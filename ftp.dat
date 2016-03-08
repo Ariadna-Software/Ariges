@@ -1,0 +1,7 @@
+euroges
+adrian04
+lcd "C:\Programas\Ariges\temp"
+ascii
+mput *.txt
+close
+bye

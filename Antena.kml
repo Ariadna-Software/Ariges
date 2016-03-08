@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <kml xmlns="http://earth.google.com/kml/2.0">
+  <Placemark>
+    <name>VIT. DE LA POBLA DEL DUC, COOP</name>
+    <visibility>0</visibility>
+    <LookAt id="khLookAt786">
+        <longitude>-0.3950000000</longitude>
+        <latitude>39.5955600000</latitude>
+        <range>392.9086289641584</range>
+        <tilt>3.915988552288592e-011</tilt>
+        <heading>21.24266674690592</heading>
+    </LookAt>
+    <styleUrl>root://styleMaps#default+nicon=0x307+hicon=0x317</styleUrl>
+    <Point id="khPoint787">
+    <coordinates>-0.3950000000,39.5955600000,0</coordinates>
+    </Point>
+   </Placemark>
+</kml>

@@ -1,0 +1,75 @@
+alter table `sclien` add column `Recargofinanciero` tinyint  DEFAULT '0' NULL  COMMENT 'Si se le aplica o no' after `enviocorreo`, add column `AplicaPortesFactura` tinyint  DEFAULT '0' NULL  COMMENT 'Portes al facturar tipo Herbelca' after `Recargofinanciero`;
+
+alter table `spara1` add column `artRecargoFina` varchar (16)   NULL  COMMENT 'Articulo para el recargo financiero' after `NumCopias`;
+insert into `scryst` (`codcryst`,`nomcryst`,`documrpt`,`codigiso`,`codigrev`,`lineapi1`,`lineapi2`,`lineapi3`,`lineapi4`,`lineapi5`,`imprimedirecto`,`pdfrpt`) values ( '48','Pedidos x Zona','rPedxZona.rpt',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0','rPedxZona.rpt');
+
+ CREATE TABLE `tmpsliped` (                                
+             `codusu` int(1) NOT NULL default '0',                   
+             `numpedcl` mediumint(7) unsigned NOT NULL default '0',  
+             `numlinea` smallint(5) unsigned NOT NULL default '0',   
+             `codalmac` smallint(3) unsigned NOT NULL default '0',   
+             `codartic` varchar(16) NOT NULL default '',             
+             `nomartic` varchar(40) NOT NULL default '',             
+             `ampliaci` varchar(60) default NULL,                    
+             `cantidad` decimal(12,2) NOT NULL default '0.00',       
+             `numbultos` int(5) NOT NULL default '0',                
+             `importel` decimal(12,2) NOT NULL default '0.00',       
+             `cantpedprov` int(1) NOT NULL default '0',              
+             `fecpedprov` varchar(10) NOT NULL default '',           
+             `stockalm` int(1) NOT NULL default '0',                 
+             `stocktot` int(1) NOT NULL default '0',                 
+             `referart` varchar(18) NOT NULL default '',             
+             `codclien` int(11) default NULL,                        
+             `codzona` smallint(5) unsigned default NULL,            
+             KEY `tmpsliped_1` (`codusu`,`numpedcl`,`numlinea`)      
+           ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+#Para mejorar la velocidad de uno de los informes de ofertas
+alter table `tmpscapreu` add index `alineas` ( `codusu`, `numofert` );
+alter table `tmpslipreu` add index `codusu` ( `codusu`, `numofert` );
+alter table `tmpslipreu` add index `codusus` ( `codusu` );
+
+alter table `spara1` add column `TipoPortes` tinyint   NULL  COMMENT '0-fontenas 1-herbelca' after `artRecargoFina`;
+alter table `spara1` add column `DirecEnvio` tinyint  DEFAULT '0' NULL  COMMENT 'Ademas de dpto lleva dir envio (HERBELCA)' after `TipoPortes`;                                  
+
+#Direccion envio
+################################################################################################
+CREATE TABLE `sdirenvio` (                                                                 
+          `codclien` int(6) unsigned NOT NULL default '0',                                      
+          `coddiren` smallint(3) unsigned NOT NULL default '0',                                 
+          `nomdiren` varchar(30) NOT NULL default '',                                           
+          `domdiren` varchar(30) NOT NULL default '',                                           
+          `codpobla` varchar(6) NOT NULL default '',                                            
+          `pobdiren` varchar(30) NOT NULL default '',                                           
+          `prodiren` varchar(30) NOT NULL default '',                                           
+          `perdiren` varchar(30) default NULL,                                                  
+          `teldiren` varchar(10) default NULL,                                                  
+          `faxdiren` varchar(10) default NULL,                                                                                                 
+          PRIMARY KEY  (`codclien`,`coddiren`),                                                 
+          KEY `fkDirenCodclient` (`codclien`),                                                  
+          CONSTRAINT `sdiren_ibfk_1` FOREIGN KEY (`codclien`) REFERENCES `sclien` (`codclien`)  
+        ) ENGINE=InnoDB DEFAULT HARSET=latin1;
+
+alter table `scapre` add column `coddiren` smallint   NULL  COMMENT 'Direcion envio2 (herbelca)' after `actuacion`;
+alter table `schpre` add column `coddiren` smallint   NULL  COMMENT 'Direcion envio2 (herbelca)' after `actuacion`;
+
+alter table `scaped` add column `coddiren` smallint   NULL  COMMENT 'Direcion envio2 (herbelca)' after `actuacion`;
+alter table `schped` add column `coddiren` smallint   NULL  COMMENT 'Direcion envio2 (herbelca)' after `actuacion`;
+
+alter table `scaalb` add column `coddiren` smallint   NULL  COMMENT 'Direcion envio2 (herbelca)' after `origdat`, add column `tipAlbaran` tinyint  DEFAULT '0' NULL  COMMENT '1-Con transporte  0-Sintrasporte' after `coddiren`;
+alter table `schalb` add column `coddiren` smallint   NULL  COMMENT 'Direcion envio2 (herbelca)' after `origdat`, add column `tipAlbaran` tinyint  DEFAULT '0' NULL  COMMENT '1-Con transporte  0-Sintrasporte' after `coddiren`;
+
+alter table `scaalb` add column `albImpreso` tinyint  DEFAULT '0' NULL  COMMENT 'Se ha impreso el albaran' after `tipAlbaran`;
+alter table `schalb` add column `albImpreso` tinyint  DEFAULT '0' NULL  COMMENT 'Se ha impreso el albaran' after `tipAlbaran`;
+
+alter table `scafac1` add column `coddiren` smallint   NULL  COMMENT 'Direcion envio2 (herbelca)' after `fecenvio`, add column `tipAlbaran` tinyint   NULL  COMMENT '1-Con transporte  0-Sintrasporte' after `coddiren`;
+
+alter table `scaalb` add column `codzonas` smallint  NULL  COMMENT 'Se ha impreso el albaran' after `albImpreso`;
+alter table `schalb` add column `codzonas` smallint  NULL  COMMENT 'Se ha impreso el albaran' after `albImpreso`;
+
+#Albaran transporte
+insert into `scryst` (`codcryst`,`nomcryst`,`documrpt`,`codigiso`,`codigrev`,`lineapi1`,`lineapi2`,`lineapi3`,`lineapi4`,`lineapi5`,`imprimedirecto`,`pdfrpt`) values ( '49','Albaran transporte ','rAlbTrans.rpt',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0','rAlbTrans.rpt')
+
+#Descuentos
+alter table `sfamia` add column `codprove` int   NULL  after `codccost`;

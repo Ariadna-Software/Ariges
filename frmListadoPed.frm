@@ -1,0 +1,8219 @@
+VERSION 5.00
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Begin VB.Form frmListadoPed 
+   BorderStyle     =   3  'Fixed Dialog
+   Caption         =   "Informes"
+   ClientHeight    =   7725
+   ClientLeft      =   45
+   ClientTop       =   2430
+   ClientWidth     =   8535
+   Icon            =   "frmListadoPed.frx":0000
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   7725
+   ScaleWidth      =   8535
+   ShowInTaskbar   =   0   'False
+   StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameGenAlbaran 
+      Height          =   7215
+      Left            =   480
+      TabIndex        =   50
+      Top             =   0
+      Width           =   5835
+      Begin VB.Frame FrameGenAlbEuler 
+         Caption         =   "             Generar albaran euler"
+         Height          =   735
+         Left            =   360
+         TabIndex        =   299
+         Top             =   3480
+         Width           =   4935
+         Begin VB.ComboBox cboTipoAlbaranEuler 
+            Height          =   315
+            ItemData        =   "frmListadoPed.frx":000C
+            Left            =   720
+            List            =   "frmListadoPed.frx":001C
+            Style           =   2  'Dropdown List
+            TabIndex        =   32
+            Top             =   360
+            Width           =   2055
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo Albaran"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   25
+            Left            =   480
+            TabIndex        =   300
+            Top             =   120
+            Width           =   900
+         End
+      End
+      Begin VB.Frame FramePartes 
+         Height          =   1455
+         Left            =   240
+         TabIndex        =   274
+         Top             =   5160
+         Visible         =   0   'False
+         Width           =   5295
+         Begin VB.ComboBox cboFacturacion 
+            Height          =   315
+            Left            =   1680
+            Style           =   2  'Dropdown List
+            TabIndex        =   41
+            Top             =   960
+            Width           =   2055
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   60
+            Left            =   2160
+            TabIndex        =   39
+            Top             =   480
+            Width           =   975
+         End
+         Begin VB.CheckBox chkFrInterna 
+            Caption         =   "Interna"
+            Height          =   255
+            Left            =   3840
+            TabIndex        =   40
+            Top             =   360
+            Width           =   975
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   59
+            Left            =   360
+            TabIndex        =   38
+            Top             =   480
+            Width           =   1095
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo facturación"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   65
+            Left            =   360
+            TabIndex        =   277
+            Top             =   1080
+            Width           =   1155
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cantidad otros"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   64
+            Left            =   2160
+            TabIndex        =   276
+            Top             =   180
+            Width           =   1065
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cantidad real dosis"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   63
+            Left            =   120
+            TabIndex        =   275
+            Top             =   180
+            Width           =   1365
+         End
+      End
+      Begin VB.CheckBox chkFraMostrador 
+         Caption         =   "A factura mostrador"
+         Height          =   255
+         Left            =   3720
+         TabIndex        =   34
+         Top             =   4440
+         Width           =   1815
+      End
+      Begin VB.Frame FramRectARM 
+         Caption         =   "Fra a la que rectifica"
+         Height          =   735
+         Left            =   720
+         TabIndex        =   248
+         Top             =   5160
+         Width           =   4815
+         Begin VB.TextBox txtFraRectifica 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   405
+            Left            =   240
+            TabIndex        =   250
+            Top             =   240
+            Width           =   3615
+         End
+         Begin VB.CommandButton cmdSelFraRect 
+            Caption         =   "+"
+            Height          =   375
+            Left            =   4080
+            TabIndex        =   249
+            Top             =   240
+            Width           =   375
+         End
+      End
+      Begin VB.Frame FrameZona 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame16"
+         Height          =   615
+         Left            =   720
+         TabIndex        =   244
+         Top             =   3720
+         Width           =   4935
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   22
+            Left            =   1080
+            Locked          =   -1  'True
+            TabIndex        =   245
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   22
+            Left            =   420
+            MaxLength       =   4
+            TabIndex        =   31
+            Top             =   240
+            Width           =   615
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   35
+            Left            =   120
+            Picture         =   "frmListadoPed.frx":0057
+            Top             =   240
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Zona"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   53
+            Left            =   120
+            TabIndex        =   246
+            Top             =   0
+            Width           =   360
+         End
+      End
+      Begin VB.CheckBox chkImpHojaExped 
+         Caption         =   "Imprimir Hoja Expedición"
+         Height          =   255
+         Left            =   1080
+         TabIndex        =   37
+         Top             =   5280
+         Width           =   2295
+      End
+      Begin VB.CheckBox chkImpEtiq 
+         Caption         =   "Imprimir Etiquetas"
+         Height          =   255
+         Left            =   3720
+         TabIndex        =   36
+         Top             =   4800
+         Width           =   1575
+      End
+      Begin VB.Frame FramepedidoFactura 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame15"
+         Height          =   615
+         Left            =   720
+         TabIndex        =   224
+         Top             =   6000
+         Width           =   4815
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   5
+            Left            =   1155
+            Locked          =   -1  'True
+            TabIndex        =   225
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3495
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   5
+            Left            =   315
+            MaxLength       =   6
+            TabIndex        =   42
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   0
+            Left            =   0
+            Picture         =   "frmListadoPed.frx":0159
+            Top             =   240
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cta prevista cobro"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   23
+            Left            =   0
+            TabIndex        =   226
+            Top             =   0
+            Width           =   1335
+         End
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   25
+         Left            =   2400
+         MaxLength       =   10
+         TabIndex        =   33
+         Top             =   4440
+         Width           =   1215
+      End
+      Begin VB.CheckBox chkImpAlbaran 
+         Caption         =   "Imprimir Albaran"
+         Height          =   255
+         Left            =   1080
+         TabIndex        =   35
+         Top             =   4800
+         Value           =   1  'Checked
+         Width           =   1575
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   19
+         Left            =   1140
+         MaxLength       =   4
+         TabIndex        =   30
+         Top             =   3240
+         Width           =   615
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   19
+         Left            =   1800
+         Locked          =   -1  'True
+         TabIndex        =   57
+         Text            =   "Text5"
+         Top             =   3240
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   18
+         Left            =   1140
+         MaxLength       =   4
+         TabIndex        =   29
+         Top             =   2520
+         Width           =   615
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   18
+         Left            =   1800
+         Locked          =   -1  'True
+         TabIndex        =   55
+         Text            =   "Text5"
+         Top             =   2520
+         Width           =   3735
+      End
+      Begin VB.CommandButton cmdAceptarGenAlb 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   3360
+         TabIndex        =   43
+         Top             =   6720
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   3
+         Left            =   4560
+         TabIndex        =   44
+         Top             =   6720
+         Width           =   975
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   17
+         Left            =   1140
+         MaxLength       =   4
+         TabIndex        =   28
+         Top             =   1800
+         Width           =   615
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   17
+         Left            =   1800
+         Locked          =   -1  'True
+         TabIndex        =   51
+         Text            =   "Text5"
+         Top             =   1800
+         Width           =   3735
+      End
+      Begin VB.Label Label5 
+         Caption         =   "Zona:"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   247
+         Top             =   6720
+         Width           =   2535
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Albaran"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   32
+         Left            =   840
+         TabIndex        =   59
+         Top             =   4440
+         Width           =   1155
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   0
+         Left            =   2040
+         Picture         =   "frmListadoPed.frx":025B
+         Top             =   4440
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Forma de Envío"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   11
+         Left            =   840
+         TabIndex        =   58
+         Top             =   3000
+         Width           =   1110
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   10
+         Left            =   840
+         Picture         =   "frmListadoPed.frx":02E6
+         Top             =   3240
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Material Preparado por"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   10
+         Left            =   840
+         TabIndex        =   56
+         Top             =   2280
+         Width           =   1650
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   9
+         Left            =   840
+         Picture         =   "frmListadoPed.frx":03E8
+         Top             =   2520
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Pasar Pedido a "
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   600
+         TabIndex        =   54
+         Top             =   480
+         Width           =   4695
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Introduzca los siguiente campos: "
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   14
+         Left            =   600
+         TabIndex        =   53
+         Top             =   1200
+         Width           =   2835
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Trabajador de Albaran"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   15
+         Left            =   840
+         TabIndex        =   52
+         Top             =   1560
+         Width           =   1620
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   8
+         Left            =   840
+         Picture         =   "frmListadoPed.frx":04EA
+         Top             =   1800
+         Width           =   240
+      End
+   End
+   Begin VB.Frame FramePreFacturar 
+      Height          =   6375
+      Left            =   120
+      TabIndex        =   60
+      Top             =   120
+      Width           =   7035
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   61
+         Left            =   5400
+         MaxLength       =   6
+         TabIndex        =   74
+         Top             =   4860
+         Width           =   735
+      End
+      Begin VB.Frame Frame16 
+         Height          =   975
+         Left            =   360
+         TabIndex        =   289
+         Top             =   3480
+         Visible         =   0   'False
+         Width           =   6375
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Efectivo"
+            Height          =   255
+            Index           =   10
+            Left            =   1320
+            TabIndex        =   296
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   1095
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Transferencia"
+            Height          =   255
+            Index           =   11
+            Left            =   2520
+            TabIndex        =   295
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Talón"
+            Height          =   255
+            Index           =   12
+            Left            =   4200
+            TabIndex        =   294
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   975
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Pagaré"
+            Height          =   255
+            Index           =   13
+            Left            =   5280
+            TabIndex        =   293
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   975
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Recibo bancario"
+            Height          =   255
+            Index           =   14
+            Left            =   1320
+            TabIndex        =   292
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Confirming"
+            Height          =   255
+            Index           =   15
+            Left            =   3000
+            TabIndex        =   291
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1335
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Tarjeta crédito"
+            Height          =   255
+            Index           =   16
+            Left            =   4560
+            TabIndex        =   290
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1335
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo de pago"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   12
+            Left            =   120
+            TabIndex        =   297
+            Top             =   240
+            Width           =   1080
+         End
+      End
+      Begin VB.ComboBox cmbTipAlbaran 
+         Height          =   315
+         Index           =   0
+         ItemData        =   "frmListadoPed.frx":05EC
+         Left            =   1920
+         List            =   "frmListadoPed.frx":05F9
+         Style           =   2  'Dropdown List
+         TabIndex        =   77
+         Top             =   5880
+         Visible         =   0   'False
+         Width           =   1695
+      End
+      Begin VB.CheckBox chkResumenForpa 
+         Caption         =   "Resumen forma de pago"
+         Height          =   195
+         Left            =   3720
+         TabIndex        =   76
+         Top             =   5400
+         Width           =   2295
+      End
+      Begin VB.CheckBox chkSoloFacturar 
+         Caption         =   "Solo Albaranes para facturar"
+         Height          =   375
+         Left            =   960
+         TabIndex        =   75
+         Top             =   5310
+         Value           =   1  'Checked
+         Width           =   2535
+      End
+      Begin VB.Frame Frame7 
+         Caption         =   "Tipo Informe"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   690
+         Left            =   360
+         TabIndex        =   179
+         Top             =   4560
+         Width           =   4335
+         Begin VB.OptionButton OptDetalle 
+            Caption         =   "Facturacion"
+            Height          =   255
+            Index           =   3
+            Left            =   2880
+            TabIndex        =   73
+            Top             =   270
+            Width           =   1215
+         End
+         Begin VB.OptionButton OptDetalle 
+            Caption         =   "Resumen"
+            Height          =   255
+            Index           =   1
+            Left            =   1560
+            TabIndex        =   72
+            Top             =   270
+            Width           =   1215
+         End
+         Begin VB.OptionButton OptDetalle 
+            Caption         =   "Detalle"
+            Height          =   255
+            Index           =   0
+            Left            =   360
+            TabIndex        =   71
+            Top             =   270
+            Width           =   1095
+         End
+      End
+      Begin VB.Frame Frame6 
+         BorderStyle     =   0  'None
+         Height          =   975
+         Left            =   480
+         TabIndex        =   173
+         Top             =   2520
+         Width           =   6135
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   33
+            Left            =   1260
+            MaxLength       =   6
+            TabIndex        =   70
+            Top             =   600
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   33
+            Left            =   2040
+            Locked          =   -1  'True
+            TabIndex        =   175
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   3615
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   32
+            Left            =   1260
+            MaxLength       =   6
+            TabIndex        =   69
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   32
+            Left            =   2040
+            Locked          =   -1  'True
+            TabIndex        =   174
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3615
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   17
+            Left            =   360
+            TabIndex        =   178
+            Top             =   600
+            Width           =   420
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   0
+            Left            =   360
+            TabIndex        =   177
+            Top             =   240
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   19
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":062C
+            Top             =   615
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Agente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   38
+            Left            =   0
+            TabIndex        =   176
+            Top             =   0
+            Width           =   975
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   18
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":072E
+            Top             =   255
+            Width           =   240
+         End
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   26
+         Left            =   1740
+         MaxLength       =   10
+         TabIndex        =   63
+         Top             =   960
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdAceptarPreFac 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4560
+         TabIndex        =   78
+         Top             =   5880
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   5
+         Left            =   5760
+         TabIndex        =   79
+         Top             =   5880
+         Width           =   975
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   27
+         Left            =   3900
+         MaxLength       =   10
+         TabIndex        =   64
+         Top             =   960
+         Width           =   1215
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   30
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   81
+         Text            =   "Text5"
+         Top             =   2760
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   30
+         Left            =   1620
+         MaxLength       =   3
+         TabIndex        =   67
+         Top             =   2760
+         Width           =   615
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   31
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   80
+         Text            =   "Text5"
+         Top             =   3120
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   31
+         Left            =   1620
+         MaxLength       =   3
+         TabIndex        =   68
+         Top             =   3120
+         Width           =   615
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   29
+         Left            =   1740
+         MaxLength       =   6
+         TabIndex        =   66
+         Top             =   2040
+         Width           =   735
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   29
+         Left            =   2520
+         Locked          =   -1  'True
+         TabIndex        =   62
+         Text            =   "Text5"
+         Top             =   2040
+         Width           =   3615
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   28
+         Left            =   1740
+         MaxLength       =   6
+         TabIndex        =   65
+         Top             =   1680
+         Width           =   735
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   28
+         Left            =   2520
+         Locked          =   -1  'True
+         TabIndex        =   61
+         Text            =   "Text5"
+         Top             =   1680
+         Width           =   3615
+      End
+      Begin VB.Image imgayuda 
+         Height          =   240
+         Index           =   1
+         Left            =   6240
+         ToolTipText     =   "Previsión facturacion"
+         Top             =   4920
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Periodo facturación"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   24
+         Left            =   4920
+         TabIndex        =   298
+         Top             =   4560
+         Width           =   1650
+      End
+      Begin VB.Label lblTipAlbaran 
+         Caption         =   "Tipo de albaranes:"
+         Height          =   255
+         Index           =   0
+         Left            =   480
+         TabIndex        =   220
+         Top             =   5880
+         Visible         =   0   'False
+         Width           =   1335
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   44
+         Left            =   3120
+         TabIndex        =   91
+         Top             =   960
+         Width           =   420
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   10
+         Left            =   1440
+         Picture         =   "frmListadoPed.frx":0830
+         Top             =   960
+         Width           =   240
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Prefacturación de Albaranes"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   0
+         Left            =   360
+         TabIndex        =   90
+         Top             =   240
+         Width           =   6375
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Albaran"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   43
+         Left            =   480
+         TabIndex        =   89
+         Top             =   720
+         Width           =   1200
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   42
+         Left            =   915
+         TabIndex        =   88
+         Top             =   960
+         Width           =   450
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   11
+         Left            =   3600
+         Picture         =   "frmListadoPed.frx":08BB
+         Top             =   960
+         Width           =   240
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   16
+         Left            =   1320
+         Picture         =   "frmListadoPed.frx":0946
+         Top             =   2775
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Formas de Pago"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   41
+         Left            =   480
+         TabIndex        =   87
+         Top             =   2520
+         Width           =   1350
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   40
+         Left            =   795
+         TabIndex        =   86
+         Top             =   2760
+         Width           =   450
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   17
+         Left            =   1320
+         Picture         =   "frmListadoPed.frx":0A48
+         Top             =   3135
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   39
+         Left            =   795
+         TabIndex        =   85
+         Top             =   3120
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   35
+         Left            =   915
+         TabIndex        =   84
+         Top             =   2040
+         Width           =   420
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   15
+         Left            =   1440
+         Picture         =   "frmListadoPed.frx":0B4A
+         Top             =   2040
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   34
+         Left            =   915
+         TabIndex        =   83
+         Top             =   1680
+         Width           =   450
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Cliente"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   33
+         Left            =   480
+         TabIndex        =   82
+         Top             =   1440
+         Width           =   585
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   14
+         Left            =   1440
+         Picture         =   "frmListadoPed.frx":0C4C
+         Top             =   1680
+         Width           =   240
+      End
+   End
+   Begin VB.Frame FramePedxArtic 
+      Height          =   7455
+      Left            =   120
+      TabIndex        =   45
+      Top             =   120
+      Width           =   7575
+      Begin VB.Frame FrameTiposFactura 
+         Height          =   1335
+         Left            =   240
+         TabIndex        =   278
+         Top             =   4200
+         Visible         =   0   'False
+         Width           =   5895
+         Begin VB.ListBox ListTipoFact 
+            Height          =   960
+            Left            =   1320
+            Style           =   1  'Checkbox
+            TabIndex        =   279
+            Top             =   240
+            Width           =   3975
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo factura"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   66
+            Left            =   120
+            TabIndex        =   280
+            Top             =   240
+            Width           =   1020
+         End
+      End
+      Begin VB.Frame Frame10 
+         Height          =   3015
+         Left            =   360
+         TabIndex        =   192
+         Top             =   2760
+         Width           =   6495
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   58
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   272
+            Text            =   "Text5"
+            Top             =   1920
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   58
+            Left            =   1560
+            TabIndex        =   16
+            Top             =   1920
+            Width           =   615
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   57
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   269
+            Text            =   "Text5"
+            Top             =   1560
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   57
+            Left            =   1560
+            TabIndex        =   15
+            Top             =   1560
+            Width           =   615
+         End
+         Begin VB.CheckBox Check1chkAgrupaAg 
+            Caption         =   "Agrupa agente"
+            Height          =   435
+            Left            =   4680
+            TabIndex        =   20
+            Top             =   2400
+            Width           =   1455
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   24
+            Left            =   1560
+            TabIndex        =   14
+            Top             =   960
+            Width           =   615
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   24
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   257
+            Text            =   "Text5"
+            Top             =   960
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   23
+            Left            =   1560
+            TabIndex        =   13
+            Top             =   600
+            Width           =   615
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   23
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   254
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   3735
+         End
+         Begin VB.Frame Frame11 
+            Caption         =   " Ordenar por "
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   615
+            Left            =   120
+            TabIndex        =   195
+            Top             =   2280
+            Width           =   4455
+            Begin VB.OptionButton OptOrdenVentas 
+               Caption         =   "Vol. ventas"
+               Height          =   255
+               Left            =   3000
+               TabIndex        =   19
+               Top             =   240
+               Value           =   -1  'True
+               Width           =   1215
+            End
+            Begin VB.OptionButton OptOrdenNomclien 
+               Caption         =   "Nombre cliente"
+               Height          =   375
+               Left            =   1560
+               TabIndex        =   18
+               Top             =   180
+               Width           =   1455
+            End
+            Begin VB.OptionButton OptOrdenCodclien 
+               Caption         =   "Cod. cliente"
+               Height          =   255
+               Left            =   120
+               TabIndex        =   17
+               Top             =   240
+               Width           =   1215
+            End
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   1
+            Left            =   3840
+            MaxLength       =   15
+            TabIndex        =   12
+            Top             =   120
+            Width           =   1695
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   41
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":0D4E
+            Top             =   1920
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   62
+            Left            =   720
+            TabIndex        =   273
+            Top             =   1920
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   40
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":0E50
+            Top             =   1560
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Actividad"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   61
+            Left            =   120
+            TabIndex        =   271
+            Top             =   1320
+            Width           =   795
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   60
+            Left            =   720
+            TabIndex        =   270
+            Top             =   1560
+            Width           =   450
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   58
+            Left            =   720
+            TabIndex        =   258
+            Top             =   960
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   37
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":0F52
+            Top             =   960
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   56
+            Left            =   720
+            TabIndex        =   256
+            Top             =   600
+            Width           =   450
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Agente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   55
+            Left            =   120
+            TabIndex        =   255
+            Top             =   360
+            Width           =   615
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   36
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":1054
+            Top             =   600
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "€"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   19
+            Left            =   5640
+            TabIndex        =   194
+            Top             =   120
+            Width           =   105
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Mostrar Clientes con ventas superiores a"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   18
+            Left            =   120
+            TabIndex        =   193
+            Top             =   120
+            Width           =   3465
+         End
+      End
+      Begin VB.CheckBox chkDispo 
+         Caption         =   "Datos de dpto/obra"
+         Height          =   255
+         Index           =   1
+         Left            =   1920
+         TabIndex        =   252
+         Top             =   4320
+         Width           =   1935
+      End
+      Begin VB.CheckBox chkDispo 
+         Caption         =   "Detalle"
+         Height          =   255
+         Index           =   0
+         Left            =   480
+         TabIndex        =   251
+         Top             =   4320
+         Width           =   1575
+      End
+      Begin VB.Frame FramepedxClien 
+         BorderStyle     =   0  'None
+         Height          =   2295
+         Left            =   5760
+         TabIndex        =   233
+         Top             =   4320
+         Visible         =   0   'False
+         Width           =   6375
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   10
+            Left            =   1500
+            MaxLength       =   6
+            TabIndex        =   11
+            Top             =   1680
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   10
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   241
+            Text            =   "Text5"
+            Top             =   1680
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   9
+            Left            =   1500
+            MaxLength       =   6
+            TabIndex        =   10
+            Top             =   1320
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   9
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   239
+            Text            =   "Text5"
+            Top             =   1320
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   7
+            Left            =   1500
+            MaxLength       =   6
+            TabIndex        =   9
+            Top             =   600
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   7
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   237
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   6
+            Left            =   1500
+            MaxLength       =   6
+            TabIndex        =   8
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   6
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   234
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3855
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Zona"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   52
+            Left            =   0
+            TabIndex        =   243
+            Top             =   1080
+            Width           =   615
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   47
+            Left            =   600
+            TabIndex        =   242
+            Top             =   1680
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   34
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":1156
+            Top             =   1680
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   31
+            Left            =   600
+            TabIndex        =   240
+            Top             =   1320
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   33
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":1258
+            Top             =   1320
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   29
+            Left            =   600
+            TabIndex        =   238
+            Top             =   600
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   13
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":135A
+            Top             =   600
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Agente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   28
+            Left            =   0
+            TabIndex        =   236
+            Top             =   0
+            Width           =   615
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   27
+            Left            =   600
+            TabIndex        =   235
+            Top             =   240
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   3
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":145C
+            Top             =   240
+            Width           =   240
+         End
+      End
+      Begin VB.ComboBox cmbTipAlbaran 
+         Height          =   315
+         Index           =   1
+         ItemData        =   "frmListadoPed.frx":155E
+         Left            =   2640
+         List            =   "frmListadoPed.frx":156B
+         Style           =   2  'Dropdown List
+         TabIndex        =   221
+         Top             =   4920
+         Visible         =   0   'False
+         Width           =   1695
+      End
+      Begin VB.Frame Frame12 
+         BorderStyle     =   0  'None
+         Height          =   2055
+         Left            =   7080
+         TabIndex        =   196
+         Top             =   1440
+         Width           =   6495
+         Begin VB.Frame Frame13 
+            Height          =   615
+            Left            =   240
+            TabIndex        =   202
+            Top             =   1320
+            Width           =   2655
+            Begin VB.OptionButton OptResumen 
+               Caption         =   "Resumen"
+               Height          =   255
+               Left            =   1320
+               TabIndex        =   204
+               Top             =   240
+               Width           =   1095
+            End
+            Begin VB.OptionButton OptDetalle 
+               Caption         =   "Detalle"
+               Height          =   255
+               Index           =   2
+               Left            =   120
+               TabIndex        =   203
+               Top             =   240
+               Value           =   -1  'True
+               Width           =   975
+            End
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   2
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   198
+            Text            =   "Text5"
+            Top             =   360
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   2
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   21
+            Top             =   360
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   3
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   197
+            Text            =   "Text5"
+            Top             =   720
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   3
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   22
+            Top             =   720
+            Width           =   735
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   1
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":159E
+            Top             =   360
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Trabajador"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   22
+            Left            =   120
+            TabIndex        =   201
+            Top             =   120
+            Width           =   945
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   21
+            Left            =   480
+            TabIndex        =   200
+            Top             =   360
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   2
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":16A0
+            Top             =   720
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   20
+            Left            =   480
+            TabIndex        =   199
+            Top             =   720
+            Width           =   420
+         End
+      End
+      Begin VB.Frame Frame5 
+         BorderStyle     =   0  'None
+         Height          =   1095
+         Left            =   360
+         TabIndex        =   167
+         Top             =   2640
+         Width           =   6495
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   21
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   7
+            Top             =   720
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   21
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   169
+            Text            =   "Text5"
+            Top             =   720
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   20
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   6
+            Top             =   360
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   20
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   168
+            Text            =   "Text5"
+            Top             =   360
+            Width           =   3855
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   12
+            Left            =   480
+            TabIndex        =   172
+            Top             =   720
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   12
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":17A2
+            Top             =   720
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   13
+            Left            =   480
+            TabIndex        =   171
+            Top             =   360
+            Width           =   450
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cliente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   16
+            Left            =   120
+            TabIndex        =   170
+            Top             =   120
+            Width           =   585
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   11
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":18A4
+            Top             =   360
+            Width           =   240
+         End
+      End
+      Begin VB.Frame Frame9 
+         BorderStyle     =   0  'None
+         Height          =   1095
+         Left            =   360
+         TabIndex        =   186
+         Top             =   1920
+         Width           =   6375
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   13
+            Left            =   1800
+            Locked          =   -1  'True
+            TabIndex        =   188
+            Text            =   "Text5"
+            Top             =   360
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   13
+            Left            =   1260
+            MaxLength       =   3
+            TabIndex        =   2
+            Top             =   360
+            Width           =   495
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   14
+            Left            =   1800
+            Locked          =   -1  'True
+            TabIndex        =   187
+            Text            =   "Text5"
+            Top             =   720
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   14
+            Left            =   1260
+            MaxLength       =   3
+            TabIndex        =   3
+            Top             =   720
+            Width           =   495
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   4
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":19A6
+            Top             =   360
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Almacen"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   6
+            Left            =   120
+            TabIndex        =   191
+            Top             =   120
+            Width           =   735
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   7
+            Left            =   480
+            TabIndex        =   190
+            Top             =   360
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   5
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":1AA8
+            Top             =   720
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   8
+            Left            =   480
+            TabIndex        =   189
+            Top             =   720
+            Width           =   420
+         End
+      End
+      Begin VB.Frame Frame8 
+         BorderStyle     =   0  'None
+         Height          =   1215
+         Left            =   240
+         TabIndex        =   180
+         Top             =   3120
+         Width           =   6975
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   15
+            Left            =   2520
+            Locked          =   -1  'True
+            TabIndex        =   182
+            Text            =   "Text5"
+            Top             =   480
+            Width           =   4215
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   15
+            Left            =   1260
+            MaxLength       =   16
+            TabIndex        =   4
+            Top             =   480
+            Width           =   1215
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   16
+            Left            =   2520
+            Locked          =   -1  'True
+            TabIndex        =   181
+            Text            =   "Text5"
+            Top             =   840
+            Width           =   4215
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   16
+            Left            =   1260
+            MaxLength       =   16
+            TabIndex        =   5
+            Top             =   840
+            Width           =   1215
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   6
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":1BAA
+            Top             =   480
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Artículo"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   1
+            Left            =   120
+            TabIndex        =   185
+            Top             =   240
+            Width           =   660
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   3
+            Left            =   480
+            TabIndex        =   184
+            Top             =   480
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   7
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":1CAC
+            Top             =   840
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   9
+            Left            =   480
+            TabIndex        =   183
+            Top             =   840
+            Width           =   420
+         End
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   12
+         Left            =   4140
+         MaxLength       =   10
+         TabIndex        =   1
+         Top             =   1440
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   2
+         Left            =   5760
+         TabIndex        =   27
+         Top             =   7080
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdAceptarPedxArtic 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4680
+         TabIndex        =   26
+         Top             =   7080
+         Width           =   975
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   11
+         Left            =   1740
+         MaxLength       =   10
+         TabIndex        =   0
+         Top             =   1440
+         Width           =   1215
+      End
+      Begin VB.Frame FrameOrden1 
+         BorderStyle     =   0  'None
+         Height          =   855
+         Left            =   240
+         TabIndex        =   232
+         Top             =   6600
+         Width           =   3975
+         Begin VB.CheckBox chkPedxClixSemEntrega 
+            Caption         =   "Obs. pedido"
+            Height          =   255
+            Index           =   1
+            Left            =   2040
+            TabIndex        =   24
+            Top             =   120
+            Value           =   1  'Checked
+            Width           =   1815
+         End
+         Begin VB.CheckBox chkPedxClixSemEntrega 
+            Caption         =   "Semana entrega"
+            Height          =   255
+            Index           =   0
+            Left            =   240
+            TabIndex        =   23
+            Top             =   120
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.ComboBox cboTipocliente 
+            Height          =   315
+            Left            =   1320
+            Style           =   2  'Dropdown List
+            TabIndex        =   25
+            Top             =   480
+            Width           =   1815
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo cliente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   59
+            Left            =   240
+            TabIndex        =   268
+            Top             =   510
+            Width           =   810
+         End
+         Begin VB.Image imgayuda 
+            Height          =   255
+            Index           =   0
+            Left            =   3240
+            ToolTipText     =   "Pedidos por cliente"
+            Top             =   480
+            Width           =   255
+         End
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   54
+         Left            =   480
+         TabIndex        =   253
+         Top             =   4680
+         Width           =   2850
+      End
+      Begin VB.Label lblTipAlbaran 
+         Caption         =   "Tipo de albaranes:"
+         Height          =   255
+         Index           =   1
+         Left            =   600
+         TabIndex        =   222
+         Top             =   4920
+         Visible         =   0   'False
+         Width           =   1335
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   7
+         Left            =   3840
+         Picture         =   "frmListadoPed.frx":1DAE
+         Top             =   1440
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   5
+         Left            =   960
+         TabIndex        =   49
+         Top             =   1440
+         Width           =   450
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Pedido"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   4
+         Left            =   480
+         TabIndex        =   48
+         Top             =   1200
+         Width           =   1110
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Pedidos por Artículo"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   360
+         TabIndex        =   47
+         Top             =   480
+         Width           =   4815
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   6
+         Left            =   1440
+         Picture         =   "frmListadoPed.frx":1E39
+         Top             =   1440
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   2
+         Left            =   3360
+         TabIndex        =   46
+         Top             =   1440
+         Width           =   420
+      End
+   End
+   Begin VB.Frame FrameFacturar 
+      Height          =   7575
+      Left            =   120
+      TabIndex        =   92
+      Top             =   0
+      Width           =   7395
+      Begin VB.Frame Frame15 
+         Height          =   975
+         Left            =   360
+         TabIndex        =   228
+         Top             =   5160
+         Width           =   6855
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Tarjeta crédito"
+            Height          =   255
+            Index           =   6
+            Left            =   5040
+            TabIndex        =   288
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Confirming"
+            Height          =   255
+            Index           =   5
+            Left            =   3600
+            TabIndex        =   287
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1335
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Recibo bancario"
+            Height          =   255
+            Index           =   4
+            Left            =   1800
+            TabIndex        =   286
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Pagaré"
+            Height          =   255
+            Index           =   3
+            Left            =   5640
+            TabIndex        =   285
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   975
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Talón"
+            Height          =   255
+            Index           =   2
+            Left            =   4440
+            TabIndex        =   284
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   975
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Transferencia"
+            Height          =   255
+            Index           =   1
+            Left            =   2760
+            TabIndex        =   283
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Efectivo"
+            Height          =   255
+            Index           =   0
+            Left            =   1560
+            TabIndex        =   282
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo de pago"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   11
+            Left            =   240
+            TabIndex        =   281
+            Top             =   240
+            Width           =   1080
+         End
+      End
+      Begin VB.Frame FrameProgress 
+         Height          =   1050
+         Left            =   360
+         TabIndex        =   205
+         Top             =   6240
+         Visible         =   0   'False
+         Width           =   4695
+         Begin MSComctlLib.ProgressBar ProgressBar1 
+            Height          =   345
+            Left            =   120
+            TabIndex        =   206
+            Top             =   600
+            Width           =   4335
+            _ExtentX        =   7646
+            _ExtentY        =   609
+            _Version        =   393216
+            Appearance      =   1
+         End
+         Begin VB.Label lblProgess 
+            Caption         =   "Iniciando el proceso ..."
+            Height          =   195
+            Index           =   1
+            Left            =   120
+            TabIndex        =   208
+            Top             =   350
+            Width           =   4335
+         End
+         Begin VB.Label lblProgess 
+            Caption         =   "Facturando:"
+            Height          =   195
+            Index           =   0
+            Left            =   120
+            TabIndex        =   207
+            Top             =   135
+            Width           =   4215
+         End
+      End
+      Begin VB.Frame Frame4 
+         Height          =   3255
+         Left            =   360
+         TabIndex        =   149
+         Top             =   1800
+         Width           =   6855
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   42
+            Left            =   3000
+            Locked          =   -1  'True
+            TabIndex        =   163
+            Text            =   "Text5"
+            Top             =   2520
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   42
+            Left            =   2220
+            MaxLength       =   6
+            TabIndex        =   139
+            Top             =   2520
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   43
+            Left            =   3000
+            Locked          =   -1  'True
+            TabIndex        =   162
+            Text            =   "Text5"
+            Top             =   2880
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   43
+            Left            =   2220
+            MaxLength       =   6
+            TabIndex        =   140
+            Top             =   2880
+            Width           =   735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   41
+            Left            =   2220
+            MaxLength       =   6
+            TabIndex        =   138
+            Top             =   2040
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   41
+            Left            =   3000
+            Locked          =   -1  'True
+            TabIndex        =   158
+            Text            =   "Text5"
+            Top             =   2040
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   40
+            Left            =   2220
+            MaxLength       =   6
+            TabIndex        =   137
+            Top             =   1680
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   40
+            Left            =   3000
+            Locked          =   -1  'True
+            TabIndex        =   157
+            Text            =   "Text5"
+            Top             =   1680
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   38
+            Left            =   2640
+            MaxLength       =   10
+            TabIndex        =   135
+            Top             =   1200
+            Width           =   1215
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   39
+            Left            =   5040
+            MaxLength       =   10
+            TabIndex        =   136
+            Top             =   1200
+            Width           =   1215
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   36
+            Left            =   2640
+            MaxLength       =   10
+            TabIndex        =   133
+            Top             =   720
+            Width           =   1215
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   37
+            Left            =   5040
+            MaxLength       =   10
+            TabIndex        =   134
+            Top             =   720
+            Width           =   1215
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   35
+            Left            =   3120
+            MaxLength       =   10
+            TabIndex        =   132
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   22
+            Left            =   1920
+            Picture         =   "frmListadoPed.frx":1EC4
+            Top             =   2520
+            Width           =   240
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Forma pago"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   3
+            Left            =   240
+            TabIndex        =   166
+            Top             =   2520
+            Width           =   1005
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   48
+            Left            =   1395
+            TabIndex        =   165
+            Top             =   2520
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   23
+            Left            =   1920
+            Picture         =   "frmListadoPed.frx":1FC6
+            Top             =   2880
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   49
+            Left            =   1395
+            TabIndex        =   164
+            Top             =   2880
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   20
+            Left            =   1920
+            Picture         =   "frmListadoPed.frx":20C8
+            Top             =   1680
+            Width           =   240
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   21
+            Left            =   1920
+            Picture         =   "frmListadoPed.frx":21CA
+            Top             =   2040
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   50
+            Left            =   1395
+            TabIndex        =   161
+            Top             =   2040
+            Width           =   420
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   51
+            Left            =   1395
+            TabIndex        =   160
+            Top             =   1680
+            Width           =   450
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Cliente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   2
+            Left            =   240
+            TabIndex        =   159
+            Top             =   1680
+            Width           =   585
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   37
+            Left            =   4200
+            TabIndex        =   156
+            Top             =   1200
+            Width           =   420
+         End
+         Begin VB.Image imgFecha 
+            Height          =   240
+            Index           =   12
+            Left            =   2280
+            Picture         =   "frmListadoPed.frx":22CC
+            Top             =   1215
+            Width           =   240
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Fecha Albaran"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   1
+            Left            =   240
+            TabIndex        =   155
+            Top             =   1200
+            Width           =   1200
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   46
+            Left            =   1755
+            TabIndex        =   154
+            Top             =   1200
+            Width           =   450
+         End
+         Begin VB.Image imgFecha 
+            Height          =   240
+            Index           =   13
+            Left            =   4680
+            Picture         =   "frmListadoPed.frx":2357
+            Top             =   1215
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   36
+            Left            =   4200
+            TabIndex        =   153
+            Top             =   720
+            Width           =   420
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Nº Albaran"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   4
+            Left            =   240
+            TabIndex        =   152
+            Top             =   720
+            Width           =   900
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   45
+            Left            =   1755
+            TabIndex        =   151
+            Top             =   720
+            Width           =   450
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Periodicidad de la Facturación"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   6
+            Left            =   240
+            TabIndex        =   150
+            Top             =   240
+            Width           =   2520
+         End
+      End
+      Begin VB.Frame Frame3 
+         Height          =   1095
+         Left            =   360
+         TabIndex        =   145
+         Top             =   720
+         Width           =   6855
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   4
+            Left            =   5160
+            MaxLength       =   10
+            TabIndex        =   130
+            Top             =   240
+            Width           =   1335
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   34
+            Left            =   2580
+            MaxLength       =   10
+            TabIndex        =   129
+            Top             =   240
+            Width           =   1215
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   0
+            Left            =   3000
+            Locked          =   -1  'True
+            TabIndex        =   146
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   0
+            Left            =   2220
+            MaxLength       =   6
+            TabIndex        =   131
+            Top             =   600
+            Width           =   735
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Nº Factura"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   9
+            Left            =   4200
+            TabIndex        =   219
+            Top             =   240
+            Width           =   885
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Fecha de la Facturación"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   5
+            Left            =   240
+            TabIndex        =   148
+            Top             =   240
+            Width           =   1980
+         End
+         Begin VB.Image imgFecha 
+            Height          =   240
+            Index           =   14
+            Left            =   2280
+            Picture         =   "frmListadoPed.frx":23E2
+            Top             =   240
+            Width           =   240
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Cta. Prevista Cobro"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   7
+            Left            =   240
+            TabIndex        =   147
+            Top             =   600
+            Width           =   1620
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   24
+            Left            =   1920
+            Picture         =   "frmListadoPed.frx":246D
+            Top             =   600
+            Width           =   240
+         End
+      End
+      Begin VB.CommandButton cmdAceptarFac 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   5160
+         TabIndex        =   142
+         Top             =   6840
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   6
+         Left            =   6240
+         TabIndex        =   144
+         Top             =   6840
+         Width           =   975
+      End
+      Begin VB.Label Label10 
+         Caption         =   "Facturación de Albaranes"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   0
+         Left            =   360
+         TabIndex        =   93
+         Top             =   240
+         Width           =   6615
+      End
+      Begin VB.Label Label10 
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   10
+         Left            =   360
+         TabIndex        =   227
+         Top             =   3360
+         Width           =   6615
+      End
+   End
+   Begin VB.Frame FramePreFacMante 
+      Height          =   7575
+      Left            =   0
+      TabIndex        =   94
+      Top             =   0
+      Width           =   7275
+      Begin VB.Frame Frame2 
+         Height          =   615
+         Index           =   1
+         Left            =   360
+         TabIndex        =   229
+         Top             =   6240
+         Width           =   6495
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   54
+            Left            =   2040
+            MaxLength       =   4
+            TabIndex        =   113
+            Top             =   240
+            Width           =   855
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   54
+            Left            =   2940
+            Locked          =   -1  'True
+            TabIndex        =   231
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3375
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   54
+            Left            =   1560
+            Picture         =   "frmListadoPed.frx":256F
+            Top             =   240
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Centro de coste"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   0
+            Left            =   120
+            TabIndex        =   230
+            Top             =   240
+            Width           =   1335
+         End
+      End
+      Begin VB.Frame Frame2 
+         Height          =   1350
+         Index           =   0
+         Left            =   360
+         TabIndex        =   125
+         Top             =   840
+         Width           =   6495
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   52
+            Left            =   2880
+            Locked          =   -1  'True
+            TabIndex        =   141
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   3495
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   52
+            Left            =   2040
+            MaxLength       =   6
+            TabIndex        =   103
+            Top             =   600
+            Width           =   735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   47
+            Left            =   2040
+            MaxLength       =   4
+            TabIndex        =   104
+            Top             =   945
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   47
+            Left            =   2865
+            Locked          =   -1  'True
+            TabIndex        =   126
+            Text            =   "Text5"
+            Top             =   945
+            Width           =   3495
+         End
+         Begin VB.TextBox txtCodigo 
+            Height          =   285
+            Index           =   44
+            Left            =   2040
+            MaxLength       =   10
+            TabIndex        =   102
+            Top             =   240
+            Width           =   1215
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Cta. Prev. Cobro"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   8
+            Left            =   120
+            TabIndex        =   143
+            Top             =   600
+            Width           =   1350
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   31
+            Left            =   1730
+            Picture         =   "frmListadoPed.frx":2671
+            Top             =   600
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Operador"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   5
+            Left            =   120
+            TabIndex        =   128
+            Top             =   945
+            Width           =   795
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   26
+            Left            =   1730
+            Picture         =   "frmListadoPed.frx":2773
+            Top             =   945
+            Width           =   240
+         End
+         Begin VB.Image imgFecha 
+            Height          =   240
+            Index           =   15
+            Left            =   1730
+            Picture         =   "frmListadoPed.frx":2875
+            Top             =   240
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Fecha Facturación"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   2
+            Left            =   120
+            TabIndex        =   127
+            Top             =   240
+            Width           =   1530
+         End
+      End
+      Begin VB.Frame Frame1 
+         Height          =   3960
+         Left            =   360
+         TabIndex        =   96
+         Top             =   2280
+         Width           =   6495
+         Begin VB.Frame FrameTapa 
+            Height          =   2895
+            Left            =   120
+            TabIndex        =   265
+            Top             =   960
+            Visible         =   0   'False
+            Width           =   6135
+            Begin VB.ComboBox cboSituMan 
+               Height          =   315
+               ItemData        =   "frmListadoPed.frx":2900
+               Left            =   1680
+               List            =   "frmListadoPed.frx":290D
+               Style           =   2  'Dropdown List
+               TabIndex        =   266
+               Top             =   720
+               Width           =   2175
+            End
+            Begin VB.Label Label7 
+               AutoSize        =   -1  'True
+               Caption         =   "Situacion"
+               BeginProperty Font 
+                  Name            =   "Tahoma"
+                  Size            =   8.25
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               ForeColor       =   &H00000080&
+               Height          =   195
+               Index           =   15
+               Left            =   120
+               TabIndex        =   267
+               Top             =   720
+               Width           =   780
+            End
+         End
+         Begin VB.CheckBox chkSituFacMant 
+            Caption         =   "Situación facturación"
+            Height          =   255
+            Left            =   4440
+            TabIndex        =   264
+            Top             =   600
+            Width           =   1935
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   56
+            Left            =   1425
+            MaxLength       =   6
+            TabIndex        =   112
+            Top             =   3480
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   56
+            Left            =   2205
+            Locked          =   -1  'True
+            TabIndex        =   262
+            Text            =   "Text5"
+            Top             =   3480
+            Width           =   3735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   55
+            Left            =   2205
+            Locked          =   -1  'True
+            TabIndex        =   259
+            Text            =   "Text5"
+            Top             =   3120
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   55
+            Left            =   1440
+            MaxLength       =   6
+            TabIndex        =   111
+            Top             =   3120
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   50
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   121
+            Text            =   "Text5"
+            Top             =   2160
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   50
+            Left            =   1380
+            MaxLength       =   3
+            TabIndex        =   109
+            Top             =   2160
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   51
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   120
+            Text            =   "Text5"
+            Top             =   2520
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   51
+            Left            =   1380
+            MaxLength       =   3
+            TabIndex        =   110
+            Top             =   2520
+            Width           =   735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   49
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   108
+            Top             =   1560
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   49
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   116
+            Text            =   "Text5"
+            Top             =   1560
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   48
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   107
+            Top             =   1200
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   48
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   101
+            Text            =   "Text5"
+            Top             =   1200
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   46
+            Left            =   1680
+            MaxLength       =   2
+            TabIndex        =   106
+            Top             =   600
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   46
+            Left            =   2520
+            Locked          =   -1  'True
+            TabIndex        =   99
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   1695
+         End
+         Begin VB.TextBox txtCodigo 
+            Height          =   285
+            Index           =   45
+            Left            =   1680
+            MaxLength       =   3
+            TabIndex        =   105
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   45
+            Left            =   2520
+            Locked          =   -1  'True
+            TabIndex        =   97
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3375
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   14
+            Left            =   600
+            TabIndex        =   263
+            Top             =   3480
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   39
+            Left            =   1125
+            Picture         =   "frmListadoPed.frx":293E
+            Top             =   3480
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Departamento"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   13
+            Left            =   120
+            TabIndex        =   261
+            Top             =   2880
+            Width           =   1245
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   38
+            Left            =   1125
+            Picture         =   "frmListadoPed.frx":2A40
+            Top             =   3120
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   12
+            Left            =   600
+            TabIndex        =   260
+            Top             =   3120
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   29
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":2B42
+            Top             =   2160
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Formas de Pago"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   7
+            Left            =   120
+            TabIndex        =   124
+            Top             =   1920
+            Width           =   1350
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   10
+            Left            =   555
+            TabIndex        =   123
+            Top             =   2160
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   30
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":2C44
+            Top             =   2520
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   11
+            Left            =   555
+            TabIndex        =   122
+            Top             =   2520
+            Width           =   420
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   9
+            Left            =   555
+            TabIndex        =   119
+            Top             =   1560
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   28
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":2D46
+            Top             =   1560
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   8
+            Left            =   555
+            TabIndex        =   118
+            Top             =   1200
+            Width           =   450
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Cliente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   6
+            Left            =   120
+            TabIndex        =   117
+            Top             =   960
+            Width           =   585
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   27
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":2E48
+            Top             =   1200
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Mes a facturar"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   4
+            Left            =   120
+            TabIndex        =   100
+            Top             =   600
+            Width           =   1230
+         End
+         Begin VB.Label Label7 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo Contrato"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   3
+            Left            =   120
+            TabIndex        =   98
+            Top             =   240
+            Width           =   1155
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   25
+            Left            =   1380
+            Picture         =   "frmListadoPed.frx":2F4A
+            Top             =   240
+            Width           =   240
+         End
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   7
+         Left            =   5760
+         TabIndex        =   115
+         Top             =   6960
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdAceptarPreFacMan 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4680
+         TabIndex        =   114
+         Top             =   6960
+         Width           =   975
+      End
+      Begin VB.Label lblFactMant 
+         Caption         =   "Label5"
+         Height          =   375
+         Left            =   360
+         TabIndex        =   223
+         Top             =   6960
+         Width           =   3735
+      End
+      Begin VB.Label Label7 
+         Caption         =   "Prefacturación Mantenimientos"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   1
+         Left            =   360
+         TabIndex        =   95
+         Top             =   360
+         Width           =   6375
+      End
+   End
+   Begin MSComDlg.CommonDialog cd1 
+      Left            =   7800
+      Top             =   6480
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
+   Begin VB.Frame FrameEstVentas 
+      Height          =   3975
+      Left            =   480
+      TabIndex        =   209
+      Top             =   720
+      Width           =   7035
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   53
+         Left            =   1500
+         MaxLength       =   4
+         TabIndex        =   213
+         Top             =   1440
+         Width           =   840
+      End
+      Begin VB.CommandButton cmdAceptarEstVentas 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4200
+         TabIndex        =   215
+         Top             =   3120
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   8
+         Left            =   5280
+         TabIndex        =   216
+         Top             =   3120
+         Width           =   975
+      End
+      Begin VB.Frame Frame14 
+         BorderStyle     =   0  'None
+         Height          =   495
+         Left            =   480
+         TabIndex        =   210
+         Top             =   1800
+         Width           =   6495
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   8
+            Left            =   1920
+            Locked          =   -1  'True
+            TabIndex        =   211
+            Text            =   "Text5"
+            Top             =   120
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   8
+            Left            =   1020
+            MaxLength       =   6
+            TabIndex        =   214
+            Top             =   120
+            Width           =   840
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   32
+            Left            =   705
+            Picture         =   "frmListadoPed.frx":304C
+            Top             =   120
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cliente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   30
+            Left            =   0
+            TabIndex        =   212
+            Top             =   120
+            Width           =   585
+         End
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Ventas por meses"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   480
+         TabIndex        =   218
+         Top             =   480
+         Width           =   4815
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Año"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   57
+         Left            =   480
+         TabIndex        =   217
+         Top             =   1440
+         Width           =   330
+      End
+   End
+End
+Attribute VB_Name = "frmListadoPed"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+Public Event DatoSeleccionado(CadenaSeleccion As String)
+
+Public OpcionListado As Integer
+'(ver opciones en frmListado)
+      
+      
+      
+'Alguna opcion mas
+'                   1000.-  Es cuando paso pedido a albaran y este a factura en el mismo proceso
+'                   1001.-  Facturar un unico albaran
+'                   1010  algo de pasar a albaran
+'                   1043   pasar parte trabajoa albaran
+      
+Public NumCod As String 'Para indicar cod. Traspaso,Movimiento, etc. que llama
+                        'Para indicar nº oferta a imprimir
+
+
+Public codClien As String 'Para seleccionar inicialmente las ofertas del Proveedor
+                        'para paso ped a labaran llevare datos x defecto: llevo: tienecoddiren & "|" & zonacliente & "|"
+                
+
+'#Laura 14/11/2006 Recuperar facturas Alzira
+Public EstaRecupFact As Boolean ' si esta recuperando facturas (para albaranes de mostrador)
+
+
+'Private HaDevueltoDatos As Boolean
+Private NomTabla As String
+Private NomTablaLin As String
+
+'Private WithEvents frmMtoCartasOfe As frmFacCartasOferta
+Private WithEvents frmMtoClient As frmFacClientes3
+Attribute frmMtoClient.VB_VarHelpID = -1
+Private WithEvents frmMtoAlmacen As frmAlmAlPropios
+Attribute frmMtoAlmacen.VB_VarHelpID = -1
+Private WithEvents frmMtoArticulo As frmAlmArticu2
+Attribute frmMtoArticulo.VB_VarHelpID = -1
+Private WithEvents frmMtoTraba As frmAdmTrabajadores
+Attribute frmMtoTraba.VB_VarHelpID = -1
+Private WithEvents frmMtoFEnvio As frmFacFormasEnvio
+Attribute frmMtoFEnvio.VB_VarHelpID = -1
+Private WithEvents frmMtoFPago As frmFacFormasPago
+Attribute frmMtoFPago.VB_VarHelpID = -1
+Private WithEvents frmMtoAgente As frmFacAgentesCom
+Attribute frmMtoAgente.VB_VarHelpID = -1
+Private WithEvents frmMtoBancosPro As frmFacBancosPropios
+Attribute frmMtoBancosPro.VB_VarHelpID = -1
+Private WithEvents frmMtoTipCo As frmManTiposContrato
+Attribute frmMtoTipCo.VB_VarHelpID = -1
+Private WithEvents frmZ As frmFacZonas
+Attribute frmZ.VB_VarHelpID = -1
+
+Private WithEvents frmB As frmBuscaGrid
+Attribute frmB.VB_VarHelpID = -1
+
+'Private WithEvents frmB As frmBuscaGrid  'Busquedas
+Private WithEvents frmF As frmCal 'Calendario de Fechas
+Attribute frmF.VB_VarHelpID = -1
+
+Private WithEvents frmLd As frmListadoOfer   'Para desde pedido a al fra de RMA seelccione los datos de deovlucion
+Attribute frmLd.VB_VarHelpID = -1
+Private WithEvents frmDptoEnvio As frmFacCliEnvDpto
+Attribute frmDptoEnvio.VB_VarHelpID = -1
+
+'----- Variables para el INforme ----
+Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
+Private CadParam As String
+Private numParam As Byte
+Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private Titulo As String 'Titulo informe que se pasa a frmImprimir
+Private nomRPT As String 'nombre del fichero .rpt a imprimir
+Private conSubRPT As Boolean 'si tiene subinformes para enlazarlos a las tablas correctas
+'-------------------------------------
+
+
+Dim indCodigo As Integer 'indice para txtCodigo
+
+Dim PrimeraVez As Boolean
+
+
+Private Sub KEYpress(KeyAscii As Integer)
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 2, cerrar
+    If cerrar Then Unload Me
+End Sub
+
+
+
+
+Private Sub cboFacturacion_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub cboTipoAlbaranEuler_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub cboTipocliente_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+
+Private Sub Check1chkAgrupaAg_Click()
+    'FrameTiposFactura.visible = Me.Check1chkAgrupaAg.Value = 0
+End Sub
+
+Private Sub Check1chkAgrupaAg_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub chkFraMostrador_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub chkFrInterna_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub chkImpAlbaran_KeyDown(KeyCode As Integer, Shift As Integer)
+    KEYdown KeyCode
+    
+End Sub
+
+Private Sub chkImpAlbaran_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+    
+    
+End Sub
+
+
+
+
+Private Sub chkImpEtiq_KeyDown(KeyCode As Integer, Shift As Integer)
+    KEYdown KeyCode
+End Sub
+
+Private Sub chkImpEtiq_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+Private Sub chkImpHojaExped_KeyDown(KeyCode As Integer, Shift As Integer)
+    KEYdown KeyCode
+End Sub
+
+Private Sub chkImpHojaExped_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+
+
+
+
+
+
+
+
+Private Sub chkPedxClixSemEntrega_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub chkSituFacMant_Click()
+    FrameTapa.visible = chkSituFacMant.Value = 1
+End Sub
+
+Private Sub chkSituFacMant_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub chkSoloFacturar_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub cmdAceptarEstVentas_Click()
+'Estadistica Ventas por meses
+Dim campo As String
+    
+    InicializarVbles
+    
+    'Pasar nombre de la Empresa como parametro
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    numParam = numParam + 1
+
+    
+    'El campo AÑO es obligarotorio
+    txtCodigo(53).Text = Trim(txtCodigo(53).Text)
+    If txtCodigo(53).Text = "" Then
+        MsgBox "Debe seleccionar una año para el informe.", vbInformation
+        Exit Sub
+    Else
+        campo = "year({scafac.fecfactu})"
+        cadFormula = campo & " = " & txtCodigo(53).Text
+'        campo = campo & " = " & CInt(txtCodigo(53).Text) - 1
+'        cadFormula = "(" & cadFormula & " OR " & campo & ")"
+        
+        'Parametro del año solicitado para el informe
+        'Pasar el año solicitado como parametro
+        CadParam = CadParam & "pAnyo=""" & "Año: " & txtCodigo(53).Text & """|"
+        numParam = numParam + 1
+    End If
+    
+    'Campo seleccion de un CLIENTE
+    txtCodigo(8).Text = Trim(txtCodigo(8).Text)
+    If txtCodigo(8).Text <> "" Then
+        campo = "{scafac.codclien}"
+        cadFormula = cadFormula & " AND (" & campo & " =" & txtCodigo(8).Text & ")"
+        'Pasar el cliente solicitado como parametro
+        CadParam = CadParam & "pDHCliente=""" & "Cliente: " & txtCodigo(8).Text & " - " & txtNombre(8).Text & """|"
+    Else
+        'Mostrar en el informe el total del Año Anterior
+        campo = campo & " = " & CInt(txtCodigo(53).Text) - 1
+        cadFormula = "(" & cadFormula & " OR " & campo & ")"
+        
+        CadParam = CadParam & "pDHCliente=""" & "Cliente: Todos" & """|"
+    End If
+    numParam = numParam + 1
+    
+    
+    'Comprobar si hay registros para mostrar en el informe
+    cadSelect = cadFormula
+    If Not HayRegParaInforme("scafac", cadSelect) Then Exit Sub
+    
+    
+    'Borro los datos temporales,por si acaso se hubiera quedado
+    BorrarTempInformes
+    
+    'Generar la temporal con los totales por año, mes y cliente (tmpinformes)
+    If Not TempVentasMeses(cadSelect, txtCodigo(53).Text) Then
+        'Borrar los registros generados por el usuario de la temporal
+        BorrarTempInformes
+        Exit Sub
+    End If
+    
+    cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
+    Titulo = "Ventas por meses"
+'    If Me.OptTipoInf(0).Value = True Then
+        nomRPT = "rFacVentasxMesGra.rpt"
+'    Else
+'        Exit Sub
+'        nomRPT = "rFacVentasxMesTex.rpt"
+'    End If
+    conSubRPT = False
+    
+    LlamarImprimir
+    
+    'Borrar los registros generados por el usuario de la temporal
+    BorrarTempInformes
+End Sub
+
+
+
+Private Sub cmdAceptarFac_Click()
+'Facturacion de Albaranes
+Dim campo As String, Cad As String
+Dim cadFrom As String
+Dim cadSQL As String 'Para seleccionar los Albaranes del rango seleccion
+                      'que no se van a facturar
+Dim CambiamosConta As Boolean
+Dim Seguir As Boolean
+Dim RT As ADODB.Recordset
+Dim UnoSolo As Boolean
+    
+    
+    InicializarVbles
+    
+    CambiamosConta = False
+    '--- Comprobar q los campos tienen valor
+    If Trim(txtCodigo(34).Text) = "" Then 'Fecha factura
+        MsgBox "El campo Fecha Factura debe tener valor.", vbExclamation
+        Exit Sub
+    End If
+    
+    If Trim(txtCodigo(0).Text) = "" Or txtNombre(0).Text = "" Then 'Banco propio
+        MsgBox "El campo cta. prevista de cobro debe tener valor.", vbExclamation
+        Exit Sub
+    End If
+    
+    
+    'Junio 2014. Para el proceso de facturacion hemos añadido TIPOS de pago
+    'Alguno debe estar marcado
+    If OpcionListado = 52 Then
+        Cad = ""
+        For indCodigo = 0 To 6   'LOS SEIS PRIMEROS
+            If Me.chkTpPago2(indCodigo).Value = 1 Then Cad = "1"
+        Next indCodigo
+        If Cad = "" Then
+            MsgBox "Seleccione algun tipo de pago", vbExclamation
+            Exit Sub
+        End If
+    End If
+    
+
+
+    'FechaOK
+    If EsFechaOKConta(CDate(Me.txtCodigo(34).Text)) <> 0 Then
+        MsgBox "Fechas fuera de ejercicio", vbExclamation
+        Exit Sub
+    End If
+    
+    'Mayo 2013
+    'Fechas contabilizacion de facturas
+    Cad = "concat(anofactu,'|',perfactu,'|')"
+    
+    cadFrom = DevuelveDesdeBD(conConta, "periodos", "Parametros", "1", "1", "N", Cad)
+    If cadFrom <> "" Then
+        indCodigo = 1
+        If cadFrom = "0" Then indCodigo = 3
+        campo = RecuperaValor(Cad, 2)
+        'MEs
+        If campo <> "" Then
+            cadFrom = CStr(CByte(campo) * indCodigo)
+            Cad = RecuperaValor(Cad, 1)
+            indCodigo = DiasMes(CByte(cadFrom), CInt(Cad))
+            Cad = indCodigo & "/" & Format(cadFrom, "00") & "/" & Cad
+            If CDate(Cad) > CDate(txtCodigo(34).Text) Then
+                Cad = "El periodo de facturacion del IVA ya esta cerrado.  ¿Desea continuar?"
+                If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
+            End If
+        End If
+    End If
+    
+
+    indCodigo = 0
+    Cad = ""
+    campo = ""
+    cadFrom = ""
+    UnoSolo = False
+    '--- Seleccinar los Albaranes que cumplen los criterios introducidos
+    If OpcionListado <> 222 Then 'Facturas Ventas (FACTURACION)
+                                 '222: Facturas de Mostrador/Rectificativa
+        'Desde/Hasta Nº ALBARAN
+        '-------------------------
+        If txtCodigo(36).Text <> "" Or txtCodigo(37).Text <> "" Then
+            campo = NomTabla & ".numalbar"
+            Cad = ""
+            If Not PonerDesdeHasta(campo, "N", 36, 37, Cad) Then Exit Sub
+        End If
+    
+        'Desde/Hasta FECHA del ALBARAN
+        '--------------------------------------------
+        If txtCodigo(38).Text <> "" Or txtCodigo(39).Text <> "" Then
+            'Para MySQL
+            campo = "scaalb.fechaalb"
+            Cad = CadenaDesdeHastaBD(txtCodigo(38).Text, txtCodigo(39).Text, campo, "F")
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+            'Para Crystal Report
+            campo = "{scaalb.fechaalb}"
+            Cad = "pDHFecha=""Fecha: "
+            If Not PonerDesdeHasta(campo, "F", 38, 39, Cad) Then Exit Sub
+        End If
+    
+        'Cadena para seleccion D/H CLIENTE
+        '----------------------------------------
+        If txtCodigo(40).Text <> "" Or txtCodigo(41).Text <> "" Then
+            campo = "scaalb.codclien"
+            Cad = ""
+            If Not PonerDesdeHasta(campo, "N", 40, 41, Cad) Then Exit Sub
+        End If
+    
+        'Cadena para seleccion FORMA PAGO
+        '--------------------------------------------
+        If txtCodigo(42).Text <> "" Or txtCodigo(43).Text <> "" Then
+            campo = "scaalb.codforpa"
+            Cad = " "
+            If Not PonerDesdeHasta(campo, "N", 42, 43, Cad) Then Exit Sub
+        End If
+
+    
+    
+        'JUNIO 2014
+        ' Tipos de pago. Si estan todos NO haremos select
+        If OpcionListado = 52 Then
+            
+            Cad = ""
+            Titulo = ""
+            For numParam = 0 To 6
+                If Me.chkTpPago2(numParam).Value = 1 Then
+                    Cad = Cad & "1"
+                    Titulo = Titulo & ", " & numParam
+                End If
+            Next numParam
+            
+            If Len(Cad) = 7 Then
+                'LOS HA COGIDO TODOS. NO lo incluyo en el desde hasta
+            Else
+                Set RT = New ADODB.Recordset
+                Titulo = Mid(Titulo, 2)
+                Cad = "Select codforpa from sforpa where tipforpa in (" & Titulo & ")"
+                RT.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Cad = ""
+                While Not RT.EOF
+                    Cad = Cad & ", " & RT!codforpa
+                    RT.MoveNext
+                Wend
+                RT.Close
+                Set RT = Nothing
+                
+                If Cad = "" Then
+                    'MAL. NInguna forpa de pago con ese tipo de pago. Fuerzo un -1
+                    Cad = "-1"
+                Else
+                    Cad = Mid(Cad, 2)
+                End If
+                Titulo = ""
+                Cad = " scaalb.codforpa IN (" & Cad & ")"
+                If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+            End If
+                
+            
+        End If
+    
+        'Otros criterios de Seleccion
+        '---------------------------------------------
+        'Seleccionar de la Tabla de albaranes scaalb, solo los Albaranes que sean
+        'del tipo:Ventas o Reparacion o Mantenimiento
+    '    cad = " scaalb.codtipom='ALV' "
+        Cad = " scaalb.codtipom='" & codClien & "' " 'filtrar por tipo de albaran segun llamado de Alb.Ventas o Alb. Reparacion
+        'Solo lo añadimos a CadSelect porque vamos a Facturar y no a sacar un listado
+        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+    
+    
+        'Seleccionar los Albanares de la Periodicidad indicada
+        If txtCodigo(35).Text <> "" Then
+            Cad = " sclien.periodof=" & txtCodigo(35).Text
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+            cadFrom = " scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien "
+        End If
+        
+    Else
+        'Facturar UNA solo
+        Cad = ""
+        If codClien = "ALM" And vParamAplic.EntradaRapidaFacturasMostrador Then Cad = "NO"
+        
+        If Cad = "" Then
+            If MsgBox("Generar la factura?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        End If
+        
+        'en la llamada reutilizamos las vbles codclien y NumCod para guardar tipomov y numalbar.
+        cadFormula = "{scaalb.codtipom}='" & codClien & "' AND scaalb.numalbar=" & NumCod
+        cadSelect = cadFormula
+        
+        UnoSolo = True
+    End If
+    
+    
+    
+    cadSQL = cadSelect
+                                                                
+    'Pequeña comprobacion de los centros de coste
+    If vEmpresa.TieneAnalitica Then
+        Cad = "select count(*) from slialb where codccost is null and (codtipom,numalbar) in ("
+        Cad = Cad & "select codtipom,numalbar from scaalb where "
+        Cad = Cad & cadSelect
+        Cad = Cad & " AND  scaalb.factursn=1 )"
+        Cad = Replace(Cad, "{", "(")
+        Cad = Replace(Cad, "}", ")")
+        NumRegElim = CInt(NumRegistros(Cad))
+        If NumRegElim > 0 Then
+             Cad = "Existen lineas de albaran(" & NumRegElim & ") sin asignar centro de coste"
+             Cad = Cad & vbCrLf & vbCrLf & Space(30) & "¿Continuar?"
+             If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        End If
+        
+    End If
+    
+                                                        
+                                                                
+                                                                
+                                                                'Septiembre 2009
+    'Seleccionar los Albaranes que tiene scaalb.factursn=1     y TENGAN lineas
+    Cad = " {scaalb.factursn=1} "
+    
+    'cad = cad & " and (scaalb.codtipom,scaalb.numalbar) in (select codtipom,numalbar from slialb group by codtipom,numalbar)"
+    If Not UnoSolo Then Cad = Cad & " and (scaalb.codtipom,scaalb.numalbar) in (select distinct codtipom,numalbar from slialb)"
+    
+    
+    If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+        
+    
+    AnyadirAFormula cadFormula, Cad
+    
+    
+    
+    
+    '--- Comprobar q se han Seleccionados registros de Albaran con esos criterios
+    Cad = "Select count(*) " ' & NomTabla & " INNER JOIN " & nomTablaLin
+    If cadFrom = "" Then cadFrom = " scaalb "
+    Cad = Cad & " FROM " & cadFrom
+
+    If Not HayRegParaInforme(cadFrom, cadSelect) Then Exit Sub
+    
+    If Not HayRegParaInforme(cadFrom, campo, True) Then
+        MsgBox "Albaranes para facturar sin lineas", vbExclamation
+        Exit Sub
+    End If
+    campo = ""
+    'Verificar si con los criterios seleccionados (PARA VENTAS)
+    'seleccionar si quedan en el rango Albaranes que no se van a Facturar
+    'y mostrar mensaje
+    If OpcionListado <> 222 Then
+        'Seleccionar los Albaranes que tiene scaalb.factursn=0
+        campo = " scaalb.factursn=0 "
+        If Not AnyadirAFormula(cadSQL, campo) Then Exit Sub
+        cadSQL = Cad & " WHERE " & cadSQL
+        If RegistrosAListar(cadSQL) > 0 Then
+            'Mostrar los Albaranes que no se van a Facturar
+            cadSQL = Replace(cadSQL, "count(*)", "scaalb.codtipom,scaalb.numalbar,scaalb.fechaalb,scaalb.codclien,scaalb.nomclien")
+            frmMensajes.OpcionMensaje = 12
+            frmMensajes.cadWhere = cadSQL
+            frmMensajes.Show vbModal
+            If frmMensajes.vCampos = "0" Then Exit Sub
+        End If
+    End If
+    
+    Cad = Cad & " WHERE " & cadSelect
+    
+
+    
+    
+    'Pasar Albaranes a Facturas
+    If InStr(Cad, "sclien") <> 0 Then 'hay JOIN con sclien
+        Cad = Replace(Cad, "count(*)", "scaalb.*, sclien.periodof")
+    Else
+        Cad = Replace(Cad, "count(*)", "*")
+    End If
+
+
+
+
+
+
+
+    'Albarananes EN B
+    If codClien = "ALZ" Then
+        If Not AbrirConexionConta(True) Then
+            Cad = "Error MUY grave." & vbCrLf & "Error conectando con BD: " & vParamAplic.ContabilidadB
+            MsgBox Cad, vbCritical
+            End
+            Exit Sub
+        End If
+        CambiamosConta = True
+    End If
+
+
+
+    '--- Mostrar Barra de PRogreso
+    If OpcionListado <> 222 Then '222: Facturas Mostrador/Rectificativa
+                                 '52: Facturas de Venta
+                                 'Facturas Reparacion
+        
+        
+        
+        'Fitosnatiarios. Comprobar que todos los albaranes llevan puesto carnet de manipulador
+        'y  lotes correctamente
+        If vParamAplic.ManipuladorFitosanitarios2 Then
+            Screen.MousePointer = vbHourglass
+            Dim AuxCadena As String
+            
+            AuxCadena = ""
+            If Not ComprobarFitosAlbaranesFacturasCliente(AuxCadena, cadSelect) Then AuxCadena = "NO"
+            Screen.MousePointer = vbDefault
+            
+            If AuxCadena <> "" Then
+                AuxCadena = App.Path & "\errfacFito.txt"
+                
+                AuxCadena = "Hay incidencias en fitosanitarios. Vea el fichero " & AuxCadena
+                AuxCadena = AuxCadena & vbCrLf & vbCrLf & "¿Continuar de igual modo? "
+                If MsgBox(AuxCadena, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+            End If
+        End If
+        
+        Me.Height = Me.Height + 300
+        Me.FrameFacturar.Height = Me.FrameFacturar.Height + 300
+        Me.FrameProgress.visible = True
+        Me.FrameProgress.Top = 6250
+        Me.ProgressBar1.Left = 200
+        Me.ProgressBar1.Value = 0
+        Me.lblProgess(1).Caption = "Inicializando el proceso..."
+        
+        
+        
+        'Si vamos a facturar albaranes "B" tenemos que cerrar la conexion CONTA y abrirla contra la
+        'Segunda BD que nos indica
+        
+    End If
+    
+
+    '--- Traspasa Albaranes a Facturas
+    If OpcionListado = 222 And Me.EstaRecupFact = True Then
+        '#### Laura: 14/11/2006 Recuperar facturas ALZIRA
+        'comprobar q se ha introducido el nº de factura
+        If Trim(txtCodigo(4).Text) = "" Then
+            MsgBox "Debe introducir el nº de factura"
+            Exit Sub
+        End If
+        'comprobar q la factura esta en un rango de recuperacion
+        If Not (4255 <= CLng(txtCodigo(4).Text) And CLng(txtCodigo(4).Text) <= 5220) Then
+            MsgBox "El Nº de factura no esta en el rango de recuperación."
+            Exit Sub
+        End If
+        'comprobar q no exista ya ese nº de factura en ariges
+        campo = "SELECT COUNT(*) FROM scafac WHERE "
+        campo = campo & "codtipom='FAV' and numfactu=" & DBSet(txtCodigo(4).Text, "N") & " and year(fecfactu)=" & Year(txtCodigo(34).Text) '" and fecfactu=" & DBSet(txtCodigo(34).Text, "F")
+        If Not (RegistrosAListar(campo) > 0) Then
+            'comprobar si existe la factura en contabilidad
+            campo = ""
+            campo = ObtenerLetraSerie("FAV")
+            If campo = "" Then Exit Sub
+            campo = "SELECT COUNT(*) FROM cabfact WHERE numserie=" & DBSet(campo, "T")
+            campo = campo & " AND codfaccl=" & txtCodigo(4).Text & " AND anofaccl=" & Year(txtCodigo(34).Text)
+            
+            If Not (RegistrosAListar(campo, conConta) > 0) Then
+                'no existe en contabilidad recuperamos la factura y ya esta (no insertamos en tesoreria)
+                TraspasoAlbaranesFacturas_RecuperaFac Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, txtCodigo(4).Text, Me.ProgressBar1, Me.lblProgess(1) 'Fecha de la factura, Cta Prevista de Cobro
+            Else
+                'si esiste
+                'comprobar q el cliente es el mismo en la factura q vamos a recuperar
+                'y en la factura de la conta
+                If Not ComprobarCliente_RecuperarFac(cadSelect, txtCodigo(34).Text, txtCodigo(4).Text) Then Exit Sub
+                'si existe en contabilidad recuperamos la factura y marcar como contabilizada
+                TraspasoAlbaranesFacturas_RecuperaFac Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, txtCodigo(4).Text, Me.ProgressBar1, Me.lblProgess(1) 'Fecha de la factura, Cta Prevista de Cobro
+                
+                
+            End If
+        Else
+            MsgBox "Ya existe la Factura en Ariges", vbExclamation
+        End If
+        '####################
+    Else
+        'proceso normal
+        'Fecha de la factura, Cta Prevista de Cobro
+        Screen.MousePointer = vbHourglass
+        Seguir = True
+        If vParamAplic.ArtPortesN <> "" Then
+            If vParamAplic.TipoPortes = 2 Then
+                'tipo portes HERBELCA.
+                campo = lblProgess(0).Caption
+                lblProgess(0).Caption = "Portes:"
+                If Not ProcesoPortesTipoHerbelca(Cad, cadSelect, lblProgess(1)) Then Seguir = False
+                lblProgess(0).Caption = campo
+                campo = ""
+            End If
+        End If
+         
+        If Seguir Then
+         
+            '------------------------------------------------------------------------------
+            '  LOG de acciones.
+            Set LOG = New cLOG
+            campo = "Albaran: " & codClien & " : " & NumCod
+            LOG.Insertar 2, vUsu, campo
+            Set LOG = Nothing
+            '-----------------------------------------------------------------------------
+    
+            'campo = txtCSB(0).Text & "|" & txtCSB(1).Text & "|" & txtCSB(2).Text & "|"
+            campo = "|||"
+            'Para que no coja los albaranes sin lineas
+            'cadSelect = cadSelect & " and (scaalb.codtipom,scaalb.numalbar) in (select distinct codtipom,numalbar from slialb )"
+            
+            
+            'ABRIL 2014.
+            'El parametro que le enviamos si se muestra el mensaje de que se ha generado correctamente(ultimo parametro)
+            'AHORA le enviamos FALSE
+            TraspasoAlbaranesFacturas Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, Me.ProgressBar1, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False
+        End If
+    End If
+    Screen.MousePointer = vbDefault
+    
+    If CambiamosConta Then
+       'Reestablecer la conexion con la antigua conta
+       AbrirConexionConta False
+    End If
+    '--- Ocultar Barra de Progreso
+    If OpcionListado <> 222 Then '222: Facturas Mostrador
+        Me.Height = Me.Height - 300
+        Me.FrameFacturar.Height = Me.FrameFacturar.Height - 300
+        Me.FrameProgress.visible = False
+    Else
+        'Cierro y salgo
+        Unload Me
+    End If
+End Sub
+
+
+
+'#### Laura 14/11/2006 Recuperar facturas ALZIRA
+Private Function ComprobarCliente_RecuperarFac(cadSelAlb As String, fecFac As String, numFac As String) As Boolean
+Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim codMacta1 As String 'cliente factura ariges
+Dim codMacta2 As String 'cliente factura conta
+Dim LEtra As String
+
+    On Error GoTo ErrCompCliente
+    ComprobarCliente_RecuperarFac = False
+    
+    'codmacta del cliente del albaran a facturar en Ariges
+    SQL = "select scaalb.codclien,sclien.codmacta"
+    SQL = SQL & " from scaalb inner join sclien on scaalb.codclien=sclien.codclien "
+    SQL = SQL & " Where " & cadSelAlb
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        codMacta1 = DBLet(Rs!Codmacta, "T")
+    
+    End If
+    Set Rs = Nothing
+    
+    
+    'codmacta en la contabilidad
+    LEtra = ObtenerLetraSerie("FAV")
+    SQL = "SELECT codmacta FROM cabfact "
+    SQL = SQL & " WHERE numserie=" & DBSet(LEtra, "T") & " AND codfaccl=" & numFac & " AND anofaccl=" & Year(fecFac)
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        codMacta2 = DBLet(Rs!Codmacta, "T")
+    End If
+    Set Rs = Nothing
+    
+    If codMacta1 <> "" And codMacta2 <> "" Then
+        If codMacta1 = codMacta2 Then
+            ComprobarCliente_RecuperarFac = True
+        Else
+            ComprobarCliente_RecuperarFac = False
+            MsgBox "La cuenta contable en la factura de Contabilidad no coincide con la del cliente del Albaran", vbExclamation
+        End If
+    Else
+        ComprobarCliente_RecuperarFac = False
+        MsgBox "No se ha podido leer la cuenta contable del cliente", vbExclamation
+    End If
+    
+    Exit Function
+    
+ErrCompCliente:
+    ComprobarCliente_RecuperarFac = False
+    MuestraError Err.Number, "Comprobar cliente", Err.Description
+End Function
+'#####
+
+
+Private Sub cmdAceptarGenAlb_Click()
+'Solicitar datos para Generar Albaran a partir de un Pedido
+Dim Cad As String
+
+    'DAVID
+    'Comprobar que me han puesto algun dato
+    '-------------------------------------------------------------------
+    Cad = ""
+    If txtCodigo(17).Text = "" Or txtCodigo(18).Text = "" Or txtCodigo(19).Text = "" Or txtCodigo(25).Text = "" Then Cad = "M"
+    If OpcionListado = 1000 Or OpcionListado = 1010 Then
+        If txtCodigo(5).Text = "" Then Cad = "M"
+        If txtNombre(5).Text = "" Then Cad = "M"
+    End If
+    If txtNombre(17).Text = "" Or txtNombre(18).Text = "" Or txtNombre(19).Text = "" Then Cad = "M"
+    
+    If Cad <> "" Then
+        MsgBox "Campos obligatorios ", vbExclamation
+        Exit Sub
+    End If
+    
+    
+    If Me.FramRectARM.visible Then
+        'Fra rectificativa desde ARM(teinsa)
+        If Me.txtFraRectifica.Text = "" Then
+            MsgBox "Debe indicar la factura a la que rectifica", vbExclamation
+            Exit Sub
+        End If
+    End If
+    
+    
+    If Me.FrameZona.visible Then
+        Cad = ""
+        If txtCodigo(22).Text = "" Xor txtNombre(22).Text = "" Then
+            Cad = "Zona incorrecta"
+            
+        Else
+            If txtCodigo(22).Text = "" Then Cad = "Zona incorrecta. Indique una"
+        End If
+        If Cad <> "" Then
+            MsgBox Cad, vbExclamation
+            Exit Sub
+        End If
+    End If
+        
+    If Me.chkFraMostrador.visible Then
+        'SI NO VA A FACTURA DE MOSTRADOR AVISAMOS
+        If chkFraMostrador.Value = 0 Then
+            Cad = String(60, "*") & vbCrLf
+            Cad = vbCrLf & Cad & Cad & Cad & vbCrLf
+            Cad = Cad & "    Va a generar una factura de albarán,   NO de mostrador" & "" _
+                & vbCrLf & vbCrLf & "             ¿Continuar?" & vbCrLf & Cad
+            If vParamAplic.NumeroInstalacion <> 1 Then
+                If MsgBox(Cad, vbQuestion + vbYesNoCancel + vbDefaultButton3) <> vbYes Then Exit Sub
+            End If
+        End If
+    End If
+       
+    If FramePartes.visible Then
+        If Me.txtCodigo(59).Text = "" Then
+            MsgBox "Introduzca litros reales", vbExclamation
+            PonerFoco txtCodigo(59)
+            Exit Sub
+        End If
+        
+        'MSGBOX
+        Cad = "Desea cerrar el parte de produccion con:" & vbCrLf
+        Cad = Cad & "       Litros real: " & txtCodigo(59).Text & vbCrLf
+        Cad = Cad & "       Cantidad: " & txtCodigo(60).Text & vbCrLf
+        If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+        
+        CadenaDesdeOtroForm = txtCodigo(59).Text & "|" & Me.chkFrInterna.Value & "|" & txtCodigo(60).Text & "|"
+        ' 17 Abril 2012
+        'Tipo facturacion
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & Me.cboFacturacion.ListIndex & "|"
+        
+        
+    End If
+    
+    'Enero 2016
+    
+    
+        
+    'Enero 2011
+    'la factura a la k rectifica la llevo a una temporal, para no crear mas variables
+    If Me.FramRectARM.visible Then
+        Cad = "Insert into tmpcrmmsg (`codusu`,`codigo`,`asun_obs`) values (" & vUsu.codigo & ",'1'," & DBSet(Me.txtFraRectifica.Tag, "T") & ")"
+        If Not ejecutar(Cad, False) Then Exit Sub
+    End If
+    
+    Cad = txtCodigo(17).Text & "|"
+    Cad = Cad & txtCodigo(18).Text & "|"
+    Cad = Cad & txtCodigo(19).Text & "|"
+    Cad = Cad & txtCodigo(25).Text & "|"
+    Cad = Cad & Me.chkImpAlbaran.Value & "|"
+    Cad = Cad & Me.chkImpEtiq.Value & "|"
+    Cad = Cad & Me.chkImpHojaExped.Value & "|"
+    'mando el banco propio
+    'Octubre 2010
+    '--------------------------------------------------------------
+    'Ahora siempre mando el banco. Cuando es albaran NO le hago caso
+    Cad = Cad & txtCodigo(5).Text & "|"
+    'Y mando tb, si esta visible, la zona d eenvio
+    If Me.FrameZona.visible Then Cad = Cad & txtCodigo(22).Text
+    Cad = Cad & "|"
+    
+    '10 Enero 2011
+    'Si tiene vParamAplic.FrasMostradorSerieDistinta podria pasar el pedido a
+    'fra mostrador. Se le habra puesto visible el check
+    If Me.chkFraMostrador.visible Then
+        If vParamAplic.FrasMostradorSerieDistinta Then
+            If Me.chkFraMostrador.Value = 1 Then Cad = Cad & "1" 'PASAMOS A FRAS/alb MOSTRADOR(primero a alb mostrador)
+        End If
+    End If
+    Cad = Cad & "|"
+    
+    If vParamAplic.NumeroInstalacion = 4 Then
+        Select Case Me.cboTipoAlbaranEuler.ListIndex
+        Case 1
+            Cad = Cad & "ALE"
+        Case 2
+            Cad = Cad & "ALO"
+        Case 3
+            Cad = Cad & "ALR"
+        Case Else
+            Cad = Cad & "ALV"
+        End Select
+    End If
+    Cad = Cad & "|"
+    
+    
+    RaiseEvent DatoSeleccionado(Cad)
+    
+    
+    
+    Unload Me
+End Sub
+
+
+
+Private Sub cmdAceptarPedxArtic_Click()
+'41: Informe de Pedidos por Articulo
+'44: Informe de Pedidos por Cliente
+'49: Informe de Albaranes por Artículo
+Dim campo As String
+Dim Cad As String
+Dim SQL As String
+Dim cadFormula2 As String
+Dim cadSelect2 As String
+Dim cadSelect3 As String
+Dim indice As Integer
+
+
+    InicializarVbles
+    cadFormula2 = ""
+    cadSelect2 = ""
+    cadSelect3 = ""
+    
+    'Pasar nombre de la Empresa como parametro
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    numParam = numParam + 1
+
+
+    '===================================================
+    '================= FORMULA =========================
+    
+    'Cadena para seleccion Fechas de Pedido/Albaran/Factura
+    '--------------------------------------------
+    'Desde/Hasta FECHA
+    'para el informe 227 fecha requerida
+    If OpcionListado = 227 Then
+        If txtCodigo(11).Text = "" Or txtCodigo(12).Text = "" Then
+            MsgBox "Los campos D/H fecha factura deben tener valor.", vbInformation
+            Exit Sub
+        End If
+        
+        If DateDiff("d", txtCodigo(11).Text, txtCodigo(12).Text) > 365 Then
+            MsgBox "El intervalo de fechas no puede ser superior a un año.", vbInformation
+            Exit Sub
+        End If
+    End If
+    
+    If txtCodigo(11).Text <> "" Or txtCodigo(12).Text <> "" Then
+        If OpcionListado = 227 Or OpcionListado = 228 Then
+            campo = "{" & NomTabla & ".fecfactu}"
+        ElseIf OpcionListado = 49 Then
+            campo = "{" & NomTabla & ".fechaalb}"
+        Else
+            campo = "{" & NomTabla & ".fecpedcl}"
+        End If
+        Cad = "pDHFecha=""Fecha: "
+        If Not PonerDesdeHasta(campo, "F", 11, 12, Cad) Then Exit Sub
+        cadSelect = CadenaDesdeHastaBD(txtCodigo(11).Text, txtCodigo(12).Text, campo, "F")
+        
+        'Guardamos el periodo para calcular las ventas
+        If OpcionListado = 227 Then
+            cadFormula2 = cadFormula
+            cadSelect2 = cadSelect
+            'obtenemos el periodo anterior de ventas
+            Cad = "": SQL = ""
+            If txtCodigo(11).Text <> "" Then Cad = Day(txtCodigo(11).Text) & "/" & Month(txtCodigo(11).Text) & "/" & Year(txtCodigo(11).Text) - 1
+            If txtCodigo(12).Text <> "" Then SQL = Day(txtCodigo(12).Text) & "/" & Month(txtCodigo(12).Text) & "/" & Year(txtCodigo(12).Text) - 1
+            cadSelect3 = CadenaDesdeHastaBD(Cad, SQL, campo, "F")
+        
+        ElseIf OpcionListado = 41 Or OpcionListado = 42 Then '42:Disponibilidad Stock
+        'pasar D/H fecha como parametro para enlazar con la cabecera de pedidos proveedor
+        'que esta como subinforme y que seleccione el mismo rango de fecha que
+        'para la cabecera de pedidos de cliente
+            If txtCodigo(11).Text <> "" Then
+                Cad = "pFechaD=" & "Date(" & Year(txtCodigo(11).Text) & ", " & Month(txtCodigo(11).Text) & ", " & Day(txtCodigo(11).Text) & ")"
+            Else
+                Cad = "pFechaD=" & "Date(1900,01,01)"
+            End If
+            CadParam = CadParam & Cad & "|"
+            numParam = numParam + 1
+            If txtCodigo(12).Text <> "" Then
+                Cad = "pFechaH=" & "Date(" & Year(txtCodigo(12).Text) & ", " & Month(txtCodigo(12).Text) & ", " & Day(txtCodigo(12).Text) & ")"
+            Else
+                Cad = "pFechaH=" & "Date(9999,12,31)"
+            End If
+            CadParam = CadParam & Cad & "|"
+            numParam = numParam + 1
+        End If
+    End If
+    
+    'Cadena para seleccion ALMACEN
+    '--------------------------------------------
+    If Me.Frame9.visible Then
+        If txtCodigo(13).Text <> "" Or txtCodigo(14).Text <> "" Then
+            campo = "{" & NomTablaLin & ".codalmac}"
+            'Parametro Desde/Hasta Almacen
+            Cad = "pDHAlmacen=""Almacen: "
+            If Not PonerDesdeHasta(campo, "N", 13, 14, Cad) Then Exit Sub
+        End If
+    End If
+    
+    
+    'Cadena para seleccion ARTICULO
+    '--------------------------------------------
+    If Me.Frame8.visible Then
+        If txtCodigo(15).Text <> "" Or txtCodigo(16).Text <> "" Then
+            campo = "{" & NomTablaLin & ".codartic}"
+            'Parametro Desde/Hasta Articulo
+            Cad = "pDHArticulo=""Artículo: "
+             If Not PonerDesdeHasta(campo, "T", 15, 16, Cad) Then Exit Sub
+        End If
+    End If
+    
+    'Cadena para seleccion CLIENTE
+    '--------------------------------------------
+    If Me.Frame5.visible Then
+        If OpcionListado = 44 Then
+            CadenaDesdeOtroForm = ""
+            If txtCodigo(20).Text <> "" Or txtCodigo(21).Text <> "" Then
+                campo = "{" & NomTabla & ".codclien}"
+                'Parametro Desde/Hasta Cliente
+                Cad = "Cliente: "
+                If Not PonerDesdeHasta(campo, "N", 20, 21, Cad) Then Exit Sub
+            End If
+            If Cad <> "" Then CadenaDesdeOtroForm = Cad
+            If chkPedxClixSemEntrega(0).Value = 0 Then
+                If Me.cboTipocliente.ItemData(cboTipocliente.ListIndex) >= 0 Then
+                    'Tiene seleccionado UN tipo de cliente
+                    CadenaDesdeOtroForm = CadenaDesdeOtroForm & "    Tipo: " & Me.cboTipocliente.List(cboTipocliente.ListIndex)
+                End If
+            End If
+            If CadenaDesdeOtroForm <> "" Then
+                Cad = "pDHCliente=""" & CadenaDesdeOtroForm & """|"
+                CadParam = CadParam & Cad
+                numParam = numParam + 1
+                CadenaDesdeOtroForm = ""
+            End If
+                
+                        
+            Cad = "observas=" & chkPedxClixSemEntrega(1).Value & "|"
+            CadParam = CadParam & Cad
+            numParam = numParam + 1
+            
+            
+                
+                
+        Else
+            If txtCodigo(20).Text <> "" Or txtCodigo(21).Text <> "" Then
+                campo = "{" & NomTabla & ".codclien}"
+                'Parametro Desde/Hasta Cliente
+                Cad = "pDHCliente=""Cliente: "
+                If Not PonerDesdeHasta(campo, "N", 20, 21, Cad) Then Exit Sub
+            End If
+        End If
+    End If
+    
+    
+    'Cadena para seleccion TRABAJADOR
+    '--------------------------------------------
+    If Me.Frame12.visible Then
+        If txtCodigo(2).Text <> "" Or txtCodigo(3).Text <> "" Then
+            campo = "{scafac1.codtraba}"
+            'Parametro Desde/Hasta Trabajador
+            Cad = "pDHTrabajador=""Trabajador: "
+            If Not PonerDesdeHasta(campo, "N", 2, 3, Cad) Then Exit Sub
+        End If
+    End If
+    
+    
+    
+    '227: Listado Ventas por cliente
+    'Importe ventas superior a ....
+    If Me.Frame10.visible Then
+        Cad = DBSet(txtCodigo(1).Text, "N")
+        
+        CadParam = CadParam & "pImporte=" & Cad & "|"
+        numParam = numParam + 1
+            
+        'En este sub meteremos la actividad tb
+        If txtCodigo(1).Text <> "" Or txtCodigo(57).Text <> "" Or txtCodigo(58).Text <> "" Or txtCodigo(23).Text <> "" Or txtCodigo(24).Text <> "" Then
+            'seleccionar solo los clientes que el total de la BaseImp supere esa cantidad
+            'y esten en el desde hasta que marcamos aqui
+            If cadSelect <> "" Then SQL = cadSelect2 & " AND "
+            Cad = ObtenerClientesNuevo(cadSelect, Cad)
+            cadSelect = SQL & Cad
+'            If cadSelect3 <> "" Then cadSelect3 = cadSelect3 & " AND "
+'            cadSelect3 = cadSelect3 & cad
+            If cadFormula2 <> "" Then cadFormula2 = cadFormula2 & " AND "
+            cadFormula = cadFormula2 & Cad
+        End If
+        
+        
+    End If
+    
+    
+    If OpcionListado = 49 Then
+        campo = ".numalbar"
+'        cad = "{" & NomTabla & ".codtipom}='ALV'"
+'        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
+'        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+        '-- Ahora en este informe hay mas posibilidades de selección [SERVICIOS]
+        If vParamAplic.Servicios Then
+            indice = cmbTipAlbaran(1).ListIndex
+            If indice < 0 Then
+                MsgBox "Debe seleccionar el tipo o los tipos de alabarán a procesar", vbExclamation
+                Exit Sub
+            Else
+                Select Case indice
+                    Case 0 ' solo ventas
+                        Cad = "{" & NomTabla & ".codtipom}='ALV'"
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+                        Titulo = "Albaranes por artículo (Ventas)"
+                    Case 1 ' solo servicios
+                        Cad = "{" & NomTabla & ".codtipom}='ALS'"
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+                        Titulo = "Albaranes por artículo (Servicios)"
+                    Case 2 ' ventas y servicios
+                        Cad = " ({" & NomTabla & ".codtipom}='ALV'" & _
+                                " OR {" & NomTabla & ".codtipom}='ALS')"
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+                        Titulo = "Albaranes por artículo (Ventas y servicios)"
+                End Select
+            End If
+        Else
+            Cad = "{" & NomTabla & ".codtipom}='ALV'"
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+            Titulo = "Albaranes por artículo (Ventas)"
+        End If
+        'Pasar nombre el título del informe
+        CadParam = CadParam & "|pTitulo=""" & Titulo & """|"
+        numParam = numParam + 1
+    Else
+        campo = ".numpedcl"
+    End If
+
+
+    'Febrero.
+    'Si lis ped x cliente
+    ' y no va por sememan de entrega entonces
+    If OpcionListado = 44 Then
+        'Ha selecionado un tipo de cliente
+        If Me.chkPedxClixSemEntrega(0).Value = 0 Then
+            If Me.cboTipocliente.ItemData(cboTipocliente.ListIndex) >= 0 Then
+                'Voy montar un select que devuelva de los clientes que esan en pedidos
+                'y sean del tipo ese
+                Cad = DevuelveClientesPedidosPorTipo
+                If Cad = "" Then Cad = "-1"
+                CadenaDesdeOtroForm = "{" & NomTabla & ".codclien} IN [" & Cad & "]"
+                If Not AnyadirAFormula(cadFormula, CadenaDesdeOtroForm) Then Exit Sub
+                CadenaDesdeOtroForm = "{" & NomTabla & ".codclien} IN (" & Cad & ")"
+                If Not AnyadirAFormula(cadSelect, CadenaDesdeOtroForm) Then Exit Sub
+                CadenaDesdeOtroForm = ""
+            End If
+        End If
+    End If
+    'Comprobar si hay registros a Mostrar antes de abrir el Informe
+    If OpcionListado = 227 Then
+    
+        
+    
+        Cad = NomTabla
+        Titulo = "Ventas por Cliente"
+        If Me.Check1chkAgrupaAg.Value = 1 Then
+            'Agrupa cliente
+            Titulo = Titulo & " Por cliente"
+            nomRPT = "rFacVentasxClienAg.rpt"
+        Else
+            nomRPT = "rFacVentasxClien.rpt"
+        End If
+        conSubRPT = False
+    ElseIf OpcionListado = 228 Then
+        Cad = NomTabla & " INNER JOIN scafac1 ON scafac.codtipom=scafac1.codtipom and scafac.fecfactu=scafac1.fecfactu and scafac.numfactu=scafac1.numfactu"
+        Titulo = "Ventas por Trabajador"
+        If Me.OptDetalle(2).Value = True Then 'Inf. Detalle
+            nomRPT = "rFacVentasxTrabaDet.rpt"
+            conSubRPT = True
+        ElseIf Me.OptResumen.Value = True Then 'Inf. Resum
+            nomRPT = "rFacVentasxTrabaRes.rpt"
+            conSubRPT = False
+        End If
+    Else
+       Cad = NomTabla & " INNER JOIN " & NomTablaLin
+       Cad = Cad & " ON " & NomTabla & campo & "=" & NomTablaLin & campo
+       If OpcionListado = 49 Then Cad = Cad & " AND " & NomTabla & ".codtipom=" & NomTablaLin & ".codtipom "
+    End If
+    
+    If Not HayRegParaInforme(Cad, cadSelect) Then Exit Sub
+    
+    
+    If OpcionListado = 227 Then
+        BorrarTempInformes
+        
+        'Pasar los datos a la tabla temporal tmpInformes y luego mostrar
+        'el informe de esta tabla
+        cadSelect2 = Replace(cadSelect2, "{", "")
+        cadSelect2 = Replace(cadSelect2, "}", "")
+        
+        cadSelect3 = Replace(cadSelect3, "{", "")
+        cadSelect3 = Replace(cadSelect3, "}", "")
+        
+        
+        'JULIO 2013
+        'QUe tipo de facturas entran
+        Cad = ""
+        SQL = ""
+        'LOS SELECCIONADOS
+
+        For indice = 0 To Me.ListTipoFact.ListCount - 1
+            'Siempre 3 carcateres
+            If Me.ListTipoFact.Selected(indice) Then
+                Cad = Cad & Mid(Me.ListTipoFact.List(indice), 1, 3) & "|"
+                SQL = SQL & "X"
+            End If
+        Next
+    
+        
+            '4
+        If Len(SQL) > 4 Or Len(SQL) < 1 Then
+            MsgBox "Maximo 4 tipos de facturas", vbExclamation
+             Exit Sub
+        Else
+            SQL = ""
+        End If
+      
+        
+        
+        Screen.MousePointer = vbHourglass
+        
+        
+        If Not TempVentasClientes(Me.Check1chkAgrupaAg.Value = 1, cadSelect, cadSelect2, cadSelect3, Label4(54), Cad) Then Exit Sub
+        
+        
+        'Si tiene deSDE HASTA AGENTE
+        Cad = ""
+        If Me.txtCodigo(23).Text <> "" Then Cad = Cad & " tmpinformes.campo1 < " & txtCodigo(23).Text
+        If Me.txtCodigo(24).Text <> "" Then Cad = Cad & " or tmpinformes.campo1 > " & txtCodigo(24).Text
+        If Cad <> "" Then
+            'Ok vamos a borrar datos
+            Cad = "DELETE FROM tmpinformes where codusu = " & vUsu.codigo & " AND ( " & Cad & ")"
+            conn.Execute Cad
+            
+            Cad = DevuelveDesdeBD(conAri, "count(*)", "tmpinformes", "codusu", CStr(vUsu.codigo))
+            If Cad = "" Then Cad = "0"
+            If Val(Cad) = 0 Then
+                MsgBox "No existen datos ", vbExclamation
+                Exit Sub
+            End If
+        End If
+        
+        
+        'Añadir como parametros el total del periodo que devuelve en cadSelect2
+        'y añadir el parametro del total periodo anterior q devuelve en cadSelect3
+        CadParam = CadParam & "pTotal=" & cadSelect2 & "|"
+        numParam = numParam + 1
+        CadParam = CadParam & "pTotalAnt=" & cadSelect3 & "|"
+        numParam = numParam + 1
+        
+        'Añadir el parametro para el orden del informe
+        'Orden del Informe
+        If Me.OptOrdenCodclien.Value Then
+            Cad = "{tmpinformes.codigo1}"
+            SQL = "Orden: Cod. cliente"
+        ElseIf Me.OptOrdenNomclien.Value Then
+            Cad = "{tmpinformes.nombre1}"
+            SQL = "Orden: Nombre cliente"
+        ElseIf Me.OptOrdenVentas.Value Then
+            Cad = "{tmpinformes.importe5}"
+            SQL = "Orden: Volumen ventas"
+        End If
+        
+        'Si lleva d/H agente
+        SQL = SQL & "               "
+        campo = ""
+        If txtCodigo(23).Text <> "" Then campo = campo & "    desde " & txtCodigo(23).Text & "  " & Me.txtNombre(23).Text
+        If txtCodigo(24).Text <> "" Then campo = campo & "    hasta " & txtCodigo(24).Text & "  " & Me.txtNombre(24).Text
+        If campo <> "" Then campo = "Agente " & Trim(campo)
+        SQL = SQL & campo
+        
+        'Si lleva actividad
+        SQL = SQL & "     "
+        campo = ""
+        If txtCodigo(57).Text <> "" Then
+            campo = campo & "    desde " & txtCodigo(57).Text
+            If Len(SQL) < 115 Then campo = campo & "  " & Me.txtNombre(57).Text
+        End If
+        If txtCodigo(58).Text <> "" Then
+            campo = campo & "    hasta " & txtCodigo(58).Text
+            If Len(SQL) < 125 Then campo = campo & "  " & Me.txtNombre(58).Text
+        End If
+        If campo <> "" Then campo = "Act: " & Trim(campo)
+        SQL = SQL & campo
+        
+        
+        'JULIO 2013
+        'Tipos de moviemientos que van incluidos
+        SQL = Trim(SQL) & "   Fact:"
+        cadSelect3 = "0"
+        For indice = 0 To Me.ListTipoFact.ListCount - 1
+            'Siempre 3 carcateres
+            If Me.ListTipoFact.Selected(indice) Then
+                cadSelect3 = Val(cadSelect3) + 1
+                SQL = SQL & "  " & Mid(Me.ListTipoFact.List(indice), 1, 3)
+                cadSelect2 = Trim(Mid(Me.ListTipoFact.List(indice), 6))
+                If InStr(1, UCase(cadSelect2), "FACTURA") > 0 Then
+                    cadSelect2 = Trim(Mid(cadSelect2, InStr(1, UCase(cadSelect2), "FACTURA") + 8))
+                End If
+                If Len(cadSelect2) > 5 Then cadSelect2 = Mid(cadSelect2, 1, 5) & "."
+                CadParam = CadParam & "C" & cadSelect3 & "=""" & cadSelect2 & """|"
+                numParam = numParam + 1
+                
+                
+            End If
+        Next
+            
+        
+        
+        CadParam = CadParam & "pOrden=" & Cad & "|"
+        numParam = numParam + 1
+        CadParam = CadParam & "pCadOrden=""" & SQL & """|"
+        numParam = numParam + 1
+        
+        
+        'no le pasamos formula de seleccion porque los datos ya estan en la temporal
+        'solo el usuario que genero la informacion en la temporal
+        cadFormula = "{tmpinformes.codusu}=" & vUsu.codigo
+        
+    ElseIf OpcionListado = 44 Then
+        'If Me.optOrdePed(0).Value Then
+        '    Cad = "{sliped.codartic}"
+        'Else
+            Cad = "{scaped.numpedcl}"
+        'End If
+        CadParam = CadParam & "rOrden=" & Cad & "|"
+        numParam = numParam + 1
+        
+        CadParam = CadParam & "Observas=" & Cad & "|"
+        numParam = numParam + 1
+        
+        
+        'MArzo 2010
+        SQL = ""
+        If txtCodigo(6).Text <> "" Or txtCodigo(7).Text <> "" Then
+            campo = "{scaped.codagent}"
+            'Parametro Desde/Hasta agente
+            Cad = "@=""Agente: "
+            If Not PonerDesdeHasta(campo, "N", 6, 7, Cad) Then Exit Sub
+            SQL = Mid(Cad, 4)
+        End If
+        If txtCodigo(9).Text <> "" Or txtCodigo(10).Text <> "" Then
+            campo = "{sclien.codzonas}"
+            'Parametro Desde/Hasta zona
+            Cad = "@=""Zonas: "
+            If Not PonerDesdeHasta(campo, "N", 9, 10, Cad) Then Exit Sub
+            Cad = Mid(Cad, 4)
+            SQL = Trim(SQL & "    " & Cad)
+        End If
+        If SQL <> "" Then
+            SQL = """" & SQL & """"
+            CadParam = CadParam & "pdHAgenZona= " & SQL & "|"
+            numParam = numParam + 1
+            SQL = ""
+        End If
+        
+        
+        'trampa
+        'Si ha marcado no agrupar por semana sale otro report.
+        If Me.chkPedxClixSemEntrega(0).Value = 0 Then OpcionListado = 46
+        
+        
+        
+    ElseIf OpcionListado = 42 Then
+        'DISPONIBILIDAD DE STOCKS
+        '20 Enero 2010
+        Screen.MousePointer = vbHourglass
+        Label4(54).Caption = "Prepara datos"
+        Label4(54).Refresh           'La cuolumna importel llevara el stock del almacen ppal(el 1)
+        SQL = "DELETE FROM tmpsliped where codusu = " & vUsu.codigo
+        conn.Execute SQL
+        
+        
+        'Meto en la tmp.  En codclien pondre el codprove
+        Label4(54).Caption = "Proc 1"
+        Label4(54).Refresh
+        SQL = "INSERT INTO tmpsliped(codusu,numpedcl,numlinea,codalmac,codartic,nomartic,cantidad,codclien,numbultos,codzona)"
+        SQL = SQL & " SELECT " & vUsu.codigo & ",0,0,codalmac,sliped.codartic,sliped.nomartic,sum(cantidad),sartic.codprove,rotacion,artvario "
+        
+        
+        SQL = SQL & " FROM scaped,sliped,sartic WHERE scaped.numpedcl =sliped.numpedcl AND "
+        SQL = SQL & " sartic.codartic=sliped.codartic AND sartic.ctrstock=1  And artvario = 0"
+        
+        'Si no quiere con departamentos(obra
+        If Me.chkDispo(1).Value = 0 Then SQL = SQL & " AND scaped.coddirec is null"
+        'El select
+        If cadSelect <> "" Then SQL = SQL & " AND " & cadSelect
+        SQL = SQL & " GROUP BY codalmac,sliped.codartic"
+        conn.Execute SQL
+        
+        
+        'Febrero 2013
+        'Los de varios entraran . En el proceso final actualizaremos su stock a CERO
+        SQL = "INSERT IGNORE INTO tmpsliped(codusu,numpedcl,numlinea,codalmac,codartic,nomartic,cantidad,codclien,numbultos,codzona)"
+        SQL = SQL & " SELECT " & vUsu.codigo & ",0,0,codalmac,sliped.codartic,sliped.nomartic,sum(cantidad),sartic.codprove,rotacion,artvario "
+        SQL = SQL & " FROM scaped,sliped,sartic WHERE scaped.numpedcl =sliped.numpedcl AND "
+        SQL = SQL & " sartic.codartic=sliped.codartic AND artvario = 1"
+        
+        'Si no quiere con departamentos(obra
+        If Me.chkDispo(1).Value = 0 Then SQL = SQL & " AND scaped.coddirec is null"
+        'El select
+        If cadSelect <> "" Then SQL = SQL & " AND " & cadSelect
+        SQL = SQL & " GROUP BY codalmac,sliped.codartic"
+        conn.Execute SQL
+        
+        
+        'Acciones. Proceso final
+        ObtenerValores
+        Label4(54).Caption = ""
+        
+        
+        'Pongo los nuevos valores para la cadformula
+        Cad = "{tmpsliped.codusu}=" & vUsu.codigo
+        cadFormula = ""
+        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+        'Añado si detalla o no
+        CadParam = CadParam & "Detalle= " & Me.chkDispo(0).Value & "|"
+        numParam = numParam + 1
+        
+        
+        nomRPT = DevuelveDesdeBD(conAri, "documrpt", "scryst", "codcryst", "68")
+        
+        
+        Screen.MousePointer = vbDefault
+    End If
+    
+    
+    LlamarImprimir
+    
+    
+    If OpcionListado = 46 Then OpcionListado = 44 'Lo cambio por que frmImprimir ha llamado a otro report. Pongo donde estaba
+End Sub
+
+
+Private Sub ObtenerValores()
+Dim SQL As String
+
+
+    'En importe1 tendre el del almacen PPAL
+
+    Set miRsAux = New ADODB.Recordset
+    Label4(54).Caption = "Stock "
+    Label4(54).Refresh
+    
+    
+    SQL = "Select salmac.* from tmpsliped,salmac where codusu = " & vUsu.codigo & " AND tmpsliped.codartic=salmac.codartic"
+    SQL = SQL & " AND tmpsliped.codalmac=salmac.codalmac "
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+        If miRsAux!CanStock <> 0 Then
+            SQL = "UPDATE tmpsliped set stockalm = " & CStr(Val(CCur(miRsAux!CanStock)))
+            SQL = SQL & " WHERE codusu = " & vUsu.codigo & " AND codartic=" & DBSet(miRsAux!codArtic, "T")
+            SQL = SQL & " AND codalmac =" & DBSet(miRsAux!codalmac, "N")
+            conn.Execute SQL
+        End If
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+    DoEvents
+    
+    'Metemos los del almacenppal si hay arituclos de almacen distinto del ppal(herbelca)
+    Label4(54).Caption = "Almacen PPAL"
+    Label4(54).Refresh
+    SQL = "Select distinct salmac.codartic,canstock from  tmpsliped,salmac where tmpsliped.codArtic = salmac.codArtic AND "
+    '               stk del ppal          articuo en almacen<>1    NO varios
+    SQL = SQL & " salmac.codalmac=1 and   tmpsliped.codalmac>1 and codzona=0 And CanStock > 0"
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+      
+        SQL = "UPDATE tmpsliped set importel = " & CStr(Val(CCur(miRsAux!CanStock)))
+        SQL = SQL & " WHERE codusu = " & vUsu.codigo & " AND codartic=" & DBSet(miRsAux!codArtic, "T")
+        SQL = SQL & " and codalmac>1"
+        conn.Execute SQL
+
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+    
+    'ped prov
+    Label4(54).Caption = "Ped. prov"
+    Label4(54).Refresh
+    SQL = "select codartic,codalmac,sum(cantidad) cuant from slippr,scappr WHERE scappr.numpedpr = slippr.numpedpr "
+    If Me.chkDispo(1).Value = 0 Then SQL = SQL & " AND scappr.obra=0"
+    SQL = SQL & " AND codartic IN ( select distinct(codartic) from tmpsliped WHERE codusu = " & vUsu.codigo & ") GROUP BY 1,2"
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+        If miRsAux!cuant <> 0 Then
+            SQL = "UPDATE tmpsliped set cantpedprov = " & CStr(Val(CCur(miRsAux!cuant)))
+            SQL = SQL & " WHERE codusu = " & vUsu.codigo & " AND codartic=" & DBSet(miRsAux!codArtic, "T")
+            SQL = SQL & " AND codalmac =" & DBSet(miRsAux!codalmac, "N")
+            conn.Execute SQL
+        End If
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+    Label4(54).Caption = "Articulos varios"
+    Label4(54).Refresh
+    SQL = "UPDATE tmpsliped SET stockalm =0,stocktot=0 WHERE codusu = " & vUsu.codigo & " AND codzona=1" 'Los de varios
+    conn.Execute SQL
+    
+    
+    Label4(54).Caption = "Disponibilidad"
+    Label4(54).Refresh
+    
+    
+    SQL = "DELETE  FROM tmpsliped WHERE codusu = " & vUsu.codigo & " AND  stockalm +cantpedprov-round(cantidad,0)>=0"
+    conn.Execute SQL
+   
+    
+    'Abril 2013.
+    'Herbelca
+    If vParamAplic.RecMercanciaSoloPpal Then
+        Label4(54).Caption = "Ajuste ped proveed tipo H"
+        Label4(54).Refresh
+        
+        SQL = "select codartic,sum(cantidad) cuant from slippr,scappr WHERE scappr.numpedpr = slippr.numpedpr  AND codalmac=1 "
+        If Me.chkDispo(1).Value = 0 Then SQL = SQL & " AND scappr.obra=0"
+        SQL = SQL & " AND codartic IN ( select distinct(codartic) from tmpsliped WHERE codusu = " & vUsu.codigo & " and codalmac>1) GROUP BY 1"
+        miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not miRsAux.EOF
+            
+            SQL = "UPDATE tmpsliped set cantpedprov = cantpedprov + " & CStr(Val(CCur(miRsAux!cuant)))
+            SQL = SQL & " WHERE codusu = " & vUsu.codigo & " AND codartic=" & DBSet(miRsAux!codArtic, "T")
+            SQL = SQL & " AND codalmac > 1 "
+            conn.Execute SQL
+        
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+        
+        
+    End If
+    
+    
+    If vParamAplic.RecMercanciaSoloPpal Then  'herbleca quitamos aqui los del almacen 1
+        SQL = "DELETE  FROM tmpsliped WHERE codusu = " & vUsu.codigo & " AND  stockalm +cantpedprov-round(cantidad,0)>=0 and codalmac=1"
+        conn.Execute SQL
+    End If
+    
+End Sub
+
+
+Private Sub cmdAceptarPreFac_Click()
+'Prevision de Facturacion de Albaranes
+Dim campo As String, Cad As String
+Dim B As Boolean
+Dim indice As Integer
+
+
+    If OpcionListado = 50 Then
+        Cad = ""
+        For indCodigo = 10 To 16   'LOS SEIS PRIMEROS
+            If Me.chkTpPago2(indCodigo).Value = 1 Then Cad = "1"
+        Next indCodigo
+        If Cad = "" Then
+            MsgBox "Seleccione algun tipo de pago", vbExclamation
+            Exit Sub
+        End If
+    End If
+    
+
+
+    InicializarVbles
+    B = (OpcionListado = 50)
+    
+    'If (Not B) Or (B And codClien = "ALV") Then
+        'Pasar nombre de la Empresa como parametro
+        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        numParam = numParam + 1
+    'End If
+    
+    
+    'Desde/Hasta FECHA del ALBARAN
+    '--------------------------------------------
+    If Trim(txtCodigo(26).Text) <> "" Or Trim(txtCodigo(27).Text) <> "" Then
+
+            campo = "scaalb.fechaalb"
+            cadSelect = CadenaDesdeHastaBD(txtCodigo(26).Text, txtCodigo(27).Text, campo, "F")
+            'Para Crystal Report
+            campo = "{scaalb.fechaalb}"
+            Cad = "pDHFecha=""Fecha: "
+            If Not PonerDesdeHasta(campo, "F", 26, 27, Cad) Then Exit Sub
+
+    End If
+
+    'Cadena para seleccion CLIENTE
+    '--------------------------------------------
+    If txtCodigo(28).Text <> "" Or txtCodigo(29).Text <> "" Then
+      
+            campo = "{scaalb.codclien}"
+            Cad = "pDHCliente=""Cliente: "
+   
+        If Not PonerDesdeHasta(campo, "N", 28, 29, Cad) Then Exit Sub
+    End If
+  
+    If B Then 'opcionlistado=50
+        'Cadena para seleccion FORMA PAGO
+        '--------------------------------------------
+        NumCod = ""   'reutilizo
+        If txtCodigo(30).Text <> "" Or txtCodigo(31).Text <> "" Then
+          
+            campo = "{scaalb.codforpa}"
+            Cad = "Forma Pago: "
+            If Not PonerDesdeHasta(campo, "N", 30, 31, Cad) Then Exit Sub
+            NumCod = Cad
+        End If
+        
+        'Sep 2015
+        If Me.txtCodigo(61).Text <> "" Then
+            campo = "{sclien.periodof}"
+            Cad = ""
+            If Not PonerDesdeHasta(campo, "N", 61, 61, Cad) Then Exit Sub
+            Cad = "    Periodo: " & Me.txtCodigo(61).Text & "."
+            NumCod = Trim(NumCod & Cad)
+        End If
+        
+        
+        'JUNIO 2014
+        If OpcionListado = 50 Then
+            Cad = ""
+            campo = ""
+            For NumRegElim = 10 To 16
+                If Me.chkTpPago2(NumRegElim).Value = 1 Then
+                    Cad = Cad & "1"
+                    campo = campo & ", " & NumRegElim - 10
+                End If
+            Next
+            
+            If Len(Cad) = 7 Then
+                'LOS HA COGIDO TODOS. NO lo incluyo en el desde hasta
+            Else
+                Set miRsAux = New ADODB.Recordset
+                campo = Mid(campo, 2)
+                Cad = "Select codforpa from sforpa where tipforpa in (" & campo & ")"
+                miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Cad = ""
+                While Not miRsAux.EOF
+                    Cad = Cad & ", " & miRsAux!codforpa
+                    miRsAux.MoveNext
+                Wend
+                miRsAux.Close
+                Set miRsAux = Nothing
+                
+                If Cad = "" Then
+                    'MAL. NInguna forpa de pago con ese tipo de pago. Fuerzo un -1
+                    Cad = "-1"
+                Else
+                    Cad = Mid(Cad, 2)
+                End If
+                
+                
+                If Not AnyadirAFormula(cadSelect, "scaalb.codforpa IN (" & Cad & ")") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "{scaalb.codforpa} IN [" & Cad & "]") Then Exit Sub
+                
+                'Para el rpt saber que tipo de pago llevo
+                Cad = ""
+                For NumRegElim = 10 To 16
+                    If Me.chkTpPago2(NumRegElim).Value = 1 Then Cad = Cad & "- " & Mid(chkTpPago2(NumRegElim).Caption, 1, 5) & "."
+                Next
+                Cad = "        Tipo pago: " & Mid(Cad, 2)
+                NumCod = Trim(NumCod & Cad)
+            End If
+                
+                
+            
+            If NumCod <> "" Then
+                                
+                CadParam = CadParam & "pDHForpa=""" & NumCod & "|"
+                numParam = numParam + 1
+            End If
+        End If
+        
+        
+        
+        'seleccionar los Albaranes de Venta/Repar/Mantenim.
+        'seleccionamos tipo de movimiento segun albaran de venta o Reparacion (ALV,ALR)
+        '-- Aqui es donde se seleccionaban los albaranes a mostrar en el informe, ahora
+        '   como se pueden seleccionar diferentes combinaciones se modifica la carga de la
+        '   selección (se queda en rem la antigua línea) [SERVICIOS]
+        
+        If vParamAplic.Servicios And codClien <> "ALR" Then
+            indice = cmbTipAlbaran(0).ListIndex
+            If indice < 0 Then
+                MsgBox "Debe seleccionar el tipo o los tipos de alabarán a procesar", vbExclamation
+                Exit Sub
+            Else
+                Select Case indice
+                    Case 0 ' solo ventas
+                        Cad = " {scaalb.codtipom}='ALV' "
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+                    Case 1 ' solo servicios
+                        Cad = " {scaalb.codtipom}='ALS' "
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+                    Case 2 ' ventas y servicios
+                        Cad = " ({scaalb.codtipom}='ALV'" & _
+                                " OR {scaalb.codtipom}='ALS') "
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+                End Select
+            End If
+        Else
+        
+            
+            If vParamAplic.NumeroInstalacion = 4 Then
+                'Añadimos todos los tipos de albaran en la prefacturacion
+                Cad = " {scaalb.codtipom} IN ['ALV','ALR','ALE','ALO','ALM'] "
+            Else
+                Cad = " {scaalb.codtipom}='" & codClien & "' "
+            End If
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+        End If
+        'Seleccionar los que esten marcados para facturar
+        'Seleccionar solo aquellos que el campo scaalb.factursn=1
+        If Me.chkSoloFacturar.Value = 1 Then
+            Cad = " {scaalb.factursn}=1 "
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
+        End If
+    Else
+        'Cadena para seleccion AGENTE
+        '--------------------------------------------
+        If txtCodigo(32).Text <> "" Or txtCodigo(33).Text <> "" Then
+            campo = "{scaalb.codagent}"
+            Cad = "pDHAgente="""
+            If Not PonerDesdeHasta(campo, "N", 32, 33, Cad) Then Exit Sub
+        End If
+        
+        'Seleccionar solo aquellos que tienen Nº de Pedido para comparar los Plazos de Entrega
+        campo = " NOT ISNULL({scaalb.numpedcl}) "
+        If Not AnyadirAFormula(cadFormula, campo) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, campo) Then Exit Sub
+    End If
+    
+    'Comprobar si hay registros a Mostrar antes de abrir el Informe
+    cadSelect = "scaalb.codclien = sclien.codclien AND " & cadSelect
+    If Not HayRegParaInforme("scaalb,sclien", cadSelect) Then Exit Sub
+    
+    If OpcionListado = 51 Then
+        Titulo = "Incumplimiento Plazos de Entrega"
+        nomRPT = "rFacIncumPlazos.rpt"
+        
+    'ENERO 2009
+    ElseIf OpcionListado = 50 Then
+    'ElseIf OpcionListado = 50 And codClien = "ALV" Then
+        If chkResumenForpa.Value = 1 Then
+            'VAMOS A MOSTRAR LA HOJA RESUMEN DE FORMAS DE PAGO
+            conn.Execute "DELETE FROM tmpinformes where codusu =" & vUsu.codigo
+        
+            If Me.OptDetalle(0).Value Then
+                Titulo = "SELECT scaalb.codforpa, sum(slialb.importel)," & vUsu.codigo
+                Titulo = Titulo & " FROM   ((scaalb scaalb INNER JOIN sclien sclien ON scaalb.codclien=sclien.codclien) INNER JOIN"
+                Titulo = Titulo & " slialb slialb ON (scaalb.codtipom=slialb.codtipom) AND (scaalb.numalbar=slialb.numalbar))"
+                Titulo = Titulo & " INNER JOIN starif starif ON sclien.codtarif=starif.codlista"
+            
+            Else
+                Titulo = "SELECT  scaalb.codforpa ,sum(slialb.importel)," & vUsu.codigo
+                Titulo = Titulo & " FROM   slialb slialb INNER JOIN scaalb scaalb ON "
+                Titulo = Titulo & " (slialb.codtipom=scaalb.codtipom) AND (slialb.numalbar=scaalb.numalbar)"
+                Titulo = Titulo & " INNER JOIN sclien sclien ON scaalb.codclien=sclien.codclien"
+            End If
+    
+            If cadSelect <> "" Then Titulo = Titulo & " WHERE " & cadSelect
+                
+            
+            Titulo = Titulo & " GROUP BY codforpa"
+            Titulo = "INSERT INTO tmpinformes (codigo1,importe1,codusu) " & Titulo
+            conn.Execute Titulo
+        End If
+    
+    
+        Titulo = "Previsión Facturación Ventas"
+        If codClien = "ALR" Then Titulo = Titulo & "(REP)"
+        '-- Si estan activos los servicios hay diferentes posibilidades y el título
+        '   las refleja, la variabele 'indice' lleva la información del combo seleccionado y
+        '   ha sido cargada un poco más arriba [SERVICIOS]
+        
+        If vParamAplic.Servicios And codClien <> "ALR" Then
+            Select Case indice
+                Case 0
+                    Titulo = "Previsión Facturación Ventas"
+                Case 1
+                    Titulo = "Previsión Facturación Servicios"
+                Case 2
+                    Titulo = "Previsión Facturación Ventas y Servicios"
+            End Select
+        End If
+        If Me.OptDetalle(3).Value Then Titulo = Titulo & "(Fact.)"
+         
+
+        conSubRPT = True
+        If Me.OptDetalle(0).Value = True Then
+        
+            If vParamAplic.NumeroInstalacion = 4 Then
+                'EULER llamara a la suya
+                nomRPT = "eulFacPrevFactDetalle.rpt"
+            Else
+                nomRPT = "rFacPrevFactDetalle.rpt"
+            End If
+        ElseIf Me.OptDetalle(1).Value = True Then
+            nomRPT = "rFacPrevFactResum.rpt"
+            
+        Else
+            'Nuevo Marzo 2009
+            'Como se facturara, es decir, el primer nivel de agrupacion es el tipofact de scaalb
+            nomRPT = "rFacPrevFactDetalleCole.rpt"
+        End If
+        
+        Cad = "pCodUsu=" & vUsu.codigo & "|"
+        CadParam = CadParam & Cad
+        numParam = numParam + 1
+        
+        '-- Ahora el título depende de los tipos de albaranes seleccionados [SERVICIOS]
+        Cad = "pTitulo=""" & Titulo & """|"
+        CadParam = CadParam & Cad
+        numParam = numParam + 1
+        
+        
+        '--  Mostrara , o no, el subreport con el resumen por forma pago
+        Cad = "pVerForpa=" & Abs(chkResumenForpa.Value) & "|"
+        CadParam = CadParam & Cad
+        numParam = numParam + 1
+        
+        '--- departamentos
+        'cad = "TieneDpto=" & Abs(vParamAplic.Departamento) & "|"
+        Cad = "TieneDpto=" & Abs(vParamAplic.HayDeparNuevo > 0) & "|"
+        CadParam = CadParam & Cad
+        numParam = numParam + 1
+        
+        
+        
+        
+        On Error GoTo EPreFact
+        Cad = "delete from tmpstockfec where codusu=" & vUsu.codigo
+        conn.Execute Cad
+        
+        'Insertar total bonificaciones por cliente,articulo en una TEMPORAL
+        Cad = "SELECT " & vUsu.codigo & " as codusu,  slialb.codartic,scaalb.codclien,sum(slialb.cantidad) as stock "
+        Cad = Cad & "FROM (((scaalb INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar) "
+        Cad = Cad & " INNER JOIN sbonif ON slialb.codartic=sbonif.codartic ) "
+        Cad = Cad & " INNER JOIN sclien ON scaalb.codclien=sclien.codclien) "
+        Cad = Cad & " INNER JOIN starif ON sclien.codtarif=starif.codlista "
+        Cad = Cad & "WHERE " & cadSelect
+        Cad = Cad & " AND starif.bonifica=1 "
+        Cad = Cad & " GROUP BY scaalb.codclien,slialb.codartic"
+        
+        Cad = "INSERT INTO tmpstockfec (codusu,codartic,codalmac,stock) " & Cad
+        conn.Execute Cad
+        
+        B = False 'PARA QUE NO ENTRE EN LO DE ABAJO y vaya a imprimir
+    End If
+    
+
+    LlamarImprimir
+    
+    If OpcionListado = 50 Then
+        Cad = "delete from tmpstockfec where codusu=" & vUsu.codigo
+        conn.Execute Cad
+    End If
+EPreFact:
+    If Err.Number <> 0 Then
+        MuestraError Err.Number, "Informe Prefacturación", Err.Description
+    End If
+End Sub
+
+
+Private Sub cmdAceptarPreFacMan_Click()
+'74: PreFacturar Mantenimientos
+'75: Facturar Mantenimientos
+Dim campo As String, Cad As String
+Dim B As Boolean
+Dim PreguntaHecha As Boolean
+
+     InicializarVbles
+     B = (OpcionListado = 74) 'Prefacturar (mostrar listado)
+     If Not B Then chkSituFacMant.Value = 0 'por si acaso
+     
+     'Introducir el mes que se va a facturar
+     If txtCodigo(46).Text = "" Then
+        MsgBox "Debe introducir el mes a Facturar.", vbInformation
+        Exit Sub
+    End If
+     
+     
+    'Febrero 2011
+    'Ha puesto departamento.
+    If Me.chkSituFacMant.Value = 0 Then
+        If Me.txtCodigo(55).Text <> "" Or txtCodigo(56).Text <> "" Then
+            'SI no este el mismo cliente... NO seguimos
+            If txtCodigo(48).Text <> txtCodigo(49).Text Or txtCodigo(49).Text = "" Then
+                MsgBox "Seleccione un cliente para poder indicar departamento", vbExclamation
+                PonerFoco txtCodigo(48)
+                Exit Sub
+            End If
+        End If
+    End If
+     
+    If Not B Then 'Vamos a facturar
+        'si vamos a facturar comprobar que la fecha de factura tiene valor
+        Cad = ""
+        If txtCodigo(44).Text = "" Then Cad = " - El campo Fecha Factura" & vbCrLf
+            
+        
+        'si vamos a facturar debe haber una cta prev. de cobro
+        If txtCodigo(52).Text = "" Then Cad = Cad & " - El campo Cta. Prev. de cobro " & vbCrLf
+            
+        
+        'si vamos a facturar comprobar que el cod. de operador tiene valor
+        If txtCodigo(47).Text = "" Then Cad = Cad & " - El campo operador " & vbCrLf
+            
+        
+        
+        'Si tienen analitcia y es por proyecto, la esta pidiendo en el fram2
+        'Con lo cual es un campo obligatorio
+        If Me.Frame2(1).visible Then
+            If txtCodigo(54).Text = "" Then Cad = Cad & " - Centro de coste"
+        End If
+        
+        If Cad <> "" Then
+            MsgBox "Debe comprobar: " & vbCrLf & vbCrLf & Cad, vbExclamation
+            Exit Sub
+        End If
+    End If
+     
+     
+    'Pasar nombre de la Empresa como parametro
+    CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    numParam = numParam + 1
+
+     
+    'Cadena para seleccion TIPO CONTRATO
+    '--------------------------------------------
+    If txtCodigo(45).Text <> "" Then
+        campo = "{scaman.codtipco}"
+'        If Not PonerDesdeHasta(campo, "N", 48, 49, cad) Then Exit Sub
+        Cad = campo & "= '" & txtCodigo(45).Text & "'"
+        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+        
+        'Parametro
+        Cad = "pTipCo=""Tipo Contrato: "
+        CadParam = CadParam & Cad & txtCodigo(45).Text & " - " & txtNombre(45).Text & """|"
+        numParam = numParam + 1
+    End If
+     
+     
+    'Cadena para seleccion CLIENTE
+    '--------------------------------------------
+    CadenaDesdeOtroForm = ""
+    If Me.chkSituFacMant.Value = 0 Then
+        If txtCodigo(48).Text <> "" Or txtCodigo(49).Text <> "" Then
+            campo = "{scaman.codclien}"
+            Cad = "Cliente: "
+            If Not PonerDesdeHasta(campo, "N", 48, 49, Cad) Then Exit Sub
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & Cad
+        End If
+        If txtCodigo(55).Text <> "" Or txtCodigo(56).Text <> "" Then
+            campo = "{scaman.coddirec}"
+            Cad = "Dpto: "
+            If Not PonerDesdeHasta(campo, "N", 55, 56, Cad) Then Exit Sub
+            CadenaDesdeOtroForm = Trim(CadenaDesdeOtroForm & Space(10) & Cad)
+        End If
+    End If
+    
+    CadenaDesdeOtroForm = "pDHCliente=""" & CadenaDesdeOtroForm & """|"
+    CadParam = CadParam & CadenaDesdeOtroForm
+    numParam = numParam + 1
+    CadenaDesdeOtroForm = ""
+    
+    
+    'Cadena para seleccion FORMA PAGO
+    '--------------------------------------------
+    If Me.chkSituFacMant.Value = 0 Then
+        If txtCodigo(50).Text <> "" Or txtCodigo(51).Text <> "" Then
+            campo = "{scaman.codforpa}"
+            Cad = "pDHForpa=""Forma Pago: "
+            If Not PonerDesdeHasta(campo, "N", 50, 51, Cad) Then Exit Sub
+        End If
+    End If
+            
+            
+    'MES A FACTURAR
+    'Seleccionar solo aquellos que el campo del mes seleccionado sea no nulo
+    '------------------------------------------------------------------------
+    Cad = Format(txtCodigo(46).Text, "00")
+    campo = "mes" & Cad & "act"
+    Cad = "(NOT ISNULL({scaman." & campo & "})) and ({scaman." & campo & "}<>0)"
+    If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+    'Parametro
+    Cad = "pCampoMes={scaman." & campo & "}" & "|"
+    CadParam = CadParam & Cad
+    numParam = numParam + 1
+    Cad = "pMes=""Mes a Facturar: " & UCase(txtNombre(46).Text) & """|"
+    CadParam = CadParam & Cad
+    numParam = numParam + 1
+    
+    
+    
+    If B Then
+        'Prevision
+        Cad = "0"
+        
+        If txtCodigo(48).Text = txtCodigo(49).Text And txtCodigo(49).Text <> "" Then
+            'Mismo cliente
+            If Me.txtCodigo(55).Text <> "" Or txtCodigo(56).Text <> "" Then Cad = "1"
+        End If
+        Cad = "DetallaDir=" & Cad & "|"
+        CadParam = CadParam & Cad
+        numParam = numParam + 1
+    End If
+    
+    
+    'Comprobamos si ha seleccionado
+    If Me.chkSituFacMant.Value = 1 Then
+        Cad = "NumeroMes=" & txtCodigo(46).Text & "|"
+        CadParam = CadParam & Cad
+        numParam = numParam + 1
+        
+        campo = "Facturado y pendiente"
+        
+        If Me.cboSituMan.ListIndex > 0 Then
+            'Si pide facturado o pendiente
+            
+            If Me.cboSituMan.ListIndex = 1 Then
+                'FACTURADOS.  Luego ult mesfac tiene que ser mayor o igual
+                Cad = " >= "
+                campo = "Facturado"
+            Else
+                Cad = "<"
+                campo = "Pendiente"
+            End If
+            Cad = "({scaman.ulmesfac}" & Cad & txtCodigo(46).Text & ")"
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+            
+        End If
+        'Reutilizare:
+        Cad = "pDHForpa=""Situacion: " & campo & """|"
+        CadParam = CadParam & Cad
+        numParam = numParam + 1
+        
+    End If
+    
+    
+    
+        
+    cadSelect = cadFormula
+    If Not HayRegParaInforme("scaman", cadSelect) Then Exit Sub
+    
+    
+    'Aqui deberiamos comporbar si el periodo indicado YA esta facturado o no
+    PreguntaHecha = False
+    If Not B Then
+        'FACTURACION
+        Cad = CStr(EsFechaOKConta(CDate(txtCodigo(44).Text)))
+        If Val(Cad) > 0 Then
+            Cad = "Fecha factura incorrecta para la contabilidad. ¿Continuar?"
+            If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+            PreguntaHecha = True
+        End If
+    End If
+    
+    
+    
+    'Comprobamos si hay matenimientos ya facturados
+    If Me.chkSituFacMant.Value = 0 Then
+        'facturacion o listado normal
+    
+        Cad = "Select * from " & cadFormula
+        If miRsAux Is Nothing Then Set miRsAux = New ADODB.Recordset
+        Cad = "SELECT scaman.codclien,nomclien,coddirec "
+        Cad = Cad & " FROM scaman INNER JOIN sclien ON scaman.codclien=sclien.codclien "
+        Cad = Cad & " WHERE " & cadSelect
+        'Que el ultimo mes de facturado sea mayor o igual  al que voy a facturar
+        Cad = Cad & " AND ulmesfac >= " & txtCodigo(46).Text
+        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Cad = ""
+        While Not miRsAux.EOF
+            Titulo = ""
+            If Not IsNull(miRsAux!CodDirec) Then
+                Titulo = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", "codclien=" & miRsAux!codClien & " AND coddirec ", CStr(miRsAux!CodDirec))
+                Titulo = "( " & miRsAux!CodDirec & " " & Titulo & ")"
+                
+            End If
+            Cad = Cad & "    .- " & miRsAux!Nomclien & Titulo & vbCrLf
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+        Set miRsAux = Nothing
+        If Cad <> "" Then
+            Cad = "Los siguientes mantenimientos ya estan facturados: " & vbCrLf & Cad & vbCrLf & vbCrLf
+            Cad = Cad & "¿Continuar?"
+            If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
+            PreguntaHecha = True
+        End If
+    End If
+    
+    If B Then 'OpcionListado = 74 'NO Imprime, mostrar resultado en pantalla
+        
+        If Me.chkSituFacMant.Value = 0 Then
+            Titulo = "Prefacturación Mantenimientos"
+            nomRPT = "rManPrefacturar.rpt"
+        Else
+            Titulo = "Situación facturacion mantenimientos"
+            nomRPT = "rManPrefacturarSitu.rpt"
+        End If
+        LlamarImprimir
+    Else
+    
+        
+        If Not PreguntaHecha Then
+            Cad = "¿Seguro que desea seguir con el proceso?"
+            If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        End If
+            
+        
+        '------------------------------------------------------------------------------
+        '  LOG de acciones
+        Set LOG = New cLOG
+        Cad = "MANTENIMIENTOS: " & vbCrLf & cadSelect
+        LOG.Insertar 2, vUsu, Cad
+        Set LOG = Nothing
+        '-----------------------------------------------------------------------------
+        
+        
+        
+        'Generar facturas de los mantenimientos seleccionados para facturar
+        'cada mantenimiento genera una factura
+        Cad = "SELECT scaman.codclien,scaman.coddirec,sdirec.nomdirec,nummante,fechaini,codtipco,codforpa,tipopago," & campo & " as importe "
+        'David
+        'Necesito el campo concefaccl y el tipopago(mensual...)
+        Cad = Cad & ", concefac"
+        Cad = Cad & " FROM scaman LEFT OUTER JOIN sdirec ON scaman.codclien=sdirec.codclien AND scaman.coddirec=sdirec.coddirec "
+        Cad = Cad & " WHERE " & cadSelect
+        
+        lblFactMant.Caption = "Obteniendo datos"
+        lblFactMant.Refresh
+        'Pasamos la SQL que selecciona los mantenimientos a facturar y
+        'le pasamos la fecha y operador de la factura.
+        If TraspasoMtosAFacturas(Cad, cadSelect, txtCodigo(44).Text, txtCodigo(47).Text, txtCodigo(52).Text, txtCodigo(46).Text, lblFactMant, txtCodigo(54).Text) Then 'Fecha de la factura, Operador
+            Unload Me
+        End If
+        lblFactMant.Caption = ""
+    End If
+End Sub
+
+
+
+Private Sub cmdCancel_Click(Index As Integer)
+    Unload Me
+     
+End Sub
+
+
+Private Sub Command1_Click()
+
+        
+End Sub
+
+Private Sub cmdSelFraRect_Click()
+        
+        Set frmLd = New frmListadoOfer
+        frmLd.OpcionListado = 225
+        frmLd.Show vbModal
+        Set frmLd = Nothing
+        
+        
+End Sub
+
+Private Sub Form_Activate()
+    If PrimeraVez Then
+        PrimeraVez = False
+        Select Case OpcionListado
+            Case 41, 42, 44, 49, 227, 228 '41: Informe de Pedidos por Articulo
+                        '42: Informe de Disponibilidad de Stocks
+                        '44: Informe de Pedidos por Cliente
+                        '49: Informe de Albaranes por Articulo
+                        '227: Inf. estadistica Ventas por cliente
+                PonerFoco txtCodigo(11)
+            Case 43, 1000, 1010
+                    '43: Generar Albaran desde Pedido (NO IMPRIME LISTADO)
+                    '1000: Pedido a factura:  Piede ademas de los datos del albaran, la cta prevista
+                    
+                If FramePartes.visible = True Then
+                    'Es facturar parte
+                            
+
+                    'CadenaDesdeOtroForm = 'trab,fecha,interna
+                    txtCodigo_LostFocus 17
+                    txtNombre(18).Text = txtNombre(17).Text
+                    txtCodigo_LostFocus 19
+                            
+                    PonerFoco txtCodigo(25)
+                Else
+                    PonerFoco txtCodigo(17)
+                End If
+                
+                
+                
+                
+                
+            Case 50, 51 '50: Prevision de Facturacion Albaranes (NO IMPRIME LISTADO)
+                        '51: Inf. Incumplimiento Plazos de Entrega
+                PonerFoco txtCodigo(26)
+            Case 52, 222
+                '52: Facturacion de Albaranes
+                '222: Factura de Mostrador
+                indCodigo = 0
+                
+                If vParamAplic.CodigoUnicoBancoPropio > 0 Then
+                    txtCodigo(0).Text = vParamAplic.CodigoUnicoBancoPropio
+                    txtNombre(0).Text = PonerNombreDeCod(txtCodigo(0), conAri, "sbanpr", "nombanpr", "codbanpr", "Bancos Propios")
+                    If vParamAplic.EntradaRapidaFacturasMostrador And codClien = "ALM" Then indCodigo = 1
+                End If
+                If indCodigo = 0 Then
+                    PonerFoco txtCodigo(34)
+                Else
+                    PonerFocoBtn cmdAceptarFac
+                End If
+                    
+                
+            Case 74 '74: Previsión facturación Mantenimientos
+                PonerFoco txtCodigo(45)
+            Case 75 '75: Facturacion de Mantenimientos
+                PonerFoco txtCodigo(44)
+            Case 229 '229: Inf. estadistica ventas por meses
+                PonerFoco txtCodigo(53)
+        End Select
+    End If
+    Screen.MousePointer = vbDefault
+End Sub
+
+Private Sub CargaIconosAyuda()
+Dim Ima As Image
+    On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
+    For Each Ima In Me.imgayuda
+        Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
+    Next
+    Err.Clear
+End Sub
+
+Private Sub Form_Load()
+Dim H As Integer, W As Integer
+Dim indFrame As Single
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+    PrimeraVez = True
+    limpiar Me
+    CargaIconosAyuda
+    
+    'Ocultar todos los Frames de Formulario
+    Me.FramePedxArtic.visible = False
+    Me.FrameGenAlbaran.visible = False
+    Me.FramePreFacturar.visible = False
+    Me.FrameFacturar.visible = False
+    Me.FramePreFacMante.visible = False
+    Me.FrameEstVentas.visible = False
+    
+    CommitConexion
+    
+    NomTabla = "scaped"
+    NomTablaLin = "sliped"
+        
+    Select Case OpcionListado
+        'LISTADOS DE FACTURACION
+        '-----------------------
+            
+        Case 41, 42, 44, 49, 227, 228 '41: Informe de Pedidos por Articulo
+                    '42: Informe de Disponibilidad de Stocks
+                    '44: Informe de Pedidos por Cliente
+                    '49: Informe de Albaranes por Articulo
+                    '227: Inf. estadistica Ventas por cliente
+                    '228: Inf. estadistica Ventas por trabjador
+            PonerFramePedxArticVisible True, H, W
+            indFrame = 2 'solo para el boton cancelar
+            '-- Si está activada la opción de servicios, muestra los controles que permiten
+            '   el tipo o tipos de albaranes a mostrar en el informe, en caso contrario los
+            '   oculta para no liar [SERVICIOS]
+            lblTipAlbaran(1).visible = False
+            cmbTipAlbaran(1).visible = False
+            Label4(54).Caption = ""
+            chkDispo(0).visible = OpcionListado = 42 'solo disponibilidad
+            chkDispo(1).visible = OpcionListado = 42 'solo disponibilidad
+            If vParamAplic.Servicios And OpcionListado = 49 Then
+                lblTipAlbaran(1).visible = True
+                cmbTipAlbaran(1).visible = True
+            End If
+            
+            If OpcionListado = 49 Then 'Albaranes de Venta
+                NomTabla = "scaalb"
+                NomTablaLin = "slialb"
+            ElseIf OpcionListado = 227 Or OpcionListado = 228 Then
+                NomTabla = "scafac"
+                NomTablaLin = "slifac"
+                
+                'poner por defecto las fechas del ejercicio contable
+                Me.txtCodigo(11).Text = vEmpresa.FechaIni
+                Me.txtCodigo(12).Text = vEmpresa.FechaFin
+                
+                
+                Label4(54).Top = 5880
+                If OpcionListado = 227 Then
+                    FrameTiposFactura.BorderStyle = 0
+                    FrameTiposFactura.Left = Frame10.Left + 30
+                    FrameTiposFactura.Top = Frame10.Top + Frame10.Height - 90
+                    FrameTiposFactura.visible = True
+                    
+                    Label4(54).Top = cmdAceptarPedxArtic.Top + 120
+                    
+                    CargaListTipoFacturas
+                End If
+                
+            End If
+            
+            If OpcionListado = 44 Then
+                CargaComboTipoCliente
+                'Para TEINSA no marco las obsrvaciones
+                chkPedxClixSemEntrega(1).Value = 1
+                If vParamAplic.Frecuencias Then chkPedxClixSemEntrega(1).Value = 0
+                
+                'Para HERBELCA desmarco la semana de entrega
+                chkPedxClixSemEntrega(0).Value = 1
+                If vParamAplic.AlmacenB > 0 Then chkPedxClixSemEntrega(0).Value = 0
+                
+            End If
+            
+        Case 43, 1000, 1043
+                '43: Generar Albaran desde Pedido (NO IMPRIME LISTADO)
+                '1000:  Pedido a factura: pide la cta prevista de cobro
+                
+                'En codclien llevo: tienecoddiren & "|" & zonacliente & "|" 'si es visible framezona
+                If codClien <> "" Then
+                    W = RecuperaValor(codClien, 3)
+                Else
+                    W = 0
+                End If
+            
+                'Si tiene coddiren tendre que pedir la zona de reparto
+                FramePartes.visible = False
+                FrameZona.visible = False
+                FrameGenAlbEuler.visible = False
+                If W = 1 Then
+                    txtCodigo(22).Text = RecuperaValor(codClien, 1)
+                    txtNombre(22).Text = RecuperaValor(codClien, 2)
+                    FrameZona.visible = True
+                End If
+                
+                
+                Label5.Caption = "" 'Zona d
+                'la zona del cliente
+                ' RecuperaValor(codClien, 1)
+                
+                W = 6515
+                H = FrameGenAlbaran.Height + 340
+                PonerFrameVisible Me.FrameGenAlbaran, True, H, W
+                txtCodigo(25).Text = Format(Now, "dd/mm/yyyy")
+                indFrame = 3
+                chkImpAlbaran.Caption = "Impimir "
+                If OpcionListado = 1000 Then
+                    Label4(32).Caption = "Fec. FACTURA"
+                    Label3.Caption = "FACTURAR pedido"
+                    chkImpAlbaran.Caption = chkImpAlbaran.Caption & "FACTURA"
+                Else
+                    
+                    Label4(32).Caption = "Fecha albarán"
+                    chkImpAlbaran.Caption = chkImpAlbaran.Caption & "albaran"
+                    If NumCod = "REP" Then
+                        Label3.Caption = "Pasar Reparación a Albaran"
+                    Else
+                        Label3.Caption = "Pasar Pedido a Albaran"
+                        
+                        If vParamAplic.NumeroInstalacion = 4 Then
+                            FrameGenAlbEuler.BorderStyle = 0
+                            FrameGenAlbEuler.visible = True
+                            Me.cboTipoAlbaranEuler.ListIndex = 0
+                        End If
+                        
+                        If Me.OpcionListado = 1043 Then
+                            Label3.Caption = "Pasar parte trabajo a Albaran"
+                            
+                            CargarComboFacturacion
+                            Me.cboFacturacion.ListIndex = 1
+                            
+                            Me.chkImpEtiq.visible = False
+                            Me.chkImpHojaExped.visible = False
+                            FramePartes.visible = True
+                            
+                            
+      
+                            'CadenaDesdeOtroForm = 'trab,fecha,interna
+                            txtCodigo(17).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
+                            txtCodigo(18).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
+                            txtCodigo(19).Text = vParamAplic.PorDefecto_Envio
+                            txtCodigo(25).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
+                            txtCodigo(59).Text = "0" 'cantidad litros
+                            txtCodigo(60).Text = "1,00" 'cantidad otros
+                            
+                            Titulo = RecuperaValor(CadenaDesdeOtroForm, 3)
+                            If Titulo = "1" Then
+                                Me.chkFrInterna.Value = 1
+                            Else
+                                Me.chkFrInterna.Value = 0
+                            End If
+                            
+                            'Mayo 2013. Tipo facturacion
+                            Titulo = RecuperaValor(CadenaDesdeOtroForm, 4)
+                            Me.cboFacturacion.ListIndex = Val(Titulo)
+                            
+                            CadenaDesdeOtroForm = ""
+                            Titulo = ""
+                            OpcionListado = 43
+                        End If
+                        
+                            
+                    End If
+                End If
+                FramepedidoFactura.visible = (OpcionListado = 1000)
+                
+                
+                
+                
+                '- Ver si hay articulo portes para imprimir hoja Expedicion
+                If vParamAplic.TipoPortes = 1 Then
+                    Me.chkImpHojaExped.Value = 1
+                Else
+                    Me.chkImpHojaExped.Value = 0
+                End If
+            
+                'Enero 2011
+                'Si es PEW o devolucion de pedidos, ni mostramos el chek de hoja de expedidcion ni imprfra ni ostias ne vinagre
+                
+                FramRectARM.visible = False
+                txtFraRectifica.Text = ""
+                chkFraMostrador.visible = False
+                If NumCod = "PEW" Then
+                    If OpcionListado = 1000 Then
+                        FramRectARM.visible = True
+                        'OK no mostraremos todas esas cosas
+                        chkImpHojaExped.visible = False
+                        'chkImpAlbaran.visible = False
+                        chkImpEtiq.visible = False
+                    End If
+                Else
+                    'Si opcion=1000(pasando a factura)
+                    '  y tiene numero serie distinto para las facturas de mostrador, entonces
+                    '  debe seleccionar si el pedido lo pasa a Mostraor(contado)
+                    'vParamAplic.FrasMostradorSerieDistinta    . Los pedidos de B van a B
+                    If vParamAplic.FrasMostradorSerieDistinta And NumCod <> "PEZ" Then
+                        chkFraMostrador.visible = True
+                        If Me.OpcionListado = 1000 Then
+                            chkFraMostrador.Caption = "Factura"
+                        Else
+                            chkFraMostrador.Caption = "Albaran"
+                        End If
+                        chkFraMostrador.Caption = chkFraMostrador.Caption & " de mostrador"
+                    End If
+                End If
+            
+        Case 50, 51 '50: Prevision Facturacion de Albaranes (NO IMPRIME LISTADO)
+                    '51: Inf. Incumplimiento Plazos de Entrega
+            PonerFramePreFacVisible True, H, W
+            indFrame = 5 'solo para el boton cancelar
+            '-- Si está activada la opción de servicios, muestra los controles que permiten
+            '   el tipo o tipos de albaranes a mostrar en el informe, en caso contrario los
+            '   oculta para no liar [SERVICIOS]
+            lblTipAlbaran(0).visible = False
+            cmbTipAlbaran(0).visible = False
+            If vParamAplic.Servicios Then
+                lblTipAlbaran(0).visible = codClien <> "ALR"
+                cmbTipAlbaran(0).visible = codClien <> "ALR"
+                lblTipAlbaran(0).Top = cmdAceptarPreFac.Top
+                cmbTipAlbaran(0).Top = cmdAceptarPreFac.Top
+            End If
+            chkResumenForpa.visible = OpcionListado = 50
+        Case 52, 222
+                    '52: Facturacion de Albaranes
+                    '222: Factura de Mostrador
+                    
+            PonerFrameFacVisible True, H, W
+            txtCodigo(34).Text = Format(Now, "dd/mm/yyyy")
+            txtCodigo(39).Text = Format(CDate(txtCodigo(34).Text) - 1, "dd/mm/yyyy")
+            indFrame = 6
+            
+            NomTabla = "scaalb"
+            NomTablaLin = "slialb"
+            
+            
+            
+            'Si es facturacion directa: 222 oculto el frame y muestro el albaran que voy a facturar
+            Frame4.visible = (OpcionListado = 52)
+            If OpcionListado = 52 Then
+                Label10(10).Caption = ""
+                Me.Frame15.Top = 5040
+                Frame15.visible = True
+            Else
+                Label10(10).Caption = "Albarán:     " & codClien & "   " & NumCod
+                Me.Frame15.Top = 1800
+                Frame15.visible = False
+            End If
+           
+            
+            
+            
+        Case 74, 75 '74: Prefacturación Mantenimientos
+                    '75: Facturacion de Mantenimientos
+            lblFactMant.Caption = ""
+            PonerFramePreFacManteVisible True, H, W
+            indFrame = 7 'solo para el boton cancelar
+            
+            chkSituFacMant.visible = OpcionListado = 74
+            Me.FrameTapa.visible = False
+            cboSituMan.ListIndex = 0
+            
+        Case 229 '229: Inf. estadistica ventas por mes
+            H = 4000
+            W = 7035
+            PonerFrameVisible Me.FrameEstVentas, True, H, W
+            indFrame = 8
+    End Select
+    
+    
+    'Esto se consigue poneinedo el cancel en el opcion k corresponda
+    Me.cmdCancel(indFrame).Cancel = True
+    Me.Width = W + 70
+    Me.Height = H + 350
+        
+End Sub
+
+
+
+Private Sub frmB_Selecionado(CadenaDevuelta As String)
+    cadFormula = CadenaDevuelta
+End Sub
+
+Private Sub frmDptoEnvio_DatoSeleccionado(CadenaSeleccion As String)
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmF_Selec(vFecha As Date)
+'Calendario de Fecha
+    txtCodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
+End Sub
+
+
+Private Sub frmLd_DatoSeleccionado(CadenaSeleccion As String)
+    txtFraRectifica.Text = RecuperaValor(CadenaSeleccion, 1) & RecuperaValor(CadenaSeleccion, 2) & " de " & RecuperaValor(CadenaSeleccion, 3)
+    txtFraRectifica.Tag = CadenaSeleccion
+End Sub
+
+Private Sub frmMtoAgente_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Agente
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmMtoAlmacen_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Almacen
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmMtoArticulo_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Articulos
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmMtoBancosPro_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Bancos Propios
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+
+Private Sub frmMtoClient_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Clientes
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmMtoFEnvio_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Formas de Envio
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmMtoFPago_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Formas de Pabo
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmMtoTipCo_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Tipos de Contrato del Mantenimiento
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmMtoTraba_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Mantenimiento de Trabajadores
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmZ_DatoSeleccionado(CadenaSeleccion As String)
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+
+Private Sub imgayuda_Click(Index As Integer)
+Dim Ayuda As String
+
+    'Sera las ayuda. Tampoco queiero la biblia, pero,
+    'si un "pelin" de ayuda no me vendria mal a mi, imaginemos a el cliente final
+    Select Case Index
+    Case 0
+        Ayuda = "Si marca la opción 'Semana de entrega' saldrá el informe valorado y agrupado por semana de entrega" & vbCrLf
+        Ayuda = Ayuda & "En caso contrario, saldrá el informe sin valorar, con stocks y pedidos a proveedor de los artículos"
+        Ayuda = Ayuda & vbCrLf & vbCrLf & "Tipo de cliente válido sólo para la opción 'Sin valorar'(semana entrega desmarcado)"
+        
+    
+    Case 1
+        Ayuda = "Si no indica periodo de facturacion serán todos. " & vbCrLf
+    End Select
+    Ayuda = imgayuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
+    MsgBox Ayuda, vbInformation
+End Sub
+
+
+
+Private Sub imgBuscarOfer_Click(Index As Integer)
+    Select Case Index
+            
+        Case 11, 12, 14, 15, 20, 21, 27, 28, 32 'Cod. CLIENTE
+            Select Case Index
+                Case 11, 12: indCodigo = Index + 9
+                Case 14, 15: indCodigo = Index + 14
+                Case 20, 21: indCodigo = Index + 20
+                Case 27, 28: indCodigo = Index + 21
+                Case 32: indCodigo = 8
+            End Select
+            Set frmMtoClient = New frmFacClientes3
+            frmMtoClient.DatosADevolverBusqueda = "0|1|"
+            If Not IsNumeric(txtCodigo(indCodigo).Text) Then txtCodigo(indCodigo).Text = ""
+            frmMtoClient.Show vbModal
+            Set frmMtoClient = Nothing
+            
+        Case 4, 5 'Cod. ALMACEN
+            If Index = 4 Then indCodigo = 13
+            If Index = 5 Then indCodigo = 14
+            Set frmMtoAlmacen = New frmAlmAlPropios
+            frmMtoAlmacen.DatosADevolverBusqueda = "0|1|"
+            If Not IsNumeric(txtCodigo(indCodigo).Text) Then txtCodigo(indCodigo).Text = ""
+            frmMtoAlmacen.Show vbModal
+            Set frmMtoAlmacen = Nothing
+            
+        Case 6, 7 'Cod. ARTICULO
+            If Index = 6 Then
+                indCodigo = 15
+            Else
+                indCodigo = 16
+            End If
+            Set frmMtoArticulo = New frmAlmArticu2
+            'frmMtoArticulo.DatosADevolverBusqueda3 = "@1@"
+            frmMtoArticulo.DesdeTPV = False
+            frmMtoArticulo.Show vbModal
+            Set frmMtoArticulo = Nothing
+        
+        Case 1, 2, 8, 9 'cod. TRABAJADOR
+            Select Case Index
+                Case 1, 2: indCodigo = Index + 1
+                Case 8, 9: indCodigo = Index + 9
+            End Select
+            
+            Set frmMtoTraba = New frmAdmTrabajadores
+            frmMtoTraba.DatosADevolverBusqueda = "0|1|"
+            frmMtoTraba.Show vbModal
+            Set frmMtoTraba = Nothing
+            
+        Case 10 'Cod. Forma de Envio
+            indCodigo = 19
+            Set frmMtoFEnvio = New frmFacFormasEnvio
+            frmMtoFEnvio.DatosADevolverBusqueda = "0|1|"
+            frmMtoFEnvio.Show vbModal
+            Set frmMtoFEnvio = Nothing
+            
+        Case 16, 17, 22, 23, 29, 30 'Forma de PAGO
+            Select Case Index
+                Case 16, 17: indCodigo = Index + 14
+                Case 22, 23: indCodigo = Index + 20
+                Case 29, 30: indCodigo = Index + 21
+            End Select
+            Set frmMtoFPago = New frmFacFormasPago
+            frmMtoFPago.DatosADevolverBusqueda = "0|1|"
+            If Not IsNumeric(txtCodigo(indCodigo).Text) Then txtCodigo(indCodigo).Text = ""
+            frmMtoFPago.Show vbModal
+            Set frmMtoFPago = Nothing
+            
+        Case 3, 13, 18, 19, 36, 37 'cod AGENTE
+            If Index <= 13 Then
+                'D/H agente para pedido x cliente
+                'MARZO 2010
+                indCodigo = 7
+                If Index = 3 Then indCodigo = 6
+            Else
+                If Index < 36 Then
+                    indCodigo = Index + 14
+                Else
+                    indCodigo = Index - 13
+                End If
+            End If
+            Set frmMtoAgente = New frmFacAgentesCom
+            frmMtoAgente.DatosADevolverBusqueda = "0|1|"
+            If Not IsNumeric(txtCodigo(indCodigo).Text) Then txtCodigo(indCodigo).Text = ""
+            frmMtoAgente.Show vbModal
+            Set frmMtoAgente = Nothing
+            
+        Case 0, 24, 31 'Bancos Propios
+            indCodigo = 0
+            If Index = 31 Then
+                indCodigo = 52
+            ElseIf Index = 0 Then indCodigo = 5
+            End If
+            Set frmMtoBancosPro = New frmFacBancosPropios
+            frmMtoBancosPro.DatosADevolverBusqueda = "0|1|"
+            frmMtoBancosPro.Show vbModal
+            Set frmMtoBancosPro = Nothing
+        
+        Case 25 'Tipo CONTRATO
+            indCodigo = 45
+            Set frmMtoTipCo = New frmManTiposContrato
+            frmMtoTipCo.DatosADevolverBusqueda = "0|1|"
+            frmMtoTipCo.Show vbModal
+            Set frmMtoTipCo = Nothing
+        Case 33, 34, 35
+            'ZONAS
+            If Index = 35 Then
+                indCodigo = 22
+            Else
+                indCodigo = (Index - 33) + 9  'txtcodigo(9)
+            End If
+            Set frmZ = New frmFacZonas
+            frmZ.DatosADevolverBusqueda = "0|1|"
+            frmZ.Show vbModal
+            Set frmZ = Nothing
+            
+        Case 38, 39
+                
+                If Index = 38 Or Index = 39 Then
+                    If txtCodigo(48).Text <> txtCodigo(49).Text Or txtCodigo(49).Text = "" Then
+                        MsgBox "Seleccione un cliente para podre indicar departamento", vbExclamation
+                        Exit Sub
+                    End If
+                    
+                    'Tienen que existir el cliente
+                    If txtNombre(48).Text = "" Then
+                        MsgBox "No existe el cliente", vbExclamation
+                        Exit Sub
+                    End If
+                    indCodigo = Index + 17
+                End If
+                Set frmDptoEnvio = New frmFacCliEnvDpto
+                frmDptoEnvio.DireccionesEnvio = False
+                If txtCodigo(Index).Text <> "" Then
+                    frmDptoEnvio.VerDatoDpto = CInt(txtCodigo(Index).Text)
+                Else
+                    frmDptoEnvio.VerDatoDpto = -1
+                End If
+                frmDptoEnvio.codClien = CLng(txtCodigo(48).Text)
+                frmDptoEnvio.Nomclien = txtNombre(48).Text
+                frmDptoEnvio.Show vbModal
+                Set frmDptoEnvio = Nothing
+                
+        Case 40, 41
+            indCodigo = Index + 17   '57 y 58
+            AbrirBuscaGrid indCodigo
+        Case 54
+            indCodigo = 54
+            AbrirBuscaGrid indCodigo
+    End Select
+    PonerFoco txtCodigo(indCodigo)
+End Sub
+
+
+Private Sub imgFecha_Click(Index As Integer)
+   Screen.MousePointer = vbHourglass
+   Set frmF = New frmCal
+   frmF.Fecha = Now
+   
+   Select Case Index
+        Case 0 'Frame Pasar Pedido -> Albaran
+            indCodigo = 25
+        Case 1 'framePedidos
+            indCodigo = 3 'Desde
+        Case 2 'framePedidos
+            indCodigo = 4 'Hasta
+        
+        Case 6 'FramePedxArtic
+            indCodigo = 11 'Fecha Desde
+        Case 7 'FramePedxArtic
+            indCodigo = 12 'Fecha Hasta
+        Case 9 'FramePedCompras
+            indCodigo = 24 'Fecha Hasta
+        Case 10 'FramePreFacturar
+            indCodigo = 26
+        Case 11 'FramePreFacturar
+            indCodigo = 27
+        Case 12 'Frame Factura
+            indCodigo = 38
+        Case 13 'Frame Factura
+            indCodigo = 39
+        Case 14 'FrameFactura
+            indCodigo = 34
+   End Select
+   
+   PonerFormatoFecha txtCodigo(indCodigo)
+   If txtCodigo(indCodigo).Text <> "" Then frmF.Fecha = CDate(txtCodigo(indCodigo).Text)
+
+   Screen.MousePointer = vbDefault
+   frmF.Show vbModal
+   Set frmF = Nothing
+   PonerFoco txtCodigo(indCodigo)
+End Sub
+
+
+
+
+
+
+
+
+
+
+Private Sub OptDetalle_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+Private Sub OptOrdenCodclien_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub txtCodigo_GotFocus(Index As Integer)
+    ConseguirFoco txtCodigo(Index), 3
+End Sub
+
+Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    KEYdown KeyCode
+End Sub
+
+Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+Private Sub txtCodigo_LostFocus(Index As Integer)
+Dim devuelve As String
+Dim codCampo As String, NomCampo As String
+Dim tabla As String
+      
+    Select Case Index
+        Case 1, 60 'Importe (Decimal(12,2))
+            PonerFormatoDecimal txtCodigo(Index), 1
+            
+        Case 0, 5, 52 'Bancos Propios
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, "sbanpr", "nombanpr", "codbanpr", "Bancos Propios")
+                If txtCodigo(Index).Text <> "" And txtNombre(Index).Text <> "" Then
+                    txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "0000")
+                Else
+                    PonerFoco txtCodigo(Index)
+                End If
+            Else
+                txtNombre(Index).Text = ""
+            End If
+        
+        'FECHA Desde Hasta
+        Case 11, 12, 25, 26, 27, 34, 38, 39, 44
+            If txtCodigo(Index).Text <> "" Then
+                PonerFormatoFecha txtCodigo(Index)
+                If Index = 34 Then _
+                    txtCodigo(39).Text = Format(CDate(txtCodigo(34).Text) - 1, "dd/mm/yyyy")
+            End If
+           
+'            'Fecha entrega para Pedido. Poner la semana
+'            If Index = 26 Then txtNombre(4).Text = CalculaSemana(CDate(txtCodigo(26).Text))
+        
+        Case 53, 59 'AÑO - litros reales partes trabajo
+             If Not PonerFormatoEntero(txtCodigo(Index)) Then
+                If Index = 59 Then txtCodigo(Index).Text = ""
+             End If
+        
+        Case 36, 37  'Nº de Pedido / Albaran
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "0000000")
+            End If
+            
+
+        Case 35  'Num coppias y Periodicidad Facturacion
+            PonerFormatoEntero txtCodigo(Index)
+
+        Case 8, 20, 21, 28, 29, 40, 41, 48, 49 'Cod. CLIENTE
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                NomCampo = "nomclien"
+                tabla = "sclien"
+                codCampo = "codclien"
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, tabla, NomCampo, codCampo, "Cliente")
+                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            Else
+                txtNombre(Index).Text = ""
+            End If
+            
+        Case 13, 14 'ALMACEN
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                NomCampo = "nomalmac"
+                tabla = "salmpr"
+                codCampo = "codalmac"
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, tabla, NomCampo, codCampo, "Almacen")
+                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            Else
+                txtNombre(Index).Text = ""
+            End If
+     
+        Case 2, 3, 17, 18, 47 'Cod. Trabajador
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                NomCampo = "nomtraba"
+                tabla = "straba"
+                codCampo = "codtraba"
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, tabla, NomCampo, codCampo, "Trabajador")
+                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "0000")
+            Else
+                txtNombre(Index).Text = ""
+            End If
+            
+        Case 19 'Cod. Envio
+            NomCampo = "nomenvio"
+            tabla = "senvio"
+            codCampo = "codenvio"
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, tabla, NomCampo, codCampo, "Forma de Envío")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            
+            
+        Case 30, 31, 42, 43, 50, 51 'Cod. Formas de PAGO
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, "sforpa", "nomforpa", "codforpa", "Formas de Pago")
+                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            Else
+                txtNombre(Index).Text = ""
+                txtCodigo(Index).Text = ""
+            End If
+        
+        Case 6, 7, 32, 33, 23, 24 'AGENTE
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, "sagent", "nomagent", "codagent", "Agente")
+                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "0000")
+            Else
+                txtNombre(Index).Text = ""
+                txtCodigo(Index).Text = ""
+            End If
+        Case 9, 10, 22 'ZONA
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, "szonas", "nomzonas", "codzonas", "Zonas")
+                If Index = 22 Then
+                    'Si pone ZONA tiene que existir
+                    If txtNombre(Index).Text = "" Then txtCodigo(Index).Text = ""
+                End If
+                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "0000")
+            Else
+                txtNombre(Index).Text = ""
+                txtCodigo(Index).Text = ""
+            End If
+            
+        Case 45 'TIPO CONTRATO
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, "stipco", "nomtipco", "codtipco", "Tipo Contrato", "T")
+            
+        Case 46 'MES a facturar
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                'Comprobar que el mes es correcto, valores entre 1-12
+                devuelve = txtCodigo(Index).Text
+                If (CByte(devuelve) >= 1) And (CByte(devuelve) <= 12) Then
+                    txtNombre(Index).Text = UCase(MonthName(CLng(devuelve)))
+                Else
+                    MsgBox "El valor introducido no es un MES válido.(1-12).", vbInformation
+                    txtCodigo(Index).Text = ""
+                    PonerFoco txtCodigo(Index)
+                End If
+            Else
+                txtNombre(Index).Text = ""
+            End If
+            
+            
+        Case 54
+            'Centro de coste
+            txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+            codCampo = ""
+            If txtCodigo(Index).Text <> "" Then
+                
+                codCampo = "nomccost"
+                tabla = DevuelveDesdeBD(conConta, "codccost", "cabccost", "codccost", txtCodigo(Index).Text, "T", codCampo)
+            
+                If tabla = "" Then
+                    MsgBox "No existe el centro de coste: " & txtCodigo(Index).Text, vbExclamation
+                    
+                End If
+                If codCampo = "nomccost" Then codCampo = ""
+                txtCodigo(Index).Text = tabla
+            End If
+            txtNombre(Index).Text = codCampo
+            
+            
+            
+        Case 55, 56
+            'DEPARTAMENTO
+            codCampo = ""
+            devuelve = ""
+            If txtCodigo(Index).Text = "" Then
+                txtNombre(Index).Text = codCampo
+                Exit Sub
+            End If
+            
+            If Index = 55 Or Index = 56 Then
+                'Departemento. Tienen que poner un UNICO cliente
+                If txtCodigo(48).Text <> txtCodigo(49).Text Or txtCodigo(49).Text = "" Then
+                    MsgBox "Seleccione un cliente para poder indicar departamento", vbExclamation
+                    txtCodigo(Index).Text = ""
+                    PonerFoco txtCodigo(48)
+                    devuelve = "NO"
+                End If
+            End If
+            If devuelve = "" Then
+                If PonerFormatoEntero(txtCodigo(Index)) Then
+                    codCampo = PonerNombreDeCod(txtCodigo(Index), conAri, "sdirec", "nomdirec", "codclien=" & txtCodigo(48).Text & " AND coddirec ", "Departamentos")
+                    If txtCodigo(Index).Text <> "" And codCampo <> "" Then
+                        txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "0000")
+                    Else
+                        txtCodigo(Index).Text = ""
+                        PonerFoco txtCodigo(Index)
+                    End If
+                Else
+                    txtCodigo(Index).Text = ""
+                End If
+            End If
+            txtNombre(Index).Text = codCampo
+            
+        Case 57, 58
+            If PonerFormatoEntero(txtCodigo(Index)) Then
+                NomCampo = "nomactiv"
+                tabla = "sactiv"
+                codCampo = "codactiv"
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, tabla, NomCampo, codCampo, "Actividad")
+                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            Else
+                txtCodigo(Index).Text = ""
+                txtNombre(Index).Text = ""
+            End If
+        '##### Recuperar facturas ALZIRA
+        Case 4 'nº factura
+            PonerFocoBtn Me.cmdAceptarFac
+        '#####
+    End Select
+End Sub
+
+
+
+Private Sub PonerFramePedxArticVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+'Pone el Frame de Informe Pedidos por Articulo Visible y Ajustado al Formulario, y visualiza los controles
+'necesario para cada Informe de Ofertas
+
+    'MARZO 2010
+    'Los botones de aceptar cancelar
+    H = 4800
+    If OpcionListado = 41 Then
+        H = 6080
+    Else
+        If OpcionListado = 44 Then
+            H = 8080
+        Else
+            If OpcionListado = 227 Then H = 7080
+        End If
+    End If
+    cmdAceptarPedxArtic.Top = H
+    Me.cmdCancel(2).Top = H
+
+    'lbl
+    H = 4680
+    If OpcionListado = 41 Then
+        H = 4880
+    Else
+        If OpcionListado = 44 Then
+            H = 6880
+        Else
+            If OpcionListado = 227 Then H = 5880
+        End If
+    End If
+    Label4(54).Top = H
+
+
+    H = 5415
+    If OpcionListado = 41 Then
+        H = 6575
+    Else
+        If OpcionListado = 44 Then
+            H = 8575
+        Else
+            If OpcionListado = 227 Then H = 7575
+        End If
+    End If
+    
+    W = 7515
+    
+
+    
+        
+    'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
+    PonerFrameVisible Me.FramePedxArtic, visible, H, W
+    
+    If visible = True Then
+        Me.Frame5.visible = OpcionListado = 41 Or (OpcionListado = 44) Or (OpcionListado = 227) 'D/H cliente
+        'D/H Artículo
+        'Me.Frame8.visible = (OpcionListado <> 44) And (OpcionListado <> 227) And (OpcionListado <> 228)
+        Me.Frame8.visible = (OpcionListado <> 227) And (OpcionListado <> 228)
+        
+        Me.Frame9.visible = (OpcionListado <> 227 And OpcionListado <> 228) 'D/H Almacen
+        Me.Frame10.visible = (OpcionListado = 227)
+        Me.Frame12.visible = (OpcionListado = 228)
+        FrameOrden1.visible = (OpcionListado = 44)
+        FramepedxClien.visible = (OpcionListado = 44)
+        'Para que salga
+        
+        If OpcionListado = 44 Then 'Informe Pedido por cliente
+            Me.Frame5.Top = 4320
+            Me.Frame5.Left = 400
+            Me.Label1.Caption = "Pedidos por Cliente"
+            '
+            FramepedxClien.Top = 5440
+            FramepedxClien.Left = 500
+            Frame8.Left = 320
+            
+            FrameOrden1.Top = 7600
+            
+        ElseIf OpcionListado = 227 Then 'Inf. Estadistica ventas x cliente
+            Me.Frame5.Top = 1800
+            Me.Frame5.Left = 500
+            Me.Frame10.Top = 2800
+            Me.Label1.Caption = "Ventas por Cliente"
+            Label4(4).Caption = "Fecha Factura"
+            Frame10.BorderStyle = 0
+            'Me.cmdAceptarPedxArtic.Top = 4850
+            'Me.cmdCancel(2).Top = Me.cmdAceptarPedxArtic.Top
+        ElseIf OpcionListado = 228 Then 'Inf. Estadistica ventas x trabajador
+            Me.Frame12.Top = 1900
+            Me.Frame12.Left = 500
+            Me.Label1.Caption = "Ventas por Trabajador"
+            Label4(4).Caption = "Fecha Factura"
+            Me.cmdAceptarPedxArtic.Top = 4150
+            Me.cmdCancel(2).Top = Me.cmdAceptarPedxArtic.Top
+        Else
+            Me.Frame8.Top = 3120
+            Me.Frame8.Left = 500
+            If OpcionListado = 41 Then
+                Me.Label1.Caption = "Pedidos por Artículo"
+                Frame5.Top = 4300
+                Frame5.Left = 300
+                Me.Frame8.Top = 3020
+                Me.Frame8.Left = 300
+            ElseIf OpcionListado = 42 Then
+                Me.Label1.Caption = "Disponibilidad de Stocks"
+            ElseIf OpcionListado = 49 Then
+                Me.Label1.Caption = "Albaranes por Artículo"
+                Label4(4).Caption = "Fecha Albaran"
+            End If
+        End If
+    End If
+End Sub
+
+
+Private Sub PonerFramePreFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+'Pone el Frame del Prevision Facturacion Albaran Visible y Ajustado al Formulario, y visualiza los controles
+Dim B As Boolean
+Dim Cad As String
+
+    H = 6355
+    If OpcionListado = 51 Then 'Inf. Incum. plazos entrega
+        H = 5400
+        Me.cmdAceptarPreFac.Top = 4600
+        Me.cmdCancel(5).Top = Me.cmdAceptarPreFac.Top
+    Else
+        Frame16.visible = True 'tipos de pago
+    End If
+    W = 6800
+    'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
+    PonerFrameVisible Me.FramePreFacturar, visible, H, W
+    If visible = True Then
+        B = (OpcionListado = 50)
+        Label4(41).visible = B
+        Me.imgBuscarOfer(16).visible = B
+        Me.imgBuscarOfer(17).visible = B
+        Me.txtCodigo(30).visible = B
+        Me.txtCodigo(31).visible = B
+        Me.txtNombre(30).visible = B
+        Me.txtNombre(31).visible = B
+        Me.Frame6.visible = Not B
+        Me.Frame6.Top = 2750
+        Me.Frame6.Left = 460
+        
+        'solo albaranes a facturar
+        Me.chkSoloFacturar.visible = B
+        Me.chkSoloFacturar.Value = 1
+        
+        'Detalle o resumen
+        Me.Frame7.visible = B And codClien = "ALV"
+        Me.Frame7.visible = B 'And CodClien = "ALV"
+        Me.OptDetalle(0).Value = True
+        
+        'Sept 2015. Periodo facturacion
+        Me.Label4(24).visible = B
+        Me.txtCodigo(61).visible = B
+        Me.imgayuda(1).visible = B
+        
+        
+        If Not B Then
+            Me.Label9(0).Caption = "Incum. plazos entrega"
+        Else 'Prevision Facturacion
+            Select Case codClien 'aqui guardamos el tipo de movimiento
+                Case "ALV": Cad = "" ' antes "(Ventas)" [SERVICIOS]
+                Case "ALR": Cad = "(Reparaciones)"
+                Case "ALM": Cad = "(Mantenimientos)"
+            End Select
+            Me.Label9(0).Caption = "Previsión de facturación " & Cad
+        End If
+    End If
+End Sub
+
+
+Private Sub PonerFrameFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+'Pone el Frame de Facturacion de Albaran Visible y Ajustado al Formulario, y visualiza los controles
+Dim Cad As String
+
+    H = 7100 + 180
+    W = 7480
+    
+    If visible = True Then
+         Select Case codClien 'aqui guardamos el tipo de movimiento
+            Case "ALV": Cad = "(Ventas)"
+            Case "ALR": Cad = "(Reparaciones)"
+            Case "ALM", "ART":
+                If codClien = "ALM" Then
+                    Cad = "(Mostrador)"
+                Else
+                    Cad = "(Rectificativa)"
+                End If
+                'Me.Frame3.Top = 1200
+                Me.Frame4.visible = False
+                H = 4000
+                Me.cmdAceptarFac.Top = 3200
+                Me.cmdCancel(6).Top = Me.cmdAceptarFac.Top
+            Case "ALS": Cad = "(Servicios)"
+                
+                
+        End Select
+        '#### Laura Recuperar facturas ALZIRA
+        'nº de factura solo visible si estamos recuperando facturas
+        Me.Label10(9).visible = Me.EstaRecupFact And OpcionListado = 222
+        Me.txtCodigo(4).visible = Me.EstaRecupFact And OpcionListado = 222
+        If Me.EstaRecupFact And OpcionListado = 222 Then txtCodigo(0).Text = "001"
+        
+        Me.Label10(0).Caption = "Facturación de Albaranes " & Cad
+        Me.Caption = "Facturación"
+    End If
+    
+    PonerFrameVisible Me.FrameFacturar, visible, H, W
+End Sub
+
+
+Private Sub PonerFramePreFacManteVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+'Pone el Frame del Prevision Facturacion Albaran Mantenimientos Visible y Ajustado al Formulario, y visualiza los controles
+Dim B As Boolean
+Dim Cad As String
+
+    
+    If visible = True Then
+        B = (OpcionListado = 74) 'prefacturar
+        W = 7120
+        If B Then 'prefacturar
+            'H = 5600
+            H = 7600
+        Else 'facturar
+            'H = 6855
+            H = 7855
+            
+        End If
+        'H = 6855
+        Me.FramePreFacMante.Height = H
+        'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
+        PonerFrameVisible Me.FramePreFacMante, visible, H, W
+        
+        If B Then 'prefacturar
+            Me.Frame2(0).visible = False
+            Me.Frame2(1).visible = False
+            Me.Frame1.Top = Me.Frame1.Top - 800
+            Me.Frame1.BorderStyle = 0
+            Me.Label7(1).Caption = "Prefacturación Mantenimientos"
+            Me.cmdAceptarPreFacMan.Top = H - Me.cmdAceptarPreFacMan.Height - 120
+            Me.cmdCancel(7).Top = cmdAceptarPreFacMan.Top
+        Else 'facturar
+            Me.Label7(1).Caption = "Facturación Mantenimientos"
+            Me.txtCodigo(44).Text = Format(Now, "dd/mm/yyyy")
+            Me.txtCodigo(47).Text = PonerTrabajadorConectado(Cad)
+            Me.txtNombre(47).Text = Cad
+            B = False                            'Si es por proyecto pedira el CC, si no cojera el tel trab o la familia
+            If vEmpresa.TieneAnalitica Then B = vParamAplic.ModoAnalitica = 2
+            Me.Frame2(1).visible = B
+        End If
+        Me.lblFactMant.Top = H - Me.lblFactMant.Height - 120
+    End If
+    txtCodigo(54).Text = ""
+End Sub
+
+
+
+Private Function AnyadirParametroDH(Cad As String, indD As Byte, indH As Byte) As String
+On Error Resume Next
+
+    If txtCodigo(indD).Text <> "" And txtCodigo(indH).Text <> "" Then
+        If txtCodigo(indD).Text = txtCodigo(indH).Text Then
+            Cad = Cad & txtCodigo(indD).Text
+            If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
+            AnyadirParametroDH = Cad
+            Exit Function
+        End If
+    End If
+    
+    If txtCodigo(indD).Text <> "" Then
+        Cad = Cad & "desde " & txtCodigo(indD).Text
+        If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
+    End If
+    If txtCodigo(indH).Text <> "" Then
+        Cad = Cad & "  hasta " & txtCodigo(indH).Text
+        If txtNombre(indH).Text <> "" Then Cad = Cad & " - " & txtNombre(indH).Text
+    End If
+    AnyadirParametroDH = Cad
+End Function
+
+
+Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
+Dim devuelve As String
+
+    PonerDesdeHasta = False
+    devuelve = CadenaDesdeHasta(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
+    If devuelve = "Error" Then Exit Function
+    If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
+    If Tipo <> "F" Then
+        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
+    End If
+    If devuelve <> "" Then
+        If param <> "" Then
+            'Parametro Desde/Hasta
+            CadParam = CadParam & AnyadirParametroDH(param, indD, indH) & """|"
+            numParam = numParam + 1
+        End If
+        PonerDesdeHasta = True
+    End If
+End Function
+
+
+Private Sub InicializarVbles()
+    cadFormula = ""
+    cadSelect = ""
+    CadParam = ""
+    numParam = 0
+End Sub
+
+
+Private Sub LlamarImprimir()
+    With frmImprimir
+        .FormulaSeleccion = cadFormula
+        .OtrosParametros = CadParam
+        .NumeroParametros = numParam
+        .SoloImprimir = False
+        .EnvioEMail = False
+        .opcion = OpcionListado
+        .Titulo = Titulo
+        .ConSubInforme = conSubRPT
+        .NombreRpt = nomRPT  'nombre del informe
+        .Show vbModal
+    End With
+End Sub
+
+Private Sub txtCodigo_Validate(Index As Integer, Cancel As Boolean)
+    Select Case Index
+           Case 15, 16 'ARTICULO
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), conAri, "sartic", "nomartic", "codartic", "Articulo", "T")
+            'If txtNombre(Index).Text = "" And txtCodigo(Index) <> "" Then Cancel = True
+    End Select
+End Sub
+
+
+
+
+Private Function ObtenerClientesNuevo(cadW As String, Importe As String) As String
+Dim SQL As String
+Dim Rs As ADODB.Recordset
+
+    On Error GoTo EClientes
+    
+    cadW = Replace(cadW, "{", "")
+    cadW = Replace(cadW, "}", "")
+    
+    SQL = "select scafac.codclien,scafac.nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1)+ sum(if(isnull(baseimp2),0,baseimp2))+ sum(if(isnull(baseimp3),0,baseimp3)) as BaseImp"
+    SQL = SQL & " From scafac,sclien WHERE scafac.codclien=sclien.codclien "
+    If txtCodigo(57).Text <> "" Then SQL = SQL & " AND sclien.codactiv >= " & txtCodigo(57).Text
+    If txtCodigo(58).Text <> "" Then SQL = SQL & " AND sclien.codactiv <= " & txtCodigo(58).Text
+    'El agente
+    If Me.txtCodigo(23).Text <> "" Then SQL = SQL & " AND sclien.codagent >= " & txtCodigo(23).Text
+    If Me.txtCodigo(24).Text <> "" Then SQL = SQL & " AND sclien.codagent <= " & txtCodigo(24).Text
+    
+    
+    If cadW <> "" Then SQL = SQL & " AND " & cadW
+    SQL = SQL & " group by codclien "
+    If Importe <> "" Then SQL = SQL & " having baseimp>" & Importe
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
+    While Not Rs.EOF
+'        If RS!BaseImp >= CCur(Importe) Then
+            SQL = SQL & Rs!codClien & ","
+'        End If
+        Rs.MoveNext
+    Wend
+    Rs.Close
+    Set Rs = Nothing
+    
+    'Si no tiene DATOS es que ninguno entra dentro de estos registros
+    If SQL = "" Then SQL = "-1-"
+    
+    If SQL <> "" Then
+        SQL = Mid(SQL, 1, Len(SQL) - 1)
+        SQL = "( {scafac.codclien} IN [" & SQL & "] )"
+    End If
+    ObtenerClientesNuevo = SQL
+    
+EClientes:
+   If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
+End Function
+
+
+
+
+
+
+Private Sub AbrirBuscaGrid(Op As Integer)
+    
+    Set frmB = New frmBuscaGrid
+    cadFormula = "" 'Aqui metera el valor
+    Select Case Op
+    Case 54
+        'CEntro de coste
+        
+        frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
+        frmB.vTabla = "cabccost"
+        frmB.vSQL = ""
+       
+        '###A mano
+        frmB.vDevuelve = "0|1|"
+        frmB.vTitulo = "Centros de coste"
+        frmB.vselElem = 0
+        frmB.vConexionGrid = conConta
+    
+    Case 57, 58
+        frmB.vCampos = "Codigo|sactiv|codactiv|T||20·Descripción|sactiv|nomactiv|T||70·"
+        frmB.vTabla = "sactiv"
+        frmB.vSQL = ""
+       
+        '###A mano
+        frmB.vDevuelve = "0|1|"
+        frmB.vTitulo = "Actividades"
+        frmB.vselElem = 0
+        frmB.vConexionGrid = conAri
+    
+    End Select
+    frmB.Show vbModal
+    Set frmB = Nothing
+    
+    
+    If cadFormula <> "" Then
+        'Ha devuelto algun dato
+        'If Op = 54 Then
+            txtCodigo(Op).Text = RecuperaValor(cadFormula, 1)
+            txtNombre(Op).Text = RecuperaValor(cadFormula, 2)
+        'End If
+    End If
+End Sub
+
+
+
+
+
+'-----------------------------------------------------------------------------------------------------
+'-----------------------------------------------------------------------------------------------------
+'
+'   Generacion de portes TIPO HERBELCA
+'
+'-----------------------------------------------------------------------------------------------------
+'-----------------------------------------------------------------------------------------------------
+Private Function ProcesoPortesTipoHerbelca(cadSQL As String, cadWhere As String, ByRef LblBar As Label) As Boolean
+    
+    ProcesoPortesTipoHerbelca = False
+    'Primera pasada para comprobar
+
+    If Not CargaPorteTipoHerbelca(True, cadSQL, cadWhere, LblBar) Then Exit Function
+ 
+    'Segunda pasada para insertar los portes
+    If CargaPorteTipoHerbelca(False, cadSQL, cadWhere, LblBar) Then ProcesoPortesTipoHerbelca = True
+        
+
+    
+End Function
+
+
+Private Function CargaPorteTipoHerbelca(Comprobar As Boolean, cadSQL As String, cadWhere As String, ByRef LblBar As Label) As Boolean
+Dim RSalb As ADODB.Recordset
+Dim SQL As String
+Dim Codclien1 As Long
+Dim ClienConPortes As Boolean
+Dim cadW As String
+Dim FecEnvio As Date
+Dim T1 As Single
+Dim DatosPortes As String  'nomartic|preciov|preciouc|
+
+    On Error GoTo ETraspasoAlbFac
+
+    CargaPorteTipoHerbelca = False
+
+    'Meteremos en una de las temporales los registros que comprobando den error
+    Set RSalb = New ADODB.Recordset
+    
+    If Comprobar Then
+        SQL = "Delete from tmpsliped where codusu = " & vUsu.codigo
+        conn.Execute SQL
+    Else
+        SQL = "Select nomartic,preciove,preciouc from sartic where codartic = " & DBSet(vParamAplic.ArtPortesN, "T")
+        RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        'No pueser eof
+        DatosPortes = RSalb!NomArtic & "|"
+        SQL = CStr(RSalb!preciove)
+        DatosPortes = DatosPortes & TransformaComasPuntos(SQL) & "|"
+        SQL = CStr(RSalb!precioUC)
+        DatosPortes = DatosPortes & TransformaComasPuntos(SQL) & "|"
+        RSalb.Close
+    End If
+    '
+    'Marcar Albaranes que se van a Facturar
+    '----------------------------------------
+    SQL = "select scaalb.codclien,fecenvio,NumAlbar,scaalb.nomclien from scaalb,sclien where scaalb.codclien=Sclien.codclien AND "
+    SQL = SQL & cadWhere
+    'de transporte y con fecha de envio
+    SQL = SQL & " AND  tipalbaran=1 and not fecenvio is null order by codclien,fecenvio,numalbar"
+    
+    
+    LblBar.Caption = "Leyendo datos"
+    LblBar.Refresh
+    RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Codclien1 = -1
+    ClienConPortes = False
+    cadW = ""
+    T1 = Timer
+    DoEvents
+    While Not RSalb.EOF
+        
+            
+        If RSalb!codClien <> Codclien1 Then
+            If cadW <> "" Then
+                If ClienConPortes Then TratarLineaPortes Comprobar, cadW, SQL, DatosPortes, Codclien1
+            End If
+            Espera 0.1
+            ClienConPortes = False
+            Codclien1 = RSalb!codClien
+            SQL = RSalb!Nomclien
+            FecEnvio = RSalb!FecEnvio
+            cadW = DevuelveDesdeBD(conAri, "AplicaPortesFactura", "sclien", "codclien", CStr(Codclien1))
+            If cadW = "1" Then ClienConPortes = True
+            cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NumAlbar
+            If ClienConPortes Then
+                LblBar.Caption = "Cliente: " & Format(RSalb!codClien, "000000") & " - " & RSalb!Nomclien
+            Else
+                LblBar.Caption = RSalb!NumAlbar
+            End If
+            LblBar.Refresh
+        Else
+            'mismo cliente. Comprobemos la fecha
+            If FecEnvio <> RSalb!FecEnvio Then
+                'Otra fecha de envio. Comprobemos portes hasta aqui
+                If ClienConPortes Then TratarLineaPortes Comprobar, cadW, SQL, DatosPortes, Codclien1
+            
+                FecEnvio = RSalb!FecEnvio
+                
+                cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NumAlbar
+                
+            Else
+                'Codclien y fechaenvio la misma
+                'Todos igual. Metemos al select el albaran
+                cadW = cadW & "," & RSalb!NumAlbar
+            End If
+        
+        End If
+            
+
+        RSalb.MoveNext
+        If Timer - T1 > 4 Then
+            Me.Refresh
+            DoEvents
+            T1 = Timer
+        End If
+        
+    Wend
+    RSalb.Close
+    
+        
+    'comprobar la ultima Factura generada del blucle
+    If cadW <> "" Then
+        
+        
+                   
+        If ClienConPortes Then
+            LblBar.Caption = SQL
+            TratarLineaPortes Comprobar, cadW, SQL, DatosPortes, Codclien1
+        End If
+       
+        Espera 0.1
+    End If
+    
+    If Comprobar Then
+        SQL = "Select * from tmpsliped where codusu = " & vUsu.codigo & " ORDER BY ampliaci,nomartic"
+        RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        SQL = ""
+        While Not RSalb.EOF
+            SQL = SQL & "1"
+            RSalb.MoveNext
+        Wend
+        RSalb.Close
+        If SQL <> "" Then
+            CadenaDesdeOtroForm = ""
+            frmListado3.opcion = 2
+            frmListado3.Show vbModal
+            If CadenaDesdeOtroForm <> "" Then CargaPorteTipoHerbelca = True
+            
+        Else
+            CargaPorteTipoHerbelca = True
+        End If
+        
+    Else
+        'Si llega aqui es qu todo ha ido benne
+        CargaPorteTipoHerbelca = True
+    
+    End If
+    Espera 0.2
+    
+    
+ETraspasoAlbFac:
+    If Err.Number <> 0 Then MuestraError Err.Number, "Portes TIPO 2", Err.Description
+    Set RSalb = Nothing
+    
+End Function
+
+
+'DatosDeArticPortes:  nomartic|preciove|preciouc|  los precios sin comas
+Private Function TratarLineaPortes(Comprobar As Boolean, CadWh As String, Nomclien As String, DatosDeArticPortes As String, CodigoCliente As Long) As Boolean
+Dim Aux As String
+Dim RN As ADODB.Recordset
+Dim J As Integer
+Dim Llega As Boolean
+Dim ImporteT As Currency
+
+    'Comprobamos que no tiene una linea de portes
+    TratarLineaPortes = False
+    Set RN = New ADODB.Recordset
+    
+    
+    'Seimpre comprobaremos
+    
+    Aux = CadWh & ")) AND codartic = " & DBSet(vParamAplic.ArtPortesN, "T")
+    Aux = "Select * from slialb WHERE " & Aux
+    RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Llega = False
+    If Not RN.EOF Then
+        
+        'YA EXISTE UNA LINEA con portes
+        If Comprobar Then
+            Aux = "insert into `tmpsliped` (`codusu`,`numpedcl`,`numlinea`,`codalmac`,codartic,`nomartic`,codclien)  VALUES ("
+            Aux = Aux & vUsu.codigo & "," & RN!NumAlbar & "," & RN!numlinea & "," & RN!codalmac & "," & DBSet(RN!codtipom, "T")
+            Aux = Aux & "," & DBSet(Nomclien, "T") & "," & CodigoCliente & ")"
+            ejecutar Aux, False
+        Else
+            Llega = True
+        End If
+    End If
+    RN.Close
+    
+    If Comprobar Then Exit Function
+        
+    'Si ya tiene TB nos salimos
+    If Llega Then Exit Function
+        
+        
+        'Veamos si llega al minimo exigible
+        Aux = "Select sum(importel) from slialb where " & CadWh & "))"
+        RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Llega = False
+        ImporteT = 0
+        If Not RN.EOF Then
+            If Not RN.EOF Then
+                ImporteT = RN.Fields(0)
+                If RN.Fields(0) >= vParamAplic.ImporteMinimo Then Llega = True
+            End If
+        End If
+        RN.Close
+        
+        'OCTUBRE 2011
+        'Si el IMPORTE es cero... NO le facturamos PORTES
+        If ImporteT = 0 Then Llega = True
+        
+        'Si no llega
+        If Not Llega Then
+            'Vere si hay RESTO PEDIDOS
+            Aux = Replace(CadWh, "slialb", "scaalb")
+            Aux = "select numpedcl from scaalb where " & Aux & ")) group by 1"
+            RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Aux = ""
+            While Not RN.EOF
+                If DBLet(RN.Fields(0), "T") <> "" Then Aux = Aux & ", " & RN.Fields(0)
+                RN.MoveNext
+            Wend
+            RN.Close
+            
+            
+            If Aux <> "" Then
+                'VERE LOS PEDIDOS pendientes, si es k lo tien
+                Aux = Mid(Aux, 2)
+                Aux = Trim(Aux)
+                Aux = "select sum(importel) from sliped where numpedcl in (" & Aux & ")"
+                RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If Not RN.EOF Then
+                    If Not IsNull(RN.Fields(0)) Then ImporteT = ImporteT + RN.Fields(0)
+                End If
+                RN.Close
+                If ImporteT >= vParamAplic.ImporteMinimo Then Llega = True
+                
+            End If
+        End If
+        
+        If Not Llega Then
+                'NO llega al minimo.
+                'Sicota, cargar portes
+            
+                J = InStrRev(CadWh, ",")
+                If J = 0 Then
+                    'Solo hay un albaran
+                    J = InStrRev(CadWh, "(") 'YA NO PUEDE SER CERO
+                End If
+                Aux = Mid(CadWh, J + 1)
+                Aux = "Select numalbar,codalmac,max(numlinea) from slialb where codtipom='ALV' AND numalbar =" & Aux & " GROUP BY 1,2"
+                RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                'NO PUEDE SER EOF
+                Aux = "'ALV'," & RN!NumAlbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codalmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
+                
+                'codtipom,numalbar,numlinea,codalmac,codartic,nomartic,cantidad,numbultos,
+                'precioar,dtoline1,dtoline2,importel,origpre,codproveX,
+                'En cadparam tengo el precioar y en cadtitulo el nomartic
+                Aux = Aux & DBSet(RecuperaValor(DatosDeArticPortes, 1), "T") & ",1,1," & RecuperaValor(DatosDeArticPortes, 2) & ",0,0," & RecuperaValor(DatosDeArticPortes, 2) & ",'A',0)"
+                
+                Aux = "codtipom,numalbar,numlinea,codalmac,codartic,nomartic,cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre,codproveX) VALUES  (" & Aux
+                Aux = "INSERT INTO slialb (" & Aux
+                
+                'Si da error que salga
+                conn.Execute Aux
+        End If
+    
+    Set RN = Nothing
+    TratarLineaPortes = True
+End Function
+
+Private Sub CargaComboTipoCliente()
+    CargarCombo_Tabla Me.cboTipocliente, "stipclien", "tipclien", "descclien"
+    'Metemos una linea que sea "todos"
+    cboTipocliente.AddItem "Todos"
+    cboTipocliente.ItemData(cboTipocliente.NewIndex) = "-1"
+    cboTipocliente.ListIndex = cboTipocliente.NewIndex
+End Sub
+
+Private Function DevuelveClientesPedidosPorTipo() As String
+Dim Aux As String
+On Error GoTo EDevuelveClientesPedidosPorTipo
+    DevuelveClientesPedidosPorTipo = ""
+    
+    Set miRsAux = New ADODB.Recordset
+    Aux = "Select distinct(scaped.codclien) FROM scaped ,sliped ,sclien WHERE scaped.numpedcl=sliped.numpedcl"
+    Aux = Aux & " AND scaped.codclien=sclien.codclien AND tipclien = " & Me.cboTipocliente.ItemData(cboTipocliente.ListIndex)
+    If cadSelect <> "" Then
+        Aux = Aux & " AND " & cadSelect
+        Aux = Replace(Aux, "{", "(")
+        Aux = Replace(Aux, "}", ")")
+    End If
+    
+    miRsAux.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Aux = ""
+    While Not miRsAux.EOF
+        Aux = Aux & ", " & miRsAux!codClien
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    If Aux <> "" Then Aux = Mid(Aux, 2) 'primera coma
+    DevuelveClientesPedidosPorTipo = Aux
+EDevuelveClientesPedidosPorTipo:
+    If Err.Number <> 0 Then MuestraError Err.Number, "Obteniedo cliente por tipo"
+    Set miRsAux = Nothing
+End Function
+
+
+
+Private Sub CargarComboFacturacion()
+'### Combo Tipo Facturación
+'Cargaremos el combo, o bien desde una tabla o con valores fijos o como
+'se quiera, la cuestion es cargarlo
+' El estilo del combo debe de ser 2 - Dropdown List
+' Si queremos que este ordenado, o lo ordenamos por la sentencia sql
+' o marcamos la opcion sorted del combo
+'0-Factura Colectiva, 1-Factura x Albaran
+
+    cboFacturacion.Clear
+    cboFacturacion.AddItem "Factura Colectiva"
+    cboFacturacion.ItemData(cboFacturacion.NewIndex) = 0
+
+    cboFacturacion.AddItem "Factura x Albaran"
+    cboFacturacion.ItemData(cboFacturacion.NewIndex) = 1
+
+
+End Sub
+
+
+Private Sub CargaListTipoFacturas()
+Dim I As Integer
+Dim Rectifica As Byte '0. Sin cargar  1.- Cargada
+    
+    
+    'Cosillas "a mano"
+    'Cuales vienen marcadas por defecto
+    Titulo = "FAV|FRT|"
+    
+    'Herbelca
+    If vParamAplic.AlmacenB > 90 Then
+        'MOstraremos tb las de mostrador
+        Titulo = Titulo & "FMO|FTI|"
+    Else
+        If vParamAplic.Frecuencias Then
+            'MANTENI  Y REPARACION
+            Titulo = Titulo & "FAM|FAR|"
+        Else
+            'Si tiene tienda
+            If Not vParamTPV Is Nothing Then
+                Titulo = Titulo & "FTI|FAI|"
+            Else
+                Titulo = Titulo & "FAM|FAS|"
+            End If
+        End If
+    End If
+
+    
+    Titulo = "SELECT codtipom,nomtipom,if(instr('" & Titulo & "',codtipom)>0,1,0) marcar"
+    Titulo = Titulo & " , if (codtipom='FRT',1,0) fuerzaorden"
+    Titulo = Titulo & " FROM stipom WHERE codtipom LIKE 'F%' ORDER BY fuerzaorden,marcar desc,1"
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open Titulo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+        
+        ListTipoFact.AddItem miRsAux!codtipom & " - " & miRsAux!nomtipom
+        If miRsAux!marcar = 1 Then ListTipoFact.Selected(I) = True
+            
+        I = I + 1
+            
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+    Set miRsAux = Nothing
+    
+    
+    Titulo = ""
+End Sub
+
+'Private Sub txtCSB_LostFocus(Index As Integer)
+'    If Index = 0 And Me.txtCSB(0).Text = "" Then PonerFocoBtn Me.cmdAceptarFac
+'End Sub

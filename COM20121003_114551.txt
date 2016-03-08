@@ -1,0 +1,99 @@
+31/08/2012
+TAL/PAG   actual
+========================================
+FAV5203410 cobrado
+FAV5203547 cobrado
+FAV5203380 cobrado
+FAV5203543 cobrado
+FAV5203314 cobrado
+FAV5203333 cobrado
+FAV5203387 cobrado
+FAV5203394 cobrado
+FAV5203463 cobrado
+FAV5203464 cobrado
+FAV5203480 cobrado
+FAV5203341 cobrado
+FAV5203407 cobrado
+FAV5203459 cobrado
+FAV5203541 cobrado
+FAV5203531 cobrado
+FAV5203469 cobrado
+FAV5203511 cobrado
+FAV5203434 cobrado
+FAV5203435 cobrado
+FAV5203522 cobrado
+FAV5203523 cobrado
+FAV5203481 cobrado
+FAV5203429 cobrado
+FAV5203444 cobrado
+FAV5203465 cobrado
+FAV5203466 cobrado
+FAV5203467 cobrado
+FAV5203468 cobrado
+FMO7204104 pendiente
+FRT6200854 pendiente
+FRT6200836 cobrado
+
+
+Contados del periodo
+========================================
+FMO7204162   Pdte
+FMO7204161   Pdte
+FMO7204160   Pdte
+FMO7204146   Pdte
+FMO7204141   Pdte
+FMO7204098   Pdte
+FMO7204096   Pdte
+FMO7204149   Pdte
+FMO7204082   Pdte
+FMO7204069   Pdte
+FMO7204147   Pdte
+FMO7204140   Pdte
+FMO7204040   Pdte
+FMO7204090   Pdte
+FMO7204152   Pdte
+FMO7204148   Pdte
+FMO7204128   Pdte
+FMO7204101   Pdte
+FMO7204100   Pdte
+FMO7204097   Pdte
+FMO7204156   Pdte
+FMO7204155   Pdte
+FMO7204154   Pdte
+FMO7204144   Pdte
+FMO7204136   Pdte
+FMO7204139   Pdte
+FMO7204142   Pdte
+FMO7204143   Pdte
+FMO7204145   Pdte
+FMO7204138   Pdte
+FMO7204135   Pdte
+FMO7204134   Pdte
+FMO7204150   Pdte
+FMO7204137   Pdte
+FMO7204163   Pdte
+FMO7204159   Pdte
+FMO7204158   Pdte
+FMO7204151   Pdte
+FMO7204153   Pdte
+FMO7204157   Pdte
+FMO7204103   Pdte
+FRT6200865   Pdte
+FRT6200864   Pdte
+FRT6200862   Pdte
+FRT6200860   Pdte
+FRT6200847   Pdte
+
+
+Contados anterior
+========================================
+
+
+Impagados
+========================================
+
+
+Vueltos a girar
+========================================
+FAV5203117   Pdte   Esta devuelto. No lo tocamos
+FAV5203096   Pdte   Esta devuelto. No lo tocamos

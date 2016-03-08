@@ -1,0 +1,14 @@
+Utils = 88, 116, 765, 478, 
+providerMySQL = 0, 0, 0, 0, C
+providerSQLServer = 0, 0, 0, 0, C
+SQLDataHelper = 66, 87, 659, 446, 
+frmComEntPedidos = 22, 29, 615, 388, , 110, 145, 703, 504, C
+Cempresa = 88, 116, 681, 475, 
+SOloCalendar = 269, 45, 862, 404, 
+Configuracion = 0, 0, 0, 0, C
+Usuario = 44, 58, 637, 417, 
+frmMainCalendar = 88, 116, 805, 567, , 132, 174, 849, 625, C
+frmReminders = 44, 58, 721, 420, Z, 154, 203, 871, 654, C
+frmPPal = 0, 0, 0, 0, C, 0, 0, 717, 451, C
+frmSettings = 0, 0, 0, 0, C, 22, 29, 739, 480, C
+frmEditEvent = 44, 58, 788, 352, , 44, 58, 761, 509, C

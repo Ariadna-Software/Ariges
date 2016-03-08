@@ -1,0 +1,26 @@
+<?xml version="1.0"  encoding="utf-8" standalone="yes" ?>
+<ChilkatLog>
+<SendEmail>
+    <SMTP_Connect>
+        <info>Connecting to SMTP server mail.ariadnasoftware.com:25</info>
+        <smtp_host>mail.ariadnasoftware.com</smtp_host>
+        <smtp_port>25</smtp_port>
+        <smtp_user>david.gandul@ariadnasoftware.com</smtp_user>
+        <login_method>LOGIN</login_method>
+        <info>CONNECTED to ESMTP server mail.ariadnasoftware.com:25</info>
+    </SMTP_Connect>
+    <subject>1</subject>
+    <from>david.gandul@ariadnasoftware.com</from>
+    <recipients>
+        <error><![CDATA[501 <david@myariadna> Invalid mail address, must be fully qualified domain]]></error>
+        <error><![CDATA[Failed when sending RCPT TO:<david@myariadna>]]></error>
+        <bad_address>david@myariadna</bad_address>
+        <bcc>david.gandul@ariadnasoftware.com</bcc>
+    </recipients>
+    <error>Warning: failed to send to 1 recipient(s), continuing to send to 1 recipient(s)</error>
+    <email_size>106735</email_size>
+    <error>Partial send failure.</error>
+</SendEmail>
+<SaveXmlLog>
+</SaveXmlLog>
+</ChilkatLog>

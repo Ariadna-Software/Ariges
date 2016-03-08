@@ -1,0 +1,245 @@
+***** 4.2.52
+==========================================================================================================
+
+-En propuesta pedido compras y resumen Vtas. Agente que salga la hora del listado.
+-En asignacion de Albaranes añadir la columna de facturar para que se pueda modificar ahi mismo.
+-El famoso mensaje de NO ROTACION y no hay stock tambien debe ser para unidades x caja = 1 
+-Avisar en el pase de pedido a factura si no se hace de MOSTRADOR. ¡¡¡ CARTEL GRANDE ¡¡¡
+
+-Facturacion Renting por departamentos
+
+
+-Alzira
+	-Partes trabajo.
+	-Añaduir superficie seleccion campos
+	-Articulos fijos en lineas partes
+	- Cantidades decimales al cerrar parte
+	-Aviso cierre parte sin trabajadores campo asignados
+
+-Herbelca
+	-Comunicacion ALMAGRUPO
+	-rpt ofertas imprima referencia cliente
+
+
+***** 4.2.51
+==========================================================================================================
+Bug. 
+	-Numeros de serie desde compra. Cuando eran muchos, al asignarlos en las ventas daba error desbordamiento
+	-Fra proforma en Herbleca para clientes Iva Exento
+
+
+-partes trabajo.  Añadir trabajador y vehiculo al parte. Cambios en rpt. 
+-Gestion de flotas - maqinaria
+-Renting. Periodos de facturacion
+-Informe revision stocks desde inventario
+-Infmre que articulos han disparado el punto de pedido
+-Riesgo. Añadir fecha baja(vinculado con Contabilidad-Tesoreria
+
+
+- Herbelca. 
+	-Informe clientes por volumen ventas. Añadir opcion asegurados-Credito privado
+	-oferta. Direccion envio.
+
+
+
+***** 4.2.50
+==========================================================================================================
+	-PartesADV.  Cambios agrupacion. Pase a albaran con observaciones.
+
+
+	-Compras. Pedidos.  
+		Cuando insertamos un articulo con componentes, pregunta si queremos insertar los componentes
+	-Bug asignacion numeros serie ya creados en pase ped-albaran
+	-Pedidos devolucion. Asignar dire. habitual
+	-Cambio mensajes stock en PED-OFE cuando el articulo NO es de rotacion y no tiene stock
+	-Propuesta de pedido.  
+		Check para salir las observaciones del articulo
+		Revision articulos que son componentes de otros. Marcarlo en el report 
+		Marcar en el report si tiene vetas por "el mismo"
+	-Listados de beneficios. Poder elegir que precio coge
+
+
+
+
+***** 4.2.49
+==========================================================================================================
+	- Listado para saber una articulo que es componente, de qu articulos es componente	
+	- pedidos prov, nomprove a 40char
+	- articulo que no es de rotacion y se vende por cajas msg si no hay stock 
+	  y el pedido/oferta no es multiplo de las cajas
+	- Trabajador de albaran solo se modifica si usuario administrador
+	- Actualizar datos operaciones aseguradas en ariconta
+	- Facturacion de servicios y renting
+
+	-HERBELCA
+		- Informe cliente por volumen ventas. Marcar si es credito privado
+		- Informe notificacion ventas a credito
+	-TEINSA
+		-Prismaticos para motivo reparacion desde el control de raparaciones
+	
+
+***** 4.2.48
+==========================================================================================================
+	- Informe stocks max-min. Tiene en cta pedidos(cli/prov)
+	- Informe pedidos proveedor.  % Para saber cuanto del consumo es de un unico cliente
+	- Articulos. Equivalencias. Equivalencias entre articulos, para en las OFE-PED, si no hay stock, que
+	  muestre(si tiene) los articulos equivalentes
+	- Coste estadistica ventas. Check para tener en cuenta los rappels
+	- Desde albaran compra poder imprimir etiquetas de estanteria
+	- Detalle de facturacion. Check para poner Resumen forma de pago. 
+	  Sacara totales por forma de pago y detalles de IVA
+	- margen vtas articulo. Check para detallar a nivel de articulo o solo familias. Totalizar 
+	- Permitir en TPV que los tiquets nominativos(socios)acepten forma de pago tarjeta
+	- Calculo de riesgo. Clientes NO de varios y con limite de credito
+	- QUATRETONDA
+		Personalizar lotes en albaran, factura
+
+	- HERBELCA
+		-Texto auxiliar documentos
+
+	- TEINSA
+		-Aviso en entrada de reparaciones si el articulo esta de baja
+		-Listado mantenimientos: Totalizar
+		-Listado   "        equipos: Indicar departamento
+	
+	
+	- BUG	
+		-Pase pedido devolucion a albaran y se ha impreso, no lo marcaba
+		-Al entrar en articulos desde F2 en lineas no permitia acceder a los EAN
+
+	- ALZIRA
+		Partes de trabajo
+
+		
+
+***** 4.2.47
+==========================================================================================================
+	-Proceso ADV alzira
+
+	- Bug PedidoRMA a albaran venta. Si imprime marcar impreso
+	- Bug Pedido por zona. Si no hay stoc, servir completo, no sale nada
+	- Infomre clientes, vol vtas, exportacion (herbelca)
+	- Listado precios proveedor. Ordenar por codartic(no tenia order)
+
+
+***** 4.2.46
+==========================================================================================================
+- Herbelca.  Direcciones de envio y los departamentos llevan ZONA.
+	Cambio informe pedidos por zona
+
+	- Albaran. Marca de copia para los Ya impresos
+
+- Alzira. Nuevos Mtos de tratamientos, ADR
+
+- TEINSA.  Cuando elimina linea numero serie pone a NULL los campos de la venta
+
+
+***** 4.2.45
+==========================================================================================================
+
+- Estadisticas compras por meses (igual que ventas)
+
+- Albaran compra:
+	.-	Importel en lineas albaran compra.  Permitir modificarlo
+	.-	Al modificar una linea que no se vaya a la primera
+
+- Stock por meses.  Rehacer el proceso.
+
+- Herbelca. OFerta que salgan tambien los componentes
+
+- Listado LOM. Ordenado por fecha
+
+-BUG.  Estadisiticas compras familia-articulo
+
+
+
+
+***** 4.2.44
+==========================================================================================================
+
+-Pedido compra. 
+	-Al modificar la linea que no vuelva a la primera.
+	-Modificar descuentos masivamente
+-Albaranes
+	-Cuando inserta linea articulo, comprobar que el articulo no existe en un pedido de ese cliente (y no es de varios)
+	
+-Ofertas
+	-Impresion. Fos formatos: cliente / interna (ya no esta mebrete/papel blanco)
+		Cuando selecciona cliente sale la oferta normal y cuando selec interna sale un rpt interno configurable
+-Pedidos
+	-Cuando un articulo no hay stock, no es de rotacion y en precios prove pone cantidad minima
+	(es decir, que al proveedor hay que pedir como minimo ESA cantidad), da aviso informando de ella
+	-Si pasa el ped. devolucion a albaran venta, las observaciones del pedido van a las 
+	 observaciones(1 y 2) del albaran
+-Facturacion
+	-Factura negativa metera un UNICO vencimiento.
+	-Factura =0 NO se cobran portes
+-Articulo
+	-Utilidad para recalcular el UPC
+-Herbelca
+	-rptEtiquetas.  Si hay departamento CERO sale esa direccion
+	-impresion pedido por zona y desde mantenimiento salgan las mismas columnas en mismo orden
+
+BUG. Calculo PORTES. Cuando es peso negativo y e importe <>0 el INSERT era erroroneo		
+
+
+
+
+
+***** 4.2.43 
+==========================================================================================================
+
+-- Actualizar desde telematel
+	Hay un exe externo para no cambiar instalacion.
+	El exe, desde una xls, genera un txt formato telematel y lo importa.
+	
+	Parametrizar las columnas que se necesiten para saber referencia del articulo y precio para
+        insertar en TELEMATEL para que siga su cauce normal.
+
+
+--  Letra serie: 3 digitos
+
+
+-- Cuando en compra cambia el precio compra, si el articulo es componente de otros saca un listado de estos
+
+-- Si el movimiento se produce en fecha posterior a un inventario avisa. Tanto en compras como en ventas
+	-pedido a albaran 
+	-albaran 
+
+-- Poder tener una observacion de la linea (Text) que se imprimiria tras la ampliacion de la linea en la Oferta.
+
+-- Parametrizar solapa de ofertas "Textos de la Carta" para que salga por defecto los valores puestos.
+
+-- SAIL:
+	-Cuando elimine una actuacion comprueba que no tenga datos relacionados en of/ped/alb/partes de trabajo
+	-En partes de trabajo no puede meter mismo trabajador/dia
+
+
+
+***** 4.2.42 
+==========================================================================================================
+
+Herbelca
+========================================================================
+-Pedidos proveedor: Cuando ponga el proveedor que rellenes observaciones
+	En la ficha del proveedor hay cinco campos de observaciones que
+	pondra como observaciones de pie pedido.
+
+-Listado vtas por forma pago
+
+-stcok meses. Una columna mas donde ponga prestand - rappel
+
+-Funcion para recalcular el pmp
+
+-Que funcione con usuarios AGENTE. Solo veran lo suyo
+
+Teinsa
+========================================================================
+-Codificar cargos de datos de contacto en el mantenimiento de clientes.
+-Impresion de etqi. de clientes. Sacar listview con los cargos
+-Poder intercalar lineas en albaranes.
+
+
+BUGs
+========================================================================
+- Desboradmiento cuando departamentos era mmayor que un byte

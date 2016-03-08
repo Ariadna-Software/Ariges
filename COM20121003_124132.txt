@@ -1,0 +1,24 @@
+Administrador
+Equipo: PCDAVID
+Fecha: 03/10/2012 12:41:32
+PeriTxtComision.Text
+TAL/PAG   actual
+========================================
+FMO7204440 cobrado
+FRT6200920 cobrado
+FRT6200933 cobrado
+FRT6200909 cobrado
+FRT6200923 cobrado
+
+
+Contados del periodo
+========================================
+
+
+Contados anterior
+========================================
+FAV5203085   Pdte
+
+
+Impagados
+========================================
