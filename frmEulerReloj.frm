@@ -965,6 +965,9 @@ Dim vCli As CCliente
             Cad = DevuelveDesdeBD(conAri, "codalmac", "straba", "codtraba", CStr(Combo1.ItemData(Combo1.ListIndex)))
             If Cad = "10" Then
                 Cad = "CAR"
+                
+                'DE momento el trozo de CAR lo comentamos y siempre crea ALR
+                Cad = "ALR"
             Else
                 Cad = "ALR"
             End If

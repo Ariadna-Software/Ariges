@@ -739,7 +739,7 @@ Private Sub cmdCampos_Click()
    
    
     CadenaDesdeOtroForm = ""
-    frmADVvarios.opcion = 0
+    frmADVvarios.Opcion = 0
     frmADVvarios.vCampos = Text1(0).Text
     frmADVvarios.Show vbModal
     If CadenaDesdeOtroForm <> "" Then
@@ -838,7 +838,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim cad As String
+Dim Cad As String
 
 
 '    If cadSel = "" Then Unload Me
@@ -929,15 +929,15 @@ Dim cad As String
     
     
     'Poner el cliente de la venta
-    If Not IsNull(RSVenta!codclien) Then
-        cad = "codforpa"
-        Text1(0).Text = Format(RSVenta!codclien, "000000")
-        Text2(0).Text = DevuelveDesdeBDNew(conAri, "sclien", "nomclien", "codclien", Text1(0).Text, "N", cad) '(RAFA/ALZIRA 31082006)
+    If Not IsNull(RSVenta!codClien) Then
+        Cad = "codforpa"
+        Text1(0).Text = Format(RSVenta!codClien, "000000")
+        Text2(0).Text = DevuelveDesdeBDNew(conAri, "sclien", "nomclien", "codclien", Text1(0).Text, "N", Cad) '(RAFA/ALZIRA 31082006)
         
         
         'FORMA DE PAGO
         
-        Text1(1).Text = Format(CLng(cad), "000")
+        Text1(1).Text = Format(CLng(Cad), "000")
         PonerformaDePago
         
         
@@ -969,13 +969,13 @@ Dim cad As String
     
     
     If vParamTPV.Rapida Then
-        Me.label2(4).Caption = "0.00" 'cambio
+        Me.Label2(4).Caption = "0.00" 'cambio
         Me.Text1(3).Text = "0.00" 'Entregado
         
         
         
     Else
-        Me.label2(4).Caption = "" 'cambio
+        Me.Label2(4).Caption = "" 'cambio
         Me.Text1(3).Text = "" 'Entregado
     End If
     Me.Text1(4).Text = "" 'Cheque regalo
@@ -991,18 +991,18 @@ Dim cad As String
         Me.cmdCampos.Top = Me.cmdCampos.Top + 1000
     End If
     'Cheque
-    label1(3).Top = Me.FrameEfectivo.Top + 120
-    Text1(4).Top = label1(3).Top + 392
+    Label1(3).Top = Me.FrameEfectivo.Top + 120
+    Text1(4).Top = Label1(3).Top + 392
     
     Me.mnManipulador.visible = LLevaArticulosFitosanitarios
     Toolbar1.Buttons(10).visible = LLevaArticulosFitosanitarios
     
     If vParamAplic.Ariagro <> "" Then
-        cad = "fecventa = " & DBSet(RSVenta!fecventa, "F")
-        cad = cad & " AND numtermi = " & RSVenta!NumTermi & " AND numventa"
-        cad = DevuelveDesdeBD(conAri, "count(*)", "sliven2", cad, CStr(RSVenta!NumVenta), "N")
-        If cad <> "" Then
-            If Val(cad) > 0 Then CargaDatosCampos
+        Cad = "fecventa = " & DBSet(RSVenta!fecventa, "F")
+        Cad = Cad & " AND numtermi = " & RSVenta!NumTermi & " AND numventa"
+        Cad = DevuelveDesdeBD(conAri, "count(*)", "sliven2", Cad, CStr(RSVenta!NumVenta), "N")
+        If Cad <> "" Then
+            If Val(Cad) > 0 Then CargaDatosCampos
         End If
     End If
     
@@ -1035,14 +1035,14 @@ End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
 'para busquedas
-Dim i As Byte
+Dim I As Byte
 
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
-        i = CInt(Me.imgBuscar(0).Tag)
+        I = CInt(Me.imgBuscar(0).Tag)
         
-        Text1(i).Text = RecuperaValor(CadenaDevuelta, 1)
+        Text1(I).Text = RecuperaValor(CadenaDevuelta, 1)
 '        If i <> 5 Then Text1_LostFocus (i)
     End If
     Screen.MousePointer = vbDefault
@@ -1288,7 +1288,7 @@ Dim curCambio As Currency
         
         '# Modificado: LAURA (25/07/2008)
         If Text1(3).Text <> "" Then curEntregado = CCur(Text1(3).Text)
-        If label2(4).Caption <> "" Then curCambio = CCur(label2(4).Caption)
+        If Label2(4).Caption <> "" Then curCambio = CCur(Label2(4).Caption)
         If Impr Then ImprimirTicketDirecto vNumTicket, miFechaTicket, curEntregado, curCambio
         '#
         
@@ -1333,9 +1333,9 @@ Dim devuelve As String
                 Text1(Index).Text = Format(Text1(Index).Text, "000000")
                 If Text2(Index).Text = "" Then
                     PonerFoco Text1(Index)
-                ElseIf ClienteOK(Text1(Index), RSVenta!codclien, True) Then
+                ElseIf ClienteOK(Text1(Index), RSVenta!codClien, True) Then
                     
-                    If Val(Text1(Index)) <> Val(RSVenta!codclien) Then
+                    If Val(Text1(Index)) <> Val(RSVenta!codClien) Then
                         'Actualizo scaven
                         SQL = "UPDATE scaven SET codclien= " & Text1(Index).Text
                         SQL = SQL & ", coddirec=NULL"
@@ -1352,7 +1352,7 @@ Dim devuelve As String
                         Text1_LostFocus (1)
                     End If
                 Else
-                    Text1(Index).Text = RSVenta!codclien
+                    Text1(Index).Text = RSVenta!codClien
                     Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sclien", "nomclien", "codclien", "cliente", "N")
                     Text1(Index).Text = Format(Text1(Index).Text, "000000")
                     PonerFoco Text1(Index)
@@ -1376,7 +1376,7 @@ Dim devuelve As String
                 Else
                     Me.FrameEfectivo.Enabled = (TipoForPa = 0)
                     If TipoForPa <> 0 Then
-                        Me.label2(4).Caption = ""
+                        Me.Label2(4).Caption = ""
                         Me.Text1(3).Text = ""
                     Else
                         'Forpa correcta. SI NO tiene checque regalo lo posicionamos
@@ -1404,12 +1404,12 @@ Dim devuelve As String
                 'obtener el importe del cheque regalo si hay
                 ImpCheque = CCur(ComprobarCero(Text1(4).Text))
                 'Obtener el cambio= entregado + cheque_regalo - importe
-                label2(4).Caption = Format(CCur(Text1(Index).Text) + ImpCheque - CCur(ImporteFinal), FormatoImporte)
+                Label2(4).Caption = Format(CCur(Text1(Index).Text) + ImpCheque - CCur(ImporteFinal), FormatoImporte)
                 If Text1(1).Text = "" Then PonerFoco Text1(1) 'Si no ha puesto la forma de pago.. que la ponga
             Else
-                label2(4).Caption = ""
+                Label2(4).Caption = ""
             End If
-            frmFacTPVEnt.EnviarVisorPuerto label2(3).Caption, label2(4).Caption, label2(0).Caption, label2(1).Caption
+            frmFacTPVEnt.EnviarVisorPuerto Label2(3).Caption, Label2(4).Caption, Label2(0).Caption, Label2(1).Caption
             
         Case 4 'cheque regalo
              If PonerFormatoDecimal(Text1(Index), 1) Then
@@ -1471,7 +1471,7 @@ On Error Resume Next
 
     vCStock.tipoMov = TipoM
     vCStock.HoraMov = CStr(Rs!horventa)
-    vCStock.codartic = Rs!codartic
+    vCStock.codArtic = Rs!codArtic
     vCStock.codAlmac = codAlmac
     vCStock.cantidad = CSng(Rs!cantidad)
     '16 Mayo 08
@@ -1653,7 +1653,7 @@ Dim ErroresEnStock As String
             End If
             SQL = "UPDATE slotes SET vendida=vendida " & SQL & DBSet(Abs(Rs!cantidad), "N")
             SQL = SQL & " WHERE numlotes= " & DBSet(Rs!numLote, "T")
-            SQL = SQL & " AND codartic= " & DBSet(Rs!codartic, "T")
+            SQL = SQL & " AND codartic= " & DBSet(Rs!codArtic, "T")
             SQL = SQL & " AND fecentra= " & DBSet(Rs!fecentra, "F")
             conn.Execute SQL
             
@@ -1686,7 +1686,7 @@ Dim vClien As CCliente
 Dim DatosDelClienteVarios As String
 Dim RT As ADODB.Recordset
 Dim UpdatesNumlotes As String
-Dim i As Integer
+Dim I As Integer
     On Error GoTo EInsFac
     
     
@@ -1798,12 +1798,12 @@ Dim i As Integer
     If b Then
         'Actualizamos si lleva articulos fitosanitarios
         While UpdatesNumlotes <> ""
-            i = InStr(1, UpdatesNumlotes, "|")
-            If i = 0 Then
+            I = InStr(1, UpdatesNumlotes, "|")
+            If I = 0 Then
                 UpdatesNumlotes = ""
             Else
-                SQL = Mid(UpdatesNumlotes, 1, i - 1)
-                UpdatesNumlotes = Mid(UpdatesNumlotes, i + 1)
+                SQL = Mid(UpdatesNumlotes, 1, I - 1)
+                UpdatesNumlotes = Mid(UpdatesNumlotes, I + 1)
         
                 'Hacemos el update
                 SQL = SQL & " AND codtipom = '" & vFactu.codtipom & "' AND numfactu = " & vFactu.NumFactu
@@ -2038,8 +2038,8 @@ End Function
 '0: tiket   1: Albaran    2:Factura
 Private Function DatosOk(Destino As Byte) As Boolean
 Dim b As Boolean
-Dim i As Byte
-Dim cad As String
+Dim I As Byte
+Dim Cad As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo EDatosOK
@@ -2049,20 +2049,20 @@ Dim Rs As ADODB.Recordset
     '------------------
     
     'comprobar que los campos tienen valor
-    For i = 0 To 2
-        If Trim(Me.Text1(i).Text) = "" Then
-            If i = 0 Then
-                cad = "Cliente"
-            ElseIf i = 1 Then
-                cad = "Forma de pago"
-            ElseIf i = 2 Then
-                cad = "Operador"
+    For I = 0 To 2
+        If Trim(Me.Text1(I).Text) = "" Then
+            If I = 0 Then
+                Cad = "Cliente"
+            ElseIf I = 1 Then
+                Cad = "Forma de pago"
+            ElseIf I = 2 Then
+                Cad = "Operador"
             End If
-            MsgBox "El campo " & cad & " debe tener valor.", vbInformation
+            MsgBox "El campo " & Cad & " debe tener valor.", vbInformation
             b = False
             Exit For
         End If
-    Next i
+    Next I
     
     'comprobar que el trabajador existe
     If b Then
@@ -2077,8 +2077,8 @@ Dim Rs As ADODB.Recordset
     '--- comprobar q el cliente no esta bloqueado y q si se ha cambiado sea de la mista
     '--- tarifa q para el q se insertaron las lineas
     If b Then
-        b = ClienteOK(Text1(0), RSVenta!codclien, False)
-        If Not b Then Text1(0).Text = RSVenta!codclien
+        b = ClienteOK(Text1(0), RSVenta!codClien, False)
+        If Not b Then Text1(0).Text = RSVenta!codClien
     End If
     '---
     
@@ -2087,12 +2087,12 @@ Dim Rs As ADODB.Recordset
     '--- comprobar q si es cliente contado el tipo de forma de pago sea efectivo
     If b Then
         'obtenemos tipoforpa correcta por si acaso
-        cad = DevuelveDesdeBD(conAri, "tipforpa", "sforpa", "codforpa", Text1(1).Text, "N")
-        If cad = "" Then
+        Cad = DevuelveDesdeBD(conAri, "tipforpa", "sforpa", "codforpa", Text1(1).Text, "N")
+        If Cad = "" Then
             b = False
             MsgBox "No existe la forma de pago.", vbExclamation
         Else
-            TipoForPa = CByte(cad)
+            TipoForPa = CByte(Cad)
         
             'si se ha definido un cliente como contado en parametros del TPV
             If vParamTPV.Cliente <> "" Then
@@ -2105,7 +2105,7 @@ Dim Rs As ADODB.Recordset
                 End If
             End If
             
-            
+            aqui aqui aqui
             
             'Mayo 2014
             'Si hay recargo financiero, y es la empresa ALZIRA, entonces
@@ -2134,7 +2134,7 @@ Dim Rs As ADODB.Recordset
             Else
                 If Not vParamTPV.Rapida Then
             
-                    If (CCur(Me.Text1(3).Text) + CCur(ComprobarCero(Text1(4).Text))) < CCur(Me.label2(1).Caption) Then
+                    If (CCur(Me.Text1(3).Text) + CCur(ComprobarCero(Text1(4).Text))) < CCur(Me.Label2(1).Caption) Then
                         MsgBox "La cantidad entregada debe ser igual o superior al importe total.", vbInformation
                         b = False
                     End If
@@ -2161,12 +2161,12 @@ Dim Rs As ADODB.Recordset
     If b Then
         If Me.Text1(4).Text <> "" Then
             'comprobar q en parametros de la aplicacion el campo codforpa tiene valor
-            If vParamAplic.ForPagoChequeRegalo = CCur(Me.label2(1).Caption) Then
+            If vParamAplic.ForPagoChequeRegalo = CCur(Me.Label2(1).Caption) Then
                 MsgBox "No se ha introducido la forma de pago del cheque regalo." & vbCrLf & "Configurar parámetros aplicación.", vbInformation, "Comprobar datos"
                 b = False
             End If
             'comprobar que el importe del cheque sea >= q total factura
-            If CCur(Me.Text1(4).Text) > CCur(Me.label2(1).Caption) Then
+            If CCur(Me.Text1(4).Text) > CCur(Me.Label2(1).Caption) Then
                 MsgBox "El importe del cheque regalo no puede ser superior al TOTAL.", vbExclamation
                 b = False
             End If
@@ -2180,14 +2180,14 @@ Dim Rs As ADODB.Recordset
 
         'si hay analitica  por familia=1, si es por trabajador=0 se comprueba en form de total TPV
         'comprobar q las lineas de venta tienen centro de coste
-        cad = "SELECT codartic FROM sliven WHERE " & Replace(cadSel, "scaven", "sliven")
-        cad = cad & " and isnull(codccost)"
+        Cad = "SELECT codartic FROM sliven WHERE " & Replace(cadSel, "scaven", "sliven")
+        Cad = Cad & " and isnull(codccost)"
         
         Set Rs = New ADODB.Recordset
-        Rs.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Rs.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         If Not Rs.EOF Then
             b = False
-            MsgBox "La familia del artículo " & DBLet(Rs!codartic, "T") & " no tiene asignado centro de coste.", vbExclamation
+            MsgBox "La familia del artículo " & DBLet(Rs!codArtic, "T") & " no tiene asignado centro de coste.", vbExclamation
         End If
         Rs.Close
         Set Rs = Nothing
@@ -2196,17 +2196,17 @@ Dim Rs As ADODB.Recordset
     If b Then
         'Va para tiket.  Si tienen el aviso y el cliente es distinto de
         If vParamTPV.AvisoGeneraFactura Then
-            cad = ""
+            Cad = ""
             If Destino = 0 Then
-                If Val(Text1(0).Text) <> Val(vParamTPV.Cliente) Then cad = "Va a realizar un ticket a un cliente"
+                If Val(Text1(0).Text) <> Val(vParamTPV.Cliente) Then Cad = "Va a realizar un ticket a un cliente"
                 
             Else
                 'Fra o albaran
-                If Val(Text1(0).Text) = Val(vParamTPV.Cliente) Then cad = "Va a realizar un factura/albaran a un cliente genérico"
+                If Val(Text1(0).Text) = Val(vParamTPV.Cliente) Then Cad = "Va a realizar un factura/albaran a un cliente genérico"
             End If
-            If cad <> "" Then
-                cad = cad & vbCrLf & vbCrLf & "¿Continuar?"
-                If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then b = False
+            If Cad <> "" Then
+                Cad = Cad & vbCrLf & vbCrLf & "¿Continuar?"
+                If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then b = False
             End If
         End If
     End If
@@ -2423,7 +2423,7 @@ Dim MIPATH As String
         .MostrarTree = False
         .Informe = MIPATH & "rTPVTicket.rpt"
         .ConSubInforme = False
-        .opcion = 93
+        .Opcion = 93
         .ExportarPDF = False
         .Show vbModal
     End With
@@ -2439,7 +2439,7 @@ End Sub
 
 Private Sub ImprimirFactura()
 Dim MIPATH As String
-Dim cadParam As String, nomDocu As String
+Dim CadParam As String, nomDocu As String
 Dim numParam As Byte
 Dim ImprimeDirecto As Boolean
 
@@ -2454,7 +2454,7 @@ Dim ImprimeDirecto As Boolean
     '===================================================
     '============ PARAMETROS ===========================
     
-    If Not PonerParamRPT2(18, cadParam, numParam, nomDocu, ImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(18, CadParam, numParam, nomDocu, ImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
         
     '===================================================
     If ImprimeDirecto Then
@@ -2472,12 +2472,12 @@ Dim ImprimeDirecto As Boolean
             .FormulaSeleccion = cadImpresion
             .SoloImprimir = True ' (RAFA/ALZIRA 31082006)
             'No lleva multiminforme
-            .OtrosParametros = cadParam
+            .OtrosParametros = CadParam
             .NumeroParametros = numParam
             .MostrarTree = False
             .Informe = MIPATH & nomDocu
             .ConSubInforme = True
-            .opcion = 53
+            .Opcion = 53
             .ExportarPDF = False
             .NumCopias = 2 ' (RAFA/ALZIRA 31082006)
             .Show vbModal
@@ -2491,7 +2491,7 @@ End Sub
 
 Private Sub ImprimirAlbaran()
 Dim MIPATH As String
-Dim cadParam As String, nomDocu As String
+Dim CadParam As String, nomDocu As String
 Dim numParam As Byte
 Dim ImprimeDirecto As Boolean
 
@@ -2503,11 +2503,11 @@ Dim ImprimeDirecto As Boolean
     '===================================================
     '============ PARAMETROS ===========================
     
-    If Not PonerParamRPT2(10, cadParam, numParam, nomDocu, ImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(10, CadParam, numParam, nomDocu, ImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
     
     'Añadir el codigo de usuario como parametro para link con tabla Temporal (tmptiposiva) en el Report
     'tabla temporal para el calculo del bruto total para cada tipo de IVA
-    cadParam = cadParam & "pCodUsu=" & vUsu.codigo & "|"
+    CadParam = CadParam & "pCodUsu=" & vUsu.codigo & "|"
     numParam = numParam + 1
     
     
@@ -2516,7 +2516,7 @@ Dim ImprimeDirecto As Boolean
     'que se aplica a ese cliente
     SQL = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", Text1(0).Text, "N")
     If SQL <> "" Then
-        cadParam = cadParam & "pTipoIVA=" & SQL & "|"
+        CadParam = CadParam & "pTipoIVA=" & SQL & "|"
         numParam = numParam + 1
     End If
     
@@ -2533,12 +2533,12 @@ Dim ImprimeDirecto As Boolean
          With frmVisReport
             .FormulaSeleccion = cadImpresion
             .SoloImprimir = True ' (RAFA/ALZIRA 31082006)
-            .OtrosParametros = cadParam
+            .OtrosParametros = CadParam
             .NumeroParametros = numParam
             .MostrarTree = False
             .Informe = MIPATH & nomDocu
             .ConSubInforme = True
-            .opcion = 45
+            .Opcion = 45
             .ExportarPDF = False
             .NumCopias = 2 ' (RAFA/ALZIRA 31082006)
             .Show vbModal
@@ -2549,49 +2549,49 @@ End Sub
 
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
-Dim Tabla As String
+Dim Cad As String
+Dim tabla As String
 Dim Titulo As String
 Dim Desc As String
 Dim devuelve As String
-Dim i As Byte
+Dim I As Byte
 
     'Llamamos a al form
     '##A mano
-    cad = ""
+    Cad = ""
     
-    Select Case CadB
+    Select Case cadB
         Case "0" 'Cliente
-            Tabla = "sclien"
+            tabla = "sclien"
             Titulo = "Clientes"
             devuelve = "0|1|2|3|"
-            cad = cad & "Cod.Cli.|sclien|codclien|N|000000|13·"
-            cad = cad & "Nom. Cliente|sclien|nomclien|T||47·"
-            cad = cad & "Nom. Comer|sclien|nomcomer|T||25·"
-            cad = cad & "NIF|sclien|nifclien|T||15·"
-            CadB = ""
+            Cad = Cad & "Cod.Cli.|sclien|codclien|N|000000|13·"
+            Cad = Cad & "Nom. Cliente|sclien|nomclien|T||47·"
+            Cad = Cad & "Nom. Comer|sclien|nomcomer|T||25·"
+            Cad = Cad & "NIF|sclien|nifclien|T||15·"
+            cadB = ""
             
         Case "1" 'Forma pago
-            Tabla = "sforpa inner join stippa on sforpa.tipforpa=stippa.tipforpa "
+            tabla = "sforpa inner join stippa on sforpa.tipforpa=stippa.tipforpa "
             Titulo = "Formas de Pago"
             devuelve = "0|1|2|"
-            cad = cad & "Cod.For.|sforpa|codforpa|N|000|14·"
-            cad = cad & "Nom. Forma pago|sforpa|nomforpa|T||50·"
-            cad = cad & "Tipo|sforpa|tipforpa|N||12·"
-            cad = cad & "Desc Tip.|stippa|destippa|T||23·"
+            Cad = Cad & "Cod.For.|sforpa|codforpa|N|000|14·"
+            Cad = Cad & "Nom. Forma pago|sforpa|nomforpa|T||50·"
+            Cad = Cad & "Tipo|sforpa|tipforpa|N||12·"
+            Cad = Cad & "Desc Tip.|stippa|destippa|T||23·"
             'cad = cad & "Desc Tip.|sforpa|case tipforpa when 0 then ""Efectivo"" when 1 then ""Transferencia""  when 2 then ""Talón"" when 3 then ""Pagaré"" when 4 then ""Recibo bancario"" when 5 then ""Confirming"" end as desctipo|T||23·"
-            CadB = ""
+            cadB = ""
              
         Case "2" 'Trabajador
-            Tabla = "straba"
+            tabla = "straba"
             Titulo = "Operadores"
             devuelve = "0|1|2|"
-            cad = cad & "Cod.Op.|straba|codtraba|N|0000|25·"
-            cad = cad & "Nom. Operador.|straba|nomtraba|T||55·"
-            cad = cad & "NIF|straba|niftraba|T||15·"
-            CadB = ""
+            Cad = Cad & "Cod.Op.|straba|codtraba|N|0000|25·"
+            Cad = Cad & "Nom. Operador.|straba|nomtraba|T||55·"
+            Cad = Cad & "NIF|straba|niftraba|T||15·"
+            cadB = ""
              
         Case "5" 'direc./dpto del cliente
             If vParamAplic.HayDeparNuevo = 1 Then
@@ -2605,21 +2605,21 @@ Dim i As Byte
                 Desc = "Obra"
             End If
             Titulo = Titulo & Text1(0).Text & " - " & Text2(0).Text
-            cad = cad & "Cod. " & Desc & "|sdirec|coddirec|N|000|15·"
-            cad = cad & "Desc. " & Desc & "|sdirec|nomdirec|T||65·"
-            Tabla = "sdirec"
+            Cad = Cad & "Cod. " & Desc & "|sdirec|coddirec|N|000|15·"
+            Cad = Cad & "Desc. " & Desc & "|sdirec|nomdirec|T||65·"
+            tabla = "sdirec"
             devuelve = "0|1|"
-            CadB = "codclien=" & Text1(0).Text
+            cadB = "codclien=" & Text1(0).Text
     End Select
    
    
     
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vTabla = Tabla
-        frmB.vSQL = CadB
+        frmB.vCampos = Cad
+        frmB.vTabla = tabla
+        frmB.vSQL = cadB
         HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = devuelve
@@ -2627,7 +2627,7 @@ Dim i As Byte
         frmB.vselElem = 1
         frmB.vConexionGrid = conAri  'Conexión a BD: Ariges
         '#
-        If Tabla = "sdirec" Then frmB.label1.FontSize = 11
+        If tabla = "sdirec" Then frmB.Label1.FontSize = 11
         frmB.Show vbModal
         Set frmB = Nothing
         'Si ha puesto valores y tenemos que es formulario de busqueda entonces
@@ -2638,9 +2638,9 @@ Dim i As Byte
 '        Else   'de ha devuelto datos, es decir NO ha devuelto datos
 '            PonerFoco Text1(kCampo)
         'End If
-        i = CInt(Me.imgBuscar(0).Tag)
-        Text1_LostFocus (i)
-        PonerFoco Text1(i)
+        I = CInt(Me.imgBuscar(0).Tag)
+        Text1_LostFocus (I)
+        PonerFoco Text1(I)
 
 
     End If
@@ -2699,7 +2699,7 @@ Private Function HayArticuloFitosanitario_O_BloqFamilia(ParaTiket As Boolean) As
 '(OUT) -> true si encuentra algun articulo fitosanitario
 Dim SQL As String
 Dim Rs As ADODB.Recordset
-Dim i As Integer
+Dim I As Integer
 Dim Clivario As Boolean
     On Error GoTo ErrFito
     
@@ -2719,16 +2719,16 @@ Dim Clivario As Boolean
         HayArticuloFitosanitario_O_BloqFamilia = True
         
         '- seleccionamos algunos articulos para mostrar en el mensaje
-        i = 1
+        I = 1
         SQL = ""
-        While Not Rs.EOF And i < 3
+        While Not Rs.EOF And I < 3
             If SQL <> "" Then SQL = SQL & vbCrLf
             SQL = SQL & DBLet(Rs!NomArtic, "T") & " (" & DBLet(Rs!numSerie, "T") & ")"
             
-            i = i + 1
+            I = I + 1
             Rs.MoveNext
         Wend
-        If i >= 3 And Not Rs.EOF Then SQL = SQL & vbCrLf & "..."
+        If I >= 3 And Not Rs.EOF Then SQL = SQL & vbCrLf & "..."
         
         '- mostramos mensaje de error
         If ParaTiket Then
@@ -2892,7 +2892,7 @@ Dim Rs As ADODB.Recordset
                 Else
                     'OK. Actualizamos el CC
                     SQL = "UPDATE sliven set codccost=" & DBSet(Rs!CodCCost, "T") & " WHERE codartic="
-                    SQL = SQL & DBSet(Rs!codartic, "T") & " AND " & Replace(cadSel, "scaven", "sliven")
+                    SQL = SQL & DBSet(Rs!codArtic, "T") & " AND " & Replace(cadSel, "scaven", "sliven")
                     conn.Execute SQL
                 End If
                 Rs.MoveNext
@@ -3068,7 +3068,7 @@ End Function
 
 
 Private Sub MultiInsercionCampos()
-Dim i As Integer
+Dim I As Integer
 Dim VariedadPartida As String
 
         'Quito el indicador # de multi campo
@@ -3082,25 +3082,25 @@ Dim VariedadPartida As String
         NumRegElim = NumRegElim + 1
         SQL = ""
         While CadenaDesdeOtroForm <> ""
-            i = InStr(1, CadenaDesdeOtroForm, "·#")
+            I = InStr(1, CadenaDesdeOtroForm, "·#")
             
-            If i = 0 Then
+            If I = 0 Then
                 CadenaDesdeOtroForm = ""
             Else
-                cadImpresion = Mid(CadenaDesdeOtroForm, 1, i - 1)
-                CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, i + 2)
+                cadImpresion = Mid(CadenaDesdeOtroForm, 1, I - 1)
+                CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, I + 2)
                 
                 VariedadPartida = "," & DBSet(RecuperaValor(cadImpresion, 2), "T", "S") & "," & DBSet(RecuperaValor(cadImpresion, 3), "T", "S")
                 cadImpresion = RecuperaValor(cadImpresion, 1) 'cdocampo
                 
-                For i = 1 To Me.ListView1.ListItems.Count
+                For I = 1 To Me.ListView1.ListItems.Count
                     'Si no lo ha insertado YA
-                    If Val(Me.ListView1.ListItems(i).Text) = Val(cadImpresion) Then
+                    If Val(Me.ListView1.ListItems(I).Text) = Val(cadImpresion) Then
                         cadImpresion = ""
                         Exit For
                     End If
                 
-                Next i
+                Next I
                 
                 If cadImpresion <> "" Then
                     
@@ -3230,7 +3230,7 @@ ePonerformaDePago:
         Text2(1).Text = ""
     End If
     Set miRsAux = Nothing
-    Me.label2(1).Caption = Format(ImporteFinal, FormatoImporte)
+    Me.Label2(1).Caption = Format(ImporteFinal, FormatoImporte)
 End Sub
 
 

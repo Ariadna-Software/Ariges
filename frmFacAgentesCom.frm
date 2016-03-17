@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacAgentesCom 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Agentes Comerciales"
@@ -781,7 +781,7 @@ Dim Cad As String
     
     
     'Copmpruebo si esta vinculado a algun cliente
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "sclien", "codagent", CStr(Data1.Recordset!codagent))
+    Cad = DevuelveDesdeBD(conAri, "count(*)", "sclien", "codagent", CStr(Data1.Recordset!CodAgent))
     If Cad = "" Then Cad = "0"
     If Val(Cad) > 0 Then
         MsgBox "Existen clientes asociados a este agente.", vbExclamation
@@ -790,15 +790,18 @@ Dim Cad As String
     
     
     'Copmpruebo si esta vinculado a algun trabajador
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "straba", "codagent", CStr(Data1.Recordset!codagent))
+    Cad = DevuelveDesdeBD(conAri, "count(*)", "straba", "codagent", CStr(Data1.Recordset!CodAgent))
     If Cad = "" Then Cad = "0"
     If Val(Cad) > 0 Then
         MsgBox "Existe trabajador asociado a este agente.", vbExclamation
         Exit Sub
     End If
     
-    
-    Cad = DevuelveDesdeBD(conConta, "count(*)", "scobro", "agente", CStr(Data1.Recordset!codagent))
+    If vParamAplic.ContabilidadNueva Then
+        Cad = DevuelveDesdeBD(conConta, "count(*)", "cobros", "agente", CStr(Data1.Recordset!CodAgent))
+    Else
+        Cad = DevuelveDesdeBD(conConta, "count(*)", "scobro", "agente", CStr(Data1.Recordset!CodAgent))
+    End If
     If Cad <> "" Then
         If Val(Cad) = 0 Then Cad = ""
     End If
@@ -826,11 +829,11 @@ Dim Cad As String
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        Cad = "Delete from sagent where codagent=" & Data1.Recordset!codagent
+        Cad = "Delete from sagent where codagent=" & Data1.Recordset!CodAgent
         conn.Execute Cad
         
         'En tesoreria
-        Cad = "DELETE FROM agentes WHERE codigo = " & Data1.Recordset!codagent
+        Cad = "DELETE FROM agentes WHERE codigo = " & Data1.Recordset!CodAgent
         ConnConta.Execute Cad
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
@@ -1192,14 +1195,14 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
 
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     PonerIndicador lblIndicador, Modo
     
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
@@ -1207,11 +1210,11 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -1219,14 +1222,14 @@ Dim NumReg As Byte
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
     BloquearText1 Me, Modo
-    B = Modo = 1 Or Modo >= 3 'busqueda o inser/mod
-    BloquearCmb Combo1, Not B
+    b = Modo = 1 Or Modo >= 3 'busqueda o inser/mod
+    BloquearCmb Combo1, Not b
     
     '---------------------------------------------
     'Modo insertar o modificar
-    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = B Or Modo = 1
-    cmdCancelar.visible = B Or Modo = 1
+    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = b Or Modo = 1
+    cmdCancelar.visible = b Or Modo = 1
     
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
@@ -1255,48 +1258,48 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
     
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     
-    If B Then
-        If DatosADevolverBusqueda <> "" Then B = False
+    If b Then
+        If DatosADevolverBusqueda <> "" Then b = False
     End If
     
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
-     If B Then
-        If DatosADevolverBusqueda <> "" Then B = False
+    b = (Modo = 2)
+     If b Then
+        If DatosADevolverBusqueda <> "" Then b = False
     End If
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    mnEliminar.Enabled = b
     
     '----------------------------------------
-    B = (Modo >= 3) 'Insertar/Modificar
+    b = (Modo >= 3) 'Insertar/Modificar
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 'Dim cad As String
 
     DatosOk = False
-    B = CompForm(Me, 1) 'Comprobar datos OK
-    If Not B Then Exit Function
+    b = CompForm(Me, 1) 'Comprobar datos OK
+    If Not b Then Exit Function
         
-    DatosOk = B
+    DatosOk = b
 End Function
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -1367,14 +1370,35 @@ Dim Nuevo As Boolean
 
     C = DevuelveDesdeBD(conConta, "Nombre", "agentes", "Codigo", Text1(0).Text)
     Nuevo = C = ""
-    If Nuevo Then
-        C = "insert into `agentes` (`Codigo`,`Nombre`) values ( "
-        C = C & Text1(0).Text & "," & DBSet(Text1(1).Text, "T") & ")"
-        
+    If vParamAplic.ContabilidadNueva Then
+        C = "agentes(Codigo,Nombre,domagent,codpobla,pobagent,proagent,nifagent,telagent,comision,comisioc,comisios,coddelega,comsio1n,comisio1s,comsiopvpmin) VALUES ("
+        C = C & Text1(0).Text & "," & DBSet(Text1(1).Text, "T") & "," & DBSet(Text1(2).Text, "T", "S") & ","
+        'codpobla,pobagent,proagent
+        C = C & DBSet(Text1(3).Text, "N") & "," & DBSet(Text1(4).Text, "T", "N") & "," & DBSet(Text1(5).Text, "T", "N") & ","
+        'nifagent,telagent,comision
+        C = C & DBSet(Text1(6).Text, "T", "S") & "," & DBSet(Text1(7).Text, "T", "S") & "," & DBSet(Text1(8).Text, "N", "S") & ","
+        'comisioc,comisios,coddelega
+        C = C & DBSet(Text1(9).Text, "T", "S") & "," & DBSet(Text1(10).Text, "T", "S") & ","
+        If Combo1.ListIndex < 0 Then
+            C = C & "null"
+        Else
+            C = C & Combo1.ItemData(Combo1.ListIndex)
+        End If
+        'comsio1n,comisio1s,comsiopvpmin
+        C = C & "," & DBSet(Text1(11).Text, "T", "S") & "," & DBSet(Text1(12).Text, "T", "S") & "," & DBSet(Text1(13).Text, "T", "S") & ")"
+        C = "REPLACE INTO " & C
     Else
-        C = "UPDATE agentes set nombre=" & DBSet(Text1(1).Text, "T")
-        C = C & " WHERE codigo = " & Text1(0).Text
+        '// Antigua contabilidad CONTA
+        If Nuevo Then
+            C = "insert into `agentes` (`Codigo`,`Nombre`) values ( "
+            C = C & Text1(0).Text & "," & DBSet(Text1(1).Text, "T") & ")"
+            
+        Else
+            C = "UPDATE agentes set nombre=" & DBSet(Text1(1).Text, "T")
+            C = C & " WHERE codigo = " & Text1(0).Text
+        End If
     End If
+    
     On Error Resume Next
     ConnConta.Execute C
     If Err.Number <> 0 Then

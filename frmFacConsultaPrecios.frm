@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{05BFD3F1-6319-4F30-B752-C7A22889BCC4}#1.0#0"; "AcroPDF.dll"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacConsultaPrecios2 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   8250
@@ -36,8 +36,8 @@ Begin VB.Form frmFacConsultaPrecios2
          TabIndex        =   50
          Top             =   240
          Width           =   4455
-         _cx             =   7858
-         _cy             =   11668
+         _cx             =   5080
+         _cy             =   5080
       End
    End
    Begin VB.Frame FrameMostrarDatos 
@@ -1136,7 +1136,7 @@ End Sub
 
 
 Private Sub CargaStock()
-Dim i As Currency
+Dim I As Currency
 Dim J As Integer
 
     Valor = 0
@@ -1149,11 +1149,11 @@ Dim J As Integer
         Set IT = ListStock.ListItems.Add()
         IT.Text = miRsAux!codAlmac
         IT.SubItems(1) = miRsAux!nomalmac
-        i = DBLet(miRsAux!CanStock, "N")
-        IT.SubItems(2) = Format(i, FormatoCantidad)
+        I = DBLet(miRsAux!CanStock, "N")
+        IT.SubItems(2) = Format(I, FormatoCantidad)
         IT.SubItems(3) = " ": IT.SubItems(4) = " "
         IT.SubItems(5) = IT.SubItems(2)
-        Valor = Valor + i
+        Valor = Valor + I
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1173,12 +1173,12 @@ Dim J As Integer
               For J = 1 To ListStock.ListItems.Count
                     If ListStock.ListItems(J).Text = CStr(miRsAux.Fields(0)) Then
                         'ES este
-                        i = DBLet(miRsAux.Fields(1), "N")
-                        If i <> 0 Then ListStock.ListItems(J).SubItems(3) = Format(i, FormatoCantidad)
-                        Valor = Valor - i
+                        I = DBLet(miRsAux.Fields(1), "N")
+                        If I <> 0 Then ListStock.ListItems(J).SubItems(3) = Format(I, FormatoCantidad)
+                        Valor = Valor - I
                         
-                        i = ImporteFormateado(ListStock.ListItems(J).SubItems(2)) - i
-                        ListStock.ListItems(J).SubItems(5) = Format(i, FormatoCantidad)
+                        I = ImporteFormateado(ListStock.ListItems(J).SubItems(2)) - I
+                        ListStock.ListItems(J).SubItems(5) = Format(I, FormatoCantidad)
                         Exit For
                     End If
             Next
@@ -1200,14 +1200,14 @@ Dim J As Integer
               For J = 1 To ListStock.ListItems.Count
                     If ListStock.ListItems(J).Text = CStr(miRsAux.Fields(0)) Then
                         'ES este
-                        i = DBLet(miRsAux.Fields(1), "N")
-                        If i <> 0 Then ListStock.ListItems(J).SubItems(4) = Format(i, FormatoCantidad)
-                        Valor = Valor + i
+                        I = DBLet(miRsAux.Fields(1), "N")
+                        If I <> 0 Then ListStock.ListItems(J).SubItems(4) = Format(I, FormatoCantidad)
+                        Valor = Valor + I
                         
-                        i = ImporteFormateado(ListStock.ListItems(J).SubItems(2)) + i
+                        I = ImporteFormateado(ListStock.ListItems(J).SubItems(2)) + I
                                 'los pedidos clientes (reservas)
-                        i = i - ImporteFormateado(Trim(ListStock.ListItems(J).SubItems(3)))
-                        ListStock.ListItems(J).SubItems(5) = Format(i, FormatoCantidad)
+                        I = I - ImporteFormateado(Trim(ListStock.ListItems(J).SubItems(3)))
+                        ListStock.ListItems(J).SubItems(5) = Format(I, FormatoCantidad)
           
                         Exit For
                     End If
@@ -1282,7 +1282,7 @@ End Sub
 '1.- Articulop
 '2.los dos
 
-Private Sub CargarDatos(opcion As Byte)
+Private Sub CargarDatos(Opcion As Byte)
 Dim Familia As Integer
 Dim marca As Integer
 
@@ -1290,7 +1290,7 @@ Dim marca As Integer
     
     Cad = "OK"
 
-    If opcion <> 1 Then
+    If Opcion <> 1 Then
         lblIndicador.Caption = "Datos cliente"
         lblIndicador.Refresh
         
@@ -1300,7 +1300,7 @@ Dim marca As Integer
         
         'Ponemos los campos
         '--------------------------------------------------------
-        Me.txtCodigo(0).Text = miRsAux!codclien
+        Me.txtCodigo(0).Text = miRsAux!codClien
         Me.txtResultado(1).Text = miRsAux!Nomclien
         Me.txtResultado(2).Text = miRsAux!codforpa
         Me.txtResultado(3).Text = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", miRsAux!codforpa, "N")
@@ -1330,7 +1330,7 @@ Dim marca As Integer
         DoEvents
     End If
     'Datos articulo
-    If opcion <> 0 Then
+    If Opcion <> 0 Then
         lblIndicador.Caption = "Articulo"
         lblIndicador.Refresh
         
@@ -1340,7 +1340,7 @@ Dim marca As Integer
         Me.txtResultado(9).Text = miRsAux!NomArtic
         Me.txtResultado(10).Text = Format(DBLet(miRsAux!precioUC, "N"), FormatoPrecio)
         Me.txtResultado(11).Text = Format(DBLet(miRsAux!PrecioMP, "N"), FormatoPrecio)
-        Me.txtResultado(12).Text = Format(DBLet(miRsAux!preciove, "N"), FormatoPrecio)
+        Me.txtResultado(12).Text = Format(DBLet(miRsAux!PrecioVe, "N"), FormatoPrecio)
         chkCtrolStock.Value = miRsAux!CtrStock  'guardare si lleva control de stock
         Me.txtResultado(9).Tag = miRsAux!unicajas
         Select Case miRsAux!codstatu
@@ -1392,7 +1392,7 @@ Dim marca As Integer
         DoEvents
     
     End If
-    If opcion = 2 Then
+    If Opcion = 2 Then
         'Datos albaranes......
         CargarDatosFacturacion
     
@@ -1435,8 +1435,13 @@ Private Sub PonerCobrosPendientes(ByVal Codmacta As String)
     Cad = " WHERE scobro.codmacta = '" & Codmacta & "'"
     Cad = Cad & " AND fecvenci <= ' " & Format(Now, FormatoFecha) & "' "
     Cad = Cad & " AND (sforpa.tipforpa between 0 and 3)"
-    Cad = "SELECT sum(impvenci - if(isnull(impcobro),0,impcobro)) FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa " & Cad
     
+    If vParamAplic.ContabilidadNueva Then
+        Cad = " cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa " & Cad
+    Else
+        Cad = " scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa " & Cad
+    End If
+    Cad = "SELECT sum(impvenci + coalesce(gastos,0) - coalesce(impcobro,0)) FROM " & Cad
     'Lee de la Base de Datos de CONTABILIDAD
     miRsAux.Open Cad, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     
@@ -1501,7 +1506,7 @@ Dim Ico As Integer
         
         'Nuevo. El documento
         IT.SubItems(2) = Cad
-        IT.SubItems(3) = Format(miRsAux!Cantidad, FormatoCantidad)
+        IT.SubItems(3) = Format(miRsAux!cantidad, FormatoCantidad)
         IT.SubItems(4) = Format(miRsAux!precioar, FormatoPrecio)
         IT.SubItems(5) = Format(miRsAux!dtoline1, FormatoDescuento)
         IT.SubItems(6) = Format(miRsAux!dtoline2, FormatoDescuento)
@@ -1522,15 +1527,15 @@ End Sub
 Private Sub CalcularPrecioFinal()
 Dim CPrecioFact As CPreciosFact
 Dim Precio As Currency
-Dim Cantidad As Currency
+Dim cantidad As Currency
 Dim PorCaja As Boolean
 Dim NumCajas As Integer
                 Set CPrecioFact = New CPreciosFact
                 'Si se puede vender por cajas(devuelve>1) poner numero de cajas en una linea con el
                 'precio de caja, y otra linea con el resto unidades un precio unidad
                 'Cantidad = txtAux(Index).Text
-                Cantidad = 1
-                NumCajas = CPrecioFact.ObtenerNumCajas(CStr(Cantidad), CStr(txtResultado(9).Tag))
+                cantidad = 1
+                NumCajas = CPrecioFact.ObtenerNumCajas(CStr(cantidad), CStr(txtResultado(9).Tag))
                 'RestoUnid = CInt(ComprobarCero(Cantidad)) - NumCajas * CInt(devuelve)
                 'Obtenemos la Tarifa del Cliente
                 CPrecioFact.CodigoArtic = Me.txtCodigo(1).Text
@@ -1558,7 +1563,7 @@ Dim NumCajas As Integer
                     PonerFormatoDecimal txtResultado(15), 4
                     txtResultado(16).Text = CPrecioFact.Descuento2
                     PonerFormatoDecimal txtResultado(16), 4
-                    txtResultado(17).Text = CalcularImporte(CStr(Cantidad), txtResultado(14).Text, txtResultado(15).Text, txtResultado(16).Text, vParamAplic.TipoDtos)
+                    txtResultado(17).Text = CalcularImporte(CStr(cantidad), txtResultado(14).Text, txtResultado(15).Text, txtResultado(16).Text, vParamAplic.TipoDtos)
                     PonerFormatoDecimal txtResultado(17), 1
                 Set CPrecioFact = Nothing
 End Sub
@@ -1567,24 +1572,24 @@ End Sub
 
 
 '0  Artic   1 Cliente      2 los dos
-Private Sub LimpiarlosCampos(opcion As Byte)
-Dim i As Integer
+Private Sub LimpiarlosCampos(Opcion As Byte)
+Dim I As Integer
  
-    If opcion <> 1 Then
+    If Opcion <> 1 Then
         'ARTICULOS
-        For i = 1 To 7
-            txtResultado(i).Text = ""
-        Next i
+        For I = 1 To 7
+            txtResultado(I).Text = ""
+        Next I
         chkCtrolStock.Value = 0  'guardare si lleva control de stock
         
         
         
     End If
-    If opcion <> 0 Then
+    If Opcion <> 0 Then
         'CLIENTE
-         For i = 9 To 13
-            txtResultado(i).Text = ""
-        Next i
+         For I = 9 To 13
+            txtResultado(I).Text = ""
+        Next I
         txtResultado(0).Text = ""
         Me.listTarifa.ListItems.Clear
         Me.ListStock.ListItems.Clear
@@ -1593,9 +1598,9 @@ Dim i As Integer
     
     
     listDatos.ListItems.Clear
-    For i = 14 To 17
-            txtResultado(i).Text = ""
-    Next i
+    For I = 14 To 17
+            txtResultado(I).Text = ""
+    Next I
     Label2(4).Caption = ""
     lblSituacion.Caption = ""
 End Sub
