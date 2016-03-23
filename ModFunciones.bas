@@ -3014,7 +3014,8 @@ Dim ImporteCredito As Currency
     Importe = 0
         
     'VEMOS EN TESORERIA
-    SQL = "Select sum(impvenci)+sum(coalesce(gastos,0))-sum(coalesce(impcobro,0)) from scobro "
+    SQL = "Select sum(impvenci)+sum(coalesce(gastos,0))-sum(coalesce(impcobro,0)) from "
+    SQL = SQL & IIf(vParamAplic.ContabilidadNueva, "cobros", "scobro")
     SQL = SQL & " WHERE codmacta = '" & Cta & "' AND codforpa IN " & ForpasRecFinan
     R.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not R.EOF Then Importe = Importe + DBLet(R.Fields(0), "N")

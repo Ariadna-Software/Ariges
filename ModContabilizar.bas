@@ -324,15 +324,18 @@ Dim B As Boolean
 
     ComprobarNumFacturas_new = False
     
-'    SQLconta = "SELECT numserie,codfaccl,anofaccl FROM cabfact "
-    SQLconta = "SELECT count(*) FROM cabfact WHERE "
-'    SQLconta = SQLconta & " WHERE (" & cadWConta & ") "
-
     
-'    Set RSconta = New ADODB.Recordset
-'    RSconta.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        
+    
+    
+        'aqui aqui aqui aqui
+    
+        If vParamAplic.ContabilidadNueva Then
+            SQLconta = "SELECT count(*) FROM factcli WHERE "
+        Else
+            SQLconta = "SELECT count(*) FROM cabfact WHERE "
+        End If
 
-'    If Not RSconta.EOF Then
         'Seleccionamos las distintas facturas que vamos a facturar
         SQL = "SELECT DISTINCT " & cadTabla & ".codtipom,letraser,scafac.numfactu,scafac.fecfactu "
         SQL = SQL & " FROM (" & cadTabla & " INNER JOIN stipom ON " & cadTabla & ".codtipom=stipom.codtipom) "
@@ -343,7 +346,11 @@ Dim B As Boolean
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         B = True
         While Not RS.EOF And B
-            SQL = "(numserie= " & DBSet(RS!LetraSer, "T") & " AND codfaccl=" & DBSet(RS!NumFactu, "N") & " AND anofaccl=" & Year(RS!FecFactu) & ")"
+            If vParamAplic.ContabilidadNueva Then
+                SQL = "(numserie= " & DBSet(RS!LetraSer, "T") & " AND numfactu=" & DBSet(RS!NumFactu, "N") & " AND anofactu=" & Year(RS!FecFactu) & ")"
+            Else
+                SQL = "(numserie= " & DBSet(RS!LetraSer, "T") & " AND codfaccl=" & DBSet(RS!NumFactu, "N") & " AND anofaccl=" & Year(RS!FecFactu) & ")"
+            End If
 '            If SituarRSetMULTI(RSconta, SQL) Then
             SQL = SQLconta & SQL
             If RegistrosAListar(SQL, conConta) Then
@@ -667,9 +674,9 @@ Dim SQLcuentas As String
             B = False 'no encontrado
             If Opcion = 1 Then
                 If cadTabla = "scafac" Then
-                    SQL = RS!Codmacta & " del Cliente " & Format(RS!codclien, "000000")
+                    SQL = RS!Codmacta & " del Cliente " & Format(RS!codClien, "000000")
                 Else
-                    SQL = RS!Codmacta & " del Proveedor " & Format(RS!CodProve, "000000")
+                    SQL = RS!Codmacta & " del Proveedor " & Format(RS!Codprove, "000000")
                 End If
             ElseIf Opcion = 2 Then
                 SQL = RS!Codmacta & " de la familia " & Format(RS!Codfamia, "0000")
@@ -978,8 +985,11 @@ Dim Errores As String
                     SQL = ""
                 Else
                     C = Mid(SQL, 1, i - 1)
-                    
-                    C = DevuelveDesdeBD(conConta, "codccost", "cabccost", "codccost", C, "T")
+                    If vParamAplic.ContabilidadNueva Then
+                        C = DevuelveDesdeBD(conConta, "codccost", "ccoste", "codccost", C, "T")
+                    Else
+                        C = DevuelveDesdeBD(conConta, "codccost", "cabccost", "codccost", C, "T")
+                    End If
                     If C = "" Then
                         'ERROR EN CC. NO EXISTE
                         Errores = Errores & " - " & Mid(SQL, 1, i - 1) & "       no existe  " & vbCrLf
@@ -1083,8 +1093,11 @@ Dim ListaFTG As Collection
                     SQL = ""
                 Else
                     C = Mid(SQL, 1, i - 1)
-                    
-                    C = DevuelveDesdeBD(conConta, "codccost", "cabccost", "codccost", C, "T")
+                    If vParamAplic.ContabilidadNueva Then
+                        C = DevuelveDesdeBD(conConta, "codccost", "ccoste", "codccost", C, "T")
+                    Else
+                        C = DevuelveDesdeBD(conConta, "codccost", "cabccost", "codccost", C, "T")
+                    End If
                     If C = "" Then
                         'ERROR EN CC. NO EXISTE
                         Errores = Errores & " - " & Mid(SQL, 1, i - 1) & "       no existe  " & vbCrLf
@@ -1975,7 +1988,7 @@ EContab:
         'Si es correcto entonces creo una entrada en tmp para luego listar los resultados de
         'la contabilizacion
          If Mc.Contador > 0 Then
-            SQL = "DELETE from tmpinformes where codusu = " & vUsu.Codigo & " AND codigo1= " & Mc.Contador
+            SQL = "DELETE from tmpinformes where codusu = " & vUsu.codigo & " AND codigo1= " & Mc.Contador
             conn.Execute SQL
         End If
     
@@ -2110,8 +2123,8 @@ Dim Nulo3 As String
             
             
             'Para saber el numreo de registro que le asigna a la factrua
-            SQL = "INSERT INTO tmpinformes (codusu,codigo1,nombre1,nombre2,importe1) VALUES (" & vUsu.Codigo & "," & Mc.Contador
-            SQL = SQL & ",'" & DevNombreSQL(RS!NumFactu) & " @ " & Format(RS!FecFactu, "dd/mm/yyyy") & "','" & DevNombreSQL(RS!nomprove) & "'," & RS!CodProve & ")"
+            SQL = "INSERT INTO tmpinformes (codusu,codigo1,nombre1,nombre2,importe1) VALUES (" & vUsu.codigo & "," & Mc.Contador
+            SQL = SQL & ",'" & DevNombreSQL(RS!NumFactu) & " @ " & Format(RS!FecFactu, "dd/mm/yyyy") & "','" & DevNombreSQL(RS!nomprove) & "'," & RS!Codprove & ")"
             conn.Execute SQL
         End If
     End If
@@ -2401,8 +2414,9 @@ Dim Cad As String
     End If
     
     codCCoste = Trim(txt.Text)
-    
-    Cad = DevuelveDesdeBDNew(conConta, "cabccost", "nomccost", "codccost", codCCoste, "T")
+    Cad = "cabccost"
+    If vParamAplic.ContabilidadNueva Then Cad = "ccoste"
+    Cad = DevuelveDesdeBDNew(conConta, Cad, "nomccost", "codccost", codCCoste, "T")
     If Cad = "" Then
         If Not txt.Locked Then MsgBox "No existe el Centro de coste : " & codCCoste, vbExclamation
         PonerNombreCCoste = ""
@@ -2547,15 +2561,15 @@ End Function
 '   - No inserta en cabfact(ni linfact).  Mete un apunte
 '       43000   contra las 70000 que deriven de las familias
 '
-Private Function ContabilizaFAI(Caderror As String, cadWhere As String, ByRef vContaFra As cContabilizarFacturas) As Boolean
-Dim RC As ADODB.Recordset
+Private Function ContabilizaFAI(cadError As String, cadWhere As String, ByRef vContaFra As cContabilizarFacturas) As Boolean
+Dim Rc As ADODB.Recordset
 Dim RL As ADODB.Recordset
 Dim SQL As String
 Dim Aux As String
 
     On Error GoTo eContabilizaFAI
     ContabilizaFAI = False
-    Caderror = ""
+    cadError = ""
     SQL = " SELECT stipom.letraser,numfactu,fecfactu, sclien.codmacta,sclien.cliabono,year(fecfactu) as anofaccl,"
     SQL = SQL & "scafac.dtoppago,scafac.dtognral,baseimp1,baseimp2,baseimp3,porciva1,porciva2,porciva3,imporiv1,imporiv2,imporiv3,"
     SQL = SQL & "totalfac,codigiv1,codigiv2,codigiv3,aportacion "
@@ -2566,14 +2580,14 @@ Dim Aux As String
     SQL = SQL & " FROM (" & "scafac inner join " & "stipom on scafac.codtipom=stipom.codtipom) "
     SQL = SQL & "INNER JOIN " & "sclien ON scafac.codclien=sclien.codclien "
     SQL = SQL & " WHERE " & cadWhere
-    Set RC = New ADODB.Recordset
-    RC.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    DtoPPago = RC!DtoPPago
-    DtoGnral = RC!DtoGnral
-    BaseImp = RC!baseimp1
-    TotalFac = RC!TotalFac
+    Set Rc = New ADODB.Recordset
+    Rc.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    DtoPPago = Rc!DtoPPago
+    DtoGnral = Rc!DtoGnral
+    BaseImp = Rc!baseimp1
+    TotalFac = Rc!TotalFac
     DatosAportacion = ""
-    conCtaAlt = RC!cliAbono
+    conCtaAlt = Rc!cliAbono
     
     
     
@@ -2613,14 +2627,14 @@ Dim Aux As String
     RL.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
 
-    Caderror = vContaFra.IntegraLaFacturaClienteINTERNA(RC, RL)
+    cadError = vContaFra.IntegraLaFacturaClienteINTERNA(Rc, RL)
 
     
 eContabilizaFAI:
     If Err.Number <> 0 Then
-        Caderror = Err.Description
+        cadError = Err.Description
         Err.Clear
     End If
-    If Caderror = "" Then ContabilizaFAI = True
+    If cadError = "" Then ContabilizaFAI = True
     
 End Function

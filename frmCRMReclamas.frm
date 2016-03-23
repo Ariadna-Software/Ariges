@@ -305,7 +305,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public Intercambio As String  ' codig|nomclien|codmacta|nommacta| estos ultimos si hiciera falta
+Public Intercambio As String  ' codig|nomclien|codmacta|nommacta|   NUEVO. Para la ariconta lleva el numlinea (si procede
 Private Codigo2  As Long
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
@@ -360,11 +360,23 @@ Private Sub Form_Activate()
     
     If Codigo2 > 0 Then
         Set miRsAux = New ADODB.Recordset
-        SQL = "Select * from shcocob where codigo = " & Codigo2
+        
+        
+        If vParamAplic.ContabilidadNueva Then
+            SQL = RecuperaValor(Intercambio, 3)
+            If SQL <> "" Then SQL = " AND numlinea =" & SQL
+            SQL = " WHERE reclama.codigo =" & Codigo2 & SQL & " ORDER BY fecreclama desc ,reclama.codigo,numlinea  DESC"
+            SQL = " FROM  reclama  left join reclama_facturas  on reclama.codigo=reclama_facturas.codigo" & SQL
+            SQL = " if (impvenci is null, importes,impvenci) impvenci,observaciones,fecreclama " & SQL
+            SQL = "select codmacta,nommacta,numserie,numfactu Codfaccl,fecfactu fecfaccl,numorden," & SQL
+        Else
+            SQL = "Select * from shcocob where codigo = " & Codigo2
+        End If
+        
         miRsAux.Open SQL, ConnConta, adOpenKeyset, adLockPessimistic, adCmdText
         If Not miRsAux.EOF Then
             Text1(0).Text = miRsAux!Codmacta
-            Text2(0).Text = miRsAux!nommacta
+            Text2(0).Text = miRsAux!Nommacta
             Text1(1).Text = DBLet(miRsAux!numSerie, "T")
             Text1(2).Text = DBLet(miRsAux!Codfaccl, "T")
             Text1(3).Text = DBLet(miRsAux!fecfaccl, "F")
@@ -386,6 +398,13 @@ Private Sub Form_Activate()
             Text1(I).Text = ""
         Next I
         Text1(5).Text = Format(Now, "dd/mm/yyyy")
+    Else
+        If vParamAplic.ContabilidadNueva Then
+            'DE momento, NO dejo modificar el ariconta la reclamacion
+            Command1(0).visible = False
+            Image1.visible = False
+            Text1(7).Locked = True
+        End If
     End If
     Text1(0).Locked = True
     For I = 1 To 6
@@ -394,7 +413,11 @@ Private Sub Form_Activate()
     Me.imgFecha(3).visible = Codigo2 = -1
     Me.imgFecha(5).visible = Codigo2 = -1
     If Codigo2 >= 0 Then
-        PonerFoco Text1(7)
+        If vParamAplic.ContabilidadNueva Then
+            PonerFocoBtn Command1(1)
+        Else
+            PonerFoco Text1(7)
+        End If
     Else
         PonerFoco Text1(1)
     End If

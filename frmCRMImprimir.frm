@@ -643,7 +643,7 @@ Private Sub imgCheck_Click(Index As Integer)
     Else
         If tv2.Nodes.Count = 0 Then Exit Sub
         For J = 1 To tv2.Nodes.Count
-            tv2.Nodes(J).Checked = Index = 1
+            tv2.Nodes(J).Checked = Index = 3
         Next J
     
     End If
@@ -1248,9 +1248,21 @@ Dim F As Date
                 SQL = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,"
                 SQL = SQL & "`importe`,`observa`,forpa) values ( "
                 SQL = SQL & vUsu.codigo & "," & NumRegElim & ",0,'"
-                SQL = SQL & Rs!numSerie & Format(Rs!Codfaccl, "000000")
+                
+                SQL = SQL & Rs!numSerie
+                If vParamAplic.ContabilidadNueva Then
+                    SQL = SQL & Format(Rs!NumFactu, "000000")
+                Else
+                    SQL = SQL & Format(Rs!Codfaccl, "000000")
+                End If
                 If Rs!FecVenci < Now Then SQL = SQL & " *"
-                SQL = SQL & "','" & Format(Rs!fecfaccl, FormatoFecha)
+                
+                If vParamAplic.ContabilidadNueva Then
+                    SQL = SQL & "','" & Format(Rs!FecFactu, FormatoFecha)
+                Else
+                    SQL = SQL & "','" & Format(Rs!fecfaccl, FormatoFecha)
+                End If
+                
                 SQL = SQL & "','" & Format(Rs!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
                 'Antes la observa era NULL, ahora llevare el Depto
                 If IsNull(Rs!Departamento) Then
@@ -1346,24 +1358,50 @@ Dim F As Date
     J = DevuelveIndiceNodo("adm3")
     If HayKprocesarNodo(J, F) Then
         Donde = "Hco reclamas"
-        SQL = "SELECT codigo,numserie,codfaccl,fecfaccl,fecreclama,impvenci,codmacta,observaciones from shcocob "
+        
+        If vParamAplic.ContabilidadNueva Then
+            SQL = "select reclama.codigo,numserie,numfactu codfaccl,fecfactu fecfaccl,fecreclama,impvenci,codmacta,observaciones,importes "
+            SQL = SQL & " from reclama  left join reclama_facturas  on reclama.codigo=reclama_facturas.codigo"
+        
+        Else
+            SQL = "SELECT codigo,numserie,codfaccl,fecfaccl,fecreclama,impvenci,codmacta,observaciones from shcocob "
+        
+        End If
+        
         SQL = SQL & " WHERE codmacta = '" & vCRM.Codmacta & "'"
-        SQL = SQL & " AND fecreclama >= '" & Format(F, FormatoFecha) & "' "
-        'SQL = SQL & " AND (sforpa.tipforpa between 0 and 3) ORDER BY fecvenci desc"
+        SQL = SQL & " AND fecreclama >= '" & Format(F, FormatoFecha) & "' ORDER BY fecreclama"
+        If vParamAplic.ContabilidadNueva Then SQL = SQL & ",reclama_facturas.codigo"
+        
+        
+        
         J = CInt(NumRegElim) 'pk puede que haya metidos de cobros. NO reseteo Numregelim
         
         Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        SQL = ""
         While Not Rs.EOF
             NumRegElim = NumRegElim + 1
             SQL = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,`importe`,`observa`) values ("
             SQL = SQL & vUsu.codigo & "," & NumRegElim & ",1,'"
             SQL = SQL & DBLet(Rs!numSerie, "T") & Format(DBLet(Rs!Codfaccl, "N"), "000000") & "','"
             SQL = SQL & Format(Rs!fecfaccl, FormatoFecha) & "','" & Format(Rs!fecreclama, FormatoFecha) & "',"
-            SQL = SQL & TransformaComasPuntos(Rs!ImpVenci) & ",'"
+            If vParamAplic.ContabilidadNueva Then
+                If IsNull(Rs!ImpVenci) Then
+                    Aux = DBLet(Rs!Importes)
+                Else
+                    Aux = Rs!ImpVenci
+                End If
+            Else
+                Aux = Rs!ImpVenci
+            End If
+            SQL = SQL & TransformaComasPuntos(Aux) & ",'"
             Cad = DBLetMemo(Rs!Observaciones)
             Cad = Replace(Cad, vbCrLf, " ")
             SQL = SQL & DevNombreSQL(Cad) & "')"
             conn.Execute SQL
+            
+            
+            
+            
             Rs.MoveNext
         Wend
         Rs.Close

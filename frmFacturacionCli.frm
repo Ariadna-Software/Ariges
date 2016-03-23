@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacturacionCli 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Facturación por cliente"
@@ -365,7 +365,7 @@ Dim SQL As String
 Dim Im As Currency
 
 Private Sub cmdFacturar_Click()
-Dim i As Integer
+Dim I As Integer
 
     
     
@@ -399,12 +399,12 @@ Dim i As Integer
     
     'Vere si hay alguno marcado para facturar
     SQL = ""
-    For i = 1 To TreeView1.Nodes.Count
-        If Not TreeView1.Nodes(i).Parent Is Nothing Then
-            If TreeView1.Nodes(i).Checked Then
-                If Not TreeView1.Nodes(i).Parent.Checked Then
-                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(i).Parent.Text, vbExclamation
-                    TreeView1.Nodes(i).Parent.Checked = True
+    For I = 1 To TreeView1.Nodes.Count
+        If Not TreeView1.Nodes(I).Parent Is Nothing Then
+            If TreeView1.Nodes(I).Checked Then
+                If Not TreeView1.Nodes(I).Parent.Checked Then
+                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(I).Parent.Text, vbExclamation
+                    TreeView1.Nodes(I).Parent.Checked = True
                     Exit Sub
                 End If
                 
@@ -421,7 +421,7 @@ Dim i As Integer
 
 
     CadenaDesdeOtroForm = ""
-    frmListado2.opcion = 25
+    frmListado2.Opcion = 25
     frmListado2.Show vbModal
     If CadenaDesdeOtroForm <> "" Then
         'OK Vamos a facturar
@@ -549,16 +549,16 @@ Dim Im As Currency
 End Sub
 
 Private Sub PonerCadenaImporte(ByRef N As Node, Padre As Boolean)
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
     If Padre Then
         J = 24
     Else
         J = 45
     End If
-    i = InStr(1, N.Text, ":")
-    If i > 0 Then
-        N.Text = Mid(N.Text, 1, i)
+    I = InStr(1, N.Text, ":")
+    If I > 0 Then
+        N.Text = Mid(N.Text, 1, I)
         N.Text = N.Text & Right(Space(J) & Format(N.Tag, FormatoImporte), J)
     End If
 End Sub
@@ -679,12 +679,17 @@ End Sub
 
 
 Private Sub CargarVtos()
-Dim It As ListItem
+Dim IT As ListItem
 Dim Im2 As Currency
 Dim Pend As Currency
 
     ListView1.ListItems.Clear
-    SQL = "SELECT scobro.* FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+    
+    If vParamAplic.ContabilidadNueva Then
+        SQL = "SELECT ImpVenci,gastos,impcobro,FecVenci,numSerie,numfactu codfaccl,fecfactu fecfaccl FROM cobros scobro INNER JOIN formapago ON scobro.codforpa=formapago.codforpa  "
+    Else
+        SQL = "SELECT scobro.* FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+    End If
     SQL = SQL & " WHERE scobro.codmacta = '" & txtSitua.Tag & "'"
     'SQL = SQL & " AND fecvenci <= ' " & Format(Now, FormatoFecha) & "' "
     ' SQL = SQL & " AND (sforpa.tipforpa between 0 and 3)
@@ -696,15 +701,15 @@ Dim Pend As Currency
         Im2 = miRsAux!ImpVenci + DBLet(miRsAux!gastos, "N") - DBLet(miRsAux!impcobro, "N")
         If Im2 <> 0 Then
     
-            Set It = ListView1.ListItems.Add()
-            It.Text = miRsAux!FecVenci
-            It.SmallIcon = 23
+            Set IT = ListView1.ListItems.Add()
+            IT.Text = miRsAux!FecVenci
+            IT.SmallIcon = 23
             'If miRsAux!FecVenci > Now Then
-            It.SubItems(1) = miRsAux!numSerie & Format(miRsAux!Codfaccl, "00000")
-            It.SubItems(2) = Format(miRsAux!fecfaccl, "dd/mm/yyyy")
+            IT.SubItems(1) = miRsAux!numSerie & Format(miRsAux!Codfaccl, "00000")
+            IT.SubItems(2) = Format(miRsAux!fecfaccl, "dd/mm/yyyy")
             
             
-            It.SubItems(3) = Format(Im2, FormatoImporte)
+            IT.SubItems(3) = Format(Im2, FormatoImporte)
             Im = Im + Im2
             If miRsAux!FecVenci < Now Then Pend = Pend + Im2
         End If
@@ -793,21 +798,21 @@ Dim C As String
     
 End Sub
 
-Private Function DevuelveNumeroAlbaran(linea As String) As String
+Private Function DevuelveNumeroAlbaran(Linea As String) As String
 Dim J As Integer
     
     DevuelveNumeroAlbaran = "0"
     
-    J = InStr(1, linea, " ")
+    J = InStr(1, Linea, " ")
     If J > 0 Then
-        DevuelveNumeroAlbaran = Mid(linea, 1, J - 1)
+        DevuelveNumeroAlbaran = Mid(Linea, 1, J - 1)
         DevuelveNumeroAlbaran = Mid(DevuelveNumeroAlbaran, 4) 'los tres primeros son el codtipom
     End If
 End Function
 
 
 Private Sub InsertarLineaFactura(ByRef Cole As Collection)
-Dim i As Integer
+Dim I As Integer
 Dim N As Node
 Dim TotalFra As Currency
 
@@ -826,15 +831,15 @@ Dim TotalFra As Currency
     N.Checked = True
     TotalFra = 0
     'Los albaranes que iran
-    For i = 1 To Cole.Count
+    For I = 1 To Cole.Count
         'El importe
-        SQL = RecuperaValor(Cole.item(i), 2)
+        SQL = RecuperaValor(Cole.item(I), 2)
         Im = CCur(SQL)
         TotalFra = TotalFra + Im
         
         'El importe
         SQL = Right(Space(10) & Format(Im, FormatoImporte), 10)
-        SQL = RecuperaValor(Cole.item(i), 1) & SQL
+        SQL = RecuperaValor(Cole.item(I), 1) & SQL
         Set N = TreeView1.Nodes.Add("FRA" & Format(NumRegElim, "000"), tvwChild)
         N.Text = SQL
         N.Image = 44
@@ -894,25 +899,25 @@ End Sub
 
 Private Sub HacerFacturacionCliente()
 Dim CadenaSQL As String
-Dim i As Integer
+Dim I As Integer
     
     SQL = ""
-    For i = 1 To TreeView1.Nodes.Count
-        If TreeView1.Nodes(i).Parent Is Nothing Then
+    For I = 1 To TreeView1.Nodes.Count
+        If TreeView1.Nodes(I).Parent Is Nothing Then
             'NADA
             
         Else
-            If TreeView1.Nodes(i).Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(TreeView1.Nodes(i).Text)
+            If TreeView1.Nodes(I).Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(TreeView1.Nodes(I).Text)
    
         End If
-    Next i
+    Next I
     
     SQL = Mid(SQL, 3)
     
     CadenaSQL = "scaalb.codtipom = 'ALV' AND scaalb.codclien=" & Me.txtclien.Text & " AND  scaalb.numalbar IN (" & SQL & ")"
     SQL = "SELECT scaalb.*,sclien.nomclien FROM scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien  WHERE " & CadenaSQL
     
-    i = Val(RecuperaValor(CadenaDesdeOtroForm, 3))
+    I = Val(RecuperaValor(CadenaDesdeOtroForm, 3))
     
         
         
@@ -935,7 +940,7 @@ Dim i As Integer
     
         
         
-    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, i = 1, "ALV", "", CByte(txtCopia.Text), True, False
+    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, I = 1, "ALV", "", CByte(txtCopia.Text), True, False
 End Sub
 
 

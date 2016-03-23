@@ -16,2673 +16,6 @@ Begin VB.Form frmListadoPed
    ScaleWidth      =   8535
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame FrameGenAlbaran 
-      Height          =   7215
-      Left            =   480
-      TabIndex        =   50
-      Top             =   0
-      Width           =   5835
-      Begin VB.Frame FrameGenAlbEuler 
-         Caption         =   "             Generar albaran euler"
-         Height          =   735
-         Left            =   360
-         TabIndex        =   299
-         Top             =   3480
-         Width           =   4935
-         Begin VB.ComboBox cboTipoAlbaranEuler 
-            Height          =   315
-            ItemData        =   "frmListadoPed.frx":000C
-            Left            =   720
-            List            =   "frmListadoPed.frx":001C
-            Style           =   2  'Dropdown List
-            TabIndex        =   32
-            Top             =   360
-            Width           =   2055
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Tipo Albaran"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   25
-            Left            =   480
-            TabIndex        =   300
-            Top             =   120
-            Width           =   900
-         End
-      End
-      Begin VB.Frame FramePartes 
-         Height          =   1455
-         Left            =   240
-         TabIndex        =   274
-         Top             =   5160
-         Visible         =   0   'False
-         Width           =   5295
-         Begin VB.ComboBox cboFacturacion 
-            Height          =   315
-            Left            =   1680
-            Style           =   2  'Dropdown List
-            TabIndex        =   41
-            Top             =   960
-            Width           =   2055
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   60
-            Left            =   2160
-            TabIndex        =   39
-            Top             =   480
-            Width           =   975
-         End
-         Begin VB.CheckBox chkFrInterna 
-            Caption         =   "Interna"
-            Height          =   255
-            Left            =   3840
-            TabIndex        =   40
-            Top             =   360
-            Width           =   975
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   59
-            Left            =   360
-            TabIndex        =   38
-            Top             =   480
-            Width           =   1095
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Tipo facturación"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   65
-            Left            =   360
-            TabIndex        =   277
-            Top             =   1080
-            Width           =   1155
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Cantidad otros"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   64
-            Left            =   2160
-            TabIndex        =   276
-            Top             =   180
-            Width           =   1065
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Cantidad real dosis"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   63
-            Left            =   120
-            TabIndex        =   275
-            Top             =   180
-            Width           =   1365
-         End
-      End
-      Begin VB.CheckBox chkFraMostrador 
-         Caption         =   "A factura mostrador"
-         Height          =   255
-         Left            =   3720
-         TabIndex        =   34
-         Top             =   4440
-         Width           =   1815
-      End
-      Begin VB.Frame FramRectARM 
-         Caption         =   "Fra a la que rectifica"
-         Height          =   735
-         Left            =   720
-         TabIndex        =   248
-         Top             =   5160
-         Width           =   4815
-         Begin VB.TextBox txtFraRectifica 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   405
-            Left            =   240
-            TabIndex        =   250
-            Top             =   240
-            Width           =   3615
-         End
-         Begin VB.CommandButton cmdSelFraRect 
-            Caption         =   "+"
-            Height          =   375
-            Left            =   4080
-            TabIndex        =   249
-            Top             =   240
-            Width           =   375
-         End
-      End
-      Begin VB.Frame FrameZona 
-         BorderStyle     =   0  'None
-         Caption         =   "Frame16"
-         Height          =   615
-         Left            =   720
-         TabIndex        =   244
-         Top             =   3720
-         Width           =   4935
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   22
-            Left            =   1080
-            Locked          =   -1  'True
-            TabIndex        =   245
-            Text            =   "Text5"
-            Top             =   240
-            Width           =   3735
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   22
-            Left            =   420
-            MaxLength       =   4
-            TabIndex        =   31
-            Top             =   240
-            Width           =   615
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   35
-            Left            =   120
-            Picture         =   "frmListadoPed.frx":0057
-            Top             =   240
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Zona"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   53
-            Left            =   120
-            TabIndex        =   246
-            Top             =   0
-            Width           =   360
-         End
-      End
-      Begin VB.CheckBox chkImpHojaExped 
-         Caption         =   "Imprimir Hoja Expedición"
-         Height          =   255
-         Left            =   1080
-         TabIndex        =   37
-         Top             =   5280
-         Width           =   2295
-      End
-      Begin VB.CheckBox chkImpEtiq 
-         Caption         =   "Imprimir Etiquetas"
-         Height          =   255
-         Left            =   3720
-         TabIndex        =   36
-         Top             =   4800
-         Width           =   1575
-      End
-      Begin VB.Frame FramepedidoFactura 
-         BorderStyle     =   0  'None
-         Caption         =   "Frame15"
-         Height          =   615
-         Left            =   720
-         TabIndex        =   224
-         Top             =   6000
-         Width           =   4815
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   5
-            Left            =   1155
-            Locked          =   -1  'True
-            TabIndex        =   225
-            Text            =   "Text5"
-            Top             =   240
-            Width           =   3495
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   5
-            Left            =   315
-            MaxLength       =   6
-            TabIndex        =   42
-            Top             =   240
-            Width           =   735
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   0
-            Left            =   0
-            Picture         =   "frmListadoPed.frx":0159
-            Top             =   240
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Cta prevista cobro"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   23
-            Left            =   0
-            TabIndex        =   226
-            Top             =   0
-            Width           =   1335
-         End
-      End
-      Begin VB.TextBox txtCodigo 
-         Height          =   285
-         Index           =   25
-         Left            =   2400
-         MaxLength       =   10
-         TabIndex        =   33
-         Top             =   4440
-         Width           =   1215
-      End
-      Begin VB.CheckBox chkImpAlbaran 
-         Caption         =   "Imprimir Albaran"
-         Height          =   255
-         Left            =   1080
-         TabIndex        =   35
-         Top             =   4800
-         Value           =   1  'Checked
-         Width           =   1575
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   19
-         Left            =   1140
-         MaxLength       =   4
-         TabIndex        =   30
-         Top             =   3240
-         Width           =   615
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   19
-         Left            =   1800
-         Locked          =   -1  'True
-         TabIndex        =   57
-         Text            =   "Text5"
-         Top             =   3240
-         Width           =   3735
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   18
-         Left            =   1140
-         MaxLength       =   4
-         TabIndex        =   29
-         Top             =   2520
-         Width           =   615
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   18
-         Left            =   1800
-         Locked          =   -1  'True
-         TabIndex        =   55
-         Text            =   "Text5"
-         Top             =   2520
-         Width           =   3735
-      End
-      Begin VB.CommandButton cmdAceptarGenAlb 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3360
-         TabIndex        =   43
-         Top             =   6720
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   3
-         Left            =   4560
-         TabIndex        =   44
-         Top             =   6720
-         Width           =   975
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   17
-         Left            =   1140
-         MaxLength       =   4
-         TabIndex        =   28
-         Top             =   1800
-         Width           =   615
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   17
-         Left            =   1800
-         Locked          =   -1  'True
-         TabIndex        =   51
-         Text            =   "Text5"
-         Top             =   1800
-         Width           =   3735
-      End
-      Begin VB.Label Label5 
-         Caption         =   "Zona:"
-         Height          =   255
-         Left            =   240
-         TabIndex        =   247
-         Top             =   6720
-         Width           =   2535
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha Albaran"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   32
-         Left            =   840
-         TabIndex        =   59
-         Top             =   4440
-         Width           =   1155
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   0
-         Left            =   2040
-         Picture         =   "frmListadoPed.frx":025B
-         Top             =   4440
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Forma de Envío"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   11
-         Left            =   840
-         TabIndex        =   58
-         Top             =   3000
-         Width           =   1110
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   10
-         Left            =   840
-         Picture         =   "frmListadoPed.frx":02E6
-         Top             =   3240
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Material Preparado por"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   10
-         Left            =   840
-         TabIndex        =   56
-         Top             =   2280
-         Width           =   1650
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   9
-         Left            =   840
-         Picture         =   "frmListadoPed.frx":03E8
-         Top             =   2520
-         Width           =   240
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Pasar Pedido a "
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   600
-         TabIndex        =   54
-         Top             =   480
-         Width           =   4695
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Introduzca los siguiente campos: "
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   14
-         Left            =   600
-         TabIndex        =   53
-         Top             =   1200
-         Width           =   2835
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Trabajador de Albaran"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   15
-         Left            =   840
-         TabIndex        =   52
-         Top             =   1560
-         Width           =   1620
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   8
-         Left            =   840
-         Picture         =   "frmListadoPed.frx":04EA
-         Top             =   1800
-         Width           =   240
-      End
-   End
-   Begin VB.Frame FramePreFacturar 
-      Height          =   6375
-      Left            =   120
-      TabIndex        =   60
-      Top             =   120
-      Width           =   7035
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   61
-         Left            =   5400
-         MaxLength       =   6
-         TabIndex        =   74
-         Top             =   4860
-         Width           =   735
-      End
-      Begin VB.Frame Frame16 
-         Height          =   975
-         Left            =   360
-         TabIndex        =   289
-         Top             =   3480
-         Visible         =   0   'False
-         Width           =   6375
-         Begin VB.CheckBox chkTpPago2 
-            Caption         =   "Efectivo"
-            Height          =   255
-            Index           =   10
-            Left            =   1320
-            TabIndex        =   296
-            Top             =   240
-            Value           =   1  'Checked
-            Width           =   1095
-         End
-         Begin VB.CheckBox chkTpPago2 
-            Caption         =   "Transferencia"
-            Height          =   255
-            Index           =   11
-            Left            =   2520
-            TabIndex        =   295
-            Top             =   240
-            Value           =   1  'Checked
-            Width           =   1575
-         End
-         Begin VB.CheckBox chkTpPago2 
-            Caption         =   "Talón"
-            Height          =   255
-            Index           =   12
-            Left            =   4200
-            TabIndex        =   294
-            Top             =   240
-            Value           =   1  'Checked
-            Width           =   975
-         End
-         Begin VB.CheckBox chkTpPago2 
-            Caption         =   "Pagaré"
-            Height          =   255
-            Index           =   13
-            Left            =   5280
-            TabIndex        =   293
-            Top             =   240
-            Value           =   1  'Checked
-            Width           =   975
-         End
-         Begin VB.CheckBox chkTpPago2 
-            Caption         =   "Recibo bancario"
-            Height          =   255
-            Index           =   14
-            Left            =   1320
-            TabIndex        =   292
-            Top             =   600
-            Value           =   1  'Checked
-            Width           =   1575
-         End
-         Begin VB.CheckBox chkTpPago2 
-            Caption         =   "Confirming"
-            Height          =   255
-            Index           =   15
-            Left            =   3000
-            TabIndex        =   291
-            Top             =   600
-            Value           =   1  'Checked
-            Width           =   1335
-         End
-         Begin VB.CheckBox chkTpPago2 
-            Caption         =   "Tarjeta crédito"
-            Height          =   255
-            Index           =   16
-            Left            =   4560
-            TabIndex        =   290
-            Top             =   600
-            Value           =   1  'Checked
-            Width           =   1335
-         End
-         Begin VB.Label Label10 
-            AutoSize        =   -1  'True
-            Caption         =   "Tipo de pago"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   12
-            Left            =   120
-            TabIndex        =   297
-            Top             =   240
-            Width           =   1080
-         End
-      End
-      Begin VB.ComboBox cmbTipAlbaran 
-         Height          =   315
-         Index           =   0
-         ItemData        =   "frmListadoPed.frx":05EC
-         Left            =   1920
-         List            =   "frmListadoPed.frx":05F9
-         Style           =   2  'Dropdown List
-         TabIndex        =   77
-         Top             =   5880
-         Visible         =   0   'False
-         Width           =   1695
-      End
-      Begin VB.CheckBox chkResumenForpa 
-         Caption         =   "Resumen forma de pago"
-         Height          =   195
-         Left            =   3720
-         TabIndex        =   76
-         Top             =   5400
-         Width           =   2295
-      End
-      Begin VB.CheckBox chkSoloFacturar 
-         Caption         =   "Solo Albaranes para facturar"
-         Height          =   375
-         Left            =   960
-         TabIndex        =   75
-         Top             =   5310
-         Value           =   1  'Checked
-         Width           =   2535
-      End
-      Begin VB.Frame Frame7 
-         Caption         =   "Tipo Informe"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   690
-         Left            =   360
-         TabIndex        =   179
-         Top             =   4560
-         Width           =   4335
-         Begin VB.OptionButton OptDetalle 
-            Caption         =   "Facturacion"
-            Height          =   255
-            Index           =   3
-            Left            =   2880
-            TabIndex        =   73
-            Top             =   270
-            Width           =   1215
-         End
-         Begin VB.OptionButton OptDetalle 
-            Caption         =   "Resumen"
-            Height          =   255
-            Index           =   1
-            Left            =   1560
-            TabIndex        =   72
-            Top             =   270
-            Width           =   1215
-         End
-         Begin VB.OptionButton OptDetalle 
-            Caption         =   "Detalle"
-            Height          =   255
-            Index           =   0
-            Left            =   360
-            TabIndex        =   71
-            Top             =   270
-            Width           =   1095
-         End
-      End
-      Begin VB.Frame Frame6 
-         BorderStyle     =   0  'None
-         Height          =   975
-         Left            =   480
-         TabIndex        =   173
-         Top             =   2520
-         Width           =   6135
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   33
-            Left            =   1260
-            MaxLength       =   6
-            TabIndex        =   70
-            Top             =   600
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   33
-            Left            =   2040
-            Locked          =   -1  'True
-            TabIndex        =   175
-            Text            =   "Text5"
-            Top             =   600
-            Width           =   3615
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   32
-            Left            =   1260
-            MaxLength       =   6
-            TabIndex        =   69
-            Top             =   240
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   32
-            Left            =   2040
-            Locked          =   -1  'True
-            TabIndex        =   174
-            Text            =   "Text5"
-            Top             =   240
-            Width           =   3615
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   17
-            Left            =   360
-            TabIndex        =   178
-            Top             =   600
-            Width           =   420
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   0
-            Left            =   360
-            TabIndex        =   177
-            Top             =   240
-            Width           =   450
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   19
-            Left            =   960
-            Picture         =   "frmListadoPed.frx":062C
-            Top             =   615
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Agente"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   38
-            Left            =   0
-            TabIndex        =   176
-            Top             =   0
-            Width           =   975
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   18
-            Left            =   960
-            Picture         =   "frmListadoPed.frx":072E
-            Top             =   255
-            Width           =   240
-         End
-      End
-      Begin VB.TextBox txtCodigo 
-         Height          =   285
-         Index           =   26
-         Left            =   1740
-         MaxLength       =   10
-         TabIndex        =   63
-         Top             =   960
-         Width           =   1215
-      End
-      Begin VB.CommandButton cmdAceptarPreFac 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4560
-         TabIndex        =   78
-         Top             =   5880
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   5
-         Left            =   5760
-         TabIndex        =   79
-         Top             =   5880
-         Width           =   975
-      End
-      Begin VB.TextBox txtCodigo 
-         Height          =   285
-         Index           =   27
-         Left            =   3900
-         MaxLength       =   10
-         TabIndex        =   64
-         Top             =   960
-         Width           =   1215
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   30
-         Left            =   2280
-         Locked          =   -1  'True
-         TabIndex        =   81
-         Text            =   "Text5"
-         Top             =   2760
-         Width           =   3735
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   30
-         Left            =   1620
-         MaxLength       =   3
-         TabIndex        =   67
-         Top             =   2760
-         Width           =   615
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   31
-         Left            =   2280
-         Locked          =   -1  'True
-         TabIndex        =   80
-         Text            =   "Text5"
-         Top             =   3120
-         Width           =   3735
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   31
-         Left            =   1620
-         MaxLength       =   3
-         TabIndex        =   68
-         Top             =   3120
-         Width           =   615
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   29
-         Left            =   1740
-         MaxLength       =   6
-         TabIndex        =   66
-         Top             =   2040
-         Width           =   735
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   29
-         Left            =   2520
-         Locked          =   -1  'True
-         TabIndex        =   62
-         Text            =   "Text5"
-         Top             =   2040
-         Width           =   3615
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   28
-         Left            =   1740
-         MaxLength       =   6
-         TabIndex        =   65
-         Top             =   1680
-         Width           =   735
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   28
-         Left            =   2520
-         Locked          =   -1  'True
-         TabIndex        =   61
-         Text            =   "Text5"
-         Top             =   1680
-         Width           =   3615
-      End
-      Begin VB.Image imgayuda 
-         Height          =   240
-         Index           =   1
-         Left            =   6240
-         ToolTipText     =   "Previsión facturacion"
-         Top             =   4920
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Periodo facturación"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   24
-         Left            =   4920
-         TabIndex        =   298
-         Top             =   4560
-         Width           =   1650
-      End
-      Begin VB.Label lblTipAlbaran 
-         Caption         =   "Tipo de albaranes:"
-         Height          =   255
-         Index           =   0
-         Left            =   480
-         TabIndex        =   220
-         Top             =   5880
-         Visible         =   0   'False
-         Width           =   1335
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   44
-         Left            =   3120
-         TabIndex        =   91
-         Top             =   960
-         Width           =   420
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   10
-         Left            =   1440
-         Picture         =   "frmListadoPed.frx":0830
-         Top             =   960
-         Width           =   240
-      End
-      Begin VB.Label Label9 
-         Caption         =   "Prefacturación de Albaranes"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Index           =   0
-         Left            =   360
-         TabIndex        =   90
-         Top             =   240
-         Width           =   6375
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha Albaran"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   43
-         Left            =   480
-         TabIndex        =   89
-         Top             =   720
-         Width           =   1200
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   42
-         Left            =   915
-         TabIndex        =   88
-         Top             =   960
-         Width           =   450
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   11
-         Left            =   3600
-         Picture         =   "frmListadoPed.frx":08BB
-         Top             =   960
-         Width           =   240
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   16
-         Left            =   1320
-         Picture         =   "frmListadoPed.frx":0946
-         Top             =   2775
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Formas de Pago"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   41
-         Left            =   480
-         TabIndex        =   87
-         Top             =   2520
-         Width           =   1350
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   40
-         Left            =   795
-         TabIndex        =   86
-         Top             =   2760
-         Width           =   450
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   17
-         Left            =   1320
-         Picture         =   "frmListadoPed.frx":0A48
-         Top             =   3135
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   39
-         Left            =   795
-         TabIndex        =   85
-         Top             =   3120
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   35
-         Left            =   915
-         TabIndex        =   84
-         Top             =   2040
-         Width           =   420
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   15
-         Left            =   1440
-         Picture         =   "frmListadoPed.frx":0B4A
-         Top             =   2040
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   34
-         Left            =   915
-         TabIndex        =   83
-         Top             =   1680
-         Width           =   450
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Cliente"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   33
-         Left            =   480
-         TabIndex        =   82
-         Top             =   1440
-         Width           =   585
-      End
-      Begin VB.Image imgBuscarOfer 
-         Height          =   240
-         Index           =   14
-         Left            =   1440
-         Picture         =   "frmListadoPed.frx":0C4C
-         Top             =   1680
-         Width           =   240
-      End
-   End
-   Begin VB.Frame FramePedxArtic 
-      Height          =   7455
-      Left            =   120
-      TabIndex        =   45
-      Top             =   120
-      Width           =   7575
-      Begin VB.Frame FrameTiposFactura 
-         Height          =   1335
-         Left            =   240
-         TabIndex        =   278
-         Top             =   4200
-         Visible         =   0   'False
-         Width           =   5895
-         Begin VB.ListBox ListTipoFact 
-            Height          =   960
-            Left            =   1320
-            Style           =   1  'Checkbox
-            TabIndex        =   279
-            Top             =   240
-            Width           =   3975
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Tipo factura"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   66
-            Left            =   120
-            TabIndex        =   280
-            Top             =   240
-            Width           =   1020
-         End
-      End
-      Begin VB.Frame Frame10 
-         Height          =   3015
-         Left            =   360
-         TabIndex        =   192
-         Top             =   2760
-         Width           =   6495
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   58
-            Left            =   2280
-            Locked          =   -1  'True
-            TabIndex        =   272
-            Text            =   "Text5"
-            Top             =   1920
-            Width           =   3735
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   58
-            Left            =   1560
-            TabIndex        =   16
-            Top             =   1920
-            Width           =   615
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   57
-            Left            =   2280
-            Locked          =   -1  'True
-            TabIndex        =   269
-            Text            =   "Text5"
-            Top             =   1560
-            Width           =   3735
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   57
-            Left            =   1560
-            TabIndex        =   15
-            Top             =   1560
-            Width           =   615
-         End
-         Begin VB.CheckBox Check1chkAgrupaAg 
-            Caption         =   "Agrupa agente"
-            Height          =   435
-            Left            =   4680
-            TabIndex        =   20
-            Top             =   2400
-            Width           =   1455
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   24
-            Left            =   1560
-            TabIndex        =   14
-            Top             =   960
-            Width           =   615
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   24
-            Left            =   2280
-            Locked          =   -1  'True
-            TabIndex        =   257
-            Text            =   "Text5"
-            Top             =   960
-            Width           =   3735
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   23
-            Left            =   1560
-            TabIndex        =   13
-            Top             =   600
-            Width           =   615
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   23
-            Left            =   2280
-            Locked          =   -1  'True
-            TabIndex        =   254
-            Text            =   "Text5"
-            Top             =   600
-            Width           =   3735
-         End
-         Begin VB.Frame Frame11 
-            Caption         =   " Ordenar por "
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   615
-            Left            =   120
-            TabIndex        =   195
-            Top             =   2280
-            Width           =   4455
-            Begin VB.OptionButton OptOrdenVentas 
-               Caption         =   "Vol. ventas"
-               Height          =   255
-               Left            =   3000
-               TabIndex        =   19
-               Top             =   240
-               Value           =   -1  'True
-               Width           =   1215
-            End
-            Begin VB.OptionButton OptOrdenNomclien 
-               Caption         =   "Nombre cliente"
-               Height          =   375
-               Left            =   1560
-               TabIndex        =   18
-               Top             =   180
-               Width           =   1455
-            End
-            Begin VB.OptionButton OptOrdenCodclien 
-               Caption         =   "Cod. cliente"
-               Height          =   255
-               Left            =   120
-               TabIndex        =   17
-               Top             =   240
-               Width           =   1215
-            End
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   1
-            Left            =   3840
-            MaxLength       =   15
-            TabIndex        =   12
-            Top             =   120
-            Width           =   1695
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   41
-            Left            =   1200
-            Picture         =   "frmListadoPed.frx":0D4E
-            Top             =   1920
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   62
-            Left            =   720
-            TabIndex        =   273
-            Top             =   1920
-            Width           =   420
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   40
-            Left            =   1200
-            Picture         =   "frmListadoPed.frx":0E50
-            Top             =   1560
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Actividad"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   61
-            Left            =   120
-            TabIndex        =   271
-            Top             =   1320
-            Width           =   795
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   60
-            Left            =   720
-            TabIndex        =   270
-            Top             =   1560
-            Width           =   450
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   58
-            Left            =   720
-            TabIndex        =   258
-            Top             =   960
-            Width           =   420
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   37
-            Left            =   1200
-            Picture         =   "frmListadoPed.frx":0F52
-            Top             =   960
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   56
-            Left            =   720
-            TabIndex        =   256
-            Top             =   600
-            Width           =   450
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Agente"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   55
-            Left            =   120
-            TabIndex        =   255
-            Top             =   360
-            Width           =   615
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   36
-            Left            =   1200
-            Picture         =   "frmListadoPed.frx":1054
-            Top             =   600
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "€"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   19
-            Left            =   5640
-            TabIndex        =   194
-            Top             =   120
-            Width           =   105
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Mostrar Clientes con ventas superiores a"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   18
-            Left            =   120
-            TabIndex        =   193
-            Top             =   120
-            Width           =   3465
-         End
-      End
-      Begin VB.CheckBox chkDispo 
-         Caption         =   "Datos de dpto/obra"
-         Height          =   255
-         Index           =   1
-         Left            =   1920
-         TabIndex        =   252
-         Top             =   4320
-         Width           =   1935
-      End
-      Begin VB.CheckBox chkDispo 
-         Caption         =   "Detalle"
-         Height          =   255
-         Index           =   0
-         Left            =   480
-         TabIndex        =   251
-         Top             =   4320
-         Width           =   1575
-      End
-      Begin VB.Frame FramepedxClien 
-         BorderStyle     =   0  'None
-         Height          =   2295
-         Left            =   5760
-         TabIndex        =   233
-         Top             =   4320
-         Visible         =   0   'False
-         Width           =   6375
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   10
-            Left            =   1500
-            MaxLength       =   6
-            TabIndex        =   11
-            Top             =   1680
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   10
-            Left            =   2280
-            Locked          =   -1  'True
-            TabIndex        =   241
-            Text            =   "Text5"
-            Top             =   1680
-            Width           =   3855
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   9
-            Left            =   1500
-            MaxLength       =   6
-            TabIndex        =   10
-            Top             =   1320
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   9
-            Left            =   2280
-            Locked          =   -1  'True
-            TabIndex        =   239
-            Text            =   "Text5"
-            Top             =   1320
-            Width           =   3855
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   7
-            Left            =   1500
-            MaxLength       =   6
-            TabIndex        =   9
-            Top             =   600
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   7
-            Left            =   2280
-            Locked          =   -1  'True
-            TabIndex        =   237
-            Text            =   "Text5"
-            Top             =   600
-            Width           =   3855
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   6
-            Left            =   1500
-            MaxLength       =   6
-            TabIndex        =   8
-            Top             =   240
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   6
-            Left            =   2280
-            Locked          =   -1  'True
-            TabIndex        =   234
-            Text            =   "Text5"
-            Top             =   240
-            Width           =   3855
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Zona"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   52
-            Left            =   0
-            TabIndex        =   243
-            Top             =   1080
-            Width           =   615
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   47
-            Left            =   600
-            TabIndex        =   242
-            Top             =   1680
-            Width           =   420
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   34
-            Left            =   1200
-            Picture         =   "frmListadoPed.frx":1156
-            Top             =   1680
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   31
-            Left            =   600
-            TabIndex        =   240
-            Top             =   1320
-            Width           =   450
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   33
-            Left            =   1200
-            Picture         =   "frmListadoPed.frx":1258
-            Top             =   1320
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   29
-            Left            =   600
-            TabIndex        =   238
-            Top             =   600
-            Width           =   420
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   13
-            Left            =   1200
-            Picture         =   "frmListadoPed.frx":135A
-            Top             =   600
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Agente"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   28
-            Left            =   0
-            TabIndex        =   236
-            Top             =   0
-            Width           =   615
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   27
-            Left            =   600
-            TabIndex        =   235
-            Top             =   240
-            Width           =   450
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   3
-            Left            =   1200
-            Picture         =   "frmListadoPed.frx":145C
-            Top             =   240
-            Width           =   240
-         End
-      End
-      Begin VB.ComboBox cmbTipAlbaran 
-         Height          =   315
-         Index           =   1
-         ItemData        =   "frmListadoPed.frx":155E
-         Left            =   2640
-         List            =   "frmListadoPed.frx":156B
-         Style           =   2  'Dropdown List
-         TabIndex        =   221
-         Top             =   4920
-         Visible         =   0   'False
-         Width           =   1695
-      End
-      Begin VB.Frame Frame12 
-         BorderStyle     =   0  'None
-         Height          =   2055
-         Left            =   7080
-         TabIndex        =   196
-         Top             =   1440
-         Width           =   6495
-         Begin VB.Frame Frame13 
-            Height          =   615
-            Left            =   240
-            TabIndex        =   202
-            Top             =   1320
-            Width           =   2655
-            Begin VB.OptionButton OptResumen 
-               Caption         =   "Resumen"
-               Height          =   255
-               Left            =   1320
-               TabIndex        =   204
-               Top             =   240
-               Width           =   1095
-            End
-            Begin VB.OptionButton OptDetalle 
-               Caption         =   "Detalle"
-               Height          =   255
-               Index           =   2
-               Left            =   120
-               TabIndex        =   203
-               Top             =   240
-               Value           =   -1  'True
-               Width           =   975
-            End
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   2
-            Left            =   2160
-            Locked          =   -1  'True
-            TabIndex        =   198
-            Text            =   "Text5"
-            Top             =   360
-            Width           =   3855
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   2
-            Left            =   1380
-            MaxLength       =   6
-            TabIndex        =   21
-            Top             =   360
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   3
-            Left            =   2160
-            Locked          =   -1  'True
-            TabIndex        =   197
-            Text            =   "Text5"
-            Top             =   720
-            Width           =   3855
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   3
-            Left            =   1380
-            MaxLength       =   6
-            TabIndex        =   22
-            Top             =   720
-            Width           =   735
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   1
-            Left            =   1080
-            Picture         =   "frmListadoPed.frx":159E
-            Top             =   360
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Trabajador"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   22
-            Left            =   120
-            TabIndex        =   201
-            Top             =   120
-            Width           =   945
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   21
-            Left            =   480
-            TabIndex        =   200
-            Top             =   360
-            Width           =   450
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   2
-            Left            =   1080
-            Picture         =   "frmListadoPed.frx":16A0
-            Top             =   720
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   20
-            Left            =   480
-            TabIndex        =   199
-            Top             =   720
-            Width           =   420
-         End
-      End
-      Begin VB.Frame Frame5 
-         BorderStyle     =   0  'None
-         Height          =   1095
-         Left            =   360
-         TabIndex        =   167
-         Top             =   2640
-         Width           =   6495
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   21
-            Left            =   1380
-            MaxLength       =   6
-            TabIndex        =   7
-            Top             =   720
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   21
-            Left            =   2160
-            Locked          =   -1  'True
-            TabIndex        =   169
-            Text            =   "Text5"
-            Top             =   720
-            Width           =   3855
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   20
-            Left            =   1380
-            MaxLength       =   6
-            TabIndex        =   6
-            Top             =   360
-            Width           =   735
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   20
-            Left            =   2160
-            Locked          =   -1  'True
-            TabIndex        =   168
-            Text            =   "Text5"
-            Top             =   360
-            Width           =   3855
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   12
-            Left            =   480
-            TabIndex        =   172
-            Top             =   720
-            Width           =   420
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   12
-            Left            =   1080
-            Picture         =   "frmListadoPed.frx":17A2
-            Top             =   720
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   13
-            Left            =   480
-            TabIndex        =   171
-            Top             =   360
-            Width           =   450
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Cliente"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   16
-            Left            =   120
-            TabIndex        =   170
-            Top             =   120
-            Width           =   585
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   11
-            Left            =   1080
-            Picture         =   "frmListadoPed.frx":18A4
-            Top             =   360
-            Width           =   240
-         End
-      End
-      Begin VB.Frame Frame9 
-         BorderStyle     =   0  'None
-         Height          =   1095
-         Left            =   360
-         TabIndex        =   186
-         Top             =   1920
-         Width           =   6375
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   13
-            Left            =   1800
-            Locked          =   -1  'True
-            TabIndex        =   188
-            Text            =   "Text5"
-            Top             =   360
-            Width           =   3735
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   13
-            Left            =   1260
-            MaxLength       =   3
-            TabIndex        =   2
-            Top             =   360
-            Width           =   495
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   14
-            Left            =   1800
-            Locked          =   -1  'True
-            TabIndex        =   187
-            Text            =   "Text5"
-            Top             =   720
-            Width           =   3735
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   14
-            Left            =   1260
-            MaxLength       =   3
-            TabIndex        =   3
-            Top             =   720
-            Width           =   495
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   4
-            Left            =   960
-            Picture         =   "frmListadoPed.frx":19A6
-            Top             =   360
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Almacen"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   6
-            Left            =   120
-            TabIndex        =   191
-            Top             =   120
-            Width           =   735
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   7
-            Left            =   480
-            TabIndex        =   190
-            Top             =   360
-            Width           =   450
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   5
-            Left            =   960
-            Picture         =   "frmListadoPed.frx":1AA8
-            Top             =   720
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   8
-            Left            =   480
-            TabIndex        =   189
-            Top             =   720
-            Width           =   420
-         End
-      End
-      Begin VB.Frame Frame8 
-         BorderStyle     =   0  'None
-         Height          =   1215
-         Left            =   240
-         TabIndex        =   180
-         Top             =   3120
-         Width           =   6975
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   15
-            Left            =   2520
-            Locked          =   -1  'True
-            TabIndex        =   182
-            Text            =   "Text5"
-            Top             =   480
-            Width           =   4215
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   15
-            Left            =   1260
-            MaxLength       =   16
-            TabIndex        =   4
-            Top             =   480
-            Width           =   1215
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   16
-            Left            =   2520
-            Locked          =   -1  'True
-            TabIndex        =   181
-            Text            =   "Text5"
-            Top             =   840
-            Width           =   4215
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   16
-            Left            =   1260
-            MaxLength       =   16
-            TabIndex        =   5
-            Top             =   840
-            Width           =   1215
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   6
-            Left            =   960
-            Picture         =   "frmListadoPed.frx":1BAA
-            Top             =   480
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Artículo"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   1
-            Left            =   120
-            TabIndex        =   185
-            Top             =   240
-            Width           =   660
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Desde"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   3
-            Left            =   480
-            TabIndex        =   184
-            Top             =   480
-            Width           =   450
-         End
-         Begin VB.Image imgBuscarOfer 
-            Height          =   240
-            Index           =   7
-            Left            =   960
-            Picture         =   "frmListadoPed.frx":1CAC
-            Top             =   840
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Hasta"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   9
-            Left            =   480
-            TabIndex        =   183
-            Top             =   840
-            Width           =   420
-         End
-      End
-      Begin VB.TextBox txtCodigo 
-         Height          =   285
-         Index           =   12
-         Left            =   4140
-         MaxLength       =   10
-         TabIndex        =   1
-         Top             =   1440
-         Width           =   1215
-      End
-      Begin VB.CommandButton cmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   2
-         Left            =   5760
-         TabIndex        =   27
-         Top             =   7080
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdAceptarPedxArtic 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4680
-         TabIndex        =   26
-         Top             =   7080
-         Width           =   975
-      End
-      Begin VB.TextBox txtCodigo 
-         Height          =   285
-         Index           =   11
-         Left            =   1740
-         MaxLength       =   10
-         TabIndex        =   0
-         Top             =   1440
-         Width           =   1215
-      End
-      Begin VB.Frame FrameOrden1 
-         BorderStyle     =   0  'None
-         Height          =   855
-         Left            =   240
-         TabIndex        =   232
-         Top             =   6600
-         Width           =   3975
-         Begin VB.CheckBox chkPedxClixSemEntrega 
-            Caption         =   "Obs. pedido"
-            Height          =   255
-            Index           =   1
-            Left            =   2040
-            TabIndex        =   24
-            Top             =   120
-            Value           =   1  'Checked
-            Width           =   1815
-         End
-         Begin VB.CheckBox chkPedxClixSemEntrega 
-            Caption         =   "Semana entrega"
-            Height          =   255
-            Index           =   0
-            Left            =   240
-            TabIndex        =   23
-            Top             =   120
-            Value           =   1  'Checked
-            Width           =   1575
-         End
-         Begin VB.ComboBox cboTipocliente 
-            Height          =   315
-            Left            =   1320
-            Style           =   2  'Dropdown List
-            TabIndex        =   25
-            Top             =   480
-            Width           =   1815
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Tipo cliente"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Index           =   59
-            Left            =   240
-            TabIndex        =   268
-            Top             =   510
-            Width           =   810
-         End
-         Begin VB.Image imgayuda 
-            Height          =   255
-            Index           =   0
-            Left            =   3240
-            ToolTipText     =   "Pedidos por cliente"
-            Top             =   480
-            Width           =   255
-         End
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   54
-         Left            =   480
-         TabIndex        =   253
-         Top             =   4680
-         Width           =   2850
-      End
-      Begin VB.Label lblTipAlbaran 
-         Caption         =   "Tipo de albaranes:"
-         Height          =   255
-         Index           =   1
-         Left            =   600
-         TabIndex        =   222
-         Top             =   4920
-         Visible         =   0   'False
-         Width           =   1335
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   7
-         Left            =   3840
-         Picture         =   "frmListadoPed.frx":1DAE
-         Top             =   1440
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   5
-         Left            =   960
-         TabIndex        =   49
-         Top             =   1440
-         Width           =   450
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha Pedido"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   4
-         Left            =   480
-         TabIndex        =   48
-         Top             =   1200
-         Width           =   1110
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Pedidos por Artículo"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   360
-         TabIndex        =   47
-         Top             =   480
-         Width           =   4815
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   6
-         Left            =   1440
-         Picture         =   "frmListadoPed.frx":1E39
-         Top             =   1440
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   195
-         Index           =   2
-         Left            =   3360
-         TabIndex        =   46
-         Top             =   1440
-         Width           =   420
-      End
-   End
    Begin VB.Frame FrameFacturar 
       Height          =   7575
       Left            =   120
@@ -2967,7 +300,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   22
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":1EC4
+            Picture         =   "frmListadoPed.frx":000C
             Top             =   2520
             Width           =   240
          End
@@ -3014,7 +347,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   23
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":1FC6
+            Picture         =   "frmListadoPed.frx":010E
             Top             =   2880
             Width           =   240
          End
@@ -3041,7 +374,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   20
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":20C8
+            Picture         =   "frmListadoPed.frx":0210
             Top             =   1680
             Width           =   240
          End
@@ -3049,7 +382,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   21
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":21CA
+            Picture         =   "frmListadoPed.frx":0312
             Top             =   2040
             Width           =   240
          End
@@ -3134,7 +467,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   12
             Left            =   2280
-            Picture         =   "frmListadoPed.frx":22CC
+            Picture         =   "frmListadoPed.frx":0414
             Top             =   1215
             Width           =   240
          End
@@ -3181,7 +514,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   13
             Left            =   4680
-            Picture         =   "frmListadoPed.frx":2357
+            Picture         =   "frmListadoPed.frx":049F
             Top             =   1215
             Width           =   240
          End
@@ -3355,7 +688,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   14
             Left            =   2280
-            Picture         =   "frmListadoPed.frx":23E2
+            Picture         =   "frmListadoPed.frx":052A
             Top             =   240
             Width           =   240
          End
@@ -3383,7 +716,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   24
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":246D
+            Picture         =   "frmListadoPed.frx":05B5
             Top             =   600
             Width           =   240
          End
@@ -3441,6 +774,2673 @@ Begin VB.Form frmListadoPed
          TabIndex        =   227
          Top             =   3360
          Width           =   6615
+      End
+   End
+   Begin VB.Frame FrameGenAlbaran 
+      Height          =   7215
+      Left            =   480
+      TabIndex        =   50
+      Top             =   0
+      Width           =   5835
+      Begin VB.Frame FrameGenAlbEuler 
+         Caption         =   "             Generar albaran euler"
+         Height          =   735
+         Left            =   360
+         TabIndex        =   299
+         Top             =   3480
+         Width           =   4935
+         Begin VB.ComboBox cboTipoAlbaranEuler 
+            Height          =   315
+            ItemData        =   "frmListadoPed.frx":06B7
+            Left            =   720
+            List            =   "frmListadoPed.frx":06C7
+            Style           =   2  'Dropdown List
+            TabIndex        =   32
+            Top             =   360
+            Width           =   2055
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo Albaran"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   25
+            Left            =   480
+            TabIndex        =   300
+            Top             =   120
+            Width           =   900
+         End
+      End
+      Begin VB.Frame FramePartes 
+         Height          =   1455
+         Left            =   240
+         TabIndex        =   274
+         Top             =   5160
+         Visible         =   0   'False
+         Width           =   5295
+         Begin VB.ComboBox cboFacturacion 
+            Height          =   315
+            Left            =   1680
+            Style           =   2  'Dropdown List
+            TabIndex        =   41
+            Top             =   960
+            Width           =   2055
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   60
+            Left            =   2160
+            TabIndex        =   39
+            Top             =   480
+            Width           =   975
+         End
+         Begin VB.CheckBox chkFrInterna 
+            Caption         =   "Interna"
+            Height          =   255
+            Left            =   3840
+            TabIndex        =   40
+            Top             =   360
+            Width           =   975
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   59
+            Left            =   360
+            TabIndex        =   38
+            Top             =   480
+            Width           =   1095
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo facturación"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   65
+            Left            =   360
+            TabIndex        =   277
+            Top             =   1080
+            Width           =   1155
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cantidad otros"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   64
+            Left            =   2160
+            TabIndex        =   276
+            Top             =   180
+            Width           =   1065
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cantidad real dosis"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   63
+            Left            =   120
+            TabIndex        =   275
+            Top             =   180
+            Width           =   1365
+         End
+      End
+      Begin VB.CheckBox chkFraMostrador 
+         Caption         =   "A factura mostrador"
+         Height          =   255
+         Left            =   3720
+         TabIndex        =   34
+         Top             =   4440
+         Width           =   1815
+      End
+      Begin VB.Frame FramRectARM 
+         Caption         =   "Fra a la que rectifica"
+         Height          =   735
+         Left            =   720
+         TabIndex        =   248
+         Top             =   5160
+         Width           =   4815
+         Begin VB.TextBox txtFraRectifica 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   405
+            Left            =   240
+            TabIndex        =   250
+            Top             =   240
+            Width           =   3615
+         End
+         Begin VB.CommandButton cmdSelFraRect 
+            Caption         =   "+"
+            Height          =   375
+            Left            =   4080
+            TabIndex        =   249
+            Top             =   240
+            Width           =   375
+         End
+      End
+      Begin VB.Frame FrameZona 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame16"
+         Height          =   615
+         Left            =   720
+         TabIndex        =   244
+         Top             =   3720
+         Width           =   4935
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   22
+            Left            =   1080
+            Locked          =   -1  'True
+            TabIndex        =   245
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   22
+            Left            =   420
+            MaxLength       =   4
+            TabIndex        =   31
+            Top             =   240
+            Width           =   615
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   35
+            Left            =   120
+            Picture         =   "frmListadoPed.frx":0702
+            Top             =   240
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Zona"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   53
+            Left            =   120
+            TabIndex        =   246
+            Top             =   0
+            Width           =   360
+         End
+      End
+      Begin VB.CheckBox chkImpHojaExped 
+         Caption         =   "Imprimir Hoja Expedición"
+         Height          =   255
+         Left            =   1080
+         TabIndex        =   37
+         Top             =   5280
+         Width           =   2295
+      End
+      Begin VB.CheckBox chkImpEtiq 
+         Caption         =   "Imprimir Etiquetas"
+         Height          =   255
+         Left            =   3720
+         TabIndex        =   36
+         Top             =   4800
+         Width           =   1575
+      End
+      Begin VB.Frame FramepedidoFactura 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame15"
+         Height          =   615
+         Left            =   720
+         TabIndex        =   224
+         Top             =   6000
+         Width           =   4815
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   5
+            Left            =   1155
+            Locked          =   -1  'True
+            TabIndex        =   225
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3495
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   5
+            Left            =   315
+            MaxLength       =   6
+            TabIndex        =   42
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   0
+            Left            =   0
+            Picture         =   "frmListadoPed.frx":0804
+            Top             =   240
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cta prevista cobro"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   23
+            Left            =   0
+            TabIndex        =   226
+            Top             =   0
+            Width           =   1335
+         End
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   25
+         Left            =   2400
+         MaxLength       =   10
+         TabIndex        =   33
+         Top             =   4440
+         Width           =   1215
+      End
+      Begin VB.CheckBox chkImpAlbaran 
+         Caption         =   "Imprimir Albaran"
+         Height          =   255
+         Left            =   1080
+         TabIndex        =   35
+         Top             =   4800
+         Value           =   1  'Checked
+         Width           =   1575
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   19
+         Left            =   1140
+         MaxLength       =   4
+         TabIndex        =   30
+         Top             =   3240
+         Width           =   615
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   19
+         Left            =   1800
+         Locked          =   -1  'True
+         TabIndex        =   57
+         Text            =   "Text5"
+         Top             =   3240
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   18
+         Left            =   1140
+         MaxLength       =   4
+         TabIndex        =   29
+         Top             =   2520
+         Width           =   615
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   18
+         Left            =   1800
+         Locked          =   -1  'True
+         TabIndex        =   55
+         Text            =   "Text5"
+         Top             =   2520
+         Width           =   3735
+      End
+      Begin VB.CommandButton cmdAceptarGenAlb 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   3360
+         TabIndex        =   43
+         Top             =   6720
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   3
+         Left            =   4560
+         TabIndex        =   44
+         Top             =   6720
+         Width           =   975
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   17
+         Left            =   1140
+         MaxLength       =   4
+         TabIndex        =   28
+         Top             =   1800
+         Width           =   615
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   17
+         Left            =   1800
+         Locked          =   -1  'True
+         TabIndex        =   51
+         Text            =   "Text5"
+         Top             =   1800
+         Width           =   3735
+      End
+      Begin VB.Label Label5 
+         Caption         =   "Zona:"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   247
+         Top             =   6720
+         Width           =   2535
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Albaran"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   32
+         Left            =   840
+         TabIndex        =   59
+         Top             =   4440
+         Width           =   1155
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   0
+         Left            =   2040
+         Picture         =   "frmListadoPed.frx":0906
+         Top             =   4440
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Forma de Envío"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   11
+         Left            =   840
+         TabIndex        =   58
+         Top             =   3000
+         Width           =   1110
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   10
+         Left            =   840
+         Picture         =   "frmListadoPed.frx":0991
+         Top             =   3240
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Material Preparado por"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   10
+         Left            =   840
+         TabIndex        =   56
+         Top             =   2280
+         Width           =   1650
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   9
+         Left            =   840
+         Picture         =   "frmListadoPed.frx":0A93
+         Top             =   2520
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Pasar Pedido a "
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   600
+         TabIndex        =   54
+         Top             =   480
+         Width           =   4695
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Introduzca los siguiente campos: "
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   14
+         Left            =   600
+         TabIndex        =   53
+         Top             =   1200
+         Width           =   2835
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Trabajador de Albaran"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   15
+         Left            =   840
+         TabIndex        =   52
+         Top             =   1560
+         Width           =   1620
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   8
+         Left            =   840
+         Picture         =   "frmListadoPed.frx":0B95
+         Top             =   1800
+         Width           =   240
+      End
+   End
+   Begin VB.Frame FramePreFacturar 
+      Height          =   6375
+      Left            =   120
+      TabIndex        =   60
+      Top             =   120
+      Width           =   7035
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   61
+         Left            =   5400
+         MaxLength       =   6
+         TabIndex        =   74
+         Top             =   4860
+         Width           =   735
+      End
+      Begin VB.Frame Frame16 
+         Height          =   975
+         Left            =   360
+         TabIndex        =   289
+         Top             =   3480
+         Visible         =   0   'False
+         Width           =   6375
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Efectivo"
+            Height          =   255
+            Index           =   10
+            Left            =   1320
+            TabIndex        =   296
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   1095
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Transferencia"
+            Height          =   255
+            Index           =   11
+            Left            =   2520
+            TabIndex        =   295
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Talón"
+            Height          =   255
+            Index           =   12
+            Left            =   4200
+            TabIndex        =   294
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   975
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Pagaré"
+            Height          =   255
+            Index           =   13
+            Left            =   5280
+            TabIndex        =   293
+            Top             =   240
+            Value           =   1  'Checked
+            Width           =   975
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Recibo bancario"
+            Height          =   255
+            Index           =   14
+            Left            =   1320
+            TabIndex        =   292
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Confirming"
+            Height          =   255
+            Index           =   15
+            Left            =   3000
+            TabIndex        =   291
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1335
+         End
+         Begin VB.CheckBox chkTpPago2 
+            Caption         =   "Tarjeta crédito"
+            Height          =   255
+            Index           =   16
+            Left            =   4560
+            TabIndex        =   290
+            Top             =   600
+            Value           =   1  'Checked
+            Width           =   1335
+         End
+         Begin VB.Label Label10 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo de pago"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   12
+            Left            =   120
+            TabIndex        =   297
+            Top             =   240
+            Width           =   1080
+         End
+      End
+      Begin VB.ComboBox cmbTipAlbaran 
+         Height          =   315
+         Index           =   0
+         ItemData        =   "frmListadoPed.frx":0C97
+         Left            =   1920
+         List            =   "frmListadoPed.frx":0CA4
+         Style           =   2  'Dropdown List
+         TabIndex        =   77
+         Top             =   5880
+         Visible         =   0   'False
+         Width           =   1695
+      End
+      Begin VB.CheckBox chkResumenForpa 
+         Caption         =   "Resumen forma de pago"
+         Height          =   195
+         Left            =   3720
+         TabIndex        =   76
+         Top             =   5400
+         Width           =   2295
+      End
+      Begin VB.CheckBox chkSoloFacturar 
+         Caption         =   "Solo Albaranes para facturar"
+         Height          =   375
+         Left            =   960
+         TabIndex        =   75
+         Top             =   5310
+         Value           =   1  'Checked
+         Width           =   2535
+      End
+      Begin VB.Frame Frame7 
+         Caption         =   "Tipo Informe"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   690
+         Left            =   360
+         TabIndex        =   179
+         Top             =   4560
+         Width           =   4335
+         Begin VB.OptionButton OptDetalle 
+            Caption         =   "Facturacion"
+            Height          =   255
+            Index           =   3
+            Left            =   2880
+            TabIndex        =   73
+            Top             =   270
+            Width           =   1215
+         End
+         Begin VB.OptionButton OptDetalle 
+            Caption         =   "Resumen"
+            Height          =   255
+            Index           =   1
+            Left            =   1560
+            TabIndex        =   72
+            Top             =   270
+            Width           =   1215
+         End
+         Begin VB.OptionButton OptDetalle 
+            Caption         =   "Detalle"
+            Height          =   255
+            Index           =   0
+            Left            =   360
+            TabIndex        =   71
+            Top             =   270
+            Width           =   1095
+         End
+      End
+      Begin VB.Frame Frame6 
+         BorderStyle     =   0  'None
+         Height          =   975
+         Left            =   480
+         TabIndex        =   173
+         Top             =   2520
+         Width           =   6135
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   33
+            Left            =   1260
+            MaxLength       =   6
+            TabIndex        =   70
+            Top             =   600
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   33
+            Left            =   2040
+            Locked          =   -1  'True
+            TabIndex        =   175
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   3615
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   32
+            Left            =   1260
+            MaxLength       =   6
+            TabIndex        =   69
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   32
+            Left            =   2040
+            Locked          =   -1  'True
+            TabIndex        =   174
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3615
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   17
+            Left            =   360
+            TabIndex        =   178
+            Top             =   600
+            Width           =   420
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   0
+            Left            =   360
+            TabIndex        =   177
+            Top             =   240
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   19
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":0CD7
+            Top             =   615
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Agente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   38
+            Left            =   0
+            TabIndex        =   176
+            Top             =   0
+            Width           =   975
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   18
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":0DD9
+            Top             =   255
+            Width           =   240
+         End
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   26
+         Left            =   1740
+         MaxLength       =   10
+         TabIndex        =   63
+         Top             =   960
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdAceptarPreFac 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4560
+         TabIndex        =   78
+         Top             =   5880
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   5
+         Left            =   5760
+         TabIndex        =   79
+         Top             =   5880
+         Width           =   975
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   27
+         Left            =   3900
+         MaxLength       =   10
+         TabIndex        =   64
+         Top             =   960
+         Width           =   1215
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   30
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   81
+         Text            =   "Text5"
+         Top             =   2760
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   30
+         Left            =   1620
+         MaxLength       =   3
+         TabIndex        =   67
+         Top             =   2760
+         Width           =   615
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   31
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   80
+         Text            =   "Text5"
+         Top             =   3120
+         Width           =   3735
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   31
+         Left            =   1620
+         MaxLength       =   3
+         TabIndex        =   68
+         Top             =   3120
+         Width           =   615
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   29
+         Left            =   1740
+         MaxLength       =   6
+         TabIndex        =   66
+         Top             =   2040
+         Width           =   735
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   29
+         Left            =   2520
+         Locked          =   -1  'True
+         TabIndex        =   62
+         Text            =   "Text5"
+         Top             =   2040
+         Width           =   3615
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   28
+         Left            =   1740
+         MaxLength       =   6
+         TabIndex        =   65
+         Top             =   1680
+         Width           =   735
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   28
+         Left            =   2520
+         Locked          =   -1  'True
+         TabIndex        =   61
+         Text            =   "Text5"
+         Top             =   1680
+         Width           =   3615
+      End
+      Begin VB.Image imgayuda 
+         Height          =   240
+         Index           =   1
+         Left            =   6240
+         ToolTipText     =   "Previsión facturacion"
+         Top             =   4920
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Periodo facturación"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   24
+         Left            =   4920
+         TabIndex        =   298
+         Top             =   4560
+         Width           =   1650
+      End
+      Begin VB.Label lblTipAlbaran 
+         Caption         =   "Tipo de albaranes:"
+         Height          =   255
+         Index           =   0
+         Left            =   480
+         TabIndex        =   220
+         Top             =   5880
+         Visible         =   0   'False
+         Width           =   1335
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   44
+         Left            =   3120
+         TabIndex        =   91
+         Top             =   960
+         Width           =   420
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   10
+         Left            =   1440
+         Picture         =   "frmListadoPed.frx":0EDB
+         Top             =   960
+         Width           =   240
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Prefacturación de Albaranes"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   0
+         Left            =   360
+         TabIndex        =   90
+         Top             =   240
+         Width           =   6375
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Albaran"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   43
+         Left            =   480
+         TabIndex        =   89
+         Top             =   720
+         Width           =   1200
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   42
+         Left            =   915
+         TabIndex        =   88
+         Top             =   960
+         Width           =   450
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   11
+         Left            =   3600
+         Picture         =   "frmListadoPed.frx":0F66
+         Top             =   960
+         Width           =   240
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   16
+         Left            =   1320
+         Picture         =   "frmListadoPed.frx":0FF1
+         Top             =   2775
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Formas de Pago"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   41
+         Left            =   480
+         TabIndex        =   87
+         Top             =   2520
+         Width           =   1350
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   40
+         Left            =   795
+         TabIndex        =   86
+         Top             =   2760
+         Width           =   450
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   17
+         Left            =   1320
+         Picture         =   "frmListadoPed.frx":10F3
+         Top             =   3135
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   39
+         Left            =   795
+         TabIndex        =   85
+         Top             =   3120
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   35
+         Left            =   915
+         TabIndex        =   84
+         Top             =   2040
+         Width           =   420
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   15
+         Left            =   1440
+         Picture         =   "frmListadoPed.frx":11F5
+         Top             =   2040
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   34
+         Left            =   915
+         TabIndex        =   83
+         Top             =   1680
+         Width           =   450
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Cliente"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   33
+         Left            =   480
+         TabIndex        =   82
+         Top             =   1440
+         Width           =   585
+      End
+      Begin VB.Image imgBuscarOfer 
+         Height          =   240
+         Index           =   14
+         Left            =   1440
+         Picture         =   "frmListadoPed.frx":12F7
+         Top             =   1680
+         Width           =   240
+      End
+   End
+   Begin VB.Frame FramePedxArtic 
+      Height          =   7455
+      Left            =   120
+      TabIndex        =   45
+      Top             =   120
+      Width           =   7575
+      Begin VB.Frame FrameTiposFactura 
+         Height          =   1335
+         Left            =   240
+         TabIndex        =   278
+         Top             =   4200
+         Visible         =   0   'False
+         Width           =   5895
+         Begin VB.ListBox ListTipoFact 
+            Height          =   960
+            Left            =   1320
+            Style           =   1  'Checkbox
+            TabIndex        =   279
+            Top             =   240
+            Width           =   3975
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo factura"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   66
+            Left            =   120
+            TabIndex        =   280
+            Top             =   240
+            Width           =   1020
+         End
+      End
+      Begin VB.Frame Frame10 
+         Height          =   3015
+         Left            =   360
+         TabIndex        =   192
+         Top             =   2760
+         Width           =   6495
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   58
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   272
+            Text            =   "Text5"
+            Top             =   1920
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   58
+            Left            =   1560
+            TabIndex        =   16
+            Top             =   1920
+            Width           =   615
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   57
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   269
+            Text            =   "Text5"
+            Top             =   1560
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   57
+            Left            =   1560
+            TabIndex        =   15
+            Top             =   1560
+            Width           =   615
+         End
+         Begin VB.CheckBox Check1chkAgrupaAg 
+            Caption         =   "Agrupa agente"
+            Height          =   435
+            Left            =   4680
+            TabIndex        =   20
+            Top             =   2400
+            Width           =   1455
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   24
+            Left            =   1560
+            TabIndex        =   14
+            Top             =   960
+            Width           =   615
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   24
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   257
+            Text            =   "Text5"
+            Top             =   960
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   23
+            Left            =   1560
+            TabIndex        =   13
+            Top             =   600
+            Width           =   615
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   23
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   254
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   3735
+         End
+         Begin VB.Frame Frame11 
+            Caption         =   " Ordenar por "
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   615
+            Left            =   120
+            TabIndex        =   195
+            Top             =   2280
+            Width           =   4455
+            Begin VB.OptionButton OptOrdenVentas 
+               Caption         =   "Vol. ventas"
+               Height          =   255
+               Left            =   3000
+               TabIndex        =   19
+               Top             =   240
+               Value           =   -1  'True
+               Width           =   1215
+            End
+            Begin VB.OptionButton OptOrdenNomclien 
+               Caption         =   "Nombre cliente"
+               Height          =   375
+               Left            =   1560
+               TabIndex        =   18
+               Top             =   180
+               Width           =   1455
+            End
+            Begin VB.OptionButton OptOrdenCodclien 
+               Caption         =   "Cod. cliente"
+               Height          =   255
+               Left            =   120
+               TabIndex        =   17
+               Top             =   240
+               Width           =   1215
+            End
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   1
+            Left            =   3840
+            MaxLength       =   15
+            TabIndex        =   12
+            Top             =   120
+            Width           =   1695
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   41
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":13F9
+            Top             =   1920
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   62
+            Left            =   720
+            TabIndex        =   273
+            Top             =   1920
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   40
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":14FB
+            Top             =   1560
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Actividad"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   61
+            Left            =   120
+            TabIndex        =   271
+            Top             =   1320
+            Width           =   795
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   60
+            Left            =   720
+            TabIndex        =   270
+            Top             =   1560
+            Width           =   450
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   58
+            Left            =   720
+            TabIndex        =   258
+            Top             =   960
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   37
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":15FD
+            Top             =   960
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   56
+            Left            =   720
+            TabIndex        =   256
+            Top             =   600
+            Width           =   450
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Agente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   55
+            Left            =   120
+            TabIndex        =   255
+            Top             =   360
+            Width           =   615
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   36
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":16FF
+            Top             =   600
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "€"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   19
+            Left            =   5640
+            TabIndex        =   194
+            Top             =   120
+            Width           =   105
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Mostrar Clientes con ventas superiores a"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   18
+            Left            =   120
+            TabIndex        =   193
+            Top             =   120
+            Width           =   3465
+         End
+      End
+      Begin VB.CheckBox chkDispo 
+         Caption         =   "Datos de dpto/obra"
+         Height          =   255
+         Index           =   1
+         Left            =   1920
+         TabIndex        =   252
+         Top             =   4320
+         Width           =   1935
+      End
+      Begin VB.CheckBox chkDispo 
+         Caption         =   "Detalle"
+         Height          =   255
+         Index           =   0
+         Left            =   480
+         TabIndex        =   251
+         Top             =   4320
+         Width           =   1575
+      End
+      Begin VB.Frame FramepedxClien 
+         BorderStyle     =   0  'None
+         Height          =   2295
+         Left            =   5760
+         TabIndex        =   233
+         Top             =   4320
+         Visible         =   0   'False
+         Width           =   6375
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   10
+            Left            =   1500
+            MaxLength       =   6
+            TabIndex        =   11
+            Top             =   1680
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   10
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   241
+            Text            =   "Text5"
+            Top             =   1680
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   9
+            Left            =   1500
+            MaxLength       =   6
+            TabIndex        =   10
+            Top             =   1320
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   9
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   239
+            Text            =   "Text5"
+            Top             =   1320
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   7
+            Left            =   1500
+            MaxLength       =   6
+            TabIndex        =   9
+            Top             =   600
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   7
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   237
+            Text            =   "Text5"
+            Top             =   600
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   6
+            Left            =   1500
+            MaxLength       =   6
+            TabIndex        =   8
+            Top             =   240
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   6
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   234
+            Text            =   "Text5"
+            Top             =   240
+            Width           =   3855
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Zona"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   52
+            Left            =   0
+            TabIndex        =   243
+            Top             =   1080
+            Width           =   615
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   47
+            Left            =   600
+            TabIndex        =   242
+            Top             =   1680
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   34
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":1801
+            Top             =   1680
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   31
+            Left            =   600
+            TabIndex        =   240
+            Top             =   1320
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   33
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":1903
+            Top             =   1320
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   29
+            Left            =   600
+            TabIndex        =   238
+            Top             =   600
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   13
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":1A05
+            Top             =   600
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Agente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   28
+            Left            =   0
+            TabIndex        =   236
+            Top             =   0
+            Width           =   615
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   27
+            Left            =   600
+            TabIndex        =   235
+            Top             =   240
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   3
+            Left            =   1200
+            Picture         =   "frmListadoPed.frx":1B07
+            Top             =   240
+            Width           =   240
+         End
+      End
+      Begin VB.ComboBox cmbTipAlbaran 
+         Height          =   315
+         Index           =   1
+         ItemData        =   "frmListadoPed.frx":1C09
+         Left            =   2640
+         List            =   "frmListadoPed.frx":1C16
+         Style           =   2  'Dropdown List
+         TabIndex        =   221
+         Top             =   4920
+         Visible         =   0   'False
+         Width           =   1695
+      End
+      Begin VB.Frame Frame12 
+         BorderStyle     =   0  'None
+         Height          =   2055
+         Left            =   7080
+         TabIndex        =   196
+         Top             =   1440
+         Width           =   6495
+         Begin VB.Frame Frame13 
+            Height          =   615
+            Left            =   240
+            TabIndex        =   202
+            Top             =   1320
+            Width           =   2655
+            Begin VB.OptionButton OptResumen 
+               Caption         =   "Resumen"
+               Height          =   255
+               Left            =   1320
+               TabIndex        =   204
+               Top             =   240
+               Width           =   1095
+            End
+            Begin VB.OptionButton OptDetalle 
+               Caption         =   "Detalle"
+               Height          =   255
+               Index           =   2
+               Left            =   120
+               TabIndex        =   203
+               Top             =   240
+               Value           =   -1  'True
+               Width           =   975
+            End
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   2
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   198
+            Text            =   "Text5"
+            Top             =   360
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   2
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   21
+            Top             =   360
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   3
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   197
+            Text            =   "Text5"
+            Top             =   720
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   3
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   22
+            Top             =   720
+            Width           =   735
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   1
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":1C49
+            Top             =   360
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Trabajador"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   22
+            Left            =   120
+            TabIndex        =   201
+            Top             =   120
+            Width           =   945
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   21
+            Left            =   480
+            TabIndex        =   200
+            Top             =   360
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   2
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":1D4B
+            Top             =   720
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   20
+            Left            =   480
+            TabIndex        =   199
+            Top             =   720
+            Width           =   420
+         End
+      End
+      Begin VB.Frame Frame5 
+         BorderStyle     =   0  'None
+         Height          =   1095
+         Left            =   360
+         TabIndex        =   167
+         Top             =   2640
+         Width           =   6495
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   21
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   7
+            Top             =   720
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   21
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   169
+            Text            =   "Text5"
+            Top             =   720
+            Width           =   3855
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   20
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   6
+            Top             =   360
+            Width           =   735
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   20
+            Left            =   2160
+            Locked          =   -1  'True
+            TabIndex        =   168
+            Text            =   "Text5"
+            Top             =   360
+            Width           =   3855
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   12
+            Left            =   480
+            TabIndex        =   172
+            Top             =   720
+            Width           =   420
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   12
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":1E4D
+            Top             =   720
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   13
+            Left            =   480
+            TabIndex        =   171
+            Top             =   360
+            Width           =   450
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Cliente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   16
+            Left            =   120
+            TabIndex        =   170
+            Top             =   120
+            Width           =   585
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   11
+            Left            =   1080
+            Picture         =   "frmListadoPed.frx":1F4F
+            Top             =   360
+            Width           =   240
+         End
+      End
+      Begin VB.Frame Frame9 
+         BorderStyle     =   0  'None
+         Height          =   1095
+         Left            =   360
+         TabIndex        =   186
+         Top             =   1920
+         Width           =   6375
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   13
+            Left            =   1800
+            Locked          =   -1  'True
+            TabIndex        =   188
+            Text            =   "Text5"
+            Top             =   360
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   13
+            Left            =   1260
+            MaxLength       =   3
+            TabIndex        =   2
+            Top             =   360
+            Width           =   495
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   14
+            Left            =   1800
+            Locked          =   -1  'True
+            TabIndex        =   187
+            Text            =   "Text5"
+            Top             =   720
+            Width           =   3735
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   14
+            Left            =   1260
+            MaxLength       =   3
+            TabIndex        =   3
+            Top             =   720
+            Width           =   495
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   4
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":2051
+            Top             =   360
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Almacen"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   6
+            Left            =   120
+            TabIndex        =   191
+            Top             =   120
+            Width           =   735
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   7
+            Left            =   480
+            TabIndex        =   190
+            Top             =   360
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   5
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":2153
+            Top             =   720
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   8
+            Left            =   480
+            TabIndex        =   189
+            Top             =   720
+            Width           =   420
+         End
+      End
+      Begin VB.Frame Frame8 
+         BorderStyle     =   0  'None
+         Height          =   1215
+         Left            =   240
+         TabIndex        =   180
+         Top             =   3120
+         Width           =   6975
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   15
+            Left            =   2520
+            Locked          =   -1  'True
+            TabIndex        =   182
+            Text            =   "Text5"
+            Top             =   480
+            Width           =   4215
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   15
+            Left            =   1260
+            MaxLength       =   16
+            TabIndex        =   4
+            Top             =   480
+            Width           =   1215
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   16
+            Left            =   2520
+            Locked          =   -1  'True
+            TabIndex        =   181
+            Text            =   "Text5"
+            Top             =   840
+            Width           =   4215
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   16
+            Left            =   1260
+            MaxLength       =   16
+            TabIndex        =   5
+            Top             =   840
+            Width           =   1215
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   6
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":2255
+            Top             =   480
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Artículo"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   195
+            Index           =   1
+            Left            =   120
+            TabIndex        =   185
+            Top             =   240
+            Width           =   660
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   3
+            Left            =   480
+            TabIndex        =   184
+            Top             =   480
+            Width           =   450
+         End
+         Begin VB.Image imgBuscarOfer 
+            Height          =   240
+            Index           =   7
+            Left            =   960
+            Picture         =   "frmListadoPed.frx":2357
+            Top             =   840
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   9
+            Left            =   480
+            TabIndex        =   183
+            Top             =   840
+            Width           =   420
+         End
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   12
+         Left            =   4140
+         MaxLength       =   10
+         TabIndex        =   1
+         Top             =   1440
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   2
+         Left            =   5760
+         TabIndex        =   27
+         Top             =   7080
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdAceptarPedxArtic 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4680
+         TabIndex        =   26
+         Top             =   7080
+         Width           =   975
+      End
+      Begin VB.TextBox txtCodigo 
+         Height          =   285
+         Index           =   11
+         Left            =   1740
+         MaxLength       =   10
+         TabIndex        =   0
+         Top             =   1440
+         Width           =   1215
+      End
+      Begin VB.Frame FrameOrden1 
+         BorderStyle     =   0  'None
+         Height          =   855
+         Left            =   240
+         TabIndex        =   232
+         Top             =   6600
+         Width           =   3975
+         Begin VB.CheckBox chkPedxClixSemEntrega 
+            Caption         =   "Obs. pedido"
+            Height          =   255
+            Index           =   1
+            Left            =   2040
+            TabIndex        =   24
+            Top             =   120
+            Value           =   1  'Checked
+            Width           =   1815
+         End
+         Begin VB.CheckBox chkPedxClixSemEntrega 
+            Caption         =   "Semana entrega"
+            Height          =   255
+            Index           =   0
+            Left            =   240
+            TabIndex        =   23
+            Top             =   120
+            Value           =   1  'Checked
+            Width           =   1575
+         End
+         Begin VB.ComboBox cboTipocliente 
+            Height          =   315
+            Left            =   1320
+            Style           =   2  'Dropdown List
+            TabIndex        =   25
+            Top             =   480
+            Width           =   1815
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Tipo cliente"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   59
+            Left            =   240
+            TabIndex        =   268
+            Top             =   510
+            Width           =   810
+         End
+         Begin VB.Image imgayuda 
+            Height          =   255
+            Index           =   0
+            Left            =   3240
+            ToolTipText     =   "Pedidos por cliente"
+            Top             =   480
+            Width           =   255
+         End
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   54
+         Left            =   480
+         TabIndex        =   253
+         Top             =   4680
+         Width           =   2850
+      End
+      Begin VB.Label lblTipAlbaran 
+         Caption         =   "Tipo de albaranes:"
+         Height          =   255
+         Index           =   1
+         Left            =   600
+         TabIndex        =   222
+         Top             =   4920
+         Visible         =   0   'False
+         Width           =   1335
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   7
+         Left            =   3840
+         Picture         =   "frmListadoPed.frx":2459
+         Top             =   1440
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   5
+         Left            =   960
+         TabIndex        =   49
+         Top             =   1440
+         Width           =   450
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Pedido"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   4
+         Left            =   480
+         TabIndex        =   48
+         Top             =   1200
+         Width           =   1110
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Pedidos por Artículo"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   360
+         TabIndex        =   47
+         Top             =   480
+         Width           =   4815
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   6
+         Left            =   1440
+         Picture         =   "frmListadoPed.frx":24E4
+         Top             =   1440
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   2
+         Left            =   3360
+         TabIndex        =   46
+         Top             =   1440
+         Width           =   420
       End
    End
    Begin VB.Frame FramePreFacMante 
@@ -5018,7 +5018,7 @@ End Sub
 '#### Laura 14/11/2006 Recuperar facturas ALZIRA
 Private Function ComprobarCliente_RecuperarFac(cadSelAlb As String, fecFac As String, numFac As String) As Boolean
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim codMacta1 As String 'cliente factura ariges
 Dim codMacta2 As String 'cliente factura conta
 Dim LEtra As String
@@ -5031,25 +5031,25 @@ Dim LEtra As String
     SQL = SQL & " from scaalb inner join sclien on scaalb.codclien=sclien.codclien "
     SQL = SQL & " Where " & cadSelAlb
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        codMacta1 = DBLet(Rs!Codmacta, "T")
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        codMacta1 = DBLet(RS!Codmacta, "T")
     
     End If
-    Set Rs = Nothing
+    Set RS = Nothing
     
     
     'codmacta en la contabilidad
     LEtra = ObtenerLetraSerie("FAV")
     SQL = "SELECT codmacta FROM cabfact "
     SQL = SQL & " WHERE numserie=" & DBSet(LEtra, "T") & " AND codfaccl=" & numFac & " AND anofaccl=" & Year(fecFac)
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        codMacta2 = DBLet(Rs!Codmacta, "T")
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        codMacta2 = DBLet(RS!Codmacta, "T")
     End If
-    Set Rs = Nothing
+    Set RS = Nothing
     
     If codMacta1 <> "" And codMacta2 <> "" Then
         If codMacta1 = codMacta2 Then
@@ -5769,7 +5769,7 @@ Dim SQL As String
         If miRsAux!CanStock <> 0 Then
             SQL = "UPDATE tmpsliped set stockalm = " & CStr(Val(CCur(miRsAux!CanStock)))
             SQL = SQL & " WHERE codusu = " & vUsu.codigo & " AND codartic=" & DBSet(miRsAux!codArtic, "T")
-            SQL = SQL & " AND codalmac =" & DBSet(miRsAux!codalmac, "N")
+            SQL = SQL & " AND codalmac =" & DBSet(miRsAux!codAlmac, "N")
             conn.Execute SQL
         End If
         miRsAux.MoveNext
@@ -5808,7 +5808,7 @@ Dim SQL As String
         If miRsAux!cuant <> 0 Then
             SQL = "UPDATE tmpsliped set cantpedprov = " & CStr(Val(CCur(miRsAux!cuant)))
             SQL = SQL & " WHERE codusu = " & vUsu.codigo & " AND codartic=" & DBSet(miRsAux!codArtic, "T")
-            SQL = SQL & " AND codalmac =" & DBSet(miRsAux!codalmac, "N")
+            SQL = SQL & " AND codalmac =" & DBSet(miRsAux!codAlmac, "N")
             conn.Execute SQL
         End If
         miRsAux.MoveNext
@@ -7704,10 +7704,10 @@ Private Sub LlamarImprimir()
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
-        .opcion = OpcionListado
+        .Opcion = OpcionListado
         .Titulo = Titulo
         .ConSubInforme = conSubRPT
-        .NombreRpt = nomRPT  'nombre del informe
+        .NombreRPT = nomRPT  'nombre del informe
         .Show vbModal
     End With
 End Sub
@@ -7725,7 +7725,7 @@ End Sub
 
 Private Function ObtenerClientesNuevo(cadW As String, Importe As String) As String
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error GoTo EClientes
     
@@ -7745,17 +7745,17 @@ Dim Rs As ADODB.Recordset
     SQL = SQL & " group by codclien "
     If Importe <> "" Then SQL = SQL & " having baseimp>" & Importe
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
-    While Not Rs.EOF
+    While Not RS.EOF
 '        If RS!BaseImp >= CCur(Importe) Then
-            SQL = SQL & Rs!codClien & ","
+            SQL = SQL & RS!codClien & ","
 '        End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     'Si no tiene DATOS es que ninguno entra dentro de estos registros
     If SQL = "" Then SQL = "-1-"
@@ -7869,7 +7869,7 @@ Dim DatosPortes As String  'nomartic|preciov|preciouc|
         RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         'No pueser eof
         DatosPortes = RSalb!NomArtic & "|"
-        SQL = CStr(RSalb!preciove)
+        SQL = CStr(RSalb!PrecioVe)
         DatosPortes = DatosPortes & TransformaComasPuntos(SQL) & "|"
         SQL = CStr(RSalb!precioUC)
         DatosPortes = DatosPortes & TransformaComasPuntos(SQL) & "|"
@@ -7967,7 +7967,7 @@ Dim DatosPortes As String  'nomartic|preciov|preciouc|
         RSalb.Close
         If SQL <> "" Then
             CadenaDesdeOtroForm = ""
-            frmListado3.opcion = 2
+            frmListado3.Opcion = 2
             frmListado3.Show vbModal
             If CadenaDesdeOtroForm <> "" Then CargaPorteTipoHerbelca = True
             
@@ -8014,7 +8014,7 @@ Dim ImporteT As Currency
         'YA EXISTE UNA LINEA con portes
         If Comprobar Then
             Aux = "insert into `tmpsliped` (`codusu`,`numpedcl`,`numlinea`,`codalmac`,codartic,`nomartic`,codclien)  VALUES ("
-            Aux = Aux & vUsu.codigo & "," & RN!NumAlbar & "," & RN!numlinea & "," & RN!codalmac & "," & DBSet(RN!codtipom, "T")
+            Aux = Aux & vUsu.codigo & "," & RN!NumAlbar & "," & RN!numlinea & "," & RN!codAlmac & "," & DBSet(RN!codtipom, "T")
             Aux = Aux & "," & DBSet(Nomclien, "T") & "," & CodigoCliente & ")"
             ejecutar Aux, False
         Else
@@ -8088,7 +8088,7 @@ Dim ImporteT As Currency
                 Aux = "Select numalbar,codalmac,max(numlinea) from slialb where codtipom='ALV' AND numalbar =" & Aux & " GROUP BY 1,2"
                 RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 'NO PUEDE SER EOF
-                Aux = "'ALV'," & RN!NumAlbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codalmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
+                Aux = "'ALV'," & RN!NumAlbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codAlmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
                 
                 'codtipom,numalbar,numlinea,codalmac,codartic,nomartic,cantidad,numbultos,
                 'precioar,dtoline1,dtoline2,importel,origpre,codproveX,
@@ -8165,7 +8165,7 @@ End Sub
 
 
 Private Sub CargaListTipoFacturas()
-Dim I As Integer
+Dim i As Integer
 Dim Rectifica As Byte '0. Sin cargar  1.- Cargada
     
     
@@ -8200,9 +8200,9 @@ Dim Rectifica As Byte '0. Sin cargar  1.- Cargada
     While Not miRsAux.EOF
         
         ListTipoFact.AddItem miRsAux!codtipom & " - " & miRsAux!nomtipom
-        If miRsAux!marcar = 1 Then ListTipoFact.Selected(I) = True
+        If miRsAux!marcar = 1 Then ListTipoFact.Selected(i) = True
             
-        I = I + 1
+        i = i + 1
             
         miRsAux.MoveNext
     Wend

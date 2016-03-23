@@ -2105,7 +2105,7 @@ Dim Rs As ADODB.Recordset
                 End If
             End If
             
-            aqui aqui aqui
+
             
             'Mayo 2014
             'Si hay recargo financiero, y es la empresa ALZIRA, entonces
