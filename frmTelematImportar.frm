@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTelematImportar 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Importar fichero telematel"
@@ -275,8 +275,8 @@ Private Sub cmdActualizar_Click()
     
     Screen.MousePointer = vbHourglass
     Me.FrameProc.visible = True
-    Me.Label2(0).Caption = "Comienzo proceso. Leyendo BD"
-    Me.Label2(1).Caption = ""
+    Me.label2(0).Caption = "Comienzo proceso. Leyendo BD"
+    Me.label2(1).Caption = ""
     Me.Refresh
     Actualizar
     Me.FrameProc.visible = False
@@ -294,8 +294,8 @@ Dim HayQueInsertarTelematel As Boolean
     Set miRsAux = New ADODB.Recordset
     Set RArt = New ADODB.Recordset
     Espera 0.2
-    Me.Label2(0).Caption = "Abriendo RS"
-    Me.Label2(0).Refresh
+    Me.label2(0).Caption = "Abriendo RS"
+    Me.label2(0).Refresh
     
    
     
@@ -324,10 +324,10 @@ Dim HayQueInsertarTelematel As Boolean
     TieneError = False
     CodTelemYaInsertados = ""
     For NF = 1 To lw1.ListItems.Count
-        Me.Label2(0).Caption = lw1.ListItems(NF).SubItems(1)
-        Me.Label2(1).Caption = NF & " de " & lw1.ListItems.Count
-        Me.Label2(0).Refresh
-        Me.Label2(1).Refresh
+        Me.label2(0).Caption = lw1.ListItems(NF).SubItems(1)
+        Me.label2(1).Caption = NF & " de " & lw1.ListItems.Count
+        Me.label2(0).Refresh
+        Me.label2(1).Refresh
         If (NF Mod 50) = 0 Then DoEvents
         'BUscamos codartic
         Aux = BuscarCodartic(NF)
@@ -410,21 +410,21 @@ Dim HayQueInsertarTelematel As Boolean
     'No los miraremos en todos, solo en aquellos que ya exisiteran y NO haya encontrado el codigo
     'esos telem me los guardo en CodTelemYaInsertados
     If CodTelemYaInsertados <> "" Then
-        Me.Label2(0).Caption = "Comprobacion referencias capturadas"
-        Me.Label2(1).Caption = ""
-        Me.Label2(0).Refresh
-        Me.Label2(1).Refresh
+        Me.label2(0).Caption = "Comprobacion referencias capturadas"
+        Me.label2(1).Caption = ""
+        Me.label2(0).Refresh
+        Me.label2(1).Refresh
         CodTelemYaInsertados = Mid(CodTelemYaInsertados, 2)
         
-        'FALTA### FALTA### FALTA###
+        
         
         Cad = "Select * from stelem where codprove=" & txtProv(0).Text
         Cad = Cad & " AND codartic<>"""""
         Cad = Cad & " AND codtelem in (" & CodTelemYaInsertados & ")"
         miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
-            Me.Label2(1).Caption = DBLet(miRsAux!Nombre, "T")
-            Me.Label2(1).Refresh
+            Me.label2(1).Caption = DBLet(miRsAux!Nombre, "T")
+            Me.label2(1).Refresh
             Cad = "UPDATE sartic set "
             Cad = Cad & " `referprov`=" & DBSet(miRsAux!referprov, "T")
             
@@ -434,7 +434,7 @@ Dim HayQueInsertarTelematel As Boolean
         Wend
         miRsAux.Close
         
-         Me.Label2(1).Caption = ""
+         Me.label2(1).Caption = ""
     End If
     Set miRsAux = Nothing
     Set RArt = Nothing
@@ -628,24 +628,24 @@ End Sub
 
 '-----------------------------------------------------------------------------
 Private Sub ProcesarFichero()
-Dim Ok As Boolean
+Dim OK As Boolean
 Dim IT As ListItem
 On Error GoTo EprocesarFichero
     NF = FreeFile
     Open Text1.Text For Input As #NF
-    Ok = EOF(NF)
+    OK = EOF(NF)
     NumRegElim = 0
     CadenaDesdeOtroForm = ""
-    While Not Ok
+    While Not OK
         Line Input #NF, Cad
         Set IT = lw1.ListItems.Add()
         If Not ProcesarLinea(IT) Then
             lw1.ListItems.Remove IT.Index
             '¿Continuamos?
             'if msgbox("¿Continuar
-            Ok = True
+            OK = True
         Else
-            Ok = EOF(NF)
+            OK = EOF(NF)
         End If
     Wend
     NumRegElim = Val(CadenaDesdeOtroForm)

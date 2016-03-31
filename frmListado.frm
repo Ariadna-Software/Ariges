@@ -12129,7 +12129,7 @@ Dim codigo  As String
     Else
 
         '------------------------------------------------------------
-        'Envio por mail del desde hasta seleccionado
+        'Envio por mail del desde hasta se  leccionado
         'Comprobaremos los mail, que todos tienen
         'FALTA###
         
@@ -13579,6 +13579,12 @@ Dim IndiceFoco As Integer
         
         
         Case 223
+        
+            'FALTA### Quitar
+            txtCodigo(31).Text = "17/03/2016"
+            txtCodigo(32).Text = "17/03/2016"
+        
+        
             '223: Contabilizar facturas
             If Me.OptProve.Tag = "" Then
                 'Contabilizacion normal clie/prov

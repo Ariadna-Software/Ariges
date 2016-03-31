@@ -572,18 +572,18 @@ Private Sub Form_Load()
     PriVez = True
     txtclien.Text = ""
     If Me.ImprimirCertificacion Then
-        Label2.Caption = "Certificación"
-        Label2.ForeColor = &H80&
+        label2.Caption = "Certificación"
+        label2.ForeColor = &H80&
         SQL = "Impresión certificación"
         'Fecha "certificacion"
-        Label1(8).Caption = "F. Certif."
+        label1(8).Caption = "F. Certif."
         Me.txtFec = Format(Now, "dd/mm/yyyy")
         
     Else
-        Label2.Caption = "Facturar"
-        Label2.ForeColor = vbRed
+        label2.Caption = "Facturar"
+        label2.ForeColor = vbRed
         SQL = "Facturar Albaranes x Cliente"
-        Label1(8).Caption = "Copias"
+        label1(8).Caption = "Copias"
     End If
     Me.Caption = SQL
     Me.cmdFacturar(1).visible = ImprimirCertificacion
@@ -591,7 +591,7 @@ Private Sub Form_Load()
     
     'Tipo Albaran para la certificacion
     If ImprimirCertificacion Then CargaComboTipos
-    Me.Label1(9).visible = True ' ImprimirCertificacion
+    Me.label1(9).visible = True ' ImprimirCertificacion
     cboTipo2.visible = True 'ImprimirCertificacion2
    
     
@@ -658,13 +658,11 @@ Private Sub TreeView1_DblClick()
         If vParamAplic.TipoFormularioClientes = 0 Then
             frmFacEntAlbaranes2.hcoCodMovim = NumRegElim
             frmFacEntAlbaranes2.hcoCodTipoM = Mid(TreeView1.SelectedItem.Text, 1, 3)
-            frmFacEntAlbaranes2.RecuperarFactu = False
             frmFacEntAlbaranes2.Show vbModal
             Set frmFacEntAlbaranes2 = Nothing
         Else
             frmFacEntAlbSAIL.hcoCodMovim = NumRegElim
             frmFacEntAlbSAIL.hcoCodTipoM = Mid(TreeView1.SelectedItem.Text, 1, 3)
-            frmFacEntAlbSAIL.RecuperarFactu = False
             frmFacEntAlbSAIL.Show vbModal
             Set frmFacEntAlbSAIL = Nothing
         End If
@@ -754,7 +752,6 @@ Private Sub TreeView2_DblClick()
         If vParamAplic.TipoFormularioClientes = 0 Then
                 frmFacEntAlbaranes2.hcoCodMovim = NumRegElim
                 frmFacEntAlbaranes2.hcoCodTipoM = Mid(TreeView2.SelectedItem.Text, 1, 3)
-                frmFacEntAlbaranes2.RecuperarFactu = False
                 frmFacEntAlbaranes2.Show vbModal
                 Set frmFacEntAlbaranes2 = Nothing
             
@@ -762,7 +759,6 @@ Private Sub TreeView2_DblClick()
         
             frmFacEntAlbSAIL.hcoCodMovim = NumRegElim
             frmFacEntAlbSAIL.hcoCodTipoM = Mid(TreeView2.SelectedItem.Text, 1, 3)
-            frmFacEntAlbSAIL.RecuperarFactu = False
             frmFacEntAlbSAIL.Show vbModal
             Set frmFacEntAlbSAIL = Nothing
         End If
@@ -1015,7 +1011,7 @@ Dim C As String
     
 End Sub
 
-Private Function DevuelveNumeroAlbaran(Linea As String) As String
+Private Function DevuelveNumeroAlbaran(linea As String) As String
 Dim J As Integer
     
     
@@ -1023,9 +1019,9 @@ Dim J As Integer
 
         DevuelveNumeroAlbaran = "('PPP',0)"
         
-        J = InStr(1, Linea, " ")
+        J = InStr(1, linea, " ")
         If J > 0 Then
-            DevuelveNumeroAlbaran = Mid(Linea, 1, J - 1)
+            DevuelveNumeroAlbaran = Mid(linea, 1, J - 1)
             DevuelveNumeroAlbaran = "('" & Mid(DevuelveNumeroAlbaran, 1, 3) & "'," & Mid(DevuelveNumeroAlbaran, 4) & ")" 'los tres primeros son el codtipom
         End If
 

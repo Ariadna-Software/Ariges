@@ -861,23 +861,17 @@ Dim ImporteAuxiliarTesoreria As Currency
     
     If b Then
         'Insertar en Tesoreria
-        '#### Laura 15/11/2006 Recuperar facturas ALZIRA
-        'If frmComFacturar.Check1(0).Value = 1 Then    'Lo cambia DAVID, para no pasar valores de formularios
+        
         If InsertarEnLaTesoreria Then
-            '####
             
             b = InsertarEnTesoreria(MenError)
             
         End If
         
         
-        '#### Laura 15/11/2006 Recuperar facturas ALZIRA
-        'If frmComFacturar.Check1(1).Value = 1 Then     'Lo cambia DAVID, para no pasar valores de formularios
         If MarcarAlbaranesComoContabilizados Then
             If b Then b = Me.MarcarContabilizada(MenError)
         End If
-        '####
-        
         
         'Eliminar los Albaranes y sus lineas
         If b Then
@@ -889,7 +883,6 @@ Dim ImporteAuxiliarTesoreria As Currency
         conn.CommitTrans
         ConnConta.CommitTrans
         TraspasoAlbaranesAFactura = True
-        'If Not LiquidacionProveedores Then MsgBox "La Factura de los Albaranes seleccionados se generó correctamente.", vbInformation
     Else
         conn.RollbackTrans
         ConnConta.RollbackTrans

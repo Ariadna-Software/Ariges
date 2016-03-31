@@ -393,139 +393,139 @@ Begin VB.Form frmFacEntAlbSAIL
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbSAIL.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(43)"
-      Tab(1).Control(1)=   "Text1(40)"
-      Tab(1).Control(2)=   "chkFacturarKm"
-      Tab(1).Control(3)=   "Text1(34)"
-      Tab(1).Control(4)=   "FrameFactura"
-      Tab(1).Control(5)=   "FrameFacRec"
-      Tab(1).Control(6)=   "FrameHco"
-      Tab(1).Control(7)=   "Text1(29)"
-      Tab(1).Control(8)=   "Text2(29)"
-      Tab(1).Control(9)=   "Text1(28)"
-      Tab(1).Control(10)=   "Text2(28)"
-      Tab(1).Control(11)=   "Text1(27)"
-      Tab(1).Control(12)=   "Text2(27)"
-      Tab(1).Control(13)=   "Text1(2)"
-      Tab(1).Control(14)=   "Text1(25)"
-      Tab(1).Control(15)=   "Text1(26)"
-      Tab(1).Control(16)=   "Text1(24)"
-      Tab(1).Control(17)=   "Text1(23)"
-      Tab(1).Control(18)=   "Text1(22)"
-      Tab(1).Control(19)=   "Text1(21)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(10)"
+      Tab(1).Control(4)=   "Label1(11)"
+      Tab(1).Control(5)=   "Label1(12)"
+      Tab(1).Control(6)=   "imgBuscar(7)"
+      Tab(1).Control(7)=   "Label1(9)"
+      Tab(1).Control(8)=   "imgBuscar(8)"
+      Tab(1).Control(9)=   "Label1(23)"
+      Tab(1).Control(10)=   "Label1(24)"
+      Tab(1).Control(11)=   "imgBuscar(9)"
+      Tab(1).Control(12)=   "Label1(43)"
+      Tab(1).Control(13)=   "Label1(49)"
+      Tab(1).Control(14)=   "Label1(61)"
+      Tab(1).Control(15)=   "Text1(39)"
+      Tab(1).Control(16)=   "chkDocArchi"
+      Tab(1).Control(17)=   "Text1(38)"
+      Tab(1).Control(18)=   "Text1(18)"
+      Tab(1).Control(19)=   "Text1(19)"
       Tab(1).Control(20)=   "Text1(20)"
-      Tab(1).Control(21)=   "Text1(19)"
-      Tab(1).Control(22)=   "Text1(18)"
-      Tab(1).Control(23)=   "Text1(38)"
-      Tab(1).Control(24)=   "chkDocArchi"
-      Tab(1).Control(25)=   "Text1(39)"
-      Tab(1).Control(26)=   "Label1(61)"
-      Tab(1).Control(27)=   "Label1(49)"
-      Tab(1).Control(28)=   "Label1(43)"
-      Tab(1).Control(29)=   "imgBuscar(9)"
-      Tab(1).Control(30)=   "Label1(24)"
-      Tab(1).Control(31)=   "Label1(23)"
-      Tab(1).Control(32)=   "imgBuscar(8)"
-      Tab(1).Control(33)=   "Label1(9)"
-      Tab(1).Control(34)=   "imgBuscar(7)"
-      Tab(1).Control(35)=   "Label1(12)"
-      Tab(1).Control(36)=   "Label1(11)"
-      Tab(1).Control(37)=   "Label1(10)"
-      Tab(1).Control(38)=   "Label1(5)"
-      Tab(1).Control(39)=   "Label1(3)"
-      Tab(1).Control(40)=   "Label1(45)"
+      Tab(1).Control(21)=   "Text1(21)"
+      Tab(1).Control(22)=   "Text1(22)"
+      Tab(1).Control(23)=   "Text1(23)"
+      Tab(1).Control(24)=   "Text1(24)"
+      Tab(1).Control(25)=   "Text1(26)"
+      Tab(1).Control(26)=   "Text1(25)"
+      Tab(1).Control(27)=   "Text1(2)"
+      Tab(1).Control(28)=   "Text2(27)"
+      Tab(1).Control(29)=   "Text1(27)"
+      Tab(1).Control(30)=   "Text2(28)"
+      Tab(1).Control(31)=   "Text1(28)"
+      Tab(1).Control(32)=   "Text2(29)"
+      Tab(1).Control(33)=   "Text1(29)"
+      Tab(1).Control(34)=   "FrameHco"
+      Tab(1).Control(35)=   "FrameFacRec"
+      Tab(1).Control(36)=   "FrameFactura"
+      Tab(1).Control(37)=   "Text1(34)"
+      Tab(1).Control(38)=   "chkFacturarKm"
+      Tab(1).Control(39)=   "Text1(40)"
+      Tab(1).Control(40)=   "Text1(43)"
       Tab(1).ControlCount=   41
       TabCaption(2)   =   "O.trab /ext"
       TabPicture(2)   =   "frmFacEntAlbSAIL.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "FrameOT"
-      Tab(2).Control(1)=   "txtEuler(7)"
-      Tab(2).Control(2)=   "txtEuler(6)"
-      Tab(2).Control(3)=   "Label3(1)"
-      Tab(2).Control(4)=   "Label3(0)"
-      Tab(2).Control(5)=   "lblTituloEst"
+      Tab(2).Control(0)=   "lblTituloEst"
+      Tab(2).Control(1)=   "Label3(0)"
+      Tab(2).Control(2)=   "Label3(1)"
+      Tab(2).Control(3)=   "txtEuler(6)"
+      Tab(2).Control(4)=   "txtEuler(7)"
+      Tab(2).Control(5)=   "FrameOT"
       Tab(2).ControlCount=   6
       TabCaption(3)   =   "Reparaciones"
       TabPicture(3)   =   "frmFacEntAlbSAIL.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "txtEule_R(21)"
-      Tab(3).Control(1)=   "txtEule_R(20)"
-      Tab(3).Control(2)=   "txtEule_R(2)"
-      Tab(3).Control(3)=   "txtEule_R(1)"
-      Tab(3).Control(4)=   "txtEule_R(0)"
-      Tab(3).Control(5)=   "optEule_R(1)"
-      Tab(3).Control(6)=   "optEule_R(0)"
-      Tab(3).Control(7)=   "Frame4R"
-      Tab(3).Control(8)=   "txtEule_R(4)"
-      Tab(3).Control(9)=   "txtEule_R(3)"
-      Tab(3).Control(10)=   "chkEuler(9)"
-      Tab(3).Control(11)=   "chkEuler(8)"
-      Tab(3).Control(12)=   "chkEuler(7)"
-      Tab(3).Control(13)=   "chkEuler(6)"
-      Tab(3).Control(14)=   "chkEuler(5)"
-      Tab(3).Control(15)=   "chkEuler(4)"
-      Tab(3).Control(16)=   "chkEuler(3)"
-      Tab(3).Control(17)=   "chkEuler(2)"
-      Tab(3).Control(18)=   "chkEuler(1)"
-      Tab(3).Control(19)=   "chkEuler(0)"
-      Tab(3).Control(20)=   "txtEule_R(15)"
-      Tab(3).Control(21)=   "txtEule_R(16)"
-      Tab(3).Control(22)=   "txtEule_R(14)"
-      Tab(3).Control(23)=   "txtEule_R(13)"
-      Tab(3).Control(24)=   "txtEule_R(12)"
-      Tab(3).Control(25)=   "txtEule_R(9)"
-      Tab(3).Control(26)=   "txtEule_R(10)"
-      Tab(3).Control(27)=   "txtEule_R(8)"
-      Tab(3).Control(28)=   "txtEule_R(6)"
-      Tab(3).Control(29)=   "txtEule_R(5)"
-      Tab(3).Control(30)=   "txtEule_R(7)"
-      Tab(3).Control(31)=   "optEule_R(7)"
-      Tab(3).Control(32)=   "optEule_R(6)"
-      Tab(3).Control(33)=   "optEule_R(5)"
-      Tab(3).Control(34)=   "optEule_R(4)"
-      Tab(3).Control(35)=   "txtEule_R(19)"
-      Tab(3).Control(36)=   "txtEule_R(18)"
-      Tab(3).Control(37)=   "txtEule_R(17)"
-      Tab(3).Control(38)=   "cboEulerUdR"
-      Tab(3).Control(39)=   "txtEule_R(11)"
-      Tab(3).Control(40)=   "Label3E(37)"
-      Tab(3).Control(41)=   "Label3E(36)"
-      Tab(3).Control(42)=   "Label3E(24)"
-      Tab(3).Control(43)=   "Label3E(23)"
-      Tab(3).Control(44)=   "Label3E(20)"
-      Tab(3).Control(45)=   "Label3E(15)"
-      Tab(3).Control(46)=   "Label3E(10)"
-      Tab(3).Control(47)=   "Label3E(9)"
-      Tab(3).Control(48)=   "Label3E(8)"
-      Tab(3).Control(49)=   "Label3E(7)"
-      Tab(3).Control(50)=   "Label3E(6)"
-      Tab(3).Control(51)=   "Label3E(5)"
-      Tab(3).Control(52)=   "Label3E(4)"
-      Tab(3).Control(53)=   "Label3E(3)"
-      Tab(3).Control(54)=   "Label3E(2)"
-      Tab(3).Control(55)=   "Label3E(1)"
-      Tab(3).Control(56)=   "Label3E(30)"
-      Tab(3).Control(57)=   "Label3E(29)"
-      Tab(3).Control(58)=   "Label3E(28)"
-      Tab(3).Control(59)=   "Label3E(27)"
-      Tab(3).Control(60)=   "Label3E(26)"
-      Tab(3).Control(61)=   "Label3E(25)"
-      Tab(3).Control(62)=   "Label3E(11)"
-      Tab(3).Control(63)=   "Label3E(19)"
-      Tab(3).Control(64)=   "Label3E(18)"
-      Tab(3).Control(65)=   "Label3E(17)"
-      Tab(3).Control(66)=   "Label3E(16)"
-      Tab(3).Control(67)=   "Label3E(14)"
-      Tab(3).Control(68)=   "Label3E(13)"
-      Tab(3).Control(69)=   "Label3E(12)"
-      Tab(3).Control(70)=   "Label3E(32)"
-      Tab(3).Control(71)=   "Label3E(31)"
-      Tab(3).Control(72)=   "Label3E(35)"
-      Tab(3).Control(73)=   "Label3E(34)"
-      Tab(3).Control(74)=   "Label3E(33)"
-      Tab(3).Control(75)=   "Line4"
-      Tab(3).Control(76)=   "Line3"
-      Tab(3).Control(77)=   "Line5"
+      Tab(3).Control(0)=   "Line5"
+      Tab(3).Control(1)=   "Line3"
+      Tab(3).Control(2)=   "Line4"
+      Tab(3).Control(3)=   "Label3E(33)"
+      Tab(3).Control(4)=   "Label3E(34)"
+      Tab(3).Control(5)=   "Label3E(35)"
+      Tab(3).Control(6)=   "Label3E(31)"
+      Tab(3).Control(7)=   "Label3E(32)"
+      Tab(3).Control(8)=   "Label3E(12)"
+      Tab(3).Control(9)=   "Label3E(13)"
+      Tab(3).Control(10)=   "Label3E(14)"
+      Tab(3).Control(11)=   "Label3E(16)"
+      Tab(3).Control(12)=   "Label3E(17)"
+      Tab(3).Control(13)=   "Label3E(18)"
+      Tab(3).Control(14)=   "Label3E(19)"
+      Tab(3).Control(15)=   "Label3E(11)"
+      Tab(3).Control(16)=   "Label3E(25)"
+      Tab(3).Control(17)=   "Label3E(26)"
+      Tab(3).Control(18)=   "Label3E(27)"
+      Tab(3).Control(19)=   "Label3E(28)"
+      Tab(3).Control(20)=   "Label3E(29)"
+      Tab(3).Control(21)=   "Label3E(30)"
+      Tab(3).Control(22)=   "Label3E(1)"
+      Tab(3).Control(23)=   "Label3E(2)"
+      Tab(3).Control(24)=   "Label3E(3)"
+      Tab(3).Control(25)=   "Label3E(4)"
+      Tab(3).Control(26)=   "Label3E(5)"
+      Tab(3).Control(27)=   "Label3E(6)"
+      Tab(3).Control(28)=   "Label3E(7)"
+      Tab(3).Control(29)=   "Label3E(8)"
+      Tab(3).Control(30)=   "Label3E(9)"
+      Tab(3).Control(31)=   "Label3E(10)"
+      Tab(3).Control(32)=   "Label3E(15)"
+      Tab(3).Control(33)=   "Label3E(20)"
+      Tab(3).Control(34)=   "Label3E(23)"
+      Tab(3).Control(35)=   "Label3E(24)"
+      Tab(3).Control(36)=   "Label3E(36)"
+      Tab(3).Control(37)=   "Label3E(37)"
+      Tab(3).Control(38)=   "txtEule_R(11)"
+      Tab(3).Control(39)=   "cboEulerUdR"
+      Tab(3).Control(40)=   "txtEule_R(17)"
+      Tab(3).Control(41)=   "txtEule_R(18)"
+      Tab(3).Control(42)=   "txtEule_R(19)"
+      Tab(3).Control(43)=   "optEule_R(4)"
+      Tab(3).Control(44)=   "optEule_R(5)"
+      Tab(3).Control(45)=   "optEule_R(6)"
+      Tab(3).Control(46)=   "optEule_R(7)"
+      Tab(3).Control(47)=   "txtEule_R(7)"
+      Tab(3).Control(48)=   "txtEule_R(5)"
+      Tab(3).Control(49)=   "txtEule_R(6)"
+      Tab(3).Control(50)=   "txtEule_R(8)"
+      Tab(3).Control(51)=   "txtEule_R(10)"
+      Tab(3).Control(52)=   "txtEule_R(9)"
+      Tab(3).Control(53)=   "txtEule_R(12)"
+      Tab(3).Control(54)=   "txtEule_R(13)"
+      Tab(3).Control(55)=   "txtEule_R(14)"
+      Tab(3).Control(56)=   "txtEule_R(16)"
+      Tab(3).Control(57)=   "txtEule_R(15)"
+      Tab(3).Control(58)=   "chkEuler(0)"
+      Tab(3).Control(59)=   "chkEuler(1)"
+      Tab(3).Control(60)=   "chkEuler(2)"
+      Tab(3).Control(61)=   "chkEuler(3)"
+      Tab(3).Control(62)=   "chkEuler(4)"
+      Tab(3).Control(63)=   "chkEuler(5)"
+      Tab(3).Control(64)=   "chkEuler(6)"
+      Tab(3).Control(65)=   "chkEuler(7)"
+      Tab(3).Control(66)=   "chkEuler(8)"
+      Tab(3).Control(67)=   "chkEuler(9)"
+      Tab(3).Control(68)=   "txtEule_R(3)"
+      Tab(3).Control(69)=   "txtEule_R(4)"
+      Tab(3).Control(70)=   "Frame4R"
+      Tab(3).Control(71)=   "optEule_R(0)"
+      Tab(3).Control(72)=   "optEule_R(1)"
+      Tab(3).Control(73)=   "txtEule_R(0)"
+      Tab(3).Control(74)=   "txtEule_R(1)"
+      Tab(3).Control(75)=   "txtEule_R(2)"
+      Tab(3).Control(76)=   "txtEule_R(20)"
+      Tab(3).Control(77)=   "txtEule_R(21)"
       Tab(3).ControlCount=   78
       TabCaption(4)   =   "Documentos asociados"
       TabPicture(4)   =   "frmFacEntAlbSAIL.frx":007C
@@ -3977,8 +3977,7 @@ Public hcoCodTipoM As String 'Codigo detalle de Movimiento(ALV,ALR,ALS)
 Public EsHistorico As Boolean 'Si es true abrir el formulario con la tabla de
                               'de historico schalb, y solo en modo de consulta
                               
-Public RecuperarFactu As Boolean 'si esta recuperando facturas al generar las facturas no coger contaror
-                                 'pedirlas por teclado
+
                                  
 Public AlbAvisoGenerado As Long 'Cuando desde aviso cierro reparacion, creo un albaran y llamo a este form
                                 'Entonces lo cargo el albaran y lo meto insertando lineas
@@ -5181,15 +5180,15 @@ Private Sub Form_Load()
     
     If CodTipoMov = "ALR" Then
         Me.Caption = "Albaranes Reparación"
-        Label1(3).visible = False
-        Label1(5).visible = False
+        label1(3).visible = False
+        label1(5).visible = False
         Text1(23).visible = False
         Text1(24).visible = False
-        Label1(12).visible = False
+        label1(12).visible = False
         Text1(2).visible = False
         'Captions
-        Label1(11).Caption = "Nº Repa."
-        Label1(10).Caption = "Fecha repara."
+        label1(11).Caption = "Nº Repa."
+        label1(10).Caption = "Fecha repara."
         Text1(24).visible = False
         'Terminal
         Text1(38).visible = False
@@ -5197,25 +5196,25 @@ Private Sub Form_Load()
         
         
     Else
-        Label1(11).Caption = "Nº Pedido"
-        Label1(10).Caption = "Fecha pedido"
+        label1(11).Caption = "Nº Pedido"
+        label1(10).Caption = "Fecha pedido"
     End If
    
     'Comprobar si es Departamento o Direccion
-    Me.Label1(1).Caption = DevuelveTextoDepto(True)
+    Me.label1(1).Caption = DevuelveTextoDepto(True)
     If vParamAplic.TieneCRM Then
-        Label1(61).Caption = "Observaciones CRM"
+        label1(61).Caption = "Observaciones CRM"
     Else
-        Label1(61).Caption = "Observaciones internas"
+        label1(61).Caption = "Observaciones internas"
     End If
     ' ---- [19/10/2009] [LAURA] : añadir centro de coste a la linea
     If vEmpresa.TieneAnalitica Then
         'cmdAux(9).ToolTipText = "Buscar centro coste"
         imgBuscar2(9).ToolTipText = "Buscar centro coste"
         txtAux(9).Tag = "centro coste"
-        Label1(51).Caption = "Centro coste"
+        label1(51).Caption = "Centro coste"
     Else
-        Label1(51).Caption = "Proveedor"
+        label1(51).Caption = "Proveedor"
     End If
     imgBuscar2(9).Tag = -1
         
@@ -5227,7 +5226,7 @@ Private Sub Form_Load()
     
     
     'Aportacion a terminal
-    Label1(49).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
+    label1(49).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
     Text1(40).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
     
     If Not EsHistorico Then
@@ -5239,7 +5238,6 @@ Private Sub Form_Load()
             Me.Caption = "Albaranes Clientes"
         ElseIf CodTipoMov = "ALM" Then
             Me.Caption = "Albaranes de Mostrador"
-            If Me.RecuperarFactu Then Me.Caption = "Albaranes de Mostrador (Recuperar facturas)"
         ElseIf CodTipoMov = "ART" Then
             Me.Caption = "Albaranes Rectificativos"
         End If
@@ -6207,7 +6205,7 @@ Dim Desc As String, devuelve As String
         frmB.vTitulo = Titulo
         frmB.vselElem = 1
         frmB.vConexionGrid = conAri  'Conexión a BD: Ariges
-        If Not EsCabecera Then frmB.Label1.FontSize = 11
+        If Not EsCabecera Then frmB.label1.FontSize = 11
 '        frmB.vBuscaPrevia = chkVistaPrevia
         '#
         frmB.Show vbModal
@@ -6303,7 +6301,7 @@ Dim b As Boolean
 
     If hcoCodTipoM <> "ALR" Then
         'sem. entrega pedido
-        Label1(12).visible = Not b
+        label1(12).visible = Not b
         Text1(2).visible = Not b
         'num oferta
         Text1(23).visible = Not b And hcoCodTipoM <> "ALR"
@@ -6317,21 +6315,21 @@ Dim b As Boolean
     
         If b Then
         'El albaran se genero a partir de un ticket
-            Me.Label1(11).Caption = "Nº Ticket"
-            Me.Label1(10).Caption = "Fecha Ticket"
-            Me.Label1(9).Caption = "Trabajador Ticket"
+            Me.label1(11).Caption = "Nº Ticket"
+            Me.label1(10).Caption = "Fecha Ticket"
+            Me.label1(9).Caption = "Trabajador Ticket"
         
             'ocultamos los datos de la oferta
-            Me.Label1(3).Caption = "Nº Venta"
-            Label1(5).Caption = "Nº Terminal"
+            Me.label1(3).Caption = "Nº Venta"
+            label1(5).Caption = "Nº Terminal"
         Else
-            Me.Label1(11).Caption = "Nº Pedido"
-            Me.Label1(10).Caption = "Fecha Pedido"
-            Me.Label1(9).Caption = "Trabajador Pedido"
+            Me.label1(11).Caption = "Nº Pedido"
+            Me.label1(10).Caption = "Fecha Pedido"
+            Me.label1(9).Caption = "Trabajador Pedido"
     
             'Mostramos los datos de la oferta
-            Me.Label1(3).Caption = "Nº Oferta"
-            Label1(5).Caption = "Fecha Oferta"
+            Me.label1(3).Caption = "Nº Oferta"
+            label1(5).Caption = "Fecha Oferta"
         End If
         
     End If
@@ -6683,9 +6681,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             
         Case 12 'Generar Factura Mostrador
                 'o Factura Rectificativa (FRT)
-            If Me.RecuperarFactu Then
-                BotonRecuperarFactura
-            Else
+          
             
                 'Septiebmre2009
                 If Data2.Recordset Is Nothing Then Exit Sub
@@ -6714,14 +6710,12 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
                     'Facturacion de Albaran de Mostrador
                     frmListadoPed.codClien = CodTipoMov  'utilizamos esta vble para pasarle el tipo de movimiento
                     frmListadoPed.NumCod = Text1(0).Text  'utilizamos esta vble para pasarle el nº albaran
-                    frmListadoPed.EstaRecupFact = False
                     AbrirListadoPed (222)
                     
                     PosicionarDataTrasEliminar
                 Else
                     MsgBox "El Albaran no esta marcado para facturar", vbInformation
                 End If
-            End If
             
         Case 13
             'DAVID
@@ -7291,9 +7285,7 @@ Dim I As Byte
         'El Campo de Origen del precio se actualiza por programa al modificar el precio
         BloquearTxt txtAux(5), True
         'El campo Importe es calculado y lo bloqueamos.
-        '##### Laura Recuperar facturas ALZIRA
-'        BloquearTxt txtAux(8), True
-        BloquearTxt txtAux(8), Not (Me.RecuperarFactu)
+        BloquearTxt txtAux(8), True
         '#####
 '        'Bloquear campo numbultos q es calculado
 '        BloquearTxt txtAux(10), True
@@ -9444,7 +9436,6 @@ Private Sub BotonRecuperarFactura()
         'Facturacion de Albaran de Mostrador
         frmListadoPed.codClien = CodTipoMov  'utilizamos esta vble para pasarle el tipo de movimiento
         frmListadoPed.NumCod = Text1(0).Text  'utilizamos esta vble para pasarle el nº albaran
-        frmListadoPed.EstaRecupFact = Me.RecuperarFactu
         AbrirListadoPed (222)
         
         PosicionarDataTrasEliminar

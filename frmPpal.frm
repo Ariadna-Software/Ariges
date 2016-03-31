@@ -391,7 +391,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "13:14"
+            TextSave        =   "10:58"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2916,13 +2916,11 @@ Private Sub mnAlbaranesB_Click()
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ALZ"
         frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
     Else
         frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbSAIL.hcoCodTipoM = "ALZ"
         frmFacEntAlbSAIL.EsHistorico = False
-        frmFacEntAlbSAIL.RecuperarFactu = False
         frmFacEntAlbSAIL.Show vbModal
     End If
 End Sub
@@ -3516,7 +3514,6 @@ Private Sub mnFacAlbDevolucion_Click()
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "DEV"
         frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
     End If
 End Sub
@@ -3528,7 +3525,6 @@ Private Sub mnFacAlbMostrador_Click()
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ALM"
         frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
     End If
 End Sub
@@ -3542,13 +3538,11 @@ Private Sub mnFacAlbRectifica_Click()
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ART"
         frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
     Else
         frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbSAIL.hcoCodTipoM = "ART"
         frmFacEntAlbSAIL.EsHistorico = False
-        frmFacEntAlbSAIL.RecuperarFactu = False
         frmFacEntAlbSAIL.Show vbModal
     End If
 End Sub
@@ -3604,7 +3598,6 @@ Private Sub mnFacEntAlbaran_Click()
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ALV"
         frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
         
     'ElseIf T Then
@@ -3612,7 +3605,6 @@ Private Sub mnFacEntAlbaran_Click()
         frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbSAIL.hcoCodTipoM = "ALV"
         frmFacEntAlbSAIL.EsHistorico = False
-        frmFacEntAlbSAIL.RecuperarFactu = False
         frmFacEntAlbSAIL.Show vbModal
     End If
 End Sub
@@ -3709,13 +3701,11 @@ Private Sub mnFacHcoAlbaranes_Click()
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ALV"
         frmFacEntAlbaranes2.EsHistorico = True
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
     Else
         frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbSAIL.hcoCodTipoM = "ALV"
         frmFacEntAlbSAIL.EsHistorico = True
-        frmFacEntAlbSAIL.RecuperarFactu = False
         frmFacEntAlbSAIL.Show vbModal
     
     End If
@@ -4280,7 +4270,6 @@ Private Sub mnRepAlbaranes_Click()
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ALR"
         frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
     'End If
 End Sub
@@ -4403,7 +4392,6 @@ Private Sub mnServicios_Click(Index As Integer)
                 frmFacEntAlbaranes2.hcoCodTipoM = "ALI"
             End If
             frmFacEntAlbaranes2.EsHistorico = False
-            frmFacEntAlbaranes2.RecuperarFactu = False
             frmFacEntAlbaranes2.Show vbModal
             
         Else
@@ -4417,7 +4405,6 @@ Private Sub mnServicios_Click(Index As Integer)
                 End If
                 
                 frmFacEntAlbSAIL.EsHistorico = False
-                frmFacEntAlbSAIL.RecuperarFactu = False
                 frmFacEntAlbSAIL.Show vbModal
             End If
         End If
@@ -4514,7 +4501,6 @@ Private Sub mnTelefonia2_Click(Index As Integer)
     Case 0
             frmFacEntAlbaranes2.hcoCodTipoM = "ALT"
             frmFacEntAlbaranes2.EsHistorico = False
-            frmFacEntAlbaranes2.RecuperarFactu = False
             frmFacEntAlbaranes2.Show vbModal
     
     

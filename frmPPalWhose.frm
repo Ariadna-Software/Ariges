@@ -177,14 +177,12 @@ Private Sub mnClientes1_Click(Index As Integer)
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ALV"
         frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
 
     Case 2
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ART"
         frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.RecuperarFactu = False
         frmFacEntAlbaranes2.Show vbModal
 
     Case 3
@@ -214,14 +212,14 @@ Private Sub mnCRM_Click(Index As Integer)
             frmCRMtipos.Show vbModal
         
         Case 2
-            frmCRMVarios.opcion = 0
+            frmCRMVarios.Opcion = 0
             frmCRMVarios.Show vbModal
             
         Case 3
             frmListadoOfer.OpcionListado = 406
             frmListadoOfer.Show vbModal
         Case 4
-            frmCRMVarios.opcion = 1
+            frmCRMVarios.Opcion = 1
             frmCRMVarios.Show vbModal
             
         End Select
@@ -241,7 +239,7 @@ Private Sub mnInformes1_Click(Index As Integer)
         AbrirListadoOfer (230)
     Case 3
         
-        frmListado3.opcion = 18
+        frmListado3.Opcion = 18
         frmListado3.Show vbModal
     Case 4
         AbrirListadoOfer (231)

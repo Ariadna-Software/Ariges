@@ -25,7 +25,7 @@ Begin VB.Form frmListadoPed
       Begin VB.Frame Frame15 
          Height          =   975
          Left            =   360
-         TabIndex        =   228
+         TabIndex        =   226
          Top             =   5160
          Width           =   6855
          Begin VB.CheckBox chkTpPago2 
@@ -33,7 +33,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   6
             Left            =   5040
-            TabIndex        =   288
+            TabIndex        =   286
             Top             =   600
             Value           =   1  'Checked
             Width           =   1575
@@ -43,7 +43,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   5
             Left            =   3600
-            TabIndex        =   287
+            TabIndex        =   285
             Top             =   600
             Value           =   1  'Checked
             Width           =   1335
@@ -53,7 +53,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   4
             Left            =   1800
-            TabIndex        =   286
+            TabIndex        =   284
             Top             =   600
             Value           =   1  'Checked
             Width           =   1575
@@ -63,7 +63,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   3
             Left            =   5640
-            TabIndex        =   285
+            TabIndex        =   283
             Top             =   240
             Value           =   1  'Checked
             Width           =   975
@@ -73,7 +73,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   2
             Left            =   4440
-            TabIndex        =   284
+            TabIndex        =   282
             Top             =   240
             Value           =   1  'Checked
             Width           =   975
@@ -83,7 +83,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   1
             Left            =   2760
-            TabIndex        =   283
+            TabIndex        =   281
             Top             =   240
             Value           =   1  'Checked
             Width           =   1575
@@ -93,7 +93,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   0
             Left            =   1560
-            TabIndex        =   282
+            TabIndex        =   280
             Top             =   240
             Value           =   1  'Checked
             Width           =   1575
@@ -114,7 +114,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   11
             Left            =   240
-            TabIndex        =   281
+            TabIndex        =   279
             Top             =   240
             Width           =   1080
          End
@@ -122,14 +122,14 @@ Begin VB.Form frmListadoPed
       Begin VB.Frame FrameProgress 
          Height          =   1050
          Left            =   360
-         TabIndex        =   205
+         TabIndex        =   204
          Top             =   6240
          Visible         =   0   'False
          Width           =   4695
          Begin MSComctlLib.ProgressBar ProgressBar1 
             Height          =   345
             Left            =   120
-            TabIndex        =   206
+            TabIndex        =   205
             Top             =   600
             Width           =   4335
             _ExtentX        =   7646
@@ -142,7 +142,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   1
             Left            =   120
-            TabIndex        =   208
+            TabIndex        =   207
             Top             =   350
             Width           =   4335
          End
@@ -151,7 +151,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   0
             Left            =   120
-            TabIndex        =   207
+            TabIndex        =   206
             Top             =   135
             Width           =   4215
          End
@@ -159,7 +159,7 @@ Begin VB.Form frmListadoPed
       Begin VB.Frame Frame4 
          Height          =   3255
          Left            =   360
-         TabIndex        =   149
+         TabIndex        =   148
          Top             =   1800
          Width           =   6855
          Begin VB.TextBox txtNombre 
@@ -168,7 +168,7 @@ Begin VB.Form frmListadoPed
             Index           =   42
             Left            =   3000
             Locked          =   -1  'True
-            TabIndex        =   163
+            TabIndex        =   162
             Text            =   "Text5"
             Top             =   2520
             Width           =   3735
@@ -179,7 +179,7 @@ Begin VB.Form frmListadoPed
             Index           =   42
             Left            =   2220
             MaxLength       =   6
-            TabIndex        =   139
+            TabIndex        =   138
             Top             =   2520
             Width           =   735
          End
@@ -189,7 +189,7 @@ Begin VB.Form frmListadoPed
             Index           =   43
             Left            =   3000
             Locked          =   -1  'True
-            TabIndex        =   162
+            TabIndex        =   161
             Text            =   "Text5"
             Top             =   2880
             Width           =   3735
@@ -200,7 +200,7 @@ Begin VB.Form frmListadoPed
             Index           =   43
             Left            =   2220
             MaxLength       =   6
-            TabIndex        =   140
+            TabIndex        =   139
             Top             =   2880
             Width           =   735
          End
@@ -210,7 +210,7 @@ Begin VB.Form frmListadoPed
             Index           =   41
             Left            =   2220
             MaxLength       =   6
-            TabIndex        =   138
+            TabIndex        =   137
             Top             =   2040
             Width           =   735
          End
@@ -220,7 +220,7 @@ Begin VB.Form frmListadoPed
             Index           =   41
             Left            =   3000
             Locked          =   -1  'True
-            TabIndex        =   158
+            TabIndex        =   157
             Text            =   "Text5"
             Top             =   2040
             Width           =   3735
@@ -231,7 +231,7 @@ Begin VB.Form frmListadoPed
             Index           =   40
             Left            =   2220
             MaxLength       =   6
-            TabIndex        =   137
+            TabIndex        =   136
             Top             =   1680
             Width           =   735
          End
@@ -241,7 +241,7 @@ Begin VB.Form frmListadoPed
             Index           =   40
             Left            =   3000
             Locked          =   -1  'True
-            TabIndex        =   157
+            TabIndex        =   156
             Text            =   "Text5"
             Top             =   1680
             Width           =   3735
@@ -252,7 +252,7 @@ Begin VB.Form frmListadoPed
             Index           =   38
             Left            =   2640
             MaxLength       =   10
-            TabIndex        =   135
+            TabIndex        =   134
             Top             =   1200
             Width           =   1215
          End
@@ -262,7 +262,7 @@ Begin VB.Form frmListadoPed
             Index           =   39
             Left            =   5040
             MaxLength       =   10
-            TabIndex        =   136
+            TabIndex        =   135
             Top             =   1200
             Width           =   1215
          End
@@ -272,7 +272,7 @@ Begin VB.Form frmListadoPed
             Index           =   36
             Left            =   2640
             MaxLength       =   10
-            TabIndex        =   133
+            TabIndex        =   132
             Top             =   720
             Width           =   1215
          End
@@ -282,7 +282,7 @@ Begin VB.Form frmListadoPed
             Index           =   37
             Left            =   5040
             MaxLength       =   10
-            TabIndex        =   134
+            TabIndex        =   133
             Top             =   720
             Width           =   1215
          End
@@ -292,7 +292,7 @@ Begin VB.Form frmListadoPed
             Index           =   35
             Left            =   3120
             MaxLength       =   10
-            TabIndex        =   132
+            TabIndex        =   131
             Top             =   240
             Width           =   735
          End
@@ -320,7 +320,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   3
             Left            =   240
-            TabIndex        =   166
+            TabIndex        =   165
             Top             =   2520
             Width           =   1005
          End
@@ -339,7 +339,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   48
             Left            =   1395
-            TabIndex        =   165
+            TabIndex        =   164
             Top             =   2520
             Width           =   450
          End
@@ -366,7 +366,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   49
             Left            =   1395
-            TabIndex        =   164
+            TabIndex        =   163
             Top             =   2880
             Width           =   420
          End
@@ -401,7 +401,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   50
             Left            =   1395
-            TabIndex        =   161
+            TabIndex        =   160
             Top             =   2040
             Width           =   420
          End
@@ -420,7 +420,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   51
             Left            =   1395
-            TabIndex        =   160
+            TabIndex        =   159
             Top             =   1680
             Width           =   450
          End
@@ -440,7 +440,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   2
             Left            =   240
-            TabIndex        =   159
+            TabIndex        =   158
             Top             =   1680
             Width           =   585
          End
@@ -459,7 +459,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   37
             Left            =   4200
-            TabIndex        =   156
+            TabIndex        =   155
             Top             =   1200
             Width           =   420
          End
@@ -487,7 +487,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   1
             Left            =   240
-            TabIndex        =   155
+            TabIndex        =   154
             Top             =   1200
             Width           =   1200
          End
@@ -506,7 +506,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   46
             Left            =   1755
-            TabIndex        =   154
+            TabIndex        =   153
             Top             =   1200
             Width           =   450
          End
@@ -533,7 +533,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   36
             Left            =   4200
-            TabIndex        =   153
+            TabIndex        =   152
             Top             =   720
             Width           =   420
          End
@@ -553,7 +553,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   4
             Left            =   240
-            TabIndex        =   152
+            TabIndex        =   151
             Top             =   720
             Width           =   900
          End
@@ -572,7 +572,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   45
             Left            =   1755
-            TabIndex        =   151
+            TabIndex        =   150
             Top             =   720
             Width           =   450
          End
@@ -592,7 +592,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   6
             Left            =   240
-            TabIndex        =   150
+            TabIndex        =   149
             Top             =   240
             Width           =   2520
          End
@@ -600,19 +600,9 @@ Begin VB.Form frmListadoPed
       Begin VB.Frame Frame3 
          Height          =   1095
          Left            =   360
-         TabIndex        =   145
+         TabIndex        =   144
          Top             =   720
          Width           =   6855
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   4
-            Left            =   5160
-            MaxLength       =   10
-            TabIndex        =   130
-            Top             =   240
-            Width           =   1335
-         End
          Begin VB.TextBox txtCodigo 
             Alignment       =   1  'Right Justify
             Height          =   285
@@ -629,7 +619,7 @@ Begin VB.Form frmListadoPed
             Index           =   0
             Left            =   3000
             Locked          =   -1  'True
-            TabIndex        =   146
+            TabIndex        =   145
             Text            =   "Text5"
             Top             =   600
             Width           =   3735
@@ -640,29 +630,9 @@ Begin VB.Form frmListadoPed
             Index           =   0
             Left            =   2220
             MaxLength       =   6
-            TabIndex        =   131
+            TabIndex        =   130
             Top             =   600
             Width           =   735
-         End
-         Begin VB.Label Label10 
-            AutoSize        =   -1  'True
-            Caption         =   "Nº Factura"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
-            Index           =   9
-            Left            =   4200
-            TabIndex        =   219
-            Top             =   240
-            Width           =   885
          End
          Begin VB.Label Label10 
             AutoSize        =   -1  'True
@@ -680,7 +650,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   5
             Left            =   240
-            TabIndex        =   148
+            TabIndex        =   147
             Top             =   240
             Width           =   1980
          End
@@ -708,7 +678,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   7
             Left            =   240
-            TabIndex        =   147
+            TabIndex        =   146
             Top             =   600
             Width           =   1620
          End
@@ -725,7 +695,7 @@ Begin VB.Form frmListadoPed
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   5160
-         TabIndex        =   142
+         TabIndex        =   141
          Top             =   6840
          Width           =   975
       End
@@ -734,7 +704,7 @@ Begin VB.Form frmListadoPed
          Height          =   375
          Index           =   6
          Left            =   6240
-         TabIndex        =   144
+         TabIndex        =   143
          Top             =   6840
          Width           =   975
       End
@@ -771,7 +741,7 @@ Begin VB.Form frmListadoPed
          Height          =   345
          Index           =   10
          Left            =   360
-         TabIndex        =   227
+         TabIndex        =   225
          Top             =   3360
          Width           =   6615
       End
@@ -786,7 +756,7 @@ Begin VB.Form frmListadoPed
          Caption         =   "             Generar albaran euler"
          Height          =   735
          Left            =   360
-         TabIndex        =   299
+         TabIndex        =   297
          Top             =   3480
          Width           =   4935
          Begin VB.ComboBox cboTipoAlbaranEuler 
@@ -814,7 +784,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   25
             Left            =   480
-            TabIndex        =   300
+            TabIndex        =   298
             Top             =   120
             Width           =   900
          End
@@ -822,7 +792,7 @@ Begin VB.Form frmListadoPed
       Begin VB.Frame FramePartes 
          Height          =   1455
          Left            =   240
-         TabIndex        =   274
+         TabIndex        =   272
          Top             =   5160
          Visible         =   0   'False
          Width           =   5295
@@ -875,7 +845,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   65
             Left            =   360
-            TabIndex        =   277
+            TabIndex        =   275
             Top             =   1080
             Width           =   1155
          End
@@ -894,7 +864,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   64
             Left            =   2160
-            TabIndex        =   276
+            TabIndex        =   274
             Top             =   180
             Width           =   1065
          End
@@ -913,7 +883,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   63
             Left            =   120
-            TabIndex        =   275
+            TabIndex        =   273
             Top             =   180
             Width           =   1365
          End
@@ -930,7 +900,7 @@ Begin VB.Form frmListadoPed
          Caption         =   "Fra a la que rectifica"
          Height          =   735
          Left            =   720
-         TabIndex        =   248
+         TabIndex        =   246
          Top             =   5160
          Width           =   4815
          Begin VB.TextBox txtFraRectifica 
@@ -947,7 +917,7 @@ Begin VB.Form frmListadoPed
             EndProperty
             Height          =   405
             Left            =   240
-            TabIndex        =   250
+            TabIndex        =   248
             Top             =   240
             Width           =   3615
          End
@@ -955,7 +925,7 @@ Begin VB.Form frmListadoPed
             Caption         =   "+"
             Height          =   375
             Left            =   4080
-            TabIndex        =   249
+            TabIndex        =   247
             Top             =   240
             Width           =   375
          End
@@ -965,7 +935,7 @@ Begin VB.Form frmListadoPed
          Caption         =   "Frame16"
          Height          =   615
          Left            =   720
-         TabIndex        =   244
+         TabIndex        =   242
          Top             =   3720
          Width           =   4935
          Begin VB.TextBox txtNombre 
@@ -974,7 +944,7 @@ Begin VB.Form frmListadoPed
             Index           =   22
             Left            =   1080
             Locked          =   -1  'True
-            TabIndex        =   245
+            TabIndex        =   243
             Text            =   "Text5"
             Top             =   240
             Width           =   3735
@@ -1012,7 +982,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   53
             Left            =   120
-            TabIndex        =   246
+            TabIndex        =   244
             Top             =   0
             Width           =   360
          End
@@ -1038,7 +1008,7 @@ Begin VB.Form frmListadoPed
          Caption         =   "Frame15"
          Height          =   615
          Left            =   720
-         TabIndex        =   224
+         TabIndex        =   222
          Top             =   6000
          Width           =   4815
          Begin VB.TextBox txtNombre 
@@ -1047,7 +1017,7 @@ Begin VB.Form frmListadoPed
             Index           =   5
             Left            =   1155
             Locked          =   -1  'True
-            TabIndex        =   225
+            TabIndex        =   223
             Text            =   "Text5"
             Top             =   240
             Width           =   3495
@@ -1085,7 +1055,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   23
             Left            =   0
-            TabIndex        =   226
+            TabIndex        =   224
             Top             =   0
             Width           =   1335
          End
@@ -1192,7 +1162,7 @@ Begin VB.Form frmListadoPed
          Caption         =   "Zona:"
          Height          =   255
          Left            =   240
-         TabIndex        =   247
+         TabIndex        =   245
          Top             =   6720
          Width           =   2535
       End
@@ -1362,7 +1332,7 @@ Begin VB.Form frmListadoPed
       Begin VB.Frame Frame16 
          Height          =   975
          Left            =   360
-         TabIndex        =   289
+         TabIndex        =   287
          Top             =   3480
          Visible         =   0   'False
          Width           =   6375
@@ -1371,7 +1341,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   10
             Left            =   1320
-            TabIndex        =   296
+            TabIndex        =   294
             Top             =   240
             Value           =   1  'Checked
             Width           =   1095
@@ -1381,7 +1351,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   11
             Left            =   2520
-            TabIndex        =   295
+            TabIndex        =   293
             Top             =   240
             Value           =   1  'Checked
             Width           =   1575
@@ -1391,7 +1361,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   12
             Left            =   4200
-            TabIndex        =   294
+            TabIndex        =   292
             Top             =   240
             Value           =   1  'Checked
             Width           =   975
@@ -1401,7 +1371,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   13
             Left            =   5280
-            TabIndex        =   293
+            TabIndex        =   291
             Top             =   240
             Value           =   1  'Checked
             Width           =   975
@@ -1411,7 +1381,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   14
             Left            =   1320
-            TabIndex        =   292
+            TabIndex        =   290
             Top             =   600
             Value           =   1  'Checked
             Width           =   1575
@@ -1421,7 +1391,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   15
             Left            =   3000
-            TabIndex        =   291
+            TabIndex        =   289
             Top             =   600
             Value           =   1  'Checked
             Width           =   1335
@@ -1431,7 +1401,7 @@ Begin VB.Form frmListadoPed
             Height          =   255
             Index           =   16
             Left            =   4560
-            TabIndex        =   290
+            TabIndex        =   288
             Top             =   600
             Value           =   1  'Checked
             Width           =   1335
@@ -1452,7 +1422,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   12
             Left            =   120
-            TabIndex        =   297
+            TabIndex        =   295
             Top             =   240
             Width           =   1080
          End
@@ -1500,7 +1470,7 @@ Begin VB.Form frmListadoPed
          ForeColor       =   &H00000080&
          Height          =   690
          Left            =   360
-         TabIndex        =   179
+         TabIndex        =   178
          Top             =   4560
          Width           =   4335
          Begin VB.OptionButton OptDetalle 
@@ -1535,7 +1505,7 @@ Begin VB.Form frmListadoPed
          BorderStyle     =   0  'None
          Height          =   975
          Left            =   480
-         TabIndex        =   173
+         TabIndex        =   172
          Top             =   2520
          Width           =   6135
          Begin VB.TextBox txtCodigo 
@@ -1554,7 +1524,7 @@ Begin VB.Form frmListadoPed
             Index           =   33
             Left            =   2040
             Locked          =   -1  'True
-            TabIndex        =   175
+            TabIndex        =   174
             Text            =   "Text5"
             Top             =   600
             Width           =   3615
@@ -1575,7 +1545,7 @@ Begin VB.Form frmListadoPed
             Index           =   32
             Left            =   2040
             Locked          =   -1  'True
-            TabIndex        =   174
+            TabIndex        =   173
             Text            =   "Text5"
             Top             =   240
             Width           =   3615
@@ -1595,7 +1565,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   17
             Left            =   360
-            TabIndex        =   178
+            TabIndex        =   177
             Top             =   600
             Width           =   420
          End
@@ -1614,7 +1584,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   0
             Left            =   360
-            TabIndex        =   177
+            TabIndex        =   176
             Top             =   240
             Width           =   450
          End
@@ -1642,7 +1612,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   38
             Left            =   0
-            TabIndex        =   176
+            TabIndex        =   175
             Top             =   0
             Width           =   975
          End
@@ -1798,7 +1768,7 @@ Begin VB.Form frmListadoPed
          Height          =   195
          Index           =   24
          Left            =   4920
-         TabIndex        =   298
+         TabIndex        =   296
          Top             =   4560
          Width           =   1650
       End
@@ -1807,7 +1777,7 @@ Begin VB.Form frmListadoPed
          Height          =   255
          Index           =   0
          Left            =   480
-         TabIndex        =   220
+         TabIndex        =   218
          Top             =   5880
          Visible         =   0   'False
          Width           =   1335
@@ -2063,7 +2033,7 @@ Begin VB.Form frmListadoPed
       Begin VB.Frame FrameTiposFactura 
          Height          =   1335
          Left            =   240
-         TabIndex        =   278
+         TabIndex        =   276
          Top             =   4200
          Visible         =   0   'False
          Width           =   5895
@@ -2071,7 +2041,7 @@ Begin VB.Form frmListadoPed
             Height          =   960
             Left            =   1320
             Style           =   1  'Checkbox
-            TabIndex        =   279
+            TabIndex        =   277
             Top             =   240
             Width           =   3975
          End
@@ -2091,7 +2061,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   66
             Left            =   120
-            TabIndex        =   280
+            TabIndex        =   278
             Top             =   240
             Width           =   1020
          End
@@ -2099,7 +2069,7 @@ Begin VB.Form frmListadoPed
       Begin VB.Frame Frame10 
          Height          =   3015
          Left            =   360
-         TabIndex        =   192
+         TabIndex        =   191
          Top             =   2760
          Width           =   6495
          Begin VB.TextBox txtNombre 
@@ -2108,7 +2078,7 @@ Begin VB.Form frmListadoPed
             Index           =   58
             Left            =   2280
             Locked          =   -1  'True
-            TabIndex        =   272
+            TabIndex        =   270
             Text            =   "Text5"
             Top             =   1920
             Width           =   3735
@@ -2128,7 +2098,7 @@ Begin VB.Form frmListadoPed
             Index           =   57
             Left            =   2280
             Locked          =   -1  'True
-            TabIndex        =   269
+            TabIndex        =   267
             Text            =   "Text5"
             Top             =   1560
             Width           =   3735
@@ -2165,7 +2135,7 @@ Begin VB.Form frmListadoPed
             Index           =   24
             Left            =   2280
             Locked          =   -1  'True
-            TabIndex        =   257
+            TabIndex        =   255
             Text            =   "Text5"
             Top             =   960
             Width           =   3735
@@ -2185,7 +2155,7 @@ Begin VB.Form frmListadoPed
             Index           =   23
             Left            =   2280
             Locked          =   -1  'True
-            TabIndex        =   254
+            TabIndex        =   252
             Text            =   "Text5"
             Top             =   600
             Width           =   3735
@@ -2204,7 +2174,7 @@ Begin VB.Form frmListadoPed
             ForeColor       =   &H00000080&
             Height          =   615
             Left            =   120
-            TabIndex        =   195
+            TabIndex        =   194
             Top             =   2280
             Width           =   4455
             Begin VB.OptionButton OptOrdenVentas 
@@ -2266,7 +2236,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   62
             Left            =   720
-            TabIndex        =   273
+            TabIndex        =   271
             Top             =   1920
             Width           =   420
          End
@@ -2294,7 +2264,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   61
             Left            =   120
-            TabIndex        =   271
+            TabIndex        =   269
             Top             =   1320
             Width           =   795
          End
@@ -2313,7 +2283,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   60
             Left            =   720
-            TabIndex        =   270
+            TabIndex        =   268
             Top             =   1560
             Width           =   450
          End
@@ -2332,7 +2302,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   58
             Left            =   720
-            TabIndex        =   258
+            TabIndex        =   256
             Top             =   960
             Width           =   420
          End
@@ -2359,7 +2329,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   56
             Left            =   720
-            TabIndex        =   256
+            TabIndex        =   254
             Top             =   600
             Width           =   450
          End
@@ -2379,7 +2349,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   55
             Left            =   120
-            TabIndex        =   255
+            TabIndex        =   253
             Top             =   360
             Width           =   615
          End
@@ -2407,7 +2377,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   19
             Left            =   5640
-            TabIndex        =   194
+            TabIndex        =   193
             Top             =   120
             Width           =   105
          End
@@ -2427,7 +2397,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   18
             Left            =   120
-            TabIndex        =   193
+            TabIndex        =   192
             Top             =   120
             Width           =   3465
          End
@@ -2437,7 +2407,7 @@ Begin VB.Form frmListadoPed
          Height          =   255
          Index           =   1
          Left            =   1920
-         TabIndex        =   252
+         TabIndex        =   250
          Top             =   4320
          Width           =   1935
       End
@@ -2446,7 +2416,7 @@ Begin VB.Form frmListadoPed
          Height          =   255
          Index           =   0
          Left            =   480
-         TabIndex        =   251
+         TabIndex        =   249
          Top             =   4320
          Width           =   1575
       End
@@ -2454,7 +2424,7 @@ Begin VB.Form frmListadoPed
          BorderStyle     =   0  'None
          Height          =   2295
          Left            =   5760
-         TabIndex        =   233
+         TabIndex        =   231
          Top             =   4320
          Visible         =   0   'False
          Width           =   6375
@@ -2474,7 +2444,7 @@ Begin VB.Form frmListadoPed
             Index           =   10
             Left            =   2280
             Locked          =   -1  'True
-            TabIndex        =   241
+            TabIndex        =   239
             Text            =   "Text5"
             Top             =   1680
             Width           =   3855
@@ -2495,7 +2465,7 @@ Begin VB.Form frmListadoPed
             Index           =   9
             Left            =   2280
             Locked          =   -1  'True
-            TabIndex        =   239
+            TabIndex        =   237
             Text            =   "Text5"
             Top             =   1320
             Width           =   3855
@@ -2516,7 +2486,7 @@ Begin VB.Form frmListadoPed
             Index           =   7
             Left            =   2280
             Locked          =   -1  'True
-            TabIndex        =   237
+            TabIndex        =   235
             Text            =   "Text5"
             Top             =   600
             Width           =   3855
@@ -2537,7 +2507,7 @@ Begin VB.Form frmListadoPed
             Index           =   6
             Left            =   2280
             Locked          =   -1  'True
-            TabIndex        =   234
+            TabIndex        =   232
             Text            =   "Text5"
             Top             =   240
             Width           =   3855
@@ -2557,7 +2527,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   52
             Left            =   0
-            TabIndex        =   243
+            TabIndex        =   241
             Top             =   1080
             Width           =   615
          End
@@ -2576,7 +2546,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   47
             Left            =   600
-            TabIndex        =   242
+            TabIndex        =   240
             Top             =   1680
             Width           =   420
          End
@@ -2603,7 +2573,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   31
             Left            =   600
-            TabIndex        =   240
+            TabIndex        =   238
             Top             =   1320
             Width           =   450
          End
@@ -2630,7 +2600,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   29
             Left            =   600
-            TabIndex        =   238
+            TabIndex        =   236
             Top             =   600
             Width           =   420
          End
@@ -2658,7 +2628,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   28
             Left            =   0
-            TabIndex        =   236
+            TabIndex        =   234
             Top             =   0
             Width           =   615
          End
@@ -2677,7 +2647,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   27
             Left            =   600
-            TabIndex        =   235
+            TabIndex        =   233
             Top             =   240
             Width           =   450
          End
@@ -2697,7 +2667,7 @@ Begin VB.Form frmListadoPed
          Left            =   2640
          List            =   "frmListadoPed.frx":1C16
          Style           =   2  'Dropdown List
-         TabIndex        =   221
+         TabIndex        =   219
          Top             =   4920
          Visible         =   0   'False
          Width           =   1695
@@ -2706,20 +2676,20 @@ Begin VB.Form frmListadoPed
          BorderStyle     =   0  'None
          Height          =   2055
          Left            =   7080
-         TabIndex        =   196
+         TabIndex        =   195
          Top             =   1440
          Width           =   6495
          Begin VB.Frame Frame13 
             Height          =   615
             Left            =   240
-            TabIndex        =   202
+            TabIndex        =   201
             Top             =   1320
             Width           =   2655
             Begin VB.OptionButton OptResumen 
                Caption         =   "Resumen"
                Height          =   255
                Left            =   1320
-               TabIndex        =   204
+               TabIndex        =   203
                Top             =   240
                Width           =   1095
             End
@@ -2728,7 +2698,7 @@ Begin VB.Form frmListadoPed
                Height          =   255
                Index           =   2
                Left            =   120
-               TabIndex        =   203
+               TabIndex        =   202
                Top             =   240
                Value           =   -1  'True
                Width           =   975
@@ -2740,7 +2710,7 @@ Begin VB.Form frmListadoPed
             Index           =   2
             Left            =   2160
             Locked          =   -1  'True
-            TabIndex        =   198
+            TabIndex        =   197
             Text            =   "Text5"
             Top             =   360
             Width           =   3855
@@ -2761,7 +2731,7 @@ Begin VB.Form frmListadoPed
             Index           =   3
             Left            =   2160
             Locked          =   -1  'True
-            TabIndex        =   197
+            TabIndex        =   196
             Text            =   "Text5"
             Top             =   720
             Width           =   3855
@@ -2800,7 +2770,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   22
             Left            =   120
-            TabIndex        =   201
+            TabIndex        =   200
             Top             =   120
             Width           =   945
          End
@@ -2819,7 +2789,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   21
             Left            =   480
-            TabIndex        =   200
+            TabIndex        =   199
             Top             =   360
             Width           =   450
          End
@@ -2846,7 +2816,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   20
             Left            =   480
-            TabIndex        =   199
+            TabIndex        =   198
             Top             =   720
             Width           =   420
          End
@@ -2855,7 +2825,7 @@ Begin VB.Form frmListadoPed
          BorderStyle     =   0  'None
          Height          =   1095
          Left            =   360
-         TabIndex        =   167
+         TabIndex        =   166
          Top             =   2640
          Width           =   6495
          Begin VB.TextBox txtCodigo 
@@ -2874,7 +2844,7 @@ Begin VB.Form frmListadoPed
             Index           =   21
             Left            =   2160
             Locked          =   -1  'True
-            TabIndex        =   169
+            TabIndex        =   168
             Text            =   "Text5"
             Top             =   720
             Width           =   3855
@@ -2895,7 +2865,7 @@ Begin VB.Form frmListadoPed
             Index           =   20
             Left            =   2160
             Locked          =   -1  'True
-            TabIndex        =   168
+            TabIndex        =   167
             Text            =   "Text5"
             Top             =   360
             Width           =   3855
@@ -2915,7 +2885,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   12
             Left            =   480
-            TabIndex        =   172
+            TabIndex        =   171
             Top             =   720
             Width           =   420
          End
@@ -2942,7 +2912,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   13
             Left            =   480
-            TabIndex        =   171
+            TabIndex        =   170
             Top             =   360
             Width           =   450
          End
@@ -2962,7 +2932,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   16
             Left            =   120
-            TabIndex        =   170
+            TabIndex        =   169
             Top             =   120
             Width           =   585
          End
@@ -2979,7 +2949,7 @@ Begin VB.Form frmListadoPed
          BorderStyle     =   0  'None
          Height          =   1095
          Left            =   360
-         TabIndex        =   186
+         TabIndex        =   185
          Top             =   1920
          Width           =   6375
          Begin VB.TextBox txtNombre 
@@ -2988,7 +2958,7 @@ Begin VB.Form frmListadoPed
             Index           =   13
             Left            =   1800
             Locked          =   -1  'True
-            TabIndex        =   188
+            TabIndex        =   187
             Text            =   "Text5"
             Top             =   360
             Width           =   3735
@@ -3009,7 +2979,7 @@ Begin VB.Form frmListadoPed
             Index           =   14
             Left            =   1800
             Locked          =   -1  'True
-            TabIndex        =   187
+            TabIndex        =   186
             Text            =   "Text5"
             Top             =   720
             Width           =   3735
@@ -3048,7 +3018,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   6
             Left            =   120
-            TabIndex        =   191
+            TabIndex        =   190
             Top             =   120
             Width           =   735
          End
@@ -3067,7 +3037,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   7
             Left            =   480
-            TabIndex        =   190
+            TabIndex        =   189
             Top             =   360
             Width           =   450
          End
@@ -3094,7 +3064,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   8
             Left            =   480
-            TabIndex        =   189
+            TabIndex        =   188
             Top             =   720
             Width           =   420
          End
@@ -3103,7 +3073,7 @@ Begin VB.Form frmListadoPed
          BorderStyle     =   0  'None
          Height          =   1215
          Left            =   240
-         TabIndex        =   180
+         TabIndex        =   179
          Top             =   3120
          Width           =   6975
          Begin VB.TextBox txtNombre 
@@ -3112,7 +3082,7 @@ Begin VB.Form frmListadoPed
             Index           =   15
             Left            =   2520
             Locked          =   -1  'True
-            TabIndex        =   182
+            TabIndex        =   181
             Text            =   "Text5"
             Top             =   480
             Width           =   4215
@@ -3133,7 +3103,7 @@ Begin VB.Form frmListadoPed
             Index           =   16
             Left            =   2520
             Locked          =   -1  'True
-            TabIndex        =   181
+            TabIndex        =   180
             Text            =   "Text5"
             Top             =   840
             Width           =   4215
@@ -3172,7 +3142,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   1
             Left            =   120
-            TabIndex        =   185
+            TabIndex        =   184
             Top             =   240
             Width           =   660
          End
@@ -3191,7 +3161,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   3
             Left            =   480
-            TabIndex        =   184
+            TabIndex        =   183
             Top             =   480
             Width           =   450
          End
@@ -3218,7 +3188,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   9
             Left            =   480
-            TabIndex        =   183
+            TabIndex        =   182
             Top             =   840
             Width           =   420
          End
@@ -3262,7 +3232,7 @@ Begin VB.Form frmListadoPed
          BorderStyle     =   0  'None
          Height          =   855
          Left            =   240
-         TabIndex        =   232
+         TabIndex        =   230
          Top             =   6600
          Width           =   3975
          Begin VB.CheckBox chkPedxClixSemEntrega 
@@ -3308,7 +3278,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   59
             Left            =   240
-            TabIndex        =   268
+            TabIndex        =   266
             Top             =   510
             Width           =   810
          End
@@ -3336,7 +3306,7 @@ Begin VB.Form frmListadoPed
          Height          =   195
          Index           =   54
          Left            =   480
-         TabIndex        =   253
+         TabIndex        =   251
          Top             =   4680
          Width           =   2850
       End
@@ -3345,7 +3315,7 @@ Begin VB.Form frmListadoPed
          Height          =   255
          Index           =   1
          Left            =   600
-         TabIndex        =   222
+         TabIndex        =   220
          Top             =   4920
          Visible         =   0   'False
          Width           =   1335
@@ -3453,7 +3423,7 @@ Begin VB.Form frmListadoPed
          Height          =   615
          Index           =   1
          Left            =   360
-         TabIndex        =   229
+         TabIndex        =   227
          Top             =   6240
          Width           =   6495
          Begin VB.TextBox txtCodigo 
@@ -3472,7 +3442,7 @@ Begin VB.Form frmListadoPed
             Index           =   54
             Left            =   2940
             Locked          =   -1  'True
-            TabIndex        =   231
+            TabIndex        =   229
             Text            =   "Text5"
             Top             =   240
             Width           =   3375
@@ -3501,7 +3471,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   0
             Left            =   120
-            TabIndex        =   230
+            TabIndex        =   228
             Top             =   240
             Width           =   1335
          End
@@ -3519,7 +3489,7 @@ Begin VB.Form frmListadoPed
             Index           =   52
             Left            =   2880
             Locked          =   -1  'True
-            TabIndex        =   141
+            TabIndex        =   140
             Text            =   "Text5"
             Top             =   600
             Width           =   3495
@@ -3580,7 +3550,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   8
             Left            =   120
-            TabIndex        =   143
+            TabIndex        =   142
             Top             =   600
             Width           =   1350
          End
@@ -3658,7 +3628,7 @@ Begin VB.Form frmListadoPed
          Begin VB.Frame FrameTapa 
             Height          =   2895
             Left            =   120
-            TabIndex        =   265
+            TabIndex        =   263
             Top             =   960
             Visible         =   0   'False
             Width           =   6135
@@ -3668,7 +3638,7 @@ Begin VB.Form frmListadoPed
                Left            =   1680
                List            =   "frmListadoPed.frx":290D
                Style           =   2  'Dropdown List
-               TabIndex        =   266
+               TabIndex        =   264
                Top             =   720
                Width           =   2175
             End
@@ -3688,7 +3658,7 @@ Begin VB.Form frmListadoPed
                Height          =   195
                Index           =   15
                Left            =   120
-               TabIndex        =   267
+               TabIndex        =   265
                Top             =   720
                Width           =   780
             End
@@ -3697,7 +3667,7 @@ Begin VB.Form frmListadoPed
             Caption         =   "Situación facturación"
             Height          =   255
             Left            =   4440
-            TabIndex        =   264
+            TabIndex        =   262
             Top             =   600
             Width           =   1935
          End
@@ -3717,7 +3687,7 @@ Begin VB.Form frmListadoPed
             Index           =   56
             Left            =   2205
             Locked          =   -1  'True
-            TabIndex        =   262
+            TabIndex        =   260
             Text            =   "Text5"
             Top             =   3480
             Width           =   3735
@@ -3728,7 +3698,7 @@ Begin VB.Form frmListadoPed
             Index           =   55
             Left            =   2205
             Locked          =   -1  'True
-            TabIndex        =   259
+            TabIndex        =   257
             Text            =   "Text5"
             Top             =   3120
             Width           =   3735
@@ -3883,7 +3853,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   14
             Left            =   600
-            TabIndex        =   263
+            TabIndex        =   261
             Top             =   3480
             Width           =   420
          End
@@ -3911,7 +3881,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   13
             Left            =   120
-            TabIndex        =   261
+            TabIndex        =   259
             Top             =   2880
             Width           =   1245
          End
@@ -3938,7 +3908,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   12
             Left            =   600
-            TabIndex        =   260
+            TabIndex        =   258
             Top             =   3120
             Width           =   450
          End
@@ -4160,7 +4130,7 @@ Begin VB.Form frmListadoPed
          Caption         =   "Label5"
          Height          =   375
          Left            =   360
-         TabIndex        =   223
+         TabIndex        =   221
          Top             =   6960
          Width           =   3735
       End
@@ -4194,7 +4164,7 @@ Begin VB.Form frmListadoPed
    Begin VB.Frame FrameEstVentas 
       Height          =   3975
       Left            =   480
-      TabIndex        =   209
+      TabIndex        =   208
       Top             =   720
       Width           =   7035
       Begin VB.TextBox txtCodigo 
@@ -4203,7 +4173,7 @@ Begin VB.Form frmListadoPed
          Index           =   53
          Left            =   1500
          MaxLength       =   4
-         TabIndex        =   213
+         TabIndex        =   212
          Top             =   1440
          Width           =   840
       End
@@ -4211,7 +4181,7 @@ Begin VB.Form frmListadoPed
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4200
-         TabIndex        =   215
+         TabIndex        =   214
          Top             =   3120
          Width           =   975
       End
@@ -4220,7 +4190,7 @@ Begin VB.Form frmListadoPed
          Height          =   375
          Index           =   8
          Left            =   5280
-         TabIndex        =   216
+         TabIndex        =   215
          Top             =   3120
          Width           =   975
       End
@@ -4228,7 +4198,7 @@ Begin VB.Form frmListadoPed
          BorderStyle     =   0  'None
          Height          =   495
          Left            =   480
-         TabIndex        =   210
+         TabIndex        =   209
          Top             =   1800
          Width           =   6495
          Begin VB.TextBox txtNombre 
@@ -4237,7 +4207,7 @@ Begin VB.Form frmListadoPed
             Index           =   8
             Left            =   1920
             Locked          =   -1  'True
-            TabIndex        =   211
+            TabIndex        =   210
             Text            =   "Text5"
             Top             =   120
             Width           =   3855
@@ -4248,7 +4218,7 @@ Begin VB.Form frmListadoPed
             Index           =   8
             Left            =   1020
             MaxLength       =   6
-            TabIndex        =   214
+            TabIndex        =   213
             Top             =   120
             Width           =   840
          End
@@ -4276,7 +4246,7 @@ Begin VB.Form frmListadoPed
             Height          =   195
             Index           =   30
             Left            =   0
-            TabIndex        =   212
+            TabIndex        =   211
             Top             =   120
             Width           =   585
          End
@@ -4295,7 +4265,7 @@ Begin VB.Form frmListadoPed
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   480
-         TabIndex        =   218
+         TabIndex        =   217
          Top             =   480
          Width           =   4815
       End
@@ -4315,7 +4285,7 @@ Begin VB.Form frmListadoPed
          Height          =   195
          Index           =   57
          Left            =   480
-         TabIndex        =   217
+         TabIndex        =   216
          Top             =   1440
          Width           =   330
       End
@@ -4348,9 +4318,6 @@ Public NumCod As String 'Para indicar cod. Traspaso,Movimiento, etc. que llama
 Public codClien As String 'Para seleccionar inicialmente las ofertas del Proveedor
                         'para paso ped a labaran llevare datos x defecto: llevo: tienecoddiren & "|" & zonacliente & "|"
                 
-
-'#Laura 14/11/2006 Recuperar facturas Alzira
-Public EstaRecupFact As Boolean ' si esta recuperando facturas (para albaranes de mostrador)
 
 
 'Private HaDevueltoDatos As Boolean
@@ -4918,84 +4885,43 @@ Dim UnoSolo As Boolean
     
 
     '--- Traspasa Albaranes a Facturas
-    If OpcionListado = 222 And Me.EstaRecupFact = True Then
-        '#### Laura: 14/11/2006 Recuperar facturas ALZIRA
-        'comprobar q se ha introducido el nº de factura
-        If Trim(txtCodigo(4).Text) = "" Then
-            MsgBox "Debe introducir el nº de factura"
-            Exit Sub
-        End If
-        'comprobar q la factura esta en un rango de recuperacion
-        If Not (4255 <= CLng(txtCodigo(4).Text) And CLng(txtCodigo(4).Text) <= 5220) Then
-            MsgBox "El Nº de factura no esta en el rango de recuperación."
-            Exit Sub
-        End If
-        'comprobar q no exista ya ese nº de factura en ariges
-        campo = "SELECT COUNT(*) FROM scafac WHERE "
-        campo = campo & "codtipom='FAV' and numfactu=" & DBSet(txtCodigo(4).Text, "N") & " and year(fecfactu)=" & Year(txtCodigo(34).Text) '" and fecfactu=" & DBSet(txtCodigo(34).Text, "F")
-        If Not (RegistrosAListar(campo) > 0) Then
-            'comprobar si existe la factura en contabilidad
+   'proceso normal
+    'Fecha de la factura, Cta Prevista de Cobro
+    Screen.MousePointer = vbHourglass
+    Seguir = True
+    If vParamAplic.ArtPortesN <> "" Then
+        If vParamAplic.TipoPortes = 2 Then
+            'tipo portes HERBELCA.
+            campo = lblProgess(0).Caption
+            lblProgess(0).Caption = "Portes:"
+            If Not ProcesoPortesTipoHerbelca(Cad, cadSelect, lblProgess(1)) Then Seguir = False
+            lblProgess(0).Caption = campo
             campo = ""
-            campo = ObtenerLetraSerie("FAV")
-            If campo = "" Then Exit Sub
-            campo = "SELECT COUNT(*) FROM cabfact WHERE numserie=" & DBSet(campo, "T")
-            campo = campo & " AND codfaccl=" & txtCodigo(4).Text & " AND anofaccl=" & Year(txtCodigo(34).Text)
-            
-            If Not (RegistrosAListar(campo, conConta) > 0) Then
-                'no existe en contabilidad recuperamos la factura y ya esta (no insertamos en tesoreria)
-                TraspasoAlbaranesFacturas_RecuperaFac Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, txtCodigo(4).Text, Me.ProgressBar1, Me.lblProgess(1) 'Fecha de la factura, Cta Prevista de Cobro
-            Else
-                'si esiste
-                'comprobar q el cliente es el mismo en la factura q vamos a recuperar
-                'y en la factura de la conta
-                If Not ComprobarCliente_RecuperarFac(cadSelect, txtCodigo(34).Text, txtCodigo(4).Text) Then Exit Sub
-                'si existe en contabilidad recuperamos la factura y marcar como contabilizada
-                TraspasoAlbaranesFacturas_RecuperaFac Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, txtCodigo(4).Text, Me.ProgressBar1, Me.lblProgess(1) 'Fecha de la factura, Cta Prevista de Cobro
-                
-                
-            End If
-        Else
-            MsgBox "Ya existe la Factura en Ariges", vbExclamation
-        End If
-        '####################
-    Else
-        'proceso normal
-        'Fecha de la factura, Cta Prevista de Cobro
-        Screen.MousePointer = vbHourglass
-        Seguir = True
-        If vParamAplic.ArtPortesN <> "" Then
-            If vParamAplic.TipoPortes = 2 Then
-                'tipo portes HERBELCA.
-                campo = lblProgess(0).Caption
-                lblProgess(0).Caption = "Portes:"
-                If Not ProcesoPortesTipoHerbelca(Cad, cadSelect, lblProgess(1)) Then Seguir = False
-                lblProgess(0).Caption = campo
-                campo = ""
-            End If
-        End If
-         
-        If Seguir Then
-         
-            '------------------------------------------------------------------------------
-            '  LOG de acciones.
-            Set LOG = New cLOG
-            campo = "Albaran: " & codClien & " : " & NumCod
-            LOG.Insertar 2, vUsu, campo
-            Set LOG = Nothing
-            '-----------------------------------------------------------------------------
-    
-            'campo = txtCSB(0).Text & "|" & txtCSB(1).Text & "|" & txtCSB(2).Text & "|"
-            campo = "|||"
-            'Para que no coja los albaranes sin lineas
-            'cadSelect = cadSelect & " and (scaalb.codtipom,scaalb.numalbar) in (select distinct codtipom,numalbar from slialb )"
-            
-            
-            'ABRIL 2014.
-            'El parametro que le enviamos si se muestra el mensaje de que se ha generado correctamente(ultimo parametro)
-            'AHORA le enviamos FALSE
-            TraspasoAlbaranesFacturas Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, Me.ProgressBar1, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False
         End If
     End If
+     
+    If Seguir Then
+     
+        '------------------------------------------------------------------------------
+        '  LOG de acciones.
+        Set LOG = New cLOG
+        campo = "Albaran: " & codClien & " : " & NumCod
+        LOG.Insertar 2, vUsu, campo
+        Set LOG = Nothing
+        '-----------------------------------------------------------------------------
+
+        'campo = txtCSB(0).Text & "|" & txtCSB(1).Text & "|" & txtCSB(2).Text & "|"
+        campo = "|||"
+        'Para que no coja los albaranes sin lineas
+        'cadSelect = cadSelect & " and (scaalb.codtipom,scaalb.numalbar) in (select distinct codtipom,numalbar from slialb )"
+        
+        
+        'ABRIL 2014.
+        'El parametro que le enviamos si se muestra el mensaje de que se ha generado correctamente(ultimo parametro)
+        'AHORA le enviamos FALSE
+        TraspasoAlbaranesFacturas Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, Me.ProgressBar1, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False
+    End If
+
     Screen.MousePointer = vbDefault
     
     If CambiamosConta Then
@@ -5014,62 +4940,6 @@ Dim UnoSolo As Boolean
 End Sub
 
 
-
-'#### Laura 14/11/2006 Recuperar facturas ALZIRA
-Private Function ComprobarCliente_RecuperarFac(cadSelAlb As String, fecFac As String, numFac As String) As Boolean
-Dim SQL As String
-Dim RS As ADODB.Recordset
-Dim codMacta1 As String 'cliente factura ariges
-Dim codMacta2 As String 'cliente factura conta
-Dim LEtra As String
-
-    On Error GoTo ErrCompCliente
-    ComprobarCliente_RecuperarFac = False
-    
-    'codmacta del cliente del albaran a facturar en Ariges
-    SQL = "select scaalb.codclien,sclien.codmacta"
-    SQL = SQL & " from scaalb inner join sclien on scaalb.codclien=sclien.codclien "
-    SQL = SQL & " Where " & cadSelAlb
-    
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        codMacta1 = DBLet(RS!Codmacta, "T")
-    
-    End If
-    Set RS = Nothing
-    
-    
-    'codmacta en la contabilidad
-    LEtra = ObtenerLetraSerie("FAV")
-    SQL = "SELECT codmacta FROM cabfact "
-    SQL = SQL & " WHERE numserie=" & DBSet(LEtra, "T") & " AND codfaccl=" & numFac & " AND anofaccl=" & Year(fecFac)
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        codMacta2 = DBLet(RS!Codmacta, "T")
-    End If
-    Set RS = Nothing
-    
-    If codMacta1 <> "" And codMacta2 <> "" Then
-        If codMacta1 = codMacta2 Then
-            ComprobarCliente_RecuperarFac = True
-        Else
-            ComprobarCliente_RecuperarFac = False
-            MsgBox "La cuenta contable en la factura de Contabilidad no coincide con la del cliente del Albaran", vbExclamation
-        End If
-    Else
-        ComprobarCliente_RecuperarFac = False
-        MsgBox "No se ha podido leer la cuenta contable del cliente", vbExclamation
-    End If
-    
-    Exit Function
-    
-ErrCompCliente:
-    ComprobarCliente_RecuperarFac = False
-    MuestraError Err.Number, "Comprobar cliente", Err.Description
-End Function
-'#####
 
 
 Private Sub cmdAceptarGenAlb_Click()
@@ -5865,7 +5735,7 @@ End Sub
 Private Sub cmdAceptarPreFac_Click()
 'Prevision de Facturacion de Albaranes
 Dim campo As String, Cad As String
-Dim B As Boolean
+Dim b As Boolean
 Dim indice As Integer
 
 
@@ -5883,7 +5753,7 @@ Dim indice As Integer
 
 
     InicializarVbles
-    B = (OpcionListado = 50)
+    b = (OpcionListado = 50)
     
     'If (Not B) Or (B And codClien = "ALV") Then
         'Pasar nombre de la Empresa como parametro
@@ -5915,7 +5785,7 @@ Dim indice As Integer
         If Not PonerDesdeHasta(campo, "N", 28, 29, Cad) Then Exit Sub
     End If
   
-    If B Then 'opcionlistado=50
+    If b Then 'opcionlistado=50
         'Cadena para seleccion FORMA PAGO
         '--------------------------------------------
         NumCod = ""   'reutilizo
@@ -6171,7 +6041,7 @@ Dim indice As Integer
         Cad = "INSERT INTO tmpstockfec (codusu,codartic,codalmac,stock) " & Cad
         conn.Execute Cad
         
-        B = False 'PARA QUE NO ENTRE EN LO DE ABAJO y vaya a imprimir
+        b = False 'PARA QUE NO ENTRE EN LO DE ABAJO y vaya a imprimir
     End If
     
 
@@ -6192,12 +6062,12 @@ Private Sub cmdAceptarPreFacMan_Click()
 '74: PreFacturar Mantenimientos
 '75: Facturar Mantenimientos
 Dim campo As String, Cad As String
-Dim B As Boolean
+Dim b As Boolean
 Dim PreguntaHecha As Boolean
 
      InicializarVbles
-     B = (OpcionListado = 74) 'Prefacturar (mostrar listado)
-     If Not B Then chkSituFacMant.Value = 0 'por si acaso
+     b = (OpcionListado = 74) 'Prefacturar (mostrar listado)
+     If Not b Then chkSituFacMant.Value = 0 'por si acaso
      
      'Introducir el mes que se va a facturar
      If txtCodigo(46).Text = "" Then
@@ -6219,7 +6089,7 @@ Dim PreguntaHecha As Boolean
         End If
     End If
      
-    If Not B Then 'Vamos a facturar
+    If Not b Then 'Vamos a facturar
         'si vamos a facturar comprobar que la fecha de factura tiene valor
         Cad = ""
         If txtCodigo(44).Text = "" Then Cad = " - El campo Fecha Factura" & vbCrLf
@@ -6319,7 +6189,7 @@ Dim PreguntaHecha As Boolean
     
     
     
-    If B Then
+    If b Then
         'Prevision
         Cad = "0"
         
@@ -6372,7 +6242,7 @@ Dim PreguntaHecha As Boolean
     
     'Aqui deberiamos comporbar si el periodo indicado YA esta facturado o no
     PreguntaHecha = False
-    If Not B Then
+    If Not b Then
         'FACTURACION
         Cad = CStr(EsFechaOKConta(CDate(txtCodigo(44).Text)))
         If Val(Cad) > 0 Then
@@ -6417,7 +6287,7 @@ Dim PreguntaHecha As Boolean
         End If
     End If
     
-    If B Then 'OpcionListado = 74 'NO Imprime, mostrar resultado en pantalla
+    If b Then 'OpcionListado = 74 'NO Imprime, mostrar resultado en pantalla
         
         If Me.chkSituFacMant.Value = 0 Then
             Titulo = "Prefacturación Mantenimientos"
@@ -7502,7 +7372,7 @@ End Sub
 
 Private Sub PonerFramePreFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame del Prevision Facturacion Albaran Visible y Ajustado al Formulario, y visualiza los controles
-Dim B As Boolean
+Dim b As Boolean
 Dim Cad As String
 
     H = 6355
@@ -7517,34 +7387,34 @@ Dim Cad As String
     'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
     PonerFrameVisible Me.FramePreFacturar, visible, H, W
     If visible = True Then
-        B = (OpcionListado = 50)
-        Label4(41).visible = B
-        Me.imgBuscarOfer(16).visible = B
-        Me.imgBuscarOfer(17).visible = B
-        Me.txtCodigo(30).visible = B
-        Me.txtCodigo(31).visible = B
-        Me.txtNombre(30).visible = B
-        Me.txtNombre(31).visible = B
-        Me.Frame6.visible = Not B
+        b = (OpcionListado = 50)
+        Label4(41).visible = b
+        Me.imgBuscarOfer(16).visible = b
+        Me.imgBuscarOfer(17).visible = b
+        Me.txtCodigo(30).visible = b
+        Me.txtCodigo(31).visible = b
+        Me.txtNombre(30).visible = b
+        Me.txtNombre(31).visible = b
+        Me.Frame6.visible = Not b
         Me.Frame6.Top = 2750
         Me.Frame6.Left = 460
         
         'solo albaranes a facturar
-        Me.chkSoloFacturar.visible = B
+        Me.chkSoloFacturar.visible = b
         Me.chkSoloFacturar.Value = 1
         
         'Detalle o resumen
-        Me.Frame7.visible = B And codClien = "ALV"
-        Me.Frame7.visible = B 'And CodClien = "ALV"
+        Me.Frame7.visible = b And codClien = "ALV"
+        Me.Frame7.visible = b 'And CodClien = "ALV"
         Me.OptDetalle(0).Value = True
         
         'Sept 2015. Periodo facturacion
-        Me.Label4(24).visible = B
-        Me.txtCodigo(61).visible = B
-        Me.imgayuda(1).visible = B
+        Me.Label4(24).visible = b
+        Me.txtCodigo(61).visible = b
+        Me.imgayuda(1).visible = b
         
         
-        If Not B Then
+        If Not b Then
             Me.Label9(0).Caption = "Incum. plazos entrega"
         Else 'Prevision Facturacion
             Select Case codClien 'aqui guardamos el tipo de movimiento
@@ -7584,12 +7454,8 @@ Dim Cad As String
                 
                 
         End Select
-        '#### Laura Recuperar facturas ALZIRA
-        'nº de factura solo visible si estamos recuperando facturas
-        Me.Label10(9).visible = Me.EstaRecupFact And OpcionListado = 222
-        Me.txtCodigo(4).visible = Me.EstaRecupFact And OpcionListado = 222
-        If Me.EstaRecupFact And OpcionListado = 222 Then txtCodigo(0).Text = "001"
         
+        'marzo 2016
         Me.Label10(0).Caption = "Facturación de Albaranes " & Cad
         Me.Caption = "Facturación"
     End If
@@ -7600,14 +7466,14 @@ End Sub
 
 Private Sub PonerFramePreFacManteVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame del Prevision Facturacion Albaran Mantenimientos Visible y Ajustado al Formulario, y visualiza los controles
-Dim B As Boolean
+Dim b As Boolean
 Dim Cad As String
 
     
     If visible = True Then
-        B = (OpcionListado = 74) 'prefacturar
+        b = (OpcionListado = 74) 'prefacturar
         W = 7120
-        If B Then 'prefacturar
+        If b Then 'prefacturar
             'H = 5600
             H = 7600
         Else 'facturar
@@ -7620,7 +7486,7 @@ Dim Cad As String
         'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
         PonerFrameVisible Me.FramePreFacMante, visible, H, W
         
-        If B Then 'prefacturar
+        If b Then 'prefacturar
             Me.Frame2(0).visible = False
             Me.Frame2(1).visible = False
             Me.Frame1.Top = Me.Frame1.Top - 800
@@ -7633,9 +7499,9 @@ Dim Cad As String
             Me.txtCodigo(44).Text = Format(Now, "dd/mm/yyyy")
             Me.txtCodigo(47).Text = PonerTrabajadorConectado(Cad)
             Me.txtNombre(47).Text = Cad
-            B = False                            'Si es por proyecto pedira el CC, si no cojera el tel trab o la familia
-            If vEmpresa.TieneAnalitica Then B = vParamAplic.ModoAnalitica = 2
-            Me.Frame2(1).visible = B
+            b = False                            'Si es por proyecto pedira el CC, si no cojera el tel trab o la familia
+            If vEmpresa.TieneAnalitica Then b = vParamAplic.ModoAnalitica = 2
+            Me.Frame2(1).visible = b
         End If
         Me.lblFactMant.Top = H - Me.lblFactMant.Height - 120
     End If
@@ -7725,7 +7591,7 @@ End Sub
 
 Private Function ObtenerClientesNuevo(cadW As String, Importe As String) As String
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EClientes
     
@@ -7745,17 +7611,17 @@ Dim RS As ADODB.Recordset
     SQL = SQL & " group by codclien "
     If Importe <> "" Then SQL = SQL & " having baseimp>" & Importe
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
-    While Not RS.EOF
+    While Not Rs.EOF
 '        If RS!BaseImp >= CCur(Importe) Then
-            SQL = SQL & RS!codClien & ","
+            SQL = SQL & Rs!codClien & ","
 '        End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     'Si no tiene DATOS es que ninguno entra dentro de estos registros
     If SQL = "" Then SQL = "-1-"
@@ -8165,7 +8031,7 @@ End Sub
 
 
 Private Sub CargaListTipoFacturas()
-Dim i As Integer
+Dim I As Integer
 Dim Rectifica As Byte '0. Sin cargar  1.- Cargada
     
     
@@ -8200,9 +8066,9 @@ Dim Rectifica As Byte '0. Sin cargar  1.- Cargada
     While Not miRsAux.EOF
         
         ListTipoFact.AddItem miRsAux!codtipom & " - " & miRsAux!nomtipom
-        If miRsAux!marcar = 1 Then ListTipoFact.Selected(i) = True
+        If miRsAux!marcar = 1 Then ListTipoFact.Selected(I) = True
             
-        i = i + 1
+        I = I + 1
             
         miRsAux.MoveNext
     Wend

@@ -816,7 +816,7 @@ Dim Index As Integer
     Me.listTarifa.ListItems.Clear
     Me.ListStock.ListItems.Clear
     Me.listDatos.ListItems.Clear
-    Label2(4).Caption = ""
+    label2(4).Caption = ""
 
     lblSituacion.Caption = ""
     
@@ -1009,7 +1009,6 @@ Dim SQL As String
             
             frmFacEntAlbaranes2.hcoCodMovim = RecuperaValor(SQL, 2)
             frmFacEntAlbaranes2.hcoCodTipoM = RecuperaValor(SQL, 1)
-            frmFacEntAlbaranes2.RecuperarFactu = False
             frmFacEntAlbaranes2.Show vbModal
          
             
@@ -1017,7 +1016,6 @@ Dim SQL As String
          
             frmFacEntAlbSAIL.hcoCodMovim = listDatos.SelectedItem.SubItems(1)
             frmFacEntAlbSAIL.hcoCodTipoM = listDatos.SelectedItem.Text
-            frmFacEntAlbSAIL.RecuperarFactu = False
             frmFacEntAlbSAIL.Show vbModal
      
                  
@@ -1550,11 +1548,11 @@ Dim NumCajas As Integer
                     
                 'En cad TENGO el origen del precio
                 Select Case Cad
-                    Case "P": Label2(4).Caption = "Promoción"
-                    Case "E": Label2(4).Caption = "Precio Especial"
-                    Case "T": Label2(4).Caption = "Tarifa Artículo"
-                    Case "A": Label2(4).Caption = "Precio Artículo"
-                    Case "M": Label2(4).Caption = "Manual"
+                    Case "P": label2(4).Caption = "Promoción"
+                    Case "E": label2(4).Caption = "Precio Especial"
+                    Case "T": label2(4).Caption = "Tarifa Artículo"
+                    Case "A": label2(4).Caption = "Precio Artículo"
+                    Case "M": label2(4).Caption = "Manual"
                 End Select
                 
                     txtResultado(14).Text = Precio
@@ -1601,7 +1599,7 @@ Dim I As Integer
     For I = 14 To 17
             txtResultado(I).Text = ""
     Next I
-    Label2(4).Caption = ""
+    label2(4).Caption = ""
     lblSituacion.Caption = ""
 End Sub
 

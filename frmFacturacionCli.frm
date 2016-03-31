@@ -479,13 +479,11 @@ Private Sub TreeView1_DblClick()
         If vParamAplic.TipoFormularioClientes = 0 Then
             frmFacEntAlbaranes2.hcoCodMovim = DevuelveNumeroAlbaran(TreeView1.SelectedItem.Text)
             frmFacEntAlbaranes2.hcoCodTipoM = Mid(TreeView1.SelectedItem.Text, 1, 3)
-            frmFacEntAlbaranes2.RecuperarFactu = False
             frmFacEntAlbaranes2.Show vbModal
             Set frmFacEntAlbaranes2 = Nothing
         Else
             frmFacEntAlbSAIL.hcoCodMovim = DevuelveNumeroAlbaran(TreeView1.SelectedItem.Text)
             frmFacEntAlbSAIL.hcoCodTipoM = Mid(TreeView1.SelectedItem.Text, 1, 3)
-            frmFacEntAlbSAIL.RecuperarFactu = False
             frmFacEntAlbSAIL.Show vbModal
             Set frmFacEntAlbSAIL = Nothing
         End If
@@ -572,7 +570,6 @@ Private Sub TreeView2_DblClick()
         If vParamAplic.TipoFormularioClientes = 0 Then
                 frmFacEntAlbaranes2.hcoCodMovim = DevuelveNumeroAlbaran(TreeView2.SelectedItem.Text)
                 frmFacEntAlbaranes2.hcoCodTipoM = Mid(TreeView2.SelectedItem.Text, 1, 3)
-                frmFacEntAlbaranes2.RecuperarFactu = False
                 frmFacEntAlbaranes2.Show vbModal
                 Set frmFacEntAlbaranes2 = Nothing
             
@@ -580,7 +577,6 @@ Private Sub TreeView2_DblClick()
         
             frmFacEntAlbSAIL.hcoCodMovim = DevuelveNumeroAlbaran(TreeView2.SelectedItem.Text)
             frmFacEntAlbSAIL.hcoCodTipoM = Mid(TreeView2.SelectedItem.Text, 1, 3)
-            frmFacEntAlbSAIL.RecuperarFactu = False
             frmFacEntAlbSAIL.Show vbModal
             Set frmFacEntAlbSAIL = Nothing
         End If
@@ -798,14 +794,14 @@ Dim C As String
     
 End Sub
 
-Private Function DevuelveNumeroAlbaran(Linea As String) As String
+Private Function DevuelveNumeroAlbaran(linea As String) As String
 Dim J As Integer
     
     DevuelveNumeroAlbaran = "0"
     
-    J = InStr(1, Linea, " ")
+    J = InStr(1, linea, " ")
     If J > 0 Then
-        DevuelveNumeroAlbaran = Mid(Linea, 1, J - 1)
+        DevuelveNumeroAlbaran = Mid(linea, 1, J - 1)
         DevuelveNumeroAlbaran = Mid(DevuelveNumeroAlbaran, 4) 'los tres primeros son el codtipom
     End If
 End Function

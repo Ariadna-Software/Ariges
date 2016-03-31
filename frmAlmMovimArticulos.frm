@@ -676,21 +676,21 @@ End Sub
 
 
 Private Sub Imprimir()
-Dim cad As String
+Dim Cad As String
 Dim numParam As Byte
 
     'Resto parametros
-    cad = ""
-    cad = cad & "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
+    Cad = ""
+    Cad = Cad & "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
     numParam = 1
             
     With frmImprimir
-        .NombreRpt = "rAlmMovim.rpt"
-        .OtrosParametros = cad
+        .NombreRPT = "rAlmMovim.rpt"
+        .OtrosParametros = Cad
         .NumeroParametros = numParam
         .FormulaSeleccion = cadSeleccion
         .EnvioEMail = False
-        .opcion = 9
+        .Opcion = 9
         .Titulo = "Informe Movimientos Articulos"
         .ConSubInforme = True
         .Show vbModal
@@ -772,7 +772,6 @@ Dim SQL As String
                                 .hcoCodMovim = Data2.Recordset!document
                             End If
                             .hcoCodTipoM = Data2.Recordset!detamovi
-                            .RecuperarFactu = False
                             .Show vbModal
                         End With
                         
@@ -785,7 +784,6 @@ Dim SQL As String
                                 .hcoCodMovim = Data2.Recordset!document
                             End If
                             .hcoCodTipoM = Data2.Recordset!detamovi
-                            .RecuperarFactu = False
                             .Show vbModal
                         End With
                 End If
@@ -814,7 +812,6 @@ Dim SQL As String
                             .hcoCodMovim = Data2.Recordset!document
                         End If
                         .hcoCodTipoM = Data2.Recordset!detamovi
-                        .RecuperarFactu = False
                         .Show vbModal
                     End With
                 End If
@@ -971,13 +968,13 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim B As Boolean
+Dim b As Boolean
 Dim I As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
 
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
      
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data2, SQL, PrimeraVez
@@ -1049,7 +1046,7 @@ Dim SQL As String
         DataGrid1.Columns(I).AllowSizing = False
     Next I
     DataGrid1.ScrollBars = dbgAutomatic
-    DataGrid1.Enabled = B
+    DataGrid1.Enabled = b
     If Modo = 2 Then DataGrid1.Enabled = True
     PrimeraVez = False
     
@@ -1257,7 +1254,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
     End If
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
@@ -1321,17 +1318,17 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim I As Byte
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
 
    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
@@ -1351,18 +1348,18 @@ Dim NumReg As Byte
         PonerBotonCabecera True
     End Select
            
-    B = Modo <> 0 And Modo <> 2
+    b = Modo <> 0 And Modo <> 2
   
     For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = B
+        Me.imgBuscar(I).Enabled = b
     Next I
 
     
     PonerLongCampos
 
-    B = (Kmodo >= 3) Or Modo = 1
-    Toolbar1.Buttons(1).Enabled = Not B
-    Toolbar1.Buttons(2).Enabled = Not B
+    b = (Kmodo >= 3) Or Modo = 1
+    Toolbar1.Buttons(1).Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not b
 End Sub
 
 
@@ -1480,19 +1477,19 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
+Private Sub PonerBotonCabecera(b As Boolean)
 Dim bol As Boolean
 
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    If B Then Me.lblIndicador.Caption = ""
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    If b Then Me.lblIndicador.Caption = ""
     
     bol = (Modo = 1 Or Modo = 2)
     Me.Label3.visible = bol
     Me.Text2(1).visible = bol
     
     bol = (Modo = 2)
-    Me.Label2.visible = bol
+    Me.label2.visible = bol
     Me.Text2(2).visible = bol
     
     '---- Laura: 27/09/2006
@@ -1658,23 +1655,23 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    cad = ""
+    Cad = ""
             
-    cad = cad & "Código|smoval|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
+    Cad = Cad & "Código|smoval|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
     tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
     tabla = tabla & " GROUP BY smoval.codartic "
     Titulo = "Movimientos de Articulos"
 
            
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
+        frmB.vCampos = Cad
         frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
@@ -1709,15 +1706,15 @@ Dim Nombre As String
         Case "TRA", "REG", "DFI"
             'Obtener nombre de la tabla de trabajadores
             Nombre = DevuelveDesdeBDNew(conAri, "straba", "nomtraba", "codtraba", CStr(codigo), "N")
-            Label2.Caption = "Trabajador"
+            label2.Caption = "Trabajador"
         Case "ALV", "ALR", "ALM", "ART", "FAV", "FTI", "ATI"
             'Obtener nombre de la tabla de Clientes
             Nombre = DevuelveDesdeBDNew(conAri, "sclien", "nomclien", "codclien", CStr(codigo), "N")
-            Label2.Caption = "Cliente"
+            label2.Caption = "Cliente"
         Case "ALC"
             'Obtener el nombre de la tabla de Proveedores
             Nombre = DevuelveDesdeBDNew(conAri, "sprove", "nomprove", "codprove", CStr(codigo), "N")
-            Label2.Caption = "Proveedor"
+            label2.Caption = "Proveedor"
     End Select
     PonerNombreCliente = Nombre
 End Function

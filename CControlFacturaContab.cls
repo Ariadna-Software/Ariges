@@ -185,7 +185,7 @@ End Function
 Public Function CuentasBloqueadas(ByRef CnnCta As Connection, ByVal CadenaCuentas As String, FechaContab As Date, ByRef CtaBloq As Collection)
 Dim SQL As String
 Dim Aux As String
-Dim i As Integer
+Dim I As Integer
 Dim RT As ADODB.Recordset
 
 
@@ -194,10 +194,10 @@ Dim RT As ADODB.Recordset
     Do
         'Para reestringir la select un poco
         If Len(CadenaCuentas) > 450 Then
-            i = InStr(450, CadenaCuentas, ",")
-            If i > 0 Then
-                Aux = Mid(CadenaCuentas, 1, i - 1)
-                CadenaCuentas = Mid(CadenaCuentas, i + 1)
+            I = InStr(450, CadenaCuentas, ",")
+            If I > 0 Then
+                Aux = Mid(CadenaCuentas, 1, I - 1)
+                CadenaCuentas = Mid(CadenaCuentas, I + 1)
             Else
                 Aux = CadenaCuentas
                 CadenaCuentas = ""
@@ -212,7 +212,7 @@ Dim RT As ADODB.Recordset
         RT.Open SQL, CnnCta, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not RT.EOF
             'Devolver empipado ciertos campos, para que pueden mostrar los que quieran
-            SQL = RT!Codmacta & "|" & RT!nommacta & "|" & RT!fecbloq & "|"
+            SQL = RT!Codmacta & "|" & RT!Nommacta & "|" & RT!fecbloq & "|"
             CtaBloq.Add SQL
             RT.MoveNext
         Wend
@@ -237,10 +237,10 @@ Dim LaFecha As Date
 
     Set RT = New ADODB.Recordset
     If Serie = "" Then
+        'Estamos en proveedores
         SQL = "select max(fecrecpr) as fecha from cabfactprov "
             
     Else
-        'Estamos en proveedores
         SQL = "Select max(fecfaccl)as fecha from cabfact WHERE numserie = '" & Serie & "'"
     End If
     LaFecha = CDate("01/01/1900")
@@ -268,7 +268,7 @@ End Function
 
 
 Private Function LeerDatos(ByRef CN As Connection) As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 
     If DatosCargados Then
@@ -277,34 +277,34 @@ Dim SQL As String
     End If
     
     SQL = "Select * from parametros "
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, CN, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, CN, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Rs.EOF Then
         'MSGBOX
         LeerDatos = "No existe parametros para la empresa"
     Else
-        mvarFechaIni = RS!FechaIni
-        mvarFechaFin = RS!FechaFin
+        mvarFechaIni = Rs!FechaIni
+        mvarFechaFin = Rs!FechaFin
         mvarFechaFin = DateAdd("yyyy", 1, mvarFechaFin)
-        If IsNull(RS!FechaActiva) Then
+        If IsNull(Rs!FechaActiva) Then
             mvarFechaActiva = mvarFechaIni
         Else
-            mvarFechaActiva = RS!FechaActiva
+            mvarFechaActiva = Rs!FechaActiva
         End If
         'Utlimo peridodo liquidado
-        mvarUltMEsIVA = DBLet(RS!perfactu, "N")
+        mvarUltMEsIVA = DBLet(Rs!perfactu, "N")
         If mvarUltMEsIVA = 0 Then mvarUltMEsIVA = 1
-        mvarUltAnyoIVA = DBLet(RS!anofactu, "N")
+        mvarUltAnyoIVA = DBLet(Rs!anofactu, "N")
         If mvarUltAnyoIVA = 0 Then mvarUltAnyoIVA = 1900
         
-        mvarEsIvaMensual = DBLet(RS!periodos, "N") = 1
+        mvarEsIvaMensual = DBLet(Rs!periodos, "N") = 1
 
     
         
         LeerDatos = ""
         DatosCargados = True
     End If
-    RS.Close
+    Rs.Close
     
     
 End Function

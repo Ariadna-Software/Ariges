@@ -2078,7 +2078,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public opcion As Byte
+Public Opcion As Byte
     '   0.- Precio medio ponderado
     '   1.- Articulo es escandallo de otros
     '   2.- Precio ultima compra (RECALCULO)
@@ -2180,8 +2180,8 @@ End Sub
 Private Sub cmdActualizaSoloProveedor_Click()
 
     On Error GoTo ecmdActualizaSoloProveedor
-    CadenaDesdeOtroForm = "Origen    " & Me.Label2(3).Caption & " " & Me.Label2(5).Caption & vbCrLf
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Destino   " & Me.Label2(6).Caption & " " & Me.Label2(8).Caption
+    CadenaDesdeOtroForm = "Origen    " & Me.label2(3).Caption & " " & Me.label2(5).Caption & vbCrLf
+    CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Destino   " & Me.label2(6).Caption & " " & Me.label2(8).Caption
     SQL = "Va a cambiar en la BD el proveedor:"
     SQL = SQL & vbCrLf & CadenaDesdeOtroForm
     SQL = SQL & vbCrLf & "¿Continuar?"
@@ -2191,31 +2191,31 @@ Private Sub cmdActualizaSoloProveedor_Click()
     
     Set miRsAux = New ADODB.Recordset
    
-    Label2(10).Caption = "Articulo(1/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Articulo(1/5)"
+    label2(10).Refresh
     
-    CadParam = "UPDATE sartic set codprove =" & Label2(6).Caption
-    CadParam = CadParam & " WHERE codprove=" & Label2(3).Caption
+    CadParam = "UPDATE sartic set codprove =" & label2(6).Caption
+    CadParam = CadParam & " WHERE codprove=" & label2(3).Caption
     conn.Execute CadParam
     Espera 0.8
     
     conn.Execute "SET FOREIGN_KEY_CHECKS=0;"
-    Label2(10).Caption = "Precios(2/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Precios(2/5)"
+    label2(10).Refresh
     CadParam = Replace(CadParam, "sartic", "slispr")
     conn.Execute CadParam
-    Label2(10).Caption = "Hco precios(3/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Hco precios(3/5)"
+    label2(10).Refresh
     CadParam = Replace(CadParam, "slispr", "slisp1")
     conn.Execute CadParam
     
-    Label2(10).Caption = "Dto proveedor(41/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Dto proveedor(41/5)"
+    label2(10).Refresh
     CadParam = Replace(CadParam, "slisp1", "sdtomp")
     conn.Execute CadParam
     
-    Label2(10).Caption = "Familias(5/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Familias(5/5)"
+    label2(10).Refresh
     CadParam = Replace(CadParam, "sdtomp", "sfamia")
     conn.Execute CadParam
     
@@ -2227,7 +2227,7 @@ Private Sub cmdActualizaSoloProveedor_Click()
     
     Set LOG = New cLOG
     
-     Label2(10).Caption = ""
+     label2(10).Caption = ""
     LOG.Insertar 32, vUsu, CadenaDesdeOtroForm
     
     Screen.MousePointer = vbDefault
@@ -2238,7 +2238,7 @@ Private Sub cmdActualizaSoloProveedor_Click()
 ecmdActualizaSoloProveedor:
     If Err.Number <> 0 Then
         MuestraError Err.Number, , Err.Description
-         Label2(10).Caption = ""
+         label2(10).Caption = ""
     End If
     Set miRsAux = Nothing
     Set LOG = Nothing
@@ -2312,7 +2312,7 @@ Private Sub cmdCambiarPasswd_Click()
     
     
     If MsgBox("Desea cambiar el password para las aplicaciones ARIADNA SOFTWARE?", vbQuestion + vbYesNo) = vbYes Then
-        NumRegElim = (vUsu.Codigo Mod 1000)
+        NumRegElim = (vUsu.codigo Mod 1000)
         SQL = "UPDATE usuarios.usuarios SET passwordpropio=" & DBSet(txtPassword(2).Text, "T")
         SQL = SQL & " WHERE codusu = " & NumRegElim
         conn.Execute SQL
@@ -2557,11 +2557,11 @@ Dim EsAlbaranDeRuta As Boolean
     End If
     If Not PonerParamRPT2(indRPT, CadParam, CByte(numParam), SQL, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
     frmImprimir.NombrePDF = SQL
-    frmImprimir.NombreRpt = SQL
+    frmImprimir.NombreRPT = SQL
     
     'Añadir el codigo de usuario como parametro para link con tabla Temporal (tmptiposiva) en el Report
     'tabla temporal para el calculo del bruto total para cada tipo de IVA
-    CadParam = CadParam & "pCodUsu=" & vUsu.Codigo & "|"
+    CadParam = CadParam & "pCodUsu=" & vUsu.codigo & "|"
     numParam = numParam + 1
     
     'PORTES
@@ -2640,7 +2640,7 @@ Dim EsAlbaranDeRuta As Boolean
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
-        .opcion = 45
+        .Opcion = 45
         
         .Titulo = "Albaran de Cliente(Seleccion)"
         
@@ -2678,16 +2678,16 @@ Private Function CargarDatosImprimeAlbaranConTransporte() As Boolean
         
     'Para cada albaran pendiente de reeimprimir habra que ver si tiene resto de pedido
     'Si lo tiene cargaremos la tabla
-    SQL = "DELETE FROM tmpsliped WHERE codusu = " & vUsu.Codigo
+    SQL = "DELETE FROM tmpsliped WHERE codusu = " & vUsu.codigo
     conn.Execute SQL
     
     
     'Para tener un temporal por si se va la luz
-    SQL = "DELETE FROM tmpnseries WHERE codusu =" & vUsu.Codigo
+    SQL = "DELETE FROM tmpnseries WHERE codusu =" & vUsu.codigo
     conn.Execute SQL
     
     SQL = "INSERT INTO tmpnseries (codusu ,numlinealb,numserie) "
-    SQL = SQL & " select " & vUsu.Codigo & " ,numalbar,fechaalb from scaalb where " & pPdfRpt
+    SQL = SQL & " select " & vUsu.codigo & " ,numalbar,fechaalb from scaalb where " & pPdfRpt
     conn.Execute SQL
     
     
@@ -2698,13 +2698,13 @@ Private Function CargarDatosImprimeAlbaranConTransporte() As Boolean
     '
     '**** linkamos POR codzona--> CODDIREN.  pARA NO CREAR MAS CAMPOS EN TMPSLIPED.. En codlamac llevare el coddiren
     '
-    SQL = "Select " & vUsu.Codigo & ",scaped.numpedcl,numlinea,codartic,nomartic,cantidad,coddiren,codclien FROM scaped,sliped where scaped.numpedcl =sliped.numpedcl"
+    SQL = "Select " & vUsu.codigo & ",scaped.numpedcl,numlinea,codartic,nomartic,cantidad,coddiren,codclien FROM scaped,sliped where scaped.numpedcl =sliped.numpedcl"
     SQL = SQL & " AND (scaped.numpedcl,fecpedcl) in "
     SQL = SQL & "( select numpedcl,fecpedcl from scaalb where " & pPdfRpt & ")"
     SQL = "INSERT INTO tmpsliped(codusu, numpedcl, numlinea, codartic, nomartic, cantidad,codzona,codclien) " & SQL
     If ejecutar(SQL, False) Then
         'Pondre a cero la codzona pq si no el rpt no enlaza bien
-        SQL = "UPDATE tmpsliped SET codzona = 0 where codusu = " & vUsu.Codigo & " AND codzona is null"
+        SQL = "UPDATE tmpsliped SET codzona = 0 where codusu = " & vUsu.codigo & " AND codzona is null"
         ejecutar SQL, False
         CargarDatosImprimeAlbaranConTransporte = True
     End If
@@ -2731,12 +2731,12 @@ Private Sub cmdTfnia_Click(Index As Integer)
         'Imprimir
         If lw(5).ListItems.Count = 0 Then Exit Sub
         
-        conn.Execute "Delete from tmpinformes where codusu =" & vUsu.Codigo
+        conn.Execute "Delete from tmpinformes where codusu =" & vUsu.codigo
         SQL = "INSERT INTO tmpinformes(codusu,codigo1,nombre1,campo1,nombre2,nombre3) VALUES "
         CadParam = ""
         For numParam = 1 To lw(5).ListItems.Count
             'tmpinformes(codusu,codigo1,nombre1,nombre2,nombre3)
-            CadParam = CadParam & ", (" & vUsu.Codigo & "," & numParam & ",'" & lw(5).ListItems(numParam).Text & "',"
+            CadParam = CadParam & ", (" & vUsu.codigo & "," & numParam & ",'" & lw(5).ListItems(numParam).Text & "',"
             CadParam = CadParam & DBSet(lw(5).ListItems(numParam).SubItems(1), "T") & "," & DBSet(lw(5).ListItems(numParam).SubItems(2), "T") & "," & DBSet(lw(5).ListItems(numParam).SubItems(3), "T") & ") "
         Next
         CadParam = Mid(CadParam, 2)
@@ -2747,7 +2747,7 @@ Private Sub cmdTfnia_Click(Index As Integer)
         SQL = lw(5).ColumnHeaders(lw(5).SortKey + 1)
         CadParam = CadParam & "Valores=""Orden: " & SQL & """|"
         numParam = numParam + 1
-        LlamarImprimir "Mod. cuotas telefonia", "{tmpinformes.codusu}=" & vUsu.Codigo, "rTelefModCuota.rpt"
+        LlamarImprimir "Mod. cuotas telefonia", "{tmpinformes.codusu}=" & vUsu.codigo, "rTelefModCuota.rpt"
         
     End If
 End Sub
@@ -2787,7 +2787,7 @@ Private Sub cmdtreeview1_Click(Index As Integer)
             Else
                 'aÑadir,modificar familias
                 CadenaDesdeOtroForm = ""
-                frmVarios3.opcion = 0
+                frmVarios3.Opcion = 0
                 frmVarios3.Show vbModal
                 If CadenaDesdeOtroForm <> "" Then
                     'Pequeña comprobacion
@@ -2826,7 +2826,7 @@ Private Sub cmdtreeview1_Click(Index As Integer)
                     'modificar
                     CadenaDesdeOtroForm = Replace(TreeView1.SelectedItem, " - ", "|")
                     CadenaDesdeOtroForm = CadenaDesdeOtroForm & "|0|"
-                    frmVarios3.opcion = 0
+                    frmVarios3.Opcion = 0
                     frmVarios3.Show vbModal
                     If CadenaDesdeOtroForm <> "" Then numParam = 1
                 End If
@@ -2977,7 +2977,7 @@ Dim NO As Node
         CadParam = CadParam & "TextoAnterior= """ & RecuperaValor(SQL, 2) & """|"
         numParam = numParam + 2
          
-        LlamarImprimir "Ventas familia agrupado", "{tmpinformes.codusu}=" & vUsu.Codigo, "rVtasAgrupaFamiliaAlz.rpt"
+        LlamarImprimir "Ventas familia agrupado", "{tmpinformes.codusu}=" & vUsu.codigo, "rVtasAgrupaFamiliaAlz.rpt"
     End If
     
     Screen.MousePointer = vbDefault
@@ -2989,23 +2989,23 @@ End Sub
 Private Sub Form_Activate()
     If PrimVez Then
         PrimVez = False
-        If opcion = 0 Or opcion = 2 Then CargaLwPrecioMP
-        If opcion = 1 Then CarArticulos
+        If Opcion = 0 Or Opcion = 2 Then CargaLwPrecioMP
+        If Opcion = 1 Then CarArticulos
         
-        If opcion = 5 Then CargarLineasPedidoVarios
-        If opcion = 6 Then CargarLineasFacturaTipoPrecio
-        If opcion = 7 Then CargarTreevieVentasAlzira
-        If opcion = 8 Then
+        If Opcion = 5 Then CargarLineasPedidoVarios
+        If Opcion = 6 Then CargarLineasFacturaTipoPrecio
+        If Opcion = 7 Then CargarTreevieVentasAlzira
+        If Opcion = 8 Then
             optTelefono_Click 0
             Set miRsAux = New ADODB.Recordset
         End If
         
-        If opcion = 9 Then CargaDatosFAZ
-        If opcion = 11 Then CargaControlDireccionesEnvio
-        If opcion = 12 Then CargarArticulosCambio
-        If opcion = 14 Then CargaAlbaranes True
+        If Opcion = 9 Then CargaDatosFAZ
+        If Opcion = 11 Then CargaControlDireccionesEnvio
+        If Opcion = 12 Then CargarArticulosCambio
+        If Opcion = 14 Then CargaAlbaranes True
         
-        If opcion = 15 Then PonerCamposCambioProveedor
+        If Opcion = 15 Then PonerCamposCambioProveedor
     End If
     Screen.MousePointer = vbDefault
     
@@ -3033,16 +3033,16 @@ Dim indice As Integer
     FrameCambioFamMarca.visible = False
     FrameAgua.visible = False
     FrameUpdateaSoloProveedor.visible = False
-    indice = opcion
-    If opcion >= 4 Then limpiar Me
-    Select Case opcion
+    indice = Opcion
+    If Opcion >= 4 Then limpiar Me
+    Select Case Opcion
     Case 0, 2
         'Ajuste precio
         '   0: PrecioMP
         '   2: PrecioMP
         
         PonerFrameVisible FramePMP, H, W
-        If opcion = 0 Then
+        If Opcion = 0 Then
             Caption = "Actualizar precio medio ponderado"
             
         Else
@@ -3139,7 +3139,7 @@ Private Sub PonerFrameVisible(ByRef F As Frame, ByRef CH As Integer, CW As Integ
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    If opcion = 8 Then Set miRsAux = Nothing
+    If Opcion = 8 Then Set miRsAux = Nothing
 End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -3172,7 +3172,7 @@ Private Sub Imga_Click(Index As Integer)
     Case 2
 
         CadenaDesdeOtroForm = ""
-        frmVarios3.opcion = 4
+        frmVarios3.Opcion = 4
         frmVarios3.Show vbModal
         If CadenaDesdeOtroForm <> "" Then AnyadeNodoTelefonia False
 
@@ -3209,7 +3209,7 @@ Dim Ayuda As String
         Ayuda = Ayuda & vbCrLf & "%Comision:  Que llevara la linea"
     End Select
     
-    Ayuda = imgAyuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
+    Ayuda = imgayuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 
@@ -3271,7 +3271,7 @@ Private Sub CargaLwPrecioMP()
     Set miRsAux = New ADODB.Recordset
     Me.lw(0).ListItems.Clear
     
-    SQL = "Select * from tmpinformes where codusu = " & vUsu.Codigo & " ORDER BY campo1,nombre1"
+    SQL = "Select * from tmpinformes where codusu = " & vUsu.codigo & " ORDER BY campo1,nombre1"
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
@@ -3377,7 +3377,7 @@ Dim HayError As Boolean
     For NumRegElim = lw(0).ListItems.Count To 1 Step -1
         If lw(0).ListItems(NumRegElim).Checked Then
             
-            If opcion = 0 Then
+            If Opcion = 0 Then
                 SQL = "preciomp"
             Else
                 SQL = "preciouc"
@@ -3411,7 +3411,7 @@ Private Sub InsertaLog()
         '  LOG de acciones
         Set LOG = New cLOG
         vCadena = Mid(vCadena, 6) 'quitamos el primer separador
-        If opcion = 0 Then
+        If Opcion = 0 Then
             vCadena = "PMP: " & vCadena
         Else
             vCadena = "UPC: " & vCadena
@@ -3583,7 +3583,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgAyuda
+    For Each Ima In Me.imgayuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear
@@ -3612,7 +3612,7 @@ Dim MasDeUnAlbaran As Boolean
         IT.Text = DBLet(miRsAux!codtipoa, "T") & Format(miRsAux!NumAlbar, "0000000")
         IT.SubItems(1) = miRsAux!codArtic 'nomartic
         IT.SubItems(2) = miRsAux!NomArtic 'nomartic
-        IT.SubItems(3) = Format(miRsAux!Cantidad, FormatoPorcen)  'cantidad o servidas
+        IT.SubItems(3) = Format(miRsAux!cantidad, FormatoPorcen)  'cantidad o servidas
         IT.SubItems(4) = Format(miRsAux!precioar, FormatoPrecio)
         IT.SubItems(5) = Format(miRsAux!dtoline1, FormatoPorcen)
         IT.SubItems(6) = Format(miRsAux!dtoline2, FormatoPorcen)
@@ -3682,7 +3682,7 @@ Private Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     
 End Sub
 
-Private Sub LlamarImprimir(cadTitulo As String, cadFormula As String, NombreRpt As String)
+Private Sub LlamarImprimir(cadTitulo As String, cadFormula As String, NombreRPT As String)
     With frmImprimir
         .FormulaSeleccion = cadFormula
         .OtrosParametros = CadParam
@@ -3691,10 +3691,10 @@ Private Sub LlamarImprimir(cadTitulo As String, cadFormula As String, NombreRpt 
         .SoloImprimir = False
         .EnvioEMail = False
         .Titulo = cadTitulo
-        .opcion = 3000   'VAN TODOS EN ESTE SACO
+        .Opcion = 3000   'VAN TODOS EN ESTE SACO
         .NombrePDF = ""
-        .NombrePDF = NombreRpt
-        .NombreRpt = NombreRpt
+        .NombrePDF = NombreRPT
+        .NombreRPT = NombreRPT
         .ConSubInforme = False 'conSubRPT
         .MostrarTreeDesdeFuera = False ' vMostrarTree
         .Show vbModal
@@ -3781,7 +3781,7 @@ Dim F As Date
     lblAzira(1).Caption = "Preparando datos"
     lblAzira(1).Refresh
     
-    SQL = "DELETE FROM tmpinformes where codusu = " & vUsu.Codigo
+    SQL = "DELETE FROM tmpinformes where codusu = " & vUsu.codigo
     conn.Execute SQL
     
     
@@ -3797,7 +3797,7 @@ Dim F As Date
         If numParam = 1 Then F = DateAdd("yyyy", -1, F)         'anterior
         CadParam = ""
         For NumRegElim = 1 To 12
-            CadParam = CadParam & ", (" & vUsu.Codigo & "," & (numParam * 100) + Month(F) & "," & Format(F, "yyyymm") & ","
+            CadParam = CadParam & ", (" & vUsu.codigo & "," & (numParam * 100) + Month(F) & "," & Format(F, "yyyymm") & ","
             CadParam = CadParam & numParam & "," & DBSet(MonthName(Month(F)), "T") & ",0,0,0,0,0,0,0,0,0)"
             F = DateAdd("m", 1, F)
         Next
@@ -3846,8 +3846,8 @@ Dim F As Date
         If NumRegElim <> 5 Then CadParam = CadParam & ",importeb" & NumRegElim
     Next NumRegElim
     
-    SQL = "select " & vUsu.Codigo & ",min(codigo1)+2000,max(campo1)+1000,2,nombre1" & SQL
-    SQL = SQL & " FROM tmpinformes WHERE codusu =" & vUsu.Codigo & " group by nombre1 order by 3 "
+    SQL = "select " & vUsu.codigo & ",min(codigo1)+2000,max(campo1)+1000,2,nombre1" & SQL
+    SQL = SQL & " FROM tmpinformes WHERE codusu =" & vUsu.codigo & " group by nombre1 order by 3 "
     SQL = CadParam & ") " & SQL
     conn.Execute SQL
     
@@ -3856,13 +3856,13 @@ Dim F As Date
     
     lblAzira(1).Caption = "Valores a cero"
     lblAzira(1).Refresh
-    SQL = "select * FROM tmpinformes WHERE codusu =" & vUsu.Codigo & " and campo2<2 "
+    SQL = "select * FROM tmpinformes WHERE codusu =" & vUsu.codigo & " and campo2<2 "
     SQL = SQL & " and importe1=0 and importeb1=0 and importe2=0 and importeb2=0 and importe3=0 "
     SQL = SQL & " and importeb3=0 and importe4=0 and importeb4=0 and importe5=0 order by campo1"
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         SQL = "UPDATE tmpinformes set importe1=0 , importeb1=0 , importe2=0 , importeb2=0 , importe3=0"
-        SQL = SQL & " ,importeb3=0 , importe4=0 , importeb4=0 , importe5=0  WHERE codusu =" & vUsu.Codigo
+        SQL = SQL & " ,importeb3=0 , importe4=0 , importeb4=0 , importe5=0  WHERE codusu =" & vUsu.codigo
         SQL = SQL & " AND campo2=2 and nombre1=" & DBSet(miRsAux!nombre1, "T")
         conn.Execute SQL
         miRsAux.MoveNext
@@ -3948,7 +3948,7 @@ Dim F1 As Date
                 End If
                 If DBLet(miRsAux.Fields(1), "N") <> 0 Then
                     Aux = "UPDATE tmpinformes set " & Aux & " = " & DBSet(miRsAux.Fields(1), "N")
-                    Aux = Aux & " WHERE codusu = " & vUsu.Codigo & " AND campo1=" & miRsAux.Fields(0)
+                    Aux = Aux & " WHERE codusu = " & vUsu.codigo & " AND campo1=" & miRsAux.Fields(0)
                     conn.Execute Aux
                 End If
                 miRsAux.MoveNext
@@ -4350,10 +4350,10 @@ Dim vFac As CFactura
             
          
             
-            vFac.Cliente = vCl.Codigo
+            vFac.Cliente = vCl.codigo
             vFac.BancoPr = RecuperaValor(Me.vCadena, 2)
             'domclien codpobla pobclien proclien nifclien telclien   codforpa
-            SQL = SQL & ", codclien=" & vCl.Codigo
+            SQL = SQL & ", codclien=" & vCl.codigo
             SQL = SQL & ", nomclien=" & DBSet(vCl.Nombre, "T")
             SQL = SQL & ", domclien=" & DBSet(vCl.Domicilio, "T")
             SQL = SQL & ", codpobla=" & DBSet(vCl.CPostal, "T")
@@ -4884,7 +4884,6 @@ Private Sub AbrirFormularioDireccionEnvio()
              With frmFacEntAlbaranes2
                 .hcoCodMovim = lw(7).SelectedItem.SubItems(1)
                 .hcoCodTipoM = lw(7).SelectedItem.Text
-                .RecuperarFactu = False
                 .Show vbModal
             End With
             
@@ -4893,7 +4892,6 @@ Private Sub AbrirFormularioDireccionEnvio()
              With frmFacEntAlbSAIL
                 .hcoCodMovim = lw(7).SelectedItem.SubItems(1)
                 .hcoCodTipoM = lw(7).SelectedItem.Text
-                .RecuperarFactu = False
                 .Show vbModal
             End With
         End If
@@ -5143,12 +5141,12 @@ Private Sub PonerCamposCambioProveedor()
     numParam = InStr(1, SQL, "=")
     SQL = Trim(Mid(SQL, numParam + 1))
     
-    Label2(3).Caption = Right("00000" & SQL, 5)
-    Label2(5).Caption = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", SQL)
+    label2(3).Caption = Right("00000" & SQL, 5)
+    label2(5).Caption = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", SQL)
     SQL = Right("00000" & RecuperaValor(vCadena, 4), 5)
-    Label2(6).Caption = SQL
-    Label2(8).Caption = RecuperaValor(vCadena, 5)
-    Label2(10).Caption = ""
+    label2(6).Caption = SQL
+    label2(8).Caption = RecuperaValor(vCadena, 5)
+    label2(10).Caption = ""
     
     Me.cmdActualizaSoloProveedor.Enabled = vUsu.Nivel <= 1
     

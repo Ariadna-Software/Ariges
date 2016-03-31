@@ -1946,8 +1946,8 @@ On Error GoTo Err3
     
         mvarRecalculoMargen = DBLet(Rs!ActualizaMargen, "N") = 1
     
-        'FALTA###
-        If Me.HayDeparNuevo = 2 Then mvarTipoFormularioClientes = 1
+        
+        If Me.HayDeparNuevo = 2 Then mvarTipoFormularioClientes = 1  'Obras. SAIL-Y euler
         Leer = 0
         
         

@@ -172,101 +172,101 @@ Begin VB.Form frmAlmArticulos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmAlmArticulos.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2(3)"
-      Tab(1).Control(1)=   "Label2(2)"
-      Tab(1).Control(2)=   "Label2(11)"
-      Tab(1).Control(3)=   "Label2(1)"
-      Tab(1).Control(4)=   "Label1(40)"
-      Tab(1).Control(5)=   "Text1(21)"
-      Tab(1).Control(6)=   "Text1(20)"
-      Tab(1).Control(7)=   "Text1(19)"
-      Tab(1).Control(8)=   "Text1(28)"
-      Tab(1).Control(9)=   "framePortes"
-      Tab(1).Control(10)=   "Text1(33)"
-      Tab(1).Control(11)=   "chkWeb"
+      Tab(1).Control(0)=   "chkWeb"
+      Tab(1).Control(1)=   "Text1(33)"
+      Tab(1).Control(2)=   "framePortes"
+      Tab(1).Control(3)=   "Text1(28)"
+      Tab(1).Control(4)=   "Text1(19)"
+      Tab(1).Control(5)=   "Text1(20)"
+      Tab(1).Control(6)=   "Text1(21)"
+      Tab(1).Control(7)=   "Label1(40)"
+      Tab(1).Control(8)=   "Label2(1)"
+      Tab(1).Control(9)=   "Label2(11)"
+      Tab(1).Control(10)=   "Label2(2)"
+      Tab(1).Control(11)=   "Label2(3)"
       Tab(1).ControlCount=   12
       TabCaption(2)   =   "Componentes"
       TabPicture(2)   =   "frmAlmArticulos.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "txtAux(7)"
-      Tab(2).Control(1)=   "Data2"
-      Tab(2).Control(2)=   "txtAux(6)"
-      Tab(2).Control(3)=   "cmdActualizarImportes1(1)"
-      Tab(2).Control(4)=   "cmdActualizarImportes1(0)"
-      Tab(2).Control(5)=   "txtConjunto(5)"
-      Tab(2).Control(6)=   "txtConjunto(4)"
-      Tab(2).Control(7)=   "txtConjunto(3)"
-      Tab(2).Control(8)=   "txtConjunto(2)"
-      Tab(2).Control(9)=   "txtConjunto(1)"
-      Tab(2).Control(10)=   "txtConjunto(0)"
-      Tab(2).Control(11)=   "txtAux(5)"
-      Tab(2).Control(12)=   "txtAux(4)"
+      Tab(2).Control(0)=   "Line4"
+      Tab(2).Control(1)=   "Label5(0)"
+      Tab(2).Control(2)=   "Label5(1)"
+      Tab(2).Control(3)=   "Label5(2)"
+      Tab(2).Control(4)=   "Label5(3)"
+      Tab(2).Control(5)=   "Label5(4)"
+      Tab(2).Control(6)=   "Label5(5)"
+      Tab(2).Control(7)=   "Line5"
+      Tab(2).Control(8)=   "DataGrid1"
+      Tab(2).Control(9)=   "cmdAux"
+      Tab(2).Control(10)=   "txtAux(0)"
+      Tab(2).Control(11)=   "txtAux(1)"
+      Tab(2).Control(12)=   "txtAux2"
       Tab(2).Control(13)=   "txtAux(3)"
-      Tab(2).Control(14)=   "txtAux2"
-      Tab(2).Control(15)=   "txtAux(1)"
-      Tab(2).Control(16)=   "txtAux(0)"
-      Tab(2).Control(17)=   "cmdAux"
-      Tab(2).Control(18)=   "DataGrid1"
-      Tab(2).Control(19)=   "Line5"
-      Tab(2).Control(20)=   "Label5(5)"
-      Tab(2).Control(21)=   "Label5(4)"
-      Tab(2).Control(22)=   "Label5(3)"
-      Tab(2).Control(23)=   "Label5(2)"
-      Tab(2).Control(24)=   "Label5(1)"
-      Tab(2).Control(25)=   "Label5(0)"
-      Tab(2).Control(26)=   "Line4"
+      Tab(2).Control(14)=   "txtAux(4)"
+      Tab(2).Control(15)=   "txtAux(5)"
+      Tab(2).Control(16)=   "txtConjunto(0)"
+      Tab(2).Control(17)=   "txtConjunto(1)"
+      Tab(2).Control(18)=   "txtConjunto(2)"
+      Tab(2).Control(19)=   "txtConjunto(3)"
+      Tab(2).Control(20)=   "txtConjunto(4)"
+      Tab(2).Control(21)=   "txtConjunto(5)"
+      Tab(2).Control(22)=   "cmdActualizarImportes1(0)"
+      Tab(2).Control(23)=   "cmdActualizarImportes1(1)"
+      Tab(2).Control(24)=   "txtAux(6)"
+      Tab(2).Control(25)=   "Data2"
+      Tab(2).Control(26)=   "txtAux(7)"
       Tab(2).ControlCount=   27
       TabCaption(3)   =   "Control instalación / producción"
       TabPicture(3)   =   "frmAlmArticulos.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "txtAux(2)"
+      Tab(3).Control(0)=   "Data3"
       Tab(3).Control(1)=   "DataGrid2"
-      Tab(3).Control(2)=   "Data3"
+      Tab(3).Control(2)=   "txtAux(2)"
       Tab(3).ControlCount=   3
       TabCaption(4)   =   "Stocks"
       TabPicture(4)   =   "frmAlmArticulos.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "cmdAlma"
-      Tab(4).Control(1)=   "Text3(0)"
-      Tab(4).Control(2)=   "Text2(8)"
-      Tab(4).Control(3)=   "Text3(2)"
-      Tab(4).Control(4)=   "FrameArtxAlmac"
-      Tab(4).Control(5)=   "DataGrid3"
+      Tab(4).Control(0)=   "DataGrid3"
+      Tab(4).Control(1)=   "FrameArtxAlmac"
+      Tab(4).Control(2)=   "Text3(2)"
+      Tab(4).Control(3)=   "Text2(8)"
+      Tab(4).Control(4)=   "Text3(0)"
+      Tab(4).Control(5)=   "cmdAlma"
       Tab(4).ControlCount=   6
       TabCaption(5)   =   "  EAN  / Equivalencias"
       TabPicture(5)   =   "frmAlmArticulos.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "cmdEquiv"
-      Tab(5).Control(1)=   "Text6(0)"
-      Tab(5).Control(2)=   "Text6(1)"
-      Tab(5).Control(3)=   "txtAux(8)"
-      Tab(5).Control(4)=   "DataGrid4"
-      Tab(5).Control(5)=   "Data5"
-      Tab(5).Control(6)=   "DataGrid6"
-      Tab(5).Control(7)=   "Data7"
-      Tab(5).Control(8)=   "Label2(6)"
-      Tab(5).Control(9)=   "Label2(4)"
+      Tab(5).Control(0)=   "Label2(4)"
+      Tab(5).Control(1)=   "Label2(6)"
+      Tab(5).Control(2)=   "Data7"
+      Tab(5).Control(3)=   "DataGrid6"
+      Tab(5).Control(4)=   "Data5"
+      Tab(5).Control(5)=   "DataGrid4"
+      Tab(5).Control(6)=   "txtAux(8)"
+      Tab(5).Control(7)=   "Text6(1)"
+      Tab(5).Control(8)=   "Text6(0)"
+      Tab(5).Control(9)=   "cmdEquiv"
       Tab(5).ControlCount=   10
       TabCaption(6)   =   "Documentos"
       TabPicture(6)   =   "frmAlmArticulos.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Frame4"
-      Tab(6).Control(1)=   "FrameDisponible"
-      Tab(6).Control(2)=   "lw1"
-      Tab(6).Control(3)=   "Label2(0)"
+      Tab(6).Control(0)=   "Label2(0)"
+      Tab(6).Control(1)=   "lw1"
+      Tab(6).Control(2)=   "FrameDisponible"
+      Tab(6).Control(3)=   "Frame4"
       Tab(6).ControlCount=   4
       TabCaption(7)   =   "Fitosanitarios"
       TabPicture(7)   =   "frmAlmArticulos.frx":00D0
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "cboADV"
-      Tab(7).Control(1)=   "Text5(1)"
-      Tab(7).Control(2)=   "Text5(0)"
-      Tab(7).Control(3)=   "cmdMatAux"
+      Tab(7).Control(0)=   "Label2(5)"
+      Tab(7).Control(1)=   "Label1(41)"
+      Tab(7).Control(2)=   "data6"
+      Tab(7).Control(3)=   "DataGrid5"
       Tab(7).Control(4)=   "FrameServicios"
-      Tab(7).Control(5)=   "DataGrid5"
-      Tab(7).Control(6)=   "data6"
-      Tab(7).Control(7)=   "Label1(41)"
-      Tab(7).Control(8)=   "Label2(5)"
+      Tab(7).Control(5)=   "cmdMatAux"
+      Tab(7).Control(6)=   "Text5(0)"
+      Tab(7).Control(7)=   "Text5(1)"
+      Tab(7).Control(8)=   "cboADV"
       Tab(7).ControlCount=   9
       Begin VB.ComboBox cboTipoComiArtVario 
          Height          =   315
@@ -5027,24 +5027,24 @@ Private Sub Form_Load()
     Me.Toolbar1.Buttons(14).visible = vParamAplic.Ariagro <> ""
 
     cboADV.visible = vParamAplic.NumeroInstalacion = 1
-    Label1(41).visible = vParamAplic.NumeroInstalacion = 1
+    label1(41).visible = vParamAplic.NumeroInstalacion = 1
 
 
     If vParamAplic.NumeroInstalacion = 2 Then
         'HERBELCA
         cboTipoComiArtVario.visible = True
-        Label1(44).visible = True
+        label1(44).visible = True
         CargarComboComisionArticulosVarios
         
-        Label1(20).Caption = "Ud. embalaje grande"
-        Label1(42).Caption = "Ud. embalaje pequeña"
+        label1(20).Caption = "Ud. embalaje grande"
+        label1(42).Caption = "Ud. embalaje pequeña"
         
     Else
         'Resto
-        Label1(20).Caption = "Unidades caja"
-        Label1(42).Caption = "Ud embalaje"
+        label1(20).Caption = "Unidades caja"
+        label1(42).Caption = "Ud embalaje"
         cboTipoComiArtVario.visible = False
-        Label1(44).visible = False
+        label1(44).visible = False
     End If
     
 
@@ -5061,8 +5061,8 @@ Private Sub Form_Load()
     If vParamAplic.NumeroInstalacion = 4 Then
         'En EULER, ni codprove, ni refereprov SE VEN
         'Pero se insertan etc etc, por lo tanto los pongo "lejos" y en el zorder los paso al final
-        Label1(5).visible = False
-        Label1(38).visible = False
+        label1(5).visible = False
+        label1(38).visible = False
         imgCuentas(0).visible = False
         Text2(0).visible = False
         'Los txt no puedo ocultarlos
@@ -5138,9 +5138,9 @@ Private Sub Form_Load()
     '-- Descriptores especiales y botón de composición (Rafa VRS 4.0.9)
     If vParamAplic.Descriptores Then
         'cmdGenerar.visible = True  estara en poner modo
-        Label1(6) = "Cod. Categoria"
-        Label1(9) = "Cod. Modelo"
-        Label1(17) = "Cod. Formato"
+        label1(6) = "Cod. Categoria"
+        label1(9) = "Cod. Modelo"
+        label1(17) = "Cod. Formato"
         '-- Aqui cambiamos los tag para evitar lios.
         CambiaTagDescriptores Text1(3), "Cod. Categoria"
         CambiaTagDescriptores Text1(5), "Cod. Formato"
@@ -8138,7 +8138,7 @@ End Sub
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
     
     If Button.Tag = "" Then Exit Sub
-    Label2(0).Caption = ""
+    label2(0).Caption = ""
     'Levantamos todos los botones y dejamos pulsado el de ahora
     For NumRegElim = 1 To Toolbar2.Buttons.Count
         If Toolbar2.Buttons(NumRegElim).Tag <> "" Then
@@ -8166,7 +8166,7 @@ Dim C As ColumnHeader
 
     Select Case OpcionList
     Case 0 'TARIFAS
-        Label2(0).Caption = "Tarifas"
+        label2(0).Caption = "Tarifas"
         Columnas = "Tarifa|Descripcion |Tipo|Importe|"
         Ancho = "800|2900|850|1500|"
         'vwColumnRight =1  left=0   center=2
@@ -8176,7 +8176,7 @@ Dim C As ColumnHeader
         Ncol = 4
     
     Case 1 'PRECIOS ESPECIALES
-        Label2(0).Caption = "Precios especiales"
+        label2(0).Caption = "Precios especiales"
         Columnas = "Cod. cli.|Nombre |Precio|"
         Ancho = "1200|3500|1300|"
         'vwColumnRight =1  left=0   center=2
@@ -8186,7 +8186,7 @@ Dim C As ColumnHeader
         Ncol = 3
         
     Case 2
-        Label2(0).Caption = "Promociones"
+        label2(0).Caption = "Promociones"
         Columnas = "Tarifa|Descripcion|F. inicio|F. Fin| Precio|"
         Ancho = "900|2300|1100|1100|1150|"
         'vwColumnRight =1  left=0   center=2
@@ -8196,7 +8196,7 @@ Dim C As ColumnHeader
         Ncol = 5
         
     Case 3 'PEDIDOS
-        Label2(0).Caption = "PEDIDOS"
+        label2(0).Caption = "PEDIDOS"
         Columnas = "NºPed|Fecha|Cod.|Nombre|Candtidad|"
         Ancho = "1250|1100|800|2300|1000|"
         'vwColumnRight =1  left=0   center=2
@@ -8207,7 +8207,7 @@ Dim C As ColumnHeader
         
     Case 4
         'MOVIMIENTOS
-        Label2(0).Caption = "MOVIMIENTOS ALMACEN"
+        label2(0).Caption = "MOVIMIENTOS ALMACEN"
         Columnas = "Alm|Fecha|Tipo|Entrada|Documento|Cantidad|C/P/T|"
         Ancho = "600|1100|900|900|1000|1000|900|"
         'vwColumnRight =1  left=0   center=2
@@ -8218,7 +8218,7 @@ Dim C As ColumnHeader
         
     Case 5
         'Precios proveedor
-        Label2(0).Caption = "PRECIOS PROVEE."
+        label2(0).Caption = "PRECIOS PROVEE."
         Columnas = "Prov.|Nombre|Precio|Cambio|Precio N.|"
         Ancho = "1200|2400|1050|900|1050|"
         'vwColumnRight =1  left=0   center=2
@@ -8250,7 +8250,7 @@ Dim C As String
 Dim bs As Byte
     bs = Screen.MousePointer
     C = Me.lblIndicador.Caption
-    lblIndicador.Caption = "Leyendo " & Label2(0).Caption
+    lblIndicador.Caption = "Leyendo " & label2(0).Caption
     lblIndicador.Refresh
     CargaDatosLW2
     Me.lblIndicador.Caption = C
@@ -8571,7 +8571,6 @@ Dim SQL As String
                                 .hcoCodMovim = lw1.SelectedItem.SubItems(4)
                             End If
                             .hcoCodTipoM = lw1.SelectedItem.SubItems(2)
-                            .RecuperarFactu = False
                             .Show vbModal
                         End With
                     Else
@@ -8583,7 +8582,6 @@ Dim SQL As String
                                 .hcoCodMovim = lw1.SelectedItem.SubItems(4)
                             End If
                             .hcoCodTipoM = lw1.SelectedItem.SubItems(2)
-                            .RecuperarFactu = False
                             .Show vbModal
                         End With
                     End If
