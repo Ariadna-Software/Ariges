@@ -587,7 +587,11 @@ Dim SQL As String
         If CuentaPrev = "" Then
             'leer la cuenta prevista de pagos de la tabla de contabilidad: conta.spagos
             'cuando vamos a borrar una factura porque modificarmos
-            SQL = DevuelveDesdeBDNew(conConta, "spagop", "ctabanc1", "ctaprove", CtaProve, "T", , "numfactu", vNumfactu, "T", "fecfactu", vFecfactu, "F")
+            If vParamAplic.ContabilidadNueva Then
+                SQL = DevuelveDesdeBDNew(conConta, "pagos", "ctabanc1", "codmacta", CtaProve, "T", , "numfactu", vNumfactu, "T", "fecfactu", vFecfactu, "F")
+            Else
+                SQL = DevuelveDesdeBDNew(conConta, "spagop", "ctabanc1", "ctaprove", CtaProve, "T", , "numfactu", vNumfactu, "T", "fecfactu", vFecfactu, "F")
+            End If
             If SQL <> "" Then
                 CuentaPrev = SQL
                 LeerDatos3 = True

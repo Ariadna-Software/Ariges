@@ -13581,8 +13581,8 @@ Dim IndiceFoco As Integer
         Case 223
         
             'FALTA### Quitar
-            txtCodigo(31).Text = "17/03/2016"
-            txtCodigo(32).Text = "17/03/2016"
+            txtCodigo(31).Text = "22/03/2016"
+            txtCodigo(32).Text = "22/03/2016"
         
         
             '223: Contabilizar facturas

@@ -259,7 +259,7 @@ Dim numlinea As Integer
 
 Dim Importe As Currency
 Dim DatosRetencion As String
-
+Dim Cliente As String
 
     On Error GoTo EIntegraLaFactura
     'Sabemos que
@@ -275,12 +275,7 @@ Dim DatosRetencion As String
     
     If vParamAplic.ContabilidadNueva Then
         SQL = "SELECT numserie, numfactu codfaccl, fecfactu fecfaccl,factcli.codmacta"
-        SQL = SQL & ", totfaccl ,confaccl  ,cuereten  , trefaccl"
-        SQL = SQL & ", tp1faccl ,ti1faccl ,tr1faccl  ,tr1faccl"
-        
-        
-        
-        
+        SQL = SQL & ", totfaccl ,factcli.observa confaccl  ,cuereten  , trefaccl"
         SQL = SQL & " ,numasien,cuentas.nommacta FROM factcli,cuentas"
         SQL = SQL & " WHERE numserie='" & numSerie
         SQL = SQL & "' AND numfactu= " & numFac
@@ -431,21 +426,58 @@ Dim DatosRetencion As String
     
     miConexion.Execute Cad & SQL
     numlinea = numlinea + 1 'Es el contador de lineaapunteshco
-    
+    Cliente = RF!Codmacta
     
     
     If vParamAplic.ContabilidadNueva Then
-        Stop
+        
         RF.Close
         
         'Abrimos el RF con las lineas del IVA
+                
+        SQL = "SELECT numserie, numfactu codfaccl, fecfactu fecfaccl"
+        SQL = SQL & ", baseimpo,codigiva,porciva,porcrec,impoiva,imporec  FROM factcli_totales "
+        SQL = SQL & " WHERE numserie='" & numSerie
+        SQL = SQL & "' AND numfactu= " & numFac
+        SQL = SQL & " AND anofactu=" & Anofac
+        RF.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+        While Not RF.EOF
+            
+            
+            A_Donde = "IVA " & numlinea - 1
+            Cad3 = "cuentarr"
+            cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!CodigIVA, "N", Cad3)
+            If cad2 <> "" Then
+                SQL = numlinea & ",'" & cad2 & "'," & DocConcAmp
+                cad2 = CadenaImporte(False, RF!impoiva, Importe0)
+                SQL = SQL & "," & cad2 & ","
+                SQL = SQL & "NULL,'" & Cliente & "','FRACLI',0)"
+                If Not Importe0 Then
+                    miConexion.Execute Cad & SQL
+                    numlinea = numlinea + 1
+                End If
+                
+                'La de recargo  1-----------------
+                If Not IsNull(RF!imporec) Then
+                         SQL = numlinea & "," & Cad3 & "," & DocConcAmp
+                        'Importes, atencion importes negativos
+                        cad2 = CadenaImporte(False, RF!imporec, Importe0)
+                        SQL = SQL & "," & cad2 & ","
+                        SQL = SQL & "NULL,'" & Cliente & "','FRACLI',0)"
+                        If Not Importe0 Then
+                            miConexion.Execute Cad & SQL
+                            numlinea = numlinea + 1
+                        End If
+                End If
+            
+            End If
         
         
         
-        aqui aqui aqui
-    
-    
-    
+            numlinea = numlinea + 1 'Es el contador de lineaapunteshco
+            RF.MoveNext
+        Wend
+        
     Else
         '------------------------------------------------------------
         'Cuentas de IVA. Cuenta 1
@@ -563,13 +595,16 @@ Dim DatosRetencion As String
         End If 'De IVA 3
     End If  'DE LOS IVAS
     
+    RF.Close
+    
     '-------------------------------------
     ' RETENCION
     A_Donde = "Retencion"
     
-    hay una cadena con los datos, pq el rf deberaimos haberlo cerrado ya
+    'hay una cadena con los datos, pq el rf deberaimos haberlo cerrado ya
     
-    If Not IsNull(RF!cuereten) Then
+    If DatosRetencion <> "" Then
+        Stop
         SQL = numlinea & ",'" & RF!cuereten & "'," & DocConcAmp
         'Importes, atencion importes negativos
         cad2 = CadenaImporte(True, RF!trefaccl, Importe0)
@@ -583,20 +618,24 @@ Dim DatosRetencion As String
     
     
     '------------------------------------------------------------
-    'Las lineas de la factura. Para ello guardaremos algunos datos
-    cad2 = RF!Codmacta
-    Importe = RF!totfaccl
-    Cuenta = RF!Codmacta
-    RF.Close
-    
-    
+    'Las lineas de la factura.
     
     A_Donde = "Leyendo lineas factura"
-    SQL = "Select linfact.* , codmacta FROM linfact,Cuentas "
-    SQL = SQL & " WHERE numserie='" & numSerie
-    SQL = SQL & "' AND codfaccl= " & numFac
-    SQL = SQL & " AND anofaccl=" & Anofac
-    SQL = SQL & " AND linfact.codtbase = Cuentas.codmacta"
+    
+    
+    If vParamAplic.ContabilidadNueva Then
+        SQL = "SELECT codmacta codtbase, baseimpo impbascl,codccost  FROM factcli_lineas "
+        SQL = SQL & " WHERE numserie='" & numSerie
+        SQL = SQL & "' AND numfactu= " & numFac
+        SQL = SQL & " AND anofactu=" & Anofac
+        
+    Else
+        SQL = "Select linfact.* , codmacta FROM linfact,Cuentas "
+        SQL = SQL & " WHERE numserie='" & numSerie
+        SQL = SQL & "' AND codfaccl= " & numFac
+        SQL = SQL & " AND anofaccl=" & Anofac
+        SQL = SQL & " AND linfact.codtbase = Cuentas.codmacta"
+    End If
     RF.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     'Para cada linea insertamos
     cad2 = ""
@@ -613,7 +652,7 @@ Dim DatosRetencion As String
             cad2 = "'" & RF!CodCCost & "'"
         End If
         
-        SQL = SQL & cad2 & ",'" & Cuenta & "','FRACLI',0)"
+        SQL = SQL & cad2 & ",'" & Cliente & "','FRACLI',0)"
     
         miConexion.Execute Cad & SQL
         numlinea = numlinea + 1 'Es el contador de lineaapunteshco
@@ -642,16 +681,24 @@ Dim DatosRetencion As String
     
     
     'Actualimos en factura, el nº de asiento
-    SQL = "UPDATE cabfact SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & NumAsiento
-    SQL = SQL & " WHERE numserie='" & numSerie
-    SQL = SQL & "' AND codfaccl= " & numFac
-    SQL = SQL & " AND anofaccl=" & Anofac
+    If vParamAplic.ContabilidadNueva Then
+        SQL = "UPDATE factcli SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & NumAsiento
+        SQL = SQL & " WHERE numserie='" & numSerie
+        SQL = SQL & "' AND numfactu= " & numFac
+        SQL = SQL & " AND anofactu=" & Anofac
+    Else
+        SQL = "UPDATE cabfact SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & NumAsiento
+        SQL = SQL & " WHERE numserie='" & numSerie
+        SQL = SQL & "' AND codfaccl= " & numFac
+        SQL = SQL & " AND anofaccl=" & Anofac
+    End If
     miConexion.Execute SQL
     
     'Para los saldos ponemos el numero de asiento donde toca
-    A_Donde = CalcularLineasYSaldosFacturas(True)
-    IntegraLaFacturaCliente = A_Donde
-    
+    If Not vParamAplic.ContabilidadNueva Then
+        A_Donde = CalcularLineasYSaldosFacturas(True)
+        IntegraLaFacturaCliente = A_Donde
+    End If
     Set RF = Nothing
     
     Exit Function
@@ -713,24 +760,21 @@ Dim Importe As Currency
     
     'Cabecera del hco de apuntes
     A_Donde = "Inserta cabecera hco apuntes"
-    SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari) VALUES ("
-    'Ant 17/OCT/2005
-    'SQL = SQL & vParam.numdiacl & ",'" & Fecha & "'," & NumAsiento
+    SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari"
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & ",feccreacion,usucreacion,desdeaplicacion"
+    SQL = SQL & ") VALUES ("
     SQL = SQL & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & NumAsiento
     Cad = Observaciones & vbCrLf & "Factura interna: " & Format(RCab!NumFactu, "00000") & " - " & RCab!FecFactu
-    SQL = SQL & "," & DBSet(Cad, "T", "S") & ")"
+    SQL = SQL & "," & DBSet(Cad, "T", "S")
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ariges'"
+    miConexion.Execute SQL & ")"
     Cad = ""
-    miConexion.Execute SQL
-    
     'Lineas fijas, es decir la linea de cliente, importes y tal y tal
     'Para el sql
     Cad = "INSERT INTO hlinapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum, "
     Cad = Cad & "codconce,ampconce, timporteD, timporteH,codccost, ctacontr, idcontab, punteada)"
-    'Ant 17/oct/05
-    'Cad = Cad & " VALUES (" & vParam.numdiacl & ",'" & Fecha & "'," & NumAsiento & ","
     Cad = Cad & " VALUES (" & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & NumAsiento & ","
-    numlinea = 1 'Contador de lineas
-    
+    numlinea = 1
     
     A_Donde = "Linea cliente"
     '-------------------------------------------------------------------
@@ -810,40 +854,7 @@ Dim Importe As Currency
     
     
     
-    '------------------------------------------------------------
-    'Cuentas de IVA. Cuenta 1
-'    A_Donde = "IVA 1"
-'    Cad3 = "cuentarr"
-'    cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RCab!tp1faccl, "N", Cad3)
-'    If cad2 <> "" Then
-'        SQL = numlinea & ",'" & cad2 & "'," & DocConcAmp
-'        cad2 = CadenaImporte(False, RF!ti1faccl, Importe0)
-'        SQL = SQL & "," & cad2 & ","
-'        SQL = SQL & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
-'        If Not Importe0 Then
-'            miConexion.Execute Cad & SQL
-'            numlinea = numlinea + 1
-'        End If
-'
-'        'La de recargo  1-----------------
-'        If Not IsNull(RCab!tr1faccl) Then
-'                 SQL = numlinea & "," & Cad3 & "," & DocConcAmp
-'                'Importes, atencion importes negativos
-'                cad2 = CadenaImporte(False, RF!tr1faccl, Importe0)
-'                SQL = SQL & "," & cad2 & ","
-'                SQL = SQL & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
-'                If Not Importe0 Then
-'                    miConexion.Execute Cad & SQL
-'                    numlinea = numlinea + 1
-'                End If
-'        End If
-'    Else
-'
-'        IntegraLaFacturaClienteINTERNA = "Error leyendo TIPO de IVA: " & RF!tp1faccl
-'        RF.Close
-'        Exit Function
-'    End If
-'
+    
     
     
     '------------------------------------------------------------
@@ -851,40 +862,10 @@ Dim Importe As Currency
     '   No llevan IVA
     '
     '------------------------------------------------------------
-    'Cuentas de IVA. Cuenta 2
-    'Tampoco debe llevar retencion
-    '-------------------------------------
-    ' RETENCION
-'    A_Donde = "Retencion"
-'    If Not IsNull(RF!cuereten) Then
-'        SQL = numlinea & ",'" & RF!cuereten & "'," & DocConcAmp
-'        'Importes, atencion importes negativos
-'        cad2 = CadenaImporte(True, RF!trefaccl, Importe0)
-'        SQL = SQL & "," & cad2 & ","
-'        SQL = SQL & "NULL,NULL,'FRACLI',0)"
-'
-'        miConexion.Execute Cad & SQL
-'        numlinea = numlinea + 1 'Es el contador de lineaapunteshco
-'    End If
-'
-    
     
     '------------------------------------------------------------
     'Las lineas de la factura. Para ello guardaremos algunos datos
-    cad2 = RCab!Codmacta
     Importe = RCab!TotalFac
-    
-    
-    
-    'Ampliacion segun parametros . Especial para NombreCta
-'    If vParam.nctafact = 3 Then
-'        'Para las lineas la ampliacion es la ctacliente
-'        DocConcAmp = "'" & NUmSerie & Format(NumFac, "000000000") & "'," & vParam.concefcl & ",'"
-'        Cad2 = Mid(RF!nommacta, 1, 30)
-'        DocConcAmp = DocConcAmp & Cad2 & "'"   'DocConcAmp Sirve para el IVA
-'    End If
-        
-    'Cerramos el RF
     Cuenta = RCab!Codmacta
     
     
@@ -934,17 +915,13 @@ Dim Importe As Currency
     
     
     
-''    'Actualimos en factura, el nº de asiento   EN INTERNAS  NOOOO hay factura en el registro
-''    SQL = "UPDATE cabfact SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & NumAsiento
-''    SQL = SQL & " WHERE numserie='" & numSerie
-''    SQL = SQL & "' AND codfaccl= " & numFac
-''    SQL = SQL & " AND anofaccl=" & Anofac
-''    miConexion.Execute SQL
+
     
     'Para los saldos ponemos el numero de asiento donde toca
-    A_Donde = CalcularLineasYSaldosFacturas(True)
-    IntegraLaFacturaClienteINTERNA = A_Donde
-    
+    If Not vParamAplic.ContabilidadNueva Then
+        A_Donde = CalcularLineasYSaldosFacturas(True)
+        IntegraLaFacturaClienteINTERNA = A_Donde
+    End If
         
     
     Exit Function

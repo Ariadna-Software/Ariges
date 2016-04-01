@@ -236,13 +236,30 @@ Dim SQL As String
 Dim LaFecha As Date
 
     Set RT = New ADODB.Recordset
-    If Serie = "" Then
-        'Estamos en proveedores
-        SQL = "select max(fecrecpr) as fecha from cabfactprov "
-            
+    
+    If vParamAplic.ContabilidadNueva Then
+        If Serie = "" Then
+            'Estamos en proveedores
+            SQL = "select max(fecharec) as fecha from factpro "
+            'Falta### el numero de serie de las facturas de proveedor Vendra de parametros
+           
+                
+        Else
+            SQL = "Select max(fecfactu)as fecha from factcli WHERE numserie = '" & Serie & "'"
+        End If
+    
+    
     Else
-        SQL = "Select max(fecfaccl)as fecha from cabfact WHERE numserie = '" & Serie & "'"
+    
+        If Serie = "" Then
+            'Estamos en proveedores
+            SQL = "select max(fecrecpr) as fecha from cabfactprov "
+                
+        Else
+            SQL = "Select max(fecfaccl)as fecha from cabfact WHERE numserie = '" & Serie & "'"
+        End If
     End If
+    
     LaFecha = CDate("01/01/1900")
     RT.Open SQL, CnnCta, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RT.EOF Then
@@ -253,12 +270,7 @@ Dim LaFecha As Date
     
     
     If LaFecha > fecFac Then
-        'ERROR. La fecha factura menor k una contabilizada
-        'If Serie = "" Then
-        '   ' FechaUltFac = "Fecha recepcion menor que la fecha recepcion en contabilidad"
-        'Else
-        '   ' FechaUltFac = "Fecha factura menor que la fecha factura en contabilidad"
-        'End If
+        
         FechaUltFacturaMayor = True
     Else
         FechaUltFacturaMayor = False
