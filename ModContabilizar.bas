@@ -1493,7 +1493,7 @@ Dim SQL2 As String
             vImpRec(0) = DBLet(Rs!imporiv1re, "N")
             vBaseIva(0) = Rs!baseimp1
             
-            vTipoIva(1) = 0: vTipoIva(1) = 0
+            vTipoIva(1) = 0: vTipoIva(2) = 0
             
             If Not IsNull(Rs!porciva2) Then
                 SQL2 = "'" & Rs!LetraSer & "'," & Rs!NumFactu & "," & DBSet(Rs!FecFactu, "F") & "," & Year(Rs!FecFactu) & ","
@@ -1961,7 +1961,7 @@ Dim K As Byte
             cadCampo = "sfamia.abocompr"
         End If
         
-        SQL = "SELECT slifpc.codprove,slifpc.numfactu,slifpc.fecfactu," & cadCampo & " as cuenta, sum(importel) as importe  "
+        SQL = "SELECT codigiva,slifpc.codprove,slifpc.numfactu,FecFactu," & cadCampo & " as cuenta, sum(importel) as importe  "
         
         'Tiene analitica. Luego el codtraba tiene que aparecer
         If vCCos > 0 Then SQL = SQL & ",slifpc.codccost"
@@ -1985,8 +1985,7 @@ Dim K As Byte
         If vCCos = 2 Then SQL = SQL & " codccost, "
                   
         'Agrupemos por trabajador o no, tambien agrupamos por la cuenta
-        SQL = SQL & cadCampo
-        
+        SQL = SQL & cadCampo & ", codigiva ORDER BY codigiva ," & cadCampo
         
         
     End If
@@ -2010,8 +2009,9 @@ Dim K As Byte
             SQL = "'" & Rs!LetraSer & "'," & Rs!NumFactu & "," & DBSet(Rs!FecFactu, "F") & "," & Year(Rs!FecFactu) & "," & I & ","
         Else
             'Compras
-            Stop
-            SQL = numRegis & "," & AnyoFacPr & "," & I & ","
+            'factpro_lineas(numserie,numregis,fecharec,anofactu,numlinea,codmacta,baseimpo,codigiva,porciva,porcrec,impoiva,imporec,aplicret,codccost)
+            
+            SQL = "'" & SerieFraPro & "'," & numRegis & "," & DBSet(Rs!FecFactu, "F") & "," & AnyoFacPr & "," & I & ","
         
             
         End If
@@ -2020,12 +2020,12 @@ Dim K As Byte
         'Vemos que tipo de IVA es en el vector de importes
         NumeroIVA = 127
         For K = 0 To 2
-            If Rs!CodigIVA = vTipoIva(K) Then
+            If Rs!codigiva = vTipoIva(K) Then
                 NumeroIVA = K
                 Exit For
             End If
         Next
-        If NumeroIVA > 100 Then Err.Raise 513, "Error obteniendo IVA: " & Rs!CodigIVA
+        If NumeroIVA > 100 Then Err.Raise 513, "Error obteniendo IVA: " & Rs!codigiva
         
         'Importe
         '----------------------------------------------------------------------------
@@ -2046,7 +2046,7 @@ Dim K As Byte
             Else
                 'Si que hay mas lineas.
                 'Son del mismo tipo de IVA
-                If Rs!CodigIVA <> vTipoIva(0) Then
+                If Rs!codigiva <> vTipoIva(0) Then
                     'NO es el mismo tipo de IVA
                     'Hay que ajustar
                     HayQueAjustar = True
@@ -2055,7 +2055,7 @@ Dim K As Byte
             Rs.MovePrevious
         End If
         
-        
+        'codigiva,porciva,porcrec,impoiva,imporec,aplicret,codccost)
         'codigiva,porciva,porcrec,
         SQL = SQL & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
         
@@ -2164,7 +2164,8 @@ Dim K As Byte
             SQL = "INSERT INTO  factcli_lineas(numserie,numfactu,fecfactu,anofactu,numlinea,codmacta,codigiva,porciva,porcrec,"
             SQL = SQL & " baseimpo,impoiva,imporec,aplicret,codccost)"
         Else
-            SQL = "INSERT INTO linfactprov (numregis,anofacpr,numlinea,codtbase,impbaspr,codccost) "
+            SQL = "INSERT INTO factpro_lineas(numserie,numregis,fecharec,anofactu,numlinea,codmacta,codigiva,porciva,porcrec,"
+            SQL = SQL & " baseimpo,impoiva,imporec,aplicret,codccost)"
         End If
         SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
@@ -2355,17 +2356,23 @@ Dim Rs As ADODB.Recordset
 Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
-
+Dim SQL2 As String
 Dim Aux As String
 Dim TipoOpera As Byte
+Dim CadenaInsertFaclin2     As String
+Dim ImporAux As Currency
     On Error GoTo EInsertar
        
+    
+    
+    
+    
     
     SQL = SQL & " SELECT fecfactu,year(fecrecep) as anofacpr,fecrecep,numfactu,sprove.codmacta,"
     SQL = SQL & "scafpc.dtoppago,scafpc.dtognral,baseiva1,baseiva2,baseiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
     SQL = SQL & "totalfac,tipoiva1,tipoiva2,tipoiva3,tipprove,impret,scafpc.nomprove,scafpc.codprove,tiporet,PorRet,impret,InvSujPas "   'Modificacion facturas socios
     'Datos para la nueva contabiliad
-    If vParamAplic.ContabilidadNueva Then SQL = SQL & " ,scafpc.nomprove,scafpc.domprove,scafpc.codpobla,scafpc.pobprove,scafpc.proprove,scafpc.nifprove"
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & " ,scafpc.nomprove,scafpc.domprove,scafpc.codpobla,scafpc.pobprove,scafpc.proprove,scafpc.nifprove,scafpc.codforpa,codpais"
     SQL = SQL & " FROM " & "scafpc"
     SQL = SQL & " INNER JOIN " & "sprove ON scafpc.codprove=sprove.codprove "
     SQL = SQL & " WHERE " & cadWhere
@@ -2389,7 +2396,8 @@ Dim TipoOpera As Byte
             AnyoFacPr = Rs!anofacpr
             
             'Para que contabilice las facturas automaticamente
-            If vCF.RealizarContabilizacion Then vCF.FijarNumeroFactura Mc.Contador, AnyoFacPr, ""
+            'SerieFraPro --> Atigua contabilidad poner a ""
+            If vCF.RealizarContabilizacion Then vCF.FijarNumeroFactura Mc.Contador, AnyoFacPr, SerieFraPro
             
             'SI es facutra socio y tiene retencion
             DatosRetencion = ""
@@ -2407,7 +2415,8 @@ Dim TipoOpera As Byte
             If DBLet(Rs!BaseIVA2, "N") = "0" Then Nulo2 = "S"
             If DBLet(Rs!BaseIVA3, "N") = "0" Then Nulo3 = "S"
             SQL = ""
-            SQL = Mc.Contador & "," & DBSet(Rs!FecFactu, "F") & "," & Rs!anofacpr & "," & DBSet(Rs!FecRecep, "F") & "," & DBSet(Rs!FecRecep, "F") & "," & DBSet(Rs!NumFactu, "T") & "," & DBSet(Rs!Codmacta, "T") & ","
+            If vParamAplic.ContabilidadNueva Then SQL = "'" & SerieFraPro & "',"
+            SQL = SQL & Mc.Contador & "," & DBSet(Rs!FecFactu, "F") & "," & Rs!anofacpr & "," & DBSet(Rs!FecRecep, "F") & "," & DBSet(Rs!FecRecep, "F") & "," & DBSet(Rs!NumFactu, "T") & "," & DBSet(Rs!Codmacta, "T") & ","
             
             Select Case vParamAplic.ObsFactura
             Case 0
@@ -2452,30 +2461,29 @@ Dim TipoOpera As Byte
             Else
                 'Contabilidad NUEVA
                 'fecliqcl,nommacta,dirdatos,codpobla,despobla,desprovi,nifdatos,codpais,dpto,codagente,codforpa,escorrecta,
-                SQL = SQL & DBSet(Rs!FecFactu, "F") & "," & DBSet(Rs!Nomclien, "T") & "," & DBSet(Rs!domclien, "T", "S") & ","
-                SQL = SQL & DBSet(Rs!codpobla, "F", "S") & "," & DBSet(Rs!pobclien, "T", "S") & "," & DBSet(Rs!proclien, "T", "S") & ","
-                SQL = SQL & DBSet(Rs!nifClien, "F", "S") & "," & DBSet(Rs!codpais, "T", "S") & "," & DBSet(Rs!CodDirec, "T", "S") & ","
-                SQL = SQL & DBSet(Rs!CodAgent, "N", "S") & "," & Rs!codforpa & ",1,"
+                SQL = SQL & "," & DBSet(Rs!nomprove, "T") & "," & DBSet(Rs!domprove, "T", "S") & ","
+                SQL = SQL & DBSet(Rs!codpobla, "T", "S") & "," & DBSet(Rs!pobprove, "T", "S") & "," & DBSet(Rs!proprove, "T", "S") & ","
+                SQL = SQL & DBSet(Rs!nifProve, "F", "S") & "," & DBSet(Rs!codpais, "T", "S") & ","
+                SQL = SQL & Rs!codforpa & ","
                 
   
                 'codopera,codconce340,codintra
                 '*****
                 ' Tipo de operacion
+                ' 0 General   1 Intracom    2  Export import    3 Interior exenta    4   ISP    5 REA
                 '  GENERAL // INTRACOMUNITARIA // EXPORT. - IMPORT. //   INTERIOR EXENTA   // INV. SUJETO PASIVO   // R.E.A.
                 'Si es una factura con IVA 0%
+                TipoOpera = 0
                 If Rs!porciva1 = 0 And IsNull(Rs!porciva2) And IsNull(Rs!porciva3) Then
-                    'IVA ES CERO
-                    Aux = DBLet(Rs!codpais, "T")
-                    If Aux = "" Then Aux = "ES"
                     
                     
-                    If Aux = "ES" Then
-                        'NACIONAL. Facturas exenta de iva
-                        TipoOpera = 3
-                        
+                                    
+                    'Si el proveedor es INTRACOM, marco la de extranjero
+                    If DBLet(Rs!InvSujPas, "N") = 1 Then
+                         TipoOpera = 4
                     Else
-                        Aux = DevuelveDesdeBD(conConta, "intracom", "paises", "codpais", Aux, "T")
-                        If Aux = "1" Then
+                         'IVA ES CERO
+                         If Rs!tipprove = 1 Then
                             'intracomunitaria
                             TipoOpera = 1
                         Else
@@ -2483,66 +2491,111 @@ Dim TipoOpera As Byte
                             TipoOpera = 2
                         End If
                     End If
-                Else
-                    'Factura NORMAL
-                    TipoOpera = 0
+                
                 End If
                 
                 'Concepto 340
                 '---------------------
-                ' 0 Habitual                B  Ticuet agrupado         C  Varios tipos impositivos
-                ' D Rectificativa           I Sujeto pasivo             J Tikets
-                ' P adquisiciones de bienes y servicios
-                Select Case Rs!codtipom
-                Case "FTG"
-                    Aux = "B"
-                Case "FTI"
-                    Aux = "J"
-                Case "FRT"
-                    Aux = "D"
-                Case Else
-                    'HABITUAL
-                    If Not IsNull(Rs!porciva2) Then
-                        Aux = "C" 'varios tipos de iVA
+                ' 0 Habitual                 C  Varios tipos impositivos
+                ' D Rectificativa           I Sujeto pasivo
+                ' P adquisiciones intracomunitarias de bienes y servicios
+                'IMPORTACION(  NO salen en el 340)
+                Aux = "0"
+                Select Case TipoOpera
+                Case 0
+                    If Rs!TotalFac < 0 Then
+                        Aux = "D"
                     Else
-                        Aux = "0"
+                        If Not IsNull(Rs!TipoIVA2) Then Aux = "C"
                     End If
+                
+                Case 1
+                    Aux = "P"
+                
+                Case 4
+                    Aux = "I"
                 End Select
                 
                 'codopera,codconce340,codintra
-                SQL = SQL & TipoOpera & "," & DBSet(Aux, "T") & ","
-                Aux = ValorNulo
-                If TipoOpera = 1 Then Aux = "'E'" 'Entregas intracomunitarias extenas de IVA
-                SQL = SQL & Aux
+                SQL = SQL & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
                 
                 
+                
+                
+                
+                'para las lineas
+                'factpro_totales(numserie,numregis,fecharec,anofactu,numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+                'IVA 1, siempre existe
+                Aux = "'" & SerieFraPro & "'," & Mc.Contador & "," & DBSet(Rs!FecRecep, "F") & "," & Rs!anofacpr & ","
+                
+                SQL2 = Aux & "1," & DBSet(Rs!BaseIVA1, "N") & "," & Rs!TipoIVA1 & "," & DBSet(Rs!porciva1, "N") & ","
+                SQL2 = SQL2 & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & ValorNulo
+                CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & SQL2 & ")"
+                vTipoIva(0) = Rs!TipoIVA1
+                vPorcIva(0) = Rs!porciva1
+                vPorcRec(0) = 0
+                vImpIva(0) = Rs!impoiva1
+                vImpRec(0) = 0
+                vBaseIva(0) = Rs!BaseIVA1
+                
+                vTipoIva(1) = 0: vTipoIva(2) = 0
+                
+                If Not IsNull(Rs!porciva2) Then
+                    SQL2 = Aux & "2," & DBSet(Rs!BaseIVA2, "N") & "," & Rs!TipoIVA2 & "," & DBSet(Rs!porciva2, "N") & ","
+                    SQL2 = SQL2 & ValorNulo & "," & DBSet(Rs!impoiva2, "N") & "," & ValorNulo
+                    CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & SQL2 & ")"
+                    vTipoIva(1) = Rs!TipoIVA2
+                    vPorcIva(1) = Rs!porciva2
+                    vPorcRec(1) = 0
+                    vImpIva(1) = Rs!impoiva2
+                    vImpRec(1) = 0
+                    vBaseIva(1) = Rs!BaseIVA2
+                
+                End If
+                If Not IsNull(Rs!porciva3) Then
+                    SQL2 = Aux & "3," & DBSet(Rs!BaseIVA3, "N") & "," & Rs!TipoIVA3 & "," & DBSet(Rs!porciva3, "N") & ","
+                    SQL2 = SQL2 & ValorNulo & "," & DBSet(Rs!impoiva3, "N") & "," & ValorNulo
+                    CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & SQL2 & ")"
+                    vTipoIva(2) = Rs!TipoIVA3
+                    vPorcIva(2) = Rs!porciva3
+                    vPorcRec(2) = 0
+                    vImpIva(2) = Rs!impoiva3
+                    vImpRec(2) = 0
+                    vBaseIva(2) = Rs!BaseIVA3
+                End If
+                
+                    
+                    
+                'Los totales
+                'totbases,totbasesret,totivas,totrecargo,totfacpr,
+                ImporAux = Rs!BaseIVA1 + DBLet(Rs!BaseIVA2, "N") + DBLet(Rs!BaseIVA3, "N")
+                SQL = SQL & DBSet(ImporAux, "N") & "," & ValorNulo & ","
+                'totivas
+                ImporAux = Rs!impoiva1 + DBLet(Rs!impoiva2, "N") + DBLet(Rs!impoiva3, "N")
+                SQL = SQL & DBSet(ImporAux, "N") & "," & DBSet(Rs!TotalFac, "N") & ","
+                        
+                
+                  
                 
             End If
             
             
-            'RETENCION.   29 MAYO 2008
-            ' retfacpr,trefacpr,cuereten              Las facturas pueden llevar retencion
-            Stop
-            'Ya hemos cerrado el Rs
             'Leemos sobre el parametro: DatosRetencion
-            
-            
-            'Nulo2 = ""
-            'If Rs!TipoRet = 0 Then
-            '    If Not IsNull(Rs!PorRet) And Not IsNull(Rs!ImpRet) Then Nulo2 = "O"
-            'End If
-            'If Nulo2 = "" Then
-            
             If DatosRetencion = "" Then
-            
                 'NULOS
                 SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                If vParamAplic.ContabilidadNueva Then SQL = SQL & "0"
             Else
                 'TIene valor
-                'SQL = SQL & DBSet(Rs!PorRet, "N") & "," & DBSet(Rs!ImpRet, "N") & ",'" & vParamAplic.CtaReten & "',"
                 SQL = SQL & DBSet(RecuperaValor(DatosRetencion, 1), "N") & "," & DBSet(RecuperaValor(DatosRetencion, 2), "N") & ",'" & vParamAplic.CtaReten & "',"
+                If vParamAplic.ContabilidadNueva Then Stop: MsgBox "Falta tipo": SQL = SQL & ValorNulo
             End If
-            SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            
+            If vParamAplic.ContabilidadNueva Then
+                
+            Else
+                SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            End If
             Cad = Cad & "(" & SQL & ")"
             
             
@@ -2550,11 +2603,30 @@ Dim TipoOpera As Byte
             
             
             'Insertar en la contabilidad
-            SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,fecliqpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
-            SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
-            SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,nodeducible) "
+            If vParamAplic.ContabilidadNueva Then
+                SQL = "INSERT INTO factpro(numserie,numregis,fecfactu,anofactu,fecharec,fecliqpr,numfactu,codmacta,observa,nommacta,"
+                SQL = SQL & "dirdatos,codpobla,despobla,desprovi,nifdatos,codpais,codforpa,codopera,codconce340,codintra,"
+                SQL = SQL & "totbases,totbasesret,totivas,totfacpr,retfacpr , trefacpr, cuereten, tiporeten)"
+            Else
+                SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,fecliqpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
+                SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
+                SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,nodeducible) "
+            End If
+            
+                        
             SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
+            
+            
+            
+            If vParamAplic.ContabilidadNueva Then
+                'Las  lineas de IVA
+                SQL = "INSERT INTO factpro_totales(numserie,numregis,fecharec,anofactu,numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)"
+                SQL = SQL & " VALUES " & CadenaInsertFaclin2
+                ConnConta.Execute SQL
+                
+            End If
+            
             
             
             

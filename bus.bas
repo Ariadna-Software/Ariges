@@ -93,7 +93,7 @@ Public Volver_A_Cargar_Datos As Boolean
 'De momento SOLO lleva el PATH de alfresco, cuando haya mas deberemos crear su clase
 Public EulerParam As String
 
-
+Public Const SerieFraPro = "0"
 
 
 'Inicio Aplicación
@@ -1106,42 +1106,42 @@ End Function
 
 
 'Obvio
-Public Function EsCuentaUltimoNivel(cuenta As String) As Boolean
-    EsCuentaUltimoNivel = (Len(cuenta) = vEmpresa.DigitosUltimoNivel)
+Public Function EsCuentaUltimoNivel(Cuenta As String) As Boolean
+    EsCuentaUltimoNivel = (Len(Cuenta) = vEmpresa.DigitosUltimoNivel)
 End Function
 
 
-Public Function CuentaCorrectaUltimoNivel(ByRef cuenta As String, ByRef devuelve As String) As Boolean
+Public Function CuentaCorrectaUltimoNivel(ByRef Cuenta As String, ByRef devuelve As String) As Boolean
 'Comprueba si es numerica
 Dim SQL As String
 Dim otroCampo As String
 
 CuentaCorrectaUltimoNivel = False
-If cuenta = "" Then
+If Cuenta = "" Then
     devuelve = "Cuenta vacia"
     Exit Function
 End If
 
-If Not IsNumeric(cuenta) Then
-    devuelve = "La cuenta debe de ser numérica: " & cuenta
+If Not IsNumeric(Cuenta) Then
+    devuelve = "La cuenta debe de ser numérica: " & Cuenta
     Exit Function
 End If
 
 'Rellenamos si procede
-cuenta = RellenaCodigoCuenta(cuenta)
+Cuenta = RellenaCodigoCuenta(Cuenta)
 
 '==========
-If Not EsCuentaUltimoNivel(cuenta) Then
-    devuelve = "No es cuenta de último nivel: " & cuenta
+If Not EsCuentaUltimoNivel(Cuenta) Then
+    devuelve = "No es cuenta de último nivel: " & Cuenta
     Exit Function
 End If
 '==================
 
 otroCampo = "apudirec"
 'BD 2: conexion a BD Conta
-SQL = DevuelveDesdeBD(conConta, "nommacta", "cuentas", "codmacta", cuenta, "T", otroCampo)
+SQL = DevuelveDesdeBD(conConta, "nommacta", "cuentas", "codmacta", Cuenta, "T", otroCampo)
 If SQL = "" Then
-    devuelve = "No existe la cuenta : " & cuenta
+    devuelve = "No existe la cuenta : " & Cuenta
     CuentaCorrectaUltimoNivel = True
     Exit Function
 End If
@@ -1151,7 +1151,7 @@ If otroCampo = "S" Then 'Si es apunte directo
     CuentaCorrectaUltimoNivel = True
     devuelve = SQL
 Else
-    devuelve = "No es apunte directo: " & cuenta
+    devuelve = "No es apunte directo: " & Cuenta
 End If
 
 End Function
@@ -1384,7 +1384,7 @@ End Function
 
 'Lo que hace es comprobar que si la resolucion es mayor
 'que 800x600 lo pone en el 400
-Public Sub AjustarPantalla(ByRef formulario As Form)
+Public Sub AjustarPantalla(ByRef Formulario As Form)
 '    If Screen.Width > 13000 Then
 '        formulario.Top = 400
 '        formulario.Left = 400

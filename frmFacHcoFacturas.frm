@@ -278,8 +278,8 @@ Begin VB.Form frmFacHcoFacturas2
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacHcoFacturas.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "FrameCliente"
-      Tab(0).Control(1)=   "FrameFactura"
+      Tab(0).Control(0)=   "FrameFactura"
+      Tab(0).Control(1)=   "FrameCliente"
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmFacHcoFacturas.frx":0A2A
@@ -6947,6 +6947,7 @@ Dim C As String
     vFactu.DtoPPago = CCur(ComprobarCero(Text1(16).Text))
     vFactu.DtoGnral = CCur(ComprobarCero(Text1(17).Text))
     vFactu.Cliente = Text1(4).Text
+    
     CambiaIVA = False
     If Text1(1).Text = "FRT" Then
         'Facturas rectificativas. EXISTE la posibilidad que haya cambio de IVA en funcion de la fecha
@@ -6969,7 +6970,8 @@ Dim C As String
     Else
         If CDate(Text1(2).Text) < vParamAplic.FechaCambioIva Then CambiaIVA = True
     End If
-                                                                                'Que coja el IVA wque tiene, sin cambios
+    vFactu.codtipom = Text1(1).Text  'abril 2015
+                                                                              'Que coja el IVA wque tiene, sin cambios
     If vFactu.CalcularDatosFactura(ObtenerWhereCP(False), NombreTabla, NomTablaLineas, CambiaIVA) Then
         
         FacOK = True
