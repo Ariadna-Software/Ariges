@@ -610,22 +610,22 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(33)"
-      Tab(1).Control(1)=   "Text1(29)"
-      Tab(1).Control(2)=   "Text1(30)"
-      Tab(1).Control(3)=   "FrameHco"
-      Tab(1).Control(4)=   "Text1(25)"
-      Tab(1).Control(5)=   "Text1(24)"
-      Tab(1).Control(6)=   "Text1(23)"
-      Tab(1).Control(7)=   "Text1(22)"
-      Tab(1).Control(8)=   "Text1(21)"
-      Tab(1).Control(9)=   "Text1(20)"
-      Tab(1).Control(10)=   "Text1(19)"
-      Tab(1).Control(11)=   "Label1(27)"
-      Tab(1).Control(12)=   "Label1(18)"
-      Tab(1).Control(13)=   "Label1(5)"
-      Tab(1).Control(14)=   "Label1(3)"
-      Tab(1).Control(15)=   "Label1(45)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(18)"
+      Tab(1).Control(4)=   "Label1(27)"
+      Tab(1).Control(5)=   "Text1(19)"
+      Tab(1).Control(6)=   "Text1(20)"
+      Tab(1).Control(7)=   "Text1(21)"
+      Tab(1).Control(8)=   "Text1(22)"
+      Tab(1).Control(9)=   "Text1(23)"
+      Tab(1).Control(10)=   "Text1(24)"
+      Tab(1).Control(11)=   "Text1(25)"
+      Tab(1).Control(12)=   "FrameHco"
+      Tab(1).Control(13)=   "Text1(30)"
+      Tab(1).Control(14)=   "Text1(29)"
+      Tab(1).Control(15)=   "Text1(33)"
       Tab(1).ControlCount=   16
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
@@ -4020,7 +4020,7 @@ Dim numParam As Byte
     If Not PonerParamRPT2(9, CadParam, numParam, nomDocu, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
 
     With frmImprimir
-        .NombreRpt = nomDocu
+        .NombreRPT = nomDocu
         .NombrePDF = pPdfRpt
         .SeleccionaRPTCodigo = pRptvMultiInforme
         .FormulaSeleccion = cadFormula
@@ -5495,21 +5495,24 @@ Dim I As Byte, i2 As Byte
         txtAux(I).Top = 290
         txtAux(I).visible = visible
         txtAux(I).BackColor = vbWhite
+        txtAux(I).ForeColor = vbBlack
         
         txtAux(i2).Top = 290
         txtAux(i2).visible = visible
         txtAux(i2).BackColor = vbWhite
-        
+        txtAux(i2).ForeColor = vbBlack
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
             txtAux(I).Text = ""
             BloquearTxt txtAux(I), False
             txtAux(I).BackColor = &H80000013
+            txtAux(I).ForeColor = vbWhite
             
             txtAux(i2).Text = ""
             BloquearTxt txtAux(i2), False
             txtAux(i2).BackColor = &H80000013
+            txtAux(i2).ForeColor = vbWhite
         End If
       
         'Fijamos altura(Height) y posición Top
@@ -6784,7 +6787,7 @@ Dim vTipoM As String
     numParam = numParam + 1
     
     'Nombre fichero .rpt a Imprimir
-    frmImprimir.NombreRpt = nomDocu
+    frmImprimir.NombreRPT = nomDocu
     frmImprimir.NombrePDF = pPdfRpt
     frmImprimir.SeleccionaRPTCodigo = pRptvMultiInforme
     
@@ -6960,7 +6963,7 @@ Dim SeSirve As Boolean
     NumFila = Data2.Recordset.AbsolutePosition
     
     If Index = 3 Then
-        PonerFormatoDecimal txtAux(Index), 1
+        If Not PonerFormatoDecimal(txtAux(Index), 1) Then txtAux(Index).Text = ""
         If txtAux(Index).Text <> "" Then
             If (CCur(txtAux(Index).Text) <> Data2.Recordset!servidas) Or txtAux(9).Text = "" Then
                 '-- calcular nº bultos

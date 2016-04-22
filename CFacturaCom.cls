@@ -627,7 +627,7 @@ ELeer:
 End Function
 
 Public Sub FijarTipoIvaProveedor(ByRef vCodProve As Long)
-        
+        '0, Normal  1, Intra  2. Extranjero  3.  REA  4 Modulos
         mKTipoIVA = CInt(DevuelveDesdeBDNew(conAri, "sprove", "tipprove", "codprove", CStr(vCodProve), "N"))
         
 End Sub
@@ -989,7 +989,7 @@ Dim Nulo3 As String
     SQL = SQL & DBSet(TotalFac, "N", "N") & ",0,"
     'Retencion socios
     SQL = SQL & DBSet(PorRet, "N", "S") & "," & DBSet(ImpRet2, "N", "S")
-    SQL = SQL & "," & TipoRet & "," & DBSet(ISP, "B") & ")"
+    SQL = SQL & "," & TipoRet & "," & DBSet(mISP, "B") & ")"
     
     conn.Execute SQL
     Set vProve = Nothing
@@ -1084,7 +1084,7 @@ End Function
 
 
 
-Public Function CalcularDatosFactura2(cadWhere As String, NomTabla As String, NomTablaLin As String, FechaDoc As Date, ISP As Boolean) As Boolean
+Public Function CalcularDatosFactura2(cadWhere As String, NomTabla As String, NomTablaLin As String, FechaDoc As Date, InvSujetoPasivo As Boolean) As Boolean
 'cadWhere: cad para la where de la SQL que selecciona las lineas del albaran o la factura
 'nomTabla: nombre de la tabla de albaranes(scaalp) o de AlbaranesXFactura(scafpa)
 '           segun llamemos desde recepcion de facturas o desde Hco de Facturas
@@ -1141,9 +1141,7 @@ Dim CodigoDeIva As Integer
         Impaux = CalcularPorcentaje(Rs!bruto, DtoGnral, 2)
         ImpBImIVA = ImpBImIVA - Impaux '(bruto - Dtogn)
         
-        'Obtener el % de IVA
-        'SI TIENE RETENCION ENTONCES el tipo de iva es el REA
-        'FALTA###
+
         
         
         If FechaDoc < vParamAplic.FechaCambioIva Then
@@ -1226,15 +1224,14 @@ Dim CodigoDeIva As Integer
     
     'TOTAL de la factura
     'Si es inversion de sujeto pasivo el IVA no lo suma en el total factura
-    If ISP Then
-        'NO HACE EL sum
-        TotalFac = BaseImp
-    Else
-        TotalFac = BaseImp + TotImpIVA
+    TotalFac = BaseImp
+    If Not mISP Then
+        'No es inversion SUJ pasivo, si ademas, no es intracom NO sumo eliva
+        If mKTipoIVA <> 1 Then TotalFac = BaseImp + TotImpIVA
     End If
     If PorRet > 0 And ImpRet2 <> 0 Then TotalFac = TotalFac - ImpRet2
     
-    CalcularDatosFactura2 = True
+    
     
 ECalcular:
     If Err.Number <> 0 Then

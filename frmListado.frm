@@ -12765,7 +12765,7 @@ Dim Rs As ADODB.Recordset
             SQL = SQL & DBSet(Rs!nummante, "T", "S") & "," & DBSet(Rs!ultrepar, "F", "S") & "," & DBSet(Rs!fingaran, "F", "S") & ","
             SQL = SQL & DBSet(Rs!codtipom, "T", "S") & "," & DBSet(Rs!NumFactu, "N", "S") & "," & DBSet(Rs!FechaVta, "F", "S") & ","
             SQL = SQL & DBSet(Rs!NumAlbar, "N", "S") & "," & DBSet(Rs!numline1, "N", "S") & "," & DBSet(Rs!Codprove, "N", "S") & ","
-            SQL = SQL & DBSet(Rs!numalbPr, "T", "S") & "," & DBSet(Rs!fechacom, "F", "S") & "," & DBSet(Rs!numline2, "N", "S") & ")"
+            SQL = SQL & DBSet(Rs!numalbPr, "T", "S") & "," & DBSet(Rs!fechaCom, "F", "S") & "," & DBSet(Rs!numline2, "N", "S") & ")"
         End If
         Rs.Close
         Set Rs = Nothing
@@ -13156,7 +13156,7 @@ Dim Codfamia As Integer
             Exit Sub
         Else
             tabla = "UPDATE tmpinformes SET porcen1 =" & TransformaComasPuntos(CStr(Rs!PorceIVA))
-            tabla = tabla & " WHERE codusu =" & vUsu.codigo & " AND codigo1 = " & Rs!CodigIVA
+            tabla = tabla & " WHERE codusu =" & vUsu.codigo & " AND codigo1 = " & Rs!codigiva
             conn.Execute tabla
         End If
     Next I
@@ -17526,29 +17526,33 @@ Dim AuxD As String
        
         'Veremos si va a contabilizar fras proveedor INTRACOM. Si es asin
         SQL = "SELECT COUNT(*) FROM scafpc,sprove WHERE scafpc.codprove = sprove.codprove and tipprove=1"
-        If cadWhere <> "" Then SQL = SQL & " AND " & cadWhere
-        If RegistrosAListar(SQL) > 0 Then
-            'Hay facturas intracomunitarias.  Veremos si esta bien configuarado el programa
-            If vParamAplic.CtaContabIntracom <> "" Then
-                'NO ha puesto IVA intracom
-                If vParamAplic.IvaIntracomAdicional = 0 Then
-                    MsgBox "No esta en parametros el IVA intracom para las facturas adicionales", vbExclamation
-                    Exit Function
+        
+        'ABRIL 2016
+        'YA no hace la ceracion de la AUTOFACTURA
+        If False Then
+            If cadWhere <> "" Then SQL = SQL & " AND " & cadWhere
+            If RegistrosAListar(SQL) > 0 Then
+                'Hay facturas intracomunitarias.  Veremos si esta bien configuarado el programa
+                If vParamAplic.CtaContabIntracom <> "" Then
+                    'NO ha puesto IVA intracom
+                    If vParamAplic.IvaIntracomAdicional = 0 Then
+                        MsgBox "No esta en parametros el IVA intracom para las facturas adicionales", vbExclamation
+                        Exit Function
+                    End If
+                    
+                    'Ha puesto cta contable para las dos facturas "extras". Veamos si existe
+                    SQL = DevuelveDesdeBDNew(conConta, "cuentas", "codmacta", "codmacta", vParamAplic.CtaContabIntracom, "N")
+                    If SQL = "" Then
+                        MsgBox "No existe la cuenta contable para las facturas intracom", vbExclamation
+                        Exit Function
+                    End If
+                    
+                    SQL = "" 'todo ok
+                    
                 End If
-                
-                'Ha puesto cta contable para las dos facturas "extras". Veamos si existe
-                SQL = DevuelveDesdeBDNew(conConta, "cuentas", "codmacta", "codmacta", vParamAplic.CtaContabIntracom, "N")
-                If SQL = "" Then
-                    MsgBox "No existe la cuenta contable para las facturas intracom", vbExclamation
-                    Exit Function
-                End If
-                
-                SQL = "" 'todo ok
-                
             End If
+            
         End If
-        
-        
     End If
     
     LblPg1.Caption = "Fechas contabilizacion"
@@ -17582,6 +17586,16 @@ Dim AuxD As String
     '---- Crear tabla TEMP para los posible errores de facturas
     tmpErrores = CrearTMPErrFact(cadTabla)
     
+    
+    
+    'Modificacion 11 Abril 2011
+    '-----------------------------------------------------------
+    ' Mosrtaremos para cada factura de PROVEEDOR
+    ' que numregis le ha asignado
+    SQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.codigo
+    conn.Execute SQL
+    
+    
     '---- Pasar las Facturas a la Contabilidad
     b = PasarFacturasAContab(cadTabla, CCoste2)
     
@@ -17612,69 +17626,7 @@ Dim AuxD As String
             
             'Esto lo paso dentro del FRMCOMFACTURAR, para poder mostrar otra pantalla con los datos
             
-'            'JULIO, no mostrare el inrome si no que mostrare un msgbox con el numero de factura contabilizada
-'            'Si genera la factura y la contabiliza (UNA A UNA),
-'            numParam = CByte(vbCritical)
-'            cadFormula = "importe1"
-'            cadParam = DevuelveDesdeBD(conAri, "codigo1", "tmpinformes", "codusu", vUsu.codigo, "N", cadFormula)
-'
-'            If cadParam <> "" Then
-'                AuxD = DevuelveDesdeBD(conAri, "importeb5", "tmpinformes", "codusu", vUsu.codigo, "N")
-'                If AuxD <> "" And Val(AuxD) <> 0 Then
-'                    AuxD = vbCrLf & "Asiento: " & Val(AuxD)
-'                Else
-'                    AuxD = ""
-'                End If
-'                cadParam = cadParam & AuxD
-'                AuxD = ""
-'            End If
-'            If cadParam = "" Then
-'                cadParam = "No se ha encontrado el numero de registro"
-'
-'            Else
-'
-'                cadParam = "Numero de registro: " & cadParam & vbCrLf
-'                cadFormula = DevuelveDesdeBD(conAri, "codmacta", "sprove", "codprove", CStr(Val(CCur(cadFormula))))
-'                AuxD = ""
-'
-'                If cadFormula = "" Then
-'                    AuxD = "Err. cuenta proveedor"
-'                Else
-'
-'
-'                    AuxD = DevuelveDesdeBD(conAri, "nombre1", "tmpinformes", "codusu", vUsu.codigo, "N")
-'                    numParam = InStr(1, AuxD, "@")
-'                    If numParam = 0 Then
-'                        AuxD = "Err en campo temporal(nombre1)"
-'                        numParam = CByte(vbCritical)
-'                    Else
-'                        AuxD = "numfactu=" & DBSet(Trim(Mid(AuxD, 1, numParam - 1)), "T") & " AND fecfactu = " & DBSet(Trim(Mid(AuxD, numParam + 1)), "F")
-'                        Set miRsAux = New ADODB.Recordset
-'                        AuxD = "Select * from spagop WHERE ctaprove = '" & cadFormula & "' AND " & AuxD & " ORDER BY numorden"
-'                        miRsAux.Open AuxD, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-'                        AuxD = ""
-'                        While Not miRsAux.EOF
-'                            AuxD = AuxD & miRsAux!fecefect & "  " & miRsAux!impefect & vbCrLf
-'                            miRsAux.MoveNext
-'                        Wend
-'                        miRsAux.Close
-'                        Set miRsAux = Nothing
-'
-'                        If AuxD = "" Then
-'                            numParam = CByte(vbCritical)
-'                            AuxD = "Err. No se han encontrado los vtos"
-'                        Else
-'                            numParam = CByte(vbInformation)
-'                            AuxD = vbCrLf & vbCrLf & "Vencimientos:" & vbCrLf & AuxD
-'                        End If
-'                    End If
-'                End If
-'                cadParam = cadParam & AuxD
-'            End If
-'
-'
-            
-'            MsgBox cadParam, numParam
+
             
         Else
         
@@ -17696,6 +17648,7 @@ Dim AuxD As String
     End If
     '---- Eliminar tabla TEMP de Errores
     BorrarTMPErrFact
+    ejecutar "DELETE FROM tmpinformes WHERE codusu =" & vUsu.codigo, False
     ContabilizarFacturas = True
 End Function
 
@@ -17773,12 +17726,6 @@ Dim cContaFra As cContabilizarFacturas
     
     
 
-    'Modificacion 20 Abril 2008
-    '-----------------------------------------------------------
-    ' Mosrtaremos para cada factura de PROVEEDOR
-    ' que numregis le ha asignado
-    SQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.codigo
-    conn.Execute SQL
 
     '---- Pasar cada una de las facturas seleccionadas a la Conta
     If NumFactu > 0 Then
@@ -19356,9 +19303,12 @@ Private Sub PonerDatosFacturaProveedorAcabadaRecepcionar()
           
            
             CadParam = "Numero de registro: " & CadParam & vbCrLf
-                
-                cadFormula = DevuelveDesdeBD(conAri, "codmacta", "sprove", "codprove", CStr(Val(CCur(cadFormula))))
-                Orden1 = ""
+                If cadFormula <> "importe1" Then
+                    cadFormula = DevuelveDesdeBD(conAri, "codmacta", "sprove", "codprove", CStr(Val(CCur(cadFormula))))
+                    Orden1 = ""
+                Else
+                    cadFormula = ""
+                End If
                 
                 If cadFormula = "" Then
                     Orden1 = "Error en cuenta contable proveedor"

@@ -13270,7 +13270,7 @@ Dim J As Integer
         vFactu.CCC_CTa = vProve.CuentaBan
         vFactu.IBAN = vProve.IBAN
         
-        vFactu.ISP = False
+        
     
         'Obtengo los totales mediante el cadselect
         Cad = "Select sum(importel) FROM slialp WHERE " & ColFacturar.item(J)

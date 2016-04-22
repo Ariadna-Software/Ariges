@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmConfParamAplic 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   " Parámetros"
@@ -148,149 +148,175 @@ Begin VB.Form frmConfParamAplic
       _Version        =   393216
       Style           =   1
       Tabs            =   6
+      Tab             =   3
       TabsPerRow      =   6
       TabHeight       =   520
       TabCaption(0)   =   "Datos Varios"
       TabPicture(0)   =   "frmConfParamAplic.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(6)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label1(5)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "Label1(4)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label1(1)"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label1(0)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label1(14)"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "imgBuscar(1)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "Label1(59)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Label1(63)"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "imgayuda(2)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Text1(0)"
-      Tab(0).Control(10).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "cboDpto"
+      Tab(0).Control(1)=   "Frame13"
+      Tab(0).Control(2)=   "cboCreaTarifa"
+      Tab(0).Control(3)=   "Text2(1)"
+      Tab(0).Control(4)=   "cboOrdenDtos"
+      Tab(0).Control(5)=   "cboTipodtos"
+      Tab(0).Control(6)=   "Text1(1)"
+      Tab(0).Control(7)=   "FramePrecioKm"
+      Tab(0).Control(8)=   "Text1(4)"
+      Tab(0).Control(9)=   "Text1(5)"
+      Tab(0).Control(10)=   "FrameOpciones"
       Tab(0).Control(11)=   "FrameDiasMante"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "FrameOpciones"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Text1(5)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Text1(4)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "FramePrecioKm"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "Text1(1)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "cboTipodtos"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "cboOrdenDtos"
-      Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Text2(1)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "cboCreaTarifa"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "Frame13"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "cboDpto"
-      Tab(0).Control(22).Enabled=   0   'False
+      Tab(0).Control(12)=   "Text1(0)"
+      Tab(0).Control(13)=   "imgayuda(2)"
+      Tab(0).Control(14)=   "Label1(63)"
+      Tab(0).Control(15)=   "Label1(59)"
+      Tab(0).Control(16)=   "imgBuscar(1)"
+      Tab(0).Control(17)=   "Label1(14)"
+      Tab(0).Control(18)=   "Label1(0)"
+      Tab(0).Control(19)=   "Label1(1)"
+      Tab(0).Control(20)=   "Label1(4)"
+      Tab(0).Control(21)=   "Label1(5)"
+      Tab(0).Control(22)=   "Label1(6)"
       Tab(0).ControlCount=   23
       TabCaption(1)   =   "Datos Facturación"
       TabPicture(1)   =   "frmConfParamAplic.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame2"
-      Tab(1).Control(1)=   "FrameTelefoniaArtic"
-      Tab(1).Control(2)=   "Frame9"
-      Tab(1).Control(3)=   "Frame10"
-      Tab(1).Control(4)=   "Frame12"
-      Tab(1).Control(5)=   "Frame15"
+      Tab(1).Control(0)=   "Frame15"
+      Tab(1).Control(1)=   "Frame12"
+      Tab(1).Control(2)=   "Frame10"
+      Tab(1).Control(3)=   "Frame9"
+      Tab(1).Control(4)=   "FrameTelefoniaArtic"
+      Tab(1).Control(5)=   "Frame2"
       Tab(1).ControlCount=   6
       TabCaption(2)   =   "Datos compras / Copias"
       TabPicture(2)   =   "frmConfParamAplic.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "imgBuscar(65)"
-      Tab(2).Control(1)=   "imgayuda(6)"
-      Tab(2).Control(2)=   "Label1(67)"
-      Tab(2).Control(3)=   "Label1(75)"
-      Tab(2).Control(4)=   "Frame3"
-      Tab(2).Control(5)=   "Frame11"
-      Tab(2).Control(6)=   "FrameNumCopias"
-      Tab(2).Control(7)=   "Frame14"
-      Tab(2).Control(8)=   "Frame4"
-      Tab(2).Control(9)=   "Frame16"
-      Tab(2).Control(10)=   "Text2(65)"
-      Tab(2).Control(11)=   "Text1(65)"
-      Tab(2).Control(12)=   "Text1(72)"
-      Tab(2).Control(13)=   "FrameSepOfertas"
+      Tab(2).Control(0)=   "FrameSepOfertas"
+      Tab(2).Control(1)=   "Text1(72)"
+      Tab(2).Control(2)=   "Text1(65)"
+      Tab(2).Control(3)=   "Text2(65)"
+      Tab(2).Control(4)=   "Frame16"
+      Tab(2).Control(5)=   "Frame4"
+      Tab(2).Control(6)=   "Frame14"
+      Tab(2).Control(7)=   "FrameNumCopias"
+      Tab(2).Control(8)=   "Frame11"
+      Tab(2).Control(9)=   "Frame3"
+      Tab(2).Control(10)=   "Label1(75)"
+      Tab(2).Control(11)=   "Label1(67)"
+      Tab(2).Control(12)=   "imgayuda(6)"
+      Tab(2).Control(13)=   "imgBuscar(65)"
       Tab(2).ControlCount=   14
       TabCaption(3)   =   "Datos Contabilidad "
       TabPicture(3)   =   "frmConfParamAplic.frx":0060
-      Tab(3).ControlEnabled=   0   'False
+      Tab(3).ControlEnabled=   -1  'True
       Tab(3).Control(0)=   "Label1(15)"
+      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "Label1(17)"
+      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).Control(2)=   "Label1(18)"
+      Tab(3).Control(2).Enabled=   0   'False
       Tab(3).Control(3)=   "Label1(19)"
+      Tab(3).Control(3).Enabled=   0   'False
       Tab(3).Control(4)=   "imgBuscar(39)"
+      Tab(3).Control(4).Enabled=   0   'False
       Tab(3).Control(5)=   "Label1(48)"
+      Tab(3).Control(5).Enabled=   0   'False
       Tab(3).Control(6)=   "imgBuscar(40)"
+      Tab(3).Control(6).Enabled=   0   'False
       Tab(3).Control(7)=   "Label2(7)"
+      Tab(3).Control(7).Enabled=   0   'False
       Tab(3).Control(8)=   "Label2(6)"
+      Tab(3).Control(8).Enabled=   0   'False
       Tab(3).Control(9)=   "Label1(49)"
+      Tab(3).Control(9).Enabled=   0   'False
       Tab(3).Control(10)=   "Label1(50)"
+      Tab(3).Control(10).Enabled=   0   'False
       Tab(3).Control(11)=   "imgBuscar(41)"
+      Tab(3).Control(11).Enabled=   0   'False
       Tab(3).Control(12)=   "Label1(52)"
+      Tab(3).Control(12).Enabled=   0   'False
       Tab(3).Control(13)=   "Label1(53)"
+      Tab(3).Control(13).Enabled=   0   'False
       Tab(3).Control(14)=   "imgBuscar(45)"
+      Tab(3).Control(14).Enabled=   0   'False
       Tab(3).Control(15)=   "Label1(47)"
+      Tab(3).Control(15).Enabled=   0   'False
       Tab(3).Control(16)=   "Label1(51)"
+      Tab(3).Control(16).Enabled=   0   'False
       Tab(3).Control(17)=   "Label1(58)"
+      Tab(3).Control(17).Enabled=   0   'False
       Tab(3).Control(18)=   "Label2(4)"
+      Tab(3).Control(18).Enabled=   0   'False
       Tab(3).Control(19)=   "imgBuscar(67)"
+      Tab(3).Control(19).Enabled=   0   'False
       Tab(3).Control(20)=   "Label1(72)"
+      Tab(3).Control(20).Enabled=   0   'False
       Tab(3).Control(21)=   "Label1(73)"
+      Tab(3).Control(21).Enabled=   0   'False
       Tab(3).Control(22)=   "imgBuscar(66)"
+      Tab(3).Control(22).Enabled=   0   'False
       Tab(3).Control(23)=   "Label1(74)"
+      Tab(3).Control(23).Enabled=   0   'False
       Tab(3).Control(24)=   "imgayuda(8)"
+      Tab(3).Control(24).Enabled=   0   'False
       Tab(3).Control(25)=   "imgayuda(9)"
+      Tab(3).Control(25).Enabled=   0   'False
       Tab(3).Control(26)=   "Text1(20)"
+      Tab(3).Control(26).Enabled=   0   'False
       Tab(3).Control(27)=   "Text1(21)"
+      Tab(3).Control(27).Enabled=   0   'False
       Tab(3).Control(28)=   "Text1(22)"
+      Tab(3).Control(28).Enabled=   0   'False
       Tab(3).Control(29)=   "Text1(23)"
+      Tab(3).Control(29).Enabled=   0   'False
       Tab(3).Control(30)=   "Text2(46)"
+      Tab(3).Control(30).Enabled=   0   'False
       Tab(3).Control(31)=   "Text1(46)"
+      Tab(3).Control(31).Enabled=   0   'False
       Tab(3).Control(32)=   "Text1(47)"
+      Tab(3).Control(32).Enabled=   0   'False
       Tab(3).Control(33)=   "Text2(47)"
+      Tab(3).Control(33).Enabled=   0   'False
       Tab(3).Control(34)=   "Text1(49)"
+      Tab(3).Control(34).Enabled=   0   'False
       Tab(3).Control(35)=   "Text1(48)"
+      Tab(3).Control(35).Enabled=   0   'False
       Tab(3).Control(36)=   "Text2(48)"
+      Tab(3).Control(36).Enabled=   0   'False
       Tab(3).Control(37)=   "cboObsFactura"
+      Tab(3).Control(37).Enabled=   0   'False
       Tab(3).Control(38)=   "Text2(52)"
+      Tab(3).Control(38).Enabled=   0   'False
       Tab(3).Control(39)=   "Text1(52)"
+      Tab(3).Control(39).Enabled=   0   'False
       Tab(3).Control(40)=   "Text1(50)"
+      Tab(3).Control(40).Enabled=   0   'False
       Tab(3).Control(41)=   "CboModAnalitica"
+      Tab(3).Control(41).Enabled=   0   'False
       Tab(3).Control(42)=   "Frame8"
+      Tab(3).Control(42).Enabled=   0   'False
       Tab(3).Control(43)=   "Text2(70)"
+      Tab(3).Control(43).Enabled=   0   'False
       Tab(3).Control(44)=   "Text1(70)"
+      Tab(3).Control(44).Enabled=   0   'False
       Tab(3).Control(45)=   "chkContabIntraCom"
+      Tab(3).Control(45).Enabled=   0   'False
       Tab(3).Control(46)=   "Text2(71)"
+      Tab(3).Control(46).Enabled=   0   'False
       Tab(3).Control(47)=   "Text1(71)"
+      Tab(3).Control(47).Enabled=   0   'False
       Tab(3).ControlCount=   48
       TabCaption(4)   =   "Internet"
       TabPicture(4)   =   "frmConfParamAplic.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "FrameEMail"
-      Tab(4).Control(1)=   "FrameSoporte"
+      Tab(4).Control(0)=   "FrameSoporte"
+      Tab(4).Control(1)=   "FrameEMail"
       Tab(4).ControlCount=   2
       TabCaption(5)   =   "Valores por defecto / AVISOS"
       TabPicture(5)   =   "frmConfParamAplic.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame7"
-      Tab(5).Control(1)=   "Frame5"
+      Tab(5).Control(0)=   "Frame5"
+      Tab(5).Control(1)=   "Frame7"
       Tab(5).ControlCount=   2
       Begin VB.Frame FrameSepOfertas 
          Caption         =   "Separador ofertas"
@@ -668,7 +694,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   71
-         Left            =   -68280
+         Left            =   6720
          MaxLength       =   2
          TabIndex        =   71
          Tag             =   "IVAexento|N|S|0||spara1|IvaIntracomAdicional|||"
@@ -680,7 +706,7 @@ Begin VB.Form frmConfParamAplic
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   71
-         Left            =   -67560
+         Left            =   7440
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   242
@@ -691,7 +717,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.CheckBox chkContabIntraCom 
          Caption         =   "Permitir contabilizacion"
          Height          =   375
-         Left            =   -69240
+         Left            =   5760
          TabIndex        =   68
          Tag             =   "Mantenimientos|N|N|||spara1|IntracomAdicionContab|||"
          Top             =   1920
@@ -701,7 +727,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   70
-         Left            =   -73560
+         Left            =   1440
          MaxLength       =   10
          TabIndex        =   67
          Tag             =   "Cta intracom|N|S|||spara1|CtaContabIntracom|||"
@@ -713,7 +739,7 @@ Begin VB.Form frmConfParamAplic
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   70
-         Left            =   -72240
+         Left            =   2760
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   238
@@ -1744,7 +1770,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.ComboBox cboDpto 
          Height          =   315
          ItemData        =   "frmConfParamAplic.frx":00B4
-         Left            =   1920
+         Left            =   -73080
          List            =   "frmConfParamAplic.frx":00C1
          Style           =   2  'Dropdown List
          TabIndex        =   6
@@ -1765,7 +1791,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00000080&
          Height          =   2895
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   139
          Top             =   3600
          Width           =   10215
@@ -2246,7 +2272,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   735
-         Left            =   7800
+         Left            =   -67200
          TabIndex        =   177
          Top             =   840
          Width           =   2295
@@ -2275,7 +2301,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.ComboBox cboCreaTarifa 
          Height          =   315
          ItemData        =   "frmConfParamAplic.frx":00E8
-         Left            =   1920
+         Left            =   -73080
          List            =   "frmConfParamAplic.frx":00F5
          Style           =   2  'Dropdown List
          TabIndex        =   5
@@ -2285,7 +2311,7 @@ Begin VB.Form frmConfParamAplic
       End
       Begin VB.ComboBox CboModAnalitica 
          Height          =   315
-         Left            =   -66960
+         Left            =   8040
          Style           =   2  'Dropdown List
          TabIndex        =   69
          Tag             =   "Modo analítica|N|N|0|9|spara1|modanalitica|||"
@@ -2425,7 +2451,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   50
-         Left            =   -66120
+         Left            =   8880
          MaxLength       =   2
          TabIndex        =   63
          Tag             =   "NºConta|N|S|1|99|spara1|conta_B|||"
@@ -2496,7 +2522,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   52
-         Left            =   -73080
+         Left            =   1920
          MaxLength       =   2
          TabIndex        =   70
          Tag             =   "IVAexento|N|S|0||spara1|IvaIntracom|||"
@@ -2508,7 +2534,7 @@ Begin VB.Form frmConfParamAplic
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   52
-         Left            =   -72360
+         Left            =   2640
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   164
@@ -2519,7 +2545,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.ComboBox cboObsFactura 
          Height          =   315
          ItemData        =   "frmConfParamAplic.frx":014C
-         Left            =   -74760
+         Left            =   240
          List            =   "frmConfParamAplic.frx":014E
          Style           =   2  'Dropdown List
          TabIndex        =   64
@@ -2591,7 +2617,7 @@ Begin VB.Form frmConfParamAplic
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   48
-         Left            =   -67560
+         Left            =   7440
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   157
@@ -2603,7 +2629,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   48
-         Left            =   -68280
+         Left            =   6720
          MaxLength       =   2
          TabIndex        =   73
          Tag             =   "IVAexento|N|S|0||spara1|ivaexento|||"
@@ -2615,7 +2641,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   49
-         Left            =   -65520
+         Left            =   9480
          MaxLength       =   5
          TabIndex        =   66
          Tag             =   "Nº Contabilidad|N|S|||spara1|porreten|||"
@@ -2627,7 +2653,7 @@ Begin VB.Form frmConfParamAplic
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   47
-         Left            =   -69240
+         Left            =   5760
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   153
@@ -2639,7 +2665,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   47
-         Left            =   -70680
+         Left            =   4320
          MaxLength       =   10
          TabIndex        =   65
          Tag             =   "Cta retencion|N|S|||spara1|ctareten|||"
@@ -2651,7 +2677,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   46
-         Left            =   -73080
+         Left            =   1920
          MaxLength       =   2
          TabIndex        =   72
          Tag             =   "REA|N|S|0||spara1|iva_rea|||"
@@ -2663,7 +2689,7 @@ Begin VB.Form frmConfParamAplic
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   46
-         Left            =   -72360
+         Left            =   2640
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   151
@@ -2775,7 +2801,7 @@ Begin VB.Form frmConfParamAplic
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   1
-         Left            =   3360
+         Left            =   -71640
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   135
@@ -2786,7 +2812,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   23
-         Left            =   -73800
+         Left            =   1200
          MaxLength       =   30
          TabIndex        =   59
          Tag             =   "Servidor Contabilidad|T|S|||spara1|serconta|||"
@@ -2798,7 +2824,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   22
-         Left            =   -67560
+         Left            =   7440
          MaxLength       =   2
          TabIndex        =   62
          Tag             =   "Nº Contabilidad|N|S|||spara1|numconta|||"
@@ -2809,7 +2835,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   21
-         Left            =   -71280
+         Left            =   3720
          MaxLength       =   20
          TabIndex        =   60
          Tag             =   "Usuario Contabilidad|T|S|||spara1|usuconta|||"
@@ -2821,7 +2847,7 @@ Begin VB.Form frmConfParamAplic
          Height          =   285
          IMEMode         =   3  'DISABLE
          Index           =   20
-         Left            =   -69600
+         Left            =   5400
          MaxLength       =   20
          PasswordChar    =   "*"
          TabIndex        =   61
@@ -2832,7 +2858,7 @@ Begin VB.Form frmConfParamAplic
       End
       Begin VB.ComboBox cboOrdenDtos 
          Height          =   315
-         Left            =   1920
+         Left            =   -73080
          Style           =   2  'Dropdown List
          TabIndex        =   3
          Tag             =   "Orden Descuentos|N|N|||spara1|ordendto|||"
@@ -2900,7 +2926,7 @@ Begin VB.Form frmConfParamAplic
       End
       Begin VB.ComboBox cboTipodtos 
          Height          =   315
-         Left            =   1920
+         Left            =   -73080
          Style           =   2  'Dropdown List
          TabIndex        =   4
          Tag             =   "Tipo Descuentos|N|N|||spara1|tipodtos|||"
@@ -2911,7 +2937,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   1
-         Left            =   2640
+         Left            =   -72360
          MaxLength       =   3
          TabIndex        =   2
          Tag             =   "Código Tarifa PVP|N|N|||spara1|codtarif|000||"
@@ -2932,7 +2958,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1070
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   118
          Top             =   4080
          Width           =   3375
@@ -2982,7 +3008,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   320
          Index           =   4
-         Left            =   3360
+         Left            =   -71640
          MaxLength       =   35
          TabIndex        =   0
          Tag             =   "Nombre Director Gerente|T|S|||spara1|nomgeren|||"
@@ -2993,7 +3019,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   320
          Index           =   5
-         Left            =   3360
+         Left            =   -71640
          MaxLength       =   35
          TabIndex        =   1
          Tag             =   "Nombre responsable Admon|T|S|||spara1|nomadmin|||"
@@ -3014,7 +3040,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   4935
-         Left            =   4200
+         Left            =   -70800
          TabIndex        =   117
          Top             =   1800
          Width           =   6135
@@ -3317,7 +3343,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1095
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   114
          Top             =   5640
          Width           =   3375
@@ -3367,7 +3393,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   0
-         Left            =   4260
+         Left            =   -70740
          MaxLength       =   15
          TabIndex        =   125
          Tag             =   "Código Parámetros Aplic|N|N|||spara1|codigo||S|"
@@ -3412,7 +3438,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgayuda 
          Height          =   255
          Index           =   9
-         Left            =   -64800
+         Left            =   10200
          ToolTipText     =   "Compras intracomunitarias"
          Top             =   2760
          Width           =   255
@@ -3420,7 +3446,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgayuda 
          Height          =   255
          Index           =   8
-         Left            =   -71400
+         Left            =   3600
          ToolTipText     =   "Compras intracomunitarias"
          Top             =   1680
          Width           =   255
@@ -3439,7 +3465,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   74
-         Left            =   -69840
+         Left            =   5160
          TabIndex        =   243
          Top             =   2760
          Width           =   1275
@@ -3447,7 +3473,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   66
-         Left            =   -73800
+         Left            =   1200
          Tag             =   "-1"
          ToolTipText     =   "Buscar I.V.A."
          Top             =   1920
@@ -3467,7 +3493,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00000080&
          Height          =   195
          Index           =   73
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   241
          Top             =   2400
          Width           =   1725
@@ -3486,7 +3512,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   72
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   240
          Top             =   1680
          Width           =   3300
@@ -3494,7 +3520,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   67
-         Left            =   -68520
+         Left            =   6480
          Tag             =   "-1"
          ToolTipText     =   "Buscar cuenta contable"
          Top             =   2760
@@ -3504,7 +3530,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Cuenta extra"
          Height          =   195
          Index           =   4
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   239
          Top             =   1920
          Width           =   900
@@ -3512,7 +3538,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgayuda 
          Height          =   255
          Index           =   2
-         Left            =   3720
+         Left            =   -71280
          ToolTipText     =   "Departamento-Direcciones"
          Top             =   3480
          Width           =   375
@@ -3521,7 +3547,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Departamento"
          Height          =   255
          Index           =   63
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   186
          Top             =   3510
          Width           =   1455
@@ -3530,7 +3556,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Crear tarifas"
          Height          =   255
          Index           =   59
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   176
          Top             =   2970
          Width           =   1455
@@ -3549,7 +3575,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   58
-         Left            =   -66960
+         Left            =   8040
          TabIndex        =   175
          Top             =   1680
          Width           =   1515
@@ -3568,7 +3594,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   255
          Index           =   51
-         Left            =   -66600
+         Left            =   8400
          TabIndex        =   169
          Top             =   405
          Width           =   1455
@@ -3587,7 +3613,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   47
-         Left            =   -74520
+         Left            =   480
          TabIndex        =   165
          Top             =   2760
          Width           =   1125
@@ -3595,7 +3621,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   45
-         Left            =   -73320
+         Left            =   1680
          Tag             =   "-1"
          ToolTipText     =   "Buscar I.V.A."
          Top             =   2760
@@ -3616,7 +3642,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   53
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   163
          Top             =   960
          Width           =   2385
@@ -3635,7 +3661,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   52
-         Left            =   -74520
+         Left            =   480
          TabIndex        =   162
          Top             =   3120
          Width           =   555
@@ -3643,7 +3669,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   41
-         Left            =   -68520
+         Left            =   6480
          Tag             =   "-1"
          ToolTipText     =   "Buscar I.V.A."
          Top             =   3120
@@ -3663,7 +3689,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   50
-         Left            =   -69840
+         Left            =   5160
          TabIndex        =   158
          Top             =   3120
          Width           =   1155
@@ -3682,7 +3708,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   49
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   156
          Top             =   360
          Width           =   1185
@@ -3691,7 +3717,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "%"
          Height          =   255
          Index           =   6
-         Left            =   -65880
+         Left            =   9120
          TabIndex        =   155
          Top             =   1200
          Width           =   255
@@ -3700,7 +3726,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Cuenta"
          Height          =   255
          Index           =   7
-         Left            =   -71760
+         Left            =   3240
          TabIndex        =   154
          Top             =   1200
          Width           =   615
@@ -3708,7 +3734,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   40
-         Left            =   -71040
+         Left            =   3960
          Tag             =   "-1"
          ToolTipText     =   "Buscar cuenta contable"
          Top             =   1200
@@ -3728,7 +3754,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00800000&
          Height          =   195
          Index           =   48
-         Left            =   -72000
+         Left            =   3000
          TabIndex        =   152
          Top             =   960
          Width           =   1155
@@ -3736,7 +3762,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   39
-         Left            =   -73320
+         Left            =   1680
          Tag             =   "-1"
          ToolTipText     =   "Buscar I.V.A."
          Top             =   3120
@@ -3745,7 +3771,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   1
-         Left            =   1965
+         Left            =   -73035
          Tag             =   "-1"
          ToolTipText     =   "Buscar tarifa"
          Top             =   1320
@@ -3755,7 +3781,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Servidor"
          Height          =   195
          Index           =   19
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   134
          Top             =   600
          Width           =   900
@@ -3764,7 +3790,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Nº conta"
          Height          =   195
          Index           =   18
-         Left            =   -68280
+         Left            =   6720
          TabIndex        =   133
          Top             =   600
          Width           =   660
@@ -3773,7 +3799,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Usuario"
          Height          =   195
          Index           =   17
-         Left            =   -72000
+         Left            =   3000
          TabIndex        =   132
          Top             =   600
          Width           =   780
@@ -3782,7 +3808,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Pass."
          Height          =   195
          Index           =   15
-         Left            =   -70200
+         Left            =   4800
          TabIndex        =   131
          Top             =   600
          Width           =   840
@@ -3791,7 +3817,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Orden Descuentos"
          Height          =   255
          Index           =   14
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   130
          Top             =   1890
          Width           =   1575
@@ -3800,7 +3826,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Tipo de Descuentos"
          Height          =   255
          Index           =   0
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   124
          Top             =   2430
          Width           =   1575
@@ -3809,7 +3835,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Código Tarifa de PVP"
          Height          =   255
          Index           =   1
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   123
          Top             =   1320
          Width           =   1575
@@ -3818,7 +3844,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Nombre del Director Gerente"
          Height          =   255
          Index           =   4
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   122
          Top             =   540
          Width           =   2055
@@ -3827,7 +3853,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Nombre responsable Administración"
          Height          =   255
          Index           =   5
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   121
          Top             =   900
          Width           =   2655
@@ -3836,7 +3862,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Código"
          Height          =   255
          Index           =   6
-         Left            =   3720
+         Left            =   -71280
          TabIndex        =   126
          Top             =   1020
          Width           =   495
@@ -4426,7 +4452,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgAyuda
+    For Each Ima In Me.imgayuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear
@@ -4479,6 +4505,27 @@ Dim Im
     
     
     
+    '-- Abril 2016
+    'Contabilizacion INTRACOMUNITARIAS. YA no llevan la extra, ni nada. Entran con el IVA que le corresponda, pero sin SUMAR
+    imgayuda(8).visible = False
+    chkContabIntraCom.visible = False
+    Label1(72).visible = False
+    Label2(4).visible = False
+    Text1(70).visible = False
+    Text2(70).visible = False
+    
+    Label1(74).visible = False
+    Text1(71).visible = False
+    Text2(71).visible = False
+    
+    
+    CboModAnalitica.Left = 240
+    Label1(58).Left = 240
+    
+    
+    
+    
+    
     NombreTabla = "spara1"
     'ASignamos un SQL al DATA1
     Data1.ConnectionString = conn
@@ -4490,7 +4537,7 @@ Dim Im
     '20 Dic 2010
     'Ope. aseguradas lo habilitamos por el YOG. Auqi solo puede cambiar la situbloq
     chkAseguradas.visible = False
-    imgAyuda(5).visible = False
+    imgayuda(5).visible = False
     
     PonerModo 0
 End Sub
@@ -4548,12 +4595,12 @@ End Sub
 
 Private Sub frmFP_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Formas de Pago
-Dim Indice As Byte
+Dim indice As Byte
 
-    Indice = 24
-    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod Forma Pago
-    FormateaCampo Text1(Indice)
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Forma Pago
+    indice = 24
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod Forma Pago
+    FormateaCampo Text1(indice)
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Forma Pago
 End Sub
 
 Private Sub frmMtoArt_DatoSeleccionado(CadenaSeleccion As String)
@@ -4636,6 +4683,17 @@ Dim Ayuda As String
         Ayuda = Ayuda & vbCrLf & "la de proveedor extra tendra el mismo numero que la de cliente"
     
     
+        
+        Ayuda = vbCrLf & "Abril 2016"
+        Ayuda = Ayuda & vbCrLf & "La factura entrará con el iva marcado en IVA Especiales-> intracomu"
+        Ayuda = Ayuda & vbCrLf & "Pero este IVA no sumará al total factura, y si que realizara los "
+        Ayuda = Ayuda & vbCrLf & "apuntes a las cuentas de IVA cuando se contabilice. "
+        
+        
+    
+    
+    
+    
     Case 10
         Ayuda = vbCrLf & "Porcentaje.   Cuando el porcentaje de dias entre dias que hay desde fecha factura "
         Ayuda = Ayuda & vbCrLf & " hasta el vencimiento y dias desde la fecha de generacion de comisiones hasta el vencimiento"
@@ -4656,12 +4714,12 @@ Dim Ayuda As String
     End Select
     
     
-    Ayuda = imgAyuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
+    Ayuda = imgayuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
-Dim i As Integer
+Dim I As Integer
     Screen.MousePointer = vbHourglass
 
     Select Case Index
@@ -4749,17 +4807,17 @@ Dim i As Integer
             If CadenaDesdeOtroForm <> "" Then
                 Select Case Index
                 Case 42
-                    i = 9 'Para la cta aportacion
+                    I = 9 'Para la cta aportacion
                 Case 33 To 41, 45
-                        i = 7
+                        I = 7
                 Case 66, 67
-                    i = 4
+                    I = 4
                 Case Else
                     'IVAS antiguos
-                    i = 13
+                    I = 13
                 End Select
-                Text1(Index + i).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
-                Text2(Index + i).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
+                Text1(Index + I).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
+                Text2(Index + I).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
             End If
         
             
@@ -5054,17 +5112,17 @@ Dim b As Boolean
             
    'Fras proveedor INTRACOM
    'Si indica la cuenta debe indicar el tipo de iva
-   If Me.Text1(70).Text <> "" Then
-        If Text1(71).Text = "" Then
-            MsgBox "Si indica la cta de contab. de fras proveedor 'extra' debe indicar el tipo de iva", vbExclamation
-            b = False
-        End If
-    Else
-        If Text1(71).Text <> "" Then
-            MsgBox "Ha indicado IVA para fra proveedor intracom, y no ha puesto la cuenta para las facturas 'extra'", vbExclamation
-            b = False
-        End If
-    End If
+'   If Me.Text1(70).Text <> "" Then
+'        If Text1(71).Text = "" Then
+'            MsgBox "Si indica la cta de contab. de fras proveedor 'extra' debe indicar el tipo de iva", vbExclamation
+'            b = False
+'        End If
+'    Else
+'        If Text1(71).Text <> "" Then
+'            MsgBox "Ha indicado IVA para fra proveedor intracom, y no ha puesto la cuenta para las facturas 'extra'", vbExclamation
+'            b = False
+'        End If
+'    End If
     
     
     
@@ -5239,6 +5297,13 @@ Dim b As Boolean
     For Each img In Me.imgBuscar
         BloquearImg img, Not b
     Next
+    
+    'IVA intracom
+    imgBuscar(66).visible = False
+    imgBuscar(67).visible = False
+    
+    
+    
 '    BloquearImg Me.imgBuscar(1), (Modo <> 4)
 '    BloquearImg Me.imgBuscar(15), (Modo <> 4)
 '    For NumRegElim = 24 To 42
@@ -5385,19 +5450,19 @@ End Sub
 
 Private Sub AsignarNumeroDeCopias()
 Dim Aux As String
-Dim i As Integer
+Dim I As Integer
 
     Aux = ""
-    For i = 0 To Me.txtNumCopias.Count - 1
-        If txtNumCopias(i).Text = "" Then
+    For I = 0 To Me.txtNumCopias.Count - 1
+        If txtNumCopias(I).Text = "" Then
             Aux = Aux & "0"
         Else
-            If Val(txtNumCopias(i).Text) = 0 Then
+            If Val(txtNumCopias(I).Text) = 0 Then
                 Aux = Aux & "1"
             Else
-                Aux = Aux & Mid(txtNumCopias(i).Text, 1, 1)
+                Aux = Aux & Mid(txtNumCopias(I).Text, 1, 1)
             End If
         End If
-    Next i
+    Next I
     vParamAplic.NumeroCopias = Aux
 End Sub

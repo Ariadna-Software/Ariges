@@ -61,7 +61,7 @@ On Error Resume Next
         NomTabla = "scaped"
         NomTablaH = "schped"
         NomTablaLinH = "slhped"
-        SQL = " SELECT numpedcl,fecpedcl," & vUsu.Codigo Mod 1000 & " as codigusu," & cadL & ","
+        SQL = " SELECT numpedcl,fecpedcl," & vUsu.codigo Mod 1000 & " as codigusu," & cadL & ","
         SQL = SQL & "fecentre,sementre,visadore,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
         SQL = SQL & "coddirec,nomdirec,referenc,codtraba,codagent,codforpa,dtoppago,dtognral,"
         SQL = SQL & "tipofact,observa01,observa02,observa03,observa04,observa05,servcomp,restoped,numofert,fecofert,observap1,observap2,recogecl,actuacion,coddiren,observacrm"
@@ -73,7 +73,7 @@ On Error Resume Next
         NomTabla = "scaalb"
         NomTablaH = "schalb"
         NomTablaLinH = "slhalb"
-        SQL = " SELECT codtipom,numalbar,fechaalb," & vUsu.Codigo Mod 1000 & " as codigusu," & cadL & ","
+        SQL = " SELECT codtipom,numalbar,fechaalb," & vUsu.codigo Mod 1000 & " as codigusu," & cadL & ","
         SQL = SQL & "factursn,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
         SQL = SQL & "coddirec,nomdirec,referenc,facturkm,cantidkm,codtraba,codtrab1,codtrab2,codagent,codforpa,codenvio,dtoppago,dtognral,"
         SQL = SQL & "tipofact,observa01,observa02,observa03,observa04,observa05,numofert,fecofert,numpedcl,fecpedcl,fecentre,sementre,esticket,numtermi,numventa "
@@ -103,7 +103,7 @@ On Error Resume Next
         SQL = " (numalbar,fechaalb,codprove,codigusu,fechelim,trabelim,codincid,nomprove,domprove,"
         SQL = SQL & "codpobla,pobprove,proprove,nifprove,telprove,codforpa,codtraba,codtrab1,dtoppago,dtognral,"
         SQL = SQL & "observa1,observa2,observa3,observa4,observa5,numpedpr,fecpedpr,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega) "
-        SQL = SQL & " SELECT numalbar,fechaalb,codprove," & vUsu.Codigo Mod 1000 & " as codigusu," & cadL & ","
+        SQL = SQL & " SELECT numalbar,fechaalb,codprove," & vUsu.codigo Mod 1000 & " as codigusu," & cadL & ","
         SQL = SQL & "nomprove,domprove,codpobla,pobprove,proprove,nifprove,telprove,"
         SQL = SQL & "codforpa,codtraba,codtrab1,dtoppago,dtognral,"
         SQL = SQL & "observa1,observa2,observa3,observa4,observa5,numpedpr,fecpedpr,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega"
@@ -112,7 +112,7 @@ On Error Resume Next
         NomTabla = "scappr"
         NomTablaH = "schppr"
         NomTablaLinH = "slhppr"
-        SQL = " SELECT numpedpr,fecpedpr," & vUsu.Codigo Mod 1000 & " as codigusu," & cadL & ","
+        SQL = " SELECT numpedpr,fecpedpr," & vUsu.codigo Mod 1000 & " as codigusu," & cadL & ","
         SQL = SQL & "codprove,nomprove,domprove,codpobla,pobprove,proprove,nifprove,telprove,"
         SQL = SQL & "coddirea,coddiref,codforpa,codtraba,codtrab1,dtognral,dtoppago,"
         SQL = SQL & "restoped,codclien,observa1,observa2,observa3,observa4,observa5,tipoporte,obra,coddirre"
@@ -312,6 +312,14 @@ Dim EsAlbaran As Boolean
     If CodTipoMov = "OFE" Then
         SQL = "DELETE FROM slipresail WHERE " & cadAux
         ejecutar SQL, False  'Si da error me da lo mismo. Qu siga la fiesta
+        
+        
+        If vParamAplic.NumeroInstalacion = 4 Then
+            SQL = "DELETE FROM sliprePdfs   WHERE " & cadAux
+            ejecutar SQL, False  'Si da error me da lo mismo. Qu siga la fiesta
+        End If
+
+        
         
     End If
     

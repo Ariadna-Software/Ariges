@@ -109,8 +109,6 @@ Dim LanzaWhose As Boolean
        
        'Necesitaremos el archivo arifon.dat
        
-
-       
        frmIdentifica.Show vbModal
                
 
@@ -2139,22 +2137,22 @@ End Function
 '   2- Varios
 '   ---------
 '   3.- Tabas que cuando eliminen el articulo tendre que borrar yo
-Public Sub DevuelveTablasBorre(Opcion As Byte, ByRef Tablas As String, ByRef Descripcion As String, ByRef NumeroTablas As Integer)
+Public Sub DevuelveTablasBorre(opcion As Byte, ByRef Tablas As String, ByRef Descripcion As String, ByRef NumeroTablas As Integer)
 
-    If Opcion = 0 Then
+    If opcion = 0 Then
         'CLIENTES
         Tablas = "slhalb|slhped|slhpre|slialb|slifac|sliordpr|sliped|slipre|sliven|slirep|"
         Descripcion = "Hco albaranes|Hco pedidos|Hco ofertas|Albaranes|Facturas|produccion|"
         Descripcion = Descripcion & "Pedidos|Ofertas|TPV|Reparaciones|"
         NumeroTablas = 10
-    ElseIf Opcion = 1 Then
+    ElseIf opcion = 1 Then
         'PROVEEDRORES
         Tablas = "slhalp|slhppr|slialp|slifpc|slippr|"
         Descripcion = "Hco albaranes|Hco pedidos|Albaranes|Facturas|Pedidos|"
         NumeroTablas = 5
         
         
-    ElseIf Opcion = 2 Then
+    ElseIf opcion = 2 Then
         'VARIOS
         Tablas = "slhmov|sarti2|slhtra|slimov|slitra|slotes|smoval|sserie|stipco|shinve|sarti6|"
         Descripcion = "Hco Lineas Movimientos Almacen|Instalaciones|hco traspaso almacen|"

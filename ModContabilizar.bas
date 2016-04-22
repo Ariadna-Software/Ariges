@@ -1195,7 +1195,7 @@ Dim ErrorContab As String
                 b = InsertarLinFact_TicketsAgrupados("scafac", cadWhere, cadMen, False)
             Else
                 'Normal. Esta es la forma NORMAL NORMAL de hacerlo
-                b = InsertarLinFact("scafac", cadWhere, cadMen, False)
+                b = InsertarLinFact("scafac", cadWhere, cadMen, False, 0, "")
             End If
             cadMen = "Insertando Lin. Factura: " & cadMen
     
@@ -1598,9 +1598,9 @@ End Function
 
 
 
-Private Function InsertarLinFact(cadTabla As String, cadWhere As String, cadErr As String, vLlevaRetencion As Boolean, Optional numRegis As Long) As Boolean
+Private Function InsertarLinFact(cadTabla As String, cadWhere As String, cadErr As String, vLlevaRetencion As Boolean, numRegis As Long, Intracom As String) As Boolean
     If vParamAplic.ContabilidadNueva Then
-        InsertarLinFact = InsertarLinFactContaNueva(cadTabla, cadWhere, cadErr, vLlevaRetencion, numRegis)
+        InsertarLinFact = InsertarLinFactContaNueva(cadTabla, cadWhere, cadErr, vLlevaRetencion, numRegis, Intracom)
     Else
         InsertarLinFact = InsertarLinFactContaAntigua(cadTabla, cadWhere, cadErr, vLlevaRetencion, numRegis)
     End If
@@ -1880,7 +1880,9 @@ EInLinea:
     End If
 End Function
 
-Private Function InsertarLinFactContaNueva(cadTabla As String, cadWhere As String, cadErr As String, vLlevaRetencion As Boolean, Optional numRegis As Long) As Boolean
+
+'FraIntraCom2. Si es <>"" entonces lleva el tipo de iva que va la factura
+Private Function InsertarLinFactContaNueva(cadTabla As String, cadWhere As String, cadErr As String, vLlevaRetencion As Boolean, numRegis As Long, FraIntraCom As String) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
@@ -1930,7 +1932,9 @@ Dim K As Byte
             End If
         End If
         
-        SQL = " SELECT codigiva,stipom.letraser,slifac.codtipom,slifac.numfactu,slifac.fecfactu," & cadCampo & " as cuenta,sum(importel) as importe"
+    
+        
+        SQL = "SELECT codigiva,stipom.letraser,slifac.codtipom,slifac.numfactu,slifac.fecfactu," & cadCampo & " as cuenta,sum(importel) as importe"
         
         'Tiene analitica. Luego el codtraba tiene que aparecer
         If vCCos > 0 Then SQL = SQL & ",slifac.codccost"
@@ -1961,7 +1965,14 @@ Dim K As Byte
             cadCampo = "sfamia.abocompr"
         End If
         
-        SQL = "SELECT codigiva,slifpc.codprove,slifpc.numfactu,FecFactu," & cadCampo & " as cuenta, sum(importel) as importe  "
+        
+        If FraIntraCom <> "" Then
+            SQL = " SELECT " & FraIntraCom
+        Else
+            SQL = " SELECT"
+        End If
+        
+        SQL = SQL & " codigiva,slifpc.codprove,slifpc.numfactu,FecFactu," & cadCampo & " as cuenta, sum(importel) as importe  "
         
         'Tiene analitica. Luego el codtraba tiene que aparecer
         If vCCos > 0 Then SQL = SQL & ",slifpc.codccost"
@@ -2020,12 +2031,12 @@ Dim K As Byte
         'Vemos que tipo de IVA es en el vector de importes
         NumeroIVA = 127
         For K = 0 To 2
-            If Rs!codigiva = vTipoIva(K) Then
+            If Rs!CodigIVA = vTipoIva(K) Then
                 NumeroIVA = K
                 Exit For
             End If
         Next
-        If NumeroIVA > 100 Then Err.Raise 513, "Error obteniendo IVA: " & Rs!codigiva
+        If NumeroIVA > 100 Then Err.Raise 513, "Error obteniendo IVA: " & Rs!CodigIVA
         
         'Importe
         '----------------------------------------------------------------------------
@@ -2046,7 +2057,7 @@ Dim K As Byte
             Else
                 'Si que hay mas lineas.
                 'Son del mismo tipo de IVA
-                If Rs!codigiva <> vTipoIva(0) Then
+                If Rs!CodigIVA <> vTipoIva(0) Then
                     'NO es el mismo tipo de IVA
                     'Hay que ajustar
                     HayQueAjustar = True
@@ -2268,6 +2279,9 @@ Dim Actual_sig As Boolean
     b = InsertarCabFactProv(cadWhere, cadMen, Mc, FechaFin, vLlevaRetencion, vContaFra, FraIntraCom2, Actual_sig)
     cadMen = "Insertando Cab. Factura: " & cadMen
     
+    
+    'En contabilidad nueva, en FraIntraCom2 llevamos el tipo de IVA : Rs!TipoIVA1
+    
     If b Then
         
         'Si es contabilizacion nueva cargamos el IVA
@@ -2277,7 +2291,7 @@ Dim Actual_sig As Boolean
         'Veremos que opcion de CC es la que hay que pasar (agrupar o no agrupar)
         vCCos = CodCCost
         '---- Insertar lineas de Factura en la Conta
-        b = InsertarLinFact("scafpc", cadWhere, cadMen, vLlevaRetencion, Mc.Contador)
+        b = InsertarLinFact("scafpc", cadWhere, cadMen, vLlevaRetencion, Mc.Contador, FraIntraCom2)
         cadMen = "Insertando Lin. Factura: " & cadMen
 
         
@@ -2348,7 +2362,7 @@ End Function
 
 
 'Si es intracomunitaria devolvera el anofacpr para la generacion de las "extras"
-Private Function InsertarCabFactProv(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String, ByRef LlevaRetencion As Boolean, ByRef vCF As cContabilizarFacturas, ByRef EsFacturaIntracom2 As String, ByRef ContadorContaActual As Boolean) As Boolean
+Private Function InsertarCabFactProv(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String, ByRef LlevaRetencionAgricola As Boolean, ByRef vCF As cContabilizarFacturas, ByRef EsFacturaIntracom2 As String, ByRef ContadorContaActual As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim SQL As String
@@ -2361,6 +2375,9 @@ Dim Aux As String
 Dim TipoOpera As Byte
 Dim CadenaInsertFaclin2     As String
 Dim ImporAux As Currency
+
+
+
     On Error GoTo EInsertar
        
     
@@ -2401,13 +2418,16 @@ Dim ImporAux As Currency
             
             'SI es facutra socio y tiene retencion
             DatosRetencion = ""
-            If Rs!TipoRet = 1 Then 'FACTURA SOCIO, con retencion
-                If DBLet(Rs!ImpRet, "N") <> 0 Then
+            LlevaRetencionAgricola = False
+            If Rs!TipoRet = 1 Then
+                If DBLet(Rs!impret, "N") <> 0 Then
                     'El total factura es totafac+ retencion
-                    DatosRetencion = Rs!Codmacta & "|" & Rs!ImpRet & "|"
-                    TotalFac = TotalFac + Rs!ImpRet  'Luego en las lineas va la resta de este importe
-                    LlevaRetencion = True
+                    DatosRetencion = Rs!Codmacta & "|" & Rs!impret & "|" & Rs!PorRet & "|"
+                    TotalFac = TotalFac + Rs!impret
+                    LlevaRetencionAgricola = True
                 End If
+            Else
+                If Not IsNull(Rs!impret) Then DatosRetencion = Rs!impret & "|" & Rs!PorRet & "|"
             End If
             
             Nulo2 = "N"
@@ -2474,23 +2494,20 @@ Dim ImporAux As Currency
                 '  GENERAL // INTRACOMUNITARIA // EXPORT. - IMPORT. //   INTERIOR EXENTA   // INV. SUJETO PASIVO   // R.E.A.
                 'Si es una factura con IVA 0%
                 TipoOpera = 0
-                If Rs!porciva1 = 0 And IsNull(Rs!porciva2) And IsNull(Rs!porciva3) Then
+                If DBLet(Rs!InvSujPas, "N") = 1 Then
+                    TipoOpera = 4
                     
+                Else
                     
-                                    
-                    'Si el proveedor es INTRACOM, marco la de extranjero
-                    If DBLet(Rs!InvSujPas, "N") = 1 Then
-                         TipoOpera = 4
-                    Else
                          'IVA ES CERO
-                         If Rs!tipprove = 1 Then
+                        If Rs!tipprove = 1 Then
                             'intracomunitaria
                             TipoOpera = 1
                         Else
                             'Exstranjero
-                            TipoOpera = 2
+                             If Rs!tipprove = 1 Then TipoOpera = 2
                         End If
-                    End If
+                    
                 
                 End If
                 
@@ -2576,26 +2593,38 @@ Dim ImporAux As Currency
                         
                 
                   
+                  
+                  
+                EsFacturaIntracom2 = ""
+                If DBLet(Rs!tipprove, "N") = 1 Then
+                    'OK es intracomunitaria
+                    EsFacturaIntracom2 = Rs!TipoIVA1
+                End If
+                  
                 
             End If
-            
+
             
             'Leemos sobre el parametro: DatosRetencion
-            If DatosRetencion = "" Then
+            Aux = ""
+            If DatosRetencion <> "" Then
+                If Not LlevaRetencionAgricola Then Aux = "S"                              'RETENCION NORMAL
+            End If
+            If Aux = "" Then
                 'NULOS
                 SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
                 If vParamAplic.ContabilidadNueva Then SQL = SQL & "0"
             Else
+                ' retfacpr , trefacpr, cuereten,     tiporeten   'SOLO EN LA NUEVA
                 'TIene valor
-                SQL = SQL & DBSet(RecuperaValor(DatosRetencion, 1), "N") & "," & DBSet(RecuperaValor(DatosRetencion, 2), "N") & ",'" & vParamAplic.CtaReten & "',"
-                If vParamAplic.ContabilidadNueva Then Stop: MsgBox "Falta tipo": SQL = SQL & ValorNulo
+                
+                SQL = SQL & DBSet(RecuperaValor(DatosRetencion, 2), "T") & "," & DBSet(RecuperaValor(DatosRetencion, 1), "N") & ",'" & vParamAplic.CtaReten & "',"
+                If vParamAplic.ContabilidadNueva Then SQL = SQL & "0"
             End If
             
-            If vParamAplic.ContabilidadNueva Then
-                
-            Else
-                SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
-            End If
+            ' Antigua: numdiari,fechaent,numasien,nodeducible)
+            If Not vParamAplic.ContabilidadNueva Then SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            
             Cad = Cad & "(" & SQL & ")"
             
             
@@ -2635,6 +2664,8 @@ Dim ImporAux As Currency
             SQL = "INSERT INTO tmpinformes (codusu,codigo1,nombre1,nombre2,importe1) VALUES (" & vUsu.codigo & "," & Mc.Contador
             SQL = SQL & ",'" & DevNombreSQL(Rs!NumFactu) & " @ " & Format(Rs!FecFactu, "dd/mm/yyyy") & "','" & DevNombreSQL(Rs!nomprove) & "'," & Rs!Codprove & ")"
             conn.Execute SQL
+        Else
+            Err.Raise 513, , "Error obteniendo contador NºRegistro"
         End If
     End If
     Rs.Close
@@ -2651,7 +2682,7 @@ End Function
 
 
 
-Public Sub FechasEjercicioConta(FIni As String, FFin As String)
+Public Sub FechasEjercicioConta(FIni As String, Ffin As String)
 'Dim RS As ADODB.Recordset
 '
 '    On Error GoTo EFechas

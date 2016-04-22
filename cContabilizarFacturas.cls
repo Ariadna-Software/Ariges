@@ -446,7 +446,7 @@ Dim Cliente As String
             
             A_Donde = "IVA " & numlinea - 1
             Cad3 = "cuentarr"
-            cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!codigiva, "N", Cad3)
+            cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!CodigIVA, "N", Cad3)
             If cad2 <> "" Then
                 SQL = numlinea & ",'" & cad2 & "'," & DocConcAmp
                 cad2 = CadenaImporte(False, RF!impoiva, Importe0)
@@ -961,6 +961,21 @@ Dim contLinea As Integer
 Dim ColumnaIVA As String
 Dim DatosRetencion  As String
     
+    
+'Marzo 2015
+' Factura inversion de sujeto pasivo
+' Por cada IVA entrará un linea mas , ya que ademas del soportado, pondremos el repercutido
+'Dim InversionSujetoPasivo As Boolean    ver bajo feb2016
+'Febrero 2016
+'El tratamiento contable de las facturas intracomunitarias es el mismo
+'Por lo tanto La variable que era InversionSujetoPasivo pasa a ser NoSumaIVA
+Dim NoSumaIVA As Boolean
+
+    
+    
+    
+    
+    
     On Error GoTo EIntegraLaFactura2
     
     
@@ -971,7 +986,7 @@ Dim DatosRetencion  As String
     
     If vParamAplic.ContabilidadNueva Then
         SQL = "SELECT numserie, numfactu numfacpr, fecfactu fecfacpr,factpro.codmacta,fecharec fecrecpr,"
-        SQL = SQL & " totfacpr ,factpro.observa confacpr,cuereten  , trefacpr ,numasien,cuentas.nommacta"
+        SQL = SQL & " totfacpr ,factpro.observa confacpr,cuereten  , trefacpr ,numasien,cuentas.nommacta,codopera"
         SQL = SQL & " FROM factpro,cuentas "
         SQL = SQL & " WHERE numserie='" & SerieFraPro
         SQL = SQL & "' AND numregis= " & numRegis
@@ -1022,6 +1037,14 @@ Dim DatosRetencion  As String
     SQL = SQL & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & NumAsiento
     SQL = SQL & "," & DBSet(Observaciones, "T", "S") & ")"
     miConexion.Execute SQL
+    
+    
+    If vParamAplic.ContabilidadNueva Then
+        NoSumaIVA = RF!codopera = 3 Or RF!codopera = 1  'Febrerp 2016
+    Else
+        NoSumaIVA = RF!extranje = 3 Or RF!extranje = 1  'Febrerp 2016
+    End If
+    
     
     
     'Lineas fijas, es decir la linea de cliente, importes y tal y tal
@@ -1114,11 +1137,11 @@ Dim DatosRetencion  As String
     
     
     DatosRetencion = ""
-    If Not IsNull(RF!cuereten) Then DatosRetencion = RF!cuereten & "|" & RF!trefaccl & "|"
+    If Not IsNull(RF!cuereten) Then DatosRetencion = RF!cuereten & "|" & RF!trefacpr & "|"
     
     '-------------------------------------------------------------------
     'LINEA Cliente
-    SQL = numlinea & ",'" & RF!Codmacta & "',"
+    SQL = contLinea & ",'" & RF!Codmacta & "',"
     
     
     
@@ -1158,7 +1181,7 @@ Dim DatosRetencion  As String
             
             A_Donde = "IVA " & contLinea - 1
             Cad3 = "cuentasr"
-            cad2 = DevuelveDesdeBDModulo(ColumnaIVA, "tiposiva", "codigiva", RF!codigiva, "N", Cad3)
+            cad2 = DevuelveDesdeBDModulo(ColumnaIVA, "tiposiva", "codigiva", RF!CodigIVA, "N", Cad3)
             If cad2 <> "" Then
                 SQL = contLinea & ",'" & cad2 & "'," & DocConcAmp
                 cad2 = CadenaImporte(True, RF!impoiva, Importe0)
@@ -1224,7 +1247,8 @@ Dim DatosRetencion  As String
             
                     'MARZO 2015
             '=================================================================================
-            If DBLet(RF!extranje, "N") = 3 Then
+            'If DBLet(RF!extranje, "N") = 3 Then
+            If NoSumaIVA Then
                 Cad3 = "cuentarr"
                 cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!tp1facpr, "N", Cad3)
                 
@@ -1300,7 +1324,8 @@ Dim DatosRetencion  As String
                 
                 'MARZO 2015
                 '=================================================================================
-                If DBLet(RF!extranje, "N") = 3 Then
+                'If DBLet(RF!extranje, "N") = 3 Then
+                If NoSumaIVA Then
                     Cad3 = "cuentarr"
                     cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!tp2facpr, "N", Cad3)
                     
@@ -1374,7 +1399,8 @@ Dim DatosRetencion  As String
                 
                 'MARZO 2015
                 '=================================================================================
-                If DBLet(RF!extranje, "N") = 3 Then
+                'If DBLet(RF!extranje, "N") = 3 Then
+                If NoSumaIVA Then
                     Cad3 = "cuentarr"
                     cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!tp3facpr, "N", Cad3)
                     

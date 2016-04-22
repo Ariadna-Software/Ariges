@@ -166,8 +166,8 @@ Begin VB.Form frmComHcoFacturas2
    End
    Begin MSAdodcLib.Adodc Data2 
       Height          =   330
-      Left            =   7320
-      Top             =   3720
+      Left            =   960
+      Top             =   4320
       Visible         =   0   'False
       Width           =   1335
       _ExtentX        =   2355
@@ -213,8 +213,8 @@ Begin VB.Form frmComHcoFacturas2
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
-      Left            =   7560
-      Top             =   3720
+      Left            =   9840
+      Top             =   3840
       Visible         =   0   'False
       Width           =   1335
       _ExtentX        =   2355
@@ -1102,12 +1102,13 @@ Begin VB.Form frmComHcoFacturas2
          Width           =   11055
          Begin VB.CheckBox chkISP 
             Caption         =   "Inversión sujeto pasivo"
-            Height          =   330
-            Left            =   8280
+            Enabled         =   0   'False
+            Height          =   255
+            Left            =   8520
             TabIndex        =   120
-            Tag             =   "Descuento General|N|N|||scafpc|InvSujPas||N|"
+            Tag             =   "ISP|N|N|||scafpc|InvSujPas|||"
             Top             =   1440
-            Width           =   2175
+            Width           =   2295
          End
          Begin VB.TextBox Text2 
             BackColor       =   &H80000018&
@@ -2047,17 +2048,17 @@ Private Sub chkDocArchi_KeyPress(KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub chkISP_Click()
-    If Modo = 1 Then
-        CheckCadenaBusqueda chkISP, BuscaChekc
-    ElseIf Modo = 4 Then
-        ActualizarDatosFactura
-    End If
-End Sub
+'Private Sub chkISP_Click()
+'    If Modo = 1 Then
+'        CheckCadenaBusqueda chkISP, BuscaChekc
+'    ElseIf Modo = 4 Then
+'        ActualizarDatosFactura
+'    End If
+'End Sub
 
-Private Sub chkISP_KeyDown(KeyCode As Integer, Shift As Integer)
-    KEYdown KeyCode
-End Sub
+'Private Sub chkISP_KeyDown(KeyCode As Integer, Shift As Integer)
+'    KEYdown KeyCode
+'End Sub
 
 
 
@@ -2582,6 +2583,7 @@ Private Sub Form_Load()
     'Solo sera visible SI (y solo si) en paretros.ctaretnecion <>""
     FrmRetencionSocios.visible = vParamAplic.CtaReten <> ""
     Me.chkISP.visible = vParamAplic.InvSujetoPasivo
+
       
     LimpiarCampos   'Limpia los campos TextBox
      
@@ -2643,7 +2645,7 @@ On Error Resume Next
     '### a mano
     Me.Check1.Value = 0
     Me.chkDocArchi.Value = 0
-    Me.chkISP.Value = 0
+
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -2839,13 +2841,13 @@ End Sub
 Private Sub mnModificar_Click()
     If Data1.Recordset.EOF Then Exit Sub
     
-    'Si son facturas de liquidacion de soccios NO dejamos modificarlas
-    If Me.FrmRetencionSocios.visible Then
-        If DBLet(Data1.Recordset!PorRet, "N") > 0 Then
-            MsgBox "Factura liquidación socios. No puede modificarse", vbExclamation
-            Exit Sub
-        End If
-    End If
+'    'Si son facturas de liquidacion de soccios NO dejamos modificarlas
+'    If Me.FrmRetencionSocios.visible Then
+'        If DBLet(Data1.Recordset!PorRet, "N") > 0 Then
+'            MsgBox "Factura liquidación socios. No puede modificarse", vbExclamation
+'            Exit Sub
+'        End If
+'    End If
 
 
     If Modo = 5 Then 'Modificar lineas
@@ -3243,7 +3245,12 @@ Dim b As Boolean
     
     
     Me.Check1.Enabled = (Modo = 1 Or Modo = 3 Or Modo = 4)
-    Me.chkISP.Enabled = Check1.Enabled
+    If Me.chkISP.visible Then Me.chkISP.Enabled = Check1.Enabled
+    
+    
+    
+    
+    
     
     b = (Modo <> 1)
     'Campos Nº Factura bloqueado y en azul
@@ -4137,7 +4144,11 @@ On Error GoTo EContab
         'comprobar en la contabilidad si esta contabilizada
         Cta = DevuelveDesdeBDNew(conAri, "sprove", "codmacta", "codprove", Text1(2).Text, "N")
         If Cta <> "" Then
-            numasien = DevuelveDesdeBDNew(conConta, "cabfactprov", "numasien", "codmacta", Cta, "T", , "numfacpr", Text1(0).Text, "T", "fecfacpr", Text1(1).Text, "F")
+            If vParamAplic.ContabilidadNueva Then
+                numasien = DevuelveDesdeBDNew(conConta, "factpro", "numasien", "codmacta", Cta, "T", , "numfactu", Text1(0).Text, "T", "fecfactu", Text1(1).Text, "F")
+            Else
+                numasien = DevuelveDesdeBDNew(conConta, "cabfactprov", "numasien", "codmacta", Cta, "T", , "numfacpr", Text1(0).Text, "T", "fecfacpr", Text1(1).Text, "F")
+            End If
             If numasien <> "" Then
                 FactContabilizada = True
                 MsgBox "La factura esta contabilizada y no se puede modificar ni eliminar.", vbInformation
@@ -4266,7 +4277,7 @@ Dim cadSel As String
     vFactu.FijarTipoIvaProveedor CLng(Val(Text1(2).Text))
     
     
-    If vFactu.CalcularDatosFactura2(cadSel, "scafpa", "slifpc", CDate(Text1(1).Text), Me.chkISP.Value = 1) Then
+    If vFactu.CalcularDatosFactura2(cadSel, "scafpa", "slifpc", CDate(Text1(1).Text), Val(Data1.Recordset!InvSujPas) = 1) Then
         Text1(14).Text = vFactu.BrutoFac
         Text1(15).Text = vFactu.ImpPPago
         Text1(16).Text = vFactu.ImpGnral
@@ -4365,3 +4376,4 @@ Private Sub LanazarVincularAlbaranes()
     frmComCasarAlbaranes.Codprove = Data2.Recordset!Codprove
     frmComCasarAlbaranes.Show vbModal
 End Sub
+

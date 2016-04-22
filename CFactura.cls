@@ -3390,11 +3390,20 @@ Private Function CalcularDesplazamiento(cadWhere As String, NomTabla As String) 
 'calcula en vbles: Totalkm, Ampliacion los valores para insertar en linea factura
 Dim Rs As ADODB.Recordset
 Dim SQL As String
+Dim CalcularKM As Boolean
     
+    
+   
     CalcularDesplazamiento = False
     On Error GoTo EDesp
     
-    If codtipom = "FAV" Or codtipom = "FAR" Then
+    CalcularKM = False
+    If InStr(1, cadWhere, "scaalb") > 0 Then
+        'Esta facturando
+        If codtipom = "FAV" Or codtipom = "FAR" Then CalcularKM = True
+    End If
+    
+    If CalcularKM Then
         'Obtenemos el total de km a facturar en los albaranes seleccionados
         SQL = "SELECT fechaalb,sum(cantidkm)" ',sum(sclien.kilometr) "
         SQL = SQL & " FROM " & NomTabla '& " INNER JOIN sclien ON " & NomTabla & ".codclien=sclien.codclien "

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmComFacturar 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Facturas Compra Proveedores"
@@ -20,7 +20,7 @@ Begin VB.Form frmComFacturar
    Begin VB.Frame FrameFactura 
       Height          =   5220
       Left            =   7080
-      TabIndex        =   17
+      TabIndex        =   18
       Top             =   2000
       Width           =   5055
       Begin VB.CheckBox chkLlevarContab 
@@ -89,7 +89,7 @@ Begin VB.Form frmComFacturar
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   56
+         TabIndex        =   57
          Top             =   4200
          Visible         =   0   'False
          Width           =   1575
@@ -99,7 +99,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   55
+         TabIndex        =   56
          Top             =   2160
          Width           =   255
       End
@@ -108,7 +108,7 @@ Begin VB.Form frmComFacturar
          Height          =   375
          Index           =   1
          Left            =   1200
-         TabIndex        =   54
+         TabIndex        =   55
          Top             =   4680
          Width           =   975
       End
@@ -117,7 +117,7 @@ Begin VB.Form frmComFacturar
          Height          =   375
          Index           =   0
          Left            =   120
-         TabIndex        =   53
+         TabIndex        =   54
          Top             =   4680
          Width           =   975
       End
@@ -127,7 +127,7 @@ Begin VB.Form frmComFacturar
          Index           =   24
          Left            =   3480
          MaxLength       =   5
-         TabIndex        =   50
+         TabIndex        =   51
          Tag             =   "Impret|N|S|||scafac|impret|#,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   3360
@@ -139,7 +139,7 @@ Begin VB.Form frmComFacturar
          Index           =   23
          Left            =   1200
          MaxLength       =   5
-         TabIndex        =   49
+         TabIndex        =   50
          Tag             =   "PorRet|N|S|0||scafac|PorRet|#0.00|N|"
          Text            =   "Text1 7"
          Top             =   3360
@@ -152,7 +152,7 @@ Begin VB.Form frmComFacturar
          Index           =   9
          Left            =   3480
          MaxLength       =   15
-         TabIndex        =   41
+         TabIndex        =   42
          Tag             =   "Importe IVA 1|N|N|0||scafac|imporiv1|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   1350
@@ -164,7 +164,7 @@ Begin VB.Form frmComFacturar
          Index           =   8
          Left            =   3480
          MaxLength       =   15
-         TabIndex        =   40
+         TabIndex        =   41
          Tag             =   "Base Imponible 3|N|N|0||scafac|baseimp3|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   900
@@ -176,7 +176,7 @@ Begin VB.Form frmComFacturar
          Index           =   7
          Left            =   3480
          MaxLength       =   15
-         TabIndex        =   39
+         TabIndex        =   40
          Tag             =   "Base Imponible 2 |N|N|0||scafac|baseimp2|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   570
@@ -188,7 +188,7 @@ Begin VB.Form frmComFacturar
          Index           =   6
          Left            =   3480
          MaxLength       =   15
-         TabIndex        =   37
+         TabIndex        =   38
          Tag             =   "Base Imponible 1|N|N|0||scafac|baseimp1|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   240
@@ -200,7 +200,7 @@ Begin VB.Form frmComFacturar
          Index           =   12
          Left            =   600
          MaxLength       =   5
-         TabIndex        =   35
+         TabIndex        =   36
          Tag             =   "% IVA 3|N|S|0|99.90|scafac|porciva3||N|"
          Text            =   "Text1 7"
          Top             =   2805
@@ -212,7 +212,7 @@ Begin VB.Form frmComFacturar
          Index           =   11
          Left            =   600
          MaxLength       =   5
-         TabIndex        =   34
+         TabIndex        =   35
          Tag             =   "& IVA 2|N|S|0|99.90|scafac|porciva2||N|"
          Text            =   "Text1 7"
          Top             =   2475
@@ -224,7 +224,7 @@ Begin VB.Form frmComFacturar
          Index           =   10
          Left            =   600
          MaxLength       =   5
-         TabIndex        =   33
+         TabIndex        =   34
          Tag             =   "% IVA 1|N|S|0|99.90|scafac|porciva1||N|"
          Text            =   "Text1 7"
          Top             =   2160
@@ -236,7 +236,7 @@ Begin VB.Form frmComFacturar
          Index           =   16
          Left            =   1800
          MaxLength       =   15
-         TabIndex        =   27
+         TabIndex        =   28
          Tag             =   "Base Imponible 1|N|N|0||scafac|baseimp1|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   2160
@@ -248,7 +248,7 @@ Begin VB.Form frmComFacturar
          Index           =   13
          Left            =   1185
          MaxLength       =   5
-         TabIndex        =   26
+         TabIndex        =   27
          Tag             =   "% IVA 1|N|S|0|99.90|scafac|porciva1|#0.00|N|"
          Text            =   "Text1 7"
          Top             =   2160
@@ -261,7 +261,7 @@ Begin VB.Form frmComFacturar
          Index           =   19
          Left            =   3480
          MaxLength       =   15
-         TabIndex        =   25
+         TabIndex        =   26
          Tag             =   "Importe IVA 1|N|N|0||scafac|imporiv1|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   2160
@@ -273,7 +273,7 @@ Begin VB.Form frmComFacturar
          Index           =   17
          Left            =   1800
          MaxLength       =   15
-         TabIndex        =   24
+         TabIndex        =   25
          Tag             =   "Base Imponible 2 |N|N|0||scafac|baseimp2|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   2475
@@ -285,7 +285,7 @@ Begin VB.Form frmComFacturar
          Index           =   14
          Left            =   1185
          MaxLength       =   5
-         TabIndex        =   23
+         TabIndex        =   24
          Tag             =   "& IVA 2|N|S|0|99.90|scafac|porciva2|#0.00|N|"
          Text            =   "Text1 7"
          Top             =   2475
@@ -298,7 +298,7 @@ Begin VB.Form frmComFacturar
          Index           =   20
          Left            =   3480
          MaxLength       =   15
-         TabIndex        =   22
+         TabIndex        =   23
          Tag             =   "Importe IVA 2|N|N|0||scafac|imporiv2|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   2475
@@ -310,7 +310,7 @@ Begin VB.Form frmComFacturar
          Index           =   18
          Left            =   1800
          MaxLength       =   15
-         TabIndex        =   21
+         TabIndex        =   22
          Tag             =   "Base Imponible 3|N|N|0||scafac|baseimp3|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   2805
@@ -322,7 +322,7 @@ Begin VB.Form frmComFacturar
          Index           =   15
          Left            =   1200
          MaxLength       =   5
-         TabIndex        =   20
+         TabIndex        =   21
          Tag             =   "% IVA 3|N|S|0|99.90|scafac|porciva3|#0.00|N|"
          Text            =   "Text1 7"
          Top             =   2805
@@ -335,7 +335,7 @@ Begin VB.Form frmComFacturar
          Index           =   21
          Left            =   3480
          MaxLength       =   15
-         TabIndex        =   19
+         TabIndex        =   20
          Tag             =   "Importe IVA 3|N|N|0||scafac|imporiv3|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   2805
@@ -357,7 +357,7 @@ Begin VB.Form frmComFacturar
          Index           =   22
          Left            =   2640
          MaxLength       =   15
-         TabIndex        =   18
+         TabIndex        =   19
          Tag             =   "Total Factura|N|N|0||scafac|totalfac|#,###,###,##0.00|N|"
          Text            =   "Text1 7"
          Top             =   4680
@@ -368,7 +368,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   13
          Left            =   1800
-         TabIndex        =   52
+         TabIndex        =   53
          Top             =   3360
          Width           =   1455
       End
@@ -377,7 +377,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   12
          Left            =   120
-         TabIndex        =   51
+         TabIndex        =   52
          Top             =   3360
          Width           =   1095
       End
@@ -401,7 +401,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   11
          Left            =   3240
-         TabIndex        =   46
+         TabIndex        =   47
          Top             =   900
          Width           =   135
       End
@@ -416,7 +416,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   8
          Left            =   1920
-         TabIndex        =   45
+         TabIndex        =   46
          Top             =   900
          Width           =   1215
       End
@@ -434,7 +434,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   99
          Left            =   3240
-         TabIndex        =   44
+         TabIndex        =   45
          Top             =   570
          Width           =   135
       End
@@ -443,7 +443,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   7
          Left            =   1920
-         TabIndex        =   43
+         TabIndex        =   44
          Top             =   570
          Width           =   1215
       End
@@ -458,7 +458,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   9
          Left            =   1920
-         TabIndex        =   42
+         TabIndex        =   43
          Top             =   1440
          Width           =   1215
       End
@@ -467,7 +467,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   6
          Left            =   1920
-         TabIndex        =   38
+         TabIndex        =   39
          Top             =   240
          Width           =   1335
       End
@@ -476,7 +476,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   5
          Left            =   600
-         TabIndex        =   36
+         TabIndex        =   37
          Top             =   1920
          Width           =   495
       End
@@ -485,7 +485,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   4
          Left            =   1800
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   1920
          Width           =   1215
       End
@@ -494,7 +494,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   33
          Left            =   3480
-         TabIndex        =   31
+         TabIndex        =   32
          Top             =   1950
          Width           =   1335
       End
@@ -512,7 +512,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   36
          Left            =   11880
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   2160
          Width           =   135
       End
@@ -531,7 +531,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   39
          Left            =   3450
-         TabIndex        =   29
+         TabIndex        =   30
          Top             =   4320
          Width           =   1530
       End
@@ -540,7 +540,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   41
          Left            =   1185
-         TabIndex        =   28
+         TabIndex        =   29
          Top             =   1920
          Width           =   495
       End
@@ -548,7 +548,7 @@ Begin VB.Form frmComFacturar
    Begin VB.Frame FrameIntro 
       Height          =   1550
       Left            =   120
-      TabIndex        =   7
+      TabIndex        =   8
       Top             =   385
       Width           =   12015
       Begin VB.CheckBox Check1 
@@ -556,8 +556,8 @@ Begin VB.Form frmComFacturar
          Height          =   375
          Index           =   1
          Left            =   5280
-         TabIndex        =   48
-         Top             =   960
+         TabIndex        =   49
+         Top             =   480
          Visible         =   0   'False
          Width           =   1240
       End
@@ -566,8 +566,8 @@ Begin VB.Form frmComFacturar
          Height          =   375
          Index           =   0
          Left            =   5280
-         TabIndex        =   47
-         Top             =   600
+         TabIndex        =   48
+         Top             =   120
          Value           =   1  'Checked
          Visible         =   0   'False
          Width           =   1240
@@ -579,7 +579,7 @@ Begin VB.Form frmComFacturar
          Left            =   1400
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   16
+         TabIndex        =   17
          Text            =   "Text2"
          Top             =   1000
          Width           =   3735
@@ -602,7 +602,7 @@ Begin VB.Form frmComFacturar
          Left            =   7875
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   14
+         TabIndex        =   15
          Text            =   "Text2"
          Top             =   1000
          Width           =   3615
@@ -614,7 +614,7 @@ Begin VB.Form frmComFacturar
          Left            =   7875
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   13
+         TabIndex        =   14
          Text            =   "Text2"
          Top             =   400
          Width           =   3615
@@ -677,6 +677,24 @@ Begin VB.Form frmComFacturar
          Top             =   400
          Width           =   1245
       End
+      Begin VB.Label lbTipoProve 
+         Caption         =   "asda"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   18
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   495
+         Left            =   5280
+         TabIndex        =   63
+         Top             =   960
+         Width           =   1215
+      End
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   1
@@ -718,7 +736,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   3
          Left            =   3830
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   200
          Width           =   1215
       End
@@ -727,7 +745,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   2
          Left            =   6600
-         TabIndex        =   12
+         TabIndex        =   13
          Top             =   795
          Width           =   1215
       End
@@ -745,7 +763,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   1
          Left            =   6600
-         TabIndex        =   11
+         TabIndex        =   12
          Top             =   195
          Width           =   735
       End
@@ -754,7 +772,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   795
          Width           =   855
       End
@@ -763,7 +781,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   29
          Left            =   2005
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   200
          Width           =   1095
       End
@@ -772,7 +790,7 @@ Begin VB.Form frmComFacturar
          Height          =   255
          Index           =   28
          Left            =   240
-         TabIndex        =   8
+         TabIndex        =   9
          Top             =   200
          Width           =   1095
       End
@@ -828,7 +846,7 @@ Begin VB.Form frmComFacturar
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   6
+      TabIndex        =   7
       Top             =   0
       Width           =   12210
       _ExtentX        =   21537
@@ -867,13 +885,13 @@ Begin VB.Form frmComFacturar
       BorderStyle     =   0  'None
       Height          =   5055
       Left            =   120
-      TabIndex        =   57
+      TabIndex        =   58
       Top             =   2040
       Width           =   6855
       Begin MSComctlLib.ListView ListView1 
          Height          =   4890
          Left            =   0
-         TabIndex        =   58
+         TabIndex        =   6
          Top             =   120
          Width           =   6855
          _ExtentX        =   12091
@@ -1000,6 +1018,8 @@ Private Sub chkInvSujePasivo_Click()
     End If
     CalcularDatosFactura
 End Sub
+
+
 
 Private Sub chkTipoRet_Click()
     Text1_LostFocus 23  'Como si cambaira la retencion
@@ -1151,6 +1171,7 @@ End Sub
 Private Sub LimpiarCampos()
 On Error Resume Next
     limpiar Me
+    lbTipoProve.Caption = ""
     'Aqui va el especifico de cada form es
     '### a mano
     If Err.Number <> 0 Then Err.Clear
@@ -1424,6 +1445,7 @@ Dim C As String
                 
             Else
                 Text2(Index).Text = ""
+                lbTipoProve.Caption = ""
             End If
 
         Case 4 'Cod Trabajador
@@ -1505,7 +1527,7 @@ End Sub
 
 Private Sub PonerModo2(Kmodo As Byte)
 Dim I As Byte, NumReg As Byte
-Dim B As Boolean
+Dim b As Boolean
 On Error GoTo EPonerModo
 
 
@@ -1513,27 +1535,31 @@ On Error GoTo EPonerModo
     
     
     'GEneral
-    B = (Modo2 = 5)
-    FrameFactura.Enabled = B   'Solo habilitado al final
-    Toolbar1.Enabled = Not B
+    b = (Modo2 = 5)
+    FrameFactura.Enabled = b   'Solo habilitado al final
+    Toolbar1.Enabled = Not b
     'Antes. Para que no se quede en gris
     'ListView1.Enabled = Not b
     'para que no se quede el listview en gris
-    FrameList.Enabled = Not B
-    FrameIntro.Enabled = Not B
+    FrameList.Enabled = Not b
+    FrameIntro.Enabled = Not b
     
-    cmdGenerar(0).visible = B
-    cmdGenerar(1).visible = B
+    cmdGenerar(0).visible = b
+    cmdGenerar(1).visible = b
     'chkTipoRet.visible = b
-    If Not B Then
+    If Not b Then
         cmdIVA(0).visible = False
         cmdIVA(1).visible = False
         cmdIVA(2).visible = False
     End If
-    
+        
+    If Modo2 < 5 Then
+        If vParamAplic.InvSujetoPasivo Then Me.chkInvSujePasivo.visible = True
+    End If
+        
     'Modo 2. Hay datos y estamos visualizandolos
     '=========================================
-    B = (Modo2 = 2)
+    b = (Modo2 = 2)
         
                  
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -1585,10 +1611,10 @@ On Error GoTo EPonerModo
     
     
     '---------------------------------------------
-    B = (Modo2 <> 0 And Modo2 <> 2 And Modo2 <> 5)
+    b = (Modo2 <> 0 And Modo2 <> 2 And Modo2 <> 5)
     
     For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = B
+        Me.imgBuscar(I).Enabled = b
     Next I
                     
 
@@ -1819,7 +1845,7 @@ Private Sub CargarAlbaranes()
 'Recupera de la BD y muestra en el Listview todos los albaranes de compra
 'que tiene el proveedor introducido.
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 On Error GoTo ECargar
 
@@ -1837,25 +1863,25 @@ On Error GoTo ECargar
     SQL = SQL & " GROUP BY scaalp.numalbar, scaalp.fechaalb, scaalp.codforpa, scaalp.dtoppago,scaalp.dtognral "
     SQL = SQL & " ORDER BY scaalp.numalbar"
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     InicializarListView
     
-    While Not RS.EOF
+    While Not Rs.EOF
         Set ItmX = ListView1.ListItems.Add()
-        ItmX.Text = RS!NumAlbar
-        ItmX.SubItems(1) = Format(RS!FechaAlb, "dd/mm/yyyy")
-        ItmX.SubItems(2) = Format(RS!codforpa, "000")
-        ItmX.SubItems(3) = RS!nomforpa
-        ItmX.SubItems(4) = Format(RS!DtoPPago, "#0.00")
-        ItmX.SubItems(5) = Format(RS!DtoGnral, "#0.00")
-        ItmX.SubItems(6) = Format(RS!bruto, "#,###,#0.00") '(RAFA/ALZIRA) 12092006
+        ItmX.Text = Rs!NumAlbar
+        ItmX.SubItems(1) = Format(Rs!FechaAlb, "dd/mm/yyyy")
+        ItmX.SubItems(2) = Format(Rs!codforpa, "000")
+        ItmX.SubItems(3) = Rs!nomforpa
+        ItmX.SubItems(4) = Format(Rs!DtoPPago, "#0.00")
+        ItmX.SubItems(5) = Format(Rs!DtoGnral, "#0.00")
+        ItmX.SubItems(6) = Format(Rs!bruto, "#,###,#0.00") '(RAFA/ALZIRA) 12092006
         'Sig
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 ECargar:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando Albaranes", Err.Description
 End Sub
@@ -1932,6 +1958,7 @@ Dim vFactu As CFacturaCom
     
         
     vFactu.FijarTipoIvaProveedor Val(Text1(3).Text)
+    
     If vFactu.CalcularDatosFactura2(cadWhere, "scaalp", "slialp", CDate(Text1(1).Text), Me.chkInvSujePasivo.Value = 1) Then
         Text1(6).Text = vFactu.BrutoFac
         Text1(7).Text = vFactu.ImpPPago
@@ -2029,6 +2056,9 @@ Dim Cad As String
         Exit Sub
     End If
         
+    If vParamAplic.InvSujetoPasivo Then
+        If vProve.TipoProv = 1 Then Me.chkInvSujePasivo.visible = False
+    End If
     
     
     If Not DatosOk Then Exit Sub
@@ -2090,7 +2120,12 @@ Dim CadenaContab As String
         vFactu.CCC_CC = vProve.DigControl
         vFactu.CCC_CTa = vProve.CuentaBan
         vFactu.IBAN = vProve.IBAN
-        vFactu.ISP = Me.chkInvSujePasivo.Value = 1
+        
+        vFactu.ISP = False
+        If Me.chkInvSujePasivo.visible And Me.chkInvSujePasivo.Value = 1 Then vFactu.ISP = True
+        
+        
+        
         If vFactu.TraspasoAlbaranesAFactura(cadWhere, (Check1(0).Value = 1), (Check1(1).Value = 1), False) Then
         
             '------------------------------------------------------------------------------
@@ -2110,23 +2145,34 @@ Dim CadenaContab As String
                 frmListado.NumCod = CadenaContab
                 frmListado.CadTag = cadWhere
                 frmListado.Show vbModal
-                CadenaContab = DevuelveDesdeBD(conAri, "codigo1", "tmpinformes", "codusu", vUsu.Codigo)
+                CadenaContab = DevuelveDesdeBD(conAri, "codigo1", "tmpinformes", "codusu", vUsu.codigo)
                 If CadenaContab = "" Then
-                    CadenaContab = " Numregis ERROR"
+                    
+                    
+                    'Como no se ha contabilizado, pero si que quiero que ponga el venticimento, lo tenog quieu poner a manao
+                    'dav07 @ 01/03/2015
+                    Cad = Text1(0).Text & " @ " & Text1(1).Text
+                    Cad = DBSet(Cad, "T")
+                    Cad = vUsu.codigo & ",0," & Cad & "," & Text1(3).Text & ")"
+                    Cad = "INSERT INTO tmpinformes(codusu,codigo1,nombre1 ,importe1) VALUES (" & Cad
+                    ejecutar Cad, True
+                    
+                    
+                    CadenaContab = " Numregis ERROR. No contabizada"
                 Else
                     CadenaContab = " Numregis " & CadenaContab
                 End If
             Else
                 'NO contabiliza
                 'Con lo cual METER el registro en la tmp a mano
-                conn.Execute "delete from tmpinformes WHERE codusu =" & vUsu.Codigo
+                conn.Execute "delete from tmpinformes WHERE codusu =" & vUsu.codigo
                 Espera 0.1
                 'codusu,codigo1,nombre1 ,importe1
                 
                 'dav07 @ 01/03/2015
                 Cad = Text1(0).Text & " @ " & Text1(1).Text
                 Cad = DBSet(Cad, "T")
-                Cad = vUsu.Codigo & ",0," & Cad & "," & Text1(3).Text & ")"
+                Cad = vUsu.codigo & ",0," & Cad & "," & Text1(3).Text & ")"
                 Cad = "INSERT INTO tmpinformes(codusu,codigo1,nombre1 ,importe1) VALUES (" & Cad
                 conn.Execute Cad
                 Espera 0.2
@@ -2200,10 +2246,10 @@ Dim CadenaContab As String
             
             If vParamAplic.NumeroInstalacion = 1 Then
     
-                Cad = DevuelveDesdeBD(conAri, "count(*)", "sflotas", "codprove", CStr(vProve.Codigo))
+                Cad = DevuelveDesdeBD(conAri, "count(*)", "sflotas", "codprove", CStr(vProve.codigo))
     
                 If Val(Cad) > 0 Then
-                    frmComCasarAlbaranes.CodProve = vProve.Codigo
+                    frmComCasarAlbaranes.Codprove = vProve.codigo
                     frmComCasarAlbaranes.Show vbModal
                 End If
             End If
@@ -2250,7 +2296,7 @@ Private Sub RefrescarAlbaranes()
 Dim I As Integer
 Dim SQL As String
 Dim Itm As ListItem
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
     
 
     For I = 1 To ListView1.ListItems.Count
@@ -2262,15 +2308,15 @@ Dim RS As ADODB.Recordset
         SQL = SQL & " GROUP BY scaalp.numalbar, scaalp.fechaalb, scaalp.codforpa, scaalp.dtoppago,scaalp.dtognral "
         SQL = SQL & " ORDER BY scaalp.numalbar"
 
-        Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-        If Not RS.EOF Then 'Actualizamos los datos de este item en el list
-            ListView1.ListItems(I).SubItems(2) = RS!codforpa
-            ListView1.ListItems(I).SubItems(3) = RS!nomforpa
-            ListView1.ListItems(I).SubItems(4) = RS!DtoPPago
-            ListView1.ListItems(I).SubItems(5) = RS!DtoGnral
-            ListView1.ListItems(I).SubItems(6) = RS!bruto
+        If Not Rs.EOF Then 'Actualizamos los datos de este item en el list
+            ListView1.ListItems(I).SubItems(2) = Rs!codforpa
+            ListView1.ListItems(I).SubItems(3) = Rs!nomforpa
+            ListView1.ListItems(I).SubItems(4) = Rs!DtoPPago
+            ListView1.ListItems(I).SubItems(5) = Rs!DtoGnral
+            ListView1.ListItems(I).SubItems(6) = Rs!bruto
 
         End If
         
@@ -2279,8 +2325,8 @@ Dim RS As ADODB.Recordset
             ListView1_ItemCheck Itm
         End If
 
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
     Next I
     
     'recalcular el total de la factura
@@ -2299,16 +2345,31 @@ End Sub
 
 Private Function PonerDatosProveedor() As String
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open "Select nomprove,sprove.codbanpr,nombanpr from sprove ,sbanpr where sprove.codbanpr= sbanpr.codbanpr  and sprove.codprove =" & Text1(3).Text, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open "Select nomprove,sprove.codbanpr,nombanpr,tipprove from sprove ,sbanpr where sprove.codbanpr= sbanpr.codbanpr  and sprove.codprove =" & Text1(3).Text, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'Devolvemos el nombre del prove y fijamos la cadena del banco
     If miRsAux.EOF Then
         PonerDatosProveedor = ""
         Text1(5).Text = ""
         Text2(5).Text = ""
+        lbTipoProve.Caption = ""
+        
     Else
         PonerDatosProveedor = miRsAux!nomprove
         Text1(5).Text = miRsAux!codbanpr
         Text2(5).Text = miRsAux!nombanpr
+        Select Case miRsAux!tipprove
+        Case 1
+            lbTipoProve.Caption = "INTRA."
+            lbTipoProve.ForeColor = &H80&
+            
+        Case 2
+            lbTipoProve.Caption = "EXTR."
+            lbTipoProve.ForeColor = &H800000
+            
+        Case Else
+            lbTipoProve.Caption = ""
+        End Select
+        
     End If
     miRsAux.Close
     Set miRsAux = Nothing

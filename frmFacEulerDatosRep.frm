@@ -1128,6 +1128,8 @@ End Sub
 Private Sub Form_Load()
 Dim Bloquea As Boolean
 Dim N As Byte
+        Me.Icon = frmPpal.Icon
+    Me.Caption = "Datos albaran Euler"
     
         
     'If Buscar Then
@@ -1262,6 +1264,13 @@ Dim SQL As String
 Dim Campos As String
 Dim Aux As String
 Dim K As Integer
+
+
+    If Not Buscar Then
+        Unload Me
+        Exit Sub
+    End If
+
 
     Campos = CamposSQlFichaReparacion()
     Campos = Replace(Campos, ",", "|")

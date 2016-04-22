@@ -805,8 +805,11 @@ On Error GoTo Error1
                             End If
                         End If
                     End If
-                    
-                    PosicionarData
+                    If codArtic <> "" Then
+                        Unload Me
+                    Else
+                        PosicionarData
+                    End If
                 End If
             End If
     End Select
@@ -877,7 +880,9 @@ Private Sub Form_Activate()
         Text1(0).Text = codArtic
         HacerBusqueda
         
-        
+        If codArtic <> "" And Modo = 2 Then
+            If BLOQUEADesdeFormulario(Me) Then BotonModificar
+        End If
         
 
     End If
@@ -1266,7 +1271,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 7 'Eliminar
                 BotonEliminar
         Case 9
-            frmListado2.Opcion = 34
+            frmListado2.opcion = 34
             frmListado2.Show vbModal
             BotonBuscar
             
@@ -1274,7 +1279,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 10
             'Nuevo aumento % precio
             If vUsu.Nivel > 1 Then Exit Sub
-            frmListado3.Opcion = 62
+            frmListado3.opcion = 62
             frmListado3.Show vbModal
             BotonBuscar
             
