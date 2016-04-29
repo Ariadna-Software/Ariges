@@ -3836,9 +3836,11 @@ Dim Aux As String
             
             'Cuando lleve Registro fitosanitario entonces el modificar articulo "cantidad" sera SI no se ha vendido NADA
             '------------------------------------------------------------------------------
-            If b And ModificaLineas = 2 Then
+            If b And vParamAplic.ManipuladorFitosanitarios2 Then
+            
+            
                 'Modificando
-                If vParamAplic.ManipuladorFitosanitarios2 Then
+                If ModificaLineas = 2 Then
                     
                     cadList = ""
                     'Si cambia cantidad vendida o nº lote entonces comprobaremos
@@ -3864,6 +3866,20 @@ Dim Aux As String
                                 b = False
                             End If
                         End If
+                    End If
+                
+                
+                Else
+                    'Insertando linea
+                    'No puede poner el mismo articulo, lote en el mismo albaran
+
+                    cadList = "numlotes =" & DBSet(Text2(17).Text, "T") & " AND fechaalb = " & DBSet(Data1.Recordset!FechaAlb, "F")
+                    cadList = cadList & " AND codartic = " & DBSet(txtAux(1).Text, "T") & " AND 1"
+                    cadList = DevuelveDesdeBD(conAri, "count(*)", "slialp", cadList, "1")
+                    If Val(cadList) > 0 Then
+                        'NO PUEDE
+                        MsgBox "Ya existe el mismo articulo-lote-albaran ", vbExclamation
+                        b = False
                     End If
                 End If ' manniulador
             End If 'ModificaLineas=2
@@ -4100,16 +4116,33 @@ Dim ImpReciclado As Single
             'si el articulo tiene control de numero de lotes, insertar en la tabla slotes
             If Me.Text2(17).Locked = False Then
                 'si ya existe la linea aumentamos la cantidad entrada
-                SQL = "SELECT COUNT(*) FROM slotes WHERE "
-                SQL = SQL & " codartic=" & DBSet(txtAux(1).Text, "T") & " AND numlotes=" & DBSet(Text2(17).Text, "T") & " AND fecentra=" & DBSet(Text1(1).Text, "F")
-                If RegistrosAListar(SQL) > 0 Then
-                    SQL = "UPDATE slotes SET canentra=canentra + " & DBSet(txtAux(3).Text, "N")
+                SQL = " codartic=" & DBSet(txtAux(1).Text, "T") & " AND numlotes=" & DBSet(Text2(17).Text, "T") & " AND fecentra"
+                SQL = DevuelveDesdeBD(conAri, "canentra", "slotes", SQL, DBSet(Text1(1).Text, "F"), "")
+                If SQL = "" Then SQL = "0"
+                If CCur(SQL) <> 0 Then
+                    
+                    If DBSet(txtAux(3).Text, "N") < 0 Then
+                        SQL = ""
+                    Else
+                        SQL = "+"
+                    End If
+                    SQL = "UPDATE slotes SET canentra=canentra  " & SQL & DBSet(txtAux(3).Text, "N")
+                    
                     SQL = SQL & " WHERE " & " codartic=" & DBSet(txtAux(1).Text, "T") & " AND numlotes=" & DBSet(Text2(17).Text, "T") & " AND fecentra=" & DBSet(Text1(1).Text, "F")
+                    conn.Execute SQL
                 Else
                     SQL = "INSERT INTO slotes (codartic,numlotes,fecentra,canentra,canasign) VALUES ("
                     SQL = SQL & DBSet(txtAux(1).Text, "T") & ", " & DBSet(Text2(17).Text, "T") & ", "
                     'fecha entrada, cantidad entrada y cantidad asignada
-                    SQL = SQL & DBSet(Text1(1).Text, "F") & "," & DBSet(txtAux(3).Text, "N") & ",0)"
+                    SQL = SQL & DBSet(Text1(1).Text, "F") & "," & DBSet(txtAux(3).Text, "N") & ","
+                    
+                    If DBSet(txtAux(3).Text, "N") < 0 Then
+                        'Es un abono. La cantidad "vendida" es la misma que la "cantidad"
+                        ' ya que de este material NO se vende
+                        SQL = SQL & "0)"     'SQL = SQL & DBSet(txtAux(3).Text, "N") & ")"
+                    Else
+                        SQL = SQL & "0)"
+                    End If
                     conn.Execute SQL
                 End If
             End If
@@ -5623,7 +5656,7 @@ Dim nSerie As CNumSerie
     Set nSerie = New CNumSerie
     nSerie.Proveedor = CInt(Text1(4).Text)
     nSerie.NumAlbProve = Text1(0).Text
-    nSerie.fechaCom = Text1(1).Text
+    nSerie.fechacom = Text1(1).Text
     
     
     'Recuperar los Nº Serie de ese articulo cargados en la Temporal

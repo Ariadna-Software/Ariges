@@ -19,6 +19,25 @@ Public NombreCheck As String
 
 Public vbMyMonday
 
+
+
+
+Public Type vParamAplicDef
+   HayDeparNuevo As Integer
+   DireccionesEnvio As Boolean
+End Type
+
+Public vParamAplic As vParamAplicDef
+
+
+Public Type vParamDef
+   CifEmpresa As String
+End Type
+
+Public vParam As vParamDef
+
+
+
 Public Function AbrirConexion() As Boolean
 Dim Cad As String
 On Error GoTo EAbrirConexion
@@ -38,7 +57,7 @@ On Error GoTo EAbrirConexion
     'cad = "DSN=plannertours;DESC=MySQL ODBC 3.51 Driver DSN;DATABASE=plannertours;UID=" & Usuario & ";PASSWORD=" & Pass & ";PORT=3306;OPTION=3;STMT=;"
     
     '---- Laura: 17/10/2006
-    Cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE=vAriges;DATABASE=Ariges6;"
+    Cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE=vAriges;DATABASE=Ariges1;"
     Cad = Cad & ";"   'UID=" & vConfig.User
     Cad = Cad & ";"   'PWD=" & vConfig.password
     Cad = Cad & ";Persist Security Info=true"
@@ -94,6 +113,14 @@ Public Sub Main()
         
         Set vUsu = New Usuario
         
+        vParam.CifEmpresa = "B20899563"
+        vParamAplic.DireccionesEnvio = False
+        vParamAplic.HayDeparNuevo = 0
+        
+        
+        
+        
+        
         If AbrirConexion() = False Then
             MsgBox "La aplicación no puede continuar sin acceso a los datos. ", vbCritical
             End
@@ -129,15 +156,15 @@ End Sub
 
 
 Public Function Espera(Segundos As Single)
-Dim t1
-    t1 = Timer
+Dim T1
+    T1 = Timer
     Do
-    Loop Until Timer - t1 > Segundos
+    Loop Until Timer - T1 > Segundos
 End Function
 
 
 
-Public Function DBSet(vData As Variant, Tipo As String, Optional EsNulo As String) As Variant
+Public Function DBSet(vData As Variant, Tipo As String, Optional esNULO As String) As Variant
 'Establece el valor del dato correcto antes de Insertar en la BD
 'Tipos
 '       T
@@ -161,7 +188,7 @@ Dim ValorNumericoCero As Boolean
             Select Case Tipo
                 Case "T"    'Texto
                     If vData = "" Then
-                        If EsNulo = "N" Then
+                        If esNULO = "N" Then
                             DBSet = "''"
                         Else
                             DBSet = ValorNulo
@@ -186,8 +213,8 @@ Dim ValorNumericoCero As Boolean
                     End If
                     
                     If ValorNumericoCero Then
-                        If EsNulo <> "" Then
-                            If EsNulo = "S" Then
+                        If esNULO <> "" Then
+                            If esNULO = "S" Then
                                 DBSet = ValorNulo
                             Else
                                 DBSet = 0
@@ -210,7 +237,7 @@ Dim ValorNumericoCero As Boolean
 ''                    DBLet = "0:00:00"
 '                     '==Laura
                     If vData = "" Then
-                        If EsNulo = "S" Then
+                        If esNULO = "S" Then
                             DBSet = ValorNulo
                         Else
                             DBSet = "'1900-01-01'"
@@ -221,7 +248,7 @@ Dim ValorNumericoCero As Boolean
 
                 Case "FH" 'Fecha/Hora
                     If vData = "" Then
-                        If EsNulo = "S" Then DBSet = ValorNulo
+                        If esNULO = "S" Then DBSet = ValorNulo
                     Else
                         DBSet = "'" & Format(vData, "yyyy-mm-dd hh:mm:ss") & "'"
                     End If
@@ -248,46 +275,46 @@ End Function
 
 Public Sub NombreSQL(ByRef CADENA As String)
 Dim J As Integer
-Dim i As Integer
+Dim I As Integer
 Dim Aux As String
 
     J = 1
     '-- (RAFA/ALZIRA) 07052006
     Do
-        i = InStr(J, CADENA, "\")
-        If i > 0 Then
-            Aux = Mid(CADENA, 1, i - 1) & "\"
-            CADENA = Aux & Mid(CADENA, i)
-            J = i + 2
+        I = InStr(J, CADENA, "\")
+        If I > 0 Then
+            Aux = Mid(CADENA, 1, I - 1) & "\"
+            CADENA = Aux & Mid(CADENA, I)
+            J = I + 2
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     
 
     J = 1
     Do
-        i = InStr(J, CADENA, "'")
-        If i > 0 Then
-            Aux = Mid(CADENA, 1, i - 1) & "\"
-            CADENA = Aux & Mid(CADENA, i)
-            J = i + 2
+        I = InStr(J, CADENA, "'")
+        If I > 0 Then
+            Aux = Mid(CADENA, 1, I - 1) & "\"
+            CADENA = Aux & Mid(CADENA, I)
+            J = I + 2
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     
 End Sub
 
 Public Function DevNombreSQL(CADENA As String) As String
 Dim J As Integer
-Dim i As Integer
+Dim I As Integer
 Dim Aux As String
     J = 1
     Do
-        i = InStr(J, CADENA, "'")
-        If i > 0 Then
-            Aux = Mid(CADENA, 1, i - 1) & "\"
-            CADENA = Aux & Mid(CADENA, i)
-            J = i + 2
+        I = InStr(J, CADENA, "'")
+        If I > 0 Then
+            Aux = Mid(CADENA, 1, I - 1) & "\"
+            CADENA = Aux & Mid(CADENA, I)
+            J = I + 2
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     DevNombreSQL = CADENA
 End Function
 
@@ -298,30 +325,30 @@ End Function
 '   Cogemos un numero formateado: 1.256.256,98  y deevolvemos 1256256,98
 '   Tiene que venir numérico
 Public Function ImporteFormateado(Importe As String) As Currency
-Dim i As Integer
+Dim I As Integer
 
     If Importe = "" Then
         ImporteFormateado = 0
     Else
         'Primero quitamos los puntos
         Do
-            i = InStr(1, Importe, ".")
-            If i > 0 Then Importe = Mid(Importe, 1, i - 1) & Mid(Importe, i + 1)
-        Loop Until i = 0
+            I = InStr(1, Importe, ".")
+            If I > 0 Then Importe = Mid(Importe, 1, I - 1) & Mid(Importe, I + 1)
+        Loop Until I = 0
         ImporteFormateado = Importe
     End If
 End Function
 Public Function ImporteFormateadoSingle(Importe As String) As Single
-Dim i As Integer
+Dim I As Integer
 
     If Importe = "" Then
         ImporteFormateadoSingle = 0
     Else
         'Primero quitamos los puntos
         Do
-            i = InStr(1, Importe, ".")
-            If i > 0 Then Importe = Mid(Importe, 1, i - 1) & Mid(Importe, i + 1)
-        Loop Until i = 0
+            I = InStr(1, Importe, ".")
+            If I > 0 Then Importe = Mid(Importe, 1, I - 1) & Mid(Importe, I + 1)
+        Loop Until I = 0
         ImporteFormateadoSingle = Importe
     End If
 End Function
@@ -332,13 +359,13 @@ End Function
 'Cambia los puntos de los numeros decimales
 'por comas
 Public Function TransformaComasPuntos(CADENA As String) As String
-Dim i As Integer
+Dim I As Integer
     Do
-        i = InStr(1, CADENA, ",")
-        If i > 0 Then
-            CADENA = Mid(CADENA, 1, i - 1) & "." & Mid(CADENA, i + 1)
+        I = InStr(1, CADENA, ",")
+        If I > 0 Then
+            CADENA = Mid(CADENA, 1, I - 1) & "." & Mid(CADENA, I + 1)
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     TransformaComasPuntos = CADENA
 End Function
 
@@ -447,7 +474,7 @@ Public Sub CargarCombo_Tabla(ByRef Cbo As ComboBox, NomTabla As String, NomCodig
 '(IN) ItemNulo: si es true se añade el primer item con linea en blanco
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim i As Integer
+Dim I As Integer
 
     On Error GoTo ErrCombo
     
@@ -480,11 +507,11 @@ Dim i As Integer
             '- si el codigo NomCodigo en alfanumerico no se puede cargar
             '- el codigo en ItemData y cargamos un indice ficticio
             '- y en el List el campo codigo NomCodigo
-            i = 1
+            I = 1
             While Not RS.EOF
               Cbo.AddItem RS.Fields(0).Value 'campo del codigo
-              Cbo.ItemData(Cbo.NewIndex) = i
-              i = i + 1
+              Cbo.ItemData(Cbo.NewIndex) = I
+              I = I + 1
               RS.MoveNext
             Wend
         End If
@@ -503,27 +530,27 @@ End Sub
 
 'recupera valor desde una cadena con pipes(acabada en pipes)
 'Para ello le decimos el orden  y ya ta
-Public Function RecuperaValor(ByRef CADENA As String, orden As Integer) As String
-Dim i As Integer
+Public Function RecuperaValor(ByRef CADENA As String, Orden As Integer) As String
+Dim I As Integer
 Dim J As Integer
 Dim cont As Integer
 Dim Cad As String
 
-    i = 0
+    I = 0
     cont = 1
     Cad = ""
     Do
-        J = i + 1
-        i = InStr(J, CADENA, "|")
-        If i > 0 Then
-            If cont = orden Then
-                Cad = Mid(CADENA, J, i - J)
-                i = Len(CADENA) 'Para salir del bucle
+        J = I + 1
+        I = InStr(J, CADENA, "|")
+        If I > 0 Then
+            If cont = Orden Then
+                Cad = Mid(CADENA, J, I - J)
+                I = Len(CADENA) 'Para salir del bucle
                 Else
                     cont = cont + 1
             End If
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RecuperaValor = Cad
 End Function
 
@@ -640,7 +667,7 @@ Public Function ContieneCaracterBusqueda(CADENA As String) As Boolean
 ' >,>,>=,: , ....
 'si encuentra algun caracter de busqueda devuelve TRUE y sale
 Dim b As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim CH As String
 
 
@@ -652,10 +679,10 @@ Dim CH As String
     End If
 
     'For i = 1 To Len(cadena)
-    i = 1
+    I = 1
     b = False
     Do
-        CH = Mid(CADENA, i, 1)
+        CH = Mid(CADENA, I, 1)
         Select Case CH
             Case "<", ">", ":", "="
                 b = True
@@ -665,8 +692,8 @@ Dim CH As String
                 b = False
         End Select
     'Next i
-        i = i + 1
-    Loop Until (b = True) Or (i > Len(CADENA))
+        I = I + 1
+    Loop Until (b = True) Or (I > Len(CADENA))
     ContieneCaracterBusqueda = b
 End Function
 
@@ -707,7 +734,7 @@ End Function
 
 '*********** LAURA : 13/09/2005
 Public Function EsEnteroNew(texto As String) As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim C As Integer
 Dim L As Integer
 Dim res As Boolean
@@ -722,24 +749,24 @@ Dim res As Boolean
         C = 0
         L = 1
         Do
-            i = InStr(L, texto, ".")
-            If i > 0 Then
-                L = i + 1
+            I = InStr(L, texto, ".")
+            If I > 0 Then
+                L = I + 1
                 C = C + 1
             End If
-        Loop Until i = 0
+        Loop Until I = 0
         If C > 0 Then res = False
         
         'Si ha puesto mas de una coma y no tiene puntos
         If C = 0 Then
             L = 1
             Do
-                i = InStr(L, texto, ",")
-                If i > 0 Then
-                    L = i + 1
+                I = InStr(L, texto, ",")
+                If I > 0 Then
+                    L = I + 1
                     C = C + 1
                 End If
-            Loop Until i = 0
+            Loop Until I = 0
             If C > 0 Then res = False
         End If
     End If
@@ -1043,14 +1070,14 @@ End Function
 
 
 Public Function QuitarCaracterEnter(vcad As String) As String
-Dim i As Integer
+Dim I As Integer
 
     Do
-        i = InStr(1, vcad, Chr(13))
-        If i > 0 Then 'Hay ENTER
-            vcad = Mid(vcad, 1, i - 1) & Mid(vcad, i + 2)
+        I = InStr(1, vcad, Chr(13))
+        If I > 0 Then 'Hay ENTER
+            vcad = Mid(vcad, 1, I - 1) & Mid(vcad, I + 2)
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     QuitarCaracterEnter = vcad
 End Function
 
@@ -1061,7 +1088,7 @@ Dim Cad As String
 Dim Aux As String
 Dim CH As String
 Dim fin As Boolean
-Dim i, J As String
+Dim I, J As String
 
 On Error GoTo ErrSepara
 SeparaCampoBusqueda = 1
@@ -1076,14 +1103,14 @@ Case "N"
         CADENA = TransformaComasPuntos(CADENA)
     End If
     '====================
-    i = CararacteresCorrectos(CADENA, "N")
-    If i > 0 Then Exit Function  'Ha habido un error y salimos
+    I = CararacteresCorrectos(CADENA, "N")
+    If I > 0 Then Exit Function  'Ha habido un error y salimos
     'Comprobamos si hay intervalo ':'
-    i = InStr(1, CADENA, ":")
-    If i > 0 Then
+    I = InStr(1, CADENA, ":")
+    If I > 0 Then
         'Intervalo numerico
-        Cad = Mid(CADENA, 1, i - 1)
-        Aux = Mid(CADENA, i + 1)
+        Cad = Mid(CADENA, 1, I - 1)
+        Aux = Mid(CADENA, I + 1)
         If Not IsNumeric(Cad) Or Not IsNumeric(Aux) Then Exit Function  'No son numeros
         'Intervalo correcto
         'Construimos la cadena
@@ -1097,19 +1124,19 @@ Case "N"
                 DevSQL = "1=1"
              Else
                     fin = False
-                    i = 1
+                    I = 1
                     Cad = ""
                     Aux = "NO ES NUMERO"
                     While Not fin
-                        CH = Mid(CADENA, i, 1)
+                        CH = Mid(CADENA, I, 1)
                         If CH = ">" Or CH = "<" Or CH = "=" Then
                             Cad = Cad & CH
                             Else
-                                Aux = Mid(CADENA, i)
+                                Aux = Mid(CADENA, I)
                                 fin = True
                         End If
-                        i = i + 1
-                        If i > Len(CADENA) Then fin = True
+                        I = I + 1
+                        If I > Len(CADENA) Then fin = True
                     Wend
                     'En aux debemos tener el numero
                     If Not IsNumeric(Aux) Then Exit Function
@@ -1120,14 +1147,14 @@ Case "N"
         End If
 Case "F"
      '---------------- FECHAS ------------------
-    i = CararacteresCorrectos(CADENA, "F")
-    If i = 1 Then Exit Function
+    I = CararacteresCorrectos(CADENA, "F")
+    If I = 1 Then Exit Function
     'Comprobamos si hay intervalo ':'
-    i = InStr(1, CADENA, ":")
-    If i > 0 Then
+    I = InStr(1, CADENA, ":")
+    If I > 0 Then
         'Intervalo de fechas
-        Cad = Mid(CADENA, 1, i - 1)
-        Aux = Mid(CADENA, i + 1)
+        Cad = Mid(CADENA, 1, I - 1)
+        Aux = Mid(CADENA, I + 1)
         If Not EsFechaOK(Cad) Or Not EsFechaOK(Aux) Then Exit Function  'Fechas incorrectas
         'Intervalo correcto
         'Construimos la cadena
@@ -1157,19 +1184,19 @@ Case "F"
                   DevSQL = "1=1"
             Else
                 fin = False
-                i = 1
+                I = 1
                 Cad = ""
                 Aux = "NO ES FECHA"
                 While Not fin
-                    CH = Mid(CADENA, i, 1)
+                    CH = Mid(CADENA, I, 1)
                     If CH = ">" Or CH = "<" Or CH = "=" Then
                         Cad = Cad & CH
                         Else
-                            Aux = Mid(CADENA, i)
+                            Aux = Mid(CADENA, I)
                             fin = True
                     End If
-                    i = i + 1
-                    If i > Len(CADENA) Then fin = True
+                    I = I + 1
+                    If I > Len(CADENA) Then fin = True
                 Wend
                 'En aux debemos tener el numero
                 If Not EsFechaOK(Aux) Then Exit Function
@@ -1186,14 +1213,14 @@ Case "F"
     
   Case "H"
      '---------------- FECHAS ------------------
-    i = CararacteresCorrectos(CADENA, "F")
-    If i = 1 Then Exit Function
+    I = CararacteresCorrectos(CADENA, "F")
+    If I = 1 Then Exit Function
     'Comprobamos si hay intervalo ':'
-    i = InStr(1, CADENA, ":")
-    If i > 0 Then
+    I = InStr(1, CADENA, ":")
+    If I > 0 Then
         'Intervalo de fechas
-        Cad = Mid(CADENA, 1, i - 1)
-        Aux = Mid(CADENA, i + 1)
+        Cad = Mid(CADENA, 1, I - 1)
+        Aux = Mid(CADENA, I + 1)
         If Not EsFechaOK(Cad) Or Not EsFechaOK(Aux) Then Exit Function  'Fechas incorrectas
         'Intervalo correcto
         'Construimos la cadena
@@ -1223,19 +1250,19 @@ Case "F"
                   DevSQL = "1=1"
             Else
                 fin = False
-                i = 1
+                I = 1
                 Cad = ""
                 Aux = "NO ES FECHA"
                 While Not fin
-                    CH = Mid(CADENA, i, 1)
+                    CH = Mid(CADENA, I, 1)
                     If CH = ">" Or CH = "<" Or CH = "=" Then
                         Cad = Cad & CH
                         Else
-                            Aux = Mid(CADENA, i)
+                            Aux = Mid(CADENA, I)
                             fin = True
                     End If
-                    i = i + 1
-                    If i > Len(CADENA) Then fin = True
+                    I = I + 1
+                    If I > Len(CADENA) Then fin = True
                 Wend
                 'En aux debemos tener el numero
                 If Not EsFechaOK(Aux) Then
@@ -1265,8 +1292,8 @@ Case "F"
     
 Case "T"
     '---------------- TEXTO ------------------
-    i = CararacteresCorrectos(CADENA, "T")
-    If i = 1 Then Exit Function
+    I = CararacteresCorrectos(CADENA, "T")
+    If I = 1 Then Exit Function
     
     'Comprobamos que no es el mayor
      If CADENA = ">>" Or CADENA = "<<" Then
@@ -1290,9 +1317,9 @@ Case "T"
         'NO es para report
             DevSQL = campo & " LIKE '"
         Else  'Es para report
-            i = InStr(1, CADENA, "*")
+            I = InStr(1, CADENA, "*")
             'Poner Consulta de seleccion para Crystal Report
-            If i > 0 Then
+            If I > 0 Then
                 DevSQL = campo & " LIKE """ & CADENA & """"
             Else
                 DevSQL = campo & " = """ & CADENA & """"
@@ -1302,23 +1329,23 @@ Case "T"
     
     
     'Cambiamos el * por % puesto que en ADO es el caraacter para like
-    i = 1
+    I = 1
     Aux = CADENA
     If Not Left(campo, 1) = "{" Then
       'No es para report
-       While i <> 0
-           i = InStr(1, Aux, "*")
-           If i > 0 Then
-                Aux = Mid(Aux, 1, i - 1) & "%" & Mid(Aux, i + 1)
+       While I <> 0
+           I = InStr(1, Aux, "*")
+           If I > 0 Then
+                Aux = Mid(Aux, 1, I - 1) & "%" & Mid(Aux, I + 1)
             End If
         Wend
     End If
     
     'Cambiamos el ? por la _ pue es su omonimo
-    i = 1
-    While i <> 0
-        i = InStr(1, Aux, "?")
-        If i > 0 Then Aux = Mid(Aux, 1, i - 1) & "_" & Mid(Aux, i + 1)
+    I = 1
+    While I <> 0
+        I = InStr(1, Aux, "?")
+        If I > 0 Then Aux = Mid(Aux, 1, I - 1) & "_" & Mid(Aux, I + 1)
     Wend
     
     
@@ -1366,8 +1393,8 @@ Case "B"
     'Los booleanos. Valores buenos son
     'Verdadero , Falso, True, False, = , <>
     'Igual o distinto
-    i = InStr(1, CADENA, "<>")
-    If i = 0 Then
+    I = InStr(1, CADENA, "<>")
+    If I = 0 Then
         'IGUAL A valor
         Cad = " = "
         Else
@@ -1375,8 +1402,8 @@ Case "B"
         Cad = " <> "
     End If
     'Verdadero o falso
-    i = InStr(1, CADENA, "V")
-    If i > 0 Then
+    I = InStr(1, CADENA, "V")
+    If I > 0 Then
             Aux = "True"
             Else
             Aux = "False"
@@ -1395,7 +1422,7 @@ End Function
 
 
 Private Function CararacteresCorrectos(vcad As String, Tipo As String) As Byte
-Dim i As Integer
+Dim I As Integer
 Dim CH As String
 Dim Error As Boolean
 
@@ -1404,8 +1431,8 @@ Error = False
 Select Case Tipo
 Case "N"
     'Numero. Aceptamos numeros, >,< = :
-    For i = 1 To Len(vcad)
-        CH = Mid(vcad, i, 1)
+    For I = 1 To Len(vcad)
+        CH = Mid(vcad, I, 1)
         Select Case CH
             Case "0" To "9"
             Case "<", ">", ":", "=", ".", " ", "-"
@@ -1413,11 +1440,11 @@ Case "N"
                 Error = True
                 Exit For
         End Select
-    Next i
+    Next I
 Case "T"
     'Texto aceptamos numeros, letras y el interrogante y el asterisco
-    For i = 1 To Len(vcad)
-        CH = Mid(vcad, i, 1)
+    For I = 1 To Len(vcad)
+        CH = Mid(vcad, I, 1)
         Select Case CH
             Case "a" To "z"
             Case "A" To "Z"
@@ -1433,12 +1460,12 @@ Case "T"
                 Error = True
                 Exit For
         End Select
-    Next i
+    Next I
     
 Case "F"
     'Tipo Fecha. Aceptamos Numeros , "/" ,":"
-    For i = 1 To Len(vcad)
-        CH = Mid(vcad, i, 1)
+    For I = 1 To Len(vcad)
+        CH = Mid(vcad, I, 1)
         Select Case CH
             Case "0" To "9"
             Case "<", ">", ":", "/", "="
@@ -1446,12 +1473,12 @@ Case "F"
                 Error = True
                 Exit For
         End Select
-    Next i
+    Next I
 
 Case "B"
     'Numeros , "/" ,":"
-    For i = 1 To Len(vcad)
-        CH = Mid(vcad, i, 1)
+    For I = 1 To Len(vcad)
+        CH = Mid(vcad, I, 1)
         Select Case CH
             Case "0" To "9"
             Case "<", ">", ":", "/", "=", " "
@@ -1459,7 +1486,7 @@ Case "B"
                 Error = True
                 Exit For
         End Select
-    Next i
+    Next I
 End Select
 'Si no ha habido error cambiamos el retorno
 If Not Error Then CararacteresCorrectos = 0
@@ -1471,14 +1498,14 @@ End Function
 
 
 Public Function QuitarCaracterNULL(vcad As String) As String
-Dim i As Integer
+Dim I As Integer
 
     Do
-        i = InStr(1, vcad, vbNullChar)
-        If i > 0 Then 'Hay null
-            vcad = Mid(vcad, 1, i - 1) & Mid(vcad, i + 2)
+        I = InStr(1, vcad, vbNullChar)
+        If I > 0 Then 'Hay null
+            vcad = Mid(vcad, 1, I - 1) & Mid(vcad, I + 2)
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     QuitarCaracterNULL = vcad
 End Function
 
@@ -1613,7 +1640,7 @@ End Function
 Public Function ValorParaSQL(Valor, ByRef vtag As CTag) As String
 Dim Dev As String
 Dim D As Single
-Dim i As Integer
+Dim I As Integer
 Dim V
     Dev = ""
     If Valor <> "" Then
@@ -1915,17 +1942,17 @@ End Sub
 
 Public Sub DesplazamientoVisible(ByRef toolb As Toolbar, iniBoton As Byte, bol As Boolean, nreg As Byte)
 'Oculta o Muestra las botones de  flechas de desplazamiento de la toolbar
-Dim i As Byte
+Dim I As Byte
 
     Select Case nreg
         Case 0, 1 '0 o 1 registro no mostrar los botones despl.
-            For i = iniBoton To iniBoton + 3
-                toolb.Buttons(i).Visible = False
-            Next i
+            For I = iniBoton To iniBoton + 3
+                toolb.Buttons(I).Visible = False
+            Next I
         Case Else '>1 reg, mostrar si bol
-            For i = iniBoton To iniBoton + 3
-                toolb.Buttons(i).Visible = bol
-            Next i
+            For I = iniBoton To iniBoton + 3
+                toolb.Buttons(I).Visible = bol
+            Next I
     End Select
 End Sub
 
@@ -1938,7 +1965,7 @@ Public Sub BloquearText1(ByRef formulario As Form, Modo As Byte)
 'si estamos en modo modificar bloquea solo los campos que son clave primaria
 'IN ->  formulario: formulario en el que se van a poner los controles textbox en modo visualización
 '       Modo: modo del mantenimiento (Insertar, Modificar,Buscar...)
-Dim i As Byte
+Dim I As Byte
 Dim b As Boolean
 Dim vtag As CTag
 On Error Resume Next
@@ -1946,32 +1973,32 @@ On Error Resume Next
     With formulario
         b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'And ModoLineas = 1))
         
-        For i = 0 To .Text1.Count - 1 'En principio todos los TExt1 tiene TAG
+        For I = 0 To .text1.Count - 1 'En principio todos los TExt1 tiene TAG
             Set vtag = New CTag
-            vtag.Cargar .Text1(i)
+            vtag.Cargar .text1(I)
             If vtag.Cargado Then
                 If vtag.EsClave And (Modo = 2 Or Modo = 4 Or Modo = 5) Then
-                    .Text1(i).Locked = True
-                    .Text1(i).BackColor = &H80000018 'amarillo claro
+                    .text1(I).Locked = True
+                    .text1(I).BackColor = &H80000018 'amarillo claro
                 Else
-                    .Text1(i).Locked = Not b  '((Not b) And (Modo <> 1))
+                    .text1(I).Locked = Not b  '((Not b) And (Modo <> 1))
                     If b Then
-                        .Text1(i).BackColor = vbWhite
+                        .text1(I).BackColor = vbWhite
                     Else
-                        .Text1(i).BackColor = &H80000018 'amarillo claro
+                        .text1(I).BackColor = &H80000018 'amarillo claro
                     End If
-                    If Modo = 3 Then .Text1(i).Text = "" 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
+                    If Modo = 3 Then .text1(I).Text = "" 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
                 End If
             Else
-                .Text1(i).Locked = Not b  '((Not b) And (Modo <> 1))
+                .text1(I).Locked = Not b  '((Not b) And (Modo <> 1))
                 If b Then
-                    .Text1(i).BackColor = vbWhite
+                    .text1(I).BackColor = vbWhite
                 Else
-                    .Text1(i).BackColor = &H80000018 'amarillo claro
+                    .text1(I).BackColor = &H80000018 'amarillo claro
                 End If
             End If
         Set vtag = Nothing
-        Next i
+        Next I
         
     End With
     If Err.Number <> 0 Then Err.Clear
@@ -1980,7 +2007,7 @@ End Sub
 
 
 Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, opcion As Byte)
-    Dim i As Integer
+    Dim I As Integer
     
     On Error Resume Next
 
@@ -1988,46 +2015,46 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, opcion A
         If Modo = 1 Then 'BUSQUEDA
             Select Case opcion
                 Case 1 'Para los TEXT1
-                    For i = 0 To .Text1.Count - 1
-                        With .Text1(i)
+                    For I = 0 To .text1.Count - 1
+                        With .text1(I)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = (.HelpContextID * 2) + 1 'el doble + 1
                             End If
                         End With
-                    Next i
+                    Next I
                 
                 Case 3 'para los TXTAUX
-                    For i = 0 To .txtAux.Count - 1
-                        With .txtAux(i)
+                    For I = 0 To .txtAux.Count - 1
+                        With .txtAux(I)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = (.HelpContextID * 2) + 1 'el doble + 1
                             End If
                         End With
-                    Next i
+                    Next I
             End Select
             
         Else 'resto de modos
             Select Case opcion
                 Case 1
-                    For i = 0 To .Text1.Count - 1
-                        With .Text1(i)
+                    For I = 0 To .text1.Count - 1
+                        With .text1(I)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
                             End If
                         End With
-                    Next i
+                    Next I
                 Case 3
-                    For i = 0 To .txtAux.Count - 1
-                        With .txtAux(i)
+                    For I = 0 To .txtAux.Count - 1
+                        With .txtAux(I)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
                             End If
                         End With
-                    Next i
+                    Next I
             End Select
         End If
     End With
@@ -2167,7 +2194,7 @@ End Function
 
 
 
-Public Function ValorDevueltoFormGrid(ByRef Control As Control, ByRef CadenaDevuelta As String, orden As Integer) As String
+Public Function ValorDevueltoFormGrid(ByRef Control As Control, ByRef CadenaDevuelta As String, Orden As Integer) As String
 Dim mTag As CTag
 Dim Cad As String
 Dim Aux As String
@@ -2181,7 +2208,7 @@ Dim Aux As String
         If Control.Tag <> "" Then
             'Si es texto monta esta parte de sql
             If TypeOf Control Is TextBox Then
-                Aux = RecuperaValor(CadenaDevuelta, orden)
+                Aux = RecuperaValor(CadenaDevuelta, Orden)
                 If Aux <> "" Then Cad = mTag.columna & " = " & ValorParaSQL(Aux, mTag)
             'CheckBOX
            ' ElseIf TypeOf Control Is CheckBox Then
@@ -2235,7 +2262,7 @@ Dim mTag As CTag
 Dim Cad As String
 Dim Valor As Variant
 Dim campo As String  'Campo en la base de datos
-Dim i As Integer
+Dim I As Integer
 
 
     On Error GoTo EPonerCamposForma
@@ -2316,14 +2343,14 @@ Dim i As Integer
                 If mTag.Cargado Then
                     campo = mTag.columna
                     Valor = DBLet(vData.Recordset.Fields(campo))
-                    i = 0
-                    For i = 0 To Control.ListCount - 1
-                        If Control.ItemData(i) = Val(Valor) Then
-                            Control.ListIndex = i
+                    I = 0
+                    For I = 0 To Control.ListCount - 1
+                        If Control.ItemData(I) = Val(Valor) Then
+                            Control.ListIndex = I
                             Exit For
                         End If
-                    Next i
-                    If i = Control.ListCount Then Control.ListIndex = -1
+                    Next I
+                    If I = Control.ListCount Then Control.ListIndex = -1
                 End If 'de cargado
             End If 'de <>""
         End If
@@ -2342,7 +2369,7 @@ End Function
 
 
 Public Sub PonerOpcionesMenuGeneral(ByRef formulario As Form)
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 
 On Error GoTo EPonerOpcionesMenuGeneral
@@ -2351,14 +2378,14 @@ On Error GoTo EPonerOpcionesMenuGeneral
 With formulario
 
     'LA TOOLBAR  .--> Requisito, k se llame toolbar1
-    For i = 1 To .Toolbar1.Buttons.Count
-        If .Toolbar1.Buttons(i).Tag <> "" Then
-            J = Val(.Toolbar1.Buttons(i).Tag)
+    For I = 1 To .Toolbar1.Buttons.Count
+        If .Toolbar1.Buttons(I).Tag <> "" Then
+            J = Val(.Toolbar1.Buttons(I).Tag)
             If J < vUsu.Nivel Then
-                .Toolbar1.Buttons(i).Enabled = False
+                .Toolbar1.Buttons(I).Enabled = False
             End If
         End If
-    Next i
+    Next I
 
     'Esto es un poco salvaje. Por si acaso , no existe en este trozo pondremos los errores on resume next
 
@@ -2427,4 +2454,219 @@ On Error Resume Next
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
+
+
+
+Public Function DBLetMemo(vData As Variant) As String
+    On Error Resume Next
+    
+    DBLetMemo = vData
+    
+'    If IsNull(DBLetMemo) Then DBLetMemo = ""
+    
+    If Err.Number <> 0 Then
+        Err.Clear
+        DBLetMemo = ""
+    End If
+End Function
+
+
+
+
+'Funciona para claves primarias formadas por 2 campos
+Public Function DevuelveDesdeBDNew(vBD As Byte, Ktabla As String, kCampo As String, Kcodigo1 As String, valorCodigo1 As String, Optional tipo1 As String, Optional ByRef otroCampo As String, Optional KCodigo2 As String, Optional ValorCodigo2 As String, Optional tipo2 As String, Optional KCodigo3 As String, Optional ValorCodigo3 As String, Optional tipo3 As String) As String
+'IN: vBD --> Base de Datos a la que se accede
+Dim RS As Recordset
+Dim Cad As String
+Dim Aux As String
+    
+On Error GoTo EDevuelveDesdeBDnew
+    DevuelveDesdeBDNew = ""
+'    If valorCodigo1 = "" And ValorCodigo2 = "" Then Exit Function
+    Cad = "Select " & kCampo
+    If otroCampo <> "" Then Cad = Cad & ", " & otroCampo
+    Cad = Cad & " FROM " & Ktabla
+    If Kcodigo1 <> "" Then
+        Cad = Cad & " WHERE " & Kcodigo1 & " = "
+        If tipo1 = "" Then tipo1 = "N"
+    Select Case tipo1
+        Case "N"
+            'No hacemos nada
+            Cad = Cad & Val(valorCodigo1)
+        Case "T"
+            Cad = Cad & DBSet(valorCodigo1, "T")
+        Case "F"
+            Cad = Cad & "'" & valorCodigo1 & "'"
+        Case Else
+            MsgBox "Tipo : " & tipo1 & " no definido", vbExclamation
+            Exit Function
+    End Select
+    End If
+    
+    If KCodigo2 <> "" Then
+        Cad = Cad & " AND " & KCodigo2 & " = "
+        If tipo2 = "" Then tipo2 = "N"
+        Select Case tipo2
+        Case "N"
+            'No hacemos nada
+            If ValorCodigo2 = "" Then
+                Cad = Cad & "-1"
+            Else
+                Cad = Cad & Val(ValorCodigo2)
+            End If
+        Case "T"
+'            cad = cad & "'" & ValorCodigo2 & "'"
+            Cad = Cad & DBSet(ValorCodigo2, "T")
+        Case "F"
+            Cad = Cad & "'" & Format(ValorCodigo2, FormatoFecha) & "'"
+        Case Else
+            MsgBox "Tipo : " & tipo2 & " no definido", vbExclamation
+            Exit Function
+        End Select
+    End If
+    
+    If KCodigo3 <> "" Then
+        Cad = Cad & " AND " & KCodigo3 & " = "
+        If tipo3 = "" Then tipo3 = "N"
+        Select Case tipo3
+        Case "N"
+            'No hacemos nada
+            If ValorCodigo3 = "" Then
+                Cad = Cad & "-1"
+            Else
+                Cad = Cad & Val(ValorCodigo3)
+            End If
+        Case "T"
+            Cad = Cad & "'" & ValorCodigo3 & "'"
+        Case "F"
+            Cad = Cad & "'" & Format(ValorCodigo3, FormatoFecha) & "'"
+        Case Else
+            MsgBox "Tipo : " & tipo3 & " no definido", vbExclamation
+            Exit Function
+        End Select
+    End If
+    
+    
+    'Creamos el sql
+    Set RS = New ADODB.Recordset
+    
+    If vBD = conAri Then 'BD 1: Ariges
+        RS.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Else    'BD 2: Conta
+        RS.Open Cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    End If
+    
+    If Not RS.EOF Then
+        DevuelveDesdeBDNew = DBLet(RS.Fields(0))
+        If otroCampo <> "" Then otroCampo = DBLet(RS.Fields(1))
+    End If
+    RS.Close
+    Set RS = Nothing
+    Exit Function
+    
+EDevuelveDesdeBDnew:
+        MuestraError Err.Number, "Devuelve DesdeBD.", Err.Description
+End Function
+
+
+
+
+
+
+Public Function ComprobarCero(Valor As String) As String
+    If Valor = "" Then
+        ComprobarCero = "0"
+    Else
+        ComprobarCero = Valor
+    End If
+End Function
+
+
+
+
+
+
+Public Function Comprueba_CuentaBan2(CC As String, Optional OcultarMsgbox As Boolean) As Boolean
+Dim Cad As String
+
+    'Validar que la cuenta bancaria es correcta
+    Comprueba_CuentaBan2 = False
+    If Trim(CC) <> "" Then
+        If Not Comprueba_CC(CC, Cad) Then
+            If Not OcultarMsgbox Then MsgBox "La cuenta bancaria no es correcta." & vbCrLf & Cad, vbInformation
+        Else
+            Comprueba_CuentaBan2 = True
+        End If
+    End If
+End Function
+'------------------------------
+
+
+Private Function Comprueba_CC(CC As String, ByRef MensajeError As String) As Boolean
+    Dim Calculado As String
+    Dim I, i2, i3, i4 As Integer
+
+    
+    MensajeError = "Longitud <>20"
+    
+    '-- Esta función comprueba la corrección de un número de cuenta pasado en CC
+    If Len(CC) <> 20 Then Exit Function '-- Las cuentas deben contener 20 dígitos en total
+    MensajeError = ""
+    
+    '-- Calculamos el primer dígito de control
+    I = Val(Mid(CC, 1, 1)) * 4
+    I = I + Val(Mid(CC, 2, 1)) * 8
+    I = I + Val(Mid(CC, 3, 1)) * 5
+    I = I + Val(Mid(CC, 4, 1)) * 10
+    I = I + Val(Mid(CC, 5, 1)) * 9
+    I = I + Val(Mid(CC, 6, 1)) * 7
+    I = I + Val(Mid(CC, 7, 1)) * 3
+    I = I + Val(Mid(CC, 8, 1)) * 6
+    i2 = Int(I / 11)
+    i3 = I - (i2 * 11)
+    i4 = 11 - i3
+    Select Case i4
+        Case 11
+            i4 = 0
+        Case 10
+            i4 = 1
+    End Select
+    
+    Calculado = i4
+    If i4 <> Val(Mid(CC, 9, 1)) Then MensajeError = "N"
+    
+    '-- Calculamos el segundo dígito de control
+    I = Val(Mid(CC, 11, 1)) * 1
+    I = I + Val(Mid(CC, 12, 1)) * 2
+    I = I + Val(Mid(CC, 13, 1)) * 4
+    I = I + Val(Mid(CC, 14, 1)) * 8
+    I = I + Val(Mid(CC, 15, 1)) * 5
+    I = I + Val(Mid(CC, 16, 1)) * 10
+    I = I + Val(Mid(CC, 17, 1)) * 9
+    I = I + Val(Mid(CC, 18, 1)) * 7
+    I = I + Val(Mid(CC, 19, 1)) * 3
+    I = I + Val(Mid(CC, 20, 1)) * 6
+    i2 = Int(I / 11)
+    i3 = I - (i2 * 11)
+    i4 = 11 - i3
+    Select Case i4
+        Case 11
+            i4 = 0
+        Case 10
+            i4 = 1
+    End Select
+    
+    
+    Calculado = Calculado & i4
+    
+    If i4 <> Val(Mid(CC, 10, 1)) Then MensajeError = "N"
+    
+    If MensajeError <> "" Then
+        MensajeError = "CC calculado: " & Calculado & "  -  " & Mid(CC, 9, 2)
+    Else
+        Comprueba_CC = True
+    End If
+
+End Function
+
 

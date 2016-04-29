@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacTPVParamG 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Parámetros generales TPV"
@@ -95,20 +95,32 @@ Begin VB.Form frmFacTPVParamG
       Tab(0).Control(21).Enabled=   0   'False
       Tab(0).Control(22)=   "chkParam(5)"
       Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).ControlCount=   23
+      Tab(0).Control(23)=   "chkParam(6)"
+      Tab(0).Control(23).Enabled=   0   'False
+      Tab(0).ControlCount=   24
       TabCaption(1)   =   "Cab./Pie Ticket"
       TabPicture(1)   =   "frmFacTPVParamG.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(7)"
-      Tab(1).Control(1)=   "Text1(6)"
-      Tab(1).Control(2)=   "Text1(5)"
-      Tab(1).Control(3)=   "Text1(4)"
+      Tab(1).Control(0)=   "Label1(2)"
+      Tab(1).Control(1)=   "Label1(0)"
+      Tab(1).Control(2)=   "Text1(1)"
+      Tab(1).Control(3)=   "Text1(2)"
       Tab(1).Control(4)=   "Text1(3)"
-      Tab(1).Control(5)=   "Text1(2)"
-      Tab(1).Control(6)=   "Text1(1)"
-      Tab(1).Control(7)=   "Label1(0)"
-      Tab(1).Control(8)=   "Label1(2)"
+      Tab(1).Control(5)=   "Text1(4)"
+      Tab(1).Control(6)=   "Text1(5)"
+      Tab(1).Control(7)=   "Text1(6)"
+      Tab(1).Control(8)=   "Text1(7)"
       Tab(1).ControlCount=   9
+      Begin VB.CheckBox chkParam 
+         Caption         =   "Prohibir ticket a cliente (Socios)"
+         Height          =   255
+         Index           =   6
+         Left            =   5160
+         TabIndex        =   38
+         Tag             =   "C|T|S|||spatpvg|ProhibirTicketSocios|||"
+         Top             =   3600
+         Width           =   3135
+      End
       Begin VB.CheckBox chkParam 
          Caption         =   "Prohibir fitosanitarios a clientes varios"
          Height          =   255

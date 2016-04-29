@@ -416,7 +416,7 @@ Public Function LeerDatos(vCodClien As String) As Boolean
 'Leer los datos de un cliente dado
 'Lee de la BD: Ariges, Tabla: sclien
 'OUT: True si lee los datos correctamente
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 
     On Error GoTo ELeer
@@ -427,56 +427,58 @@ Dim SQL As String
     SQL = SQL & " FROM sclien "
     SQL = SQL & " WHERE codclien=" & vCodClien
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    If RS.EOF Then
+    If Rs.EOF Then
         LeerDatos = False
     Else
-        mCodClien = CStr(RS!codclien)
+        mCodClien = CStr(Rs!codclien)
         
-        mNomClien = RS!Nomclien
-        mNomComer = RS!nomcomer
-        mDomClien = DBLet(RS!domclien, "T")
-        mCodpobla = DBLet(RS!codpobla, "T")
-        mPobClien = DBLet(RS!pobclien, "T")
-        mProClien = DBLet(RS!proclien, "T")
-        mNIFClien = DBLet(RS!nifClien, "T")
-        mWwwClien = DBLet(RS!wwwclien, "T")
-        mTfnClien = DBLet(RS!telclie1, "T")
-        mMaiClien = DBLet(RS!maiclie1, "T")
+        mNomClien = Rs!Nomclien
+        mNomComer = Rs!nomcomer
+        mDomClien = DBLet(Rs!domclien, "T")
+        mCodpobla = DBLet(Rs!codpobla, "T")
+        mPobClien = DBLet(Rs!pobclien, "T")
+        mProClien = DBLet(Rs!proclien, "T")
+        mNIFClien = DBLet(Rs!nifClien, "T")
+        mWwwClien = DBLet(Rs!wwwclien, "T")
+        mTfnClien = DBLet(Rs!telclie1, "T")
+        mMaiClien = DBLet(Rs!maiclie1, "T")
        
-        mCodEnvio = CStr(DBLet(RS!CodEnvio, "N"))
-        mCodAgent = CStr(RS!codagent)
-        mCodForpa = CStr(RS!codforpa)
-        mDtoPpago = CStr(RS!DtoPPago)
-        mDtoGnral = CStr(RS!DtoGnral)
-        mTipoFact = RS!tipofact
+        mCodEnvio = CStr(DBLet(Rs!CodEnvio, "N"))
+        mCodAgent = CStr(Rs!codagent)
+        mCodForpa = CStr(Rs!codforpa)
+        mDtoPpago = CStr(Rs!DtoPPago)
+        mDtoGnral = CStr(Rs!DtoGnral)
+        mTipoFact = Rs!tipofact
         
-        mCodbanco = CStr(DBLet(RS!codbanco, "N"))
-        mCodsucur = CStr(DBLet(RS!codsucur, "N"))
-        mDigContr = DBLet(RS!digcontr, "T")
-        mCuentaba = DBLet(RS!cuentaba, "T")
-        mIBAN = DBLet(RS!IBAN, "T")
+        mCodbanco = CStr(DBLet(Rs!codbanco, "N"))
+        mCodsucur = CStr(DBLet(Rs!codsucur, "N"))
+        mDigContr = DBLet(Rs!digcontr, "T")
+        mCuentaba = DBLet(Rs!cuentaba, "T")
+        mIBAN = DBLet(Rs!IBAN, "T")
         
-        mObservac = DBLetMemo(RS!observac)
-        mCliVario = RS!CliVario
+        mObservac = DBLetMemo(Rs!observac)
+        mCliVario = Rs!CliVario
         
-        Tarifa = RS!codTarif
-        Situacion = RS!codsitua
-        mKilometr = DBLet(RS!kilometr, "N")
+        Tarifa = Rs!codTarif
+        Situacion = Rs!codsitua
+        mKilometr = DBLet(Rs!kilometr, "N")
 
-        mFecUltMovim = DBLet(RS!FechaMov, "T")
+        mFecUltMovim = DBLet(Rs!FechaMov, "T")
         
-        mPersonaContacto = DBLet(RS!perclie1, "T")
+        mPersonaContacto = DBLet(Rs!perclie1, "T")
         
-        mZona = CStr(DBLet(RS!codzonas, "N"))
+        mZona = CStr(DBLet(Rs!codzonas, "N"))
         
         
         'Direccion envio habitual
         mDirEnvioHabitual = -1
+        
+        
         If vParamAplic.DireccionesEnvio Then
-            If Not IsNull(RS!coddirenhab) Then mDirEnvioHabitual = RS!coddirenhab
+            If Not IsNull(Rs!coddirenhab) Then mDirEnvioHabitual = Rs!coddirenhab
         End If
         
         
@@ -484,8 +486,8 @@ Dim SQL As String
         LeerDatos = True
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
@@ -493,7 +495,7 @@ ELeer:
     SQL = SQL & "Número: " & Err.Number & vbCrLf
     SQL = SQL & "Descripción: " & Err.Description
     MsgBox SQL, vbExclamation
-    Set RS = Nothing
+    Set Rs = Nothing
     LeerDatos = False
 End Function
 
@@ -502,7 +504,7 @@ End Function
 Public Function LeerDatosCliVario(vNIF As String) As Boolean
 'si es cliente de varios recuperamos los datos nombre,direc,etc.
 'de la tabla de varios: sclvar
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
     
     On Error GoTo ELeer
@@ -512,10 +514,10 @@ Dim SQL As String
     SQL = SQL & " FROM sclvar "
     SQL = SQL & " WHERE nifclien=" & DBSet(vNIF, "T")
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     mPersonaContacto = ""
-    If RS.EOF Then
+    If Rs.EOF Then
         LeerDatosCliVario = False
         
         mNomClien = ""
@@ -527,20 +529,20 @@ Dim SQL As String
         mTfnClien = ""
         MsgBox "No existe el cliente vario: " & vNIF, vbInformation
     Else
-        mNIFClien = RS!nifClien
-        mNomClien = RS!Nomclien
+        mNIFClien = Rs!nifClien
+        mNomClien = Rs!Nomclien
         mNomComer = ""
-        mDomClien = RS!domclien
-        mCodpobla = DBLet(RS!codpobla, "T")
-        mPobClien = DBLet(RS!pobclien, "T")
-        mProClien = DBLet(RS!proclien, "T")
-        mTfnClien = DBLet(RS!telclien, "T")
+        mDomClien = Rs!domclien
+        mCodpobla = DBLet(Rs!codpobla, "T")
+        mPobClien = DBLet(Rs!pobclien, "T")
+        mProClien = DBLet(Rs!proclien, "T")
+        mTfnClien = DBLet(Rs!telclien, "T")
         
         LeerDatosCliVario = True
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
@@ -548,7 +550,7 @@ ELeer:
     SQL = SQL & "Número: " & Err.Number & vbCrLf
     SQL = SQL & "Descripción: " & Err.Description
     MsgBox SQL, vbExclamation
-    Set RS = Nothing
+    Set Rs = Nothing
     LeerDatosCliVario = False
 End Function
 

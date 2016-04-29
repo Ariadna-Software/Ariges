@@ -1245,7 +1245,10 @@ Dim curCambio As Currency
     '-- no se puede hacer un ticket y salimos
     If HayArticuloFitosanitario_O_BloqFamilia(True) Then Exit Sub
     
-    '##
+    
+    
+    
+    
     
     cadImpresion = ""
     CodTipoMov = "FTI" 'factura ticket
@@ -1600,7 +1603,7 @@ Dim Rs As ADODB.Recordset
 Dim vCStock As CStock
 Dim b As Boolean
 Dim ErroresEnStock As String
-
+Dim ErroresEnLotes_DatosInternos As String
     On Error GoTo EInsMov
     
     'Para cada linea de venta insertar el movimiento e actualizar stocks
@@ -1646,12 +1649,25 @@ Dim ErroresEnStock As String
         SQL = "SELECT * FROM slivenlotes WHERE " & SQL
         Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not Rs.EOF
+        
+            If Rs!cantidad > 0 Then
+                SQL = " numlotes= " & DBSet(Rs!numLote, "T")
+                SQL = SQL & " AND codartic= " & DBSet(Rs!codArtic, "T")
+                SQL = SQL & " AND fecentra= " & DBSet(Rs!fecentra, "F") & " AND 1"
+                SQL = DevuelveDesdeBD(conAri, "canentra-vendida", "slotes", SQL, "1")
+                
+                If Rs!cantidad > CCur(SQL) Then
+                    Stop
+                    Espera 0 - 75
+                End If
+            End If
+        
             If Rs!cantidad < 0 Then
                 SQL = "-"
             Else
                 SQL = "+"
             End If
-            SQL = "UPDATE slotes SET vendida=vendida " & SQL & DBSet(Abs(Rs!cantidad), "N")
+            SQL = "UPDATE slotes SET vendida=vendida " & SQL & Abs(DBSet(Rs!cantidad, "N"))
             SQL = SQL & " WHERE numlotes= " & DBSet(Rs!numLote, "T")
             SQL = SQL & " AND codartic= " & DBSet(Rs!codArtic, "T")
             SQL = SQL & " AND fecentra= " & DBSet(Rs!fecentra, "F")
@@ -2082,6 +2098,13 @@ Dim Rs As ADODB.Recordset
     End If
     '---
     
+        
+    If b And vParamTPV.ProhibirTicketSocios And Destino = 0 Then
+        If CLng(Text1(0).Text) <> CLng(vParamTPV.Cliente) Then
+            b = False
+             MsgBox "Esta prohibido los tickets a clientes", vbExclamation
+        End If
+    End If
     
     '--- Laura: 12/04/2007
     '--- comprobar q si es cliente contado el tipo de forma de pago sea efectivo

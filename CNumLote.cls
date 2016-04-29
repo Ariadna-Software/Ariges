@@ -18,7 +18,7 @@ Option Explicit
 
 'Variables locales que contienen valores de propiedad
 Private mNumLotes As String 'num. lote
-Private mCodartic As String 'cod. articulo
+Private mCodArtic As String 'cod. articulo
 Private mFecEntra As String 'fecha de entrada
 Private mCanEntra As Single 'cantidad de entrada
 
@@ -43,11 +43,11 @@ End Property
 '**** cod. Artic
 
 Public Property Let Articulo(ByVal vData As String)
-     mCodartic = vData
+     mCodArtic = vData
 End Property
 
 Public Property Get Articulo() As String
-     Articulo = mCodartic
+     Articulo = mCodArtic
 End Property
 
 
@@ -80,11 +80,11 @@ End Property
 '------------------------------------------------
 
 
-Public Function LeerDatos(vCodArtic As String, vNumLote As String, vFecEntra As String) As Boolean
+Public Function LeerDatos(vCodartic As String, vNumLote As String, vFecEntra As String) As Boolean
 'Leer los datos de un numero de lote
 'Lee de la BD: Ariges, Tabla: slotes
 'OUT: True si lee los datos correctamente
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 
     On Error GoTo ELeer
@@ -92,31 +92,31 @@ Dim SQL As String
     
     SQL = "SELECT codartic,numlotes,fecentra,canentra "
     SQL = SQL & " FROM slotes "
-    SQL = SQL & " WHERE codartic=" & DBSet(vCodArtic, "T") & " AND numlotes=" & DBSet(vNumLote, "T")
+    SQL = SQL & " WHERE codartic=" & DBSet(vCodartic, "T") & " AND numlotes=" & DBSet(vNumLote, "T")
     SQL = SQL & " AND fecentra=" & DBSet(vFecEntra, "F")
     
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    If RS.EOF Then
+    If Rs.EOF Then
         LeerDatos = False
     Else
-        mCodartic = CStr(RS!codArtic)
-        mNumLotes = RS!numlotes
-        mFecEntra = DBLet(RS!fecentra, "F") 'fecha entrada
+        mCodArtic = CStr(Rs!codArtic)
+        mNumLotes = Rs!numlotes
+        mFecEntra = DBLet(Rs!fecentra, "F") 'fecha entrada
         
-        mCanEntra = DBLet(RS!canentra, "N") 'cantidad de entrada
+        mCanEntra = DBLet(Rs!canentra, "N") 'cantidad de entrada
 
         LeerDatos = True
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
-    Set RS = Nothing
+    Set Rs = Nothing
     LeerDatos = False
     
     SQL = "Se ha producido un error. " & "Datos Nº de Lote." & vbCrLf
@@ -145,10 +145,12 @@ Dim SQL As String
         SQL = "DELETE FROM slotes  "
     Else
         'actualizar la cantidad
+        
+        
         SQL = "UPDATE slotes SET canentra=canentra + " & DBSet(vCanti, "N")
     End If
     SQL = SQL & " WHERE codartic=" & DBSet(Articulo, "T") & " AND numlotes=" & DBSet(numLote, "T") & " AND fecentra=" & DBSet(FechaEnt, "F")
-    Conn.Execute SQL
+    conn.Execute SQL
     Eliminar = True
     Exit Function
 

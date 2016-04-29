@@ -1,18 +1,18 @@
 VERSION 5.00
 Begin VB.Form frmUtDeclara 
    Caption         =   "Declarar ROPO"
-   ClientHeight    =   2550
+   ClientHeight    =   2985
    ClientLeft      =   60
    ClientTop       =   450
    ClientWidth     =   4050
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2550
+   ScaleHeight     =   2985
    ScaleWidth      =   4050
    StartUpPosition =   2  'CenterScreen
-   Begin VB.CheckBox Check1 
-      Caption         =   "Verificar datos"
+   Begin VB.CheckBox Check2 
+      Caption         =   "Facturas de tratamientos"
       Height          =   255
       Left            =   240
       TabIndex        =   8
@@ -44,7 +44,7 @@ Begin VB.Form frmUtDeclara
       Height          =   495
       Left            =   2280
       TabIndex        =   2
-      Top             =   1920
+      Top             =   2280
       Width           =   1575
    End
    Begin VB.CommandButton cmdComenzar 
@@ -52,7 +52,7 @@ Begin VB.Form frmUtDeclara
       Height          =   495
       Left            =   360
       TabIndex        =   0
-      Top             =   1920
+      Top             =   2280
       Width           =   1695
    End
    Begin VB.Label Label4 
@@ -113,7 +113,7 @@ Begin VB.Form frmUtDeclara
       Height          =   255
       Left            =   240
       TabIndex        =   1
-      Top             =   1440
+      Top             =   1800
       Width           =   3735
    End
 End
@@ -128,17 +128,17 @@ Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 
 Dim db As BaseDatos
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim rs2 As ADODB.Recordset
 Dim SQL As String
-Dim Cantidad As Double
+Dim cantidad As Double
 Dim resto As Double
 
 Private Sub cmdComenzar_Click()
 
     Screen.MousePointer = vbHourglass
-    lblinf.Caption = "Incio proceso"
-    lblinf.Refresh
+    lblInf.Caption = "Incio proceso"
+    lblInf.Refresh
     'RealizarProceso
     SQL = "A" 'antiguo
     If txtFecha(0).Text <> "" Then
@@ -152,7 +152,7 @@ Private Sub cmdComenzar_Click()
         ProcesoDesdeSlifac
     End If
     
-    lblinf.Caption = ""
+    lblInf.Caption = ""
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -175,6 +175,11 @@ Private Sub Form_Load()
     '-- Por defecto desde y hasta fecha de hoy
     txtFecha(0).Text = Format(Date, "dd/mm/yyyy")
     txtFecha(1).Text = Format(Date, "dd/mm/yyyy")
+    
+    
+    Check2.Value = 0
+    Check2.visible = vParamAplic.NumeroInstalacion = 1
+    
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -223,8 +228,8 @@ Dim fin As Boolean
     End If
     
     
-    lblinf.Caption = "Preparando datos"
-    lblinf.Refresh
+    lblInf.Caption = "Preparando datos"
+    lblInf.Refresh
     
     '-- Eliminamos posibles declaraciones anteriores
     SQL = "delete from declaralom"
@@ -246,8 +251,8 @@ Dim fin As Boolean
     
     
     '-- Ahora vamos a por el gran mogollón
-    lblinf.Caption = "Obtener lineas facturas"
-    lblinf.Refresh
+    lblInf.Caption = "Obtener lineas facturas"
+    lblInf.Refresh
     SQL = "select a.codtipom, a.numfactu, a.fecfactu, a.codartic, a.nomartic, a.cantidad " & _
             ",b.nomclien, b.nifclien,b.domclien direccion,concat(codpobla,' ',pobclien) poblacion " & _
             ",d.descateg" & _
@@ -263,40 +268,40 @@ Dim fin As Boolean
             " and d.codcateg = c.codcateg" & _
             " and a.fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F") & _
             " order by codartic,a.fecfactu desc "
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenKeyset, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenKeyset, adLockOptimistic, adCmdText
     
     DoEvents
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
     
         'Ahora vamos a contar los que hay
         L = 0
-        While Not RS.EOF
-            RS.MoveNext
+        While Not Rs.EOF
+            Rs.MoveNext
             L = L + 1
         Wend
-        RS.MoveFirst
+        Rs.MoveFirst
         
         
-        lblinf.Tag = L
+        lblInf.Tag = L
         L = 1
         ArticuloATratar = ""
-        lblinf.Caption = ""
+        lblInf.Caption = ""
         fin = False
         HaMovidoLinFactura = False
         
         While Not fin
             
             
-            lblinf.Caption = "Registro      " & L & " de " & lblinf.Tag & " "
-            lblinf.Refresh
+            lblInf.Caption = "Registro      " & L & " de " & lblInf.Tag & " "
+            lblInf.Refresh
             If (L Mod 100) = 0 Then DoEvents
             
             
                 
             
-            If RS!codArtic <> ArticuloATratar Then
+            If Rs!codArtic <> ArticuloATratar Then
                 'OK. NUEVO ARTICULO
                 If ArticuloATratar <> "" Then
                     If UtilizadaEnLote > 0 Then
@@ -304,22 +309,22 @@ Dim fin As Boolean
                         SQL = "update slotes set canasign = " & TransformaComasPuntos(CStr(UtilizadaEnLote))
                         SQL = SQL & " where codartic = " & db.texto(rs2!codArtic)
                         SQL = SQL & " and numlotes = " & db.texto(rs2!numlotes)
-                        SQL = SQL & " and fecentra = " & db.Fecha(rs2!FecEntra)
+                        SQL = SQL & " and fecentra = " & db.Fecha(rs2!fecentra)
                         db.ejecutar SQL
                     End If
                 
                     rs2.Close
                 End If
-                ArticuloATratar = RS!codArtic
+                ArticuloATratar = Rs!codArtic
                 
                 
                 'If Rs!codArtic = "010009" Then Stop
                 
                 HaMovidoLinFactura = True
                 SQL = "select a.codartic, a.numlotes, a.fecentra, a.canentra, a.canasign, b.numserie from slotes as a, sartic as b" & _
-                    " where a.codartic = " & db.texto(RS!codArtic) & _
+                    " where a.codartic = " & db.texto(Rs!codArtic) & _
                     " and (a.canentra - a.canasign > 0)" & _
-                    " and a.fecentra <= " & db.Fecha(RS!FecFactu) & _
+                    " and a.fecentra <= " & db.Fecha(Rs!FecFactu) & _
                     " and b.codartic = a.codartic" & _
                     " order by a.fecentra desc"
             
@@ -335,8 +340,8 @@ Dim fin As Boolean
             End If
             
             If HaMovidoLinFactura Then
-                Cantidad = RS!Cantidad
-                resto = Cantidad
+                cantidad = Rs!cantidad
+                resto = cantidad
                 HaMovidoLinFactura = False
             End If
             
@@ -344,19 +349,19 @@ Dim fin As Boolean
                 'NO HAY MAS LOTES
                 SQL = "insert into declaralom(FechaVenta, NombreComercial, Registro, Categoria, Lote, Cantidad, NombreSocio, NIF, NumFactura,EsVenta,Direccion,Poblacion)"
                 SQL = SQL & " values("
-                SQL = SQL & db.Fecha(RS!FecFactu) & "," ' FechaVenta
-                SQL = SQL & db.texto(RS!NomArtic) & "," ' NombreComercial
+                SQL = SQL & db.Fecha(Rs!FecFactu) & "," ' FechaVenta
+                SQL = SQL & db.texto(Rs!NomArtic) & "," ' NombreComercial
                 SQL = SQL & db.texto(" ") & "," ' Registro
-                SQL = SQL & db.texto(RS!descateg) & "," ' Categoria
+                SQL = SQL & db.texto(Rs!descateg) & "," ' Categoria
                 SQL = SQL & db.texto(" ") & "," ' Lote
                 SQL = SQL & db.numero(resto) & "," ' Cantidad
-                SQL = SQL & db.texto(RS!Nomclien) & "," ' NombreSocio
-                SQL = SQL & db.texto(RS!nifClien) & "," ' NIF
-                SQL = SQL & db.texto(RS!codtipom & Format(RS!NumFactu, "0000000")) & "," ' NumFactura
+                SQL = SQL & db.texto(Rs!Nomclien) & "," ' NombreSocio
+                SQL = SQL & db.texto(Rs!nifClien) & "," ' NIF
+                SQL = SQL & db.texto(Rs!codtipom & Format(Rs!NumFactu, "0000000")) & "," ' NumFactura
                 'octubre 2011 EsVenta,Direccion,Poblacion
                             SQL = SQL & "1,"   ' es vebta
-                            SQL = SQL & db.texto(RS!Direccion) & "," ' direccion cliente
-                            SQL = SQL & db.texto(RS!Poblacion) & ")" ' poblacion
+                            SQL = SQL & db.texto(Rs!Direccion) & "," ' direccion cliente
+                            SQL = SQL & db.texto(Rs!Poblacion) & ")" ' poblacion
                 
                 
                 db.ejecutar SQL
@@ -364,14 +369,14 @@ Dim fin As Boolean
                 
             
             Else
-                If rs2!FecEntra > RS!FecFactu Then
+                If rs2!fecentra > Rs!FecFactu Then
                     'Cantidad utilizada
                     If UtilizadaEnLote > 0 Then
                         'UPDATE ENNUmero de lote en canasign
                         SQL = "update slotes set canasign = " & TransformaComasPuntos(CStr(UtilizadaEnLote))
                         SQL = SQL & " where codartic = " & db.texto(rs2!codArtic)
                         SQL = SQL & " and numlotes = " & db.texto(rs2!numlotes)
-                        SQL = SQL & " and fecentra = " & db.Fecha(rs2!FecEntra)
+                        SQL = SQL & " and fecentra = " & db.Fecha(rs2!fecentra)
                         db.ejecutar SQL
                         UtilizadaEnLote = 0
                         
@@ -395,20 +400,20 @@ Dim fin As Boolean
                             
                             SQL = "insert into declaralom(FechaVenta, NombreComercial, Registro, Categoria, Lote, Cantidad, NombreSocio, NIF, NumFactura,EsVenta,Direccion,Poblacion)"
                             SQL = SQL & " values("
-                            SQL = SQL & db.Fecha(RS!FecFactu) & "," ' FechaVenta
-                            SQL = SQL & db.texto(RS!NomArtic) & "," ' NombreComercial
+                            SQL = SQL & db.Fecha(Rs!FecFactu) & "," ' FechaVenta
+                            SQL = SQL & db.texto(Rs!NomArtic) & "," ' NombreComercial
                             SQL = SQL & db.texto(rs2!numSerie) & "," ' Registro
-                            SQL = SQL & db.texto(RS!descateg) & "," ' Categoria
+                            SQL = SQL & db.texto(Rs!descateg) & "," ' Categoria
                             SQL = SQL & db.texto(rs2!numlotes) & "," ' Lote
                             SQL = SQL & TransformaComasPuntos(db.numero(resto)) & "," ' Cantidad
-                            SQL = SQL & db.texto(RS!Nomclien) & "," ' NombreSocio
-                            SQL = SQL & db.texto(RS!nifClien) & "," ' NIF
-                            SQL = SQL & db.texto(RS!codtipom & Format(RS!NumFactu, "0000000")) & "," ' NumFactura
+                            SQL = SQL & db.texto(Rs!Nomclien) & "," ' NombreSocio
+                            SQL = SQL & db.texto(Rs!nifClien) & "," ' NIF
+                            SQL = SQL & db.texto(Rs!codtipom & Format(Rs!NumFactu, "0000000")) & "," ' NumFactura
                             
                             'octubre 2011 EsVenta,Direccion,Poblacion
                             SQL = SQL & "1,"   ' es vebta
-                            SQL = SQL & db.texto(RS!Direccion) & "," ' direccion cliente
-                            SQL = SQL & db.texto(RS!Poblacion) & ")" ' poblacion
+                            SQL = SQL & db.texto(Rs!Direccion) & "," ' direccion cliente
+                            SQL = SQL & db.texto(Rs!Poblacion) & ")" ' poblacion
                             db.ejecutar SQL
                             
                             HaMovidoLinFactura = True
@@ -418,19 +423,19 @@ Dim fin As Boolean
                             If CantidadQuedaEnLote > 0 Then
                                 SQL = "insert into declaralom(FechaVenta, NombreComercial, Registro, Categoria, Lote, Cantidad, NombreSocio, NIF, NumFactura,EsVenta,Direccion,Poblacion)"
                                 SQL = SQL & " values("
-                                SQL = SQL & db.Fecha(RS!FecFactu) & "," ' FechaVenta
-                                SQL = SQL & db.texto(RS!NomArtic) & "," ' NombreComercial
+                                SQL = SQL & db.Fecha(Rs!FecFactu) & "," ' FechaVenta
+                                SQL = SQL & db.texto(Rs!NomArtic) & "," ' NombreComercial
                                 SQL = SQL & db.texto(rs2!numSerie) & "," ' Registro
-                                SQL = SQL & db.texto(RS!descateg) & "," ' Categoria
+                                SQL = SQL & db.texto(Rs!descateg) & "," ' Categoria
                                 SQL = SQL & db.texto(rs2!numlotes) & "," ' Lote
                                 SQL = SQL & TransformaComasPuntos(db.numero(CantidadQuedaEnLote)) & ","  ' Cantidad
-                                SQL = SQL & db.texto(RS!Nomclien) & "," ' NombreSocio
-                                SQL = SQL & db.texto(RS!nifClien) & "," ' NIF
-                                SQL = SQL & db.texto(RS!codtipom & Format(RS!NumFactu, "0000000")) & ","
+                                SQL = SQL & db.texto(Rs!Nomclien) & "," ' NombreSocio
+                                SQL = SQL & db.texto(Rs!nifClien) & "," ' NIF
+                                SQL = SQL & db.texto(Rs!codtipom & Format(Rs!NumFactu, "0000000")) & ","
                                 'octubre 2011 EsVenta,Direccion,Poblacion
                                 SQL = SQL & "1,"   ' es vebta
-                                SQL = SQL & db.texto(RS!Direccion) & "," ' direccion cliente
-                                SQL = SQL & db.texto(RS!Poblacion) & ")" ' poblacion
+                                SQL = SQL & db.texto(Rs!Direccion) & "," ' direccion cliente
+                                SQL = SQL & db.texto(Rs!Poblacion) & ")" ' poblacion
                                 
                                 db.ejecutar SQL
                                 resto = resto - CantidadQuedaEnLote  'nos queda "resto por asignar
@@ -440,7 +445,7 @@ Dim fin As Boolean
                             SQL = "update slotes set canasign = " & TransformaComasPuntos(CStr(UtilizadaEnLote))
                             SQL = SQL & " where codartic = " & db.texto(rs2!codArtic)
                             SQL = SQL & " and numlotes = " & db.texto(rs2!numlotes)
-                            SQL = SQL & " and fecentra = " & db.Fecha(rs2!FecEntra)
+                            SQL = SQL & " and fecentra = " & db.Fecha(rs2!fecentra)
                             db.ejecutar SQL
                                 
                             
@@ -464,10 +469,10 @@ Dim fin As Boolean
             
             
             If HaMovidoLinFactura Then
-                RS.MoveNext
+                Rs.MoveNext
                 L = L + 1
             End If
-            If RS.EOF Then fin = True
+            If Rs.EOF Then fin = True
             
             
         Wend
@@ -477,8 +482,8 @@ Dim fin As Boolean
 '        sql = sql & " from slotes as a, sartic as b, scateg as c"
 '        sql = sql & " where b.codartic = a.codartic"
 '        sql = sql & " and c.codcateg = b.codcateg"
-        lblinf.Caption = "Proveedores"
-        lblinf.Refresh
+        lblInf.Caption = "Proveedores"
+        lblInf.Refresh
         DoEvents
         SQL = "insert into declaralom (FechaVenta,NombreComercial,Registro,Categoria,Lote,Cantidad,NombreSocio,NIF,NumFactura,CanCompra,EsVenta,Direccion,Poblacion)"
         SQL = SQL & "select distinct a.fecentra, b.nomartic, b.numserie, c.descateg, a.numlotes, 0, e.nomprove, e.nifprove, d.document, a.canentra" & _
@@ -496,15 +501,15 @@ Dim fin As Boolean
         
         db.ejecutar SQL
         
-        RS.Close
+        Rs.Close
         
         'Si temenos enlace con ariagro, podemos intentar sacar los tratamientos
         
         
         'If vParamAplic.Ariagro <> "" Then
         If BuscarEnSlifacCampos Then
-            lblinf.Caption = "Enlace ariagro"
-            lblinf.Refresh
+            lblInf.Caption = "Enlace ariagro"
+            lblInf.Refresh
             DoEvents
             Set Col = New Collection
             
@@ -512,22 +517,22 @@ Dim fin As Boolean
             cadFecha = " FechaVenta between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
             L = 0
             SQL = "Select count(*) from declaralom where esventa=1 AND " & cadFecha
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            If Not RS.EOF Then L = DBLet(RS.Fields(0), "N")
-            RS.Close
-            lblinf.Tag = L
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            If Not Rs.EOF Then L = DBLet(Rs.Fields(0), "N")
+            Rs.Close
+            lblInf.Tag = L
             
             SQL = "select FechaVenta,substring(numfactura,1,3),substring(numfactura,4) from declaralom where esventa=1 AND " & cadFecha
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             L = 0
             SQL = ""
-            While Not RS.EOF
+            While Not Rs.EOF
                 L = L + 1
-                lblinf.Caption = "Col   " & Col.Count + 1 & "   Reg  " & L & " de " & lblinf.Tag
-                lblinf.Refresh
+                lblInf.Caption = "Col   " & Col.Count + 1 & "   Reg  " & L & " de " & lblInf.Tag
+                lblInf.Refresh
                 
-                SQL = SQL & ", (" & DBSet(RS!fechaventa, "F") & "," & DBSet(RS.Fields(1), "T") & "," & RS.Fields(2) & ")"
-                RS.MoveNext
+                SQL = SQL & ", (" & DBSet(Rs!fechaventa, "F") & "," & DBSet(Rs.Fields(1), "T") & "," & Rs.Fields(2) & ")"
+                Rs.MoveNext
                 
                 
                 If L > 29 Then
@@ -537,46 +542,46 @@ Dim fin As Boolean
                     L = 0
                 End If
             Wend
-            RS.Close
+            Rs.Close
             
             If L > 0 Then Col.Add SQL
             
             'Para cada subgrupo buscarenmos en slifaccampos
             For L = 1 To Col.Count
-                lblinf.Caption = "Ariagro " & L & " de " & Col.Count
-                lblinf.Refresh
+                lblInf.Caption = "Ariagro " & L & " de " & Col.Count
+                lblInf.Refresh
                 If (L Mod 5) = 0 Then DoEvents
                 SQL = "(" & Mid(Col.item(L), 2) & ")"
                 SQL = "Select * from slifaccampos where (fecfactu,codtipom,numfactu) IN " & SQL
-                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                While Not RS.EOF
+                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                While Not Rs.EOF
                     
                     'FAV0079016
-                    SQL = " AND numfactura = '" & RS!codtipom & Format(RS!NumFactu, "0000000") & "'"
-                    SQL = " WHERE esventa=1 and fechaventa= " & DBSet(RS!FecFactu, "F") & SQL
+                    SQL = " AND numfactura = '" & Rs!codtipom & Format(Rs!NumFactu, "0000000") & "'"
+                    SQL = " WHERE esventa=1 and fechaventa= " & DBSet(Rs!FecFactu, "F") & SQL
                     
-                    SQL = "UPDATE declaraLOM SET cultivo=" & RS!codCampo & SQL
+                    SQL = "UPDATE declaraLOM SET cultivo=" & Rs!codCampo & SQL
                     conn.Execute SQL
-                    RS.MoveNext
+                    Rs.MoveNext
                 Wend
-                RS.Close
+                Rs.Close
                 
             Next
                 
             Set rs2 = Nothing
             Set rs2 = New ADODB.Recordset
-            lblinf.Caption = "Obtener variedad"
-            lblinf.Refresh
+            lblInf.Caption = "Obtener variedad"
+            lblInf.Refresh
             DoEvents
             SQL = "Select cultivo from declaralom where cultivo <>'' GROUP BY 1"
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not RS.EOF
-                lblinf.Caption = "Campo " & RS!cultivo
-                lblinf.Refresh
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not Rs.EOF
+                lblInf.Caption = "Campo " & Rs!cultivo
+                lblInf.Refresh
                 SQL = "select rcampos.codcampo,  variedades.nomvarie"
                 SQL = SQL & " from @#rcampos inner join @#variedades on rcampos.codvarie = variedades.codvarie"
                 SQL = Replace(SQL, "@#", vParamAplic.Ariagro & ".")
-                SQL = SQL & " WHERE codcampo =" & RS!cultivo
+                SQL = SQL & " WHERE codcampo =" & Rs!cultivo
                 
                 rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If rs2.EOF Then
@@ -585,12 +590,12 @@ Dim fin As Boolean
                     SQL = rs2!nomvarie
                 End If
                 rs2.Close
-                SQL = "UPDATE declaralom set cultivo=" & DBSet(SQL, "T") & " WHERE cultivo =" & DBSet(RS!cultivo, "T")
+                SQL = "UPDATE declaralom set cultivo=" & DBSet(SQL, "T") & " WHERE cultivo =" & DBSet(Rs!cultivo, "T")
                 conn.Execute SQL
                 
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
             
         
@@ -605,12 +610,12 @@ Dim fin As Boolean
             Set rs2 = New ADODB.Recordset
             SQL = "select fechaventa, NombreComercial,Registro,Categoria,Lote,NIF,NumFactura"
             SQL = SQL & " from declaralom where esventa=1 and numfactura like 'FAS%' and cultivo is null and tratamiento is null"
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not RS.EOF
-                lblinf.Caption = "Fra: " & RS!NumFactura
-                lblinf.Refresh
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not Rs.EOF
+                lblInf.Caption = "Fra: " & Rs!NumFactura
+                lblInf.Refresh
                 SQL = "select * from scafac1 where codtipom='FAS' "
-                SQL = SQL & " and fecfactu=" & DBSet(RS!fechaventa, "F") & " and numfactu=" & Mid(RS!NumFactura, 4)
+                SQL = SQL & " and fecfactu=" & DBSet(Rs!fechaventa, "F") & " and numfactu=" & Mid(Rs!NumFactura, 4)
                 rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If rs2.EOF Then
                     SQL = ""
@@ -650,17 +655,17 @@ Dim fin As Boolean
                     End If
                     SQL = "UPDATE declaralom set cultivo=" & DBSet(SQL, "T")
                     SQL = SQL & ",tratamiento= " & DBSet(cadFecha, "T", "S")
-                    SQL = SQL & " where fechaventa=" & DBSet(RS!fechaventa, "F") & " and numfactura='" & RS!NumFactura
-                    SQL = SQL & "' and lote=" & DBSet(RS!lote, "T") & " and nif=" & DBSet(RS!NIF, "T")
-                    SQL = SQL & " and registro=" & DBSet(RS!registro, "T") & " and cultivo is null and tratamiento is null"
+                    SQL = SQL & " where fechaventa=" & DBSet(Rs!fechaventa, "F") & " and numfactura='" & Rs!NumFactura
+                    SQL = SQL & "' and lote=" & DBSet(Rs!lote, "T") & " and nif=" & DBSet(Rs!NIF, "T")
+                    SQL = SQL & " and registro=" & DBSet(Rs!registro, "T") & " and cultivo is null and tratamiento is null"
                     
                     conn.Execute SQL
                 
                 End If
                 
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
 
 
@@ -699,14 +704,14 @@ Dim fin As Boolean
                                             "," & Format(Hasta, "dd") & ")"
         frmVisReport.Show vbModal
         '--
-        lblinf.Caption = "Proceso terminado."
-        lblinf.Refresh
+        lblInf.Caption = "Proceso terminado."
+        lblInf.Refresh
         DoEvents
     Else
         MsgBox "NO existen datos entre las fechas", vbExclamation
-        RS.Close
+        Rs.Close
     End If
-    Set RS = Nothing
+    Set Rs = Nothing
     Set rs2 = Nothing
 End Sub
 
@@ -784,6 +789,7 @@ Dim fin As Boolean
 Dim LotesCorrectos As Boolean
 Dim MoverRsPpal As Boolean
 Dim NF As Integer
+Dim SQL_Servicios As String
 
     SQL = ""
     If txtFecha(0).Text = "" Or txtFecha(1).Text = "" Then
@@ -800,8 +806,8 @@ Dim NF As Integer
     End If
     
     
-    lblinf.Caption = "Preparando datos"
-    lblinf.Refresh
+    lblInf.Caption = "Preparando datos"
+    lblInf.Refresh
     
     '-- Eliminamos posibles declaraciones anteriores
     SQL = "delete from declaralom"
@@ -821,34 +827,49 @@ Dim NF As Integer
         End If
     End If
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Set rs2 = New ADODB.Recordset
     Errores = ""
     
     '1.- Comprobamos que todos los articulos vendidos en el periodo, que deberian tener lote
     SQL = "select codcateg from scateg where ctrlotes = 1"
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Aux = ""
-    While Not RS.EOF
-        Aux = Aux & ", " & DBSet(RS!codCateg, "T")
-        RS.MoveNext
+    While Not Rs.EOF
+        Aux = Aux & ", " & DBSet(Rs!codCateg, "T")
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
-    If Aux = "" Then Stop
+    If Aux = "" Then
+        MsgBox "Categorias sin control de lotes", vbExclamation
+        Exit Sub
+    End If
+        
     Aux = "(" & Mid(Aux, 2) & ")"
     
     SQL = "select slifac.codartic,slifac.nomartic from  slifac,sartic where slifac.codartic=sartic.codartic "
     SQL = SQL & " AND fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
     SQL = SQL & " AND codcateg in " & Aux & "  and coalesce(numserie,'')=''"
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    If vParamAplic.NumeroInstalacion = 1 Then
+        'ALZIRA
+        SQL_Servicios = " = "
+        If Me.Check2.Value = 0 Then SQL_Servicios = " <> "
+        SQL_Servicios = SQL_Servicios & "'FAS'"
+        
+        SQL = SQL & " AND slifac.codtipom" & SQL_Servicios
+        
+    End If
+    
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
     Aux = Space(20)
-    While Not RS.EOF
-        SQL = SQL & Mid(RS!codArtic & Aux, 1, 20) & RS!NomArtic & vbCrLf
-        RS.MoveNext
+    While Not Rs.EOF
+        SQL = SQL & Mid(Rs!codArtic & Aux, 1, 20) & Rs!NomArtic & vbCrLf
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     If SQL <> "" Then
         Aux = "Errores en articulos. No esta indicado el numero de registro" & vbCrLf & String(40, "=") & vbCrLf & SQL
         Errores = Errores & Aux
@@ -861,21 +882,26 @@ Dim NF As Integer
     
     
     
-    lblinf.Caption = "Comprobando lotes"
-    lblinf.Refresh
+    lblInf.Caption = "Comprobando lotes"
+    lblInf.Refresh
     
     SQL = "select codtipom, numfactu, fecfactu,sum(cantidad) as canti from slifac,sartic WHERE slifac.codartic=sartic.codartic"
     SQL = SQL & " and numserie<>'' and numlote<>'' AND fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
+    
+    If SQL_Servicios <> "" Then SQL = SQL & " AND slifac.codtipom" & SQL_Servicios
+    
     SQL = SQL & " group by 1,2,3 order by 1,2,3"
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
 
     SQL = "select codtipom, numfactu, fecfactu,sum(cantidad) as canti from slifaclotes"
     SQL = SQL & " WHERE fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
+    If SQL_Servicios <> "" Then SQL = SQL & " AND slifaclotes.codtipom" & SQL_Servicios
+    
     SQL = SQL & "  group by 1,2,3 order by 1,2,3"
     rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set Col = New Collection
-    While Not RS.EOF
+    While Not Rs.EOF
         
         
         'If RS!NumFactu = 67650 Then Stop
@@ -886,10 +912,10 @@ Dim NF As Integer
         If rs2.EOF Then
             
         Else
-            If RS!codtipom = rs2!codtipom Then
-                If Val(RS!NumFactu) = Val(rs2!NumFactu) Then
-                    If RS!FecFactu = rs2!FecFactu Then
-                        If RS!canti <= rs2!canti Then LotesCorrectos = True
+            If Rs!codtipom = rs2!codtipom Then
+                If Val(Rs!NumFactu) = Val(rs2!NumFactu) Then
+                    If Rs!FecFactu = rs2!FecFactu Then
+                        If Rs!canti <= rs2!canti Then LotesCorrectos = True
                     End If
                 End If
             End If
@@ -899,15 +925,15 @@ Dim NF As Integer
                 rs2.MoveNext
             Else
                 
-                If RS!codtipom <> rs2!codtipom Then
+                If Rs!codtipom <> rs2!codtipom Then
                     MsgBox "Avise soporte tecnico. Err: codtipom", vbExclamation
                 Else
-                    If Val(RS!NumFactu) > Val(rs2!NumFactu) Then
+                    If Val(Rs!NumFactu) > Val(rs2!NumFactu) Then
                         
                         rs2.MoveNext
                         MoverRsPpal = False
                     Else
-                        SQL = RS!codtipom & "|" & RS!NumFactu & "|" & RS!FecFactu & "|"
+                        SQL = Rs!codtipom & "|" & Rs!NumFactu & "|" & Rs!FecFactu & "|"
                         Col.Add SQL
                     End If
                 End If
@@ -917,10 +943,10 @@ Dim NF As Integer
         End If
         
         
-        If MoverRsPpal Then RS.MoveNext
+        If MoverRsPpal Then Rs.MoveNext
     Wend
     rs2.Close
-    RS.Close
+    Rs.Close
               
     
     
@@ -928,8 +954,8 @@ Dim NF As Integer
     SQL = ""
               
     For L = 1 To Col.Count
-        lblinf.Caption = "Lotes FRA" & Col.item(L)
-        lblinf.Refresh
+        lblInf.Caption = "Lotes FRA" & Col.item(L)
+        lblInf.Refresh
         Debug.Print Col.item(L)
         Aux = ", ('" & RecuperaValor(Col.item(L), 1) & "'," & RecuperaValor(Col.item(L), 2) & "," & DBSet(RecuperaValor(Col.item(L), 3), "F") & ")"
         SQL = SQL & Aux & vbCrLf
@@ -948,18 +974,19 @@ Dim NF As Integer
         
     End If
     '-- Ahora vamos a por el gran mogollón
-    lblinf.Caption = "Datos manipulador "
-    lblinf.Refresh
+    lblInf.Caption = "Datos manipulador "
+    lblInf.Refresh
     SQL = "select codtipom,numfactu,fecfactu,ManipuladorNumCarnet,ManipuladorFecCaducidad,ManipuladorNombre,TipoCarnet from"
     SQL = SQL & " scafac1 where fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
     SQL = SQL & " AND ManipuladorNumCarnet <> ''"
+    If SQL_Servicios <> "" Then SQL = SQL & " AND scafac1.codtipom" & SQL_Servicios
     SQL = SQL & " ORDER BY codtipom,numfactu,fecfactu ,manipuladornumcarnet desc"
     'rs2.Open SQL, conn, adOpenKeyset, adLockReadOnly, adCmdText
     
     
     
-    lblinf.Caption = "Obtener registros "
-    lblinf.Refresh
+    lblInf.Caption = "Obtener registros "
+    lblInf.Refresh
     'SQL = "select a.codtipom, a.numfactu, a.fecfactu, a.codartic, c.nomartic, a.cantidad " & _
             ",b.nomclien, b.nifclien,b.domclien direccion,concat(codpobla,' ',pobclien) poblacion " & _
             ",d.descateg , numlote,numserie " & _
@@ -985,28 +1012,31 @@ Dim NF As Integer
     SQL = SQL & " and b.codtipom = h.codtipom and b.numfactu = h.numfactu and b.fecfactu = h.fecfactu"
     SQL = SQL & " and b.codtipom = a.codtipom and b.numfactu = a.numfactu and b.fecfactu = a.fecfactu"
     SQL = SQL & " and a.codtipoa = h.codtipoa and a.numalbar = h.numalbar"
+    
+     If SQL_Servicios <> "" Then SQL = SQL & " AND a.codtipom" & SQL_Servicios
+    
     SQL = SQL & " order by codartic,h.fechaalb desc"
     
-    RS.Open SQL, conn, adOpenKeyset, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenKeyset, adLockOptimistic, adCmdText
     
     DoEvents
-    While Not RS.EOF
+    While Not Rs.EOF
                 'If Rs!NumFactu = 70679 Then Stop
     
     
-                lblinf.Caption = "Ventas: " & RS!codtipom & " " & RS!NumFactu & " " & RS!codArtic
-                lblinf.Refresh
+                lblInf.Caption = "Ventas: " & Rs!codtipom & " " & Rs!NumFactu & " " & Rs!codArtic
+                lblInf.Refresh
                 SQL = "insert into declaralom(FechaVenta, NombreComercial, Registro, Categoria, Lote, Cantidad, NombreSocio, NIF, NumFactura,EsVenta,Direccion,Poblacion,NomCarnetMani, NumCarnet, NifMani)"
                 SQL = SQL & " values("
-                SQL = SQL & db.Fecha(RS!FechaAlb) & "," ' FechaVenta
-                SQL = SQL & db.texto(RS!NomArtic) & "," ' NombreComercial
-                SQL = SQL & db.texto(RS!numSerie) & "," ' Registro
-                SQL = SQL & db.texto(RS!descateg) & "," ' Categoria
-                SQL = SQL & db.texto(RS!numLote) & "," ' Lote
-                SQL = SQL & db.numero(RS!Cantidad) & "," ' Cantidad
+                SQL = SQL & db.Fecha(Rs!FechaAlb) & "," ' FechaVenta
+                SQL = SQL & db.texto(Rs!NomArtic) & "," ' NombreComercial
+                SQL = SQL & db.texto(Rs!numSerie) & "," ' Registro
+                SQL = SQL & db.texto(Rs!descateg) & "," ' Categoria
+                SQL = SQL & db.texto(Rs!numLote) & "," ' Lote
+                SQL = SQL & db.numero(Rs!cantidad) & "," ' Cantidad
     
                 'ENERO 2016
-                LotesCorrectos = DBLet(RS!ManipuladorNombre, "T") <> ""
+                LotesCorrectos = DBLet(Rs!ManipuladorNombre, "T") <> ""
 '
 '                If LotesCorrectos Then
 '                    'ManipuladorNumCarnet,ManipuladorFecCaducidad,ManipuladorNombre,TipoCarnet
@@ -1014,13 +1044,13 @@ Dim NF As Integer
 '                Else
 '                    SQL = SQL & db.texto(RS!Nomclien) & "," ' NombreSocio
 '                End If
-                SQL = SQL & db.texto(RS!Nomclien) & "," ' NombreSocio
+                SQL = SQL & db.texto(Rs!Nomclien) & "," ' NombreSocio
                 
-                SQL = SQL & db.texto(RS!nifClien) & "," ' NIF
-                SQL = SQL & db.texto(RS!codtipom & Format(RS!NumFactu, "0000000")) & "," ' NumFactura
+                SQL = SQL & db.texto(Rs!nifClien) & "," ' NIF
+                SQL = SQL & db.texto(Rs!codtipom & Format(Rs!NumFactu, "0000000")) & "," ' NumFactura
                 SQL = SQL & "1,"   ' es vebta
-                SQL = SQL & db.texto(RS!Direccion) & "," ' direccion cliente
-                SQL = SQL & db.texto(RS!Poblacion) & "," ' poblacion
+                SQL = SQL & db.texto(Rs!Direccion) & "," ' direccion cliente
+                SQL = SQL & db.texto(Rs!Poblacion) & "," ' poblacion
                 
                 
  
@@ -1028,8 +1058,8 @@ Dim NF As Integer
                 'NomCarnetMani, NumCarnet, NifMani
                 If LotesCorrectos Then
                     'Datos carnet manipulador
-                    SQL = SQL & db.texto(RS!ManipuladorNombre) & "," ' NombreSocio
-                    SQL = SQL & db.texto(RS!ManipuladorNumCarnet) & ","
+                    SQL = SQL & db.texto(Rs!ManipuladorNombre) & "," ' NombreSocio
+                    SQL = SQL & db.texto(Rs!ManipuladorNumCarnet) & ","
                     SQL = SQL & "NULL)"  ' poblacion
                 
                 Else
@@ -1038,13 +1068,13 @@ Dim NF As Integer
                 db.ejecutar SQL
         
         
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
+        Rs.Close
         
 
-        lblinf.Caption = "Proveedores"
-        lblinf.Refresh
+        lblInf.Caption = "Proveedores"
+        lblInf.Refresh
         DoEvents
         SQL = "insert into declaralom (FechaVenta,NombreComercial,Registro,Categoria,Lote,Cantidad,NombreSocio,NIF,NumFactura,CanCompra,EsVenta,Direccion,Poblacion,NomCarnetMani, NumCarnet, NifMani)"
         SQL = SQL & "select distinct a.fecentra, b.nomartic, b.numserie, c.descateg, a.numlotes, 0, e.nomprove, e.nifprove, d.document, a.canentra" & _
@@ -1059,6 +1089,11 @@ Dim NF As Integer
                 " and a.fecentra between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F") & _
                 " and e.codprove = d.codigope"
         
+        'Las compras, para cuando son SERVICIOS(Alzira) no van
+        If SQL_Servicios <> "" Then
+            'Es decir, para servicio digo que a=-1 y me devuelve EOF
+            If Me.Check2.Value = 1 Then SQL = SQL & " AND a.codartic='-1A1-'"
+        End If
         
         db.ejecutar SQL
         
@@ -1069,8 +1104,8 @@ Dim NF As Integer
         
             
         
-            lblinf.Caption = "Enlace ariagro"
-            lblinf.Refresh
+            lblInf.Caption = "Enlace ariagro"
+            lblInf.Refresh
             DoEvents
             Set Col = New Collection
             
@@ -1078,22 +1113,22 @@ Dim NF As Integer
             cadFecha = " FechaVenta between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
             L = 0
             SQL = "Select count(*) from declaralom where esventa=1 AND " & cadFecha
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            If Not RS.EOF Then L = DBLet(RS.Fields(0), "N")
-            RS.Close
-            lblinf.Tag = L
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            If Not Rs.EOF Then L = DBLet(Rs.Fields(0), "N")
+            Rs.Close
+            lblInf.Tag = L
             
             SQL = "select FechaVenta,substring(numfactura,1,3),substring(numfactura,4) from declaralom where esventa=1 AND " & cadFecha
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             L = 0
             SQL = ""
-            While Not RS.EOF
+            While Not Rs.EOF
                 L = L + 1
-                lblinf.Caption = "Col   " & Col.Count + 1 & "   Reg  " & L & " de " & lblinf.Tag
-                lblinf.Refresh
+                lblInf.Caption = "Col   " & Col.Count + 1 & "   Reg  " & L & " de " & lblInf.Tag
+                lblInf.Refresh
                 
-                SQL = SQL & ", (" & DBSet(RS!fechaventa, "F") & "," & DBSet(RS.Fields(1), "T") & "," & RS.Fields(2) & ")"
-                RS.MoveNext
+                SQL = SQL & ", (" & DBSet(Rs!fechaventa, "F") & "," & DBSet(Rs.Fields(1), "T") & "," & Rs.Fields(2) & ")"
+                Rs.MoveNext
                 
                 
                 If L > 29 Then
@@ -1103,46 +1138,46 @@ Dim NF As Integer
                     L = 0
                 End If
             Wend
-            RS.Close
+            Rs.Close
             
             If L > 0 Then Col.Add SQL
             
             'Para cada subgrupo buscarenmos en slifaccampos
             For L = 1 To Col.Count
-                lblinf.Caption = "Ariagro " & L & " de " & Col.Count
-                lblinf.Refresh
+                lblInf.Caption = "Ariagro " & L & " de " & Col.Count
+                lblInf.Refresh
                 If (L Mod 5) = 0 Then DoEvents
                 SQL = "(" & Mid(Col.item(L), 2) & ")"
                 SQL = "Select * from slifaccampos where (fecfactu,codtipom,numfactu) IN " & SQL
-                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                While Not RS.EOF
+                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                While Not Rs.EOF
                     
                     'FAV0079016
-                    SQL = " AND numfactura = '" & RS!codtipom & Format(RS!NumFactu, "0000000") & "'"
-                    SQL = " WHERE esventa=1 and fechaventa= " & DBSet(RS!FecFactu, "F") & SQL
+                    SQL = " AND numfactura = '" & Rs!codtipom & Format(Rs!NumFactu, "0000000") & "'"
+                    SQL = " WHERE esventa=1 and fechaventa= " & DBSet(Rs!FecFactu, "F") & SQL
                     
-                    SQL = "UPDATE declaraLOM SET cultivo=" & RS!codCampo & SQL
+                    SQL = "UPDATE declaraLOM SET cultivo=" & Rs!codCampo & SQL
                     conn.Execute SQL
-                    RS.MoveNext
+                    Rs.MoveNext
                 Wend
-                RS.Close
+                Rs.Close
                 
             Next
                 
             Set rs2 = Nothing
             Set rs2 = New ADODB.Recordset
-            lblinf.Caption = "Obtener variedad"
-            lblinf.Refresh
+            lblInf.Caption = "Obtener variedad"
+            lblInf.Refresh
             DoEvents
             SQL = "Select cultivo from declaralom where cultivo <>'' GROUP BY 1"
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not RS.EOF
-                lblinf.Caption = "Campo " & RS!cultivo
-                lblinf.Refresh
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not Rs.EOF
+                lblInf.Caption = "Campo " & Rs!cultivo
+                lblInf.Refresh
                 SQL = "select rcampos.codcampo,  variedades.nomvarie"
                 SQL = SQL & " from @#rcampos inner join @#variedades on rcampos.codvarie = variedades.codvarie"
                 SQL = Replace(SQL, "@#", vParamAplic.Ariagro & ".")
-                SQL = SQL & " WHERE codcampo =" & RS!cultivo
+                SQL = SQL & " WHERE codcampo =" & Rs!cultivo
                 
                 rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If rs2.EOF Then
@@ -1151,12 +1186,12 @@ Dim NF As Integer
                     SQL = rs2!nomvarie
                 End If
                 rs2.Close
-                SQL = "UPDATE declaralom set cultivo=" & DBSet(SQL, "T") & " WHERE cultivo =" & DBSet(RS!cultivo, "T")
+                SQL = "UPDATE declaralom set cultivo=" & DBSet(SQL, "T") & " WHERE cultivo =" & DBSet(Rs!cultivo, "T")
                 conn.Execute SQL
                 
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
             
         
@@ -1171,12 +1206,12 @@ Dim NF As Integer
             Set rs2 = New ADODB.Recordset
             SQL = "select fechaventa, NombreComercial,Registro,Categoria,Lote,NIF,NumFactura"
             SQL = SQL & " from declaralom where esventa=1 and numfactura like 'FAS%' and cultivo is null and tratamiento is null"
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not RS.EOF
-                lblinf.Caption = "Fra: " & RS!NumFactura
-                lblinf.Refresh
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not Rs.EOF
+                lblInf.Caption = "Fra: " & Rs!NumFactura
+                lblInf.Refresh
                 SQL = "select * from scafac1 where codtipom='FAS' "
-                SQL = SQL & " and fecfactu=" & DBSet(RS!fechaventa, "F") & " and numfactu=" & Mid(RS!NumFactura, 4)
+                SQL = SQL & " and fecfactu=" & DBSet(Rs!fechaventa, "F") & " and numfactu=" & Mid(Rs!NumFactura, 4)
                 rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If rs2.EOF Then
                     SQL = ""
@@ -1216,17 +1251,17 @@ Dim NF As Integer
                     End If
                     SQL = "UPDATE declaralom set cultivo=" & DBSet(SQL, "T")
                     SQL = SQL & ",tratamiento= " & DBSet(cadFecha, "T", "S")
-                    SQL = SQL & " where fechaventa=" & DBSet(RS!fechaventa, "F") & " and numfactura='" & RS!NumFactura
-                    SQL = SQL & "' and lote=" & DBSet(RS!lote, "T") & " and nif=" & DBSet(RS!NIF, "T")
-                    SQL = SQL & " and registro=" & DBSet(RS!registro, "T") & " and cultivo is null and tratamiento is null"
+                    SQL = SQL & " where fechaventa=" & DBSet(Rs!fechaventa, "F") & " and numfactura='" & Rs!NumFactura
+                    SQL = SQL & "' and lote=" & DBSet(Rs!lote, "T") & " and nif=" & DBSet(Rs!NIF, "T")
+                    SQL = SQL & " and registro=" & DBSet(Rs!registro, "T") & " and cultivo is null and tratamiento is null"
                     
                     conn.Execute SQL
                 
                 End If
                 
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
 
 
@@ -1265,11 +1300,11 @@ Dim NF As Integer
                                             "," & Format(Hasta, "dd") & ")"
         frmVisReport.Show vbModal
         '--
-        lblinf.Caption = "Proceso terminado."
-        lblinf.Refresh
+        lblInf.Caption = "Proceso terminado."
+        lblInf.Refresh
         DoEvents
   
-    Set RS = Nothing
+    Set Rs = Nothing
     Set rs2 = Nothing
 End Sub
 

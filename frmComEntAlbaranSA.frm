@@ -591,33 +591,33 @@ Begin VB.Form frmComEntAlbaranSA
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmComEntAlbaranSA.frx":02B7
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FrameHco"
-      Tab(1).Control(1)=   "Text1(27)"
-      Tab(1).Control(2)=   "Text1(28)"
-      Tab(1).Control(3)=   "Text1(29)"
-      Tab(1).Control(4)=   "FrameFactura"
-      Tab(1).Control(5)=   "Text1(26)"
-      Tab(1).Control(6)=   "Text2(26)"
-      Tab(1).Control(7)=   "chkDocArchi"
-      Tab(1).Control(8)=   "Text1(25)"
-      Tab(1).Control(9)=   "Text2(21)"
-      Tab(1).Control(10)=   "Text1(21)"
-      Tab(1).Control(11)=   "Text1(19)"
-      Tab(1).Control(12)=   "Text1(18)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(1)"
+      Tab(1).Control(2)=   "imgBuscar(4)"
+      Tab(1).Control(3)=   "Label1(3)"
+      Tab(1).Control(4)=   "imgFecha(1)"
+      Tab(1).Control(5)=   "imgBuscar(8)"
+      Tab(1).Control(6)=   "Label1(4)"
+      Tab(1).Control(7)=   "Label1(48)"
+      Tab(1).Control(8)=   "Label1(47)"
+      Tab(1).Control(9)=   "Label1(44)"
+      Tab(1).Control(10)=   "imgFecha(2)"
+      Tab(1).Control(11)=   "Text1(15)"
+      Tab(1).Control(12)=   "Text1(16)"
       Tab(1).Control(13)=   "Text1(17)"
-      Tab(1).Control(14)=   "Text1(16)"
-      Tab(1).Control(15)=   "Text1(15)"
-      Tab(1).Control(16)=   "imgFecha(2)"
-      Tab(1).Control(17)=   "Label1(44)"
-      Tab(1).Control(18)=   "Label1(47)"
-      Tab(1).Control(19)=   "Label1(48)"
-      Tab(1).Control(20)=   "Label1(4)"
-      Tab(1).Control(21)=   "imgBuscar(8)"
-      Tab(1).Control(22)=   "imgFecha(1)"
-      Tab(1).Control(23)=   "Label1(3)"
-      Tab(1).Control(24)=   "imgBuscar(4)"
-      Tab(1).Control(25)=   "Label1(1)"
-      Tab(1).Control(26)=   "Label1(45)"
+      Tab(1).Control(14)=   "Text1(18)"
+      Tab(1).Control(15)=   "Text1(19)"
+      Tab(1).Control(16)=   "Text1(21)"
+      Tab(1).Control(17)=   "Text2(21)"
+      Tab(1).Control(18)=   "Text1(25)"
+      Tab(1).Control(19)=   "chkDocArchi"
+      Tab(1).Control(20)=   "Text2(26)"
+      Tab(1).Control(21)=   "Text1(26)"
+      Tab(1).Control(22)=   "FrameFactura"
+      Tab(1).Control(23)=   "Text1(29)"
+      Tab(1).Control(24)=   "Text1(28)"
+      Tab(1).Control(25)=   "Text1(27)"
+      Tab(1).Control(26)=   "FrameHco"
       Tab(1).ControlCount=   27
       Begin VB.TextBox txtDesc 
          BackColor       =   &H80000018&
@@ -2492,7 +2492,7 @@ Dim EnPromocionOPrecioEspecial As String
                                     EnPromocionOPrecioEspecial = DevuelveDesdeBD(conAri, "count(*)", "sarti1", "codarti1", txtAux(1).Text, "T")
                                     If EnPromocionOPrecioEspecial = "" Then EnPromocionOPrecioEspecial = "0"
                                     If Val(EnPromocionOPrecioEspecial) > 0 Then
-                                        frmListado4.Opcion = 1
+                                        frmListado4.opcion = 1
                                         frmListado4.vCadena = txtAux(1).Text & "|"
                                         frmListado4.Show vbModal
                                     End If
@@ -2501,6 +2501,12 @@ Dim EnPromocionOPrecioEspecial As String
                                 End If   'Fecha ultima compra
                             End If  'Precio ultima compra
                     End If  'Por si han puesto cantidad=0
+                    
+                    
+                    'Abril 2016
+                    'INsertar linea de componentes
+                    InsertarSubComponentes
+                    
                     
                     If PrimeraLin Then
                         CargaGrid DataGrid1, Data2, True
@@ -2557,7 +2563,7 @@ Dim EnPromocionOPrecioEspecial As String
                             EnPromocionOPrecioEspecial = DevuelveDesdeBD(conAri, "count(*)", "sarti1", "codarti1", txtAux(1).Text, "T")
                             If EnPromocionOPrecioEspecial = "" Then EnPromocionOPrecioEspecial = "0"
                             If Val(EnPromocionOPrecioEspecial) > 0 Then
-                                frmListado4.Opcion = 1
+                                frmListado4.opcion = 1
                                 frmListado4.vCadena = txtAux(1).Text & "|"
                                 frmListado4.Show vbModal
                             End If
@@ -3895,6 +3901,7 @@ End Sub
 Private Sub PonerCampos()
 On Error Resume Next
 
+    If Data1.Recordset Is Nothing Then Exit Sub
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
     
@@ -4289,7 +4296,7 @@ Private Sub Imprimir()
             'vOY A CARGAR LOS DATOS
             CadenaDesdeOtroForm = Text1(0).Text & "|" & Text1(1).Text & "|" & Text1(4).Text & "|" & Text1(5).Text & "|"
         End If
-        frmListado2.Opcion = 10
+        frmListado2.opcion = 10
         frmListado2.Show vbModal
         
     
@@ -4863,6 +4870,7 @@ Private Sub CargaTxtAux(visible As Boolean, limpiar As Boolean)
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
 Dim I As Byte
+Dim b As Boolean
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
@@ -4873,7 +4881,12 @@ Dim I As Byte
         cmdAux(0).visible = visible
         cmdAux(1).visible = visible
         
-        If Not Me.Data2.Recordset.EOF Then
+        If limpiar Then
+            b = False
+        Else
+            b = Not Data2.Recordset.EOF
+        End If
+        If b Then
             
             For I = 10 To 12
                 Me.txtAux(I).Text = DBLet(Me.Data2.Recordset.Fields(I + 6), "T")
@@ -5043,13 +5056,13 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     
         If Index = 1 Then Me.DataGrid1.Columns(5).Caption = "EAN"
         If Index = 4 And txtAux(1).Text <> "" Then
-                frmListadoPrecios.Opcion = 0
+                frmListadoPrecios.opcion = 0
                 frmListadoPrecios.CadenaPasoDatos = txtAux(1).Text & "|" & Text1(4).Text & "|"
                 frmListadoPrecios.Show vbModal
         End If
     ElseIf KeyCode = 114 Then
         If Index = 4 And txtAux(1).Text <> "" Then
-                frmListadoPrecios.Opcion = 1
+                frmListadoPrecios.opcion = 1
                 frmListadoPrecios.CadenaPasoDatos = txtAux(1).Text & "|" & Text1(4).Text & "|"
                 frmListadoPrecios.Show vbModal
         End If
@@ -5245,6 +5258,21 @@ Dim Cad As String
 Dim Aux2 As String
     On Error GoTo EPrecios
     
+    
+    '// EULER
+    '   Si el articulo tiene componentes, el precio en la compra va a cero
+    If vParamAplic.NumeroInstalacion = 4 Then
+        Cad = DevuelveDesdeBD(conAri, "conjunto", "sartic", "codartic", txtAux(1).Text, "T")
+        If Cad = "1" Then
+            txtAux(4).Text = "0"
+            txtAux(5).Text = txtAux(4).Text
+            txtAux(6).Text = txtAux(4).Text
+            txtAux(7).Text = txtAux(4).Text
+            Exit Sub
+        End If
+    End If
+        
+        
     Set vPrecio = New CPreciosCom
     If vPrecio.Leer(txtAux(1).Text, Text1(4).Text) Then
         If vPrecio.ComprobarCantidad(CInt(txtAux(3).Text)) Then
@@ -6042,7 +6070,7 @@ Dim nSerie As CNumSerie
     Set nSerie = New CNumSerie
     nSerie.Proveedor = CInt(Text1(4).Text)
     nSerie.NumAlbProve = Text1(0).Text
-    nSerie.fechaCom = Text1(1).Text
+    nSerie.fechacom = Text1(1).Text
     
     
     'Recuperar los Nº Serie de ese articulo cargados en la Temporal
@@ -6590,7 +6618,7 @@ Dim OK As Boolean
 
     
     CadenaDesdeOtroForm = ""
-    frmListado2.Opcion = 18
+    frmListado2.opcion = 18
     frmListado2.Show vbModal
     If CadenaDesdeOtroForm = "" Then Exit Sub
     'Si es el mismo no hago nada
@@ -7105,3 +7133,119 @@ Private Sub LanzarBuscarAlbaranEuler()
          txtAux_LostFocus 15
     End If
 End Sub
+
+
+
+
+
+Private Sub InsertarSubComponentes()
+Dim SQL As String
+Dim TipoDto As Byte
+Dim J As Integer
+Dim cantidad As Currency
+Dim numlinea As Integer
+Dim vCStock As CStock
+'Si el articulo es de conjuntos, preguntara si quiere insertar la lineas de los conjuntos
+   
+        If vParamAplic.NumeroInstalacion <> 4 Then Exit Sub
+   
+        SQL = DevuelveDesdeBD(conAri, "conjunto", "sartic", "codartic", txtAux(1).Text, "T")
+        If SQL = "1" Then
+        
+        
+            'SI!!!!!!, es de conjuntos
+           ' If MsgBox("Articulo con componentes. Desea insertar las lineas?", vbQuestion + vbYesNo) <> vbYes Then Exit Sub
+            
+
+            SQL = DevuelveDesdeBDNew(conAri, "sprove", "tipodtos", "codprove", Text1(4).Text, "N")
+            TipoDto = CByte(SQL)
+            cantidad = ImporteFormateado(txtAux(3).Text)
+            
+            SQL = ObtenerWhereCP(False)
+            SQL = Replace(SQL, NombreTabla, NomTablaLineas)
+            numlinea = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", SQL)
+                 
+   
+   
+            SQL = "Select sarti1.*,nomartic from sarti1,sartic where sarti1.codarti1=sartic.codartic and sarti1.codartic=" & DBSet(txtAux(1).Text, "T")
+            Set miRsAux = New ADODB.Recordset
+            'miRsAux.Open SQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
+            miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            SQL = ""
+            While Not miRsAux.EOF
+                'Limpiamos todo menos el almacen y el CC si lo tuviera
+                For J = 1 To 8
+                    txtAux(J).Text = ""
+                Next
+                
+                
+                txtAux(1).Text = miRsAux!codarti1
+                txtAux(2).Text = miRsAux!NomArtic
+                'Cantidad es la cantidad de la linea ppal * la del escandallo
+                txtAux(3).Text = cantidad * miRsAux!cantidad
+            
+                ObtenerPrecioCompra
+            
+                
+                txtAux(7).Text = CalcularImporteSng(txtAux(3).Text, txtAux(4).Text, txtAux(5).Text, txtAux(6).Text, TipoDto)
+            
+            
+            
+                Set vCStock = New CStock
+                If InicializarCStock(vCStock, "E", CStr(numlinea)) Then
+                
+            
+            
+                    SQL = "INSERT INTO " & NomTablaLineas
+                    SQL = SQL & " (numalbar, fechaalb, codprove, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,numlotes,codccost,codclien,coddirec,actuacion,codtipomV,numalbarV,fechaalbV) "
+                    SQL = SQL & "VALUES (" & DBSet(Text1(0).Text, "T") & ", " & DBSet(Text1(1).Text, "F") & ", " & Val(Text1(4).Text) & ", " & numlinea & ", " & Val(txtAux(0).Text) & ","
+                    SQL = SQL & DBSet(txtAux(1).Text, "T") & ", " & DBSet(txtAux(2).Text, "T") & ", " & DBSet(txtAux(14).Text, "T") & ", "
+                    SQL = SQL & DBSet(txtAux(3).Text, "N") & ", "
+                    SQL = SQL & DBSet(txtAux(4).Text, "S") & ", " & DBSet(txtAux(5).Text, "N") & ", "
+                    SQL = SQL & DBSet(txtAux(6).Text, "N") & ", "
+                    SQL = SQL & DBSet(txtAux(7).Text, "N") & ", " & DBSet(txtAux(13).Text, "T") & ","
+                    SQL = SQL & DBSet(txtAux(9).Text, "T", "S") & "," 'centro coste
+                    SQL = SQL & DBSet(txtAux(10).Text, "N", "S") & ","  'cliente
+                    SQL = SQL & DBSet(txtAux(11).Text, "T", "S") & "," 'obra
+                    SQL = SQL & DBSet(txtAux(12).Text, "T", "S")  'actuacion
+                    
+                    
+                    
+                    If vParamAplic.NumeroInstalacion = 4 Then
+                        SQL = SQL & "," & DBSet(txtAux(15).Text, "T", "S")
+                        SQL = SQL & "," & DBSet(txtAux(16).Text, "N", "S")
+                        SQL = SQL & "," & DBSet(txtAux(17).Text, "F", "S")
+                    Else
+                        SQL = SQL & ",NULL,NULL,NULL"
+                    End If
+                    SQL = SQL & ");"
+
+                    
+                    
+                    
+                    
+                
+                    If Not ejecutar(SQL, True) Then
+                        MsgBox "Error añadiendo el componente: " & miRsAux!NomArtic, vbExclamation
+                    
+                    Else
+                        numlinea = numlinea + 1
+                        If Not vCStock.ActualizarStock Then MsgBox "Error actualizando stock componentes: " & miRsAux!NomArtic, vbExclamation
+                    End If
+                Else
+                    MsgBox "Error stock: " & miRsAux!NomArtic, vbExclamation
+                End If
+                    
+                    
+                Set vCStock = Nothing
+                miRsAux.MoveNext
+            Wend
+            miRsAux.Close
+            Set miRsAux = Nothing
+        End If
+        
+ 
+    
+End Sub
+
+

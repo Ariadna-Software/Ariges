@@ -296,8 +296,9 @@ Begin VB.Form frmFacEntAlbSAIL
       _ExtentY        =   12806
       _Version        =   393216
       Style           =   1
-      Tabs            =   5
-      TabsPerRow      =   5
+      Tabs            =   6
+      Tab             =   5
+      TabsPerRow      =   6
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -310,140 +311,101 @@ Begin VB.Form frmFacEntAlbSAIL
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacEntAlbSAIL.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(51)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label1(35)"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "Label1(53)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "imgBuscar2(12)"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "imgBuscar2(9)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label1(54)"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "imgBuscar2(13)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "Label1(55)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "imgBuscar2(0)"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "Label1(56)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Label1(58)"
-      Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "imgObserva(1)"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "imgObserva(0)"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "DataGrid1"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "txtaux(0)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "txtaux(1)"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "txtaux(3)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "txtaux(4)"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "txtaux(6)"
-      Tab(0).Control(18).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "txtaux(13)"
+      Tab(0).Control(1)=   "txtaux(17)"
+      Tab(0).Control(2)=   "txtaux(15)"
+      Tab(0).Control(3)=   "Text2(2)"
+      Tab(0).Control(4)=   "txtaux(14)"
+      Tab(0).Control(5)=   "Text2(13)"
+      Tab(0).Control(6)=   "Text2(0)"
+      Tab(0).Control(7)=   "txtaux(12)"
+      Tab(0).Control(8)=   "txtaux(16)"
+      Tab(0).Control(9)=   "Text2(9)"
+      Tab(0).Control(10)=   "txtaux(11)"
+      Tab(0).Control(11)=   "txtaux(10)"
+      Tab(0).Control(12)=   "txtaux(9)"
+      Tab(0).Control(13)=   "txtaux(5)"
+      Tab(0).Control(14)=   "FrameCliente"
+      Tab(0).Control(15)=   "cmdAux(1)"
+      Tab(0).Control(16)=   "cmdAux(0)"
+      Tab(0).Control(17)=   "txtaux(2)"
+      Tab(0).Control(18)=   "txtaux(8)"
       Tab(0).Control(19)=   "txtaux(7)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "txtaux(8)"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "txtaux(2)"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "cmdAux(0)"
-      Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "cmdAux(1)"
-      Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "FrameCliente"
-      Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "txtaux(5)"
-      Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "txtaux(9)"
-      Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "txtaux(10)"
-      Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "txtaux(11)"
-      Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "Text2(9)"
-      Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "txtaux(16)"
-      Tab(0).Control(30).Enabled=   0   'False
-      Tab(0).Control(31)=   "txtaux(12)"
-      Tab(0).Control(31).Enabled=   0   'False
-      Tab(0).Control(32)=   "Text2(0)"
-      Tab(0).Control(32).Enabled=   0   'False
-      Tab(0).Control(33)=   "Text2(13)"
-      Tab(0).Control(33).Enabled=   0   'False
-      Tab(0).Control(34)=   "txtaux(14)"
-      Tab(0).Control(34).Enabled=   0   'False
-      Tab(0).Control(35)=   "Text2(2)"
-      Tab(0).Control(35).Enabled=   0   'False
-      Tab(0).Control(36)=   "txtaux(15)"
-      Tab(0).Control(36).Enabled=   0   'False
-      Tab(0).Control(37)=   "txtaux(17)"
-      Tab(0).Control(37).Enabled=   0   'False
-      Tab(0).Control(38)=   "txtaux(13)"
-      Tab(0).Control(38).Enabled=   0   'False
+      Tab(0).Control(20)=   "txtaux(6)"
+      Tab(0).Control(21)=   "txtaux(4)"
+      Tab(0).Control(22)=   "txtaux(3)"
+      Tab(0).Control(23)=   "txtaux(1)"
+      Tab(0).Control(24)=   "txtaux(0)"
+      Tab(0).Control(25)=   "DataGrid1"
+      Tab(0).Control(26)=   "imgObserva(0)"
+      Tab(0).Control(27)=   "imgObserva(1)"
+      Tab(0).Control(28)=   "Label1(58)"
+      Tab(0).Control(29)=   "Label1(56)"
+      Tab(0).Control(30)=   "imgBuscar2(0)"
+      Tab(0).Control(31)=   "Label1(55)"
+      Tab(0).Control(32)=   "imgBuscar2(13)"
+      Tab(0).Control(33)=   "Label1(54)"
+      Tab(0).Control(34)=   "imgBuscar2(9)"
+      Tab(0).Control(35)=   "imgBuscar2(12)"
+      Tab(0).Control(36)=   "Label1(53)"
+      Tab(0).Control(37)=   "Label1(35)"
+      Tab(0).Control(38)=   "Label1(51)"
       Tab(0).ControlCount=   39
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbSAIL.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(3)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(10)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Label1(12)"
-      Tab(1).Control(6)=   "imgBuscar(7)"
-      Tab(1).Control(7)=   "Label1(9)"
-      Tab(1).Control(8)=   "imgBuscar(8)"
-      Tab(1).Control(9)=   "Label1(23)"
-      Tab(1).Control(10)=   "Label1(24)"
-      Tab(1).Control(11)=   "imgBuscar(9)"
-      Tab(1).Control(12)=   "Label1(43)"
-      Tab(1).Control(13)=   "Label1(49)"
-      Tab(1).Control(14)=   "Label1(61)"
-      Tab(1).Control(15)=   "Text1(39)"
-      Tab(1).Control(16)=   "chkDocArchi"
-      Tab(1).Control(17)=   "Text1(38)"
-      Tab(1).Control(18)=   "Text1(18)"
-      Tab(1).Control(19)=   "Text1(19)"
+      Tab(1).Control(0)=   "Text1(43)"
+      Tab(1).Control(1)=   "Text1(40)"
+      Tab(1).Control(2)=   "chkFacturarKm"
+      Tab(1).Control(3)=   "Text1(34)"
+      Tab(1).Control(4)=   "FrameFactura"
+      Tab(1).Control(5)=   "FrameFacRec"
+      Tab(1).Control(6)=   "FrameHco"
+      Tab(1).Control(7)=   "Text1(29)"
+      Tab(1).Control(8)=   "Text2(29)"
+      Tab(1).Control(9)=   "Text1(28)"
+      Tab(1).Control(10)=   "Text2(28)"
+      Tab(1).Control(11)=   "Text1(27)"
+      Tab(1).Control(12)=   "Text2(27)"
+      Tab(1).Control(13)=   "Text1(2)"
+      Tab(1).Control(14)=   "Text1(25)"
+      Tab(1).Control(15)=   "Text1(26)"
+      Tab(1).Control(16)=   "Text1(24)"
+      Tab(1).Control(17)=   "Text1(23)"
+      Tab(1).Control(18)=   "Text1(22)"
+      Tab(1).Control(19)=   "Text1(21)"
       Tab(1).Control(20)=   "Text1(20)"
-      Tab(1).Control(21)=   "Text1(21)"
-      Tab(1).Control(22)=   "Text1(22)"
-      Tab(1).Control(23)=   "Text1(23)"
-      Tab(1).Control(24)=   "Text1(24)"
-      Tab(1).Control(25)=   "Text1(26)"
-      Tab(1).Control(26)=   "Text1(25)"
-      Tab(1).Control(27)=   "Text1(2)"
-      Tab(1).Control(28)=   "Text2(27)"
-      Tab(1).Control(29)=   "Text1(27)"
-      Tab(1).Control(30)=   "Text2(28)"
-      Tab(1).Control(31)=   "Text1(28)"
-      Tab(1).Control(32)=   "Text2(29)"
-      Tab(1).Control(33)=   "Text1(29)"
-      Tab(1).Control(34)=   "FrameHco"
-      Tab(1).Control(35)=   "FrameFacRec"
-      Tab(1).Control(36)=   "FrameFactura"
-      Tab(1).Control(37)=   "Text1(34)"
-      Tab(1).Control(38)=   "chkFacturarKm"
-      Tab(1).Control(39)=   "Text1(40)"
-      Tab(1).Control(40)=   "Text1(43)"
+      Tab(1).Control(21)=   "Text1(19)"
+      Tab(1).Control(22)=   "Text1(18)"
+      Tab(1).Control(23)=   "Text1(38)"
+      Tab(1).Control(24)=   "chkDocArchi"
+      Tab(1).Control(25)=   "Text1(39)"
+      Tab(1).Control(26)=   "Label1(61)"
+      Tab(1).Control(27)=   "Label1(49)"
+      Tab(1).Control(28)=   "Label1(43)"
+      Tab(1).Control(29)=   "imgBuscar(9)"
+      Tab(1).Control(30)=   "Label1(24)"
+      Tab(1).Control(31)=   "Label1(23)"
+      Tab(1).Control(32)=   "imgBuscar(8)"
+      Tab(1).Control(33)=   "Label1(9)"
+      Tab(1).Control(34)=   "imgBuscar(7)"
+      Tab(1).Control(35)=   "Label1(12)"
+      Tab(1).Control(36)=   "Label1(11)"
+      Tab(1).Control(37)=   "Label1(10)"
+      Tab(1).Control(38)=   "Label1(5)"
+      Tab(1).Control(39)=   "Label1(3)"
+      Tab(1).Control(40)=   "Label1(45)"
       Tab(1).ControlCount=   41
       TabCaption(2)   =   "O.trab /ext"
       TabPicture(2)   =   "frmFacEntAlbSAIL.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "lblTituloEst"
-      Tab(2).Control(1)=   "Label3(0)"
-      Tab(2).Control(2)=   "Label3(1)"
-      Tab(2).Control(3)=   "txtEuler(6)"
-      Tab(2).Control(4)=   "txtEuler(7)"
-      Tab(2).Control(5)=   "FrameOT"
+      Tab(2).Control(0)=   "FrameOT"
+      Tab(2).Control(1)=   "txtEuler(7)"
+      Tab(2).Control(2)=   "txtEuler(6)"
+      Tab(2).Control(3)=   "Label3(1)"
+      Tab(2).Control(4)=   "Label3(0)"
+      Tab(2).Control(5)=   "lblTituloEst"
       Tab(2).ControlCount=   6
       TabCaption(3)   =   "Reparaciones"
       TabPicture(3)   =   "frmFacEntAlbSAIL.frx":0060
@@ -531,6 +493,76 @@ Begin VB.Form frmFacEntAlbSAIL
       TabPicture(4)   =   "frmFacEntAlbSAIL.frx":007C
       Tab(4).ControlEnabled=   0   'False
       Tab(4).ControlCount=   0
+      TabCaption(5)   =   "Fichadas"
+      TabPicture(5)   =   "frmFacEntAlbSAIL.frx":0098
+      Tab(5).ControlEnabled=   -1  'True
+      Tab(5).Control(0)=   "Label1(62)"
+      Tab(5).Control(0).Enabled=   0   'False
+      Tab(5).Control(1)=   "Label1(63)"
+      Tab(5).Control(1).Enabled=   0   'False
+      Tab(5).Control(2)=   "ListView1"
+      Tab(5).Control(2).Enabled=   0   'False
+      Tab(5).ControlCount=   3
+      Begin MSComctlLib.ListView ListView1 
+         Height          =   4575
+         Left            =   1080
+         TabIndex        =   289
+         Top             =   840
+         Width           =   12375
+         _ExtentX        =   21828
+         _ExtentY        =   8070
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Tahoma"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   6
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Trab."
+            Object.Width           =   1764
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Nombre"
+            Object.Width           =   5503
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Tarea"
+            Object.Width           =   1429
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Descripción"
+            Object.Width           =   6350
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   2
+            SubItemIndex    =   4
+            Text            =   "Fecha"
+            Object.Width           =   3253
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   5
+            Text            =   "Hora"
+            Object.Width           =   2540
+         EndProperty
+      End
       Begin VB.TextBox txtEule_R 
          Height          =   315
          Index           =   21
@@ -934,9 +966,9 @@ Begin VB.Form frmFacEntAlbSAIL
       End
       Begin VB.ComboBox cboEulerUdR 
          Height          =   315
-         ItemData        =   "frmFacEntAlbSAIL.frx":0098
+         ItemData        =   "frmFacEntAlbSAIL.frx":00B4
          Left            =   -68880
-         List            =   "frmFacEntAlbSAIL.frx":00A5
+         List            =   "frmFacEntAlbSAIL.frx":00C1
          Style           =   2  'Dropdown List
          TabIndex        =   88
          Top             =   6480
@@ -1174,7 +1206,7 @@ Begin VB.Form frmFacEntAlbSAIL
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   237
-         Text            =   "frmFacEntAlbSAIL.frx":00B9
+         Text            =   "frmFacEntAlbSAIL.frx":00D5
          Top             =   1320
          Width           =   6975
       End
@@ -1185,7 +1217,7 @@ Begin VB.Form frmFacEntAlbSAIL
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   236
-         Text            =   "frmFacEntAlbSAIL.frx":00BF
+         Text            =   "frmFacEntAlbSAIL.frx":00DB
          Top             =   1080
          Width           =   6975
       End
@@ -1204,7 +1236,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   13
-         Left            =   11040
+         Left            =   -63960
          MaxLength       =   6
          TabIndex        =   53
          Text            =   "codc"
@@ -1215,7 +1247,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   17
-         Left            =   12480
+         Left            =   -62520
          TabIndex        =   221
          Text            =   "codc"
          Top             =   6600
@@ -1260,7 +1292,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   15
-         Left            =   11040
+         Left            =   -63960
          MaxLength       =   6
          TabIndex        =   55
          Text            =   "codc"
@@ -1271,7 +1303,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   2
-         Left            =   11640
+         Left            =   -63360
          Locked          =   -1  'True
          MaxLength       =   60
          TabIndex        =   212
@@ -1284,7 +1316,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   14
-         Left            =   11040
+         Left            =   -63960
          MaxLength       =   6
          TabIndex        =   54
          Text            =   "codc"
@@ -1295,7 +1327,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   13
-         Left            =   11640
+         Left            =   -63360
          Locked          =   -1  'True
          MaxLength       =   60
          TabIndex        =   210
@@ -1307,7 +1339,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   0
-         Left            =   11640
+         Left            =   -63360
          Locked          =   -1  'True
          MaxLength       =   60
          TabIndex        =   208
@@ -1320,7 +1352,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   12
-         Left            =   11040
+         Left            =   -63960
          MaxLength       =   6
          TabIndex        =   52
          Text            =   "codc"
@@ -1795,12 +1827,12 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   675
          Index           =   16
-         Left            =   11040
+         Left            =   -63960
          Locked          =   -1  'True
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   51
-         Text            =   "frmFacEntAlbSAIL.frx":00C5
+         Text            =   "frmFacEntAlbSAIL.frx":00E1
          Top             =   3360
          Width           =   3765
       End
@@ -1808,7 +1840,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   9
-         Left            =   11760
+         Left            =   -63240
          Locked          =   -1  'True
          MaxLength       =   60
          TabIndex        =   165
@@ -1820,7 +1852,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   11
-         Left            =   13200
+         Left            =   -61800
          MaxLength       =   15
          TabIndex        =   163
          Text            =   "numlote"
@@ -1835,7 +1867,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   10
-         Left            =   13800
+         Left            =   -61200
          MaxLength       =   5
          TabIndex        =   45
          Text            =   "bulto"
@@ -1848,7 +1880,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   9
-         Left            =   11040
+         Left            =   -63960
          MaxLength       =   6
          TabIndex        =   50
          Text            =   "codc"
@@ -1989,7 +2021,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   11
             Left            =   1080
-            Picture         =   "frmFacEntAlbSAIL.frx":0102
+            Picture         =   "frmFacEntAlbSAIL.frx":011E
             ToolTipText     =   "Buscar incidencia"
             Top             =   1815
             Width           =   240
@@ -2007,7 +2039,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   10
             Left            =   1080
-            Picture         =   "frmFacEntAlbSAIL.frx":0204
+            Picture         =   "frmFacEntAlbSAIL.frx":0220
             ToolTipText     =   "Buscar trabajador"
             Top             =   1095
             Width           =   240
@@ -2175,7 +2207,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   5
-         Left            =   8880
+         Left            =   -66120
          Locked          =   -1  'True
          MaxLength       =   1
          TabIndex        =   47
@@ -2187,15 +2219,15 @@ Begin VB.Form frmFacEntAlbSAIL
       End
       Begin VB.Frame FrameCliente 
          Height          =   1950
-         Left            =   200
+         Left            =   -74800
          TabIndex        =   103
          Top             =   315
          Width           =   14580
          Begin VB.ComboBox cboTipoImpr 
             Height          =   315
-            ItemData        =   "frmFacEntAlbSAIL.frx":0306
+            ItemData        =   "frmFacEntAlbSAIL.frx":0322
             Left            =   12600
-            List            =   "frmFacEntAlbSAIL.frx":0319
+            List            =   "frmFacEntAlbSAIL.frx":0335
             Style           =   2  'Dropdown List
             TabIndex        =   23
             Tag             =   "TipoImp|N|S|||scaalb|tipoimp|||"
@@ -2204,9 +2236,9 @@ Begin VB.Form frmFacEntAlbSAIL
          End
          Begin VB.ComboBox cboTipoDat 
             Height          =   315
-            ItemData        =   "frmFacEntAlbSAIL.frx":0351
+            ItemData        =   "frmFacEntAlbSAIL.frx":036D
             Left            =   12600
-            List            =   "frmFacEntAlbSAIL.frx":035E
+            List            =   "frmFacEntAlbSAIL.frx":037A
             Style           =   2  'Dropdown List
             TabIndex        =   22
             Tag             =   "Origen Datos|N|S|||scaalb|origdat|||"
@@ -2435,7 +2467,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   0
             Left            =   14160
-            Picture         =   "frmFacEntAlbSAIL.frx":037A
+            Picture         =   "frmFacEntAlbSAIL.frx":0396
             ToolTipText     =   "Limpiar campo"
             Top             =   1200
             Visible         =   0   'False
@@ -2445,7 +2477,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   1
             Left            =   14160
-            Picture         =   "frmFacEntAlbSAIL.frx":6BCC
+            Picture         =   "frmFacEntAlbSAIL.frx":6BE8
             ToolTipText     =   "Limpiar campo"
             Top             =   1560
             Visible         =   0   'False
@@ -2482,7 +2514,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   40
             Left            =   12240
-            Picture         =   "frmFacEntAlbSAIL.frx":D41E
+            Picture         =   "frmFacEntAlbSAIL.frx":D43A
             ToolTipText     =   "Buscar fecha"
             Top             =   720
             Width           =   240
@@ -2491,7 +2523,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   12
             Left            =   6600
-            Picture         =   "frmFacEntAlbSAIL.frx":D4A9
+            Picture         =   "frmFacEntAlbSAIL.frx":D4C5
             ToolTipText     =   "Buscar forma de pago"
             Top             =   540
             Width           =   240
@@ -2519,7 +2551,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   6
             Left            =   855
-            Picture         =   "frmFacEntAlbSAIL.frx":D5AB
+            Picture         =   "frmFacEntAlbSAIL.frx":D5C7
             ToolTipText     =   "Buscar población"
             Top             =   867
             Width           =   240
@@ -2538,7 +2570,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   2
             Left            =   6600
-            Picture         =   "frmFacEntAlbSAIL.frx":D6AD
+            Picture         =   "frmFacEntAlbSAIL.frx":D6C9
             ToolTipText     =   "Buscar direc./dpto"
             Top             =   165
             Width           =   240
@@ -2583,7 +2615,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   1
             Left            =   855
-            Picture         =   "frmFacEntAlbSAIL.frx":D7AF
+            Picture         =   "frmFacEntAlbSAIL.frx":D7CB
             ToolTipText     =   "Buscar cliente varios"
             Top             =   165
             Visible         =   0   'False
@@ -2602,7 +2634,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   5
             Left            =   6600
-            Picture         =   "frmFacEntAlbSAIL.frx":D8B1
+            Picture         =   "frmFacEntAlbSAIL.frx":D8CD
             ToolTipText     =   "Buscar agente"
             Top             =   870
             Width           =   240
@@ -2647,7 +2679,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   4
             Left            =   6600
-            Picture         =   "frmFacEntAlbSAIL.frx":D9B3
+            Picture         =   "frmFacEntAlbSAIL.frx":D9CF
             ToolTipText     =   "Buscar forma de pago"
             Top             =   1230
             Width           =   240
@@ -2667,7 +2699,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "+"
          Height          =   315
          Index           =   1
-         Left            =   2640
+         Left            =   -72360
          TabIndex        =   102
          ToolTipText     =   "Buscar artículo"
          Top             =   3960
@@ -2679,7 +2711,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "+"
          Height          =   315
          Index           =   0
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   101
          ToolTipText     =   "Buscar almacen"
          Top             =   3960
@@ -2692,7 +2724,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   2
-         Left            =   2880
+         Left            =   -72120
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   43
@@ -2709,7 +2741,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   8
-         Left            =   9240
+         Left            =   -65760
          MaxLength       =   12
          TabIndex        =   99
          Tag             =   "Importe"
@@ -2725,7 +2757,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   7
-         Left            =   7680
+         Left            =   -67320
          MaxLength       =   30
          TabIndex        =   49
          Tag             =   "Descuento 2"
@@ -2741,7 +2773,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   6
-         Left            =   7200
+         Left            =   -67800
          MaxLength       =   5
          TabIndex        =   48
          Tag             =   "Descuento 1"
@@ -2757,7 +2789,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   4
-         Left            =   8160
+         Left            =   -66840
          MaxLength       =   12
          TabIndex        =   46
          Tag             =   "Precio"
@@ -2773,7 +2805,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   3
-         Left            =   6120
+         Left            =   -68880
          MaxLength       =   16
          TabIndex        =   44
          Tag             =   "Cantidad"
@@ -2788,7 +2820,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   1
-         Left            =   1200
+         Left            =   -73800
          MaxLength       =   18
          TabIndex        =   42
          Tag             =   "Código Artículo"
@@ -2803,7 +2835,7 @@ Begin VB.Form frmFacEntAlbSAIL
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   0
-         Left            =   360
+         Left            =   -74640
          MaxLength       =   15
          TabIndex        =   41
          Tag             =   "Código Almacen"
@@ -2863,9 +2895,9 @@ Begin VB.Form frmFacEntAlbSAIL
          Width           =   7845
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmFacEntAlbSAIL.frx":DAB5
+         Bindings        =   "frmFacEntAlbSAIL.frx":DAD1
          Height          =   4680
-         Left            =   195
+         Left            =   -74805
          TabIndex        =   100
          Top             =   2325
          Width           =   10740
@@ -2963,10 +2995,46 @@ Begin VB.Form frmFacEntAlbSAIL
          Top             =   675
          Width           =   885
       End
+      Begin VB.Label Label1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   63
+         Left            =   11400
+         TabIndex        =   291
+         Top             =   5640
+         Width           =   1575
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Horas"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   62
+         Left            =   10680
+         TabIndex        =   290
+         Top             =   5640
+         Width           =   975
+      End
       Begin VB.Image imgObserva 
          Height          =   255
          Index           =   0
-         Left            =   12360
+         Left            =   -62640
          Top             =   3120
          Width           =   255
       End
@@ -3456,7 +3524,7 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.Image imgObserva 
          Height          =   255
          Index           =   1
-         Left            =   13680
+         Left            =   -61320
          Top             =   6360
          Width           =   255
       End
@@ -3464,7 +3532,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "Observaciones"
          Height          =   255
          Index           =   58
-         Left            =   12480
+         Left            =   -62520
          TabIndex        =   222
          Top             =   6360
          Width           =   1095
@@ -3491,7 +3559,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "P. Coste"
          Height          =   255
          Index           =   56
-         Left            =   11040
+         Left            =   -63960
          TabIndex        =   213
          Top             =   6360
          Width           =   975
@@ -3499,8 +3567,8 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.Image imgBuscar2 
          Height          =   240
          Index           =   0
-         Left            =   11880
-         Picture         =   "frmFacEntAlbSAIL.frx":DACA
+         Left            =   -63120
+         Picture         =   "frmFacEntAlbSAIL.frx":DAE6
          ToolTipText     =   "Buscar forma de pago"
          Top             =   5640
          Visible         =   0   'False
@@ -3510,7 +3578,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "Trabajador"
          Height          =   255
          Index           =   55
-         Left            =   11040
+         Left            =   -63960
          TabIndex        =   211
          Top             =   5640
          Width           =   975
@@ -3518,8 +3586,8 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.Image imgBuscar2 
          Height          =   240
          Index           =   13
-         Left            =   11400
-         Picture         =   "frmFacEntAlbSAIL.frx":DBCC
+         Left            =   -63600
+         Picture         =   "frmFacEntAlbSAIL.frx":DBE8
          ToolTipText     =   "Buscar forma de pago"
          Top             =   4920
          Visible         =   0   'False
@@ -3529,7 +3597,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "T.O."
          Height          =   255
          Index           =   54
-         Left            =   11040
+         Left            =   -63960
          TabIndex        =   209
          Top             =   4920
          Width           =   975
@@ -3537,8 +3605,8 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.Image imgBuscar2 
          Height          =   240
          Index           =   9
-         Left            =   12000
-         Picture         =   "frmFacEntAlbSAIL.frx":DCCE
+         Left            =   -63000
+         Picture         =   "frmFacEntAlbSAIL.frx":DCEA
          ToolTipText     =   "Buscar forma de pago"
          Top             =   2400
          Visible         =   0   'False
@@ -3547,8 +3615,8 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.Image imgBuscar2 
          Height          =   240
          Index           =   12
-         Left            =   11760
-         Picture         =   "frmFacEntAlbSAIL.frx":DDD0
+         Left            =   -63240
+         Picture         =   "frmFacEntAlbSAIL.frx":DDEC
          ToolTipText     =   "Buscar forma de pago"
          Top             =   4185
          Visible         =   0   'False
@@ -3558,7 +3626,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "Capitulo"
          Height          =   255
          Index           =   53
-         Left            =   11040
+         Left            =   -63960
          TabIndex        =   207
          Top             =   4200
          Width           =   975
@@ -3567,7 +3635,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "Ampliación Línea"
          Height          =   255
          Index           =   35
-         Left            =   11040
+         Left            =   -63960
          TabIndex        =   167
          Top             =   3120
          Width           =   1335
@@ -3576,7 +3644,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "Centro coste"
          Height          =   255
          Index           =   51
-         Left            =   11040
+         Left            =   -63960
          TabIndex        =   166
          Top             =   2400
          Width           =   975
@@ -3585,7 +3653,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   9
          Left            =   -67560
-         Picture         =   "frmFacEntAlbSAIL.frx":DED2
+         Picture         =   "frmFacEntAlbSAIL.frx":DEEE
          ToolTipText     =   "Buscar forma de envio"
          Top             =   480
          Width           =   240
@@ -3612,7 +3680,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   8
          Left            =   -73455
-         Picture         =   "frmFacEntAlbSAIL.frx":DFD4
+         Picture         =   "frmFacEntAlbSAIL.frx":DFF0
          ToolTipText     =   "Buscar trabajador"
          Top             =   1680
          Width           =   240
@@ -3630,7 +3698,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   7
          Left            =   -73455
-         Picture         =   "frmFacEntAlbSAIL.frx":E0D6
+         Picture         =   "frmFacEntAlbSAIL.frx":E0F2
          ToolTipText     =   "Buscar trabajador"
          Top             =   1215
          Width           =   240
@@ -3823,7 +3891,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   0
          Left            =   7980
-         Picture         =   "frmFacEntAlbSAIL.frx":E1D8
+         Picture         =   "frmFacEntAlbSAIL.frx":E1F4
          ToolTipText     =   "Buscar cliente"
          Top             =   510
          Width           =   240
@@ -3850,7 +3918,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   3
          Left            =   7980
-         Picture         =   "frmFacEntAlbSAIL.frx":E2DA
+         Picture         =   "frmFacEntAlbSAIL.frx":E2F6
          ToolTipText     =   "Buscar trabajador"
          Top             =   150
          Width           =   240
@@ -3868,7 +3936,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   0
          Left            =   2835
-         Picture         =   "frmFacEntAlbSAIL.frx":E3DC
+         Picture         =   "frmFacEntAlbSAIL.frx":E3F8
          ToolTipText     =   "Buscar fecha"
          Top             =   120
          Width           =   240
@@ -5141,15 +5209,26 @@ Private Sub Form_Load()
     Me.SSTab1.Tab = 0
       
     LimpiarCampos   'Limpia los campos TextBox
-    
-    CargarComboFacturacion
     VieneDeBuscar = False
+    CargarComboFacturacion
+    
     CodTipoMov = hcoCodTipoM
             
                 
     SSTab1.TabVisible(2) = False
     SSTab1.TabVisible(3) = False
     SSTab1.TabVisible(4) = False   'La de documentos, de momento siempre visible=false
+    
+    
+    Modo = 0
+    
+    If vParamAplic.NumeroInstalacion = 4 Then
+        If CodTipoMov = "ALO" Or CodTipoMov = "ALE" Or CodTipoMov = "ALR" Then Modo = 1
+    End If
+    SSTab1.TabVisible(5) = Modo = 1 'Fichadas. PARA ALE,ALO,
+    
+    
+    Modo = 0
     cadList = "Albaranes Clientes"
     If vParamAplic.NumeroInstalacion = 4 Then
         FrameOT.visible = False
@@ -5180,15 +5259,15 @@ Private Sub Form_Load()
     
     If CodTipoMov = "ALR" Then
         Me.Caption = "Albaranes Reparación"
-        label1(3).visible = False
-        label1(5).visible = False
+        Label1(3).visible = False
+        Label1(5).visible = False
         Text1(23).visible = False
         Text1(24).visible = False
-        label1(12).visible = False
+        Label1(12).visible = False
         Text1(2).visible = False
         'Captions
-        label1(11).Caption = "Nº Repa."
-        label1(10).Caption = "Fecha repara."
+        Label1(11).Caption = "Nº Repa."
+        Label1(10).Caption = "Fecha repara."
         Text1(24).visible = False
         'Terminal
         Text1(38).visible = False
@@ -5196,25 +5275,25 @@ Private Sub Form_Load()
         
         
     Else
-        label1(11).Caption = "Nº Pedido"
-        label1(10).Caption = "Fecha pedido"
+        Label1(11).Caption = "Nº Pedido"
+        Label1(10).Caption = "Fecha pedido"
     End If
    
     'Comprobar si es Departamento o Direccion
-    Me.label1(1).Caption = DevuelveTextoDepto(True)
+    Me.Label1(1).Caption = DevuelveTextoDepto(True)
     If vParamAplic.TieneCRM Then
-        label1(61).Caption = "Observaciones CRM"
+        Label1(61).Caption = "Observaciones CRM"
     Else
-        label1(61).Caption = "Observaciones internas"
+        Label1(61).Caption = "Observaciones internas"
     End If
     ' ---- [19/10/2009] [LAURA] : añadir centro de coste a la linea
     If vEmpresa.TieneAnalitica Then
         'cmdAux(9).ToolTipText = "Buscar centro coste"
         imgBuscar2(9).ToolTipText = "Buscar centro coste"
         txtAux(9).Tag = "centro coste"
-        label1(51).Caption = "Centro coste"
+        Label1(51).Caption = "Centro coste"
     Else
-        label1(51).Caption = "Proveedor"
+        Label1(51).Caption = "Proveedor"
     End If
     imgBuscar2(9).Tag = -1
         
@@ -5226,7 +5305,7 @@ Private Sub Form_Load()
     
     
     'Aportacion a terminal
-    label1(49).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
+    Label1(49).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
     Text1(40).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
     
     If Not EsHistorico Then
@@ -5288,6 +5367,9 @@ Private Sub Form_Load()
     End If
     
     
+    
+    'Lo que era TEXTO para SAIL pasa a ser CERRADA para Euler
+    If vParamAplic.NumeroInstalacion = 4 Then cboTipoDat.List(2) = "CERRADA"
 End Sub
 
 
@@ -5308,7 +5390,7 @@ On Error Resume Next
     
     
     If SSTab1.TabVisible(2) Or SSTab1.TabVisible(3) Then LimpiarFichaTecnica False
-    
+    If SSTab1.TabVisible(5) Then ListView1.ListItems.Clear: Label1(63).Caption = ""
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -6205,7 +6287,7 @@ Dim Desc As String, devuelve As String
         frmB.vTitulo = Titulo
         frmB.vselElem = 1
         frmB.vConexionGrid = conAri  'Conexión a BD: Ariges
-        If Not EsCabecera Then frmB.label1.FontSize = 11
+        If Not EsCabecera Then frmB.Label1.FontSize = 11
 '        frmB.vBuscaPrevia = chkVistaPrevia
         '#
         frmB.Show vbModal
@@ -6301,7 +6383,7 @@ Dim b As Boolean
 
     If hcoCodTipoM <> "ALR" Then
         'sem. entrega pedido
-        label1(12).visible = Not b
+        Label1(12).visible = Not b
         Text1(2).visible = Not b
         'num oferta
         Text1(23).visible = Not b And hcoCodTipoM <> "ALR"
@@ -6315,21 +6397,21 @@ Dim b As Boolean
     
         If b Then
         'El albaran se genero a partir de un ticket
-            Me.label1(11).Caption = "Nº Ticket"
-            Me.label1(10).Caption = "Fecha Ticket"
-            Me.label1(9).Caption = "Trabajador Ticket"
+            Me.Label1(11).Caption = "Nº Ticket"
+            Me.Label1(10).Caption = "Fecha Ticket"
+            Me.Label1(9).Caption = "Trabajador Ticket"
         
             'ocultamos los datos de la oferta
-            Me.label1(3).Caption = "Nº Venta"
-            label1(5).Caption = "Nº Terminal"
+            Me.Label1(3).Caption = "Nº Venta"
+            Label1(5).Caption = "Nº Terminal"
         Else
-            Me.label1(11).Caption = "Nº Pedido"
-            Me.label1(10).Caption = "Fecha Pedido"
-            Me.label1(9).Caption = "Trabajador Pedido"
+            Me.Label1(11).Caption = "Nº Pedido"
+            Me.Label1(10).Caption = "Fecha Pedido"
+            Me.Label1(9).Caption = "Trabajador Pedido"
     
             'Mostramos los datos de la oferta
-            Me.label1(3).Caption = "Nº Oferta"
-            label1(5).Caption = "Fecha Oferta"
+            Me.Label1(3).Caption = "Nº Oferta"
+            Label1(5).Caption = "Fecha Oferta"
         End If
         
     End If
@@ -6338,6 +6420,8 @@ Dim b As Boolean
     
     If SSTab1.TabVisible(2) Then PonerCamposFicha
     If SSTab1.TabVisible(3) Then PonerCamposFichaReparacion
+    If SSTab1.TabVisible(5) Then PonerTareasAsociadas
+    
     
     Text2(3).Text = PonerNombreDeCod(Text1(3), conAri, "straba", "nomtraba", "codtraba")
     Text2(27).Text = PonerNombreDeCod(Text1(27), conAri, "straba", "nomtraba", "codtraba")
@@ -6417,8 +6501,25 @@ Dim b As Boolean
     
     
     'Campo Nº Albaran y Tipo Movim. siempre bloqueado, excepto si estamos en modo de busqueda
+    
+    I = 0
+    If vParamAplic.NumeroInstalacion = 4 Then
+        'para EULER
+        I = 1
+        b = True
+        If Modo = 1 Then
+            b = False
+        Else
+            If Modo = 3 And hcoCodTipoM = "ALR" Then b = False
+        End If
+    End If
+    If I = 0 Then
+        BloquearTxt Text1(0), Modo <> 1, True
+    Else
+        'EULER EN MODO
+        BloquearTxt Text1(0), b, True
+    End If
     b = (Modo <> 1)
-    BloquearTxt Text1(0), b, True
     BloquearTxt Text1(30), b
     'Bloquear los campos de Oferta
     If Text1(23).visible Then
@@ -6557,8 +6658,19 @@ Dim devuelve As String
     
         
     
-    
-    
+    If vParamAplic.NumeroInstalacion = 4 And Modo = 3 Then
+        'En euler, los albaranes de reparacion pueden introducir MANUALMENTE el numero
+        If Me.hcoCodTipoM = "ALR" Then
+            If Me.Text1(0).Text <> "" Then
+                devuelve = "codtipom = " & DBSet(hcoCodTipoM, "T") & " AND numalbar  "
+                devuelve = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", devuelve, Text1(0).Text, "N")
+                If devuelve <> "" Then
+                    MsgBox "Ya existe el albaran " & Me.hcoCodTipoM & Text1(0).Text, vbExclamation
+                    b = False
+                End If
+            End If
+        End If
+    End If
     DatosOk = b
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -7980,34 +8092,44 @@ Dim bol As Boolean, Existe As Boolean
 Dim cambiaSQL As Boolean
 Dim devuelve As String
 Dim codtipomAUX As String
+Dim ObtenerContador As Boolean
 
     On Error GoTo EInsertarOferta
     
     bol = True
     
-    cambiaSQL = False
     
     
+    ObtenerContador = True   'Obtener contador
     codtipomAUX = CodTipoMov
     If vParamAplic.NumeroInstalacion = 4 Then
         If CodTipoMov = "ALR" Then
-            'Esta postpuesto hasta nueva orden
-            'Si el trabajador es de Valencia sera los ALR, si es de EUSAKADI seran CAR
-            
-            devuelve = DevuelveDesdeBD(conAri, "codalmac", "straba", "codtraba", Text1(3).Text)
-            If devuelve = "10" Then codtipomAUX = "ALR"  'codtipomAUX = "CAR"
-           
+        
+            'Si ha metido a mano el numero de albaran, lo dejo
+            If Trim(Text1(0).Text) <> "" Then
+                ObtenerContador = False
+            Else
+                'Si el trabajador es de Valencia sera los ALR, si es de EUSAKADI seran CAR
+                devuelve = DevuelveDesdeBD(conAri, "codalmac", "straba", "codtraba", Text1(3).Text)
+                If devuelve = "10" Then codtipomAUX = "CAR"
+            End If
         End If
     End If
     
+    If ObtenerContador Then Text1(0).Text = vTipoMov.ConseguirContador(codtipomAUX)
     
-    Text1(0).Text = vTipoMov.ConseguirContador(codtipomAUX)
+    
+    
+    cambiaSQL = False
     Do
         'Pero en scaalb, en el caso de los albaranes de reparacion de EULER, siempre graba el ALR
         devuelve = DevuelveDesdeBDNew(conAri, NombreTabla, "numalbar", "codtipom", Text1(30).Text, "T", , "numalbar", Text1(0).Text, "N")
         If devuelve <> "" Then
             'Ya existe el contador incrementarlo
             Existe = True
+            
+            If Not ObtenerContador Then Err.Raise 513, , "Entrada duplicada en BD"  'EULER. Pueden poner contador a mano
+            
             vTipoMov.IncrementarContador (codtipomAUX)
             Text1(0).Text = vTipoMov.ConseguirContador(codtipomAUX)
             cambiaSQL = True
@@ -10523,5 +10645,51 @@ Dim N As Byte
    conn.Execute s
     
 End Function
+
+
+
+
+
+
+
+Private Sub PonerTareasAsociadas()
+Dim N As Integer
+Dim SQL As String
+Dim Horas As Currency
+
+    SQL = "select sreloj.codtraba,nomtraba,fecha,sreloj.codtipor,nomtipor,horainicio,horafin,calculadas from sreloj left join stipor on sreloj.codtipor=stipor.codtipor"
+    SQL = SQL & " left join straba on straba.codtraba=sreloj.codtraba"
+    SQL = SQL & " WHERE codtipom = '" & CodTipoMov & "' and numalbar =" & Text1(0).Text
+    SQL = SQL & " ORDER BY fecha,horainicio"
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    ListView1.ListItems.Clear
+    Horas = 0
+    N = 0
+    While Not miRsAux.EOF
+        N = N + 1
+        ListView1.ListItems.Add , , Format(miRsAux!CodTraba, "0000")
+        ListView1.ListItems(N).SubItems(1) = DBLet(miRsAux!NomTraba, "T")
+        ListView1.ListItems(N).SubItems(2) = DBLet(miRsAux!codtipor, "T")
+        ListView1.ListItems(N).SubItems(3) = DBLet(miRsAux!NomTipor, "T")
+        ListView1.ListItems(N).SubItems(4) = Format(miRsAux!Fecha, "dd/mm/yyyy")
+        
+        If Not IsNull(miRsAux!calculadas) Then
+            Horas = Horas + miRsAux!calculadas
+            ListView1.ListItems(N).SubItems(5) = Format(miRsAux!calculadas, FormatoCantidad)
+        Else
+            ListView1.ListItems(N).SubItems(5) = " "
+        End If
+        miRsAux.MoveNext
+    Wend
+    Label1(63).Caption = Format(Horas, FormatoCantidad)
+    miRsAux.Close
+    Set miRsAux = Nothing
+    
+    
+'    For N = 1 To ListView1.ColumnHeaders.Count
+'        Debug.Print N & ": " & ListView1.ColumnHeaders(N).Width
+'    Next
+End Sub
 
 

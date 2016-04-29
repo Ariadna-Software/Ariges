@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmListado5 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Listado"
@@ -14,6 +14,111 @@ Begin VB.Form frmListado5
    ScaleWidth      =   13080
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameTelefonia 
+      Height          =   3015
+      Left            =   4920
+      TabIndex        =   186
+      Top             =   1440
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.TextBox txtNumero 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   2
+         Left            =   2640
+         TabIndex        =   188
+         Text            =   "Text1"
+         Top             =   1560
+         Width           =   855
+      End
+      Begin VB.TextBox txtNumero 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   1
+         Left            =   2640
+         TabIndex        =   187
+         Text            =   "Text1"
+         Top             =   1080
+         Width           =   855
+      End
+      Begin VB.CommandButton cmdContratoTelef 
+         Caption         =   "Aceptar"
+         Height          =   375
+         Left            =   1680
+         TabIndex        =   189
+         Top             =   2400
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   18
+         Left            =   2880
+         TabIndex        =   190
+         Top             =   2400
+         Width           =   975
+      End
+      Begin VB.Label lblDpto 
+         AutoSize        =   -1  'True
+         Caption         =   "Meses duración"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   17
+         Left            =   360
+         TabIndex        =   193
+         Top             =   1560
+         Width           =   1110
+      End
+      Begin VB.Label lblDpto 
+         AutoSize        =   -1  'True
+         Caption         =   "Importe terminal"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   16
+         Left            =   360
+         TabIndex        =   192
+         Top             =   1080
+         Width           =   1185
+      End
+      Begin VB.Label Label9 
+         Alignment       =   2  'Center
+         Caption         =   "Datos contrato"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   18
+         Left            =   120
+         TabIndex        =   191
+         Top             =   360
+         Width           =   3855
+      End
+   End
    Begin VB.Frame FramePreguntaDevoluciones 
       Height          =   2175
       Left            =   3240
@@ -2645,6 +2750,9 @@ Public OtrosDatos As String
     '   16.- Listado compras cliente desde una fecha
     '   17.- devoluciones. Preguta si pasa a albaran o a frt
     
+    '   18.-  Telefonia,  Impresion contrato.  Importet terminal y meses
+    
+    
 Private WithEvents frmCli As frmFacClientes3
 Attribute frmCli.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
@@ -2779,6 +2887,8 @@ Private Sub cmdCancelar_Click(Index As Integer)
         CadenaDesdeOtroForm = ""
     ElseIf Index = 17 Then
         CadenaDesdeOtroForm = ""
+    ElseIf Index = 18 Then
+        CadenaDesdeOtroForm = ""
     End If
     Unload Me
     
@@ -2906,6 +3016,12 @@ Private Sub cmdContadorAgua_Click()
     
 End Sub
 
+Private Sub cmdContratoTelef_Click()
+
+    CadenaDesdeOtroForm = Trim(txtNumero(1).Text) & "|" & Trim(txtNumero(2).Text) & "|"
+    Unload Me
+End Sub
+
 Private Sub cmdDevolucion_Click()
     CadenaDesdeOtroForm = IIf(Me.optDevol(0).Value, "ALV", "ART")
     Unload Me
@@ -2922,7 +3038,7 @@ Private Sub cmdElimPresu_Click()
         MsgBox "Ningun dato a eliminar", vbExclamation
     Else
         CadenaDesdeOtroForm = miSQL
-        frmVarios3.Opcion = 5
+        frmVarios3.opcion = 5
         frmVarios3.Show vbModal
         Unload Me
         
@@ -2950,7 +3066,7 @@ Private Sub cmdFitoCampos_Click()
         cadNomRPT = cadNomRPT & ".rpt"
         cadPDFrpt = cadNomRPT
         conSubRPT = False
-        cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
+        cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
         LlamarImprimir
     
     End If
@@ -3018,7 +3134,7 @@ Private Sub cmdSdtofmInsert_Click()
     Screen.MousePointer = vbHourglass
     lblIndicador(0).Caption = "Preparando BD"
     lblIndicador(0).Refresh
-    conn.Execute "DELETE FROM tmpinformes where codusu =" & vUsu.Codigo
+    conn.Execute "DELETE FROM tmpinformes where codusu =" & vUsu.codigo
     
     
     'Cargamos todos los posibles descuentos
@@ -3026,7 +3142,7 @@ Private Sub cmdSdtofmInsert_Click()
     lblIndicador(0).Refresh
     
     miSQL = "insert into tmpinformes(codusu,codigo1,campo1,importe1,fecha1)"
-    miSQL = miSQL & " SELECT " & vUsu.Codigo & ", sactivdtos.codactiv,sactivdtos.codfamia,dtoline1"
+    miSQL = miSQL & " SELECT " & vUsu.codigo & ", sactivdtos.codactiv,sactivdtos.codfamia,dtoline1"
     miSQL = miSQL & "," & DBSet(txtFecha(2).Text, "F")
     miSQL = miSQL & " From sactivdtos, sfamiadtos WHERE  sfamiadtos.codfamia=sactivdtos.codfamia AND"
     miSQL = miSQL & " sfamiadtos.clasifica=sactivdtos.clasifica "
@@ -3052,7 +3168,7 @@ Private Sub cmdSdtofmInsert_Click()
             miSQL = miSQL & ", " & miRsAux!Codfamia
             If Len(miSQL) > 400 Then
                 miSQL = Mid(miSQL, 2)
-                miSQL = vUsu.Codigo & " AND campo1 IN (" & miSQL & ")"
+                miSQL = vUsu.codigo & " AND campo1 IN (" & miSQL & ")"
                 miSQL = "DELETE FROM tmpinformes WHERE codusu = " & miSQL
                 conn.Execute miSQL
                 miSQL = ""
@@ -3062,7 +3178,7 @@ Private Sub cmdSdtofmInsert_Click()
         miRsAux.Close
         If miSQL <> "" Then
             miSQL = Mid(miSQL, 2)
-            miSQL = vUsu.Codigo & " AND campo1 IN (" & miSQL & ")"
+            miSQL = vUsu.codigo & " AND campo1 IN (" & miSQL & ")"
             miSQL = "DELETE FROM tmpinformes WHERE codusu = " & miSQL
             conn.Execute miSQL
         End If
@@ -3082,7 +3198,7 @@ Private Sub cmdSdtofmInsert_Click()
     lblIndicador(0).Caption = "Insertando en descuentos"
     lblIndicador(0).Refresh
     miSQL = "INSERT INTO sdtofm (codclien,codfamia,codmarca,fechadto,dtoline1,dtoline2,codactiv,dtoEsp) SELECT"
-    miSQL = miSQL & " null,campo1,null,fecha1,importe1,0,codigo1,0 FROM tmpinformes where codusu = " & vUsu.Codigo
+    miSQL = miSQL & " null,campo1,null,fecha1,importe1,0,codigo1,0 FROM tmpinformes where codusu = " & vUsu.codigo
     conn.Execute miSQL
     
     
@@ -3216,6 +3332,7 @@ Dim indice As Byte
     FrameMarjalChipos.visible = False
     FrameListadoComprasClientes.visible = False
     FramePreguntaDevoluciones.visible = False
+    FrameTelefonia.visible = False
     indice = OpcionListado
     Me.Caption = "Listado"
     Select Case OpcionListado
@@ -3305,6 +3422,11 @@ Dim indice As Byte
         
     Case 17
         PonerFrameVisible FramePreguntaDevoluciones
+        
+    Case 18
+        PonerFrameVisible FrameTelefonia
+        limpiar Me
+        txtNumero(2).Text = "24"
     End Select
     
     Me.cmdCancelar(CInt(indice)).Cancel = True
@@ -3346,10 +3468,10 @@ Private Sub LlamarImprimir()
         .SoloImprimir = False
         .EnvioEMail = False
         .Titulo = cadTitulo
-        .Opcion = 3000   'VAN TODOS EN ESTE SACO
+        .opcion = 3000   'VAN TODOS EN ESTE SACO
         .NombrePDF = ""
         .NombrePDF = cadPDFrpt
-        .NombreRpt = cadNomRPT
+        .NombreRPT = cadNomRPT
         .ConSubInforme = conSubRPT
         .MostrarTreeDesdeFuera = vMostrarTree
         .Show vbModal
@@ -3758,14 +3880,14 @@ Private Sub txtFamia_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtFamia_LostFocus(Index As Integer)
-Dim Codigo  As String
+Dim codigo  As String
     txtFamia(Index).Text = Trim(txtFamia(Index).Text)
-    Codigo = ""
+    codigo = ""
     miSQL = ""
     If txtFamia(Index).Text <> "" Then
         If IsNumeric(txtFamia(Index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(Index).Text, "N")
-            If Codigo = "" Then
+            codigo = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(Index).Text, "N")
+            If codigo = "" Then
                 MsgBox "El codigo no pertence a ninguna familia", vbExclamation
                 If Index = 0 Then
                     txtFamia(Index).Text = ""
@@ -3777,7 +3899,7 @@ Dim Codigo  As String
         End If
     End If
      
-    Me.txtDescFamia(Index).Text = Codigo
+    Me.txtDescFamia(Index).Text = codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
         txtFamia(Index).Text = ""
@@ -3893,32 +4015,45 @@ Dim J As Long
     miSQL = ""
     If txtNumero(Index).Text <> "" Then
         
-        'Select case index
-        If Not PonerFormatoEntero(txtNumero(Index)) Then
-            txtNumero(Index).Text = ""
-            
-        Else
-            'Calulamos la diferencia
-            J = Val(Trim(Mid(Me.txtNoModificable(3).Text, 11))) 'quitamos la fecha y queda la lectura
-            J = Val(txtNumero(Index).Text) - J
-            If J < 0 Then
-                MsgBox "Consumo negativo", vbExclamation
-                J = 0
-            Else
-                miSQL = txtNumero(Index).Text
+        Select Case Index
+        Case 0
+            If Not PonerFormatoEntero(txtNumero(Index)) Then
+                txtNumero(Index).Text = ""
                 
+            Else
+                'Calulamos la diferencia
+                
+                J = Val(Trim(Mid(Me.txtNoModificable(3).Text, 11))) 'quitamos la fecha y queda la lectura
+                J = Val(txtNumero(Index).Text) - J
+                If J < 0 Then
+                    MsgBox "Consumo negativo", vbExclamation
+                    J = 0
+                Else
+                    miSQL = txtNumero(Index).Text
+                    
+                End If
             End If
-        End If
-    
+        Case 1
+        
+            If Not PonerFormatoDecimal(txtNumero(Index), 3) Then txtNumero(Index).Text = ""
+        Case 2
+            If Not PonerFormatoEntero(txtNumero(Index)) Then txtNumero(Index).Text = ""
+        
+        End Select
     Else
         
     End If
-    txtNumero(0).Text = miSQL
-    If J = 0 Then J = RecuperaValor(OtrosDatos, 3)
-    Label1(7).Tag = J
-    Label1(7).Caption = Label1(7).Tag & " m3"
-    If txtNumero(0).Text = "" Then PonerFoco txtNumero(0)
+    If Index = 0 Then
+        txtNumero(0).Text = miSQL
+        If J = 0 Then J = RecuperaValor(OtrosDatos, 3)
+        Label1(7).Tag = J
+        Label1(7).Caption = Label1(7).Tag & " m3"
+        If txtNumero(0).Text = "" Then PonerFoco txtNumero(0)
+        
+        
+    End If
 End Sub
+
 
 
 
@@ -4272,7 +4407,7 @@ End Function
 
 Private Function GeneraDatosComprasTratamientos() As Boolean
 Dim RN As ADODB.Recordset
-Dim total As Currency
+Dim Total As Currency
 
     On Error GoTo eGeneraDatosComprasTratamientos
     
@@ -4281,7 +4416,7 @@ Dim total As Currency
     
     Me.lblIndicador(1).Caption = "Obteniendo ventas articulo"
     Me.lblIndicador(1).Refresh
-    miSQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
+    miSQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.codigo
     conn.Execute miSQL
     
 '''''''    miSQL = "select " & vUsu.Codigo & ", @rownum:=@rownum+1 AS rownum ,slifac.codartic,codfamia,sartic.nomartic,"
@@ -4341,19 +4476,19 @@ Dim total As Currency
         
         'tmpinformes(codusu,codigo1,nombre1,campo2,campo1,nombre2,importe1) " & miSQL
         
-        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBSet(miRsAux!codArtic, "T") & ",0,"
+        miSQL = miSQL & ", (" & vUsu.codigo & "," & NumRegElim & "," & DBSet(miRsAux!codArtic, "T") & ",0,"
     
         RN.Find "codartic = " & DBSet(miRsAux!codArtic, "T"), , adSearchForward, 1
         'NO PUEDE SER EOF
         If Not IsNull(miRsAux!Cuantos) Then
-            total = DBLet(RN!precioUC, "N")
-            total = Round(total * miRsAux!Cuantos, 2)
+            Total = DBLet(RN!precioUC, "N")
+            Total = Round(Total * miRsAux!Cuantos, 2)
         Else
-            total = 0
+            Total = 0
         End If
         
         
-        miSQL = miSQL & RN!Codfamia & "," & DBSet(RN!NomArtic, "T") & "," & DBSet(total, "N") & ")"
+        miSQL = miSQL & RN!Codfamia & "," & DBSet(RN!NomArtic, "T") & "," & DBSet(Total, "N") & ")"
         
         
         If Len(miSQL) > 10000 Then
@@ -4454,7 +4589,7 @@ Dim ImporteTotal As Currency
 
     'miSQL = "Select campo1,campo2,nomfamia, ctaventa,ctavtaser,ctavent1,ctavtaseralt,sum(importe1) as impor "
     miSQL = "Select campo1,nomfamia,ctacompr ,ctacomprser,sum(importe1) as impor "
-    miSQL = miSQL & " from tmpinformes,sfamia where tmpinformes.campo1=sfamia.codfamia AND codusu = " & vUsu.Codigo & " group by campo1"
+    miSQL = miSQL & " from tmpinformes,sfamia where tmpinformes.campo1=sfamia.codfamia AND codusu = " & vUsu.codigo & " group by campo1"
 
     
     
@@ -4581,7 +4716,7 @@ End Sub
 Private Sub CargaLineasPedidoProveedor()
     Set miRsAux = New ADODB.Recordset
     
-    miSQL = "select tmpslipreu.*,artvario from tmpslipreu,sartic where tmpslipreu.codartic=sartic.codartic and codusu = " & vUsu.Codigo & " ORDER BY numlinea"
+    miSQL = "select tmpslipreu.*,artvario from tmpslipreu,sartic where tmpslipreu.codartic=sartic.codartic and codusu = " & vUsu.codigo & " ORDER BY numlinea"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = 0
     lw(2).ListItems.Clear
@@ -4632,7 +4767,7 @@ Dim RN As ADODB.Recordset
     
     Me.lblIndicador(2).Caption = "Obteniendo ventas articulo"
     Me.lblIndicador(2).Refresh
-    miSQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
+    miSQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.codigo
     conn.Execute miSQL
     
     'Tipo factura
@@ -4713,7 +4848,7 @@ Dim RN As ADODB.Recordset
         '                   codclien  campo secuenc fra     nomvari  partida  campook cant   artfito fecfac  fecalb
         'tmpinformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,nombre3,porcen1,importe1,obser,fecha1 ,fecha2,)
         
-        miSQL = ", (" & vUsu.Codigo & "," & miRsAux!codClien & "," & miRsAux!codCampo & "," & NumRegElim & ",'"
+        miSQL = ", (" & vUsu.codigo & "," & miRsAux!codClien & "," & miRsAux!codCampo & "," & NumRegElim & ",'"
         miSQL = miSQL & Mid(miRsAux!codtipom & "   ", 1, 3) & Format(miRsAux!NumFactu, "000000") & "',"
         'La tengo guardada en las lineas del campo
         If IsNull(miRsAux!nomvarie) Or IsNull(miRsAux!nompartida) Then
@@ -4753,7 +4888,7 @@ Dim RN As ADODB.Recordset
      
      
     'Ajustamos los campos que no tenemos NOmvarie nompartida
-    miSQL = "Select distinct(campo1) from tmpinformes where codusu =" & vUsu.Codigo & " AND porcen1<>0 ORDER BY campo1"
+    miSQL = "Select distinct(campo1) from tmpinformes where codusu =" & vUsu.codigo & " AND porcen1<>0 ORDER BY campo1"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cadTitulo = ""
     miSQL = ""
@@ -4792,7 +4927,7 @@ Dim RN As ADODB.Recordset
             
             miSQL = cadNomRPT & miSQL & ")"
             miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-            miSQL = "UPDATE tmpinformes set nombre2=@@ , nombre3=## , porcen1=0 WHERE codusu = " & vUsu.Codigo & " AND campo1 = "
+            miSQL = "UPDATE tmpinformes set nombre2=@@ , nombre3=## , porcen1=0 WHERE codusu = " & vUsu.codigo & " AND campo1 = "
             While Not miRsAux.EOF
                 cadPDFrpt = Replace(miSQL, "@@", DBSet(miRsAux!nomparti, "T"))
                 cadPDFrpt = Replace(cadPDFrpt, "##", DBSet(miRsAux!nomvarie, "T"))
@@ -4824,7 +4959,7 @@ Dim RN As ADODB.Recordset
                 Me.lblIndicador(2).Caption = "Fra: " & cadTitulo
                 Me.lblIndicador(2).Refresh
                 miSQL = "UPDATE tmpinformes set obser = " & DBSet(cadNomRPT, "T")
-                miSQL = miSQL & " WHERE codusu = " & vUsu.Codigo & " AND nombre1= '" & cadTitulo & "'"
+                miSQL = miSQL & " WHERE codusu = " & vUsu.codigo & " AND nombre1= '" & cadTitulo & "'"
                 conn.Execute miSQL
             End If
             cadTitulo = cadPDFrpt

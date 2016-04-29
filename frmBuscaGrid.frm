@@ -758,9 +758,9 @@ Dim I As Integer
 End Sub
 
 
-Private Sub ConfiguraForm(ByVal tamanyo As Integer)
+Private Sub ConfiguraForm(ByVal Tamanyo As Integer)
 'Ajustar tamaño del form
-    Select Case tamanyo
+    Select Case Tamanyo
     Case 0  'Tamaño normal
         DataGrid1.visible = True
         Me.Height = 6225
@@ -847,10 +847,6 @@ Dim pTexto As String
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub Text1_DblClick()
-
-End Sub
-
 Private Sub Text1_GotFocus()
     ConseguirFoco Text1, 3
 End Sub
@@ -889,14 +885,14 @@ End Sub
 
 Private Sub CargaTagTxt(ByVal vselElem As Integer)
 Dim Cad As String
-Dim EsNulo As String
+Dim esNULO As String
 
     If vselElem = 0 Then
-        EsNulo = "N"
+        esNULO = "N"
     Else
-        EsNulo = "S"
+        esNULO = "S"
     End If
-    Cad = Cabeceras(vselElem) & "|" & TipoCampo(vselElem) & "|" & EsNulo & "|||"
+    Cad = Cabeceras(vselElem) & "|" & TipoCampo(vselElem) & "|" & esNULO & "|||"
     Cad = Cad & vTabla & "|" & CabColumnas(vselElem) & "|" & FormatoCampo(vselElem) & "||"
     txtBusqueda.Tag = Cad
 End Sub

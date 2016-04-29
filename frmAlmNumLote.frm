@@ -480,7 +480,7 @@ Dim NumReg As Long
                      'LOG
                      If vParamAplic.ManipuladorFitosanitarios2 Then
                         
-                        Indicador = "Articulo: " & Data1.Recordset!codartic & " -- " & Data1.Recordset!NomArtic
+                        Indicador = "Articulo: " & Data1.Recordset!codArtic & " -- " & Data1.Recordset!NomArtic
                         Indicador = Indicador & vbCrLf & "Anterior: " & Data1.Recordset!vendida
                         Indicador = Indicador & "     ACtual: " & Me.txtAux(4).Text
                         
@@ -1027,7 +1027,7 @@ Dim SQL As String
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Me.Data1.Recordset.AbsolutePosition
-        SQL = "Delete from " & NombreTabla & " WHERE codartic=" & DBSet(Data1.Recordset!codartic, "T") & " AND numlotes=" & DBSet(Data1.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data1.Recordset!fecentra, "F")
+        SQL = "Delete from " & NombreTabla & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Data1.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data1.Recordset!fecentra, "F")
         
         conn.Execute SQL
         CancelaADODC Me.Data1
@@ -1044,7 +1044,7 @@ End Function
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim cArt As CArticulo
+Dim cart As CArticulo
 
     On Error GoTo ErrDatosOK
 
@@ -1055,14 +1055,14 @@ Dim cArt As CArticulo
     
     'comprobar que el articulo insertado tiene control de numero de serie
     If Modo = 3 Then
-        Set cArt = New CArticulo
-        If cArt.LeerDatos(txtAux(0).Text) Then
-            If Not cArt.TieneNumLote Then
+        Set cart = New CArticulo
+        If cart.LeerDatos(txtAux(0).Text) Then
+            If Not cart.TieneNumLote Then
                 b = False
                 MsgBox "El artículo no tiene control de nº de lote.", vbInformation
             End If
         End If
-        Set cArt = Nothing
+        Set cart = Nothing
     End If
     
     
@@ -1267,7 +1267,7 @@ Dim SQL As String
     PuedeRealizarLaAccion = False
     If SQL <> "" Then
         SQL = "numlote =" & DBSet(Data1.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!fecentra, "F")
-        SQL = SQL & " AND codartic = " & DBSet(Data1.Recordset!codartic, "T") & " AND 1"
+        SQL = SQL & " AND codartic = " & DBSet(Data1.Recordset!codArtic, "T") & " AND 1"
         SQL = DevuelveDesdeBD(conAri, "count(*)", "slialblotes", SQL, "1")
         If Val(SQL) > 0 Then
             MsgBox "El lote ya ha sido vendido", vbExclamation
@@ -1275,7 +1275,7 @@ Dim SQL As String
         End If
         
         SQL = "numlote =" & DBSet(Data1.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!fecentra, "F")
-        SQL = SQL & " AND codartic = " & DBSet(Data1.Recordset!codartic, "T") & " AND 1"
+        SQL = SQL & " AND codartic = " & DBSet(Data1.Recordset!codArtic, "T") & " AND 1"
         SQL = DevuelveDesdeBD(conAri, "count(*)", "slivenlotes", SQL, "1")
         If Val(SQL) > 0 Then
             MsgBox "El lote esta siendo vendido", vbExclamation
@@ -1291,13 +1291,23 @@ End Function
 
 Private Sub HacerComprobacion()
 Dim Cad As String
-Dim Cantidad As Currency
+Dim cantidad As Currency
 Dim ColArtic As Collection
 Dim I As Integer
 Dim EnElLote As Currency
 Dim NF As Integer
+Dim UpdateaSlotes As Boolean
+
 
     conn.Execute "DELETE FROM tmpstockfec WHERE codusu =" & vUsu.codigo
+    
+    lblIndicador.Caption = "Ajuste devoluciones"
+    lblIndicador.Refresh
+    Cad = "UPDATE slotes set vendida=canentra where canentra < 0"
+    conn.Execute Cad
+    Espera 0.5
+    
+    
     
     lblIndicador.Caption = "Leyendo lotes"
     lblIndicador.Refresh
@@ -1305,6 +1315,9 @@ Dim NF As Integer
     Cad = Cad & " select " & vUsu.codigo & ",codartic,1,sum(canentra-vendida) from slotes group by codartic"
     conn.Execute Cad
      
+     
+    
+      
      
     lblIndicador.Caption = "Leyendo salmac"
     lblIndicador.Refresh
@@ -1318,17 +1331,17 @@ Dim NF As Integer
     Open App.Path & "\ajslot.txt" For Output As #NF
     While Not miRsAux.EOF
         
-        Cad = DevuelveDesdeBD(conAri, "stock", "tmpstockfec", "codusu = " & vUsu.codigo & " AND codartic", miRsAux!codartic, "T")
-        Cantidad = CCur(Cad)
+        Cad = DevuelveDesdeBD(conAri, "stock", "tmpstockfec", "codusu = " & vUsu.codigo & " AND codartic", miRsAux!codArtic, "T")
+        cantidad = CCur(Cad)
         
-        If miRsAux!canti = Cantidad Then
-            Cad = "DELETE FROM tmpstockfec WHERE codusu =" & vUsu.codigo & " AND codartic = " & DBSet(miRsAux!codartic, "T")
+        If miRsAux!canti = cantidad Then
+            Cad = "DELETE FROM tmpstockfec WHERE codusu =" & vUsu.codigo & " AND codartic = " & DBSet(miRsAux!codArtic, "T")
             conn.Execute Cad
         Else
         
-            Cantidad = miRsAux!canti
+            cantidad = miRsAux!canti
         
-            Cad = miRsAux!codartic & "|" & Cantidad & "|"
+            Cad = miRsAux!codArtic & "|" & cantidad & "|"
             ColArtic.Add Cad
         End If
         
@@ -1345,65 +1358,78 @@ Dim NF As Integer
         
         
         Cad = RecuperaValor(ColArtic.item(I), 2)
-        Cantidad = CCur(Cad)   'stock - lotes
+        cantidad = CCur(Cad)   'canstock
         
         
         Cad = RecuperaValor(ColArtic.item(I), 1)
         Debug.Print Cad
         
-        Cad = "Select * from slotes WHERE canentra-vendida>0 and codartic=" & DBSet(Cad, "T") & " order by fecentra"
-        If Cantidad < 0 Then Cad = Cad & " DESC"
-        miRsAux.Open Cad, conn, adOpenKeyset, adLockReadOnly, adCmdText
-        Cad = ""
-        While Not miRsAux.EOF
-           
-            EnElLote = 0
-            If Cantidad < 0 Then
-                'Significa que hay mas en lote s que en stock. Nos fiamos del stock
-                
-                
-                
-                
-            Else
-                
-                    If miRsAux!canentra > Cantidad Then
-                        'Perfecto. TOOOOdos va a este lote
-                        EnElLote = miRsAux!canentra - Cantidad
-                        Cantidad = 0
-                    Else
-                        
-                        EnElLote = miRsAux!canentra
-                        Cantidad = Cantidad - miRsAux!canentra
-                    End If
-                             
-            End If
+        
+        If cantidad < 0 Then
+            'STOCK NEGATIVO
             
+            'Cantidad negativa
+            Print #NF, RecuperaValor(ColArtic.item(I), 1) & "::" & RecuperaValor(ColArtic.item(I), 2) & "::" & cantidad & "      NEGATIVO"
             
-            If EnElLote > 0 Then
-                Cad = "UPDATE slotes set vendida=" & DBSet(EnElLote, "N") & " WHERE codartic =" & miRsAux!codartic
-                Cad = Cad & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!fecentra, "F")
-                conn.Execute Cad
-            End If
-            miRsAux.MoveNext
-            If Cantidad = 0 Then
-                'HA IDO TODO BIEN
-                While Not miRsAux.EOF
-                     Cad = "UPDATE slotes set vendida=canentra WHERE codartic =" & miRsAux!codartic
+        Else
+            Cad = "Select * from slotes WHERE  codartic=" & DBSet(Cad, "T") & " AND canentra >0 order by fecentra desc"
+            miRsAux.Open Cad, conn, adOpenKeyset, adLockReadOnly, adCmdText
+            Cad = ""
+            While Not miRsAux.EOF
+               
+               
+                If miRsAux!codArtic = "2020903032012" Then Stop
+               
+                EnElLote = 0
+                UpdateaSlotes = False
+                If cantidad < 0 Then
+                    'Significa que hay mas en lote s que en stock. Nos fiamos del stock
+                    
+                    
+                    
+                    
+                Else
+                    
+                        If miRsAux!canentra > cantidad Then
+                            'Perfecto. TOOOOdos va a este lote
+                            EnElLote = miRsAux!canentra - cantidad
+                            cantidad = 0
+                            UpdateaSlotes = True
+                        Else
+                            
+                            EnElLote = 0
+                            cantidad = cantidad - miRsAux!canentra
+                            UpdateaSlotes = True
+                        End If
+                                 
+                End If
+                
+                
+                If UpdateaSlotes Then
+                    Cad = "UPDATE slotes set vendida=" & DBSet(EnElLote, "N") & " WHERE codartic =" & DBSet(miRsAux!codArtic, "T")
                     Cad = Cad & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!fecentra, "F")
                     conn.Execute Cad
-                    miRsAux.MoveNext
-                Wend
+                End If
+                miRsAux.MoveNext
+                If cantidad = 0 Then
+                    'HA IDO TODO BIEN
+                    While Not miRsAux.EOF
+                        Cad = "UPDATE slotes set vendida=canentra WHERE codartic =" & DBSet(miRsAux!codArtic, "T")
+                        Cad = Cad & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!fecentra, "F")
+                        conn.Execute Cad
+                        miRsAux.MoveNext
+                    Wend
+                End If
+            Wend
+            miRsAux.Close
+            
+            If cantidad <> 0 Then
+                Print #NF, RecuperaValor(ColArtic.item(I), 1) & "::" & RecuperaValor(ColArtic.item(I), 2) & "::" & cantidad
+            Else
+                If Cad = "" Then Print #NF, RecuperaValor(ColArtic.item(I), 1) & "::" & RecuperaValor(ColArtic.item(I), 2) & " 0STOCK"
             End If
-        Wend
-        miRsAux.Close
         
-        If Cantidad <> 0 Then
-            Print #NF, RecuperaValor(ColArtic.item(I), 1) & "::" & RecuperaValor(ColArtic.item(I), 2) & "::" & Cantidad
-        Else
-            If Cad = "" Then Print #NF, RecuperaValor(ColArtic.item(I), 1) & "::" & RecuperaValor(ColArtic.item(I), 2) & " 0STOCK"
         End If
-        
-        
     Next
     Close #NF
     

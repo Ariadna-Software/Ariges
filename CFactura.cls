@@ -932,7 +932,7 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
                 textcsb33 = textcsb33 & "  FACT: " & rsVenci!Serie & Format(rsVenci!NumFact, "000000") & "-" & Format(rsVenci!Ano, "0000") & _
                                         " DE " & Format(rsVenci!Fecha, "dd/mm/yyyy")
         
-                textcsb33 = textcsb33 & "  TOT. " & Format(rsVenci!total, "#,###,##0.00") & "'"
+                textcsb33 = textcsb33 & "  TOT. " & Format(rsVenci!Total, "#,###,##0.00") & "'"
                 
                 'la ultima linea del CSB, la der y la izda
                 CadValues2 = "'BASE: " & Format(rsVenci!BaseImponible, "##0.00")
@@ -1026,7 +1026,7 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
                 'la ultima linea del CSB, la der y la izda
                 CadValues2 = "BASE                " & Right(Space(12) & Format(rsVenci!BaseImponible, "#,###,##0.00"), 12) & _
                                                             " IVA:" & Format(rsVenci!TipoIVA, "#0") & ""
-                CadValues3 = "%      CUOTA: " & Format(rsVenci!Cuota, "#,###,##0.00") & "     TOTAL: " & Format(rsVenci!total, "#,###,##0.00")
+                CadValues3 = "%      CUOTA: " & Format(rsVenci!Cuota, "#,###,##0.00") & "     TOTAL: " & Format(rsVenci!Total, "#,###,##0.00")
         
         
                 If vParamAplic.ContabilidadNueva Then
@@ -2651,7 +2651,7 @@ Dim RTiket As ADODB.Recordset
     '
     SQL = "INSERT INTO scafac1 (codtipom,numfactu,fecfactu,codtipoa,numalbar,fechaalb,numpedcl,fecpedcl,sementre,numofert,fecofert,"
     SQL = SQL & "referenc,codenvio,codtraba,codtrab1,codtrab2,observa1,observa2,observa3,observa4,observa5,numtermi,numventa,actuacion,tipoimp ,"
-    SQL = SQL & "origdat,fecenvio,docarchiv,coddiren,SerieTfno, ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente)"
+    SQL = SQL & "origdat,fecenvio,docarchiv,coddiren,SerieTfno, ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente,numbultos)"
     
     
     'Octubre 2013
@@ -2704,7 +2704,7 @@ Dim RTiket As ADODB.Recordset
                 devuelve = devuelve & "," & DBSet(RTiket!ManipuladorNombre, "F", "S") & "," & DBSet(RTiket!TipoCarnet, "N")
             End If
         End If
-        SQL = SQL & devuelve & ",0)"
+        SQL = SQL & devuelve & ",0,NULL)"   'pidecli y numbultos
         RTiket.Close
     ElseIf (codtipom <> "FAM" And codtipom <> "FTI") And cadSQL <> "" Then 'Facturas de VEnta
         SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(NumFactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu,"
@@ -2717,7 +2717,7 @@ Dim RTiket As ADODB.Recordset
         
         
         'Manipulador
-        SQL = SQL & " , ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente "
+        SQL = SQL & " , ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente,numbultos "
         
         SQL = SQL & " FROM scaalb WHERE " & cadSQL
         
@@ -2813,8 +2813,8 @@ Dim RTiket As ADODB.Recordset
         SQL = SQL & DBSet(devuelve, "T") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo
         '                                                                                   sail + fecenvio  + docarchiv + coddiren + letratf
         SQL = SQL & "," & DBSet(NumTerminal, "N", "S") & "," & DBSet(NumVenta, "N", "S") & ",NULL,NULL,NULL,NULL,0,NULL,NULL"
-        ' ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet
-        SQL = SQL & ",NULL,NULL,NULL,NULL,0)"
+        ' ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,pidecli numbulto
+        SQL = SQL & ",NULL,NULL,NULL,NULL,0,null)"
     End If
     
     conn.Execute SQL

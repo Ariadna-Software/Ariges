@@ -84,8 +84,8 @@ On Error Resume Next
         SQL = SQL & ",albImpreso , codzonas,observacrm"
         'Ocvubre 2015
         SQL = SQL & ", ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet"
-        'Enero 2016
-        SQL = SQL & ", PideCliente"
+        'Enero 2016               abri16
+        SQL = SQL & ", PideCliente,numbultos"
         
       Case "OFE" 'Ofertas a Clientes
         NomTabla = "scapre"
@@ -174,7 +174,7 @@ On Error Resume Next
       Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE" '[1.3.1] 'Albaranes ventas a clientes, Mantenimientos y Reparaciones
         NomTablaLin = "slialb"
         NomTablaLinH = "slhalb"
-        SQL = " SELECT scaalb.codtipom,scaalb.numalbar,scaalb.fechaalb,slialb.numlinea,slialb.codalmac,slialb.codartic,slialb.nomartic,slialb.ampliaci,slialb.cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre ,codproveX,numlote,codccost"
+        SQL = " SELECT scaalb.codtipom,scaalb.numalbar,scaalb.fechaalb,slialb.numlinea,slialb.codalmac,slialb.codartic,slialb.nomartic,slialb.ampliaci,slialb.cantidad,slialb.numbultos,precioar,dtoline1,dtoline2,importel,origpre ,codproveX,numlote,codccost"
         SQL = SQL & ",codtipor,codcapit ,precoste,slialb.codtraba,pvpInferior,comisionagente "
         SQL = SQL & " FROM scaalb INNER JOIN slialb on scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
         SQL = SQL & " WHERE " & cadWhere

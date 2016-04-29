@@ -16,6 +16,7 @@ Begin VB.Form frmEulerReloj
       Height          =   495
       Index           =   0
       Left            =   120
+      Picture         =   "frmEulerReloj.frx":030A
       Style           =   1  'Graphical
       TabIndex        =   15
       ToolTipText     =   "Generar albaran"
@@ -84,9 +85,9 @@ Begin VB.Form frmEulerReloj
             Strikethrough   =   0   'False
          EndProperty
          Height          =   480
-         ItemData        =   "frmEulerReloj.frx":030A
+         ItemData        =   "frmEulerReloj.frx":0894
          Left            =   0
-         List            =   "frmEulerReloj.frx":030C
+         List            =   "frmEulerReloj.frx":0896
          Style           =   2  'Dropdown List
          TabIndex        =   8
          Top             =   480
@@ -348,8 +349,9 @@ Private Sub cmdAlbaran_Click(Index As Integer)
 End Sub
 
 Private Sub cmdImprimir_Click()
-    frmListado2.Opcion = 46
-    frmListado2.Show vbModal
+    'VERSION RELOJ
+    'frmListado2.opcion = 46
+    'frmListado2.Show vbModal
 End Sub
 
 Private Sub Combo1_Click()
@@ -423,7 +425,7 @@ Dim OrdenProduccion As Boolean
     
     Else
     
-            Cad = "codtipom = '" & Cad & "'"
+            Cad = "codtipom = '" & Cad & "' AND  (origdat is null or origdat<>2)"
             CargarCombo_Tabla Me.Combo3, "scaalb", "concat(numalbar,' - ',nomclien)", "NumAlbar", Cad
                 
     End If
@@ -570,6 +572,23 @@ Private Sub Form_Activate()
         miRsAux.Close
         Labels
         
+        
+        miRsAux.Open "Select distinct fecha from sreloj where horafin is null", conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Cad = ""
+        HayQueCerrarNodo = 0
+        While Not miRsAux.EOF
+            HayQueCerrarNodo = HayQueCerrarNodo + 1
+            Cad = Cad & Format(miRsAux!Fecha, "dd/mm/yyyy") & "     "
+            If (HayQueCerrarNodo Mod 3) = 0 Then Cad = Cad & vbCrLf
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+        If Cad <> "" Then MsgBox "Dias por finalizar tareas: " & vbCrLf & Cad, vbExclamation
+            
+        Labels
+        
+        
+        
         'Cargo listitiem
         HayQueCerrarNodo = 0
         CagarMarcajes
@@ -603,7 +622,7 @@ Private Sub Form_Load()
     cboTipoTrabajo.AddItem "T. exterior"
     cboTipoTrabajo.AddItem "Orden de trabajo"
     '
-    cboTipoTrabajo.AddItem "Producción"   'orden de produccion
+    'cboTipoTrabajo.AddItem "Producción"   'orden de produccion
 
     
     Me.Command1.Tag = 1
@@ -616,9 +635,17 @@ End Sub
 
 
 Private Sub CargaImangenBtn()
+
+'Version normal
+
     Me.cmdImprimir.Picture = frmPpal.imgListComun.ListImages(16).Picture
     Me.cmdAlbaran(0).Picture = frmPpal.ImgListPpal.ListImages(10).Picture
-'    Me.cmdAlbaran(1).Picture = frmPpal.ImgListPpal.ListImages(7).Picture
+    ' Me.cmdAlbaran(1).Picture = frmPpal.ImgListPpal.ListImages(7).Picture
+
+
+'Version SOLORELOJ. Comentar en NORMAL
+'    Me.cmdImprimir.visible = False
+
 End Sub
 
 Private Sub Form_Resize()
@@ -663,171 +690,62 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
     Cad = CadenaDevuelta
 End Sub
 
-'Private Sub imgBuscar_Click(Index As Integer)
-'
-'    Screen.MousePointer = vbHourglass
-'    Set frmB = New frmBuscaGrid
-'    frmB.vSQL = ""
-'    If Index = 0 Then
-'        Cad = "Nº Serie|scarep|numserie|T||20·Artic.|scarep|codartic|T||25·Desc. Artic.|sartic|nomartic|T||40·"
-'        Cad = Cad & "Num Rep.|scarep|numrepar|N|0000000|15·"
-'        frmB.vDevuelve = "0|2|3|"
-'
-'        frmB.vTabla = "(scarep LEFT JOIN sartic ON scarep.codartic=sartic.codartic)"
-'        frmB.vTitulo = "Reparaciones"
-'        frmB.vselElem = 3
-'
-'    Else
-'        'select numparte,scaparte.codtraba,nomtraba,fecha from scaparte left join straba on scaparte.codtraba =straba.codtraba
-'        Cad = "Nº Parte|scaparte|numparte|N|0000000|15·Artic.|scaparte|codtraba|N|00|15·Trabajador|straba|nomtraba|T||45·"
-'        Cad = Cad & "Fecha|scaparte|fecha|T|dd/mm/yyyy|20·"
-'
-'        frmB.vDevuelve = "0|3|"
-'        frmB.vselElem = 0
-'        frmB.vTabla = "(scaparte left join straba on scaparte.codtraba =straba.codtraba)"
-'        frmB.vTitulo = "Partes de trabajo"
-'        frmB.vSQL = "scaparte.codtraba = " & Combo1.ItemData(Combo1.ListIndex)
-'        frmB.vselElem = 3
-'    End If
-'        frmB.vCampos = Cad
-'
-'        Cad = ""
-'        frmB.vConexionGrid = conAri
-'
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-'        If Cad <> "" Then
-'            If Index = 0 Then
-'                Text1(0).Text = RecuperaValor(Cad, 3)
-'                Text2(0).Text = RecuperaValor(Cad, 2)
-'                Text2(0).Text = Text2(0).Text & " - " & RecuperaValor(Cad, 1)
-'                Text1(1).Text = ""
-'                Text2(1).Text = ""
-'            Else
-'                Text1(1).Text = RecuperaValor(Cad, 1)
-'                Text2(1).Text = "Fecha: " & RecuperaValor(Cad, 2)
-'                Text1(0).Text = ""
-'                Text2(0).Text = ""
-'            End If
-'        End If
-'
-'End Sub
+Private Sub ListView2_DblClick()
+Dim I As Integer
 
+    If ListView2.SelectedItem Is Nothing Then Exit Sub
+    
+    
+    For I = 0 To Combo1.ListCount - 1
+        If Combo1.ItemData(I) = Val(ListView2.SelectedItem.Text) Then
+            'Este es el trabajador
+            Combo1.ListIndex = I
+            Exit For
+        End If
+    Next
+    
+       
+    Select Case UCase(Trim(ListView2.SelectedItem.SubItems(2)))
+    Case "ALE"
+        I = 2
+    Case "ALO"
+        I = 3
+    Case Else
+        I = 1
+    End Select
+    cboTipoTrabajo.ListIndex = I
+    DoEvents
+    Espera 0.1
+    
+    For I = 0 To Combo3.ListCount - 1
+        Cad = Combo3.List(I)
+        Cad = Mid(Cad, 1, InStr(1, Cad, "-") - 1)
+        If Val(Cad) = Val(ListView2.SelectedItem.SubItems(3)) Then
+            'Este es el trabajador
+            Combo3.ListIndex = I
+            Exit For
+        End If
+    Next
+    
+    
+ 
+    ListView2.Tag = Trim(Mid(ListView2.SelectedItem.SubItems(4), 1, InStr(2, ListView2.SelectedItem.SubItems(4), " ")))
+    For I = 0 To Combo4.ListCount - 1
+        Cad = Trim(Combo4.List(I))
+        
+        Cad = Mid(Cad, InStr(1, Cad, "[") + 1)  'quitamos primer corchete
+        Cad = Mid(Cad, 1, Len(Cad) - 1)  'quitamos segundo corchete
+        
+        If Cad = ListView2.Tag Then
+            'Este es el trabajador
+            Combo4.ListIndex = I
+            Exit For
+        End If
+    Next
+    ListView2.Tag = ""
+    
+End Sub
 
-
-'Private Sub Option1_Click(Index As Integer)
-'    PonerFrames2
-'
-'End Sub
-'
-'Private Sub Option1_KeyPress(Index As Integer, KeyAscii As Integer)
-'    KEYpressGnral KeyAscii, 3, False
-'End Sub
-
-'Private Sub Text1_GotFocus(Index As Integer)
-'
-'    ConseguirFoco Text1(Index), 3
-'End Sub
-'
-'
-'Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-''Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-'    KEYdown KeyCode
-'End Sub
-'
-'Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-'    KEYpressGnral KeyAscii, 3, False
-'End Sub
-'
-''----------------------------------------------------------------
-''----------------------------------------------------------------
-'' Cunado el campo de texto pierde el enfoque
-'' Es especifico de cada formulario y en el podremos controlar
-'' lo que queramos, desde formatear un campo si asi lo deseamos
-'' hasta pedir que nos devuelva los datos de la empresa
-''----------------------------------------------------------------
-''----------------------------------------------------------------
-'Private Sub Text1_LostFocus(Index As Integer)
-'
-'
-'    If Not PerderFocoGnral(Text1(Index), 3) Then Exit Sub
-'    'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
-'    'mostrar mensajes ni hacer nada
-'    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-'    Text1(Index).Text = Trim(Text1(Index).Text)
-'    Cad = ""
-'    If Text1(Index).Text <> "" Then
-'        Select Case Index
-'        Case 0
-'            If PonerFormatoEntero(Text1(Index)) Then
-'                Cad = "scarep LEFT JOIN sartic ON scarep.codartic=sartic.codartic"
-'                Cad = DevuelveDesdeBD(conAri, "concat(nomartic,' ',scarep.numserie)", Cad, "numrepar", Text1(Index).Text)
-'                If Cad = "" Then MsgBox "No existe reparacion", vbExclamation
-'
-'            End If
-'
-'            NumRegElim = 1
-'        Case 1
-'            ')"
-'            If PonerFormatoEntero(Text1(Index)) Then
-'                Cad = "scaparte left join straba on scaparte.codtraba =straba.codtraba "
-'                Cad = DevuelveDesdeBD(conAri, "concat('Fecha: ',' ',scaparte.fecha)", Cad, "numparte = " & Text1(Index).Text & " AND scaparte.codtraba", Combo1.ItemData(Combo1.ListIndex))
-'                If Cad = "" Then MsgBox "No existe parte o no esta vinculado con este trabajador", vbExclamation
-'            End If
-'
-'
-'        Case 2
-'             If PonerFormatoEntero(Text1(Index)) Then
-'
-'                Cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(Index).Text)
-'                If Cad = "" Then
-'                    MsgBox "No existe trabajador", vbExclamation
-'                Else
-'                    Text1(3).Text = ""
-'                    Text1(4).Text = ""
-'                    Text2(3).Text = ""
-'                    Text2(4).Text = ""
-'                End If
-'            End If
-'        Case 3
-'            If Text1(2).Text = "" Then
-'                MsgBox "ponga cliente", vbExclamation
-'            Else
-'                If PonerFormatoEntero(Text1(Index)) Then
-'                    Cad = "codclien = " & Text1(2).Text & " AND coddirec "
-'                    Cad = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", Cad, Text1(Index).Text)
-'
-'                    If Cad = "" Then
-'                        MsgBox "No existe la obra para el cliente seleccionado", vbExclamation
-'                    Else
-'                        Text1(4).Text = ""
-'                        Text2(4).Text = ""
-'                    End If
-'                End If
-'            End If
-'        Case 4
-'            If Text1(2).Text = "" Or Text1(3).Text = "" Then
-'                MsgBox "Ponga cliente/obra", vbExclamation
-'            Else
-'
-'
-'                Cad = "codclien = " & Text1(2).Text & " AND coddirec = " & Text1(3).Text & " AND actuacion "
-'
-'                Cad = DevuelveDesdeBD(conAri, "concat(actuacion,'    Fec:',fechaini)", "sactuaobra", Cad, Text1(4).Text, "T")
-'
-'                If Cad = "" Then MsgBox "No existe la actuacion para el client/obra seleccionado", vbExclamation
-'
-'
-'            End If
-'        End Select
-'
-'        If Cad = "" Then
-'            Text1(Index).Text = ""
-'            PonerFoco Text1(Index)
-'        End If
-'    End If
-'    Text2(Index).Text = Cad
-'End Sub
 
 Private Sub Timer1_Timer()
     T1 = DateAdd("s", 1, T1)
@@ -871,10 +789,10 @@ Dim Repar As String
         IT.SubItems(2) = DBLet(miRsAux!codtipom, "T") & " "
         IT.SubItems(3) = DBLet(miRsAux!NumAlbar, "T") & " "
         
-        If IsNull(miRsAux!nomtipor) Then
+        If IsNull(miRsAux!NomTipor) Then
             Cad = "--- ** No encotrado"
         Else
-            Cad = miRsAux!nomtipor
+            Cad = miRsAux!NomTipor
         End If
         Cad = miRsAux!codtipor & " " & Cad
         IT.SubItems(4) = Cad
@@ -935,7 +853,7 @@ End Sub
 Private Sub CrearAlbaran()
 Dim vC As CTiposMov
 Dim vCli As CCliente
-
+Dim HaCambiadoContador As Boolean
     On Error GoTo eCrearAlbaran
     
     Set vC = New CTiposMov
@@ -945,8 +863,11 @@ Dim vCli As CCliente
     conn.BeginTrans
 
     
-    
+    'VErsion normal
     Cad = DBSet(vParam.CifEmpresa, "T") & " ORDER BY codclien"
+    
+
+    
     Cad = DevuelveDesdeBD(conAri, "codclien", "sclien", "nifclien", Cad)
     If Cad = "" Then Err.Raise 513, , "Obteniendo cliente EULER"
     
@@ -965,9 +886,6 @@ Dim vCli As CCliente
             Cad = DevuelveDesdeBD(conAri, "codalmac", "straba", "codtraba", CStr(Combo1.ItemData(Combo1.ListIndex)))
             If Cad = "10" Then
                 Cad = "CAR"
-                
-                'DE momento el trozo de CAR lo comentamos y siempre crea ALR
-                Cad = "ALR"
             Else
                 Cad = "ALR"
             End If
@@ -976,6 +894,14 @@ Dim vCli As CCliente
     vC.ConseguirContador Cad
     
     
+    Cad = InputBox("Nº " & vC.NombreMovimiento, , CStr(vC.Contador + 1))
+    If Cad = "" Then Err.Raise 513, , "Proceso cancelado por el usuario"
+    
+    HaCambiadoContador = False
+    If Val(Cad) <> vC.Contador Then
+        vC.Contador = Val(Cad) - 1   '
+        HaCambiadoContador = True
+    End If
     Cad = "INSERT INTO scaalb(codtipom,numalbar,fechaalb,factursn,codclien,"
     Cad = Cad & "nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
     Cad = Cad & "facturkm,codtraba,codtrab2,codagent,codforpa,codenvio,dtoppago,dtognral,tipofact,esticket) VALUES ('"
@@ -991,11 +917,15 @@ Dim vCli As CCliente
     Cad = Cad & "," & DBSet(vCli.Agente, "T") & "," & DBSet(vCli.ForPago, "T") & "," & DBSet(vCli.FEnvio, "T") & ",0,0,0,0)"
     conn.Execute Cad
     
-    vC.IncrementarContador vC.TipoMovimiento
+    If Not HaCambiadoContador Then
+        vC.IncrementarContador vC.TipoMovimiento
+    Else
+        vC.Contador = vC.Contador + 1
+    End If
     
 eCrearAlbaran:
     If Err.Number <> 0 Then
-        MuestraError Err.Number, Err.Description, Err.Description
+        MuestraError Err.Number, , Err.Description
         conn.RollbackTrans
     Else
         conn.CommitTrans
