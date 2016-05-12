@@ -8,21 +8,34 @@ Begin VB.Form frmEulerTrab
    ClientHeight    =   6120
    ClientLeft      =   45
    ClientTop       =   630
-   ClientWidth     =   14820
+   ClientWidth     =   15420
    ClipControls    =   0   'False
    Icon            =   "frmEulerTrab.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6120
-   ScaleWidth      =   14820
+   ScaleWidth      =   15420
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtAux3 
       BackColor       =   &H80000018&
-      Height          =   1275
+      BorderStyle     =   0  'None
+      Height          =   315
+      Index           =   2
+      Left            =   9840
+      Locked          =   -1  'True
+      TabIndex        =   25
+      Text            =   "Text2"
+      Top             =   3600
+      Visible         =   0   'False
+      Width           =   405
+   End
+   Begin VB.TextBox txtAux3 
+      BackColor       =   &H80000018&
+      Height          =   1515
       Index           =   4
-      Left            =   11160
+      Left            =   11760
       Locked          =   -1  'True
       MultiLine       =   -1  'True
       TabIndex        =   21
@@ -33,7 +46,7 @@ Begin VB.Form frmEulerTrab
    Begin VB.ComboBox cboTipo 
       Height          =   315
       ItemData        =   "frmEulerTrab.frx":0012
-      Left            =   11160
+      Left            =   11760
       List            =   "frmEulerTrab.frx":0022
       Style           =   2  'Dropdown List
       TabIndex        =   6
@@ -59,7 +72,7 @@ Begin VB.Form frmEulerTrab
       Alignment       =   1  'Right Justify
       Height          =   315
       Index           =   5
-      Left            =   11160
+      Left            =   11760
       MaxLength       =   16
       TabIndex        =   5
       Tag             =   "Salida|H|S|||sreloj|Horafin|hh:mm:ss||"
@@ -71,7 +84,7 @@ Begin VB.Form frmEulerTrab
       Alignment       =   1  'Right Justify
       Height          =   315
       Index           =   4
-      Left            =   11160
+      Left            =   11760
       TabIndex        =   4
       Tag             =   "Entrada|H|N|||sreloj|HoraInicio|hh:mm:ss||"
       Text            =   "entrada"
@@ -184,9 +197,9 @@ Begin VB.Form frmEulerTrab
    Begin VB.TextBox txtAux 
       Height          =   315
       Index           =   6
-      Left            =   13200
-      MaxLength       =   6
-      TabIndex        =   7
+      Left            =   13800
+      MaxLength       =   13
+      TabIndex        =   10
       Tag             =   "Tipo|N|N|||sreloj|numalbar|0000||"
       Text            =   "tipo"
       Top             =   3600
@@ -195,26 +208,26 @@ Begin VB.Form frmEulerTrab
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   12120
-      TabIndex        =   8
-      Top             =   5445
+      Left            =   12720
+      TabIndex        =   7
+      Top             =   5565
       Width           =   1035
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   13275
-      TabIndex        =   9
-      Top             =   5445
+      Left            =   13875
+      TabIndex        =   8
+      Top             =   5565
       Width           =   1035
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   13275
-      TabIndex        =   10
-      Top             =   5445
+      Left            =   13875
+      TabIndex        =   9
+      Top             =   5565
       Visible         =   0   'False
       Width           =   1035
    End
@@ -238,8 +251,8 @@ Begin VB.Form frmEulerTrab
       Left            =   0
       TabIndex        =   12
       Top             =   0
-      Width           =   14820
-      _ExtentX        =   26141
+      Width           =   15420
+      _ExtentX        =   27199
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -348,8 +361,8 @@ Begin VB.Form frmEulerTrab
       Left            =   120
       TabIndex        =   11
       Top             =   495
-      Width           =   10815
-      _ExtentX        =   19076
+      Width           =   11535
+      _ExtentX        =   20346
       _ExtentY        =   8864
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -413,7 +426,7 @@ Begin VB.Form frmEulerTrab
    End
    Begin VB.Image imgRef 
       Height          =   240
-      Left            =   12480
+      Left            =   13080
       Picture         =   "frmEulerTrab.frx":007E
       Top             =   3240
       Width           =   240
@@ -431,7 +444,7 @@ Begin VB.Form frmEulerTrab
       EndProperty
       Height          =   240
       Index           =   3
-      Left            =   11160
+      Left            =   11760
       TabIndex        =   24
       Top             =   1800
       Width           =   660
@@ -449,7 +462,7 @@ Begin VB.Form frmEulerTrab
       EndProperty
       Height          =   240
       Index           =   1
-      Left            =   11160
+      Left            =   11760
       TabIndex        =   23
       Top             =   3240
       Width           =   1260
@@ -467,7 +480,7 @@ Begin VB.Form frmEulerTrab
       EndProperty
       Height          =   240
       Index           =   0
-      Left            =   11160
+      Left            =   11760
       TabIndex        =   22
       Top             =   720
       Width           =   660
@@ -851,7 +864,10 @@ Dim tots As String
     CargaGridGnral DataGrid1, Me.Data1, tots, False
     'S|txtAux(0)|T|Código|700|
     tots = "S|txtAux(0)|T|Trab|750|;S|cmdAux(0)|B||0|;S|txtAux3(0)|T|Nombre|2800|;S|txtAux(1)|T|Tipo|700|;S|cmdAux(1)|B||0|;"
-    tots = tots & "S|txtAux3(1)|T|Trabajo|3400|;S|txtAux(2)|T|Fecha|1150|;S|txtAux(3)|T|Horas|850|;"
+    tots = tots & "S|txtAux3(1)|T|Trabajo|3600|;S|txtAux(2)|T|Fecha|1150|;S|txtAux(3)|T|Trab|850|;"
+    
+    'en formato hora
+    tots = tots & "S|txtAux3(2)|T|Horas|850|;"
     
     'tots = tots & "S|txtAux(4)|T|Entrada|1100|;S|txtAux(5)|T|Salida|1100|;"
     tots = tots & "N|||||;N|||||;"
@@ -862,8 +878,8 @@ Dim tots As String
     
     'dtos alineados a la dcha
     
-    DataGrid1.Columns(8).Alignment = dbgRight
-    
+    DataGrid1.Columns(5).Alignment = dbgRight
+    DataGrid1.Columns(6).Alignment = dbgRight
 
     DataGrid1.ScrollBars = dbgAutomatic
     
@@ -884,26 +900,26 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Byte
-Dim B As Boolean
+Dim b As Boolean
 
     On Error Resume Next
     
     DeseleccionaGrid Me.DataGrid1
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To 3
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = B
+        txtAux(jj).visible = b
         If jj < 2 Then
             txtAux3(jj).Height = DataGrid1.RowHeight
             txtAux3(jj).Top = alto
-            txtAux3(jj).visible = B
+            txtAux3(jj).visible = b
             
-            Me.cmdaux(jj).Height = Me.DataGrid1.RowHeight
-            Me.cmdaux(jj).Top = alto
-            Me.cmdaux(jj).visible = B
-            Me.cmdaux(jj).Enabled = B
+            Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
+            Me.cmdAux(jj).Top = alto
+            Me.cmdAux(jj).visible = b
+            Me.cmdAux(jj).Enabled = b
             
             
             
@@ -911,9 +927,9 @@ Dim B As Boolean
     Next jj
     
     For jj = 4 To 6
-        BloquearTxt txtAux(jj), Not B
+        BloquearTxt txtAux(jj), Not b
     Next jj
-    BloquearCmb Me.cboTipo, Not B
+    BloquearCmb Me.cboTipo, Not b
     If Err.Number Then Err.Clear
 End Sub
 
@@ -987,7 +1003,7 @@ Dim K As Integer
         Case 10 'Imprimir
         
             'AHORA
-            frmListado2.opcion = 46
+            frmListado2.Opcion = 46
             frmListado2.Show vbModal
             Exit Sub
 '            'ANTES
@@ -1058,7 +1074,6 @@ Dim K As Integer
 '            End With
 '
         Case 11  'Salir
-            mnSalir_Click
     End Select
 End Sub
 
@@ -1072,17 +1087,17 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
-Dim i As Byte
+Dim b As Boolean
+Dim I As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
      'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -1096,13 +1111,13 @@ Dim i As Byte
     'Next I
                       
     '-----------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
-    PonerLongCampos
+    'PonerLongCampos
 
     PonerModoOpcionesMenu  'Activar opciones de menu según modo
     PonerOpcionesMenu   'Activar opciones de menu según nivel
@@ -1110,39 +1125,39 @@ Dim i As Byte
 End Sub
 
 
-Private Sub PonerLongCampos()
-'Modificar el MaxLength del campo en funcion de si es modo de búsqueda o no
-'para los campos que permitan introducir criterios más largos del tamaño del campo
-      PonerLongCamposGnral Me, Modo, 3
-End Sub
+'Private Sub PonerLongCampos()
+''Modificar el MaxLength del campo en funcion de si es modo de búsqueda o no
+''para los campos que permitan introducir criterios más largos del tamaño del campo
+'      PonerLongCamposGnral Me, Modo, 3
+'End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
     
     On Error Resume Next
 
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnEliminar.Enabled = b
     
-    B = ((Modo >= 3))
+    b = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo opciones del menú.", Err.Description
 
@@ -1172,7 +1187,13 @@ Dim SQL As String
     
     
 
-    SQL = "SELECT sreloj.codtraba,nomtraba ,stipor.codtipor,nomtipor,fecha,calculadas,HoraInicio,HoraFin,"
+    SQL = "SELECT sreloj.codtraba,nomtraba ,stipor.codtipor,nomtipor,fecha,calculadas"
+    
+    'EN formato horas
+    SQL = SQL & ",concat(floor(calculadas) ,':',right(concat('0',floor(round(100*(calculadas - floor(calculadas) ) * 0.6,2))),2)) horas"
+    
+    
+    SQL = SQL & ",HoraInicio,HoraFin,"
     'SQL = SQL & " if(sreloj.codtipom='ALE','Exter',if(codtipom='ALR','Repar',if(codtipom='ALO','Orden','Prod'))) Txt,"
     SQL = SQL & " codtipom,numalbar,ID FROM "
     SQL = SQL & NombreTabla
@@ -1261,7 +1282,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim i As Integer
+Dim I As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1271,8 +1292,8 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
@@ -1330,7 +1351,7 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
 
@@ -1348,8 +1369,8 @@ Dim SQL As String
     End If
     If Me.txtAux(3).Text = "" Then txtAux(3).Text = "0"
     DatosOk = False
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
     
     
@@ -1365,10 +1386,10 @@ Dim SQL As String
         
         If Not (RegistrosAListar(SQL) > 0) Then
             SQL = "No existe el Albaran de fecha referenciado. ¿Desea continuar?"
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then B = False
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then b = False
         End If
     End If
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -1445,7 +1466,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
 End Sub
 
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba

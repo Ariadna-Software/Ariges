@@ -1026,16 +1026,7 @@ Dim Errores As String
     End If
     
     
-    'ANTES
-    'If SQL <> "" Then
-    '    If Len(SQL) = 1 Then
-    '        'Todos los CEntros de coste son el mismo. Con lo cual NO hara falta agrupar por trabajador
-    '        ComprobarCCoste = 1
-    '    Else
-    '        'Tiene CC distintos. SI agruparemos por Trabajador
-    '        ComprobarCCoste = 2
-    '    End If
-    'End If
+
 ECCoste:
      If Err.Number <> 0 Then
         MuestraError Err.Number, "Comprobar Cento de Coste", Err.Description

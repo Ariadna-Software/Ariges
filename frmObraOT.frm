@@ -512,6 +512,7 @@ Dim SQL As String
         'Hay que eliminar
         SQL = "Delete from stipor where codtipor= '" & Adodc1.Recordset!codtipor & "'"
         conn.Execute SQL
+        CadenaConsulta = "Select * from stipor "
         CancelaADODC Me.Adodc1
         CargaGrid ""
         CancelaADODC Me.Adodc1
@@ -779,7 +780,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
 End Sub
 
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
@@ -793,18 +794,26 @@ Private Sub txtAux_LostFocus(Index As Integer)
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     txtAux(Index).Text = Trim(txtAux(Index))
     If Index = 0 Then
-        If Len(txtAux(Index).Text) > 1 Then
-            MsgBox "Codigo debe ser una letra únicamente.", vbExclamation
-            txtAux(Index).Text = Mid(txtAux(Index), 1, 1)
-            PonerFoco txtAux(Index)
+        If Modo > 2 Then
+            txtAux(0).Text = UCase(txtAux(0).Text)
+            If Len(txtAux(Index).Text) > 2 Then
+                MsgBox "Codigo debe ser de dos carcacteres.", vbExclamation
+                'txtAux(Index).Text = Mid(txtAux(Index), 1, 1)
+                PonerFoco txtAux(Index)
+            End If
         End If
-        txtAux(0).Text = UCase(txtAux(0).Text)
     End If
 End Sub
 
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
+
+    If Len(txtAux(0).Text) > 2 Then
+        MsgBox "Longitud de código incorrecta"
+        Exit Function
+    End If
+
 
     b = CompForm(Me, 3)
     If Not b Then Exit Function

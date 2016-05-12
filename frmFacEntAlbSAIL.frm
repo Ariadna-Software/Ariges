@@ -500,16 +500,18 @@ Begin VB.Form frmFacEntAlbSAIL
       Tab(5).Control(0).Enabled=   0   'False
       Tab(5).Control(1)=   "Label1(63)"
       Tab(5).Control(1).Enabled=   0   'False
-      Tab(5).Control(2)=   "ListView1"
+      Tab(5).Control(2)=   "Label1(64)"
       Tab(5).Control(2).Enabled=   0   'False
-      Tab(5).ControlCount=   3
+      Tab(5).Control(3)=   "ListView1"
+      Tab(5).Control(3).Enabled=   0   'False
+      Tab(5).ControlCount=   4
       Begin MSComctlLib.ListView ListView1 
          Height          =   4575
-         Left            =   1080
+         Left            =   480
          TabIndex        =   289
          Top             =   840
-         Width           =   12375
-         _ExtentX        =   21828
+         Width           =   13575
+         _ExtentX        =   23945
          _ExtentY        =   8070
          View            =   3
          LabelEdit       =   1
@@ -530,7 +532,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   6
+         NumItems        =   7
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Trab."
             Object.Width           =   1764
@@ -557,9 +559,15 @@ Begin VB.Form frmFacEntAlbSAIL
             Object.Width           =   3253
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
+            Alignment       =   2
             SubItemIndex    =   5
-            Text            =   "Hora"
+            Text            =   "Tiempo"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   6
+            Text            =   "Horas"
             Object.Width           =   2540
          EndProperty
       End
@@ -3007,11 +3015,29 @@ Begin VB.Form frmFacEntAlbSAIL
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
+         Index           =   64
+         Left            =   10920
+         TabIndex        =   292
+         Top             =   5640
+         Width           =   1455
+      End
+      Begin VB.Label Label1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
          Index           =   63
-         Left            =   11400
+         Left            =   12480
          TabIndex        =   291
          Top             =   5640
-         Width           =   1575
+         Width           =   1455
       End
       Begin VB.Label Label1 
          Caption         =   "Horas"
@@ -3026,7 +3052,7 @@ Begin VB.Form frmFacEntAlbSAIL
          EndProperty
          Height          =   255
          Index           =   62
-         Left            =   10680
+         Left            =   9360
          TabIndex        =   290
          Top             =   5640
          Width           =   975
@@ -5390,7 +5416,7 @@ On Error Resume Next
     
     
     If SSTab1.TabVisible(2) Or SSTab1.TabVisible(3) Then LimpiarFichaTecnica False
-    If SSTab1.TabVisible(5) Then ListView1.ListItems.Clear: Label1(63).Caption = ""
+    If SSTab1.TabVisible(5) Then ListView1.ListItems.Clear: Label1(63).Caption = "": Label1(64).Caption = ""
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -7687,7 +7713,11 @@ Dim DtoPermitido As Boolean
                     If ModificaLineas = 1 Then 'insertar linea
                         b = True
                     ElseIf ModificaLineas = 2 Then 'modificar linea
-                        If Data2.Recordset!codArtic <> txtAux(1).Text Then b = True
+                        If Data2.Recordset!codArtic <> txtAux(1).Text Then
+                             b = True
+                        Else
+                            If CStr(DBLet(Data2.Recordset!origpre, "T")) <> "M" Then b = True
+                        End If
                     End If
                 End If
                 
@@ -10656,6 +10686,7 @@ Private Sub PonerTareasAsociadas()
 Dim N As Integer
 Dim SQL As String
 Dim Horas As Currency
+Dim HorasDec As Currency
 
     SQL = "select sreloj.codtraba,nomtraba,fecha,sreloj.codtipor,nomtipor,horainicio,horafin,calculadas from sreloj left join stipor on sreloj.codtipor=stipor.codtipor"
     SQL = SQL & " left join straba on straba.codtraba=sreloj.codtraba"
@@ -10676,13 +10707,36 @@ Dim Horas As Currency
         
         If Not IsNull(miRsAux!calculadas) Then
             Horas = Horas + miRsAux!calculadas
-            ListView1.ListItems(N).SubItems(5) = Format(miRsAux!calculadas, FormatoCantidad)
+            ListView1.ListItems(N).SubItems(6) = Format(miRsAux!calculadas, FormatoCantidad)
+            SQL = Format(Int(miRsAux!calculadas), "00") & ":"
+            
+            
+            HorasDec = Int((miRsAux!calculadas - Int(miRsAux!calculadas)) * 100)
+            HorasDec = Round(HorasDec * 0.6, 2)
+            SQL = SQL & Format(HorasDec, "00")
+            ListView1.ListItems(N).SubItems(5) = SQL
+            
+            
+            
         Else
             ListView1.ListItems(N).SubItems(5) = " "
+            ListView1.ListItems(N).SubItems(6) = " "
         End If
         miRsAux.MoveNext
     Wend
     Label1(63).Caption = Format(Horas, FormatoCantidad)
+    
+    If Horas = 0 Then
+        SQL = ""
+    Else
+        SQL = Format(Int(Horas), "00") & ":"
+        HorasDec = Int((Horas - Int(Horas)) * 100)
+        HorasDec = Round(HorasDec * 0.6, 2)
+        SQL = SQL & Format(HorasDec, "00")
+    End If
+    Label1(64).Caption = SQL
+
+    
     miRsAux.Close
     Set miRsAux = Nothing
     

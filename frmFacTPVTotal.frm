@@ -1064,7 +1064,9 @@ Private Sub frmClv_DatoSeleccionado(CadenaSeleccion As String)
             SQL = RecuperaValor(SQL, 1)
             SQL = IIf(SQL = "1", "Básico", IIf(SQL = "2", "Cualificado", ""))
             txtManipulador(2).Text = SQL
-            Text2(3).Text = Text2(0).Text
+            '
+            
+            Text2(3).Text = RecuperaValor(CadenaSeleccion, 2)
         End If
     
     End If
@@ -1657,7 +1659,8 @@ Dim ErroresEnLotes_DatosInternos As String
                 SQL = DevuelveDesdeBD(conAri, "canentra-vendida", "slotes", SQL, "1")
                 
                 If Rs!cantidad > CCur(SQL) Then
-                    Stop
+                    'Stop
+                    MsgBox "Mas cantidad que disponible en el LOTE: " & Rs!codArtic & " " & Rs!numLote & vbCrLf & "Proceso continua", vbExclamation
                     Espera 0 - 75
                 End If
             End If
@@ -2820,8 +2823,22 @@ Dim Clivario As Boolean
                         If txtManipulador(0).Text = "" Or Text2(3).Text = "" Then
                             MsgBox "Seleccione un carnet de manipulador de fitosantiarios", vbExclamation
                         Else
-                            HayArticuloFitosanitario_O_BloqFamilia = False
+                            SQL = "sin fecha caducidad"
+                            If txtManipulador(1).Text <> "" Then
+                                If CDate(txtManipulador(1).Text) < Format(Now, "dd/mm/yyyy") Then
+                                    SQL = "caducado"
+                                Else
+                                    'OK
+                                    SQL = ""
+                                End If
+                            End If
                             'para que vea si bloqueamos por familis
+                            If SQL = "" Then
+                                HayArticuloFitosanitario_O_BloqFamilia = False
+                            Else
+                                SQL = "Carnet " & SQL & vbCrLf & "¿Continuar de igual modo?"
+                                If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then HayArticuloFitosanitario_O_BloqFamilia = False
+                            End If
                         End If
                     End If
                 Else
@@ -3005,7 +3022,7 @@ Private Sub LanzarClientesVarios()
 
     Set frmClv = New frmFacClientesV
     frmClv.DatosADevolverBusqueda = "0|1|"
-    frmClv.vNif = Text3.Tag
+    frmClv.vNIF = Text3.Tag
     frmClv.Show vbModal
     Set frmClv = Nothing
     ActualizarCliVariosEnBD

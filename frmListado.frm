@@ -12765,7 +12765,7 @@ Dim Rs As ADODB.Recordset
             SQL = SQL & DBSet(Rs!nummante, "T", "S") & "," & DBSet(Rs!ultrepar, "F", "S") & "," & DBSet(Rs!fingaran, "F", "S") & ","
             SQL = SQL & DBSet(Rs!codtipom, "T", "S") & "," & DBSet(Rs!NumFactu, "N", "S") & "," & DBSet(Rs!FechaVta, "F", "S") & ","
             SQL = SQL & DBSet(Rs!NumAlbar, "N", "S") & "," & DBSet(Rs!numline1, "N", "S") & "," & DBSet(Rs!Codprove, "N", "S") & ","
-            SQL = SQL & DBSet(Rs!numalbPr, "T", "S") & "," & DBSet(Rs!fechaCom, "F", "S") & "," & DBSet(Rs!numline2, "N", "S") & ")"
+            SQL = SQL & DBSet(Rs!numalbPr, "T", "S") & "," & DBSet(Rs!fechacom, "F", "S") & "," & DBSet(Rs!numline2, "N", "S") & ")"
         End If
         Rs.Close
         Set Rs = Nothing
@@ -13156,7 +13156,7 @@ Dim Codfamia As Integer
             Exit Sub
         Else
             tabla = "UPDATE tmpinformes SET porcen1 =" & TransformaComasPuntos(CStr(Rs!PorceIVA))
-            tabla = tabla & " WHERE codusu =" & vUsu.codigo & " AND codigo1 = " & Rs!codigiva
+            tabla = tabla & " WHERE codusu =" & vUsu.codigo & " AND codigo1 = " & Rs!CodigIVA
             conn.Execute tabla
         End If
     Next I
@@ -17648,7 +17648,7 @@ Dim AuxD As String
     End If
     '---- Eliminar tabla TEMP de Errores
     BorrarTMPErrFact
-    ejecutar "DELETE FROM tmpinformes WHERE codusu =" & vUsu.codigo, False
+    
     ContabilizarFacturas = True
 End Function
 

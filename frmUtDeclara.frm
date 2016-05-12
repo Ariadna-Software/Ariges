@@ -1127,7 +1127,11 @@ Dim SQL_Servicios As String
                 lblInf.Caption = "Col   " & Col.Count + 1 & "   Reg  " & L & " de " & lblInf.Tag
                 lblInf.Refresh
                 
-                SQL = SQL & ", (" & DBSet(Rs!fechaventa, "F") & "," & DBSet(Rs.Fields(1), "T") & "," & Rs.Fields(2) & ")"
+                
+                'Graba FECHA ALBARAN, y luiego no encuentra por fecha factura.
+                'Buscamos , de momento, por serie+factura
+                'SQL = SQL & ", (" & DBSet(Rs!fechaventa, "F") & "," & DBSet(Rs.Fields(1), "T") & "," & Rs.Fields(2) & ")"
+                SQL = SQL & ", (" & DBSet(Rs.Fields(1), "T") & "," & Rs.Fields(2) & ")"
                 Rs.MoveNext
                 
                 
@@ -1142,25 +1146,79 @@ Dim SQL_Servicios As String
             
             If L > 0 Then Col.Add SQL
             
+            
+            'Abro los tratamientos
+            lblInf.Caption = "Leyendo tratamientos BD..."
+            lblInf.Refresh
+            
+            SQL = "select codtrata,nomtrata from advtrata"
+            rs2.Open SQL, conn, adOpenKeyset, adLockOptimistic, adCmdText
+            
+            
+            
             'Para cada subgrupo buscarenmos en slifaccampos
             For L = 1 To Col.Count
-                lblInf.Caption = "Ariagro " & L & " de " & Col.Count
+                lblInf.Caption = "Ariagro " & L & " de " & Col.Count & " Cultivo"
                 lblInf.Refresh
-                If (L Mod 5) = 0 Then DoEvents
+                DoEvents
                 SQL = "(" & Mid(Col.item(L), 2) & ")"
-                SQL = "Select * from slifaccampos where (fecfactu,codtipom,numfactu) IN " & SQL
+                'SQL = "Select * from slifaccampos where (fecfactu,codtipom,numfactu) IN " & SQL
+                SQL = "Select * from slifaccampos where (codtipom,numfactu) IN " & SQL
+                SQL = SQL & " AND fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
                 Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 While Not Rs.EOF
                     
                     'FAV0079016
                     SQL = " AND numfactura = '" & Rs!codtipom & Format(Rs!NumFactu, "0000000") & "'"
-                    SQL = " WHERE esventa=1 and fechaventa= " & DBSet(Rs!FecFactu, "F") & SQL
-                    
+                    'SQL = " WHERE esventa=1 and fechaventa= " & DBSet(Rs!FecFactu, "F") & SQL
+                    SQL = " WHERE esventa=1 " & SQL
                     SQL = "UPDATE declaraLOM SET cultivo=" & Rs!codCampo & SQL
                     conn.Execute SQL
                     Rs.MoveNext
                 Wend
                 Rs.Close
+                
+                
+                'Vamos a ver los tratamientos
+                lblInf.Caption = "Ariagro " & L & " de " & Col.Count & " Tratamiento"
+                lblInf.Refresh
+
+                
+                SQL = "Select codtipom,numfactu,GROUP_CONCAT( substring(referenc,7) separator ' , ') from scafac1 where "
+                SQL = SQL & " fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
+                SQL = SQL & " AND referenc like 'PARTE%' "
+                SQL = SQL & " AND (codtipom,numfactu) IN (" & Mid(Col.item(L), 2) & ") group by 1,2"
+                
+                
+                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                While Not Rs.EOF
+                    SQL = DBLet(Rs.Fields(2), "T")
+                    lblInf.Caption = "parte : " & SQL
+                    lblInf.Refresh
+                    
+                    If SQL <> "" Then
+                    
+                        NF = InStrRev(SQL, " , ")
+                        If NF > 0 Then SQL = Mid(SQL, NF + 3)
+                        
+                        SQL = DevuelveDesdeBD(conAri, "codtrata", "advpartes", "numparte", SQL)
+                        If SQL <> "" Then
+                            rs2.Find "codtrata = " & SQL, , adSearchForward, 1
+                            If Not rs2.EOF Then
+                                'FAV0079016
+                                SQL = " AND numfactura = '" & Rs!codtipom & Format(Rs!NumFactu, "0000000") & "'"
+                                'SQL = " WHERE esventa=1 and fechaventa= " & DBSet(Rs!FecFactu, "F") & SQL
+                                SQL = " WHERE esventa=1 " & SQL
+                                SQL = "UPDATE declaraLOM SET tratamiento=" & DBSet(rs2!nomtrata, "T") & SQL
+                                conn.Execute SQL
+                            End If
+                        End If
+                    End If
+                    Rs.MoveNext
+                Wend
+                Rs.Close
+               
+                  
                 
             Next
                 
@@ -1193,7 +1251,13 @@ Dim SQL_Servicios As String
             Wend
             Rs.Close
             
-            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
         
         End If 'de ariagro
         
@@ -1211,7 +1275,9 @@ Dim SQL_Servicios As String
                 lblInf.Caption = "Fra: " & Rs!NumFactura
                 lblInf.Refresh
                 SQL = "select * from scafac1 where codtipom='FAS' "
-                SQL = SQL & " and fecfactu=" & DBSet(Rs!fechaventa, "F") & " and numfactu=" & Mid(Rs!NumFactura, 4)
+                'SQL = SQL & " and fecfactu=" & DBSet(Rs!fechaventa, "F") & " and numfactu=" & Mid(Rs!NumFactura, 4)
+                SQL = SQL & " and numfactu=" & Mid(Rs!NumFactura, 4)
+              
                 rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If rs2.EOF Then
                     SQL = ""
@@ -1288,6 +1354,10 @@ Dim SQL_Servicios As String
         If Not PonerParamRPT2(31, "", 0, Aux, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then
             Exit Sub
         End If
+        
+        
+        
+        If Me.Check2.Value = 1 Then Aux = Replace(Aux, ".rpt", "S.rpt")
         frmVisReport.Informe = App.Path & "\Informes\" & Aux
         
         frmVisReport.FormulaSeleccion = "{declaralom.FechaVenta} in " & _

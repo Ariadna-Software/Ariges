@@ -1295,12 +1295,15 @@ Dim F As Date
         'insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,`importe`,`observa`) values ( '1','0','0','','','',NULL,NULL)
         
         If vParamAplic.ContabilidadNueva Then
-            SQL = " cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa "
+            SQL = "SELECT impcobro ,impcobro,numfactu codfaccl,numserie,fecvenci,fecfactu fecfaccl,Departamento,scobro.codforpa,nomforpa "
+            SQL = SQL & " FROM cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa "
         Else
-            SQL = " scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+            SQL = "SELECT impcobro,Codfaccl,numserie,fecvenci,fecfaccl,Departamento,scobro.codforpa,nomforpa"
+            SQL = SQL & " FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
         End If
            
-        SQL = "SELECT impcobro FROm " & SQL & " WHERE scobro.codmacta = '" & vCRM.Codmacta & "'"
+        
+        SQL = SQL & " WHERE scobro.codmacta = '" & vCRM.Codmacta & "'"
         SQL = SQL & " AND (sforpa.tipforpa between 2 and 5) "
         SQL = SQL & " AND impcobro<>0 ORDER BY fecvenci desc"   'ANTES era >0
         

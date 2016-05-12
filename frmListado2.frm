@@ -13669,7 +13669,8 @@ Private Sub cmdInformeProductividad_Click()
     'nombre3,
     campo = campo & "concat(HoraInicio,' - ' ,if(HoraFin is null,'',Horafin)),"
     'importe1
-    campo = campo & " if(horafin is null,0,Hour (timediff(horafin, horainicio)) + Round(Minute(timediff(horafin, horainicio)) / 60, 2))"
+    'campo = campo & " if(horafin is null,0,Hour (timediff(horafin, horainicio)) + Round(Minute(timediff(horafin, horainicio)) / 60, 2))"
+    campo = campo & " if(horafin is null,0,calculadas)"
     'Tarea
     campo = campo & ", concat(sreloj.codtipor,' ',coalesce(nomtipor,''))"
     
@@ -13679,6 +13680,13 @@ Private Sub cmdInformeProductividad_Click()
 
     campo = "INSERT INTO tmpinformes(codusu,codigo1,campo2,nombre1,campo1,nombre2,fecha1,nombre3,importe1,obser) " & campo
     If ejecutar(campo, False) Then
+        Espera 0.5
+        campo = "update tmpinformes set importe2=floor(importe1),"
+        campo = campo & "Importe3 = Round(Round(Importe1 - floor(Importe1), 2) * 100 * 0.6)"
+        campo = campo & " Where CodUsu = " & vUsu.codigo & " And  Importe1 > 0"
+        ejecutar campo, False
+    
+    
         'A imprimir
         cadTitulo = "Informe produccion"
         cadNomRPT = "rproductividad2.rpt"

@@ -5441,7 +5441,12 @@ Dim b As Boolean
                     If ModificaLineas = 1 Then 'insertar linea
                         b = True
                     ElseIf ModificaLineas = 2 Then 'modificar linea
-                        If Data2.Recordset!codArtic <> txtAux(1).Text Then b = True
+                        If Data2.Recordset!codArtic <> txtAux(1).Text Then
+                         b = True
+                        Else
+                            If CStr(DBLet(Data2.Recordset!origpre, "T")) <> "M" Then b = True
+                        End If
+                        
                     End If
                 End If
                 

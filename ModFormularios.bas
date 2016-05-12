@@ -717,7 +717,7 @@ ErrCarga:
 End Sub
 
 
-Public Sub CargarCombo_Tabla(ByRef CBO As ComboBox, NomTabla As String, NomCodigo As String, nomDescrip As String, Optional strWhere As String, Optional ItemNulo As Boolean)
+Public Sub CargarCombo_Tabla(ByRef CBO As ComboBox, NomTabla As String, NomCodigo As String, nomDescrip As String, Optional strWhere As String, Optional ItemNulo As Boolean, Optional Ordenacion As String)
 'Carga un objeto ComboBox con los registros de una Tabla
 '(IN) cbo: ComboBox en el q se van a cargar los datos
 '(IN) nomTabla: nombre de la tabla de la q leeremos los datos a cargar
@@ -735,7 +735,12 @@ Dim I As Integer
     
     SQL = "SELECT " & NomCodigo & "," & nomDescrip & " FROM " & NomTabla
     If strWhere <> "" Then SQL = SQL & " WHERE " & strWhere
-    SQL = SQL & " ORDER BY " & nomDescrip
+    SQL = SQL & " ORDER BY "
+    If Ordenacion <> "" Then
+        SQL = SQL & Ordenacion
+    Else
+        SQL = SQL & nomDescrip
+    End If
     
 '    If AbrirRecordset(SQL, RS) Then
     Set Rs = New ADODB.Recordset
