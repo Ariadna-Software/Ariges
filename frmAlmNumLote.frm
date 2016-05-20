@@ -413,6 +413,33 @@ Begin VB.Form frmAlmNumLote
          Shortcut        =   ^S
       End
    End
+   Begin VB.Menu mnFiltro 
+      Caption         =   "Filtro"
+      Begin VB.Menu mnFiltro1 
+         Caption         =   "Sin filtro"
+         Index           =   0
+      End
+      Begin VB.Menu mnFiltro1 
+         Caption         =   "-"
+         Index           =   1
+      End
+      Begin VB.Menu mnFiltro1 
+         Caption         =   "Disponible"
+         Index           =   2
+      End
+      Begin VB.Menu mnFiltro1 
+         Caption         =   "Ultimo mes"
+         Index           =   3
+      End
+      Begin VB.Menu mnFiltro1 
+         Caption         =   "Ultimos 6 meses"
+         Index           =   4
+      End
+      Begin VB.Menu mnFiltro1 
+         Caption         =   "Ultimo año"
+         Index           =   5
+      End
+   End
 End
 Attribute VB_Name = "frmAlmNumLote"
 Attribute VB_GlobalNameSpace = False
@@ -446,6 +473,7 @@ Dim CadenaBusqueda As String
 
 Private HaDevueltoDatos As Boolean
 
+Dim KK As Integer
 
 
 Private Sub cmdAceptar_Click()
@@ -646,6 +674,18 @@ Private Sub Form_Load()
     End If
 '    CargaGrid (Modo = 2 Or Modo = 0)
     CargaGrid False
+    
+    KK = ByteValueLeer(Me.Name)
+    mnFiltro.Tag = KK
+    For kCampo = 0 To Me.mnFiltro1.Count - 1
+        If KK = kCampo Then
+            mnFiltro1(kCampo).Checked = True
+            Exit For
+        End If
+    Next
+    
+    
+    
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -708,6 +748,17 @@ End Sub
 
 
 
+Private Sub Form_Unload(Cancel As Integer)
+    KK = 0
+    For kCampo = 0 To Me.mnFiltro1.Count - 1
+        If mnFiltro1(kCampo).Checked Then
+            KK = kCampo
+            Exit For
+        End If
+    Next
+    If mnFiltro.Tag <> KK Then ByteValueGuardar Me.Name, CByte(KK)
+End Sub
+
 Private Sub frmA_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento de Articulos
     txtAux(0).Text = RecuperaValor(CadenaSeleccion, 1)
@@ -748,6 +799,18 @@ End Sub
 
 Private Sub mnEliminar_Click()
     BotonEliminar
+End Sub
+
+Private Sub mnFiltro1_Click(Index As Integer)
+    For KK = 0 To Me.mnFiltro1.Count - 1
+        If Index <> 1 Then
+            If KK = Index Then
+                Me.mnFiltro1(KK).Checked = True
+            Else
+                Me.mnFiltro1(KK).Checked = False
+            End If
+        End If
+    Next
 End Sub
 
 Private Sub mnModificar_Click()
@@ -934,6 +997,14 @@ Dim anc As Single
     End If
 End Sub
 
+Private Function ValorFiltro() As String
+    ValorFiltro = ""
+    If Me.mnFiltro1(2).Checked Then
+        ValorFiltro = " canentra - vendida >0 "
+    ElseIf Me.mnFiltro1(3).Checked Then
+        MsgBox "Falt"
+    End If
+End Function
 
 Private Sub BotonVerTodos()
     On Error Resume Next
@@ -941,7 +1012,12 @@ Private Sub BotonVerTodos()
     EsBusqueda = False
     LimpiarCampos
     
-    CadenaConsulta = "Select * from " & NombreTabla & Ordenacion
+    CadenaConsulta = ValorFiltro
+    If CadenaConsulta <> "" Then CadenaConsulta = " WHERE " & CadenaConsulta
+    
+    
+    CadenaConsulta = "Select * from " & NombreTabla & CadenaConsulta
+    CadenaConsulta = CadenaConsulta & Ordenacion
     PonerCadenaBusqueda
     PonerFocoGrid DataGrid1
 
@@ -1138,8 +1214,13 @@ End Sub
 
 Private Sub HacerBusqueda()
 Dim cadB As String
-
+Dim Aux As String
+    
     cadB = ObtenerBusqueda(Me, False)
+    Aux = ValorFiltro
+    If Aux <> "" Then Aux = " AND " & Aux
+    
+    
     If chkVistaPrevia = 1 Then
         MandaBusquedaPrevia cadB
     ElseIf cadB <> "" Then 'Se muestran en el mismo form

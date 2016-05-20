@@ -1948,12 +1948,12 @@ On Error GoTo Err3
     
         
         If Me.HayDeparNuevo = 2 Then mvarTipoFormularioClientes = 1  'Obras. SAIL-Y euler
-        Leer = 0
+        
         
         
         'Solo GET
         mvarContabilidadNueva = DBLet(Rs!NuevaContabilidad, "N") = 1
-        'mvarContabilidadNueva = False
+        Leer = 0
         
         ComprobarProgramaEnvioMail
         

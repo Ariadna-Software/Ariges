@@ -8,6 +8,7 @@ Attribute VB_Name = "ValoresxDefecto"
 ' CheckValueLeer:
 '                   asiganr directamente a un check de vista previa su valor
 
+'Guardar BYTE
 
 
 Private Function DevNombreFichero(Nombre As String) As String
@@ -86,5 +87,75 @@ If Dir(vPath, vbArchive) = "" Then
 End If
 Exit Sub
 ECrearFichValoresPorDefecto:
+    Err.Clear
+End Sub
+
+
+
+'Valores por defecto pero que no sean CHECK
+'Son tipo BTE
+Public Function ByteValueLeer(NombreForm As String) As Byte
+Dim NombreFichero As String
+
+On Error GoTo ECheckValueLeer
+ByteValueLeer = 0
+'Se podria hacer un select para que no lie mucho los nombres en las carpetas
+NombreFichero = DevNombreFichero(NombreForm)
+If NombreFichero <> "" Then
+    If Dir(NombreFichero) <> "" Then
+        FicheroByte True, NombreFichero, ByteValueLeer
+    End If
+End If
+
+
+Exit Function
+ECheckValueLeer:
+    Err.Clear
+End Function
+
+Public Sub ByteValueGuardar(NombreForm As String, Valor As Byte)
+ Dim NombreFichero  As String
+    'Se podria hacer un select para que no lie mucho los nombres en las carpetas
+    NombreFichero = DevNombreFichero(NombreForm)
+    If NombreFichero = "" Then Exit Sub
+    If Valor > 128 Then Valor = 128
+    If Valor = 0 Then
+        'Hay que eliminar si existe
+        EliminaValoresPorDefecto NombreFichero
+    Else
+        FicheroByte False, NombreFichero, Valor
+    End If
+        
+    
+
+    
+    
+End Sub
+
+
+
+Private Sub FicheroByte(Leer As Boolean, NomFich As String, ByRef Resultado As Byte)
+Dim Cad As String
+Dim NF As Integer
+    
+    On Error Resume Next
+    NF = FreeFile
+    If Leer Then
+        Open NomFich For Input As #NF
+        Line Input #NF, Cad
+        Close #NF
+        If Not IsNumeric(Cad) Then
+            Cad = "0"
+        Else
+            If Val(Cad) > 128 Then Cad = "128"
+        End If
+        Resultado = CByte(Cad)
+    Else
+        Open NomFich For Output As #NF
+        Print #NF, Resultado
+        Close #NF
+        
+    End If
+    
     Err.Clear
 End Sub

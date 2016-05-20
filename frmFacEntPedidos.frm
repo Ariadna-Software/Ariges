@@ -2909,6 +2909,7 @@ Private Sub BotonEliminarLinea()
 Dim SQL As String
 Dim ImpReciclado As Single
 Dim pos As Integer
+Dim CodproveHerbelca  As String
 
     On Error GoTo EEliminarLinea
 
@@ -2921,16 +2922,36 @@ Dim pos As Integer
             
             
     If vParamAplic.NumeroInstalacion = 2 Then
-        'HERBELCA
+    
+        CodproveHerbelca = "codprove"
+        
+        SQL = DevuelveDesdeBD(conAri, "count(*)", "sartic", "codartic", CStr(Data2.Recordset!codArtic), "T", CodproveHerbelca)
         If vUsu.Nivel > 0 Then
             
-            SQL = "artvario=1 AND sartic.codartic"
-            SQL = DevuelveDesdeBD(conAri, "count(*)", "sartic", SQL, CStr(Data2.Recordset!codArtic))
             If Val(SQL) > 0 Then
                 MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
                 Exit Sub
             End If
         End If
+        
+        
+        If CodproveHerbelca = 5000 Then
+            'Proveedor de varios
+             If vUsu.AlmacenPorDefecto > 1 Then
+                MsgBox "No puede eliminar linea", vbExclamation
+                Exit Sub
+            End If
+        End If
+        
+        
+        'SI es de portes tampoco dejo
+        If vParamAplic.ArtPortesN = CStr(Data2.Recordset!codArtic) Then
+            If vUsu.AlmacenPorDefecto > 1 Then
+                MsgBox "No puede eliminar linea", vbExclamation
+                Exit Sub
+            End If
+        End If
+    
     End If
     
             

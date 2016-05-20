@@ -3674,6 +3674,10 @@ Dim vWhere As String
     If Data2.Recordset.EOF Then Exit Sub
     
     
+        
+    
+    
+    
     
     'bloqueamos el registro a modificar
     vWhere = Replace(ObtenerWhereCP(False), NombreTabla, NomTablaLineas) & " and numlinea=" & Data2.Recordset!numlinea
@@ -3808,6 +3812,7 @@ End Sub
 Private Sub BotonEliminarLinea()
 'Eliminar una linea De Mantenimiento. Tabla: slima1
 Dim SQL As String
+Dim CodproveHerbelca As String
 
     'Si no estaba modificando lineas salimos
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
@@ -3817,12 +3822,31 @@ Dim SQL As String
         
     If vParamAplic.NumeroInstalacion = 2 Then
         'HERBELCA
+        CodproveHerbelca = "codprove"
+        
+        SQL = DevuelveDesdeBD(conAri, "count(*)", "sartic", "codartic", CStr(Data2.Recordset!codArtic), "T", CodproveHerbelca)
         If vUsu.Nivel > 0 Then
             
-            SQL = "artvario=1 AND sartic.codartic"
-            SQL = DevuelveDesdeBD(conAri, "count(*)", "sartic", SQL, CStr(Data2.Recordset!codArtic), "T")
             If Val(SQL) > 0 Then
                 MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
+                Exit Sub
+            End If
+        End If
+        
+        
+        If CodproveHerbelca = 5000 Then
+            'Proveedor de varios
+             If vUsu.AlmacenPorDefecto > 1 Then
+                MsgBox "No puede eliminar linea", vbExclamation
+                Exit Sub
+            End If
+        End If
+        
+        
+        'SI es de portes tampoco dejo
+        If vParamAplic.ArtPortesN = CStr(Data2.Recordset!codArtic) Then
+            If vUsu.AlmacenPorDefecto > 1 Then
+                MsgBox "No puede eliminar linea", vbExclamation
                 Exit Sub
             End If
         End If
@@ -5773,6 +5797,15 @@ Dim devuelve As String
     End If
     
     
+    
+    'HERBELCA.
+    ' Modificar.  Los trabajadores de GANDIA-CASTELLON no pueden desmarcar FACTURAR
+    If vParamAplic.NumeroInstalacion = 2 And Modo = 4 And Me.chkFacturar.Value = 0 Then
+        If DBLet(Me.Data1.Recordset!factursn, "N") = 1 Then
+            'ERA facturar y ahora NO tienen la marca.
+            If vUsu.AlmacenPorDefecto > 1 Then Me.chkFacturar.Value = 1   'NO PREGUNTAMOS ni damos error ni nada de nada
+        End If
+    End If
     
 '    If Modo = 3 And b Then
 '         If vParamAplic.ManipuladorFitosanitarios2 And hcoCodTipoM = "ALM" Then
@@ -7810,8 +7843,8 @@ EEliminarLinea:
 End Function
 
 
-Private Sub ReestablecerLotesArticulo(Linea As Integer)
-        If Linea >= 0 Then
+Private Sub ReestablecerLotesArticulo(linea As Integer)
+        If linea >= 0 Then
             BuscaChekc = DevuelveDesdeBD(conAri, "numserie", "sartic", "codartic", Data2.Recordset!codArtic, "T")
         Else
             BuscaChekc = "OK"
@@ -7819,7 +7852,7 @@ Private Sub ReestablecerLotesArticulo(Linea As Integer)
         If Trim(BuscaChekc) <> "" Then
             Set miRsAux = New ADODB.Recordset
             BuscaChekc = "Select * from slialblotes WHERE codtipom= '" & Data1.Recordset!codtipom & "' AND numalbar = " & Data1.Recordset!NumAlbar
-            If Linea >= 0 Then BuscaChekc = BuscaChekc & " AND numlinea =" & Data2.Recordset!numlinea
+            If linea >= 0 Then BuscaChekc = BuscaChekc & " AND numlinea =" & Data2.Recordset!numlinea
             miRsAux.Open BuscaChekc, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not miRsAux.EOF
                 If miRsAux!cantidad <> 0 Then
@@ -8367,7 +8400,7 @@ End Sub
 Private Sub PedirNSeriesT(ByRef Rs As ADODB.Recordset)
 Dim RSseries As ADODB.Recordset
 Dim SQL As String
-Dim Linea As Integer
+Dim linea As Integer
 
     On Error GoTo EPedirNSeries
 
@@ -8375,7 +8408,7 @@ Dim Linea As Integer
         PedirNSeriesGnral Rs, False
         Rs.MoveFirst
         While Not Rs.EOF
-            Linea = 0
+            linea = 0
             'Cargar los Nº de serie asignados
             SQL = "SELECT numserie, codartic,nummante FROM sserie "
             SQL = SQL & " WHERE codtipom='" & Text1(30).Text & "' and "
@@ -8385,12 +8418,12 @@ Dim Linea As Integer
             Set RSseries = New ADODB.Recordset
             RSseries.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RSseries.EOF
-                Linea = Linea + 1
+                linea = linea + 1
                 SQL = "UPDATE tmpnseries SET numserie=" & DBSet(RSseries!numSerie, "T")
                 SQL = SQL & ", nummante = " & DBSet(RSseries!nummante, "T")
                 SQL = SQL & " WHERE codartic=" & DBSet(Rs!codArtic, "T")
                 SQL = SQL & " and numlinealb=" & Rs!numlinea
-                SQL = SQL & " and numlinea=" & Linea
+                SQL = SQL & " and numlinea=" & linea
                 conn.Execute SQL
                 RSseries.MoveNext
             Wend

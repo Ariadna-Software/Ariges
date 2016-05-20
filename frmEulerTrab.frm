@@ -72,24 +72,21 @@ Begin VB.Form frmEulerTrab
       Alignment       =   1  'Right Justify
       Height          =   315
       Index           =   5
-      Left            =   11760
-      MaxLength       =   16
+      Left            =   12240
       TabIndex        =   5
-      Tag             =   "Salida|H|S|||sreloj|Horafin|hh:mm:ss||"
       Text            =   "salida"
-      Top             =   2040
-      Width           =   1200
+      Top             =   1920
+      Width           =   1920
    End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Height          =   315
       Index           =   4
-      Left            =   11760
+      Left            =   12240
       TabIndex        =   4
-      Tag             =   "Entrada|H|N|||sreloj|HoraInicio|hh:mm:ss||"
       Text            =   "entrada"
-      Top             =   960
-      Width           =   1200
+      Top             =   1080
+      Width           =   1920
    End
    Begin VB.CommandButton cmdAux 
       Appearance      =   0  'Flat
@@ -446,7 +443,7 @@ Begin VB.Form frmEulerTrab
       Index           =   3
       Left            =   11760
       TabIndex        =   24
-      Top             =   1800
+      Top             =   1560
       Width           =   660
    End
    Begin VB.Label Label2 
@@ -482,7 +479,7 @@ Begin VB.Form frmEulerTrab
       Index           =   0
       Left            =   11760
       TabIndex        =   22
-      Top             =   720
+      Top             =   840
       Width           =   660
    End
    Begin VB.Label Label10 
@@ -1074,6 +1071,7 @@ Dim K As Integer
 '            End With
 '
         Case 11  'Salir
+            Unload Me
     End Select
 End Sub
 
@@ -1276,6 +1274,7 @@ Dim anc As Single
     anc = ObtenerAlto(Me.DataGrid1, 10)
     LLamaLineas anc
     txtAux(2).Text = Format(Now, "dd/mm/yyyy")
+    txtAux(4).Text = Format(Now, "dd/mm/yyyy hh:nn:ss")
     
     PonerFoco txtAux(0)
 End Sub
@@ -1373,7 +1372,34 @@ Dim SQL As String
     If Not b Then Exit Function
     
     
+    SQL = txtAux(4).Text
+    If Not EsFechaHoraOK(SQL) Then
+        MsgBox "Error hora inicio", vbExclamation
+        b = False
+    Else
+        If Format(CDate(SQL), "dd/mm/yyyy") <> CDate(txtAux(2).Text) Then
+            MsgBox "Fecha inicio debe ser: " & txtAux(2).Text, vbExclamation
+            b = False
+        End If
+    End If
+    If Not b Then Exit Function
     
+    SQL = Trim(txtAux(5).Text)
+    If SQL <> "" Then
+        If Not EsFechaHoraOK(SQL) Then
+            MsgBox "Error hora inicio", vbExclamation
+            b = False
+            
+        Else
+            If CDate(txtAux(5).Text) < CDate(txtAux(4).Text) Then
+                MsgBox "Fecha fin menor que fecha inicio", vbExclamation
+                b = False
+            End If
+        End If
+        
+        
+    End If
+    If Not b Then Exit Function
     
     
     'Comprobar que existe un Albaran de venta para ese técnico(realizado por del alb)
@@ -1395,17 +1421,29 @@ End Function
 
 Private Sub HacerBusqueda()
 Dim cadB As String
+Dim FechaFinNula As Boolean
 
     On Error Resume Next
     
-   
+    FechaFinNula = False
+    If LCase(Me.txtAux(5).Text) = "null" Then FechaFinNula = True
+    txtAux(5).Text = ""
+    txtAux(4).Text = ""
+    
     cadB = ObtenerBusqueda(Me, False)
+    
+     
      
     If cboTipo.ListIndex >= 0 Then
         If cadB <> "" Then cadB = cadB & " AND "
         cadB = cadB & " codtipom = '" & RecuperaValor("ALR|ALE|ALO|PRO|", cboTipo.ListIndex + 1) & "'"
     End If
     
+    If FechaFinNula Then
+        If cadB <> "" Then cadB = cadB & " AND "
+        cadB = cadB & " horafin is null"
+    End If
+    If cadB = "" Then Exit Sub
     
     If chkVistaPrevia = 1 Then
 '        MandaBusquedaPrevia cadB
@@ -1483,7 +1521,7 @@ End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-
+Dim Aux As String
     On Error Resume Next
     
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
@@ -1550,10 +1588,15 @@ Private Sub txtAux_LostFocus(Index As Integer)
             PonerFormatoDecimal txtAux(Index), 4
             
         Case 4, 5 'horas
-            txtAux(Index) = Replace(txtAux(Index), ".", ":")
-            PonerFormatoHora txtAux(Index)
-            DiferenciaHoras
-            
+            txtAux(Index).Text = Trim(txtAux(Index).Text)
+            If txtAux(Index).Text <> "" Then
+                txtAux(Index) = Replace(txtAux(Index), ".", ":")
+                Aux = txtAux(Index).Text
+                If EsFechaHoraOK(Aux) Then
+                    txtAux(Index).Text = Aux
+                    DiferenciaHoras
+                End If
+            End If
     End Select
     
     If Err.Number <> 0 Then MuestraError Err.Number, "", Err.Description
@@ -1578,21 +1621,20 @@ Dim Limp As Boolean
         txtAux(6).Text = ""
         txtAux3(4).Text = ""
 
-        
     Else
         'EL
-        txtAux(4).Text = PonerCampoAux(1)
-        txtAux(5).Text = PonerCampoAux(2)
-        txtAux(6).Text = PonerCampoAux(3)
+        txtAux(4).Text = PonerCampoAux2(1)
+        txtAux(5).Text = PonerCampoAux2(2)
+        txtAux(6).Text = PonerCampoAux2(3)
         txtAux3(4).Text = ""
-        PonerCampoAux 4
+        PonerCampoAux2 4
         
         
     End If
 End Sub
 
 
-Private Function PonerCampoAux(Cual As Integer) As String
+Private Function PonerCampoAux2(Cual As Integer) As String
 Dim Cad As String
 Dim C As String
     
@@ -1604,12 +1646,12 @@ Dim C As String
         Cad = ""
     Else
         If Cual < 3 Then
-            Cad = Format(Data1.Recordset.Fields(C), "hh:mm:ss")
+            Cad = Format(Data1.Recordset.Fields(C), "dd/mm/yyyy hh:mm:ss")
         Else
             Cad = Data1.Recordset.Fields(C)
         End If
     End If
-    PonerCampoAux = Cad
+    PonerCampoAux2 = Cad
     
     
     If Cual = 4 Then
@@ -1668,11 +1710,11 @@ Dim Cad As String
         If Data1.Recordset.EOF Then CadenaConsulta = Cad
         
         Cad = Cad & "," & DBSet(txtAux(2).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
-        Cad = Cad & DBSet(txtAux(4).Text, "H") & ","
+        Cad = Cad & DBSet(txtAux(4).Text, "FH") & ","
         If txtAux(5).Text = "" Then
             Cad = Cad & "NULL"
         Else
-            Cad = Cad & DBSet(txtAux(5).Text, "H")
+            Cad = Cad & DBSet(txtAux(5).Text, "FH")
         End If
         Cad = Cad & "," & DBSet(txtAux(3).Text, "N") & ","
         
@@ -1683,11 +1725,11 @@ Dim Cad As String
     Else
         Cad = "UPDATE sreloj SET fecha=" & DBSet(txtAux(2).Text, "F")
         Cad = Cad & ",codtraba=" & DBSet(txtAux(0).Text, "N") & ",codtipor=" & DBSet(txtAux(1).Text, "T")
-        Cad = Cad & ",HoraInicio=" & DBSet(txtAux(4).Text, "H") & ",HoraFin="
+        Cad = Cad & ",HoraInicio=" & DBSet(txtAux(4).Text, "FH") & ",HoraFin="
         If txtAux(5).Text = "" Then
             Cad = Cad & "NULL"
         Else
-            Cad = Cad & DBSet(txtAux(5).Text, "H")
+            Cad = Cad & DBSet(txtAux(5).Text, "FH")
         End If
         
         Cad = Cad & ",Calculadas=" & DBSet(txtAux(3).Text, "N") & ",numalbar=" & DBSet(txtAux(6).Text, "N")
@@ -1705,7 +1747,11 @@ Private Sub DiferenciaHoras()
 Dim Minutos As Integer
     If Me.txtAux(4).Text = "" Or txtAux(5).Text = "" Then Exit Sub
     
-    Minutos = DateDiff("n", CDate(txtAux(4).Text), CDate(txtAux(5).Text))
+    If CDate(txtAux(4).Text) > CDate(txtAux(5).Text) Then
+        Minutos = -1
+    Else
+        Minutos = DateDiff("n", CDate(txtAux(4).Text), CDate(txtAux(5).Text))
+    End If
     If Minutos < 0 Then
         MsgBox "Diferencia de horas negativa", vbExclamation
         PonerFoco txtAux(5)

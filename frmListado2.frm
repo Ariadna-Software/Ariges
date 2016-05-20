@@ -17812,7 +17812,7 @@ Dim Almacen As Integer
     
             'Insertar en las tablas de Albaranes: scaalb, slialb
             'en el campo scafac1.numalbar guardamos el nº de ticket
-            If b Then b = InsertarAlbaran(NumAlb, CStr(RT!CodTraba), 1, RT!cantidad, RT!total, MenError)
+            If b Then b = InsertarAlbaran(NumAlb, CStr(RT!CodTraba), 1, RT!cantidad, RT!Total, MenError)
         
         End If
 
@@ -19035,7 +19035,7 @@ Dim RatioMensual As Currency
 Dim AprovMesMin As Currency
 Dim AprovMesMax As Currency
 Dim Cantaux As Currency
-Dim Kk As Integer
+Dim KK As Integer
 
     On Error GoTo Etmppedprov
     GeneraInformepedidoProv = False
@@ -19357,17 +19357,17 @@ Dim Kk As Integer
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    For Kk = 1 To ColArt_.Count
-        Label3(100).Caption = "Ud minimo. " & Kk & " de " & ColArt_.Count
+    For KK = 1 To ColArt_.Count
+        Label3(100).Caption = "Ud minimo. " & KK & " de " & ColArt_.Count
         Label3(100).Refresh
     
-        miSQL = "select * from slispr  where codprove = " & ColArt_.item(Kk)
+        miSQL = "select * from slispr  where codprove = " & ColArt_.item(KK)
         miSQL = miSQL & " AND cantmini>0 and codartic in "
-        miSQL = miSQL & " (select codartic from tmppedprov where codprove = " & ColArt_.item(Kk)
+        miSQL = miSQL & " (select codartic from tmppedprov where codprove = " & ColArt_.item(KK)
         miSQL = miSQL & " AND codusu =" & vUsu.codigo & ")   "
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
-            miSQL = "UPDATE tmppedprov SET caja=" & miRsAux!cantmini & " WHERE codprove =" & ColArt_.item(Kk)
+            miSQL = "UPDATE tmppedprov SET caja=" & DBSet(miRsAux!cantmini, "N") & " WHERE codprove =" & ColArt_.item(KK)
             miSQL = miSQL & " AND codartic = " & DBSet(miRsAux!codArtic, "T") & " AND codusu =" & vUsu.codigo
             conn.Execute miSQL
             miRsAux.MoveNext

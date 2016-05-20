@@ -44,32 +44,32 @@ End Function
 
 '=== DAVID (estaban en Modulo:bus, antes era ESFechaOKString)
 Public Function EsFechaOK(T As String) As Boolean
-Dim cad As String
+Dim Cad As String
 Dim mes As String, dia As String
     
-    cad = T
-    If InStr(1, cad, "/") = 0 Then
+    Cad = T
+    If InStr(1, Cad, "/") = 0 Then
        'debe ser una cadena tipo:020105 y la convertimos a 02/01/05
-       If Not IsNumeric(cad) Then
+       If Not IsNumeric(Cad) Then
             EsFechaOK = False
             Exit Function
        End If
         
       '==== Anade: Laura 04/02/2005 =============
-        If Len(cad) < 6 Then
+        If Len(Cad) < 6 Then
             EsFechaOK = False
             Exit Function
         End If
         
         'Comprobar que el dia es correcto, valores entre 1-31
-        dia = Mid(cad, 1, 2)
+        dia = Mid(Cad, 1, 2)
         If dia < 1 Or dia > 31 Then
             EsFechaOK = False
             Exit Function
         End If
         
         'Comprobar que el mes es correcto, valores entre 1-12
-        mes = Mid(cad, 3, 2)
+        mes = Mid(Cad, 3, 2)
         If mes < 1 Or mes > 12 Then
             EsFechaOK = False
             Exit Function
@@ -77,18 +77,18 @@ Dim mes As String, dia As String
       '============================================
         
         If Len(T) = 8 Then
-            cad = Mid(cad, 1, 2) & "/" & Mid(cad, 3, 2) & "/" & Mid(cad, 5)
+            Cad = Mid(Cad, 1, 2) & "/" & Mid(Cad, 3, 2) & "/" & Mid(Cad, 5)
         Else
-            If Len(T) = 6 Then cad = Mid(cad, 1, 2) & "/" & Mid(cad, 3, 2) & "/" & Mid(cad, 5)
+            If Len(T) = 6 Then Cad = Mid(Cad, 1, 2) & "/" & Mid(Cad, 3, 2) & "/" & Mid(Cad, 5)
         End If
     Else
-        dia = Mid(cad, 1, 2)
-        mes = Mid(cad, 4, 2)
+        dia = Mid(Cad, 1, 2)
+        mes = Mid(Cad, 4, 2)
     End If
     
-    If IsDate(cad) Then
+    If IsDate(Cad) Then
         EsFechaOK = True
-        T = Format(cad, "dd/mm/yyyy")
+        T = Format(Cad, "dd/mm/yyyy")
       '==== Añade: Laura 08/02/2005
         If Month(T) <> Val(mes) Then EsFechaOK = False
         If Day(T) <> Val(dia) Then EsFechaOK = False
@@ -101,23 +101,23 @@ End Function
 
 '=== DAVID (estaba en Modulo:bus)
 Public Function EsHoraOK(T As String) As Boolean
-Dim cad As String
+Dim Cad As String
     
-    cad = T
-    If InStr(1, cad, ":") = 0 Then
+    Cad = T
+    If InStr(1, Cad, ":") = 0 Then
         Select Case Len(T)
             Case 8
-                cad = Mid(cad, 1, 2) & ":" & Mid(cad, 3, 2) & ":" & Mid(cad, 5)
+                Cad = Mid(Cad, 1, 2) & ":" & Mid(Cad, 3, 2) & ":" & Mid(Cad, 5)
             Case 6
-                cad = Mid(cad, 1, 2) & ":" & Mid(cad, 3, 2) & ":" & Mid(cad, 5)
+                Cad = Mid(Cad, 1, 2) & ":" & Mid(Cad, 3, 2) & ":" & Mid(Cad, 5)
             Case 4
-                cad = Mid(cad, 1, 2) & ":" & Mid(cad, 3, 2) & ":00"
+                Cad = Mid(Cad, 1, 2) & ":" & Mid(Cad, 3, 2) & ":00"
         End Select
     End If
     
-    If IsDate(cad) Then
+    If IsDate(Cad) Then
         EsHoraOK = True
-        T = Format(cad, "hh:mm:ss")
+        T = Format(Cad, "hh:mm:ss")
     Else
         EsHoraOK = False
     End If
@@ -126,16 +126,16 @@ End Function
 
 '==== LAURA
 Public Sub PonerFormatoFecha(ByRef T As TextBox)
-Dim cad As String
+Dim Cad As String
 
-    cad = T.Text
-    If cad <> "" Then
-        If Not EsFechaOK(cad) Then
+    Cad = T.Text
+    If Cad <> "" Then
+        If Not EsFechaOK(Cad) Then
             MsgBox "Fecha incorrecta. (dd/mm/yyyy)", vbExclamation
-            cad = "mal"
+            Cad = "mal"
         End If
-        If cad <> "" And cad <> "mal" Then
-            T.Text = cad
+        If Cad <> "" And Cad <> "mal" Then
+            T.Text = Cad
         Else
             T.Text = ""
             PonerFoco T
@@ -143,18 +143,58 @@ Dim cad As String
     End If
 End Sub
 
+
+'---- David Mao 2016
+Public Function EsFechaHoraOK(T As String) As Boolean
+Dim EspacioEnBlanco As Integer
+Dim LaFecha As String
+Dim LaHora As String
+Dim Mensaje As String
+
+    'Devolvera OK si:
+    ' dd/mm/yyyy hh:nn:ss
+    
+    'Es decir. Hay un espacio en blanco
+    ' Lo de antes del espacio en blanco es una fecha
+    ' Lo de despues es una hora
+    '
+    EsFechaHoraOK = False
+    Mensaje = ""
+    EspacioEnBlanco = InStr(1, T, " ")
+    If EspacioEnBlanco = 0 Then
+        Mensaje = "Falta separacion fecha-hora(Espacio)"
+    Else
+        LaFecha = Trim(Mid(T, 1, EspacioEnBlanco))
+        LaHora = Trim(Mid(T, EspacioEnBlanco))
+        
+        If Not EsFechaOK(LaFecha) Then
+            Mensaje = "Fecha incorrecta: " & LaFecha
+        Else
+            If Not EsHoraOK(LaHora) Then Mensaje = "Fecha incorrecta: " & LaFecha
+        End If
+                
+    End If
+    If Mensaje <> "" Then
+        MsgBox Mensaje, vbExclamation
+    Else
+        T = LaFecha & " " & LaHora
+        EsFechaHoraOK = True
+    End If
+End Function
+
+
 '==== LAURA
 Public Sub PonerFormatoHora(ByRef T As TextBox)
-Dim cad As String
+Dim Cad As String
 
-        cad = T.Text
-        If cad <> "" Then
-            If Not EsHoraOK(cad) Then
+        Cad = T.Text
+        If Cad <> "" Then
+            If Not EsHoraOK(Cad) Then
                 MsgBox "Hora incorrecta. (hh:mm:ss)", vbExclamation
-                cad = "mal"
+                Cad = "mal"
             End If
-            If cad <> "" And cad <> "mal" Then
-                T.Text = cad
+            If Cad <> "" And Cad <> "mal" Then
+                T.Text = Cad
             Else
                 T.Text = ""
                 PonerFoco T
@@ -164,14 +204,14 @@ End Sub
 
 
 '==== LAURA
-Public Function EsFechaPosterior(FIni As String, FFin As String, MError As Boolean, Optional Men As String) As Boolean
+Public Function EsFechaPosterior(FIni As String, Ffin As String, MError As Boolean, Optional Men As String) As Boolean
 'Comprueba que la Fecha Fin es posterior a la Fecha de Inicio
 'Si se pasa un cadena Men, se muestra esta como Mensaje de Error
 On Error Resume Next
 
     EsFechaPosterior = True
-    If Trim(FIni) <> "" And Trim(FFin) <> "" Then
-        If CDate(FIni) >= CDate(FFin) Then
+    If Trim(FIni) <> "" And Trim(Ffin) <> "" Then
+        If CDate(FIni) >= CDate(Ffin) Then
             EsFechaPosterior = False
             If MError Then
                 If Men <> "" Then
@@ -189,7 +229,7 @@ End Function
 
 '==== LAURA
 '==== Fec. ult. modif.: 20/06/2008
-Public Function EsFechaIgualPosterior(FIni As String, FFin As String, MError As Boolean, Optional Men As String) As Boolean
+Public Function EsFechaIgualPosterior(FIni As String, Ffin As String, MError As Boolean, Optional Men As String) As Boolean
 'Comprueba que la Fecha Fin es igual o posterior a la Fecha de Inicio
 'Si se pasa un cadena Men, se muestra esta como Mensaje de Error
 '(IN) -> FIni: fecha inicio
@@ -202,8 +242,8 @@ Public Function EsFechaIgualPosterior(FIni As String, FFin As String, MError As 
 
 '    EsFechaIgualPosterior = True
     
-    If Trim(FIni) <> "" And Trim(FFin) <> "" Then
-        If CDate(FIni) > CDate(FFin) Then
+    If Trim(FIni) <> "" And Trim(Ffin) <> "" Then
+        If CDate(FIni) > CDate(Ffin) Then
             EsFechaIgualPosterior = False
             
             If MError Then 'mostrar error
@@ -259,18 +299,18 @@ End Function
 
 
 '==== LAURA
-Public Function EntreFechas(FIni As String, FechaComp As String, FFin As String) As Boolean
+Public Function EntreFechas(FIni As String, FechaComp As String, Ffin As String) As Boolean
 Dim b As Boolean
     b = False
-    If FIni <> "" And FFin <> "" Then
-        If EsFechaIgualPosterior(FIni, FechaComp, False) And EsFechaIgualPosterior(FechaComp, FFin, False) Then
+    If FIni <> "" And Ffin <> "" Then
+        If EsFechaIgualPosterior(FIni, FechaComp, False) And EsFechaIgualPosterior(FechaComp, Ffin, False) Then
             b = True
         End If
-    ElseIf FIni = "" And FFin <> "" Then
-        If EsFechaIgualPosterior(FechaComp, FFin, False) Then
+    ElseIf FIni = "" And Ffin <> "" Then
+        If EsFechaIgualPosterior(FechaComp, Ffin, False) Then
             b = True
         End If
-    ElseIf FIni <> "" And FFin = "" Then
+    ElseIf FIni <> "" And Ffin = "" Then
         If EsFechaIgualPosterior(FIni, FechaComp, False) Then
             b = True
         End If
