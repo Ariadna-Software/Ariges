@@ -13667,7 +13667,10 @@ Private Sub cmdInformeProductividad_Click()
     '               ,   campo1,     nombre2,                        fecha
     campo = campo & "numalbar ,if(codtipom is null,'PROD',codtipom),Fecha,"
     'nombre3,
-    campo = campo & "concat(HoraInicio,' - ' ,if(HoraFin is null,'',Horafin)),"
+    campo = campo & "concat(DATE_FORMAT(HoraInicio, '%H:%i:%s'),' - ' ,if(HoraFin is null,'',"
+    
+    campo = campo & "if( date(horafin)=fecha,DATE_FORMAT(Horafin, '%H:%i:%s'),DATE_FORMAT(Horafin, '%H:%i:%s  (%d/%m) '))"
+    campo = campo & ")),"
     'importe1
     'campo = campo & " if(horafin is null,0,Hour (timediff(horafin, horainicio)) + Round(Minute(timediff(horafin, horainicio)) / 60, 2))"
     campo = campo & " if(horafin is null,0,calculadas)"
@@ -17812,7 +17815,7 @@ Dim Almacen As Integer
     
             'Insertar en las tablas de Albaranes: scaalb, slialb
             'en el campo scafac1.numalbar guardamos el nº de ticket
-            If b Then b = InsertarAlbaran(NumAlb, CStr(RT!CodTraba), 1, RT!cantidad, RT!Total, MenError)
+            If b Then b = InsertarAlbaran(NumAlb, CStr(RT!CodTraba), 1, RT!cantidad, RT!total, MenError)
         
         End If
 

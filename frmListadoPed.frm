@@ -4993,6 +4993,7 @@ Dim Cad As String
     End If
     If txtNombre(17).Text = "" Or txtNombre(18).Text = "" Or txtNombre(19).Text = "" Then Cad = "M"
     
+    
     If Cad <> "" Then
         MsgBox "Campos obligatorios ", vbExclamation
         Exit Sub
@@ -5034,6 +5035,8 @@ Dim Cad As String
             End If
         End If
     End If
+       
+       
        
     If FramePartes.visible Then
         If Me.txtCodigo(59).Text = "" Then
@@ -5108,6 +5111,15 @@ Dim Cad As String
     Cad = Cad & "|"
     
     
+    'Mayo 2016
+    '--------------------
+    'Numero de bultos
+    If Not Me.FrameBultosHerbelca.visible Then
+        Cad = Cad & "0"
+    Else
+        Cad = Cad & CInt(Val(Me.txtCodigo(62).Text))
+    End If
+    Cad = Cad & "|"
     RaiseEvent DatoSeleccionado(Cad)
     
     
@@ -6605,7 +6617,8 @@ Dim indFrame As Single
                             FrameGenAlbEuler.visible = True
                             Me.cboTipoAlbaranEuler.ListIndex = 0
                         Else
-                            Me.FrameBultosHerbelca.visible = True
+                            'Menos para partes de trabajo
+                            If Me.OpcionListado <> 1043 Then Me.FrameBultosHerbelca.visible = True
                         End If
                         
                         If Me.OpcionListado = 1043 Then
@@ -7682,11 +7695,11 @@ End Function
 
 
 
-Private Sub AbrirBuscaGrid(Op As Integer)
+Private Sub AbrirBuscaGrid(OP As Integer)
     
     Set frmB = New frmBuscaGrid
     cadFormula = "" 'Aqui metera el valor
-    Select Case Op
+    Select Case OP
     Case 54
         'CEntro de coste
         
@@ -7719,8 +7732,8 @@ Private Sub AbrirBuscaGrid(Op As Integer)
     If cadFormula <> "" Then
         'Ha devuelto algun dato
         'If Op = 54 Then
-            txtCodigo(Op).Text = RecuperaValor(cadFormula, 1)
-            txtNombre(Op).Text = RecuperaValor(cadFormula, 2)
+            txtCodigo(OP).Text = RecuperaValor(cadFormula, 1)
+            txtNombre(OP).Text = RecuperaValor(cadFormula, 2)
         'End If
     End If
 End Sub

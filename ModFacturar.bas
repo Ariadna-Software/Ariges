@@ -181,7 +181,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
                 If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ) Then
                     If b Then b = False
                     AnyadirAvisos ErroresAux
-                Else 'añadirlo a la lista de facturas a imprimir
+                Else 'a?adirlo a la lista de facturas a imprimir
                     If ListFactu = "" Then
                         ListFactu = vFactu.NumFactu
                     Else
@@ -224,7 +224,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
             If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ) Then
                 If b Then b = False
                 AnyadirAvisos ErroresAux
-            Else 'añadirlo a la lista de facturas a imprimir
+            Else 'a?adirlo a la lista de facturas a imprimir
                 If ListFactu = "" Then
                     ListFactu = vFactu.NumFactu
                 Else
@@ -270,7 +270,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
                     If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ) Then
                         If b Then b = False
                         AnyadirAvisos ErroresAux
-                    Else 'añadirlo a la lista de facturas a imprimir
+                    Else 'a?adirlo a la lista de facturas a imprimir
                         If ListFactu = "" Then
                             ListFactu = vFactu.NumFactu
                         Else
@@ -332,7 +332,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ) Then
             If b Then b = False
             AnyadirAvisos "Error Facturando el Cliente: " & Format(vFactu.Cliente, "000000") & " " & vFactu.NombreClien & vbCrLf & ErroresAux
-        Else 'añadirlo a la lista de facturas a imprimir
+        Else 'a?adirlo a la lista de facturas a imprimir
             If ListFactu = "" Then
                 ListFactu = vFactu.NumFactu
             Else
@@ -356,7 +356,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         If MostrarMsgOK Then MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente.", vbInformation
     Else
         LblBar.Caption = "Proceso finalizado con errores."
-        SQL = "ATENCIÓN:" & vbCrLf
+        SQL = "ATENCI?N:" & vbCrLf
         MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
         If Errores <> "" Then MostrarAvisos
     End If
@@ -448,7 +448,7 @@ Dim b As Boolean
     Exit Function
     
 ErrObtFec:
-    MuestraError Err.Number, "Obtener Fecha vencimiento según dias de pago.", Err.Description
+    MuestraError Err.Number, "Obtener Fecha vencimiento seg?n dias de pago.", Err.Description
 End Function
 
 
@@ -656,7 +656,7 @@ Dim NomTablaLineas As String
     
     If Not PonerParamRPT2(indRPT, CadParam, numParam, nomDocu, ImpresionDirecta, pPdfRpt, pRptvMultiInforme) Then Exit Sub
    
-    'Añadir el codigo de usuario como parametro para link con tabla Temporal (tmptiposiva) en el Report
+    'A?adir el codigo de usuario como parametro para link con tabla Temporal (tmptiposiva) en el Report
     'tabla temporal para el calculo del bruto total para cada tipo de IVA
     CadParam = CadParam & "pCodUsu=" & vUsu.codigo & "|"
     numParam = numParam + 1
@@ -689,13 +689,13 @@ Dim NomTablaLineas As String
         
     '===================================================
     '================= FORMULA =========================
-    'Cadena para seleccion Nº de Albaran
+    'Cadena para seleccion N? de Albaran
     '---------------------------------------------------
     If NumAlb <> "" Then
         '- Cod Tipo Movimiento
         devuelve = "{" & NombreTabla & ".codtipom}='" & tipMov & "'"
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
-        '- Nº Albaran
+        '- N? Albaran
         devuelve = "{" & NombreTabla & ".numalbar}=" & Val(NumAlb)
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
         cadSelect = cadFormula
@@ -712,7 +712,7 @@ Dim NomTablaLineas As String
     End If
    
 '    '=========================================================================
-'    'Aqui sabemos que valor tiene CodClien y añadimos a los parametros el tipo de IVA
+'    'Aqui sabemos que valor tiene CodClien y a?adimos a los parametros el tipo de IVA
 '    'que se aplica a ese cliente
 '    devuelve = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", codClien, "N")
 '    If devuelve <> "" Then
@@ -731,7 +731,7 @@ Dim NomTablaLineas As String
     
     If ImpresionDirecta Then
         'Imrpimie directamente. Tipo 4tonda.  -----------
-        If MsgBox("¿Imprimir el albarán?", vbQuestion + vbYesNo) = vbYes Then ImprimirDirectoAlb cadSelect
+        If MsgBox("?Imprimir el albar?n?", vbQuestion + vbYesNo) = vbYes Then ImprimirDirectoAlb cadSelect
     Else
         With frmImprimir
             .FormulaSeleccion = cadFormula
@@ -770,13 +770,42 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim NombreTabla As String
 Dim ImprimeDirecto As Boolean
-
-
+Dim RN As ADODB.Recordset
+Dim ListaFacturasDefinitiva As String
     cadFormula = ""
     CadParam = ""
     cadSelect = ""
     numParam = 0
     NombreTabla = "scafac"
+
+    
+    'Mayo 2015
+    'NO imprimiremos las que el cliente tenga la marca de enviar por email
+    ' Soalucion. De ListaF que lleva las facturas, quetare las los clientes lleven la marca
+    
+    devuelve = " coalesce(EnvFraEmail,0)=0 AND " & NombreTabla & ".codtipom='" & TipoFac & "' AND "
+    devuelve = devuelve & NombreTabla & ".numfactu IN (" & listaF & ")"
+    devuelve = devuelve & " AND year(" & NombreTabla & ".fecfactu) = " & Year(fechaF)
+    devuelve = "Select numfactu from scafac,sclien WHERE scafac.codclien =sclien.codclien AND " & devuelve
+    Set RN = New ADODB.Recordset
+    RN.Open devuelve, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    ListaFacturasDefinitiva = ""
+    While Not RN.EOF
+       ListaFacturasDefinitiva = ListaFacturasDefinitiva & ", " & RN!NumFactu
+       RN.MoveNext
+    Wend
+    RN.Close
+    If ListaFacturasDefinitiva = "" Then
+        ListaFacturasDefinitiva = "-1"
+    Else
+        ListaFacturasDefinitiva = Mid(ListaFacturasDefinitiva, 2) 'quito la primera coma
+    End If
+     
+    Set RN = Nothing
+    
+    CadParam = ""
+    cadSelect = ""
+
 
     '===================================================
     '============ PARAMETROS ===========================
@@ -827,33 +856,35 @@ Dim ImprimeDirecto As Boolean
         'Llamo desde el menu de Reimprimir facturas y tengo construida la
         'cadena de seleccion D/H tipoMov, D/H NumFactu, D/H fecfactu
         cadSelect = SQL
-        cadFormula = listaF
+        cadFormula = ListaFacturasDefinitiva
         CadParam = CadParam & fechaF
         numParam = numParam + 1
     Else
         'Llama desde PasarAlbaranes a  Facturas y al terminar las imprime
         '===================================================
         '================= FORMULA =========================
-        'Cadena para seleccion Nº de Factura
+        'Cadena para seleccion N? de Factura
         '---------------------------------------------------
         'Cod Tipo Movimiento
         devuelve = "({" & NombreTabla & ".codtipom}='" & TipoFac & "') "
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     
-        'Nº Factura
-        devuelve = "({" & NombreTabla & ".numfactu} IN [" & listaF & "])"
+        'N? Factura
+        devuelve = "({" & NombreTabla & ".numfactu} IN [" & ListaFacturasDefinitiva & "])"
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     
         'fecha factu
         devuelve = "(year({" & NombreTabla & ".fecfactu}) = " & Year(fechaF) & ")"
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
 
+        
+
         cadSelect = cadFormula
 
-
+    
     End If
     
-    If Not HayRegParaInforme(NombreTabla, cadSelect) Then Exit Sub
+    If Not HayRegParaInforme(NombreTabla, cadSelect, True) Then Exit Sub
 
 
      If ImprimeDirecto Then
@@ -1018,7 +1049,7 @@ Dim Conta2 As Long
                 vClien.ActualizaUltFecMovim (FechaFact)
                 
                 
-                'añadirlo a la lista de facturas a imprimir
+                'a?adirlo a la lista de facturas a imprimir
                 If ListFactu = "" Then
                     ListFactu = vFactu.NumFactu
                 Else
@@ -1039,7 +1070,7 @@ Dim Conta2 As Long
     If b Then
         MsgBox "Las Facturas de los Mantenimientos seleccionados se generaron correctamente.", vbInformation
     Else
-        SQL = "ATENCIÓN:" & vbCrLf
+        SQL = "ATENCI?N:" & vbCrLf
         MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbInformation
     End If
     
@@ -1101,14 +1132,14 @@ Dim NombreTabla As String
     
     '===================================================
     '================= FORMULA =========================
-    'Cadena para seleccion Nº de Factura
+    'Cadena para seleccion N? de Factura
     '---------------------------------------------------
     'Cod Tipo Movimiento
     devuelve = "{" & NombreTabla & ".codtipom}='FAM'"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     cadSelect = cadFormula
     
-    'Nº Factura
+    'N? Factura
     devuelve = "{" & NombreTabla & ".numfactu} IN [" & ListFactu & "]"
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     devuelve = "{" & NombreTabla & ".numfactu} IN (" & ListFactu & ")"
@@ -1223,7 +1254,7 @@ End Function
 '   Mayo 2012.  Se facturara por cliente, DEPARTAMENTO, dependiendo
 '   del parametro del cliente.
 '   Que vamos a hacer....
-'       Llamaremos a la funcion facturar renting desde un RS que hará el select
+'       Llamaremos a la funcion facturar renting desde un RS que har? el select
 '
 
 Public Function FacturarRenting(cadSQL As String, Fecfact As String, OpeFact As String, banPr As String, ByRef Lbl As Label, CentroCoste As String, SoloID As String, PeriodoFacturar As Date) As Boolean
@@ -1320,7 +1351,7 @@ Dim ElDepartamento As String
         MsgBox "Las Facturas de alquiler/" & RentingLB & " seleccionados se generaron correctamente.", vbInformation
         
     Else
-        Aux = "ATENCIÓN:" & vbCrLf
+        Aux = "ATENCI?N:" & vbCrLf
         MsgBox Aux & "No todas las Facturas se generaron correctamente!!!.", vbCritical
     End If
     
@@ -1504,7 +1535,7 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
                 vClien.ActualizaUltFecMovim (Fecfact)
                 
                 
-                'añadirlo a la lista de facturas a imprimir
+                'a?adirlo a la lista de facturas a imprimir
                 If ListadoFacturas = "" Then
                     ListadoFacturas = vFactu.NumFactu
                 Else
@@ -1655,7 +1686,7 @@ Dim b As Boolean
     If Not b Then
         
         Errores = DevuelveDesdeBD(conAri, "count(*)", "scaalb", "referenc", Fichero, "T")
-        If Errores <> "" Then MsgBox "Se han quedado " & Errores & " albaranes. Consulte soporte técnico[tmpcrmmsg]", vbExclamation
+        If Errores <> "" Then MsgBox "Se han quedado " & Errores & " albaranes. Consulte soporte t?cnico[tmpcrmmsg]", vbExclamation
             
     End If
     
@@ -1759,7 +1790,7 @@ Dim RTT As ADODB.Recordset
                     SQL = " scaalb.codtipom='" & RSalb!codtipom & "' AND scaalb.numalbar=" & RSalb!NumAlbar
                 Else
                     'FAT
-                    SQL = RSalb!NumAlbar 'en la funcion de pasaralbfras YA montaré el SELECT 'FUERZA EL NUMERO
+                    SQL = RSalb!NumAlbar 'en la funcion de pasaralbfras YA montar? el SELECT 'FUERZA EL NUMERO
                     
                     If Not Coarval Then
                         'PUEDE ser que tengamos albaranes de telefonia introducidos "a mano"
@@ -1859,7 +1890,7 @@ Dim RTT As ADODB.Recordset
         cadW = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", "FAI", "T")
         cadW = "UPDATE scafac1 SET serietfno='" & cadW & "' WHERE"
         cadW = cadW & " codtipom='FAI' AND referenc=" & DBSet(Fichero, "T")
-        If Not ejecutar(cadW, False) Then MsgBox "Error actualizando referencias INTERNAS(serietfno). El proceso continua. Avise soporte técnico", vbExclamation
+        If Not ejecutar(cadW, False) Then MsgBox "Error actualizando referencias INTERNAS(serietfno). El proceso continua. Avise soporte t?cnico", vbExclamation
             
         cadW = "codtipom = 'ALT' AND factursn"
         cadW = DevuelveDesdeBD(conAri, "count(*)", "scaalb", cadW, "1")
@@ -1872,7 +1903,7 @@ Dim RTT As ADODB.Recordset
         MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente." & cadW, vbInformation
     Else
         LblBar.Caption = "Proceso finalizado con errores."
-        SQL = "ATENCIÓN:" & vbCrLf
+        SQL = "ATENCI?N:" & vbCrLf
         MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
         If Errores <> "" Then MostrarAvisos
     End If
@@ -1886,7 +1917,7 @@ Dim RTT As ADODB.Recordset
 ETraspasoAlbFac:
     
     If Err.Number <> 0 Then
-        MuestraError Err.Number, "Facturando telefonía", Err.Description
+        MuestraError Err.Number, "Facturando telefon?a", Err.Description
     End If
     Set RTT = Nothing
 End Function
@@ -2064,7 +2095,7 @@ Dim CodCCost As String
         LetraSer = Trim(DBLet(Rs!Provincia, "T") & "  " & DBLet(Rs!Companyia, "T"))
         Cad = Cad & "," & DBSet(LetraSer, "T")
         'Octubre 2013
-        'Observa3,4 y 5 ->> Nº telefono y periodo facturacion
+        'Observa3,4 y 5 ->> N? telefono y periodo facturacion
         'Cad = Cad & ",NULL,NULL,0,"
         Cad = Cad & "," & DBSet(Rs!idtelefono, "T") & "," & DBSet(PeriodoFacturacion, "T") & ",0,"
         
@@ -2198,7 +2229,7 @@ Dim b As Boolean
     If Not b Then
         
         Errores = DevuelveDesdeBD(conAri, "count(*)", "scaalb", "codtipom", "ALT", "T")
-        If Errores <> "" Then MsgBox "Se han quedado " & Errores & " albaranes. Consulte soporte técnico", vbExclamation
+        If Errores <> "" Then MsgBox "Se han quedado " & Errores & " albaranes. Consulte soporte t?cnico", vbExclamation
             
     End If
     
@@ -2486,7 +2517,7 @@ Dim RTT As ADODB.Recordset
         MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente." & cadW, vbInformation
     Else
         LblBar.Caption = "Proceso finalizado con errores."
-        SQL = "ATENCIÓN:" & vbCrLf
+        SQL = "ATENCI?N:" & vbCrLf
         MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
         If Errores <> "" Then MostrarAvisos
     End If
@@ -2500,7 +2531,7 @@ Dim RTT As ADODB.Recordset
 ETraspasoAlbFac:
     
     If Err.Number <> 0 Then
-        MuestraError Err.Number, "Facturando telefonía", Err.Description
+        MuestraError Err.Number, "Facturando telefon?a", Err.Description
     End If
     Set RTT = Nothing
 End Function
@@ -2658,7 +2689,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
                 If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False) Then
                     If b Then b = False
                     AnyadirAvisos ErroresAux
-                Else 'añadirlo a la lista de facturas a imprimir
+                Else 'a?adirlo a la lista de facturas a imprimir
                                    
                     ListFactu = ListFactu & "," & vFactu.NumFactu
                 End If
@@ -2698,7 +2729,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
             If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False) Then
                 If b Then b = False
                 AnyadirAvisos ErroresAux
-            Else 'añadirlo a la lista de facturas a imprimir
+            Else 'a?adirlo a la lista de facturas a imprimir
 
                 ListFactu = ListFactu & "," & vFactu.NumFactu
                 
@@ -2742,7 +2773,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
                     If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False) Then
                         If b Then b = False
                         AnyadirAvisos ErroresAux
-                    Else 'añadirlo a la lista de facturas a imprimir
+                    Else 'a?adirlo a la lista de facturas a imprimir
                         'If ListFactu = "" Then
                         '    ListFactu = vFactu.NumFactu
                         'Else
@@ -2804,7 +2835,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False) Then
             If b Then b = False
             AnyadirAvisos "Error Facturando el Cliente: " & Format(vFactu.Cliente, "000000") & " " & vFactu.NombreClien & vbCrLf & ErroresAux
-        Else 'añadirlo a la lista de facturas a imprimir
+        Else 'a?adirlo a la lista de facturas a imprimir
             ListFactu = ListFactu & "," & vFactu.NumFactu
         End If
         If PgbVisible Then
@@ -2824,7 +2855,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         If MostrarMsgOK Then MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente.", vbInformation
     Else
         LblBar.Caption = "Proceso finalizado con errores."
-        SQL = "ATENCIÓN:" & vbCrLf
+        SQL = "ATENCI?N:" & vbCrLf
         MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
         If Errores <> "" Then MostrarAvisos
     End If
@@ -3008,3 +3039,4 @@ On Error GoTo eLanzarErrorFitos
 eLanzarErrorFitos:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
 End Sub
+

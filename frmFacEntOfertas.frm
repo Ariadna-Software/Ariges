@@ -5970,7 +5970,7 @@ Dim vTipoM As CTiposMov
     
       
     'Nombre fichero .rpt a Imprimir
-    frmImprimir.NombreRpt = nomDocu
+    frmImprimir.NombreRPT = nomDocu
     frmImprimir.NombrePDF = pPdfRpt
     frmImprimir.SeleccionaRPTCodigo = pRptvMultiInforme
     

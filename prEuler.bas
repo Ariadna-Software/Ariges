@@ -58,6 +58,9 @@ On Error GoTo EAbrirConexion
     
     '---- Laura: 17/10/2006
     Cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE=vAriges;DATABASE=Ariges1;"
+    If False Then
+        Cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE=vAriges;DATABASE=Ariges6;"
+    End If
     Cad = Cad & ";"   'UID=" & vConfig.User
     Cad = Cad & ";"   'PWD=" & vConfig.password
     Cad = Cad & ";Persist Security Info=true"

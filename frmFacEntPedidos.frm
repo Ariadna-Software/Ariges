@@ -610,22 +610,22 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(3)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(18)"
-      Tab(1).Control(4)=   "Label1(27)"
-      Tab(1).Control(5)=   "Text1(19)"
-      Tab(1).Control(6)=   "Text1(20)"
-      Tab(1).Control(7)=   "Text1(21)"
-      Tab(1).Control(8)=   "Text1(22)"
-      Tab(1).Control(9)=   "Text1(23)"
-      Tab(1).Control(10)=   "Text1(24)"
-      Tab(1).Control(11)=   "Text1(25)"
-      Tab(1).Control(12)=   "FrameHco"
-      Tab(1).Control(13)=   "Text1(30)"
-      Tab(1).Control(14)=   "Text1(29)"
-      Tab(1).Control(15)=   "Text1(33)"
+      Tab(1).Control(0)=   "Text1(33)"
+      Tab(1).Control(1)=   "Text1(29)"
+      Tab(1).Control(2)=   "Text1(30)"
+      Tab(1).Control(3)=   "FrameHco"
+      Tab(1).Control(4)=   "Text1(25)"
+      Tab(1).Control(5)=   "Text1(24)"
+      Tab(1).Control(6)=   "Text1(23)"
+      Tab(1).Control(7)=   "Text1(22)"
+      Tab(1).Control(8)=   "Text1(21)"
+      Tab(1).Control(9)=   "Text1(20)"
+      Tab(1).Control(10)=   "Text1(19)"
+      Tab(1).Control(11)=   "Label1(27)"
+      Tab(1).Control(12)=   "Label1(18)"
+      Tab(1).Control(13)=   "Label1(5)"
+      Tab(1).Control(14)=   "Label1(3)"
+      Tab(1).Control(15)=   "Label1(45)"
       Tab(1).ControlCount=   16
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
@@ -2360,7 +2360,7 @@ Dim PulsadoMas2 As Boolean
 Dim CodZona As Integer   'Ocutbre 2010
 Dim GrabaLogCambioPrecioDto As Boolean 'Enero 2011
 Dim ClienteConRiesgo As Boolean  'Junio 2011   Si sigue adelante con el pedido grabar un LOG
-
+Dim NumeroBultosAlbaran As Integer
 
 Dim LineasArticulosEnPedidosProveedor As String
 
@@ -3483,6 +3483,13 @@ Dim CambiaZona As Boolean
     vSQL = RecuperaValor(CadenaSeleccion, 10)
     EsAMostrador = vSQL = "1"
     
+    'Mayo 2016
+    vSQL = RecuperaValor(CadenaSeleccion, 12)
+    If Trim(vSQL) = "" Then vSQL = "0"
+    NumeroBultosAlbaran = CInt(vSQL)
+    
+    
+    
 End Sub
 
 
@@ -3800,7 +3807,7 @@ Dim cadMen As String
     'si no se va a servir completo preguntar como se quiere servir si completo o no
     If Me.chkServirCom = 0 Then
         'Preguntar si se sirve el pedido completo o no
-        Resp = MsgBox("¿Servir el pedido completo?", vbYesNoCancel)
+        Resp = MsgBox("¿Servir el pedido completo?", vbYesNoCancel + vbQuestion)
         If Resp = vbCancel Then Exit Sub
     
         If Resp = vbYes Then
@@ -6538,14 +6545,15 @@ Dim codtipom As String
         
     vSQL = vSQL & " observacrm "
     vSQL = vSQL & "," & Abs(chkPedPorCliente.Value)
-    
+    'Mayo 2016
+    vSQL = vSQL & "," & DBSet(NumeroBultosAlbaran, "N", "S")
     
     
     'Acabar la sql con el contador seleccionado
     devuelve = vSQL
     vSQL = "INSERT INTO scaalb (codtipom,numalbar,fechaalb,factursn,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
     vSQL = vSQL & "coddirec,nomdirec,referenc,codtraba,codtrab1,codtrab2,codagent,codforpa,codenvio,dtoppago,dtognral,tipofact,"
-    vSQL = vSQL & "observa01,observa02,observa03,observa04,observa05,numofert,fecofert,numpedcl,fecpedcl,fecentre,sementre,coddiren,tipAlbaran,codzonas,observacrm,PideCliente) "
+    vSQL = vSQL & "observa01,observa02,observa03,observa04,observa05,numofert,fecofert,numpedcl,fecpedcl,fecentre,sementre,coddiren,tipAlbaran,codzonas,observacrm,PideCliente,numbultos) "
     vSQL = vSQL & "SELECT '" & codtipom & "' as codtipom, " & NumAlb & " as numalbar, " & devuelve
     vSQL = vSQL & " FROM " & NombreTabla & " WHERE numpedcl=" & Text1(0).Text
 
