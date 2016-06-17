@@ -887,6 +887,7 @@ Dim NumeroDeVencimientos As Byte
 Dim NuevaNorma19 As Boolean
 
 Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
+Dim AuxIBAN As String
 
     On Error GoTo EInsertarTesoreria
 
@@ -911,6 +912,14 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
     End If
         
         
+        
+    AuxIBAN = mIBAN
+    If vParamAplic.ContabilidadNueva Then
+        If mCodbanco <> "" And mCodsucur <> "" Then AuxIBAN = AuxIBAN & Right("0000" & mCodbanco, 4) & Right("0000" & mCodsucur, 4) & Right("00" & mDigContr, 2) & Right("0000000000" & mCuentaba, 10)            '
+    End If
+        
+        
+        
         'Facturas de telefonia.
         '-------------------------------------------------------
         
@@ -932,7 +941,7 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
                 textcsb33 = textcsb33 & "  FACT: " & rsVenci!Serie & Format(rsVenci!NumFact, "000000") & "-" & Format(rsVenci!Ano, "0000") & _
                                         " DE " & Format(rsVenci!Fecha, "dd/mm/yyyy")
         
-                textcsb33 = textcsb33 & "  TOT. " & Format(rsVenci!Total, "#,###,##0.00") & "'"
+                textcsb33 = textcsb33 & "  TOT. " & Format(rsVenci!total, "#,###,##0.00") & "'"
                 
                 'la ultima linea del CSB, la der y la izda
                 CadValues2 = "'BASE: " & Format(rsVenci!BaseImponible, "##0.00")
@@ -1026,7 +1035,7 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
                 'la ultima linea del CSB, la der y la izda
                 CadValues2 = "BASE                " & Right(Space(12) & Format(rsVenci!BaseImponible, "#,###,##0.00"), 12) & _
                                                             " IVA:" & Format(rsVenci!TipoIVA, "#0") & ""
-                CadValues3 = "%      CUOTA: " & Format(rsVenci!Cuota, "#,###,##0.00") & "     TOTAL: " & Format(rsVenci!Total, "#,###,##0.00")
+                CadValues3 = "%      CUOTA: " & Format(rsVenci!Cuota, "#,###,##0.00") & "     TOTAL: " & Format(rsVenci!total, "#,###,##0.00")
         
         
                 If vParamAplic.ContabilidadNueva Then
@@ -1102,7 +1111,7 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
     'nomclien,domclien,pobclien, cpclien,proclien
     CadenaDatosFiscales = DBSet(mNomClien, "T") & "," & DBSet(mDomClien, "T") & "," & DBSet(mPobClien, "T")
     CadenaDatosFiscales = CadenaDatosFiscales & "," & DBSet(mCodpobla, "T") & "," & DBSet(mProClien, "T")
-    
+    If vParamAplic.ContabilidadNueva Then CadenaDatosFiscales = DBSet(mNIFClien, "T") & "," & CadenaDatosFiscales
     
     ImporteDeLaFactura = TotalFac
     Knumerovenci = 1
@@ -1238,7 +1247,7 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
                 
                 CadValues = CadValues & DBSet(ImpVenci, "N") & ")"
                 CadValues2 = CadValues2 & DBSet(ImpVenci2, "N") & ", '" & CuentaPrev & "', " & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", "
-                CadValues2 = CadValues2 & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", " & DBSet(mIBAN, "T", "S") & ", "
+                CadValues2 = CadValues2 & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", " & DBSet(AuxIBAN, "T", "S") & ", "
                 CadValues2 = CadValues2 & textcsb33 & ", " & DBSet(Agente, "N")
                 
                 'departamento y transfer
@@ -1430,7 +1439,7 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
                         SQL = "INSERT INTO cobros (numserie, numfactu, fecfactu,text41csb, "
                         SQL = SQL & "numorden , Codmacta, codforpa, FecVenci, ImpVenci, ctabanc1, entidad, oficina, control"
                         SQL = SQL & ", cuentaba,iban,text33csb,agente,departamento,transfer "
-                        
+                        SQL = SQL & ", nifclien"  'Junio 16
                     Else
                         SQL = "INSERT INTO scobro (numserie, codfaccl, fecfaccl,text41csb ,text42csb, text43csb,"
                         SQL = SQL & "text51csb,text52csb,text53csb,text61csb,text62csb,text63csb,"
@@ -1438,7 +1447,7 @@ Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
                         SQL = SQL & ", cuentaba,iban,text33csb,agente,departamento,transfer "
                         
                     End If
-                    SQL = SQL & ",nomclien,domclien,pobclien, cpclien,proclien)"
+                    SQL = SQL & ",nomclien,domclien,pobclien, cpclien,proclien)"   '=Datos fiscales. para conta nueva meto el NIF mNIFClien
                     SQL = SQL & " VALUES " & CadValues2
                     ConnConta.Execute SQL
                 End If

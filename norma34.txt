@@ -2,86 +2,124 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000000160201F20160201T180157</MsgId>
-      <CreDtTm>2016-02-01T18:01:57</CreDtTm>
-      <NbOfTxs>1</NbOfTxs>
-      <CtrlSum>20.00</CtrlSum>
+      <MsgId>TRANPAG000000160603F20160603T103742</MsgId>
+      <CreDtTm>2016-06-03T10:37:42</CreDtTm>
+      <NbOfTxs>2</NbOfTxs>
+      <CtrlSum>2202.99</CtrlSum>
       <InitgPty>
-         <Nm>HEr</Nm>
+         <Nm>Teinsa</Nm>
          <Id>
-           <PrvtId>
+           <OrgId>
                <Othr>
-                  <Id>99099</Id>
+                  <Id>B46155719000</Id>
                </Othr>
-           </PrvtId>
+           </OrgId>
          </Id>
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>2016020118015799</PmtInfId>
+      <PmtInfId>20160603103742B46155719</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2016-02-01</ReqdExctnDt>
+      <ReqdExctnDt>2016-06-03</ReqdExctnDt>
       <Dbtr>
-         <Nm>HEr</Nm>
+         <Nm>Teinsa</Nm>
          <PstlAdr>
             <Ctry>ES</Ctry>
-            <AdrLine>Azagador de la Torre, 93 46026 VALENCIA VALENCIA</AdrLine>
+            <AdrLine>C/Les Moreres Parcela 48-A Pol.InD.Virge 46950 XIRIVELLA VALENCIA</AdrLine>
          </PstlAdr>
          <Id>
-            <PrvtId>
+            <OrgId>
                <Othr>
-                  <Id>99099</Id>
+                  <Id>B46155719000</Id>
                </Othr>
-            </PrvtId>
+            </OrgId>
          </Id>
     </Dbtr>
     <DbtrAcct>
        <Id>
-          <IBAN>ES6400491827832010389247</IBAN>
+          <IBAN>ES6520385825216000651183</IBAN>
        </Id>
        <Ccy>EUR</Ccy>
     </DbtrAcct>
     <DbtrAgt>
        <FinInstnId>
-          <BIC>BSCHESMMXXX</BIC>
+          <BIC>CAHMESMMXXX</BIC>
        </FinInstnId>
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>19894202F</EndToEndId>
+         <EndToEndId>29171321F</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">20</InstdAmt>
+          <InstdAmt Ccy="EUR">923.69</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
-             <BIC>DEUTESBBXXX</BIC>
+             <BIC>CAHMESMMXXX</BIC>
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>JOSE MIGUEL PARDO CERRO</Nm>
+          <Nm>MARCELO RUIZ AMARFIL</Nm>
            <Id>
                <PrvtId>
                   <Othr>
-                     <Id>19894202F</Id>
+                     <Id>29171321F</Id>
                   </Othr>
                </PrvtId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES2200190001661234554321</IBAN>
+              <IBAN>ES6120386037153000479934</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Transferencia</Ustrd>
+         <Ustrd>Pago Nomina OCTUBRE - 2014</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>19886744R</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">1279.3</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CAHMESMMXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>JULIO MATEO ESCUDERO</Nm>
+           <Id>
+               <PrvtId>
+                  <Othr>
+                     <Id>19886744R</Id>
+                  </Othr>
+               </PrvtId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES5620386406153000357493</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago Nomina OCTUBRE - 2014</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

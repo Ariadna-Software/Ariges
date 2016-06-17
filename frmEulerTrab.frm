@@ -1411,7 +1411,7 @@ Dim SQL As String
         SQL = "SELECT count(*) FROM scaalb WHERE " & SQL
         
         If Not (RegistrosAListar(SQL) > 0) Then
-            SQL = "No existe el Albaran de fecha referenciado. ¿Desea continuar?"
+            SQL = "No existe(o esta facturado) el Albaran de fecha indicado. ¿Desea continuar?"
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then b = False
         End If
     End If
@@ -1568,8 +1568,23 @@ Dim Aux As String
                     If cboTipo.ListIndex = 3 Then
                         txtAux3(4).Text = "Produccion"
                     Else
+                        
+                    
                         CadenaConsulta = "codtipom = '" & RecuperaValor("ALR|ALE|ALO|", cboTipo.ListIndex + 1) & "' AND numalbar "
-                        txtAux3(4).Text = PonerNombreDeCod(txtAux(Index), conAri, "scaalb", "nomclien", CadenaConsulta)
+                       ' txtAux3(4).Text = PonerNombreDeCod(txtAux(Index), conAri, "scaalb", "nomclien", CadenaConsulta, "Albaran")
+                        
+                        CadenaConsulta = DevuelveDesdeBD(conAri, "nomclien", "scaalb", CadenaConsulta, txtAux(Index).Text)
+                        If CadenaConsulta = "" Then
+                          '  CadenaConsulta = "No existe , o esta facturado,  " & cboTipo.Text & ": " & txtAux(Index).Text
+                          '  CadenaConsulta = CadenaConsulta & vbCrLf & "   ¿Continuar?"
+                          '  If MsgBox(CadenaConsulta, vbQuestion + vbYesNo) = vbNo Then
+                          '      txtAux3(4).Text = ""
+                          '  Else
+                                txtAux3(4).Text = "NO encontrado"
+                          '  End If
+                        Else
+                            txtAux3(4).Text = CadenaConsulta
+                        End If
                         If txtAux3(4).Text = "" Then
                             txtAux(Index).Text = ""
                             PonerFoco txtAux(Index)

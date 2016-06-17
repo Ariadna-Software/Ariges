@@ -93,7 +93,7 @@ Public Volver_A_Cargar_Datos As Boolean
 'De momento SOLO lleva el PATH de alfresco, cuando haya mas deberemos crear su clase
 Public EulerParam As String
 
-Public Const SerieFraPro = "0"
+Public Const SerieFraPro = "1"
 
 
 'Inicio Aplicación
@@ -567,13 +567,13 @@ End Sub
 'Cambia los puntos de los numeros decimales
 'por comas
 Public Function TransformaPuntosComas(Cadena As String) As String
-    Dim I As Integer
+    Dim i As Integer
     Do
-        I = InStr(1, Cadena, ".")
-        If I > 0 Then
-            Cadena = Mid(Cadena, 1, I - 1) & "," & Mid(Cadena, I + 1)
+        i = InStr(1, Cadena, ".")
+        If i > 0 Then
+            Cadena = Mid(Cadena, 1, i - 1) & "," & Mid(Cadena, i + 1)
         End If
-        Loop Until I = 0
+        Loop Until i = 0
     TransformaPuntosComas = Cadena
 End Function
 
@@ -581,13 +581,13 @@ End Function
 'Cambia los puntos de los numeros decimales
 'por comas
 Public Function TransformaComasPuntos(Cadena As String) As String
-Dim I As Integer
+Dim i As Integer
     Do
-        I = InStr(1, Cadena, ",")
-        If I > 0 Then
-            Cadena = Mid(Cadena, 1, I - 1) & "." & Mid(Cadena, I + 1)
+        i = InStr(1, Cadena, ",")
+        If i > 0 Then
+            Cadena = Mid(Cadena, 1, i - 1) & "." & Mid(Cadena, i + 1)
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     TransformaComasPuntos = Cadena
 End Function
 
@@ -596,13 +596,13 @@ End Function
 'Cambia los puntos de los numeros decimales
 'por comas
 Public Function TransformaPuntosHoras(Cadena As String) As String
-    Dim I As Integer
+    Dim i As Integer
     Do
-        I = InStr(1, Cadena, ".")
-        If I > 0 Then
-            Cadena = Mid(Cadena, 1, I - 1) & ":" & Mid(Cadena, I + 1)
+        i = InStr(1, Cadena, ".")
+        If i > 0 Then
+            Cadena = Mid(Cadena, 1, i - 1) & ":" & Mid(Cadena, i + 1)
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     TransformaPuntosHoras = Cadena
 End Function
 
@@ -653,7 +653,7 @@ End Function
 
 
 
-Public Function DBSet(vData As Variant, Tipo As String, Optional EsNulo As String) As Variant
+Public Function DBSet(vData As Variant, Tipo As String, Optional esNULO As String) As Variant
 'Establece el valor del dato correcto antes de Insertar en la BD
 'Tipos
 '       T
@@ -677,7 +677,7 @@ Dim ValorNumericoCero As Boolean
             Select Case Tipo
                 Case "T"    'Texto
                     If vData = "" Then
-                        If EsNulo = "N" Then
+                        If esNULO = "N" Then
                             DBSet = "''"
                         Else
                             DBSet = ValorNulo
@@ -702,8 +702,8 @@ Dim ValorNumericoCero As Boolean
                     End If
                     
                     If ValorNumericoCero Then
-                        If EsNulo <> "" Then
-                            If EsNulo = "S" Then
+                        If esNULO <> "" Then
+                            If esNULO = "S" Then
                                 DBSet = ValorNulo
                             Else
                                 DBSet = 0
@@ -726,7 +726,7 @@ Dim ValorNumericoCero As Boolean
 ''                    DBLet = "0:00:00"
 '                     '==Laura
                     If vData = "" Then
-                        If EsNulo = "S" Then
+                        If esNULO = "S" Then
                             DBSet = ValorNulo
                         Else
                             DBSet = "'1900-01-01'"
@@ -737,7 +737,7 @@ Dim ValorNumericoCero As Boolean
 
                 Case "FH" 'Fecha/Hora
                     If vData = "" Then
-                        If EsNulo = "S" Then DBSet = ValorNulo
+                        If esNULO = "S" Then DBSet = ValorNulo
                     Else
                         DBSet = "'" & Format(vData, "yyyy-mm-dd hh:mm:ss") & "'"
                     End If
@@ -764,7 +764,7 @@ End Function
 
 
 
-Public Function DBSetDavid(vData As Variant, Tipo As String, Optional EsNulo As String) As Variant
+Public Function DBSetDavid(vData As Variant, Tipo As String, Optional esNULO As String) As Variant
 'Establece el valor del dato correcto antes de Insertar en la BD
 Dim Cad As String
     On Error GoTo Error1
@@ -781,7 +781,7 @@ Dim Cad As String
             Select Case Tipo
                 Case "T"    'Texto
                     If vData = "" Then
-                        If EsNulo = "N" Then
+                        If esNULO = "N" Then
                             DBSetDavid = "''"
                         Else
                             DBSetDavid = ValorNulo
@@ -794,8 +794,8 @@ Dim Cad As String
                     
                 Case "N"    'Numero
                     If CStr(vData) = "" Then
-                        If EsNulo <> "" Then
-                            If EsNulo = "S" Then
+                        If esNULO <> "" Then
+                            If esNULO = "S" Then
                                 DBSetDavid = ValorNulo
                             Else
                                 DBSetDavid = 0
@@ -804,8 +804,8 @@ Dim Cad As String
                             DBSetDavid = 0
                         End If
                     ElseIf CCur(vData) = 0 Then
-                        If EsNulo <> "" Then
-                            If EsNulo = "S" Then
+                        If esNULO <> "" Then
+                            If esNULO = "S" Then
                                 DBSetDavid = ValorNulo
                             Else
                                 DBSetDavid = 0
@@ -823,7 +823,7 @@ Dim Cad As String
 ''                    DBLet = "0:00:00"
 '                     '==Laura
                     If vData = "" Then
-                        If EsNulo = "S" Then
+                        If esNULO = "S" Then
                             DBSetDavid = ValorNulo
                         Else
                             DBSetDavid = "'1900-01-01'"
@@ -834,7 +834,7 @@ Dim Cad As String
 
                 Case "FH" 'Fecha/Hora
                     If vData = "" Then
-                        If EsNulo = "S" Then DBSetDavid = ValorNulo
+                        If esNULO = "S" Then DBSetDavid = ValorNulo
                     Else
                         DBSetDavid = "'" & Format(vData, "yyyy-mm-dd hh:mm:ss") & "'"
                     End If
@@ -924,7 +924,7 @@ End Function
 Public Function RellenaCodigoCuenta(vCodigo As String) As String
 'Rellena con ceros hasta poner una cuenta.
 'Ejemplo: 43.1 --> 430000001
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim cont As Integer
 Dim Cad As String
@@ -932,26 +932,26 @@ Dim Cad As String
     RellenaCodigoCuenta = vCodigo
     If Len(vCodigo) > vEmpresa.DigitosUltimoNivel Then Exit Function
     
-    I = 0: cont = 0
+    i = 0: cont = 0
     Do
-        I = I + 1
-        I = InStr(I, vCodigo, ".")
-        If I > 0 Then
+        i = i + 1
+        i = InStr(i, vCodigo, ".")
+        If i > 0 Then
             If cont > 0 Then cont = 1000
-            cont = cont + I
+            cont = cont + i
         End If
-    Loop Until I = 0
+    Loop Until i = 0
 
     'Habia mas de un punto
     If cont > 1000 Or cont = 0 Then Exit Function
 
     'Cambiamos el punto por 0's  .-Utilizo la variable maximocaracteres, para no tener k definir mas
-    I = Len(vCodigo) - 1 'el punto lo quito
-    J = vEmpresa.DigitosUltimoNivel - I
+    i = Len(vCodigo) - 1 'el punto lo quito
+    J = vEmpresa.DigitosUltimoNivel - i
     Cad = ""
-    For I = 1 To J
+    For i = 1 To J
         Cad = Cad & "0"
-    Next I
+    Next i
 
     Cad = Mid(vCodigo, 1, cont - 1) & Cad
     Cad = Cad & Mid(vCodigo, cont + 1)
@@ -961,7 +961,7 @@ End Function
 
 
 Public Function DevuelveDesdeBD(vBD As Byte, kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef otroCampo As String) As String
-    Dim Rs As Recordset
+    Dim RS As Recordset
     Dim Cad As String
     Dim Aux As String
     
@@ -986,20 +986,20 @@ Public Function DevuelveDesdeBD(vBD As Byte, kCampo As String, Ktabla As String,
 '    Debug.Print cad
     
     'Creamos el sql
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     If vBD = 1 Then 'BD 1: Ariges
-        Rs.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Else    'BD 2: Conta
-        Rs.Open Cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open Cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
     End If
     
-    If Not Rs.EOF Then
-        DevuelveDesdeBD = DBLet(Rs.Fields(0))
-        If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
+    If Not RS.EOF Then
+        DevuelveDesdeBD = DBLet(RS.Fields(0))
+        If otroCampo <> "" Then otroCampo = DBLet(RS.Fields(1))
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
 EDevuelveDesdeBD:
         MuestraError Err.Number, "Devuelve DesdeBD.", Err.Description
@@ -1010,7 +1010,7 @@ End Function
 'Funciona para claves primarias formadas por 2 campos
 Public Function DevuelveDesdeBDNew(vBD As Byte, Ktabla As String, kCampo As String, Kcodigo1 As String, valorCodigo1 As String, Optional tipo1 As String, Optional ByRef otroCampo As String, Optional KCodigo2 As String, Optional ValorCodigo2 As String, Optional tipo2 As String, Optional KCodigo3 As String, Optional ValorCodigo3 As String, Optional tipo3 As String) As String
 'IN: vBD --> Base de Datos a la que se accede
-Dim Rs As Recordset
+Dim RS As Recordset
 Dim Cad As String
 Dim Aux As String
     
@@ -1082,20 +1082,20 @@ On Error GoTo EDevuelveDesdeBDnew
     
     
     'Creamos el sql
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     If vBD = conAri Then 'BD 1: Ariges
-        Rs.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Else    'BD 2: Conta
-        Rs.Open Cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open Cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
     End If
     
-    If Not Rs.EOF Then
-        DevuelveDesdeBDNew = DBLet(Rs.Fields(0))
-        If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
+    If Not RS.EOF Then
+        DevuelveDesdeBDNew = DBLet(RS.Fields(0))
+        If otroCampo <> "" Then otroCampo = DBLet(RS.Fields(1))
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
     
 EDevuelveDesdeBDnew:
@@ -1310,7 +1310,7 @@ End Function
 
 
 Public Function CambiarBarrasPATH2(ParaGuardarBD As Boolean, Cadena) As String
-Dim I As Integer
+Dim i As Integer
 Dim CH As String
 Dim Ch2 As String
 
@@ -1321,23 +1321,23 @@ Else
     CH = "/"
     Ch2 = "\"
 End If
-I = 0
+i = 0
 Do
-    I = I + 1
-    I = InStr(1, Cadena, CH)
-    If I > 0 Then Cadena = Mid(Cadena, 1, I - 1) & Ch2 & Mid(Cadena, I + 1)
-Loop Until I = 0
+    i = i + 1
+    i = InStr(1, Cadena, CH)
+    If i > 0 Then Cadena = Mid(Cadena, 1, i - 1) & Ch2 & Mid(Cadena, i + 1)
+Loop Until i = 0
 CambiarBarrasPATH2 = Cadena
 End Function
 
 
 Public Function ImporteSinFormato(Cadena As String) As String
-Dim I As Integer
+Dim i As Integer
     'Quitamos puntos
     Do
-        I = InStr(1, Cadena, ".")
-        If I > 0 Then Cadena = Mid(Cadena, 1, I - 1) & Mid(Cadena, I + 1)
-    Loop Until I = 0
+        i = InStr(1, Cadena, ".")
+        If i > 0 Then Cadena = Mid(Cadena, 1, i - 1) & Mid(Cadena, i + 1)
+    Loop Until i = 0
     ImporteSinFormato = TransformaPuntosComas(Cadena)
 End Function
 
@@ -1400,30 +1400,30 @@ End Sub
 '   Cogemos un numero formateado: 1.256.256,98  y deevolvemos 1256256,98
 '   Tiene que venir numérico
 Public Function ImporteFormateado(Importe As String) As Currency
-Dim I As Integer
+Dim i As Integer
 
     If Importe = "" Then
         ImporteFormateado = 0
     Else
         'Primero quitamos los puntos
         Do
-            I = InStr(1, Importe, ".")
-            If I > 0 Then Importe = Mid(Importe, 1, I - 1) & Mid(Importe, I + 1)
-        Loop Until I = 0
+            i = InStr(1, Importe, ".")
+            If i > 0 Then Importe = Mid(Importe, 1, i - 1) & Mid(Importe, i + 1)
+        Loop Until i = 0
         ImporteFormateado = Importe
     End If
 End Function
 Public Function ImporteFormateadoSingle(Importe As String) As Single
-Dim I As Integer
+Dim i As Integer
 
     If Importe = "" Then
         ImporteFormateadoSingle = 0
     Else
         'Primero quitamos los puntos
         Do
-            I = InStr(1, Importe, ".")
-            If I > 0 Then Importe = Mid(Importe, 1, I - 1) & Mid(Importe, I + 1)
-        Loop Until I = 0
+            i = InStr(1, Importe, ".")
+            If i > 0 Then Importe = Mid(Importe, 1, i - 1) & Mid(Importe, i + 1)
+        Loop Until i = 0
         ImporteFormateadoSingle = Importe
     End If
 End Function
@@ -1553,23 +1553,23 @@ End Function
 
 
 Public Function EsNumerico(texto As String) As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim C As Integer
 Dim L As Integer
 Dim Cad As String
-Dim b As Boolean
+Dim B As Boolean
     
     EsNumerico = False
-    b = True
+    B = True
     Cad = ""
     If Not IsNumeric(texto) Then
         Cad = "El campo debe ser numérico"
-        b = False
+        B = False
         '======= Añade Laura
         'formato: (.25)
-        I = InStr(1, texto, ".")
-        If I = 1 Then
-            If IsNumeric(Mid(texto, 2, Len(texto))) Then b = True
+        i = InStr(1, texto, ".")
+        If i = 1 Then
+            If IsNumeric(Mid(texto, 2, Len(texto))) Then B = True
         End If
         '======================
     Else
@@ -1577,37 +1577,37 @@ Dim b As Boolean
         C = 0
         L = 1
         Do
-            I = InStr(L, texto, ".")
-            If I > 0 Then
-                L = I + 1
+            i = InStr(L, texto, ".")
+            If i > 0 Then
+                L = i + 1
                 C = C + 1
             End If
-        Loop Until I = 0
+        Loop Until i = 0
         If C > 1 Then
             Cad = "Numero de puntos incorrecto"
-            b = False
+            B = False
         End If
         
         'Si ha puesto mas de una coma y no tiene puntos
         If C = 0 Then
             L = 1
             Do
-                I = InStr(L, texto, ",")
-                If I > 0 Then
-                    L = I + 1
+                i = InStr(L, texto, ",")
+                If i > 0 Then
+                    L = i + 1
                     C = C + 1
                 End If
-            Loop Until I = 0
+            Loop Until i = 0
             If C > 1 Then
                 Cad = "Numero incorrecto"
-                b = False
+                B = False
             End If
         End If
     End If
-    If Not b Then
+    If Not B Then
         MsgBox Cad, vbExclamation
     Else
-        EsNumerico = b
+        EsNumerico = B
     End If
 End Function
 
@@ -1706,46 +1706,46 @@ End Function
 'Para los nombre que pueden tener ' . Para las comillas habra que hacer dentro otro INSTR
 Public Sub NombreSQL(ByRef Cadena As String)
 Dim J As Integer
-Dim I As Integer
+Dim i As Integer
 Dim Aux As String
 
     J = 1
     '-- (RAFA/ALZIRA) 07052006
     Do
-        I = InStr(J, Cadena, "\")
-        If I > 0 Then
-            Aux = Mid(Cadena, 1, I - 1) & "\"
-            Cadena = Aux & Mid(Cadena, I)
-            J = I + 2
+        i = InStr(J, Cadena, "\")
+        If i > 0 Then
+            Aux = Mid(Cadena, 1, i - 1) & "\"
+            Cadena = Aux & Mid(Cadena, i)
+            J = i + 2
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     
 
     J = 1
     Do
-        I = InStr(J, Cadena, "'")
-        If I > 0 Then
-            Aux = Mid(Cadena, 1, I - 1) & "\"
-            Cadena = Aux & Mid(Cadena, I)
-            J = I + 2
+        i = InStr(J, Cadena, "'")
+        If i > 0 Then
+            Aux = Mid(Cadena, 1, i - 1) & "\"
+            Cadena = Aux & Mid(Cadena, i)
+            J = i + 2
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     
 End Sub
 
 Public Function DevNombreSQL(Cadena As String) As String
 Dim J As Integer
-Dim I As Integer
+Dim i As Integer
 Dim Aux As String
     J = 1
     Do
-        I = InStr(J, Cadena, "'")
-        If I > 0 Then
-            Aux = Mid(Cadena, 1, I - 1) & "\"
-            Cadena = Aux & Mid(Cadena, I)
-            J = I + 2
+        i = InStr(J, Cadena, "'")
+        If i > 0 Then
+            Aux = Mid(Cadena, 1, i - 1) & "\"
+            Cadena = Aux & Mid(Cadena, i)
+            J = i + 2
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     DevNombreSQL = Cadena
 End Function
 
@@ -1806,14 +1806,14 @@ End Function
 ' Los numeros vendran formateados o sin formatear, pero siempre viene texto
 '
 Public Function CadenaCurrency(texto As String, ByRef Importe As Currency) As Boolean
-Dim I As Integer
+Dim i As Integer
 On Error GoTo ECadenaCurrency
     
     Importe = 0
     CadenaCurrency = False
     If Not IsNumeric(texto) Then Exit Function
-    I = InStr(1, texto, ",")
-    If I = 0 Then
+    i = InStr(1, texto, ",")
+    If i = 0 Then
         'Significa k el numero no esta  formateado y como mucho tiene punto
         Importe = CCur(TransformaPuntosComas(texto))
     Else
@@ -2005,51 +2005,51 @@ End Function
 Public Function SePuedeEliminarArticulo(ByVal Articulo As String, ByRef L1 As Label) As String
 On Error GoTo Salida
 Dim SQL As String
-Dim Rs As ADODB.Recordset
-Dim I As Integer
+Dim RS As ADODB.Recordset
+Dim i As Integer
 Dim C As String
 Dim nt As Integer
 
     SePuedeEliminarArticulo = ""
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     Articulo = "'" & DevNombreSQL(Articulo) & "'"
     
     
     'Clientes
     DevuelveTablasBorre 0, C, SQL, nt
-    For I = 1 To nt
-        L1.Caption = RecuperaValor(SQL, I) & " (Clientes)"
+    For i = 1 To nt
+        L1.Caption = RecuperaValor(SQL, i) & " (Clientes)"
         L1.Refresh
-        If TieneDatosSQLCount(Rs, "SELECT count(*) from " & RecuperaValor(C, I) & " where codartic = " & Articulo, 0) Then
+        If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
             
         End If
-    Next I
+    Next i
     If SePuedeEliminarArticulo <> "" Then SePuedeEliminarArticulo = SePuedeEliminarArticulo & vbCrLf & vbCrLf
     
     'Si llega aqui comprobamos en  proveedores
     'PROVEEDORES
     DevuelveTablasBorre 1, C, SQL, nt
-    For I = 1 To nt
-        L1.Caption = RecuperaValor(SQL, I) & " (Proveedores)"
+    For i = 1 To nt
+        L1.Caption = RecuperaValor(SQL, i) & " (Proveedores)"
         L1.Refresh
-        If TieneDatosSQLCount(Rs, "SELECT count(*) from " & RecuperaValor(C, I) & " where codartic = " & Articulo, 0) Then
+        If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
         
         End If
-    Next I
+    Next i
     If SePuedeEliminarArticulo <> "" Then SePuedeEliminarArticulo = SePuedeEliminarArticulo & vbCrLf
     
     'Varios
     DevuelveTablasBorre 2, C, SQL, nt
-    For I = 1 To nt
-        L1.Caption = RecuperaValor(SQL, I) & " (Varios)"
+    For i = 1 To nt
+        L1.Caption = RecuperaValor(SQL, i) & " (Varios)"
         L1.Refresh
-        If TieneDatosSQLCount(Rs, "SELECT count(*) from " & RecuperaValor(C, I) & " where codartic = " & Articulo, 0) Then
+        If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
             
         End If
-    Next I
+    Next i
     
         
         
@@ -2080,14 +2080,14 @@ End Function
 
 
 
-Private Function TieneDatosSQLCount(ByRef Rs As ADODB.Recordset, vSQL As String, IndexdelCount As Integer) As Boolean
+Private Function TieneDatosSQLCount(ByRef RS As ADODB.Recordset, vSQL As String, IndexdelCount As Integer) As Boolean
     TieneDatosSQLCount = False
-    Rs.Open vSQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(IndexdelCount)) Then If Rs.Fields(IndexdelCount) > 0 Then TieneDatosSQLCount = True
+    RS.Open vSQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(IndexdelCount)) Then If RS.Fields(IndexdelCount) > 0 Then TieneDatosSQLCount = True
     End If
         
-    Rs.Close
+    RS.Close
 
 End Function
 
@@ -2137,22 +2137,22 @@ End Function
 '   2- Varios
 '   ---------
 '   3.- Tabas que cuando eliminen el articulo tendre que borrar yo
-Public Sub DevuelveTablasBorre(opcion As Byte, ByRef Tablas As String, ByRef Descripcion As String, ByRef NumeroTablas As Integer)
+Public Sub DevuelveTablasBorre(Opcion As Byte, ByRef Tablas As String, ByRef Descripcion As String, ByRef NumeroTablas As Integer)
 
-    If opcion = 0 Then
+    If Opcion = 0 Then
         'CLIENTES
         Tablas = "slhalb|slhped|slhpre|slialb|slifac|sliordpr|sliped|slipre|sliven|slirep|"
         Descripcion = "Hco albaranes|Hco pedidos|Hco ofertas|Albaranes|Facturas|produccion|"
         Descripcion = Descripcion & "Pedidos|Ofertas|TPV|Reparaciones|"
         NumeroTablas = 10
-    ElseIf opcion = 1 Then
+    ElseIf Opcion = 1 Then
         'PROVEEDRORES
         Tablas = "slhalp|slhppr|slialp|slifpc|slippr|"
         Descripcion = "Hco albaranes|Hco pedidos|Albaranes|Facturas|Pedidos|"
         NumeroTablas = 5
         
         
-    ElseIf opcion = 2 Then
+    ElseIf Opcion = 2 Then
         'VARIOS
         Tablas = "slhmov|sarti2|slhtra|slimov|slitra|slotes|smoval|sserie|stipco|shinve|sarti6|"
         Descripcion = "Hco Lineas Movimientos Almacen|Instalaciones|hco traspaso almacen|"
@@ -2267,7 +2267,7 @@ End Function
 Public Sub MostrarCadenasConexion()
 Dim Cad As String
 Dim cadCon As String
-Dim I As Integer
+Dim i As Integer
 Dim Propiedades() As String
 Dim cadBD As String, cadDSN As String, cadSERVER As String
 
@@ -2280,15 +2280,15 @@ Dim cadBD As String, cadDSN As String, cadSERVER As String
     Propiedades = Split(cadCon, ";")
     
     '- coger las propiedades q nos interesan
-    For I = 0 To UBound(Propiedades)
-        If InStr(1, Propiedades(I), "DATABASE=") > 0 Then
-            cadBD = Propiedades(I)
-        ElseIf InStr(1, Propiedades(I), "DSN=") > 0 Then
-            cadDSN = Propiedades(I)
-         ElseIf InStr(1, Propiedades(I), "SERVER=") > 0 Then
-            cadSERVER = Propiedades(I)
+    For i = 0 To UBound(Propiedades)
+        If InStr(1, Propiedades(i), "DATABASE=") > 0 Then
+            cadBD = Propiedades(i)
+        ElseIf InStr(1, Propiedades(i), "DSN=") > 0 Then
+            cadDSN = Propiedades(i)
+         ElseIf InStr(1, Propiedades(i), "SERVER=") > 0 Then
+            cadSERVER = Propiedades(i)
         End If
-    Next I
+    Next i
     
     Cad = Cad & "Conexión: " & Replace(cadBD, "DATABASE=", "") & vbCrLf
     Cad = Cad & "----------------------------------------   " & vbCrLf
@@ -2305,15 +2305,15 @@ Dim cadBD As String, cadDSN As String, cadSERVER As String
     cadSERVER = ""
     
     '- coger las propiedade q nos interesan
-    For I = 0 To UBound(Propiedades)
-        If InStr(1, Propiedades(I), "DATABASE=") > 0 Then
-            cadBD = Propiedades(I)
-        ElseIf InStr(1, Propiedades(I), "DSN=") > 0 Then
-            cadDSN = Propiedades(I)
-         ElseIf InStr(1, Propiedades(I), "SERVER=") > 0 Then
-            cadSERVER = Propiedades(I)
+    For i = 0 To UBound(Propiedades)
+        If InStr(1, Propiedades(i), "DATABASE=") > 0 Then
+            cadBD = Propiedades(i)
+        ElseIf InStr(1, Propiedades(i), "DSN=") > 0 Then
+            cadDSN = Propiedades(i)
+         ElseIf InStr(1, Propiedades(i), "SERVER=") > 0 Then
+            cadSERVER = Propiedades(i)
         End If
-    Next I
+    Next i
     
     Cad = Cad & "Conexión: " & Replace(cadBD, "DATABASE=", "") & vbCrLf
     Cad = Cad & "----------------------------------------   " & vbCrLf
@@ -2376,22 +2376,22 @@ End Function
 
 Private Sub BorrarEnZbloqueos()
 Dim Cad As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
     On Error GoTo EBorrarEnZbloqueos
     
     Cad = "Select ariges from empresasariges"
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
-        Cad = "DELETE FROM " & Rs.Fields(0) & ".zbloqueos where codusu = " & vUsu.codigo
+    Set RS = New ADODB.Recordset
+    RS.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
+        Cad = "DELETE FROM " & RS.Fields(0) & ".zbloqueos where codusu = " & vUsu.codigo
         ejecutar Cad, True
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
 EBorrarEnZbloqueos:
    Err.Clear
-   Set Rs = Nothing
+   Set RS = Nothing
 End Sub
 
 
@@ -2442,7 +2442,7 @@ End Sub
 
 
 Public Sub DavidLogImpresionAlbaranes()
-Dim b As Boolean
+Dim B As Boolean
 Dim SQL As String
 
     'antes d lanzar este sub se fijaran las variables
@@ -2452,8 +2452,8 @@ Dim SQL As String
     On Error Resume Next
 
     'PrecioMinimo  mvarTipoPortes
-    b = vParamAplic.PrecioMinimo Or vParamAplic.TipoPortes = 2
-    If Not b Then Exit Sub
+    B = vParamAplic.PrecioMinimo Or vParamAplic.TipoPortes = 2
+    If Not B Then Exit Sub
 
 
     'Inserto en slog
@@ -2480,7 +2480,7 @@ End Sub
 Public Function ActualizarPrecioEspecialGenerico(codArt As String, Precio As Currency, BloqueaTabla As Boolean) As Boolean
 'actualizar precio especial
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim NumF As String
 Dim fec As Date
     On Error GoTo ErrAct
@@ -2493,52 +2493,52 @@ Dim fec As Date
     End If
     
     SQL = "SELECT * FROM sprees WHERE codartic=" & DBSet(codArt, "T")
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
     
         
     
         '-- Insertar en el historico spree1
         'numero de linea
-        NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", "codartic=" & DBSet(codArt, "T") & " AND codclien=" & Rs!codClien)
+        NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", "codartic=" & DBSet(codArt, "T") & " AND codclien=" & RS!codClien)
     
     
         
-        If IsNull(Rs!fechanue) Then
+        If IsNull(RS!fechanue) Then
             SQL = DBSet(Now, "F")
         Else
-            SQL = DBSet(Rs!fechanue, "F")
+            SQL = DBSet(RS!fechanue, "F")
         End If
         'codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec
-        SQL = Rs!codClien & "," & DBSet(codArt, "T") & "," & NumF & "," & SQL
+        SQL = RS!codClien & "," & DBSet(codArt, "T") & "," & NumF & "," & SQL
         
         'No tiene valor siguiente. Directamente actualizamos
-        SQL = SQL & "," & DBSet(Rs!precioac, "N") & "," & DBSet(DBLet(Rs!precioa1, "N"), "N") & "," & DBSet(Rs!dtoespec, "N") & ")"
+        SQL = SQL & "," & DBSet(RS!precioac, "N") & "," & DBSet(DBLet(RS!precioa1, "N"), "N") & "," & DBSet(RS!dtoespec, "N") & ")"
         SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec) VALUES (" & SQL
         conn.Execute SQL
         
         
         '-- Actualizar precios actuales con nuevo y resetear valores nuevos
-        If IsNull(Rs!precionu) Then
+        If IsNull(RS!precionu) Then
             'Como el valor de precion1 es nulo, actualizamos directamente
             SQL = "UPDATE sprees SET precioac=" & DBSet(Precio, "N")
             
         Else
             
-            SQL = "UPDATE sprees SET precioac=" & DBSet(Rs!precionu, "N")
-            SQL = SQL & "," & " precioa1=" & DBSet(Rs!precion1, "N")
-            SQL = SQL & ", dtoespec=" & DBSet(Rs!dtoespe1, "N", "S")
+            SQL = "UPDATE sprees SET precioac=" & DBSet(RS!precionu, "N")
+            SQL = SQL & "," & " precioa1=" & DBSet(RS!precion1, "N")
+            SQL = SQL & ", dtoespec=" & DBSet(RS!dtoespe1, "N", "S")
             SQL = SQL & ", " & "precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(Now, "F")
         
         End If
-        SQL = SQL & " WHERE codclien=" & Rs!codClien & " and codartic=" & DBSet(codArt, "T")
+        SQL = SQL & " WHERE codclien=" & RS!codClien & " and codartic=" & DBSet(codArt, "T")
         conn.Execute SQL
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 
 

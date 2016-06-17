@@ -275,8 +275,8 @@ Private Sub cmdActualizar_Click()
     
     Screen.MousePointer = vbHourglass
     Me.FrameProc.visible = True
-    Me.label2(0).Caption = "Comienzo proceso. Leyendo BD"
-    Me.label2(1).Caption = ""
+    Me.Label2(0).Caption = "Comienzo proceso. Leyendo BD"
+    Me.Label2(1).Caption = ""
     Me.Refresh
     Actualizar
     Me.FrameProc.visible = False
@@ -294,8 +294,8 @@ Dim HayQueInsertarTelematel As Boolean
     Set miRsAux = New ADODB.Recordset
     Set RArt = New ADODB.Recordset
     Espera 0.2
-    Me.label2(0).Caption = "Abriendo RS"
-    Me.label2(0).Refresh
+    Me.Label2(0).Caption = "Abriendo RS"
+    Me.Label2(0).Refresh
     
    
     
@@ -324,10 +324,10 @@ Dim HayQueInsertarTelematel As Boolean
     TieneError = False
     CodTelemYaInsertados = ""
     For NF = 1 To lw1.ListItems.Count
-        Me.label2(0).Caption = lw1.ListItems(NF).SubItems(1)
-        Me.label2(1).Caption = NF & " de " & lw1.ListItems.Count
-        Me.label2(0).Refresh
-        Me.label2(1).Refresh
+        Me.Label2(0).Caption = lw1.ListItems(NF).SubItems(1)
+        Me.Label2(1).Caption = NF & " de " & lw1.ListItems.Count
+        Me.Label2(0).Refresh
+        Me.Label2(1).Refresh
         If (NF Mod 50) = 0 Then DoEvents
         'BUscamos codartic
         Aux = BuscarCodartic(NF)
@@ -403,28 +403,29 @@ Dim HayQueInsertarTelematel As Boolean
     miRsAux.Close
     RArt.Close
     
-    
+    'Junio16--> ERROR CABEL
     'Agosto 2011
     'Puede que haya cambiado la referencia, pero que el artiulo sea EL mismo
     'Para aquellos telem que ya existian comprobaremos si la tienen un codartic asignado
     'No los miraremos en todos, solo en aquellos que ya exisiteran y NO haya encontrado el codigo
     'esos telem me los guardo en CodTelemYaInsertados
     If CodTelemYaInsertados <> "" Then
-        Me.label2(0).Caption = "Comprobacion referencias capturadas"
-        Me.label2(1).Caption = ""
-        Me.label2(0).Refresh
-        Me.label2(1).Refresh
+        Me.Label2(0).Caption = "Comprobacion referencias capturadas"
+        Me.Label2(1).Caption = ""
+        Me.Label2(0).Refresh
+        Me.Label2(1).Refresh
         CodTelemYaInsertados = Mid(CodTelemYaInsertados, 2)
         
         
         
-        Cad = "Select * from stelem where codprove=" & txtProv(0).Text
-        Cad = Cad & " AND codartic<>"""""
+        Cad = "Select * from stelem where "
+        Cad = Cad & " codprove=" & txtProv(0).Text & " AND "
+        Cad = Cad & " codartic<>"""""
         Cad = Cad & " AND codtelem in (" & CodTelemYaInsertados & ")"
         miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
-            Me.label2(1).Caption = DBLet(miRsAux!Nombre, "T")
-            Me.label2(1).Refresh
+            Me.Label2(1).Caption = DBLet(miRsAux!Nombre, "T")
+            Me.Label2(1).Refresh
             Cad = "UPDATE sartic set "
             Cad = Cad & " `referprov`=" & DBSet(miRsAux!referprov, "T")
             
@@ -434,7 +435,7 @@ Dim HayQueInsertarTelematel As Boolean
         Wend
         miRsAux.Close
         
-         Me.label2(1).Caption = ""
+         Me.Label2(1).Caption = ""
     End If
     Set miRsAux = Nothing
     Set RArt = Nothing
@@ -663,32 +664,32 @@ End Sub
 Private Function ProcesarLinea(ByRef IT As ListItem) As Boolean
 Dim J As Integer
 Dim Inicio As Integer
-Dim I As Integer
+Dim i As Integer
 Dim Aux As String
     
     
     ProcesarLinea = False
     Inicio = 1
-    For I = 1 To 7
+    For i = 1 To 7
         J = InStr(Inicio, Cad, ";")
         If J = 0 Then
-            MsgBox "No se ha encontrado el separador " & J & ". Campo: " & I, vbExclamation
+            MsgBox "No se ha encontrado el separador " & J & ". Campo: " & i, vbExclamation
             Exit Function
         Else
             Aux = Mid(Cad, Inicio, J - Inicio)
             Aux = Trim(Aux)
-            If I = 1 Then
+            If i = 1 Then
                 IT.Text = Aux
             Else
-                If I = 6 Then Aux = Val(Aux)
+                If i = 6 Then Aux = Val(Aux)
                 
-                IT.SubItems(I - 1) = Aux
+                IT.SubItems(i - 1) = Aux
             End If
             Inicio = J + 1
             
             
             
-            If I = 2 Then
+            If i = 2 Then
                 If Len(Aux) > NumRegElim Then
                     NumRegElim = Len(Aux)
                     CadenaDesdeOtroForm = IT.Index
@@ -745,12 +746,12 @@ End Function
 
 
 Private Function FicheroExcelConvertido() As String
-Dim I As Integer
+Dim i As Integer
 
 
-    I = InStrRev(Text1.Text, ".")
+    i = InStrRev(Text1.Text, ".")
     
-    FicheroExcelConvertido = Mid(Text1.Text, 1, I) & "txt"
+    FicheroExcelConvertido = Mid(Text1.Text, 1, i) & "txt"
 
 
 
@@ -758,7 +759,7 @@ End Function
 
 Private Function ProcesarFicheroExcel() As Boolean
 Dim Aux As String
-Dim I As Integer
+Dim i As Integer
     
     On Error GoTo eProcesarFicheroExcel:
 
@@ -767,24 +768,24 @@ Dim I As Integer
     Aux = App.Path & "\aTelemat.exe  /" & Text1.Text
     Shell Aux, vbNormalFocus
     Aux = FicheroExcelConvertido
-    I = 0
+    i = 0
     'Como mucho un minuto
     Caption = "     ******  Procesando fichero XLS   ******"
     Do
        
        If Dir(Aux, vbArchive) <> "" Then
             'OK, ya se ha creado el archivo
-            I = 61
+            i = 61
             ProcesarFicheroExcel = True
         Else
-            I = I + 1
+            i = i + 1
             Me.Refresh
             Screen.MousePointer = vbHourglass
             DoEvents
             Espera 0.9
         End If
        
-    Loop Until I > 60
+    Loop Until i > 60
     
 eProcesarFicheroExcel:
     If Err.Number <> 0 Then MuestraError Err.Number
