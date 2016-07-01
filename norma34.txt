@@ -2,125 +2,48 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000000160603F20160603T103742</MsgId>
-      <CreDtTm>2016-06-03T10:37:42</CreDtTm>
-      <NbOfTxs>2</NbOfTxs>
-      <CtrlSum>2202.99</CtrlSum>
+      <MsgId>TRANPAG000000160630F20160630T102742</MsgId>
+      <CreDtTm>2016-06-30T10:27:42</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+      <CtrlSum>1054.79</CtrlSum>
       <InitgPty>
-         <Nm>Teinsa</Nm>
+         <Nm>Ariadna Software S.L.</Nm>
          <Id>
            <OrgId>
                <Othr>
-                  <Id>B46155719000</Id>
+                  <Id>B96470190000</Id>
                </Othr>
            </OrgId>
          </Id>
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20160603103742B46155719</PmtInfId>
+      <PmtInfId>20160630102742B96470190</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2016-06-03</ReqdExctnDt>
+      <ReqdExctnDt>2016-06-30</ReqdExctnDt>
       <Dbtr>
-         <Nm>Teinsa</Nm>
+         <Nm>Ariadna Software S.L.</Nm>
          <PstlAdr>
             <Ctry>ES</Ctry>
-            <AdrLine>C/Les Moreres Parcela 48-A Pol.InD.Virge 46950 XIRIVELLA VALENCIA</AdrLine>
+            <AdrLine>Pasaje Ventura Feliu, 13 - Ent. Izq. 2  46007 VALENCIA VALENCIA</AdrLine>
          </PstlAdr>
          <Id>
             <OrgId>
                <Othr>
-                  <Id>B46155719000</Id>
+                  <Id>B96470190000</Id>
                </Othr>
             </OrgId>
          </Id>
     </Dbtr>
     <DbtrAcct>
        <Id>
-          <IBAN>ES6520385825216000651183</IBAN>
+          <IBAN>ES6421001864930200004908</IBAN>
        </Id>
        <Ccy>EUR</Ccy>
     </DbtrAcct>
     <DbtrAgt>
        <FinInstnId>
-          <BIC>CAHMESMMXXX</BIC>
+          <BIC></BIC>
+          <BIC>CAIXESBBXXX</BIC>
        </FinInstnId>
     </DbtrAgt>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>29171321F</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">923.69</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>MARCELO RUIZ AMARFIL</Nm>
-           <Id>
-               <PrvtId>
-                  <Othr>
-                     <Id>29171321F</Id>
-                  </Othr>
-               </PrvtId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES6120386037153000479934</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago Nomina OCTUBRE - 2014</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>19886744R</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">1279.3</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>JULIO MATEO ESCUDERO</Nm>
-           <Id>
-               <PrvtId>
-                  <Othr>
-                     <Id>19886744R</Id>
-                  </Othr>
-               </PrvtId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES5620386406153000357493</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago Nomina OCTUBRE - 2014</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   </PmtInf>
-</CstmrCdtTrfInitn></Document>

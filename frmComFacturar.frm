@@ -1074,6 +1074,8 @@ Dim N  As Long
         
         
         GenerarFactura_
+        If vParamAplic.InvSujetoPasivo Then Me.chkInvSujePasivo.Value = 0
+        BotonPedirDatos
         
     End If
 End Sub
@@ -1958,6 +1960,9 @@ Dim vFactu As CFacturaCom
     
         
     vFactu.FijarTipoIvaProveedor Val(Text1(3).Text)
+    vFactu.ISP = False
+    If Me.chkInvSujePasivo.visible And Me.chkInvSujePasivo.Value = 1 Then vFactu.ISP = True
+        
     
     If vFactu.CalcularDatosFactura2(cadWhere, "scaalp", "slialp", CDate(Text1(1).Text), Me.chkInvSujePasivo.Value = 1) Then
         Text1(6).Text = vFactu.BrutoFac

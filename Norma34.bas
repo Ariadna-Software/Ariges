@@ -78,7 +78,7 @@ Dim Regs As Integer
 Dim Importe As Currency
 Dim Im As Currency
 Dim Cad As String
-Dim AUX As String
+Dim Aux As String
 Dim SufijoOEM As String
 Dim NFic As Integer
 Dim EsPersonaJuridica2 As Boolean
@@ -136,9 +136,9 @@ Dim EsPersonaJuridica2 As Boolean
     
     
     
-    AUX = Regs & "|" & Format(Im, "#.00") & "|"
-    Print #NFic, "      <NbOfTxs>" & RecuperaValor(AUX, 1) & "</NbOfTxs>"
-    Print #NFic, "      <CtrlSum>" & TransformaComasPuntos(RecuperaValor(AUX, 2)) & "</CtrlSum>"
+    Aux = Regs & "|" & Format(Im, "#.00") & "|"
+    Print #NFic, "      <NbOfTxs>" & RecuperaValor(Aux, 1) & "</NbOfTxs>"
+    Print #NFic, "      <CtrlSum>" & TransformaComasPuntos(RecuperaValor(Aux, 2)) & "</CtrlSum>"
     Print #NFic, "      <InitgPty>"
     Print #NFic, "         <Nm>" & XML(vEmpresa.nomempre) & "</Nm>"
     Print #NFic, "         <Id>"
@@ -189,16 +189,16 @@ Dim EsPersonaJuridica2 As Boolean
     Print #NFic, "         </PstlAdr>"
     Print #NFic, "         <Id>"
     
-    AUX = "PrvtId"
-    If EsPersonaJuridica2 Then AUX = "OrgId"
+    Aux = "PrvtId"
+    If EsPersonaJuridica2 Then Aux = "OrgId"
    
     
-    Print #NFic, "            <" & AUX & ">"
+    Print #NFic, "            <" & Aux & ">"
     
     Print #NFic, "               <Othr>"
     Print #NFic, "                  <Id>" & CIF & SufijoOEM & "</Id>"
     Print #NFic, "               </Othr>"
-    Print #NFic, "            </" & AUX & ">"
+    Print #NFic, "            </" & Aux & ">"
     Print #NFic, "         </Id>"
     Print #NFic, "    </Dbtr>"
     
@@ -213,9 +213,11 @@ Dim EsPersonaJuridica2 As Boolean
     Print #NFic, "       <FinInstnId>"
     
     Cad = Mid(CuentaPropia2, 5, 4)
-    
-    Cad = DevuelveDesdeBD(conConta, "bic", "sbic", "entidad", Cad)
-    
+    If vParamAplic.ContabilidadNueva Then
+        Cad = DevuelveDesdeBD(conConta, "bic", "bics", "entidad", Cad)
+    Else
+        Cad = DevuelveDesdeBD(conConta, "bic", "sbic", "entidad", Cad)
+    End If
     Print #NFic, "          <BIC>" & Trim(Cad) & "</BIC>"
     Print #NFic, "       </FinInstnId>"
     Print #NFic, "    </DbtrAgt>"
@@ -230,10 +232,10 @@ Dim EsPersonaJuridica2 As Boolean
         Print #NFic, "   <CdtTrfTxInf>"
         Print #NFic, "      <PmtId>"
         
-        AUX = miRsAux!refbenef
+        Aux = miRsAux!refbenef
          
         
-        Print #NFic, "         <EndToEndId>" & AUX & "</EndToEndId>"
+        Print #NFic, "         <EndToEndId>" & Aux & "</EndToEndId>"
         Print #NFic, "      </PmtId>"
         Print #NFic, "      <PmtTpInf>"
         
@@ -252,13 +254,13 @@ Dim EsPersonaJuridica2 As Boolean
         
         Print #NFic, "          <SvcLvl><Cd>SEPA</Cd></SvcLvl>"
 
-        AUX = "SALA"
+        Aux = "SALA"
 '        ElseIf ConceptoTr = "0" Then
 '            AUX = "PENS"
 '        Else
 '            AUX = "TRAD"
 '        End If
-        Print #NFic, "          <CtgyPurp><Cd>" & AUX & "</Cd></CtgyPurp>"
+        Print #NFic, "          <CtgyPurp><Cd>" & Aux & "</Cd></CtgyPurp>"
         Print #NFic, "       </PmtTpInf>"
         Print #NFic, "       <Amt>"
         Print #NFic, "          <InstdAmt Ccy=""EUR"">" & TransformaComasPuntos(CStr(Im)) & "</InstdAmt>"
@@ -266,7 +268,13 @@ Dim EsPersonaJuridica2 As Boolean
         Print #NFic, "       <CdtrAgt>"
         Print #NFic, "          <FinInstnId>"
         Cad = DBLet(miRsAux!entidad, "T")
-        If Cad <> "" Then Cad = DevuelveDesdeBD(conConta, "bic", "sbic", "entidad", Cad)
+        If Cad <> "" Then
+            If vParamAplic.ContabilidadNueva Then
+                Cad = DevuelveDesdeBD(conConta, "bic", "bics", "entidad", Cad)
+            Else
+                Cad = DevuelveDesdeBD(conConta, "bic", "sbic", "entidad", Cad)
+            End If
+        End If
         If Cad = "" Then Err.Raise 513, , "No existe BIC: " & miRsAux!Nommacta & vbCrLf & "Entidad: " & Cad
         
         Print #NFic, "             <BIC>" & Cad & "</BIC>"
@@ -280,16 +288,16 @@ Dim EsPersonaJuridica2 As Boolean
         
         
         Print #NFic, "           <Id>"
-        AUX = "PrvtId"
-        If EsPersonaJuridica2 Then AUX = "OrgId"
+        Aux = "PrvtId"
+        If EsPersonaJuridica2 Then Aux = "OrgId"
       
-        Print #NFic, "               <" & AUX & ">"
+        Print #NFic, "               <" & Aux & ">"
         Print #NFic, "                  <Othr>"
         Print #NFic, "                     <Id>" & miRsAux!refbenef & "</Id>"
         'Da problemas.... con Cajamar
         'Print #NFic, "                     <Issr>NIF</Issr>"
         Print #NFic, "                  </Othr>"
-        Print #NFic, "               </" & AUX & ">"
+        Print #NFic, "               </" & Aux & ">"
         Print #NFic, "           </Id>"
         Print #NFic, "        </Cdtr>"
         Print #NFic, "        <CdtrAcct>"
@@ -300,22 +308,22 @@ Dim EsPersonaJuridica2 As Boolean
         Print #NFic, "      <Purp>"
         
        ' If ConceptoTr = "1" Then
-            AUX = "SALA"
+            Aux = "SALA"
        ' ElseIf ConceptoTr = "0" Then
        '     AUX = "PENS"
        ' Else
        '     AUX = "TRAD"
        ' End If
         
-        Print #NFic, "         <Cd>" & AUX & "</Cd>"
+        Print #NFic, "         <Cd>" & Aux & "</Cd>"
         Print #NFic, "      </Purp>"
         Print #NFic, "      <RmtInf>"
         'Print #NFic, "      <Ustrd>ESTE ES EL CONCEPTO, POR TANTO NO SE SI SERA EL TEXTO QUE IRA DONDE TIENE QUE IR, O EN OTRO LADAO... A SABER. LO QUE ESTA CLARO ES QUE VA.</Ustrd>
 
         
-        AUX = DescripcionTrans
-        If Trim(AUX) = "" Then AUX = miRsAux!Nommacta
-        Print #NFic, "         <Ustrd>" & XML(Trim(AUX)) & "</Ustrd>"
+        Aux = DescripcionTrans
+        If Trim(Aux) = "" Then Aux = miRsAux!Nommacta
+        Print #NFic, "         <Ustrd>" & XML(Trim(Aux)) & "</Ustrd>"
         Print #NFic, "      </RmtInf>"
         Print #NFic, "   </CdtTrfTxInf>"
  
@@ -380,8 +388,8 @@ Dim Regs As Integer
 Dim CodigoOrdenante As String
 Dim Importe As Currency
 Dim Im As Currency
-Dim RS As ADODB.Recordset
-Dim AUX As String
+Dim Rs As ADODB.Recordset
+Dim Aux As String
 Dim Cad As String
 
 
@@ -413,52 +421,52 @@ Dim Cad As String
     
     'Imprimimos las lineas
     'Para ello abrimos la tabla tmpNorma34
-    Set RS = New ADODB.Recordset
-    AUX = cadSQL
+    Set Rs = New ADODB.Recordset
+    Aux = cadSQL
     
 
 
 
-    RS.Open AUX, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Importe = 0
-    If RS.EOF Then
+    If Rs.EOF Then
         'No hayningun registro
         
     Else
         Regs = 0
-        While Not RS.EOF
-            frmListadoNomi.lblProgreso.Caption = "Trabajador: " & DBLet(RS!Nommacta, "T") & "     " & Regs + 1 & " de " & frmListadoNomi.ProgressBar1.Max
+        While Not Rs.EOF
+            frmListadoNomi.lblProgreso.Caption = "Trabajador: " & DBLet(Rs!Nommacta, "T") & "     " & Regs + 1 & " de " & frmListadoNomi.ProgressBar1.Max
 
-            Im = DBLet(RS!Importe, "N")
+            Im = DBLet(Rs!Importe, "N")
             
             'Codigo beneficiario
             '---------------------------------------------------
            
-            AUX = RellenaABlancos(DBLet(RS!refbenef, "T"), True, 12) 'NIF beneficiari (trabajador)
+            Aux = RellenaABlancos(DBLet(Rs!refbenef, "T"), True, 12) 'NIF beneficiari (trabajador)
            
-            AUX = "06" & "56" & CodigoOrdenante & AUX   'Ordenante y socio juntos
+            Aux = "06" & "56" & CodigoOrdenante & Aux   'Ordenante y socio juntos
         
-            Linea1 NFich, AUX, RS, Im, Cad, ConceptoTrans
-            Linea2 NFich, AUX, RS, Cad
-            Linea3 NFich, AUX, RS, Cad
-            Linea4 NFich, AUX, RS, Cad
-            Linea5 NFich, AUX, RS, Cad
-            Linea6 NFich, AUX, RS, Cad, DescripcionTrans, Pagos
-            If Pagos Then Linea7 NFich, AUX, RS, Cad
+            Linea1 NFich, Aux, Rs, Im, Cad, ConceptoTrans
+            Linea2 NFich, Aux, Rs, Cad
+            Linea3 NFich, Aux, Rs, Cad
+            Linea4 NFich, Aux, Rs, Cad
+            Linea5 NFich, Aux, Rs, Cad
+            Linea6 NFich, Aux, Rs, Cad, DescripcionTrans, Pagos
+            If Pagos Then Linea7 NFich, Aux, Rs, Cad
         
             Importe = Importe + Im
             Regs = Regs + 1
             IncrementarProgresNew frmListadoNomi.ProgressBar1, 1
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         'Imprimimos totales
         frmListadoNomi.lblProgreso.Caption = "Total..."
         Totales NFich, CodigoOrdenante, Importe, Regs, Cad, Pagos
     End If
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Close (NFich)
     frmListadoNomi.lblProgreso.Caption = "Proceso finalizado."
     
@@ -473,15 +481,15 @@ End Function
 
 
 
-Private Function RellenaABlancos(CADENA As String, PorLaDerecha As Boolean, Longitud As Integer) As String
+Private Function RellenaABlancos(Cadena As String, PorLaDerecha As Boolean, Longitud As Integer) As String
 Dim Cad As String
     
     Cad = Space(Longitud)
     If PorLaDerecha Then
-        Cad = CADENA & Cad
+        Cad = Cadena & Cad
         RellenaABlancos = Left(Cad, Longitud)
     Else
-        Cad = Cad & CADENA
+        Cad = Cad & Cadena
         RellenaABlancos = Right(Cad, Longitud)
     End If
     
@@ -489,15 +497,15 @@ End Function
 
 
 
-Private Function RellenaAceros(CADENA As String, PorLaDerecha As Boolean, Longitud As Integer) As String
+Private Function RellenaAceros(Cadena As String, PorLaDerecha As Boolean, Longitud As Integer) As String
 Dim Cad As String
     
     Cad = Mid("00000000000000000000", 1, Longitud)
     If PorLaDerecha Then
-        Cad = CADENA & Cad
+        Cad = Cadena & Cad
         RellenaAceros = Left(Cad, Longitud)
     Else
-        Cad = Cad & CADENA
+        Cad = Cad & Cadena
         RellenaAceros = Right(Cad, Longitud)
     End If
     
@@ -637,9 +645,9 @@ End Sub
 
 
 Private Sub Linea6(NF As Integer, ByRef CodOrde As String, ByRef RS1 As ADODB.Recordset, ByRef Cad As String, ByRef ConceptoT As String, Pagos As Boolean)
-Dim AUX As String
+Dim Aux As String
 
-    AUX = ConceptoT
+    Aux = ConceptoT
 '    If Pagos Then
 '        'Tiene dos campos para las descripcion. Si no tiene nada pondre la descripcion de la transferencia
 '        Aux = Trim(DBLet(RS1!text1csb, "T"))
@@ -648,7 +656,7 @@ Dim AUX As String
 
     Cad = CodOrde    'llevara tb la ID del socio
     Cad = Cad & "016"
-    Cad = Cad & RellenaABlancos(AUX, False, 35)
+    Cad = Cad & RellenaABlancos(Aux, False, 35)
     Cad = RellenaABlancos(Cad, True, 72)
     Print #NF, Cad
 End Sub
@@ -667,11 +675,11 @@ End Sub
 
 
 
-Private Sub Totales(NF As Integer, ByRef CodOrde As String, Total As Currency, Registros As Integer, ByRef Cad As String, Pagos As Boolean)
+Private Sub Totales(NF As Integer, ByRef CodOrde As String, total As Currency, Registros As Integer, ByRef Cad As String, Pagos As Boolean)
     Cad = "08" & "56"
     Cad = Cad & CodOrde    'llevara tb la ID del socio
     Cad = Cad & Space(15)
-    Cad = Cad & RellenaAceros(CStr(Int(Round(Total * 100, 2))), False, 12)
+    Cad = Cad & RellenaAceros(CStr(Int(Round(total * 100, 2))), False, 12)
     Cad = Cad & RellenaAceros(CStr(Registros), False, 8)
     If Pagos Then
         Cad = Cad & RellenaAceros(CStr((Registros * 7) + 4 + 1), False, 10)
@@ -721,7 +729,7 @@ Dim Regs As Integer
 Dim Importe As Currency
 Dim Im As Currency
 Dim Cad As String
-Dim AUX As String
+Dim Aux As String
 Dim NF As Integer
 Dim Sufijo As String
 
@@ -815,9 +823,9 @@ Dim Sufijo As String
             
             
             Im = miRsAux!Importe
-            AUX = miRsAux!refbenef
+            Aux = miRsAux!refbenef
             
-            AUX = FrmtStr(AUX, 10)
+            Aux = FrmtStr(Aux, 10)
             Importe = Importe + Im
             Regs = Regs + 1
             
@@ -827,8 +835,8 @@ Dim Sufijo As String
             'Campo 5 . Referencia del ordenante
             
             
-            AUX = miRsAux!refbenef & " " & Format(Fecha, "dd/mm/yyyy")
-            Cad = Cad & FrmtStr(AUX, 35)
+            Aux = miRsAux!refbenef & " " & Format(Fecha, "dd/mm/yyyy")
+            Cad = Cad & FrmtStr(Aux, 35)
             
             'Campo 6
             Cad = Cad & "A"
@@ -850,8 +858,8 @@ Dim Sufijo As String
             
             
             'Concepto
-            AUX = DescripcionTrans
-            Cad = Cad & FrmtStr(AUX, 140)
+            Aux = DescripcionTrans
+            Cad = Cad & FrmtStr(Aux, 140)
             
             'Campo17
             Cad = Cad & FrmtStr("", 35)  'Reservado
@@ -954,9 +962,9 @@ End Function
 
 
 
-Private Function XML(CADENA As String) As String
+Private Function XML(Cadena As String) As String
 Dim I As Integer
-Dim AUX As String
+Dim Aux As String
 Dim Le As String
 Dim C As Integer
     'Carácter no permitido en XML  Representación ASCII
@@ -972,9 +980,9 @@ Dim C As Integer
     '0 1 2 3 4 5 6 7 8 9
     '/ - ? : ( ) . , ' +
     'Espacio
-    AUX = ""
-    For I = 1 To Len(CADENA)
-        Le = Mid(CADENA, I, 1)
+    Aux = ""
+    For I = 1 To Len(Cadena)
+        Le = Mid(Cadena, I, 1)
         C = Asc(Le)
         
         
@@ -994,8 +1002,8 @@ Dim C As Integer
         Case Else
             Le = " "
         End Select
-        AUX = AUX & Le
+        Aux = Aux & Le
     Next
-    XML = AUX
+    XML = Aux
 End Function
 

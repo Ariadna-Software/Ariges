@@ -1225,6 +1225,7 @@ Private Sub mnManipulador_Click()
             conn.Execute SQL
             Espera 0.5
             Me.Refresh
+            
     End If
 End Sub
 
@@ -3022,7 +3023,7 @@ Private Sub LanzarClientesVarios()
 
     Set frmClv = New frmFacClientesV
     frmClv.DatosADevolverBusqueda = "0|1|"
-    frmClv.vNIF = Text3.Tag
+    frmClv.vNif = Text3.Tag
     frmClv.Show vbModal
     Set frmClv = Nothing
     ActualizarCliVariosEnBD
