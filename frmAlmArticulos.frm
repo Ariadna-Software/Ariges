@@ -47,7 +47,7 @@ Begin VB.Form frmAlmArticulos
       _Version        =   393216
       Style           =   1
       Tabs            =   8
-      Tab             =   7
+      Tab             =   1
       TabsPerRow      =   8
       TabHeight       =   520
       TabCaption(0)   =   "Datos básicos   "
@@ -114,19 +114,31 @@ Begin VB.Form frmAlmArticulos
       Tab(0).ControlCount=   58
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmAlmArticulos.frx":0028
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "chkWeb"
-      Tab(1).Control(1)=   "Text1(33)"
-      Tab(1).Control(2)=   "framePortes"
-      Tab(1).Control(3)=   "Text1(28)"
-      Tab(1).Control(4)=   "Text1(19)"
-      Tab(1).Control(5)=   "Text1(20)"
-      Tab(1).Control(6)=   "Text1(21)"
-      Tab(1).Control(7)=   "Label1(40)"
-      Tab(1).Control(8)=   "Label2(1)"
-      Tab(1).Control(9)=   "Label2(11)"
-      Tab(1).Control(10)=   "Label2(2)"
-      Tab(1).Control(11)=   "Label2(3)"
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "Label2(3)"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "Label2(2)"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "Label2(11)"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(3)=   "Label2(1)"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "Label1(40)"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "Text1(21)"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "Text1(20)"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(7)=   "Text1(19)"
+      Tab(1).Control(7).Enabled=   0   'False
+      Tab(1).Control(8)=   "Text1(28)"
+      Tab(1).Control(8).Enabled=   0   'False
+      Tab(1).Control(9)=   "framePortes"
+      Tab(1).Control(9).Enabled=   0   'False
+      Tab(1).Control(10)=   "Text1(33)"
+      Tab(1).Control(10).Enabled=   0   'False
+      Tab(1).Control(11)=   "chkWeb"
+      Tab(1).Control(11).Enabled=   0   'False
       Tab(1).ControlCount=   12
       TabCaption(2)   =   "Componentes"
       TabPicture(2)   =   "frmAlmArticulos.frx":0044
@@ -200,25 +212,16 @@ Begin VB.Form frmAlmArticulos
       Tab(6).ControlCount=   4
       TabCaption(7)   =   "Fitosanitarios"
       TabPicture(7)   =   "frmAlmArticulos.frx":00D0
-      Tab(7).ControlEnabled=   -1  'True
-      Tab(7).Control(0)=   "Label2(5)"
-      Tab(7).Control(0).Enabled=   0   'False
-      Tab(7).Control(1)=   "Label1(41)"
-      Tab(7).Control(1).Enabled=   0   'False
-      Tab(7).Control(2)=   "data6"
-      Tab(7).Control(2).Enabled=   0   'False
-      Tab(7).Control(3)=   "DataGrid5"
-      Tab(7).Control(3).Enabled=   0   'False
+      Tab(7).ControlEnabled=   0   'False
+      Tab(7).Control(0)=   "cboADV"
+      Tab(7).Control(1)=   "Text5(1)"
+      Tab(7).Control(2)=   "Text5(0)"
+      Tab(7).Control(3)=   "cmdMatAux"
       Tab(7).Control(4)=   "FrameServicios"
-      Tab(7).Control(4).Enabled=   0   'False
-      Tab(7).Control(5)=   "cmdMatAux"
-      Tab(7).Control(5).Enabled=   0   'False
-      Tab(7).Control(6)=   "Text5(0)"
-      Tab(7).Control(6).Enabled=   0   'False
-      Tab(7).Control(7)=   "Text5(1)"
-      Tab(7).Control(7).Enabled=   0   'False
-      Tab(7).Control(8)=   "cboADV"
-      Tab(7).Control(8).Enabled=   0   'False
+      Tab(7).Control(5)=   "DataGrid5"
+      Tab(7).Control(6)=   "data6"
+      Tab(7).Control(7)=   "Label1(41)"
+      Tab(7).Control(8)=   "Label2(5)"
       Tab(7).ControlCount=   9
       Begin VB.ComboBox cboTipoComiArtVario 
          Height          =   315
@@ -244,7 +247,7 @@ Begin VB.Form frmAlmArticulos
       Begin VB.ComboBox cboADV 
          Height          =   315
          ItemData        =   "frmAlmArticulos.frx":00EC
-         Left            =   360
+         Left            =   -74640
          List            =   "frmAlmArticulos.frx":00EE
          Style           =   2  'Dropdown List
          TabIndex        =   182
@@ -255,7 +258,7 @@ Begin VB.Form frmAlmArticulos
       Begin VB.CheckBox chkWeb 
          Caption         =   "Se muestra en la web"
          Height          =   315
-         Left            =   -71760
+         Left            =   3240
          TabIndex        =   181
          Tag             =   "Se muestra en la web|N|N|0|1|sartic|oftweb||N|"
          Top             =   5880
@@ -304,7 +307,7 @@ Begin VB.Form frmAlmArticulos
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   33
-         Left            =   -72840
+         Left            =   2160
          MaxLength       =   12
          TabIndex        =   43
          Tag             =   "Precio Ultima Compra|N|S|0|100|sartic|PorcenComunica|||"
@@ -350,7 +353,7 @@ Begin VB.Form frmAlmArticulos
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   1
-         Left            =   6960
+         Left            =   -68040
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   172
@@ -362,7 +365,7 @@ Begin VB.Form frmAlmArticulos
       Begin VB.TextBox Text5 
          Height          =   315
          Index           =   0
-         Left            =   6000
+         Left            =   -69000
          MaxLength       =   8
          TabIndex        =   170
          Text            =   "Text3"
@@ -373,7 +376,7 @@ Begin VB.Form frmAlmArticulos
       Begin VB.CommandButton cmdMatAux 
          Caption         =   "+"
          Height          =   255
-         Left            =   6720
+         Left            =   -68280
          TabIndex        =   171
          ToolTipText     =   "Materias activas"
          Top             =   1560
@@ -384,7 +387,7 @@ Begin VB.Form frmAlmArticulos
          BorderStyle     =   0  'None
          Caption         =   "Frame4"
          Height          =   3735
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   156
          Top             =   1440
          Width           =   4815
@@ -843,7 +846,7 @@ Begin VB.Form frmAlmArticulos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   855
-         Left            =   -68040
+         Left            =   6960
          TabIndex        =   134
          Top             =   5400
          Width           =   3975
@@ -1002,7 +1005,7 @@ Begin VB.Form frmAlmArticulos
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   28
-         Left            =   -74760
+         Left            =   240
          MaxLength       =   60
          ScrollBars      =   2  'Vertical
          TabIndex        =   42
@@ -1302,7 +1305,7 @@ Begin VB.Form frmAlmArticulos
       Begin VB.TextBox Text1 
          Height          =   975
          Index           =   19
-         Left            =   -74760
+         Left            =   240
          MaxLength       =   200
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -1314,7 +1317,7 @@ Begin VB.Form frmAlmArticulos
       Begin VB.TextBox Text1 
          Height          =   855
          Index           =   20
-         Left            =   -74760
+         Left            =   240
          MaxLength       =   200
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -1326,7 +1329,7 @@ Begin VB.Form frmAlmArticulos
       Begin VB.TextBox Text1 
          Height          =   855
          Index           =   21
-         Left            =   -74760
+         Left            =   240
          MaxLength       =   200
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -2279,7 +2282,7 @@ Begin VB.Form frmAlmArticulos
       End
       Begin MSDataGridLib.DataGrid DataGrid5 
          Height          =   5055
-         Left            =   5400
+         Left            =   -69600
          TabIndex        =   168
          Top             =   1080
          Width           =   5295
@@ -2343,7 +2346,7 @@ Begin VB.Form frmAlmArticulos
       End
       Begin MSAdodcLib.Adodc data6 
          Height          =   330
-         Left            =   9240
+         Left            =   -65760
          Top             =   480
          Visible         =   0   'False
          Width           =   1575
@@ -2537,7 +2540,7 @@ Begin VB.Form frmAlmArticulos
          Caption         =   "En partes trabajo"
          Height          =   255
          Index           =   41
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   183
          Top             =   720
          Width           =   2085
@@ -2582,7 +2585,7 @@ Begin VB.Form frmAlmArticulos
          Caption         =   "% comunicacion de stock"
          Height          =   255
          Index           =   40
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   177
          Top             =   5880
          Width           =   2175
@@ -2620,7 +2623,7 @@ Begin VB.Form frmAlmArticulos
          ForeColor       =   &H00000080&
          Height          =   300
          Index           =   5
-         Left            =   5400
+         Left            =   -69600
          TabIndex        =   169
          Top             =   720
          Width           =   2865
@@ -2763,7 +2766,7 @@ Begin VB.Form frmAlmArticulos
          Caption         =   "Texto auxiliar documentos"
          Height          =   240
          Index           =   1
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   113
          Top             =   5040
          Width           =   2655
@@ -2772,7 +2775,7 @@ Begin VB.Form frmAlmArticulos
          Caption         =   "Texto para Ventas"
          Height          =   240
          Index           =   11
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   82
          Top             =   600
          Width           =   1575
@@ -2781,7 +2784,7 @@ Begin VB.Form frmAlmArticulos
          Caption         =   "Texto para Compras"
          Height          =   240
          Index           =   2
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   81
          Top             =   2160
          Width           =   1575
@@ -2790,7 +2793,7 @@ Begin VB.Form frmAlmArticulos
          Caption         =   "Control de Instalación"
          Height          =   240
          Index           =   3
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   80
          Top             =   3480
          Width           =   1575

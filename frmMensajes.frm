@@ -15,6 +15,59 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   14160
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameErrorCC 
+      Height          =   6135
+      Left            =   6000
+      TabIndex        =   64
+      Top             =   960
+      Width           =   6495
+      Begin VB.TextBox txtCCError 
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   4335
+         Left            =   240
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   67
+         Text            =   "frmMensajes.frx":000C
+         Top             =   840
+         Width           =   5895
+      End
+      Begin VB.CommandButton cmdSalirCC 
+         Caption         =   "&Salir"
+         Height          =   375
+         Left            =   5040
+         TabIndex        =   66
+         Top             =   5520
+         Width           =   975
+      End
+      Begin VB.Label Label7 
+         Caption         =   "Errores centro de coste"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   495
+         Index           =   0
+         Left            =   240
+         TabIndex        =   65
+         Top             =   360
+         Width           =   5295
+      End
+   End
    Begin VB.Frame FrameNSeries 
       Height          =   5000
       Left            =   480
@@ -337,7 +390,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":000C
+         Picture         =   "frmMensajes.frx":0012
          Top             =   6960
          Width           =   240
       End
@@ -345,7 +398,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0156
+         Picture         =   "frmMensajes.frx":015C
          Top             =   6960
          Width           =   240
       End
@@ -382,7 +435,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   58
-         Text            =   "frmMensajes.frx":02A0
+         Text            =   "frmMensajes.frx":02A6
          Top             =   2760
          Width           =   7335
       End
@@ -491,9 +544,9 @@ Begin VB.Form frmMensajes
       Width           =   12975
       Begin VB.ComboBox cmbActualizarTar 
          Height          =   315
-         ItemData        =   "frmMensajes.frx":02A6
+         ItemData        =   "frmMensajes.frx":02AC
          Left            =   7800
-         List            =   "frmMensajes.frx":02A8
+         List            =   "frmMensajes.frx":02AE
          Style           =   2  'Dropdown List
          TabIndex        =   41
          Top             =   5960
@@ -611,7 +664,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   11760
-         Picture         =   "frmMensajes.frx":02AA
+         Picture         =   "frmMensajes.frx":02B0
          Top             =   240
          Width           =   240
       End
@@ -619,7 +672,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   12360
-         Picture         =   "frmMensajes.frx":03F4
+         Picture         =   "frmMensajes.frx":03FA
          Top             =   240
          Width           =   240
       End
@@ -670,7 +723,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   3  'Both
          TabIndex        =   28
-         Text            =   "frmMensajes.frx":053E
+         Text            =   "frmMensajes.frx":0544
          Top             =   360
          Width           =   7695
       End
@@ -848,7 +901,7 @@ Begin VB.Form frmMensajes
          Left            =   240
          MultiLine       =   -1  'True
          TabIndex        =   23
-         Text            =   "frmMensajes.frx":0544
+         Text            =   "frmMensajes.frx":054A
          Top             =   120
          Width           =   6615
       End
@@ -950,6 +1003,9 @@ Public OpcionMensaje As Byte
 '22 .-  Muestra clientes potenciales
 
 '23 .- Igual que 15. Listado PVP con IVA  (para los TPVs)
+
+'24 .- Lineas de factura sib centro de coste
+
 
 Public cadWhere As String 'Cadena para pasarle la WHERE de la SELECT de los cobros pendientes o de Pedido(para comp. stock)
                           'o CodArtic para seleccionar los Nº Series
@@ -1409,6 +1465,14 @@ Dim b As Boolean
     Unload Me
 End Sub
 
+Private Sub cmdSalir_Click()
+    Unload Me
+End Sub
+
+Private Sub cmdSalirCC_Click()
+    Unload Me
+End Sub
+
 Private Sub cmdSelTodos_Click()
     Dim I As Integer
 
@@ -1469,6 +1533,10 @@ Dim OK As Boolean
             CargarEmail
         Case 23
             CargarPVPArticulos   'aqui aqui auqi
+            
+        Case 24
+            txtCCError.Text = vCampos
+            vCampos = ""
     End Select
     
     Screen.MousePointer = vbDefault
@@ -1489,7 +1557,8 @@ On Error Resume Next
     FrameEtiqEstant.visible = False
     FrameCorreccionPrecios.visible = False
     FrameTraspasoMante.visible = False
-    FrameEMail.visible = False
+    FrameEmail.visible = False
+    FrameErrorCC.visible = False
     PulsadoSalir = True
     PrimeraVez = True
     
@@ -1645,9 +1714,9 @@ On Error Resume Next
         Case 21
             'Ver email
             limpiar Me
-            H = FrameEMail.Height
-            W = FrameEMail.Width
-            PonerFrameVisible FrameEMail, True, H, W
+            H = FrameEmail.Height
+            W = FrameEmail.Width
+            PonerFrameVisible FrameEmail, True, H, W
             If cadWHERE2 = "0" Then
                 Caption = "Enviados"
                 Label5(0).Caption = "Para"
@@ -1657,6 +1726,14 @@ On Error Resume Next
             End If
             cmdEmail.Cancel = True
             PonerFocoBtn Me.cmdEmail
+            
+    Case 24
+        
+        Caption = "Analítica"
+        H = FrameErrorCC.Height
+        W = FrameErrorCC.Width
+        PonerFrameVisible FrameErrorCC, True, H, W
+        PonerFocoBtn cmdSalirCC
     End Select
     'Me.cmdCancel(indFrame).Cancel = True
     Me.Height = H + 350
@@ -1885,17 +1962,17 @@ Dim SQL As String
     
 End Sub
     
-Private Sub CargaStockConjuntos(Linea As String)
+Private Sub CargaStockConjuntos(linea As String)
     
         
         Set miRsAux = New ADODB.Recordset
             'Deberiamos cargar los elementos que tiene subconjuntos
-            cadWHERE2 = "SELECT " & RecuperaValor(Linea, 1) & ",sarti1.codarti1,nomartic,"
-            cadWHERE2 = cadWHERE2 & " sarti1.cantidad * " & TransformaComasPuntos(RecuperaValor(Linea, 3)) & " as cantidad,"
-            cadWHERE2 = cadWHERE2 & " salmac.canstock as canstock,  canstock-(sarti1.cantidad * " & TransformaComasPuntos(RecuperaValor(Linea, 3))
+            cadWHERE2 = "SELECT " & RecuperaValor(linea, 1) & ",sarti1.codarti1,nomartic,"
+            cadWHERE2 = cadWHERE2 & " sarti1.cantidad * " & TransformaComasPuntos(RecuperaValor(linea, 3)) & " as cantidad,"
+            cadWHERE2 = cadWHERE2 & " salmac.canstock as canstock,  canstock-(sarti1.cantidad * " & TransformaComasPuntos(RecuperaValor(linea, 3))
             cadWHERE2 = cadWHERE2 & ") as disp From sarti1, salmac, sartic"
             cadWHERE2 = cadWHERE2 & " Where sarti1.codarti1 = salmac.codArtic And sarti1.codarti1 = sartic.codArtic"
-            cadWHERE2 = cadWHERE2 & " and sarti1.codartic='" & DevNombreSQL(RecuperaValor(Linea, 2)) & "'"
+            cadWHERE2 = cadWHERE2 & " and sarti1.codartic='" & DevNombreSQL(RecuperaValor(linea, 2)) & "'"
             
             miRsAux.Open cadWHERE2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not miRsAux.EOF
@@ -2757,7 +2834,7 @@ Dim RBarras As ADODB.Recordset
             SQL = RBarras!codigoea
         End If
         'Ponemos el codigo de articulo y el TIPO de IVA
-        IT.Tag = "'" & DevNombreSQL(Rs!codArtic) & "'," & Rs!CodigIVA & ",'" & SQL & "'"
+        IT.Tag = "'" & DevNombreSQL(Rs!codArtic) & "'," & Rs!codigiva & ",'" & SQL & "'"
         IT.Text = Rs!NomArtic
         IT.SubItems(1) = Format(Rs!PrecioVe, cadWHERE2)
         IT.SubItems(2) = Rs!nomfamia
@@ -3251,7 +3328,7 @@ Dim ImpIva As Currency
         
         '`codartic`,`numlinea`,numserie,`numlinealb`,nummante
         
-        RIVA.Find "codigiva = " & miRsAux!CodigIVA, , adSearchForward, 1
+        RIVA.Find "codigiva = " & miRsAux!codigiva, , adSearchForward, 1
         ImpIva = 0
         If Not RIVA.EOF Then ImpIva = DBLet(RIVA!PorceIVA)
                 
@@ -3280,7 +3357,7 @@ Dim ImpIva As Currency
         IT.Checked = True
         
         '`codartic`,`numlinea`,numserie,`numlinealb`,nummante
-        SQL = "'" & DevNombreSQL(miRsAux!codArtic) & "'," & miRsAux!CodigIVA & ",'" & IT.SubItems(1) & "'," & TotalArray & ",'" & IT.SubItems(2) & "')"
+        SQL = "'" & DevNombreSQL(miRsAux!codArtic) & "'," & miRsAux!codigiva & ",'" & IT.SubItems(1) & "'," & TotalArray & ",'" & IT.SubItems(2) & "')"
         IT.Tag = SQL
         
         

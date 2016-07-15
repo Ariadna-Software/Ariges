@@ -552,7 +552,7 @@ Public Function LeerDatos3(vCodProve As String, vNumfactu As String, vFecfactu A
 'Leer los datos de una factura almacenada en la tabla scafpc
 'Lee de la BD: Ariges, Tabla: scafpc
 'OUT: True si lee los datos correctamente
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Mens As String
 Dim SQL As String
 
@@ -564,19 +564,19 @@ Dim SQL As String
     SQL = SQL & " AND numfactu='" & vNumfactu & "'"
     SQL = SQL & " AND fecfactu='" & Format(vFecfactu, FormatoFecha) & "'"
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Mens = ""
-    If RS.EOF Then
+    If Rs.EOF Then
         
     Else
         Mens = "Datos Factura"
-        mCodProve = RS!Codprove
-        mNumFactu = CStr(RS!NumFactu)
-        mFecFactu = CStr(RS!FecFactu)
-        mCodForpa = CStr(RS!codforpa)
-        mBrutofac = CStr(RS!BrutoFac)
-        mTotalfac = CStr(RS!TotalFac)
+        mCodProve = Rs!Codprove
+        mNumFactu = CStr(Rs!NumFactu)
+        mFecFactu = CStr(Rs!FecFactu)
+        mCodForpa = CStr(Rs!codforpa)
+        mBrutofac = CStr(Rs!BrutoFac)
+        mTotalfac = CStr(Rs!TotalFac)
         'obterner la ctaCble del proveedor
         SQL = "tipprove"
         CtaProve = DevuelveDesdeBDNew(conAri, "sprove", "codmacta", "codprove", vCodProve, "N", SQL)
@@ -615,8 +615,8 @@ Dim SQL As String
         
 
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
@@ -624,7 +624,7 @@ ELeer:
     Mens = Mens & "Número: " & Err.Number & vbCrLf
     Mens = Mens & "Descripción: " & Err.Description
     MsgBox Mens, vbExclamation
-    If Not RS Is Nothing Then Set RS = Nothing
+    If Not Rs Is Nothing Then Set Rs = Nothing
     LeerDatos3 = False
 End Function
 
@@ -640,15 +640,15 @@ End Sub
 
 Public Function InsertarEnTesoreria(MenError As String) As Boolean
 'Guarda datos de Tesoreria en tablas: ariges.svenci y en conta.scobros
-Dim B As Boolean
-Dim RS As ADODB.Recordset
+Dim b As Boolean
+Dim Rs As ADODB.Recordset
 Dim rsVenci As ADODB.Recordset
 Dim SQL As String
 Dim cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
 Dim FecVenci As Date, FecVenci1 As Date
 Dim ImpVenci As Single
-Dim i As Byte
+Dim I As Byte
 
     On Error GoTo EInsertarTesoreria
 
@@ -668,16 +668,16 @@ Dim i As Byte
             SQL = SQL & " FROM spara1 "
             'SQL = SQL & " WHERE codigo=1"
             
-            Set RS = New ADODB.Recordset
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Set Rs = New ADODB.Recordset
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            If Not RS.EOF Then
+            If Not Rs.EOF Then
                'vamos creando la cadena para insertar en spagosp de la CONTA
                CadValuesAux2 = "('" & CtaProve & "', " & DBSet(NumFactu, "T") & ", '" & Format(FecFactu, FormatoFecha) & "', "
               
               'Primer Vencimiento
               '------------------------------------------------------------
-              i = 1
+              I = 1
               'FECHA VTO
               FecVenci = CDate(FecFactu)
               '=== Modificado: Laura 23/01/2007
@@ -685,15 +685,15 @@ Dim i As Byte
               FecVenci = DateAdd("d", DBLet(rsVenci!primerve, "N"), FecVenci)
               '==================================
               'comprobar si tiene dias de pago y obtener la fecha del vencimiento correcta
-              FecVenci = ComprobarFechaVenci(FecVenci, DBLet(RS!DiaPago1, "N"), DBLet(RS!DiaPago2, "N"), DBLet(RS!DiaPago3, "N"))
+              FecVenci = ComprobarFechaVenci(FecVenci, DBLet(Rs!DiaPago1, "N"), DBLet(Rs!DiaPago2, "N"), DBLet(Rs!DiaPago3, "N"))
 
               'Comprobar si  tiene mes a no girar
               FecVenci1 = FecVenci
-              If DBSet(RS!mesnogir, "N") <> 0 Then
-                  FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(RS!mesnogir, "N"), DBSet(0, "N"), RS!DiaPago1, RS!DiaPago2, RS!DiaPago3)
+              If DBSet(Rs!mesnogir, "N") <> 0 Then
+                  FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(Rs!mesnogir, "N"), DBSet(0, "N"), Rs!DiaPago1, Rs!DiaPago2, Rs!DiaPago3)
               End If
              
-              CadValues2 = CadValuesAux2 & i
+              CadValues2 = CadValuesAux2 & I
               CadValues2 = CadValues2 & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
                 
               'IMPORTE del Vencimiento
@@ -710,18 +710,23 @@ Dim i As Byte
               
               If Val(mCCC_Entidad) = 0 Then
                 'NO TIENE ENTIDAD
-                CadValues2 = CadValues2 & "null,null,null,null,null,"
+                If vParamAplic.ContabilidadNueva Then
+                    CadValues2 = CadValues2 & "null,"   'Solo llevamos el IBAN
+                Else
+                    CadValues2 = CadValues2 & "null,null,null,null,null,"
+                End If
               Else
                 
-                'En contabiliadd nueva, el IBAN no solo es ES??   es toooooda la cuenta
-                CadValues2 = CadValues2 & DBSet(mCCC_Entidad, "T", "S") & "," & DBSet(mCCC_Oficina, "T", "S") & ","
-                CadValues2 = CadValues2 & DBSet(mCCC_CC, "T", "S") & "," & DBSet(mCCC_CTa, "T", "S") & ","
-              
+                
+               
                 If vParamAplic.ContabilidadNueva Then
+                    'En contabiliadd nueva, el IBAN no solo es ES??   es toooooda la cuenta
                     SQL = mIBAN & Right("0000" & mCCC_Entidad, 4) & Right("0000" & mCCC_Oficina, 4)
                     SQL = SQL & mCCC_CC & Right(String(10, "0") & mCCC_CTa, 10)
                     CadValues2 = CadValues2 & DBSet(SQL, "T") & ","
                 Else
+                     CadValues2 = CadValues2 & DBSet(mCCC_Entidad, "T", "S") & "," & DBSet(mCCC_Oficina, "T", "S") & ","
+                    CadValues2 = CadValues2 & DBSet(mCCC_CC, "T", "S") & "," & DBSet(mCCC_CTa, "T", "S") & ","
                     CadValues2 = CadValues2 & DBSet(mIBAN, "T", "S") & ","
                 End If
               End If
@@ -767,22 +772,22 @@ Dim i As Byte
               
               'Resto Vencimientos
               '--------------------------------------------------------------------
-              For i = 2 To rsVenci!numerove
+              For I = 2 To rsVenci!numerove
                  'FECHA Resto Vencimientos
                   '==== Modificado: Laura 23/01/2007
                   'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
                   FecVenci = DateAdd("d", DBLet(rsVenci!restoven, "N"), FecVenci)
                   '==================================================
                   'comprobar si tiene dias de pago y obtener la fecha del vencimiento correcta
-                  FecVenci = ComprobarFechaVenci(FecVenci, DBLet(RS!DiaPago1, "N"), DBLet(RS!DiaPago2, "N"), DBLet(RS!DiaPago3, "N"))
+                  FecVenci = ComprobarFechaVenci(FecVenci, DBLet(Rs!DiaPago1, "N"), DBLet(Rs!DiaPago2, "N"), DBLet(Rs!DiaPago3, "N"))
 
                   'Comprobar si tiene mes a no girar
                   FecVenci1 = FecVenci
-                  If DBSet(RS!mesnogir, "N") <> 0 Then
-                        FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(RS!mesnogir, "N"), DBSet(0, "N"), RS!DiaPago1, RS!DiaPago2, RS!DiaPago3)
+                  If DBSet(Rs!mesnogir, "N") <> 0 Then
+                        FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(Rs!mesnogir, "N"), DBSet(0, "N"), Rs!DiaPago1, Rs!DiaPago2, Rs!DiaPago3)
                   End If
 
-                  CadValues2 = CadValues2 & ", " & CadValuesAux2 & i & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
+                  CadValues2 = CadValues2 & ", " & CadValuesAux2 & I & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
 
                   'IMPORTE Resto de Vendimientos
                   ImpVenci = Round(TotalFac / rsVenci!numerove, 2)
@@ -791,9 +796,18 @@ Dim i As Byte
                   
                   
                   'David. Para que ponga la cuenta bancaria (SI LA tiene)
-                  CadValues2 = CadValues2 & DBSet(mCCC_Entidad, "T", "S") & "," & DBSet(mCCC_Oficina, "T", "S") & ","
-                  CadValues2 = CadValues2 & DBSet(mCCC_CC, "T", "S") & "," & DBSet(mCCC_CTa, "T", "S") & "," & DBSet(mIBAN, "T", "S") & ","
-
+                  If vParamAplic.ContabilidadNueva Then
+                        If mCCC_Entidad = "" Then
+                            SQL = ""
+                        Else
+                            SQL = mIBAN & Right("0000" & mCCC_Entidad, 4) & Right("0000" & mCCC_Oficina, 4)
+                            SQL = SQL & mCCC_CC & Right(String(10, "0") & mCCC_CTa, 10)
+                        End If
+                        CadValues2 = CadValues2 & DBSet(SQL, "T", "S") & ","
+                  Else
+                        CadValues2 = CadValues2 & DBSet(mCCC_Entidad, "T", "S") & "," & DBSet(mCCC_Oficina, "T", "S") & ","
+                        CadValues2 = CadValues2 & DBSet(mCCC_CC, "T", "S") & "," & DBSet(mCCC_CTa, "T", "S") & "," & DBSet(mIBAN, "T", "S") & ","
+                  End If
                   SQL = "Factura num.: " & NumFactu & "-" & Format(FecFactu, "dd/mm/yyyy")
                   CadValues2 = CadValues2 & "'" & DevNombreSQL(SQL) & "',"
                   SQL = "Vto a fecha: " & Format(FecVenci1, "dd/mm/yyyy")
@@ -811,11 +825,11 @@ Dim i As Byte
                   End If
                   CadValues2 = CadValues2 & ")"
                   
-              Next i
+              Next I
             End If
         End If
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
     End If
     rsVenci.Close
     Set rsVenci = Nothing
@@ -857,7 +871,8 @@ Dim i As Byte
         'SQL = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1) "
         'David. Cuenta bancaria y descripcion textos
         If vParamAplic.ContabilidadNueva Then
-            SQL = "INSERT INTO pagos (codmacta, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,control,cuentaba,iban,text1csb,text2csb "
+            SQL = "INSERT INTO pagos (codmacta, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1," 'entidad,oficina,control,cuentaba,
+            SQL = SQL & "iban,text1csb,text2csb "
             SQL = SQL & ", nomprove , domprove, pobprove, cpprove, proprove, nifProve, codpais, numSerie)"
         Else
             SQL = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,iban,text1csb,text2csb )"
@@ -869,14 +884,14 @@ Dim i As Byte
         ConnConta.Execute SQL
     End If
 
-    B = True
+    b = True
     
 EInsertarTesoreria:
     If Err.Number <> 0 Then
-        B = False
+        b = False
         MenError = "Error al insertar en Tesoreria: " & Err.Description
     End If
-    InsertarEnTesoreria = B
+    InsertarEnTesoreria = b
 End Function
 
 'Si es LiquidacionProveedores entonces
@@ -887,7 +902,7 @@ End Function
 Public Function TraspasoAlbaranesAFactura(cadSQL As String, InsertarEnLaTesoreria As Boolean, MarcarAlbaranesComoContabilizados As Boolean, LiquidacionProveedores As Boolean) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Albaranes que vamos a Facturar
 'Desde Albaranes Genera las Facturas correspondientes
-Dim B As Boolean
+Dim b As Boolean
 Dim MenError As String
 Dim ImporteAuxiliarTesoreria As Currency
 
@@ -906,29 +921,29 @@ Dim ImporteAuxiliarTesoreria As Currency
     
     
     'Insertar la Factura
-    B = InsertarFactura(cadSQL, MenError)
+    b = InsertarFactura(cadSQL, MenError)
     
-    If B Then
+    If b Then
         'Insertar en Tesoreria
         
         If InsertarEnLaTesoreria Then
             
-            B = InsertarEnTesoreria(MenError)
+            b = InsertarEnTesoreria(MenError)
             
         End If
         
         
         If MarcarAlbaranesComoContabilizados Then
-            If B Then B = Me.MarcarContabilizada(MenError)
+            If b Then b = Me.MarcarContabilizada(MenError)
         End If
         
         'Eliminar los Albaranes y sus lineas
-        If B Then
-            B = EliminarAlbaranes(cadSQL, MenError)
+        If b Then
+            b = EliminarAlbaranes(cadSQL, MenError)
         End If
     End If
 
-     If B Then
+     If b Then
         conn.CommitTrans
         ConnConta.CommitTrans
         TraspasoAlbaranesAFactura = True
@@ -956,29 +971,29 @@ End Function
 
 Private Function InsertarFactura(cadSQL As String, cadError As String) As Boolean
 'Insertamos en las tablas de factura de proveedor: scafpc, scafpa, slifpc
-Dim B As Boolean
+Dim b As Boolean
     
     InsertarFactura = False
     
     
     'Cabecera Factura
     cadError = ""
-    B = InsertarCabeceraFactu(cadError)
-    If Not B Then
+    b = InsertarCabeceraFactu(cadError)
+    If Not b Then
 '        cadError = "Error al insertar cabecera de factura"
         Exit Function
     End If
     
     'Cabeceras Albaranes de la Factura
-    B = InsertarCabAlbaranesFactu(cadSQL, cadError)
-    If Not B Then
+    b = InsertarCabAlbaranesFactu(cadSQL, cadError)
+    If Not b Then
 '        cadError = "Error al insertar cabecera albaranes de factura"
         Exit Function
     End If
     
     'Insertar lineas de la factura
-    B = InsertarLineasFactu(cadSQL, cadError)
-    If Not B Then
+    b = InsertarLineasFactu(cadSQL, cadError)
+    If Not b Then
 '        cadError = "Error al insertar líneas de factura"
         Exit Function
     End If
@@ -1133,8 +1148,8 @@ Public Function CalcularDatosFactura2(cadWhere As String, NomTabla As String, No
 'cadWhere: cad para la where de la SQL que selecciona las lineas del albaran o la factura
 'nomTabla: nombre de la tabla de albaranes(scaalp) o de AlbaranesXFactura(scafpa)
 '           segun llamemos desde recepcion de facturas o desde Hco de Facturas
-Dim RS As ADODB.Recordset
-Dim i As Integer
+Dim Rs As ADODB.Recordset
+Dim I As Integer
 
 Dim SQL As String
 Dim cadAux As String
@@ -1166,34 +1181,34 @@ Dim CodigoDeIva As Integer
     SQL = SQL & " GROUP BY codigiva "
     SQL = SQL & " ORDER BY codigiva "
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     TotBruto = 0
-    i = 1
-    While Not RS.EOF
+    I = 1
+    While Not Rs.EOF
         'Aqui vamos acumulando la suma del importe bruto de las lineas
-        TotBruto = TotBruto + RS!bruto
-        ImpBImIVA = RS!bruto
+        TotBruto = TotBruto + Rs!bruto
+        ImpBImIVA = Rs!bruto
         
         'Aplicarle el dto ppago
         '---- Laura: 24/10/2006
-        Impaux = CalcularPorcentaje(RS!bruto, DtoPPago, 2)
+        Impaux = CalcularPorcentaje(Rs!bruto, DtoPPago, 2)
         ImpBImIVA = ImpBImIVA - Impaux '(bruto - DtoPP)
         
         'Aplicarle el dto grnal
         '---- Laura: 24/10/2006
-        Impaux = CalcularPorcentaje(RS!bruto, DtoGnral, 2)
+        Impaux = CalcularPorcentaje(Rs!bruto, DtoGnral, 2)
         ImpBImIVA = ImpBImIVA - Impaux '(bruto - Dtogn)
         
 
         
         
         If FechaDoc < vParamAplic.FechaCambioIva Then
-            cadAux = CStr(vParamAplic.DevuelveTipoIVA_OLD(False, RS!CodigIVA, True))
-            If cadAux = "" Then cadAux = RS!CodigIVA
+            cadAux = CStr(vParamAplic.DevuelveTipoIVA_OLD(False, Rs!CodigIVA, True))
+            If cadAux = "" Then cadAux = Rs!CodigIVA
         Else
-             cadAux = RS!CodigIVA
+             cadAux = Rs!CodigIVA
         End If
         CodigoDeIva = CInt(cadAux)
         cadAux = DevuelveDesdeBDNew(conConta, "tiposiva", "porceiva", "codigiva", CStr(CodigoDeIva), "N")
@@ -1205,7 +1220,7 @@ Dim CodigoDeIva As Integer
         TotImpIVA = TotImpIVA + ImpIva
         
         
-        Select Case i
+        Select Case I
             Case 1  'IVA 1
                 TipoIVA1 = CodigoDeIva
                 
@@ -1236,12 +1251,12 @@ Dim CodigoDeIva As Integer
                 'Importe total con IVA
                 ImpIVA3 = ImpIva
         End Select
-        i = i + 1
-        RS.MoveNext
+        I = I + 1
+        Rs.MoveNext
     Wend
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
     'TOTALES
     BrutoFac = TotBruto

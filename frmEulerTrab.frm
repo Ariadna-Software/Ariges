@@ -1690,12 +1690,12 @@ Dim C As String
                     C = "Albaran: " & vbCrLf & C
                 Else
                     'SELECT concat(codclien,'|',nomclien,'|') from scafac,scafac1 where
-                    C = "scafac.codtipom=scafac1.codtipom AND scafac.numfactu=Scafac1.numfactu and scafac.fecfactu=scafac1.fecfactu"
-                    C = "codtipoa='" & Cad & "' AND numalbar"
+                    C = "scafac.codtipom=scafac1.codtipom AND scafac.numfactu=Scafac1.numfactu and scafac.fecfactu=scafac1.fecfactu AND "
+                    C = C & "codtipoa='" & Cad & "' AND numalbar"
                     C = DevuelveDesdeBD(conAri, "concat(codclien,'|',nomclien,'|',scafac.numfactu,'|',scafac.fecfactu,'|',scafac.codtipom,'|')", "scafac,scafac1", C, txtAux(6).Text)
                 
                     If C <> "" Then
-                        C = RecuperaValor(C, 5) & RecuperaValor(C, 3) & " de " & RecuperaValor(C, 4) & vbCrLf & RecuperaValor(C, 1) & " - " & RecuperaValor(C, 2)
+                        C = RecuperaValor(C, 5) & Format(RecuperaValor(C, 3), "00000") & " de " & RecuperaValor(C, 4) & vbCrLf & RecuperaValor(C, 1) & " - " & RecuperaValor(C, 2)
                         C = "Factura: " & C
                     Else
                         C = "NO encontrado"

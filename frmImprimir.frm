@@ -569,8 +569,7 @@ Dim Cad As String
                         Titulo = "Etiquetas de mantenimiento"
                         'NombreRPT = "rManClienEtiq.rpt"
                         
-                        
-                        
+
                     
                     ' ---- [06/11/2009] [LAURA] : corregir informe de frecuencias
                     '      estos valores se pasan ya al llamar al form desde mto frecuencias

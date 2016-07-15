@@ -918,33 +918,20 @@ Dim SQL As String
 Dim I As Integer
 Dim C As String
 Dim Errores As String
+
+Dim VerDetalle As Boolean
+
     On Error GoTo ECCoste
 
     ComprobarCCoste = 0
     Set miRsAux = New ADODB.Recordset
     
     
-    'anterior a la introducion de modoanalitica
-    '
-    'If Clientes Then
-    '    SQL = "select codccost from scafac , scafac1, straba "
-    '    SQL = SQL & " WHERE scafac.codtipom=scafac1.codtipom and scafac.numfactu=scafac1.numfactu and"
-    '    SQL = SQL & " scafac.fecfactu=scafac1.fecfactu  and scafac1.codtraba=straba.codtraba"
-    '
-    'Else
-    '    'PROVEEDORES
-    '    SQL = "select codccost from scafpc ,scafpa, straba WHERE"
-    '    SQL = SQL & " scafpc.codProve = scafpa.codProve And scafpc.NumFactu = scafpa.NumFactu And"
-    '    SQL = SQL & " scafpc.FecFactu = scafpa.FecFactu AND codtrab2=straba.codtraba"
-    '
-    '
-    'End If
-    
     
     'AHORA
+    VerDetalle = False
     If Clientes Then
     
-        
         SQL = "select codccost from slifac where (codtipom,numfactu,fecfactu) "
         SQL = SQL & " in ( select codtipom,numfactu,fecfactu from scafac "
         If cadSQL <> "" Then SQL = SQL & " WHERE " & cadSQL
@@ -954,12 +941,9 @@ Dim Errores As String
     
     
     
-    '    select distinct(slifac.numfactu) from slifac where codtipom='FTI' and codccost is null AND (numfactu,fecfactu,codtipom) in (
-' select sfactik.numfactu,sfactik.fecfactu,'FTI' from sfactik,scafac where sfactik.numfacftg=scafac.numfactu and scafac.fecfactu=sfactik.fecfacftg)
-    
-    
-    
     Else
+    
+    
         SQL = "select codccost from slifpc where (codprove,numfactu,fecfactu) in ("
         SQL = SQL & "select codprove,numfactu,fecfactu from scafpc "
         If cadSQL <> "" Then SQL = SQL & " WHERE " & cadSQL
@@ -976,6 +960,7 @@ Dim Errores As String
         If IsNull(miRsAux.Fields(0)) Then
             'MAL MAL. NO puede ser NULO
             Errores = Errores & "  ***  Lineas sin centro de coste asginado" & vbCrLf & vbCrLf
+            If Clientes Then VerDetalle = True
         Else
             SQL = SQL & DevNombreSQL(miRsAux.Fields(0)) & "|"
             
@@ -984,10 +969,34 @@ Dim Errores As String
     Wend
     miRsAux.Close
     
-    If SQL <> "" Then
-        
     
+    
+    If VerDetalle Then
+        
+        Errores = "select codtipom,numfactu,fecfactu,nomartic,cantidad from slifac where (codtipom,numfactu,fecfactu) "
+        Errores = Errores & " in ( select codtipom,numfactu,fecfactu from scafac "
+        
+        If cadSQL <> "" Then Errores = Errores & " WHERE " & cadSQL
+        Errores = Errores & ") AND codccost IS NULL"
+        miRsAux.Open Errores, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Errores = ""
+        
+        While Not miRsAux.EOF
             
+            Errores = Errores & miRsAux!codtipom & Format(miRsAux!NumFactu, "000000") & " " & Format(miRsAux!FecFactu, "dd/mm/yyyy") & vbCrLf
+            Errores = Errores & "        .- " & miRsAux!NomArtic & "(" & miRsAux!cantidad & ")" & vbCrLf
+                 
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+        
+        Errores = "  ***  Lineas sin centro de coste asginado" & vbCrLf & Errores
+        
+    End If
+    
+    
+    'Comprobaremos los centros de coste
+    If SQL <> "" Then
             While SQL <> ""
                 I = InStr(1, SQL, "|")
                 If I = 0 Then
@@ -1004,23 +1013,37 @@ Dim Errores As String
                     If C = "" Then
                         'ERROR EN CC. NO EXISTE
                         Errores = Errores & " - " & Mid(SQL, 1, I - 1) & "       no existe  " & vbCrLf
+                        
                     End If
                     SQL = Mid(SQL, I + 1)
                 End If
             Wend
     
             If Errores <> "" Then
-                MsgBox Errores, vbExclamation
-                
+            
+                    If VerDetalle Then
+                        frmMensajes.vCampos = Errores
+                        frmMensajes.OpcionMensaje = 24
+                        frmMensajes.Show vbModal
+                    Else
+                    
+                        MsgBox Errores, vbExclamation
+                    End If
             Else
                 ComprobarCCoste = 2
             End If
     Else
             ComprobarCCoste = 0
             If Errores <> "" Then
-                Errores = "Errores en CC. No deberia continuar. " & vbCrLf & Errores & "¿Continuar?"
-                If MsgBox(Errores, vbQuestion + vbYesNo) = vbYes Then ComprobarCCoste = 1
-                
+            
+                    If VerDetalle Then
+                        frmMensajes.vCampos = Errores
+                        frmMensajes.OpcionMensaje = 24
+                        frmMensajes.Show vbModal
+                    Else
+                        Errores = "Errores en CC. No deberia continuar. " & vbCrLf & Errores & "¿Continuar?"
+                        If MsgBox(Errores, vbQuestion + vbYesNo) = vbYes Then ComprobarCCoste = 1
+                    End If
 
             End If
     End If
@@ -2022,12 +2045,12 @@ Dim K As Byte
         'Vemos que tipo de IVA es en el vector de importes
         NumeroIVA = 127
         For K = 0 To 2
-            If Rs!CodigIVA = vTipoIva(K) Then
+            If Rs!codigiva = vTipoIva(K) Then
                 NumeroIVA = K
                 Exit For
             End If
         Next
-        If NumeroIVA > 100 Then Err.Raise 513, "Error obteniendo IVA: " & Rs!CodigIVA
+        If NumeroIVA > 100 Then Err.Raise 513, "Error obteniendo IVA: " & Rs!codigiva
         
         'Importe
         '----------------------------------------------------------------------------
@@ -2048,7 +2071,7 @@ Dim K As Byte
             Else
                 'Si que hay mas lineas.
                 'Son del mismo tipo de IVA
-                If Rs!CodigIVA <> vTipoIva(0) Then
+                If Rs!codigiva <> vTipoIva(0) Then
                     'NO es el mismo tipo de IVA
                     'Hay que ajustar
                     HayQueAjustar = True

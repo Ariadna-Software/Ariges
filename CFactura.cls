@@ -30,6 +30,8 @@ Private mPobClien As String 'poblacion
 Private mProClien As String 'provincia
 Private mNIFClien As String 'NIF proveedor
 Private mTelclien As String 'telefono
+Private mPais As String
+
 
 Private mCoddirec As String 'codigo direc./dpto
 Private mNomdirec As String  'nombre direc./dpto
@@ -889,6 +891,8 @@ Dim NuevaNorma19 As Boolean
 Dim FormapagoAportacion  As Integer   'De momento NO la lee de parametros
 Dim AuxIBAN As String
 
+Dim TextoAuxiliar As String
+
     On Error GoTo EInsertarTesoreria
 
     Set rsVenci = New ADODB.Recordset
@@ -1111,7 +1115,10 @@ Dim AuxIBAN As String
     'nomclien,domclien,pobclien, cpclien,proclien
     CadenaDatosFiscales = DBSet(mNomClien, "T") & "," & DBSet(mDomClien, "T") & "," & DBSet(mPobClien, "T")
     CadenaDatosFiscales = CadenaDatosFiscales & "," & DBSet(mCodpobla, "T") & "," & DBSet(mProClien, "T")
-    If vParamAplic.ContabilidadNueva Then CadenaDatosFiscales = DBSet(mNIFClien, "T") & "," & CadenaDatosFiscales
+    If vParamAplic.ContabilidadNueva Then
+        J = vUsu.codigo Mod 1000
+        CadenaDatosFiscales = DBSet(mNIFClien, "T") & "," & J & "," & DBSet(mPais, "T") & "," & CadenaDatosFiscales
+    End If
     
     ImporteDeLaFactura = TotalFac
     Knumerovenci = 1
@@ -1246,8 +1253,10 @@ Dim AuxIBAN As String
                 End If
                 
                 CadValues = CadValues & DBSet(ImpVenci, "N") & ")"
-                CadValues2 = CadValues2 & DBSet(ImpVenci2, "N") & ", '" & CuentaPrev & "', " & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", "
-                CadValues2 = CadValues2 & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", " & DBSet(AuxIBAN, "T", "S") & ", "
+                CadValues2 = CadValues2 & DBSet(ImpVenci2, "N") & ", '" & CuentaPrev & "', "
+                
+                If Not vParamAplic.ContabilidadNueva Then CadValues2 = CadValues2 & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", "
+                CadValues2 = CadValues2 & DBSet(AuxIBAN, "T", "S") & ", "
                 CadValues2 = CadValues2 & textcsb33 & ", " & DBSet(Agente, "N")
                 
                 'departamento y transfer
@@ -1283,7 +1292,11 @@ Dim AuxIBAN As String
                     ImpVenci = Round2(TotalFactura3 / rsVenci!numerove, 2)
                     ImpVenci2 = Round2((TotalFactura3 - ImpCheque) / rsVenci!numerove, 2)
                     CadValues = CadValues & DBSet(ImpVenci, "N") & ")"
-                    CadValues2 = CadValues2 & DBSet(ImpVenci2, "N") & ", " & DBSet(CuentaPrev, "T") & ", " & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", " & DBSet(IBAN, "T", "S") & ", " & textcsb33 & ", " & DBSet(Agente, "N") & ", "
+                    CadValues2 = CadValues2 & DBSet(ImpVenci2, "N") & ", " & DBSet(CuentaPrev, "T") & ", "
+                    If Not vParamAplic.ContabilidadNueva Then
+                        CadValues2 = CadValues2 & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", "
+                    End If
+                    CadValues2 = CadValues2 & DBSet(AuxIBAN, "T", "S") & ", " & textcsb33 & ", " & DBSet(Agente, "N") & ", "
                     CadValues2 = CadValues2 & DBSet(Me.DirDpto, "N", "S") & ",NULL"
                     '1 Julio 2009
                     ' Datos fiscales en scobro nomclien , domclien, pobclien, cpclien, proclien
@@ -1299,10 +1312,11 @@ Dim AuxIBAN As String
                     CadValues2 = CadValues2 & ", " & CadValuesAuxConta & Knumerovenci & "," & Codmacta & ", " & vParamAplic.ForPagoChequeRegalo & ", "
                     
                     'FECHA VTO
-                    CadValuesAuxConta = "primerve"
-                    TipForPago = DevuelveDesdeBDNew(conAri, "sforpa", "tipforpa", "codforpa", vParamAplic.ForPagoChequeRegalo, "N", CadValuesAuxConta)
+
+                    TextoAuxiliar = "primerve"
+                    TipForPago = DevuelveDesdeBDNew(conAri, "sforpa", "tipforpa", "codforpa", vParamAplic.ForPagoChequeRegalo, "N", TextoAuxiliar)
                     FecVenci = CDate(FecFactu)
-                    FecVenci = FecVenci + CByte(CadValuesAuxConta)
+                    FecVenci = FecVenci + CInt(TextoAuxiliar)
                     'comprobar si tiene dias de pago y obtener la fecha del vencimiento correcta
                     If TipForPago <> 0 Then
             '            FecVenci = ComprobarFechaVenci(FecVenci, DBLet(RS!DiaPago1, "N"), DBLet(RS!DiaPago2, "N"), DBLet(RS!DiaPago3, "N"))
@@ -1312,7 +1326,11 @@ Dim AuxIBAN As String
                     End If
                     
                     CadValues2 = CadValues2 & DBSet(FecVenci, "F") & ", "
-                    CadValues2 = CadValues2 & DBSet(ImpCheque, "N") & ", '" & CuentaPrev & "', " & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", " & DBSet(IBAN, "T", "S") & ", " & textcsb33 & ", " & DBSet(Agente, "N")
+                    CadValues2 = CadValues2 & DBSet(ImpCheque, "N") & ", '" & CuentaPrev & "', "
+                    If Not vParamAplic.ContabilidadNueva Then
+                        CadValues2 = CadValues2 & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", "
+                    End If
+                    CadValues2 = CadValues2 & DBSet(AuxIBAN, "T", "S") & ", " & textcsb33 & ", " & DBSet(Agente, "N")
                     'departamento
                     CadValues2 = CadValues2 & "," & DBSet(Me.DirDpto, "N", "S") & ",NULL)"
                 End If
@@ -1328,47 +1346,47 @@ Dim AuxIBAN As String
                         
                    'Montamos EL SQL para el cobro de la aportacion al termina
                     'ForPago
+                    FecVenci = CDate(FecFactu)
                     Knumerovenci = Knumerovenci + 1
                     CadValues2 = CadValues2 & ", " & CadValuesAuxConta & Knumerovenci & ",'" & vParamAplic.ctaAportacion & "', "
                     
                     FormapagoAportacion = -1
                     
                     'Vemos primero Efectivos con texto efectivo o contador
-                    CadValuesAuxConta = "(nomforpa like '%efec%' or nomforpa like '%conta%') and tipforpa"
-                    CadValuesAuxConta = DevuelveDesdeBDNew(conAri, "sforpa", "codforpa", CadValuesAuxConta, "0", "N", CadValuesAuxConta)
-                    If CadValuesAuxConta <> "" Then
+                    TextoAuxiliar = "(nomforpa like '%efec%' or nomforpa like '%conta%') and tipforpa"
+                    TextoAuxiliar = DevuelveDesdeBDNew(conAri, "sforpa", "codforpa", TextoAuxiliar, "0", "N", TextoAuxiliar)
+                    
+                    'CadValuesAuxConta = "(nomforpa like '%efec%' or nomforpa like '%conta%') and tipforpa"
+                    'CadValuesAuxConta = DevuelveDesdeBDNew(conAri, "sforpa", "codforpa", CadValuesAuxConta, "0", "N", CadValuesAuxConta)
+                    
+                    
+                    If TextoAuxiliar <> "" Then
                         'OK ya tenemos la forma de pago
                         TipForPago = 0
-                        FormapagoAportacion = CadValuesAuxConta
-                        CadValuesAuxConta = 0
+                        FormapagoAportacion = TextoAuxiliar
                     Else
                         'Provamos de otro modo
-                        CadValuesAuxConta = "primerve"
+                        TextoAuxiliar = "primerve"
                         'TipForPago = DevuelveDesdeBDNew(conAri, "sforpa", "tipforpa", "codforpa", ForPago, "N", CadValuesAuxConta)
-                        TipForPago = DevuelveDesdeBDNew(conAri, "sforpa", "tipforpa", "codforpa", ForPago, "N", CadValuesAuxConta)
+                        TipForPago = DevuelveDesdeBDNew(conAri, "sforpa", "tipforpa", "codforpa", ForPago, "N", TextoAuxiliar)
                         FormapagoAportacion = ForPago
-                    End If
-                    FecVenci = CDate(FecFactu)
-                    FecVenci = FecVenci + CByte(CadValuesAuxConta)
-                    'comprobar si tiene dias de pago y obtener la fecha del vencimiento correcta
-                    If TipForPago <> 0 Then
-            '            FecVenci = ComprobarFechaVenci(FecVenci, DBLet(RS!DiaPago1, "N"), DBLet(RS!DiaPago2, "N"), DBLet(RS!DiaPago3, "N"))
-                       ' MsgBox "FALTA config con forma de pago aportacion no en EFECTIVO. ", vbInformation
-                       ' FecVenci = MecVenci
-                        
-                    Else
-                        FecVenci = ComprobarFechaVenci(FecVenci, 0, 0, 0)
+                        FecVenci = FecVenci + CInt(TextoAuxiliar)
                     End If
                     
+
                     
                     CadValues2 = CadValues2 & FormapagoAportacion & ", "
                     
                     CadValues2 = CadValues2 & DBSet(FecVenci, "F") & ", "
-                    CadValues2 = CadValues2 & DBSet(Aportacion, "N") & ", '" & CuentaPrev & "', " & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", " & DBSet(IBAN, "T", "S") & ", " & textcsb33 & ", " & DBSet(Agente, "N")
+                    CadValues2 = CadValues2 & DBSet(Aportacion, "N") & ", '" & CuentaPrev & "', "
+                    If Not vParamAplic.ContabilidadNueva Then
+                        CadValues2 = CadValues2 & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", "
+                    End If
+                    CadValues2 = CadValues2 & DBSet(AuxIBAN, "T", "S") & ", " & textcsb33 & ", " & DBSet(Agente, "N")
                     'departamento
                     CadValues2 = CadValues2 & "," & DBSet(Me.DirDpto, "N", "S") & ",NULL"
-                    'Modificacion que metia los datos fiscales
-                    CadValues2 = CadValues2 & ",NULL,NULL,NULL,NULL,NULL)"
+                    
+                    CadValues2 = CadValues2 & "," & CadenaDatosFiscales & ")"
                 End If
                 
             End If
@@ -1385,7 +1403,11 @@ Dim AuxIBAN As String
                     ImpVenci = ImporteAdelantado
                     ImpVenci2 = ImporteAdelantado
                     CadValues = CadValues & DBSet(ImpVenci, "N") & ")"
-                    CadValues2 = CadValues2 & DBSet(ImpVenci2, "N") & ", " & DBSet(CuentaPrev, "T") & ", " & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", " & DBSet(IBAN, "T", "S") & ", " & textcsb33 & ", " & DBSet(Agente, "N") & ", "
+                    CadValues2 = CadValues2 & DBSet(ImpVenci2, "N") & ", " & DBSet(CuentaPrev, "T") & ", "
+                    If Not vParamAplic.ContabilidadNueva Then
+                        CadValues2 = CadValues2 & DBSet(Banco, "N") & ", " & DBSet(Sucursal, "N") & ", " & DBSet(DigControl, "T") & ", " & DBSet(CuentaBan, "T") & ", "
+                    End If
+                    CadValues2 = CadValues2 & DBSet(AuxIBAN, "T", "S") & ", " & textcsb33 & ", " & DBSet(Agente, "N") & ", "
                     CadValues2 = CadValues2 & DBSet(Me.DirDpto, "N", "S") & ",NULL"
                     '1 Julio 2009
                     ' Datos fiscales en scobro nomclien , domclien, pobclien, cpclien, proclien
@@ -1437,9 +1459,9 @@ Dim AuxIBAN As String
                     'Insertamos en la tabla scobro de la CONTA
                     If vParamAplic.ContabilidadNueva Then
                         SQL = "INSERT INTO cobros (numserie, numfactu, fecfactu,text41csb, "
-                        SQL = SQL & "numorden , Codmacta, codforpa, FecVenci, ImpVenci, ctabanc1, entidad, oficina, control"
-                        SQL = SQL & ", cuentaba,iban,text33csb,agente,departamento,transfer "
-                        SQL = SQL & ", nifclien"  'Junio 16
+                        SQL = SQL & "numorden , Codmacta, codforpa, FecVenci, ImpVenci, ctabanc1, "
+                        SQL = SQL & "iban,text33csb,agente,departamento,transfer "
+                        SQL = SQL & ", nifclien,codusu,codpais"  'Junio 16
                     Else
                         SQL = "INSERT INTO scobro (numserie, codfaccl, fecfaccl,text41csb ,text42csb, text43csb,"
                         SQL = SQL & "text51csb,text52csb,text53csb,text61csb,text62csb,text63csb,"
@@ -2582,6 +2604,7 @@ Dim Cad As String, cad2 As String
                 DigControl = vClien.DigControl
                 CuentaBan = vClien.CuentaBan
                 IBAN = vClien.IBAN
+                mPais = vClien.Pais
             Else
                 Banco = ValorNulo
                 Sucursal = ValorNulo
@@ -3493,7 +3516,7 @@ Dim numlinea As Integer
             'Comprobar para los codartic de las lineas de albaran que vamos
             'a factura, para cuales hay bonificacion y la cantidad de la linea
             'cumple la cantidad para que se le aplica la bonificacion
-            SQL = "SELECT slialb.codartic, sum(slialb.cantidad) as cantidad "
+            SQL = "SELECT " & NomTablaLin & ".codartic, sum(" & NomTablaLin & ".cantidad) as cantidad "
             SQL = SQL & "FROM " & NomTablaLin
             SQL = SQL & " INNER JOIN sbonif ON " & NomTablaLin & ".codartic=sbonif.codartic "
             SQL = SQL & " WHERE " & Replace(cadWhere, "scaalb", NomTablaLin)

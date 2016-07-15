@@ -698,8 +698,9 @@ Begin VB.Form frmFacEntPedSail
          Left            =   11400
          Locked          =   -1  'True
          MaxLength       =   60
+         MultiLine       =   -1  'True
          TabIndex        =   51
-         Text            =   "Text2 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqa"
+         Text            =   "frmFacEntPedSail.frx":037A
          Top             =   3000
          Width           =   4245
       End
@@ -850,7 +851,7 @@ Begin VB.Form frmFacEntPedSail
             Height          =   240
             Index           =   7
             Left            =   1080
-            Picture         =   "frmFacEntPedSail.frx":037A
+            Picture         =   "frmFacEntPedSail.frx":03B7
             ToolTipText     =   "Buscar trabajador"
             Top             =   570
             Width           =   240
@@ -868,7 +869,7 @@ Begin VB.Form frmFacEntPedSail
             Height          =   240
             Index           =   8
             Left            =   1080
-            Picture         =   "frmFacEntPedSail.frx":047C
+            Picture         =   "frmFacEntPedSail.frx":04B9
             ToolTipText     =   "Buscar incidencia"
             Top             =   940
             Width           =   240
@@ -1626,7 +1627,7 @@ Begin VB.Form frmFacEntPedSail
             Height          =   240
             Index           =   9
             Left            =   7005
-            Picture         =   "frmFacEntPedSail.frx":057E
+            Picture         =   "frmFacEntPedSail.frx":05BB
             ToolTipText     =   "Buscar forma de pago"
             Top             =   480
             Width           =   240
@@ -1635,7 +1636,7 @@ Begin VB.Form frmFacEntPedSail
             Height          =   240
             Index           =   4
             Left            =   7005
-            Picture         =   "frmFacEntPedSail.frx":0680
+            Picture         =   "frmFacEntPedSail.frx":06BD
             ToolTipText     =   "Buscar forma de pago"
             Top             =   1260
             Width           =   240
@@ -1663,7 +1664,7 @@ Begin VB.Form frmFacEntPedSail
             Height          =   240
             Index           =   6
             Left            =   900
-            Picture         =   "frmFacEntPedSail.frx":0782
+            Picture         =   "frmFacEntPedSail.frx":07BF
             ToolTipText     =   "Buscar población"
             Top             =   880
             Width           =   240
@@ -1682,7 +1683,7 @@ Begin VB.Form frmFacEntPedSail
             Height          =   240
             Index           =   2
             Left            =   7005
-            Picture         =   "frmFacEntPedSail.frx":0884
+            Picture         =   "frmFacEntPedSail.frx":08C1
             ToolTipText     =   "Buscar direc./dpto"
             Top             =   180
             Width           =   240
@@ -1727,7 +1728,7 @@ Begin VB.Form frmFacEntPedSail
             Height          =   240
             Index           =   1
             Left            =   900
-            Picture         =   "frmFacEntPedSail.frx":0986
+            Picture         =   "frmFacEntPedSail.frx":09C3
             ToolTipText     =   "Buscar cliente varios"
             Top             =   180
             Visible         =   0   'False
@@ -1755,7 +1756,7 @@ Begin VB.Form frmFacEntPedSail
             Height          =   240
             Index           =   5
             Left            =   7005
-            Picture         =   "frmFacEntPedSail.frx":0A88
+            Picture         =   "frmFacEntPedSail.frx":0AC5
             ToolTipText     =   "Buscar agente"
             Top             =   885
             Width           =   240
@@ -2007,7 +2008,7 @@ Begin VB.Form frmFacEntPedSail
          Width           =   8805
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmFacEntPedSail.frx":0B8A
+         Bindings        =   "frmFacEntPedSail.frx":0BC7
          Height          =   3000
          Left            =   195
          TabIndex        =   59
@@ -2106,7 +2107,7 @@ Begin VB.Form frmFacEntPedSail
          Height          =   240
          Index           =   11
          Left            =   12360
-         Picture         =   "frmFacEntPedSail.frx":0B9F
+         Picture         =   "frmFacEntPedSail.frx":0BDC
          ToolTipText     =   "Buscar población"
          Top             =   5160
          Visible         =   0   'False
@@ -2116,7 +2117,7 @@ Begin VB.Form frmFacEntPedSail
          Height          =   240
          Index           =   12
          Left            =   12000
-         Picture         =   "frmFacEntPedSail.frx":0CA1
+         Picture         =   "frmFacEntPedSail.frx":0CDE
          ToolTipText     =   "Buscar población"
          Top             =   3840
          Visible         =   0   'False
@@ -2126,7 +2127,7 @@ Begin VB.Form frmFacEntPedSail
          Height          =   240
          Index           =   13
          Left            =   12120
-         Picture         =   "frmFacEntPedSail.frx":0DA3
+         Picture         =   "frmFacEntPedSail.frx":0DE0
          ToolTipText     =   "Buscar población"
          Top             =   4440
          Visible         =   0   'False
@@ -4572,6 +4573,16 @@ EDatosOkLinea:
 End Function
 
 
+Private Sub Text2_GotFocus(Index As Integer)
+    If Index = 16 Then
+        'Campo observaciones. NO, repito NO, se selecciona todo
+        If Text2(Index).Text <> "" Then
+            Text2(Index).Text = Text2(Index).Text & " "
+            Text2(Index).SelStart = Len(Text2(Index).Text)
+        End If
+    End If
+End Sub
+
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Ampliacion linea y Flecha hacia abajo
        ' PonerFocoBtn Me.cmdAceptar
@@ -5213,7 +5224,16 @@ Dim cadkey As Integer
 
     If Modo >= 5 Then cadkey = ObtenerCadKey(kCampo, Index)
     kCampo = Index
-    ConseguirFocoLin txtAux(Index), cadkey
+    
+    If Index = 16 Then
+        'Campo observaciones. NO, repito NO, se selecciona todo
+        If txtAux(Index).Text <> "" Then
+            txtAux(Index).Text = txtAux(Index).Text & " "
+            txtAux(Index).SelStart = Len(txtAux(Index).Text)
+        End If
+    Else
+        ConseguirFocoLin txtAux(Index), cadkey
+    End If
     LabelAyudatxtAux Index, lblF
     
 End Sub
@@ -5402,6 +5422,13 @@ Dim codCC As String
                 Else
                     PonerFoco txtAux(0)
                 End If
+                
+                
+                If Text2(16).Text = "" Then _
+                    Text2(16).Text = DevuelveDesdeBD(conAri, "txtauxdocumento", "sartic", "codartic", txtAux(1).Text, "T")
+
+                
+                
             Else
                 PonerFoco txtAux(Index)
             End If

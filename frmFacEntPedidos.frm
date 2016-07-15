@@ -7356,6 +7356,43 @@ Dim Rs As ADODB.Recordset
     
     Set vCStock = Nothing
     Rs.Close
+    
+    
+    
+    
+    
+    'En herbelca, para castellon y gandia. Si hay cantidad de un articulo en negativo NO deja pasar
+    If b And vParamAplic.NumeroInstalacion = 2 And vUsu.Nivel > 0 Then
+        'Si castellon -gandia
+        If vUsu.AlmacenPorDefecto = 4 Or vUsu.AlmacenPorDefecto = 2 Then
+            
+            SQL = "SELECT sliped.codartic,sliped.nomartic, ####"
+            SQL = SQL & " from sliped,sartic where sartic.codartic=sliped.codartic AND cantidad<0 and rotacion=0"
+            If AlbCompleto Then
+                SQL = Replace(SQL, "####", "cantidad")
+            Else
+                SQL = Replace(SQL, "####", "servidas")
+            End If
+            SQL = SQL & " AND " & Replace(ObtenerWhereCP, NombreTabla, NomTablaLineas)
+            
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            SQL = ""
+            While Not Rs.EOF
+                SQL = SQL & "   -" & Rs!NomArtic & vbCrLf
+                Rs.MoveNext
+            Wend
+            Rs.Close
+            
+            If SQL <> "" Then
+                SQL = "Cantidad negativa en articulos de NO rotacion." & vbCrLf & SQL
+                MsgBox SQL, vbExclamation
+                b = False
+            End If
+        End If
+    
+    
+    End If
+    
     Set Rs = Nothing
     SePuedeServirPedido = b
     

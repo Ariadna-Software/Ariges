@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacTPVParamT 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Parámetros terminales TPV"
@@ -19,6 +19,18 @@ Begin VB.Form frmFacTPVParamT
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Desc. terminal|T|S|||spatpvt|destermi||N|"
+   Begin VB.TextBox txtAux 
+      BorderStyle     =   0  'None
+      Height          =   290
+      Index           =   7
+      Left            =   7200
+      TabIndex        =   5
+      Tag             =   "ImpALV|T|S|||spatpvt|ImpresoraALV|||"
+      Text            =   "Imp ALVa"
+      Top             =   3480
+      Visible         =   0   'False
+      Width           =   555
+   End
    Begin VB.TextBox txtAux 
       BorderStyle     =   0  'None
       Height          =   290
@@ -39,7 +51,7 @@ Begin VB.Form frmFacTPVParamT
       Left            =   480
       Locked          =   -1  'True
       MaxLength       =   50
-      TabIndex        =   21
+      TabIndex        =   22
       Tag             =   "Impresora|T|S|||spatpvt|nomimpre||N|"
       Text            =   "impreso"
       Top             =   4440
@@ -105,14 +117,14 @@ Begin VB.Form frmFacTPVParamT
       Caption         =   " Visor "
       Height          =   1695
       Left            =   5400
-      TabIndex        =   16
+      TabIndex        =   17
       Top             =   4080
       Width           =   4215
       Begin VB.CheckBox chkAbreCajon 
          Caption         =   "Abre cajón"
          Height          =   255
          Left            =   1320
-         TabIndex        =   22
+         TabIndex        =   23
          Tag             =   "Cajon|N|S|||spatpvt|abrecajon|||"
          Top             =   360
          Width           =   1215
@@ -121,7 +133,7 @@ Begin VB.Form frmFacTPVParamT
          Height          =   315
          Left            =   120
          Style           =   2  'Dropdown List
-         TabIndex        =   6
+         TabIndex        =   7
          Tag             =   "Nº Puerto|N|S|||spatpvt|numpuerto|||"
          Top             =   1080
          Width           =   1575
@@ -130,7 +142,7 @@ Begin VB.Form frmFacTPVParamT
          Caption         =   "Utiliza visor "
          Height          =   255
          Left            =   120
-         TabIndex        =   5
+         TabIndex        =   6
          Tag             =   "Hay visor|N|S|||spatpvt|hayvisor|||"
          Top             =   360
          Width           =   1215
@@ -139,7 +151,7 @@ Begin VB.Form frmFacTPVParamT
          Height          =   315
          Left            =   2280
          Style           =   2  'Dropdown List
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   1080
          Width           =   1695
       End
@@ -150,7 +162,7 @@ Begin VB.Form frmFacTPVParamT
          Left            =   2760
          Locked          =   -1  'True
          MaxLength       =   35
-         TabIndex        =   17
+         TabIndex        =   18
          Tag             =   "Velocidad Puerto|N|S|||spatpvt|velocpue|||"
          Text            =   "Text1"
          Top             =   1080
@@ -161,7 +173,7 @@ Begin VB.Form frmFacTPVParamT
          Height          =   255
          Index           =   1
          Left            =   120
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   840
          Width           =   1095
       End
@@ -170,7 +182,7 @@ Begin VB.Form frmFacTPVParamT
          Height          =   255
          Index           =   5
          Left            =   2280
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   840
          Width           =   1575
       End
@@ -179,14 +191,14 @@ Begin VB.Form frmFacTPVParamT
       Caption         =   " Impresora "
       Height          =   1695
       Left            =   240
-      TabIndex        =   15
+      TabIndex        =   16
       Top             =   4080
       Width           =   5055
       Begin VB.CommandButton cmdConfigImpre 
          Caption         =   "Sel. &impresora..."
          Height          =   375
          Left            =   240
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   1080
          Width           =   1515
       End
@@ -201,7 +213,7 @@ Begin VB.Form frmFacTPVParamT
    Begin VB.Frame Frame1 
       Height          =   540
       Left            =   360
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   5880
       Width           =   3000
       Begin VB.Label lblIndicador 
@@ -209,7 +221,7 @@ Begin VB.Form frmFacTPVParamT
          Caption         =   "Label2"
          Height          =   255
          Left            =   360
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   210
          Width           =   2280
       End
@@ -219,7 +231,7 @@ Begin VB.Form frmFacTPVParamT
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   8595
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   6045
       Width           =   1035
    End
@@ -227,7 +239,7 @@ Begin VB.Form frmFacTPVParamT
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   7320
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   6045
       Visible         =   0   'False
       Width           =   1035
@@ -236,7 +248,7 @@ Begin VB.Form frmFacTPVParamT
       Caption         =   "&Salir"
       Height          =   375
       Left            =   8595
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   6045
       Width           =   1035
    End
@@ -244,7 +256,7 @@ Begin VB.Form frmFacTPVParamT
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   12
+      TabIndex        =   13
       Top             =   0
       Width           =   10050
       _ExtentX        =   17727
@@ -330,11 +342,11 @@ Begin VB.Form frmFacTPVParamT
       Bindings        =   "frmFacTPVParamT.frx":000C
       Height          =   3165
       Left            =   240
-      TabIndex        =   20
+      TabIndex        =   21
       TabStop         =   0   'False
       Top             =   600
-      Width           =   8175
-      _ExtentX        =   14420
+      Width           =   9615
+      _ExtentX        =   16960
       _ExtentY        =   5583
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -710,6 +722,7 @@ Dim tots As String
     tots = "S|txtAux(0)|T|NºTerm.|800|;S|txtAux(1)|T|Desc. terminal|1700|;S|txtAux(2)|T|Nombre PC|1600|;"
     tots = tots & "S|txtAux(3)|T|contador|1200|;N||||0|;N||||0|;N||||0|;N||||0|;"
     tots = tots & "N||||0|;N||||0|;S|txtAux(6)|T|Puerto COM|1200|;"  'abrecajon y secuencia cajon y puerto com
+    tots = tots & "S|txtAux(7)|T|Impresora ALB.|2200|;"  'abrecajon y secuencia cajon y puerto com
     arregla tots, DataGrid1, Me
 
     'dtos alineados a la dcha
@@ -828,7 +841,7 @@ Dim b As Boolean
         DeseleccionaGrid Me.DataGrid1
         b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
-        For jj = 0 To 6
+        For jj = 0 To 7
             If jj < 4 Or jj > 5 Then
                 txtAux(jj).Height = DataGrid1.RowHeight
                 txtAux(jj).Top = alto
@@ -965,8 +978,8 @@ Dim anc As Single
     txtAux(2).Text = DBLet(DataGrid1.Columns(2).Value, "T")
     txtAux(3).Text = DBLet(DataGrid1.Columns(3).Value, "N")
     txtAux(4).Text = DBLet(Data1.Recordset!NomImpre, "T")
-    txtAux(6).Text = DBLet(Data1.Recordset!CualCom, "N")
-    
+    txtAux(6).Text = DBLet(Data1.Recordset!cualcom, "N")
+    txtAux(7).Text = DBLet(Data1.Recordset!ImpresoraALV, "T")
 '    For i = 3 To 8
 '        txtAux(i).Text = DBLet(Data1.Recordset.Fields(i + 1).Value, "T")
 '    Next i

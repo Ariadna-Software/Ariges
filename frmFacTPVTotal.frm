@@ -2556,7 +2556,10 @@ Dim ImprimeDirecto As Boolean
         ImprimirDirectoAlb SQL
     
     Else
-    
+         
+         
+         
+         
          With frmVisReport
             .FormulaSeleccion = cadImpresion
             .SoloImprimir = True ' (RAFA/ALZIRA 31082006)
@@ -2566,8 +2569,11 @@ Dim ImprimeDirecto As Boolean
             .Informe = MIPATH & nomDocu
             .ConSubInforme = True
             .Opcion = 45
+            
+            'Julio 16
+            .ForzarNombreImpresora = vParamTPV.ImpresoraAlbaranes
             .ExportarPDF = False
-            .NumCopias = 2 ' (RAFA/ALZIRA 31082006)
+            .NumCopias = 2
             .Show vbModal
         End With
     End If

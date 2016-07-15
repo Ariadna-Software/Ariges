@@ -1776,38 +1776,44 @@ Dim Aux As String
             SQL = SQL & ",forpa=" & DBSet(vClien.ForPago, "N", "S")
             
             'Cuenta bancaria
-            SQL = SQL & ", entidad="
-            If vClien.Banco = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & Format(vClien.Banco, "0000") & "'"
-            End If
-            SQL = SQL & ", oficina="
-            If vClien.Sucursal = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & Format(vClien.Sucursal, "0000") & "'"
-            End If
-            SQL = SQL & ", " & IIf(vParamAplic.ContabilidadNueva, "control", "CC") & " ="
-            If vClien.DigControl = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & Format(vClien.DigControl, "00") & "'"
-            End If
-            SQL = SQL & ", cuentaba="
-            If vClien.CuentaBan = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & Format(vClien.CuentaBan, "0000000000") & "'"
-            End If
-                        
-            SQL = SQL & ", iban="
-            If vClien.IBAN = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & vClien.IBAN & "'"
-            End If
+            If vParamAplic.ContabilidadNueva Then
+                
+                Aux = MiFormat(vClien.IBAN, "") & MiFormat(vClien.Banco, "0000") & MiFormat(vClien.Sucursal, "0000") & MiFormat(vClien.DigControl, "00") & MiFormat(vClien.CuentaBan, "0000000000")
+                SQL = SQL & ", iban=" & DBSet(Aux, "T")
             
+            Else
+                SQL = SQL & ", entidad="
+                If vClien.Banco = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & Format(vClien.Banco, "0000") & "'"
+                End If
+                SQL = SQL & ", oficina="
+                If vClien.Sucursal = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & Format(vClien.Sucursal, "0000") & "'"
+                End If
+                SQL = SQL & ", " & IIf(vParamAplic.ContabilidadNueva, "control", "CC") & " ="
+                If vClien.DigControl = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & Format(vClien.DigControl, "00") & "'"
+                End If
+                SQL = SQL & ", cuentaba="
+                If vClien.CuentaBan = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & Format(vClien.CuentaBan, "0000000000") & "'"
+                End If
+                            
+                SQL = SQL & ", iban="
+                If vClien.IBAN = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & vClien.IBAN & "'"
+                End If
+            End If
             
             'Pais
             If vParamAplic.ContabilidadNueva Then
@@ -1818,26 +1824,26 @@ Dim Aux As String
                 Else
                     'Tiene pais. Grabaraemos:
                     '   Si es intracom
-                    If Aux = "ES" Then
-                        Aux = "ESPAÑA"
-                    Else
-                        Aux = DevuelveDesdeBD(conConta, "concat(codpais,'|',nompais,'|',intracom,'|')", "paises", "codpais", Aux, "T")
-                        If Aux = "" Or Aux = "|||" Then
-                            Aux = ValorNulo
-                        Else
-                            If RecuperaValor(Aux, 3) = "0" Then
-                                'Extranjero
-                                Aux = RecuperaValor(Aux, 2) & " (" & RecuperaValor(Aux, 1) & ")"
-                            Else
-                                'Intracomunitaria
-                                Aux = RecuperaValor(Aux, 1) & " " & RecuperaValor(Aux, 2)
-                            End If
-                        End If
-                    End If
+'                    If Aux = "ES" Then
+'                        'Aux = "ESPAÑA"
+'                    Else
+'                        Aux = DevuelveDesdeBD(conConta, "concat(codpais,'|',codpais,'|',intracom,'|')", "paises", "codpais", Aux, "T")
+'                        If Aux = "" Or Aux = "|||" Then
+'                            Aux = ValorNulo
+'                        Else
+'                            If RecuperaValor(Aux, 3) = "0" Then
+'                                'Extranjero
+'                                Aux = RecuperaValor(Aux, 2) & " (" & RecuperaValor(Aux, 1) & ")"
+'                            Else
+'                                'Intracomunitaria
+'                                Aux = RecuperaValor(Aux, 1) & " " & RecuperaValor(Aux, 2)
+'                            End If
+'                        End If
+'                    End If
                 
                 End If
                 If Aux <> ValorNulo Then Aux = DBSet(Aux, "T")
-                SQL = SQL & ", pais=" & Aux
+                SQL = SQL & ", codpais=" & Aux
             End If
             
             
@@ -1868,39 +1874,45 @@ Dim Aux As String
             SQL = SQL & ",forpa=" & DBSet(vProve.ForPago, "N", "S")
             
             'Cuenta bancaria
-            SQL = SQL & ", entidad="
-            If vProve.Banco = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & Format(vProve.Banco, "0000") & "'"
-            End If
-            SQL = SQL & ", oficina="
-            If vProve.Sucursal = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & Format(vProve.Sucursal, "0000") & "'"
-            End If
+            If vParamAplic.ContabilidadNueva Then
             
-            SQL = SQL & ", " & IIf(vParamAplic.ContabilidadNueva, "control", "CC") & " ="
-            If vProve.DigControl = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & Format(vProve.DigControl, "00") & "'"
-            End If
-            SQL = SQL & ", cuentaba="
-            If vProve.CuentaBan = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & Format(vProve.CuentaBan, "0000000000") & "'"
-            End If
-            SQL = SQL & ", iban="
-            If vProve.IBAN = "" Then
-                SQL = SQL & "NULL"
-            Else
-                SQL = SQL & "'" & vProve.IBAN & "'"
-            End If
+                 Aux = MiFormat(vProve.IBAN, "") & MiFormat(vProve.Banco, "0000") & MiFormat(vProve.Sucursal, "0000") & MiFormat(vProve.DigControl, "00") & MiFormat(vProve.CuentaBan, "0000000000")
+                SQL = SQL & ", iban=" & DBSet(Aux, "T")
             
-            
+            Else
+                SQL = SQL & ", entidad="
+                If vProve.Banco = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & Format(vProve.Banco, "0000") & "'"
+                End If
+                SQL = SQL & ", oficina="
+                If vProve.Sucursal = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & Format(vProve.Sucursal, "0000") & "'"
+                End If
+                
+                SQL = SQL & ", " & IIf(vParamAplic.ContabilidadNueva, "control", "CC") & " ="
+                If vProve.DigControl = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & Format(vProve.DigControl, "00") & "'"
+                End If
+                SQL = SQL & ", cuentaba="
+                If vProve.CuentaBan = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & Format(vProve.CuentaBan, "0000000000") & "'"
+                End If
+                SQL = SQL & ", iban="
+                If vProve.IBAN = "" Then
+                    SQL = SQL & "NULL"
+                Else
+                    SQL = SQL & "'" & vProve.IBAN & "'"
+                End If
+                
+            End If
             
             SQL = SQL & " WHERE codmacta = " & DBSet(Cuenta, "T")
             
@@ -1967,8 +1979,18 @@ EModCta:
 End Function
 
 
-
-
+'Si es "" devuelve "" , si no, devuelve el campo formateado
+Private Function MiFormat(Valor As String, Formato As String) As String
+    If Trim(Valor) = "" Then
+       MiFormat = ""
+    Else
+        If Formato = "" Then
+            MiFormat = Valor
+        Else
+            MiFormat = Format(Valor, Formato)
+        End If
+    End If
+End Function
 
 
 'He cambiado el metodo a public

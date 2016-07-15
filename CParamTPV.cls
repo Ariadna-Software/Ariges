@@ -85,6 +85,9 @@ Private mvarProhibirFitosantiarios_a_Varios As Boolean
 'Abril 2016
 Private mvarProhibirTicketSocios As Boolean
 
+'Julio 2017
+Private mvarImpresoraAlbaranes As String
+
 
 'En Impresion tiket directa abre un cursor cada tiket
 'Para leer el pie
@@ -413,7 +416,9 @@ Public Property Get NumeroDeTerminal() As Integer
 End Property
 
 
-
+Public Property Get ImpresoraAlbaranes() As String
+     ImpresoraAlbaranes = mvarImpresoraAlbaranes
+End Property
 
 
 
@@ -498,7 +503,7 @@ On Error GoTo Err3
         mvarForpasConRecargoFinanciero = ""
         
         mvarProhibirTicketSocios = (DBLet(Rs!ProhibirTicketSocios, "N") = 1)
-
+      
         Leer = 0
     End If
 
@@ -550,7 +555,7 @@ Dim Rs As ADODB.Recordset
         mvarAbreCajon = Val(DBLet(Rs!AbreCajon, "N")) = 1
         mvarSecuenciaCajon = DBLet(Rs!SecuenciaCajon)
         mvarComImpresora = DBLet(Rs!cualcom, "N")
-        
+        mvarImpresoraAlbaranes = DBLet(Rs!ImpresoraALV, "T")
         Leer2 = 0
     End If
 

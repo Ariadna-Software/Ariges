@@ -63,10 +63,23 @@ Private Sub Command1_Click(Index As Integer)
     Unload Me
 End Sub
 
+Private Sub Form_Activate()
+    If Me.Tag = 1 Then
+        Me.Tag = 0
+        If Modificar Then
+            If Text1.Text <> "" Then Text1.Text = Text1.Text & " "
+            Text1.SelStart = Len(Text1.Text)
+        End If
+    End If
+End Sub
+
 Private Sub Form_Load()
+    Me.Tag = 1
     Me.Caption = "Observaciones linea albarán"
     Me.Icon = frmPpal.Icon
     Text1.Locked = Not Modificar
     Me.Command1(0).Enabled = Modificar
     Screen.MousePointer = vbDefault
+    
+        
 End Sub

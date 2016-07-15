@@ -5955,6 +5955,17 @@ Dim vArtic As CArticulo
                         MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
                         b = False
                     End If
+                
+                
+                    If b And (vUsu.AlmacenPorDefecto = 4 Or vUsu.AlmacenPorDefecto = 2) Then
+                        'Los usuarios de CASTELLON NO pueden realizar abonos sobre materia no rotacion
+                        Aux = "artvario=0 AND sartic.codartic"
+                        Aux = DevuelveDesdeBD(conAri, "rotacion", "sartic", Aux, txtAux(1).Text, "T")
+                        If Val(Aux) = 0 Then
+                            MsgBox "Material de NO rotación. No se permite el abono", vbExclamation
+                            b = False
+                        End If
+                    End If
                 End If
             End If
         End If

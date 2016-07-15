@@ -4808,6 +4808,16 @@ End Function
 
 
 
+Private Sub Text2_GotFocus(Index As Integer)
+     If Index = 16 Then
+        'Campo observaciones. NO, repito NO, se selecciona todo
+        If Text2(Index).Text <> "" Then
+            Text2(Index).Text = Text2(Index).Text & " "
+            Text2(Index).SelStart = Len(Text2(Index).Text)
+        End If
+    End If
+End Sub
+
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then
       '  PonerFocoBtn Me.cmdAceptar
@@ -5289,8 +5299,10 @@ Dim cadkey As Integer
 
     cadkey = ObtenerCadKey(kCampo, Index)
     kCampo = Index
-'    ConseguirFoco txtAux(Index), Modo, cadkey
-    ConseguirFocoLin txtAux(Index), cadkey
+
+   
+        ConseguirFocoLin txtAux(Index), cadkey
+
     
     LabelAyudatxtAux Index, lblF
     
@@ -5406,6 +5418,13 @@ Dim b As Boolean
                 Else
                     PonerFoco txtAux(0)
                 End If
+                
+                
+                If Text2(16).Text = "" Then _
+                    Text2(16).Text = DevuelveDesdeBD(conAri, "txtauxdocumento", "sartic", "codartic", txtAux(1).Text, "T")
+
+                
+                
             Else
                 PonerFoco txtAux(Index)
             End If

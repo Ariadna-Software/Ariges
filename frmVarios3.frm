@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmVarios3 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Opciones"
@@ -560,6 +560,8 @@ Public Opcion As Byte
     '4.- Cutoas porpias para insercion masiva
     '5.- Eliminar facturas FAZ (presupuestos) herbelca
     
+        
+    
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
     
@@ -569,7 +571,7 @@ Dim PrimVez As Boolean
 
 
 Dim PulsadoCerrar As Boolean
-Dim It As ListItem
+Dim IT As ListItem
 
 Private Sub cboTipoFra_KeyPress(KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
@@ -935,7 +937,7 @@ Private Sub cmdImprimirErrores_Click()
         .EnvioEMail = False
         .Opcion = 3002
         .Titulo = "Errores C.C.C."
-        .NombreRpt = "rComprobarCCC.rpt"
+        .NombreRPT = "rComprobarCCC.rpt"
         .ConSubInforme = False
         .Show vbModal
     End With
@@ -1144,10 +1146,10 @@ Private Sub LanzaBuscaGrid(LOpcion As Byte)
 End Sub
 
 
-Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
-    If Item.Tag = 0 Then
+Private Sub ListView1_ItemCheck(ByVal item As MSComctlLib.ListItem)
+    If item.Tag = 0 Then
         'Ha pinchado sobre el nodo "padre"
-        NumRegElim = Item.Index + 1
+        NumRegElim = item.Index + 1
         Do
             If NumRegElim > ListView1.ListItems.Count Then
                 NumRegElim = 0
@@ -1155,7 +1157,7 @@ Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
                 If ListView1.ListItems(NumRegElim).Tag = 0 Then
                     NumRegElim = 0
                 Else
-                    ListView1.ListItems(NumRegElim).Checked = Item.Checked
+                    ListView1.ListItems(NumRegElim).Checked = item.Checked
                     NumRegElim = NumRegElim + 1
                 End If
             End If
@@ -1223,34 +1225,34 @@ Dim N As Integer
     NumRegElim = -1
     While Not miRsAux.EOF
         
-        If miRsAux!codclien <> NumRegElim Then
+        If miRsAux!codClien <> NumRegElim Then
             'Cliente nuevo
-            Set It = ListView1.ListItems.Add
-            It.Text = Format(miRsAux!codclien, "0000")
-            It.SubItems(1) = miRsAux!Nomclien
+            Set IT = ListView1.ListItems.Add
+            IT.Text = Format(miRsAux!codClien, "0000")
+            IT.SubItems(1) = miRsAux!Nomclien
             'Los 10 primeros (relleando a blancos sera el codmacta, los siguientes desde el 11 el NIF
-            It.SubItems(2) = Mid(miRsAux!nomforpa, 1, 10)
+            IT.SubItems(2) = Mid(miRsAux!nomforpa, 1, 10)
             
-            It.SubItems(3) = DBLet(miRsAux!nomactiv, "T")
-            It.SubItems(4) = Mid(miRsAux!nomforpa, 11)
-            It.SubItems(5) = " "
-            It.Tag = 0
-            NumRegElim = miRsAux!codclien
-            Label4(1).Caption = It.Text
+            IT.SubItems(3) = DBLet(miRsAux!nomactiv, "T")
+            IT.SubItems(4) = Mid(miRsAux!nomforpa, 11)
+            IT.SubItems(5) = " "
+            IT.Tag = 0
+            NumRegElim = miRsAux!codClien
+            Label4(1).Caption = IT.Text
             Label4(1).Refresh
-            davidNumalbar = It.Index
+            davidNumalbar = IT.Index
         End If
         
         
         
-        Set It = ListView1.ListItems.Add
-        It.Text = " "
-        It.SubItems(1) = ""
+        Set IT = ListView1.ListItems.Add
+        IT.Text = " "
+        IT.SubItems(1) = ""
         
         
-        It.SubItems(2) = DBLet(miRsAux!nombre1, "T") & " "
-        It.SubItems(3) = DBLet(miRsAux!nombre2, "T") & " "
-        It.SubItems(4) = DBLet(miRsAux!nombre3, "T") & " "
+        IT.SubItems(2) = DBLet(miRsAux!nombre1, "T") & " "
+        IT.SubItems(3) = DBLet(miRsAux!nombre2, "T") & " "
+        IT.SubItems(4) = DBLet(miRsAux!nombre3, "T") & " "
     
         
         
@@ -1271,12 +1273,12 @@ Dim N As Integer
             miSQL = "contaariges"
         End If
         If N = 1 Then miSQL = miSQL & Mid(miRsAux!obser, 6)
-        It.SubItems(5) = miSQL
+        IT.SubItems(5) = miSQL
         
-        It.Tag = davidNumalbar 'Indice ande esta el "padre" , los datos de cuenta cabecera
-        It.SubItems(6) = DBLet(miRsAux!obser, "N")
-        It.SubItems(7) = miRsAux!campo1
-        It.ToolTipText = It.SubItems(6)
+        IT.Tag = davidNumalbar 'Indice ande esta el "padre" , los datos de cuenta cabecera
+        IT.SubItems(6) = DBLet(miRsAux!obser, "N")
+        IT.SubItems(7) = miRsAux!campo1
+        IT.ToolTipText = IT.SubItems(6)
         
         miRsAux.MoveNext
     Wend
@@ -1366,30 +1368,30 @@ Dim N As Integer
     
     While Not miRsAux.EOF
             
-        Set It = lwTelefoDe.ListItems.Add
-        It.Text = miRsAux!codArtic
-        It.SubItems(1) = " "
-        It.SubItems(2) = " "
-        If Not IsNull(miRsAux!codclien) Then It.SubItems(1) = Format(miRsAux!codclien, "0000")
-        If Not IsNull(miRsAux!Nomclien) Then It.SubItems(2) = miRsAux!Nomclien
+        Set IT = lwTelefoDe.ListItems.Add
+        IT.Text = miRsAux!codArtic
+        IT.SubItems(1) = " "
+        IT.SubItems(2) = " "
+        If Not IsNull(miRsAux!codClien) Then IT.SubItems(1) = Format(miRsAux!codClien, "0000")
+        If Not IsNull(miRsAux!Nomclien) Then IT.SubItems(2) = miRsAux!Nomclien
         
         
         'Febrero 2014
         '1  Sin consumo
         '2  Inactivo
         '5+ Otra compañia
-        It.SubItems(4) = " "
-        It.SubItems(3) = " "
+        IT.SubItems(4) = " "
+        IT.SubItems(3) = " "
         
         If miRsAux!numlinea > 0 Then
             'inactivo   otra compañia
             If miRsAux!numlinea = 2 Then
                 'INACTIVO
-                It.SubItems(3) = "SI"
-                It.ForeColor = vbRed
+                IT.SubItems(3) = "SI"
+                IT.ForeColor = vbRed
             ElseIf miRsAux!numlinea >= 5 Then
-                It.SubItems(4) = "*"
-                It.ForeColor = vbBlue
+                IT.SubItems(4) = "*"
+                IT.ForeColor = vbBlue
             End If
         End If
         
@@ -1414,12 +1416,12 @@ Private Sub CargalwPresuElim()
     
     While Not miRsAux.EOF
             
-        Set It = lwPresuElim.ListItems.Add
-        It.Text = Format(miRsAux!NumFactu, "0000")
-        It.SubItems(1) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
-        It.SubItems(2) = miRsAux!codclien
-        It.SubItems(3) = miRsAux!Nomclien
-        It.SubItems(4) = Format(miRsAux!TotalFac, FormatoImporte)
+        Set IT = lwPresuElim.ListItems.Add
+        IT.Text = Format(miRsAux!NumFactu, "0000")
+        IT.SubItems(1) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
+        IT.SubItems(2) = miRsAux!codClien
+        IT.SubItems(3) = miRsAux!Nomclien
+        IT.SubItems(4) = Format(miRsAux!TotalFac, FormatoImporte)
 
         miRsAux.MoveNext
     Wend

@@ -63,6 +63,9 @@ Private mPersonaContacto As String
 
 Private mDirEnvioHabitual As Integer   ' Si no trabajamos con direcciones de envio, o no la tiene configurada tendra un -1
 
+
+Private mPais As String 'Conta nueva. Tesoreria
+
 '------------------------------------------------
 'Propiedades del modulo CCliente
 '------------------------------------------------
@@ -387,6 +390,13 @@ Public Property Get DirEnvioHabitual() As Integer
      DirEnvioHabitual = mDirEnvioHabitual
 End Property
 
+
+Public Property Get Pais() As String
+     Pais = mPais
+End Property
+
+
+
 '------------------------------------------------
 'Procedimientos del modulo CCliente
 '------------------------------------------------
@@ -423,7 +433,7 @@ Dim SQL As String
     
     LeerDatos = False
     
-    SQL = "SELECT codclien,nomclien,nomcomer,codpobla,domclien,pobclien,proclien,nifclien,wwwclien,codenvio,codagent,codforpa,codbanco,codsucur,digcontr,cuentaba,telclie1,maiclie1,clivario,dtoppago,dtognral,codtarif,codsitua,tipofact,kilometr,fechamov,observac,perclie1,codzonas,coddirenhab,iban "
+    SQL = "SELECT codclien,nomclien,nomcomer,codpobla,domclien,pobclien,proclien,nifclien,wwwclien,codenvio,codagent,codforpa,codbanco,codsucur,digcontr,cuentaba,telclie1,maiclie1,clivario,dtoppago,dtognral,codtarif,codsitua,tipofact,kilometr,fechamov,observac,perclie1,codzonas,coddirenhab,iban,codpais "
     SQL = SQL & " FROM sclien "
     SQL = SQL & " WHERE codclien=" & vCodClien
     
@@ -433,7 +443,7 @@ Dim SQL As String
     If Rs.EOF Then
         LeerDatos = False
     Else
-        mCodClien = CStr(Rs!codclien)
+        mCodClien = CStr(Rs!codClien)
         
         mNomClien = Rs!Nomclien
         mNomComer = Rs!nomcomer
@@ -447,11 +457,11 @@ Dim SQL As String
         mMaiClien = DBLet(Rs!maiclie1, "T")
        
         mCodEnvio = CStr(DBLet(Rs!CodEnvio, "N"))
-        mCodAgent = CStr(Rs!codagent)
+        mCodAgent = CStr(Rs!CodAgent)
         mCodForpa = CStr(Rs!codforpa)
         mDtoPpago = CStr(Rs!DtoPPago)
         mDtoGnral = CStr(Rs!DtoGnral)
-        mTipoFact = Rs!tipofact
+        mTipoFact = Rs!TipoFact
         
         mCodbanco = CStr(DBLet(Rs!codbanco, "N"))
         mCodsucur = CStr(DBLet(Rs!codsucur, "N"))
@@ -460,7 +470,7 @@ Dim SQL As String
         mIBAN = DBLet(Rs!IBAN, "T")
         
         mObservac = DBLetMemo(Rs!observac)
-        mCliVario = Rs!CliVario
+        mCliVario = Rs!Clivario
         
         Tarifa = Rs!codTarif
         Situacion = Rs!codsitua
@@ -472,10 +482,10 @@ Dim SQL As String
         
         mZona = CStr(DBLet(Rs!codzonas, "N"))
         
-        
+        mPais = DBLet(Rs!codpais, "T")
         'Direccion envio habitual
         mDirEnvioHabitual = -1
-        
+            
         
         If vParamAplic.DireccionesEnvio Then
             If Not IsNull(Rs!coddirenhab) Then mDirEnvioHabitual = Rs!coddirenhab
@@ -501,7 +511,7 @@ End Function
 
 
 
-Public Function LeerDatosCliVario(vNIF As String) As Boolean
+Public Function LeerDatosCliVario(vNif As String) As Boolean
 'si es cliente de varios recuperamos los datos nombre,direc,etc.
 'de la tabla de varios: sclvar
 Dim Rs As ADODB.Recordset
@@ -512,7 +522,7 @@ Dim SQL As String
     
     SQL = "SELECT nifclien,nomclien,domclien,codpobla,pobclien,proclien,telclien "
     SQL = SQL & " FROM sclvar "
-    SQL = SQL & " WHERE nifclien=" & DBSet(vNIF, "T")
+    SQL = SQL & " WHERE nifclien=" & DBSet(vNif, "T")
     
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -527,7 +537,7 @@ Dim SQL As String
         mPobClien = ""
         mProClien = ""
         mTfnClien = ""
-        MsgBox "No existe el cliente vario: " & vNIF, vbInformation
+        MsgBox "No existe el cliente vario: " & vNif, vbInformation
     Else
         mNIFClien = Rs!nifClien
         mNomClien = Rs!Nomclien
@@ -556,7 +566,7 @@ End Function
 
 
 
-Public Function ActualizarClienteV(vNIF As String) As Boolean
+Public Function ActualizarClienteV(vNif As String) As Boolean
 'Actualiza los datos del cliente de varios en la tabla: sclvar
 Dim SQL As String
 Dim devuelve As String
@@ -564,16 +574,16 @@ Dim devuelve As String
     On Error GoTo EActualizarCliente
     ActualizarClienteV = False
     
-    devuelve = DevuelveDesdeBDNew(conAri, "sclvar", "nifclien", "nifclien", vNIF, "T")
+    devuelve = DevuelveDesdeBDNew(conAri, "sclvar", "nifclien", "nifclien", vNif, "T")
     
     If devuelve <> "" Then 'Existe el cliente de varios y lo actualizamos
         SQL = "UPDATE sclvar SET nomclien=" & DBSet(Nombre, "T") & ", domclien=" & DBSet(Domicilio, "T") & ", "
         SQL = SQL & " codpobla=" & DBSet(CPostal, "T") & ", pobclien=" & DBSet(Poblacion, "T") & ", "
         SQL = SQL & " proclien=" & DBSet(Provincia, "T") & ", telclien=" & DBSet(TfnoClien, "T")
-        SQL = SQL & " WHERE nifclien=" & DBSet(vNIF, "T")
+        SQL = SQL & " WHERE nifclien=" & DBSet(vNif, "T")
     Else 'No existe el cliente y lo añadimos
         SQL = "INSERT INTO sclvar (nifclien, nomclien, domclien, codpobla, pobclien, proclien, telclien) "
-        SQL = SQL & " VALUES (" & DBSet(vNIF, "T") & ", " & DBSet(Nombre, "T") & ", " & DBSet(Domicilio, "T") & ", "
+        SQL = SQL & " VALUES (" & DBSet(vNif, "T") & ", " & DBSet(Nombre, "T") & ", " & DBSet(Domicilio, "T") & ", "
         SQL = SQL & DBSet(CPostal, "T") & ", " & DBSet(Poblacion, "T") & ", " & DBSet(Provincia, "T") & ", " & DBSet(TfnoClien, "T") & ")"
     End If
     conn.Execute SQL, , adCmdText

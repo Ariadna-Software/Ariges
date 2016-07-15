@@ -144,7 +144,7 @@ Dim Cad As String
 End Sub
 
 
-'---- David Mao 2016
+'---- David Mayo 2016
 Public Function EsFechaHoraOK(T As String) As Boolean
 Dim EspacioEnBlanco As Integer
 Dim LaFecha As String
