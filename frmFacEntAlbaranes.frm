@@ -350,72 +350,72 @@ Begin VB.Form frmFacEntAlbaranes2
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacEntAlbaranes.frx":0049
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtAux(12)"
-      Tab(0).Control(1)=   "txtAux(11)"
-      Tab(0).Control(2)=   "txtAux(10)"
-      Tab(0).Control(3)=   "cmdAux(9)"
-      Tab(0).Control(4)=   "txtAux(9)"
-      Tab(0).Control(5)=   "txtAux(5)"
-      Tab(0).Control(6)=   "FrameCliente"
-      Tab(0).Control(7)=   "cmdAux(1)"
-      Tab(0).Control(8)=   "cmdAux(0)"
-      Tab(0).Control(9)=   "txtAux(2)"
-      Tab(0).Control(10)=   "txtAux(8)"
-      Tab(0).Control(11)=   "txtAux(7)"
-      Tab(0).Control(12)=   "txtAux(6)"
-      Tab(0).Control(13)=   "txtAux(4)"
-      Tab(0).Control(14)=   "txtAux(3)"
-      Tab(0).Control(15)=   "txtAux(1)"
-      Tab(0).Control(16)=   "txtAux(0)"
-      Tab(0).Control(17)=   "DataGrid1"
+      Tab(0).Control(0)=   "DataGrid1"
+      Tab(0).Control(1)=   "txtAux(0)"
+      Tab(0).Control(2)=   "txtAux(1)"
+      Tab(0).Control(3)=   "txtAux(3)"
+      Tab(0).Control(4)=   "txtAux(4)"
+      Tab(0).Control(5)=   "txtAux(6)"
+      Tab(0).Control(6)=   "txtAux(7)"
+      Tab(0).Control(7)=   "txtAux(8)"
+      Tab(0).Control(8)=   "txtAux(2)"
+      Tab(0).Control(9)=   "cmdAux(0)"
+      Tab(0).Control(10)=   "cmdAux(1)"
+      Tab(0).Control(11)=   "FrameCliente"
+      Tab(0).Control(12)=   "txtAux(5)"
+      Tab(0).Control(13)=   "txtAux(9)"
+      Tab(0).Control(14)=   "cmdAux(9)"
+      Tab(0).Control(15)=   "txtAux(10)"
+      Tab(0).Control(16)=   "txtAux(11)"
+      Tab(0).Control(17)=   "txtAux(12)"
       Tab(0).ControlCount=   18
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbaranes.frx":0065
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(44)"
-      Tab(1).Control(1)=   "Text2(43)"
-      Tab(1).Control(2)=   "Text1(43)"
-      Tab(1).Control(3)=   "FrameFacRec"
-      Tab(1).Control(4)=   "chkDocArchi"
-      Tab(1).Control(5)=   "Text1(41)"
-      Tab(1).Control(6)=   "Text1(39)"
-      Tab(1).Control(7)=   "FrameHco"
-      Tab(1).Control(8)=   "Text1(29)"
-      Tab(1).Control(9)=   "Text2(29)"
-      Tab(1).Control(10)=   "Text1(28)"
-      Tab(1).Control(11)=   "Text2(28)"
-      Tab(1).Control(12)=   "Text1(27)"
-      Tab(1).Control(13)=   "Text2(27)"
-      Tab(1).Control(14)=   "Text1(2)"
-      Tab(1).Control(15)=   "Text1(25)"
-      Tab(1).Control(16)=   "Text1(26)"
-      Tab(1).Control(17)=   "Text1(24)"
-      Tab(1).Control(18)=   "Text1(23)"
-      Tab(1).Control(19)=   "Text1(22)"
-      Tab(1).Control(20)=   "Text1(21)"
-      Tab(1).Control(21)=   "Text1(20)"
-      Tab(1).Control(22)=   "Text1(19)"
-      Tab(1).Control(23)=   "Text1(18)"
-      Tab(1).Control(24)=   "Text1(38)"
-      Tab(1).Control(25)=   "chkImpreso"
-      Tab(1).Control(26)=   "Label1(55)"
-      Tab(1).Control(27)=   "Label1(54)"
-      Tab(1).Control(28)=   "imgBuscar(13)"
-      Tab(1).Control(29)=   "imgBuscar(9)"
-      Tab(1).Control(30)=   "Shape1"
-      Tab(1).Control(31)=   "imgFecha(40)"
-      Tab(1).Control(32)=   "Label1(52)"
-      Tab(1).Control(33)=   "Label1(24)"
-      Tab(1).Control(34)=   "Label1(23)"
-      Tab(1).Control(35)=   "imgBuscar(8)"
-      Tab(1).Control(36)=   "Label1(9)"
-      Tab(1).Control(37)=   "imgBuscar(7)"
-      Tab(1).Control(38)=   "Label1(12)"
-      Tab(1).Control(39)=   "Label1(11)"
-      Tab(1).Control(40)=   "Label1(10)"
-      Tab(1).Control(41)=   "Label1(5)"
-      Tab(1).Control(42)=   "Label1(3)"
-      Tab(1).Control(43)=   "Label1(45)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(10)"
+      Tab(1).Control(4)=   "Label1(11)"
+      Tab(1).Control(5)=   "Label1(12)"
+      Tab(1).Control(6)=   "imgBuscar(7)"
+      Tab(1).Control(7)=   "Label1(9)"
+      Tab(1).Control(8)=   "imgBuscar(8)"
+      Tab(1).Control(9)=   "Label1(23)"
+      Tab(1).Control(10)=   "Label1(24)"
+      Tab(1).Control(11)=   "Label1(52)"
+      Tab(1).Control(12)=   "imgFecha(40)"
+      Tab(1).Control(13)=   "Shape1"
+      Tab(1).Control(14)=   "imgBuscar(9)"
+      Tab(1).Control(15)=   "imgBuscar(13)"
+      Tab(1).Control(16)=   "Label1(54)"
+      Tab(1).Control(17)=   "Label1(55)"
+      Tab(1).Control(18)=   "chkImpreso"
+      Tab(1).Control(19)=   "Text1(38)"
+      Tab(1).Control(20)=   "Text1(18)"
+      Tab(1).Control(21)=   "Text1(19)"
+      Tab(1).Control(22)=   "Text1(20)"
+      Tab(1).Control(23)=   "Text1(21)"
+      Tab(1).Control(24)=   "Text1(22)"
+      Tab(1).Control(25)=   "Text1(23)"
+      Tab(1).Control(26)=   "Text1(24)"
+      Tab(1).Control(27)=   "Text1(26)"
+      Tab(1).Control(28)=   "Text1(25)"
+      Tab(1).Control(29)=   "Text1(2)"
+      Tab(1).Control(30)=   "Text2(27)"
+      Tab(1).Control(31)=   "Text1(27)"
+      Tab(1).Control(32)=   "Text2(28)"
+      Tab(1).Control(33)=   "Text1(28)"
+      Tab(1).Control(34)=   "Text2(29)"
+      Tab(1).Control(35)=   "Text1(29)"
+      Tab(1).Control(36)=   "FrameHco"
+      Tab(1).Control(37)=   "Text1(39)"
+      Tab(1).Control(38)=   "Text1(41)"
+      Tab(1).Control(39)=   "chkDocArchi"
+      Tab(1).Control(40)=   "FrameFacRec"
+      Tab(1).Control(41)=   "Text1(43)"
+      Tab(1).Control(42)=   "Text2(43)"
+      Tab(1).Control(43)=   "Text1(44)"
       Tab(1).ControlCount=   44
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranes.frx":0081
@@ -3659,7 +3659,21 @@ Dim vWhere As String
     
     If Data2.Recordset.EOF Then Exit Sub
     
-    
+        
+    'Herbelca. Tania 21/07/2016
+    '--------------------------
+    ' De varios no dejo modificar la linea. Segun ella esto ya lo hacia.
+    'Version: 4_6_51 de Feb16 No lo hace    Solo era para eliminar linea
+    If vParamAplic.NumeroInstalacion = 2 Then
+        If vUsu.Nivel > 0 Then
+
+            vWhere = DevuelveDesdeBD(conAri, "artvario", "sartic", "codartic", CStr(Data2.Recordset!codArtic), "T")
+            If Val(vWhere) > 0 Then
+                MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
+                Exit Sub
+            End If
+        End If
+    End If
         
     
     

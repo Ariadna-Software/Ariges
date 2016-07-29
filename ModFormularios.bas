@@ -1647,7 +1647,9 @@ Dim b As Boolean
 
     On Error GoTo EInsCta
     
-    SQL = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,maidatos,webdatos,obsdatos,pais,forpa, ctabanco) "
+    SQL = ""
+    If vParamAplic.ContabilidadNueva Then SQL = "cod"
+    SQL = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,maidatos,webdatos,obsdatos," & SQL & "pais,forpa, ctabanco) "
     SQL = SQL & " VALUES (" & DBSet(Cuenta, "T") & ","
     
     If cadClien <> "" Then
@@ -1662,29 +1664,32 @@ Dim b As Boolean
                 If Aux = "" Then
                     Aux = ValorNulo
                 Else
-                    'Tiene pais. Grabaraemos:
-                    '   Si es intracom
-                    If Aux = "ES" Then
-                        Aux = "ESPAÑA"
-                    Else
-                        Aux = DevuelveDesdeBD(conConta, "concat(codpais,'|',nompais,'|',intracom,'|')", "paises", "codpais", Aux, "T")
-                        If Aux = "" Or Aux = "|||" Then
-                            Aux = ValorNulo
-                        Else
-                            If RecuperaValor(Aux, 3) = "0" Then
-                                'Extranjero
-                                Aux = RecuperaValor(Aux, 2) & " (" & RecuperaValor(Aux, 1) & ")"
-                            Else
-                                'Intracomunitaria
-                                Aux = RecuperaValor(Aux, 1) & " " & RecuperaValor(Aux, 2)
-                            End If
-                        End If
-                    End If
-                    
-                    
-                    
-                    If Aux <> ValorNulo Then Aux = DBSet(Aux, "T")
+
+
                 End If
+'                    'Tiene pais. Grabaraemos:
+'                    '   Si es intracom
+'                    If Aux = "ES" Then
+'                        'España
+'                    Else
+'                        Aux = DevuelveDesdeBD(conConta, "concat(codpais,'|',codpais,'|',intracom,'|')", "paises", "codpais", Aux, "T")
+'                        If Aux = "" Or Aux = "|||" Then
+'                            Aux = ValorNulo
+'                        Else
+'                            If RecuperaValor(Aux, 3) = "0" Then
+'                                'Extranjero
+'                                Aux = RecuperaValor(Aux, 2) & " (" & RecuperaValor(Aux, 1) & ")"
+'                            Else
+'                                'Intracomunitaria
+'                                Aux = RecuperaValor(Aux, 1) & " " & RecuperaValor(Aux, 2)
+'                            End If
+'                        End If
+'                    End If
+'
+'
+                    
+                 If Aux <> ValorNulo Then Aux = DBSet(Aux, "T")
+'                End If
             Else
                 Aux = ValorNulo
             End If
@@ -1705,7 +1710,21 @@ Dim b As Boolean
         If vProve.LeerDatos(cadProve) Then
             SQL = SQL & DBSet(vProve.Nombre, "T") & ",'S',1," & DBSet(vProve.Nombre, "T") & "," & DBSet(vProve.Domicilio, "T") & ","
             SQL = SQL & DBSet(vProve.CPostal, "T") & "," & DBSet(vProve.Poblacion, "T") & "," & DBSet(vProve.Provincia, "T") & "," & DBSet(vProve.NIF, "T") & ","
-            SQL = SQL & DBSet(vProve.EMailAdmon, "T") & "," & DBSet(vProve.WebProve, "T") & "," & ValorNulo & "," & ValorNulo
+            SQL = SQL & DBSet(vProve.EMailAdmon, "T") & "," & DBSet(vProve.WebProve, "T") & ","
+            
+            If vParamAplic.ContabilidadNueva Then
+                Aux = DevuelveDesdeBD(conAri, "codpais", "sprove", "codprove", vProve.codigo)
+                If Aux = "" Then
+                    Aux = ValorNulo
+                Else
+                    Aux = DBSet(Aux, "T")
+                End If
+            Else
+                Aux = ValorNulo
+            End If
+            SQL = SQL & Aux & "," & ValorNulo
+            
+            
             'Forma pago y cuenta banco por defecto
             cadProve = DevuelveDesdeBD(conAri, "codmacta", "sbanpr", "codbanpr", vProve.BancoPropio)
             SQL = SQL & "," & DBSet(vProve.ForPago, "N", "S") & "," & DBSet(cadProve, "N", "S") & ")"
