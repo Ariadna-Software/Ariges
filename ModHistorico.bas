@@ -94,7 +94,7 @@ On Error Resume Next
         SQL = " SELECT numofert, fecofert," & "'" & Format(Now, FormatoFecha) & "' as fechamov, fecentre, aceptado, codclien, nomclien, domclien, codpobla, "
         SQL = SQL & "pobclien, proclien, nifclien, telclien, coddirec, nomdirec, referenc, codtraba, codagent, codforpa, dtoppago, dtognral, tipofact, "
         SQL = SQL & "plazos01, plazos02, plazos03, asunto01, asunto02, asunto03, asunto04, asunto05, observa01, observa02, observa03, observa04, observa05, "
-        SQL = SQL & "concepto, seguiofe ,actuacion,coddiren,mailconfir,observacrm "
+        SQL = SQL & "concepto, seguiofe ,actuacion,coddiren,mailconfir,observacrm,obscompra "
         
       Case "ALC" 'Albaranes a Proveedores (Compras)
         NomTabla = "scaalp"
@@ -256,7 +256,7 @@ Private Function BorrarTraspaso(EnHistorico As Boolean, cadWhere As String) As B
 'Si EnHistorico=true borra de las tablas de historico: "schtra" y "slhtra"
 'Si EnHistorico=false borra de las tablas de traspaso: "scatra" y "slitra"
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Cad As String, cadAux As String
 Dim EsAlbaran As Boolean
     BorrarTraspaso = False
@@ -282,19 +282,19 @@ Dim EsAlbaran As Boolean
     End Select
     
     If CodTipoMov <> "ALC" And CodTipoMov <> "PEC" Then
-        Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         Cad = ""
-        While Not Rs.EOF
+        While Not RS.EOF
             If CodTipoMov <> "ALC" Then
-                Cad = Cad & Rs.Fields(0).Value & ","
+                Cad = Cad & RS.Fields(0).Value & ","
             Else
                 Cad = Cad & "numalbar="
             End If
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
         'Quitar la ultima coma de la cadena
         Cad = Mid(Cad, 1, Len(Cad) - 1)
         

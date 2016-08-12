@@ -21,7 +21,7 @@ Begin VB.Form frmFacEntOfertas2
    Begin VB.Frame Frame2 
       Height          =   920
       Left            =   120
-      TabIndex        =   80
+      TabIndex        =   82
       Top             =   390
       Width           =   12015
       Begin VB.TextBox Text2 
@@ -31,7 +31,7 @@ Begin VB.Form frmFacEntOfertas2
          Left            =   7965
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   85
+         TabIndex        =   87
          Text            =   "Text2"
          Top             =   160
          Width           =   3345
@@ -130,7 +130,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   21
          Left            =   6105
-         TabIndex        =   86
+         TabIndex        =   88
          Top             =   165
          Width           =   855
       End
@@ -148,7 +148,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   0
          Left            =   6105
-         TabIndex        =   84
+         TabIndex        =   86
          Top             =   525
          Width           =   615
       End
@@ -157,7 +157,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   14
          Left            =   1235
-         TabIndex        =   83
+         TabIndex        =   85
          Top             =   240
          Width           =   615
       End
@@ -175,7 +175,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   50
          Left            =   200
-         TabIndex        =   82
+         TabIndex        =   84
          Top             =   240
          Width           =   735
       End
@@ -193,7 +193,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   51
          Left            =   2450
-         TabIndex        =   81
+         TabIndex        =   83
          Top             =   240
          Width           =   735
       End
@@ -206,7 +206,7 @@ Begin VB.Form frmFacEntOfertas2
       Locked          =   -1  'True
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
-      TabIndex        =   56
+      TabIndex        =   58
       Text            =   "frmFacEntOfertas.frx":0326
       Top             =   6720
       Width           =   6885
@@ -215,7 +215,7 @@ Begin VB.Form frmFacEntOfertas2
       Height          =   960
       Index           =   0
       Left            =   120
-      TabIndex        =   39
+      TabIndex        =   41
       Top             =   6375
       Width           =   2175
       Begin VB.Label lblIndicador 
@@ -223,7 +223,7 @@ Begin VB.Form frmFacEntOfertas2
          Caption         =   "Label2"
          Height          =   240
          Left            =   240
-         TabIndex        =   40
+         TabIndex        =   42
          Top             =   360
          Width           =   1755
       End
@@ -233,7 +233,7 @@ Begin VB.Form frmFacEntOfertas2
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   11040
-      TabIndex        =   37
+      TabIndex        =   39
       Top             =   6480
       Width           =   1035
    End
@@ -241,7 +241,7 @@ Begin VB.Form frmFacEntOfertas2
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   9840
-      TabIndex        =   36
+      TabIndex        =   38
       Top             =   6480
       Width           =   1035
    End
@@ -342,7 +342,7 @@ Begin VB.Form frmFacEntOfertas2
    Begin TabDlg.SSTab SSTab1 
       Height          =   5040
       Left            =   120
-      TabIndex        =   43
+      TabIndex        =   45
       Tag             =   "Fecha Oferta|F|N|||scapre|fecentre|dd/mm/yyyy|N|"
       Top             =   1320
       Width           =   12015
@@ -418,45 +418,58 @@ Begin VB.Form frmFacEntOfertas2
       TabCaption(2)   =   "Concepto y Gestión Oferta"
       TabPicture(2)   =   "frmFacEntOfertas.frx":039B
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label1(38)"
-      Tab(2).Control(1)=   "Label1(37)"
-      Tab(2).Control(2)=   "Label1(18)"
+      Tab(2).Control(0)=   "Text1(36)"
+      Tab(2).Control(1)=   "Text1(35)"
+      Tab(2).Control(2)=   "Text1(32)"
       Tab(2).Control(3)=   "Text1(31)"
-      Tab(2).Control(4)=   "Text1(32)"
-      Tab(2).Control(5)=   "Text1(35)"
-      Tab(2).ControlCount=   6
+      Tab(2).Control(4)=   "Label1(28)"
+      Tab(2).Control(5)=   "Label1(18)"
+      Tab(2).Control(6)=   "Label1(37)"
+      Tab(2).Control(7)=   "Label1(38)"
+      Tab(2).ControlCount=   8
       TabCaption(3)   =   "Totales"
       TabPicture(3)   =   "frmFacEntOfertas.frx":03B7
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "FrameFactura"
       Tab(3).ControlCount=   1
+      Begin VB.TextBox Text1 
+         Height          =   1635
+         Index           =   36
+         Left            =   -69000
+         MultiLine       =   -1  'True
+         TabIndex        =   37
+         Tag             =   "ObCom|T|S|||scapre|obscompra|||"
+         Text            =   "frmFacEntOfertas.frx":03D3
+         Top             =   3120
+         Width           =   5805
+      End
       Begin VB.ComboBox cboOpcion 
          Height          =   315
-         ItemData        =   "frmFacEntOfertas.frx":03D3
+         ItemData        =   "frmFacEntOfertas.frx":03DB
          Left            =   11160
-         List            =   "frmFacEntOfertas.frx":03DD
+         List            =   "frmFacEntOfertas.frx":03E5
          Style           =   2  'Dropdown List
-         TabIndex        =   55
+         TabIndex        =   57
          Top             =   4080
          Visible         =   0   'False
          Width           =   735
       End
       Begin VB.TextBox Text1 
-         Height          =   795
+         Height          =   1635
          Index           =   35
-         Left            =   -73320
+         Left            =   -74760
          MaxLength       =   255
          MultiLine       =   -1  'True
-         TabIndex        =   134
+         TabIndex        =   36
          Tag             =   "Obs CRM|T|S|||scapre|observacrm|||"
-         Text            =   "frmFacEntOfertas.frx":03E9
-         Top             =   3840
-         Width           =   9285
+         Text            =   "frmFacEntOfertas.frx":03F1
+         Top             =   3120
+         Width           =   5445
       End
       Begin VB.Frame FrameFactura 
          Height          =   3780
          Left            =   -74280
-         TabIndex        =   87
+         TabIndex        =   89
          Top             =   720
          Width           =   10575
          Begin VB.TextBox Text3 
@@ -475,7 +488,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   1
             Left            =   120
             MaxLength       =   15
-            TabIndex        =   136
+            TabIndex        =   137
             Text            =   "Text1 7"
             Top             =   3240
             Width           =   1845
@@ -486,7 +499,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   43
             Left            =   3240
             MaxLength       =   15
-            TabIndex        =   122
+            TabIndex        =   124
             Text            =   "Text1 7"
             Top             =   1560
             Width           =   1485
@@ -497,7 +510,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   37
             Left            =   2520
             MaxLength       =   4
-            TabIndex        =   121
+            TabIndex        =   123
             Text            =   "Text1 7"
             Top             =   1560
             Width           =   525
@@ -508,7 +521,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   40
             Left            =   4920
             MaxLength       =   5
-            TabIndex        =   120
+            TabIndex        =   122
             Text            =   "Text1 7"
             Top             =   1560
             Width           =   525
@@ -520,7 +533,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   46
             Left            =   5520
             MaxLength       =   15
-            TabIndex        =   119
+            TabIndex        =   121
             Text            =   "Text1 7"
             Top             =   1560
             Width           =   1485
@@ -531,7 +544,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   44
             Left            =   3240
             MaxLength       =   15
-            TabIndex        =   118
+            TabIndex        =   120
             Text            =   "Text1 7"
             Top             =   1875
             Width           =   1485
@@ -542,7 +555,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   38
             Left            =   2520
             MaxLength       =   4
-            TabIndex        =   117
+            TabIndex        =   119
             Text            =   "Text1 7"
             Top             =   1875
             Width           =   525
@@ -553,7 +566,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   41
             Left            =   4920
             MaxLength       =   5
-            TabIndex        =   116
+            TabIndex        =   118
             Text            =   "Text1 7"
             Top             =   1875
             Width           =   525
@@ -565,7 +578,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   47
             Left            =   5520
             MaxLength       =   15
-            TabIndex        =   115
+            TabIndex        =   117
             Text            =   "Text1 7"
             Top             =   1875
             Width           =   1485
@@ -576,7 +589,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   45
             Left            =   3240
             MaxLength       =   15
-            TabIndex        =   114
+            TabIndex        =   116
             Text            =   "Text1 7"
             Top             =   2205
             Width           =   1485
@@ -587,7 +600,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   39
             Left            =   2520
             MaxLength       =   4
-            TabIndex        =   113
+            TabIndex        =   115
             Text            =   "Text1 7"
             Top             =   2205
             Width           =   525
@@ -598,7 +611,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   42
             Left            =   4920
             MaxLength       =   5
-            TabIndex        =   112
+            TabIndex        =   114
             Text            =   "Text1 7"
             Top             =   2205
             Width           =   525
@@ -610,7 +623,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   48
             Left            =   5520
             MaxLength       =   15
-            TabIndex        =   111
+            TabIndex        =   113
             Text            =   "Text1 7"
             Top             =   2205
             Width           =   1485
@@ -622,7 +635,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   54
             Left            =   7800
             MaxLength       =   15
-            TabIndex        =   110
+            TabIndex        =   112
             Text            =   "Text1 7"
             Top             =   2205
             Width           =   1245
@@ -633,7 +646,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   51
             Left            =   7200
             MaxLength       =   5
-            TabIndex        =   109
+            TabIndex        =   111
             Text            =   "Text1 7"
             Top             =   2205
             Width           =   525
@@ -645,7 +658,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   53
             Left            =   7800
             MaxLength       =   15
-            TabIndex        =   108
+            TabIndex        =   110
             Text            =   "Text1 7"
             Top             =   1875
             Width           =   1245
@@ -656,7 +669,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   50
             Left            =   7200
             MaxLength       =   5
-            TabIndex        =   107
+            TabIndex        =   109
             Text            =   "Text1 7"
             Top             =   1875
             Width           =   525
@@ -668,7 +681,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   52
             Left            =   7800
             MaxLength       =   15
-            TabIndex        =   106
+            TabIndex        =   108
             Text            =   "Text1 7"
             Top             =   1560
             Width           =   1245
@@ -679,7 +692,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   49
             Left            =   7200
             MaxLength       =   5
-            TabIndex        =   105
+            TabIndex        =   107
             Text            =   "Text1 7"
             Top             =   1560
             Width           =   525
@@ -690,7 +703,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   33
             Left            =   240
             MaxLength       =   15
-            TabIndex        =   92
+            TabIndex        =   94
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1485
@@ -701,7 +714,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   34
             Left            =   2160
             MaxLength       =   15
-            TabIndex        =   91
+            TabIndex        =   93
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1365
@@ -712,7 +725,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   35
             Left            =   3960
             MaxLength       =   15
-            TabIndex        =   90
+            TabIndex        =   92
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1365
@@ -724,7 +737,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   36
             Left            =   5760
             MaxLength       =   15
-            TabIndex        =   89
+            TabIndex        =   91
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1485
@@ -745,7 +758,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   55
             Left            =   7200
             MaxLength       =   15
-            TabIndex        =   88
+            TabIndex        =   90
             Text            =   "Text1 7"
             Top             =   2640
             Width           =   1845
@@ -765,7 +778,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   24
             Left            =   120
-            TabIndex        =   137
+            TabIndex        =   138
             Top             =   3000
             Width           =   1770
          End
@@ -774,7 +787,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   9
             Left            =   3360
-            TabIndex        =   128
+            TabIndex        =   130
             Top             =   1320
             Width           =   1215
          End
@@ -783,7 +796,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   33
             Left            =   5520
-            TabIndex        =   127
+            TabIndex        =   129
             Top             =   1350
             Width           =   1335
          End
@@ -798,7 +811,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   41
             Left            =   4920
-            TabIndex        =   126
+            TabIndex        =   128
             Top             =   1350
             Width           =   495
          End
@@ -807,7 +820,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   42
             Left            =   2520
-            TabIndex        =   125
+            TabIndex        =   127
             Top             =   1320
             Width           =   735
          End
@@ -816,7 +829,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   48
             Left            =   7200
-            TabIndex        =   124
+            TabIndex        =   126
             Top             =   1320
             Width           =   495
          End
@@ -825,7 +838,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   22
             Left            =   8040
-            TabIndex        =   123
+            TabIndex        =   125
             Top             =   1320
             Width           =   735
          End
@@ -834,7 +847,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   10
             Left            =   240
-            TabIndex        =   101
+            TabIndex        =   103
             Top             =   360
             Width           =   855
          End
@@ -843,7 +856,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   11
             Left            =   2160
-            TabIndex        =   100
+            TabIndex        =   102
             Top             =   360
             Width           =   855
          End
@@ -852,7 +865,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   12
             Left            =   3960
-            TabIndex        =   99
+            TabIndex        =   101
             Top             =   360
             Width           =   855
          End
@@ -861,7 +874,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   8
             Left            =   5760
-            TabIndex        =   98
+            TabIndex        =   100
             Top             =   360
             Width           =   1215
          End
@@ -879,7 +892,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   30
             Left            =   1920
-            TabIndex        =   97
+            TabIndex        =   99
             Top             =   480
             Width           =   135
          End
@@ -897,7 +910,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   31
             Left            =   3720
-            TabIndex        =   96
+            TabIndex        =   98
             Top             =   480
             Width           =   135
          End
@@ -915,7 +928,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   32
             Left            =   5520
-            TabIndex        =   95
+            TabIndex        =   97
             Top             =   480
             Width           =   135
          End
@@ -933,7 +946,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   36
             Left            =   11880
-            TabIndex        =   94
+            TabIndex        =   96
             Top             =   2160
             Width           =   135
          End
@@ -952,7 +965,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   39
             Left            =   5640
-            TabIndex        =   93
+            TabIndex        =   95
             Top             =   2640
             Width           =   1530
          End
@@ -967,7 +980,7 @@ Begin VB.Form frmFacEntOfertas2
          Left            =   8280
          Locked          =   -1  'True
          MaxLength       =   1
-         TabIndex        =   57
+         TabIndex        =   59
          Tag             =   "Descuento 1"
          Text            =   "OF"
          Top             =   4080
@@ -979,7 +992,7 @@ Begin VB.Form frmFacEntOfertas2
          ForeColor       =   &H00972E0B&
          Height          =   2355
          Left            =   240
-         TabIndex        =   64
+         TabIndex        =   66
          Top             =   370
          Width           =   11655
          Begin VB.TextBox Text1 
@@ -987,7 +1000,7 @@ Begin VB.Form frmFacEntOfertas2
             Index           =   34
             Left            =   5640
             MaxLength       =   40
-            TabIndex        =   132
+            TabIndex        =   134
             Tag             =   "E-mail confirmación|T|S|||scapre|mailconfir||N|"
             Text            =   "Text1 wwwwwwwwwwwwwwwwwwwwwwwwww aqteter"
             Top             =   1920
@@ -1000,7 +1013,7 @@ Begin VB.Form frmFacEntOfertas2
             Left            =   7560
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   130
+            TabIndex        =   132
             Text            =   "Text2"
             Top             =   1320
             Width           =   3390
@@ -1024,7 +1037,7 @@ Begin VB.Form frmFacEntOfertas2
             Left            =   7560
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   77
+            TabIndex        =   79
             Tag             =   "Direccion/Dpto.|T|S|||scapre|nomdirec||N|"
             Text            =   "Text2"
             Top             =   210
@@ -1127,7 +1140,7 @@ Begin VB.Form frmFacEntOfertas2
             Left            =   7560
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   71
+            TabIndex        =   73
             Text            =   "Text2"
             Top             =   562
             Width           =   3405
@@ -1151,7 +1164,7 @@ Begin VB.Form frmFacEntOfertas2
             Left            =   7560
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   66
+            TabIndex        =   68
             Text            =   "Text2"
             Top             =   914
             Width           =   3390
@@ -1205,7 +1218,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   23
             Left            =   5640
-            TabIndex        =   133
+            TabIndex        =   135
             Top             =   1680
             Width           =   1455
          End
@@ -1213,7 +1226,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   240
             Index           =   7
             Left            =   6600
-            Picture         =   "frmFacEntOfertas.frx":03F1
+            Picture         =   "frmFacEntOfertas.frx":03F9
             ToolTipText     =   "Buscar forma de pago"
             Top             =   1320
             Width           =   240
@@ -1223,7 +1236,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   6
             Left            =   5700
-            TabIndex        =   131
+            TabIndex        =   133
             Top             =   1350
             Width           =   855
          End
@@ -1232,7 +1245,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   240
             Index           =   6
             Left            =   900
-            Picture         =   "frmFacEntOfertas.frx":04F3
+            Picture         =   "frmFacEntOfertas.frx":04FB
             ToolTipText     =   "Buscar población"
             Top             =   914
             Width           =   240
@@ -1242,7 +1255,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   1
             Left            =   5700
-            TabIndex        =   79
+            TabIndex        =   81
             Top             =   210
             Width           =   495
          End
@@ -1251,7 +1264,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   240
             Index           =   2
             Left            =   6600
-            Picture         =   "frmFacEntOfertas.frx":05F5
+            Picture         =   "frmFacEntOfertas.frx":05FD
             ToolTipText     =   "Buscar direc./dpto"
             Top             =   210
             Width           =   240
@@ -1261,7 +1274,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   17
             Left            =   120
-            TabIndex        =   78
+            TabIndex        =   80
             Top             =   1266
             Width           =   735
          End
@@ -1270,7 +1283,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   16
             Left            =   120
-            TabIndex        =   76
+            TabIndex        =   78
             Top             =   914
             Width           =   735
          End
@@ -1279,7 +1292,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   19
             Left            =   2445
-            TabIndex        =   75
+            TabIndex        =   77
             Top             =   210
             Width           =   735
          End
@@ -1288,7 +1301,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   20
             Left            =   120
-            TabIndex        =   74
+            TabIndex        =   76
             Top             =   210
             Width           =   615
          End
@@ -1296,7 +1309,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   240
             Index           =   1
             Left            =   900
-            Picture         =   "frmFacEntOfertas.frx":06F7
+            Picture         =   "frmFacEntOfertas.frx":06FF
             ToolTipText     =   "Buscar cliente varios"
             Top             =   220
             Visible         =   0   'False
@@ -1307,7 +1320,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   13
             Left            =   120
-            TabIndex        =   73
+            TabIndex        =   75
             Top             =   1610
             Width           =   855
          End
@@ -1316,7 +1329,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   34
             Left            =   5700
-            TabIndex        =   72
+            TabIndex        =   74
             Top             =   562
             Width           =   615
          End
@@ -1324,7 +1337,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   240
             Index           =   5
             Left            =   6600
-            Picture         =   "frmFacEntOfertas.frx":07F9
+            Picture         =   "frmFacEntOfertas.frx":0801
             ToolTipText     =   "Buscar agente"
             Top             =   562
             Width           =   240
@@ -1334,7 +1347,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   15
             Left            =   5700
-            TabIndex        =   70
+            TabIndex        =   72
             Top             =   924
             Width           =   855
          End
@@ -1343,7 +1356,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   25
             Left            =   3960
-            TabIndex        =   69
+            TabIndex        =   71
             Top             =   1680
             Width           =   615
          End
@@ -1352,7 +1365,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   26
             Left            =   3960
-            TabIndex        =   68
+            TabIndex        =   70
             Top             =   2040
             Width           =   735
          End
@@ -1361,7 +1374,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   4
             Left            =   120
-            TabIndex        =   67
+            TabIndex        =   69
             Top             =   2040
             Width           =   1095
          End
@@ -1369,7 +1382,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   240
             Index           =   4
             Left            =   6600
-            Picture         =   "frmFacEntOfertas.frx":08FB
+            Picture         =   "frmFacEntOfertas.frx":0903
             ToolTipText     =   "Buscar forma de pago"
             Top             =   914
             Width           =   240
@@ -1379,7 +1392,7 @@ Begin VB.Form frmFacEntOfertas2
             Height          =   255
             Index           =   7
             Left            =   120
-            TabIndex        =   65
+            TabIndex        =   67
             Top             =   562
             Width           =   735
          End
@@ -1420,7 +1433,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   315
          Index           =   1
          Left            =   2640
-         TabIndex        =   63
+         TabIndex        =   65
          ToolTipText     =   "Buscar artículo"
          Top             =   3960
          Visible         =   0   'False
@@ -1432,7 +1445,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   315
          Index           =   0
          Left            =   960
-         TabIndex        =   62
+         TabIndex        =   64
          ToolTipText     =   "Buscar almacen"
          Top             =   3960
          Visible         =   0   'False
@@ -1447,7 +1460,7 @@ Begin VB.Form frmFacEntOfertas2
          Left            =   2880
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   50
+         TabIndex        =   52
          Tag             =   "Nombre Artículo"
          Text            =   "nomArtic"
          Top             =   4080
@@ -1463,7 +1476,7 @@ Begin VB.Form frmFacEntOfertas2
          Index           =   8
          Left            =   10080
          MaxLength       =   12
-         TabIndex        =   58
+         TabIndex        =   60
          Tag             =   "Importe"
          Text            =   "Importe"
          Top             =   4080
@@ -1479,7 +1492,7 @@ Begin VB.Form frmFacEntOfertas2
          Index           =   7
          Left            =   9480
          MaxLength       =   30
-         TabIndex        =   54
+         TabIndex        =   56
          Tag             =   "Descuento 2"
          Text            =   "Dto2"
          Top             =   4080
@@ -1495,7 +1508,7 @@ Begin VB.Form frmFacEntOfertas2
          Index           =   6
          Left            =   8880
          MaxLength       =   5
-         TabIndex        =   53
+         TabIndex        =   55
          Tag             =   "Descuento 1"
          Text            =   "Dto1"
          Top             =   4080
@@ -1511,7 +1524,7 @@ Begin VB.Form frmFacEntOfertas2
          Index           =   4
          Left            =   7440
          MaxLength       =   12
-         TabIndex        =   52
+         TabIndex        =   54
          Tag             =   "Precio"
          Text            =   "123,456.7879"
          Top             =   4080
@@ -1519,26 +1532,26 @@ Begin VB.Form frmFacEntOfertas2
          Width           =   855
       End
       Begin VB.TextBox Text1 
-         Height          =   1275
+         Height          =   1635
          Index           =   32
-         Left            =   -73320
+         Left            =   -69000
          MultiLine       =   -1  'True
          TabIndex        =   35
          Tag             =   "Gestión Oferta|T|S|||scapre|seguiofe||N|"
-         Text            =   "frmFacEntOfertas.frx":09FD
-         Top             =   2280
-         Width           =   9285
+         Text            =   "frmFacEntOfertas.frx":0A05
+         Top             =   840
+         Width           =   5805
       End
       Begin VB.TextBox Text1 
-         Height          =   1275
+         Height          =   1635
          Index           =   31
-         Left            =   -73320
+         Left            =   -74760
          MultiLine       =   -1  'True
          TabIndex        =   34
          Tag             =   "Concepto Oferta|T|S|||scapre|concepto||N|"
-         Text            =   "frmFacEntOfertas.frx":0A05
+         Text            =   "frmFacEntOfertas.frx":0A0D
          Top             =   840
-         Width           =   9285
+         Width           =   5445
       End
       Begin VB.TextBox txtAux 
          Alignment       =   1  'Right Justify
@@ -1549,7 +1562,7 @@ Begin VB.Form frmFacEntOfertas2
          Index           =   3
          Left            =   6240
          MaxLength       =   16
-         TabIndex        =   51
+         TabIndex        =   53
          Tag             =   "Cantidad"
          Text            =   "1,234,567,891.25"
          Top             =   4080
@@ -1564,7 +1577,7 @@ Begin VB.Form frmFacEntOfertas2
          Index           =   1
          Left            =   1200
          MaxLength       =   18
-         TabIndex        =   49
+         TabIndex        =   51
          Tag             =   "Código Artículo"
          Text            =   "Artic Artic Artic5"
          Top             =   3900
@@ -1579,7 +1592,7 @@ Begin VB.Form frmFacEntOfertas2
          Index           =   0
          Left            =   360
          MaxLength       =   15
-         TabIndex        =   48
+         TabIndex        =   50
          Tag             =   "Código Almacen"
          Text            =   "codalmac"
          Top             =   3900
@@ -1687,10 +1700,10 @@ Begin VB.Form frmFacEntOfertas2
          Width           =   7845
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmFacEntOfertas.frx":0A0D
+         Bindings        =   "frmFacEntOfertas.frx":0A15
          Height          =   2055
          Left            =   240
-         TabIndex        =   59
+         TabIndex        =   61
          Top             =   2880
          Width           =   11655
          _ExtentX        =   20558
@@ -1756,20 +1769,29 @@ Begin VB.Form frmFacEntOfertas2
          EndProperty
       End
       Begin VB.Label Label1 
+         Caption         =   "Observaciones compra"
+         Height          =   255
+         Index           =   28
+         Left            =   -69000
+         TabIndex        =   140
+         Top             =   2880
+         Width           =   1815
+      End
+      Begin VB.Label Label1 
          Caption         =   "Obse"
-         Height          =   495
+         Height          =   255
          Index           =   18
          Left            =   -74760
-         TabIndex        =   135
-         Top             =   3840
-         Width           =   1455
+         TabIndex        =   136
+         Top             =   2880
+         Width           =   3015
       End
       Begin VB.Label Label1 
          Caption         =   "Validez Oferta"
          Height          =   255
          Index           =   2
          Left            =   -74400
-         TabIndex        =   104
+         TabIndex        =   106
          Top             =   1080
          Width           =   1095
       End
@@ -1778,17 +1800,17 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   37
          Left            =   -74760
-         TabIndex        =   61
-         Top             =   840
+         TabIndex        =   63
+         Top             =   600
          Width           =   1815
       End
       Begin VB.Label Label1 
          Caption         =   "Gestión Oferta"
          Height          =   255
          Index           =   38
-         Left            =   -74760
-         TabIndex        =   60
-         Top             =   2280
+         Left            =   -69000
+         TabIndex        =   62
+         Top             =   600
          Width           =   1815
       End
       Begin VB.Label Label1 
@@ -1796,7 +1818,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   45
          Left            =   -74400
-         TabIndex        =   47
+         TabIndex        =   49
          Top             =   3020
          Width           =   1095
       End
@@ -1805,7 +1827,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   5
          Left            =   -74400
-         TabIndex        =   45
+         TabIndex        =   47
          Top             =   1520
          Width           =   1095
       End
@@ -1814,7 +1836,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   255
          Index           =   3
          Left            =   -74400
-         TabIndex        =   44
+         TabIndex        =   46
          Top             =   450
          Width           =   1215
       End
@@ -1823,7 +1845,7 @@ Begin VB.Form frmFacEntOfertas2
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   11040
-      TabIndex        =   38
+      TabIndex        =   40
       Top             =   6480
       Visible         =   0   'False
       Width           =   1035
@@ -1832,7 +1854,7 @@ Begin VB.Form frmFacEntOfertas2
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   41
+      TabIndex        =   43
       Top             =   0
       Width           =   12315
       _ExtentX        =   21722
@@ -1962,7 +1984,7 @@ Begin VB.Form frmFacEntOfertas2
          Left            =   9360
          Locked          =   -1  'True
          MaxLength       =   15
-         TabIndex        =   103
+         TabIndex        =   105
          Text            =   "TOTAL"
          Top             =   120
          Width           =   885
@@ -1974,7 +1996,7 @@ Begin VB.Form frmFacEntOfertas2
          Index           =   56
          Left            =   10440
          MaxLength       =   15
-         TabIndex        =   102
+         TabIndex        =   104
          Text            =   "Text1 7"
          Top             =   60
          Width           =   1530
@@ -1983,7 +2005,7 @@ Begin VB.Form frmFacEntOfertas2
          Caption         =   "Vista previa"
          Height          =   195
          Left            =   7800
-         TabIndex        =   42
+         TabIndex        =   44
          Top             =   120
          Width           =   1455
       End
@@ -2001,7 +2023,7 @@ Begin VB.Form frmFacEntOfertas2
       Height          =   255
       Index           =   27
       Left            =   0
-      TabIndex        =   138
+      TabIndex        =   139
       Top             =   0
       Width           =   1335
    End
@@ -2019,7 +2041,7 @@ Begin VB.Form frmFacEntOfertas2
       EndProperty
       Height          =   255
       Left            =   9360
-      TabIndex        =   129
+      TabIndex        =   131
       Top             =   6960
       Width           =   2775
    End
@@ -2028,7 +2050,7 @@ Begin VB.Form frmFacEntOfertas2
       Height          =   255
       Index           =   35
       Left            =   2400
-      TabIndex        =   46
+      TabIndex        =   48
       Top             =   6480
       Width           =   1335
    End
@@ -3116,7 +3138,7 @@ End Sub
 
 
 Private Sub frmPlant_CargarPlantillas()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RSLineas As ADODB.Recordset
 Dim SQL As String, devuelve As String
 Dim codAlmac As String
@@ -3135,8 +3157,8 @@ Dim COntadorLInea As Integer
     'lineas de esa oferta poniendo en cantidad de slipre de lineas de oferta
     'el resultado de multiplicar la cantidad de tmpscapla * cantidad de slipla
     SQL = "SELECT * FROM tmpscapla WHERE codusu=" & vUsu.codigo & " AND cantidad>0 ORDER BY codplant"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     'Obtener el almacen por defecto del trabajador
     'Poner el Almacen por defecto del Trabajador
@@ -3151,10 +3173,10 @@ Dim COntadorLInea As Integer
     'Consigo el contador
     COntadorLInea = Val(SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", ObtenerWhereCP))
     
-    While Not Rs.EOF  'Para cada plantilla
+    While Not RS.EOF  'Para cada plantilla
         'Añadimos todas las lineas de esa plantilla en la cantidad correcta en las
         'lineas de la Oferta
-        SQL = "SELECT * FROM slipla WHERE codplant=" & Rs!codPlant & " order by numlinea"
+        SQL = "SELECT * FROM slipla WHERE codplant=" & RS!codPlant & " order by numlinea"
         Set RSLineas = New ADODB.Recordset
         RSLineas.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         While Not RSLineas.EOF
@@ -3163,7 +3185,7 @@ Dim COntadorLInea As Integer
             If devuelve <> "" Then
             'Si se puede vender por cajas(devuelve>1) poner numero de unidades/caja en una linea con el
             'precio de caja, y otra linea con el resto unidades un precio unidad
-                cantidad = (Rs!cantidad * RSLineas!cantidad)
+                cantidad = (RS!cantidad * RSLineas!cantidad)
                 NumCajas = ObtenerNumCajas(CStr(cantidad), devuelve)
                 RestoUnid = CInt(cantidad) - NumCajas * CInt(devuelve)
                 'Obtener el precio a aplicar
@@ -3198,10 +3220,10 @@ Dim COntadorLInea As Integer
         Wend
         RSLineas.Close
         Set RSLineas = Nothing
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
     'Borrar de la Tabla Temporal (tmpscapla) los registros insertados tras añadir
     'las lineas de las plantillas seleccionadas
@@ -3224,10 +3246,10 @@ End Sub
 
 
 Private Sub frmTOferta_CargarOferta2(NumOfe As String)
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim numlinea As String, vWhere As String
-Dim I  As Integer
+Dim i  As Integer
 Dim CopiaDesdeHco As Boolean
     On Error GoTo ECargarOferta
     
@@ -3249,31 +3271,31 @@ Dim CopiaDesdeHco As Boolean
     Else
         SQL = "Select * from " & NomTablaLineas & " where numofert=" & RecuperaValor(NumOfe, 1)
     End If
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    While Not Rs.EOF  'Para cada linea de oferta
+    While Not RS.EOF  'Para cada linea de oferta
         'Obtener el siguiente numero de linea
         vWhere = ObtenerWhereCP
         numlinea = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", vWhere)
         
         SQL = "INSERT INTO " & NomTablaLineas & " (numofert, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,origpre,esopcion) "
-        SQL = SQL & " VALUES(" & Text1(0).Text & ", " & numlinea & ", " & Rs!codAlmac & ", " & DBSet(Rs!codArtic, "T") & ", " & DBSet(Rs!NomArtic, "T") & ", "
-        SQL = SQL & DBSet(Rs!Ampliaci, "T", "S")
-        SQL = SQL & ", " & DBSet(Rs!cantidad, "N") & ", " & DBSet(Rs!precioar, "N") & ", " & DBSet(Rs!dtoline1, "N") & ", " & DBSet(Rs!dtoline2, "N") & ", " & DBSet(Rs!ImporteL, "N") & ", "
-        SQL = SQL & DBSet(CStr(Rs!origpre), "T", "S") & ","
+        SQL = SQL & " VALUES(" & Text1(0).Text & ", " & numlinea & ", " & RS!codAlmac & ", " & DBSet(RS!codArtic, "T") & ", " & DBSet(RS!NomArtic, "T") & ", "
+        SQL = SQL & DBSet(RS!Ampliaci, "T", "S")
+        SQL = SQL & ", " & DBSet(RS!cantidad, "N") & ", " & DBSet(RS!precioar, "N") & ", " & DBSet(RS!dtoline1, "N") & ", " & DBSet(RS!dtoline2, "N") & ", " & DBSet(RS!ImporteL, "N") & ", "
+        SQL = SQL & DBSet(CStr(RS!origpre), "T", "S") & ","
         'SQL = SQL & Rs!esopcion & "," & DBSet(DBLet((Rs!observa), "T"), "T", "S") & ")"
-        SQL = SQL & Rs!esopcion & ")"
+        SQL = SQL & RS!esopcion & ")"
         conn.Execute SQL
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     
     SQL = RecuperaValor(NumOfe, 2)  'Copio observaciones
     vWhere = RecuperaValor(NumOfe, 3)  'Copio datos carta
-    I = Val(SQL) + Val(vWhere)
-    If I > 0 Then
+    i = Val(SQL) + Val(vWhere)
+    If i > 0 Then
         'Cargo en RS la oferta
         If CopiaDesdeHco Then
             SQL = DevuelveDesdeBD(conAri, "distinct(fecofert)", "slhpre", "numofert", RecuperaValor(NumOfe, 1))
@@ -3282,41 +3304,41 @@ Dim CopiaDesdeHco As Boolean
         Else
             SQL = "Select * from " & NombreTabla & " where numofert=" & RecuperaValor(NumOfe, 1)
         End If
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then
             'UPDATEAMOS los campos de la oferta de observaciones
             SQL = ""
             If RecuperaValor(NumOfe, 2) = "1" Then 'Copio observaciones
                 
                 
-                For I = 1 To 5
-                    vWhere = "observa0" & I
-                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(Rs.Fields(vWhere), "T"), "T", "S")
+                For i = 1 To 5
+                    vWhere = "observa0" & i
+                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(RS.Fields(vWhere), "T"), "T", "S")
                     SQL = SQL & numlinea
-                Next I
+                Next i
                 
                 '15 Marzo 2010. Cunado pone copiar observacinoes TB tiene que copiar el campo concepto
-                SQL = SQL & ", concepto = " & DBSet(DBLet(Rs!concepto, "T"), "T")
+                SQL = SQL & ", concepto = " & DBSet(DBLet(RS!concepto, "T"), "T")
                 '12 Sept 2012  Copiara tb el plazo de entrega
-                SQL = SQL & ", plazos01 = " & DBSet(DBLet(Rs!plazos01, "T"), "T", "S")
-                SQL = SQL & ", plazos02 = " & DBSet(DBLet(Rs!plazos02, "T"), "T", "S")
+                SQL = SQL & ", plazos01 = " & DBSet(DBLet(RS!plazos01, "T"), "T", "S")
+                SQL = SQL & ", plazos02 = " & DBSet(DBLet(RS!plazos02, "T"), "T", "S")
                 
                 
             End If
             
             If RecuperaValor(NumOfe, 3) = "1" Then 'Copio carta
-                For I = 1 To 5
-                    vWhere = "asunto0" & I
-                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(Rs.Fields(vWhere), "T"), "T", "S")
+                For i = 1 To 5
+                    vWhere = "asunto0" & i
+                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(RS.Fields(vWhere), "T"), "T", "S")
                     SQL = SQL & numlinea
-                Next I
+                Next i
                 
             End If
        
             SQL = Mid(SQL, 2)  'quito la primera coma
             SQL = SQL & " WHERE numofert = " & Text1(0).Text
             SQL = "UPDATE " & NombreTabla & " SET " & SQL
-            Rs.Close
+            RS.Close
         conn.Execute SQL
         PosicionarData  'vuelvo a cargar los datos
         PonerCampos
@@ -3326,10 +3348,10 @@ Dim CopiaDesdeHco As Boolean
     End If
     
     
-    Set Rs = Nothing
+    Set RS = Nothing
 
     'Actualizar el Grid con las lineas Añadidas
-    If I = 0 Then CalcularDatosFactura   'Si no mete obser y carta que carge los totales
+    If i = 0 Then CalcularDatosFactura   'Si no mete obser y carta que carge los totales
     PonerCamposLineas
     DataGrid1.Enabled = True
     Screen.MousePointer = vbDefault
@@ -3541,6 +3563,15 @@ Dim LineasQueSepasan As String
             
             
         End If
+    
+        devuelve = Trim(DBLet(Data1.Recordset!obscompra, "T"))
+        If devuelve <> "" Then
+            MsgBox devuelve, vbInformation, "Observaciones compra"
+            devuelve = ""
+        End If
+        
+        
+    
     
         'Pedir: Operador de Pedido, fecha pedido, y fecha entrega (calcular semana)
 '        AbrirListadoOfer (37) '37: Pedir datos para Pedido (NO IMPRIME LISTADO)
@@ -4102,8 +4133,8 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte, NumReg As Byte
-Dim b As Boolean
+Dim i As Byte, NumReg As Byte
+Dim B As Boolean
 
     On Error GoTo EPonerModo
     lblF.Caption = ""
@@ -4125,12 +4156,12 @@ Dim b As Boolean
     'Modo 2. Hay datos y estamos visualizandolos
     '=========================================
     'Poner Flechas de desplazamiento visibles
-    b = (Modo = 2)
+    B = (Modo = 2)
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
         
         
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -4139,47 +4170,47 @@ Dim b As Boolean
     
     'Poner siempre el campo numOferta (contador) bloqueado, excepto cuando
     'estamos en modo de Busqueda
-    b = (Modo <> 1)
-    BloquearTxt Text1(0), b, True
+    B = (Modo <> 1)
+    BloquearTxt Text1(0), B, True
     
     '-----  Datos Totales de Factura siempre bloqueado
-    For I = 33 To 56
-        BloquearTxt Text3(I), True
-    Next I
+    For i = 33 To 56
+        BloquearTxt Text3(i), True
+    Next i
     'Campo B.Imp y Imp. IVA siempre en azul
     Text3(36).BackColor = &HFFFFC0
-    For I = 46 To 48
-        Text3(I).BackColor = &HFFFFC0
-        Text3(I + 6).BackColor = &HFFFFC0
-    Next I
+    For i = 46 To 48
+        Text3(i).BackColor = &HFFFFC0
+        Text3(i + 6).BackColor = &HFFFFC0
+    Next i
     'Campos total Factura en verde
     Text3(55).BackColor = &HC0FFC0
     Text3(56).BackColor = &HC0FFC0    'Tatal factura
     '---------------------------------------------------
     
-    b = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
-    Me.cboFacturacion.Enabled = b
-    Me.chkAceptado(0).Enabled = b
+    B = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
+    Me.cboFacturacion.Enabled = B
+    Me.chkAceptado(0).Enabled = B
     
     'Si no es modo lineas Boquear los TxtAux
-    For I = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(I), (Modo <> 5)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(i), (Modo <> 5)
+    Next i
     BloquearTxt Text2(16), (Modo <> 5)
     
     
     '---------------------------------------------
-    b = Modo <> 0 And Modo <> 2 And Modo <> 5
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2 And Modo <> 5
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     
-    For I = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(i).Enabled = B
+    Next i
     
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = B
+    Next i
     Me.imgBuscar(1).visible = False
     Me.imgBuscar(8).Enabled = Modo <> 0
        
@@ -4210,14 +4241,14 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim devuelve As String
 
     On Error GoTo EDatosOK
 
     DatosOk = False
-    b = CompForm(Me, 1) 'Comprobar formato datos ok
-    If Not b Then Exit Function
+    B = CompForm(Me, 1) 'Comprobar formato datos ok
+    If Not B Then Exit Function
     
     'Comprobar que la Fecha Entrega es posterior a la del pedido
     If Not EsFechaIgualPosterior(Text1(1).Text, Text1(2).Text, True, "La Fecha de Entrega debe ser posterior a la Fecha del Pedido.") Then Exit Function
@@ -4230,56 +4261,56 @@ Dim devuelve As String
         If devuelve = "1" And Text1(13).Text = "" Then 'Referencia Obligatoria
             MsgBox "La Referencia del Cliente es Obligatoria.", vbInformation
             PonerFoco Text1(13)
-            b = False
+            B = False
         End If
     End If
     
-    If b Then
+    If B Then
         'Lleva direcciones de envio. Comprobamos que la que ha puesto existe...
         If vParamAplic.DireccionesEnvio Then
             If Text1(33).Text = "" Xor Text2(33).Text = "" Then
                 MsgBox "Dirección de envio INCORRECTA", vbExclamation
-                b = False
+                B = False
             End If
             'Ha puesto un codenvio y parece ser que existe... LO COMPURBEO que no hay referenciales
-            If b And Text1(33).Text <> "" Then
+            If B And Text1(33).Text <> "" Then
                 devuelve = DevuelveDesdeBDNew(1, "sdirenvio", "nomdiren", "codclien", Text1(4).Text, "N", "", "coddiren", Text1(33).Text, "N")
                 If devuelve = "" Then
                     MsgBox "NO existe la dirección de envio: " & Text1(33).Text, vbExclamation
                     PonerFoco Text1(33)
-                    b = False
+                    B = False
                 End If
             End If
          End If 'de direnvii
     End If 'de b=true
             
-    If b Then
+    If B Then
         If EsDeVarios Then
             If vParamAplic.FrasMostradorSerieDistinta Then
                 'Tiene contadores distintos.... FORMA DE PAGO deberia ser efec o tartje
                 devuelve = DevuelveDesdeBDNew(1, " sforpa", "tipforpa", "codforpa", Text1(14).Text)
                 If devuelve <> "0" And devuelve <> "6" Then
-                    If MsgBox("La forma pago deberia ser efectivo o tarjeta.   ¿Continuar? ", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then b = False
-                    If Not b Then PonerFoco Text1(14)
+                    If MsgBox("La forma pago deberia ser efectivo o tarjeta.   ¿Continuar? ", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then B = False
+                    If Not B Then PonerFoco Text1(14)
                 End If
                 devuelve = ""
             End If
         End If
     End If
         
-    If b Then
+    If B Then
         'Si el usuario conectado es agente SOLO puede ponerse a el como agente
         
         If vUsu.CodigoAgente > 0 And Val(Text1(17).Text) <> vUsu.CodigoAgente Then
             'MAL
             MsgBox "Agente distinto del conectado", vbExclamation
-            b = False
+            B = False
         End If
     End If
             
-    If Not b Then Exit Function
+    If Not B Then Exit Function
           
-    DatosOk = b
+    DatosOk = B
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -4287,8 +4318,8 @@ End Function
 
 
 Private Function DatosOkLinea(ByRef DescuentoSuperiorPermitido As Boolean) As Boolean
-Dim b As Boolean
-Dim I As Byte
+Dim B As Boolean
+Dim i As Byte
 Dim vArtic As CArticulo
 Dim Aux As String
 
@@ -4314,33 +4345,33 @@ Dim Aux As String
     
     
     
-    b = True
-    For I = 0 To txtAux.Count - 1
-        If txtAux(I).Text = "" Then
-            MsgBox "El campo " & txtAux(I).Tag & " no puede ser nulo", vbExclamation
-            b = False
-            PonerFoco txtAux(I)
+    B = True
+    For i = 0 To txtAux.Count - 1
+        If txtAux(i).Text = "" Then
+            MsgBox "El campo " & txtAux(i).Tag & " no puede ser nulo", vbExclamation
+            B = False
+            PonerFoco txtAux(i)
             Exit Function
         End If
-    Next I
+    Next i
         
     'Comprobar que existe de el articulo en el almacen seleccionado
     Set vArtic = New CArticulo
     vArtic.codigo = txtAux(1).Text
     If Not vArtic.ExisteEnAlmacen(txtAux(0).Text) Then
-        b = False
+        B = False
         PonerFoco txtAux(1)
     End If
     Set vArtic = Nothing
     
     
-    If b Then
+    If B Then
         '--------------------------------
         'Comprobaremos que esta vendiendo por encima del dto permitido
         'Preguntaremos si sigue o para
                
         GrabaLogCambioPrecioDto = False
-        If b Then
+        If B Then
             'Si todo ha ido bien..
             'Y lleva el parametro
             If vParamAplic.LogCambioPrecDto Then ComprobarCambioPrecioDto
@@ -4349,7 +4380,7 @@ Dim Aux As String
     End If
     
     
-    DatosOkLinea = b
+    DatosOkLinea = B
     
 EDatosOkLinea:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -4666,15 +4697,15 @@ End Function
 
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 'Pone el boton de Regresar a la Cabecera si pasamos a MAntenimiento de Lineas
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdRegresar.visible = b
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
-    If b Then
+    If B Then
         Me.lblIndicador.Caption = "Líneas " & TituloLinea
         PonerFocoBtn Me.cmdRegresar
         cmdRegresar.Cancel = True
@@ -4689,12 +4720,12 @@ End Sub
 
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim SQL As String
 
     On Error GoTo ECargaGrid
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
@@ -4703,8 +4734,8 @@ Dim SQL As String
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
         
-    b = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
-    vDataGrid.Enabled = Not b
+    B = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
+    vDataGrid.Enabled = Not B
 
     PrimeraVez = False
     Exit Sub
@@ -4715,7 +4746,7 @@ End Sub
 
 
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo ECargaGrid
 
@@ -4779,10 +4810,10 @@ Dim I As Integer
                 
     End Select
 
-    For I = 0 To vDataGrid.Columns.Count - 1
-        vDataGrid.Columns(I).Locked = True
-        vDataGrid.Columns(I).AllowSizing = False
-    Next I
+    For i = 0 To vDataGrid.Columns.Count - 1
+        vDataGrid.Columns(i).Locked = True
+        vDataGrid.Columns(i).AllowSizing = False
+    Next i
     vDataGrid.HoldFields
     Exit Sub
 ECargaGrid:
@@ -4795,34 +4826,34 @@ Private Sub CargaTxtAux(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim I As Byte
+Dim i As Byte
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For I = 0 To txtAux.Count - 1 'TextBox
-            txtAux(I).Top = 290
-            txtAux(I).visible = visible
-        Next I
+        For i = 0 To txtAux.Count - 1 'TextBox
+            txtAux(i).Top = 290
+            txtAux(i).visible = visible
+        Next i
 '        txtAux2.visible = visible
         cmdAux(0).visible = visible
         cmdAux(1).visible = visible
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
-            For I = 0 To txtAux.Count - 1
-                txtAux(I).Text = ""
-                BloquearTxt txtAux(I), False
-            Next I
+            For i = 0 To txtAux.Count - 1
+                txtAux(i).Text = ""
+                BloquearTxt txtAux(i), False
+            Next i
             cboOpcion.ListIndex = -1
         Else 'Vamos a modificar
-            For I = 0 To txtAux.Count - 1
-                If I < 3 Then
-                    txtAux(I).Text = DataGrid1.Columns(I + 2).Text
+            For i = 0 To txtAux.Count - 1
+                If i < 3 Then
+                    txtAux(i).Text = DataGrid1.Columns(i + 2).Text
                 Else
-                    txtAux(I).Text = DataGrid1.Columns(I + 3).Text
+                    txtAux(i).Text = DataGrid1.Columns(i + 3).Text
                 End If
-                txtAux(I).Locked = False
-            Next I
+                txtAux(i).Locked = False
+            Next i
             If Me.DataGrid1.Columns(12).Text = "Si" Then
                 cboOpcion.ListIndex = 1
             Else
@@ -4840,10 +4871,10 @@ Dim I As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid1, 10)
         
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).Top = alto
-            txtAux(I).Height = DataGrid1.RowHeight
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Top = alto
+            txtAux(i).Height = DataGrid1.RowHeight
+        Next i
         cmdAux(0).Top = alto
         cmdAux(1).Top = alto
         cmdAux(0).Height = DataGrid1.RowHeight
@@ -4866,19 +4897,19 @@ Dim I As Byte
         txtAux(3).Left = txtAux(2).Left + txtAux(2).Width + 10
         txtAux(3).Width = DataGrid1.Columns(6).Width - 10
         'Precio, Dto1, Dto2, Precio
-        For I = 4 To txtAux.Count - 1
-            txtAux(I).Left = txtAux(I - 1).Left + txtAux(I - 1).Width + 10
-            txtAux(I).Width = DataGrid1.Columns(I + 3).Width - 10
-        Next I
+        For i = 4 To txtAux.Count - 1
+            txtAux(i).Left = txtAux(i - 1).Left + txtAux(i - 1).Width + 10
+            txtAux(i).Width = DataGrid1.Columns(i + 3).Width - 10
+        Next i
         
         
         cboOpcion.Left = txtAux(8).Left + txtAux(8).Width + 30
         
         'Los ponemos Visibles o No
         '--------------------------
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).visible = visible
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).visible = visible
+        Next i
         cmdAux(0).visible = visible
         cmdAux(1).visible = visible
     End If
@@ -4963,7 +4994,7 @@ Dim vCStock As CStock
 Dim NumCajas As Integer, RestoUnid As Integer
 Dim OrigP As String 'De donde viene el precio
 Dim cantidad As String
-Dim b As Boolean
+Dim B As Boolean
 
 Dim StatusArticMayorCero As Boolean
 
@@ -5021,10 +5052,10 @@ Dim StatusArticMayorCero As Boolean
                     Me.txtAux(6).Text = ""
                     Me.txtAux(7).Text = ""
                 End If
-                b = (Me.ActiveControl.Name = "txtAux")
-                If b Then b = (Me.ActiveControl.Index = 2)
+                B = (Me.ActiveControl.Name = "txtAux")
+                If B Then B = (Me.ActiveControl.Index = 2)
                 
-                If b Then
+                If B Then
                     If txtAux(2).Locked Then
                         If StatusArticMayorCero Then PonerFoco txtAux(3)
                     Else
@@ -5057,27 +5088,27 @@ Dim StatusArticMayorCero As Boolean
         Case 3 'CANTIDAD
             If PonerFormatoDecimal(txtAux(Index), 1) Then  'Tipo 1: Decimal(12,2)
                 'Comprobar si hay suficiente stock
-                b = True
+                B = True
                 Set vCStock = New CStock
-                If Not InicializarCStock2(vCStock, "S", 0, False) Then b = False
+                If Not InicializarCStock2(vCStock, "S", 0, False) Then B = False
                 If vCStock.MueveStock Then
-                    If Not vCStock.MoverStock(False, False) Then b = False
+                    If Not vCStock.MoverStock(False, False) Then B = False
                 End If
-                If Not b Then
+                If Not B Then
                     Set vCStock = Nothing
                     Exit Sub
                 End If
                 
-                b = False
+                B = False
                 If Modo = 5 Then 'Modo lineas
                     If ModificaLineas = 1 Then 'insertar linea
-                        b = True
+                        B = True
                     ElseIf ModificaLineas = 2 Then 'modificar linea
-                        If Data2.Recordset!codArtic <> txtAux(1).Text Then b = True
+                        If Data2.Recordset!codArtic <> txtAux(1).Text Then B = True
                     End If
                 End If
                 
-                If b Then 'Modo Insertar en Mto Lineas
+                If B Then 'Modo Insertar en Mto Lineas
                     'Obtener el precio correspondiente y los descuentos
                     'Comprobar si el articulo se vende por cajas antes de entrar a la función
                     devuelve = DevuelveDesdeBDNew(conAri, "sartic", "unicajas", "codartic", txtAux(1).Text, "T")
@@ -5124,7 +5155,7 @@ Dim StatusArticMayorCero As Boolean
     '                        TxtAux(3).Text = NumCajas * CInt(devuelve)
                             PonerFoco txtAux(Index)
                         Else
-                            If (txtAux(4).Text = "") Or (txtAux(4).Text <> "" And ModificaLineas = 2 And b) Then
+                            If (txtAux(4).Text = "") Or (txtAux(4).Text <> "" And ModificaLineas = 2 And B) Then
                                 txtAux(4).Text = Precio
                                 txtAux(5).Text = OrigP 'De donde viene el precio
                             End If
@@ -5288,13 +5319,13 @@ End Function
 
 Private Sub PonerModoOpcionesMenu(Modo As Byte)
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean, bol As Boolean
-Dim I As Byte
+Dim B As Boolean, bol As Boolean
+Dim i As Byte
 
     'Si visualizamos el historico no mostrar botones de Mantenimiento, solo es consulta
-    For I = 5 To 17
-        Toolbar1.Buttons(I).visible = Not EsHistorico
-    Next I
+    For i = 5 To 17
+        Toolbar1.Buttons(i).visible = Not EsHistorico
+    Next i
     Me.mnNuevo.visible = Not EsHistorico
     Me.mnModificar.visible = Not EsHistorico
     Me.mnEliminar.visible = Not EsHistorico
@@ -5312,67 +5343,67 @@ Dim I As Byte
     Me.mnImpFactProF.Enabled = Not EsHistorico
     
     If Not EsHistorico Then
-        b = (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
+        B = (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
         'Insertar
-        Toolbar1.Buttons(5).Enabled = (b Or Modo = 0)
-        Me.mnNuevo.Enabled = (b Or Modo = 0)
+        Toolbar1.Buttons(5).Enabled = (B Or Modo = 0)
+        Me.mnNuevo.Enabled = (B Or Modo = 0)
         'Modificar
-        Toolbar1.Buttons(6).Enabled = b
-        Me.mnModificar.Enabled = b
+        Toolbar1.Buttons(6).Enabled = B
+        Me.mnModificar.Enabled = B
         'eliminar
-        Toolbar1.Buttons(7).Enabled = b
-        Me.mnEliminar.Enabled = b
+        Toolbar1.Buttons(7).Enabled = B
+        Me.mnEliminar.Enabled = B
             
-        b = (Modo = 2)
+        B = (Modo = 2)
         'Mantenimiento lineas
-        Toolbar1.Buttons(10).Enabled = b
-        Me.mnLineas.Enabled = b
+        Toolbar1.Buttons(10).Enabled = B
+        Me.mnLineas.Enabled = B
         'Generar Pedido
         If Modo = 5 Then
             Toolbar1.Buttons(11).Image = 34 '.Buttons(11).Image = 26
             Toolbar1.Buttons(11).ToolTipText = "Insertar intercalando"
-            b = (ModificaLineas = 0)
+            B = (ModificaLineas = 0)
         Else
             'b=modo=2
             Toolbar1.Buttons(11).Image = 26   '26
             Toolbar1.Buttons(11).ToolTipText = "Generar Pedido"
         End If
-        Toolbar1.Buttons(11).Enabled = b
-        Me.mnGenPedido.Enabled = b And Modo <> 5
+        Toolbar1.Buttons(11).Enabled = B
+        Me.mnGenPedido.Enabled = B And Modo <> 5
         
         
-        b = (Modo = 5) And (ModificaLineas = 0)
+        B = (Modo = 5) And (ModificaLineas = 0)
         'Plantillas
-        Toolbar1.Buttons(12).visible = b
-        Toolbar1.Buttons(12).Enabled = b
-        Me.mnPlantillas.visible = b
-        Me.mnPlantillas.Enabled = b
+        Toolbar1.Buttons(12).visible = B
+        Toolbar1.Buttons(12).Enabled = B
+        Me.mnPlantillas.visible = B
+        Me.mnPlantillas.Enabled = B
         'Traer Lineas de Otra Oferta
-        Toolbar1.Buttons(13).visible = b
-        Toolbar1.Buttons(13).Enabled = b
-        Me.mnOferta.visible = b
-        Me.mnOferta.Enabled = b
+        Toolbar1.Buttons(13).visible = B
+        Toolbar1.Buttons(13).Enabled = B
+        Me.mnOferta.visible = B
+        Me.mnOferta.Enabled = B
         
         'Recordatorio
-        b = (Modo = 2)
+        B = (Modo = 2)
         bol = (Modo <> 5)
         Toolbar1.Buttons(16).visible = bol
-        Toolbar1.Buttons(16).Enabled = b
+        Toolbar1.Buttons(16).Enabled = B
         Me.mnImpRecordatorio.visible = bol
-        Me.mnImpRecordatorio.Enabled = b
+        Me.mnImpRecordatorio.Enabled = B
         'Valoración
         Toolbar1.Buttons(17).visible = bol
-        Toolbar1.Buttons(17).Enabled = b
+        Toolbar1.Buttons(17).Enabled = B
         Me.mnImpValoracion.visible = bol
-        Me.mnImpValoracion.Enabled = b
+        Me.mnImpValoracion.Enabled = B
         
-        b = (Modo >= 3) Or Modo = 1
+        B = (Modo >= 3) Or Modo = 1
         'Buscar
-        Toolbar1.Buttons(1).Enabled = Not b
-        Me.mnBuscar.Enabled = Not b
+        Toolbar1.Buttons(1).Enabled = Not B
+        Me.mnBuscar.Enabled = Not B
         'Ver Todos
-        Toolbar1.Buttons(2).Enabled = Not b
-        Me.mnVerTodos.Enabled = Not b
+        Toolbar1.Buttons(2).Enabled = Not B
+        Me.mnVerTodos.Enabled = Not B
     End If
 End Sub
 
@@ -5459,15 +5490,15 @@ End Function
 
 
 Private Sub LimpiarDatosCliente()
-Dim I As Byte
+Dim i As Byte
 
-    For I = 4 To 13
-        Text1(I).Text = ""
-    Next I
+    For i = 4 To 13
+        Text1(i).Text = ""
+    Next i
     If Modo = 3 Then
-        For I = 14 To 17
-            Text1(I).Text = ""
-        Next I
+        For i = 14 To 17
+            Text1(i).Text = ""
+        Next i
         Text2(12).Text = ""
         Text2(14).Text = ""
         Text2(17).Text = ""
@@ -5631,7 +5662,7 @@ EGenPedido:
         
         If vParamAplic.LogCambioPrecDto Then GrabaLog CambiosArt
         
-        
+        'Si tiene
     Else
         conn.RollbackTrans
     End If
@@ -5640,8 +5671,8 @@ End Sub
 
 Private Function InsertarLineasPedido(NumPedido As String, QueLineasPasanAlPedido As String, vArticulos_NO_Rotacion As String) As Boolean
 Dim SQL As String
-Dim Rs As ADODB.Recordset
-Dim I As Long
+Dim RS As ADODB.Recordset
+Dim i As Long
     On Error GoTo Elin
 
     'David SEPT2009
@@ -5683,19 +5714,19 @@ Dim I As Long
     'Marzo 2014.
     'HERBELCA.
     'Numbultos servira para saber las servidas
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     If vParamAplic.NumeroInstalacion <> 2 Then 'para todos menos para herbelca
         SQL = "Select cantidad , unicajas,numlinea from sliped,sartic where sliped.codartic = sartic.codartic and unicajas >1 and  sliped.numpedcl = " & NumPedido
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not Rs.EOF
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not RS.EOF
             
-            I = Rs!cantidad \ CLng(Rs!unicajas)
-            If (Rs!cantidad Mod CLng(Rs!unicajas)) > 0 Then I = I + 1
-            SQL = "UPDATE sliped Set numbultos=" & I & " WHERE sliped.numpedcl = " & NumPedido & " AND numlinea = " & Rs!numlinea
+            i = RS!cantidad \ CLng(RS!unicajas)
+            If (RS!cantidad Mod CLng(RS!unicajas)) > 0 Then i = i + 1
+            SQL = "UPDATE sliped Set numbultos=" & i & " WHERE sliped.numpedcl = " & NumPedido & " AND numlinea = " & RS!numlinea
             conn.Execute SQL
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
         
     Else
         
@@ -5709,22 +5740,22 @@ Dim I As Long
         
         SQL = "Select sliped.codartic,sliped.nomartic from sliped,sartic where sliped.codartic = sartic.codartic  and  sliped.numpedcl = " & NumPedido & SQL
         SQL = SQL & " AND rotacion=0"
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not Rs.EOF
-           vArticulos_NO_Rotacion = vArticulos_NO_Rotacion & Rs!codArtic & " - " & Rs!NomArtic & vbCrLf
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not RS.EOF
+           vArticulos_NO_Rotacion = vArticulos_NO_Rotacion & RS!codArtic & " - " & RS!NomArtic & vbCrLf
             
-           Rs.MoveNext
+           RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
         
     End If
-    Set Rs = Nothing
+    Set RS = Nothing
     
     
     InsertarLineasPedido = True
     Exit Function
 Elin:
-    Set Rs = Nothing
+    Set RS = Nothing
      'Hay error , almacenamos y salimos
     InsertarLineasPedido = False
 
@@ -5868,12 +5899,12 @@ End Sub
 
 Private Sub PonerDatosClienteVario(nifClien As String)
 Dim vCliente As CCliente
-Dim b As Boolean
+Dim B As Boolean
    
     If nifClien = "" Then Exit Sub
    
     Set vCliente = New CCliente
-    b = vCliente.LeerDatosCliVario(nifClien)
+    B = vCliente.LeerDatosCliVario(nifClien)
     Text1(5).Text = vCliente.Nombre  'Nom clien
     Text1(8).Text = vCliente.Domicilio
     Text1(9).Text = vCliente.CPostal
@@ -5882,13 +5913,13 @@ Dim b As Boolean
 '    Text1(6).Text = vCliente.NIF
     Text1(7).Text = DBLet(vCliente.TfnoClien, "T")
             
-    If Not b Then PonerFoco Text1(6)
+    If Not B Then PonerFoco Text1(6)
     Set vCliente = Nothing
 End Sub
 
 
 Private Sub BloquearDatosCliente(bol As Boolean)
-Dim I As Byte
+Dim i As Byte
 
     'bloquear/desbloquear campos de datos segun sea de varios o no
     If Modo <> 5 Then
@@ -5896,9 +5927,9 @@ Dim I As Byte
         Me.imgBuscar(1).Enabled = bol
         Me.imgBuscar(6).Enabled = bol
         
-        For I = 5 To 11 'si no es de varios no se pueden modificar los datos
-            BloquearTxt Text1(I), Not bol
-        Next I
+        For i = 5 To 11 'si no es de varios no se pueden modificar los datos
+            BloquearTxt Text1(i), Not bol
+        Next i
     End If
 End Sub
 
@@ -6078,31 +6109,31 @@ End Sub
 
 
 Private Function FormatoDatosTotales()
-Dim I As Byte
+Dim i As Byte
 
-    For I = 33 To 36
-        Text3(I).Text = QuitarCero(Text3(I).Text)
-        Text3(I).Text = Format(Text3(I).Text, FormatoImporte)
-    Next I
-    For I = 49 To 54
-        Text3(I).Text = QuitarCero(Text3(I).Text)
-        Text3(I).Text = Format(Text3(I).Text, FormatoImporte)
-    Next I
+    For i = 33 To 36
+        Text3(i).Text = QuitarCero(Text3(i).Text)
+        Text3(i).Text = Format(Text3(i).Text, FormatoImporte)
+    Next i
+    For i = 49 To 54
+        Text3(i).Text = QuitarCero(Text3(i).Text)
+        Text3(i).Text = Format(Text3(i).Text, FormatoImporte)
+    Next i
     'Desglose B.Imponible por IVA
-    For I = 43 To 45
-        If Text3(I).Text <> "" Then
-             If CSng(Text3(I).Text) = 0 Then
-                Text3(I).Text = QuitarCero(Text3(I).Text)
-                Text3(I - 3).Text = QuitarCero(Text3(I - 3).Text)
-                Text3(I - 6).Text = QuitarCero(Text3(I - 6).Text)
-                Text3(I + 3).Text = QuitarCero(Text3(I).Text)
+    For i = 43 To 45
+        If Text3(i).Text <> "" Then
+             If CSng(Text3(i).Text) = 0 Then
+                Text3(i).Text = QuitarCero(Text3(i).Text)
+                Text3(i - 3).Text = QuitarCero(Text3(i - 3).Text)
+                Text3(i - 6).Text = QuitarCero(Text3(i - 6).Text)
+                Text3(i + 3).Text = QuitarCero(Text3(i).Text)
             Else
-                Text3(I).Text = Format(Text3(I).Text, FormatoImporte)
-                Text3(I - 3) = Format(Text3(I - 3).Text, FormatoDescuento)
-                Text3(I + 3).Text = Format(Text3(I + 3).Text, FormatoImporte)
+                Text3(i).Text = Format(Text3(i).Text, FormatoImporte)
+                Text3(i - 3) = Format(Text3(i - 3).Text, FormatoDescuento)
+                Text3(i + 3).Text = Format(Text3(i + 3).Text, FormatoImporte)
             End If
         End If
-    Next I
+    Next i
      'TOTALES
     Text3(55).Text = Format(Text3(55).Text, FormatoImporte)
     Text3(56).Text = Format(Text3(56).Text, FormatoImporte)
@@ -6387,18 +6418,18 @@ End Sub
 
 Private Function HaCambiadoprecioDto(ByRef cart As Collection) As Boolean
 Dim Aux As String
-Dim I As Integer
+Dim i As Integer
 
     HaCambiadoprecioDto = True
     If cart.Count = 0 Then Exit Function
 
     'Ha cambiado algo
     '-----------------
-    For I = 1 To cart.Count
-        Aux = Aux & vbCrLf & cart(I)
+    For i = 1 To cart.Count
+        Aux = Aux & vbCrLf & cart(i)
     Next
     Aux = vbCrLf & Aux
-    Aux = "Existen nuevos precios para algunos articulos de la oferta. ¿Continuar?" & vbCrLf & String(60, "*") & Aux
+    Aux = "Existen nuevos precios para algunos articulos de la oferta.        ¿Continuar?" & vbCrLf & String(60, "*") & Aux
     If MsgBox(Aux, vbQuestion + vbYesNo) = vbNo Then HaCambiadoprecioDto = False
 
 
@@ -6407,7 +6438,7 @@ End Function
 
 Private Sub GrabaLog(ByRef CA As Collection)
 Dim Aux As String
-Dim I  As Integer
+Dim i  As Integer
 
     If CA.Count = 0 Then Exit Sub
 
@@ -6415,11 +6446,11 @@ Dim I  As Integer
     'Ahora ire grabando el LOG
     
     Set LOG = New cLOG
-    I = 1
-    While I <= CA.Count
+    i = 1
+    While i <= CA.Count
         If Aux = "" Then Aux = "Oferta: " & Text1(0).Text & " " & Text1(1).Text
         
-        If Len(Aux) + Len(CA(I)) > 253 Then
+        If Len(Aux) + Len(CA(i)) > 253 Then
         
             'Añado el LOG tal y como esta. No muevo el I
             LOG.Insertar 15, vUsu, Aux
@@ -6427,8 +6458,8 @@ Dim I  As Integer
             Espera 1
         Else
             'Meto en la cadena
-            Aux = Aux & vbCrLf & CA(I)
-            I = I + 1
+            Aux = Aux & vbCrLf & CA(i)
+            i = i + 1
         End If
     Wend
     LOG.Insertar 15, vUsu, Aux
@@ -6835,7 +6866,7 @@ End Sub
 
 Private Function GenerarAlbaransmovalFAZ() As Boolean
 Dim vCStock As CStock
-Dim b As Boolean
+Dim B As Boolean
 Dim vSQL As String
 
     On Error GoTo eGenerarAlbaransmovalFAZ
@@ -6873,7 +6904,7 @@ Dim vSQL As String
     'LOS STOCKS
     vSQL = "Select * FROM slipre WHERE " & CadenaSQL
     Set vCStock = New CStock
-    b = True
+    B = True
     
     vSQL = "select * from slipre WHERE numofert = " & Text1(0).Text & " AND " & CadenaSQL
     Set miRsAux = New ADODB.Recordset
@@ -6894,15 +6925,15 @@ Dim vSQL As String
         vCStock.codArtic = miRsAux!codArtic
         'en actualizar stock comprobamos si el articulo tiene control de stock
         If vCStock.cantidad <> 0 Then
-            b = vCStock.ActualizarStock(False, False)
-            If Not b Then miRsAux.MoveLast
+            B = vCStock.ActualizarStock(False, False)
+            If Not B Then miRsAux.MoveLast
         End If
-        If b Then miRsAux.MoveNext
+        If B Then miRsAux.MoveNext
     Wend
     
     miRsAux.Close
     
-    If b Then GenerarAlbaransmovalFAZ = True
+    If B Then GenerarAlbaransmovalFAZ = True
     
     
 eGenerarAlbaransmovalFAZ:

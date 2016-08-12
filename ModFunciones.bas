@@ -1608,7 +1608,7 @@ Dim Impaux As Currency
         If DBLet(RS!Clivario, "N") = 1 Then
             SQL = ""
         Else
-            codClien = codClien & " - " & RS!NomClien
+            codClien = codClien & " - " & RS!Nomclien
             ImporteCred = DBLet(RS!limcredi, "N")
             If ImporteCred > 0 Then codClien = codClien & "   Límite credito: " & Format(ImporteCred, FormatoImporte)
             Codmacta = RS!Codmacta
@@ -1742,7 +1742,7 @@ Dim codigo As Integer
     RA.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     ImporteAlbaranes = 0
     While Not RA.EOF
-        codigo = RA!CodigIVA
+        codigo = RA!codigiva
         If TipoIVA = 1 Then
             'Recargo equivalencia
             codigo = vParamAplic.DevuleveTipoIVA_RE(codigo)
@@ -2773,11 +2773,7 @@ Dim ArtiVarios As String
             
             
             
-            
-            '-----------------------------------------------------------------------------------------
-            '  Octubre 2014
-            'Quitamos esto
-            'If vParamAplic.RecMercanciaSoloPpal Then SQL = SQL & " AND sliped.codalmac =1" 'solo el ppal
+
             'Añadimos esto
             SQL = SQL & " AND cantidad >0 "
             
@@ -2802,7 +2798,7 @@ Dim ArtiVarios As String
                 If ArtiVarios = "" Then
                     L = L + 1
                     Cad = Cad & ", (" & vUsu.codigo & ",'" & Format(miRsAux!fecpedcl, "dd/mm/yyyy") & "'," & miRsAux!numpedcl & ","
-                    Cad = Cad & DBSet(miRsAux!codArtic, "T") & "," & DBSet(miRsAux!NomClien, "T") & "," & DBSet(DBLet(miRsAux!lapobla, "T") & " ", "T") & ",'" & Format(miRsAux!FecEntre, "dd/mm/yyyy") & "',"
+                    Cad = Cad & DBSet(miRsAux!codArtic, "T") & "," & DBSet(miRsAux!Nomclien, "T") & "," & DBSet(DBLet(miRsAux!lapobla, "T") & " ", "T") & ",'" & Format(miRsAux!FecEntre, "dd/mm/yyyy") & "',"
                     Cad = Cad & DBSet(miRsAux!cantidad, "N") & "," & L & "," & miRsAux!recogecl & ")"
                 End If
                 miRsAux.MoveNext
@@ -2821,22 +2817,29 @@ Dim ArtiVarios As String
     
     If L > 0 Then
         ComprobarPedidosClientesDesdeAlbProveedor = True
-        'Llamaremos a imprimir general
-         With frmImprimir
-            .FormulaSeleccion = "{tmpnlotes.codusu} = " & vUsu.codigo
-            .OtrosParametros = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
-            .NumeroParametros = 1
+        
+        
+        
+            'Llamaremos a imprimir general
+             With frmImprimir
+                .FormulaSeleccion = "{tmpnlotes.codusu} = " & vUsu.codigo
+                .OtrosParametros = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+                .NumeroParametros = 1
+        
+                .SoloImprimir = False
+                .EnvioEMail = False
+                .Opcion = 5
+                .PulsaAceptar = True
+                .Titulo = "Listado"
+                .NombreRPT = "rpedProvCli.rpt"
+                .ConSubInforme = False
+                .Show vbModal
+            End With
     
-            .SoloImprimir = False
-            .EnvioEMail = False
-            .Opcion = 5
-            .PulsaAceptar = True
-            .Titulo = "Listado"
-            .NombreRPT = "rpedProvCli.rpt"
-            .ConSubInforme = False
-            .Show vbModal
-        End With
     
+      
+        
+        
     End If
 
 EComprobarPedidosClientesDesdeAlbProveedor:

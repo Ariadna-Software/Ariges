@@ -610,22 +610,22 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(3)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(18)"
-      Tab(1).Control(4)=   "Label1(27)"
-      Tab(1).Control(5)=   "Text1(19)"
-      Tab(1).Control(6)=   "Text1(20)"
-      Tab(1).Control(7)=   "Text1(21)"
-      Tab(1).Control(8)=   "Text1(22)"
-      Tab(1).Control(9)=   "Text1(23)"
-      Tab(1).Control(10)=   "Text1(24)"
-      Tab(1).Control(11)=   "Text1(25)"
-      Tab(1).Control(12)=   "FrameHco"
-      Tab(1).Control(13)=   "Text1(30)"
-      Tab(1).Control(14)=   "Text1(29)"
-      Tab(1).Control(15)=   "Text1(33)"
+      Tab(1).Control(0)=   "Text1(33)"
+      Tab(1).Control(1)=   "Text1(29)"
+      Tab(1).Control(2)=   "Text1(30)"
+      Tab(1).Control(3)=   "FrameHco"
+      Tab(1).Control(4)=   "Text1(25)"
+      Tab(1).Control(5)=   "Text1(24)"
+      Tab(1).Control(6)=   "Text1(23)"
+      Tab(1).Control(7)=   "Text1(22)"
+      Tab(1).Control(8)=   "Text1(21)"
+      Tab(1).Control(9)=   "Text1(20)"
+      Tab(1).Control(10)=   "Text1(19)"
+      Tab(1).Control(11)=   "Label1(27)"
+      Tab(1).Control(12)=   "Label1(18)"
+      Tab(1).Control(13)=   "Label1(5)"
+      Tab(1).Control(14)=   "Label1(3)"
+      Tab(1).Control(15)=   "Label1(45)"
       Tab(1).ControlCount=   16
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
@@ -2778,20 +2778,7 @@ Dim vWhere As String
     
     
     
-    'Herbelca. Tania 21/07/2016
-    '--------------------------
-    ' De varios no dejo modificar la linea. Segun ella esto ya lo hacia.
-    'Version: 4_6_51 de Feb16 No lo hace    Solo era para eliminar linea
-    If vParamAplic.NumeroInstalacion = 2 Then
-        If vUsu.Nivel > 0 Then
 
-            vWhere = DevuelveDesdeBD(conAri, "artvario", "sartic", "codartic", CStr(Data2.Recordset!codArtic), "T")
-            If Val(vWhere) > 0 Then
-                MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
-                Exit Sub
-            End If
-        End If
-    End If
     
     
     
@@ -4847,6 +4834,7 @@ Dim b As Boolean
 Dim I As Byte
 Dim vArtic As CArticulo
 Dim Aux As String
+Dim Valor As Currency
 
     On Error GoTo EDatosOkLinea
 
@@ -4886,6 +4874,38 @@ Dim Aux As String
     
     
     
+    'Primera comprobacon herbelca
+    If b And vParamAplic.NumeroInstalacion = 2 And ModificaLineas = 2 Then
+        'Esta modificando. Un usuario que no es  nivel 0
+        If vUsu.Nivel > 0 Then
+            
+            For I = 0 To 8
+                'Menos el 5 y el 2 que dejamos cambiar, el resto no puede tocar nada, de nada
+                If I <> 2 And I <> 5 Then
+                   
+                    If I = 1 Then
+                        'Texto.  El codartic
+                         Aux = ""
+                        If txtAux(I).Text <> Data2.Recordset!codArtic Then Aux = "A"
+                    Else
+                        ''Campos numericos
+                        Valor = ImporteFormateado(txtAux(I).Text)
+                        Aux = RecuperaValor("codalmac|codartic||cantidad|precioar||dtoline1|dtoline2|importel|", I + 1)
+                        If Valor = CCur(Data2.Recordset.Fields(Aux)) Then Aux = ""
+                    End If
+                    
+                    If Aux <> "" Then
+                        'ERROR, ha cambiado algo que no debe
+                        MsgBox "No puede realizar estos cambios. ", vbExclamation
+                        b = False
+                        Exit Function
+                    End If
+                End If
+            Next I
+                
+        End If
+        
+    End If
     
     '21 Marzo 2011
     ' Comprobar que este articulo, para este cliente, no esta en otro pedido

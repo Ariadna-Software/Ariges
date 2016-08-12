@@ -2180,8 +2180,8 @@ End Sub
 Private Sub cmdActualizaSoloProveedor_Click()
 
     On Error GoTo ecmdActualizaSoloProveedor
-    CadenaDesdeOtroForm = "Origen    " & Me.label2(3).Caption & " " & Me.label2(5).Caption & vbCrLf
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Destino   " & Me.label2(6).Caption & " " & Me.label2(8).Caption
+    CadenaDesdeOtroForm = "Origen    " & Me.Label2(3).Caption & " " & Me.Label2(5).Caption & vbCrLf
+    CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Destino   " & Me.Label2(6).Caption & " " & Me.Label2(8).Caption
     SQL = "Va a cambiar en la BD el proveedor:"
     SQL = SQL & vbCrLf & CadenaDesdeOtroForm
     SQL = SQL & vbCrLf & "¿Continuar?"
@@ -2191,31 +2191,31 @@ Private Sub cmdActualizaSoloProveedor_Click()
     
     Set miRsAux = New ADODB.Recordset
    
-    label2(10).Caption = "Articulo(1/5)"
-    label2(10).Refresh
+    Label2(10).Caption = "Articulo(1/5)"
+    Label2(10).Refresh
     
-    CadParam = "UPDATE sartic set codprove =" & label2(6).Caption
-    CadParam = CadParam & " WHERE codprove=" & label2(3).Caption
+    CadParam = "UPDATE sartic set codprove =" & Label2(6).Caption
+    CadParam = CadParam & " WHERE codprove=" & Label2(3).Caption
     conn.Execute CadParam
     Espera 0.8
     
     conn.Execute "SET FOREIGN_KEY_CHECKS=0;"
-    label2(10).Caption = "Precios(2/5)"
-    label2(10).Refresh
+    Label2(10).Caption = "Precios(2/5)"
+    Label2(10).Refresh
     CadParam = Replace(CadParam, "sartic", "slispr")
     conn.Execute CadParam
-    label2(10).Caption = "Hco precios(3/5)"
-    label2(10).Refresh
+    Label2(10).Caption = "Hco precios(3/5)"
+    Label2(10).Refresh
     CadParam = Replace(CadParam, "slispr", "slisp1")
     conn.Execute CadParam
     
-    label2(10).Caption = "Dto proveedor(41/5)"
-    label2(10).Refresh
+    Label2(10).Caption = "Dto proveedor(41/5)"
+    Label2(10).Refresh
     CadParam = Replace(CadParam, "slisp1", "sdtomp")
     conn.Execute CadParam
     
-    label2(10).Caption = "Familias(5/5)"
-    label2(10).Refresh
+    Label2(10).Caption = "Familias(5/5)"
+    Label2(10).Refresh
     CadParam = Replace(CadParam, "sdtomp", "sfamia")
     conn.Execute CadParam
     
@@ -2227,7 +2227,7 @@ Private Sub cmdActualizaSoloProveedor_Click()
     
     Set LOG = New cLOG
     
-     label2(10).Caption = ""
+     Label2(10).Caption = ""
     LOG.Insertar 32, vUsu, CadenaDesdeOtroForm
     
     Screen.MousePointer = vbDefault
@@ -2238,7 +2238,7 @@ Private Sub cmdActualizaSoloProveedor_Click()
 ecmdActualizaSoloProveedor:
     If Err.Number <> 0 Then
         MuestraError Err.Number, , Err.Description
-         label2(10).Caption = ""
+         Label2(10).Caption = ""
     End If
     Set miRsAux = Nothing
     Set LOG = Nothing
@@ -2840,47 +2840,93 @@ Private Sub cmdtreeview1_Click(Index As Integer)
 End Sub
 
 Private Sub cmdUpdatearFamiliaMarca_Click()
-    
+Dim Aux As String
+
     SQL = ""
+    Aux = ""
     For NumRegElim = 1 To Me.lw(8).ListItems.Count
-        If Me.lw(8).ListItems(NumRegElim).Checked Then SQL = SQL & "X"
+        If Me.lw(8).ListItems(NumRegElim).Checked Then
+            SQL = SQL & "X"
+            Aux = Aux & ", " & lw(8).ListItems(NumRegElim).Text
+        End If
     Next NumRegElim
 
     If SQL = "" Then Exit Sub
     
     numParam = Len(SQL)
     
-    SQL = "Va a actualizar " & numParam & " articulo(s)."
+    SQL = ""
+    If numParam > 1 Then SQL = "s"
+    
+    SQL = "Va a actualizar " & numParam & " articulo" & SQL & " seleccionado" & SQL & "." & vbCrLf
     SQL = SQL & vbCrLf & CadenaDesdeOtroForm
     SQL = SQL & vbCrLf & "¿Continuar?"
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    
+    
+    
+
+    
+    
     
     Screen.MousePointer = vbHourglass
     
     '  LOG de acciones
     Set LOG = New cLOG
     
-    SQL = CadenaDesdeOtroForm & vbCrLf & "Total: " & lw(8).ListItems.Count & " Actualiza: " & numParam
-    LOG.Insertar 27, vUsu, SQL
-    Espera 0.8
     
-    CadenaDesdeOtroForm = "UPDATE sartic set codfamia =" & RecuperaValor(vCadena, 2)
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", codmarca=" & RecuperaValor(vCadena, 3)
-    If Me.lblTitulo(19).visible Then
-        If Val(Me.lblTitulo(19).Tag) > 0 Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", codprove=" & Me.lblTitulo(19).Tag
-    End If
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & " WHERE codartic IN "
+    
+    
+    numParam = 0
+    Do
+        
+        SQL = CadenaDesdeOtroForm & vbCrLf & "Total: " & lw(8).ListItems.Count & " Actualizar: " & numParam & vbCrLf & "Artic:"
+        If Len(CadenaDesdeOtroForm) > 210 Then
+            If numParam = 0 Then
+                LOG.Insertar 27, vUsu, CadenaDesdeOtroForm & " Sigue secuencia"
+                Espera 1
+                
+            End If
+            numParam = numParam + 1
+            SQL = "Secuencia:" & numParam & vbCrLf
+        Else
+            SQL = CadenaDesdeOtroForm
+        End If
+        
+        NumRegElim = Len(Aux) + Len(SQL)
+        If NumRegElim > 180 Then
+            NumRegElim = 180 - Len(SQL)
+            SQL = SQL & Mid(Aux, 1, NumRegElim) & "..."
+            Aux = Mid(Aux, NumRegElim + 1)
+        Else
+            SQL = SQL & Aux
+            Aux = ""
+        End If
+    
+        LOG.Insertar 27, vUsu, SQL
+        Espera 0.8
+    
+    Loop Until Aux = ""
+    'Lo que updateamos
+    CadenaDesdeOtroForm = ""
+    SQL = RecuperaValor(vCadena, 2)
+    If SQL <> "" Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", codfamia =" & SQL
+    SQL = RecuperaValor(vCadena, 3)
+    If SQL <> "" Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", codmarca =" & SQL
+    SQL = RecuperaValor(vCadena, 4)
+    If Val(SQL) > 0 Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", codprove=" & SQL
+    CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, 2) 'quitamos la primera coma
+    'montamos el sql
+    
+    CadenaDesdeOtroForm = "UPDATE sartic set " & CadenaDesdeOtroForm
+    CadenaDesdeOtroForm = CadenaDesdeOtroForm & " WHERE codartic = "
     numParam = 0
     SQL = ""
     For NumRegElim = 1 To Me.lw(8).ListItems.Count
-        If Me.lw(8).ListItems(NumRegElim).Checked Then
-            numParam = numParam + 1
-            SQL = SQL & ", " & DBSet(lw(8).ListItems(NumRegElim).Text, "T")
-            If Len(SQL) > 220 Then ActualizaFamiliaMarca
-        End If
+        If Me.lw(8).ListItems(NumRegElim).Checked Then ActualizaFamiliaMarca2
+        
     Next NumRegElim
-    If Len(SQL) > 0 Then ActualizaFamiliaMarca
-    CadenaDesdeOtroForm = ""
+    
         
     Set LOG = Nothing
     Screen.MousePointer = vbDefault
@@ -2890,38 +2936,41 @@ Private Sub cmdUpdatearFamiliaMarca_Click()
     
 End Sub
 
-Private Sub ActualizaFamiliaMarca()
+Private Sub ActualizaFamiliaMarca2()
 Dim YProveedor As String
 
-        SQL = Mid(SQL, 2)
+        'Numregelim llevo el indice al lw(8) para coger el articulo
         
         'Si queremos insertar LOG
         YProveedor = ""
-        'SI updatea el proveedor
-        If Me.lblTitulo(19).visible Then
-            If Val(lblTitulo(19).Tag) > 0 Then
-                YProveedor = RecuperaValor(vCadena, 1)
-                YProveedor = Mid(YProveedor, 1, InStr(YProveedor, " AND "))
-            End If
+        SQL = RecuperaValor(vCadena, 4)
+        If SQL = "-1" Then SQL = ""
+        If SQL <> "" Then
+        
+            'Esta actualizando el proveedor. Vemos el del articulo
+            CadParam = DevuelveDesdeBD(conAri, "codprove", "sartic", "codartic", lw(8).ListItems(NumRegElim).Text, "T")
+            If CadParam <> SQL Then YProveedor = CadParam
+            
+            
         End If
-        LOG.Insertar 27, vUsu, "Articulos: " & SQL
-        Espera 0.85
-        CadParam = CadenaDesdeOtroForm & "(" & SQL & ")"
+       
+        CadParam = CadenaDesdeOtroForm & DBSet(lw(8).ListItems(NumRegElim).Text, "T")
         conn.Execute CadParam
         
         If YProveedor <> "" Then
-            CadParam = " WHERE " & YProveedor
-            CadParam = "UPDATE slispr SET codprove=" & lblTitulo(19).Tag & CadParam
-            CadParam = CadParam & " AND codartic IN (" & SQL & ")"
-                
             conn.Execute "SET FOREIGN_KEY_CHECKS=0;"
-            ejecutar CadParam, False
-            CadParam = Replace(CadParam, "slispr", "slisp1")
-            ejecutar CadParam, False
+            CadParam = " WHERE codprove = " & YProveedor
+            CadParam = "UPDATE slispr SET codprove=" & SQL & CadParam
+            CadParam = CadParam & " AND codartic = " & DBSet(lw(8).ListItems(NumRegElim).Text, "T")
+                
+            
+            If ejecutar(CadParam, False) Then
+                CadParam = Replace(CadParam, "slispr", "slisp1")
+                ejecutar CadParam, False
+            End If
             conn.Execute "SET FOREIGN_KEY_CHECKS=1;"
-            
-            
         End If
+
         SQL = ""
 
 End Sub
@@ -3520,15 +3569,15 @@ Private Sub txtDecimal_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtDecimal_LostFocus(Index As Integer)
-Dim b As Boolean
+Dim B As Boolean
     txtDecimal(Index).Text = Trim(txtDecimal(Index).Text)
     If txtDecimal(Index).Text <> "" Then
        ' If Index = 0 Or Index = 9 Then
        '     B = PonerFormatoDecimal(txtDecimal(Index), 2)
        ' Else
-            b = PonerFormatoDecimal(txtDecimal(Index), 5)
+            B = PonerFormatoDecimal(txtDecimal(Index), 5)
        ' End If
-        If b Then
+        If B Then
 
         Else
             txtDecimal(Index).Text = ""
@@ -4165,7 +4214,7 @@ Dim Aux2 As Currency
     SQL = "Select * from tiposiva"
     miRsAux.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        CadParam = CadParam & Format(miRsAux!CodigIVA, "0000") & "#" & Right(Space(5) & miRsAux!PorceIVA, 5) & "|"
+        CadParam = CadParam & Format(miRsAux!codigiva, "0000") & "#" & Right(Space(5) & miRsAux!PorceIVA, 5) & "|"
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -4186,7 +4235,7 @@ Dim Aux2 As Currency
     NumRegElim = -1
     While Not miRsAux.EOF
     
-        numParam = InStr(1, CadParam, Format(miRsAux!CodigIVA, "0000") & "#")
+        numParam = InStr(1, CadParam, Format(miRsAux!codigiva, "0000") & "#")
         If numParam = 0 Then
             SQL = "0"
         Else
@@ -4197,7 +4246,7 @@ Dim Aux2 As Currency
             
             
             'Fra con dos IVAS
-            IT.SubItems(6) = IT.SubItems(6) & " - " & SQL & "(" & miRsAux!CodigIVA & ")"
+            IT.SubItems(6) = IT.SubItems(6) & " - " & SQL & "(" & miRsAux!codigiva & ")"
             'BRUTO
             Importe = ImporteFormateado(IT.SubItems(5)) + miRsAux!Suma
             IT.SubItems(5) = Format(Importe, FormatoImporte)
@@ -5141,12 +5190,12 @@ Private Sub PonerCamposCambioProveedor()
     numParam = InStr(1, SQL, "=")
     SQL = Trim(Mid(SQL, numParam + 1))
     
-    label2(3).Caption = Right("00000" & SQL, 5)
-    label2(5).Caption = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", SQL)
+    Label2(3).Caption = Right("00000" & SQL, 5)
+    Label2(5).Caption = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", SQL)
     SQL = Right("00000" & RecuperaValor(vCadena, 4), 5)
-    label2(6).Caption = SQL
-    label2(8).Caption = RecuperaValor(vCadena, 5)
-    label2(10).Caption = ""
+    Label2(6).Caption = SQL
+    Label2(8).Caption = RecuperaValor(vCadena, 5)
+    Label2(10).Caption = ""
     
     Me.cmdActualizaSoloProveedor.Enabled = vUsu.Nivel <= 1
     
