@@ -270,15 +270,15 @@ End Sub
 
 
 Private Sub Combo1_Click()
-Dim I As Integer
+Dim i As Integer
 Dim C  As String
     If PrimeraVez Then Exit Sub
     'En nomrpt pondra el valor entrecorchetado
     C = Combo1.Text
-    I = InStr(1, C, "[")
-    C = Mid(C, I + 1)
-    I = InStr(1, C, "]")
-    C = Mid(C, 1, I - 1)
+    i = InStr(1, C, "[")
+    C = Mid(C, i + 1)
+    i = InStr(1, C, "]")
+    C = Mid(C, 1, i - 1)
     Me.NombreRPT = C
 End Sub
 
@@ -455,7 +455,21 @@ Dim Cad As String
                 Text1.Text = "Listado control albaranes facturados"
             Case 2046
                 Text1.Text = "Listado control productividad"
+                    
+            Case 2048
+                Text1.Text = "Beneficio Marca, Agente, Proveedor"
+                MostrarTree = True
+            Case 2049
+                Text1.Text = "Ventas marca-familia"
+                MostrarTree = True
+            Case 2050
+                Text1.Text = "Compras marca-familia"
+                MostrarTree = True
+            
+            
                 
+                
+            
             End Select
         End If
     Else

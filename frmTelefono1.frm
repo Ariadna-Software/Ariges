@@ -1003,9 +1003,12 @@ Private Sub HacerImportacion()
             'FALTA###
             
             Mens = Text1.Text
+            
+            
             If Len(Mens) > 12 Then Mens = Right(Mens, 12)
             
-           '1era cosa a tener en cuenta. El fichero no puede estar procesado
+
+            '1era cosa a tener en cuenta. El fichero no puede estar procesado
             Mens = DevuelveDesdeBD(conAri, "fecha", "tel_fichtraspasados", "Fichero", Mens, "T")
             If Mens <> "" Then Mens = "El fichero se traspaso el dia " & Mens & vbCrLf
                 
@@ -1068,7 +1071,20 @@ Private Sub HacerImportacion()
             MsgBox "Imposible localizar datos factura en fichero Orange", vbExclamation
             Exit Sub
         End If
+        
+        
+        
+        'EN ORANGE tenemos que comprobar que el fichero NO ha siado traspasado
+        Mens = DevuelveDesdeBD(conAri, "fecha", "tel_fichtraspasados", "Fichero", FicheroOrange, "T")
+        If Mens <> "" Then
+            MsgBox "El fichero se traspaso el dia " & Mens & vbCrLf, vbExclamation
+            Exit Sub
+        End If
+        
+        
+        'Para la utilizacion posterior
         Mens = FicheroOrange
+        
     End If
     
     
@@ -1346,9 +1362,9 @@ Dim IT As ListItem
         If Me.chkMostrarBase.Value = 1 Then
             IT.SubItems(2) = Format(miRsAux!BaseImponible, "#,##0.00")
         Else
-            IT.SubItems(2) = Format(miRsAux!Total, "#,##0.00")
+            IT.SubItems(2) = Format(miRsAux!total, "#,##0.00")
         End If
-        IT.SubItems(3) = Format(miRsAux!Total * 100, "0000000")
+        IT.SubItems(3) = Format(miRsAux!total * 100, "0000000")
         
         'Para el WHERE
         IT.Tag = "Serie = '" & miRsAux!Serie & "' AND Ano =" & miRsAux!Ano & " AND NumFact =" & miRsAux!NumFact

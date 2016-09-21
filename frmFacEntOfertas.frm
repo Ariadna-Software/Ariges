@@ -397,35 +397,35 @@ Begin VB.Form frmFacEntOfertas2
       TabCaption(1)   =   "Textos de la Carta"
       TabPicture(1)   =   "frmFacEntOfertas.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(3)"
-      Tab(1).Control(1)=   "Label1(5)"
-      Tab(1).Control(2)=   "Label1(45)"
-      Tab(1).Control(3)=   "Label1(2)"
-      Tab(1).Control(4)=   "Text1(21)"
-      Tab(1).Control(5)=   "Text1(22)"
-      Tab(1).Control(6)=   "Text1(23)"
-      Tab(1).Control(7)=   "Text1(24)"
+      Tab(1).Control(0)=   "Text1(19)"
+      Tab(1).Control(1)=   "Text1(20)"
+      Tab(1).Control(2)=   "Text1(18)"
+      Tab(1).Control(3)=   "Text1(30)"
+      Tab(1).Control(4)=   "Text1(29)"
+      Tab(1).Control(5)=   "Text1(28)"
+      Tab(1).Control(6)=   "Text1(27)"
+      Tab(1).Control(7)=   "Text1(26)"
       Tab(1).Control(8)=   "Text1(25)"
-      Tab(1).Control(9)=   "Text1(26)"
-      Tab(1).Control(10)=   "Text1(27)"
-      Tab(1).Control(11)=   "Text1(28)"
-      Tab(1).Control(12)=   "Text1(29)"
-      Tab(1).Control(13)=   "Text1(30)"
-      Tab(1).Control(14)=   "Text1(18)"
-      Tab(1).Control(15)=   "Text1(20)"
-      Tab(1).Control(16)=   "Text1(19)"
+      Tab(1).Control(9)=   "Text1(24)"
+      Tab(1).Control(10)=   "Text1(23)"
+      Tab(1).Control(11)=   "Text1(22)"
+      Tab(1).Control(12)=   "Text1(21)"
+      Tab(1).Control(13)=   "Label1(2)"
+      Tab(1).Control(14)=   "Label1(45)"
+      Tab(1).Control(15)=   "Label1(5)"
+      Tab(1).Control(16)=   "Label1(3)"
       Tab(1).ControlCount=   17
       TabCaption(2)   =   "Concepto y Gestión Oferta"
       TabPicture(2)   =   "frmFacEntOfertas.frx":039B
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Text1(36)"
-      Tab(2).Control(1)=   "Text1(35)"
-      Tab(2).Control(2)=   "Text1(32)"
-      Tab(2).Control(3)=   "Text1(31)"
-      Tab(2).Control(4)=   "Label1(28)"
-      Tab(2).Control(5)=   "Label1(18)"
-      Tab(2).Control(6)=   "Label1(37)"
-      Tab(2).Control(7)=   "Label1(38)"
+      Tab(2).Control(0)=   "Label1(38)"
+      Tab(2).Control(1)=   "Label1(37)"
+      Tab(2).Control(2)=   "Label1(18)"
+      Tab(2).Control(3)=   "Label1(28)"
+      Tab(2).Control(4)=   "Text1(31)"
+      Tab(2).Control(5)=   "Text1(32)"
+      Tab(2).Control(6)=   "Text1(35)"
+      Tab(2).Control(7)=   "Text1(36)"
       Tab(2).ControlCount=   8
       TabCaption(3)   =   "Totales"
       TabPicture(3)   =   "frmFacEntOfertas.frx":03B7
@@ -4416,6 +4416,15 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
+
+    If vParamAplic.QueEmpresaEs = 1 Then
+        'WHOSE. NO permitimos ni
+        If Button.Index = 11 Then Exit Sub
+        If Button.Index = 19 Then Exit Sub
+    End If
+    
+
+
 
     If Button.Index = 17 Or Button.Index = 19 Then
         'Valoracion , fra proforma

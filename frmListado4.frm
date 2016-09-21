@@ -2180,8 +2180,8 @@ End Sub
 Private Sub cmdActualizaSoloProveedor_Click()
 
     On Error GoTo ecmdActualizaSoloProveedor
-    CadenaDesdeOtroForm = "Origen    " & Me.Label2(3).Caption & " " & Me.Label2(5).Caption & vbCrLf
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Destino   " & Me.Label2(6).Caption & " " & Me.Label2(8).Caption
+    CadenaDesdeOtroForm = "Origen    " & Me.label2(3).Caption & " " & Me.label2(5).Caption & vbCrLf
+    CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Destino   " & Me.label2(6).Caption & " " & Me.label2(8).Caption
     SQL = "Va a cambiar en la BD el proveedor:"
     SQL = SQL & vbCrLf & CadenaDesdeOtroForm
     SQL = SQL & vbCrLf & "¿Continuar?"
@@ -2191,31 +2191,31 @@ Private Sub cmdActualizaSoloProveedor_Click()
     
     Set miRsAux = New ADODB.Recordset
    
-    Label2(10).Caption = "Articulo(1/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Articulo(1/5)"
+    label2(10).Refresh
     
-    CadParam = "UPDATE sartic set codprove =" & Label2(6).Caption
-    CadParam = CadParam & " WHERE codprove=" & Label2(3).Caption
+    CadParam = "UPDATE sartic set codprove =" & label2(6).Caption
+    CadParam = CadParam & " WHERE codprove=" & label2(3).Caption
     conn.Execute CadParam
     Espera 0.8
     
     conn.Execute "SET FOREIGN_KEY_CHECKS=0;"
-    Label2(10).Caption = "Precios(2/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Precios(2/5)"
+    label2(10).Refresh
     CadParam = Replace(CadParam, "sartic", "slispr")
     conn.Execute CadParam
-    Label2(10).Caption = "Hco precios(3/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Hco precios(3/5)"
+    label2(10).Refresh
     CadParam = Replace(CadParam, "slispr", "slisp1")
     conn.Execute CadParam
     
-    Label2(10).Caption = "Dto proveedor(41/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Dto proveedor(41/5)"
+    label2(10).Refresh
     CadParam = Replace(CadParam, "slisp1", "sdtomp")
     conn.Execute CadParam
     
-    Label2(10).Caption = "Familias(5/5)"
-    Label2(10).Refresh
+    label2(10).Caption = "Familias(5/5)"
+    label2(10).Refresh
     CadParam = Replace(CadParam, "sdtomp", "sfamia")
     conn.Execute CadParam
     
@@ -2227,7 +2227,7 @@ Private Sub cmdActualizaSoloProveedor_Click()
     
     Set LOG = New cLOG
     
-     Label2(10).Caption = ""
+     label2(10).Caption = ""
     LOG.Insertar 32, vUsu, CadenaDesdeOtroForm
     
     Screen.MousePointer = vbDefault
@@ -2238,7 +2238,7 @@ Private Sub cmdActualizaSoloProveedor_Click()
 ecmdActualizaSoloProveedor:
     If Err.Number <> 0 Then
         MuestraError Err.Number, , Err.Description
-         Label2(10).Caption = ""
+         label2(10).Caption = ""
     End If
     Set miRsAux = Nothing
     Set LOG = Nothing
@@ -5190,12 +5190,12 @@ Private Sub PonerCamposCambioProveedor()
     numParam = InStr(1, SQL, "=")
     SQL = Trim(Mid(SQL, numParam + 1))
     
-    Label2(3).Caption = Right("00000" & SQL, 5)
-    Label2(5).Caption = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", SQL)
+    label2(3).Caption = Right("00000" & SQL, 5)
+    label2(5).Caption = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", SQL)
     SQL = Right("00000" & RecuperaValor(vCadena, 4), 5)
-    Label2(6).Caption = SQL
-    Label2(8).Caption = RecuperaValor(vCadena, 5)
-    Label2(10).Caption = ""
+    label2(6).Caption = SQL
+    label2(8).Caption = RecuperaValor(vCadena, 5)
+    label2(10).Caption = ""
     
     Me.cmdActualizaSoloProveedor.Enabled = vUsu.Nivel <= 1
     

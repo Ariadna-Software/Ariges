@@ -197,7 +197,7 @@ Private Sub Form_Activate()
          
          'Para que borre de la tabla temporal
          PrepararCarpetasEnvioMail
-         DoEvents
+        DoEvents
          
          'Gestionar el nombre del PC para la asignacion de PC en el entorno de red
          GestionaPC
@@ -377,29 +377,29 @@ End Sub
 'a la que ha entrado, y el usuario
 Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
 Dim NF As Integer
-Dim cad As String
+Dim Cad As String
 On Error GoTo ENumeroEmpresaMemorizar
 
 
         
-    cad = App.Path & "\ultusu.dat"
+    Cad = App.Path & "\ultusu.dat"
     If Leer Then
-        If Dir(cad) <> "" Then
+        If Dir(Cad) <> "" Then
             NF = FreeFile
-            Open cad For Input As #NF
-            Line Input #NF, cad
+            Open Cad For Input As #NF
+            Line Input #NF, Cad
             Close #NF
-            cad = Trim(cad)
+            Cad = Trim(Cad)
             
                 'El primer pipe es el usuario
-                Text1(0).Text = cad
+                Text1(0).Text = Cad
     
         End If
     Else 'Escribir
         NF = FreeFile
-        Open cad For Output As #NF
-        cad = Text1(0).Text
-        Print #NF, cad
+        Open Cad For Output As #NF
+        Cad = Text1(0).Text
+        Print #NF, Cad
         Close #NF
     End If
 ENumeroEmpresaMemorizar:

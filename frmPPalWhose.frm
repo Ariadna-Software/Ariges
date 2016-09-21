@@ -27,29 +27,34 @@ Begin VB.Form frmPPalWhose
          Shortcut        =   ^C
       End
       Begin VB.Menu mnClientes1 
-         Caption         =   "Facturas "
+         Caption         =   "Ofertas"
          Index           =   1
+         Shortcut        =   ^O
+      End
+      Begin VB.Menu mnClientes1 
+         Caption         =   "Facturas "
+         Index           =   2
          Shortcut        =   ^F
       End
       Begin VB.Menu mnClientes1 
          Caption         =   "Facturas rectificativas"
-         Index           =   2
-      End
-      Begin VB.Menu mnClientes1 
-         Caption         =   "Histórico de facturas"
          Index           =   3
       End
       Begin VB.Menu mnClientes1 
-         Caption         =   "Contabilizacion facturas"
+         Caption         =   "Histórico de facturas"
          Index           =   4
       End
       Begin VB.Menu mnClientes1 
-         Caption         =   "-"
+         Caption         =   "Contabilizacion facturas"
          Index           =   5
       End
       Begin VB.Menu mnClientes1 
-         Caption         =   "Clientes potenciales"
+         Caption         =   "-"
          Index           =   6
+      End
+      Begin VB.Menu mnClientes1 
+         Caption         =   "Clientes potenciales"
+         Index           =   7
          Shortcut        =   ^P
       End
    End
@@ -172,28 +177,31 @@ Private Sub mnClientes1_Click(Index As Integer)
         
         
     Case 1
+        frmFacEntOfertas2.DatosOferta = ""
+        frmFacEntOfertas2.EsHistorico = False
+        frmFacEntOfertas2.Show vbModal
 
-
+    Case 2
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ALV"
         frmFacEntAlbaranes2.EsHistorico = False
         frmFacEntAlbaranes2.Show vbModal
 
-    Case 2
+    Case 3
         frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbaranes2.hcoCodTipoM = "ART"
         frmFacEntAlbaranes2.EsHistorico = False
         frmFacEntAlbaranes2.Show vbModal
 
-    Case 3
+    Case 4
         'Factura
         frmFacHcoFacturas2.hcoCodMovim = ""
         frmFacHcoFacturas2.Show vbModal
     
-    Case 4
+    Case 5
         AbrirListado 223
         
-    Case 6
+    Case 7
         frmFacClienPot.Show vbModal
     End Select
     

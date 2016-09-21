@@ -454,7 +454,7 @@ Dim Cliente As String
             cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!codigiva, "N", Cad3)
             If cad2 <> "" Then
                 SQL = numlinea & ",'" & cad2 & "'," & DocConcAmp
-                cad2 = CadenaImporte(False, RF!impoiva, Importe0)
+                cad2 = CadenaImporte(False, RF!IMPOIVA, Importe0)
                 SQL = SQL & "," & cad2 & ","
                 SQL = SQL & "NULL,'" & Cliente & "','FRACLI',0)"
                 If Not Importe0 Then
@@ -1196,7 +1196,7 @@ Dim NoSumaIVA As Boolean
             cad2 = DevuelveDesdeBDModulo(ColumnaIVA, "tiposiva", "codigiva", RF!codigiva, "N", Cad3)
             If cad2 <> "" Then
                 SQL = contLinea & ",'" & cad2 & "'," & DocConcAmp
-                cad2 = CadenaImporte(True, RF!impoiva, Importe0)
+                cad2 = CadenaImporte(True, RF!IMPOIVA, Importe0)
                 SQL = SQL & "," & cad2 & ","
                 SQL = SQL & "NULL,'" & Cuenta & "','FRAPRO',0)"
                 If Not Importe0 Then
@@ -1216,6 +1216,39 @@ Dim NoSumaIVA As Boolean
                             contLinea = contLinea + 1
                         End If
                 End If
+            
+            
+            
+                'isP Y EXTRAJENRO . no SUMAN iva
+                If NoSumaIVA Then
+                    Cad3 = "cuentarr"
+                    cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!codigiva, "N", Cad3)
+                    
+                    Cad3 = cad2 & "|" & Cad3 & "|"
+                    
+                    
+                    SQL = contLinea & ",'" & RecuperaValor(Cad3, 1) & "'," & DocConcAmp
+                    cad2 = CadenaImporte(False, RF!IMPOIVA, Importe0)
+                    SQL = SQL & "," & cad2 & ","
+                    SQL = SQL & "NULL,'" & Cuenta & "','FRAPRO',0)"
+                    If Not Importe0 Then
+                        miConexion.Execute Cad & SQL
+                        contLinea = contLinea + 1
+                    End If
+                   
+                    If Not IsNull(RF!imporec) Then
+                         SQL = contLinea & "," & RecuperaValor(Cad3, 2) & "," & DocConcAmp
+                        'Importes, atencion importes negativos
+                        cad2 = CadenaImporte(False, RF!imporec, Importe0)
+                        SQL = SQL & "," & cad2 & ","
+                        SQL = SQL & "NULL,'" & Cuenta & "','FRAPRO',0)"
+                        If Not Importe0 Then
+                            miConexion.Execute Cad & SQL
+                            contLinea = contLinea + 1
+                        End If
+                    End If
+                End If
+            
             
             End If
         
@@ -2238,16 +2271,31 @@ Dim Existe As Boolean
     
     'cobros
     If EliminaElCobro Then
-        SQL = " numserie='" & Serie & "' AND codfaccl=" & NumeroFactura
-        SQL = SQL & " AND fecfaccl='" & Format(FechaFac, FormatoFecha) & "'"
-        miConexion.Execute "Delete from scobro WHERE " & SQL
+    
+        If vParamAplic.ContabilidadNueva Then
+            SQL = " cobros WHERE numserie='" & Serie & "' AND numfactu=" & NumeroFactura
+            SQL = SQL & " AND fecfactu='" & Format(FechaFac, FormatoFecha) & "'"
+        Else
+            SQL = " scobro WHERE numserie='" & Serie & "' AND codfaccl=" & NumeroFactura
+            SQL = SQL & " AND fecfaccl='" & Format(FechaFac, FormatoFecha) & "'"
+        End If
+        miConexion.Execute "Delete from " & SQL
     End If
     
     Set RF = New ADODB.Recordset
-    SQL = "SELECT numasien,fechaent,numdiari,codfaccl FROM cabfact"
-    SQL = SQL & " WHERE numserie='" & Serie
-    SQL = SQL & "' AND codfaccl= " & NumeroFactura
-    SQL = SQL & " AND anofaccl= " & Anofac
+    
+    If vParamAplic.ContabilidadNueva Then
+        SQL = "SELECT numasien,fechaent,numdiari,numfactu codfacc FROM factcli"
+        SQL = SQL & " WHERE numserie='" & Serie
+        SQL = SQL & "' AND numfactu= " & NumeroFactura
+        SQL = SQL & " AND anofactu=" & Anofac
+        
+    Else
+        SQL = "SELECT numasien,fechaent,numdiari,codfaccl FROM cabfact"
+        SQL = SQL & " WHERE numserie='" & Serie
+        SQL = SQL & "' AND codfaccl= " & NumeroFactura
+        SQL = SQL & " AND anofaccl= " & Anofac
+    End If
     RF.Open SQL, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
     DiarioFacturas = -1
     Existe = False
@@ -2266,11 +2314,12 @@ Dim Existe As Boolean
     
         If DiarioFacturas > 0 Then
             'OK. HAY que eliminar el apunte
-    
-            SQL = CalcularLineasYSaldosFacturas(False)
-            If SQL <> "" Then
-                MsgBox SQL, vbExclamation
-                Exit Function
+            If Not vParamAplic.ContabilidadNueva Then
+                SQL = CalcularLineasYSaldosFacturas(False)
+                If SQL <> "" Then
+                    MsgBox SQL, vbExclamation
+                    Exit Function
+                End If
             End If
             
             SQL = " WHERE numdiari= " & DiarioFacturas
@@ -2282,16 +2331,23 @@ Dim Existe As Boolean
         End If
     
     
-    
-    
-        SQL = " numserie='" & Serie & "' AND codfaccl=" & NumeroFactura
-        SQL = SQL & " AND anofaccl = " & Anofac
-
+        
+        If vParamAplic.ContabilidadNueva Then
+            SQL = " numserie='" & Serie & "' AND numfactu=" & NumeroFactura
+            SQL = SQL & " AND anofactu = " & Anofac
+        Else
+            SQL = " numserie='" & Serie & "' AND codfaccl=" & NumeroFactura
+            SQL = SQL & " AND anofaccl = " & Anofac
+        End If
         'Lineas
-        miConexion.Execute "Delete from linfact WHERE " & SQL
+        miConexion.Execute "Delete from " & IIf(vParamAplic.ContabilidadNueva, "factcli_lineas", "linfact") & " WHERE " & SQL
+
+
+           
+        If vParamAplic.ContabilidadNueva Then miConexion.Execute "Delete from factcli_totales WHERE " & SQL
 
         'cabecera
-        miConexion.Execute "Delete from cabfact WHERE " & SQL
+        miConexion.Execute "Delete from " & IIf(vParamAplic.ContabilidadNueva, "factcli", "cabfact") & " WHERE " & SQL
 
         
     End If

@@ -292,40 +292,40 @@ Begin VB.Form frmComHcoFacturas2
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmComHcoFacturas.frx":0B2C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text3(10)"
-      Tab(1).Control(1)=   "Text2(2)"
-      Tab(1).Control(2)=   "Text3(9)"
-      Tab(1).Control(3)=   "chkDocArchi"
-      Tab(1).Control(4)=   "txtAux(8)"
-      Tab(1).Control(5)=   "txtAux3(1)"
-      Tab(1).Control(6)=   "txtAux3(0)"
-      Tab(1).Control(7)=   "txtAux(3)"
-      Tab(1).Control(8)=   "txtAux(2)"
-      Tab(1).Control(9)=   "txtAux(1)"
-      Tab(1).Control(10)=   "txtAux(0)"
-      Tab(1).Control(11)=   "cmdObserva"
-      Tab(1).Control(12)=   "Text3(3)"
-      Tab(1).Control(13)=   "Text3(2)"
-      Tab(1).Control(14)=   "Text2(0)"
-      Tab(1).Control(15)=   "Text3(0)"
-      Tab(1).Control(16)=   "Text2(1)"
-      Tab(1).Control(17)=   "Text3(1)"
-      Tab(1).Control(18)=   "txtAux(4)"
-      Tab(1).Control(19)=   "txtAux(5)"
-      Tab(1).Control(20)=   "txtAux(6)"
-      Tab(1).Control(21)=   "txtAux(7)"
-      Tab(1).Control(22)=   "DataGrid1"
-      Tab(1).Control(23)=   "DataGrid2"
-      Tab(1).Control(24)=   "FrameObserva"
-      Tab(1).Control(25)=   "imgBuscar(7)"
-      Tab(1).Control(26)=   "Label1(13)"
-      Tab(1).Control(27)=   "Label1(8)"
-      Tab(1).Control(28)=   "Label1(18)"
-      Tab(1).Control(29)=   "Label1(6)"
-      Tab(1).Control(30)=   "Label1(21)"
-      Tab(1).Control(31)=   "imgBuscar(5)"
-      Tab(1).Control(32)=   "Label1(9)"
-      Tab(1).Control(33)=   "imgBuscar(6)"
+      Tab(1).Control(0)=   "imgBuscar(6)"
+      Tab(1).Control(1)=   "Label1(9)"
+      Tab(1).Control(2)=   "imgBuscar(5)"
+      Tab(1).Control(3)=   "Label1(21)"
+      Tab(1).Control(4)=   "Label1(6)"
+      Tab(1).Control(5)=   "Label1(18)"
+      Tab(1).Control(6)=   "Label1(8)"
+      Tab(1).Control(7)=   "Label1(13)"
+      Tab(1).Control(8)=   "imgBuscar(7)"
+      Tab(1).Control(9)=   "FrameObserva"
+      Tab(1).Control(10)=   "DataGrid2"
+      Tab(1).Control(11)=   "DataGrid1"
+      Tab(1).Control(12)=   "txtAux(7)"
+      Tab(1).Control(13)=   "txtAux(6)"
+      Tab(1).Control(14)=   "txtAux(5)"
+      Tab(1).Control(15)=   "txtAux(4)"
+      Tab(1).Control(16)=   "Text3(1)"
+      Tab(1).Control(17)=   "Text2(1)"
+      Tab(1).Control(18)=   "Text3(0)"
+      Tab(1).Control(19)=   "Text2(0)"
+      Tab(1).Control(20)=   "Text3(2)"
+      Tab(1).Control(21)=   "Text3(3)"
+      Tab(1).Control(22)=   "cmdObserva"
+      Tab(1).Control(23)=   "txtAux(0)"
+      Tab(1).Control(24)=   "txtAux(1)"
+      Tab(1).Control(25)=   "txtAux(2)"
+      Tab(1).Control(26)=   "txtAux(3)"
+      Tab(1).Control(27)=   "txtAux3(0)"
+      Tab(1).Control(28)=   "txtAux3(1)"
+      Tab(1).Control(29)=   "txtAux(8)"
+      Tab(1).Control(30)=   "chkDocArchi"
+      Tab(1).Control(31)=   "Text3(9)"
+      Tab(1).Control(32)=   "Text2(2)"
+      Tab(1).Control(33)=   "Text3(10)"
       Tab(1).ControlCount=   34
       Begin VB.TextBox Text3 
          Alignment       =   1  'Right Justify
@@ -2312,7 +2312,7 @@ End Sub
 
 Private Sub LLamaLineas(xModo As Byte, Optional alto As Single, Optional grid As String)
 Dim jj As Integer
-Dim b As Boolean
+Dim B As Boolean
 '
 '    Select Case grid
 '        Case "DataGrid1"
@@ -2321,13 +2321,13 @@ Dim b As Boolean
             DeseleccionaGrid Me.DataGrid1
             'PonerModo xModo + 1
 
-            b = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Lineas
+            B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Lineas
 
             For jj = 0 To txtAux.Count - 1
                 If jj = 4 Or jj = 5 Or jj = 6 Or jj = 7 Then
                     txtAux(jj).Height = DataGrid1.RowHeight
                     txtAux(jj).Top = alto
-                    txtAux(jj).visible = b
+                    txtAux(jj).visible = B
                     If jj = 1 Then txtAux(jj).Enabled = True
                     
                     
@@ -2336,11 +2336,11 @@ Dim b As Boolean
     End If
         If grid = "DataGrid2" Then
             DeseleccionaGrid Me.DataGrid2
-            b = (xModo = 1)
+            B = (xModo = 1)
              For jj = 0 To txtAux3.Count - 1
                 txtAux3(jj).Height = DataGrid2.RowHeight
                 txtAux3(jj).Top = alto
-                txtAux3(jj).visible = b
+                txtAux3(jj).visible = B
             Next jj
         End If
 '    End Select
@@ -2418,21 +2418,21 @@ End Sub
 
 
 Private Sub BloqueaText3()
-Dim I As Byte
+Dim i As Byte
     'bloquear los Text3 que son las lineas de scafpa
-    For I = 0 To 1
-        BloquearTxt Text3(I), (Modo <> 4) And Modo <> 1
-    Next I
+    For i = 0 To 1
+        BloquearTxt Text3(i), (Modo <> 4) And Modo <> 1
+    Next i
     If Me.FrameObserva.visible Then
-        For I = 4 To 8
-            BloquearTxt Text3(I), (Modo <> 4)
-        Next I
+        For i = 4 To 8
+            BloquearTxt Text3(i), (Modo <> 4)
+        Next i
     End If
     'numpedpr, fecpedpr siempre bloqueados
-    For I = 2 To 3
+    For i = 2 To 3
         'Feb 2011. Dejamos que busque por ellos
-        BloquearTxt Text3(I), Modo <> 1
-    Next I
+        BloquearTxt Text3(i), Modo <> 1
+    Next i
     Me.chkDocArchi.Enabled = Modo = 1 Or Modo = 4
     BloquearTxt Text3(9), Not chkDocArchi.Enabled
     BloquearTxt Text3(10), Not chkDocArchi.Enabled
@@ -2495,7 +2495,7 @@ End Sub
 
 
 Private Sub DataGrid2_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-Dim I As Byte
+Dim i As Byte
 
     If Not Data3.Recordset.EOF Then
         Text3(0).Text = DBLet(Data3.Recordset.Fields!codtrab2, "T")
@@ -2526,9 +2526,9 @@ Dim I As Byte
         'Datos de la tabla slipre
         CargaGrid DataGrid1, Data2, True
     Else
-        For I = 0 To Text3.Count - 1
-            Text3(I).Text = ""
-        Next I
+        For i = 0 To Text3.Count - 1
+            Text3(i).Text = ""
+        Next i
         Me.chkDocArchi.Value = 0
         Text2(0).Text = ""
         Text2(1).Text = ""
@@ -3205,8 +3205,8 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte, NumReg As Byte
-Dim b As Boolean
+Dim i As Byte, NumReg As Byte
+Dim B As Boolean
 
     On Error GoTo EPonerModo
 
@@ -3219,10 +3219,10 @@ Dim b As Boolean
     
     'Modo 2. Hay datos y estamos visualizandolos
     '=========================================
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         cmdRegresar.visible = False
     End If
@@ -3232,7 +3232,7 @@ Dim b As Boolean
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
           
         
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -3252,18 +3252,18 @@ Dim b As Boolean
     
     
     
-    b = (Modo <> 1)
+    B = (Modo <> 1)
     'Campos Nº Factura bloqueado y en azul
-    BloquearTxt Text1(0), b, True
-    BloquearTxt Text1(3), b 'referencia
+    BloquearTxt Text1(0), B, True
+    BloquearTxt Text1(3), B 'referencia
     
-    FrmRetencionSocios.Enabled = Not b
+    FrmRetencionSocios.Enabled = Not B
     
     
     'Importes siempre bloqueados
-    For I = 14 To 30
-        BloquearTxt Text1(I), (Modo <> 1)
-    Next I
+    For i = 14 To 30
+        BloquearTxt Text1(i), (Modo <> 1)
+    Next i
 
     'Campo B.Imp y Imp. IVA siempre en azul
     Text1(17).BackColor = &HFFFFC0
@@ -3276,23 +3276,23 @@ Dim b As Boolean
     BloqueaText3
     
     'Si no es modo lineas Boquear los TxtAux
-    For I = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(I), (Modo <> 5)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(i), (Modo <> 5)
+    Next i
     BloquearTxt txtAux(8), True
     
     'Si no es modo Busqueda Bloquear los TxtAux3 (son los txtaux de los albaranes de factura)
-    For I = 0 To txtAux3.Count - 1
-        BloquearTxt txtAux3(I), (Modo <> 1)
-    Next I
+    For i = 0 To txtAux3.Count - 1
+        BloquearTxt txtAux3(i), (Modo <> 1)
+    Next i
     
     'ampliacion linea
-    b = (Modo = 5) And Me.DataGrid1.visible
+    B = (Modo = 5) And Me.DataGrid1.visible
     'Modo Linea de Albaranes
-    Me.Label1(35).visible = b
-    Me.Label1(3).visible = b
-    Me.Text2(16).visible = b
-    Me.Text2(17).visible = b
+    Me.Label1(35).visible = B
+    Me.Label1(3).visible = B
+    Me.Text2(16).visible = B
+    Me.Text2(17).visible = B
     BloquearTxt Text2(16), (Modo <> 5) Or (Modo = 5 And ModificaLineas <> 1)
     BloquearTxt Text2(17), (Modo <> 5) Or (Modo = 5 And ModificaLineas <> 1)
 
@@ -3305,14 +3305,14 @@ Dim b As Boolean
 
 
     '---------------------------------------------
-    b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
-    Me.chkDocArchi.Enabled = b
+    B = (Modo <> 0 And Modo <> 2 And Modo <> 5)
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
+    Me.chkDocArchi.Enabled = B
     
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = B
+    Next i
     Me.imgBuscar(0).Enabled = (Modo = 1)
     Me.imgBuscar(1).visible = False
                     
@@ -3339,7 +3339,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
-Dim b As Boolean
+Dim B As Boolean
 On Error GoTo EDatosOK
 
     DatosOk = False
@@ -3348,8 +3348,8 @@ On Error GoTo EDatosOK
     ComprobarDatosTotales
         
     'comprobamos datos OK de la tabla scafac
-    b = CompForm(Me, 1) 'Comprobar formato datos ok de la cabecera: opcion=1
-    If Not b Then Exit Function
+    B = CompForm(Me, 1) 'Comprobar formato datos ok de la cabecera: opcion=1
+    If Not B Then Exit Function
        
     BuscaChekc = ""
     If Text3(0).Text = "" Or Text2(0).Text = "" Then BuscaChekc = BuscaChekc & "  -" & Label1(21).Caption & vbCrLf
@@ -3360,14 +3360,14 @@ On Error GoTo EDatosOK
         BuscaChekc = "Error en campos: " & vbCrLf & BuscaChekc
         MsgBox BuscaChekc, vbExclamation
         BuscaChekc = ""
-        b = False
+        B = False
     End If
        
        
        
        
        
-    DatosOk = b
+    DatosOk = B
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -3375,25 +3375,25 @@ End Function
 
 
 Private Function DatosOkLinea() As Boolean
-Dim b As Boolean
-Dim I As Byte
+Dim B As Boolean
+Dim i As Byte
 On Error GoTo EDatosOkLinea
 
     DatosOkLinea = False
-    b = True
+    B = True
 
-    For I = 0 To txtAux.Count - 1
-        If I = 4 Or I = 5 Or I = 6 Then
-            If txtAux(I).Text = "" Then
-                MsgBox "El campo " & txtAux(I).Tag & " no puede ser nulo", vbExclamation
-                b = False
-                PonerFoco txtAux(I)
+    For i = 0 To txtAux.Count - 1
+        If i = 4 Or i = 5 Or i = 6 Then
+            If txtAux(i).Text = "" Then
+                MsgBox "El campo " & txtAux(i).Tag & " no puede ser nulo", vbExclamation
+                B = False
+                PonerFoco txtAux(i)
                 Exit Function
             End If
         End If
-    Next I
+    Next i
             
-    DatosOkLinea = b
+    DatosOkLinea = B
 EDatosOkLinea:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
@@ -3532,7 +3532,7 @@ Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Albaran: slialb
 Dim SQL As String
 Dim vWhere As String
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo EModificarLinea
 
@@ -3555,42 +3555,42 @@ Dim b As Boolean
     
     If SQL <> "" Then
         'actualizar la factura y vencimientos
-        b = ModificarFactura(SQL)
-        ModificarLinea = b
+        B = ModificarFactura(SQL)
+        ModificarLinea = B
     End If
     
 EModificarLinea:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Modificar Lineas Factura" & vbCrLf & Err.Description
-        b = False
+        B = False
     End If
-    ModificarLinea = b
+    ModificarLinea = B
 End Function
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 'Pone el boton de Regresar a la Cabecera si pasamos a MAntenimiento de Lineas
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
 
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdRegresar.visible = b
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
-    If b Then
+    If B Then
         Me.lblIndicador.Caption = "Líneas " & TituloLinea
         PonerFocoBtn Me.cmdRegresar
     End If
     'Habilitar las opciones correctas del menu segun Modo
 '    PonerModoOpcionesMenu (Modo)
 '    PonerOpcionesMenu 'Habilitar las opciones correctas del menu segun Nivel de Acceso
-    DataGrid2.Enabled = Not b
+    DataGrid2.Enabled = Not B
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim Opcion As Byte
 Dim SQL As String
 
@@ -3610,8 +3610,8 @@ Dim SQL As String
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
     
-    b = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
-    vDataGrid.Enabled = Not b
+    B = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
+    vDataGrid.Enabled = Not B
     PrimeraVez = False
     Exit Sub
     
@@ -3727,11 +3727,11 @@ End Sub
 Private Function Eliminar() As Boolean
 Dim SQL As String
 Dim Cta As String
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo FinEliminar
 
-        b = False
+        B = False
         Eliminar = False
         If Data1.Recordset.EOF Then Exit Function
         
@@ -3741,15 +3741,23 @@ Dim b As Boolean
         'Eliminar en la tabla pagos de la Contabilidad: spagop
         '------------------------------------------------
         Cta = DevuelveDesdeBDNew(conAri, "sprove", "codmacta", "codprove", Text1(2).Text, "N")
-        SQL = " ctaprove='" & Cta & "' AND numfactu='" & Data1.Recordset.Fields!NumFactu & "'"
+        
+        If vParamAplic.ContabilidadNueva Then
+            SQL = "codmacta"
+        Else
+            SQL = "ctaprove"
+        End If
+        SQL = SQL & " ='" & Cta & "' AND numfactu='" & Data1.Recordset.Fields!NumFactu & "'"
         SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
-        ConnConta.Execute "Delete from spagop WHERE " & SQL
-        b = True
+        If vParamAplic.ContabilidadNueva Then SQL = SQL & " AND numserie='" & SerieFraPro & "'"
+        
+        ConnConta.Execute "Delete from " & IIf(vParamAplic.ContabilidadNueva, "pagos", "spagop") & " WHERE " & SQL
+        B = True
         
         
         'Eliminar en tablas de factura de Ariges: scafpc, scafpa, slifpc
         '---------------------------------------------------------------
-        If b Then
+        If B Then
             SQL = " " & ObtenerWhereCP(True)
         
             'Lineas de facturas (slifpc)
@@ -3764,7 +3772,7 @@ Dim b As Boolean
         
         'Eliminar los movimientos generados por el albaran que genero la factura
         '-----------------------------------------------------------------------
-        If b Then
+        If B Then
         
         End If
         
@@ -3773,16 +3781,16 @@ Dim b As Boolean
 FinEliminar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar Factura", Err.Description
-        b = False
+        B = False
     End If
-    If Not b Then
+    If Not B Then
         conn.RollbackTrans
         ConnConta.RollbackTrans
     Else
         conn.CommitTrans
         ConnConta.CommitTrans
     End If
-    Eliminar = b
+    Eliminar = B
 End Function
 
 
@@ -3866,37 +3874,37 @@ End Function
 
 Private Sub PonerModoOpcionesMenu(Modo As Byte)
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-        b = (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
+        B = (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
         'Modificar
-        Toolbar1.Buttons(5).Enabled = b
-        Me.mnModificar.Enabled = b
+        Toolbar1.Buttons(5).Enabled = B
+        Me.mnModificar.Enabled = B
         'eliminar
         Toolbar1.Buttons(6).Enabled = (Modo = 2)
         Me.mnEliminar.Enabled = (Modo = 2)
             
-        b = (Modo = 2)
+        B = (Modo = 2)
         'Mantenimiento lineas
-        Toolbar1.Buttons(9).Enabled = b
-        Me.mnLineas.Enabled = b
+        Toolbar1.Buttons(9).Enabled = B
+        Me.mnLineas.Enabled = B
         'Imprimir
 '        Toolbar1.Buttons(10).Enabled = b
 '        Me.mnImprimir.Enabled = b
         
         
         'Vicular
-        Toolbar1.Buttons(12).Enabled = b
+        Toolbar1.Buttons(12).Enabled = B
         
         
         
-        b = (Modo >= 3) Or Modo = 1
+        B = (Modo >= 3) Or Modo = 1
         'Buscar
-        Toolbar1.Buttons(1).Enabled = Not b
-        Me.mnBuscar.Enabled = Not b
+        Toolbar1.Buttons(1).Enabled = Not B
+        Me.mnBuscar.Enabled = Not B
         'Ver Todos
-        Toolbar1.Buttons(2).Enabled = Not b
-        Me.mnVerTodos.Enabled = Not b
+        Toolbar1.Buttons(2).Enabled = Not B
+        Me.mnVerTodos.Enabled = Not B
         
         
         
@@ -3962,13 +3970,13 @@ End Sub
 Private Sub PonerDatosProveVario(nifProve As String)
 'Poner el los campos Text el valor del proveedor
 Dim vProve As CProveedor
-Dim b As Boolean
+Dim B As Boolean
    
     If nifProve = "" Then Exit Sub
    
     Set vProve = New CProveedor
-    b = vProve.LeerDatosProveVario(nifProve)
-    If b Then
+    B = vProve.LeerDatosProveVario(nifProve)
+    If B Then
         Text1(3).Text = vProve.Nombre   'Nom proveedor
         Text1(6).Text = vProve.Domicilio
         Text1(7).Text = vProve.CPostal
@@ -3981,25 +3989,25 @@ End Sub
 
 
 Private Sub LimpiarDatosProve()
-Dim I As Byte
+Dim i As Byte
 
-    For I = 3 To 9
-        Text1(I).Text = ""
-    Next I
+    For i = 3 To 9
+        Text1(i).Text = ""
+    Next i
 End Sub
    
 
 Private Function ModificaAlbxFac() As Boolean
 Dim SQL As String
-Dim b As Boolean
+Dim B As Boolean
 On Error GoTo EModificaAlb
     
     ModificaAlbxFac = False
     If Data3.Recordset.EOF Then Exit Function
     
     'comprobar datos OK de la scafac1
-    b = CompForm(Me, 2) 'Comprobar formato datos ok de la cabecera alb: opcion=2
-    If Not b Then Exit Function
+    B = CompForm(Me, 2) 'Comprobar formato datos ok de la cabecera alb: opcion=2
+    If Not B Then Exit Function
     
     'Comprobaremos de albaranes factura
     BuscaChekc = ""
@@ -4186,7 +4194,7 @@ End Sub
 
 
 Private Sub BloquearDatosProve(bol As Boolean)
-Dim I As Byte
+Dim i As Byte
 
     'bloquear/desbloquear campos de datos segun sea de varios o no
     If Modo <> 5 Then
@@ -4194,9 +4202,9 @@ Dim I As Byte
         Me.imgBuscar(1).Enabled = bol 'NIF
         Me.imgBuscar(2).Enabled = bol 'poblacion
         
-        For I = 3 To 9 'si no es de varios no se pueden modificar los datos
-            BloquearTxt Text1(I), Not bol
-        Next I
+        For i = 3 To 9 'si no es de varios no se pueden modificar los datos
+            BloquearTxt Text1(i), Not bol
+        Next i
     End If
 End Sub
 
@@ -4237,22 +4245,22 @@ Private Function ObtenerSelFactura() As String
 'Facturados, abrimos este form pero cargando los datos de la factura
 'correspendiente al albaran que se selecciono
 Dim Cad As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 On Error Resume Next
 
     Cad = "SELECT codprove,numfactu,fecfactu FROM scafpa "
     Cad = Cad & " WHERE codprove=" & DBSet(hcoCodProve, "N") & " AND numalbar=" & DBSet(hcoCodMovim, "T")
     Cad = Cad & " AND fechaalb=" & DBSet(hcoFechaMovim, "F")
 
-    Set Rs = New ADODB.Recordset
-    Rs.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then 'where para la factura
-        Cad = " WHERE codprove=" & Rs!Codprove & " AND numfactu= '" & Rs!NumFactu & "' AND fecfactu=" & DBSet(Rs!FecFactu, "F")
+    Set RS = New ADODB.Recordset
+    RS.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then 'where para la factura
+        Cad = " WHERE codprove=" & RS!Codprove & " AND numfactu= '" & RS!NumFactu & "' AND fecfactu=" & DBSet(RS!FecFactu, "F")
     Else
         Cad = " where numfactu=-1"
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
     ObtenerSelFactura = Cad
 End Function
@@ -4312,33 +4320,33 @@ End Function
 
 
 Private Sub FormatoDatosTotales()
-Dim I As Byte
+Dim i As Byte
 
-    For I = 14 To 17
+    For i = 14 To 17
 '        Text1(I).Text = QuitarCero(Text1(I).Text)
-        FormateaCampo Text1(I)
-    Next I
+        FormateaCampo Text1(i)
+    Next i
     
-    For I = 24 To 26
-        If Text1(I).Text <> "" Then
+    For i = 24 To 26
+        If Text1(i).Text <> "" Then
             'Si la Base Imp. es 0
-            If CSng(Text1(I).Text) = 0 Then
-                Text1(I).Text = QuitarCero(Text1(I).Text)
-                Text1(I - 3).Text = QuitarCero(Text1(I - 3).Text)
-                Text1(I - 6).Text = QuitarCero(Text1(I - 6).Text)
-                Text1(I + 3).Text = QuitarCero(Text1(I + 3).Text)
+            If CSng(Text1(i).Text) = 0 Then
+                Text1(i).Text = QuitarCero(Text1(i).Text)
+                Text1(i - 3).Text = QuitarCero(Text1(i - 3).Text)
+                Text1(i - 6).Text = QuitarCero(Text1(i - 6).Text)
+                Text1(i + 3).Text = QuitarCero(Text1(i + 3).Text)
             Else
-                FormateaCampo Text1(I)
-                FormateaCampo Text1(I - 3)
-                FormateaCampo Text1(I - 6)
-                FormateaCampo Text1(I + 3)
+                FormateaCampo Text1(i)
+                FormateaCampo Text1(i - 3)
+                FormateaCampo Text1(i - 6)
+                FormateaCampo Text1(i + 3)
             End If
         Else 'No hay Base Imponible
-            Text1(I - 3).Text = QuitarCero(Text1(I - 3).Text)
-            Text1(I - 6).Text = QuitarCero(Text1(I - 6).Text)
-            Text1(I + 3).Text = ""
+            Text1(i - 3).Text = QuitarCero(Text1(i - 3).Text)
+            Text1(i - 6).Text = QuitarCero(Text1(i - 6).Text)
+            Text1(i + 3).Text = ""
         End If
-    Next I
+    Next i
     
     If Me.FrmRetencionSocios.visible Then
         FormateaCampo Text1(32)
@@ -4349,11 +4357,11 @@ End Sub
 
 
 Private Sub ComprobarDatosTotales()
-Dim I As Byte
+Dim i As Byte
 
-    For I = 14 To 17
-        Text1(I).Text = ComprobarCero(Text1(I).Text)
-    Next I
+    For i = 14 To 17
+        Text1(i).Text = ComprobarCero(Text1(i).Text)
+    Next i
 End Sub
 
 

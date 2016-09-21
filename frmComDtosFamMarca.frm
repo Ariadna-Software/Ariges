@@ -1,23 +1,38 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmComDtosFamMarca 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Dtos. Familia/Marca Proveedor"
    ClientHeight    =   6015
    ClientLeft      =   45
    ClientTop       =   630
-   ClientWidth     =   13050
+   ClientWidth     =   13905
    ClipControls    =   0   'False
    Icon            =   "frmComDtosFamMarca.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6015
-   ScaleWidth      =   13050
+   ScaleWidth      =   13905
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      Height          =   315
+      Index           =   8
+      Left            =   12120
+      MaxLength       =   5
+      TabIndex        =   8
+      Tag             =   "Sin cargo|N|S|0|99.90|sdtomp|dtosincargo|#0.00|N|"
+      Text            =   "Sinca"
+      Top             =   3600
+      Visible         =   0   'False
+      Width           =   615
+   End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
@@ -52,7 +67,7 @@ Begin VB.Form frmComDtosFamMarca
       Height          =   540
       Index           =   0
       Left            =   240
-      TabIndex        =   22
+      TabIndex        =   23
       Top             =   5400
       Width           =   2535
       Begin VB.Label lblIndicador 
@@ -60,7 +75,7 @@ Begin VB.Form frmComDtosFamMarca
          Caption         =   "Label2"
          Height          =   240
          Left            =   240
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   180
          Width           =   2115
       End
@@ -71,7 +86,7 @@ Begin VB.Form frmComDtosFamMarca
       Height          =   315
       Index           =   0
       Left            =   1080
-      TabIndex        =   21
+      TabIndex        =   22
       ToolTipText     =   "Buscar proveedor"
       Top             =   3600
       Visible         =   0   'False
@@ -83,7 +98,7 @@ Begin VB.Form frmComDtosFamMarca
       Height          =   315
       Index           =   1
       Left            =   3840
-      TabIndex        =   20
+      TabIndex        =   21
       ToolTipText     =   "Buscar familia artículo"
       Top             =   3600
       Visible         =   0   'False
@@ -95,7 +110,7 @@ Begin VB.Form frmComDtosFamMarca
       Height          =   315
       Index           =   2
       Left            =   6480
-      TabIndex        =   19
+      TabIndex        =   20
       ToolTipText     =   "Buscar marca"
       Top             =   3600
       Visible         =   0   'False
@@ -107,7 +122,7 @@ Begin VB.Form frmComDtosFamMarca
       Height          =   315
       Index           =   3
       Left            =   9720
-      TabIndex        =   18
+      TabIndex        =   19
       ToolTipText     =   "Buscar fecha"
       Top             =   3600
       Visible         =   0   'False
@@ -195,7 +210,7 @@ Begin VB.Form frmComDtosFamMarca
       Left            =   6720
       Locked          =   -1  'True
       MaxLength       =   25
-      TabIndex        =   17
+      TabIndex        =   18
       Text            =   "text 2 text 2 text 2 text"
       Top             =   3600
       Visible         =   0   'False
@@ -205,7 +220,7 @@ Begin VB.Form frmComDtosFamMarca
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   10560
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   5400
       Width           =   1035
    End
@@ -214,7 +229,7 @@ Begin VB.Form frmComDtosFamMarca
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   11715
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   5400
       Width           =   1035
    End
@@ -222,7 +237,7 @@ Begin VB.Form frmComDtosFamMarca
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   11715
-      TabIndex        =   10
+      TabIndex        =   11
       Top             =   5400
       Visible         =   0   'False
       Width           =   1035
@@ -234,7 +249,7 @@ Begin VB.Form frmComDtosFamMarca
       Left            =   1560
       Locked          =   -1  'True
       MaxLength       =   40
-      TabIndex        =   15
+      TabIndex        =   16
       Text            =   "Text2 Text2 Text2 Text2 Text2 Text2 Text"
       Top             =   4920
       Width           =   4005
@@ -247,7 +262,7 @@ Begin VB.Form frmComDtosFamMarca
       Index           =   1
       Left            =   4080
       Locked          =   -1  'True
-      TabIndex        =   14
+      TabIndex        =   15
       Text            =   "Text2"
       Top             =   3600
       Visible         =   0   'False
@@ -271,10 +286,10 @@ Begin VB.Form frmComDtosFamMarca
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   0
-      Width           =   13050
-      _ExtentX        =   23019
+      Width           =   13905
+      _ExtentX        =   24527
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -330,7 +345,7 @@ Begin VB.Form frmComDtosFamMarca
          Caption         =   "Vista previa"
          Height          =   315
          Left            =   6600
-         TabIndex        =   16
+         TabIndex        =   17
          Top             =   0
          Visible         =   0   'False
          Width           =   1215
@@ -387,10 +402,10 @@ Begin VB.Form frmComDtosFamMarca
       Bindings        =   "frmComDtosFamMarca.frx":000C
       Height          =   4005
       Left            =   120
-      TabIndex        =   24
+      TabIndex        =   25
       Top             =   720
-      Width           =   12855
-      _ExtentX        =   22675
+      Width           =   13695
+      _ExtentX        =   24156
       _ExtentY        =   7064
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -457,7 +472,7 @@ Begin VB.Form frmComDtosFamMarca
       Caption         =   "Desc. Proveedor"
       Height          =   315
       Left            =   240
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   4920
       Width           =   1215
    End
@@ -474,7 +489,7 @@ Begin VB.Form frmComDtosFamMarca
       EndProperty
       Height          =   255
       Left            =   240
-      TabIndex        =   12
+      TabIndex        =   13
       Top             =   8220
       Visible         =   0   'False
       Width           =   3495
@@ -672,7 +687,7 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
 
     If Not Data1.Recordset.EOF And (Modo <> 3 And Modo <> 4) Then
         'Poner descripcion del Cliente
-        Text2(0).Text = DevuelveDesdeBDNew(1, "sprove", "nomprove", "codprove", CStr(Data1.Recordset!CodProve), "N")
+        Text2(0).Text = DevuelveDesdeBDNew(1, "sprove", "nomprove", "codprove", CStr(Data1.Recordset!Codprove), "N")
         
         lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
     End If
@@ -723,18 +738,18 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim SQL As String
 On Error GoTo ECarga
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data1, SQL, False
 
     CargaGrid2
 
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     DataGrid1.ScrollBars = dbgAutomatic
     
 ECarga:
@@ -752,6 +767,8 @@ On Error GoTo ECarga2
     tots = tots & "S|txtAux(3)|T|Fecha dto.|1150|;S|cmdAux(3)|B||0|;S|txtAux(4)|T|Dto 1|800|;S|txtAux(5)|T|Dto 2|800|;"
     'Sept 2010
     tots = tots & "S|txtAux(6)|T|Rap 1|800|;S|txtAux(7)|T|Rap 2|800|;"
+    'Ago 2016
+    tots = tots & "S|txtAux(8)|T|S/Cargo|850|;"
     arregla tots, DataGrid1, Me
 
     'dtos alineados a la dcha
@@ -759,6 +776,7 @@ On Error GoTo ECarga2
     DataGrid1.Columns(7).Alignment = dbgRight
     DataGrid1.Columns(8).Alignment = dbgRight
     DataGrid1.Columns(9).Alignment = dbgRight
+    DataGrid1.Columns(10).Alignment = dbgRight
     
 ECarga2:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid: " & DataGrid1.Tag, Err.Description
@@ -791,21 +809,21 @@ End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
-Dim Indice As Byte
-    Indice = 3
-    txtAux(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim indice As Byte
+    indice = 3
+    txtAux(indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmFam_DatoSeleccionado(CadenaSeleccion As String)
 'Formulario Mantenimiento Familias
     txtAux(1).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
-    txtAux2(1).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtaux2(1).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmM_DatoSeleccionado(CadenaSeleccion As String)
 'Formulario Mantenimiento MARCAS
     txtAux(2).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
-    txtAux2(2).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtaux2(2).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmP_DatoSeleccionado(CadenaSeleccion As String)
@@ -885,7 +903,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
@@ -908,9 +926,9 @@ Dim b As Boolean
                  
     
     '-----------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     Me.DataGrid1.Enabled = (Modo <> 3 And Modo <> 4)
     BloquearClavesP (Modo = 4) ' si modificar
 
@@ -926,27 +944,27 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = (b Or (Modo = 0))
-    Me.mnNuevo.Enabled = (b Or (Modo = 0))
+    Toolbar1.Buttons(5).Enabled = (B Or (Modo = 0))
+    Me.mnNuevo.Enabled = (B Or (Modo = 0))
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnEliminar.Enabled = B
     
     
-    b = (Modo >= 3) Or Modo = 1
+    B = (Modo >= 3) Or Modo = 1
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'Ver Todos
-    Toolbar1.Buttons(2).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
 End Sub
 
 
@@ -983,7 +1001,7 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 Dim SQL As String
     
     SQL = "SELECT " & NombreTabla & ".codprove, " & NombreTabla & ".codfamia, nomfamia, " & NombreTabla & ".codmarca, nommarca, "
-    SQL = SQL & "fechadto, dtoline1, dtoline2, rap1, rap2 "
+    SQL = SQL & "fechadto, dtoline1, dtoline2, rap1, rap2,dtosincargo "
     SQL = SQL & " FROM (" & NombreTabla & " LEFT JOIN sfamia ON " & NombreTabla & ".codfamia =sfamia.codfamia) "
     SQL = SQL & " LEFT JOIN smarca ON " & NombreTabla & ".codmarca=smarca.codmarca "
 
@@ -1083,15 +1101,15 @@ Dim anc As Single
         txtAux(i).Text = DBLet(DataGrid1.Columns(i).Value, "N")
         FormateaCampo txtAux(i)
     Next i
-    txtAux2(1).Text = DBLet(Me.DataGrid1.Columns(2).Value, "T")
+    txtaux2(1).Text = DBLet(Me.DataGrid1.Columns(2).Value, "T")
     
     'Marca
     txtAux(2).Text = DBLet(Data1.Recordset!codmarca, "T")
     FormateaCampo txtAux(2)
-    txtAux2(2).Text = DBLet(Data1.Recordset!nommarca, "T")
+    txtaux2(2).Text = DBLet(Data1.Recordset!nommarca, "T")
     
     txtAux(3).Text = DBLet(Me.DataGrid1.Columns(5).Value, "F")
-    For i = 4 To 7
+    For i = 4 To 8
         txtAux(i).Text = DBLet(DataGrid1.Columns(i + 2), "N")
         FormateaCampo txtAux(i)
     Next i
@@ -1119,7 +1137,7 @@ On Error GoTo FinEliminar
         If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
             'Hay que eliminar
             NumRegElim = Me.Data1.Recordset.AbsolutePosition
-            SQL = "Delete from " & NombreTabla & " where codprove=" & Val(Data1.Recordset!CodProve)
+            SQL = "Delete from " & NombreTabla & " where codprove=" & Val(Data1.Recordset!Codprove)
             SQL = SQL & " and codfamia=" & Val(Data1.Recordset!Codfamia) & " and codmarca"
             If IsNull(Data1.Recordset!codmarca) Then
                 SQL = SQL & " is null "
@@ -1140,11 +1158,11 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
     
     If txtAux(0).Text <> "" Then
@@ -1156,7 +1174,7 @@ Dim b As Boolean
     End If
     
     If txtAux(1).Text <> "" Then
-        If txtAux2(1).Text = "" Then
+        If txtaux2(1).Text = "" Then
             MsgBox "Error en familia", vbExclamation
             PonerFoco txtAux(1)
             Exit Function
@@ -1170,7 +1188,7 @@ Dim b As Boolean
             CadenaConsulta = " is null"
         Else
             'Si pone la marca, DEBE existir
-            If txtAux2(2).Text = "" Then
+            If txtaux2(2).Text = "" Then
                 MsgBox "No existe la marca: " & txtAux(2).Text, vbExclamation
                 Exit Function
             End If
@@ -1265,7 +1283,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
 End Sub
 
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
@@ -1304,23 +1322,23 @@ Dim campo As String, tabla As String
             If PonerFormatoEntero(txtAux(Index)) Then
                 campo = "nomfamia"
                 tabla = "sfamia"
-                txtAux2(Index).Text = PonerNombreDeCod(txtAux(Index), conAri, tabla, campo)
+                txtaux2(Index).Text = PonerNombreDeCod(txtAux(Index), conAri, tabla, campo)
             Else
-                txtAux2(Index).Text = ""
+                txtaux2(Index).Text = ""
             End If
             
         Case 2 'Cod. Marca
             If PonerFormatoEntero(txtAux(Index)) Then
                 campo = "nommarca"
                 tabla = "smarca"
-                txtAux2(Index).Text = PonerNombreDeCod(txtAux(Index), conAri, tabla, campo)
+                txtaux2(Index).Text = PonerNombreDeCod(txtAux(Index), conAri, tabla, campo)
             Else
-                txtAux2(Index).Text = ""
+                txtaux2(Index).Text = ""
             End If
             
         Case 3 'Fecha Descuento
             PonerFormatoFecha txtAux(Index)
-        Case 4 To 7 'Descuentos
+        Case 4 To 8 'Descuentos
             'Formato tipo 4: Decimal(4,2)
             If Not PonerFormatoDecimal(txtAux(Index), 4) Then txtAux(Index).Text = ""
     End Select
@@ -1330,29 +1348,29 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim b As Boolean
+Dim B As Boolean
 
         DeseleccionaGrid Me.DataGrid1
         'PonerModo xModo + 1
 
-        b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+        B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
         For jj = 0 To txtAux.Count - 1
             txtAux(jj).Height = DataGrid1.RowHeight
             txtAux(jj).Top = alto
-            txtAux(jj).visible = b
+            txtAux(jj).visible = B
         Next jj
         
-        For jj = 1 To txtAux2.Count
-            txtAux2(jj).Height = Me.DataGrid1.RowHeight
-            txtAux2(jj).Top = alto
-            txtAux2(jj).visible = b
+        For jj = 1 To txtaux2.Count
+            txtaux2(jj).Height = Me.DataGrid1.RowHeight
+            txtaux2(jj).Top = alto
+            txtaux2(jj).visible = B
         Next jj
         
         For jj = 0 To Me.cmdAux.Count - 1
             Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
             Me.cmdAux(jj).Top = alto
-            Me.cmdAux(jj).visible = b
+            Me.cmdAux(jj).visible = B
         Next jj
 End Sub
 
@@ -1369,6 +1387,7 @@ On Error GoTo eModificaAqui
     SQL = SQL & ", dtoline2=" & DBSet(txtAux(5).Text, "N")
     SQL = SQL & ", rap1=" & DBSet(txtAux(6).Text, "N", "S")
     SQL = SQL & ", rap2=" & DBSet(txtAux(7).Text, "N", "S")
+    SQL = SQL & ", dtosincargo=" & DBSet(txtAux(8).Text, "N", "S")
     SQL = SQL & " where `codprove`=" & txtAux(0).Text & " and codfamia= " & txtAux(1).Text & " AND codmarca "
     If txtAux(2).Text = "" Then
         SQL = SQL & " is null"
