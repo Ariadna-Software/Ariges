@@ -1,5 +1,5 @@
 Type=Exe
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\Windows\SysWow64\STDOLE2.TLB#OLE Automation
 Reference=*\G{56BF9020-7A2F-11D0-9482-00A0C91110ED}#1.0#0#..\..\Windows\SysWow64\MSBIND.DLL#Microsoft Data Binding Collection
 Object={8767A745-088E-4CA6-8594-073D6D2DE57A}#9.2#0; crviewer9.dll
 Reference=*\G{2B78E590-E7D0-49BF-8F16-CFD6324DB307}#9.0#0#..\..\Program Files (x86)\Common Files\Crystal Decisions\2.0\bin\craxddrt9.dll#Crystal Reports 9 ActiveX Designer Design and Runtime Library
