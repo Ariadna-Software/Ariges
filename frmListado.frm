@@ -12156,7 +12156,7 @@ Dim codigo  As String
         NumRegElim = 0
         While Not miRsAux.EOF
             If IsNull(miRsAux!el_mail) Then
-                devuelve = devuelve & "    - " & miRsAux!NomClien & vbCrLf
+                devuelve = devuelve & "    - " & miRsAux!Nomclien & vbCrLf
             Else
                 'INSERTAMOS
                 NumRegElim = NumRegElim + 1
@@ -13161,7 +13161,7 @@ Dim Codfamia As Integer
             Exit Sub
         Else
             tabla = "UPDATE tmpinformes SET porcen1 =" & TransformaComasPuntos(CStr(RS!PorceIVA))
-            tabla = tabla & " WHERE codusu =" & vUsu.codigo & " AND codigo1 = " & RS!CodigIVA
+            tabla = tabla & " WHERE codusu =" & vUsu.codigo & " AND codigo1 = " & RS!codigiva
             conn.Execute tabla
         End If
     Next i
@@ -14651,7 +14651,7 @@ Dim Ind As Integer
                                 txtBultos(6).Tag = "|"
                                 Orden1 = "T"
                                 
-                                Orden2 = RS!NomClien
+                                Orden2 = RS!Nomclien
                                 Clivario = DBLet(RS!Clivario, "N") = 1
                             End If
                             'Las direcciones alternativas
@@ -18243,7 +18243,7 @@ Dim RS As ADODB.Recordset
     On Error GoTo ErrAlb
     
     '1) -- Buscar en la tabla de ALBARANES: PED -> ALV
-    SQL = "SELECT codclien,coddirec, sum(numbultos) as totBultos"
+    SQL = "SELECT codclien,coddirec, sum(l.numbultos) as totBultos"
     SQL = SQL & " FROM scaalb c INNER JOIN slialb l ON c.numalbar=l.numalbar and c.codtipom=l.codtipom"
     SQL = SQL & " WHERE c.numalbar=" & NumCod & " and c.codtipom='ALV'"
     SQL = SQL & " GROUP by c.numalbar,c.codtipom"
@@ -18267,7 +18267,7 @@ Dim RS As ADODB.Recordset
     '2) Buscar en la tabla de FACTURAS PED -> FAV
     If txtClie.Text = "" Then
          'Comprobar en FACTURAS: x si se pasa de PED -> FAC
-        SQL = "SELECT codclien,coddirec, sum(numbultos) as totBultos "
+        SQL = "SELECT codclien,coddirec, sum(l.numbultos) as totBultos "
         SQL = SQL & " FROM (scafac c INNER JOIN scafac1 a ON c.numfactu=a.numfactu and c.codtipom=a.codtipom and c.fecfactu=a.fecfactu)"
         SQL = SQL & " INNER JOIN slifac l ON a.numfactu=l.numfactu and a.codtipom=l.codtipom and a.fecfactu=l.fecfactu and a.numalbar=l.numalbar and a.codtipoa=l.codtipoa"
         SQL = SQL & " WHERE a.numalbar=" & NumCod & " and a.codtipoa='ALV'"

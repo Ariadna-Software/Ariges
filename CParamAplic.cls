@@ -395,6 +395,10 @@ Private mvarRecalculoMargen As Boolean
 Private mvarContabilidadNueva As Boolean
 
 
+'OCt2016
+Private mvarLotesGeneralitat As Boolean  'NO lleva en BD spara1. Si tiene fitos y existe la tabla slotesgeneralitat pondremos a true
+
+
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
@@ -1630,6 +1634,10 @@ Public Property Get Huertos() As Boolean
      Huertos = mvarHuertos
 End Property
 
+Public Property Get LotesGeneralitat() As Boolean
+     LotesGeneralitat = mvarLotesGeneralitat
+End Property
+
 
 
 
@@ -1993,6 +2001,10 @@ On Error GoTo Err3
         'Marjal CHIPOS, para saber si es marjal sin ponerle un numero instalacion
         FijarSiTieneHuertos RS
         
+        
+        'Lotes generalitat. Para meter los datos en
+        FijarSiTieneLotesGeneralitat RS
+        
     End If
     
     Set RS = Nothing
@@ -2263,35 +2275,35 @@ End Function
 
 
 Public Function DevuleveTipoIVA_RE(TipoIVAOrigen As Integer) As Integer
-Dim devuelve As Integer
+Dim Devuelve As Integer
     
     'IVA con recargo de equivalencia
-    devuelve = TipoIVAOrigen
+    Devuelve = TipoIVAOrigen
     If TipoIVAOrigen = TipoIVA1 Then
-        devuelve = TipoIVAre1
+        Devuelve = TipoIVAre1
     ElseIf TipoIVAOrigen = vParamAplic.TipoIVA2 Then
-        devuelve = TipoIVAre2
+        Devuelve = TipoIVAre2
     ElseIf TipoIVAOrigen = TipoIVA3 Then
-        devuelve = TipoIVAre3
+        Devuelve = TipoIVAre3
     Else
         MsgBox "NO se ha encontrado la correspondencia para el IVA RE: " & TipoIVAOrigen, vbExclamation
     End If
-    DevuleveTipoIVA_RE = devuelve
+    DevuleveTipoIVA_RE = Devuelve
 End Function
 
 
 
 Public Function DevuelveTipoIVA_OLD(ConRecargo As Boolean, TipoIVAOrigen As Integer, Optional OcultarMensaje As Boolean) As Integer
-Dim devuelve As Integer
+Dim Devuelve As Integer
     
-    devuelve = TipoIVAOrigen
+    Devuelve = TipoIVAOrigen
     
     If ConRecargo Then
         'IVA con recargo de equivalencia
         If TipoIVAOrigen = TipoIVA1 Then
-            devuelve = Me.OLDIVAre1
+            Devuelve = Me.OLDIVAre1
         ElseIf TipoIVAOrigen = vParamAplic.TipoIVA2 Then
-            devuelve = Me.OLDIVAre2
+            Devuelve = Me.OLDIVAre2
 '        ElseIf TipoIVAOrigen = TipoIVA3 Then
 '            devuelve = OLDIVAre3
         Else
@@ -2301,9 +2313,9 @@ Dim devuelve As Integer
     
     Else
         If TipoIVAOrigen = TipoIVA1 Then
-            devuelve = OLDIVA1
+            Devuelve = OLDIVA1
         ElseIf TipoIVAOrigen = vParamAplic.TipoIVA2 Then
-            devuelve = OLDIVA2
+            Devuelve = OLDIVA2
 '        ElseIf TipoIVAOrigen = TipoIVA3 Then
 '            devuelve = OLDIVA3
         Else
@@ -2313,7 +2325,7 @@ Dim devuelve As Integer
     
     
     End If
-    DevuelveTipoIVA_OLD = devuelve
+    DevuelveTipoIVA_OLD = Devuelve
 End Function
 
 
@@ -2508,4 +2520,34 @@ eFijarSiTieneHuertos:
     conn.Errors.Clear
     Set R = Nothing
 End Sub
+
+
+
+
+'Fijar lotes generalitat
+Private Sub FijarSiTieneLotesGeneralitat(ByRef R As ADODB.Recordset)
+    'Para marja-chipos
+    'Marjal CHIPOS
+    
+    On Error GoTo eFijarSiTieneHuertos
+    Set R = Nothing
+    Set R = New ADODB.Recordset
+    mvarLotesGeneralitat = False
+    
+    If Not mvarManipuladorFitosanitarios Then Exit Sub
+    
+    SQL = "Select * from slotesgeneralitat where codartic='@#@@'"
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    'Si llega aqui siginifca que la tabla existe
+    
+    mvarLotesGeneralitat = True
+    R.Close
+eFijarSiTieneHuertos:
+    Err.Clear
+    conn.Errors.Clear
+    Set R = Nothing
+    
+End Sub
+
+
 

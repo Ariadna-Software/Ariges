@@ -4,10 +4,10 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.MDIForm frmPpal 
    BackColor       =   &H00858585&
    Caption         =   "Ariges 4"
-   ClientHeight    =   8850
+   ClientHeight    =   9150
    ClientLeft      =   165
-   ClientTop       =   -690
-   ClientWidth     =   12705
+   ClientTop       =   -990
+   ClientWidth     =   15105
    Icon            =   "frmPpal.frx":0000
    LinkTopic       =   "MDIForm1"
    StartUpPosition =   2  'CenterScreen
@@ -241,8 +241,8 @@ Begin VB.MDIForm frmPpal
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   12705
-      _ExtentX        =   22410
+      Width           =   15105
+      _ExtentX        =   26644
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -349,9 +349,9 @@ Begin VB.MDIForm frmPpal
       Height          =   585
       Left            =   0
       TabIndex        =   1
-      Top             =   8265
-      Width           =   12705
-      _ExtentX        =   22410
+      Top             =   8565
+      Width           =   15105
+      _ExtentX        =   26644
       _ExtentY        =   1032
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -364,7 +364,7 @@ Begin VB.MDIForm frmPpal
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   14340
+            Object.Width           =   18574
             Text            =   "asdasd"
             TextSave        =   "asdasd"
          EndProperty
@@ -391,7 +391,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "16:24"
+            TextSave        =   "12:29"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2218,8 +2218,13 @@ Begin VB.MDIForm frmPpal
       Begin VB.Menu mnAridocFacturas 
          Caption         =   "Traspaso Aridoc"
       End
-      Begin VB.Menu mnUtiDeclaracionLOM 
+      Begin VB.Menu mnUtiDeclaraLOM 
+         Caption         =   "Lotes fitosanitarios subvencionados"
+         Index           =   0
+      End
+      Begin VB.Menu mnUtiDeclaraLOM 
          Caption         =   "Declaración ROPO"
+         Index           =   1
       End
       Begin VB.Menu mnArticulos 
          Caption         =   "Acciones artículos"
@@ -2371,7 +2376,7 @@ Private Sub SituarArriba()
 End Sub
 
 Private Sub MDIForm_Activate()
-Dim B As Boolean
+Dim b As Boolean
 
 
    ' AvisosPendientes = False
@@ -2397,14 +2402,14 @@ Dim B As Boolean
     
     '-- Control de si se utilizan servicios o no ( si es que no no se muestra el menú) hemos fichado gente nueva para la copa
     '   el situarlo aqui hace que no haya que salir y entrar en el programa si se
-    B = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALI", "T") <> ""
-    PuntoDeMenuVisible mnServicios(3), B
-    PuntoDeMenuVisible mnServicios(4), B And vParamAplic.NumeroInstalacion <> 4
-    PuntoDeMenuVisible mnServicios(5), B
+    b = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALI", "T") <> ""
+    PuntoDeMenuVisible mnServicios(3), b
+    PuntoDeMenuVisible mnServicios(4), b And vParamAplic.NumeroInstalacion <> 4
+    PuntoDeMenuVisible mnServicios(5), b
     PuntoDeMenuVisible mnServicios(1), vParamAplic.Servicios
     PuntoDeMenuVisible mnServicios(2), vParamAplic.Servicios And vParamAplic.NumeroInstalacion <> 4  'EULER NO los factura
-    B = B Or vParamAplic.Servicios
-    PuntoDeMenuVisible mnServicios(0), B  'la barra
+    b = b Or vParamAplic.Servicios
+    PuntoDeMenuVisible mnServicios(0), b  'la barra
     
     
     'vParamAplic.Reparaciones
@@ -2445,10 +2450,10 @@ Dim B As Boolean
         
     'Los albaranes y facturas en "B"
     'seran visibles si esta creado el tipo movimiento y tene contabilidad B
-    B = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALZ", "T") <> ""
-    B = B And vParamAplic.ContabilidadB > 0
-    PuntoDeMenuVisible Me.mnAlbaranesB, B
-    PuntoDeMenuVisible mnFacturarPresupuestos, B
+    b = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALZ", "T") <> ""
+    b = b And vParamAplic.ContabilidadB > 0
+    PuntoDeMenuVisible Me.mnAlbaranesB, b
+    PuntoDeMenuVisible mnFacturarPresupuestos, b
    
 
        
@@ -2492,21 +2497,21 @@ Dim B As Boolean
     
     'mnAlmMovimArticulosSt.visible = False
     'Dim TieneDevolucionRMA As Boolean  'Si tiene el tipo de movimiento PEW''
-    B = False
-    If DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "PEW", "T") <> "" Then B = True
-    PuntoDeMenuVisible Me.mnFacPedidos(11), B
-    PuntoDeMenuVisible Me.mnFacPedidos(12), B
-    B = False
+    b = False
+    If DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "PEW", "T") <> "" Then b = True
+    PuntoDeMenuVisible Me.mnFacPedidos(11), b
+    PuntoDeMenuVisible Me.mnFacPedidos(12), b
+    b = False
     'If vParamAplic.AlmacenB >= 0 Then
     If vParamAplic.NumeroInstalacion = 2 Then
         'Tiene almacen B
         If DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "PEZ", "T") <> "" Then
-            If vUsu.AlmacenPorDefecto = CStr(vParamAplic.AlmacenB) Then B = True
+            If vUsu.AlmacenPorDefecto = CStr(vParamAplic.AlmacenB) Then b = True
         End If
     End If
-    PuntoDeMenuVisible Me.mnFacPedidos(13), B
+    PuntoDeMenuVisible Me.mnFacPedidos(13), b
     'QUe ponga el separador
-    If B Then
+    If b Then
         If Me.mnFacPedidos(13).visible Then Me.mnFacPedidos(11).visible = True
     End If
     'Factura de mostrador se ve si el usuario lo tiene seleccionado
@@ -2517,17 +2522,17 @@ Dim B As Boolean
         'Si es empresa de b
     'Utilidades de traspaso presu a factura
     'y eliminar presu
-    B = False
+    b = False
     'If vParamAplic.AlmacenB > 90 Then
     If vParamAplic.NumeroInstalacion = 2 Then
         If vUsu.codigo Mod 1000 = 0 Then
-            B = True
+            b = True
         Else
-            B = Val(vUsu.AlmacenPorDefecto) > 90
+            b = Val(vUsu.AlmacenPorDefecto) > 90
         End If
     End If
-    PuntoDeMenuVisible mnUtilidadesVarias(2), B
-    PuntoDeMenuVisible mnUtilidadesVarias(3), B
+    PuntoDeMenuVisible mnUtilidadesVarias(2), b
+    PuntoDeMenuVisible mnUtilidadesVarias(3), b
     
     
     
@@ -2575,14 +2580,14 @@ Dim B As Boolean
     
       
     'ELUER
-    B = False
-    If vParamAplic.NumeroInstalacion = 4 Then B = True
+    b = False
+    If vParamAplic.NumeroInstalacion = 4 Then b = True
     
-    PuntoDeMenuVisible mnUtilidadesVarias(4), B 'vParamAplic.NumeroInstalacion = 4
-    PuntoDeMenuVisible mnMtoEuler(0), B
-    PuntoDeMenuVisible mnMtoEuler(1), B
-    PuntoDeMenuVisible mnMtoEuler(2), B
-    PuntoDeMenuVisible mnMtoEuler(3), B
+    PuntoDeMenuVisible mnUtilidadesVarias(4), b 'vParamAplic.NumeroInstalacion = 4
+    PuntoDeMenuVisible mnMtoEuler(0), b
+    PuntoDeMenuVisible mnMtoEuler(1), b
+    PuntoDeMenuVisible mnMtoEuler(2), b
+    PuntoDeMenuVisible mnMtoEuler(3), b
     If vParamAplic.NumeroInstalacion = 4 Then
         PuntoDeMenuVisible mnRepAlbaranes, False
         PuntoDeMenuVisible mnRepEntReparacion, False
@@ -2606,7 +2611,9 @@ Dim B As Boolean
     
     
     
-    
+    'Declaracion  fitosnaitarios
+    mnUtiDeclaraLOM(0).visible = vParamAplic.LotesGeneralitat 'SUBVENCIONADOS
+    mnUtiDeclaraLOM(1).visible = vParamAplic.ManipuladorFitosanitarios2
     
     
     
@@ -2624,8 +2631,8 @@ End Sub
 
 
 
-Private Sub PuntoDeMenuVisible(ByRef MnPuntoDMenu As Menu, B As Boolean)
-    If MnPuntoDMenu.visible Then MnPuntoDMenu.visible = B
+Private Sub PuntoDeMenuVisible(ByRef MnPuntoDMenu As Menu, b As Boolean)
+    If MnPuntoDMenu.visible Then MnPuntoDMenu.visible = b
     
 End Sub
 
@@ -2764,7 +2771,7 @@ End Sub
 
 Private Sub MDIForm_Unload(Cancel As Integer)
 'Formulario Principal
-Dim Cad As String
+Dim cad As String
 
 
     'Elimnar bloquo BD
@@ -4766,7 +4773,7 @@ End Sub
 
 Private Sub mnUtiConnActivas_Click()
 'ver las conexiones a donde apuntan
-Dim Cad As String
+Dim cad As String
 '    cad = "Conexiones:" & vbCrLf
 '    cad = cad & "------------------" & vbCrLf & vbCrLf
 '    cad = cad & "Ariges: " & vbCrLf & conn.ConnectionString & vbCrLf & vbCrLf
@@ -4777,9 +4784,14 @@ Dim Cad As String
     MostrarCadenasConexion
 End Sub
 
-Private Sub mnUtiDeclaracionLOM_Click()
-'Declaracion LOM
-    frmUtDeclara.Show vbModal
+
+
+Private Sub mnUtiDeclaraLOM_Click(Index As Integer)
+    If Index = 0 Then
+        frmFacLotesGeneralitat.Show vbModal
+    Else
+        frmUtDeclara.Show vbModal
+    End If
 End Sub
 
 Private Sub mnUtilidadesVarias_Click(Index As Integer)
@@ -4837,16 +4849,16 @@ End Sub
 Private Sub mnUtiUsuActivos_Click()
 'Muestra si hay otros usuarios conectados a la Gestion
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 
     CadenaDesdeOtroForm = OtrosPCsContraContabiliad
     If CadenaDesdeOtroForm <> "" Then
-        i = 1
+        I = 1
         Me.Tag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
         Do
-            SQL = RecuperaValor(CadenaDesdeOtroForm, i)
+            SQL = RecuperaValor(CadenaDesdeOtroForm, I)
             If SQL <> "" Then Me.Tag = Me.Tag & "    - " & SQL & vbCrLf
-            i = i + 1
+            I = I + 1
         Loop Until SQL = ""
         MsgBox Me.Tag, vbExclamation
     Else
@@ -4986,13 +4998,13 @@ End Sub
 
 Private Sub PonerDatosVisiblesForm()
 'Escribe texto de la barra de la aplicación
-Dim Cad As String
-    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
-    Cad = Cad & ", " & Format(Now, "d")
-    Cad = Cad & " de " & Format(Now, "mmmm")
-    Cad = Cad & " de " & Format(Now, "yyyy")
-    Cad = "    " & Cad & "    "
-    Me.StatusBar1.Panels(5).Text = Cad
+Dim cad As String
+    cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
+    cad = cad & ", " & Format(Now, "d")
+    cad = cad & " de " & Format(Now, "mmmm")
+    cad = cad & " de " & Format(Now, "yyyy")
+    cad = "    " & cad & "    "
+    Me.StatusBar1.Panels(5).Text = cad
     If vEmpresa Is Nothing Then
         Caption = "ARIGES" & " ver. " & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & "   Usuario: " & vUsu.Nombre & " FALTA CONFIGURAR"
         'Panel con el nombre de la empresa
@@ -5006,11 +5018,11 @@ End Sub
 
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim Cad As String
+Dim cad As String
 
     
     For Each T In Me
-        Cad = T.Name
+        cad = T.Name
         If Mid(T.Name, 1, 2) = "mn" Then
             If LCase(Mid(T.Caption, 1, 1)) <> "-" Then T.Enabled = Habilitar
         End If
@@ -5034,21 +5046,21 @@ Dim T
 End Sub
 
 Private Sub PonerMenusNivelUsuario()
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (vUsu.Nivel = 0) Or (vUsu.Nivel = 1)  'Administradores y root
+    b = (vUsu.Nivel = 0) Or (vUsu.Nivel = 1)  'Administradores y root
 
-    Me.mnConfParamAplic = B
-    mnConfManteUsuarios = B
+    Me.mnConfParamAplic = b
+    mnConfManteUsuarios = b
     
-    mnUsuarios.Enabled = B
-    mnNuevaEmpresa.Enabled = B
-    mnPedirPwd.Enabled = B
+    mnUsuarios.Enabled = b
+    mnNuevaEmpresa.Enabled = b
+    mnPedirPwd.Enabled = b
     Me.mnUtiConnActivas.Enabled = (vUsu.Nivel = 0) 'solo para root
     
 
-    B = vUsu.Nivel = 3  'Es usuario de consultas
-    If B Then
+    b = vUsu.Nivel = 3  'Es usuario de consultas
+    If b Then
         'Inventario
         Me.mnAlmTomaInven.Enabled = False
         Me.mnAlmEntradaInve.Enabled = False
@@ -5081,8 +5093,8 @@ End Sub
 
 
 Private Sub LanzaHome(Opcion As String)
-Dim i As Integer
-Dim Cad As String
+Dim I As Integer
+Dim cad As String
 
     On Error GoTo ELanzaHome
 
@@ -5112,7 +5124,7 @@ Dim Cad As String
 '        LanzaHome = True
 '    End If
 ELanzaHome:
-    If Err.Number <> 0 Then MuestraError Err.Number, Cad & vbCrLf & Err.Description
+    If Err.Number <> 0 Then MuestraError Err.Number, cad & vbCrLf & Err.Description
     CadenaDesdeOtroForm = ""
 End Sub
 
@@ -5356,17 +5368,17 @@ Private Function ComprobarBotonMenuVisible(objMenu As Menu, Activado As Boolean)
 Dim nomMenu As String
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim Cad As String
-Dim B As Boolean
+Dim cad As String
+Dim b As Boolean
 
 
     On Error GoTo EComprobar
     
-    B = objMenu.visible
+    b = objMenu.visible
     Activado = objMenu.Enabled
     
-    If B = False Then
-        ComprobarBotonMenuVisible = B
+    If b = False Then
+        ComprobarBotonMenuVisible = b
     Else
     
         nomMenu = objMenu.Name
@@ -5377,16 +5389,16 @@ Dim B As Boolean
         SQL = "select padre from usuarios.appmenus where aplicacion='Ariges' and name=" & DBSet(nomMenu, "T")
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
-            Cad = RS.Fields(0).Value
+            cad = RS.Fields(0).Value
         End If
         RS.Close
         
-        B = True
-        While B And Cad <> ""
-                SQL = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & Cad
+        b = True
+        While b And cad <> ""
+                SQL = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & cad
                 RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Not RS.EOF Then
-                    Cad = RS!Padre
+                    cad = RS!Padre
                     nomMenu = RS!Name
                 End If
                 RS.Close
@@ -5397,13 +5409,13 @@ Dim B As Boolean
                 RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If RS.Fields(0).Value > 0 Then
                     'Esta bloqueado el menu para el usuario
-                    B = False
+                    b = False
                     Activado = False
                 End If
                 RS.Close
-                If Cad = "0" Then Cad = "" 'terminar si llegamos a la raiz
+                If cad = "0" Then cad = "" 'terminar si llegamos a la raiz
         Wend
-        ComprobarBotonMenuVisible = B
+        ComprobarBotonMenuVisible = b
         Set RS = Nothing
     End If
     

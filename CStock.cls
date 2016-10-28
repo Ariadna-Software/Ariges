@@ -64,21 +64,21 @@ Dim artsotckminimo As String
 'Propiedades del modulo CStock
 '------------------------------------------------
 
-Public Property Let Codartic(ByVal vData As String)
+Public Property Let codArtic(ByVal vData As String)
      mvarcodartic = vData
 End Property
 
-Public Property Get Codartic() As String
-     Codartic = mvarcodartic
+Public Property Get codArtic() As String
+     codArtic = mvarcodartic
 End Property
 
 
-Public Property Let codalmac(ByVal vData As Integer)
+Public Property Let codAlmac(ByVal vData As Integer)
      mvarCodAlmac = vData
 End Property
 
-Public Property Get codalmac() As Integer
-     codalmac = mvarCodAlmac
+Public Property Get codAlmac() As Integer
+     codAlmac = mvarCodAlmac
 End Property
 
 
@@ -208,7 +208,7 @@ Private Function HayStock(ByRef ColArt As Collection, vCantidad As Single, ByRef
                 
                 If stockOrig < CSng(ColArt(nI).cantidadPuntoPedido) Then
                     PuntoPedidooMinimo = 2
-                    artPuntoPedido = artPuntoPedido & ColArt(nI).Codartic & "|"
+                    artPuntoPedido = artPuntoPedido & ColArt(nI).codArtic & "|"
                 End If
             End If
             
@@ -222,7 +222,7 @@ Private Function HayStock(ByRef ColArt As Collection, vCantidad As Single, ByRef
                     'TIENE FIJADO EL PUNTO MINIMO
                     If stockOrig < CSng(ColArt(nI).cantidadMinimo) Then
                         PuntoPedidooMinimo = 1
-                        artsotckminimo = artsotckminimo & ColArt(nI).Codartic & "|"
+                        artsotckminimo = artsotckminimo & ColArt(nI).codArtic & "|"
                     End If
                 End If
             End If
@@ -252,8 +252,8 @@ Dim Rotacion As String
         For nI = 1 To CL.Count
 
                 Rotacion = "concat(rotacion,""|"",codprove)"
-                NomArtic = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", CL(nI).Codartic, "T", Rotacion)
-                NomArtic = CL(nI).Codartic & " - " & NomArtic & " ("
+                NomArtic = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", CL(nI).codArtic, "T", Rotacion)
+                NomArtic = CL(nI).codArtic & " - " & NomArtic & " ("
                 
                 NomArtic = NomArtic & CL(nI).cantidadStock & ")"
                 If nI > 1 Then NomArtic = "       L: " & NomArtic
@@ -271,7 +271,7 @@ Dim Rotacion As String
                         
                         'Marzo 2012.
                         'Va a por UNICAJAS, no a por cantmini
-                        Rotacion = DevuelveDesdeBDNew(conAri, "sartic", "unicajas", "codartic", CL(nI).Codartic, "T")
+                        Rotacion = DevuelveDesdeBDNew(conAri, "sartic", "unicajas", "codartic", CL(nI).codArtic, "T")
                         If Rotacion = "" Then Rotacion = "0"
                         
                         If Val(Rotacion) > 1 Then
@@ -304,7 +304,7 @@ Dim Rotacion As String
         
         If DetaMov = "OFE" Or DetaMov = "PEV" Or DetaMov = "PEW" Or DetaMov = "PEZ" Then 'No hay control de stock para bloquear solo informa
             If HayArticulosEquivalenciaConStock Then
-                LanzaEquivalencias CL(1).Codartic, devuelve
+                LanzaEquivalencias CL(1).codArtic, devuelve
             Else
                 MsgBox devuelve, vbInformation
             End If
@@ -354,7 +354,7 @@ End Function
 Private Function ObtenerStockNuevo3(ByRef ColArticulos As Collection) As Boolean
 'OUT: cantidad de Stock que hay en el almacen vColAlm del articulo vCodArtic
 'Modificacion  19 Nov.  NO msgbox. Ya que si es conjunto lo mostrare al final
-Dim cant As String
+Dim Cant As String
 Dim devuelve As String
 Dim RT As ADODB.Recordset
 
@@ -366,24 +366,24 @@ Dim RT As ADODB.Recordset
 '        Debug.Print ColArticulos.item(nI).codArtic
         'Marzo 2010
         'cant = DevuelveDesdeBDNew(conAri, "salmac", "canstock", "codartic", ColArticulos.item(nI).codartic, "T", , "codalmac", CStr(codAlmac), "N")
-        cant = "Select canstock,stockmin,puntoped,fechainv from salmac WHERE codartic = " & DBSet(ColArticulos.Item(nI).Codartic, "T") & " AND codalmac = " & CStr(codalmac)
-        RT.Open cant, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Cant = "Select canstock,stockmin,puntoped,fechainv from salmac WHERE codartic = " & DBSet(ColArticulos.item(nI).codArtic, "T") & " AND codalmac = " & CStr(codAlmac)
+        RT.Open Cant, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If RT.EOF Then
             
-            cant = vbCrLf & "     .-"
+            Cant = vbCrLf & "     .-"
             'Significa que el articulo tiene conjuntos y es del conjunto
             If nI > 1 Then devuelve = devuelve & "(Lin) "
-            cant = cant & ColArticulos.Item(nI).Codartic
-            devuelve = devuelve & cant
+            Cant = Cant & ColArticulos.item(nI).codArtic
+            devuelve = devuelve & Cant
         Else
             'SI que tiene estock
-            ColArticulos.Item(nI).cantidadStock = DBLet(RT!CanStock, "N")
-            ColArticulos.Item(nI).cantidadPuntoPedido = DBLet(RT!puntoped, "N")
-            ColArticulos.Item(nI).cantidadMinimo = DBLet(RT!stockmin, "N")
+            ColArticulos.item(nI).cantidadStock = DBLet(RT!CanStock, "N")
+            ColArticulos.item(nI).cantidadPuntoPedido = DBLet(RT!puntoped, "N")
+            ColArticulos.item(nI).cantidadMinimo = DBLet(RT!stockmin, "N")
             If IsNull(RT!FechaINV) Then
-                ColArticulos.Item(nI).FecInve = "01/01/1900"
+                ColArticulos.item(nI).FecInve = "01/01/1900"
             Else
-                ColArticulos.Item(nI).FecInve = RT!FechaINV
+                ColArticulos.item(nI).FecInve = RT!FechaINV
             End If
                 
         End If
@@ -395,7 +395,7 @@ Dim RT As ADODB.Recordset
     'ANtes solo comprobaba el primero
     'cant = DevuelveDesdeBDNew(conAri, "salmac", "canstock", "codartic", codartic, "T", , "codalmac", CStr(codAlmac), "N")
     If devuelve <> "" Then 'No hay de ese artículo(s) en Almacen
-        devuelve = "No existe en el Almacen: " & codalmac & vbCrLf
+        devuelve = "No existe en el Almacen: " & codAlmac & vbCrLf
         devuelve = devuelve & "Artículo " & vbCrLf
         MsgBox devuelve, vbExclamation
         ObtenerStockNuevo3 = False
@@ -414,7 +414,7 @@ Dim vArtic As CArticulo
 Dim B As Boolean
 
     Set vArtic = New CArticulo
-    If vArtic.LeerDatos(Codartic) Then
+    If vArtic.LeerDatos(codArtic) Then
         If vArtic.EsInstalacion Then
             'Si el articulo es una instalacion no mueve stock
             B = False
@@ -449,7 +449,7 @@ Dim MinimoPedido As Byte
     'Comprobar si hay suficiente stock para realizar el Movimiento de stock si
     'el articulo NO es INSTALACION
     Set vArtic = New CArticulo
-    If vArtic.LeerDatos(Codartic) Then
+    If vArtic.LeerDatos(codArtic) Then
         If vArtic.EsInstalacion Then
             B = True
         Else
@@ -462,7 +462,7 @@ Dim MinimoPedido As Byte
                 If Not YaTieneLeidoLosDatosObjeto Then
                     Set cArticulos = New Collection
                     Set vD = New cLArticulo
-                    vD.Codartic = vArtic.Codigo
+                    vD.codArtic = vArtic.codigo
                     vD.CantidadNecesaria = 1
                     cArticulos.Add vD
                 
@@ -534,7 +534,7 @@ Dim Can As Single
         If artsotckminimo <> "" Then artsotckminimo = "|" & artsotckminimo
         devuelve = ""
         For nI = 1 To CL.Count
-                Cad = "|" & CL(nI).Codartic & "|"
+                Cad = "|" & CL(nI).codArtic & "|"
                 If InStr(1, artsotckminimo, Cad) > 0 Then
                     Esta = True
                     Minimo = True
@@ -550,8 +550,8 @@ Dim Can As Single
              
                 If Esta Then
                     
-                    Cad = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", CL(nI).Codartic, "T")
-                    Cad = CL(nI).Codartic & " - " & Cad '& " ("
+                    Cad = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", CL(nI).codArtic, "T")
+                    Cad = CL(nI).codArtic & " - " & Cad '& " ("
                     If Minimo Then
                         Cad = "MINIMO STOCK   " & Cad
                         'Cad = Cad & CL(nI).cantidadStock & ")"
@@ -567,9 +567,9 @@ Dim Can As Single
                     'Insertamos en tm
                     If InsertaEnBD Then
                             SQL = "insert into `spedidos` (`fechahora`,`codusu`,`codalmac`,`codartic`,`minimo`,`puntope`,"
-                            SQL = SQL & "`cantidad`,`proceso`) values (concat(curdate(),' ' ,curtime())," & vUsu.Codigo
+                            SQL = SQL & "`cantidad`,`proceso`) values (concat(curdate(),' ' ,curtime())," & vUsu.codigo
                             SQL = SQL & "," & mvarCodAlmac
-                            SQL = SQL & "," & DBSet(CL(nI).Codartic, "T")
+                            SQL = SQL & "," & DBSet(CL(nI).codArtic, "T")
                             SQL = SQL & "," & DBSet(CL(nI).cantidadMinimo, "N")
                             SQL = SQL & "," & DBSet(CL(nI).cantidadPuntoPedido, "N")
                             
@@ -592,7 +592,10 @@ Dim Can As Single
         If devuelve = "" Then Exit Sub
         
         If Not MuestraMSG Then Exit Sub
-        
+                
+                
+        If vParamAplic.NumeroInstalacion = 2 Then Exit Sub
+                
         'Mostramos el msgh
         devuelve = vbCrLf & String(40, "-") & vbCrLf & devuelve & vbCrLf & vbCrLf
         If CL.Count > 1 Then devuelve = devuelve & "(Conjuntos)" & vbCrLf
@@ -625,7 +628,7 @@ Dim F_inve As String
     '-------------------------------------------------------------------------------
     Set vD = New cLArticulo
     Set cArticulos = New Collection
-    vD.Codartic = mvarcodartic
+    vD.codArtic = mvarcodartic
     vD.CantidadNecesaria = 1
     
     
@@ -665,7 +668,7 @@ Dim F_inve As String
             miImporte = cArticulos(nI).CantidadNecesaria * cantidad * cArticulos(nI).precioUC
         
         End If
-        CadValues = "VALUES (" & DBSet(cArticulos(nI).Codartic, "T") & ", " & codalmac & ", " & DBSet(FechaMov, "F") & ", '"
+        CadValues = "VALUES (" & DBSet(cArticulos(nI).codArtic, "T") & ", " & codAlmac & ", " & DBSet(FechaMov, "F") & ", '"
         If HoraMov = "" Then HoraMov = Format(FechaMov, "dd/mm/yyyy") & " " & Format(Now, "hh:mm:ss")
         CadValues = CadValues & Format(HoraMov, "yyyy-mm-dd hh:mm:ss") & "', " & vTipoMov & " , '" & DetaMov & "', " & DBSet(miCantidad, "N") & ", "
         CadValues = CadValues & DBSet(miImporte, "N") & ", " & Trabajador & ", " & ValorNulo & ", " & DBSet(Documento, "T") & ", " & LineaDocu & ")"
@@ -750,19 +753,19 @@ On Error Resume Next
 
     ActualizarStockAlmacen = False
     For nI = 1 To cArticulos.Count
-        ElArticulo = DBSet(cArticulos(nI).Codartic, "T")
+        ElArticulo = DBSet(cArticulos(nI).codArtic, "T")
         miCantidad = cArticulos(nI).CantidadNecesaria * cantidad
         If cantidad <> 0 Then
             If tipoMov = "E" Then 'Mov. de Entrada
                 '==== Aumentar el stock en el Almacen
                 SQL = "UPDATE salmac Set canstock = canstock + " & DBSet(miCantidad, "N")
                 SQL = SQL & " WHERE codartic =" & ElArticulo & " AND "
-                SQL = SQL & " codalmac =" & codalmac
+                SQL = SQL & " codalmac =" & codAlmac
             Else 'Mov. de Salida
                 '==== Disminuir Stock en Almacen Origen
                 SQL = "UPDATE salmac Set canstock = canstock - " & DBSet(miCantidad, "N")
                 SQL = SQL & " WHERE codartic =" & ElArticulo & " AND "
-                SQL = SQL & " codalmac =" & codalmac
+                SQL = SQL & " codalmac =" & codAlmac
             End If
             conn.Execute SQL
         End If
@@ -794,7 +797,7 @@ Dim vD As cLArticulo
     '-------------------------------------------------------------------------------
     Set vD = New cLArticulo
     Set cArticulos = New Collection
-    vD.Codartic = mvarcodartic
+    vD.codArtic = mvarcodartic
     vD.CantidadNecesaria = 1  'el principal siempre es uno
     cArticulos.Add vD
 
@@ -841,8 +844,8 @@ Dim SQL As String
 On Error GoTo EElim
 
     For nI = 1 To cArticulos.Count
-        SQL = DBSet(cArticulos(nI).Codartic, "T")
-        SQL = "DELETE FROM smoval WHERE codartic=" & SQL & " AND codalmac=" & codalmac
+        SQL = DBSet(cArticulos(nI).codArtic, "T")
+        SQL = "DELETE FROM smoval WHERE codartic=" & SQL & " AND codalmac=" & codAlmac
         SQL = SQL & " AND detamovi='" & DetaMov & "' AND document= " & DBSet(Documento, "T") & " AND numlinea= " & LineaDocu
         SQL = SQL & " AND fechamov=" & DBSet(FechaMov, "F")
         'en albaranes de compra añadir el proveedor
@@ -890,7 +893,7 @@ Dim vD  As cLArticulo
         
         Set vD = New cLArticulo
         Set cArticulos = New Collection
-        vD.Codartic = mvarcodartic
+        vD.codArtic = mvarcodartic
         vD.CantidadNecesaria = 1  'el principal siempre es uno
         cArticulos.Add vD
         
@@ -921,7 +924,7 @@ Dim SQL As String
 On Error Resume Next
     
     SQL = "UPDATE smoval SET cantidad=" & DBSet(cantidad, "N") & ", impormov=" & DBSet(Importe, "N") 'Importe
-    SQL = SQL & " WHERE codartic=" & DBSet(Codartic, "T") & " AND codalmac=" & codalmac
+    SQL = SQL & " WHERE codartic=" & DBSet(codArtic, "T") & " AND codalmac=" & codAlmac
     SQL = SQL & " AND detamovi='" & DetaMov & "' AND document= " & DBSet(Documento, "T") & " AND numlinea= " & LineaDocu
     conn.Execute SQL
     
@@ -949,7 +952,7 @@ Dim RS As ADODB.Recordset
 
     'Obtener el tipo de movimiento en la smoval
     SQL = "SELECT tipomovi FROM smoval "
-    SQL = SQL & " WHERE codartic=" & DBSet(Codartic, "T") & " AND codalmac=" & codalmac
+    SQL = SQL & " WHERE codartic=" & DBSet(codArtic, "T") & " AND codalmac=" & codAlmac
     SQL = SQL & " AND detamovi='" & DetaMov & "' AND document= " & DBSet(Documento, "T") & " AND numlinea= " & LineaDocu
     
     Set RS = New ADODB.Recordset
@@ -1037,7 +1040,7 @@ Dim C As String
         While Not RS.EOF
             Set vDa = New cLArticulo
             vDa.CantidadNecesaria = RS!cantidad
-            vDa.Codartic = RS!codarti1
+            vDa.codArtic = RS!codarti1
             vDa.precioUC = DBLet(RS!precioUC, "N")
             cArticulos.Add vDa
             RS.MoveNext
@@ -1065,13 +1068,13 @@ Dim Cad As String
         
         If cArticulos Is Nothing Then
             'Solo comprobaremos del articulo este
-            Cad = "codartic=" & DBSet(Me.Codartic, "T") & " AND codalmac "
-            Cad = DevuelveDesdeBD(conAri, "fechainv", "salmac", Cad, CStr(codalmac))
+            Cad = "codartic=" & DBSet(Me.codArtic, "T") & " AND codalmac "
+            Cad = DevuelveDesdeBD(conAri, "fechainv", "salmac", Cad, CStr(codAlmac))
             If Cad <> "" Then
                 If Cad <> "0:00:00" Then
                     'OK
                     If CDate(Cad) > CDate(FechaMov) Then
-                        Cad = Codartic & "  inventariado en " & Cad
+                        Cad = codArtic & "  inventariado en " & Cad
                     Else
                         Cad = ""
                     End If
@@ -1084,8 +1087,8 @@ Dim Cad As String
         Else
             Cad = ""
             For NF = 1 To cArticulos.Count
-                    If CDate(Me.FechaMov) < CDate(cArticulos.Item(NF).FecInve) Then
-                        Cad = Cad & cArticulos.Item(NF).Codartic & "  inventariado en " & cArticulos.Item(NF).FecInve & vbCrLf
+                    If CDate(Me.FechaMov) < CDate(cArticulos.item(NF).FecInve) Then
+                        Cad = Cad & cArticulos.item(NF).codArtic & "  inventariado en " & cArticulos.item(NF).FecInve & vbCrLf
                     End If
             Next
         End If

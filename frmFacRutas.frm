@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacRutas 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Rutas de Asistencia"
@@ -343,6 +343,7 @@ Dim b As Boolean
     txtAux(1).visible = Not b
     cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
+    
     DataGrid1.Enabled = b
     
     'Si es regresar
@@ -439,7 +440,7 @@ End Sub
 
 Private Sub BotonModificar()
 Dim anc As Single
-Dim i As Integer
+Dim I As Integer
     
     If adodc1.Recordset.EOF Then Exit Sub
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
@@ -447,8 +448,8 @@ Dim i As Integer
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -491,7 +492,7 @@ On Error GoTo Error2
         'Hay que eliminar
         NumRegElim = Me.adodc1.Recordset.AbsolutePosition
         SQL = "Delete from srutas where codrutas=" & adodc1.Recordset!codrutas
-        Conn.Execute SQL
+        conn.Execute SQL
         CancelaADODC Me.adodc1
         CargaGrid ""
         CancelaADODC Me.adodc1
@@ -505,7 +506,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim cadB As String
 On Error Resume Next
 
@@ -528,11 +529,11 @@ On Error Resume Next
              If DatosOk And BLOQUEADesdeFormulario(Me) Then
                  If ModificaDesdeFormulario(Me, 3) Then
                       TerminaBloquear
-                      i = adodc1.Recordset.Fields(0)
+                      I = adodc1.Recordset.Fields(0)
                       PonerModo 2
                       CancelaADODC Me.adodc1
                       CargaGrid
-                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                   End If
 '                  adodc1.Recordset.MoveFirst
                   DataGrid1.SetFocus
