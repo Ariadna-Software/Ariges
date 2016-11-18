@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmRepCargarNSerie 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Introducir Nº Series"
@@ -504,7 +504,7 @@ Dim alto As Single
             Else
                 txtAux.Text = DBLet(Data1.Recordset!numSerie, "T")
                 txtAux.Locked = False
-                txtauz.Text = DBLet(Data1.Recordset!NumMante, "T")
+                txtauz.Text = DBLet(Data1.Recordset!nummante, "T")
                 txtauz.Locked = False
                 
                 If DeVentas Then
@@ -560,27 +560,27 @@ Dim RStmp As ADODB.Recordset
 Dim cadExisten As String
 Dim cadExisten2 As String
 Dim devuelve As String
-Dim b As Boolean
+Dim B As Boolean
 
-    b = True
+    B = True
     'Antes de salir de ventana de carga de Nº series comprobar que en la tabla TMP
     'se han cargado todos los Nº de Serie
-    SQL = "select numserie from tmpnseries where (numserie='' or numserie=' ') AND codusu=" & vUsu.Codigo
+    SQL = "select numserie from tmpnseries where (numserie='' or numserie=' ') AND codusu=" & vUsu.codigo
     Set RStmp = New ADODB.Recordset
     RStmp.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RStmp.EOF Then
         MsgBox " Debe Introducir todos los Nº de Serie antes de Salir.", vbExclamation
-        b = False
+        B = False
     End If
     RStmp.Close
     Set RStmp = Nothing
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
     
     'Comprobar que los Nº de Serie cargados en la temporal no esten asignados ya
     cadExisten = ""
     cadExisten2 = ""
     SQL = "SELECT numserie, codartic FROM tmpnseries "
-    SQL = SQL & " WHERE codusu=" & vUsu.Codigo
+    SQL = SQL & " WHERE codusu=" & vUsu.codigo
     SQL = SQL & " ORDER BY codartic "
     Set RStmp = New ADODB.Recordset
     RStmp.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -617,14 +617,14 @@ Dim b As Boolean
             cadExisten = "Los siguientes Nº Serie ya estan asignados a un Albaran de VENTA:" & vbCrLf & vbCrLf & cadExisten
             cadExisten = cadExisten & vbCrLf & vbCrLf & "Introduzca otro Nº."
             MsgBox cadExisten, vbExclamation
-            b = False
+            B = False
         End If
         
         If cadExisten2 <> "" Then 'Se han encontrado Nº Series ya asignados a Facturas
             cadExisten2 = "Los siguientes Nº Serie ya estan asignados a una Factura de VENTA:" & vbCrLf & cadExisten2
             cadExisten2 = cadExisten2 & vbCrLf & vbCrLf & "Introduzca otro Nº."
             MsgBox cadExisten2, vbExclamation
-            b = False
+            B = False
         End If
         
         
@@ -646,7 +646,7 @@ Dim b As Boolean
             cadExisten = "Los siguientes Nº Serie ya estan asignados a un Albaran de COMPRA:" & vbCrLf & vbCrLf & cadExisten
             cadExisten = cadExisten & vbCrLf & vbCrLf & "Introduzca otro Nº."
             MsgBox cadExisten, vbExclamation
-           b = False
+           B = False
         End If
         
         'Comprobar que los Nº de Serie introducidos no esten repetidos en la tabla temporal
@@ -654,7 +654,7 @@ Dim b As Boolean
     End If
     RStmp.Close
     Set RStmp = Nothing
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
     
     'Cargar las lineas de las plantilla como lineas de la Oferta y Salir (Volver a Mto Ofertas)
     PulsadoSalir = True
@@ -672,7 +672,7 @@ End Sub
 
 Private Sub mnSalir_Click()
     PulsadoSalir = True
-    If MsgBox("Va a salir sin Introducir los Nº de Serie." & vbCrLf & "¿Desea continuar?", vbYesNo) = vbNo Then Exit Sub
+    If MsgBox("Va a salir sin Introducir los Nº de Serie." & vbCrLf & "¿Desea continuar?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
     If MsgBox("Seguro?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
     Unload Me
 End Sub
@@ -682,7 +682,7 @@ Private Sub txtAux_GotFocus()
     ConseguirFoco txtAux, 3
 End Sub
 
-Private Sub TxtAux_KeyDown(KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(KeyCode As Integer, Shift As Integer)
     gridCargado = False
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
@@ -741,17 +741,17 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
        
     Modo = Kmodo
     PonerIndicador lblIndicador, Modo
     
     'MODIFICAR
-    b = (Modo = 4)
-    Me.cmdAceptar.visible = b
-    Me.cmdCancelar.visible = b
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnModificar.Enabled = Not b
+    B = (Modo = 4)
+    Me.cmdAceptar.visible = B
+    Me.cmdCancelar.visible = B
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnModificar.Enabled = Not B
     
     PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario
@@ -774,7 +774,7 @@ Dim SQL As String
      'TEINSA. Puede ser que haya dos lineas con el mismo articulo y distintos num serie
      SQL = SQL & " ,numlinealb"
      SQL = SQL & " FROM " & NombreTabla & " INNER JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic "
-     SQL = SQL & " WHERE codusu=" & vUsu.Codigo
+     SQL = SQL & " WHERE codusu=" & vUsu.codigo
      SQL = SQL & Ordenacion
     
      MontaSQLCarga = SQL
@@ -794,7 +794,7 @@ Private Sub PonerOpcionesMenu()
 End Sub
 
 
-Private Function ActualizarNumSerie(nSerie As String, NumMante As String) As Boolean
+Private Function ActualizarNumSerie(nSerie As String, nummante As String) As Boolean
 'Actualizar en la tabla temporal tmpnseries el Nº de Serie
 Dim SQL As String
 On Error GoTo EActualizar
@@ -806,8 +806,8 @@ On Error GoTo EActualizar
     SQL = SQL & DBSet(nSerie, "T")
     
     'Modificacion
-    SQL = SQL & " , nummante = " & DBSet(NumMante, "T")
-    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+    SQL = SQL & " , nummante = " & DBSet(nummante, "T")
+    SQL = SQL & " WHERE codusu=" & vUsu.codigo & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
     SQL = SQL & " AND numlinea=" & Data1.Recordset!numlinea
     'Junio2010
     SQL = SQL & " AND numlinealb = " & Data1.Recordset!numlinealb
@@ -828,11 +828,11 @@ End Function
 
 Private Function DatosOk(nSerie As String) As Boolean
 Dim devuelve As String
-Dim b As Boolean
+Dim B As Boolean
 Dim NumAlbar As String
 
     DatosOk = False
-    b = True
+    B = True
     If Data1.Recordset.EOF Then Exit Function
     
     'Comprobar si existe en la tabla sserie, y ya esta comprado
@@ -850,25 +850,25 @@ Dim NumAlbar As String
                 If Val(NumAlbar) <> Val(NumAlb) Then
                     devuelve = "El Nº de Serie ya ha sido vendido en el Albaran Nº: " & Format(NumAlbar, "0000000")
                     MsgBox devuelve, vbExclamation
-                    b = False
+                    B = False
                 End If
             ElseIf NumAlbar <> NumAlb Then
                     devuelve = "El Nº de Serie ya ha sido comprado en el Albaran Nº: " & NumAlbar
                     MsgBox devuelve, vbExclamation
-                    b = False
+                    B = False
             End If
         End If
     End If
     
         'comprobar si existe en la tabla temporal con lo cual quiere decir que ya hemos
         'introducido ese nº de serie
-        devuelve = "select count(*) from tmpnseries WHERE codusu=" & vUsu.Codigo
+        devuelve = "select count(*) from tmpnseries WHERE codusu=" & vUsu.codigo
         devuelve = devuelve & " and codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " and numserie=" & DBSet(nSerie, "T")
         devuelve = devuelve & " and numlinea <>" & Data1.Recordset!numlinea
         If RegistrosAListar(devuelve) > 0 Then
             devuelve = "Ya ha introducido una linea con el nº de serie: " & nSerie
             MsgBox devuelve, vbInformation
-            b = False
+            B = False
         End If
         
         
@@ -882,7 +882,7 @@ Dim NumAlbar As String
 '            End If
 '        End If
 '    End If
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -892,7 +892,7 @@ Private Sub CargarNSeriesConsecutivos(cadNSerie As String)
 'Ej: A partid de la entrada: artic=0000016  numserie=0016-001
 '   genera para cada linea de ese artic que encuentre: numserie=0016-02, 0016-03,...
 Dim codArtic As String
-Dim NumMante As String
+Dim nummante As String
 
     If Data1.Recordset.EOF Then Exit Sub
     
@@ -901,14 +901,14 @@ Dim NumMante As String
     
     'Insertar el primer registro
     If DatosOk(cadNSerie) Then
-        NumMante = ""
+        nummante = ""
         If DeVentas Then
             If Trim(txtauz.Text) <> "" Then
-                    If MsgBox("¿Desea poner a los numeros de serie el mantenimiento: " & txtauz.Text & " ?", vbQuestion + vbYesNo) = vbYes Then NumMante = txtauz.Text
+                    If MsgBox("¿Desea poner a los numeros de serie el mantenimiento: " & txtauz.Text & " ?", vbQuestion + vbYesNo) = vbYes Then nummante = txtauz.Text
             End If
         End If
         codArtic = Data1.Recordset!codArtic
-        ActualizarNumSerie cadNSerie, NumMante  'pongo un NULL en nummante
+        ActualizarNumSerie cadNSerie, nummante  'pongo un NULL en nummante
         Data1.Recordset.MoveNext
     
         'Insertar sucesivos registros
@@ -916,7 +916,7 @@ Dim NumMante As String
           If Data1.Recordset!codArtic = codArtic Then
             'Obtener el Nº De Serie Siguiente
             cadNSerie = ObtenerNSerieSiguiente(cadNSerie)
-            If DatosOk(cadNSerie) Then ActualizarNumSerie cadNSerie, NumMante
+            If DatosOk(cadNSerie) Then ActualizarNumSerie cadNSerie, nummante
           End If
           Data1.Recordset.MoveNext
         Wend

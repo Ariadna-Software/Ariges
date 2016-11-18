@@ -350,72 +350,72 @@ Begin VB.Form frmFacEntAlbaranes2
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacEntAlbaranes.frx":0049
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "txtAux(12)"
-      Tab(0).Control(1)=   "txtAux(11)"
-      Tab(0).Control(2)=   "txtAux(10)"
-      Tab(0).Control(3)=   "cmdAux(9)"
-      Tab(0).Control(4)=   "txtAux(9)"
-      Tab(0).Control(5)=   "txtAux(5)"
-      Tab(0).Control(6)=   "FrameCliente"
-      Tab(0).Control(7)=   "cmdAux(1)"
-      Tab(0).Control(8)=   "cmdAux(0)"
-      Tab(0).Control(9)=   "txtAux(2)"
-      Tab(0).Control(10)=   "txtAux(8)"
-      Tab(0).Control(11)=   "txtAux(7)"
-      Tab(0).Control(12)=   "txtAux(6)"
-      Tab(0).Control(13)=   "txtAux(4)"
-      Tab(0).Control(14)=   "txtAux(3)"
-      Tab(0).Control(15)=   "txtAux(1)"
-      Tab(0).Control(16)=   "txtAux(0)"
-      Tab(0).Control(17)=   "DataGrid1"
+      Tab(0).Control(0)=   "DataGrid1"
+      Tab(0).Control(1)=   "txtAux(0)"
+      Tab(0).Control(2)=   "txtAux(1)"
+      Tab(0).Control(3)=   "txtAux(3)"
+      Tab(0).Control(4)=   "txtAux(4)"
+      Tab(0).Control(5)=   "txtAux(6)"
+      Tab(0).Control(6)=   "txtAux(7)"
+      Tab(0).Control(7)=   "txtAux(8)"
+      Tab(0).Control(8)=   "txtAux(2)"
+      Tab(0).Control(9)=   "cmdAux(0)"
+      Tab(0).Control(10)=   "cmdAux(1)"
+      Tab(0).Control(11)=   "FrameCliente"
+      Tab(0).Control(12)=   "txtAux(5)"
+      Tab(0).Control(13)=   "txtAux(9)"
+      Tab(0).Control(14)=   "cmdAux(9)"
+      Tab(0).Control(15)=   "txtAux(10)"
+      Tab(0).Control(16)=   "txtAux(11)"
+      Tab(0).Control(17)=   "txtAux(12)"
       Tab(0).ControlCount=   18
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbaranes.frx":0065
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(44)"
-      Tab(1).Control(1)=   "Text2(43)"
-      Tab(1).Control(2)=   "Text1(43)"
-      Tab(1).Control(3)=   "FrameFacRec"
-      Tab(1).Control(4)=   "chkDocArchi"
-      Tab(1).Control(5)=   "Text1(41)"
-      Tab(1).Control(6)=   "Text1(39)"
-      Tab(1).Control(7)=   "FrameHco"
-      Tab(1).Control(8)=   "Text1(29)"
-      Tab(1).Control(9)=   "Text2(29)"
-      Tab(1).Control(10)=   "Text1(28)"
-      Tab(1).Control(11)=   "Text2(28)"
-      Tab(1).Control(12)=   "Text1(27)"
-      Tab(1).Control(13)=   "Text2(27)"
-      Tab(1).Control(14)=   "Text1(2)"
-      Tab(1).Control(15)=   "Text1(25)"
-      Tab(1).Control(16)=   "Text1(26)"
-      Tab(1).Control(17)=   "Text1(24)"
-      Tab(1).Control(18)=   "Text1(23)"
-      Tab(1).Control(19)=   "Text1(22)"
-      Tab(1).Control(20)=   "Text1(21)"
-      Tab(1).Control(21)=   "Text1(20)"
-      Tab(1).Control(22)=   "Text1(19)"
-      Tab(1).Control(23)=   "Text1(18)"
-      Tab(1).Control(24)=   "Text1(38)"
-      Tab(1).Control(25)=   "chkImpreso"
-      Tab(1).Control(26)=   "Label1(55)"
-      Tab(1).Control(27)=   "Label1(54)"
-      Tab(1).Control(28)=   "imgBuscar(13)"
-      Tab(1).Control(29)=   "imgBuscar(9)"
-      Tab(1).Control(30)=   "Shape1"
-      Tab(1).Control(31)=   "imgFecha(40)"
-      Tab(1).Control(32)=   "Label1(52)"
-      Tab(1).Control(33)=   "Label1(24)"
-      Tab(1).Control(34)=   "Label1(23)"
-      Tab(1).Control(35)=   "imgBuscar(8)"
-      Tab(1).Control(36)=   "Label1(9)"
-      Tab(1).Control(37)=   "imgBuscar(7)"
-      Tab(1).Control(38)=   "Label1(12)"
-      Tab(1).Control(39)=   "Label1(11)"
-      Tab(1).Control(40)=   "Label1(10)"
-      Tab(1).Control(41)=   "Label1(5)"
-      Tab(1).Control(42)=   "Label1(3)"
-      Tab(1).Control(43)=   "Label1(45)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(10)"
+      Tab(1).Control(4)=   "Label1(11)"
+      Tab(1).Control(5)=   "Label1(12)"
+      Tab(1).Control(6)=   "imgBuscar(7)"
+      Tab(1).Control(7)=   "Label1(9)"
+      Tab(1).Control(8)=   "imgBuscar(8)"
+      Tab(1).Control(9)=   "Label1(23)"
+      Tab(1).Control(10)=   "Label1(24)"
+      Tab(1).Control(11)=   "Label1(52)"
+      Tab(1).Control(12)=   "imgFecha(40)"
+      Tab(1).Control(13)=   "Shape1"
+      Tab(1).Control(14)=   "imgBuscar(9)"
+      Tab(1).Control(15)=   "imgBuscar(13)"
+      Tab(1).Control(16)=   "Label1(54)"
+      Tab(1).Control(17)=   "Label1(55)"
+      Tab(1).Control(18)=   "chkImpreso"
+      Tab(1).Control(19)=   "Text1(38)"
+      Tab(1).Control(20)=   "Text1(18)"
+      Tab(1).Control(21)=   "Text1(19)"
+      Tab(1).Control(22)=   "Text1(20)"
+      Tab(1).Control(23)=   "Text1(21)"
+      Tab(1).Control(24)=   "Text1(22)"
+      Tab(1).Control(25)=   "Text1(23)"
+      Tab(1).Control(26)=   "Text1(24)"
+      Tab(1).Control(27)=   "Text1(26)"
+      Tab(1).Control(28)=   "Text1(25)"
+      Tab(1).Control(29)=   "Text1(2)"
+      Tab(1).Control(30)=   "Text2(27)"
+      Tab(1).Control(31)=   "Text1(27)"
+      Tab(1).Control(32)=   "Text2(28)"
+      Tab(1).Control(33)=   "Text1(28)"
+      Tab(1).Control(34)=   "Text2(29)"
+      Tab(1).Control(35)=   "Text1(29)"
+      Tab(1).Control(36)=   "FrameHco"
+      Tab(1).Control(37)=   "Text1(39)"
+      Tab(1).Control(38)=   "Text1(41)"
+      Tab(1).Control(39)=   "chkDocArchi"
+      Tab(1).Control(40)=   "FrameFacRec"
+      Tab(1).Control(41)=   "Text1(43)"
+      Tab(1).Control(42)=   "Text2(43)"
+      Tab(1).Control(43)=   "Text1(44)"
       Tab(1).ControlCount=   44
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranes.frx":0081
@@ -6962,7 +6962,7 @@ Dim okArticulo As Boolean
 Dim DtoPermitido As Boolean
 Dim AbrirDevoluciones As Boolean
 Dim StatusArticMayorCero As Boolean
-
+Dim TieneDescuentos As String
 
     If Not PerderFocoGnralLineas(txtAux(Index), ModificaLineas) Then Exit Sub
     
@@ -7127,19 +7127,40 @@ Dim StatusArticMayorCero As Boolean
                         txtAux(11).Text = DBLet(miRsAux!numLote, "T")
                         txtAux(10).Text = Abs(miRsAux!NumBultos)
                         
+                        TieneDescuentos = "concat(dtognral,'|',dtoppago,'|')"
                         If Mid(miRsAux!codtipom, 1, 1) = "F" Then
                             'Es una factura
+                            'Vere los descuentos
+                            devuelve = "fecfactu=" & DBSet(miRsAux!FecFactu, "F") & " AND codtipom =" & DBSet(miRsAux!codtipom, "T") & " AND numfactu"
+                            TieneDescuentos = DevuelveDesdeBD(conAri, TieneDescuentos, "scafac", devuelve, CStr(miRsAux!NumFactu))
+                     
+                            'Par el resto
                             devuelve = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", miRsAux!codtipom, "T")
                             devuelve = "Rectifica a factura: " & devuelve & Format(miRsAux!NumFactu, "000000") & " de " & Format(miRsAux!FecFactu, "dd/mm/yyyy")
                         Else
                             'Es un albaran. Solo HERBELCA demomento
                             devuelve = "codtipom = " & DBSet(miRsAux!codtipom, "T") & " AND numalbar"
-                            devuelve = DevuelveDesdeBD(conAri, "fechaalb", "scaalb", devuelve, miRsAux!NumAlbar)
+                            devuelve = DevuelveDesdeBD(conAri, "fechaalb", "scaalb", devuelve, miRsAux!NumAlbar, "N", TieneDescuentos)
                             devuelve = "Rectifica al albarán: " & miRsAux!codtipom & Format(miRsAux!NumAlbar, "000000") & " de " & Format(devuelve, "dd/mm/yyyy")
                         End If
                         Text2(16).Text = devuelve
+                        If TieneDescuentos = "" Then TieneDescuentos = "0|0|"
+                            
+                        If CCur(RecuperaValor(TieneDescuentos, 1)) <> Data1.Recordset!DtoGnral Then
+                           TieneDescuentos = "En albaran origen: " & RecuperaValor(TieneDescuentos, 1) & vbCrLf
+                           TieneDescuentos = TieneDescuentos & "En albaran ACTUAL: " & Data1.Recordset!DtoGnral
+                           TieneDescuentos = "Descuento general" & vbCrLf & TieneDescuentos
+                        Else
+                            If CCur(RecuperaValor(TieneDescuentos, 2)) <> Data1.Recordset!DtoPPago Then
+                                TieneDescuentos = "En albaran/factura origen: " & RecuperaValor(TieneDescuentos, 2) & vbCrLf
+                                TieneDescuentos = TieneDescuentos & "En albaran devolucion: " & Data1.Recordset!DtoPPago & vbCrLf
+                                TieneDescuentos = "Descuento pronto pago" & vbCrLf & vbCrLf & TieneDescuentos
+                            Else
+                                TieneDescuentos = ""
+                            End If
+                        End If
+                        If TieneDescuentos <> "" Then MsgBox TieneDescuentos, vbExclamation
                         
-                        'PonerFocoBtn cmdAceptar
                     End If
 
                 End If
@@ -9126,61 +9147,6 @@ EInsFactu:
         MuestraError Err.Number, "Lineas Factura", Err.Description
     End If
 End Sub
-
-
-'Private Sub InsertarLineasFactu_old(cadWHERE)
-''cadSerie = "INSERT INTO slialb(codtipom,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre) "
-''cadSerie = cadSerie & " SELECT '" & Text1(30).Text & "' as codtipom," & Text1(0).Text & " as numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre FROM slifac WHERE " & CadenaSeleccion
-' Dim RS As ADODB.Recordset
-' Dim SQL As String
-' Dim i As Integer
-' Dim cadI As String
-'
-'    On Error GoTo EInsFactu
-'    Screen.MousePointer = vbHourglass
-'
-'    If cadWHERE <> "" Then
-'        'Obtenemos el numero de linea a insertar
-'        SQL = Replace(ObtenerWhereCP(False), NombreTabla, NomTablaLineas)
-'        SQL = SugerirCodigoSiguienteStr("slialb", "numlinea", SQL)
-'        i = Int(SQL)
-'
-'        cadI = ""
-'
-'        SQL = "SELECT * FROM slifac WHERE " & cadWHERE
-'
-'        Set RS = New ADODB.Recordset
-'        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'        While Not RS.EOF
-'            SQL = "('" & Text1(30).Text & "'," & Text1(0).Text & "," & i & ","  'codtipoa,numalbar,numlinea
-'            SQL = SQL & DBSet(RS!codAlmac, "N") & "," & DBSet(RS!codArtic, "T") & "," & DBSet(RS!NomArtic, "T") & "," & DBSet(RS!ampliaci, "T") & ","
-'            SQL = SQL & DBSet(RS!Cantidad * -1, "N") & "," & DBSet(RS!precioar, "N") & "," & DBSet(RS!dtoline1, "N") & "," & DBSet(RS!dtoline2, "N") & ","
-'            SQL = SQL & DBSet(RS!ImporteL * -1, "N") & "," & DBSet(RS!origpre, "T") & ")"
-'            If cadI = "" Then
-'                cadI = SQL
-'            Else
-'                cadI = cadI & "," & SQL
-'            End If
-'            i = i + 1
-'            RS.MoveNext
-'        Wend
-'        RS.Close
-'        Set RS = Nothing
-'
-'        If cadI <> "" Then
-'            SQL = "INSERT INTO slialb(codtipom,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre) VALUES "
-'            SQL = SQL & cadI
-'            Conn.Execute SQL
-'        End If
-'    End If
-'    Screen.MousePointer = vbDefault
-'
-'EInsFactu:
-'    If Err.Number <> 0 Then
-'        Screen.MousePointer = vbDefault
-'        MuestraError Err.Number, "Lineas Factura", Err.Description
-'    End If
-'End Sub
 
 
 

@@ -3038,7 +3038,7 @@ Private Sub cmdElimPresu_Click()
         MsgBox "Ningun dato a eliminar", vbExclamation
     Else
         CadenaDesdeOtroForm = miSQL
-        frmVarios3.opcion = 5
+        frmVarios3.Opcion = 5
         frmVarios3.Show vbModal
         Unload Me
         
@@ -3157,7 +3157,7 @@ Private Sub cmdSdtofmInsert_Click()
         lblIndicador(0).Refresh
         miSQL = "Select codfamia from sdtofm where  "
         miSQL = miSQL & " codclien IS NULL AND codmarca is null "
-        If Me.txtActiv(1).Text <> "" Then miSQL = miSQL & " AND codactiv =" & Me.txtActiv(1).Text & " AND "
+        If Me.txtActiv(1).Text <> "" Then miSQL = miSQL & " AND codactiv =" & Me.txtActiv(1).Text
         If txtFamia(0).Text <> "" Then miSQL = miSQL & " AND codfamia = " & txtFamia(0).Text
         
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -3333,6 +3333,7 @@ Dim indice As Byte
     FrameListadoComprasClientes.visible = False
     FramePreguntaDevoluciones.visible = False
     FrameTelefonia.visible = False
+
     indice = OpcionListado
     Me.Caption = "Listado"
     Select Case OpcionListado
@@ -3468,7 +3469,7 @@ Private Sub LlamarImprimir()
         .SoloImprimir = False
         .EnvioEMail = False
         .Titulo = cadTitulo
-        .opcion = 3000   'VAN TODOS EN ESTE SACO
+        .Opcion = 3000   'VAN TODOS EN ESTE SACO
         .NombrePDF = ""
         .NombrePDF = cadPDFrpt
         .NombreRPT = cadNomRPT
@@ -4407,7 +4408,7 @@ End Function
 
 Private Function GeneraDatosComprasTratamientos() As Boolean
 Dim RN As ADODB.Recordset
-Dim Total As Currency
+Dim total As Currency
 
     On Error GoTo eGeneraDatosComprasTratamientos
     
@@ -4481,14 +4482,14 @@ Dim Total As Currency
         RN.Find "codartic = " & DBSet(miRsAux!codArtic, "T"), , adSearchForward, 1
         'NO PUEDE SER EOF
         If Not IsNull(miRsAux!Cuantos) Then
-            Total = DBLet(RN!precioUC, "N")
-            Total = Round(Total * miRsAux!Cuantos, 2)
+            total = DBLet(RN!precioUC, "N")
+            total = Round(total * miRsAux!Cuantos, 2)
         Else
-            Total = 0
+            total = 0
         End If
         
         
-        miSQL = miSQL & RN!Codfamia & "," & DBSet(RN!NomArtic, "T") & "," & DBSet(Total, "N") & ")"
+        miSQL = miSQL & RN!Codfamia & "," & DBSet(RN!NomArtic, "T") & "," & DBSet(total, "N") & ")"
         
         
         If Len(miSQL) > 10000 Then

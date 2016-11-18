@@ -10900,7 +10900,7 @@ Dim J As Integer
         Set frmMen = Nothing
         If cadSelect = "" Then Exit Sub
         
-        If OpcionListado = 91 And Me.chkEmail(1).Value = 1 Then
+        If OpcionListado = 91 And Me.chkEMAIL(1).Value = 1 Then
             'Enviarlo por e-mail
             campo = DevuelveDesdeBD(conAri, "documrpt", "scryst", "codcryst", "57")
             If campo = "" Then campo = "rFacClienCarta.rpt"
@@ -12019,7 +12019,7 @@ Dim campo As String
     Set frmMen = Nothing
     If cadSelect = "" Then Exit Sub
     
-    If OpcionListado = 306 And Me.chkEmail(0).Value = 1 Then
+    If OpcionListado = 306 And Me.chkEMAIL(0).Value = 1 Then
         'Enviarlo por e-mail
         EnviarEMailMulti cadSelect, Titulo, "rComProveCarta.rpt", "sprove" 'email para proveedores
     Else
@@ -12394,7 +12394,7 @@ Dim campo1 As String, campo2 As String, campo3 As String
             indRPT = 7 '7: Pedidos de Clientes
             NumeroDeCopias = vParamAplic.NumCop_Pedido
             If Me.chkVarios(10).Value = 1 Then
-                indRPT = 83 'Interno
+                indRPT = 84 'Interno
                 Titulo = Titulo & " (INTERNO)"
                 NumeroDeCopias = 1
             End If

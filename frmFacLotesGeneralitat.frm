@@ -8,21 +8,34 @@ Begin VB.Form frmFacLotesGeneralitat
    ClientHeight    =   8370
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   14100
+   ClientWidth     =   14565
    Icon            =   "frmFacLotesGeneralitat.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   8370
-   ScaleWidth      =   14100
+   ScaleWidth      =   14565
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      Height          =   270
+      Index           =   6
+      Left            =   7920
+      MaxLength       =   18
+      TabIndex        =   6
+      Tag             =   "NºSerie|T|N|||slotesgeneralitat|numserie|||"
+      Text            =   "ser"
+      Top             =   2640
+      Width           =   675
+   End
    Begin VB.CommandButton cmdAux 
       Caption         =   "+"
       Height          =   255
       Index           =   1
       Left            =   6720
-      TabIndex        =   35
+      TabIndex        =   36
       Top             =   2640
       Visible         =   0   'False
       Width           =   135
@@ -32,7 +45,7 @@ Begin VB.Form frmFacLotesGeneralitat
       Height          =   255
       Index           =   0
       Left            =   3840
-      TabIndex        =   34
+      TabIndex        =   35
       Top             =   2640
       Visible         =   0   'False
       Width           =   135
@@ -40,8 +53,8 @@ Begin VB.Form frmFacLotesGeneralitat
    Begin VB.TextBox txtAux2 
       Height          =   315
       Index           =   7
-      Left            =   11760
-      TabIndex        =   14
+      Left            =   12000
+      TabIndex        =   15
       Text            =   "co"
       Top             =   5040
       Width           =   1395
@@ -53,7 +66,7 @@ Begin VB.Form frmFacLotesGeneralitat
       Height          =   270
       Index           =   3
       Left            =   5760
-      TabIndex        =   10
+      TabIndex        =   11
       Text            =   "cantidad"
       Top             =   5640
       Width           =   1155
@@ -89,8 +102,8 @@ Begin VB.Form frmFacLotesGeneralitat
    Begin VB.TextBox txtAux2 
       Height          =   1755
       Index           =   8
-      Left            =   9000
-      TabIndex        =   15
+      Left            =   9240
+      TabIndex        =   16
       Text            =   "24348588Y"
       Top             =   5760
       Width           =   4755
@@ -98,8 +111,8 @@ Begin VB.Form frmFacLotesGeneralitat
    Begin VB.TextBox txtAux2 
       Height          =   315
       Index           =   6
-      Left            =   10200
-      TabIndex        =   13
+      Left            =   10440
+      TabIndex        =   14
       Text            =   "co"
       Top             =   5040
       Width           =   1395
@@ -107,8 +120,8 @@ Begin VB.Form frmFacLotesGeneralitat
    Begin VB.TextBox txtAux2 
       Height          =   315
       Index           =   5
-      Left            =   9000
-      TabIndex        =   12
+      Left            =   9240
+      TabIndex        =   13
       Text            =   "co"
       Top             =   5040
       Width           =   1035
@@ -116,14 +129,13 @@ Begin VB.Form frmFacLotesGeneralitat
    Begin VB.TextBox txtAux2 
       Height          =   315
       Index           =   4
-      Left            =   9000
-      TabIndex        =   11
+      Left            =   9240
+      TabIndex        =   12
       Text            =   "24348588Y"
       Top             =   4320
       Width           =   4755
    End
    Begin VB.TextBox txtAux 
-      Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       Height          =   315
@@ -153,7 +165,7 @@ Begin VB.Form frmFacLotesGeneralitat
       Caption         =   "+"
       Height          =   255
       Left            =   1200
-      TabIndex        =   18
+      TabIndex        =   19
       Top             =   5640
       Visible         =   0   'False
       Width           =   135
@@ -166,7 +178,7 @@ Begin VB.Form frmFacLotesGeneralitat
       Height          =   270
       Index           =   2
       Left            =   4080
-      TabIndex        =   27
+      TabIndex        =   28
       Text            =   "Descripcion"
       Top             =   5640
       Visible         =   0   'False
@@ -178,7 +190,7 @@ Begin VB.Form frmFacLotesGeneralitat
       Height          =   270
       Index           =   0
       Left            =   360
-      TabIndex        =   8
+      TabIndex        =   9
       Text            =   "co"
       Top             =   5640
       Visible         =   0   'False
@@ -191,7 +203,7 @@ Begin VB.Form frmFacLotesGeneralitat
       Height          =   270
       Index           =   1
       Left            =   1920
-      TabIndex        =   9
+      TabIndex        =   10
       Text            =   "Tasa"
       Top             =   5640
       Visible         =   0   'False
@@ -249,9 +261,9 @@ Begin VB.Form frmFacLotesGeneralitat
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       Height          =   270
-      Index           =   7
+      Index           =   8
       Left            =   9480
-      TabIndex        =   7
+      TabIndex        =   8
       Tag             =   "Cantidad|N|N|||slotesgeneralitat|cantidad|0.00|N|"
       Text            =   "cantidad"
       Top             =   2640
@@ -261,10 +273,10 @@ Begin VB.Form frmFacLotesGeneralitat
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       Height          =   270
-      Index           =   6
-      Left            =   8280
+      Index           =   7
+      Left            =   8760
       MaxLength       =   18
-      TabIndex        =   6
+      TabIndex        =   7
       Tag             =   "Lote|T|N|||slotesgeneralitat|numlote|||"
       Text            =   "lote"
       Top             =   2640
@@ -274,16 +286,16 @@ Begin VB.Form frmFacLotesGeneralitat
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   12540
-      TabIndex        =   17
+      Left            =   12780
+      TabIndex        =   18
       Top             =   7800
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   11340
-      TabIndex        =   16
+      Left            =   11580
+      TabIndex        =   17
       Top             =   7800
       Width           =   1035
    End
@@ -315,8 +327,8 @@ Begin VB.Form frmFacLotesGeneralitat
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   12540
-      TabIndex        =   23
+      Left            =   12780
+      TabIndex        =   24
       Top             =   7800
       Visible         =   0   'False
       Width           =   1035
@@ -324,7 +336,7 @@ Begin VB.Form frmFacLotesGeneralitat
    Begin VB.Frame Frame1 
       Height          =   555
       Left            =   120
-      TabIndex        =   20
+      TabIndex        =   21
       Top             =   7695
       Width           =   2475
       Begin VB.Label lblIndicador 
@@ -341,7 +353,7 @@ Begin VB.Form frmFacLotesGeneralitat
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   21
+         TabIndex        =   22
          Top             =   240
          Width           =   2280
       End
@@ -350,10 +362,10 @@ Begin VB.Form frmFacLotesGeneralitat
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   19
+      TabIndex        =   20
       Top             =   0
-      Width           =   14100
-      _ExtentX        =   24871
+      Width           =   14565
+      _ExtentX        =   25691
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -394,7 +406,6 @@ Begin VB.Form frmFacLotesGeneralitat
             Object.ToolTipText     =   "Lineas"
          EndProperty
          BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
             Object.ToolTipText     =   "Imprimir"
          EndProperty
          BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
@@ -406,7 +417,7 @@ Begin VB.Form frmFacLotesGeneralitat
          Caption         =   "Vista previa"
          Height          =   195
          Left            =   3840
-         TabIndex        =   22
+         TabIndex        =   23
          Top             =   120
          Visible         =   0   'False
          Width           =   1215
@@ -463,11 +474,11 @@ Begin VB.Form frmFacLotesGeneralitat
       Bindings        =   "frmFacLotesGeneralitat.frx":000C
       Height          =   2805
       Left            =   120
-      TabIndex        =   24
+      TabIndex        =   25
       TabStop         =   0   'False
       Top             =   540
-      Width           =   13695
-      _ExtentX        =   24156
+      Width           =   14295
+      _ExtentX        =   25215
       _ExtentY        =   4948
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -531,7 +542,7 @@ Begin VB.Form frmFacLotesGeneralitat
       Bindings        =   "frmFacLotesGeneralitat.frx":0021
       Height          =   3405
       Left            =   120
-      TabIndex        =   26
+      TabIndex        =   27
       TabStop         =   0   'False
       Top             =   4080
       Width           =   8415
@@ -609,7 +620,7 @@ Begin VB.Form frmFacLotesGeneralitat
       ForeColor       =   &H00004080&
       Height          =   375
       Left            =   2400
-      TabIndex        =   33
+      TabIndex        =   34
       Top             =   3600
       Width           =   11415
    End
@@ -618,8 +629,8 @@ Begin VB.Form frmFacLotesGeneralitat
       Caption         =   "Observaciones"
       Height          =   195
       Index           =   4
-      Left            =   9000
-      TabIndex        =   32
+      Left            =   9240
+      TabIndex        =   33
       Top             =   5520
       Width           =   1065
    End
@@ -628,8 +639,8 @@ Begin VB.Form frmFacLotesGeneralitat
       Caption         =   "Tipo carnet "
       Height          =   195
       Index           =   3
-      Left            =   11760
-      TabIndex        =   31
+      Left            =   12000
+      TabIndex        =   32
       Top             =   4800
       Width           =   855
    End
@@ -638,8 +649,8 @@ Begin VB.Form frmFacLotesGeneralitat
       Caption         =   "Fec. vigencia"
       Height          =   195
       Index           =   2
-      Left            =   10200
-      TabIndex        =   30
+      Left            =   10440
+      TabIndex        =   31
       Top             =   4800
       Width           =   960
    End
@@ -648,8 +659,8 @@ Begin VB.Form frmFacLotesGeneralitat
       Caption         =   "Nº carnet "
       Height          =   195
       Index           =   1
-      Left            =   9000
-      TabIndex        =   29
+      Left            =   9240
+      TabIndex        =   30
       Top             =   4800
       Width           =   720
    End
@@ -658,8 +669,8 @@ Begin VB.Form frmFacLotesGeneralitat
       Caption         =   "Nombre carnet manipulador"
       Height          =   195
       Index           =   0
-      Left            =   9000
-      TabIndex        =   28
+      Left            =   9240
+      TabIndex        =   29
       Top             =   4080
       Width           =   1950
    End
@@ -677,7 +688,7 @@ Begin VB.Form frmFacLotesGeneralitat
       ForeColor       =   &H00800000&
       Height          =   375
       Left            =   120
-      TabIndex        =   25
+      TabIndex        =   26
       Top             =   3600
       Width           =   2655
    End
@@ -739,6 +750,8 @@ Private WithEvents frmC As frmFacClientes3
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents FrmArt As frmAlmArticu2   'Form Articulos
 Attribute FrmArt.VB_VarHelpID = -1
+Private WithEvents frmProv As frmComProveedores
+Attribute frmProv.VB_VarHelpID = -1
 
 Dim PrimeraVez As Boolean
 
@@ -1015,8 +1028,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     txtAux(3).Left = txtAux(2).Left + txtAux(2).Width + 65
     txtAux(4).Left = txtAux(3).Left + txtAux(3).Width + 65
     txtAux(5).Left = txtAux(4).Left + txtAux(4).Width + 65
-    txtAux(6).Left = txtAux(5).Left + txtAux(5).Width + 65
+    txtAux(6).Left = txtAux(5).Left + txtAux(5).Width + 70
     txtAux(7).Left = txtAux(6).Left + txtAux(6).Width + 65
+    txtAux(8).Left = txtAux(7).Left + txtAux(7).Width + 65
     If Modo = 3 Then
         cmdAux(0).visible = True
         cmdAux(0).Left = txtAux(3).Left - 90
@@ -1083,7 +1097,7 @@ Dim SQL As String
             'Hay que eliminar
             SQL = "Delete from slotesgeneralitat where id=" & adodc1.Recordset!Id
             conn.Execute SQL
-            Limpiar Me
+            limpiar Me
             CancelaADODC Me.adodc1
             CargaGrid ""
             CancelaADODC Me.adodc1
@@ -1154,12 +1168,12 @@ Private Sub Adodc2_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal p
     PonerFora False
 End Sub
 
-Private Sub PonerFora(Limpiar As Boolean)
+Private Sub PonerFora(limpiar As Boolean)
 
 
     On Error Resume Next
     
-    If Limpiar Then
+    If limpiar Then
         For i = 4 To txtAux2.Count - 1
             txtAux2(i).Text = ""
         Next i
@@ -1234,19 +1248,35 @@ On Error Resume Next
 End Sub
 
 
-Private Sub cmdAux_Click(index As Integer)
+Private Sub cmdAux_Click(Index As Integer)
     
     
     CadenaConsulta = ""
-    Set FrmArt = New frmAlmArticu2
-    'FrmArt.DatosADevolverBusqueda3 = "@1@" 'Poner en Modo busqueda
-    FrmArt.DesdeTPV = False
-    FrmArt.Show vbModal
-    Set FrmArt = Nothing
-    If CadenaConsulta <> "" Then
-        Me.txtAux(2).Text = RecuperaValor(CadenaConsulta, 1)
-        Me.txtAux(3).Text = RecuperaValor(CadenaConsulta, 2)
+    If Index = 0 Then
+        Set FrmArt = New frmAlmArticu2
+        'FrmArt.DatosADevolverBusqueda3 = "@1@" 'Poner en Modo busqueda
+        FrmArt.DesdeTPV = False
+        FrmArt.Show vbModal
+        Set FrmArt = Nothing
+        If CadenaConsulta <> "" Then
+            Me.txtAux(2).Text = RecuperaValor(CadenaConsulta, 1)
+            Me.txtAux(3).Text = RecuperaValor(CadenaConsulta, 2)
+        End If
+    
+    
+    Else
+        'Proveedor
+        
+        Set frmProv = New frmComProveedores
+        frmProv.DatosADevolverBusqueda = "1"
+        frmProv.Show vbModal
+        Set frmProv = Nothing
+        If CadenaConsulta <> "" Then
+            Me.txtAux(4).Text = RecuperaValor(CadenaConsulta, 1)
+            Me.txtAux(5).Text = RecuperaValor(CadenaConsulta, 2)
+        End If
     End If
+    
     CadenaConsultaSelect
 End Sub
 
@@ -1363,7 +1393,7 @@ On Error Resume Next
             Modo = 2
             PonerFora False
         Else
-            Limpiar Me
+            limpiar Me
         End If
     Case 4 'Modificar
         TerminaBloquear
@@ -1508,7 +1538,7 @@ Private Sub Form_Load()
     cmdRegresar.visible = (DatosADevolverBusqueda <> "")
     Modo = 0
     ModificaLineas = 0
-    Limpiar Me
+    limpiar Me
     
     
 End Sub
@@ -1517,8 +1547,8 @@ End Sub
 Private Sub CadenaConsultaSelect()
     CadenaConsulta = "select id,fecha,slotesgeneralitat.codartic,nomartic,"
     'slotesgeneralitat.numserie,slotesgeneralitat.fecvigen,"
-    CadenaConsulta = CadenaConsulta & " slotesgeneralitat.codprove,nomprove "
-    CadenaConsulta = CadenaConsulta & " ,numlote ,cantidad from slotesgeneralitat,sartic,sprove"
+    CadenaConsulta = CadenaConsulta & " slotesgeneralitat.codprove,nomprove, "
+    CadenaConsulta = CadenaConsulta & " slotesgeneralitat.numserie,numlote ,cantidad from slotesgeneralitat,sartic,sprove"
     CadenaConsulta = CadenaConsulta & " where slotesgeneralitat.codartic=sartic.codartic AND slotesgeneralitat.codprove=sprove.codprove"
 End Sub
 
@@ -1538,6 +1568,10 @@ Private Sub frmArt_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmC_DatoSeleccionado(CadenaSeleccion As String)
+    CadenaConsulta = CadenaSeleccion
+End Sub
+
+Private Sub frmProv_DatoSeleccionado(CadenaSeleccion As String)
     CadenaConsulta = CadenaSeleccion
 End Sub
 
@@ -1572,7 +1606,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.index
+    Select Case Button.Index
         Case 1: BotonBuscar
         Case 2: BotonVerTodos
         Case 5: BotonAnyadir
@@ -1580,7 +1614,9 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 7: BotonEliminar
         Case 9: MtoLineas
         Case 10 'Imprimir listado Tipos de Unidades
-               
+                If Modo <> 2 Then Exit Sub
+                frmListado3.Opcion = 65
+                frmListado3.Show vbModal
                 
                
         Case 11: mnSalir_Click
@@ -1630,22 +1666,28 @@ Dim B As Boolean
         
     i = 3 '
         DataGrid1.Columns(i).Caption = "Nombre"
-        DataGrid1.Columns(i).Width = 3200
+        DataGrid1.Columns(i).Width = 3000
     
     i = 4 '
         DataGrid1.Columns(i).Caption = "Prov"
-        DataGrid1.Columns(i).Width = 950
+        DataGrid1.Columns(i).Width = 850
     
     i = 5 '
         DataGrid1.Columns(i).Caption = "Nombre proveedor"
         DataGrid1.Columns(i).Width = 2400
     
     i = 6 '
+        DataGrid1.Columns(i).Caption = "NºSerie"
+        DataGrid1.Columns(i).Width = 1200
+    
+    
+    
+    i = 7 '
         DataGrid1.Columns(i).Caption = "Lote"
         DataGrid1.Columns(i).Width = 1200
                         
             
-    i = 7 'Lote
+    i = 8 'Lote
         DataGrid1.Columns(i).Caption = "Cantidad"
         DataGrid1.Columns(i).Width = 1300
         DataGrid1.Columns(i).Alignment = dbgRight
@@ -1698,62 +1740,62 @@ Dim B As Boolean
 End Sub
 
 
-Private Sub txtAux_GotFocus(index As Integer)
-    ConseguirFoco txtAux(index), Modo
+Private Sub txtAux_GotFocus(Index As Integer)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
-Private Sub txtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
 
-Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
-Private Sub txtAux_LostFocus(index As Integer)
+Private Sub txtAux_LostFocus(Index As Integer)
 Dim devuelve As String
     If Modo = 1 Then Exit Sub
-    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
-    Select Case index
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    Select Case Index
     Case 0
-        PonerFormatoEntero txtAux(index) 'Cod. Tipo Unidad
+        PonerFormatoEntero txtAux(Index) 'Cod. Tipo Unidad
     Case 1
-        PonerFormatoFecha txtAux(index)
+        PonerFormatoFecha txtAux(Index)
          
     Case 2
         
         devuelve = ""
-        If txtAux(index).Text <> "" Then
-            devuelve = DevuelveDesdeBD(conAri, "nomartic", "sartic", "artvario=0 AND codartic", txtAux(index).Text, "T")
+        If txtAux(Index).Text <> "" Then
+            devuelve = DevuelveDesdeBD(conAri, "nomartic", "sartic", "artvario=0 AND codartic", txtAux(Index).Text, "T")
             If devuelve = "" Then MsgBox "no existe artículo", vbExclamation
         End If
         
         If devuelve = "" Then
-            If txtAux(index).Text <> "" Then
-                txtAux(index).Text = ""
-                PonerFoco txtAux(index)
+            If txtAux(Index).Text <> "" Then
+                txtAux(Index).Text = ""
+                PonerFoco txtAux(Index)
             End If
         End If
         txtAux(3).Text = devuelve
     Case 4
         devuelve = ""
-        If txtAux(index).Text <> "" Then
-            devuelve = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtAux(index).Text, "N")
+        If txtAux(Index).Text <> "" Then
+            devuelve = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtAux(Index).Text, "N")
             If devuelve = "" Then MsgBox "no existe proveedor", vbExclamation
         End If
         
         If devuelve = "" Then
-            If txtAux(index).Text <> "" Then
-                txtAux(index).Text = ""
-                PonerFoco txtAux(index)
+            If txtAux(Index).Text <> "" Then
+                txtAux(Index).Text = ""
+                PonerFoco txtAux(Index)
             End If
         End If
         txtAux(5).Text = devuelve
-    Case 7
-         If Not PonerFormatoDecimal(txtAux(index), 3) Then txtAux(index).Text = ""   'Cod. Tipo Unidad
+    Case 8
+         If Not PonerFormatoDecimal(txtAux(Index), 3) Then txtAux(Index).Text = ""   'Cod. Tipo Unidad
     End Select
   
 End Sub
@@ -1791,7 +1833,7 @@ End Sub
 
 Private Sub LimpiarCampos()
 On Error Resume Next
-    Limpiar Me   'Metodo general: Limpia los controles TextBox
+    limpiar Me   'Metodo general: Limpia los controles TextBox
     'Aqui va el especifico de cada form es
     '### a mano
     If Err.Number <> 0 Then Err.Clear
@@ -1909,35 +1951,35 @@ End Sub
 
 
 
-Private Sub txtAux2_GotFocus(index As Integer)
-     ConseguirFoco txtAux2(index), Modo
+Private Sub txtAux2_GotFocus(Index As Integer)
+     ConseguirFoco txtAux2(Index), Modo
 End Sub
 
-Private Sub txtAux2_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtAux2_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub txtAux2_LostFocus(index As Integer)
+Private Sub txtAux2_LostFocus(Index As Integer)
 Dim Cad As String
 
-    Select Case index
+    Select Case Index
     Case 0
-        PonerFormatoFecha txtAux2(index)
+        PonerFormatoFecha txtAux2(Index)
             
     
     Case 1
         Cad = ""
         
-        If PonerFormatoEntero(txtAux2(index)) Then
+        If PonerFormatoEntero(txtAux2(Index)) Then
             
-            Cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtAux2(index))
+            Cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtAux2(Index))
             If Cad = "" Then
-                MsgBox "No existe el cliente: " & txtAux2(index).Text, vbExclamation
-                txtAux2(index) = ""
-                PonerFoco txtAux2(index)
+                MsgBox "No existe el cliente: " & txtAux2(Index).Text, vbExclamation
+                txtAux2(Index) = ""
+                PonerFoco txtAux2(Index)
                 
             Else
-                txtAux2(index + 1) = Cad
+                txtAux2(Index + 1) = Cad
                 cmdAux2_Click
             End If
             
@@ -1953,7 +1995,7 @@ Dim Cad As String
     
     Case 3
         ' lo que ponga en su TAG  (8)
-        If Not PonerFormatoDecimal(txtAux2(index), 3) Then txtAux2(index).Text = ""
+        If Not PonerFormatoDecimal(txtAux2(Index), 3) Then txtAux2(Index).Text = ""
     End Select
 End Sub
 

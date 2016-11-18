@@ -25,7 +25,7 @@ Begin VB.Form frmFacEntPedidos
       Left            =   3600
       Locked          =   -1  'True
       MaxLength       =   60
-      TabIndex        =   140
+      TabIndex        =   141
       Text            =   "nom ccoste"
       Top             =   7500
       Visible         =   0   'False
@@ -34,7 +34,7 @@ Begin VB.Form frmFacEntPedidos
    Begin VB.Frame Frame2 
       Height          =   855
       Left            =   120
-      TabIndex        =   81
+      TabIndex        =   82
       Top             =   410
       Width           =   13215
       Begin VB.CheckBox chkServirCom 
@@ -89,7 +89,7 @@ Begin VB.Form frmFacEntPedidos
          Left            =   8190
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   87
+         TabIndex        =   88
          Text            =   "Text2"
          Top             =   130
          Width           =   3975
@@ -173,7 +173,7 @@ Begin VB.Form frmFacEntPedidos
          Height          =   255
          Index           =   0
          Left            =   6360
-         TabIndex        =   88
+         TabIndex        =   89
          Top             =   480
          Width           =   615
       End
@@ -182,7 +182,7 @@ Begin VB.Form frmFacEntPedidos
          Height          =   255
          Index           =   21
          Left            =   6360
-         TabIndex        =   86
+         TabIndex        =   87
          Top             =   130
          Width           =   780
       End
@@ -200,7 +200,7 @@ Begin VB.Form frmFacEntPedidos
          Height          =   255
          Index           =   14
          Left            =   1230
-         TabIndex        =   85
+         TabIndex        =   86
          Top             =   165
          Width           =   735
       End
@@ -218,7 +218,7 @@ Begin VB.Form frmFacEntPedidos
          Height          =   255
          Index           =   50
          Left            =   240
-         TabIndex        =   84
+         TabIndex        =   85
          Top             =   165
          Width           =   735
       End
@@ -236,7 +236,7 @@ Begin VB.Form frmFacEntPedidos
          Height          =   255
          Index           =   51
          Left            =   2400
-         TabIndex        =   83
+         TabIndex        =   84
          Top             =   165
          Width           =   735
       End
@@ -245,7 +245,7 @@ Begin VB.Form frmFacEntPedidos
          Height          =   255
          Index           =   8
          Left            =   3570
-         TabIndex        =   82
+         TabIndex        =   83
          Top             =   165
          Width           =   615
       End
@@ -258,7 +258,7 @@ Begin VB.Form frmFacEntPedidos
       Locked          =   -1  'True
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
-      TabIndex        =   55
+      TabIndex        =   56
       Text            =   "frmFacEntPedidos.frx":0326
       Top             =   7080
       Visible         =   0   'False
@@ -268,7 +268,7 @@ Begin VB.Form frmFacEntPedidos
       Height          =   475
       Index           =   0
       Left            =   120
-      TabIndex        =   38
+      TabIndex        =   39
       Top             =   6975
       Width           =   2175
       Begin VB.Label lblIndicador 
@@ -276,7 +276,7 @@ Begin VB.Form frmFacEntPedidos
          Caption         =   "Label2"
          Height          =   240
          Left            =   240
-         TabIndex        =   39
+         TabIndex        =   40
          Top             =   180
          Width           =   1755
       End
@@ -286,7 +286,7 @@ Begin VB.Form frmFacEntPedidos
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   11520
-      TabIndex        =   36
+      TabIndex        =   37
       Top             =   7080
       Width           =   1035
    End
@@ -294,7 +294,7 @@ Begin VB.Form frmFacEntPedidos
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   10320
-      TabIndex        =   35
+      TabIndex        =   36
       Top             =   7080
       Width           =   1035
    End
@@ -349,7 +349,7 @@ Begin VB.Form frmFacEntPedidos
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   40
+      TabIndex        =   41
       Top             =   0
       Width           =   13455
       _ExtentX        =   23733
@@ -462,7 +462,7 @@ Begin VB.Form frmFacEntPedidos
          Index           =   56
          Left            =   10080
          MaxLength       =   15
-         TabIndex        =   121
+         TabIndex        =   122
          Text            =   "Text1 7"
          Top             =   80
          Width           =   1530
@@ -486,7 +486,7 @@ Begin VB.Form frmFacEntPedidos
          Index           =   0
          Left            =   8520
          MaxLength       =   15
-         TabIndex        =   120
+         TabIndex        =   121
          Text            =   "TOTAL"
          Top             =   100
          Width           =   1490
@@ -495,7 +495,7 @@ Begin VB.Form frmFacEntPedidos
          Caption         =   "Vista previa"
          Height          =   195
          Left            =   8040
-         TabIndex        =   41
+         TabIndex        =   42
          Top             =   120
          Width           =   1215
       End
@@ -550,7 +550,7 @@ Begin VB.Form frmFacEntPedidos
    Begin TabDlg.SSTab SSTab1 
       Height          =   5700
       Left            =   120
-      TabIndex        =   42
+      TabIndex        =   43
       Tag             =   "Fecha Oferta|F|N|||scapre|fecentre|dd/mm/yyyy|N|"
       Top             =   1275
       Width           =   13215
@@ -558,6 +558,7 @@ Begin VB.Form frmFacEntPedidos
       _ExtentY        =   10054
       _Version        =   393216
       Style           =   1
+      Tab             =   1
       TabsPerRow      =   4
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -571,85 +572,98 @@ Begin VB.Form frmFacEntPedidos
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacEntPedidos.frx":0363
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "DataGrid1"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "txtAux(0)"
-      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "txtAux(1)"
-      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "txtAux(3)"
-      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "txtAux(4)"
-      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "txtAux(6)"
-      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "txtAux(7)"
-      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "txtAux(8)"
-      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).Control(8)=   "txtAux(2)"
-      Tab(0).Control(8).Enabled=   0   'False
       Tab(0).Control(9)=   "cmdAux(0)"
-      Tab(0).Control(9).Enabled=   0   'False
       Tab(0).Control(10)=   "cmdAux(1)"
-      Tab(0).Control(10).Enabled=   0   'False
       Tab(0).Control(11)=   "FrameCliente"
-      Tab(0).Control(11).Enabled=   0   'False
       Tab(0).Control(12)=   "txtAux(5)"
-      Tab(0).Control(12).Enabled=   0   'False
       Tab(0).Control(13)=   "txtAux(9)"
-      Tab(0).Control(13).Enabled=   0   'False
       Tab(0).Control(14)=   "txtAux(10)"
-      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "txtAux(11)"
-      Tab(0).Control(15).Enabled=   0   'False
       Tab(0).Control(16)=   "cmdAux(2)"
-      Tab(0).Control(16).Enabled=   0   'False
       Tab(0).ControlCount=   17
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "Label1(18)"
+      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "Label1(27)"
-      Tab(1).Control(5)=   "Text1(19)"
-      Tab(1).Control(6)=   "Text1(20)"
-      Tab(1).Control(7)=   "Text1(21)"
-      Tab(1).Control(8)=   "Text1(22)"
-      Tab(1).Control(9)=   "Text1(23)"
-      Tab(1).Control(10)=   "Text1(24)"
-      Tab(1).Control(11)=   "Text1(25)"
-      Tab(1).Control(12)=   "FrameHco"
-      Tab(1).Control(13)=   "Text1(30)"
-      Tab(1).Control(14)=   "Text1(29)"
-      Tab(1).Control(15)=   "Text1(33)"
-      Tab(1).ControlCount=   16
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "Label1(28)"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "Text1(19)"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(7)=   "Text1(20)"
+      Tab(1).Control(7).Enabled=   0   'False
+      Tab(1).Control(8)=   "Text1(21)"
+      Tab(1).Control(8).Enabled=   0   'False
+      Tab(1).Control(9)=   "Text1(22)"
+      Tab(1).Control(9).Enabled=   0   'False
+      Tab(1).Control(10)=   "Text1(23)"
+      Tab(1).Control(10).Enabled=   0   'False
+      Tab(1).Control(11)=   "Text1(24)"
+      Tab(1).Control(11).Enabled=   0   'False
+      Tab(1).Control(12)=   "Text1(25)"
+      Tab(1).Control(12).Enabled=   0   'False
+      Tab(1).Control(13)=   "FrameHco"
+      Tab(1).Control(13).Enabled=   0   'False
+      Tab(1).Control(14)=   "Text1(30)"
+      Tab(1).Control(14).Enabled=   0   'False
+      Tab(1).Control(15)=   "Text1(29)"
+      Tab(1).Control(15).Enabled=   0   'False
+      Tab(1).Control(16)=   "Text1(33)"
+      Tab(1).Control(16).Enabled=   0   'False
+      Tab(1).Control(17)=   "Text1(34)"
+      Tab(1).Control(17).Enabled=   0   'False
+      Tab(1).ControlCount=   18
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameFactura"
       Tab(2).ControlCount=   1
       Begin VB.TextBox Text1 
+         Height          =   3765
+         Index           =   34
+         Left            =   9000
+         MultiLine       =   -1  'True
+         TabIndex        =   35
+         Tag             =   "Obs|T|S|||scaped|observaciones|||"
+         Top             =   1680
+         Width           =   3885
+      End
+      Begin VB.TextBox Text1 
          Height          =   1005
          Index           =   33
-         Left            =   -74400
+         Left            =   240
          MaxLength       =   255
          MultiLine       =   -1  'True
          TabIndex        =   34
          Tag             =   "Obs CRM|T|S|||scaped|observacrm|||"
          Top             =   4515
-         Width           =   8805
+         Width           =   8445
       End
       Begin VB.CommandButton cmdAux 
          Appearance      =   0  'Flat
          Caption         =   "+"
          Height          =   315
          Index           =   2
-         Left            =   12120
-         TabIndex        =   142
+         Left            =   -62880
+         TabIndex        =   143
          ToolTipText     =   "Buscar centro coste"
          Top             =   4080
          Visible         =   0   'False
@@ -661,9 +675,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   11
-         Left            =   11640
+         Left            =   -63360
          MaxLength       =   4
-         TabIndex        =   53
+         TabIndex        =   54
          Tag             =   "centro coste"
          Text            =   "codc"
          Top             =   4080
@@ -676,9 +690,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   10
-         Left            =   12360
+         Left            =   -62640
          MaxLength       =   15
-         TabIndex        =   54
+         TabIndex        =   55
          Text            =   "numlote"
          Top             =   4080
          Visible         =   0   'False
@@ -691,9 +705,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   9
-         Left            =   7440
+         Left            =   -67560
          MaxLength       =   5
-         TabIndex        =   49
+         TabIndex        =   50
          Tag             =   "Bultos"
          Text            =   "12345"
          Top             =   4080
@@ -703,37 +717,37 @@ Begin VB.Form frmFacEntPedidos
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   29
-         Left            =   -74400
+         Left            =   240
          MaxLength       =   80
          TabIndex        =   32
          Tag             =   "Observación pedido 1|T|S|||scaped|observap1||N|"
-         Top             =   3600
-         Width           =   8805
+         Top             =   3480
+         Width           =   8445
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   30
-         Left            =   -74400
+         Left            =   240
          MaxLength       =   80
          TabIndex        =   33
          Tag             =   "Observación pedido 2|T|S|||scaped|observap2||N|"
-         Top             =   3900
-         Width           =   8805
+         Top             =   3840
+         Width           =   8445
       End
       Begin VB.Frame FrameHco 
-         Height          =   1400
-         Left            =   -71760
-         TabIndex        =   122
+         Height          =   915
+         Left            =   3240
+         TabIndex        =   123
          Top             =   360
-         Width           =   5775
+         Width           =   9855
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   315
             Index           =   26
-            Left            =   1560
+            Left            =   120
             MaxLength       =   10
-            TabIndex        =   127
-            Top             =   200
+            TabIndex        =   128
+            Top             =   480
             Width           =   1185
          End
          Begin VB.TextBox Text1 
@@ -742,9 +756,9 @@ Begin VB.Form frmFacEntPedidos
             Index           =   27
             Left            =   1560
             MaxLength       =   30
-            TabIndex        =   126
+            TabIndex        =   127
             Text            =   "Text1"
-            Top             =   570
+            Top             =   450
             Width           =   660
          End
          Begin VB.TextBox Text2 
@@ -754,32 +768,32 @@ Begin VB.Form frmFacEntPedidos
             Left            =   2235
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   125
+            TabIndex        =   126
             Text            =   "Text2"
-            Top             =   570
-            Width           =   3285
+            Top             =   450
+            Width           =   3045
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   315
             Index           =   28
-            Left            =   1560
+            Left            =   5520
             MaxLength       =   30
-            TabIndex        =   124
+            TabIndex        =   125
             Text            =   "Text1"
-            Top             =   940
+            Top             =   480
             Width           =   660
          End
          Begin VB.TextBox Text2 
             BackColor       =   &H80000018&
             Height          =   315
             Index           =   28
-            Left            =   2235
+            Left            =   6360
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   123
+            TabIndex        =   124
             Text            =   "Text2"
-            Top             =   940
+            Top             =   480
             Width           =   3285
          End
          Begin VB.Label Label1 
@@ -787,7 +801,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   37
             Left            =   120
-            TabIndex        =   130
+            TabIndex        =   131
             Top             =   200
             Width           =   1335
          End
@@ -795,43 +809,43 @@ Begin VB.Form frmFacEntPedidos
             Caption         =   "Trabajador"
             Height          =   255
             Index           =   38
-            Left            =   120
-            TabIndex        =   129
-            Top             =   570
+            Left            =   1560
+            TabIndex        =   130
+            Top             =   240
             Width           =   825
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   7
-            Left            =   1080
+            Left            =   2760
             Picture         =   "frmFacEntPedidos.frx":03B7
             ToolTipText     =   "Buscar trabajador"
-            Top             =   570
+            Top             =   120
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "Incidencia"
             Height          =   255
             Index           =   40
-            Left            =   120
-            TabIndex        =   128
-            Top             =   940
+            Left            =   5760
+            TabIndex        =   129
+            Top             =   120
             Width           =   825
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   8
-            Left            =   1080
+            Left            =   6600
             Picture         =   "frmFacEntPedidos.frx":04B9
             ToolTipText     =   "Buscar incidencia"
-            Top             =   940
+            Top             =   120
             Width           =   240
          End
       End
       Begin VB.Frame FrameFactura 
          Height          =   3300
          Left            =   -73800
-         TabIndex        =   89
+         TabIndex        =   90
          Top             =   1320
          Width           =   10575
          Begin VB.TextBox Text3 
@@ -840,7 +854,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   49
             Left            =   6600
             MaxLength       =   5
-            TabIndex        =   137
+            TabIndex        =   138
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   525
@@ -852,7 +866,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   52
             Left            =   7200
             MaxLength       =   15
-            TabIndex        =   136
+            TabIndex        =   137
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   1245
@@ -863,7 +877,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   50
             Left            =   6600
             MaxLength       =   5
-            TabIndex        =   135
+            TabIndex        =   136
             Text            =   "Text1 7"
             Top             =   1755
             Width           =   525
@@ -875,7 +889,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   53
             Left            =   7200
             MaxLength       =   15
-            TabIndex        =   134
+            TabIndex        =   135
             Text            =   "Text1 7"
             Top             =   1755
             Width           =   1245
@@ -886,7 +900,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   51
             Left            =   6600
             MaxLength       =   5
-            TabIndex        =   133
+            TabIndex        =   134
             Text            =   "Text1 7"
             Top             =   2085
             Width           =   525
@@ -898,7 +912,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   54
             Left            =   7200
             MaxLength       =   15
-            TabIndex        =   132
+            TabIndex        =   133
             Text            =   "Text1 7"
             Top             =   2085
             Width           =   1245
@@ -919,7 +933,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   55
             Left            =   6600
             MaxLength       =   15
-            TabIndex        =   106
+            TabIndex        =   107
             Text            =   "Text1 7"
             Top             =   2760
             Width           =   1845
@@ -931,7 +945,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   48
             Left            =   4920
             MaxLength       =   15
-            TabIndex        =   105
+            TabIndex        =   106
             Text            =   "Text1 7"
             Top             =   2085
             Width           =   1485
@@ -942,7 +956,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   42
             Left            =   4320
             MaxLength       =   5
-            TabIndex        =   104
+            TabIndex        =   105
             Text            =   "Text1 7"
             Top             =   2085
             Width           =   525
@@ -953,7 +967,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   39
             Left            =   1920
             MaxLength       =   4
-            TabIndex        =   103
+            TabIndex        =   104
             Text            =   "Text1 7"
             Top             =   2085
             Width           =   525
@@ -964,7 +978,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   45
             Left            =   2640
             MaxLength       =   15
-            TabIndex        =   102
+            TabIndex        =   103
             Text            =   "Text1 7"
             Top             =   2085
             Width           =   1485
@@ -976,7 +990,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   47
             Left            =   4920
             MaxLength       =   15
-            TabIndex        =   101
+            TabIndex        =   102
             Text            =   "Text1 7"
             Top             =   1755
             Width           =   1485
@@ -987,7 +1001,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   41
             Left            =   4320
             MaxLength       =   5
-            TabIndex        =   100
+            TabIndex        =   101
             Text            =   "Text1 7"
             Top             =   1755
             Width           =   525
@@ -998,7 +1012,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   38
             Left            =   1920
             MaxLength       =   4
-            TabIndex        =   99
+            TabIndex        =   100
             Text            =   "Text1 7"
             Top             =   1755
             Width           =   525
@@ -1009,7 +1023,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   44
             Left            =   2640
             MaxLength       =   15
-            TabIndex        =   98
+            TabIndex        =   99
             Text            =   "Text1 7"
             Top             =   1755
             Width           =   1485
@@ -1021,7 +1035,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   46
             Left            =   4920
             MaxLength       =   15
-            TabIndex        =   97
+            TabIndex        =   98
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   1485
@@ -1032,7 +1046,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   40
             Left            =   4320
             MaxLength       =   5
-            TabIndex        =   96
+            TabIndex        =   97
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   525
@@ -1043,7 +1057,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   37
             Left            =   1920
             MaxLength       =   4
-            TabIndex        =   95
+            TabIndex        =   96
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   525
@@ -1054,7 +1068,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   43
             Left            =   2640
             MaxLength       =   15
-            TabIndex        =   94
+            TabIndex        =   95
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   1485
@@ -1066,7 +1080,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   36
             Left            =   5760
             MaxLength       =   15
-            TabIndex        =   93
+            TabIndex        =   94
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1485
@@ -1077,7 +1091,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   35
             Left            =   3960
             MaxLength       =   15
-            TabIndex        =   92
+            TabIndex        =   93
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1365
@@ -1088,7 +1102,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   34
             Left            =   2160
             MaxLength       =   15
-            TabIndex        =   91
+            TabIndex        =   92
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1365
@@ -1099,7 +1113,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   33
             Left            =   240
             MaxLength       =   15
-            TabIndex        =   90
+            TabIndex        =   91
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1485
@@ -1109,7 +1123,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   22
             Left            =   7440
-            TabIndex        =   139
+            TabIndex        =   140
             Top             =   1200
             Width           =   735
          End
@@ -1118,7 +1132,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   48
             Left            =   6600
-            TabIndex        =   138
+            TabIndex        =   139
             Top             =   1200
             Width           =   495
          End
@@ -1127,7 +1141,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   42
             Left            =   1920
-            TabIndex        =   119
+            TabIndex        =   120
             Top             =   1200
             Width           =   735
          End
@@ -1136,7 +1150,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   41
             Left            =   4320
-            TabIndex        =   118
+            TabIndex        =   119
             Top             =   1230
             Width           =   495
          End
@@ -1155,7 +1169,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   39
             Left            =   4800
-            TabIndex        =   117
+            TabIndex        =   118
             Top             =   2760
             Width           =   1530
          End
@@ -1173,7 +1187,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   36
             Left            =   11880
-            TabIndex        =   116
+            TabIndex        =   117
             Top             =   2160
             Width           =   135
          End
@@ -1188,7 +1202,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   33
             Left            =   4920
-            TabIndex        =   115
+            TabIndex        =   116
             Top             =   1230
             Width           =   1335
          End
@@ -1206,7 +1220,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   32
             Left            =   5520
-            TabIndex        =   114
+            TabIndex        =   115
             Top             =   480
             Width           =   135
          End
@@ -1224,7 +1238,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   31
             Left            =   3720
-            TabIndex        =   113
+            TabIndex        =   114
             Top             =   480
             Width           =   135
          End
@@ -1242,7 +1256,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   30
             Left            =   1920
-            TabIndex        =   112
+            TabIndex        =   113
             Top             =   480
             Width           =   135
          End
@@ -1251,7 +1265,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   2
             Left            =   5760
-            TabIndex        =   111
+            TabIndex        =   112
             Top             =   360
             Width           =   1215
          End
@@ -1260,7 +1274,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   12
             Left            =   3960
-            TabIndex        =   110
+            TabIndex        =   111
             Top             =   360
             Width           =   855
          End
@@ -1269,7 +1283,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   11
             Left            =   2160
-            TabIndex        =   109
+            TabIndex        =   110
             Top             =   360
             Width           =   855
          End
@@ -1278,7 +1292,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   10
             Left            =   240
-            TabIndex        =   108
+            TabIndex        =   109
             Top             =   360
             Width           =   855
          End
@@ -1287,7 +1301,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   9
             Left            =   2760
-            TabIndex        =   107
+            TabIndex        =   108
             Top             =   1200
             Width           =   1215
          End
@@ -1296,23 +1310,23 @@ Begin VB.Form frmFacEntPedidos
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   25
-         Left            =   -73320
+         Left            =   1440
          MaxLength       =   10
-         TabIndex        =   78
+         TabIndex        =   79
          Tag             =   "Fecha Oferta|F|S|||scaped|fecofert|dd/mm/yyyy|N|"
-         Top             =   1035
+         Top             =   795
          Width           =   1185
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   24
-         Left            =   -74400
+         Left            =   360
          MaxLength       =   7
-         TabIndex        =   77
+         TabIndex        =   78
          Tag             =   "Nº Oferta|N|S|||scaped|numofert|0000000|N|"
          Text            =   "Text1 7"
-         Top             =   1035
+         Top             =   795
          Width           =   885
       End
       Begin VB.TextBox txtAux 
@@ -1322,10 +1336,10 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   5
-         Left            =   8880
+         Left            =   -66120
          Locked          =   -1  'True
          MaxLength       =   1
-         TabIndex        =   56
+         TabIndex        =   57
          Tag             =   "Descuento 1"
          Text            =   "OF"
          Top             =   4080
@@ -1334,8 +1348,8 @@ Begin VB.Form frmFacEntPedidos
       End
       Begin VB.Frame FrameCliente 
          Height          =   2400
-         Left            =   200
-         TabIndex        =   61
+         Left            =   -74800
+         TabIndex        =   62
          Top             =   310
          Width           =   12855
          Begin VB.CheckBox chkPedPorCliente 
@@ -1355,7 +1369,7 @@ Begin VB.Form frmFacEntPedidos
             Left            =   8400
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   146
+            TabIndex        =   147
             Text            =   "Text2"
             Top             =   1200
             Width           =   4215
@@ -1378,7 +1392,7 @@ Begin VB.Form frmFacEntPedidos
             Enabled         =   0   'False
             Height          =   240
             Left            =   10200
-            TabIndex        =   144
+            TabIndex        =   145
             Tag             =   "Enviado e-mail confirmación|N|N|||scaped|envconfir||N|"
             Top             =   1680
             Width           =   2415
@@ -1411,7 +1425,7 @@ Begin VB.Form frmFacEntPedidos
             Left            =   8400
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   74
+            TabIndex        =   75
             Tag             =   "Direccion/Dpto.|T|S|||scaped|nomdirec||N|"
             Text            =   "Text2"
             Top             =   165
@@ -1514,7 +1528,7 @@ Begin VB.Form frmFacEntPedidos
             Left            =   8400
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   68
+            TabIndex        =   69
             Text            =   "Text2"
             Top             =   480
             Width           =   4215
@@ -1538,7 +1552,7 @@ Begin VB.Form frmFacEntPedidos
             Left            =   8400
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   63
+            TabIndex        =   64
             Text            =   "Text2"
             Top             =   840
             Width           =   4215
@@ -1601,7 +1615,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   24
             Left            =   6000
-            TabIndex        =   147
+            TabIndex        =   148
             Top             =   1200
             Width           =   1335
          End
@@ -1610,7 +1624,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   23
             Left            =   7800
-            TabIndex        =   143
+            TabIndex        =   144
             Top             =   1680
             Width           =   1455
          End
@@ -1629,7 +1643,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   1
             Left            =   6000
-            TabIndex        =   76
+            TabIndex        =   77
             Top             =   165
             Width           =   495
          End
@@ -1648,7 +1662,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   17
             Left            =   120
-            TabIndex        =   75
+            TabIndex        =   76
             Top             =   1218
             Width           =   735
          End
@@ -1657,7 +1671,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   16
             Left            =   120
-            TabIndex        =   73
+            TabIndex        =   74
             Top             =   867
             Width           =   735
          End
@@ -1666,7 +1680,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   19
             Left            =   2565
-            TabIndex        =   72
+            TabIndex        =   73
             Top             =   165
             Width           =   735
          End
@@ -1675,7 +1689,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   20
             Left            =   120
-            TabIndex        =   71
+            TabIndex        =   72
             Top             =   165
             Width           =   615
          End
@@ -1694,7 +1708,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   13
             Left            =   120
-            TabIndex        =   70
+            TabIndex        =   71
             Top             =   1560
             Width           =   855
          End
@@ -1703,7 +1717,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   34
             Left            =   6000
-            TabIndex        =   69
+            TabIndex        =   70
             Top             =   510
             Width           =   615
          End
@@ -1721,7 +1735,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   15
             Left            =   6000
-            TabIndex        =   67
+            TabIndex        =   68
             Top             =   870
             Width           =   855
          End
@@ -1730,7 +1744,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   25
             Left            =   120
-            TabIndex        =   66
+            TabIndex        =   67
             Top             =   1980
             Width           =   1215
          End
@@ -1739,7 +1753,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   26
             Left            =   1980
-            TabIndex        =   65
+            TabIndex        =   66
             Top             =   1980
             Width           =   735
          End
@@ -1748,7 +1762,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   4
             Left            =   3360
-            TabIndex        =   64
+            TabIndex        =   65
             Top             =   1980
             Width           =   1335
          End
@@ -1766,7 +1780,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   255
             Index           =   7
             Left            =   120
-            TabIndex        =   62
+            TabIndex        =   63
             Top             =   516
             Width           =   735
          End
@@ -1776,8 +1790,8 @@ Begin VB.Form frmFacEntPedidos
          Caption         =   "+"
          Height          =   315
          Index           =   1
-         Left            =   2640
-         TabIndex        =   60
+         Left            =   -72360
+         TabIndex        =   61
          ToolTipText     =   "Buscar artículo"
          Top             =   4080
          Visible         =   0   'False
@@ -1788,8 +1802,8 @@ Begin VB.Form frmFacEntPedidos
          Caption         =   "+"
          Height          =   315
          Index           =   0
-         Left            =   960
-         TabIndex        =   59
+         Left            =   -74040
+         TabIndex        =   60
          ToolTipText     =   "Buscar almacen"
          Top             =   4080
          Visible         =   0   'False
@@ -1801,10 +1815,10 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   2
-         Left            =   2880
+         Left            =   -72120
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   47
+         TabIndex        =   48
          Tag             =   "Nombre Artículo"
          Text            =   "nomArtic"
          Top             =   4080
@@ -1818,9 +1832,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   8
-         Left            =   10680
+         Left            =   -64320
          MaxLength       =   12
-         TabIndex        =   57
+         TabIndex        =   58
          Tag             =   "Importe"
          Text            =   "Importe"
          Top             =   4080
@@ -1834,9 +1848,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   7
-         Left            =   10080
+         Left            =   -64920
          MaxLength       =   30
-         TabIndex        =   52
+         TabIndex        =   53
          Tag             =   "Descuento 2"
          Text            =   "Dto2"
          Top             =   4080
@@ -1850,9 +1864,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   6
-         Left            =   9360
+         Left            =   -65640
          MaxLength       =   5
-         TabIndex        =   51
+         TabIndex        =   52
          Tag             =   "Descuento 1"
          Text            =   "Dto1"
          Top             =   4080
@@ -1866,9 +1880,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   4
-         Left            =   7920
+         Left            =   -67080
          MaxLength       =   12
-         TabIndex        =   50
+         TabIndex        =   51
          Tag             =   "Precio"
          Text            =   "123,456.7879"
          Top             =   3960
@@ -1882,9 +1896,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   3
-         Left            =   6120
+         Left            =   -68880
          MaxLength       =   16
-         TabIndex        =   48
+         TabIndex        =   49
          Tag             =   "Cantidad"
          Text            =   "1,234,567,891.25"
          Top             =   4080
@@ -1897,9 +1911,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   1
-         Left            =   1200
+         Left            =   -73800
          MaxLength       =   18
-         TabIndex        =   46
+         TabIndex        =   47
          Tag             =   "Código Artículo"
          Text            =   "Artic Artic Artic5"
          Top             =   4020
@@ -1912,9 +1926,9 @@ Begin VB.Form frmFacEntPedidos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   0
-         Left            =   360
+         Left            =   -74640
          MaxLength       =   15
-         TabIndex        =   45
+         TabIndex        =   46
          Tag             =   "Código Almacen"
          Text            =   "codalmac"
          Top             =   4020
@@ -1924,58 +1938,59 @@ Begin VB.Form frmFacEntPedidos
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   23
-         Left            =   -74400
+         Left            =   240
          MaxLength       =   80
          TabIndex        =   31
          Tag             =   "Observación 5|T|S|||scaped|observa05||N|"
-         Top             =   3000
-         Width           =   8805
+         Top             =   2760
+         Width           =   8445
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   22
-         Left            =   -74400
+         Left            =   240
          MaxLength       =   80
          TabIndex        =   30
          Tag             =   "Observación 4|T|S|||scaped|observa04||N|"
-         Top             =   2715
-         Width           =   8805
+         Top             =   2475
+         Width           =   8445
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   21
-         Left            =   -74400
+         Left            =   240
          MaxLength       =   80
          TabIndex        =   29
          Tag             =   "Observación 3|T|S|||scaped|observa03||N|"
-         Top             =   2430
-         Width           =   8805
+         Top             =   2190
+         Width           =   8445
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   20
-         Left            =   -74400
+         Left            =   240
          MaxLength       =   80
          TabIndex        =   28
          Tag             =   "Observación 2|T|S|||scaped|observa02||N|"
-         Top             =   2145
-         Width           =   8805
+         Top             =   1905
+         Width           =   8445
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   19
-         Left            =   -74400
+         Left            =   240
          MaxLength       =   80
          TabIndex        =   27
          Tag             =   "Observación 1|T|S|||scaped|observa01||N|"
-         Top             =   1860
-         Width           =   8805
+         Text            =   "ZZZZZZZZZ0ZZZZZZZZZ0ZZZZZZZZZ0ZZZZZZZZZ0ZZZZZZZZZ0ZZZZZZZZZ0ZZZZZZZZZ0ZZZZZZZZZ0"
+         Top             =   1620
+         Width           =   8445
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
          Bindings        =   "frmFacEntPedidos.frx":0BC7
          Height          =   2760
-         Left            =   195
-         TabIndex        =   58
+         Left            =   -74805
+         TabIndex        =   59
          Top             =   2760
          Width           =   12855
          _ExtentX        =   22675
@@ -2041,11 +2056,20 @@ Begin VB.Form frmFacEntPedidos
          EndProperty
       End
       Begin VB.Label Label1 
+         Caption         =   "Observaciones internas"
+         Height          =   255
+         Index           =   28
+         Left            =   9000
+         TabIndex        =   150
+         Top             =   1440
+         Width           =   2055
+      End
+      Begin VB.Label Label1 
          Caption         =   "Observaciones del Pedido"
          Height          =   255
          Index           =   27
-         Left            =   -74400
-         TabIndex        =   148
+         Left            =   240
+         TabIndex        =   149
          Top             =   4320
          Width           =   2055
       End
@@ -2053,36 +2077,36 @@ Begin VB.Form frmFacEntPedidos
          Caption         =   "Observaciones del Pedido"
          Height          =   255
          Index           =   18
-         Left            =   -74400
-         TabIndex        =   131
-         Top             =   3400
+         Left            =   240
+         TabIndex        =   132
+         Top             =   3120
          Width           =   2055
       End
       Begin VB.Label Label1 
          Caption         =   "Fecha Oferta"
          Height          =   255
          Index           =   5
-         Left            =   -73320
-         TabIndex        =   80
-         Top             =   840
+         Left            =   1440
+         TabIndex        =   81
+         Top             =   480
          Width           =   1095
       End
       Begin VB.Label Label1 
          Caption         =   "Nº Oferta"
          Height          =   255
          Index           =   3
-         Left            =   -74400
-         TabIndex        =   79
-         Top             =   840
+         Left            =   360
+         TabIndex        =   80
+         Top             =   480
          Width           =   735
       End
       Begin VB.Label Label1 
          Caption         =   "Observaciones albarán"
          Height          =   255
          Index           =   45
-         Left            =   -74400
-         TabIndex        =   44
-         Top             =   1640
+         Left            =   240
+         TabIndex        =   45
+         Top             =   1395
          Width           =   2055
       End
    End
@@ -2090,7 +2114,7 @@ Begin VB.Form frmFacEntPedidos
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   11520
-      TabIndex        =   37
+      TabIndex        =   38
       Top             =   7080
       Visible         =   0   'False
       Width           =   1035
@@ -2117,7 +2141,7 @@ Begin VB.Form frmFacEntPedidos
       EndProperty
       Height          =   255
       Left            =   9480
-      TabIndex        =   145
+      TabIndex        =   146
       Top             =   7560
       Width           =   3615
    End
@@ -2126,7 +2150,7 @@ Begin VB.Form frmFacEntPedidos
       Height          =   255
       Index           =   6
       Left            =   2400
-      TabIndex        =   141
+      TabIndex        =   142
       Top             =   7560
       Visible         =   0   'False
       Width           =   975
@@ -2137,7 +2161,7 @@ Begin VB.Form frmFacEntPedidos
       Height          =   195
       Index           =   35
       Left            =   2400
-      TabIndex        =   43
+      TabIndex        =   44
       Top             =   7080
       Visible         =   0   'False
       Width           =   810
@@ -4217,14 +4241,14 @@ Private Sub Text1_GotFocus(Index As Integer)
     txtAnterior = Text1(Index).Text
     kCampo = Index
     If Index = 9 Then HaCambiadoCP = False 'CPostal
-    ConseguirFoco Text1(Index), Modo
+    If Index <> 34 Then ConseguirFoco Text1(Index), Modo
 End Sub
 
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 Dim Ind As Integer
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-      If Index <> 33 Then KEYdown KeyCode
+    If Index <> 33 And Index <> 34 Then KEYdown KeyCode
     
         
     If KeyCode = 43 Or KeyCode = 107 Or KeyCode = 187 Then

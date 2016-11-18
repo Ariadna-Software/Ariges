@@ -20764,6 +20764,14 @@ Dim KK As Integer
     End If
     
     
+    'Herbelca. Si el articulo es conjunto de otro (aunque no este en el select), que lo marque
+
+    Label3(100).Caption = "Escandallo (II)"
+    Label3(100).Refresh
+    miSQL = "UPDATE tmppedprov set esEscandallo =2 where codusu =" & vUsu.codigo
+    miSQL = miSQL & " and esescandallo=0 and codartic in (select codarti1 from sarti1)"
+    conn.Execute miSQL
+    
     If NumRegElim = 0 Then
         MsgBox "Ningún dato generado", vbExclamation
     Else
