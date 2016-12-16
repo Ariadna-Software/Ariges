@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.ocx"
-Object = "{79EB16A5-917F-4145-AB5F-D3AEA60612D8}#11.2#0"; "Codejock.Calendar.Unicode.v11.2.0.ocx"
+Object = "{79EB16A5-917F-4145-AB5F-D3AEA60612D8}#17.2#0"; "Codejock.Calendar.v17.2.0.ocx"
 Begin VB.Form frmMainCalendar 
    BackColor       =   &H80000010&
    Caption         =   "Agenda - ARIGES"
@@ -155,11 +155,10 @@ Begin VB.Form frmMainCalendar
       TabIndex        =   4
       Top             =   840
       Width           =   2535
-      _Version        =   720898
+      _Version        =   1114114
       _ExtentX        =   4471
       _ExtentY        =   7435
       _StockProps     =   64
-      RowCount        =   2
       TextNoneButton  =   "Ninguno"
       TextTodayButton =   "HOY"
    End
@@ -169,7 +168,7 @@ Begin VB.Form frmMainCalendar
       TabIndex        =   3
       Top             =   840
       Width           =   6555
-      _Version        =   720898
+      _Version        =   1114114
       _ExtentX        =   11562
       _ExtentY        =   7329
       _StockProps     =   64
@@ -781,7 +780,7 @@ Private Sub CalendarControl_IsEditOperationDisabled(ByVal OpParams As XtremeCale
             Dim dtBegin As Date, dtEnd As Date, bAllDay As Boolean
             Dim nSelDays As Long, nSelWDay As Long
                                    
-            If CalendarControl.ActiveView.getSelection(dtBegin, dtEnd, bAllDay) = False Then
+            If CalendarControl.ActiveView.GetSelection(dtBegin, dtEnd, bAllDay) = False Then
                 Exit Sub
             End If
             
@@ -809,7 +808,7 @@ Private Sub CalendarControl_KeyDown(KeyCode As Integer, Shift As Integer)
     Debug.Print "KeyDown"
     Dim BeginSelection As Date, EndSelection As Date, AllDay As Boolean
 
-    If CalendarControl.ActiveView.getSelection(BeginSelection, EndSelection, AllDay) Then
+    If CalendarControl.ActiveView.GetSelection(BeginSelection, EndSelection, AllDay) Then
         Debug.Print "Selection: "; BeginSelection; " - "; EndSelection
     End If
 
@@ -1039,13 +1038,13 @@ End Sub
 
 Private Sub Form_Load()
     '
-    Me.Icon = frmPpal.Icon
+    Me.Icon = frmPPal.Icon
     PrimeraVez = True
     
     Dim C As String
     m_eActiveDataProvider = cjCalendarData_MySQL
     
-        C = Conn.ConnectionString
+        C = COnn.ConnectionString
         
         C = "Provider=MSDASQL.1;Extended Properties=""DATABASE=" & vEmpresa.BDAriges & ";DSN=vAriges;OPTION=0;PWD=" & vConfig.password & ";SERVER=" & vConfig.SERVER & ";UID=" & vConfig.User & """"
         OpenProvider cjCalendarData_MySQL, C, False
@@ -1082,7 +1081,7 @@ Private Sub Form_Load()
     CalendarControl.DayView.ScrollToWorkDayBegin
         
         
-    If Skin2007 Then CambiarTEmaTheme2007
+   ' If Skin2007 Then CambiarTEmaTheme2007
     
     
     'Para cargar los iconos
@@ -1312,7 +1311,7 @@ Private Sub mnuDeleteEvent_Click()
     'CalendarControl.RedrawControl
 End Sub
 
-Private Sub CambiarTEmaTheme2007()
+Private Sub CambiarTEmaTheme2007_2()
     Dim objThemeOfice2007 As CalendarThemeOffice2007
     Set objThemeOfice2007 = CalendarControl.Theme
     
@@ -1579,7 +1578,7 @@ Private Sub mnuReminders_Click()
     End If
 
     If ModalFormsRunningCounter = 0 Then
-        If Not frmReminders.visible Then
+        If Not frmReminders.Visible Then
             frmReminders.OnReminders xtpCalendarRemindersFire, Nothing
         End If
         

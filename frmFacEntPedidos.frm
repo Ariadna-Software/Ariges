@@ -573,23 +573,23 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacEntPedidos.frx":0363
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "DataGrid1"
-      Tab(0).Control(1)=   "txtAux(0)"
-      Tab(0).Control(2)=   "txtAux(1)"
-      Tab(0).Control(3)=   "txtAux(3)"
-      Tab(0).Control(4)=   "txtAux(4)"
-      Tab(0).Control(5)=   "txtAux(6)"
-      Tab(0).Control(6)=   "txtAux(7)"
-      Tab(0).Control(7)=   "txtAux(8)"
+      Tab(0).Control(0)=   "cmdAux(2)"
+      Tab(0).Control(1)=   "txtAux(11)"
+      Tab(0).Control(2)=   "txtAux(10)"
+      Tab(0).Control(3)=   "txtAux(9)"
+      Tab(0).Control(4)=   "txtAux(5)"
+      Tab(0).Control(5)=   "FrameCliente"
+      Tab(0).Control(6)=   "cmdAux(1)"
+      Tab(0).Control(7)=   "cmdAux(0)"
       Tab(0).Control(8)=   "txtAux(2)"
-      Tab(0).Control(9)=   "cmdAux(0)"
-      Tab(0).Control(10)=   "cmdAux(1)"
-      Tab(0).Control(11)=   "FrameCliente"
-      Tab(0).Control(12)=   "txtAux(5)"
-      Tab(0).Control(13)=   "txtAux(9)"
-      Tab(0).Control(14)=   "txtAux(10)"
-      Tab(0).Control(15)=   "txtAux(11)"
-      Tab(0).Control(16)=   "cmdAux(2)"
+      Tab(0).Control(9)=   "txtAux(8)"
+      Tab(0).Control(10)=   "txtAux(7)"
+      Tab(0).Control(11)=   "txtAux(6)"
+      Tab(0).Control(12)=   "txtAux(4)"
+      Tab(0).Control(13)=   "txtAux(3)"
+      Tab(0).Control(14)=   "txtAux(1)"
+      Tab(0).Control(15)=   "txtAux(0)"
+      Tab(0).Control(16)=   "DataGrid1"
       Tab(0).ControlCount=   17
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
@@ -606,31 +606,33 @@ Begin VB.Form frmFacEntPedidos
       Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "Label1(28)"
       Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "Text1(19)"
+      Tab(1).Control(6)=   "imgBuscar(11)"
       Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "Text1(20)"
+      Tab(1).Control(7)=   "Text1(19)"
       Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "Text1(21)"
+      Tab(1).Control(8)=   "Text1(20)"
       Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "Text1(22)"
+      Tab(1).Control(9)=   "Text1(21)"
       Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "Text1(23)"
+      Tab(1).Control(10)=   "Text1(22)"
       Tab(1).Control(10).Enabled=   0   'False
-      Tab(1).Control(11)=   "Text1(24)"
+      Tab(1).Control(11)=   "Text1(23)"
       Tab(1).Control(11).Enabled=   0   'False
-      Tab(1).Control(12)=   "Text1(25)"
+      Tab(1).Control(12)=   "Text1(24)"
       Tab(1).Control(12).Enabled=   0   'False
-      Tab(1).Control(13)=   "FrameHco"
+      Tab(1).Control(13)=   "Text1(25)"
       Tab(1).Control(13).Enabled=   0   'False
-      Tab(1).Control(14)=   "Text1(30)"
+      Tab(1).Control(14)=   "FrameHco"
       Tab(1).Control(14).Enabled=   0   'False
-      Tab(1).Control(15)=   "Text1(29)"
+      Tab(1).Control(15)=   "Text1(30)"
       Tab(1).Control(15).Enabled=   0   'False
-      Tab(1).Control(16)=   "Text1(33)"
+      Tab(1).Control(16)=   "Text1(29)"
       Tab(1).Control(16).Enabled=   0   'False
-      Tab(1).Control(17)=   "Text1(34)"
+      Tab(1).Control(17)=   "Text1(33)"
       Tab(1).Control(17).Enabled=   0   'False
-      Tab(1).ControlCount=   18
+      Tab(1).Control(18)=   "Text1(34)"
+      Tab(1).Control(18).Enabled=   0   'False
+      Tab(1).ControlCount=   19
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
       Tab(2).ControlEnabled=   0   'False
@@ -802,7 +804,7 @@ Begin VB.Form frmFacEntPedidos
             Index           =   37
             Left            =   120
             TabIndex        =   131
-            Top             =   200
+            Top             =   240
             Width           =   1335
          End
          Begin VB.Label Label1 
@@ -817,28 +819,28 @@ Begin VB.Form frmFacEntPedidos
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   7
-            Left            =   2760
+            Left            =   2520
             Picture         =   "frmFacEntPedidos.frx":03B7
             ToolTipText     =   "Buscar trabajador"
-            Top             =   120
+            Top             =   240
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "Incidencia"
             Height          =   255
             Index           =   40
-            Left            =   5760
+            Left            =   5520
             TabIndex        =   129
-            Top             =   120
+            Top             =   240
             Width           =   825
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   8
-            Left            =   6600
+            Left            =   6480
             Picture         =   "frmFacEntPedidos.frx":04B9
             ToolTipText     =   "Buscar incidencia"
-            Top             =   120
+            Top             =   240
             Width           =   240
          End
       End
@@ -2055,6 +2057,15 @@ Begin VB.Form frmFacEntPedidos
             EndProperty
          EndProperty
       End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   11
+         Left            =   10680
+         Picture         =   "frmFacEntPedidos.frx":0BDC
+         ToolTipText     =   "Buscar forma de pago"
+         Top             =   1440
+         Width           =   240
+      End
       Begin VB.Label Label1 
          Caption         =   "Observaciones internas"
          Height          =   255
@@ -2123,7 +2134,7 @@ Begin VB.Form frmFacEntPedidos
       Height          =   240
       Index           =   10
       Left            =   3240
-      Picture         =   "frmFacEntPedidos.frx":0BDC
+      Picture         =   "frmFacEntPedidos.frx":0CDE
       ToolTipText     =   "Buscar cliente varios"
       Top             =   7080
       Width           =   240
@@ -3686,7 +3697,12 @@ Private Sub imgBuscar_Click(Index As Integer)
 Dim indice As Byte
 
     If Modo = 2 Or Modo = 0 Then
-        If Index <> 10 Then Exit Sub
+        If Index = 11 Then
+            'DEJO pasara
+            
+        Else
+            If Index <> 10 Then Exit Sub
+        End If
     End If
     Screen.MousePointer = vbHourglass
     TerminaBloquear
@@ -3786,6 +3802,8 @@ Dim indice As Byte
                     If RecuperaValor(CadenaDesdeOtroForm, 1) = "1" Then Text2(16).Text = Mid(CadenaDesdeOtroForm, 3)
                 End If
                 CadenaDesdeOtroForm = ""
+        Case 11
+            AbrirObservacionesInternas
     End Select
     
     PonerFoco Text1(indice)
@@ -4643,8 +4661,14 @@ On Error Resume Next
     
     CalcularDatosFactura
     
+    
+    
     '-- Esto permanece para saber donde estamos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+    
+    
+    If Text1(34).Text <> "" And vParamAplic.NumeroInstalacion = 2 Then AbrirObservacionesInternas
+    
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -9094,4 +9118,21 @@ eTrasapasarAOfertas:
     Set vNu = Nothing
     TituloLinea = ""
     txtAnterior = ""
+End Sub
+
+
+
+Private Sub AbrirObservacionesInternas()
+Dim B As Boolean
+
+    CadenaDesdeOtroForm = ""
+    B = False
+    If Not EsHistorico Then B = Modo = 3 Or Modo = 4
+    
+    frmFacClienteObser.Modificar = B
+    frmFacClienteObser.Text1 = Text1(34).Text
+    frmFacClienteObser.Show vbModal
+    If B Then
+        If RecuperaValor(CadenaDesdeOtroForm, 1) = "1" Then Text1(34).Text = Mid(CadenaDesdeOtroForm, 3)
+    End If
 End Sub

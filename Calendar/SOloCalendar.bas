@@ -56,7 +56,7 @@ On Error GoTo EAbrirConexion
     'cad = "DSN=plannertours;DESC=MySQL ODBC 3.51 Driver DSN;DATABASE=plannertours;UID=" & Usuario & ";PASSWORD=" & Pass & ";PORT=3306;OPTION=3;STMT=;"
     
     '---- Laura: 17/10/2006
-    cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE= vAriges;DATABASE=ariges2;SERVER=PCDAVIDG"
+    cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE= vAriges;DATABASE=ariges2;SERVER=PCDAVID"
 '    cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DSN= vAriges;DATABASE=" & vUsu.CadenaConexion
     
     cad = cad & ";UID=root"

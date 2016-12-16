@@ -298,6 +298,7 @@ Form=frmPpal.frm
 Form=frmFacActPrecios.frm
 Form=frmFacEntOfertas.frm
 Form=frmFacLotesGeneralitat.frm
+Form=frmAlmCalidad.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""

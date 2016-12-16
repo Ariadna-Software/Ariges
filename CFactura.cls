@@ -1580,7 +1580,7 @@ Dim TotRe As Currency
 
 Dim ImporteParaComparar As Currency
 Dim NueroIvas As Integer
-
+Dim InsertandoFAM As Boolean
 
     CalcularDatosFactura = False
     On Error GoTo ECalcular
@@ -1611,7 +1611,8 @@ Dim NueroIvas As Integer
         exento_IVA = ClienteExentoIVA
    End If
    
-  
+   InsertandoFAM = False
+   
    If exento_IVA = 2 Or exento_IVA = 3 Then
         cadWhere = Replace(cadWhere, NomTabla, NomTablaLin)
         SQL = "SELECT sum(importel) as bruto"
@@ -1627,6 +1628,15 @@ Dim NueroIvas As Integer
                 SQL = "SELECT codartic,nomartic,sartic.codigiva, tiposiva.porceiva "
                 SQL = SQL & " FROM sartic INNER JOIN conta" & vParamAplic.NumeroConta & ".tiposiva ON sartic.codigiva=conta" & vParamAplic.NumeroConta & ".tiposiva.codigiva"
                 SQL = SQL & " WHERE codartic=" & DBSet(ArticFac, "T")
+                InsertandoFAM = True
+            Else
+                'DICIEMBRE 2016. No funcionaba si articfac=""
+                'Esta modificando factura mantenimientos
+                SQL = "SELECT sartic.codigiva,sum(importel) as bruto"
+                SQL = SQL & " FROM " & NomTablaLin & " LEFT OUTER JOIN sartic ON " & NomTablaLin & ".codartic=sartic.codartic"
+                SQL = SQL & " WHERE " & cadWhere
+                SQL = SQL & " GROUP BY codigiva "
+                SQL = SQL & " ORDER BY codigiva "
             End If
        Else
             cadWhere = Replace(cadWhere, NomTabla, NomTablaLin)
@@ -1653,7 +1663,8 @@ Dim NueroIvas As Integer
     ImporteParaComparar = 0
     
     'VEre cuantos IVAS tiene y el bruto. Para cuadrar los decimales
-    If codtipom = "FAM" Then
+    'If codtipom = "FAM" Then
+    If InsertandoFAM Then
         'No hago la comrobacion para cuadre decimales
         NueroIvas = 1
     Else
@@ -1681,7 +1692,8 @@ Dim NueroIvas As Integer
 
     While Not RS.EOF
         'Aqui vamos acumulando la suma del importe bruto de las lineas
-        If codtipom = "FAM" Then
+        'If codtipom = "FAM" Then
+        If InsertandoFAM Then
             vBruto = BrutoFac
         Else
             vBruto = RS!bruto
@@ -2604,7 +2616,7 @@ Dim Cad As String, cad2 As String
                 DigControl = vClien.DigControl
                 CuentaBan = vClien.CuentaBan
                 IBAN = vClien.IBAN
-                mPais = vClien.PAIS
+                mPais = vClien.Pais
             Else
                 Banco = ValorNulo
                 Sucursal = ValorNulo

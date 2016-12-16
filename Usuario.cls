@@ -170,15 +170,15 @@ Dim I As Long
     SQL = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
     SQL = SQL & " AND NivelAriges >=0"
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open SQL, COnn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If RS.EOF Then
         Leer = 1
     Else
         I = DevuelveAumentoPC
-        mvarCodigo = Val(DBLet(RS!CodUsu)) + I
-        mvarNombre = DBLet(RS!nomusu)
-        mvarNivel = Val(DBLet(RS!nivelariges))
+        mvarCodigo = Val(Dblet(RS!CodUsu)) + I
+        mvarNombre = Dblet(RS!nomusu)
+        mvarNivel = Val(Dblet(RS!nivelariges))
         mvarPasswdPROPIO = RS!passwordpropio
         mvarlogin = vlogin  'por si acasp esta escroto en mayus, minusclu....
         mvarlogin = RS!Login
@@ -213,7 +213,7 @@ Dim agente As String
 
 
     agente = "codagent"
-    mvarAlmacenPorDefecto = DevuelveDesdeBD(conAri, "codalmac", "straba", "login", Me.Login, "T", agente)
+    'mvarAlmacenPorDefecto = DevuelveDesdeBD(conAri, "codalmac", "straba", "login", Me.Login, "T", agente)
     If agente = "codagent" Then agente = ""
     If agente = "" Then agente = "0"
         

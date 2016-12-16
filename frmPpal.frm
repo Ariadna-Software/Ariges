@@ -391,7 +391,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "12:29"
+            TextSave        =   "10:24"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2158,6 +2158,10 @@ Begin VB.MDIForm frmPpal
       Begin VB.Menu mnproduccion1 
          Caption         =   "Registro trazabilidad"
          Index           =   3
+      End
+      Begin VB.Menu mnproduccion1 
+         Caption         =   "Parámetros cálidad"
+         Index           =   4
       End
    End
    Begin VB.Menu mnTPV 
@@ -4261,7 +4265,9 @@ Private Sub mnproduccion1_Click(Index As Integer)
         frmAlmDescCostesTasas.Show vbModal
     Case 3
         frmListLotes.Show vbModal
-        
+    Case 4
+        frmAlmCalidad.Show vbModal
+
     End Select
 End Sub
 
@@ -4849,16 +4855,16 @@ End Sub
 Private Sub mnUtiUsuActivos_Click()
 'Muestra si hay otros usuarios conectados a la Gestion
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
 
     CadenaDesdeOtroForm = OtrosPCsContraContabiliad
     If CadenaDesdeOtroForm <> "" Then
-        I = 1
+        i = 1
         Me.Tag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
         Do
-            SQL = RecuperaValor(CadenaDesdeOtroForm, I)
+            SQL = RecuperaValor(CadenaDesdeOtroForm, i)
             If SQL <> "" Then Me.Tag = Me.Tag & "    - " & SQL & vbCrLf
-            I = I + 1
+            i = i + 1
         Loop Until SQL = ""
         MsgBox Me.Tag, vbExclamation
     Else
@@ -5093,7 +5099,7 @@ End Sub
 
 
 Private Sub LanzaHome(Opcion As String)
-Dim I As Integer
+Dim i As Integer
 Dim cad As String
 
     On Error GoTo ELanzaHome

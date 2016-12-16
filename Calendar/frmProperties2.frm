@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmEditEvent 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Nueva cita"
@@ -354,9 +354,6 @@ Option Explicit
 
 
 
-Private WithEvents frmP As frmFacEntPedidos
-Attribute frmP.VB_VarHelpID = -1
-
 
 Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 Const CB_SETDROPPEDWIDTH = &H160
@@ -399,8 +396,8 @@ End Sub
 
 Private Sub chkAllDayEvent_Click()
 
-    cmbEndTime.visible = IIf(chkAllDayEvent.Value = 1, False, True)
-    cmbStartTime.visible = IIf(chkAllDayEvent.Value = 1, False, True)
+    cmbEndTime.Visible = IIf(chkAllDayEvent.Value = 1, False, True)
+    cmbStartTime.Visible = IIf(chkAllDayEvent.Value = 1, False, True)
 
 End Sub
 
@@ -655,15 +652,15 @@ Error:
 End Sub
 
 Private Sub Form_Load()
-    Me.Icon = frmPpal.Icon
+    Me.Icon = frmPPal.Icon
     InitStartTimeCombo
     
     
     'ASigno las imagenes al toolbar
     With Me.Toolbar1
-        .ImageList = frmPpal.ImgListPpal
-        .Buttons(1).Image = 9   'Pedidos
-        .Buttons(8).Image = 2   'Eliminar  referencia a ARIGES
+     '   .ImageList = frmPPal.ImgListPpal
+     '   .Buttons(1).Image = 9   'Pedidos
+     '   .Buttons(8).Image = 2   'Eliminar  referencia a ARIGES
     End With
     
 '    ' Fill Labels Combobox
@@ -680,7 +677,7 @@ Private Sub Form_Load()
     cmbLabel.AddItem "Pedido"
     cmbLabel.ItemData(cmbLabel.NewIndex) = 1
         
-    cmbLabel.visible = m_pEditingEvent.Label > 0
+    cmbLabel.Visible = m_pEditingEvent.Label > 0
     cmbLabel.Enabled = False
     
     ' Fill event Busy Status combobox
@@ -727,8 +724,8 @@ Public Sub SetStartEnd(BeginSelection As Date, EndSelection As Date, AllDay As B
     EndTime = TimeValue(EndSelection)
 
     If AllDay Then
-        cmbEndTime.visible = False
-        cmbStartTime.visible = False
+        cmbEndTime.Visible = False
+        cmbStartTime.Visible = False
     
         If DateDiff("s", EndTime, 0) = 0 Then
             EndDate = EndDate - 1
@@ -752,7 +749,7 @@ Public Sub NewEvent()
     m_bAddEvent = True
     
     Dim BeginSelection As Date, EndSelection As Date, AllDay As Boolean
-    frmMainCalendar.CalendarControl.ActiveView.getSelection BeginSelection, EndSelection, AllDay
+    frmMainCalendar.CalendarControl.ActiveView.GetSelection BeginSelection, EndSelection, AllDay
 
     m_pEditingEvent.StartTime = BeginSelection
     m_pEditingEvent.EndTime = EndSelection
@@ -850,13 +847,13 @@ Public Sub UpdateControlsFromEvent()
     Dim bDatesVisible As Boolean
     bDatesVisible = m_pEditingEvent.RecurrenceState <> xtpCalendarRecurrenceMaster
        
-    lblStartTime.visible = bDatesVisible
-    lblEndTime.visible = bDatesVisible
-    cmbStartDate.visible = bDatesVisible
-    cmbStartTime.visible = bDatesVisible
-    cmbEndDate.visible = bDatesVisible
-    cmbEndTime.visible = bDatesVisible
-    chkAllDayEvent.visible = bDatesVisible
+    lblStartTime.Visible = bDatesVisible
+    lblEndTime.Visible = bDatesVisible
+    cmbStartDate.Visible = bDatesVisible
+    cmbStartTime.Visible = bDatesVisible
+    cmbEndDate.Visible = bDatesVisible
+    cmbEndTime.Visible = bDatesVisible
+    chkAllDayEvent.Visible = bDatesVisible
         
     If bDatesVisible Then
         chkAllDayEvent_Click
@@ -928,7 +925,7 @@ Private Sub HacerPedido()
     frmP.Show vbModal
     Set frmP = Nothing
     
-    If vEnlaceAriges > 0 Then Me.cmbLabel.visible = True
+    If vEnlaceAriges > 0 Then Me.cmbLabel.Visible = True
         
   
 End Sub
