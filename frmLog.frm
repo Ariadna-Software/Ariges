@@ -1,20 +1,20 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmLog 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "LOG de acciones"
    ClientHeight    =   5985
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   10110
+   ClientWidth     =   11865
    Icon            =   "frmLog.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5985
-   ScaleWidth      =   10110
+   ScaleWidth      =   11865
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtAux 
@@ -84,8 +84,8 @@ Begin VB.Form frmLog
       TabIndex        =   11
       TabStop         =   0   'False
       Top             =   540
-      Width           =   9735
-      _ExtentX        =   17171
+      Width           =   11175
+      _ExtentX        =   19711
       _ExtentY        =   8334
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -149,7 +149,7 @@ Begin VB.Form frmLog
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   8700
+      Left            =   10260
       TabIndex        =   6
       Top             =   5400
       Width           =   1035
@@ -157,7 +157,7 @@ Begin VB.Form frmLog
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   7500
+      Left            =   9060
       TabIndex        =   5
       Top             =   5400
       Width           =   1035
@@ -165,7 +165,7 @@ Begin VB.Form frmLog
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   8700
+      Left            =   10260
       TabIndex        =   10
       Top             =   5400
       Visible         =   0   'False
@@ -202,8 +202,8 @@ Begin VB.Form frmLog
       Left            =   0
       TabIndex        =   7
       Top             =   0
-      Width           =   10110
-      _ExtentX        =   17833
+      Width           =   11865
+      _ExtentX        =   20929
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -373,26 +373,26 @@ Dim Modo As Byte
 
 
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
-    b = (Modo = 2)
+    B = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
-    txtAux(2).visible = Not b
-    txtAux(3).visible = Not b
+    txtAux(0).visible = Not B
+    txtAux(1).visible = Not B
+    txtAux(2).visible = Not B
+    txtAux(3).visible = Not B
     
-    CboTipoSitu.visible = Not b
+    CboTipoSitu.visible = Not B
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     End If
     
     'Si estamos insertando o busqueda
@@ -412,28 +412,28 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ber Todos
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
-    b = b And Not DeConsulta
+    B = B And Not DeConsulta
     'Añadir
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(10).Enabled = b
+    Toolbar1.Buttons(10).Enabled = B
 End Sub
 
 
@@ -655,16 +655,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = adodc1.Recordset.Fields(0) & "|"
-    cad = cad & adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -678,7 +678,7 @@ Private Sub DataGrid1_DblClick()
                 CadenaDesdeOtroForm = "Fecha: " & adodc1.Recordset!Fecha & vbCrLf
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Usuario / PC : " & adodc1.Recordset!Usuario & " - " & adodc1.Recordset!PC & vbCrLf
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Accion: " & adodc1.Recordset!NomArtic & vbCrLf & vbCrLf
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Replace(Space(80), " ", "-") & vbCrLf
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Replace(Space(70), " ", "-") & vbCrLf
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Descripción:" & vbCrLf & adodc1.Recordset!Descripcion
                 MsgBox CadenaDesdeOtroForm, vbInformation
                 CadenaDesdeOtroForm = ""
@@ -776,10 +776,10 @@ End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim b As Boolean
+Dim B As Boolean
 Dim tots As String
     
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
     If SQL <> "" Then
         SQL = CadenaConsulta & " AND " & SQL
@@ -791,11 +791,11 @@ Dim tots As String
     CargaGridGnral DataGrid1, Me.adodc1, SQL, False
     
     '### a mano
-    tots = "S|txtAux(0)|T|Fecha|2000|;S|CboTipoSitu|C|Accion|1700|;S|txtAux(1)|T|Usuario|1200|;"
-    tots = tots & "S|txtAux(2)|T|PC|1400|;S|txtAux(3)|T|Descripcioin|2700|;"
+    tots = "S|txtAux(0)|T|Fecha|2000|;S|CboTipoSitu|C|Accion|2700|;S|txtAux(1)|T|Usuario|1200|;"
+    tots = tots & "S|txtAux(2)|T|PC|1400|;S|txtAux(3)|T|Descripcioin|2900|;"
     arregla tots, DataGrid1, Me
     
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
@@ -831,8 +831,8 @@ Dim L As Collection
         If L.Count > 0 Then
             For NumRegElim = 1 To L.Count
                 
-                CboTipoSitu.AddItem RecuperaValor(L.item(NumRegElim), 2)
-                CboTipoSitu.ItemData(CboTipoSitu.NewIndex) = Val(RecuperaValor(L.item(NumRegElim), 1))
+                CboTipoSitu.AddItem RecuperaValor(L.Item(NumRegElim), 2)
+                CboTipoSitu.ItemData(CboTipoSitu.NewIndex) = Val(RecuperaValor(L.Item(NumRegElim), 1))
                 FormatoCod = FormatoCod & ",(" & vUsu.codigo & ",0,'2007-07-04'," & CboTipoSitu.ItemData(CboTipoSitu.NewIndex) & ",0,'" & DevNombreSQL(CboTipoSitu.List(CboTipoSitu.NewIndex)) & "')"
             Next NumRegElim
         End If
@@ -850,7 +850,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 

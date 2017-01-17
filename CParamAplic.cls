@@ -373,7 +373,8 @@ Private mvarNumeroInstalacion As Byte
     ' 2.-  Herbelca (en muchos sitios pone almacenb>90
     ' 3.- Teinsa   buscar frecuencias
     ' 4.- EULER
-
+    ' 5.- Fontenas
+    
 '[14/10/2014]
 Private mvarManipuladorFitosanitarios As Boolean
 

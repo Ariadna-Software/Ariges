@@ -848,7 +848,7 @@ Private Sub CargarComboTipoPago()
 ' Si queremos que este ordenado, o lo ordenamos por la sentencia sql
 ' o marcamos la opcion sorted del combo
 '0-Contado, 1-Cheque, 2-Pagaré, 3-Transferencia, 4-Efecto
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 
     Combo1.Clear
@@ -856,16 +856,16 @@ Dim SQL As String
     On Error GoTo ECargar
 
     SQL = "SELECT tipforpa, destippa from stippa"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
-        Combo1.AddItem Rs!destippa
-        Combo1.ItemData(Combo1.NewIndex) = Rs!tipforpa
-        Rs.MoveNext
+    While Not RS.EOF
+        Combo1.AddItem RS!destippa
+        Combo1.ItemData(Combo1.NewIndex) = RS!tipforpa
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     
 ECargar:
@@ -1143,8 +1143,8 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
-Dim b As Boolean
+Dim i As Byte
+Dim B As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1152,10 +1152,10 @@ Dim NumReg As Byte
     
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
         If Modo = 1 Then Me.lblIndicador.Caption = "BUSQUEDA"
     Else
         cmdRegresar.visible = False
@@ -1166,15 +1166,15 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
     
     
     '----------------------------------------------
     'Modo insertar o modificar
-    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = b Or Modo = 1
-    cmdCancelar.visible = b Or Modo = 1
-    If b Or Modo = 1 Then
+    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = B Or Modo = 1
+    cmdCancelar.visible = B Or Modo = 1
+    If B Or Modo = 1 Then
         cmdCancelar.Cancel = True
     Else
         cmdCancelar.Cancel = False
@@ -1183,18 +1183,18 @@ Dim NumReg As Byte
     BloquearText1 Me, Modo
     
     'Formas de Pago
-    For I = 0 To Text2.Count - 1
-        BloquearTxt Text2(I), True
-    Next I
+    For i = 0 To Text2.Count - 1
+        BloquearTxt Text2(i), True
+    Next i
     
     Combo1.Enabled = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
     
-    b = (Modo = 3) 'Insertar
+    B = (Modo = 3) 'Insertar
     'Campos Importe Mínimo y % Adelantado
-    If b Then
-        For I = 8 To 9
-            BloquearTxt Text1(I), True
-        Next I
+    If B Then
+        For i = 8 To 9
+            BloquearTxt Text1(i), True
+        Next i
     End If
 
      chkVistaPrevia.Enabled = (Modo <= 2)
@@ -1206,74 +1206,74 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    mnEliminar.Enabled = B
     
-    b = (Modo >= 3)
+    B = (Modo >= 3)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnNuevo.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnNuevo.Enabled = Not B
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
     
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
      
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then B = False
     End If
      
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     'Comprobar que si nº vencimientos es 1, el campo resto vencimientos no tiene valor
     If Val(Text1(2).Text) = 1 Then
         If Not EsVacio(Text1(4)) Then
             MsgBox "El campo Resto Vencimientos no puede tener valor si NºVtos=1", vbInformation
-            b = False
+            B = False
         End If
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
      
     'Comprobar el campo resto vencimientos
     If Not EsVacio(Text1(2)) And Not EsVacio(Text1(3)) Then
         If Val(Text1(2).Text) > 1 And EsVacio(Text1(4)) Then
             MsgBox "El Campo Resto Vencimientos debe tener valor", vbInformation
             PonerFoco Text1(4)
-            b = False
+            B = False
         End If
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     'Comprobar el importe Mínimo
     'Requerido si se selecciona una forma de pago alternativa
     If Not EsVacio(Text1(6)) And EsVacio(Text1(8)) Then
        MsgBox "El campo Importe Mínimo debe tener valor", vbInformation
        PonerFoco Text1(8)
-       b = False
+       B = False
     End If
     'Verificar que el campo Importe Minimo no tiene valor si la forma de pago es vacio
     If EsVacio(Text1(6)) And Not EsVacio(Text1(8)) Then
         MsgBox "El campo Importe Mínimo no puede tener valor si no selecciona Forma de Pago.", vbInformation
-        b = False
+        B = False
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     
     'Porcentaje Adelantado
@@ -1281,26 +1281,26 @@ Dim b As Boolean
     If Not EsVacio(Text1(7)) And EsVacio(Text1(9)) Then
         MsgBox "El campo % Adelantado debe tener valor", vbInformation
         PonerFoco Text1(9)
-        b = False
+        B = False
     End If
     'Verificar que el campo %adelantado no tiene valor si la forma de pago es vacio
     If EsVacio(Text1(7)) And Not EsVacio(Text1(9)) Then
         MsgBox "El campo %Adelantado no puede tener valor si no selecciona Forma de Pago.", vbInformation
-        b = False
+        B = False
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
         
         
     'Marzo 2011
     '----------------------------------
     'Comprobaremos que son correctas las formas de pago adelantao y alternativa, y que no son la misma
     'que la principal
-    If b Then
+    If B Then
         'Alternativa
         If Text1(6).Text <> "" Then
             If Text1(6).Text = Text1(0).Text Then
                 MsgBox "Mismo código de forma de pago y la forma de pago alternativa", vbExclamation
-                b = False
+                B = False
             End If
         End If
         
@@ -1309,7 +1309,7 @@ Dim b As Boolean
         If Text1(7).Text <> "" Then
             If Text1(7).Text = Text1(0).Text Then
                 MsgBox "Mismo código de forma de pago y la forma de pago adelantado", vbExclamation
-                b = False
+                B = False
             End If
         End If
         
@@ -1318,7 +1318,7 @@ Dim b As Boolean
         
         
         'Salimos si no esta bien
-        If Not b Then Exit Function
+        If Not B Then Exit Function
     End If
         
             
@@ -1330,7 +1330,7 @@ Dim b As Boolean
         If Not PuedeModificarFPenContab Then Exit Function
     End If
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 

@@ -50,9 +50,9 @@ Begin VB.Form frmListado4
       Begin VB.Label Label2 
          Height          =   255
          Index           =   9
-         Left            =   0
+         Left            =   240
          TabIndex        =   120
-         Top             =   0
+         Top             =   2040
          Width           =   3255
       End
       Begin VB.Label Label2 
@@ -498,7 +498,7 @@ Begin VB.Form frmListado4
          BackColor       =   -2147483643
          BorderStyle     =   1
          Appearance      =   1
-         NumItems        =   4
+         NumItems        =   6
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Codigo"
             Object.Width           =   3200
@@ -517,6 +517,16 @@ Begin VB.Form frmListado4
             SubItemIndex    =   3
             Text            =   "Desc. marca"
             Object.Width           =   3572
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "Familia"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
+            Text            =   "codprove"
+            Object.Width           =   0
          EndProperty
       End
       Begin VB.Label lblTitulo 
@@ -2845,15 +2855,15 @@ Dim Aux As String
     SQL = ""
     Aux = ""
     For NumRegElim = 1 To Me.lw(8).ListItems.Count
-        If Me.lw(8).ListItems(NumRegElim).Checked Then
+        If Not Me.lw(8).ListItems(NumRegElim).Checked Then
             SQL = SQL & "X"
-            Aux = Aux & ", " & lw(8).ListItems(NumRegElim).Text
+            lw(8).ListItems(NumRegElim).Checked = True
         End If
     Next NumRegElim
 
-    If SQL = "" Then Exit Sub
+    If SQL <> "" Then MsgBox "Todos los articulos serán seleccionados.", vbInformation
     
-    numParam = Len(SQL)
+    numParam = NumRegElim
     
     SQL = ""
     If numParam > 1 Then SQL = "s"
@@ -2933,10 +2943,22 @@ Dim Aux As String
     numParam = 0
     SQL = ""
     For NumRegElim = 1 To Me.lw(8).ListItems.Count
-        If Me.lw(8).ListItems(NumRegElim).Checked Then ActualizaFamiliaMarca2
+        If Me.lw(8).ListItems(NumRegElim).Checked Then ActualizaFamiliaMarca
         
     Next NumRegElim
     
+    
+    CadParam = RecuperaValor(vCadena, 4)
+    If CadParam = "-1" Then CadParam = lw(8).ListItems(1).SubItems(5)
+    CadParam = "UPDATE sdtomp SET codprove=" & CadParam
+    If RecuperaValor(vCadena, 2) <> "" Then CadParam = CadParam & ", codfamia= " & RecuperaValor(vCadena, 2)
+    'HEREBLCA. LA marca no la trato
+    'If RecuperaValor(vCadena, 3) <> "" Then CadParam = CadParam & ", codmarca= " & RecuperaValor(vCadena, 3)
+    CadParam = CadParam & " WHERE codprove = " & lw(8).ListItems(1).SubItems(5)
+    CadParam = CadParam & " AND codfamia = " & lw(8).ListItems(1).SubItems(4)
+    
+    ejecutar CadParam, False
+        
         
     Set LOG = Nothing
     Screen.MousePointer = vbDefault
@@ -2946,7 +2968,7 @@ Dim Aux As String
     
 End Sub
 
-Private Sub ActualizaFamiliaMarca2()
+Private Sub ActualizaFamiliaMarca()
 Dim YProveedor As String
 
         'Numregelim llevo el indice al lw(8) para coger el articulo
@@ -2958,28 +2980,32 @@ Dim YProveedor As String
         If SQL <> "" Then
         
             'Esta actualizando el proveedor. Vemos el del articulo
-            CadParam = DevuelveDesdeBD(conAri, "codprove", "sartic", "codartic", lw(8).ListItems(NumRegElim).Text, "T")
+            CadParam = lw(8).ListItems(NumRegElim).SubItems(5)
             If CadParam <> SQL Then YProveedor = CadParam
             
-            
+        Else
+            YProveedor = lw(8).ListItems(NumRegElim).SubItems(5)
+            SQL = YProveedor
         End If
        
         CadParam = CadenaDesdeOtroForm & DBSet(lw(8).ListItems(NumRegElim).Text, "T")
         conn.Execute CadParam
         
-        If YProveedor <> "" Then
+        
             conn.Execute "SET FOREIGN_KEY_CHECKS=0;"
             CadParam = " WHERE codprove = " & YProveedor
             CadParam = "UPDATE slispr SET codprove=" & SQL & CadParam
             CadParam = CadParam & " AND codartic = " & DBSet(lw(8).ListItems(NumRegElim).Text, "T")
                 
             
-            If ejecutar(CadParam, False) Then
-                CadParam = Replace(CadParam, "slispr", "slisp1")
-                ejecutar CadParam, False
-            End If
+            ejecutar CadParam, False
+                
+            CadParam = Replace(CadParam, "slispr", "slisp1")
+            ejecutar CadParam, False
+         
+            
             conn.Execute "SET FOREIGN_KEY_CHECKS=1;"
-        End If
+
 
         SQL = ""
 
@@ -3268,7 +3294,7 @@ Dim Ayuda As String
         Ayuda = Ayuda & vbCrLf & "%Comision:  Que llevara la linea"
     End Select
     
-    Ayuda = imgayuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
+    Ayuda = imgAyuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 
@@ -3642,7 +3668,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgayuda
+    For Each Ima In Me.imgAyuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear
@@ -4252,7 +4278,7 @@ Dim Aux2 As Currency
             SQL = Trim(Mid(CadParam, numParam + 5, 5))
         End If
     
-        If NumRegElim = miRsAux!NumFactu Then
+        If NumRegElim = miRsAux!Numfactu Then
             
             
             'Fra con dos IVAS
@@ -4278,7 +4304,7 @@ Dim Aux2 As Currency
                 Importe = (CCur(SQL) / 100)
             
                 
-                IT.Text = Format(miRsAux!NumFactu, "000000")
+                IT.Text = Format(miRsAux!Numfactu, "000000")
                 IT.SubItems(1) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
                 IT.SubItems(2) = Format(miRsAux!FecFactu, "yyyymmdd") 'para la ordenacion
                 IT.SubItems(3) = Format(miRsAux!codClien, "0000")
@@ -4298,7 +4324,7 @@ Dim Aux2 As Currency
                 End If
                 
         End If
-        NumRegElim = miRsAux!NumFactu
+        NumRegElim = miRsAux!Numfactu
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -4380,7 +4406,7 @@ Dim vFac As CFactura
     If vFac.LeerDatos("FAS", ContadorFAS + 1, SQL) Then
         Debug.Print vFac.Agente
         
-        SQL = "codtipom='" & vFac.codtipom & "' AND fecfactu=" & DBSet(vFac.FecFactu, "F") & " AND numfactu=" & vFac.NumFactu
+        SQL = "codtipom='" & vFac.codtipom & "' AND fecfactu=" & DBSet(vFac.FecFactu, "F") & " AND numfactu=" & vFac.Numfactu
         
         vFac.CuentaPrev = DevuelveDesdeBD(conAri, "codagent", "scafac", SQL & " AND 1", "1")
         If Val(vFac.CuentaPrev) = 0 Then vFac.CuentaPrev = DevuelveDesdeBD(conAri, "codagent", "sagent", "codagent>0 AND 1", "1")
@@ -4421,14 +4447,14 @@ Dim vFac As CFactura
             SQL = SQL & ", nifclien=" & DBSet(vCl.NIF, "T")
             SQL = SQL & ", telclien=" & DBSet(vCl.TfnoClien, "T")
             
-            SQL = SQL & " WHERE codtipom='" & vFac.codtipom & "' AND fecfactu=" & DBSet(vFac.FecFactu, "F") & " AND numfactu=" & vFac.NumFactu
+            SQL = SQL & " WHERE codtipom='" & vFac.codtipom & "' AND fecfactu=" & DBSet(vFac.FecFactu, "F") & " AND numfactu=" & vFac.Numfactu
             
             conn.Execute SQL
             
             'Diciembre 2014. Vuelven a querer el vto en tesoreria
             vFac.CuentaPrev = DevuelveDesdeBD(conAri, "codmacta", "sbanpr", "codbanpr", vFac.BancoPr)
             'vFac.CuentaPrev = ""
-            If Not vFac.InsertarEnTesoreria(vFac.codtipom & vFac.NumFactu & "||", SQL) Then MsgBox SQL, vbExclamation
+            If Not vFac.InsertarEnTesoreria(vFac.codtipom & vFac.Numfactu & "||", SQL) Then MsgBox SQL, vbExclamation
             
         End If
     End If
@@ -4925,7 +4951,7 @@ Private Sub CargaItemDireccionEnvio(ByRef elit As ListItem)
         elit.SubItems(6) = miRsAux!nomdiren
         elit.SubItems(7) = miRsAux!codtipom_
         SQL = " "
-        If Not IsNull(miRsAux!NumFactu) Then SQL = Format(miRsAux!NumFactu, "00000")
+        If Not IsNull(miRsAux!Numfactu) Then SQL = Format(miRsAux!Numfactu, "00000")
         elit.SubItems(8) = SQL
         SQL = " "
         If Not IsNull(miRsAux!FecFactu) Then SQL = Format(miRsAux!FecFactu, FormatoFecha)
@@ -5043,7 +5069,7 @@ Private Sub CargarArticulosCambio()
     
     Me.lw(8).ListItems.Clear
     
-    SQL = " SELECT codartic,nomartic,sartic.codmarca,nommarca"
+    SQL = " SELECT codartic,nomartic,sartic.codmarca,nommarca,codfamia,codprove"
     SQL = SQL & " From sartic,smarca"
     SQL = SQL & " WHERE sartic.codmarca=smarca.codmarca AND " & RecuperaValor(vCadena, 1)
     
@@ -5056,6 +5082,10 @@ Private Sub CargarArticulosCambio()
         IT.SubItems(1) = miRsAux!NomArtic
         IT.SubItems(2) = miRsAux!codmarca
         IT.SubItems(3) = miRsAux!nommarca
+        IT.SubItems(4) = miRsAux!Codfamia
+        IT.SubItems(5) = miRsAux!Codprove
+        IT.Checked = True
+        
         miRsAux.MoveNext
         
         

@@ -1250,9 +1250,6 @@ Dim curCambio As Currency
     
     
     
-    
-    
-    
     cadImpresion = ""
     CodTipoMov = "FTI" 'factura ticket
     curEntregado = 0
@@ -1572,7 +1569,7 @@ End Function
 
 
 
-Private Function ObtenerContadorFactura(NumFactu As String) As Boolean
+Private Function ObtenerContadorFactura(Numfactu As String) As Boolean
 Dim vTipoMov As CTiposMov
 Dim Existe As Boolean
 
@@ -1582,9 +1579,9 @@ Dim Existe As Boolean
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         Do
-            NumFactu = vTipoMov.ConseguirContador(CodTipoMov)
+            Numfactu = vTipoMov.ConseguirContador(CodTipoMov)
             vTipoMov.IncrementarContador (CodTipoMov)
-            SQL = "select count(*) from scafac where codtipom='" & CodTipoMov & "' and numfactu=" & NumFactu & " and fecfactu=" & DBSet(miFechaTicket, "F")
+            SQL = "select count(*) from scafac where codtipom='" & CodTipoMov & "' and numfactu=" & Numfactu & " and fecfactu=" & DBSet(miFechaTicket, "F")
             Existe = (RegistrosAListar(SQL) > 0)
         Loop Until Existe = False
         ObtenerContadorFactura = True
@@ -1700,7 +1697,7 @@ End Function
 
 
 
-Private Function InsertarHistFactura(NumTicket As String, Optional NumFactu As String, Optional NumAlbTicket As String, Optional MenError As String) As Boolean
+Private Function InsertarHistFactura(NumTicket As String, Optional Numfactu As String, Optional NumAlbTicket As String, Optional MenError As String) As Boolean
 Dim B As Boolean
 Dim vFactu As CFactura
 Dim vClien As CCliente
@@ -1739,12 +1736,12 @@ Dim i As Integer
     SQL = ""
     'Insertar la cabecera de Factura (scafac)
     Set vFactu = New CFactura
-    If NumFactu = "" Then
+    If Numfactu = "" Then
         vFactu.codtipom = "FTI"
-        vFactu.NumFactu = NumTicket
+        vFactu.Numfactu = NumTicket
     Else
         vFactu.codtipom = "FAV"
-        vFactu.NumFactu = NumFactu
+        vFactu.Numfactu = Numfactu
     End If
     vFactu.FecFactu = Format(miFechaTicket, "dd/mm/yyyy")
     vFactu.NumTerminal = RSVenta!NumTermi
@@ -1753,7 +1750,7 @@ Dim i As Integer
     
     'Guardamos los valores identificativos de la factura generada
     'para imprimirla posteriormente
-    cadImpresion = "{scafac.codtipom}='" & vFactu.codtipom & "' and {scafac.numfactu}=" & vFactu.NumFactu
+    cadImpresion = "{scafac.codtipom}='" & vFactu.codtipom & "' and {scafac.numfactu}=" & vFactu.Numfactu
 
     vFactu.Cliente = Text1(0).Text
     vFactu.DirDpto = Text1(5).Text
@@ -1827,7 +1824,7 @@ Dim i As Integer
                 UpdatesNumlotes = Mid(UpdatesNumlotes, i + 1)
         
                 'Hacemos el update
-                SQL = SQL & " AND codtipom = '" & vFactu.codtipom & "' AND numfactu = " & vFactu.NumFactu
+                SQL = SQL & " AND codtipom = '" & vFactu.codtipom & "' AND numfactu = " & vFactu.Numfactu
                 SQL = SQL & " AND fecfactu = " & DBSet(miFechaTicket, "F")
                 conn.Execute SQL
  
@@ -2133,7 +2130,15 @@ Dim RS As ADODB.Recordset
                 End If
             End If
             
-
+            'Enero 2017
+            ' TICKET realizado con forma de pago NO habitual. Continuar?"
+            If Destino = 0 Then
+                If TipoForPa <> 0 And TipoForPa <> 6 Then 'tiene q tener tipo forpa EFECTIVO or TARJ CREDIT
+                    If MsgBox("TICKET realizado con forma de pago NO habitual. ¿ Continuar ?", vbQuestion + vbYesNo) <> vbYes Then
+                        B = False
+                    End If
+                End If
+            End If
             
             'Mayo 2014
             'Si hay recargo financiero, y es la empresa ALZIRA, entonces
@@ -2358,7 +2363,7 @@ End Function
 
 
 
-Private Function GenerarFactura(NumFactu As String) As Boolean
+Private Function GenerarFactura(Numfactu As String) As Boolean
 Dim B As Boolean
 Dim NumTicket As String
 Dim MenError As String
@@ -2375,7 +2380,7 @@ Dim MenError As String
     'Obtener el contador de ticket (ATI).
     B = ObtenerContadorAlbTicket(NumTicket)
     
-    If B Then B = ObtenerContadorFactura(NumFactu)
+    If B Then B = ObtenerContadorFactura(Numfactu)
     
     If B Then
         'Si lleva recfinan, meto una linea en la sliven
@@ -2393,7 +2398,7 @@ Dim MenError As String
         'en el campo scafac1.numalbar guardamos el nº de ticket
         If B Then
             CodTipoMov = "FAV"
-            B = InsertarHistFactura(NumTicket, NumFactu, , MenError)
+            B = InsertarHistFactura(NumTicket, Numfactu, , MenError)
         End If
     End If
     
@@ -2507,7 +2512,12 @@ Dim ImprimeDirecto As Boolean
             .ConSubInforme = True
             .Opcion = 53
             .ExportarPDF = False
-            .NumCopias = 2 ' (RAFA/ALZIRA 31082006)
+            'Martin. Dic16
+            If vParamAplic.NumeroInstalacion = 1 Then
+                .NumCopias = 1
+            Else
+                .NumCopias = 2
+            End If
             .Show vbModal
         End With
     End If
@@ -2574,7 +2584,13 @@ Dim ImprimeDirecto As Boolean
             'Julio 16
             .ForzarNombreImpresora = vParamTPV.ImpresoraAlbaranes
             .ExportarPDF = False
-            .NumCopias = 2
+            
+            'Martin. Dic16
+            If vParamAplic.NumeroInstalacion = 1 Then
+                .NumCopias = 1
+            Else
+                .NumCopias = 2
+            End If
             .Show vbModal
         End With
     End If

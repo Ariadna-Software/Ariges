@@ -573,23 +573,23 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacEntPedidos.frx":0363
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "cmdAux(2)"
-      Tab(0).Control(1)=   "txtAux(11)"
-      Tab(0).Control(2)=   "txtAux(10)"
-      Tab(0).Control(3)=   "txtAux(9)"
-      Tab(0).Control(4)=   "txtAux(5)"
-      Tab(0).Control(5)=   "FrameCliente"
-      Tab(0).Control(6)=   "cmdAux(1)"
-      Tab(0).Control(7)=   "cmdAux(0)"
+      Tab(0).Control(0)=   "DataGrid1"
+      Tab(0).Control(1)=   "txtAux(0)"
+      Tab(0).Control(2)=   "txtAux(1)"
+      Tab(0).Control(3)=   "txtAux(3)"
+      Tab(0).Control(4)=   "txtAux(4)"
+      Tab(0).Control(5)=   "txtAux(6)"
+      Tab(0).Control(6)=   "txtAux(7)"
+      Tab(0).Control(7)=   "txtAux(8)"
       Tab(0).Control(8)=   "txtAux(2)"
-      Tab(0).Control(9)=   "txtAux(8)"
-      Tab(0).Control(10)=   "txtAux(7)"
-      Tab(0).Control(11)=   "txtAux(6)"
-      Tab(0).Control(12)=   "txtAux(4)"
-      Tab(0).Control(13)=   "txtAux(3)"
-      Tab(0).Control(14)=   "txtAux(1)"
-      Tab(0).Control(15)=   "txtAux(0)"
-      Tab(0).Control(16)=   "DataGrid1"
+      Tab(0).Control(9)=   "cmdAux(0)"
+      Tab(0).Control(10)=   "cmdAux(1)"
+      Tab(0).Control(11)=   "FrameCliente"
+      Tab(0).Control(12)=   "txtAux(5)"
+      Tab(0).Control(13)=   "txtAux(9)"
+      Tab(0).Control(14)=   "txtAux(10)"
+      Tab(0).Control(15)=   "txtAux(11)"
+      Tab(0).Control(16)=   "cmdAux(2)"
       Tab(0).ControlCount=   17
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
@@ -2481,6 +2481,18 @@ Dim HayQueServir As Boolean
             If DatosOk Then
                 ActualizarClienteVarios Text1(4).Text, Text1(6).Text
                 If ModificaDesdeFormulario(Me, 1) Then
+                
+                    If vParamAplic.NumeroInstalacion = 2 Then
+                        If Val(Me.Data1.Recordset!CodAgent) <> Val(Me.Text1(17).Text) Then
+                            SQL = DevuelveDesdeBD(conAri, "nomagent", "sagent", "codagent", CStr(Me.Data1.Recordset!CodAgent), "T")
+                            SQL = "Antiguo: " & Me.Data1.Recordset!CodAgent & " " & SQL & vbCrLf
+                            SQL = SQL & "Actual: " & Text1(17).Text & " " & Me.Text2(17).Text
+                            Set LOG = New cLOG
+                            LOG.Insertar 36, vUsu, SQL
+                            Set LOG = Nothing
+                        End If
+                    End If
+                
                     TerminaBloquear
                     'Por si acaso ha cambioado coiddirec
                     UpdateaNomDirec

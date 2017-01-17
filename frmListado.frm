@@ -502,10 +502,19 @@ Begin VB.Form frmListado
          Top             =   2640
          Width           =   2895
       End
+      Begin VB.Label lblDtoAct 
+         Caption         =   "Label13"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   764
+         Top             =   5280
+         Visible         =   0   'False
+         Width           =   615
+      End
       Begin VB.Image imgayuda 
          Height          =   240
          Index           =   2
-         Left            =   4200
+         Left            =   4440
          ToolTipText     =   "Buscar cliente"
          Top             =   5280
          Width           =   240
@@ -11372,6 +11381,7 @@ Dim tabla As String
     'Para un cliente puede tener dto metidos para "el " en sdtofm o puede venir de su actividad
     If OpcionListado = 54 And optFrDto(5).Value Then
         HacerListadoDtosCliente
+        lblDtoAct.visible = False
         Exit Sub
     End If
     
@@ -12763,7 +12773,7 @@ Dim RS As ADODB.Recordset
             SQL = "(" & DBSet(txtCodigo(81).Text, "T") & ", " & DBSet(RS!codArtic, "T", "N") & "," & DBSet(RS!codTipar, "T", "N") & ","
             SQL = SQL & DBSet(RS!codClien, "N", "S") & "," & DBSet(RS!CodDirec, "N", "S") & "," & DBSet(RS!TieneMan, "N", "S") & ","
             SQL = SQL & DBSet(RS!nummante, "T", "S") & "," & DBSet(RS!ultrepar, "F", "S") & "," & DBSet(RS!fingaran, "F", "S") & ","
-            SQL = SQL & DBSet(RS!codtipom, "T", "S") & "," & DBSet(RS!NumFactu, "N", "S") & "," & DBSet(RS!FechaVta, "F", "S") & ","
+            SQL = SQL & DBSet(RS!codtipom, "T", "S") & "," & DBSet(RS!Numfactu, "N", "S") & "," & DBSet(RS!FechaVta, "F", "S") & ","
             SQL = SQL & DBSet(RS!NumAlbar, "N", "S") & "," & DBSet(RS!numline1, "N", "S") & "," & DBSet(RS!Codprove, "N", "S") & ","
             SQL = SQL & DBSet(RS!numalbPr, "T", "S") & "," & DBSet(RS!fechacom, "F", "S") & "," & DBSet(RS!numline2, "N", "S") & ")"
         End If
@@ -17530,7 +17540,7 @@ Dim AuxD As String
         SQL = "SELECT COUNT(*) FROM scafpc,sprove WHERE scafpc.codprove = sprove.codprove and tipprove=1"
         
         'ABRIL 2016
-        'YA no hace la ceracion de la AUTOFACTURA
+        'YA no hace la creacion de la AUTOFACTURA
         If False Then
             If cadWhere <> "" Then SQL = SQL & " AND " & cadWhere
             If RegistrosAListar(SQL) > 0 Then
@@ -17667,7 +17677,7 @@ Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim B As Boolean
 Dim i As Integer
-Dim NumFactu As Integer
+Dim Numfactu As Integer
 Dim Codigo1 As String
 Dim ContabilizacionAgrupadaTickets As Boolean
 
@@ -17703,9 +17713,9 @@ Dim cContaFra As cContabilizarFacturas
     
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RS.EOF Then
-        NumFactu = RS.Fields(0)
+        Numfactu = RS.Fields(0)
     Else
-        NumFactu = 0
+        Numfactu = 0
     End If
     RS.Close
     Set RS = Nothing
@@ -17730,11 +17740,11 @@ Dim cContaFra As cContabilizarFacturas
 
 
     '---- Pasar cada una de las facturas seleccionadas a la Conta
-    If NumFactu > 0 Then
+    If Numfactu > 0 Then
     
         Set RS = New ADODB.Recordset
     
-        CargarProgres Me.ProgressBarContab, NumFactu
+        CargarProgres Me.ProgressBarContab, Numfactu
         
         
         'PreComproabacion de los asientos
@@ -17742,7 +17752,7 @@ Dim cContaFra As cContabilizarFacturas
             SQL = "Select min(fecfactu) from tmpfactu"
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If Not RS.EOF Then
-                If Not cContaFra.PreComprobacionNumeroAsiento(RS.Fields(0), NumFactu) Then
+                If Not cContaFra.PreComprobacionNumeroAsiento(RS.Fields(0), Numfactu) Then
                     
                     'Para que la ventana siguiente muestr bien el error
                     SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) VALUES ("
@@ -17778,11 +17788,11 @@ Dim cContaFra As cContabilizarFacturas
         
             'Segun sea cli o pro
             If cadTabla = "scafac" Then
-                SQL = cadTabla & "." & Codigo1 & "=" & DBSet(RS.Fields(0), "T") & " AND scafac.numfactu=" & RS!NumFactu
+                SQL = cadTabla & "." & Codigo1 & "=" & DBSet(RS.Fields(0), "T") & " AND scafac.numfactu=" & RS!Numfactu
                 SQL = SQL & " and scafac.fecfactu=" & DBSet(RS!FecFactu, "F")
                 If PasarFactura(SQL, miCC, ContabilizacionAgrupadaTickets, cContaFra) = False And B Then B = False
             Else
-                SQL = cadTabla & "." & Codigo1 & "=" & DBSet(RS.Fields(0), "N") & " and scafpc.numfactu=" & DBSet(RS!NumFactu, "T")
+                SQL = cadTabla & "." & Codigo1 & "=" & DBSet(RS.Fields(0), "N") & " and scafpc.numfactu=" & DBSet(RS!Numfactu, "T")
                 SQL = SQL & " and scafpc.fecfactu=" & DBSet(RS!FecFactu, "F")
                 If PasarFacturaProv(SQL, miCC, Orden2, cContaFra) = False And B Then B = False
             End If
@@ -17800,7 +17810,7 @@ Dim cContaFra As cContabilizarFacturas
             '----
             
             IncrementarProgres Me.ProgressBarContab, 1
-            Me.lblProgess2(1).Caption = "Insertando Facturas en Contabilidad...   (" & i & " de " & NumFactu & ")"
+            Me.lblProgess2(1).Caption = "Insertando Facturas en Contabilidad...   (" & i & " de " & Numfactu & ")"
             Me.Refresh
             i = i + 1
             RS.MoveNext   'Siguiente factura
@@ -19193,7 +19203,9 @@ Private Sub HacerListadoDtosCliente()
 
 
 
-    
+    lblDtoAct.visible = True
+    lblDtoAct.Caption = "Prepara"
+    lblDtoAct.Refresh
     'Vaciamos
     conn.Execute "DELETE FROM tmpinformes WHERE codusu =" & vUsu.codigo
     
@@ -19226,6 +19238,8 @@ Private Sub HacerListadoDtosCliente()
         miRsAux.MoveFirst
         
         While Not miRsAux.EOF
+            lblDtoAct.Caption = "Cl " & miRsAux!codClien
+            lblDtoAct.Refresh
             codigo = "insert into tmpinformes(codusu,codigo1,campo1,campo2,importe1,importe2,fecha1,porcen1)"
             codigo = codigo & " select " & vUsu.codigo & ",codclien,codfamia,codmarca,dtoline1,dtoline2,fechadto,0"
             codigo = codigo & " from sdtofm where codclien=" & miRsAux!codClien
@@ -19247,6 +19261,8 @@ Private Sub HacerListadoDtosCliente()
     miRsAux.Close
     
     'Si tiene alguno de MARCA
+     lblDtoAct.Caption = "Marca"
+    lblDtoAct.Refresh
     codigo = "Select campo2 from tmpinformes WHERE codusu =" & vUsu.codigo & " AND campo2>=0 GROUP BY 1"
     miRsAux.Open codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
@@ -19256,11 +19272,64 @@ Private Sub HacerListadoDtosCliente()
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    Set miRsAux = Nothing
+  
     
-    
+     lblDtoAct.Caption = "Activ"
+    lblDtoAct.Refresh
     codigo = "UPDATE tmpinformes SET nombre3='Activ.' WHERE codusu =" & vUsu.codigo & " AND porcen1>=1"
     conn.Execute codigo
+    
+    
+    
+    
+    
+    
+    'Enero 2017
+    'Lincaremos con sdtomp , para ello veremos para cada familia porveedor y marca (marca puede ser NULL seran dos procesos
+    
+    For NumRegElim = 1 To 2
+        lblDtoAct.Caption = "Prov (" & NumRegElim & ")"
+        lblDtoAct.Refresh
+        codigo = "select * from sdtomp where "
+        If NumRegElim = 1 Then
+            codigo = codigo & " codmarca is null "
+        Else
+            codigo = codigo & " codmarca>=0 "
+        End If
+        codigo = codigo & " AND (codprove,codfamia) in "
+        codigo = codigo & " (select distinct codfamia,codprove from sfamia ,tmpinformes where "
+        If NumRegElim = 1 Then
+            codigo = codigo & " codmarca is null "
+        Else
+            codigo = codigo & " codmarca>=0 "
+        End If
+        codigo = codigo & " and codusu =" & vUsu.codigo & " and tmpinformes.campo1=sfamia.codfamia )"
+        
+        miRsAux.Open codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not miRsAux.EOF
+            
+            lblDtoAct.Caption = "Fam: " & miRsAux!Codfamia
+            lblDtoAct.Refresh
+            'importeb1,importeb2,importeb3,importeb4  << dtoline1,dtoline2,rap1,rap2
+            codigo = "UPDATE tmpinformes set importeb1=" & DBSet(miRsAux!dtoline1, "N", "S")
+            codigo = codigo & ", importeb2 =" & DBSet(miRsAux!dtoline2, "N", "S")
+            codigo = codigo & ", importeb3 =" & DBSet(miRsAux!Rap1, "N", "S")
+            codigo = codigo & ", importeb4 =" & DBSet(miRsAux!Rap2, "N", "S")
+            codigo = codigo & " WHERE codusu =" & vUsu.codigo
+            codigo = codigo & " AND campo1=" & miRsAux!Codfamia
+            If NumRegElim = 1 Then
+            codigo = codigo & " AND campo2 is null "
+            Else
+                codigo = codigo & " AND campo2 >=0 "
+            End If
+            conn.Execute codigo
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+    
+    
+    Next
+    Set miRsAux = Nothing
     
     
     cadTitulo = "Descuento cliente / actividad"
@@ -19268,7 +19337,6 @@ Private Sub HacerListadoDtosCliente()
     cadNomRPT = "rFacDtoCliACtiv.rpt"
     
     LlamarImprimir False
-    
     
     
     Screen.MousePointer = vbDefault

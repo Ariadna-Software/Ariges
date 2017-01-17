@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmInventario 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Entrada de Inventario Real"
@@ -117,7 +117,7 @@ Begin VB.Form frmAlmInventario
    Begin VB.TextBox txtAux 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
-      BackColor       =   &H80000013&
+      BackColor       =   &H00C0C0C0&
       BorderStyle     =   0  'None
       Height          =   320
       Left            =   1200
@@ -389,7 +389,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim cad As String
+Dim Cad As String
 
     On Error GoTo Error1
     
@@ -407,19 +407,19 @@ Dim cad As String
                     CargaTxtAux True, True
                     cmdImportar.visible = True
                 Else 'No existen registros en la tabla sinven para ese criterio de búsqueda
-                    cad = "No se esta realizando inventario para esos criterios de búsqueda."
-                    MsgBox cad, vbInformation
+                    Cad = "No se esta realizando inventario para esos criterios de búsqueda."
+                    MsgBox Cad, vbInformation
                     PonerFoco Text1(0)
                 End If
             Else
-                cad = "Criterio de Búsqueda incompleto." & vbCrLf
-                cad = cad & "Debe introducir ambos criterios de búsqueda: cod. almacen, "
+                Cad = "Criterio de Búsqueda incompleto." & vbCrLf
+                Cad = Cad & "Debe introducir ambos criterios de búsqueda: cod. almacen, "
                 If vParamAplic.InventarioxProv Then
-                    cad = cad & "Cod. Proveedor"
+                    Cad = Cad & "Cod. Proveedor"
                 Else
-                    cad = cad & "Cod. Familia"
+                    Cad = Cad & "Cod. Familia"
                 End If
-                MsgBox cad, vbExclamation
+                MsgBox Cad, vbExclamation
                 PonerFoco Text1(0)
             End If
             
@@ -507,19 +507,23 @@ Private Sub Form_Load()
     PonerModo 0
     CargaGrid (Modo = 2)
     
+    
+            
+    
     Screen.MousePointer = vbDefault
 End Sub
 
 
+
 Private Sub CargaGrid(enlaza As Boolean)
 Dim i As Byte
-Dim Sql As String
+Dim SQL As String
 On Error GoTo ECarga
 
     gridCargado = False
     
-    Sql = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.Data1, Sql, PrimeraVez
+    SQL = MontaSQLCarga(enlaza)
+    CargaGridGnral DataGrid1, Me.Data1, SQL, PrimeraVez
     
     PrimeraVez = False
         
@@ -696,7 +700,7 @@ End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
 Dim campo As String
-Dim Tabla As String
+Dim tabla As String
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
@@ -711,18 +715,18 @@ Dim Tabla As String
         Select Case Index
             Case 0 'Codigo Almacen
                 campo = "nomalmac"
-                Tabla = "salmpr"
+                tabla = "salmpr"
             Case 1 'Codigo Familia/ Cod. Proveedor
                 If vParamAplic.InventarioxProv Then
                 'Realizar inventario por Proveedor
                     campo = "nomprove"
-                    Tabla = "sprove"
+                    tabla = "sprove"
                 Else
                     campo = "nomfamia"
-                    Tabla = "sfamia"
+                    tabla = "sfamia"
                 End If
         End Select
-        Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, Tabla, campo)
+        Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, tabla, campo)
         If Text1(Index).Text <> "" And Text2(Index).Text = "" Then PonerFoco Text1(Index)
      End If
 End Sub
@@ -732,7 +736,7 @@ Private Sub txtAux_GotFocus()
     ConseguirFocoLin txtAux
 End Sub
 
-Private Sub TxtAux_KeyDown(KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(KeyCode As Integer, Shift As Integer)
 On Error GoTo EKeyD
     If KeyCode = 38 Or KeyCode = 40 Then
         ModificarExistencia
@@ -815,7 +819,7 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
        
     Modo = Kmodo
     PonerIndicador lblIndicador, Modo
@@ -826,12 +830,12 @@ Dim b As Boolean
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
 '    BloquearText1 Me, Modo
-    b = (Modo <> 1)
-    BloquearTxt Text1(0), b
-    BloquearTxt Text1(1), b
+    B = (Modo <> 1)
+    BloquearTxt Text1(0), B
+    BloquearTxt Text1(1), B
     
-    b = (Modo = 0) Or (Modo = 2)
-    PonerBotonCabecera b
+    B = (Modo = 0) Or (Modo = 2)
+    PonerBotonCabecera B
    
     Select Case Kmodo
 '    Case 0    'Modo Inicial
@@ -849,15 +853,15 @@ Dim b As Boolean
 '        lblIndicador.Caption = "MODIFICAR"
     End Select
            
-    b = Modo <> 0 And Modo <> 2 And Modo <> 4
+    B = Modo <> 0 And Modo <> 2 And Modo <> 4
    
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
+        Me.imgBuscar(i).Enabled = B
     Next i
 
-    b = (Modo = 1)
-    Toolbar1.Buttons(1).Enabled = Not b
-    Toolbar1.Buttons(4).Enabled = Not b And (Not (Modo = 0 Or Modo = 4))
+    B = (Modo = 1)
+    Toolbar1.Buttons(1).Enabled = Not B
+    Toolbar1.Buttons(4).Enabled = Not B And (Not (Modo = 0 Or Modo = 4))
 
     PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario
@@ -880,39 +884,39 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "SELECT sinven.codartic, sartic.nomartic, "
-    Sql = Sql & " sinven.fechainv, sinven.horainve, sinven.existenc, sinven.existenc - salmac.canstock as diferencia "
-    Sql = Sql & " FROM (sinven INNER JOIN sartic on sinven.codartic=sartic.codartic) INNER JOIN salmac ON sinven.codalmac=salmac.codalmac and sinven.codartic=salmac.codartic"
-    Sql = Sql & " INNER JOIN salmpr ON sinven.codalmac=salmpr.codalmac"
+    SQL = "SELECT sinven.codartic, sartic.nomartic, "
+    SQL = SQL & " sinven.fechainv, sinven.horainve, sinven.existenc, sinven.existenc - salmac.canstock as diferencia "
+    SQL = SQL & " FROM (sinven INNER JOIN sartic on sinven.codartic=sartic.codartic) INNER JOIN salmac ON sinven.codalmac=salmac.codalmac and sinven.codartic=salmac.codartic"
+    SQL = SQL & " INNER JOIN salmpr ON sinven.codalmac=salmpr.codalmac"
     
     If enlaza Then
-        Sql = Sql & " WHERE sinven.codalmac = " & Text1(0).Text & " AND "
+        SQL = SQL & " WHERE sinven.codalmac = " & Text1(0).Text & " AND "
         If vParamAplic.InventarioxProv Then
-            Sql = Sql & "sinven.codprove=" & Text1(1).Text
+            SQL = SQL & "sinven.codprove=" & Text1(1).Text
         Else
-            Sql = Sql & "sinven.codfamia=" & Text1(1).Text
+            SQL = SQL & "sinven.codfamia=" & Text1(1).Text
         End If
     Else
-        Sql = Sql & " WHERE sinven.codalmac = -1"
+        SQL = SQL & " WHERE sinven.codalmac = -1"
     End If
 
     If vParamAplic.InventarioxProv Then
         '-- Modificado por LAURA 29/08/2007  --> DAVID 13Junio11  Vuelvo a poner codartic
-        Sql = Sql & " ORDER BY sinven.codprove, sinven.codfamia, codartic"
+        SQL = SQL & " ORDER BY sinven.codprove, sinven.codfamia, codartic"
         'Sql = Sql & " ORDER BY sinven.codprove, sinven.codfamia, nomartic"
     Else
         '-- Modificado por LAURA 29/08/2007
         'SQL = SQL & " ORDER BY sinven.codfamia, codartic"
         If vParamAplic.SituaEnCodigoArticulo Then
             'Por codigo de articulopac
-            Sql = Sql & " ORDER BY sinven.codfamia, sinven.codartic"
+            SQL = SQL & " ORDER BY sinven.codfamia, sinven.codartic"
         Else
-            Sql = Sql & " ORDER BY sinven.codfamia, nomartic"
+            SQL = SQL & " ORDER BY sinven.codfamia, nomartic"
         End If
     End If
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 
 
@@ -960,10 +964,10 @@ Private Function DatosOk() As Boolean
 End Function
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera(B As Boolean)
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then Me.lblIndicador.Caption = ""
 End Sub
 
 
@@ -974,7 +978,7 @@ End Sub
 
 Private Function ActualizarExistencia(canti As String) As Boolean
 'Actualiza la cantidad de stock Inventariada (Existencia Real en Almacen)
-Dim Sql As String
+Dim SQL As String
 Dim ADonde As String
 
     On Error GoTo EActualizar
@@ -983,28 +987,28 @@ Dim ADonde As String
     'Actualizar la Tabla: sinven con la cantidad introducida
     '-------------------------------------------------------
     ADonde = "Modificando datos de Inventario (Tabla: sinven)."
-    Sql = "UPDATE sinven Set existenc = " & DBSet(canti, "N")
-    Sql = Sql & " WHERE codartic =" & DBSet(Data1.Recordset!codartic, "T") & " AND "
-    Sql = Sql & " codalmac =" & Val(Text1(0).Text)
-    conn.Execute Sql
+    SQL = "UPDATE sinven Set existenc = " & DBSet(canti, "N")
+    SQL = SQL & " WHERE codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND "
+    SQL = SQL & " codalmac =" & Val(Text1(0).Text)
+    conn.Execute SQL
     
     
     'Actualizar la Tabla: salmac el campo stockinv con la cantidad introducida
     '-------------------------------------------------------------------------
     ADonde = "Modificando datos de Articulos en Almacen. Tabla: salmac."
-    Sql = "UPDATE salmac Set stockinv = " & DBSet(canti, "N")
-    Sql = Sql & " WHERE codartic =" & DBSet(Data1.Recordset!codartic, "T") & " AND "
-    Sql = Sql & " codalmac =" & Val(Text1(0).Text)
-    conn.Execute Sql
+    SQL = "UPDATE salmac Set stockinv = " & DBSet(canti, "N")
+    SQL = SQL & " WHERE codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND "
+    SQL = SQL & " codalmac =" & Val(Text1(0).Text)
+    conn.Execute SQL
     
     ActualizarExistencia = True
         
 EActualizar:
     If Err.Number <> 0 Then
         'Hay error , almacenamos y salimos
-         Sql = "Actualizando Diferencias de Inventario." & vbCrLf & "--------------------------------------------" & vbCrLf
-         Sql = Sql & ADonde
-         MuestraError Err.Number, Sql, Err.Description
+         SQL = "Actualizando Diferencias de Inventario." & vbCrLf & "--------------------------------------------" & vbCrLf
+         SQL = SQL & ADonde
+         MuestraError Err.Number, SQL, Err.Description
          conn.RollbackTrans
          ActualizarExistencia = False
     Else
@@ -1045,9 +1049,9 @@ Dim Indicador As String
 End Function
 
 '----------------------- RAFA: Fichero de inventario QTD
-Private Function ActualizarExistencia2(canti As String, codartic As String) As Boolean
+Private Function ActualizarExistencia2(canti As String, codArtic As String) As Boolean
 'Actualiza la cantidad de stock Inventariada (Existencia Real en Almacen)
-Dim Sql As String
+Dim SQL As String
 Dim ADonde As String
 
     On Error GoTo EActualizar
@@ -1056,28 +1060,28 @@ Dim ADonde As String
     'Actualizar la Tabla: sinven con la cantidad introducida
     '-------------------------------------------------------
     ADonde = "Modificando datos de Inventario (Tabla: sinven)."
-    Sql = "UPDATE sinven Set existenc = " & DBSet(canti, "N")
-    Sql = Sql & " WHERE codartic =" & DBSet(codartic, "T") & " AND "
-    Sql = Sql & " codalmac =" & Val(Text1(0).Text)
-    conn.Execute Sql
+    SQL = "UPDATE sinven Set existenc = " & DBSet(canti, "N")
+    SQL = SQL & " WHERE codartic =" & DBSet(codArtic, "T") & " AND "
+    SQL = SQL & " codalmac =" & Val(Text1(0).Text)
+    conn.Execute SQL
     
     
     'Actualizar la Tabla: salmac el campo stockinv con la cantidad introducida
     '-------------------------------------------------------------------------
     ADonde = "Modificando datos de Articulos en Almacen. Tabla: salmac."
-    Sql = "UPDATE salmac Set stockinv = " & DBSet(canti, "N")
-    Sql = Sql & " WHERE codartic =" & DBSet(codartic, "T") & " AND "
-    Sql = Sql & " codalmac =" & Val(Text1(0).Text)
-    conn.Execute Sql
+    SQL = "UPDATE salmac Set stockinv = " & DBSet(canti, "N")
+    SQL = SQL & " WHERE codartic =" & DBSet(codArtic, "T") & " AND "
+    SQL = SQL & " codalmac =" & Val(Text1(0).Text)
+    conn.Execute SQL
     
     ActualizarExistencia2 = True
         
 EActualizar:
     If Err.Number <> 0 Then
         'Hay error , almacenamos y salimos
-         Sql = "Actualizando Diferencias de Inventario." & vbCrLf & "--------------------------------------------" & vbCrLf
-         Sql = Sql & ADonde
-         MuestraError Err.Number, Sql, Err.Description
+         SQL = "Actualizando Diferencias de Inventario." & vbCrLf & "--------------------------------------------" & vbCrLf
+         SQL = SQL & ADonde
+         MuestraError Err.Number, SQL, Err.Description
          conn.RollbackTrans
          ActualizarExistencia2 = False
     Else
@@ -1090,14 +1094,14 @@ Private Function ProcesarFicheroInventario(Fichero As String) As Boolean
     '----- ProcesarFicheroInventario:
     '   Procesa el fichero pasado en el parámetro fichero y carga los datos correspondientes.
     '   si hay errores los graba en el fichero invddmmaahhmm.log
-    Dim Sql As String
-    Dim Rs As ADODB.Recordset
+    Dim SQL As String
+    Dim RS As ADODB.Recordset
     Dim NfLeer As Integer ' controlador de fichero
     Dim NfLog As Integer ' controlador del fichero log
     Dim LineaLeida As String ' la linea leida del fichero
     Dim LineaLog As String ' la linea a grabar en el log
-    Dim Codigo As String
-    Dim Cantidad As String
+    Dim codigo As String
+    Dim cantidad As String
     Dim i As Integer
     Dim pos As Integer
     On Error GoTo err_ProcesarFichero
@@ -1114,30 +1118,30 @@ Private Function ProcesarFicheroInventario(Fichero As String) As Boolean
         DoEvents
         pos = InStr(1, LineaLeida, ",")
         If pos Then
-            Codigo = Mid(LineaLeida, 1, pos - 1)
-            Cantidad = Right(LineaLeida, Len(LineaLeida) - pos)
+            codigo = Mid(LineaLeida, 1, pos - 1)
+            cantidad = Right(LineaLeida, Len(LineaLeida) - pos)
             '-- Ahora hay que buscar el artículo asociado
             '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN y quitar de la cabecera
 '            Sql = "select * from sartic where codigoea = '" & Codigo & "'"
-            Sql = "select * from sarti3 where codigoea = '" & Codigo & "'"
+            SQL = "select * from sarti3 where codigoea = '" & codigo & "'"
             '----
             
-            Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly
-            If Not Rs.EOF Then
+            Set RS = New ADODB.Recordset
+            RS.Open SQL, conn, adOpenForwardOnly
+            If Not RS.EOF Then
                 '-- Si que lo ha encontrado vamos a actualizarlo
-                If Not ActualizarExistencia2(Cantidad, Rs!codartic) Then
+                If Not ActualizarExistencia2(cantidad, RS!codArtic) Then
                     LineaLog = "Linea:" & CStr(i) & "|Error actualizando existencias " & _
-                        " EAN: " & Codigo & _
-                        " ARTICULO: " & Rs!codartic & _
-                        " CANTIDAD: " & Cantidad
+                        " EAN: " & codigo & _
+                        " ARTICULO: " & RS!codArtic & _
+                        " CANTIDAD: " & cantidad
                     Print #NfLog, LineaLog
                     ProcesarFicheroInventario = False
                 End If
             Else
                 LineaLog = "Linea:" & CStr(i) & "|No se ha encontrado artículo asociado " & _
-                    " EAN: " & Codigo & _
-                    " CANTIDAD: " & Cantidad
+                    " EAN: " & codigo & _
+                    " CANTIDAD: " & cantidad
                 Print #NfLog, LineaLog
                 ProcesarFicheroInventario = False
             End If
