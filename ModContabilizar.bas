@@ -788,7 +788,7 @@ Dim SQLcuentas As String
                 If CtaBloq.Count > 0 Then
                     'EXISTEN CUENTAS BLOQUEADAS
                     For Ic = 1 To CtaBloq.Count
-                        QueCuentasSon = CtaBloq.item(Ic)
+                        QueCuentasSon = CtaBloq.Item(Ic)
                         SQL = SQL & RecuperaValor(QueCuentasSon, 1) & "   " & RecuperaValor(QueCuentasSon, 2) & vbCrLf
                     Next
                     SQL = "Cuentas bloqueadas en contabilidad: " & vbCrLf & String(30, "=") & vbCrLf & SQL
@@ -1089,7 +1089,7 @@ Dim ListaFTG As Collection
     
         C = "select codccost,count(*) from slifac where codtipom='FTI' AND"
         C = C & " (numfactu,fecfactu,codtipom) in ( select sfactik.numfactu,sfactik.fecfactu,'FTI' from sfactik "
-        C = C & " where " & ListaFTG.item(i) & ") GROUP BY codccost order by codccost desc"
+        C = C & " where " & ListaFTG.Item(i) & ") GROUP BY codccost order by codccost desc"
         miRsAux.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             If IsNull(miRsAux.Fields(0)) Then
@@ -1425,8 +1425,8 @@ Dim SQL2 As String
             
             'fecliqcl,nommacta,dirdatos,codpobla,despobla,desprovi,nifdatos,codpais,dpto,codagente,codforpa,escorrecta,
             SQL = SQL & DBSet(RS!FecFactu, "F") & "," & DBSet(RS!Nomclien, "T") & "," & DBSet(RS!domclien, "T", "S") & ","
-            SQL = SQL & DBSet(RS!codpobla, "F", "S") & "," & DBSet(RS!pobclien, "T", "S") & "," & DBSet(RS!proclien, "T", "S") & ","
-            SQL = SQL & DBSet(RS!nifClien, "F", "S") & "," & DBSet(RS!codpais, "T", "S") & "," & DBSet(RS!CodDirec, "T", "S") & ","
+            SQL = SQL & DBSet(RS!codpobla, "T", "S") & "," & DBSet(RS!pobclien, "T", "S") & "," & DBSet(RS!proclien, "T", "S") & ","
+            SQL = SQL & DBSet(RS!nifClien, "T", "S") & "," & DBSet(RS!codpais, "T", "S") & "," & DBSet(RS!CodDirec, "T", "S") & ","
             SQL = SQL & DBSet(RS!CodAgent, "N", "S") & "," & RS!codforpa & ",1,"
             
             
@@ -2500,7 +2500,7 @@ Dim ImporAux As Currency
                 'fecliqcl,nommacta,dirdatos,codpobla,despobla,desprovi,nifdatos,codpais,dpto,codagente,codforpa,escorrecta,
                 SQL = SQL & "," & DBSet(RS!nomprove, "T") & "," & DBSet(RS!domprove, "T", "S") & ","
                 SQL = SQL & DBSet(RS!codpobla, "T", "S") & "," & DBSet(RS!pobprove, "T", "S") & "," & DBSet(RS!proprove, "T", "S") & ","
-                SQL = SQL & DBSet(RS!nifProve, "F", "S") & "," & DBSet(RS!codpais, "T", "S") & ","
+                SQL = SQL & DBSet(RS!nifProve, "t", "S") & "," & DBSet(RS!codpais, "T", "S") & ","
                 SQL = SQL & RS!codforpa & ","
                 
   

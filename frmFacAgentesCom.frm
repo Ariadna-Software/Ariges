@@ -774,53 +774,61 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
     
     'Copmpruebo si esta vinculado a algun cliente
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "sclien", "codagent", CStr(Data1.Recordset!CodAgent))
-    If Cad = "" Then Cad = "0"
-    If Val(Cad) > 0 Then
+    cad = DevuelveDesdeBD(conAri, "count(*)", "sclien", "codagent", CStr(Data1.Recordset!CodAgent))
+    If cad = "" Then cad = "0"
+    If Val(cad) > 0 Then
         MsgBox "Existen clientes asociados a este agente.", vbExclamation
+        Exit Sub
+    End If
+    cad = DevuelveDesdeBD(conAri, "count(*)", "sclien", "visitador", CStr(Data1.Recordset!CodAgent))
+    If cad = "" Then cad = "0"
+    If Val(cad) > 0 Then
+        MsgBox "Existen clientes(visitador) asociados a este agente.", vbExclamation
         Exit Sub
     End If
     
     
+    
+    
     'Copmpruebo si esta vinculado a algun trabajador
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "straba", "codagent", CStr(Data1.Recordset!CodAgent))
-    If Cad = "" Then Cad = "0"
-    If Val(Cad) > 0 Then
+    cad = DevuelveDesdeBD(conAri, "count(*)", "straba", "codagent", CStr(Data1.Recordset!CodAgent))
+    If cad = "" Then cad = "0"
+    If Val(cad) > 0 Then
         MsgBox "Existe trabajador asociado a este agente.", vbExclamation
         Exit Sub
     End If
     
     If vParamAplic.ContabilidadNueva Then
-        Cad = DevuelveDesdeBD(conConta, "count(*)", "cobros", "agente", CStr(Data1.Recordset!CodAgent))
+        cad = DevuelveDesdeBD(conConta, "count(*)", "cobros", "agente", CStr(Data1.Recordset!CodAgent))
     Else
-        Cad = DevuelveDesdeBD(conConta, "count(*)", "scobro", "agente", CStr(Data1.Recordset!CodAgent))
+        cad = DevuelveDesdeBD(conConta, "count(*)", "scobro", "agente", CStr(Data1.Recordset!CodAgent))
     End If
-    If Cad <> "" Then
-        If Val(Cad) = 0 Then Cad = ""
+    If cad <> "" Then
+        If Val(cad) = 0 Then cad = ""
     End If
     
-    If Cad = "" Then
+    If cad = "" Then
     
-            Cad = "¿Seguro que desea eliminar el Agente Comercial? " & vbCrLf
-            Cad = Cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), "0000")
-            Cad = Cad & vbCrLf & "Descripción: " & Data1.Recordset.Fields(1)
-            If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+            cad = "¿Seguro que desea eliminar el Agente Comercial? " & vbCrLf
+            cad = cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), "0000")
+            cad = cad & vbCrLf & "Descripción: " & Data1.Recordset.Fields(1)
+            If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     Else
         'EXSITEN Vtos
-        Cad = "Existen " & Cad & " vencimiento(s) en Arimoney para este agente."
+        cad = "Existen " & cad & " vencimiento(s) en Arimoney para este agente."
         If vUsu.Nivel > 1 Then
-            MsgBox Cad, vbExclamation
+            MsgBox cad, vbExclamation
             Exit Sub
         Else
-            Cad = Cad & vbCrLf & "¿Continuar?"
-            If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+            cad = cad & vbCrLf & "¿Continuar?"
+            If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
         End If
     End If
     'Borramos
@@ -829,12 +837,12 @@ Dim Cad As String
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        Cad = "Delete from sagent where codagent=" & Data1.Recordset!CodAgent
-        conn.Execute Cad
+        cad = "Delete from sagent where codagent=" & Data1.Recordset!CodAgent
+        conn.Execute cad
         
         'En tesoreria
-        Cad = "DELETE FROM agentes WHERE codigo = " & Data1.Recordset!CodAgent
-        ConnConta.Execute Cad
+        cad = "DELETE FROM agentes WHERE codigo = " & Data1.Recordset!CodAgent
+        ConnConta.Execute cad
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
         Else
@@ -851,16 +859,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
     
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1113,17 +1121,17 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim Cad As String
+Dim cad As String
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(0), 30, "Código")
-        Cad = Cad & ParaGrid(Text1(1), 70, "Denominacion")
+        cad = ""
+        cad = cad & ParaGrid(Text1(0), 30, "Código")
+        cad = cad & ParaGrid(Text1(1), 70, "Denominacion")
 '        Cad = Cad & ParaGrid(Combo1, 20, "Tipo Pago")
-        If Cad <> "" Then
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = NombreTabla
             frmB.vSQL = cadB
             HaDevueltoDatos = False
@@ -1341,11 +1349,11 @@ End Sub
 
 
 Private Sub PosicionarData()
-Dim Cad As String
+Dim cad As String
 Dim Indicador As String
 
-    Cad = "(codagent=" & Text1(0).Text & ")"
-    If SituarData(Data1, Cad, Indicador) Then
+    cad = "(codagent=" & Text1(0).Text & ")"
+    If SituarData(Data1, cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else

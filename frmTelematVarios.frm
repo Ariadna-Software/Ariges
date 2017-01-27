@@ -14,11 +14,38 @@ Begin VB.Form frmTelematVarios
    ScaleWidth      =   12930
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameProgress 
+      Height          =   1215
+      Left            =   6600
+      TabIndex        =   14
+      Top             =   2760
+      Visible         =   0   'False
+      Width           =   4815
+      Begin MSComctlLib.ProgressBar Pb1 
+         Height          =   375
+         Left            =   240
+         TabIndex        =   22
+         Top             =   720
+         Width           =   4335
+         _ExtentX        =   7646
+         _ExtentY        =   661
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.Label Label2 
+         Caption         =   "progreso"
+         Height          =   375
+         Left            =   240
+         TabIndex        =   15
+         Top             =   360
+         Width           =   4215
+      End
+   End
    Begin VB.Frame FrameDescuadreRefencias 
       Height          =   4455
       Left            =   5760
       TabIndex        =   42
-      Top             =   480
+      Top             =   1200
       Visible         =   0   'False
       Width           =   6135
       Begin VB.CheckBox chkCabel 
@@ -265,6 +292,184 @@ Begin VB.Form frmTelematVarios
          Width           =   615
       End
    End
+   Begin VB.Frame FrameCruzar 
+      Height          =   4695
+      Left            =   240
+      TabIndex        =   16
+      Top             =   120
+      Width           =   10815
+      Begin VB.CheckBox chkCabel 
+         Caption         =   "Proveedor CABEL"
+         Height          =   195
+         Index           =   2
+         Left            =   7320
+         TabIndex        =   63
+         Top             =   360
+         Width           =   2055
+      End
+      Begin VB.CommandButton cmdBuscaArticulos 
+         Height          =   495
+         Left            =   6360
+         Picture         =   "frmTelematVarios.frx":0408
+         Style           =   1  'Graphical
+         TabIndex        =   25
+         ToolTipText     =   "Busca articulos"
+         Top             =   240
+         Width           =   495
+      End
+      Begin VB.CommandButton cmdCruzar 
+         Caption         =   "Actualizar"
+         Height          =   375
+         Left            =   7920
+         TabIndex        =   21
+         Top             =   4200
+         Width           =   1335
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "Cancelar"
+         Height          =   375
+         Index           =   1
+         Left            =   9360
+         TabIndex        =   20
+         Top             =   4200
+         Width           =   1215
+      End
+      Begin VB.TextBox txtProve 
+         Height          =   285
+         Index           =   1
+         Left            =   1560
+         TabIndex        =   18
+         Text            =   "Text1"
+         Top             =   360
+         Width           =   975
+      End
+      Begin VB.TextBox txtDescProve 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   1
+         Left            =   2640
+         TabIndex        =   17
+         Text            =   "Text2"
+         Top             =   360
+         Width           =   3495
+      End
+      Begin MSComctlLib.ListView lw2 
+         Height          =   3135
+         Left            =   240
+         TabIndex        =   24
+         Top             =   840
+         Width           =   10335
+         _ExtentX        =   18230
+         _ExtentY        =   5530
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         Checkboxes      =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   5
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Cod.Tele."
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Nombre"
+            Object.Width           =   7168
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Cod.artic."
+            Object.Width           =   3175
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Fecha"
+            Object.Width           =   2117
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   4
+            Text            =   "Precio"
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin VB.Image imgayuda 
+         Height          =   240
+         Index           =   0
+         Left            =   9840
+         ToolTipText     =   "Buscar cliente"
+         Top             =   360
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   2520
+         TabIndex        =   26
+         Top             =   4200
+         Width           =   3735
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   3
+         Left            =   360
+         Picture         =   "frmTelematVarios.frx":0E0A
+         ToolTipText     =   "Seleccionar todo"
+         Top             =   4200
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   2
+         Left            =   720
+         Picture         =   "frmTelematVarios.frx":0F54
+         ToolTipText     =   "Quitar seleccion"
+         Top             =   4200
+         Width           =   240
+      End
+      Begin VB.Image imgPorv 
+         Height          =   240
+         Index           =   1
+         Left            =   1200
+         Picture         =   "frmTelematVarios.frx":109E
+         ToolTipText     =   "Buscar centro coste"
+         Top             =   360
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Proveedor"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   4
+         Left            =   240
+         TabIndex        =   19
+         Top             =   360
+         Width           =   855
+      End
+   End
    Begin VB.Frame FrameImprimirTel 
       Height          =   4455
       Left            =   240
@@ -322,9 +527,9 @@ Begin VB.Form frmTelematVarios
       End
       Begin VB.ComboBox Combo1 
          Height          =   315
-         ItemData        =   "frmTelematVarios.frx":0408
+         ItemData        =   "frmTelematVarios.frx":11A0
          Left            =   360
-         List            =   "frmTelematVarios.frx":0415
+         List            =   "frmTelematVarios.frx":11AD
          Style           =   2  'Dropdown List
          TabIndex        =   33
          Top             =   3720
@@ -420,7 +625,7 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   3
          Left            =   1080
-         Picture         =   "frmTelematVarios.frx":0438
+         Picture         =   "frmTelematVarios.frx":11D0
          Top             =   2640
          Width           =   240
       End
@@ -457,7 +662,7 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   2
          Left            =   1080
-         Picture         =   "frmTelematVarios.frx":053A
+         Picture         =   "frmTelematVarios.frx":12D2
          Top             =   2280
          Width           =   240
       End
@@ -501,7 +706,7 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   3
          Left            =   1080
-         Picture         =   "frmTelematVarios.frx":063C
+         Picture         =   "frmTelematVarios.frx":13D4
          ToolTipText     =   "Buscar centro coste"
          Top             =   1440
          Width           =   240
@@ -510,82 +715,84 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   2
          Left            =   1080
-         Picture         =   "frmTelematVarios.frx":073E
+         Picture         =   "frmTelematVarios.frx":14D6
          ToolTipText     =   "Buscar centro coste"
          Top             =   1080
          Width           =   240
       End
    End
-   Begin VB.Frame FrameCruzar 
-      Height          =   4695
+   Begin VB.Frame FrameAticulos_A_Obsoletos 
+      Height          =   7935
       Left            =   240
-      TabIndex        =   16
-      Top             =   120
-      Width           =   10815
-      Begin VB.CheckBox chkCabel 
-         Caption         =   "Proveedor CABEL"
-         Height          =   195
-         Index           =   2
-         Left            =   7320
-         TabIndex        =   63
-         Top             =   360
-         Width           =   2775
-      End
-      Begin VB.CommandButton cmdBuscaArticulos 
-         Height          =   495
-         Left            =   6360
-         Picture         =   "frmTelematVarios.frx":0840
-         Style           =   1  'Graphical
-         TabIndex        =   25
-         ToolTipText     =   "Busca articulos"
-         Top             =   240
-         Width           =   495
-      End
-      Begin VB.CommandButton cmdCruzar 
-         Caption         =   "Actualizar"
+      TabIndex        =   77
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   12735
+      Begin VB.CommandButton cmdCargaArtParaObsoletos 
          Height          =   375
-         Left            =   7920
-         TabIndex        =   21
-         Top             =   4200
-         Width           =   1335
+         Left            =   6360
+         Picture         =   "frmTelematVarios.frx":15D8
+         Style           =   1  'Graphical
+         TabIndex        =   73
+         ToolTipText     =   "Carga datos"
+         Top             =   360
+         Width           =   375
+      End
+      Begin VB.CommandButton cmdPasarObsoletos 
+         Caption         =   "Pasar obsoletos"
+         Height          =   375
+         Left            =   9360
+         TabIndex        =   75
+         Top             =   7320
+         Width           =   1455
+      End
+      Begin VB.TextBox txtFecha 
+         Height          =   285
+         Index           =   2
+         Left            =   5040
+         TabIndex        =   72
+         Text            =   "Text1"
+         Top             =   480
+         Width           =   1215
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "Cancelar"
          Height          =   375
-         Index           =   1
-         Left            =   9360
-         TabIndex        =   20
-         Top             =   4200
+         Index           =   4
+         Left            =   11040
+         TabIndex        =   76
+         Top             =   7320
          Width           =   1215
       End
       Begin VB.TextBox txtProve 
          Height          =   285
-         Index           =   1
-         Left            =   1560
-         TabIndex        =   18
+         Index           =   6
+         Left            =   240
+         TabIndex        =   71
          Text            =   "Text1"
-         Top             =   360
-         Width           =   975
+         Top             =   480
+         Width           =   855
       End
       Begin VB.TextBox txtDescProve 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
          Height          =   285
-         Index           =   1
-         Left            =   2640
-         TabIndex        =   17
+         Index           =   6
+         Left            =   1200
+         TabIndex        =   78
          Text            =   "Text2"
-         Top             =   360
-         Width           =   3495
+         Top             =   480
+         Width           =   3735
       End
-      Begin MSComctlLib.ListView lw2 
-         Height          =   3135
+      Begin MSComctlLib.ListView lw3 
+         Height          =   6135
          Left            =   240
-         TabIndex        =   24
-         Top             =   840
-         Width           =   10335
-         _ExtentX        =   18230
-         _ExtentY        =   5530
+         TabIndex        =   74
+         Top             =   960
+         Width           =   12135
+         _ExtentX        =   21405
+         _ExtentY        =   10821
+         SortKey         =   2
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -599,73 +806,101 @@ Begin VB.Form frmTelematVarios
          Appearance      =   1
          NumItems        =   5
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Cod.Tele."
-            Object.Width           =   2540
+            Text            =   "Fam"
+            Object.Width           =   2011
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
-            Text            =   "Nombre"
-            Object.Width           =   7168
+            Text            =   "Descripcion familia"
+            Object.Width           =   6286
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
-            Text            =   "Cod.artic."
+            Text            =   "Cod.Art"
             Object.Width           =   3175
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "Fecha"
-            Object.Width           =   2117
+            Text            =   "Articulo"
+            Object.Width           =   6615
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
             SubItemIndex    =   4
-            Text            =   "Precio"
+            Text            =   "Stock"
             Object.Width           =   2540
          EndProperty
       End
-      Begin VB.Label Label3 
-         Caption         =   "Label3"
+      Begin VB.Label Label1 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   9.75
             Charset         =   0
-            Weight          =   400
+            Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   375
-         Left            =   2520
-         TabIndex        =   26
-         Top             =   4200
-         Width           =   3735
+         Height          =   255
+         Index           =   11
+         Left            =   1320
+         TabIndex        =   82
+         Tag             =   "Leyendo datos"
+         Top             =   7440
+         Width           =   7335
       End
-      Begin VB.Image imgCheck 
+      Begin VB.Label Label1 
+         Caption         =   "Articulos del proveedor indicado o fecha cambio menor que la seleccionada"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   10
+         Left            =   6840
+         TabIndex        =   81
+         Top             =   480
+         Width           =   5775
+      End
+      Begin VB.Image imgF 
          Height          =   240
-         Index           =   3
-         Left            =   360
-         Picture         =   "frmTelematVarios.frx":1242
-         ToolTipText     =   "Seleccionar todo"
-         Top             =   4200
+         Index           =   2
+         Left            =   6000
+         Picture         =   "frmTelematVarios.frx":1FDA
+         ToolTipText     =   "Buscar centro coste"
+         Top             =   240
          Width           =   240
       End
       Begin VB.Image imgCheck 
          Height          =   240
-         Index           =   2
-         Left            =   720
-         Picture         =   "frmTelematVarios.frx":138C
+         Index           =   5
+         Left            =   240
+         Picture         =   "frmTelematVarios.frx":2564
+         ToolTipText     =   "Seleccionar todo"
+         Top             =   7440
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   4
+         Left            =   600
+         Picture         =   "frmTelematVarios.frx":26AE
          ToolTipText     =   "Quitar seleccion"
-         Top             =   4200
+         Top             =   7440
          Width           =   240
       End
       Begin VB.Image imgPorv 
          Height          =   240
-         Index           =   1
-         Left            =   1200
-         Picture         =   "frmTelematVarios.frx":14D6
+         Index           =   6
+         Left            =   1080
+         Picture         =   "frmTelematVarios.frx":27F8
          ToolTipText     =   "Buscar centro coste"
-         Top             =   360
+         Top             =   240
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -680,38 +915,20 @@ Begin VB.Form frmTelematVarios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   4
+         Index           =   8
          Left            =   240
-         TabIndex        =   19
-         Top             =   360
+         TabIndex        =   79
+         Top             =   240
          Width           =   855
       End
-   End
-   Begin VB.Frame FrameProgress 
-      Height          =   1215
-      Left            =   6600
-      TabIndex        =   14
-      Top             =   2760
-      Visible         =   0   'False
-      Width           =   4815
-      Begin MSComctlLib.ProgressBar Pb1 
-         Height          =   375
-         Left            =   240
-         TabIndex        =   22
-         Top             =   720
-         Width           =   4335
-         _ExtentX        =   7646
-         _ExtentY        =   661
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin VB.Label Label2 
-         Caption         =   "progreso"
-         Height          =   375
-         Left            =   240
-         TabIndex        =   15
-         Top             =   360
-         Width           =   4215
+      Begin VB.Label Label1 
+         Caption         =   "F.ult.cambio"
+         Height          =   255
+         Index           =   9
+         Left            =   5040
+         TabIndex        =   80
+         Top             =   240
+         Width           =   855
       End
    End
    Begin VB.Frame FrameActprec 
@@ -721,13 +938,13 @@ Begin VB.Form frmTelematVarios
       Top             =   0
       Width           =   12615
       Begin VB.CheckBox chkCabel 
-         Caption         =   "Proveedor CABEL"
+         Caption         =   "CABEL"
          Height          =   195
          Index           =   3
          Left            =   10680
          TabIndex        =   64
          Top             =   480
-         Width           =   1695
+         Width           =   975
       End
       Begin VB.TextBox txtDecimal 
          Height          =   285
@@ -828,14 +1045,14 @@ Begin VB.Form frmTelematVarios
          Width           =   1215
       End
       Begin VB.CommandButton cmdVerArt 
-         Height          =   495
+         Height          =   375
          Left            =   10080
-         Picture         =   "frmTelematVarios.frx":15D8
+         Picture         =   "frmTelematVarios.frx":28FA
          Style           =   1  'Graphical
          TabIndex        =   5
          ToolTipText     =   "Carga datos"
-         Top             =   240
-         Width           =   495
+         Top             =   360
+         Width           =   375
       End
       Begin VB.TextBox txtFecha 
          Height          =   285
@@ -875,6 +1092,14 @@ Begin VB.Form frmTelematVarios
          Top             =   480
          Width           =   855
       End
+      Begin VB.Image imgayuda 
+         Height          =   240
+         Index           =   1
+         Left            =   11760
+         ToolTipText     =   "Buscar cliente"
+         Top             =   480
+         Width           =   240
+      End
       Begin VB.Label Label1 
          Caption         =   "Margen%"
          BeginProperty Font 
@@ -907,7 +1132,7 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmTelematVarios.frx":1FDA
+         Picture         =   "frmTelematVarios.frx":32FC
          ToolTipText     =   "Quitar seleccion"
          Top             =   7680
          Width           =   240
@@ -916,7 +1141,7 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmTelematVarios.frx":2124
+         Picture         =   "frmTelematVarios.frx":3446
          ToolTipText     =   "Seleccionar todo"
          Top             =   7680
          Width           =   240
@@ -962,7 +1187,7 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   1
          Left            =   9120
-         Picture         =   "frmTelematVarios.frx":226E
+         Picture         =   "frmTelematVarios.frx":3590
          ToolTipText     =   "Buscar centro coste"
          Top             =   240
          Width           =   240
@@ -971,7 +1196,7 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   0
          Left            =   1200
-         Picture         =   "frmTelematVarios.frx":27F8
+         Picture         =   "frmTelematVarios.frx":3B1A
          ToolTipText     =   "Buscar centro coste"
          Top             =   240
          Width           =   240
@@ -980,7 +1205,7 @@ Begin VB.Form frmTelematVarios
          Height          =   240
          Index           =   0
          Left            =   7680
-         Picture         =   "frmTelematVarios.frx":28FA
+         Picture         =   "frmTelematVarios.frx":3C1C
          ToolTipText     =   "Buscar centro coste"
          Top             =   240
          Width           =   240
@@ -1018,6 +1243,8 @@ Public Opcion As Byte
         
         '2.- Imprimir
         '3.- Imprimir descuadre refencias
+        
+        '4.- Pasar obsoletos
         
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
@@ -1297,8 +1524,12 @@ End Sub
 
 
 
+Private Sub cmdCargaArtParaObsoletos_Click()
+    CargaArticulosParaObsoletos2
+End Sub
+
 Private Sub cmdCruzar_Click()
-Dim AUx As String
+Dim Aux As String
 
     If Me.lw2.ListItems.Count = 0 Then Exit Sub
     SQL = "Seleccione algun articulo para actualizar la referencia"
@@ -1332,11 +1563,11 @@ Dim AUx As String
             
             SQL = DevuelveDesdeBD(conAri, "codean", "stelem", "codtelem", lw2.ListItems(N).Tag, "N")
             If SQL <> "" Then
-                AUx = DevuelveDesdeBD(conAri, "max(numlinea)", "sarti3", "codartic", DevNombreSQL(lw2.ListItems(N).SubItems(2)), "T")
-                If AUx = "" Then AUx = "0"
-                AUx = CStr(Val(AUx) + 1)
+                Aux = DevuelveDesdeBD(conAri, "max(numlinea)", "sarti3", "codartic", DevNombreSQL(lw2.ListItems(N).SubItems(2)), "T")
+                If Aux = "" Then Aux = "0"
+                Aux = CStr(Val(Aux) + 1)
         
-                SQL = "INSERT INTO sarti3(codartic,numlinea,codigoea) VALUES (" & DBSet(lw2.ListItems(N).SubItems(2), "T") & "," & AUx & "," & DBSet(SQL, "T") & ")"
+                SQL = "INSERT INTO sarti3(codartic,numlinea,codigoea) VALUES (" & DBSet(lw2.ListItems(N).SubItems(2), "T") & "," & Aux & "," & DBSet(SQL, "T") & ")"
 
                 ejecutar SQL, False
             End If
@@ -1346,7 +1577,7 @@ Dim AUx As String
 End Sub
 
 Private Sub cmdImprimir_Click()
-Dim AUx As String
+Dim Aux As String
 
     If Not FijarSqlListadoTelematel(False) Then Exit Sub
 
@@ -1506,7 +1737,7 @@ End Function
 
 
 Private Sub cmdListadoSinCruadrar_Click()
-Dim B As Boolean
+Dim b As Boolean
     
     Screen.MousePointer = vbHourglass
     Label6.Caption = "Prepara datos"
@@ -1515,15 +1746,15 @@ Dim B As Boolean
     conn.Execute SQL
     
     If chkCabel(0).Value = 0 Then
-        B = CargaTablaReferenciasSinCruzar
+        b = CargaTablaReferenciasSinCruzar
     Else
-        B = CargaTablaReferenciasSinCruzarCABEL
+        b = CargaTablaReferenciasSinCruzarCABEL
     End If
     
     Label6.Caption = ""
     Screen.MousePointer = vbDefault
     
-    If B Then
+    If b Then
         CadenaDesdeOtroForm = ""
         SQL = ""
         If Me.txtProve(4).Text <> "" Then SQL = "desde " & txtProve(4).Text & " - " & txtDescProve(4).Text
@@ -1554,6 +1785,38 @@ Dim B As Boolean
     End If
     
     
+End Sub
+
+Private Sub cmdPasarObsoletos_Click()
+    If lw3.ListItems.Count = 0 Then Exit Sub
+    
+    SQL = ""
+    For NumRegElim = 1 To lw3.ListItems.Count
+        If lw3.ListItems(NumRegElim).Checked Then SQL = SQL & "X"
+    Next
+    If SQL = "" Then
+        MsgBox "Seleccione algun valor", vbExclamation
+        Exit Sub
+    End If
+    
+    SQL = "Va a traspasar a obsoletos " & Len(SQL) & " referencias.  ¿Continuar?"
+    If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    
+    Screen.MousePointer = vbHourglass
+    For NumRegElim = lw3.ListItems.Count To 1 Step -1
+        Label1(11).Caption = lw3.ListItems(NumRegElim).SubItems(3)
+        Label1(11).Refresh
+
+        If lw3.ListItems(NumRegElim).Checked Then
+            SQL = "UPDATE sartic set codfamia=9998 ,codmarca=12 ,codstatu =1"
+            SQL = SQL & " WHERE codartic=" & DBSet(lw3.ListItems(NumRegElim).SubItems(2), "T")
+            conn.Execute SQL
+             lw3.ListItems.Remove NumRegElim
+        End If
+    Next
+    Label1(11).Caption = ""
+    Label1(11).Refresh
+    Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub cmdVerArt_Click()
@@ -1667,12 +1930,17 @@ Private Sub Combo1_KeyPress(KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
+Private Sub Command1_Click()
+    
+End Sub
+
 Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
     FrameActprec.visible = False
     Me.FrameCruzar.visible = False
     FrameImprimirTel.visible = False
     FrameDescuadreRefencias.visible = False
+    FrameAticulos_A_Obsoletos.visible = False
     limpiar Me
     Select Case Opcion
     Case 0
@@ -1690,10 +1958,15 @@ Private Sub Form_Load()
         Label6.Caption = "" 'indicador
         PonerFrameVisible Me.FrameDescuadreRefencias
         Caption = "Imprimir"
-        
+    Case 4
+        PonerFrameVisible Me.FrameAticulos_A_Obsoletos
+        Me.txtFecha(2).Text = Format(DateAdd("yyyy", -1, Now), "dd/mm/yyyy")
+        txtFecha(2).Tag = txtFecha(2).Text
+        Caption = "Pasar a obsoletos"
     End Select
     
     Me.cmdCancel(Opcion).Cancel = True
+    CargaIconosAyuda
 End Sub
 
 Private Sub PonerFrameVisible(Fr As Frame)
@@ -1726,14 +1999,33 @@ Private Sub frmC_Selec(vFecha As Date)
     SQL = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
+Private Sub imgayuda_Click(Index As Integer)
+Dim Men As String
+    Select Case Index
+    Case 0
+        Men = "Busca en los datos importados de telematel, aquellos que no esten asignados y el codigo de proveedor "
+        Men = Men & " este vacio " & vbCrLf & "Para saber si ese articulo ya lo tenemos cruzado busca en "
+        Men = Men & " la tabla de  articulos la referencia donde  la familia sea marca propia."
+    Case 1
+        Men = "Trae los datos de telematel donde el codigo de proveedor este vacio(NULL) "
+        
+    End Select
+    Men = "Marca CABEL" & vbCrLf & vbCrLf & Men
+    MsgBox Men, vbExclamation
+End Sub
+
 Private Sub imgCheck_Click(Index As Integer)
     If Index < 2 Then
         For N = 1 To lw1.ListItems.Count
             lw1.ListItems(N).Checked = Index = 0
         Next
-    Else
+    ElseIf Index < 4 Then
         For N = 1 To lw2.ListItems.Count
             lw2.ListItems(N).Checked = Index = 3
+        Next
+    Else
+        For N = 1 To lw3.ListItems.Count
+            lw3.ListItems(N).Checked = Index = 5
         Next
     End If
 End Sub
@@ -1745,8 +2037,12 @@ Private Sub imgF_Click(Index As Integer)
     If txtFecha(Index).Text <> "" Then frmC.Fecha = CDate(txtFecha(Index).Text)
     frmC.Show vbModal
     Set frmC = Nothing
-    If SQL <> "" Then txtFecha(Index).Text = SQL
+    If SQL <> "" Then
+        txtFecha(Index).Text = SQL
+        If Index = 2 Then txtFecha_LostFocus 2
+    End If
     SQL = ""
+    
 End Sub
 
 Private Sub imgFamilia_Click(Index As Integer)
@@ -1779,6 +2075,7 @@ Private Sub imgPorv_Click(Index As Integer)
         txtProve(Index).Text = RecuperaValor(SQL, 1)
         txtDescProve(Index).Text = RecuperaValor(SQL, 2)
         SQL = ""
+        If Index = 6 Then txtProve_LostFocus Index
     End If
 End Sub
 
@@ -1821,6 +2118,7 @@ End Sub
 
 Private Sub txtFecha_LostFocus(Index As Integer)
     PonerFormatoFecha txtFecha(Index)
+   
 End Sub
 
 Private Sub txtProve_GotFocus(Index As Integer)
@@ -1847,6 +2145,7 @@ Private Sub txtProve_LostFocus(Index As Integer)
         
         If Opcion = 0 Then lw1.ListItems.Clear
     End If
+
 End Sub
 
 
@@ -1859,15 +2158,15 @@ Private Sub txtDecimal_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtDecimal_LostFocus(Index As Integer)
-Dim B As Boolean
+Dim b As Boolean
     txtDecimal(Index).Text = Trim(txtDecimal(Index).Text)
     If txtDecimal(Index).Text <> "" Then
        ' If Index = 0 Then
-            B = PonerFormatoDecimal(txtDecimal(Index), 4)
+            b = PonerFormatoDecimal(txtDecimal(Index), 4)
        ' Else
        '     B = PonerFormatoDecimal(txtDecimal(Index), 3)
        ' End If
-        If B Then
+        If b Then
 
         Else
             txtDecimal(Index).Text = ""
@@ -1994,7 +2293,7 @@ End Function
 
 Private Function CargaTablaReferenciasSinCruzar() As Boolean
 Dim CP As Collection
-Dim AUx As String
+Dim Aux As String
 
     On Error GoTo eCargaTablaReferenciasSinCruzar
     
@@ -2007,11 +2306,11 @@ Dim AUx As String
     
 
     SQL = "Select codprove from sartic WHERE artvario=0 and referprov<> '' "
-    AUx = CadenaDesdeHastaBD(txtProve(4).Text, txtProve(5).Text, "(sartic.codprove)", "N")
+    Aux = CadenaDesdeHastaBD(txtProve(4).Text, txtProve(5).Text, "(sartic.codprove)", "N")
 
-    If AUx <> "" Then SQL = SQL & " AND " & AUx
-    AUx = CadenaDesdeHastaBD(txtFamia(0).Text, txtFamia(1).Text, "(sartic.codfamia)", "N")
-    If AUx <> "" Then SQL = SQL & " AND " & AUx
+    If Aux <> "" Then SQL = SQL & " AND " & Aux
+    Aux = CadenaDesdeHastaBD(txtFamia(0).Text, txtFamia(1).Text, "(sartic.codfamia)", "N")
+    If Aux <> "" Then SQL = SQL & " AND " & Aux
     SQL = SQL & " GROUP BY 1"
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
@@ -2028,8 +2327,8 @@ Dim AUx As String
             
         SQL = "select codartic,nomartic,codtelem,referprov,codfamia from sartic"
         SQL = SQL & " where codprove=" & CP.item(N) & " and codfamia<>9998 and artvario=0 "
-        AUx = CadenaDesdeHastaBD(txtFamia(0).Text, txtFamia(1).Text, "(sartic.codfamia)", "N")
-        If AUx <> "" Then SQL = SQL & " AND " & AUx
+        Aux = CadenaDesdeHastaBD(txtFamia(0).Text, txtFamia(1).Text, "(sartic.codfamia)", "N")
+        If Aux <> "" Then SQL = SQL & " AND " & Aux
         SQL = SQL & " AND referprov not in (select referprov from stelem where codprove=" & CP.item(N) & ")"
 
         
@@ -2050,8 +2349,8 @@ Dim AUx As String
         miRsAux.Close
         If SQL <> "" Then
             SQL = Mid(SQL, 2)
-            AUx = "insert into `tmpinformes` (`codusu`,`codigo1`,`campo1`,`campo2`,`nombre1`,`nombre2`,`nombre3`) VALUES " & SQL
-            conn.Execute AUx
+            Aux = "insert into `tmpinformes` (`codusu`,`codigo1`,`campo1`,`campo2`,`nombre1`,`nombre2`,`nombre3`) VALUES " & SQL
+            conn.Execute Aux
         End If
     Next
     If NumRegElim > 0 Then CargaTablaReferenciasSinCruzar = True
@@ -2063,7 +2362,7 @@ End Function
 
 
 Private Function CargaTablaReferenciasSinCruzarCABEL() As Boolean
-Dim AUx As String
+Dim Aux As String
 
     On Error GoTo eCargaTablaReferenciasSinCruzarC
     
@@ -2078,8 +2377,8 @@ Dim AUx As String
         SQL = "select codartic,nomartic,codtelem,referprov,sartic.codfamia,sartic.codprove from sartic,sfamia"
         SQL = SQL & " WHERE sartic.codfamia=sfamia.codfamia AND sfamia.marcapropia=1"
         SQL = SQL & " AND sartic.codfamia<>9998 and artvario=0 "
-        AUx = CadenaDesdeHastaBD(txtFamia(0).Text, txtFamia(1).Text, "(sartic.codfamia)", "N")
-        If AUx <> "" Then SQL = SQL & " AND " & AUx
+        Aux = CadenaDesdeHastaBD(txtFamia(0).Text, txtFamia(1).Text, "(sartic.codfamia)", "N")
+        If Aux <> "" Then SQL = SQL & " AND " & Aux
         SQL = SQL & " AND referprov not in (select referprov from stelem where codprove is null )"
 
         
@@ -2101,8 +2400,8 @@ Dim AUx As String
         If SQL <> "" Then
             NumRegElim = NumRegElim + 1
             SQL = Mid(SQL, 2)
-            AUx = "insert into `tmpinformes` (`codusu`,`codigo1`,`campo1`,`campo2`,`nombre1`,`nombre2`,`nombre3`) VALUES " & SQL
-            conn.Execute AUx
+            Aux = "insert into `tmpinformes` (`codusu`,`codigo1`,`campo1`,`campo2`,`nombre1`,`nombre2`,`nombre3`) VALUES " & SQL
+            conn.Execute Aux
         End If
     
     If NumRegElim > 0 Then CargaTablaReferenciasSinCruzarCABEL = True
@@ -2147,3 +2446,77 @@ ELeerGuardarImportes:
     
 End Sub
 
+
+Private Sub CargaArticulosParaObsoletos2()
+    Label1(11).Caption = Label1(11).Tag
+    Label1(11).Refresh
+    Screen.MousePointer = vbHourglass
+    Set miRsAux = New ADODB.Recordset
+    CargaArticulosParaObsoletosPr
+    Set miRsAux = Nothing
+    Label1(11).Caption = ""
+    Screen.MousePointer = vbDefault
+End Sub
+
+Private Sub CargaArticulosParaObsoletosPr()
+
+
+    If Me.txtProve(6).Text = "" Or Me.txtFecha(2).Text = "" Then
+        Me.lw3.ListItems.Clear
+        Exit Sub
+    End If
+    
+    
+    'el proveedor seleccionado que no están en telematel, o que la fecha de cambio sea menor a la dada
+    lw3.ListItems.Clear
+    Me.Refresh
+    DoEvents
+
+        
+
+        Label1(11).Caption = "Leyendo articulos BD .............."
+        Label1(11).Refresh
+            
+            SQL = "select sartic.codartic,sum(canstock),sartic.codfamia,nomfamia,NomArtic from sartic,salmac ,sfamia"
+            SQL = SQL & " Where sartic.Codprove = " & Me.txtProve(6).Text
+            SQL = SQL & " And sartic.codArtic = salmac.codArtic And sfamia.Codfamia = sartic.Codfamia AND sartic.codfamia<>9998"
+            SQL = SQL & " and not sartic.codartic In (select codartic from stelem where codartic<>'' and codprove=" & Me.txtProve(6).Text & ") group by 1"
+            
+            SQL = SQL & " UNION "
+        
+            SQL = SQL & " select sartic.codartic,sum(canstock),sartic.codfamia,nomfamia,NomArtic from sartic,salmac ,sfamia"
+            SQL = SQL & " where sartic.codprove= " & Me.txtProve(6).Text
+            SQL = SQL & " and sfamia.codfamia=sartic.codfamia and sartic.codartic=salmac.codartic and sartic.codfamia<>9998 AND sartic.codartic In"
+            SQL = SQL & " (select codartic from stelem where codprove=" & Me.txtProve(6).Text & " and codartic<>''  and fechacambio<"
+            SQL = SQL & DBSet(txtFecha(2).Text, "F") & ") group by 1"
+            
+        SQL = SQL & " ORDER BY 3,1"
+        Label1(11).Refresh
+        miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Label1(11).Caption = "Carga registros"
+        Label1(11).Refresh
+        While Not miRsAux.EOF
+            Set IT = lw3.ListItems.Add()
+            IT.Text = miRsAux!Codfamia
+            IT.SubItems(1) = miRsAux!nomfamia
+            IT.SubItems(2) = miRsAux!codArtic
+            IT.SubItems(3) = miRsAux!NomArtic
+            IT.SubItems(4) = Format(miRsAux.Fields(1), FormatoCantidad)
+        
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+    
+    Label1(11).Caption = ""
+End Sub
+
+
+
+Private Sub CargaIconosAyuda()
+Dim Ima As Image
+    On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
+    For Each Ima In Me.imgayuda
+        Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
+    Next
+    Err.Clear
+End Sub

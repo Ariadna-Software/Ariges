@@ -140,18 +140,18 @@ End Property
 
 
 
-Public Property Let Codigo(ByVal vData As Long)
-Attribute Codigo.VB_Description = "Código del grupo de formas de cobro"
+Public Property Let codigo(ByVal vData As Long)
+Attribute codigo.VB_Description = "Código del grupo de formas de cobro"
 'se usa cuando se asigna un valor a una propiedad, en el lado izquierdo de la asignación.
 'Syntax: X.Codigo= 5
     mvarCodigo = vData
 End Property
 
 
-Public Property Get Codigo() As Long
+Public Property Get codigo() As Long
 'se usa cuando se asigna un valor a una propiedad, en el lado derecho de la asignación.
 'Syntax: Debug.Print X.Codigo
-    Codigo = mvarCodigo
+    codigo = mvarCodigo
 End Property
 
 Public Property Get PC() As String
@@ -164,21 +164,21 @@ End Property
 
 Public Function Leer(ByVal vlogin As String) As Byte
 Attribute Leer.VB_Description = "Lee un grupo de formas de cobro en función del código que se le ha pasado. Si devuelve 0 se ha conseguido leer el dato."
-Dim I As Long
+Dim i As Long
     On Error GoTo Err1
     
     SQL = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
     SQL = SQL & " AND NivelAriges >=0"
     Set RS = New ADODB.Recordset
-    RS.Open SQL, COnn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If RS.EOF Then
         Leer = 1
     Else
-        I = DevuelveAumentoPC
-        mvarCodigo = Val(Dblet(RS!CodUsu)) + I
-        mvarNombre = Dblet(RS!nomusu)
-        mvarNivel = Val(Dblet(RS!nivelariges))
+        i = DevuelveAumentoPC
+        mvarCodigo = Val(DBLet(RS!CodUsu)) + i
+        mvarNombre = DBLet(RS!nomusu)
+        mvarNivel = Val(DBLet(RS!nivelariges))
         mvarPasswdPROPIO = RS!passwordpropio
         mvarlogin = vlogin  'por si acasp esta escroto en mayus, minusclu....
         mvarlogin = RS!Login
@@ -209,15 +209,16 @@ End Function
 
 'Almacen por defecto y CODAGENT
 Public Sub FijarOtrosValoresUsuario()
-Dim agente As String
+Dim Agente As String
 
 
-    agente = "codagent"
-    'mvarAlmacenPorDefecto = DevuelveDesdeBD(conAri, "codalmac", "straba", "login", Me.Login, "T", agente)
-    If agente = "codagent" Then agente = ""
-    If agente = "" Then agente = "0"
+    Agente = "codagent"
+    mvarAlmacenPorDefecto = DevuelveDesdeBD(conAri, "codalmac", "straba", "login", Me.Login, "T", Agente)
+    If mvarAlmacenPorDefecto = "" Then mvarAlmacenPorDefecto = "1"
+    If Agente = "codagent" Then Agente = ""
+    If Agente = "" Then Agente = "0"
         
-    mvarCodigoAgente = Val(agente)
+    mvarCodigoAgente = Val(Agente)
 End Sub
 
 

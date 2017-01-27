@@ -38,7 +38,7 @@ Begin VB.Form frmAlmCargarNLote
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
-      BackColor       =   &H80000013&
+      BackColor       =   &H00C0C0C0&
       BorderStyle     =   0  'None
       Height          =   320
       Left            =   3720
@@ -224,7 +224,7 @@ Dim DentroTRANS As Boolean
     'comprobar que todos los num serie tienen valor
     If Desde2 = "" Then
         SQL = "SELECT COUNT(*) FROM " & NombreTabla
-        SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND " & Me.parSelSQL & " AND (isnull(numlotes) or trim(numlotes)="""" )"
+        SQL = SQL & " WHERE codusu=" & vUsu.codigo & " AND " & Me.parSelSQL & " AND (isnull(numlotes) or trim(numlotes)="""" )"
         
         If RegistrosAListar(SQL) > 0 Then
             MsgBox "Hay algún articulo para el que no se ha introducido Nº de Lote.", vbInformation
@@ -251,7 +251,7 @@ Dim DentroTRANS As Boolean
     
                 SQL = "UPDATE slialp " & " SET numlotes=" & DBSet(RS!numlotes, "T")
                 SQL = SQL & " WHERE " & " numalbar=" & DBSet(RS!NumAlbar, "T") & " AND fechaalb=" & DBSet(RS!FechaAlb, "F")
-                SQL = SQL & " AND codprove=" & RS!codProve & " AND numlinea=" & RS!numlinea
+                SQL = SQL & " AND codprove=" & RS!Codprove & " AND numlinea=" & RS!numlinea
         
                 conn.Execute SQL
                 
@@ -260,14 +260,14 @@ Dim DentroTRANS As Boolean
                 SQL = SQL & " codartic=" & DBSet(RS!codArtic, "T") & " AND numlotes=" & DBSet(RS!numlotes, "T") & " AND fecentra=" & DBSet(RS!FechaAlb, "F")
                 If RegistrosAListar(SQL) > 0 Then
                     'si ya existe la linea aumentamos la cantidad entrada
-                    SQL = "UPDATE slotes SET canentra=canentra + " & DBSet(RS!Cantidad, "N")
+                    SQL = "UPDATE slotes SET canentra=canentra + " & DBSet(RS!cantidad, "N")
                     SQL = SQL & " WHERE " & " codartic=" & DBSet(RS!codArtic, "T") & " AND numlotes=" & DBSet(RS!numlotes, "T") & " AND fecentra=" & DBSet(RS!FechaAlb, "F")
                     conn.Execute SQL
                 Else
                     SQL = "INSERT INTO slotes (codartic,numlotes,fecentra,canentra,canasign) VALUES ("
                     SQL = SQL & DBSet(RS!codArtic, "T") & ", " & DBSet(RS!numlotes, "T") & ", "
                     'fecha entrada, cantidad entrada y cantidad asignada
-                    SQL = SQL & DBSet(RS!FechaAlb, "F") & "," & DBSet(RS!Cantidad, "N") & ",0)"
+                    SQL = SQL & DBSet(RS!FechaAlb, "F") & "," & DBSet(RS!cantidad, "N") & ",0)"
                     conn.Execute SQL
                 End If
         
@@ -372,7 +372,7 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 Dim SQL As String
 
      SQL = "SELECT * FROM " & NombreTabla
-     SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND " & Me.parSelSQL
+     SQL = SQL & " WHERE codusu=" & vUsu.codigo & " AND " & Me.parSelSQL
      SQL = SQL & Ordenacion
 
      MontaSQLCarga = SQL
@@ -380,7 +380,7 @@ End Function
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim I As Byte
+Dim i As Byte
 Dim SQL As String
     
     On Error GoTo ECarga
@@ -418,10 +418,10 @@ Dim SQL As String
     DataGrid1.Columns(9).Caption = "Nº Lote"
     DataGrid1.Columns(9).Width = 1500
         
-    For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-        DataGrid1.Columns(I).Locked = True
-    Next I
+    For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+        DataGrid1.Columns(i).Locked = True
+    Next i
     
     gridCargado = True
     
@@ -495,7 +495,8 @@ End Sub
 
 
 
-Private Sub TxtAux_KeyDown(KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(KeyCode As Integer, Shift As Integer)
+On Error GoTo eKeycode
      Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
                 If DataGrid1.Row > 0 Then
@@ -514,6 +515,9 @@ Private Sub TxtAux_KeyDown(KeyCode As Integer, Shift As Integer)
                     PonerFocoBtn Me.cmdAceptar
                 End If
     End Select
+    Exit Sub
+eKeycode:
+    MuestraError Err.Number, Err.Description
 End Sub
 
 
@@ -566,7 +570,7 @@ Dim SQL As String
   '  If Trim(txtAux.Text) <> "" Then
         SQL = "UPDATE " & NombreTabla & " SET numlotes=" & DBSet(txtAux.Text, "T")
         SQL = SQL & " WHERE codusu=" & Data1.Recordset!CodUsu & " AND numalbar=" & DBSet(Data1.Recordset!NumAlbar, "T") & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        SQL = SQL & " AND codprove=" & Data1.Recordset!codProve & " AND numlinea=" & Data1.Recordset!numlinea
+        SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove & " AND numlinea=" & Data1.Recordset!numlinea
 
         conn.Execute SQL
    ' End If

@@ -4,16 +4,16 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTelematMto 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Fichero TELEMATEL"
-   ClientHeight    =   3510
+   ClientHeight    =   3480
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   8430
+   ClientWidth     =   8550
    Icon            =   "frmTelematMto.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   3510
-   ScaleWidth      =   8430
+   ScaleHeight     =   3480
+   ScaleWidth      =   8550
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox Text1 
@@ -227,8 +227,8 @@ Begin VB.Form frmTelematMto
       Left            =   0
       TabIndex        =   16
       Top             =   0
-      Width           =   8430
-      _ExtentX        =   14870
+      Width           =   8550
+      _ExtentX        =   15081
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -283,7 +283,7 @@ Begin VB.Form frmTelematMto
             Object.ToolTipText     =   "Importar fichero"
          EndProperty
          BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Pasar obsoletos"
          EndProperty
          BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Style           =   3
@@ -295,7 +295,7 @@ Begin VB.Form frmTelematMto
             Object.Visible         =   0   'False
          EndProperty
          BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
+            Object.ToolTipText     =   "Impresión reusltados"
          EndProperty
          BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Imprimir"
@@ -327,12 +327,12 @@ Begin VB.Form frmTelematMto
          EndProperty
       EndProperty
       Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
+         Caption         =   "previa"
          Height          =   195
-         Left            =   6960
+         Left            =   7440
          TabIndex        =   17
          Top             =   120
-         Width           =   1215
+         Width           =   855
       End
    End
    Begin VB.Image imgBuscar 
@@ -574,7 +574,7 @@ Private Sub cmdCancelar_Click()
             PonerModo 2
             PonerCampos
     End Select
-    PonerFoco Text1(0)
+    PonerFoco text1(0)
 End Sub
 
 
@@ -594,14 +594,14 @@ Private Sub BotonBuscar()
         LimpiarCampos
         PonerModo 1
         'Si pasamos el control aqui lo ponemos en amarillo
-        PonerFoco Text1(0)
-        Text1(0).BackColor = vbYellow
+        PonerFoco text1(0)
+        text1(0).BackColor = vbYellow
     Else 'Modo=1 Busqueda
         HacerBusqueda
         If Data1.Recordset.EOF Then
-            Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
-            PonerFoco Text1(kCampo)
+            text1(kCampo).Text = ""
+            text1(kCampo).BackColor = vbYellow
+            PonerFoco text1(kCampo)
         End If
     End If
 End Sub
@@ -634,12 +634,12 @@ Private Sub BotonModificar()
     
     'Añadiremos el boton de aceptar y demas objetos para insertar
     PonerModo 4
-    PonerFoco Text1(1)
+    PonerFoco text1(1)
 End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
@@ -649,12 +649,12 @@ Dim Cad As String
     
     
     '### a mano
-    Cad = "¿Seguro que desea eliminar la Familia de Artículo?:" & vbCrLf
-    Cad = Cad & vbCrLf & "Cod. : " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
-    Cad = Cad & vbCrLf & "Desc.: " & Data1.Recordset.Fields(1)
+    cad = "¿Seguro que desea eliminar la Familia de Artículo?:" & vbCrLf
+    cad = cad & vbCrLf & "Cod. : " & Format(Data1.Recordset.Fields(0), FormatoCampo(text1(0)))
+    cad = cad & vbCrLf & "Desc.: " & Data1.Recordset.Fields(1)
 
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
@@ -678,16 +678,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -719,8 +719,10 @@ Private Sub Form_Load()
         .Buttons(11).Image = 39  '
         .Buttons(12).Image = 14  'borrar proveedor
         .Buttons(13).Image = 13  'importar fich
+        .Buttons(14).Image = 23  'pasar a obsoletos
         
         
+        .Buttons(18).Image = 37  ' impresion resultados
         .Buttons(19).Image = 16  ' Imprimir
         .Buttons(20).Image = 40  ' Imprimir
         .Buttons(21).Image = 15  'Salir
@@ -772,9 +774,9 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim CadB As String
+Dim cadB As String
 Dim Aux As String
-Dim Indice As Byte
+Dim indice As Byte
     
     If CadenaDevuelta <> "" Then
             
@@ -785,22 +787,22 @@ Dim Indice As Byte
                     Screen.MousePointer = vbHourglass
                     'Sabemos que campos son los que nos devuelve
                     'Creamos una cadena consulta y ponemos los datos
-                    CadB = ""
-                    Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-                    CadB = Aux
+                    cadB = ""
+                    Aux = ValorDevueltoFormGrid(text1(0), CadenaDevuelta, 1)
+                    cadB = Aux
                     '   Como la clave principal es unica, con poner el sql apuntando
                     '   al valor devuelto sobre la clave ppal es suficiente
                     'Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
                     'If CadB <> "" Then CadB = CadB & " AND "
                     'CadB = CadB & Aux
                     'Se muestran en el mismo form
-                    CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+                    CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
                     PonerCadenaBusqueda
                     Screen.MousePointer = vbDefault
             Else
             
                 'prove
-                Text1(3).Text = RecuperaValor(CadenaDevuelta, 1)
+                text1(3).Text = RecuperaValor(CadenaDevuelta, 1)
                 Text2(3).Text = RecuperaValor(CadenaDevuelta, 2)
             End If
     End If
@@ -863,7 +865,7 @@ End Sub
 
 Private Sub Text1_GotFocus(Index As Integer)
     kCampo = Index
-    ConseguirFoco Text1(Index), Modo
+    ConseguirFoco text1(Index), Modo
 End Sub
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -886,7 +888,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim C As String
 
-    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(text1(Index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -896,10 +898,10 @@ Dim C As String
     Select Case Index
         Case 0 'Codigo
 
-             If PonerFormatoEntero(Text1(Index)) Then
+             If PonerFormatoEntero(text1(Index)) Then
                 'Comprobar si ya existe el cod
                 If Modo = 3 Then 'Insertar
-                    If ExisteCP(Text1(Index)) Then PonerFoco Text1(Index)
+                    If ExisteCP(text1(Index)) Then PonerFoco text1(Index)
                 End If
             End If
 
@@ -907,11 +909,11 @@ Dim C As String
         Case 3
             'Codprove
             C = ""
-            If Text1(3).Text <> "" Then
-                If Not PonerFormatoEntero(Text1(3)) Then
-                    Text1(3).Text = ""
+            If text1(3).Text <> "" Then
+                If Not PonerFormatoEntero(text1(3)) Then
+                    text1(3).Text = ""
                 Else
-                    C = PonerNombreDeCod(Text1(3), conAri, "sprove", "nomprove", "codprove")
+                    C = PonerNombreDeCod(text1(3), conAri, "sprove", "nomprove", "codprove")
                     
                 End If
             End If
@@ -921,53 +923,53 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
     
-    CadB = ObtenerBusqueda(Me, False)
+    cadB = ObtenerBusqueda(Me, False)
 
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia CadB, True
+        MandaBusquedaPrevia cadB, True
     Else
         'Se muestran en el mismo form
-        If CadB <> "" Then
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        If cadB <> "" Then
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String, EsBusqueda As Boolean)
+Private Sub MandaBusquedaPrevia(cadB As String, EsBusqueda As Boolean)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 
             Screen.MousePointer = vbHourglass
             'Llamamos a al form
             '##A mano
-            Cad = ""
+            cad = ""
       
             'Busqueda de una Família de Artículo
              Set frmB = New frmBuscaGrid
             If EsBusqueda Then
                 '
-                Cad = Cad & ParaGrid(Text1(0), 14, "Código")
-                Cad = Cad & ParaGrid(Text1(1), 61, "Nombre")
-                Cad = Cad & ParaGrid(Text1(4), 25, "Ref prove")
+                cad = cad & ParaGrid(text1(0), 14, "Código")
+                cad = cad & ParaGrid(text1(1), 61, "Nombre")
+                cad = cad & ParaGrid(text1(4), 25, "Ref prove")
                 frmB.vTabla = "stelem"
                 frmB.vTitulo = "Fichero telematel"
             Else
                 'PREOVEEDORES
-                Cad = Cad & "Código|sprove|codprove|N|000000|18·"
-                Cad = Cad & "Nombre|sprove|nomprove|T||40·"
-                Cad = Cad & "Nom.Comer.|sprove|nomcomer|T||40·"
+                cad = cad & "Código|sprove|codprove|N|000000|18·"
+                cad = cad & "Nombre|sprove|nomprove|T||40·"
+                cad = cad & "Nom.Comer.|sprove|nomcomer|T||40·"
             
                 frmB.vTabla = "sprove"
                 frmB.vTitulo = "Proveedores"
             End If
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             
             Me.Tag = Abs(EsBusqueda)   '0- Proveedores 1-Buscaprevia
-            frmB.vSQL = CadB
+            frmB.vSQL = cadB
             '###A mano
             frmB.vDevuelve = "0|1|"
             frmB.vselElem = 1
@@ -990,7 +992,7 @@ Private Sub PonerCadenaBusqueda()
     If Data1.Recordset.RecordCount <= 0 Then
         If Modo = 1 Then 'Busqueda
              MsgBox "No hay ningún registro en la tabla " & NombreTabla & " para ese criterio de Búsqueda.", vbInformation
-             PonerFoco Text1(0)
+             PonerFoco text1(0)
         Else
             MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
         End If
@@ -1013,13 +1015,13 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim I As Byte
+Dim i As Byte
     
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
     
-    Text2(2).Text = PonerNombreDeCod(Text1(2), conAri, "sartic", "nomartic", "codartic")
-    Text2(3).Text = PonerNombreDeCod(Text1(3), conAri, "sprove", "nomprove", "codprove")
+    Text2(2).Text = PonerNombreDeCod(text1(2), conAri, "sartic", "nomartic", "codartic")
+    Text2(3).Text = PonerNombreDeCod(text1(3), conAri, "sprove", "nomprove", "codprove")
     
     '-- Esto permanece para saber donde estamos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -1031,7 +1033,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1039,10 +1041,10 @@ Dim NumReg As Byte
     
     '-------------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -1052,10 +1054,10 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     'Poner Boton de Cabecera o Aceptar/Cancelar
-    PonerBotonCabecera B Or (Modo = 0)
+    PonerBotonCabecera b Or (Modo = 0)
         
     'Bloquear Registros si modo distinto de Insertar o Modificar
     BloquearText1 Me, Modo
@@ -1075,35 +1077,35 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 On Error Resume Next
 
     'b = (Modo = 2) Or (Modo = 0) Or (Modo = 1)
-    B = Modo <= 2
+    b = Modo <= 2
     
-    Toolbar1.Buttons(9).Enabled = B
-    mnActCodigos.Enabled = B
+    Toolbar1.Buttons(9).Enabled = b
+    mnActCodigos.Enabled = b
     
-    Toolbar1.Buttons(10).Enabled = B
-    mnActImportes.Enabled = B
+    Toolbar1.Buttons(10).Enabled = b
+    mnActImportes.Enabled = b
     
-    Toolbar1.Buttons(13).Enabled = B
-    mnTelematel.Enabled = B
+    Toolbar1.Buttons(13).Enabled = b
+    mnTelematel.Enabled = b
     
     'Añadir
    ' Toolbar1.Buttons(5).Enabled = b
    ' Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    mnEliminar.Enabled = b
     
-    Toolbar1.Buttons(11).Enabled = B
-    mnCrearArticulo.Enabled = B
+    Toolbar1.Buttons(11).Enabled = b
+    mnCrearArticulo.Enabled = b
     
 
     
@@ -1111,13 +1113,13 @@ On Error Resume Next
     
     
      '---------------------------------
-    B = (Modo >= 3)
+    b = (Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -1130,18 +1132,18 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
     DatosOk = False
-    B = CompForm(Me, 1)
-    If Not B Then Exit Function
+    b = CompForm(Me, 1)
+    If Not b Then Exit Function
     
     'Comprobar si ya existe el cod de familia en la tabla
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then B = False
+        If ExisteCP(text1(0)) Then b = False
     End If
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -1156,7 +1158,7 @@ Dim Precio As Currency
     If Button.Index = 11 Then
         If Modo <> 2 Then Exit Sub
     End If
-    If Button.Index = 12 Then
+    If Button.Index = 12 Or Button.Index = 14 Then
         If Modo <> 2 And Modo <> 0 Then Exit Sub
     End If
     
@@ -1184,14 +1186,14 @@ Dim Precio As Currency
                     MsgBox "Ya tiene asignado articulo", vbExclamation
                     Exit Sub
                 End If
-                Precio = ImporteFormateado(Text1(7).Text)
-                NumRegElim = Val(Text1(6).Text)
+                Precio = ImporteFormateado(text1(7).Text)
+                NumRegElim = Val(text1(6).Text)
                 Precio = Precio / NumRegElim
                 CadenaDesdeOtroForm = ""
                 With frmAlmArticulos
                     'codprove|nomprove|refprove|precio|nomartic|ean|codtelem|
-                   .DatosADevolverBusqueda = "··" & Text1(3).Text & "|" & Text2(3).Text & "|" & Text1(4).Text & "|" & CStr(Precio) & "|" & Text1(1).Text & _
-                        "|" & Text1(5) & "|" & Text1(0).Text & "|"
+                   .DatosADevolverBusqueda = "··" & text1(3).Text & "|" & Text2(3).Text & "|" & text1(4).Text & "|" & CStr(Precio) & "|" & text1(1).Text & _
+                        "|" & text1(5) & "|" & text1(0).Text & "|"
                    .Show vbModal
                 End With
                 
@@ -1210,7 +1212,7 @@ Dim Precio As Currency
         
         Case 12
             CadenaDesdeOtroForm = ""
-            frmListado3.opcion = 56
+            frmListado3.Opcion = 56
             frmListado3.Show vbModal
             If CadenaDesdeOtroForm <> "" Then
                 Screen.MousePointer = vbHourglass
@@ -1225,6 +1227,23 @@ Dim Precio As Currency
             End If
         Case 13
             BotonTelematel
+            
+        
+        Case 14
+            'Pasar obsoletos
+            frmTelematVarios.Opcion = 4
+            frmTelematVarios.Show vbModal
+
+        
+        Case 18
+            If Modo <> 2 Then Exit Sub
+            If Data1.Recordset.EOF Then
+                MsgBox "Ningun registro devuelto", vbExclamation
+                Exit Sub
+            End If
+            ImprimirSeleccion
+            
+            
             
         Case 19 'Imprimir listado
             BotonImprimir False
@@ -1252,18 +1271,18 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    If B Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera(b As Boolean)
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    If b Then Me.lblIndicador.Caption = ""
 End Sub
 
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
-    Cad = "(codtelem=" & Text1(0).Text & ")"
-    If SituarData(Data1, Cad, Indicador) Then
+    cad = "(codtelem=" & text1(0).Text & ")"
+    If SituarData(Data1, cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -1274,9 +1293,9 @@ End Sub
 
 Private Sub BotonImprimir(Descuadre As Boolean)
     If Descuadre Then
-        frmTelematVarios.opcion = 3
+        frmTelematVarios.Opcion = 3
     Else
-        frmTelematVarios.opcion = 2
+        frmTelematVarios.Opcion = 2
     End If
     frmTelematVarios.Show vbModal
 End Sub
@@ -1285,13 +1304,13 @@ End Sub
 
 
 Private Sub BotonActualizarCodigos()
-    frmTelematVarios.opcion = 1
+    frmTelematVarios.Opcion = 1
     frmTelematVarios.Show vbModal
 End Sub
 
 
 Private Sub BotonActualizarImportes()
-    frmTelematVarios.opcion = 0
+    frmTelematVarios.Opcion = 0
     frmTelematVarios.Show vbModal
 End Sub
 
@@ -1299,4 +1318,49 @@ End Sub
 Private Sub BotonTelematel()
     frmTelematImportar.Show vbModal
     PonerModo 0
+End Sub
+
+
+Private Sub ImprimirSeleccion()
+
+
+    Dim CADENA As String
+    
+    
+    'Quito parentesis
+    
+    CADENA = Data1.RecordSource
+    CADENA = Replace(SQL2SF(CADENA), "", "")
+    CADENA = Replace(CADENA, " stelem", " {stelem")
+    
+    
+    CADENA = Mid(CADENA, InStr(1, CADENA, " WHERE ") + 6)
+    CADENA = Mid(CADENA, 1, (InStr(1, CADENA, " ORDER BY ")))
+        With frmImprimir
+            .FormulaSeleccion = CADENA
+            
+        
+             .NumeroParametros = 2
+             
+             CADENA = Replace(CADENA, "stelem.", "")
+             CADENA = "pDesde=""SELEC: " & CADENA & """|"
+             
+             
+             
+              CADENA = "|pNomEmpre=""" & vEmpresa.nomempre & """|" & CADENA
+             .OtrosParametros = CADENA
+             .SoloImprimir = False
+             .EnvioEMail = False
+             .Opcion = 5
+             .Titulo = "Listado artículos telematel"
+             .NombreRPT = "rTelematel.rpt"  'Nombre fichero .rpt a Imprimir
+             .Show vbModal
+        End With
+    
+
+    
+    
+
+
+
 End Sub

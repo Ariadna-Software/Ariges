@@ -188,6 +188,14 @@ Begin VB.Form frmTelematImportar
       Top             =   0
       Width           =   975
    End
+   Begin VB.Image imgayuda 
+      Height          =   240
+      Index           =   1
+      Left            =   9720
+      ToolTipText     =   "Buscar cliente"
+      Top             =   0
+      Width           =   240
+   End
    Begin VB.Label Label1 
       Caption         =   "Proveedor"
       Height          =   255
@@ -235,7 +243,7 @@ Option Explicit
 Private WithEvents frmP As frmComProveedores
 Attribute frmP.VB_VarHelpID = -1
 
-Dim Cad As String
+Dim cad As String
 Dim NF As Integer
 
 Dim RArt As ADODB.Recordset  'para pre cargar los articulos del proveedor
@@ -246,32 +254,32 @@ Private Sub cmdActualizar_Click()
 
 
 
-    Cad = ""
+    cad = ""
     If lw1.ListItems.Count = 0 Then
-        Cad = "Ningun dato"
+        cad = "Ningun dato"
     Else
         If Me.chkCabel.Value And Me.chkMultiProveedor.Value Then
            ' Cad = "Debe indicar una de las dos opciones: Cabel / Multiproveedor "
         Else
             If Me.chkCabel.Value Then
-                If txtProv(0).Text <> "" Then Cad = "No debe indicar proveedor"
+                If txtProv(0).Text <> "" Then cad = "No debe indicar proveedor"
             Else
-                If txtProv(0).Text = "" Or txtProv(1).Text = "" Then Cad = "Falta proveedor"
+                If txtProv(0).Text = "" Or txtProv(1).Text = "" Then cad = "Falta proveedor"
             End If
         End If
     End If
-    If Cad <> "" Then
-        MsgBox Cad, vbExclamation
+    If cad <> "" Then
+        MsgBox cad, vbExclamation
         Exit Sub
     End If
     
     If Me.chkCabel.Value Then
-        Cad = "Procesar los datos del fichero CABEL?"
+        cad = "Procesar los datos del fichero CABEL?"
     Else
-        Cad = "Seguro que desea actualizar los datos para el proveedor: " & vbCrLf & Format(txtProv(0).Text, "0000") & " -  " & txtProv(1).Text
-        If Me.chkMultiProveedor.Value = 1 Then Cad = Cad & vbCrLf & vbCrLf & "Fichero multiproveedor"
+        cad = "Seguro que desea actualizar los datos para el proveedor: " & vbCrLf & Format(txtProv(0).Text, "0000") & " -  " & txtProv(1).Text
+        If Me.chkMultiProveedor.Value = 1 Then cad = cad & vbCrLf & vbCrLf & "Fichero multiproveedor"
     End If
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     
     Screen.MousePointer = vbHourglass
     Me.FrameProc.visible = True
@@ -308,13 +316,13 @@ Dim HayQueInsertarTelematel As Boolean
         'RArt.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
     Else
     
-        Cad = "Select * from stelem where codprove = " & txtProv(0).Text & " ORDER BY codtelem,referprov"
-        miRsAux.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+        cad = "Select * from stelem where codprove = " & txtProv(0).Text & " ORDER BY codtelem,referprov"
+        miRsAux.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
     
     
         'Como antes
-        Cad = "Select codartic,referprov from sartic where codprove = " & txtProv(0).Text & " ORDER BY codtelem"
-        RArt.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+        cad = "Select codartic,referprov from sartic where codprove = " & txtProv(0).Text & " ORDER BY codtelem"
+        RArt.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
     End If
     
     
@@ -335,16 +343,16 @@ Dim HayQueInsertarTelematel As Boolean
         'Vemos si existe en telematel
         If ExisteEnStelem(NF) Then
             'UPDATEAMOS
-             Cad = "update `stelem` set nombre=" & DBSet(lw1.ListItems(NF).SubItems(1), "T")
-             Cad = Cad & ",`codean`=" & DBSet(lw1.ListItems(NF).SubItems(2), "T", "S")
-             Cad = Cad & ",`precio`=" & DBSet(lw1.ListItems(NF).SubItems(3), "N")
-             Cad = Cad & ",`referprov`=" & DBSet(lw1.ListItems(NF).SubItems(4), "T")
-             Cad = Cad & ",`uniprec`=" & DBSet(lw1.ListItems(NF).SubItems(5), "N")
-             Cad = Cad & ",`fechacambio`=" & DBSet(lw1.ListItems(NF).SubItems(6), "F")
+             cad = "update `stelem` set nombre=" & DBSet(lw1.ListItems(NF).SubItems(1), "T")
+             cad = cad & ",`codean`=" & DBSet(lw1.ListItems(NF).SubItems(2), "T", "S")
+             cad = cad & ",`precio`=" & DBSet(lw1.ListItems(NF).SubItems(3), "N")
+             cad = cad & ",`referprov`=" & DBSet(lw1.ListItems(NF).SubItems(4), "T")
+             cad = cad & ",`uniprec`=" & DBSet(lw1.ListItems(NF).SubItems(5), "N")
+             cad = cad & ",`fechacambio`=" & DBSet(lw1.ListItems(NF).SubItems(6), "F")
              
              If Aux <> "" Then
                 'EXISTE EL ARTICULO
-                Cad = Cad & ",`codartic`=" & DBSet(Aux, "T")
+                cad = cad & ",`codartic`=" & DBSet(Aux, "T")
                 
              Else
                 'Agosto2011
@@ -356,7 +364,7 @@ Dim HayQueInsertarTelematel As Boolean
                 
                 
              
-            Cad = Cad & " where `codtelem`=" & DBSet(lw1.ListItems(NF).Text, "N")
+            cad = cad & " where `codtelem`=" & DBSet(lw1.ListItems(NF).Text, "N")
             
         Else
             'INSERTAMOS
@@ -368,28 +376,28 @@ Dim HayQueInsertarTelematel As Boolean
             If HayQueInsertarTelematel Then
 
 
-                Cad = "insert into `stelem` (`codtelem`,`nombre`,`codean`,`precio`,`referprov`,`uniprec`,`fechacambio`,"
-                Cad = Cad & "`codartic`,`codprove`) values (" & lw1.ListItems(NF).Text & "," & DBSet(lw1.ListItems(NF).SubItems(1), "T")
+                cad = "insert into `stelem` (`codtelem`,`nombre`,`codean`,`precio`,`referprov`,`uniprec`,`fechacambio`,"
+                cad = cad & "`codartic`,`codprove`) values (" & lw1.ListItems(NF).Text & "," & DBSet(lw1.ListItems(NF).SubItems(1), "T")
                 'ean precio
-                Cad = Cad & "," & DBSet(lw1.ListItems(NF).SubItems(2), "T", "S") & "," & DBSet(lw1.ListItems(NF).SubItems(3), "N")
+                cad = cad & "," & DBSet(lw1.ListItems(NF).SubItems(2), "T", "S") & "," & DBSet(lw1.ListItems(NF).SubItems(3), "N")
                 'refprov uni
-                Cad = Cad & "," & DBSet(lw1.ListItems(NF).SubItems(4), "T") & "," & DBSet(lw1.ListItems(NF).SubItems(5), "N") & "," & DBSet(lw1.ListItems(NF).SubItems(6), "F")
-                Cad = Cad & "," & DBSet(Aux, "T", "S") & ","
+                cad = cad & "," & DBSet(lw1.ListItems(NF).SubItems(4), "T") & "," & DBSet(lw1.ListItems(NF).SubItems(5), "N") & "," & DBSet(lw1.ListItems(NF).SubItems(6), "F")
+                cad = cad & "," & DBSet(Aux, "T", "S") & ","
                 
                 If Me.chkCabel.Value = 1 Then
-                    Cad = Cad & "NULL)"
+                    cad = cad & "NULL)"
                 Else
-                    Cad = Cad & txtProv(0) & ")"
+                    cad = cad & txtProv(0) & ")"
                 End If
             Else
                 'SI esta multiproveedor, si no la encuentra, NO la inserta
-                Cad = ""
+                cad = ""
                 
             End If
         End If
         
-        If Cad <> "" Then
-            If Not ejecutar(Cad, False) Then TieneError = True
+        If cad <> "" Then
+            If Not ejecutar(cad, False) Then TieneError = True
         End If
         
         
@@ -418,19 +426,19 @@ Dim HayQueInsertarTelematel As Boolean
         
         
         
-        Cad = "Select * from stelem where "
-        Cad = Cad & " codprove=" & txtProv(0).Text & " AND "
-        Cad = Cad & " codartic<>"""""
-        Cad = Cad & " AND codtelem in (" & CodTelemYaInsertados & ")"
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cad = "Select * from stelem where "
+        cad = cad & " codprove=" & txtProv(0).Text & " AND "
+        cad = cad & " codartic<>"""""
+        cad = cad & " AND codtelem in (" & CodTelemYaInsertados & ")"
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             Me.Label2(1).Caption = DBLet(miRsAux!Nombre, "T")
             Me.Label2(1).Refresh
-            Cad = "UPDATE sartic set "
-            Cad = Cad & " `referprov`=" & DBSet(miRsAux!referprov, "T")
+            cad = "UPDATE sartic set "
+            cad = cad & " `referprov`=" & DBSet(miRsAux!referprov, "T")
             
-            Cad = Cad & " WHERE `codartic`=" & DBSet(miRsAux!codArtic, "T")
-            ejecutar Cad, False
+            cad = cad & " WHERE `codartic`=" & DBSet(miRsAux!codArtic, "T")
+            ejecutar cad, False
             miRsAux.MoveNext
         Wend
         miRsAux.Close
@@ -500,26 +508,26 @@ Private Sub cmdImportar_Click()
 
    
 
-    Cad = ""
+    cad = ""
     If Text1.Text = "" Then
-        Cad = "Seleccione el fichero para importar"
+        cad = "Seleccione el fichero para importar"
     Else
         If Dir(Text1.Text, vbArchive) = "" Then
-            Cad = "No existe el fichero"
+            cad = "No existe el fichero"
         Else
             If Me.chkExcel.Value = 1 Then
                 'EXCEL
                 If UCase(Right(Text1.Text, 3)) <> "XLS" Then
-                    Cad = "Extension invalida. XLS"
+                    cad = "Extension invalida. XLS"
                     
                 Else
                     'existe el fichero y es una excel
                     'Veremos el fichero TXT que se genera.
-                    Cad = EliminarFicheroTXTdeEXCEL
+                    cad = EliminarFicheroTXTdeEXCEL
                     
                 End If
             Else
-                If UCase(Right(Text1.Text, 3)) <> "TXT" Then Cad = "Extension invalida."
+                If UCase(Right(Text1.Text, 3)) <> "TXT" Then cad = "Extension invalida."
             End If
             
         End If
@@ -533,15 +541,15 @@ Private Sub cmdImportar_Click()
     
     
     
-    If Cad <> "" Then
-        MsgBox Cad, vbExclamation
+    If cad <> "" Then
+        MsgBox cad, vbExclamation
         Exit Sub
     End If
         
     'Por si acaso ya existen datos
     If lw1.ListItems.Count > 0 Then
-        Cad = "Ya existen datos. Desea importar el fichero?"
-        If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        cad = "Ya existen datos. Desea importar el fichero?"
+        If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     End If
         
         
@@ -592,12 +600,17 @@ Private Sub Form_Load()
         Me.chkExcel.Value = 1
         Me.chkExcel.visible = True
     End If
+    CargaIconosAyuda
 End Sub
 
 Private Sub frmP_DatoSeleccionado(CadenaSeleccion As String)
     Me.txtProv(0).Text = RecuperaValor(CadenaSeleccion, 1)
     Me.txtProv(1).Text = RecuperaValor(CadenaSeleccion, 2)
     
+End Sub
+
+Private Sub imgayuda_Click(Index As Integer)
+    MsgBox "Al importar los datos en telematel, los inserta sin asignarle codigo de proveedor", vbExclamation
 End Sub
 
 Private Sub imgBuscarG_Click(Index As Integer)
@@ -638,7 +651,7 @@ On Error GoTo EprocesarFichero
     NumRegElim = 0
     CadenaDesdeOtroForm = ""
     While Not OK
-        Line Input #NF, Cad
+        Line Input #NF, cad
         Set IT = lw1.ListItems.Add()
         If Not ProcesarLinea(IT) Then
             lw1.ListItems.Remove IT.Index
@@ -671,12 +684,12 @@ Dim Aux As String
     ProcesarLinea = False
     Inicio = 1
     For i = 1 To 7
-        J = InStr(Inicio, Cad, ";")
+        J = InStr(Inicio, cad, ";")
         If J = 0 Then
             MsgBox "No se ha encontrado el separador " & J & ". Campo: " & i, vbExclamation
             Exit Function
         Else
-            Aux = Mid(Cad, Inicio, J - Inicio)
+            Aux = Mid(cad, Inicio, J - Inicio)
             Aux = Trim(Aux)
             If i = 1 Then
                 IT.Text = Aux
@@ -711,12 +724,12 @@ End Sub
 
 Private Sub txtProv_LostFocus(Index As Integer)
     If Index = 0 Then
-        Cad = ""
+        cad = ""
         txtProv(0).Text = Trim(txtProv(0).Text)
         If txtProv(0).Text <> "" Then
             If PonerFormatoEntero(txtProv(0)) Then
-                Cad = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtProv(0).Text)
-                If Cad = "" Then
+                cad = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtProv(0).Text)
+                If cad = "" Then
                     MsgBox "No existe el proveedor: " & txtProv(0).Text, vbExclamation
                     txtProv(0).Text = ""
                     PonerFoco txtProv(0)
@@ -725,7 +738,7 @@ Private Sub txtProv_LostFocus(Index As Integer)
                 txtProv(0).Text = ""
             End If
         End If
-        txtProv(1).Text = Cad
+        txtProv(1).Text = cad
     End If
 End Sub
 
@@ -793,3 +806,12 @@ eProcesarFicheroExcel:
     Caption = "Importar fichero telematel"
 End Function
     
+Private Sub CargaIconosAyuda()
+Dim Ima As Image
+    On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
+    For Each Ima In Me.imgayuda
+        Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
+    Next
+    Err.Clear
+End Sub
+
