@@ -319,15 +319,15 @@ End Sub
 'Si no he ajustado el NombrePDF y no le he puesto valor entonces,
 'cogera el mismo que tiene en NombreRPT
 Private Sub Form_Load()
-Dim Cad As String
+Dim cad As String
 
     PrimeraVez = True
     Lanzado = False
     CargaICO
-    Cad = Dir(App.Path & "\impre.dat", vbArchive)
+    cad = Dir(App.Path & "\impre.dat", vbArchive)
     HaPulsadoElBotonDeImprimir = False
     'ReestableceSoloImprimir = False
-    If Cad = "" Then
+    If cad = "" Then
         chkSoloImprimir.Value = 0
     Else
         chkSoloImprimir.Value = 1
@@ -620,7 +620,7 @@ Dim OtrosParam2 As String
 Dim NumParam2 As Integer
 Dim HaPulsadoImprimir As Boolean
 Dim J As Integer
-
+Dim EulerT As String
 
 
 
@@ -735,6 +735,16 @@ Dim J As Integer
                 End If
             
                 If LanzaAbrirOutlook Then
+                
+                
+                    
+                    If vParamAplic.NumeroInstalacion = 4 Then
+                        If davidCodtipom <> "" Then
+                            If Dir(davidCodtipom, vbDirectory) <> "" Then LanzaVisorMimeDocumento Me.hwnd, davidCodtipom
+                            
+                        End If
+                    End If
+                
                     '
                     LanzaProgramaAbrirOutlook
                 Else

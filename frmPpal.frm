@@ -391,7 +391,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "14:11"
+            TextSave        =   "11:39"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2268,6 +2268,10 @@ Begin VB.MDIForm frmPpal
       Begin VB.Menu mnUtilidadesVarias 
          Caption         =   "Exportar albaranes de servicio"
          Index           =   5
+      End
+      Begin VB.Menu mnUtilidadesVarias 
+         Caption         =   "Exportar email csv"
+         Index           =   6
       End
       Begin VB.Menu mnBarra19 
          Caption         =   "-"
@@ -4828,6 +4832,9 @@ Private Sub mnUtilidadesVarias_Click(Index As Integer)
     
     Case 5
         frmListado3.Opcion = 59
+        frmListado3.Show vbModal
+    Case 6
+        frmListado3.Opcion = 66
         frmListado3.Show vbModal
     End Select
 End Sub

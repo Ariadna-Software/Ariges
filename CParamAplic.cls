@@ -354,7 +354,7 @@ Private mvarAguasPotables As Boolean
 
 'NO lleva Campo en BD. Cuando lea la empresa, que vea cuantos bancos tiene.
 'Si tiene solo uno, ese sera el banco por defecto, sino=0
-Private mvarCodigoUnicoBancoPropio As Byte
+Private mvarCodigoUnicoBancoPropio_ As Integer
 
 
 '[22/04/2014] [DAVID]
@@ -1600,7 +1600,7 @@ End Property
 'Si solo tiene un banco propio, este valor sera >0
 'Si es cero=tiene varios bancos propios
 Public Property Get CodigoUnicoBancoPropio() As String
-    CodigoUnicoBancoPropio = mvarCodigoUnicoBancoPropio
+    CodigoUnicoBancoPropio = mvarCodigoUnicoBancoPropio_
 End Property
 
 
@@ -2482,17 +2482,17 @@ End Function
 Private Sub FijarSiTieneUnSoloBancoPropio(ByRef R As ADODB.Recordset)
     On Error GoTo eFijaSiTieneUnSoloBancoPropio
     Set R = New ADODB.Recordset
-    mvarCodigoUnicoBancoPropio = 0
+    mvarCodigoUnicoBancoPropio_ = 0
     SQL = "Select codbanpr from sbanpr "
     R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
     While Not R.EOF
-        mvarCodigoUnicoBancoPropio = R!codbanpr
+        mvarCodigoUnicoBancoPropio_ = R!codbanpr
         SQL = SQL & "X"
-        R.MoveNext
+            R.MoveNext
     Wend
     R.Close
-    If Len(SQL) > 1 Then mvarCodigoUnicoBancoPropio = 0
+    If Len(SQL) > 1 Then mvarCodigoUnicoBancoPropio_ = 0
     
      Exit Sub
 eFijaSiTieneUnSoloBancoPropio:

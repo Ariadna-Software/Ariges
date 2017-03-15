@@ -2,23 +2,35 @@ VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmFamiliaArticulo 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Familias de artículos"
-   ClientHeight    =   8295
+   ClientHeight    =   8310
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   8400
+   ClientWidth     =   13470
    Icon            =   "frmAlmFamiliaArticulo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8295
-   ScaleWidth      =   8400
+   ScaleHeight     =   8310
+   ScaleWidth      =   13470
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Digitos 1er nivel|N|N|||empresa|numdigi1|||"
+   Begin VB.TextBox Text1 
+      Height          =   4995
+      Index           =   14
+      Left            =   8520
+      MultiLine       =   -1  'True
+      ScrollBars      =   2  'Vertical
+      TabIndex        =   20
+      Tag             =   "Descr|T|S|||sfamia|descripcion||N|"
+      Text            =   "frmAlmFamiliaArticulo.frx":000C
+      Top             =   1320
+      Width           =   4605
+   End
    Begin MSAdodcLib.Adodc Data2 
       Height          =   375
       Left            =   3000
@@ -70,23 +82,23 @@ Begin VB.Form frmAlmFamiliaArticulo
       BorderStyle     =   0  'None
       Height          =   1095
       Left            =   120
-      TabIndex        =   44
+      TabIndex        =   45
       Top             =   6480
-      Width           =   8055
+      Width           =   12975
       Begin VB.CheckBox chkMarcaPropia 
          Height          =   195
-         Left            =   6000
+         Left            =   10800
          TabIndex        =   16
          Tag             =   "Comunica|N|N|||sfamia|marcapropia||N|"
-         Top             =   840
+         Top             =   240
          Width           =   375
       End
       Begin VB.CheckBox chkComunica 
          Height          =   195
-         Left            =   6000
+         Left            =   8880
          TabIndex        =   15
          Tag             =   "Comunica|N|N|||sfamia|comunica||N|"
-         Top             =   480
+         Top             =   300
          Width           =   375
       End
       Begin VB.CheckBox chkBloqTPV 
@@ -94,7 +106,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Left            =   6000
          TabIndex        =   14
          Tag             =   "Bloq TPV|N|N|||sfamia|bloqEnTPV||N|"
-         Top             =   120
+         Top             =   300
          Width           =   375
       End
       Begin VB.TextBox Text1 
@@ -114,7 +126,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Left            =   1920
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   47
+         TabIndex        =   48
          Text            =   "Text2"
          Top             =   720
          Width           =   3585
@@ -126,7 +138,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Left            =   2160
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   45
+         TabIndex        =   46
          Text            =   "Text2"
          Top             =   240
          Width           =   3585
@@ -143,25 +155,25 @@ Begin VB.Form frmAlmFamiliaArticulo
       Begin VB.Label Label4 
          Caption         =   "Marca propia"
          Height          =   255
-         Left            =   6480
-         TabIndex        =   60
-         Top             =   840
+         Left            =   11280
+         TabIndex        =   61
+         Top             =   240
          Width           =   1455
       End
       Begin VB.Label Label3 
          Caption         =   "Comunica"
          Height          =   255
-         Left            =   6480
-         TabIndex        =   53
-         Top             =   480
+         Left            =   9360
+         TabIndex        =   54
+         Top             =   270
          Width           =   1455
       End
       Begin VB.Label Label2 
          Caption         =   "Bloquea en TPV"
          Height          =   255
          Left            =   6480
-         TabIndex        =   52
-         Top             =   120
+         TabIndex        =   53
+         Top             =   270
          Width           =   1455
       End
       Begin VB.Label Label1 
@@ -169,7 +181,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Height          =   255
          Index           =   4
          Left            =   120
-         TabIndex        =   48
+         TabIndex        =   49
          Top             =   720
          Width           =   615
       End
@@ -177,7 +189,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Height          =   240
          Index           =   0
          Left            =   960
-         Picture         =   "frmAlmFamiliaArticulo.frx":000C
+         Picture         =   "frmAlmFamiliaArticulo.frx":0012
          ToolTipText     =   "Buscar centro coste"
          Top             =   720
          Width           =   240
@@ -187,7 +199,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Height          =   255
          Index           =   9
          Left            =   120
-         TabIndex        =   46
+         TabIndex        =   47
          Top             =   240
          Width           =   855
       End
@@ -195,7 +207,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Height          =   240
          Index           =   1
          Left            =   960
-         Picture         =   "frmAlmFamiliaArticulo.frx":010E
+         Picture         =   "frmAlmFamiliaArticulo.frx":0114
          ToolTipText     =   "Buscar centro coste"
          Top             =   240
          Width           =   240
@@ -204,7 +216,7 @@ Begin VB.Form frmAlmFamiliaArticulo
    Begin TabDlg.SSTab SSTab1 
       Height          =   5295
       Left            =   120
-      TabIndex        =   29
+      TabIndex        =   30
       Top             =   1080
       Width           =   8175
       _ExtentX        =   14420
@@ -213,7 +225,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Tabs            =   2
       TabHeight       =   520
       TabCaption(0)   =   "Contabilidad"
-      TabPicture(0)   =   "frmAlmFamiliaArticulo.frx":0210
+      TabPicture(0)   =   "frmAlmFamiliaArticulo.frx":0216
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Frame2"
       Tab(0).Control(0).Enabled=   0   'False
@@ -221,7 +233,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Tab(0).Control(1).Enabled=   0   'False
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Descuentos"
-      TabPicture(1)   =   "frmAlmFamiliaArticulo.frx":022C
+      TabPicture(1)   =   "frmAlmFamiliaArticulo.frx":0232
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Label1(10)"
       Tab(1).Control(1)=   "DataGrid1"
@@ -236,7 +248,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Index           =   10
          Left            =   -71760
          MaxLength       =   5
-         TabIndex        =   50
+         TabIndex        =   51
          Tag             =   "Centro de coste|N|S|0|100|sfamia|maxdtopar|#0.00|N|"
          Top             =   4200
          Width           =   975
@@ -283,7 +295,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Begin MSDataGridLib.DataGrid DataGrid1 
          Height          =   2535
          Left            =   -74880
-         TabIndex        =   49
+         TabIndex        =   50
          Top             =   960
          Width           =   7815
          _ExtentX        =   13785
@@ -358,7 +370,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          ForeColor       =   &H00972E0B&
          Height          =   1575
          Left            =   240
-         TabIndex        =   39
+         TabIndex        =   40
          Top             =   3480
          Width           =   7695
          Begin VB.TextBox Text1 
@@ -379,7 +391,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   58
+            TabIndex        =   59
             Text            =   "Text2"
             Top             =   1080
             Width           =   3885
@@ -391,7 +403,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   41
+            TabIndex        =   42
             Text            =   "Text2"
             Top             =   240
             Width           =   3885
@@ -403,7 +415,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   40
+            TabIndex        =   41
             Text            =   "Text2"
             Top             =   675
             Width           =   3885
@@ -435,7 +447,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   13
             Left            =   240
-            TabIndex        =   59
+            TabIndex        =   60
             Top             =   1080
             Width           =   1695
          End
@@ -443,7 +455,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   8
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":0248
+            Picture         =   "frmAlmFamiliaArticulo.frx":024E
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   1125
             Width           =   240
@@ -452,7 +464,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   3
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":034A
+            Picture         =   "frmAlmFamiliaArticulo.frx":0350
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   720
             Width           =   240
@@ -461,7 +473,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   1
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":044C
+            Picture         =   "frmAlmFamiliaArticulo.frx":0452
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   315
             Width           =   240
@@ -471,7 +483,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   6
             Left            =   240
-            TabIndex        =   43
+            TabIndex        =   44
             Top             =   270
             Width           =   1815
          End
@@ -480,7 +492,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   8
             Left            =   240
-            TabIndex        =   42
+            TabIndex        =   43
             Top             =   675
             Width           =   1455
          End
@@ -499,7 +511,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          ForeColor       =   &H00972E0B&
          Height          =   2895
          Left            =   240
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   480
          Width           =   7695
          Begin VB.TextBox Text2 
@@ -509,7 +521,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   56
+            TabIndex        =   57
             Text            =   "Text2"
             Top             =   2400
             Width           =   3885
@@ -532,7 +544,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   54
+            TabIndex        =   55
             Text            =   "Text2"
             Top             =   1920
             Width           =   3885
@@ -577,7 +589,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   34
+            TabIndex        =   35
             Text            =   "Text2"
             Top             =   1485
             Width           =   3885
@@ -589,7 +601,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   33
+            TabIndex        =   34
             Text            =   "Text2"
             Top             =   1080
             Width           =   3885
@@ -601,7 +613,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   32
+            TabIndex        =   33
             Text            =   "Text2"
             Top             =   240
             Width           =   3885
@@ -613,7 +625,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   31
+            TabIndex        =   32
             Text            =   "Text2"
             Top             =   675
             Width           =   3885
@@ -644,7 +656,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   7
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":054E
+            Picture         =   "frmAlmFamiliaArticulo.frx":0554
             Tag             =   "-1"
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   2445
@@ -655,7 +667,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   12
             Left            =   240
-            TabIndex        =   57
+            TabIndex        =   58
             Top             =   2430
             Width           =   1815
          End
@@ -663,7 +675,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   6
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":0650
+            Picture         =   "frmAlmFamiliaArticulo.frx":0656
             Tag             =   "-1"
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   1965
@@ -674,7 +686,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   11
             Left            =   240
-            TabIndex        =   55
+            TabIndex        =   56
             Top             =   2010
             Width           =   1815
          End
@@ -683,7 +695,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   3
             Left            =   240
-            TabIndex        =   38
+            TabIndex        =   39
             Top             =   1515
             Width           =   1815
          End
@@ -692,7 +704,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   2
             Left            =   240
-            TabIndex        =   37
+            TabIndex        =   38
             Top             =   1110
             Width           =   1815
          End
@@ -700,7 +712,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   4
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":0752
+            Picture         =   "frmAlmFamiliaArticulo.frx":0758
             Tag             =   "-1"
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   1125
@@ -710,7 +722,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   5
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":0854
+            Picture         =   "frmAlmFamiliaArticulo.frx":085A
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   1560
             Width           =   240
@@ -719,7 +731,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   2
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":0956
+            Picture         =   "frmAlmFamiliaArticulo.frx":095C
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   705
             Width           =   240
@@ -728,7 +740,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   240
             Index           =   0
             Left            =   2040
-            Picture         =   "frmAlmFamiliaArticulo.frx":0A58
+            Picture         =   "frmAlmFamiliaArticulo.frx":0A5E
             Tag             =   "-1"
             ToolTipText     =   "Buscar cuenta contable"
             Top             =   285
@@ -739,7 +751,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   5
             Left            =   240
-            TabIndex        =   36
+            TabIndex        =   37
             Top             =   270
             Width           =   1575
          End
@@ -748,7 +760,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   7
             Left            =   240
-            TabIndex        =   35
+            TabIndex        =   36
             Top             =   675
             Width           =   1575
          End
@@ -758,7 +770,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Height          =   195
          Index           =   10
          Left            =   -74880
-         TabIndex        =   51
+         TabIndex        =   52
          Top             =   4320
          Width           =   2835
       End
@@ -775,8 +787,8 @@ Begin VB.Form frmAlmFamiliaArticulo
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   7200
-      TabIndex        =   22
+      Left            =   12120
+      TabIndex        =   23
       Top             =   7800
       Visible         =   0   'False
       Width           =   1035
@@ -807,7 +819,7 @@ Begin VB.Form frmAlmFamiliaArticulo
    Begin VB.Frame Frame1 
       Height          =   540
       Left            =   120
-      TabIndex        =   23
+      TabIndex        =   24
       Top             =   7680
       Width           =   2655
       Begin VB.Label lblIndicador 
@@ -815,7 +827,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Caption         =   "Label2"
          Height          =   255
          Left            =   120
-         TabIndex        =   24
+         TabIndex        =   25
          Top             =   240
          Width           =   2355
       End
@@ -824,16 +836,16 @@ Begin VB.Form frmAlmFamiliaArticulo
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   7170
-      TabIndex        =   21
+      Left            =   12120
+      TabIndex        =   22
       Top             =   7800
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   5880
-      TabIndex        =   20
+      Left            =   10800
+      TabIndex        =   21
       Top             =   7800
       Width           =   1035
    End
@@ -888,10 +900,10 @@ Begin VB.Form frmAlmFamiliaArticulo
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   27
+      TabIndex        =   28
       Top             =   0
-      Width           =   8400
-      _ExtentX        =   14817
+      Width           =   13470
+      _ExtentX        =   23760
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -968,10 +980,20 @@ Begin VB.Form frmAlmFamiliaArticulo
          Caption         =   "Vista previa"
          Height          =   195
          Left            =   5880
-         TabIndex        =   28
+         TabIndex        =   29
          Top             =   120
          Width           =   1215
       End
+   End
+   Begin VB.Label Label1 
+      Alignment       =   1  'Right Justify
+      Caption         =   "Descripcion"
+      Height          =   195
+      Index           =   14
+      Left            =   8520
+      TabIndex        =   62
+      Top             =   1080
+      Width           =   840
    End
    Begin VB.Label Label1 
       Alignment       =   1  'Right Justify
@@ -979,7 +1001,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Height          =   255
       Index           =   1
       Left            =   1800
-      TabIndex        =   26
+      TabIndex        =   27
       Top             =   600
       Width           =   1095
    End
@@ -989,7 +1011,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Height          =   255
       Index           =   0
       Left            =   120
-      TabIndex        =   25
+      TabIndex        =   26
       Top             =   600
       Width           =   375
    End
@@ -1277,32 +1299,32 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
     'El registro de codigo 0 no se puede Modificar ni Eliminar
     'If EsCodigoCero(CStr(Data1.Recordset.Fields(0).Value), FormatoCampo(Text1(0))) Then Exit Sub
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "sartic", "codfamia", Text1(0).Text)
-    If Cad = "" Then Cad = "0"
-    If Val(Cad) > 0 Then
-        Cad = "Hay " & Cad & " artículos pertenecientes a esta familia"
-        MsgBox Cad, vbExclamation
+    cad = DevuelveDesdeBD(conAri, "count(*)", "sartic", "codfamia", Text1(0).Text)
+    If cad = "" Then cad = "0"
+    If Val(cad) > 0 Then
+        cad = "Hay " & cad & " artículos pertenecientes a esta familia"
+        MsgBox cad, vbExclamation
         Exit Sub
     End If
     
     '### a mano
-    Cad = "¿Seguro que desea eliminar la Familia de Artículo?:" & vbCrLf
-    Cad = Cad & vbCrLf & "Cod. : " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
-    Cad = Cad & vbCrLf & "Desc.: " & Data1.Recordset.Fields(1)
+    cad = "¿Seguro que desea eliminar la Familia de Artículo?:" & vbCrLf
+    cad = cad & vbCrLf & "Cod. : " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
+    cad = cad & vbCrLf & "Desc.: " & Data1.Recordset.Fields(1)
     
     
 
 
 
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
@@ -1310,22 +1332,22 @@ Dim Cad As String
         'Borramos en dtofamia
         lblIndicador.Caption = "Eliminando descuentos"
         lblIndicador.Refresh
-        Cad = "Delete from sdtofm where codfamia = " & Data1.Recordset!Codfamia
-        conn.Execute Cad
+        cad = "Delete from sdtofm where codfamia = " & Data1.Recordset!Codfamia
+        conn.Execute cad
         
         
-        Cad = "Delete from sdtomp where codfamia = " & Data1.Recordset!Codfamia
-        conn.Execute Cad
+        cad = "Delete from sdtomp where codfamia = " & Data1.Recordset!Codfamia
+        conn.Execute cad
         
         
-        Cad = "Delete from sfamiadtos where codfamia = " & Data1.Recordset!Codfamia 'despues del DELETE
-        conn.Execute Cad
+        cad = "Delete from sfamiadtos where codfamia = " & Data1.Recordset!Codfamia 'despues del DELETE
+        conn.Execute cad
         
         lblIndicador.Caption = "Eliminando familia"
         lblIndicador.Refresh
         Data1.Recordset.Delete
         
-        ejecutar Cad, False
+        ejecutar cad, False
         
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
@@ -1347,7 +1369,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
     
@@ -1361,9 +1383,9 @@ Dim Cad As String
             Exit Sub
         End If
     
-        Cad = Data1.Recordset.Fields(0) & "|"
-        Cad = Cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(Cad)
+        cad = Data1.Recordset.Fields(0) & "|"
+        cad = cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(cad)
         Unload Me
     End If
 End Sub
@@ -1615,15 +1637,19 @@ End Sub
 
 
 Private Sub Text1_GotFocus(Index As Integer)
+    
     kCampo = Index
+    If Index = 14 Then Exit Sub
     ConseguirFoco Text1(Index), Modo
 End Sub
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    If Index = 14 Then Exit Sub
     If Not (Index = 0 And KeyCode = 38) Then KEYdown KeyCode
 End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+    If Index = 14 Then Exit Sub
     KEYpress KeyAscii
 End Sub
 
@@ -1713,7 +1739,7 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim tabla As String
 Dim Titulo As String
 Dim CargaF As Boolean 'Para saber si se carga el frame o no en el BuscaGrid
@@ -1721,20 +1747,20 @@ Dim Conexion As Byte
 
         'Llamamos a al form
         '##A mano
-        Cad = ""
+        cad = ""
         If Val(Me.imgCuentas(0).Tag) >= 0 Then
         'Se llama a Busqueda desde un campo de Cuenta
             '#A MANO: Porque busca en la tabla Cuentas
             'de la base de datos de Contabilidad
-            Cad = Cad & "Código|Cuentas|codmacta|T||15·Denominacion|Cuentas|nommacta|T||70·"
+            cad = cad & "Código|Cuentas|codmacta|T||15·Denominacion|Cuentas|nommacta|T||70·"
             tabla = "Cuentas"
             Titulo = "Cuentas"
             Conexion = conConta    'Conexión a BD: Conta
             CargaF = True 'Se puede cargar el frame
         Else
             'Busqueda de una Família de Artículo
-            Cad = Cad & ParaGrid(Text1(0), 15, "Código")
-            Cad = Cad & ParaGrid(Text1(1), 80, "Denominacion")
+            cad = cad & ParaGrid(Text1(0), 15, "Código")
+            cad = cad & ParaGrid(Text1(1), 80, "Denominacion")
             tabla = "sfamia"
             Titulo = "Família de Artículos"
             If vParamAplic.Descriptores Then Titulo = "Categorias Art."
@@ -1742,10 +1768,10 @@ Dim Conexion As Byte
             CargaF = False 'No se carga el frame
         End If
         
-        If Cad <> "" Then
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = tabla
             frmB.vSQL = cadB
             HaDevueltoDatos = False
@@ -1808,19 +1834,19 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim I As Byte
+Dim i As Byte
     
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
     
     'poner la descripcion de las cuentas
-    For I = 2 To 7
-        Text2(I).Text = PonerNombreCuenta(Text1(I), Modo)
-    Next I
-    For I = 11 To 13
+    For i = 2 To 7
+        Text2(i).Text = PonerNombreCuenta(Text1(i), Modo)
+    Next i
+    For i = 11 To 13
         
-        Text2(I).Text = PonerNombreCuenta(Text1(I), Modo)
-    Next I
+        Text2(i).Text = PonerNombreCuenta(Text1(i), Modo)
+    Next i
     ' ---- [19/10/2009] [LAURA]: añadir campo centro de coste familia
     If vEmpresa.TieneAnalitica Then Me.Text2(8).Text = PonerNombreCCoste(Me.Text1(8))
         
@@ -1840,7 +1866,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
  
@@ -1853,16 +1879,16 @@ Dim NumReg As Byte
     
     
     Frame4.Enabled = Modo < 5  'En lineas no dejo trabajar
-    B = Modo < 5
-    If Not B Then ModificaLineas = 0
+    b = Modo < 5
+    If Not b Then ModificaLineas = 0
     'datagrid1.enabled
     
     '-------------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
         cmdRegresar.visible = Modo = 5 And ModificaLineas = 0
@@ -1873,10 +1899,10 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     'Poner Boton de Cabecera o Aceptar/Cancelar
-    PonerBotonCabecera B Or (Modo = 0)
+    PonerBotonCabecera b Or (Modo = 0)
         
     'Bloquear Registros si modo distinto de Insertar o Modificar
     BloquearText1 Me, Modo
@@ -1902,45 +1928,45 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 On Error Resume Next
 
-    B = Modo < 3
-    If Not B Then
-        If Modo = 5 And ModificaLineas = 0 Then B = True
+    b = Modo < 3
+    If Not b Then
+        If Modo = 5 And ModificaLineas = 0 Then b = True
     End If
     
     'Añadir
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = Modo = 2
-    Toolbar1.Buttons(11).Enabled = B
-    If Not B Then
-        If Modo = 5 And ModificaLineas = 0 Then B = True
+    b = Modo = 2
+    Toolbar1.Buttons(11).Enabled = b
+    If Not b Then
+        If Modo = 5 And ModificaLineas = 0 Then b = True
     End If
     
     
     
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    mnEliminar.Enabled = b
     
     
     Toolbar1.Buttons(9).Enabled = Modo = 2
     Me.mnLineas.Enabled = Modo = 2
     
      '---------------------------------
-    B = (Modo >= 3)
+    b = (Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -1953,18 +1979,18 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
     DatosOk = False
-    B = CompForm(Me, 1)
-    If Not B Then Exit Function
+    b = CompForm(Me, 1)
+    If Not b Then Exit Function
     
     'Comprobar si ya existe el cod de familia en la tabla
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then B = False
+        If ExisteCP(Text1(0)) Then b = False
     End If
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -2013,11 +2039,11 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
+Private Sub PonerBotonCabecera(b As Boolean)
 
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    If B Then
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    If b Then
         PonerFocoBtn Me.cmdRegresar
         cmdRegresar.Cancel = True
     Else
@@ -2026,17 +2052,17 @@ Private Sub PonerBotonCabecera(B As Boolean)
     
     
     Me.cmdRegresar.Caption = "Cabecera"
-    If B Then
-        B = False
+    If b Then
+        b = False
         If Modo = 2 Then
-            B = Me.DatosADevolverBusqueda <> ""
-            If B Then Me.cmdRegresar.Caption = "Regresar"
+            b = Me.DatosADevolverBusqueda <> ""
+            If b Then Me.cmdRegresar.Caption = "Regresar"
         ElseIf Modo = 5 Then
-            B = ModificaLineas = 0
+            b = ModificaLineas = 0
         End If
         
     End If
-    Me.cmdRegresar.visible = B
+    Me.cmdRegresar.visible = b
    
     
     'Habilitar las opciones correctas del menu
@@ -2049,10 +2075,10 @@ End Sub
 
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
-    Cad = "(codfamia=" & Text1(0).Text & ")"
-    If SituarData(Data1, Cad, Indicador) Then
+    cad = "(codfamia=" & Text1(0).Text & ")"
+    If SituarData(Data1, cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -2073,23 +2099,23 @@ EPosicionarData2:
 End Sub
 
 Private Sub BotonImprimir()
-    frmListado3.opcion = 12
+    frmListado3.Opcion = 12
     frmListado3.Show vbModal
 End Sub
 
 
 Private Sub TratarCtaContable()
-Dim I As Integer
+Dim i As Integer
 Dim CtaCreadas As String
-    For I = 2 To 7
-        If Text2(I).Text = vbCrearNuevaCta Then
-            If InStr(1, CtaCreadas, Text1(I).Text & "|") = 0 Then
-                InsertarCuentaCble Text1(I).Text, "", "", Text1(1).Text
-                CtaCreadas = CtaCreadas & Text1(I).Text & "|"
+    For i = 2 To 7
+        If Text2(i).Text = vbCrearNuevaCta Then
+            If InStr(1, CtaCreadas, Text1(i).Text & "|") = 0 Then
+                InsertarCuentaCble Text1(i).Text, "", "", Text1(1).Text
+                CtaCreadas = CtaCreadas & Text1(i).Text & "|"
             End If
-            Text2(I).Text = Text1(1).Text
+            Text2(i).Text = Text1(1).Text
         End If
-    Next I
+    Next i
 End Sub
 
 Private Sub BotonMtoLineas()
@@ -2245,12 +2271,12 @@ End Sub
 
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
     On Error GoTo ECargaGrid
 
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral vDataGrid, vData, SQL, True
@@ -2259,8 +2285,8 @@ Dim SQL As String
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
         
-    B = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
-    vDataGrid.Enabled = Not B
+    b = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
+    vDataGrid.Enabled = Not b
 
     'PrimeraVez = False
     Exit Sub
@@ -2271,7 +2297,7 @@ End Sub
 
 
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo ECargaGrid
 
@@ -2296,10 +2322,10 @@ Dim I As Integer
                 
 
 
-    For I = 0 To vDataGrid.Columns.Count - 1
-        vDataGrid.Columns(I).Locked = True
-        vDataGrid.Columns(I).AllowSizing = False
-    Next I
+    For i = 0 To vDataGrid.Columns.Count - 1
+        vDataGrid.Columns(i).Locked = True
+        vDataGrid.Columns(i).AllowSizing = False
+    Next i
     vDataGrid.HoldFields
     Exit Sub
 ECargaGrid:
@@ -2312,30 +2338,30 @@ Private Sub CargaTxtAux(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim I As Byte
+Dim i As Byte
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For I = 0 To txtAux.Count - 1 'TextBox
-            txtAux(I).Top = 290
-            txtAux(I).visible = visible
-        Next I
+        For i = 0 To txtAux.Count - 1 'TextBox
+            txtAux(i).Top = 290
+            txtAux(i).visible = visible
+        Next i
         Combo1.visible = False
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
-            For I = 0 To txtAux.Count - 1
-                txtAux(I).Text = ""
+            For i = 0 To txtAux.Count - 1
+                txtAux(i).Text = ""
               '  BloquearTxt txtAux(i), False  'Todos menos el nombre
-            Next I
+            Next i
 
         Else 'Vamos a modificar
-            For I = 0 To txtAux.Count - 1
+            For i = 0 To txtAux.Count - 1
          
-                txtAux(I).Text = DataGrid1.Columns(I + 2).Text
+                txtAux(i).Text = DataGrid1.Columns(i + 2).Text
             
-                txtAux(I).Locked = False
-            Next I
+                txtAux(i).Locked = False
+            Next i
         End If
         
 
@@ -2344,10 +2370,10 @@ Dim I As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid1, 10)
         
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).Top = alto
-            txtAux(I).Height = DataGrid1.RowHeight
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Top = alto
+            txtAux(i).Height = DataGrid1.RowHeight
+        Next i
         Combo1.Top = alto
         'Fijamos anchura y posicion Left
         '--------------------------------
@@ -2356,18 +2382,18 @@ Dim I As Byte
         'Precio, Dto1, Dto2, Precio
         Combo1.Left = DataGrid1.Left + 340
         Combo1.Width = DataGrid1.Columns(2).Left - DataGrid1.Left - 240
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).Left = DataGrid1.Columns(I + 2).Left + 10 + 120
-            txtAux(I).Width = DataGrid1.Columns(I + 2).Width - 10
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Left = DataGrid1.Columns(i + 2).Left + 10 + 120
+            txtAux(i).Width = DataGrid1.Columns(i + 2).Width - 10
+        Next i
         
 
         Combo1.visible = limpiar
         'Los ponemos Visibles o No
         '--------------------------
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).visible = visible
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).visible = visible
+        Next i
         
     End If
 
@@ -2536,7 +2562,7 @@ Private Sub ActualizarDtoFamilia()
     
     
     CadenaDesdeOtroForm = Text1(0).Text
-    frmVarios.opcion = 8
+    frmVarios.Opcion = 8
     frmVarios.Show vbModal
     
 End Sub

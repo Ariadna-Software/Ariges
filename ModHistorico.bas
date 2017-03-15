@@ -257,7 +257,7 @@ Private Function BorrarTraspaso(EnHistorico As Boolean, cadWhere As String) As B
 'Si EnHistorico=false borra de las tablas de traspaso: "scatra" y "slitra"
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim Cad As String, cadAux As String
+Dim cad As String, cadAux As String
 Dim EsAlbaran As Boolean
     BorrarTraspaso = False
     On Error GoTo EBorrar
@@ -284,21 +284,21 @@ Dim EsAlbaran As Boolean
     If CodTipoMov <> "ALC" And CodTipoMov <> "PEC" Then
         Set RS = New ADODB.Recordset
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        Cad = ""
+        cad = ""
         While Not RS.EOF
             If CodTipoMov <> "ALC" Then
-                Cad = Cad & RS.Fields(0).Value & ","
+                cad = cad & RS.Fields(0).Value & ","
             Else
-                Cad = Cad & "numalbar="
+                cad = cad & "numalbar="
             End If
             RS.MoveNext
         Wend
         RS.Close
         Set RS = Nothing
         'Quitar la ultima coma de la cadena
-        Cad = Mid(Cad, 1, Len(Cad) - 1)
+        cad = Mid(cad, 1, Len(cad) - 1)
         
-        cadAux = cadAux & "(" & Cad & ")"
+        cadAux = cadAux & "(" & cad & ")"
     Else
         cadAux = Replace(cadWhere, NomTabla, NomTablaLin)
     End If

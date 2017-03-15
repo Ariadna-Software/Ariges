@@ -1,5 +1,5 @@
 Type=Exe
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\Windows\SysWow64\STDOLE2.TLB#OLE Automation
 Reference=*\G{00000205-0000-0010-8000-00AA006D2EA4}#2.5#0#..\..\Program Files (x86)\Common Files\System\ado\msado25.tlb#Microsoft ActiveX Data Objects 2.5 Library
 Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0; MSCOMCTL.OCX
 Object={CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0; MSDATGRD.OCX
@@ -27,7 +27,7 @@ HelpContextID="0"
 CompatibleMode="0"
 MajorVer=1
 MinorVer=0
-RevisionVer=8
+RevisionVer=9
 AutoIncrementVer=1
 ServerSupportFiles=0
 VersionCompanyName="Ariadna Software"

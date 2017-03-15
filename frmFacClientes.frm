@@ -13587,7 +13587,7 @@ Dim IT
     Else
       
         Set IT = lw1.ListItems.Add()
-        IT.Text = Me.Adodc1IMG.Recordset!Orden '
+        IT.Text = Me.Adodc1IMG.Recordset!orden '
 
         IT.SubItems(1) = Me.Adodc1IMG.Recordset.Fields(3)  'Abs(DesdeBD)   'DesdeBD 0:NO  numero: el codigo en la BD
         IT.SubItems(2) = vpaz
