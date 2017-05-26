@@ -351,7 +351,6 @@ Begin VB.Form frmFacEntOfertas2
       _Version        =   393216
       Style           =   1
       Tabs            =   4
-      Tab             =   3
       TabsPerRow      =   4
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -365,60 +364,73 @@ Begin VB.Form frmFacEntOfertas2
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacEntOfertas.frx":0363
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "cboOpcion"
-      Tab(0).Control(1)=   "txtAux(5)"
-      Tab(0).Control(2)=   "FrameCliente"
-      Tab(0).Control(3)=   "cmdAux(1)"
-      Tab(0).Control(4)=   "cmdAux(0)"
-      Tab(0).Control(5)=   "txtAux(2)"
-      Tab(0).Control(6)=   "txtAux(8)"
-      Tab(0).Control(7)=   "txtAux(7)"
-      Tab(0).Control(8)=   "txtAux(6)"
-      Tab(0).Control(9)=   "txtAux(4)"
-      Tab(0).Control(10)=   "txtAux(3)"
-      Tab(0).Control(11)=   "txtAux(1)"
-      Tab(0).Control(12)=   "txtAux(0)"
-      Tab(0).Control(13)=   "DataGrid1"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "DataGrid1"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "txtAux(0)"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "txtAux(1)"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "txtAux(3)"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).Control(4)=   "txtAux(4)"
+      Tab(0).Control(4).Enabled=   0   'False
+      Tab(0).Control(5)=   "txtAux(6)"
+      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).Control(6)=   "txtAux(7)"
+      Tab(0).Control(6).Enabled=   0   'False
+      Tab(0).Control(7)=   "txtAux(8)"
+      Tab(0).Control(7).Enabled=   0   'False
+      Tab(0).Control(8)=   "txtAux(2)"
+      Tab(0).Control(8).Enabled=   0   'False
+      Tab(0).Control(9)=   "cmdAux(0)"
+      Tab(0).Control(9).Enabled=   0   'False
+      Tab(0).Control(10)=   "cmdAux(1)"
+      Tab(0).Control(10).Enabled=   0   'False
+      Tab(0).Control(11)=   "FrameCliente"
+      Tab(0).Control(11).Enabled=   0   'False
+      Tab(0).Control(12)=   "txtAux(5)"
+      Tab(0).Control(12).Enabled=   0   'False
+      Tab(0).Control(13)=   "cboOpcion"
+      Tab(0).Control(13).Enabled=   0   'False
       Tab(0).ControlCount=   14
       TabCaption(1)   =   "Textos de la Carta"
       TabPicture(1)   =   "frmFacEntOfertas.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(3)"
-      Tab(1).Control(1)=   "Label1(5)"
-      Tab(1).Control(2)=   "Label1(45)"
-      Tab(1).Control(3)=   "Label1(2)"
-      Tab(1).Control(4)=   "Text1(21)"
-      Tab(1).Control(5)=   "Text1(22)"
-      Tab(1).Control(6)=   "Text1(23)"
-      Tab(1).Control(7)=   "Text1(24)"
+      Tab(1).Control(0)=   "Text1(19)"
+      Tab(1).Control(1)=   "Text1(20)"
+      Tab(1).Control(2)=   "Text1(18)"
+      Tab(1).Control(3)=   "Text1(30)"
+      Tab(1).Control(4)=   "Text1(29)"
+      Tab(1).Control(5)=   "Text1(28)"
+      Tab(1).Control(6)=   "Text1(27)"
+      Tab(1).Control(7)=   "Text1(26)"
       Tab(1).Control(8)=   "Text1(25)"
-      Tab(1).Control(9)=   "Text1(26)"
-      Tab(1).Control(10)=   "Text1(27)"
-      Tab(1).Control(11)=   "Text1(28)"
-      Tab(1).Control(12)=   "Text1(29)"
-      Tab(1).Control(13)=   "Text1(30)"
-      Tab(1).Control(14)=   "Text1(18)"
-      Tab(1).Control(15)=   "Text1(20)"
-      Tab(1).Control(16)=   "Text1(19)"
+      Tab(1).Control(9)=   "Text1(24)"
+      Tab(1).Control(10)=   "Text1(23)"
+      Tab(1).Control(11)=   "Text1(22)"
+      Tab(1).Control(12)=   "Text1(21)"
+      Tab(1).Control(13)=   "Label1(2)"
+      Tab(1).Control(14)=   "Label1(45)"
+      Tab(1).Control(15)=   "Label1(5)"
+      Tab(1).Control(16)=   "Label1(3)"
       Tab(1).ControlCount=   17
       TabCaption(2)   =   "Concepto y Gestión Oferta"
       TabPicture(2)   =   "frmFacEntOfertas.frx":039B
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Text1(36)"
-      Tab(2).Control(1)=   "Text1(35)"
-      Tab(2).Control(2)=   "Text1(32)"
-      Tab(2).Control(3)=   "Text1(31)"
-      Tab(2).Control(4)=   "Label1(28)"
-      Tab(2).Control(5)=   "Label1(18)"
-      Tab(2).Control(6)=   "Label1(37)"
-      Tab(2).Control(7)=   "Label1(38)"
+      Tab(2).Control(0)=   "Label1(38)"
+      Tab(2).Control(1)=   "Label1(37)"
+      Tab(2).Control(2)=   "Label1(18)"
+      Tab(2).Control(3)=   "Label1(28)"
+      Tab(2).Control(4)=   "Text1(31)"
+      Tab(2).Control(5)=   "Text1(32)"
+      Tab(2).Control(6)=   "Text1(35)"
+      Tab(2).Control(7)=   "Text1(36)"
       Tab(2).ControlCount=   8
       TabCaption(3)   =   "Totales"
       TabPicture(3)   =   "frmFacEntOfertas.frx":03B7
-      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "FrameFactura"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
       Begin VB.TextBox Text1 
          Height          =   1635
@@ -434,7 +446,7 @@ Begin VB.Form frmFacEntOfertas2
       Begin VB.ComboBox cboOpcion 
          Height          =   315
          ItemData        =   "frmFacEntOfertas.frx":03DB
-         Left            =   -63840
+         Left            =   11160
          List            =   "frmFacEntOfertas.frx":03E5
          Style           =   2  'Dropdown List
          TabIndex        =   57
@@ -456,7 +468,7 @@ Begin VB.Form frmFacEntOfertas2
       End
       Begin VB.Frame FrameFactura 
          Height          =   3780
-         Left            =   720
+         Left            =   -74280
          TabIndex        =   89
          Top             =   720
          Width           =   10575
@@ -965,7 +977,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   5
-         Left            =   -66720
+         Left            =   8280
          Locked          =   -1  'True
          MaxLength       =   1
          TabIndex        =   59
@@ -979,7 +991,7 @@ Begin VB.Form frmFacEntOfertas2
          Caption         =   "Datos Cliente"
          ForeColor       =   &H00972E0B&
          Height          =   2355
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   66
          Top             =   370
          Width           =   11655
@@ -1420,7 +1432,7 @@ Begin VB.Form frmFacEntOfertas2
          Caption         =   "+"
          Height          =   315
          Index           =   1
-         Left            =   -72360
+         Left            =   2640
          TabIndex        =   65
          ToolTipText     =   "Buscar artículo"
          Top             =   3960
@@ -1432,7 +1444,7 @@ Begin VB.Form frmFacEntOfertas2
          Caption         =   "+"
          Height          =   315
          Index           =   0
-         Left            =   -74040
+         Left            =   960
          TabIndex        =   64
          ToolTipText     =   "Buscar almacen"
          Top             =   3960
@@ -1445,7 +1457,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   2
-         Left            =   -72120
+         Left            =   2880
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   52
@@ -1462,7 +1474,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   8
-         Left            =   -64920
+         Left            =   10080
          MaxLength       =   12
          TabIndex        =   60
          Tag             =   "Importe"
@@ -1478,7 +1490,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   7
-         Left            =   -65520
+         Left            =   9480
          MaxLength       =   30
          TabIndex        =   56
          Tag             =   "Descuento 2"
@@ -1494,7 +1506,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   6
-         Left            =   -66120
+         Left            =   8880
          MaxLength       =   5
          TabIndex        =   55
          Tag             =   "Descuento 1"
@@ -1510,7 +1522,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   4
-         Left            =   -67560
+         Left            =   7440
          MaxLength       =   12
          TabIndex        =   54
          Tag             =   "Precio"
@@ -1548,7 +1560,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   3
-         Left            =   -68760
+         Left            =   6240
          MaxLength       =   16
          TabIndex        =   53
          Tag             =   "Cantidad"
@@ -1563,7 +1575,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   1
-         Left            =   -73800
+         Left            =   1200
          MaxLength       =   18
          TabIndex        =   51
          Tag             =   "Código Artículo"
@@ -1578,7 +1590,7 @@ Begin VB.Form frmFacEntOfertas2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   0
-         Left            =   -74640
+         Left            =   360
          MaxLength       =   15
          TabIndex        =   50
          Tag             =   "Código Almacen"
@@ -1690,7 +1702,7 @@ Begin VB.Form frmFacEntOfertas2
       Begin MSDataGridLib.DataGrid DataGrid1 
          Bindings        =   "frmFacEntOfertas.frx":0A15
          Height          =   2055
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   61
          Top             =   2880
          Width           =   11655
@@ -3126,7 +3138,7 @@ End Sub
 
 
 Private Sub frmPlant_CargarPlantillas()
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim RSLineas As ADODB.Recordset
 Dim SQL As String, devuelve As String
 Dim codAlmac As String
@@ -3145,8 +3157,8 @@ Dim COntadorLInea As Integer
     'lineas de esa oferta poniendo en cantidad de slipre de lineas de oferta
     'el resultado de multiplicar la cantidad de tmpscapla * cantidad de slipla
     SQL = "SELECT * FROM tmpscapla WHERE codusu=" & vUsu.codigo & " AND cantidad>0 ORDER BY codplant"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     'Obtener el almacen por defecto del trabajador
     'Poner el Almacen por defecto del Trabajador
@@ -3161,10 +3173,10 @@ Dim COntadorLInea As Integer
     'Consigo el contador
     COntadorLInea = Val(SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", ObtenerWhereCP))
     
-    While Not RS.EOF  'Para cada plantilla
+    While Not Rs.EOF  'Para cada plantilla
         'Añadimos todas las lineas de esa plantilla en la cantidad correcta en las
         'lineas de la Oferta
-        SQL = "SELECT * FROM slipla WHERE codplant=" & RS!codplant & " order by numlinea"
+        SQL = "SELECT * FROM slipla WHERE codplant=" & Rs!codplant & " order by numlinea"
         Set RSLineas = New ADODB.Recordset
         RSLineas.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         While Not RSLineas.EOF
@@ -3173,7 +3185,7 @@ Dim COntadorLInea As Integer
             If devuelve <> "" Then
             'Si se puede vender por cajas(devuelve>1) poner numero de unidades/caja en una linea con el
             'precio de caja, y otra linea con el resto unidades un precio unidad
-                cantidad = (RS!cantidad * RSLineas!cantidad)
+                cantidad = (Rs!cantidad * RSLineas!cantidad)
                 NumCajas = ObtenerNumCajas(CStr(cantidad), devuelve)
                 RestoUnid = CInt(cantidad) - NumCajas * CInt(devuelve)
                 'Obtener el precio a aplicar
@@ -3208,10 +3220,10 @@ Dim COntadorLInea As Integer
         Wend
         RSLineas.Close
         Set RSLineas = Nothing
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
     'Borrar de la Tabla Temporal (tmpscapla) los registros insertados tras añadir
     'las lineas de las plantillas seleccionadas
@@ -3234,7 +3246,7 @@ End Sub
 
 
 Private Sub frmTOferta_CargarOferta2(NumOfe As String)
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim numlinea As String, vWhere As String
 Dim i  As Integer
@@ -3259,25 +3271,25 @@ Dim CopiaDesdeHco As Boolean
     Else
         SQL = "Select * from " & NomTablaLineas & " where numofert=" & RecuperaValor(NumOfe, 1)
     End If
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    While Not RS.EOF  'Para cada linea de oferta
+    While Not Rs.EOF  'Para cada linea de oferta
         'Obtener el siguiente numero de linea
         vWhere = ObtenerWhereCP
         numlinea = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", vWhere)
         
         SQL = "INSERT INTO " & NomTablaLineas & " (numofert, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,origpre,esopcion) "
-        SQL = SQL & " VALUES(" & Text1(0).Text & ", " & numlinea & ", " & RS!codAlmac & ", " & DBSet(RS!codArtic, "T") & ", " & DBSet(RS!NomArtic, "T") & ", "
-        SQL = SQL & DBSet(RS!Ampliaci, "T", "S")
-        SQL = SQL & ", " & DBSet(RS!cantidad, "N") & ", " & DBSet(RS!precioar, "N") & ", " & DBSet(RS!dtoline1, "N") & ", " & DBSet(RS!dtoline2, "N") & ", " & DBSet(RS!ImporteL, "N") & ", "
-        SQL = SQL & DBSet(CStr(RS!origpre), "T", "S") & ","
+        SQL = SQL & " VALUES(" & Text1(0).Text & ", " & numlinea & ", " & Rs!codAlmac & ", " & DBSet(Rs!codArtic, "T") & ", " & DBSet(Rs!NomArtic, "T") & ", "
+        SQL = SQL & DBSet(Rs!Ampliaci, "T", "S")
+        SQL = SQL & ", " & DBSet(Rs!cantidad, "N") & ", " & DBSet(Rs!precioar, "N") & ", " & DBSet(Rs!dtoline1, "N") & ", " & DBSet(Rs!dtoline2, "N") & ", " & DBSet(Rs!ImporteL, "N") & ", "
+        SQL = SQL & DBSet(CStr(Rs!origpre), "T", "S") & ","
         'SQL = SQL & Rs!esopcion & "," & DBSet(DBLet((Rs!observa), "T"), "T", "S") & ")"
-        SQL = SQL & RS!esopcion & ")"
+        SQL = SQL & Rs!esopcion & ")"
         conn.Execute SQL
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     
     SQL = RecuperaValor(NumOfe, 2)  'Copio observaciones
@@ -3292,8 +3304,8 @@ Dim CopiaDesdeHco As Boolean
         Else
             SQL = "Select * from " & NombreTabla & " where numofert=" & RecuperaValor(NumOfe, 1)
         End If
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not RS.EOF Then
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
             'UPDATEAMOS los campos de la oferta de observaciones
             SQL = ""
             If RecuperaValor(NumOfe, 2) = "1" Then 'Copio observaciones
@@ -3301,15 +3313,15 @@ Dim CopiaDesdeHco As Boolean
                 
                 For i = 1 To 5
                     vWhere = "observa0" & i
-                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(RS.Fields(vWhere), "T"), "T", "S")
+                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(Rs.Fields(vWhere), "T"), "T", "S")
                     SQL = SQL & numlinea
                 Next i
                 
                 '15 Marzo 2010. Cunado pone copiar observacinoes TB tiene que copiar el campo concepto
-                SQL = SQL & ", concepto = " & DBSet(DBLet(RS!Concepto, "T"), "T")
+                SQL = SQL & ", concepto = " & DBSet(DBLet(Rs!Concepto, "T"), "T")
                 '12 Sept 2012  Copiara tb el plazo de entrega
-                SQL = SQL & ", plazos01 = " & DBSet(DBLet(RS!plazos01, "T"), "T", "S")
-                SQL = SQL & ", plazos02 = " & DBSet(DBLet(RS!plazos02, "T"), "T", "S")
+                SQL = SQL & ", plazos01 = " & DBSet(DBLet(Rs!plazos01, "T"), "T", "S")
+                SQL = SQL & ", plazos02 = " & DBSet(DBLet(Rs!plazos02, "T"), "T", "S")
                 
                 
             End If
@@ -3317,7 +3329,7 @@ Dim CopiaDesdeHco As Boolean
             If RecuperaValor(NumOfe, 3) = "1" Then 'Copio carta
                 For i = 1 To 5
                     vWhere = "asunto0" & i
-                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(RS.Fields(vWhere), "T"), "T", "S")
+                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(Rs.Fields(vWhere), "T"), "T", "S")
                     SQL = SQL & numlinea
                 Next i
                 
@@ -3326,7 +3338,7 @@ Dim CopiaDesdeHco As Boolean
             SQL = Mid(SQL, 2)  'quito la primera coma
             SQL = SQL & " WHERE numofert = " & Text1(0).Text
             SQL = "UPDATE " & NombreTabla & " SET " & SQL
-            RS.Close
+            Rs.Close
         conn.Execute SQL
         PosicionarData  'vuelvo a cargar los datos
         PonerCampos
@@ -3336,7 +3348,7 @@ Dim CopiaDesdeHco As Boolean
     End If
     
     
-    Set RS = Nothing
+    Set Rs = Nothing
 
     'Actualizar el Grid con las lineas Añadidas
     If i = 0 Then CalcularDatosFactura   'Si no mete obser y carta que carge los totales
@@ -3513,6 +3525,7 @@ Dim devuelve As String
 Dim CA As Collection
 Dim LineasQueSepasan As String
 
+
     'Comprobar que hay una Oferta seleccionada
     If Text1(0).Text = "" Then Exit Sub
     
@@ -3559,8 +3572,11 @@ Dim LineasQueSepasan As String
         End If
         
         
+        'Si pasa la oferta completa o no
+        Precio = ""   'Para que luego NO vuelva a hacer la pregunta
+        TieneOpciones (False)
     
-    
+        
         'Pedir: Operador de Pedido, fecha pedido, y fecha entrega (calcular semana)
 '        AbrirListadoOfer (37) '37: Pedir datos para Pedido (NO IMPRIME LISTADO)
         Set frmList = New frmListadoOfer
@@ -3578,7 +3594,7 @@ Dim LineasQueSepasan As String
         'LineasQueSepasan: Llevara las lineas que SI se van a pasar
         '                   Si esta vacio son todas
         LineasQueSepasan = ""
-        If TieneOpciones2(False) Then
+        If TieneOpciones(False) Then
         
             '------------------------------------------------------------
             '
@@ -3592,7 +3608,7 @@ Dim LineasQueSepasan As String
             
             
         End If
-        
+        Precio = ""
         'Tenemos en CadenaSQL parte de la SELECT para insertar el Pedido
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
@@ -4422,7 +4438,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     If Button.Index = 17 Or Button.Index = 19 Then
         'Valoracion , fra proforma
         'If TieneOpciones Then Exit Sub
-        TieneOpciones2 True   'Siempre dejo seguir
+        TieneOpciones True   'Siempre dejo seguir
     End If
 
 
@@ -5337,7 +5353,7 @@ Dim i As Byte
     Me.mnOferta.visible = Not EsHistorico 'Traer de Oferta
     Me.mnImpRecordatorio.visible = Not EsHistorico
     Me.mnImpValoracion.visible = Not EsHistorico
-    Me.mnbarra2.visible = Not EsHistorico
+    Me.mnBarra2.visible = Not EsHistorico
     Me.mnbarra3.visible = Not EsHistorico
     Me.mnBarra4.visible = Not EsHistorico
     
@@ -5617,6 +5633,7 @@ Dim bol As Boolean
 Dim MenError As String
 Dim numPed As String
 Dim LineasNoRotacion As String
+Dim EliminarOferta As Boolean
     On Error GoTo EGenPedido
 
     bol = False
@@ -5629,7 +5646,12 @@ Dim LineasNoRotacion As String
     If bol Then 'Si se inserta Pedido
        'Pasar la Oferta al Historico de Oferta y Borrarla de Ofertas
        vSQL = " scapre.numofert= " & Text1(0).Text
-       bol = ActualizarElTraspaso(MenError, vSQL, "OFE")
+       
+       EliminarOferta = True
+      
+    
+                
+        If EliminarOferta Then bol = ActualizarElTraspaso(MenError, vSQL, "OFE")
     Else
         MsgBox MenError, vbExclamation
     End If
@@ -5673,7 +5695,7 @@ End Sub
 
 Private Function InsertarLineasPedido(NumPedido As String, QueLineasPasanAlPedido As String, vArticulos_NO_Rotacion As String) As Boolean
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim i As Long
     On Error GoTo Elin
 
@@ -5716,19 +5738,19 @@ Dim i As Long
     'Marzo 2014.
     'HERBELCA.
     'Numbultos servira para saber las servidas
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     If vParamAplic.NumeroInstalacion <> 2 Then 'para todos menos para herbelca
         SQL = "Select cantidad , unicajas,numlinea from sliped,sartic where sliped.codartic = sartic.codartic and unicajas >1 and  sliped.numpedcl = " & NumPedido
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RS.EOF
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
             
-            i = RS!cantidad \ CLng(RS!unicajas)
-            If (RS!cantidad Mod CLng(RS!unicajas)) > 0 Then i = i + 1
-            SQL = "UPDATE sliped Set numbultos=" & i & " WHERE sliped.numpedcl = " & NumPedido & " AND numlinea = " & RS!numlinea
+            i = Rs!cantidad \ CLng(Rs!unicajas)
+            If (Rs!cantidad Mod CLng(Rs!unicajas)) > 0 Then i = i + 1
+            SQL = "UPDATE sliped Set numbultos=" & i & " WHERE sliped.numpedcl = " & NumPedido & " AND numlinea = " & Rs!numlinea
             conn.Execute SQL
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
+        Rs.Close
         
     Else
         
@@ -5742,22 +5764,22 @@ Dim i As Long
         
         SQL = "Select sliped.codartic,sliped.nomartic from sliped,sartic where sliped.codartic = sartic.codartic  and  sliped.numpedcl = " & NumPedido & SQL
         SQL = SQL & " AND rotacion=0"
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RS.EOF
-           vArticulos_NO_Rotacion = vArticulos_NO_Rotacion & RS!codArtic & " - " & RS!NomArtic & vbCrLf
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
+           vArticulos_NO_Rotacion = vArticulos_NO_Rotacion & Rs!codArtic & " - " & Rs!NomArtic & vbCrLf
             
-           RS.MoveNext
+           Rs.MoveNext
         Wend
-        RS.Close
+        Rs.Close
         
     End If
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
     InsertarLineasPedido = True
     Exit Function
 Elin:
-    Set RS = Nothing
+    Set Rs = Nothing
      'Hay error , almacenamos y salimos
     InsertarLineasPedido = False
 
@@ -6598,16 +6620,31 @@ End Sub
 
 
 
-Private Function TieneOpciones2(MostrarMensaje As Boolean) As Boolean
+Private Function TieneOpciones(MostrarMensaje As Boolean) As Boolean
 Dim SQL As String
-    TieneOpciones2 = False
+    TieneOpciones = False
     
     'Si tiene opciones NO depodremos listar algunas cosas: fra provorma
     If Text1(0).Text <> "" Then
         SQL = DevuelveDesdeBD(conAri, "count(*)", NomTablaLineas, "esopcion=1 AND numofert", Text1(0).Text)
         If Val(SQL) > 0 Then
             If MostrarMensaje Then MsgBox "Oferta con opciones", vbExclamation
-            TieneOpciones2 = True
+            TieneOpciones = True
+        Else
+            'Va a pasar de oferta a pedidod
+            If Not MostrarMensaje Then
+                
+                    If Precio = "" Then
+                        Precio = "NO"
+                        If MsgBox("¿Pasar todas las lineas de la oferta al pedido?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
+                            TieneOpciones = True
+                            Precio = "SI"
+                        End If
+                    Else
+                        If Precio = "SI" Then TieneOpciones = True
+                    End If
+                
+            End If
         End If
     End If
 End Function

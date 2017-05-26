@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmGesSocAsociados 
    Caption         =   "Datos básicos"
    ClientHeight    =   9855
@@ -11,8 +11,8 @@ Begin VB.Form frmGesSocAsociados
    ClientWidth     =   11955
    Icon            =   "frmGesSocAsociados.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   9855
-   ScaleWidth      =   11955
+   ScaleHeight     =   12630
+   ScaleWidth      =   21360
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame2 
       Height          =   615
@@ -157,8 +157,8 @@ Begin VB.Form frmGesSocAsociados
       Left            =   0
       TabIndex        =   37
       Top             =   0
-      Width           =   11955
-      _ExtentX        =   21087
+      Width           =   21360
+      _ExtentX        =   37677
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -423,17 +423,17 @@ Begin VB.Form frmGesSocAsociados
       TabCaption(1)   =   "Email  /  Histórico"
       TabPicture(1)   =   "frmGesSocAsociados.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Check1(0)"
-      Tab(1).Control(1)=   "Check1(1)"
-      Tab(1).Control(2)=   "Check1(2)"
-      Tab(1).Control(3)=   "Check1(3)"
-      Tab(1).Control(4)=   "txtHco(1)"
+      Tab(1).Control(0)=   "lblDpto(6)"
+      Tab(1).Control(1)=   "lblDpto(5)"
+      Tab(1).Control(2)=   "Line1"
+      Tab(1).Control(3)=   "lblDpto(0)"
+      Tab(1).Control(4)=   "DataGrid2"
       Tab(1).Control(5)=   "txtHco(0)"
-      Tab(1).Control(6)=   "DataGrid2"
-      Tab(1).Control(7)=   "lblDpto(0)"
-      Tab(1).Control(8)=   "Line1"
-      Tab(1).Control(9)=   "lblDpto(5)"
-      Tab(1).Control(10)=   "lblDpto(6)"
+      Tab(1).Control(6)=   "txtHco(1)"
+      Tab(1).Control(7)=   "Check1(3)"
+      Tab(1).Control(8)=   "Check1(2)"
+      Tab(1).Control(9)=   "Check1(1)"
+      Tab(1).Control(10)=   "Check1(0)"
       Tab(1).ControlCount=   11
       TabCaption(2)   =   "Datos III"
       TabPicture(2)   =   "frmGesSocAsociados.frx":0044
@@ -2009,7 +2009,7 @@ End Sub
 
 Private Sub BotonEliminarLinea()
 'Eliminar una linea De Trabajador. Tablas: strab1, strab2, strab3, strab4, strab5
-Dim Sql As String
+Dim SQL As String
 Dim numlinea As Integer
 On Error GoTo EEliminarLinea
 
@@ -2573,15 +2573,15 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 
-    CadB = ObtenerBusqueda(Me, False, BuscaChekc)
+    cadB = ObtenerBusqueda(Me, False, BuscaChekc)
     'cadB = ObtenerBusqueda(Me, False)
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         PonerFoco Text1(0)
@@ -2589,7 +2589,7 @@ Dim CadB As String
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 'Dim Cad As String
 'Dim Tabla As String
@@ -2614,7 +2614,7 @@ Private Sub MandaBusquedaPrevia(CadB As String)
         Set frmB1 = New frmBuscaGrid
         frmB1.vCampos = CadenaConsulta
         frmB1.vTabla = "asociados"
-        frmB1.vSQL = CadB
+        frmB1.vSQL = cadB
         
         '###A mano
         frmB1.vDevuelve = "0|1|"
@@ -3278,10 +3278,10 @@ On Error Resume Next
 End Sub
 
 
-Private Sub CargaGrid1(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, Sql As String)
+Private Sub CargaGrid1(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, SQL As String)
 On Error GoTo ECargaGrid
 
-    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
+    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
     vDataGrid.RowHeight = 320
      
     CargaGrid2 vDataGrid, vData
@@ -3536,15 +3536,15 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim Sql As String
+Dim SQL As String
 On Error GoTo FinEliminar
 
         conn.BeginTrans
-        Sql = " WHERE  idasoc=" & Data1.Recordset!IdAsoc
+        SQL = " WHERE  idasoc=" & Data1.Recordset!IdAsoc
 
         'Lineas Estudios/Formacion
-        conn.Execute "Delete from asociados_hcocambios " & Sql
-        conn.Execute "Delete from asociados " & Sql
+        conn.Execute "Delete from asociados_hcocambios " & SQL
+        conn.Execute "Delete from asociados " & SQL
         
        
         conn.Execute "DELETE from facelec_ariadna.cliente where cod_gessoc = " & CStr(Data1.Recordset!IdAsoc)

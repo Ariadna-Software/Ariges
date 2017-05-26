@@ -12883,7 +12883,7 @@ Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim NomPDF As String 'Nombre del fichero .pdf
 Dim campo As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     If txtCodigo(116).Text = "" Then
         MsgBox "Debe seleccionar una carta para Imprimir la Confirmación entrega del Pedido.", vbInformation
@@ -12962,16 +12962,16 @@ Dim RS As ADODB.Recordset
     '-- obtener los datos para envio e-mail
     campo = "SELECT numpedcl,fecpedcl,codclien,nomclien,mailconfir"
     campo = campo & " FROM " & NomTabla & " WHERE numpedcl=" & NumCod
-    Set RS = New ADODB.Recordset
-    RS.Open campo, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open campo, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         
     campo = ""
-    If Not RS.EOF Then
-        If DBLet(RS!mailconfir, "T") <> "" Then campo = RS!Nomclien & "|" & RS!mailconfir & "|"
+    If Not Rs.EOF Then
+        If DBLet(Rs!mailconfir, "T") <> "" Then campo = Rs!Nomclien & "|" & Rs!mailconfir & "|"
     End If
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
     If campo = "" Then MsgBox "No hay dirección e-mail en el pedido para enviar confirmación de entrega.", vbExclamation
     
@@ -13904,7 +13904,7 @@ Private Sub cmdEnvioMail_Click()
 End Sub
 
 Private Sub HacerCmdEnvioMail_Click()
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim VanLosFTI As Boolean
 Dim b As Boolean
 Dim ClienteVario As Long
@@ -14044,7 +14044,7 @@ Dim Aux As String
     cadSelect = cadSelect & NomTabla
     cadSelect = " WHERE " & cadSelect
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     DoEvents
     
     
@@ -14097,25 +14097,25 @@ Dim Aux As String
     
     'El orden vamos a hacerlo por: Tipo documento
     NomTabla = NomTabla & " ORDER BY codtipom"
-    RS.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = 0
-    While Not RS.EOF
+    While Not Rs.EOF
     
-        lblInd.Caption = RS!Numfactu
+        lblInd.Caption = Rs!Numfactu
         lblInd.Refresh
         
         b = True
         If VanLosFTI Then
-            If RS!codtipom = "FTI" Then
-                If RS!codClien = ClienteVario Then b = False
+            If Rs!codtipom = "FTI" Then
+                If Rs!codClien = ClienteVario Then b = False
             End If
         End If
         If b Then
-            NomTabla = RS!codtipom & "'," & RS!codClien & "," & RS!Numfactu & "," & CStr(RS!Numfactu Mod 32000) & ",'" & Format(RS!FecFactu, FormatoFecha)
+            NomTabla = Rs!codtipom & "'," & Rs!codClien & "," & Rs!Numfactu & "," & CStr(Rs!Numfactu Mod 32000) & ",'" & Format(Rs!FecFactu, FormatoFecha)
             
             'El tipo de informe lo guardare en el ultimo campo
             'El report es el = 12
-            NomTabla = NomTabla & "',12," & TransformaComasPuntos(CStr(DBLet(RS!TotalFac, "N"))) & ")"
+            NomTabla = NomTabla & "',12," & TransformaComasPuntos(CStr(DBLet(Rs!TotalFac, "N"))) & ")"
             
             
             
@@ -14125,9 +14125,9 @@ Dim Aux As String
                 
            If (NumRegElim Mod 50) = 0 Then DoEvents
         End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     'Mayo 2016
     If chkMail(3).Value = 1 Then
@@ -14173,21 +14173,21 @@ Dim Aux As String
     cadSelect = Mid(cadSelect, 7)
     NomTabla = NomTabla & " AND " & cadSelect & "  AND numtermi>=0  "
     
-    RS.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF
-        lblInd.Caption = RS!Numfactu
+    While Not Rs.EOF
+        lblInd.Caption = Rs!Numfactu
         lblInd.Refresh
-        NomTabla = "numalbar = '" & RS!codtipom & "' AND fechaalb = '" & Format(RS!FecFactu, FormatoFecha) & "' AND numlinea = " & CStr(RS!Numfactu Mod 32000)
+        NomTabla = "numalbar = '" & Rs!codtipom & "' AND fechaalb = '" & Format(Rs!FecFactu, FormatoFecha) & "' AND numlinea = " & CStr(Rs!Numfactu Mod 32000)
         'El tipo de informe lo guardare en el ultimo campo
         'El report es el = 12
         NomTabla = "UPDATE tmpnlotes SET codalmac = 18 WHERE codusu = " & vUsu.codigo & " AND " & NomTabla
         conn.Execute NomTabla
     
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     
     
@@ -14227,13 +14227,13 @@ Dim Aux As String
             cadSelect = "Select codclien,maiclie" & cadSelect
             cadSelect = cadSelect & " as email from tmpnlotes,sclien where codusu = " & vUsu.codigo & " and codclien=codprove"
             cadSelect = cadSelect & " group by codclien having email is null"
-            RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             NumRegElim = 0
-            While Not RS.EOF
+            While Not Rs.EOF
                 NumRegElim = NumRegElim + 1
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
             If NumRegElim > 0 Then
                 If MsgBox("Tiene cliente sin mail. Continuar sin sus datos?", vbQuestion + vbYesNo) = vbNo Then
@@ -14242,23 +14242,23 @@ Dim Aux As String
                 End If
                     
                 'Si no salimos borramos
-                RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 cadSelect = "DELETE from tmpnlotes where codusu =" & vUsu.codigo & " and codprove ="
-                While Not RS.EOF
-                    conn.Execute cadSelect & RS!codClien
-                    RS.MoveNext
+                While Not Rs.EOF
+                    conn.Execute cadSelect & Rs!codClien
+                    Rs.MoveNext
                 Wend
-                RS.Close
+                Rs.Close
                 
                 
                 cadSelect = "Select count(*) from tmpnlotes where codusu =" & vUsu.codigo
-                RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 NumRegElim = 0
-                If Not RS.EOF Then
-                    If Not IsNull(RS.Fields(0)) Then NumRegElim = DBLet(RS.Fields(0), "N")
+                If Not Rs.EOF Then
+                    If Not IsNull(Rs.Fields(0)) Then NumRegElim = DBLet(Rs.Fields(0), "N")
                     
                 End If
-                RS.Close
+                Rs.Close
                 
                 If NumRegElim = 0 Then
                     'NO hay datos para enviar
@@ -14271,7 +14271,7 @@ Dim Aux As String
                     If MsgBox(cadSelect, vbQuestion + vbYesNo) = vbNo Then NumRegElim = 0
                 End If
                 If NumRegElim = 0 Then
-                    Set RS = Nothing
+                    Set Rs = Nothing
                     Screen.MousePointer = vbDefault
                     Exit Sub
                 End If
@@ -14302,7 +14302,7 @@ Dim Aux As String
     
     
     NumRegElim = 0
-    If GeneracionEnvioMail(RS) Then NumRegElim = 1
+    If GeneracionEnvioMail(Rs) Then NumRegElim = 1
         
     
     'Si ha ido todo bien entonces numregelim=1
@@ -14364,7 +14364,7 @@ End Sub
         
         
         
-Private Function GeneracionEnvioMail(ByRef RS As ADODB.Recordset) As Boolean
+Private Function GeneracionEnvioMail(ByRef Rs As ADODB.Recordset) As Boolean
 Dim EsdesdeTelCabFact As Boolean
     On Error GoTo EGeneracionEnvioMail
     GeneracionEnvioMail = False
@@ -14374,55 +14374,55 @@ Dim EsdesdeTelCabFact As Boolean
         Label14(22).Caption = "Preparando datos facturae"
         Label14(22).Refresh
         cadSelect = "Select numalbar from tmpnlotes where codusu = " & vUsu.codigo & " GROUP BY 1"
-        RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RS.EOF
-            cadSelect = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", RS!NumAlbar, "T")
+        Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
+            cadSelect = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", Rs!NumAlbar, "T")
             If cadSelect = "" Then
-                codClien = codClien & "        " & RS!NumAlbar
+                codClien = codClien & "        " & Rs!NumAlbar
             Else
-                cadSelect = "UPDATE tmpnlotes set numlotes= '" & cadSelect & "' WHERE codusu = " & vUsu.codigo & " AND numalbar=" & DBSet(RS!NumAlbar, "T")
+                cadSelect = "UPDATE tmpnlotes set numlotes= '" & cadSelect & "' WHERE codusu = " & vUsu.codigo & " AND numalbar=" & DBSet(Rs!NumAlbar, "T")
                 conn.Execute cadSelect
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
+        Rs.Close
     
     End If
         
     cadSelect = "Select * from tmpnlotes where codusu =" & vUsu.codigo & " ORDER BY codalmac,numalbar,codprove"
-    RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     codClien = ""
-    While Not RS.EOF
+    While Not Rs.EOF
         
         If Dir(App.Path & "\docum.pdf", vbArchive) <> "" Then Kill App.Path & "\docum.pdf"
     
-        Label14(22).Caption = "Factura: " & RS!NumAlbar & " " & RS!codArtic
+        Label14(22).Caption = "Factura: " & Rs!NumAlbar & " " & Rs!codArtic
         Label14(22).Refresh
         
-        If codClien <> RS!codAlmac Then   'If CodClien <> RS!codTipoM Then
+        If codClien <> Rs!codAlmac Then   'If CodClien <> RS!codTipoM Then
             'OTRO TIPO DE DOCUMENTO
             
             '''''If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then
-            If Not PonerParamRPT2(RS!codAlmac, CadParam, numParam, NumCod, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
+            If Not PonerParamRPT2(Rs!codAlmac, CadParam, numParam, NumCod, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
                 Exit Function
             End If
-            codClien = RS!codAlmac
+            codClien = Rs!codAlmac
         End If
         
         EsdesdeTelCabFact = False
-        If RS!NumAlbar = "FAT" Then
+        If Rs!NumAlbar = "FAT" Then
             If vParamAplic.TieneTelefonia2 = 1 Then EsdesdeTelCabFact = True
         End If
         'If Rs!NumAlbar = "FAT" Then
         If EsdesdeTelCabFact Then
             
             'Factura de telefonia. Lleva otro SELECT     serie
-            cadFormula = "{tel_cab_factura.Serie} ='" & RS!numlotes & "' and {tel_cab_factura.Ano} =" & Year(RS!FechaAlb) & " and {tel_cab_factura.NumFact} =" & RS!codArtic
+            cadFormula = "{tel_cab_factura.Serie} ='" & Rs!numlotes & "' and {tel_cab_factura.Ano} =" & Year(Rs!FechaAlb) & " and {tel_cab_factura.NumFact} =" & Rs!codArtic
         Else
             'RESTO de facturas
-            cadFormula = "({scafac.codtipom}='" & RS!NumAlbar & "') "
-            cadFormula = cadFormula & " AND ({scafac.numfactu}=" & RS!codArtic & ") "
-            cadFormula = cadFormula & " AND ({scafac.fecfactu}= Date(" & Year(RS!FechaAlb) & "," & Month(RS!FechaAlb) & "," & Day(RS!FechaAlb) & "))"
+            cadFormula = "({scafac.codtipom}='" & Rs!NumAlbar & "') "
+            cadFormula = cadFormula & " AND ({scafac.numfactu}=" & Rs!codArtic & ") "
+            cadFormula = cadFormula & " AND ({scafac.fecfactu}= Date(" & Year(Rs!FechaAlb) & "," & Month(Rs!FechaAlb) & "," & Day(Rs!FechaAlb) & "))"
         End If
 
           
@@ -14456,11 +14456,11 @@ Dim EsdesdeTelCabFact As Boolean
         
         'FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & RS!NumAlbar & Format(RS!codProve, "0000000") & Format(RS!codArtic, "0000000") & Format(RS!FechaAlb, "yymmdd") & ".pdf"
         If OpcionListado = 315 Then
-            FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & RS!NumAlbar & Format(RS!codArtic, "0000000") & ".pdf"
+            FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & Rs!NumAlbar & Format(Rs!codArtic, "0000000") & ".pdf"
         Else
             'Se tiene que llamar base_numserie_numFactura_yyyymmdd.pdf
             
-            cadFormula = vEmpresa.BDAriges & "_" & RS!numlotes & "_" & RS!codArtic & "_" & Format(RS!FechaAlb, "yyyymmdd") & ".pdf"
+            cadFormula = vEmpresa.BDAriges & "_" & Rs!numlotes & "_" & Rs!codArtic & "_" & Format(Rs!FechaAlb, "yyyymmdd") & ".pdf"
             cadFormula = vParamAplic.PathFacturaE & "\" & cadFormula
             
             Label14(22).Caption = cadFormula
@@ -14470,15 +14470,15 @@ Dim EsdesdeTelCabFact As Boolean
             
             
             'Ha copiado, luego yo la pongo como en facturaE
-            cadFormula = "UPDATE scafac set EnFacturaE=1 WHERE codtipom='" & RS!NumAlbar & "' AND numfactu=" & RS!codArtic
-            cadFormula = cadFormula & " AND fecfactu='" & Format(RS!FechaAlb, FormatoFecha) & "'"
+            cadFormula = "UPDATE scafac set EnFacturaE=1 WHERE codtipom='" & Rs!NumAlbar & "' AND numfactu=" & Rs!codArtic
+            cadFormula = cadFormula & " AND fecfactu='" & Format(Rs!FechaAlb, FormatoFecha) & "'"
             ejecutar cadFormula, False
         End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
-    Set RS = Nothing
+    Set Rs = Nothing
     GeneracionEnvioMail = True
     Exit Function
 EGeneracionEnvioMail:
@@ -15658,7 +15658,11 @@ Dim EsNomCod As Boolean
                     txtCodigo(Index).Text = ""
                     PonerFoco txtCodigo(Index)
                 Else
-                    txtNombre(4).Text = CalculaSemana(CDate(txtCodigo(26).Text))
+                    If Not IsDate(txtCodigo(26).Text) Then
+                        txtNombre(4).Text = ""
+                    Else
+                        txtNombre(4).Text = CalculaSemana(CDate(txtCodigo(26).Text))
+                    End If
                 End If
             End If
             
@@ -16006,7 +16010,7 @@ Private Function ObtenerTotalOferPeriodo(cadWhere As String, TotImpA As String, 
 'TotOfeA: nº total de ofertas Aceptadas en el periodo
 'TotOfeNA: nº total de Ofertas NO Aceptadas en el periodo
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ImpBrutoLin As Currency
 Dim ImpBrutoTotA As Currency
 Dim ImpBrutoTotNA As Currency
@@ -16033,21 +16037,21 @@ On Error GoTo ETotalPeriodo
     TotalOfeA = 0
     TotalOfeNA = 0
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
-        ImpBrutoLin = RS!ImpTotal - RS!impdtopp - RS!impdtogn
-        If RS!aceptado = 1 Then 'OFERTA ACEPTADA
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+        ImpBrutoLin = Rs!ImpTotal - Rs!impdtopp - Rs!impdtogn
+        If Rs!aceptado = 1 Then 'OFERTA ACEPTADA
             TotalOfeA = TotalOfeA + 1
             ImpBrutoTotA = ImpBrutoTotA + ImpBrutoLin
         Else 'OFERTA NO ACEPTADA
             TotalOfeNA = TotalOfeNA + 1
             ImpBrutoTotNA = ImpBrutoTotNA + ImpBrutoLin
         End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     TotImpA = Format(ImpBrutoTotA, "0.00")
     TotImpNA = Format(ImpBrutoTotNA, "0.00")
@@ -16227,7 +16231,7 @@ End Function
 Private Function ListaClientesMante(cadWhere As String) As String
 'devuelve de los clientes filtrados en la cadWhere aquellos que tiene mantenimientos
 Dim SQL As String, cad As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 On Error GoTo ELista
 
     cad = ""
@@ -16235,15 +16239,15 @@ On Error GoTo ELista
     SQL = SQL & " FROM sclien INNER JOIN scaman ON sclien.codclien=scaman.codclien "
     If cadWhere <> "" Then SQL = SQL & " WHERE " & cadWhere
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
-    While Not RS.EOF
-        cad = cad & RS.Fields(0).Value & ","
-        RS.MoveNext
+    While Not Rs.EOF
+        cad = cad & Rs.Fields(0).Value & ","
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     'quitamos la ultima coma
     If cad <> "" Then cad = Mid(cad, 1, Len(cad) - 1)
@@ -16258,7 +16262,7 @@ End Function
 Private Function ListaClientesDesdeHastaFactura2() As String
 'devuelve de los clientes filtrados en la cadWhere aquellos que tiene mantenimientos
 Dim SQL As String, cad As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 On Error GoTo ELista2
 
     'Monto el cad
@@ -16296,15 +16300,15 @@ On Error GoTo ELista2
     If cad <> "" Then SQL = SQL & " WHERE " & cad
 
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
-    While Not RS.EOF
-        cad = cad & RS.Fields(0).Value & ","
-        RS.MoveNext
+    While Not Rs.EOF
+        cad = cad & Rs.Fields(0).Value & ","
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     'quitamos la ultima coma
     If cad <> "" Then
@@ -16323,7 +16327,7 @@ End Function
 
 Private Sub EnviarEMailMulti(cadWhere As String, cadTit As String, cadRpt As String, cadTabla As String)
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad1 As String, cad2 As String, Lista As String
 Dim cont As Integer
 
@@ -16341,8 +16345,8 @@ On Error GoTo EEnviar
     SQL = SQL & "FROM " & cadTabla
     SQL = SQL & " WHERE " & cadWhere
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'creamos una temporal donde guardamos para cada proveedor que SI tiene
     'e-mail, el mail1 o el mail2 al que vamos a enviar
@@ -16356,14 +16360,14 @@ On Error GoTo EEnviar
     cont = 0
     Lista = ""
     
-    While Not RS.EOF
+    While Not Rs.EOF
     'para cada cliente/proveedor enviamos un e-mail
-        cad1 = DBLet(RS.Fields(2), "T") 'e-mail administracion
-        cad2 = DBLet(RS.Fields(3), "T") 'e-mail compras
+        cad1 = DBLet(Rs.Fields(2), "T") 'e-mail administracion
+        cad2 = DBLet(Rs.Fields(3), "T") 'e-mail compras
         
         If cad1 = "" And cad2 = "" Then 'no tiene e-mail
 '              MsgBox "Sin mail para el proveedor: " & Format(RS!codProve, "000000") & " - " & RS!nomprove, vbExclamation
-              Lista = Lista & Format(RS.Fields(0), "000000") & " - " & RS.Fields(1) & vbCrLf
+              Lista = Lista & Format(Rs.Fields(0), "000000") & " - " & Rs.Fields(1) & vbCrLf
         ElseIf cad1 <> "" And cad2 <> "" Then 'tiene 2 e-mail
             'ver a q e-mail se va a enviar (administracion, compras)
             If cadTabla = "sprove" Then
@@ -16380,10 +16384,10 @@ On Error GoTo EEnviar
                 .OtrosParametros = CadParam
                 .NumeroParametros = numParam
                 If cadTabla = "sprove" Then
-                    SQL = "{sprove.codprove}=" & RS.Fields(0)
+                    SQL = "{sprove.codprove}=" & Rs.Fields(0)
                     .Opcion = 306
                 Else
-                    SQL = "{sclien.codclien}=" & RS.Fields(0)
+                    SQL = "{sclien.codclien}=" & Rs.Fields(0)
                     .Opcion = 91
                 End If
                 .FormulaSeleccion = SQL
@@ -16397,7 +16401,7 @@ On Error GoTo EEnviar
                 If CadenaDesdeOtroForm = "" Then
                 'si se ha generado el .pdf para enviar
                     SQL = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
-                    SQL = SQL & " VALUES (" & vUsu.codigo & "," & DBSet(RS.Fields(0), "N") & "," & DBSet(RS.Fields(1), "T") & "," & DBSet(cad1, "T") & ")"
+                    SQL = SQL & " VALUES (" & vUsu.codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(cad1, "T") & ")"
                     conn.Execute SQL
             
                     Me.Refresh
@@ -16405,16 +16409,16 @@ On Error GoTo EEnviar
                     cont = cont + 1
                     'Se ha generado bien el documento
                     'Lo copiamos sobre app.path & \temp
-                    SQL = RS.Fields(0) & ".pdf"
+                    SQL = Rs.Fields(0) & ".pdf"
                     FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & SQL
                 End If
             End With
         End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
       
     If cont > 0 Then
         Espera 0.4
@@ -16471,7 +16475,7 @@ Private Sub CargarComboTipoMov(indice As Integer)
 
 'Lo cargamos con los valores de la tabla stipom que tengan tipo de documento=Albaranes (tipodocu=1)
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim i As Byte
 
     On Error GoTo ECargaCombo
@@ -16482,19 +16486,19 @@ Dim i As Byte
     'AHora tiene que mostrarlas todas
     'SQL = "select codtipom, nomtipom from stipom where (codtipom like 'F__') and (codtipom<>'FRT')"
     SQL = "select codtipom, nomtipom from stipom where (codtipom like 'F__')"  ' and (codtipom<>'FRT')"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     i = 0
     
     If indice < 1000 Then
             'Son combos normales
          cboTipomov(indice).Clear
         
-         While Not RS.EOF
-             cboTipomov(indice).AddItem RS.Fields(0).Value & "-" & RS.Fields(1).Value
+         While Not Rs.EOF
+             cboTipomov(indice).AddItem Rs.Fields(0).Value & "-" & Rs.Fields(1).Value
              cboTipomov(indice).ItemData(cboTipomov(indice).NewIndex) = i
              i = i + 1
-             RS.MoveNext
+             Rs.MoveNext
          Wend
         
         
@@ -16516,7 +16520,7 @@ Dim i As Byte
         'LOS TIKCETS NO LOS ENVIO POR MAIL
         
         'Febrero 2013. Si que se pueden poner los tikets NOMINATIVOS
-        While Not RS.EOF
+        While Not Rs.EOF
 '            If RS!codtipom <> "FTI" Then
 '
 '                ListTipoMov(indice).AddItem RS.Fields(0).Value & "-" & RS.Fields(1).Value
@@ -16525,17 +16529,17 @@ Dim i As Byte
 '            End If
             
             
-                ListTipoMov(indice).AddItem RS.Fields(0).Value & "-" & RS.Fields(1).Value
+                ListTipoMov(indice).AddItem Rs.Fields(0).Value & "-" & Rs.Fields(1).Value
                 'ListTipoMov(indice).List (ListTipoMov(indice).NewIndex)
                 ListTipoMov(indice).Selected((ListTipoMov(indice).NewIndex)) = True
             
 
 
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     'Pongo el dos para todos menos para la de etiquetas cliente
     If indice < 1000 Then
@@ -17496,7 +17500,7 @@ Dim Base As Currency
 Dim cad As String
 Dim Aux As String
 Dim F As Date
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim J As Integer
 
@@ -17504,7 +17508,7 @@ Dim J As Integer
     On Error GoTo eGenerarDatosInformes
     GenerarDatosInformes = False
     Set vCRM = New cCRM
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     vCRM.BorrarTemporales
     vCRM.codClien = miRsAux!codClien
     vCRM.Codmacta = DevuelveDesdeBD(conAri, "codmacta", "sclien", "codclien", vCRM.codClien)
@@ -17528,19 +17532,19 @@ Dim J As Integer
     'Aqui va lo de ultimos años
     SQL = SQL & " group by 1 order by 1,2"
     
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = 0
     
-    While Not RS.EOF
+    While Not Rs.EOF
         cad = ""
     
         NumRegElim = NumRegElim + 1
-        Impor1 = DBLet(RS!TotalFac, "N")
+        Impor1 = DBLet(Rs!TotalFac, "N")
         
         SQL = "insert into `tmpcrmtesor` (`codusu`,`codigo`,`importe`,`anyotxt`,`variacion`)"
         SQL = SQL & " values (" & vUsu.codigo & "," & NumRegElim & "," & TransformaComasPuntos(CStr(Impor1)) & ",'"
         
-        If Val(RS!Anyo) = Year(Now) Then
+        If Val(Rs!Anyo) = Year(Now) Then
             'Valor actual.
             SQL = SQL & "actual',"
             'Cambio la base para comprar con el mismo periodo del actual
@@ -17560,21 +17564,21 @@ Dim J As Integer
             End If
         Else
             'Otro año cualquiera
-             SQL = SQL & RS!Anyo & "',"
+             SQL = SQL & Rs!Anyo & "',"
             If NumRegElim > 1 And Base <> 0 Then
                 Impor1 = CStr(((100 * Impor1) / Base) - 100)
                 cad = Format(Impor1, FormatoPorcen) & "%"
             End If
              
         End If
-        Base = DBLet(RS!TotalFac, "N")
+        Base = DBLet(Rs!TotalFac, "N")
         SQL = SQL & "'" & cad & "')"
       
 
         conn.Execute SQL
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     
     
@@ -17588,24 +17592,24 @@ Dim J As Integer
     SQL = SQL & "  AND recedocu=0 ORDER BY fecvenci desc"
     
     NumRegElim = 0
-    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     Base = 0
     Impor1 = 0
     
-    While Not RS.EOF
+    While Not Rs.EOF
           'trozo copiado d ela funcion de ver cobros pdtes
-      If DBLet(RS!Devuelto, "N") = 1 Then
+      If DBLet(Rs!Devuelto, "N") = 1 Then
             'SALE SEGURO (si no esta girado otra vez ¿no?
             'Si esta girado otra vez tendra impcobro, con lo cual NO tendra diferencia de importes
-            Impor1 = RS!ImpVenci + DBLet(RS!gastos, "N") - DBLet(RS!impcobro, "N")
+            Impor1 = Rs!ImpVenci + DBLet(Rs!gastos, "N") - DBLet(Rs!impcobro, "N")
             
         Else
             'Si esta recibido NO lo saco
-            If Val(RS!recedocu) = 1 Then
+            If Val(Rs!recedocu) = 1 Then
                 Impor1 = 0
             Else
                 'NO esta recibido. Si tiene diferencia
-                Impor1 = RS!ImpVenci + DBLet(RS!gastos, "N") - DBLet(RS!impcobro, "N")
+                Impor1 = Rs!ImpVenci + DBLet(Rs!gastos, "N") - DBLet(Rs!impcobro, "N")
         
             End If
       End If
@@ -17614,32 +17618,32 @@ Dim J As Integer
             SQL = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,"
             SQL = SQL & "`importe`,`observa`,forpa) values ( "
             SQL = SQL & vUsu.codigo & "," & NumRegElim & ",0,'"
-            SQL = SQL & RS!numSerie & Format(RS!Codfaccl, "000000")
-            If RS!FecVenci < Now Then SQL = SQL & " *"
-            SQL = SQL & "','" & Format(RS!fecfaccl, FormatoFecha)
-            SQL = SQL & "','" & Format(RS!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
+            SQL = SQL & Rs!numSerie & Format(Rs!Codfaccl, "000000")
+            If Rs!FecVenci < Now Then SQL = SQL & " *"
+            SQL = SQL & "','" & Format(Rs!fecfaccl, FormatoFecha)
+            SQL = SQL & "','" & Format(Rs!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
             'Antes la observa era NULL, ahora llevare el Depto
-            If IsNull(RS!Departamento) Then
+            If IsNull(Rs!Departamento) Then
                 Aux = "NULL"
             Else
                 Aux = "codclien = " & vCRM.codClien & " AND coddirec  "
-                Aux = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", Aux, CStr(RS!Departamento))
-                If Aux = "" Then Aux = RS!Departamento
+                Aux = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", Aux, CStr(Rs!Departamento))
+                If Aux = "" Then Aux = Rs!Departamento
                 Aux = "'" & DevNombreSQL(Aux) & "'"
                 
             End If
             SQL = SQL & Aux
             'Mayo 2010
             'Con forma de pago
-            SQL = SQL & ",'" & Format(RS!codforpa, "000") & " - " & DevNombreSQL(RS!nomforpa) & "')"
+            SQL = SQL & ",'" & Format(Rs!codforpa, "000") & " - " & DevNombreSQL(Rs!nomforpa) & "')"
             conn.Execute SQL
       End If
-      RS.MoveNext
+      Rs.MoveNext
 
         
     
     Wend
-    RS.Close
+    Rs.Close
         
         
     'Marzo 2011
@@ -17653,44 +17657,44 @@ Dim J As Integer
     SQL = SQL & " AND impcobro>0 ORDER BY fecvenci desc"
 
     J = CInt(NumRegElim) 'pk puede que haya metidos de cobros. NO reseteo Numregelim
-    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     Base = 0
     Impor1 = 0
     
-    While Not RS.EOF
+    While Not Rs.EOF
     'trozo copiado d ela funcion de ver cobros pdtes
       
             'NO esta recibido. Si tiene diferencia
-            Impor1 = RS!impcobro
+            Impor1 = Rs!impcobro
             NumRegElim = NumRegElim + 1
             SQL = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,"
             SQL = SQL & "`importe`,`observa`,forpa) values ( "
             SQL = SQL & vUsu.codigo & "," & NumRegElim & ",2,'"    '2.  El 2 es RIESGO para el rpt
-            SQL = SQL & RS!numSerie & Format(RS!Codfaccl, "000000")
-            If RS!FecVenci < Now Then SQL = SQL & " *"
-            SQL = SQL & "','" & Format(RS!fecfaccl, FormatoFecha)
-            SQL = SQL & "','" & Format(RS!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
+            SQL = SQL & Rs!numSerie & Format(Rs!Codfaccl, "000000")
+            If Rs!FecVenci < Now Then SQL = SQL & " *"
+            SQL = SQL & "','" & Format(Rs!fecfaccl, FormatoFecha)
+            SQL = SQL & "','" & Format(Rs!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
             'Antes la observa era NULL, ahora llevare el Depto
-            If IsNull(RS!Departamento) Then
+            If IsNull(Rs!Departamento) Then
                 Aux = "NULL"
             Else
                 Aux = "codclien = " & vCRM.codClien & " AND coddirec  "
-                Aux = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", Aux, CStr(RS!Departamento))
-                If Aux = "" Then Aux = RS!Departamento
+                Aux = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", Aux, CStr(Rs!Departamento))
+                If Aux = "" Then Aux = Rs!Departamento
                 Aux = "'" & DevNombreSQL(Aux) & "'"
                 
             End If
             SQL = SQL & Aux
             'Mayo 2010
             'Con forma de pago
-            SQL = SQL & ",'" & Format(RS!codforpa, "000") & " - " & DevNombreSQL(RS!nomforpa) & "')"
+            SQL = SQL & ",'" & Format(Rs!codforpa, "000") & " - " & DevNombreSQL(Rs!nomforpa) & "')"
             conn.Execute SQL
-            RS.MoveNext
+            Rs.MoveNext
 
         
     
     Wend
-    RS.Close
+    Rs.Close
         
  
     Titulo = "Hco reclamas"
@@ -17700,29 +17704,29 @@ Dim J As Integer
     'SQL = SQL & " AND (sforpa.tipforpa between 0 and 3) ORDER BY fecvenci desc"
     J = CInt(NumRegElim) 'pk puede que haya metidos de cobros. NO reseteo Numregelim
     
-    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         NumRegElim = NumRegElim + 1
         SQL = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,`importe`,`observa`) values ("
         SQL = SQL & vUsu.codigo & "," & NumRegElim & ",1,'"
-        SQL = SQL & DBLet(RS!numSerie, "T") & Format(DBLet(RS!Codfaccl, "N"), "000000") & "','"
-        SQL = SQL & Format(RS!fecfaccl, FormatoFecha) & "','" & Format(RS!fecreclama, FormatoFecha) & "',"
-        SQL = SQL & TransformaComasPuntos(RS!ImpVenci) & ",'"
-        cad = DBLetMemo(RS!Observaciones)
+        SQL = SQL & DBLet(Rs!numSerie, "T") & Format(DBLet(Rs!Codfaccl, "N"), "000000") & "','"
+        SQL = SQL & Format(Rs!fecfaccl, FormatoFecha) & "','" & Format(Rs!fecreclama, FormatoFecha) & "',"
+        SQL = SQL & TransformaComasPuntos(Rs!ImpVenci) & ",'"
+        cad = DBLetMemo(Rs!Observaciones)
         cad = Replace(cad, vbCrLf, " ")
         SQL = SQL & DevNombreSQL(cad) & "')"
         conn.Execute SQL
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
    
  
     SQL = "Select count(*) from scaman where codclien = " & CStr(miRsAux!codClien)
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = 0
-    If Not RS.EOF Then NumRegElim = DBLet(RS.Fields(0), "N")
-    RS.Close
+    If Not Rs.EOF Then NumRegElim = DBLet(Rs.Fields(0), "N")
+    Rs.Close
 
     
     
@@ -17736,7 +17740,7 @@ Dim J As Integer
 eGenerarDatosInformes:
     If Err.Number <> 0 Then MuestraError Err.Number, Titulo
     Set vCRM = Nothing
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 

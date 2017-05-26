@@ -400,6 +400,10 @@ Private mvarContabilidadNueva As Boolean
 Private mvarLotesGeneralitat As Boolean  'NO lleva en BD spara1. Si tiene fitos y existe la tabla slotesgeneralitat pondremos a true
 
 
+'MAY 2017
+Private mvarInventarioCodigoArticulo As Boolean
+
+
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
@@ -1621,6 +1625,16 @@ Public Property Get EntradaRapidaFacturasMostrador() As Boolean
 End Property
 
 
+Public Property Let InventarioCodigoArticulo(ByVal vData As Boolean)
+     mvarInventarioCodigoArticulo = vData
+End Property
+Public Property Get InventarioCodigoArticulo() As Boolean
+     InventarioCodigoArticulo = mvarInventarioCodigoArticulo
+End Property
+
+
+
+
 
 Public Property Get ManipuladorFitosanitarios2() As Boolean
      ManipuladorFitosanitarios2 = mvarManipuladorFitosanitarios
@@ -1957,6 +1971,9 @@ On Error GoTo Err3
         mvarRecalculoMargen = DBLet(RS!ActualizaMargen, "N") = 1
     
         
+        mvarInventarioCodigoArticulo = DBLet(RS!InventarioPorCodigo, "N") = 1
+        
+        
         If Me.HayDeparNuevo = 2 Then mvarTipoFormularioClientes = 1  'Obras. SAIL-Y euler
         
         
@@ -2222,6 +2239,11 @@ On Error GoTo EModificar
     
     
     SQL = SQL & ", ActualizaMargen = " & DBSet(RecalculoMargen, "B")
+    
+    SQL = SQL & ", InventarioPorCodigo = " & DBSet(mvarInventarioCodigoArticulo, "B")
+
+
+
 
     'Solo desde OG
     'SQL = SQL & ",Renting = " & DBSet(mvarRenting, "B")

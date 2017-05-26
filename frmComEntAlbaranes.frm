@@ -2180,7 +2180,7 @@ Dim ParaElMargen As Currency
                                     Else
                                         EnPromocionOPrecioEspecial = "ATENCION. Artículo en:"
                                         If precioUC = 1 Or precioUC = 3 Then EnPromocionOPrecioEspecial = EnPromocionOPrecioEspecial & vbCrLf & " - PROMOCIONES"
-                                        If precioUC = 3 Then EnPromocionOPrecioEspecial = EnPromocionOPrecioEspecial & vbCrLf & " - PRECIOS ESPECIALES"
+                                        If precioUC = 2 Or precioUC = 3 Then EnPromocionOPrecioEspecial = EnPromocionOPrecioEspecial & vbCrLf & " - PRECIOS ESPECIALES"
                                         EnPromocionOPrecioEspecial = vbCrLf & String(20, "*") & vbCrLf & vbCrLf & EnPromocionOPrecioEspecial & vbCrLf & String(20, "*")
                                         EnPromocionOPrecioEspecial = vbCrLf & vbCrLf & vbCrLf & EnPromocionOPrecioEspecial
                                     End If
@@ -2333,7 +2333,7 @@ Dim SQL As String
 Dim Izquierda As String, Derecha As String
 Dim llis As Collection
 Dim i As Integer
-Dim B As Boolean
+Dim b As Boolean
 
 
     If Data1.Recordset.EOF Then Exit Function
@@ -2450,14 +2450,14 @@ Dim B As Boolean
         End If
         Set llis = Nothing
     End If
-    B = True
+    b = True
     
 EComprobar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "El campo fecha no se ha podido modificar", Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         ComprobarCambioFecha = True
     Else
         ComprobarCambioFecha = False
@@ -2709,7 +2709,7 @@ Private Sub BotonEliminar()
 ' - eliminar los movimientos que inserto el albaran en (smoval)
 ' - actualizar el ultprecio compra y ultima fecha compra en funcion del ult. movimiento ALC en smoval
 ' - reestablecer el precio medio ponderado
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo EEliminar
 
@@ -2720,15 +2720,15 @@ Dim Cad As String
     
     If Not PuedeEliminar(False) Then Exit Sub
     
-    Cad = "Cabecera de Albaranes Compras" & vbCrLf
-    Cad = Cad & "-------------------------------------------------" & vbCrLf & vbCrLf
-    Cad = Cad & "Va a eliminar el Albaran:            "
-    Cad = Cad & vbCrLf & "Nº:  " & Text1(0).Text
-    Cad = Cad & vbCrLf & "Fecha: " & Text1(1).Text
-    Cad = Cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? " & vbCrLf & vbCrLf
-    Cad = Cad & "-------------------------------------------------"
+    cad = "Cabecera de Albaranes Compras" & vbCrLf
+    cad = cad & "-------------------------------------------------" & vbCrLf & vbCrLf
+    cad = cad & "Va a eliminar el Albaran:            "
+    cad = cad & vbCrLf & "Nº:  " & Text1(0).Text
+    cad = cad & vbCrLf & "Fecha: " & Text1(1).Text
+    cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? " & vbCrLf & vbCrLf
+    cad = cad & "-------------------------------------------------"
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         Screen.MousePointer = vbHourglass
     
         NumRegElim = Data1.Recordset.AbsolutePosition
@@ -2803,7 +2803,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
-Dim Cad As String
+Dim cad As String
 
     'Quitar lineas y volver a la cabecera
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
@@ -2824,9 +2824,9 @@ Dim Cad As String
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
-        Cad = Data1.Recordset.Fields(0) & "|"
-        Cad = Cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(Cad)
+        cad = Data1.Recordset.Fields(0) & "|"
+        cad = cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(cad)
         Unload Me
     End If
 End Sub
@@ -3321,18 +3321,18 @@ End Sub
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 Dim Ind As Integer
-Dim B As Boolean
+Dim b As Boolean
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
     
     If KeyCode = 43 Or KeyCode = 107 Or KeyCode = 187 Then
-        B = False
+        b = False
         If Text1(Index).Text = "" Then
-            B = True
+            b = True
         Else
-            If Text1(Index).SelLength = Len(Text1(Index).Text) Then B = True
+            If Text1(Index).SelLength = Len(Text1(Index).Text) Then b = True
         End If
-        If B Then
+        If b Then
                 Ind = -1
                 Select Case Index
                 Case 2
@@ -3485,24 +3485,24 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
     '##A mano
-    Cad = ""
-    Cad = Cad & ParaGrid(Text1(0), 20, "Nº Albaran")
-    Cad = Cad & ParaGrid(Text1(1), 15, "Fecha Alb.")
-    Cad = Cad & ParaGrid(Text1(4), 15, "Provedor")
-    Cad = Cad & ParaGrid(Text1(5), 50, "Nombre Prov.")
+    cad = ""
+    cad = cad & ParaGrid(Text1(0), 20, "Nº Albaran")
+    cad = cad & ParaGrid(Text1(1), 15, "Fecha Alb.")
+    cad = cad & ParaGrid(Text1(4), 15, "Provedor")
+    cad = cad & ParaGrid(Text1(5), 50, "Nombre Prov.")
     tabla = NombreTabla
     Titulo = "Albaranes"
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
@@ -3612,7 +3612,7 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte, NumReg As Byte
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo EPonerModo
 
@@ -3628,10 +3628,10 @@ Dim B As Boolean
     
     'Modo 2. Hay datos y estamos visualizandolos
     '=========================================
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -3639,14 +3639,14 @@ Dim B As Boolean
     '22 Sept 2010
     'El albaran lo puede imprimir en cualquier empresa
     'If vParamAplic.IVA_REA > 0 Then Toolbar1.Buttons(12).Enabled = b
-    Toolbar1.Buttons(12).Enabled = B
+    Toolbar1.Buttons(12).Enabled = b
     
     'Poner Flechas de desplazamiento visibles
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
         
         
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -3658,11 +3658,11 @@ Dim B As Boolean
     
     'La fecha de albaran es clave primaria pero dejamos modificarla
     BloquearTxt Text1(1), (Modo = 0 Or Modo = 2 Or Modo = 5)
-    B = (Modo <> 1)
+    b = (Modo <> 1)
     'Bloquear los campos de Pedido, excepto en Busqueda
-    BloquearTxt Text1(3), B
-    BloquearTxt Text1(20), B
-    BloquearTxt Text1(21), B
+    BloquearTxt Text1(3), b
+    BloquearTxt Text1(20), b
+    BloquearTxt Text1(21), b
     
     
    
@@ -3693,22 +3693,22 @@ Dim B As Boolean
     
     
     '---------------------------------------------
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1)
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1)
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
     If cmdCancelar.visible Then cmdCancelar.Cancel = True
-    chkDocArchi.Enabled = B
+    chkDocArchi.Enabled = b
         
     
     
     
     For i = 0 To Me.imgFecha.Count - 1
 '        Me.imgFecha(i).Enabled = b
-        BloquearImg imgFecha(i), Not B
+        BloquearImg imgFecha(i), Not b
     Next i
     
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = B
+        Me.imgBuscar(i).Enabled = b
     Next i
     Me.imgBuscar(4).Enabled = (Modo = 1)
     Me.imgBuscar(0).Enabled = (Modo = 3 Or Modo = 1)
@@ -3755,50 +3755,51 @@ End Sub
 Private Function DatosOk() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
-Dim B As Boolean
-Dim Cad As String
+Dim b As Boolean
+Dim cad As String
 
     On Error GoTo EDatosOK
 
     DatosOk = False
        
-    B = CompForm(Me, 1) 'Comprobar formato datos ok
-    If Not B Then Exit Function
+    b = CompForm(Me, 1) 'Comprobar formato datos ok
+    If Not b Then Exit Function
     
     If Modo = 3 Then
         'Comprobare que este albaran/proveedor NO existe
         'a que es campo clave en scafpc1
-        Cad = "numalbar=" & DBSet(Text1(0).Text, "T") & " AND codprove"
-        Cad = DevuelveDesdeBD(conAri, "fechaalb", "scaalp", Cad, Text1(4).Text, "N")
-        If Cad <> "" Then
-            Cad = Text1(5).Text & vbCrLf & "con fecha " & Cad
-            Cad = "Ya existe el albaran: " & Text1(0).Text & " del proveedor " & vbCrLf & Text1(4).Text & " " & Cad
+        cad = "numalbar=" & DBSet(Text1(0).Text, "T") & " AND codprove"
+        cad = DevuelveDesdeBD(conAri, "fechaalb", "scaalp", cad, Text1(4).Text, "N")
+        If cad <> "" Then
+            cad = Text1(5).Text & vbCrLf & "con fecha " & cad
+            cad = "Ya existe el albaran: " & Text1(0).Text & " del proveedor " & vbCrLf & Text1(4).Text & " " & cad
             
-            MsgBox Cad, vbExclamation
-            B = False
+            MsgBox cad, vbExclamation
+            b = False
         End If
     End If
     
-    If Modo = 4 And B Then
+    If Modo = 4 And b Then
         If vParamAplic.ManipuladorFitosanitarios2 Then
             If CDate(Text1(1).Text) <> Data1.Recordset!FechaAlb Then
                 'Si tienen lotes asignados NO podremos seguir
-                If Not PuedeEliminar(False) Then B = False
+                If Not PuedeEliminar(False) Then b = False
             End If
         End If
     End If
     
-    DatosOk = B
+    DatosOk = b
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
 
 
 Private Function DatosOkLinea() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim i As Byte
 Dim cart As CArticulo
 Dim Aux As String
+Dim DiferenciaCantidad As Currency
 
     On Error GoTo EDatosOkLinea
 
@@ -3819,7 +3820,7 @@ Dim Aux As String
     
     
     
-    B = True
+    b = True
     'Comprobar que los campos requeridos tengan valor
     For i = 0 To txtAux.Count - 1
         If txtAux(i).Text = "" Then
@@ -3828,7 +3829,7 @@ Dim Aux As String
             Else
                 Screen.MousePointer = vbDefault
                 MsgBox "El campo " & txtAux(i).Tag & " no puede ser nulo", vbExclamation
-                B = False
+                b = False
                 PonerFoco txtAux(i)
                 Exit Function
             End If
@@ -3841,7 +3842,7 @@ Dim Aux As String
     If cart.LeerDatos(txtAux(1).Text) Then
         If cart.TieneNumLote Then
             If Trim(Text2(17).Text) = "" Then
-                B = False
+                b = False
                 MsgBox "El nº de lote no puede ser nulo." & vbCrLf & vbCrLf & "El artículo tiene control de lotes.", vbExclamation
                 PonerFoco Text2(17)
             End If
@@ -3849,7 +3850,7 @@ Dim Aux As String
             
             'Cuando lleve Registro fitosanitario entonces el modificar articulo "cantidad" sera SI no se ha vendido NADA
             '------------------------------------------------------------------------------
-            If B And vParamAplic.ManipuladorFitosanitarios2 Then
+            If b And vParamAplic.ManipuladorFitosanitarios2 Then
             
             
                 'Modificando
@@ -3858,25 +3859,43 @@ Dim Aux As String
                     cadList = ""
                     'Si cambia cantidad vendida o nº lote entonces comprobaremos
                     If Data2.Recordset!numlotes <> Me.Text2(17).Text Then
-                        cadList = "OK"
+                        cadList = "LO"
                     ElseIf Data2.Recordset!cantidad <> ImporteFormateado(Me.txtAux(3).Text) Then
                         cadList = "OK"
                     End If
             
                     If cadList <> "" Then
-                        cadList = "numlote =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!FechaAlb, "F")
-                        cadList = cadList & " AND codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND 1"
-                        cadList = DevuelveDesdeBD(conAri, "count(*)", "slialblotes", cadList, "1")
-                        If Val(cadList) > 0 Then
-                            MsgBox "El lote ya ha sido vendido", vbExclamation
-                            B = False
-                        Else
+                        
+                        If cadList = "LO" Then
+                            
                             cadList = "numlote =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!FechaAlb, "F")
                             cadList = cadList & " AND codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND 1"
-                            cadList = DevuelveDesdeBD(conAri, "count(*)", "slivenlotes", cadList, "1")
+                            cadList = DevuelveDesdeBD(conAri, "count(*)", "slialblotes", cadList, "1")
                             If Val(cadList) > 0 Then
-                                MsgBox "El lote esta siendo vendido", vbExclamation
-                                B = False
+                                MsgBox "El lote ya ha sido vendido", vbExclamation
+                                b = False
+                            Else
+                                cadList = "numlote =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!FechaAlb, "F")
+                                cadList = cadList & " AND codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND 1"
+                                cadList = DevuelveDesdeBD(conAri, "count(*)", "slivenlotes", cadList, "1")
+                                If Val(cadList) > 0 Then
+                                    MsgBox "El lote esta siendo vendido", vbExclamation
+                                    b = False
+                                End If
+                            End If
+                        Else
+                            'Es el mismo lote de venta. Vemos si cambiando la cantidad tiene bastante
+                            DiferenciaCantidad = Data2.Recordset!cantidad - ImporteFormateado(Me.txtAux(3).Text)
+                            If DiferenciaCantidad > 0 Then
+                                'Hemos puesto menos cantidad de la que habiamos puesto
+                                cadList = "numlotes =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!FechaAlb, "F")
+                                cadList = cadList & " AND codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND 1"
+                                cadList = DevuelveDesdeBD(conAri, "(canentra-vendida)", "slotes", cadList, "1")
+                                If cadList = "" Then cadList = "0"
+                                If DiferenciaCantidad > CCur(cadList) Then
+                                      MsgBox "Cantidad disponible insuficiente", vbExclamation
+                                      b = False
+                                End If
                             End If
                         End If
                     End If
@@ -3892,7 +3911,7 @@ Dim Aux As String
                     If Val(cadList) > 0 Then
                         'NO PUEDE
                         MsgBox "Ya existe el mismo articulo-lote-albaran ", vbExclamation
-                        B = False
+                        b = False
                     End If
                 End If ' manniulador
             End If 'ModificaLineas=2
@@ -3911,7 +3930,7 @@ Dim Aux As String
 '    End If
     
         
-    DatosOkLinea = B
+    DatosOkLinea = b
 EDatosOkLinea:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
@@ -4035,7 +4054,7 @@ Private Function InsertarLinea(numlinea As String) As Boolean
 'Inserta un registro en la tabla de lineas de Albaranes: slialb
 'OUT -> NumLinea: devuelve el Nº de linea que acaba de insertar
 Dim SQL As String
-Dim B As Boolean
+Dim b As Boolean
 Dim vCStock As CStock
 Dim vArtic As CArticulo
 Dim MenError As String
@@ -4098,9 +4117,9 @@ Dim ImpReciclado As Single
         If CCur(txtAux(3).Text) > 0 Then
             'Laura 19/12/2006: calcular precio_ult_compra con el precio con descuentos, ed. importe/cantidad, en lugar de con el precio
             'b = vArtic.ActualizarUltFechaCompra(Text1(1).Text, txtAux(4).Text)
-            B = vArtic.ActualizarUltFechaCompra(Text1(1).Text, CStr(Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4)))
+            b = vArtic.ActualizarUltFechaCompra(Text1(1).Text, CStr(Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4)))
         Else
-            B = True
+            b = True
         End If
                 
         'Actualizar en la tabla sartic el precio medio ponderado
@@ -4108,15 +4127,15 @@ Dim ImpReciclado As Single
             MenError = "Actualizar precio medio ponderado"
             'Laura 19/12/2006: calcular precio_ult_compra con el precio con descuentos, ed. importe/cantidad, en lugar de con el precio
             'If b Then b = vArtic.ActualizarPrecioMedPond(CCur(txtAux(3).Text), CCur(txtAux(4).Text))
-            If B Then B = vArtic.ActualizarPrecioMedPond(CCur(txtAux(3).Text), Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4))
+            If b Then b = vArtic.ActualizarPrecioMedPond(CCur(txtAux(3).Text), Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4))
             Set vArtic = Nothing
             '====
         End If
         
         'en actualizar stock comprobamos si el articulo tiene control de stock
-        If B Then
+        If b Then
             MenError = "Actualizando Stocks"
-            B = vCStock.ActualizarStock
+            b = vCStock.ActualizarStock
             
             
             vCStock.ComprobarFechaInventario True, ""  'Dejo seguir
@@ -4125,7 +4144,7 @@ Dim ImpReciclado As Single
         End If
         
         
-        If B Then
+        If b Then
             'si el articulo tiene control de numero de lotes, insertar en la tabla slotes
             If Me.Text2(17).Locked = False Then
                 'si ya existe la linea aumentamos la cantidad entrada
@@ -4165,7 +4184,7 @@ Dim ImpReciclado As Single
         
         
         'Articulo reciclado
-        If B Then
+        If b Then
           If vParamAplic.ArtReciclado <> "" Then
                 
                 If ArticuloConTasaReciclado(txtAux(1).Text, ImpReciclado) Then
@@ -4194,9 +4213,9 @@ Dim ImpReciclado As Single
     Set vCStock = Nothing
     
 EInsertarLinea:
-    If Err.Number <> 0 Then B = False
+    If Err.Number <> 0 Then b = False
     
-    If B Then
+    If b Then
         If DentroTRANS Then conn.CommitTrans
         AlmacenLineas = CInt(txtAux(0).Text)
         InsertarLinea = True
@@ -4213,7 +4232,7 @@ Private Function ModificarLinea() As Boolean
 Dim SQL As String, vWhere As String
 Dim vCStock As CStock
 Dim vArtic As CArticulo
-Dim B As Boolean
+Dim b As Boolean
 Dim MenError As String
 Dim dentroTRANSAC As Boolean
 Dim cadNumLote As String
@@ -4265,20 +4284,20 @@ Dim ImpReciclado As Single
         MenError = "Recalcular precio medio ponderado del articulo."
         '-- Laura 18/12/2006: calcular precio_med_pond con el precio aplicandole el descuento, ed. importe/cantidad.
         'b = vArtic.ReestablecerPrecioMedPon(CCur(Data2.Recordset!Cantidad), CCur(Data2.Recordset!precioar))
-        B = vArtic.ReestablecerPrecioMedPon(CCur(Data2.Recordset!cantidad), CCur(Data2.Recordset!ImporteL) / CCur(Data2.Recordset!cantidad))
+        b = vArtic.ReestablecerPrecioMedPon(CCur(Data2.Recordset!cantidad), CCur(Data2.Recordset!ImporteL) / CCur(Data2.Recordset!cantidad))
         
         '-- Laura 18/12/2006: calcular precio_med_pond con el precio aplicandole el descuento, ed. importe/cantidad.
         'If b Then b = vArtic.ActualizarPrecioMedPond(CCur(txtAux(3).Text), CCur(txtAux(4).Text), CCur(Data2.Recordset!Cantidad))
-        If B Then B = vArtic.ActualizarPrecioMedPond(CCur(txtAux(3).Text), Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4), CCur(Data2.Recordset!cantidad))
+        If b Then b = vArtic.ActualizarPrecioMedPond(CCur(txtAux(3).Text), Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4), CCur(Data2.Recordset!cantidad))
         
         'Actualizar ultima fecha de compra del articulo
-        If B Then
+        If b Then
             'Noacutalizamos si cantidad negativa
             If CCur(txtAux(3).Text) > 0 Then
                 MenError = "Actualizando ult. fecha compra"
                 '-- Laura 18/12/2006: actualizar precio_ult_compra con el precio aplicandole el descuento, ed. importe/cantidad.
                 'b = vArtic.ActualizarUltFechaCompra(Text1(1).Text, txtAux(4).Text)
-                B = vArtic.ActualizarUltFechaCompra(Text1(1).Text, Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4))
+                b = vArtic.ActualizarUltFechaCompra(Text1(1).Text, Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4))
             End If
         End If
         '====
@@ -4286,20 +4305,20 @@ Dim ImpReciclado As Single
             
         'Actualizar Stocks de los articulos y movimientos
         '===================================================
-        If B Then
+        If b Then
             MenError = "Actualizando stocks y movimientos almacen"
             'si no se ha modificado el almacen reestablecemos cantidad y precio
             If CInt(Data2.Recordset!codAlmac) = CInt(txtAux(0).Text) Then
 '                MenError = "Actualizando Stocks"
-                B = vCStock.ModificarStock(Data2.Recordset!cantidad)
+                b = vCStock.ModificarStock(Data2.Recordset!cantidad)
             Else
                 'deshacer el movimiento para el almacen anterior y devolver stock
-                B = InicializarCStock(vCStock, "S") 'movim. de salida
-                If B Then B = vCStock.DevolverStock2
+                b = InicializarCStock(vCStock, "S") 'movim. de salida
+                If b Then b = vCStock.DevolverStock2
                             
                 'Insertar el movimiento para el nuevo almacen y actualizar stock
-                B = InicializarCStock(vCStock, "E") 'mov. de entrada
-                If B Then B = vCStock.ActualizarStock
+                b = InicializarCStock(vCStock, "E") 'mov. de entrada
+                If b Then b = vCStock.ActualizarStock
             End If
         End If
                 
@@ -4307,7 +4326,7 @@ Dim ImpReciclado As Single
         
         '=== CONTROL Nº DE LOTES DEL ARTICULO
         '===============================================
-        If B Then
+        If b Then
             'comprobar si el artículo que modificamos tiene control de lotes
             MenError = "Actualizando Nº Lote."
             If vArtic.TieneNumLote Then
@@ -4317,7 +4336,7 @@ Dim ImpReciclado As Single
                     SQL = SQL & " AND fecentra=" & DBSet(Data2.Recordset!FechaAlb, "F")
                     If RegistrosAListar(SQL) > 0 Then
                         'actualizar la cantidad de entrada de la tabla slotes
-                        SQL = "UPDATE slotes SET canentra=canentra + " & DBSet(CStr(CSng(txtAux(3).Text)) - CSng(Me.Data2.Recordset!cantidad), "N")
+                        SQL = "UPDATE slotes SET canentra=" & DBSet(txtAux(3).Text, "N")  '- CSng(Me.Data2.Recordset!cantidad), "N")
                         SQL = SQL & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data2.Recordset!FechaAlb, "F")
                         conn.Execute SQL
                     ElseIf Text2(17).Text <> "" Then
@@ -4352,7 +4371,7 @@ Dim ImpReciclado As Single
             
         
         'Articulo reciclado
-        If B Then
+        If b Then
             If vParamAplic.ArtReciclado <> "" Then
                 
                 If ArticuloConTasaReciclado(txtAux(1).Text, ImpReciclado) Then
@@ -4379,12 +4398,12 @@ Dim ImpReciclado As Single
         End If
             
             
-        If B Then
+        If b Then
             conn.CommitTrans
         Else
             conn.RollbackTrans
         End If
-        ModificarLinea = B
+        ModificarLinea = b
     End If
         
     
@@ -4404,21 +4423,21 @@ End Function
 
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
+Private Sub PonerBotonCabecera(b As Boolean)
 'Pone el boton de Regresar a la Cabecera si pasamos a MAntenimiento de Lineas
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
 
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    Me.cmdRegresar.visible = B
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
     If cmdRegresar.visible Then
         cmdRegresar.Cancel = True
     Else
         cmdCancelar.Cancel = True
     End If
-    If B Then
+    If b Then
         Me.lblIndicador.Caption = "Líneas " & TituloLinea
         PonerFocoBtn Me.cmdRegresar
     End If
@@ -4430,12 +4449,12 @@ End Sub
 
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
 On Error GoTo ECargaGrid
 
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
@@ -4443,8 +4462,8 @@ On Error GoTo ECargaGrid
     CargaGrid2 vDataGrid, vData
     
     
-    B = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
-    vDataGrid.Enabled = Not B
+    b = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
+    vDataGrid.Enabled = Not b
     If Modo = 2 Then vDataGrid.Enabled = True
     PrimeraVez = False
     
@@ -4694,7 +4713,7 @@ Dim cadkey As Integer
     
 End Sub
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     
     ' ---- [02/11/2009] [LAURA] : al pulsar F2 para abrir articulos en la solapa Documentos|Pedidos
@@ -4738,7 +4757,7 @@ End Sub
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim TipoDto As Byte
-Dim B As Boolean
+Dim b As Boolean
 Dim bLotes As Boolean
 Dim okArticulo As Boolean
 
@@ -4799,10 +4818,10 @@ Dim okArticulo As Boolean
                 
                 '##
                 
-                B = (Me.ActiveControl.Name = "txtAux")
-                If B Then B = (Me.ActiveControl.Index = 0)
+                b = (Me.ActiveControl.Name = "txtAux")
+                If b Then b = (Me.ActiveControl.Index = 0)
                 
-                If Not B Then
+                If Not b Then
 '                    If txtAux(2).Locked Then PonerFoco txtAux(3)
                 Else
                     PonerFoco txtAux(0)
@@ -4864,8 +4883,8 @@ End Sub
 
 Private Sub ObtenerPrecioCompra()
 Dim vPrecio As CPreciosCom
-Dim Cad As String
-Dim Aux2 As String
+Dim cad As String
+Dim aux2 As String
     On Error GoTo EPrecios
     
     Set vPrecio = New CPreciosCom
@@ -4881,16 +4900,16 @@ Dim Aux2 As String
     Else
         'Obtener el ult. precio de compra de ese articulo (sartic)
        
-        Cad = DevuelveDesdeBDNew(conAri, "sartic", "preciouc", "codartic", txtAux(1).Text, "T")
-        If Cad <> "" Then txtAux(4).Text = Cad
+        cad = DevuelveDesdeBDNew(conAri, "sartic", "preciouc", "codartic", txtAux(1).Text, "T")
+        If cad <> "" Then txtAux(4).Text = cad
         
             vPrecio.CodigoArtic = txtAux(1).Text
             vPrecio.CodigoProve = Text1(4).Text
-            Cad = vPrecio.ObtenerDescuentos2(Text1(1).Text, Aux2)
-            If Cad = "" Then Cad = "0"
-            txtAux(5).Text = Cad
-            If Aux2 = "" Then Aux2 = "0"
-            txtAux(6).Text = Aux2
+            cad = vPrecio.ObtenerDescuentos2(Text1(1).Text, aux2)
+            If cad = "" Then cad = "0"
+            txtAux(5).Text = cad
+            If aux2 = "" Then aux2 = "0"
+            txtAux(6).Text = aux2
             
             'txtAux(5).Text = "0"
             'txtAux(6).Text = "0"
@@ -4907,9 +4926,9 @@ EPrecios:
 End Sub
 
 
-Private Sub BotonMtoLineas(numTab As Integer, Cad As String)
+Private Sub BotonMtoLineas(numTab As Integer, cad As String)
         Me.SSTab1.Tab = numTab
-        TituloLinea = Cad
+        TituloLinea = cad
         ModificaLineas = 0
         If Data2.Recordset.EOF Then Text2(16).Text = ""
         PonerModo 5
@@ -4922,7 +4941,7 @@ End Sub
 
 Private Function Eliminar() As Boolean
 Dim vWhere As String
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
     On Error GoTo FinEliminar
@@ -4933,23 +4952,23 @@ Dim SQL As String
         
         'Reestablecer el stock en la tabla salmac a partir de todas las lineas del albaran
         'Eliminar los movimientos de smoval
-        B = ReestablecerStock(vWhere)
+        b = ReestablecerStock(vWhere)
         
 
-        If B Then
+        If b Then
                         'Hay que eliminar los lotes
             If vParamAplic.ManipuladorFitosanitarios2 Then EliminarEnSlotes
                     
         End If
         
-        If B Then
+        If b Then
             'Pasar los datos al historico de albaranes de compra y borrarlos de albaranes
             'scaalp --> schalp
             'slialp --> slhalp
-            B = ActualizarElTraspaso("", vWhere, CodTipoMov, cadList)
+            b = ActualizarElTraspaso("", vWhere, CodTipoMov, cadList)
             
             'Eliminar los numeros de serie del albaran sino estan vendidos a ningun cliente
-            If B Then
+            If b Then
                 SQL = "DELETE FROM sserie WHERE numalbpr=" & DBSet(Data1.Recordset!NumAlbar, "T")
                 SQL = SQL & " AND fechacom=" & DBSet(Data1.Recordset!FechaAlb, "F")
                 SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
@@ -4962,9 +4981,9 @@ Dim SQL As String
 FinEliminar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar Albaran Compras", Err.Description
-        B = False
+        b = False
     End If
-    If Not B Then
+    If Not b Then
         conn.RollbackTrans
         Eliminar = False
     Else
@@ -5062,45 +5081,45 @@ End Function
 
 Private Sub PonerModoOpcionesMenu(Modo As Byte)
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
    
-        B = (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
+        b = (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
         'Insertar
-        Toolbar1.Buttons(5).Enabled = (B Or Modo = 0) And (cadSelAlbaranes = "" Or (cadSelAlbaranes <> "" And Modo = 5)) And Not EsHistorico
-        Me.mnNuevo.Enabled = (B Or Modo = 0) And (cadSelAlbaranes = "" Or (cadSelAlbaranes <> "" And Modo = 5)) And Not EsHistorico
+        Toolbar1.Buttons(5).Enabled = (b Or Modo = 0) And (cadSelAlbaranes = "" Or (cadSelAlbaranes <> "" And Modo = 5)) And Not EsHistorico
+        Me.mnNuevo.Enabled = (b Or Modo = 0) And (cadSelAlbaranes = "" Or (cadSelAlbaranes <> "" And Modo = 5)) And Not EsHistorico
         'Modificar
-        Toolbar1.Buttons(6).Enabled = B And Not EsHistorico
-        Me.mnModificar.Enabled = B And Not EsHistorico
+        Toolbar1.Buttons(6).Enabled = b And Not EsHistorico
+        Me.mnModificar.Enabled = b And Not EsHistorico
         'eliminar
         'Toolbar1.Buttons(7).Enabled = b And cadSelAlbaranes = "" And Not EsHistorico
         'Me.mnEliminar.Enabled = b And cadSelAlbaranes = "" And Not EsHistorico
         
         'No permito borrar
-        If B Then
+        If b Then
             'Si modo=2 NO dejare que borre
-            If Modo = 2 And cadSelAlbaranes <> "" Then B = False
+            If Modo = 2 And cadSelAlbaranes <> "" Then b = False
         End If
-        Toolbar1.Buttons(7).Enabled = B And Not EsHistorico
+        Toolbar1.Buttons(7).Enabled = b And Not EsHistorico
         Me.mnEliminar.Enabled = Toolbar1.Buttons(7).Enabled
             
-        B = (Modo = 2) And Not EsHistorico
+        b = (Modo = 2) And Not EsHistorico
         'Mantenimiento lineas
         
         Toolbar1.Buttons(10).Enabled = (Modo = 2)
         Me.mnLineas.Enabled = (Modo = 2)
-        Toolbar1.Buttons(9).Enabled = B
-        Toolbar1.Buttons(14).Enabled = B
+        Toolbar1.Buttons(9).Enabled = b
+        Toolbar1.Buttons(14).Enabled = b
         
-        Toolbar1.Buttons(12).Enabled = B
+        Toolbar1.Buttons(12).Enabled = b
         
         
-        B = (Modo >= 3) Or Modo = 1
+        b = (Modo >= 3) Or Modo = 1
         'Buscar
-        Toolbar1.Buttons(1).Enabled = (Not B)
-        Me.mnBuscar.Enabled = (Not B)
+        Toolbar1.Buttons(1).Enabled = (Not b)
+        Me.mnBuscar.Enabled = (Not b)
         'Ver Todos
-        Toolbar1.Buttons(2).Enabled = (Not B)
-        Me.mnVerTodos.Enabled = (Not B)
+        Toolbar1.Buttons(2).Enabled = (Not b)
+        Me.mnVerTodos.Enabled = (Not b)
 End Sub
 
 
@@ -5167,7 +5186,7 @@ Dim vCStock As CStock
 Dim cLote As CNumLote
 Dim cart As CArticulo
 Dim SQL As String
-Dim B As Boolean
+Dim b As Boolean
 Dim Aux As String
 Dim ImpReciclado As Single
 
@@ -5237,16 +5256,16 @@ Dim ImpReciclado As Single
     Set cart = Nothing
     '====
     
-    B = vCStock.DevolverStock2
+    b = vCStock.DevolverStock2
     Set vCStock = Nothing
     
     'Si el articulo tiene control de lotes eliminar la cantidad eliminada
     'si la linea se queda con cero borrarla.
-    If B Then
+    If b Then
         If Not IsNull(Data2.Recordset!numlotes) Then
             Set cLote = New CNumLote
             If cLote.LeerDatos(CStr(Data2.Recordset!codArtic), CStr(Data2.Recordset!numlotes), CStr(Data2.Recordset!FechaAlb)) Then
-                B = cLote.Eliminar(CSng(Data2.Recordset!cantidad))
+                b = cLote.Eliminar(CSng(Data2.Recordset!cantidad))
             
             End If
             Set cLote = Nothing
@@ -5257,9 +5276,9 @@ Dim ImpReciclado As Single
 EEliminarLinea:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar Linea Albaran " & vbCrLf & Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         EliminarLinea = True
     Else
@@ -5308,7 +5327,7 @@ Private Function ReestablecerStock(cadSel As String) As Boolean
 Dim vCStock As CStock
 Dim cart As CArticulo
 Dim cLote As CNumLote
-Dim B As Boolean
+Dim b As Boolean
 Dim RS As ADODB.Recordset
 Dim SQL As String
 
@@ -5320,8 +5339,8 @@ Dim SQL As String
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    B = True
-    While (Not RS.EOF) And B
+    b = True
+    While (Not RS.EOF) And b
         'para cada linea de albaran deshacemos movimientos y precios medios ponderados
         Set vCStock = New CStock
            If InicializarCStock(vCStock, "S", RS!numlinea) Then
@@ -5338,15 +5357,15 @@ Dim SQL As String
                 If cart.LeerDatos(vCStock.codArtic) Then
                     'Laura 19/12/2006: Calcular precio medio pond. con precio con los descuentos (importe/cantidad)
                     'If Not cArt.ReestablecerPrecioMedPon(CCur(vCStock.Cantidad), CCur(RS!precioar)) Then b = False
-                    If Not cart.ReestablecerPrecioMedPon(CCur(vCStock.cantidad), Round2(vCStock.Importe / vCStock.cantidad, 4)) Then B = False
+                    If Not cart.ReestablecerPrecioMedPon(CCur(vCStock.cantidad), Round2(vCStock.Importe / vCStock.cantidad, 4)) Then b = False
                     
                     'Si el articulo tiene control de lotes eliminar la cantidad eliminada
                     'si la linea se queda con cero borrarla.
-                    If B Then
+                    If b Then
                         If cart.TieneNumLote Then
                             Set cLote = New CNumLote
                             If cLote.LeerDatos(cart.codigo, CStr(DBLet(RS!numlotes, "T")), CStr(RS!FechaAlb)) Then
-                                B = cLote.Eliminar(vCStock.cantidad)
+                                b = cLote.Eliminar(vCStock.cantidad)
                             
                             End If
                             Set cLote = Nothing
@@ -5360,11 +5379,11 @@ Dim SQL As String
                 'Actualiza el stock en salmac y borra de smoval
                 'Para cada linea de albaran reestablecer el stock. Como era Mov. de Entrada
                 'en Almacen ahora lo tiene que borrar(S).
-                If B Then
-                    If Not vCStock.DevolverStock2() Then B = False
+                If b Then
+                    If Not vCStock.DevolverStock2() Then b = False
                 End If
            Else
-               B = False
+               b = False
            End If
 '           Data2.Recordset.MoveNext
            Set vCStock = Nothing
@@ -5409,8 +5428,8 @@ Dim SQL As String
 '    End If
 
 ERestablecer:
-    If Err.Number <> 0 Then B = False
-    If Not B Then
+    If Err.Number <> 0 Then b = False
+    If Not b Then
         ReestablecerStock = False
         MuestraError Err.Number, "Reestablecer stock.", Err.Description
     Else
@@ -5424,11 +5443,11 @@ End Function
 Private Function ReestablecerUltFecCompra() As Boolean
 Dim cart As CArticulo
 Dim SQL As String
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo ERestCompra
     
-    B = True
+    b = True
     
 '    select distinct codartic from slialp
 'where numalbar=2100045 and fechaalb='2006-09-15' and codprove=21
@@ -5457,7 +5476,7 @@ Dim B As Boolean
     
     
     
-    ReestablecerUltFecCompra = B
+    ReestablecerUltFecCompra = b
     
     
 ERestCompra:
@@ -5620,7 +5639,7 @@ Private Sub CargarNumSeries()
 'Insertar un registro en la tabla "sserie" por cada uno de los
 'Nº de Serie introducidos en la Tabla Temporal o actualizalo
 Dim SQL As String
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo ECargar
     conn.BeginTrans
@@ -5641,12 +5660,12 @@ Dim B As Boolean
     SQL = SQL & " and fechacom='" & Format(Text1(1).Text, FormatoFecha) & "'"
     conn.Execute SQL
     
-    B = InsertarNumSeriesDeTMP
+    b = InsertarNumSeriesDeTMP
     
    
 ECargar:
-    If Err.Number <> 0 Then B = False
-    If B Then
+    If Err.Number <> 0 Then b = False
+    If b Then
         conn.CommitTrans
     Else
         conn.RollbackTrans
@@ -5659,7 +5678,7 @@ Private Function InsertarNumSeriesDeTMP() As Boolean
 'Inserta en la tabla sserie todos los nº de serie q se han cargado en la temporal
 Dim SQL As String
 Dim NumAlbar As String
-Dim B As Boolean
+Dim b As Boolean
 Dim RStmp As ADODB.Recordset
 Dim nSerie As CNumSerie
 
@@ -5680,8 +5699,8 @@ Dim nSerie As CNumSerie
     Set RStmp = New ADODB.Recordset
     RStmp.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                 
-    B = True
-    While Not RStmp.EOF And B
+    b = True
+    While Not RStmp.EOF And b
         nSerie.numSerie = RStmp!numSerie
         nSerie.Articulo = RStmp!codArtic
         nSerie.NumLinAlbPr = RStmp!numlinealb
@@ -5696,10 +5715,10 @@ Dim nSerie As CNumSerie
         SQL = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", RStmp!numSerie, "T", NumAlbar, "codartic", RStmp!codArtic, "T")
         If SQL <> "" Then
             If NumAlbar = "" Then 'ya existe el nº serie y actualizamos ya que no esta asignado a ningun albaran
-                B = nSerie.ActualizarNumSerie(False)
+                b = nSerie.ActualizarNumSerie(False)
             End If
         Else
-            B = nSerie.InsertarNumSerie
+            b = nSerie.InsertarNumSerie
         End If
         
 '        b = InsertarNSerie(RStmp!NumSerie, RStmp!codArtic, RStmp!NumLinealb)
@@ -5711,8 +5730,8 @@ Dim nSerie As CNumSerie
     Set nSerie = Nothing
     
 EInsertarNSeries:
-    If Err.Number <> 0 Then B = False
-    If Not B Then
+    If Err.Number <> 0 Then b = False
+    If Not b Then
         InsertarNumSeriesDeTMP = False
     Else
         InsertarNumSeriesDeTMP = True
@@ -5800,13 +5819,13 @@ End Sub
 Private Sub PonerDatosProveVario(nifProve As String)
 'Poner el los campos Text el valor del cliente
 Dim vProve As CProveedor
-Dim B As Boolean
+Dim b As Boolean
    
     If nifProve = "" Then Exit Sub
    
     Set vProve = New CProveedor
-    B = vProve.LeerDatosProveVario(nifProve)
-    If B Then
+    b = vProve.LeerDatosProveVario(nifProve)
+    If b Then
         Text1(5).Text = vProve.Nombre   'Nom proveedor
         Text1(8).Text = vProve.Domicilio
         Text1(9).Text = vProve.CPostal
@@ -6071,7 +6090,7 @@ End Sub
 
 
 Private Function ModificarCabAlbaran() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim MenError As String
 
     On Error GoTo EModificaAlb
@@ -6079,28 +6098,28 @@ Dim MenError As String
     conn.BeginTrans
 
     MenError = "Modificando fecha de albaran en tablas relacionadas."
-    B = ComprobarCambioFecha
+    b = ComprobarCambioFecha
                 
-    If B Then
+    If b Then
         MenError = "Modificando el albaran (scaalb)."
-        B = ModificaDesdeFormulario(Me, 1)
+        b = ModificaDesdeFormulario(Me, 1)
         
-        If B Then
+        If b Then
             'Actualizar los datos del Proveedor si es de varios
             MenError = "Actualizando proveedor de varios."
-            B = ActualizarProveVarios(Text1(4).Text, Text1(6).Text)
+            b = ActualizarProveVarios(Text1(4).Text, Text1(6).Text)
         End If
     End If
 
 EModificaAlb:
-    If Err.Number <> 0 Then B = False
-    If B Then
+    If Err.Number <> 0 Then b = False
+    If b Then
         conn.CommitTrans
     Else
         conn.RollbackTrans
         MsgBox "Error Modificando el albaran." & vbCrLf & MenError, vbExclamation
     End If
-    ModificarCabAlbaran = B
+    ModificarCabAlbaran = b
     Espera 0.2
 End Function
 
@@ -6633,18 +6652,18 @@ End Function
 
 
 Private Sub EliminarEnSlotes()
-Dim Cad As String
+Dim cad As String
     Set miRsAux = New ADODB.Recordset
-    Cad = ObtenerWhereCP(True)
-    Cad = Replace(Cad, NombreTabla, NomTablaLineas)
-    Cad = "Select codartic,numlotes,fechaalb from " & NomTablaLineas & Cad & " AND numlotes  <> ''"
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = ObtenerWhereCP(True)
+    cad = Replace(cad, NombreTabla, NomTablaLineas)
+    cad = "Select codartic,numlotes,fechaalb from " & NomTablaLineas & cad & " AND numlotes  <> ''"
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
    
     While Not miRsAux.EOF
                 
-        Cad = "DELETE FROM slotes WHERE "
-        Cad = Cad & " codartic=" & DBSet(miRsAux!codArtic, "T") & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!FechaAlb, "F")
-        conn.Execute Cad
+        cad = "DELETE FROM slotes WHERE "
+        cad = cad & " codartic=" & DBSet(miRsAux!codArtic, "T") & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!FechaAlb, "F")
+        conn.Execute cad
         miRsAux.MoveNext
     Wend
     miRsAux.Close

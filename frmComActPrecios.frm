@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmComActPrecios 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Actualizar precios venta"
@@ -528,7 +528,7 @@ Dim Ordenacion As String
 Private Modo As Byte
 
 
-Dim cArt As CArticulo
+Dim cart As CArticulo
 
 
 
@@ -573,7 +573,7 @@ Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim cTar As CTarifaArt
 Dim MenError As String
-    
+Dim RN As ADODB.Recordset
 
     If Not BloqueaRegistro("slista", "codartic=" & DBSet(Me.parCodArtic, "T")) Then Exit Sub
     
@@ -584,7 +584,7 @@ Dim MenError As String
     
     'Actualizar el PVP del artículo
     '----------------------------------
-    b = cArt.CambiaPrecioVenta(Text1(4).Text, Text1(5).Text, Text1(1).Text, MenError)
+    b = cart.CambiaPrecioVenta(Text1(4).Text, Text1(5).Text, Text1(1).Text, MenError)
     
     
     'Actualizar los precios de las TARIFAS del artículo si se ha modificado
@@ -601,6 +601,8 @@ Dim MenError As String
                 If cTar.LeerDatos(Me.parCodArtic, RS!codlista) Then
                     b = cTar.ActualizarPrecios(Text1(1).Text, RS!tmpprecioac, 0, MenError, True)
                 End If
+                                
+                
                 Set cTar = Nothing
             End If
             RS.MoveNext
@@ -608,6 +610,12 @@ Dim MenError As String
         RS.Close
         Set RS = Nothing
     End If
+    
+    If b And vParamAplic.ActualizaPrecioEspecial Then
+        ActualizarPrecioEspecialGenerico parCodArtic, ImporteFormateado(Text1(4).Text), False
+        
+    End If
+    
     
     If b Then
         conn.CommitTrans
@@ -694,17 +702,17 @@ Private Sub Form_Load()
     Text1(0).Text = Me.parCodArtic
     Text2(0).Text = Me.parNomArtic
     
-    Set cArt = New CArticulo
-    If cArt.LeerDatos(Me.parCodArtic) Then
-        Text1(2).Text = cArt.PrecioUltCom
+    Set cart = New CArticulo
+    If cart.LeerDatos(Me.parCodArtic) Then
+        Text1(2).Text = cart.PrecioUltCom
         Text1(2).Text = Format(Text1(2).Text, FormatoPrecio)
         
-        Text1(3).Text = cArt.PrecioVenta 'precio venta actual
+        Text1(3).Text = cart.PrecioVenta 'precio venta actual
         Text1(3).Text = Format(Text1(3).Text, FormatoPrecio)
-        Text1(5).Text = cArt.MargenComercial
+        Text1(5).Text = cart.MargenComercial
         Text1(5).Text = Format(Text1(5).Text, FormatoPorcen)
         
-        Text1(4).Text = cArt.AplicarMargenComercial 'obtiene el nuevo PVP
+        Text1(4).Text = cart.AplicarMargenComercial 'obtiene el nuevo PVP
         Text1(4).Text = Format(Text1(4).Text, FormatoPrecio)
     Else
         cmdActualizar.Enabled = False
@@ -792,7 +800,7 @@ End Sub
 
 
 Private Sub Form_Unload(Cancel As Integer)
-    If Not cArt Is Nothing Then Set cArt = Nothing
+    If Not cart Is Nothing Then Set cart = Nothing
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
@@ -984,7 +992,7 @@ End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
 Dim MargenTemporal As Currency
-Dim Ok As Boolean
+Dim OK As Boolean
 
     'If Modo = 2 Then Modo = 4
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
@@ -999,7 +1007,7 @@ Dim Ok As Boolean
             'las tarifas el % sobre el PVP
             If PonerFormatoDecimal(Text1(Index), 2) Then
                 Text1(Index).Text = Format(Text1(Index).Text, FormatoPrecio)
-                If ImporteFormateado(Text1(Index).Text) <> cArt.AplicarMargenComercial Then
+                If ImporteFormateado(Text1(Index).Text) <> cart.AplicarMargenComercial Then
                     
                     If vParamAplic.RecalculoMargen Then
                         'Significa que ajustamos el maren al precio de venta /copra
@@ -1008,9 +1016,9 @@ Dim Ok As Boolean
                             MargenTemporal = (MargenTemporal - 1) * 100
                             If Val(MargenTemporal) > 999 Then
                                 MsgBox "margen calculado:" & Format(MargenTemporal, FormatoPrecio) & "   superior al 999%. No se actualizara"
-                                MargenTemporal = cArt.MargenComercial
+                                MargenTemporal = cart.MargenComercial
                             Else
-                                cArt.MargenComercial = MargenTemporal
+                                cart.MargenComercial = MargenTemporal
                             End If
                             Text1(5).Text = Format(MargenTemporal, FormatoPorcen)
                             
@@ -1018,7 +1026,7 @@ Dim Ok As Boolean
                                             
                         End If
                     Else
-                        Ok = True
+                        OK = True
                     End If
                     
                     CalcularPreciosNuevosTarifas
@@ -1026,20 +1034,20 @@ Dim Ok As Boolean
                 
                 End If
             Else
-                Text1(4).Text = Format(cArt.PrecioVenta, FormatoPrecio)
+                Text1(4).Text = Format(cart.PrecioVenta, FormatoPrecio)
             End If
         Case 5 'margen comercial
             If Text1(Index).Text <> "" Then
                 If PonerFormatoDecimal(Text1(Index), 7) Then 'tipo 7: Decimal(5,2)
                     'recalcular los nuevos PVP del articulo y de las tarifas
-                    cArt.MargenComercial = CCur(Text1(Index).Text)
-                    Text1(4).Text = cArt.AplicarMargenComercial 'obtiene el nuevo PVP
+                    cart.MargenComercial = CCur(Text1(Index).Text)
+                    Text1(4).Text = cart.AplicarMargenComercial 'obtiene el nuevo PVP
                     Text1(4).Text = Format(Text1(4).Text, FormatoPrecio)
                     CalcularPreciosNuevosTarifas
                     CargaGrid True
                 Else
                     'MsgBox "Introduzca valor para el margen comercial", vbInformation
-                    Text1(Index).Text = Format(cArt.MargenComercial, FormatoPorcen)
+                    Text1(Index).Text = Format(cart.MargenComercial, FormatoPorcen)
                     PonerFoco Text1(Index)
                 End If
             End If
@@ -1116,7 +1124,7 @@ Dim cTar As CTarifaArt
     
     While Not RS.EOF
         Set cTar = New CTarifaArt
-        If cTar.LeerDatos(RS!codartic, RS!codlista) Then
+        If cTar.LeerDatos(RS!codArtic, RS!codlista) Then
             cTar.AplicarMargenComercial (CCur(Text1(4).Text))
         End If
         Set cTar = Nothing

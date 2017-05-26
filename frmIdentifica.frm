@@ -3,14 +3,20 @@ Begin VB.Form frmIdentifica
    BackColor       =   &H00800000&
    BorderStyle     =   0  'None
    Caption         =   "Form1"
-   ClientHeight    =   5655
+   ClientHeight    =   6105
    ClientLeft      =   0
    ClientTop       =   0
    ClientWidth     =   7590
    LinkTopic       =   "Form1"
-   ScaleHeight     =   5655
+   ScaleHeight     =   6105
    ScaleWidth      =   7590
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Timer Timer1 
+      Enabled         =   0   'False
+      Interval        =   1000
+      Left            =   1080
+      Top             =   5280
+   End
    Begin VB.TextBox Text1 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
@@ -28,11 +34,11 @@ Begin VB.Form frmIdentifica
       Height          =   330
       IMEMode         =   3  'DISABLE
       Index           =   1
-      Left            =   4320
+      Left            =   4440
       PasswordChar    =   "*"
       TabIndex        =   1
       Text            =   "Text1"
-      Top             =   4920
+      Top             =   4560
       Width           =   3015
    End
    Begin VB.TextBox Text1 
@@ -56,6 +62,25 @@ Begin VB.Form frmIdentifica
       Text            =   "Text1"
       Top             =   1920
       Width           =   3015
+   End
+   Begin VB.Label lblTiempo 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Usuario"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Left            =   120
+      TabIndex        =   6
+      Top             =   0
+      Width           =   7335
    End
    Begin VB.Label Label11 
       BackStyle       =   0  'Transparent
@@ -93,7 +118,7 @@ Begin VB.Form frmIdentifica
       Index           =   2
       Left            =   5160
       TabIndex        =   4
-      Top             =   4920
+      Top             =   4560
       Width           =   2175
    End
    Begin VB.Label Label1 
@@ -152,6 +177,7 @@ Option Explicit
 
 Dim PrimeraVez As Boolean
 Dim T1 As Single
+Dim Segundos As Integer
 
 Private Sub Form_Activate()
     If PrimeraVez Then
@@ -181,22 +207,9 @@ Private Sub Form_Activate()
              End
         End If
          
-         'La llave
-         '### Ya no llevamos LOCKER
-'''''''         If True Then
-'''''''            Load frmLLave
-'''''''            If Not frmLLave.ActiveLock1.RegisteredUser Then
-'''''''                'No ESTA REGISTRADO
-'''''''                frmLLave.Show vbModal
-'''''''            Else
-'''''''                Unload frmLLave
-'''''''            End If
-'''''''          End If
-         
-         '###
          
          'Para que borre de la tabla temporal
-         PrepararCarpetasEnvioMail
+        PrepararCarpetasEnvioMail
         DoEvents
          
          'Gestionar el nombre del PC para la asignacion de PC en el entorno de red
@@ -207,7 +220,11 @@ Private Sub Form_Activate()
          
          T1 = T1 + 2.5 - Timer
          If T1 > 0 Then Espera T1
-
+         
+         CadenaDesdeOtroForm = ""
+         Segundos = 60
+         Timer1.Enabled = True
+        
          
          PonerVisible True
          If Text1(0).Text <> "" Then
@@ -227,6 +244,7 @@ Private Sub Form_Load()
     T1 = Timer
     Text1(0).Text = ""
     Text1(1).Text = ""
+    lblTiempo.Caption = ""
     Label11.Caption = "Ver. " & App.Major & "." & App.Minor & "." & App.Revision
     PrimeraVez = True
     CargaImagen
@@ -239,7 +257,7 @@ Private Sub CargaImagen()
     Me.Height = Me.Image1.Height
     Me.Width = Me.Image1.Width
     FijarText
-    
+        
     If Err.Number <> 0 Then
         MsgBox Err.Description & vbCrLf & vbCrLf & "Error cargando", vbCritical
         Set conn = Nothing
@@ -274,8 +292,6 @@ Dim L As Long
     
 EF:
     If Err.Number <> 0 Then MuestraError Err.Number
-        
-    
     
 End Sub
 
@@ -355,6 +371,7 @@ Dim OK As Byte
             PonerFoco Text1(0)
     Else
         'OK
+        Timer1.Enabled = False
         CadenaDesdeOtroForm = "OK"
         Unload Me
     End If
@@ -377,31 +394,46 @@ End Sub
 'a la que ha entrado, y el usuario
 Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
 Dim NF As Integer
-Dim Cad As String
+Dim cad As String
 On Error GoTo ENumeroEmpresaMemorizar
 
 
         
-    Cad = App.Path & "\ultusu.dat"
+    cad = App.Path & "\ultusu.dat"
     If Leer Then
-        If Dir(Cad) <> "" Then
+        If Dir(cad) <> "" Then
             NF = FreeFile
-            Open Cad For Input As #NF
-            Line Input #NF, Cad
+            Open cad For Input As #NF
+            Line Input #NF, cad
             Close #NF
-            Cad = Trim(Cad)
+            cad = Trim(cad)
             
                 'El primer pipe es el usuario
-                Text1(0).Text = Cad
+                Text1(0).Text = cad
     
         End If
     Else 'Escribir
         NF = FreeFile
-        Open Cad For Output As #NF
-        Cad = Text1(0).Text
-        Print #NF, Cad
+        Open cad For Output As #NF
+        cad = Text1(0).Text
+        Print #NF, cad
         Close #NF
     End If
 ENumeroEmpresaMemorizar:
     Err.Clear
+End Sub
+
+Private Sub Timer1_Timer()
+    Segundos = Segundos - 1
+    If Segundos > 55 Then
+        lblTiempo.Caption = ""
+    Else
+    
+        lblTiempo.Caption = "Si no hace login, la pantalla se cerrará automáticamente en " & " " & Segundos & " segundos."
+        lblTiempo.Refresh
+        If Segundos < 1 Then
+            Timer1.Enabled = False
+            Unload Me
+        End If
+    End If
 End Sub

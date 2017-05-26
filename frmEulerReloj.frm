@@ -414,7 +414,7 @@ Private Sub cmdAlbaran_Click(Index As Integer)
     If Combo1.ListIndex < 0 Then cad = "Seleccione el trabajador "
         
     If Me.cboTipoTrabajo.ListIndex <= 0 Then cad = "Seleccione el tipo de albaran"
-    If Me.cboTipoTrabajo.ListIndex = 4 Then cad = "No puede seleccionar produccion"
+    'If Me.cboTipoTrabajo.ListIndex = 4 Then cad = "No puede seleccionar produccion"
         
     If cad <> "" Then
         MsgBox cad, vbExclamation
@@ -433,8 +433,8 @@ End Sub
 
 Private Sub cmdImprimir_Click()
     'VERSION RELOJ: comentar lineas #Soloreloj
-   ' frmListado2.opcion = 46
-   ' frmListado2.Show vbModal
+    frmListado2.Opcion = 46
+    frmListado2.Show vbModal
 End Sub
 
 Private Sub Combo1_Click()
@@ -540,7 +540,10 @@ Dim cad2 As String
         
     ElseIf cboTipoTrabajo.ListIndex = 4 Then
         'Orden produccion
-        OrdenProduccion = True
+        'OrdenProduccion = True
+        cad = "ALV"
+        
+        
     End If
     
     If OrdenProduccion Then
@@ -575,7 +578,10 @@ Dim cad2 As String
     ElseIf cboTipoTrabajo.ListIndex = 3 Then
         cad = "O"
     ElseIf cboTipoTrabajo.ListIndex = 4 Then
-        cad = "L" 'FALTA######
+        cad = "V"
+        
+        
+        
     End If
     cad = "codtipor like '" & cad & "_'"
     CargarCombo_Tabla Me.Combo4, "stipor", "concat(nomtipor,' [',codtipor,']')", "1", cad
@@ -679,7 +685,7 @@ Dim C As String
         ElseIf cboTipoTrabajo.ListIndex = 3 Then
             C = "'ALO'"
         ElseIf cboTipoTrabajo.ListIndex = 4 Then
-            C = "null"
+            C = "'ALV'"
         End If
         cad = "," & C & cad
         
@@ -797,6 +803,8 @@ Private Sub Form_Load()
     cboTipoTrabajo.AddItem "Reparación"
     cboTipoTrabajo.AddItem "T. exterior"
     cboTipoTrabajo.AddItem "Orden de trabajo"
+    cboTipoTrabajo.AddItem "Albaran venta"
+    
     '
     'cboTipoTrabajo.AddItem "Producción"   'orden de produccion
 
@@ -1116,16 +1124,16 @@ End Sub
 
 
 Private Sub PonerFrames2()
-Dim b As Boolean
+Dim B As Boolean
 
     
 
 
     
     If Combo1.ListIndex < 0 Then
-        b = False
+        B = False
     Else
-        b = HayQueCerrarNodo = 0
+        B = HayQueCerrarNodo = 0
     End If
     
     Frame4.visible = True
@@ -1166,6 +1174,8 @@ Dim HaCambiadoContador As Boolean
         cad = "ALE"
     Case 3
         cad = "ALO"
+    Case 4
+        cad = "ALV"
     Case Else
             
             cad = DevuelveDesdeBD(conAri, "codalmac", "straba", "codtraba", CStr(Combo1.ItemData(Combo1.ListIndex)))

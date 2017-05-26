@@ -601,16 +601,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1046,7 +1046,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1054,8 +1054,8 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
@@ -1283,7 +1283,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
 End Sub
 
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
@@ -1371,10 +1371,10 @@ End Function
 
 
 Private Sub HacerComprobacion()
-Dim Cad As String
+Dim cad As String
 Dim cantidad As Currency
 Dim ColArtic As Collection
-Dim I As Integer
+Dim i As Integer
 Dim EnElLote As Currency
 Dim NF As Integer
 Dim UpdateaSlotes As Boolean
@@ -1384,17 +1384,17 @@ Dim UpdateaSlotes As Boolean
     
     lblIndicador.Caption = "Ajuste devoluciones"
     lblIndicador.Refresh
-    Cad = "UPDATE slotes set vendida=canentra where canentra < 0"
-    conn.Execute Cad
+    cad = "UPDATE slotes set vendida=canentra where canentra < 0"
+    conn.Execute cad
     Espera 0.5
     
     
     
     lblIndicador.Caption = "Leyendo lotes"
     lblIndicador.Refresh
-    Cad = "insert into tmpstockfec(codusu,codartic,codalmac,stock)"
-    Cad = Cad & " select " & vUsu.codigo & ",codartic,1,sum(canentra-vendida) from slotes group by codartic"
-    conn.Execute Cad
+    cad = "insert into tmpstockfec(codusu,codartic,codalmac,stock)"
+    cad = cad & " select " & vUsu.codigo & ",codartic,1,sum(canentra-vendida) from slotes group by codartic"
+    conn.Execute cad
      
      
     
@@ -1405,25 +1405,25 @@ Dim UpdateaSlotes As Boolean
     Espera 0.5
     
     Set miRsAux = New ADODB.Recordset
-    Cad = "Select codartic, sum(canstock) canti from salmac where codartic in (select codartic from tmpstockfec where codusu =" & vUsu.codigo & ") GROUP BY codartic"
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "Select codartic, sum(canstock) canti from salmac where codartic in (select codartic from tmpstockfec where codusu =" & vUsu.codigo & ") GROUP BY codartic"
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set ColArtic = New Collection
     NF = FreeFile
     Open App.Path & "\ajslot.txt" For Output As #NF
     While Not miRsAux.EOF
         
-        Cad = DevuelveDesdeBD(conAri, "stock", "tmpstockfec", "codusu = " & vUsu.codigo & " AND codartic", miRsAux!codArtic, "T")
-        cantidad = CCur(Cad)
+        cad = DevuelveDesdeBD(conAri, "stock", "tmpstockfec", "codusu = " & vUsu.codigo & " AND codartic", miRsAux!codArtic, "T")
+        cantidad = CCur(cad)
         
         If miRsAux!canti = cantidad Then
-            Cad = "DELETE FROM tmpstockfec WHERE codusu =" & vUsu.codigo & " AND codartic = " & DBSet(miRsAux!codArtic, "T")
-            conn.Execute Cad
+            cad = "DELETE FROM tmpstockfec WHERE codusu =" & vUsu.codigo & " AND codartic = " & DBSet(miRsAux!codArtic, "T")
+            conn.Execute cad
         Else
         
             cantidad = miRsAux!canti
         
-            Cad = miRsAux!codArtic & "|" & cantidad & "|"
-            ColArtic.Add Cad
+            cad = miRsAux!codArtic & "|" & cantidad & "|"
+            ColArtic.Add cad
         End If
         
         miRsAux.MoveNext
@@ -1433,33 +1433,33 @@ Dim UpdateaSlotes As Boolean
     
     
     
-    For I = 1 To ColArtic.Count
-        lblIndicador.Caption = I & " de " & ColArtic.Count
+    For i = 1 To ColArtic.Count
+        lblIndicador.Caption = i & " de " & ColArtic.Count
         lblIndicador.Refresh
         
         
-        Cad = RecuperaValor(ColArtic.item(I), 2)
-        cantidad = CCur(Cad)   'canstock
+        cad = RecuperaValor(ColArtic.item(i), 2)
+        cantidad = CCur(cad)   'canstock
         
         
-        Cad = RecuperaValor(ColArtic.item(I), 1)
-        Debug.Print Cad
+        cad = RecuperaValor(ColArtic.item(i), 1)
+        Debug.Print cad
         
         
         If cantidad < 0 Then
             'STOCK NEGATIVO
             
             'Cantidad negativa
-            Print #NF, RecuperaValor(ColArtic.item(I), 1) & "::" & RecuperaValor(ColArtic.item(I), 2) & "::" & cantidad & "      NEGATIVO"
+            Print #NF, RecuperaValor(ColArtic.item(i), 1) & "::" & RecuperaValor(ColArtic.item(i), 2) & "::" & cantidad & "      NEGATIVO"
             
         Else
-            Cad = "Select * from slotes WHERE  codartic=" & DBSet(Cad, "T") & " AND canentra >0 order by fecentra desc"
-            miRsAux.Open Cad, conn, adOpenKeyset, adLockReadOnly, adCmdText
-            Cad = ""
+            cad = "Select * from slotes WHERE  codartic=" & DBSet(cad, "T") & " AND canentra >0 order by fecentra desc"
+            miRsAux.Open cad, conn, adOpenKeyset, adLockReadOnly, adCmdText
+            cad = ""
             While Not miRsAux.EOF
                
                
-                If miRsAux!codArtic = "2020903032012" Then Stop
+                'If miRsAux!codArtic = "2020903032012" Then Sto p
                
                 EnElLote = 0
                 UpdateaSlotes = False
@@ -1487,17 +1487,17 @@ Dim UpdateaSlotes As Boolean
                 
                 
                 If UpdateaSlotes Then
-                    Cad = "UPDATE slotes set vendida=" & DBSet(EnElLote, "N") & " WHERE codartic =" & DBSet(miRsAux!codArtic, "T")
-                    Cad = Cad & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!fecentra, "F")
-                    conn.Execute Cad
+                    cad = "UPDATE slotes set vendida=" & DBSet(EnElLote, "N") & " WHERE codartic =" & DBSet(miRsAux!codArtic, "T")
+                    cad = cad & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!fecentra, "F")
+                    conn.Execute cad
                 End If
                 miRsAux.MoveNext
                 If cantidad = 0 Then
                     'HA IDO TODO BIEN
                     While Not miRsAux.EOF
-                        Cad = "UPDATE slotes set vendida=canentra WHERE codartic =" & DBSet(miRsAux!codArtic, "T")
-                        Cad = Cad & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!fecentra, "F")
-                        conn.Execute Cad
+                        cad = "UPDATE slotes set vendida=canentra WHERE codartic =" & DBSet(miRsAux!codArtic, "T")
+                        cad = cad & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!fecentra, "F")
+                        conn.Execute cad
                         miRsAux.MoveNext
                     Wend
                 End If
@@ -1505,9 +1505,9 @@ Dim UpdateaSlotes As Boolean
             miRsAux.Close
             
             If cantidad <> 0 Then
-                Print #NF, RecuperaValor(ColArtic.item(I), 1) & "::" & RecuperaValor(ColArtic.item(I), 2) & "::" & cantidad
+                Print #NF, RecuperaValor(ColArtic.item(i), 1) & "::" & RecuperaValor(ColArtic.item(i), 2) & "::" & cantidad
             Else
-                If Cad = "" Then Print #NF, RecuperaValor(ColArtic.item(I), 1) & "::" & RecuperaValor(ColArtic.item(I), 2) & " 0STOCK"
+                If cad = "" Then Print #NF, RecuperaValor(ColArtic.item(i), 1) & "::" & RecuperaValor(ColArtic.item(i), 2) & " 0STOCK"
             End If
         
         End If

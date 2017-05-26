@@ -10771,6 +10771,9 @@ Dim bytPrecio As Byte
                     Case 16: cadNomRPT = "rAlmInvenValoracion.rpt"  'Listado Valoracion Stocks Inventariados
                     Case 17: cadNomRPT = "rAlmValoracion.rpt"  'Listado Valoracion Stocks)
                 End Select
+                
+
+                
             End If
         End If
         Screen.MousePointer = vbHourglass
@@ -16228,21 +16231,18 @@ Dim bytPrecio As Byte
     
     
     
-    'ENERO 2013
-    'Antes de pasar a inventariar  ver sia hay datos inventariandose
-'    If OpcionListado = 12 Then
-'
-'
-'        devuelve = "salmac  INNER JOIN sartic ON salmac.codartic=sartic.codartic  "
-'        CodAux = "sartic.ctrstock = 1 AND sartic.codstatu < 2  AND ( sartic.codartic,codalmac) IN (select codartic,codalmac from sinven) AND  salmac.codalmac"
-'        CodAux = DevuelveDesdeBD(conAri, "count(*)", devuelve, CodAux, txtCodigo(13).Text)
-'        If CodAux = "" Then CodAux = "0"
-'
-'        If Val(CodAux) > 0 Then MsgBox "Existen articulos(" & CodAux & ")    YA inventariandose", vbExclamation
-'
-'
-'
-'    End If
+    
+    '12,13,16 inventario
+    Select Case OpcionListado
+    Case 12, 13, 16
+        If Not vParamAplic.InventarioxProv Then
+            If vParamAplic.InventarioCodigoArticulo Then
+                CadParam = CadParam & "orden= 1|"
+                numParam = numParam + 1
+            End If
+            
+        End If
+    End Select
     
 
     PonerFormulaYParametrosInf12 = True

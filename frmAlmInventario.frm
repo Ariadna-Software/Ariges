@@ -389,7 +389,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo Error1
     
@@ -407,19 +407,19 @@ Dim Cad As String
                     CargaTxtAux True, True
                     cmdImportar.visible = True
                 Else 'No existen registros en la tabla sinven para ese criterio de búsqueda
-                    Cad = "No se esta realizando inventario para esos criterios de búsqueda."
-                    MsgBox Cad, vbInformation
+                    cad = "No se esta realizando inventario para esos criterios de búsqueda."
+                    MsgBox cad, vbInformation
                     PonerFoco Text1(0)
                 End If
             Else
-                Cad = "Criterio de Búsqueda incompleto." & vbCrLf
-                Cad = Cad & "Debe introducir ambos criterios de búsqueda: cod. almacen, "
+                cad = "Criterio de Búsqueda incompleto." & vbCrLf
+                cad = cad & "Debe introducir ambos criterios de búsqueda: cod. almacen, "
                 If vParamAplic.InventarioxProv Then
-                    Cad = Cad & "Cod. Proveedor"
+                    cad = cad & "Cod. Proveedor"
                 Else
-                    Cad = Cad & "Cod. Familia"
+                    cad = cad & "Cod. Familia"
                 End If
-                MsgBox Cad, vbExclamation
+                MsgBox cad, vbExclamation
                 PonerFoco Text1(0)
             End If
             
@@ -631,10 +631,10 @@ Private Sub frmFA_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 
-Private Sub frmFI_Seleccionado(Cadena As String)
+Private Sub frmFI_Seleccionado(CADENA As String)
     Dim resultado As Boolean
-    If Cadena <> "" Then
-        resultado = ProcesarFicheroInventario(Cadena)
+    If CADENA <> "" Then
+        resultado = ProcesarFicheroInventario(CADENA)
         If Not resultado Then
             MsgBox "Se ha producido errores durante el proceso de captura, consulte el fichero LOG para más detalles", vbCritical
         Else
@@ -736,7 +736,7 @@ Private Sub txtAux_GotFocus()
     ConseguirFocoLin txtAux
 End Sub
 
-Private Sub txtAux_KeyDown(KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(KeyCode As Integer, Shift As Integer)
 On Error GoTo EKeyD
     If KeyCode = 38 Or KeyCode = 40 Then
         ModificarExistencia
@@ -819,7 +819,7 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim B As Boolean
+Dim b As Boolean
        
     Modo = Kmodo
     PonerIndicador lblIndicador, Modo
@@ -830,12 +830,12 @@ Dim B As Boolean
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
 '    BloquearText1 Me, Modo
-    B = (Modo <> 1)
-    BloquearTxt Text1(0), B
-    BloquearTxt Text1(1), B
+    b = (Modo <> 1)
+    BloquearTxt Text1(0), b
+    BloquearTxt Text1(1), b
     
-    B = (Modo = 0) Or (Modo = 2)
-    PonerBotonCabecera B
+    b = (Modo = 0) Or (Modo = 2)
+    PonerBotonCabecera b
    
     Select Case Kmodo
 '    Case 0    'Modo Inicial
@@ -853,15 +853,15 @@ Dim B As Boolean
 '        lblIndicador.Caption = "MODIFICAR"
     End Select
            
-    B = Modo <> 0 And Modo <> 2 And Modo <> 4
+    b = Modo <> 0 And Modo <> 2 And Modo <> 4
    
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = B
+        Me.imgBuscar(i).Enabled = b
     Next i
 
-    B = (Modo = 1)
-    Toolbar1.Buttons(1).Enabled = Not B
-    Toolbar1.Buttons(4).Enabled = Not B And (Not (Modo = 0 Or Modo = 4))
+    b = (Modo = 1)
+    Toolbar1.Buttons(1).Enabled = Not b
+    Toolbar1.Buttons(4).Enabled = Not b And (Not (Modo = 0 Or Modo = 4))
 
     PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario
@@ -913,7 +913,11 @@ Dim SQL As String
             'Por codigo de articulopac
             SQL = SQL & " ORDER BY sinven.codfamia, sinven.codartic"
         Else
-            SQL = SQL & " ORDER BY sinven.codfamia, nomartic"
+            If vParamAplic.InventarioCodigoArticulo Then
+                SQL = SQL & " ORDER BY sinven.codfamia, codartic"
+            Else
+                SQL = SQL & " ORDER BY sinven.codfamia, nomartic"
+            End If
         End If
     End If
     MontaSQLCarga = SQL
@@ -964,10 +968,10 @@ Private Function DatosOk() As Boolean
 End Function
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    If B Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera(b As Boolean)
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    If b Then Me.lblIndicador.Caption = ""
 End Sub
 
 

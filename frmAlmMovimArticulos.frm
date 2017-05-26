@@ -1707,7 +1707,7 @@ Dim Nombre As String
             'Obtener nombre de la tabla de trabajadores
             Nombre = DevuelveDesdeBDNew(conAri, "straba", "nomtraba", "codtraba", CStr(codigo), "N")
             Label2.Caption = "Trabajador"
-        Case "ALV", "ALR", "ALM", "ART", "FAV", "FTI", "ATI"
+        Case "ALV", "ALR", "ALM", "ART", "FAV", "FTI", "ATI", "ALS", "ALO", "ALE", "ALI", "ALT"
             'Obtener nombre de la tabla de Clientes
             Nombre = DevuelveDesdeBDNew(conAri, "sclien", "nomclien", "codclien", CStr(codigo), "N")
             Label2.Caption = "Cliente"

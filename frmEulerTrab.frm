@@ -43,11 +43,11 @@ Begin VB.Form frmEulerTrab
       Top             =   3960
       Width           =   3285
    End
-   Begin VB.ComboBox cboTipo 
+   Begin VB.ComboBox cboTipo2 
       Height          =   315
       ItemData        =   "frmEulerTrab.frx":0012
       Left            =   11760
-      List            =   "frmEulerTrab.frx":0022
+      List            =   "frmEulerTrab.frx":0025
       Style           =   2  'Dropdown List
       TabIndex        =   6
       Top             =   3600
@@ -120,7 +120,7 @@ Begin VB.Form frmEulerTrab
       Index           =   1
       Left            =   3480
       TabIndex        =   1
-      Tag             =   "Cod. trabajo|T|N|||sreloj|codtipor|||"
+      Tag             =   "Tipo trabajo|T|N|||sreloj|codtipor|||"
       Text            =   "numal"
       Top             =   3600
       Visible         =   0   'False
@@ -353,7 +353,7 @@ Begin VB.Form frmEulerTrab
       _Version        =   393216
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
-      Bindings        =   "frmEulerTrab.frx":006A
+      Bindings        =   "frmEulerTrab.frx":007C
       Height          =   5025
       Left            =   120
       TabIndex        =   11
@@ -424,7 +424,7 @@ Begin VB.Form frmEulerTrab
    Begin VB.Image imgRef 
       Height          =   240
       Left            =   13080
-      Picture         =   "frmEulerTrab.frx":007E
+      Picture         =   "frmEulerTrab.frx":0090
       Top             =   3240
       Width           =   240
    End
@@ -570,7 +570,7 @@ Dim CadenaBusqueda As String
 
 Private HaDevueltoDatos As Boolean
 
-
+Dim B As Boolean
 Private Sub chkVistaPrevia_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -643,11 +643,11 @@ Private Sub cmdAux_Click(Index As Integer)
             frmB.vConexionGrid = conAri 'Conexion a BD Ariges
             frmB.vCampos = CadenaConsulta
             frmB.vTabla = "stipor"
-            If cboTipo.ListIndex < 0 Or cboTipo.ListIndex > 2 Then
+            If cboTipo2.ListIndex < 0 Or cboTipo2.ListIndex > 2 Then
                 CadenaConsulta = ""
             Else
                 'CadenaConsulta = "codtipor like '" & RecuperaValor("ALR|ALE|ALO|", cboTipo.ListIndex + 1) & "'"
-                CadenaConsulta = "codtipor like '" & RecuperaValor("R|E|O|", cboTipo.ListIndex + 1) & "%'"
+                CadenaConsulta = "codtipor like '" & RecuperaValor("R|E|O||V|", cboTipo2.ListIndex + 1) & "%'"
             End If
             frmB.vSQL = CadenaConsulta
             CadenaConsulta = ""
@@ -668,17 +668,17 @@ Private Sub cmdAux_Click(Index As Integer)
             Set frmB = New frmBuscaGrid
             frmB.vCampos = CadenaConsulta
             frmB.vTabla = "scaalb"
-            If cboTipo.ListIndex < 0 Then
-                CadenaConsulta = " IN ('ALR','ALO','ALE')"
+            If cboTipo2.ListIndex < 0 Then
+                CadenaConsulta = " IN ('ALR','ALO','ALE','ALV')"
             Else
-                CadenaConsulta = " = '" & RecuperaValor("ALR|ALE|ALO|", cboTipo.ListIndex + 1) & "'"
+                CadenaConsulta = " = '" & RecuperaValor("ALR|ALE|ALO||ALV|", cboTipo2.ListIndex + 1) & "'"
             End If
             CadenaConsulta = "codtipom " & CadenaConsulta
             frmB.vSQL = CadenaConsulta
             HaDevueltoDatos = False
             '###A mano
             frmB.vDevuelve = "0|1|2|"
-            frmB.vTitulo = "Albaranes " & cboTipo.Text
+            frmB.vTitulo = cboTipo2.Text
             frmB.vselElem = 2
             frmB.vConexionGrid = conAri 'Conexion a BD Ariges
             CadenaConsulta = ""
@@ -692,8 +692,10 @@ Private Sub cmdAux_Click(Index As Integer)
                     NumRegElim = 1
                 ElseIf CadenaDesdeOtroForm = "ALO" Then
                     NumRegElim = 2
+                ElseIf CadenaDesdeOtroForm = "ALV" Then
+                    NumRegElim = 4
                 End If
-                cboTipo.ListIndex = NumRegElim
+                cboTipo2.ListIndex = NumRegElim
                 txtAux(6).Text = RecuperaValor(CadenaConsulta, 2)
                 txtAux_LostFocus 6
                 CadenaConsulta = ""
@@ -749,21 +751,21 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
 
-Private Sub cboTipo_KeyPress(KeyAscii As Integer)
+Private Sub cboTipo2_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -897,26 +899,26 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Byte
-Dim b As Boolean
+Dim B As Boolean
 
     On Error Resume Next
     
     DeseleccionaGrid Me.DataGrid1
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To 3
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = b
+        txtAux(jj).visible = B
         If jj < 2 Then
             txtAux3(jj).Height = DataGrid1.RowHeight
             txtAux3(jj).Top = alto
-            txtAux3(jj).visible = b
+            txtAux3(jj).visible = B
             
             Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
             Me.cmdAux(jj).Top = alto
-            Me.cmdAux(jj).visible = b
-            Me.cmdAux(jj).Enabled = b
+            Me.cmdAux(jj).visible = B
+            Me.cmdAux(jj).Enabled = B
             
             
             
@@ -924,9 +926,9 @@ Dim b As Boolean
     Next jj
     
     For jj = 4 To 6
-        BloquearTxt txtAux(jj), Not b
+        BloquearTxt txtAux(jj), Not B
     Next jj
-    BloquearCmb Me.cboTipo, Not b
+    BloquearCmb Me.cboTipo2, Not B
     If Err.Number Then Err.Clear
 End Sub
 
@@ -945,8 +947,15 @@ Private Sub frmT_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub imgRef_Click()
+
     If Modo = 0 Or Modo = 2 Then Exit Sub
-    If cboTipo.ListIndex < 0 Or cboTipo.ListIndex > 2 Then Exit Sub
+    B = False
+    If cboTipo2.ListIndex < 0 Then
+        B = True
+    Else
+        If cboTipo2.ListIndex = 3 Then B = True
+    End If
+    If B Then Exit Sub
     
     cmdAux_Click 100
 End Sub
@@ -1085,17 +1094,17 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
-Dim I As Byte
+Dim B As Boolean
+Dim i As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
      'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         cmdRegresar.visible = False
     End If
@@ -1109,9 +1118,9 @@ Dim I As Byte
     'Next I
                       
     '-----------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -1132,30 +1141,30 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
     
     On Error Resume Next
 
-    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnEliminar.Enabled = B
     
-    b = ((Modo >= 3))
+    B = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo opciones del menú.", Err.Description
 
@@ -1166,7 +1175,7 @@ Private Sub LimpiarCampos()
     limpiar Me   'Metodo general: Limpia los controles TextBox
     'Aqui va el especifico de cada form es
     '### a mano
-    cboTipo.ListIndex = -1
+    cboTipo2.ListIndex = -1
 End Sub
 
 
@@ -1281,7 +1290,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1291,8 +1300,8 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
@@ -1350,13 +1359,13 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim SQL As String
 
 
-    If cboTipo.ListIndex = -1 Then
+    If cboTipo2.ListIndex = -1 Then
         MsgBox "Seleccione tipo trabajo", vbExclamation
-        PonerFocoCbo cboTipo
+        PonerFocoCbo cboTipo2
         Exit Function
     End If
     
@@ -1368,54 +1377,57 @@ Dim SQL As String
     End If
     If Me.txtAux(3).Text = "" Then txtAux(3).Text = "0"
     DatosOk = False
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
     
     SQL = txtAux(4).Text
     If Not EsFechaHoraOK(SQL) Then
         MsgBox "Error hora inicio", vbExclamation
-        b = False
+        B = False
     Else
         If Format(CDate(SQL), "dd/mm/yyyy") <> CDate(txtAux(2).Text) Then
             MsgBox "Fecha inicio debe ser: " & txtAux(2).Text, vbExclamation
-            b = False
+            B = False
         End If
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     SQL = Trim(txtAux(5).Text)
     If SQL <> "" Then
         If Not EsFechaHoraOK(SQL) Then
             MsgBox "Error hora inicio", vbExclamation
-            b = False
+            B = False
             
         Else
             If CDate(txtAux(5).Text) < CDate(txtAux(4).Text) Then
                 MsgBox "Fecha fin menor que fecha inicio", vbExclamation
-                b = False
+                B = False
             End If
         End If
         
         
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     
     'Comprobar que existe un Albaran de venta para ese técnico(realizado por del alb)
     'para ese cliente y en esa fecha. Si no avisar
-    If Me.cboTipo.ListIndex < 3 And Me.cboTipo.ListIndex >= 0 Then
-        
-        SQL = RecuperaValor("ALR|ALE|ALO|", cboTipo.ListIndex + 1)
+    B = False
+    If Me.cboTipo2.ListIndex >= 0 Then
+        If Me.cboTipo2.ListIndex <> 3 Then B = True
+    End If
+    If B Then
+        SQL = RecuperaValor("ALR|ALE|ALO||ALV|", cboTipo2.ListIndex + 1)
         SQL = " numalbar=" & DBSet(txtAux(6).Text, "N") & " AND codtipom=" & DBSet(SQL, "T")
         SQL = "SELECT count(*) FROM scaalb WHERE " & SQL
         
         If Not (RegistrosAListar(SQL) > 0) Then
-            SQL = "No existe(o esta facturado) el Albaran de fecha indicado. ¿Desea continuar?"
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then b = False
+            SQL = "No existe(o esta facturado) el albaran de fecha indicado. ¿Desea continuar?"
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then B = False
         End If
     End If
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1434,9 +1446,9 @@ Dim FechaFinNula As Boolean
     
      
      
-    If cboTipo.ListIndex >= 0 Then
+    If cboTipo2.ListIndex >= 0 Then
         If cadB <> "" Then cadB = cadB & " AND "
-        cadB = cadB & " codtipom = '" & RecuperaValor("ALR|ALE|ALO|PRO|", cboTipo.ListIndex + 1) & "'"
+        cadB = cadB & " codtipom = '" & RecuperaValor("ALR|ALE|ALO|PRO|ALV|", cboTipo2.ListIndex + 1) & "'"
     End If
     
     If FechaFinNula Then
@@ -1460,7 +1472,7 @@ End Sub
 
 
 Private Sub PonerCadenaBusqueda()
-Dim Cad As String
+Dim cad As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo EEPonerBusq
@@ -1470,9 +1482,9 @@ Dim Cad As String
     Data1.Refresh
     If Data1.Recordset.RecordCount <= 0 Then
         CargaGrid False
-        Cad = "No hay ningún registro en la tabla "
-         If EsBusqueda Then Cad = Cad & " para ese criterio de Búsqueda."
-        MsgBox Cad, vbInformation
+        cad = "No hay ningún registro en la tabla "
+         If EsBusqueda Then cad = cad & " para ese criterio de Búsqueda."
+        MsgBox cad, vbInformation
         Screen.MousePointer = vbDefault
         PonerModo Modo
         Exit Sub
@@ -1504,7 +1516,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
 End Sub
 
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
@@ -1554,9 +1566,9 @@ Dim Aux As String
             End If
         Case 6 'Cod. tipor
             If Modo = 1 Then Exit Sub
-            If cboTipo.ListIndex < 0 Then
+            If cboTipo2.ListIndex < 0 Then
                 txtAux(Index).Text = ""
-                PonerFocoCbo cboTipo
+                PonerFocoCbo cboTipo2
                 Exit Sub
             End If
             
@@ -1565,12 +1577,12 @@ Dim Aux As String
             Else
                 If PonerFormatoEntero(txtAux(Index)) Then
                 
-                    If cboTipo.ListIndex = 3 Then
+                    If cboTipo2.ListIndex = 3 Then
                         txtAux3(4).Text = "Produccion"
                     Else
                         
                     
-                        CadenaConsulta = "codtipom = '" & RecuperaValor("ALR|ALE|ALO|", cboTipo.ListIndex + 1) & "' AND numalbar "
+                        CadenaConsulta = "codtipom = '" & RecuperaValor("ALR|ALE|ALO||ALV|", cboTipo2.ListIndex + 1) & "' AND numalbar "
                        ' txtAux3(4).Text = PonerNombreDeCod(txtAux(Index), conAri, "scaalb", "nomclien", CadenaConsulta, "Albaran")
                         
                         CadenaConsulta = DevuelveDesdeBD(conAri, "nomclien", "scaalb", CadenaConsulta, txtAux(Index).Text)
@@ -1650,40 +1662,52 @@ End Sub
 
 
 Private Function PonerCampoAux2(Cual As Integer) As String
-Dim Cad As String
+Dim cad As String
 Dim C As String
     
-    Cad = ""
+    cad = ""
     C = RecuperaValor("HoraInicio|HoraFin|numalbar|codtipom|", Cual)
     
     
     If IsNull(Data1.Recordset.Fields(C)) Then
-        Cad = ""
+        cad = ""
     Else
         If Cual < 3 Then
-            Cad = Format(Data1.Recordset.Fields(C), "dd/mm/yyyy hh:mm:ss")
+            cad = Format(Data1.Recordset.Fields(C), "dd/mm/yyyy hh:mm:ss")
         Else
-            Cad = Data1.Recordset.Fields(C)
+            cad = Data1.Recordset.Fields(C)
         End If
     End If
-    PonerCampoAux2 = Cad
+    PonerCampoAux2 = cad
     
     
     If Cual = 4 Then
-        If Cad = "" Then
-            Me.cboTipo.ListIndex = -1
+        If cad = "" Then
+            Me.cboTipo2.ListIndex = -1
         Else
             'Ubicamos el combo
             'Vamos a intentar localizar el ALBARAN, FACTURA
                             
-            If Mid(Cad, 1, 1) = "A" Then
+            If Mid(cad, 1, 1) = "A" Then
                 'ALbaran
+                If cad = "ALE" Then
+                    cboTipo2.ListIndex = 1
+                Else
+                    If cad = "ALO" Then
+                        cboTipo2.ListIndex = 2
+                    ElseIf cad = "ALV" Then
+                        cboTipo2.ListIndex = 4
+                    Else
+                        cboTipo2.ListIndex = 0
+                    End If
+                End If
+            
+        
                 
-                cboTipo.ListIndex = IIf(Cad = "ALE", 1, IIf(Cad = "ALO", 2, 0))
                 
                 
                 
-                C = "codtipom='" & Cad & "' AND numalbar"
+                C = "codtipom='" & cad & "' AND numalbar"
                 C = DevuelveDesdeBD(conAri, "concat(codclien,'|',nomclien,'|')", "scaalb", C, txtAux(6).Text)
                 If C <> "" Then
                     C = RecuperaValor(C, 1) & " - " & RecuperaValor(C, 2)
@@ -1691,7 +1715,7 @@ Dim C As String
                 Else
                     'SELECT concat(codclien,'|',nomclien,'|') from scafac,scafac1 where
                     C = "scafac.codtipom=scafac1.codtipom AND scafac.numfactu=Scafac1.numfactu and scafac.fecfactu=scafac1.fecfactu AND "
-                    C = C & "codtipoa='" & Cad & "' AND numalbar"
+                    C = C & "codtipoa='" & cad & "' AND numalbar"
                     C = DevuelveDesdeBD(conAri, "concat(codclien,'|',nomclien,'|',scafac.numfactu,'|',scafac.fecfactu,'|',scafac.codtipom,'|')", "scafac,scafac1", C, txtAux(6).Text)
                 
                     If C <> "" Then
@@ -1703,7 +1727,7 @@ Dim C As String
                 End If
             Else
                 'Prodccion
-                cboTipo.ListIndex = 3
+                cboTipo2.ListIndex = 3
                 C = "Produccion"
             End If
             
@@ -1714,45 +1738,45 @@ End Function
 
 
 Private Function InsertarModificar() As Boolean
-Dim Cad As String
+Dim cad As String
     
     
     If Modo <> 4 Then
         'sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor)
         
-        Cad = SugerirCodigoSiguienteStr("sreloj", "id")
+        cad = SugerirCodigoSiguienteStr("sreloj", "id")
         
-        If Data1.Recordset.EOF Then CadenaConsulta = Cad
+        If Data1.Recordset.EOF Then CadenaConsulta = cad
         
-        Cad = Cad & "," & DBSet(txtAux(2).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
-        Cad = Cad & DBSet(txtAux(4).Text, "FH") & ","
+        cad = cad & "," & DBSet(txtAux(2).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
+        cad = cad & DBSet(txtAux(4).Text, "FH") & ","
         If txtAux(5).Text = "" Then
-            Cad = Cad & "NULL"
+            cad = cad & "NULL"
         Else
-            Cad = Cad & DBSet(txtAux(5).Text, "FH")
+            cad = cad & DBSet(txtAux(5).Text, "FH")
         End If
-        Cad = Cad & "," & DBSet(txtAux(3).Text, "N") & ","
+        cad = cad & "," & DBSet(txtAux(3).Text, "N") & ","
         
-        Cad = Cad & "'" & RecuperaValor("ALR|ALE|ALO|PROD|", cboTipo.ListIndex + 1) & "',"
-        Cad = Cad & DBSet(txtAux(6).Text, "N") & "," & DBSet(txtAux(1).Text, "T") & ")"
+        cad = cad & "'" & RecuperaValor("ALR|ALE|ALO|PROD|ALV|", cboTipo2.ListIndex + 1) & "',"
+        cad = cad & DBSet(txtAux(6).Text, "N") & "," & DBSet(txtAux(1).Text, "T") & ")"
         
-        Cad = "insert into sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor) VALUES (" & Cad
+        cad = "insert into sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor) VALUES (" & cad
     Else
-        Cad = "UPDATE sreloj SET fecha=" & DBSet(txtAux(2).Text, "F")
-        Cad = Cad & ",codtraba=" & DBSet(txtAux(0).Text, "N") & ",codtipor=" & DBSet(txtAux(1).Text, "T")
-        Cad = Cad & ",HoraInicio=" & DBSet(txtAux(4).Text, "FH") & ",HoraFin="
+        cad = "UPDATE sreloj SET fecha=" & DBSet(txtAux(2).Text, "F")
+        cad = cad & ",codtraba=" & DBSet(txtAux(0).Text, "N") & ",codtipor=" & DBSet(txtAux(1).Text, "T")
+        cad = cad & ",HoraInicio=" & DBSet(txtAux(4).Text, "FH") & ",HoraFin="
         If txtAux(5).Text = "" Then
-            Cad = Cad & "NULL"
+            cad = cad & "NULL"
         Else
-            Cad = Cad & DBSet(txtAux(5).Text, "FH")
+            cad = cad & DBSet(txtAux(5).Text, "FH")
         End If
         
-        Cad = Cad & ",Calculadas=" & DBSet(txtAux(3).Text, "N") & ",numalbar=" & DBSet(txtAux(6).Text, "N")
-        Cad = Cad & ",codtipom='" & RecuperaValor("ALR|ALE|ALO|PROD|", cboTipo.ListIndex + 1)
-        Cad = Cad & "' WHERE ID =" & Data1.Recordset!Id
+        cad = cad & ",Calculadas=" & DBSet(txtAux(3).Text, "N") & ",numalbar=" & DBSet(txtAux(6).Text, "N")
+        cad = cad & ",codtipom='" & RecuperaValor("ALR|ALE|ALO|PROD|ALV|", cboTipo2.ListIndex + 1)
+        cad = cad & "' WHERE ID =" & Data1.Recordset!Id
     End If
     
-    InsertarModificar = ejecutar(Cad, False)
+    InsertarModificar = ejecutar(cad, False)
     If Modo = 3 And Data1.Recordset.EOF Then
         
     End If
