@@ -3631,7 +3631,7 @@ End Sub
 
 Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
 Dim devuelve As String
-Dim Cad As String
+Dim cad As String
 Dim Subtipo As String 'F: fecha   N: numero   T: texto  H: HORA
 Dim TDes As TextBox
 Dim THas As TextBox
@@ -3742,8 +3742,8 @@ Dim DesH As TextBox '    "       HASTA
         If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        Cad = CadenaDesdeHastaBD(TDes.Text, THas.Text, campo, Subtipo)
-        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Function
+        cad = CadenaDesdeHastaBD(TDes.Text, THas.Text, campo, Subtipo)
+        If Not AnyadirAFormula(cadSelect, cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
@@ -3757,19 +3757,19 @@ Dim DesH As TextBox '    "       HASTA
 End Function
 
 
-Private Function AnyadirParametroDH(Cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
+Private Function AnyadirParametroDH(cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
 On Error Resume Next
     
      If TextoDESDE.Text <> "" Then
-        Cad = Cad & "desde " & TextoDESDE.Text
-        If TD.Text <> "" Then Cad = Cad & " - " & TD.Text
+        cad = cad & "desde " & TextoDESDE.Text
+        If TD.Text <> "" Then cad = cad & " - " & TD.Text
     End If
     If TextoHasta.Text <> "" Then
-        Cad = Cad & "  hasta " & TextoHasta.Text
-        If TH <> "" Then Cad = Cad & " - " & TH.Text
+        cad = cad & "  hasta " & TextoHasta.Text
+        If TH <> "" Then cad = cad & " - " & TH.Text
     End If
     
-    AnyadirParametroDH = Cad
+    AnyadirParametroDH = cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
@@ -4543,15 +4543,15 @@ Dim ImporteTotal As Currency
 
     On Error GoTo eGenerarApunteAjusteTratamientos
 
-    numParam = EsFechaOKConta(Now)
-    If numParam > 0 Then
-        MsgBox "Fecha fuera de ejercicios", vbExclamation
+    ResultadoFechaContaOK = EsFechaOKConta(Now, True)
+    If ResultadoFechaContaOK > 0 Then
+        If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
         Exit Sub
     End If
     
     Set miRsAux = New ADODB.Recordset
     numParam = 0
-    If vEmpresa.FechaFin < CDate(Now) Then numParam = 1
+    If vEmpresa.FechaFin <= CDate(Now) Then numParam = 1
     
     
     Set Mc = New Contadores
@@ -4850,7 +4850,7 @@ Dim RN As ADODB.Recordset
         'tmpinformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,nombre3,porcen1,importe1,obser,fecha1 ,fecha2,)
         
         miSQL = ", (" & vUsu.codigo & "," & miRsAux!codClien & "," & miRsAux!codCampo & "," & NumRegElim & ",'"
-        miSQL = miSQL & Mid(miRsAux!codtipom & "   ", 1, 3) & Format(miRsAux!NumFactu, "000000") & "',"
+        miSQL = miSQL & Mid(miRsAux!codtipom & "   ", 1, 3) & Format(miRsAux!Numfactu, "000000") & "',"
         'La tengo guardada en las lineas del campo
         If IsNull(miRsAux!nomvarie) Or IsNull(miRsAux!nompartida) Then
             'Lo cojo de ARIAGRO
@@ -4953,7 +4953,7 @@ Dim RN As ADODB.Recordset
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     cadTitulo = ""
     While Not miRsAux.EOF
-        cadPDFrpt = Mid(miRsAux!codtipom & "   ", 1, 3) & Format(miRsAux!NumFactu, "000000")
+        cadPDFrpt = Mid(miRsAux!codtipom & "   ", 1, 3) & Format(miRsAux!Numfactu, "000000")
         If cadTitulo <> cadPDFrpt Then
             'Vemos si hay que updatear
             If cadTitulo <> "" Then
@@ -5156,7 +5156,7 @@ Dim EnAlbaranes As Boolean
         While Not miRsAux.EOF
             lw(4).ListItems.Add , , miRsAux!codtipom
             NumRegElim = NumRegElim + 1
-            lw(4).ListItems(NumRegElim).SubItems(1) = Format(miRsAux!NumFactu, "00000")
+            lw(4).ListItems(NumRegElim).SubItems(1) = Format(miRsAux!Numfactu, "00000")
             lw(4).ListItems(NumRegElim).SubItems(2) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
             
             lw(4).ListItems(NumRegElim).SubItems(3) = Format(miRsAux!precioar, FormatoPrecio)

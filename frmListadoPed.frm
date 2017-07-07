@@ -4627,8 +4627,9 @@ Dim UnoSolo As Boolean
 
 
     'FechaOK
-    If EsFechaOKConta(CDate(Me.txtCodigo(34).Text)) <> 0 Then
-        MsgBox "Fechas fuera de ejercicio", vbExclamation
+    ResultadoFechaContaOK = EsFechaOKConta(CDate(Me.txtCodigo(34).Text), True)
+    If ResultadoFechaContaOK <> 0 Then
+        If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
         Exit Sub
     End If
     
@@ -6292,10 +6293,13 @@ Dim PreguntaHecha As Boolean
     PreguntaHecha = False
     If Not b Then
         'FACTURACION
-        cad = CStr(EsFechaOKConta(CDate(txtCodigo(44).Text)))
-        If Val(cad) > 0 Then
-            cad = "Fecha factura incorrecta para la contabilidad. ¿Continuar?"
-            If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        
+        ResultadoFechaContaOK = EsFechaOKConta(CDate(txtCodigo(44).Text), True)
+        If ResultadoFechaContaOK > 0 Then
+            If MensajeFechaOkConta <> 4 Then
+                cad = MensajeFechaOkConta & ". ¿Continuar?"
+                If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+            End If
             PreguntaHecha = True
         End If
     End If
@@ -7657,7 +7661,7 @@ End Sub
 
 Private Function ObtenerClientesNuevo(cadW As String, Importe As String) As String
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EClientes
     
@@ -7677,17 +7681,17 @@ Dim RS As ADODB.Recordset
     SQL = SQL & " group by codclien "
     If Importe <> "" Then SQL = SQL & " having baseimp>" & Importe
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
-    While Not RS.EOF
+    While Not Rs.EOF
 '        If RS!BaseImp >= CCur(Importe) Then
-            SQL = SQL & RS!codClien & ","
+            SQL = SQL & Rs!codClien & ","
 '        End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     'Si no tiene DATOS es que ninguno entra dentro de estos registros
     If SQL = "" Then SQL = "-1-"

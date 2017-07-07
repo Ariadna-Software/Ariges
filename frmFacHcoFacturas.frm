@@ -285,67 +285,67 @@ Begin VB.Form frmFacHcoFacturas2
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmFacHcoFacturas.frx":0A2A
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FrameEuler"
-      Tab(1).Control(1)=   "chkPedxCli"
-      Tab(1).Control(2)=   "FrameCampos"
-      Tab(1).Control(3)=   "Text3(18)"
-      Tab(1).Control(4)=   "Text2(18)"
-      Tab(1).Control(5)=   "Text3(17)"
-      Tab(1).Control(6)=   "txtAux(11)"
-      Tab(1).Control(7)=   "cmdaux"
-      Tab(1).Control(8)=   "txtAux(10)"
-      Tab(1).Control(9)=   "txtAux(9)"
-      Tab(1).Control(10)=   "Text3(14)"
-      Tab(1).Control(11)=   "txtAux3(2)"
-      Tab(1).Control(12)=   "txtAux3(1)"
-      Tab(1).Control(13)=   "txtAux3(0)"
-      Tab(1).Control(14)=   "txtAux(5)"
-      Tab(1).Control(15)=   "txtAux(3)"
-      Tab(1).Control(16)=   "txtAux(2)"
-      Tab(1).Control(17)=   "txtAux(1)"
-      Tab(1).Control(18)=   "txtAux(0)"
-      Tab(1).Control(19)=   "cmdObserva3"
-      Tab(1).Control(20)=   "Text2(3)"
-      Tab(1).Control(21)=   "Text3(3)"
-      Tab(1).Control(22)=   "Text3(4)"
-      Tab(1).Control(23)=   "Text3(5)"
-      Tab(1).Control(24)=   "Text3(7)"
-      Tab(1).Control(25)=   "Text3(6)"
-      Tab(1).Control(26)=   "Text3(8)"
-      Tab(1).Control(27)=   "Text2(0)"
-      Tab(1).Control(28)=   "Text3(0)"
-      Tab(1).Control(29)=   "Text2(1)"
+      Tab(1).Control(0)=   "imgBuscar(7)"
+      Tab(1).Control(1)=   "Label1(9)"
+      Tab(1).Control(2)=   "Label1(23)"
+      Tab(1).Control(3)=   "Label1(24)"
+      Tab(1).Control(4)=   "Label1(21)"
+      Tab(1).Control(5)=   "Label1(2)"
+      Tab(1).Control(6)=   "Label1(6)"
+      Tab(1).Control(7)=   "Label1(18)"
+      Tab(1).Control(8)=   "Label1(22)"
+      Tab(1).Control(9)=   "Label1(40)"
+      Tab(1).Control(10)=   "imgBuscar(8)"
+      Tab(1).Control(11)=   "imgBuscar(9)"
+      Tab(1).Control(12)=   "imgBuscar(6)"
+      Tab(1).Control(13)=   "Label1(47)"
+      Tab(1).Control(14)=   "imgBuscar(10)"
+      Tab(1).Control(15)=   "Label1(48)"
+      Tab(1).Control(16)=   "Label1(49)"
+      Tab(1).Control(17)=   "Label1(57)"
+      Tab(1).Control(18)=   "FrameTelefonia"
+      Tab(1).Control(19)=   "Text3(15)"
+      Tab(1).Control(20)=   "chkEnvio"
+      Tab(1).Control(21)=   "FrameObserva"
+      Tab(1).Control(22)=   "DataGrid2"
+      Tab(1).Control(23)=   "DataGrid1"
+      Tab(1).Control(24)=   "txtAux(8)"
+      Tab(1).Control(25)=   "txtAux(7)"
+      Tab(1).Control(26)=   "txtAux(6)"
+      Tab(1).Control(27)=   "txtAux(4)"
+      Tab(1).Control(28)=   "Text3(2)"
+      Tab(1).Control(29)=   "Text2(2)"
       Tab(1).Control(30)=   "Text3(1)"
-      Tab(1).Control(31)=   "Text2(2)"
-      Tab(1).Control(32)=   "Text3(2)"
-      Tab(1).Control(33)=   "txtAux(4)"
-      Tab(1).Control(34)=   "txtAux(6)"
-      Tab(1).Control(35)=   "txtAux(7)"
-      Tab(1).Control(36)=   "txtAux(8)"
-      Tab(1).Control(37)=   "DataGrid1"
-      Tab(1).Control(38)=   "DataGrid2"
-      Tab(1).Control(39)=   "FrameObserva"
-      Tab(1).Control(40)=   "chkEnvio"
-      Tab(1).Control(41)=   "Text3(15)"
-      Tab(1).Control(42)=   "FrameTelefonia"
-      Tab(1).Control(43)=   "Label1(57)"
-      Tab(1).Control(44)=   "Label1(49)"
-      Tab(1).Control(45)=   "Label1(48)"
-      Tab(1).Control(46)=   "imgBuscar(10)"
-      Tab(1).Control(47)=   "Label1(47)"
-      Tab(1).Control(48)=   "imgBuscar(6)"
-      Tab(1).Control(49)=   "imgBuscar(9)"
-      Tab(1).Control(50)=   "imgBuscar(8)"
-      Tab(1).Control(51)=   "Label1(40)"
-      Tab(1).Control(52)=   "Label1(22)"
-      Tab(1).Control(53)=   "Label1(18)"
-      Tab(1).Control(54)=   "Label1(6)"
-      Tab(1).Control(55)=   "Label1(2)"
-      Tab(1).Control(56)=   "Label1(21)"
-      Tab(1).Control(57)=   "Label1(24)"
-      Tab(1).Control(58)=   "Label1(23)"
-      Tab(1).Control(59)=   "Label1(9)"
-      Tab(1).Control(60)=   "imgBuscar(7)"
+      Tab(1).Control(31)=   "Text2(1)"
+      Tab(1).Control(32)=   "Text3(0)"
+      Tab(1).Control(33)=   "Text2(0)"
+      Tab(1).Control(34)=   "Text3(8)"
+      Tab(1).Control(35)=   "Text3(6)"
+      Tab(1).Control(36)=   "Text3(7)"
+      Tab(1).Control(37)=   "Text3(5)"
+      Tab(1).Control(38)=   "Text3(4)"
+      Tab(1).Control(39)=   "Text3(3)"
+      Tab(1).Control(40)=   "Text2(3)"
+      Tab(1).Control(41)=   "cmdObserva3"
+      Tab(1).Control(42)=   "txtAux(0)"
+      Tab(1).Control(43)=   "txtAux(1)"
+      Tab(1).Control(44)=   "txtAux(2)"
+      Tab(1).Control(45)=   "txtAux(3)"
+      Tab(1).Control(46)=   "txtAux(5)"
+      Tab(1).Control(47)=   "txtAux3(0)"
+      Tab(1).Control(48)=   "txtAux3(1)"
+      Tab(1).Control(49)=   "txtAux3(2)"
+      Tab(1).Control(50)=   "Text3(14)"
+      Tab(1).Control(51)=   "txtAux(9)"
+      Tab(1).Control(52)=   "txtAux(10)"
+      Tab(1).Control(53)=   "cmdaux"
+      Tab(1).Control(54)=   "txtAux(11)"
+      Tab(1).Control(55)=   "Text3(17)"
+      Tab(1).Control(56)=   "Text2(18)"
+      Tab(1).Control(57)=   "Text3(18)"
+      Tab(1).Control(58)=   "FrameCampos"
+      Tab(1).Control(59)=   "chkPedxCli"
+      Tab(1).Control(60)=   "FrameEuler"
       Tab(1).ControlCount=   61
       Begin VB.Frame FrameEuler 
          Height          =   2055
@@ -7227,7 +7227,7 @@ End Function
 
 Private Function ObtenerSelFactura() As String
 Dim cad As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error Resume Next
 
@@ -7264,15 +7264,15 @@ Dim RS As ADODB.Recordset
                     cad = "SELECT codtipom,numfactu,fecfactu FROM scafac1 "
                     cad = cad & " WHERE codtipoa=" & DBSet(hcoCodTipoM, "T") & " AND numalbar=" & hcoCodMovim & " AND fechaalb=" & DBSet(hcoFechaMov, "F")
                     
-                    Set RS = New ADODB.Recordset
-                    RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                    If Not RS.EOF Then 'where para la factura
-                        cad = " WHERE codtipom='" & RS!codtipom & "' AND numfactu= " & RS!Numfactu & " AND fecfactu=" & DBSet(RS!FecFactu, "F")
+                    Set Rs = New ADODB.Recordset
+                    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    If Not Rs.EOF Then 'where para la factura
+                        cad = " WHERE codtipom='" & Rs!codtipom & "' AND numfactu= " & Rs!Numfactu & " AND fecfactu=" & DBSet(Rs!FecFactu, "F")
                     Else
                         cad = " WHERE numfactu=-1"
                     End If
-                    RS.Close
-                    Set RS = Nothing
+                    Rs.Close
+                    Set Rs = Nothing
                 End If
     
     End If
@@ -7299,7 +7299,7 @@ End Function
 
 
 Private Sub CargaCombo()
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim i As Byte
     
@@ -7317,18 +7317,18 @@ Dim i As Byte
         SQL = SQL & "'FAZ'"
     End If
         
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
-        SQL = RS!nomtipom
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+        SQL = Rs!nomtipom
         SQL = Replace(SQL, "Factura", "")
-        Combo1.AddItem RS!codtipom & "-" & SQL
+        Combo1.AddItem Rs!codtipom & "-" & SQL
         Combo1.ItemData(Combo1.NewIndex) = i
         i = i + 1
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Sub
 
 
@@ -7986,6 +7986,10 @@ Dim b As Boolean
         BuscaChekc = cControlFra.FechaCorrectaIVA(ConnConta, Text1(2))
         If BuscaChekc <> "" Then miSQL = miSQL & "- " & BuscaChekc & vbCrLf
             
+            
+        If DBLet(Data1.Recordset!intconta, "N") = 1 Then miSQL = "Factura contabilizada." & vbCrLf & miSQL
+        
+        
         If miSQL <> "" Then
             MsgBox miSQL, vbExclamation
             Set cControlFra = Nothing

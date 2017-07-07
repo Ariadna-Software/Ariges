@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacClientesV 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Clientes Varios"
@@ -529,7 +529,7 @@ Private Sub cboFitos_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim Cad As String
+Dim cad As String
 Dim Indicador As String
 
     Screen.MousePointer = vbHourglass
@@ -542,8 +542,8 @@ Dim Indicador As String
                 If InsertarDesdeForm(Me) Then
                     Espera 0.25
                     Data1.RecordSource = "Select * from " & NombreTabla
-                    Cad = "(nifclien=" & DBSet(Text1(0).Text, "T") & ")"
-                    If SituarData(Data1, Cad, Indicador) Then
+                    cad = "(nifclien=" & DBSet(Text1(0).Text, "T") & ")"
+                    If SituarData(Data1, cad, Indicador) Then
                         PonerModo 2
                         lblIndicador.Caption = Indicador
                     Else
@@ -557,8 +557,8 @@ Dim Indicador As String
                 If ModificaDesdeFormulario(Me, 1) Then
                     TerminaBloquear
                     
-                    Cad = "(nifclien=" & DBSet(Text1(0).Text, "T") & ")"
-                    If SituarData(Data1, Cad, Indicador) Then
+                    cad = "(nifclien=" & DBSet(Text1(0).Text, "T") & ")"
+                    If SituarData(Data1, cad, Indicador) Then
                         PonerModo 2
                         lblIndicador.Caption = Indicador
                     Else
@@ -646,17 +646,17 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
-    Cad = "¿Seguro que desea eliminar el Cliente de Varios?"
-    Cad = Cad & vbCrLf & "Código: " & Data1.Recordset.Fields(0)
-    Cad = Cad & vbCrLf & "Descripción: " & Data1.Recordset.Fields(1)
+    cad = "¿Seguro que desea eliminar el Cliente de Varios?"
+    cad = cad & vbCrLf & "Código: " & Data1.Recordset.Fields(0)
+    cad = cad & vbCrLf & "Descripción: " & Data1.Recordset.Fields(1)
     
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
@@ -679,16 +679,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
     
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -953,16 +953,16 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim Cad As String
+Dim cad As String
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(0), 30, "N.I.F.")
-        Cad = Cad & ParaGrid(Text1(1), 70, "Nombre")
-        If Cad <> "" Then
+        cad = ""
+        cad = cad & ParaGrid(Text1(0), 30, "N.I.F.")
+        cad = cad & ParaGrid(Text1(1), 70, "Nombre")
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = NombreTabla
             frmB.vSQL = cadB
             HaDevueltoDatos = False
@@ -1112,7 +1112,11 @@ Dim b As Boolean
         
     'comprobamos si ya existe el cliente de varios
     If Modo = 3 Then 'Insertar
+        If Not ValidarNIF(Text1(0).Text) Then
+            b = False
+        Else
             If ExisteCP(Text1(0)) Then b = False
+        End If
     End If
 
     If vParamAplic.ManipuladorFitosanitarios2 Then

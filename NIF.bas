@@ -61,7 +61,7 @@ Public Function Comprobar_NIF(NIF As String) As Boolean
 
                     Comprobar_NIF = Comprobar_NIF_Sociedad(NIF)
 
-                ElseIf InStr(1, "MX", Mid(NIF, 1, 1)) <> 0 Then
+                ElseIf InStr(1, "MXY", Mid(NIF, 1, 1)) <> 0 Then
 
                     '-- Es un extranjero
 
@@ -123,11 +123,16 @@ Public Function Comprobar_NIF_PersonaExtranjera(NIF As String) As Boolean
 
     Dim m23 As Integer
 
-    mCadena = "DTRWAGMYFPXBNJZSQVHLCKE"
+    mCadena = "DTRWAGMYFPXBNJZSQVHLCKE" 'ANTES
+
+    mCadena = "TRWAGMYFPDXBNJZSQVHLCKE"
 
     '-- Tomamos el NIF propiamente dicho y calculamos el módulo 23
 
-    m23 = Val(Mid(NIF, 2, 7)) Mod 23
+     Aux = Mid(NIF, 2, 7)
+    If Mid(NIF, 1, 1) = "Y" Then Aux = "1" & Aux
+
+    m23 = Val(Aux) Mod 23
 
     mLetra = Mid(mCadena, m23 + 1, 1)
 
@@ -153,7 +158,7 @@ Public Function Comprobar_NIF_Sociedad(NIF As String) As Boolean
 
     Dim mLetra As String
 
-    Dim vNIF As String
+    Dim vNif As String
 
     Dim mN2 As String
 
@@ -163,21 +168,21 @@ Public Function Comprobar_NIF_Sociedad(NIF As String) As Boolean
 
     mCadena = "ABCDEFGHIJ"
 
-    vNIF = Mid(NIF, 2, 7)
+    vNif = Mid(NIF, 2, 7)
 
     '-- Sumamos las cifras pares
 
-    For i = 2 To Len(vNIF) Step 2
+    For i = 2 To Len(vNif) Step 2
 
-        Suma = Suma + Val(Mid(vNIF, i, 1))
+        Suma = Suma + Val(Mid(vNif, i, 1))
 
     Next i
 
     '-- Ahora las impares * 2, y sumando las cifras del resultado
 
-    For i = 1 To Len(vNIF) Step 2
+    For i = 1 To Len(vNif) Step 2
 
-        mN2 = CStr(Val(Mid(vNIF, i, 1)) * 2)
+        mN2 = CStr(Val(Mid(vNif, i, 1)) * 2)
 
         For i2 = 1 To Len(mN2)
 

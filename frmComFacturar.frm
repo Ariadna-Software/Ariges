@@ -1285,8 +1285,8 @@ End Sub
 
 Private Sub ListView1_ItemCheck(ByVal item As MSComctlLib.ListItem)
 'Cuando se selecciona un albaran de la lista
-Dim I As Integer
-Dim Cad As String
+Dim i As Integer
+Dim cad As String
 Dim TipoFP As Integer 'Forma de pago
 Dim TipoDtoPP As Currency 'descuento pronto pago
 Dim tipoDtoGn As Currency 'descuento general
@@ -1297,12 +1297,12 @@ Dim tipoDtoGn As Currency 'descuento general
     
     If item.Checked Then
         If vEmpresa.TieneAnalitica Then
-            Cad = "codccost is null AND fechaalb = " & DBSet(item.SubItems(1), "F")
-            Cad = Cad & " AND numalbar = " & DBSet(item.Text, "T") & " AND codprove"
+            cad = "codccost is null AND fechaalb = " & DBSet(item.SubItems(1), "F")
+            cad = cad & " AND numalbar = " & DBSet(item.Text, "T") & " AND codprove"
         
-            I = Val(DevuelveDesdeBD(conAri, "count(*)", "slialp", Cad, Text1(3).Text))
-            If I > 0 Then
-                MsgBox "Lineas de albaran(" & I & ") sin centro de coste asignado", vbExclamation
+            i = Val(DevuelveDesdeBD(conAri, "count(*)", "slialp", cad, Text1(3).Text))
+            If i > 0 Then
+                MsgBox "Lineas de albaran(" & i & ") sin centro de coste asignado", vbExclamation
                 item.Checked = False
                 Exit Sub
             End If
@@ -1328,17 +1328,17 @@ Dim tipoDtoGn As Currency 'descuento general
     'ya que si ya habia algun albaran selecionado tendremos que comprobar
     'que son de la misma forpa, dtoppago y dtognral.
     'si esto no se cumple no se pueden agrupar en la misma factura
-    For I = 1 To ListView1.ListItems.Count
-        If item.Index <> I Then
-            If ListView1.ListItems(I).Checked Then
+    For i = 1 To ListView1.ListItems.Count
+        If item.Index <> i Then
+            If ListView1.ListItems(i).Checked Then
                 'ya habia otro albaran seleccionado
-                TipoFP = ListView1.ListItems(I).SubItems(2)
-                TipoDtoPP = CCur(ListView1.ListItems(I).SubItems(4))
-                tipoDtoGn = CCur(ListView1.ListItems(I).SubItems(5))
+                TipoFP = ListView1.ListItems(i).SubItems(2)
+                TipoDtoPP = CCur(ListView1.ListItems(i).SubItems(4))
+                tipoDtoGn = CCur(ListView1.ListItems(i).SubItems(5))
                 Exit For
             End If
         End If
-    Next I
+    Next i
     
     If Not (TipoFP = 0 And TipoDtoPP = 0 And tipoDtoGn = 0) Then
     'si ya habia un albaran seleccionado, comprobar que es del mismo tipo
@@ -1528,7 +1528,7 @@ End Sub
 
 
 Private Sub PonerModo2(Kmodo As Byte)
-Dim I As Byte, NumReg As Byte
+Dim i As Byte, NumReg As Byte
 Dim b As Boolean
 On Error GoTo EPonerModo
 
@@ -1570,9 +1570,9 @@ On Error GoTo EPonerModo
     BloquearText1 Me, Modo2
     
     'Importes siempre bloqueados
-    For I = 6 To 22
-        BloquearTxt Text1(I), True
-    Next I
+    For i = 6 To 22
+        BloquearTxt Text1(i), True
+    Next i
     'Campo B.Imp y Imp. IVA siempre en azul
     Text1(9).BackColor = &HFFFFC0 'Base imponible
     Text1(19).BackColor = &HFFFFC0 'Total Iva 1
@@ -1583,10 +1583,10 @@ On Error GoTo EPonerModo
     
     
     If Modo2 = 4 Then
-        For I = 0 To 4
-            If I <> 2 Then
-                Text1(I).Locked = False
-                Text1(I).BackColor = vbWhite
+        For i = 0 To 4
+            If i <> 2 Then
+                Text1(i).Locked = False
+                Text1(i).BackColor = vbWhite
             End If
         Next
     End If
@@ -1615,9 +1615,9 @@ On Error GoTo EPonerModo
     '---------------------------------------------
     b = (Modo2 <> 0 And Modo2 <> 2 And Modo2 <> 5)
     
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = b
+    Next i
                     
 
        
@@ -1642,32 +1642,32 @@ End Sub
 Private Function DatosOk() As Boolean
 'Comprobar que los datos del frame de introduccion son correctos antes de cargar datos
 Dim vtag As CTag
-Dim Cad As String
-Dim I As Byte
+Dim cad As String
+Dim i As Byte
 
     On Error GoTo EDatosOK
     DatosOk = False
     
     ' deben de introducirse todos los datos del frame
-    For I = 0 To 5
-        If Text1(I).Text = "" Then
-            If Text1(I).Tag <> "" Then
+    For i = 0 To 5
+        If Text1(i).Text = "" Then
+            If Text1(i).Tag <> "" Then
                 Set vtag = New CTag
-                If vtag.Cargar(Text1(I)) Then
-                    Cad = vtag.Nombre
+                If vtag.Cargar(Text1(i)) Then
+                    cad = vtag.Nombre
                 Else
-                    Cad = "Campo"
+                    cad = "Campo"
                 End If
                 Set vtag = Nothing
             Else
-                Cad = "Campo"
-                If I = 5 Then Cad = "Cta. Prev. Pago"
+                cad = "Campo"
+                If i = 5 Then cad = "Cta. Prev. Pago"
             End If
-            MsgBox Cad & " no puede estar vacio. Reintroduzca", vbExclamation
-            PonerFoco Text1(I)
+            MsgBox cad & " no puede estar vacio. Reintroduzca", vbExclamation
+            PonerFoco Text1(i)
             Exit Function
         End If
-    Next I
+    Next i
         
     'comprobar que la fecha de la factura sea anterior a la fecha de recepcion
     If Not EsFechaIgualPosterior(Text1(1).Text, Text1(2).Text, True, "La fecha de recepción debe ser igual o posterior a la fecha de la factura.") Then
@@ -1675,15 +1675,11 @@ Dim I As Byte
     End If
     
     'Comprobar que la fecha de RECEPCION esta dentro de los ejercicios contables
-    I = EsFechaOKConta(CDate(Text1(2).Text))
-    If I > 0 Then
-        'If i = 1 Then
-            MsgBox "Fecha fuera ejercicios contables", vbExclamation
-            Exit Function
-       ' Else
-       '     cad = "La fecha es superior al ejercico contable siguiente. ¿Desea continuar?"
-       '     If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
-       ' End If
+    ResultadoFechaContaOK = EsFechaOKConta(CDate(Text1(2).Text), True)
+    If ResultadoFechaContaOK > 0 Then
+        If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
+        Exit Function
+
     End If
     
     'comprobar que se han seleccionado lineas para facturar
@@ -1698,53 +1694,53 @@ Dim I As Byte
     
     
     'todos los albaranes seleccionados deben tener la misma: forma pago, dto ppago, dto gnral
-    Cad = "select count(distinct codforpa,dtoppago,dtognral) from scaalp "
-    Cad = Cad & " WHERE " & Replace(cadWhere, "slialp", "scaalp")
-    If RegistrosAListar(Cad) > 1 Then
+    cad = "select count(distinct codforpa,dtoppago,dtognral) from scaalp "
+    cad = cad & " WHERE " & Replace(cadWhere, "slialp", "scaalp")
+    If RegistrosAListar(cad) > 1 Then
         MsgBox "No se puede facturar albaranes con distintas: forma de pago, dto gral, dto ppago.", vbExclamation
         Exit Function
     End If
     
     
     'Si la forpa es TRANSFERENCIA entonces compruebo la si tiene cta bancaria
-    Cad = "select distinct (codforpa) from scaalp "
-    Cad = Cad & " WHERE " & Replace(cadWhere, "slialp", "scaalp")
+    cad = "select distinct (codforpa) from scaalp "
+    cad = cad & " WHERE " & Replace(cadWhere, "slialp", "scaalp")
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Cad = miRsAux.Fields(0)
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = miRsAux.Fields(0)
     miRsAux.Close
     
     
     
     'Ahora buscamos el tipforpa del codforpa
-    Cad = "Select tipforpa from sforpa where codforpa=" & Cad
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 0
+    cad = "Select tipforpa from sforpa where codforpa=" & cad
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    i = 0
     If miRsAux.EOF Then
         MsgBox "Error en el TIPO de forma de pago", vbExclamation
     Else
-        I = 1
-        Cad = miRsAux.Fields(0)
-        If Val(Cad) = vbFPTransferencia Then
+        i = 1
+        cad = miRsAux.Fields(0)
+        If Val(cad) = vbFPTransferencia Then
             'Compruebo que la forpa es transferencia
-            I = 2
+            i = 2
         End If
     End If
     miRsAux.Close
     Set miRsAux = Nothing
     
     
-    If I = 2 Then
+    If i = 2 Then
         'La forma de pago es transferencia. Debo comprobar que existe la cuenta bancaria
         'del proveedor
         If vProve.CuentaBan = "" Or vProve.DigControl = "" Or vProve.Sucursal = "" Or vProve.Banco = "" Then
-            Cad = "Cuenta bancaria incorrecta. Forma de pago: transferencia.    ¿Continuar?"
-            If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then I = 0
+            cad = "Cuenta bancaria incorrecta. Forma de pago: transferencia.    ¿Continuar?"
+            If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then i = 0
         End If
     End If
     
     'Si i=0 es que o esta mal la forpa o no quiere seguir pq no tiene cuenta bancaria
-    If I > 0 Then DatosOk = True
+    If i > 0 Then DatosOk = True
     Exit Function
     
 EDatosOK:
@@ -1907,35 +1903,35 @@ End Sub
 
 
 Private Sub CalcularDatosFactura()
-Dim I As Integer
+Dim i As Integer
 Dim SQL As String
 Dim cadAux As String
 Dim vFactu As CFacturaCom
 
     'Limpiar en el form los datos calculados de la factura
     'y volvemos a recalcular
-    For I = 6 To 22
-         Text1(I).Text = ""
-    Next I
+    For i = 6 To 22
+         Text1(i).Text = ""
+    Next i
 
     cadAux = ""
     cadWhere = ""
     
-    For I = 1 To ListView1.ListItems.Count
-        If ListView1.ListItems(I).Checked Then
+    For i = 1 To ListView1.ListItems.Count
+        If ListView1.ListItems(i).Checked Then
         'para cada albaran seleccionado para la factura
-            ForPa = ListView1.ListItems(I).SubItems(2)
-            dtoPP = ListView1.ListItems(I).SubItems(4)
-            dtoGn = ListView1.ListItems(I).SubItems(5)
-            SQL = "(numalbar=" & DBSet(ListView1.ListItems(I).Text, "T") & " and "
-            SQL = SQL & "fechaalb=" & DBSet(ListView1.ListItems(I).SubItems(1), "F") & ")"
+            ForPa = ListView1.ListItems(i).SubItems(2)
+            dtoPP = ListView1.ListItems(i).SubItems(4)
+            dtoGn = ListView1.ListItems(i).SubItems(5)
+            SQL = "(numalbar=" & DBSet(ListView1.ListItems(i).Text, "T") & " and "
+            SQL = SQL & "fechaalb=" & DBSet(ListView1.ListItems(i).SubItems(1), "F") & ")"
             If cadAux = "" Then
                 cadAux = SQL
             Else
                 cadAux = cadAux & " OR " & SQL
             End If
         End If
-    Next I
+    Next i
     
     If cadAux <> "" Then
     'se han seleccionado albaranes para facturar
@@ -1983,20 +1979,20 @@ Dim vFactu As CFacturaCom
         Text1(21).Text = vFactu.ImpIVA3
         Text1(22).Text = vFactu.TotalFac
         
-        For I = 6 To 22
-            FormateaCampo Text1(I)
-        Next I
+        For i = 6 To 22
+            FormateaCampo Text1(i)
+        Next i
         'Quitar ceros de linea IVA 2
         If Val(Text1(14).Text) = 0 And Val(Text1(11).Text) = 0 Then
-            For I = 11 To 20 Step 3
-                Text1(I).Text = QuitarCero(CCur(Text1(I).Text))
-            Next I
+            For i = 11 To 20 Step 3
+                Text1(i).Text = QuitarCero(CCur(Text1(i).Text))
+            Next i
         End If
         'Quitar ceros de linea IVA 3
         If Val(Text1(15).Text) = 0 And Val(Text1(12).Text) = 0 Then
-            For I = 12 To 21 Step 3
-                Text1(I).Text = QuitarCero(CCur(Text1(I).Text))
-            Next I
+            For i = 12 To 21 Step 3
+                Text1(i).Text = QuitarCero(CCur(Text1(i).Text))
+            Next i
         End If
         
     Else
@@ -2032,22 +2028,22 @@ End Function
 
 
 Private Sub BotonFacturar()
-Dim Cad As String
+Dim cad As String
 
         Screen.MousePointer = vbHourglass
     
     
     
-    Cad = ""
+    cad = ""
     If Text1(3).Text = "" Or Text2(3).Text = "" Then
-        Cad = "Falta proveedor"
+        cad = "Falta proveedor"
     Else
-        If Not IsNumeric(Text1(3).Text) Then Cad = "Campo proveedor debe ser numérico"
-        If Text1(4).Text = "" Or Text2(4).Text = "" Then Cad = Cad & "- Operador"
+        If Not IsNumeric(Text1(3).Text) Then cad = "Campo proveedor debe ser numérico"
+        If Text1(4).Text = "" Or Text2(4).Text = "" Then cad = cad & "- Operador"
                 
     End If
-    If Cad <> "" Then
-        MsgBox Cad, vbExclamation
+    If cad <> "" Then
+        MsgBox cad, vbExclamation
         Exit Sub
     End If
         
@@ -2074,7 +2070,7 @@ End Sub
 
 Private Function GenerarFactura_() As Boolean
 Dim vFactu As CFacturaCom
-Dim Cad  As String
+Dim cad  As String
 Dim CadenaContab As String
 
         On Error GoTo Error1
@@ -2083,7 +2079,7 @@ Dim CadenaContab As String
         'Pasar los Albaranes seleccionados con cadWHERE a una factura
         Set vFactu = New CFacturaCom
         vFactu.Proveedor = Text1(3).Text
-        vFactu.NumFactu = Text1(0).Text
+        vFactu.Numfactu = Text1(0).Text
         vFactu.FecFactu = Text1(1).Text
         vFactu.FecRecep = Text1(2).Text
         vFactu.Trabajador = Text1(4).Text
@@ -2156,11 +2152,11 @@ Dim CadenaContab As String
                     
                     'Como no se ha contabilizado, pero si que quiero que ponga el venticimento, lo tenog quieu poner a manao
                     'dav07 @ 01/03/2015
-                    Cad = Text1(0).Text & " @ " & Text1(1).Text
-                    Cad = DBSet(Cad, "T")
-                    Cad = vUsu.codigo & ",0," & Cad & "," & Text1(3).Text & ")"
-                    Cad = "INSERT INTO tmpinformes(codusu,codigo1,nombre1 ,importe1) VALUES (" & Cad
-                    ejecutar Cad, True
+                    cad = Text1(0).Text & " @ " & Text1(1).Text
+                    cad = DBSet(cad, "T")
+                    cad = vUsu.codigo & ",0," & cad & "," & Text1(3).Text & ")"
+                    cad = "INSERT INTO tmpinformes(codusu,codigo1,nombre1 ,importe1) VALUES (" & cad
+                    ejecutar cad, True
                     
                     
                     CadenaContab = " Numregis ERROR. No contabizada"
@@ -2175,11 +2171,11 @@ Dim CadenaContab As String
                 'codusu,codigo1,nombre1 ,importe1
                 
                 'dav07 @ 01/03/2015
-                Cad = Text1(0).Text & " @ " & Text1(1).Text
-                Cad = DBSet(Cad, "T")
-                Cad = vUsu.codigo & ",0," & Cad & "," & Text1(3).Text & ")"
-                Cad = "INSERT INTO tmpinformes(codusu,codigo1,nombre1 ,importe1) VALUES (" & Cad
-                conn.Execute Cad
+                cad = Text1(0).Text & " @ " & Text1(1).Text
+                cad = DBSet(cad, "T")
+                cad = vUsu.codigo & ",0," & cad & "," & Text1(3).Text & ")"
+                cad = "INSERT INTO tmpinformes(codusu,codigo1,nombre1 ,importe1) VALUES (" & cad
+                conn.Execute cad
                 Espera 0.2
             End If
             
@@ -2200,40 +2196,40 @@ Dim CadenaContab As String
             
             'ALBARANES
             
-            Cad = Text1(3).Text & "-" & Mid(Text2(3).Text, 1, 15) & "..." & vbCrLf
-            Cad = Cad & "FRA: " & Text1(0).Text & "   " & Text1(1).Text & "  ALB:"
+            cad = Text1(3).Text & "-" & Mid(Text2(3).Text, 1, 15) & "..." & vbCrLf
+            cad = cad & "FRA: " & Text1(0).Text & "   " & Text1(1).Text & "  ALB:"
             For NumRegElim = 1 To Me.ListView1.ListItems.Count
-                If ListView1.ListItems(NumRegElim).Checked Then Cad = Cad & ListView1.ListItems(NumRegElim).Text & ":"
+                If ListView1.ListItems(NumRegElim).Checked Then cad = cad & ListView1.ListItems(NumRegElim).Text & ":"
             Next
-            Cad = Cad & CadenaContab
-            Cad = Cad & vbCrLf & "B." & Text1(6).Text
+            cad = cad & CadenaContab
+            cad = cad & vbCrLf & "B." & Text1(6).Text
             
             NumRegElim = 0
             If Text1(7).Text <> "" Then
                 If ImporteFormateado(Text1(7).Text) <> 0 Then
-                    Cad = Cad & "  DtoPP " & Text1(7).Text
+                    cad = cad & "  DtoPP " & Text1(7).Text
                     NumRegElim = 1
                 End If
             End If
             If Text1(8).Text <> "" Then
                 If ImporteFormateado(Text1(8).Text) <> 0 Then
-                    Cad = Cad & "  DtoGE " & Text1(8).Text
+                    cad = cad & "  DtoGE " & Text1(8).Text
                     NumRegElim = 1
                 End If
             End If
-            If NumRegElim = 1 Then Cad = Cad & "  B.I." & Text1(NumRegElim).Text
-            Cad = Cad & vbCrLf
+            If NumRegElim = 1 Then cad = cad & "  B.I." & Text1(NumRegElim).Text
+            cad = cad & vbCrLf
                 
             For NumRegElim = 0 To 2
                 If Text1(10 + NumRegElim).Text <> "" Then
-                    Cad = Cad & NumRegElim + 1 & ":- " & Text1(10 + NumRegElim).Text & "(" & Text1(13 + NumRegElim).Text & ")"
-                    Cad = Cad & "     " & Text1(16 + NumRegElim).Text & "    " & Text1(19 + NumRegElim).Text & vbCrLf
+                    cad = cad & NumRegElim + 1 & ":- " & Text1(10 + NumRegElim).Text & "(" & Text1(13 + NumRegElim).Text & ")"
+                    cad = cad & "     " & Text1(16 + NumRegElim).Text & "    " & Text1(19 + NumRegElim).Text & vbCrLf
                 End If
             Next
-            If Text1(23).Text <> "" Then Cad = Cad & "Ret:" & Text1(23).Text & "   " & Text1(24).Text & vbCrLf
-            Cad = Cad & vbCrLf & "TOTAL: " & Text1(22).Text
+            If Text1(23).Text <> "" Then cad = cad & "Ret:" & Text1(23).Text & "   " & Text1(24).Text & vbCrLf
+            cad = cad & vbCrLf & "TOTAL: " & Text1(22).Text
     
-            LOG.Insertar 9, vUsu, Cad
+            LOG.Insertar 9, vUsu, cad
             Set LOG = Nothing
             
             
@@ -2251,9 +2247,9 @@ Dim CadenaContab As String
             
             If vParamAplic.NumeroInstalacion = 1 Then
     
-                Cad = DevuelveDesdeBD(conAri, "count(*)", "sflotas", "codprove", CStr(vProve.codigo))
+                cad = DevuelveDesdeBD(conAri, "count(*)", "sflotas", "codprove", CStr(vProve.codigo))
     
-                If Val(Cad) > 0 Then
+                If Val(cad) > 0 Then
                     frmComCasarAlbaranes.Codprove = vProve.codigo
                     frmComCasarAlbaranes.Show vbModal
                 End If
@@ -2281,16 +2277,16 @@ End Function
 
 Private Function ExisteFacturaEnHco() As Boolean
 'Comprobamos si la factura ya existe en la tabla de Facturas a Proveedor: scafpc
-Dim Cad As String
+Dim cad As String
 
     ExisteFacturaEnHco = False
     'Tiene que tener valor los 3 campos de clave primaria antes de comprobar
     If Not (Text1(0).Text <> "" And Text1(1).Text <> "" And Text1(3).Text <> "") Then Exit Function
     
     ' No debe existir el número de factura para el proveedor en hco
-    Cad = "SELECT count(*) FROM scafpc "
-    Cad = Cad & " WHERE codprove=" & Text1(3).Text & " AND numfactu=" & DBSet(Text1(0).Text, "T") & " AND year(fecfactu)=" & Year(Text1(1).Text)
-    If RegistrosAListar(Cad) > 0 Then
+    cad = "SELECT count(*) FROM scafpc "
+    cad = cad & " WHERE codprove=" & Text1(3).Text & " AND numfactu=" & DBSet(Text1(0).Text, "T") & " AND year(fecfactu)=" & Year(Text1(1).Text)
+    If RegistrosAListar(cad) > 0 Then
         MsgBox "Factura de proveedor ya existente. Reintroduzca.", vbExclamation
         ExisteFacturaEnHco = True
         Exit Function
@@ -2298,18 +2294,18 @@ Dim Cad As String
 End Function
 
 Private Sub RefrescarAlbaranes()
-Dim I As Integer
+Dim i As Integer
 Dim SQL As String
 Dim Itm As ListItem
 Dim Rs As ADODB.Recordset
     
 
-    For I = 1 To ListView1.ListItems.Count
+    For i = 1 To ListView1.ListItems.Count
         SQL = "SELECT scaalp.numalbar,scaalp.fechaalb,scaalp.codforpa,sforpa.nomforpa,scaalp.dtoppago,scaalp.dtognral, "
         SQL = SQL & " sum(slialp.importel) as bruto "
         SQL = SQL & " FROM (scaalp LEFT OUTER JOIN sforpa ON scaalp.codforpa=sforpa.codforpa) "
         SQL = SQL & " INNER JOIN slialp ON scaalp.numalbar = slialp.numalbar  AND scaalp.fechaalb=slialp.fechaalb AND scaalp.codprove=slialp.codprove "
-        SQL = SQL & " WHERE scaalp.codprove =" & Text1(3).Text & " AND scaalp.numalbar=" & DBSet(ListView1.ListItems(I).Text, "T") & " AND scaalp.fechaalb=" & DBSet(ListView1.ListItems(I).SubItems(1), "F")
+        SQL = SQL & " WHERE scaalp.codprove =" & Text1(3).Text & " AND scaalp.numalbar=" & DBSet(ListView1.ListItems(i).Text, "T") & " AND scaalp.fechaalb=" & DBSet(ListView1.ListItems(i).SubItems(1), "F")
         SQL = SQL & " GROUP BY scaalp.numalbar, scaalp.fechaalb, scaalp.codforpa, scaalp.dtoppago,scaalp.dtognral "
         SQL = SQL & " ORDER BY scaalp.numalbar"
 
@@ -2317,30 +2313,30 @@ Dim Rs As ADODB.Recordset
         Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
         If Not Rs.EOF Then 'Actualizamos los datos de este item en el list
-            ListView1.ListItems(I).SubItems(2) = Rs!codforpa
-            ListView1.ListItems(I).SubItems(3) = Rs!nomforpa
-            ListView1.ListItems(I).SubItems(4) = Rs!DtoPPago
-            ListView1.ListItems(I).SubItems(5) = Rs!DtoGnral
-            ListView1.ListItems(I).SubItems(6) = Rs!bruto
+            ListView1.ListItems(i).SubItems(2) = Rs!codforpa
+            ListView1.ListItems(i).SubItems(3) = Rs!nomforpa
+            ListView1.ListItems(i).SubItems(4) = Rs!DtoPPago
+            ListView1.ListItems(i).SubItems(5) = Rs!DtoGnral
+            ListView1.ListItems(i).SubItems(6) = Rs!bruto
 
         End If
         
-        If ListView1.ListItems(I).Checked Then 'comprobamos otra vez el chek y recalculamos factura
-            Set Itm = ListView1.ListItems(I)
+        If ListView1.ListItems(i).Checked Then 'comprobamos otra vez el chek y recalculamos factura
+            Set Itm = ListView1.ListItems(i)
             ListView1_ItemCheck Itm
         End If
 
         Rs.Close
         Set Rs = Nothing
-    Next I
+    Next i
     
     'recalcular el total de la factura
-     For I = 1 To ListView1.ListItems.Count
-        If ListView1.ListItems(I).Checked Then
+     For i = 1 To ListView1.ListItems.Count
+        If ListView1.ListItems(i).Checked Then
             CalcularDatosFactura
             Exit For
         End If
-     Next I
+     Next i
      
 End Sub
 

@@ -98,6 +98,8 @@ Public EulerParam As String
 
 Public Const SerieFraPro = "1"
 
+Public ResultadoFechaContaOK As Byte
+Public MensajeFechaOkConta As String
 
 'Inicio Aplicación
 Public Sub Main()
@@ -222,7 +224,12 @@ Public Function LeerDatosEmpresa()
             MsgBox "No se han podido cargar datos empresa (BD:usuarios). Debe configurar la aplicación.", vbExclamation
             Set vEmpresa = Nothing
         End If
-            
+                   
+                   
+                   
+        
+                   
+                   
 End Function
 
 
@@ -235,6 +242,9 @@ Public Function LeerNivelesEmpresa()
             MsgBox "No se han podido cargar los niveles de la contabilidad de la empresa. Debe configurar la aplicación.", vbExclamation
 '            Set vEmpresa = Nothing
         End If
+        
+        
+        vParamAplic.SII_FijarValores
         
 End Function
 
@@ -1385,7 +1395,7 @@ End Function
 
 'Lo que hace es comprobar que si la resolucion es mayor
 'que 800x600 lo pone en el 400
-Public Sub AjustarPantalla(ByRef formulario As Form)
+Public Sub AjustarPantalla(ByRef Formulario As Form)
 '    If Screen.Width > 13000 Then
 '        formulario.Top = 400
 '        formulario.Left = 400
@@ -1849,9 +1859,12 @@ End Sub
 '            1: Inferior
 '            2: Superior
 
-Public Function EsFechaOKConta(Fecha As Date) As Byte
+'           SII.  4. No seguir, pero no dar msgbox
+'                 5. NO seguir, pero dar msgbox con MensajeFechaOkConta
+Public Function EsFechaOKConta(Fecha As Date, DejarContinuarSII As Boolean) As Byte
 Dim F2 As Date
-
+    
+    
     If vEmpresa.FechaIni > Fecha Then
         EsFechaOKConta = 1
     Else
@@ -1863,7 +1876,28 @@ Dim F2 As Date
             EsFechaOKConta = 0
         End If
     End If
-
+    If EsFechaOKConta = 0 Then
+        'Si tiene SII
+        If vParamAplic.ContabilidadNueva Then
+            If vParamAplic.SII_Tiene Then
+                If DateDiff("d", Fecha, Now) > vParamAplic.Sii_Dias Then
+                    MensajeFechaOkConta = "Fecha fuera de periodo de comunicación SII."
+                    'LLEVA SII y han trascurrido los dias
+                    If vUsu.Nivel = 0 Then
+                        If MsgBox(MensajeFechaOkConta & vbCrLf & "¿Continuar?", vbQuestion + vbYesNoCancel) <> vbYes Then
+                            EsFechaOKConta = 4
+                        End If
+                        
+                    Else
+                        'NO tienen nivel
+                        EsFechaOKConta = 5
+                    End If
+                End If
+            End If
+        End If
+    Else
+        MensajeFechaOkConta = "Fuera de ejercicios contables"
+    End If
 End Function
 
 
