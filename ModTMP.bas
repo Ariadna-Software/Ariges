@@ -21,7 +21,7 @@ Public Function CargarDatosTMPNumSeries(NomTabla As String, codArtic As String, 
 '      Cant: cantidad de Articulo (tantas filas como articulos)
 '      Mostrar: si true se cargar los Nº de serie sino en blanco
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
 Dim numlinea As String, vWhere As String
 
     On Error GoTo ECargaDatosTMP
@@ -30,14 +30,14 @@ Dim numlinea As String, vWhere As String
     vWhere = "(codusu=" & vUsu.codigo & " and codartic=" & DBSet(codArtic, "T") & " and numlinealb=" & DBSet(NumLinAlb, "N") & ")"
 
     'insertamos tantos num.serie como cantidad
-    For I = 0 To Cant - 1
+    For i = 0 To Cant - 1
         'Obtener Num Linea
         numlinea = SugerirCodigoSiguienteStr(NomTabla, "numlinea", vWhere)
         'Insertar en la temporal para Nº Series
         SQL = "INSERT INTO " & NomTabla & " (codusu, codartic, numlinealb, numlinea, numserie,nummante) VALUES ("
         SQL = SQL & vUsu.codigo & ", " & DBSet(codArtic, "T") & ", " & NumLinAlb & ", " & numlinea & ", ' ',' ')"
         conn.Execute SQL
-    Next I
+    Next i
  
 ECargaDatosTMP:
     If Err.Number <> 0 Then
@@ -354,13 +354,13 @@ Private Function TotMovimientosStock2(cadSQL As String, vTipomovi As Byte) As Si
 'Para un tipo de Movimiento vtipomovi(0=Salida, 1=Entrada) devolver
 'la cantidad de stock para esos registros de la select
 Dim RSmov As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 
         TotMovimientosStock2 = 0
-        Cad = cadSQL & " AND tipomovi=" & vTipomovi
+        cad = cadSQL & " AND tipomovi=" & vTipomovi
         
         Set RSmov = New ADODB.Recordset
-        RSmov.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RSmov.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not RSmov.EOF Then
             If Not IsNull(RSmov.Fields(0).Value) Then _
@@ -375,15 +375,15 @@ Private Sub TotMovimientosStockAgrup(cadSQL As String, ByRef Entradas As Currenc
 'Para un tipo de Movimiento vtipomovi(0=Salida, 1=Entrada) devolver
 'la cantidad de stock para esos registros de la select
 Dim RSmov As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 
     
         Entradas = 0
         Salidas = 0
-        Cad = cadSQL & " GROUP BY tipomovi"
+        cad = cadSQL & " GROUP BY tipomovi"
         
         Set RSmov = New ADODB.Recordset
-        RSmov.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RSmov.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
         While Not RSmov.EOF
@@ -418,7 +418,7 @@ Dim T1 As Currency
 Dim T2 As Currency
 Dim T3 As Currency
 Dim T4 As Currency
-Dim Total As String 'Total del periodo seleccionado
+Dim total As String 'Total del periodo seleccionado
 Dim totalAnt As String 'total del periodo anterior
 Dim ColAgent As Collection
 Dim J As Long
@@ -483,7 +483,7 @@ Dim J As Long
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
-        Total = CStr(DBLet(Rs.Fields(0), "N"))
+        total = CStr(DBLet(Rs.Fields(0), "N"))
     End If
     Rs.Close
     Set Rs = Nothing
@@ -499,7 +499,10 @@ Dim J As Long
         Lbl.Refresh
 
         SQL = "select sum(baseimp1 + if(isnull(baseimp2),0,baseimp2) + if(isnull(baseimp3),0,baseimp3)) as BaseImp "
-        SQL = SQL & " FROM scafac WHERE 1=1 "
+        SQL = SQL & " FROM scafac,sclien "
+        SQL = SQL & "  WHERE scafac.codclien=sclien.codclien "
+        
+        
         If cadSelAnte <> "" Then SQL = SQL & " AND " & cadSelAnte
         
         'JUL2013
@@ -526,8 +529,9 @@ Dim J As Long
     Lbl.Caption = "Obteniendo importes periodo"
     Lbl.Refresh
     
-    SQL = "select codtipom,codclien,nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1 + if(isnull(baseimp2),0,baseimp2) + if(isnull(baseimp3),0,baseimp3)) as BaseImp "
-    SQL = SQL & " from scafac WHERE 1=1 "
+    SQL = "select codtipom,scafac.codclien,scafac.nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1 + if(isnull(baseimp2),0,baseimp2) + if(isnull(baseimp3),0,baseimp3)) as BaseImp "
+    SQL = SQL & " FROM scafac,sclien "
+    SQL = SQL & "  WHERE scafac.codclien=sclien.codclien "
     If cadSel <> "" Then SQL = SQL & " AND " & cadSel
     'JUL2013
     SQL = SQL & "  AND scafac.codtipom IN  " & TiposDeFacturas
@@ -557,7 +561,7 @@ Dim J As Long
                 '----
                 SQL = SQL & DBSet(T1, "N") & ","
                 '% sobre el total de ventas
-                T1 = Round((T1 * 100) / CCur(Total), 2)
+                T1 = Round((T1 * 100) / CCur(total), 2)
                 SQL = SQL & DBSet(T1, "N") & ","
                 'Obtener ventas del cliente para el periodo anterior
                 SQL = SQL & VentasPeriodoAnterior(PorAgente, Cliente, cadSelAnte, TiposDeFacturas) & ")"
@@ -579,7 +583,7 @@ Dim J As Long
             End If
             
             'Empezamos el registro para el siguiente cliente
-            SQL = "(" & vUsu.codigo & "," & Rs!codClien & "," & DBSet(Rs!Nomclien, "T") & ","
+            SQL = "(" & vUsu.codigo & "," & Rs!codClien & "," & DBSet(Rs!NomClien, "T") & ","
             T1 = 0
             T2 = 0
             T3 = 0
@@ -622,7 +626,7 @@ Dim J As Long
         T1 = CStr(T1 + T2 + T3 + T4)
         '----
         SQL = SQL & DBSet(T1, "N") & ","
-        T1 = CStr(Round((CCur(T1) * 100) / CCur(Total), 2))
+        T1 = CStr(Round((CCur(T1) * 100) / CCur(total), 2))
         SQL = SQL & DBSet(T1, "N") & ","
         'Obtener ventas del cliente para el periodo anterior
         SQL = SQL & VentasPeriodoAnterior(PorAgente, Cliente, cadSelAnte, TiposDeFacturas) & ")"
@@ -647,7 +651,7 @@ Dim J As Long
     
     
     
-    cadSelPeriodo = DBSet(Total, "N")
+    cadSelPeriodo = DBSet(total, "N")
     cadSelAnte = DBSet(totalAnt, "N")
     
     
@@ -692,7 +696,7 @@ Dim J As Long
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set ColAgent = New Collection
     While Not Rs.EOF
-        SQL = "nombre1= " & DBSet(Rs!Nomclien, "T") & " WHERE codusu = " & vUsu.codigo & " AND codigo1=" & Rs!Codigo1
+        SQL = "nombre1= " & DBSet(Rs!NomClien, "T") & " WHERE codusu = " & vUsu.codigo & " AND codigo1=" & Rs!Codigo1
         ColAgent.Add SQL
         Rs.MoveNext
     Wend
@@ -744,9 +748,9 @@ Dim T4 As Currency
     If cadSel <> "" Then
         '---- Laura: Modificaco 26/09/2006
         'SQL = "select codclien,codtipom,sum(baseimp1)+sum(baseimp2)+sum(baseimp3) as BaseImp "
-        SQL = "SELECT codclien,codtipom, sum(baseimp1 + if(isnull(baseimp2),0,baseimp2) + if(isnull(baseimp3),0,baseimp3)) as BaseImp "
+        SQL = "SELECT scafac.codclien,codtipom, sum(baseimp1 + if(isnull(baseimp2),0,baseimp2) + if(isnull(baseimp3),0,baseimp3)) as BaseImp "
         '----
-        SQL = SQL & " from scafac where " & cadSel
+        SQL = SQL & " from scafac,sclien where scafac.codclien =sclien.codclien AND " & cadSel
         'JUL2013
         SQL = SQL & "  AND scafac.codtipom IN  " & TiposDeFacturaAListar
         
@@ -818,7 +822,7 @@ Dim Rs As ADODB.Recordset
 
 Dim Cliente As Long
 Dim MesAnt As Integer
-Dim I As Integer
+Dim i As Integer
 
 Dim llis As Collection
 Dim TotClien(12) As Currency
@@ -834,14 +838,14 @@ Dim Derecha As String
     Set llis = New Collection
     
     'Inicializamos las listas
-    For I = 1 To 12
-        TotClien(I) = 0
-        TotAnyo(I) = 0
-    Next I
+    For i = 1 To 12
+        TotClien(i) = 0
+        TotAnyo(i) = 0
+    Next i
     
    
-    I = InStr(cadSel, "codclien")
-    If I > 0 Then 'Se ha seleccionado un cliente
+    i = InStr(cadSel, "codclien")
+    If i > 0 Then 'Se ha seleccionado un cliente
         SQL = "SELECT  codclien , year(fecfactu) AnyoFac,month(fecfactu) as MesFac, sum(baseimp1+if(isnull(baseimp2),0,baseimp2)+If(isnull(baseimp3),0,baseimp3)) as BaseImp "
         SQL = SQL & " FROM scafac "
         SQL = SQL & " WHERE " & cadSel '& " AND month(fecfactu)=1 "
@@ -860,10 +864,10 @@ Dim Derecha As String
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'Actualizar la lista con el total del cliente o del anyo anterior
-    If I > 0 Then Cliente = Rs!codClien
+    If i > 0 Then Cliente = Rs!codClien
     While Not Rs.EOF
-        I = CInt(Rs!mesfac)
-        TotClien(I) = Rs!BaseImp
+        i = CInt(Rs!mesfac)
+        TotClien(i) = Rs!BaseImp
         Rs.MoveNext
     Wend
     Rs.Close
@@ -883,8 +887,8 @@ Dim Derecha As String
     
     'Actualizar la lista con el total del Anyo solicitado
     While Not Rs.EOF
-        I = CInt(Rs!mesfac)
-        TotAnyo(I) = Rs!BaseImp
+        i = CInt(Rs!mesfac)
+        TotAnyo(i) = Rs!BaseImp
         Rs.MoveNext
     Wend
     Rs.Close
@@ -893,16 +897,16 @@ Dim Derecha As String
     
     'Insertamos en la lista todos los registros que vamos a insertar en la temporal
     'Un registro para cada mes
-    For I = 1 To 12
-        If TotAnyo(I) <> 0 Then
+    For i = 1 To 12
+        If TotAnyo(i) <> 0 Then
             If Cliente <> 0 Then
                 'porcentaje del cliente respecto al total del año (por mes)
-                Porce = Round((TotClien(I) * 100) / TotAnyo(I), 2)
+                Porce = Round((TotClien(i) * 100) / TotAnyo(i), 2)
             Else
                 'Incremento/decremento respecto al anyo anterior (por mes)
                 'en TotClien en este caso se ha almacenado el total del año anterior de cada mes
-                If TotClien(I) <> 0 Then
-                    Porce = Round(((TotAnyo(I) - TotClien(I)) / TotClien(I)) * 100, 2)
+                If TotClien(i) <> 0 Then
+                    Porce = Round(((TotAnyo(i) - TotClien(i)) / TotClien(i)) * 100, 2)
                 Else
                     Porce = 0
                 End If
@@ -910,9 +914,9 @@ Dim Derecha As String
         Else
             Porce = 0
         End If
-        Derecha = "(" & vUsu.codigo & "," & Cliente & "," & Anyo & "," & I & "," & DBSet(TotClien(I), "N") & "," & DBSet(Porce, "N") & "," & DBSet(TotAnyo(I), "N") & ")"
+        Derecha = "(" & vUsu.codigo & "," & Cliente & "," & Anyo & "," & i & "," & DBSet(TotClien(i), "N") & "," & DBSet(Porce, "N") & "," & DBSet(TotAnyo(i), "N") & ")"
         llis.Add Derecha
-    Next I
+    Next i
     
     
     Izquierda = "INSERT INTO tmpinformes (codusu,codigo1,campo1,campo2,importe1,porcen1,importeb1) VALUES "
@@ -921,10 +925,10 @@ Dim Derecha As String
     'Insertamos en la temporal todos los registros insertados en la lista
     'recorremos toda las lista
     SQL = ""
-    For I = 1 To llis.Count
-        SQL = SQL & llis.item(I) & ","
+    For i = 1 To llis.Count
+        SQL = SQL & llis.item(i) & ","
         MesAnt = MesAnt + 1
-    Next I
+    Next i
     Set llis = Nothing
     
     
@@ -969,7 +973,7 @@ Dim Rs As ADODB.Recordset
 
 Dim Proveedor As Long
 Dim MesAnt As Integer
-Dim I As Integer
+Dim i As Integer
 
 Dim llis As Collection
 Dim TotClien(12) As Currency
@@ -985,14 +989,14 @@ Dim Derecha As String
     Set llis = New Collection
     
     'Inicializamos las listas
-    For I = 1 To 12
-        TotClien(I) = 0
-        TotAnyo(I) = 0
-    Next I
+    For i = 1 To 12
+        TotClien(i) = 0
+        TotAnyo(i) = 0
+    Next i
     
    
-    I = InStr(cadSel, "codprove")
-    If I > 0 Then 'Se ha seleccionado un cliente fecrecep
+    i = InStr(cadSel, "codprove")
+    If i > 0 Then 'Se ha seleccionado un cliente fecrecep
         SQL = "SELECT  codprove , year(fecrecep) AnyoFac,month(fecrecep) as MesFac, sum(baseiva1+if(isnull(baseiva2),0,baseiva2)+If(isnull(baseiva3),0,baseiva3)) as BaseImp "
         SQL = SQL & " FROM scafpc "
         SQL = SQL & " WHERE " & cadSel '& " AND month(fecfactu)=1 "
@@ -1011,10 +1015,10 @@ Dim Derecha As String
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'Actualizar la lista con el total del cliente o del anyo anterior
-    If I > 0 Then Proveedor = Rs!Codprove
+    If i > 0 Then Proveedor = Rs!Codprove
     While Not Rs.EOF
-        I = CInt(Rs!mesfac)
-        TotClien(I) = Rs!BaseImp
+        i = CInt(Rs!mesfac)
+        TotClien(i) = Rs!BaseImp
         Rs.MoveNext
     Wend
     Rs.Close
@@ -1034,8 +1038,8 @@ Dim Derecha As String
     
     'Actualizar la lista con el total del Anyo solicitado
     While Not Rs.EOF
-        I = CInt(Rs!mesfac)
-        TotAnyo(I) = Rs!BaseImp
+        i = CInt(Rs!mesfac)
+        TotAnyo(i) = Rs!BaseImp
         Rs.MoveNext
     Wend
     Rs.Close
@@ -1044,16 +1048,16 @@ Dim Derecha As String
     
     'Insertamos en la lista todos los registros que vamos a insertar en la temporal
     'Un registro para cada mes
-    For I = 1 To 12
-        If TotAnyo(I) <> 0 Then
+    For i = 1 To 12
+        If TotAnyo(i) <> 0 Then
             If Proveedor <> 0 Then
                 'porcentaje del cliente respecto al total del año (por mes)
-                Porce = Round((TotClien(I) * 100) / TotAnyo(I), 2)
+                Porce = Round((TotClien(i) * 100) / TotAnyo(i), 2)
             Else
                 'Incremento/decremento respecto al anyo anterior (por mes)
                 'en TotClien en este caso se ha almacenado el total del año anterior de cada mes
-                If TotClien(I) <> 0 Then
-                    Porce = Round(((TotAnyo(I) - TotClien(I)) / TotClien(I)) * 100, 2)
+                If TotClien(i) <> 0 Then
+                    Porce = Round(((TotAnyo(i) - TotClien(i)) / TotClien(i)) * 100, 2)
                 Else
                     Porce = 0
                 End If
@@ -1061,9 +1065,9 @@ Dim Derecha As String
         Else
             Porce = 0
         End If
-        Derecha = "(" & vUsu.codigo & "," & Proveedor & "," & Anyo & "," & I & "," & DBSet(TotClien(I), "N") & "," & DBSet(Porce, "N") & "," & DBSet(TotAnyo(I), "N") & ")"
+        Derecha = "(" & vUsu.codigo & "," & Proveedor & "," & Anyo & "," & i & "," & DBSet(TotClien(i), "N") & "," & DBSet(Porce, "N") & "," & DBSet(TotAnyo(i), "N") & ")"
         llis.Add Derecha
-    Next I
+    Next i
     
     
     Izquierda = "INSERT INTO tmpinformes (codusu,codigo1,campo1,campo2,importe1,porcen1,importeb1) VALUES "
@@ -1072,10 +1076,10 @@ Dim Derecha As String
     'Insertamos en la temporal todos los registros insertados en la lista
     'recorremos toda las lista
     SQL = ""
-    For I = 1 To llis.Count
-        SQL = SQL & llis.item(I) & ","
+    For i = 1 To llis.Count
+        SQL = SQL & llis.item(i) & ","
         MesAnt = MesAnt + 1
-    Next I
+    Next i
     Set llis = Nothing
     
     
