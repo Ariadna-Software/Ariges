@@ -84,8 +84,8 @@ On Error Resume Next
         SQL = SQL & ",albImpreso , codzonas,observacrm"
         'Ocvubre 2015
         SQL = SQL & ", ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet"
-        'Enero 2016               abri16
-        SQL = SQL & ", PideCliente,numbultos"
+        'Enero 2016               abri16      ago17
+        SQL = SQL & ", PideCliente,numbultos,fechaAux"
         
       Case "OFE" 'Ofertas a Clientes
         NomTabla = "scapre"
@@ -159,10 +159,11 @@ End Function
 Private Function InsertarLineasHistorico(cadWhere As String) As Boolean
 Dim SQL As String
 Dim Aux As String
+Dim EsAlbaran As Boolean
 On Error Resume Next
 
 
-
+    EsAlbaran = False
     Select Case CodTipoMov
       Case "PEV" 'pedidos ventas a clientes
         NomTablaLin = "sliped"
@@ -178,6 +179,7 @@ On Error Resume Next
         SQL = SQL & ",codtipor,codcapit ,precoste,slialb.codtraba,pvpInferior,comisionagente "
         SQL = SQL & " FROM scaalb INNER JOIN slialb on scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
         SQL = SQL & " WHERE " & cadWhere
+        EsAlbaran = True
       Case "OFE" 'Ofertas a clientes
         NomTablaLin = "slipre"
         NomTablaLinH = "slhpre"
@@ -239,7 +241,16 @@ On Error Resume Next
     End If
     
     
-    
+    If EsAlbaran Then
+        If vParamAplic.NumeroInstalacion = 4 Then
+            SQL = cadWhere
+            SQL = Replace(SQL, "scaalb", "slialb_eu")
+            SQL = "INSERT INTO slhalb_eu SELECT * from slialb_eu WHERE " & SQL
+            If Not ejecutar(SQL, True) Then MsgBox "Error insertando en tabla hco costes " & vbCrLf & "El programa continuara generando el pedido. " & vbCrLf & "Avise a soporte técnico", vbExclamation
+                
+        End If
+    End If
+
     
     
     If Err.Number <> 0 Then
@@ -256,7 +267,7 @@ Private Function BorrarTraspaso(EnHistorico As Boolean, cadWhere As String) As B
 'Si EnHistorico=true borra de las tablas de historico: "schtra" y "slhtra"
 'Si EnHistorico=false borra de las tablas de traspaso: "scatra" y "slitra"
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad As String, cadAux As String
 Dim EsAlbaran As Boolean
     BorrarTraspaso = False
@@ -282,19 +293,19 @@ Dim EsAlbaran As Boolean
     End Select
     
     If CodTipoMov <> "ALC" And CodTipoMov <> "PEC" Then
-        Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         cad = ""
-        While Not RS.EOF
+        While Not Rs.EOF
             If CodTipoMov <> "ALC" Then
-                cad = cad & RS.Fields(0).Value & ","
+                cad = cad & Rs.Fields(0).Value & ","
             Else
                 cad = cad & "numalbar="
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
         'Quitar la ultima coma de la cadena
         cad = Mid(cad, 1, Len(cad) - 1)
         
@@ -334,6 +345,14 @@ Dim EsAlbaran As Boolean
             SQL = "DELETE FROM slialblotes WHERE " & cadAux
             ejecutar SQL, False  'Si da error me da lo mismo. Qu siga la fiesta
         End If
+        
+        
+        If vParamAplic.NumeroInstalacion = 4 Then
+                SQL = "DELETE from slialb_eu where "
+                SQL = SQL & cadAux
+                ejecutar SQL, False
+        End If
+    
         
         
     End If

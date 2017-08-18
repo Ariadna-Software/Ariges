@@ -213,78 +213,78 @@ Begin VB.Form frmConfParamAplic
       TabCaption(2)   =   "Datos compras / Copias"
       TabPicture(2)   =   "frmConfParamAplic.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "imgBuscar(65)"
-      Tab(2).Control(1)=   "imgayuda(6)"
-      Tab(2).Control(2)=   "Label1(67)"
-      Tab(2).Control(3)=   "Label1(75)"
-      Tab(2).Control(4)=   "Frame3"
-      Tab(2).Control(5)=   "Frame11"
-      Tab(2).Control(6)=   "FrameNumCopias"
-      Tab(2).Control(7)=   "Frame14"
-      Tab(2).Control(8)=   "Frame4"
-      Tab(2).Control(9)=   "Frame16"
-      Tab(2).Control(10)=   "Text2(65)"
-      Tab(2).Control(11)=   "Text1(65)"
-      Tab(2).Control(12)=   "Text1(72)"
-      Tab(2).Control(13)=   "FrameSepOfertas"
+      Tab(2).Control(0)=   "FrameSepOfertas"
+      Tab(2).Control(1)=   "Text1(72)"
+      Tab(2).Control(2)=   "Text1(65)"
+      Tab(2).Control(3)=   "Text2(65)"
+      Tab(2).Control(4)=   "Frame16"
+      Tab(2).Control(5)=   "Frame4"
+      Tab(2).Control(6)=   "Frame14"
+      Tab(2).Control(7)=   "FrameNumCopias"
+      Tab(2).Control(8)=   "Frame11"
+      Tab(2).Control(9)=   "Frame3"
+      Tab(2).Control(10)=   "Label1(75)"
+      Tab(2).Control(11)=   "Label1(67)"
+      Tab(2).Control(12)=   "imgayuda(6)"
+      Tab(2).Control(13)=   "imgBuscar(65)"
       Tab(2).ControlCount=   14
       TabCaption(3)   =   "Datos Contabilidad "
       TabPicture(3)   =   "frmConfParamAplic.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Label1(15)"
-      Tab(3).Control(1)=   "Label1(17)"
-      Tab(3).Control(2)=   "Label1(18)"
-      Tab(3).Control(3)=   "Label1(19)"
-      Tab(3).Control(4)=   "imgBuscar(39)"
-      Tab(3).Control(5)=   "Label1(48)"
-      Tab(3).Control(6)=   "imgBuscar(40)"
-      Tab(3).Control(7)=   "Label2(7)"
-      Tab(3).Control(8)=   "Label2(6)"
-      Tab(3).Control(9)=   "Label1(49)"
-      Tab(3).Control(10)=   "Label1(50)"
-      Tab(3).Control(11)=   "imgBuscar(41)"
-      Tab(3).Control(12)=   "Label1(52)"
-      Tab(3).Control(13)=   "Label1(53)"
-      Tab(3).Control(14)=   "imgBuscar(45)"
-      Tab(3).Control(15)=   "Label1(47)"
-      Tab(3).Control(16)=   "Label1(51)"
-      Tab(3).Control(17)=   "Label1(58)"
-      Tab(3).Control(18)=   "Label2(4)"
-      Tab(3).Control(19)=   "imgBuscar(67)"
-      Tab(3).Control(20)=   "Label1(72)"
-      Tab(3).Control(21)=   "Label1(73)"
-      Tab(3).Control(22)=   "imgBuscar(66)"
-      Tab(3).Control(23)=   "Label1(74)"
-      Tab(3).Control(24)=   "imgayuda(8)"
-      Tab(3).Control(25)=   "imgayuda(9)"
-      Tab(3).Control(26)=   "Text1(20)"
-      Tab(3).Control(27)=   "Text1(21)"
-      Tab(3).Control(28)=   "Text1(22)"
-      Tab(3).Control(29)=   "Text1(23)"
-      Tab(3).Control(30)=   "Text2(46)"
-      Tab(3).Control(31)=   "Text1(46)"
-      Tab(3).Control(32)=   "Text1(47)"
-      Tab(3).Control(33)=   "Text2(47)"
-      Tab(3).Control(34)=   "Text1(49)"
-      Tab(3).Control(35)=   "Text1(48)"
-      Tab(3).Control(36)=   "Text2(48)"
-      Tab(3).Control(37)=   "cboObsFactura"
-      Tab(3).Control(38)=   "Text2(52)"
-      Tab(3).Control(39)=   "Text1(52)"
-      Tab(3).Control(40)=   "Text1(50)"
-      Tab(3).Control(41)=   "CboModAnalitica"
-      Tab(3).Control(42)=   "Frame8"
-      Tab(3).Control(43)=   "Text2(70)"
-      Tab(3).Control(44)=   "Text1(70)"
-      Tab(3).Control(45)=   "chkContabIntraCom"
-      Tab(3).Control(46)=   "Text2(71)"
-      Tab(3).Control(47)=   "Text1(71)"
+      Tab(3).Control(0)=   "Text1(71)"
+      Tab(3).Control(1)=   "Text2(71)"
+      Tab(3).Control(2)=   "chkContabIntraCom"
+      Tab(3).Control(3)=   "Text1(70)"
+      Tab(3).Control(4)=   "Text2(70)"
+      Tab(3).Control(5)=   "Frame8"
+      Tab(3).Control(6)=   "CboModAnalitica"
+      Tab(3).Control(7)=   "Text1(50)"
+      Tab(3).Control(8)=   "Text1(52)"
+      Tab(3).Control(9)=   "Text2(52)"
+      Tab(3).Control(10)=   "cboObsFactura"
+      Tab(3).Control(11)=   "Text2(48)"
+      Tab(3).Control(12)=   "Text1(48)"
+      Tab(3).Control(13)=   "Text1(49)"
+      Tab(3).Control(14)=   "Text2(47)"
+      Tab(3).Control(15)=   "Text1(47)"
+      Tab(3).Control(16)=   "Text1(46)"
+      Tab(3).Control(17)=   "Text2(46)"
+      Tab(3).Control(18)=   "Text1(23)"
+      Tab(3).Control(19)=   "Text1(22)"
+      Tab(3).Control(20)=   "Text1(21)"
+      Tab(3).Control(21)=   "Text1(20)"
+      Tab(3).Control(22)=   "imgayuda(9)"
+      Tab(3).Control(23)=   "imgayuda(8)"
+      Tab(3).Control(24)=   "Label1(74)"
+      Tab(3).Control(25)=   "imgBuscar(66)"
+      Tab(3).Control(26)=   "Label1(73)"
+      Tab(3).Control(27)=   "Label1(72)"
+      Tab(3).Control(28)=   "imgBuscar(67)"
+      Tab(3).Control(29)=   "Label2(4)"
+      Tab(3).Control(30)=   "Label1(58)"
+      Tab(3).Control(31)=   "Label1(51)"
+      Tab(3).Control(32)=   "Label1(47)"
+      Tab(3).Control(33)=   "imgBuscar(45)"
+      Tab(3).Control(34)=   "Label1(53)"
+      Tab(3).Control(35)=   "Label1(52)"
+      Tab(3).Control(36)=   "imgBuscar(41)"
+      Tab(3).Control(37)=   "Label1(50)"
+      Tab(3).Control(38)=   "Label1(49)"
+      Tab(3).Control(39)=   "Label2(6)"
+      Tab(3).Control(40)=   "Label2(7)"
+      Tab(3).Control(41)=   "imgBuscar(40)"
+      Tab(3).Control(42)=   "Label1(48)"
+      Tab(3).Control(43)=   "imgBuscar(39)"
+      Tab(3).Control(44)=   "Label1(19)"
+      Tab(3).Control(45)=   "Label1(18)"
+      Tab(3).Control(46)=   "Label1(17)"
+      Tab(3).Control(47)=   "Label1(15)"
       Tab(3).ControlCount=   48
       TabCaption(4)   =   "Internet"
       TabPicture(4)   =   "frmConfParamAplic.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "FrameEMail"
-      Tab(4).Control(1)=   "FrameSoporte"
+      Tab(4).Control(0)=   "FrameSoporte"
+      Tab(4).Control(1)=   "FrameEMail"
       Tab(4).ControlCount=   2
       TabCaption(5)   =   "Valores por defecto / AVISOS"
       TabPicture(5)   =   "frmConfParamAplic.frx":0098
@@ -2280,7 +2280,7 @@ Begin VB.Form frmConfParamAplic
          Style           =   2  'Dropdown List
          TabIndex        =   5
          Tag             =   "Tipo Descuentos|N|N|||spara1|creatarifart|||"
-         Top             =   2820
+         Top             =   2940
          Width           =   1815
       End
       Begin VB.ComboBox CboModAnalitica 
@@ -2289,7 +2289,7 @@ Begin VB.Form frmConfParamAplic
          Style           =   2  'Dropdown List
          TabIndex        =   69
          Tag             =   "Modo analítica|N|N|0|9|spara1|modanalitica|||"
-         Top             =   1920
+         Top             =   1500
          Width           =   1935
       End
       Begin VB.Frame Frame12 
@@ -2836,7 +2836,7 @@ Begin VB.Form frmConfParamAplic
          Style           =   2  'Dropdown List
          TabIndex        =   3
          Tag             =   "Orden Descuentos|N|N|||spara1|ordendto|||"
-         Top             =   1740
+         Top             =   2100
          Width           =   1815
       End
       Begin VB.Frame Frame2 
@@ -2904,7 +2904,7 @@ Begin VB.Form frmConfParamAplic
          Style           =   2  'Dropdown List
          TabIndex        =   4
          Tag             =   "Tipo Descuentos|N|N|||spara1|tipodtos|||"
-         Top             =   2280
+         Top             =   2520
          Width           =   1815
       End
       Begin VB.TextBox Text1 
@@ -3542,7 +3542,7 @@ Begin VB.Form frmConfParamAplic
          Index           =   59
          Left            =   360
          TabIndex        =   176
-         Top             =   2850
+         Top             =   2970
          Width           =   1455
       End
       Begin VB.Label Label1 
@@ -3803,7 +3803,7 @@ Begin VB.Form frmConfParamAplic
          Index           =   14
          Left            =   360
          TabIndex        =   130
-         Top             =   1770
+         Top             =   2130
          Width           =   1575
       End
       Begin VB.Label Label1 
@@ -3812,7 +3812,7 @@ Begin VB.Form frmConfParamAplic
          Index           =   0
          Left            =   360
          TabIndex        =   124
-         Top             =   2310
+         Top             =   2550
          Width           =   1575
       End
       Begin VB.Label Label1 
@@ -4505,8 +4505,8 @@ Dim Im
     Text1(71).visible = False
     Text2(71).visible = False
     
-    
-    CboModAnalitica.Left = 240
+    CboModAnalitica.Top = 1600
+    CboModAnalitica.Left = 1840
     Label1(58).Left = 240
     
     
@@ -5274,7 +5274,7 @@ Dim b As Boolean
     
     
     'El frame del articulo de separacion en ofertas solo sera habilitado para el usuario ROOT
-    FrameSepOfertas.Enabled = b And LCase(vUsu.Login) = "root"
+    FrameSepOfertas.Enabled = b And vUsu.Nivel = 0
     
     'FrameNumCopias.Enabled = B
     For NumRegElim = 0 To txtNumCopias.Count - 1

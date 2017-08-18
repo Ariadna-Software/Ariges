@@ -235,12 +235,12 @@ Begin VB.Form frmAlmFamiliaArticulo
       TabCaption(1)   =   "Descuentos"
       TabPicture(1)   =   "frmAlmFamiliaArticulo.frx":0232
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(10)"
-      Tab(1).Control(1)=   "DataGrid1"
-      Tab(1).Control(2)=   "txtAux(1)"
-      Tab(1).Control(3)=   "txtAux(0)"
-      Tab(1).Control(4)=   "Combo1"
-      Tab(1).Control(5)=   "Text1(10)"
+      Tab(1).Control(0)=   "Text1(10)"
+      Tab(1).Control(1)=   "Combo1"
+      Tab(1).Control(2)=   "txtAux(0)"
+      Tab(1).Control(3)=   "txtAux(1)"
+      Tab(1).Control(4)=   "DataGrid1"
+      Tab(1).Control(5)=   "Label1(10)"
       Tab(1).ControlCount=   6
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -2119,8 +2119,17 @@ Dim CtaCreadas As String
 End Sub
 
 Private Sub BotonMtoLineas()
+
        If Data1.Recordset Is Nothing Then Exit Sub
        If Data1.Recordset.EOF Then Exit Sub
+       
+       
+        If vParamAplic.NumeroInstalacion = 2 Then
+            CadenaConsulta = " codartic in (select codartic from sartic where codfamia=" & Data1.Recordset!Codfamia & ") AND 1"
+            CadenaConsulta = DevuelveDesdeBD(conAri, "count(distinct(codartic)) ", " sprees", CadenaConsulta, "1")
+            If Val(CadenaConsulta) > 0 Then MsgBox "Hay " & CadenaConsulta & " articulos en precios especiales pertenecientes a esta familia", vbExclamation
+            CadenaConsulta = ""
+        End If
        
         Me.SSTab1.Tab = 1
         ModificaLineas = 0

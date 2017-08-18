@@ -5,7 +5,7 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacTPVParamG 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Parámetros generales TPV"
-   ClientHeight    =   6600
+   ClientHeight    =   6690
    ClientLeft      =   45
    ClientTop       =   735
    ClientWidth     =   9270
@@ -13,7 +13,7 @@ Begin VB.Form frmFacTPVParamG
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6600
+   ScaleHeight     =   6690
    ScaleWidth      =   9270
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -21,7 +21,7 @@ Begin VB.Form frmFacTPVParamG
       Height          =   540
       Left            =   360
       TabIndex        =   24
-      Top             =   5880
+      Top             =   6120
       Width           =   3000
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -34,13 +34,13 @@ Begin VB.Form frmFacTPVParamG
       End
    End
    Begin TabDlg.SSTab SSTab1 
-      Height          =   5175
+      Height          =   5415
       Left            =   360
       TabIndex        =   26
       Top             =   600
       Width           =   8535
       _ExtentX        =   15055
-      _ExtentY        =   9128
+      _ExtentY        =   9551
       _Version        =   393216
       Style           =   1
       Tabs            =   2
@@ -97,7 +97,9 @@ Begin VB.Form frmFacTPVParamG
       Tab(0).Control(22).Enabled=   0   'False
       Tab(0).Control(23)=   "chkParam(6)"
       Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).ControlCount=   24
+      Tab(0).Control(24)=   "chkParam(7)"
+      Tab(0).Control(24).Enabled=   0   'False
+      Tab(0).ControlCount=   25
       TabCaption(1)   =   "Cab./Pie Ticket"
       TabPicture(1)   =   "frmFacTPVParamG.frx":0028
       Tab(1).ControlEnabled=   0   'False
@@ -112,13 +114,23 @@ Begin VB.Form frmFacTPVParamG
       Tab(1).Control(8)=   "Text1(7)"
       Tab(1).ControlCount=   9
       Begin VB.CheckBox chkParam 
+         Caption         =   "Prohibir realizar facturas venta"
+         Height          =   255
+         Index           =   7
+         Left            =   240
+         TabIndex        =   39
+         Tag             =   "C|T|S|||spatpvg|prohibirFacturasTPV|||"
+         Top             =   3840
+         Width           =   3135
+      End
+      Begin VB.CheckBox chkParam 
          Caption         =   "Prohibir ticket a cliente (Socios)"
          Height          =   255
          Index           =   6
          Left            =   5160
          TabIndex        =   38
          Tag             =   "C|T|S|||spatpvg|ProhibirTicketSocios|||"
-         Top             =   3600
+         Top             =   3360
          Width           =   3135
       End
       Begin VB.CheckBox chkParam 
@@ -128,7 +140,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   5160
          TabIndex        =   37
          Tag             =   "C|T|S|||spatpvg|prohibirFitosAVarios|||"
-         Top             =   3120
+         Top             =   2880
          Width           =   3135
       End
       Begin VB.CheckBox chkParam 
@@ -138,7 +150,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   240
          TabIndex        =   36
          Tag             =   "C|T|S|||spatpvg|ProhibirTiketsNegativos|||"
-         Top             =   3600
+         Top             =   3360
          Width           =   3135
       End
       Begin VB.CheckBox chkParam 
@@ -148,7 +160,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   5160
          TabIndex        =   10
          Tag             =   "C|T|S|||spatpvg|TkMostrarTrabajador|||"
-         Top             =   4320
+         Top             =   4560
          Width           =   3135
       End
       Begin VB.CheckBox chkBasesImp 
@@ -157,7 +169,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   5160
          TabIndex        =   12
          Tag             =   "Mostrar bases imponibles|N|N|||spatpvg|basesimp|||"
-         Top             =   4680
+         Top             =   4920
          Width           =   2175
       End
       Begin VB.CheckBox chkImprtick 
@@ -166,7 +178,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   5160
          TabIndex        =   5
          Tag             =   "Imprimir ticket|N|N|||spatpvg|imprtick|||"
-         Top             =   2040
+         Top             =   1800
          Width           =   1935
       End
       Begin VB.CheckBox Check1 
@@ -175,7 +187,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   5160
          TabIndex        =   3
          Tag             =   "Redondea|N|N|||spatpvg|redondea2|||"
-         Top             =   1560
+         Top             =   1320
          Width           =   3135
       End
       Begin VB.CheckBox Check2 
@@ -185,7 +197,7 @@ Begin VB.Form frmFacTPVParamG
          TabIndex        =   7
          Tag             =   "Redondea|N|N|||spatpvg|IVAsobrePVP|||"
          ToolTipText     =   "Calcula el precio desde el PVP final"
-         Top             =   2520
+         Top             =   2280
          Width           =   2295
       End
       Begin VB.CheckBox chkParam 
@@ -195,7 +207,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   240
          TabIndex        =   11
          Tag             =   "C|T|S|||spatpvg|TkCantidad2Decimales|||"
-         Top             =   4800
+         Top             =   5040
          Width           =   5655
       End
       Begin VB.CheckBox chkParam 
@@ -205,7 +217,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   240
          TabIndex        =   9
          Tag             =   "C|T|S|||spatpvg|TkOcultarEntregado|||"
-         Top             =   4320
+         Top             =   4680
          Width           =   5655
       End
       Begin VB.CheckBox chkParam 
@@ -215,7 +227,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   240
          TabIndex        =   8
          Tag             =   "C|T|S|||spatpvg|PonEntragado|||"
-         Top             =   2640
+         Top             =   2400
          Width           =   5655
       End
       Begin VB.CheckBox chkAviso 
@@ -224,7 +236,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   240
          TabIndex        =   6
          Tag             =   "C|T|S|||spatpvg|AvisoGenFra|||"
-         Top             =   3120
+         Top             =   2880
          Width           =   4815
       End
       Begin VB.CheckBox chkStock 
@@ -233,7 +245,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   240
          TabIndex        =   4
          Tag             =   "C|T|S|||spatpvg|CtrstockVenta|||"
-         Top             =   2160
+         Top             =   1920
          Width           =   2655
       End
       Begin VB.CheckBox chkRapido 
@@ -242,43 +254,43 @@ Begin VB.Form frmFacTPVParamG
          Left            =   240
          TabIndex        =   2
          Tag             =   "C|T|S|||spatpvg|rapido|||"
-         Top             =   1680
+         Top             =   1440
          Width           =   2415
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   9
-         Left            =   3720
+         Left            =   3600
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   34
          Text            =   "Text2"
-         Top             =   1080
-         Width           =   3615
+         Top             =   870
+         Width           =   4095
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   9
-         Left            =   2760
+         Left            =   2640
          MaxLength       =   35
          TabIndex        =   1
          Tag             =   "Cta prev. cobro|T|S|||spatpvg|ctabanc1|||"
          Text            =   "Text1"
-         Top             =   1080
+         Top             =   870
          Width           =   855
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   8
-         Left            =   3240
+         Left            =   3600
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   32
          Text            =   "Text2"
-         Top             =   540
+         Top             =   480
          Width           =   4095
       End
       Begin VB.TextBox Text1 
@@ -362,12 +374,12 @@ Begin VB.Form frmFacTPVParamG
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   8
-         Left            =   2280
+         Left            =   2640
          MaxLength       =   35
          TabIndex        =   0
          Tag             =   "Cliente|N|N|||spatpvg|codclien|000000||"
          Text            =   "Text1"
-         Top             =   540
+         Top             =   480
          Width           =   855
       End
       Begin VB.Label Label2 
@@ -385,14 +397,14 @@ Begin VB.Form frmFacTPVParamG
          Height          =   195
          Left            =   240
          TabIndex        =   35
-         Top             =   4020
+         Top             =   4320
          Width           =   1650
       End
       Begin VB.Line Line1 
          X1              =   1320
          X2              =   8160
-         Y1              =   4110
-         Y2              =   4110
+         Y1              =   4440
+         Y2              =   4440
       End
       Begin VB.Image imgBuscar 
          Height          =   240
@@ -400,7 +412,7 @@ Begin VB.Form frmFacTPVParamG
          Left            =   2400
          Tag             =   "-1"
          ToolTipText     =   "Buscar artículo"
-         Top             =   1095
+         Top             =   900
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -409,13 +421,13 @@ Begin VB.Form frmFacTPVParamG
          Index           =   7
          Left            =   480
          TabIndex        =   33
-         Top             =   1080
+         Top             =   870
          Width           =   1800
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   8
-         Left            =   1920
+         Left            =   2400
          Tag             =   "-1"
          ToolTipText     =   "Buscar artículo"
          Top             =   555
@@ -466,7 +478,7 @@ Begin VB.Form frmFacTPVParamG
       Height          =   375
       Left            =   7875
       TabIndex        =   14
-      Top             =   6045
+      Top             =   6165
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -474,7 +486,7 @@ Begin VB.Form frmFacTPVParamG
       Height          =   375
       Left            =   6600
       TabIndex        =   13
-      Top             =   6045
+      Top             =   6165
       Visible         =   0   'False
       Width           =   1035
    End
@@ -483,7 +495,7 @@ Begin VB.Form frmFacTPVParamG
       Height          =   375
       Left            =   7875
       TabIndex        =   22
-      Top             =   6045
+      Top             =   6165
       Width           =   1035
    End
    Begin MSComctlLib.Toolbar Toolbar1 
@@ -520,7 +532,7 @@ Begin VB.Form frmFacTPVParamG
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
       Left            =   3600
-      Top             =   6120
+      Top             =   6240
       Visible         =   0   'False
       Width           =   1455
       _ExtentX        =   2566
@@ -1002,7 +1014,7 @@ End Sub
 
 
 Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
+    Me.cmdAceptar.visible = Not b And vUsu.Nivel = 0
     Me.cmdCancelar.visible = Not b
     Me.cmdSalir.visible = b
     If b Then Me.lblIndicador.Caption = ""

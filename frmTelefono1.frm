@@ -1161,6 +1161,7 @@ Private Sub HacerImportacion()
             'VODAFONE
             resultado = mGen2.cargarBaseDatosVODAFONE(Text1.Text, lblInf)
         End If
+        lblInf.Caption = ""
         Screen.MousePointer = vbDefault
         If Not resultado Then Exit Sub
         
@@ -1554,7 +1555,7 @@ Dim cControlFra As CControlFacturaContab
                 NumRegElim = 0  'De momento BIEN
                 cad = cad & vbCrLf & vbCrLf
                 'Comprobaciones
-                    
+                If UBound(Campos) < 11 Then
                     cad = cad & "Numero columnas incorrecto. Debian haber 11 columnas"
                     NumRegElim = 1
                 Else
@@ -1614,7 +1615,6 @@ Dim cControlFra As CControlFacturaContab
         
             
         Else
-            
             cad = "OK"
         End If
         If NumRegElim = 1 Then

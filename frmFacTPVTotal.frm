@@ -1455,6 +1455,11 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 4 'Generar Albaran
             mnAlbaran_Click
         Case 6 'Generar Factura
+        
+            If vParamTPV.ProhibirFacturasTPV And vUsu.Nivel > 0 Then
+                MsgBox "Esta opción no esta permitida por el departamento de administración.", vbExclamation
+                Exit Sub
+            End If
             mnFactura_Click
         
         Case 8
@@ -3106,12 +3111,12 @@ Dim RN As ADODB.Recordset
         'Orden para generar el albaran
         ' nomclien domclien codpobla pobclien proclien nifclien telclien
         If CF Is Nothing Then
-            LeerDesdeTablaClienteVarios = DBSet(RN!Nomclien, "T", "N") & ", " & DBSet(RN!domclien, "T", "N") & ","
+            LeerDesdeTablaClienteVarios = DBSet(RN!NomClien, "T", "N") & ", " & DBSet(RN!domclien, "T", "N") & ","
             LeerDesdeTablaClienteVarios = LeerDesdeTablaClienteVarios & DBSet(RN!codpobla, "T", "N") & ", " & DBSet(RN!pobclien, "T", "N") & "," & DBSet(RN!proclien, "T", "N") & ","
             LeerDesdeTablaClienteVarios = LeerDesdeTablaClienteVarios & DBSet(RN!nifClien, "T", "N") & "," & DBSet(RN!telclien, "T")
         Else
                 'ASignamos a la factura
-                CF.NombreClien = RN!Nomclien
+                CF.NombreClien = RN!NomClien
                 CF.DomicilioClien = DBLet(RN!domclien, "T")
                 CF.CPostal = DBLet(RN!codpobla, "T")
                 CF.Poblacion = DBLet(RN!pobclien, "T")

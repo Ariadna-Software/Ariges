@@ -126,159 +126,159 @@ Public Function cargarBaseDatosMOVISTAR(mfichero As String, ByRef LB As Label) A
     Close #NF
 End Function
 
-Private Sub cargaDatosPrincipales(Cadena As String)
+Private Sub cargaDatosPrincipales(CADENA As String)
     Dim mSQL As String
     With mdbFac2
         mSQL = "insert into telefono.ficheros values("
-        mSQL = mSQL & .texto(Cadena) & ","  ' campo Fichero
-        mSQL = mSQL & .texto(Mid(Cadena, 1, 1)) & ","   ' campo Servicio
-        mSQL = mSQL & .texto(Mid(Cadena, 2, 1)) & "," ' campo Mes
-        mSQL = mSQL & .texto(Mid(Cadena, 3, 1)) & ","  ' campo Ano
-        mSQL = mSQL & .texto(Mid(Cadena, 4, 5)) & ","  ' campo Soporte
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 1)) & ","  ' campo Agrupacion
-        mSQL = mSQL & .texto(Mid(Cadena, 11, 2)) & ")"  ' campo Version
+        mSQL = mSQL & .texto(CADENA) & ","  ' campo Fichero
+        mSQL = mSQL & .texto(Mid(CADENA, 1, 1)) & ","   ' campo Servicio
+        mSQL = mSQL & .texto(Mid(CADENA, 2, 1)) & "," ' campo Mes
+        mSQL = mSQL & .texto(Mid(CADENA, 3, 1)) & ","  ' campo Ano
+        mSQL = mSQL & .texto(Mid(CADENA, 4, 5)) & ","  ' campo Soporte
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 1)) & ","  ' campo Agrupacion
+        mSQL = mSQL & .texto(Mid(CADENA, 11, 2)) & ")"  ' campo Version
         .ejecutar mSQL
     End With
 End Sub
 
 
-Private Sub cargaRegistro010(Cadena As String) ' cabecera de soporte
+Private Sub cargaRegistro010(CADENA As String) ' cabecera de soporte
     Dim mSQL As String
     With mdbFac2
         mSQL = "insert into telefono.cabecera_de_soporte values("
         mSQL = mSQL & .texto(mFicheroCorto) & ","  ' campo Fichero
-        mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-        mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registrp
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 56, 11)) & ","   ' campo CIF
-        mSQL = mSQL & .texto(Mid(Cadena, 67, 65)) & ","   ' campo Nombre
-        mSQL = mSQL & .texto(Mid(Cadena, 132, 40)) & ","   ' campo Domicilio
-        mSQL = mSQL & .numero(Mid(Cadena, 172, 5)) & ","   ' campo Código Postal
-        mSQL = mSQL & .texto(Mid(Cadena, 177, 40)) & ","   ' campo Localidad
-        mSQL = mSQL & .texto(Mid(Cadena, 217, 11)) & ","   ' campo CIF
-        mSQL = mSQL & .texto(Mid(Cadena, 228, 20)) & ","   ' campo Nombre
-        mSQL = mSQL & .texto(Mid(Cadena, 248, 65)) & ","   ' campo Nombre
-        mSQL = mSQL & .texto(Mid(Cadena, 313, 40)) & ","   ' campo Domicilio
-        mSQL = mSQL & .texto(Mid(Cadena, 353, 5)) & ","   ' campo Código Postal
-        mSQL = mSQL & .texto(Mid(Cadena, 358, 40)) & ","   ' campo Localidad
-        mSQL = mSQL & .texto(Mid(Cadena, 398, 20)) & ","   ' campo E-mail
-        mSQL = mSQL & .texto(Mid(Cadena, 418, 5)) & ","   ' campo Código de soporte
-        mSQL = mSQL & .Fecha(fechatel(Mid(Cadena, 423, 8))) & ","   ' campo Fecha de Facturación
-        mSQL = mSQL & .Fecha(fechatel(Mid(Cadena, 431, 8))) & ","   ' campo Fecha de Generación registro
-        mSQL = mSQL & .texto(Mid(Cadena, 439, 6)) & ","   ' campo Versión del soporte
-        mSQL = mSQL & .texto(Mid(Cadena, 445, 12)) & ","   ' campo Nombre del fichero
-        mSQL = mSQL & .texto(Mid(Cadena, 457, 6)) & ","   ' campo Código de agrupación asociación
-        mSQL = mSQL & .texto(Mid(Cadena, 463, 3)) & ","   ' campo Moneda
-        mSQL = mSQL & .numero(Mid(Cadena, 466, 8), 4) & ","  ' campo Factor de conversión
-        mSQL = mSQL & .texto(Mid(Cadena, 474, 20)) & ","   ' campo Tipo Soporte
-        mSQL = mSQL & .texto(Mid(Cadena, 494, 207)) & ")"  ' campo Libre
+        mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+        mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registrp
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 56, 11)) & ","   ' campo CIF
+        mSQL = mSQL & .texto(Mid(CADENA, 67, 65)) & ","   ' campo Nombre
+        mSQL = mSQL & .texto(Mid(CADENA, 132, 40)) & ","   ' campo Domicilio
+        mSQL = mSQL & .numero(Mid(CADENA, 172, 5)) & ","   ' campo Código Postal
+        mSQL = mSQL & .texto(Mid(CADENA, 177, 40)) & ","   ' campo Localidad
+        mSQL = mSQL & .texto(Mid(CADENA, 217, 11)) & ","   ' campo CIF
+        mSQL = mSQL & .texto(Mid(CADENA, 228, 20)) & ","   ' campo Nombre
+        mSQL = mSQL & .texto(Mid(CADENA, 248, 65)) & ","   ' campo Nombre
+        mSQL = mSQL & .texto(Mid(CADENA, 313, 40)) & ","   ' campo Domicilio
+        mSQL = mSQL & .texto(Mid(CADENA, 353, 5)) & ","   ' campo Código Postal
+        mSQL = mSQL & .texto(Mid(CADENA, 358, 40)) & ","   ' campo Localidad
+        mSQL = mSQL & .texto(Mid(CADENA, 398, 20)) & ","   ' campo E-mail
+        mSQL = mSQL & .texto(Mid(CADENA, 418, 5)) & ","   ' campo Código de soporte
+        mSQL = mSQL & .Fecha(fechatel(Mid(CADENA, 423, 8))) & ","   ' campo Fecha de Facturación
+        mSQL = mSQL & .Fecha(fechatel(Mid(CADENA, 431, 8))) & ","   ' campo Fecha de Generación registro
+        mSQL = mSQL & .texto(Mid(CADENA, 439, 6)) & ","   ' campo Versión del soporte
+        mSQL = mSQL & .texto(Mid(CADENA, 445, 12)) & ","   ' campo Nombre del fichero
+        mSQL = mSQL & .texto(Mid(CADENA, 457, 6)) & ","   ' campo Código de agrupación asociación
+        mSQL = mSQL & .texto(Mid(CADENA, 463, 3)) & ","   ' campo Moneda
+        mSQL = mSQL & .numero(Mid(CADENA, 466, 8), 4) & ","  ' campo Factor de conversión
+        mSQL = mSQL & .texto(Mid(CADENA, 474, 20)) & ","   ' campo Tipo Soporte
+        mSQL = mSQL & .texto(Mid(CADENA, 494, 207)) & ")"  ' campo Libre
         .ejecutar mSQL
     End With
 End Sub
 
 
-Private Sub cargaRegistro100(Cadena As String) ' Factura
+Private Sub cargaRegistro100(CADENA As String) ' Factura
     Dim mSQL As String
     With mdbFac2
         mSQL = "insert into telefono.factura values("
         mSQL = mSQL & .texto(mFicheroCorto) & ","  ' campo Fichero
-        mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-        mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registr0
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo N.Factura
-        mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo Libre
-        mSQL = mSQL & .Fecha(fechatel(Mid(Cadena, 56, 8))) & ","   ' campo Fecha de Factura
-        mSQL = mSQL & .texto(Mid(Cadena, 64, 20)) & ","   ' campo Tipo de Factura
-        mSQL = mSQL & .numero(Mid(Cadena, 84, 4)) & ","  ' campo Banco
-        mSQL = mSQL & .numero(Mid(Cadena, 88, 4)) & ","   ' campo Sucursal
-        mSQL = mSQL & .texto(Mid(Cadena, 92, 2)) & ","   ' campo Dígitos de control
-        mSQL = mSQL & .numero(Mid(Cadena, 94, 19)) & ","   ' campo Cuenta / Nº de Tarjeta
-        mSQL = mSQL & .texto(Mid(Cadena, 113, 8)) & ","   ' campo Servicio
-        mSQL = mSQL & .texto(Mid(Cadena, 121, 40)) & ","   ' campo Tipo de Contrato
-        mSQL = mSQL & .numero(Mid(Cadena, 161, 5)) & ","   ' campo Numero de líneas fijas
-        mSQL = mSQL & .numero(Mid(Cadena, 166, 5)) & ","   ' campo Número de líneas móviles
-        mSQL = mSQL & .texto(Mid(Cadena, 171, 3)) & ","   ' campo Moneda Original
-        mSQL = mSQL & .numero(Mid(Cadena, 174, 16), 4) & ","  ' campo Total cuotas
-        mSQL = mSQL & .numero(Mid(Cadena, 190, 16), 4) & ","  ' campo Total Servicio Medido
-        mSQL = mSQL & .numero(Mid(Cadena, 206, 16), 4) & ","  ' campo Total Varios
-        mSQL = mSQL & .numero(Mid(Cadena, 222, 16), 4) & ","  ' campo Total Descuentos
-        mSQL = mSQL & .numero(Mid(Cadena, 238, 16), 4) & ","  ' campo Suma Total
-        mSQL = mSQL & .numero(Mid(Cadena, 254, 16), 4) & ","  ' campo Total Impuestos
-        mSQL = mSQL & .numero(Mid(Cadena, 270, 14), 2) & ","  ' campo Total a Pagar
-        mSQL = mSQL & .texto(Mid(Cadena, 284, 6)) & ","   ' campo Impuesto
-        mSQL = mSQL & .numero(Mid(Cadena, 290, 4), 2) & ","  ' campo Tipo
-        mSQL = mSQL & .numero(Mid(Cadena, 294, 16), 4) & ","  ' campo Base Imponible
-        mSQL = mSQL & .texto(Mid(Cadena, 310, 11)) & ","   ' campo CIF
-        mSQL = mSQL & .texto(Mid(Cadena, 321, 380)) & ")"   ' campo Libre
+        mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+        mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registr0
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo N.Factura
+        mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo Libre
+        mSQL = mSQL & .Fecha(fechatel(Mid(CADENA, 56, 8))) & ","   ' campo Fecha de Factura
+        mSQL = mSQL & .texto(Mid(CADENA, 64, 20)) & ","   ' campo Tipo de Factura
+        mSQL = mSQL & .numero(Mid(CADENA, 84, 4)) & ","  ' campo Banco
+        mSQL = mSQL & .numero(Mid(CADENA, 88, 4)) & ","   ' campo Sucursal
+        mSQL = mSQL & .texto(Mid(CADENA, 92, 2)) & ","   ' campo Dígitos de control
+        mSQL = mSQL & .numero(Mid(CADENA, 94, 19)) & ","   ' campo Cuenta / Nº de Tarjeta
+        mSQL = mSQL & .texto(Mid(CADENA, 113, 8)) & ","   ' campo Servicio
+        mSQL = mSQL & .texto(Mid(CADENA, 121, 40)) & ","   ' campo Tipo de Contrato
+        mSQL = mSQL & .numero(Mid(CADENA, 161, 5)) & ","   ' campo Numero de líneas fijas
+        mSQL = mSQL & .numero(Mid(CADENA, 166, 5)) & ","   ' campo Número de líneas móviles
+        mSQL = mSQL & .texto(Mid(CADENA, 171, 3)) & ","   ' campo Moneda Original
+        mSQL = mSQL & .numero(Mid(CADENA, 174, 16), 4) & ","  ' campo Total cuotas
+        mSQL = mSQL & .numero(Mid(CADENA, 190, 16), 4) & ","  ' campo Total Servicio Medido
+        mSQL = mSQL & .numero(Mid(CADENA, 206, 16), 4) & ","  ' campo Total Varios
+        mSQL = mSQL & .numero(Mid(CADENA, 222, 16), 4) & ","  ' campo Total Descuentos
+        mSQL = mSQL & .numero(Mid(CADENA, 238, 16), 4) & ","  ' campo Suma Total
+        mSQL = mSQL & .numero(Mid(CADENA, 254, 16), 4) & ","  ' campo Total Impuestos
+        mSQL = mSQL & .numero(Mid(CADENA, 270, 14), 2) & ","  ' campo Total a Pagar
+        mSQL = mSQL & .texto(Mid(CADENA, 284, 6)) & ","   ' campo Impuesto
+        mSQL = mSQL & .numero(Mid(CADENA, 290, 4), 2) & ","  ' campo Tipo
+        mSQL = mSQL & .numero(Mid(CADENA, 294, 16), 4) & ","  ' campo Base Imponible
+        mSQL = mSQL & .texto(Mid(CADENA, 310, 11)) & ","   ' campo CIF
+        mSQL = mSQL & .texto(Mid(CADENA, 321, 380)) & ")"   ' campo Libre
         .ejecutar mSQL
     End With
 End Sub
 
 
-Private Sub cargaRegistro300(Cadena As String) ' Teléfono
+Private Sub cargaRegistro300(CADENA As String) ' Teléfono
     Dim mSQL As String
     With mdbFac2
         mSQL = "insert into telefono.telefono values("
         mSQL = mSQL & .texto(mFicheroCorto) & ","  ' campo Fichero
-        mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-        mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registr0
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo N.Factura
-        mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo N. de PreFactura
-        mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo N. de telefono
-        mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo N. de extensión
-        mSQL = mSQL & .numero(Mid(Cadena, 56, 14), 4) & ","  ' campo Total Cuotas
-        mSQL = mSQL & .numero(Mid(Cadena, 70, 14), 4) & ","  ' campo Total Servicio Medido
-        mSQL = mSQL & .numero(Mid(Cadena, 84, 14), 4) & "," ' campo Total Servicio Franquiciado
-        mSQL = mSQL & .numero(Mid(Cadena, 98, 14), 4) & ","  ' campo Total Varios
-        mSQL = mSQL & .numero(Mid(Cadena, 112, 14), 4) & ","  ' campo Total Descuentos
-        mSQL = mSQL & .numero(Mid(Cadena, 126, 14), 4) & ","  ' campo Suma Total
-        mSQL = mSQL & .numero(Mid(Cadena, 140, 5), 2) & ","  ' campo Proporción de cargos
-        mSQL = mSQL & .numero(Mid(Cadena, 145, 14), 4) & ","  ' campo Cargos
-        mSQL = mSQL & .numero(Mid(Cadena, 159, 5), 2) & ","  ' campo Proporción Desc. Cuotas
-        mSQL = mSQL & .numero(Mid(Cadena, 164, 14), 4) & ","  ' campo Descuento cuotas
-        mSQL = mSQL & .numero(Mid(Cadena, 178, 5), 2) & ","  ' campo Proporcion Dto. Serv. Med
-        mSQL = mSQL & .numero(Mid(Cadena, 183, 14), 4) & ","  ' campo Descuento Servicio Medido
-        mSQL = mSQL & .texto(Mid(Cadena, 197, 10)) & ","   ' campo Código centro de coste
-        mSQL = mSQL & .texto(Mid(Cadena, 207, 40)) & ","   ' campo Descripción centro de coste
-        mSQL = mSQL & .texto(Mid(Cadena, 247, 40)) & ","   ' campo Usuario
-        mSQL = mSQL & .texto(Mid(Cadena, 287, 414)) & ")"   ' campo Libre
+        mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+        mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registr0
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo N.Factura
+        mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo N. de PreFactura
+        mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo N. de telefono
+        mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo N. de extensión
+        mSQL = mSQL & .numero(Mid(CADENA, 56, 14), 4) & ","  ' campo Total Cuotas
+        mSQL = mSQL & .numero(Mid(CADENA, 70, 14), 4) & ","  ' campo Total Servicio Medido
+        mSQL = mSQL & .numero(Mid(CADENA, 84, 14), 4) & "," ' campo Total Servicio Franquiciado
+        mSQL = mSQL & .numero(Mid(CADENA, 98, 14), 4) & ","  ' campo Total Varios
+        mSQL = mSQL & .numero(Mid(CADENA, 112, 14), 4) & ","  ' campo Total Descuentos
+        mSQL = mSQL & .numero(Mid(CADENA, 126, 14), 4) & ","  ' campo Suma Total
+        mSQL = mSQL & .numero(Mid(CADENA, 140, 5), 2) & ","  ' campo Proporción de cargos
+        mSQL = mSQL & .numero(Mid(CADENA, 145, 14), 4) & ","  ' campo Cargos
+        mSQL = mSQL & .numero(Mid(CADENA, 159, 5), 2) & ","  ' campo Proporción Desc. Cuotas
+        mSQL = mSQL & .numero(Mid(CADENA, 164, 14), 4) & ","  ' campo Descuento cuotas
+        mSQL = mSQL & .numero(Mid(CADENA, 178, 5), 2) & ","  ' campo Proporcion Dto. Serv. Med
+        mSQL = mSQL & .numero(Mid(CADENA, 183, 14), 4) & ","  ' campo Descuento Servicio Medido
+        mSQL = mSQL & .texto(Mid(CADENA, 197, 10)) & ","   ' campo Código centro de coste
+        mSQL = mSQL & .texto(Mid(CADENA, 207, 40)) & ","   ' campo Descripción centro de coste
+        mSQL = mSQL & .texto(Mid(CADENA, 247, 40)) & ","   ' campo Usuario
+        mSQL = mSQL & .texto(Mid(CADENA, 287, 414)) & ")"   ' campo Libre
         .ejecutar mSQL
     End With
 End Sub
 
-Private Sub cargaRegistro310(Cadena As String) ' Cuotas
+Private Sub cargaRegistro310(CADENA As String) ' Cuotas
     Dim i As Integer
     Dim mSQL As String
     For i = 0 To 5
     With mdbFac2
         mSQL = "insert into telefono.cuotas values("
         mSQL = mSQL & .texto(mFicheroCorto) & ","  ' campo Fichero
-        mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-        mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registr0
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo N.Factura
-        mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo N. de PreFactura
-        mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo N. de telefono
-        mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo N. de extensión
-        If Mid(Cadena, 56 + (93 * i), 8) <> "00000000" Then
+        mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+        mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registr0
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo N.Factura
+        mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo N. de PreFactura
+        mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo N. de telefono
+        mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo N. de extensión
+        If Mid(CADENA, 56 + (93 * i), 8) <> "00000000" Then
             '-- zona que se repite en el registro original ---------------------------------------
-            mSQL = mSQL & .Fecha(fechatel(Mid(Cadena, 56 + (93 * i), 8))) & "," ' campo Fecha Inicio Cuotas
-            mSQL = mSQL & .Fecha(fechatel(Mid(Cadena, 64 + (93 * i), 8))) & "," ' campo Fecha Fin Cuotas
-            mSQL = mSQL & .texto(Mid(Cadena, 72 + (93 * i), 3)) & "," ' campo Código de cuota
-            mSQL = mSQL & .texto(Mid(Cadena, 75 + (93 * i), 60)) & "," ' campo Descripción de la cuota
-            mSQL = mSQL & .numero(Mid(Cadena, 135 + (93 * i), 14), 4) & "," ' campo Importe
+            mSQL = mSQL & .Fecha(fechatel(Mid(CADENA, 56 + (93 * i), 8))) & "," ' campo Fecha Inicio Cuotas
+            mSQL = mSQL & .Fecha(fechatel(Mid(CADENA, 64 + (93 * i), 8))) & "," ' campo Fecha Fin Cuotas
+            mSQL = mSQL & .texto(Mid(CADENA, 72 + (93 * i), 3)) & "," ' campo Código de cuota
+            mSQL = mSQL & .texto(Mid(CADENA, 75 + (93 * i), 60)) & "," ' campo Descripción de la cuota
+            mSQL = mSQL & .numero(Mid(CADENA, 135 + (93 * i), 14), 4) & "," ' campo Importe
             '-------------------------------------------------------------------------------------
-            mSQL = mSQL & .texto(Mid(Cadena, 614, 97)) & ")"   ' campo Libre
+            mSQL = mSQL & .texto(Mid(CADENA, 614, 97)) & ")"   ' campo Libre
             .ejecutar mSQL
         End If
     End With
     Next i
 End Sub
 
-Private Sub cargaRegistro320(Cadena As String) ' resumen de llamadas
+Private Sub cargaRegistro320(CADENA As String) ' resumen de llamadas
     Dim i As Integer
     Dim mSQL As String
     
@@ -288,30 +288,30 @@ Private Sub cargaRegistro320(Cadena As String) ' resumen de llamadas
     With mdbFac2
         mSQL = "insert into telefono.resumen_de_llamadas values("
         mSQL = mSQL & .texto(mFicheroCorto) & ","  ' campo Fichero
-        mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-        mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registr0
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo N.Factura
-        mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo N. de PreFactura
-        mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo N. de telefono
-        mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo N. de extensión
-        mSQL = mSQL & .Fecha(fechatel(Mid(Cadena, 56, 8))) & ","  ' campo Fecha Inicio Periodo
-        mSQL = mSQL & .Fecha(fechatel(Mid(Cadena, 64, 8))) & ","  ' campo Fecha Fin Periodo
-        If Mid(Cadena, 72 + (103 * i), 3) <> "   " Then
+        mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+        mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registr0
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo N.Factura
+        mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo N. de PreFactura
+        mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo N. de telefono
+        mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo N. de extensión
+        mSQL = mSQL & .Fecha(fechatel(Mid(CADENA, 56, 8))) & ","  ' campo Fecha Inicio Periodo
+        mSQL = mSQL & .Fecha(fechatel(Mid(CADENA, 64, 8))) & ","  ' campo Fecha Fin Periodo
+        If Mid(CADENA, 72 + (103 * i), 3) <> "   " Then
             '-- zona que se repite en el registro original ---------------------------------------
             
-            mSQL = mSQL & .texto(Mid(Cadena, 72 + (103 * i), 3)) & "," ' campo Código de tipo de tráfico
-            mSQL = mSQL & .texto(Mid(Cadena, 75 + (103 * i), 35)) & "," ' campo Tipo de tráfico
-            mSQL = mSQL & .numero(Mid(Cadena, 110 + (103 * i), 7)) & "," ' campo Número de llamadas
-            mSQL = mSQL & .texto(Mid(Cadena, 117 + (103 * i), 10)) & "," ' campo Unidad de medida
-            mSQL = mSQL & .numero(Mid(Cadena, 127 + (103 * i), 10), 2) & "," ' campo Cantidad de medida
-            mSQL = mSQL & .numero(Mid(Cadena, 137 + (103 * i), 10), 2) & "," ' campo Cantidad franquiciada
-            mSQL = mSQL & .numero(Mid(Cadena, 147 + (103 * i), 14), 4) & "," ' campo Importe franquiciado
+            mSQL = mSQL & .texto(Mid(CADENA, 72 + (103 * i), 3)) & "," ' campo Código de tipo de tráfico
+            mSQL = mSQL & .texto(Mid(CADENA, 75 + (103 * i), 35)) & "," ' campo Tipo de tráfico
+            mSQL = mSQL & .numero(Mid(CADENA, 110 + (103 * i), 7)) & "," ' campo Número de llamadas
+            mSQL = mSQL & .texto(Mid(CADENA, 117 + (103 * i), 10)) & "," ' campo Unidad de medida
+            mSQL = mSQL & .numero(Mid(CADENA, 127 + (103 * i), 10), 2) & "," ' campo Cantidad de medida
+            mSQL = mSQL & .numero(Mid(CADENA, 137 + (103 * i), 10), 2) & "," ' campo Cantidad franquiciada
+            mSQL = mSQL & .numero(Mid(CADENA, 147 + (103 * i), 14), 4) & "," ' campo Importe franquiciado
             
             
-            mSQL = mSQL & .numero(Mid(Cadena, 161 + (103 * i), 14), 4) & "," ' campo Importes
+            mSQL = mSQL & .numero(Mid(CADENA, 161 + (103 * i), 14), 4) & "," ' campo Importes
             
             '-------------------------------------------------------------------------------------
-            mSQL = mSQL & .texto(Mid(Cadena, 690, 11)) & ")"   ' campo Libre
+            mSQL = mSQL & .texto(Mid(CADENA, 690, 11)) & ")"   ' campo Libre
             .ejecutar mSQL
             
         End If
@@ -371,7 +371,7 @@ End Sub
 
 
 
-Private Sub cargaRegistro330(Cadena As String) ' detalle de llamadas
+Private Sub cargaRegistro330(CADENA As String) ' detalle de llamadas
     Dim i As Integer
     Dim mSQL As String
     Dim CodigoTrafico As String
@@ -396,15 +396,15 @@ Private Sub cargaRegistro330(Cadena As String) ' detalle de llamadas
             'mSQL = mSQL & ",calidad_suministrada,Importe,Libre)"
             'mSQL = mSQL & " values("
             mSQL = ", (" & .texto(mFicheroCorto) & ","   ' campo Fichero
-            mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-            mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registro
-            mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo N.Factura
-            mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo N. de PreFactura
-            mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo N. de telefono
-            mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo N. de extensión
-            CodigoTrafico = Trim(Mid(Cadena, 56, 3))
+            mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+            mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registro
+            mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo N.Factura
+            mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo N. de PreFactura
+            mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo N. de telefono
+            mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo N. de extensión
+            CodigoTrafico = Trim(Mid(CADENA, 56, 3))
             mSQL = mSQL & .texto(CodigoTrafico) & ","   ' campo Código de tráfico
-            mSQL = mSQL & .texto(Mid(Cadena, 59, 30)) & ","  ' campo Tipo de tráfico
+            mSQL = mSQL & .texto(Mid(CADENA, 59, 30)) & ","  ' campo Tipo de tráfico
             '-- zona que se repite en el registro original ---------------------------------------
             recalcular = False
             If vParamAplic.TieneTelefonia2 = 3 Then
@@ -413,7 +413,7 @@ Private Sub cargaRegistro330(Cadena As String) ' detalle de llamadas
                 CodigoTrafico = "'" & CodigoTrafico & "'"
                 If InStr(1, mvarConceptosLlamadasRefacturables, CodigoTrafico) > 0 Then
                     'LAS ESPECIALES NO se refacturan
-                    Aux = Mid(Cadena, 89 + (148 * i), 3)
+                    Aux = Mid(CADENA, 89 + (148 * i), 3)
                     If Trim(Aux) = "E" Then
                         'recalcular = True
                         
@@ -426,27 +426,27 @@ Private Sub cargaRegistro330(Cadena As String) ' detalle de llamadas
             
             
             'Comun
-            mSQL = mSQL & .texto(Mid(Cadena, 89 + (148 * i), 3)) & "," ' campo Código de abreviatura
-            mSQL = mSQL & .texto(Mid(Cadena, 92 + (148 * i), 30)) & "," ' campo Descripción de tipo de llamada
-            mSQL = mSQL & .texto(Mid(Cadena, 122 + (148 * i), 3)) & "," ' campo Código de desrtino
-            mSQL = mSQL & .texto(Mid(Cadena, 125 + (148 * i), 14)) & "," ' campo Tipo de destino
-            mSQL = mSQL & .texto(Mid(Cadena, 139 + (148 * i), 8)) & "," ' campo Operador
-            mSQL = mSQL & .texto(Mid(Cadena, 147 + (148 * i), 25)) & "," ' campo Número llamado
-            mSQL = mSQL & .texto(Mid(Cadena, 172 + (148 * i), 4)) & "," ' campo Fecha (MMDD)
-            mSQL = mSQL & .texto(Mid(Cadena, 176 + (148 * i), 2)) & "," ' campo Código horario
-            mSQL = mSQL & .texto(Mid(Cadena, 178 + (148 * i), 4)) & "," ' campo Hora (HHMM)
-            mSQL = mSQL & .texto(Mid(Cadena, 182 + (148 * i), 10)) & "," ' campo Unidad de medida
-            mSQL = mSQL & .numero(Mid(Cadena, 192 + (148 * i), 7), 2) & "," ' campo Cantidad medida originada
-            mSQL = mSQL & .numero(Mid(Cadena, 199 + (148 * i), 7), 2) & "," ' campo Cantidad medida recibida
-            mSQL = mSQL & .texto(Mid(Cadena, 206 + (148 * i), 10)) & "," ' campo Unidad calidad trasmisión
-            mSQL = mSQL & .numero(Mid(Cadena, 216 + (148 * i), 7), 2) & "," ' campo Calidad suministrada
+            mSQL = mSQL & .texto(Mid(CADENA, 89 + (148 * i), 3)) & "," ' campo Código de abreviatura
+            mSQL = mSQL & .texto(Mid(CADENA, 92 + (148 * i), 30)) & "," ' campo Descripción de tipo de llamada
+            mSQL = mSQL & .texto(Mid(CADENA, 122 + (148 * i), 3)) & "," ' campo Código de desrtino
+            mSQL = mSQL & .texto(Mid(CADENA, 125 + (148 * i), 14)) & "," ' campo Tipo de destino
+            mSQL = mSQL & .texto(Mid(CADENA, 139 + (148 * i), 8)) & "," ' campo Operador
+            mSQL = mSQL & .texto(Mid(CADENA, 147 + (148 * i), 25)) & "," ' campo Número llamado
+            mSQL = mSQL & .texto(Mid(CADENA, 172 + (148 * i), 4)) & "," ' campo Fecha (MMDD)
+            mSQL = mSQL & .texto(Mid(CADENA, 176 + (148 * i), 2)) & "," ' campo Código horario
+            mSQL = mSQL & .texto(Mid(CADENA, 178 + (148 * i), 4)) & "," ' campo Hora (HHMM)
+            mSQL = mSQL & .texto(Mid(CADENA, 182 + (148 * i), 10)) & "," ' campo Unidad de medida
+            mSQL = mSQL & .numero(Mid(CADENA, 192 + (148 * i), 7), 2) & "," ' campo Cantidad medida originada
+            mSQL = mSQL & .numero(Mid(CADENA, 199 + (148 * i), 7), 2) & "," ' campo Cantidad medida recibida
+            mSQL = mSQL & .texto(Mid(CADENA, 206 + (148 * i), 10)) & "," ' campo Unidad calidad trasmisión
+            mSQL = mSQL & .numero(Mid(CADENA, 216 + (148 * i), 7), 2) & "," ' campo Calidad suministrada
             
             
             
-            Libre = Mid(Cadena, 681, 20) 'la cadena que va en la ultiposicion
+            Libre = Mid(CADENA, 681, 20) 'la cadena que va en la ultiposicion
             If Not recalcular Then
 
-                mSQL = mSQL & .numero(Mid(Cadena, 223 + (148 * i), 14), 4) & "," ' campo Importe
+                mSQL = mSQL & .numero(Mid(CADENA, 223 + (148 * i), 14), 4) & "," ' campo Importe
                 '-------------------------------------------------------------------------------------
                 
             Else
@@ -458,14 +458,14 @@ Private Sub cargaRegistro330(Cadena As String) ' detalle de llamadas
                 '           0.12    12 segundos
                 
                 'Si el importe facturado es CERO no hacemos nada mas
-                Aux = .numero(Mid(Cadena, 223 + (148 * i), 14), 4) 'importe linea
+                Aux = .numero(Mid(CADENA, 223 + (148 * i), 14), 4) 'importe linea
                 ImporteIncial = TransformaPuntosComas(Aux)
                 
                 If ImporteIncial <> 0 Then
                     
-                    Libre = .numero(Mid(Cadena, 223 + (148 * i), 14), 4)
+                    Libre = .numero(Mid(CADENA, 223 + (148 * i), 14), 4)
                     'Cantidad medida orignalmente
-                    Aux = .numero(Mid(Cadena, 192 + (148 * i), 7), 2)
+                    Aux = .numero(Mid(CADENA, 192 + (148 * i), 7), 2)
                     OrigenContado = TransformaPuntosComas(Aux)
                     
                     i1 = Int(OrigenContado)  'minutos
@@ -510,90 +510,90 @@ Private Sub cargaRegistro330(Cadena As String) ' detalle de llamadas
     mdbFac2.ejecutar mSQL
 End Sub
 
-Private Sub cargaRegistro340(Cadena As String) ' varios
+Private Sub cargaRegistro340(CADENA As String) ' varios
     Dim i As Integer
     Dim mSQL As String
     For i = 0 To 4
     With mdbFac2
         mSQL = "insert into telefono.varios values("
         mSQL = mSQL & .texto(mFicheroCorto) & ","  ' campo Fichero
-        mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-        mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registro
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo N.Factura
-        mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo N. de PreFactura
-        mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo N. de telefono
-        mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo N. de extensión
+        mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+        mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registro
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo N.Factura
+        mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo N. de PreFactura
+        mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo N. de telefono
+        mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo N. de extensión
         '-- zona que se repite en el registro original ---------------------------------------
-        mSQL = mSQL & .texto(Mid(Cadena, 56 + (117 * i), 3)) & "," ' campo Código de Vario
-        mSQL = mSQL & .texto(Mid(Cadena, 59 + (117 * i), 100)) & "," ' campo Descripción de Vario
-        mSQL = mSQL & .numero(Mid(Cadena, 159 + (117 * i), 14), 4) & "," ' campo Importe
+        mSQL = mSQL & .texto(Mid(CADENA, 56 + (117 * i), 3)) & "," ' campo Código de Vario
+        mSQL = mSQL & .texto(Mid(CADENA, 59 + (117 * i), 100)) & "," ' campo Descripción de Vario
+        mSQL = mSQL & .numero(Mid(CADENA, 159 + (117 * i), 14), 4) & "," ' campo Importe
         '-------------------------------------------------------------------------------------
-        mSQL = mSQL & .texto(Mid(Cadena, 641, 60)) & ")"   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 641, 60)) & ")"   ' campo Libre
         .ejecutar mSQL
     End With
     Next i
 End Sub
 
-Private Sub cargaRegistro850(Cadena As String) ' Descuentos por factura
+Private Sub cargaRegistro850(CADENA As String) ' Descuentos por factura
     Dim i As Integer
     Dim mSQL As String
     For i = 0 To 4
     With mdbFac2
         mSQL = "insert into telefono.descuentos_por_factura values("
         mSQL = mSQL & .texto(mFicheroCorto) & ","  ' campo Fichero
-        mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-        mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registr0
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo Libre
+        mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+        mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registr0
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo Libre
         '----------- Zona que se repite
-        mSQL = mSQL & .texto(Mid(Cadena, 56 + (120 * i), 3)) & "," ' campo Código de descuento
-        mSQL = mSQL & .texto(Mid(Cadena, 59 + (120 * i), 40)) & "," ' campo Descripción de descuento
-        mSQL = mSQL & .texto(Mid(Cadena, 99 + (120 * i), 3)) & "," ' campo Código de tipo de descuento
-        mSQL = mSQL & .texto(Mid(Cadena, 102 + (120 * i), 1)) & "," ' campo Indicador tramo / base
-        mSQL = mSQL & .texto(Mid(Cadena, 103 + (120 * i), 25)) & "," ' campo Tramo / base
-        mSQL = mSQL & .numero(Mid(Cadena, 128 + (120 * i), 14), 4) & "," ' campo Importe
-        mSQL = mSQL & .numero(Mid(Cadena, 142 + (120 * i), 5), 2) & "," ' campo Porcentaje descuento
-        mSQL = mSQL & .texto(Mid(Cadena, 147 + (120 * i), 1)) & "," ' campo Indicador descuento global
-        mSQL = mSQL & .numero(Mid(Cadena, 148 + (120 * i), 14), 4) & "," ' campo Descuento global
-        mSQL = mSQL & .numero(Mid(Cadena, 162 + (120 * i), 14), 4) & "," ' campo Importe descuento
+        mSQL = mSQL & .texto(Mid(CADENA, 56 + (120 * i), 3)) & "," ' campo Código de descuento
+        mSQL = mSQL & .texto(Mid(CADENA, 59 + (120 * i), 40)) & "," ' campo Descripción de descuento
+        mSQL = mSQL & .texto(Mid(CADENA, 99 + (120 * i), 3)) & "," ' campo Código de tipo de descuento
+        mSQL = mSQL & .texto(Mid(CADENA, 102 + (120 * i), 1)) & "," ' campo Indicador tramo / base
+        mSQL = mSQL & .texto(Mid(CADENA, 103 + (120 * i), 25)) & "," ' campo Tramo / base
+        mSQL = mSQL & .numero(Mid(CADENA, 128 + (120 * i), 14), 4) & "," ' campo Importe
+        mSQL = mSQL & .numero(Mid(CADENA, 142 + (120 * i), 5), 2) & "," ' campo Porcentaje descuento
+        mSQL = mSQL & .texto(Mid(CADENA, 147 + (120 * i), 1)) & "," ' campo Indicador descuento global
+        mSQL = mSQL & .numero(Mid(CADENA, 148 + (120 * i), 14), 4) & "," ' campo Descuento global
+        mSQL = mSQL & .numero(Mid(CADENA, 162 + (120 * i), 14), 4) & "," ' campo Importe descuento
         '-----------------
-        mSQL = mSQL & .texto(Mid(Cadena, 656, 45)) & ")"   ' campo Libre (??)
+        mSQL = mSQL & .texto(Mid(CADENA, 656, 45)) & ")"   ' campo Libre (??)
         
         .ejecutar mSQL
     End With
     Next i
 End Sub
 
-Private Sub cargaRegistro990(Cadena As String) ' totales del soporte
+Private Sub cargaRegistro990(CADENA As String) ' totales del soporte
     Dim mSQL As String
     With mdbFac2
         mSQL = "insert into telefono.totales_del_soporte values("
         mSQL = mSQL & .texto(mFicheroCorto) & ","  ' campo Fichero
-        mSQL = mSQL & .numero(Mid(Cadena, 1, 3)) & "," ' campo Tipo de registro
-        mSQL = mSQL & .numero(Mid(Cadena, 4, 6)) & ","   ' campo Secuencia de registro
-        mSQL = mSQL & .texto(Mid(Cadena, 10, 14)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 24, 14)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 38, 9)) & ","   ' campo Libre
-        mSQL = mSQL & .texto(Mid(Cadena, 47, 9)) & ","   ' campo Libre
-        mSQL = mSQL & .numero(Mid(Cadena, 56, 24), 4) & ","  ' campo Total Cuotas
-        mSQL = mSQL & .numero(Mid(Cadena, 80, 24), 4) & ","  ' campo Total varios
-        mSQL = mSQL & .numero(Mid(Cadena, 104, 24), 4) & "," ' campo Total descuentos
-        mSQL = mSQL & .numero(Mid(Cadena, 128, 24), 4) & ","  ' campo Total servicio medido
-        mSQL = mSQL & .numero(Mid(Cadena, 152, 24), 4) & ","  ' campo Suma Total
-        mSQL = mSQL & .numero(Mid(Cadena, 176, 24), 4) & ","  ' campo Total impuestos
-        mSQL = mSQL & .numero(Mid(Cadena, 200, 22), 2) & ","  ' campo Total a pagar
-        mSQL = mSQL & .numero(Mid(Cadena, 222, 8)) & ","   ' campo Total registros
-        mSQL = mSQL & .numero(Mid(Cadena, 230, 8)) & ","   ' campo Total clientes
-        mSQL = mSQL & .numero(Mid(Cadena, 238, 8)) & ","   ' campo Total SERVICIOS
-        mSQL = mSQL & .numero(Mid(Cadena, 246, 8)) & ","   ' campo Total facturas
-        mSQL = mSQL & .numero(Mid(Cadena, 254, 8)) & ","   ' campo Total prefacturas
-        mSQL = mSQL & .numero(Mid(Cadena, 262, 8)) & ","   ' campo Total teléfonos fijos
-        mSQL = mSQL & .numero(Mid(Cadena, 270, 8)) & ","   ' campo Total teléfonos móviles
-        mSQL = mSQL & .texto(Mid(Cadena, 278, 5)) & ","   ' campo Código de soporte
-        mSQL = mSQL & .texto(Mid(Cadena, 283, 6)) & ","   ' campo Código de agrupación
-        mSQL = mSQL & .texto(Mid(Cadena, 289, 412)) & ")"   ' campo Libre (??)
+        mSQL = mSQL & .numero(Mid(CADENA, 1, 3)) & "," ' campo Tipo de registro
+        mSQL = mSQL & .numero(Mid(CADENA, 4, 6)) & ","   ' campo Secuencia de registro
+        mSQL = mSQL & .texto(Mid(CADENA, 10, 14)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 24, 14)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 38, 9)) & ","   ' campo Libre
+        mSQL = mSQL & .texto(Mid(CADENA, 47, 9)) & ","   ' campo Libre
+        mSQL = mSQL & .numero(Mid(CADENA, 56, 24), 4) & ","  ' campo Total Cuotas
+        mSQL = mSQL & .numero(Mid(CADENA, 80, 24), 4) & ","  ' campo Total varios
+        mSQL = mSQL & .numero(Mid(CADENA, 104, 24), 4) & "," ' campo Total descuentos
+        mSQL = mSQL & .numero(Mid(CADENA, 128, 24), 4) & ","  ' campo Total servicio medido
+        mSQL = mSQL & .numero(Mid(CADENA, 152, 24), 4) & ","  ' campo Suma Total
+        mSQL = mSQL & .numero(Mid(CADENA, 176, 24), 4) & ","  ' campo Total impuestos
+        mSQL = mSQL & .numero(Mid(CADENA, 200, 22), 2) & ","  ' campo Total a pagar
+        mSQL = mSQL & .numero(Mid(CADENA, 222, 8)) & ","   ' campo Total registros
+        mSQL = mSQL & .numero(Mid(CADENA, 230, 8)) & ","   ' campo Total clientes
+        mSQL = mSQL & .numero(Mid(CADENA, 238, 8)) & ","   ' campo Total SERVICIOS
+        mSQL = mSQL & .numero(Mid(CADENA, 246, 8)) & ","   ' campo Total facturas
+        mSQL = mSQL & .numero(Mid(CADENA, 254, 8)) & ","   ' campo Total prefacturas
+        mSQL = mSQL & .numero(Mid(CADENA, 262, 8)) & ","   ' campo Total teléfonos fijos
+        mSQL = mSQL & .numero(Mid(CADENA, 270, 8)) & ","   ' campo Total teléfonos móviles
+        mSQL = mSQL & .texto(Mid(CADENA, 278, 5)) & ","   ' campo Código de soporte
+        mSQL = mSQL & .texto(Mid(CADENA, 283, 6)) & ","   ' campo Código de agrupación
+        mSQL = mSQL & .texto(Mid(CADENA, 289, 412)) & ")"   ' campo Libre (??)
         .ejecutar mSQL
     End With
 End Sub
@@ -850,7 +850,7 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
                     Set mrs1 = mdbFac2.cursor(mSQL)
                     If Not mrs1.EOF Then
                     
-                        SeparaNomclienNomApellidos mrs1!Nomclien, Nombre, Apell1, Apell2
+                        SeparaNomclienNomApellidos mrs1!NomClien, Nombre, Apell1, Apell2
                     
                     
                         mSQL = "update tel_cab_factura set "
@@ -1881,27 +1881,27 @@ End Sub
 
 
 'ByVal para que pueda modificar el valor si modificar en origen
-Private Sub SeparaNomclienNomApellidos(ByVal Nomclien As String, Nom As String, Ap1 As String, Ap2 As String)
+Private Sub SeparaNomclienNomApellidos(ByVal NomClien As String, nom As String, Ap1 As String, Ap2 As String)
 Dim i As Integer
 Dim TieneComa As Boolean
 
-    i = InStr(1, Nomclien, ",")
+    i = InStr(1, NomClien, ",")
     
     TieneComa = i > 0
     
     If TieneComa Then
         'El nombre va detras de la coma
-        Nom = Mid(Nomclien, i + 1)
-        Nomclien = Mid(Nomclien, 1, i - 1)
+        nom = Mid(NomClien, i + 1)
+        NomClien = Mid(NomClien, 1, i - 1)
         
         
-        i = InStrRev(Nomclien, " ")
+        i = InStrRev(NomClien, " ")
         If i = 0 Then
-            Ap1 = Nomclien
+            Ap1 = NomClien
             Ap2 = ""
         Else
-            Ap1 = Mid(Nomclien, 1, i - 1)
-            Ap2 = Mid(Nomclien, i + 1)
+            Ap1 = Mid(NomClien, 1, i - 1)
+            Ap2 = Mid(NomClien, i + 1)
         End If
         
         
@@ -1910,26 +1910,26 @@ Dim TieneComa As Boolean
         Ap1 = ""
         Ap2 = ""
         
-        i = InStr((Len(Nomclien) / 3), Nomclien, " ")
+        i = InStr((Len(NomClien) / 3), NomClien, " ")
         
         If i = 0 Then
-            i = InStr(1, Nomclien, " ")
+            i = InStr(1, NomClien, " ")
             If i = 0 Then
-                Nomclien = "NO encontrado"
+                NomClien = "NO encontrado"
                 Exit Sub
             End If
         End If
         
-        Nom = Mid(Nomclien, 1, i - 1)
-        Nomclien = Trim(Mid(Nomclien, i + 1))
+        nom = Mid(NomClien, 1, i - 1)
+        NomClien = Trim(Mid(NomClien, i + 1))
         
-        i = InStr(5, Nomclien, " ")
+        i = InStr(5, NomClien, " ")
         If i = 0 Then
-            Ap1 = Nomclien
+            Ap1 = NomClien
             Ap2 = ""
         Else
-            Ap1 = Mid(Nomclien, 1, i - 1)
-            Ap2 = Mid(Nomclien, i + 1)
+            Ap1 = Mid(NomClien, 1, i - 1)
+            Ap2 = Mid(NomClien, i + 1)
         End If
         
         
@@ -1946,7 +1946,7 @@ End Sub
 
 Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora As Byte)
     Dim RS As ADODB.Recordset
-    Dim Cad As String
+    Dim cad As String
     Dim Aux As String
     Dim Impor As Currency
     Dim imp2 As Currency
@@ -1956,8 +1956,8 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
     'Entran con espacios en blanco
     L.Caption = "Ajustando numeros llamados"
     L.Refresh
-    Cad = "update telefono.detalle_de_llamadas set Numero_llamado =trim(Numero_llamado) where fichero='" & mFicheroCorto & "'"
-    conn.Execute Cad
+    cad = "update telefono.detalle_de_llamadas set Numero_llamado =trim(Numero_llamado) where fichero='" & mFicheroCorto & "'"
+    conn.Execute cad
     Espera 0.25
     
     'LLAMADAS DE COOPERATIVA
@@ -1969,29 +1969,29 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
      L.Caption = "Leyendo registros llamada"
      L.Refresh
      If mvarConceptosQueSonLlamadas <> "" Then
-         Cad = "select Numero_llamado from telefono.detalle_de_llamadas where fichero='" & mFicheroCorto & "' and Numero_llamado<>'' and"
-         Cad = Cad & " Numero_llamado in (select idtelefono from sclientfno where operador = " & Operadora & ") group by 1"
+         cad = "select Numero_llamado from telefono.detalle_de_llamadas where fichero='" & mFicheroCorto & "' and Numero_llamado<>'' and"
+         cad = cad & " Numero_llamado in (select idtelefono from sclientfno where operador = " & Operadora & ") group by 1"
          Set RS = New ADODB.Recordset
-         RS.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+         RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
          While Not RS.EOF
              L.Caption = RS.Fields(0)
              L.Refresh
              
              
              'Primero el importl
-             Cad = "update telefono.detalle_de_llamadas set libre=importe"
-             Cad = Cad & " WHERE Numero_llamado ='" & RS.Fields(0) & "' AND fichero='" & mFicheroCorto & "'"
-             Cad = Cad & " and importe<>0 AND libre=''"
-             Cad = Cad & " and Codigo_de_trafico in (" & mvarConceptosQueSonLlamadas & ")"
-             conn.Execute Cad
+             cad = "update telefono.detalle_de_llamadas set libre=importe"
+             cad = cad & " WHERE Numero_llamado ='" & RS.Fields(0) & "' AND fichero='" & mFicheroCorto & "'"
+             cad = cad & " and importe<>0 AND libre=''"
+             cad = cad & " and Codigo_de_trafico in (" & mvarConceptosQueSonLlamadas & ")"
+             conn.Execute cad
            
            
              'Me estoy guardando el importe anterior en LIBRE
-             Cad = "update telefono.detalle_de_llamadas set importe=0"
-             Cad = Cad & " WHERE Numero_llamado ='" & RS.Fields(0) & "' AND fichero='" & mFicheroCorto & "'"
-             Cad = Cad & " and importe<>0 "
-             Cad = Cad & " and Codigo_de_trafico in (" & mvarConceptosQueSonLlamadas & ")"
-             conn.Execute Cad
+             cad = "update telefono.detalle_de_llamadas set importe=0"
+             cad = cad & " WHERE Numero_llamado ='" & RS.Fields(0) & "' AND fichero='" & mFicheroCorto & "'"
+             cad = cad & " and importe<>0 "
+             cad = cad & " and Codigo_de_trafico in (" & mvarConceptosQueSonLlamadas & ")"
+             conn.Execute cad
              
              
              
@@ -2017,8 +2017,8 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
         'OK, tiene para refacturar
         'Valores por defecto. Para poder ordenar debe ser numerico el campo del where
         Aux = "Fichero =" & DBSet(mFicheroCorto, "T") & " AND 1"
-        Cad = "concat(numero_de_factura,'|',min(Fecha_inicio_periodo),'|',max(Fecha_final_periodo),'|')"
-        Cad = DevuelveDesdeBD(conAri, Cad, "telefono.resumen_de_llamadas", Aux, "1 GROUP BY  numero_de_factura", "N")
+        cad = "concat(numero_de_factura,'|',min(Fecha_inicio_periodo),'|',max(Fecha_final_periodo),'|')"
+        cad = DevuelveDesdeBD(conAri, cad, "telefono.resumen_de_llamadas", Aux, "1 GROUP BY  numero_de_factura", "N")
         'Me lo guardo
         
         
@@ -2040,8 +2040,8 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
             Aux = Aux & "Fecha_final_periodo,Codigo_de_tipo_de_trafico,Tipo_de_trafico,Numero_de_llamadas,"
             Aux = Aux & "Unidad_de_medida,Cantidad_medida,Cantidad_franquiciada,Importe_franquiciado,Importes,Libre)"
             
-            Aux = Aux & "  SELECT '" & mFicheroCorto & "',320,1,'" & RecuperaValor(Cad, 1) & "',''"
-            Aux = Aux & ",Numero_de_telefono,'','" & RecuperaValor(Cad, 2) & "','" & RecuperaValor(Cad, 3) & "',"
+            Aux = Aux & "  SELECT '" & mFicheroCorto & "',320,1,'" & RecuperaValor(cad, 1) & "',''"
+            Aux = Aux & ",Numero_de_telefono,'','" & RecuperaValor(cad, 2) & "','" & RecuperaValor(cad, 3) & "',"
             Aux = Aux & "Codigo_de_trafico,Tipo_de_trafico,count(*),Unidad_de_medida,sum(Cantidad_medida_originada)"
             Aux = Aux & ",0,0,sum(importe),'' FROM telefono.detalle_de_llamadas WHERE  Fichero =" & DBSet(mFicheroCorto, "T")
             Aux = Aux & " and Codigo_de_trafico in (" & mvarConceptosNOSonLlamadas & ")  and fecha<>'0000'"
@@ -2061,8 +2061,8 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
             L.Caption = "Calculo resumen consumo"
             L.Refresh
         
-            Aux = "  SELECT '" & mFicheroCorto & "',320,1,'" & RecuperaValor(Cad, 1) & "',''"
-            Aux = Aux & ",Numero_de_telefono,'','" & RecuperaValor(Cad, 2) & "','" & RecuperaValor(Cad, 3) & "',"
+            Aux = "  SELECT '" & mFicheroCorto & "',320,1,'" & RecuperaValor(cad, 1) & "',''"
+            Aux = Aux & ",Numero_de_telefono,'','" & RecuperaValor(cad, 2) & "','" & RecuperaValor(cad, 3) & "',"
             Aux = Aux & "Codigo_de_trafico,Tipo_de_trafico,count(*),Unidad_de_medida,"
             'sum(Cantidad_medida_originada)"
             'Los segundos se suma distinto
@@ -2081,7 +2081,7 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
             Aux = Aux & "Fecha_final_periodo,Codigo_de_tipo_de_trafico,Tipo_de_trafico,Numero_de_llamadas,"
             Aux = Aux & "Unidad_de_medida,Cantidad_medida,Cantidad_franquiciada,Importe_franquiciado,Importes,Libre)"
             
-            Cad = "" 'cuidado. Esta variable estaba para el numero de factura telefonia, fechainic y fin
+            cad = "" 'cuidado. Esta variable estaba para el numero de factura telefonia, fechainic y fin
             While Not RS.EOF
                 Aux2 = ", ("
                 For i = 0 To 12
@@ -2099,23 +2099,23 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
                 ',0,0,sum(importe),''
                 Aux2 = Aux2 & ",0,0," & DBSet(RS!totimpor, "N") & ",''"
                 
-                Cad = Cad & Aux2 & ")"
+                cad = cad & Aux2 & ")"
                 
                 
-                If Len(Cad) > 25000 Then
-                    Cad = Mid(Cad, 2)
-                    Cad = Aux & " VALUES " & Cad
-                    conn.Execute Cad
-                    Cad = ""
+                If Len(cad) > 25000 Then
+                    cad = Mid(cad, 2)
+                    cad = Aux & " VALUES " & cad
+                    conn.Execute cad
+                    cad = ""
                 End If
                 RS.MoveNext
             Wend
             RS.Close
             
-            If Cad <> "" Then
-                Cad = Mid(Cad, 2)
-                Cad = Aux & " VALUES " & Cad
-                conn.Execute Cad
+            If cad <> "" Then
+                cad = Mid(cad, 2)
+                cad = Aux & " VALUES " & cad
+                conn.Execute cad
             
             End If
         End If
@@ -2130,10 +2130,10 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
             L.Caption = "Concepto W1"
             L.Refresh
 
-            Cad = "UPDATE telefono.resumen_de_llamadas set codigo_de_tipo_de_trafico='20' WHERE Fichero =" & DBSet(mFicheroCorto, "T")
+            cad = "UPDATE telefono.resumen_de_llamadas set codigo_de_tipo_de_trafico='20' WHERE Fichero =" & DBSet(mFicheroCorto, "T")
             
-            Cad = Cad & " AND codigo_de_tipo_de_trafico='W1'"
-            conn.Execute Cad
+            cad = cad & " AND codigo_de_tipo_de_trafico='W1'"
+            conn.Execute cad
             
         End If
     End If
@@ -2161,7 +2161,7 @@ End Function
 '   1. MOV    2.  ORAN  ....
 Public Function AjusteCuotasNuevas2(TipoFicheroOperador As Byte, mfichero As String, ByRef L As Label)
 Dim vSQL As String
-Dim Cad As String
+Dim cad As String
 Dim Origen As String
 Dim Rc As ADODB.Recordset
 Dim i As Integer
@@ -2178,15 +2178,15 @@ Dim Importe3 As Currency
     
     vSQL = "Fichero =" & DBSet(mfichero, "T") & " AND 1"
     
-    Cad = "concat(numero_de_factura,'|',min(Fecha_inicio_cuotas),'|',min(Fecha_final_cuotas),'|')"
-    Origen = DevuelveDesdeBD(conAri, Cad, "telefono.cuotas", vSQL, "1 GROUP BY  numero_de_factura", "N")
+    cad = "concat(numero_de_factura,'|',min(Fecha_inicio_cuotas),'|',min(Fecha_final_cuotas),'|')"
+    Origen = DevuelveDesdeBD(conAri, cad, "telefono.cuotas", vSQL, "1 GROUP BY  numero_de_factura", "N")
     If Origen = "" Then
         'Probamos en detalle lamadas
          
         vSQL = "Fichero =" & DBSet(mfichero, "T") & " AND 1"
     
-        Cad = "concat(numero_de_factura,'|',min(Fecha_inicio_periodo),'|',min(Fecha_final_periodo),'|')"
-        Origen = DevuelveDesdeBD(conAri, Cad, "telefono.resumen_de_llamadas", vSQL, "1 GROUP BY  numero_de_factura", "N")
+        cad = "concat(numero_de_factura,'|',min(Fecha_inicio_periodo),'|',min(Fecha_final_periodo),'|')"
+        Origen = DevuelveDesdeBD(conAri, cad, "telefono.resumen_de_llamadas", vSQL, "1 GROUP BY  numero_de_factura", "N")
     End If
     
     L.Caption = "Ajuste cuotas personalizable (I)"
@@ -2195,10 +2195,10 @@ Dim Importe3 As Currency
     Set Rc = New ADODB.Recordset
     
     'Vemos las acciones tipo1.   ELIMINAR
-    Cad = DevuelveACcionesTipo(1, 0, Rc, TipoFicheroOperador)
-    If Cad <> "" Then
-        Cad = "DELETE FROM telefono.cuotas WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota IN (" & Cad & ")"
-        conn.Execute Cad
+    cad = DevuelveACcionesTipo(1, 0, Rc, TipoFicheroOperador)
+    If cad <> "" Then
+        cad = "DELETE FROM telefono.cuotas WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota IN (" & cad & ")"
+        conn.Execute cad
     End If
     
     L.Caption = "Ajuste cuotas personalizable (II)"
@@ -2207,19 +2207,19 @@ Dim Importe3 As Currency
     '  tipo: 0. Se cobra el mes entero.
 
     
-    Cad = "Select * from tel_descuentoscuotas WHERE accion=2 AND Mensual =0 " 'todo el mes
-    Cad = Cad & " AND operadora =" & TipoFicheroOperador
+    cad = "Select * from tel_descuentoscuotas WHERE accion=2 AND Mensual =0 " 'todo el mes
+    cad = cad & " AND operadora =" & TipoFicheroOperador
 '    vSQL = "1"
 '    If EsFicheroOrange_ Then vSQL = "2"
 '    Cad = Cad & vSQL
     
-    Rc.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Cad = ""
+    Rc.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = ""
     While Not Rc.EOF
-        Cad = TransformaComasPuntos(CStr(Rc!Valor))
-        Cad = "UPDATE telefono.cuotas SET importe = " & Cad
-        Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!codigo_de_cuota, "T")
-        conn.Execute Cad
+        cad = TransformaComasPuntos(CStr(Rc!Valor))
+        cad = "UPDATE telefono.cuotas SET importe = " & cad
+        cad = cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!codigo_de_cuota, "T")
+        conn.Execute cad
         Rc.MoveNext
     Wend
     Rc.Close
@@ -2229,8 +2229,8 @@ Dim Importe3 As Currency
     '  tipo: 1.  Se prorratea los dias,
     L.Caption = "Ajuste cuotas personalizable (III)"
     L.Refresh
-    Cad = DevuelveACcionesTipo(2, 1, Rc, TipoFicheroOperador)
-    If Cad <> "" Then
+    cad = DevuelveACcionesTipo(2, 1, Rc, TipoFicheroOperador)
+    If cad <> "" Then
         MsgBox "FALTA acciones 2. Cuota mes entera"
         Stop
     End If
@@ -2240,17 +2240,17 @@ Dim Importe3 As Currency
     '  tipo: 1.  Se prorratea los dias,
     L.Caption = "Ajuste cuotas personalizable (III)"
     L.Refresh
-    Cad = DevuelveACcionesTipo(3, 1, Rc, TipoFicheroOperador)
-    If Cad <> "" Then
+    cad = DevuelveACcionesTipo(3, 1, Rc, TipoFicheroOperador)
+    If cad <> "" Then
         L.Caption = "Prorrateo de cuotas"
         L.Refresh
         
         'CUOTAS PRORRATEABLES pro fecha de baja u alta
         
         vSQL = "select Codigo_de_cuota,Numero_de_telefono,datediff(Fecha_final_cuotas,Fecha_inicio_cuotas) dias,Importe from telefono.cuotas"
-        vSQL = vSQL & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota IN (" & Cad & ") ORDER BY 1"
+        vSQL = vSQL & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota IN (" & cad & ") ORDER BY 1"
         Rc.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        Cad = ""
+        cad = ""
         vSQL = "" 'Aqui llevare la cuota
         Importe2 = 0 '% para guardar
         While Not Rc.EOF
@@ -2271,11 +2271,11 @@ Dim Importe3 As Currency
             
             
             
-            Cad = "UPDATE telefono.cuotas SET libre=" & TransformaComasPuntos(CStr(Rc!Importe))
-            Cad = Cad & ",importe = " & TransformaComasPuntos(CStr(Importe3))
-            Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!codigo_de_cuota, "T")
-            Cad = Cad & " AND Numero_de_telefono =" & DBSet(Rc!Numero_de_telefono, "T")
-            conn.Execute Cad
+            cad = "UPDATE telefono.cuotas SET libre=" & TransformaComasPuntos(CStr(Rc!Importe))
+            cad = cad & ",importe = " & TransformaComasPuntos(CStr(Importe3))
+            cad = cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!codigo_de_cuota, "T")
+            cad = cad & " AND Numero_de_telefono =" & DBSet(Rc!Numero_de_telefono, "T")
+            conn.Execute cad
             Rc.MoveNext
         Wend
         Rc.Close
@@ -2298,24 +2298,24 @@ Dim Importe3 As Currency
 '    If EsFicheroOrange_ Then vSQL = "2"
     vSQL = "operadora = " & TipoFicheroOperador
     
-    Cad = "Fichero =" & DBSet(mfichero, "T") & " and not codigo_de_cuota in (select codigo_de_cuota from tel_descuentoscuotas where " & vSQL & ") and 1"
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "telefono.cuotas", Cad, "1", "N")
-    If Cad <> "" Then
-        If Val(Cad) > 0 Then Cad = ""
+    cad = "Fichero =" & DBSet(mfichero, "T") & " and not codigo_de_cuota in (select codigo_de_cuota from tel_descuentoscuotas where " & vSQL & ") and 1"
+    cad = DevuelveDesdeBD(conAri, "count(*)", "telefono.cuotas", cad, "1", "N")
+    If cad <> "" Then
+        If Val(cad) > 0 Then cad = ""
     End If
-    If Cad = "" Then
-        Cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,nombre1,nombre2) "
-        Cad = Cad & " select " & vUsu.codigo & ",1,0,Codigo_de_cuota,Descripcion_de_cuota"
-        Cad = Cad & "  from telefono.cuotas where Fichero =" & DBSet(mfichero, "T") & " group by Codigo_de_cuota"
-        conn.Execute Cad
+    If cad = "" Then
+        cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,nombre1,nombre2) "
+        cad = cad & " select " & vUsu.codigo & ",1,0,Codigo_de_cuota,Descripcion_de_cuota"
+        cad = cad & "  from telefono.cuotas where Fichero =" & DBSet(mfichero, "T") & " group by Codigo_de_cuota"
+        conn.Execute cad
         
         'vSQL = "1"
         'If EsFicheroOrange_ Then vSQL = "2"
         vSQL = TipoFicheroOperador
-        Cad = "insert ignore into tel_descuentoscuotas(operadora,codigo_de_cuota,Descripcion_de_cuota,accion,Mensual,Valor)"
-        Cad = Cad & " select " & vSQL & ",Codigo_de_cuota,Descripcion_de_cuota,0,0,sum(importe)/count(*) from telefono.cuotas "
-        Cad = Cad & " where Fichero =" & DBSet(mfichero, "T") & " group by Codigo_de_cuota"
-        conn.Execute Cad
+        cad = "insert ignore into tel_descuentoscuotas(operadora,codigo_de_cuota,Descripcion_de_cuota,accion,Mensual,Valor)"
+        cad = cad & " select " & vSQL & ",Codigo_de_cuota,Descripcion_de_cuota,0,0,sum(importe)/count(*) from telefono.cuotas "
+        cad = cad & " where Fichero =" & DBSet(mfichero, "T") & " group by Codigo_de_cuota"
+        conn.Execute cad
         
     End If
     
@@ -2323,30 +2323,30 @@ Dim Importe3 As Currency
     'VARIOS
     L.Caption = "Cargos VARIOS"
     L.Refresh
-    Cad = "Fichero =" & DBSet(mfichero, "T") & " and Codigo_de_vario<>'' and not Codigo_de_vario "
+    cad = "Fichero =" & DBSet(mfichero, "T") & " and Codigo_de_vario<>'' and not Codigo_de_vario "
     'vSQL = "1"
     'If EsFicheroOrange_ Then vSQL = "2"
     vSQL = "operadora = " & TipoFicheroOperador '& vSQL
-    Cad = Cad & " in (select CodigoVario from tel_cargo_varios where " & vSQL & ") and 1"
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "telefono.varios", Cad, "1", "N")
-    If Cad <> "" Then
-        If Val(Cad) > 0 Then Cad = ""
+    cad = cad & " in (select CodigoVario from tel_cargo_varios where " & vSQL & ") and 1"
+    cad = DevuelveDesdeBD(conAri, "count(*)", "telefono.varios", cad, "1", "N")
+    If cad <> "" Then
+        If Val(cad) > 0 Then cad = ""
     End If
-    If Cad = "" Then
+    If cad = "" Then
         'Codigo_de_vario Descripcion_de_vario
 
-        Cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,nombre1,nombre2) "
-        Cad = Cad & " select " & vUsu.codigo & ",2,0,Codigo_de_vario,Descripcion_de_vario"
-        Cad = Cad & "  from telefono.varios where Fichero =" & DBSet(mfichero, "T")
-        Cad = Cad & " AND Codigo_de_vario<>"""" AND Importe<>0 group by Codigo_de_vario"
-        conn.Execute Cad
+        cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,nombre1,nombre2) "
+        cad = cad & " select " & vUsu.codigo & ",2,0,Codigo_de_vario,Descripcion_de_vario"
+        cad = cad & "  from telefono.varios where Fichero =" & DBSet(mfichero, "T")
+        cad = cad & " AND Codigo_de_vario<>"""" AND Importe<>0 group by Codigo_de_vario"
+        conn.Execute cad
         
 
-        Cad = "insert ignore tel_cargo_varios(CodigoVario,Descripcion,CargarEnFactura,Operadora)"
-        Cad = Cad & " select Codigo_de_vario,Descripcion_de_vario,0,1 from telefono.varios "
-        Cad = Cad & " where Codigo_de_vario<>'' AND importe<>0"
-        Cad = Cad & " AND Fichero =" & DBSet(mfichero, "T") & " group by Codigo_de_vario"
-        conn.Execute Cad
+        cad = "insert ignore tel_cargo_varios(CodigoVario,Descripcion,CargarEnFactura,Operadora)"
+        cad = cad & " select Codigo_de_vario,Descripcion_de_vario,0,1 from telefono.varios "
+        cad = cad & " where Codigo_de_vario<>'' AND importe<>0"
+        cad = cad & " AND Fichero =" & DBSet(mfichero, "T") & " group by Codigo_de_vario"
+        conn.Execute cad
         
     End If
 
@@ -2359,51 +2359,51 @@ Dim Importe3 As Currency
     'Despues de ajustar las cuotas, mostraremos los telefonos que no tienen CUOTAS
     'Por si quiere quitar alguno. Para que no le lleguen la factura
     'Primero. Metemos todos los telelfonos del fichero
-    Cad = "DELETE FROM tmpnseries WHERE codusu = " & vUsu.codigo
-    conn.Execute Cad
+    cad = "DELETE FROM tmpnseries WHERE codusu = " & vUsu.codigo
+    conn.Execute cad
     Espera 0.15
     
     
-    Cad = "select " & vUsu.codigo & ",Numero_de_telefono,0 from telefono.telefono" & _
+    cad = "select " & vUsu.codigo & ",Numero_de_telefono,0 from telefono.telefono" & _
             " where Fichero = " & mdbFac2.texto(mfichero) & " order by Numero_de_telefono"
-    Cad = "INSERT INTO tmpnseries(codusu,codartic,numlinea) " & Cad
-    conn.Execute Cad
+    cad = "INSERT INTO tmpnseries(codusu,codartic,numlinea) " & cad
+    conn.Execute cad
     Espera 0.25
     
     'INACTIVOS. Pondremos numlinea =2
-    Cad = "select * from tmpnseries where codusu =" & vUsu.codigo & " and codartic in (select IdTelefono from sclientfno where inactivo=1)"
-    Rc.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "select * from tmpnseries where codusu =" & vUsu.codigo & " and codartic in (select IdTelefono from sclientfno where inactivo=1)"
+    Rc.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rc.EOF
-        Cad = "UPDATE tmpnseries set numlinea= 2 where codusu = " & vUsu.codigo & " AND codartic = " & DBSet(Rc!codArtic, "T")
+        cad = "UPDATE tmpnseries set numlinea= 2 where codusu = " & vUsu.codigo & " AND codartic = " & DBSet(Rc!codArtic, "T")
         Rc.MoveNext
-        ejecutar Cad, False
+        ejecutar cad, False
         Espera 0.1
     Wend
     Rc.Close
     
     'Febrero 2014
     'Los que en la fiche del telefono, el operador que llevan es OTRO que el del fichero
-    Cad = "select * from tmpnseries where codusu =" & vUsu.codigo & " and codartic in (select IdTelefono from sclientfno where inactivo=0 and operador <>" & TipoFicheroOperador & " )"
-    Rc.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "select * from tmpnseries where codusu =" & vUsu.codigo & " and codartic in (select IdTelefono from sclientfno where inactivo=0 and operador <>" & TipoFicheroOperador & " )"
+    Rc.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rc.EOF
-        Cad = "UPDATE tmpnseries set numlinea= 5 where codusu = " & vUsu.codigo & " AND codartic = " & DBSet(Rc!codArtic, "T")
+        cad = "UPDATE tmpnseries set numlinea= 5 where codusu = " & vUsu.codigo & " AND codartic = " & DBSet(Rc!codArtic, "T")
         Rc.MoveNext
-        ejecutar Cad, False
+        ejecutar cad, False
         Espera 0.1
     Wend
     Rc.Close
     
     
     'Borramos los que tienen detalle _llamadas , cutoas y varios  FEB 2014 -->
-    Cad = "DELETE FROM tmpnseries WHERE codusu =" & vUsu.codigo & " AND numlinea<2 AND codartic IN ("
+    cad = "DELETE FROM tmpnseries WHERE codusu =" & vUsu.codigo & " AND numlinea<2 AND codartic IN ("
     vSQL = "Select distinct(Numero_de_telefono) FROM telefono.cuotas WHERE Fichero = " & mdbFac2.texto(mfichero)
-    vSQL = Cad & vSQL & ")"
+    vSQL = cad & vSQL & ")"
     conn.Execute vSQL
     vSQL = "Select distinct(Numero_de_telefono) FROM telefono.resumen_de_llamadas WHERE Fichero = " & mdbFac2.texto(mfichero)
-    vSQL = Cad & vSQL & ")"
+    vSQL = cad & vSQL & ")"
     conn.Execute vSQL
     vSQL = "Select distinct(Numero_de_telefono) FROM telefono.varios WHERE Fichero = " & mdbFac2.texto(mfichero)
-    vSQL = Cad & vSQL & ")"
+    vSQL = cad & vSQL & ")"
     conn.Execute vSQL
     
 
@@ -2417,9 +2417,9 @@ Dim Importe3 As Currency
             frmVarios3.Opcion = 3
             frmVarios3.Show vbModal
     
-            Cad = "Select * from tmpnseries WHERE codusu = " & vUsu.codigo
-            Rc.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            Cad = ""
+            cad = "Select * from tmpnseries WHERE codusu = " & vUsu.codigo
+            Rc.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            cad = ""
             While Not Rc.EOF
                 
                 'Febrero 2013
@@ -2427,15 +2427,15 @@ Dim Importe3 As Currency
                 L.Caption = "Quitar datos: " & Rc!codArtic
                 L.Refresh
                 
-                Cad = " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Numero_de_telefono = " & DBSet(Rc!codArtic, "T")
+                cad = " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Numero_de_telefono = " & DBSet(Rc!codArtic, "T")
                 
-                conn.Execute "DELETE FROM telefono.cuotas" & Cad
+                conn.Execute "DELETE FROM telefono.cuotas" & cad
                 
-                conn.Execute "DELETE FROM telefono.resumen_de_llamadas" & Cad
+                conn.Execute "DELETE FROM telefono.resumen_de_llamadas" & cad
                 
-                conn.Execute "DELETE from telefono.varios" & Cad
+                conn.Execute "DELETE from telefono.varios" & cad
                 
-                conn.Execute "DELETE FROM telefono.telefono" & Cad
+                conn.Execute "DELETE FROM telefono.telefono" & cad
                 Rc.MoveNext
             Wend
             Rc.Close
@@ -2740,11 +2740,11 @@ Dim IdLinDetalle As Long
                 
                 Else
 '
-'                    If InStr(1, Tramo, "consumo en servicios especia") > 0 Then Stop
+'                    If InStr(1, Tramo, "655889829;16/07/2017;orangeworld;Roaming Zona1") > 0 Then Stop
 '                    If InStr(1, Tramo, "mínimo") > 0 Then Stop
 '                    If InStr(1, Tramo, "anquilidad") > 0 Then Stop
 '                    If InStr(1, Tramo, "606399489") > 0 Then Stop
-                    
+'                    If Tipo = 9 Then Stop
                     
                     If Tipo = 1 Then
                         'NADA
@@ -3085,6 +3085,9 @@ Dim Libre As String
 Dim Valor As Currency
 Dim Valor2 As Currency
     
+    
+    On Error GoTo eInsertarTramoDetalleLlamdas
+    
     '-->Fecha mmdd   hora hhmm
     'Fichero,id,Numero_de_telefono,Codigo_de_trafico,Tipo_de_trafico,Numero_llamado,Fecha,Hora_inicio,Unidad_de_medida,  Cantidad_medida_originada Importe
     'quito las dos primeras lineas que son expliativas
@@ -3159,6 +3162,10 @@ Dim Valor2 As Currency
                 CadenaInsert = CadenaInsert & "'7','Mensajes',"
             ElseIf Tipo = 9 Then
                 CadenaInsert = CadenaInsert & "'8','Datos roaming',"
+                
+                
+                
+                
             End If
             CadenaInsert = CadenaInsert & "'" & RecuperaValor(linea, 3)
             Aux = RecuperaValor(linea, 2) 'fecha
@@ -3169,7 +3176,7 @@ Dim Valor2 As Currency
             CadenaInsert = CadenaInsert & Aux & "',"
             'Cantidad
             
-            'If Tipo <> 2 And Tipo <> 4 And Tipo <> 7 Then Stop
+            
             
             
             Aux = RecuperaValor(linea, 6) 'unidada
@@ -3180,14 +3187,18 @@ Dim Valor2 As Currency
                     Aux = "SMS"
                 ElseIf Tipo = 7 Then
                     If Aux = "" Then Aux = "Segundos"
+                ElseIf Tipo = 9 Then
+                    If Aux = "" Then Aux = "KB"
                 Else
                     Aux = "Segundos"
                 End If
             End If
+            
             CadenaInsert = CadenaInsert & "'" & Aux & "'," & TransformaComasPuntos(CStr(TotalLlamada)) & ","
             
             'Importe
             Aux = RecuperaValor(linea, 10)
+           
             
             'Se refacturan
             If Tipo = 2 Then
@@ -3250,6 +3261,14 @@ Dim Valor2 As Currency
     End If
     
     
+    
+eInsertarTramoDetalleLlamdas:
+    If Err.Number <> 0 Then
+        Aux = "Error procesando tramo. " & vbCrLf & linea
+        MsgBox Aux, vbCritical
+        Err.Clear
+        Err.Raise 513, , "Revise fichero a procesar"
+    End If
 End Sub
 
 
@@ -3281,19 +3300,21 @@ Dim Cambialo As Byte
             'MsgBox "GIGAS"
             Ud = "Gigabytes"
             Aux = Trim(Mid(Aux, 1, Len(Aux) - 2))
+            If Aux = "" Then Aux = "0"
             DevuelveUnidad = CCur(Aux)
         End If
         If LCase(Right(Aux, 2)) = "mb" Then
             
             Ud = "Megabytes"
             Aux = Trim(Mid(Aux, 1, Len(Aux) - 2))
+            If Aux = "" Then Aux = "0"
             DevuelveUnidad = CCur(Aux)
         End If
         If LCase(Right(Aux, 2)) = "kb" Then
             
             Ud = "Kilobytes"
             Aux = Trim(Mid(Aux, 1, Len(Aux) - 2))
-            
+            If Aux = "" Then Aux = "0"
             DevuelveUnidad = CCur(Aux)
         End If
         If LCase(Right(Aux, 5)) = "bytes" Then
@@ -4408,7 +4429,7 @@ Dim i As Integer
                     End If
                 End If
                 
-                SeparaNomclienNomApellidos miRsAux!Nomclien, Nombre, Apell1, Apell2
+                SeparaNomclienNomApellidos miRsAux!NomClien, Nombre, Apell1, Apell2
                 mSQL = mSQL & mdbFac2.texto(Apell1) & ","
                 mSQL = mSQL & mdbFac2.texto(Apell2) & ","
                 mSQL = mSQL & mdbFac2.texto(Nombre) & ","
@@ -4617,7 +4638,7 @@ End Function
 
 Private Function CargarTraficoNuevo(ByRef RR As ADODB.Recordset, ByRef consumoSinIVA As Currency) As Currency
 Dim i As Integer
-Dim Cad As String
+Dim cad As String
         
         
         
@@ -4628,9 +4649,9 @@ Dim Cad As String
         'tel_lin_factura_consumos(Serie,Ano,NumFact,NumLin,CodTipoTrafico,DescTipoTrafico,NumLlamadas,Unidad,Cantidad,Importe,TipoIVA,FechaInicio)
         
         i = 0
-        Cad = "Select substring(tipo,1,50) lacuota, sum(duracion) SumaDeDuracion,"
-        Cad = Cad & "sum(volumen) SumaDeVolumen ,sum(Importe) SumaDeCoste , count(*) NumLlamadas "
-        Cad = Cad & " from vodafonetxt.dntv_cab WHERE telef_ext like '" & RR!Telefono & "%' GROUP BY 1"
+        cad = "Select substring(tipo,1,50) lacuota, sum(duracion) SumaDeDuracion,"
+        cad = cad & "sum(volumen) SumaDeVolumen ,sum(Importe) SumaDeCoste , count(*) NumLlamadas "
+        cad = cad & " from vodafonetxt.dntv_cab WHERE telef_ext like '" & RR!Telefono & "%' GROUP BY 1"
         
 '            var rs0 = from l in ctx2.DntvCabs
 '                      Where L.TelefExt.StartsWith(Telefono)
@@ -4645,7 +4666,7 @@ Dim Cad As String
 '                          SumaDeCoste = g.Sum(l => l.Importe),
 '                          NumLlamadas = g.Count()
 
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
         
         '        cons.NumLlamadas = dr.NumLlamadas;
@@ -4699,9 +4720,9 @@ Dim Cad As String
 '                          SumaDeCoste = g.Sum(m => m.Importe),
 '                          NumLlamadas = g.Count()
 '                      };
-        Cad = "Select substring(tipo,1,50) lacuota, sum(importe) SumaDeCoste,count(*) NumLlamadas "
-        Cad = Cad & " from vodafonetxt.Dsva_Cab WHERE telef_ext like '" & RR!Telefono & "%' GROUP BY 1"
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cad = "Select substring(tipo,1,50) lacuota, sum(importe) SumaDeCoste,count(*) NumLlamadas "
+        cad = cad & " from vodafonetxt.Dsva_Cab WHERE telef_ext like '" & RR!Telefono & "%' GROUP BY 1"
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
         
 
@@ -4748,10 +4769,10 @@ Dim Cad As String
         '                  SumaDeCoste = g.Sum(l => l.Importe),
         '                  NumLlamadas = g.Count()
         '              };
-        Cad = "Select substring(tipo,1,50) lacuota, sum(duracion) SumaDeDuracion,"
-        Cad = Cad & "sum(volumen) SumaDeVolumen ,sum(Importe) SumaDeCoste , count(*) NumLlamadas "
-        Cad = Cad & " from vodafonetxt.Dntd_cab WHERE telef_ext like '" & RR!Telefono & "%' GROUP BY 1"
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cad = "Select substring(tipo,1,50) lacuota, sum(duracion) SumaDeDuracion,"
+        cad = cad & "sum(volumen) SumaDeVolumen ,sum(Importe) SumaDeCoste , count(*) NumLlamadas "
+        cad = cad & " from vodafonetxt.Dntd_cab WHERE telef_ext like '" & RR!Telefono & "%' GROUP BY 1"
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             
                 'cons.NumLlamadas = dr.NumLlamadas;
@@ -4788,9 +4809,9 @@ Dim Cad As String
         '               select ld;
         '
         '
-        Cad = "Select substring(producto,1,50) lacuota,  importe , fecha_inicio,num_llamadas"
-        Cad = Cad & " from vodafonetxt.Doim_Cab WHERE telef like '" & RR!Telefono & "%' "
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cad = "Select substring(producto,1,50) lacuota,  importe , fecha_inicio,num_llamadas"
+        cad = cad & " from vodafonetxt.Doim_Cab WHERE telef like '" & RR!Telefono & "%' "
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             
        
@@ -4834,28 +4855,28 @@ End Function
 
 
 Private Function CodigoDecripcionCuotaVoda(Tipo As Byte, Descrip As String) As String
-Dim Cad As String
+Dim cad As String
 
     If Tipo = 0 Then
         'CUOTAS
         'DescCuota CodCuota  tel_desc_cuotas
       
-        Cad = DevuelveDesdeBD(conAri, "CodCuota", "tel_desc_cuotas", "DescCuota", Descrip, "T")
+        cad = DevuelveDesdeBD(conAri, "CodCuota", "tel_desc_cuotas", "DescCuota", Descrip, "T")
         
-        If Cad = "" Then
+        If cad = "" Then
             Print #NF, "Cuota incorrecta: " & Descrip
-            Cad = "INCORR"
+            cad = "INCORR"
         End If
     Else
         'tipo=1
         
-        Cad = DevuelveDesdeBD(conAri, "CodTipoTrafico", "tel_desc_consumos", "DescTipoTrafico", Descrip, "T")
-        If Cad = "" Then
+        cad = DevuelveDesdeBD(conAri, "CodTipoTrafico", "tel_desc_consumos", "DescTipoTrafico", Descrip, "T")
+        If cad = "" Then
             Print #NF, "Cuota trafico incorrecta: " & Descrip
-            Cad = "INCORR"
+            cad = "INCORR"
         End If
     End If
-    CodigoDecripcionCuotaVoda = "," & DBSet(Cad, "T") & "," & DBSet(Descrip, "T") & ","
+    CodigoDecripcionCuotaVoda = "," & DBSet(cad, "T") & "," & DBSet(Descrip, "T") & ","
 End Function
 
 
@@ -4866,7 +4887,7 @@ End Function
 Private Function CargarDescuentos(ByRef RR As ADODB.Recordset) As Currency
 Dim i As Integer
 Dim RN As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim TieneDto As Boolean
 Dim Importe As Currency
 
@@ -4880,19 +4901,19 @@ Dim Importe As Currency
             Set RN = New ADODB.Recordset
             'Tel_lin_factura_descuento(Serie,Ano,NumFact,NumLin,Concepto,Descuento,Base,Importe
             CadenaInsert = ""
-            Cad = "Select codcuota,sum(importe) importe from Tel_lin_factura_cuotas WHERE serie ='" & RR!Serie & "' AND ano = " & RR!Ano & " AND numfact = " & RR!NumFact & " GROUP BY 1"
-            RN.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+            cad = "Select codcuota,sum(importe) importe from Tel_lin_factura_cuotas WHERE serie ='" & RR!Serie & "' AND ano = " & RR!Ano & " AND numfact = " & RR!NumFact & " GROUP BY 1"
+            RN.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
             If Not RN.EOF Then
-                Cad = ""
+                cad = ""
                 While Not RN.EOF
-                    Cad = Cad & ", " & DBSet(RN!CodCuota, "T")
+                    cad = cad & ", " & DBSet(RN!CodCuota, "T")
                     RN.MoveNext
                 Wend
                 RN.MoveFirst
                 
-                Cad = Mid(Cad, 2) 'No puede ser EOF
-                Cad = "Select * from Tel_desc_cuotas WHERE codcuota IN (" & Cad & ")"
-                miRsAux.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+                cad = Mid(cad, 2) 'No puede ser EOF
+                cad = "Select * from Tel_desc_cuotas WHERE codcuota IN (" & cad & ")"
+                miRsAux.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
                 'foreach (ModAriGesTel.Tel_lin_factura_cuota lc in rs)
                 '{
                 '    // Vemos si hay algun descuento posible.
@@ -4944,19 +4965,19 @@ Dim Importe As Currency
             '          where l.Serie == serie && l.Ano == ano && l.NumFact == numfac
             '          select l;
             'foreach (ModAriGesTel.Tel_lin_factura_consumo lt in rs2)
-            Cad = "Select CodTipoTrafico,sum(importe) importe from Tel_lin_factura_consumos WHERE serie ='" & RR!Serie & "' AND ano = " & RR!Ano & " AND numfact = " & RR!NumFact & " GROUP BY 1"
-            RN.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+            cad = "Select CodTipoTrafico,sum(importe) importe from Tel_lin_factura_consumos WHERE serie ='" & RR!Serie & "' AND ano = " & RR!Ano & " AND numfact = " & RR!NumFact & " GROUP BY 1"
+            RN.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
             If Not RN.EOF Then
-                Cad = ""
+                cad = ""
                 While Not RN.EOF
-                    Cad = Cad & ", " & DBSet(RN!CodTipoTrafico, "T")
+                    cad = cad & ", " & DBSet(RN!CodTipoTrafico, "T")
                     RN.MoveNext
                 Wend
                 RN.MoveFirst
                 
-                Cad = Mid(Cad, 2) 'No puede ser EOF
-                Cad = "Select * from Tel_desc_consumos WHERE CodTipoTrafico IN (" & Cad & ")"
-                miRsAux.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+                cad = Mid(cad, 2) 'No puede ser EOF
+                cad = "Select * from Tel_desc_consumos WHERE CodTipoTrafico IN (" & cad & ")"
+                miRsAux.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
             
                 
             
@@ -5215,7 +5236,7 @@ End Sub
 '*********************************************************************************************************
 Public Function RefacturarCuotasVODAFONE(mfichero As String, ByRef L As Label)
 Dim vSQL As String
-Dim Cad As String
+Dim cad As String
 Dim Origen As String
 Dim Rc As ADODB.Recordset
 Dim i As Integer
