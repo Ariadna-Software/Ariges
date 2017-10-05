@@ -873,16 +873,33 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Activate()
+Dim C As String
     If kCampo < 0 Then
         'Es la primera vez
         kCampo = 0
         limpiar Me
         Text1(0).Text = codArtic
-        HacerBusqueda
-        
-        If codArtic <> "" And Modo = 2 Then
-            If BLOQUEADesdeFormulario(Me) Then BotonModificar
+        C = ""
+        If codArtic <> "" Then
+            C = DevuelveDesdeBD(conAri, " distinct codartic", "slista", "codartic", codArtic, "T")
         End If
+        If C <> "" Then
+            HacerBusqueda
+            If codArtic <> "" And Modo = 2 Then
+                If BLOQUEADesdeFormulario(Me) Then BotonModificar
+            
+            End If
+        Else
+            If codArtic <> "" Then
+                BotonAnyadir
+                Text1(0).Text = codArtic
+                C = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", codArtic, "T")
+                Me.Text2(0).Text = C
+                PonerFoco Text1(1)
+            End If
+        End If
+        
+        
         
 
     End If
@@ -942,7 +959,7 @@ End Sub
 
 Private Sub CargaGrid(enlaza As Boolean)
 Dim b As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
@@ -954,33 +971,33 @@ Dim SQL As String
 
     DataGrid1.Columns(0).visible = False 'Cod. Articulo
     DataGrid1.Columns(1).visible = False 'Cod. Lista
-    I = 2
+    i = 2
     
     'Numero Linea
-    DataGrid1.Columns(I).Caption = "Num. Linea"
-    DataGrid1.Columns(I).Width = 1200
+    DataGrid1.Columns(i).Caption = "Num. Linea"
+    DataGrid1.Columns(i).Width = 1200
     
     'Fecha Cambio
-    DataGrid1.Columns(I + 1).Caption = "Fecha Cambio"
-    DataGrid1.Columns(I + 1).Width = 1500
+    DataGrid1.Columns(i + 1).Caption = "Fecha Cambio"
+    DataGrid1.Columns(i + 1).Width = 1500
     
     'Precio Unidad
-    DataGrid1.Columns(I + 2).Caption = "Precio Unidad"
-    DataGrid1.Columns(I + 2).Width = 2000
-    DataGrid1.Columns(I + 2).Alignment = dbgRight
-    DataGrid1.Columns(I + 2).NumberFormat = FormatoPrecio & " "
+    DataGrid1.Columns(i + 2).Caption = "Precio Unidad"
+    DataGrid1.Columns(i + 2).Width = 2000
+    DataGrid1.Columns(i + 2).Alignment = dbgRight
+    DataGrid1.Columns(i + 2).NumberFormat = FormatoPrecio & " "
     
     'Precio Caja
-    DataGrid1.Columns(I + 3).Caption = "Precio Caja"
-    DataGrid1.Columns(I + 3).Width = 2000
-    DataGrid1.Columns(I + 3).Alignment = dbgRight
-    DataGrid1.Columns(I + 3).NumberFormat = FormatoPrecio & " "
+    DataGrid1.Columns(i + 3).Caption = "Precio Caja"
+    DataGrid1.Columns(i + 3).Width = 2000
+    DataGrid1.Columns(i + 3).Alignment = dbgRight
+    DataGrid1.Columns(i + 3).NumberFormat = FormatoPrecio & " "
     
     DataGrid1.ScrollBars = dbgAutomatic
        
-    For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-    Next I
+    For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+    Next i
     DataGrid1.Enabled = b
     DataGrid1.ScrollBars = dbgAutomatic
     Exit Sub
@@ -1271,7 +1288,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 7 'Eliminar
                 BotonEliminar
         Case 9
-            frmListado2.opcion = 34
+            frmListado2.Opcion = 34
             frmListado2.Show vbModal
             BotonBuscar
             
@@ -1279,7 +1296,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 10
             'Nuevo aumento % precio
             If vUsu.Nivel > 1 Then Exit Sub
-            frmListado3.opcion = 62
+            frmListado3.Opcion = 62
             frmListado3.Show vbModal
             BotonBuscar
             
@@ -1304,7 +1321,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte, NumReg As Byte
+Dim i As Byte, NumReg As Byte
 Dim b As Boolean
 On Error GoTo EPonerModo
 
@@ -1332,13 +1349,13 @@ On Error GoTo EPonerModo
     cmdCancelar.visible = b
     cmdAceptar.visible = b
     
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = b And Modo <> 4 'Si modificar no activado pq son claves ajenas
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = b And Modo <> 4 'Si modificar no activado pq son claves ajenas
+    Next i
     
-    For I = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(I).Enabled = b 'And Modo <> 3 'Si es insertar se modifica
-    Next I
+    For i = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(i).Enabled = b 'And Modo <> 3 'Si es insertar se modifica
+    Next i
     
 '    Me.chkPermiteDto.Enabled = (Modo = 1) Or (Modo = 3) Or (Modo = 4)
     
@@ -1599,29 +1616,29 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: slista
-    Cad = Cad & ParaGrid(Text1(0), 18, "Cod Artic.")
-    Cad = Cad & "Desc. Artic|sartic|nomartic|T||48·"
-    Cad = Cad & ParaGrid(Text1(1), 7, "Tar.")
-    Cad = Cad & "Tarifa|starif|nomlista|T||12·"
-    Cad = Cad & ParaGrid(Text1(2), 14, "Precio")
+    cad = cad & ParaGrid(Text1(0), 18, "Cod Artic.")
+    cad = cad & "Desc. Artic|sartic|nomartic|T||48·"
+    cad = cad & ParaGrid(Text1(1), 7, "Tar.")
+    cad = cad & "Tarifa|starif|nomlista|T||12·"
+    cad = cad & ParaGrid(Text1(2), 14, "Precio")
     tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ")"
     tabla = tabla & " LEFT JOIN starif ON " & NombreTabla & ".codlista=starif.codlista"
        
 '    tabla = "slista"
     Titulo = "Tarifas de Artículos"
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False

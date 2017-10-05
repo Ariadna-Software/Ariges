@@ -1653,7 +1653,7 @@ Dim H As Integer, W As Integer 'Alto, Ancho
             Label4(3).Caption = ""
     End Select
     
-    PonerFrameVisible Me.frameListado, (Me.parOpcion = 1), H, W
+    PonerFrameVisible Me.FrameListado, (Me.parOpcion = 1), H, W
     PonerFrameVisible Me.FrameGenerar, (Me.parOpcion = 2), H, W
     PonerFrameVisible Me.FrameNorma34, (Me.parOpcion = 3), H, W
     
@@ -1844,7 +1844,7 @@ Private Sub MostrarProgreso(mostrar As Boolean)
 End Sub
 
 
-Private Sub GenerarNorma34(cadWHERE As String)
+Private Sub GenerarNorma34(cadWhere As String)
 Dim totReg As Integer
 Dim SQL As String
 Dim cad As String
@@ -1862,7 +1862,7 @@ Dim DescripTr As String 'descripcion de la orden
     
         
     '-- total registros a processar para ProgressBar
-    SQL = "SELECT count(*) FROM snomin WHERE " & cadWHERE
+    SQL = "SELECT count(*) FROM snomin WHERE " & cadWhere
     totReg = TotalRegistros(SQL)
     CargarProgresNew Me.ProgressBar1, totReg
 
@@ -1884,7 +1884,7 @@ Dim DescripTr As String 'descripcion de la orden
     End If
     SQL = SQL & ",straba.nomtraba as nommacta, straba.domtraba as dirdatos, straba.codpobla as codposta,straba.pobtraba as despobla,straba.niftraba as refbenef,iban"
     SQL = SQL & " FROM snomin, straba "
-    SQL = SQL & " WHERE snomin.codtraba = straba.codtraba and " & cadWHERE
+    SQL = SQL & " WHERE snomin.codtraba = straba.codtraba and " & cadWhere
     SQL = SQL & " GROUP BY codtraba"
     CadenaSQL = SQL
 
@@ -1901,7 +1901,7 @@ Dim DescripTr As String 'descripcion de la orden
         If IsNull(RS!codbanco) Then
             cad = ""
         Else
-            cad = Format(RS!codbanco, "0000") & "|" & Format(DBLet(RS!codsucur, "T"), "0000") & "|" & DBLet(RS!digcontr, "T") & "|" & Format(DBLet(RS!cuentaba, "T"), "0000000000") & "|" & DBLet(RS!IBAN, "T") & "|"
+            cad = Format(RS!codbanco, "0000") & "|" & Format(DBLet(RS!codsucur, "T"), "0000") & "|" & DBLet(RS!digcontr, "T") & "|" & Format(DBLet(RS!cuentaba, "T"), "0000000000") & "|" & DBLet(RS!Iban, "T") & "|"
         End If
     End If
     Set RS = Nothing
@@ -1919,7 +1919,7 @@ Dim DescripTr As String 'descripcion de la orden
         Else 'gastos procesados
             SQL = "UPDATE snomin SET n34gast=1"
         End If
-        SQL = SQL & " WHERE " & cadWHERE
+        SQL = SQL & " WHERE " & cadWhere
         conn.Execute SQL
     End If
     
@@ -1955,7 +1955,7 @@ End Sub
 
 
 
-Private Sub ProcesarCambios(cadWHERE As String)
+Private Sub ProcesarCambios(cadWhere As String)
 'Dim totReg As Long
 '
 'Dim SQL As String
@@ -2190,7 +2190,7 @@ Dim Base As Currency
     miRsAux.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set ListaClientes = New Collection
     While Not miRsAux.EOF
-        ListaClientes.Add CStr(miRsAux!codClien) & "|" & miRsAux!Nomclien & "|" & DBLet(miRsAux!pobclien, "T") & "|"
+        ListaClientes.Add CStr(miRsAux!codClien) & "|" & miRsAux!NomClien & "|" & DBLet(miRsAux!pobclien, "T") & "|"
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -2228,7 +2228,7 @@ Dim Base As Currency
         
         
         If Importe = 0 Then
-            'Stop
+            'St op
         Else
             cadSelect = miRsAux!CodTraba & txtCodigo(12).Text & Format(txtCodigo(13).Text, "00")
             Aux = CLng(cadSelect)

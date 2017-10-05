@@ -115,18 +115,18 @@ Begin VB.Form frmAlmArticulos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmAlmArticulos.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "chkWeb"
-      Tab(1).Control(1)=   "Text1(33)"
-      Tab(1).Control(2)=   "framePortes"
-      Tab(1).Control(3)=   "Text1(28)"
-      Tab(1).Control(4)=   "Text1(19)"
-      Tab(1).Control(5)=   "Text1(20)"
-      Tab(1).Control(6)=   "Text1(21)"
-      Tab(1).Control(7)=   "Label1(40)"
-      Tab(1).Control(8)=   "Label2(1)"
-      Tab(1).Control(9)=   "Label2(11)"
-      Tab(1).Control(10)=   "Label2(2)"
-      Tab(1).Control(11)=   "Label2(3)"
+      Tab(1).Control(0)=   "Label2(3)"
+      Tab(1).Control(1)=   "Label2(2)"
+      Tab(1).Control(2)=   "Label2(11)"
+      Tab(1).Control(3)=   "Label2(1)"
+      Tab(1).Control(4)=   "Label1(40)"
+      Tab(1).Control(5)=   "Text1(21)"
+      Tab(1).Control(6)=   "Text1(20)"
+      Tab(1).Control(7)=   "Text1(19)"
+      Tab(1).Control(8)=   "Text1(28)"
+      Tab(1).Control(9)=   "framePortes"
+      Tab(1).Control(10)=   "Text1(33)"
+      Tab(1).Control(11)=   "chkWeb"
       Tab(1).ControlCount=   12
       TabCaption(2)   =   "Componentes"
       TabPicture(2)   =   "frmAlmArticulos.frx":0044
@@ -189,58 +189,58 @@ Begin VB.Form frmAlmArticulos
       TabCaption(3)   =   "Control instalación / producción"
       TabPicture(3)   =   "frmAlmArticulos.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "txtAux(11)"
-      Tab(3).Control(1)=   "txtAux(10)"
-      Tab(3).Control(2)=   "cboCalidad"
+      Tab(3).Control(0)=   "Data3"
+      Tab(3).Control(1)=   "DataGrid2"
+      Tab(3).Control(2)=   "txtAux(2)"
       Tab(3).Control(3)=   "txtAux(9)"
-      Tab(3).Control(4)=   "txtAux(2)"
-      Tab(3).Control(5)=   "DataGrid2"
-      Tab(3).Control(6)=   "Data3"
+      Tab(3).Control(4)=   "cboCalidad"
+      Tab(3).Control(5)=   "txtAux(10)"
+      Tab(3).Control(6)=   "txtAux(11)"
       Tab(3).ControlCount=   7
       TabCaption(4)   =   "Stocks"
       TabPicture(4)   =   "frmAlmArticulos.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "cmdAlma"
-      Tab(4).Control(1)=   "Text3(0)"
-      Tab(4).Control(2)=   "Text2(8)"
-      Tab(4).Control(3)=   "Text3(2)"
-      Tab(4).Control(4)=   "FrameArtxAlmac"
-      Tab(4).Control(5)=   "DataGrid3"
+      Tab(4).Control(0)=   "DataGrid3"
+      Tab(4).Control(1)=   "FrameArtxAlmac"
+      Tab(4).Control(2)=   "Text3(2)"
+      Tab(4).Control(3)=   "Text2(8)"
+      Tab(4).Control(4)=   "Text3(0)"
+      Tab(4).Control(5)=   "cmdAlma"
       Tab(4).ControlCount=   6
       TabCaption(5)   =   "  EAN  / Equivalencias"
       TabPicture(5)   =   "frmAlmArticulos.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "cmdEquiv"
-      Tab(5).Control(1)=   "Text6(0)"
-      Tab(5).Control(2)=   "Text6(1)"
-      Tab(5).Control(3)=   "txtAux(8)"
-      Tab(5).Control(4)=   "DataGrid4"
-      Tab(5).Control(5)=   "Data5"
-      Tab(5).Control(6)=   "DataGrid6"
-      Tab(5).Control(7)=   "Data7"
-      Tab(5).Control(8)=   "Label2(6)"
-      Tab(5).Control(9)=   "Label2(4)"
+      Tab(5).Control(0)=   "Label2(4)"
+      Tab(5).Control(1)=   "Label2(6)"
+      Tab(5).Control(2)=   "Data7"
+      Tab(5).Control(3)=   "DataGrid6"
+      Tab(5).Control(4)=   "Data5"
+      Tab(5).Control(5)=   "DataGrid4"
+      Tab(5).Control(6)=   "txtAux(8)"
+      Tab(5).Control(7)=   "Text6(1)"
+      Tab(5).Control(8)=   "Text6(0)"
+      Tab(5).Control(9)=   "cmdEquiv"
       Tab(5).ControlCount=   10
       TabCaption(6)   =   "Documentos"
       TabPicture(6)   =   "frmAlmArticulos.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Frame4"
-      Tab(6).Control(1)=   "FrameDisponible"
-      Tab(6).Control(2)=   "lw1"
-      Tab(6).Control(3)=   "Label2(0)"
+      Tab(6).Control(0)=   "Label2(0)"
+      Tab(6).Control(1)=   "lw1"
+      Tab(6).Control(2)=   "FrameDisponible"
+      Tab(6).Control(3)=   "Frame4"
       Tab(6).ControlCount=   4
       TabCaption(7)   =   "Fitosanitarios"
       TabPicture(7)   =   "frmAlmArticulos.frx":00D0
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "cboADV"
-      Tab(7).Control(1)=   "Text5(1)"
-      Tab(7).Control(2)=   "Text5(0)"
-      Tab(7).Control(3)=   "cmdMatAux"
+      Tab(7).Control(0)=   "Label2(5)"
+      Tab(7).Control(1)=   "Label1(41)"
+      Tab(7).Control(2)=   "data6"
+      Tab(7).Control(3)=   "DataGrid5"
       Tab(7).Control(4)=   "FrameServicios"
-      Tab(7).Control(5)=   "DataGrid5"
-      Tab(7).Control(6)=   "data6"
-      Tab(7).Control(7)=   "Label1(41)"
-      Tab(7).Control(8)=   "Label2(5)"
+      Tab(7).Control(5)=   "cmdMatAux"
+      Tab(7).Control(6)=   "Text5(0)"
+      Tab(7).Control(7)=   "Text5(1)"
+      Tab(7).Control(8)=   "cboADV"
       Tab(7).ControlCount=   9
       Begin VB.TextBox txtAux 
          Appearance      =   0  'Flat
@@ -3381,8 +3381,8 @@ Begin VB.Form frmAlmArticulos
          Shortcut        =   ^K
       End
       Begin VB.Menu mnMtoConjuntos 
-         Caption         =   "&Conjuntos"
-         Shortcut        =   ^C
+         Caption         =   "Conjuntos"
+         Shortcut        =   ^J
       End
       Begin VB.Menu mnMtoInstalaciones 
          Caption         =   "&Instalaciones"
@@ -6662,7 +6662,17 @@ Dim i As Byte
         End If
         
         
-        
+        'Modificar herbelca . Articulos de rotacion
+        If vParamAplic.NumeroInstalacion = 2 Then
+            If Val(Data1.Recordset!Rotacion) <> Abs(chkRotacion.Value) Then
+                'han cambiado la marca del articulo.
+                'Si no es superusuario no puedo cambiar la rotacion
+                If vUsu.Nivel > 0 Then
+                    MsgBox "No puede cambiar la marca de rotacion", vbExclamation
+                    Exit Function
+                End If
+            End If
+        End If
         
         
         'Mayo 2017.
@@ -7099,7 +7109,7 @@ End Function
 Private Function InsertarPreciosPorTarifa2(Optional cadErr As String) As Boolean
 'Insertar en la lista de precios las tarifas para el articulo
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim cTar As CTarifaArt
 Dim NoOK As Boolean
 Dim cad As String
@@ -7142,8 +7152,8 @@ Dim cad As String
     End If
     '----
         
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa insertar un linea en la tabla de lista de precios
     'por cada codartic,codtarif
@@ -7153,14 +7163,14 @@ Dim cad As String
     ' Sobre PVP o sobre PUC
     'FALTA###
     NoOK = False
-    While Not Rs.EOF
+    While Not RS.EOF
         Set cTar = New CTarifaArt
         cTar.CodigoArticulo = Text1(0).Text
-        cTar.CodigoTarifa = Rs!codlista
+        cTar.CodigoTarifa = RS!codlista
         'Aqui dependera de una cosa u otra para lo del PVP / UPC
         ' 1.-  "    "  va sobre el UPC
         ' 0.- La tarifa va sobre el PVP
-        If DBLet(Rs!opcionINC, "N") = 0 Then
+        If DBLet(RS!opcionINC, "N") = 0 Then
             'PVP
             cTar.PrecioActual = CCur(Text1(17).Text) 'precio venta al publico (pvp)
         Else
@@ -7172,10 +7182,10 @@ Dim cad As String
         End If
         If cTar.InsertarPrecios = False Then NoOK = True
         Set cTar = Nothing
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
         
     If NoOK Then
         InsertarPreciosPorTarifa2 = False
@@ -7380,7 +7390,7 @@ End Function
 Private Function ActualizarPreciosPorTarifaDOS(PVP As Byte, Optional cadErr As String) As Boolean
 'Actualiza en la lista de precios las tarifas para el articulo
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim cTar As CTarifaArt
 Dim NoOK As Boolean
 Dim menErr As String
@@ -7419,16 +7429,16 @@ Dim newPrecio As Currency
         SQL = SQL & " AND opcionINC = " & CStr(PVP)
     End If
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa actualizar la linea en la tabla de lista de precios
     'por cada codartic,codtarif
     NoOK = False
-    While Not Rs.EOF
+    While Not RS.EOF
         If BloquearTarifas(Text1(0).Text) Then
             Set cTar = New CTarifaArt
-            If cTar.LeerDatos(Text1(0).Text, Rs!codlista) Then
+            If cTar.LeerDatos(Text1(0).Text, RS!codlista) Then
                 
                 If cTar.TarifaSobre = 0 Then
                     'TARIFAS SOBRE PVP
@@ -7445,10 +7455,10 @@ Dim newPrecio As Currency
             Else
                 'si no existe el articulo con esa tarifa la damos de alta
                 cTar.CodigoArticulo = Text1(0).Text
-                cTar.CodigoTarifa = Rs!codlista
+                cTar.CodigoTarifa = RS!codlista
                 'Si la tarifa es sobre PVP, mando el PVP
                 'Si es sobre el UPC mando el UPC
-                If DBLet(Rs!opcionINC, "N") = 0 Then
+                If DBLet(RS!opcionINC, "N") = 0 Then
                     'PVP
                     cTar.PrecioActual = CCur(Text1(17).Text) 'precio venta al publico (pvp)
                 Else
@@ -7464,10 +7474,10 @@ Dim newPrecio As Currency
             'Exit Function
         End If
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
         
     If NoOK Then
         ActualizarPreciosPorTarifaDOS = False
@@ -8119,7 +8129,11 @@ Private Sub txtAux_LostFocus(Index As Integer)
             If txtAux(1).Text <> "" Then
                 If vParamAplic.ComponentePorcentaje And MateriaPrima Then
                     'Formato decimal
-                    If Not PonerFormatoDecimal(txtAux(Index), 4) Then txtAux(1).Text = ""
+                    'Octubre2017. Antes era formato decimal. Dejamos que sea lo que quiera
+                    'If Not PonerFormatoDecimal(txtAux(Index), 4) Then txtAux(1).Text = ""
+                    If Not PonerFormatoDecimal(txtAux(Index), 2) Then txtAux(1).Text = ""
+                    
+                    
                 Else
                     If Not PonerFormatoDecimal(txtAux(Index), 2) Then txtAux(1).Text = ""
                 End If
@@ -8457,7 +8471,7 @@ End Sub
 
 Private Sub CargaDatosLW2()
 Dim cad As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim IT As ListItem
 Dim ElIcono As Integer
 
@@ -8525,39 +8539,39 @@ Dim ElIcono As Integer
     BuscaChekc = ""
     
     lw1.ListItems.Clear
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
-    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
         Set IT = lw1.ListItems.Add()
         If lw1.ColumnHeaders(1).Tag <> "" Then
-            IT.Text = Format(Rs.Fields(0), lw1.ColumnHeaders(1).Tag)
+            IT.Text = Format(RS.Fields(0), lw1.ColumnHeaders(1).Tag)
         Else
-            IT.Text = Rs.Fields(0)
+            IT.Text = RS.Fields(0)
         End If
         'El resto de cmpos
         For NumRegElim = 2 To CInt(RecuperaValor(lw1.Tag, 2))
-            If IsNull(Rs.Fields(NumRegElim - 1)) Then
+            If IsNull(RS.Fields(NumRegElim - 1)) Then
                 IT.SubItems(NumRegElim - 1) = " "
             Else
                 If lw1.ColumnHeaders(NumRegElim).Tag <> "" Then
-                    IT.SubItems(NumRegElim - 1) = Format(Rs.Fields(NumRegElim - 1), lw1.ColumnHeaders(NumRegElim).Tag)
+                    IT.SubItems(NumRegElim - 1) = Format(RS.Fields(NumRegElim - 1), lw1.ColumnHeaders(NumRegElim).Tag)
                 Else
-                    IT.SubItems(NumRegElim - 1) = Rs.Fields(NumRegElim - 1)
+                    IT.SubItems(NumRegElim - 1) = RS.Fields(NumRegElim - 1)
                 End If
             End If
         Next
         IT.SmallIcon = ElIcono
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     
     Exit Sub
 ECargaDatosLW:
     MuestraError Err.Number, "", Err.Description
-    Set Rs = Nothing
+    Set RS = Nothing
     
 End Sub
 
@@ -8602,39 +8616,39 @@ End Sub
 
 
 Private Function CargaListPedidos(ByRef ElIcono As Integer, cad As String) As Currency
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim IT As ListItem
 Dim cantidad As Currency
 
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     cantidad = 0
-    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
         Set IT = lw1.ListItems.Add()
         If lw1.ColumnHeaders(1).Tag <> "" Then
-            IT.Text = Format(Rs.Fields(0), lw1.ColumnHeaders(1).Tag)
+            IT.Text = Format(RS.Fields(0), lw1.ColumnHeaders(1).Tag)
         Else
-            IT.Text = Rs.Fields(0)
+            IT.Text = RS.Fields(0)
         End If
         'El resto de cmpos
         For NumRegElim = 2 To CInt(RecuperaValor(lw1.Tag, 2))
-            If IsNull(Rs.Fields(NumRegElim - 1)) Then
+            If IsNull(RS.Fields(NumRegElim - 1)) Then
                 IT.SubItems(NumRegElim - 1) = " "
             Else
                 If lw1.ColumnHeaders(NumRegElim).Tag <> "" Then
-                    IT.SubItems(NumRegElim - 1) = Format(Rs.Fields(NumRegElim - 1), lw1.ColumnHeaders(NumRegElim).Tag)
+                    IT.SubItems(NumRegElim - 1) = Format(RS.Fields(NumRegElim - 1), lw1.ColumnHeaders(NumRegElim).Tag)
                 Else
-                    IT.SubItems(NumRegElim - 1) = Rs.Fields(NumRegElim - 1)
+                    IT.SubItems(NumRegElim - 1) = RS.Fields(NumRegElim - 1)
                 End If
             End If
         Next
-        cantidad = cantidad + DBLet(Rs!Cuantos, "N")
+        cantidad = cantidad + DBLet(RS!Cuantos, "N")
         IT.SmallIcon = ElIcono
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     CargaListPedidos = cantidad
 End Function
 

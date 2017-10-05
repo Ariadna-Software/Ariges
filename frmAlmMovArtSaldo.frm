@@ -480,7 +480,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Dim vStock As Currency
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
 '------------------------------------------
 Dim CadClie As String   '|codigo·nombre|
@@ -759,7 +759,7 @@ Dim Documento As String
 
 
             If vParamAplic.NumeroInstalacion = 2 Then
-                If Val(vUsu.AlmacenPorDefecto) <> vParamAplic.AlmacenB Then
+                If Val(vUsu.AlmacenPorDefecto2) <> vParamAplic.AlmacenB Then
                     If lw1.SelectedItem.SubItems(2) = "ALZ" Then
                         Screen.MousePointer = vbDefault
                         Exit Sub
@@ -1123,7 +1123,7 @@ Private Sub BotonBuscar()
         Me.lblIndicador.Caption = "Búsqueda"
         PonerModo 1
         PonerFoco Text1(0)
-        Text1(1).Text = vUsu.AlmacenPorDefecto
+        Text1(1).Text = vUsu.AlmacenPorDefecto2
         Text1(0).BackColor = vbYellow
     Else
         HacerBusqueda
@@ -1179,12 +1179,12 @@ Dim cadB2 As String
         'HERBELCA
         If vUsu.CodigoAgente > 0 Then
             'Es solo un agente. Solo puede ver sus movimientos
-            If vUsu.AlmacenPorDefecto > 0 Then
+            If vUsu.AlmacenPorDefecto2 > 0 Then
                 If cadB <> "" Then cadB = cadB & " AND "
                 If cadSeleccion2 <> "" Then cadSeleccion2 = cadSeleccion2 & " AND "
                     
-                cadB = cadB & " smoval.codalmac = " & vUsu.AlmacenPorDefecto
-                cadSeleccion2 = cadSeleccion2 & " {smoval.codalmac} = " & vUsu.AlmacenPorDefecto
+                cadB = cadB & " smoval.codalmac = " & vUsu.AlmacenPorDefecto2
+                cadSeleccion2 = cadSeleccion2 & " {smoval.codalmac} = " & vUsu.AlmacenPorDefecto2
             End If
         End If
     End If
@@ -1276,26 +1276,26 @@ On Error GoTo EPonerCampos
     Aux = "Select nomalmac,canstock ,stockinv ,fechainv ,horainve from salmac,salmpr where salmac.codAlmac = salmpr.codAlmac "
     Aux = Aux & " AND salmac.codAlmac = " & Data1.Recordset!codAlmac
     Aux = Aux & " AND codartic =" & DBSet(Data1.Recordset!codArtic, "T")
-    Set RS = New ADODB.Recordset
-    RS.Open Aux, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Aux, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Aux = "||||"
     vStock = 0
     Text2(1).Text = ""
-    If Not RS.EOF Then
-        Text2(1).Text = RS!nomalmac
+    If Not Rs.EOF Then
+        Text2(1).Text = Rs!nomalmac
     
         Aux = ""
-        If Not IsNull(RS!FechaINV) Then Aux = Aux & Format(RS!FechaINV, "dd/mm/yyyy")
+        If Not IsNull(Rs!FechaINV) Then Aux = Aux & Format(Rs!FechaINV, "dd/mm/yyyy")
 
         Aux = Aux & "|"
-        If Not IsNull(RS!horainve) Then Aux = Aux & Format(RS!horainve, "hh:mm:ss")
+        If Not IsNull(Rs!horainve) Then Aux = Aux & Format(Rs!horainve, "hh:mm:ss")
         Aux = Aux & "|"
         
-        Aux = Aux & Format(RS!CanStock, FormatoCantidad) & "|"
-        Aux = Aux & Format(DBLet(RS!Stockinv, "N"), FormatoCantidad) & "|"
-        vStock = DBLet(RS!Stockinv, "N")
+        Aux = Aux & Format(Rs!CanStock, FormatoCantidad) & "|"
+        Aux = Aux & Format(DBLet(Rs!Stockinv, "N"), FormatoCantidad) & "|"
+        vStock = DBLet(Rs!Stockinv, "N")
     End If
-    RS.Close
+    Rs.Close
     For i = 1 To 4
         Text1(i + 1).Text = RecuperaValor(Aux, i)
     Next i
@@ -1320,7 +1320,7 @@ On Error GoTo EPonerCampos
     
 EPonerCampos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo Campos", Err.Description
-    Set RS = Nothing
+    Set Rs = Nothing
 End Sub
 
 
@@ -1491,21 +1491,21 @@ Dim IT As ListItem
     
     
     Aux = Aux & " order by Fechamov , horamovi "
-     RS.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+     Rs.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         Set IT = lw1.ListItems.Add()
-        IT.Text = Format(RS!FechaMov, "dd/mm/yyyy")
-        IT.SubItems(1) = Format(RS!horamovi, "hh:mm:ss")
-        IT.SubItems(2) = RS!detamovi
-        IT.SubItems(3) = RS!codigope
+        IT.Text = Format(Rs!FechaMov, "dd/mm/yyyy")
+        IT.SubItems(1) = Format(Rs!horamovi, "hh:mm:ss")
+        IT.SubItems(2) = Rs!detamovi
+        IT.SubItems(3) = Rs!codigope
         
         'If It.SubItems(2) = "ALR" And It.SubItems(3) = "752" Then
         
         'smoval.tipomovi=0,""S""
         '   0: SALIDA
         '   1: ENTRADA
-        cantidad = RS!cantidad
-        If RS!tipomovi = 1 Then
+        cantidad = Rs!cantidad
+        If Rs!tipomovi = 1 Then
             IT.SubItems(5) = Format(cantidad, FormatoCantidad)
             IT.SubItems(6) = " "
             
@@ -1518,20 +1518,20 @@ Dim IT As ListItem
         IT.SubItems(7) = Format(vStock, FormatoCantidad)
         
        ' If Me.chkCargaNombres.Value = 1 Then
-            Aux = PonerNombreCliente(RS!codigope, RS!detamovi)
+            Aux = PonerNombreCliente(Rs!codigope, Rs!detamovi)
             If Aux = "" Then Aux = "Error leyendo desde BD"
             IT.SubItems(4) = Aux
        ' End If
        
        
        
-       IT.Tag = DBLet(RS!document)
-       RS.MoveNext
+       IT.Tag = DBLet(Rs!document)
+       Rs.MoveNext
         
         
     
     Wend
-    RS.Close
+    Rs.Close
     
     'Si es el mismo importe k el stock
     Me.cmdActualizStock.Tag = vStock  'me to el stock aqui

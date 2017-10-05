@@ -3768,7 +3768,7 @@ Dim cad As String
     If Modo = 3 Then
         'Comprobare que este albaran/proveedor NO existe
         'a que es campo clave en scafpc1
-        cad = "numalbar=" & DBSet(Text1(0).Text, "T") & " AND codprove"
+        cad = " year(fechaalb)=" & Year(CDate(Text1(1).Text)) & " AND numalbar=" & DBSet(Text1(0).Text, "T") & " AND codprove"
         cad = DevuelveDesdeBD(conAri, "fechaalb", "scaalp", cad, Text1(4).Text, "N")
         If cad <> "" Then
             cad = Text1(5).Text & vbCrLf & "con fecha " & cad
@@ -4884,7 +4884,7 @@ End Sub
 Private Sub ObtenerPrecioCompra()
 Dim vPrecio As CPreciosCom
 Dim cad As String
-Dim aux2 As String
+Dim Aux2 As String
     On Error GoTo EPrecios
     
     Set vPrecio = New CPreciosCom
@@ -4905,11 +4905,11 @@ Dim aux2 As String
         
             vPrecio.CodigoArtic = txtAux(1).Text
             vPrecio.CodigoProve = Text1(4).Text
-            cad = vPrecio.ObtenerDescuentos2(Text1(1).Text, aux2)
+            cad = vPrecio.ObtenerDescuentos2(Text1(1).Text, Aux2)
             If cad = "" Then cad = "0"
             txtAux(5).Text = cad
-            If aux2 = "" Then aux2 = "0"
-            txtAux(6).Text = aux2
+            If Aux2 = "" Then Aux2 = "0"
+            txtAux(6).Text = Aux2
             
             'txtAux(5).Text = "0"
             'txtAux(6).Text = "0"

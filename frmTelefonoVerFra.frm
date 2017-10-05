@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTelefonoVerFra 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Ver datos prefactura"
@@ -14,6 +14,17 @@ Begin VB.Form frmTelefonoVerFra
    ScaleHeight     =   9180
    ScaleWidth      =   11760
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox Text1 
+      Alignment       =   1  'Right Justify
+      Height          =   285
+      Index           =   6
+      Left            =   2040
+      Locked          =   -1  'True
+      TabIndex        =   20
+      Text            =   "Text2"
+      Top             =   2280
+      Width           =   975
+   End
    Begin MSComDlg.CommonDialog cd1 
       Left            =   3840
       Top             =   720
@@ -67,12 +78,12 @@ Begin VB.Form frmTelefonoVerFra
       Alignment       =   1  'Right Justify
       Height          =   285
       Index           =   5
-      Left            =   2520
+      Left            =   3120
       Locked          =   -1  'True
       TabIndex        =   11
       Text            =   "Text2"
       Top             =   2280
-      Width           =   1095
+      Width           =   975
    End
    Begin VB.CommandButton Command1 
       Cancel          =   -1  'True
@@ -87,12 +98,12 @@ Begin VB.Form frmTelefonoVerFra
       Alignment       =   1  'Right Justify
       Height          =   285
       Index           =   4
-      Left            =   1320
+      Left            =   1080
       Locked          =   -1  'True
       TabIndex        =   8
       Text            =   "Text2"
       Top             =   2280
-      Width           =   975
+      Width           =   855
    End
    Begin MSComctlLib.ListView ListView1 
       Height          =   2415
@@ -133,7 +144,7 @@ Begin VB.Form frmTelefonoVerFra
       TabIndex        =   4
       Text            =   "Text2"
       Top             =   2280
-      Width           =   1095
+      Width           =   855
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
@@ -232,6 +243,15 @@ Begin VB.Form frmTelefonoVerFra
       EndProperty
    End
    Begin VB.Label Label1 
+      Caption         =   "Exento"
+      Height          =   255
+      Index           =   9
+      Left            =   2040
+      TabIndex        =   21
+      Top             =   2040
+      Width           =   975
+   End
+   Begin VB.Label Label1 
       Caption         =   "Nombre"
       Height          =   255
       Index           =   8
@@ -279,25 +299,25 @@ Begin VB.Form frmTelefonoVerFra
       Width           =   1455
    End
    Begin VB.Label Label1 
-      Caption         =   "Total"
+      Caption         =   "TOTAL"
       Height          =   255
       Index           =   5
-      Left            =   2520
+      Left            =   3360
       TabIndex        =   12
       Top             =   2040
-      Width           =   975
+      Width           =   615
    End
    Begin VB.Label Label1 
       Caption         =   "IVA"
       Height          =   255
       Index           =   4
-      Left            =   1320
+      Left            =   1080
       TabIndex        =   9
       Top             =   2040
       Width           =   975
    End
    Begin VB.Label Label1 
-      Caption         =   "Base Imponible"
+      Caption         =   "Imponible"
       Height          =   255
       Index           =   3
       Left            =   120
@@ -345,7 +365,7 @@ Public TieneAlbaranes As Boolean
 
 
 Private UnaVez As Boolean
-Dim Cad As String
+Dim cad As String
 
 
 
@@ -372,23 +392,23 @@ Dim Seleccionados As Integer
             Exit Sub
         End If
         
-        Cad = "|"
+        cad = "|"
         For NumRegElim = 1 To ListView2.ListItems.Count
             If ListView2.ListItems(NumRegElim).Selected Then
-                If InStr(1, Cad, "|" & Me.ListView2.ListItems(NumRegElim).SubItems(2) & "|") = 0 Then Cad = Cad & ListView2.ListItems(NumRegElim).SubItems(2) & "|"
+                If InStr(1, cad, "|" & Me.ListView2.ListItems(NumRegElim).SubItems(2) & "|") = 0 Then cad = cad & ListView2.ListItems(NumRegElim).SubItems(2) & "|"
             End If
         Next
         'Ya tengo los distintos conceptos
         'AAhora busco
-        Cad = Mid(Cad, 2) 'quito el primer pipe
+        cad = Mid(cad, 2) 'quito el primer pipe
         CadenaDesdeOtroForm = ""
         Do
-            davidNumalbar = InStr(1, Cad, "|")
+            davidNumalbar = InStr(1, cad, "|")
             If davidNumalbar = 0 Then
-                Cad = ""
+                cad = ""
             Else
-                pPdfRpt = Mid(Cad, 1, davidNumalbar - 1)
-                Cad = Mid(Cad, davidNumalbar + 1)
+                pPdfRpt = Mid(cad, 1, davidNumalbar - 1)
+                cad = Mid(cad, davidNumalbar + 1)
                 pImprimeDirecto = True
                 SumaCantidad = 0
                 SumaImporte = 0
@@ -409,7 +429,7 @@ Dim Seleccionados As Integer
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & vbCrLf & Format(davidNumalbar, "000") & "      Cantidad:    " & Format(SumaCantidad, FormatoCantidad)
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & "         Importe:     " & Format(SumaImporte, FormatoPrecio) & vbCrLf
             End If
-        Loop Until Cad = ""
+        Loop Until cad = ""
         pPdfRpt = "": pImprimeDirecto = False: davidNumalbar = 0
         CadenaDesdeOtroForm = "Resumen datos seleccionados (" & Seleccionados & ") " & vbCrLf & CadenaDesdeOtroForm
         MsgBox CadenaDesdeOtroForm, vbInformation
@@ -420,7 +440,7 @@ End Sub
 
 
 Private Sub Form_Activate()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
     
     If UnaVez Then
         UnaVez = False
@@ -440,46 +460,47 @@ End Sub
 Private Sub CargarDatos()
 
 
-Dim It As ListItem
+Dim IT As ListItem
 
     Set miRsAux = New ADODB.Recordset
     
     'Cabecera
-    Cad = "Select * from tel_cab_factura WHERE  " & RecuperaValor(Where2, 2)
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "Select * from tel_cab_factura WHERE  " & RecuperaValor(Where2, 2)
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'NO PUESER EOF
     Text1(0).Text = miRsAux!Telefono
-         Cad = ""
-         If Not IsNull(miRsAux!apellido1) Then Cad = miRsAux!apellido1
-         If Not IsNull(miRsAux!apellido2) Then Cad = Trim(Cad & " " & miRsAux!apellido2)
-         If Not IsNull(miRsAux!nombre) Then
-             If Cad <> "" Then Cad = Cad & ","
-             Cad = Trim(Cad & " " & Trim(miRsAux!nombre))
+         cad = ""
+         If Not IsNull(miRsAux!apellido1) Then cad = miRsAux!apellido1
+         If Not IsNull(miRsAux!apellido2) Then cad = Trim(cad & " " & miRsAux!apellido2)
+         If Not IsNull(miRsAux!Nombre) Then
+             If cad <> "" Then cad = cad & ","
+             cad = Trim(cad & " " & Trim(miRsAux!Nombre))
          End If
     
-    Text1(1).Text = Cad
+    Text1(1).Text = cad
     Text1(2).Text = miRsAux!Fecha
     Text1(3).Text = Format(miRsAux!BaseImponible, "#,##0.00") ' Cuota Total
     Text1(4).Text = Format(miRsAux!Cuota, "#,##0.00") ' Cuota Total
     Text1(5).Text = Format(miRsAux!total, "#,##0.00") ' Cuota Total
-    
+    Text1(6).Text = ""
+    If DBLet(miRsAux!base_exenta, "N") <> 0 Then Text1(6).Text = Format(miRsAux!base_exenta, "#,##0.00") ' Cuota Total
     
     If vParamAplic.TieneTelefonia2 = 3 Then
-        Cad = FormatoPrecio
+        cad = FormatoPrecio
     Else
-        Cad = FormatoImporte
+        cad = FormatoImporte
     End If
-    CargaLwTelefonia Me.ListView1, miRsAux!serie, miRsAux!Ano, miRsAux!NumFact, Cad
+    CargaLwTelefonia Me.ListView1, miRsAux!Serie, miRsAux!Ano, miRsAux!NumFact, cad
     
     miRsAux.Close
     
      Label1(8).Caption = ""
     If TieneAlbaranes Then
-        Cad = "Select nomclien,scaalb.numalbar,codartic,nomartic,importel from scaalb left join slialb on scaalb.codtipom=slialb.codtipom"
-        Cad = Cad & " AND scaalb.numalbar = slialb.numalbar "
-        Cad = Cad & " WHERE referenc = '" & Text1(0).Text & "' AND factursn=1"
+        cad = "Select nomclien,scaalb.numalbar,codartic,nomartic,importel from scaalb left join slialb on scaalb.codtipom=slialb.codtipom"
+        cad = cad & " AND scaalb.numalbar = slialb.numalbar "
+        cad = cad & " WHERE referenc = '" & Text1(0).Text & "' AND factursn=1"
         
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If miRsAux.EOF Then
             MsgBox "Albaranes NO encotrados", vbExclamation
         Else
@@ -491,8 +512,8 @@ Dim It As ListItem
                 Text1(1).ForeColor = vbBlack
             End If
             While Not miRsAux.EOF
-                Cad = "** " & Format(miRsAux!NumAlbar, "0000") & " - " & miRsAux!NomArtic & "(" & miRsAux!codArtic & ")"
-                ListView1.ListItems.Add , , Cad
+                cad = "** " & Format(miRsAux!NumAlbar, "0000") & " - " & miRsAux!NomArtic & "(" & miRsAux!codArtic & ")"
+                ListView1.ListItems.Add , , cad
                 ListView1.ListItems(ListView1.ListItems.Count).SubItems(1) = Format(miRsAux!ImporteL, "#,##0.00")
                 ListView1.ListItems(ListView1.ListItems.Count).ForeColor = vbBlue
                 ListView1.ListItems(ListView1.ListItems.Count).ListSubItems(1).ForeColor = vbBlue
@@ -513,27 +534,27 @@ End Sub
 
 
 
-Private Sub DetalleLlamada(orden As Byte)
+Private Sub DetalleLlamada(Orden As Byte)
 
     'Detalle llamada
-    If ListView2.Tag = orden Then Exit Sub
+    If ListView2.Tag = Orden Then Exit Sub
     
     Me.ListView2.ListItems.Clear
-    ListView2.Tag = orden
+    ListView2.Tag = Orden
     'Cad = "select Numero_llamado,Fecha,Hora_inicio,Unidad_de_medida,Codigo_de_trafico,"
-    Cad = "SELECT Numero_llamado,Fecha,Codigo_de_trafico, Tipo_de_trafico,Cantidad_medida_originada,"
-    Cad = Cad & " Unidad_de_medida,Importe,Hora_inicio from telefono.detalle_de_llamadas"
-    Cad = Cad & " where fichero='" & Where2 & "' and   Numero_de_telefono='" & Text1(0).Text & "' and fecha<>'0000'"
+    cad = "SELECT Numero_llamado,Fecha,Codigo_de_trafico, Tipo_de_trafico,Cantidad_medida_originada,"
+    cad = cad & " Unidad_de_medida,Importe,Hora_inicio from telefono.detalle_de_llamadas"
+    cad = cad & " where fichero='" & Where2 & "' and   Numero_de_telefono='" & Text1(0).Text & "' and fecha<>'0000'"
     'Cad = Cad & " ORDER BY fecha,Hora_inicio"
-    Cad = Cad & " ORDER BY " & orden + 1
-    If orden <> 1 Then
-        Cad = Cad & ",2,8"
+    cad = cad & " ORDER BY " & Orden + 1
+    If Orden <> 1 Then
+        cad = cad & ",2,8"
     Else
-        Cad = Cad & ",8"
+        cad = cad & ",8"
     End If
     Set miRsAux = Nothing
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
         While Not miRsAux.EOF
             'Cad = "** " & Format(miRsAux!NumAlbar, "0000") & " - " & miRsAux!NomArtic & "(" & miRsAux!codArtic & ")"
@@ -571,20 +592,20 @@ Dim NF As Integer
         Open App.Path & "\docum.csv" For Output As #NF
         
         'Cabecera
-        Cad = ""
+        cad = ""
         For NumRegElim = 1 To ListView2.ColumnHeaders.Count
-            Cad = Cad & ";""" & ListView2.ColumnHeaders(NumRegElim).Text & """"
+            cad = cad & ";""" & ListView2.ColumnHeaders(NumRegElim).Text & """"
         Next NumRegElim
-        Print #NF, Mid(Cad, 2)
+        Print #NF, Mid(cad, 2)
     
     
         'Lineas
         For NumRegElim = 1 To ListView2.ListItems.Count
-            Cad = """" & Trim(ListView2.ListItems(NumRegElim)) & """"
+            cad = """" & Trim(ListView2.ListItems(NumRegElim)) & """"
             For davidNumalbar = 1 To ListView2.ColumnHeaders.Count - 1
-                Cad = Cad & ";""" & Trim(ListView2.ListItems(NumRegElim).SubItems(davidNumalbar)) & """"
+                cad = cad & ";""" & Trim(ListView2.ListItems(NumRegElim).SubItems(davidNumalbar)) & """"
             Next davidNumalbar
-            Print #NF, Cad
+            Print #NF, cad
             
             
         Next NumRegElim

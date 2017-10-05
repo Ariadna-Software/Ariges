@@ -16,18 +16,18 @@ Begin VB.Form frmListado3
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
    Begin VB.Frame FrameCostesEuler 
-      Height          =   2895
-      Left            =   3360
+      Height          =   1575
+      Left            =   0
       TabIndex        =   1275
-      Top             =   480
+      Top             =   360
       Visible         =   0   'False
-      Width           =   6975
+      Width           =   11415
       Begin VB.CommandButton cmdCostesAlbEueler 
          Caption         =   "&Aceptar"
          Height          =   375
-         Left            =   4320
+         Left            =   8520
          TabIndex        =   1280
-         Top             =   2280
+         Top             =   960
          Width           =   975
       End
       Begin VB.TextBox txtDecimal 
@@ -36,28 +36,28 @@ Begin VB.Form frmListado3
          Enabled         =   0   'False
          Height          =   285
          Index           =   21
-         Left            =   3720
-         TabIndex        =   1288
+         Left            =   9600
+         TabIndex        =   1287
          Text            =   "Text3"
-         Top             =   1800
+         Top             =   480
          Width           =   1455
       End
       Begin VB.TextBox txtDecimal 
          Height          =   285
          Index           =   20
-         Left            =   1920
+         Left            =   8040
          TabIndex        =   1279
          Text            =   "Text3"
-         Top             =   1800
+         Top             =   480
          Width           =   1455
       End
       Begin VB.TextBox txtDecimal 
          Height          =   285
          Index           =   19
-         Left            =   240
+         Left            =   6720
          TabIndex        =   1278
          Text            =   "Text3"
-         Top             =   1800
+         Top             =   480
          Width           =   1215
       End
       Begin VB.TextBox txtFecha 
@@ -66,7 +66,7 @@ Begin VB.Form frmListado3
          Left            =   240
          TabIndex        =   1276
          Text            =   "Text1"
-         Top             =   1080
+         Top             =   480
          Width           =   1215
       End
       Begin VB.TextBox txtDescArticulo 
@@ -75,9 +75,9 @@ Begin VB.Form frmListado3
          Index           =   18
          Left            =   3000
          Locked          =   -1  'True
-         TabIndex        =   1283
+         TabIndex        =   1282
          Text            =   "Text5"
-         Top             =   1080
+         Top             =   480
          Width           =   3615
       End
       Begin VB.TextBox txtArticulo 
@@ -86,17 +86,38 @@ Begin VB.Form frmListado3
          Left            =   1560
          MaxLength       =   16
          TabIndex        =   1277
-         Top             =   1080
+         Top             =   480
          Width           =   1455
       End
       Begin VB.CommandButton cmdCancelar 
          Caption         =   "&Cancelar"
          Height          =   375
          Index           =   67
-         Left            =   5520
+         Left            =   9960
          TabIndex        =   1281
-         Top             =   2280
+         Top             =   960
          Width           =   1095
+      End
+      Begin VB.Label lblTitulo 
+         Alignment       =   2  'Center
+         Caption         =   "Costes albarán"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   13.5
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   480
+         Index           =   59
+         Left            =   2040
+         TabIndex        =   1290
+         Top             =   840
+         Visible         =   0   'False
+         Width           =   4125
       End
       Begin VB.Label lblDpto 
          AutoSize        =   -1  'True
@@ -114,8 +135,8 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   96
          Left            =   240
-         TabIndex        =   1290
-         Top             =   2400
+         TabIndex        =   1289
+         Top             =   840
          Visible         =   0   'False
          Width           =   1080
       End
@@ -134,9 +155,9 @@ Begin VB.Form frmListado3
          ForeColor       =   &H00000000&
          Height          =   195
          Index           =   244
-         Left            =   3720
-         TabIndex        =   1289
-         Top             =   1560
+         Left            =   10200
+         TabIndex        =   1288
+         Top             =   240
          Width           =   570
       End
       Begin VB.Label Label4 
@@ -154,9 +175,9 @@ Begin VB.Form frmListado3
          ForeColor       =   &H00000000&
          Height          =   195
          Index           =   243
-         Left            =   1920
-         TabIndex        =   1287
-         Top             =   1560
+         Left            =   8400
+         TabIndex        =   1286
+         Top             =   240
          Width           =   435
       End
       Begin VB.Label Label4 
@@ -174,9 +195,9 @@ Begin VB.Form frmListado3
          ForeColor       =   &H00000000&
          Height          =   195
          Index           =   242
-         Left            =   240
-         TabIndex        =   1286
-         Top             =   1560
+         Left            =   6840
+         TabIndex        =   1285
+         Top             =   240
          Width           =   645
       End
       Begin VB.Label Label4 
@@ -195,8 +216,8 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   241
          Left            =   240
-         TabIndex        =   1285
-         Top             =   840
+         TabIndex        =   1284
+         Top             =   240
          Width           =   435
       End
       Begin VB.Image imgFecha 
@@ -204,7 +225,7 @@ Begin VB.Form frmListado3
          Index           =   76
          Left            =   720
          Picture         =   "frmListado3.frx":0000
-         Top             =   840
+         Top             =   240
          Width           =   240
       End
       Begin VB.Label Label3 
@@ -213,8 +234,8 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   100
          Left            =   1560
-         TabIndex        =   1284
-         Top             =   840
+         TabIndex        =   1283
+         Top             =   240
          Width           =   525
       End
       Begin VB.Image imgArticulo 
@@ -222,28 +243,8 @@ Begin VB.Form frmListado3
          Index           =   18
          Left            =   2160
          Picture         =   "frmListado3.frx":008B
-         Top             =   840
-         Width           =   240
-      End
-      Begin VB.Label lblTitulo 
-         Alignment       =   2  'Center
-         Caption         =   "Costes albarán"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   13.5
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   480
-         Index           =   59
-         Left            =   720
-         TabIndex        =   1282
          Top             =   240
-         Width           =   4125
+         Width           =   240
       End
    End
    Begin VB.Frame FrameVtasArticulo 
@@ -18954,7 +18955,7 @@ Attribute frmZ.VB_VarHelpID = -1
 
 'Los reports
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'Cadena con los parametros para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para el frmImprimir
@@ -19131,7 +19132,7 @@ Dim Importe As Currency
     Screen.MousePointer = vbDefault
     Label3(96).Caption = ""
     If NumRegElim > 0 Then
-        CadParam = CadParam & "Detalla=" & Abs(Me.chkVarios(31).Value) & "|"
+        cadParam = cadParam & "Detalla=" & Abs(Me.chkVarios(31).Value) & "|"
         numParam = numParam + 1
         cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
     
@@ -19203,7 +19204,7 @@ End Sub
 Private Sub cmdActFamiliaMarca_Click()
 Dim K As Integer
 
-    CadParam = ""
+    cadParam = ""
     'If Me.txtCodProve(26).Text = "" Or Me.txtDescProve(26) = "" Then CadParam = CadParam & "-Proveedor" & vbCrLf
     'O pone proveedor o familia
     If txtFamia(23).Text = "" And Me.txtCodProve(26).Text = "" Then
@@ -19273,12 +19274,12 @@ Private Sub cmdAgenFamMar_Click()
     If AgenteFamiliaMarca Then
         
         
-        CadParam = CadParam & "Detalla=" & Abs(Me.chkVarios(20).Value) & "|"
+        cadParam = cadParam & "Detalla=" & Abs(Me.chkVarios(20).Value) & "|"
         cadNomRPT = "1"
         If Me.chkVarios(33).visible Then
             If Me.chkVarios(33).Value = 0 Then cadNomRPT = "0"
         End If
-        CadParam = CadParam & "DetallaFam=" & cadNomRPT & "|"
+        cadParam = cadParam & "DetallaFam=" & cadNomRPT & "|"
         
         numParam = numParam + 1
         cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
@@ -19339,7 +19340,7 @@ Private Sub cmdAguaCanonGeneralitat_Click()
         
         InicializarVbles True
                     
-        CadParam = CadParam & "pdh1=""Periódo " & txtFecha(57).Text & " - " & txtFecha(58).Text & """|"
+        cadParam = cadParam & "pdh1=""Periódo " & txtFecha(57).Text & " - " & txtFecha(58).Text & """|"
         numParam = numParam + 1
         cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
         cadNomRPT = "aguFacPeriodo.rpt"
@@ -19618,7 +19619,7 @@ Private Sub cmdAnulados_Click()
             Exit Sub
         End If
     
-        CadParam = CadParam & "pDHFecha=""" & cadNomRPT & """|"
+        cadParam = cadParam & "pDHFecha=""" & cadNomRPT & """|"
         numParam = numParam + 1
 
         
@@ -19701,7 +19702,7 @@ Private Sub cmdArtEnPromo_Click()
         
         miSQL = "pdh1=""Almacén: " & cadPDFrpt & miSQL & """|"
         
-        CadParam = CadParam & miSQL
+        cadParam = cadParam & miSQL
         numParam = numParam + 1
           
         
@@ -19722,15 +19723,15 @@ Private Sub cmdArtEnPromo_Click()
             cadPDFrpt = cadPDFrpt & miSQL
         End If
         
-        CadParam = CadParam & "pdh2=""" & cadPDFrpt & """|"
+        cadParam = cadParam & "pdh2=""" & cadPDFrpt & """|"
         numParam = numParam + 1
             
             
-        CadParam = CadParam & "detalla=" & Abs(Me.chkVarios(0).Value) & "|"
+        cadParam = cadParam & "detalla=" & Abs(Me.chkVarios(0).Value) & "|"
         numParam = numParam + 1
                 
         If Opcion = 5 Then
-            CadParam = CadParam & "DetallaFamilia=" & Abs(Me.chkVarios(28).Value) & "|"
+            cadParam = cadParam & "DetallaFamilia=" & Abs(Me.chkVarios(28).Value) & "|"
             numParam = numParam + 1
         End If
                  
@@ -19888,7 +19889,7 @@ Private Sub cmdArtixFactura_Click()
             cadPDFrpt = cadPDFrpt & miSQL
         End If
         
-        CadParam = CadParam & "pdh1=""" & cadPDFrpt & """|"
+        cadParam = cadParam & "pdh1=""" & cadPDFrpt & """|"
         numParam = numParam + 1
     
         cadPDFrpt = ""
@@ -19916,7 +19917,7 @@ Private Sub cmdArtixFactura_Click()
         End If
     
     
-        CadParam = CadParam & "pdh2=""" & cadPDFrpt & """|"
+        cadParam = cadParam & "pdh2=""" & cadPDFrpt & """|"
         numParam = numParam + 1
         
         
@@ -19963,7 +19964,7 @@ Private Sub cmdArtMasVendidos_Click()
             cadPDFrpt = cadPDFrpt & miSQL
         End If
         
-        CadParam = CadParam & "pdh1=""" & cadPDFrpt & """|"
+        cadParam = cadParam & "pdh1=""" & cadPDFrpt & """|"
         numParam = numParam + 1
         
         If Me.optArtMasVendidos(0).Value Then
@@ -19974,7 +19975,7 @@ Private Sub cmdArtMasVendidos_Click()
             miSQL = "2"
         End If
         miSQL = "{tmpinformes.importe" & miSQL
-        CadParam = CadParam & "Orden=" & miSQL & "}|"
+        cadParam = cadParam & "Orden=" & miSQL & "}|"
         numParam = numParam + 1
         
         
@@ -19986,7 +19987,7 @@ Private Sub cmdArtMasVendidos_Click()
             If Not PonerDesdeHasta(codigo, "PRO", 24, 25, miSQL) Then Exit Sub
             cadPDFrpt = cadPDFrpt & miSQL
         End If
-        CadParam = CadParam & "pdh2=""" & cadPDFrpt & """|"
+        cadParam = cadParam & "pdh2=""" & cadPDFrpt & """|"
         numParam = numParam + 1
 
         Screen.MousePointer = vbHourglass
@@ -20114,7 +20115,7 @@ Private Sub cmdClivaarios_Click()
             codigo = "{sclvar.codpobla} <= """ & txtNumEntero(2).Text & """"
             If Not AnyadirAFormula(cadFormula, codigo) Then Exit Sub
         End If
-        CadParam = CadParam & miSQL & """|"
+        cadParam = cadParam & miSQL & """|"
         numParam = numParam + 1
         
     End If
@@ -20142,7 +20143,7 @@ Private Sub cmdClivaarios_Click()
             codigo = "nifclien"
         End If
         codigo = "{sclvar." & codigo & "}"
-        CadParam = CadParam & "orden2=" & codigo & "|"
+        cadParam = cadParam & "orden2=" & codigo & "|"
         numParam = numParam + 1
     End If
     
@@ -20186,9 +20187,9 @@ Private Sub cmdComisiones_Click()
       
     
     
-    CadParam = CadParam & "pdh1=""" & cadNomRPT & """|"
+    cadParam = cadParam & "pdh1=""" & cadNomRPT & """|"
     numParam = numParam + 1
-    CadParam = CadParam & "Detalla=" & chkVarios(17).Value & "|"
+    cadParam = cadParam & "Detalla=" & chkVarios(17).Value & "|"
     numParam = numParam + 1
     
     Screen.MousePointer = vbHourglass
@@ -20207,7 +20208,7 @@ Private Sub cmdComisiones_Click()
         cadPDFrpt = cadNomRPT
 
         codigo = "{sclvar." & codigo & "}"
-        CadParam = CadParam & "orden2=" & codigo & "|"
+        cadParam = cadParam & "orden2=" & codigo & "|"
         numParam = numParam + 1
     
     
@@ -20415,11 +20416,11 @@ Private Sub cmdDescuentos_Click()
         If cadPDFrpt <> "" Then cadPDFrpt = cadPDFrpt & "              "
         cadPDFrpt = cadPDFrpt & miSQL
     End If
-    CadParam = CadParam & "pdh=""" & cadPDFrpt & """|"
+    cadParam = cadParam & "pdh=""" & cadPDFrpt & """|"
     numParam = numParam + 1
     cadPDFrpt = ""
     
-    CadParam = CadParam & "Particulares=" & chkVarios(2).Value & "|"
+    cadParam = cadParam & "Particulares=" & chkVarios(2).Value & "|"
     numParam = numParam + 1
     
     
@@ -20607,10 +20608,10 @@ Dim UltFecMes As Date
     
     MontaSQLRenting UltFecMes, True
     
-    CadParam = " sclienrenting.codclien=sclien.codclien AND " & miSQL
-    CadParam = DevuelveDesdeBD(conAri, "count(*)", "sclienrenting,sclien", CadParam & " AND 1", "1")
-    If CadParam = "" Then CadParam = "0"
-    If Val(CadParam) = 0 Then
+    cadParam = " sclienrenting.codclien=sclien.codclien AND " & miSQL
+    cadParam = DevuelveDesdeBD(conAri, "count(*)", "sclienrenting,sclien", cadParam & " AND 1", "1")
+    If cadParam = "" Then cadParam = "0"
+    If Val(cadParam) = 0 Then
         MsgBox "No existen datos para facturar", vbExclamation
         Exit Sub
     End If
@@ -20626,10 +20627,10 @@ Dim UltFecMes As Date
         FI = CDate("01/" & Format(FI, "mm/yyyy"))
         MontaSQLRenting FI, False
                         'Mayo, añado el tipo facturacion rentint que dira el tipofac:1men 3:tri 6:sem 12:anual
-        CadParam = "Select sclienrenting.*,nomclien,TipoFraRenting from  sclienrenting,sclien WHERE sclienrenting.codclien=sclien.codclien  " & miSQL
-        CadParam = CadParam & " ORDER BY sclienrenting.codclien,fecalta"
+        cadParam = "Select sclienrenting.*,nomclien,TipoFraRenting from  sclienrenting,sclien WHERE sclienrenting.codclien=sclien.codclien  " & miSQL
+        cadParam = cadParam & " ORDER BY sclienrenting.codclien,fecalta"
         CadenaDesdeOtroForm = "Cliente   Referencia     F.Alta        Ultima" & vbCrLf & String(50, "=") & vbCrLf
-        miRsAux.Open CadParam, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open cadParam, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         NumRegElim = -1
         While Not miRsAux.EOF
             
@@ -20640,8 +20641,8 @@ Dim UltFecMes As Date
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & Format(miRsAux!codClien, "0000") & " " & miRsAux!NomClien & vbCrLf
                 NumRegElim = miRsAux!codClien
             End If
-            CadParam = Mid(miRsAux!Referencia & Space(15), 1, 15)
-            CadenaDesdeOtroForm = CadenaDesdeOtroForm & Space(10) & CadParam & Format(miRsAux!fecalta, "dd/mm/yyyy")
+            cadParam = Mid(miRsAux!Referencia & Space(15), 1, 15)
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & Space(10) & cadParam & Format(miRsAux!fecalta, "dd/mm/yyyy")
             If Not IsNull(miRsAux!ultfec) Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "    " & Format(miRsAux!ultfec, "dd/mm/yyyy")
             CadenaDesdeOtroForm = CadenaDesdeOtroForm & vbCrLf
             miRsAux.MoveNext
@@ -20661,8 +20662,8 @@ Dim UltFecMes As Date
         
         
         'Si llega aqui preguntamos por seguir
-        CadParam = "Seguro que desea facturar Renting y servicios a fecha: " & txtFecha(17).Text & "?"
-        If MsgBox(CadParam, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        cadParam = "Seguro que desea facturar Renting y servicios a fecha: " & txtFecha(17).Text & "?"
+        If MsgBox(cadParam, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     End If
     
     
@@ -20745,7 +20746,7 @@ Dim UltFecMes As Date
         
         miSQL = "Fecha facturación: " & txtFecha(17).Text & """|"
         
-        CadParam = CadParam & "pdh1=""" & Trim(miSQL)
+        cadParam = cadParam & "pdh1=""" & Trim(miSQL)
         numParam = numParam + 1
         
         If txtCliente(10).Text <> "" Or txtCliente(11).Text <> "" Then
@@ -20876,7 +20877,7 @@ Private Sub cmdFlotas_Click()
         
         
         
-        CadParam = CadParam & "pdh=""" & Trim(miSQL) & """|"
+        cadParam = cadParam & "pdh=""" & Trim(miSQL) & """|"
         numParam = numParam + 1
         
 
@@ -21437,7 +21438,7 @@ Private Sub cmdListTelefonos_Click()
             codigo = miSQL & "<= " & DBSet(FI, "F")
             AnyadirAFormula cadSelect, codigo
             
-            CadParam = CadParam & "meses=" & Me.txtNumEntero(3).Text & "|"
+            cadParam = cadParam & "meses=" & Me.txtNumEntero(3).Text & "|"
             numParam = numParam + 1
         
         Else
@@ -21455,10 +21456,10 @@ Private Sub cmdListTelefonos_Click()
         If ListView2(0).Tag <> "" Then cadPDFrpt = Trim(cadPDFrpt & "   " & ListView2(0).Tag)
         
         
-        CadParam = CadParam & "Renovacion=" & chkVarios(16).Value & "|"
+        cadParam = cadParam & "Renovacion=" & chkVarios(16).Value & "|"
         numParam = numParam + 1
         
-        CadParam = CadParam & "pdh1=""" & cadPDFrpt & """|"
+        cadParam = cadParam & "pdh1=""" & cadPDFrpt & """|"
         numParam = numParam + 1
         
         
@@ -21771,15 +21772,15 @@ Dim PorRap2 As Currency
                         '
                     Else
                         codigo = Aux
-                        CadParam = "if(rap2 is null,0,rap2)"
+                        cadParam = "if(rap2 is null,0,rap2)"
                         Aux = "codprove = " & miRsAux!Codprove & " AND codfamia"
-                        Aux = DevuelveDesdeBD(conAri, "if(rap1 is null,0,rap1)", "sdtomp", Aux, CStr(miRsAux!Codfamia), "N", CadParam)
+                        Aux = DevuelveDesdeBD(conAri, "if(rap1 is null,0,rap1)", "sdtomp", Aux, CStr(miRsAux!Codfamia), "N", cadParam)
                         If Aux = "" Then
                             Aux = 0
-                            CadParam = "0"
+                            cadParam = "0"
                         End If
                         PorceRap = CCur(Aux)
-                        PorRap2 = CCur(CadParam)
+                        PorRap2 = CCur(cadParam)
                     End If
     
     
@@ -21977,7 +21978,7 @@ Private Sub cmdPrevision_Click()
         InicializarVbles True
         PasaVariablesReport
         cadFormula = "{tmpprevision2.codusu} = " & vUsu.codigo
-        CadParam = miSQL
+        cadParam = miSQL
         numParam = NumRegElim
         cadNomRPT = "rPrevision.rpt"
         cadTitulo = "Prevision tesoreria"
@@ -22085,7 +22086,7 @@ Private Sub cmdPuntoVenta_Click()
             If Not PonerDesdeHasta(codigo, "F", 20, 21, miSQL) Then Exit Sub
         End If
          miSQL = miSQL & cadTitulo
-        CadParam = CadParam & "pdh1=""" & Trim(miSQL) & """|"
+        cadParam = cadParam & "pdh1=""" & Trim(miSQL) & """|"
         numParam = numParam + 1
         
 
@@ -22270,6 +22271,14 @@ Dim ArticuloFitoSanitarios As Boolean
         
     Set miRsAux = New ADODB.Recordset
     If HacerActualizacion Then
+    
+        If Opcion = 61 Then
+            InicializarVbles True
+            cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
+            cadTitulo = "Inventario articulo"
+            cadNomRPT = "rAlmInvenArticulo.rpt"
+            LlamarImprimir
+        End If
         conSubRPT = True
         If ArticuloFitoSanitarios Then conSubRPT = ActualizarlosteFito
     
@@ -22333,15 +22342,15 @@ Private Sub CambiarTitular()
     cadTitulo = cadFormula 'Para el LOG
     
     'SOn OBSERVACCIONES EN DOS clientes. El del alta y el de la baja
-    cadSelect = PonerTrabajadorConectado(CadParam)  'Trabajador conectado.Antes de lanzar este form hemos comprobado que exist
-    CadParam = DevuelveDesdeBD(conAri, "codagent", "sagent", "codagent>0 AND 1", "1")  'AGENTE
+    cadSelect = PonerTrabajadorConectado(cadParam)  'Trabajador conectado.Antes de lanzar este form hemos comprobado que exist
+    cadParam = DevuelveDesdeBD(conAri, "codagent", "sagent", "codagent>0 AND 1", "1")  'AGENTE
     
     
     'BAJA
     miSQL = "insert into `scrmacciones` (`usuario`,`fechora`,`codclien`,`agente`,`codtraba`,`estado`,"
     miSQL = miSQL & "`tipo`,`medio`,`observaciones`) VALUES ('" & DevNombreSQL(vUsu.Login) & "','"
     miSQL = miSQL & Format(Now, "yyyy-mm-dd hh:nn:ss") & "',"
-    miSQL = miSQL & NumRegElim & "," & CadParam & "," & cadSelect & ",2,"
+    miSQL = miSQL & NumRegElim & "," & cadParam & "," & cadSelect & ",2,"
     'tipo, medio observaciones
     cadNomRPT = "Cambio titular. BAJA."
     miSQL = miSQL & "3,'Otros'," & DBSet(cadNomRPT & vbCrLf & cadFormula, "T") & ")"
@@ -22351,7 +22360,7 @@ Private Sub CambiarTitular()
     miSQL = "insert into `scrmacciones` (`usuario`,`fechora`,`codclien`,`agente`,`codtraba`,`estado`,"
     miSQL = miSQL & "`tipo`,`medio`,`observaciones`) VALUES ('" & DevNombreSQL(vUsu.Login) & "','"
     miSQL = miSQL & Format(Now, "yyyy-mm-dd hh:nn:ss") & "',"
-    miSQL = miSQL & Me.txtCliente(20).Text & "," & CadParam & "," & cadSelect & ",2,"
+    miSQL = miSQL & Me.txtCliente(20).Text & "," & cadParam & "," & cadSelect & ",2,"
     'tipo, medio observaciones
     cadNomRPT = "Cambio titular. ALTA."
     miSQL = miSQL & "3,'Otros'," & DBSet(cadNomRPT & vbCrLf & cadFormula, "T") & ")"
@@ -22446,12 +22455,12 @@ Private Sub Renovar()
         cadFormula = cadFormula & "   Resto: " & Val(txtVariosBloqueado(4).Text) - Val(txtNumEntero(0).Text)
     End If
     
-    cadSelect = PonerTrabajadorConectado(CadParam)  'Trabajador conectado.Antes de lanzar este form hemos comprobado que exist
-    CadParam = DevuelveDesdeBD(conAri, "codagent", "sagent", "codagent>0 AND 1", "1")  'AGENTE
+    cadSelect = PonerTrabajadorConectado(cadParam)  'Trabajador conectado.Antes de lanzar este form hemos comprobado que exist
+    cadParam = DevuelveDesdeBD(conAri, "codagent", "sagent", "codagent>0 AND 1", "1")  'AGENTE
     miSQL = "insert into `scrmacciones` (`usuario`,`fechora`,`codclien`,`agente`,`codtraba`,`estado`,"
     miSQL = miSQL & "`tipo`,`medio`,`observaciones`) VALUES ('" & DevNombreSQL(vUsu.Login) & "','"
     miSQL = miSQL & Format(txtFecha(44).Text, FormatoFecha) & " " & Format(Now, "hh:mm:ss") & "',"
-    miSQL = miSQL & NumRegElim & "," & CadParam & "," & cadSelect & ",2,"
+    miSQL = miSQL & NumRegElim & "," & cadParam & "," & cadSelect & ",2,"
     'tipo, medio observaciones
     miSQL = miSQL & "3,'Otros'," & DBSet(cadFormula, "T") & ")"
     conn.Execute miSQL
@@ -22502,7 +22511,7 @@ Dim b As Boolean
         Else
             miSQL = miSQL & """|"
         End If
-        CadParam = CadParam & "|codalmac= " & Me.txtAlma(4).Text & "|"
+        cadParam = cadParam & "|codalmac= " & Me.txtAlma(4).Text & "|"
         
         numParam = numParam + 1
         
@@ -22624,7 +22633,7 @@ Dim b As Boolean
         
         'If Me.chkVarios(9).Value Then cadTitulo = cadTitulo & "      (Negativos)"
         
-        CadParam = CadParam & "pdh1=""" & Trim(cadTitulo) & """|"
+        cadParam = cadParam & "pdh1=""" & Trim(cadTitulo) & """|"
         numParam = numParam + 1
         
         
@@ -22644,7 +22653,7 @@ Dim b As Boolean
             If Not PonerDesdeHasta(codigo, "PRO", 20, 21, miSQL) Then Exit Sub
             cadTitulo = cadTitulo & "    " & miSQL
         End If
-        CadParam = CadParam & "pdh2=""" & Trim(cadTitulo) & """|"
+        cadParam = cadParam & "pdh2=""" & Trim(cadTitulo) & """|"
         numParam = numParam + 1
         
         
@@ -22655,17 +22664,17 @@ Dim b As Boolean
             If Not PonerDesdeHasta(codigo, "ART", 13, 14, miSQL) Then Exit Sub
             cadTitulo = cadTitulo & "    " & miSQL
         End If
-        CadParam = CadParam & "pdh3=""" & Trim(cadTitulo) & """|"
+        cadParam = cadParam & "pdh3=""" & Trim(cadTitulo) & """|"
         numParam = numParam + 1
         
         
-        CadParam = CadParam & "QueOpcion="
+        cadParam = cadParam & "QueOpcion="
         If Me.optCtrlStock(0).Value Then
-            CadParam = CadParam & "0|"
+            cadParam = cadParam & "0|"
         ElseIf Me.optCtrlStock(1).Value Then
-            CadParam = CadParam & "1|"
+            cadParam = cadParam & "1|"
         Else
-            CadParam = CadParam & "2|"
+            cadParam = cadParam & "2|"
         End If
         numParam = numParam + 1
         
@@ -22698,7 +22707,7 @@ Private Sub cmdStockMes_Click()
     If chkVarios(3).Value = 1 Then miSQL = miSQL & "   (*)"
     
     miSQL = miSQL & """|"
-    CadParam = CadParam & miSQL
+    cadParam = cadParam & miSQL
     numParam = numParam + 1
     
     If txtCodProve(0).Text <> "" Or txtCodProve(1).Text <> "" Then
@@ -22779,7 +22788,7 @@ Private Sub cmdTelefoniaCuotas_Click()
         
         
         cadPDFrpt = Trim(ListView2(1).Tag & "    " & cadPDFrpt)
-        CadParam = CadParam & "pdh1=""" & cadPDFrpt & """|"
+        cadParam = cadParam & "pdh1=""" & cadPDFrpt & """|"
         numParam = numParam + 1
         
         'Grupo
@@ -22788,7 +22797,7 @@ Private Sub cmdTelefoniaCuotas_Click()
         Else
             codigo = "{sclientfno.IdTelefono}"
         End If
-        CadParam = CadParam & "grupo2=" & codigo & "|"
+        cadParam = cadParam & "grupo2=" & codigo & "|"
         numParam = numParam + 1
         
         Screen.MousePointer = vbHourglass
@@ -22901,7 +22910,7 @@ Private Sub cmdVentasxTipoPrecio_Click()
     If cadPDFrpt = "" Then Exit Sub  'NO deberia pasar
     cadPDFrpt = Replace(cadPDFrpt, "&", "")
     
-    CadParam = CadParam & "pPrecio=""" & UCase(cadPDFrpt) & """|"
+    cadParam = cadParam & "pPrecio=""" & UCase(cadPDFrpt) & """|"
     numParam = numParam + 1
     cadSelect = "slifac.origpre ='" & cadTitulo & "'"
     
@@ -22950,7 +22959,7 @@ Private Sub cmdVentasxTipoPrecio_Click()
     End If
     
     
-    CadParam = CadParam & "pdh1=""" & cadTitulo & """|"
+    cadParam = cadParam & "pdh1=""" & cadTitulo & """|"
     numParam = numParam + 1
 
     
@@ -22979,7 +22988,7 @@ Private Sub cmdVentasxTipoPrecio_Click()
     
     
     
-    CadParam = CadParam & "pdh3=""" & cadTitulo & """|"
+    cadParam = cadParam & "pdh3=""" & cadTitulo & """|"
     numParam = numParam + 1
     
     
@@ -23051,8 +23060,8 @@ Private Sub cmdVtaAgeTraba_Click()
         If Me.chkVarios(21).Value = 1 Then cadTitulo = cadTitulo & "  [PRESU]"
         
         
-        CadParam = CadParam & "pdH1=""" & cadTitulo & """|"
-        CadParam = CadParam & "detalla=" & Abs(Me.chkVarios(25).Value) & "|"
+        cadParam = cadParam & "pdH1=""" & cadTitulo & """|"
+        cadParam = cadParam & "detalla=" & Abs(Me.chkVarios(25).Value) & "|"
         numParam = numParam + 2
         
         cadTitulo = ""
@@ -23079,7 +23088,7 @@ Private Sub cmdVtaAgeTraba_Click()
         If Len(codigo) = Me.ListView1(5).ListItems.Count Then miSQL = "  TODOS"
         miSQL = "Trabajadores:" & Mid(miSQL, 2)
         cadTitulo = Trim(cadTitulo & "    " & miSQL)
-        CadParam = CadParam & "pdH2=""" & cadTitulo & """|"
+        cadParam = cadParam & "pdH2=""" & cadTitulo & """|"
         numParam = numParam + 1
         
         cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
@@ -23114,7 +23123,7 @@ Private Sub cmdVtasCredito_Click()
             If Not PonerDesdeHasta(codigo, "F", 18, 19, miSQL) Then Exit Sub
         End If
          miSQL = miSQL & cadTitulo
-        CadParam = CadParam & "pdh1=""" & Trim(miSQL) & """|"
+        cadParam = cadParam & "pdh1=""" & Trim(miSQL) & """|"
         numParam = numParam + 1
         
 
@@ -23188,7 +23197,7 @@ Dim b As Boolean
             If Not PonerDesdeHasta(codigo, "F", 14, 15, miSQL) Then Exit Sub
         End If
         miSQL = miSQL & cadTitulo
-        CadParam = CadParam & "pdh1=""" & Trim(miSQL) & """|"
+        cadParam = cadParam & "pdh1=""" & Trim(miSQL) & """|"
         numParam = numParam + 1
         
         'Cliente
@@ -23199,7 +23208,7 @@ Dim b As Boolean
             If Not PonerDesdeHasta(codigo, "CLI", 8, 9, miSQL) Then Exit Sub
         End If
             
-        CadParam = CadParam & "pdh2=""" & miSQL & """|"
+        cadParam = cadParam & "pdh2=""" & miSQL & """|"
         numParam = numParam + 1
         
         
@@ -23254,7 +23263,7 @@ Dim b As Boolean
             If Me.ListView1(2).ListItems(NumRegElim).Checked Then miSQL = miSQL & " - " & Me.ListView1(2).ListItems(NumRegElim).Text
         Next
         miSQL = "Trabajadores: " & Mid(miSQL, 3)
-        CadParam = CadParam & "pdh2=""" & miSQL & """|"
+        cadParam = cadParam & "pdh2=""" & miSQL & """|"
         numParam = numParam + 1
         
         cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
@@ -23800,6 +23809,7 @@ Dim W As Integer
     Case 67
         Caption = "Datos costes"
         PonerFrameVisible FrameCostesEuler, H, W
+        Me.BorderStyle = 0
         lblDpto(96).visible = OtrosDatos <> ""
         If OtrosDatos <> "" Then
             txtFecha(76).Text = RecuperaValor(OtrosDatos, 1)
@@ -23971,7 +23981,8 @@ Private Sub imgArticulo_Click(Index As Integer)
         PonerFoco txtArticulo(Index)
         If Index = 0 Then cargarUltimoIventario
         If Index = 8 Then CargaPrecioCompraProve
-        If Index = 6 Then CargaPrecioCosteArticulo
+        If Index = 6 Then CargaPrecioCosteArticulo CByte(Index)
+        If Index = 18 Then CargaPrecioCosteArticulo CByte(Index)
     End If
 End Sub
 
@@ -25821,7 +25832,8 @@ Dim T As String
     codigo = ""
     If Index = 0 Then cargarUltimoIventario
     If Index = 5 Then CargaPrecioCompraProve
-    If Index = 6 Then CargaPrecioCosteArticulo
+    If Index = 6 Then CargaPrecioCosteArticulo CByte(Index)
+    If Index = 18 Then CargaPrecioCosteArticulo CByte(Index)
 End Sub
 
 
@@ -25929,7 +25941,7 @@ Dim ImporteUd As Currency
 Dim CuantoHabia As Currency
 Dim FechaInventario As Date
 Dim b As Boolean
-
+    
 
     On Error GoTo EHacerActualizacion
     HacerActualizacion = False
@@ -25972,7 +25984,21 @@ Dim b As Boolean
             CuantoHabia = DBLet(miRsAux!CanStock, "N")
         End If
     Else
+        'Impresion
+        conn.Execute "DELETE FROM tmpInformes where codusu = " & vUsu.codigo
         Fecha_ = Now
+        
+        cadFormula = "preciouc"
+        cadNomRPT = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", miRsAux!codArtic, "T", cadFormula)
+        If cadFormula = "" Then cadFormula = "0"
+        cadNomRPT = vUsu.codigo & "," & miRsAux!codAlmac & "," & DBSet(miRsAux!codArtic, "T") & "," & DBSet(cadNomRPT, "T") & ","
+        cadNomRPT = "INSERT INTO tmpinformes(codusu,codigo1,nombre1,nombre2,importe1,importe2,importeb1,importeb2,fecha1,nombre3) VALUES (" & cadNomRPT
+        cadNomRPT = cadNomRPT & DBSet(DBLet(miRsAux!CanStock, "N"), "N") & "," & DBSet(txtcantidad(0).Text, "N") & "," & DBSet(cadFormula, "N") & ","
+        CuantoHabia = ImporteFormateado(txtcantidad(0).Text) * CCur(cadFormula)
+        cadNomRPT = cadNomRPT & DBSet(CuantoHabia, "N") & "," & DBSet(Fecha_, "F") & "," & DBSet(txtDescAlma(0).Text, "T") & ")"
+        conn.Execute cadNomRPT
+        
+        
         'Cojo la de movimientos
         CuantoHabia = DBLet(miRsAux!CanStock, "N")
     End If
@@ -26486,7 +26512,7 @@ End Function
 Private Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     cadFormula = ""
     cadSelect = ""
-    CadParam = "|"
+    cadParam = "|"
     numParam = 0
     cadTitulo = ""
     cadNomRPT = ""
@@ -26496,7 +26522,7 @@ Private Sub InicializarVbles(AñadireElDeEmpresa As Boolean)
     vMostrarTree = False
     
     If AñadireElDeEmpresa Then
-        CadParam = CadParam & "pEmpresa=""" & vEmpresa.nomempre & """|"
+        cadParam = cadParam & "pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
     End If
     
@@ -26505,7 +26531,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
 
         .SoloImprimir = False
@@ -26689,7 +26715,7 @@ Dim DesH As TextBox '    "       HASTA
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            CadParam = CadParam & AnyadirParametroDH(param, TDes, THas, DesD, DesH) & """|"
+            cadParam = cadParam & AnyadirParametroDH(param, TDes, THas, DesD, DesH) & """|"
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -27380,14 +27406,14 @@ Dim i As Integer
             i = InStr(1, miRsAux!Descripcion, "culo ")
             If i > 0 Then
                 cadSelect = Mid(miRsAux!Descripcion, 1, i + 4)
-                CadParam = Mid(miRsAux!Descripcion, i + 5)
-                i = InStr(1, CadParam, vbCrLf)
+                cadParam = Mid(miRsAux!Descripcion, i + 5)
+                i = InStr(1, cadParam, vbCrLf)
                 If i > 0 Then
-                    OtrosDatos = Mid(CadParam, 1, i - 1)
+                    OtrosDatos = Mid(cadParam, 1, i - 1)
                     cadSelect = cadSelect & OtrosDatos 'voy concatenando para luego devolver los textos
                     OtrosDatos = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", OtrosDatos, "T")
                     If OtrosDatos <> "" Then cadSelect = cadSelect & vbCrLf & " [" & OtrosDatos & "]"
-                    cadSelect = cadSelect & Mid(CadParam, i)
+                    cadSelect = cadSelect & Mid(cadParam, i)
                 Else
                    '
                 End If
@@ -27504,7 +27530,7 @@ Dim Cuantos As Integer
     miSQL = Trim(codigo & "   " & miSQL)
     
     miSQL = "pdh1=""" & miSQL & """|"
-    CadParam = CadParam & miSQL
+    cadParam = cadParam & miSQL
     numParam = numParam + 1
         
     'Desde hasta 1
@@ -27528,7 +27554,7 @@ Dim Cuantos As Integer
     Next
     miSQL = "Acc: " & Mid(miSQL, 2)
     miSQL = "pdh2=""" & miSQL & """|"
-    CadParam = CadParam & miSQL
+    cadParam = cadParam & miSQL
     numParam = numParam + 1
         
     cadTitulo = "Listado LOG "
@@ -27728,11 +27754,13 @@ Ecargaprov:
     
 End Sub
 
-Private Sub CargaPrecioCosteArticulo()
+Private Sub CargaPrecioCosteArticulo(QueIndice As Byte)
 Dim C As String
-    C = DevuelveDesdeBD(conAri, "preciouc", "sartic", "codartic", txtArticulo(6).Text, "T")
+
+    
+    C = DevuelveDesdeBD(conAri, "preciouc", "sartic", "codartic", txtArticulo(QueIndice).Text, "T")
     If C = "" Then C = "0"
-    txtDecimal(0).Text = Format(C, FormatoPrecio)
+    txtDecimal(IIf(QueIndice = 6, 0, 20)).Text = Format(C, FormatoPrecio)
 End Sub
 
 
@@ -28152,7 +28180,7 @@ Dim IT As ListItem
     'Para cualquiera menos root
     If (vUsu.codigo Mod 1000) > 0 Then
         miSQL = miSQL & " AND codtipom"
-        If Val(vUsu.AlmacenPorDefecto) = vParamAplic.AlmacenB Then
+        If Val(vUsu.AlmacenPorDefecto2) = vParamAplic.AlmacenB Then
             miSQL = miSQL & " = "
         Else
             miSQL = miSQL & "<>"
@@ -28298,7 +28326,7 @@ Dim YaEstaFijadoPrecio As Boolean
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     codArtic = "@DABIZ"
-    CadParam = "INSERT INTO tmpInformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importeb1,importeb2) VALUES "  'LOS ISNERTS
+    cadParam = "INSERT INTO tmpInformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importeb1,importeb2) VALUES "  'LOS ISNERTS
     cadTitulo = ""
     NumRegElim = 0
     cadNomRPT = ""
@@ -28319,7 +28347,7 @@ Dim YaEstaFijadoPrecio As Boolean
                     If Len(cadTitulo) > 3000 Then
                         'INSERTO TMP
                         cadTitulo = Mid(cadTitulo, 2) 'quito la coma
-                        cadTitulo = CadParam & cadTitulo
+                        cadTitulo = cadParam & cadTitulo
                         conn.Execute cadTitulo
                         cadTitulo = ""
                     End If
@@ -28399,7 +28427,7 @@ Dim YaEstaFijadoPrecio As Boolean
         'INSERTO TMP
         If cadTitulo <> "" Then
             cadTitulo = Mid(cadTitulo, 2) 'quito la coma
-            cadTitulo = CadParam & cadTitulo
+            cadTitulo = cadParam & cadTitulo
             conn.Execute cadTitulo
         End If
     End If
@@ -28456,7 +28484,7 @@ Dim Aux As Currency
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
-    CadParam = "INSERT INTO tmpInformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importeb1,importeb2) VALUES "  'LOS ISNERTS
+    cadParam = "INSERT INTO tmpInformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importeb1,importeb2) VALUES "  'LOS ISNERTS
     cadTitulo = ""
     NumRegElim = 0
     cadNomRPT = ""
@@ -28483,7 +28511,7 @@ Dim Aux As Currency
                 If Len(cadTitulo) > 3000 Then
                     'INSERTO TMP
                     cadTitulo = Mid(cadTitulo, 2) 'quito la coma
-                    cadTitulo = CadParam & cadTitulo
+                    cadTitulo = cadParam & cadTitulo
                     conn.Execute cadTitulo
                     cadTitulo = ""
                 End If
@@ -28499,7 +28527,7 @@ Dim Aux As Currency
    
     If cadTitulo <> "" Then
         cadTitulo = Mid(cadTitulo, 2) 'quito la coma
-        cadTitulo = CadParam & cadTitulo
+        cadTitulo = cadParam & cadTitulo
         conn.Execute cadTitulo
     End If
 
@@ -28668,11 +28696,11 @@ Dim i As Integer
         Label3(48).Caption = RecuperaValor(codigo, 2)
         Label3(48).Refresh
         
-        CadParam = RecuperaValor(codigo, 1)
+        cadParam = RecuperaValor(codigo, 1)
         codigo = "select totalfac,sforpa.* from scafac,sforpa where scafac.codforpa=sforpa.codforpa"
-        codigo = codigo & " AND codclien =" & CadParam & " AND " & miSQL & " GROUP BY 1"
+        codigo = codigo & " AND codclien =" & cadParam & " AND " & miSQL & " GROUP BY 1"
         
-        CadParam = ""
+        cadParam = ""
         miRsAux.Open codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
 
@@ -28680,31 +28708,31 @@ Dim i As Integer
             If miRsAux!numerove = 1 Then
                 'UN unico vencimiento
                 'Todo el importe va a la linea
-                CadParam = CadParam & ", (" & vUsu.codigo & "," & RecuperaValor(CCl.item(NumRegElim), 1)
-                CadParam = CadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 2), "T")
-                CadParam = CadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 3), "T") 'poblacion
+                cadParam = cadParam & ", (" & vUsu.codigo & "," & RecuperaValor(CCl.item(NumRegElim), 1)
+                cadParam = cadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 2), "T")
+                cadParam = cadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 3), "T") 'poblacion
                 'codpostal,nif
-                CadParam = CadParam & "," & RecuperaValor(CCl.item(NumRegElim), 4) & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 5), "T")
-                CadParam = CadParam & "," & miRsAux!primerve & "," & DBSet(miRsAux!TotalFac, "N") & ")"
+                cadParam = cadParam & "," & RecuperaValor(CCl.item(NumRegElim), 4) & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 5), "T")
+                cadParam = cadParam & "," & miRsAux!primerve & "," & DBSet(miRsAux!TotalFac, "N") & ")"
             Else
                 'MAS DE UN VENCIMIENTO
                 Importe = miRsAux!TotalFac / miRsAux!numerove
                 
                 'Primer vto
                 i = miRsAux!primerve
-                CadParam = CadParam & ", (" & vUsu.codigo & "," & RecuperaValor(CCl.item(NumRegElim), 1)
-                CadParam = CadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 2), "T")
-                CadParam = CadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 3), "T") 'poblacion
-                CadParam = CadParam & "," & RecuperaValor(CCl.item(NumRegElim), 4) & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 5), "T")
-                CadParam = CadParam & "," & i & "," & DBSet(Importe, "N") & ")"
+                cadParam = cadParam & ", (" & vUsu.codigo & "," & RecuperaValor(CCl.item(NumRegElim), 1)
+                cadParam = cadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 2), "T")
+                cadParam = cadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 3), "T") 'poblacion
+                cadParam = cadParam & "," & RecuperaValor(CCl.item(NumRegElim), 4) & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 5), "T")
+                cadParam = cadParam & "," & i & "," & DBSet(Importe, "N") & ")"
                 
                 For numParam = 2 To miRsAux!numerove
                     i = i + miRsAux!restoven
-                    CadParam = CadParam & ", (" & vUsu.codigo & "," & RecuperaValor(CCl.item(NumRegElim), 1)
-                    CadParam = CadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 2), "T")
-                    CadParam = CadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 3), "T") 'poblacion
-                    CadParam = CadParam & "," & RecuperaValor(CCl.item(NumRegElim), 4) & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 5), "T")
-                    CadParam = CadParam & "," & i & "," & DBSet(Importe, "N") & ")"
+                    cadParam = cadParam & ", (" & vUsu.codigo & "," & RecuperaValor(CCl.item(NumRegElim), 1)
+                    cadParam = cadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 2), "T")
+                    cadParam = cadParam & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 3), "T") 'poblacion
+                    cadParam = cadParam & "," & RecuperaValor(CCl.item(NumRegElim), 4) & "," & DBSet(RecuperaValor(CCl.item(NumRegElim), 5), "T")
+                    cadParam = cadParam & "," & i & "," & DBSet(Importe, "N") & ")"
 
                 Next numParam
             End If
@@ -28713,10 +28741,10 @@ Dim i As Integer
         miRsAux.Close
         
         'INSERTAMOS
-        CadParam = Mid(CadParam, 2)
+        cadParam = Mid(cadParam, 2)
         
-        CadParam = "INSERT INTO tmpinformes(codusu,codigo1,nombre1,nombre2,campo2,nombre3,campo1,importe1) VALUES " & CadParam
-        conn.Execute CadParam
+        cadParam = "INSERT INTO tmpinformes(codusu,codigo1,nombre1,nombre2,campo2,nombre3,campo1,importe1) VALUES " & cadParam
+        conn.Execute cadParam
     Next NumRegElim
 
     GenerarDatosVentasAcredito = True
@@ -29478,16 +29506,16 @@ Dim LogC As String
     'situacion=-1
     miSQL = "Select * from scomisiones where mesanyo=" & DBSet(FI, "F") & "  and tal_pag=1 ORDER BY codtipom"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    CadParam = "" 'codtipom
+    cadParam = "" 'codtipom
     cadFormula = "" 'tendre el numserie
     i = 0
     LogC = "TAL/PAG   actual" & vbCrLf & String(40, "=") 'para el log
     While Not miRsAux.EOF
         
         
-        If CStr(miRsAux!codtipom) <> CadParam Then
-            CadParam = miRsAux!codtipom
-            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", CadParam, "T")
+        If CStr(miRsAux!codtipom) <> cadParam Then
+            cadParam = miRsAux!codtipom
+            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", cadParam, "T")
         End If
     
     
@@ -29578,15 +29606,15 @@ Dim LogC As String
     miSQL = miSQL & " AND fechavto >=" & DBSet(FI, "F")
     miSQL = miSQL & " ORDER BY codtipom"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    CadParam = "" 'codtipom
+    cadParam = "" 'codtipom
     cadFormula = "" 'tendre el numserie
     i = 0
     While Not miRsAux.EOF
         
         
-        If CStr(miRsAux!codtipom) <> CadParam Then
-            CadParam = miRsAux!codtipom
-            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", CadParam, "T")
+        If CStr(miRsAux!codtipom) <> cadParam Then
+            cadParam = miRsAux!codtipom
+            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", cadParam, "T")
         End If
     
         
@@ -29684,15 +29712,15 @@ Dim LogC As String
     miSQL = "select * from scomisiones where tipforpa=0 AND mesanyo=" & DBSet(FI, "F") & " ORDER BY codtipom"
     
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    CadParam = "" 'codtipom
+    cadParam = "" 'codtipom
     cadFormula = "" 'tendre el numserie
     i = 0
     While Not miRsAux.EOF
         
         
-        If CStr(miRsAux!codtipom) <> CadParam Then
-            CadParam = miRsAux!codtipom
-            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", CadParam, "T")
+        If CStr(miRsAux!codtipom) <> cadParam Then
+            cadParam = miRsAux!codtipom
+            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", cadParam, "T")
         End If
     
     
@@ -29729,15 +29757,15 @@ Dim LogC As String
     miSQL = "select * from scomisiones where tipforpa=0 AND mesanyo<" & DBSet(FI, "F")
     miSQL = miSQL & " AND mod(situacion,2)=1 " & " ORDER BY codtipom"  '
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    CadParam = "" 'codtipom
+    cadParam = "" 'codtipom
     cadFormula = "" 'tendre el numserie
     i = 0
     While Not miRsAux.EOF
         '
         
-        If CStr(miRsAux!codtipom) <> CadParam Then
-            CadParam = miRsAux!codtipom
-            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", CadParam, "T")
+        If CStr(miRsAux!codtipom) <> cadParam Then
+            cadParam = miRsAux!codtipom
+            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", cadParam, "T")
         End If
     
     
@@ -29787,7 +29815,7 @@ Dim LogC As String
     miRsAux.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'cadFormula  cadParam
-    CadParam = "" 'tendre LA LETRA
+    cadParam = "" 'tendre LA LETRA
     cadFormula = "" 'tendre el codtipom
     
     i = 0
@@ -29796,9 +29824,9 @@ Dim LogC As String
         Label3(57).Caption = i & " de " & NumRegElim
         Label3(57).Refresh
         
-        If CStr(miRsAux!numSerie) <> CadParam Then
-            CadParam = miRsAux!numSerie
-            cadFormula = DevuelveDesdeBD(conAri, "codtipom", "stipom", "letraser", CadParam, "T")
+        If CStr(miRsAux!numSerie) <> cadParam Then
+            cadParam = miRsAux!numSerie
+            cadFormula = DevuelveDesdeBD(conAri, "codtipom", "stipom", "letraser", cadParam, "T")
         End If
         'Comprobaremos si la situacion  no es devuelta
         miSQL = "Select * from scomisiones where codtipom='" & cadFormula & "' AND numfactu=" & miRsAux!Codfaccl
@@ -29847,7 +29875,7 @@ Dim LogC As String
     miSQL = "Select * " & miSQL
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'cadFormula  cadParam
-    CadParam = "" 'codtipom
+    cadParam = "" 'codtipom
     cadFormula = "" 'tendre el numserie
     i = 0
     While Not miRsAux.EOF
@@ -29855,9 +29883,9 @@ Dim LogC As String
         Label3(57).Caption = i & " de " & NumRegElim
         Label3(57).Refresh
         
-        If CStr(miRsAux!codtipom) <> CadParam Then
-            CadParam = miRsAux!codtipom
-            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", CadParam, "T")
+        If CStr(miRsAux!codtipom) <> cadParam Then
+            cadParam = miRsAux!codtipom
+            cadFormula = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", cadParam, "T")
         End If
     
     
@@ -30201,11 +30229,11 @@ eGeneraComisionesMes:
 End Function
 
 'Llevara un RS en lazando a la tabla comisiones
-Private Function AñadeEnComisionesCodclienNomclien(ByRef Rs As ADODB.Recordset) As String
+Private Function AñadeEnComisionesCodclienNomclien(ByRef RS As ADODB.Recordset) As String
 Dim RB As ADODB.Recordset
 Dim Aux As String
 
-    Aux = "scafac.codtipom = " & DBSet(Rs!codtipom, "T") & " AND scafac.fecfactu = " & DBSet(Rs!FecFactu, "F") & " AND scafac.numfactu=" & Rs!Numfactu
+    Aux = "scafac.codtipom = " & DBSet(RS!codtipom, "T") & " AND scafac.fecfactu = " & DBSet(RS!FecFactu, "F") & " AND scafac.numfactu=" & RS!Numfactu
     'Agosto 2012
     'Añadimos la fecha de vto
     Aux = "scafac.codtipom=svenci.codtipom   and scafac.numfactu=svenci.numfactu and scafac.fecfactu =svenci.fecfactu WHERE " & Aux
@@ -30328,18 +30356,18 @@ Dim C As Collection
     
     
      
-    CadParam = "UPDATE sdtomp SET dtoline1=" & DBSet(Me.txtDecimal(5).Text, "N", "N")
-    CadParam = CadParam & ", dtoline2=" & DBSet(Me.txtDecimal(6).Text, "N", "S")
-    CadParam = CadParam & ", rap1=" & DBSet(Me.txtDecimal(7).Text, "N", "S")
-    CadParam = CadParam & ", Rap2=" & DBSet(Me.txtDecimal(8).Text, "N", "S")
-    CadParam = CadParam & ", fechadto=" & DBSet(Me.txtFecha(29).Text, "F")
-    CadParam = CadParam & " WHERE codfamia = " & txtFamia(16).Text & " AND codmarca "
+    cadParam = "UPDATE sdtomp SET dtoline1=" & DBSet(Me.txtDecimal(5).Text, "N", "N")
+    cadParam = cadParam & ", dtoline2=" & DBSet(Me.txtDecimal(6).Text, "N", "S")
+    cadParam = cadParam & ", rap1=" & DBSet(Me.txtDecimal(7).Text, "N", "S")
+    cadParam = cadParam & ", Rap2=" & DBSet(Me.txtDecimal(8).Text, "N", "S")
+    cadParam = cadParam & ", fechadto=" & DBSet(Me.txtFecha(29).Text, "F")
+    cadParam = cadParam & " WHERE codfamia = " & txtFamia(16).Text & " AND codmarca "
     If txtmarca(0).Text = "" Then
-        CadParam = CadParam & " is null"
+        cadParam = cadParam & " is null"
     Else
-        CadParam = CadParam & " = " & txtmarca(0).Text
+        cadParam = cadParam & " = " & txtmarca(0).Text
     End If
-    CadParam = CadParam & " AND codprove = "
+    cadParam = cadParam & " AND codprove = "
     
     
     'Para el select de la dtopm
@@ -30363,7 +30391,7 @@ Dim C As Collection
         cadTitulo = ""
         If Not miRsAux.EOF Then
             'Ya existe
-            If Actualizar Then cadTitulo = CadParam & cadNomRPT
+            If Actualizar Then cadTitulo = cadParam & cadNomRPT
                 
         Else
             'No existe. Lo creamos
@@ -30463,8 +30491,8 @@ Dim ColCli As Collection
     NumRegElim = 0
     'Ahora ya tengo para buscar los articulos
     For J = 1 To ColCli.Count
-        CadParam = RecuperaValor(ColCli.item(J), 1)
-        Label3(10).Caption = "Datos: " & CadParam
+        cadParam = RecuperaValor(ColCli.item(J), 1)
+        Label3(10).Caption = "Datos: " & cadParam
         Label3(10).Refresh
     
         miSQL = " select slifac.codartic,CodProve,codfamia,sartic.NomArtic,codclien,nomclien,sum(cantidad) cantid,sum(importel) implin ,codagent from scafac,scafac1,slifac,sartic  WHERE"
@@ -30487,12 +30515,12 @@ Dim ColCli As Collection
         If Me.txtAgente(4).Text <> "" Then miSQL = miSQL & " AND scafac.CODAGENT >= " & Me.txtAgente(4).Text
         If Me.txtAgente(5).Text <> "" Then miSQL = miSQL & " AND scafac.codagent <= " & Me.txtAgente(5).Text
         
-        CadParam = RecuperaValor(ColCli.item(J), 1)
-        miSQL = miSQL & " AND codclien = " & CadParam
+        cadParam = RecuperaValor(ColCli.item(J), 1)
+        miSQL = miSQL & " AND codclien = " & cadParam
         
-        CadParam = RecuperaValor(ColCli.item(J), 2)
-        CadParam = Mid(CadParam, 2)
-        miSQL = miSQL & " AND codfamia IN (" & CadParam & ") GROUP BY 1,2"
+        cadParam = RecuperaValor(ColCli.item(J), 2)
+        cadParam = Mid(cadParam, 2)
+        miSQL = miSQL & " AND codfamia IN (" & cadParam & ") GROUP BY 1,2"
         
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
@@ -30581,12 +30609,12 @@ Dim ColCli As Collection
          Label3(10).Refresh
      
          miSQL = " select codclien,codfamia,dtoline1,dtoline2 FROM sdtofm WHERE dtoesp=1"
-         CadParam = RecuperaValor(ColCli.item(J), 1)
-         miSQL = miSQL & " AND codclien = " & CadParam
+         cadParam = RecuperaValor(ColCli.item(J), 1)
+         miSQL = miSQL & " AND codclien = " & cadParam
          
-         CadParam = RecuperaValor(ColCli.item(J), 2)
-         CadParam = Mid(CadParam, 2)
-         miSQL = miSQL & " AND codfamia IN (" & CadParam & ") "
+         cadParam = RecuperaValor(ColCli.item(J), 2)
+         cadParam = Mid(cadParam, 2)
+         miSQL = miSQL & " AND codfamia IN (" & cadParam & ") "
          
          miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
          While Not miRsAux.EOF
@@ -31255,7 +31283,11 @@ Dim ColArt As Collection
     Me.Label3(60).Refresh
     DoEvents
     conn.Execute "update tmpinformes set porcen2=0 where codusu= " & vUsu.codigo
-    conn.Execute "update tmpinformes set porcen2=1 where codusu= " & vUsu.codigo & " and nombre1 in (select distinct(codartic) from sarti1)"
+    
+    'Agosto 2017
+    'ANTES: misql=select distinct(codartic) from sarti1
+    miSQL = "select distinct sarti1.codartic from sarti1,sartic where sarti1.codartic=sartic.codartic and sartic.conjunto=1"
+    conn.Execute "update tmpinformes set porcen2=1 where codusu= " & vUsu.codigo & " and nombre1 in (" & miSQL & ")"
 
     'ACeleramos el proceso
     'miSQL = "select " & vUsu.Codigo & ",codarti1 from sarti1 where codartic in (select nombre1 from tmpinformes where porcen2>0 and codusu = " & vUsu.Codigo & ") group by codarti1"
@@ -31309,9 +31341,9 @@ Dim ColArt As Collection
         Me.Label3(60).Caption = miRsAux!nomforpa
         Me.Label3(60).Refresh
         'En txtauxiliar de tmpcrclien, grabaraemos 8 posciones para unicajas y 8 para unicajas2
-        CadParam = "concat(right(concat('        ',unicajas),8),right(concat('        ',if(unicajas2 is null,'',unicajas2)),8))"
-        miSQL = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", miRsAux!nomforpa, "T", CadParam)
-        miSQL = "UPDATE tmpcrmclien set nomactiv=" & DBSet(miSQL, "T") & ", auxiliar = '" & CadParam & "'"
+        cadParam = "concat(right(concat('        ',unicajas),8),right(concat('        ',if(unicajas2 is null,'',unicajas2)),8))"
+        miSQL = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", miRsAux!nomforpa, "T", cadParam)
+        miSQL = "UPDATE tmpcrmclien set nomactiv=" & DBSet(miSQL, "T") & ", auxiliar = '" & cadParam & "'"
         miSQL = miSQL & " WHERE codusu = " & vUsu.codigo & " AND nomforpa= " & DBSet(miRsAux!nomforpa, "T")
         conn.Execute miSQL
         
@@ -31329,7 +31361,7 @@ Dim ColArt As Collection
     
     
     cadFormula = ""
-    CadParam = ""
+    cadParam = ""
     
     If NumRegElim > 0 Then
         ReposcionAlmacen2 = True
@@ -32161,7 +32193,7 @@ Dim Impo1 As Currency: Dim Impo2 As Currency: Dim Impo3 As Currency
         If Not PonerDesdeHasta(codigo, "MAR", 1, 2, miSQL) Then Exit Function
         cadNomRPT = Trim(cadNomRPT & "   " & miSQL)
     End If
-    CadParam = CadParam & "pdH2=""" & cadNomRPT & """|"
+    cadParam = cadParam & "pdH2=""" & cadNomRPT & """|"
     numParam = numParam + 1
       
     If txtFamia(21).Text <> "" Or txtFamia(22).Text <> "" Then
@@ -32407,17 +32439,17 @@ Dim Periodo As Byte
     End Select
     
     'Ha superado los periodos del año, cambiamos del año
-    CadParam = "º"
+    cadParam = "º"
     If vMostrarTree Then
         Periodo = 1
         NumRegElim = NumRegElim + 1
-        CadParam = "er"
+        cadParam = "er"
     End If
     'Este campo ira a la observacion 4, indicando el periodo facturado
     
-    Me.TxtNoEscribible(0).Text = "Periodo: " & Periodo & CadParam & " " & cadFormula & " " & NumRegElim
+    Me.TxtNoEscribible(0).Text = "Periodo: " & Periodo & cadParam & " " & cadFormula & " " & NumRegElim
     
-    CadParam = ""
+    cadParam = ""
     PonerDatosFacturacion = True
     miRsAux.Close
     
@@ -32789,7 +32821,7 @@ Dim FBaja As Date
     Label3(84).Caption = "Leyendo valores facturacion"
     Label3(84).Refresh
     
-    CadParam = codigo 'Numero de registros a insertar
+    cadParam = codigo 'Numero de registros a insertar
     cadPDFrpt = PonerTrabajadorConectado(codigo)   'codtraba
     
     
@@ -32875,7 +32907,7 @@ Dim FBaja As Date
     
     miRsAux.Open codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'no puede ser eof
-    CadParam = miRsAux.Fields(0)
+    cadParam = miRsAux.Fields(0)
     miRsAux.Close
     
     codigo = "select aguacontadores.*,aguacalibre.*"
@@ -32894,7 +32926,7 @@ Dim FBaja As Date
         
     
         Label3(84).Tag = Val(Label3(84).Tag) + 1
-        Label3(84).Caption = Label3(84).Tag & " / " & CadParam & " - " & miRsAux!NomClien
+        Label3(84).Caption = Label3(84).Tag & " / " & cadParam & " - " & miRsAux!NomClien
         Label3(84).Refresh
         If (NumRegElim Mod 25) = 0 Then
             DoEvents
@@ -33842,8 +33874,8 @@ Dim Aux As String
             If Val(codigo) = 0 Then codigo = "60"
             
             miSQL = Me.TxtFichero(0) & "      Consumo superior: " & codigo
-            CadParam = CadParam & "pdh1= ""Fichero:    " & miSQL & """|"
-            CadParam = CadParam & "ValorAlerta= " & codigo & "|"
+            cadParam = cadParam & "pdh1= ""Fichero:    " & miSQL & """|"
+            cadParam = cadParam & "ValorAlerta= " & codigo & "|"
             numParam = 2
             
             cadPDFrpt = ""
@@ -33867,11 +33899,11 @@ Dim Aux As String
                 MsgBox "Consumos negativos", vbExclamation
             Else
                 'SI quiere insertar en los contadores....
-                CadParam = String(60, "*")
+                cadParam = String(60, "*")
                 codigo = vbCrLf & vbCrLf & "Va a importar los datos del fichero y actualizar "
                 codigo = codigo & vbCrLf & " los datos de lectura de los contadores"
                 codigo = codigo & vbCrLf & vbCrLf & vbCrLf & "¿Continuar?" & vbCrLf & vbCrLf
-                codigo = CadParam & codigo & CadParam
+                codigo = cadParam & codigo & cadParam
                 If MsgBox(codigo, vbQuestion + vbYesNoCancel + vbDefaultButton3) = vbYes Then
                     
                     Label3(86).Caption = "Actualizando en BD"
@@ -33879,17 +33911,17 @@ Dim Aux As String
                     
                     
                     'OK. Metemos en LOG
-                    CadParam = "select count(*),sum(importe1)-sum(importe2),max(fecha1) from tmpinformes where codusu =" & vUsu.codigo
-                    miRsAux.Open CadParam, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    cadParam = "select count(*),sum(importe1)-sum(importe2),max(fecha1) from tmpinformes where codusu =" & vUsu.codigo
+                    miRsAux.Open cadParam, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     'NO puede ser eof
-                    CadParam = Me.TxtFichero(0).Text
-                    NumRegElim = InStrRev(CadParam, "\")
-                    If NumRegElim > 0 Then CadParam = Mid(CadParam, NumRegElim + 1)
-                    CadParam = "[IMPORTAR FICHERO]  " & CadParam & "  Fec: " & txtFecha(56).Text & vbCrLf
-                    CadParam = CadParam & "Reg: " & miRsAux.Fields(0) & "  Sum cons." & Val(miRsAux.Fields(1)) & "  Fec. ant." & miRsAux.Fields(2)
+                    cadParam = Me.TxtFichero(0).Text
+                    NumRegElim = InStrRev(cadParam, "\")
+                    If NumRegElim > 0 Then cadParam = Mid(cadParam, NumRegElim + 1)
+                    cadParam = "[IMPORTAR FICHERO]  " & cadParam & "  Fec: " & txtFecha(56).Text & vbCrLf
+                    cadParam = cadParam & "Reg: " & miRsAux.Fields(0) & "  Sum cons." & Val(miRsAux.Fields(1)) & "  Fec. ant." & miRsAux.Fields(2)
                     miRsAux.Close
                     Set LOG = New cLOG
-                    LOG.Insertar 29, vUsu, CadParam
+                    LOG.Insertar 29, vUsu, cadParam
                     Set LOG = Nothing
                     
                     
@@ -34137,7 +34169,7 @@ On Error GoTo eListadoAguaEmpresa
     cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
     cadTitulo = "Listado facturacion Aguas"
     
-    CadParam = CadParam & "pdh1= ""Fecha factura:    " & Me.txtFecha(56).Text & """|"
+    cadParam = cadParam & "pdh1= ""Fecha factura:    " & Me.txtFecha(56).Text & """|"
     numParam = 1
     
     cadPDFrpt = ""
@@ -34325,7 +34357,7 @@ Dim ConsumoM3 As Integer
     Label3(84).Caption = "Leyendo valores facturacion"
     Label3(84).Refresh
     
-    CadParam = codigo 'Numero de registros a insertar
+    cadParam = codigo 'Numero de registros a insertar
     cadPDFrpt = 1 'PonerTrabajadorConectado(codigo)    'codtraba
     
     
@@ -34412,7 +34444,7 @@ Dim ConsumoM3 As Integer
     codigo = "Select count(*) from tmpinformes ,aguacontadores where tmpinformes.nombre1=contador and facturar=1 and codusu = " & vUsu.codigo
     miRsAux.Open codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'no puede ser eof
-    CadParam = miRsAux.Fields(0)
+    cadParam = miRsAux.Fields(0)
     miRsAux.Close
     
     codigo = "select importe1 lec_actual,importe2 lec_anterior,fecha_anterior,fecha1 fecha_actual,Contador,TipoFacturacion,TipoUso"
@@ -34430,7 +34462,7 @@ Dim ConsumoM3 As Integer
 
     
         Label3(84).Tag = Val(Label3(84).Tag) + 1
-        Label3(86).Caption = Label3(84).Tag & " / " & CadParam & " - " & miRsAux!NomClien
+        Label3(86).Caption = Label3(84).Tag & " / " & cadParam & " - " & miRsAux!NomClien
         Label3(86).Refresh
         If (NumRegElim Mod 25) = 0 Then
             DoEvents
@@ -34966,7 +34998,7 @@ On Error GoTo eListadoAguaPrefacturar
         
         codigo = codigo & DBSet(cadPDFrpt, "T")
         
-        CadParam = 0
+        cadParam = 0
         'IMporte1 importe 2, suministro base + iva   REDUCIDO
         cadPDFrpt = ",0,0"
         'Importe3, importe 4  instalacion base + iva NORMAL
@@ -35045,7 +35077,7 @@ On Error GoTo eListadoAguaPrefacturar
     cadFormula = "{tmpinformes.codusu} = " & vUsu.codigo
     cadTitulo = "Prefacturacion final fichero consumo agua"
     
-    CadParam = CadParam & "pdh1= ""Fichero: " & TxtFichero(0).Text & """|"
+    cadParam = cadParam & "pdh1= ""Fichero: " & TxtFichero(0).Text & """|"
     numParam = 1
     
     cadPDFrpt = ""
@@ -35121,11 +35153,11 @@ Dim TipoDto As Byte
             'cadFormula-> Dto 2    cadTitulo->importel
             If vPrecio.Leer(miRsAux!codArtic, txtCodProve(29).Text) Then
                 If vPrecio.ComprobarCantidad(miRsAux!cantidad) Then
-                    CadParam = vPrecio.ObtenerPrecio(txtFecha(59).Text)
+                    cadParam = vPrecio.ObtenerPrecio(txtFecha(59).Text)
                     cadSelect = vPrecio.Descuento1
                     cadFormula = vPrecio.Descuento2
                     
-                    cadTitulo = CalcularImporteSng(CStr(miRsAux!cantidad), CadParam, cadSelect, cadFormula, TipoDto)
+                    cadTitulo = CalcularImporteSng(CStr(miRsAux!cantidad), cadParam, cadSelect, cadFormula, TipoDto)
                     
                     vectorSQL(2) = Val(vectorSQL(2)) + 1
                     origenPrecio = 2
@@ -35137,14 +35169,14 @@ Dim TipoDto As Byte
             
             If origenPrecio = 0 Then
             
-                CadParam = DevuelveDesdeBDNew(conAri, "sartic", "preciouc", "codartic", miRsAux!codArtic, "T")
-                If CadParam <> "" Then
+                cadParam = DevuelveDesdeBDNew(conAri, "sartic", "preciouc", "codartic", miRsAux!codArtic, "T")
+                If cadParam <> "" Then
                     'Septiembre 2010   'Descuentos
                     vPrecio.CodigoArtic = miRsAux!codArtic
                     vPrecio.CodigoProve = txtCodProve(29).Text
                     cadSelect = vPrecio.ObtenerDescuentos2(txtFecha(59).Text, cadFormula)
                     If cadSelect <> "" Then
-                        cadTitulo = CalcularImporteSng(CStr(miRsAux!cantidad), CadParam, cadSelect, cadFormula, TipoDto)
+                        cadTitulo = CalcularImporteSng(CStr(miRsAux!cantidad), cadParam, cadSelect, cadFormula, TipoDto)
                         origenPrecio = 1
                         vectorSQL(1) = Val(vectorSQL(1)) + 1
                     End If
@@ -35154,7 +35186,7 @@ Dim TipoDto As Byte
         End If   'De VARIOS
         
         If origenPrecio = 0 Then
-            CadParam = miRsAux!precioar
+            cadParam = miRsAux!precioar
             cadSelect = miRsAux!dtoline1
             cadFormula = miRsAux!dtoline2
             cadTitulo = miRsAux!ImporteL
@@ -35167,7 +35199,7 @@ Dim TipoDto As Byte
         'En codalmac tendremos si ha encontrado en slispr el precio del articulo-proveedor
         cadPDFrpt = ", (" & vUsu.codigo & "," & NumRegElim & "," & miRsAux!numlinea & "," & DBSet(miRsAux!codArtic, "T") & ","
         cadPDFrpt = cadPDFrpt & DBSet(miRsAux!NomArtic, "T") & "," & DBSet(miRsAux!cantidad, "N") & ","
-        cadPDFrpt = cadPDFrpt & DBSet(CadParam, "N") & "," & DBSet(cadSelect, "N") & ","
+        cadPDFrpt = cadPDFrpt & DBSet(cadParam, "N") & "," & DBSet(cadSelect, "N") & ","
         cadPDFrpt = cadPDFrpt & DBSet(cadFormula, "N") & "," & DBSet(cadTitulo, "N") & "," & origenPrecio & ")"
         miSQL = miSQL & cadPDFrpt
         miRsAux.MoveNext
@@ -35196,10 +35228,10 @@ Dim TipoDto As Byte
     
     cadPDFrpt = "0,00"
     miSQL = cadPDFrpt
-    CadParam = vectorSQL(3)
-    If Me.txtDecimal(10).Text <> "" Then miSQL = CalcularPorcentaje(ImporteFormateado(CadParam), ImporteFormateado(txtDecimal(10).Text), 2)
-    If Me.txtDecimal(11).Text <> "" Then cadPDFrpt = CalcularPorcentaje(ImporteFormateado(CadParam), ImporteFormateado(txtDecimal(11).Text), 2)
-    miSQL = CStr(CCur(CadParam) - CCur(miSQL) - CCur(cadPDFrpt))
+    cadParam = vectorSQL(3)
+    If Me.txtDecimal(10).Text <> "" Then miSQL = CalcularPorcentaje(ImporteFormateado(cadParam), ImporteFormateado(txtDecimal(10).Text), 2)
+    If Me.txtDecimal(11).Text <> "" Then cadPDFrpt = CalcularPorcentaje(ImporteFormateado(cadParam), ImporteFormateado(txtDecimal(11).Text), 2)
+    miSQL = CStr(CCur(cadParam) - CCur(miSQL) - CCur(cadPDFrpt))
     Me.txtDecimal(16) = Format(CCur(miSQL), FormatoImporte)
     
 eHacerSimulacionPedidoProveedor:
@@ -35455,7 +35487,7 @@ Private Function ListadoContadoresAgua() As Boolean
  '       Err.Raise 513, , "Seleccione al menos un valor para baja"
  '   End If
     
-    CadParam = CadParam & "DesdeHasta=""" & cadPDFrpt & """|"
+    cadParam = cadParam & "DesdeHasta=""" & cadPDFrpt & """|"
     numParam = numParam + 1
     
     cadPDFrpt = "1=1 " & cadSelect
@@ -35490,14 +35522,14 @@ Dim Trabajador As Long
 
     
 
-    CadParam = "ALV"  'tipo malbaran
+    cadParam = "ALV"  'tipo malbaran
     cadPDFrpt = PonerTrabajadorConectado("")
     If cadPDFrpt = "" Then
         MsgBox "Error trabajador conectado", vbExclamation
         Exit Function
     End If
         
-    miSQL = DevuelveDesdeBD(conAri, "contador", "stipom", "codtipom", CadParam, "T")
+    miSQL = DevuelveDesdeBD(conAri, "contador", "stipom", "codtipom", cadParam, "T")
     NumRegElim = Val(miSQL)    'Contador
     'Agente
     cadSelect = DevuelveDesdeBD(conAri, "codagent", "sagent", "1", "1")
@@ -35509,7 +35541,7 @@ Dim Trabajador As Long
     cadFormula = cadFormula & ",numalbar,codclien,nomclien,domclien,codpobla,pobclien,proclien,"
     cadFormula = cadFormula & "nifclien,telclien,coddirec,nomdirec,referenc,codforpa,dtoppago,dtognral,tipofact"
     cadFormula = cadFormula & ",observa01,observa02,observa03,observa04,observa05,tipAlbaran) VALUES "
-    cadFormula = cadFormula & "(" & miSQL & ",'" & CadParam & "'," & DBSet(txtFecha(62).Text, "F") & ",1,"
+    cadFormula = cadFormula & "(" & miSQL & ",'" & cadParam & "'," & DBSet(txtFecha(62).Text, "F") & ",1,"
     cadFormula = cadFormula & cadPDFrpt & "," & cadPDFrpt & "," & cadPDFrpt & "," & cadSelect
     
     
@@ -35518,7 +35550,7 @@ Dim Trabajador As Long
     If cadPDFrpt = "" Then cadPDFrpt = DevuelveDesdeBD(conAri, "codprove", "sprove", "1", "1", "T")
     cadSelect = "INSERT INTO slialb(codprovex,codalmac,codtipom,numalbar,numlinea,codartic,nomartic,"
     cadSelect = cadSelect & "ampliaci,cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre)"
-    cadSelect = cadSelect & "VALUES (" & cadPDFrpt & ",1,'" & CadParam & "',"
+    cadSelect = cadSelect & "VALUES (" & cadPDFrpt & ",1,'" & cadParam & "',"
 
 
 
@@ -35588,7 +35620,7 @@ Dim Trabajador As Long
     miRsAux.Close
     
     'UPdateamos contador
-     miSQL = "UPDATE stipom SET contador=" & NumRegElim & " WHERE codtipom='" & CadParam & "'"
+     miSQL = "UPDATE stipom SET contador=" & NumRegElim & " WHERE codtipom='" & cadParam & "'"
     conn.Execute miSQL
     
 End Function
@@ -35622,20 +35654,20 @@ Private Function IntroduccionLotesFitosanitariosInventario() As Boolean
         conn.Execute "DELETE FROM tmpnlotes where codusu =" & vUsu.codigo
         Espera 0.3
         
-        CadParam = DevuelveDesdeBD(conAri, "count(*)", "slotes", "codartic", Me.txtArticulo(0).Text, "T")
-        If Val(CadParam) = 0 Then
+        cadParam = DevuelveDesdeBD(conAri, "count(*)", "slotes", "codartic", Me.txtArticulo(0).Text, "T")
+        If Val(cadParam) = 0 Then
             MsgBox "Ningun lote disponible para el articulo", vbExclamation
             Exit Function
         End If
-        CadParam = "Select " & vUsu.codigo & ",codartic,@rownum:=@rownum+1 AS rownum "
-        CadParam = CadParam & ", fecentra,canentra*100,0,numlotes FROM slotes,(SELECT @rownum:=0) r"
-        CadParam = CadParam & " WHERE codartic =" & DBSet(Me.txtArticulo(0).Text, "T")
-        CadParam = CadParam & " ORDER BY fecentra desc"
+        cadParam = "Select " & vUsu.codigo & ",codartic,@rownum:=@rownum+1 AS rownum "
+        cadParam = cadParam & ", fecentra,canentra*100,0,numlotes FROM slotes,(SELECT @rownum:=0) r"
+        cadParam = cadParam & " WHERE codartic =" & DBSet(Me.txtArticulo(0).Text, "T")
+        cadParam = cadParam & " ORDER BY fecentra desc"
           
        
 
-        CadParam = "insert into tmpnlotes(codusu,codartic,numlinea,fechaalb,codprove,cantidad,numlotes)  " & CadParam
-        conn.Execute CadParam
+        cadParam = "insert into tmpnlotes(codusu,codartic,numlinea,fechaalb,codprove,cantidad,numlotes)  " & cadParam
+        conn.Execute cadParam
         
         
         
@@ -35665,18 +35697,18 @@ Private Function ActualizarlosteFito() As Boolean
     ActualizarlosteFito = False
     Set miRsAux = New ADODB.Recordset
     
-    CadParam = "Select * from tmpnlotes where codusu = " & vUsu.codigo
-    miRsAux.Open CadParam, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cadParam = "Select * from tmpnlotes where codusu = " & vUsu.codigo
+    miRsAux.Open cadParam, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cadFormula = ""
     cadNomRPT = ""
     While Not miRsAux.EOF
             If cadNomRPT = "" Then cadNomRPT = miRsAux!codArtic
             
             If miRsAux!cantidad > 0 Then
-                CadParam = "UPDATE slotes SET vendida=canentra-" & DBSet(miRsAux!cantidad, "N") & " WHERE codartic= " & DBSet(cadNomRPT, "T")
-                CadParam = CadParam & " AND numlotes = " & DBSet(miRsAux!numlotes, "T")
-                CadParam = CadParam & " AND fecentra = " & DBSet(miRsAux!FechaAlb, "F")
-                conn.Execute CadParam
+                cadParam = "UPDATE slotes SET vendida=canentra-" & DBSet(miRsAux!cantidad, "N") & " WHERE codartic= " & DBSet(cadNomRPT, "T")
+                cadParam = cadParam & " AND numlotes = " & DBSet(miRsAux!numlotes, "T")
+                cadParam = cadParam & " AND fecentra = " & DBSet(miRsAux!FechaAlb, "F")
+                conn.Execute cadParam
             Else
                 cadFormula = cadFormula & ", (" & DBSet(miRsAux!numlotes, "T") & ", " & DBSet(miRsAux!FechaAlb, "F") & ")"
             End If
@@ -35686,9 +35718,9 @@ Private Function ActualizarlosteFito() As Boolean
     
     If cadFormula <> "" Then
         cadFormula = Mid(cadFormula, 2)
-        CadParam = "UPDATE slotes SET vendida=canentra WHERE codartic= " & DBSet(cadNomRPT, "T")
-        CadParam = CadParam & " AND (numlotes,fecentra) IN (" & cadFormula & ")"
-        conn.Execute CadParam
+        cadParam = "UPDATE slotes SET vendida=canentra WHERE codartic= " & DBSet(cadNomRPT, "T")
+        cadParam = cadParam & " AND (numlotes,fecentra) IN (" & cadFormula & ")"
+        conn.Execute cadParam
     End If
     ActualizarlosteFito = True
 eActualizarlosteFito:
@@ -35768,7 +35800,7 @@ Dim NF As Integer
                 cadSelect = miRsAux!Nombre & ";" & cadTitulo & ";"
                 NumRegElim = 1
             Else
-                'Stop
+                'St op
             End If
         End If
         miRsAux.MoveNext

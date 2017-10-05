@@ -286,7 +286,7 @@ Begin VB.Form frmEulerTrab
             Style           =   3
          EndProperty
          BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Dividir tarea"
          EndProperty
          BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Imprimir"
@@ -570,7 +570,11 @@ Dim CadenaBusqueda As String
 
 Private HaDevueltoDatos As Boolean
 
-Dim B As Boolean
+
+Private TareaADuplicar As Long
+Private MaximoHoras As Currency
+Private LaDuplicada As Long
+Dim b As Boolean
 Private Sub chkVistaPrevia_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -589,8 +593,25 @@ Dim NumReg As Long
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarModificar Then
+                    If TareaADuplicar > 0 Then
+                        'Updatearemos en la tarea "origen"las horas menos las "separadas"
+                        MaximoHoras = MaximoHoras - ImporteFormateado(txtAux(3).Text)
+                        CadenaBusqueda = "UPDATE sreloj set calculadas =" & DBSet(MaximoHoras, "N")
+                        CadenaBusqueda = CadenaBusqueda & " , HoraFin = " & DBSet(txtAux(4).Text, "FH")
+                        CadenaBusqueda = CadenaBusqueda & " WHERE id= " & TareaADuplicar
+                        ejecutar CadenaBusqueda, True
+                        
+                        CadenaBusqueda = " WHERE ID IN ( " & TareaADuplicar & "," & LaDuplicada & ")"
+                        EsBusqueda = True
+                    End If
                     CargaGrid True
-                    BotonAnyadir
+                    
+                    If TareaADuplicar > 0 Then
+                        TareaADuplicar = 0
+                        PonerModo 2
+                    Else
+                        BotonAnyadir
+                    End If
                 End If
             End If
         
@@ -717,7 +738,7 @@ Dim Indicador As String
             PonerModo 0
             LLamaLineas 10
             EsBusqueda = False
-           
+            TareaADuplicar = 0
         Case 3 'Insertar
             DataGrid1.AllowAddNew = False
             DataGrid1.Enabled = True
@@ -827,6 +848,7 @@ Private Sub Form_Load()
         .Buttons(5).Image = 3 'Añadir
         .Buttons(6).Image = 4 'Modificar
         .Buttons(7).Image = 5 'Eliminar
+        .Buttons(9).Image = 42 'dividir tarea
         .Buttons(10).Image = 16 'Imprimir
         .Buttons(11).Image = 15 'Salir
     End With
@@ -899,26 +921,26 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Byte
-Dim B As Boolean
+Dim b As Boolean
 
     On Error Resume Next
     
     DeseleccionaGrid Me.DataGrid1
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To 3
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = B
+        txtAux(jj).visible = b
         If jj < 2 Then
             txtAux3(jj).Height = DataGrid1.RowHeight
             txtAux3(jj).Top = alto
-            txtAux3(jj).visible = B
+            txtAux3(jj).visible = b
             
             Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
             Me.cmdAux(jj).Top = alto
-            Me.cmdAux(jj).visible = B
-            Me.cmdAux(jj).Enabled = B
+            Me.cmdAux(jj).visible = b
+            Me.cmdAux(jj).Enabled = b
             
             
             
@@ -926,9 +948,9 @@ Dim B As Boolean
     Next jj
     
     For jj = 4 To 6
-        BloquearTxt txtAux(jj), Not B
+        BloquearTxt txtAux(jj), Not b
     Next jj
-    BloquearCmb Me.cboTipo2, Not B
+    BloquearCmb Me.cboTipo2, Not b
     If Err.Number Then Err.Clear
 End Sub
 
@@ -949,13 +971,13 @@ End Sub
 Private Sub imgRef_Click()
 
     If Modo = 0 Or Modo = 2 Then Exit Sub
-    B = False
+    b = False
     If cboTipo2.ListIndex < 0 Then
-        B = True
+        b = True
     Else
-        If cboTipo2.ListIndex = 3 Then B = True
+        If cboTipo2.ListIndex = 3 Then b = True
     End If
-    If B Then Exit Sub
+    If b Then Exit Sub
     
     cmdAux_Click 100
 End Sub
@@ -1006,6 +1028,9 @@ Dim K As Integer
             mnModificar_Click
         Case 7 'Eliminar
             mnEliminar_Click
+            
+        Case 9
+            DuplicarTareaActual
         Case 10 'Imprimir
         
             'AHORA
@@ -1094,17 +1119,17 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim i As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
      'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -1118,9 +1143,9 @@ Dim i As Byte
     'Next I
                       
     '-----------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -1141,30 +1166,33 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
     
     On Error Resume Next
 
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
-    'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     
-    B = ((Modo >= 3))
+    Toolbar1.Buttons(9).Enabled = b
+    
+    'eliminar
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnEliminar.Enabled = b
+    
+    b = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo opciones del menú.", Err.Description
 
@@ -1359,7 +1387,7 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
 
@@ -1377,57 +1405,67 @@ Dim SQL As String
     End If
     If Me.txtAux(3).Text = "" Then txtAux(3).Text = "0"
     DatosOk = False
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
     
     SQL = txtAux(4).Text
     If Not EsFechaHoraOK(SQL) Then
         MsgBox "Error hora inicio", vbExclamation
-        B = False
+        b = False
     Else
         If Format(CDate(SQL), "dd/mm/yyyy") <> CDate(txtAux(2).Text) Then
             MsgBox "Fecha inicio debe ser: " & txtAux(2).Text, vbExclamation
-            B = False
+            b = False
         End If
     End If
-    If Not B Then Exit Function
+    If Not b Then Exit Function
     
     SQL = Trim(txtAux(5).Text)
     If SQL <> "" Then
         If Not EsFechaHoraOK(SQL) Then
             MsgBox "Error hora inicio", vbExclamation
-            B = False
+            b = False
             
         Else
             If CDate(txtAux(5).Text) < CDate(txtAux(4).Text) Then
                 MsgBox "Fecha fin menor que fecha inicio", vbExclamation
-                B = False
+                b = False
             End If
         End If
         
         
     End If
-    If Not B Then Exit Function
+    If Not b Then Exit Function
+    
+    
+    If TareaADuplicar > 0 Then
+        If ImporteFormateado(txtAux(3).Text) >= MaximoHoras Then
+            MsgBox "Las horas no pueden ser mayores que la tarea que duplica: " & MaximoHoras, vbExclamation
+            Exit Function
+        End If
+    End If
+    
+    
     
     
     'Comprobar que existe un Albaran de venta para ese técnico(realizado por del alb)
     'para ese cliente y en esa fecha. Si no avisar
-    B = False
+    b = False
     If Me.cboTipo2.ListIndex >= 0 Then
-        If Me.cboTipo2.ListIndex <> 3 Then B = True
+        If Me.cboTipo2.ListIndex <> 3 Then b = True
     End If
-    If B Then
+    If b Then
         SQL = RecuperaValor("ALR|ALE|ALO||ALV|", cboTipo2.ListIndex + 1)
         SQL = " numalbar=" & DBSet(txtAux(6).Text, "N") & " AND codtipom=" & DBSet(SQL, "T")
         SQL = "SELECT count(*) FROM scaalb WHERE " & SQL
         
         If Not (RegistrosAListar(SQL) > 0) Then
             SQL = "No existe(o esta facturado) el albaran de fecha indicado. ¿Desea continuar?"
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then B = False
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then b = False
         End If
     End If
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -1534,6 +1572,8 @@ End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim Aux As String
+Dim Minutos As Currency
+
     On Error Resume Next
     
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
@@ -1612,8 +1652,40 @@ Dim Aux As String
 '            PonerFormatoEntero txtAux(Index)
            
         Case 3  'Sum horas
-            PonerFormatoDecimal txtAux(Index), 4
-            
+            If Not PonerFormatoDecimal(txtAux(Index), 4) Then
+                txtAux(Index).Text = ""
+            Else
+                'Dato Correcto
+                If InStr(1, txtAux(Index).Text, "-") > 0 Then
+                    MsgBox "No se permiten importes negativos", vbExclamation
+                    txtAux(Index).Text = ""
+                Else
+                    If TareaADuplicar > 0 Then
+                        'Esta duplicando tarea, las horas no puede ser maor o igual que las que "duplica"
+                        If ImporteFormateado(txtAux(Index).Text) >= MaximoHoras Then
+                            MsgBox "Las horas no pueden ser mayores que la tarea que duplica: " & MaximoHoras, vbExclamation
+                            txtAux(Index).Text = ""
+                            PonerFoco txtAux(Index)
+                        Else
+                            'Es correcto. Con lo cual, cogeremos la fecha final de tarea, si esta, y le restaremos las horas introducidas
+                            If Me.txtAux(5).Text <> "" Then
+                           
+                                If EsFechaHoraOK(CStr(txtAux(5).Text)) Then
+                                    Minutos = ImporteFormateado(txtAux(Index).Text)
+                                    Aux = Int(Minutos) * 60
+                                    Minutos = Minutos - Int(Minutos)
+                                    Minutos = (Minutos * 60)
+                                    If Minutos = 60 Then Minutos = 59
+                                    Minutos = Minutos + Int(Aux)
+                                    Aux = DateAdd("n", -1 * Minutos, CDate(txtAux(5).Text))
+                                    txtAux(4).Text = Aux
+                                    
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
         Case 4, 5 'horas
             txtAux(Index).Text = Trim(txtAux(Index).Text)
             If txtAux(Index).Text <> "" Then
@@ -1745,7 +1817,7 @@ Dim cad As String
         'sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor)
         
         cad = SugerirCodigoSiguienteStr("sreloj", "id")
-        
+        LaDuplicada = Val(cad)
         If Data1.Recordset.EOF Then CadenaConsulta = cad
         
         cad = cad & "," & DBSet(txtAux(2).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
@@ -1807,4 +1879,42 @@ Dim Minutos As Integer
         
     End If
     
+End Sub
+
+
+'.................................
+
+Private Sub DuplicarTareaActual()
+Dim Cd As String
+Dim J As Integer
+
+    If Me.Data1.Recordset.EOF Then Exit Sub
+    If Modo <> 2 Then Exit Sub
+    
+    TareaADuplicar = Data1.Recordset!Id
+    CadenaBusqueda = " WHERE ID = " & TareaADuplicar
+    EsBusqueda = True
+    CadenaConsulta = MontaSQLCarga(True)
+    PonerCadenaBusqueda
+    PonerFocoGrid Me.DataGrid1
+    
+    
+    MaximoHoras = Data1.Recordset!calculadas 'Maximo horas a dividir
+    Cd = ""
+    For J = 0 To Data1.Recordset.Fields.Count - 1
+        Cd = Cd & DBLet(Data1.Recordset.Fields(J), "T") & "|"
+    Next
+    BotonAnyadir
+    
+    
+    
+    Me.txtAux(0).Text = RecuperaValor(Cd, 1)
+    txtAux3(0).Text = RecuperaValor(Cd, 2)
+    Me.txtAux(1).Text = RecuperaValor(Cd, 3)
+    txtAux3(1).Text = RecuperaValor(Cd, 4)
+    Me.txtAux(2).Text = RecuperaValor(Cd, 5)
+'    Me.txtAux(3).Text = RecuperaValor(Cd, 6)
+    txtAux(4).Text = ""
+    Me.txtAux(5).Text = RecuperaValor(Cd, 9)
+    PonerFoco txtAux(3)
 End Sub

@@ -1933,7 +1933,7 @@ Dim ImpLinea As Currency
 Dim HayQueAjustar As Boolean
 Dim K As Byte
 Dim PrimerCodigiva As Integer
-
+Dim ImpAuxiliarIVA As Currency
     On Error GoTo EInLinea
     
 
@@ -2095,7 +2095,7 @@ Dim PrimerCodigiva As Integer
             Else
                 'Si que hay mas lineas.
                 'Son del mismo tipo de IVA
-                If Rs!codigiva <> vTipoIva(0) Then
+                If Rs!codigiva <> vTipoIva(NumeroIVA) Then
                     'NO es el mismo tipo de IVA
                     'Hay que ajustar
                     HayQueAjustar = True
@@ -2109,8 +2109,8 @@ Dim PrimerCodigiva As Integer
         SQL = SQL & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
         
         If HayQueAjustar Then
-            'Stop
-        
+            'St op
+            
         
         End If
         
@@ -2123,6 +2123,50 @@ Dim PrimerCodigiva As Integer
             ImpRec = vPorcRec(NumeroIVA) / 100
             ImpRec = Round2(ImpLinea * ImpRec, 2)
         End If
+        
+        Dim C22 As String
+        
+        C22 = ""
+        
+        ImpAuxiliarIVA = vImpIva(NumeroIVA) - ImpImva
+        HayQueAjustar = False
+        If ImpAuxiliarIVA <> 0 Then
+            'falta importe.
+            'Puede ser que hayan mas lineas, o haya descuadre. Como esta ordenado por tipo de iva
+            Rs.MoveNext
+            If Rs.EOF Then
+                'No hay mas lineas
+                'Hay que ajustar SI o SI
+                HayQueAjustar = True
+                C22 = "   EOF"
+            Else
+                'Si que hay mas lineas.
+                'Son del mismo tipo de IVA
+                If Rs!codigiva <> vTipoIva(NumeroIVA) Then
+                    'NO es el mismo tipo de IVA
+                    'Hay que ajustar
+                    HayQueAjustar = True
+                    C22 = " Siguiente !="
+                Else
+                    
+                    HayQueAjustar = False
+                End If
+            End If
+            Rs.MovePrevious
+        End If
+        
+        
+        If HayQueAjustar Then
+            If cadTabla = "scafac" Then 'VENTAS
+                Debug.Print Rs!LetraSer & Rs!Numfactu & "   cal/pdte " & ImpImva & " / " & vImpIva(NumeroIVA) & C22
+            Else
+                Debug.Print Rs!Numfactu & "   cal/pdte " & ImpImva & " / " & vImpIva(NumeroIVA) & C22
+            End If
+            ImpImva = vImpIva(NumeroIVA)
+            If vPorcRec(NumeroIVA) <> 0 Then ImpRec = vPorcRec(NumeroIVA)
+        End If
+        
+        
         vImpIva(NumeroIVA) = vImpIva(NumeroIVA) - ImpImva
         vImpRec(NumeroIVA) = vImpRec(NumeroIVA) - ImpRec
         
@@ -2168,7 +2212,7 @@ Dim PrimerCodigiva As Integer
     'Si lleva retencion, solo sera en caso de facturas proveedores, entonces metere dos lineas mas
     '
     If vLlevaRetencion Then
-        'stop
+        'st op
         'Cojere los datos del proveedor
         'Reutilizo total fac
         TotalFac = CCur(RecuperaValor(DatosRetencion, 2))
@@ -2962,7 +3006,7 @@ Dim LineaCentroCoste  As Boolean
             SQL = SQL & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
             
             If HayQueAjustar Then
-                Stop
+                'St OP
             Else
             
             End If

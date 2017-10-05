@@ -71,7 +71,6 @@ On Error GoTo eDatosGeneradosExportacionAlmagrupo
        miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
        While Not miRsAux.EOF
            
-            'If miRsAux!codArtic = "0010000389" Then Stop
            
            If NF1 > 0 Then
                 'compras
@@ -185,7 +184,7 @@ Public Sub ExportarDatosFTP(ByRef LB As Label)
 End Sub
 
 Private Function CrearFicheroLotesFTP() As Boolean
-Dim Nf As Integer
+Dim NF As Integer
 
     On Error GoTo eCrearFicheroLotesFTP
     CrearFicheroLotesFTP = False
@@ -194,29 +193,29 @@ Dim Nf As Integer
     
     miSQL = miRsAux!ip
     'NO PUEDE SE EOF
-    Nf = FreeFile
-    Open App.Path & "\ftp.dat" For Output As #Nf
-    Print #Nf, miRsAux!Usuario
-    Print #Nf, miRsAux!Clave
+    NF = FreeFile
+    Open App.Path & "\ftp.dat" For Output As #NF
+    Print #NF, miRsAux!Usuario
+    Print #NF, miRsAux!Clave
     miRsAux.Close
-    Print #Nf, "lcd """ & App.Path & "\temp"""
-    Print #Nf, "ascii"
+    Print #NF, "lcd """ & App.Path & "\temp"""
+    Print #NF, "ascii"
     
-    Print #Nf, "mput *.txt"
-    Print #Nf, "close"
-    Print #Nf, "bye"
+    Print #NF, "mput *.txt"
+    Print #NF, "close"
+    Print #NF, "bye"
    
-    Close #Nf
+    Close #NF
     
-    Nf = FreeFile
-    Open App.Path & "\Ariftp.bat" For Output As #Nf
-    Print #Nf, "cd """ & App.Path & """"
-    Print #Nf, "cls"
-    Print #Nf, "FTP -i -s:ftp.dat " & miSQL & ""
+    NF = FreeFile
+    Open App.Path & "\Ariftp.bat" For Output As #NF
+    Print #NF, "cd """ & App.Path & """"
+    Print #NF, "cls"
+    Print #NF, "FTP -i -s:ftp.dat " & miSQL & ""
    ' Print #Nf, ""
     'Print #Nf, "pause "
    ' Print #Nf, "pause 0"
-    Close #Nf
+    Close #NF
     CrearFicheroLotesFTP = True
 eCrearFicheroLotesFTP:
     If Err.Number <> 0 Then MuestraError Err.Number
@@ -250,8 +249,8 @@ End Sub
 '------------------------------------------------------------------------------------
 
 Public Function GeneraDatosAlmagrupo(QueOpcion As Byte, ByRef LB As Label) As Boolean
-Dim Nf As Integer
-Dim Cad As String
+Dim NF As Integer
+Dim cad As String
 Dim F As Date
 Dim Fechas As Collection
 Dim Meses As Byte
@@ -267,9 +266,9 @@ Dim J As Integer
     
     
     'Preparamos el fichero LOG
-    Nf = FreeFile
-    Open App.Path & "\Logftp\" & Format(Now, "yyyy_mm_dd_hhnnss") & ".LOG" For Output As #Nf
-    Print #Nf, "Incio proceso: " & Format(Now, "dd/mm/yyyy hh:mm:ss") & vbCrLf
+    NF = FreeFile
+    Open App.Path & "\Logftp\" & Format(Now, "yyyy_mm_dd_hhnnss") & ".LOG" For Output As #NF
+    Print #NF, "Incio proceso: " & Format(Now, "dd/mm/yyyy hh:mm:ss") & vbCrLf
     
     If QueOpcion = 1 Then
         Meses = 3
@@ -283,54 +282,54 @@ Dim J As Integer
    
     
     For J = 1 To Meses
-        Cad = Format(F, "dd/mm/yyyy")
+        cad = Format(F, "dd/mm/yyyy")
         F = CDate("01/" & Format(F, "mm/yyyy"))
-        Cad = Format(F, "dd/mm/yyyy") & "|" & Cad & "|"
+        cad = Format(F, "dd/mm/yyyy") & "|" & cad & "|"
         F = DateAdd("d", -1, F)
-        Fechas.Add Cad
+        Fechas.Add cad
     Next
     
     'Ya tengo todos los meses a presentar
     For J = 1 To Fechas.Count
-        Cad = Fechas.Item(J)
+        cad = Fechas.item(J)
         
-        PonerLabel LB, Replace(Cad, "|", "  ")
+        PonerLabel LB, Replace(cad, "|", "  ")
         If (J Mod 3) = 2 Then DoEvents
     
     
         If QueOpcion = 1 Then
             'Solo para el envio diario, solo la primera vez
             If J = 1 Then
-                Print #Nf, "Genera Stocks: " & Replace(Cad, "|", "  ")
-                Print #Nf, String(40, "-")
+                Print #NF, "Genera Stocks: " & Replace(cad, "|", "  ")
+                Print #NF, String(40, "-")
 
-                If Not GeneraDatosAlmagrupoStocks(QueOpcion, Nf, LB) Then Exit For
+                If Not GeneraDatosAlmagrupoStocks(QueOpcion, NF, LB) Then Exit For
             End If
         End If
         
         
-        Print #Nf, "Consumos periodo: " & Replace(Cad, "|", "  ")
-        Print #Nf, String(40, "-")
-        Cad = RecuperaValor(Cad, 1)
-        F = CDate(Cad)
-        Cad = Fechas.Item(J)
-        If Not GeneraDatosAlmagrupoMesConsumos(F, CDate(RecuperaValor(Cad, 2)), QueOpcion, Nf, LB) Then Exit For
+        Print #NF, "Consumos periodo: " & Replace(cad, "|", "  ")
+        Print #NF, String(40, "-")
+        cad = RecuperaValor(cad, 1)
+        F = CDate(cad)
+        cad = Fechas.item(J)
+        If Not GeneraDatosAlmagrupoMesConsumos(F, CDate(RecuperaValor(cad, 2)), QueOpcion, NF, LB) Then Exit For
         
     Next
     
-    Cad = "Fin proceso: " & Format(Now, "dd/mm/yyyy hh:mm:ss")
+    cad = "Fin proceso: " & Format(Now, "dd/mm/yyyy hh:mm:ss")
     If J <= Fechas.Count Then
-        Print #Nf, Cad & " con ERRORES"
+        Print #NF, cad & " con ERRORES"
     Else
         'Vamos a ver totales
-        Print #Nf, Cad
-        Cad = DevuelveDesdeBD(conAri, "count(*)", "salmagrupo", "cifproveedor = 'S' AND 1", "1")
-        If Cad = "" Then Cad = "0"
-        Print #Nf, "Total stocks: " & Cad
+        Print #NF, cad
+        cad = DevuelveDesdeBD(conAri, "count(*)", "salmagrupo", "cifproveedor = 'S' AND 1", "1")
+        If cad = "" Then cad = "0"
+        Print #NF, "Total stocks: " & cad
         
-        Cad = DevuelveDesdeBD(conAri, "count(*)", "salmagrupo", "cifproveedor <> 'S' AND 1", "1")
-        If Cad = "" Then Cad = "0"
-        Print #Nf, "Total consumos: " & Cad
+        cad = DevuelveDesdeBD(conAri, "count(*)", "salmagrupo", "cifproveedor <> 'S' AND 1", "1")
+        If cad = "" Then cad = "0"
+        Print #NF, "Total consumos: " & cad
         
         
     End If
@@ -338,7 +337,7 @@ Dim J As Integer
     
     
     
-    Close Nf
+    Close NF
 End Function
 
 Private Sub PonerLabel(ByRef L As Label, ByRef T As String)
@@ -349,9 +348,9 @@ Private Sub PonerLabel(ByRef L As Label, ByRef T As String)
 End Sub
 
 Private Function GeneraDatosAlmagrupoMesConsumos(FIni As Date, Ffin As Date, LaOpcion As Byte, Fichero As Integer, ByRef L As Label) As Boolean
-Dim I As Currency
+Dim i As Currency
 Dim Aux2 As String
-Dim Fin As Boolean
+Dim fin As Boolean
 Dim Insert As String
 Dim Contador As Long
     On Error GoTo eGeneraDatosAlmagrupo
@@ -416,7 +415,7 @@ Dim Contador As Long
                     miSQL = ", (" & Aux2 & "," & DBSet(miRsAux!elprove, "T") & "," & DBSet(miRsAux!nomprove, "T")
                     'mes,anyo,codartic,udscompra,importe,stock
                     miSQL = miSQL & "," & Month(FIni) & "," & Year(FIni) & "," & DBSet(miRsAux!codArtic, "T")
-                    miSQL = miSQL & "," & DBSet(miRsAux!Cantidad, "N") & "," & DBSet(miRsAux!elimporte, "N") & ",0)"
+                    miSQL = miSQL & "," & DBSet(miRsAux!cantidad, "N") & "," & DBSet(miRsAux!elimporte, "N") & ",0)"
                     Insert = Insert & miSQL
                     
                     If Len(Insert) > 10000 Then
@@ -459,9 +458,9 @@ End Function
 
 
 Private Function GeneraDatosAlmagrupoStocks(LaOpcion As Byte, Fichero As Integer, ByRef L As Label) As Boolean
-Dim I As Currency
+Dim i As Currency
 Dim Aux2 As String
-Dim Fin As Boolean
+Dim fin As Boolean
 Dim Insert As String
 
 
@@ -497,18 +496,18 @@ Dim Insert As String
             'Los que nos son de rotacion declaro el %
             
             
-            I = (DBLet(miRsAux!PorcenComunica, "N") / 100)
+            i = (DBLet(miRsAux!PorcenComunica, "N") / 100)
         Else
             'De rotacion NO declaro NADA
             'i = (DBLet(miRsAux!PorcenComunica, "N") / 100)
-            I = 0
+            i = 0
         End If
-        I = miRsAux!CanStock * I
-        I = CInt(I)
+        i = miRsAux!CanStock * i
+        i = CInt(i)
         
         
         'Solo declaro stocks positivos
-        If I > 0 Then
+        If i > 0 Then
                     
                 NumRegElim = NumRegElim + 1
                     
@@ -516,7 +515,7 @@ Dim Insert As String
                 'insert salmagrupo (cifproveedor,mes,anyo,codartic,udscompra,importe,stock,cifprovhabitual,ConcomprasPeriodo,
                 'miSQL = miSQL & ", ('S'," & Month(FIni) & "," & Year(FIni) & "," & DBSet(miRsAux!codArtic, "T")
                 miSQL = miSQL & ", ('S',1,1," & DBSet(miRsAux!codArtic, "T")
-                miSQL = miSQL & ",NULL," & DBSet(miRsAux!precioUC, "N") & "," & DBSet(I, "N") & "," & DBSet(miRsAux!nifProve, "T") & "," & DBSet(miRsAux!nomprove, "T") & ")"
+                miSQL = miSQL & ",NULL," & DBSet(miRsAux!precioUC, "N") & "," & DBSet(i, "N") & "," & DBSet(miRsAux!nifProve, "T") & "," & DBSet(miRsAux!nomprove, "T") & ")"
                 
                 If NumRegElim > 50 Then
                     miSQL = Mid(miSQL, 2)

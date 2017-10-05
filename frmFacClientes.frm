@@ -133,9 +133,12 @@ Begin VB.Form frmFacClientes
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacClientes.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "frameDptoVentas"
+      Tab(1).Control(0)=   "frameDptoDirec"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "frameDptoAdmon"
-      Tab(1).Control(2)=   "frameDptoDirec"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "frameDptoVentas"
+      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Direcciones"
       TabPicture(2)   =   "frmFacClientes.frx":0044
@@ -2552,7 +2555,7 @@ Begin VB.Form frmFacClientes
             Width           =   645
          End
          Begin VB.CheckBox chkRecargFinan 
-            Caption         =   "Recarargo financiero"
+            Caption         =   "Recargo financiero"
             Height          =   315
             Left            =   2400
             TabIndex        =   57
@@ -2795,13 +2798,13 @@ Begin VB.Form frmFacClientes
          End
          Begin VB.Label Label1 
             AutoSize        =   -1  'True
-            Caption         =   "Repeteticion Factura"
+            Caption         =   "Repeticion Factura"
             Height          =   195
             Index           =   55
             Left            =   3600
             TabIndex        =   164
             Top             =   2040
-            Width           =   1485
+            Width           =   1350
          End
          Begin VB.Label Label1 
             Caption         =   "Valorar Albaran "
@@ -6019,7 +6022,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
             Exit Sub
         Case 4
             frmCrmObsDpto.Nuevo = True
-            frmCrmObsDpto.Label2.Caption = Data1.Recordset!Nomclien
+            frmCrmObsDpto.Label2.Caption = Data1.Recordset!NomClien
             frmCrmObsDpto.Tag = Data1.Recordset!codClien
             frmCrmObsDpto.Show vbModal
             
@@ -6245,7 +6248,7 @@ Dim NombreModificado As Boolean
                 NombreModificado = False
                 If DBLet(Data1.Recordset!Clivario, "N") = 0 Then
                     'EL NOMBRE DEL cliente HA CAMBIADO. Los de varios NO los contemplamos
-                    If Trim(DevNombreSQL(Data1.Recordset!Nomclien)) <> Trim(Text1(1).Text) Then NombreModificado = True
+                    If Trim(DevNombreSQL(Data1.Recordset!NomClien)) <> Trim(Text1(1).Text) Then NombreModificado = True
                 End If
                 
                 If ModificaDesdeFormulario(Me, 1) Then
@@ -7313,7 +7316,7 @@ End Sub
 
 
 Private Sub cmdCancelar_GotFocus()
-  '  Stop
+  '
 End Sub
 
 Private Sub cmdFitos_Click(Index As Integer)
@@ -8759,7 +8762,7 @@ Dim i As Integer
         CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "observa", "scrmobsclien", BuscaChekc, CStr(Data1.Recordset!codClien))
         
         frmCrmObsDpto.Dpto = CByte(Me.lwCRM.SelectedItem.SubItems(3))
-        frmCrmObsDpto.Label2.Caption = Data1.Recordset!Nomclien
+        frmCrmObsDpto.Label2.Caption = Data1.Recordset!NomClien
         frmCrmObsDpto.Tag = Data1.Recordset!codClien
         frmCrmObsDpto.Show vbModal
         
@@ -9485,6 +9488,14 @@ Dim b As Boolean
         If vParamAplic.TieneCRM Then lwCRM.ListItems.Clear
     End If
 
+                        
+    If vParamAplic.NumeroInstalacion = 2 Then
+        If vUsu.Nivel > 0 And Modo = 4 Then
+            imgBuscar(8).Enabled = False
+            BloquearTxt Text1(42), True
+        End If
+    End If
+                        
                         
 EPonerModo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -11752,7 +11763,7 @@ Dim TieneDatosDpto As Boolean
         miRsAux.Close
     End If
     
-    BuscaChekc = vUsu.CadenaConexion & "|" & Data1.Recordset!codClien & "|" & CStr(Data1.Recordset!Nomclien) & "||||" & BuscaChekc
+    BuscaChekc = vUsu.CadenaConexion & "|" & Data1.Recordset!codClien & "|" & CStr(Data1.Recordset!NomClien) & "||||" & BuscaChekc
     
     Shell App.Path & "\AriOutlook.exe " & BuscaChekc, vbNormalFocus
     
@@ -12860,7 +12871,7 @@ Dim Valor
         txt = txt & Right("00" & DBLet(Data1.Recordset.Fields!digcontr), 2)
         txt = txt & Right(String(10, "0") & DBLet(Data1.Recordset.Fields!cuentaba), 10)
         'Nov 2013.
-        txt = DBLet(Data1.Recordset!IBAN, "T") & txt
+        txt = DBLet(Data1.Recordset!Iban, "T") & txt
         QueCampos = Me.Text1(56).Text & Me.Text1(31).Text & Text1(32).Text & Text1(33).Text & Text1(34).Text
         If txt <> QueCampos Then CambiaCCC_Ariadna = True
     End If
@@ -13627,7 +13638,7 @@ Private Sub LanzaFrmDireccionEnvio()
     frmDptoEnvio2.DireccionesEnvio = True
     frmDptoEnvio2.VerDatoDpto = -1
     frmDptoEnvio2.codClien = CLng(Text1(0).Text)
-    frmDptoEnvio2.Nomclien = Text1(1).Text
+    frmDptoEnvio2.NomClien = Text1(1).Text
     frmDptoEnvio2.Show vbModal
     Set frmDptoEnvio2 = Nothing
 End Sub

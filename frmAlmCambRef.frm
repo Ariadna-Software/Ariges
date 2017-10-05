@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmCambRef 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Cambio código articulo-referencia"
@@ -560,7 +560,7 @@ Private Sub BotonAnyadir()
 Dim anc As Single
     
     'Situamos el grid al final
-    AnyadirLinea DataGrid1, Adodc1
+    AnyadirLinea DataGrid1, adodc1
    
     anc = ObtenerAlto(DataGrid1, 10)
     
@@ -593,7 +593,7 @@ Private Sub BotonVerTodos()
     On Error Resume Next
 
     CargaGrid ""
-    If Adodc1.Recordset.RecordCount <= 0 Then
+    If adodc1.Recordset.RecordCount <= 0 Then
          MsgBox "No hay ningún registro en la tabla sarticcambioref", vbInformation
          Screen.MousePointer = vbDefault
          Exit Sub
@@ -611,8 +611,8 @@ Dim cad As String
 Dim anc As Single
 
     
-    If Adodc1.Recordset.EOF Then Exit Sub
-    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
     Screen.MousePointer = vbHourglass
     
@@ -673,22 +673,22 @@ Dim SQL As String
     On Error GoTo Error2
     
     'Ciertas comprobaciones
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
     '### a mano
     SQL = "¿Seguro que desea eliminar el artículo?" & vbCrLf
-    SQL = SQL & vbCrLf & "Linea: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Artículo: " & Adodc1.Recordset.Fields(1) & " " & Adodc1.Recordset.Fields(2)
+    SQL = SQL & vbCrLf & "Linea: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Artículo: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
     
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = Me.Adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from sarticcambioref where codartic=" & DBSet(Adodc1.Recordset!codArtic, "T")
+        NumRegElim = Me.adodc1.Recordset.AbsolutePosition
+        SQL = "Delete from sarticcambioref where codartic=" & DBSet(adodc1.Recordset!codArtic, "T")
         conn.Execute SQL
-        CancelaADODC Me.Adodc1
+        CancelaADODC Me.adodc1
         CargaGrid ""
-        CancelaADODC Me.Adodc1
-        SituarDataPosicion Me.Adodc1, NumRegElim, SQL
+        CancelaADODC Me.adodc1
+        SituarDataPosicion Me.adodc1, NumRegElim, SQL
     End If
     
 Error2:
@@ -698,7 +698,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim I As Integer
+Dim i As Integer
 Dim cadB As String
 
     On Error Resume Next
@@ -717,11 +717,11 @@ Dim cadB As String
                 If BLOQUEADesdeFormulario(Me) Then
                     If ModificaDesdeFormulario(Me, 3) Then
                         TerminaBloquear
-                        I = Adodc1.Recordset.Fields(0)
+                        i = adodc1.Recordset.Fields(0)
                         PonerModo 2
-                        CancelaADODC Me.Adodc1
+                        CancelaADODC Me.adodc1
                         CargaGrid
-                        Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & I)
+                        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     End If
                     PonerFocoGrid Me.DataGrid1
                 End If
@@ -785,9 +785,9 @@ Private Sub cmdCancelar_Click()
     Select Case Modo
         Case 3 'Insertar
             DataGrid1.AllowAddNew = False
-            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
         Case 4 'Modificar
-            Me.lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+            Me.lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
         Case 1 'Buscar
             CargaGrid
     End Select
@@ -808,8 +808,8 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+    If Not adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     End If
 End Sub
 
@@ -892,7 +892,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 7: mnEliminar_Click
         Case 10, 12
             If Modo <> 2 Then Exit Sub
-            If Adodc1.Recordset.EOF Then Exit Sub
+            If adodc1.Recordset.EOF Then Exit Sub
             
             'Botón Imprimir Listado
             If Button.Index = 10 Then
@@ -911,7 +911,7 @@ End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
     
     
@@ -945,57 +945,57 @@ Dim b As Boolean
     End If
     SQL = SQL & " ORDER BY numlinea"
     
-    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
 
     'Nombre producto
-    I = 0
-        DataGrid1.Columns(I).Caption = "Linea"
-        DataGrid1.Columns(I).Width = 600
+    i = 0
+        DataGrid1.Columns(i).Caption = "Linea"
+        DataGrid1.Columns(i).Width = 600
    
     
     'Leemos del vector en 2
-    I = 1
-        DataGrid1.Columns(I).Caption = "Origen"
-        DataGrid1.Columns(I).Width = 1400
-    I = 2
-        DataGrid1.Columns(I).Caption = "Descripcion"
-        DataGrid1.Columns(I).Width = 3000
-    I = 3
-        DataGrid1.Columns(I).Caption = "Destino"
-        DataGrid1.Columns(I).Width = 1400
-    I = 4
-        DataGrid1.Columns(I).Caption = "Prov"
-        DataGrid1.Columns(I).Width = 800
+    i = 1
+        DataGrid1.Columns(i).Caption = "Origen"
+        DataGrid1.Columns(i).Width = 1400
+    i = 2
+        DataGrid1.Columns(i).Caption = "Descripcion"
+        DataGrid1.Columns(i).Width = 3000
+    i = 3
+        DataGrid1.Columns(i).Caption = "Destino"
+        DataGrid1.Columns(i).Width = 1400
+    i = 4
+        DataGrid1.Columns(i).Caption = "Prov"
+        DataGrid1.Columns(i).Width = 800
     
-    I = 5
-        DataGrid1.Columns(I).Caption = "Proveedor"
-        DataGrid1.Columns(I).Width = 1800
+    i = 5
+        DataGrid1.Columns(i).Caption = "Proveedor"
+        DataGrid1.Columns(i).Width = 1800
     
-    I = 6
-        DataGrid1.Columns(I).Caption = "Fam"
-        DataGrid1.Columns(I).Width = 700
-    I = 7
-        DataGrid1.Columns(I).Caption = "Familia"
-        DataGrid1.Columns(I).Width = 1200
+    i = 6
+        DataGrid1.Columns(i).Caption = "Fam"
+        DataGrid1.Columns(i).Width = 700
+    i = 7
+        DataGrid1.Columns(i).Caption = "Familia"
+        DataGrid1.Columns(i).Width = 1200
         
-    I = 8
-        DataGrid1.Columns(I).Caption = "€ Vta"
-        DataGrid1.Columns(I).Width = 950
-        DataGrid1.Columns(I).NumberFormat = FormatoPrecio
-        DataGrid1.Columns(I).Alignment = dbgRight
-    I = 9
-        DataGrid1.Columns(I).Caption = "€ Compra"
-        DataGrid1.Columns(I).Width = 950
-        DataGrid1.Columns(I).NumberFormat = FormatoPrecio
-        DataGrid1.Columns(I).Alignment = dbgRight
+    i = 8
+        DataGrid1.Columns(i).Caption = "€ Vta"
+        DataGrid1.Columns(i).Width = 950
+        DataGrid1.Columns(i).NumberFormat = FormatoPrecio
+        DataGrid1.Columns(i).Alignment = dbgRight
+    i = 9
+        DataGrid1.Columns(i).Caption = "€ Compra"
+        DataGrid1.Columns(i).Width = 950
+        DataGrid1.Columns(i).NumberFormat = FormatoPrecio
+        DataGrid1.Columns(i).Alignment = dbgRight
         
-    I = 10
-        DataGrid1.Columns(I).Caption = "Ref. prov"
-        DataGrid1.Columns(I).Width = 1600
+    i = 10
+        DataGrid1.Columns(i).Caption = "Ref. prov"
+        DataGrid1.Columns(i).Width = 1600
     
-    I = 11
-        DataGrid1.Columns(I).Caption = "OK"
-        DataGrid1.Columns(I).Width = 1300
+    i = 11
+        DataGrid1.Columns(i).Caption = "OK"
+        DataGrid1.Columns(i).Width = 1300
         
     'Fiajamos el cadancho
     If Not CadAncho Then
@@ -1012,19 +1012,19 @@ Dim b As Boolean
         txtAux(2).Width = DataGrid1.Columns(3).Width - 60
         
         'Codprove y famia
-        For I = 3 To 4
+        For i = 3 To 4
             J = 4
-            If I = 4 Then J = 6
-            txtAux(I).Left = DataGrid1.Columns(J).Left + DataGrid1.Left
-            txtAux(I).Width = DataGrid1.Columns(J).Width - 30
-            txtAux2(I).Left = DataGrid1.Columns(J + 1).Left + DataGrid1.Left
-            txtAux2(I).Width = DataGrid1.Columns(J + 1).Width - 60
-            Me.cmdArticulo(I).Left = txtAux2(I).Left - 120
+            If i = 4 Then J = 6
+            txtAux(i).Left = DataGrid1.Columns(J).Left + DataGrid1.Left
+            txtAux(i).Width = DataGrid1.Columns(J).Width - 30
+            txtAux2(i).Left = DataGrid1.Columns(J + 1).Left + DataGrid1.Left
+            txtAux2(i).Width = DataGrid1.Columns(J + 1).Width - 60
+            Me.cmdArticulo(i).Left = txtAux2(i).Left - 120
         Next
         
-        For I = 5 To 7
-            txtAux(I).Left = DataGrid1.Columns(I + 3).Left + DataGrid1.Left
-            txtAux(I).Width = DataGrid1.Columns(I + 3).Width - 30
+        For i = 5 To 7
+            txtAux(i).Left = DataGrid1.Columns(i + 3).Left + DataGrid1.Left
+            txtAux(i).Width = DataGrid1.Columns(i + 3).Width - 30
         Next
         
         
@@ -1032,23 +1032,23 @@ Dim b As Boolean
     End If
    
    'No permitir cambiar tamaño de columnas
-   For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-   Next I
+   For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+   Next i
    
    'Habilitamos botones Modificar y Eliminar
    If Toolbar1.Buttons(6).Enabled Then
-        Toolbar1.Buttons(6).Enabled = Not Adodc1.Recordset.EOF
-        Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
-        mnModificar.Enabled = Not Adodc1.Recordset.EOF
-        mnEliminar.Enabled = Not Adodc1.Recordset.EOF
+        Toolbar1.Buttons(6).Enabled = Not adodc1.Recordset.EOF
+        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
+        mnModificar.Enabled = Not adodc1.Recordset.EOF
+        mnEliminar.Enabled = Not adodc1.Recordset.EOF
    End If
    DataGrid1.Enabled = b
    DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
-   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+   If Not adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If
@@ -1212,7 +1212,7 @@ End Sub
 
 Private Sub ActualizarReferencias()
 Dim H As Integer
-Dim Tabla As String
+Dim tabla As String
 Dim Cole As Collection
 Dim K As Integer
 Dim J As Integer
@@ -1228,43 +1228,43 @@ Dim CambiosOk As Boolean
     miRsAux.Open CadenaConsulta, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CadenaConsulta = ""
     While Not miRsAux.EOF
-        CadenaConsulta = CadenaConsulta & vbCrLf & "  -" & miRsAux!codArti1
+        CadenaConsulta = CadenaConsulta & vbCrLf & "  -" & miRsAux!codarti1
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     If CadenaConsulta <> "" Then CadenaConsulta = "A) Ya existen los artículos" & vbCrLf & CadenaConsulta
     
-    Tabla = "select * from sarticcambioref where not codartic in (select codartic from sartic)"
-    miRsAux.Open Tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Tabla = ""
+    tabla = "select * from sarticcambioref where not codartic in (select codartic from sartic)"
+    miRsAux.Open tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    tabla = ""
     While Not miRsAux.EOF
-        Tabla = Tabla & vbCrLf & "  -" & miRsAux!codArtic
+        tabla = tabla & vbCrLf & "  -" & miRsAux!codArtic
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    If Tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "B) No  existen los artículos" & vbCrLf & Tabla
+    If tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "B) No  existen los artículos" & vbCrLf & tabla
 
     
     'PROVEEDORES Y FAMILIAS
-    Tabla = "select * from sarticcambioref where not codprove in (select codprove from sprove)"
-    miRsAux.Open Tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Tabla = ""
+    tabla = "select * from sarticcambioref where not codprove in (select codprove from sprove)"
+    miRsAux.Open tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    tabla = ""
     While Not miRsAux.EOF
-        Tabla = Tabla & vbCrLf & "  -" & miRsAux!codArtic
+        tabla = tabla & vbCrLf & "  -" & miRsAux!codArtic
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    If Tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "C) No  existe el proceedor para los artículos" & vbCrLf & Tabla
+    If tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "C) No  existe el proceedor para los artículos" & vbCrLf & tabla
 
-    Tabla = "select * from sarticcambioref where not codfamia in (select codfamia from sfamia)"
-    miRsAux.Open Tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Tabla = ""
+    tabla = "select * from sarticcambioref where not codfamia in (select codfamia from sfamia)"
+    miRsAux.Open tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    tabla = ""
     While Not miRsAux.EOF
-        Tabla = Tabla & vbCrLf & "  -" & miRsAux!codArtic
+        tabla = tabla & vbCrLf & "  -" & miRsAux!codArtic
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    If Tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "D) No  existe la familia para los artículos" & vbCrLf & Tabla
+    If tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "D) No  existe la familia para los artículos" & vbCrLf & tabla
 
 
     'Vemos si hay articulos con cambio de precios
@@ -1344,8 +1344,7 @@ Dim CambiosOk As Boolean
     CadenaConsulta = CadenaConsulta & TablasParametros("artagrupa1,artagrupa2,artagrupa3,codarticGRUPO", "advparametros", Cole)
     CadenaConsulta = CadenaConsulta & TablasParametros("codartid,codartictel,ArtReciclado,ArticuloPortes,artRecargoFina,artSeparador,artTfoniaIvaExento", "spara1", Cole)
     If vParamAplic.TieneTelefonia2 > 0 Then CadenaConsulta = CadenaConsulta & TablasParametros("artiTelefNorORAN,artiTelefNorVOD", "spara2", Cole)
-    'If vParamAplic.AguasPotables <> "" Then Stop
-    
+      
     Set Cole = Nothing
     If CadenaConsulta <> "" Then
         MsgBox CadenaConsulta, vbExclamation
@@ -1452,15 +1451,15 @@ Dim CambiosOk As Boolean
         If CambiosOk Then
     
             CadenaConsulta = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", CStr(miRsAux!codArtic), "T")
-            CadenaConsulta = "[ACTUALIZAR] " & miRsAux!codArtic & "   Desc: " & CadenaConsulta & " -> " & miRsAux!codArti1
+            CadenaConsulta = "[ACTUALIZAR] " & miRsAux!codArtic & "   Desc: " & CadenaConsulta & " -> " & miRsAux!codarti1
             LOG.Insertar 7, vUsu, CadenaConsulta
             
             
             
         
         
-            CadenaConsulta = "UPDATE sartic SET codartic = " & DBSet(miRsAux!codArti1, "T")
-            If Not IsNull(miRsAux!CodProve) Then CadenaConsulta = CadenaConsulta & ", codprove =" & miRsAux!CodProve
+            CadenaConsulta = "UPDATE sartic SET codartic = " & DBSet(miRsAux!codarti1, "T")
+            If Not IsNull(miRsAux!Codprove) Then CadenaConsulta = CadenaConsulta & ", codprove =" & miRsAux!Codprove
             If Not IsNull(miRsAux!Codfamia) Then CadenaConsulta = CadenaConsulta & ", codfamia =" & miRsAux!Codfamia
             If Not IsNull(miRsAux!referprov) Then CadenaConsulta = CadenaConsulta & ", referprov =" & DBSet(miRsAux!referprov, "T")
             
@@ -1470,16 +1469,16 @@ Dim CambiosOk As Boolean
             'Cambamos en las tablas
             For K = 1 To Cole.Count
             
-                J = InStr(1, Cole.Item(K), "#")
+                J = InStr(1, Cole.item(K), "#")
                 
                 Me.lblIndicador.Caption = miRsAux!codArtic & " " & K & "/" & Cole.Count
                 Me.lblIndicador.Refresh
-                Tabla = Mid(Cole.Item(K), 1, J - 1)
+                tabla = Mid(Cole.item(K), 1, J - 1)
                 
                 DoEvents
                 Screen.MousePointer = vbHourglass
                 
-                Aux = Mid(Cole.Item(K), J + 1)
+                Aux = Mid(Cole.item(K), J + 1)
                 
                 While Aux <> ""
                     J = InStr(1, Aux, "|")
@@ -1489,7 +1488,7 @@ Dim CambiosOk As Boolean
                         CadenaConsulta = Mid(Aux, 1, J - 1)
                         Aux = Mid(Aux, J + 1)
                         
-                        CadenaConsulta = "UPDATE " & Tabla & " SET " & CadenaConsulta & " = " & DBSet(miRsAux!codArti1, "T") & " WHERE " & CadenaConsulta & " = " & DBSet(miRsAux!codArtic, "T")
+                        CadenaConsulta = "UPDATE " & tabla & " SET " & CadenaConsulta & " = " & DBSet(miRsAux!codarti1, "T") & " WHERE " & CadenaConsulta & " = " & DBSet(miRsAux!codArtic, "T")
                         conn.Execute CadenaConsulta
                     End If
                         
@@ -1527,7 +1526,7 @@ Dim CambiosOk As Boolean
     
     
     CargaGrid ""
-    If Not Me.Adodc1.Recordset.EOF Then MsgBox "Llame soporte técnico", vbCritical
+    If Not Me.adodc1.Recordset.EOF Then MsgBox "Llame soporte técnico", vbCritical
     
     Screen.MousePointer = vbDefault
 End Sub
@@ -1556,31 +1555,31 @@ End Function
 
 
 
-Private Function TablasParametros(ByVal Campos As String, Tabla As String, ByRef ColArticulos As Collection) As String
+Private Function TablasParametros(ByVal Campos As String, tabla As String, ByRef ColArticulos As Collection) As String
 Dim Aux As String
-Dim I As Byte
+Dim i As Byte
 Dim K As Integer
     
     On Error GoTo eTablasParametros
     
     TablasParametros = ""
-    Aux = "Select " & Campos & " FROM " & Tabla
+    Aux = "Select " & Campos & " FROM " & tabla
     miRsAux.Open Aux, conn, adOpenKeyset, adLockPessimistic, adCmdText
     
     If Not miRsAux.EOF Then
         For K = 1 To ColArticulos.Count
             Aux = ""
-            For I = 0 To miRsAux.Fields.Count - 1
-                Campos = DBLetMemo(miRsAux.Fields(Val(I)))
-                If Campos = CStr(ColArticulos.Item(K)) Then Aux = Aux & "  " & miRsAux.Fields(I).Name
+            For i = 0 To miRsAux.Fields.Count - 1
+                Campos = DBLetMemo(miRsAux.Fields(Val(i)))
+                If Campos = CStr(ColArticulos.item(K)) Then Aux = Aux & "  " & miRsAux.Fields(i).Name
             Next
-            If Aux <> "" Then TablasParametros = TablasParametros & vbCrLf & ColArticulos.Item(K) & Aux
+            If Aux <> "" Then TablasParametros = TablasParametros & vbCrLf & ColArticulos.item(K) & Aux
         Next K
     End If
     miRsAux.Close
     
     
-    If TablasParametros <> "" Then TablasParametros = vbCrLf & Tabla & " " & TablasParametros
+    If TablasParametros <> "" Then TablasParametros = vbCrLf & tabla & " " & TablasParametros
     
 eTablasParametros:
     If Err.Number <> 0 Then
@@ -1608,7 +1607,7 @@ Private Function ActualizarPrecios(Venta As Boolean) As Boolean
         
         
         CadenaConsulta = "UPDATE slispr SET fechanue=" & DBSet(Now, "F") & ", precionu =" & DBSet(miRsAux!precom, "N")
-        If Not IsNull(miRsAux!CodProve) Then CadenaConsulta = CadenaConsulta & ", codprove = " & miRsAux!CodProve
+        If Not IsNull(miRsAux!Codprove) Then CadenaConsulta = CadenaConsulta & ", codprove = " & miRsAux!Codprove
 
     End If
     
@@ -1622,8 +1621,8 @@ Private Function ActualizarPrecios(Venta As Boolean) As Boolean
     
     
     If Not Venta Then
-        If Not IsNull(miRsAux!CodProve) Then
-            CadenaConsulta = "UPDATE slisp1 set codprove =" & miRsAux!CodProve & " WHERE codartic = " & DBSet(miRsAux!codArtic, "T")
+        If Not IsNull(miRsAux!Codprove) Then
+            CadenaConsulta = "UPDATE slisp1 set codprove =" & miRsAux!Codprove & " WHERE codartic = " & DBSet(miRsAux!codArtic, "T")
             CadenaConsulta = CadenaConsulta & " AND codprove = " & NumRegElim
             conn.Execute CadenaConsulta
         End If

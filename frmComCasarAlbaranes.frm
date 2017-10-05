@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmComCasarAlbaranes 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   8295
@@ -324,7 +324,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public codProve As Long
+Public Codprove As Long
 
 Dim miSQL As String
 Dim PVez As Boolean
@@ -346,7 +346,7 @@ Private Sub VincularAlbaran()
             
             With ListView1.ListItems(NumRegElim)
                 'pROVEE
-                miSQL = ", (" & codProve & "," & DBSet(Trim(ListView2.SelectedItem.SubItems(2)), "T") & ","
+                miSQL = ", (" & Codprove & "," & DBSet(Trim(ListView2.SelectedItem.SubItems(2)), "T") & ","
                 miSQL = miSQL & DBSet(Trim(ListView2.SelectedItem.SubItems(3)), "F") & ","
                 miSQL = miSQL & DBSet(Trim(ListView2.SelectedItem.Text), "T") & "," & DBSet(Trim(ListView2.SelectedItem.SubItems(1)), "F") & ","
                 'vENTAS
@@ -425,7 +425,7 @@ Private Sub Form_Load()
     Screen.MousePointer = vbHourglass
     Me.Icon = frmPpal.Icon
 
-    Text2.Text = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", CStr(codProve))
+    Text2.Text = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", CStr(Codprove))
         
     PVez = True
     
@@ -437,7 +437,7 @@ End Sub
 Private Sub CargaProveedor()
     ListView2.ListItems.Clear
     'Si queremos meter los albaranes....
-    miSQL = "select numalbar,fechaalb,null numfactu,null fecfactu ,albcli,codtipom,fecalbcli from scaalp where codprove =" & codProve
+    miSQL = "select numalbar,fechaalb,null numfactu,null fecfactu ,albcli,codtipom,fecalbcli from scaalp where codprove =" & Codprove
     miSQL = miSQL & " and fechaalb >= '2014-09-01'"
     miSQL = miSQL & " and codtipom is null and albcli is null"
     miSQL = miSQL & " Union"
@@ -446,9 +446,9 @@ Private Sub CargaProveedor()
     miSQL = "" 'De momento NO entran los albaranes
     
     
-    miSQL = miSQL & " select numalbar,fechaalb, numfactu, fecfactu  from scafpa where codprove =" & codProve
+    miSQL = miSQL & " select numalbar,fechaalb, numfactu, fecfactu  from scafpa where codprove =" & Codprove
     miSQL = miSQL & " and fecfactu >= '2014-09-01'"
-    miSQL = miSQL & " and not (numfactu, fecfactu) IN (select numfacpr,fecfacpr from scafpaVinc where codprove = " & codProve
+    miSQL = miSQL & " and not (numfactu, fecfactu) IN (select numfacpr,fecfacpr from scafpaVinc where codprove = " & Codprove
     miSQL = miSQL & ") ORDER BY 1,2"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
@@ -456,7 +456,7 @@ Private Sub CargaProveedor()
         Set IT = ListView2.ListItems.Add()
         IT.Text = miRsAux!NumAlbar
         IT.SubItems(1) = miRsAux!FechaAlb
-        IT.SubItems(2) = DBLet(miRsAux!NumFactu, "T") & " "
+        IT.SubItems(2) = DBLet(miRsAux!Numfactu, "T") & " "
         IT.SubItems(3) = DBLet(miRsAux!FecFactu, "T") & " "
            
         
@@ -467,17 +467,17 @@ Private Sub CargaProveedor()
     
     'Los que estaan
     ListView3.ListItems.Clear
-    miSQL = "select numalbar,fechaalb,null numfactu,null fecfactu ,albcli,codtipom,fecalbcli from scaalp where codprove =" & codProve
+    miSQL = "select numalbar,fechaalb,null numfactu,null fecfactu ,albcli,codtipom,fecalbcli from scaalp where codprove =" & Codprove
     miSQL = miSQL & " and  codtipom <>'' and albcli >=0"
     miSQL = miSQL & " Union"
-    miSQL = miSQL & " select numalbar,fechaalb, numfactu, fecfactu ,albcli,codtipom,fecalbcli from scafpa where codprove =" & codProve
+    miSQL = miSQL & " select numalbar,fechaalb, numfactu, fecfactu ,albcli,codtipom,fecalbcli from scafpa where codprove =" & Codprove
     miSQL = miSQL & " and codtipom <>'' and albcli >=0"
     miSQL = miSQL & " ORDER BY 2,3"
     
     
     'MARZO 2015
         
-    miSQL = " select  numalbPr,fecalbpr,numfacpr,fecfacpr,codtipom,numalbar,fecfaccl from scafpaVinc where codprove = " & codProve
+    miSQL = " select  numalbPr,fecalbpr,numfacpr,fecfacpr,codtipom,numalbar,fecfaccl from scafpaVinc where codprove = " & Codprove
     miSQL = miSQL & " ORDER BY 1,2"
     
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -507,7 +507,7 @@ Private Sub CargaClientes()
 Dim RN As ADODB.Recordset
 
     'Cargo un RS con todos los partes vinculados al proveedor
-    miSQL = "select numparte from advpartes where codflota in (select codflota from sflotas where codprove=" & codProve & ")"
+    miSQL = "select numparte from advpartes where codflota in (select codflota from sflotas where codprove=" & Codprove & ")"
     miRsAux.Open miSQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
 
     Label2(4).Caption = "Albaranes"
@@ -517,7 +517,7 @@ Dim RN As ADODB.Recordset
     
     miSQL = "select numalbar,fechaalb,codtipom codtipoa,null numfactu,null fecfactu,null codtipom,referenc,codclien,nomclien,0.00 BrutoFac  from scaalb where  referenc like 'part%' "
     miSQL = miSQL & " and codtipom in ('ALS','ALI') AND not (numalbar,codtipom)"
-    miSQL = miSQL & " in (select codtipom,numalbar from scafpaVinc WHERE codprove=" & codProve & ")  "
+    miSQL = miSQL & " in (select codtipom,numalbar from scafpaVinc WHERE codprove=" & Codprove & ")  "
     
     CargaLWClientes
     
@@ -529,9 +529,8 @@ Dim RN As ADODB.Recordset
     miSQL = miSQL & "  scafac.numfactu = scafac1.numfactu and scafac.codtipom = scafac1.codtipom and scafac.fecfactu = scafac1.fecfactu "
     miSQL = miSQL & "  and codtipoa in ('ALS','ALI') AND referenc like 'part%' and scafac.fecfactu>='2015-01-01'"
     miSQL = miSQL & "  AND not (numalbar,codtipoa,scafac1.fecfactu)"
-    miSQL = miSQL & " in (select codtipom,numalbar,fecfaccl from scafpaVinc WHERE codprove=" & codProve & ")  "
+    miSQL = miSQL & " in (select codtipom,numalbar,fecfaccl from scafpaVinc WHERE codprove=" & Codprove & ")  "
     
-'    Stop
 '    miSQL = "select numalbar,fechaalb,codtipoa, scafac1.numfactu, scafac1.fecfactu,scafac1.codtipom,  referenc,codclien,nomclien,brutofac from scafac,scafac1 where   scafac.numfactu = scafac1.numfactu and scafac.codtipom = scafac1.codtipom and scafac.fecfactu = scafac1.fecfactu   and codtipoa in ('ALV','ALS','ALI') AND referenc like '%a%' and scafac.fecfactu>='2014-01-01'  AND not (numalbar,codtipoa,scafac1.fecfactu) in (select codtipom,numalbar,fecfaccl from scafpaVinc WHERE codprove=6)  "
 '
     CargaLWClientes
@@ -543,17 +542,17 @@ End Sub
 
 
 Private Sub CargaLWClientes()
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
     
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     'MISQL llevará el sql vinculado a uno u otro
-    RS.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
             'Parte: 14119
-            Label2(4).Caption = "Refer: " & RS!referenc
+            Label2(4).Caption = "Refer: " & Rs!referenc
             Label2(4).Refresh
-            miSQL = Trim(Mid(RS!referenc, 7))
+            miSQL = Trim(Mid(Rs!referenc, 7))
             
             If miSQL <> "" Then
                 If Not IsNumeric(miSQL) Then
@@ -571,23 +570,23 @@ Dim RS As ADODB.Recordset
         
         
                 Set IT = ListView1.ListItems.Add()
-                IT.Text = RS!NumAlbar
-                IT.SubItems(1) = RS!FechaAlb
-                IT.SubItems(2) = DBLet(RS!codtipoa, "T") & " "
-                IT.SubItems(3) = DBLet(RS!NumFactu, "T") & " "
-                IT.SubItems(4) = DBLet(RS!FecFactu, "T") & " "
-                IT.SubItems(5) = DBLet(RS!codtipom, "T") & " "
-                IT.SubItems(6) = RS!referenc
-                IT.SubItems(7) = Format(RS!codclien, "0000")
-                IT.SubItems(8) = RS!Nomclien
-                If RS!BrutoFac <> 0 Then IT.SubItems(9) = RS!BrutoFac
+                IT.Text = Rs!NumAlbar
+                IT.SubItems(1) = Rs!FechaAlb
+                IT.SubItems(2) = DBLet(Rs!codtipoa, "T") & " "
+                IT.SubItems(3) = DBLet(Rs!Numfactu, "T") & " "
+                IT.SubItems(4) = DBLet(Rs!FecFactu, "T") & " "
+                IT.SubItems(5) = DBLet(Rs!codtipom, "T") & " "
+                IT.SubItems(6) = Rs!referenc
+                IT.SubItems(7) = Format(Rs!codClien, "0000")
+                IT.SubItems(8) = Rs!NomClien
+                If Rs!BrutoFac <> 0 Then IT.SubItems(9) = Rs!BrutoFac
             End If
             
-            RS.MoveNext
+            Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
-    Set RS = Nothing
+    Set Rs = Nothing
 End Sub
 
 
@@ -599,7 +598,7 @@ Private Sub Desvincular()
             'scafpavinc(codprove,numfacpr,fecfacpr,numalbPr,fecalbpr,codtipom,,fecfaccl)
         
             miSQL = "DELETE FROM scafpavinc"
-            miSQL = miSQL & " WHERE codprove =" & codProve & " AND numfacpr =" & DBSet(Trim(ListView3.SelectedItem.SubItems(2)), "T")
+            miSQL = miSQL & " WHERE codprove =" & Codprove & " AND numfacpr =" & DBSet(Trim(ListView3.SelectedItem.SubItems(2)), "T")
             miSQL = miSQL & " AND fecfacpr = " & DBSet(Trim(ListView3.SelectedItem.SubItems(3)), "F") & " AND numalbPr =" & DBSet(Trim(ListView3.SelectedItem.Text), "T")
             miSQL = miSQL & " AND fecalbpr = " & DBSet(Trim(ListView3.SelectedItem.SubItems(1)), "F") & " AND codtipom =" & DBSet(Trim(ListView3.SelectedItem.SubItems(4)), "T")
              miSQL = miSQL & " AND numalbar = " & DBSet(Trim(ListView3.SelectedItem.SubItems(5)), "N") & " AND fecfaccl =" & DBSet(Trim(ListView3.SelectedItem.SubItems(6)), "F")

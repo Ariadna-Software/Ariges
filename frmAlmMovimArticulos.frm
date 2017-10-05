@@ -725,6 +725,8 @@ Private Sub DataGrid1_DblClick()
 'Abrir el formulario del Mantenimiento del que viene el Movimiento
 'Se busca en histórico o en Form
 Dim SQL As String
+Dim NUmAlbar As String
+Dim Codtipm As String
 
     Select Case Data2.Recordset!detamovi
         Case "TRA" 'traspaso de almacenes
@@ -745,7 +747,7 @@ Dim SQL As String
                 .Show vbModal
             End With
 
-        Case "ALV", "ART", "ALM", "ALZ", "ALI", "ALS", "ALE", "ALO", "ALR"
+        Case "ALV", "ART", "ALM", "ALZ", "ALI", "ALS", "ALE", "ALO", "ALR", "MAT"
                                 'ALV:Albaran de Venta (a clientes)
                                 'ART: Albaran rectificativo
                                 'ALM: ALbaran Mostrador
@@ -755,14 +757,22 @@ Dim SQL As String
             'si no esta facturado abrir el formulario de Entrada de Albaranes: frmFacEntAlbaranes
             'si esta ya facturado abrir el histórico de facturas: frmFacHcoFacturas
             If vParamAplic.NumeroInstalacion = 2 Then
-                If Val(vUsu.AlmacenPorDefecto) <> vParamAplic.AlmacenB Then
+                If Val(vUsu.AlmacenPorDefecto2) <> vParamAplic.AlmacenB Then
                     If Data2.Recordset!detamovi = "ALZ" Then Exit Sub
                 End If
             End If
                 
             
+            NUmAlbar = Data2.Recordset!document
+            Codtipm = Data2.Recordset!detamovi
+            
+            If Data2.Recordset!detamovi = "MAT" Then
+                Codtipm = Mid(Data2.Recordset!document, 1, 3)
+                NUmAlbar = Mid(Data2.Recordset!document, 4)
+            End If
+            
             'consultamos si existe el albaran en la tabla de albaranes: scaalb
-            SQL = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", Data2.Recordset!detamovi, "T", , "numalbar", Data2.Recordset!document, "N")
+            SQL = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", Codtipm, "T", , "numalbar", NUmAlbar, "N")
             If SQL <> "" Then 'existe el Albaran
                 If vParamAplic.TipoFormularioClientes = 0 Then
                          With frmFacEntAlbaranes2
@@ -778,12 +788,12 @@ Dim SQL As String
                 Else
                     'FORMULARIO SAIL
                          With frmFacEntAlbSAIL
-                            If EsNumerico(Data2.Recordset!document) Then
-                                .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
-                            Else
-                                .hcoCodMovim = Data2.Recordset!document
-                            End If
-                            .hcoCodTipoM = Data2.Recordset!detamovi
+                         '   If EsNumerico(Data2.Recordset!document) Then
+                         '       .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
+                         '   Else
+                                .hcoCodMovim = NUmAlbar  ' Data2.Recordset!document
+                         '   End If
+                            .hcoCodTipoM = Codtipm
                             .Show vbModal
                         End With
                 End If
@@ -794,10 +804,10 @@ Dim SQL As String
                     If EsNumerico(Data2.Recordset!document) Then
                         .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
                     Else
-                        .hcoCodMovim = Data2.Recordset!document
+                        .hcoCodMovim = NUmAlbar ' Data2.Recordset!document
                     End If
-                    .hcoCodTipoM = Data2.Recordset!detamovi
-                    .hcoFechaMov = Data2.Recordset!FechaMov
+                    .hcoCodTipoM = Codtipm 'Data2.Recordset!detamovi
+                    If Data2.Recordset!detamovi <> "MAT" Then .hcoFechaMov = Data2.Recordset!FechaMov
                     
                     .Show vbModal
                 End With
@@ -1521,12 +1531,12 @@ Dim cadB2 As String
         'HERBELCA
         If vUsu.CodigoAgente > 0 Then
             'Es solo un agente. Solo puede ver sus movimientos
-            If vUsu.AlmacenPorDefecto > 0 Then
+            If vUsu.AlmacenPorDefecto2 > 0 Then
                 If cadB <> "" Then cadB = cadB & " AND "
                 If cadSeleccion <> "" Then cadSeleccion = cadSeleccion & " AND "
                     
-                cadB = cadB & " smoval.codalmac = " & vUsu.AlmacenPorDefecto
-                cadSeleccion = cadSeleccion & " {smoval.codalmac} = " & vUsu.AlmacenPorDefecto
+                cadB = cadB & " smoval.codalmac = " & vUsu.AlmacenPorDefecto2
+                cadSeleccion = cadSeleccion & " {smoval.codalmac} = " & vUsu.AlmacenPorDefecto2
             End If
         End If
     End If
@@ -1707,7 +1717,7 @@ Dim Nombre As String
             'Obtener nombre de la tabla de trabajadores
             Nombre = DevuelveDesdeBDNew(conAri, "straba", "nomtraba", "codtraba", CStr(codigo), "N")
             Label2.Caption = "Trabajador"
-        Case "ALV", "ALR", "ALM", "ART", "FAV", "FTI", "ATI", "ALS", "ALO", "ALE", "ALI", "ALT"
+        Case "ALV", "ALR", "ALM", "ART", "FAV", "FTI", "ATI", "ALS", "ALO", "ALE", "ALI", "ALT", "MAT"
             'Obtener nombre de la tabla de Clientes
             Nombre = DevuelveDesdeBDNew(conAri, "sclien", "nomclien", "codclien", CStr(codigo), "N")
             Label2.Caption = "Cliente"

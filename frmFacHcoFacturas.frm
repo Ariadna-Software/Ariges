@@ -262,7 +262,7 @@ Begin VB.Form frmFacHcoFacturas2
       _ExtentY        =   8467
       _Version        =   393216
       Style           =   1
-      Tabs            =   2
+      Tab             =   2
       TabsPerRow      =   4
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -276,138 +276,81 @@ Begin VB.Form frmFacHcoFacturas2
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacHcoFacturas.frx":0A0E
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "FrameCliente"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "FrameFactura"
-      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "FrameFactura"
+      Tab(0).Control(1)=   "FrameCliente"
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmFacHcoFacturas.frx":0A2A
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "imgBuscar(7)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Label1(9)"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "Label1(23)"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "Label1(24)"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "Label1(21)"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "Label1(2)"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "Label1(6)"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).Control(7)=   "Label1(18)"
-      Tab(1).Control(7).Enabled=   0   'False
       Tab(1).Control(8)=   "Label1(22)"
-      Tab(1).Control(8).Enabled=   0   'False
       Tab(1).Control(9)=   "Label1(40)"
-      Tab(1).Control(9).Enabled=   0   'False
       Tab(1).Control(10)=   "imgBuscar(8)"
-      Tab(1).Control(10).Enabled=   0   'False
       Tab(1).Control(11)=   "imgBuscar(9)"
-      Tab(1).Control(11).Enabled=   0   'False
       Tab(1).Control(12)=   "imgBuscar(6)"
-      Tab(1).Control(12).Enabled=   0   'False
       Tab(1).Control(13)=   "Label1(47)"
-      Tab(1).Control(13).Enabled=   0   'False
       Tab(1).Control(14)=   "imgBuscar(10)"
-      Tab(1).Control(14).Enabled=   0   'False
       Tab(1).Control(15)=   "Label1(48)"
-      Tab(1).Control(15).Enabled=   0   'False
       Tab(1).Control(16)=   "Label1(49)"
-      Tab(1).Control(16).Enabled=   0   'False
       Tab(1).Control(17)=   "Label1(57)"
-      Tab(1).Control(17).Enabled=   0   'False
       Tab(1).Control(18)=   "FrameTelefonia"
-      Tab(1).Control(18).Enabled=   0   'False
       Tab(1).Control(19)=   "Text3(15)"
-      Tab(1).Control(19).Enabled=   0   'False
       Tab(1).Control(20)=   "chkEnvio"
-      Tab(1).Control(20).Enabled=   0   'False
       Tab(1).Control(21)=   "FrameObserva"
-      Tab(1).Control(21).Enabled=   0   'False
       Tab(1).Control(22)=   "DataGrid2"
-      Tab(1).Control(22).Enabled=   0   'False
       Tab(1).Control(23)=   "DataGrid1"
-      Tab(1).Control(23).Enabled=   0   'False
       Tab(1).Control(24)=   "txtAux(8)"
-      Tab(1).Control(24).Enabled=   0   'False
       Tab(1).Control(25)=   "txtAux(7)"
-      Tab(1).Control(25).Enabled=   0   'False
       Tab(1).Control(26)=   "txtAux(6)"
-      Tab(1).Control(26).Enabled=   0   'False
       Tab(1).Control(27)=   "txtAux(4)"
-      Tab(1).Control(27).Enabled=   0   'False
       Tab(1).Control(28)=   "Text3(2)"
-      Tab(1).Control(28).Enabled=   0   'False
       Tab(1).Control(29)=   "Text2(2)"
-      Tab(1).Control(29).Enabled=   0   'False
       Tab(1).Control(30)=   "Text3(1)"
-      Tab(1).Control(30).Enabled=   0   'False
       Tab(1).Control(31)=   "Text2(1)"
-      Tab(1).Control(31).Enabled=   0   'False
       Tab(1).Control(32)=   "Text3(0)"
-      Tab(1).Control(32).Enabled=   0   'False
       Tab(1).Control(33)=   "Text2(0)"
-      Tab(1).Control(33).Enabled=   0   'False
       Tab(1).Control(34)=   "Text3(8)"
-      Tab(1).Control(34).Enabled=   0   'False
       Tab(1).Control(35)=   "Text3(6)"
-      Tab(1).Control(35).Enabled=   0   'False
       Tab(1).Control(36)=   "Text3(7)"
-      Tab(1).Control(36).Enabled=   0   'False
       Tab(1).Control(37)=   "Text3(5)"
-      Tab(1).Control(37).Enabled=   0   'False
       Tab(1).Control(38)=   "Text3(4)"
-      Tab(1).Control(38).Enabled=   0   'False
       Tab(1).Control(39)=   "Text3(3)"
-      Tab(1).Control(39).Enabled=   0   'False
       Tab(1).Control(40)=   "Text2(3)"
-      Tab(1).Control(40).Enabled=   0   'False
       Tab(1).Control(41)=   "cmdObserva3"
-      Tab(1).Control(41).Enabled=   0   'False
       Tab(1).Control(42)=   "txtAux(0)"
-      Tab(1).Control(42).Enabled=   0   'False
       Tab(1).Control(43)=   "txtAux(1)"
-      Tab(1).Control(43).Enabled=   0   'False
       Tab(1).Control(44)=   "txtAux(2)"
-      Tab(1).Control(44).Enabled=   0   'False
       Tab(1).Control(45)=   "txtAux(3)"
-      Tab(1).Control(45).Enabled=   0   'False
       Tab(1).Control(46)=   "txtAux(5)"
-      Tab(1).Control(46).Enabled=   0   'False
       Tab(1).Control(47)=   "txtAux3(0)"
-      Tab(1).Control(47).Enabled=   0   'False
       Tab(1).Control(48)=   "txtAux3(1)"
-      Tab(1).Control(48).Enabled=   0   'False
       Tab(1).Control(49)=   "txtAux3(2)"
-      Tab(1).Control(49).Enabled=   0   'False
       Tab(1).Control(50)=   "Text3(14)"
-      Tab(1).Control(50).Enabled=   0   'False
       Tab(1).Control(51)=   "txtAux(9)"
-      Tab(1).Control(51).Enabled=   0   'False
       Tab(1).Control(52)=   "txtAux(10)"
-      Tab(1).Control(52).Enabled=   0   'False
       Tab(1).Control(53)=   "cmdaux"
-      Tab(1).Control(53).Enabled=   0   'False
       Tab(1).Control(54)=   "txtAux(11)"
-      Tab(1).Control(54).Enabled=   0   'False
       Tab(1).Control(55)=   "Text3(17)"
-      Tab(1).Control(55).Enabled=   0   'False
       Tab(1).Control(56)=   "Text2(18)"
-      Tab(1).Control(56).Enabled=   0   'False
       Tab(1).Control(57)=   "Text3(18)"
-      Tab(1).Control(57).Enabled=   0   'False
       Tab(1).Control(58)=   "FrameCampos"
-      Tab(1).Control(58).Enabled=   0   'False
       Tab(1).Control(59)=   "chkPedxCli"
-      Tab(1).Control(59).Enabled=   0   'False
       Tab(1).Control(60)=   "FrameEuler"
-      Tab(1).Control(60).Enabled=   0   'False
       Tab(1).ControlCount=   61
+      TabCaption(2)   =   "Costes"
+      TabPicture(2)   =   "frmFacHcoFacturas.frx":0A46
+      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).Control(0)=   "lwCostes"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).ControlCount=   1
       Begin VB.Frame FrameEuler 
          Height          =   2055
          Left            =   -74880
@@ -417,7 +360,7 @@ Begin VB.Form frmFacHcoFacturas2
          Width           =   13935
          Begin VB.Frame FrameReparEuler 
             Height          =   1935
-            Left            =   360
+            Left            =   480
             TabIndex        =   203
             Top             =   120
             Width           =   13455
@@ -438,7 +381,7 @@ Begin VB.Form frmFacHcoFacturas2
                MultiLine       =   -1  'True
                ScrollBars      =   2  'Vertical
                TabIndex        =   206
-               Text            =   "frmFacHcoFacturas.frx":0A46
+               Text            =   "frmFacHcoFacturas.frx":0A62
                Top             =   240
                Width           =   7575
             End
@@ -446,7 +389,7 @@ Begin VB.Form frmFacHcoFacturas2
                Height          =   375
                Index           =   0
                Left            =   3000
-               Picture         =   "frmFacHcoFacturas.frx":0A4C
+               Picture         =   "frmFacHcoFacturas.frx":0A68
                Style           =   1  'Graphical
                TabIndex        =   205
                ToolTipText     =   "Ver datos reparacion"
@@ -480,7 +423,7 @@ Begin VB.Form frmFacHcoFacturas2
             MultiLine       =   -1  'True
             ScrollBars      =   2  'Vertical
             TabIndex        =   188
-            Text            =   "frmFacHcoFacturas.frx":729E
+            Text            =   "frmFacHcoFacturas.frx":72BA
             Top             =   240
             Width           =   4575
          End
@@ -497,7 +440,7 @@ Begin VB.Form frmFacHcoFacturas2
                MultiLine       =   -1  'True
                ScrollBars      =   2  'Vertical
                TabIndex        =   189
-               Text            =   "frmFacHcoFacturas.frx":72A4
+               Text            =   "frmFacHcoFacturas.frx":72C0
                Top             =   240
                Width           =   6975
             End
@@ -596,8 +539,8 @@ Begin VB.Form frmFacHcoFacturas2
          Begin VB.Image imgBuscarEULER 
             Height          =   240
             Left            =   0
-            ToolTipText     =   "Buscar trabajador"
-            Top             =   0
+            ToolTipText     =   "Ver datos extendido"
+            Top             =   120
             Width           =   240
          End
          Begin VB.Label Label3 
@@ -839,7 +782,7 @@ Begin VB.Form frmFacHcoFacturas2
             Height          =   375
             Index           =   1
             Left            =   5280
-            Picture         =   "frmFacHcoFacturas.frx":72AA
+            Picture         =   "frmFacHcoFacturas.frx":72C6
             Style           =   1  'Graphical
             TabIndex        =   160
             ToolTipText     =   "Eliminar campo"
@@ -851,7 +794,7 @@ Begin VB.Form frmFacHcoFacturas2
             Height          =   375
             Index           =   0
             Left            =   5280
-            Picture         =   "frmFacHcoFacturas.frx":7CAC
+            Picture         =   "frmFacHcoFacturas.frx":7CC8
             Style           =   1  'Graphical
             TabIndex        =   159
             ToolTipText     =   "Añadir campo"
@@ -1294,7 +1237,7 @@ Begin VB.Form frmFacHcoFacturas2
       End
       Begin VB.Frame FrameFactura 
          Height          =   1980
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   65
          Top             =   2670
          Width           =   12255
@@ -1906,7 +1849,7 @@ Begin VB.Form frmFacHcoFacturas2
          Caption         =   "Datos Cliente"
          ForeColor       =   &H00972E0B&
          Height          =   2295
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   44
          Top             =   360
          Width           =   12255
@@ -2339,7 +2282,7 @@ Begin VB.Form frmFacHcoFacturas2
          End
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmFacHcoFacturas.frx":E4FE
+         Bindings        =   "frmFacHcoFacturas.frx":E51A
          Height          =   2025
          Left            =   -74760
          TabIndex        =   60
@@ -2408,7 +2351,7 @@ Begin VB.Form frmFacHcoFacturas2
          EndProperty
       End
       Begin MSDataGridLib.DataGrid DataGrid2 
-         Bindings        =   "frmFacHcoFacturas.frx":E513
+         Bindings        =   "frmFacHcoFacturas.frx":E52F
          Height          =   1945
          Left            =   -74760
          TabIndex        =   91
@@ -2676,6 +2619,89 @@ Begin VB.Form frmFacHcoFacturas2
             Top             =   240
             Width           =   1455
          End
+      End
+      Begin MSComctlLib.ListView lwCostes 
+         Height          =   3735
+         Left            =   240
+         TabIndex        =   207
+         Top             =   840
+         Width           =   13695
+         _ExtentX        =   24156
+         _ExtentY        =   6588
+         SortKey         =   8
+         View            =   3
+         LabelEdit       =   1
+         Sorted          =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Tahoma"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   10
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Tipo"
+            Object.Width           =   1411
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Nombre"
+            Object.Width           =   5503
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Documento"
+            Object.Width           =   2116
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Fecha"
+            Object.Width           =   2205
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "Descripción"
+            Object.Width           =   6350
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   5
+            Text            =   "Cantidad"
+            Object.Width           =   1764
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   6
+            Text            =   "Precio"
+            Object.Width           =   2010
+         EndProperty
+         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   7
+            Text            =   "Importe"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   8
+            Text            =   "ORDEN"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(10) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   9
+            Text            =   "codartic"
+            Object.Width           =   0
+         EndProperty
       End
       Begin VB.Label Label1 
          Caption         =   "Pedido por cliente"
@@ -3428,7 +3454,7 @@ Dim cadB As String
         If (vUsu.codigo Mod 1000) > 0 Then
     
             cadB = " scafac.codtipom "
-            If Val(vUsu.AlmacenPorDefecto) = vParamAplic.AlmacenB Then
+            If Val(vUsu.AlmacenPorDefecto2) = vParamAplic.AlmacenB Then
                 cadB = cadB & " = "
             Else
                 cadB = cadB & " <> "
@@ -4339,6 +4365,15 @@ Dim RefeGrande As Boolean
     End If
     
     
+    'El boton de imprimir campos lo usare en euler para los costes
+    Me.SSTab1.TabVisible(2) = False
+    If vParamAplic.NumeroInstalacion = 4 Then
+        Toolbar1.Buttons(14).Image = 36
+        Toolbar1.Buttons(14).visible = True
+        Toolbar1.Buttons(14).ToolTipText = "Costes"
+        Me.SSTab1.TabVisible(2) = True
+    End If
+    
     EsDeVarios = False
     If vUsu.Nivel = 0 Then EsDeVarios = vParamAplic.GrabaModificarPrecioAlaBaja
     Toolbar1.Buttons(15).visible = EsDeVarios
@@ -4404,6 +4439,7 @@ Dim RefeGrande As Boolean
         Label1(47).Caption = "F. liquid."
         FrameReparEuler.BorderStyle = 0
         imgBuscarEULER.Picture = frmPpal.imgListComun.ListImages(19).Picture
+        
     End If
         
     
@@ -4497,7 +4533,7 @@ On Error Resume Next
         Me.ListView2.ListItems.Clear
         Me.ListView3.ListItems.Clear
     End If
-    
+    If vParamAplic.NumeroInstalacion = 4 Then lwCostes.ListItems.Clear
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -4725,6 +4761,9 @@ End Sub
 Private Sub imgBuscarEULER_Click()
 Dim Aux As String
     If Modo <> 1 Then Exit Sub
+    
+    
+    
     CadenaDesdeOtroForm = ""
     frmFacEulerDatosRep.Buscar = True
     frmFacEulerDatosRep.Show vbModal
@@ -5206,7 +5245,7 @@ Dim cadAux As String
             If (vUsu.codigo Mod 1000) > 0 Then
                 If cadB <> "" Then cadB = cadB & " AND "
                 cadB = cadB & " scafac.codtipom "
-                If Val(vUsu.AlmacenPorDefecto) = vParamAplic.AlmacenB Then
+                If Val(vUsu.AlmacenPorDefecto2) = vParamAplic.AlmacenB Then
                     cadB = cadB & " = "
                 Else
                     cadB = cadB & " <> "
@@ -5405,6 +5444,7 @@ Dim b2 As Boolean
     If vParamAplic.Ariagro <> "" Then CargaDatosCampos
     If vParamAplic.TieneTelefonia2 > 0 Then CargaDatosTelefonia
     If vParamAplic.NumeroInstalacion = 4 Then PonerCamposFicha
+        
     'Poner la referencia del cliente
   '  If Not data3.Recordset.EOF Then Text1(3).Text = DBLet(data3.Recordset.Fields!referenc, "T")
     
@@ -5563,7 +5603,7 @@ Dim b As Boolean
     Me.txtAux2(9).visible = (Modo = 5) And b
     
     imgBuscarEULER.visible = Modo = 1
-
+    
     Me.Combo1.visible = (Modo = 1)
 
     '---------------------------------------------
@@ -5804,7 +5844,12 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             
         Case 13: mnModLotes_Click
         
-        Case 14: mnEditarCampos_Click
+        Case 14:
+            If vParamAplic.NumeroInstalacion = 4 Then
+                ImprimirCostesEuler
+            Else
+                mnEditarCampos_Click
+            End If
         
         Case 15: mnTipoPreciosLinea_Click
          
@@ -6222,6 +6267,16 @@ Dim cContaFra As cContabilizarFacturas
         conn.Execute "Delete from slifac " & SQL
     
     
+        'Lineas lotes
+        conn.Execute "Delete from slifaclotes  " & SQL
+        
+       
+        If vParamAplic.NumeroInstalacion = 4 Then
+            conn.Execute "Delete from slifac_eu " & SQL
+            
+            conn.Execute "Delete from scafac_eu " & SQL
+        End If
+        
         'Campos
         conn.Execute "Delete from slifaccampos " & SQL
     
@@ -6397,7 +6452,7 @@ Dim b As Boolean
         Toolbar1.Buttons(13).Enabled = b
         Me.mnModLotes.Enabled = b
         
-        If vParamAplic.Ariagro <> "" Then
+        If Toolbar1.Buttons(14).visible Then
             Toolbar1.Buttons(14).Enabled = b
             Me.mnEditarCampos.Enabled = b
         End If
@@ -6551,7 +6606,7 @@ End Sub
     
 Private Sub BotonImprimir(OpcionListado As Byte)
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
 Dim cadSelect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
@@ -6566,7 +6621,7 @@ Dim NumCopias As Integer
     End If
     
     cadFormula = ""
-    CadParam = ""
+    cadParam = ""
     cadSelect = ""
     numParam = 0
     NumCopias = 1
@@ -6597,14 +6652,14 @@ Dim NumCopias As Integer
         '-----------------------------------------------
         indRPT = 18 'Facturas Clientes TPV
     End If
-    If Not PonerParamRPT2(indRPT, CadParam, numParam, nomDocu, ImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(indRPT, cadParam, numParam, nomDocu, ImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
       
       
       
     'PUNTO VERDE
     '--------------------------------------------------------------------------
     If vParamAplic.ArtReciclado <> "" Then
-        CadParam = CadParam & "PuntoVerde= """ & vParamAplic.ArtReciclado & """|"
+        cadParam = cadParam & "PuntoVerde= """ & vParamAplic.ArtReciclado & """|"
         numParam = numParam + 1
     End If
       
@@ -6655,7 +6710,7 @@ Dim NumCopias As Integer
                 .outTipoDocumento = 2
                 .SeleccionaRPTCodigo = pRptvMultiInforme
                 .FormulaSeleccion = cadFormula
-                .OtrosParametros = CadParam
+                .OtrosParametros = cadParam
                 .NumeroParametros = numParam
                 .NombrePDF = pPdfRpt
                 .SoloImprimir = False
@@ -7289,7 +7344,7 @@ End Function
 
 Private Function ObtenerSelFactura() As String
 Dim cad As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error Resume Next
 
@@ -7326,15 +7381,15 @@ Dim Rs As ADODB.Recordset
                     cad = "SELECT codtipom,numfactu,fecfactu FROM scafac1 "
                     cad = cad & " WHERE codtipoa=" & DBSet(hcoCodTipoM, "T") & " AND numalbar=" & hcoCodMovim & " AND fechaalb=" & DBSet(hcoFechaMov, "F")
                     
-                    Set Rs = New ADODB.Recordset
-                    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                    If Not Rs.EOF Then 'where para la factura
-                        cad = " WHERE codtipom='" & Rs!codtipom & "' AND numfactu= " & Rs!Numfactu & " AND fecfactu=" & DBSet(Rs!FecFactu, "F")
+                    Set RS = New ADODB.Recordset
+                    RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    If Not RS.EOF Then 'where para la factura
+                        cad = " WHERE codtipom='" & RS!codtipom & "' AND numfactu= " & RS!Numfactu & " AND fecfactu=" & DBSet(RS!FecFactu, "F")
                     Else
                         cad = " WHERE numfactu=-1"
                     End If
-                    Rs.Close
-                    Set Rs = Nothing
+                    RS.Close
+                    Set RS = Nothing
                 End If
     
     End If
@@ -7361,7 +7416,7 @@ End Function
 
 
 Private Sub CargaCombo()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim i As Byte
     
@@ -7371,7 +7426,7 @@ Dim i As Byte
     'Para cualquiera menos root
     If (vUsu.codigo Mod 1000) > 0 Then
         SQL = SQL & " AND codtipom"
-        If Val(vUsu.AlmacenPorDefecto) = vParamAplic.AlmacenB Then
+        If Val(vUsu.AlmacenPorDefecto2) = vParamAplic.AlmacenB Then
             SQL = SQL & " = "
         Else
             SQL = SQL & "<>"
@@ -7379,24 +7434,24 @@ Dim i As Byte
         SQL = SQL & "'FAZ'"
     End If
         
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
-        SQL = Rs!nomtipom
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
+        SQL = RS!nomtipom
         SQL = Replace(SQL, "Factura", "")
-        Combo1.AddItem Rs!codtipom & "-" & SQL
+        Combo1.AddItem RS!codtipom & "-" & SQL
         Combo1.ItemData(Combo1.NewIndex) = i
         i = i + 1
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 End Sub
 
 
 Private Sub ImprimirAlbaran(OpcionListado As Byte)
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
 Dim cadSelect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
@@ -7407,21 +7462,21 @@ Dim devuelve As String
 
     
     cadFormula = ""
-    CadParam = ""
+    cadParam = ""
     cadSelect = ""
     numParam = 0
     
     '===================================================
     '============ PARAMETROS ===========================
     indRPT = 42
-    If Not PonerParamRPT2(indRPT, CadParam, numParam, nomDocu, False, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(indRPT, cadParam, numParam, nomDocu, False, pPdfRpt, pRptvMultiInforme) Then Exit Sub
       
       
       
     'PUNTO VERDE
     '--------------------------------------------------------------------------
     If vParamAplic.ArtReciclado <> "" Then
-        CadParam = CadParam & "PuntoVerde= """ & vParamAplic.ArtReciclado & """|"
+        cadParam = cadParam & "PuntoVerde= """ & vParamAplic.ArtReciclado & """|"
         numParam = numParam + 1
     End If
       
@@ -7468,7 +7523,7 @@ Dim devuelve As String
         'que se aplica a ese cliente
         devuelve = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", Text1(4).Text, "N")
         If devuelve <> "" Then
-            CadParam = CadParam & "pTipoIVA= " & devuelve & "|"
+            cadParam = cadParam & "pTipoIVA= " & devuelve & "|"
             numParam = numParam + 1
         End If
          
@@ -7491,7 +7546,7 @@ Dim devuelve As String
                 
                 
                 .FormulaSeleccion = cadFormula
-                .OtrosParametros = CadParam
+                .OtrosParametros = cadParam
                 .NumeroParametros = numParam
                 .NombrePDF = pPdfRpt
                 .SoloImprimir = False
@@ -8247,6 +8302,10 @@ Private Sub PonerCamposFicha()
 Dim N As Byte
 Dim SQL As String
 Dim cad2 As String
+Dim N2 As Integer
+Dim ImpMano As Currency
+Dim total As Currency
+Dim Impo As Currency
 
     Me.FrameALE.visible = Data3.Recordset!codtipoa = "ALO"     'Text1(1).Text = "FAE"
     Me.FrameReparEuler.visible = Data3.Recordset!codtipoa = "ALR"      'Text1(1).Text = "FAE"
@@ -8259,7 +8318,7 @@ Dim cad2 As String
     SQL = SQL & ",TipoBombLimSumVer,TipoBomAgitadorRes,TipoBomAgitadorLim,TipoBomResOtrosEqu,TipoBomLimOtrosEqu,DatosBommarca,DatosBomNumCurva"
     SQL = SQL & ",DatosBomModelo,DatosBomNumSerie,DatosBomAno,DatosBomH,DatosBomTipoRodete,DatosBomCaudal,DatosBomUdCaudal,DatosMotorMarca"
     SQL = SQL & ",DatosMotorModelo , DatosMotorNumSerie, DatosMotorV, DatosMotorI, DatosMotorCV, DatosMotorKw, DatosMotorrpm, NumParteTrabajo, NumTrabajExterno"
-    
+    lwCostes.ListItems.Add , , "asdadad"
     
     
     SQL = "Select " & SQL & " FROM scafac_eu "
@@ -8271,6 +8330,9 @@ Dim cad2 As String
         LimpiarFichaTecnica False
         
     Else
+        
+        
+        
         
         'cboEulerT.ListIndex = DBLet(miRsAux!partetrabajo)  '0 1
         
@@ -8358,6 +8420,106 @@ Dim cad2 As String
         End If  'de alr
     End If
     miRsAux.Close
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    'Carga costes euler
+    'ImpMano
+    'Total
+
+    Me.lwCostes.ListItems.Clear
+    SQL = " *,if(tipo=0,0,1) orden1 "
+    SQL = "Select " & SQL & " FROM  slifac_eu " & ObtenerWhereCP(True)
+    SQL = SQL & " order by orden1,fechamov"
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    N2 = 0
+    ImpMano = 0
+    cad2 = ""
+    total = 0
+    While Not miRsAux.EOF
+        N2 = N2 + 1
+        Select Case miRsAux!Tipo
+        Case 0
+            'Horas
+            lwCostes.ListItems.Add , , "HOR"
+            lwCostes.ListItems(N2).SubItems(1) = "Horas trabajadas"
+            lwCostes.ListItems(N2).SubItems(2) = " "
+            lwCostes.ListItems(N2).SubItems(3) = " "
+            lwCostes.ListItems(N2).SubItems(4) = " "
+            
+        Case 1, 2
+            'Materia prima
+            lwCostes.ListItems.Add , , IIf(miRsAux!Tipo = 1, "MAT", "ALB")
+            lwCostes.ListItems(N2).SubItems(1) = IIf(miRsAux!Tipo = 1, "Material auxiliar", " ")
+            lwCostes.ListItems(N2).SubItems(2) = " "
+            lwCostes.ListItems(N2).SubItems(3) = " "
+            
+           
+           
+        
+        Case Else
+            'proveedor
+            lwCostes.ListItems.Add , , "PRO"
+            lwCostes.ListItems(N2).SubItems(1) = miRsAux!Aux
+            lwCostes.ListItems(N2).SubItems(2) = miRsAux!Documento
+            
+            
+        End Select
+        If miRsAux!Tipo <> 0 Then
+            lwCostes.ListItems(N2).SubItems(4) = miRsAux!NomArtic
+            lwCostes.ListItems(N2).SubItems(3) = miRsAux!FechaMov
+        End If
+        'Cantidad
+        lwCostes.ListItems(N2).SubItems(5) = Format(miRsAux!cantidad, FormatoImporte)
+        lwCostes.ListItems(N2).SubItems(6) = Format(miRsAux!precioar, FormatoImporte)
+        Impo = Round2(miRsAux!precioar * miRsAux!cantidad, 2)
+        lwCostes.ListItems(N2).SubItems(7) = Format(Impo, FormatoImporte)
+        
+        If miRsAux!Tipo = 0 Then ImpMano = ImpMano + Impo
+        total = total + Impo
+        
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    If N2 > 0 Then
+        If ImpMano > 0 Then
+            N2 = N2 + 1
+            lwCostes.ListItems.Add , , " "
+            For N = 1 To 5
+                lwCostes.ListItems(N2).SubItems(N) = " "
+            Next
+            lwCostes.ListItems(N2).SubItems(6) = "Mano obra"
+            lwCostes.ListItems(N2).SubItems(7) = Format(ImpMano, FormatoImporte)
+        End If
+        If total > 0 Then
+            Impo = total - ImpMano
+        
+            
+            lwCostes.ListItems.Add , , " "
+            N2 = N2 + 1
+            For N = 1 To 5
+                lwCostes.ListItems(N2).SubItems(N) = " "
+            Next
+            lwCostes.ListItems(N2).SubItems(6) = "Materiales"
+            lwCostes.ListItems(N2).SubItems(7) = Format(Impo, FormatoImporte)
+            
+                
+            lwCostes.ListItems.Add , , " "
+            N2 = N2 + 1
+            For N = 1 To 5
+                lwCostes.ListItems(N2).SubItems(N) = " "
+            Next
+            lwCostes.ListItems(N2).SubItems(6) = "  TOTAL"
+            lwCostes.ListItems(N2).SubItems(7) = Format(total, FormatoImporte)
+        End If
+    End If
+        
     Set miRsAux = Nothing
 End Sub
 
@@ -8375,7 +8537,7 @@ Dim N As Byte
     Me.optEuler(0).Value = False  'Ninguno seleccionado
     
     
-    
+    lwCostes.ListItems.Clear
     
 End Sub
 
@@ -8392,6 +8554,11 @@ If Modo <> 2 Then Exit Sub
     BuscaChekc = DevuelveDesdeBDNew(conAri, "scryst", "documrpt", "codcryst", CStr(NumRegElim), "N")
     
     If BuscaChekc = "" Then Exit Sub
+    
+    
+
+    
+    
     
     With frmImprimir
             'Cod Tipo Movimiento
@@ -8623,4 +8790,67 @@ Private Sub ReestableceLotesArticulo()
             Set miRsAux = Nothing
         End If
 End Sub
+
+
+
+Private Sub ImprimirCostesEuler()
+
+    On Error GoTo eImprimirCostesEuler
+    If Modo <> 2 Then Exit Sub
+    
+    
+
+    With frmImprimir
+        .NombreRPT = "EULFacturaCostes.rpt"
+        .FormulaSeleccion = "{" & NombreTabla & ".codtipom}='" & Text1(1).Text & "' AND {" & NombreTabla & ".numfactu}=" & Val(Text1(0).Text) & " AND {" & NombreTabla & ".fecfactu}= Date(" & Year(Text1(2).Text) & "," & Month(Text1(2).Text) & "," & Day(Text1(2).Text) & ")"
+        .OtrosParametros = "|pCodUsu=" & vUsu.codigo & "|"
+        .NumeroParametros = 1
+        .Titulo = "Costes EULER"
+        .SoloImprimir = False
+        .EnvioEMail = False
+        .Opcion = 2000 '2000 generico
+        .ConSubInforme = True
+        .Show vbModal
+    End With
+    
+    
+    
+    
+    
+    
+    
+eImprimirCostesEuler:
+    If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
+    
+End Sub
+
+
+
+
+
+
+
+'--------------------------------------------------------------------------------
+Private Function CargaCostesEuler2() As Boolean
+Dim C As String
+
+    On Error GoTo eCargaCostesEuler
+    
+    
+    C = "Select     "
+    
+
+        
+    
+eCargaCostesEuler:
+    If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
+    
+    lblIndicador.Caption = lblIndicador.Tag
+    Screen.MousePointer = vbDefault
+End Function
+
+
+
+
+
 

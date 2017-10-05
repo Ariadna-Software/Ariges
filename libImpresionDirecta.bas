@@ -18,11 +18,11 @@ Private Const ModoImpresion = 2
     ' Sin embargo con el TPRINTER podemos llegar a las 37 lineas
     ' .....  como suena. ASIN ES!!!!!
         
-Dim Cabecera As Collection
+Dim cabecera As Collection
 Dim Lineas As Collection
 Dim Importes As Collection
                     
-Dim rs1 As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 Dim LasObservaciones As String
 Dim NF As Integer
                 
@@ -82,7 +82,7 @@ On Error GoTo EImpD
         AccionesIniciales
         
         
-        Set rs1 = New ADODB.Recordset
+        Set RS1 = New ADODB.Recordset
         
        
         
@@ -95,26 +95,26 @@ On Error GoTo EImpD
         
         'Cabecera del albaran
         SQL = "select * from scaalb WHERE " & cadSelect
-        rs1.Open SQL, conn, adOpenForwardOnly
+        RS1.Open SQL, conn, adOpenForwardOnly
         
         
-        Lin = Space(MargenIzdo + 45) & "ALB.   " & rs1!codtipom & Format(rs1!NumAlbar, "000000") & Space(12) & Format(rs1!FechaAlb, "dd/mm/yyyy")
-        Set Cabecera = New Collection
+        Lin = Space(MargenIzdo + 45) & "ALB.   " & RS1!codtipom & Format(RS1!NumAlbar, "000000") & Space(12) & Format(RS1!FechaAlb, "dd/mm/yyyy")
+        Set cabecera = New Collection
         'EN la impresora se alineara la linea roja del cabezal con la linea superiror del papel impreso (en verde)
         'Añadairemos una linea en blanco
-        Cabecera.Add " "
-        Cabecera.Add Lin
-        Cabecera.Add Space(MargenIzdo + 45)
+        cabecera.Add " "
+        cabecera.Add Lin
+        cabecera.Add Space(MargenIzdo + 45)
         
         'Lineas 2 a 7 , datos cliente  nomclien  domclien  codpobla  pobclien  proclien  nifclien
-        CargaEncabezado2 0, rs1
+        CargaEncabezado2 0, RS1
         
         
         'Leo estos valores para el final del albaran dtoppago dtognral
         Set vFactu = New CFactura
-        vFactu.DtoPPago = rs1!DtoPPago
-        vFactu.DtoGnral = rs1!DtoGnral
-        vFactu.Cliente = rs1!codclien
+        vFactu.DtoPPago = RS1!DtoPPago
+        vFactu.DtoGnral = RS1!DtoGnral
+        vFactu.Cliente = RS1!codClien
 
         If Not vFactu.CalcularDatosFactura(cadSelect, "scaalb", "slialb", False) Then
             MsgBox "MAAAL"
@@ -122,42 +122,42 @@ On Error GoTo EImpD
         
         
         'Veo el campo observaciones
-        LasObservaciones = DBLet(rs1!observa01, "T")
+        LasObservaciones = DBLet(RS1!observa01, "T")
         
         'Cerramos el rs
-        rs1.Close
+        RS1.Close
         
         
         SQL = "select slialb.*,codigiva,numserie,fecvigen from slialb,sartic where slialb.codartic=sartic.codartic AND "
         SQL = SQL & Replace(cadSelect, "scaalb", "slialb") & " ORDER by numlinea"
-        rs1.Open SQL, conn, adOpenForwardOnly
+        RS1.Open SQL, conn, adOpenForwardOnly
         
         
         Set Lineas = New Collection
-        While Not rs1.EOF
+        While Not RS1.EOF
             
             'Las lineas correspondientes
-            Lin = Right(Space(16) & rs1!codArtic, 16)  '16 es la longiyud de codartic
+            Lin = Right(Space(16) & RS1!codArtic, 16)  '16 es la longiyud de codartic
             Lin = Space(MargenIzdo) & Lin
-            Lin = Lin & " " & Left(rs1!NomArtic & Space(30), 30)
+            Lin = Lin & " " & Left(RS1!NomArtic & Space(30), 30)
             
-            Lin = Lin & Right(Space(9) & Format(rs1!Cantidad, FormatoCantidad), 9) & Space(2)
-            Lin = Lin & Right(Space(10) & Format(rs1!precioar, FormatoPrecio), 10)
+            Lin = Lin & Right(Space(9) & Format(RS1!cantidad, FormatoCantidad), 9) & Space(2)
+            Lin = Lin & Right(Space(10) & Format(RS1!precioar, FormatoPrecio), 10)
             'El IVA.
-            rsIVA.Find "codigiva = " & rs1!codigiva, , adSearchForward, 1
+            rsIVA.Find "codigiva = " & RS1!codigiva, , adSearchForward, 1
             If rsIVA.EOF Then
                 Lin = Lin & " * "
             Else
                 Lin = Lin & " " & Format(rsIVA!PorceIVA, "00")
             End If
-            Lin = Lin & Right(Space(15) & Format(rs1!ImporteL, FormatoPrecio), 15)
+            Lin = Lin & Right(Space(15) & Format(RS1!ImporteL, FormatoPrecio), 15)
             Lineas.Add Lin
             'El numero de serie
-            Lin = DBLet(rs1!numSerie, "T")
+            Lin = DBLet(RS1!numSerie, "T")
             If Lin <> "" Then
-                If Not IsNull(rs1!fecvigen) Then Lin = Lin & " (" & Format(rs1!fecvigen, "dd/mm/yy") & ")"
+                If Not IsNull(RS1!fecvigen) Then Lin = Lin & " (" & Format(RS1!fecvigen, "dd/mm/yy") & ")"
                 
-                If Not IsNull(rs1!numLote) Then Lin = Lin & "  NºLote: " & rs1!numLote
+                If Not IsNull(RS1!numLote) Then Lin = Lin & "  NºLote: " & RS1!numLote
                 
                 'Esto estaba
                 Lin = Space(10) & "N. Reg: " & Lin
@@ -167,13 +167,13 @@ On Error GoTo EImpD
                 
                 Lineas.Add Lin
             End If
-            rs1.MoveNext
+            RS1.MoveNext
             
             
         Wend
         
         
-        rs1.Close
+        RS1.Close
         rsIVA.Close
         
         'Añado las obseraciones
@@ -222,11 +222,11 @@ EImpD:
     End If
     
     
-    Set Cabecera = Nothing
+    Set cabecera = Nothing
     Set Lineas = Nothing
     Set Importes = Nothing
     Set rsIVA = New ADODB.Recordset
-    Set rs1 = New ADODB.Recordset
+    Set RS1 = New ADODB.Recordset
     Exit Sub
     
 End Sub
@@ -262,8 +262,8 @@ Private Sub ImprimeEnPapel()
             If i = 0 Then
                 '***********************************************************
                 'Imprimir cabecera
-                For i = 1 To Cabecera.Count
-                    ImprimeLaLinea Cabecera(i)
+                For i = 1 To cabecera.Count
+                    ImprimeLaLinea cabecera(i)
                 Next i
                 i = 0
                 'Si hay mas de una hoja pongo tambien el numero de hoja
@@ -346,7 +346,7 @@ Private Sub ImprimeEnPapel()
 End Sub
 
 
-Private Function LineaImportes(BaseIVA As Currency, PorceIVA As Currency, ImpIVA As Currency, IvaRE As Currency, ImpIVARE As Currency, TotalFac As String) As String
+Private Function LineaImportes(BaseIVA As Currency, PorceIVA As Currency, ImpIva As Currency, IvaRE As Currency, ImpIVARE As Currency, TotalFac As String) As String
 Dim Lin As String
     
         Lin = Space(17) & Format(BaseIVA, FormatoImporte)
@@ -354,7 +354,7 @@ Dim Lin As String
         Lin = Space(MargenIzdo + 16) & Lin
         Lin = Lin & "  " & Right(Space(5) & Format(PorceIVA, FormatoPorcen), 5)
          Lin = Lin & " "
-        Lin = Lin & Right(Space(11) & Format(ImpIVA, FormatoImporte), 11)
+        Lin = Lin & Right(Space(11) & Format(ImpIva, FormatoImporte), 11)
         If IvaRE = 0 Then
             'No lleva % retencion
             Lin = Lin & Space(17)
@@ -371,34 +371,34 @@ End Function
 
 'Como los campos del albaran y de la factura son los mismos...
 ' Paso Opcion por si acaso tengo que hacer algo a las facturas o a los albaranes...
-Private Sub CargaEncabezado2(Opcion As Byte, ByRef RS As ADODB.Recordset)
+Private Sub CargaEncabezado2(Opcion As Byte, ByRef Rs As ADODB.Recordset)
 Dim L As String
-        L = Space(35) & Format(RS!codclien, "000") & Space(15)
-        L = Mid(L, 1, (MargenIzdo + 45)) & RS!Nomclien
+        L = Space(35) & Format(Rs!codClien, "000") & Space(15)
+        L = Mid(L, 1, (MargenIzdo + 45)) & Rs!NomClien
         'linea 4
-        Cabecera.Add L
-        Cabecera.Add Space(MargenIzdo + 45) & DBLet(RS!domclien, "T")
-        Cabecera.Add Space(MargenIzdo + 45) & RS!pobclien
-        Cabecera.Add Space(MargenIzdo + 45) & Format(RS!codpobla, "00000") & " " & RS!proclien
-        Cabecera.Add Space(MargenIzdo + 45) & "C.I.F.: " & RS!NIFClien
+        cabecera.Add L
+        cabecera.Add Space(MargenIzdo + 45) & DBLet(Rs!domclien, "T")
+        cabecera.Add Space(MargenIzdo + 45) & Rs!pobclien
+        cabecera.Add Space(MargenIzdo + 45) & Format(Rs!codpobla, "00000") & " " & Rs!proclien
+        cabecera.Add Space(MargenIzdo + 45) & "C.I.F.: " & Rs!nifClien
         L = Space(MargenIzdo + 2) & vEmpresa.nomempre & Space(40)
-        L = Mid(L, 1, MargenIzdo + 45) & "Forma de pago: " & DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "Codforpa", RS!codforpa)
-        Cabecera.Add L
-        Cabecera.Add Space(MargenIzdo + 2) & vParam.DomicilioEmpresa
+        L = Mid(L, 1, MargenIzdo + 45) & "Forma de pago: " & DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "Codforpa", Rs!codforpa)
+        cabecera.Add L
+        cabecera.Add Space(MargenIzdo + 2) & vParam.DomicilioEmpresa
         L = Space(MargenIzdo + 2) & vParam.CPostal & " " & vParam.Poblacion & " " & vParam.Provincia
-        Cabecera.Add L
+        cabecera.Add L
         L = Space(MargenIzdo + 2) & "Tfno: " & vParam.Telefono & " " & vParam.CifEmpresa
-        Cabecera.Add L
+        cabecera.Add L
         
 End Sub
 
-Private Sub ImprimeLaLinea(Linea As String)
-    Debug.Print Linea
+Private Sub ImprimeLaLinea(linea As String)
+    Debug.Print linea
     If ModoImpresion = 0 Then Exit Sub  'Solo debug
     If ModoImpresion = 1 Then
-        Printer.Print Linea
+        Printer.Print linea
     Else
-        Print #NF, Linea
+        Print #NF, linea
     End If
     
 End Sub
@@ -441,7 +441,7 @@ On Error GoTo EImpD
         
         AccionesIniciales
         
-        Set rs1 = New ADODB.Recordset
+        Set RS1 = New ADODB.Recordset
         
         
         
@@ -456,19 +456,19 @@ On Error GoTo EImpD
         SQL = SQL & " scafac.numfactu=scafac1.numfactu AND scafac.fecfactu=scafac1.fecfactu "
         SQL = SQL & " WHERE " & cadSelect
         
-        rs1.Open "Select observa1,scafac1.numalbar " & SQL, conn, adOpenForwardOnly
+        RS1.Open "Select observa1,scafac1.numalbar " & SQL, conn, adOpenForwardOnly
         TieneObsAlbaran = 0
-        While Not rs1.EOF
-            SQL = DBLet(rs1!observa1, "T")
-            Lin = "[" & Format(rs1!NumAlbar, "000000") & "]"
-            rs1.MoveNext
-            If Not rs1.EOF Then TieneObsAlbaran = 1 'Para que pinte el numero de albaran
+        While Not RS1.EOF
+            SQL = DBLet(RS1!observa1, "T")
+            Lin = "[" & Format(RS1!NumAlbar, "000000") & "]"
+            RS1.MoveNext
+            If Not RS1.EOF Then TieneObsAlbaran = 1 'Para que pinte el numero de albaran
             If SQL <> "" Then
                 If TieneObsAlbaran = 1 Then SQL = Lin & "   " & SQL
                 LasObservaciones = LasObservaciones & "- " & SQL & "|"
             End If
         Wend
-        rs1.Close
+        RS1.Close
         
         
         
@@ -495,70 +495,70 @@ On Error GoTo EImpD
         
         'Cabecera del albaran
         Lin = "select * from scafac WHERE " & cadSelect
-        rs1.Open Lin, conn, adOpenForwardOnly
+        RS1.Open Lin, conn, adOpenForwardOnly
         
         
-        Lin = Space(MargenIzdo + 45) & "FAC.   " & rs1!codtipom & Format(rs1!NumFactu, "000000") & Space(12) & Format(rs1!FecFactu, "dd/mm/yyyy")
-        Set Cabecera = New Collection
+        Lin = Space(MargenIzdo + 45) & "FAC.   " & RS1!codtipom & Format(RS1!Numfactu, "000000") & Space(12) & Format(RS1!FecFactu, "dd/mm/yyyy")
+        Set cabecera = New Collection
         'EN la impresora se alineara la linea roja del cabezal con la linea superiror del papel impreso (en verde)
         'Añadairemos una linea en blanco
-        Cabecera.Add " "
-        Cabecera.Add Lin
-        Cabecera.Add Space(MargenIzdo + 45)
+        cabecera.Add " "
+        cabecera.Add Lin
+        cabecera.Add Space(MargenIzdo + 45)
         
         'Lineas 2 a 7 , datos cliente  nomclien  domclien  codpobla  pobclien  proclien  nifclien
-        CargaEncabezado2 1, rs1
+        CargaEncabezado2 1, RS1
         
         
         'Leo estos valores para el final del albaran dtoppago dtognral
         Set vFactu = New CFactura
-        vFactu.DtoPPago = rs1!DtoPPago
-        vFactu.DtoGnral = rs1!DtoGnral
-        vFactu.Cliente = rs1!codclien
-        vFactu.NumFactu = rs1!NumFactu
-        vFactu.FecFactu = rs1!FecFactu
-        vFactu.codtipom = rs1!codtipom
+        vFactu.DtoPPago = RS1!DtoPPago
+        vFactu.DtoGnral = RS1!DtoGnral
+        vFactu.Cliente = RS1!codClien
+        vFactu.Numfactu = RS1!Numfactu
+        vFactu.FecFactu = RS1!FecFactu
+        vFactu.codtipom = RS1!codtipom
         
         'Cerramos el rs
-        rs1.Close
+        RS1.Close
         
         
         
         Lin = "select slifac.*,codigiva,numserie " & SQL
         Lin = Lin & " ORDER BY numalbar,numlinea"
-        rs1.Open Lin, conn, adOpenForwardOnly
+        RS1.Open Lin, conn, adOpenForwardOnly
         
         
         Set Lineas = New Collection
-        While Not rs1.EOF
+        While Not RS1.EOF
             
             'Las lineas correspondientes
-            Lin = Right(Space(16) & rs1!codArtic, 16)  '16 es la longiyud de codartic
+            Lin = Right(Space(16) & RS1!codArtic, 16)  '16 es la longiyud de codartic
             Lin = Space(MargenIzdo) & Lin
-            Lin = Lin & " " & Left(rs1!NomArtic & Space(30), 30)
+            Lin = Lin & " " & Left(RS1!NomArtic & Space(30), 30)
             
-            Lin = Lin & Right(Space(9) & Format(rs1!Cantidad, FormatoCantidad), 9) & Space(2)
-            Lin = Lin & Right(Space(10) & Format(rs1!precioar, FormatoPrecio), 10)
+            Lin = Lin & Right(Space(9) & Format(RS1!cantidad, FormatoCantidad), 9) & Space(2)
+            Lin = Lin & Right(Space(10) & Format(RS1!precioar, FormatoPrecio), 10)
             'El IVA.
-            rsIVA.Find "codigiva = " & rs1!codigiva, , adSearchForward, 1
+            rsIVA.Find "codigiva = " & RS1!codigiva, , adSearchForward, 1
             If rsIVA.EOF Then
                 Lin = Lin & " * "
             Else
                 Lin = Lin & " " & Format(rsIVA!PorceIVA, "00")
             End If
-            Lin = Lin & Right(Space(15) & Format(rs1!ImporteL, FormatoPrecio), 15)
+            Lin = Lin & Right(Space(15) & Format(RS1!ImporteL, FormatoPrecio), 15)
             Lineas.Add Lin
             'El numero de serie
-            Lin = DBLet(rs1!numSerie, "T")
+            Lin = DBLet(RS1!numSerie, "T")
             If Lin <> "" Then
                 Lin = Space(14) & " N. Reg: " & Space(12) & Lin
                 Lineas.Add Lin
             End If
-            rs1.MoveNext
+            RS1.MoveNext
             
             
         Wend
-        rs1.Close
+        RS1.Close
         rsIVA.Close
         
         'Las observaciones de la factura
@@ -629,11 +629,11 @@ EImpD:
     End If
     
     
-    Set Cabecera = Nothing
+    Set cabecera = Nothing
     Set Lineas = Nothing
     Set Importes = Nothing
     Set rsIVA = New ADODB.Recordset
-    Set rs1 = New ADODB.Recordset
+    Set RS1 = New ADODB.Recordset
     Exit Sub
     
 End Sub
@@ -666,7 +666,7 @@ On Error GoTo EImpD
       
         
         
-        Set rs1 = New ADODB.Recordset
+        Set RS1 = New ADODB.Recordset
         
         AccionesIniciales
         
@@ -685,29 +685,29 @@ On Error GoTo EImpD
         'Y el albaran
         SQL = SQL & " AND " & cadSelect
         
-        rs1.Open SQL, conn, adOpenForwardOnly
+        RS1.Open SQL, conn, adOpenForwardOnly
         
         
-        Lin = Space(MargenIzdo + 45) & "FAC.   " & rs1!codtipom & Format(rs1!NumFactu, "000000") & Space(12) & Format(rs1!FecFactu, "dd/mm/yyyy")
-        Set Cabecera = New Collection
+        Lin = Space(MargenIzdo + 45) & "FAC.   " & RS1!codtipom & Format(RS1!Numfactu, "000000") & Space(12) & Format(RS1!FecFactu, "dd/mm/yyyy")
+        Set cabecera = New Collection
         'EN la impresora se alineara la linea roja del cabezal con la linea superiror del papel impreso (en verde)
         'Añadairemos una linea en blanco
-        Cabecera.Add " "
-        Cabecera.Add Lin
-        Cabecera.Add Space(MargenIzdo + 45)
+        cabecera.Add " "
+        cabecera.Add Lin
+        cabecera.Add Space(MargenIzdo + 45)
         
         'Lineas 2 a 7 , datos cliente  nomclien  domclien  codpobla  pobclien  proclien  nifclien
-        CargaEncabezado2 1, rs1
+        CargaEncabezado2 1, RS1
         
         
         'Leo estos valores para el final del albaran dtoppago dtognral
         Set vFactu = New CFactura
-        vFactu.DtoPPago = rs1!DtoPPago
-        vFactu.DtoGnral = rs1!DtoGnral
-        vFactu.Cliente = rs1!codclien
-        vFactu.NumFactu = rs1!NumFactu
-        vFactu.FecFactu = rs1!FecFactu
-        vFactu.codtipom = rs1!codtipom
+        vFactu.DtoPPago = RS1!DtoPPago
+        vFactu.DtoGnral = RS1!DtoGnral
+        vFactu.Cliente = RS1!codClien
+        vFactu.Numfactu = RS1!Numfactu
+        vFactu.FecFactu = RS1!FecFactu
+        vFactu.codtipom = RS1!codtipom
         
         
         'En sql tendremos los numeros de lote
@@ -716,16 +716,16 @@ On Error GoTo EImpD
         'vamos imprimiendo los albaranes
         Set Lineas = New Collection
         i = 0
-        While Not rs1.EOF
-            Lin = rs1!codTipoa & Format(rs1!NumAlbar, "0000000")
+        While Not RS1.EOF
+            Lin = RS1!codtipoa & Format(RS1!NumAlbar, "0000000")
             If Lin <> Grupo Then
                 If Grupo <> "" Then LineaAlbaranFactura Albaran, Importe, SQL, i
                 
             
                 Grupo = Lin
-                Lin = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", rs1!CodTraba)
+                Lin = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", RS1!CodTraba)
                 If Lin <> "" Then Lin = " Venta realizada por " & Lin
-                Albaran = "Albarán: " & Grupo & " de fecha " & Format(rs1!FechaAlb, "dd/mm/yyyy") & " " & Lin
+                Albaran = "Albarán: " & Grupo & " de fecha " & Format(RS1!FechaAlb, "dd/mm/yyyy") & " " & Lin
                 'Faltara añadir el importe
                 Importe = 0
                 
@@ -733,15 +733,15 @@ On Error GoTo EImpD
             
             End If
             'El numero de serie
-            Lin = DBLet(rs1!numSerie, "T")
+            Lin = DBLet(RS1!numSerie, "T")
             If Lin <> "" Then
                 If InStr(1, SQL, "|" & Lin & "|") = 0 Then SQL = SQL & Lin & "|"
                     
             End If
-            Importe = Importe + rs1!ImporteL
-            rs1.MoveNext
+            Importe = Importe + RS1!ImporteL
+            RS1.MoveNext
         Wend
-        rs1.Close
+        RS1.Close
         LineaAlbaranFactura Albaran, Importe, SQL, i
         
 
@@ -785,7 +785,7 @@ On Error GoTo EImpD
         'Ya tenemos todos los datos
         'Ahora manadmos a la impresora
         'NumeroPaginas = ((i - 1) \ LineasPorHoja) + 1
-        'If I > 13 Then Stop
+
         ImprimeEnPapel
         
         
@@ -797,10 +797,10 @@ EImpD:
     End If
     
     
-    Set Cabecera = Nothing
+    Set cabecera = Nothing
     Set Lineas = Nothing
     Set Importes = Nothing
-    Set rs1 = New ADODB.Recordset
+    Set RS1 = New ADODB.Recordset
     Exit Sub
     
 End Sub
@@ -837,40 +837,40 @@ End Sub
 Private Function CargarImportesDesdeFactura(ByRef F As CFactura, ByRef auxiliar As String) As Boolean
     CargarImportesDesdeFactura = False
     auxiliar = "Select * from scafac where codtipom=" & DBSet(F.codtipom, "T")
-    auxiliar = auxiliar & " AND numfactu=" & DBSet(F.NumFactu, "N")
+    auxiliar = auxiliar & " AND numfactu=" & DBSet(F.Numfactu, "N")
     auxiliar = auxiliar & " AND fecfactu=" & DBSet(F.FecFactu, "F")
-    rs1.Open auxiliar, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If rs1.EOF Then
+    RS1.Open auxiliar, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If RS1.EOF Then
         
     
     
     Else
         CargarImportesDesdeFactura = True
         
-        F.BaseIVA1 = DBLet(rs1!baseimp1, "N")
-        F.PorceIVA1 = DBLet(rs1!porciva1, "N")
-        F.ImpIVA1 = DBLet(rs1!imporiv1, "N")
-        F.PorceIVA1RE = DBLet(rs1!porciva1re, "N")
-        F.ImpIVA1RE = DBLet(rs1!imporiv1re, "N")
+        F.BaseIVA1 = DBLet(RS1!baseimp1, "N")
+        F.PorceIVA1 = DBLet(RS1!porciva1, "N")
+        F.ImpIVA1 = DBLet(RS1!imporiv1, "N")
+        F.PorceIVA1RE = DBLet(RS1!porciva1re, "N")
+        F.ImpIVA1RE = DBLet(RS1!imporiv1re, "N")
         
         
         
-        F.BaseIVA2 = DBLet(rs1!baseimp2, "N")
-        F.PorceIVA2 = DBLet(rs1!porciva2, "N")
-        F.ImpIVA2 = DBLet(rs1!imporiv2, "N")
-        F.PorceIVA2RE = DBLet(rs1!porciva2re, "N")
-        F.ImpIVA2RE = DBLet(rs1!imporiv2re, "N")
+        F.BaseIVA2 = DBLet(RS1!baseimp2, "N")
+        F.PorceIVA2 = DBLet(RS1!porciva2, "N")
+        F.ImpIVA2 = DBLet(RS1!imporiv2, "N")
+        F.PorceIVA2RE = DBLet(RS1!porciva2re, "N")
+        F.ImpIVA2RE = DBLet(RS1!imporiv2re, "N")
         
-        F.BaseIVA3 = DBLet(rs1!baseimp3, "N")
-        F.PorceIVA3 = DBLet(rs1!porciva3, "N")
-        F.ImpIVA3 = DBLet(rs1!imporiv3, "N")
-        F.PorceIVA3RE = DBLet(rs1!porciva3re, "N")
-        F.ImpIVA3RE = DBLet(rs1!imporiv3re, "N")
+        F.BaseIVA3 = DBLet(RS1!baseimp3, "N")
+        F.PorceIVA3 = DBLet(RS1!porciva3, "N")
+        F.ImpIVA3 = DBLet(RS1!imporiv3, "N")
+        F.PorceIVA3RE = DBLet(RS1!porciva3re, "N")
+        F.ImpIVA3RE = DBLet(RS1!imporiv3re, "N")
         
-        F.TotalFac = rs1!TotalFac
+        F.TotalFac = RS1!TotalFac
             
     
     End If
-    rs1.Close
+    RS1.Close
 End Function
 

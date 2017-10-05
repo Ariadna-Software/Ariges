@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmArticu2 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Artículos (Busqueda)"
@@ -530,7 +530,7 @@ Private Sub BotonVerTodos()
 On Error Resume Next
 
     CargaGrid ""
-    If Adodc1.Recordset.RecordCount <= 0 Then
+    If adodc1.Recordset.RecordCount <= 0 Then
         MsgBox "No hay ningún registro en la tabla artic.", vbInformation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -617,7 +617,7 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim i As Integer
-Dim CadB As String
+Dim cadB As String
 
     On Error Resume Next
 
@@ -631,10 +631,10 @@ Dim CadB As String
                     If InStr(1, txtAux(i).Text, "*") = 0 Then txtAux(i).Text = "*" & txtAux(i).Text & "*"
                 End If
             Next i
-            CadB = ObtenerBusqueda(Me, False)
-            If CadB <> "" Then
+            cadB = ObtenerBusqueda(Me, False)
+            If cadB <> "" Then
                 PonerModo 2
-                CargaGrid CadB
+                CargaGrid cadB
                 DataGrid1.SetFocus
             End If
         
@@ -691,13 +691,13 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim cad As String
 
-    If Adodc1.Recordset.EOF Then
+    If adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Adodc1.Recordset.Fields(0) & "|"
-    cad = cad & Adodc1.Recordset.Fields(1) & "|"
+    cad = adodc1.Recordset.Fields(0) & "|"
+    cad = cad & adodc1.Recordset.Fields(1) & "|"
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -712,8 +712,8 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+    If Not adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     End If
 End Sub
 
@@ -762,8 +762,8 @@ Private Sub Form_Load()
     
     'Novimebre 2010
     If parAlmacen = "" Then
-        If vUsu.AlmacenPorDefecto <> "" Then
-            parAlmacen = vUsu.AlmacenPorDefecto
+        If vUsu.AlmacenPorDefecto2 <> "" Then
+            parAlmacen = vUsu.AlmacenPorDefecto2
         Else
             parAlmacen = DevuelveDesdeBDNew(conAri, "salmpr", "min(codalmac)", "", "")
         End If
@@ -869,7 +869,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 
-Private Sub CargaGrid(Optional Sql As String)
+Private Sub CargaGrid(Optional SQL As String)
 Dim b As Boolean
 Dim tots As String
 Dim cadSel As String
@@ -877,20 +877,20 @@ Dim cadSel As String
     b = DataGrid1.Enabled
     
     ' ---- [06/11/2009] [LAURA] : añadir la cantidad de stock
-    cadSel = Sql
+    cadSel = SQL
     
     'AnyadirAFormula cadSel, "codalmac=" & Me.parAlmacen
     
-    Sql = CadenaConsulta
+    SQL = CadenaConsulta
 '    If Trim(cadSel) <> "" Then Sql = Sql & " WHERE " & cadSel
-    If Trim(cadSel) <> "" Then Sql = Sql & " AND " & cadSel
+    If Trim(cadSel) <> "" Then SQL = SQL & " AND " & cadSel
     If mnOrdenadoPor(1).Checked Then
-        Sql = Sql & " ORDER BY sartic.nomartic"
+        SQL = SQL & " ORDER BY sartic.nomartic"
     Else
-        Sql = Sql & " ORDER BY sartic.codartic"
+        SQL = SQL & " ORDER BY sartic.codartic"
     End If
 
-    CargaGridGnral DataGrid1, Me.Adodc1, Sql, False
+    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
     
     '### a mano
     tots = "S|txtAux(0)|T|Codigo|1800|;S|txtAux(1)|T|Descripcion|3640|;S|txtAux(2)|T|Cod. Asoc.|1300|;"
@@ -913,8 +913,8 @@ Dim cadSel As String
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
-   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+   If Not adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If

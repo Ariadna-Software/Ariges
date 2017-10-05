@@ -10504,7 +10504,7 @@ Attribute frmMen.VB_VarHelpID = -1
 
 '----- Variables para el INforme ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'cadena con los parametros q se pasan a Crystal R.
+Private cadParam As String 'cadena con los parametros q se pasan a Crystal R.
 Private numParam As Byte
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private Titulo As String 'Titulo informe que se pasa a frmImprimir
@@ -10549,7 +10549,7 @@ Private Sub cboTipomov_Click(Index As Integer)
     If Index = 1 Then
         'Reimpresion de facturas
         'Alzira NO esta en esto
-        If vParamAplic.TieneTelefonia2 > 1 Then chk_duplicado2(2).visible = Mid(cboTipoMov(Index).Text, 1, 3) = "FAT"
+        If vParamAplic.TieneTelefonia2 > 1 Then chk_duplicado2(2).visible = Mid(cboTipomov(Index).Text, 1, 3) = "FAT"
     End If
 End Sub
 
@@ -10694,6 +10694,17 @@ Dim cad As String
         MsgBox cad, vbExclamation
         Exit Sub
     End If
+    
+    
+    
+    'Comprobare que no existe el albaran del cliente
+     cad = " year(fechaalb) = " & Year(CDate(txtCodigo(49).Text)) & " AND numalbar=" & DBSet(txtCodigo(48).Text, "T") & " AND codprove"
+     cad = DevuelveDesdeBD(conAri, "fechaalb", "scaalp", cad, CStr(codClien), "N")
+     If cad <> "" Then
+        MsgBox "Ya existe para el proveedor el albaran indicado.  Fecha:" & cad, vbExclamation
+        Exit Sub
+    End If
+    
     cad = txtCodigo(47).Text & "|"
     cad = cad & txtCodigo(48).Text & "|"
     cad = cad & txtCodigo(49).Text & "|"
@@ -10714,7 +10725,7 @@ Dim devuelve As String
     
     '============ PARAMETROS ===========================
     'Nombre de la Empresa
-    CadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+    cadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
     numParam = numParam + 1
 
 
@@ -10781,7 +10792,7 @@ Dim b As Boolean
     '===================================================
     '============ PARAMETROS ===========================
     'Nombre de la Empresa
-    CadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+    cadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
     numParam = numParam + 1
     
     '====================================================
@@ -10832,7 +10843,7 @@ Dim b As Boolean
     End If
     If codigo <> "" Then
         codigo = "pDHActividad=""" & codigo & """|"
-        CadParam = CadParam & codigo
+        cadParam = cadParam & codigo
         numParam = numParam + 1
     End If
     'Cadena para seleccion D/H ZONA
@@ -10876,7 +10887,7 @@ Dim b As Boolean
     
     If Titulo <> "" Then
         devuelve = "pDHAgente="" " & Titulo & """|"
-        CadParam = CadParam & devuelve
+        cadParam = cadParam & devuelve
         numParam = numParam + 1
         Titulo = ""
     End If
@@ -10908,7 +10919,7 @@ Dim b As Boolean
  
     If Titulo <> "" Then
         devuelve = "pDHSituacion="" " & Titulo & """|"
-        CadParam = CadParam & devuelve
+        cadParam = cadParam & devuelve
         numParam = numParam + 1
         Titulo = ""
     End If
@@ -10959,7 +10970,7 @@ Dim b As Boolean
             If Me.optClienteLis(1).Value Then devuelve = 1
             If Me.optClienteLis(2).Value Then devuelve = 2
             devuelve = "MuestrEmail=" & devuelve & "|"
-            CadParam = CadParam & devuelve
+            cadParam = cadParam & devuelve
             numParam = numParam + 1
         
             'Le calculo el volumen de ventas
@@ -11019,7 +11030,7 @@ Dim J As Integer
     '===================================================
     '============ PARAMETROS ===========================
     'Nombre de la Empresa
-    CadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+    cadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
     numParam = numParam + 1
     
     
@@ -11122,7 +11133,7 @@ Dim J As Integer
             End If
         End If
         'Parametro a la Atencion de
-        CadParam = CadParam & "pAtencion=""Att. " & txtCodigo(0).Text & """|"
+        cadParam = cadParam & "pAtencion=""Att. " & txtCodigo(0).Text & """|"
         numParam = numParam + 1
         
         'seleccionamos todos los clientes por defecto,
@@ -11187,7 +11198,7 @@ Dim J As Integer
             conSubRPT = False
         Else '91: CARTA/e-MAil
             'Parametro cod. carta
-            CadParam = CadParam & "pCodCarta= " & txtCodigo(64).Text & "|"
+            cadParam = cadParam & "pCodCarta= " & txtCodigo(64).Text & "|"
             numParam = numParam + 1
             
             'Nombre fichero .rpt a Imprimir
@@ -11214,7 +11225,7 @@ Dim J As Integer
             devuelve = "(" & campo & " < '" & Format(txtCodigo(31).Text, FormatoFecha) & "' OR isnull(sclien.fechamov))"
             If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
             devuelve = "pFechaMov=""" & txtCodigo(31).Text & """|"
-            CadParam = CadParam & devuelve
+            cadParam = cadParam & devuelve
             numParam = numParam + 1
         End If
         
@@ -11321,7 +11332,7 @@ Dim HayDatos As Boolean
     InicializarVbles
     
     'Pasar nombre de la Empresa como parametro
-    CadParam = "|pNomEmpre=""" & vEmpresa.nomempre & """|"
+    cadParam = "|pNomEmpre=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '====================================================
@@ -11345,7 +11356,7 @@ Dim HayDatos As Boolean
         If Not PonerDesdeHasta(campo, "F", 92, 93, cad) Then Exit Sub
         cad = "pDHFecha=""Fecha Fact.: " & cad
         If chkDatosAlbaranes(1).Value Then cad = cad & "  Albaranes"
-        CadParam = CadParam & cad & """|"
+        cadParam = cadParam & cad & """|"
     End If
     
     tabla = "scafpc"
@@ -11499,7 +11510,7 @@ Dim HayDatos As Boolean
     conSubRPT = False
     If OpcionListado = 311 Then
         cad = "Salta= " & Me.chkDatosAlbaranes(5).Value & "|"
-        CadParam = CadParam & cad
+        cadParam = cadParam & cad
         numParam = numParam + 1
         
         If Me.chkDatosAlbaranes(2).Value = 0 Then
@@ -11507,7 +11518,7 @@ Dim HayDatos As Boolean
             cad = "0"
             If chkDatosAlbaranes(7).Value = 0 Then cad = "1"
             cad = "detalla= " & cad & "|"
-            CadParam = CadParam & cad
+            cadParam = cadParam & cad
             numParam = numParam + 1
        Else
             'RAPPEL, puede mostrar o no los detalles de articulos
@@ -11515,7 +11526,7 @@ Dim HayDatos As Boolean
             cad = "0"
             If OptCompras(1).Value Then cad = "1"
             cad = "DetaArtic= " & cad & "|"
-            CadParam = CadParam & cad
+            cadParam = cadParam & cad
             numParam = numParam + 1
             
        End If
@@ -11585,7 +11596,7 @@ Dim HayDatos As Boolean
   '              If chkDatosAlbaranes(3).Value = 0 Then Cad = 0
                 cad = "Detalla= " & cad & "|"
             End If
-            CadParam = CadParam & cad
+            cadParam = cadParam & cad
             numParam = numParam + 1
             'Solo hay un rpt para los rappels
             If Me.chkDatosAlbaranes(2).Value = 1 Then
@@ -11612,7 +11623,7 @@ Dim HayDatos As Boolean
         cad = "0"
         If chkDatosAlbaranes(7).Value = 0 Then cad = "1"
         cad = "detalla= " & cad & "|"
-        CadParam = CadParam & cad
+        cadParam = cadParam & cad
         numParam = numParam + 1
     
     
@@ -11646,11 +11657,11 @@ Dim C2 As String
     
     
     'Pasar nombre de la Empresa como parametro
-    CadParam = "|pNomEmpre=""" & vEmpresa.nomempre & """|"
+    cadParam = "|pNomEmpre=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
      'Pasar nombre de la Empresa como parametro
-    CadParam = CadParam & "NOHco=" & Abs(Me.chkBusHcoOfer.Value) & "|"
+    cadParam = cadParam & "NOHco=" & Abs(Me.chkBusHcoOfer.Value) & "|"
     numParam = numParam + 1
     
     '===================================================
@@ -11662,7 +11673,7 @@ Dim C2 As String
         Else
             cad = "False"
         End If
-        CadParam = CadParam & "|pPtes=" & cad & "|"
+        cadParam = cadParam & "|pPtes=" & cad & "|"
         numParam = numParam + 1
         
         'Nombre fichero .rpt a Imprimir
@@ -11713,7 +11724,7 @@ Dim C2 As String
     
     If C2 <> "" Then
             cad = "pDHFecha= """ & C2
-            CadParam = CadParam & cad & """|"
+            cadParam = cadParam & cad & """|"
             numParam = numParam + 1
     End If
     
@@ -11739,13 +11750,13 @@ Dim C2 As String
             'y pasarlo al Informe como parametro
             If ObtenerTotalOferPeriodo(cadSelect, TotImpBA, TotImpBNA, TotOfeA, TotOfeNA) Then
                 cad = "pTotPeriodoOfeA="""
-                CadParam = CadParam & cad & TotOfeA & """|"
+                cadParam = cadParam & cad & TotOfeA & """|"
                 cad = "pTotPeriodoOfeNA="""
-                CadParam = CadParam & cad & TotOfeNA & """|"
+                cadParam = cadParam & cad & TotOfeNA & """|"
                 cad = "pTotPeriodoImpA="""
-                CadParam = CadParam & cad & TotImpBA & """|"
+                cadParam = cadParam & cad & TotImpBA & """|"
                 cad = "pTotPeriodoImpNA="""
-                CadParam = CadParam & cad & TotImpBNA & """|"
+                cadParam = cadParam & cad & TotImpBNA & """|"
                 numParam = numParam + 4
             End If
             
@@ -11795,7 +11806,7 @@ Dim C2 As String
     
     If C2 <> "" Then
             cad = "pDHAgente= """ & C2
-            CadParam = CadParam & cad & """|"
+            cadParam = cadParam & cad & """|"
             numParam = numParam + 1
     End If
      
@@ -11952,7 +11963,7 @@ Dim HePuestoElJoinConSclien As Boolean
     
     
     'Pasar nombre de la Empresa como parametro
-    CadParam = "|pNomEmpre=""" & vEmpresa.nomempre & """|"
+    cadParam = "|pNomEmpre=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '====================================================
@@ -12021,7 +12032,7 @@ Dim HePuestoElJoinConSclien As Boolean
     End If
     
     cad = "pDHClien= """ & tabla & """|"
-    CadParam = CadParam & cad
+    cadParam = cadParam & cad
     numParam = numParam + 1
 
    
@@ -12087,7 +12098,7 @@ Dim HePuestoElJoinConSclien As Boolean
         
         
         cad = "pDHFamilia= """ & nomRPT & """|"
-        CadParam = CadParam & cad
+        cadParam = cadParam & cad
         numParam = numParam + 1
         nomRPT = ""
         
@@ -12174,7 +12185,7 @@ Dim HePuestoElJoinConSclien As Boolean
         If Me.chkDatosAlbaranes(3).Value Then
             nomRPT = nomRPT & "Pro"
             
-            CadParam = CadParam & "Detalle= " & Abs(chkDatosAlbaranes(4).Value) & "|"
+            cadParam = cadParam & "Detalle= " & Abs(chkDatosAlbaranes(4).Value) & "|"
             numParam = numParam + 1
         End If
             
@@ -12225,7 +12236,7 @@ Dim HePuestoElJoinConSclien As Boolean
                 conSubRPT = True
             
                 cad = "codusu= " & vUsu.codigo & "|"
-                CadParam = CadParam & cad
+                cadParam = cadParam & cad
                 numParam = numParam + 1
             End If
         Else
@@ -12234,7 +12245,7 @@ Dim HePuestoElJoinConSclien As Boolean
             conSubRPT = False
             
             cad = "VerFP= " & Abs(Me.chkDatosAlbaranes(8).Value) & "|"
-            CadParam = CadParam & cad
+            cadParam = cadParam & cad
             numParam = numParam + 1
             
         End If
@@ -12338,18 +12349,18 @@ Dim campo As String
         End If
         
         
-        If Not PonerParamRPT2(62, CadParam, numParam, nomRPT, vImprimedirecto, campo, pRptvMultiInforme) Then
+        If Not PonerParamRPT2(62, cadParam, numParam, nomRPT, vImprimedirecto, campo, pRptvMultiInforme) Then
             nomRPT = "rComProveCarta.rpt"
         End If
         
         
         'Parametro cod. carta
-        CadParam = "|pCodCarta= " & txtCodigo(63).Text & "|"
+        cadParam = "|pCodCarta= " & txtCodigo(63).Text & "|"
         numParam = numParam + 1
         
         
         'Firmado
-        CadParam = CadParam & "pFirmado=""" & Trim(txtCodigo(146).Text) & """|"
+        cadParam = cadParam & "pFirmado=""" & Trim(txtCodigo(146).Text) & """|"
         numParam = numParam + 1
         
         
@@ -12359,7 +12370,7 @@ Dim campo As String
         conSubRPT = True
         
     Else 'ETIQUETAS
-        CadParam = "|"
+        cadParam = "|"
     
         'Nombre fichero .rpt a Imprimir
         nomRPT = "rComProveEtiq.rpt"
@@ -12389,7 +12400,7 @@ Dim campo As String
         
         
     'Parametro a la Atencion de
-    CadParam = CadParam & "pAtencion=""Att. " & txtCodigo(62).Text & """|"
+    cadParam = cadParam & "pAtencion=""Att. " & txtCodigo(62).Text & """|"
     numParam = numParam + 1
     
     'ver si hay registros seleccionados para mostrar en el informe
@@ -12425,7 +12436,7 @@ Dim TipoM As String * 3
     End If
 
 
-    TipoM = Mid(Me.cboTipoMov(0).List(Me.cboTipoMov(0).ListIndex), 1, 3)
+    TipoM = Mid(Me.cboTipomov(0).List(Me.cboTipomov(0).ListIndex), 1, 3)
     
     'comprobar que existe la factura en tabla "scafac"
     cad = "select count(*) from scafac where codtipom='" & TipoM & "' AND numfactu="
@@ -12555,7 +12566,7 @@ Dim jj As Integer
     
     
     
-    If Not PonerParamRPT2(indRPT, CadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(indRPT, cadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then Exit Sub
 
 
     'ANTES ocubre 2011
@@ -12571,19 +12582,19 @@ Dim jj As Integer
     
     
             
-    If Not PonerParamRPT2(indRPT, CadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(indRPT, cadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then Exit Sub
                 
     
     'Se pasa como parametro la carta a imprimir
     If Me.txtCodigo(2).Text <> "" Then
-        CadParam = CadParam & "pCodCarta=" & CInt(Me.txtCodigo(2).Text) & "|"
+        cadParam = cadParam & "pCodCarta=" & CInt(Me.txtCodigo(2).Text) & "|"
     Else
-        CadParam = CadParam & "pCodCarta=" & CInt(0) & "|"
+        cadParam = cadParam & "pCodCarta=" & CInt(0) & "|"
     End If
     numParam = numParam + 1
     
     'Añadir el codigo de usuario como parametro para link con tabla Temporal en el Report
-    CadParam = CadParam & "pCodUsu=" & vUsu.codigo & "|"
+    cadParam = cadParam & "pCodUsu=" & vUsu.codigo & "|"
     numParam = numParam + 1
         
         
@@ -12647,14 +12658,14 @@ Dim jj As Integer
     'que se aplica a ese cliente (0=NORMAL)
     devuelve = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", codClien, "N")
     If devuelve <> "" Then
-        CadParam = CadParam & "pTipoIVA=" & devuelve & "|"
+        cadParam = cadParam & "pTipoIVA=" & devuelve & "|"
         numParam = numParam + 1
     End If
 
 
     'Agosto 2011
     'Separador
-    CadParam = CadParam & "Separador=""" & vParamAplic.ArtSeparador & """|"
+    cadParam = cadParam & "Separador=""" & vParamAplic.ArtSeparador & """|"
     numParam = numParam + 1
 
 
@@ -12795,7 +12806,7 @@ Dim campo1 As String, campo2 As String, campo3 As String
             Titulo = "Hist. Pedidos de Compras"
     End Select
     
-    If Not PonerParamRPT2(indRPT, CadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(indRPT, cadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then Exit Sub
      
     If OpcionListado = 38 Or OpcionListado = 239 Then
         campo1 = "numpedcl"
@@ -12877,19 +12888,19 @@ Dim campo1 As String, campo2 As String, campo3 As String
         'Añadimos a los parametros el tipo de IVA que se aplica a ese cliente (para saber si esta exento o no de IVA)
         devuelve = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", codClien, "N")
         If devuelve <> "" Then
-            CadParam = CadParam & "pTipoIVA=" & devuelve & "|"
+            cadParam = cadParam & "pTipoIVA=" & devuelve & "|"
             numParam = numParam + 1
         End If
         
         'PORTES
-        CadParam = CadParam & "vPortes=""" & vParamAplic.ArtPortesN & """|"
+        cadParam = cadParam & "vPortes=""" & vParamAplic.ArtPortesN & """|"
         numParam = numParam + 1
     End If
 
 
     'Listado proveedores
     If OpcionListado = 55 Then
-        CadParam = CadParam & "valorado= " & Abs(Me.chkVarios(0).Value) & "|"
+        cadParam = cadParam & "valorado= " & Abs(Me.chkVarios(0).Value) & "|"
         numParam = numParam + 1
     End If
     'comprobar que hay datos para mostrar en el Informe
@@ -12921,15 +12932,15 @@ Dim RS As ADODB.Recordset
     
     'Se pasa como parametro la carta a imprimir
     If Me.txtCodigo(116).Text <> "" Then
-        CadParam = CadParam & "|pCodCarta=" & CInt(Me.txtCodigo(116).Text) & "|"
+        cadParam = cadParam & "|pCodCarta=" & CInt(Me.txtCodigo(116).Text) & "|"
     Else
-        CadParam = CadParam & "|pCodCarta=" & CInt(0) & "|"
+        cadParam = cadParam & "|pCodCarta=" & CInt(0) & "|"
     End If
     numParam = numParam + 1
     
     
     indRPT = 40 'Añade los parametros de la tabla scrystal para el informe
-    If Not PonerParamRPT2(indRPT, CadParam, numParam, nomDocu, vImprimedirecto, pPdfRpt, pRptvMultiInforme) Then
+    If Not PonerParamRPT2(indRPT, cadParam, numParam, nomDocu, vImprimedirecto, pPdfRpt, pRptvMultiInforme) Then
         Exit Sub
     End If
     
@@ -12956,7 +12967,7 @@ Dim RS As ADODB.Recordset
 
      With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = True
@@ -13036,7 +13047,7 @@ Dim cad As String
     InicializarVbles
     
     'Pasar nombre de la Empresa como parametro
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     'Pasar el ORDEN del informe como parametro
@@ -13046,13 +13057,13 @@ Dim cad As String
         Else
             cad = "{scappr.numpedpr}"
         End If
-        CadParam = CadParam & "pOrden=" & cad & "|"
+        cadParam = cadParam & "pOrden=" & cad & "|"
         numParam = numParam + 1
     End If
     
     If OpcionListado = 308 Then
         cad = "detalla=" & Abs(Me.chkVarios(1).Value)
-        CadParam = CadParam & cad & "|"
+        cadParam = cadParam & cad & "|"
         numParam = numParam + 1
     End If
     
@@ -13130,7 +13141,7 @@ Dim EsDeTelCabFactura As Boolean
     
     'Agosto 2016
     'Si marca todas, es de UN solo cliente y no van tickets ni telefonia, ni FAG
-    If Mid(Me.cboTipoMov(1).Text, 1, 3) = "***" Then
+    If Mid(Me.cboTipomov(1).Text, 1, 3) = "***" Then
         'Ha seleccionado la opcion de TODAS
         'Tienen que ser el mismo cliente
         codigo = ""
@@ -13187,7 +13198,7 @@ Dim EsDeTelCabFactura As Boolean
     
     'Desde/Hasta tipo movimiento
     '---------------------------------------------
-    TipoM = Mid(Me.cboTipoMov(1).List(Me.cboTipoMov(1).ListIndex), 1, 3)
+    TipoM = Mid(Me.cboTipomov(1).List(Me.cboTipomov(1).ListIndex), 1, 3)
     If TipoM <> "" Then
     
         If TipoM = "***" Then
@@ -13289,9 +13300,9 @@ Dim EsDeTelCabFactura As Boolean
    
     
     If CBool(Me.chk_duplicado2(0).Value) Then
-        CadParam = "pDuplicado=1|"
+        cadParam = "pDuplicado=1|"
     Else
-        CadParam = "pDuplicado=0|"
+        cadParam = "pDuplicado=0|"
     End If
     
     EsDeTelCabFactura = False
@@ -13361,7 +13372,7 @@ Dim EsDeTelCabFactura As Boolean
     
     
     TipoFactura = 0
-    codigo = Mid(cboTipoMov(1).Text, 1, 3)
+    codigo = Mid(cboTipomov(1).Text, 1, 3)
     If codigo <> "" Then
         If codigo = "FTI" Then
             TipoFactura = 1                        'Facturas ticket
@@ -13395,7 +13406,7 @@ Dim EsDeTelCabFactura As Boolean
     End If
     
     
-    ImprimirFacturas cadFormula, CadParam, cadSelect, TipoFactura, CByte(txtCodigo(119).Text), Me.chk_duplicado2(1).Value, False, True
+    ImprimirFacturas cadFormula, cadParam, cadSelect, TipoFactura, CByte(txtCodigo(119).Text), Me.chk_duplicado2(1).Value, False, True
     
 End Sub
 
@@ -13407,7 +13418,7 @@ Dim cad As String
     InicializarVbles
     
     'Pasar nombre de la Empresa como parametro
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '===================================================
@@ -13506,7 +13517,7 @@ Dim devuelve As String, campo As String
     
     
         
-    If Not PonerParamRPT2(37, CadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
+    If Not PonerParamRPT2(37, cadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
         Exit Sub
     End If
     
@@ -13520,7 +13531,7 @@ Dim devuelve As String, campo As String
     Else
         campo = "False"
     End If
-    CadParam = CadParam & "pPapelB=" & campo & "|"
+    cadParam = cadParam & "pPapelB=" & campo & "|"
     numParam = numParam + 1
                     
     'Si se impremen Saldos o no
@@ -13529,24 +13540,24 @@ Dim devuelve As String, campo As String
     Else
         campo = "False"
     End If
-    CadParam = CadParam & "pImpSaldo=" & campo & "|"
+    cadParam = cadParam & "pImpSaldo=" & campo & "|"
     numParam = numParam + 1
     
                     
     'Se pasa como parametro la carta a imprimir
     If Me.txtCodigo(81).Text <> "" Then
-        CadParam = CadParam & "pCodCarta=" & CInt(Me.txtCodigo(81).Text) & "|"
+        cadParam = cadParam & "pCodCarta=" & CInt(Me.txtCodigo(81).Text) & "|"
     Else
-        CadParam = CadParam & "pCodCarta=" & CInt(0) & "|"
+        cadParam = cadParam & "pCodCarta=" & CInt(0) & "|"
     End If
     numParam = numParam + 1
     
     'Añadir la fecha de la carta como parametro del informe
-    CadParam = CadParam & "pFecha=""" & txtCodigo(82).Text & """|"
+    cadParam = cadParam & "pFecha=""" & txtCodigo(82).Text & """|"
     numParam = numParam + 1
     
     'Añadir la poblacion de la empresa como parametro del informe
-    CadParam = CadParam & "pPoblacion=""" & vParam.Poblacion & """|"
+    cadParam = cadParam & "pPoblacion=""" & vParam.Poblacion & """|"
     numParam = numParam + 1
     
     
@@ -13619,12 +13630,12 @@ Dim bytPrecio As Byte 'Precio valoracion seleccionado
     '===================================================
     '============ PARAMETROS ===========================
     'Pasar nombre de la Empresa como parametro
-    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
         
     If OpcionListado = 32 Then
         indRPT = 53 'Añade los parametros de la tabla scrystal para el informe
-        If Not PonerParamRPT2(indRPT, CadParam, numParam, nomDocu, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
+        If Not PonerParamRPT2(indRPT, cadParam, numParam, nomDocu, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
             Exit Sub
         End If
     
@@ -13634,29 +13645,29 @@ Dim bytPrecio As Byte 'Precio valoracion seleccionado
         Else
             devuelve = "False"
         End If
-        CadParam = CadParam & "pPapelB=" & devuelve & "|"
+        cadParam = cadParam & "pPapelB=" & devuelve & "|"
         numParam = numParam + 1
                     
         'Se pasa como parametro la carta a imprimir
         If Me.txtCodigo(13).Text <> "" Then
-            CadParam = CadParam & "pCodCarta=" & CInt(Me.txtCodigo(13).Text) & "|"
+            cadParam = cadParam & "pCodCarta=" & CInt(Me.txtCodigo(13).Text) & "|"
         Else
-            CadParam = CadParam & "pCodCarta=" & CInt(0) & "|"
+            cadParam = cadParam & "pCodCarta=" & CInt(0) & "|"
         End If
         numParam = numParam + 1
         
         'Añadir las 2 lineas como parametros del informe
         If Me.txtCodigo(14).Text <> "" Then 'Linea A
-            CadParam = CadParam & "pLineaA=""" & Me.txtCodigo(14).Text & """|"
+            cadParam = cadParam & "pLineaA=""" & Me.txtCodigo(14).Text & """|"
             numParam = numParam + 1
         End If
         If Me.txtCodigo(15).Text <> "" Then 'Linea B
-            CadParam = CadParam & "pLineaB=""" & Me.txtCodigo(15).Text & """|"
+            cadParam = cadParam & "pLineaB=""" & Me.txtCodigo(15).Text & """|"
             numParam = numParam + 1
         End If
     
         'Añadir la poblacion de la empresa como parametro del informe
-        CadParam = CadParam & "pPoblacion=""" & vParam.Poblacion & """|"
+        cadParam = cadParam & "pPoblacion=""" & vParam.Poblacion & """|"
         numParam = numParam + 1
         'Nombre fichero .rpt a Imprimir
         'nomRPT = "rFacOfeRecorda.rpt"
@@ -13665,7 +13676,7 @@ Dim bytPrecio As Byte 'Precio valoracion seleccionado
     Else
         
         indRPT = 33 'Añade los parametros de la tabla scrystal para el informe
-        If Not PonerParamRPT2(indRPT, CadParam, numParam, nomDocu, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
+        If Not PonerParamRPT2(indRPT, cadParam, numParam, nomDocu, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
             Exit Sub
         End If
 
@@ -13677,7 +13688,7 @@ Dim bytPrecio As Byte 'Precio valoracion seleccionado
         If Me.optPrecioMA.Value Then bytPrecio = 2
         If Me.optPrecioUC.Value Then bytPrecio = 3
         If Me.optPrecioStd.Value Then bytPrecio = 4
-        CadParam = CadParam & "pPrecio=" & bytPrecio & "|"
+        cadParam = cadParam & "pPrecio=" & bytPrecio & "|"
         numParam = numParam + 1
     End If
     
@@ -13783,7 +13794,7 @@ Dim devuelve As String
     '===================================================
     '============ PARAMETROS ===========================
     'Nombre de la Empresa
-    CadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+    cadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
     numParam = numParam + 1
     
     
@@ -13815,7 +13826,7 @@ Dim devuelve As String
     
     If OpcionListado <= 401 Then   'eitquetas y cartas
         'Parametro a la Atencion de
-        CadParam = CadParam & "pAtencion=""Att. " & txtCodigo(135).Text & """|"
+        cadParam = cadParam & "pAtencion=""Att. " & txtCodigo(135).Text & """|"
         numParam = numParam + 1
      End If
      
@@ -13841,7 +13852,7 @@ Dim devuelve As String
     
 
     
-    CadParam = CadParam & "pCodCarta= " & txtCodigo(138).Text & "|"
+    cadParam = cadParam & "pCodCarta= " & txtCodigo(138).Text & "|"
     numParam = numParam + 1
     
     'Preseleccion
@@ -13889,9 +13900,9 @@ Private Sub cmdComprobarCCC_NIF_Secciones_Click()
     '---------------------------------------------------------
     If Trim(txtCodigo(147).Text) <> "" Or Trim(txtCodigo(148).Text) <> "" Then
         'Para Crystal Report
-        CadParam = "{sclien.codclien}"
+        cadParam = "{sclien.codclien}"
         nomRPT = "pdh1= ""Cliente: " 'Parametro Desde/Hasta Fecha
-        If Not PonerDesdeHasta(CadParam, "N", 147, 148, nomRPT) Then Exit Sub
+        If Not PonerDesdeHasta(cadParam, "N", 147, 148, nomRPT) Then Exit Sub
     End If
     
    CadenaDesdeOtroForm = nomRPT & """|"
@@ -14426,7 +14437,7 @@ Dim EsdesdeTelCabFact As Boolean
             'OTRO TIPO DE DOCUMENTO
             
             '''''If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then
-            If Not PonerParamRPT2(RS!codAlmac, CadParam, numParam, NumCod, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
+            If Not PonerParamRPT2(RS!codAlmac, cadParam, numParam, NumCod, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
                 Exit Function
             End If
             codClien = RS!codAlmac
@@ -14451,7 +14462,7 @@ Dim EsdesdeTelCabFact As Boolean
           
         With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = True
@@ -14689,7 +14700,7 @@ Private Sub Form_Activate()
             Case 225 'Datos para Factura Rectificativa
                 PonerFoco txtCodigo(71)
             Case 226 'Datos para Reimprimir Facturas
-                PonerFocoCbo Me.cboTipoMov(1)
+                PonerFocoCbo Me.cboTipomov(1)
                 
             Case 230 'Listado Ventas por Familia
                 PonerFoco txtCodigo(96)
@@ -15102,12 +15113,12 @@ Dim devuelve As String
                 Me.txtNombre(132).Text = Me.txtNombre(131).Text
             Else
                 If OpcionListado = 400 Then
-                    CadParam = "etiquetas"
+                    cadParam = "etiquetas"
                 Else
-                    CadParam = "cartas"
+                    cadParam = "cartas"
                 End If
-                Label8(1).Caption = "Clientes potenciales (" & CadParam & ")"
-                CadParam = ""
+                Label8(1).Caption = "Clientes potenciales (" & cadParam & ")"
+                cadParam = ""
             End If
                 
             FrameCartaPot.BorderStyle = 0
@@ -15502,7 +15513,7 @@ Dim i As Integer
 End Sub
 
 Private Sub imgClearCmbTipomov_Click()
-    cboTipoMov(2).ListIndex = -1
+    cboTipomov(2).ListIndex = -1
 End Sub
 
 Private Sub imgFecha_Click(Index As Integer)
@@ -16116,7 +16127,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    CadParam = ""
+    cadParam = ""
     NumeroDeCopias = 1
     numParam = 0
     pRptvMultiInforme = 0
@@ -16144,7 +16155,7 @@ Dim cad As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            CadParam = CadParam & AnyadirParametroDH(param, indD, indH) & """|"
+            cadParam = cadParam & AnyadirParametroDH(param, indD, indH) & """|"
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -16170,7 +16181,7 @@ Private Sub LlamarImprimir(PonerNombrePDF As Boolean, EnviaPorEmail As Boolean, 
             .outClaveNombreArchiv = RecuperaValor(DatosEnvioMail, 3)
         End If
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .Opcion = OpcionListado
         .SoloImprimir = False
@@ -16205,49 +16216,49 @@ Dim NomCampo As String
     
     Select Case cadgrupo
         Case "Actividad"
-            CadParam = CadParam & campo & "{sclien.codactiv}" & "|"
+            cadParam = cadParam & campo & "{sclien.codactiv}" & "|"
             If numGrupo = 1 Then
-                CadParam = CadParam & NomCampo & " ""ACTIVIDAD:  "" & " & " totext({sclien.codactiv},""000"") & " & """  """ & " & {sactiv.nomactiv}" & "|"
+                cadParam = cadParam & NomCampo & " ""ACTIVIDAD:  "" & " & " totext({sclien.codactiv},""000"") & " & """  """ & " & {sactiv.nomactiv}" & "|"
             Else
 '                cadParam = cadParam & nomcampo & " totext({sclien.codactiv},""000"") & " & """ """ & " & {sactiv.nomactiv}" & "|"
-                CadParam = CadParam & NomCampo & "{sactiv.nomactiv}" & "|"
-                CadParam = CadParam & "pTitulo" & numGrupo & "=""Actividad""" & "|"
+                cadParam = cadParam & NomCampo & "{sactiv.nomactiv}" & "|"
+                cadParam = cadParam & "pTitulo" & numGrupo & "=""Actividad""" & "|"
                 numParam = numParam + 1
             End If
             numParam = numParam + 1
             
         Case "Zona"
-            CadParam = CadParam & campo & "{sclien.codzonas}" & "|"
+            cadParam = cadParam & campo & "{sclien.codzonas}" & "|"
             If numGrupo = 1 Then
-                CadParam = CadParam & NomCampo & " ""ZONA:  "" & " & " totext({sclien.codzonas},""000"") & " & """  """ & " & {szonas.nomzonas}" & "|"
+                cadParam = cadParam & NomCampo & " ""ZONA:  "" & " & " totext({sclien.codzonas},""000"") & " & """  """ & " & {szonas.nomzonas}" & "|"
             Else
 '                cadParam = cadParam & nomcampo & " totext({sclien.codzonas},""000"") & " & """ """ & " & {szonas.nomzonas}" & "|"
-                CadParam = CadParam & NomCampo & "{szonas.nomzonas}" & "|"
-                CadParam = CadParam & "pTitulo" & numGrupo & "=""Zona""" & "|"
+                cadParam = cadParam & NomCampo & "{szonas.nomzonas}" & "|"
+                cadParam = cadParam & "pTitulo" & numGrupo & "=""Zona""" & "|"
                 numParam = numParam + 1
             End If
             numParam = numParam + 1
             
         Case "Ruta"
-            CadParam = CadParam & campo & "{sclien.codrutas}" & "|"
+            cadParam = cadParam & campo & "{sclien.codrutas}" & "|"
             If numGrupo = 1 Then
-                CadParam = CadParam & NomCampo & " ""RUTA:  "" & " & " totext({sclien.codrutas},""000"") & " & """  """ & " & {srutas.nomrutas}" & "|"
+                cadParam = cadParam & NomCampo & " ""RUTA:  "" & " & " totext({sclien.codrutas},""000"") & " & """  """ & " & {srutas.nomrutas}" & "|"
             Else
 '                cadParam = cadParam & nomcampo & " totext({sclien.codrutas},""000"") & " & """ """ & " & {srutas.nomrutas}" & "|"
-                CadParam = CadParam & NomCampo & "{srutas.nomrutas}" & "|"
-                CadParam = CadParam & "pTitulo" & numGrupo & "=""Ruta""" & "|"
+                cadParam = cadParam & NomCampo & "{srutas.nomrutas}" & "|"
+                cadParam = cadParam & "pTitulo" & numGrupo & "=""Ruta""" & "|"
                 numParam = numParam + 1
             End If
             numParam = numParam + 1
 '            PonerGrupo = numGrupo
         Case "Agente"
-            CadParam = CadParam & campo & "{sclien.codagent}" & "|"
+            cadParam = cadParam & campo & "{sclien.codagent}" & "|"
             If numGrupo = 1 Then
-                CadParam = CadParam & NomCampo & " ""AGENTE:  "" & " & " totext({sclien.codagent},""000000"") & " & """  """ & " & {sagent.nomagent}" & "|"
+                cadParam = cadParam & NomCampo & " ""AGENTE:  "" & " & " totext({sclien.codagent},""000000"") & " & """  """ & " & {sagent.nomagent}" & "|"
             Else
 '                cadParam = cadParam & nomcampo & " totext({sclien.codagent},""000000"") & " & """ """ & " & {sagent.nomagent}" & "|"
-                CadParam = CadParam & NomCampo & "{sagent.nomagent}" & "|"
-                CadParam = CadParam & "pTitulo" & numGrupo & "=""Agente""" & "|"
+                cadParam = cadParam & NomCampo & "{sagent.nomagent}" & "|"
+                cadParam = cadParam & "pTitulo" & numGrupo & "=""Agente""" & "|"
                 numParam = numParam + 1
             End If
             numParam = numParam + 1
@@ -16295,9 +16306,9 @@ On Error GoTo ELista2
 
     'Monto el cad
     cad = ""
-    If Me.cboTipoMov(2).ListIndex >= 0 Then
+    If Me.cboTipomov(2).ListIndex >= 0 Then
         'Tipo mov=
-        cad = " AND codtipom = '" & Mid(Me.cboTipoMov(2).List(Me.cboTipoMov(2).ListIndex), 1, 3) & "'"
+        cad = " AND codtipom = '" & Mid(Me.cboTipomov(2).List(Me.cboTipomov(2).ListIndex), 1, 3) & "'"
     End If
     If txtCodigo(102).Text <> "" Then cad = cad & " AND numfactu >= " & txtCodigo(102).Text
     If txtCodigo(103).Text <> "" Then cad = cad & " AND numfactu <= " & txtCodigo(103).Text
@@ -16409,7 +16420,7 @@ On Error GoTo EEnviar
         
         If cad1 <> "" Then 'HAY email --> ENVIAMOS e-mail
             With frmImprimir
-                .OtrosParametros = CadParam
+                .OtrosParametros = cadParam
                 .NumeroParametros = numParam
                 If cadTabla = "sprove" Then
                     SQL = "{sprove.codprove}=" & RS.Fields(0)
@@ -16520,11 +16531,11 @@ Dim i As Byte
     
     If indice < 1000 Then
             'Son combos normales
-         cboTipoMov(indice).Clear
+         cboTipomov(indice).Clear
         
          While Not RS.EOF
-             cboTipoMov(indice).AddItem RS.Fields(0).Value & "-" & RS.Fields(1).Value
-             cboTipoMov(indice).ItemData(cboTipoMov(indice).NewIndex) = i
+             cboTipomov(indice).AddItem RS.Fields(0).Value & "-" & RS.Fields(1).Value
+             cboTipomov(indice).ItemData(cboTipomov(indice).NewIndex) = i
              i = i + 1
              RS.MoveNext
          Wend
@@ -16534,8 +16545,8 @@ Dim i As Byte
         'Para la reimpresion de facturas, añadiremos al final la opcion *** TODAS
         ' que serán todas menos FAT, FTI  FAG que son impresiones distintas
         If indice = 1 And OpcionListado = 226 Then
-            cboTipoMov(indice).AddItem "*** Todas *** "
-            cboTipoMov(indice).ItemData(cboTipoMov(indice).NewIndex) = i
+            cboTipomov(indice).AddItem "*** Todas *** "
+            cboTipomov(indice).ItemData(cboTipomov(indice).NewIndex) = i
             i = i + 1
         End If
         
@@ -16571,7 +16582,7 @@ Dim i As Byte
     
     'Pongo el dos para todos menos para la de etiquetas cliente
     If indice < 1000 Then
-        If indice <> 2 Then Me.cboTipoMov(indice).ListIndex = 2
+        If indice <> 2 Then Me.cboTipomov(indice).ListIndex = 2
     End If
 ECargaCombo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -16762,7 +16773,7 @@ Dim ListaCli As Collection
     
     
     '38. Pedidos
-    If Not PonerParamRPT2(7, CadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
+    If Not PonerParamRPT2(7, cadParam, numParam, nomRPT, vImprimedirecto, cadPDFrpt, pRptvMultiInforme) Then
         Exit Sub
     End If
 
@@ -17433,7 +17444,7 @@ Dim SQL As String
         'Hacemos impresion directa
     
         
-        CadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+        cadParam = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
 
     
         GenerarDatosInformes
@@ -17465,17 +17476,17 @@ Dim SQL As String
         
         
         'Vamos a fijar la cadena de parametros de impresion
-        CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|pVisVolVenta=1|pDesdeAnyo=2009|pVisCobrPdte=1|"
-        CadParam = CadParam & "pVisReclamas=1|pDesdeReclamas=Date(2007, 1, 7)|pVisMtos=1|"
-        CadParam = CadParam & "pDesdeOferta=Date(2010, 1, 1)|pDesdepedido=Date(2009, 1, 1)|"
-        CadParam = CadParam & "pDesdeAlbaran=Date(2010, 1, 1)|pVisAccionesComer=1|pDesdeAccComer=Date(2010, 3, 1)|"
-        CadParam = CadParam & "pVisLlamadas=0|pDesdeLlamada=Date(2010, 3, 1)|pVisEmails=0|pDesdeEmail=Date(2010, 1, 1)|"
-        CadParam = CadParam & "pVisFreq=0|pVisAlbSat=0|pVisAvisos=0|pVisReparas=0|"
+        cadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|pVisVolVenta=1|pDesdeAnyo=2009|pVisCobrPdte=1|"
+        cadParam = cadParam & "pVisReclamas=1|pDesdeReclamas=Date(2007, 1, 7)|pVisMtos=1|"
+        cadParam = cadParam & "pDesdeOferta=Date(2010, 1, 1)|pDesdepedido=Date(2009, 1, 1)|"
+        cadParam = cadParam & "pDesdeAlbaran=Date(2010, 1, 1)|pVisAccionesComer=1|pDesdeAccComer=Date(2010, 3, 1)|"
+        cadParam = cadParam & "pVisLlamadas=0|pDesdeLlamada=Date(2010, 3, 1)|pVisEmails=0|pDesdeEmail=Date(2010, 1, 1)|"
+        cadParam = cadParam & "pVisFreq=0|pVisAlbSat=0|pVisAvisos=0|pVisReparas=0|"
         NumRegElim = 20
         With frmImprimir
             .FormulaSeleccion = "{tmpcrmclien.codusu} = " & vUsu.codigo
   
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = NumRegElim
     
             .SoloImprimir = True
@@ -17811,7 +17822,7 @@ Dim IT As ListItem
     'Para cualquiera menos root
     If (vUsu.codigo Mod 1000) > 0 Then
         codigo = codigo & " AND codtipom"
-        If Val(vUsu.AlmacenPorDefecto) = vParamAplic.AlmacenB Then
+        If Val(vUsu.AlmacenPorDefecto2) = vParamAplic.AlmacenB Then
             codigo = codigo & " = "
         Else
             codigo = codigo & "<>"

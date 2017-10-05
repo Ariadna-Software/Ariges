@@ -31,7 +31,7 @@ Private mvarAlmacenPorDefecto As String
 
 Private mvarCodigoAgente As Integer
 
-Private RS As ADODB.Recordset
+Private Rs As ADODB.Recordset
 Private SQL As String
 Private Mens As String
 
@@ -119,10 +119,10 @@ End Property
 
 
 'Solo tiene GET, se fija desde una funcion
-Public Property Get AlmacenPorDefecto() As String
+Public Property Get AlmacenPorDefecto2() As String
 'se usa cuando se asigna un valor a una propiedad, en el lado derecho de la asignación.
 'Syntax: Debug.Print X.Nombre
-    AlmacenPorDefecto = mvarAlmacenPorDefecto
+    AlmacenPorDefecto2 = mvarAlmacenPorDefecto
 End Property
 
 Public Property Get CodigoAgente() As Integer
@@ -169,29 +169,29 @@ Dim i As Long
     
     SQL = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
     SQL = SQL & " AND NivelAriges >=0"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If RS.EOF Then
+    If Rs.EOF Then
         Leer = 1
     Else
         i = DevuelveAumentoPC
-        mvarCodigo = Val(DBLet(RS!CodUsu)) + i
-        mvarNombre = DBLet(RS!nomusu)
-        mvarNivel = Val(DBLet(RS!nivelariges))
-        mvarPasswdPROPIO = RS!passwordpropio
+        mvarCodigo = Val(DBLet(Rs!CodUsu)) + i
+        mvarNombre = DBLet(Rs!nomusu)
+        mvarNivel = Val(DBLet(Rs!nivelariges))
+        mvarPasswdPROPIO = Rs!passwordpropio
         mvarlogin = vlogin  'por si acasp esta escroto en mayus, minusclu....
-        mvarlogin = RS!Login
+        mvarlogin = Rs!Login
         mvarCadenaConexion = ""  'Se le asigna en tiempo de diseño
         Leer = 0
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 Err1:
     Mens = "Error: " & Err.Number & " : " & Err.Description
     MsgBox Mens, vbExclamation
-    RS.Close
+    Rs.Close
     Leer = 1
 End Function
 

@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFlotaReg 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Registro entrada flotas"
@@ -671,7 +671,7 @@ Private PimeraVez As Boolean
 Private DatosVehiculo As String
 Private ConceptosRequierenKm As String  'Llevara empipados los conceptos que requieran KM
 
-Dim Cad As String
+Dim cad As String
 
 'Para cuando devuelve dos poblaciones con el mismo codigo Postal. Si viene de pulsar prismatico
 'de busqueda poner el valor de poblacion seleccionado y no volver a recuperar de la Base de Datos
@@ -744,30 +744,30 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    Cad = Val(RecuperaValor(DatosADevolverBusqueda, 1))
-    If Val(Cad) <> Val(Data1.Recordset.Fields(0)) Then
-        MsgBox "No coincide el cliente (" & Cad & ")", vbExclamation
+    cad = Val(RecuperaValor(DatosADevolverBusqueda, 1))
+    If Val(cad) <> Val(Data1.Recordset.Fields(0)) Then
+        MsgBox "No coincide el cliente (" & cad & ")", vbExclamation
         Exit Sub
     End If
-    Cad = Val(RecuperaValor(DatosADevolverBusqueda, 2))
-    If Val(Cad) <> Val(Data1.Recordset.Fields(1)) Then
-        MsgBox "No coincide la obra (" & Cad & ")", vbExclamation
+    cad = Val(RecuperaValor(DatosADevolverBusqueda, 2))
+    If Val(cad) <> Val(Data1.Recordset.Fields(1)) Then
+        MsgBox "No coincide la obra (" & cad & ")", vbExclamation
         Exit Sub
     End If
         
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-     Cad = Cad & DBLet(Data1.Recordset.Fields(2), "F") & "|"
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+     cad = cad & DBLet(Data1.Recordset.Fields(2), "F") & "|"
     'Pongo la fecha ini y el txt
-    Cad = Cad & DBLet(Data1.Recordset!FechaIni, "T") & "|"
-    Cad = Cad & DBLet(Data1.Recordset!observa, "T") & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = cad & DBLet(Data1.Recordset!FechaIni, "T") & "|"
+    cad = cad & DBLet(Data1.Recordset!observa, "T") & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -887,7 +887,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
-Dim Cad As String
+Dim cad As String
 Dim cad1 As String
 Dim nada As String
 
@@ -899,16 +899,16 @@ Dim devuelve As String
     Set frmB = New frmBuscaGrid
     Select Case Index
     Case 0
-        Cad = "Codigo|sprove|codprove|N|000|15·"
-        Cad = Cad & "Nombre|sprove|nomprove|T||55·"
+        cad = "Codigo|sprove|codprove|N|000|15·"
+        cad = cad & "Nombre|sprove|nomprove|T||55·"
         frmB.vTabla = "sprove"
         frmB.vSQL = ""
         frmB.vTitulo = "Proveedores"
     Case 1
         
-        Cad = "Codigo|sflotas|codflota|T||15·"
-        Cad = Cad & "Desc.|sflotas|nomflota|T||45·"
-        Cad = Cad & "Desc.|sflotatipo|desctipflota|T||30·"
+        cad = "Codigo|sflotas|codflota|T||15·"
+        cad = cad & "Desc.|sflotas|nomflota|T||45·"
+        cad = cad & "Desc.|sflotatipo|desctipflota|T||30·"
         
         frmB.vTabla = "sflotas,sflotatipo"
         frmB.vSQL = "sflotas.tipo=tipflota "
@@ -940,7 +940,7 @@ Dim devuelve As String
     End Select
     
     HaDevueltoDatos2 = ""
-    frmB.vCampos = Cad
+    frmB.vCampos = cad
     frmB.vDevuelve = "0|1|"
     frmB.vselElem = 0
     frmB.vCargaFrame = False
@@ -949,7 +949,7 @@ Dim devuelve As String
     Set frmB = Nothing
     
     If HaDevueltoDatos2 <> "" Then
-        'Stop
+        'St op
         Text1(Index).Text = RecuperaValor(HaDevueltoDatos2, 1)
         
         If Index = 1 Then
@@ -1118,7 +1118,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte 'Solo para saber que hay + de 1 Registro
 
     Modo = Kmodo
@@ -1126,19 +1126,19 @@ Dim NumReg As Byte 'Solo para saber que hay + de 1 Registro
     
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
         If Modo = 1 Then Me.lblIndicador.Caption = "BUSQUEDA"
     Else
         cmdRegresar.visible = False
@@ -1153,20 +1153,20 @@ Dim NumReg As Byte 'Solo para saber que hay + de 1 Registro
     BloquearTxt Text1(10), Modo <> 1
     
     'Bloquear Registro sino es Insert o Update
-    B = (Modo = 0) Or (Modo = 2)
+    b = (Modo = 0) Or (Modo = 2)
 
     
            
     '------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
-    Me.Combo1.Enabled = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
+    Me.Combo1.Enabled = b
     
     
     
-    Me.imgBuscar(0).Enabled = B
-    Me.imgBuscar(1).Enabled = B
+    Me.imgBuscar(0).Enabled = b
+    Me.imgBuscar(1).Enabled = b
     
     chkVistaPrevia.Enabled = (Modo <= 2)
     
@@ -1189,29 +1189,29 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnEliminar.Enabled = b
 
     '-------------------------------------
-    B = (Modo >= 3)
+    b = (Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'Ver Todos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
@@ -1361,11 +1361,11 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
     DatosOk = False
-    B = CompForm(Me, 1)
-    If Not B Then Exit Function
+    b = CompForm(Me, 1)
+    If Not b Then Exit Function
     
     
     'Los Kms actuales NO pueden ser menor que los que ya habian
@@ -1386,19 +1386,19 @@ Dim B As Boolean
 End Function
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: slista
-    Cad = Cad & ParaGrid(Text1(6), 10, "Registro")
+    cad = cad & ParaGrid(Text1(6), 10, "Registro")
     
-        Cad = Cad & "Codigo|sflotas|codflota|T||15·"
-        Cad = Cad & "Desc.|sflotas|nomflota|T||35·"
-        Cad = Cad & "Desc.|sflotatipo|desctipflota|T||30·"
+        cad = cad & "Codigo|sflotas|codflota|T||15·"
+        cad = cad & "Desc.|sflotas|nomflota|T||35·"
+        cad = cad & "Desc.|sflotatipo|desctipflota|T||30·"
         
         
                
@@ -1406,11 +1406,11 @@ Dim Cad As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vTabla = "sflotasregistro,sflotas,sflotatipo"
-        If CadB <> "" Then CadB = " AND " & CadB
-        CadB = "sflotasregistro.codflota=sflotas.codflota AND sflotas.tipo=tipflota " & CadB
-        frmB.vSQL = CadB
+        If cadB <> "" Then cadB = " AND " & cadB
+        cadB = "sflotasregistro.codflota=sflotas.codflota AND sflotas.tipo=tipflota " & cadB
+        frmB.vSQL = cadB
         frmB.vTitulo = "Registro"
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         HaDevueltoDatos2 = ""
         '###A mano
         frmB.vDevuelve = "0|"
@@ -1425,10 +1425,10 @@ Dim Cad As String
         If HaDevueltoDatos2 <> "" Then
             'Creamos una cadena consulta y ponemos los datos
             Screen.MousePointer = vbHourglass
-            CadB = ""
-            Cad = RecuperaValor(HaDevueltoDatos2, 1)
+            cadB = ""
+            cad = RecuperaValor(HaDevueltoDatos2, 1)
             
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE registro = " & Cad & Ordenacion
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE registro = " & cad & Ordenacion
             PonerCadenaBusqueda
             
             
@@ -1441,13 +1441,13 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 
-    CadB = ObtenerBusqueda(Me, False)
+    cadB = ObtenerBusqueda(Me, False)
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then 'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then 'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
@@ -1592,9 +1592,9 @@ Private Sub PonerDatosVehiculo()
         Text2(1).Text = ""
     Else
         
-        Cad = "Select  desctipflota, nomflota,tipflota from sflotas,sflotatipo WHERE tipo=tipflota AND codflota = " & DBSet(Text1(1).Text, "T")
+        cad = "Select  desctipflota, nomflota,tipflota from sflotas,sflotatipo WHERE tipo=tipflota AND codflota = " & DBSet(Text1(1).Text, "T")
         Set miRsAux = New ADODB.Recordset
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If miRsAux.EOF Then
             Text2(1).Text = ""
             
@@ -1607,10 +1607,10 @@ Private Sub PonerDatosVehiculo()
             If Modo = 3 Then
                 'Fijaremos los KM anteriores
                 miRsAux.Close
-                Cad = "Select horaskm,litrosulttik FROM sflotasregistro WHERE codflota = " & DBSet(Text1(1).Text, "T")
-                Cad = Cad & " AND codconcef = " & IncidenciaLlenarDeposito   'Llenar deposito
-                Cad = Cad & " ORDER BY fecha desc" 'Cogemos el ultimo tiket
-                miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                cad = "Select horaskm,litrosulttik FROM sflotasregistro WHERE codflota = " & DBSet(Text1(1).Text, "T")
+                cad = cad & " AND codconcef = " & IncidenciaLlenarDeposito   'Llenar deposito
+                cad = cad & " ORDER BY fecha desc" 'Cogemos el ultimo tiket
+                miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Not miRsAux.EOF Then
                     DatosVehiculo = DatosVehiculo & DBLet(miRsAux.Fields(0), "N") & "|"
                     DatosVehiculo = DatosVehiculo & DBLet(miRsAux.Fields(1), "N") & "|"
@@ -1638,10 +1638,10 @@ Private Sub PonerProximo()
     If Combo1.ListIndex < 0 Then Exit Sub
     If DatosVehiculo = "" Then Exit Sub
     'sflotascon_x_tipo tipflota freqKm freqMes
-    Cad = "Select freqKm ,freqMes FROM sflotascon_x_tipo WHERE tipflota = " & RecuperaValor(DatosVehiculo, 1)
-    Cad = Cad & " AND codconcef = " & Combo1.ItemData(Combo1.ListIndex)
+    cad = "Select freqKm ,freqMes FROM sflotascon_x_tipo WHERE tipflota = " & RecuperaValor(DatosVehiculo, 1)
+    cad = cad & " AND codconcef = " & Combo1.ItemData(Combo1.ListIndex)
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If DBLet(miRsAux!freqMes, "N") > 0 Then Text1(7).Text = DateAdd("m", miRsAux!freqMes, CDate(Text1(3).Text))
         Text1(10).Text = miRsAux!freqKm

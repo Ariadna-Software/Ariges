@@ -391,7 +391,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "12:51"
+            TextSave        =   "13:10"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2385,7 +2385,7 @@ End Sub
 
 Private Sub MDIForm_Activate()
 Dim b As Boolean
-
+ 
 
    ' AvisosPendientes = False
     If PrimeraVez Then
@@ -2514,7 +2514,7 @@ Dim b As Boolean
     If vParamAplic.NumeroInstalacion = 2 Then
         'Tiene almacen B
         If DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "PEZ", "T") <> "" Then
-            If vUsu.AlmacenPorDefecto = CStr(vParamAplic.AlmacenB) Then b = True
+            If vUsu.AlmacenPorDefecto2 = CStr(vParamAplic.AlmacenB) Then b = True
         End If
     End If
     PuntoDeMenuVisible Me.mnFacPedidos(13), b
@@ -2536,7 +2536,7 @@ Dim b As Boolean
         If vUsu.codigo Mod 1000 = 0 Then
             b = True
         Else
-            b = Val(vUsu.AlmacenPorDefecto) > 90
+            b = Val(vUsu.AlmacenPorDefecto2) > 90
         End If
     End If
     PuntoDeMenuVisible mnUtilidadesVarias(2), b
@@ -5382,7 +5382,7 @@ Private Function ComprobarBotonMenuVisible(objMenu As Menu, Activado As Boolean)
 '(se comprueba hasta q se encuentra el false o se llega al padre)
 Dim nomMenu As String
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim cad As String
 Dim b As Boolean
 
@@ -5398,40 +5398,40 @@ Dim b As Boolean
     
         nomMenu = objMenu.Name
         
-        Set Rs = New ADODB.Recordset
+        Set RS = New ADODB.Recordset
         
         'Obtener el padre del menu
         SQL = "select padre from usuarios.appmenus where aplicacion='Ariges' and name=" & DBSet(nomMenu, "T")
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then
-            cad = Rs.Fields(0).Value
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then
+            cad = RS.Fields(0).Value
         End If
-        Rs.Close
+        RS.Close
         
         b = True
         While b And cad <> ""
                 SQL = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & cad
-                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                If Not Rs.EOF Then
-                    cad = Rs!Padre
-                    nomMenu = Rs!Name
+                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If Not RS.EOF Then
+                    cad = RS!Padre
+                    nomMenu = RS!Name
                 End If
-                Rs.Close
+                RS.Close
                 
                 'comprobar si el padre esta bloqueado
                 SQL = "Select count(*) from usuarios.appmenususuario where aplicacion='Ariges' and codusu=" & Val(Right(CStr(vUsu.codigo), 3))
                 SQL = SQL & " and tag='" & nomMenu & "|'"
-                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                If Rs.Fields(0).Value > 0 Then
+                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If RS.Fields(0).Value > 0 Then
                     'Esta bloqueado el menu para el usuario
                     b = False
                     Activado = False
                 End If
-                Rs.Close
+                RS.Close
                 If cad = "0" Then cad = "" 'terminar si llegamos a la raiz
         Wend
         ComprobarBotonMenuVisible = b
-        Set Rs = Nothing
+        Set RS = Nothing
     End If
     
 EComprobar:

@@ -450,7 +450,7 @@ Private Sub cboTipo2_Click()
 End Sub
 
 Private Sub cmdFacturar_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
 
     
     
@@ -483,12 +483,12 @@ Dim I As Integer
     
     'Vere si hay alguno marcado para facturar
     SQL = ""
-    For I = 1 To TreeView1.Nodes.Count
-        If Not TreeView1.Nodes(I).Parent Is Nothing Then
-            If TreeView1.Nodes(I).Checked Then
-                If Not TreeView1.Nodes(I).Parent.Checked Then
-                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(I).Parent.Text, vbExclamation
-                    TreeView1.Nodes(I).Parent.Checked = True
+    For i = 1 To TreeView1.Nodes.Count
+        If Not TreeView1.Nodes(i).Parent Is Nothing Then
+            If TreeView1.Nodes(i).Checked Then
+                If Not TreeView1.Nodes(i).Parent.Checked Then
+                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(i).Parent.Text, vbExclamation
+                    TreeView1.Nodes(i).Parent.Checked = True
                     Exit Sub
                 End If
                 
@@ -509,11 +509,11 @@ Dim I As Integer
 
 
     'Si hay alguno para facturar compruebo que todas las facturas tengan al menos un albaran seleccionado
-    For I = 1 To TreeView1.Nodes.Count
-        If TreeView1.Nodes(I).Parent Is Nothing Then
-            If TreeView1.Nodes(I).Checked Then
+    For i = 1 To TreeView1.Nodes.Count
+        If TreeView1.Nodes(i).Parent Is Nothing Then
+            If TreeView1.Nodes(i).Checked Then
                 'Comprobar si algun nodo esta seleccionado
-                If Not ComprobarSubNodoSeleccionado(I) Then Exit Sub
+                If Not ComprobarSubNodoSeleccionado(i) Then Exit Sub
             End If
         End If
     Next
@@ -572,18 +572,18 @@ Private Sub Form_Load()
     PriVez = True
     txtclien.Text = ""
     If Me.ImprimirCertificacion Then
-        label2.Caption = "Certificación"
-        label2.ForeColor = &H80&
+        Label2.Caption = "Certificación"
+        Label2.ForeColor = &H80&
         SQL = "Impresión certificación"
         'Fecha "certificacion"
-        label1(8).Caption = "F. Certif."
+        Label1(8).Caption = "F. Certif."
         Me.txtFec = Format(Now, "dd/mm/yyyy")
         
     Else
-        label2.Caption = "Facturar"
-        label2.ForeColor = vbRed
+        Label2.Caption = "Facturar"
+        Label2.ForeColor = vbRed
         SQL = "Facturar Albaranes x Cliente"
-        label1(8).Caption = "Copias"
+        Label1(8).Caption = "Copias"
     End If
     Me.Caption = SQL
     Me.cmdFacturar(1).visible = ImprimirCertificacion
@@ -591,7 +591,7 @@ Private Sub Form_Load()
     
     'Tipo Albaran para la certificacion
     If ImprimirCertificacion Then CargaComboTipos
-    Me.label1(9).visible = True ' ImprimirCertificacion
+    Me.Label1(9).visible = True ' ImprimirCertificacion
     cboTipo2.visible = True 'ImprimirCertificacion2
    
     
@@ -726,7 +726,7 @@ Dim Im As Currency
 End Sub
 
 Private Sub PonerCadenaImporte(ByRef N As Node, Padre As Boolean)
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
     'Silo puede llevar los dops puntos UNA vez
 
@@ -735,9 +735,9 @@ Dim J As Integer
     Else
         J = 45
     End If
-    I = InStr(1, N.Text, ":")
-    If I > 0 Then
-        N.Text = Mid(N.Text, 1, I)
+    i = InStr(1, N.Text, ":")
+    If i > 0 Then
+        N.Text = Mid(N.Text, 1, i)
         N.Text = N.Text & Right(Space(J) & Format(N.Tag, FormatoImporte), J)
     End If
 End Sub
@@ -818,9 +818,9 @@ Private Function PonerCliente() As String
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
     If Not miRsAux.EOF Then
-        SQL = miRsAux!Nomclien
+        SQL = miRsAux!NomClien
         Me.txtNombre.Text = SQL
-        PonerCliente = miRsAux!Nomclien
+        PonerCliente = miRsAux!NomClien
         txtSitua = miRsAux!nomsitua
         txtSitua.Tag = miRsAux!Codmacta
     End If
@@ -960,7 +960,6 @@ Dim Col As Collection
     Set Col = New Collection
     
     While Not miRsAux.EOF
-        'If miRsAux!NumAlbar = 54 Then Stop
     
         If miRsAux!TipoFact = 1 Then
             'Factura x albaran
@@ -1030,7 +1029,7 @@ End Function
 
 
 Private Sub InsertarLineaFactura(ByRef Cole As Collection, CadenaFactura As String)
-Dim I As Integer
+Dim i As Integer
 Dim N As Node
 Dim TotalFra As Currency
 Dim Aux As String
@@ -1062,15 +1061,15 @@ Dim Aux As String
     N.Checked = True
     TotalFra = 0
     'Los albaranes que iran
-    For I = 1 To Cole.Count
+    For i = 1 To Cole.Count
         'El importe
-        Aux = RecuperaValor(Cole.item(I), 2)
+        Aux = RecuperaValor(Cole.item(i), 2)
         Im = CCur(Aux)
         TotalFra = TotalFra + Im
         
         'El importe
         Aux = Right(Space(10) & Format(Im, FormatoImporte), 10)
-        Aux = RecuperaValor(Cole.item(I), 1) & Aux
+        Aux = RecuperaValor(Cole.item(i), 1) & Aux
         Set N = TreeView1.Nodes.Add("FRA" & Format(NumRegElim, "000"), tvwChild)
         N.Text = Aux
         N.Image = 44
@@ -1245,7 +1244,7 @@ End Function
 
 
 Private Sub ImprimirCerti()
-Dim I As Byte
+Dim i As Byte
 Dim NO As Node
 
     SQL = "DELETE from tmpnlotes where codusu = " & vUsu.codigo
@@ -1273,9 +1272,9 @@ Dim NO As Node
         Exit Sub
     End If
     
-    If PonerParamRPT2(47, SQL, I, CadenaDesdeOtroForm, False, "", pRptvMultiInforme) Then
+    If PonerParamRPT2(47, SQL, i, CadenaDesdeOtroForm, False, "", pRptvMultiInforme) Then
         SQL = SQL & "|pFecha=""" & txtFec.Text & """|"
-        I = I + 1
+        i = i + 1
         With frmImprimir
             .ConSubInforme = False
             .FormulaSeleccion = "{tmpnlotes.codusu} = " & vUsu.codigo
@@ -1283,7 +1282,7 @@ Dim NO As Node
             .NombrePDF = pPdfRpt
             .Titulo = "Certificación"
             .OtrosParametros = SQL
-            .NumeroParametros = I
+            .NumeroParametros = i
             .SeleccionaRPTCodigo = pRptvMultiInforme
             .Opcion = 2003 'Esta libre
             .Show vbModal
@@ -1295,7 +1294,7 @@ End Sub
 Private Function InsertarAlbaranesCertificacion(Indi As Integer, NumeroFac As Integer) As Boolean
 Dim NO As Node
 Dim Aux As String
-Dim I As Integer
+Dim i As Integer
        Set NO = TreeView1.Nodes(Indi).Child
        '                                    nsecuen             nºALBA      codtipom
        'insert into `tmpnlotes` (`codusu`,`numalbar`,`codprove`,`numlotes`) values
@@ -1365,7 +1364,7 @@ End Function
 
 
 Private Sub CargaComboTipos()
-Dim I As Byte
+Dim i As Byte
 
 
     
@@ -1393,9 +1392,9 @@ Dim I As Byte
         Else
         
             SQL = "Venta|Reparación|Orden trabajo|Trabajo externo|"
-            For I = 1 To 4
-                    cboTipo2.AddItem RecuperaValor(SQL, CInt(I))
-                    cboTipo2.ItemData(cboTipo2.NewIndex) = I
+            For i = 1 To 4
+                    cboTipo2.AddItem RecuperaValor(SQL, CInt(i))
+                    cboTipo2.ItemData(cboTipo2.NewIndex) = i
             Next
             
 '            SQL = "Select codtipom from scaalb where codclien=" & txtclien.Text & " AND codtipom IN ('ALV','ALR','ALO','ALE') GROUP BY 1"

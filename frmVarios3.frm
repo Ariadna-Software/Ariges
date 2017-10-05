@@ -722,7 +722,7 @@ Dim CodmactaIndicada As Boolean
              C1 = C1 & "|nifsocio|"
              
         Case Else
-            Stop
+            Stop  'NO DEBERIA PASAR
             C1 = ""
         End Select
 
@@ -1229,7 +1229,7 @@ Dim N As Integer
             'Cliente nuevo
             Set IT = ListView1.ListItems.Add
             IT.Text = Format(miRsAux!codClien, "0000")
-            IT.SubItems(1) = miRsAux!Nomclien
+            IT.SubItems(1) = miRsAux!NomClien
             'Los 10 primeros (relleando a blancos sera el codmacta, los siguientes desde el 11 el NIF
             IT.SubItems(2) = Mid(miRsAux!nomforpa, 1, 10)
             
@@ -1373,7 +1373,7 @@ Dim N As Integer
         IT.SubItems(1) = " "
         IT.SubItems(2) = " "
         If Not IsNull(miRsAux!codClien) Then IT.SubItems(1) = Format(miRsAux!codClien, "0000")
-        If Not IsNull(miRsAux!Nomclien) Then IT.SubItems(2) = miRsAux!Nomclien
+        If Not IsNull(miRsAux!NomClien) Then IT.SubItems(2) = miRsAux!NomClien
         
         
         'Febrero 2014
@@ -1417,10 +1417,10 @@ Private Sub CargalwPresuElim()
     While Not miRsAux.EOF
             
         Set IT = lwPresuElim.ListItems.Add
-        IT.Text = Format(miRsAux!NumFactu, "0000")
+        IT.Text = Format(miRsAux!Numfactu, "0000")
         IT.SubItems(1) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
         IT.SubItems(2) = miRsAux!codClien
-        IT.SubItems(3) = miRsAux!Nomclien
+        IT.SubItems(3) = miRsAux!NomClien
         IT.SubItems(4) = Format(miRsAux!TotalFac, FormatoImporte)
 
         miRsAux.MoveNext

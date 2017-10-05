@@ -909,7 +909,6 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
           
           
           
-           'If mrs0!Telefono = "654396236" Then Stop
           
             mFactura3 = mrs0!NumFact
             mSerie = mrs0!Serie
@@ -931,7 +930,6 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
                 
                 iNSERTS = "" 'VELOCIDAD
                                 
-                'If mrs0!Telefono = "677013615" Then Stop
                 
                 While Not mrs1.EOF
                     '-- Ahora damos de alta los valores de cuota correspondiente
@@ -2231,8 +2229,8 @@ Dim Importe3 As Currency
     L.Refresh
     cad = DevuelveACcionesTipo(2, 1, Rc, TipoFicheroOperador)
     If cad <> "" Then
-        MsgBox "FALTA acciones 2. Cuota mes entera"
-        Stop
+        MsgBox "FALTA acciones 2. Cuota mes entera. No deberia haber ocurrido.", vbCritical
+        MsgBox "Avise a Ariadna !!!!!!", vbCritical
     End If
     
     
@@ -2740,11 +2738,7 @@ Dim IdLinDetalle As Long
                 
                 Else
 '
-'                    If InStr(1, Tramo, "655889829;16/07/2017;orangeworld;Roaming Zona1") > 0 Then Stop
-'                    If InStr(1, Tramo, "mínimo") > 0 Then Stop
-'                    If InStr(1, Tramo, "anquilidad") > 0 Then Stop
-'                    If InStr(1, Tramo, "606399489") > 0 Then Stop
-'                    If Tipo = 9 Then Stop
+
                     
                     If Tipo = 1 Then
                         'NADA
@@ -3112,7 +3106,7 @@ Dim Valor2 As Currency
         If linea <> "" Then
             If InStr(1, linea, "|") > 0 Then
                 MsgBox "Separador incorrecto", vbExclamation
-                Stop
+                MsgBox "Error, LINEA: " & linea
             End If
             linea = Replace(linea, ";", "|") & "|"  'pong el ultimo pipe
             
@@ -3291,7 +3285,7 @@ Dim Cambialo As Byte
             Cambialo = 1
         End If
         If Cambialo Then Tipo = 4
-        'If Cambialo = 0 Then Stop
+        'If Cambialo = 0 Then St op
     End If
     If Tipo = 4 Or Tipo = 9 Then
         DevuelveUnidad = 0
@@ -3543,6 +3537,13 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
                 'NUEVO Dic 2014
                 Case "DCFC_DAT":
                     mFicheroCorto = ""
+                    
+                'Seprtiembre 2019
+                'Seran igual que el fichero DNTV_CAB
+                Case "DNAD_DAT"
+                    ProcesarDntvCab
+                     tabla = "Dntv_Cab(ciclo,Fact_No,Telef_Ext ,Fecha_Hora ,No_Recep ,Tipo ,Destino ,Duracion ,Durac_Ses "
+                    tabla = tabla & ",Volumen,Pasos ,Tipo_Fact ,Tarifa,Descripcion ,Canal ,Ext_Origen ,Importe ,Importe_Neto) "
                 Case Else ' desconocido
                     '-- Registro no contemplado
                     '
@@ -3579,7 +3580,7 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
                 CadenaInsert = CadenaInsert & mFicheroCorto & ")"
                 
                 If Len(CadenaInsert) > 50000 Then
-                    'If InStr(1, CadenaInsert, "600400257") > 0 Then Stop
+                  
                 
                     conn.Execute CadenaInsert
                     CadenaInsert = ""
@@ -3600,10 +3601,47 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
     
     'Haremos las comprobaciones aqui
     Set miRsAux = New ADODB.Recordset
-    LB.Caption = "Comprobaciones"
+    LB.Caption = "Comprobar numeros"
     LB.Refresh
     Espera 1
     IntentaEliminarFicheroLog  'por si acaso existe
+    
+    
+    'Telefonos "RAROS que viene"
+    Dim Rtr As ADODB.Recordset
+    Set Rtr = New ADODB.Recordset
+    
+    CadenaInsert = "select * from vodafonetxt.cambionumeros WHERE false" 'Por si no esta creada la estrucutura
+    If ejecutar(CadenaInsert, True) Then
+        CadenaInsert = "select * from vodafonetxt.cambionumeros"
+        Rtr.Open CadenaInsert, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        
+        While Not Rtr.EOF
+            LB.Caption = "Cambio numeros:" & Rtr!tfno_fich & " -> " & Rtr!tfno_real
+            LB.Refresh
+            
+            'ACtualiza N tablas
+            tabla = "dcfd_cab|dcfm_cab|dcft_cab|dcfv_cab|ddnl_cab|dcul_cab|dntv_cab|dntd_cab|"
+            For NF = 1 To 8
+                Leido = "telef"
+                If NF = 7 Or NF = 8 Then Leido = Leido & "_ext"
+                
+                
+                CadenaInsert = RecuperaValor(tabla, NF)
+                CadenaInsert = "UPDATE vodafonetxt." & CadenaInsert & " SET " & Leido & "=" & DBSet(Rtr!tfno_real, "T")
+                
+                CadenaInsert = CadenaInsert & " WHERE " & Leido & " = " & DBSet(Rtr!tfno_fich, "T")
+                
+                ejecutar CadenaInsert, False
+            
+            Next
+            Rtr.MoveNext
+        Wend
+    
+    End If
+    Set Rtr = Nothing
+    LB.Caption = "Comprobaciones"
+    LB.Refresh
     
     NF = FreeFile
     GuardarNombreFichero = App.Path & "\emitefac.log"
@@ -3615,6 +3653,9 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
     If Not ComprobarTraficoVodafone(LB) Then i = 1
     
     If Not ComprobarNumerosDeTelefonoVODAFONE(LB) Then i = 1
+    
+    
+    
     
     Close #NF
     LB.Caption = "Finalizando importacion"
@@ -4205,7 +4246,7 @@ Dim i As Integer
     
     If Conceptos <> "|" Then Conceptos = Mid(Conceptos, 2)
     While Conceptos <> ""
-    
+        Debug.Print Conceptos
         i = InStr(1, Conceptos, "|")
         If i = 0 Then
             If Conceptos <> "" Then Err.Raise 513, , "Comprobando cuotas trafico vodafone(1)"
@@ -4214,33 +4255,35 @@ Dim i As Integer
             C = Mid(Conceptos, 1, i - 1)
             L.Caption = C
             L.Refresh
-            
             Conceptos = Mid(Conceptos, i + 1)
-            miRsAux.Open "Select * from Tel_desc_consumos where DescTipoTrafico =" & DBSet(C, "T"), conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            If miRsAux.EOF Then
-                ComprobarTraficoVodafone = False
-                
-                If NumRegElim = 0 Then
-                    'Vamos a ver que cuota le toca
-                    miRsAux.Close
+            If C <> "" Then
+               
+                miRsAux.Open "Select * from Tel_desc_consumos where DescTipoTrafico =" & DBSet(C, "T"), conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If miRsAux.EOF Then
+                    ComprobarTraficoVodafone = False
                     
-                    miRsAux.Open "select substring(CodTipoTrafico,5) from Tel_desc_consumos where CodTipoTrafico like 'VODT%' order by 1 desc", conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                    If Not miRsAux.EOF Then NumRegElim = Val(miRsAux.Fields(0))
+                    If NumRegElim = 0 Then
+                        'Vamos a ver que cuota le toca
+                        miRsAux.Close
                         
+                        miRsAux.Open "select substring(CodTipoTrafico,5) from Tel_desc_consumos where CodTipoTrafico like 'VODT%' order by 1 desc", conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                        If Not miRsAux.EOF Then NumRegElim = Val(miRsAux.Fields(0))
+                            
+                    End If
+                    NumRegElim = NumRegElim + 1
+                    
+                    
+                    'INSERTAMOS LA CUOTA de trafico
+                    Print #NF, "Trafico: " & C
+                    C = " VALUES ('VODT" & Format(NumRegElim, "0000") & "',0,0,0," & DBSet(C, "T") & ",0)"
+                    C = "INSERT INTO tel_desc_consumos(CodTipoTrafico,Porcentaje,Importe,Grupo,DescTipoTrafico,PorcentajeOperador) " & C
+                    
+                    conn.Execute C
+                Else
+                    'ok
                 End If
-                NumRegElim = NumRegElim + 1
-                
-                
-                'INSERTAMOS LA CUOTA de trafico
-                Print #NF, "Trafico: " & C
-                C = " VALUES ('VODT" & Format(NumRegElim, "0000") & "',0,0,0," & DBSet(C, "T") & ",0)"
-                C = "INSERT INTO tel_desc_consumos(CodTipoTrafico,Porcentaje,Importe,Grupo,DescTipoTrafico,PorcentajeOperador) " & C
-                
-                conn.Execute C
-            Else
-                'ok
+                miRsAux.Close
             End If
-            miRsAux.Close
         End If
     Wend
 
@@ -4477,7 +4520,7 @@ Dim i As Integer
     i = 0
     While Not RTef.EOF
             
-            'If RTef!Telefono = "672305329" Then Stop
+            'If RTef!Telefono = "630984819" Then Stop
             
             
             i = i + 1
@@ -4532,17 +4575,9 @@ Dim i As Integer
             'Base Normal
             TotalPrevio = Round(TotalCuotas + TotalConsumo - TotalDescuentos, 2)
             TotalCuotas = Round(TotalPrevio + ImporteAjusteMinimo, 2)
-            
-            
-            'Exenta
-            'cab.Base_exenta = totalConsumoExento;
                
             'Cuota IVA
             TotalConsumo = Round((TotalCuotas * mValorIva) / 100, 2)
-            'cab.Cuota = (cab.BaseImponible * cab.TipoIVA) / 100;
-            '// redondear los valores a 2 decimales
-            ' cab.Cuota = decimal.Round(cab.Cuota, 2, MidpointRounding.AwayFromZero);
-            'cab.BaseImponible = decimal.Round(cab.BaseImponible, 2, MidpointRounding.AwayFromZero);
             
             
             'cab.Total = cab.BaseImponible + cab.Cuota + cab.Base_exenta ;
@@ -4552,6 +4587,7 @@ Dim i As Integer
             mSQL = mSQL & ", BaseImponible =" & DBSet(TotalCuotas, "N")
             mSQL = mSQL & ", Cuota =" & DBSet(TotalConsumo, "N")
             mSQL = mSQL & ", Total =" & DBSet(TotalDescuentos, "N")
+            If TotalConsumoExento <> 0 Then mSQL = mSQL & ", base_exenta =" & DBSet(TotalConsumoExento, "N")
             mSQL = mSQL & " WHERE serie = '" & RTef!Serie & "' and ano = " & RTef!Ano & " and numfact =" & RTef!NumFact
             conn.Execute mSQL
             RTef.MoveNext
@@ -4597,7 +4633,7 @@ Dim J As Integer
                 
                 
                 If Importe <> 0 Then
-                    Cuota = CodigoDecripcionCuotaVoda(0, DBLet(miRsAux!LaCuota, "T"))
+                    Cuota = CodigoDecripcionCuotaVoda(0, DBLet(miRsAux!lacuota, "T"))
                     J = InStr(1, Cuota, "','")
                     'No puede ser 0
                     Cuota = Mid(Cuota, 1, J - 1)
@@ -4617,7 +4653,7 @@ Dim J As Integer
                 End If
                 'tel_lin_factura_cuotas(Serie,Ano,NumFact,NumLin,CodCuota,DescCuota,Importe,TipoIva)
                 CadenaInsert = CadenaInsert & ", ('" & RR!Serie & "'," & RR!Ano & "," & RR!NumFact & "," & i
-                CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(0, DBLet(miRsAux!LaCuota, "T"))
+                CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(0, DBLet(miRsAux!lacuota, "T"))
                 CadenaInsert = CadenaInsert & DBSet(Importe, "N") & ",0)"
                 CargarCuotasIva = CargarCuotasIva + Importe
 
@@ -4639,7 +4675,7 @@ End Function
 Private Function CargarTraficoNuevo(ByRef RR As ADODB.Recordset, ByRef consumoSinIVA As Currency) As Currency
 Dim i As Integer
 Dim cad As String
-        
+Dim InsertamosCuota As Boolean
         
         
         consumoSinIVA = 0
@@ -4653,18 +4689,7 @@ Dim cad As String
         cad = cad & "sum(volumen) SumaDeVolumen ,sum(Importe) SumaDeCoste , count(*) NumLlamadas "
         cad = cad & " from vodafonetxt.dntv_cab WHERE telef_ext like '" & RR!Telefono & "%' GROUP BY 1"
         
-'            var rs0 = from l in ctx2.DntvCabs
-'                      Where L.TelefExt.StartsWith(Telefono)
-'                      group l by new { l.TelefExt, l.FactNo, l.Tipo }
-'                      into g select new
-'                      {
-'                          g.Key.TelefExt,
-'                          g.Key.FactNo,
-'                          g.Key.Tipo,
-'                          SumaDeDuracion = g.Sum(l => l.Duracion),
-'                          SumaDeVolumen = g.Sum(l => l.Volumen),
-'                          SumaDeCoste = g.Sum(l => l.Importe),
-'                          NumLlamadas = g.Count()
+
 
         miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
@@ -4688,7 +4713,7 @@ Dim cad As String
             'Serie,Ano,NumFact,NumLin,CodTipoTrafico,DescTipoTrafico,
             'NumLlamadas,Unidad,Cantidad,Importe,TipoIVA)
             CadenaInsert = CadenaInsert & ", ('" & RR!Serie & "'," & RR!Ano & "," & RR!NumFact & "," & i
-            CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(1, miRsAux!LaCuota)
+            CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(1, miRsAux!lacuota)
             CadenaInsert = CadenaInsert & DBSet(miRsAux!NumLlamadas, "N") & ","
             If DBLet(miRsAux!SumaDeDuracion, "N") = 0 Then
                 'SOn KB
@@ -4740,7 +4765,7 @@ Dim cad As String
             'Serie,Ano,NumFact,NumLin,CodTipoTrafico,DescTipoTrafico,
             'NumLlamadas,Unidad,Cantidad,Importe,TipoIVA)
             CadenaInsert = CadenaInsert & ", ('" & RR!Serie & "'," & RR!Ano & "," & RR!NumFact & "," & i
-            CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(1, miRsAux!LaCuota)
+            CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(1, miRsAux!lacuota)
             CadenaInsert = CadenaInsert & DBSet(miRsAux!NumLlamadas, "N") & ","
             CadenaInsert = CadenaInsert & "'Mensajes'," & DBSet(miRsAux!NumLlamadas, "N") & "," & DBSet(miRsAux!SumaDeCoste, "N", "N")
             CadenaInsert = CadenaInsert & ",0,'1900-01-01')"
@@ -4787,7 +4812,7 @@ Dim cad As String
             'NumLlamadas,Unidad,Cantidad,Importe,TipoIVA)
             i = i + 1
             CadenaInsert = CadenaInsert & ", ('" & RR!Serie & "'," & RR!Ano & "," & RR!NumFact & "," & i
-            CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(1, miRsAux!LaCuota)
+            CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(1, miRsAux!lacuota)
             CadenaInsert = CadenaInsert & DBSet(miRsAux!NumLlamadas, "N") & ","
             
             CadenaInsert = CadenaInsert & "'KB'," & DBSet(miRsAux!SumaDeDuracion, "N", "N")
@@ -4828,16 +4853,21 @@ Dim cad As String
         '        consumoSinIVA += cons.Importe;
                     'Serie,Ano,NumFact,NumLin,CodTipoTrafico,DescTipoTrafico,
             'NumLlamadas,Unidad,Cantidad,Importe,TipoIVA)
-            i = i + 1
-            CadenaInsert = CadenaInsert & ", ('" & RR!Serie & "'," & RR!Ano & "," & RR!NumFact & "," & i
-            CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(1, miRsAux!LaCuota)
-            CadenaInsert = CadenaInsert & DBSet(miRsAux!num_llamadas, "N") & ","
-            
-            CadenaInsert = CadenaInsert & "'UD',1"
-            
-            CadenaInsert = CadenaInsert & "," & DBSet(miRsAux!Importe, "N") & ",1," & DBSet(miRsAux!fecha_inicio, "F") & ")"
-            consumoSinIVA = miRsAux!Importe
-
+            InsertamosCuota = True
+            If DBLet(miRsAux!Importe, "N") = 0 Then
+                If DBLet(miRsAux!lacuota, "T") = "" Then InsertamosCuota = False
+            End If
+            If InsertamosCuota Then
+                i = i + 1
+                CadenaInsert = CadenaInsert & ", ('" & RR!Serie & "'," & RR!Ano & "," & RR!NumFact & "," & i
+                CadenaInsert = CadenaInsert & CodigoDecripcionCuotaVoda(1, miRsAux!lacuota)
+                CadenaInsert = CadenaInsert & DBSet(miRsAux!num_llamadas, "N") & ","
+                
+                CadenaInsert = CadenaInsert & "'UD',1"
+                
+                CadenaInsert = CadenaInsert & "," & DBSet(miRsAux!Importe, "N") & ",1,'1900-01-01')"
+                If Not IsNull(miRsAux!Importe) Then consumoSinIVA = consumoSinIVA + miRsAux!Importe
+            End If
             miRsAux.MoveNext
         
         

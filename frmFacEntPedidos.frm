@@ -2990,7 +2990,7 @@ Dim CodproveHerbelca  As String
         
         If CodproveHerbelca = 5000 Then
             'Proveedor de varios
-             If vUsu.AlmacenPorDefecto > 1 Then
+             If vUsu.AlmacenPorDefecto2 > 1 Then
                 MsgBox "No puede eliminar linea", vbExclamation
                 Exit Sub
             End If
@@ -2999,7 +2999,7 @@ Dim CodproveHerbelca  As String
         
         'SI es de portes tampoco dejo
         If vParamAplic.ArtPortesN = CStr(Data2.Recordset!codArtic) Then
-            If vUsu.AlmacenPorDefecto > 1 Then
+            If vUsu.AlmacenPorDefecto2 > 1 Then
                 MsgBox "No puede eliminar linea", vbExclamation
                 Exit Sub
             End If
@@ -4020,7 +4020,6 @@ Private Function ComprobarOpcionTraspaso(Factura As Boolean) As Boolean
             CtaBancoPropi = String(3, vbCrLf)
             CtaBancoPropi = "COMPROBAR QUE LA TRANSFERENCIA ESTA EFECTUADA" & CtaBancoPropi & "¿Continuar?"
             If MsgBox(CtaBancoPropi, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
-            Stop
         End If
     End If
     
@@ -7488,7 +7487,7 @@ Dim Rs As ADODB.Recordset
     'En herbelca, para castellon y gandia. Si hay cantidad de un articulo en negativo NO deja pasar
     If b And vParamAplic.NumeroInstalacion = 2 And vUsu.Nivel > 0 Then
         'Si castellon -gandia
-        If vUsu.AlmacenPorDefecto = 4 Or vUsu.AlmacenPorDefecto = 2 Then
+        If vUsu.AlmacenPorDefecto2 = 3 Or vUsu.AlmacenPorDefecto2 = 2 Then
             
             SQL = "SELECT sliped.codartic,sliped.nomartic, ####"
             SQL = SQL & " from sliped,sartic where sartic.codartic=sliped.codartic AND cantidad<0 and rotacion=0"

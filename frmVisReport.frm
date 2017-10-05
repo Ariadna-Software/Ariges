@@ -176,7 +176,6 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub CRViewer1_ExportButtonClicked(UseDefault As Boolean)
-    'Stop
     
     If vParamAplic.NumeroInstalacion = 4 Then
         
@@ -816,11 +815,15 @@ Dim FinEspera As Boolean
     cad = cad & " AND lcase(right(fichero,3))='pdf'"
     RN.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Dir(App.Path & "\temp\*.pdf", vbArchive) <> "" Then Kill App.Path & "\temp\*.pdf"
-    J = 0
+    
+    'If Dir(App.Path & "\temp\*.pdf", vbArchive) <> "" Then Kill App.Path & "\temp\*.pdf"
+    If Dir(App.Path & "\temp\" & Format(vUsu.codigo, "0000"), vbDirectory) = "" Then MkDir App.Path & "\temp\" & Format(vUsu.codigo, "0000")
+    If Dir(App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\*.*", vbArchive) <> "" Then Kill App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\*.*"
+    
+    J = 1
     If Not RN.EOF Then
         
-        FileCopy mrpt.ExportOptions.DiskFileName, App.Path & "\temp\tmp" & J & ".pdf"
+        FileCopy mrpt.ExportOptions.DiskFileName, App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\1.pdf"
         Kill mrpt.ExportOptions.DiskFileName
         
         While Not RN.EOF
@@ -828,44 +831,61 @@ Dim FinEspera As Boolean
             'Concatenamos
             Screen.MousePointer = vbHourglass
             
-            cad = """" & App.Path & "\temp\tmp" & J - 1 & ".pdf" & """" & " """ & RN!Fichero & """"
-            
-            
-            Destino = App.Path & "\temp\tmp" & J & ".pdf"
-            cad = """" & App.Path & "\pdftk.exe"" " & cad & " cat output """ & Destino & """ verbose"
-            
-            Shell cad, vbNormalFocus
+            If False Then
+                'Esto lo hacia antes
+                cad = """" & App.Path & "\temp\tmp" & J - 1 & ".pdf" & """" & " """ & RN!Fichero & """"
+                
+                
+                Destino = App.Path & "\temp\tmp" & J & ".pdf"
+                cad = """" & App.Path & "\pdftk.exe"" " & cad & " cat output """ & Destino & """ verbose"
+                
+                Shell cad, vbNormalFocus
                         
+            Else
+                FileCopy RN!Fichero, App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\" & J & ".pdf"
+                        
+                        
+            End If
             'InputBox cad
                         
                         
-            Aux2 = "" 'No esta el archivo generado. No hace falta que sigamos. lanzar error
-            T1 = Timer
-            FinEspera = False
-            Do
-                Screen.MousePointer = vbHourglass
-                If Dir(Destino, vbArchive) <> "" Then
-                    FinEspera = True
-                    Aux2 = "SI"
-                    
-                Else
-                    If Timer - T1 > 25 Then FinEspera = True
-                    Espera 0.4
-                    
-                    
+            If False Then
+                'ANTES
+                Aux2 = "" 'No esta el archivo generado. No hace falta que sigamos. lanzar error
+                T1 = Timer
+                FinEspera = False
+                Do
                     Screen.MousePointer = vbHourglass
-                End If
-            Loop Until FinEspera
-            
-            If Dir(Destino, vbArchive) = "" Then Err.Raise 513, , "Tiempo espera excedido creando fichero temporal: " & Aux2
-            
+                    If Dir(Destino, vbArchive) <> "" Then
+                        FinEspera = True
+                        Aux2 = "SI"
+                        
+                    Else
+                        If Timer - T1 > 25 Then FinEspera = True
+                        Espera 0.4
+                        
+                        
+                        Screen.MousePointer = vbHourglass
+                    End If
+                Loop Until FinEspera
+                
+                If Dir(Destino, vbArchive) = "" Then Err.Raise 513, , "Tiempo espera excedido creando fichero temporal: " & Aux2
+            End If
             
             RN.MoveNext
         Wend
         RN.Close
         
-        
-        cad = App.Path & "\temp\tmp" & J & ".pdf"
+        If J > 1 Then
+            J = J + 1
+            Destino = App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\" & J & ".pdf"
+            cad = """" & App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\*.pdf"""
+            cad = """" & App.Path & "\pdftk.exe"" " & cad & " cat output """ & Destino & """ verbose"
+                    
+            Shell cad, vbNormalFocus
+        End If
+        Screen.MousePointer = vbHourglass
+        cad = App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\" & J & ".pdf"
         
         J = 1
         Do

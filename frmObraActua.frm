@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmObraActua 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Actuaciones en obra"
@@ -542,7 +542,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
@@ -551,27 +551,27 @@ Dim Cad As String
     
     If DatosADevolverBusqueda <> "||" Then
     
-        Cad = Val(RecuperaValor(DatosADevolverBusqueda, 1))
-        If Val(Cad) <> Val(Data1.Recordset.Fields(0)) Then
-            MsgBox "No coincide el cliente (" & Cad & ")", vbExclamation
+        cad = Val(RecuperaValor(DatosADevolverBusqueda, 1))
+        If Val(cad) <> Val(Data1.Recordset.Fields(0)) Then
+            MsgBox "No coincide el cliente (" & cad & ")", vbExclamation
             Exit Sub
         End If
-        Cad = RecuperaValor(DatosADevolverBusqueda, 2)
-        If Cad <> "" Then
-            If Val(Cad) <> Val(Data1.Recordset.Fields(1)) Then
-                MsgBox "No coincide la obra (" & Cad & ")", vbExclamation
+        cad = RecuperaValor(DatosADevolverBusqueda, 2)
+        If cad <> "" Then
+            If Val(cad) <> Val(Data1.Recordset.Fields(1)) Then
+                MsgBox "No coincide la obra (" & cad & ")", vbExclamation
                 Exit Sub
             End If
         End If
     End If
     
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-     Cad = Cad & DBLet(Data1.Recordset.Fields(2), "F") & "|"
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+     cad = cad & DBLet(Data1.Recordset.Fields(2), "F") & "|"
     'Pongo la fecha ini y el txt
-    Cad = Cad & DBLet(Data1.Recordset!FechaIni, "T") & "|"
-    Cad = Cad & DBLet(Data1.Recordset!observa, "T") & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = cad & DBLet(Data1.Recordset!FechaIni, "T") & "|"
+    cad = cad & DBLet(Data1.Recordset!observa, "T") & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -655,7 +655,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
-Dim Cad As String
+Dim cad As String
 Dim cad1 As String
 Dim nada As String
 
@@ -667,8 +667,8 @@ Dim devuelve As String
     Set frmB = New frmBuscaGrid
     Select Case Index
     Case 0
-        Cad = "Codigo|sclien|codclien|N|000|15·"
-        Cad = Cad & "Nombre|sclien|nomclien|T||55·"
+        cad = "Codigo|sclien|codclien|N|000|15·"
+        cad = cad & "Nombre|sclien|nomclien|T||55·"
         frmB.vTabla = "sclien"
         frmB.vSQL = ""
         frmB.vTitulo = "Clientes"
@@ -677,8 +677,8 @@ Dim devuelve As String
            MsgBox "Primero debe indicar el cliente", vbExclamation
            Exit Sub
         End If
-        Cad = "Obra|sdirec|coddirec|N|000|15·"
-        Cad = Cad & "Desc.|sdirec|nomdirec|T||55·"
+        cad = "Obra|sdirec|coddirec|N|000|15·"
+        cad = cad & "Desc.|sdirec|nomdirec|T||55·"
         
         frmB.vTabla = "sdirec"
         frmB.vSQL = "codclien = " & Text1(0).Text
@@ -689,8 +689,8 @@ Dim devuelve As String
            MsgBox "Primero debe indicar un cliente y obra", vbExclamation
            Exit Sub
         End If
-        Cad = "Actuacion|sactuaobra|actuacion|T||25·"
-        Cad = Cad & "Observaciones|sactuaobra|observa|T||55·"
+        cad = "Actuacion|sactuaobra|actuacion|T||25·"
+        cad = cad & "Observaciones|sactuaobra|observa|T||55·"
         
         frmB.vTabla = "sactuaobra"
         frmB.vSQL = "codclien = " & Text1(0).Text & " and coddirec = " & Text1(1).Text
@@ -710,7 +710,7 @@ Dim devuelve As String
     End Select
     
     HaDevueltoDatos2 = ""
-    frmB.vCampos = Cad
+    frmB.vCampos = cad
     frmB.vDevuelve = "0|1"
     frmB.vselElem = 0
     frmB.vCargaFrame = False
@@ -719,14 +719,12 @@ Dim devuelve As String
     Set frmB = Nothing
     
     If HaDevueltoDatos2 <> "" And Index <> 2 Then
-        'Stop
         Text1(Index).Text = RecuperaValor(HaDevueltoDatos2, 1)
         Text2(Index).Text = RecuperaValor(HaDevueltoDatos2, 2)
         HaDevueltoDatos2 = ""
     End If
     
    If HaDevueltoDatos2 <> "" And Index = 2 Then
-        'Stop
      
         Text1(Index).Text = RecuperaValor(HaDevueltoDatos2, 1)
         HaDevueltoDatos2 = ""
@@ -1101,7 +1099,7 @@ Dim SQL As String
 On Error GoTo FinEliminar
         
         SQL = " WHERE coddirec=" & Data1.Recordset!CodDirec
-        SQL = SQL & " AND codclien=" & Data1.Recordset!codclien
+        SQL = SQL & " AND codclien=" & Data1.Recordset!codClien
         SQL = SQL & " AND actuacion=" & DBSet(Data1.Recordset!actuacion, "T")
         'Cabeceras
         conn.Execute "Delete  from " & NombreTabla & SQL
@@ -1129,31 +1127,31 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: slista
-    Cad = Cad & ParaGrid(Text1(0), 8, "Cod. Cli.")
+    cad = cad & ParaGrid(Text1(0), 8, "Cod. Cli.")
     
-    Cad = Cad & "Nombre|sclien|nomclien|T||35·"
-    Cad = Cad & ParaGrid(Text1(1), 8, "Obra")
-    Cad = Cad & "Desc. obra|sdirec|nomdirec|T||30·"
-    Cad = Cad & ParaGrid(Text1(2), 18, "Actuacion")
+    cad = cad & "Nombre|sclien|nomclien|T||35·"
+    cad = cad & ParaGrid(Text1(1), 8, "Obra")
+    cad = cad & "Desc. obra|sdirec|nomdirec|T||30·"
+    cad = cad & ParaGrid(Text1(2), 18, "Actuacion")
     
                
  
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vTabla = NombreTabla & ",sclien,sdirec"
         
-        Cad = "sactuaobra.codclien=sclien.codclien and sdirec.codclien=sactuaobra.codclien and sdirec.coddirec=sactuaobra.coddirec"
+        cad = "sactuaobra.codclien=sclien.codclien and sdirec.codclien=sactuaobra.codclien and sdirec.coddirec=sactuaobra.coddirec"
 
-        If cadB <> "" Then Cad = Cad & " AND " & cadB
+        If cadB <> "" Then cad = cad & " AND " & cadB
         
-        frmB.vSQL = Cad
+        frmB.vSQL = cad
         HaDevueltoDatos2 = ""
         '###A mano
         frmB.vDevuelve = "0|2|4|"
@@ -1170,12 +1168,12 @@ Dim Cad As String
             'Creamos una cadena consulta y ponemos los datos
             Screen.MousePointer = vbHourglass
             cadB = ""
-            Cad = ValorDevueltoFormGrid(Text1(0), HaDevueltoDatos2, 1)
-            cadB = Cad
-            Cad = ValorDevueltoFormGrid(Text1(1), HaDevueltoDatos2, 2)
-            cadB = cadB & " and " & Cad
-            Cad = ValorDevueltoFormGrid(Text1(2), HaDevueltoDatos2, 3)
-            cadB = cadB & " and " & Cad
+            cad = ValorDevueltoFormGrid(Text1(0), HaDevueltoDatos2, 1)
+            cadB = cad
+            cad = ValorDevueltoFormGrid(Text1(1), HaDevueltoDatos2, 2)
+            cadB = cadB & " and " & cad
+            cad = ValorDevueltoFormGrid(Text1(2), HaDevueltoDatos2, 3)
+            cadB = cadB & " and " & cad
             CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
             

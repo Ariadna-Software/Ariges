@@ -770,7 +770,7 @@ Dim T4 As Currency
              '   Case "FRT": totRectif = RS!BaseImp
              '   Case Else
              '
-             '     '  If RS!codtipom <> "FAZ" Then Stop
+
              'End Select
             If PorAgente Then
                 

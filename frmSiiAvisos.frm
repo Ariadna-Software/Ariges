@@ -153,6 +153,10 @@ Private Sub chkTiket_Click()
     CargaFacturas
 End Sub
 
+Private Sub cmdCancelar_Click()
+    Unload Me
+End Sub
+
 Private Sub Combo1_Click()
     If PrimeraVez Then Exit Sub
     If Combo1.Tag = Combo1.ListIndex Then Exit Sub

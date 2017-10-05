@@ -1415,7 +1415,7 @@ Dim FamiliasSeleccionadas As String
                 
                 If InStr(1, FamiliasSeleccionadas, SQL) = 0 Then
                     'Esa familia NO la ha seleccionado
-                    'Stop
+                    '
                 Else
                 
                     If ActualizarPrecio2 Then lw1.ListItems.Remove N

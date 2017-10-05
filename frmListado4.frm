@@ -3294,7 +3294,7 @@ Dim Ayuda As String
         Ayuda = Ayuda & vbCrLf & "%Comision:  Que llevara la linea"
     End Select
     
-    Ayuda = imgAyuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
+    Ayuda = imgayuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 
@@ -3438,7 +3438,7 @@ Private Sub lw_DblClick(Index As Integer)
                 
         ElseIf Index = 2 Then
         
-           'Stop
+           '
         
         Else
         
@@ -3605,15 +3605,15 @@ Private Sub txtDecimal_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtDecimal_LostFocus(Index As Integer)
-Dim B As Boolean
+Dim b As Boolean
     txtDecimal(Index).Text = Trim(txtDecimal(Index).Text)
     If txtDecimal(Index).Text <> "" Then
        ' If Index = 0 Or Index = 9 Then
        '     B = PonerFormatoDecimal(txtDecimal(Index), 2)
        ' Else
-            B = PonerFormatoDecimal(txtDecimal(Index), 5)
+            b = PonerFormatoDecimal(txtDecimal(Index), 5)
        ' End If
-        If B Then
+        If b Then
 
         Else
             txtDecimal(Index).Text = ""
@@ -3668,7 +3668,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgAyuda
+    For Each Ima In Me.imgayuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear
@@ -4308,7 +4308,7 @@ Dim Aux2 As Currency
                 IT.SubItems(1) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
                 IT.SubItems(2) = Format(miRsAux!FecFactu, "yyyymmdd") 'para la ordenacion
                 IT.SubItems(3) = Format(miRsAux!codClien, "0000")
-                IT.SubItems(4) = miRsAux!Nomclien
+                IT.SubItems(4) = miRsAux!NomClien
                 IT.SubItems(5) = Format(miRsAux!Suma, FormatoImporte)
                 
                 'It.SubItems(6) = Format(Importe, FormatoImporte)
@@ -4550,7 +4550,7 @@ Private Sub LanzaBuscaGrid(KOpcion As Byte)
                 MsgBox "Error leyendo caontador", vbExclamation
                 
             Else
-                SQL = miRsAux!Contador & "|" & miRsAux!Nomclien & "|"
+                SQL = miRsAux!Contador & "|" & miRsAux!NomClien & "|"
                 SQL = SQL & DBLet(miRsAux!Descripcion, "T") & "|"
                 SQL = SQL & Format(DBLet(miRsAux!importeconcepto, "N"), FormatoImporte)
                 SQL = SQL & "|" & miRsAux!codClien & "|" & miRsAux!facturar & "|"
@@ -4707,7 +4707,7 @@ Dim ColLineas As Collection
         SQL = SQL & vCadena & " and idtelefono='" & CadParam & "'"
         miRsAux.Open SQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         If Not miRsAux.EOF Then
-            SQL = miRsAux!codClien & "|" & miRsAux!Nomclien & "|" & miRsAux!idtelefono & "|" & miRsAux!Nombre & "|"
+            SQL = miRsAux!codClien & "|" & miRsAux!NomClien & "|" & miRsAux!idtelefono & "|" & miRsAux!Nombre & "|"
             AnyadeNodoTelefonia True
         Else
             SQL = Mid(SQL, InStr(1, SQL, " WHERE ") + 12)
@@ -4946,7 +4946,7 @@ Private Sub CargaItemDireccionEnvio(ByRef elit As ListItem)
         elit.SubItems(1) = Format(miRsAux!NumAlbar, "000000")
         elit.SubItems(2) = Format(miRsAux!FechaAlb, FormatoFecha)
         elit.SubItems(3) = Format(miRsAux!codClien, "00000")
-        elit.SubItems(4) = miRsAux!Nomclien
+        elit.SubItems(4) = miRsAux!NomClien
         elit.SubItems(5) = Format(miRsAux!coddiren, "0000")
         elit.SubItems(6) = miRsAux!nomdiren
         elit.SubItems(7) = miRsAux!codtipom_
@@ -5176,7 +5176,7 @@ Private Sub CargaAlbaranes(CargaLosTiposIVA As Boolean)
         IT.Text = miRsAux!NumAlbar
         IT.SubItems(1) = Format(miRsAux!FechaAlb, "dd/mm/yyyy")
         IT.SubItems(2) = miRsAux!codClien
-        IT.SubItems(3) = miRsAux!Nomclien
+        IT.SubItems(3) = miRsAux!NomClien
         IT.SubItems(4) = miRsAux!TieneDto
         IT.SubItems(5) = Format(miRsAux!Base, FormatoImporte)
         IT.Checked = True

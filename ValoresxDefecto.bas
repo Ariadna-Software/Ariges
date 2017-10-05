@@ -134,28 +134,95 @@ End Sub
 
 
 
-Private Sub FicheroByte(Leer As Boolean, NomFich As String, ByRef Resultado As Byte)
-Dim Cad As String
+Private Sub FicheroByte(Leer As Boolean, nomFich As String, ByRef resultado As Byte)
+Dim cad As String
 Dim NF As Integer
     
     On Error Resume Next
     NF = FreeFile
     If Leer Then
-        Open NomFich For Input As #NF
-        Line Input #NF, Cad
+        Open nomFich For Input As #NF
+        Line Input #NF, cad
         Close #NF
-        If Not IsNumeric(Cad) Then
-            Cad = "0"
+        If Not IsNumeric(cad) Then
+            cad = "0"
         Else
-            If Val(Cad) > 128 Then Cad = "128"
+            If Val(cad) > 128 Then cad = "128"
         End If
-        Resultado = CByte(Cad)
+        resultado = CByte(cad)
     Else
-        Open NomFich For Output As #NF
-        Print #NF, Resultado
+        Open nomFich For Output As #NF
+        Print #NF, resultado
         Close #NF
         
     End If
     
     Err.Clear
 End Sub
+
+
+
+
+'----------------------------------------------------------
+'Valores por defecto que sera una cadena de texto
+
+Public Sub textValueLeer(NombreForm As String, Cadena_A_Leer As String)
+Dim NombreFichero As String
+
+On Error GoTo ECheckValueLeer
+Cadena_A_Leer = ""
+'Se podria hacer un select para que no lie mucho los nombres en las carpetas
+NombreFichero = DevNombreFichero(NombreForm)
+If NombreFichero <> "" Then
+    If Dir(NombreFichero) <> "" Then FicheroTexto True, NombreFichero, Cadena_A_Leer
+End If
+
+
+Exit Sub
+ECheckValueLeer:
+    Err.Clear
+End Sub
+
+Public Sub textoValueGuardar(NombreForm As String, Cadena_A_Guardar As String)
+ Dim NombreFichero  As String
+    'Se podria hacer un select para que no lie mucho los nombres en las carpetas
+    NombreFichero = DevNombreFichero(NombreForm)
+    If NombreFichero = "" Then Exit Sub
+    If Valor > 128 Then Valor = 128
+    If Cadena_A_Guardar = "" Then
+        'Hay que eliminar si existe
+        EliminaValoresPorDefecto NombreFichero
+    Else
+        FicheroTexto False, NombreFichero, Cadena_A_Guardar
+    End If
+        
+    
+End Sub
+
+
+
+
+Private Sub FicheroTexto(Leer As Boolean, nomFich As String, ByRef resultado As String)
+Dim cad As String
+Dim NF As Integer
+    
+    
+    NF = FreeFile
+    If Leer Then
+        Open nomFich For Input As #NF
+        Line Input #NF, cad
+        Close #NF
+
+        resultado = CStr(cad)
+    Else
+        Open nomFich For Output As #NF
+        Print #NF, resultado
+        Close #NF
+        
+    End If
+    
+    
+End Sub
+
+
+

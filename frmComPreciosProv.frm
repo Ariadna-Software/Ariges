@@ -1007,7 +1007,7 @@ End Sub
 
 Private Sub CargaGrid(enlaza As Boolean)
 Dim b As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
@@ -1020,22 +1020,22 @@ Dim SQL As String
     DataGrid1.Columns(0).visible = False 'Cod. Articulo
     DataGrid1.Columns(1).visible = False 'Cod. Proveedor
     DataGrid1.Columns(2).visible = False 'Numero linea
-    I = 2
+    i = 2
        
     'Fecha Cambio
-    DataGrid1.Columns(I + 1).Caption = "Fecha Cambio"
-    DataGrid1.Columns(I + 1).Width = 1600
+    DataGrid1.Columns(i + 1).Caption = "Fecha Cambio"
+    DataGrid1.Columns(i + 1).Width = 1600
     
     'Precio Unidad
-    DataGrid1.Columns(I + 2).Caption = "Precio"
-    DataGrid1.Columns(I + 2).Width = 1800
-    DataGrid1.Columns(I + 2).Alignment = dbgRight
-    DataGrid1.Columns(I + 2).NumberFormat = FormatoPrecio
+    DataGrid1.Columns(i + 2).Caption = "Precio"
+    DataGrid1.Columns(i + 2).Width = 1800
+    DataGrid1.Columns(i + 2).Alignment = dbgRight
+    DataGrid1.Columns(i + 2).NumberFormat = FormatoPrecio
        
     
-    For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-    Next I
+    For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+    Next i
     DataGrid1.Enabled = b
     DataGrid1.ScrollBars = dbgAutomatic
     
@@ -1260,7 +1260,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
 Dim NumReg As Byte
 
@@ -1306,9 +1306,9 @@ Dim NumReg As Byte
     Me.imgBuscar(0).Enabled = Modo = 1 Or Modo >= 3 'Si modificar no activado pq son claves ajenas
     
     
-    For I = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(i).Enabled = b
+    Next i
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -1381,18 +1381,18 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
 Dim SQL As String
-Dim Tabla As String
+Dim tabla As String
     
-    Tabla = "slisp1" 'Tabla de lineas
-    SQL = "SELECT * FROM " & Tabla
+    tabla = "slisp1" 'Tabla de lineas
+    SQL = "SELECT * FROM " & tabla
     
     If enlaza Then
-        SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codartic, "T") & " AND codprove=" & Data1.Recordset!Codprove
+        SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codprove=" & Data1.Recordset!Codprove
     Else
         SQL = SQL & " WHERE codprove = -1"
     End If
     
-    SQL = SQL & " ORDER BY " & Tabla & ".numlinea desc"
+    SQL = SQL & " ORDER BY " & tabla & ".numlinea desc"
     MontaSQLCarga = SQL
 End Function
 
@@ -1515,7 +1515,7 @@ Dim SQL As String
     On Error GoTo FinEliminar
         
     conn.BeginTrans
-    SQL = " WHERE codartic=" & DBSet(Data1.Recordset!codartic, "T")
+    SQL = " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T")
     SQL = SQL & " AND codprove=" & Val(Data1.Recordset!Codprove)
     
     'Lineas
@@ -1567,27 +1567,29 @@ Dim Aux As String
     ' Si da de alta el articulo-proveedor para el articulo, el proveedor es el mismo que en la ficha del articulo,
     'entoces verificamos la REFERENCIA
     If Modo = 3 Then
-        CadenaConsulta = "referprov"
-        Aux = DevuelveDesdeBD(conAri, "codprove", "sartic", "codartic", Text1(1).Text, "T", CadenaConsulta)
-        If Aux <> "" And CadenaConsulta <> "" Then
-            If Val(Aux) = Val(Text1(0).Text) Then
-                'OK. Mismo articulo, mismo proveedor
-                If Text1(13).Text <> CadenaConsulta Then
-                    Aux = "Referencia proveedor: " & vbCrLf & vbCrLf & "Ficha articulo: " & CadenaConsulta
-                    Aux = Aux & vbCrLf & "Precios prov: " & Text1(13).Text
-                    Aux = Aux & vbCrLf & vbCrLf & vbCrLf & "¿Desea que se guarde la de la ficha del articulo como referencia?"
-                    Select Case MsgBox(Aux, vbQuestion + vbYesNoCancel)
-                    Case vbYes
-                        Text1(13).Text = CadenaConsulta
-                    Case vbCancel
-                        b = False
-                    Case Else
-                        'NADA
-                    End Select
+        If vParamAplic.NumeroInstalacion <> 4 Then
+            CadenaConsulta = "referprov"
+            Aux = DevuelveDesdeBD(conAri, "codprove", "sartic", "codartic", Text1(1).Text, "T", CadenaConsulta)
+            If Aux <> "" And CadenaConsulta <> "" Then
+                If Val(Aux) = Val(Text1(0).Text) Then
+                    'OK. Mismo articulo, mismo proveedor
+                    If Text1(13).Text <> CadenaConsulta Then
+                        Aux = "Referencia proveedor: " & vbCrLf & vbCrLf & "Ficha articulo: " & CadenaConsulta
+                        Aux = Aux & vbCrLf & "Precios prov: " & Text1(13).Text
+                        Aux = Aux & vbCrLf & vbCrLf & vbCrLf & "¿Desea que se guarde la de la ficha del articulo como referencia?"
+                        Select Case MsgBox(Aux, vbQuestion + vbYesNoCancel)
+                        Case vbYes
+                            Text1(13).Text = CadenaConsulta
+                        Case vbCancel
+                            b = False
+                        Case Else
+                            'NADA
+                        End Select
+                    End If
                 End If
             End If
+            CadenaConsulta = Data1.RecordSource
         End If
-        CadenaConsulta = Data1.RecordSource
     End If
     
     
@@ -1610,29 +1612,29 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
-Dim Tabla As String
+Dim cad As String
+Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: slista
-    Cad = Cad & ParaGrid(Text1(0), 9, "Prov.")
-    Cad = Cad & "Nombre Prov.|sprove|nomprove|T||33·"
-    Cad = Cad & ParaGrid(Text1(1), 20, "Articulo")
-    Cad = Cad & "Desc. Artic|sartic|nomartic|T||38·"
+    cad = cad & ParaGrid(Text1(0), 9, "Prov.")
+    cad = cad & "Nombre Prov.|sprove|nomprove|T||33·"
+    cad = cad & ParaGrid(Text1(1), 20, "Articulo")
+    cad = cad & "Desc. Artic|sartic|nomartic|T||38·"
     
-    Tabla = "(" & NombreTabla & " LEFT JOIN sprove ON " & NombreTabla & ".codprove=sprove.codprove" & ")"
-    Tabla = Tabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic"
+    tabla = "(" & NombreTabla & " LEFT JOIN sprove ON " & NombreTabla & ".codprove=sprove.codprove" & ")"
+    tabla = tabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic"
     
     Titulo = "Precios Proveedor"
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vCampos = cad
+        frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
         '###A mano
@@ -1816,7 +1818,7 @@ Dim SQL As String
     On Error GoTo ErrModCab
 
     SQL = "UPDATE " & NombreTabla & " SET precioac=precionu, precioa1=precion1, dtoespec=dtoespe1, fechanue=null, precionu=0, precion1=0"
-    SQL = SQL & " WHERE codclien=" & Data1.Recordset!codclien & " AND codartic=" & DBSet(Data1.Recordset!codartic, "T")
+    SQL = SQL & " WHERE codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
    
     conn.Execute SQL
     ModificarCabecera = True
@@ -1839,7 +1841,7 @@ Dim NumF As String
     On Error GoTo ErrInsLin
 
     'Obtenemos la siguiente numero de linea de tarifa
-    SQL = "codclien=" & Data1.Recordset!codclien & " AND codartic=" & DBSet(Data1.Recordset!codartic, "T")
+    SQL = "codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
     NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", SQL)
 
     SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec)"
@@ -1903,7 +1905,7 @@ Dim b As Boolean
     If b And vParamAplic.NumeroInstalacion = 4 Then
         'EULER. Puede cambiar el codprove
         If Val(Data1.Recordset!Codprove) <> Val(Text1(0).Text) Then
-            Me.Tag = "UPDATE @@@ SET codprove=" & Text1(0).Text & " WHERE codartic=" & DBSet(Data1.Recordset!codartic, "T") & " AND codprove=" & Data1.Recordset!Codprove & ";"
+            Me.Tag = "UPDATE @@@ SET codprove=" & Text1(0).Text & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codprove=" & Data1.Recordset!Codprove & ";"
             
             conn.Execute "SET FOREIGN_KEY_CHECKS=0;"
             'Cabecera
