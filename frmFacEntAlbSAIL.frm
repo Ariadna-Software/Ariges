@@ -393,164 +393,164 @@ Begin VB.Form frmFacEntAlbSAIL
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbSAIL.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(3)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(10)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Label1(12)"
-      Tab(1).Control(6)=   "imgBuscar(7)"
-      Tab(1).Control(7)=   "Label1(9)"
-      Tab(1).Control(8)=   "imgBuscar(8)"
-      Tab(1).Control(9)=   "Label1(23)"
-      Tab(1).Control(10)=   "Label1(24)"
-      Tab(1).Control(11)=   "imgBuscar(9)"
-      Tab(1).Control(12)=   "Label1(43)"
-      Tab(1).Control(13)=   "Label1(49)"
-      Tab(1).Control(14)=   "Label1(61)"
-      Tab(1).Control(15)=   "Text1(39)"
-      Tab(1).Control(16)=   "chkDocArchi"
-      Tab(1).Control(17)=   "Text1(38)"
-      Tab(1).Control(18)=   "Text1(18)"
-      Tab(1).Control(19)=   "Text1(19)"
+      Tab(1).Control(0)=   "Text1(43)"
+      Tab(1).Control(1)=   "Text1(40)"
+      Tab(1).Control(2)=   "chkFacturarKm"
+      Tab(1).Control(3)=   "Text1(34)"
+      Tab(1).Control(4)=   "FrameFactura"
+      Tab(1).Control(5)=   "FrameFacRec"
+      Tab(1).Control(6)=   "FrameHco"
+      Tab(1).Control(7)=   "Text1(29)"
+      Tab(1).Control(8)=   "Text2(29)"
+      Tab(1).Control(9)=   "Text1(28)"
+      Tab(1).Control(10)=   "Text2(28)"
+      Tab(1).Control(11)=   "Text1(27)"
+      Tab(1).Control(12)=   "Text2(27)"
+      Tab(1).Control(13)=   "Text1(2)"
+      Tab(1).Control(14)=   "Text1(25)"
+      Tab(1).Control(15)=   "Text1(26)"
+      Tab(1).Control(16)=   "Text1(24)"
+      Tab(1).Control(17)=   "Text1(23)"
+      Tab(1).Control(18)=   "Text1(22)"
+      Tab(1).Control(19)=   "Text1(21)"
       Tab(1).Control(20)=   "Text1(20)"
-      Tab(1).Control(21)=   "Text1(21)"
-      Tab(1).Control(22)=   "Text1(22)"
-      Tab(1).Control(23)=   "Text1(23)"
-      Tab(1).Control(24)=   "Text1(24)"
-      Tab(1).Control(25)=   "Text1(26)"
-      Tab(1).Control(26)=   "Text1(25)"
-      Tab(1).Control(27)=   "Text1(2)"
-      Tab(1).Control(28)=   "Text2(27)"
-      Tab(1).Control(29)=   "Text1(27)"
-      Tab(1).Control(30)=   "Text2(28)"
-      Tab(1).Control(31)=   "Text1(28)"
-      Tab(1).Control(32)=   "Text2(29)"
-      Tab(1).Control(33)=   "Text1(29)"
-      Tab(1).Control(34)=   "FrameHco"
-      Tab(1).Control(35)=   "FrameFacRec"
-      Tab(1).Control(36)=   "FrameFactura"
-      Tab(1).Control(37)=   "Text1(34)"
-      Tab(1).Control(38)=   "chkFacturarKm"
-      Tab(1).Control(39)=   "Text1(40)"
-      Tab(1).Control(40)=   "Text1(43)"
+      Tab(1).Control(21)=   "Text1(19)"
+      Tab(1).Control(22)=   "Text1(18)"
+      Tab(1).Control(23)=   "Text1(38)"
+      Tab(1).Control(24)=   "chkDocArchi"
+      Tab(1).Control(25)=   "Text1(39)"
+      Tab(1).Control(26)=   "Label1(61)"
+      Tab(1).Control(27)=   "Label1(49)"
+      Tab(1).Control(28)=   "Label1(43)"
+      Tab(1).Control(29)=   "imgBuscar(9)"
+      Tab(1).Control(30)=   "Label1(24)"
+      Tab(1).Control(31)=   "Label1(23)"
+      Tab(1).Control(32)=   "imgBuscar(8)"
+      Tab(1).Control(33)=   "Label1(9)"
+      Tab(1).Control(34)=   "imgBuscar(7)"
+      Tab(1).Control(35)=   "Label1(12)"
+      Tab(1).Control(36)=   "Label1(11)"
+      Tab(1).Control(37)=   "Label1(10)"
+      Tab(1).Control(38)=   "Label1(5)"
+      Tab(1).Control(39)=   "Label1(3)"
+      Tab(1).Control(40)=   "Label1(45)"
       Tab(1).ControlCount=   41
       TabCaption(2)   =   "O.trab /ext"
       TabPicture(2)   =   "frmFacEntAlbSAIL.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "lblTituloEst"
-      Tab(2).Control(1)=   "Label3(0)"
-      Tab(2).Control(2)=   "Label3(1)"
-      Tab(2).Control(3)=   "txtEuler(6)"
-      Tab(2).Control(4)=   "txtEuler(7)"
-      Tab(2).Control(5)=   "FrameOT"
+      Tab(2).Control(0)=   "FrameOT"
+      Tab(2).Control(1)=   "txtEuler(7)"
+      Tab(2).Control(2)=   "txtEuler(6)"
+      Tab(2).Control(3)=   "Label3(1)"
+      Tab(2).Control(4)=   "Label3(0)"
+      Tab(2).Control(5)=   "lblTituloEst"
       Tab(2).ControlCount=   6
       TabCaption(3)   =   "Reparaciones"
       TabPicture(3)   =   "frmFacEntAlbSAIL.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Line5"
-      Tab(3).Control(1)=   "Line3"
-      Tab(3).Control(2)=   "Line4"
-      Tab(3).Control(3)=   "Label3E(33)"
-      Tab(3).Control(4)=   "Label3E(34)"
-      Tab(3).Control(5)=   "Label3E(35)"
-      Tab(3).Control(6)=   "Label3E(31)"
-      Tab(3).Control(7)=   "Label3E(32)"
-      Tab(3).Control(8)=   "Label3E(12)"
-      Tab(3).Control(9)=   "Label3E(13)"
-      Tab(3).Control(10)=   "Label3E(14)"
-      Tab(3).Control(11)=   "Label3E(16)"
-      Tab(3).Control(12)=   "Label3E(17)"
-      Tab(3).Control(13)=   "Label3E(18)"
-      Tab(3).Control(14)=   "Label3E(19)"
-      Tab(3).Control(15)=   "Label3E(11)"
-      Tab(3).Control(16)=   "Label3E(25)"
-      Tab(3).Control(17)=   "Label3E(26)"
-      Tab(3).Control(18)=   "Label3E(27)"
-      Tab(3).Control(19)=   "Label3E(28)"
-      Tab(3).Control(20)=   "Label3E(29)"
-      Tab(3).Control(21)=   "Label3E(30)"
-      Tab(3).Control(22)=   "Label3E(1)"
-      Tab(3).Control(23)=   "Label3E(2)"
-      Tab(3).Control(24)=   "Label3E(3)"
-      Tab(3).Control(25)=   "Label3E(4)"
-      Tab(3).Control(26)=   "Label3E(5)"
-      Tab(3).Control(27)=   "Label3E(6)"
-      Tab(3).Control(28)=   "Label3E(7)"
-      Tab(3).Control(29)=   "Label3E(8)"
-      Tab(3).Control(30)=   "Label3E(9)"
-      Tab(3).Control(31)=   "Label3E(10)"
-      Tab(3).Control(32)=   "Label3E(15)"
-      Tab(3).Control(33)=   "Label3E(20)"
-      Tab(3).Control(34)=   "Label3E(23)"
-      Tab(3).Control(35)=   "Label3E(24)"
-      Tab(3).Control(36)=   "Label3E(36)"
-      Tab(3).Control(37)=   "Label3E(37)"
-      Tab(3).Control(38)=   "txtEule_R(11)"
-      Tab(3).Control(39)=   "cboEulerUdR"
-      Tab(3).Control(40)=   "txtEule_R(17)"
-      Tab(3).Control(41)=   "txtEule_R(18)"
-      Tab(3).Control(42)=   "txtEule_R(19)"
-      Tab(3).Control(43)=   "optEule_R(4)"
-      Tab(3).Control(44)=   "optEule_R(5)"
-      Tab(3).Control(45)=   "optEule_R(6)"
-      Tab(3).Control(46)=   "optEule_R(7)"
-      Tab(3).Control(47)=   "txtEule_R(7)"
-      Tab(3).Control(48)=   "txtEule_R(5)"
-      Tab(3).Control(49)=   "txtEule_R(6)"
-      Tab(3).Control(50)=   "txtEule_R(8)"
-      Tab(3).Control(51)=   "txtEule_R(10)"
-      Tab(3).Control(52)=   "txtEule_R(9)"
-      Tab(3).Control(53)=   "txtEule_R(12)"
-      Tab(3).Control(54)=   "txtEule_R(13)"
-      Tab(3).Control(55)=   "txtEule_R(14)"
-      Tab(3).Control(56)=   "txtEule_R(16)"
-      Tab(3).Control(57)=   "txtEule_R(15)"
-      Tab(3).Control(58)=   "chkEuler(0)"
-      Tab(3).Control(59)=   "chkEuler(1)"
-      Tab(3).Control(60)=   "chkEuler(2)"
-      Tab(3).Control(61)=   "chkEuler(3)"
-      Tab(3).Control(62)=   "chkEuler(4)"
-      Tab(3).Control(63)=   "chkEuler(5)"
-      Tab(3).Control(64)=   "chkEuler(6)"
-      Tab(3).Control(65)=   "chkEuler(7)"
-      Tab(3).Control(66)=   "chkEuler(8)"
-      Tab(3).Control(67)=   "chkEuler(9)"
-      Tab(3).Control(68)=   "txtEule_R(3)"
-      Tab(3).Control(69)=   "txtEule_R(4)"
-      Tab(3).Control(70)=   "Frame4R"
-      Tab(3).Control(71)=   "optEule_R(0)"
-      Tab(3).Control(72)=   "optEule_R(1)"
-      Tab(3).Control(73)=   "txtEule_R(0)"
-      Tab(3).Control(74)=   "txtEule_R(1)"
-      Tab(3).Control(75)=   "txtEule_R(2)"
-      Tab(3).Control(76)=   "txtEule_R(20)"
-      Tab(3).Control(77)=   "txtEule_R(21)"
+      Tab(3).Control(0)=   "txtEule_R(21)"
+      Tab(3).Control(1)=   "txtEule_R(20)"
+      Tab(3).Control(2)=   "txtEule_R(2)"
+      Tab(3).Control(3)=   "txtEule_R(1)"
+      Tab(3).Control(4)=   "txtEule_R(0)"
+      Tab(3).Control(5)=   "optEule_R(1)"
+      Tab(3).Control(6)=   "optEule_R(0)"
+      Tab(3).Control(7)=   "Frame4R"
+      Tab(3).Control(8)=   "txtEule_R(4)"
+      Tab(3).Control(9)=   "txtEule_R(3)"
+      Tab(3).Control(10)=   "chkEuler(9)"
+      Tab(3).Control(11)=   "chkEuler(8)"
+      Tab(3).Control(12)=   "chkEuler(7)"
+      Tab(3).Control(13)=   "chkEuler(6)"
+      Tab(3).Control(14)=   "chkEuler(5)"
+      Tab(3).Control(15)=   "chkEuler(4)"
+      Tab(3).Control(16)=   "chkEuler(3)"
+      Tab(3).Control(17)=   "chkEuler(2)"
+      Tab(3).Control(18)=   "chkEuler(1)"
+      Tab(3).Control(19)=   "chkEuler(0)"
+      Tab(3).Control(20)=   "txtEule_R(15)"
+      Tab(3).Control(21)=   "txtEule_R(16)"
+      Tab(3).Control(22)=   "txtEule_R(14)"
+      Tab(3).Control(23)=   "txtEule_R(13)"
+      Tab(3).Control(24)=   "txtEule_R(12)"
+      Tab(3).Control(25)=   "txtEule_R(9)"
+      Tab(3).Control(26)=   "txtEule_R(10)"
+      Tab(3).Control(27)=   "txtEule_R(8)"
+      Tab(3).Control(28)=   "txtEule_R(6)"
+      Tab(3).Control(29)=   "txtEule_R(5)"
+      Tab(3).Control(30)=   "txtEule_R(7)"
+      Tab(3).Control(31)=   "optEule_R(7)"
+      Tab(3).Control(32)=   "optEule_R(6)"
+      Tab(3).Control(33)=   "optEule_R(5)"
+      Tab(3).Control(34)=   "optEule_R(4)"
+      Tab(3).Control(35)=   "txtEule_R(19)"
+      Tab(3).Control(36)=   "txtEule_R(18)"
+      Tab(3).Control(37)=   "txtEule_R(17)"
+      Tab(3).Control(38)=   "cboEulerUdR"
+      Tab(3).Control(39)=   "txtEule_R(11)"
+      Tab(3).Control(40)=   "Label3E(37)"
+      Tab(3).Control(41)=   "Label3E(36)"
+      Tab(3).Control(42)=   "Label3E(24)"
+      Tab(3).Control(43)=   "Label3E(23)"
+      Tab(3).Control(44)=   "Label3E(20)"
+      Tab(3).Control(45)=   "Label3E(15)"
+      Tab(3).Control(46)=   "Label3E(10)"
+      Tab(3).Control(47)=   "Label3E(9)"
+      Tab(3).Control(48)=   "Label3E(8)"
+      Tab(3).Control(49)=   "Label3E(7)"
+      Tab(3).Control(50)=   "Label3E(6)"
+      Tab(3).Control(51)=   "Label3E(5)"
+      Tab(3).Control(52)=   "Label3E(4)"
+      Tab(3).Control(53)=   "Label3E(3)"
+      Tab(3).Control(54)=   "Label3E(2)"
+      Tab(3).Control(55)=   "Label3E(1)"
+      Tab(3).Control(56)=   "Label3E(30)"
+      Tab(3).Control(57)=   "Label3E(29)"
+      Tab(3).Control(58)=   "Label3E(28)"
+      Tab(3).Control(59)=   "Label3E(27)"
+      Tab(3).Control(60)=   "Label3E(26)"
+      Tab(3).Control(61)=   "Label3E(25)"
+      Tab(3).Control(62)=   "Label3E(11)"
+      Tab(3).Control(63)=   "Label3E(19)"
+      Tab(3).Control(64)=   "Label3E(18)"
+      Tab(3).Control(65)=   "Label3E(17)"
+      Tab(3).Control(66)=   "Label3E(16)"
+      Tab(3).Control(67)=   "Label3E(14)"
+      Tab(3).Control(68)=   "Label3E(13)"
+      Tab(3).Control(69)=   "Label3E(12)"
+      Tab(3).Control(70)=   "Label3E(32)"
+      Tab(3).Control(71)=   "Label3E(31)"
+      Tab(3).Control(72)=   "Label3E(35)"
+      Tab(3).Control(73)=   "Label3E(34)"
+      Tab(3).Control(74)=   "Label3E(33)"
+      Tab(3).Control(75)=   "Line4"
+      Tab(3).Control(76)=   "Line3"
+      Tab(3).Control(77)=   "Line5"
       Tab(3).ControlCount=   78
       TabCaption(4)   =   "Costes"
       TabPicture(4)   =   "frmFacEntAlbSAIL.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "cmdLineasCostes(3)"
-      Tab(4).Control(1)=   "cmdLineasCostes(2)"
-      Tab(4).Control(2)=   "cmdLineasCostes(0)"
-      Tab(4).Control(3)=   "cmdLineasCostes(1)"
-      Tab(4).Control(4)=   "ListView2"
-      Tab(4).Control(5)=   "Label1(71)"
-      Tab(4).Control(6)=   "Label1(70)"
-      Tab(4).Control(7)=   "Label1(69)"
-      Tab(4).Control(8)=   "Label1(68)"
-      Tab(4).Control(9)=   "Label1(67)"
-      Tab(4).Control(10)=   "Label1(66)"
-      Tab(4).Control(11)=   "Label3E(22)"
+      Tab(4).Control(0)=   "Label3E(22)"
+      Tab(4).Control(1)=   "Label1(66)"
+      Tab(4).Control(2)=   "Label1(67)"
+      Tab(4).Control(3)=   "Label1(68)"
+      Tab(4).Control(4)=   "Label1(69)"
+      Tab(4).Control(5)=   "Label1(70)"
+      Tab(4).Control(6)=   "Label1(71)"
+      Tab(4).Control(7)=   "ListView2"
+      Tab(4).Control(8)=   "cmdLineasCostes(1)"
+      Tab(4).Control(9)=   "cmdLineasCostes(0)"
+      Tab(4).Control(10)=   "cmdLineasCostes(2)"
+      Tab(4).Control(11)=   "cmdLineasCostes(3)"
       Tab(4).ControlCount=   12
       TabCaption(5)   =   "Fichadas"
       TabPicture(5)   =   "frmFacEntAlbSAIL.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Label1(62)"
-      Tab(5).Control(1)=   "Label1(63)"
+      Tab(5).Control(0)=   "ListView1"
+      Tab(5).Control(1)=   "Label3E(0)"
       Tab(5).Control(2)=   "Label1(64)"
-      Tab(5).Control(3)=   "Label3E(0)"
-      Tab(5).Control(4)=   "ListView1"
+      Tab(5).Control(3)=   "Label1(63)"
+      Tab(5).Control(4)=   "Label1(62)"
       Tab(5).ControlCount=   5
       Begin VB.CommandButton cmdLineasCostes 
          Height          =   375
@@ -4249,7 +4249,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Width           =   240
       End
       Begin VB.Label Label1 
-         Caption         =   "F. auxiliar"
+         Caption         =   "F. entrega"
          Height          =   255
          Index           =   65
          Left            =   3240
@@ -4546,7 +4546,7 @@ Dim AlmacenLineas As Integer
 
 Dim LineaIntercalar As Integer 'NO reutilizar
 
-Dim PrecioHoraCosteEuler As Currency
+
 
 
 
@@ -4868,7 +4868,7 @@ Private Sub BotonAnyadir()
 'Añadir registro en tabla de cabecera de Pedidos: scaped (Cabecera)
 Dim NomTraba As String
 Dim cad As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     LimpiarCampos 'Vacía los TextBox
     'Poner los grid sin apuntar a nada
@@ -4892,43 +4892,43 @@ Dim RS As ADODB.Recordset
         NomTraba = NomTraba & " from (scafac inner join sforpa on scafac.codforpa=sforpa.codforpa) "
         NomTraba = NomTraba & " inner join sagent on scafac.codagent=sagent.codagent where " & cadList
         
-        Set RS = New ADODB.Recordset
-        RS.Open NomTraba, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open NomTraba, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
         PonerModo 3
         
-        If Not RS.EOF Then
-            Text1(4).Text = RS!codClien
+        If Not Rs.EOF Then
+            Text1(4).Text = Rs!codClien
             FormateaCampo Text1(4)
-            Text1(5).Text = RS!NomClien
-            Text1(6).Text = RS!nifClien
-            Text1(7).Text = DBLet(RS!telclien, "T")
-            Text1(8).Text = RS!domclien
-            Text1(9).Text = RS!codpobla
-            Text1(10).Text = RS!pobclien
-            Text1(11).Text = DBLet(RS!proclien, "T")
-            Text1(12).Text = DBLet(RS!CodDirec, "T")
+            Text1(5).Text = Rs!NomClien
+            Text1(6).Text = Rs!nifClien
+            Text1(7).Text = DBLet(Rs!telclien, "T")
+            Text1(8).Text = Rs!domclien
+            Text1(9).Text = Rs!codpobla
+            Text1(10).Text = Rs!pobclien
+            Text1(11).Text = DBLet(Rs!proclien, "T")
+            Text1(12).Text = DBLet(Rs!CodDirec, "T")
             FormateaCampo Text1(12)
-            Text2(12).Text = DBLet(RS!nomdirec, "T")
-            Text1(14).Text = RS!codforpa
+            Text2(12).Text = DBLet(Rs!nomdirec, "T")
+            Text1(14).Text = Rs!codforpa
             FormateaCampo Text1(14)
-            Text2(14).Text = RS!nomforpa
-            Text1(15).Text = DBLet(RS!DtoPPago, "N")
+            Text2(14).Text = Rs!nomforpa
+            Text1(15).Text = DBLet(Rs!DtoPPago, "N")
             FormateaCampo Text1(15)
-            Text1(16).Text = DBLet(RS!DtoGnral, "N")
+            Text1(16).Text = DBLet(Rs!DtoGnral, "N")
             FormateaCampo Text1(16)
-            Text1(17).Text = DBLet(RS!CodAgent, "T")
+            Text1(17).Text = DBLet(Rs!CodAgent, "T")
             FormateaCampo Text1(17)
-            Text2(17).Text = RS!NomAgent
-            Text1(37).Text = RS!codtipmf
-            Text1(36).Text = DBLet(RS!Numfactu, "N")
+            Text2(17).Text = Rs!NomAgent
+            Text1(37).Text = Rs!codtipmf
+            Text1(36).Text = DBLet(Rs!Numfactu, "N")
             FormateaCampo Text1(36)
-            Text1(35).Text = RS!FecFactu
+            Text1(35).Text = Rs!FecFactu
             
             'Observacion 1   'DAVID
             'Text1(18).Text = "RECTIFICA A FACTURA: " & RS!codtipmf & ", " & RS!NumFactu & ", " & RS!FecFactu
-            Text1(18).Text = RS!Numfactu & ", " & RS!FecFactu
+            Text1(18).Text = Rs!Numfactu & ", " & Rs!FecFactu
             'Observacion 2
             Text1(19).Text = motivo
             
@@ -4938,7 +4938,7 @@ Dim RS As ADODB.Recordset
             
             
             'Memorizo cad con codtipom
-            cad = RS!codtipmf
+            cad = Rs!codtipmf
             
             
             
@@ -4952,13 +4952,13 @@ Dim RS As ADODB.Recordset
         Else
             cad = "N" 'para que la busqueda de despues no de error
         End If
-        RS.Close
+        Rs.Close
         
         'DAVID
         'Para que meta la letra de serie, NO el tipo moviemiento
-        RS.Open "SELECT * FROM stipom WHERE codtipom='" & cad & "'"
-        If Not RS.EOF Then cad = DBLet(RS!LetraSer, "T")
-        RS.Close
+        Rs.Open "SELECT * FROM stipom WHERE codtipom='" & cad & "'"
+        If Not Rs.EOF Then cad = DBLet(Rs!LetraSer, "T")
+        Rs.Close
         If cad = "" Then cad = CodTipoMov
         Text1(18).Text = "RECTIFICA A FACTURA: " & cad & ", " & Text1(18).Text
         
@@ -4967,15 +4967,15 @@ Dim RS As ADODB.Recordset
         'JUNIO 2010
         'Envio por defecto del cliente
         cad = "select sclien.codenvio,nomenvio from  sclien,senvio where sclien.codenvio=senvio.codenvio AND sclien.codclien= " & Text1(4).Text
-        RS.Open cad, conn, adOpenForwardOnly, adCmdText
-        If Not RS.EOF Then
-            Text1(29).Text = RS!CodEnvio
-            Text2(29).Text = RS!nomenvio
+        Rs.Open cad, conn, adOpenForwardOnly, adCmdText
+        If Not Rs.EOF Then
+            Text1(29).Text = Rs!CodEnvio
+            Text2(29).Text = Rs!nomenvio
         Else
             Text1(29).Text = ""
             Text2(29).Text = ""
         End If
-        RS.Close
+        Rs.Close
         
             
         
@@ -4984,7 +4984,7 @@ Dim RS As ADODB.Recordset
         
         
         
-        Set RS = Nothing
+        Set Rs = Nothing
     Else
         'Añadiremos el boton de aceptar y demas objetos para insertar
         PonerModo 3
@@ -5895,11 +5895,6 @@ Private Sub Form_Load()
     chkVistaPrevia.Value = CheckValueLeer(Name)
     
     
-    If vParamAplic.NumeroInstalacion = 4 Then
-        CadenaConsulta = DevuelveDesdeBD(conAri, "preciohoracoste", "eulerparam", "1", "1")
-        If CadenaConsulta = "" Then CadenaConsulta = 0
-        PrecioHoraCosteEuler = CCur(CadenaConsulta)
-    End If
     
     
     'ASignamos un SQL al DATA1
@@ -8884,6 +8879,17 @@ Dim ImpReciclado As Single
     
 
     
+     
+    SQL = "Albarán: " & Text1(30).Text & "-" & Text1(0).Text & " de " & Text1(1).Text & vbCrLf
+    SQL = SQL & "Linea: " & Data2.Recordset!codArtic & " " & DBSet(Data2.Recordset!NomArtic, "T")
+    SQL = SQL & "   Uds: " & Data2.Recordset!cantidad & "    Importe:" & DBSet(Data2.Recordset!ImporteL, "T")
+
+    Set LOG = New cLOG
+    ' 17 Venta a sabiendas riesgo
+    LOG.Insertar 37, vUsu, SQL
+    Set LOG = Nothing
+    
+    
 EEliminarLinea:
      If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar Linea Albaran " & vbCrLf & Err.Description
@@ -9182,7 +9188,7 @@ EMostrarNSeries:
 End Sub
 
 
-Private Sub PedirNSeries(ByRef RS As ADODB.Recordset)
+Private Sub PedirNSeries(ByRef Rs As ADODB.Recordset)
 Dim SQL As String
 
     On Error GoTo EPedirNSeries
@@ -9190,7 +9196,7 @@ Dim SQL As String
         SQL = "El artículo tienen control de Nº de Serie." & vbCrLf & vbCrLf
         SQL = SQL & "Introduzca los Nº De Serie." & vbCrLf
         MsgBox SQL, vbInformation
-        PedirNSeriesGnral RS, False
+        PedirNSeriesGnral Rs, False
         
         Set frmNSerie = New frmRepCargarNSerie
         frmNSerie.DeVentas = True 'Se llama desde Alb. de Venta
@@ -9377,7 +9383,7 @@ Dim RSLineas As ADODB.Recordset
 End Sub
 
 
-Private Sub PedirNSeriesT(ByRef RS As ADODB.Recordset)
+Private Sub PedirNSeriesT(ByRef Rs As ADODB.Recordset)
 Dim RSseries As ADODB.Recordset
 Dim SQL As String
 Dim linea As Integer
@@ -9385,15 +9391,15 @@ Dim linea As Integer
     On Error GoTo EPedirNSeries
 
 
-        PedirNSeriesGnral RS, False
-        RS.MoveFirst
-        While Not RS.EOF
+        PedirNSeriesGnral Rs, False
+        Rs.MoveFirst
+        While Not Rs.EOF
             linea = 0
             'Cargar los Nº de serie asignados
             SQL = "SELECT numserie, codartic,nummante FROM sserie "
             SQL = SQL & " WHERE codtipom='" & Text1(30).Text & "' and "
             SQL = SQL & "numalbar=" & Text1(0).Text
-            SQL = SQL & " and numline1=" & RS!numlinea
+            SQL = SQL & " and numline1=" & Rs!numlinea
             SQL = SQL & " ORDER BY codartic "
             Set RSseries = New ADODB.Recordset
             RSseries.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -9401,13 +9407,13 @@ Dim linea As Integer
                 linea = linea + 1
                 SQL = "UPDATE tmpnseries SET numserie=" & DBSet(RSseries!numSerie, "T")
                 SQL = SQL & ", nummante = " & DBSet(RSseries!nummante, "T")
-                SQL = SQL & " WHERE codartic=" & DBSet(RS!codArtic, "T")
-                SQL = SQL & " and numlinealb=" & RS!numlinea
+                SQL = SQL & " WHERE codartic=" & DBSet(Rs!codArtic, "T")
+                SQL = SQL & " and numlinealb=" & Rs!numlinea
                 SQL = SQL & " and numlinea=" & linea
                 conn.Execute SQL
                 RSseries.MoveNext
             Wend
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         RSseries.Close
         Set RSseries = Nothing
@@ -9856,7 +9862,7 @@ End Sub
  Private Sub InsertarLineasFactu(cadWhere)
 'cadSerie = "INSERT INTO slialb(codtipom,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre) "
 'cadSerie = cadSerie & " SELECT '" & Text1(30).Text & "' as codtipom," & Text1(0).Text & " as numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre FROM slifac WHERE " & CadenaSeleccion
- Dim RS As ADODB.Recordset
+ Dim Rs As ADODB.Recordset
  Dim SQL As String
  Dim i As Integer
  Dim cadI As String
@@ -9878,30 +9884,30 @@ End Sub
     
         SQL = "SELECT * FROM slifac WHERE " & cadWhere
     
-        Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RS.EOF
-            txtAux(0).Text = RS!codAlmac
-            txtAux(1).Text = RS!codArtic
-            txtAux(2).Text = RS!NomArtic
-            txtAux(16).Text = DBLet(RS!Ampliaci, "T")
+        Set Rs = New ADODB.Recordset
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
+            txtAux(0).Text = Rs!codAlmac
+            txtAux(1).Text = Rs!codArtic
+            txtAux(2).Text = Rs!NomArtic
+            txtAux(16).Text = DBLet(Rs!Ampliaci, "T")
 '            Text2(9).Text = DBLet(RS!nomprove, "T")
-            txtAux(3).Text = CStr(RS!cantidad * -1)
-            txtAux(4).Text = RS!precioar
-            txtAux(5).Text = DBLet(RS!origpre, "T")
-            txtAux(6).Text = RS!dtoline1
-            txtAux(7).Text = RS!dtoline2
-            txtAux(8).Text = CStr(RS!ImporteL * -1)
+            txtAux(3).Text = CStr(Rs!cantidad * -1)
+            txtAux(4).Text = Rs!precioar
+            txtAux(5).Text = DBLet(Rs!origpre, "T")
+            txtAux(6).Text = Rs!dtoline1
+            txtAux(7).Text = Rs!dtoline2
+            txtAux(8).Text = CStr(Rs!ImporteL * -1)
             
             ' ---- [21/10/2009] [LAURA] : se añade el centro de coste
             If Not vEmpresa.TieneAnalitica Then
-                txtAux(9).Text = DBLet(RS!codProvex, "N")
-                Text2(9).Text = DevuelveDesdeBDNew(conAri, "sprove", "nomprove", "codprove", CStr(RS!codProvex), "N")
+                txtAux(9).Text = DBLet(Rs!codProvex, "N")
+                Text2(9).Text = DevuelveDesdeBDNew(conAri, "sprove", "nomprove", "codprove", CStr(Rs!codProvex), "N")
             Else
-                CCos = DBLet(RS!CodCCost)
+                CCos = DBLet(Rs!CodCCost)
                 If CCos = "" Then
                     'MAL. DEBERIA tener Analitica.
-                    If vParamAplic.ModoAnalitica = 1 Then CCos = DevuelveDesdeBD(conAri, "codccost", "sartic,sfamia", "sartic.codfamia=sfamia.codfamia AND codartic", CStr(RS!codArtic), "T")
+                    If vParamAplic.ModoAnalitica = 1 Then CCos = DevuelveDesdeBD(conAri, "codccost", "sartic,sfamia", "sartic.codfamia=sfamia.codfamia AND codartic", CStr(Rs!codArtic), "T")
                     If CCos = "" Then CCos = DevuelveDesdeBD(conAri, "codccost", "straba", "codtraba", Text1(3).Text)
                 End If
                 txtAux(9).Text = CCos
@@ -9913,9 +9919,9 @@ End Sub
 '            Text2(9).Text = "*"
             
             'numbultos
-            txtAux(10).Text = CStr(RS!NumBultos * -1)
+            txtAux(10).Text = CStr(Rs!NumBultos * -1)
             'numlote
-            txtAux(11).Text = DBLet(RS!numLote, "T")
+            txtAux(11).Text = DBLet(Rs!numLote, "T")
             
             If InsertarLinea(numlin, True) Then
             
@@ -9931,10 +9937,10 @@ End Sub
 '                cadI = cadI & "," & SQL
 '            End If
 '            i = i + 1
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
         
         CalcularDatosFactura
         
@@ -10080,7 +10086,7 @@ End Function
 Private Sub DevolverNumSeries()
 Dim SQL As String
 Dim cadWhere As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EDevNumSerie
         
@@ -10099,14 +10105,14 @@ Dim RS As ADODB.Recordset
     
     
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'Hay articulos con nº de serie en las lineas del albaran rectificativo
     'que hay que quitar de los nº de serie que tenia asignados
     'estamos devolviendo nº serie y pedimos los que vamos a devolver y a estos
     'le limpiamos los campos de venta de la tabla sserie
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
         SQL = "select sserie.numserie, sserie.codartic, sartic.nomartic"
         SQL = SQL & " from slialb inner join scaalb on slialb.codtipom=scaalb.codtipom and scaalb.numalbar=slialb.numalbar "
         '-- LAURA: 02/07/2007
@@ -10117,10 +10123,10 @@ Dim RS As ADODB.Recordset
         SQL = SQL & " inner join sartic on sserie.codartic=sartic.codartic "
         SQL = SQL & cadWhere & " and scaalb.numfactu=" & CStr(Me.Data1.Recordset!Numfactu)
     
-        MostrarNSeries RS, , SQL
+        MostrarNSeries Rs, , SQL
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 EDevNumSerie:
     If Err.Number <> 0 Then
@@ -11349,7 +11355,7 @@ End Sub
 Private Sub CargaCostesEuler(limpiar As Boolean)
 Dim oldC As Byte
 Dim C1 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim N As Integer
 Dim H As Currency
 Dim TotalCostes As Currency
@@ -11392,8 +11398,8 @@ Dim Aux1 As Currency
             ListView2.ListItems(1).SubItems(N) = " "
         Next
         ListView2.ListItems(1).SubItems(5) = Format(H, FormatoImporte)
-        ListView2.ListItems(1).SubItems(6) = Format(PrecioHoraCosteEuler, FormatoPrecio)
-        H = H * PrecioHoraCosteEuler
+        ListView2.ListItems(1).SubItems(6) = Format(vParamAplic.PrecioHoraCosteEUL, FormatoPrecio)
+        H = H * vParamAplic.PrecioHoraCosteEUL
         TotalCostes = TotalCostes + H
         CostesHoras = H
         ListView2.ListItems(1).SubItems(7) = Format(H, FormatoImporte)
@@ -11408,35 +11414,35 @@ Dim Aux1 As Currency
     C1 = C1 & "' and numalbarV=" & Text1(0).Text
     C1 = C1 & " ORDER BY Fechaalb"
     
-    Set RS = New ADODB.Recordset
-    RS.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Set Rs = New ADODB.Recordset
+    Rs.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         N = N + 1
         
         Set IT = ListView2.ListItems.Add
         IT.Text = "ALC"
-        IT.SubItems(1) = DBLet(RS!nomprove, "T")
-        IT.SubItems(2) = DBLet(RS!NumAlbar, "T")
-        IT.SubItems(3) = Format(RS!FechaAlb, "dd/mm/yyyy")
-        IT.SubItems(4) = DBLet(RS!NomArtic, "T")
-        IT.SubItems(5) = Format(RS!cantidad, FormatoImporte)
+        IT.SubItems(1) = DBLet(Rs!nomprove, "T")
+        IT.SubItems(2) = DBLet(Rs!NumAlbar, "T")
+        IT.SubItems(3) = Format(Rs!FechaAlb, "dd/mm/yyyy")
+        IT.SubItems(4) = DBLet(Rs!NomArtic, "T")
+        IT.SubItems(5) = Format(Rs!cantidad, FormatoImporte)
                
-        If RS!cantidad = 0 Then
+        If Rs!cantidad = 0 Then
             Aux1 = 0
         Else
-            Aux1 = RS!ImporteL / RS!cantidad
+            Aux1 = Rs!ImporteL / Rs!cantidad
         End If
         IT.SubItems(6) = Format(Aux1, FormatoPrecio)
-        Aux1 = Aux1 - RS!precioar
+        Aux1 = Aux1 - Rs!precioar
         If Abs(Aux1) > 0.05 Then IT.ListSubItems(6).ForeColor = vbRed  'Lleva descuentos
-        IT.SubItems(7) = Format(RS!ImporteL, FormatoImporte)
-        IT.SubItems(8) = Format(RS!FechaAlb, "yymmdd") & Format(RS!Codprove, "00000") & RS!NumAlbar  'ordenacion
-        IT.SubItems(9) = RS!codArtic
-        TotalCostes = TotalCostes + RS!ImporteL
+        IT.SubItems(7) = Format(Rs!ImporteL, FormatoImporte)
+        IT.SubItems(8) = Format(Rs!FechaAlb, "yymmdd") & Format(Rs!Codprove, "00000") & Rs!NumAlbar  'ordenacion
+        IT.SubItems(9) = Rs!codArtic
+        TotalCostes = TotalCostes + Rs!ImporteL
          
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 
 
 
@@ -11450,37 +11456,37 @@ Dim Aux1 As Currency
     C1 = C1 & " and codtipomv='" & CodTipoMov
     C1 = C1 & "' and numalbarV=" & Text1(0).Text
     C1 = C1 & " ORDER BY fecfactu"
-    RS.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         N = N + 1
         
         Set IT = ListView2.ListItems.Add
         IT.Text = "FAC"
-        IT.SubItems(1) = DBLet(RS!nomprove, "T")
-        IT.SubItems(2) = DBLet(RS!Numfactu, "T")
-        IT.SubItems(3) = Format(RS!FecFactu, "dd/mm/yyyy")
-        IT.SubItems(4) = DBLet(RS!NomArtic, "T")
-        IT.SubItems(5) = Format(RS!cantidad, FormatoImporte)
+        IT.SubItems(1) = DBLet(Rs!nomprove, "T")
+        IT.SubItems(2) = DBLet(Rs!Numfactu, "T")
+        IT.SubItems(3) = Format(Rs!FecFactu, "dd/mm/yyyy")
+        IT.SubItems(4) = DBLet(Rs!NomArtic, "T")
+        IT.SubItems(5) = Format(Rs!cantidad, FormatoImporte)
         
         
-        If RS!cantidad = 0 Then
+        If Rs!cantidad = 0 Then
             Aux1 = 0
         Else
-            Aux1 = RS!ImporteL / RS!cantidad
+            Aux1 = Rs!ImporteL / Rs!cantidad
         End If
         IT.SubItems(6) = Format(Aux1, FormatoPrecio)
-        Aux1 = Aux1 - RS!precioar
+        Aux1 = Aux1 - Rs!precioar
         If Abs(Aux1) > 0.05 Then IT.ListSubItems(6).ForeColor = vbRed  'Lleva descuentos
         
         
         
-        IT.SubItems(7) = Format(RS!ImporteL, FormatoImporte)
-        IT.SubItems(8) = Format(RS!FecFactu, "yymmdd") & Format(RS!Codprove, "00000") & RS!Numfactu  'ordenacion
-        TotalCostes = TotalCostes + RS!ImporteL
-        IT.SubItems(9) = RS!codArtic
-        RS.MoveNext
+        IT.SubItems(7) = Format(Rs!ImporteL, FormatoImporte)
+        IT.SubItems(8) = Format(Rs!FecFactu, "yymmdd") & Format(Rs!Codprove, "00000") & Rs!Numfactu  'ordenacion
+        TotalCostes = TotalCostes + Rs!ImporteL
+        IT.SubItems(9) = Rs!codArtic
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 
 
 
@@ -11491,26 +11497,26 @@ Dim Aux1 As Currency
     C1 = C1 & " WHERE codtipom='" & CodTipoMov
     C1 = C1 & "' and numalbar=" & Text1(0).Text
     C1 = C1 & " ORDER BY fechamov"
-    RS.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         N = N + 1
         
         Set IT = ListView2.ListItems.Add
         IT.Text = "MAT"
         IT.SubItems(1) = " "
-        IT.SubItems(2) = "L " & RS!numlinea
-        IT.SubItems(3) = Format(RS!FechaMov, "dd/mm/yyyy")
-        IT.SubItems(4) = DBLet(RS!NomArtic, "T")
-        IT.SubItems(5) = Format(RS!cantidad, FormatoImporte)
-        IT.SubItems(6) = Format(RS!precioar, FormatoPrecio)
-        IT.SubItems(7) = Format(RS!implin, FormatoImporte)
-        IT.SubItems(8) = Format(RS!FechaMov, "yymmdd") & "   " & Format(RS!numlinea, "00") 'ordenacion
-        IT.SubItems(9) = RS!codArtic
-        TotalCostes = TotalCostes + RS!implin
+        IT.SubItems(2) = "L " & Rs!numlinea
+        IT.SubItems(3) = Format(Rs!FechaMov, "dd/mm/yyyy")
+        IT.SubItems(4) = DBLet(Rs!NomArtic, "T")
+        IT.SubItems(5) = Format(Rs!cantidad, FormatoImporte)
+        IT.SubItems(6) = Format(Rs!precioar, FormatoPrecio)
+        IT.SubItems(7) = Format(Rs!implin, FormatoImporte)
+        IT.SubItems(8) = Format(Rs!FechaMov, "yymmdd") & "   " & Format(Rs!numlinea, "00") 'ordenacion
+        IT.SubItems(9) = Rs!codArtic
+        TotalCostes = TotalCostes + Rs!implin
                  
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 
 
 
@@ -11528,32 +11534,32 @@ Dim Aux1 As Currency
 
     
     
-    Set RS = New ADODB.Recordset
-    RS.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Set Rs = New ADODB.Recordset
+    Rs.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         N = N + 1
         
         Set IT = ListView2.ListItems.Add
         IT.Text = "ALV"
         IT.SubItems(1) = " "
-        IT.SubItems(2) = DBLet(RS!NumAlbar, "T")
-        IT.SubItems(3) = Format(RS!FechaAlb, "dd/mm/yyyy")
-        IT.SubItems(4) = DBLet(RS!NomArtic, "T")
-        IT.SubItems(5) = Format(RS!cantidad, FormatoImporte)
+        IT.SubItems(2) = DBLet(Rs!NumAlbar, "T")
+        IT.SubItems(3) = Format(Rs!FechaAlb, "dd/mm/yyyy")
+        IT.SubItems(4) = DBLet(Rs!NomArtic, "T")
+        IT.SubItems(5) = Format(Rs!cantidad, FormatoImporte)
         
 
-        Aux1 = DBLet(RS!precioUC, "N") * DBLet(RS!cantidad, "N")
+        Aux1 = DBLet(Rs!precioUC, "N") * DBLet(Rs!cantidad, "N")
         Aux1 = Round(Aux1, 2)
-        IT.SubItems(6) = " " & Format(DBLet(RS!precioUC, "N"), FormatoPrecio)
+        IT.SubItems(6) = " " & Format(DBLet(Rs!precioUC, "N"), FormatoPrecio)
         
     
         IT.SubItems(7) = Format(Aux1, FormatoImporte)
-        IT.SubItems(8) = Format(RS!FechaAlb, "yymmdd") & CodTipoMov & RS!NumAlbar  'ordenacion
+        IT.SubItems(8) = Format(Rs!FechaAlb, "yymmdd") & CodTipoMov & Rs!NumAlbar  'ordenacion
         TotalCostes = TotalCostes + Aux1
          
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
 
 
 
@@ -11574,7 +11580,7 @@ Dim Aux1 As Currency
     
 eCargaCostesEuler:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
-    Set RS = Nothing
+    Set Rs = Nothing
     lblIndicador.Caption = lblIndicador.Tag
     Screen.MousePointer = oldC
 End Sub

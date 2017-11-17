@@ -249,7 +249,7 @@ Begin VB.Form frmAlmArticu2
       Appearance      =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   11
+         NumButtons      =   17
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Buscar"
          EndProperty
@@ -281,14 +281,30 @@ Begin VB.Form frmAlmArticu2
             Style           =   3
          EndProperty
          BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
             Style           =   3
          EndProperty
          BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Imprimir"
+            Object.ToolTipText     =   "Articulos agrupados"
          EndProperty
          BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Salir"
             ImageIndex      =   15
          EndProperty
@@ -350,6 +366,11 @@ Begin VB.Form frmAlmArticu2
       Begin VB.Menu mnVerTodos 
          Caption         =   "&Ver todos"
          Shortcut        =   ^B
+      End
+      Begin VB.Menu mnLotes 
+         Caption         =   "Lotes (articulos agrupados)"
+         Shortcut        =   ^L
+         Visible         =   0   'False
       End
       Begin VB.Menu mnBarra1 
          Caption         =   "-"
@@ -429,23 +450,23 @@ Dim b As Boolean
     b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
-    txtAux(2).visible = Not b
-    txtAux(3).visible = Not b
-    txtAux(4).visible = Not b
+    Me.txtAux(0).Visible = Not b
+    txtAux(1).Visible = Not b
+    txtAux(2).Visible = Not b
+    txtAux(3).Visible = Not b
+    txtAux(4).Visible = Not b
     If Me.DesdeTPV Then
-        txtAux(5).visible = Not b
+        txtAux(5).Visible = Not b
     Else
-        txtAux(6).visible = Not b
+        txtAux(6).Visible = Not b
     End If
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
+    cmdAceptar.Visible = Not b
+    cmdCancelar.Visible = Not b
     DataGrid1.Enabled = b
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.Visible = b
     
     'Si estamos en insertar o modificar
     BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
@@ -474,18 +495,7 @@ Dim b As Boolean
     Toolbar1.Buttons(2).Enabled = b
     Me.mnVerTodos.Enabled = b
     
-'     b = b And Not DeConsulta
-'    'Añadir
-'    Toolbar1.Buttons(5).Enabled = b
-'    Me.mnNuevo.Enabled = b
-'    'Modificar
-'    Toolbar1.Buttons(6).Enabled = b
-'    Me.mnModificar.Enabled = b
-'    'Eliminar
-'    Toolbar1.Buttons(7).Enabled = b
-'    Me.mnEliminar.Enabled = b
-'    'Imprimir
-'    Toolbar1.Buttons(10).Enabled = b
+
 End Sub
 
 
@@ -704,7 +714,7 @@ End Sub
 
 
 Private Sub DataGrid1_DblClick()
-    If cmdRegresar.visible = True Then cmdRegresar_Click
+    If cmdRegresar.Visible = True Then cmdRegresar_Click
 End Sub
 
 Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
@@ -738,10 +748,21 @@ Private Sub Form_Load()
         .Buttons(5).Image = 19    'Botón Añadir Nuevo Registro
 '        .Buttons(6).Image = 4    'Botón Modificar Registro
 '        .Buttons(7).Image = 5    'Botón Borrar Registro
-'        .Buttons(10).Image = 16  'Botón Imprimir
-        .Buttons(11).Image = 15  'Botón Salir
+        .Buttons(10).Visible = False
+        mnLotes.Visible = False
+        If DesdeTPV Then
+            If vParamAplic.NumeroInstalacion = 1 Then
+                .Buttons(10).Image = 53  'Botón articulos agrupdados en TPV
+                .Buttons(10).Visible = True
+                .Buttons(10).ToolTipText = "Lotes navidad"
+                mnLotes.Visible = True
+            End If
+        End If
+        .Buttons(17).Image = 15  'Botón Salir
     End With
     
+    
+    'Este
     
     
     FormatoCod = CheckValueLeer(Me.Name)
@@ -757,7 +778,7 @@ Private Sub Form_Load()
     'SIEMPRE VIENEN EN MODO BUSQUEDA
     If DatosADevolverBusqueda = "" Then DatosADevolverBusqueda = "0"
     
-    cmdRegresar.visible = (DatosADevolverBusqueda <> "")
+    cmdRegresar.Visible = (DatosADevolverBusqueda <> "")
 
     
     'Novimebre 2010
@@ -837,6 +858,10 @@ Dim C As String
     CadenaConsulta = C
 End Sub
 
+Private Sub mnLotes_Click()
+        HacerToolbar 10
+End Sub
+
 Private Sub mnOrdenadoPor_Click(Index As Integer)
         mnOrdenadoPor(0).Checked = Index = 0
         mnOrdenadoPor(1).Checked = Index = 1
@@ -852,18 +877,30 @@ Private Sub mnVerTodos_Click()
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    HacerToolbar Button.Index
+End Sub
+Private Sub HacerToolbar(Indice As Integer)
+    Select Case Indice
         Case 1: mnBuscar_Click
         Case 2: mnVerTodos_Click
         Case 5:
                 mnBusqAvan_Click
-'        Case 6: mnModificar_Click
-'        Case 7: mnEliminar_Click
-'        Case 10  'Informes
-'                Me.Hide
-'                AbrirListado (20)  'OpcionListado=20
-'                Me.Show vbModal
-        Case 11 'Salir
+                
+        Case 10
+            'De momento solo alzira y en TPV
+            If DesdeTPV And vParamAplic.NumeroInstalacion = 1 Then
+                CadenaDesdeOtroForm = ""
+                frmMensajes.OpcionMensaje = 25
+                frmMensajes.Show vbModal
+                If CadenaDesdeOtroForm <> "" Then
+                    CadenaDesdeOtroForm = "##LOTESAGRUPADOS##" & CadenaDesdeOtroForm
+                    RaiseEvent DatoSeleccionado(CadenaDesdeOtroForm)
+                    Unload Me
+                End If
+            
+            End If
+        Case 17 'Salir
+            
                 mnSalir_Click
     End Select
 End Sub

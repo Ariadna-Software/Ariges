@@ -1139,7 +1139,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public DatosADevolverBusqueda2 As String    'Tendra el nº de text que quiere que devuelva, empipados
+Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 Public Event DatoSeleccionado2(CadenaSeleccion As String)
 
 Private WithEvents frmB As frmBuscaGrid  'Form para busquedas
@@ -1459,6 +1459,7 @@ End Sub
 
 
 Private Sub BotonAnyadirLinea()
+
     'Si no estaba modificando lineas salimos
     ' Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 2 Then Exit Sub
@@ -1570,6 +1571,13 @@ Dim vWhere As String
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 1 Then Exit Sub '1= Insertar
     If Data2.Recordset.EOF Then Exit Sub
+    
+    
+    If Not IsNull(Data1.Recordset!fecproduccion) Then
+        MsgBox "Orden cerrada. No se puede modificar", vbExclamation
+        Exit Sub
+    End If
+    
     
   '  vWhere = ObtenerWhereCP & " and numlinea=" & Data2.Recordset!numlinea
   '  vWhere = Replace(vWhere, NombreTabla, NomTablaLineas)
@@ -1876,11 +1884,16 @@ Private Sub Form_Load()
     
     'ASignamos un SQL al DATA1
     Data1.ConnectionString = conn
-    Data1.RecordSource = "Select * from " & NombreTabla & " where codigo=-1"
+    
+    If DatosADevolverBusqueda = "" Then
+        Data1.RecordSource = "Select * from " & NombreTabla & " where false"
+    Else
+        Data1.RecordSource = "Select * from " & NombreTabla & " where codigo=" & DatosADevolverBusqueda
+    End If
     Data1.Refresh
     
     Me.Tag = "" 'Para que no carge los datos
-    If DatosADevolverBusqueda2 = "" Then
+    If DatosADevolverBusqueda = "" Then
         PonerModo 0
     Else
         If Data1.Recordset.EOF Then
@@ -2103,6 +2116,9 @@ End Sub
 
 
 Private Sub mnModificar_Click()
+
+    
+
     If Modo = 5 Then 'Modificar lineas
          BotonModificarLinea
     ElseIf Modo = 6 Then 'Sublineas
@@ -2110,6 +2126,17 @@ Private Sub mnModificar_Click()
     ElseIf Modo = 7 Then 'Sublineas
         BotonModificarSubLineaCalidad
     Else  'Modificar Pedido
+        
+        
+        
+        If Data1.Recordset.EOF Then Exit Sub
+        If Not IsNull(Data1.Recordset!fecproduccion) Then
+                MsgBox "Orden cerrada. No se puede modificar", vbExclamation
+                Exit Sub
+        End If
+    
+                
+        
          If BLOQUEADesdeFormulario(Me) Then BotonModificar
     End If
 End Sub
@@ -2396,7 +2423,7 @@ Dim b As Boolean
     '=========================================
     b = (Modo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
-    If DatosADevolverBusqueda2 <> "" Then
+    If DatosADevolverBusqueda <> "" Then
         cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
@@ -2594,6 +2621,17 @@ End Function
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
+    
+    If Button.Index = 10 Or Button.Index = 11 Then
+    
+        If Data1.Recordset.EOF Then Exit Sub
+        If Not IsNull(Data1.Recordset!fecproduccion) Then
+            MsgBox "Orden cerrada. No se puede modificar", vbExclamation
+            Exit Sub
+        End If
+
+    End If
+    
     Select Case Button.Index
         Case 1  'Buscar
             mnBuscar_Click
@@ -3326,7 +3364,7 @@ Private Function PedidoConInstalaciones() As Boolean
 'Comprobar si en las lineas del Pedido hay algun articulo que sea Instalacion
 'Si no hay niguna linea que sea instalacion no se imprimira la Orden de Instalacion
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EInstalac
 
@@ -3337,15 +3375,15 @@ Dim RS As ADODB.Recordset
     SQL = SQL & " sfamia ON sartic.codfamia=sfamia.codfamia "
     SQL = SQL & " WHERE scaped.numpedcl = " & Val(Text1(0).Text) & " And sfamia.instalac = 1"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Rs.EOF Then
         PedidoConInstalaciones = False
     Else
         PedidoConInstalaciones = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 EInstalac:
     If Err.Number <> 0 Then MuestraError Err.Number, "Comprobar si hay Articulos que son Instalaciones.", Err.Description

@@ -66,6 +66,9 @@ Private mDirEnvioHabitual As Integer   ' Si no trabajamos con direcciones de env
 
 Private mPais As String 'Conta nueva. Tesoreria
 
+Private mPuntos As Boolean
+
+
 '------------------------------------------------
 'Propiedades del modulo CCliente
 '------------------------------------------------
@@ -282,12 +285,12 @@ Public Property Get CuentaBan() As String
      CuentaBan = mCuentaba
 End Property
 
-Public Property Let IBAN(ByVal vData As String)
+Public Property Let Iban(ByVal vData As String)
      mIBAN = vData
 End Property
 
-Public Property Get IBAN() As String
-     IBAN = mIBAN
+Public Property Get Iban() As String
+     Iban = mIBAN
 End Property
 
 
@@ -391,9 +394,14 @@ Public Property Get DirEnvioHabitual() As Integer
 End Property
 
 
-Public Property Get Pais() As String
-     Pais = mPais
+Public Property Get PAIS() As String
+     PAIS = mPais
 End Property
+
+Public Property Get tienePuntos() As Boolean
+     tienePuntos = mPuntos
+End Property
+
 
 
 
@@ -426,78 +434,78 @@ Public Function LeerDatos(vCodClien As String) As Boolean
 'Leer los datos de un cliente dado
 'Lee de la BD: Ariges, Tabla: sclien
 'OUT: True si lee los datos correctamente
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 
     On Error GoTo ELeer
     
     LeerDatos = False
     
-    SQL = "SELECT codclien,nomclien,nomcomer,codpobla,domclien,pobclien,proclien,nifclien,wwwclien,codenvio,codagent,codforpa,codbanco,codsucur,digcontr,cuentaba,telclie1,maiclie1,clivario,dtoppago,dtognral,codtarif,codsitua,tipofact,kilometr,fechamov,observac,perclie1,codzonas,coddirenhab,iban,codpais "
+    SQL = "SELECT codclien,nomclien,nomcomer,codpobla,domclien,pobclien,proclien,nifclien,wwwclien,codenvio,codagent,codforpa,codbanco,codsucur,digcontr,cuentaba,telclie1,maiclie1,clivario,dtoppago,dtognral,codtarif,codsitua,tipofact,kilometr,fechamov,observac,perclie1,codzonas,coddirenhab,iban,codpais,tienepuntos "
     SQL = SQL & " FROM sclien "
     SQL = SQL & " WHERE codclien=" & vCodClien
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    If Rs.EOF Then
+    If RS.EOF Then
         LeerDatos = False
     Else
-        mCodClien = CStr(Rs!codClien)
+        mCodClien = CStr(RS!codClien)
         
-        mNomClien = Rs!Nomclien
-        mNomComer = Rs!nomcomer
-        mDomClien = DBLet(Rs!domclien, "T")
-        mCodpobla = DBLet(Rs!codpobla, "T")
-        mPobClien = DBLet(Rs!pobclien, "T")
-        mProClien = DBLet(Rs!proclien, "T")
-        mNIFClien = DBLet(Rs!nifClien, "T")
-        mWwwClien = DBLet(Rs!wwwclien, "T")
-        mTfnClien = DBLet(Rs!telclie1, "T")
-        mMaiClien = DBLet(Rs!maiclie1, "T")
+        mNomClien = RS!NomClien
+        mNomComer = RS!nomcomer
+        mDomClien = DBLet(RS!domclien, "T")
+        mCodpobla = DBLet(RS!codpobla, "T")
+        mPobClien = DBLet(RS!pobclien, "T")
+        mProClien = DBLet(RS!proclien, "T")
+        mNIFClien = DBLet(RS!nifClien, "T")
+        mWwwClien = DBLet(RS!wwwclien, "T")
+        mTfnClien = DBLet(RS!telclie1, "T")
+        mMaiClien = DBLet(RS!maiclie1, "T")
        
-        mCodEnvio = CStr(DBLet(Rs!CodEnvio, "N"))
-        mCodAgent = CStr(Rs!CodAgent)
-        mCodForpa = CStr(Rs!codforpa)
-        mDtoPpago = CStr(Rs!DtoPPago)
-        mDtoGnral = CStr(Rs!DtoGnral)
-        mTipoFact = Rs!TipoFact
+        mCodEnvio = CStr(DBLet(RS!CodEnvio, "N"))
+        mCodAgent = CStr(RS!CodAgent)
+        mCodForpa = CStr(RS!codforpa)
+        mDtoPpago = CStr(RS!DtoPPago)
+        mDtoGnral = CStr(RS!DtoGnral)
+        mTipoFact = RS!TipoFact
         
-        mCodbanco = CStr(DBLet(Rs!codbanco, "N"))
-        mCodsucur = CStr(DBLet(Rs!codsucur, "N"))
-        mDigContr = DBLet(Rs!digcontr, "T")
-        mCuentaba = DBLet(Rs!cuentaba, "T")
-        mIBAN = DBLet(Rs!IBAN, "T")
+        mCodbanco = CStr(DBLet(RS!codbanco, "N"))
+        mCodsucur = CStr(DBLet(RS!codsucur, "N"))
+        mDigContr = DBLet(RS!digcontr, "T")
+        mCuentaba = DBLet(RS!cuentaba, "T")
+        mIBAN = DBLet(RS!Iban, "T")
         
-        mObservac = DBLetMemo(Rs!observac)
-        mCliVario = Rs!Clivario
+        mObservac = DBLetMemo(RS!observac)
+        mCliVario = RS!Clivario
         
-        Tarifa = Rs!codTarif
-        Situacion = Rs!codsitua
-        mKilometr = DBLet(Rs!kilometr, "N")
+        Tarifa = RS!codTarif
+        Situacion = RS!codsitua
+        mKilometr = DBLet(RS!kilometr, "N")
 
-        mFecUltMovim = DBLet(Rs!FechaMov, "T")
+        mFecUltMovim = DBLet(RS!FechaMov, "T")
         
-        mPersonaContacto = DBLet(Rs!perclie1, "T")
+        mPersonaContacto = DBLet(RS!perclie1, "T")
         
-        mZona = CStr(DBLet(Rs!codzonas, "N"))
+        mZona = CStr(DBLet(RS!codzonas, "N"))
         
-        mPais = DBLet(Rs!codpais, "T")
+        mPais = DBLet(RS!codpais, "T")
         'Direccion envio habitual
         mDirEnvioHabitual = -1
             
         
         If vParamAplic.DireccionesEnvio Then
-            If Not IsNull(Rs!coddirenhab) Then mDirEnvioHabitual = Rs!coddirenhab
+            If Not IsNull(RS!coddirenhab) Then mDirEnvioHabitual = RS!coddirenhab
         End If
         
-        
+        mPuntos = DBLet(RS!tienePuntos, "N") = 1
         
         LeerDatos = True
     End If
 
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
 
 ELeer:
@@ -505,7 +513,7 @@ ELeer:
     SQL = SQL & "Número: " & Err.Number & vbCrLf
     SQL = SQL & "Descripción: " & Err.Description
     MsgBox SQL, vbExclamation
-    Set Rs = Nothing
+    Set RS = Nothing
     LeerDatos = False
 End Function
 
@@ -514,7 +522,7 @@ End Function
 Public Function LeerDatosCliVario(vNif As String) As Boolean
 'si es cliente de varios recuperamos los datos nombre,direc,etc.
 'de la tabla de varios: sclvar
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
     
     On Error GoTo ELeer
@@ -524,10 +532,10 @@ Dim SQL As String
     SQL = SQL & " FROM sclvar "
     SQL = SQL & " WHERE nifclien=" & DBSet(vNif, "T")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     mPersonaContacto = ""
-    If Rs.EOF Then
+    If RS.EOF Then
         LeerDatosCliVario = False
         
         mNomClien = ""
@@ -539,20 +547,20 @@ Dim SQL As String
         mTfnClien = ""
         MsgBox "No existe el cliente vario: " & vNif, vbInformation
     Else
-        mNIFClien = Rs!nifClien
-        mNomClien = Rs!Nomclien
+        mNIFClien = RS!nifClien
+        mNomClien = RS!NomClien
         mNomComer = ""
-        mDomClien = Rs!domclien
-        mCodpobla = DBLet(Rs!codpobla, "T")
-        mPobClien = DBLet(Rs!pobclien, "T")
-        mProClien = DBLet(Rs!proclien, "T")
-        mTfnClien = DBLet(Rs!telclien, "T")
-        
+        mDomClien = RS!domclien
+        mCodpobla = DBLet(RS!codpobla, "T")
+        mPobClien = DBLet(RS!pobclien, "T")
+        mProClien = DBLet(RS!proclien, "T")
+        mTfnClien = DBLet(RS!telclien, "T")
+        mPuntos = False
         LeerDatosCliVario = True
     End If
 
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
 
 ELeer:
@@ -560,7 +568,7 @@ ELeer:
     SQL = SQL & "Número: " & Err.Number & vbCrLf
     SQL = SQL & "Descripción: " & Err.Description
     MsgBox SQL, vbExclamation
-    Set Rs = Nothing
+    Set RS = Nothing
     LeerDatosCliVario = False
 End Function
 
@@ -716,15 +724,15 @@ End Function
 
 Public Function Bonifica() As Boolean
 'Indica si al cliente se le aplican bonificaciones o no
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo EBonifica
     Bonifica = False
     
-    Cad = DevuelveDesdeBDNew(conAri, "sclien", "codtarif", "codclien", codigo, "N")
-    If Cad <> "" Then
-        Cad = DevuelveDesdeBDNew(conAri, "starif", "bonifica", "codlista", Cad, "N")
-        If Cad <> "" Then Bonifica = CBool(Cad)
+    cad = DevuelveDesdeBDNew(conAri, "sclien", "codtarif", "codclien", codigo, "N")
+    If cad <> "" Then
+        cad = DevuelveDesdeBDNew(conAri, "starif", "bonifica", "codlista", cad, "N")
+        If cad <> "" Then Bonifica = CBool(cad)
     End If
     
 EBonifica:

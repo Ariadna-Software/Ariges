@@ -1563,6 +1563,10 @@ Dim cControlFra As CControlFacturaContab
                     If Not IsNumeric(Campos(5)) Then
                         cad = cad & "Codigo socio incorrecto " & vbCrLf
                         NumRegElim = 1
+                    Else
+                        'Es el codigo de socio.
+                        'Pos si acaso sa ha vuelto loco el de las factuas y lo envia "decimal"
+                        Campos(5) = Replace(Campos(5), ",00", "")
                     End If
                     Campos(0) = Campos(6)
                     If Len(Campos(0)) < 6 Then

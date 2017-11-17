@@ -722,7 +722,7 @@ Dim CodmactaIndicada As Boolean
              C1 = C1 & "|nifsocio|"
              
         Case Else
-            Stop  'NO DEBERIA PASAR
+           
             C1 = ""
         End Select
 

@@ -490,7 +490,12 @@ Dim MinimoPedido As Byte
                     
                 If Not b Then
                     'No hay stock para el movimiento. Ver control de Stock
-                    b = Not (ControlStock2(cArticulos))
+                    'Si es produccion, y entrada, NO muestro mensaje de error
+                    If (mvarDetaMov = "PRO" Or mvarDetaMov = "PRE") And mvarTipoMov = "E" Then
+                        b = True
+                    Else
+                        b = Not (ControlStock2(cArticulos))
+                    End If
                 Else
                     'Ha ido bien , pero debe realizar pedidos (o esta en minimo)
                     If MinimoPedido > 0 Then

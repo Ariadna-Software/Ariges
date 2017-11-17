@@ -23,7 +23,7 @@ Public Function LeerBinary(ADOField As ADODB.Field, NombreArchivo As String) As 
     Dim nChunks As Long
     Dim nSize As Long
     Dim Fragment As Long
-    Dim I As Long
+    Dim i As Long
     
     
     On Error GoTo ELeerBinary
@@ -39,7 +39,7 @@ Public Function LeerBinary(ADOField As ADODB.Field, NombreArchivo As String) As 
     Fragment = nSize Mod mBuffer
     Chunk() = ADOField.GetChunk(Fragment)
     Put nFile, , Chunk()
-    For I = 1 To nChunks
+    For i = 1 To nChunks
         Chunk() = ADOField.GetChunk(mBuffer)
         Put nFile, , Chunk()
     Next
@@ -48,7 +48,7 @@ Public Function LeerBinary(ADOField As ADODB.Field, NombreArchivo As String) As 
     LeerBinary = True
     Exit Function
 ELeerBinary:
-    MuestraError Err.Number, "Leer Binary"
+    MuestraError Err.Number, "Leer Binary", Err.Description
     
     On Error Resume Next
     Close nFile
@@ -58,7 +58,7 @@ End Function
 
 Public Sub GuardarBinary(ADOField As ADODB.Field, kImagen As String)   ' unImage As Image)
     ' Guardar el contenido del Picture en el campo de la base
-    Dim I As Long
+    Dim i As Long
     Dim Fragment As Long
     Dim nSize As Long
     Dim nChunks As Long
@@ -85,10 +85,10 @@ Public Sub GuardarBinary(ADOField As ADODB.Field, kImagen As String)   ' unImage
     Get nFile, , Chunk()
     ADOField.AppendChunk Chunk()
     ReDim Chunk(mBuffer)
-    For I = 1 To nChunks
+    For i = 1 To nChunks
         Get nFile, , Chunk()
         ADOField.AppendChunk Chunk()
-    Next I
+    Next i
     Close nFile
     
     
@@ -114,7 +114,7 @@ Public Sub LeerBinaryEnString(ADOField As ADODB.Field, CadenaFinal As String)
     Dim nChunks As Long
     Dim nSize As Long
     Dim Fragment As Long
-    Dim I As Long
+    Dim i As Long
     '
     
     

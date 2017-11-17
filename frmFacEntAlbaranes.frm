@@ -335,7 +335,6 @@ Begin VB.Form frmFacEntAlbaranes2
       _Version        =   393216
       Style           =   1
       Tabs            =   4
-      Tab             =   2
       TabsPerRow      =   4
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -349,91 +348,123 @@ Begin VB.Form frmFacEntAlbaranes2
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacEntAlbaranes.frx":0049
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "DataGrid1"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "txtAux(0)"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "txtAux(1)"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "txtAux(3)"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "txtAux(4)"
+      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "txtAux(6)"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "txtAux(7)"
+      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "txtAux(8)"
+      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).Control(8)=   "txtAux(2)"
+      Tab(0).Control(8).Enabled=   0   'False
       Tab(0).Control(9)=   "cmdAux(0)"
+      Tab(0).Control(9).Enabled=   0   'False
       Tab(0).Control(10)=   "cmdAux(1)"
+      Tab(0).Control(10).Enabled=   0   'False
       Tab(0).Control(11)=   "FrameCliente"
+      Tab(0).Control(11).Enabled=   0   'False
       Tab(0).Control(12)=   "txtAux(5)"
+      Tab(0).Control(12).Enabled=   0   'False
       Tab(0).Control(13)=   "txtAux(9)"
+      Tab(0).Control(13).Enabled=   0   'False
       Tab(0).Control(14)=   "cmdAux(9)"
+      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "txtAux(10)"
+      Tab(0).Control(15).Enabled=   0   'False
       Tab(0).Control(16)=   "txtAux(11)"
+      Tab(0).Control(16).Enabled=   0   'False
       Tab(0).Control(17)=   "txtAux(12)"
+      Tab(0).Control(17).Enabled=   0   'False
       Tab(0).ControlCount=   18
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbaranes.frx":0065
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(3)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(10)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Label1(12)"
-      Tab(1).Control(6)=   "imgBuscar(7)"
-      Tab(1).Control(7)=   "Label1(9)"
-      Tab(1).Control(8)=   "imgBuscar(8)"
-      Tab(1).Control(9)=   "Label1(23)"
-      Tab(1).Control(10)=   "Label1(24)"
-      Tab(1).Control(11)=   "Label1(52)"
-      Tab(1).Control(12)=   "imgFecha(40)"
-      Tab(1).Control(13)=   "Shape1"
-      Tab(1).Control(14)=   "imgBuscar(9)"
-      Tab(1).Control(15)=   "imgBuscar(13)"
-      Tab(1).Control(16)=   "Label1(54)"
-      Tab(1).Control(17)=   "Label1(55)"
-      Tab(1).Control(18)=   "chkImpreso"
-      Tab(1).Control(19)=   "Text1(38)"
-      Tab(1).Control(20)=   "Text1(18)"
-      Tab(1).Control(21)=   "Text1(19)"
+      Tab(1).Control(0)=   "Text2(1)"
+      Tab(1).Control(1)=   "Text1(44)"
+      Tab(1).Control(2)=   "Text2(43)"
+      Tab(1).Control(3)=   "Text1(43)"
+      Tab(1).Control(4)=   "FrameFacRec"
+      Tab(1).Control(5)=   "chkDocArchi"
+      Tab(1).Control(6)=   "Text1(41)"
+      Tab(1).Control(7)=   "Text1(39)"
+      Tab(1).Control(8)=   "FrameHco"
+      Tab(1).Control(9)=   "Text1(29)"
+      Tab(1).Control(10)=   "Text2(29)"
+      Tab(1).Control(11)=   "Text1(28)"
+      Tab(1).Control(12)=   "Text2(28)"
+      Tab(1).Control(13)=   "Text1(27)"
+      Tab(1).Control(14)=   "Text2(27)"
+      Tab(1).Control(15)=   "Text1(2)"
+      Tab(1).Control(16)=   "Text1(25)"
+      Tab(1).Control(17)=   "Text1(26)"
+      Tab(1).Control(18)=   "Text1(24)"
+      Tab(1).Control(19)=   "Text1(23)"
+      Tab(1).Control(20)=   "Text1(22)"
+      Tab(1).Control(21)=   "Text1(21)"
       Tab(1).Control(22)=   "Text1(20)"
-      Tab(1).Control(23)=   "Text1(21)"
-      Tab(1).Control(24)=   "Text1(22)"
-      Tab(1).Control(25)=   "Text1(23)"
-      Tab(1).Control(26)=   "Text1(24)"
-      Tab(1).Control(27)=   "Text1(26)"
-      Tab(1).Control(28)=   "Text1(25)"
-      Tab(1).Control(29)=   "Text1(2)"
-      Tab(1).Control(30)=   "Text2(27)"
-      Tab(1).Control(31)=   "Text1(27)"
-      Tab(1).Control(32)=   "Text2(28)"
-      Tab(1).Control(33)=   "Text1(28)"
-      Tab(1).Control(34)=   "Text2(29)"
-      Tab(1).Control(35)=   "Text1(29)"
-      Tab(1).Control(36)=   "FrameHco"
-      Tab(1).Control(37)=   "Text1(39)"
-      Tab(1).Control(38)=   "Text1(41)"
-      Tab(1).Control(39)=   "chkDocArchi"
-      Tab(1).Control(40)=   "FrameFacRec"
-      Tab(1).Control(41)=   "Text1(43)"
-      Tab(1).Control(42)=   "Text2(43)"
-      Tab(1).Control(43)=   "Text1(44)"
-      Tab(1).ControlCount=   44
+      Tab(1).Control(23)=   "Text1(19)"
+      Tab(1).Control(24)=   "Text1(18)"
+      Tab(1).Control(25)=   "Text1(38)"
+      Tab(1).Control(26)=   "chkImpreso"
+      Tab(1).Control(27)=   "Label1(63)"
+      Tab(1).Control(28)=   "Label1(55)"
+      Tab(1).Control(29)=   "Label1(54)"
+      Tab(1).Control(30)=   "imgBuscar(13)"
+      Tab(1).Control(31)=   "imgBuscar(9)"
+      Tab(1).Control(32)=   "Shape1"
+      Tab(1).Control(33)=   "imgFecha(40)"
+      Tab(1).Control(34)=   "Label1(52)"
+      Tab(1).Control(35)=   "Label1(24)"
+      Tab(1).Control(36)=   "Label1(23)"
+      Tab(1).Control(37)=   "imgBuscar(8)"
+      Tab(1).Control(38)=   "Label1(9)"
+      Tab(1).Control(39)=   "imgBuscar(7)"
+      Tab(1).Control(40)=   "Label1(12)"
+      Tab(1).Control(41)=   "Label1(11)"
+      Tab(1).Control(42)=   "Label1(10)"
+      Tab(1).Control(43)=   "Label1(5)"
+      Tab(1).Control(44)=   "Label1(3)"
+      Tab(1).Control(45)=   "Label1(45)"
+      Tab(1).ControlCount=   46
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranes.frx":0081
-      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameManipulador"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "FrameCampos"
-      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Totales"
       TabPicture(3)   =   "frmFacEntAlbaranes.frx":009D
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "FrameFactura"
       Tab(3).ControlCount=   1
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Height          =   315
+         Index           =   1
+         Left            =   -68880
+         Locked          =   -1  'True
+         MaxLength       =   40
+         TabIndex        =   199
+         Text            =   "Text2"
+         Top             =   675
+         Visible         =   0   'False
+         Width           =   885
+      End
       Begin VB.Frame FrameCampos 
          Caption         =   "Campos"
          Height          =   3495
-         Left            =   8040
+         Left            =   -66960
          TabIndex        =   190
          Top             =   600
          Width           =   4695
@@ -515,7 +546,7 @@ Begin VB.Form frmFacEntAlbaranes2
       Begin VB.Frame FrameManipulador 
          Caption         =   "Manipulador fitosanitarios  "
          Height          =   3495
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   179
          Top             =   600
          Width           =   7335
@@ -1098,7 +1129,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   12
-         Left            =   -61800
+         Left            =   13200
          MaxLength       =   15
          TabIndex        =   138
          Text            =   "comision"
@@ -1121,19 +1152,19 @@ Begin VB.Form frmFacEntAlbaranes2
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   43
-         Left            =   -67680
+         Left            =   -66360
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   134
          Text            =   "Text2"
          Top             =   1440
-         Width           =   3525
+         Width           =   3045
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   43
-         Left            =   -68520
+         Left            =   -67200
          MaxLength       =   30
          TabIndex        =   133
          Tag             =   "Cod. zona|N|S|0||scaalb|codzonas|000|N|"
@@ -1210,19 +1241,19 @@ Begin VB.Form frmFacEntAlbaranes2
          End
       End
       Begin VB.CheckBox chkDocArchi 
-         Caption         =   "Documento archivado"
+         Caption         =   "Docu. archivado"
          Height          =   375
-         Left            =   -63720
+         Left            =   -63240
          TabIndex        =   31
          Tag             =   "Docar|N|N|||scaalb|docarchiv||N|"
-         Top             =   1320
-         Width           =   1935
+         Top             =   1440
+         Width           =   1695
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   41
-         Left            =   -63720
+         Left            =   -63240
          MaxLength       =   10
          TabIndex        =   30
          Tag             =   "Fecha envio|F|S|||scaalb|fecenvio|dd/mm/yyyy|N|"
@@ -1235,7 +1266,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   11
-         Left            =   -62400
+         Left            =   12600
          MaxLength       =   15
          TabIndex        =   128
          Text            =   "numlote"
@@ -1250,7 +1281,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   10
-         Left            =   -67560
+         Left            =   7440
          MaxLength       =   5
          TabIndex        =   50
          Tag             =   "Bultos"
@@ -1264,7 +1295,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Caption         =   "+"
          Height          =   315
          Index           =   9
-         Left            =   -62640
+         Left            =   12360
          TabIndex        =   124
          ToolTipText     =   "Buscar proveedor"
          Top             =   3960
@@ -1278,7 +1309,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   9
-         Left            =   -63360
+         Left            =   11640
          MaxLength       =   6
          TabIndex        =   56
          Tag             =   "proveedor"
@@ -1419,7 +1450,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   29
-         Left            =   -68520
+         Left            =   -67200
          MaxLength       =   30
          TabIndex        =   29
          Tag             =   "Cod. Envío|N|N|0|999|scaalb|codenvio|000|N|"
@@ -1431,13 +1462,13 @@ Begin VB.Form frmFacEntAlbaranes2
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   29
-         Left            =   -67680
+         Left            =   -66360
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   93
          Text            =   "Text2"
          Top             =   840
-         Width           =   3525
+         Width           =   3045
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -1551,7 +1582,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   5
-         Left            =   -66120
+         Left            =   8880
          Locked          =   -1  'True
          MaxLength       =   1
          TabIndex        =   52
@@ -1563,7 +1594,7 @@ Begin VB.Form frmFacEntAlbaranes2
       End
       Begin VB.Frame FrameCliente 
          Height          =   1950
-         Left            =   -74800
+         Left            =   200
          TabIndex        =   63
          Top             =   315
          Width           =   13400
@@ -2048,7 +2079,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Caption         =   "+"
          Height          =   315
          Index           =   1
-         Left            =   -72360
+         Left            =   2640
          TabIndex        =   62
          ToolTipText     =   "Buscar artículo"
          Top             =   3960
@@ -2060,7 +2091,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Caption         =   "+"
          Height          =   315
          Index           =   0
-         Left            =   -74040
+         Left            =   960
          TabIndex        =   61
          ToolTipText     =   "Buscar almacen"
          Top             =   3960
@@ -2073,7 +2104,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   2
-         Left            =   -72120
+         Left            =   2880
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   48
@@ -2090,7 +2121,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   8
-         Left            =   -64440
+         Left            =   10560
          MaxLength       =   12
          TabIndex        =   55
          Tag             =   "Importe"
@@ -2106,7 +2137,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   7
-         Left            =   -65040
+         Left            =   9960
          MaxLength       =   30
          TabIndex        =   54
          Tag             =   "Descuento 2"
@@ -2122,7 +2153,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   6
-         Left            =   -65640
+         Left            =   9360
          MaxLength       =   5
          TabIndex        =   53
          Tag             =   "Descuento 1"
@@ -2138,7 +2169,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   4
-         Left            =   -66960
+         Left            =   8040
          MaxLength       =   12
          TabIndex        =   51
          Tag             =   "Precio"
@@ -2154,7 +2185,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   3
-         Left            =   -68880
+         Left            =   6120
          MaxLength       =   16
          TabIndex        =   49
          Tag             =   "Cantidad"
@@ -2169,7 +2200,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   1
-         Left            =   -73800
+         Left            =   1200
          MaxLength       =   18
          TabIndex        =   47
          Tag             =   "Código Artículo"
@@ -2184,7 +2215,7 @@ Begin VB.Form frmFacEntAlbaranes2
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   0
-         Left            =   -74640
+         Left            =   360
          MaxLength       =   15
          TabIndex        =   46
          Tag             =   "Código Almacen"
@@ -2246,7 +2277,7 @@ Begin VB.Form frmFacEntAlbaranes2
       Begin MSDataGridLib.DataGrid DataGrid1 
          Bindings        =   "frmFacEntAlbaranes.frx":7C23
          Height          =   2040
-         Left            =   -74805
+         Left            =   195
          TabIndex        =   60
          Top             =   2325
          Width           =   13400
@@ -2333,6 +2364,16 @@ Begin VB.Form frmFacEntAlbaranes2
          Width           =   1335
       End
       Begin VB.Label Label1 
+         Caption         =   "Puntos"
+         Height          =   255
+         Index           =   63
+         Left            =   -68880
+         TabIndex        =   198
+         Top             =   480
+         Visible         =   0   'False
+         Width           =   735
+      End
+      Begin VB.Label Label1 
          Caption         =   "Observaciones"
          Height          =   495
          Index           =   55
@@ -2345,7 +2386,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Caption         =   "Cod. zona"
          Height          =   195
          Index           =   54
-         Left            =   -68520
+         Left            =   -67200
          TabIndex        =   135
          Top             =   1200
          Width           =   810
@@ -2353,7 +2394,7 @@ Begin VB.Form frmFacEntAlbaranes2
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   13
-         Left            =   -67560
+         Left            =   -66240
          Picture         =   "frmFacEntAlbaranes.frx":7C38
          ToolTipText     =   "Buscar forma de envio"
          Top             =   1200
@@ -2362,22 +2403,22 @@ Begin VB.Form frmFacEntAlbaranes2
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   9
-         Left            =   -67560
+         Left            =   -66240
          Picture         =   "frmFacEntAlbaranes.frx":7D3A
          ToolTipText     =   "Buscar forma de envio"
          Top             =   600
          Width           =   240
       End
       Begin VB.Shape Shape1 
-         Height          =   1400
-         Left            =   -68640
+         Height          =   1395
+         Left            =   -67320
          Top             =   480
-         Width           =   7095
+         Width           =   5895
       End
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   40
-         Left            =   -62760
+         Left            =   -62280
          Picture         =   "frmFacEntAlbaranes.frx":7E3C
          ToolTipText     =   "Buscar fecha"
          Top             =   600
@@ -2387,7 +2428,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Caption         =   "Fecha envio"
          Height          =   195
          Index           =   52
-         Left            =   -63720
+         Left            =   -63240
          TabIndex        =   129
          Top             =   600
          Width           =   1095
@@ -2396,7 +2437,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Caption         =   "Cod. Envío"
          Height          =   195
          Index           =   24
-         Left            =   -68520
+         Left            =   -67200
          TabIndex        =   94
          Top             =   600
          Width           =   810
@@ -2963,6 +3004,10 @@ Dim vAgent As cAgente
 
 
 
+'Para los puntos. El canje solo deberia hacerse en albaran NUEVO
+Dim EsNuevoAlbaran As Boolean
+
+
 Private Sub cboFacturacion_KeyPress(KeyAscii As Integer)
     'KEYpress KeyAscii
     PonerFocoBtn cmdAceptar
@@ -3178,7 +3223,78 @@ Dim SQL As String
                 Set LOG = Nothing
             End If
         End If
+    
+    
+    
+        If vParamAplic.PtosAsignar > 0 Then
+            'Sistema de puntos
+   
+  
+                
+                If Val(Data1.Recordset!codClien) <> Val(Text1(4).Text) Then
+                    'Si cambia el cliente, hay que ver
+                    SQL = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
+                    If Val(SQL) = "1" Then
+                        'El nuevo cliente tiene puntos
+                        SQL = "+"
+                        If Data1.Recordset!Puntos < 0 Then SQL = "-"
+                        SQL = "UPDATE sclien set puntos=coalesce(puntos,0) " & SQL & DBSet(Abs(Data1.Recordset!Puntos), "N")
+                        SQL = SQL & " WHERE codclien =" & Text1(4).Text
+                        conn.Execute SQL
+                    
+                        BuscaChekc = "U"
+                       
+                    Else
+                        SQL = "UPDATE scaalb SET puntos=0 WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!NumAlbar
+                        conn.Execute SQL
+                        BuscaChekc = "D"
+                        Text2(1).Text = ""
+                        
+                    End If
+                    
+                    
+                    'Le quito los puntos al cliente origen. Osea al reves de arriba
+                    SQL = "-"
+                    If Data1.Recordset!Puntos < 0 Then SQL = "+"
+                    SQL = "UPDATE sclien set puntos=puntos " & SQL & DBSet(Abs(Data1.Recordset!Puntos), "N")
+                    SQL = SQL & " WHERE codclien =" & Data1.Recordset!codClien
+                    conn.Execute SQL
+                    
+                    
+                    
+                    'O borro o updateo movimientos puntos
+                    SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+                    SQL = SQL & " AND codclien = " & Data1.Recordset!codClien
+                    If BuscaChekc = "U" Then
+                        BuscaChekc = "UPDATE smovalpuntos SET codclien = " & Text1(4).Text
+                    Else
+                        BuscaChekc = "DELETE FROM smovalpuntos "
+                    End If
+                    SQL = BuscaChekc & SQL
+                    
+                    ejecutar SQL, False
+                    
+                    BuscaChekc = ""
+                    
+                    
+                End If
+                If CDate(Me.Text1(1).Text) <> Data1.Recordset!FechaAlb Then
+                    SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+                    SQL = SQL & " AND codclien = " & Data1.Recordset!codClien
+                    SQL = "UPDATE smovalpuntos set fechaalb= " & DBSet(Text1(1).Text, "F") & SQL
+                    ejecutar SQL, False
+                    
+                End If
+
+            End If
+                
+    
+    
     End If
+    
+    
+    
+    
     
 EModificaAlb:
     If Err.Number <> 0 Then b = False
@@ -3288,6 +3404,12 @@ Dim EraNuevaLinea As Boolean
             LineaIntercalar = 0
             PonerBotonCabecera True
             Me.DataGrid1.Enabled = True
+            
+            
+            
+            
+            
+            
             
             If Me.hcoCodTipoM = "ALM" And vParamAplic.EntradaRapidaFacturasMostrador Then
                 'Estamos en facturas mostrador, cont entrada rapida. Simularemos el boton
@@ -3757,6 +3879,15 @@ Dim NumAlbElim As Long
     End If
 
 
+    If vParamAplic.PtosAsignar > 0 Then
+        cad = Replace(ObtenerWhereCP(False), "scaalb", "slialb") & " AND codartic "
+        cad = DevuelveDesdeBD(conAri, "codartic", "slialb", cad, vParamAplic.PtosArticuloCanje, "T")
+        If cad <> "" Then
+            MsgBox "Tiene  articulo canje. ", vbExclamation
+            Exit Sub
+        End If
+
+    End If
     If hcoCodTipoM = "DEV" Then
         cadList = "devolucion"
     Else
@@ -3925,7 +4056,10 @@ Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
 Dim cad As String
 Dim Port As Integer      'Port: para saber si ha metido/Modificado el articulo de portes
-
+Dim Puntos As Currency
+Dim PtosCliente As Currency
+Dim PtosAnt As Currency
+Dim Aux As String
     'Quitar lineas y volver a la cabecera
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
     
@@ -3944,12 +4078,81 @@ Dim Port As Integer      'Port: para saber si ha metido/Modificado el articulo d
         End If
     
         If vParamAplic.NumeroInstalacion = 2 Then ComprobarComisionesAlbaranes
+        If vParamAplic.PtosAsignar > 0 Then
+            cad = "puntos"
+            If DevuelveDesdeBD(conAri, "tienepuntos", "sclien", "codclien", CStr(Data1.Recordset!codClien), "N", cad) = "1" Then
+                
+                If Me.hcoCodTipoM <> "ART" Then
+                    Aux = Replace(ObtenerWhereCP(False), NombreTabla, NomTablaLineas) & " AND 1 "
+                    Aux = DevuelveDesdeBD(conAri, "concat(sum(if(codartic=" & DBSet(vParamAplic.PtosArticuloCanje, "T") & ",1,0)),'|',sum(importel),'|') ", "slialb", Aux, "1")
+                    If Mid(Aux, 1, 1) = "1" Then
+                        'llev articulo canje
+                        Aux = RecuperaValor(Aux, 2)
+                        If CCur(Aux) < 0 Then
+                            'El albaran se queda en negativo. NO dejo continuar
+                            MsgBox "El albaran se queda con importe en negativo. ", vbExclamation
+                            Exit Sub
+                        End If
+                    End If
+                End If
+                If cad = "" Then
+                    PtosCliente = 0
+                Else
+                    PtosCliente = CCur(cad)
+                End If
+                Puntos = CalcularPuntosAlbaran(Replace(ObtenerWhereCP(False), NombreTabla, NomTablaLineas), Data1.Recordset!FechaAlb)
+                
+                
+                If Me.Text2(1).Text = "" Then
+                    PtosAnt = 0
+                Else
+                    PtosAnt = ImporteFormateado(Text2(1).Text)
+                End If
+                Text2(1).Text = Puntos
+                
+                'Updateamos el albaran
+                If PtosAnt <> Puntos Then
+                    cad = "UPDATE scaalb set puntos = " & DBSet(Puntos, "N")
+                    cad = cad & ObtenerWhereCP(True)
+                    conn.Execute cad
+                    
+                    'los moviimeintos PUNTOS
+                    cad = Replace(ObtenerWhereCP(False), "scaalb", "smovalpuntos") & " and concepto=0 AND codclien"
+                    
+                    cad = DevuelveDesdeBD(conAri, "numero", "smovalpuntos", cad, CStr(Data1.Recordset!codClien))
+                    If cad = "" Then
+                        
+                        cad = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", CStr(Data1.Recordset!codClien))
+                        'NUEVA LINEA
+                        
+                        cad = " VALUES (" & Data1.Recordset!codClien & "," & Val(cad) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!NumAlbar
+                        
+                        cad = "INSERT INTO smovalpuntos(codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov)" & cad
+                        cad = cad & " ," & DBSet(Data1.Recordset!FechaAlb, "F") & ",0," & DBSet(Puntos, "N") & ",now())"
+                    Else
+                        'UPDATE
+                        cad = "UPDATE smovalpuntos set puntos=" & DBSet(Puntos, "N") & " WHERE codclien=" & Data1.Recordset!codClien & " AND numero=" & cad
+                    End If
+                    
+                    ejecutar cad, False
+                    
+                    
+                    Puntos = Puntos - PtosAnt
     
-    
+                    PtosCliente = PtosCliente + Puntos
+                    cad = "UPDATE sclien set puntos = " & DBSet(PtosCliente, "N")
+                    cad = cad & " WHERE codclien = " & Data1.Recordset!codClien
+                    conn.Execute cad
+                    
+                End If
+                
+            End If
+        End If
         ' ---- [15/09/2009] (LAURA)
         DescuentosCantidad ""
         ' ----
-    
+        EsNuevoAlbaran = False
+        
         PonerModo 2
         If Not Data1.Recordset.EOF Then _
             Me.lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -4179,6 +4382,12 @@ Private Sub Form_Load()
     End If
     
     
+    If vParamAplic.PtosAsignar > 0 Then
+        Label1(63).visible = True
+        Text2(1).visible = True
+    End If
+    
+    
     Dim b As Boolean
     b = False
     If vParamAplic.NumeroInstalacion = 3 Or vParamAplic.NumeroInstalacion = 2 Then
@@ -4369,6 +4578,10 @@ End Sub
 
 
 Private Sub Form_Unload(Cancel As Integer)
+    If Modo = 5 Then
+        Cancel = 1
+        Exit Sub
+    End If
     CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     AlbAvisoGenerado = 0   'por si acaso
 End Sub
@@ -5036,13 +5249,13 @@ Dim campo As String
             End If
             
         Case 6 'NIF
-'            If Not EsDeVarios Then Exit Sub
+            If Text1(6).Locked Then Exit Sub
 '            'si no se ha modificado el nif del cliente no hacer nada (Modo 4=Modificar)
-'            If (Modo = 4) Then
-'                If (Text1(6).Text = Data1.Recordset!nifClien) Then Exit Sub
-'            End If
-'            PonerDatosClienteVario (Text1(Index).Text)
-                     
+            If (Modo = 4) Then
+                If (Text1(6).Text = Data1.Recordset!nifClien) Then Exit Sub
+            End If
+            PonerDatosClienteVario (Text1(Index).Text)
+                    
         Case 9 'Cod. Postal
              If Text1(Index).Locked Then Exit Sub
              If Text1(Index).Text = "" Then
@@ -5366,8 +5579,8 @@ Dim b As Boolean
      
     'Direccion de envio
     If vParamAplic.DireccionesEnvio Then Text2(42).Text = PonerNombreDeCod(Text1(42), conAri, "sdirenvio", "nomdiren", "codclien = " & Text1(4).Text & " AND coddiren")
-        
-     
+    
+    
     
     
     
@@ -5379,6 +5592,9 @@ Dim b As Boolean
         Text2(32).Text = PonerNombreDeCod(Text1(32), conAri, "straba", "nomtraba", "codtraba")
         Text2(33).Text = PonerNombreDeCod(Text1(33), conAri, "sincid", "nomincid", "codincid")
     End If
+    
+    
+    If vParamAplic.PtosAsignar > 0 Then ObtenerPuntos
     
    
     If Me.FrameCampos.visible Then CargaDatosCampos
@@ -5665,34 +5881,68 @@ Dim devuelve As String
     
     
     
-    
-        'Modificando
-        GrabaCambioTrabajador = -1
         
+            'Modificando
+            GrabaCambioTrabajador = -1
             
-         If Val(Text1(3).Text) <> Val(Data1.Recordset!CodTraba) Then
-             'MsgBox "No puede cambiar el trabajador", vbExclamation
-             'Text2(3).Text = ""
-             'Text1(3).Text = CStr(Data1.Recordset!CodTraba)
-             'PonerFoco Text1(3)
-             GrabaCambioTrabajador = Data1.Recordset!CodTraba
-         End If
-     
-     
-     
-       'En herbelca SOLO los supersuser quitan la marca de facturar
-    
-        If hcoCodTipoM <> "DEV" And vParamAplic.NumeroInstalacion = 2 And vUsu.Nivel > 0 Then
-            
-                If DBLet(Data1.Recordset!factursn, "N") = 1 And Me.chkFacturar.Value = 0 Then
                 
-                    MsgBox "No puede quitar la marca de facturar", vbExclamation
+             If Val(Text1(3).Text) <> Val(Data1.Recordset!CodTraba) Then
+                 'MsgBox "No puede cambiar el trabajador", vbExclamation
+                 'Text2(3).Text = ""
+                 'Text1(3).Text = CStr(Data1.Recordset!CodTraba)
+                 'PonerFoco Text1(3)
+                 GrabaCambioTrabajador = Data1.Recordset!CodTraba
+             End If
+         
+         
+         
+           'En herbelca SOLO los supersuser quitan la marca de facturar
+        
+            If hcoCodTipoM <> "DEV" And vParamAplic.NumeroInstalacion = 2 And vUsu.Nivel > 0 Then
+                
+                    If DBLet(Data1.Recordset!factursn, "N") = 1 And Me.chkFacturar.Value = 0 Then
+                    
+                        MsgBox "No puede quitar la marca de facturar", vbExclamation
+                        Exit Function
+                    End If
+    
+            End If
+            
+            If vParamAplic.PtosAsignar > 0 Then
+            
+         
+            
+                devuelve = ""
+                If Val(Data1.Recordset!codClien) <> Val(Text1(4).Text) Then
+                    If CDate(Me.Text1(1).Text) <> Data1.Recordset!FechaAlb Then
+                        If CDate(Me.Text1(1).Text) > vParamAplic.PtosFechaIncio Then
+                            If Data1.Recordset!FechaAlb < vParamAplic.PtosFechaIncio Then devuelve = "N"
+                        Else
+                            If Data1.Recordset!FechaAlb > vParamAplic.PtosFechaIncio Then devuelve = "N"
+                        End If
+                    End If
+                End If
+                
+                If devuelve <> "" Then
+                    MsgBox "No puede cambiar el cliente y ademas cambiar las fecha del albaran a peridod de puntos distinto", vbExclamation
                     Exit Function
                 End If
-
-        End If
-        
-    End If
+            
+            
+                If CDate(Me.Text1(1).Text) <> Data1.Recordset!FechaAlb Then
+                    devuelve = Replace(ObtenerWhereCP(False), "scaalb", "slialb") & " AND codartic "
+                    devuelve = DevuelveDesdeBD(conAri, "codartic", "slialb", devuelve, vParamAplic.PtosArticuloCanje, "T")
+                    If devuelve <> "" Then
+                        MsgBox "Tiene  articulo canje. ", vbExclamation
+                        Exit Function
+                    End If
+                End If
+            
+    
+            
+            
+            End If
+    End If  'modificando
     
     
     
@@ -5825,6 +6075,12 @@ Dim devuelve As String
         End If
     End If
     
+    
+    
+    
+    
+    
+    
 '    If Modo = 3 And b Then
 '         If vParamAplic.ManipuladorFitosanitarios2 And hcoCodTipoM = "ALM" Then
 '                'Esto sera para el CHOLI , en Navarrres
@@ -5949,19 +6205,115 @@ Dim vArtic As CArticulo
 
     End If
     
+    
+    
+    
+    
+    
+    'Articulo canje.
+    If vParamAplic.PtosAsignar > 0 Then
+        If ModificaLineas = 2 Then
+            'Esta modificando el articulo de canje
+            If Data2.Recordset!codArtic = vParamAplic.PtosArticuloCanje Then
+                'El articulo ahora debe ser el de canje. NO lo puede modificar
+                If txtAux(1).Text <> vParamAplic.PtosArticuloCanje Then
+                    MsgBox "No puede reemplzar el articulo de canje en esta linea", vbExclamation
+                    b = False
+                End If
+            Else
+                If txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
+                    'No podemos sustituir un articulo por el articulo de canje
+                    MsgBox "No puede reemplzar un articulo por el de canje ", vbExclamation
+                    b = False
+                End If
+            End If
+        Else
+            'Dando de alta
+            If Me.txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
+            
+             
+                'El cliente tiene puntos
+                Aux = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
+                If Val(Aux) = 0 Then
+                    MsgBox "El cliente no tiene marca de Puntos", vbExclamation
+                    b = False
+                Else
+                
+                    'Si no es nuevo albaran, solo superusuarios pueden insertar canje
+                    If Not EsNuevoAlbaran Then
+                        If vUsu.Nivel > 0 Then
+                            MsgBox "No es albaran nuevo. No puede utilizar articulo canje", vbExclamation
+                            b = False
+                        Else
+                            If MsgBox("No es un albaran nuevo. ¿Desea continuar con el canje?", vbQuestion + vbYesNo) <> vbYes Then b = False
+                        End If
+                    End If
+                    
+                    If Not b Then Exit Function
+                    
+                    'Veremos si YA esta el articulo de canje aqui
+                     Aux = Replace(ObtenerWhereCP(False), "scaalb", "slialb") & " AND codartic "
+                     Aux = DevuelveDesdeBD(conAri, "codartic", "slialb", Aux, txtAux(1).Text, "T")
+                     If Aux <> "" Then
+                         MsgBox "Ya esta el articulo de canje en este albarán", vbExclamation
+                         b = False
+                     
+                     Else
+                         'De momento Veo si hay algun articulo de familias de canje
+                         
+                        
+                         Aux = CalcularPuntosAlbaranCABEL(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), Data1.Recordset!FechaAlb)
+                         
+                         If Aux = "" Then Aux = "0"
+                         If CCur(Aux) = 0 Then
+                            'No hacemos nada
+                            MsgBox "No tiene articulos de las familias de canje", vbInformation
+                            
+                            If Not Data2.Recordset.EOF Then b = False
+                         Else
+                            If -ImporteFormateado(txtAux(3).Text) > CCur(Aux) Then
+                                MsgBox "No puede canjear mas de " & Aux, vbExclamation
+                                b = False
+                            End If
+                         End If
+                     End If
+                End If
+            End If
+        End If
+    
+        'Es correcto, y vemos la cantidad
+        If b Then
+            If Me.txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
+                'Los puntos son positivos de normal . El ya los restar (o sumara en los de devolucion
+                Aux = ""
+                If ImporteFormateado(txtAux(3).Text) < 0 Then
+                    'Cantidad negativa. En albaranes rectificativos
+                    If Data1.Recordset!codtipom = "ALR" Then Aux = "Canje puntos en positivo"
+                Else
+                    If Data1.Recordset!codtipom <> "ALR" Then Aux = "Canje puntos devolucion en negativo"
+                End If
+                If Aux <> "" Then
+                    MsgBox Aux, vbExclamation
+                    b = False
+                End If
+            End If
+        End If
+    
+    End If
+    
+    
+    If Not b Then Exit Function
+    
+    
+    
+    
+    
     If b Then
         If hcoCodTipoM <> "FMO" Then
             'En facturas de mostrador NO lo compurbeo para acelerar el prloceso
             vCStock.ComprobarFechaInventario True, ""
                 
         End If
-        
-        
-       
-    
-    
-    
-        
         
         
            
@@ -6348,7 +6700,7 @@ Dim ArtFitosnatiarios As Boolean
             If ClienteConTasaReciclado And Not DesdeRecuperaParaRectificativa2 Then
                 If ArticuloConTasaReciclado(txtAux(1).Text, ImpReciclado) Then
                     'Insertamos la linea del reciclado
-                 
+                    
                     vWhere = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", vParamAplic.ArtReciclado, "T")
                     SQL = "INSERT INTO " & NomTablaLineas
                     SQL = SQL & "(codtipom, numalbar,numlinea, codalmac, codartic, nomartic, ampliaci, cantidad,  precioar,"
@@ -6370,7 +6722,26 @@ Dim ArtFitosnatiarios As Boolean
             End If  'Cliente con tasa reciclado
         End If 'ok actualiza stock
         
-        
+        If b Then
+            If vParamAplic.PtosAsignar > 0 Then
+                If txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
+                    
+                    ImpReciclado = ImporteFormateado(txtAux(3).Text)
+    
+                    SQL = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", CStr(Data1.Recordset!codClien))
+                    SQL = " VALUES (" & Data1.Recordset!codClien & "," & Val(SQL) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!NumAlbar
+                    
+                    SQL = "INSERT INTO smovalpuntos(codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov)" & SQL
+                    SQL = SQL & " ," & DBSet(Data1.Recordset!FechaAlb, "F") & ",1," & DBSet(ImpReciclado, "N") & ",now())"
+                    conn.Execute SQL
+                
+                    
+                    SQL = "UPDATE sclien set puntos=" & DBSet(ImpReciclado, "N") & " + coalesce(puntos,0) "
+                    SQL = SQL & " WHERE codclien =" & Text1(4).Text
+                    conn.Execute SQL
+                End If
+            End If
+        End If
     
     End If
     Set vCStock = Nothing
@@ -6508,8 +6879,26 @@ Dim ArtFitosnatiarios As Boolean
                     End If  'articulo con reciclado
                 End If ' de cliente con tasa reciclado
                 
-
                 
+                If vParamAplic.PtosAsignar > 0 Then
+                    If Data2.Recordset!codArtic = vParamAplic.PtosArticuloCanje Then
+                        'Ha cambiado el articulo de puntos
+                        'Actualizamos los puntos en el cliente, el el movimputs
+                        ImpReciclado = Data2.Recordset!cantidad
+                        ImpReciclado = ImporteFormateado(txtAux(3).Text) - ImpReciclado
+                        SQL = "UPDATE sclien set puntos=" & DBSet(ImpReciclado, "N") & " + coalesce(puntos,0) "
+                        SQL = SQL & " WHERE codclien =" & Text1(4).Text
+                        conn.Execute SQL
+                                                
+                        SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+                        SQL = SQL & " AND codclien = " & Data1.Recordset!codClien & " AND concepto=1"
+                        SQL = "UPDATE smovalpuntos  set puntos = " & DBSet(ImporteFormateado(txtAux(3).Text), "N") & SQL
+                        conn.Execute SQL
+                                                
+                                                
+                                                
+                    End If
+                End If
             End If
 '        If SQL <> "" Then
 '
@@ -7179,7 +7568,35 @@ Dim TieneDescuentos As String
 
                 End If
                 
-                
+                If vParamAplic.PtosAsignar > 0 And hcoCodTipoM <> "ALR" Then
+                    If txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
+                    
+                        devuelve = "puntos"
+                        If DevuelveDesdeBD(conAri, "tienepuntos", "sclien", "codclien", CStr(Data1.Recordset!codClien), "T", devuelve) = "0" Then
+                              MsgBox "NO tiene puntos", vbExclamation
+                              txtAux(1).Text = ""
+                        Else
+                              If devuelve = "" Then devuelve = "0"
+                              cantidad = CalcularPuntosAlbaranCABEL(Replace(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), NombreTabla, NomTablaLineas), Data1.Recordset!FechaAlb)
+                              If CCur(cantidad) > CCur(devuelve) Then
+                                txtAux(3).Text = Format(-1 * CCur(devuelve), FormatoCantidad)
+                              Else
+                                txtAux(3).Text = Format(-1 * CCur(cantidad), FormatoCantidad)
+                              End If
+                              
+                              
+                                            
+                                txtAux(6).Text = "0"
+                                txtAux(7).Text = "0"
+                                txtAux(10).Text = "1"
+                                txtAux(6).Enabled = False
+                                txtAux(7).Enabled = False
+                                txtAux(7).Enabled = False
+                              
+                              
+                        End If
+                    End If
+                End If
             End If
         
         Case 2 'Nombre Articulo
@@ -7304,6 +7721,33 @@ Dim TieneDescuentos As String
                         End If
                         
 '                            PonerFoco txtAux(Index + 1)
+
+                        'Si es articulo de canje
+                        If vParamAplic.PtosAsignar > 0 Then
+                            If txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
+                                txtAux(4).Text = Format(vParamAplic.PtosEquivalencia, FormatoPrecio)
+                                txtAux(6).Text = "0"
+                                txtAux(7).Text = "0"
+                                txtAux(10).Text = "1"
+                                txtAux(6).Enabled = False
+                                txtAux(7).Enabled = False
+                                txtAux(7).Enabled = False
+                            
+                            
+                                devuelve = ""
+                                If CStr(Data1.Recordset!codtipom) <> "ALR" Then
+                                    devuelve = DevuelveDesdeBD(conAri, "puntos", "sclien", "codclien", CStr(Data1.Recordset!codClien))
+                                    If devuelve = "" Then devuelve = 0
+                                    If Abs(cantidad) > CCur(devuelve) Then
+                                        MsgBox "Utiliza mas puntos de los que tiene", vbExclamation
+                                        txtAux(3).Text = Format(devuelve, FormatoCantidad)
+                                    Else
+                                        devuelve = ""
+                                    End If
+                                End If
+                                If devuelve = "" Then PonerFocoBtn Me.cmdAceptar
+                            End If
+                        End If
                         Set CPrecioFact = Nothing
                     End If
                 End If
@@ -7396,7 +7840,7 @@ Private Sub BotonMtoLineas(numTab As Integer, cad As String)
     
     AlmacenLineas = -1
     PonerUltAlmacen
-    
+    EsNuevoAlbaran = False
 End Sub
 
 
@@ -7480,6 +7924,33 @@ Dim ParaElLog As String
         End If
     End If
         
+        
+    If b Then
+         If vParamAplic.PtosAsignar > 0 Then
+            'Sistema de puntos
+            If DBLet(Data1.Recordset!Puntos, "N") <> 0 Then
+                
+                
+                    'Si cambia el cliente, hay que ver
+                    SQL = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
+                    If Val(SQL) = "1" Then
+                        'El nuevo cliente tiene puntos
+                        SQL = "-"
+                        If Data1.Recordset!Puntos < 0 Then SQL = "+"
+                        SQL = "UPDATE sclien set puntos=coalesce(puntos,0) " & SQL & DBSet(Abs(Data1.Recordset!Puntos), "N")
+                        SQL = SQL & " WHERE codclien =" & Text1(4).Text
+                        conn.Execute SQL
+                    End If
+                    SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+                    SQL = SQL & " AND codclien = " & Data1.Recordset!codClien
+                    
+                        
+                    SQL = "DELETE FROM smovalpuntos " & SQL
+                    conn.Execute SQL
+            End If
+        End If
+    End If
+
 FinEliminar:
     If Err.Number <> 0 Then
         b = False
@@ -7871,6 +8342,35 @@ Dim ImpReciclado As Single
         conn.Execute SQL 'Eliminar linea
     End If
         
+
+    
+    
+    If vParamAplic.PtosAsignar > 0 Then
+        
+        'Si es la linea de canje, hay que quitarla de movimientos
+        If Data2.Recordset!codArtic = vParamAplic.PtosArticuloCanje Then
+            SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+            SQL = SQL & " AND codclien = " & Data1.Recordset!codClien & " AND concepto=1"
+            SQL = "DELETE FROM smovalpuntos  " & SQL
+            conn.Execute SQL
+      
+            SQL = "UPDATE sclien set puntos=" & DBSet(-1 * Data2.Recordset!cantidad, "N") & " + coalesce(puntos,0) "
+            SQL = SQL & " WHERE codclien =" & Text1(4).Text
+            conn.Execute SQL
+        End If
+    End If
+    
+    SQL = "Albarán: " & Text1(30).Text & "-" & Text1(0).Text & " de " & Text1(1).Text & vbCrLf
+    SQL = SQL & "Linea: " & Data2.Recordset!codArtic & " " & DBSet(Data2.Recordset!NomArtic, "T")
+    SQL = SQL & "Uds: " & Data2.Recordset!cantidad & "    Importe:" & DBSet(Data2.Recordset!ImporteL, "N")
+
+    Set LOG = New cLOG
+    ' 17 Venta a sabiendas riesgo
+    LOG.Insertar 37, vUsu, SQL
+    Set LOG = Nothing
+            
+        
+        
         
     'Si tiene
 EEliminarLinea:
@@ -8040,7 +8540,7 @@ End Function
 
 Private Sub BotonImprimir_(OpcionListado As Byte, EsInformePortes As Boolean)
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
 Dim cadSelect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
@@ -8054,7 +8554,7 @@ Dim ImpresionDirecta As Boolean
     End If
     
     cadFormula = ""
-    CadParam = ""
+    cadParam = ""
     cadSelect = ""
     numParam = 0
     
@@ -8084,19 +8584,19 @@ Dim ImpresionDirecta As Boolean
         End If
     End If
     
-    If Not PonerParamRPT2(indRPT, CadParam, numParam, nomDocu, ImpresionDirecta, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(indRPT, cadParam, numParam, nomDocu, ImpresionDirecta, pPdfRpt, pRptvMultiInforme) Then Exit Sub
    
     'Añadir el codigo de usuario como parametro para link con tabla Temporal (tmptiposiva) en el Report
     'tabla temporal para el calculo del bruto total para cada tipo de IVA
-    CadParam = CadParam & "pCodUsu=" & vUsu.codigo & "|"
+    cadParam = cadParam & "pCodUsu=" & vUsu.codigo & "|"
     numParam = numParam + 1
     
     'PORTES
-    CadParam = CadParam & "vPortes=""" & vParamAplic.ArtPortesN & """|"
+    cadParam = cadParam & "vPortes=""" & vParamAplic.ArtPortesN & """|"
     numParam = numParam + 1
     
     'PUNTO VERDE
-    CadParam = CadParam & "PuntoVerde=""" & vParamAplic.ArtReciclado & """|"
+    cadParam = cadParam & "PuntoVerde=""" & vParamAplic.ArtReciclado & """|"
     numParam = numParam + 1
     
     'Si se imprimen importes y/o
@@ -8105,7 +8605,7 @@ Dim ImpresionDirecta As Boolean
     ' 0 "Todo"
     ' 1 "Cantidad y Precio"
     ' 2 "Cantidad"
-    CadParam = CadParam & "Albarcon=" & devuelve & "|"
+    cadParam = cadParam & "Albarcon=" & devuelve & "|"
     numParam = numParam + 1
     
     
@@ -8153,12 +8653,12 @@ Dim ImpresionDirecta As Boolean
     'que se aplica a ese cliente
     If CodTipoMov = "ALI" Then
         'facturas internas VAN sin IVA         Si los ALZ no
-        CadParam = CadParam & "pTipoIVA=2|"
+        cadParam = cadParam & "pTipoIVA=2|"
         numParam = numParam + 1
     Else
         devuelve = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", Text1(4).Text, "N")
         If devuelve <> "" Then
-            CadParam = CadParam & "pTipoIVA=" & devuelve & "|"
+            cadParam = cadParam & "pTipoIVA=" & devuelve & "|"
             numParam = numParam + 1
         End If
     End If
@@ -8195,7 +8695,7 @@ Dim ImpresionDirecta As Boolean
             End If
             
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = False
@@ -8298,6 +8798,11 @@ Dim SQL As String
     
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
+    
+        'Herbelca , control puntos
+        'If vParamAplic.PtosAsignar > 0 Then Text1(43).Text = CalcularPuntosAlbaran
+    
+    
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
         SQL = CadenaInsertarDesdeForm(Me)
         If SQL <> "" Then
@@ -8308,6 +8813,7 @@ Dim SQL As String
                 'Ponerse en Modo Insertar Lineas
                 BotonMtoLineas 0, "Albaranes"
                 BotonAnyadirLinea False
+                EsNuevoAlbaran = True
             End If
         End If
         Text1(0).Text = Format(Text1(0).Text, "0000000")
@@ -8855,6 +9361,11 @@ Dim vCliente As CCliente
     
     Set vCliente = New CCliente
     If EsClienteVarios(clien) Then
+         If Not Comprobar_NIF(NIF) Then
+            If MsgBox("El NIF es incorrecto. ¿Continuar de igual modo?", vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
+        
+        End If
+       
         vCliente.NIF = NIF
         vCliente.Nombre = Text1(5).Text
         vCliente.Domicilio = Text1(8).Text
@@ -11055,4 +11566,16 @@ Dim Aux As String
 eComprobarComisionesAlbaranes:
     If Err.Number <> 0 Then Err.Clear
     Set miRsAux = Nothing
+End Sub
+
+
+
+
+
+
+Private Sub ObtenerPuntos()
+Dim C As String
+    C = ObtenerWhereCP(False) & " AND 1"
+    C = DevuelveDesdeBD(conAri, "puntos", "scaalb", C, "1")
+    Text2(1).Text = C
 End Sub

@@ -25,7 +25,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Left            =   8520
       MultiLine       =   -1  'True
       ScrollBars      =   2  'Vertical
-      TabIndex        =   20
+      TabIndex        =   21
       Tag             =   "Descr|T|S|||sfamia|descripcion||N|"
       Text            =   "frmAlmFamiliaArticulo.frx":000C
       Top             =   1320
@@ -82,20 +82,28 @@ Begin VB.Form frmAlmFamiliaArticulo
       BorderStyle     =   0  'None
       Height          =   1095
       Left            =   120
-      TabIndex        =   45
+      TabIndex        =   46
       Top             =   6480
       Width           =   12975
+      Begin VB.CheckBox chkPuntos 
+         Height          =   195
+         Left            =   11280
+         TabIndex        =   17
+         Tag             =   "Canje|N|N|||sfamia|PtosPermiteCanje||N|"
+         Top             =   300
+         Width           =   375
+      End
       Begin VB.CheckBox chkMarcaPropia 
          Height          =   195
-         Left            =   10800
+         Left            =   9480
          TabIndex        =   16
          Tag             =   "Comunica|N|N|||sfamia|marcapropia||N|"
-         Top             =   240
+         Top             =   300
          Width           =   375
       End
       Begin VB.CheckBox chkComunica 
          Height          =   195
-         Left            =   8880
+         Left            =   7920
          TabIndex        =   15
          Tag             =   "Comunica|N|N|||sfamia|comunica||N|"
          Top             =   300
@@ -126,7 +134,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Left            =   1920
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   48
+         TabIndex        =   49
          Text            =   "Text2"
          Top             =   720
          Width           =   3585
@@ -138,7 +146,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Left            =   2160
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   46
+         TabIndex        =   47
          Text            =   "Text2"
          Top             =   240
          Width           =   3585
@@ -153,35 +161,45 @@ Begin VB.Form frmAlmFamiliaArticulo
          Width           =   855
       End
       Begin VB.Label Label4 
+         Caption         =   "Permite canje"
+         Height          =   195
+         Index           =   1
+         Left            =   11640
+         TabIndex        =   64
+         Top             =   300
+         Width           =   1170
+      End
+      Begin VB.Label Label4 
          Caption         =   "Marca propia"
-         Height          =   255
-         Left            =   11280
-         TabIndex        =   61
-         Top             =   240
-         Width           =   1455
+         Height          =   195
+         Index           =   0
+         Left            =   9960
+         TabIndex        =   62
+         Top             =   300
+         Width           =   930
       End
       Begin VB.Label Label3 
          Caption         =   "Comunica"
-         Height          =   255
-         Left            =   9360
-         TabIndex        =   54
-         Top             =   270
-         Width           =   1455
+         Height          =   195
+         Left            =   8400
+         TabIndex        =   55
+         Top             =   300
+         Width           =   705
       End
       Begin VB.Label Label2 
          Caption         =   "Bloquea en TPV"
-         Height          =   255
+         Height          =   195
          Left            =   6480
-         TabIndex        =   53
-         Top             =   270
-         Width           =   1455
+         TabIndex        =   54
+         Top             =   300
+         Width           =   1170
       End
       Begin VB.Label Label1 
          Caption         =   "CCoste"
          Height          =   255
          Index           =   4
          Left            =   120
-         TabIndex        =   49
+         TabIndex        =   50
          Top             =   720
          Width           =   615
       End
@@ -199,7 +217,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Height          =   255
          Index           =   9
          Left            =   120
-         TabIndex        =   47
+         TabIndex        =   48
          Top             =   240
          Width           =   855
       End
@@ -216,7 +234,7 @@ Begin VB.Form frmAlmFamiliaArticulo
    Begin TabDlg.SSTab SSTab1 
       Height          =   5295
       Left            =   120
-      TabIndex        =   30
+      TabIndex        =   31
       Top             =   1080
       Width           =   8175
       _ExtentX        =   14420
@@ -235,12 +253,12 @@ Begin VB.Form frmAlmFamiliaArticulo
       TabCaption(1)   =   "Descuentos"
       TabPicture(1)   =   "frmAlmFamiliaArticulo.frx":0232
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(10)"
-      Tab(1).Control(1)=   "Combo1"
-      Tab(1).Control(2)=   "txtAux(0)"
-      Tab(1).Control(3)=   "txtAux(1)"
-      Tab(1).Control(4)=   "DataGrid1"
-      Tab(1).Control(5)=   "Label1(10)"
+      Tab(1).Control(0)=   "Label1(10)"
+      Tab(1).Control(1)=   "DataGrid1"
+      Tab(1).Control(2)=   "txtAux(1)"
+      Tab(1).Control(3)=   "txtAux(0)"
+      Tab(1).Control(4)=   "Combo1"
+      Tab(1).Control(5)=   "Text1(10)"
       Tab(1).ControlCount=   6
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -248,7 +266,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Index           =   10
          Left            =   -71760
          MaxLength       =   5
-         TabIndex        =   51
+         TabIndex        =   52
          Tag             =   "Centro de coste|N|S|0|100|sfamia|maxdtopar|#0.00|N|"
          Top             =   4200
          Width           =   975
@@ -257,7 +275,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Height          =   315
          Left            =   -74760
          Style           =   2  'Dropdown List
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   3000
          Visible         =   0   'False
          Width           =   2415
@@ -270,7 +288,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Index           =   0
          Left            =   -71880
          MaxLength       =   18
-         TabIndex        =   18
+         TabIndex        =   19
          Tag             =   "Código Artículo"
          Text            =   "Artic Artic Artic5"
          Top             =   3000
@@ -285,7 +303,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Index           =   1
          Left            =   -70200
          MaxLength       =   15
-         TabIndex        =   19
+         TabIndex        =   20
          Tag             =   "Código Almacen"
          Text            =   "codalmac"
          Top             =   3120
@@ -295,7 +313,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Begin MSDataGridLib.DataGrid DataGrid1 
          Height          =   2535
          Left            =   -74880
-         TabIndex        =   50
+         TabIndex        =   51
          Top             =   960
          Width           =   7815
          _ExtentX        =   13785
@@ -370,7 +388,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          ForeColor       =   &H00972E0B&
          Height          =   1575
          Left            =   240
-         TabIndex        =   40
+         TabIndex        =   41
          Top             =   3480
          Width           =   7695
          Begin VB.TextBox Text1 
@@ -391,7 +409,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   59
+            TabIndex        =   60
             Text            =   "Text2"
             Top             =   1080
             Width           =   3885
@@ -403,7 +421,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   42
+            TabIndex        =   43
             Text            =   "Text2"
             Top             =   240
             Width           =   3885
@@ -415,7 +433,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   41
+            TabIndex        =   42
             Text            =   "Text2"
             Top             =   675
             Width           =   3885
@@ -447,7 +465,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   13
             Left            =   240
-            TabIndex        =   60
+            TabIndex        =   61
             Top             =   1080
             Width           =   1695
          End
@@ -483,7 +501,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   6
             Left            =   240
-            TabIndex        =   44
+            TabIndex        =   45
             Top             =   270
             Width           =   1815
          End
@@ -492,7 +510,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   8
             Left            =   240
-            TabIndex        =   43
+            TabIndex        =   44
             Top             =   675
             Width           =   1455
          End
@@ -511,7 +529,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          ForeColor       =   &H00972E0B&
          Height          =   2895
          Left            =   240
-         TabIndex        =   31
+         TabIndex        =   32
          Top             =   480
          Width           =   7695
          Begin VB.TextBox Text2 
@@ -521,7 +539,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   57
+            TabIndex        =   58
             Text            =   "Text2"
             Top             =   2400
             Width           =   3885
@@ -544,7 +562,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   55
+            TabIndex        =   56
             Text            =   "Text2"
             Top             =   1920
             Width           =   3885
@@ -589,7 +607,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   35
+            TabIndex        =   36
             Text            =   "Text2"
             Top             =   1485
             Width           =   3885
@@ -601,7 +619,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   34
+            TabIndex        =   35
             Text            =   "Text2"
             Top             =   1080
             Width           =   3885
@@ -613,7 +631,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   33
+            TabIndex        =   34
             Text            =   "Text2"
             Top             =   240
             Width           =   3885
@@ -625,7 +643,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   30
-            TabIndex        =   32
+            TabIndex        =   33
             Text            =   "Text2"
             Top             =   675
             Width           =   3885
@@ -667,7 +685,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   12
             Left            =   240
-            TabIndex        =   58
+            TabIndex        =   59
             Top             =   2430
             Width           =   1815
          End
@@ -686,7 +704,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   11
             Left            =   240
-            TabIndex        =   56
+            TabIndex        =   57
             Top             =   2010
             Width           =   1815
          End
@@ -695,7 +713,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   3
             Left            =   240
-            TabIndex        =   39
+            TabIndex        =   40
             Top             =   1515
             Width           =   1815
          End
@@ -704,7 +722,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   2
             Left            =   240
-            TabIndex        =   38
+            TabIndex        =   39
             Top             =   1110
             Width           =   1815
          End
@@ -751,7 +769,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   5
             Left            =   240
-            TabIndex        =   37
+            TabIndex        =   38
             Top             =   270
             Width           =   1575
          End
@@ -760,7 +778,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Height          =   255
             Index           =   7
             Left            =   240
-            TabIndex        =   36
+            TabIndex        =   37
             Top             =   675
             Width           =   1575
          End
@@ -770,7 +788,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Height          =   195
          Index           =   10
          Left            =   -74880
-         TabIndex        =   52
+         TabIndex        =   53
          Top             =   4320
          Width           =   2835
       End
@@ -788,7 +806,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   12120
-      TabIndex        =   23
+      TabIndex        =   24
       Top             =   7800
       Visible         =   0   'False
       Width           =   1035
@@ -819,7 +837,7 @@ Begin VB.Form frmAlmFamiliaArticulo
    Begin VB.Frame Frame1 
       Height          =   540
       Left            =   120
-      TabIndex        =   24
+      TabIndex        =   25
       Top             =   7680
       Width           =   2655
       Begin VB.Label lblIndicador 
@@ -827,7 +845,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Caption         =   "Label2"
          Height          =   255
          Left            =   120
-         TabIndex        =   25
+         TabIndex        =   26
          Top             =   240
          Width           =   2355
       End
@@ -837,7 +855,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   12120
-      TabIndex        =   22
+      TabIndex        =   23
       Top             =   7800
       Width           =   1035
    End
@@ -845,7 +863,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   10800
-      TabIndex        =   21
+      TabIndex        =   22
       Top             =   7800
       Width           =   1035
    End
@@ -900,7 +918,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   28
+      TabIndex        =   29
       Top             =   0
       Width           =   13470
       _ExtentX        =   23760
@@ -980,7 +998,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          Caption         =   "Vista previa"
          Height          =   195
          Left            =   5880
-         TabIndex        =   29
+         TabIndex        =   30
          Top             =   120
          Width           =   1215
       End
@@ -991,7 +1009,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Height          =   195
       Index           =   14
       Left            =   8520
-      TabIndex        =   62
+      TabIndex        =   63
       Top             =   1080
       Width           =   840
    End
@@ -1001,7 +1019,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Height          =   255
       Index           =   1
       Left            =   1800
-      TabIndex        =   27
+      TabIndex        =   28
       Top             =   600
       Width           =   1095
    End
@@ -1011,7 +1029,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       Height          =   255
       Index           =   0
       Left            =   120
-      TabIndex        =   26
+      TabIndex        =   27
       Top             =   600
       Width           =   375
    End
@@ -1132,6 +1150,14 @@ Private Sub chkMarcaPropia_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
+
+Private Sub chkPuntos_GotFocus()
+    ConseguirfocoChk Modo
+End Sub
+
+Private Sub chkPuntos_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
 
 Private Sub cmdAceptar_Click()
 Dim numlinea As Integer
@@ -1447,6 +1473,11 @@ Private Sub Form_Load()
     NombreTabla = "sfamia"
     Ordenacion = " ORDER BY codfamia"
     
+    
+    Me.chkPuntos.visible = vParamAplic.PtosAsignar > 0
+    Label4(1).visible = vParamAplic.PtosAsignar > 0
+    
+    
     'Vemos como esta guardado el valor del check
     chkVistaPrevia.Value = CheckValueLeer(Name)
        
@@ -1474,6 +1505,7 @@ Private Sub LimpiarCampos()
     chkBloqTPV.Value = 0
     chkComunica.Value = 0
     chkMarcaPropia.Value = 0
+    chkPuntos.Value = 0
 End Sub
 
 
@@ -1916,6 +1948,17 @@ Dim NumReg As Byte
     chkMarcaPropia.Enabled = Me.chkBloqTPV.Enabled
     
     chkVistaPrevia.Enabled = (Modo <= 2)
+    
+    If vParamAplic.PtosAsignar > 0 Then
+        b = False
+        If Modo = 1 Then
+            b = True
+        Else
+            If Modo > 2 Then b = vUsu.Nivel = 0
+        End If
+        chkPuntos.Enabled = b
+    End If
+    
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.

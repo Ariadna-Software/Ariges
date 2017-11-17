@@ -85,7 +85,7 @@ On Error Resume Next
         'Ocvubre 2015
         SQL = SQL & ", ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet"
         'Enero 2016               abri16      ago17
-        SQL = SQL & ", PideCliente,numbultos,fechaAux"
+        SQL = SQL & ", PideCliente,numbultos,fechaAux,puntos"
         
       Case "OFE" 'Ofertas a Clientes
         NomTabla = "scapre"
@@ -267,7 +267,7 @@ Private Function BorrarTraspaso(EnHistorico As Boolean, cadWhere As String) As B
 'Si EnHistorico=true borra de las tablas de historico: "schtra" y "slhtra"
 'Si EnHistorico=false borra de las tablas de traspaso: "scatra" y "slitra"
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim cad As String, cadAux As String
 Dim EsAlbaran As Boolean
     BorrarTraspaso = False
@@ -293,19 +293,19 @@ Dim EsAlbaran As Boolean
     End Select
     
     If CodTipoMov <> "ALC" And CodTipoMov <> "PEC" Then
-        Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         cad = ""
-        While Not Rs.EOF
+        While Not RS.EOF
             If CodTipoMov <> "ALC" Then
-                cad = cad & Rs.Fields(0).Value & ","
+                cad = cad & RS.Fields(0).Value & ","
             Else
                 cad = cad & "numalbar="
             End If
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
         'Quitar la ultima coma de la cadena
         cad = Mid(cad, 1, Len(cad) - 1)
         

@@ -411,9 +411,18 @@ Private mvarSIIDias As Integer
 Private mvarSIIFechaIni As Date
 
 
-'Agosto
+'Agosto.
 Private mvarPtosAsignar As Currency  'Si lleva >0 tendra sistema de puntos
 Private mvarPtosImporteCalculo As Currency
+Private mvarPtosEquivalencia As Currency    'ptos a euro
+Private mvarPtosArticuloCanje As String     'Aticulo de canje
+Private mvarPtosFechaIncio As String     'Aticulo de canje
+
+
+'SEPTIE
+Private mvarPrecioHoraCosteEUL As Currency
+
+
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
@@ -1472,6 +1481,7 @@ End Property
 
 
 
+
 'Dic 2012     EN TPV tb vamos a poder añadir un campo a un tiket.
 'Para ello en ariagro tendremos el nombre de la bD, como hasta ahora, pero
 ' para saber si tienen ADV veremos si tiene algun valor en la tabla de  advparametros
@@ -1690,19 +1700,36 @@ Public Property Get Sii_Dias() As Integer
      Sii_Dias = mvarSIIDias
 End Property
 
+
+
+
+
+'Private mvarPtosAsignar As Currency  'Si lleva >0 tendra sistema de puntos
+'Private mvarPtosImporteCalculo As Currency
 Public Property Get PtosAsignar() As Currency
      PtosAsignar = mvarPtosAsignar
 End Property
 Public Property Get PtosImporteCalculo() As Currency
      PtosImporteCalculo = mvarPtosImporteCalculo
 End Property
+Public Property Get PtosEquivalencia() As Currency
+     PtosEquivalencia = mvarPtosEquivalencia
+End Property
+Public Property Get PtosArticuloCanje() As String
+     PtosArticuloCanje = mvarPtosArticuloCanje
+End Property
+Public Property Get PtosFechaIncio() As Date
+     PtosFechaIncio = mvarPtosFechaIncio
+End Property
 
 
 
-'Private mvarPtosAsignar As Currency  'Si lleva >0 tendra sistema de puntos
-'Private mvarPtosImporteCalculo As Currency
-
-
+Public Property Get PrecioHoraCosteEUL() As Currency
+     PrecioHoraCosteEUL = mvarPrecioHoraCosteEUL
+End Property
+Public Property Let PrecioHoraCosteEUL(ByVal CosteHOra As Currency)
+     mvarPrecioHoraCosteEUL = CosteHOra
+End Property
 
 
 
@@ -2023,10 +2050,12 @@ On Error GoTo Err3
         If Not IsNull(RS!PtosAsignar) Then
             mvarPtosAsignar = RS!PtosAsignar
             mvarPtosImporteCalculo = DBLet(RS!PtosImporteCalculo, "N")
-        
+            mvarPtosEquivalencia = RS!PtosEquivalencia
+            mvarPtosArticuloCanje = RS!PtosArticuloCanje
+            mvarPtosFechaIncio = RS!PtosFechaIncio
         End If
         
-        
+        mvarPrecioHoraCosteEUL = DBLet(RS!preciohoracoste, "N")
         
         
         ComprobarProgramaEnvioMail
@@ -2289,6 +2318,9 @@ On Error GoTo EModificar
     
     SQL = SQL & ", InventarioPorCodigo = " & DBSet(mvarInventarioCodigoArticulo, "B")
 
+    'Coste hora euler
+    SQL = SQL & ", preciohoracoste= " & DBSet(mvarPrecioHoraCosteEUL, "N", "S")
+            
 
 
 

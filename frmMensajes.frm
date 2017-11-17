@@ -15,6 +15,368 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   14160
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Visible         =   0   'False
+   Begin VB.Frame FrameArticulosAgrupados 
+      Height          =   6015
+      Left            =   0
+      TabIndex        =   68
+      Top             =   1080
+      Visible         =   0   'False
+      Width           =   9375
+      Begin VB.Frame FrameSelecArtAgrupado 
+         Height          =   3255
+         Left            =   1440
+         TabIndex        =   75
+         Top             =   1320
+         Width           =   6495
+         Begin VB.TextBox txtNoEditable 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   13.5
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00C00000&
+            Height          =   375
+            Index           =   5
+            Left            =   4560
+            Locked          =   -1  'True
+            TabIndex        =   81
+            Text            =   "6"
+            Top             =   2400
+            Width           =   1335
+         End
+         Begin VB.TextBox txtNoEditable 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   13.5
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   4
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   80
+            Text            =   "5"
+            Top             =   2400
+            Width           =   1335
+         End
+         Begin VB.TextBox txtNoEditable 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   13.5
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   3
+            Left            =   480
+            Locked          =   -1  'True
+            TabIndex        =   79
+            Text            =   "4"
+            Top             =   2400
+            Width           =   1335
+         End
+         Begin VB.TextBox txtNoEditable 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   13.5
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   2
+            Left            =   480
+            Locked          =   -1  'True
+            TabIndex        =   78
+            Text            =   "3"
+            Top             =   1560
+            Width           =   5295
+         End
+         Begin VB.TextBox txtNoEditable 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   13.5
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   1
+            Left            =   2280
+            Locked          =   -1  'True
+            TabIndex        =   77
+            Text            =   "2"
+            Top             =   720
+            Width           =   1695
+         End
+         Begin VB.TextBox txtNoEditable 
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   13.5
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   375
+            Index           =   0
+            Left            =   480
+            Locked          =   -1  'True
+            TabIndex        =   76
+            Text            =   "1"
+            Top             =   720
+            Width           =   1335
+         End
+         Begin VB.Label Label8 
+            Caption         =   "TOTAL"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   5
+            Left            =   4680
+            TabIndex        =   87
+            Top             =   2040
+            Width           =   855
+         End
+         Begin VB.Label Label8 
+            Caption         =   "PVP"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   4
+            Left            =   2400
+            TabIndex        =   86
+            Top             =   2040
+            Width           =   735
+         End
+         Begin VB.Label Label8 
+            Caption         =   "Uds"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   3
+            Left            =   480
+            TabIndex        =   85
+            Top             =   2040
+            Width           =   735
+         End
+         Begin VB.Label Label8 
+            Caption         =   "Descripción"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Index           =   2
+            Left            =   480
+            TabIndex        =   84
+            Top             =   1200
+            Width           =   1245
+         End
+         Begin VB.Label Label8 
+            Caption         =   "Referencia"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   300
+            Index           =   1
+            Left            =   2280
+            TabIndex        =   83
+            Top             =   360
+            Width           =   1170
+         End
+         Begin VB.Label Label8 
+            Caption         =   "Id"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   0
+            Left            =   480
+            TabIndex        =   82
+            Top             =   360
+            Width           =   735
+         End
+      End
+      Begin VB.TextBox txtArtAgrupado 
+         Alignment       =   2  'Center
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   13.5
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   1680
+         TabIndex        =   70
+         Text            =   "1"
+         Top             =   5400
+         Width           =   735
+      End
+      Begin VB.CommandButton cmdArtAgrupado 
+         Caption         =   "&Salir"
+         Height          =   375
+         Index           =   1
+         Left            =   8160
+         TabIndex        =   72
+         Top             =   5520
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdArtAgrupado 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Index           =   0
+         Left            =   7080
+         TabIndex        =   71
+         Top             =   5520
+         Width           =   975
+      End
+      Begin MSComctlLib.ListView lwArticulosAgrupados 
+         Height          =   4455
+         Left            =   480
+         TabIndex        =   69
+         Top             =   840
+         Width           =   8625
+         _ExtentX        =   15214
+         _ExtentY        =   7858
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   4
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Caja"
+            Object.Width           =   2187
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Descripcion"
+            Object.Width           =   7408
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Referencia"
+            Object.Width           =   2187
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   3
+            Text            =   "PVP"
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin VB.Label Label7 
+         Caption         =   "CAJAS"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   495
+         Index           =   3
+         Left            =   480
+         TabIndex        =   74
+         Top             =   5400
+         Width           =   1215
+      End
+      Begin VB.Label Label7 
+         Caption         =   "Artículos agrupados"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   495
+         Index           =   2
+         Left            =   480
+         TabIndex        =   73
+         Top             =   240
+         Width           =   5295
+      End
+   End
    Begin VB.Frame FrameErrorCC 
       Height          =   6135
       Left            =   6000
@@ -1006,6 +1368,7 @@ Public OpcionMensaje As Byte
 
 '24 .- Lineas de factura sib centro de coste
 
+'25 .- Articulos agruopados en ventas TPV
 
 Public cadWhere As String 'Cadena para pasarle la WHERE de la SELECT de los cobros pendientes o de Pedido(para comp. stock)
                           'o CodArtic para seleccionar los Nº Series
@@ -1227,6 +1590,48 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
       Unload Me
 End Sub
 
+
+Private Sub cmdArtAgrupado_Click(Index As Integer)
+Dim Impor As Currency
+    CadenaDesdeOtroForm = ""
+    If FrameSelecArtAgrupado.Visible Then
+        If Index = 0 Then
+            'OK este es el lote y las uds que quiere
+            CadenaDesdeOtroForm = lwArticulosAgrupados.SelectedItem.Text & "|" & txtArtAgrupado.Text & "|"  'lote y uds
+            Unload Me
+        Else
+            ponerframeTotaAgrupadoVisible False
+        End If
+    Else
+        If Index = 0 Then
+            If txtArtAgrupado.Text = "" Then txtArtAgrupado.Text = "1"
+            If Me.lwArticulosAgrupados.SelectedItem Is Nothing Then Exit Sub
+            
+            With lwArticulosAgrupados.SelectedItem
+                Me.txtNoEditable(0).Text = .Text
+                Me.txtNoEditable(1).Text = .SubItems(2)
+                Me.txtNoEditable(2).Text = .SubItems(1)
+                Me.txtNoEditable(3).Text = txtArtAgrupado.Text
+                Me.txtNoEditable(4).Text = .SubItems(3)
+                Impor = ImporteFormateado(.SubItems(3))
+                Impor = Impor * CInt(Me.txtArtAgrupado.Text)
+                Me.txtNoEditable(5).Text = Format(Impor, FormatoImporte)
+            End With
+            
+            ponerframeTotaAgrupadoVisible True
+            
+            PonerFocoBtn cmdArtAgrupado(0)
+        Else
+            Unload Me
+        End If
+    End If
+End Sub
+
+Private Sub ponerframeTotaAgrupadoVisible(Visible As Boolean)
+    FrameSelecArtAgrupado.Visible = Visible
+    Me.lwArticulosAgrupados.Enabled = Not Visible
+    Me.txtArtAgrupado.Enabled = Not Visible
+End Sub
 
 Private Sub cmdCancelar_Click()
     If OpcionMensaje = 4 Then
@@ -1538,6 +1943,10 @@ Dim OK As Boolean
         Case 24
             txtCCError.Text = vCampos
             vCampos = ""
+            
+        Case 25
+            CargaArticulosAgrupados
+            
     End Select
     
     Screen.MousePointer = vbDefault
@@ -1549,17 +1958,18 @@ Dim H As Integer, W As Integer
 Dim cad As String
 On Error Resume Next
 
-    Me.FrameCobrosPtes.visible = False
-    Me.FrameAcercaDe.visible = False
-    Me.FrameNSeries.visible = False
-    Me.FrameComponentes.visible = False
-    Me.FrameComponentes2.visible = False
-    Me.FrameErrores.visible = False
-    FrameEtiqEstant.visible = False
-    FrameCorreccionPrecios.visible = False
-    FrameTraspasoMante.visible = False
-    FrameEMail.visible = False
-    FrameErrorCC.visible = False
+    Me.FrameCobrosPtes.Visible = False
+    Me.FrameAcercaDe.Visible = False
+    Me.FrameNSeries.Visible = False
+    Me.FrameComponentes.Visible = False
+    Me.FrameComponentes2.Visible = False
+    Me.FrameErrores.Visible = False
+    FrameEtiqEstant.Visible = False
+    FrameCorreccionPrecios.Visible = False
+    FrameTraspasoMante.Visible = False
+    FrameEmail.Visible = False
+    FrameErrorCC.Visible = False
+    FrameArticulosAgrupados.Visible = False
     PulsadoSalir = True
     PrimeraVez = True
     
@@ -1631,15 +2041,15 @@ On Error Resume Next
             
             
             PulsadoSalir = False
-            Me.cmdSelTodos.visible = True
-            Me.cmdDeselTodos.visible = True
+            Me.cmdSelTodos.Visible = True
+            Me.cmdDeselTodos.Visible = True
             
         Case 9 'Etiquetas de Proveedores
             PonerFrameNSeriesVisible True, H, W
             Me.Caption = "Proveedores"
             PulsadoSalir = False
-            Me.cmdSelTodos.visible = True
-            Me.cmdDeselTodos.visible = True
+            Me.cmdSelTodos.Visible = True
+            Me.cmdDeselTodos.Visible = True
         
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
@@ -1651,8 +2061,8 @@ On Error Resume Next
             PonerFrameNSeriesVisible True, H, W
             Me.Caption = "Lineas Factura a Rectificar"
             PulsadoSalir = False
-            Me.cmdSelTodos.visible = True
-            Me.cmdDeselTodos.visible = True
+            Me.cmdSelTodos.Visible = True
+            Me.cmdDeselTodos.Visible = True
             Me.cmdAceptarNSeries.Left = Me.cmdAceptarNSeries.Left + 1000
             Me.cmdCancelar.Left = Me.cmdCancelar.Left + 1000
         
@@ -1715,9 +2125,9 @@ On Error Resume Next
         Case 21
             'Ver email
             limpiar Me
-            H = FrameEMail.Height
-            W = FrameEMail.Width
-            PonerFrameVisible FrameEMail, True, H, W
+            H = FrameEmail.Height
+            W = FrameEmail.Width
+            PonerFrameVisible FrameEmail, True, H, W
             If cadWHERE2 = "0" Then
                 Caption = "Enviados"
                 Label5(0).Caption = "Para"
@@ -1735,6 +2145,14 @@ On Error Resume Next
         W = FrameErrorCC.Width
         PonerFrameVisible FrameErrorCC, True, H, W
         PonerFocoBtn cmdSalirCC
+    Case 25
+        Caption = "LOTES"
+        
+        H = FrameArticulosAgrupados.Height
+        W = FrameArticulosAgrupados.Width
+        PonerFrameVisible FrameArticulosAgrupados, True, H, W
+        FrameSelecArtAgrupado.Visible = False
+        cmdArtAgrupado(1).Cancel = True
     End Select
     'Me.cmdCancel(indFrame).Cancel = True
     Me.Height = H + 350
@@ -1744,7 +2162,7 @@ On Error Resume Next
 End Sub
 
 
-Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub PonerFrameCobrosPtesVisible(Visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Cobros Pendientes Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
@@ -1786,22 +2204,22 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             End If
     End Select
             
-    PonerFrameVisible Me.FrameCobrosPtes, visible, H, W
+    PonerFrameVisible Me.FrameCobrosPtes, Visible, H, W
 
-    If visible = True Then
-        Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
-        Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12)
-        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12)
-        Me.Label1(1).visible = (OpcionMensaje = 12)
+    If Visible = True Then
+        Me.txtParam.Visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
+        Me.Label1(0).Visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12)
+        Me.cmdCancelarCobros.Visible = (OpcionMensaje = 12)
+        Me.Label1(1).Visible = (OpcionMensaje = 12)
     End If
 End Sub
 
 
-Private Sub PonerFrameAcercaDeVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub PonerFrameAcercaDeVisible(Visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame ACERCA DE visible y Ajustado al Formulario
 
-    Me.FrameAcercaDe.visible = visible
-    If visible = True Then
+    Me.FrameAcercaDe.Visible = Visible
+    If Visible = True Then
         'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
         Me.FrameAcercaDe.Top = -90
         Me.FrameAcercaDe.Left = 0
@@ -1814,7 +2232,7 @@ Private Sub PonerFrameAcercaDeVisible(visible As Boolean, ByRef H As Integer, By
 End Sub
 
 
-Private Sub PonerFrameNSeriesVisible(visible As Boolean, H As Integer, W As Integer)
+Private Sub PonerFrameNSeriesVisible(Visible As Boolean, H As Integer, W As Integer)
 'Pone el Frame de Nº Serie Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
@@ -1824,31 +2242,31 @@ Private Sub PonerFrameNSeriesVisible(visible As Boolean, H As Integer, W As Inte
         W = 10900
     ElseIf OpcionMensaje = 14 Then
         W = 6500
-        Me.Label7(1).visible = True
+        Me.Label7(1).Visible = True
     ElseIf OpcionMensaje = 17 Then
         W = 10500
-        Me.Label7(1).visible = False
+        Me.Label7(1).Visible = False
     Else
         W = 8500
-        Me.Label7(1).visible = False
+        Me.Label7(1).Visible = False
     End If
-    PonerFrameVisible Me.FrameNSeries, visible, H, W
+    PonerFrameVisible Me.FrameNSeries, Visible, H, W
 End Sub
 
 
-Private Sub ponerFrameComponentesVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub ponerFrameComponentesVisible(Visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Componentes Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
 '    Me.FrameComponentes.visible = visible
-    Me.FrameComponentes2.visible = visible
+    Me.FrameComponentes2.Visible = Visible
     
     H = 4000
     W = 5300
-    PonerFrameVisible Me.FrameComponentes, visible, H, W
+    PonerFrameVisible Me.FrameComponentes, Visible, H, W
         
     'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
-    If visible Then Me.OptCompXDpto.Caption = DevuelveTextoDepto(False)
+    If Visible Then Me.OptCompXDpto.Caption = DevuelveTextoDepto(False)
         
     
 End Sub
@@ -2745,6 +3163,14 @@ End Sub
 
 
 
+Private Sub lwArticulosAgrupados_DblClick()
+    cmdArtAgrupado_Click 0
+End Sub
+
+Private Sub lwArticulosAgrupados_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
 Private Sub OptCompXClien_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -3092,6 +3518,21 @@ End Function
 
 
 
+Private Sub txtArtAgrupado_GotFocus()
+    ConseguirFoco txtArtAgrupado, 3
+End Sub
+
+Private Sub txtArtAgrupado_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub txtArtAgrupado_LostFocus()
+    If Not PonerFormatoEntero(txtArtAgrupado) Then
+        txtArtAgrupado.Text = "1"
+        PonerFoco txtArtAgrupado
+    End If
+End Sub
+
 Private Sub txtMante_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -3414,4 +3855,25 @@ Private Sub ImprimeListadoTPV()
             If vCampos <> "" Then conn.Execute "insert into `tmpnseries` (`codusu`,`codartic`,`numlinea`,numserie,`numlinealb`,nummante) VALUES " & Mid(vCampos, 2) & ";"
 
 
+End Sub
+
+Private Sub CargaArticulosAgrupados()
+Dim ItmX As ListItem
+    Set miRsAux = New ADODB.Recordset
+    lwArticulosAgrupados.ListItems.Clear
+    cadWHERE2 = "select * from sarticAgrupado ORDER BY  idcaja"
+    miRsAux.Open cadWHERE2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+        Set ItmX = lwArticulosAgrupados.ListItems.Add()
+        ItmX.Text = miRsAux.Fields(0).Value 'Nº Serie
+        ItmX.SubItems(1) = miRsAux.Fields(1).Value 'Nº Factura
+        ItmX.SubItems(2) = miRsAux.Fields(2).Value 'Fecha Factura
+        ItmX.SubItems(3) = Format(miRsAux!totalmostrar, FormatoImporte) 'Fecha Vencimiento
+        
+        
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+    cadWHERE2 = ""
 End Sub

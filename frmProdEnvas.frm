@@ -1159,7 +1159,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public DatosADevolverBusqueda2 As String    'Tendra el nº de text que quiere que devuelva, empipados
+Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 Public Event DatoSeleccionado2(CadenaSeleccion As String)
 
 Private WithEvents frmB As frmBuscaGrid  'Form para busquedas
@@ -1365,7 +1365,7 @@ Dim PrimeraLin As Boolean 'Si se inserta la primera linea no esta creado el data
             
             If ModificaLineas = 1 Then 'INSERTAR lineas Pedidos
                 PrimeraLin = False
-                If data3.Recordset.EOF = True Then PrimeraLin = True
+                If Data3.Recordset.EOF = True Then PrimeraLin = True
                 If InsertarSubLineaCalidad Then
                     CargaGridCalidad True
                     BotonAnyadirSubLineaCalidad
@@ -1466,7 +1466,7 @@ Private Sub cmdCancelar_Click()
            
             If ModificaLineas = 1 Then 'INSERTAR
                 DataGrid2.AllowAddNew = False
-                If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
+                If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
             End If
             ModificaLineas = 0
             PonerBotonCabecera True
@@ -1560,7 +1560,7 @@ Private Sub BotonAnyadirSubLinea()
     PonerBotonCabecera False
     lblIndicador.Caption = "INSERTAR"
     
-    AnyadirLinea DataGrid2, data3
+    AnyadirLinea DataGrid2, Data3
     
     ModificarCantidadComponentes True
 
@@ -1682,7 +1682,7 @@ Dim vWhere As String
     'Si no estaba modificando lineas salimos
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 1 Then Exit Sub '1= Insertar
-    If data3.Recordset.EOF Then Exit Sub
+    If Data3.Recordset.EOF Then Exit Sub
     
   
     ModificaLineas = 2 'Modificar
@@ -1804,7 +1804,7 @@ Dim SQL As String
         CargaGrid2 DataGrid1, Data2
 '        SituarDataTrasEliminar Data2, NumRegElim
         SituarDataPosicion Me.Data2, NumRegElim, SQL
-        
+        If Data2.Recordset.EOF Then CargaGrid3 False
 '        CancelaADODC
     End If
     PonerFocoBtn Me.cmdRegresar
@@ -1826,29 +1826,29 @@ Dim SQL As String
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 1 Or ModificaLineas = 2 Then Exit Sub '1= Insertar, 2=Modificar
 
-    If data3.Recordset.EOF Then Exit Sub
+    If Data3.Recordset.EOF Then Exit Sub
             
     ModificaLineas = 3 'Eliminar
     SQL = "¿Seguro que desea eliminar la sublínea de envasado?     "
     SQL = SQL & vbCrLf
-    SQL = SQL & vbCrLf & "Artículo:  " & data3.Recordset!codarti2 & " - " & data3.Recordset!NomArtic
-    SQL = SQL & vbCrLf & "Lote:  " & DBLet(data3.Recordset!numLote)
-    SQL = SQL & vbCrLf & "Cantidad:  " & Format(DBLet(data3.Recordset!cantidad, "N"), FormatoCantidad2)
+    SQL = SQL & vbCrLf & "Artículo:  " & Data3.Recordset!codarti2 & " - " & Data3.Recordset!NomArtic
+    SQL = SQL & vbCrLf & "Lote:  " & DBLet(Data3.Recordset!numLote)
+    SQL = SQL & vbCrLf & "Cantidad:  " & Format(DBLet(Data3.Recordset!cantidad, "N"), FormatoCantidad2)
     
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = data3.Recordset.AbsolutePosition
+        NumRegElim = Data3.Recordset.AbsolutePosition
         SQL = " WHERE codartic = " & DBSet(Data2.Recordset!codArtic, "T")
         SQL = SQL & " and codigo=" & Data1.Recordset!codigo
         SQL = SQL & " and codalmac=" & Data2.Recordset!codAlmac
-        SQL = SQL & " AND codarti2 = " & DBSet(data3.Recordset!codarti2, "T")
+        SQL = SQL & " AND codarti2 = " & DBSet(Data3.Recordset!codarti2, "T")
         'Las sublineas
         conn.Execute "DELETE FROM slienvpr2 " & SQL
  
         ModificaLineas = 0
         CargaGrid3 True
 
-        SituarDataPosicion Me.data3, NumRegElim, SQL
+        SituarDataPosicion Me.Data3, NumRegElim, SQL
         
 
     End If
@@ -2033,11 +2033,15 @@ Private Sub Form_Load()
     
     'ASignamos un SQL al DATA1
     Data1.ConnectionString = conn
-    Data1.RecordSource = "Select * from " & NombreTabla & " where codigo=-1"
+    If DatosADevolverBusqueda = "" Then
+        Data1.RecordSource = "Select * from " & NombreTabla & " where false"
+    Else
+        Data1.RecordSource = "Select * from " & NombreTabla & " where codigo =" & DatosADevolverBusqueda
+    End If
     Data1.Refresh
     
     Me.Tag = "" 'Para que no carge los datos
-    If DatosADevolverBusqueda2 = "" Then
+    If DatosADevolverBusqueda = "" Then
         PonerModo 0
     Else
         If Data1.Recordset.EOF Then
@@ -2266,7 +2270,20 @@ Private Sub mnModificar_Click()
     ElseIf Modo = 7 Then 'Sublineas
         BotonModificarSubLineaCalidad
     
-    Else  'Modificar Pedido
+    Else  'Modificar
+    
+
+    
+        If Data1.Recordset.EOF Then Exit Sub
+        If Not IsNull(Data1.Recordset!fecproduccion) Then
+            MsgBox "Orden cerrada. No se puede modificar", vbExclamation
+            Exit Sub
+        End If
+
+
+
+    
+    
          If BLOQUEADesdeFormulario(Me) Then BotonModificar
     End If
 End Sub
@@ -2563,7 +2580,7 @@ Dim b As Boolean
     '=========================================
     b = (Modo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
-    If DatosADevolverBusqueda2 <> "" Then
+    If DatosADevolverBusqueda <> "" Then
         cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
@@ -2765,7 +2782,16 @@ End Function
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     
+    If Button.Index = 10 Or Button.Index = 11 Then
     
+        If Data1.Recordset.EOF Then Exit Sub
+        If Not IsNull(Data1.Recordset!fecproduccion) Then
+            MsgBox "Orden cerrada. No se puede modificar", vbExclamation
+            Exit Sub
+        End If
+
+    End If
+
     
     Select Case Button.Index
         Case 1  'Buscar
@@ -3127,12 +3153,12 @@ Dim SQL As String
     SQL = " sartic,slienvpr2 left join sprove on slienvpr2.codprove = sprove.codprove" & SQL
     SQL = " Select codarti2,nomartic,numlote,slienvpr2.codprove,nomprove,cantidad  from " & SQL
 
-    data3.ConnectionString = conn
-    data3.RecordSource = SQL
-    data3.Refresh
+    Data3.ConnectionString = conn
+    Data3.RecordSource = SQL
+    Data3.Refresh
     If DataGrid2.DataSource Is Nothing Then DataGrid2.ClearFields
         
-    Set DataGrid2.DataSource = data3
+    Set DataGrid2.DataSource = Data3
     DataGrid2.RowHeight = 290
     DataGrid2.Columns(0).Caption = "Codigo"
     DataGrid2.Columns(0).Width = 1700
@@ -3634,7 +3660,7 @@ Private Function PedidoConInstalaciones() As Boolean
 'Comprobar si en las lineas del Pedido hay algun articulo que sea Instalacion
 'Si no hay niguna linea que sea instalacion no se imprimira la Orden de Instalacion
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EInstalac
 
@@ -3645,15 +3671,15 @@ Dim RS As ADODB.Recordset
     SQL = SQL & " sfamia ON sartic.codfamia=sfamia.codfamia "
     SQL = SQL & " WHERE scaped.numpedcl = " & Val(Text1(0).Text) & " And sfamia.instalac = 1"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Rs.EOF Then
         PedidoConInstalaciones = False
     Else
         PedidoConInstalaciones = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 EInstalac:
     If Err.Number <> 0 Then MuestraError Err.Number, "Comprobar si hay Articulos que son Instalaciones.", Err.Description
@@ -3756,7 +3782,7 @@ Dim SQL As String
     SQL = SQL & " WHERE codartic = " & DBSet(Data2.Recordset!codArtic, "T")
     SQL = SQL & " and codigo=" & Data1.Recordset!codigo
     SQL = SQL & " and codalmac=" & Data2.Recordset!codAlmac
-    SQL = SQL & " and codarti2=" & DBSet(data3.Recordset!codarti2, "T")
+    SQL = SQL & " and codarti2=" & DBSet(Data3.Recordset!codarti2, "T")
     conn.Execute SQL
     
     
@@ -3827,7 +3853,7 @@ Dim RN As ADODB.Recordset
     If ModificaLineas = 2 Then
         Set RN = New ADODB.Recordset
         'Vere si existe el lote en envasado
-        SQL = "Select * from sliordpr where codartic = " & DBSet(data3.Recordset!codarti2, "T")
+        SQL = "Select * from sliordpr where codartic = " & DBSet(Data3.Recordset!codarti2, "T")
         SQL = SQL & " AND numlote = " & DBSet(txtComponentes(0).Text, "T", "N")
         SQL = SQL & " and codalmac=" & Data2.Recordset!codAlmac
         RN.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -3853,14 +3879,26 @@ Dim RN As ADODB.Recordset
     
     
     If Not LoteEncontrado Then
-        SQL = "INSERT INTO slienvprcalidad"
-        SQL = SQL & "(codigo,codalmac,codartic,codarti2,codigoensayo,especificaciones,resultado,conforme) "
-        SQL = SQL & "select " & Val(Text1(0).Text) & ", " & Val(Data2.Recordset!codAlmac) & ","
-        SQL = SQL & " sarti1.codartic,codarti1,codigoensayo,especificaciones,'',0"
-        SQL = SQL & " FROM   sarti1 INNER JOIN sarti7 ON sarti1.codarti1 = sarti7.codArtic "
-        SQL = SQL & " WHERE sarti1.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
-        SQL = SQL & " AND sarti1.codarti1 = " & DBSet(data3.Recordset!codarti2, "T")
-        conn.Execute SQL
+        
+            SQL = ""
+            If Data2.Recordset.EOF Then
+                SQL = "N"
+            Else
+                If Data3.Recordset.EOF Then SQL = "N"
+            End If
+            
+            If SQL = "" Then
+                
+                SQL = "INSERT INTO slienvprcalidad"
+                SQL = SQL & "(codigo,codalmac,codartic,codarti2,codigoensayo,especificaciones,resultado,conforme) "
+                SQL = SQL & "select " & Val(Text1(0).Text) & ", " & Val(Data2.Recordset!codAlmac) & ","
+                SQL = SQL & " sarti1.codartic,codarti1,codigoensayo,especificaciones,'',0"
+                SQL = SQL & " FROM   sarti1 INNER JOIN sarti7 ON sarti1.codarti1 = sarti7.codArtic "
+                SQL = SQL & " WHERE sarti1.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
+                SQL = SQL & " AND sarti1.codarti1 = " & DBSet(Data3.Recordset!codarti2, "T")
+                conn.Execute SQL
+            End If
+        
 
     End If
 End Sub
@@ -3877,7 +3915,7 @@ Dim i As Integer
     
     If visible Then
         For i = 0 To 3
-            If data3.Recordset.EOF Then
+            If Data3.Recordset.EOF Then
                 Me.txtComponentes(i).Top = DataGrid2.Top + DataGrid2.RowTop(0) + 10
             Else
                 Me.txtComponentes(i).Top = DataGrid2.Top + DataGrid2.RowTop(DataGrid2.Row) + 10

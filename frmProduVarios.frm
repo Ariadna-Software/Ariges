@@ -81,7 +81,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public opcion As Byte
+Public Opcion As Byte
     '0  .-Cierrer de una orden de produccion
     '1 .-  "             "        envasado
 Public Intercambio As String
@@ -100,7 +100,7 @@ End Sub
 Private Sub cmdCierreOrdProd_Click()
     If txtFecha(0).Text = "" Then Exit Sub
     cad = "¿Seguro que desea cerrar la orden de "
-    If opcion = 0 Then
+    If Opcion = 0 Then
         cad = cad & "producción"
     Else
         cad = cad & "envasado"
@@ -121,13 +121,13 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
     FrCierreOrdenProduccion.visible = False
     limpiar Me
-    i = opcion
-    Select Case opcion
+    i = Opcion
+    Select Case Opcion
     Case 0, 1
         PonerFrameVisible FrCierreOrdenProduccion
         Me.Caption = "Cierre orden producción"
         lbFec(0).Caption = "Cod:   " & RecuperaValor(Intercambio, 1) & "   " & RecuperaValor(Intercambio, 2) & "   "
-        If opcion = 0 Then
+        If Opcion = 0 Then
             lbFec(0).Caption = lbFec(0).Caption & "PROD"
         Else
             lbFec(0).Caption = lbFec(0).Caption & "Envasado"
@@ -196,7 +196,7 @@ Dim vCStock As CStock
 Dim b As Boolean
 Dim tabla As String
     
-    If opcion = 0 Then
+    If Opcion = 0 Then
         tabla = "sliordpr"
     Else
         tabla = "slienvpr"
@@ -274,7 +274,7 @@ Dim tabla As String
         
             If vCStock.MueveStock Then
                 If SoloComprobar Then
-                    b = vCStock.MoverStock(False, False)
+                    b = vCStock.MoverStock(False, False, True)
                 Else
                     b = vCStock.ActualizarStock(False)
                 End If
@@ -308,7 +308,7 @@ Dim tabla As String
     'Acutailizaremos algnas cosas como la fecha de baja
     If Not SoloComprobar Then
         conn.CommitTrans
-        If opcion = 0 Then
+        If Opcion = 0 Then
             cad = "sordprod"
         Else
             cad = "senvprod"
@@ -337,20 +337,20 @@ Dim CantidadNecesaria As Currency
     On Error Resume Next
 
     vCStock.tipoMov = TipoM
-    If opcion = 0 Then
+    If Opcion = 0 Then
         vCStock.DetaMov = "PRO"
     Else
         vCStock.DetaMov = "PRE"
     End If
     vCStock.Trabajador = PonerTrabajadorConectado(cad)
     vCStock.Documento = RecuperaValor(Intercambio, 1)
-    vCStock.Fechamov = txtFecha(0).Text '
+    vCStock.FechaMov = txtFecha(0).Text '
     
    
     vCStock.codArtic = miRsAux!codarti2
     vCStock.codAlmac = CInt(miRsAux!codAlmac)
-    CantidadNecesaria = miRsAux!Cantidad
-    vCStock.Cantidad = CSng(CantidadNecesaria)
+    CantidadNecesaria = miRsAux!cantidad
+    vCStock.cantidad = CSng(CantidadNecesaria)
     vCStock.Importe = 0
     vCStock.LineaDocu = 0
 

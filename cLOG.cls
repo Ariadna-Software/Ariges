@@ -64,6 +64,7 @@ Option Explicit
 '       34 .- Eliminar albaran
 '       35 .- Tabla numeros de lote. Modificar
 '       36 .- Cambio agente pedido
+'       37 .- Eliminar linea albaran
 Public Function Insertar(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String) As Boolean
 Dim SQL As String
 
@@ -129,6 +130,7 @@ Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
     ListaAcciones.Add "34|Eliminar albaran|"
     ListaAcciones.Add "35|Modificar numero lote|"
     ListaAcciones.Add "36|Cambio agente pedido|"
+    ListaAcciones.Add "37|Eliminar linea albaran|"
     DevuelveAcciones = True
     Exit Function
 EDevuelveAcciones:

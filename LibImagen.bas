@@ -428,7 +428,7 @@ Public TotalTipos As Integer   'Menos 1. Es decir, si hay tres tipos la var vale
 ''Para que no tenga que hacer cada vez el select, y sabiendo que casi todo son letras y numero
 ''Para saber si lo tenemos que modificar
 ''comprobaremos que el ASC es mayor 165 para saber si hay que hacer cambios, o no
-''If InStr(1, l, "CAMPA") Then Stop
+''If InStr(1, l, "CAMPA") Then
 'For I = 1 To Len(L)
 '    C = Mid(L, I, 1)
 '    J = Asc(C)
@@ -634,7 +634,7 @@ Public TotalTipos As Integer   'Menos 1. Es decir, si hay tres tipos la var vale
 
 Public Sub PonerArrayTiposMensaje()
 Dim L As Long
-Dim Fin As Integer
+Dim fin As Integer
 Dim i As Integer
 Dim J As Integer
 Dim Cortar11 As String
@@ -647,19 +647,19 @@ Dim Cortar11 As String
     TotalTipos = 0
     Cortar11 = "Select count(*) from mailtipo"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cortar11, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Fin = 0
-    If Not miRsAux.EOF Then Fin = DBLet(miRsAux.Fields(0), "N")
+    miRsAux.Open Cortar11, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    fin = 0
+    If Not miRsAux.EOF Then fin = DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
     
-    If Fin = 0 Then Exit Sub
+    If fin = 0 Then Exit Sub
     
     
-    ReDim ArrayTipoMen(Fin)
-    TotalTipos = Fin
+    ReDim ArrayTipoMen(fin)
+    TotalTipos = fin
     
     Cortar11 = "Select * from mailtipo order by tipo "
-    miRsAux.Open Cortar11, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Cortar11, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     J = 0
     i = 0
     
@@ -668,11 +668,11 @@ Dim Cortar11 As String
         
         If miRsAux!Tipo - J > 1 Then
             J = J + 1
-            For Fin = J To miRsAux!Tipo - 1
-                ArrayTipoMen(Fin).Color = 0
-                ArrayTipoMen(Fin).Descripcion = ""
-                ArrayTipoMen(Fin).Icono = 0
-            Next Fin
+            For fin = J To miRsAux!Tipo - 1
+                ArrayTipoMen(fin).Color = 0
+                ArrayTipoMen(fin).Descripcion = ""
+                ArrayTipoMen(fin).Icono = 0
+            Next fin
             i = miRsAux!Tipo
         End If
         

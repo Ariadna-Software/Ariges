@@ -908,6 +908,15 @@ Dim Documento As String
                 .hcoFechaMov = lw1.SelectedItem.Text
                 .Show vbModal
             End With
+    Case "PRO"
+    
+        frmProdOrden.DatosADevolverBusqueda = lw1.SelectedItem.Tag
+        frmProdOrden.Show vbModal
+    
+    Case "PRE"
+        frmProdEnvas.DatosADevolverBusqueda = lw1.SelectedItem.Tag
+        frmProdEnvas.Show vbModal
+    
     End Select
 
     Screen.MousePointer = vbDefault
@@ -1379,7 +1388,7 @@ Dim Nombre As String
     'cadTraba
 
     Select Case movim
-        Case "TRA", "REG", "DFI", "ALI"
+        Case "TRA", "REG", "DFI", "ALI", "PRO", "PRE"
             If Not EstaEnCadenas(codigo, 1, Nombre) Then
                 'Obtener nombre de la tabla de trabajadores
                 Nombre = DevuelveDesdeBDNew(conAri, "straba", "nomtraba", "codtraba", CStr(codigo), "N")

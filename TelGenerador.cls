@@ -1518,7 +1518,7 @@ End Function
 
 Public Function calculaInformeDescuentos(mfichero As String) As Boolean
     Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Rs As ADODB.Recordset
     Dim rs2 As ADODB.Recordset
     Dim rs3 As ADODB.Recordset
     Dim i As Integer
@@ -1552,12 +1552,12 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
     SQL = "select * from telefono.descuentos_por_factura" & _
             " where fichero = " & mdbFac2.texto(mfichero) & _
             " and Codigo_de_descuento <> ''"
-    Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Set Rs = mdbFac2.cursor(SQL)
+    If Not Rs.EOF Then
         Reg = 0
-        RS.MoveFirst
-        While Not RS.EOF
+        Rs.MoveFirst
+        While Not Rs.EOF
             Reg = Reg + 1
             '-- Ya podemos dar de alta nuestro registro
             Id = tmpSiguienteID()
@@ -1565,14 +1565,14 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
             SQL = SQL & " values("
             SQL = SQL & mdbFac2.numero(Id) & ","
             SQL = SQL & mdbFac2.texto(mfichero) & ","
-            SQL = SQL & mdbFac2.texto(RS!Descripcion_de_descuento) & ","
-            SQL = SQL & mdbFac2.numero(RS!Porcentaje_descuento) & ","
-            SQL = SQL & mdbFac2.numero(RS!Importe) & ","
-            SQL = SQL & mdbFac2.numero(Abs(RS!Importe_Descuento)) & ")"
+            SQL = SQL & mdbFac2.texto(Rs!Descripcion_de_descuento) & ","
+            SQL = SQL & mdbFac2.numero(Rs!Porcentaje_descuento) & ","
+            SQL = SQL & mdbFac2.numero(Rs!Importe) & ","
+            SQL = SQL & mdbFac2.numero(Abs(Rs!Importe_Descuento)) & ")"
             mdbFac2.ejecutar SQL
             '-- Ahora buscamos las correspondencias para ver los descuentos que hacemos nosotros
             SQL = "select * from tel_relacion_descuentos" & _
-                    " where coddesctel = " & mdbFac2.texto(RS!Codigo_de_descuento)
+                    " where coddesctel = " & mdbFac2.texto(Rs!Codigo_de_descuento)
             Set rs2 = New ADODB.Recordset
             Set rs2 = mdbFac2.cursor(SQL)
             If Not rs2.EOF Then
@@ -1678,7 +1678,7 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
                     End If
                 Next i
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
     '-- Ya están actualizados todos los registros, ahora vamos a por los totales
@@ -1687,18 +1687,18 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
     SQL = "select sum(cop_base), sum(cop_importe), ID from tmp_inf_descuentos2"
     SQL = SQL & " where fichero = " & mdbFac2.texto(mfichero)
     SQL = SQL & " group by ID"
-    Set RS = mdbFac2.cursor(SQL)
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
+    Set Rs = mdbFac2.cursor(SQL)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
             SQL = "update tmp_inf_descuentos set "
             SQL = SQL & " cop_descripcion = 'TOTAL'" & ","
-            SQL = SQL & " cop_base = " & mdbFac2.numero(RS.Fields(0)) & ","
-            SQL = SQL & " cop_importe = " & mdbFac2.numero(RS.Fields(1))
-            SQL = SQL & " where ID = " & mdbFac2.numero(RS.Fields(2))
+            SQL = SQL & " cop_base = " & mdbFac2.numero(Rs.Fields(0)) & ","
+            SQL = SQL & " cop_importe = " & mdbFac2.numero(Rs.Fields(1))
+            SQL = SQL & " where ID = " & mdbFac2.numero(Rs.Fields(2))
             SQL = SQL & " and fichero = " & mdbFac2.texto(mfichero)
             mdbFac2.ejecutar SQL
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
     '-- Por último los nombrecitos a ver si salen bien.
@@ -1710,7 +1710,7 @@ Private Function compruebaCoherenciaDescuentos() As Boolean
     '   son correctas, fundamentalmente si el descuento pertenece a un grupo que todos
     '   los tráficos asignados a ese grupo estan en el mismo registro de relación
     Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Rs As ADODB.Recordset
     Dim rs2 As ADODB.Recordset
     Dim i As Integer
     Dim C As String
@@ -1721,19 +1721,19 @@ Private Function compruebaCoherenciaDescuentos() As Boolean
     Grupo = 0
     '--
     SQL = "select * from tel_relacion_descuentos"
-    Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
-            If RS!Tipo = "T" Then ' solo tiene sentido en el caso de tráfico
+    Set Rs = New ADODB.Recordset
+    Set Rs = mdbFac2.cursor(SQL)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
+            If Rs!Tipo = "T" Then ' solo tiene sentido en el caso de tráfico
                 '-- descomponemos la relación de tipos de tráfico asociada
-                For i = 1 To Len(RS!reldescpro)
-                    C = Mid(RS!reldescpro, i, 1)
+                For i = 1 To Len(Rs!reldescpro)
+                    C = Mid(Rs!reldescpro, i, 1)
                     If C = "/" Then
                         '-- buscammos si pertenece a un grupo y a cual
                         SQL = "select * from tel_desc_consumos" & _
-                                " where CodTipoTrafico = " & mdbFac2.texto(RS!coddesctel)
+                                " where CodTipoTrafico = " & mdbFac2.texto(Rs!coddesctel)
                         Set rs2 = New ADODB.Recordset
                         Set rs2 = mdbFac2.cursor(SQL)
                         If Not rs2.EOF Then
@@ -1748,46 +1748,46 @@ Private Function compruebaCoherenciaDescuentos() As Boolean
                     End If
                 Next i
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
-    Set RS = Nothing
+    Set Rs = Nothing
     Set rs2 = Nothing
 End Function
 
 Private Function tmpSiguienteID() As Long
-    Dim RS As ADODB.Recordset
+    Dim Rs As ADODB.Recordset
     Dim SQL As String
     SQL = "select max(ID) from tmp_inf_descuentos"
-    Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
-    If Not IsNull(RS.Fields(0)) Then
-        tmpSiguienteID = RS.Fields(0) + 1
+    Set Rs = New ADODB.Recordset
+    Set Rs = mdbFac2.cursor(SQL)
+    If Not IsNull(Rs.Fields(0)) Then
+        tmpSiguienteID = Rs.Fields(0) + 1
     Else
         tmpSiguienteID = 1
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 Private Function tmpsiguienteID2(Id As Long) As Long
-    Dim RS As ADODB.Recordset
+    Dim Rs As ADODB.Recordset
     Dim SQL As String
     SQL = "select max(ID2) from tmp_inf_descuentos2" & _
             " where ID = " & mdbFac2.numero(Id)
-    Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
-    If Not IsNull(RS.Fields(0)) Then
-        tmpsiguienteID2 = RS.Fields(0) + 1
+    Set Rs = New ADODB.Recordset
+    Set Rs = mdbFac2.cursor(SQL)
+    If Not IsNull(Rs.Fields(0)) Then
+        tmpsiguienteID2 = Rs.Fields(0) + 1
     Else
         tmpsiguienteID2 = 1
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
     
 Private Sub Carga_Inf_Nombres(mfichero As String)
-    Dim RS As ADODB.Recordset
+    Dim Rs As ADODB.Recordset
     Dim rs2 As ADODB.Recordset
     Dim rs3 As ADODB.Recordset
     Dim SQL As String
@@ -1802,21 +1802,21 @@ Private Sub Carga_Inf_Nombres(mfichero As String)
     mdbFac2.ejecutar SQL
     '-- leemos secuencialmente los valores
     SQL = "select * from tel_relacion_nombres"
-    Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
+    Set Rs = New ADODB.Recordset
+    Set Rs = mdbFac2.cursor(SQL)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
             SQL = "select * from telefono.descuentos_por_factura" & _
                     " where fichero = " & mdbFac2.texto(mfichero) & _
-                    " and Codigo_de_descuento = " & mdbFac2.texto(RS!coddesctel)
+                    " and Codigo_de_descuento = " & mdbFac2.texto(Rs!coddesctel)
             Set rs2 = New ADODB.Recordset
             Set rs2 = mdbFac2.cursor(SQL)
             If Not rs2.EOF Then n1 = rs2!Descripcion_de_descuento Else n1 = ""
-            For i = 1 To Len(RS!reldescpro)
-                C = Mid(RS!reldescpro, i, 1)
+            For i = 1 To Len(Rs!reldescpro)
+                C = Mid(Rs!reldescpro, i, 1)
                 If C = "/" Then
-                    Select Case RS!Tipo
+                    Select Case Rs!Tipo
                         Case "T"
                             SQL = "select * from telefono.detalle_de_llamadas " & _
                                     " where fichero = " & mdbFac2.texto(mfichero) & _
@@ -1836,7 +1836,7 @@ Private Sub Carga_Inf_Nombres(mfichero As String)
                     End Select
                     '-- Y ahora damos de alta el registro correspondiente
                     If N2 <> "" And Not IsNull(N2) Then
-                        If RS!Tipo = "T" Then
+                        If Rs!Tipo = "T" Then
                             SQL = "select sum(a.Importe)" & _
                                    " from tel_lin_factura_consumos as a, tel_cab_factura as b" & _
                                    " where b.fichero = " & mdbFac2.texto(mfichero) & _
@@ -1870,7 +1870,7 @@ Private Sub Carga_Inf_Nombres(mfichero As String)
                 End If
             Next i
             n1 = ""
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
 End Sub
@@ -1943,7 +1943,7 @@ End Sub
 
 
 Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora As Byte)
-    Dim RS As ADODB.Recordset
+    Dim Rs As ADODB.Recordset
     Dim cad As String
     Dim Aux As String
     Dim Impor As Currency
@@ -1959,7 +1959,7 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
     Espera 0.25
     
     'LLAMADAS DE COOPERATIVA
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
     If Operadora = 1 Then
         'SOLO PARA MOVISTAR. Las llamadas entre telefonos en ORANGE, ya vienen a 0
@@ -1969,16 +1969,16 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
      If mvarConceptosQueSonLlamadas <> "" Then
          cad = "select Numero_llamado from telefono.detalle_de_llamadas where fichero='" & mFicheroCorto & "' and Numero_llamado<>'' and"
          cad = cad & " Numero_llamado in (select idtelefono from sclientfno where operador = " & Operadora & ") group by 1"
-         Set RS = New ADODB.Recordset
-         RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-         While Not RS.EOF
-             L.Caption = RS.Fields(0)
+         Set Rs = New ADODB.Recordset
+         Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+         While Not Rs.EOF
+             L.Caption = Rs.Fields(0)
              L.Refresh
              
              
              'Primero el importl
              cad = "update telefono.detalle_de_llamadas set libre=importe"
-             cad = cad & " WHERE Numero_llamado ='" & RS.Fields(0) & "' AND fichero='" & mFicheroCorto & "'"
+             cad = cad & " WHERE Numero_llamado ='" & Rs.Fields(0) & "' AND fichero='" & mFicheroCorto & "'"
              cad = cad & " and importe<>0 AND libre=''"
              cad = cad & " and Codigo_de_trafico in (" & mvarConceptosQueSonLlamadas & ")"
              conn.Execute cad
@@ -1986,7 +1986,7 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
            
              'Me estoy guardando el importe anterior en LIBRE
              cad = "update telefono.detalle_de_llamadas set importe=0"
-             cad = cad & " WHERE Numero_llamado ='" & RS.Fields(0) & "' AND fichero='" & mFicheroCorto & "'"
+             cad = cad & " WHERE Numero_llamado ='" & Rs.Fields(0) & "' AND fichero='" & mFicheroCorto & "'"
              cad = cad & " and importe<>0 "
              cad = cad & " and Codigo_de_trafico in (" & mvarConceptosQueSonLlamadas & ")"
              conn.Execute cad
@@ -1994,9 +1994,9 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
              
              
          
-             RS.MoveNext
+             Rs.MoveNext
          Wend
-         RS.Close
+         Rs.Close
          
      End If
     End If
@@ -2072,7 +2072,7 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
             Aux = Aux & ",0,0,sum(importe) totimpor,'' FROM telefono.detalle_de_llamadas WHERE  Fichero =" & DBSet(mFicheroCorto, "T")
             Aux = Aux & " and Codigo_de_trafico in (" & mvarConceptosQueSonLlamadas & ")  and fecha<>'0000'"
             Aux = Aux & " group by Codigo_de_trafico,Numero_de_telefono order by Numero_de_telefono,Codigo_de_trafico"
-            RS.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             Aux = "INSERT INTO telefono.resumen_de_llamadas (Fichero,Tipo_de_registro,Secuencia_de_registro,Numero_de_factura,"
             Aux = Aux & "Numero_de_prefactura,Numero_de_telefono,Numero_de_extension,Fecha_inicio_periodo,"
@@ -2080,13 +2080,13 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
             Aux = Aux & "Unidad_de_medida,Cantidad_medida,Cantidad_franquiciada,Importe_franquiciado,Importes,Libre)"
             
             cad = "" 'cuidado. Esta variable estaba para el numero de factura telefonia, fechainic y fin
-            While Not RS.EOF
+            While Not Rs.EOF
                 Aux2 = ", ("
                 For i = 0 To 12
-                    Aux2 = Aux2 & DBSet(RS.Fields(i), "T", "N") & ","
+                    Aux2 = Aux2 & DBSet(Rs.Fields(i), "T", "N") & ","
                 Next
                             
-                Impor = DBLet(RS!Calculados, "N")
+                Impor = DBLet(Rs!Calculados, "N")
                 imp2 = Impor \ 60
                 Impor = Impor - (imp2 * 60)
                 Impor = imp2 + (Round(Impor / 100, 2))
@@ -2095,7 +2095,7 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
                 Aux2 = Aux2 & DBSet(Impor, "N")
                 
                 ',0,0,sum(importe),''
-                Aux2 = Aux2 & ",0,0," & DBSet(RS!totimpor, "N") & ",''"
+                Aux2 = Aux2 & ",0,0," & DBSet(Rs!totimpor, "N") & ",''"
                 
                 cad = cad & Aux2 & ")"
                 
@@ -2106,9 +2106,9 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
                     conn.Execute cad
                     cad = ""
                 End If
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
             If cad <> "" Then
                 cad = Mid(cad, 2)
@@ -2148,7 +2148,7 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
     
     
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
 End Function
@@ -2508,7 +2508,7 @@ Dim C As String
 End Sub
 
 
-Private Function DevuelveACcionesTipo(Accion As Byte, mes As Byte, ByRef RS As ADODB.Recordset, QueOperador As Byte) As String
+Private Function DevuelveACcionesTipo(Accion As Byte, mes As Byte, ByRef Rs As ADODB.Recordset, QueOperador As Byte) As String
 Dim C As String
     C = "Select * from tel_descuentoscuotas WHERE accion=" & Accion
     If Accion > 1 Then C = C & " AND Mensual =" & mes  'si es cuota entera o prrorateable
@@ -2518,13 +2518,13 @@ Dim C As String
 '    Else
 '        C = C & "1"
 '    End If
-    RS.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     C = ""
-    While Not RS.EOF
-        C = C & ", " & DBSet(RS!codigo_de_cuota, "T")
-        RS.MoveNext
+    While Not Rs.EOF
+        C = C & ", " & DBSet(Rs!codigo_de_cuota, "T")
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
   
     If C <> "" Then DevuelveACcionesTipo = Mid(C, 2) 'quito la primera coma
 End Function
@@ -4520,7 +4520,7 @@ Dim i As Integer
     i = 0
     While Not RTef.EOF
             
-            'If RTef!Telefono = "630984819" Then Stop
+            'If RTef!Telefono = "630984819" Then St op
             
             
             i = i + 1

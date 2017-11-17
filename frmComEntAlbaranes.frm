@@ -551,32 +551,32 @@ Begin VB.Form frmComEntAlbaranes
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmComEntAlbaranes.frx":02B7
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(44)"
-      Tab(1).Control(1)=   "Label1(45)"
-      Tab(1).Control(2)=   "Label1(1)"
-      Tab(1).Control(3)=   "imgBuscar(4)"
-      Tab(1).Control(4)=   "Label1(3)"
-      Tab(1).Control(5)=   "imgFecha(1)"
-      Tab(1).Control(6)=   "imgBuscar(8)"
-      Tab(1).Control(7)=   "Label1(4)"
-      Tab(1).Control(8)=   "imgFecha(2)"
-      Tab(1).Control(9)=   "Label1(47)"
-      Tab(1).Control(10)=   "Label1(48)"
-      Tab(1).Control(11)=   "Text1(15)"
-      Tab(1).Control(12)=   "Text1(16)"
-      Tab(1).Control(13)=   "Text1(17)"
-      Tab(1).Control(14)=   "Text1(18)"
-      Tab(1).Control(15)=   "Text1(19)"
-      Tab(1).Control(16)=   "Text1(21)"
-      Tab(1).Control(17)=   "Text2(21)"
-      Tab(1).Control(18)=   "FrameHco"
-      Tab(1).Control(19)=   "Text1(25)"
-      Tab(1).Control(20)=   "chkDocArchi"
-      Tab(1).Control(21)=   "Text2(26)"
-      Tab(1).Control(22)=   "Text1(26)"
-      Tab(1).Control(23)=   "Text1(27)"
-      Tab(1).Control(24)=   "Text1(28)"
-      Tab(1).Control(25)=   "Text1(29)"
+      Tab(1).Control(0)=   "Text1(29)"
+      Tab(1).Control(1)=   "Text1(28)"
+      Tab(1).Control(2)=   "Text1(27)"
+      Tab(1).Control(3)=   "Text1(26)"
+      Tab(1).Control(4)=   "Text2(26)"
+      Tab(1).Control(5)=   "chkDocArchi"
+      Tab(1).Control(6)=   "Text1(25)"
+      Tab(1).Control(7)=   "FrameHco"
+      Tab(1).Control(8)=   "Text2(21)"
+      Tab(1).Control(9)=   "Text1(21)"
+      Tab(1).Control(10)=   "Text1(19)"
+      Tab(1).Control(11)=   "Text1(18)"
+      Tab(1).Control(12)=   "Text1(17)"
+      Tab(1).Control(13)=   "Text1(16)"
+      Tab(1).Control(14)=   "Text1(15)"
+      Tab(1).Control(15)=   "Label1(48)"
+      Tab(1).Control(16)=   "Label1(47)"
+      Tab(1).Control(17)=   "imgFecha(2)"
+      Tab(1).Control(18)=   "Label1(4)"
+      Tab(1).Control(19)=   "imgBuscar(8)"
+      Tab(1).Control(20)=   "imgFecha(1)"
+      Tab(1).Control(21)=   "Label1(3)"
+      Tab(1).Control(22)=   "imgBuscar(4)"
+      Tab(1).Control(23)=   "Label1(1)"
+      Tab(1).Control(24)=   "Label1(45)"
+      Tab(1).Control(25)=   "Label1(44)"
       Tab(1).ControlCount=   26
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmComEntAlbaranes.frx":02D3
@@ -3770,6 +3770,13 @@ Dim cad As String
         'a que es campo clave en scafpc1
         cad = " year(fechaalb)=" & Year(CDate(Text1(1).Text)) & " AND numalbar=" & DBSet(Text1(0).Text, "T") & " AND codprove"
         cad = DevuelveDesdeBD(conAri, "fechaalb", "scaalp", cad, Text1(4).Text, "N")
+        
+        If cad = "" Then
+            cad = " year(fechaalb)=" & Year(CDate(Text1(1).Text)) & " AND numalbar=" & DBSet(Text1(0).Text, "T") & " AND codprove"
+            cad = DevuelveDesdeBD(conAri, "fechaalb", "scafpa", cad, Text1(4).Text, "N")
+            If cad <> "" Then cad = cad & " (Facturado)"
+        End If
+        
         If cad <> "" Then
             cad = Text1(5).Text & vbCrLf & "con fecha " & cad
             cad = "Ya existe el albaran: " & Text1(0).Text & " del proveedor " & vbCrLf & Text1(4).Text & " " & cad

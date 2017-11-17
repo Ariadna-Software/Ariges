@@ -813,8 +813,8 @@ Dim FinEspera As Boolean
     Set RN = New ADODB.Recordset
     cad = "Select * from tmpImpresionAuxliar WHERE codusu = " & vUsu.codigo
     cad = cad & " AND lcase(right(fichero,3))='pdf'"
-    RN.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    
+    RN.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Screen.MousePointer = vbHourglass
     
     'If Dir(App.Path & "\temp\*.pdf", vbArchive) <> "" Then Kill App.Path & "\temp\*.pdf"
     If Dir(App.Path & "\temp\" & Format(vUsu.codigo, "0000"), vbDirectory) = "" Then MkDir App.Path & "\temp\" & Format(vUsu.codigo, "0000")
@@ -879,33 +879,52 @@ Dim FinEspera As Boolean
         If J > 1 Then
             J = J + 1
             Destino = App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\" & J & ".pdf"
+            Destino = mrpt.ExportOptions.DiskFileName
+            
+            
             cad = """" & App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\*.pdf"""
             cad = """" & App.Path & "\pdftk.exe"" " & cad & " cat output """ & Destino & """ verbose"
                     
             Shell cad, vbNormalFocus
         End If
         Screen.MousePointer = vbHourglass
-        cad = App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\" & J & ".pdf"
+        'cad = App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\" & J & ".pdf"
+       '
+       ' J = 1
+       ' Do
+       '     If Dir(cad, vbArchive) = "" Then
+       '         Screen.MousePointer = vbHourglass
+       '         DoEvents
+       '         Espera 0.8
+       '         J = J + 1
+       '     Else
+       '         Espera 0.1
+       '         If CopiarFichero(cad) Then
+       '             J = 35
+       '         Else
+       '             J = 34
+       '         End If
+       '     End If
+       ' Loop Until J > 30
         
-        J = 1
+        J = 0
+        cad = ""
         Do
-            If Dir(cad, vbArchive) = "" Then
-                Screen.MousePointer = vbHourglass
-                DoEvents
-                Espera 0.8
-                J = J + 1
+            J = J + 1
+            If Dir(Destino, vbArchive) = "" Then
+                Espera 1
+            
+                If J > 120 Then cad = "NO"
             Else
-                Espera 0.1
-                If CopiarFichero(cad) Then
-                    J = 35
-                Else
-                    J = 34
-                End If
+                cad = "SI"
             End If
-        Loop Until J > 30
-        
-        
-        
+        Loop Until cad <> ""
+        If cad = "SI" Then
+            J = 36             'ok
+        Else
+            J = 34
+        End If
+         
     Else
         'NO hay ningun pdf para exportar. Solo exportará el docum.pdf
         cad = mrpt.ExportOptions.DiskFileName

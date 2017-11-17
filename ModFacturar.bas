@@ -1321,8 +1321,15 @@ Dim ElDepartamento As String
     If SoloID <> "" Then
         'Es solo UNO.
         'Si factura por departamento, la factura ira a ese departamento
-        Aux = ""
-        b = FacturarRentingCliDpto(cadSQL, Fecfact, OpeFact, banPr, Lbl, CentroCoste, SoloID, PeriodoFacturar, ListFactu, Aux)
+        
+        
+        Aux = SoloID & " AND 1"
+        PorDep = DevuelveDesdeBD(conAri, "coddirec", "sclienrenting", Aux, "1")
+        
+        b = FacturarRentingCliDpto(cadSQL, Fecfact, OpeFact, banPr, Lbl, CentroCoste, SoloID, PeriodoFacturar, ListFactu, PorDep)
+        
+        PorDep = ""
+        
         
     Else
         ' '----------------------------------------
@@ -1536,7 +1543,7 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
             vFactu.Telefono = vClien.TfnoClien
             vFactu.DirDpto = ""   'SE FACTURA A UN CLIENTE, no a al departamento
             vFactu.NombreDirDpto = ""
-        
+            
             vFactu.Agente = vClien.Agente
             'forma de pago del mantenimiento
             vFactu.ForPago = vClien.ForPago
@@ -1556,7 +1563,26 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
                 Aux2 = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", Aux2, PorDepartamento)
                 vFactu.DirDpto = PorDepartamento
                 vFactu.NombreDirDpto = Aux2
-           
+                
+                
+                
+                
+                If vParamAplic.HayDeparNuevo = 1 Then
+                    'Son departamentos. La cuenta del cliente del banco debe coger la del departamento, SI TIENE
+                    Aux2 = "concat(coalesce(iban,''),'|',coalesce(codbanco,''),'|',coalesce(codsucur,''),'|',coalesce(digcontr,''),'|',coalesce(cuentaba,''),'|') "
+                    Aux2 = DevuelveDesdeBD(conAri, Aux2, "sdirec", "codclien =" & vFactu.Cliente & " AND coddirec  ", vFactu.DirDpto)
+                    If Aux2 <> "|||||" Then
+                        'Tiene algun valor
+                        If Trim(RecuperaValor(Aux2, 1)) <> "" And Trim(RecuperaValor(Aux2, 5)) <> "" Then
+                            'Por lo menos tiene la cuenta banc e IBAN
+                            vFactu.Iban = DBLet(RecuperaValor(Aux2, 1), "T")
+                            vFactu.Banco = DBLet(RecuperaValor(Aux2, 2), "N")
+                            vFactu.Sucursal = DBLet(RecuperaValor(Aux2, 3), "N")
+                            vFactu.DigControl = DBLet(RecuperaValor(Aux2, 4), "T")
+                            vFactu.CuentaBan = DBLet(RecuperaValor(Aux2, 5), "T")
+                        End If
+                    End If
+                End If
             End If
             vFactu.Observacion = ""   'DBLet(RSmto!concefac, "T")
                 

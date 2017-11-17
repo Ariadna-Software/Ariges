@@ -10700,8 +10700,15 @@ Dim cad As String
     'Comprobare que no existe el albaran del cliente
      cad = " year(fechaalb) = " & Year(CDate(txtCodigo(49).Text)) & " AND numalbar=" & DBSet(txtCodigo(48).Text, "T") & " AND codprove"
      cad = DevuelveDesdeBD(conAri, "fechaalb", "scaalp", cad, CStr(codClien), "N")
+     
+     If cad = "" Then
+        cad = " year(fechaalb)=" & Year(CDate(txtCodigo(49).Text)) & " AND numalbar=" & DBSet(txtCodigo(48).Text, "T") & " AND codprove"
+        cad = DevuelveDesdeBD(conAri, "fechaalb", "scafpa", cad, CStr(codClien), "N")
+        If cad <> "" Then cad = cad & " (Facturado)"
+     End If
+     
      If cad <> "" Then
-        MsgBox "Ya existe para el proveedor el albaran indicado.  Fecha:" & cad, vbExclamation
+        MsgBox "Ya existe para el proveedor el albaran indicado." & vbCrLf & "Fecha:" & cad, vbExclamation
         Exit Sub
     End If
     

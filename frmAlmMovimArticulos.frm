@@ -725,7 +725,7 @@ Private Sub DataGrid1_DblClick()
 'Abrir el formulario del Mantenimiento del que viene el Movimiento
 'Se busca en histórico o en Form
 Dim SQL As String
-Dim NUmAlbar As String
+Dim NumAlbar As String
 Dim Codtipm As String
 
     Select Case Data2.Recordset!detamovi
@@ -763,16 +763,16 @@ Dim Codtipm As String
             End If
                 
             
-            NUmAlbar = Data2.Recordset!document
+            NumAlbar = Data2.Recordset!document
             Codtipm = Data2.Recordset!detamovi
             
             If Data2.Recordset!detamovi = "MAT" Then
                 Codtipm = Mid(Data2.Recordset!document, 1, 3)
-                NUmAlbar = Mid(Data2.Recordset!document, 4)
+                NumAlbar = Mid(Data2.Recordset!document, 4)
             End If
             
             'consultamos si existe el albaran en la tabla de albaranes: scaalb
-            SQL = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", Codtipm, "T", , "numalbar", NUmAlbar, "N")
+            SQL = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", Codtipm, "T", , "numalbar", NumAlbar, "N")
             If SQL <> "" Then 'existe el Albaran
                 If vParamAplic.TipoFormularioClientes = 0 Then
                          With frmFacEntAlbaranes2
@@ -791,7 +791,7 @@ Dim Codtipm As String
                          '   If EsNumerico(Data2.Recordset!document) Then
                          '       .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
                          '   Else
-                                .hcoCodMovim = NUmAlbar  ' Data2.Recordset!document
+                                .hcoCodMovim = NumAlbar  ' Data2.Recordset!document
                          '   End If
                             .hcoCodTipoM = Codtipm
                             .Show vbModal
@@ -804,7 +804,7 @@ Dim Codtipm As String
                     If EsNumerico(Data2.Recordset!document) Then
                         .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
                     Else
-                        .hcoCodMovim = NUmAlbar ' Data2.Recordset!document
+                        .hcoCodMovim = NumAlbar ' Data2.Recordset!document
                     End If
                     .hcoCodTipoM = Codtipm 'Data2.Recordset!detamovi
                     If Data2.Recordset!detamovi <> "MAT" Then .hcoFechaMov = Data2.Recordset!FechaMov
@@ -910,6 +910,14 @@ Dim Codtipm As String
                 .hcoFechaMov = Data2.Recordset!FechaMov
                 .Show vbModal
             End With
+            
+        Case "PRO"
+            frmProdOrden.DatosADevolverBusqueda = Data2.Recordset!document
+            frmProdOrden.Show vbModal
+    
+        Case "PRE"
+              frmProdEnvas.DatosADevolverBusqueda = Data2.Recordset!document
+              frmProdEnvas.Show vbModal
     End Select
 End Sub
 
@@ -960,7 +968,16 @@ Private Sub Form_Load()
     PrimeraVez = True
     
     NombreTabla = "smoval"
-    Ordenacion = " ORDER BY codartic," & NombreTabla & ".codalmac, fechamov desc, horamovi "
+        
+        
+    If vParamAplic.NumeroInstalacion = 2 Then
+        Ordenacion = " ORDER BY codartic,fechamov desc, horamovi ," & NombreTabla & ".codalmac "
+    Else
+        Ordenacion = " ORDER BY codartic," & NombreTabla & ".codalmac, fechamov desc, horamovi "
+    End If
+    
+    
+    
     
     'Vemos como esta guardado el valor del check
     chkVistaPrevia.Value = CheckValueLeer(Name)
@@ -1713,7 +1730,7 @@ Private Function PonerNombreCliente(codigo As Long, movim As String) As String
 Dim Nombre As String
 
     Select Case movim
-        Case "TRA", "REG", "DFI"
+        Case "TRA", "REG", "DFI", "PRO", "PRE"
             'Obtener nombre de la tabla de trabajadores
             Nombre = DevuelveDesdeBDNew(conAri, "straba", "nomtraba", "codtraba", CStr(codigo), "N")
             Label2.Caption = "Trabajador"
