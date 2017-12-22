@@ -50,22 +50,22 @@ End Function
 
 
 
-Public Function CalcularPuntosAlbaranCABEL(cadWhere As String, FechaAlbaran As Date) As Currency
+Public Function CalcularPuntosAlbaranCABEL(cadWhere As String, FechaAlbaran As Date, ByRef ImporteLineasTotal As String) As Currency
 Dim Rs As ADODB.Recordset
 Dim C As String
 Dim Importe As Currency
 
     On Error GoTo eCalcularPuntosAlbaran
     CalcularPuntosAlbaranCABEL = 0
-    
+    ImporteLineasTotal = ""
     If FechaAlbaran < vParamAplic.PtosFechaIncio Then Exit Function
         
     
-    C = "select sum(importel) from slialb,sartic,sfamia   WHERE slialb.codartic=sartic.codartic and sartic.codfamia="
-    C = C & "sfamia.codfamia AND sfamia.PtosPermiteCanje =1  AND "
+    C = "select sum(if( sfamia.PtosPermiteCanje =1,importel,0)),sum(importel) from slialb,sartic,sfamia   WHERE slialb.codartic=sartic.codartic and sartic.codfamia="
+    C = C & "sfamia.codfamia   AND "
     C = C & cadWhere
-    'El canje suma tambien
-    'C = C & " AND slialb.codartic<>" & DBSet(vParamAplic.PtosArticuloCanje, "T")
+    C = C & " AND slialb.codartic<>" & DBSet(vParamAplic.PtosArticuloCanje, "T")
+    
     
     Set Rs = New ADODB.Recordset
     Rs.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -73,6 +73,8 @@ Dim Importe As Currency
         If Not IsNull(Rs.Fields(0)) Then
             Importe = Rs.Fields(0) * vParamAplic.PtosAsignar
             CalcularPuntosAlbaranCABEL = Round2(Importe / vParamAplic.PtosImporteCalculo, 2)
+        
+            ImporteLineasTotal = DBLet(Rs.Fields(1), "N")
         End If
     End If
     Rs.Close

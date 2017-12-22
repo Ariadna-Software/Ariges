@@ -1705,7 +1705,7 @@ Dim InsertandoFAM As Boolean
         If exento_IVA < 2 Or exento_IVA = 4 Then    'Con IVA normal o RE   o Reducido
             'comprobar que si hay km de DESPLAZAMIENTO se añadan al tipo de IVA correspondiente
             If TotalKm > 0 Then
-                If despIVA = Rs!codigiva Then
+                If despIVA = Rs!Codigiva Then
                     vBruto = vBruto + ImporteL
                     TotBruto = TotBruto + ImporteL
                     conDesplaz = True
@@ -1713,14 +1713,14 @@ Dim InsertandoFAM As Boolean
             End If
         
             'comprobar si hay BONIFICACIONES que aplicar a la Factura
-            If IVABonif1 = Rs!codigiva Then
+            If IVABonif1 = Rs!Codigiva Then
                 vBruto = vBruto - TotBonif1
                 TotBruto = TotBruto - TotBonif1
-            ElseIf IVABonif2 = Rs!codigiva Then
+            ElseIf IVABonif2 = Rs!Codigiva Then
                 vBruto = vBruto - TotBonif2
                 TotBruto = TotBruto - TotBonif2
                 
-            ElseIf IVABonif3 = Rs!codigiva Then
+            ElseIf IVABonif3 = Rs!Codigiva Then
                 vBruto = vBruto - TotBonif3
                 TotBruto = TotBruto - TotBonif3
             End If
@@ -1754,8 +1754,8 @@ Dim InsertandoFAM As Boolean
             End If
             
             'Obtener el % de IVA
-            cadAux = Rs!codigiva    'Por si no tiene  RE o si teniendo RE no tiene el correspondiente
-            If exento_IVA = 1 Then cadAux = CStr(vParamAplic.DevuleveTipoIVA_RE(Rs!codigiva))
+            cadAux = Rs!Codigiva    'Por si no tiene  RE o si teniendo RE no tiene el correspondiente
+            If exento_IVA = 1 Then cadAux = CStr(vParamAplic.DevuleveTipoIVA_RE(Rs!Codigiva))
             TipoIVAAplicable = CInt(cadAux)
             
             If IVA_Antiguo And exento_IVA < 2 Then
@@ -1764,7 +1764,7 @@ Dim InsertandoFAM As Boolean
                     'Debido al cambio de IVA, los albaranes rectificativos podran ir en el IVA que llevaran en su momento
                     'Es decir, que aunque ahora sea al 18(a partir de Julio), para un albr rectifi podria ser
                     'con iva 16
-                    cadAux = CStr(vParamAplic.DevuelveTipoIVA_OLD(exento_IVA = 1, Rs!codigiva))
+                    cadAux = CStr(vParamAplic.DevuelveTipoIVA_OLD(exento_IVA = 1, Rs!Codigiva))
                     TipoIVAAplicable = CInt(cadAux)
             End If
             
@@ -1932,7 +1932,7 @@ Dim InsertandoFAM As Boolean
                 ImpIVA2 = ImpIva
                 
             Case 3 'IVA 3
-                TipoIVA3 = Rs!codigiva
+                TipoIVA3 = Rs!Codigiva
                 
                 BaseIVA3 = ImpBImIVA 'BASE IMPONIBLE
                 
@@ -3292,7 +3292,7 @@ Dim TipoA As String
     
     
     
-    
+    'TIPO 1 en slifaceu
     SQL = "INSERT INTO slifac_eu(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,tipo)"
             
     SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "codtipom as codtipoa, "
@@ -3303,7 +3303,7 @@ Dim TipoA As String
     conn.Execute SQL
     
     
-    'Lineas de venta con precioar
+    'Lineas de venta con precioar  TIPO 2 en slifaceu
     '----------------------------
     SQL = "INSERT INTO slifac_eu(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,tipo)"
     SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "slialb.codtipom as codtipoa, "
@@ -3322,7 +3322,7 @@ Dim TipoA As String
     
     
     
-    'Costes linea fac
+    'Costes linea fac.  TIPO 0
     'HORAS
     
     SQL = " sreloj left join stipor on sreloj.codtipor=stipor.codtipor"
@@ -3353,7 +3353,7 @@ Dim TipoA As String
     
     
     'Costes albaran provee
-    
+     
     
     TipoA = Replace(CadenaAlbaran, "scaalb.", "")
     TipoA = Replace(TipoA, "codtipom", "codtipomv")
@@ -3867,7 +3867,7 @@ Dim ImpDif As Currency
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     i = 1
     While Not Rs.EOF And i <= 3
-        SQL = DevuelveDesdeBDNew(conConta, "tiposiva", "porceiva", "codigiva", CStr(Rs!codigiva), "N")
+        SQL = DevuelveDesdeBDNew(conConta, "tiposiva", "porceiva", "codigiva", CStr(Rs!Codigiva), "N")
         Select Case i
             Case 1
                 TipoIVA1 = Rs.Fields(0).Value

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacPreciosEspecial 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Precios Especiales"
@@ -702,7 +702,7 @@ Private HaDevueltoDatos As Boolean
 Private Sub chkPermiteDto_Click()
     If Modo = 3 Or Modo = 4 Then 'Insertar o Modificar
         If Me.chkPermiteDto.Value = 1 Then
-            Me.Text1(4).Text = ""
+            If vParamAplic.NumeroInstalacion <> 2 Then Me.Text1(4).Text = ""
             BloquearTxt Text1(4), True
         Else
             BloquearTxt Text1(4), False
@@ -964,9 +964,9 @@ End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
-Dim Indice As Byte
-    Indice = 8
-    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim indice As Byte
+    indice = 8
+    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
@@ -1001,7 +1001,7 @@ End Sub
 
 
 Private Sub imgFecha_Click(Index As Integer)
-Dim Indice As Byte
+Dim indice As Byte
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
    Screen.MousePointer = vbHourglass
@@ -1009,15 +1009,15 @@ Dim Indice As Byte
    Set frmF = New frmCal
    frmF.Fecha = Now
    
-   Indice = 8
+   indice = 8
    
-   PonerFormatoFecha Text1(Indice)
-   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
+   PonerFormatoFecha Text1(indice)
+   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco Text1(Indice)
+   PonerFoco Text1(indice)
 End Sub
 
 
@@ -1227,7 +1227,7 @@ Dim tabla As String
     tabla = "spree1"
     SQL = "SELECT * FROM " & tabla
     If enlaza Then
-        SQL = SQL & " WHERE codclien=" & Data1.Recordset!codclien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+        SQL = SQL & " WHERE codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
     Else
         SQL = SQL & " WHERE codartic = -1"
     End If
@@ -1342,7 +1342,7 @@ Dim SQL As String
 On Error GoTo FinEliminar
         
         conn.BeginTrans
-        SQL = " WHERE codclien=" & Val(Data1.Recordset!codclien)
+        SQL = " WHERE codclien=" & Val(Data1.Recordset!codClien)
         SQL = SQL & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
         
         'Lineas
@@ -1610,7 +1610,7 @@ Dim SQL As String
     On Error Resume Next
 
     SQL = "UPDATE " & NombreTabla & " SET precioac=precionu, precioa1=precion1, dtoespec=dtoespe1, fechanue=null, precionu=0, precion1=0"
-    SQL = SQL & " WHERE codclien=" & Data1.Recordset!codclien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+    SQL = SQL & " WHERE codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
     conn.Execute SQL
     
     If Err.Number <> 0 Then
@@ -1628,7 +1628,7 @@ Dim NumF As String
 On Error Resume Next
 
     'Obtenemos la siguiente numero de linea de tarifa
-    SQL = "codclien=" & Data1.Recordset!codclien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+    SQL = "codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
     NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", SQL)
 
     SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec)"

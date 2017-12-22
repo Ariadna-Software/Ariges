@@ -3571,7 +3571,7 @@ Dim TxtMotivoFra As String 'AMESA
             Rs.Open cad, conn, adOpenForwardOnly, adCmdText
             If Not Rs.EOF Then
                 Text1(29).Text = Rs!CodEnvio
-                Text2(29).Text = Rs!nomenvio
+                Text2(29).Text = Rs!nomEnvio
             Else
                 Text1(29).Text = ""
                 Text2(29).Text = ""
@@ -6135,7 +6135,10 @@ Private Function DatosOkLinea(ByRef vCStock As CStock, ByRef ARticuloFitosantiar
 Dim b As Boolean
 Dim i As Byte
 Dim Aux As String
+Dim AUx3 As String
 Dim vArtic As CArticulo
+Dim PuntosCliente As Currency
+Dim C2 As Currency
 
     On Error GoTo EDatosOkLinea
 
@@ -6233,12 +6236,14 @@ Dim vArtic As CArticulo
             
              
                 'El cliente tiene puntos
-                Aux = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
+                AUx3 = "puntos"
+                Aux = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text, "N", AUx3)
                 If Val(Aux) = 0 Then
                     MsgBox "El cliente no tiene marca de Puntos", vbExclamation
                     b = False
                 Else
-                
+                    If AUx3 = "" Then AUx3 = "0"
+                    PuntosCliente = CCur(AUx3)
                     'Si no es nuevo albaran, solo superusuarios pueden insertar canje
                     If Not EsNuevoAlbaran Then
                         If vUsu.Nivel > 0 Then
@@ -6252,6 +6257,7 @@ Dim vArtic As CArticulo
                     If Not b Then Exit Function
                     
                     'Veremos si YA esta el articulo de canje aqui
+                    
                      Aux = Replace(ObtenerWhereCP(False), "scaalb", "slialb") & " AND codartic "
                      Aux = DevuelveDesdeBD(conAri, "codartic", "slialb", Aux, txtAux(1).Text, "T")
                      If Aux <> "" Then
@@ -6260,9 +6266,7 @@ Dim vArtic As CArticulo
                      
                      Else
                          'De momento Veo si hay algun articulo de familias de canje
-                         
-                        
-                         Aux = CalcularPuntosAlbaranCABEL(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), Data1.Recordset!FechaAlb)
+                         Aux = CalcularPuntosAlbaranCABEL(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), Data1.Recordset!FechaAlb, AUx3)
                          
                          If Aux = "" Then Aux = "0"
                          If CCur(Aux) = 0 Then
@@ -6271,6 +6275,17 @@ Dim vArtic As CArticulo
                             
                             If Not Data2.Recordset.EOF Then b = False
                          Else
+                           
+                            C2 = Round2(CCur(AUx3) / vParamAplic.PtosEquivalencia, 2) '-> necesito como mucho estos puntos
+                            If C2 > PuntosCliente Then
+                                Aux = PuntosCliente
+                            Else
+                                Aux = C2
+                            End If
+                           
+                           
+                         
+                         
                             If -ImporteFormateado(txtAux(3).Text) > CCur(Aux) Then
                                 MsgBox "No puede canjear mas de " & Aux, vbExclamation
                                 b = False
@@ -6290,7 +6305,7 @@ Dim vArtic As CArticulo
                     'Cantidad negativa. En albaranes rectificativos
                     If Data1.Recordset!codtipom = "ALR" Then Aux = "Canje puntos en positivo"
                 Else
-                    If Data1.Recordset!codtipom <> "ALR" Then Aux = "Canje puntos devolucion en negativo"
+                    If Data1.Recordset!codtipom <> "ALR" Then Aux = "Canje puntos en negativo"
                 End If
                 If Aux <> "" Then
                     MsgBox Aux, vbExclamation
@@ -7366,6 +7381,10 @@ Dim DtoPermitido As Boolean
 Dim AbrirDevoluciones As Boolean
 Dim StatusArticMayorCero As Boolean
 Dim TieneDescuentos As String
+Dim AUx3 As String
+Dim PtosAuxiliar As Currency
+
+
 
     If Not PerderFocoGnralLineas(txtAux(Index), ModificaLineas) Then Exit Sub
     
@@ -7576,24 +7595,43 @@ Dim TieneDescuentos As String
                               MsgBox "NO tiene puntos", vbExclamation
                               txtAux(1).Text = ""
                         Else
-                              If devuelve = "" Then devuelve = "0"
-                              cantidad = CalcularPuntosAlbaranCABEL(Replace(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), NombreTabla, NomTablaLineas), Data1.Recordset!FechaAlb)
-                              If CCur(cantidad) > CCur(devuelve) Then
-                                txtAux(3).Text = Format(-1 * CCur(devuelve), FormatoCantidad)
-                              Else
-                                txtAux(3).Text = Format(-1 * CCur(cantidad), FormatoCantidad)
-                              End If
+                            If devuelve = "" Then devuelve = "0"
                               
+                            'Diciembre. Lo quitamos. Puede canjear todos los puntos que tenga el cliente en la ficha
+                            If CCur(devuelve) > 0 Then
+                                cantidad = CalcularPuntosAlbaranCABEL(Replace(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), NombreTabla, NomTablaLineas), Data1.Recordset!FechaAlb, AUx3)
+                                If cantidad = "" Then cantidad = "0"
+                                
+                                'Siginifica que tiene articvulos CABEL
+                                If CCur(cantidad) > 0 Then
+                                    'Tiene cable. Vamos a ver cuantos puntos necesita como maximo para el importe de este albaran
+                                    PtosAuxiliar = Round2(CCur(AUx3) / vParamAplic.PtosEquivalencia, 2) '-> necesito como mucho estos puntos
+                                    If PtosAuxiliar > devuelve Then
+                                        txtAux(3).Text = Format(-1 * CCur(devuelve), FormatoCantidad)
+                                    Else
+                                        txtAux(3).Text = Format(-1 * PtosAuxiliar, FormatoCantidad)
+                                    End If
+                                    
+                                    
+                                    
+                                Else
+                                      MsgBox "No existen articulos CABEL", vbExclamation
+                                      txtAux(1).Text = ""
+                                End If
+                                
                               
-                                            
-                                txtAux(6).Text = "0"
-                                txtAux(7).Text = "0"
-                                txtAux(10).Text = "1"
-                                txtAux(6).Enabled = False
-                                txtAux(7).Enabled = False
-                                txtAux(7).Enabled = False
-                              
-                              
+                            Else
+                                txtAux(1).Text = ""
+                            End If
+                            
+                            txtAux(6).Text = "0"
+                            txtAux(7).Text = "0"
+                            txtAux(10).Text = "1"
+                            txtAux(6).Enabled = False
+                            txtAux(7).Enabled = False
+                            txtAux(7).Enabled = False
+                            If txtAux(1).Text = "" Then txtAux(2).Text = ""
+
                         End If
                     End If
                 End If
@@ -7740,7 +7778,7 @@ Dim TieneDescuentos As String
                                     If devuelve = "" Then devuelve = 0
                                     If Abs(cantidad) > CCur(devuelve) Then
                                         MsgBox "Utiliza mas puntos de los que tiene", vbExclamation
-                                        txtAux(3).Text = Format(devuelve, FormatoCantidad)
+                                        txtAux(3).Text = "-" & Format(devuelve, FormatoCantidad)
                                     Else
                                         devuelve = ""
                                     End If
@@ -7898,10 +7936,7 @@ Dim ParaElLog As String
             conn.Execute SQL
             
             
-            'Devolvemos contador, si no estamos actualizando
-            Set vTipoMov = New CTiposMov
-            b = CBool(vTipoMov.DevolverContador(CodTipoMov, NumAlbElim))
-            Set vTipoMov = Nothing
+           
             
             
             
@@ -7931,23 +7966,29 @@ Dim ParaElLog As String
             If DBLet(Data1.Recordset!Puntos, "N") <> 0 Then
                 
                 
-                    'Si cambia el cliente, hay que ver
-                    SQL = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
-                    If Val(SQL) = "1" Then
-                        'El nuevo cliente tiene puntos
-                        SQL = "-"
-                        If Data1.Recordset!Puntos < 0 Then SQL = "+"
-                        SQL = "UPDATE sclien set puntos=coalesce(puntos,0) " & SQL & DBSet(Abs(Data1.Recordset!Puntos), "N")
-                        SQL = SQL & " WHERE codclien =" & Text1(4).Text
-                        conn.Execute SQL
-                    End If
-                    SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
-                    SQL = SQL & " AND codclien = " & Data1.Recordset!codClien
-                    
-                        
-                    SQL = "DELETE FROM smovalpuntos " & SQL
+                'Si cambia el cliente, hay que ver
+                SQL = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
+                If Val(SQL) = "1" Then
+                    'El nuevo cliente tiene puntos
+                    SQL = "-"
+                    If Data1.Recordset!Puntos < 0 Then SQL = "+"
+                    SQL = "UPDATE sclien set puntos=coalesce(puntos,0) " & SQL & DBSet(Abs(Data1.Recordset!Puntos), "N")
+                    SQL = SQL & " WHERE codclien =" & Text1(4).Text
                     conn.Execute SQL
+                End If
+            
             End If
+            
+            'Borro de smovalpuntos
+            SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+            SQL = SQL & " AND codclien = " & Data1.Recordset!codClien
+            SQL = SQL & " AND concepto = 0"
+            
+                
+            SQL = "DELETE FROM smovalpuntos " & SQL
+            conn.Execute SQL
+            
+            
         End If
     End If
 
@@ -7958,6 +7999,8 @@ FinEliminar:
     End If
     If Not b Then
         conn.RollbackTrans
+        
+        
     Else
         conn.CommitTrans
         
@@ -7966,6 +8009,12 @@ FinEliminar:
         LOG.Insertar 34, vUsu, ParaElLog
         Set LOG = Nothing
         
+        
+        
+        'Lo ponermos FUERA de la transaccion YA que lleva commits y demas
+        Set vTipoMov = New CTiposMov
+        b = CBool(vTipoMov.DevolverContador(CodTipoMov, NumAlbElim))
+        Set vTipoMov = Nothing
         
         
     End If
@@ -9956,7 +10005,7 @@ Dim codCCoste As String 'centro de coste
                 PrecioKilo = miRsAux!preciokg
                 DesdeKilo = DBLet(miRsAux!DesdeKgs, "N")
                 NumRegElim = NumRegElim + 1
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & miRsAux!CodEnvio & "<" & miRsAux!nomenvio & "<" & miRsAux!preciokg & "<" & DBLet(miRsAux!DesdeKgs, "N") & "|"
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & miRsAux!CodEnvio & "<" & miRsAux!nomEnvio & "<" & miRsAux!preciokg & "<" & DBLet(miRsAux!DesdeKgs, "N") & "|"
                 miRsAux.MoveNext
             Wend
             

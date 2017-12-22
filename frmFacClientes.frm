@@ -6179,7 +6179,7 @@ End Sub
 
 Private Sub cmdAccDocs_Click(Index As Integer)
 Dim SQL As String
-    If Index <> 2 Then
+    If Index <> 2 And Index <> 4 Then
         If Modo <> 2 Then Exit Sub
     End If
     Select Case Index
@@ -6204,52 +6204,54 @@ Dim SQL As String
             
         'PUNTOS
         Case 3, 4, 5, 6
-            If Text1(0).Text = "" Then Exit Sub
-            
+        
             If Index = 4 Then
                 ImprimirHcoPuntos
+                Exit Sub
+            End If
+            
+            If Text1(0).Text = "" Then Exit Sub
+            
+            If Index = 3 Then
+                'Sin definir
             
             Else
-                If Index = 3 Then
-                    'Sin definir
-                
+                If vUsu.Nivel > 0 Then
+                    MsgBox "No tiene permiso", vbExclamation
+                    Exit Sub
+                End If
+            
+                CadenaDesdeOtroForm = ""
+                If Index = 5 Then
+                    'Nuevo
+                    
+                    frmListado5.OtrosDatos = Text1(0).Text & "|" & Text1(1).Text & "|"
+                    frmListado5.OpcionListado = 19
+                    frmListado5.Show vbModal
+                    
+            
                 Else
-                    If vUsu.Nivel > 0 Then
-                        MsgBox "No tiene permiso", vbExclamation
+                    'QUitar
+                    If Me.lw1.SelectedItem Is Nothing Then Exit Sub
+                    
+                    If Me.lw1.SelectedItem.Tag = 0 Then
+                        MsgBox "No son incrementos manuales de puntos", vbExclamation
                         Exit Sub
                     End If
-                
-                    CadenaDesdeOtroForm = ""
-                    If Index = 5 Then
-                        'Nuevo
-                        
-                        frmListado5.OtrosDatos = Text1(0).Text & "|" & Text1(1).Text & "|"
-                        frmListado5.OpcionListado = 19
-                        frmListado5.Show vbModal
-                        
-                
-                    Else
-                        'QUitar
-                        If Me.lw1.SelectedItem Is Nothing Then Exit Sub
-                        
-                        If Me.lw1.SelectedItem.Tag = 0 Then
-                            MsgBox "No son incrementos manuales de puntos", vbExclamation
-                            Exit Sub
-                        End If
-                        
-                        If MsgBox("Seguro que desea eliminar los puntos?", vbQuestion + vbYesNoCancel) = vbYes Then
-                            If DesHacerIncrementoPuntosCliente Then CadenaDesdeOtroForm = "OK"
-                        End If
-                        
+                    
+                    If MsgBox("Seguro que desea eliminar los puntos?", vbQuestion + vbYesNoCancel) = vbYes Then
+                        If DesHacerIncrementoPuntosCliente Then CadenaDesdeOtroForm = "OK"
                     End If
-                    If CadenaDesdeOtroForm <> "" Then
-                        
-                            PosicionarData
-                            PonerCampos
-                        
-                    End If
+                    
+                End If
+                If CadenaDesdeOtroForm <> "" Then
+                    
+                        PosicionarData
+                        PonerCampos
+                    
                 End If
             End If
+
             
     End Select
 End Sub
@@ -14001,19 +14003,16 @@ End Function
 
 
 Private Sub ImprimirHcoPuntos()
-    With frmImprimir
-        .NombreRPT = "rPuntosCliente.rpt"
-        .OtrosParametros = ""
-        .NumeroParametros = 0
-        
-        
-        .FormulaSeleccion = "({sclien.codclien} = " & Data1.Recordset!codClien & ")"
-        .EnvioEMail = False
-        .Opcion = 9
-        .Titulo = "Informe puntos"
-        .ConSubInforme = True
-        .Show vbModal
-    End With
+    
+    frmListado3.Opcion = 68
+    frmListado3.OtrosDatos = ""
+    If Modo = 2 Then
+        If Not Data1.Recordset.EOF Then
+            If Not IsNull(Data1.Recordset!codClien) Then frmListado3.OtrosDatos = Data1.Recordset!codClien & "|" & Data1.Recordset!NomClien & "|"
+        End If
+    End If
+    frmListado3.Show vbModal
+    
 End Sub
 
 

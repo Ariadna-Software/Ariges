@@ -211,7 +211,7 @@ Dim gridCargado As Boolean 'Si el DataGrid ya tiene todos los Datos cargados.
 
 Private Sub cmdAceptar_Click()
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     If MsgBox("Fecha: " & vFecha & "      ¿Continuar?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
     
@@ -220,46 +220,57 @@ Dim RS As ADODB.Recordset
 
     
     SQL = MontaSQLCarga(True)
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
 
-    While Not RS.EOF
+    While Not Rs.EOF
 
        If Ventas Then
 
-            If Not IsNull(RS!tmpprecioac) Then
-                If RS!tmpprecioac > 0 Then
-                    SQL = "UPDATE slista SET precionu=" & DBSet(RS!tmpprecioac, "N")
+            If Not IsNull(Rs!tmpprecioac) Then
+                If Rs!tmpprecioac > 0 Then
+                    SQL = "UPDATE slista SET precionu=" & DBSet(Rs!tmpprecioac, "N")
                     SQL = SQL & ", fechanue = " & DBSet(vFecha, "F")
-                    SQL = SQL & " WHERE " & " codartic =" & DBSet(RS!codArtic, "T")
-                    SQL = SQL & " AND codlista=" & RS!codlista
+                    SQL = SQL & " WHERE " & " codartic =" & DBSet(Rs!codArtic, "T")
+                    SQL = SQL & " AND codlista=" & Rs!codlista
                     conn.Execute SQL
+                    
+                    
+                    'Nov 2017
+                    If vParamAplic.ActualizaPrecioEspecial Then
+                        'Como descuento vamos a poner el dto que tiene ahora
+                        SQL = "UPDATE sprees SET precionu=" & DBSet(Rs!tmpprecioac, "N")
+                        SQL = SQL & ", fechanue = " & DBSet(vFecha, "F")
+                        SQL = SQL & ", dtoespe1 = dtoespec" 'Como descuento vamos a poner el dto que tiene ahora
+                        SQL = SQL & " WHERE " & " codartic =" & DBSet(Rs!codArtic, "T")
+                        conn.Execute SQL
+                    End If
                 End If
             End If
         
         Else
             
-            If DBLet(RS!precioar, "N") > 0 Then
-                SQL = "UPDATE slispr SET precionu=" & DBSet(RS!precioar, "N")
+            If DBLet(Rs!precioar, "N") > 0 Then
+                SQL = "UPDATE slispr SET precionu=" & DBSet(Rs!precioar, "N")
                 SQL = SQL & ", fechanue = " & DBSet(vFecha, "F")
-                SQL = SQL & " WHERE " & " codartic =" & DBSet(RS!codArtic, "T")
-                SQL = SQL & " AND codprove=" & RS!NumOfert  'Numofert en la temporal es el proveedor
+                SQL = SQL & " WHERE " & " codartic =" & DBSet(Rs!codArtic, "T")
+                SQL = SQL & " AND codprove=" & Rs!NumOfert  'Numofert en la temporal es el proveedor
                 conn.Execute SQL
             End If
     
         End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Me.cmdAceptar.visible = False
     Unload Me
     Exit Sub
     
 ErrAceptar:
-    If Not RS Is Nothing Then Set RS = Nothing
+    If Not Rs Is Nothing Then Set Rs = Nothing
     MuestraError Err.Number, "No se ha actualizado correctamente los precios", Err.Description
 End Sub
 
@@ -357,7 +368,7 @@ End Function
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim I As Byte
+Dim i As Byte
 Dim SQL As String
     
     On Error GoTo ECarga
@@ -404,14 +415,14 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
        
     Modo = Kmodo
     
     'MODIFICAR
-    B = (Modo = 4)
+    b = (Modo = 4)
    ' Me.cmdAceptar2.visible = B
-    Me.cmdCancelar.visible = B
+    Me.cmdCancelar.visible = b
     
 '    PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario
@@ -494,23 +505,23 @@ End Sub
 
 Private Sub TxtAux_KeyDown(KeyCode As Integer, Shift As Integer)
 Dim J As Long
-Dim I As Integer
+Dim i As Integer
      Select Case KeyCode
         Case 33, 34
             'page down
             If KeyCode = 33 Then
-                I = -DataGrid1.VisibleRows
+                i = -DataGrid1.VisibleRows
             Else
-                I = DataGrid1.VisibleRows
+                i = DataGrid1.VisibleRows
             End If
-            J = Data1.Recordset.AbsolutePosition + I
+            J = Data1.Recordset.AbsolutePosition + i
             If J < 1 Then
                 Data1.Recordset.MoveFirst
             Else
                 If J > Data1.Recordset.RecordCount Then
                     Data1.Recordset.MoveLast
                 Else
-                    Data1.Recordset.Move I
+                    Data1.Recordset.Move i
                 End If
             End If
         Case 38 'Desplazamieto Fecha Hacia Arriba
@@ -591,7 +602,7 @@ End Sub
 
 Private Function ActualizarLinea2() As Boolean
 Dim SQL As String
-Dim I As Currency
+Dim i As Currency
 '    If Not DatosOkLinea Then Exit Function
     
     On Error GoTo ErrActLinea
@@ -599,17 +610,17 @@ Dim I As Currency
 '    Conn.BeginTrans
 
     If Trim(txtAux.Text) <> "" Then
-        I = ImporteFormateado(txtAux.Text)
+        i = ImporteFormateado(txtAux.Text)
         
         
         If Ventas Then
         
-            SQL = "UPDATE " & NombreTabla & " SET tmpprecioac=" & TransformaComasPuntos(CStr(I))
+            SQL = "UPDATE " & NombreTabla & " SET tmpprecioac=" & TransformaComasPuntos(CStr(i))
             SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codlista=" & DBSet(Data1.Recordset!codlista, "N")
         Else
             'Compras
-            SQL = "UPDATE " & NombreTabla & " SET precioar=" & TransformaComasPuntos(CStr(I))
-            SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codusu=" & vUsu.Codigo
+            SQL = "UPDATE " & NombreTabla & " SET precioar=" & TransformaComasPuntos(CStr(i))
+            SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codusu=" & vUsu.codigo
             
         End If
         

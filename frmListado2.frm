@@ -12534,7 +12534,7 @@ Private Sub cmdAgentes_Click()
     End If
      
       
-    If txtForPa(1).Text <> "" Or txtForPa(2).Text <> "" Then
+    If txtForpa(1).Text <> "" Or txtForpa(2).Text <> "" Then
         devuelve = "vForpa=""Forma de pago: "
         campo = "{scafac.codforpa}"
         If Not PonerDesdeHasta(campo, "FOR", 1, 2, devuelve) Then Exit Sub
@@ -12748,9 +12748,9 @@ Dim GenerarDatosEnTmp As Boolean
     'Si es comparativo debe indicar UN AÑO por lo menos
     If chkBenAge(2).Value = 1 Then
         If Opcion = 37 Then
-            If txtanyo(0).Text = "" Or txtanyo(1).Text = "" Then
+            If txtAnyo(0).Text = "" Or txtAnyo(1).Text = "" Then
                 MsgBox "Para el informe comparativo debe indicar el año", vbExclamation
-                PonerFoco txtanyo(0)
+                PonerFoco txtAnyo(0)
                 Exit Sub
             End If
             If chkBenAge(1).Value = 1 Then chkBenAge(1).Value = 0
@@ -12758,26 +12758,26 @@ Dim GenerarDatosEnTmp As Boolean
     End If
     
     'Si pone mes, el año debe ser el mismo
-    If txtanyo(2).Text <> "" Or txtanyo(3).Text <> "" Then
+    If txtAnyo(2).Text <> "" Or txtAnyo(3).Text <> "" Then
         miSQL = ""
         'Si pone desde hasta mes
-         If txtanyo(2).Text <> "" And txtanyo(3).Text <> "" Then
-            If Val(txtanyo(2).Text) > Val(txtanyo(3).Text) Then miSQL = "Mes fin menor que el mes incio"
+         If txtAnyo(2).Text <> "" And txtAnyo(3).Text <> "" Then
+            If Val(txtAnyo(2).Text) > Val(txtAnyo(3).Text) Then miSQL = "Mes fin menor que el mes incio"
         End If
         
         'Si indica el mes , el año tiene que ser el mismo
         
-        If txtanyo(0).Text = "" Then
+        If txtAnyo(0).Text = "" Then
             miSQL = miSQL & vbCrLf & "Debe indicar el año"
         Else
-            If txtanyo(1).Text = "" Then
+            If txtAnyo(1).Text = "" Then
                 miSQL = miSQL & vbCrLf & "Debe indicar UN único año"
             Else
-                If txtanyo(1).Text <> txtanyo(0).Text Then miSQL = miSQL & vbCrLf & "El año debe ser el mismo"
+                If txtAnyo(1).Text <> txtAnyo(0).Text Then miSQL = miSQL & vbCrLf & "El año debe ser el mismo"
             End If
         End If
         If miSQL <> "" Then
-            PonerFoco txtanyo(0)
+            PonerFoco txtAnyo(0)
             MsgBox miSQL, vbExclamation
             Exit Sub
         End If
@@ -12832,18 +12832,18 @@ Dim GenerarDatosEnTmp As Boolean
     txtFecha(11).Text = ""
     txtFecha(12).Text = ""
     
-    If txtanyo(0).Text <> "" Then txtFecha(11).Text = "01/01/" & txtanyo(0).Text
-    If txtanyo(1).Text <> "" Then txtFecha(12).Text = "31/12/" & txtanyo(1).Text
-    If Trim(Me.txtanyo(2).Text) <> "" Or Trim(txtanyo(3).Text) <> "" Then
+    If txtAnyo(0).Text <> "" Then txtFecha(11).Text = "01/01/" & txtAnyo(0).Text
+    If txtAnyo(1).Text <> "" Then txtFecha(12).Text = "31/12/" & txtAnyo(1).Text
+    If Trim(Me.txtAnyo(2).Text) <> "" Or Trim(txtAnyo(3).Text) <> "" Then
         'Ha puesto mes
-        If txtanyo(2).Text <> "" Then
-            NumRegElim = DiasMes(CByte(txtanyo(2).Text), CInt(txtanyo(0).Text))
+        If txtAnyo(2).Text <> "" Then
+            NumRegElim = DiasMes(CByte(txtAnyo(2).Text), CInt(txtAnyo(0).Text))
             NumRegElim = 1 'desde el UNO
-            txtFecha(11).Text = NumRegElim & "/" & txtanyo(2).Text & "/" & txtanyo(0).Text
+            txtFecha(11).Text = NumRegElim & "/" & txtAnyo(2).Text & "/" & txtAnyo(0).Text
         End If
-        If txtanyo(3).Text <> "" Then
-            NumRegElim = DiasMes(CByte(txtanyo(3).Text), CInt(txtanyo(0).Text))
-            txtFecha(12).Text = NumRegElim & "/" & txtanyo(3).Text & "/" & txtanyo(0).Text
+        If txtAnyo(3).Text <> "" Then
+            NumRegElim = DiasMes(CByte(txtAnyo(3).Text), CInt(txtAnyo(0).Text))
+            txtFecha(12).Text = NumRegElim & "/" & txtAnyo(3).Text & "/" & txtAnyo(0).Text
         End If
     End If
     If txtFecha(11).Text <> "" Or txtFecha(12).Text <> "" Then
@@ -12852,10 +12852,10 @@ Dim GenerarDatosEnTmp As Boolean
         If Not PonerDesdeHasta(campo, "F", 11, 12, devuelve) Then Exit Sub
         
         'Si pone mes:
-        If Me.txtanyo(2).Text <> "" Or txtanyo(3).Text <> "" Then
-            devuelve = " Año: " & txtanyo(0).Text & "     Mes: "
-            If txtanyo(2).Text <> "" Then devuelve = devuelve & " desde " & txtanyo(2).Text
-            If txtanyo(3).Text <> "" Then devuelve = devuelve & " hasta " & txtanyo(3).Text
+        If Me.txtAnyo(2).Text <> "" Or txtAnyo(3).Text <> "" Then
+            devuelve = " Año: " & txtAnyo(0).Text & "     Mes: "
+            If txtAnyo(2).Text <> "" Then devuelve = devuelve & " desde " & txtAnyo(2).Text
+            If txtAnyo(3).Text <> "" Then devuelve = devuelve & " hasta " & txtAnyo(3).Text
         End If
         miSQL = devuelve & "   "
         'Si ha puesto mes
@@ -12969,7 +12969,7 @@ Dim GenerarDatosEnTmp As Boolean
         cadNomRPT = "rBenexProv"
     End If
     'If Me.txtAnyo(2).Text <> "" Or txtAnyo(3).Text <> "" Then cadNomRPT = cadNomRPT & "mes"
-    If Me.txtanyo(2).Text <> "" Or txtanyo(3).Text <> "" Then cadNomRPT = cadNomRPT & campo
+    If Me.txtAnyo(2).Text <> "" Or txtAnyo(3).Text <> "" Then cadNomRPT = cadNomRPT & campo
     cadNomRPT = cadNomRPT & ".rpt"
     
     
@@ -13451,14 +13451,16 @@ End Sub
     
     
 Private Sub CambioPreciosTarifasVenta()
-    
+Dim OkDobleComprobacion As Boolean
+Dim SelectPrees As String
+
     cadSelect = "{slista.codlista} = " & txtTarifa(0).Text
-    'Proveedor  18 19
+    SelectPrees = ""
     If txtCodProve(20).Text <> "" Or txtCodProve(20).Text <> "" Then
         'devuelve = "pDHProve=""Proveedor: "
         campo = "{sartic.codprove}"
         If Not PonerDesdeHasta(campo, "PRO", 20, 20, devuelve) Then Exit Sub
-        
+        SelectPrees = SelectPrees & " AND sartic.codprove =" & txtCodProve(20).Text
     End If
     
     
@@ -13467,6 +13469,8 @@ Private Sub CambioPreciosTarifasVenta()
         'devuelve = "pDHFamilia=""Familia: "
         campo = "{sartic.codfamia}"
         If Not PonerDesdeHasta(campo, "FAM", 6, 7, devuelve) Then Exit Sub
+        If txtFamia(6).Text <> "" Then SelectPrees = SelectPrees & " AND sartic.codfamia >=" & txtFamia(6).Text
+        If txtFamia(7).Text <> "" Then SelectPrees = SelectPrees & " AND sartic.codfamia <=" & txtFamia(7).Text
         
     End If
     
@@ -13477,6 +13481,8 @@ Private Sub CambioPreciosTarifasVenta()
         devuelve = " "
         campo = "{sartic.codartic}"
         If Not PonerDesdeHasta(campo, "ART", 8, 9, devuelve) Then Exit Sub
+        If txtArticulo(8).Text <> "" Then SelectPrees = SelectPrees & " AND sartic.codfamia >=" & DBSet(txtArticulo(8).Text, "T")
+        If txtArticulo(9).Text <> "" Then SelectPrees = SelectPrees & " AND sartic.codfamia <=" & DBSet(txtArticulo(9).Text, "T")
         
     End If
     
@@ -13494,6 +13500,7 @@ Private Sub CambioPreciosTarifasVenta()
             campo = "3"
         End If
         campo = " AND {sartic.codstatu} = " & campo
+        SelectPrees = SelectPrees & " AND sartic.codstatu = " & campo
     End If
     cadSelect = cadSelect & campo
     cadSelect = QuitarCaracterACadena(cadSelect, "{")
@@ -13510,15 +13517,33 @@ Private Sub CambioPreciosTarifasVenta()
     
     
     'Ahora comprobare que ninugno tiene fechanue
+    OkDobleComprobacion = True
+    codigo = ""
     campo = "slista,sartic "
     campo = campo & " WHERE slista.codartic=sartic.codartic AND " & cadSelect
     campo = campo & " AND not fechanue is null"
     If HayRegParaInforme(campo, "", True) Then
-        MsgBox "Hay registros sin actualizar cambio precio", vbExclamation
-        Exit Sub
+        codigo = "Hay registros sin actualizar en lista de precios"
+        OkDobleComprobacion = False
     End If
     
     
+    '2017. Si hay actualizacion precios especiales tambien comprobaremos esto
+    If vParamAplic.ActualizaPrecioEspecial Then
+               
+        campo = "sprees,sartic "
+        campo = campo & " WHERE sprees.codartic=sartic.codartic AND "
+        campo = campo & " not fechanue is null " & SelectPrees
+        If HayRegParaInforme(campo, "", True) Then
+            codigo = codigo & vbCrLf & "Hay registros sin actualizar en precios especiales"
+            OkDobleComprobacion = False
+        End If
+    End If
+    
+    If Not OkDobleComprobacion Then
+        MsgBox codigo, vbExclamation
+        Exit Sub
+    End If
     
     
     'Ponemos el tmpprecioac a cero
@@ -13985,7 +14010,7 @@ Private Sub cmdCrearCliente_Click()
     'Creara un cliente desde potenciales
     'De momento SOLO lo ha pedido Bacchus
     miSQL = ""
-    If txtForPa(3).Text = "" Or txtAgente(10).Text = "" Then miSQL = "N"
+    If txtForpa(3).Text = "" Or txtAgente(10).Text = "" Then miSQL = "N"
     If txtDescForpa(3).Text = "" Or txtDescAgente(10).Text = "" Then miSQL = "N"
     If miSQL <> "" Then
         MsgBox "Campos obligatorios", vbExclamation
@@ -14219,7 +14244,7 @@ Dim TipoM As CTiposMov
     cadParam = ""
     If txtFecha(17).Text = "" Then cadParam = cadParam & "- fecha factura" & vbCrLf
     If txtBancoPr(0).Text = "" Then cadParam = cadParam & "- banco propio" & vbCrLf
-    If txtForPa(0).Text = "" Then cadParam = cadParam & "- forma de pago" & vbCrLf
+    If txtForpa(0).Text = "" Then cadParam = cadParam & "- forma de pago" & vbCrLf
     If txtTrab(1).Text = "" Then cadParam = cadParam & "- trabajador" & vbCrLf
 
     devuelve = ""
@@ -14393,7 +14418,7 @@ Dim J As Integer
         vFactu.Trabajador = txtTrab(1).Text
         vFactu.BancoPr = txtBancoPr(0).Text
         
-        vFactu.ForPago = txtForPa(0).Text
+        vFactu.ForPago = txtForpa(0).Text
         vFactu.DtoPPago = 0
         vFactu.DtoGnral = 0
 
@@ -15384,7 +15409,7 @@ Dim b As Boolean
     If Me.txtAlma(0).Text = "" Then miSQL = miSQL & vbCrLf & "-Almacen"
     If Me.txtCodProve(17).Text = "" Then
         'Si no pone el proveedor debe poner minimo albaranes
-        If txtanyo(4).Text = "" Then miSQL = miSQL & vbCrLf & "-Minimo albaranes x meses sin proveedor"
+        If txtAnyo(4).Text = "" Then miSQL = miSQL & vbCrLf & "-Minimo albaranes x meses sin proveedor"
     End If
     
     If Me.txtAlma(7).Text <> "" Then
@@ -15414,7 +15439,7 @@ Dim b As Boolean
         If Me.txtAlma(0).Text = "" Then
             PonerFoco txtAlma(0)
         Else
-            PonerFoco txtanyo(4)
+            PonerFoco txtAnyo(4)
         End If
         Exit Sub
     End If
@@ -15456,7 +15481,7 @@ Dim b As Boolean
         numParam = numParam + 1
         'Valores
         miSQL = ""
-        If txtanyo(5).Text <> "" Then miSQL = miSQL & "    Cli: " & txtanyo(5).Text & "%"
+        If txtAnyo(5).Text <> "" Then miSQL = miSQL & "    Cli: " & txtAnyo(5).Text & "%"
         If txtCodProve(17).Text <> "" Then miSQL = miSQL & "   Prov: " & txtCodProve(17).Text
     
         If Me.cboProPed(1).ListIndex > 0 Then miSQL = miSQL & "    Situacion: " & Me.cboProPed(1).List(Me.cboProPed(1).ListIndex)
@@ -16531,8 +16556,15 @@ Dim N As Integer
     Screen.MousePointer = vbHourglass
     N = vParamAplic.NumCop_AlbaranRuta
     
-    If CargarDatosImprimeAlbaranConTransporte Then LlamarImprimir False, N
+    If CargarDatosImprimeAlbaranConTransporte Then
+        If optAlbTrans(0).Value Then GenerearFicheroTxtAlbaranRuta
+        LlamarImprimir False, N
+    End If
     If optAlbTrans(0).Value Then
+    
+        
+    
+    
         'Si ha pulsado imprimir then
         If HaPulsadoElBotonDeImprimir Then
             'UPDATEAMOS scaalb para que no reimpimrpima los albaranes
@@ -16620,7 +16652,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgAyuda
+    For Each Ima In Me.imgayuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear
@@ -16844,8 +16876,8 @@ Dim IndiceCancel As Integer
         cboProPed(0).ListIndex = 1
         cboProPed(1).ListIndex = 1
         Label3(100).Caption = ""
-        imgAyuda(2).ToolTipText = lblTitulo(29).Caption
-        Me.txtanyo(5).Text = 70
+        imgayuda(2).ToolTipText = lblTitulo(29).Caption
+        Me.txtAnyo(5).Text = 70
     Case 33
         PonerFrameVisible FrameDtoCompra, H, W
     Case 34, 44
@@ -17021,7 +17053,7 @@ Private Sub frmEn_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmFP_DatoSeleccionado(CadenaSeleccion As String)
-    Me.txtForPa(IndiceImg).Text = RecuperaValor(CadenaSeleccion, 1)
+    Me.txtForpa(IndiceImg).Text = RecuperaValor(CadenaSeleccion, 1)
     Me.txtDescForpa(IndiceImg).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -17162,7 +17194,7 @@ Dim Ayuda As String
         Ayuda = "- Incluye varios y presu"
         Ayuda = "-Marcar   'Aplica descuento', calculará el coste aplicando el valor de Dto Sin Cargo de descuentos proveedor"
     End Select
-    Ayuda = imgAyuda(Index).ToolTipText & vbCrLf & String(47, "=") & vbCrLf & vbCrLf & Ayuda
+    Ayuda = imgayuda(Index).ToolTipText & vbCrLf & String(47, "=") & vbCrLf & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 End Sub
@@ -17543,7 +17575,7 @@ Private Sub txtAlma_LostFocus(Index As Integer)
 End Sub
 
 Private Sub txtanyo_GotFocus(Index As Integer)
-    ConseguirFoco txtanyo(Index), 3
+    ConseguirFoco txtAnyo(Index), 3
 End Sub
 
 Private Sub txtanyo_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -17551,19 +17583,19 @@ Private Sub txtanyo_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtanyo_LostFocus(Index As Integer)
-    txtanyo(Index).Text = Trim(txtanyo(Index).Text)
+    txtAnyo(Index).Text = Trim(txtAnyo(Index).Text)
     miSQL = ""
-    If txtanyo(Index).Text <> "" Then
-        If Not PonerFormatoEntero(txtanyo(Index)) Then txtanyo(Index).Text = ""
+    If txtAnyo(Index).Text <> "" Then
+        If Not PonerFormatoEntero(txtAnyo(Index)) Then txtAnyo(Index).Text = ""
     End If
     
     If Index = 2 Or Index = 3 Then
         'SON MES
-        If txtanyo(Index).Text <> "" Then
-            If Val(txtanyo(Index).Text) < 1 Or Val(txtanyo(Index).Text) > 12 Then
+        If txtAnyo(Index).Text <> "" Then
+            If Val(txtAnyo(Index).Text) < 1 Or Val(txtAnyo(Index).Text) > 12 Then
                 MsgBox "Mes incorrecto", vbExclamation
-                txtanyo(Index).Text = ""
-                PonerFoco txtanyo(Index)
+                txtAnyo(Index).Text = ""
+                PonerFoco txtAnyo(Index)
                 
             End If
         End If
@@ -17840,7 +17872,7 @@ Private Sub txtFamia_LostFocus(Index As Integer)
 End Sub
 
 Private Sub txtForpa_GotFocus(Index As Integer)
-    ConseguirFoco txtForPa(Index), 3
+    ConseguirFoco txtForpa(Index), 3
 End Sub
 
 Private Sub txtForpa_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -17848,13 +17880,13 @@ Private Sub txtForpa_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtForpa_LostFocus(Index As Integer)
-    txtForPa(Index).Text = Trim(txtForPa(Index).Text)
+    txtForpa(Index).Text = Trim(txtForpa(Index).Text)
     codigo = ""
     miSQL = ""
     numParam = 0
-    If txtForPa(Index).Text <> "" Then
-        If IsNumeric(txtForPa(Index).Text) Then
-            codigo = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", txtForPa(Index).Text, "N")
+    If txtForpa(Index).Text <> "" Then
+        If IsNumeric(txtForpa(Index).Text) Then
+            codigo = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", txtForpa(Index).Text, "N")
             If codigo = "" Then miSQL = "El codigo no pertence a ningun forma de pago"
             numParam = 1
         Else
@@ -17868,12 +17900,12 @@ Private Sub txtForpa_LostFocus(Index As Integer)
         If Index = 0 Then
             'Es obligado
             MsgBox miSQL, vbExclamation
-            txtForPa(Index).Text = ""
-            PonerFoco txtForPa(Index)
+            txtForpa(Index).Text = ""
+            PonerFoco txtForpa(Index)
         Else
             If numParam = 0 Then
                 MsgBox miSQL, vbExclamation
-                txtForPa(Index).Text = ""
+                txtForpa(Index).Text = ""
             End If
             txtDescForpa(Index).Text = ""
         End If
@@ -18299,8 +18331,8 @@ Dim DesH As TextBox '    "       HASTA
     Case "FOR"
         'FORMA DE PAGO
          
-        Set TDes = Me.txtForPa(indD)
-        Set THas = txtForPa(indH)
+        Set TDes = Me.txtForpa(indD)
+        Set THas = txtForpa(indH)
         Subtipo = "N"
                  
         Set DesD = txtDescForpa(indD)
@@ -20531,7 +20563,7 @@ Dim KK As Integer
         Label3(100).Caption = "Minimo de salidas"
         Label3(100).Refresh
         'Vamos a eliminar de la tmp aquellas entradas que no superan el minimo de salidas
-        miSQL = "DELETE  from tmppedprov  where codusu = " & vUsu.codigo & " AND nsal <" & txtanyo(4).Text
+        miSQL = "DELETE  from tmppedprov  where codusu = " & vUsu.codigo & " AND nsal <" & txtAnyo(4).Text
         conn.Execute miSQL
         Espera 0.2
     End If
@@ -20667,7 +20699,7 @@ Dim KK As Integer
     
     'Si ha puesto entradas minimias
     ' si el resultado es menor que cero, es decir, no neceista aprovisionarse, no lo muestro
-    If Me.txtanyo(4).Text <> "" Then
+    If Me.txtAnyo(4).Text <> "" Then
         Label3(100).Caption = "Eliminando datos "
         Label3(100).Refresh
         miSQL = "DELETE FROM  tmppedprov WHERE codusu = " & vUsu.codigo
@@ -20717,7 +20749,7 @@ Dim KK As Integer
     
     'Sobre lo que queda. Veremos los porcentajes de un mismo cliente
     If NumRegElim > 0 Then
-        If Val(Me.txtanyo(5).Text) > 0 Then
+        If Val(Me.txtAnyo(5).Text) > 0 Then
                 DoEvents
                 Label3(100).Caption = "(1) Porcentaje ventas"
                 Label3(100).Refresh
@@ -20779,7 +20811,7 @@ Dim KK As Integer
                  
                 'Ahora vere cual tienen un porcentaje mayor
                 
-                RatioMensual = Val(txtanyo(5).Text)
+                RatioMensual = Val(txtAnyo(5).Text)
                 Label3(100).Caption = "(3) Actualizando reg: " & NumRegElim & " de " & ColArt_.Count
                 Label3(100).Refresh
                 miSQL = "select nomprove,codprove,importel,sum(cantidad) suma from tmpcommand where codusu= " & vUsu.codigo
@@ -21537,7 +21569,7 @@ Private Sub ComparativoAgentes()
     codigo = Replace(codigo, "}", ")")
 
     'replace de fecha
-    codigo = Replace(codigo, "'" & txtanyo(0).Text & "-", "'" & CStr(CInt(txtanyo(0).Text) - 1) & "-")
+    codigo = Replace(codigo, "'" & txtAnyo(0).Text & "-", "'" & CStr(CInt(txtAnyo(0).Text) - 1) & "-")
     codigo = campo & " AND " & codigo & " GROUP BY 1,2,3"
     codigo = "INSERT INTO tmpinformes(codusu,codigo1,campo1,importe3,importe4,nombre1,importe1,importe2) " & codigo
     conn.Execute codigo
@@ -22148,7 +22180,7 @@ Private Function crearCliente() As Boolean
     ' periodof, codTarif, DtoPPago, DtoGnral, codsitua, referobl, cliabono, pasclien, ManipuladortipoCarnet ,codmacta
 
     cadSelect = NumRegElim & ", Nomclien, nomcomer, domclien, codpobla, pobclien, proclien, nifClien, wwwclien,now() fechaalt, codactiv,"
-    cadSelect = cadSelect & " CodEnvio, codzonas, codrutas," & Me.txtAgente(10).Text & " agente," & Me.txtForPa(3).Text & " forpa,"
+    cadSelect = cadSelect & " CodEnvio, codzonas, codrutas," & Me.txtAgente(10).Text & " agente," & Me.txtForpa(3).Text & " forpa,"
     cadSelect = cadSelect & " 0 Clivario, 0 TipoIVA, 0 tipofact, 0 albarcon,0 tipclien, 0 periodof," & vParamAplic.PorDefecto_Tarifa & " tarifa, "
     cadSelect = cadSelect & " 0.00,0.00,0 codsitua,0 referob,0 cliabo, nifclien pasweb, 0 manicarn, " & campo & " codmacta"
     cadSelect = cadSelect & " , perclie1 , telclie1, faxclie1, maiclie1, perclie2, telclie2, faxclie2, maiclie2, observac"
@@ -22410,4 +22442,41 @@ End Sub
 
 
 
+
+Private Sub GenerearFicheroTxtAlbaranRuta()
+Dim NF2 As Integer
+
+    On Error GoTo eGenerearFicheroTxtAlbaranRuta
+    
+    codigo = App.Path & "\Rutas" & Format(Now, "yymmddhhnnss") & ".dat"
+    NF2 = FreeFile
+    Open codigo For Output As #NF2
+    Print #NF2, cadSelect
+    Print #NF2, ""
+    Print #NF2, ""
+    Set miRsAux = New ADODB.Recordset
+    codigo = "Select codtipom,numalbar FROM scaalb WHERE " & cadSelect
+    
+    miRsAux.Open codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    codigo = ""
+    While Not miRsAux.EOF
+        codigo = codigo & ", ('" & miRsAux!codtipom & "'," & miRsAux!NumAlbar & ")"
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Print #NF2, codigo
+    
+    Print #NF2, ""
+    Print #NF2, "FIN"
+eGenerearFicheroTxtAlbaranRuta:
+    If Err.Number <> 0 Then Err.Clear
+    CierraF NF2
+    Set miRsAux = Nothing
+    
+End Sub
+Private Sub CierraF(ByRef N As Integer)
+    On Error Resume Next
+    Close #N
+    Err.Clear
+End Sub
 

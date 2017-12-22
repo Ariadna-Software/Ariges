@@ -5220,8 +5220,8 @@ Dim Id As Long
         'mvarFichero mfichero2
         SQ = "SELECT " & DBSet(mfichero2, "T") & ",320,1," & DBSet(mfichero2, "T") & ",'',Numero_de_telefono,''," & CadenaInsert
         SQ = SQ & ",Codigo_de_trafico,Tipo_de_trafico,count(*),Unidad_de_medida,sum(Cantidad_medida_originada)"
-        
-        SQ = SQ & ",0,0,sum(importe),'' FROM telefono.detalle_de_llamadas WHERE  Fichero ='CI0643137077'"
+        Stop
+        SQ = SQ & ",0,0,sum(importe),'' FROM telefono.detalle_de_llamadas WHERE  Fichero ='CI0643137077'"  'que!!!!!!
         SQ = SQ & " and   fecha<>'0000'"
         SQ = SQ & " group by Codigo_de_trafico,Numero_de_telefono order by Numero_de_telefono,Codigo_de_trafico"
     
