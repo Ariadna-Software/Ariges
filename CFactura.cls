@@ -2695,7 +2695,7 @@ Dim RTiket As ADODB.Recordset
     '
     SQL = "INSERT INTO scafac1 (codtipom,numfactu,fecfactu,codtipoa,numalbar,fechaalb,numpedcl,fecpedcl,sementre,numofert,fecofert,"
     SQL = SQL & "referenc,codenvio,codtraba,codtrab1,codtrab2,observa1,observa2,observa3,observa4,observa5,numtermi,numventa,actuacion,tipoimp ,"
-    SQL = SQL & "origdat,fecenvio,docarchiv,coddiren,SerieTfno, ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente,numbultos,fechaAux)"
+    SQL = SQL & "origdat,fecenvio,docarchiv,coddiren,SerieTfno, ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente,numbultos,fechaAux,puntos)"
     
     
     'Octubre 2013
@@ -2748,7 +2748,7 @@ Dim RTiket As ADODB.Recordset
                 devuelve = devuelve & "," & DBSet(RTiket!ManipuladorNombre, "F", "S") & "," & DBSet(RTiket!TipoCarnet, "N")
             End If
         End If
-        SQL = SQL & devuelve & ",0,NULL,null)"   'pidecli y numbultos fechaAux
+        SQL = SQL & devuelve & ",0,NULL,null,0)"   'pidecli y numbultos fechaAux, puntos
         RTiket.Close
     ElseIf (codtipom <> "FAM" And codtipom <> "FTI") And cadSQL <> "" Then 'Facturas de VEnta
         SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu,"
@@ -2761,7 +2761,7 @@ Dim RTiket As ADODB.Recordset
         
         
         'Manipulador
-        SQL = SQL & " , ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente,numbultos,fechaAux "
+        SQL = SQL & " , ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente,numbultos,fechaAux,puntos "
         
         SQL = SQL & " FROM scaalb WHERE " & cadSQL
         
@@ -2858,7 +2858,7 @@ Dim RTiket As ADODB.Recordset
         '                                                                                   sail + fecenvio  + docarchiv + coddiren + letratf
         SQL = SQL & "," & DBSet(NumTerminal, "N", "S") & "," & DBSet(NumVenta, "N", "S") & ",NULL,NULL,NULL,NULL,0,NULL,NULL"
         ' ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,pidecli numbulto fechaAux
-        SQL = SQL & ",NULL,NULL,NULL,NULL,0,null,null)"
+        SQL = SQL & ",NULL,NULL,NULL,NULL,0,null,null,0)"
     End If
     
     conn.Execute SQL
@@ -3307,9 +3307,9 @@ Dim TipoA As String
     '----------------------------
     SQL = "INSERT INTO slifac_eu(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,tipo)"
     SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "slialb.codtipom as codtipoa, "
-    SQL = SQL & "slialb.numalbar,numlinea,fechaalb,codalmac,slialb.codartic,slialb.nomartic,cantidad,preciouc,2 FROM scaalb,slialb ,sartic"
+    SQL = SQL & "slialb.numalbar,numlinea,fechaalb,codalmac,slialb.codartic,slialb.nomartic,cantidad,precoste,2 FROM scaalb,slialb ,sartic"
     
-    SQL = SQL & " Where slialb.NumAlbar = scaalb.NumAlbar And slialb.codtipom = scaalb.codtipom And slialb.codArtic = sartic.codArtic AND "
+    SQL = SQL & " Where slialb.NumAlbar = scaalb.NumAlbar And slialb.codtipom = scaalb.codtipom And slialb.codArtic = sartic.codArtic AND slialb.precoste <>0 AND "
     SQL = SQL & Replace(CadenaAlbaran, "scaalb", "slialb")
 
     conn.Execute SQL

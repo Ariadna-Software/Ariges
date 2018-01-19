@@ -395,7 +395,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "14:06"
+            TextSave        =   "12:29"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1654,6 +1654,10 @@ Begin VB.MDIForm frmPpal
             Caption         =   "Ventas por tipo de pedido"
             Index           =   7
          End
+         Begin VB.Menu mnFacEstadistica2 
+            Caption         =   "Listado de costes"
+            Index           =   8
+         End
       End
    End
    Begin VB.Menu mnCompras 
@@ -1729,6 +1733,10 @@ Begin VB.MDIForm frmPpal
          Begin VB.Menu mnComPedidosLin 
             Caption         =   "Propuesta pedido"
             Index           =   4
+         End
+         Begin VB.Menu mnComPedidosLin 
+            Caption         =   "Estadística reaprovisionamiento"
+            Index           =   5
          End
       End
       Begin VB.Menu mnComAlbaranes 
@@ -2440,11 +2448,11 @@ Dim b As Boolean
     '-- Eliminamos frecuencias de momento
     'mnFrecuencias.visible = vParamAplic.Frecuencias
     PuntoDeMenuVisible mnFrecuencias, vParamAplic.Frecuencias
-    Me.mnbarra33.Visible = mnFrecuencias.Visible
+    Me.mnbarra33.visible = mnFrecuencias.visible
     
     '--------------------
     'TElefonia
-    mnTelefonia.Visible = vParamAplic.TieneTelefonia2 > 0
+    mnTelefonia.visible = vParamAplic.TieneTelefonia2 > 0
     If vParamAplic.TieneTelefonia2 > 0 Then
         'Catadau
         'If vParamAplic.TieneTelefonia2 = 2 Then Me.mnTelefonia1(2).Caption = "Importar fichero COARVAL"
@@ -2459,9 +2467,9 @@ Dim b As Boolean
     End If
 
     '-- Contabilizacion tickets agrupados
-    mnTicket(0).Visible = vParamAplic.ContabilizarTicketAgrupados
-    mnTicket(1).Visible = vParamAplic.ContabilizarTicketAgrupados
-    mnTicket(2).Visible = vParamAplic.ContabilizarTicketAgrupados
+    mnTicket(0).visible = vParamAplic.ContabilizarTicketAgrupados
+    mnTicket(1).visible = vParamAplic.ContabilizarTicketAgrupados
+    mnTicket(2).visible = vParamAplic.ContabilizarTicketAgrupados
     
         
     'Los albaranes y facturas en "B"
@@ -2489,10 +2497,10 @@ Dim b As Boolean
     PuntoDeMenuVisible Me.mnAdministra(6), vParamAplic.GestionFlotas
        
     'Obras
-    Me.mnObra1.Visible = vParamAplic.HayDeparNuevo = 2
+    Me.mnObra1.visible = vParamAplic.HayDeparNuevo = 2
     'Mensajeria
-    mnUtiMensInt.Visible = False
-    mnBarra21.Visible = False
+    mnUtiMensInt.visible = False
+    mnBarra21.visible = False
     
  '   If AvisosPendientes Then
  '       If MsgBox("Tiene avisos pendientes. ¿Quiere verlos ahora?", vbQuestion + vbYesNo) = vbYes Then
@@ -2505,7 +2513,7 @@ Dim b As Boolean
         mnAlmTipoUnidad.Caption = "Formatos"
         mnTiposArticulos.Caption = "Modelos"
         mnAlmFamiliaArticulo.Caption = "Categorias Art."
-        mnAlmCategoria.Visible = False
+        mnAlmCategoria.visible = False
     End If
     
     'Para este usuario y esta empresa unos avlores al usuario
@@ -2528,7 +2536,7 @@ Dim b As Boolean
     PuntoDeMenuVisible Me.mnFacPedidos(13), b
     'QUe ponga el separador
     If b Then
-        If Me.mnFacPedidos(13).Visible Then Me.mnFacPedidos(11).Visible = True
+        If Me.mnFacPedidos(13).visible Then Me.mnFacPedidos(11).visible = True
     End If
     'Factura de mostrador se ve si el usuario lo tiene seleccionado
     'PuntoDeMenuVisible mnFacAlbMostrador, vParamAplic.FrasMostradorSerieDistinta
@@ -2556,7 +2564,7 @@ Dim b As Boolean
     
     
     'De momento no hay
-    mnComCtrlAlb(2).Visible = False
+    mnComCtrlAlb(2).visible = False
     
     'Facturacion electronica
     PuntoDeMenuVisible mnEnvioFactuasMail(1), vParamAplic.PathFacturaE <> ""
@@ -2604,6 +2612,7 @@ Dim b As Boolean
     PuntoDeMenuVisible mnMtoEuler(1), b
     PuntoDeMenuVisible mnMtoEuler(2), b
     PuntoDeMenuVisible mnMtoEuler(3), b
+    PuntoDeMenuVisible mnFacEstadistica2(8), b
     If vParamAplic.NumeroInstalacion = 4 Then
         PuntoDeMenuVisible mnRepAlbaranes, False
         PuntoDeMenuVisible mnRepEntReparacion, False
@@ -2628,8 +2637,8 @@ Dim b As Boolean
     
     
     'Declaracion  fitosnaitarios
-    mnUtiDeclaraLOM(0).Visible = vParamAplic.LotesGeneralitat 'SUBVENCIONADOS
-    mnUtiDeclaraLOM(1).Visible = vParamAplic.ManipuladorFitosanitarios2
+    mnUtiDeclaraLOM(0).visible = vParamAplic.LotesGeneralitat 'SUBVENCIONADOS
+    mnUtiDeclaraLOM(1).visible = vParamAplic.ManipuladorFitosanitarios2
     
     
     
@@ -2650,7 +2659,7 @@ End Sub
 
 
 Private Sub PuntoDeMenuVisible(ByRef MnPuntoDMenu As Menu, b As Boolean)
-    If MnPuntoDMenu.Visible Then MnPuntoDMenu.Visible = b
+    If MnPuntoDMenu.visible Then MnPuntoDMenu.visible = b
     
 End Sub
 
@@ -3408,7 +3417,13 @@ Private Sub mnComPedidosLin_Click(Index As Integer)
     Case 4
         'Propuesta de pedido
         AbrirListado2 32
+    
+    Case 5
+        'Propuesta de pedido
+        AbrirListado3 71
+
     End Select
+    
 End Sub
 
 Private Sub mnComPreProv_Click(Index As Integer)
@@ -3689,6 +3704,8 @@ Private Sub mnFacEstadistica2_Click(Index As Integer)
     Case 7
         'Listado pedidos por "peticion " cliente (si-no)
         AbrirListado3 63
+    Case 8
+        AbrirListado3 69  'Costes euler
     End Select
 End Sub
 
@@ -4911,8 +4928,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    
-            
+
 
         
     Select Case Button.Index
@@ -4950,7 +4966,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Case 17 'Facturas de Proveedores
         mnComHcoFacturas_Click
     Case 18 'Recepcion Fact. Prove
-        If Me.mnComFacturar.Visible And Me.mnComFacturar.Enabled Then mnComFacturar_Click
+        If Me.mnComFacturar.visible And Me.mnComFacturar.Enabled Then mnComFacturar_Click
         
     Case 21 'Mantenimientos
         mnManEntrada_Click
@@ -5025,7 +5041,7 @@ Dim cad As String
         End If
     Next
     Me.Toolbar1.Enabled = Habilitar
-    Me.Toolbar1.Visible = Habilitar
+    Me.Toolbar1.visible = Habilitar
     Me.mnConfParamAplic = True
     Me.mnConfParamGenerales = True
 
@@ -5038,7 +5054,7 @@ End Sub
 Private Sub ReestablecerMenus()
 Dim T
       For Each T In Me
-        If Mid(T.Name, 1, 2) = "mn" Then T.Visible = True
+        If Mid(T.Name, 1, 2) = "mn" Then T.visible = True
     Next
 End Sub
 
@@ -5186,7 +5202,7 @@ Dim miRsAux As ADODB.Recordset
                 If InStr(1, SQL, C) > 0 Then
                     
                     '
-                    T.Visible = False
+                    T.visible = False
                 End If
            
             End If
@@ -5221,83 +5237,83 @@ Dim Activado As Boolean
     
     '-----------------------------------------------------------
     'Articulos
-    Me.Toolbar1.Buttons(1).Visible = ComprobarBotonMenuVisible(Me.mnAlmArticulos, Activado)
+    Me.Toolbar1.Buttons(1).visible = ComprobarBotonMenuVisible(Me.mnAlmArticulos, Activado)
     Me.Toolbar1.Buttons(1).Enabled = Activado
 
     'Movimientos de Articulos
-    Me.Toolbar1.Buttons(2).Visible = ComprobarBotonMenuVisible(Me.mnAlmMovimArticulos, Activado)
+    Me.Toolbar1.Buttons(2).visible = ComprobarBotonMenuVisible(Me.mnAlmMovimArticulos, Activado)
     Me.Toolbar1.Buttons(2).Enabled = Activado
     
     
     '-----------------------------------------------------------
     'Clientes
-    Me.Toolbar1.Buttons(5).Visible = ComprobarBotonMenuVisible(Me.mnFacClientes, Activado)
+    Me.Toolbar1.Buttons(5).visible = ComprobarBotonMenuVisible(Me.mnFacClientes, Activado)
     Me.Toolbar1.Buttons(5).Enabled = Activado
     
     'Proveedores
-    Me.Toolbar1.Buttons(6).Visible = ComprobarBotonMenuVisible(Me.mnComProveedores, Activado)
+    Me.Toolbar1.Buttons(6).visible = ComprobarBotonMenuVisible(Me.mnComProveedores, Activado)
     Me.Toolbar1.Buttons(6).Enabled = Activado
     
     
     '-----------------------------------------------------------
     'Ofertas Clientes
-    Me.Toolbar1.Buttons(9).Visible = ComprobarBotonMenuVisible(Me.mnFacOfertas(0), Activado)
+    Me.Toolbar1.Buttons(9).visible = ComprobarBotonMenuVisible(Me.mnFacOfertas(0), Activado)
     Me.Toolbar1.Buttons(9).Enabled = Activado
     
     'Pedidos Clientes
-    Me.Toolbar1.Buttons(10).Visible = ComprobarBotonMenuVisible(mnFacPedidos(0), Activado)
+    Me.Toolbar1.Buttons(10).visible = ComprobarBotonMenuVisible(mnFacPedidos(0), Activado)
     Me.Toolbar1.Buttons(10).Enabled = Activado
     
     'Albaranes Clientes
-    Me.Toolbar1.Buttons(11).Visible = ComprobarBotonMenuVisible(Me.mnFacEntAlbaran, Activado)
+    Me.Toolbar1.Buttons(11).visible = ComprobarBotonMenuVisible(Me.mnFacEntAlbaran, Activado)
     Me.Toolbar1.Buttons(11).Enabled = Activado
     
     'Facturas Clientes
-    Me.Toolbar1.Buttons(12).Visible = ComprobarBotonMenuVisible(Me.mnFacHcoFacturas, Activado)
+    Me.Toolbar1.Buttons(12).visible = ComprobarBotonMenuVisible(Me.mnFacHcoFacturas, Activado)
     Me.Toolbar1.Buttons(12).Enabled = Activado
     
     
     
     'Si esta visible entonces SI lleva la misma serie no la muestro
     If vParamAplic.FrasMostradorSerieDistinta Then
-        Me.Toolbar1.Buttons(13).Visible = ComprobarBotonMenuVisible(mnFacAlbMostrador, Activado)
+        Me.Toolbar1.Buttons(13).visible = ComprobarBotonMenuVisible(mnFacAlbMostrador, Activado)
         Me.Toolbar1.Buttons(13).Enabled = Activado
     Else
-        Me.Toolbar1.Buttons(13).Visible = False
+        Me.Toolbar1.Buttons(13).visible = False
     End If
     
     '-----------------------------------------------------------
     'Pedidos Proveedor
     'Comprobar que los menus del que cuelga no este bloqueado o invisible
-    Me.Toolbar1.Buttons(15).Visible = ComprobarBotonMenuVisible(mnComPedidosLin(0), Activado)
+    Me.Toolbar1.Buttons(15).visible = ComprobarBotonMenuVisible(mnComPedidosLin(0), Activado)
     Me.Toolbar1.Buttons(15).Enabled = Activado
     
     'Albaranes Proveedor
-    Me.Toolbar1.Buttons(16).Visible = ComprobarBotonMenuVisible(Me.mnComAlbMan, Activado)
+    Me.Toolbar1.Buttons(16).visible = ComprobarBotonMenuVisible(Me.mnComAlbMan, Activado)
     Me.Toolbar1.Buttons(16).Enabled = Activado
     
     'Facturas Proveedor
-    Me.Toolbar1.Buttons(17).Visible = ComprobarBotonMenuVisible(Me.mnComHcoFacturas, Activado)
+    Me.Toolbar1.Buttons(17).visible = ComprobarBotonMenuVisible(Me.mnComHcoFacturas, Activado)
     Me.Toolbar1.Buttons(17).Enabled = Activado
     
     'Recepcion facturas de compras
-    Me.Toolbar1.Buttons(18).Visible = ComprobarBotonMenuVisible(Me.mnComFacturar, Activado)
+    Me.Toolbar1.Buttons(18).visible = ComprobarBotonMenuVisible(Me.mnComFacturar, Activado)
     Me.Toolbar1.Buttons(18).Enabled = Activado
 
 
     '-----------------------------------------------------------
     'Mantenimientos
-    Me.Toolbar1.Buttons(21).Visible = ComprobarBotonMenuVisible(Me.mnManEntrada, Activado)
+    Me.Toolbar1.Buttons(21).visible = ComprobarBotonMenuVisible(Me.mnManEntrada, Activado)
     Me.Toolbar1.Buttons(21).Enabled = Activado
     
     'Nº Serie
-    Me.Toolbar1.Buttons(22).Visible = ComprobarBotonMenuVisible(Me.mnRepNumSerie, Activado)
+    Me.Toolbar1.Buttons(22).visible = ComprobarBotonMenuVisible(Me.mnRepNumSerie, Activado)
     Me.Toolbar1.Buttons(22).Enabled = Activado
     
     
     '-----------------------------------------------------------
     'Conuslta de precio
-    Me.Toolbar1.Buttons(24).Visible = ComprobarBotonMenuVisible(Me.mnFacPedidos(8), Activado)
+    Me.Toolbar1.Buttons(24).visible = ComprobarBotonMenuVisible(Me.mnFacPedidos(8), Activado)
     Me.Toolbar1.Buttons(24).Enabled = Activado
     
     
@@ -5306,17 +5322,17 @@ Dim Activado As Boolean
     'Para EULER --> Reloj
     mnobra(2).Caption = "Partes de trabajo"
     If vParamAplic.NumeroInstalacion = 4 Then
-        Me.Toolbar1.Buttons(24).Visible = ComprobarBotonMenuVisible(Me.mnobra(4), Activado)
+        Me.Toolbar1.Buttons(24).visible = ComprobarBotonMenuVisible(Me.mnobra(4), Activado)
         Me.Toolbar1.Buttons(24).Enabled = Activado
         mnobra(2).Caption = "Mantenimiento tareas reloj"
     Else
-        Me.Toolbar1.Buttons(24).Visible = ComprobarBotonMenuVisible(Me.mnAdmGastosTec, Activado)
+        Me.Toolbar1.Buttons(24).visible = ComprobarBotonMenuVisible(Me.mnAdmGastosTec, Activado)
         Me.Toolbar1.Buttons(24).Enabled = Activado
     End If
     
     'Nuevos botones
     'TPV
-    Me.Toolbar1.Buttons(26).Visible = ComprobarBotonMenuVisible(mnTPVLinea(0), Activado)
+    Me.Toolbar1.Buttons(26).visible = ComprobarBotonMenuVisible(mnTPVLinea(0), Activado)
     If Activado Then
         CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "count(*)", "spatpvg", "1", "1")
         If CadenaDesdeOtroForm = "" Then CadenaDesdeOtroForm = "0"
@@ -5328,28 +5344,28 @@ Dim Activado As Boolean
    ' Me.Toolbar1.Buttons(27).visible = ComprobarBotonMenuVisible(mnCambioEmpresa, Activado)
     'Cambiar empresa lo dejo desde Febrero 2013 SIEMPRE visibñe
     Me.Toolbar1.Buttons(27).Enabled = True
-    Me.Toolbar1.Buttons(27).Visible = True
+    Me.Toolbar1.Buttons(27).visible = True
     
     'Agenda
     If vParamAplic.Frecuencias Then
         Me.Toolbar1.Buttons(28).Image = 24 'FRECUENCIAS
-        Me.Toolbar1.Buttons(28).Visible = ComprobarBotonMenuVisible(mnFrecuencias, Activado)
+        Me.Toolbar1.Buttons(28).visible = ComprobarBotonMenuVisible(mnFrecuencias, Activado)
         Me.Toolbar1.Buttons(28).Enabled = Activado
         Me.Toolbar1.Buttons(28).ToolTipText = "Frecuencias"
     Else
         Me.Toolbar1.Buttons(28).Image = 20 'Agenda
-        Me.Toolbar1.Buttons(28).Visible = ComprobarBotonMenuVisible(mnAgenda, Activado)
+        Me.Toolbar1.Buttons(28).visible = ComprobarBotonMenuVisible(mnAgenda, Activado)
         Me.Toolbar1.Buttons(28).Enabled = Activado
         Me.Toolbar1.Buttons(28).ToolTipText = "Agenda"
     End If
     
     'Avisos
     If vParamAplic.Ariagro = "" Then
-        Me.Toolbar1.Buttons(23).Visible = ComprobarBotonMenuVisible(mnRepAvisos, Activado)
+        Me.Toolbar1.Buttons(23).visible = ComprobarBotonMenuVisible(mnRepAvisos, Activado)
         Me.Toolbar1.Buttons(23).Enabled = Activado
     Else
         'partes de trabajo
-        Me.Toolbar1.Buttons(23).Visible = ComprobarBotonMenuVisible(mnTratamientos(4), Activado)
+        Me.Toolbar1.Buttons(23).visible = ComprobarBotonMenuVisible(mnTratamientos(4), Activado)
         Me.Toolbar1.Buttons(23).Enabled = Activado
     End If
 End Sub
@@ -5371,7 +5387,7 @@ Dim b As Boolean
 
     On Error GoTo EComprobar
     
-    b = objMenu.Visible
+    b = objMenu.visible
     Activado = objMenu.Enabled
     
     If b = False Then

@@ -49,8 +49,7 @@ End Function
 
 
 
-
-Public Function CalcularPuntosAlbaranCABEL(cadWhere As String, FechaAlbaran As Date, ByRef ImporteLineasTotal As String) As Currency
+Public Function CalcularPuntosAlbaranCABEL(cadWhere As String, FechaAlbaran As Date, ByRef ImporteLineasTotal As String, ByRef Comision As String) As Currency
 Dim Rs As ADODB.Recordset
 Dim C As String
 Dim Importe As Currency
@@ -58,10 +57,13 @@ Dim Importe As Currency
     On Error GoTo eCalcularPuntosAlbaran
     CalcularPuntosAlbaranCABEL = 0
     ImporteLineasTotal = ""
+    Comision = ""
     If FechaAlbaran < vParamAplic.PtosFechaIncio Then Exit Function
         
-    
-    C = "select sum(if( sfamia.PtosPermiteCanje =1,importel,0)),sum(importel) from slialb,sartic,sfamia   WHERE slialb.codartic=sartic.codartic and sartic.codfamia="
+    C = "max"
+    If InStr(1, cadWhere, "ART") > 0 Then C = "min"
+    C = C & "(comisionagente)"
+    C = "select sum(if( sfamia.PtosPermiteCanje =1,importel,0)),sum(importel)," & C & " from slialb,sartic,sfamia   WHERE slialb.codartic=sartic.codartic and sartic.codfamia="
     C = C & "sfamia.codfamia   AND "
     C = C & cadWhere
     C = C & " AND slialb.codartic<>" & DBSet(vParamAplic.PtosArticuloCanje, "T")
@@ -73,15 +75,16 @@ Dim Importe As Currency
         If Not IsNull(Rs.Fields(0)) Then
             Importe = Rs.Fields(0) * vParamAplic.PtosAsignar
             CalcularPuntosAlbaranCABEL = Round2(Importe / vParamAplic.PtosImporteCalculo, 2)
-        
             ImporteLineasTotal = DBLet(Rs.Fields(1), "N")
+            If Not IsNull(Rs.Fields(2)) Then Comision = Format(Rs.Fields(2), FormatoImporte)
+                
         End If
     End If
     Rs.Close
     
 eCalcularPuntosAlbaran:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
-    Set Rs = Nothing
+        Set Rs = Nothing
     
 End Function
 

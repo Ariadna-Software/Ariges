@@ -1289,7 +1289,7 @@ Private Sub cmdCancelar_Click()
     Select Case Modo
         Case 3 'Insertar
             DataGrid1.AllowAddNew = False
-            FrameFito.Visible = True
+            FrameFito.visible = True
             If Not Data2.Recordset.EOF Then Me.Data2.Recordset.MoveLast
             If ModificaLineas = 1 Then
                 ModificaLineas = 0
@@ -1300,8 +1300,8 @@ Private Sub cmdCancelar_Click()
 '            If DataGrid1.Enabled Then DataGrid1.SetFocus
 '            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
         Case 4 'Modificar
-            Me.cmdAceptar.Visible = False
-            Me.cmdCancelar.Visible = False
+            Me.cmdAceptar.visible = False
+            Me.cmdCancelar.visible = False
            
     End Select
     PonerModo 2
@@ -1431,15 +1431,15 @@ Private Sub Form_Load()
         
         
         .Buttons(21).Image = 10  'Lotes fito
-        .Buttons(21).Visible = vParamAplic.ManipuladorFitosanitarios2
-        Me.mnLotefitosanitarios.Visible = vParamAplic.ManipuladorFitosanitarios2
+        .Buttons(21).visible = vParamAplic.ManipuladorFitosanitarios2
+        Me.mnLotefitosanitarios.visible = vParamAplic.ManipuladorFitosanitarios2
         
         
         .Buttons(23).Image = 6  'Salir
     End With
 
 
-    txtFito2(0).Visible = vParamAplic.ManipuladorFitosanitarios2 Or vParamAplic.Ariagro <> ""
+    txtFito2(0).visible = vParamAplic.ManipuladorFitosanitarios2 Or vParamAplic.Ariagro <> ""
 
     PrimeraVez = True
     LimpiarCampos   'Limpia los campos TextBox
@@ -1553,7 +1553,7 @@ Dim Rs As ADODB.Recordset
 Dim N As Integer
     On Error GoTo ECargaCombo
     
-    Me.cboNumVenta.Visible = False
+    Me.cboNumVenta.visible = False
     Me.cboNumVenta.Clear
 
     SQL = "SELECT * FROM " & NombreTabla & " WHERE numtermi=" & NumTermi
@@ -1575,7 +1575,7 @@ Dim N As Integer
     Wend
     Rs.Close
     Set Rs = Nothing
-    Me.cboNumVenta.Visible = True
+    Me.cboNumVenta.visible = True
     
 ECargaCombo:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos del combo.", Err.Description
@@ -2042,10 +2042,10 @@ Dim b As Boolean
     'Si no es modo lineas Boquear los TxtAux
     For i = 1 To 5
         BloquearTxt txtAux(i), Not b
-        txtAux(i).Visible = b
+        txtAux(i).visible = b
     Next i
-    txtAux(12).Visible = txtAux(5).Visible
-    txtAux2(2).Visible = b
+    txtAux(12).visible = txtAux(5).visible
+    txtAux2(2).visible = b
     'El Importe siempre bloqueadoç
     BloquearTxt txtAux(5), True
     
@@ -2058,8 +2058,8 @@ Dim b As Boolean
     If Modo = 2 Then
         'Me garantizo que los
         'botones NO se vean
-        Me.cmdAceptar.Visible = False
-        Me.cmdCancelar.Visible = False
+        Me.cmdAceptar.visible = False
+        Me.cmdCancelar.visible = False
     End If
     
     
@@ -3185,7 +3185,7 @@ Dim anc As Single
         
     ModificaLineas = 1
     AnyadirLinea DataGrid1, Data2
-    FrameFito.Visible = False
+    FrameFito.visible = False
     
     If DataGrid1.Row < 0 Then
         anc = ObtenerAlto(DataGrid1, 50)
@@ -3612,7 +3612,7 @@ Dim PrimeraLin As Boolean
         If Data2.Recordset.EOF = True Then PrimeraLin = True
          If InsertarLinea Then
             DataGrid1.AllowAddNew = False
-            FrameFito.Visible = True
+            FrameFito.visible = True
     '        PonerModo 2
             
             If PrimeraLin Then
@@ -3975,8 +3975,8 @@ Dim cad As String
     txtAux2(2).Text = Data2.Recordset!NomArtic
     Set T = Nothing
     
-    Me.cmdAceptar.Visible = True
-    Me.cmdCancelar.Visible = True
+    Me.cmdAceptar.visible = True
+    Me.cmdCancelar.visible = True
     PonerArticuloCod txtAux(2)
     PonerFoco txtAux(3)
 End Sub

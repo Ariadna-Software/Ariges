@@ -2443,7 +2443,7 @@ Dim RN As ADODB.Recordset
     On Error GoTo EActualizaRiesgoCliente
 
     Set RN = New ADODB.Recordset
-    miSQL = "Select codclien,tipoiva,credisol,codsitua from sclien where codclien =" & codClien
+    miSQL = "Select codclien,tipoiva,if(credisol is null,0,credisol) credisol,codsitua from sclien where codclien =" & codClien
     RN.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     RiesgoCliente codClien, CByte(RN!TipoIVA), Now, ImpTesor, ImpAlb, Nothing

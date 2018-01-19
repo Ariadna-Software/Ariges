@@ -45,43 +45,43 @@ Begin VB.Form frmFacClientes
       Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "Label1(15)"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label1(36)"
+      Tab(0).Control(5)=   "Label1(37)"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "Label1(37)"
+      Tab(0).Control(6)=   "Label1(11)"
       Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "Label1(11)"
+      Tab(0).Control(7)=   "Label1(7)"
       Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Label1(7)"
+      Tab(0).Control(8)=   "Label1(5)"
       Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "Label1(5)"
+      Tab(0).Control(9)=   "imgBuscar(0)"
       Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "imgBuscar(0)"
+      Tab(0).Control(10)=   "imgBuscar(3)"
       Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "imgBuscar(3)"
+      Tab(0).Control(11)=   "Label1(17)"
       Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "Label1(17)"
+      Tab(0).Control(12)=   "Label1(6)"
       Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Label1(6)"
+      Tab(0).Control(13)=   "imgBuscar(2)"
       Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "imgBuscar(2)"
+      Tab(0).Control(14)=   "imgBuscar(1)"
       Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "imgBuscar(1)"
+      Tab(0).Control(15)=   "imgBuscar(9)"
       Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "imgBuscar(9)"
+      Tab(0).Control(16)=   "imgWeb"
       Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "imgWeb"
+      Tab(0).Control(17)=   "Label1(16)"
       Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "Label1(16)"
+      Tab(0).Control(18)=   "imgFecha(0)"
       Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "imgFecha(0)"
+      Tab(0).Control(19)=   "imgBuscar(11)"
       Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Label1(19)"
+      Tab(0).Control(20)=   "Label1(93)"
       Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "imgBuscar(11)"
+      Tab(0).Control(21)=   "imgBuscar(17)"
       Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "Label1(93)"
+      Tab(0).Control(22)=   "Label1(36)"
       Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "imgBuscar(17)"
+      Tab(0).Control(23)=   "Label1(19)"
       Tab(0).Control(23).Enabled=   0   'False
       Tab(0).Control(24)=   "Text1(3)"
       Tab(0).Control(24).Enabled=   0   'False
@@ -133,43 +133,43 @@ Begin VB.Form frmFacClientes
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacClientes.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "frameDptoVentas"
+      Tab(1).Control(0)=   "frameDptoDirec"
       Tab(1).Control(1)=   "frameDptoAdmon"
-      Tab(1).Control(2)=   "frameDptoDirec"
+      Tab(1).Control(2)=   "frameDptoVentas"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Direcciones"
       TabPicture(2)   =   "frmFacClientes.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "ToolAux"
-      Tab(2).Control(1)=   "FrameDirecciones"
+      Tab(2).Control(0)=   "FrameDirecciones"
+      Tab(2).Control(1)=   "ToolAux"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Dir. Envio"
       TabPicture(3)   =   "frmFacClientes.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "FrameDireccionEnvio"
-      Tab(3).Control(1)=   "Toolaux2"
+      Tab(3).Control(0)=   "Toolaux2"
+      Tab(3).Control(1)=   "FrameDireccionEnvio"
       Tab(3).ControlCount=   2
       TabCaption(4)   =   "Documentos"
       TabPicture(4)   =   "frmFacClientes.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label3"
-      Tab(4).Control(1)=   "imgFecha(3)"
-      Tab(4).Control(2)=   "LabelDoc"
-      Tab(4).Control(3)=   "lw1"
-      Tab(4).Control(4)=   "Frame3(0)"
-      Tab(4).Control(5)=   "Text1(46)"
-      Tab(4).Control(6)=   "FrameVisorDocumentos"
-      Tab(4).Control(7)=   "FramePuntos"
+      Tab(4).Control(0)=   "FramePuntos"
+      Tab(4).Control(1)=   "FrameVisorDocumentos"
+      Tab(4).Control(2)=   "Text1(46)"
+      Tab(4).Control(3)=   "Frame3(0)"
+      Tab(4).Control(4)=   "lw1"
+      Tab(4).Control(5)=   "LabelDoc"
+      Tab(4).Control(6)=   "imgFecha(3)"
+      Tab(4).Control(7)=   "Label3"
       Tab(4).ControlCount=   8
       TabCaption(5)   =   "CRM"
       TabPicture(5)   =   "frmFacClientes.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame3(1)"
-      Tab(5).Control(1)=   "cmdAccCRM(0)"
-      Tab(5).Control(2)=   "cmdAccCRM(1)"
-      Tab(5).Control(3)=   "cmdAccCRM(2)"
-      Tab(5).Control(4)=   "lwCRM"
-      Tab(5).Control(5)=   "LabelCRM"
+      Tab(5).Control(0)=   "LabelCRM"
+      Tab(5).Control(1)=   "lwCRM"
+      Tab(5).Control(2)=   "cmdAccCRM(2)"
+      Tab(5).Control(3)=   "cmdAccCRM(1)"
+      Tab(5).Control(4)=   "cmdAccCRM(0)"
+      Tab(5).Control(5)=   "Frame3(1)"
       Tab(5).ControlCount=   6
       TabCaption(6)   =   "Datos contacto"
       TabPicture(6)   =   "frmFacClientes.frx":00B4
@@ -179,10 +179,10 @@ Begin VB.Form frmFacClientes
       TabCaption(7)   =   "ops aseg"
       TabPicture(7)   =   "frmFacClientes.frx":00D0
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "Text1(55)"
-      Tab(7).Control(1)=   "Text1(53)"
-      Tab(7).Control(2)=   "cmdActRiesgo"
-      Tab(7).Control(3)=   "chkCredPriv"
+      Tab(7).Control(0)=   "cboTipoASeg"
+      Tab(7).Control(1)=   "Text1(55)"
+      Tab(7).Control(2)=   "Text1(53)"
+      Tab(7).Control(3)=   "cmdActRiesgo"
       Tab(7).Control(4)=   "txtSit"
       Tab(7).Control(5)=   "Text1(51)"
       Tab(7).Control(6)=   "Text1(50)"
@@ -191,138 +191,139 @@ Begin VB.Form frmFacClientes
       Tab(7).Control(9)=   "Text1(41)"
       Tab(7).Control(10)=   "Text1(47)"
       Tab(7).Control(11)=   "Text1(43)"
-      Tab(7).Control(12)=   "Label1(94)"
-      Tab(7).Control(13)=   "imgFecha(5)"
-      Tab(7).Control(14)=   "Label1(92)"
-      Tab(7).Control(15)=   "Label1(83)"
-      Tab(7).Control(16)=   "Label1(82)"
-      Tab(7).Control(17)=   "Label1(81)"
-      Tab(7).Control(18)=   "Label1(80)"
-      Tab(7).Control(19)=   "imgFecha(4)"
-      Tab(7).Control(20)=   "Label1(66)"
+      Tab(7).Control(12)=   "Label1(117)"
+      Tab(7).Control(13)=   "imgFecha(4)"
+      Tab(7).Control(14)=   "Label1(94)"
+      Tab(7).Control(15)=   "imgFecha(5)"
+      Tab(7).Control(16)=   "Label1(92)"
+      Tab(7).Control(17)=   "Label1(83)"
+      Tab(7).Control(18)=   "Label1(82)"
+      Tab(7).Control(19)=   "Label1(81)"
+      Tab(7).Control(20)=   "Label1(80)"
       Tab(7).Control(21)=   "imgFecha(2)"
       Tab(7).Control(22)=   "Label1(79)"
       Tab(7).Control(23)=   "Label1(45)"
-      Tab(7).ControlCount=   24
+      Tab(7).Control(24)=   "Label1(66)"
+      Tab(7).ControlCount=   25
       TabCaption(8)   =   "Renting"
       TabPicture(8)   =   "frmFacClientes.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "cmdRenting(3)"
-      Tab(8).Control(1)=   "txtauxRent(10)"
-      Tab(8).Control(2)=   "txtauxRent(9)"
-      Tab(8).Control(3)=   "txtauxRent(8)"
-      Tab(8).Control(4)=   "cmdRenting(2)"
-      Tab(8).Control(5)=   "txtauxRent(7)"
-      Tab(8).Control(6)=   "txtauxRent(11)"
-      Tab(8).Control(7)=   "txtauxRent(6)"
-      Tab(8).Control(8)=   "txtauxRent(5)"
-      Tab(8).Control(9)=   "txtauxRent(4)"
-      Tab(8).Control(10)=   "txtauxRent(3)"
-      Tab(8).Control(11)=   "cmdRenting(1)"
-      Tab(8).Control(12)=   "cmdRenting(0)"
-      Tab(8).Control(13)=   "txtauxRent(2)"
-      Tab(8).Control(14)=   "txtauxRent(0)"
-      Tab(8).Control(15)=   "txtauxRent(1)"
-      Tab(8).Control(16)=   "DataGrid2"
-      Tab(8).Control(17)=   "Label1(90)"
-      Tab(8).Control(18)=   "Label1(89)"
-      Tab(8).Control(19)=   "Label1(88)"
+      Tab(8).Control(0)=   "Label1(88)"
+      Tab(8).Control(1)=   "Label1(89)"
+      Tab(8).Control(2)=   "Label1(90)"
+      Tab(8).Control(3)=   "DataGrid2"
+      Tab(8).Control(4)=   "txtauxRent(1)"
+      Tab(8).Control(5)=   "txtauxRent(0)"
+      Tab(8).Control(6)=   "txtauxRent(2)"
+      Tab(8).Control(7)=   "cmdRenting(0)"
+      Tab(8).Control(8)=   "cmdRenting(1)"
+      Tab(8).Control(9)=   "txtauxRent(3)"
+      Tab(8).Control(10)=   "txtauxRent(4)"
+      Tab(8).Control(11)=   "txtauxRent(5)"
+      Tab(8).Control(12)=   "txtauxRent(6)"
+      Tab(8).Control(13)=   "txtauxRent(11)"
+      Tab(8).Control(14)=   "txtauxRent(7)"
+      Tab(8).Control(15)=   "cmdRenting(2)"
+      Tab(8).Control(16)=   "txtauxRent(8)"
+      Tab(8).Control(17)=   "txtauxRent(9)"
+      Tab(8).Control(18)=   "txtauxRent(10)"
+      Tab(8).Control(19)=   "cmdRenting(3)"
       Tab(8).ControlCount=   20
       TabCaption(9)   =   "tf"
       TabPicture(9)   =   "frmFacClientes.frx":0108
       Tab(9).ControlEnabled=   0   'False
-      Tab(9).Control(0)=   "cboOperadorTfnnia2(0)"
-      Tab(9).Control(1)=   "cboOperadorTfnnia2(1)"
-      Tab(9).Control(2)=   "FrameTelefonia(1)"
-      Tab(9).Control(3)=   "txtauxTfno(10)"
-      Tab(9).Control(4)=   "txtauxTfno(9)"
-      Tab(9).Control(5)=   "txtauxTfno(8)"
-      Tab(9).Control(6)=   "txtauxTfno(7)"
-      Tab(9).Control(7)=   "Text5(6)"
-      Tab(9).Control(8)=   "txtauxTfno(6)"
-      Tab(9).Control(9)=   "Text5(5)"
-      Tab(9).Control(10)=   "Text5(4)"
-      Tab(9).Control(11)=   "txtauxTfno(5)"
-      Tab(9).Control(12)=   "txtauxTfno(4)"
-      Tab(9).Control(13)=   "FrameTelefonia(0)"
-      Tab(9).Control(14)=   "txtauxTfno(3)"
-      Tab(9).Control(15)=   "txtauxTfno(2)"
-      Tab(9).Control(16)=   "txtauxTfno(1)"
-      Tab(9).Control(17)=   "txtauxTfno(0)"
+      Tab(9).Control(0)=   "Label1(95)"
+      Tab(9).Control(1)=   "Label1(99)"
+      Tab(9).Control(2)=   "Label1(98)"
+      Tab(9).Control(3)=   "Label2(1)"
+      Tab(9).Control(4)=   "Label1(96)"
+      Tab(9).Control(5)=   "Label1(97)"
+      Tab(9).Control(6)=   "imgBuscar(18)"
+      Tab(9).Control(7)=   "imgBuscar(19)"
+      Tab(9).Control(8)=   "imgBuscar(20)"
+      Tab(9).Control(9)=   "Label1(100)"
+      Tab(9).Control(10)=   "Label1(101)"
+      Tab(9).Control(11)=   "Label1(102)"
+      Tab(9).Control(12)=   "imgBuscar(21)"
+      Tab(9).Control(13)=   "imgFechaTf(9)"
+      Tab(9).Control(14)=   "imgFechaTf(10)"
+      Tab(9).Control(15)=   "Label1(103)"
+      Tab(9).Control(16)=   "Label1(20)"
+      Tab(9).Control(17)=   "lwTfnoCuotas"
       Tab(9).Control(18)=   "DataGrid3"
-      Tab(9).Control(19)=   "lwTfnoCuotas"
-      Tab(9).Control(20)=   "Label1(20)"
-      Tab(9).Control(21)=   "Label1(103)"
-      Tab(9).Control(22)=   "imgFechaTf(10)"
-      Tab(9).Control(23)=   "imgFechaTf(9)"
-      Tab(9).Control(24)=   "imgBuscar(21)"
-      Tab(9).Control(25)=   "Label1(102)"
-      Tab(9).Control(26)=   "Label1(101)"
-      Tab(9).Control(27)=   "Label1(100)"
-      Tab(9).Control(28)=   "imgBuscar(20)"
-      Tab(9).Control(29)=   "imgBuscar(19)"
-      Tab(9).Control(30)=   "imgBuscar(18)"
-      Tab(9).Control(31)=   "Label1(97)"
-      Tab(9).Control(32)=   "Label1(96)"
-      Tab(9).Control(33)=   "Label2(1)"
-      Tab(9).Control(34)=   "Label1(98)"
-      Tab(9).Control(35)=   "Label1(99)"
-      Tab(9).Control(36)=   "Label1(95)"
+      Tab(9).Control(19)=   "txtauxTfno(0)"
+      Tab(9).Control(20)=   "txtauxTfno(1)"
+      Tab(9).Control(21)=   "txtauxTfno(2)"
+      Tab(9).Control(22)=   "txtauxTfno(3)"
+      Tab(9).Control(23)=   "FrameTelefonia(0)"
+      Tab(9).Control(24)=   "txtauxTfno(4)"
+      Tab(9).Control(25)=   "txtauxTfno(5)"
+      Tab(9).Control(26)=   "Text5(4)"
+      Tab(9).Control(27)=   "Text5(5)"
+      Tab(9).Control(28)=   "txtauxTfno(6)"
+      Tab(9).Control(29)=   "Text5(6)"
+      Tab(9).Control(30)=   "txtauxTfno(7)"
+      Tab(9).Control(31)=   "txtauxTfno(8)"
+      Tab(9).Control(32)=   "txtauxTfno(9)"
+      Tab(9).Control(33)=   "txtauxTfno(10)"
+      Tab(9).Control(34)=   "FrameTelefonia(1)"
+      Tab(9).Control(35)=   "cboOperadorTfnnia2(1)"
+      Tab(9).Control(36)=   "cboOperadorTfnnia2(0)"
       Tab(9).ControlCount=   37
       TabCaption(10)  =   "Fito"
       TabPicture(10)  =   "frmFacClientes.frx":0124
       Tab(10).ControlEnabled=   0   'False
-      Tab(10).Control(0)=   "Label1(33)"
-      Tab(10).Control(1)=   "Label1(35)"
-      Tab(10).Control(2)=   "Label1(104)"
-      Tab(10).Control(3)=   "imgFecha(6)"
-      Tab(10).Control(4)=   "Label1(105)"
-      Tab(10).Control(5)=   "Label1(107)"
-      Tab(10).Control(6)=   "Label1(108)"
-      Tab(10).Control(7)=   "Label1(109)"
-      Tab(10).Control(8)=   "ImageFito(0)"
-      Tab(10).Control(9)=   "ImageFito(1)"
-      Tab(10).Control(10)=   "ImageFito(2)"
-      Tab(10).Control(11)=   "ImageFito(3)"
-      Tab(10).Control(12)=   "Label1(115)"
-      Tab(10).Control(13)=   "ImageFito(4)"
-      Tab(10).Control(14)=   "DataGrid4"
-      Tab(10).Control(15)=   "cboManipulador"
-      Tab(10).Control(16)=   "Text1(57)"
-      Tab(10).Control(17)=   "txtauxFito(3)"
-      Tab(10).Control(18)=   "txtauxFito(2)"
-      Tab(10).Control(19)=   "txtauxFito(1)"
-      Tab(10).Control(20)=   "cboFitos(0)"
-      Tab(10).Control(21)=   "txtauxFito(0)"
-      Tab(10).Control(22)=   "txtauxFito(4)"
-      Tab(10).Control(23)=   "Text1(58)"
-      Tab(10).Control(24)=   "cmdFitos(0)"
-      Tab(10).Control(25)=   "txtauxFito(5)"
-      Tab(10).Control(26)=   "chkManiProv"
-      Tab(10).Control(27)=   "cboFitos(1)"
+      Tab(10).Control(0)=   "cboFitos(1)"
+      Tab(10).Control(1)=   "chkManiProv"
+      Tab(10).Control(2)=   "txtauxFito(5)"
+      Tab(10).Control(3)=   "cmdFitos(0)"
+      Tab(10).Control(4)=   "Text1(58)"
+      Tab(10).Control(5)=   "txtauxFito(4)"
+      Tab(10).Control(6)=   "txtauxFito(0)"
+      Tab(10).Control(7)=   "cboFitos(0)"
+      Tab(10).Control(8)=   "txtauxFito(1)"
+      Tab(10).Control(9)=   "txtauxFito(2)"
+      Tab(10).Control(10)=   "txtauxFito(3)"
+      Tab(10).Control(11)=   "Text1(57)"
+      Tab(10).Control(12)=   "cboManipulador"
+      Tab(10).Control(13)=   "DataGrid4"
+      Tab(10).Control(14)=   "ImageFito(4)"
+      Tab(10).Control(15)=   "Label1(115)"
+      Tab(10).Control(16)=   "ImageFito(3)"
+      Tab(10).Control(17)=   "ImageFito(2)"
+      Tab(10).Control(18)=   "ImageFito(1)"
+      Tab(10).Control(19)=   "ImageFito(0)"
+      Tab(10).Control(20)=   "Label1(109)"
+      Tab(10).Control(21)=   "Label1(108)"
+      Tab(10).Control(22)=   "Label1(107)"
+      Tab(10).Control(23)=   "Label1(105)"
+      Tab(10).Control(24)=   "imgFecha(6)"
+      Tab(10).Control(25)=   "Label1(104)"
+      Tab(10).Control(26)=   "Label1(35)"
+      Tab(10).Control(27)=   "Label1(33)"
       Tab(10).ControlCount=   28
       TabCaption(11)  =   "Marja"
       TabPicture(11)  =   "frmFacClientes.frx":0140
       Tab(11).ControlEnabled=   0   'False
-      Tab(11).Control(0)=   "cbomarjal"
-      Tab(11).Control(1)=   "txtauxMarja(6)"
-      Tab(11).Control(2)=   "txtauxMarja(8)"
-      Tab(11).Control(3)=   "txtauxMarja(9)"
-      Tab(11).Control(4)=   "txtauxMarja(5)"
-      Tab(11).Control(5)=   "txtauxMarja(7)"
-      Tab(11).Control(6)=   "txtauxMarja(4)"
-      Tab(11).Control(7)=   "txtauxMarja(3)"
-      Tab(11).Control(8)=   "txtauxMarja(2)"
+      Tab(11).Control(0)=   "imgFechaCampos(7)"
+      Tab(11).Control(1)=   "Label1(110)"
+      Tab(11).Control(2)=   "Label1(111)"
+      Tab(11).Control(3)=   "imgFechaCampos(8)"
+      Tab(11).Control(4)=   "Label1(112)"
+      Tab(11).Control(5)=   "imgFechaCampos(9)"
+      Tab(11).Control(6)=   "Label1(113)"
+      Tab(11).Control(7)=   "DataGrid5"
+      Tab(11).Control(8)=   "txtauxMarja(0)"
       Tab(11).Control(9)=   "txtauxMarja(1)"
-      Tab(11).Control(10)=   "txtauxMarja(0)"
-      Tab(11).Control(11)=   "DataGrid5"
-      Tab(11).Control(12)=   "Label1(113)"
-      Tab(11).Control(13)=   "imgFechaCampos(9)"
-      Tab(11).Control(14)=   "Label1(112)"
-      Tab(11).Control(15)=   "imgFechaCampos(8)"
-      Tab(11).Control(16)=   "Label1(111)"
-      Tab(11).Control(17)=   "Label1(110)"
-      Tab(11).Control(18)=   "imgFechaCampos(7)"
+      Tab(11).Control(10)=   "txtauxMarja(2)"
+      Tab(11).Control(11)=   "txtauxMarja(3)"
+      Tab(11).Control(12)=   "txtauxMarja(4)"
+      Tab(11).Control(13)=   "txtauxMarja(7)"
+      Tab(11).Control(14)=   "txtauxMarja(5)"
+      Tab(11).Control(15)=   "txtauxMarja(9)"
+      Tab(11).Control(16)=   "txtauxMarja(8)"
+      Tab(11).Control(17)=   "txtauxMarja(6)"
+      Tab(11).Control(18)=   "cbomarjal"
       Tab(11).ControlCount=   19
       Begin VB.TextBox Text1 
          Height          =   315
@@ -347,6 +348,15 @@ Begin VB.Form frmFacClientes
          Text            =   "Text1"
          Top             =   2760
          Width           =   1365
+      End
+      Begin VB.ComboBox cboTipoASeg 
+         Height          =   315
+         Left            =   -72960
+         Style           =   2  'Dropdown List
+         TabIndex        =   73
+         Tag             =   "Tipo credito|N|S|||sclien|credipriv||N|"
+         Top             =   780
+         Width           =   2055
       End
       Begin VB.ComboBox cboPais 
          Height          =   315
@@ -953,12 +963,12 @@ Begin VB.Form frmFacClientes
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   55
-         Left            =   -66000
+         Left            =   -65400
          MaxLength       =   16
-         TabIndex        =   76
+         TabIndex        =   75
          Tag             =   "NºGrupo|N|S|0||sclien|NumGrupo|0||"
          Text            =   "Text1"
-         Top             =   960
+         Top             =   780
          Width           =   1470
       End
       Begin VB.Frame FrameTelefonia 
@@ -1067,12 +1077,12 @@ Begin VB.Form frmFacClientes
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   53
-         Left            =   -65880
+         Left            =   -72960
          MaxLength       =   10
-         TabIndex        =   79
+         TabIndex        =   80
          Tag             =   "Fecha concesion|F|S|||sclien|fecbajcre|dd/mm/yyyy|N|"
          Text            =   "Text1"
-         Top             =   1860
+         Top             =   3540
          Width           =   1110
       End
       Begin VB.CommandButton cmdRenting 
@@ -1281,18 +1291,9 @@ Begin VB.Form frmFacClientes
       Begin VB.CommandButton cmdActRiesgo 
          Caption         =   "Actualizar riesgo"
          Height          =   375
-         Left            =   -66000
+         Left            =   -66480
          TabIndex        =   240
-         Top             =   4200
-         Width           =   1575
-      End
-      Begin VB.CheckBox chkCredPriv 
-         Caption         =   "Credito privado"
-         Height          =   195
-         Left            =   -74760
-         TabIndex        =   73
-         Tag             =   "Priv.|N|N|||sclien|credipriv||N|"
-         Top             =   600
+         Top             =   4800
          Width           =   1575
       End
       Begin VB.TextBox txtSit 
@@ -1307,93 +1308,93 @@ Begin VB.Form frmFacClientes
             Strikethrough   =   0   'False
          EndProperty
          Height          =   420
-         Left            =   -74280
+         Left            =   -73320
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   239
          Text            =   "Text2"
-         Top             =   4200
+         Top             =   4800
          Width           =   6405
       End
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   51
-         Left            =   -68880
+         Left            =   -65280
          MaxLength       =   10
-         TabIndex        =   81
+         TabIndex        =   82
          Tag             =   "Fecha Reclamación|F|S|||sclien|UtFecrecal|dd/mm/yyyy|N|"
          Text            =   "Text1"
-         Top             =   2820
-         Width           =   1110
+         Top             =   3540
+         Width           =   1335
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   50
-         Left            =   -65880
+         Left            =   -69000
          MaxLength       =   16
-         TabIndex        =   82
+         TabIndex        =   74
          Tag             =   "Codigo aseg.|T|S|||sclien|codaseg||N|"
          Text            =   "Text1"
-         Top             =   2820
+         Top             =   780
          Width           =   1470
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   49
-         Left            =   -72840
+         Left            =   -69000
          MaxLength       =   16
-         TabIndex        =   80
+         TabIndex        =   81
          Tag             =   "Límite crédito|N|S|0||sclien|riesgoact|#,###,###,##0.00|N|"
          Text            =   "Text1"
-         Top             =   2820
+         Top             =   3540
          Width           =   1470
       End
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   48
-         Left            =   -68880
+         Left            =   -72960
          MaxLength       =   10
-         TabIndex        =   75
+         TabIndex        =   76
          Tag             =   "Fecha Reclamación|F|S|||sclien|FechaSol|dd/mm/yyyy|N|"
          Text            =   "Text1"
-         Top             =   1020
-         Width           =   1110
+         Top             =   1620
+         Width           =   1335
       End
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   41
-         Left            =   -68880
+         Left            =   -72960
          MaxLength       =   10
          TabIndex        =   78
          Tag             =   "Fecha concesion|F|S|||sclien|fechaulr|dd/mm/yyyy|N|"
          Text            =   "Text1"
-         Top             =   1860
-         Width           =   1110
+         Top             =   2580
+         Width           =   1455
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   47
-         Left            =   -72840
+         Left            =   -69000
          MaxLength       =   16
-         TabIndex        =   74
+         TabIndex        =   77
          Tag             =   "Límite crédito|N|S|0||sclien|credisol|#,###,###,##0.00|N|"
          Text            =   "Text1"
-         Top             =   1020
+         Top             =   1740
          Width           =   1470
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   43
-         Left            =   -72840
+         Left            =   -69000
          MaxLength       =   16
-         TabIndex        =   77
+         TabIndex        =   79
          Tag             =   "Límite crédito|N|S|0||sclien|limcredi|#,###,###,##0.00|N|"
          Text            =   "Text1"
-         Top             =   1860
+         Top             =   2580
          Width           =   1470
       End
       Begin VB.Frame Frame4 
@@ -4247,6 +4248,42 @@ Begin VB.Form frmFacClientes
             EndProperty
          EndProperty
       End
+      Begin VB.Label Label1 
+         Caption         =   "Password web"
+         Height          =   255
+         Index           =   19
+         Left            =   2880
+         TabIndex        =   182
+         Top             =   960
+         Width           =   1095
+      End
+      Begin VB.Label Label1 
+         Caption         =   "N.I.F."
+         Height          =   255
+         Index           =   36
+         Left            =   375
+         TabIndex        =   125
+         Top             =   2850
+         Width           =   1095
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Tipo crédito"
+         Height          =   255
+         Index           =   117
+         Left            =   -74520
+         TabIndex        =   368
+         Top             =   840
+         Width           =   1335
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   4
+         Left            =   -73320
+         Picture         =   "frmFacClientes.frx":62FE
+         ToolTipText     =   "Buscar fecha"
+         Top             =   1680
+         Width           =   240
+      End
       Begin VB.Image ImageFito 
          Height          =   255
          Index           =   4
@@ -4303,7 +4340,7 @@ Begin VB.Form frmFacClientes
          Height          =   240
          Index           =   8
          Left            =   -64320
-         Picture         =   "frmFacClientes.frx":62FE
+         Picture         =   "frmFacClientes.frx":6389
          ToolTipText     =   "Buscar fecha"
          Top             =   1560
          Width           =   240
@@ -4330,7 +4367,7 @@ Begin VB.Form frmFacClientes
          Height          =   240
          Index           =   7
          Left            =   -66840
-         Picture         =   "frmFacClientes.frx":6389
+         Picture         =   "frmFacClientes.frx":6414
          ToolTipText     =   "Buscar fecha"
          Top             =   1560
          Width           =   240
@@ -4436,7 +4473,7 @@ Begin VB.Form frmFacClientes
          Height          =   240
          Index           =   6
          Left            =   -68520
-         Picture         =   "frmFacClientes.frx":6414
+         Picture         =   "frmFacClientes.frx":649F
          ToolTipText     =   "Buscar fecha"
          Top             =   480
          Width           =   240
@@ -4500,7 +4537,7 @@ Begin VB.Form frmFacClientes
          Height          =   240
          Index           =   10
          Left            =   -64320
-         Picture         =   "frmFacClientes.frx":649F
+         Picture         =   "frmFacClientes.frx":652A
          ToolTipText     =   "Buscar fecha"
          Top             =   2280
          Width           =   240
@@ -4509,7 +4546,7 @@ Begin VB.Form frmFacClientes
          Height          =   240
          Index           =   9
          Left            =   -67080
-         Picture         =   "frmFacClientes.frx":652A
+         Picture         =   "frmFacClientes.frx":65B5
          ToolTipText     =   "Buscar fecha"
          Top             =   2280
          Width           =   240
@@ -4599,9 +4636,9 @@ Begin VB.Form frmFacClientes
          Caption         =   "Nº Grupo:"
          Height          =   195
          Index           =   94
-         Left            =   -67440
+         Left            =   -66600
          TabIndex        =   293
-         Top             =   1020
+         Top             =   870
          Width           =   1440
       End
       Begin VB.Label Label2 
@@ -4635,19 +4672,19 @@ Begin VB.Form frmFacClientes
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   5
-         Left            =   -66120
-         Picture         =   "frmFacClientes.frx":65B5
+         Left            =   -73320
+         Picture         =   "frmFacClientes.frx":6640
          ToolTipText     =   "Buscar fecha"
-         Top             =   1890
+         Top             =   3570
          Width           =   240
       End
       Begin VB.Label Label1 
          Caption         =   "Fecha baja"
          Height          =   255
          Index           =   92
-         Left            =   -67440
+         Left            =   -74520
          TabIndex        =   270
-         Top             =   1890
+         Top             =   3570
          Width           =   855
       End
       Begin VB.Label Label1 
@@ -4681,81 +4718,63 @@ Begin VB.Form frmFacClientes
          Caption         =   "Ult. fec. recalculo"
          Height          =   255
          Index           =   83
-         Left            =   -70800
+         Left            =   -66720
          TabIndex        =   238
-         Top             =   2850
+         Top             =   3540
          Width           =   1455
       End
       Begin VB.Label Label1 
          Caption         =   "Codigo aseguradora"
          Height          =   195
          Index           =   82
-         Left            =   -67440
+         Left            =   -70440
          TabIndex        =   237
-         Top             =   2880
+         Top             =   870
          Width           =   1680
       End
       Begin VB.Label Label1 
          Caption         =   "Riesgo actual"
          Height          =   195
          Index           =   81
-         Left            =   -74280
+         Left            =   -70440
          TabIndex        =   236
-         Top             =   2880
+         Top             =   3600
          Width           =   1080
       End
       Begin VB.Label Label1 
          Caption         =   "Fecha solicitud"
          Height          =   255
          Index           =   80
-         Left            =   -70800
+         Left            =   -74520
          TabIndex        =   235
-         Top             =   1080
+         Top             =   1680
          Width           =   1335
       End
       Begin VB.Image imgFecha 
          Height          =   240
-         Index           =   4
-         Left            =   -69120
-         Picture         =   "frmFacClientes.frx":6640
-         ToolTipText     =   "Buscar fecha"
-         Top             =   1050
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Fecha concesión"
-         Height          =   255
-         Index           =   66
-         Left            =   -70800
-         TabIndex        =   234
-         Top             =   1890
-         Width           =   1455
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
          Index           =   2
-         Left            =   -69120
+         Left            =   -73320
          Picture         =   "frmFacClientes.frx":66CB
          ToolTipText     =   "Buscar fecha"
-         Top             =   1890
+         Top             =   2610
          Width           =   240
       End
       Begin VB.Label Label1 
          Caption         =   "Límite solicitado"
          Height          =   195
          Index           =   79
-         Left            =   -74280
+         Left            =   -70440
          TabIndex        =   233
-         Top             =   1080
+         Top             =   1800
          Width           =   1440
       End
       Begin VB.Label Label1 
          Caption         =   "Límite Crédito"
          Height          =   195
          Index           =   45
-         Left            =   -74280
+         Left            =   -70440
          TabIndex        =   232
-         Top             =   1920
+         Top             =   2640
          Width           =   1080
       End
       Begin VB.Label LabelDoc 
@@ -4819,15 +4838,6 @@ Begin VB.Form frmFacClientes
          ToolTipText     =   "Buscar actividad"
          Top             =   3120
          Width           =   240
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Password web"
-         Height          =   255
-         Index           =   19
-         Left            =   2880
-         TabIndex        =   182
-         Top             =   960
-         Width           =   1095
       End
       Begin VB.Image imgFecha 
          Height          =   240
@@ -4954,15 +4964,6 @@ Begin VB.Form frmFacClientes
          Width           =   375
       End
       Begin VB.Label Label1 
-         Caption         =   "N.I.F."
-         Height          =   255
-         Index           =   36
-         Left            =   375
-         TabIndex        =   125
-         Top             =   2850
-         Width           =   1095
-      End
-      Begin VB.Label Label1 
          Caption         =   "Provincia"
          Height          =   255
          Index           =   15
@@ -5033,6 +5034,15 @@ Begin VB.Form frmFacClientes
          TabIndex        =   356
          Top             =   2880
          Width           =   1095
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Fecha concesión"
+         Height          =   255
+         Index           =   66
+         Left            =   -74520
+         TabIndex        =   234
+         Top             =   2610
+         Width           =   1455
       End
    End
    Begin VB.Frame Frame2 
@@ -5899,6 +5909,10 @@ Private Sub cboPais_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
+Private Sub cboTipoASeg_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
 Private Sub cboTipocliente_KeyPress(KeyAscii As Integer)
  KEYpress KeyAscii
 End Sub
@@ -5945,17 +5959,6 @@ End Sub
 
 
 
-Private Sub chkCredPriv_Click()
-    If Modo = 1 Then CheckCadenaBusqueda chkCredPriv, BuscaChekc
-End Sub
-
-Private Sub chkCredPriv_GotFocus()
-    ConseguirfocoChk Modo
-End Sub
-
-Private Sub chkCredPriv_KeyPress(KeyAscii As Integer)
-    KEYpress KeyAscii
-End Sub
 
 Private Sub chkEnvioFraEmail_Click()
     If Modo = 1 Then CheckCadenaBusqueda chkEnvioFraEmail, BuscaChekc
@@ -6626,10 +6629,16 @@ Private Sub cmdActRiesgo_Click()
     End If
     
     
-    If Text1(43).Text = "" Then
-        MsgBox "No tiene credito asignado", vbExclamation
+    If Me.cboTipoASeg.ListIndex < 0 Then
+        MsgBox "Tipo credito incorrecto", vbExclamation
         Exit Sub
     End If
+    
+    If cboTipoASeg.ItemData(cboTipoASeg.ListIndex) = 9 Then
+        MsgBox "Sin asegurar", vbExclamation
+        Exit Sub
+    End If
+    
     
     If MsgBox("Calcular el riesgo del cliente " & Text1(1).Text & "?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
     Set miRsAux = Nothing
@@ -6851,8 +6860,7 @@ Private Sub BotonAnyadir()
     'Fitos
     If vParamAplic.ManipuladorFitosanitarios2 Then cboManipulador.ListIndex = 0
     If vParamAplic.ContabilidadNueva Then cboPais.ListIndex = 0 'España
-    
-    
+    If vParamAplic.OperacionesAseguradas And vUsu.Nivel = 0 Then cboTipoASeg.ListIndex = Me.cboTipoASeg.ListCount - 1
     Me.chkCorreo.Value = 1
     'Sugerimos periodo y repeticion , a 1
     Text1(38).Text = 1
@@ -7998,7 +8006,7 @@ Private Sub Form_Load()
     
     SSTab1.TabVisible(7) = vParamAplic.OperacionesAseguradas And vUsu.Nivel = 0
     Me.SSTab1.TabCaption(7) = "Operaciones aseguradas"
-    
+    If vParamAplic.OperacionesAseguradas And vUsu.Nivel = 0 Then CargaComboAseguradora
     
     Toolbar2.Buttons(15).visible = vParamAplic.PtosAsignar > 0
     
@@ -8024,7 +8032,7 @@ On Error Resume Next
     'Aqui va el especifico de cada form es
     '### a mano
     Me.chkClienteV.Value = 0
-    chkCredPriv.Value = 0
+    
     Me.chkAbonos.Value = 0
     Me.chkPromociones.Value = 0
     Me.chkRentingDpto.Value = 0
@@ -8040,6 +8048,7 @@ On Error Resume Next
     Me.cboTipoIVA.ListIndex = -1
     Me.cboFraRenting.ListIndex = -1
     cboTipocliente.ListIndex = -1
+    cboTipoASeg.ListIndex = -1
     cboPais.ListIndex = -1
     CargaLineas False, 8
     If vParamAplic.TieneTelefonia2 > 0 Then
@@ -9624,6 +9633,7 @@ Dim b As Boolean
     cboTipocliente.Enabled = b
     If vParamAplic.Renting Then cboFraRenting.Enabled = b
     If vParamAplic.ManipuladorFitosanitarios2 Then cboManipulador.Enabled = b
+    cboTipoASeg.Enabled = b
     cboPais.Enabled = b
     
     cmdCancelar.visible = b
@@ -10114,7 +10124,30 @@ Dim fec As Date
         End If
     End If
     
-    
+    'Si lleva aseguradas
+    If b And vParamAplic.OperacionesAseguradas And vUsu.Nivel = 0 Then
+        BuscaChekc = ""
+        If Me.cboTipoASeg.ItemData(cboTipoASeg.ListIndex) = 9 Then
+            If Me.Text1(43).Text <> "" Then
+                If ImporteFormateado(Text1(43).Text) > 0 Then
+                    BuscaChekc = "No debe poner limite de crédito"
+                Else
+                    Text1(43).Text = ""
+                End If
+            End If
+        Else
+            If Me.Text1(43).Text = "" Then
+                BuscaChekc = "Debe poner limite de crédito"
+            Else
+                If ImporteFormateado(Text1(43).Text) = 0 Then BuscaChekc = "Debe poner limite de crédito"
+            End If
+        End If
+        If Me.chkClienteV.Value = 1 And Me.cboTipoASeg.ItemData(cboTipoASeg.ListIndex) <> 9 Then BuscaChekc = BuscaChekc & vbCrLf & "NO puede asegurar clientes varios"
+        If BuscaChekc <> "" Then
+            MsgBox BuscaChekc, vbExclamation
+            b = False
+        End If
+    End If
     
     If b Then
         BuscaChekc = ""
@@ -13121,6 +13154,12 @@ Private Sub CargaComboManipulador()
     cboManipulador.AddItem "Cualificado"
     cboManipulador.ItemData(cboManipulador.NewIndex) = 2
 
+End Sub
+
+Private Sub CargaComboAseguradora()
+    On Error Resume Next
+    CargarCombo_Tabla cboTipoASeg, "stipocredito", "codTipoCredito", "nomTipoCredito"
+    
 End Sub
 
 

@@ -39,7 +39,7 @@ Private mvarHayServicio As Boolean   'Si hay Servicios (S/N)
 Private mvarHayDeparNuevo As Byte    'Si hay 0.- Direccion  / 1.- Departamento /  2.- Obra  (SAIL pej.)
 
 Private mvarCtrStock As Boolean   'Si hay Control de Stock (S/N)
-Private mvarInventar As Boolean  'Si se realiza Inventario ordenando listados por Proveedor o no
+Private mvarInventar As Boolean  'Si se realiza Inventario ordenando lista dos por Proveedor o no
 Private mvarHaynserie As Boolean 'Si hay Nº de Serie en Compras (S/N)
 Private mvarDiasSiMan As Integer 'Nº de dias si hay mantenimiento
 Private mvarDiasNoMan As Integer 'Nº de dias si NO hay mantenimiento
@@ -1779,259 +1779,259 @@ End Property
 
 '****   LEER  ***
 Public Function Leer() As Byte
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 On Error GoTo Err3
     
     SQL = "SELECT * FROM spara1 "
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
 
-    If RS.EOF Then
+    If Rs.EOF Then
         Leer = 1
     Else
-        mvarTipoDtos = RS!TipoDtos
-        mvarOrdenDtos = RS!ordendto
-        mvarCodTarif = RS!codTarif
-        mvarCajaComp = RS!cajacomp  'Cajas completas precios (S/N)
-        mvarPreuKmCli = DBLet(RS!preukmcl, "N") 'Precio Km Desplazamiento Clientes
-        mvarPreuKmTec = DBLet(RS!preukmtc, "N") 'Precio Km Desplazamiento Técnicos
-        mvarnomGerente = DBLet(RS!nomgeren, "T") 'Nombre del Director Gerente
-        mvarnomAdmin = DBLet(RS!nomadmin, "T") 'Nombre del Responsable Administración
-        mvarHayMante = RS!haymante  'Si hay Mantenimiento (S/N)
-        mvarHayRepar = RS!hayrepar  'Si hay Reparaciones (S/N)
-        mvarHayFrecu = RS!hayfrecu  'Si hay Frecuencias (S/N)
-        mvarHayServicio = RS!hayservicio  'Si hay Servicios (S/N)
-        mvarHayDeparNuevo = RS!haydepar  'Si hay Departamento o Direccion
-        mvarCtrStock = RS!CtrStock  'Si hay Control de Stock (S/N)
-        mvarInventar = RS!inventar
-        mvarHaynserie = RS!haynserie 'Si hay Nº Serie en Compras (S/N)
-        mvarDiasSiMan = RS!diassiman 'Dias reparacion si hay Mantenimiento
-        mvarDiasNoMan = RS!diasnoman 'Dias reparacion si NO hay Mantenimiento
-        Me.ForPagoChequeRegalo = DBLet(RS!codforpa, "T")
+        mvarTipoDtos = Rs!TipoDtos
+        mvarOrdenDtos = Rs!ordendto
+        mvarCodTarif = Rs!codTarif
+        mvarCajaComp = Rs!cajacomp  'Cajas completas precios (S/N)
+        mvarPreuKmCli = DBLet(Rs!preukmcl, "N") 'Precio Km Desplazamiento Clientes
+        mvarPreuKmTec = DBLet(Rs!preukmtc, "N") 'Precio Km Desplazamiento Técnicos
+        mvarnomGerente = DBLet(Rs!nomgeren, "T") 'Nombre del Director Gerente
+        mvarnomAdmin = DBLet(Rs!nomadmin, "T") 'Nombre del Responsable Administración
+        mvarHayMante = Rs!haymante  'Si hay Mantenimiento (S/N)
+        mvarHayRepar = Rs!hayrepar  'Si hay Reparaciones (S/N)
+        mvarHayFrecu = Rs!hayfrecu  'Si hay Frecuencias (S/N)
+        mvarHayServicio = Rs!hayservicio  'Si hay Servicios (S/N)
+        mvarHayDeparNuevo = Rs!haydepar  'Si hay Departamento o Direccion
+        mvarCtrStock = Rs!CtrStock  'Si hay Control de Stock (S/N)
+        mvarInventar = Rs!inventar
+        mvarHaynserie = Rs!haynserie 'Si hay Nº Serie en Compras (S/N)
+        mvarDiasSiMan = Rs!diassiman 'Dias reparacion si hay Mantenimiento
+        mvarDiasNoMan = Rs!diasnoman 'Dias reparacion si NO hay Mantenimiento
+        Me.ForPagoChequeRegalo = DBLet(Rs!codforpa, "T")
         
         'Datos Facturacion
-        mvarCodArticDes = DBLet(RS!codartid, "T") 'articulo para facturar mantenimientos
-        mvarDiaPago1 = DBLet(RS!DiaPago1, "N") 'dia pago 1 para compras
-        mvarDiaPago2 = DBLet(RS!DiaPago2, "N") 'dia pago 2 para compras
-        mvarDiaPago3 = DBLet(RS!DiaPago3, "N") 'dia pago 3 para compras
-        mvarMesnogir = DBLet(RS!mesnogir, "N") 'mes a no girar para compras
+        mvarCodArticDes = DBLet(Rs!codartid, "T") 'articulo para facturar mantenimientos
+        mvarDiaPago1 = DBLet(Rs!DiaPago1, "N") 'dia pago 1 para compras
+        mvarDiaPago2 = DBLet(Rs!DiaPago2, "N") 'dia pago 2 para compras
+        mvarDiaPago3 = DBLet(Rs!DiaPago3, "N") 'dia pago 3 para compras
+        mvarMesnogir = DBLet(Rs!mesnogir, "N") 'mes a no girar para compras
         
         'Datos de Internet
-        mvarDireMail = DBLet(RS!DireMail, "T") 'Direccion de email
-        mvarSMTPhost = DBLet(RS!SMTPhost, "T") 'SMTP host para el envio de email
-        mvarSMTPuser = DBLet(RS!SMTPuser, "T") 'SMTP usuario para el envio de email
-        mvarSMTPpass = DBLet(RS!SMTPpass, "T") 'SMTP password para el envio de email
-        mvarWebSoporte = DBLet(RS!WebSoporte, "T") 'Web de soporte
-        mvarMailSoporte = DBLet(RS!MailSoporte, "T") 'email de soporte
-        mvarWebVersion = DBLet(RS!WebVersion, "T") 'Version de la Web
+        mvarDireMail = DBLet(Rs!DireMail, "T") 'Direccion de email
+        mvarSMTPhost = DBLet(Rs!SMTPhost, "T") 'SMTP host para el envio de email
+        mvarSMTPuser = DBLet(Rs!SMTPuser, "T") 'SMTP usuario para el envio de email
+        mvarSMTPpass = DBLet(Rs!SMTPpass, "T") 'SMTP password para el envio de email
+        mvarWebSoporte = DBLet(Rs!WebSoporte, "T") 'Web de soporte
+        mvarMailSoporte = DBLet(Rs!MailSoporte, "T") 'email de soporte
+        mvarWebVersion = DBLet(Rs!WebVersion, "T") 'Version de la Web
         
         
         'Datos Contabilidad
-        mvarSerConta = DBLet(RS!serconta, "T") 'servidor conta
-        mvarUsuConta = DBLet(RS!UsuConta, "T") 'usuario conta
-        mvarPasConta = DBLet(RS!pasconta, "T") 'password
-        mvarNumConta = DBLet(RS!numconta, "N") 'numero conta
+        mvarSerConta = DBLet(Rs!serconta, "T") 'servidor conta
+        mvarUsuConta = DBLet(Rs!UsuConta, "T") 'usuario conta
+        mvarPasConta = DBLet(Rs!pasconta, "T") 'password
+        mvarNumConta = DBLet(Rs!numconta, "N") 'numero conta
         
         
         'Valores por defecto
-        mvarDefActiv = DBLet(RS!defactividad, "N") 'numero conta
-        mvarDefEnvio = DBLet(RS!defenvio, "N") 'numero conta
-        mvarDefZona = DBLet(RS!defzona, "N") 'numero conta
-        mvarDefRuta = DBLet(RS!defruta, "N") 'numero conta
-        mvarDefSitu = DBLet(RS!defstituacion, "N") 'numero conta
-        mvarDefTarifa = DBLet(RS!deftarifa, "N") 'numero conta
-        mvarDefAgente = DBLet(RS!defagente, "N") 'numero conta
+        mvarDefActiv = DBLet(Rs!defactividad, "N") 'numero conta
+        mvarDefEnvio = DBLet(Rs!defenvio, "N") 'numero conta
+        mvarDefZona = DBLet(Rs!defzona, "N") 'numero conta
+        mvarDefRuta = DBLet(Rs!defruta, "N") 'numero conta
+        mvarDefSitu = DBLet(Rs!defstituacion, "N") 'numero conta
+        mvarDefTarifa = DBLet(Rs!deftarifa, "N") 'numero conta
+        mvarDefAgente = DBLet(Rs!defagente, "N") 'numero conta
 
 
-        mvaravipedcli = DBLet(RS!avipedcli, "N")
-        mvaravipedpro = DBLet(RS!avipedpro, "N")
-        mvaravialbcli = DBLet(RS!avialbcli, "N")
-        mvaravialbpro = DBLet(RS!avialbpro, "N")
-        mvaravimanteni = DBLet(RS!avimanteni, "N")
-        mvaravirepara = DBLet(RS!avirepara, "N")
-        mvaraviavisos = DBLet(RS!aviavios, "N")
+        mvaravipedcli = DBLet(Rs!avipedcli, "N")
+        mvaravipedpro = DBLet(Rs!avipedpro, "N")
+        mvaravialbcli = DBLet(Rs!avialbcli, "N")
+        mvaravialbpro = DBLet(Rs!avialbpro, "N")
+        mvaravimanteni = DBLet(Rs!avimanteni, "N")
+        mvaravirepara = DBLet(Rs!avirepara, "N")
+        mvaraviavisos = DBLet(Rs!aviavios, "N")
         PonVariableTienAvisos
 
         
         
 
-        mvarTipoIVAre1 = DBLet(RS!IVAre1eq, "N")
-        mvarTipoIVAre2 = DBLet(RS!IVAre2eq, "N")
-        mvarTipoIVAre3 = DBLet(RS!IVAre3eq, "N")
+        mvarTipoIVAre1 = DBLet(Rs!IVAre1eq, "N")
+        mvarTipoIVAre2 = DBLet(Rs!IVAre2eq, "N")
+        mvarTipoIVAre3 = DBLet(Rs!IVAre3eq, "N")
         mvarRecargoEquivalencia = (mvarTipoIVAre1 > 0 Or mvarTipoIVAre2 > 0 Or mvarTipoIVAre3 > 0)
         
-        mvarIVA1 = DBLet(RS!IVAre1, "N")
-        mvarIVA2 = DBLet(RS!IVAre2, "N")
-        mvarIVA3 = DBLet(RS!IVAre3, "N")
+        mvarIVA1 = DBLet(Rs!IVAre1, "N")
+        mvarIVA2 = DBLet(Rs!IVAre2, "N")
+        mvarIVA3 = DBLet(Rs!IVAre3, "N")
 
         'El articulo de telefonia no lo pongo como parametros
         'codartictel
-        mvarCodarticTfnia = DBLet(RS!codartictel, "T") 'numero conta
+        mvarCodarticTfnia = DBLet(Rs!codartictel, "T") 'numero conta
                 
                 
         'Retencion
-        mvarIVAREA = DBLet(RS!IVA_REA, "N")
-        mvarCtaReten = DBLet(RS!CtaReten, "T")
-        mvarPorReten = DBLet(RS!PorReten, "N")
+        mvarIVAREA = DBLet(Rs!IVA_REA, "N")
+        mvarCtaReten = DBLet(Rs!CtaReten, "T")
+        mvarPorReten = DBLet(Rs!PorReten, "N")
                 
                 
         'IVA exento
-        mvarIVA_Exento = DBLet(RS!ivaexento, "N")
+        mvarIVA_Exento = DBLet(Rs!ivaexento, "N")
         
         
         
         'Contabilidad
-        mvarContabilidadB = DBLet(RS!conta_B, "N")
+        mvarContabilidadB = DBLet(Rs!conta_B, "N")
         
         'Contabiliza los tickets resumidos
-        mvarContabilizarTicketAgrupados = (DBLet(RS!conttickagrupado, "N") = 1)
+        mvarContabilizarTicketAgrupados = (DBLet(Rs!conttickagrupado, "N") = 1)
         
         'Cta aportacion
-        mvarctaaportacion = DBLet(RS!ctaAportacion, "T")
+        mvarctaaportacion = DBLet(Rs!ctaAportacion, "T")
         
         'produccion
-        mvarProduccion = DBLet(RS!Produccion, "N") = 1
+        mvarProduccion = DBLet(Rs!Produccion, "N") = 1
         'descriptores
-        mvarDescriptores = DBLet(RS!Descriptores, "N") = 1
+        mvarDescriptores = DBLet(Rs!Descriptores, "N") = 1
         'obs factura
-        mvarObsFactura = DBLet(RS!ObsFactura, "N")
+        mvarObsFactura = DBLet(Rs!ObsFactura, "N")
         '
-        mvarIVA_Intracomunitario = DBLet(RS!IvaIntracom, "N")
+        mvarIVA_Intracomunitario = DBLet(Rs!IvaIntracom, "N")
         'Recliclado Punto verde
-        mvarArtReciclado = DBLet(RS!ArtReciclado, "T")
+        mvarArtReciclado = DBLet(Rs!ArtReciclado, "T")
 
-        mvarArtPortes = DBLet(RS!ArticuloPortes, "T")
-        mvarImporteMinimo = DBLet(RS!impminped, "N")
-        mvarAbonoKilos = DBLet(RS!AbonoKilos, "N")
+        mvarArtPortes = DBLet(Rs!ArticuloPortes, "T")
+        mvarImporteMinimo = DBLet(Rs!impminped, "N")
+        mvarAbonoKilos = DBLet(Rs!AbonoKilos, "N")
     
-        mvarComponentePorcentaje = DBLet(RS!compoporcen, "N") = 1
+        mvarComponentePorcentaje = DBLet(Rs!compoporcen, "N") = 1
 
         ' ---- [14/09/2009] (LAURA)
-        Me.DtoxCantidad = IIf(RS!dtoxcanti = 1, True, False)
-        Me.CreaTarifasArticulo = DBLet(RS!creatarifart, "N")
+        Me.DtoxCantidad = IIf(Rs!dtoxcanti = 1, True, False)
+        Me.CreaTarifasArticulo = DBLet(Rs!creatarifart, "N")
         ' ----
         
         ' ---- [19/10/2009] [LAURA]: añadir campo modo analitica
-        Me.ModoAnalitica = RS!modanalitica
+        Me.ModoAnalitica = Rs!modanalitica
         
         
         'David 31/12/09
-        Me.EnvioDesdeOutlook = DBLet(RS!EnvioDesdeOutlook, "N") = 1
+        Me.EnvioDesdeOutlook = DBLet(Rs!EnvioDesdeOutlook, "N") = 1
         
         'David Febrero 2010
-        ExeEnvioMail = DBLet(RS!arigesmail, "T")
-        DiasGarantia = DBLet(RS!diasgaranrepa, "N")
+        ExeEnvioMail = DBLet(Rs!arigesmail, "T")
+        DiasGarantia = DBLet(Rs!diasgaranrepa, "N")
         
-        mvarTieneCRM = DBLet(RS!TieneCRM, "N") = 1
+        mvarTieneCRM = DBLet(Rs!TieneCRM, "N") = 1
         
         
         'David. Junio 2010.  Cambio IVA   EL IVA superreducido NO cambia
-        mvarOLDIVAre1 = DBLet(RS!iva_oldre1, "N")
-        mvarOLDIVAre2 = DBLet(RS!iva_oldre2, "N")
+        mvarOLDIVAre1 = DBLet(Rs!iva_oldre1, "N")
+        mvarOLDIVAre2 = DBLet(Rs!iva_oldre2, "N")
         'mvarOLDIVAre3 = DBLet(RS!iva_oldre3, "N")
         
-        mvarOLDIVA1 = DBLet(RS!iva_old1, "N")
-        mvarOLDIVA2 = DBLet(RS!iva_old2, "N")
+        mvarOLDIVA1 = DBLet(Rs!iva_old1, "N")
+        mvarOLDIVA2 = DBLet(Rs!iva_old2, "N")
         'mvarOLDIVA3 = DBLet(RS!iva_old3, "N")
 
-        mvarNumCopiasFacturacion = DBLet(RS!NumCopias, "N")
+        mvarNumCopiasFacturacion = DBLet(Rs!NumCopias, "N")
         If mvarNumCopiasFacturacion = 0 Then mvarNumCopiasFacturacion = 1
         
         'De momento NO lo tengo en la BD
         mvarTipoFormularioClientes = 0
         
-        mvarArticuloRecargoFinanciero = DBLet(RS!artRecargoFina, "T")
+        mvarArticuloRecargoFinanciero = DBLet(Rs!artRecargoFina, "T")
         
         'tIPO PORTES
         If mvarArtPortes = "" Then
             mvarTipoPortes = -1
         Else
-            SQL = DBLet(RS!TipoPortes, "T")
+            SQL = DBLet(Rs!TipoPortes, "T")
             If SQL = "" Then SQL = "-1"
             mvarTipoPortes = CInt(SQL)
         End If
         
-        mvarDireccionesEnvio = (DBLet(RS!DirecEnvio, "N") = 1)
+        mvarDireccionesEnvio = (DBLet(Rs!DirecEnvio, "N") = 1)
         
         
-        mvarFrasMostradorSerieDistinta = (DBLet(RS!FraMostra, "N") = 1)
+        mvarFrasMostradorSerieDistinta = (DBLet(Rs!FraMostra, "N") = 1)
         
-        mvarMarcarAlbaranFacturar = (DBLet(RS!AlbParaFcturar, "N") = 1)
+        mvarMarcarAlbaranFacturar = (DBLet(Rs!AlbParaFcturar, "N") = 1)
         
         '`OperAseguradas`    `situbloq`
-        mvarOperacionesAseguradas = (DBLet(RS!OperAseguradas, "N") = 1)
-        mvarSituacionBloqueoOpAseg = DBLet(RS!situbloq, "N")
+        mvarOperacionesAseguradas = (DBLet(Rs!OperAseguradas, "N") = 1)
+        mvarSituacionBloqueoOpAseg = DBLet(Rs!situbloq, "N")
 
         'Rotacion
         'alter table `spara1` `mesconant1`  `mesconant2` `consummin`  `consummax`
-        mvarRot_ConsumMes1 = DBLet(RS!mesconant1, "N")
-        mvarRot_ConsumMes2 = DBLet(RS!mesconant2, "N")
-        mvarRot_ConsumMesMin = DBLet(RS!consummin, "N")
-        mvarRot_ConsumMesMax = DBLet(RS!consummax, "N")
+        mvarRot_ConsumMes1 = DBLet(Rs!mesconant1, "N")
+        mvarRot_ConsumMes2 = DBLet(Rs!mesconant2, "N")
+        mvarRot_ConsumMesMin = DBLet(Rs!consummin, "N")
+        mvarRot_ConsumMesMax = DBLet(Rs!consummax, "N")
         
-        mvarLogCambioPrecDto = DBLet(RS!LogCambioPrecDto, "N") = 1
+        mvarLogCambioPrecDto = DBLet(Rs!LogCambioPrecDto, "N") = 1
         
         'No esta en el form
         mvarAlmacenB = -1
-        If Not IsNull(RS!AlmacenB) Then mvarAlmacenB = RS!AlmacenB
+        If Not IsNull(Rs!AlmacenB) Then mvarAlmacenB = Rs!AlmacenB
         
         'IVA intracomuntario para fras proveedor
-        mvarIvaIntracomAdicional = DBLet(RS!IvaIntracomAdicional, "N")
-        mvarCtaContabIntracom = DBLet(RS!CtaContabIntracom, "T")
-        mvarIntracomAdicionalContab = DBLet(RS!IntracomAdicionContab, "N") = 1
+        mvarIvaIntracomAdicional = DBLet(Rs!IvaIntracomAdicional, "N")
+        mvarCtaContabIntracom = DBLet(Rs!CtaContabIntracom, "T")
+        mvarIntracomAdicionalContab = DBLet(Rs!IntracomAdicionContab, "N") = 1
 
         
-        mvarPathFacturaE = DBLet(RS!PathFacturaE, "T")
+        mvarPathFacturaE = DBLet(Rs!PathFacturaE, "T")
         
-        mvarNumeroCopias = DBLet(RS!NumeroCopias, "T")
+        mvarNumeroCopias = DBLet(Rs!NumeroCopias, "T")
         
-        mvarPrecioMinimo = DBLet(RS!PrecioMinimo, "N") = 1
-        mvarArtSeparador = DBLet(RS!ArtSeparador, "T")
-        mvarAriagro = DBLet(RS!Ariagro, "T")
+        mvarPrecioMinimo = DBLet(Rs!PrecioMinimo, "N") = 1
+        mvarArtSeparador = DBLet(Rs!ArtSeparador, "T")
+        mvarAriagro = DBLet(Rs!Ariagro, "T")
         
         
-        mvarRenting = DBLet(RS!Renting, "N") = 1
-        mvarGestionFlotas = DBLet(RS!GestionFlotas, "N") = 1
+        mvarRenting = DBLet(Rs!Renting, "N") = 1
+        mvarGestionFlotas = DBLet(Rs!GestionFlotas, "N") = 1
         
-        mvarPorcenPagoAgentTalPag = DBLet(RS!PorcenpagAgenPag, "N")
+        mvarPorcenPagoAgentTalPag = DBLet(Rs!PorcenpagAgenPag, "N")
         
-        mvarFechaCambioIva = RS!FechaCambioIva 'NO ES NULL
-        mvarClientesPotenciales = DBLet(RS!ClientesPotenciales, "N") = 1
+        mvarFechaCambioIva = Rs!FechaCambioIva 'NO ES NULL
+        mvarClientesPotenciales = DBLet(Rs!ClientesPotenciales, "N") = 1
         
         'Solo tiene GET
-        mvarTieneTelefonia2 = DBLet(RS!Telefonia, "N")
-        mvarArtiTelefonia = DBLet(RS!codartictel, "T")
+        mvarTieneTelefonia2 = DBLet(Rs!Telefonia, "N")
+        mvarArtiTelefonia = DBLet(Rs!codartictel, "T")
         
 
-        mvarRecMercanciaSoloPpal = DBLet(RS!RecMercanciaSoloPpal, "N") = 1
+        mvarRecMercanciaSoloPpal = DBLet(Rs!RecMercanciaSoloPpal, "N") = 1
         
-        mvarArtTfniaIvaExento = DBLet(RS!artTfoniaIvaExento, "T") 'articulo telefonia IVA exento
+        mvarArtTfniaIvaExento = DBLet(Rs!artTfoniaIvaExento, "T") 'articulo telefonia IVA exento
         
         
         'Solo tiene GET
-        mvarComprobarBancoRestoAplicaciones = DBLet(RS!ComprobarCCC, "N")
-        mvarAguasPotables = DBLet(RS!Agua, "N") = 1
+        mvarComprobarBancoRestoAplicaciones = DBLet(Rs!ComprobarCCC, "N")
+        mvarAguasPotables = DBLet(Rs!Agua, "N") = 1
         
         
-        mvarIncializarStockEnInventario = DBLet(RS!IncializarStokInv, "N")
+        mvarIncializarStockEnInventario = DBLet(Rs!IncializarStokInv, "N")
         
         
-        mvarActualizaPrecioEspecial = DBLet(RS!ActualizaPrecioEspecial, "N") = 1
+        mvarActualizaPrecioEspecial = DBLet(Rs!ActualizaPrecioEspecial, "N") = 1
         
         
-        mvarEntradaRapidaFacturasMostrador = DBLet(RS!FrasMostradorRapida, "N") = 1
+        mvarEntradaRapidaFacturasMostrador = DBLet(Rs!FrasMostradorRapida, "N") = 1
         
         'Solo tiene GET
-        mvarNumeroInstalacion = DBLet(RS!NumInstalacion, "N")
+        mvarNumeroInstalacion = DBLet(Rs!NumInstalacion, "N")
         
-        mvarManipuladorFitosanitarios = DBLet(RS!ManipuladorFitosanitarios, "N") = 1
+        mvarManipuladorFitosanitarios = DBLet(Rs!ManipuladorFitosanitarios, "N") = 1
         
-        mvarInvSujetoPasivo = DBLet(RS!InvSujetoPasivo, "N") = 1
+        mvarInvSujetoPasivo = DBLet(Rs!InvSujetoPasivo, "N") = 1
     
-        mvarRecalculoMargen = DBLet(RS!ActualizaMargen, "N") = 1
+        mvarRecalculoMargen = DBLet(Rs!ActualizaMargen, "N") = 1
     
         
-        mvarInventarioCodigoArticulo = DBLet(RS!InventarioPorCodigo, "N") = 1
+        mvarInventarioCodigoArticulo = DBLet(Rs!InventarioPorCodigo, "N") = 1
         
         
         If Me.HayDeparNuevo = 2 Then mvarTipoFormularioClientes = 1  'Obras. SAIL-Y euler
@@ -2039,7 +2039,7 @@ On Error GoTo Err3
         
         
         'Solo GET
-        mvarContabilidadNueva = DBLet(RS!NuevaContabilidad, "N") = 1
+        mvarContabilidadNueva = DBLet(Rs!NuevaContabilidad, "N") = 1
         Leer = 0
         mvarSIITiene = False
         
@@ -2047,15 +2047,15 @@ On Error GoTo Err3
         
         mvarPtosAsignar = 0
         mvarPtosImporteCalculo = 0
-        If Not IsNull(RS!PtosAsignar) Then
-            mvarPtosAsignar = RS!PtosAsignar
-            mvarPtosImporteCalculo = DBLet(RS!PtosImporteCalculo, "N")
-            mvarPtosEquivalencia = RS!PtosEquivalencia
-            mvarPtosArticuloCanje = RS!PtosArticuloCanje
-            mvarPtosFechaIncio = RS!PtosFechaIncio
+        If Not IsNull(Rs!PtosAsignar) Then
+            mvarPtosAsignar = Rs!PtosAsignar
+            mvarPtosImporteCalculo = DBLet(Rs!PtosImporteCalculo, "N")
+            mvarPtosEquivalencia = Rs!PtosEquivalencia
+            mvarPtosArticuloCanje = Rs!PtosArticuloCanje
+            mvarPtosFechaIncio = Rs!PtosFechaIncio
         End If
         
-        mvarPrecioHoraCosteEUL = DBLet(RS!preciohoracoste, "N")
+        mvarPrecioHoraCosteEUL = DBLet(Rs!preciohoracoste, "N")
         
         
         ComprobarProgramaEnvioMail
@@ -2074,35 +2074,35 @@ On Error GoTo Err3
         
     End If
 
-    RS.Close
+    Rs.Close
     
     If Leer = 0 Then
-        FijaParametroAlmagrupo RS  'hacer rs=nothing
+        FijaParametroAlmagrupo Rs  'hacer rs=nothing
         
         mvarQueEmpresaEs = 0
-        If ComprobarEmpresaWHOSE(RS) Then
+        If ComprobarEmpresaWHOSE(Rs) Then
             mvarQueEmpresaEs = 1
-        ElseIf ComprobarGessocial(RS) Then mvarQueEmpresaEs = 2
+        ElseIf ComprobarGessocial(Rs) Then mvarQueEmpresaEs = 2
             
         End If
         
         
         'Navarres(aunque sirve para todos)
         'Si solo tiene un banco por defecto, sera ese el cargara
-        FijarSiTieneUnSoloBancoPropio RS
+        FijarSiTieneUnSoloBancoPropio Rs
         
         
         
         'Marjal CHIPOS, para saber si es marjal sin ponerle un numero instalacion
-        FijarSiTieneHuertos RS
+        FijarSiTieneHuertos Rs
         
         
         'Lotes generalitat. Para meter los datos en
-        FijarSiTieneLotesGeneralitat RS
+        FijarSiTieneLotesGeneralitat Rs
         
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
     Exit Function
@@ -2112,8 +2112,8 @@ Err3:
     Mens = Mens & "Número: " & Err.Number & vbCrLf
     Mens = Mens & "Descripción: " & Err.Description
     MsgBox Mens, vbExclamation
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Leer = 1
 End Function
 
@@ -2364,11 +2364,11 @@ Private Function MovimientosParaServicios() As Boolean
     '-- Esta función comprueba si los movimientos ALS y FAS están creados
     '   este es un requisito previo si se desa activar la opción de servicios
     Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Rs As ADODB.Recordset
     SQL = "select count(*) from stipom where codtipom = 'ALS' or codtipom = 'FAS'"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly
-    If RS.Fields(0) = 2 Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly
+    If Rs.Fields(0) = 2 Then
         MovimientosParaServicios = True
     Else
         MovimientosParaServicios = False
@@ -2433,7 +2433,7 @@ End Function
 
 
 Private Sub CargarTablaTraduccionIVAS()
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo ECargarTablaTraduccionIVAS
     If ConnConta Is Nothing Then
@@ -2445,17 +2445,17 @@ Dim RS As ADODB.Recordset
     conn.Execute SQL
     
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     SQL = "select codigiva from tiposiva"
-    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
-        SQL = "INSERT INTO sivatra VALUES (" & RS!codigiva & "," & RS!codigiva & ")"
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+        SQL = "INSERT INTO sivatra VALUES (" & Rs!Codigiva & "," & Rs!Codigiva & ")"
         
         conn.Execute SQL
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     'Ahora acutalizo la relacion
     If mvarTipoIVAre1 > 0 Then
         SQL = "UPDATE sivatra set codigiva2=" & mvarTipoIVAre1 & " WHERE codigiva = " & mvarIVA1
