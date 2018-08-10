@@ -952,7 +952,10 @@ Dim TextoAuxiliar As String
                                                             
                 CadValues2 = CadValues2 & "  CUOTA: " & Format(rsVenci!Cuota, "##0.00") & "  (" & Format(rsVenci!TipoIVA, "#0.00") & "%)'"
         
-            
+                If vParamAplic.TelefoniaVtaPlazos Then
+                    If rsVenci!total <> mTotalfac2 Then CadValues2 = "'Total factura con IVA   " & mTotalfac2 & "'"
+                        
+                End If
             
                 CadValues = ""
                 vTextosCSB = CadValues2
@@ -1040,7 +1043,14 @@ Dim TextoAuxiliar As String
                 CadValues2 = "BASE                " & Right(Space(12) & Format(rsVenci!BaseImponible, "#,###,##0.00"), 12) & _
                                                             " IVA:" & Format(rsVenci!TipoIVA, "#0") & ""
                 CadValues3 = "%      CUOTA: " & Format(rsVenci!Cuota, "#,###,##0.00") & "     TOTAL: " & Format(rsVenci!total, "#,###,##0.00")
-        
+                
+                If vParamAplic.TelefoniaVtaPlazos Then
+                    If rsVenci!total <> mTotalfac2 Then
+                        
+                        CadValues2 = "Total factura con IVA   " & mTotalfac2
+                        CadValues3 = ""
+                    End If
+                End If
         
                 If vParamAplic.ContabilidadNueva Then
                     CadValues = CadValues2 & CadValues3

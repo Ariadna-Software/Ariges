@@ -3990,7 +3990,7 @@ Dim CodproveHerbelca As String
         
         If CodproveHerbelca = 5000 Then
             'Proveedor de varios
-             If vUsu.AlmacenPorDefecto2 > 1 Then
+             If vUsu.AlmacenPorDefecto2 > 1 And Data2.Recordset!codArtic <> vParamAplic.PtosArticuloCanje Then
                 MsgBox "No puede eliminar linea", vbExclamation
                 Exit Sub
             End If
@@ -6043,6 +6043,11 @@ Dim devuelve As String
     'el campo referencia
     If b Then
         If hcoCodTipoM = "ALT" Then
+            'Albaranes de telefonia introducidos a mano, la marca del cliente debe de estar,
+            'Cuando se genereren autmaticamente (facturacion desde fichero) pondre un 0
+            Me.chkPideCliente.Value = 1
+        
+            'Albaranes de TELEFONIA.  TIENE QUE existir el telefono, y este debe estar en
             devuelve = ""
             If Text1(13).Text = "" Then
                    devuelve = "Debe poner el teléfono asociado"
@@ -6163,6 +6168,7 @@ Dim vArtic As CArticulo
 Dim PuntosCliente As Currency
 Dim C2 As Currency
 Dim Comision As String
+Dim CanDispo As Currency
 
     On Error GoTo EDatosOkLinea
 
@@ -6183,6 +6189,7 @@ Dim Comision As String
     For i = 0 To 10
         If txtAux(i).Text = "" And i <> 5 Then
             'El campo 5= origpre puede ser nulo (en alb.repar)
+            
             MsgBox "El campo " & txtAux(i).Tag & " no puede ser nulo", vbExclamation
             b = False
             PonerFoco txtAux(i)
@@ -6345,7 +6352,37 @@ Dim Comision As String
     
     If Not b Then Exit Function
     
-    
+    If vParamAplic.NumeroInstalacion = 2 And hcoCodTipoM = "ALM" Then
+        AUx3 = ""
+        If Val(txtAux(0).Text) = 1 Then
+            AUx3 = DevuelveDesdeBD(conAri, "ctrstock", "sartic", "codartic", txtAux(1).Text, "T")
+        End If
+        If AUx3 = "1" Then
+            AUx3 = "sum(cantidad)"
+            '                                           cualqueir almacen
+            Aux = "scaped.numpedcl=sliped.numpedcl  AND codalmac>=" & txtAux(0).Text & " AND codartic "
+            Aux = DevuelveDesdeBD(conAri, "max(fecpedcl)", "scaped,sliped", Aux, txtAux(1).Text, "T", AUx3)
+            If Aux <> "" Then
+                C2 = CCur(AUx3)
+                
+               
+                AUx3 = "codalmac>=" & txtAux(0).Text & " AND codartic "
+                AUx3 = DevuelveDesdeBD(conAri, "sum(canstock)", "salmac", AUx3, txtAux(1).Text, "T")
+                CanDispo = CCur(AUx3) 'en stock para el almacen hay candispo unidades
+                
+                If CanDispo < vCStock.cantidad + C2 Then
+                  'Las cantiodades que ha pedido mas las hay en pedidos superan
+                  AUx3 = "Hay pedidos con este articulo pendientes de servir" & vbCrLf & vbCrLf
+                  AUx3 = AUx3 & "Stock articulo:     " & CanDispo & vbCrLf
+                  AUx3 = AUx3 & "Unidades en pedidos: " & C2
+                  
+                  AUx3 = AUx3 & vbCrLf & vbCrLf & "¿Continuar?"
+                  If MsgBox(AUx3, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
+                End If
+
+            End If
+         End If
+    End If
     
     
     
@@ -6353,7 +6390,7 @@ Dim Comision As String
         If hcoCodTipoM <> "FMO" Then
             'En facturas de mostrador NO lo compurbeo para acelerar el prloceso
             vCStock.ComprobarFechaInventario True, ""
-                
+              
         End If
         
         
@@ -7997,8 +8034,9 @@ Dim ParaElLog As String
                         SQL = DevuelveDesdeBD(conAri, "credipriv", "sclien", "codclien", Text1(4).Text, "N")
                         If SQL = "" Then SQL = "9"
                         If Val(SQL) < 9 Then
+                            'Febrero 2018 . YA NO
                             'OK tiene credito. Que actualice
-                            ActualizaRiesgoCliente CLng(Text1(4).Text)
+                            'ActualizaRiesgoCliente CLng(Text1(4).Text)
                         End If
                         lblIndicador.Caption = ""
                     End If
@@ -9949,7 +9987,14 @@ End Function
 
 
 Private Sub MarcarAlbaranes()
-
+    
+        If EsHistorico Then Exit Sub
+    
+        If hcoCodTipoM = "ALT" Then
+            MsgBox "No se puede realizar sobre albaranes de telefonía", vbExclamation
+            Exit Sub
+        End If
+    
         'Lanzara un desde hasta y los marcara
         frmListado.NumCod = hcoCodTipoM
         CadenaDesdeOtroForm = ""
@@ -10652,7 +10697,7 @@ Dim TipoComisionVarios As String
                 End If
                     
                 If VendeAMenorPrecio = 2 Then
-                    'Precio OK, no lleva descuento....
+                    
                     Comi_ = vAgent.ComsionPVPMin
                 ElseIf VendeAMenorPrecio = 1 Then
                     Comi_ = vAgent.ComsionEco
@@ -10710,19 +10755,20 @@ Dim Aux As String
 
     Riesgo = True
     Set miRsAux = New ADODB.Recordset
-    miSQL = "Select codclien,tipoiva,credipriv,if(credisol is null,0,credisol) credisol from sclien where codclien =" & Text1(4).Text
+    '              *^**********                ponia credisol  para todo
+    miSQL = "Select codclien,tipoiva,credipriv,if(limcredi is null,0,limcredi) limcredi from sclien where codclien =" & Text1(4).Text
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'NO PUEDE SER EOG
     miSQL = "9"
     If Not IsNull(miRsAux!credipriv) Then miSQL = miRsAux!credipriv
     
-    If Val(Aux) < 9 Then
+    If Val(miSQL) < 9 Then
         
         
         RiesgoCliente miRsAux!codClien, CByte(miRsAux!TipoIVA), Now, ImpTesor, ImpAlb, Nothing
-        Aux = Format(miRsAux!credisol, FormatoImporte)
+        Aux = Format(miRsAux!limcredi, FormatoImporte)
         If Len(Aux) < 9 Then Aux = "   " & Aux
-        miSQL = "Crédito solicitado:        " & Aux & vbCrLf
+        miSQL = "Crédito concedido:        " & Aux & vbCrLf
         
         Aux = Format(ImpTesor, FormatoImporte)
         If Len(Aux) < 9 Then Aux = Space(9 - Len(Aux)) & Aux
@@ -10740,11 +10786,11 @@ Dim Aux As String
         If Modo = 3 Then
              'Disponible
                 
-             If ImpTesor > miRsAux!credisol Then
+             If ImpTesor > miRsAux!limcredi Then
                 'NO deberia haber entrado aqui
-                miSQL = miSQL & vbCrLf & "** EXCEDE CREDITO SOLICITADO **"
+                miSQL = miSQL & vbCrLf & "** EXCEDE CREDITO CONCEDIDO **"
              Else
-                ImpTesor = miRsAux!credisol - ImpTesor
+                ImpTesor = miRsAux!limcredi - ImpTesor
                 Aux = Format(ImpTesor, FormatoImporte)
                 If Len(Aux) < 9 Then Aux = Space(9 - Len(Aux)) & Aux
                 miSQL = miSQL & vbCrLf & vbCrLf & "DISPONIBLE: " & Right(Space(30) & Aux, 30) & vbCrLf
@@ -10760,8 +10806,8 @@ Dim Aux As String
             'ImpTesor = ImpTesor + ImportePedido
             'miSQL = miSQL & "Pedido:        " & Format(ImportePedido, FormatoImporte) & vbCrLf
             
-            If ImpTesor > miRsAux!credisol Then
-                miSQL = miSQL & vbCrLf & "** EXCEDE CREDITO SOLICITADO **" & vbCrLf & vbCrLf & "¿Continuar?"
+            If ImpTesor > miRsAux!limcredi Then
+                miSQL = miSQL & vbCrLf & "** EXCEDE CREDITO CONCEDIDO **" & vbCrLf & vbCrLf & "¿Continuar?"
                 If MsgBox(miSQL, vbQuestion + vbYesNo + vbMsgBoxRight) = vbNo Then
                     Riesgo = False
                 Else
@@ -10780,7 +10826,8 @@ Dim Aux As String
                 
             End If
             'Actualziamos riesgo
-            ActualizaRiesgoCliente CLng(Text1(4).Text)
+            'Febrero2018
+            'ActualizaRiesgoCliente CLng(Text1(4).Text)
         End If
 
         

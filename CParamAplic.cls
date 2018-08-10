@@ -419,13 +419,25 @@ Private mvarPtosArticuloCanje As String     'Aticulo de canje
 Private mvarPtosFechaIncio As String     'Aticulo de canje
 
 
-'SEPTIE
+'SEPTIE17
 Private mvarPrecioHoraCosteEUL As Currency
 
+'FEB 2018
+' Si tiene telefonia, ver si tiene activado el modulo de venta a plazos de telefonos
+' if mvarTieneTelefonia2>0 irá a la spara2 a leer el valor
+Private mvarTelefoniaVtaPlazos As Boolean
+
+
+
+'MAYO 2018
+'Reimpresion facturas firmadas socio,
+Private mvarPathFirmasFacturas As String
+Private mvarPathFirmasAlbaran As String
 
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
+
 
 
 
@@ -1477,8 +1489,12 @@ Public Property Let RecalculoMargen(ByVal vData As Boolean)
      mvarRecalculoMargen = vData
 End Property
 
-
-
+'#Solo GET
+'
+' Si tiene telefonia, puede tener, o no, el modulo de venta telefonos a plazos
+Public Property Get TelefoniaVtaPlazos() As Boolean
+     TelefoniaVtaPlazos = mvarTelefoniaVtaPlazos
+End Property
 
 
 
@@ -1651,6 +1667,37 @@ End Property
 Public Property Get InventarioCodigoArticulo() As Boolean
      InventarioCodigoArticulo = mvarInventarioCodigoArticulo
 End Property
+
+
+'Path facturas firmadas signotech
+Public Property Let PathFirmasAlbaran(ByVal vData As String)
+     mvarPathFirmasAlbaran = vData
+End Property
+Public Property Get PathFirmasAlbaran() As String
+     PathFirmasAlbaran = mvarPathFirmasAlbaran
+End Property
+
+Public Property Let PathFirmasFacturas(ByVal vData As String)
+     mvarPathFirmasFacturas = vData
+End Property
+Public Property Get PathFirmasFacturas() As String
+     PathFirmasFacturas = mvarPathFirmasFacturas
+End Property
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2036,7 +2083,8 @@ On Error GoTo Err3
         
         If Me.HayDeparNuevo = 2 Then mvarTipoFormularioClientes = 1  'Obras. SAIL-Y euler
         
-        
+        mvarPathFirmasFacturas = DBLet(Rs!PathFirmasFacturas, "T")
+        mvarPathFirmasAlbaran = DBLet(Rs!PathFirmasAlbaran, "T")
         
         'Solo GET
         mvarContabilidadNueva = DBLet(Rs!NuevaContabilidad, "N") = 1
@@ -2056,6 +2104,12 @@ On Error GoTo Err3
         End If
         
         mvarPrecioHoraCosteEUL = DBLet(Rs!preciohoracoste, "N")
+        
+        
+        'Si tiene telefonia entoces vere si tiene el modulo de venta a plazos
+        mvarTelefoniaVtaPlazos = False
+        If mvarTieneTelefonia2 > 0 Then ModuloTelefoniaVtaPlazos
+                        
         
         
         ComprobarProgramaEnvioMail
@@ -2320,7 +2374,10 @@ On Error GoTo EModificar
 
     'Coste hora euler
     SQL = SQL & ", preciohoracoste= " & DBSet(mvarPrecioHoraCosteEUL, "N", "S")
-            
+    'SIGNOTEC
+    '    PathFirmasFacturas
+    SQL = SQL & ", PathFirmasAlbaran= " & DBSet(mvarPathFirmasAlbaran, "T", "S")
+    SQL = SQL & ", PathFirmasFacturas= " & DBSet(mvarPathFirmasFacturas, "T", "S")
 
 
 
@@ -2629,8 +2686,6 @@ End Sub
 
 'Fijar lotes generalitat
 Private Sub FijarSiTieneLotesGeneralitat(ByRef R As ADODB.Recordset)
-    'Para marja-chipos
-    'Marjal CHIPOS
     
     On Error GoTo eFijarSiTieneHuertos
     Set R = Nothing
@@ -2686,4 +2741,26 @@ eFijarTieneSII:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
     Set R = Nothing
 End Sub
+
+
+
+Public Sub ModuloTelefoniaVtaPlazos()
+Dim R
+    On Error GoTo eFijarTieneSII
+    
+    Set R = New ADODB.Recordset
+        
+    SQL = "select VtaPlazosTelefono FROM spara2"
+    R.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
+    If Not R.EOF Then
+        If DBLet(R!VtaPlazosTelefono, "N") = 1 Then mvarTelefoniaVtaPlazos = True
+    End If
+    R.Close
+    
+eFijarTieneSII:
+    Err.Clear
+    conn.Errors.Clear
+    Set R = Nothing
+End Sub
+
 

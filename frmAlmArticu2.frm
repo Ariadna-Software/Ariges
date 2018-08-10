@@ -395,6 +395,15 @@ Begin VB.Form frmAlmArticu2
          Caption         =   "Nombre"
          Index           =   1
       End
+      Begin VB.Menu mnExc 
+         Caption         =   "-"
+         Index           =   0
+      End
+      Begin VB.Menu mnExc 
+         Caption         =   "Excluir bloqueados - caducados"
+         Checked         =   -1  'True
+         Index           =   1
+      End
    End
 End
 Attribute VB_Name = "frmAlmArticu2"
@@ -437,6 +446,8 @@ Dim Modo As Byte
 '   3.-  Insercion de nuevo registro
 '   4.-  Modificar
 '   5.-  Mantenimiento Lineas
+
+
 '-------------------------------------------------------
 
 
@@ -450,23 +461,23 @@ Dim b As Boolean
     b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtAux(0).Visible = Not b
-    txtAux(1).Visible = Not b
-    txtAux(2).Visible = Not b
-    txtAux(3).Visible = Not b
-    txtAux(4).Visible = Not b
+    Me.txtAux(0).visible = Not b
+    txtAux(1).visible = Not b
+    txtAux(2).visible = Not b
+    txtAux(3).visible = Not b
+    txtAux(4).visible = Not b
     If Me.DesdeTPV Then
-        txtAux(5).Visible = Not b
+        txtAux(5).visible = Not b
     Else
-        txtAux(6).Visible = Not b
+        txtAux(6).visible = Not b
     End If
     
-    cmdAceptar.Visible = Not b
-    cmdCancelar.Visible = Not b
+    cmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.Visible = b
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     'Si estamos en insertar o modificar
     BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
@@ -643,6 +654,11 @@ Dim cadB As String
             Next i
             cadB = ObtenerBusqueda(Me, False)
             If cadB <> "" Then
+            
+                'Febrero 2018
+                '  Los articulos que esten BLOQUEADOS no salen en esta lista
+                cadB = cadB & " AND sartic.codstatu<>2"
+            
                 PonerModo 2
                 CargaGrid cadB
                 DataGrid1.SetFocus
@@ -714,7 +730,7 @@ End Sub
 
 
 Private Sub DataGrid1_DblClick()
-    If cmdRegresar.Visible = True Then cmdRegresar_Click
+    If cmdRegresar.visible = True Then cmdRegresar_Click
 End Sub
 
 Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
@@ -748,14 +764,14 @@ Private Sub Form_Load()
         .Buttons(5).Image = 19    'Botón Añadir Nuevo Registro
 '        .Buttons(6).Image = 4    'Botón Modificar Registro
 '        .Buttons(7).Image = 5    'Botón Borrar Registro
-        .Buttons(10).Visible = False
-        mnLotes.Visible = False
+        .Buttons(10).visible = False
+        mnLotes.visible = False
         If DesdeTPV Then
             If vParamAplic.NumeroInstalacion = 1 Then
                 .Buttons(10).Image = 53  'Botón articulos agrupdados en TPV
-                .Buttons(10).Visible = True
+                .Buttons(10).visible = True
                 .Buttons(10).ToolTipText = "Lotes navidad"
-                mnLotes.Visible = True
+                mnLotes.visible = True
             End If
         End If
         .Buttons(17).Image = 15  'Botón Salir
@@ -778,7 +794,7 @@ Private Sub Form_Load()
     'SIEMPRE VIENEN EN MODO BUSQUEDA
     If DatosADevolverBusqueda = "" Then DatosADevolverBusqueda = "0"
     
-    cmdRegresar.Visible = (DatosADevolverBusqueda <> "")
+    cmdRegresar.visible = (DatosADevolverBusqueda <> "")
 
     
     'Novimebre 2010
@@ -858,6 +874,11 @@ Dim C As String
     CadenaConsulta = C
 End Sub
 
+
+Private Sub mnExc_Click(Index As Integer)
+      If Index = 1 Then mnExc(1).Checked = Not mnExc(1).Checked
+End Sub
+
 Private Sub mnLotes_Click()
         HacerToolbar 10
 End Sub
@@ -879,8 +900,8 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     HacerToolbar Button.Index
 End Sub
-Private Sub HacerToolbar(Indice As Integer)
-    Select Case Indice
+Private Sub HacerToolbar(indice As Integer)
+    Select Case indice
         Case 1: mnBuscar_Click
         Case 2: mnVerTodos_Click
         Case 5:
@@ -916,9 +937,14 @@ Dim cadSel As String
     ' ---- [06/11/2009] [LAURA] : añadir la cantidad de stock
     cadSel = SQL
     
-    'AnyadirAFormula cadSel, "codalmac=" & Me.parAlmacen
+    
     
     SQL = CadenaConsulta
+    
+    If mnExc(1).Checked Then
+        SQL = SQL & " AND sartic.codstatu<2 " 'EXLUCIMOS
+    End If
+    
 '    If Trim(cadSel) <> "" Then Sql = Sql & " WHERE " & cadSel
     If Trim(cadSel) <> "" Then SQL = SQL & " AND " & cadSel
     If mnOrdenadoPor(1).Checked Then

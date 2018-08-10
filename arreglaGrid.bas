@@ -12,7 +12,7 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
     Dim posi2 As Integer
     Dim fil As Integer
     Dim C As Integer
-    Dim o As Integer
+    Dim O As Integer
     Dim A() As Variant 'per als 5 parametres
     'Dim grid As DataGrid
     Dim obj As Object
@@ -110,15 +110,15 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
                         obj.Left = grid.Left + 340
                         'obj.Left = grid.Left + 308
                     Else
-                        o = 0
+                        O = 0
                         While obj_ant Is Nothing
-                            o = o + 1
-                            If A(0, fil - o) = "S" Then
-                                Set obj_ant = eval(formu, CStr(A(1, fil - o)))
+                            O = O + 1
+                            If A(0, fil - O) = "S" Then
+                                Set obj_ant = eval(formu, CStr(A(1, fil - O)))
                             End If
                         Wend
                         'en obj_ant tindré el 1r objecte per darrere que siga visible
-                        Select Case A(2, fil - o)
+                        Select Case A(2, fil - O)
                             Case "T" 'objecte anterior a text es text
                                 obj.Width = grid.Columns(C).Width - 55
                                 'obj.Width = grid.Columns(c).Width - 38
@@ -137,15 +137,15 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
                         obj.Width = grid.Columns(C).Width - 10
                         obj.Left = grid.Left + 320
                     Else
-                        o = 0
+                        O = 0
                         While obj_ant Is Nothing
-                            o = o + 1
-                            If A(0, fil - o) = "S" Then
-                                Set obj_ant = eval(formu, CStr(A(1, fil - o)))
+                            O = O + 1
+                            If A(0, fil - O) = "S" Then
+                                Set obj_ant = eval(formu, CStr(A(1, fil - O)))
                             End If
                         Wend
                         'en obj_ant tindré el 1r objecte per darrere que siga visible
-                        Select Case A(2, fil - o)
+                        Select Case A(2, fil - O)
                             Case "T" 'objecte anterior a combo es text
                                 obj.Width = grid.Columns(C).Width
                                 obj.Left = obj_ant.Left + obj_ant.Width + 45
@@ -164,15 +164,15 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
                         Mens = "Falta programar en arreglaGrid per al cas que un Button es el primer objete visible d'un Datagrid"
                         MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & Mens
                     Else
-                        o = 0
+                        O = 0
                         While obj_ant Is Nothing
-                            o = o + 1
-                            If A(0, fil - o) = "S" Then
-                                Set obj_ant = eval(formu, CStr(A(1, fil - o)))
+                            O = O + 1
+                            If A(0, fil - O) = "S" Then
+                                Set obj_ant = eval(formu, CStr(A(1, fil - O)))
                             End If
                         Wend
                         'en obj_ant tindré el 1r objecte per darrere que siga visible
-                        Select Case A(2, fil - o)
+                        Select Case A(2, fil - O)
                             Case "T" 'objecte anterior a boto es text
                                 obj_ant.Width = obj_ant.Width - obj.Width + 20 '1r faig més curt l'objecte de text
                                 obj.Left = obj_ant.Left + obj_ant.Width

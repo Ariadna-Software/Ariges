@@ -24,7 +24,7 @@ Option Explicit
 '------------------------------------------------
 'Variables del modulo CStock
 '------------------------------------------------
-Private mvarcodartic As String
+Private mvarCodArtic As String
 Private mvarCodAlmac As Integer
 
 Private mvarFechaMov As String
@@ -65,11 +65,11 @@ Dim artsotckminimo As String
 '------------------------------------------------
 
 Public Property Let codArtic(ByVal vData As String)
-     mvarcodartic = vData
+     mvarCodArtic = vData
 End Property
 
 Public Property Get codArtic() As String
-     codArtic = mvarcodartic
+     codArtic = mvarCodArtic
 End Property
 
 
@@ -420,10 +420,11 @@ Dim b As Boolean
         Else
             ' ver si hay control de stock para el articulo
             If vArtic.CtrStock Then
-'                    vStock = ObtenerStock
-                    b = True
+                b = True
             Else
                 b = False
+                If vParamAplic.NumeroInstalacion = 2 And vArtic.EsConjunto Then b = True
+                
             End If
         End If
    End If
@@ -440,6 +441,9 @@ Dim devuelve As String
 Dim vArtic As CArticulo
 Dim vD As cLArticulo
 Dim MinimoPedido As Byte
+Dim Mueve As Boolean
+
+
     '0.- Nada   1.- Minimo   2.- Punto pedido
     MuestraMenCStock = Not NoMenStock
        
@@ -458,14 +462,24 @@ Dim MinimoPedido As Byte
             
             'si hay control de stock para el articulo
             If vArtic.CtrStock Then
+                Mueve = True
+            Else
+                Mueve = False
+                If vParamAplic.NumeroInstalacion = 2 And vArtic.EsConjunto Then Mueve = True
+            End If
+            'If vArtic.CtrStock Then
+             If Mueve Then
                 If Not YaTieneLeidoLosDatosObjeto Then
                     Set cArticulos = New Collection
                     Set vD = New cLArticulo
-                    vD.codArtic = vArtic.codigo
-                    vD.CantidadNecesaria = 1
-                    cArticulos.Add vD
-                
-                    'No se si deberia ir en la clase articulos o en esta
+                            
+                    'Herbelca 2018.  El ppal puede NO llevar control stock
+                    If vArtic.CtrStock Then
+                        vD.codArtic = vArtic.codigo
+                        vD.CantidadNecesaria = 1
+                        cArticulos.Add vD
+                    End If
+                    
                     If vArtic.EsConjunto And Not vParamAplic.Produccion Then AñadirArticulosConjunto vD
                 End If
                 
@@ -622,6 +636,9 @@ Dim vD As cLArticulo
 Dim miCantidad As Single
 Dim miImporte As Single
 Dim F_inve As String
+Dim EliminarPrimeraEntradaPpal As Boolean   'HERBELCA Mayo 2018
+Dim AuxD As String
+
     ActualizarStock = False
     b = False
     On Error GoTo EActualizarStock
@@ -632,24 +649,34 @@ Dim F_inve As String
     '-------------------------------------------------------------------------------
     Set vD = New cLArticulo
     Set cArticulos = New Collection
-    vD.codArtic = mvarcodartic
+    vD.codArtic = mvarCodArtic
     vD.CantidadNecesaria = 1
-    
+    EliminarPrimeraEntradaPpal = False
     
 
 
-    
+   
     If mvarDetaMov <> "ALC" Then
-        cArticulos.Add vD  'lo añado aqui
-        cadMen = DevuelveDesdeBDNew(conAri, "sartic", "conjunto", "codartic", mvarcodartic, "T")
+    
+        AuxD = "ctrstock"
+        cadMen = DevuelveDesdeBDNew(conAri, "sartic", "conjunto", "codartic", mvarCodArtic, "T", AuxD)
         If cadMen = "" Then cadMen = "0"
+        
+        If AuxD = "0" Then EliminarPrimeraEntradaPpal = True
+        
+        
+        cArticulos.Add vD  'lo añado aqui
+        
         If Val(cadMen) = 1 And Not vParamAplic.Produccion Then AñadirArticulosConjunto vD
         
     Else
-        F_inve = DevuelveDesdeBD(conAri, "fechainv", "salmac", "codartic=" & DBSet(mvarcodartic, "T") & " AND codalmac", CStr(mvarCodAlmac), "N")
+        F_inve = DevuelveDesdeBD(conAri, "fechainv", "salmac", "codartic=" & DBSet(mvarCodArtic, "T") & " AND codalmac", CStr(mvarCodAlmac), "N")
         If F_inve = "" Then F_inve = "01/01/1900"
         vD.FecInve = F_inve
         cArticulos.Add vD 'aqui lo añado
+        
+        
+        
     End If
 
     If tipoMov = "S" Then
@@ -687,6 +714,12 @@ Dim F_inve As String
     
     '---- Modificar stock del articulo
     If b Then
+    
+        'Mayo18
+        If EliminarPrimeraEntradaPpal Then cArticulos.Remove 1   'Quito el ppal , ya que no tiene control stock
+            
+    
+    
         ADonde = "Actualizando Stocks Almacenes (tabla: salmac)."
         If MueveStock Then
             If vTipoMov = "1" Then 'Entrada: no se comprueba si hay stock
@@ -713,10 +746,6 @@ Dim F_inve As String
         End If
     End If
     
-    
-    '---- si es articulo de conjunto actualizar stock e insertar movimientos
-    'para cada una de las líneas de conjunto
-    'if b then b=ActualizarStockLinConjunto
     
     
     ActualizarStock = b
@@ -801,11 +830,11 @@ Dim vD As cLArticulo
     '-------------------------------------------------------------------------------
     Set vD = New cLArticulo
     Set cArticulos = New Collection
-    vD.codArtic = mvarcodartic
+    vD.codArtic = mvarCodArtic
     vD.CantidadNecesaria = 1  'el principal siempre es uno
     cArticulos.Add vD
 
-    cadMen = DevuelveDesdeBDNew(conAri, "sartic", "conjunto", "codartic", mvarcodartic, "T")
+    cadMen = DevuelveDesdeBDNew(conAri, "sartic", "conjunto", "codartic", mvarCodArtic, "T")
     If cadMen = "" Then cadMen = "0"
     'ANTES NOVIEMBRE 2013
     'If Val(cadMen) = 1 And Not vParamAplic.Produccion Then AñadirArticulosConjunto vD
@@ -897,7 +926,7 @@ Dim vD  As cLArticulo
         
         Set vD = New cLArticulo
         Set cArticulos = New Collection
-        vD.codArtic = mvarcodartic
+        vD.codArtic = mvarCodArtic
         vD.CantidadNecesaria = 1  'el principal siempre es uno
         cArticulos.Add vD
         
@@ -1035,7 +1064,7 @@ Dim C As String
     'C = "Select codarti1,cantidad  from sarti1 where codartic = '" & mvarcodartic & "' order by numlinea"
     
     'ahora
-    C = "Select codarti1,cantidad,preciouc  from sarti1,sartic where  sarti1.codarti1=sartic.codartic and sarti1.codartic= '" & mvarcodartic & "' order by numlinea"
+    C = "Select codarti1,cantidad,preciouc  from sarti1,sartic where  sarti1.codarti1=sartic.codartic and sarti1.codartic= '" & mvarCodArtic & "' order by numlinea"
     Set Rs = New ADODB.Recordset
     Rs.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Rs.EOF Then
@@ -1121,7 +1150,7 @@ Dim Aux As String
     
     
     HayArticulosEquivalenciaConStock = False
-    Aux = "select * from salmac where codalmac=" & mvarCodAlmac & "  and codartic in (select codarti1 from sarti6 where codartic=" & DBSet(mvarcodartic, "T") & ")   "
+    Aux = "select * from salmac where codalmac=" & mvarCodAlmac & "  and codartic in (select codarti1 from sarti6 where codartic=" & DBSet(mvarCodArtic, "T") & ")   "
     Set R = New ADODB.Recordset
     R.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not R.EOF Then

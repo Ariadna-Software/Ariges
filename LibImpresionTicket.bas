@@ -56,7 +56,7 @@ Dim NomImpre As String
             .EnvioEMail = False
             .Opcion = 93
             .Titulo = "Ticket"
-            .NombreRpt = cadNomRPT
+            .NombreRPT = cadNomRPT
             .NombrePDF = pPdfRpt
             .ConSubInforme = True
             .Show vbModal
@@ -66,7 +66,7 @@ Dim NomImpre As String
         
         
         'sI ABRE EL CAJON
-        If vParamTPV.AbreCajon Then ImprimePorLaCom ""
+        If vParamTPV.AbreCajon > 0 Then ImprimePorLaCom "", vParamTPV.AbreCajon
               
               
 '        'Volver la impresora a la predeterminada
@@ -192,14 +192,14 @@ On Error GoTo EImpTickD
                 
                 'Cliente mostrador
                 If ClienteMostrador Then
-                    Lin = CuadraParteI(40, "CLIENTE: " & Format(rs2!codClien, "0000") & "  " & rs2!Nomclien)
+                    Lin = CuadraParteI(40, "CLIENTE: " & Format(rs2!codClien, "0000") & "  " & rs2!NomClien)
                     Printer.Print Lin
                 Else
-                    SQL = Trim(rs2!Nomclien & " (" & rs2!nifClien & ")")
+                    SQL = Trim(rs2!NomClien & " (" & rs2!nifClien & ")")
                     If Len(SQL) <= 40 Then
                         Lin = CuadraParteI(40, SQL)
                     Else
-                        Lin = "Cliente: " & rs2!Nomclien
+                        Lin = "Cliente: " & rs2!NomClien
                         Printer.Print Lin
                         Lin = "NIF: " & rs2!nifClien
                     End If
@@ -355,7 +355,7 @@ On Error GoTo EImpTickD
                             'El primer numero es el numero de caracteres de secuencia.
                             'Ej: 5|27|p|0|25|250|
                             '   Son 5:  27;p;0;25:250
-                If vParamTPV.AbreCajon Then
+                If vParamTPV.AbreCajon > 0 Then
                     
     
                         'De momento lo pongo a piñon
@@ -370,7 +370,7 @@ On Error GoTo EImpTickD
                         '    End If
                         'Next i
                         'Printer.Print Lin
-                        ImprimePorLaCom ""
+                        ImprimePorLaCom "", vParamTPV.AbreCajon
                 End If
                 
                 
@@ -398,8 +398,8 @@ EImpTickD:
     MsgBox Err.Description & " (" & Err.Number & ")", vbCritical, "Imprimir ticket."
 End Sub
 
-
-Public Sub ImprimePorLaCom(Cadena As String)
+'TipoPuerto :   1 COM      2: LPT
+Public Sub ImprimePorLaCom(CADENA As String, TipoPuerto As Byte)
     On Error GoTo EI
     
     Dim nFicSalCajon As Integer
@@ -407,17 +407,23 @@ Public Sub ImprimePorLaCom(Cadena As String)
     
     'Marzo 2011
     'Puerto = "COM1"
-    Puerto = "COM" & vParamTPV.ComImpresora
+    If TipoPuerto = 2 Then
+        Puerto = "LPT" & vParamTPV.ComImpresora
+    Else
+        'Lo que habia
+        Puerto = "COM" & vParamTPV.ComImpresora
+    End If
     nFicSalCajon = FreeFile
     
     Open Puerto For Output As #nFicSalCajon
+    'En ppio esta secuencia es STANDRD
     Print #nFicSalCajon, Chr$(27); "p"; Chr$(0); Chr$(25); Chr$(250)
     Close nFicSalCajon
     
     Exit Sub
 EI:
-    Cadena = "Error en COM: " & vbCrLf & vbCrLf & Err.Description
-    MsgBox Cadena, vbCritical
+    CADENA = "Error en " & Puerto & ": " & vbCrLf & vbCrLf & Err.Description
+    MsgBox CADENA, vbCritical
 End Sub
 
 
@@ -441,11 +447,11 @@ Private Function LineaCentrada(Lin As String) As String
     End If
 End Function
 
-Private Function CuadraParteD(longitud As Integer, Cadena As String) As String
-    CuadraParteD = Right(String(longitud, " ") & Cadena, longitud)
+Private Function CuadraParteD(Longitud As Integer, CADENA As String) As String
+    CuadraParteD = Right(String(Longitud, " ") & CADENA, Longitud)
 End Function
 
-Private Function CuadraParteI(longitud As Integer, Cadena As String) As String
-    CuadraParteI = Left(Cadena & String(longitud, " "), longitud)
+Private Function CuadraParteI(Longitud As Integer, CADENA As String) As String
+    CuadraParteI = Left(CADENA & String(Longitud, " "), Longitud)
 End Function
 

@@ -1177,7 +1177,7 @@ Dim bSalir As Boolean
         'Si es factura, pero paga en efectivo, abrimos cajon tambien
         SQL = DevuelveDesdeBD(conAri, "tipforpa", "sforpa", "codforpa", Text1(1).Text, "N")
         If SQL = "0" Then
-            If vParamTPV.AbreCajon Then ImprimePorLaCom ""
+            If vParamTPV.AbreCajon > 0 Then ImprimePorLaCom "", vParamTPV.AbreCajon
         End If
     
     
@@ -1674,7 +1674,7 @@ Dim ErroresEnLotes_DatosInternos As String
             Else
                 SQL = "+"
             End If
-            SQL = "UPDATE slotes SET vendida=vendida " & SQL & Abs(DBSet(Rs!cantidad, "N"))
+            SQL = "UPDATE slotes SET vendida=vendida " & SQL & DBSet(Abs(Rs!cantidad), "N")
             SQL = SQL & " WHERE numlotes= " & DBSet(Rs!numLote, "T")
             SQL = SQL & " AND codartic= " & DBSet(Rs!codArtic, "T")
             SQL = SQL & " AND fecentra= " & DBSet(Rs!fecentra, "F")

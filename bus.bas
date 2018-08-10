@@ -1395,7 +1395,7 @@ End Function
 
 'Lo que hace es comprobar que si la resolucion es mayor
 'que 800x600 lo pone en el 400
-Public Sub AjustarPantalla(ByRef Formulario As Form)
+Public Sub AjustarPantalla(ByRef formulario As Form)
 '    If Screen.Width > 13000 Then
 '        formulario.Top = 400
 '        formulario.Left = 400
@@ -1880,7 +1880,8 @@ Dim F2 As Date
         'Si tiene SII
         If vParamAplic.ContabilidadNueva Then
             If vParamAplic.SII_Tiene Then
-                If DateDiff("d", Fecha, Now) > vParamAplic.Sii_Dias Then
+                
+                If Fecha < UltimaFechaCorrectaSII(vParamAplic.Sii_Dias, Now) Then
                     MensajeFechaOkConta = "Fecha fuera de periodo de comunicación SII."
                     'LLEVA SII y han trascurrido los dias
                     If vUsu.Nivel = 0 Then
@@ -2291,8 +2292,13 @@ Dim cad As String
         End If
     End If
     
-    
-    
+    cad = DevuelveDesdeBD(conAri, "Count(*)", "scliendp", "codclien", CStr(codClien))
+    If cad = "" Then cad = "0"
+    If Val(cad) > 0 Then
+        MsgBox "Tiene datos de contacto", vbExclamation
+        Exit Function
+    End If
+
     'Si queremos comprobar mas cosas... va aquin
     PuedeEliminarCliente = True
 
@@ -2443,7 +2449,8 @@ Dim RN As ADODB.Recordset
     On Error GoTo EActualizaRiesgoCliente
 
     Set RN = New ADODB.Recordset
-    miSQL = "Select codclien,tipoiva,if(credisol is null,0,credisol) credisol,codsitua from sclien where codclien =" & codClien
+    '                               ponia credisol
+    miSQL = "Select codclien,tipoiva,if(limcredi is null,0,limcredi) limcredi,codsitua from sclien where codclien =" & codClien
     RN.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     RiesgoCliente codClien, CByte(RN!TipoIVA), Now, ImpTesor, ImpAlb, Nothing
@@ -2451,7 +2458,7 @@ Dim RN As ADODB.Recordset
     miSQL = "UPDATE sclien SET UtFecrecal = " & DBSet(Now, "F")
     miSQL = miSQL & ", riesgoact = " & DBSet(ImpTesor, "N")
         
-    ImpAlb = RN!credisol
+    ImpAlb = RN!limcredi
     
     If ImpTesor <= ImpAlb Then
     

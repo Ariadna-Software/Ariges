@@ -27,7 +27,7 @@ Private mCodCateg As String 'categoria del Articulo
 Private mCodStatu As Byte 'cod. estatus: 1=Bloqueado, 2=Caducado
 Private mCtrStock As Byte 'hay control de stock (si/No)
 Private mArtVario As Byte 'Si es articulo de varios o no
-Private mConjunto As Boolean  'Si es articulo de conjunto o no
+Private mConjunto2 As Boolean  'Si es articulo de conjunto o no
 
 Private mCodigIVA As Byte
 
@@ -126,11 +126,11 @@ End Property
 
 '**** Articulo es de Conjunto (Si/No)
 Public Property Let EsConjunto(ByVal vData As Boolean)
-     mConjunto = vData
+     mConjunto2 = vData
 End Property
 
 Public Property Get EsConjunto() As Boolean
-     EsConjunto = mConjunto
+     EsConjunto = mConjunto2
 End Property
 
 
@@ -231,12 +231,12 @@ End Property
 
 
 '**** Codigo proveedor
-Public Property Let CodProve(ByVal vData As Long)
+Public Property Let Codprove(ByVal vData As Long)
      mCodProve = vData
 End Property
 
-Public Property Get CodProve() As Long
-     CodProve = mCodProve
+Public Property Get Codprove() As Long
+     Codprove = mCodProve
 End Property
 
 
@@ -250,12 +250,12 @@ End Property
 Public Function Existe(vCodartic As String) As Boolean
 'Comprueba si existe el articulo en la BD
 Dim devuelve As String
-Dim Nom As String
+Dim nom As String
 
     On Error GoTo EExiste
     
-    Nom = "nomartic"
-    devuelve = DevuelveDesdeBD(conAri, "codartic", "sartic", "codartic", vCodartic, "T", Nom)
+    nom = "nomartic"
+    devuelve = DevuelveDesdeBD(conAri, "codartic", "sartic", "codartic", vCodartic, "T", nom)
     If devuelve = "" Then
         Existe = False
         devuelve = "No existe el Artículo " & vCodartic & ". "
@@ -263,7 +263,7 @@ Dim Nom As String
     Else
         Existe = True
         codigo = vCodartic
-        Nombre = Nom
+        Nombre = nom
     End If
     
 EExiste:
@@ -276,7 +276,7 @@ Public Function LeerDatos(vCodartic As String) As Boolean
 'Leer los datos de un Articulo dado
 'Lee de la BD: Ariges, Tabla: sartic
 'OUT: True si lee los datos correctamente
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 
     On Error GoTo ELeer
@@ -286,41 +286,41 @@ Dim SQL As String
     SQL = SQL & " FROM sartic "
     SQL = SQL & " WHERE codartic=" & DBSet(vCodartic, "T")
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    If RS.EOF Then
+    If Rs.EOF Then
         LeerDatos = False
     Else
-        codigo = CStr(RS!codArtic)
+        codigo = CStr(Rs!codArtic)
         
-        Nombre = RS!NomArtic
-        Familia = RS!Codfamia
-        categoria = DBLet(RS!codCateg, "T")
+        Nombre = Rs!NomArtic
+        Familia = Rs!Codfamia
+        categoria = DBLet(Rs!codCateg, "T")
         
-        Status = RS!codstatu
-        CtrStock = RS!CtrStock
-        EsDeVarios = RS!artvario
-        Me.EsConjunto = RS!Conjunto
+        Status = Rs!codstatu
+        CtrStock = Rs!CtrStock
+        EsDeVarios = Rs!artvario
+        Me.EsConjunto = Rs!Conjunto
         
-        PrecioVenta = RS!preciove
-        TipoIVA = RS!CodigIVA
-        UnidCaja = RS!unicajas
+        PrecioVenta = Rs!PrecioVe
+        TipoIVA = Rs!Codigiva
+        UnidCaja = Rs!unicajas
         
-        PrecioMedPon = DBLet(RS!PrecioMP, "N") 'precio medio ponderado
-        PrecioStan = DBLet(RS!preciost, "N") 'precio standard
-        PrecioUltCom = DBLet(RS!precioUC, "N") 'precio ultima compra
-        MargenComercial = DBLet(RS!margecom, "N") 'margen comercial
+        PrecioMedPon = DBLet(Rs!PrecioMP, "N") 'precio medio ponderado
+        PrecioStan = DBLet(Rs!preciost, "N") 'precio standard
+        PrecioUltCom = DBLet(Rs!precioUC, "N") 'precio ultima compra
+        MargenComercial = DBLet(Rs!margecom, "N") 'margen comercial
         
-        TextoVentas = DBLet(RS!textoven, "T")
-        TextoCompras = DBLet(RS!textocom, "T")
+        TextoVentas = DBLet(Rs!textoven, "T")
+        TextoCompras = DBLet(Rs!textocom, "T")
         
-        CodProve = DBLet(RS!CodProve, "N")
+        Codprove = DBLet(Rs!Codprove, "N")
         LeerDatos = True
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
@@ -328,7 +328,7 @@ ELeer:
     SQL = SQL & "Número: " & Err.Number & vbCrLf
     SQL = SQL & "Descripción: " & Err.Description
     MsgBox SQL, vbExclamation
-    Set RS = Nothing
+    Set Rs = Nothing
     LeerDatos = False
 End Function
 
@@ -369,20 +369,20 @@ End Sub
 
 Public Function ExisteEnAlmacen(codAlm As String, Optional CanStock As String) As Boolean
 Dim devuelve As String
-Dim Cantidad As String
+Dim cantidad As String
 
     On Error GoTo EExisteAlm
 
     'Comprobar que existe de ese articulo en el almacen seleccionado
-    Cantidad = "canstock"
-    devuelve = DevuelveDesdeBDNew(conAri, "salmac", "codartic", "codartic", codigo, "T", Cantidad, "codalmac", codAlm, "N")
+    cantidad = "canstock"
+    devuelve = DevuelveDesdeBDNew(conAri, "salmac", "codartic", "codartic", codigo, "T", cantidad, "codalmac", codAlm, "N")
     
     If devuelve = "" Then
         MsgBox "No existe unidades del Artículo: " & codigo & "  en el Almacen: " & codAlm, vbExclamation
         ExisteEnAlmacen = False
     Else
         ExisteEnAlmacen = True
-        CanStock = Cantidad
+        CanStock = cantidad
     End If
     
 EExisteAlm:
@@ -591,7 +591,7 @@ Public Function ReestablecerUltFechaCompra(vAlmac As String) As Boolean
 'con los valores del ultimo movimiento que encontremos en la smoval
 Dim SQL As String
 Dim cadSel As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo ERestFecha
 
@@ -601,17 +601,17 @@ Dim RS As ADODB.Recordset
     SQL = "select * from smoval WHERE " & cadSel
     SQL = SQL & " and horamovi =(select max(horamovi) from smoval where " & cadSel & ")"
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
         'actualizamos la sartic con esos valores
-        SQL = "UPDATE sartic SET ultfecco=" & DBSet(RS!FechaMov, "F")
-        SQL = SQL & ", preciouc=" & DBSet(RS!impormov, "N")
+        SQL = "UPDATE sartic SET ultfecco=" & DBSet(Rs!FechaMov, "F")
+        SQL = SQL & ", preciouc=" & DBSet(Rs!impormov, "N")
         SQL = SQL & " WHERE codartic=" & DBSet(codigo, "T")
         conn.Execute SQL
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
     
 ERestFecha:
@@ -679,7 +679,7 @@ End Function
 
 Public Function ObtenerPorceIVA() As Currency
 'Devuelve el % de IVA del articulo correspondiente al codigiva
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 
     On Error GoTo EPorce
@@ -687,14 +687,14 @@ Dim SQL As String
     If codigo <> "" Then 'codartic
         'Obtenemos el % de IVA a aplicar
         SQL = "SELECT porceiva FROM tiposiva WHERE codigiva=" & TipoIVA
-        Set RS = New ADODB.Recordset
-        RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         SQL = ""
-        If Not RS.EOF Then SQL = RS.Fields(0).Value
+        If Not Rs.EOF Then SQL = Rs.Fields(0).Value
         
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
         ObtenerPorceIVA = CCur(SQL)
     End If
     
@@ -704,7 +704,7 @@ EPorce:
         SQL = SQL & "Número: " & Err.Number & vbCrLf
         SQL = SQL & "Descripción: " & Err.Description
         MsgBox SQL, vbExclamation
-        Set RS = Nothing
+        Set Rs = Nothing
     End If
 End Function
 
@@ -907,12 +907,12 @@ End Function
 
 Public Function TieneNumLote() As Boolean
 'si el articulo pertenece a una categoria que tiene control de numero de lote
-Dim Cad As String
+Dim cad As String
 
     If categoria <> "" Then
         'ver si la categoria a la q pertenece lleva control de lotes
-        Cad = DevuelveDesdeBDNew(conAri, "scateg", "ctrlotes", "codcateg", categoria, "T")
-        TieneNumLote = (Cad = "1")
+        cad = DevuelveDesdeBDNew(conAri, "scateg", "ctrlotes", "codcateg", categoria, "T")
+        TieneNumLote = (cad = "1")
     Else
         'el articulo no pertenece a una categoria
         TieneNumLote = False

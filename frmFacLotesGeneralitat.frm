@@ -778,30 +778,30 @@ Dim ModificaLineas As Byte
 Dim i As Integer
 
 Private Sub PonerModo(vModo As Byte)
-Dim B As Boolean
+Dim b As Boolean
     
     
     
     ActualizarToolbarGnral Me.Toolbar1, Modo, vModo, 5
     
     Modo = vModo
-    B = (Modo = 2)
+    b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
-    B = Modo = 1 Or Modo = 3 Or Modo = 4
+    b = Modo = 1 Or Modo = 3 Or Modo = 4
     For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = B
+        txtAux(i).visible = b
     Next i
     Me.cmdAux(0).visible = False
     Me.cmdAux(1).visible = False
     
-    cmdAceptar.visible = B
-    cmdCancelar.visible = B
-    B = B Or Modo = 5
-    DataGrid1.Enabled = Not B
+    cmdAceptar.visible = b
+    cmdCancelar.visible = b
+    b = b Or Modo = 5
+    DataGrid1.Enabled = Not b
    
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Si es regresar    'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
-    If B Then
+    If b Then
         cmdRegresar.Caption = "&Regresar"
         cmdRegresar.visible = DatosADevolverBusqueda <> ""
     End If
@@ -811,11 +811,11 @@ Dim B As Boolean
     BloquearTxt txtAux(3), True
     BloquearTxt txtAux(5), True
     
-    B = False
+    b = False
     If Modo = 5 Then
-        If ModificaLineas > 0 Then Stop
+        If ModificaLineas > 0 Then MsgBox "Hb st"
     End If
-    Campos_2_Visibles B
+    Campos_2_Visibles b
     
     
     
@@ -831,31 +831,31 @@ Dim B As Boolean
 End Sub
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
     
-    B = (Modo = 2)
-    Toolbar1.Buttons(1).Enabled = B 'Buscar
-    Me.mnBuscar.Enabled = B
-    Toolbar1.Buttons(2).Enabled = B 'Todos
-    Me.mnVerTodos.Enabled = B
-    Toolbar1.Buttons(9).Enabled = B
-    Me.mnMtoLineas.Enabled = B
-    If B Then
-        B = B And Not DeConsulta
+    b = (Modo = 2)
+    Toolbar1.Buttons(1).Enabled = b 'Buscar
+    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = b 'Todos
+    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(9).Enabled = b
+    Me.mnMtoLineas.Enabled = b
+    If b Then
+        b = b And Not DeConsulta
     Else
-        B = Modo = 5 And ModificaLineas = 0
+        b = Modo = 5 And ModificaLineas = 0
     End If
     'Añadir
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnEliminar.Enabled = b
     'Imprimir
-    Toolbar1.Buttons(10).Enabled = B
+    Toolbar1.Buttons(10).Enabled = b
 End Sub
 
 
@@ -1637,9 +1637,9 @@ Private Sub MtoLineas()
 End Sub
 Private Sub CargaGrid(Optional SQL As String)
 Dim i As Byte
-Dim B As Boolean
+Dim b As Boolean
     
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     If SQL <> "" Then
         SQL = CadenaConsulta & " AND " & SQL
     Else
@@ -1723,7 +1723,7 @@ Dim B As Boolean
         mnModificar.Enabled = Not adodc1.Recordset.EOF
         mnEliminar.Enabled = Not adodc1.Recordset.EOF
    End If
-   DataGrid1.Enabled = B
+   DataGrid1.Enabled = b
    DataGrid1.ScrollBars = dbgAutomatic
    
    CargaGrid2 Not adodc1.Recordset.EOF
@@ -1745,7 +1745,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
 End Sub
 
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
@@ -1804,17 +1804,17 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
     'Comprobar si ya existe el cod de tipo unidad en la tabla
     If Modo = 3 Then 'Insertar
-        If ExisteCP(txtAux(0)) Then B = False
+        If ExisteCP(txtAux(0)) Then b = False
     End If
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -1840,14 +1840,14 @@ On Error Resume Next
 End Sub
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
+Private Sub PonerBotonCabecera(b As Boolean)
 On Error Resume Next
 
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    Me.cmdRegresar.visible = B
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "&Cabecera"
-    If B Then
+    If b Then
         Me.lblIndicador.Caption = "Lineas Detalle"
         cmdRegresar.Cancel = True
         PonerFocoBtn Me.cmdRegresar
@@ -1877,13 +1877,13 @@ End Sub
 
 Private Sub CargaGrid2(enlaza As Boolean)
 Dim i As Byte
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
 
     If Not Label1.visible Then Exit Sub
 
-    B = DataGrid2.Enabled
+    b = DataGrid2.Enabled
     DataGrid2.Enabled = False
     SQL = "select slotesgeneralitatmov.fechaMov ,slotesgeneralitatmov.codclien,nomclien,cantidad"
     SQL = SQL & " ,slotesgeneralitatmov.ManipuladorNombre,slotesgeneralitatmov.ManipuladorNumCarnet,"
@@ -1943,7 +1943,7 @@ Dim SQL As String
    Next i
    
    
-   DataGrid2.Enabled = B
+   DataGrid2.Enabled = b
    DataGrid2.ScrollBars = dbgAutomatic
    
    

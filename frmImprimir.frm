@@ -153,10 +153,10 @@ Begin VB.Form frmImprimir
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   375
+      Height          =   495
       Left            =   960
       TabIndex        =   7
-      Top             =   1320
+      Top             =   1200
       Width           =   5535
    End
 End
@@ -467,8 +467,9 @@ Dim cad As String
                 Text1.Text = "Compras marca-familia"
                 MostrarTree = True
             
-            
-                
+            Case 2051
+                'Text1.Text = "Compras marca-familia"
+                NombreRPT = "rFacPedxClienIVA.rpt"
                 
             
             End Select
@@ -650,6 +651,11 @@ Dim EulerT As String
     With frmVisReport
         If Me.chkEMAIL.Value = 1 Then
             'EMAIL
+            
+            'En EULER, el rp
+            If SeleccionaRPTCodigo > 0 Then
+                If vParamAplic.NumeroInstalacion = 4 Then NombrePDF = NombreRPT
+            End If
             .Informe = MIPATH & NombrePDF
         Else
             'IMPRIMIR

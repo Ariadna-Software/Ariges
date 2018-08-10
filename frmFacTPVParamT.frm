@@ -120,14 +120,16 @@ Begin VB.Form frmFacTPVParamT
       TabIndex        =   17
       Top             =   4080
       Width           =   4215
-      Begin VB.CheckBox chkAbreCajon 
-         Caption         =   "Abre cajón"
-         Height          =   255
-         Left            =   1320
+      Begin VB.ComboBox cboAbreCajon 
+         Height          =   315
+         ItemData        =   "frmFacTPVParamT.frx":000C
+         Left            =   2280
+         List            =   "frmFacTPVParamT.frx":000E
+         Style           =   2  'Dropdown List
          TabIndex        =   23
-         Tag             =   "Cajon|N|S|||spatpvt|abrecajon|||"
-         Top             =   360
-         Width           =   1215
+         Tag             =   "Abre cajon|N|S|||spatpvt|AbreCajon|||"
+         Top             =   480
+         Width           =   1575
       End
       Begin VB.ComboBox cboPuertos 
          Height          =   315
@@ -135,7 +137,7 @@ Begin VB.Form frmFacTPVParamT
          Style           =   2  'Dropdown List
          TabIndex        =   7
          Tag             =   "Nº Puerto|N|S|||spatpvt|numpuerto|||"
-         Top             =   1080
+         Top             =   1200
          Width           =   1575
       End
       Begin VB.CheckBox chkHayVisor 
@@ -152,7 +154,7 @@ Begin VB.Form frmFacTPVParamT
          Left            =   2280
          Style           =   2  'Dropdown List
          TabIndex        =   8
-         Top             =   1080
+         Top             =   1200
          Width           =   1695
       End
       Begin VB.TextBox txtAux 
@@ -165,8 +167,17 @@ Begin VB.Form frmFacTPVParamT
          TabIndex        =   18
          Tag             =   "Velocidad Puerto|N|S|||spatpvt|velocpue|||"
          Text            =   "Text1"
-         Top             =   1080
+         Top             =   1200
          Width           =   855
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Abre cajon"
+         Height          =   255
+         Index           =   0
+         Left            =   2280
+         TabIndex        =   24
+         Top             =   240
+         Width           =   1575
       End
       Begin VB.Label Label1 
          Caption         =   "Puerto visor"
@@ -174,7 +185,7 @@ Begin VB.Form frmFacTPVParamT
          Index           =   1
          Left            =   120
          TabIndex        =   20
-         Top             =   840
+         Top             =   960
          Width           =   1095
       End
       Begin VB.Label Label1 
@@ -183,7 +194,7 @@ Begin VB.Form frmFacTPVParamT
          Index           =   5
          Left            =   2280
          TabIndex        =   19
-         Top             =   840
+         Top             =   960
          Width           =   1575
       End
    End
@@ -212,10 +223,10 @@ Begin VB.Form frmFacTPVParamT
    End
    Begin VB.Frame Frame1 
       Height          =   540
-      Left            =   360
+      Left            =   240
       TabIndex        =   14
       Top             =   5880
-      Width           =   3000
+      Width           =   1920
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
@@ -223,7 +234,7 @@ Begin VB.Form frmFacTPVParamT
          Left            =   360
          TabIndex        =   15
          Top             =   210
-         Width           =   2280
+         Width           =   1440
       End
    End
    Begin VB.CommandButton cmdCancelar 
@@ -238,7 +249,7 @@ Begin VB.Form frmFacTPVParamT
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   7320
+      Left            =   7440
       TabIndex        =   9
       Top             =   6045
       Visible         =   0   'False
@@ -293,8 +304,8 @@ Begin VB.Form frmFacTPVParamT
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
-      Left            =   3600
-      Top             =   6120
+      Left            =   8760
+      Top             =   3960
       Visible         =   0   'False
       Width           =   1455
       _ExtentX        =   2566
@@ -339,7 +350,7 @@ Begin VB.Form frmFacTPVParamT
       _Version        =   393216
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
-      Bindings        =   "frmFacTPVParamT.frx":000C
+      Bindings        =   "frmFacTPVParamT.frx":0010
       Height          =   3165
       Left            =   240
       TabIndex        =   21
@@ -406,6 +417,15 @@ Begin VB.Form frmFacTPVParamT
          EndProperty
       EndProperty
    End
+   Begin VB.Label Label2 
+      Caption         =   " 2018.  Abrir cajon.  Se mapeara la impresora de tickets compartida por la red :      net use  lpt1  \\EQUIPO\ImpresoraCompartida"
+      Height          =   495
+      Left            =   2520
+      TabIndex        =   25
+      Top             =   6000
+      Visible         =   0   'False
+      Width           =   4815
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
       Begin VB.Menu mnNuevo 
@@ -459,6 +479,10 @@ Dim PrimeraVez As Boolean
 
 
 
+
+Private Sub cboAbreCajon_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
 
 Private Sub cboPuertos_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
@@ -629,7 +653,11 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     If Not Data1.Recordset.EOF Then
         txtAux(4).Text = DBLet(Data1.Recordset!NomImpre, "T")
         Me.chkHayVisor = Data1.Recordset!HayVisor
-        Me.chkAbreCajon = Data1.Recordset!AbreCajon
+        If IsNull(Data1.Recordset!AbreCajon) Then
+            Me.cboAbreCajon.ListIndex = -1
+        Else
+            cboAbreCajon.ListIndex = DBLet(Data1.Recordset!AbreCajon, "N")
+        End If
         Me.cboPuertos.ListIndex = DBLet(Data1.Recordset!NumPuerto, "N") - 1
 
         txtAux(5).Text = DBLet(Data1.Recordset!velocpue, "N")
@@ -688,7 +716,7 @@ Private Sub Form_Load()
 '    Label1(3).Caption = PonerNombreImpresora
     CargaComboPuertos
     CargaComboVelocidad
-    
+    CargaComboCajon
     PonerModo 0
     
     CargaGrid ""
@@ -721,7 +749,7 @@ Dim tots As String
     
     tots = "S|txtAux(0)|T|NºTerm.|800|;S|txtAux(1)|T|Desc. terminal|1700|;S|txtAux(2)|T|Nombre PC|1600|;"
     tots = tots & "S|txtAux(3)|T|contador|1200|;N||||0|;N||||0|;N||||0|;N||||0|;"
-    tots = tots & "N||||0|;N||||0|;S|txtAux(6)|T|Puerto COM|1200|;"  'abrecajon y secuencia cajon y puerto com
+    tots = tots & "N||||0|;N||||0|;S|txtAux(6)|T|Pto cajon|1200|;"  'abrecajon y secuencia cajon y puerto com
     tots = tots & "S|txtAux(7)|T|Impresora ALB.|2200|;"  'abrecajon y secuencia cajon y puerto com
     arregla tots, DataGrid1, Me
 
@@ -804,6 +832,20 @@ Private Sub CargaComboVelocidad()
 '    cboPuertos.ListIndex = 1
 End Sub
 
+Private Sub CargaComboCajon()
+    'Carga la lista del Combo de Puertos
+    Me.cboAbreCajon.Clear
+    
+    cboAbreCajon.AddItem "NO"
+    cboAbreCajon.ItemData(cboAbreCajon.NewIndex) = 0
+    
+    cboAbreCajon.AddItem "COM"
+    cboAbreCajon.ItemData(cboAbreCajon.NewIndex) = 1
+    
+    cboAbreCajon.AddItem "LPT"
+    cboAbreCajon.ItemData(cboAbreCajon.NewIndex) = 2
+
+End Sub
 
 
 
@@ -955,7 +997,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     PonerModo 4
@@ -1059,6 +1101,7 @@ End Sub
 Private Sub LimpiarCampos()
     limpiar Me   'Metodo general: Limpia los controles TextBox
     lblIndicador.Caption = ""
+    Me.cboAbreCajon.ListIndex = -1
     'Aqui va el especifico de cada form es
     '### a mano
 End Sub

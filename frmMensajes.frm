@@ -16,6 +16,204 @@ Begin VB.Form frmMensajes
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.Frame FrameAcercaDe 
+      BorderStyle     =   0  'None
+      Height          =   3855
+      Left            =   120
+      TabIndex        =   3
+      Top             =   120
+      Width           =   6375
+      Begin VB.Label Label10 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Cambios version: "
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000040&
+         Height          =   240
+         Left            =   120
+         TabIndex        =   89
+         Top             =   2040
+         Width           =   1875
+      End
+      Begin VB.Label Label9 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Haga click en este enlace  para ver los cambios"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FF0000&
+         Height          =   240
+         Left            =   1920
+         MousePointer    =   3  'I-Beam
+         TabIndex        =   88
+         ToolTipText     =   "Haga click para seguir enlace"
+         Top             =   2040
+         Width           =   4410
+      End
+      Begin VB.Label Label17 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Pasaje Ventura Feliú, 13 entlo.izquierdo 2ª"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000040&
+         Height          =   195
+         Left            =   2400
+         TabIndex        =   10
+         Top             =   3000
+         Width           =   3855
+      End
+      Begin VB.Label Label18 
+         Alignment       =   2  'Center
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "46007 - VALENCIA"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000040&
+         Height          =   195
+         Left            =   3000
+         TabIndex        =   9
+         Top             =   3285
+         Width           =   2535
+      End
+      Begin VB.Label Label26 
+         Alignment       =   2  'Center
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Tfno:  902 88 88 78  -  96 380 55 79"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000040&
+         Height          =   195
+         Left            =   2685
+         TabIndex        =   8
+         Top             =   3555
+         Width           =   3165
+      End
+      Begin VB.Label Label27 
+         Alignment       =   2  'Center
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000040&
+         Height          =   195
+         Left            =   4215
+         TabIndex        =   7
+         Top             =   3480
+         Visible         =   0   'False
+         Width           =   105
+      End
+      Begin VB.Image Image2 
+         Height          =   735
+         Left            =   0
+         Picture         =   "frmMensajes.frx":000C
+         Stretch         =   -1  'True
+         Top             =   2880
+         Width           =   1920
+      End
+      Begin VB.Label lblVersion 
+         Alignment       =   1  'Right Justify
+         BackStyle       =   0  'Transparent
+         Caption         =   "Version"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   -120
+         TabIndex        =   6
+         Top             =   1260
+         Width           =   4155
+      End
+      Begin VB.Label Label25 
+         BackStyle       =   0  'Transparent
+         Caption         =   "4"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   81.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   1725
+         Left            =   4260
+         TabIndex        =   5
+         Top             =   0
+         Width           =   1350
+      End
+      Begin VB.Label Label12 
+         BackStyle       =   0  'Transparent
+         Caption         =   "ARIGES"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   36
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   915
+         Left            =   1080
+         TabIndex        =   4
+         Top             =   300
+         Width           =   3495
+      End
+   End
    Begin VB.Frame FrameArticulosAgrupados 
       Height          =   6015
       Left            =   0
@@ -398,7 +596,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   67
-         Text            =   "frmMensajes.frx":000C
+         Text            =   "frmMensajes.frx":042A
          Top             =   840
          Width           =   5895
       End
@@ -518,160 +716,6 @@ Begin VB.Form frmMensajes
          Width           =   5295
       End
    End
-   Begin VB.Frame FrameAcercaDe 
-      BorderStyle     =   0  'None
-      Height          =   4335
-      Left            =   120
-      TabIndex        =   3
-      Top             =   120
-      Width           =   6375
-      Begin VB.Label Label17 
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Pasaje Ventura Feliú, 13 entlo.izquierdo 2ª"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   195
-         Left            =   2400
-         TabIndex        =   10
-         Top             =   2640
-         Width           =   3855
-      End
-      Begin VB.Label Label18 
-         Alignment       =   2  'Center
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "46007 - VALENCIA"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   195
-         Left            =   3000
-         TabIndex        =   9
-         Top             =   2925
-         Width           =   2535
-      End
-      Begin VB.Label Label26 
-         Alignment       =   2  'Center
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         Caption         =   "Tfno:  902 88 88 78  -  96 380 55 79"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   195
-         Left            =   2685
-         TabIndex        =   8
-         Top             =   3195
-         Width           =   3165
-      End
-      Begin VB.Label Label27 
-         Alignment       =   2  'Center
-         AutoSize        =   -1  'True
-         BackStyle       =   0  'Transparent
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   195
-         Left            =   4215
-         TabIndex        =   7
-         Top             =   3480
-         Visible         =   0   'False
-         Width           =   105
-      End
-      Begin VB.Image Image2 
-         Height          =   540
-         Left            =   120
-         Top             =   2640
-         Width           =   2160
-      End
-      Begin VB.Label lblVersion 
-         Alignment       =   1  'Right Justify
-         BackStyle       =   0  'Transparent
-         Caption         =   "Version"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   -120
-         TabIndex        =   6
-         Top             =   1260
-         Width           =   4155
-      End
-      Begin VB.Label Label25 
-         BackStyle       =   0  'Transparent
-         Caption         =   "4"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   81.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00FFFFFF&
-         Height          =   1725
-         Left            =   4260
-         TabIndex        =   5
-         Top             =   0
-         Width           =   1350
-      End
-      Begin VB.Label Label12 
-         BackStyle       =   0  'Transparent
-         Caption         =   "ARIGES"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   36
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   915
-         Left            =   1080
-         TabIndex        =   4
-         Top             =   300
-         Width           =   3495
-      End
-   End
    Begin VB.Frame FrameEtiqEstant 
       Height          =   7455
       Left            =   0
@@ -752,7 +796,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":0012
+         Picture         =   "frmMensajes.frx":0430
          Top             =   6960
          Width           =   240
       End
@@ -760,7 +804,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":015C
+         Picture         =   "frmMensajes.frx":057A
          Top             =   6960
          Width           =   240
       End
@@ -797,7 +841,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   58
-         Text            =   "frmMensajes.frx":02A6
+         Text            =   "frmMensajes.frx":06C4
          Top             =   2760
          Width           =   7335
       End
@@ -906,9 +950,9 @@ Begin VB.Form frmMensajes
       Width           =   12975
       Begin VB.ComboBox cmbActualizarTar 
          Height          =   315
-         ItemData        =   "frmMensajes.frx":02AC
+         ItemData        =   "frmMensajes.frx":06CA
          Left            =   7800
-         List            =   "frmMensajes.frx":02AE
+         List            =   "frmMensajes.frx":06CC
          Style           =   2  'Dropdown List
          TabIndex        =   41
          Top             =   5960
@@ -1026,7 +1070,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   11760
-         Picture         =   "frmMensajes.frx":02B0
+         Picture         =   "frmMensajes.frx":06CE
          Top             =   240
          Width           =   240
       End
@@ -1034,7 +1078,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   12360
-         Picture         =   "frmMensajes.frx":03FA
+         Picture         =   "frmMensajes.frx":0818
          Top             =   240
          Width           =   240
       End
@@ -1085,7 +1129,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   3  'Both
          TabIndex        =   28
-         Text            =   "frmMensajes.frx":0544
+         Text            =   "frmMensajes.frx":0962
          Top             =   360
          Width           =   7695
       End
@@ -1263,7 +1307,7 @@ Begin VB.Form frmMensajes
          Left            =   240
          MultiLine       =   -1  'True
          TabIndex        =   23
-         Text            =   "frmMensajes.frx":054A
+         Text            =   "frmMensajes.frx":0968
          Top             =   120
          Width           =   6615
       End
@@ -1428,7 +1472,7 @@ End Sub
 Private Sub cmdAceptarNSeries_Click()
 Dim i As Integer, J As Byte
 Dim Seleccionados As Integer
-Dim cad As String, SQL As String
+Dim Cad As String, SQL As String
 Dim Articulo As String
 Dim Rs As ADODB.Recordset
 Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
@@ -1441,16 +1485,16 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
       
         'Si se ha seleccionado la cantidad correcta de Nº de series, empiparlos y
         'devolverlos al form de Albaranes(facturacion)
-        cad = ""
+        Cad = ""
         For J = 0 To TotalArray
             Articulo = codArtic(J)
-            cad = cad & Articulo & "|"
+            Cad = Cad & Articulo & "|"
             For i = 1 To ListView2.ListItems.Count
                 If ListView2.ListItems(i).Checked Then
                     If Articulo = ListView2.ListItems(i).ListSubItems(1).Text Then
                         If Seleccionados < Abs(cantidad(J)) Then
                             Seleccionados = Seleccionados + 1
-                            cad = cad & ListView2.ListItems(i).Text & "|"
+                            Cad = Cad & ListView2.ListItems(i).Text & "|"
                         End If
                    'cad = cad & Data1.Recordset.Fields(1) & "|"
                     End If
@@ -1477,7 +1521,7 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
                 Set Rs = Nothing
             
             End If
-            cad = cad & "·"
+            Cad = Cad & "·"
             Seleccionados = 0
         Next J
       
@@ -1487,10 +1531,10 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
             
             '----------------------------------------------------------------
             '                                                      pongo numlinea cone l contador de registro como clave
-            cad = "insert into tmpnlotes (codusu,numalbar,fechaalb,numlinea,codalmac,codprove) values ("
+            Cad = "insert into tmpnlotes (codusu,numalbar,fechaalb,numlinea,codalmac,codprove) values ("
             ' ---- [30/10/2009] (LAURA) : agrupar por cliente y departamento
 '            cad = cad & vUsu.Codigo & ",1,'2005-04-12',1,"
-            cad = cad & vUsu.codigo & ",1,'2005-04-12',"
+            Cad = Cad & vUsu.codigo & ",1,'2005-04-12',"
             
             
             For i = 1 To ListView2.ListItems.Count
@@ -1499,7 +1543,7 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
 '                    conn.Execute cad & (ListView2.ListItems(I).Text) & ")"
 
                                                     
-                    conn.Execute cad & NumRegElim & "," & DBSet(ListView2.ListItems(i).ListSubItems(3).Text, "N", "S") & "," & (ListView2.ListItems(i).Text) & ")"
+                    conn.Execute Cad & NumRegElim & "," & DBSet(ListView2.ListItems(i).ListSubItems(3).Text, "N", "S") & "," & (ListView2.ListItems(i).Text) & ")"
                     
                     NumRegElim = NumRegElim + 1
                 End If
@@ -1514,28 +1558,28 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
             If Not CargaDatosEtiquetas Then Exit Sub
             
         Else
-            cad = ""
+            Cad = ""
             NumRegElim = 0
             For i = 1 To ListView2.ListItems.Count
                 If ListView2.ListItems(i).Checked Then
                     NumRegElim = NumRegElim + 1
-                    cad = cad & Val(ListView2.ListItems(i).Text) & ","
+                    Cad = Cad & Val(ListView2.ListItems(i).Text) & ","
                      'cad = cad & Data1.Recordset.Fields(1) & "|"
                 End If
             Next i
             If NumRegElim > 1000 Then
                 MsgBox "Maximo número de etiquetas: 1000 (" & NumRegElim & ")", vbExclamation
                 NumRegElim = 0
-                cad = ""
+                Cad = ""
                 Exit Sub
             End If
             NumRegElim = 0
-            If cad <> "" Then cad = Mid(cad, 1, Len(cad) - 1)
+            If Cad <> "" Then Cad = Mid(Cad, 1, Len(Cad) - 1)
         End If
     ElseIf OpcionMensaje = 11 Then
     'Lineas Factura a rectificar
         'cad = "(" & cadWHERE & ")"
-        cad = ""
+        Cad = ""
         C1 = ""
         C2 = ""
         c3 = ""
@@ -1546,37 +1590,37 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
                     C1 = DBSet(ListView2.ListItems(i), "T", "N")
                     C2 = ListView2.ListItems(i).ListSubItems(1)
 '                    c3 = ListView2.ListItems(i).ListSubItems(2)
-                    cad = "(codtipoa=" & Trim(C1) & " and numalbar=" & Val(C2) & " and numlinea IN (" & ListView2.ListItems(i).ListSubItems(2)
+                    Cad = "(codtipoa=" & Trim(C1) & " and numalbar=" & Val(C2) & " and numlinea IN (" & ListView2.ListItems(i).ListSubItems(2)
 
                 Else
                     If Trim(DBSet(ListView2.ListItems(i), "T", "N")) = Trim(C1) And Trim(ListView2.ListItems(i).ListSubItems(1)) = Trim(C2) Then
                     'es el mismo albaran y concatenamos lineas
-                        cad = "," & ListView2.ListItems(i).ListSubItems(2)
+                        Cad = "," & ListView2.ListItems(i).ListSubItems(2)
 
                     Else
-                        If cad <> "" Then SQL = SQL & ")) "
+                        If Cad <> "" Then SQL = SQL & ")) "
                         C1 = DBSet(ListView2.ListItems(i), "T", "N")
                         C2 = ListView2.ListItems(i).ListSubItems(1)
 '                    c3 = ListView2.ListItems(i).ListSubItems(2)
-                        cad = " or (codtipoa=" & Trim(C1) & " and numalbar=" & Val(C2) & " and numlinea IN (" & ListView2.ListItems(i).ListSubItems(2)
+                        Cad = " or (codtipoa=" & Trim(C1) & " and numalbar=" & Val(C2) & " and numlinea IN (" & ListView2.ListItems(i).ListSubItems(2)
                         
 '                       cad=cad &
                     End If
                 End If
-                SQL = SQL & cad
+                SQL = SQL & Cad
 '                If cad <> "" Then cad = cad & " OR "
 '                cad = cad & "(codtipoa=" & DBSet(ListView2.ListItems(i), "T", "N") & " and numalbar=" & Val(ListView2.ListItems(i).ListSubItems(1)) & " and numlinea=" & ListView2.ListItems(i).ListSubItems(2) & ")"
             Else
 '                cad = ""
             End If
         Next i
-        If cad <> "" Then
+        If Cad <> "" Then
             SQL = SQL & "))"
-            cad = "(" & cadWhere & ") AND (" & SQL & ")"
+            Cad = "(" & cadWhere & ") AND (" & SQL & ")"
         End If
 '        If cad <> "" Then cad = "(" & cadWHERE & ") AND (" & cad & ")"
     ElseIf OpcionMensaje = 14 Then
-        cad = RegresarCargaEmpresas
+        Cad = RegresarCargaEmpresas
     End If
     
     
@@ -1586,7 +1630,7 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
       'y Salir (Volver a Mto Albaranes Clientes (Facturacion)
       PulsadoSalir = True
       'RaiseEvent CargarNumSeries
-      RaiseEvent DatoSeleccionado(cad)
+      RaiseEvent DatoSeleccionado(Cad)
       Unload Me
 End Sub
 
@@ -1594,7 +1638,7 @@ End Sub
 Private Sub cmdArtAgrupado_Click(Index As Integer)
 Dim Impor As Currency
     CadenaDesdeOtroForm = ""
-    If FrameSelecArtAgrupado.Visible Then
+    If FrameSelecArtAgrupado.visible Then
         If Index = 0 Then
             'OK este es el lote y las uds que quiere
             CadenaDesdeOtroForm = lwArticulosAgrupados.SelectedItem.Text & "|" & txtArtAgrupado.Text & "|"  'lote y uds
@@ -1627,10 +1671,10 @@ Dim Impor As Currency
     End If
 End Sub
 
-Private Sub ponerframeTotaAgrupadoVisible(Visible As Boolean)
-    FrameSelecArtAgrupado.Visible = Visible
-    Me.lwArticulosAgrupados.Enabled = Not Visible
-    Me.txtArtAgrupado.Enabled = Not Visible
+Private Sub ponerframeTotaAgrupadoVisible(visible As Boolean)
+    FrameSelecArtAgrupado.visible = visible
+    Me.lwArticulosAgrupados.Enabled = Not visible
+    Me.txtArtAgrupado.Enabled = Not visible
 End Sub
 
 Private Sub cmdCancelar_Click()
@@ -1955,21 +1999,21 @@ End Sub
 
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
-Dim cad As String
+Dim Cad As String
 On Error Resume Next
 
-    Me.FrameCobrosPtes.Visible = False
-    Me.FrameAcercaDe.Visible = False
-    Me.FrameNSeries.Visible = False
-    Me.FrameComponentes.Visible = False
-    Me.FrameComponentes2.Visible = False
-    Me.FrameErrores.Visible = False
-    FrameEtiqEstant.Visible = False
-    FrameCorreccionPrecios.Visible = False
-    FrameTraspasoMante.Visible = False
-    FrameEmail.Visible = False
-    FrameErrorCC.Visible = False
-    FrameArticulosAgrupados.Visible = False
+    Me.FrameCobrosPtes.visible = False
+    Me.FrameAcercaDe.visible = False
+    Me.FrameNSeries.visible = False
+    Me.FrameComponentes.visible = False
+    Me.FrameComponentes2.visible = False
+    Me.FrameErrores.visible = False
+    FrameEtiqEstant.visible = False
+    FrameCorreccionPrecios.visible = False
+    FrameTraspasoMante.visible = False
+    FrameEmail.visible = False
+    FrameErrorCC.visible = False
+    FrameArticulosAgrupados.visible = False
     PulsadoSalir = True
     PrimeraVez = True
     
@@ -2010,25 +2054,25 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaPreFacturar
             Me.Caption = "Prefacturación Albaranes"
-            cad = RecuperaValor(vCampos, 1)
-            If cad <> "" Then cad = Mid(cad, 1, Len(cad) - 1)
-            Me.txtParam.Text = cad
-            cad = RecuperaValor(vCampos, 2)
-            If cad <> "" Then
-                cad = Mid(cad, 1, Len(cad) - 1)
+            Cad = RecuperaValor(vCampos, 1)
+            If Cad <> "" Then Cad = Mid(Cad, 1, Len(Cad) - 1)
+            Me.txtParam.Text = Cad
+            Cad = RecuperaValor(vCampos, 2)
+            If Cad <> "" Then
+                Cad = Mid(Cad, 1, Len(Cad) - 1)
                 If Trim(Me.txtParam.Text) <> "" Then
-                    txtParam.Text = Me.txtParam.Text & vbCrLf & cad
+                    txtParam.Text = Me.txtParam.Text & vbCrLf & Cad
                 Else
-                    txtParam.Text = cad
+                    txtParam.Text = Cad
                 End If
             End If
-            cad = RecuperaValor(vCampos, 3)
-            If cad <> "" Then
-                cad = Mid(cad, 1, Len(cad) - 1)
+            Cad = RecuperaValor(vCampos, 3)
+            If Cad <> "" Then
+                Cad = Mid(Cad, 1, Len(Cad) - 1)
                 If Trim(Me.txtParam.Text) <> "" Then
-                    txtParam.Text = Me.txtParam.Text & vbCrLf & cad
+                    txtParam.Text = Me.txtParam.Text & vbCrLf & Cad
                 Else
-                    txtParam.Text = cad
+                    txtParam.Text = Cad
                 End If
             End If
             
@@ -2041,15 +2085,15 @@ On Error Resume Next
             
             
             PulsadoSalir = False
-            Me.cmdSelTodos.Visible = True
-            Me.cmdDeselTodos.Visible = True
+            Me.cmdSelTodos.visible = True
+            Me.cmdDeselTodos.visible = True
             
         Case 9 'Etiquetas de Proveedores
             PonerFrameNSeriesVisible True, H, W
             Me.Caption = "Proveedores"
             PulsadoSalir = False
-            Me.cmdSelTodos.Visible = True
-            Me.cmdDeselTodos.Visible = True
+            Me.cmdSelTodos.visible = True
+            Me.cmdDeselTodos.visible = True
         
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
@@ -2061,8 +2105,8 @@ On Error Resume Next
             PonerFrameNSeriesVisible True, H, W
             Me.Caption = "Lineas Factura a Rectificar"
             PulsadoSalir = False
-            Me.cmdSelTodos.Visible = True
-            Me.cmdDeselTodos.Visible = True
+            Me.cmdSelTodos.visible = True
+            Me.cmdDeselTodos.visible = True
             Me.cmdAceptarNSeries.Left = Me.cmdAceptarNSeries.Left + 1000
             Me.cmdCancelar.Left = Me.cmdCancelar.Left + 1000
         
@@ -2151,7 +2195,7 @@ On Error Resume Next
         H = FrameArticulosAgrupados.Height
         W = FrameArticulosAgrupados.Width
         PonerFrameVisible FrameArticulosAgrupados, True, H, W
-        FrameSelecArtAgrupado.Visible = False
+        FrameSelecArtAgrupado.visible = False
         cmdArtAgrupado(1).Cancel = True
     End Select
     'Me.cmdCancel(indFrame).Cancel = True
@@ -2162,7 +2206,7 @@ On Error Resume Next
 End Sub
 
 
-Private Sub PonerFrameCobrosPtesVisible(Visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Cobros Pendientes Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
@@ -2204,22 +2248,22 @@ Private Sub PonerFrameCobrosPtesVisible(Visible As Boolean, ByRef H As Integer, 
             End If
     End Select
             
-    PonerFrameVisible Me.FrameCobrosPtes, Visible, H, W
+    PonerFrameVisible Me.FrameCobrosPtes, visible, H, W
 
-    If Visible = True Then
-        Me.txtParam.Visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
-        Me.Label1(0).Visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12)
-        Me.cmdCancelarCobros.Visible = (OpcionMensaje = 12)
-        Me.Label1(1).Visible = (OpcionMensaje = 12)
+    If visible = True Then
+        Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
+        Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12)
+        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12)
+        Me.Label1(1).visible = (OpcionMensaje = 12)
     End If
 End Sub
 
 
-Private Sub PonerFrameAcercaDeVisible(Visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub PonerFrameAcercaDeVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame ACERCA DE visible y Ajustado al Formulario
 
-    Me.FrameAcercaDe.Visible = Visible
-    If Visible = True Then
+    Me.FrameAcercaDe.visible = visible
+    If visible = True Then
         'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
         Me.FrameAcercaDe.Top = -90
         Me.FrameAcercaDe.Left = 0
@@ -2232,7 +2276,7 @@ Private Sub PonerFrameAcercaDeVisible(Visible As Boolean, ByRef H As Integer, By
 End Sub
 
 
-Private Sub PonerFrameNSeriesVisible(Visible As Boolean, H As Integer, W As Integer)
+Private Sub PonerFrameNSeriesVisible(visible As Boolean, H As Integer, W As Integer)
 'Pone el Frame de Nº Serie Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
@@ -2242,31 +2286,31 @@ Private Sub PonerFrameNSeriesVisible(Visible As Boolean, H As Integer, W As Inte
         W = 10900
     ElseIf OpcionMensaje = 14 Then
         W = 6500
-        Me.Label7(1).Visible = True
+        Me.Label7(1).visible = True
     ElseIf OpcionMensaje = 17 Then
         W = 10500
-        Me.Label7(1).Visible = False
+        Me.Label7(1).visible = False
     Else
         W = 8500
-        Me.Label7(1).Visible = False
+        Me.Label7(1).visible = False
     End If
-    PonerFrameVisible Me.FrameNSeries, Visible, H, W
+    PonerFrameVisible Me.FrameNSeries, visible, H, W
 End Sub
 
 
-Private Sub ponerFrameComponentesVisible(Visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub ponerFrameComponentesVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Componentes Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
 '    Me.FrameComponentes.visible = visible
-    Me.FrameComponentes2.Visible = Visible
+    Me.FrameComponentes2.visible = visible
     
     H = 4000
     W = 5300
-    PonerFrameVisible Me.FrameComponentes, Visible, H, W
+    PonerFrameVisible Me.FrameComponentes, visible, H, W
         
     'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
-    If Visible Then Me.OptCompXDpto.Caption = DevuelveTextoDepto(False)
+    If visible Then Me.OptCompXDpto.Caption = DevuelveTextoDepto(False)
         
     
 End Sub
@@ -3043,7 +3087,7 @@ End Sub
 
 Private Sub CargaImagen()
 On Error Resume Next
-    Image2.Picture = LoadPicture(App.Path & "\minilogo.bmp")
+   ' Image2.Picture = LoadPicture(App.Path & "\minilogo.bmp")
     'Image1.Picture = LoadPicture(App.path & "\fondon.gif")
     Err.Clear
 End Sub
@@ -3107,30 +3151,30 @@ End Function
 
 Private Sub InsertaGrupo(Grupo As String, Contador As Integer)
 Dim J As Integer
-Dim cad As String
+Dim Cad As String
 
     J = 0
-    cad = ""
+    Cad = ""
     
     'Cod Artic
     J = InStr(1, Grupo, "|")
     If J > 0 Then
-        cad = Mid(Grupo, 1, J - 1)
+        Cad = Mid(Grupo, 1, J - 1)
         Grupo = Mid(Grupo, J + 1)
         J = 1
     End If
-    codArtic(Contador) = cad
+    codArtic(Contador) = Cad
     
     'Cantidad
     J = InStr(1, Grupo, "|")
     If J > 0 Then
-        cad = Mid(Grupo, 1, J - 1)
+        Cad = Mid(Grupo, 1, J - 1)
         Grupo = Mid(Grupo, J + 1)
     Else
-        cad = Grupo
+        Cad = Grupo
         Grupo = ""
     End If
-    cantidad(Contador) = cad
+    cantidad(Contador) = Cad
 End Sub
 
 
@@ -3162,6 +3206,10 @@ Dim b As Boolean
 End Sub
 
 
+
+Private Sub Label9_Click()
+        LanzaVisorMimeDocumento Me.hwnd, "http://help-ariges.ariadnasw.com/Versiones.html"
+End Sub
 
 Private Sub lwArticulosAgrupados_DblClick()
     cmdArtAgrupado_Click 0
@@ -3261,7 +3309,7 @@ Dim RBarras As ADODB.Recordset
             SQL = RBarras!codigoea
         End If
         'Ponemos el codigo de articulo y el TIPO de IVA
-        IT.Tag = "'" & DevNombreSQL(Rs!codArtic) & "'," & Rs!codigiva & ",'" & SQL & "'"
+        IT.Tag = "'" & DevNombreSQL(Rs!codArtic) & "'," & Rs!Codigiva & ",'" & SQL & "'"
         IT.Text = Rs!NomArtic
         IT.SubItems(1) = Format(Rs!PrecioVe, cadWHERE2)
         IT.SubItems(2) = Rs!nomfamia
@@ -3770,7 +3818,7 @@ Dim ImpIva As Currency
         
         '`codartic`,`numlinea`,numserie,`numlinealb`,nummante
         
-        RIVA.Find "codigiva = " & miRsAux!codigiva, , adSearchForward, 1
+        RIVA.Find "codigiva = " & miRsAux!Codigiva, , adSearchForward, 1
         ImpIva = 0
         If Not RIVA.EOF Then ImpIva = DBLet(RIVA!PorceIVA)
                 
@@ -3799,7 +3847,7 @@ Dim ImpIva As Currency
         IT.Checked = True
         
         '`codartic`,`numlinea`,numserie,`numlinealb`,nummante
-        SQL = "'" & DevNombreSQL(miRsAux!codArtic) & "'," & miRsAux!codigiva & ",'" & IT.SubItems(1) & "'," & TotalArray & ",'" & IT.SubItems(2) & "')"
+        SQL = "'" & DevNombreSQL(miRsAux!codArtic) & "'," & miRsAux!Codigiva & ",'" & IT.SubItems(1) & "'," & TotalArray & ",'" & IT.SubItems(2) & "')"
         IT.Tag = SQL
         
         

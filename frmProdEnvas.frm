@@ -1439,6 +1439,7 @@ Private Sub cmdCancelar_Click()
             LimpiarCampos
             'Poner los grid sin apuntar a nada
             LimpiarDataGrids
+            CargaTxtAux False, True
             PonerModo 0
             PonerFoco Text1(0)
             
@@ -1595,6 +1596,7 @@ Private Sub BotonBuscar()
         'Poner los grid sin apuntar a nada
         LimpiarDataGrids
         PonerModo 1
+        CargaTxtAux True, True
         'Si pasamos el control aqui lo ponemos en amarillo
         PonerFoco Text1(0)
         Text1(0).BackColor = vbYellow
@@ -2408,8 +2410,16 @@ End Sub
 
 Private Sub HacerBusqueda()
 Dim cadB As String
+Dim C As String
 
+
+
+    C = DevuelveBusquedaLineas
+    
     cadB = ObtenerBusqueda(Me, False)
+    If cadB <> "" And C <> "" Then cadB = cadB & " AND "
+    cadB = cadB & C
+    
     
     If chkVistaPrevia = 1 Then
         EsCabecera = True
@@ -2503,6 +2513,7 @@ Private Sub PonerCadenaBusqueda()
     Else
         Data1.Recordset.MoveFirst
         PonerModo 2
+        CargaTxtAux False, True
         PonerCampos
     End If
     Screen.MousePointer = vbDefault
@@ -4182,5 +4193,55 @@ Dim SQL As String
         UpdateaDatosCalidad = True
     End If
     Screen.MousePointer = vbDefault
+End Function
+
+
+
+
+
+Private Function DevuelveBusquedaLineas() As String
+Dim i As Byte
+Dim EsLike As Boolean
+Dim Aux As String
+Dim J As Integer
+
+    DevuelveBusquedaLineas = ""
+    
+    For i = 0 To Me.txtAux.Count - 1
+        Me.txtAux(i).Text = Trim(Me.txtAux(i).Text)
+        If Me.txtAux(i).Text <> "" Then
+        
+            'codigo,codalmac,codartic,cantidad,numlote
+            'Los textos
+            If i = 1 Or i = 3 Then
+                Aux = RecuperaValor("|codartic||numlote|", i + 1)
+                DevuelveBusquedaLineas = DevuelveBusquedaLineas & " AND " & Aux
+                Aux = txtAux(i).Text
+            
+                If InStr(1, Aux, "*") > 0 Then
+                    Aux = " like " & DBSet(Replace(Me.txtAux(i).Text, "*", "%"), "T")
+                Else
+                    Aux = " = " & DBSet(Me.txtAux(i).Text, "T")
+                End If
+
+            Else
+                
+                If SeparaCampoBusqueda("N", RecuperaValor("codalmac||||cantidad||", CInt(i) + 1), txtAux(i).Text, Aux) > 0 Then
+                    Aux = ""
+                Else
+                    Aux = " AND " & Aux
+                End If
+            End If
+            If Aux <> "" Then DevuelveBusquedaLineas = DevuelveBusquedaLineas & Aux
+        End If
+    Next
+    
+        
+    
+    If DevuelveBusquedaLineas <> "" Then
+        DevuelveBusquedaLineas = Mid(DevuelveBusquedaLineas, 5) 'quitamos el primer and
+        DevuelveBusquedaLineas = " codigo IN (select distinct codigo from slienvpr WHERE " & DevuelveBusquedaLineas & ")"
+    
+    End If
 End Function
 

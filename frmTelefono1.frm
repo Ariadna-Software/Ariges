@@ -14,6 +14,138 @@ Begin VB.Form frmTelefono1
    ScaleHeight     =   7425
    ScaleWidth      =   8640
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameVerdatos 
+      Height          =   7215
+      Left            =   120
+      TabIndex        =   0
+      Top             =   0
+      Width           =   8295
+      Begin VB.CommandButton cmdEliminarDatosFracion 
+         Caption         =   "Elim. fich."
+         Height          =   495
+         Left            =   120
+         TabIndex        =   34
+         Top             =   6480
+         Width           =   975
+      End
+      Begin VB.CheckBox chkMostrarBase 
+         Caption         =   "Base imponible"
+         Height          =   255
+         Left            =   2280
+         TabIndex        =   33
+         Top             =   6660
+         Width           =   1575
+      End
+      Begin VB.ComboBox cboFichero 
+         Height          =   315
+         Index           =   0
+         Left            =   4800
+         Style           =   2  'Dropdown List
+         TabIndex        =   16
+         Top             =   400
+         Width           =   3255
+      End
+      Begin VB.CommandButton cmdFacturar 
+         Caption         =   "Facturar"
+         Height          =   495
+         Left            =   1200
+         TabIndex        =   14
+         Top             =   6480
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdSalir 
+         Caption         =   "Salir"
+         Height          =   495
+         Index           =   0
+         Left            =   6840
+         TabIndex        =   11
+         Top             =   6480
+         Width           =   1215
+      End
+      Begin MSComctlLib.ListView lwT 
+         Height          =   5415
+         Left            =   120
+         TabIndex        =   1
+         Top             =   840
+         Width           =   7815
+         _ExtentX        =   13785
+         _ExtentY        =   9551
+         View            =   3
+         LabelEdit       =   1
+         Sorted          =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   5
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Telefono"
+            Object.Width           =   3422
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Nombre"
+            Object.Width           =   6068
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Plz"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   3
+            Text            =   "Total"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "OrdenTotal"
+            Object.Width           =   0
+         EndProperty
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Ficheros disponibles:"
+         Height          =   195
+         Index           =   5
+         Left            =   3960
+         TabIndex        =   17
+         Top             =   6660
+         Width           =   2775
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Ficheros disponibles:"
+         Height          =   195
+         Index           =   4
+         Left            =   3120
+         TabIndex        =   15
+         Top             =   480
+         Width           =   1470
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Datos pre-factura"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   13.5
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000040&
+         Height          =   360
+         Index           =   3
+         Left            =   240
+         TabIndex        =   13
+         Top             =   360
+         Width           =   2385
+      End
+   End
    Begin VB.Frame FrameImportacion 
       Height          =   3255
       Left            =   120
@@ -287,133 +419,6 @@ Begin VB.Form frmTelefono1
       _ExtentY        =   847
       _Version        =   393216
    End
-   Begin VB.Frame FrameVerdatos 
-      Height          =   7215
-      Left            =   120
-      TabIndex        =   0
-      Top             =   0
-      Width           =   8295
-      Begin VB.CommandButton cmdEliminarDatosFracion 
-         Caption         =   "Elim. fich."
-         Height          =   495
-         Left            =   120
-         TabIndex        =   34
-         Top             =   6480
-         Width           =   975
-      End
-      Begin VB.CheckBox chkMostrarBase 
-         Caption         =   "Base imponible"
-         Height          =   255
-         Left            =   2280
-         TabIndex        =   33
-         Top             =   6660
-         Width           =   1575
-      End
-      Begin VB.ComboBox cboFichero 
-         Height          =   315
-         Index           =   0
-         Left            =   4800
-         Style           =   2  'Dropdown List
-         TabIndex        =   16
-         Top             =   400
-         Width           =   3255
-      End
-      Begin VB.CommandButton cmdFacturar 
-         Caption         =   "Facturar"
-         Height          =   495
-         Left            =   1200
-         TabIndex        =   14
-         Top             =   6480
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdSalir 
-         Caption         =   "Salir"
-         Height          =   495
-         Index           =   0
-         Left            =   6840
-         TabIndex        =   11
-         Top             =   6480
-         Width           =   1215
-      End
-      Begin MSComctlLib.ListView lwT 
-         Height          =   5415
-         Left            =   120
-         TabIndex        =   1
-         Top             =   840
-         Width           =   7815
-         _ExtentX        =   13785
-         _ExtentY        =   9551
-         View            =   3
-         LabelEdit       =   1
-         Sorted          =   -1  'True
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         NumItems        =   4
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Telefono"
-            Object.Width           =   3422
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Text            =   "Nombre"
-            Object.Width           =   6068
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   2
-            Text            =   "Total"
-            Object.Width           =   2540
-         EndProperty
-         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   3
-            Text            =   "OrdenTotal"
-            Object.Width           =   0
-         EndProperty
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Ficheros disponibles:"
-         Height          =   195
-         Index           =   5
-         Left            =   3960
-         TabIndex        =   17
-         Top             =   6660
-         Width           =   2775
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Ficheros disponibles:"
-         Height          =   195
-         Index           =   4
-         Left            =   3120
-         TabIndex        =   15
-         Top             =   480
-         Width           =   1470
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Datos pre-factura"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   13.5
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000040&
-         Height          =   360
-         Index           =   3
-         Left            =   240
-         TabIndex        =   13
-         Top             =   360
-         Width           =   2385
-      End
-   End
 End
 Attribute VB_Name = "frmTelefono1"
 Attribute VB_GlobalNameSpace = False
@@ -439,6 +444,7 @@ Dim cad As String
 Dim i As Integer
 
 
+Dim IVA_standard As Currency
 
 
 
@@ -1057,6 +1063,8 @@ Private Sub HacerImportacion()
     Mens = Text1.Text
     If Len(Text1) > 12 Then Mens = Right(Mens, 12)
     
+    
+    
     'Para el proceso de ORANGE, como el nombre del fichero puede variar "demasiado"
     'preprocesaremos el fichero para obtener el numero de factura que
     'esta en la segunda linea. Si el numero de factura ya ha sido procesado entonces
@@ -1142,15 +1150,13 @@ Private Sub HacerImportacion()
     
     
     Set mGen2 = New TelGenerador
-    
-    
     If mGen2.LeerParametrosFacturacionTelefonica(cboCompanyia2.ItemData(cboCompanyia2.ListIndex)) Then
     
         Screen.MousePointer = vbHourglass
          resultado = False
         If Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex) = 1 Then
-            mGen2.cargarBaseDatosMOVISTAR Text1, lblInf
-            resultado = True
+            resultado = mGen2.cargarBaseDatosMOVISTAR(Text1, lblInf)
+            'resultado = True
         ElseIf Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex) = 2 Then
            
             
@@ -1165,26 +1171,47 @@ Private Sub HacerImportacion()
         Screen.MousePointer = vbDefault
         If Not resultado Then Exit Sub
         
-        'LLamadas entre coooperativistas
-        If vParamAplic.TieneTelefonia2 = 3 Then
+        Screen.MousePointer = vbHourglass
         
-            'Si hay conceptos o cuotas nuevas las mete en tmpinformes para listarlas luego
-            'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2)
-            conn.Execute "DELETE from tmpinformes WHERE codusu = " & vUsu.codigo
-            
-            mGen2.RecalcularImporteLlamadasCoperativa Me.lblInf, cboCompanyia2.ItemData(cboCompanyia2.ListIndex)
-                
-            'VEmos cuotas
-            mGen2.AjusteCuotasNuevas2 Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex), Right(Text1, 12), Me.lblInf
-            'refacturamos
-            mGen2.ComprobarConceptosFacturacion
-           
+        
+        'LLamadas entre coooperativistas
+        lblInf.Caption = "Acciones cooperativa"
+        lblInf.Refresh
+        
+        
+        'Si hay conceptos o cuotas nuevas las mete en tmpinformes para listarlas luego
+        'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2)
+        conn.Execute "DELETE from tmpinformes WHERE codusu = " & vUsu.codigo
+        
+        If vParamAplic.TieneTelefonia2 = 3 Then
+                mGen2.RecalcularImporteLlamadasCoperativa Me.lblInf, cboCompanyia2.ItemData(cboCompanyia2.ListIndex)
         End If
         
+        
+         'VEmos cuotas
+         resultado = mGen2.AjusteCuotasNuevas2(cboCompanyia2.ItemData(cboCompanyia2.ListIndex), Right(Text1, 12), Me.lblInf)
+         
+         'refacturamos
+         If resultado Then mGen2.ComprobarConceptosFacturacion
+        
+                
         
         
         If Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex) <> 2 Then FicheroOrange = Text1.Text 'Para movistar dejo el nombre del fichero
         
+        
+        
+        
+        
+        
+        
+        
+        CadenaDesdeOtroForm = ""
+        Screen.MousePointer = vbDefault
+        If Not resultado Then Exit Sub
+        
+        Screen.MousePointer = vbDefault
+        DoEvents
         
         resultado = mGen2.EmitirFacturas_(FicheroOrange, Text2(0), Me.lblInf, CByte(Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex)))
         'TRUE=Error
@@ -1269,7 +1296,7 @@ Private Sub Form_Load()
     i = Opcion
     Select Case Opcion
     Case 0
-    
+        Me.lwT.ColumnHeaders(3).Width = IIf(vParamAplic.TelefoniaVtaPlazos, 600, 0)
         PonerFrameVisible Me.FrameVerdatos
         CargaCombo Me.cboFichero(0), True
     Case 1
@@ -1320,19 +1347,35 @@ End Sub
 
 Private Sub CargarListView(Fich As String)
 Dim IT As ListItem
+Dim Rc As ADODB.Recordset
+Dim ImpoAux As Currency
 
-
-
-  
-    
-        
-
-   
-   
     Set miRsAux = New ADODB.Recordset
+    Set Rc = New ADODB.Recordset
    
-   
-   
+    IVA_standard = -1
+    If vParamAplic.TelefoniaVtaPlazos Then
+    
+        cad = "Select IdTelefono,PlazosMeses,ArtPlazos,ImportePlazo from sclientfno where PlazosMeses > 0 "
+        Rc.Open cad, conn, adOpenKeyset, adCmdText
+        If Not Rc.EOF Then
+            cad = DevuelveDesdeBD(conAri, "codigiva", "sartic", "codartic", DBLet(Rc!artplazos, "T"), "T")
+            If cad <> "" Then
+                cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", cad, "N")
+                If cad <> "" Then IVA_standard = CCur(cad)
+            End If
+        End If
+    Else
+        If vParamAplic.ArtiTelefonia <> "" Then
+            IVA_standard = 0
+           cad = DevuelveDesdeBD(conAri, "codigiva", "sartic", "codartic", DBLet(vParamAplic.ArtiTelefonia, "T"), "T")
+            If cad <> "" Then
+                cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", cad, "N")
+                If cad <> "" Then IVA_standard = CCur(cad)
+            End If
+        End If
+    End If
+    
     cad = "select telefono,apellido1, apellido2,nombre,"
     cad = cad & " BaseImponible,Cuota,total,Serie ,Ano ,NumFact"
     cad = cad & "  from tel_cab_factura where fichero='" & Fich & "' order by telefono"
@@ -1343,11 +1386,15 @@ Dim IT As ListItem
     lwT.ListItems.Clear
     
     If Me.chkMostrarBase.Value = 1 Then
-        Me.lwT.ColumnHeaders(3).Text = "B.Imp."
+        Me.lwT.ColumnHeaders(4).Text = "B.Imp."
     Else
-        Me.lwT.ColumnHeaders(3).Text = "Total"
+        Me.lwT.ColumnHeaders(4).Text = "Total"
     End If
     While Not miRsAux.EOF
+    
+        'If miRsAux!Telefono = "687751251" Then St op
+    
+    
         cad = ""
         If Not IsNull(miRsAux!apellido1) Then cad = miRsAux!apellido1
         If Not IsNull(miRsAux!apellido2) Then cad = Trim(cad & " " & miRsAux!apellido2)
@@ -1361,11 +1408,38 @@ Dim IT As ListItem
         IT.SubItems(1) = cad
         
         If Me.chkMostrarBase.Value = 1 Then
-            IT.SubItems(2) = Format(miRsAux!BaseImponible, "#,##0.00")
+            IT.SubItems(3) = Format(miRsAux!BaseImponible, "#,##0.00")
         Else
-            IT.SubItems(2) = Format(miRsAux!total, "#,##0.00")
+            IT.SubItems(3) = Format(miRsAux!total, "#,##0.00")
         End If
-        IT.SubItems(3) = Format(miRsAux!total * 100, "0000000")
+        IT.SubItems(4) = Format(miRsAux!total * 100, "0000000")
+        
+        IT.SubItems(2) = " "
+        If vParamAplic.TelefoniaVtaPlazos Then
+            
+            cad = "idtelefono='" & miRsAux!Telefono & "'"
+            Rc.Find cad, , adSearchForward, 1
+            If Not Rc.EOF Then
+                IT.ListSubItems(3).ForeColor = vbBlue
+                IT.ListSubItems(3).Bold = True
+                IT.SubItems(2) = "S"
+                
+                                
+                ImpoAux = 0
+                If Me.chkMostrarBase.Value = 0 Then ImpoAux = IVA_standard
+                 
+                ImpoAux = Round2(DBLet(Rc!ImportePlazo, "N") * ((100 + ImpoAux) / 100), 2)
+                
+                ImpoAux = ImporteFormateado(IT.SubItems(3)) + ImpoAux
+                                        
+                IT.SubItems(3) = Format(ImpoAux, FormatoImporte)
+                IT.SubItems(4) = Format(ImpoAux * 100, "0000000")
+                           
+                                
+                                
+                
+            End If
+        End If
         
         'Para el WHERE
         IT.Tag = "Serie = '" & miRsAux!Serie & "' AND Ano =" & miRsAux!Ano & " AND NumFact =" & miRsAux!NumFact
@@ -1378,19 +1452,38 @@ Dim IT As ListItem
     ComprobarAlbaranesPendientes
     
     
+    'Por si se queda la facturacion a medias
+    'if False Then
+    '   For i = Me.lwT.ListItems.Count To 1 Step -1
+    '        If InStr(1, "617716340v629378165v636153242v646603031v661078672v674845196v", lwT.ListItems(i).Text) = 0 Then
+    '            lwT.ListItems.Remove i
+    '        End If
+    '    Next
+    'End If
+    
+    
+    
      Set miRsAux = Nothing
-
+    Set Rc = Nothing
 End Sub
 
 Private Sub ComprobarAlbaranesPendientes()
+Dim Impaux As Currency
+
     On Error GoTo eComprobarAlbaranesPendientes
-    '2013. Pudiera ser que tuviera albaranes pendientes de facturar
-    'Deberiamos indicarlo aqui
-    cad = "select numalbar,referenc,codclien,nomclien,factursn from scaalb where codtipom='ALT'"
+    
+    
+    cad = "select scaalb.numalbar,referenc,codclien,nomclien,factursn,sum(importel) base from scaalb left join slialb "
+    cad = cad & " on scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar"
+    cad = cad & " Where scaalb.codtipom='ALT' group by scaalb.numalbar"
+    
     miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cad = ""
-    While Not miRsAux.EOF
-        'QUe hago....
+    While Not miRsAux.EOF        'QUe hago....
+    
+        'If miRsAux!referenc = "687751251" Then St op
+    
+    
         'Buscamos por el LW e telefono
         For i = 1 To Me.lwT.ListItems.Count
             If Me.lwT.ListItems(i).Text = miRsAux!referenc Then
@@ -1410,6 +1503,21 @@ Private Sub ComprobarAlbaranesPendientes()
                 Me.lwT.ListItems(i).ForeColor = vbRed
             Else
                 Me.lwT.ListItems(i).ForeColor = vbBlue
+                'El total
+                
+            
+                Impaux = 0
+                If Me.chkMostrarBase.Value = 0 Then Impaux = IVA_standard
+                 
+                Impaux = Round2(DBLet(miRsAux!Base, "N") * ((100 + Impaux) / 100), 2)
+                
+                Impaux = ImporteFormateado(lwT.ListItems(i).SubItems(3)) + Impaux
+                                        
+                lwT.ListItems(i).SubItems(3) = Format(Impaux, FormatoImporte)
+                lwT.ListItems(i).SubItems(4) = Format(Impaux * 100, "0000000")
+            
+                lwT.ListItems(i).ListSubItems(4).Bold = True
+                lwT.ListItems(i).ListSubItems(4).ForeColor = vbBlue
             End If
         End If
         
@@ -1425,7 +1533,7 @@ Private Sub ComprobarAlbaranesPendientes()
         
     Exit Sub
 eComprobarAlbaranesPendientes:
-    MsgBox "Avise soporte tecnico. Pos: " & miRsAux!NumAlbar & "-" & i & vbCrLf & Err.Description, vbCritical
+    MsgBox "Avise soporte tecnico. Albaran pdte   : " & miRsAux!NUmAlbar & "-" & i & vbCrLf & Err.Description, vbCritical
 End Sub
 
 
@@ -1467,10 +1575,22 @@ End Sub
 
 
 Private Sub lwT_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.Index = 3 Then
-        lwT.SortKey = 3
+    i = ColumnHeader.Index - 1
+    If ColumnHeader.Index = 4 Then i = 4
+    
+    If i = lwT.SortKey Then
+        If lwT.SortOrder = lvwAscending Then
+            lwT.SortOrder = lvwDescending
+        Else
+            lwT.SortOrder = lvwAscending
+        End If
     Else
-        lwT.SortKey = ColumnHeader.Index - 1
+        If ColumnHeader.Index = 4 Then
+            lwT.SortKey = 4
+        Else
+            lwT.SortKey = ColumnHeader.Index - 1
+        End If
+        lwT.SortOrder = lvwAscending
     End If
 End Sub
 
@@ -1567,6 +1687,7 @@ Dim cControlFra As CControlFacturaContab
                         'Es el codigo de socio.
                         'Pos si acaso sa ha vuelto loco el de las factuas y lo envia "decimal"
                         Campos(5) = Replace(Campos(5), ",00", "")
+                        Campos(5) = Replace(Campos(5), ".", "")
                     End If
                     Campos(0) = Campos(6)
                     If Len(Campos(0)) < 6 Then

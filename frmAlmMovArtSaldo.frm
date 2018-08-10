@@ -98,7 +98,7 @@ Begin VB.Form frmAlmMovArtSaldo
          Caption         =   "Control stock"
          Enabled         =   0   'False
          Height          =   255
-         Left            =   4080
+         Left            =   4440
          TabIndex        =   23
          Top             =   720
          Width           =   1575
@@ -193,11 +193,18 @@ Begin VB.Form frmAlmMovArtSaldo
          Top             =   210
          Width           =   2655
       End
+      Begin VB.Image ImageObservaDFI 
+         Height          =   240
+         Left            =   3840
+         Picture         =   "frmAlmMovArtSaldo.frx":000C
+         Top             =   720
+         Width           =   240
+      End
       Begin VB.Image Image1 
          Height          =   240
          Index           =   1
          Left            =   12360
-         Picture         =   "frmAlmMovArtSaldo.frx":000C
+         Picture         =   "frmAlmMovArtSaldo.frx":0A0E
          Top             =   720
          Width           =   240
       End
@@ -205,7 +212,7 @@ Begin VB.Form frmAlmMovArtSaldo
          Height          =   240
          Index           =   0
          Left            =   12360
-         Picture         =   "frmAlmMovArtSaldo.frx":1A7E
+         Picture         =   "frmAlmMovArtSaldo.frx":2480
          Top             =   720
          Width           =   240
       End
@@ -240,7 +247,7 @@ Begin VB.Form frmAlmMovArtSaldo
          Height          =   240
          Index           =   1
          Left            =   8880
-         Picture         =   "frmAlmMovArtSaldo.frx":34F0
+         Picture         =   "frmAlmMovArtSaldo.frx":3EF2
          ToolTipText     =   "Buscar artículo"
          Top             =   247
          Width           =   240
@@ -249,7 +256,7 @@ Begin VB.Form frmAlmMovArtSaldo
          Height          =   240
          Index           =   0
          Left            =   1080
-         Picture         =   "frmAlmMovArtSaldo.frx":35F2
+         Picture         =   "frmAlmMovArtSaldo.frx":3FF4
          ToolTipText     =   "Buscar artículo"
          Top             =   247
          Width           =   240
@@ -526,6 +533,12 @@ Dim cad As String
         .NumeroParametros = 3
         
         cad = "({smoval.codAlmac} = " & Data1.Recordset!codAlmac & ") AND ({smoval.codartic}=""" & DevNombreSQL(Data1.Recordset!codArtic) & """)"
+        'Si lleva fehca inv
+        If Text1(2).Text <> "" Then
+            cad = cad & " AND {smoval.fechamov} > date(" & Format(Text1(2).Text, "yyyy,mm,dd") & ")"
+        End If
+        
+        
         .FormulaSeleccion = cad
         .EnvioEMail = False
         .Opcion = 9
@@ -547,7 +560,12 @@ Private Sub cmdActualizStock_Click()
     'Esta bien. No actualio nada
     If Me.Image1(0).visible Then Exit Sub
 
-
+    
+    'Solo si tiene control de sctok
+    If Me.Check1.Value = 0 Then
+        MsgBox "No tiene control de stock", vbExclamation
+        Exit Sub
+    End If
     'If Format(cmdActualizStock.Tag, FormatoCantidad) = Text1(5).Text Then Exit Sub
 
     If MsgBox("¿Coninuar?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
@@ -682,6 +700,17 @@ Dim cadB As String
     Screen.MousePointer = vbDefault
 End Sub
 
+
+Private Sub ImageObservaDFI_Click()
+Dim cad As String
+    If Modo <> 2 Then Exit Sub
+    If Text1(2).Text <> "" Then
+        cad = "detamovi='DFI' AND fechamov =" & DBSet(Text1(2).Text, "F") & " AND codartic =" & DBSet(Text1(0).Text, "T")
+        cad = cad & " AND codalmac "
+        cad = DevuelveDesdeBD(conAri, "observa", "smoval", cad, Text1(1).Text)
+        If cad <> "" Then MsgBox "Observaciones: " & vbCrLf & cad, vbInformation
+    End If
+End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
 
@@ -1059,6 +1088,7 @@ Private Sub LimpiarCampos()
     lw1.ListItems.Clear
     Image1(0).visible = False
     Image1(1).visible = False
+    
     Me.Check1.Value = 0
     'Aqui va el especifico de cada form es
     '### a mano
@@ -1209,18 +1239,7 @@ Dim cadB2 As String
         If cadB <> "" Then
             'Cadena para el Data1
             CadenaConsulta = "select codartic,codalmac from " & NombreTabla & " WHERE " & cadB & " GROUP BY codartic,codalmac " & Ordenacion
-            'Cadena para el Datagrid y el Data2
-            'el codartic no se incluye en la cadB de las lineas pq siempre
-            'se muestran las de un codartic concreto
-            'Text1(0).Text = ""
-            'cadB2 = ObtenerBusqueda(Me, False)
-'            CadenaBusqueda = ""
-            'If cadB2 <> "" Then 'Para cargar la consulta del CargaGrid
-            '    CadenaBusqueda = " WHERE " & cadB2
-            'Else
-            '    CadenaBusqueda = ""
-            'End If
-
+            
         Else
             'obtener todos los articulos
             CadenaConsulta = "select codartic,codalmac from " & NombreTabla & " GROUP BY codartic,codalmac " & Ordenacion
@@ -1272,9 +1291,12 @@ Dim Aux As String
 
 On Error GoTo EPonerCampos
  
+    
+ 
     If Data1.Recordset.EOF Then Exit Sub
     
     PonerCamposForma Me, Data1
+     
     Aux = "ctrstock"
     'Text2(0).Text = PonerNombreDeCod(Text1(0), conAri, "sartic", "nomartic")
     Text2(0).Text = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", Text1(0).Text, "T", Aux)
@@ -1297,7 +1319,7 @@ On Error GoTo EPonerCampos
         If Not IsNull(Rs!FechaINV) Then Aux = Aux & Format(Rs!FechaINV, "dd/mm/yyyy")
 
         Aux = Aux & "|"
-        If Not IsNull(Rs!horainve) Then Aux = Aux & Format(Rs!horainve, "hh:mm:ss")
+        If Not IsNull(Rs!HOraInve) Then Aux = Aux & Format(Rs!HOraInve, "hh:mm:ss")
         Aux = Aux & "|"
         
         Aux = Aux & Format(Rs!CanStock, FormatoCantidad) & "|"
@@ -1483,6 +1505,9 @@ Private Sub CargaListView()
 Dim cantidad As Currency
 Dim Aux As String
 Dim IT As ListItem
+Dim Insertar As Boolean
+Dim FechaInve As Date
+Dim HOraInve As Date
 
     lw1.ListItems.Clear
     CadClie = "|"
@@ -1495,47 +1520,65 @@ Dim IT As ListItem
     
     'Si lleva fehca inv
     If Text1(2).Text <> "" Then
-        Aux = Aux & " AND fechamov > " & DBSet(Text1(2).Text, "F")
+        Aux = Aux & " AND fechamov >= " & DBSet(Text1(2).Text, "F")
+        FechaInve = CDate(Text1(2).Text)
+        HOraInve = "23:59:59"
+        If Text1(3).Text <> "" Then HOraInve = CDate(Text1(3).Text)
+        If HOraInve < "23:59:50" Then HOraInve = DateAdd("s", 5, HOraInve)
     End If
     
     
     Aux = Aux & " order by Fechamov , horamovi "
      Rs.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
-        Set IT = lw1.ListItems.Add()
-        IT.Text = Format(Rs!FechaMov, "dd/mm/yyyy")
-        IT.SubItems(1) = Format(Rs!horamovi, "hh:mm:ss")
-        IT.SubItems(2) = Rs!detamovi
-        IT.SubItems(3) = Rs!codigope
-        
-        'If It.SubItems(2) = "ALR" And It.SubItems(3) = "752" Then
-        
-        'smoval.tipomovi=0,""S""
-        '   0: SALIDA
-        '   1: ENTRADA
-        cantidad = Rs!cantidad
-        If Rs!tipomovi = 1 Then
-            IT.SubItems(5) = Format(cantidad, FormatoCantidad)
-            IT.SubItems(6) = " "
-            
-        Else
-            IT.SubItems(5) = " "
-            IT.SubItems(6) = Format(cantidad, FormatoCantidad)
-            cantidad = -cantidad
+    
+        Insertar = True
+        If Me.Check1.Value Then
+            If Text1(2).Text <> "" Then
+                If Rs!FechaMov = FechaInve Then
+                    If Format(Rs!horamovi, "hh:mm:ss") <= HOraInve Then Insertar = False
+                End If
+            End If
         End If
-        vStock = vStock + cantidad
-        IT.SubItems(7) = Format(vStock, FormatoCantidad)
         
-       ' If Me.chkCargaNombres.Value = 1 Then
-            Aux = PonerNombreCliente(Rs!codigope, Rs!detamovi)
-            If Aux = "" Then Aux = "Error leyendo desde BD"
-            IT.SubItems(4) = Aux
-       ' End If
+        If Insertar Then
+             Set IT = lw1.ListItems.Add()
+             IT.Text = Format(Rs!FechaMov, "dd/mm/yyyy")
+             IT.SubItems(1) = Format(Rs!horamovi, "hh:mm:ss")
+             IT.SubItems(2) = Rs!detamovi
+             If Rs!detamovi = "DFI" Then MsgBox "Movimiento inventario posterior a fecha hora inventario", vbExclamation
+             IT.SubItems(3) = Rs!codigope
+             
+             'If It.SubItems(2) = "ALR" And It.SubItems(3) = "752" Then
+             
+             'smoval.tipomovi=0,""S""
+             '   0: SALIDA
+             '   1: ENTRADA
+             cantidad = Rs!cantidad
+             If Rs!tipomovi = 1 Then
+                 IT.SubItems(5) = Format(cantidad, FormatoCantidad)
+                 IT.SubItems(6) = " "
+                 
+             Else
+                 IT.SubItems(5) = " "
+                 IT.SubItems(6) = Format(cantidad, FormatoCantidad)
+                 cantidad = -cantidad
+             End If
+             vStock = vStock + cantidad
+             IT.SubItems(7) = Format(vStock, FormatoCantidad)
+             
+            ' If Me.chkCargaNombres.Value = 1 Then
+                 Aux = PonerNombreCliente(Rs!codigope, Rs!detamovi)
+                 If Aux = "" Then Aux = "Error leyendo desde BD"
+                 IT.SubItems(4) = Aux
+            ' End If
+            
+            
+            
+            IT.Tag = DBLet(Rs!document)
        
-       
-       
-       IT.Tag = DBLet(Rs!document)
-       Rs.MoveNext
+        End If
+        Rs.MoveNext
         
         
     

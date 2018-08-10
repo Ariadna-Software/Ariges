@@ -46,7 +46,7 @@ Private mvarImprimiDirecto As Boolean
 
 'Desglosa IVAS al pie del TICKET
 Private mvarDesglosaIVATicket As Boolean
-Private mvarAbreCajon As Boolean
+Private mvarAbreCajon As Byte 'Boolean   0 . NO     1.- COM    2.-LPT
 
 'Solo tendra get
 Private mvarSecuenciaCajon As String
@@ -309,14 +309,16 @@ Public Property Get DesglosaIVATicket() As Boolean
 End Property
 
 
-
-Public Property Let AbreCajon(ByVal vData As Boolean)
+'0. NO abre cajon      1.- Por la COM (lo que habia )    2.- LPT  (nromalmente mapeando
+Public Property Let AbreCajon(ByVal vData As Byte)
      mvarAbreCajon = vData
 End Property
-
-Public Property Get AbreCajon() As Boolean
+Public Property Get AbreCajon() As Byte
      AbreCajon = mvarAbreCajon
 End Property
+
+
+
 
 Public Property Get SecuenciaCajon() As String
     SecuenciaCajon = mvarSecuenciaCajon
@@ -437,23 +439,23 @@ End Property
 '****   LEER  ***
 Public Function Leer() As Byte
 'Lee los parametros generales
-Dim cad As String
-Dim RS As ADODB.Recordset
+Dim Cad As String
+Dim Rs As ADODB.Recordset
 Dim J As Integer
 On Error GoTo Err3
     
     SQL = "SELECT * FROM spatpvg WHERE codigo=1"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
 
-    If RS.EOF Then
+    If Rs.EOF Then
         Leer = 1
     Else
         'cliente por defecto. Tambien leeremos forma de pago y CIF del cliene x defecto dde ventas
-        mvarCodClien = RS!codClien
+        mvarCodClien = Rs!codClien
         SQL = "codforpa"
-        mvarNomClien = DevuelveDesdeBDNew(conAri, "sclien", "concat(nomclien,'|',nifclien,'|')", "codclien", RS!codClien, "N", SQL)
-        mvarCtaBanc1 = DBLet(RS!ctabanc1, "T")
+        mvarNomClien = DevuelveDesdeBDNew(conAri, "sclien", "concat(nomclien,'|',nifclien,'|')", "codclien", Rs!codClien, "N", SQL)
+        mvarCtaBanc1 = DBLet(Rs!ctabanc1, "T")
         mvarCodForPa = SQL 'forma de pago del cliente
         
         'Separamos el campo mvarNomClien en nombre y cif
@@ -461,68 +463,68 @@ On Error GoTo Err3
         mvarNomClien = RecuperaValor(mvarNomClien, 1)
         
         
-        cad = "tipforpa"
-        SQL = DevuelveDesdeBDNew(conAri, "sforpa", "nomforpa", "codforpa", mvarCodForPa, "N", cad)
+        Cad = "tipforpa"
+        SQL = DevuelveDesdeBDNew(conAri, "sforpa", "nomforpa", "codforpa", mvarCodForPa, "N", Cad)
         mvarNomForPa = SQL
-        mvarTipForPa = CByte(cad)
+        mvarTipForPa = CByte(Cad)
         
-        mvarTipCierre = CByte(RS!tipcierre)
+        mvarTipCierre = CByte(Rs!tipcierre)
         
-        mvarRapida = Val(DBLet(RS!rapido, "N")) = 1
+        mvarRapida = Val(DBLet(Rs!rapido, "N")) = 1
         mvarFormaPagoUnica = False  'Por defecto lo dejo asi
-        mvarImprimiDirecto = Val(DBLet(RS!imprtick, "N")) = 1
+        mvarImprimiDirecto = Val(DBLet(Rs!imprtick, "N")) = 1
         
         
         
-        mvarDesglosaIVATicket = Val(DBLet(RS!BasesImp, "N")) = 1
+        mvarDesglosaIVATicket = Val(DBLet(Rs!BasesImp, "N")) = 1
 
         
-        mvarRedondea2 = (DBLet(RS!Redondea2, "N") = 1)
+        mvarRedondea2 = (DBLet(Rs!Redondea2, "N") = 1)
         
         
-        mvarCalculaIVAsobrePVP = (DBLet(RS!IVAsobrePVP, "N") = 1)
+        mvarCalculaIVAsobrePVP = (DBLet(Rs!IVAsobrePVP, "N") = 1)
         
-        mvarCtrstockVenta = (DBLet(RS!CtrstockVenta, "N")) = 1
-        
-        
-        
-        mvarAvisoGeneraFactura = (DBLet(RS!AvisoGenFra, "N") = 1)
+        mvarCtrstockVenta = (DBLet(Rs!CtrstockVenta, "N")) = 1
         
         
         
+        mvarAvisoGeneraFactura = (DBLet(Rs!AvisoGenFra, "N") = 1)
         
-        mvarOfertaImporteEntregado = (DBLet(RS!PonEntragado, "N") = 1)
-        mvarTKocultalineaEntregado = (DBLet(RS!TkOcultarEntregado, "N") = 1)
-        mvarTkCantidad2Decimales = (DBLet(RS!TkCantidad2Decimales, "N") = 1)
-        mvarTkMostrarTrabajador = (DBLet(RS!TkMostrarTrabajador, "N") = 1)
-        mvarProhibirTiketsNegativos = (DBLet(RS!ProhibirTiketsNegativos, "N") = 1)
-        mvarProhibirFitosantiarios_a_Varios = (DBLet(RS!prohibirFitosAVarios, "N") = 1)
+        
+        
+        
+        mvarOfertaImporteEntregado = (DBLet(Rs!PonEntragado, "N") = 1)
+        mvarTKocultalineaEntregado = (DBLet(Rs!TkOcultarEntregado, "N") = 1)
+        mvarTkCantidad2Decimales = (DBLet(Rs!TkCantidad2Decimales, "N") = 1)
+        mvarTkMostrarTrabajador = (DBLet(Rs!TkMostrarTrabajador, "N") = 1)
+        mvarProhibirTiketsNegativos = (DBLet(Rs!ProhibirTiketsNegativos, "N") = 1)
+        mvarProhibirFitosantiarios_a_Varios = (DBLet(Rs!prohibirFitosAVarios, "N") = 1)
         
         'Cabcera y pie
         For J = 1 To 5
-            cad = DBLet(RS.Fields("cabtick" & CStr(J)), "T")
-            mvarCabecera(J - 1) = cad
+            Cad = DBLet(Rs.Fields("cabtick" & CStr(J)), "T")
+            mvarCabecera(J - 1) = Cad
         Next
         For J = 1 To 3
-            cad = DBLet(RS.Fields("pietick" & CStr(J)), "T")
-            mvarPie(J - 1) = cad
+            Cad = DBLet(Rs.Fields("pietick" & CStr(J)), "T")
+            mvarPie(J - 1) = Cad
         Next
         mvarForpasConRecargoFinanciero = ""
         
-        mvarProhibirTicketSocios = (DBLet(RS!ProhibirTicketSocios, "N") = 1)
-        mvarProhibirFacturasTPV = (DBLet(RS!ProhibirFacturasTPV, "N") = 1)
+        mvarProhibirTicketSocios = (DBLet(Rs!ProhibirTicketSocios, "N") = 1)
+        mvarProhibirFacturasTPV = (DBLet(Rs!ProhibirFacturasTPV, "N") = 1)
         Leer = 0
     End If
 
-    RS.Close
+    Rs.Close
     
     
     If Leer = 0 Then
         'ALZIRA
-        If vParamAplic.NumeroInstalacion = 1 Then FijarFormasDePagoRecargoFinanciero RS
+        If vParamAplic.NumeroInstalacion = 1 Then FijarFormasDePagoRecargoFinanciero Rs
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     Exit Function
 
 Err3:
@@ -530,8 +532,8 @@ Err3:
     Mens = Mens & "Número: " & Err.Number & vbCrLf
     Mens = Mens & "Descripción: " & Err.Description
     MsgBox Mens, vbExclamation
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Leer = 1
 End Function
 
@@ -540,34 +542,34 @@ End Function
 
 Public Function Leer2(nt As String) As Byte
 'Lee los parametros del terminal
-Dim cad As String
-Dim RS As ADODB.Recordset
+Dim Cad As String
+Dim Rs As ADODB.Recordset
     
     On Error GoTo Err3
     
     SQL = "SELECT * FROM spatpvt WHERE numtermi=" & nt
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
 
-    If RS.EOF Then
+    If Rs.EOF Then
         Leer2 = 1
     Else
         mvarNumeroDeTerminal = nt
-        mvarNomImpre = DBLet(RS!NomImpre, "T")
-        mvarHayVisor = CBool(RS!HayVisor)
-        mvarNumPuerto = DBLet(RS!NumPuerto, "N")
-        mvarVelocPue = DBLet(RS!velocpue, "T")
+        mvarNomImpre = DBLet(Rs!NomImpre, "T")
+        mvarHayVisor = CBool(Rs!HayVisor)
+        mvarNumPuerto = DBLet(Rs!NumPuerto, "N")
+        mvarVelocPue = DBLet(Rs!velocpue, "T")
         
         
-        mvarAbreCajon = Val(DBLet(RS!AbreCajon, "N")) = 1
-        mvarSecuenciaCajon = DBLet(RS!SecuenciaCajon)
-        mvarComImpresora = DBLet(RS!cualcom, "N")
-        mvarImpresoraAlbaranes = DBLet(RS!ImpresoraALV, "T")
+        mvarAbreCajon = DBLet(Rs!AbreCajon, "N")
+        mvarSecuenciaCajon = DBLet(Rs!SecuenciaCajon)
+        mvarComImpresora = DBLet(Rs!cualcom, "N")
+        mvarImpresoraAlbaranes = DBLet(Rs!ImpresoraALV, "T")
         Leer2 = 0
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 Err3:
@@ -575,8 +577,8 @@ Err3:
     Mens = Mens & "Número: " & Err.Number & vbCrLf
     Mens = Mens & "Descripción: " & Err.Description
     MsgBox Mens, vbExclamation
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Leer2 = 1
 End Function
 
@@ -611,7 +613,7 @@ End Function
 Public Function ConseguirContador(vCodigo As Byte) As Long
 Dim OK As Boolean
 Dim C1 As Long 'contador
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo Err1
     
@@ -619,15 +621,15 @@ Dim RS As ADODB.Recordset
     
     'Abrimos bloqueando
     SQL = "Select * from spatpvt WHERE numtermi=" & vCodigo & " FOR UPDATE"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
-        mvarContador = RS!Contador
-        C1 = RS!Contador
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
+        mvarContador = Rs!Contador
+        C1 = Rs!Contador
         OK = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     If OK Then ConseguirContador = C1 + 1
     Exit Function
@@ -669,7 +671,7 @@ End Function
 Public Function DevolverContador(vCodigo As Byte, Contador As Long) As Byte
 Dim OK As Boolean
 Dim C1 As Long
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo Err1
     
@@ -679,14 +681,14 @@ Dim RS As ADODB.Recordset
 '    Conn.Execute "Set autocommit = 0"
     DevolverContador = 1
     OK = False
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
-        C1 = RS!Contador
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
+        C1 = Rs!Contador
         OK = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     If Not OK Then
         conn.Execute "commit"
         Exit Function

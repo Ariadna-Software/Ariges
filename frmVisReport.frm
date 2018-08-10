@@ -175,6 +175,9 @@ Private Sub Command1_Click()
    
 End Sub
 
+
+
+
 Private Sub CRViewer1_ExportButtonClicked(UseDefault As Boolean)
     
     If vParamAplic.NumeroInstalacion = 4 Then
@@ -212,7 +215,7 @@ Private Sub CRViewer1_ExportButtonClicked(UseDefault As Boolean)
         
         End If
         Screen.MousePointer = vbDefault
-        
+    Else
     End If
 End Sub
 
@@ -321,6 +324,7 @@ Private Sub Form_Load()
 Dim i As Integer
 Dim J As Integer
 Dim NomImpre As String
+Dim BDConta As String
 
     On Error GoTo Err_Carga
 
@@ -335,6 +339,9 @@ Dim NomImpre As String
     If NumCopias = 0 Then NumCopias = 1
     Text1(0).Text = NumCopias
        
+    BDConta = "conta"
+    If vParamAplic.ContabilidadNueva Then BDConta = "ariconta"
+       
     'Conectar a la BD de la Empresa
     For i = 1 To mrpt.Database.Tables.Count
     
@@ -342,10 +349,12 @@ Dim NomImpre As String
         'Puede que alguna tabla este vinculada a ARICONTA
         If LCase(CStr(mrpt.Database.Tables(i).ConnectionProperties.item("DSN"))) = "vconta" Then
             'A conta
-            mrpt.Database.Tables(i).SetLogOnInfo "vConta", "conta" & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+            
+            mrpt.Database.Tables(i).SetLogOnInfo "vConta", BDConta & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+                
             'If (InStr(1, mrpt.Database.Tables(i).Name, "_") = 0) Then
             If RedireccionamosTabla(CStr(mrpt.Database.Tables(i).Name)) Then
-               mrpt.Database.Tables(i).Location = "conta" & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(i).Name
+               mrpt.Database.Tables(i).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(i).Name
             End If
     
     
@@ -421,6 +430,7 @@ Dim NomImpre As String
     If Me.ExportarPDF Then
         Exportar
         Exit Sub
+ 
     End If
     
      'lOS MARGENES
@@ -473,7 +483,7 @@ Dim NomImpre As String
         CRViewer1.ViewReport
     End If
     
-
+    
     
     
     
@@ -710,6 +720,9 @@ Dim crxSection As CRAXDRT.Section
 Dim crxObject As Object
 Dim crxSubreportObject As CRAXDRT.SubreportObject
 Dim i As Byte
+Dim BDConta
+    BDConta = "conta"
+    If vParamAplic.ContabilidadNueva Then BDConta = "ariconta"
 
     For Each crxSection In mrpt.Sections
         For Each crxObject In crxSection.ReportObjects
@@ -725,10 +738,11 @@ Dim i As Byte
                            smrpt.Database.Tables(i).Location = vEmpresa.BDAriges & "." & smrpt.Database.Tables(i).Name
                         End If
                     ElseIf smrpt.Database.Tables(i).ConnectionProperties.item("DSN") = "vConta" Then
-                        smrpt.Database.Tables(i).SetLogOnInfo "vConta", "conta" & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+                        
+                        smrpt.Database.Tables(i).SetLogOnInfo "vConta", BDConta & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
                         'If (InStr(1, smrpt.Database.Tables(i).Name, "_") = 0) Then
                         If RedireccionamosTabla(CStr(smrpt.Database.Tables(i).Name)) Then
-                           smrpt.Database.Tables(i).Location = "conta" & vParamAplic.NumeroConta & "." & smrpt.Database.Tables(i).Name
+                           smrpt.Database.Tables(i).Location = BDConta & vParamAplic.NumeroConta & "." & smrpt.Database.Tables(i).Name
                         End If
                         
                     ElseIf LCase(CStr(smrpt.Database.Tables(i).ConnectionProperties.item("DSN"))) = "mytelefono" Then

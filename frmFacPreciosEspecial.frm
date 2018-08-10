@@ -1389,6 +1389,13 @@ On Error Resume Next
         Exit Function
     End If
     
+    
+    If vParamAplic.NumeroInstalacion = 2 Then
+        If Text1(4).Text <> "" And Me.chkPermiteDto.Value = 0 Then
+              If MsgBox("Deberia marcar ""permite descuento"". Ha indicado descuento especial" & vbCrLf & "¿Continuar?", vbQuestion + vbYesNo) = vbNo Then Exit Function
+        End If
+    End If
+    
     DatosOk = True
 End Function
 

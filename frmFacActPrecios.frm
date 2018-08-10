@@ -287,7 +287,7 @@ Dim totRegPE As Long 'total registros a cambia de precios especiales
         If Not (totRegPA > 0) Then
             If Me.chkPreuEsp.Value = 1 Then
                 'comprobar si se actualizar precios especiales
-                SQL = "SELECT COUNT(*) FROM sprees,sartic WHERE " & cadSel
+                SQL = "SELECT COUNT(*) FROM sprees,sartic WHERE " & Replace(cadSel, "slista", "sprees")
                 totRegPE = TotalRegistros(SQL)
                 If Not (totRegPE > 0) Then
                     MsgBox "No hay tarifas de precios ni precios especiales a actualizar para esa fecha.", vbExclamation
@@ -488,7 +488,7 @@ Private Sub ProcesoActualizarPrecios_Actuales(cadWhere As String, totReg As Long
 '   - actualizar slista con slista.precioac=slista.precionu
 '   - si slista.codlista es la tarifa de los parametros de la aplicacion: actualizar PVP del articulo
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
 
@@ -507,14 +507,14 @@ Dim hayErr As Boolean
     
     '-- seleccionar todos los registros actuales a procesar
     SQL = "SELECT * FROM slista,sartic WHERE " & cadWhere
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa a cambiar
     hayErr = False
-    While Not RS.EOF
+    While Not Rs.EOF
         '-- actualizar tarifas precios y PVP si corresponde
-        If Not ActualizarTarifa(DBLet(RS!codArtic, "T"), DBLet(RS!codlista, "N")) Then
+        If Not ActualizarTarifa(DBLet(Rs!codArtic, "T"), DBLet(Rs!codlista, "N")) Then
             hayErr = True
         End If
         
@@ -525,11 +525,11 @@ Dim hayErr As Boolean
         Me.lblProgreso(1).Caption = CLng((i * 100) / totReg) & " %"
         Me.lblProgreso(0).Caption = "Actualizando precios actuales.     (" & i & " de " & totReg & ")"
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     
     Screen.MousePointer = vbDefault
@@ -556,7 +556,7 @@ End Sub
 Private Function ActualizarTarifa(codArt As String, codLis As Integer) As Boolean
 Dim cadErr As String
 Dim cTar As CTarifaArt
-Dim B As Boolean
+Dim b As Boolean
 Dim margen As Currency
 Dim newPrecio As Currency
 
@@ -565,33 +565,33 @@ Dim newPrecio As Currency
     
     
     Set cTar = New CTarifaArt
-    B = cTar.LeerDatos(codArt, codLis)
+    b = cTar.LeerDatos(codArt, codLis)
     
-    If B Then
+    If b Then
         'actualizar la tarifa precios
-        B = cTar.ActualizarPrecios(cTar.FechaCambio, cTar.PrecioNuevo, cTar.PrecioCajaNuevo, cadErr, True)
+        b = cTar.ActualizarPrecios(cTar.FechaCambio, cTar.PrecioNuevo, cTar.PrecioCajaNuevo, cadErr, True)
         
         'si tarifa es la de parametros actualizar PVP del articulo
-        If B And codLis = vParamAplic.CodTarifa Then
-            B = BloquearArticulo(codArt)
-            If B Then
+        If b And codLis = vParamAplic.CodTarifa Then
+            b = BloquearArticulo(codArt)
+            If b Then
                 margen = Round2(cTar.MargenComercial / 100, 4)
                 newPrecio = Round2((cTar.PrecioNuevo / (margen + 1)), 4)
-                B = ActualizarPVPArticulo(codArt, newPrecio)
+                b = ActualizarPVPArticulo(codArt, newPrecio)
             End If
         End If
     End If
     Set cTar = Nothing
     
     
-    If B Then
+    If b Then
         conn.CommitTrans
     Else
         conn.RollbackTrans
     End If
     
-    ActualizarTarifa = B
-    If Not B And cadErr <> "" Then MsgBox cadErr, vbExclamation
+    ActualizarTarifa = b
+    If Not b And cadErr <> "" Then MsgBox cadErr, vbExclamation
     Exit Function
     
 ErrAct:
@@ -643,7 +643,7 @@ Private Sub ProcesoActualizarPrecios_Especiales(cadWhere As String, totReg As Lo
 '   - actualizar sprees con sprees.precioac=sprees.precionu
 '   - poner a nulos los valores nuevos
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
 
@@ -662,14 +662,14 @@ Dim hayErr As Boolean
     
     '-- seleccionar todos los registros actuales a procesar
     SQL = "SELECT * FROM sprees,sartic WHERE " & cadWhere
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada precio especial a cambiar
     hayErr = False
-    While Not RS.EOF
+    While Not Rs.EOF
         '-- actualizar precios especiales
-        If Not ActualizarPrecioEspec(RS!codClien, RS!codArtic) Then
+        If Not ActualizarPrecioEspec(Rs!codClien, Rs!codArtic) Then
             'procesar errores!!!!!!!!!!!
             hayErr = True
         End If
@@ -681,11 +681,11 @@ Dim hayErr As Boolean
         Me.lblProgreso(1).Caption = CLng((i * 100) / totReg) & " %"
         Me.lblProgreso(0).Caption = "Actualizando precios especiales.     (" & i & " de " & totReg & ")"
         If (i Mod 30) = 0 Then DoEvents
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     Screen.MousePointer = vbDefault
     If Not hayErr Then
@@ -710,7 +710,7 @@ End Sub
 Private Function ActualizarPrecioEspec(codCli As Long, codArt As String) As Boolean
 'actualizar precio especial
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim NumF As String
 
     On Error GoTo ErrAct
@@ -719,30 +719,30 @@ Dim NumF As String
     ActualizarPrecioEspec = False
     
     SQL = "SELECT * FROM sprees WHERE codclien=" & codCli & " AND codartic=" & DBSet(codArt, "T")
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
         '-- Insertar en el historico spree1
         'numero de linea
         NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", "codartic=" & DBSet(codArt, "T") & " AND codclien=" & codCli)
     
         SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec) "
         SQL = SQL & " VALUES (" & codCli & "," & DBSet(codArt, "T") & "," & NumF & ","
-        SQL = SQL & DBSet(RS!fechanue, "F") & "," & DBSet(RS!precioac, "N") & "," & DBSet(DBLet(RS!precioa1, "N"), "N") & "," & DBSet(RS!dtoespec, "N") & ")"
+        SQL = SQL & DBSet(Rs!fechanue, "F") & "," & DBSet(Rs!precioac, "N") & "," & DBSet(DBLet(Rs!precioa1, "N"), "N") & "," & DBSet(Rs!dtoespec, "N") & ")"
         conn.Execute SQL
         
         
         '-- Actualizar precios actuales con nuevo y resetear valores nuevos
-        SQL = "UPDATE sprees SET precioac=" & DBSet(RS!precionu, "N")
-        SQL = SQL & "," & " precioa1=" & DBSet(RS!precion1, "N")
-        SQL = SQL & ", dtoespec=" & DBSet(RS!dtoespe1, "N")
+        SQL = "UPDATE sprees SET precioac=" & DBSet(Rs!precionu, "N")
+        SQL = SQL & "," & " precioa1=" & DBSet(Rs!precion1, "N")
+        SQL = SQL & ", dtoespec=" & DBSet(Rs!dtoespe1, "N")
         SQL = SQL & ", " & "precionu=" & ValorNulo & ", fechanue=" & ValorNulo & ", precion1=" & ValorNulo
         SQL = SQL & ", dtoespe1=" & ValorNulo
         SQL = SQL & " WHERE codclien=" & codCli & " and codartic=" & DBSet(codArt, "T")
         conn.Execute SQL
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 
     conn.CommitTrans
@@ -890,7 +890,7 @@ Private Sub ProcesoActualizarPreciosProvee(cadWhere As String, totReg As Long)
 '   - actualizar slista con slista.precioac=slista.precionu
 '   - si slista.codlista es la tarifa de los parametros de la aplicacion: actualizar PVP del articulo
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
 
@@ -909,14 +909,14 @@ Dim hayErr As Boolean
     
     '-- seleccionar todos los registros actuales a procesar
     SQL = "SELECT * FROM slispr WHERE " & cadWhere
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa a cambiar
     hayErr = False
-    While Not RS.EOF
+    While Not Rs.EOF
         '-- actualizar tarifas precios y PVP si corresponde
-        If Not ActualizarPreciosProvee(RS) Then hayErr = True
+        If Not ActualizarPreciosProvee(Rs) Then hayErr = True
         
         
         '-- actualizar la progress bar
@@ -926,11 +926,11 @@ Dim hayErr As Boolean
         Me.lblProgreso(1).Caption = CLng((i * 100) / totReg) & " %"
         Me.lblProgreso(0).Caption = "Actualizando precios actuales.     (" & i & " de " & totReg & ")"
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     
     Screen.MousePointer = vbDefault

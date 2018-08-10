@@ -544,30 +544,30 @@ Begin VB.Form frmComEntPedidosSa
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmComEntPedidosSa.frx":02B7
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(28)"
-      Tab(1).Control(2)=   "imgBuscar(11)"
-      Tab(1).Control(3)=   "Label1(44)"
-      Tab(1).Control(4)=   "imgFecha(1)"
-      Tab(1).Control(5)=   "Label1(47)"
-      Tab(1).Control(6)=   "Label1(48)"
-      Tab(1).Control(7)=   "Label1(49)"
-      Tab(1).Control(8)=   "imgBuscar(12)"
-      Tab(1).Control(9)=   "Text1(17)"
-      Tab(1).Control(10)=   "Text1(18)"
-      Tab(1).Control(11)=   "Text1(19)"
-      Tab(1).Control(12)=   "Text1(20)"
-      Tab(1).Control(13)=   "Text1(21)"
-      Tab(1).Control(14)=   "FrameDirMercancia"
-      Tab(1).Control(15)=   "FrameDirFactura"
-      Tab(1).Control(16)=   "FrameHco"
-      Tab(1).Control(17)=   "Text1(27)"
-      Tab(1).Control(18)=   "Text2(27)"
-      Tab(1).Control(19)=   "Text1(28)"
-      Tab(1).Control(20)=   "Text1(29)"
-      Tab(1).Control(21)=   "Text1(30)"
-      Tab(1).Control(22)=   "Text1(31)"
-      Tab(1).Control(23)=   "Text2(4)"
+      Tab(1).Control(0)=   "Text2(4)"
+      Tab(1).Control(1)=   "Text1(31)"
+      Tab(1).Control(2)=   "Text1(30)"
+      Tab(1).Control(3)=   "Text1(29)"
+      Tab(1).Control(4)=   "Text1(28)"
+      Tab(1).Control(5)=   "Text2(27)"
+      Tab(1).Control(6)=   "Text1(27)"
+      Tab(1).Control(7)=   "FrameHco"
+      Tab(1).Control(8)=   "FrameDirFactura"
+      Tab(1).Control(9)=   "FrameDirMercancia"
+      Tab(1).Control(10)=   "Text1(21)"
+      Tab(1).Control(11)=   "Text1(20)"
+      Tab(1).Control(12)=   "Text1(19)"
+      Tab(1).Control(13)=   "Text1(18)"
+      Tab(1).Control(14)=   "Text1(17)"
+      Tab(1).Control(15)=   "imgBuscar(12)"
+      Tab(1).Control(16)=   "Label1(49)"
+      Tab(1).Control(17)=   "Label1(48)"
+      Tab(1).Control(18)=   "Label1(47)"
+      Tab(1).Control(19)=   "imgFecha(1)"
+      Tab(1).Control(20)=   "Label1(44)"
+      Tab(1).Control(21)=   "imgBuscar(11)"
+      Tab(1).Control(22)=   "Label1(28)"
+      Tab(1).Control(23)=   "Label1(45)"
       Tab(1).ControlCount=   24
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmComEntPedidosSa.frx":02D3
@@ -6250,7 +6250,7 @@ Dim cart As CArticulo
     
 End Function
 
-Private Sub ImprimirAlbaran(NumAlbar As String, FechaAlb As String, Codprove As Long)
+Private Sub ImprimirAlbaran(NUmAlbar As String, FechaAlb As String, Codprove As Long)
 Dim cadNomRPT As String
 Dim SQL As String
 Dim numP As Byte
@@ -6270,7 +6270,7 @@ Dim param As String
     
     SQL = CadenaDesdeHasta(CStr(FechaAlb), CStr(FechaAlb), "{scaalp.fechaalb}", "F")
     SQL = SQL & " AND  {scaalp.codprove} = " & Codprove
-    SQL = SQL & " AND  {scaalp.numalbar} = """ & DevNombreSQL(NumAlbar) & """"
+    SQL = SQL & " AND  {scaalp.numalbar} = """ & DevNombreSQL(NUmAlbar) & """"
     
 
 
@@ -6372,6 +6372,9 @@ Dim ArticuloEsEscandallo As String
     
     'pedir por pantalla: el operador, Nº albaran y fecha albaran
     Set frmList = New frmListadoOfer
+    
+    frmList.codClien = Text1(4).Text  'Julio18
+    
     frmList.OpcionListado = 57
     CadenaSQL = ""
     frmList.Show vbModal
@@ -6657,7 +6660,7 @@ Dim cadSel As String
 
     On Error GoTo EPedirNLotes
         
-    cadSel = "numalbar=" & DBSet(Rs!NumAlbar, "T") & " AND fechaalb=" & DBSet(Rs!FechaAlb, "F") & " AND codprove=" & DBSet(Rs!Codprove, "N")
+    cadSel = "numalbar=" & DBSet(Rs!NUmAlbar, "T") & " AND fechaalb=" & DBSet(Rs!FechaAlb, "F") & " AND codprove=" & DBSet(Rs!Codprove, "N")
     
     'Visualizar en pantalla el Grid, y rellenar los Nº Serie
     If Not PedirNLotesGnral(Rs, True) Then
@@ -6686,7 +6689,7 @@ Private Function InsertarNSerie(numSerie As String, codArtic As String, numlinea
 'existen lineas con control de Nº Serie
 'Dim CadValues As String, cadValuesU As String
 Dim devuelve As String
-Dim NumAlbar As String
+Dim NUmAlbar As String
 Dim nSerie As CNumSerie
 Dim b As Boolean
 
@@ -6703,10 +6706,10 @@ Dim b As Boolean
     nSerie.ObtenFechaFinGarantia codArtic, Me.cmdAux(0).Tag
     
     'Comprobar si existe en la tabla sserie
-    NumAlbar = "numalbpr" 'Nº albaran de Compra
-    devuelve = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", numSerie, "T", NumAlbar, "codartic", codArtic, "T")
+    NUmAlbar = "numalbpr" 'Nº albaran de Compra
+    devuelve = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", numSerie, "T", NUmAlbar, "codartic", codArtic, "T")
     If devuelve <> "" Then 'EXISTE en tabla sserie
-        If NumAlbar = "" Then
+        If NUmAlbar = "" Then
             b = nSerie.ActualizarNumSerie(False)
         End If
     Else

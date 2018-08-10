@@ -13,152 +13,177 @@ Begin VB.Form frmCRMVarios
    ScaleWidth      =   9330
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame FrameCRMresumen 
-      Height          =   4695
-      Left            =   840
-      TabIndex        =   40
-      Top             =   240
+   Begin VB.Frame FrameClientesxAccion 
+      Height          =   6135
+      Left            =   600
+      TabIndex        =   61
+      Top             =   120
       Visible         =   0   'False
-      Width           =   6015
-      Begin VB.TextBox txtDescNumero 
-         BackColor       =   &H80000018&
+      Width           =   6615
+      Begin VB.TextBox txtFecha 
          Height          =   285
-         Index           =   7
-         Left            =   2280
-         Locked          =   -1  'True
-         TabIndex        =   59
+         Index           =   2
+         Left            =   3600
+         TabIndex        =   83
          Text            =   "Text1"
-         Top             =   2760
-         Width           =   3495
+         Top             =   960
+         Width           =   1335
       End
       Begin VB.TextBox txtNumero 
          Height          =   285
-         Index           =   7
+         Index           =   9
          Left            =   1200
-         TabIndex        =   45
+         TabIndex        =   79
          Text            =   "Text1"
-         Top             =   2760
-         Width           =   975
-      End
-      Begin VB.TextBox txtNumero 
-         Height          =   285
-         Index           =   6
-         Left            =   1200
-         TabIndex        =   44
-         Text            =   "Text1"
-         Top             =   2400
+         Top             =   3120
          Width           =   975
       End
       Begin VB.TextBox txtDescNumero 
          BackColor       =   &H80000018&
          Height          =   285
-         Index           =   6
+         Index           =   9
          Left            =   2280
          Locked          =   -1  'True
-         TabIndex        =   56
+         TabIndex        =   78
          Text            =   "Text1"
-         Top             =   2400
+         Top             =   3120
          Width           =   3495
       End
-      Begin VB.CommandButton cmdResumen 
-         Caption         =   "Generar"
-         Height          =   375
-         Left            =   3360
-         TabIndex        =   48
-         Top             =   4200
-         Width           =   1095
-      End
-      Begin VB.CheckBox chkVarios 
-         Caption         =   "Check1"
-         Height          =   255
-         Index           =   1
-         Left            =   1920
-         TabIndex        =   47
-         Top             =   3360
-         Visible         =   0   'False
-         Width           =   1215
-      End
-      Begin VB.CheckBox chkVarios 
-         Caption         =   "Salta pagina"
-         Height          =   255
-         Index           =   0
-         Left            =   480
-         TabIndex        =   46
-         Top             =   3360
-         Width           =   1215
-      End
-      Begin VB.TextBox txtCliente 
+      Begin VB.TextBox txtNumero 
          Height          =   285
-         Index           =   3
+         Index           =   8
          Left            =   1200
-         TabIndex        =   43
+         TabIndex        =   75
          Text            =   "Text1"
-         Top             =   1680
+         Top             =   2760
          Width           =   975
       End
-      Begin VB.TextBox txtDescClie 
+      Begin VB.TextBox txtDescNumero 
          BackColor       =   &H80000018&
          Height          =   285
-         Index           =   3
+         Index           =   8
          Left            =   2280
          Locked          =   -1  'True
-         TabIndex        =   53
+         TabIndex        =   74
          Text            =   "Text1"
-         Top             =   1680
+         Top             =   2760
          Width           =   3495
-      End
-      Begin VB.TextBox txtDescClie 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   2
-         Left            =   2280
-         Locked          =   -1  'True
-         TabIndex        =   50
-         Text            =   "Text1"
-         Top             =   1320
-         Width           =   3495
-      End
-      Begin VB.TextBox txtCliente 
-         Height          =   285
-         Index           =   2
-         Left            =   1200
-         TabIndex        =   42
-         Text            =   "Text1"
-         Top             =   1320
-         Width           =   975
       End
       Begin VB.CommandButton cmdCancelar 
          Caption         =   "Cancelar"
          Height          =   375
-         Index           =   1
-         Left            =   4680
-         TabIndex        =   49
-         Top             =   4200
+         Index           =   2
+         Left            =   4920
+         TabIndex        =   73
+         Top             =   5520
          Width           =   1095
       End
-      Begin VB.Image imgVarios 
+      Begin VB.CommandButton Command1 
+         Caption         =   "Generar"
+         Height          =   375
+         Left            =   1680
+         TabIndex        =   72
+         Top             =   5520
+         Width           =   1095
+      End
+      Begin VB.TextBox txtDescClie 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   5
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   70
+         Text            =   "Text1"
+         Top             =   2040
+         Width           =   3495
+      End
+      Begin VB.TextBox txtCliente 
+         Height          =   285
+         Index           =   5
+         Left            =   1200
+         TabIndex        =   69
+         Text            =   "Text1"
+         Top             =   2040
+         Width           =   975
+      End
+      Begin VB.TextBox txtDescClie 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   4
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   66
+         Text            =   "Text1"
+         Top             =   1680
+         Width           =   3495
+      End
+      Begin VB.TextBox txtCliente 
+         Height          =   285
+         Index           =   4
+         Left            =   1200
+         TabIndex        =   65
+         Text            =   "Text1"
+         Top             =   1680
+         Width           =   975
+      End
+      Begin VB.TextBox txtFecha 
+         Height          =   285
+         Index           =   1
+         Left            =   1200
+         TabIndex        =   63
+         Text            =   "Text1"
+         Top             =   960
+         Width           =   1335
+      End
+      Begin VB.Image imgFecha 
          Height          =   240
-         Index           =   7
-         Left            =   960
+         Index           =   2
+         Left            =   3360
          Picture         =   "frmCRMVarios.frx":0000
-         Top             =   2760
+         Top             =   960
          Width           =   240
       End
       Begin VB.Label Label3 
          Caption         =   "Hasta"
          Height          =   195
-         Index           =   9
+         Index           =   15
+         Left            =   2880
+         TabIndex        =   82
+         Top             =   960
+         Width           =   465
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   14
          Left            =   360
-         TabIndex        =   60
-         Top             =   2760
+         TabIndex        =   81
+         Top             =   960
          Width           =   465
       End
       Begin VB.Image imgVarios 
          Height          =   240
-         Index           =   6
+         Index           =   9
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0102
-         Top             =   2400
+         Picture         =   "frmCRMVarios.frx":008B
+         Top             =   3120
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   13
+         Left            =   360
+         TabIndex        =   80
+         Top             =   3120
+         Width           =   465
+      End
+      Begin VB.Image imgVarios 
+         Height          =   240
+         Index           =   8
+         Left            =   960
+         Picture         =   "frmCRMVarios.frx":018D
+         Top             =   2760
          Width           =   240
       End
       Begin VB.Label lblDpto 
@@ -175,45 +200,36 @@ Begin VB.Form frmCRMVarios
          EndProperty
          ForeColor       =   &H00000080&
          Height          =   195
-         Index           =   6
+         Index           =   10
          Left            =   240
-         TabIndex        =   58
-         Top             =   2160
+         TabIndex        =   77
+         Top             =   2520
          Width           =   615
       End
       Begin VB.Label Label3 
          Caption         =   "Desde"
-         Height          =   315
-         Index           =   8
+         Height          =   195
+         Index           =   12
          Left            =   360
-         TabIndex        =   57
-         Top             =   2400
+         TabIndex        =   76
+         Top             =   2760
          Width           =   465
-      End
-      Begin VB.Label lblIndicador 
-         Caption         =   "Label1"
-         Height          =   255
-         Index           =   0
-         Left            =   360
-         TabIndex        =   55
-         Top             =   3840
-         Width           =   5295
       End
       Begin VB.Image imgCliente 
          Height          =   240
-         Index           =   3
+         Index           =   5
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0204
-         Top             =   1680
+         Picture         =   "frmCRMVarios.frx":028F
+         Top             =   2040
          Width           =   240
       End
       Begin VB.Label Label3 
          Caption         =   "Hasta"
          Height          =   195
-         Index           =   7
+         Index           =   11
          Left            =   360
-         TabIndex        =   54
-         Top             =   1680
+         TabIndex        =   71
+         Top             =   2040
          Width           =   465
       End
       Begin VB.Label lblDpto 
@@ -230,32 +246,60 @@ Begin VB.Form frmCRMVarios
          EndProperty
          ForeColor       =   &H00000080&
          Height          =   195
-         Index           =   5
+         Index           =   9
          Left            =   240
-         TabIndex        =   52
-         Top             =   960
+         TabIndex        =   68
+         Top             =   1440
          Width           =   585
       End
       Begin VB.Image imgCliente 
          Height          =   240
-         Index           =   2
+         Index           =   4
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0306
-         Top             =   1320
+         Picture         =   "frmCRMVarios.frx":0391
+         Top             =   1680
          Width           =   240
       End
       Begin VB.Label Label3 
          Caption         =   "Desde"
          Height          =   195
-         Index           =   6
+         Index           =   10
          Left            =   360
-         TabIndex        =   51
-         Top             =   1320
+         TabIndex        =   67
+         Top             =   1680
          Width           =   465
+      End
+      Begin VB.Label lblDpto 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha "
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   7
+         Left            =   240
+         TabIndex        =   64
+         Top             =   720
+         Width           =   540
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   1
+         Left            =   960
+         Picture         =   "frmCRMVarios.frx":0493
+         Top             =   960
+         Width           =   240
       End
       Begin VB.Label lblTitulo 
          Alignment       =   2  'Center
-         Caption         =   "Impresión CRM resumida"
+         Caption         =   "Listado Clientes x Acción comercial"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   13.5
@@ -267,11 +311,11 @@ Begin VB.Form frmCRMVarios
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   375
-         Index           =   0
-         Left            =   1320
-         TabIndex        =   41
-         Top             =   360
-         Width           =   3735
+         Index           =   1
+         Left            =   720
+         TabIndex        =   62
+         Top             =   240
+         Width           =   5295
       End
    End
    Begin VB.Frame FrameGenerar 
@@ -509,7 +553,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   0
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0408
+         Picture         =   "frmCRMVarios.frx":051E
          Top             =   1560
          Width           =   240
       End
@@ -635,7 +679,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   5
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":050A
+         Picture         =   "frmCRMVarios.frx":0620
          Top             =   6120
          Width           =   240
       End
@@ -663,7 +707,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   4
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":060C
+         Picture         =   "frmCRMVarios.frx":0722
          Top             =   5760
          Width           =   240
       End
@@ -671,7 +715,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   3
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":070E
+         Picture         =   "frmCRMVarios.frx":0824
          Top             =   4320
          Width           =   240
       End
@@ -699,7 +743,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   2
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0810
+         Picture         =   "frmCRMVarios.frx":0926
          Top             =   4920
          Width           =   240
       End
@@ -727,7 +771,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   1
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0912
+         Picture         =   "frmCRMVarios.frx":0A28
          Top             =   4320
          Width           =   240
       End
@@ -735,7 +779,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   0
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0A14
+         Picture         =   "frmCRMVarios.frx":0B2A
          Top             =   3960
          Width           =   240
       End
@@ -743,7 +787,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   1
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0B16
+         Picture         =   "frmCRMVarios.frx":0C2C
          Top             =   3360
          Width           =   240
       End
@@ -771,7 +815,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   0
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0C18
+         Picture         =   "frmCRMVarios.frx":0D2E
          Top             =   3000
          Width           =   240
       End
@@ -799,7 +843,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   0
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0D1A
+         Picture         =   "frmCRMVarios.frx":0E30
          Top             =   1080
          Width           =   240
       End
@@ -807,7 +851,7 @@ Begin VB.Form frmCRMVarios
          Height          =   240
          Index           =   0
          Left            =   960
-         Picture         =   "frmCRMVarios.frx":0E1C
+         Picture         =   "frmCRMVarios.frx":0F32
          Top             =   720
          Width           =   240
       End
@@ -832,6 +876,267 @@ Begin VB.Form frmCRMVarios
          Width           =   540
       End
    End
+   Begin VB.Frame FrameCRMresumen 
+      Height          =   4695
+      Left            =   840
+      TabIndex        =   40
+      Top             =   240
+      Visible         =   0   'False
+      Width           =   6015
+      Begin VB.TextBox txtDescNumero 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   7
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   59
+         Text            =   "Text1"
+         Top             =   2760
+         Width           =   3495
+      End
+      Begin VB.TextBox txtNumero 
+         Height          =   285
+         Index           =   7
+         Left            =   1200
+         TabIndex        =   45
+         Text            =   "Text1"
+         Top             =   2760
+         Width           =   975
+      End
+      Begin VB.TextBox txtNumero 
+         Height          =   285
+         Index           =   6
+         Left            =   1200
+         TabIndex        =   44
+         Text            =   "Text1"
+         Top             =   2400
+         Width           =   975
+      End
+      Begin VB.TextBox txtDescNumero 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   6
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   56
+         Text            =   "Text1"
+         Top             =   2400
+         Width           =   3495
+      End
+      Begin VB.CommandButton cmdResumen 
+         Caption         =   "Generar"
+         Height          =   375
+         Left            =   3360
+         TabIndex        =   48
+         Top             =   4200
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkVarios 
+         Caption         =   "Check1"
+         Height          =   255
+         Index           =   1
+         Left            =   1920
+         TabIndex        =   47
+         Top             =   3360
+         Visible         =   0   'False
+         Width           =   1215
+      End
+      Begin VB.CheckBox chkVarios 
+         Caption         =   "Salta pagina"
+         Height          =   255
+         Index           =   0
+         Left            =   480
+         TabIndex        =   46
+         Top             =   3360
+         Width           =   1215
+      End
+      Begin VB.TextBox txtCliente 
+         Height          =   285
+         Index           =   3
+         Left            =   1200
+         TabIndex        =   43
+         Text            =   "Text1"
+         Top             =   1680
+         Width           =   975
+      End
+      Begin VB.TextBox txtDescClie 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   3
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   53
+         Text            =   "Text1"
+         Top             =   1680
+         Width           =   3495
+      End
+      Begin VB.TextBox txtDescClie 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   2
+         Left            =   2280
+         Locked          =   -1  'True
+         TabIndex        =   50
+         Text            =   "Text1"
+         Top             =   1320
+         Width           =   3495
+      End
+      Begin VB.TextBox txtCliente 
+         Height          =   285
+         Index           =   2
+         Left            =   1200
+         TabIndex        =   42
+         Text            =   "Text1"
+         Top             =   1320
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "Cancelar"
+         Height          =   375
+         Index           =   1
+         Left            =   4680
+         TabIndex        =   49
+         Top             =   4200
+         Width           =   1095
+      End
+      Begin VB.Image imgVarios 
+         Height          =   240
+         Index           =   7
+         Left            =   960
+         Picture         =   "frmCRMVarios.frx":0FBD
+         Top             =   2760
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   9
+         Left            =   360
+         TabIndex        =   60
+         Top             =   2760
+         Width           =   465
+      End
+      Begin VB.Image imgVarios 
+         Height          =   240
+         Index           =   6
+         Left            =   960
+         Picture         =   "frmCRMVarios.frx":10BF
+         Top             =   2400
+         Width           =   240
+      End
+      Begin VB.Label lblDpto 
+         AutoSize        =   -1  'True
+         Caption         =   "Agente"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   6
+         Left            =   240
+         TabIndex        =   58
+         Top             =   2160
+         Width           =   615
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Desde"
+         Height          =   315
+         Index           =   8
+         Left            =   360
+         TabIndex        =   57
+         Top             =   2400
+         Width           =   465
+      End
+      Begin VB.Label lblIndicador 
+         Caption         =   "Label1"
+         Height          =   255
+         Index           =   0
+         Left            =   360
+         TabIndex        =   55
+         Top             =   3840
+         Width           =   5295
+      End
+      Begin VB.Image imgCliente 
+         Height          =   240
+         Index           =   3
+         Left            =   960
+         Picture         =   "frmCRMVarios.frx":11C1
+         Top             =   1680
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   7
+         Left            =   360
+         TabIndex        =   54
+         Top             =   1680
+         Width           =   465
+      End
+      Begin VB.Label lblDpto 
+         AutoSize        =   -1  'True
+         Caption         =   "Cliente"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   5
+         Left            =   240
+         TabIndex        =   52
+         Top             =   960
+         Width           =   585
+      End
+      Begin VB.Image imgCliente 
+         Height          =   240
+         Index           =   2
+         Left            =   960
+         Picture         =   "frmCRMVarios.frx":12C3
+         Top             =   1320
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   6
+         Left            =   360
+         TabIndex        =   51
+         Top             =   1320
+         Width           =   465
+      End
+      Begin VB.Label lblTitulo 
+         Alignment       =   2  'Center
+         Caption         =   "Impresión CRM resumida"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   13.5
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   375
+         Index           =   0
+         Left            =   1320
+         TabIndex        =   41
+         Top             =   360
+         Width           =   3735
+      End
+   End
 End
 Attribute VB_Name = "frmCRMVarios"
 Attribute VB_GlobalNameSpace = False
@@ -842,8 +1147,9 @@ Option Explicit
 
 
 Public Opcion As Byte
-    '   0.-  Generacion
-
+    '   0.- Generacion
+    '   1.- Resumen
+    '   2.- Acciones x cliente
 
 Private WithEvents frmCli As frmFacClientes
 Attribute frmCli.VB_VarHelpID = -1
@@ -859,7 +1165,7 @@ Attribute frmAcc.VB_VarHelpID = -1
 
 Dim IndiceImg As Integer
 Dim miSQL As String
-Dim Codigo As String
+Dim codigo As String
 
 
 Private Sub chkVarios_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -943,7 +1249,7 @@ Private Sub cmdResumen_Click()
         miSQL = "|" & vEmpresa.nomempre & "|" & miSQL
         
         
-        Codigo = "{tmpcommand.codusu} = " & vUsu.Codigo 'cadformula
+        codigo = "{tmpcommand.codusu} = " & vUsu.codigo 'cadformula
         
         LlamarImprimir "rCRMres.rpt", "CRM resumen"
         
@@ -961,7 +1267,7 @@ End Sub
 Private Sub LlamarImprimir(ByRef cadNomRPT As String, Titulo As String)
     
     With frmImprimir
-        .FormulaSeleccion = Codigo
+        .FormulaSeleccion = codigo
         .OtrosParametros = miSQL
         .NumeroParametros = NumRegElim
         
@@ -984,9 +1290,11 @@ Dim W As Integer
     Me.Icon = frmPpal.Icon
     FrameGenerar.visible = False
     Me.FrameCRMresumen.visible = False
+    FrameClientesxAccion.visible = False
     limpiar Me
     
-    If Opcion = 0 Then
+    Select Case Opcion
+    Case 0
         PonerFrameVisible FrameGenerar, H, W
         txtFecha(0).Text = Format(Now, "dd/mm/yyyy")
         
@@ -995,11 +1303,15 @@ Dim W As Integer
         Me.txtDescTra(0).Text = miSQL
         miSQL = ""
         
-    Else
+    Case 1
         'Opcion=1
         lblIndicador(0).Caption = ""
         PonerFrameVisible FrameCRMresumen, H, W
-    End If
+        
+    Case 2
+        PonerFrameVisible FrameClientesxAccion, H, W
+    
+    End Select
     
     Me.cmdCancelar(Opcion).Cancel = True
     Me.Height = H
@@ -1106,25 +1418,25 @@ Dim campo As String
         campo = "Cod.|sagent|codagent|N||20·"
         campo = campo & "Nombre|sagent|nomagent|T||40·"
         
-        Codigo = "Agente|sagent||"
+        codigo = "Agente|sagent||"
     Case 2, 3
         'ZONA
         campo = "Cod.|szonas|codzonas|N||20·"
         campo = campo & "Desc.|szonas|nomzonas|T||40·"
         
-        Codigo = "ZONAS|szonas||"
+        codigo = "ZONAS|szonas||"
     
     Case 4, 5
         'RUTA
         campo = "Cod.|srutas|codrutas|N||20·"
         campo = campo & "Desc.|srutas|nomrutas|T||40·"
         
-        Codigo = "Rutas|srutas||"
+        codigo = "Rutas|srutas||"
     End Select
     frmB.vCampos = campo
-    frmB.vTitulo = RecuperaValor(Codigo, 1)
-    frmB.vTabla = RecuperaValor(Codigo, 2)
-    frmB.vSQL = RecuperaValor(Codigo, 3)
+    frmB.vTitulo = RecuperaValor(codigo, 1)
+    frmB.vTabla = RecuperaValor(codigo, 2)
+    frmB.vSQL = RecuperaValor(codigo, 3)
     frmB.vCargaFrame = False
     frmB.vDevuelve = "0|1|"
     frmB.vselElem = 1
@@ -1289,19 +1601,19 @@ Private Sub txtTrab_LostFocus(Index As Integer)
 
 
     txtTrab(Index).Text = Trim(txtTrab(Index).Text)
-    Codigo = ""
+    codigo = ""
     miSQL = ""
 
     If txtTrab(Index).Text <> "" Then
         If IsNumeric(txtTrab(Index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", txtTrab(Index).Text, "N")
-            If Codigo = "" Then miSQL = "El código no pertence a ningun trabajador"
+            codigo = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", txtTrab(Index).Text, "N")
+            If codigo = "" Then miSQL = "El código no pertence a ningun trabajador"
         Else
             miSQL = "Campo numerico"
         End If
     End If
     
-    Me.txtDescTra(Index).Text = Codigo
+    Me.txtDescTra(Index).Text = codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
         If Index < 2 Then
@@ -1329,7 +1641,7 @@ Private Sub GenerarEntradaMasivaAccionesComerciales()
         'tipo, medio observaciones
         miSQL = miSQL & txtAccion(0).Text & "," & DBSet(miRsAux!medio, "T") & "," & DBSet(miRsAux!Observaciones, "T")
         miSQL = miSQL & " FROM sclien where codclien in (" & CadenaDesdeOtroForm & ")"
-        Ejecutar miSQL, False
+        ejecutar miSQL, False
     
     End If
     miRsAux.Close
@@ -1347,20 +1659,20 @@ End Sub
 '       Resmune con D/H cliente para
 '
 Private Function GenerarResumenCRM() As Boolean
-Dim Linea() As String
+Dim linea() As String
 Dim J As Integer
 Dim K As Integer
 Dim R As ADODB.Recordset
 Dim Aux2 As String
 Dim Importe As Currency
-Dim Cad As String
+Dim cad As String
 Dim Vec As Byte
 
     On Error GoTo eGenerarResumenCRM
 
     lblIndicador(0).Caption = "Preparando datos"
-    conn.Execute "DELETE FROM tmpcommand WHERE codusu =" & vUsu.Codigo
-    conn.Execute "DELETE FROM tmpinformes WHERE codusu =" & vUsu.Codigo
+    conn.Execute "DELETE FROM tmpcommand WHERE codusu =" & vUsu.codigo
+    conn.Execute "DELETE FROM tmpinformes WHERE codusu =" & vUsu.codigo
 
 
     'Los datos del cliente, de momento, estamos guardandolos en la tmp
@@ -1371,7 +1683,7 @@ Dim Vec As Byte
     'Metemos los clientes con sus datos basicos
     '                   cliente  nombre    tfno     Fpago    situacin  cta
     'tmpcommand(codusu,codprove,nomprove,nomfamia,nomartic,codartic,importel)
-    miSQL = "select " & vUsu.Codigo & ",codclien,nomclien,telclie1,"
+    miSQL = "select " & vUsu.codigo & ",codclien,nomclien,telclie1,"
     'miSQL = miSQL & " concat(right(concat(""0000"",sclien.codforpa),4),' ',nomforpa),"
     miSQL = miSQL & " nomforpa,"
     'miSQL = miSQL & " concat(right(concat(""000"",sclien.codsitua),3),' ',nomsitua),codmacta" ''
@@ -1389,24 +1701,24 @@ Dim Vec As Byte
   
 
 
-    Codigo = "Select codmacta from scobro group by 1"
-    miRsAux.Open Codigo, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Codigo = ""
+    codigo = "Select codmacta from scobro group by 1"
+    miRsAux.Open codigo, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    codigo = ""
     While Not miRsAux.EOF
-        Codigo = Codigo & ", '" & miRsAux!Codmacta & "'"
+        codigo = codigo & ", '" & miRsAux!Codmacta & "'"
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     
-    If Codigo = "" Then
+    If codigo = "" Then
         MsgBox "Ningun dato en tesoreria!!!!", vbExclamation
         Exit Function
     End If
     
-    Codigo = Mid(Codigo, 2)
-    Codigo = "(" & Codigo & ")"
+    codigo = Mid(codigo, 2)
+    codigo = "(" & codigo & ")"
     
-    miSQL = miSQL & " AND codmacta in " & Codigo
+    miSQL = miSQL & " AND codmacta in " & codigo
     
     
     miSQL = "insert into tmpcommand(codusu,codprove,nomprove,nomfamia,nomartic,codartic,importel,codfamia) " & miSQL
@@ -1416,7 +1728,7 @@ Dim Vec As Byte
     'Ahora recorremos
     'Para buscar los pendientes...
     
-    miSQL = "Select * from tmpcommand where codusu = " & vUsu.Codigo
+    miSQL = "Select * from tmpcommand where codusu = " & vUsu.codigo
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = 0
 
@@ -1431,7 +1743,7 @@ Dim Vec As Byte
         Vec = Vec + 1
         
         Set R = New ADODB.Recordset
-        Codigo = CStr(Int(DBLet(miRsAux!ImporteL, "N")))
+        codigo = CStr(Int(DBLet(miRsAux!ImporteL, "N")))
         
         
         'Para cada vencimiento indicaremos si ha sido reclamado (veces) y si esta en situacion juridica
@@ -1439,7 +1751,7 @@ Dim Vec As Byte
         
         'Empezamos
         'insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,`importe`,`observa`) values ( '1','0','0','','','',NULL,NULL)
-        miSQL = "SELECT scobro.* FROM scobro WHERE recedocu=0 AND codmacta = '" & Codigo & "'"
+        miSQL = "SELECT scobro.* FROM scobro WHERE recedocu=0 AND codmacta = '" & codigo & "'"
         miSQL = miSQL & " ORDER BY fecvenci desc"
         R.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         miSQL = ""
@@ -1450,10 +1762,10 @@ Dim Vec As Byte
             Importe = R!ImpVenci + DBLet(R!gastos, "N") - DBLet(R!impcobro, "N")
             If Importe <> 0 Then
                 J = J + 1
-                Codigo = DBLet(R!numSerie, "T") & Format(R!Codfaccl, "0000000")
+                codigo = DBLet(R!numSerie, "T") & Format(R!Codfaccl, "0000000")
                 miSQL = miSQL & DBLet(R!numSerie, "T") & Format(R!Codfaccl, "0000000") & "·" & R!FecVenci & "·" & CStr(Importe) & "·" & R!situacionjuri & "·|"
                 
-                Aux2 = Aux2 & Codigo & "|"
+                Aux2 = Aux2 & codigo & "|"
                 
                 
             End If
@@ -1466,41 +1778,41 @@ Dim Vec As Byte
         'ya tenemos el maximo de reclamaciones y/o cobro
         If J = 0 Then
             'No tiene ningun cobro pendiente
-            Aux2 = "DELETE FROM tmpcommand WHERE codusu = " & vUsu.Codigo & " AND codprove= " & miRsAux!CodProve
+            Aux2 = "DELETE FROM tmpcommand WHERE codusu = " & vUsu.codigo & " AND codprove= " & miRsAux!Codprove
             conn.Execute Aux2
         Else
             
 
             
             'Hay mas cobros que en situacion juridica (LO NORMAL)
-            ReDim Linea(J)
+            ReDim linea(J)
             
             'Las dos conjuntas
-            Codigo = ""
+            codigo = ""
             For K = 1 To J
                 'miSQL cobros
                 
-                Codigo = RecuperaValor(miSQL, K) & "|"
-                Linea(K) = Codigo
+                codigo = RecuperaValor(miSQL, K) & "|"
+                linea(K) = codigo
             Next K
             
             
             
             'Volvemos a popner copdmacta
-            Codigo = CStr(Int(DBLet(miRsAux!ImporteL, "N")))
+            codigo = CStr(Int(DBLet(miRsAux!ImporteL, "N")))
             
             'Hco reclamacioones
             'miSQL = "SELECT codigo,numserie,codfaccl,fecfaccl,fecreclama,impvenci,codmacta,observaciones from shcocob "
             miSQL = "SELECT numserie,codfaccl,count(*) from shcocob  WHERE "
-            miSQL = miSQL & " codmacta = '" & Codigo & "'  group by 1,2 order by 3"
+            miSQL = miSQL & " codmacta = '" & codigo & "'  group by 1,2 order by 3"
             R.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-            Codigo = ""
+            codigo = ""
             While Not R.EOF
                     
                     miSQL = "|" & DBLet(R!numSerie, "T") & Format(R!Codfaccl, "0000000") & "|"
                     If InStr(1, Aux2, miSQL) > 0 Then
                         'Este vto esta
-                        Codigo = Codigo & DBLet(R!numSerie, "T") & Format(DBLet(R!Codfaccl, "N"), "0000000") & "(" & R.Fields(2) & ")" & "|"
+                        codigo = codigo & DBLet(R!numSerie, "T") & Format(DBLet(R!Codfaccl, "N"), "0000000") & "(" & R.Fields(2) & ")" & "|"
                         
                     End If
                     
@@ -1511,9 +1823,9 @@ Dim Vec As Byte
             Wend
             R.Close
             
-            For K = 1 To UBound(Linea)
-                miSQL = Linea(K)
-                If Codigo = "" Then
+            For K = 1 To UBound(linea)
+                miSQL = linea(K)
+                If codigo = "" Then
                     'Ninugna reclamacion
                     Aux2 = "0"
                 Else
@@ -1522,10 +1834,10 @@ Dim Vec As Byte
                     Aux2 = Replace(miSQL, "·", "|")
                     Aux2 = RecuperaValor(Aux2, 1)
                     
-                    J = InStr(1, Codigo, Aux2)
+                    J = InStr(1, codigo, Aux2)
                     If J > 0 Then
                         'La ha encontrado
-                        Aux2 = Mid(Codigo, J + Len(Aux2))
+                        Aux2 = Mid(codigo, J + Len(Aux2))
                         Aux2 = RecuperaValor(Aux2, 1)
                         Aux2 = Replace(Aux2, "(", "")
                         Aux2 = Replace(Aux2, ")", "")
@@ -1536,17 +1848,17 @@ Dim Vec As Byte
                     
                 End If
                 
-                Linea(K) = miSQL & "|"
+                linea(K) = miSQL & "|"
             Next K
             'Acciones comerciales
             miSQL = "SELECT usuario,fechora,observaciones from scrmacciones "
-            miSQL = miSQL & " WHERE codclien = " & miRsAux!CodProve & " ORDER BY fechora desc"
+            miSQL = miSQL & " WHERE codclien = " & miRsAux!Codprove & " ORDER BY fechora desc"
             R.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             J = 0
             While Not R.EOF
                 J = J + 1
                 
-                If J > UBound(Linea) Then
+                If J > UBound(linea) Then
                    ' If J > 2 Then
                         'No vamos a insertar mas de dos acciones comerciales
                         MueveHastaElFinal R
@@ -1556,14 +1868,14 @@ Dim Vec As Byte
                    '     Lineas(J) = miSQL
                    ' End If
                 Else
-                    miSQL = Linea(J)
+                    miSQL = linea(J)
                 End If
                 If J > 0 Then
                     Aux2 = Format(R!fechora, "dd/mm/yyyy") & " " & R!Usuario & " .-" & DBLet(R!Observaciones, "T")
                     Aux2 = Mid(Aux2, 1, 255)
                     miSQL = miSQL & Aux2 & "|"
                         
-                    Linea(J) = miSQL
+                    linea(J) = miSQL
                     
                     R.MoveNext
                 End If
@@ -1578,29 +1890,29 @@ Dim Vec As Byte
             'tmpinformes(codusu,codigo1,campo1,nombre1,importe1,fecha1,nombre2,importe2,fecha2,nombre3,obser)
             miSQL = ""
             NumRegElim = 0
-            For J = 1 To UBound(Linea)
+            For J = 1 To UBound(linea)
                 NumRegElim = NumRegElim + 1
                 'Para cada linea
-                miSQL = miSQL & ", (" & vUsu.Codigo & "," & miRsAux!CodProve & "," & NumRegElim
+                miSQL = miSQL & ", (" & vUsu.codigo & "," & miRsAux!Codprove & "," & NumRegElim
                 'Cobro pdte
-                Aux2 = RecuperaValor(CStr(Linea(J)), 1)
+                Aux2 = RecuperaValor(CStr(linea(J)), 1)
                 If Aux2 <> "" Then
                     Aux2 = Replace(Aux2, "·", "|")
-                    Codigo = RecuperaValor(Aux2, 3)
-                    Importe = CCur(Codigo)
-                    Codigo = RecuperaValor(Aux2, 1) 'vto
-                    miSQL = miSQL & ",'" & Codigo & "'," & TransformaComasPuntos(CStr(Importe))
-                    Codigo = RecuperaValor(Aux2, 4) 'juridica
+                    codigo = RecuperaValor(Aux2, 3)
+                    Importe = CCur(codigo)
+                    codigo = RecuperaValor(Aux2, 1) 'vto
+                    miSQL = miSQL & ",'" & codigo & "'," & TransformaComasPuntos(CStr(Importe))
+                    codigo = RecuperaValor(Aux2, 4) 'juridica
                     Aux2 = RecuperaValor(Aux2, 2) 'vto
                                         'fecha                 juridica
-                    miSQL = miSQL & "," & DBSet(Aux2, "F") & "," & CStr(Val(Codigo))
+                    miSQL = miSQL & "," & DBSet(Aux2, "F") & "," & CStr(Val(codigo))
                     
                 Else
                     miSQL = miSQL & ",NULL,NULL,NULL,NULL"
                 End If
                 
                 'Recalma
-                Aux2 = RecuperaValor(CStr(Linea(J)), 2)
+                Aux2 = RecuperaValor(CStr(linea(J)), 2)
                 If Aux2 <> "" Then
                     
                     miSQL = miSQL & "," & DBSet(Aux2, "T")
@@ -1610,7 +1922,7 @@ Dim Vec As Byte
                 
                 
                 'HCO
-                Aux2 = RecuperaValor(CStr(Linea(J)), 3)
+                Aux2 = RecuperaValor(CStr(linea(J)), 3)
                 miSQL = miSQL & "," & DBSet(Aux2, "T") & ")"
             Next
             If miSQL <> "" Then
@@ -1631,8 +1943,8 @@ Dim Vec As Byte
     Me.lblIndicador(0).Refresh
     
     
-    Codigo = "Select codprove,codfamia from tmpcommand WHERE codusu = " & vUsu.Codigo & " ORDER BY 1,2"
-    miRsAux.Open Codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    codigo = "Select codprove,codfamia from tmpcommand WHERE codusu = " & vUsu.codigo & " ORDER BY 1,2"
+    miRsAux.Open codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     J = -1
     miSQL = ""
     While Not miRsAux.EOF
@@ -1643,10 +1955,10 @@ Dim Vec As Byte
             Me.lblIndicador(0).Caption = miSQL
             Me.lblIndicador(0).Refresh
         End If
-        Codigo = "UPDATE tmpinformes SET nombre2=" & DBSet(miSQL, "T")
-        Codigo = Codigo & " WHERE codusu = " & vUsu.Codigo
-        Codigo = Codigo & " AND codigo1 = " & miRsAux!CodProve
-        conn.Execute Codigo
+        codigo = "UPDATE tmpinformes SET nombre2=" & DBSet(miSQL, "T")
+        codigo = codigo & " WHERE codusu = " & vUsu.codigo
+        codigo = codigo & " AND codigo1 = " & miRsAux!Codprove
+        conn.Execute codigo
         
         miRsAux.MoveNext
     Wend
@@ -1658,15 +1970,15 @@ Dim Vec As Byte
     Me.lblIndicador(0).Refresh
     
     K = 0 'para saber si hay datos en tablas
-    Codigo = "select codigo1,max(campo1) cuantos,sum(importe1) suma from tmpinformes where codusu =" & vUsu.Codigo & " group by 1"
-    miRsAux.Open Codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    codigo = "select codigo1,max(campo1) cuantos,sum(importe1) suma from tmpinformes where codusu =" & vUsu.codigo & " group by 1"
+    miRsAux.Open codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         K = K + 1
         If miRsAux!Cuantos > 1 Then
-            Codigo = "UPDATE tmpinformes set nombre3='Total pdte: " & Format(miRsAux!Suma, FormatoImporte) & "'"
-            Codigo = Codigo & " WHERE codusu = " & vUsu.Codigo & " AND codigo1= " & miRsAux!Codigo1
-            Codigo = Codigo & " ANd campo1 = " & miRsAux!Cuantos
-            conn.Execute Codigo
+            codigo = "UPDATE tmpinformes set nombre3='Total pdte: " & Format(miRsAux!Suma, FormatoImporte) & "'"
+            codigo = codigo & " WHERE codusu = " & vUsu.codigo & " AND codigo1= " & miRsAux!Codigo1
+            codigo = codigo & " ANd campo1 = " & miRsAux!Cuantos
+            conn.Execute codigo
         End If
         miRsAux.MoveNext
     Wend
@@ -1684,8 +1996,8 @@ eGenerarResumenCRM:
 End Function
 
 
-Private Sub MueveHastaElFinal(ByRef RS As ADODB.Recordset)
-    While Not RS.EOF
-        RS.MoveNext
+Private Sub MueveHastaElFinal(ByRef Rs As ADODB.Recordset)
+    While Not Rs.EOF
+        Rs.MoveNext
     Wend
 End Sub

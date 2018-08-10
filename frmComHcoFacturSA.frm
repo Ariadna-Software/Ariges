@@ -268,63 +268,63 @@ Begin VB.Form frmComHcoFacturSA
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmComHcoFacturSA.frx":0B2C
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FrameEuler"
-      Tab(1).Control(1)=   "Text3(13)"
-      Tab(1).Control(2)=   "Text3(12)"
-      Tab(1).Control(3)=   "Text3(11)"
-      Tab(1).Control(4)=   "txtAux(9)"
-      Tab(1).Control(5)=   "txtAux(10)"
-      Tab(1).Control(6)=   "txtAux(11)"
-      Tab(1).Control(7)=   "txtDesc(9)"
-      Tab(1).Control(8)=   "txtDesc(10)"
-      Tab(1).Control(9)=   "txtDesc(11)"
-      Tab(1).Control(10)=   "txtAux2(8)"
-      Tab(1).Control(11)=   "Text2(17)"
-      Tab(1).Control(12)=   "Text2(16)"
-      Tab(1).Control(13)=   "Text3(10)"
-      Tab(1).Control(14)=   "Text2(2)"
-      Tab(1).Control(15)=   "Text3(9)"
-      Tab(1).Control(16)=   "chkDocArchi"
-      Tab(1).Control(17)=   "txtAux(8)"
-      Tab(1).Control(18)=   "txtAux3(1)"
-      Tab(1).Control(19)=   "txtAux3(0)"
-      Tab(1).Control(20)=   "txtAux(3)"
-      Tab(1).Control(21)=   "txtAux(2)"
-      Tab(1).Control(22)=   "txtAux(1)"
-      Tab(1).Control(23)=   "txtAux(0)"
-      Tab(1).Control(24)=   "Text3(3)"
-      Tab(1).Control(25)=   "Text3(2)"
-      Tab(1).Control(26)=   "Text2(0)"
-      Tab(1).Control(27)=   "Text3(0)"
+      Tab(1).Control(0)=   "imgBuscar(6)"
+      Tab(1).Control(1)=   "Label1(9)"
+      Tab(1).Control(2)=   "imgBuscar(5)"
+      Tab(1).Control(3)=   "Label1(21)"
+      Tab(1).Control(4)=   "Label1(6)"
+      Tab(1).Control(5)=   "Label1(18)"
+      Tab(1).Control(6)=   "Label1(8)"
+      Tab(1).Control(7)=   "Label1(13)"
+      Tab(1).Control(8)=   "imgBuscar(7)"
+      Tab(1).Control(9)=   "Label1(35)"
+      Tab(1).Control(10)=   "Label1(3)"
+      Tab(1).Control(11)=   "Label1(46)"
+      Tab(1).Control(12)=   "imgBuscar2(11)"
+      Tab(1).Control(13)=   "imgBuscar2(10)"
+      Tab(1).Control(14)=   "imgBuscar2(9)"
+      Tab(1).Control(15)=   "Label1(22)"
+      Tab(1).Control(16)=   "Label1(23)"
+      Tab(1).Control(17)=   "Label1(24)"
+      Tab(1).Control(18)=   "Label1(34)"
+      Tab(1).Control(19)=   "Label1(47)"
+      Tab(1).Control(20)=   "Label1(40)"
+      Tab(1).Control(21)=   "DataGrid2"
+      Tab(1).Control(22)=   "DataGrid1"
+      Tab(1).Control(23)=   "txtAux(7)"
+      Tab(1).Control(24)=   "txtAux(6)"
+      Tab(1).Control(25)=   "txtAux(5)"
+      Tab(1).Control(26)=   "txtAux(4)"
+      Tab(1).Control(27)=   "Text3(1)"
       Tab(1).Control(28)=   "Text2(1)"
-      Tab(1).Control(29)=   "Text3(1)"
-      Tab(1).Control(30)=   "txtAux(4)"
-      Tab(1).Control(31)=   "txtAux(5)"
-      Tab(1).Control(32)=   "txtAux(6)"
-      Tab(1).Control(33)=   "txtAux(7)"
-      Tab(1).Control(34)=   "DataGrid1"
-      Tab(1).Control(35)=   "DataGrid2"
-      Tab(1).Control(36)=   "Label1(40)"
-      Tab(1).Control(37)=   "Label1(47)"
-      Tab(1).Control(38)=   "Label1(34)"
-      Tab(1).Control(39)=   "Label1(24)"
-      Tab(1).Control(40)=   "Label1(23)"
-      Tab(1).Control(41)=   "Label1(22)"
-      Tab(1).Control(42)=   "imgBuscar2(9)"
-      Tab(1).Control(43)=   "imgBuscar2(10)"
-      Tab(1).Control(44)=   "imgBuscar2(11)"
-      Tab(1).Control(45)=   "Label1(46)"
-      Tab(1).Control(46)=   "Label1(3)"
-      Tab(1).Control(47)=   "Label1(35)"
-      Tab(1).Control(48)=   "imgBuscar(7)"
-      Tab(1).Control(49)=   "Label1(13)"
-      Tab(1).Control(50)=   "Label1(8)"
-      Tab(1).Control(51)=   "Label1(18)"
-      Tab(1).Control(52)=   "Label1(6)"
-      Tab(1).Control(53)=   "Label1(21)"
-      Tab(1).Control(54)=   "imgBuscar(5)"
-      Tab(1).Control(55)=   "Label1(9)"
-      Tab(1).Control(56)=   "imgBuscar(6)"
+      Tab(1).Control(29)=   "Text3(0)"
+      Tab(1).Control(30)=   "Text2(0)"
+      Tab(1).Control(31)=   "Text3(2)"
+      Tab(1).Control(32)=   "Text3(3)"
+      Tab(1).Control(33)=   "txtAux(0)"
+      Tab(1).Control(34)=   "txtAux(1)"
+      Tab(1).Control(35)=   "txtAux(2)"
+      Tab(1).Control(36)=   "txtAux(3)"
+      Tab(1).Control(37)=   "txtAux3(0)"
+      Tab(1).Control(38)=   "txtAux3(1)"
+      Tab(1).Control(39)=   "txtAux(8)"
+      Tab(1).Control(40)=   "chkDocArchi"
+      Tab(1).Control(41)=   "Text3(9)"
+      Tab(1).Control(42)=   "Text2(2)"
+      Tab(1).Control(43)=   "Text3(10)"
+      Tab(1).Control(44)=   "Text2(16)"
+      Tab(1).Control(45)=   "Text2(17)"
+      Tab(1).Control(46)=   "txtAux2(8)"
+      Tab(1).Control(47)=   "txtDesc(11)"
+      Tab(1).Control(48)=   "txtDesc(10)"
+      Tab(1).Control(49)=   "txtDesc(9)"
+      Tab(1).Control(50)=   "txtAux(11)"
+      Tab(1).Control(51)=   "txtAux(10)"
+      Tab(1).Control(52)=   "txtAux(9)"
+      Tab(1).Control(53)=   "Text3(11)"
+      Tab(1).Control(54)=   "Text3(12)"
+      Tab(1).Control(55)=   "Text3(13)"
+      Tab(1).Control(56)=   "FrameEuler"
       Tab(1).ControlCount=   57
       Begin VB.Frame FrameEuler 
          Height          =   1695
@@ -2533,7 +2533,7 @@ On Error GoTo EModificarLinea
     End If
     
     vWhere = ObtenerWhereCP(False)
-    vWhere = vWhere & " AND numalbar='" & Data3.Recordset.Fields!NumAlbar & "'"
+    vWhere = vWhere & " AND numalbar='" & Data3.Recordset.Fields!NUmAlbar & "'"
     vWhere = vWhere & " and numlinea=" & Data2.Recordset!numlinea
     If Not BloqueaRegistro(NomTablaLineas, vWhere) Then
         TerminaBloquear
@@ -2604,7 +2604,7 @@ Private Sub BotonEliminar()
 'Eliminar Registro de la Cabecera: Tabla de Facturas (scafac)
 ' y los registros correspondientes de las tablas cab. albaranes (scafac1)
 ' y las lineas de la factura (slifac)
-Dim Cad As String
+Dim cad As String
 'Dim NumPedElim As Long
 On Error GoTo EEliminar
 
@@ -2614,17 +2614,17 @@ On Error GoTo EEliminar
     'solo se puede modificar la factura si no esta contabilizada
     If FactContabilizada Then Exit Sub
     
-    Cad = "Cabecera de Facturas." & vbCrLf
-    Cad = Cad & "-----------------------------------" & vbCrLf & vbCrLf
-    Cad = Cad & "Va a eliminar la Factura:            "
-    Cad = Cad & vbCrLf & "Proveedor:  " & Text1(2).Text & " - " & Text1(3).Text
-    Cad = Cad & vbCrLf & "Nº Fact.:  " & Text1(0).Text
-    Cad = Cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
+    cad = "Cabecera de Facturas." & vbCrLf
+    cad = cad & "-----------------------------------" & vbCrLf & vbCrLf
+    cad = cad & "Va a eliminar la Factura:            "
+    cad = cad & vbCrLf & "Proveedor:  " & Text1(2).Text & " - " & Text1(3).Text
+    cad = cad & vbCrLf & "Nº Fact.:  " & Text1(0).Text
+    cad = cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
 
-    Cad = Cad & vbCrLf & vbCrLf & " ¿Desea Eliminarla? "
+    cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarla? "
     
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
@@ -2698,7 +2698,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
-Dim Cad As String
+Dim cad As String
 
     'Quitar lineas y volver a la cabecera
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
@@ -2711,9 +2711,9 @@ Dim Cad As String
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
-        Cad = Data1.Recordset.Fields(0) & "|"
-        Cad = Cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(Cad)
+        cad = Data1.Recordset.Fields(0) & "|"
+        cad = cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(cad)
         Unload Me
     End If
 End Sub
@@ -2769,7 +2769,7 @@ Dim I As Byte
     If Not Data3.Recordset.EOF Then
         Text3(0).Text = DBLet(Data3.Recordset.Fields!codtrab2, "T")
         Text3_LostFocus (0)
-        Text3(1).Text = DBLet(Data3.Recordset.Fields!codtrab1, "T")
+        Text3(1).Text = DBLet(Data3.Recordset.Fields!CodTrab1, "T")
         Text3_LostFocus (1)
 
         Text3(2).Text = DBLet(Data3.Recordset.Fields!numpedpr, "N")
@@ -3427,27 +3427,27 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim tabla As String
 Dim Titulo As String
 Dim devuelve As String
     
     'Llamamos a al form
     '##A mano
-    Cad = ""
+    cad = ""
 '        cad = cad & ParaGrid(Text1(1), 10, "Tipo Fac.")
-        Cad = Cad & ParaGrid(Text1(0), 18, "Nº Factura")
-        Cad = Cad & ParaGrid(Text1(1), 15, "Fecha Fac.")
-        Cad = Cad & ParaGrid(Text1(2), 12, "Prov.")
-        Cad = Cad & ParaGrid(Text1(3), 55, "Nombre Prov")
+        cad = cad & ParaGrid(Text1(0), 18, "Nº Factura")
+        cad = cad & ParaGrid(Text1(1), 15, "Fecha Fac.")
+        cad = cad & ParaGrid(Text1(2), 12, "Prov.")
+        cad = cad & ParaGrid(Text1(3), 55, "Nombre Prov")
         tabla = NombreTabla & " LEFT OUTER JOIN scafpa ON " & NombreTabla & ".codprove=scafpa.codprove AND " & NombreTabla & ".numfactu=scafpa.numfactu AND " & NombreTabla & ".fecfactu=scafpa.fecfactu "
         Titulo = "Facturas"
         devuelve = "0|1|2|"
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
@@ -3953,7 +3953,7 @@ Dim b As Boolean
     If Data2.Recordset.EOF Then Exit Function
     
     vWhere = ObtenerWhereCP(True)
-    vWhere = vWhere & " AND numalbar='" & Data3.Recordset.Fields!NumAlbar & "'"
+    vWhere = vWhere & " AND numalbar='" & Data3.Recordset.Fields!NUmAlbar & "'"
     vWhere = vWhere & " AND numlinea=" & Data2.Recordset.Fields!numlinea
     
     If DatosOkLinea() Then
@@ -4110,7 +4110,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo
 End Sub
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
@@ -4181,7 +4181,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
 End Sub
 
 
-Private Sub BotonMtoLineas(numTab As Integer, Cad As String)
+Private Sub BotonMtoLineas(numTab As Integer, cad As String)
     Me.SSTab1.Tab = numTab
     
     If Me.DataGrid1.visible Then 'Lineas de Albaranes
@@ -4189,7 +4189,7 @@ Private Sub BotonMtoLineas(numTab As Integer, Cad As String)
             MsgBox "La factura no tiene lineas.", vbInformation
             Exit Sub
         End If
-        TituloLinea = Cad
+        TituloLinea = cad
         
         ModificaLineas = 0
         PonerModo 5
@@ -4215,7 +4215,7 @@ Dim b As Boolean
         'Eliminar en la tabla pagos de la Contabilidad: spagop
         '------------------------------------------------
         Cta = DevuelveDesdeBDNew(conAri, "sprove", "codmacta", "codprove", Text1(2).Text, "N")
-        SQL = " ctaprove='" & Cta & "' AND numfactu='" & Data1.Recordset.Fields!NumFactu & "'"
+        SQL = " ctaprove='" & Cta & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
         SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
         ConnConta.Execute "Delete from spagop WHERE " & SQL
         b = True
@@ -4334,7 +4334,7 @@ Dim SQL As String
     If enlaza Then
         SQL = SQL & " " & ObtenerWhereCP(True)
         'lineas factura proveedor
-        If Opcion = 1 Then SQL = SQL & " AND numalbar=" & DBSet(Data3.Recordset.Fields!NumAlbar, "T")
+        If Opcion = 1 Then SQL = SQL & " AND numalbar=" & DBSet(Data3.Recordset.Fields!NUmAlbar, "T")
     Else
         SQL = SQL & " WHERE numfactu = -1"
     End If
@@ -4506,7 +4506,7 @@ On Error GoTo EModificaAlb
     SQL = SQL & ObtenerWhereCP(True)
     'Antes oct 2011
     'SQL = SQL & " AND numalbar=" & Data3.Recordset.Fields!NumAlbar
-    SQL = SQL & " AND numalbar=" & DBSet(Data3.Recordset.Fields!NumAlbar, "T")
+    SQL = SQL & " AND numalbar=" & DBSet(Data3.Recordset.Fields!NUmAlbar, "T")
     conn.Execute SQL
     ModificaAlbxFac = True
     
@@ -4522,6 +4522,8 @@ Dim bol As Boolean
 Dim MenError As String
 Dim SQL As String
 Dim vFactu As CFacturaCom
+Dim TocarEnTesoreria As Boolean
+Dim Impag As String
 On Error GoTo EModFact
 
     bol = False
@@ -4564,13 +4566,56 @@ On Error GoTo EModFact
                 
                 If bol Then
                     'Eliminar de la spagop
-                    SQL = " ctaprove='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!NumFactu & "'"
-                    SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
-                    ConnConta.Execute "Delete from spagop WHERE " & SQL
+                    TocarEnTesoreria = False
+                    If vParamAplic.ContabilidadNueva Then
+                        'Si no esta el pago, o ya esta pagado, NO tocamos nada de la tesoreria
+                        If Modo = 5 Then
+                            'NO TOCAREMOS EL VTO, estamos asignadndo albaranes en las linea
+                            SQL = ""
+                        Else
+                            SQL = " codmacta='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
+                            SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
+                            SQL = DevuelveDesdeBD(conConta, "concat(impefect-coalesce(imppagad,0),'|',coalesce(imppagad,0),'|')", "pagos", SQL & " AND 1", "1")
+                            Impag = RecuperaValor(SQL, 2)
+                            SQL = RecuperaValor(SQL, 1)
+                        End If
+                        If SQL <> "" Then
+                            If Impag = "" Then Impag = "0.00"
+                           
+                            
+                            If vFactu.TotalFac <> CCur(SQL) Then
+                                If Impag <> "0.00" Then
+                                   ' MsgBox "Revise pago en tesoreria. Tiene pago realizado", vbExclamation
+                                Else
+                                    TocarEnTesoreria = True
+                                End If
+                                
+                            Else
+                                'Mismo importe.
+                                If Impag <> "0.00" Then
+                                    MsgBox "Revise pago en tesoreria. Tiene pago realizado", vbExclamation
+                                Else
+                                    TocarEnTesoreria = True
+                                End If
+                            End If
+                        End If
+                        SQL = " codmacta='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
+                        SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
+                        SQL = "Delete from pagos WHERE " & SQL
+                    Else
+                        TocarEnTesoreria = True
+                        SQL = " ctaprove='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
+                        SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
+                        SQL = "Delete from spagop WHERE " & SQL
+                    End If
+                    
                     
                     'Volvemos a grabar en TESORERIA. Tabla de Contabilidad: sconta.spagop
-                    If bol Then
-                        bol = vFactu.InsertarEnTesoreria(MenError)
+                    If TocarEnTesoreria Then
+                        ConnConta.Execute SQL
+                        If bol Then
+                            bol = vFactu.InsertarEnTesoreria(MenError)
+                        End If
                     End If
                 End If
                 Set vFactu = Nothing
@@ -4605,9 +4650,16 @@ On Error GoTo EContab
     'comprabar que se puede modificar/eliminar la factura
     If Me.Check1.Value = 1 Then 'si esta contabilizada
         'comprobar en la contabilidad si esta contabilizada
+        
+
         Cta = DevuelveDesdeBDNew(conAri, "sprove", "codmacta", "codprove", Text1(2).Text, "N")
+ 
         If Cta <> "" Then
-            numasien = DevuelveDesdeBDNew(conConta, "cabfactprov", "numasien", "codmacta", Cta, "T", , "numfacpr", Text1(0).Text, "T", "fecfacpr", Text1(1).Text, "F")
+            If vParamAplic.ContabilidadNueva Then
+                numasien = "NO"
+            Else
+                numasien = DevuelveDesdeBDNew(conConta, "cabfactprov", "numasien", "codmacta", Cta, "T", , "numfacpr", Text1(0).Text, "T", "fecfacpr", Text1(1).Text, "F")
+            End If
             If numasien <> "" Then
                 FactContabilizada = True
                 MsgBox "La factura esta contabilizada y no se puede modificar ni eliminar.", vbInformation
@@ -4695,25 +4747,25 @@ Private Function ObtenerSelFactura() As String
 'Cuando venimos desde dobleClick en Movimientos de Articulos para Albaranes ya
 'Facturados, abrimos este form pero cargando los datos de la factura
 'correspendiente al albaran que se selecciono
-Dim Cad As String
+Dim cad As String
 Dim Rs As ADODB.Recordset
 On Error Resume Next
 
-    Cad = "SELECT codprove,numfactu,fecfactu FROM scafpa "
-    Cad = Cad & " WHERE codprove=" & DBSet(hcoCodProve, "N") & " AND numalbar=" & DBSet(hcoCodMovim, "T")
-    Cad = Cad & " AND fechaalb=" & DBSet(hcoFechaMovim, "F")
+    cad = "SELECT codprove,numfactu,fecfactu FROM scafpa "
+    cad = cad & " WHERE codprove=" & DBSet(hcoCodProve, "N") & " AND numalbar=" & DBSet(hcoCodMovim, "T")
+    cad = cad & " AND fechaalb=" & DBSet(hcoFechaMovim, "F")
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then 'where para la factura
-        Cad = " WHERE codprove=" & Rs!Codprove & " AND numfactu= '" & Rs!NumFactu & "' AND fecfactu=" & DBSet(Rs!FecFactu, "F")
+        cad = " WHERE codprove=" & Rs!Codprove & " AND numfactu= '" & Rs!Numfactu & "' AND fecfactu=" & DBSet(Rs!FecFactu, "F")
     Else
-        Cad = " where numfactu=-1"
+        cad = " where numfactu=-1"
     End If
     Rs.Close
     Set Rs = Nothing
 
-    ObtenerSelFactura = Cad
+    ObtenerSelFactura = cad
 End Function
 
 
@@ -5000,29 +5052,29 @@ End Sub
 
 
 Private Sub PonerDatosAlbaranFacturaEuler()
-Dim Cad As String
+Dim cad As String
 
     txtDesc(0).Text = ""
     If txtAux(12).Text <> "" And Me.txtAux(13).Text <> "" And Me.txtAux(14).Text <> "" Then
         'Buscamos en albaranes
-        Cad = "codtipom=" & DBSet(txtAux(12).Text, "T") & " AND fechaalb =" & DBSet(txtAux(14).Text, "F")
-        Cad = Cad & " AND numalbar"
-        Cad = DevuelveDesdeBD(conAri, "concat(codclien,' ',nomclien)", "scaalb", Cad, txtAux(13).Text)
+        cad = "codtipom=" & DBSet(txtAux(12).Text, "T") & " AND fechaalb =" & DBSet(txtAux(14).Text, "F")
+        cad = cad & " AND numalbar"
+        cad = DevuelveDesdeBD(conAri, "concat(codclien,' ',nomclien)", "scaalb", cad, txtAux(13).Text)
         
-        If Cad = "" Then
-            Cad = "scafac.codtipom=scafac1.codtipom and scafac.numfactu=scafac1.numfactu and "
-            Cad = Cad & " scafac.fecfactu=scafac1.fecfactu AND scafac1.codtipoa=" & DBSet(txtAux(12).Text, "T")
-            Cad = Cad & " AND fechaalb =" & DBSet(txtAux(14).Text, "F") & " AND numalbar"
-            Cad = DevuelveDesdeBD(conAri, "concat(scafac.codtipom,right(concat('00000',scafac.numfactu),10),' de ',DATE_FORMAT(scafac.fecfactu, '%d/%m/%Y'),'|',codclien,' ',nomclien,'|')", "scafac,scafac1", Cad, txtAux(13).Text)
-            If Cad = "" Then
-                Cad = "NO EXISTE"
+        If cad = "" Then
+            cad = "scafac.codtipom=scafac1.codtipom and scafac.numfactu=scafac1.numfactu and "
+            cad = cad & " scafac.fecfactu=scafac1.fecfactu AND scafac1.codtipoa=" & DBSet(txtAux(12).Text, "T")
+            cad = cad & " AND fechaalb =" & DBSet(txtAux(14).Text, "F") & " AND numalbar"
+            cad = DevuelveDesdeBD(conAri, "concat(scafac.codtipom,right(concat('00000',scafac.numfactu),10),' de ',DATE_FORMAT(scafac.fecfactu, '%d/%m/%Y'),'|',codclien,' ',nomclien,'|')", "scafac,scafac1", cad, txtAux(13).Text)
+            If cad = "" Then
+                cad = "NO EXISTE"
             Else
-               Cad = "ALBARAN FACTURADO.     Fra:" & RecuperaValor(Cad, 1) & vbCrLf & RecuperaValor(Cad, 2)
+               cad = "ALBARAN FACTURADO.     Fra:" & RecuperaValor(cad, 1) & vbCrLf & RecuperaValor(cad, 2)
             End If
         Else
-            Cad = "ALBARAN: " & Cad
+            cad = "ALBARAN: " & cad
         End If
-        txtDesc(0).Text = Cad
+        txtDesc(0).Text = cad
     End If
         
 End Sub

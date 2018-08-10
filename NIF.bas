@@ -55,9 +55,9 @@ Public Function Comprobar_NIF(NIF As String) As Boolean
 
                 '-- Acaba en letra
 
-                If InStr(1, "ABCDEFGHPQSN", Mid(NIF, 1, 1)) <> 0 Then
+                If InStr(1, "ABCDEFGHPQRSN", Mid(NIF, 1, 1)) <> 0 Then
 
-                    '-- Es una sociedad
+                    '-- Es una sociedad , congregacion religiosa(R)....
 
                     Comprobar_NIF = Comprobar_NIF_Sociedad(NIF)
 

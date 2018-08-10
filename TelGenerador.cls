@@ -72,8 +72,12 @@ End Property
 
 Public Function cargarBaseDatosMOVISTAR(mfichero As String, ByRef LB As Label) As Boolean
     Dim NF As Integer ' soporta el identificador para apertura de fichero
-    Dim Leido As String ' registro leido del fichero
+    Dim leido As String ' registro leido del fichero
     Dim i As Integer ' un contadoir de registros
+    
+    
+    
+    
     '-- En función de los datos contenidos en el fichero de
     '   carga de telefonía actualiza la base de datos correspondiente
     '-- 1º comprobamos que existe el fichero a importar
@@ -87,40 +91,42 @@ Public Function cargarBaseDatosMOVISTAR(mfichero As String, ByRef LB As Label) A
     '- Borramos registros del mismo fichero si los hubiese
     borraDatos mFicheroCorto
     
-
+    cargarBaseDatosMOVISTAR = True
     
     '-- El fichero por lo menos existe y grabamos sus datos
     cargaDatosPrincipales mFicheroCorto
+    leido = ""
     Do While Not EOF(NF)
-        Line Input #NF, Leido
+        Line Input #NF, leido
         i = i + 1
         LB.Caption = "Registro " & CStr(i)
         LB.Refresh
         If (i Mod 5) = 0 Then DoEvents
         
         '-- hacemos lo que tengamos que hacer con el registro
-        Select Case Left(Leido, 3)
+        Select Case Left(leido, 3)
             Case "010" ' cabecera soporte
-                cargaRegistro010 Leido
+                cargaRegistro010 leido
             Case "100" ' general factura
-                cargaRegistro100 Leido
+                cargaRegistro100 leido
             Case "300" ' general telefono
-                cargaRegistro300 Leido
+                cargaRegistro300 leido
             Case "310" ' cuotas teléfono
-                cargaRegistro310 Leido
+                cargaRegistro310 leido
             Case "320" ' resumen llamadas
-                cargaRegistro320 Leido
+                cargaRegistro320 leido
             Case "330" ' detalle llamadas
-                cargaRegistro330 Leido
+                cargaRegistro330 leido
             Case "340" ' varios teléfono
-                cargaRegistro340 Leido
+                cargaRegistro340 leido
             Case "850" ' descuentos fectura
-                cargaRegistro850 Leido
+                cargaRegistro850 leido
             Case "990" ' totales soporte
-                cargaRegistro990 Leido
+                cargaRegistro990 leido
             Case Else ' desconocido
                 '-- Registro no contemplado
-                MsgBox "El registro TIPO: " & Left(Leido, 3) & " no está contemplado en la aplicación.", vbCritical
+                MsgBox "El registro TIPO: " & Left(leido, 3) & " no está contemplado en la aplicación.", vbCritical
+                cargarBaseDatosMOVISTAR = False
         End Select
     Loop
     Close #NF
@@ -683,6 +689,10 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
     Dim vC As CTiposMov
     Dim vI As CTiposMov
     
+    
+    
+    
+    
     Dim Nombre As String
     Dim Apell1 As String
     Dim Apell2 As String
@@ -691,6 +701,9 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
     Dim mSerie As String
     
     Dim mValorIva As Currency
+    
+        
+    
     
     
     Dim iNSERTS As String
@@ -2157,7 +2170,7 @@ End Function
 
 'TipoFicheroOperador
 '   1. MOV    2.  ORAN  ....
-Public Function AjusteCuotasNuevas2(TipoFicheroOperador As Byte, mfichero As String, ByRef L As Label)
+Public Function AjusteCuotasNuevas2(TipoFicheroOperador As Byte, mfichero As String, ByRef L As Label) As Boolean
 Dim vSQL As String
 Dim cad As String
 Dim Origen As String
@@ -2166,11 +2179,11 @@ Dim i As Integer
 Dim Importe2 As Currency
 Dim Importe3 As Currency
 
+    AjusteCuotasNuevas2 = False
+
     L.Caption = "Ajuste quotas"
     L.Refresh
     
-   
-
     'Valores por defecto. Para poder ordenar debe ser numerico el campo del where
     If TipoFicheroOperador = 2 Then mfichero = mFicheroCorto
     
@@ -2231,6 +2244,7 @@ Dim Importe3 As Currency
     If cad <> "" Then
         MsgBox "FALTA acciones 2. Cuota mes entera. No deberia haber ocurrido.", vbCritical
         MsgBox "Avise a Ariadna !!!!!!", vbCritical
+        Exit Function
     End If
     
     
@@ -2314,7 +2328,7 @@ Dim Importe3 As Currency
         cad = cad & " select " & vSQL & ",Codigo_de_cuota,Descripcion_de_cuota,0,0,sum(importe)/count(*) from telefono.cuotas "
         cad = cad & " where Fichero =" & DBSet(mfichero, "T") & " group by Codigo_de_cuota"
         conn.Execute cad
-        
+                    
     End If
     
 
@@ -2350,7 +2364,7 @@ Dim Importe3 As Currency
 
 
     DoEvents
-    L.Caption = "Telefonos sin consumo / inactivos / err. operadora"
+    L.Caption = "Telefonos sin consumo / inactivos / err. operadora / Plazos"
     L.Refresh
 
 
@@ -2366,6 +2380,8 @@ Dim Importe3 As Currency
             " where Fichero = " & mdbFac2.texto(mfichero) & " order by Numero_de_telefono"
     cad = "INSERT INTO tmpnseries(codusu,codartic,numlinea) " & cad
     conn.Execute cad
+    
+    
     Espera 0.25
     
     'INACTIVOS. Pondremos numlinea =2
@@ -2404,17 +2420,41 @@ Dim Importe3 As Currency
     vSQL = cad & vSQL & ")"
     conn.Execute vSQL
     
-
     
     
-    'SI hay telefonos, los muestro por si quiere eliminarlos para no facturarlos
-    
+    i = 0
     vSQL = DevuelveDesdeBD(conAri, "count(*)", "tmpnseries", "codusu", CStr(vUsu.codigo))
-    If Val(vSQL) > 0 Then
+    If Val(vSQL) > 0 Then i = 1
+    
+    If vParamAplic.TelefoniaVtaPlazos Then
+        vSQL = "operador = " & TipoFicheroOperador & " and ArtPlazos<>'' and PlazosMeses >0 AND 1"
+        vSQL = DevuelveDesdeBD(conAri, "count(*)", "sclientfno", vSQL, "1")
+        If Val(vSQL) > 0 Then i = i + 2
+    End If
+
+    'SI hay telefonos, los muestro por si quiere eliminarlos para no facturarlos
+    'Si hay plazos tambien mostraremos el form
+    '  i>0
+    
+    If i > 0 Then
+            'Para ver que mostramos en la siguiente pantalla
+            vSQL = IIf(i = 1, 0, 1)    'el 1 significa que veremos el lw de vta plazos
+            'CadenaDesdeOtroForm   1 Si muestra o no lw plazos      2 Operador   3 Nomfichero
+            CadenaDesdeOtroForm = vSQL & "|" & TipoFicheroOperador & "|" & mfichero & "|"
+                
             'Lanzamos el visor donde sal
             frmVarios3.Opcion = 3
             frmVarios3.Show vbModal
     
+            
+            If CadenaDesdeOtroForm = "" Then
+                'MAL, ha cancelado
+                L.Caption = ""
+                L.Refresh
+
+                Exit Function
+            End If
+            
             cad = "Select * from tmpnseries WHERE codusu = " & vUsu.codigo
             Rc.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             cad = ""
@@ -2478,7 +2518,7 @@ Dim Importe3 As Currency
 
 
 
-
+    AjusteCuotasNuevas2 = True
 
 
 End Function
@@ -2688,6 +2728,10 @@ Dim IdLinDetalle As Long
     mfichero2 = ""
     
     'Cargamos datos del
+    If Not LB Is Nothing Then
+        LB.Caption = "Eliminado datos anteriores"
+        LB.Refresh
+    End If
     borraDatos mFicheroCorto
 
     
@@ -2699,6 +2743,7 @@ Dim IdLinDetalle As Long
     'Se trata de poder dividir las secciones del fichero y ver si las
     'estamos tratando todas.
     'Es dceir, puede que la seccion la reconozcamos, pero no hagamos nada con ella
+    
     
     
         
@@ -2744,7 +2789,7 @@ Dim IdLinDetalle As Long
                         'NADA
                     Else
                         If Tipo > 1 And Tipo < 10 Then  '2 al 9 detalles de llamada
-                            InsertarTramoDetalleLlamdas IdLinDetalle, Tipo, Tramo
+                            InsertarTramoDetalleLlamdas IdLinDetalle, Tipo, Tramo, LB
                         Else
                             OrangeInsertBdTelefono Tipo, Tramo
                         End If
@@ -3050,7 +3095,7 @@ Dim linea As String
                         'NO INSERTAMOS LA CUOTA MINIMA
                         'conn.Execute Aux
                     End If
-                End If
+                    End If
             End If
         Wend
         'INSERT COMUN
@@ -3068,7 +3113,7 @@ End Sub
 
 
 
-Private Sub InsertarTramoDetalleLlamdas(ByRef IDLinea As Long, Tipo As Byte, Tramo As String)
+Private Sub InsertarTramoDetalleLlamdas(ByRef IDLinea As Long, Tipo As Byte, Tramo As String, ByRef LB2 As Label)
 Dim H As Long
 Dim linea As String
 Dim Aux As String
@@ -3079,12 +3124,17 @@ Dim Libre As String
 Dim Valor As Currency
 Dim Valor2 As Currency
     
-    
+Dim LenFich As Long
+Dim LlevoF As Long
+
     On Error GoTo eInsertarTramoDetalleLlamdas
     
     '-->Fecha mmdd   hora hhmm
     'Fichero,id,Numero_de_telefono,Codigo_de_trafico,Tipo_de_trafico,Numero_llamado,Fecha,Hora_inicio,Unidad_de_medida,  Cantidad_medida_originada Importe
     'quito las dos primeras lineas que son expliativas
+    
+    LenFich = Len(Tramo)
+    LB2.Tag = LB2.Caption
     
     H = InStr(1, Tramo, vbLf)
     H = InStr(H + 1, Tramo, vbLf)
@@ -3093,15 +3143,27 @@ Dim Valor2 As Currency
     Else
         Tramo = Mid(Tramo, H + 1)
     End If
+    
+        
     CadenaInsert = ""
     While Tramo <> ""
         H = InStr(1, Tramo, vbLf)
+        If H = 0 Then
+            'JUnio 18
+            'Antes no iba fino si solo habia una linea
+            Tramo = Tramo & vbLf
+            H = InStr(1, Tramo, vbLf)
+        End If
         If H = 0 Then
             Tramo = ""
             linea = ""
         Else
             linea = Mid(Tramo, 1, H - 1)
             Tramo = Mid(Tramo, H + 1)
+            
+            LlevoF = LlevoF + Len(linea)
+            LB2.Caption = LB2.Tag & "     " & LlevoF & " / " & LenFich
+            LB2.Refresh
         End If
         If linea <> "" Then
             If InStr(1, linea, "|") > 0 Then
@@ -3244,6 +3306,8 @@ Dim Valor2 As Currency
             End If
         End If
     Wend
+    LB2.Caption = LB2.Tag & " FIN"
+    LB2.Refresh
     
     If Len(CadenaInsert) > 0 Then
         
@@ -3375,7 +3439,7 @@ End Function
 '***********************************************************************************
 Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) As Boolean
 
-    Dim Leido As String ' registro leido del fichero
+    Dim leido As String ' registro leido del fichero
     Dim i As Long ' un contadoir de registros
     Dim GuardarNombreFichero As String
     Dim tabla As String
@@ -3413,7 +3477,7 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
     CadenaInsert = ""
     
     Do While Not EOF(NF)
-        Line Input #NF, Leido
+        Line Input #NF, leido
         i = i + 1
         
         
@@ -3423,9 +3487,9 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
         If (i Mod 40) = 0 Then DoEvents
         
         '-- hacemos lo que tengamos que hacer con el registro
-        If Leido <> "" Then
+        If leido <> "" Then
             
-            Valores = Split(Leido, Chr(9))
+            Valores = Split(leido, Chr(9))
                        
                        
                        
@@ -3436,7 +3500,7 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
                        
                        
                        
-            Select Case Left(Leido, 8)
+            Select Case Left(leido, 8)
                 Case "FACT_DAT":
                         ProcesaFacCab
                         tabla = "Fac_Cab(ciclo,Fac_No,Cuenta_No,Fecha_Emision,Titular,Nif_Cif,Lugar_Emision,Fecha_Inicio ,Fecha_Fin ,No_Lineas )"
@@ -3542,12 +3606,12 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
                 'Seran igual que el fichero DNTV_CAB
                 Case "DNAD_DAT"
                     ProcesarDntvCab
-                     tabla = "Dntv_Cab(ciclo,Fact_No,Telef_Ext ,Fecha_Hora ,No_Recep ,Tipo ,Destino ,Duracion ,Durac_Ses "
+                    tabla = "Dntv_Cab(ciclo,Fact_No,Telef_Ext ,Fecha_Hora ,No_Recep ,Tipo ,Destino ,Duracion ,Durac_Ses "
                     tabla = tabla & ",Volumen,Pasos ,Tipo_Fact ,Tarifa,Descripcion ,Canal ,Ext_Origen ,Importe ,Importe_Neto) "
                 Case Else ' desconocido
                     '-- Registro no contemplado
                     '
-                    If Mid(Leido, 6, 3) = "CAB" Then
+                    If Mid(leido, 6, 3) = "CAB" Then
                         'Son las cabeceras
                         '
                          
@@ -3560,7 +3624,7 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
                          CadenaInsert = ""
                          
                     Else
-                        MsgBox "El registro TIPO: " & Left(Leido, 3) & " no está contemplado en la aplicación.", vbCritical
+                        MsgBox "El registro TIPO: " & Left(leido, 3) & " no está contemplado en la aplicación.", vbCritical
                     End If
                     
                     mFicheroCorto = ""
@@ -3623,14 +3687,14 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
             'ACtualiza N tablas
             tabla = "dcfd_cab|dcfm_cab|dcft_cab|dcfv_cab|ddnl_cab|dcul_cab|dntv_cab|dntd_cab|"
             For NF = 1 To 8
-                Leido = "telef"
-                If NF = 7 Or NF = 8 Then Leido = Leido & "_ext"
+                leido = "telef"
+                If NF = 7 Or NF = 8 Then leido = leido & "_ext"
                 
                 
                 CadenaInsert = RecuperaValor(tabla, NF)
-                CadenaInsert = "UPDATE vodafonetxt." & CadenaInsert & " SET " & Leido & "=" & DBSet(Rtr!tfno_real, "T")
+                CadenaInsert = "UPDATE vodafonetxt." & CadenaInsert & " SET " & leido & "=" & DBSet(Rtr!tfno_real, "T")
                 
-                CadenaInsert = CadenaInsert & " WHERE " & Leido & " = " & DBSet(Rtr!tfno_fich, "T")
+                CadenaInsert = CadenaInsert & " WHERE " & leido & " = " & DBSet(Rtr!tfno_fich, "T")
                 
                 ejecutar CadenaInsert, False
             
@@ -3948,6 +4012,12 @@ End Sub
 Private Sub ProcesarDculCab()
 
     
+    mFicheroCorto = ""
+    If Valores(4) = "" Then
+        If Valores(5) = "0.0000" Then
+            If Valores(5) = "0.0000" Then Exit Sub
+        End If
+    End If
     mFicheroCorto = "(" & DBSet(Valores(1), "T")
     mFicheroCorto = mFicheroCorto & "," & DBSet(Valores(2), "T")
     mFicheroCorto = mFicheroCorto & "," & DBSet(Valores(3), "T")
@@ -4370,6 +4440,7 @@ Dim i As Integer
     EmitirFacturasVODAFONE = False
     
     '-- Por si nos pasan ruta completa modificamos el nombre de fichero
+    mfichero = Replace(mfichero, ".dat", "")
     If Len(mfichero) > 12 Then mfichero = Right(mfichero, 12)
     mfichero2 = mfichero
     
@@ -5168,7 +5239,7 @@ Dim Id As Long
 '                dl.Importe = dr.Importe;
                
             Id = Id + 1
-            SQ = ", (" & Id & "," & DBSet(miRsAux!FACT_NO, "T") & "," & DBSet(miRsAux!telef_ext, "T") & "," & DBSet(miRsAux!Tipo, "T")
+            SQ = ", (" & Id & "," & DBSet(miRsAux!Fact_No, "T") & "," & DBSet(miRsAux!telef_ext, "T") & "," & DBSet(miRsAux!Tipo, "T")
             SQ = SQ & "," & DBSet(miRsAux!Tipo, "T") & "," & DBSet(miRsAux!Tipo, "T") & "," & DBSet(miRsAux!Destino, "T", "S") & ","
             SQ = SQ & DBSet(miRsAux!Destino, "T", "S") & "," & DBSet(miRsAux!no_recep, "T", "S") & ",'" & Format(miRsAux!fecha_hora, "mmdd") & "','"
             SQ = SQ & Format(miRsAux!fecha_hora, "hhnn") & "','Segundos'," & DBSet(miRsAux!duracion, "N") & "," & DBSet(miRsAux!Importe, "N") & ")"
@@ -5220,8 +5291,8 @@ Dim Id As Long
         'mvarFichero mfichero2
         SQ = "SELECT " & DBSet(mfichero2, "T") & ",320,1," & DBSet(mfichero2, "T") & ",'',Numero_de_telefono,''," & CadenaInsert
         SQ = SQ & ",Codigo_de_trafico,Tipo_de_trafico,count(*),Unidad_de_medida,sum(Cantidad_medida_originada)"
-        Stop
-        SQ = SQ & ",0,0,sum(importe),'' FROM telefono.detalle_de_llamadas WHERE  Fichero ='CI0643137077'"  'que!!!!!!
+        
+        SQ = SQ & ",0,0,sum(importe),'' FROM telefono.detalle_de_llamadas WHERE  Fichero =" & DBSet(mfichero2, "T")
         SQ = SQ & " and   fecha<>'0000'"
         SQ = SQ & " group by Codigo_de_trafico,Numero_de_telefono order by Numero_de_telefono,Codigo_de_trafico"
     
@@ -5282,4 +5353,49 @@ Dim Importe2 As Currency
    'tel_desc_cuotas where refacturar>0
     
     
+End Function
+
+
+
+
+
+
+'*********************************************************************************************************
+'*********************************************************************************************************
+'
+' VENTA PLAZOS
+'
+'*********************************************************************************************************
+'*********************************************************************************************************
+
+Public Function ComprobarTelefonosVentaPlazos(ByRef L As Label, Operadora As Byte)
+
+'
+'    Dim Rs As ADODB.Recordset
+'    Dim cad As String
+'    Dim Aux As String
+'    Dim Impor As Currency
+'    Dim imp2 As Currency
+'    Dim Aux2 As String
+'    Dim i As Integer
+'
+'    'Entran con espacios en blanco
+'    L.Caption = "Comprobando"
+'    L.Refresh
+'    cad = "update telefono.detalle_de_llamadas set Numero_llamado =trim(Numero_llamado) where fichero='" & mFicheroCorto & "'"
+'    conn.Execute cad
+'    Espera 0.25
+'
+'    'LLAMADAS DE COOPERATIVA
+'    Set Rs = New ADODB.Recordset
+'
+'
+'
+'     L.Caption = "Leyendo registros llamada"
+'     L.Refresh
+'A10011554341
+'
+'
+'
+
 End Function

@@ -71,7 +71,7 @@ Begin VB.Form frmAlmMovimArticulos
       BackColor       =   &H80000018&
       Height          =   285
       Index           =   1
-      Left            =   2760
+      Left            =   2520
       Locked          =   -1  'True
       TabIndex        =   26
       Text            =   "Text2"
@@ -166,12 +166,12 @@ Begin VB.Form frmAlmMovimArticulos
       Left            =   120
       TabIndex        =   24
       Top             =   5760
-      Width           =   2505
+      Width           =   2265
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          Height          =   240
-         Left            =   240
+         Left            =   120
          TabIndex        =   25
          Top             =   180
          Width           =   1515
@@ -181,12 +181,12 @@ Begin VB.Form frmAlmMovimArticulos
       BackColor       =   &H80000018&
       Height          =   285
       Index           =   2
-      Left            =   5040
+      Left            =   4800
       Locked          =   -1  'True
       TabIndex        =   22
       Text            =   "Text2"
       Top             =   6000
-      Width           =   3975
+      Width           =   3855
    End
    Begin VB.ComboBox cboAux 
       Height          =   315
@@ -554,20 +554,28 @@ Begin VB.Form frmAlmMovimArticulos
          EndProperty
       EndProperty
    End
+   Begin VB.Image ImageObservaDFI 
+      Height          =   240
+      Left            =   8760
+      Picture         =   "frmAlmMovimArticulos.frx":0021
+      Top             =   6000
+      Visible         =   0   'False
+      Width           =   240
+   End
    Begin VB.Label Label3 
       Caption         =   "Desc. Almacen"
       Height          =   255
-      Left            =   2760
+      Left            =   2520
       TabIndex        =   27
-      Top             =   5800
+      Top             =   5805
       Width           =   1335
    End
    Begin VB.Label Label2 
       Caption         =   "Cliente/Proveedor/Trabajador"
       Height          =   255
-      Left            =   5040
+      Left            =   4800
       TabIndex        =   23
-      Top             =   5800
+      Top             =   5805
       Width           =   2775
    End
    Begin VB.Label Label1 
@@ -582,7 +590,7 @@ Begin VB.Form frmAlmMovimArticulos
       Height          =   240
       Index           =   0
       Left            =   1500
-      Picture         =   "frmAlmMovimArticulos.frx":0021
+      Picture         =   "frmAlmMovimArticulos.frx":0A23
       ToolTipText     =   "Buscar artículo"
       Top             =   645
       Width           =   240
@@ -676,17 +684,17 @@ End Sub
 
 
 Private Sub Imprimir()
-Dim cad As String
+Dim Cad As String
 Dim numParam As Byte
 
     'Resto parametros
-    cad = ""
-    cad = cad & "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
+    Cad = ""
+    Cad = Cad & "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
     numParam = 1
             
     With frmImprimir
         .NombreRPT = "rAlmMovim.rpt"
-        .OtrosParametros = cad
+        .OtrosParametros = Cad
         .NumeroParametros = numParam
         .FormulaSeleccion = cadSeleccion
         .EnvioEMail = False
@@ -918,6 +926,10 @@ Dim Codtipm As String
         Case "PRE"
               frmProdEnvas.DatosADevolverBusqueda = Data2.Recordset!document
               frmProdEnvas.Show vbModal
+    
+    
+        Case "DFI"
+            ImageObservaDFI_Click
     End Select
 End Sub
 
@@ -929,7 +941,7 @@ End Sub
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
 Dim codigo As Long
 Dim movim As String
-
+    ImageObservaDFI.visible = False
     If Not Data2.Recordset.EOF Then
         'Poner descripcion del almacen
         Text2(1).Text = Data2.Recordset.Fields(2).Value
@@ -938,6 +950,7 @@ Dim movim As String
         codigo = Data2.Recordset!codigope
         movim = Data2.Recordset!detamovi
         Text2(2).Text = PonerNombreCliente(codigo, movim)
+        ImageObservaDFI.visible = movim = "DFI"
     End If
 End Sub
 
@@ -1066,6 +1079,11 @@ Dim SQL As String
     DataGrid1.Columns(12).Caption = "Nº Linea"
     DataGrid1.Columns(12).Width = 900
     DataGrid1.Columns(12).Alignment = dbgCenter
+    
+    
+    DataGrid1.Columns(13).Caption = "Observa"
+    DataGrid1.Columns(13).Width = 0
+    
     
     DataGrid1.ScrollBars = dbgAutomatic
     
@@ -1223,6 +1241,49 @@ End Sub
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
     Text1(1).Text = Format(vFecha, "dd/mm/yyyy")
+End Sub
+
+Private Sub ImageObservaDFI_Click()
+Dim Cad As String
+Dim Invehco As Boolean
+
+    If Modo = 0 Then Exit Sub
+    
+    If Not Data2.Recordset.EOF Then
+        'Poner descripcion del almacen
+        If Data2.Recordset!detamovi = "DFI" Then
+            'Vemos datos de invemtario
+            
+            Invehco = False
+            'Veremos si el DFI es del utlimo inventario
+            Cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
+            Cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", Cad, CStr(Data2.Recordset!codAlmac))
+            
+            If Cad = "" Then
+                'No es el de salmac. Buscamos en shinve
+                Cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
+                Cad = DevuelveDesdeBD(conAri, "existenc", "shinve", Cad, CStr(Data2.Recordset!codAlmac))
+                If Cad <> "" Then Invehco = True
+            
+            End If
+            
+            
+            If Cad <> "" Then
+                
+                Cad = "          Existencias: " & Cad
+                If Invehco Then Cad = Cad & "    *Hco"
+                Cad = "Fecha inventario: " & Data2.Recordset!FechaMov & Cad
+             '   Cad = vbCrLf & "Almacen: " & Data2.Recordset!codAlmac & "-" & Text2(1).Text & vbCrLf & Cad
+             '   Cad = "Articulo: " & Text1(0).Text & " " & Text2(0).Text & Cad
+                
+            End If
+                        
+            If Not IsNull(Data2.Recordset!observa) Then Cad = Cad & vbCrLf & "Observaciones: " & vbCrLf & Data2.Recordset!observa
+            
+            If Cad <> "" Then MsgBox Cad, vbInformation
+         End If
+    End If
+        
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
@@ -1432,7 +1493,7 @@ Dim i As Integer
     cadSelGrid = ""
 
     selSQL = "SELECT smoval.codartic, smoval.codalmac, nomalmac, fechamov, horamovi, if(smoval.tipomovi=0,""S"",""E"") as tipomovi, detamovi, "
-    selSQL = selSQL & "cantidad, impormov, codigope, letraser, document, numlinea "
+    selSQL = selSQL & "cantidad, impormov, codigope, letraser, document, numlinea,observa "
     
     SQL = " FROM (smoval LEFT OUTER JOIN salmpr on smoval.codalmac=salmpr.codalmac)"
     If enlaza Then
@@ -1645,7 +1706,7 @@ Private Sub CargarComboAux()
 ' o marcamos la opcion sorted del combo
 '0-Entrada, 1-Salida
 Dim Index As Byte, i As Integer
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 On Error GoTo ECargar
 
@@ -1659,22 +1720,22 @@ On Error GoTo ECargar
         
         Index = 1 'Combo Detalle Movimiento
         SQL = "select codtipom,nomtipom from stipom"
-        Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         i = 0
         cboAux(Index).Clear
-        While Not RS.EOF
-            cboAux(Index).AddItem RS.Fields(0).Value
+        While Not Rs.EOF
+            cboAux(Index).AddItem Rs.Fields(0).Value
             cboAux(Index).ItemData(cboAux(Index).NewIndex) = i
             i = i + 1
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
 ECargar:
     If Err.Number <> 0 Then
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
         MuestraError Err.Number, "Cargando Combobox", Err.Description
     End If
 End Sub
@@ -1682,23 +1743,23 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    cad = ""
+    Cad = ""
             
-    cad = cad & "Código|smoval|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
+    Cad = Cad & "Código|smoval|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
     tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
     tabla = tabla & " GROUP BY smoval.codartic "
     Titulo = "Movimientos de Articulos"
 
            
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
+        frmB.vCampos = Cad
         frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
@@ -1752,7 +1813,7 @@ Private Sub CalcularTotales()
 'calcula la cantidad total y el importe total para los
 'registros mostrados de cada artículo
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
     
     On Error GoTo ErrTotales
     If cadSelGrid = "" Then Exit Sub
@@ -1760,18 +1821,18 @@ Dim RS As ADODB.Recordset
     SQL = "SELECT sum(cantidad) as totCantidad,sum(impormov) as totImporte "
     SQL = SQL & cadSelGrid
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS.EOF Then
-        Text2(3).Text = DBLet(RS!totcantidad, "N")
+    If Not Rs.EOF Then
+        Text2(3).Text = DBLet(Rs!totcantidad, "N")
         Text2(3).Text = Format(Text2(3).Text, FormatoCantidad)
-        Text2(4).Text = DBLet(RS!totimporte, "N")
+        Text2(4).Text = DBLet(Rs!totimporte, "N")
         Text2(4).Text = Format(Text2(4).Text, FormatoImporte)
     End If
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     Exit Sub
     

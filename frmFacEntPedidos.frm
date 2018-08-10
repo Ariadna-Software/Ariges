@@ -2393,7 +2393,7 @@ Dim CodZona As Integer   'Ocutbre 2010
 Dim GrabaLogCambioPrecioDto As Boolean 'Enero 2011
 Dim ClienteConRiesgo As Boolean  'Junio 2011   Si sigue adelante con el pedido grabar un LOG
 Dim NumeroBultosAlbaran As Integer
-
+Dim CanjeaPuntos As Currency
 Dim LineasArticulosEnPedidosProveedor As String
 
 
@@ -3541,8 +3541,14 @@ Dim CambiaZona As Boolean
     If Trim(vSQL) = "" Then vSQL = "0"
     NumeroBultosAlbaran = CInt(vSQL)
     
+    'Mayo 2018
+    CanjeaPuntos = 0
+    If vParamAplic.PtosAsignar > 0 Then
+        vSQL = RecuperaValor(CadenaSeleccion, 13)
+        If Trim(vSQL) = "" Then vSQL = "0"
+        CanjeaPuntos = CCur(vSQL)
     
-    
+    End If
 End Sub
 
 
@@ -6725,6 +6731,7 @@ Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim ImpLinea As String
 Dim NumBulto As String
+Dim Ptos As Currency
 
     On Error Resume Next
 
@@ -6779,6 +6786,42 @@ Dim NumBulto As String
         Set Rs = Nothing
     End If
     
+    
+    If vParamAplic.PtosAsignar > 0 Then
+        If CanjeaPuntos > 0 Then
+            'Tenemos que insertar el arituclo canje puntos
+            SQL = "codtipom=" & DBSet(TipoM, "T") & " AND numalbar "
+            NumBulto = "min(codalmac)"
+            SQL = DevuelveDesdeBD(conAri, "max(numlinea)", "slialb", SQL, NumAlb, "N", NumBulto)
+            If SQL = "" Then SQL = "0"
+            SQL = Val(SQL) + 1
+            SQL = " VALUES('" & TipoM & "', " & NumAlb & ", " & SQL & " , "
+            SQL = SQL & NumBulto & ", " & DBSet(vParamAplic.PtosArticuloCanje, "T") & ", "
+            SQL = SQL & DBSet(DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", vParamAplic.PtosArticuloCanje, "T"), "T") & ", null, "
+            
+            SQL = SQL & DBSet(-1 * CanjeaPuntos, "N") & ", " & DBSet(1, "N") & ", " & DBSet(vParamAplic.PtosEquivalencia, "N") & ", 0,0, "
+            Ptos = Round2(-1 * CanjeaPuntos * vParamAplic.PtosEquivalencia, 2)
+            SQL = SQL & DBSet(Ptos, "N") & ", 'A' ,0,null,null)"
+            
+            
+            
+            
+            SQL = "cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre,codprovex,numlote,codccost) " & SQL
+            SQL = "INSERT INTO slialb (codtipom,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci," & SQL
+            conn.Execute SQL
+                            
+                            
+            'Y en smoval puntos
+            'smovalpuntos codClien, numero, codtipom, NUmAlbar, FechaAlb, concepto, Puntos, fecMov, Observaciones
+            SQL = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", Text1(4).Text, "N")
+            If SQL = "" Then SQL = "0"
+            SQL = CStr(Val(SQL) + 1)
+            SQL = "(" & Text1(4).Text & "," & SQL & ",'" & TipoM & "'," & NumAlb & "," & DBSet(FechaAlb, "F") & ","
+            SQL = SQL & "1," & DBSet(-1 * CanjeaPuntos, "N") & "," & DBSet(Now, "FH") & ",'Ped->Alb  " & vUsu.Login & "')"
+            SQL = "INSERT INTO smovalpuntos(codClien, numero, codtipom, NUmAlbar, FechaAlb, concepto, Puntos, fecMov, Observaciones) VALUES " & SQL
+            conn.Execute SQL
+        End If
+    End If
     If Err.Number <> 0 Then
          'Hay error , almacenamos y salimos
         InsertarLineasAlbaran = False
@@ -7166,7 +7209,7 @@ Dim SeSirve As Boolean
     
     If SeSirve Then
         If CSng(txtAux(3).Text) > Data2.Recordset!cantidad Then
-            cadMen = "La cantitad a servir debe ser menor o igual a al cantidad del pedido."
+            cadMen = "La cantidad a servir debe ser menor o igual a al cantidad del pedido."
             cadMen = cadMen & vbCrLf
             MsgBox cadMen, vbInformation
             PonerFoco txtAux(3)
@@ -7247,8 +7290,10 @@ Dim AlbaranGenerado As Boolean
 Dim Puntos As Currency
 Dim FAlb As Date
 Dim Aux As String
+Dim CuantosPuntos As Currency
 
-'Dim CodZona As Integer   'Ocutbre 2010  VARIABLE GLOBAL DEL FORM
+
+
 
     'Pedir: Operador de Albaran, Material Preparado por y forma de envio
     CadenaSQL = ""
@@ -7303,6 +7348,46 @@ Dim Aux As String
         End If
     End If
     SQL = SQL & Abs(ImprimeFactura) & "|" 'En esta poscion maracaremos si SE VE el frame de zona
+    
+    'Veo lo de los puntos, aqui mismo
+    CuantosPuntos = 0
+    
+    If vParamAplic.PtosAsignar > 0 Then
+        'Veremos si el cliente tiene CANJE
+        Aux = "Puntos"
+        NumAlb = DevuelveDesdeBD(conAri, "tienepuntos", "sclien", "codclien", Text1(4).Text, "N", Aux)
+        If Val(NumAlb) > 0 Then
+            If Aux = "" Then Aux = "0"
+            
+            If CCur(Aux) > 0 Then
+                
+                'NUmAlbar = "select sum(if( sfamia.PtosPermiteCanje =1,importel,0)),sum(importel)," & C & " from slialb,sartic,sfamia   WHERE slialb.codartic=sartic.codartic and sartic.codfamia="
+                'C = C & "sfamia.codfamia   AND "
+                NumAlb = NomTablaLineas & ".codartic = sartic.codartic AND sartic.codfamia=sfamia.codfamia "
+                
+                If Not AlbCompleto Then NumAlb = NumAlb & " and sliped.servidas>0 "
+                
+                NumAlb = NumAlb & " AND numpedcl "
+                NumAlb = DevuelveDesdeBD(conAri, "sum(if( sfamia.PtosPermiteCanje =1,importel,0))", "sliped,sartic,sfamia ", NumAlb, Text1(0).Text)
+                If NumAlb = "" Then NumAlb = 0
+                If CCur(NumAlb) > 0 Then
+                
+                
+                
+                    CuantosPuntos = CCur(NumAlb) * vParamAplic.PtosAsignar
+                    CuantosPuntos = Round2(CuantosPuntos / vParamAplic.PtosImporteCalculo, 2)
+                    Aux = CStr(Aux) & "|" & NumAlb & "|"
+                End If
+            End If
+        End If
+        NumAlb = ""
+    End If
+    If CuantosPuntos = 0 Then
+        SQL = SQL & "||"
+    Else
+        SQL = SQL & Aux
+    End If
+    Aux = ""
     'Variabale SQL
     'codzona|nomzona|visible famezona|
     ImprimeFactura = False
@@ -7365,8 +7450,9 @@ Dim Aux As String
             Set LOG = Nothing
             
             
-            'ACTUALIZAR EL RIESGO
-            ActualizaRiesgoCliente CLng(Text1(4).Text)
+            'ACTUALIZAR EL RIESGO    Febrero 2018
+            'No lo deben calcular
+            'ActualizaRiesgoCliente CLng(Text1(4).Text)
              
         End If
     
@@ -7399,12 +7485,17 @@ Dim Aux As String
                 SQL = "UPDATE scaalb set puntos =" & DBSet(Puntos, "N") & SQL
                 conn.Execute SQL
                 
-                If Puntos >= 0 Then
+                
+                'Si ha canjeado en el paso anterior
+                'CanjeaPuntos
+                CanjeaPuntos = Puntos - CanjeaPuntos
+                
+                If CanjeaPuntos >= 0 Then
                     SQL = "+"
                 Else
                     SQL = "-"
                 End If
-                SQL = "UPDATE sclien set puntos = coalesce(puntos,0) " & SQL & DBSet(Abs(Puntos), "N") & " WHERE codclien =" & Text1(4).Text
+                SQL = "UPDATE sclien set puntos = coalesce(puntos,0) " & SQL & DBSet(Abs(CanjeaPuntos), "N") & " WHERE codclien =" & Text1(4).Text
                 conn.Execute SQL
             
                 SQL = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", Text1(4).Text)
@@ -8705,8 +8796,8 @@ Dim ImportePedido As Currency
     
     
     
-    
-    miSQL = "Select codclien,tipoiva,if(credisol is null,0,credisol) credisol,if(credipriv is null,9,credipriv) credipriv from sclien where codclien =" & Text1(4).Text
+                        'ponia credisol
+    miSQL = "Select codclien,tipoiva,if(limcredi is null,0,limcredi) limcredi,if(credipriv is null,9,credipriv) credipriv from sclien where codclien =" & Text1(4).Text
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'NO PUEDE SER EOG
     
@@ -8715,7 +8806,7 @@ Dim ImportePedido As Currency
         
         RiesgoCliente miRsAux!codClien, CByte(miRsAux!TipoIVA), Now, ImpTesor, ImpAlb, Nothing
         
-        miSQL = "Crédito solicitado:  " & Format(miRsAux!credisol, FormatoImporte) & vbCrLf
+        miSQL = "Crédito solicitado:  " & Format(miRsAux!limcredi, FormatoImporte) & vbCrLf
         
         miSQL = miSQL & "Tesorería:          " & Format(ImpTesor, FormatoImporte) & vbCrLf
         miSQL = miSQL & "Albaranes:          " & Format(ImpAlb, FormatoImporte) & vbCrLf
@@ -8726,8 +8817,8 @@ Dim ImportePedido As Currency
         'Tesoreria + albaranes + este pedido.....
         ImpTesor = ImpTesor + ImportePedido
         
-        If ImpTesor > miRsAux!credisol Then
-            miSQL = miSQL & vbCrLf & "** EXCEDE CREDITO SOLICITADO **" & vbCrLf & vbCrLf & "¿Continuar?"
+        If ImpTesor > miRsAux!limcredi Then
+            miSQL = miSQL & vbCrLf & "** EXCEDE CREDITO CONCEDIDO **" & vbCrLf & vbCrLf & "¿Continuar?"
             ClienteConRiesgo = True
             If MsgBox(miSQL, vbQuestion + vbYesNo) = vbNo Then Riesgo = False
         End If

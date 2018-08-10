@@ -231,11 +231,13 @@ Private Sub CargaListView(Cli As Boolean)
 Dim IT As ListItem
 Dim FechaLimite As Date
 Dim i As Byte
+Dim Color As Long
+
     On Error GoTo eCargaListView
     Set miRsAux = New ADODB.Recordset
     
-    FechaLimite = DateAdd("d", -1 * vParamAplic.Sii_Dias, Now)
-    
+    'FechaLimite = DateAdd("d", -1 * vParamAplic.Sii_Dias, Now)
+    FechaLimite = UltimaFechaCorrectaSII(vParamAplic.Sii_Dias, Now)
     
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
@@ -255,10 +257,17 @@ Dim i As Byte
         If Not Cli Then IT.SmallIcon = 11
                     
         If vParamAplic.SII_Tiene Then
+            Color = -1
             If miRsAux!Fecha < FechaLimite Then
-                IT.ForeColor = vbRed
+                Color = vbRed
+            Else
+                If miRsAux!Fecha = FechaLimite Then Color = vbBlue
+            End If
+                
+            If Color <> -1 Then
+                IT.ForeColor = Color
                 For i = 1 To IT.ListSubItems.Count
-                    IT.ListSubItems(i).ForeColor = vbRed
+                    IT.ListSubItems(i).ForeColor = Color
                 Next
             End If
         End If

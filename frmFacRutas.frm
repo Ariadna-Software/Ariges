@@ -440,7 +440,7 @@ End Sub
 
 Private Sub BotonModificar()
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
     
     If adodc1.Recordset.EOF Then Exit Sub
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
@@ -448,8 +448,8 @@ Dim I As Integer
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -506,7 +506,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim I As Integer
+Dim i As Integer
 Dim cadB As String
 On Error Resume Next
 
@@ -529,11 +529,11 @@ On Error Resume Next
              If DatosOk And BLOQUEADesdeFormulario(Me) Then
                  If ModificaDesdeFormulario(Me, 3) Then
                       TerminaBloquear
-                      I = adodc1.Recordset.Fields(0)
+                      i = adodc1.Recordset.Fields(0)
                       PonerModo 2
                       CancelaADODC Me.adodc1
                       CargaGrid
-                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                   End If
 '                  adodc1.Recordset.MoveFirst
                   DataGrid1.SetFocus
@@ -614,7 +614,7 @@ Private Sub Form_Load()
     End With
 
     FormatoCod = FormatoCampo(txtAux(0))
-    
+    If vParamAplic.NumeroInstalacion = 2 Then Caption = "Asociación"
     cmdRegresar.visible = (DatosADevolverBusqueda <> "")
     PonerModo 2
     

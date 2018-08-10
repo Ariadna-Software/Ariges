@@ -4,7 +4,7 @@ Option Explicit
 'MODULO PARA LA CARGA Y DESCARGA DE TABLAS TEMPORALES
 
 'LO tengo que crear "global"
-Dim codtipom(3) As String
+Dim codtipom(4) As String  'Probamos por EULER
 
 
 '================================================================================
@@ -418,6 +418,7 @@ Dim T1 As Currency
 Dim T2 As Currency
 Dim T3 As Currency
 Dim T4 As Currency
+Dim T5 As Currency
 Dim total As String 'Total del periodo seleccionado
 Dim totalAnt As String 'total del periodo anterior
 Dim ColAgent As Collection
@@ -553,13 +554,18 @@ Dim J As Long
             Lbl.Caption = "Reg. cliente: " & Rs!codClien
             Lbl.Refresh
             If SQL <> "" Then
-                SQL = SQL & DBSet(T1, "N") & "," & DBSet(T2, "N") & "," & DBSet(T3, "N") & "," & DBSet(T4, "N") & ","
-                '---- Laura: modificado 26/09/2006
-'                totVentas = CStr(CCur(ComprobarCero(totVentas)) + CCur(ComprobarCero(totMante)) + CCur(ComprobarCero(totRepar)) + CCur(ComprobarCero(totRectif)))
-                'totVentas = totVentas + totMante + totRepar + totRectif + totServi
-                T1 = T1 + T2 + T3 + T4
+                
+                If PorAgente Then T5 = T1 + T4
+                
+                SQL = SQL & DBSet(T1, "N") & "," & DBSet(T2, "N") & "," & DBSet(T3, "N") & "," & DBSet(T4, "N") & "," & DBSet(T5, "N") & ","
+                
+                If PorAgente Then
+                    T1 = T1 + T4
+                Else
+                    T1 = T1 + T2 + T3 + T4 + T5
+                End If
                 '----
-                SQL = SQL & DBSet(T1, "N") & ","
+                'SQL = SQL & DBSet(T1, "N") & ","  AHOR el total lo caclula en el rpt
                 '% sobre el total de ventas
                 T1 = Round((T1 * 100) / CCur(total), 2)
                 SQL = SQL & DBSet(T1, "N") & ","
@@ -588,7 +594,7 @@ Dim J As Long
             T2 = 0
             T3 = 0
             T4 = 0
-   
+            T5 = 0
             J = J + 1
         End If
     
@@ -609,6 +615,8 @@ Dim J As Long
                 T3 = T3 + Rs!BaseImp
             ElseIf Rs!codtipom = codtipom(3) Then
                 T4 = T4 + Rs!BaseImp
+            ElseIf Rs!codtipom = codtipom(4) Then
+                T5 = T5 + Rs!BaseImp
             End If
             
         End If
@@ -620,12 +628,18 @@ Dim J As Long
     
     
     If SQL <> "" Then 'para el ultimo registro
-        SQL = SQL & DBSet(T1, "N") & "," & DBSet(T2, "N") & "," & DBSet(T3, "N") & "," & DBSet(T4, "N") & ","
-        '---- Laura: Modificado 26/09/2006
-        'totVentas = CStr(CCur(ComprobarCero(totVentas)) + CCur(ComprobarCero(totMante)) + CCur(ComprobarCero(totRepar)) + CCur(ComprobarCero(totRectif)))
-        T1 = CStr(T1 + T2 + T3 + T4)
-        '----
-        SQL = SQL & DBSet(T1, "N") & ","
+        
+                
+        If PorAgente Then T5 = T1 + T4
+        
+        SQL = SQL & DBSet(T1, "N") & "," & DBSet(T2, "N") & "," & DBSet(T3, "N") & "," & DBSet(T4, "N") & "," & DBSet(T5, "N") & ","
+        
+        If PorAgente Then
+            T1 = T1 + T4
+        Else
+            T1 = T1 + T2 + T3 + T4 + T5
+        End If
+        
         T1 = CStr(Round((CCur(T1) * 100) / CCur(total), 2))
         SQL = SQL & DBSet(T1, "N") & ","
         'Obtener ventas del cliente para el periodo anterior
@@ -736,7 +750,7 @@ Dim T1 As Currency
 Dim T2 As Currency
 Dim T3 As Currency
 Dim T4 As Currency
-
+Dim T5 As Currency
 
     On Error GoTo EVentas
     
@@ -744,7 +758,7 @@ Dim T4 As Currency
     T2 = 0
     T3 = 0
     T4 = 0
-    
+    T5 = 0
     If cadSel <> "" Then
         '---- Laura: Modificaco 26/09/2006
         'SQL = "select codclien,codtipom,sum(baseimp1)+sum(baseimp2)+sum(baseimp3) as BaseImp "
@@ -788,6 +802,8 @@ Dim T4 As Currency
                     T3 = T3 + Rs!BaseImp
                 ElseIf Rs!codtipom = codtipom(3) Then
                     T4 = T4 + Rs!BaseImp
+                ElseIf Rs!codtipom = codtipom(4) Then
+                    T5 = T5 + Rs!BaseImp
                 End If
             End If
                          
@@ -797,12 +813,11 @@ Dim T4 As Currency
         Set Rs = Nothing
     End If
     
-    SQL = DBSet(T1, "N") & "," & DBSet(T2, "N") & "," & DBSet(T3, "N") & "," & DBSet(T4, "N") & ","
-    '---- Laura: Modificado 26/09/2006
-    'totVentas = CStr(CCur(ComprobarCero(totVentas)) + CCur(ComprobarCero(totMante)) + CCur(ComprobarCero(totRepar)) + CCur(ComprobarCero(totRectif)))
-    T1 = T1 + T2 + T3 + T4
-    '----
-    SQL = SQL & DBSet(T1, "N")
+    
+    If PorAgente Then T5 = T1 + T4
+       
+    SQL = DBSet(T1, "N") & "," & DBSet(T2, "N") & "," & DBSet(T3, "N") & "," & DBSet(T4, "N") & "," & DBSet(T5, "N")
+    
     VentasPeriodoAnterior = SQL
     
 EVentas:

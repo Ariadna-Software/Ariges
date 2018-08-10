@@ -551,32 +551,32 @@ Begin VB.Form frmComEntAlbaranes
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmComEntAlbaranes.frx":02B7
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(29)"
-      Tab(1).Control(1)=   "Text1(28)"
-      Tab(1).Control(2)=   "Text1(27)"
-      Tab(1).Control(3)=   "Text1(26)"
-      Tab(1).Control(4)=   "Text2(26)"
-      Tab(1).Control(5)=   "chkDocArchi"
-      Tab(1).Control(6)=   "Text1(25)"
-      Tab(1).Control(7)=   "FrameHco"
-      Tab(1).Control(8)=   "Text2(21)"
-      Tab(1).Control(9)=   "Text1(21)"
-      Tab(1).Control(10)=   "Text1(19)"
-      Tab(1).Control(11)=   "Text1(18)"
-      Tab(1).Control(12)=   "Text1(17)"
-      Tab(1).Control(13)=   "Text1(16)"
-      Tab(1).Control(14)=   "Text1(15)"
-      Tab(1).Control(15)=   "Label1(48)"
-      Tab(1).Control(16)=   "Label1(47)"
-      Tab(1).Control(17)=   "imgFecha(2)"
-      Tab(1).Control(18)=   "Label1(4)"
-      Tab(1).Control(19)=   "imgBuscar(8)"
-      Tab(1).Control(20)=   "imgFecha(1)"
-      Tab(1).Control(21)=   "Label1(3)"
-      Tab(1).Control(22)=   "imgBuscar(4)"
-      Tab(1).Control(23)=   "Label1(1)"
-      Tab(1).Control(24)=   "Label1(45)"
-      Tab(1).Control(25)=   "Label1(44)"
+      Tab(1).Control(0)=   "Label1(44)"
+      Tab(1).Control(1)=   "Label1(45)"
+      Tab(1).Control(2)=   "Label1(1)"
+      Tab(1).Control(3)=   "imgBuscar(4)"
+      Tab(1).Control(4)=   "Label1(3)"
+      Tab(1).Control(5)=   "imgFecha(1)"
+      Tab(1).Control(6)=   "imgBuscar(8)"
+      Tab(1).Control(7)=   "Label1(4)"
+      Tab(1).Control(8)=   "imgFecha(2)"
+      Tab(1).Control(9)=   "Label1(47)"
+      Tab(1).Control(10)=   "Label1(48)"
+      Tab(1).Control(11)=   "Text1(15)"
+      Tab(1).Control(12)=   "Text1(16)"
+      Tab(1).Control(13)=   "Text1(17)"
+      Tab(1).Control(14)=   "Text1(18)"
+      Tab(1).Control(15)=   "Text1(19)"
+      Tab(1).Control(16)=   "Text1(21)"
+      Tab(1).Control(17)=   "Text2(21)"
+      Tab(1).Control(18)=   "FrameHco"
+      Tab(1).Control(19)=   "Text1(25)"
+      Tab(1).Control(20)=   "chkDocArchi"
+      Tab(1).Control(21)=   "Text2(26)"
+      Tab(1).Control(22)=   "Text1(26)"
+      Tab(1).Control(23)=   "Text1(27)"
+      Tab(1).Control(24)=   "Text1(28)"
+      Tab(1).Control(25)=   "Text1(29)"
       Tab(1).ControlCount=   26
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmComEntAlbaranes.frx":02D3
@@ -2328,7 +2328,7 @@ Private Function ComprobarCambioFecha() As Boolean
 'Comprueba si se ha modificado el campo fecha de la cabecera.
 'Ya que es clave primaria y se deberan cambiar tambien la fecha
 'en tablas sliap y smoval
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim Izquierda As String, Derecha As String
 Dim llis As Collection
@@ -2348,22 +2348,22 @@ Dim b As Boolean
         SQL = SQL & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
         SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
         
-        Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         
         Set llis = New Collection
             
         'Nos guardamos todas las lineas con la modificacion de la fecha para
         'volverlas a insertar
-        BACKUP_TablaIzquierda RS, Izquierda
+        BACKUP_TablaIzquierda Rs, Izquierda
         
-        While Not RS.EOF
-            BACKUP_Tabla RS, Derecha, "fechaalb", CStr(Text1(1).Text)
+        While Not Rs.EOF
+            BACKUP_Tabla Rs, Derecha, "fechaalb", CStr(Text1(1).Text)
             llis.Add Derecha
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         
-        RS.Close
+        Rs.Close
        
         
         
@@ -2375,22 +2375,22 @@ Dim b As Boolean
             SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
             
             
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            While Not RS.EOF
+            While Not Rs.EOF
                 
                 SQL = "UPDATE slotes SET fecentra = " & DBSet(Text1(1).Text, "F") & " WHERE "
-                SQL = SQL & " codartic=" & DBSet(RS!codArtic, "T") & " AND numlotes=" & DBSet(RS!numlotes, "T") & " AND fecentra=" & DBSet(RS!FechaAlb, "F")
+                SQL = SQL & " codartic=" & DBSet(Rs!codArtic, "T") & " AND numlotes=" & DBSet(Rs!numlotes, "T") & " AND fecentra=" & DBSet(Rs!FechaAlb, "F")
                 conn.Execute SQL
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
         End If
 
 
         
-        Set RS = Nothing
+        Set Rs = Nothing
         
         
         
@@ -3786,6 +3786,23 @@ Dim cad As String
         End If
     End If
     
+    
+    'Febrero 208
+    'LLegado aqui veremos las fechas son "razonables"
+    If Modo = 3 And b Then
+        cad = ""
+        If CDate(Text1(1).Text) < vEmpresa.FechaIni Then
+            cad = "menor "
+        Else
+            If CDate(Text1(1).Text) > DateAdd("yyyy", 1, vEmpresa.FechaFin) Then cad = "mayor"
+        End If
+        If cad <> "" Then
+            cad = "Fecha " & cad & " que ejercicios.          " & Text1(1).Text & vbCrLf & vbCrLf & "¿Continuar?"
+            If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then b = False
+        End If
+    End If
+        
+        
     If Modo = 4 And b Then
         If vParamAplic.ManipuladorFitosanitarios2 Then
             If CDate(Text1(1).Text) <> Data1.Recordset!FechaAlb Then
@@ -5335,7 +5352,7 @@ Dim vCStock As CStock
 Dim cart As CArticulo
 Dim cLote As CNumLote
 Dim b As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 
     On Error GoTo ERestablecer
@@ -5343,20 +5360,20 @@ Dim SQL As String
     SQL = "SELECT * FROM " & NomTablaLineas & " WHERE " & Replace(cadSel, NombreTabla, NomTablaLineas)
     SQL = SQL & " ORDER BY numlinea desc "
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     b = True
-    While (Not RS.EOF) And b
+    While (Not Rs.EOF) And b
         'para cada linea de albaran deshacemos movimientos y precios medios ponderados
         Set vCStock = New CStock
-           If InicializarCStock(vCStock, "S", RS!numlinea) Then
+           If InicializarCStock(vCStock, "S", Rs!numlinea) Then
                 'estos valores hay q leerlos del RS y no del data2
-                 vCStock.codArtic = RS!codArtic
-                 vCStock.codAlmac = CInt(RS!codAlmac)
-                 vCStock.cantidad = CSng(RS!cantidad)
-                 vCStock.Importe = CCur(RS!ImporteL)
-                 vCStock.LineaDocu = RS!numlinea
+                 vCStock.codArtic = Rs!codArtic
+                 vCStock.codAlmac = CInt(Rs!codAlmac)
+                 vCStock.cantidad = CSng(Rs!cantidad)
+                 vCStock.Importe = CCur(Rs!ImporteL)
+                 vCStock.LineaDocu = Rs!numlinea
            
                 '==== Laura 20/09/2006
                 'antes de actualizar el stock reestablecer el precio medio ponderado del articulo
@@ -5371,7 +5388,7 @@ Dim SQL As String
                     If b Then
                         If cart.TieneNumLote Then
                             Set cLote = New CNumLote
-                            If cLote.LeerDatos(cart.codigo, CStr(DBLet(RS!numlotes, "T")), CStr(RS!FechaAlb)) Then
+                            If cLote.LeerDatos(cart.codigo, CStr(DBLet(Rs!numlotes, "T")), CStr(Rs!FechaAlb)) Then
                                 b = cLote.Eliminar(vCStock.cantidad)
                             
                             End If
@@ -5395,10 +5412,10 @@ Dim SQL As String
 '           Data2.Recordset.MoveNext
            Set vCStock = Nothing
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     
     '#### ANTES DEL 20/09/2006
@@ -5589,7 +5606,7 @@ Dim RSLineas As ADODB.Recordset
 End Sub
 
 
-Private Sub PedirNSeries(ByRef RS As ADODB.Recordset)
+Private Sub PedirNSeries(ByRef Rs As ADODB.Recordset)
 Dim RSseries As ADODB.Recordset
 Dim SQL As String
 Dim linea As Integer
@@ -5597,16 +5614,16 @@ Dim linea As Integer
     On Error GoTo EPedirNSeries
 
         'Inicializo la tabla temporal de los num.serie
-        PedirNSeriesGnral RS, False
+        PedirNSeriesGnral Rs, False
         
-        RS.MoveFirst
-        While Not RS.EOF
+        Rs.MoveFirst
+        While Not Rs.EOF
             linea = 0
             'Cargar los Nº de serie asignados al albaran
             SQL = "SELECT numserie, codartic FROM sserie "
             SQL = SQL & " WHERE numalbpr=" & DBSet(Text1(0).Text, "T")
             SQL = SQL & " and fechacom='" & Format(Text1(1).Text, FormatoFecha) & "'"
-            SQL = SQL & " and codprove=" & Text1(4).Text & " and numline2=" & RS!numlinea
+            SQL = SQL & " and codprove=" & Text1(4).Text & " and numline2=" & Rs!numlinea
             SQL = SQL & " ORDER BY codartic "
             
             Set RSseries = New ADODB.Recordset
@@ -5614,13 +5631,13 @@ Dim linea As Integer
             While Not RSseries.EOF
                 linea = linea + 1
                 SQL = "UPDATE tmpnseries SET numserie=" & DBSet(RSseries!numSerie, "T")
-                SQL = SQL & " WHERE codusu=" & vUsu.codigo & " and codartic=" & DBSet(RS!codArtic, "T")
-                SQL = SQL & " and numlinealb=" & RS!numlinea
+                SQL = SQL & " WHERE codusu=" & vUsu.codigo & " and codartic=" & DBSet(Rs!codArtic, "T")
+                SQL = SQL & " and numlinealb=" & Rs!numlinea
                 SQL = SQL & " and numlinea=" & linea
                 conn.Execute SQL
                 RSseries.MoveNext
             Wend
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         RSseries.Close
         Set RSseries = Nothing
