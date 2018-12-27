@@ -4,45 +4,81 @@ Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmBuscaGrid 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Búsqueda"
-   ClientHeight    =   5715
+   ClientHeight    =   7410
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   8040
+   ClientWidth     =   9480
    Icon            =   "frmBuscaGrid.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5715
-   ScaleWidth      =   8040
+   ScaleHeight     =   7410
+   ScaleWidth      =   9480
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame frameBusqueda 
       Caption         =   "Búsqueda"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   1335
       Left            =   120
       TabIndex        =   8
-      Top             =   480
+      Top             =   600
       Visible         =   0   'False
-      Width           =   7815
+      Width           =   9135
       Begin VB.CommandButton cmdBuscar 
          Caption         =   "&Buscar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   435
          Left            =   5520
          TabIndex        =   13
          Top             =   720
-         Width           =   855
+         Width           =   975
       End
       Begin VB.CommandButton cmdSalir 
          Caption         =   "&Salir"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   435
          Index           =   1
-         Left            =   6720
+         Left            =   6600
          TabIndex        =   14
          Top             =   720
-         Width           =   855
+         Width           =   975
       End
       Begin VB.OptionButton Option1 
          Caption         =   "Option2"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   1
          Left            =   2640
@@ -52,6 +88,15 @@ Begin VB.Form frmBuscaGrid
       End
       Begin VB.OptionButton Option1 
          Caption         =   "Option1"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   0
          Left            =   1200
@@ -60,27 +105,45 @@ Begin VB.Form frmBuscaGrid
          Width           =   1095
       End
       Begin VB.TextBox txtBusqueda 
-         Height          =   285
-         Left            =   1320
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   1440
          TabIndex        =   12
          Text            =   "Text2"
          Top             =   840
-         Width           =   3135
+         Width           =   3495
       End
       Begin VB.Label lblBusqueda 
          Alignment       =   1  'Right Justify
          Caption         =   "Label5"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   120
          TabIndex        =   9
-         Top             =   840
-         Width           =   1095
+         Top             =   870
+         Width           =   1215
       End
    End
    Begin MSAdodcLib.Adodc Adodc1 
       Height          =   375
-      Left            =   1080
-      Top             =   5160
+      Left            =   8520
+      Top             =   6120
       Visible         =   0   'False
       Width           =   2535
       _ExtentX        =   4471
@@ -126,58 +189,85 @@ Begin VB.Form frmBuscaGrid
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
-      Height          =   435
-      Left            =   4440
-      TabIndex        =   2
-      Top             =   5100
-      Width           =   1455
-   End
-   Begin VB.CommandButton cmdSalir 
-      Cancel          =   -1  'True
-      Caption         =   "&Salir"
-      Height          =   435
-      Index           =   0
-      Left            =   6000
-      TabIndex        =   3
-      Top             =   5100
-      Width           =   1455
-   End
-   Begin VB.TextBox text1 
-      Enabled         =   0   'False
-      Height          =   345
-      Left            =   120
-      TabIndex        =   0
-      Top             =   840
-      Width           =   7275
-   End
-   Begin MSDataGridLib.DataGrid DataGrid1 
-      Bindings        =   "frmBuscaGrid.frx":1CFA
-      Height          =   3075
-      Left            =   120
-      TabIndex        =   1
-      Top             =   1920
-      Visible         =   0   'False
-      Width           =   7815
-      _ExtentX        =   13785
-      _ExtentY        =   5424
-      _Version        =   393216
-      AllowUpdate     =   0   'False
-      ColumnHeaders   =   -1  'True
-      HeadLines       =   1
-      RowHeight       =   15
-      RowDividerStyle =   1
-      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      Height          =   435
+      Left            =   6000
+      TabIndex        =   2
+      Top             =   6840
+      Width           =   1455
+   End
+   Begin VB.CommandButton cmdSalir 
+      Cancel          =   -1  'True
+      Caption         =   "&Salir"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   435
+      Index           =   0
+      Left            =   7560
+      TabIndex        =   3
+      Top             =   6840
+      Width           =   1455
+   End
+   Begin VB.TextBox text1 
+      Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   345
+      Left            =   120
+      TabIndex        =   0
+      Top             =   960
+      Width           =   7275
+   End
+   Begin MSDataGridLib.DataGrid DataGrid1 
+      Bindings        =   "frmBuscaGrid.frx":1CFA
+      Height          =   5115
+      Left            =   120
+      TabIndex        =   1
+      Top             =   1560
+      Visible         =   0   'False
+      Width           =   9135
+      _ExtentX        =   16113
+      _ExtentY        =   9022
+      _Version        =   393216
+      AllowUpdate     =   0   'False
+      ColumnHeaders   =   -1  'True
+      HeadLines       =   1
+      RowHeight       =   16
+      RowDividerStyle =   1
+      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -223,8 +313,8 @@ Begin VB.Form frmBuscaGrid
    Begin VB.Label Label4 
       Caption         =   "Leyendo datos servidor"
       BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   11.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -234,11 +324,20 @@ Begin VB.Form frmBuscaGrid
       Height          =   270
       Left            =   120
       TabIndex        =   7
-      Top             =   5280
+      Top             =   7080
       Width           =   2520
    End
    Begin VB.Label Label3 
       Caption         =   "Búsqueda"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   120
       TabIndex        =   6
@@ -249,7 +348,7 @@ Begin VB.Form frmBuscaGrid
       Alignment       =   1  'Right Justify
       Caption         =   "TITULO"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   18
          Charset         =   0
          Weight          =   700
@@ -261,7 +360,7 @@ Begin VB.Form frmBuscaGrid
       Left            =   120
       TabIndex        =   4
       Top             =   0
-      Width           =   7695
+      Width           =   9015
    End
    Begin VB.Label Label2 
       AutoSize        =   -1  'True
@@ -308,7 +407,7 @@ Public vConexionGrid As Integer
 
 'Variables privadas
 Dim PrimeraVez As Boolean
-Dim SQL As String
+Dim Sql As String
 
 'Las redimensionaremos
 Dim TotalArray As Integer
@@ -340,11 +439,11 @@ On Error Resume Next
     End If
     
     DbClick = True
-    If Adodc1.Recordset.BOF Then
-        If Adodc1.Recordset.RecordCount > 0 Then Adodc1.Recordset.MoveFirst
+    If adodc1.Recordset.BOF Then
+        If adodc1.Recordset.RecordCount > 0 Then adodc1.Recordset.MoveFirst
     End If
     
-    If Adodc1.Recordset.RecordCount > 0 Then
+    If adodc1.Recordset.RecordCount > 0 Then
         columna = CabColumnas(vselElem)
         
          '---- Añade: Laura 28/04/2005
@@ -358,9 +457,9 @@ On Error Resume Next
         '---- se añade el formato del campo
         If PintarTxt Then
             If FormatoCampo(vselElem) <> "" Then
-                Text1.Text = Format(Adodc1.Recordset.Fields(CabColumnas(vselElem)), FormatoCampo(vselElem))
+                Text1.Text = Format(adodc1.Recordset.Fields(CabColumnas(vselElem)), FormatoCampo(vselElem))
             Else
-                Text1.Text = DBLet(Adodc1.Recordset.Fields(CabColumnas(vselElem)))
+                Text1.Text = DBLet(adodc1.Recordset.Fields(CabColumnas(vselElem)))
             End If
         End If
     End If
@@ -368,7 +467,7 @@ End Sub
 
 
 Private Sub cmdBuscar_Click()
-Dim cadB As String
+Dim CadB As String
 
     Screen.MousePointer = vbHourglass
     Me.Refresh
@@ -385,29 +484,29 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim vDes As String
-Dim I, J As Integer
+Dim i, J As Integer
 Dim V As String
 
-If Adodc1.Recordset Is Nothing Then Exit Sub
-If Adodc1.Recordset.EOF Then Exit Sub
+If adodc1.Recordset Is Nothing Then Exit Sub
+If adodc1.Recordset.EOF Then Exit Sub
 
-    I = 0
+    i = 0
     vDes = ""
     Do
-    J = I + 1
-    I = InStr(J, vDevuelve, "|")
-    If I > 0 Then
-        V = Mid(vDevuelve, J, I - J)
+    J = i + 1
+    i = InStr(J, vDevuelve, "|")
+    If i > 0 Then
+        V = Mid(vDevuelve, J, i - J)
         If V <> "" Then
             If IsNumeric(V) Then
-                If Val(V) <= TotalArray Then vDes = vDes & Adodc1.Recordset(CabColumnas(Val(V))) & "|"
+                If Val(V) <= TotalArray Then vDes = vDes & adodc1.Recordset(CabColumnas(Val(V))) & "|"
             End If
 '            If IsDate(V) Then
 '                If Val(V) <= TotalArray Then vDes = vDes & adodc1.Recordset(CabColumnas(Val(V))) & "|"
 '            End If
         End If
     End If
-Loop Until I = 0
+Loop Until i = 0
 RaiseEvent Selecionado(vDes)
 Unload Me
 End Sub
@@ -417,16 +516,16 @@ Private Sub cmdSalir_Click(Index As Integer)
 End Sub
 
 Private Sub DataGrid1_DblClick()
-    If Adodc1.Recordset Is Nothing Then Exit Sub
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset Is Nothing Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     cmdRegresar_Click
 End Sub
 
 Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
 Dim Cad As String
 
-If Adodc1.Recordset Is Nothing Then Exit Sub
-If Adodc1.Recordset.EOF Then Exit Sub
+If adodc1.Recordset Is Nothing Then Exit Sub
+If adodc1.Recordset.EOF Then Exit Sub
 If vselElem = ColIndex Then Exit Sub
 Cad = "¿Desea reordenar por el concepto " & DataGrid1.Columns(ColIndex).Caption & "?"
 If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
@@ -476,7 +575,7 @@ Private Sub Form_Load()
     PrimeraVez = True
     Label1.Caption = vTitulo
     DbClick = True
-    Adodc1.password = vUsu.Passwd
+    adodc1.password = vUsu.Passwd
     
     'If Not vBuscaPrevia And vCargaFrame Then
     If vCargaFrame Then
@@ -489,29 +588,29 @@ End Sub
 Private Function SeparaCampos() As Boolean
 Dim Cad As String
 Dim Grupo As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim C As Integer 'Contrador dentro del array
 
     SeparaCampos = False
-    I = 0
+    i = 0
     C = 0
     Do
-        J = I + 1
-        I = InStr(J, vCampos, "·")
-        If I > 0 Then
-            Grupo = Mid(vCampos, J, I - J)
+        J = i + 1
+        i = InStr(J, vCampos, "·")
+        If i > 0 Then
+            Grupo = Mid(vCampos, J, i - J)
             'Y en la martriz
             InsertaGrupo Grupo, C
             C = C + 1
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     SeparaCampos = True
 End Function
 
 
 Private Sub InsertaGrupo(Grupo As String, Contador As Integer)
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Cad As String
 
@@ -579,7 +678,7 @@ End Sub
 
 
 Private Function ObtenerTamanyosArray() As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Grupo As String
 
@@ -588,8 +687,8 @@ Dim Grupo As String
     TotalArray = -1
     J = 0
     Do
-        I = J + 1
-        J = InStr(I, vCampos, "·")
+        i = J + 1
+        J = InStr(i, vCampos, "·")
         If J > 0 Then TotalArray = TotalArray + 1
     Loop Until J = 0
     If TotalArray < 0 Then Exit Function
@@ -606,23 +705,23 @@ End Function
 
 Private Sub CargaGrid()
 Dim Cad As String, Orden As String
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 On Error GoTo ECargaGrid
 
     'On Error GoTo ECargaGRid '##QUITAR
     'Generamos SQL
     Cad = ""
-    For I = 0 To TotalArray
+    For i = 0 To TotalArray
         If Cad <> "" Then Cad = Cad & ", "
-        If (InStr(CabColumnas(I), "if") > 0) Or (InStr(CabColumnas(I), "case") > 0) Then
-            Cad = Cad & CabColumnas(I)
+        If (InStr(CabColumnas(i), "if") > 0) Or (InStr(CabColumnas(i), "case") > 0) Then
+            Cad = Cad & CabColumnas(i)
         Else
             'Si no he indicado la tabla, NO la pongo, ni pongo el punto(.)
-            If CabTablas(I) <> "" Then Cad = Cad & CabTablas(I) & "."
-            Cad = Cad & CabColumnas(I)
+            If CabTablas(i) <> "" Then Cad = Cad & CabTablas(i) & "."
+            Cad = Cad & CabColumnas(i)
         End If
-    Next I
+    Next i
     Cad = "SELECT " & Cad & " FROM " & vTabla
     If vSQL <> "" Then
         Cad = Cad & " WHERE " & vSQL
@@ -654,63 +753,63 @@ On Error GoTo ECargaGrid
     'antes:
     ' cad = cad & " ORDER BY " & CabColumnas(vselElem)
     Orden = CabColumnas(vselElem)
-    I = InStr(1, Orden, " as ")
-    If I > 0 Then Orden = Mid(Orden, I + 4)
+    i = InStr(1, Orden, " as ")
+    If i > 0 Then Orden = Mid(Orden, i + 4)
     Cad = Cad & " ORDER BY " & Orden
     '--------------------------------------------------------
-
+    DataGrid1.RowHeight = 330
 
     Select Case vConexionGrid
         Case 1  'Conexión a BDatos: Ariges
-                Adodc1.ConnectionString = conn
+                adodc1.ConnectionString = conn
         Case 2  'Conexión a BDatos: Conta
-                Adodc1.ConnectionString = ConnConta
+                adodc1.ConnectionString = ConnConta
     End Select
-
-    Adodc1.RecordSource = Cad
-    Adodc1.Refresh
+    
+    adodc1.RecordSource = Cad
+    adodc1.Refresh
 
     'If adodc1.Recordset.RecordCount > 0 Then
-    If (vCargaFrame = False) Or (vCargaFrame = True And Adodc1.Recordset.RecordCount > 0) Then
+    If (vCargaFrame = False) Or (vCargaFrame = True And adodc1.Recordset.RecordCount > 0) Then
         DataGrid1.AllowRowSizing = False
         DataGrid1.visible = True
         'Cargamos el grid
         anc = DataGrid1.Width - 640
         
-        For I = 0 To TotalArray
-            DataGrid1.Columns(I).Caption = Cabeceras(I)
-            If FormatoCampo(I) <> "" Then
-                DataGrid1.Columns(I).NumberFormat = FormatoCampo(I)
-                If InStr(1, FormatoCampo(I), ".") Then DataGrid1.Columns(I).Alignment = dbgRight
+        For i = 0 To TotalArray
+            DataGrid1.Columns(i).Caption = Cabeceras(i)
+            If FormatoCampo(i) <> "" Then
+                DataGrid1.Columns(i).NumberFormat = FormatoCampo(i)
+                If InStr(1, FormatoCampo(i), ".") Then DataGrid1.Columns(i).Alignment = dbgRight
             End If
-            If CabAncho(I) = 0 Then
-                DataGrid1.Columns(I).visible = False
+            If CabAncho(i) = 0 Then
+                DataGrid1.Columns(i).visible = False
             Else
-                DataGrid1.Columns(I).Width = anc * (CabAncho(I) / 100)
+                DataGrid1.Columns(i).Width = anc * (CabAncho(i) / 100)
             End If
-        Next I
+        Next i
     
          'Habilitamos el text1 para que escriban
         DataGrid1.Enabled = True
         Text1.Enabled = True
         Text1.visible = True
     
-        If Not Adodc1.Recordset.EOF Then
+        If Not adodc1.Recordset.EOF Then
             'Le ponemos el 1er registro
             Cad = CabColumnas(vselElem)
             
              '---- Añade: LAura 08/06/2005
             'Si hay if/case en nombre columna cogemos el renombrado: if(colum=x,,) as colum
-            I = InStr(1, Cad, " as ")
-            If I > 0 Then
-                Cad = Mid(Cad, I + 4)
+            i = InStr(1, Cad, " as ")
+            If i > 0 Then
+                Cad = Mid(Cad, i + 4)
                 Cad = Trim(Cad)
             End If
             
             '---- Modifica: Laura 2005 --------------
             '---- se añade el formato del campo
             If FormatoCampo(vselElem) <> "" Then
-                Text1.Text = Format(Adodc1.Recordset(Cad), FormatoCampo(vselElem))
+                Text1.Text = Format(adodc1.Recordset(Cad), FormatoCampo(vselElem))
             Else
                ' Text1.Text = DBLet(Adodc1.Recordset(cad))
             End If
@@ -738,15 +837,15 @@ End Sub
 
 Private Sub CargaFrame()
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
     
     frameBusqueda.visible = True
-    For I = 0 To TotalArray
-        Option1(I).Caption = Cabeceras(I)
-    Next I
-    I = 0
-    Option1(I).Value = True
-    lblBusqueda.Caption = Cabeceras(I)
+    For i = 0 To TotalArray
+        Option1(i).Caption = Cabeceras(i)
+    Next i
+    i = 0
+    Option1(i).Value = True
+    lblBusqueda.Caption = Cabeceras(i)
     txtBusqueda.Text = ""
     txtBusqueda.SetFocus
     
@@ -763,8 +862,8 @@ Private Sub ConfiguraForm(ByVal Tamanyo As Integer)
     Select Case Tamanyo
     Case 0  'Tamaño normal
         DataGrid1.visible = True
-        Me.Height = 6225
-        Me.DataGrid1.Height = 3075
+        Me.Height = 7830
+        Me.DataGrid1.Height = 5115
         If Me.frameBusqueda.visible Then Me.Top = 2600
 '        Me.Top = 1400
         Me.cmdSalir(0).visible = True
@@ -800,9 +899,9 @@ Dim pTexto As String
 
 
     If Trim(Text1) = "" Then
-        If Not Me.Adodc1.Recordset.EOF Then
-            If Not Adodc1.Recordset.BOF Then
-                Adodc1.Recordset.MoveFirst
+        If Not Me.adodc1.Recordset.EOF Then
+            If Not adodc1.Recordset.BOF Then
+                adodc1.Recordset.MoveFirst
             End If
         End If
         Exit Sub
@@ -819,7 +918,7 @@ Dim pTexto As String
     Select Case TipoCampo(vselElem)
         Case "N"
             If Not IsNumeric(Text1.Text) Then
-                If Adodc1.Recordset.RecordCount > 0 Then Adodc1.Recordset.MoveFirst
+                If adodc1.Recordset.RecordCount > 0 Then adodc1.Recordset.MoveFirst
                 Exit Sub
             End If
             If Len(Trim(Text1)) > Len(FormatoCampo(vselElem)) Then
@@ -843,7 +942,7 @@ Dim pTexto As String
     End Select
     Screen.MousePointer = vbHourglass
     
-    Adodc1.Recordset.Find SQLDBGRID, , adSearchForward, 1
+    adodc1.Recordset.Find SQLDBGRID, , adSearchForward, 1
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -852,7 +951,7 @@ Private Sub Text1_GotFocus()
 End Sub
 
 Private Sub Text1_KeyDown(KeyCode As Integer, Shift As Integer)
-Dim b As Boolean
+Dim B As Boolean
 
     If KeyCode = 13 Then cmdRegresar_Click 'ENTER
     
@@ -862,15 +961,15 @@ Dim b As Boolean
     End If
     
     If KeyCode = 38 Or KeyCode = 40 Then
-        b = False
+        B = False
         If KeyCode = 38 Then
-            If Not Adodc1.Recordset.BOF Then
-                Adodc1.Recordset.MovePrevious
+            If Not adodc1.Recordset.BOF Then
+                adodc1.Recordset.MovePrevious
             End If
         Else
-            If Not Adodc1.Recordset.EOF Then
-                Adodc1.Recordset.MoveNext
-                b = True
+            If Not adodc1.Recordset.EOF Then
+                adodc1.Recordset.MoveNext
+                B = True
             End If
         End If
         KeyCode = 0

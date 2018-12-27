@@ -4,7 +4,7 @@ Option Explicit
 
 
 
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim rs2 As ADODB.Recordset
 Dim SQL As String
 
@@ -24,40 +24,40 @@ Public Function TraspasaAsociadoAriges(IdAsoc As Long, ByRef rsUdNegocio As ADOD
     
     TraspasaAsociadoAriges = False
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
     '-- comprobamos si esta asociado ya existía como cliente al otro lado
     SQL = "select * from ariges" & rsUdNegocio!empresa_conta & ".sclien where codclien = " & IdAsoc
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     yaExiste_ = False
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
         yaExiste_ = True
-        Auxiliar2 = DBLet(RS!observac, "T")
+        Auxiliar2 = DBLet(Rs!observac, "T")
     End If
-    RS.Close
+    Rs.Close
 
 
     'NO existe veo los valores por defecto para
     'defenvio,defzona,defruta,defagente,
     If Not yaExiste_ Then
         SQL = "Select defenvio,defzona,defruta,defagente from  ariges" & rsUdNegocio!empresa_conta & ".spara1"
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         'NO PUEDE SER EOF
-        Auxiliar2 = RS!defenvio & "|" & RS!defzona & "|" & RS!defruta & "|" & RS!defagente & "|"
-        RS.Close
+        Auxiliar2 = Rs!defenvio & "|" & Rs!defzona & "|" & Rs!defruta & "|" & Rs!defagente & "|"
+        Rs.Close
             
     End If
         
     '-- Buscamos los datos del asociado
     SQL = "select * from asociados where IdAsoc = " & IdAsoc
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
         
         'Establezco la cuenta para contabilidad
-        If RS!essocio Then
-            Codmacta = rsUdNegocio!raiz_cliente_socio & Format(RS!CodSocEuroagro, "00000")
+        If Rs!essocio Then
+            Codmacta = rsUdNegocio!raiz_cliente_socio & Format(Rs!CodSocEuroagro, "00000")
         Else
-            Codmacta = rsUdNegocio!raiz_cliente_asociado & Format(RS!IdAsoc, "00000")
+            Codmacta = rsUdNegocio!raiz_cliente_asociado & Format(Rs!IdAsoc, "00000")
         End If
         
         
@@ -73,16 +73,16 @@ Public Function TraspasaAsociadoAriges(IdAsoc As Long, ByRef rsUdNegocio As ADOD
             SQL = SQL & "  iban, codbanco, codsucur, digcontr, cuentaba, codmacta, codtarif "
             SQL = SQL & " ,codenvio, codzonas, codrutas, codagent,visitador, codforpa, diapago1"
             SQL = SQL & " ,clivario, tipoiva, tipofact, albarcon, periodof, numrepet,"
-            SQL = SQL & " dtoppago, dtognral, promocio, codsitua, referobl,cliabono,pasclien"
+            SQL = SQL & " dtoppago, dtognral, promocio, codsitua, referobl,cliabono,pasclien,credipriv"
             SQL = SQL & ") values ("
             SQL = SQL & IdAsoc & ","
-            SQL = SQL & DBSet(RS!nomlargo, "T") & ","
-            SQL = SQL & DBSet(RS!nomlargo, "T") & ","
-            SQL = SQL & DBSet(RS!Direccion, "T") & ","
-            SQL = SQL & DBSet(RS!CodPostal, "N") & ","
-            SQL = SQL & DBSet(RS!Poblacion, "T") & ","
-            SQL = SQL & DBSet(RS!Provincia, "T") & ","
-            SQL = SQL & DBSet(RS!NIF, "T") & ","
+            SQL = SQL & DBSet(Rs!nomlargo, "T") & ","
+            SQL = SQL & DBSet(Rs!nomlargo, "T") & ","
+            SQL = SQL & DBSet(Rs!Direccion, "T") & ","
+            SQL = SQL & DBSet(Rs!CodPostal, "N") & ","
+            SQL = SQL & DBSet(Rs!Poblacion, "T") & ","
+            SQL = SQL & DBSet(Rs!Provincia, "T") & ","
+            SQL = SQL & DBSet(Rs!NIF, "T") & ","
             
             'Nov 2014
             SQL = SQL & DBSet(FechaDeAlta, "F") & ","
@@ -96,19 +96,19 @@ Public Function TraspasaAsociadoAriges(IdAsoc As Long, ByRef rsUdNegocio As ADOD
             'Else
             '    SQL = SQL & "2"
             'End If
-            SQL = SQL & RS!tarifaprecio
+            SQL = SQL & Rs!tarifaprecio
             
-            SQL = SQL & "," & DBSet(RS!Telefono1, "T") & ","
-            SQL = SQL & DBSet(RS!Movil, "T") & ","
-            SQL = SQL & DBSet(RS!mail, "T") & ","
-            SQL = SQL & DBSet(RS!Telefono2, "T") & "," & DBSet(RS!Telefono3, "T") & ","
+            SQL = SQL & "," & DBSet(Rs!Telefono1, "T") & ","
+            SQL = SQL & DBSet(Rs!Movil, "T") & ","
+            SQL = SQL & DBSet(Rs!mail, "T") & ","
+            SQL = SQL & DBSet(Rs!Telefono2, "T") & "," & DBSet(Rs!Telefono3, "T") & ","
             
             'iban, codbanco, codsucur, digcontr, cuentaba,codmacta
-            SQL = SQL & DBSet(RS!Iban, "T", "S") & ","
-            SQL = SQL & DBLet(RS!entidad, "N") & ","
-            SQL = SQL & DBLet(RS!Sucursal, "N") & ","
-            SQL = SQL & DBSet(RS!DC, "T") & ","
-            SQL = SQL & DBSet(RS!NumCC, "T") & ","
+            SQL = SQL & DBSet(Rs!Iban, "T", "S") & ","
+            SQL = SQL & DBLet(Rs!entidad, "N") & ","
+            SQL = SQL & DBLet(Rs!Sucursal, "N") & ","
+            SQL = SQL & DBSet(Rs!DC, "T") & ","
+            SQL = SQL & DBSet(Rs!NumCC, "T") & ","
             'Codmacta
             SQL = SQL & DBSet(Codmacta, "T")
             
@@ -139,14 +139,14 @@ Public Function TraspasaAsociadoAriges(IdAsoc As Long, ByRef rsUdNegocio As ADOD
             'dtoppago, dtognral, promocio, codsitua, referobl,  cliabono pasclien"
             'tarifaprecio
             SQL = SQL & "0,0,1,0,0,"
-            If RS!tarifaprecio = 1 Then
+            If Rs!tarifaprecio = 1 Then
                 SQL = SQL & "0"
             Else
                 SQL = SQL & "1"
             End If
             
             
-            SQL = SQL & "," & DBSet(RS!NIF, "T")
+            SQL = SQL & "," & DBSet(Rs!NIF, "T") & ",9"   '9. SIN asegurar (credipriv)
             SQL = SQL & ")"
             
         Else
@@ -159,34 +159,34 @@ Public Function TraspasaAsociadoAriges(IdAsoc As Long, ByRef rsUdNegocio As ADOD
             
             
             SQL = "UPDATE ariges" & rsUdNegocio!empresa_conta & ".sclien SET "
-            SQL = SQL & " nomclien = " & DBSet(RS!nomlargo, "T")
-            SQL = SQL & ", nomcomer = " & DBSet(RS!nomlargo, "T")
-            SQL = SQL & ", domclien = " & DBSet(RS!Direccion, "T")
-            SQL = SQL & ", codpobla = " & DBSet(RS!CodPostal, "N")
-            SQL = SQL & ", pobclien = " & DBSet(RS!Poblacion, "T")
-            SQL = SQL & ", proclien = " & DBSet(RS!Provincia, "T")
-            SQL = SQL & ", nifclien = " & DBSet(RS!NIF, "T")
+            SQL = SQL & " nomclien = " & DBSet(Rs!nomlargo, "T")
+            SQL = SQL & ", nomcomer = " & DBSet(Rs!nomlargo, "T")
+            SQL = SQL & ", domclien = " & DBSet(Rs!Direccion, "T")
+            SQL = SQL & ", codpobla = " & DBSet(Rs!CodPostal, "N")
+            SQL = SQL & ", pobclien = " & DBSet(Rs!Poblacion, "T")
+            SQL = SQL & ", proclien = " & DBSet(Rs!Provincia, "T")
+            SQL = SQL & ", nifclien = " & DBSet(Rs!NIF, "T")
             
-            SQL = SQL & ", telclie1 = " & DBSet(RS!Telefono1, "T")
-            SQL = SQL & ", faxclie1 = " & DBSet(RS!Movil, "T")
-            SQL = SQL & ", maiclie1 = " & DBSet(RS!mail, "T")
-            SQL = SQL & ", telclie2 = " & DBSet(RS!Telefono2, "T")
-            SQL = SQL & ", faxclie2 = " & DBSet(RS!Telefono3, "T")
+            SQL = SQL & ", telclie1 = " & DBSet(Rs!Telefono1, "T")
+            SQL = SQL & ", faxclie1 = " & DBSet(Rs!Movil, "T")
+            SQL = SQL & ", maiclie1 = " & DBSet(Rs!mail, "T")
+            SQL = SQL & ", telclie2 = " & DBSet(Rs!Telefono2, "T")
+            SQL = SQL & ", faxclie2 = " & DBSet(Rs!Telefono3, "T")
 
-            SQL = SQL & ", iban = " & DBSet(RS!Iban, "T")
-            SQL = SQL & ", codbanco = " & DBSet(RS!entidad, "N")
-            SQL = SQL & ", codsucur = " & DBSet(RS!Sucursal, "N")
-            SQL = SQL & ", digcontr = " & DBSet(RS!DC, "T")
-            SQL = SQL & ", cuentaba = " & DBSet(RS!NumCC, "T")
+            SQL = SQL & ", iban = " & DBSet(Rs!Iban, "T")
+            SQL = SQL & ", codbanco = " & DBSet(Rs!entidad, "N")
+            SQL = SQL & ", codsucur = " & DBSet(Rs!Sucursal, "N")
+            SQL = SQL & ", digcontr = " & DBSet(Rs!DC, "T")
+            SQL = SQL & ", cuentaba = " & DBSet(Rs!NumCC, "T")
                 
             'Antes JUNIO 2014
             'SQL = SQL & ", codtarif = " & RS!tarifaprecio
-            SQL = SQL & ", codactiv = " & RS!tarifaprecio
+            SQL = SQL & ", codactiv = " & Rs!tarifaprecio
             
             'Cuent alternativa
             SQL = SQL & ", cliabono = "
             
-            If RS!tarifaprecio = 1 Then
+            If Rs!tarifaprecio = 1 Then
                 SQL = SQL & "0"
             Else
                 SQL = SQL & "1"
@@ -212,7 +212,7 @@ Public Function TraspasaAsociadoAriges(IdAsoc As Long, ByRef rsUdNegocio As ADOD
             End If
             If SQL = "" Then
                 'No existe la cuenta. La creo
-                ActualizarLaCuenta LaConta, Codmacta, RS, vParamAplic.ContabilidadNueva
+                ActualizarLaCuenta LaConta, Codmacta, Rs, vParamAplic.ContabilidadNueva
                 Espera 0.2
             End If
             
@@ -224,7 +224,7 @@ Public Function TraspasaAsociadoAriges(IdAsoc As Long, ByRef rsUdNegocio As ADOD
         
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -239,7 +239,7 @@ Dim Codmacta As String
 Dim UltimoNivel As Byte
 Dim i As Byte
 
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Set rUd = New ADODB.Recordset
     Set rs2 = New ADODB.Recordset
     SQL = "select unidadesnegocio.* from asociados_unidadesnegocio,unidadesnegocio where "
@@ -249,8 +249,8 @@ Dim i As Byte
     rUd.Open SQL & " order by empresa_conta", conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not rUd.EOF Then
         SQL = "select * from asociados where IdAsoc = " & CStr(IdAsoc)
-        RS.Open SQL, conn, adOpenForwardOnly
-        If Not RS.EOF Then
+        Rs.Open SQL, conn, adOpenForwardOnly
+        If Not Rs.EOF Then
     
     
             While Not rUd.EOF
@@ -276,29 +276,29 @@ Dim i As Byte
                          
                         Codmacta = rUd!raiz_cliente_asociado & Format(IdAsoc, Codmacta)
                         
-                        ActualizarLaCuenta CStr(rUd!empresa_conta), Codmacta, RS, vParamAplic.ContabilidadNueva
+                        ActualizarLaCuenta CStr(rUd!empresa_conta), Codmacta, Rs, vParamAplic.ContabilidadNueva
                        
                         conn.Execute "update asociados set codmacta = '" & Codmacta & "' where IdAsoc = " & CStr(IdAsoc)
                     Else
                         'Pueden ser varias cuentas a actualizar
-                        If rUd!raiz_cliente_socio <> "" And RS!essocio = 1 Then
+                        If rUd!raiz_cliente_socio <> "" And Rs!essocio = 1 Then
                             '
                              i = UltimoNivel - Len(rUd!raiz_cliente_socio)
                              Codmacta = String(CLng(i), "0")
                              
-                             Codmacta = rUd!raiz_cliente_socio & Format(RS!CodSocEuroagro, Codmacta)
+                             Codmacta = rUd!raiz_cliente_socio & Format(Rs!CodSocEuroagro, Codmacta)
                              
-                             ActualizarLaCuenta CStr(rUd!empresa_conta), Codmacta, RS, vParamAplic.ContabilidadNueva
+                             ActualizarLaCuenta CStr(rUd!empresa_conta), Codmacta, Rs, vParamAplic.ContabilidadNueva
                                                           
                         End If
                                                 
-                        If rUd!raiz_cliente_asociado <> "" And RS!essocio = 0 Then
+                        If rUd!raiz_cliente_asociado <> "" And Rs!essocio = 0 Then
                             i = UltimoNivel - Len(rUd!raiz_cliente_asociado)
                             Codmacta = String(CLng(i), "0")
                              
                             Codmacta = rUd!raiz_cliente_asociado & Format(IdAsoc, Codmacta)
                             
-                            ActualizarLaCuenta CStr(rUd!empresa_conta), Codmacta, RS, vParamAplic.ContabilidadNueva
+                            ActualizarLaCuenta CStr(rUd!empresa_conta), Codmacta, Rs, vParamAplic.ContabilidadNueva
                             
                             
                             
@@ -311,12 +311,12 @@ Dim i As Byte
                     i = UltimoNivel - Len(rUd!raiz_proveedor)
                     Codmacta = String(CLng(i), "0")
                     
-                    If RS!essocio = 1 Then
-                        Codmacta = rUd!raiz_proveedor & Format(RS!CodSocEuroagro, Codmacta)
+                    If Rs!essocio = 1 Then
+                        Codmacta = rUd!raiz_proveedor & Format(Rs!CodSocEuroagro, Codmacta)
                     Else
                         Codmacta = rUd!raiz_proveedor & Format(IdAsoc, Codmacta)
                     End If
-                    ActualizarLaCuenta CStr(rUd!empresa_conta), Codmacta, RS, vParamAplic.ContabilidadNueva
+                    ActualizarLaCuenta CStr(rUd!empresa_conta), Codmacta, Rs, vParamAplic.ContabilidadNueva
                 End If
                         
 
@@ -326,11 +326,11 @@ Dim i As Byte
             
         
         End If
-        RS.Close
+        Rs.Close
     End If
     rUd.Close
     Set rUd = Nothing
-    Set RS = Nothing
+    Set Rs = Nothing
     Set rs2 = Nothing
 End Function
 
@@ -450,12 +450,12 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
     SQL = SQL & " and (fechabaja is null)"
     SQL = SQL & " and CodSocEuroagro < 10000"
     SQL = SQL & " and EsSocio = 1"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
         '-- Lo primero es montar el nuevo socio
-        SQL = DevuelveDesdeBD(conAri, "codsocio", "ariagro.rsocios", "codsocio", RS!CodSocEuroagro)
+        SQL = DevuelveDesdeBD(conAri, "codsocio", "ariagro.rsocios", "codsocio", Rs!CodSocEuroagro)
         
         If SQL = "" Then
         
@@ -467,37 +467,37 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
                     "codcoope, IBAN,codbanco, codsucur, digcontr, cuentaba, observaciones," & _
                     "fechaalta, fechabaja, correo, codiva, tipoirpf, tipoprod, codsitua) VALUES ("
             'odsocio, nifsocio, nomsocio, dirsocio, pobsocio, prosocio
-            SQL = SQL & DBSet(RS!CodSocEuroagro, "N") & ","
-            SQL = SQL & DBSet(RS!NIF, "T") & ","
-            SQL = SQL & DBSet(RS!nomlargo, "T") & ","
-            SQL = SQL & DBSet(RS!Direccion, "T") & ","
-            SQL = SQL & DBSet(RS!Poblacion, "T") & ","
-            SQL = SQL & DBSet(RS!Provincia, "T") & ","
+            SQL = SQL & DBSet(Rs!CodSocEuroagro, "N") & ","
+            SQL = SQL & DBSet(Rs!NIF, "T") & ","
+            SQL = SQL & DBSet(Rs!nomlargo, "T") & ","
+            SQL = SQL & DBSet(Rs!Direccion, "T") & ","
+            SQL = SQL & DBSet(Rs!Poblacion, "T") & ","
+            SQL = SQL & DBSet(Rs!Provincia, "T") & ","
     
             'codpostal, fechanac, telsoci1, telsoci2, telsoci3, movsocio, maisocio
-            SQL = SQL & DBSet(RS!CodPostal, "N") & ","
-            SQL = SQL & DBSet(RS!FechaNac, "F") & ","
-            SQL = SQL & DBSet(RS!Telefono1, "T") & ","
-            SQL = SQL & DBSet(RS!Telefono2, "T") & ","
-            SQL = SQL & DBSet(RS!Telefono3, "T") & ","
-            SQL = SQL & DBSet(RS!Movil, "T") & ","
-            SQL = SQL & DBSet(RS!mail, "T") & ","
+            SQL = SQL & DBSet(Rs!CodPostal, "N") & ","
+            SQL = SQL & DBSet(Rs!FechaNac, "F") & ","
+            SQL = SQL & DBSet(Rs!Telefono1, "T") & ","
+            SQL = SQL & DBSet(Rs!Telefono2, "T") & ","
+            SQL = SQL & DBSet(Rs!Telefono3, "T") & ","
+            SQL = SQL & DBSet(Rs!Movil, "T") & ","
+            SQL = SQL & DBSet(Rs!mail, "T") & ","
             
             'codcoope, IBAN,codbanco, codsucur, digcontr, cuentaba, observaciones
             SQL = SQL & "1,"   '-- Ponemos la cooperativa 1 a capón (OJO)
-            SQL = SQL & DBSet(RS!Iban, "T") & ","
-            SQL = SQL & DBSet(RS!entidad, "N") & ","
-            SQL = SQL & DBSet(RS!Sucursal, "N") & ","
-            SQL = SQL & DBSet(RS!DC, "T") & ","
-            SQL = SQL & DBSet(RS!NumCC, "T") & ","
+            SQL = SQL & DBSet(Rs!Iban, "T") & ","
+            SQL = SQL & DBSet(Rs!entidad, "N") & ","
+            SQL = SQL & DBSet(Rs!Sucursal, "N") & ","
+            SQL = SQL & DBSet(Rs!DC, "T") & ","
+            SQL = SQL & DBSet(Rs!NumCC, "T") & ","
             SQL = SQL & "'Gesocial: " & Format(Now, "dd/mm/yyyy hh:mm:ss") & "',"
             
             'fechaalta, fechabaja, correo, codiva, tipoirpf, tipoprod, codsitua
-            SQL = SQL & DBSet(RS!fechaalta, "F") & ","
-            SQL = SQL & DBSet(RS!fechabaja, "F", "S") & ","
-            SQL = SQL & DBSet(RS!Correo, "T") & ","
-            SQL = SQL & DBSet(RS!TipoIrpf, "N") & ","
-            SQL = SQL & "0,1,1)"
+            SQL = SQL & DBSet(Rs!fechaalta, "F") & ","
+            SQL = SQL & DBSet(Rs!fechabaja, "F", "S") & ","
+            SQL = SQL & DBSet(Rs!Correo, "T") & ","
+            SQL = SQL & DBSet(Rs!TipoIrpf, "N") & ","
+            SQL = SQL & "0,0,1)"
                 
                 
             
@@ -508,37 +508,37 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
            
             ' nifsocio, nomsocio, dirsocio, pobsocio, prosocio
             SQL = "UPDATE ariagro.rsocios SET "
-            SQL = SQL & " nifsocio = " & DBSet(RS!NIF, "T") & ","
-            SQL = SQL & " nomsocio = " & DBSet(RS!nomlargo, "T") & ","
-            SQL = SQL & " dirsocio = " & DBSet(RS!Direccion, "T") & ","
-            SQL = SQL & " pobsocio = " & DBSet(RS!Poblacion, "T") & ","
-            SQL = SQL & " prosocio = " & DBSet(RS!Provincia, "T") & ","
+            SQL = SQL & " nifsocio = " & DBSet(Rs!NIF, "T") & ","
+            SQL = SQL & " nomsocio = " & DBSet(Rs!nomlargo, "T") & ","
+            SQL = SQL & " dirsocio = " & DBSet(Rs!Direccion, "T") & ","
+            SQL = SQL & " pobsocio = " & DBSet(Rs!Poblacion, "T") & ","
+            SQL = SQL & " prosocio = " & DBSet(Rs!Provincia, "T") & ","
             
             
             'codpostal, fechanac, telsoci1, telsoci2, telsoci3, movsocio, maisocio
-            SQL = SQL & " codpostal = " & DBSet(RS!CodPostal, "N") & ","
-            SQL = SQL & " fechanac = " & DBSet(RS!FechaNac, "F") & ","
-            SQL = SQL & " telsoci1 = " & DBSet(RS!Telefono1, "T") & ","
-            SQL = SQL & " telsoci2 = " & DBSet(RS!Telefono2, "T") & ","
-            SQL = SQL & " telsoci3 = " & DBSet(RS!Telefono3, "T") & ","
-            SQL = SQL & " movsocio = " & DBSet(RS!Movil, "T") & ","
-            SQL = SQL & " maisocio = " & DBSet(RS!mail, "T") & ","
+            SQL = SQL & " codpostal = " & DBSet(Rs!CodPostal, "N") & ","
+            SQL = SQL & " fechanac = " & DBSet(Rs!FechaNac, "F") & ","
+            SQL = SQL & " telsoci1 = " & DBSet(Rs!Telefono1, "T") & ","
+            SQL = SQL & " telsoci2 = " & DBSet(Rs!Telefono2, "T") & ","
+            SQL = SQL & " telsoci3 = " & DBSet(Rs!Telefono3, "T") & ","
+            SQL = SQL & " movsocio = " & DBSet(Rs!Movil, "T") & ","
+            SQL = SQL & " maisocio = " & DBSet(Rs!mail, "T") & ","
             
             ' IBAN,codbanco, codsucur, digcontr, cuentaba, observaciones
-            SQL = SQL & " IBAN = " & DBSet(RS!Iban, "T") & ","
-            SQL = SQL & " codbanco = " & DBSet(RS!entidad, "N") & ","
-            SQL = SQL & " codsucur = " & DBSet(RS!Sucursal, "N") & ","
-            SQL = SQL & " digcontr = " & DBSet(RS!DC, "T") & ","
-            SQL = SQL & " cuentaba= " & DBSet(RS!NumCC, "T") & ","
+            SQL = SQL & " IBAN = " & DBSet(Rs!Iban, "T") & ","
+            SQL = SQL & " codbanco = " & DBSet(Rs!entidad, "N") & ","
+            SQL = SQL & " codsucur = " & DBSet(Rs!Sucursal, "N") & ","
+            SQL = SQL & " digcontr = " & DBSet(Rs!DC, "T") & ","
+            SQL = SQL & " cuentaba= " & DBSet(Rs!NumCC, "T") & ","
 
             
             'fechaalta, fechabaja, correo, codiva,
-            SQL = SQL & " fechaalta = " & DBSet(RS!fechaalta, "F") & ","
+            SQL = SQL & " fechaalta = " & DBSet(Rs!fechaalta, "F") & ","
             'Sql = Sql & " fechabaja = " & DBSet(RS!fechabaja, "F", "S") & ","
-            SQL = SQL & " correo = " & DBSet(RS!Correo, "N") & ","
-            SQL = SQL & " codiva = " & DBSet(RS!TipoIrpf, "N")
+            SQL = SQL & " correo = " & DBSet(Rs!Correo, "N") & ","
+            SQL = SQL & " codiva = " & DBSet(Rs!TipoIrpf, "N")
             
-            SQL = SQL & " WHERE codsocio = " & DBSet(RS!CodSocEuroagro, "N")
+            SQL = SQL & " WHERE codsocio = " & DBSet(Rs!CodSocEuroagro, "N")
             
         End If
             
@@ -599,38 +599,38 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
            
             
             CodMacCli = ""
-            If DBLet(rs2!raiz_cliente_asociado, "T") <> "" Then CodMacCli = rs2!raiz_cliente_asociado & Format(RS!CodSocEuroagro, String(i - Len(rs2!raiz_cliente_asociado), "0"))
+            If DBLet(rs2!raiz_cliente_asociado, "T") <> "" Then CodMacCli = rs2!raiz_cliente_asociado & Format(Rs!CodSocEuroagro, String(i - Len(rs2!raiz_cliente_asociado), "0"))
             CodMacPro = ""
-            If DBLet(rs2!raiz_proveedor, "T") <> "" Then CodMacPro = rs2!raiz_proveedor & Format(RS!CodSocEuroagro, String(i - Len(rs2!raiz_proveedor), "0"))
+            If DBLet(rs2!raiz_proveedor, "T") <> "" Then CodMacPro = rs2!raiz_proveedor & Format(Rs!CodSocEuroagro, String(i - Len(rs2!raiz_proveedor), "0"))
 
             
-            SQL = " codsocio = " & RS!CodSocEuroagro & " and codsecci "
+            SQL = " codsocio = " & Rs!CodSocEuroagro & " and codsecci "
             SQL = DevuelveDesdeBD(conAri, "codsecci", "ariagro.rsocios_seccion", SQL, rs2!CodSeccEuroagro)
              '-- NO existe y se da de alta
             If SQL = "" Then
                 SQL = "insert into ariagro.rsocios_seccion(codsocio, codsecci, fecalta, fecbaja," & _
                         "codmaccli, codmacpro, codiva) VALUES ("
-                SQL = SQL & RS!CodSocEuroagro & "," & rs2!CodSeccEuroagro & ","
-                SQL = SQL & DBSet(RS!fechaalta, "F") & ","
-                SQL = SQL & DBSet(RS!fechabaja, "F", "S") & ","
+                SQL = SQL & Rs!CodSocEuroagro & "," & rs2!CodSeccEuroagro & ","
+                SQL = SQL & DBSet(Rs!fechaalta, "F") & ","
+                SQL = SQL & DBSet(Rs!fechabaja, "F", "S") & ","
                 SQL = SQL & DBSet(CodMacCli, "T", "S") & ","
                 SQL = SQL & DBSet(CodMacPro, "T", "S") & ","
-                SQL = SQL & RS!CodIva & ")"
+                SQL = SQL & Rs!CodIva & ")"
             Else
                 '-- Si existe y se modifica
                 SQL = "update ariagro.rsocios_seccion set "
-                SQL = SQL & "fecalta = " & DBSet(RS!fechaalta, "F") & ","
-                SQL = SQL & "fecbaja = " & DBSet(RS!fechabaja, "F", "S") & ","
+                SQL = SQL & "fecalta = " & DBSet(Rs!fechaalta, "F") & ","
+                SQL = SQL & "fecbaja = " & DBSet(Rs!fechabaja, "F", "S") & ","
                 SQL = SQL & "codmaccli = " & DBSet(CodMacCli, "T", "S") & ","
                 SQL = SQL & "codmacpro = " & DBSet(CodMacPro, "T", "S")
-                SQL = SQL & " where codsocio = " & RS!CodSocEuroagro
+                SQL = SQL & " where codsocio = " & Rs!CodSocEuroagro
                 SQL = SQL & " and codsecci = " & rs2!CodSeccEuroagro
             End If
             conn.Execute SQL
            
             'LAs cremos en contabilidad
-            If CodMacCli <> "" Then ActualizarLaCuenta CStr(rs2!empresa_conta), CodMacCli, RS, vParamAplic.ContabilidadNueva
-            If CodMacPro <> "" Then ActualizarLaCuenta CStr(rs2!empresa_conta), CodMacPro, RS, vParamAplic.ContabilidadNueva
+            If CodMacCli <> "" Then ActualizarLaCuenta CStr(rs2!empresa_conta), CodMacCli, Rs, vParamAplic.ContabilidadNueva
+            If CodMacPro <> "" Then ActualizarLaCuenta CStr(rs2!empresa_conta), CodMacPro, Rs, vParamAplic.ContabilidadNueva
             rs2.MoveNext
         Wend
         rs2.Close
@@ -641,8 +641,8 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
         ActualizaSocioAriagro = True
         
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 
@@ -658,18 +658,18 @@ Public Function ActGasolineraAsociadoSocio(IdAsoc As Long, IdEntidadCoop As Inte
 Dim TipoConta As Byte
     
     '-- Primero buscamos al asociado en GesSocial para obtener sus datos
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Set rs2 = New ADODB.Recordset
     SQL = "select * from asociados where IdAsoc = " & CStr(IdAsoc)
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
     
         ''Octubre 2014.
         'Tipconta=1 SI, y solo si, Essocio=1 ; FechaBaja= Nulo ; tarifa precio = 1
         TipoConta = 0
-        If DBSet(RS!essocio, "N") = 1 Then
-            If IsNull(RS!fechabaja) Then
-                If DBLet(RS!tarifaprecio, "N") = 1 Then TipoConta = 1
+        If DBSet(Rs!essocio, "N") = 1 Then
+            If IsNull(Rs!fechabaja) Then
+                If DBLet(Rs!tarifaprecio, "N") = 1 Then TipoConta = 1
             End If
         End If
     
@@ -692,22 +692,22 @@ Dim TipoConta As Byte
                     "impfactu,dtolitro,codforpa,tipsocio,bonifbas,codsitua,codmacta,obssocio,tipconta)"
             SQL = SQL & " values("
             SQL = SQL & IdAsoc & "," & IdEntidadCoop & ","
-            SQL = SQL & DBSet(RS!nomlargo, "T") & ","
-            SQL = SQL & DBSet(RS!Direccion, "T") & ","
-            SQL = SQL & DBSet(RS!CodPostal, "T") & ","
-            SQL = SQL & DBSet(RS!Poblacion, "T") & ","
-            SQL = SQL & DBSet(RS!Provincia, "T") & ","
-            SQL = SQL & DBSet(RS!NIF, "T") & ","
-            SQL = SQL & DBSet(RS!Telefono1, "T") & ","
-            SQL = SQL & DBSet(RS!Movil, "T") & ","
-            SQL = SQL & DBSet(RS!mail, "T") & ","
+            SQL = SQL & DBSet(Rs!nomlargo, "T") & ","
+            SQL = SQL & DBSet(Rs!Direccion, "T") & ","
+            SQL = SQL & DBSet(Rs!CodPostal, "T") & ","
+            SQL = SQL & DBSet(Rs!Poblacion, "T") & ","
+            SQL = SQL & DBSet(Rs!Provincia, "T") & ","
+            SQL = SQL & DBSet(Rs!NIF, "T") & ","
+            SQL = SQL & DBSet(Rs!Telefono1, "T") & ","
+            SQL = SQL & DBSet(Rs!Movil, "T") & ","
+            SQL = SQL & DBSet(Rs!mail, "T") & ","
             SQL = SQL & DBSet(FechaAltaSeccion, "F") & ","
             SQL = SQL & "1,"  ' por defecto la tarifa es la 1
-            SQL = SQL & DBSet(Right("0000" & DBLet(RS!entidad, "T"), 4), "T") & ","
-            SQL = SQL & DBSet(Right("0000" & DBLet(RS!Sucursal, "T"), 4), "T") & ","
-            SQL = SQL & DBSet(RS!DC, "T") & ","
-            SQL = SQL & DBSet(RS!NumCC, "T") & ","
-            SQL = SQL & DBSet(RS!Iban, "T") & ","
+            SQL = SQL & DBSet(Right("0000" & DBLet(Rs!entidad, "T"), 4), "T") & ","
+            SQL = SQL & DBSet(Right("0000" & DBLet(Rs!Sucursal, "T"), 4), "T") & ","
+            SQL = SQL & DBSet(Rs!DC, "T") & ","
+            SQL = SQL & DBSet(Rs!NumCC, "T") & ","
+            SQL = SQL & DBSet(Rs!Iban, "T") & ","
             
             'SQL = SQL & gasDB.numero(0) & "," ' impfactu
             'SQL = SQL & gasDB.numero(0) & "," ' dtolitro
@@ -718,8 +718,8 @@ Dim TipoConta As Byte
             SQL = SQL & "0,0,0,0,0,0,"
 
 
-            SQL = SQL & DBSet(RS!Codmacta, "T") & ","
-            SQL = SQL & DBSet(RS!Observaciones, "T") & ","
+            SQL = SQL & DBSet(Rs!Codmacta, "T") & ","
+            SQL = SQL & DBSet(Rs!Observaciones, "T") & ","
             
             
             SQL = SQL & TipoConta & ")"
@@ -735,23 +735,23 @@ Dim TipoConta As Byte
             SQL = "update " & ElArigaso & ".ssocio set "
             'FALTA###
             SQL = SQL & "codcoope=" & IdEntidadCoop & ","
-            SQL = SQL & "nomsocio=" & DBSet(RS!nomlargo, "T") & ","
-            SQL = SQL & "domsocio=" & DBSet(RS!Direccion, "T") & ","
-            SQL = SQL & "codposta=" & DBSet(RS!CodPostal, "T") & ","
-            SQL = SQL & "pobsocio=" & DBSet(RS!Poblacion, "T") & ","
-            SQL = SQL & "prosocio=" & DBSet(RS!Provincia, "T") & ","
+            SQL = SQL & "nomsocio=" & DBSet(Rs!nomlargo, "T") & ","
+            SQL = SQL & "domsocio=" & DBSet(Rs!Direccion, "T") & ","
+            SQL = SQL & "codposta=" & DBSet(Rs!CodPostal, "T") & ","
+            SQL = SQL & "pobsocio=" & DBSet(Rs!Poblacion, "T") & ","
+            SQL = SQL & "prosocio=" & DBSet(Rs!Provincia, "T") & ","
             
-            SQL = SQL & "codbanco=" & DBSet(Right("0000" & DBLet(RS!entidad, "T"), 4), "T") & ","
-            SQL = SQL & "codsucur=" & DBSet(Right("0000" & DBLet(RS!Sucursal, "T"), 4), "T") & ","
-            SQL = SQL & "digcontr=" & DBSet(RS!DC, "T") & ","
-            SQL = SQL & "cuentaba=" & DBSet(RS!NumCC, "T") & ","
-            SQL = SQL & "nifsocio=" & DBSet(RS!NIF, "T") & ","
-            SQL = SQL & "telsocio=" & DBSet(RS!Telefono1, "T") & ","
-            SQL = SQL & "movsocio=" & DBSet(RS!Movil, "T") & ","
-            SQL = SQL & "maisocio=" & DBSet(RS!mail, "T") & ","
-            SQL = SQL & "codmacta=" & DBSet(RS!Codmacta, "T") & ","
-            SQL = SQL & "obssocio=" & DBSet(RS!Observaciones, "T", "N")
-            SQL = SQL & ", iban=" & DBSet(RS!Iban, "T")
+            SQL = SQL & "codbanco=" & DBSet(Right("0000" & DBLet(Rs!entidad, "T"), 4), "T") & ","
+            SQL = SQL & "codsucur=" & DBSet(Right("0000" & DBLet(Rs!Sucursal, "T"), 4), "T") & ","
+            SQL = SQL & "digcontr=" & DBSet(Rs!DC, "T") & ","
+            SQL = SQL & "cuentaba=" & DBSet(Rs!NumCC, "T") & ","
+            SQL = SQL & "nifsocio=" & DBSet(Rs!NIF, "T") & ","
+            SQL = SQL & "telsocio=" & DBSet(Rs!Telefono1, "T") & ","
+            SQL = SQL & "movsocio=" & DBSet(Rs!Movil, "T") & ","
+            SQL = SQL & "maisocio=" & DBSet(Rs!mail, "T") & ","
+            SQL = SQL & "codmacta=" & DBSet(Rs!Codmacta, "T") & ","
+            SQL = SQL & "obssocio=" & DBSet(Rs!Observaciones, "T", "N")
+            SQL = SQL & ", iban=" & DBSet(Rs!Iban, "T")
             
             'Octubre 2014.
             'Tipconta=1 SI, y solo si, Essocio=1 ; FechaBaja= Nulo ; tarifa precio = 1
@@ -766,19 +766,19 @@ Dim TipoConta As Byte
 
         ActGasolineraAsociadoSocio = True
     End If
-    RS.Close
+    Rs.Close
     
     
     
     
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Set rs2 = New ADODB.Recordset
     
     Exit Function
 ErrActGAS:
     MsgBox Err.Description & " (" & Err.Number & ")", vbCritical
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Set rs2 = New ADODB.Recordset
     
 End Function
@@ -789,7 +789,7 @@ End Function
 'Crear en Arifacelec
 Public Function ActAriFacElec(IdAsoc As Long) As Boolean
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Set rs2 = New ADODB.Recordset
     Dim Aux As String
     Dim i As Integer
@@ -800,8 +800,8 @@ Public Function ActAriFacElec(IdAsoc As Long) As Boolean
     Dim ACtualizaIdGesso As Boolean
     
     SQL = "select * from asociados where IdAsoc = " & CStr(IdAsoc)
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
         AltaNueva = False
         ACtualizaIdGesso = False
         
@@ -841,11 +841,11 @@ Public Function ActAriFacElec(IdAsoc As Long) As Boolean
                     ",codclien__arigasol,  codclien_ariagro,  tiene_factura_p_r_o_v,  cod_socio_ariagro,  cod_clien_ariges2,cod_teletaxi,  cod_gessoc"
                     
             SQL = SQL & ") VALUES ("
-            SQL = SQL & DBSet(RS!nomlargo, "T") & ","
-            SQL = SQL & DBSet(RS!NIF, "T") & ",0,1,"   'nueva y id_empresa
-            SQL = SQL & DBSet(RS!mail, "T", "T") & ","
+            SQL = SQL & DBSet(Rs!nomlargo, "T") & ","
+            SQL = SQL & DBSet(Rs!NIF, "T") & ",0,1,"   'nueva y id_empresa
+            SQL = SQL & DBSet(Rs!mail, "T", "T") & ","
             'contrasena, cif
-            SQL = SQL & DBSet(RS!NIF, "T") & "," & DBSet(RS!NIF, "T") & ","
+            SQL = SQL & DBSet(Rs!NIF, "T") & "," & DBSet(Rs!NIF, "T") & ","
             'Codclien ariges codclien__arigasol ....
             SQL = SQL & "0,0,0,0,0,0,0,"
             SQL = SQL & IdAsoc & ")"
@@ -861,33 +861,33 @@ Public Function ActAriFacElec(IdAsoc As Long) As Boolean
             SQL = ""
             Actualizar = True
             idArifacelec = rs2!i_d
-            NombeyEmail = RS!nomlargo & "|" & DBLet(RS!mail, "T") & "|"
-            If rs2!CIF <> RS!NIF Then
+            NombeyEmail = Rs!nomlargo & "|" & DBLet(Rs!mail, "T") & "|"
+            If rs2!CIF <> Rs!NIF Then
                 SQL = SQL & "    -CIF:  " & vbCrLf
                 Actualizar = False
             End If
             
-            If rs2!Nombre <> RS!nomlargo Then SQL = SQL & "    -nombre:" & rs2!Nombre & vbCrLf
-            If rs2!Login <> RS!NIF Then
+            If rs2!Nombre <> Rs!nomlargo Then SQL = SQL & "    -nombre:" & rs2!Nombre & vbCrLf
+            If rs2!Login <> Rs!NIF Then
                 SQL = SQL & "    -Login ()" & vbCrLf
                 Actualizar = False
             End If
             
             
             If rs2!codclien__arigasol > 0 Then
-                If rs2!codclien__arigasol <> RS!IdAsoc Then
+                If rs2!codclien__arigasol <> Rs!IdAsoc Then
                     SQL = SQL & "-Facelec  arigasol" & vbCrLf
                     Actualizar = False
                 End If
             End If
             If rs2!codclien_ariges > 0 Then
-                If rs2!codclien_ariges <> RS!IdAsoc Then
+                If rs2!codclien_ariges <> Rs!IdAsoc Then
                     SQL = SQL & "-Facelec  ariges(1)" & vbCrLf
                     Actualizar = False
                 End If
             End If
             If rs2!cod_clien_ariges2 > 0 Then
-                If rs2!cod_clien_ariges2 <> RS!IdAsoc Then
+                If rs2!cod_clien_ariges2 <> Rs!IdAsoc Then
                     SQL = SQL & "-Facelec  ariges(2)" & vbCrLf
                     Actualizar = False
                 End If
@@ -895,7 +895,7 @@ Public Function ActAriFacElec(IdAsoc As Long) As Boolean
             
             
             If rs2!cod_socio_ariagro > 0 Then
-                If rs2!cod_socio_ariagro <> RS!CodSocEuroagro Then
+                If rs2!cod_socio_ariagro <> Rs!CodSocEuroagro Then
                     SQL = SQL & "-Facelec  socio euroagro" & vbCrLf
                     Actualizar = False
                 End If
@@ -911,8 +911,8 @@ Public Function ActAriFacElec(IdAsoc As Long) As Boolean
         'Comprobaremos si hay algun datao en facelec.clientes que tenga ya ese nif o ese login
         ' el codasco NO sea el de aqui
             'Octubre 2014. Metemos or cod_gessoc is null
-            Aux = "select * from facelec_ariadna.cliente where (cod_gessoc<>" & RS!IdAsoc & " or cod_gessoc is null )"
-            Aux = Aux & " and (login=" & DBSet(RS!NIF, "T") & " or cif=" & DBSet(RS!NIF, "T") & ") ORDER BY i_d"
+            Aux = "select * from facelec_ariadna.cliente where (cod_gessoc<>" & Rs!IdAsoc & " or cod_gessoc is null )"
+            Aux = Aux & " and (login=" & DBSet(Rs!NIF, "T") & " or cif=" & DBSet(Rs!NIF, "T") & ") ORDER BY i_d"
             rs2.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             Aux = ""
             i = 0
@@ -949,7 +949,7 @@ Public Function ActAriFacElec(IdAsoc As Long) As Boolean
                 SQL = "UPDATE facelec_ariadna.cliente SET nombre=" & DBSet(RecuperaValor(NombeyEmail, 1), "T")
                 SQL = SQL & ", email=" & DBSet(RecuperaValor(NombeyEmail, 2), "T", "S")
                 'Actualizamos ges_soc y ariges
-                If ACtualizaIdGesso Then SQL = SQL & ", cod_gessoc =" & RS!IdAsoc
+                If ACtualizaIdGesso Then SQL = SQL & ", cod_gessoc =" & Rs!IdAsoc
                 SQL = SQL & " WHERE i_d =" & idArifacelec
                 conn.Execute SQL
             End If
@@ -958,8 +958,8 @@ Public Function ActAriFacElec(IdAsoc As Long) As Boolean
 
         ActAriFacElec = True
     End If
-    RS.Close
-    Set RS = New ADODB.Recordset
+    Rs.Close
+    Set Rs = New ADODB.Recordset
     Set rs2 = New ADODB.Recordset
 
     

@@ -14488,7 +14488,7 @@ Dim vProve As CProveedor
 Dim cad As String
 Dim RA As ADODB.Recordset
 Dim ColFacturar As Collection
-Dim J As Integer
+Dim j As Integer
 
 
 
@@ -14538,7 +14538,7 @@ Dim J As Integer
     
     
    'AHORA YA TENGO EN Colfactuar el conjunto de labaraens y/o facturas
-    For J = 1 To ColFacturar.Count
+    For j = 1 To ColFacturar.Count
        'Pasar los Albaranes seleccionados con cadWHERE a una factura
         Set vFactu = New CFacturaCom
         vFactu.Proveedor = vProve.codigo
@@ -14562,7 +14562,7 @@ Dim J As Integer
         
     
         'Obtengo los totales mediante el cadselect
-        cad = "Select sum(importel) FROM slialp WHERE " & ColFacturar.item(J)
+        cad = "Select sum(importel) FROM slialp WHERE " & ColFacturar.item(j)
         miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not miRsAux.EOF Then
             ImpTot = DBLet(miRsAux.Fields(0), "N")
@@ -14588,15 +14588,15 @@ Dim J As Integer
         
 
          'El select
-         cad = ColFacturar.item(J)
+         cad = ColFacturar.item(j)
          
          If Not vFactu.TraspasoAlbaranesAFactura(cad, (chkFacturPorv(1).Value = 1), (chkFacturPorv(0).Value = 1), True) Then
             'Para salir y finalizar el procesode facturacion de el proveedor
             cad = "Finalizacion de la facturacion para: " & vProve.Nombre & vbCrLf
-            cad = cad & "Proceso: " & J & " / " & ColFacturar.Count & vbCrLf
-            cad = cad & vbCrLf & "SQL: " & ColFacturar.item(J)
+            cad = cad & "Proceso: " & j & " / " & ColFacturar.Count & vbCrLf
+            cad = cad & vbCrLf & "SQL: " & ColFacturar.item(j)
             MsgBox cad, vbExclamation
-            J = ColFacturar.Count + 1  'Para que se salga
+            j = ColFacturar.Count + 1  'Para que se salga
         Else
             'incremento el contador de facturas
             Ctip.IncrementarContador Ctip.TipoMovimiento
@@ -14604,7 +14604,7 @@ Dim J As Integer
 '        Set vFactu = Nothing
 '
 
-    Next J
+    Next j
 
     Screen.MousePointer = vbDefault
 
@@ -19227,7 +19227,7 @@ End Sub
 Private Sub HacerCambiosMultibase(numlinea As Integer)
 Dim TotalReg As Long
 Dim i As Integer
-Dim J As Integer
+Dim j As Integer
 Dim Claves As Integer
 Dim Campos As Integer
 Dim Cambios As Long
@@ -19322,9 +19322,9 @@ Dim T1 As Single
             cadParam = ""
             cadTitulo = RecuperaValor(cadFormula, 4) 'los tipos de datos
             cadTitulo = Replace(cadTitulo, ",", "|") & "|"
-            For J = 0 To Claves - 1
-                cadParam = cadParam & " AND " & miRsAux.Fields(J).Name & " = "
-                codigo = RecuperaValor(cadTitulo, J + 1)
+            For j = 0 To Claves - 1
+                cadParam = cadParam & " AND " & miRsAux.Fields(j).Name & " = "
+                codigo = RecuperaValor(cadTitulo, j + 1)
 
                 Select Case codigo
                 Case "F"
@@ -19332,9 +19332,9 @@ Dim T1 As Single
                 Case "T"
                     cadParam = cadParam & "'" & miRsAux.Fields(i).Value & "'"
                 Case Else  'NUMERICO
-                    cadParam = cadParam & miRsAux.Fields(J).Value
+                    cadParam = cadParam & miRsAux.Fields(j).Value
                 End Select
-            Next J
+            Next j
             
             
             'Acabas de montar el UPDATE
@@ -20521,7 +20521,7 @@ Dim RI As ADODB.Recordset
         Label3(95).Refresh
         
         
-        RiesgoCliente miRsAux!Codigo1, miRsAux!campo2, Now, ImpTeo, ImpTot, RI
+        RiesgoCliente miRsAux!Codigo1, miRsAux!campo2, Now, ImpTeo, ImpTot, RI, 60
         
             
         If ImpTeo <> 0 Or ImpTot <> 0 Then
@@ -21116,12 +21116,12 @@ End Function
 
 'E n cuantos albaranes/fras esta el articulo en el periodo pequeño (perido1) de parametros
 Private Sub PedProv_SalidasPeriodo(FInicio As Date, ByRef CA As Collection)
-Dim J As Integer
+Dim j As Integer
 
     'Vamos a ver en cuantos albaranes, facturas del periodo salen
 
-    For J = 1 To CA.Count
-        Label3(100).Caption = "Alb " & J & "/" & CA.Count
+    For j = 1 To CA.Count
+        Label3(100).Caption = "Alb " & j & "/" & CA.Count
         Label3(100).Refresh
         
         
@@ -21142,7 +21142,7 @@ Dim J As Integer
             If Me.txtAlma(8).Text <> "" Then miSQL = miSQL & "," & Me.txtAlma(8).Text
             miSQL = miSQL & ")"
         End If
-        miSQL = miSQL & " AND codartic IN (" & CA.item(J) & ") GROUP BY 1"
+        miSQL = miSQL & " AND codartic IN (" & CA.item(j) & ") GROUP BY 1"
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             
@@ -21177,7 +21177,7 @@ Dim J As Integer
             
         End If
         
-        miSQL = miSQL & " AND codartic IN (" & CA.item(J) & ") GROUP BY 1"
+        miSQL = miSQL & " AND codartic IN (" & CA.item(j) & ") GROUP BY 1"
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
         
@@ -21197,15 +21197,15 @@ End Sub
 
 
 Private Sub PedProv_CantidadPeriodo(FInicio As Date, ByRef CA As Collection, Periodo1 As Boolean)
-Dim J As Integer
+Dim j As Integer
 
     'Vamos a ver en cuantos albaranes, facturas del periodo salen
 
-    For J = 1 To CA.Count
+    For j = 1 To CA.Count
         If Periodo1 Then
-            Label3(100).Caption = "Cantidad (I)  " & J & "/" & CA.Count
+            Label3(100).Caption = "Cantidad (I)  " & j & "/" & CA.Count
         Else
-            Label3(100).Caption = "Cantidad (II)   " & J & "/" & CA.Count
+            Label3(100).Caption = "Cantidad (II)   " & j & "/" & CA.Count
         End If
         Label3(100).Refresh
         'Docuemtnos en los que esta el articulo
@@ -21231,7 +21231,7 @@ Dim J As Integer
         End If
 
         
-        miSQL = miSQL & " AND codartic IN (" & CA.item(J) & ") GROUP BY 1"
+        miSQL = miSQL & " AND codartic IN (" & CA.item(j) & ") GROUP BY 1"
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             
@@ -21273,7 +21273,7 @@ Dim J As Integer
         End If
 
         
-        miSQL = miSQL & " AND codartic IN (" & CA.item(J) & ") GROUP BY 1"
+        miSQL = miSQL & " AND codartic IN (" & CA.item(j) & ") GROUP BY 1"
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             
@@ -21305,14 +21305,14 @@ End Sub
 ' 2  Almacen consolidado
 ' 3  Segundo almacen consolidado
 Private Sub PedProv_PedidosPendiente(ByRef CA As Collection, Cual_ As Byte)
-Dim J As Integer
+Dim j As Integer
 
     'Vamos a ver en cuantos albaranes, facturas del periodo salen
     If Cual_ = 2 And txtAlma(7).Text = "" Then Exit Sub 'Consolidado NO indicado
     If Cual_ = 3 And txtAlma(8).Text = "" Then Exit Sub 'Consolidado NO indicado
     
-    For J = 1 To CA.Count
-        Label3(100).Caption = "Pedidos pendiente " & J & "/" & CA.Count
+    For j = 1 To CA.Count
+        Label3(100).Caption = "Pedidos pendiente " & j & "/" & CA.Count
         Label3(100).Refresh
         'Docuemtnos en los que esta el articulo
         
@@ -21332,7 +21332,7 @@ Dim J As Integer
         End Select
 
         
-        miSQL = miSQL & " AND codartic IN (" & CA.item(J) & ") GROUP BY 1"
+        miSQL = miSQL & " AND codartic IN (" & CA.item(j) & ") GROUP BY 1"
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             
@@ -21362,7 +21362,7 @@ Dim J As Integer
             miSQL = miSQL & " AND codalmac = " & Me.txtAlma(8).Text
         End Select
 
-        miSQL = miSQL & " AND codartic IN (" & CA.item(J) & ") GROUP BY 1"
+        miSQL = miSQL & " AND codartic IN (" & CA.item(j) & ") GROUP BY 1"
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             miSQL = "UPDATE tmppedprov SET pedcli"
@@ -21382,14 +21382,14 @@ Dim J As Integer
 End Sub
 
 Private Sub PedProv_Stock(ByRef CA As Collection, Cual_ As Byte)
-Dim J As Integer
+Dim j As Integer
 
 
     If Cual_ = 2 And txtAlma(7).Text = "" Then Exit Sub 'Consolidado NO indicado
     If Cual_ = 3 And txtAlma(8).Text = "" Then Exit Sub 'Consolidado NO indicado
 
-    For J = 1 To CA.Count
-        Label3(100).Caption = Cual_ & "-> Stock " & J & "/" & CA.Count
+    For j = 1 To CA.Count
+        Label3(100).Caption = Cual_ & "-> Stock " & j & "/" & CA.Count
         Label3(100).Refresh
         'Stock
         miSQL = "select codartic,canstock from salmac where codalmac = "
@@ -21401,7 +21401,7 @@ Dim J As Integer
         Case 3
             miSQL = miSQL & txtAlma(8).Text
         End Select
-        miSQL = miSQL & " AND codartic IN (" & CA.item(J) & ") "
+        miSQL = miSQL & " AND codartic IN (" & CA.item(j) & ") "
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
            
@@ -21427,7 +21427,7 @@ End Sub
 
 
 Private Sub HacerEscandalloPropuestaPedido(ByRef CA As Collection)
-Dim J As Integer
+Dim j As Integer
 Dim RT As ADODB.Recordset
 
     Set RT = New ADODB.Recordset
@@ -21435,13 +21435,16 @@ Dim RT As ADODB.Recordset
 
 
 
-    For J = 1 To CA.Count
-        Label3(100).Caption = "Escandallo " & J & "/" & CA.Count
+    For j = 1 To CA.Count
+        Label3(100).Caption = "Escandallo " & j & "/" & CA.Count
         Label3(100).Refresh
     
         'EsEscandallo,TieneVtasEscandallo
         'Stock
-        miSQL = "select codarti1,sum(nsal) ns,sum(ult_1)*cantidad as u1,sum(ult_2)*cantidad as u2,sum(pedcli)*cantidad as p1 from tmppedprov,sarti1,sartic "
+        miSQL = "select codarti1,sum(nsal) ns,sum(ult_1)*cantidad as u1,sum(ult_2)*cantidad as u2,"
+        'Octubre 2018. No es pedcli, es pedcli por cada almacen (pedcli1,2 y 3)
+        miSQL = miSQL & " sum(pedcli1)*cantidad as p1 ,sum(pedcli2)*cantidad as p2 ,sum(pedcli3)*cantidad as p3"
+        miSQL = miSQL & " from tmppedprov,sarti1,sartic "
         miSQL = miSQL & " Where tmppedprov.codArtic = sarti1.codArtic AND tmppedprov.codArtic = sarti1.codArtic And sarti1.codarti1 = sartic.codArtic"
         
         'para que solo salgan los desde hastas marcados
@@ -21457,9 +21460,15 @@ Dim RT As ADODB.Recordset
         
         
         
-        miSQL = miSQL & " AND tmppedprov.codArtic IN (" & CA.item(J) & ") GROUP BY 1 "
+        miSQL = miSQL & " AND tmppedprov.codArtic IN (" & CA.item(j) & ") GROUP BY 1 "
+        
+        'If InStr(1, CA.item(j), "0010004426") > 0 Then Sto p
+        
+        
         miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
+            
+         
             
             'Alguna tiene valor
             If DBLet(miRsAux!ns, "N") = 0 And DBLet(miRsAux!u1, "N") = 0 And DBLet(miRsAux!u2, "N") = 0 And DBLet(miRsAux!p1, "N") = 0 Then
@@ -21481,7 +21490,9 @@ Dim RT As ADODB.Recordset
                     miSQL = "UPDATE tmppedprov SET esescandallo =1 ,nsal=nsal + " & DBLet(miRsAux!ns, "N")
                     miSQL = miSQL & " ,ult_1=ult_1 + " & DBLet(miRsAux!u1, "N")
                     miSQL = miSQL & " ,ult_2=ult_2 + " & DBLet(miRsAux!u2, "N")
-                    miSQL = miSQL & " ,pedcli=pedcli + " & DBLet(miRsAux!p1, "N")
+                    miSQL = miSQL & " ,pedcli1=pedcli1 + " & DBLet(miRsAux!p1, "N")
+                    miSQL = miSQL & " ,pedcli2=pedcli2 + " & DBLet(miRsAux!p2, "N")
+                    miSQL = miSQL & " ,pedcli3=pedcli3 + " & DBLet(miRsAux!p3, "N")
                     miSQL = miSQL & " WHERE codusu = " & vUsu.codigo & " AND codartic= " & DBSet(miRsAux!codarti1, "T")
                     
                 End If
@@ -21564,7 +21575,7 @@ End Sub
 
 Private Function CargaDatosResumenVtaAgente() As Boolean
 Dim ColAgent As Collection
-Dim J As Integer
+Dim j As Integer
 Dim marca As Integer
 Dim Aux As Currency
 Dim Llevo As Currency
@@ -21608,17 +21619,17 @@ Dim Reestablecer As Boolean
     
     'FACTURAS
     '---------------------------------
-    For J = 1 To ColAgent.Count
-        Label3(122).Caption = "Agente " & J & " de " & ColAgent.Count
+    For j = 1 To ColAgent.Count
+        Label3(122).Caption = "Agente " & j & " de " & ColAgent.Count
         Label3(122).Refresh
         
         
         miSQL = "SELECT  sartic.codmarca,scafac.codtipom,importel,scafac.dtoppago, scafac.dtognral,pvpInferior,scafac.codagent,visitador "
         MontaSQLVtasAgente  'añade los where ....
         If chkResVtaAgen(4).Value = 1 Then
-            miSQL = miSQL & " AND visitador = " & ColAgent.item(J)
+            miSQL = miSQL & " AND visitador = " & ColAgent.item(j)
         Else
-            miSQL = miSQL & " AND scafac.codagent = " & ColAgent.item(J)
+            miSQL = miSQL & " AND scafac.codagent = " & ColAgent.item(j)
         End If
         miSQL = miSQL & "  ORDER BY codmarca"
         If Me.chkResVtaAgen(4).Value = 1 Then miSQL = miSQL & ",visitador,codagent"
@@ -21628,7 +21639,7 @@ Dim Reestablecer As Boolean
         miSQL = ""
         Visitador = -1
         While Not miRsAux.EOF
-            Label3(122).Caption = ColAgent.item(J) & ".  Marca:  " & miRsAux!codmarca
+            Label3(122).Caption = ColAgent.item(j) & ".  Marca:  " & miRsAux!codmarca
             Label3(122).Refresh
             
             Reestablecer = False
@@ -21906,7 +21917,7 @@ End Sub
 
 
 Private Sub AgrupaVtasxProveedorxAgente()
-Dim J As Integer
+Dim j As Integer
 
     Label3(142).Caption = "Obteniendo datos"  'indicador
     Label3(142).Refresh
@@ -21973,7 +21984,7 @@ End Sub
 
 
 Private Sub AgrupaVtasxProveedorxFamilia()
-Dim J As Integer
+Dim j As Integer
     
     Label3(142).Caption = "Obteniendo datos"  'indicador
     Label3(142).Refresh

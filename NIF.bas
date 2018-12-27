@@ -36,8 +36,8 @@ Public Function Comprobar_NIF(NIF As String) As Boolean
             If IsNumeric(Mid(NIF, 9, 1)) Then
 
                 '-- Acaba en número
-
-                If InStr(1, "ABCDEFGHPQSNU", Mid(NIF, 1, 1)) <> 0 Then
+                'If InStr(1, "ABCDEFGHPQSNU", Mid(NIF, 1, 1)) <> 0 Then
+                If InStr(1, "ABCDEFGHPQSNUV", Mid(NIF, 1, 1)) <> 0 Then
 
                     '-- Es una sociedad
 
@@ -162,27 +162,27 @@ Public Function Comprobar_NIF_Sociedad(NIF As String) As Boolean
 
     Dim mN2 As String
 
-    Dim i, i2 As Integer
+    Dim I, i2 As Integer
 
     Dim Suma, Control As Long
 
-    mCadena = "ABCDEFGHIJ"
+    mCadena = "ABCDEFGHIJV"
 
     vNif = Mid(NIF, 2, 7)
 
     '-- Sumamos las cifras pares
 
-    For i = 2 To Len(vNif) Step 2
+    For I = 2 To Len(vNif) Step 2
 
-        Suma = Suma + Val(Mid(vNif, i, 1))
+        Suma = Suma + Val(Mid(vNif, I, 1))
 
-    Next i
+    Next I
 
     '-- Ahora las impares * 2, y sumando las cifras del resultado
 
-    For i = 1 To Len(vNif) Step 2
+    For I = 1 To Len(vNif) Step 2
 
-        mN2 = CStr(Val(Mid(vNif, i, 1)) * 2)
+        mN2 = CStr(Val(Mid(vNif, I, 1)) * 2)
 
         For i2 = 1 To Len(mN2)
 
@@ -190,7 +190,7 @@ Public Function Comprobar_NIF_Sociedad(NIF As String) As Boolean
 
         Next i2
 
-    Next i
+    Next I
 
     '-- Ya tenemos la suma y calculamos el control
 

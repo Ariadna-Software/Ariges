@@ -1201,6 +1201,7 @@ Dim TipoIvaFactura As Byte '0 Normal   1 R.E     2 Exento
     Else
     
         'Insertar en la conta Cabecera Factura
+        
         b = InsertarCabFact(cadWhere, cadMen, vContaFra, TipoIvaFactura)
         cadMen = "Insertando Cab. Factura: " & cadMen
         vCCos = CodCCost
@@ -1943,6 +1944,9 @@ Dim K As Byte
 Dim PrimerCodigiva As Integer
 Dim ImpAuxiliarIVA As Currency
 Dim IvaABuscar As Integer
+Dim OtraV As Integer
+
+
     On Error GoTo EInLinea
     
 
@@ -2123,10 +2127,22 @@ Dim IvaABuscar As Integer
             Else
                 'Si que hay mas lineas.
                 'Son del mismo tipo de IVA
-                If Rs!Codigiva <> vTipoIva(NumeroIVA) Then
-                    'NO es el mismo tipo de IVA
-                    'Hay que ajustar
-                    HayQueAjustar = True
+                If TipoIvaFra = 0 Then
+                    If Rs!Codigiva <> vTipoIva(NumeroIVA) Then
+                        'NO es el mismo tipo de IVA
+                        'Hay que ajustar
+                        HayQueAjustar = True
+                    End If
+                ElseIf TipoIvaFra = 1 Then
+                    OtraV = -1
+                    If Rs!Codigiva = vParamAplic.TipoIVA1 Then OtraV = vParamAplic.TipoIVAre1
+                    If Rs!Codigiva = vParamAplic.TipoIVA2 Then OtraV = vParamAplic.TipoIVAre2
+                    If Rs!Codigiva = vParamAplic.TipoIVA3 Then OtraV = vParamAplic.TipoIVAre3
+                    If OtraV < 0 Then
+                        Err.Raise 513, , "Factura con recargo equivalencia. Error obteniendo siguiente Cod.IVA"
+                    Else
+                        If OtraV <> vTipoIva(NumeroIVA) Then HayQueAjustar = True
+                    End If
                 End If
             End If
             Rs.MovePrevious
@@ -2175,15 +2191,32 @@ Dim IvaABuscar As Integer
             Else
                 'Si que hay mas lineas.
                 'Son del mismo tipo de IVA
-                If Rs!Codigiva <> vTipoIva(NumeroIVA) Then
-                    'NO es el mismo tipo de IVA
-                    'Hay que ajustar
-                    HayQueAjustar = True
-                    C22 = " Siguiente !="
-                Else
+                If TipoIvaFra = 0 Then
+                    If Rs!Codigiva <> vTipoIva(NumeroIVA) Then
+                        'NO es el mismo tipo de IVA
+                        'Hay que ajustar
+                        HayQueAjustar = True
+                        C22 = " Siguiente !="
+                    Else
+                        HayQueAjustar = False
+                    End If
                     
+                ElseIf TipoIvaFra = 1 Then
+                    
+                    OtraV = -1
+                    If Rs!Codigiva = vParamAplic.TipoIVA1 Then OtraV = vParamAplic.TipoIVAre1
+                    If Rs!Codigiva = vParamAplic.TipoIVA2 Then OtraV = vParamAplic.TipoIVAre2
+                    If Rs!Codigiva = vParamAplic.TipoIVA3 Then OtraV = vParamAplic.TipoIVAre3
+                    If OtraV < 0 Then
+                        Err.Raise 513, , "Factura con recargo equivalencia. Error obteniendo siguiente Cod.IVA"
+                    Else
+                        If OtraV <> vTipoIva(NumeroIVA) Then HayQueAjustar = True
+                    End If
+                
+                Else
                     HayQueAjustar = False
                 End If
+                
             End If
             Rs.MovePrevious
         End If
@@ -2196,7 +2229,7 @@ Dim IvaABuscar As Integer
                 Debug.Print Rs!Numfactu & "   cal/pdte " & ImpImva & " / " & vImpIva(NumeroIVA) & C22
             End If
             ImpImva = vImpIva(NumeroIVA)
-            If vPorcRec(NumeroIVA) <> 0 Then ImpRec = vPorcRec(NumeroIVA)
+            If vImpRec(NumeroIVA) <> 0 Then ImpRec = vImpRec(NumeroIVA)
         End If
         
         

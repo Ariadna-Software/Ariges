@@ -86,6 +86,8 @@ On Error Resume Next
         SQL = SQL & ", ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet"
         'Enero 2016               abri16      ago17
         SQL = SQL & ", PideCliente,numbultos,fechaAux,puntos"
+        'NOV 2018
+        SQL = SQL & ", codinter,codnatura,notasportes,chofer "
         
       Case "OFE" 'Ofertas a Clientes
         NomTabla = "scapre"
@@ -267,7 +269,7 @@ Private Function BorrarTraspaso(EnHistorico As Boolean, cadWhere As String) As B
 'Si EnHistorico=true borra de las tablas de historico: "schtra" y "slhtra"
 'Si EnHistorico=false borra de las tablas de traspaso: "scatra" y "slitra"
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad As String, cadAux As String
 Dim EsAlbaran As Boolean
     BorrarTraspaso = False
@@ -293,19 +295,19 @@ Dim EsAlbaran As Boolean
     End Select
     
     If CodTipoMov <> "ALC" And CodTipoMov <> "PEC" Then
-        Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         cad = ""
-        While Not RS.EOF
+        While Not Rs.EOF
             If CodTipoMov <> "ALC" Then
-                cad = cad & RS.Fields(0).Value & ","
+                cad = cad & Rs.Fields(0).Value & ","
             Else
                 cad = cad & "numalbar="
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
         'Quitar la ultima coma de la cadena
         cad = Mid(cad, 1, Len(cad) - 1)
         
@@ -353,8 +355,12 @@ Dim EsAlbaran As Boolean
                 ejecutar SQL, False
         End If
     
-        
-        
+        If vParamAplic.CartaPortes Then
+            SQL = "DELETE from scaalb_portes where "
+            SQL = SQL & cadAux
+            ejecutar SQL, False
+            
+        End If
     End If
     
     

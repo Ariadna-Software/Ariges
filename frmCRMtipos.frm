@@ -1,10 +1,10 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmCRMtipos 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Tipos acciones comerciales"
-   ClientHeight    =   5325
+   ClientHeight    =   5580
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   7320
@@ -12,7 +12,7 @@ Begin VB.Form frmCRMtipos
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5325
+   ScaleHeight     =   5580
    ScaleWidth      =   7320
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -449,15 +449,15 @@ End Sub
 
 
 Private Sub BotonVerTodos()
-Dim Cad As String
+Dim cad As String
     'Ver todos
-    If vUsu.Nivel > 0 Then Cad = "codigo > 20"
+    If vUsu.Nivel > 0 Then cad = "codigo > 20"
     If chkVistaPrevia.Value = 1 Then
-        MandaBusquedaPrevia Cad
+        MandaBusquedaPrevia cad
     Else
-        If vUsu.Nivel > 0 Then Cad = " WHERE " & Cad
+        If vUsu.Nivel > 0 Then cad = " WHERE " & cad
         LimpiarCampos
-        CadenaConsulta = "Select * from " & NombreTabla & Cad & Ordenacion
+        CadenaConsulta = "Select * from " & NombreTabla & cad & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
@@ -478,17 +478,17 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
     
     'Copmpruebo si se puede eliminar
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "scrmacciones", "tipo", CStr(Data1.Recordset!Codigo))
-    If Cad = "" Then Cad = "0"
-    If Val(Cad) > 0 Then
-        MsgBox "Existen acciones comerciales realizadas con este tipo(" & Cad & ")", vbExclamation
+    cad = DevuelveDesdeBD(conAri, "count(*)", "scrmacciones", "tipo", CStr(Data1.Recordset!codigo))
+    If cad = "" Then cad = "0"
+    If Val(cad) > 0 Then
+        MsgBox "Existen acciones comerciales realizadas con este tipo(" & cad & ")", vbExclamation
         Exit Sub
     End If
     
@@ -496,10 +496,10 @@ Dim Cad As String
 
  
     
-            Cad = "¿Seguro que desea eliminar la accion comercial? " & vbCrLf
-            Cad = Cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), "0000")
-            Cad = Cad & vbCrLf & "Descripción: " & Data1.Recordset.Fields(1)
-            If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+            cad = "¿Seguro que desea eliminar la accion comercial? " & vbCrLf
+            cad = cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), "0000")
+            cad = cad & vbCrLf & "Descripción: " & Data1.Recordset.Fields(1)
+            If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
    
 
     'Borramos
@@ -508,8 +508,8 @@ Dim Cad As String
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        Cad = "Delete from scrmtipo where codigo=" & Data1.Recordset!Codigo
-        conn.Execute Cad
+        cad = "Delete from scrmtipo where codigo=" & Data1.Recordset!codigo
+        conn.Execute cad
         
     
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -528,16 +528,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
     
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -634,14 +634,14 @@ End Sub
     
 Private Sub frmCP_DatoSeleccionado(CadenaSeleccion As String)
 'Formulario Mantenimiento C. Postales
-Dim Indice As Byte
+Dim indice As Byte
 Dim devuelve As String
 
-    Indice = 3
-    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
-    Text1(Indice + 1).Text = ObtenerPoblacion(Text1(Indice).Text, devuelve)  'Poblacion
+    indice = 3
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
+    Text1(indice + 1).Text = ObtenerPoblacion(Text1(indice).Text, devuelve)  'Poblacion
     'provincia
-    Text1(Indice + 2).Text = devuelve
+    Text1(indice + 2).Text = devuelve
 End Sub
 
 
@@ -667,7 +667,7 @@ End Sub
 
 Private Sub mnEliminar_Click()
     If Me.Data1.Recordset.EOF Then Exit Sub
-    If Val(CStr(Data1.Recordset!Codigo)) < 20 Then
+    If Val(CStr(Data1.Recordset!codigo)) < 20 Then
         MsgBox "Las 20 primeras se las reserva la aplicacion", vbExclamation
         Exit Sub
     End If
@@ -676,7 +676,7 @@ End Sub
 
 Private Sub mnModificar_Click()
     If Me.Data1.Recordset.EOF Then Exit Sub
-    If Val(CStr(Data1.Recordset!Codigo)) < 20 Then
+    If Val(CStr(Data1.Recordset!codigo)) < 20 Then
         If vUsu.Nivel > 0 Then
             MsgBox "Las 20 primeras se las reserva la aplicacion", vbExclamation
             Exit Sub
@@ -778,17 +778,17 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim Cad As String
+Dim cad As String
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(0), 30, "Código")
-        Cad = Cad & ParaGrid(Text1(1), 70, "Denominacion")
+        cad = ""
+        cad = cad & ParaGrid(Text1(0), 30, "Código")
+        cad = cad & ParaGrid(Text1(1), 70, "Denominacion")
 '        Cad = Cad & ParaGrid(Combo1, 20, "Tipo Pago")
-        If Cad <> "" Then
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = NombreTabla
             frmB.vSQL = cadB
             HaDevueltoDatos = False
@@ -1008,11 +1008,11 @@ End Sub
 
 
 Private Sub PosicionarData()
-Dim Cad As String
+Dim cad As String
 Dim Indicador As String
 
-    Cad = "(codigo=" & Text1(0).Text & ")"
-    If SituarData(Data1, Cad, Indicador) Then
+    cad = "(codigo=" & Text1(0).Text & ")"
+    If SituarData(Data1, cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else

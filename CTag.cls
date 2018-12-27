@@ -153,14 +153,14 @@ Public Property Let Maximo(ByVal vData As Long)
     mvarMaximo = vData
 End Property
 
-Public Property Get tabla() As String
+Public Property Get Tabla() As String
 'se usa cuando se asigna un valor a la propiedad, en el
 'lado derecho de la asignacion
 'Syntax: Debug.Print X.Tabla
-    tabla = mvarTabla
+    Tabla = mvarTabla
 End Property
 
-Public Property Let tabla(ByVal vData As String)
+Public Property Let Tabla(ByVal vData As String)
 'se usa cuando se asigna un valor a la propiedad, en el
 'lado izquierdo de la asignacion
 'Syntax: X.Tabla = 5
@@ -276,7 +276,9 @@ Public Function Cargar(vObjetoCarga As Object) As Boolean
                 Cargar = False
                 Exit Function
             Else
-                If (V(2) <> "T") And (V(2) <> "F") And (V(2) <> "N") And (V(2) <> "H") Then
+                'Novuiembre 2018
+                'T1:  Texto pero en la busqueda NO añade el *
+                If (V(2) <> "T") And (V(2) <> "F") And (V(2) <> "N") And (V(2) <> "H") And (V(2) <> "T1") Then
                     MsgBox "Tipo de Campo desconocido"
                     Cargar = False
                     Exit Function

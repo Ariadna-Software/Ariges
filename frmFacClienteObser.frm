@@ -5,12 +5,21 @@ Begin VB.Form frmFacClienteObser
    ClientHeight    =   5295
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   8280
+   ClientWidth     =   8895
+   BeginProperty Font 
+      Name            =   "Verdana"
+      Size            =   9.75
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5295
-   ScaleWidth      =   8280
+   ScaleWidth      =   8895
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox Text1 
@@ -21,14 +30,14 @@ Begin VB.Form frmFacClienteObser
       TabIndex        =   0
       Text            =   "frmFacClienteObser.frx":0000
       Top             =   120
-      Width           =   7935
+      Width           =   8655
    End
    Begin VB.CommandButton Command1 
       Cancel          =   -1  'True
       Caption         =   "Cancelar"
       Height          =   375
       Index           =   1
-      Left            =   6960
+      Left            =   7680
       TabIndex        =   2
       Top             =   4800
       Width           =   1095
@@ -37,7 +46,7 @@ Begin VB.Form frmFacClienteObser
       Caption         =   "&Aceptar"
       Height          =   375
       Index           =   0
-      Left            =   5760
+      Left            =   6360
       TabIndex        =   1
       Top             =   4800
       Width           =   1095

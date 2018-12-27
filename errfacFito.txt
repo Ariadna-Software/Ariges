@@ -1,4 +1,4 @@
-Falta identificar carnet manipulador fitosanitarios
-============================================================
-ALV 1200058  COANNA COOP.V.
 
+ALV 4709128  MSZ-DM35VA       ->   Venta menor minimo (ud)     383<444
+ALV 4709128  0010014952       ->   Venta menor minimo (ud)     272<520
+ALV 4709128  SDH17-035NW      ->   Venta menor minimo (ud)     271<298

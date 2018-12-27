@@ -44,232 +44,158 @@ Begin VB.Form frmRepEntReparaciones
       _ExtentY        =   11668
       _Version        =   393216
       Tabs            =   4
-      Tab             =   3
       TabsPerRow      =   4
       TabHeight       =   520
       TabCaption(0)   =   "Datos basicos "
       TabPicture(0)   =   "frmRepEntReparaciones.frx":000C
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame3"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "FrameOtros"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "FrameClientes"
-      Tab(0).Control(2)=   "FrameOtros"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "Frame3"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Presupuesto / S.A.T."
       TabPicture(1)   =   "frmRepEntReparaciones.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2(3)"
-      Tab(1).Control(1)=   "Label2(2)"
-      Tab(1).Control(2)=   "imgFecha(4)"
-      Tab(1).Control(3)=   "Label9(3)"
-      Tab(1).Control(4)=   "Label1(13)"
-      Tab(1).Control(5)=   "imgFecha(3)"
-      Tab(1).Control(6)=   "Label9(2)"
-      Tab(1).Control(7)=   "imgFecha(2)"
-      Tab(1).Control(8)=   "Label9(1)"
-      Tab(1).Control(9)=   "Label2(1)"
-      Tab(1).Control(10)=   "Label11(0)"
-      Tab(1).Control(11)=   "Label1(12)"
-      Tab(1).Control(12)=   "Line1"
-      Tab(1).Control(13)=   "Line2"
-      Tab(1).Control(14)=   "Label12(0)"
-      Tab(1).Control(15)=   "Label12(1)"
-      Tab(1).Control(16)=   "Label11(1)"
-      Tab(1).Control(17)=   "imgFecha(5)"
-      Tab(1).Control(18)=   "Label9(4)"
-      Tab(1).Control(19)=   "Label9(5)"
-      Tab(1).Control(20)=   "imgBuscar(8)"
-      Tab(1).Control(21)=   "Text1(22)"
-      Tab(1).Control(22)=   "Text2(21)"
-      Tab(1).Control(23)=   "Text1(21)"
-      Tab(1).Control(24)=   "Text1(20)"
-      Tab(1).Control(25)=   "Text1(19)"
-      Tab(1).Control(26)=   "Text1(18)"
-      Tab(1).Control(27)=   "Text1(17)"
-      Tab(1).Control(28)=   "Text1(16)"
-      Tab(1).Control(29)=   "Combo1"
-      Tab(1).Control(30)=   "Check1"
-      Tab(1).Control(31)=   "Text1(25)"
-      Tab(1).Control(32)=   "Text1(26)"
-      Tab(1).Control(33)=   "Text1(27)"
+      Tab(1).Control(0)=   "Text1(27)"
+      Tab(1).Control(1)=   "Text1(26)"
+      Tab(1).Control(2)=   "Text1(25)"
+      Tab(1).Control(3)=   "Check1"
+      Tab(1).Control(4)=   "Combo1"
+      Tab(1).Control(5)=   "Text1(16)"
+      Tab(1).Control(6)=   "Text1(17)"
+      Tab(1).Control(7)=   "Text1(18)"
+      Tab(1).Control(8)=   "Text1(19)"
+      Tab(1).Control(9)=   "Text1(20)"
+      Tab(1).Control(10)=   "Text1(21)"
+      Tab(1).Control(11)=   "Text2(21)"
+      Tab(1).Control(12)=   "Text1(22)"
+      Tab(1).Control(13)=   "imgBuscar(8)"
+      Tab(1).Control(14)=   "Label9(5)"
+      Tab(1).Control(15)=   "Label9(4)"
+      Tab(1).Control(16)=   "imgFecha(5)"
+      Tab(1).Control(17)=   "Label11(1)"
+      Tab(1).Control(18)=   "Label12(1)"
+      Tab(1).Control(19)=   "Label12(0)"
+      Tab(1).Control(20)=   "Line2"
+      Tab(1).Control(21)=   "Line1"
+      Tab(1).Control(22)=   "Label1(12)"
+      Tab(1).Control(23)=   "Label11(0)"
+      Tab(1).Control(24)=   "Label2(1)"
+      Tab(1).Control(25)=   "Label9(1)"
+      Tab(1).Control(26)=   "imgFecha(2)"
+      Tab(1).Control(27)=   "Label9(2)"
+      Tab(1).Control(28)=   "imgFecha(3)"
+      Tab(1).Control(29)=   "Label1(13)"
+      Tab(1).Control(30)=   "Label9(3)"
+      Tab(1).Control(31)=   "imgFecha(4)"
+      Tab(1).Control(32)=   "Label2(2)"
+      Tab(1).Control(33)=   "Label2(3)"
       Tab(1).ControlCount=   34
       TabCaption(2)   =   "Lineas"
       TabPicture(2)   =   "frmRepEntReparaciones.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label1(16)"
-      Tab(2).Control(1)=   "DataGrid1"
-      Tab(2).Control(2)=   "txtAux(0)"
-      Tab(2).Control(3)=   "txtAux(1)"
-      Tab(2).Control(4)=   "txtAux(3)"
-      Tab(2).Control(5)=   "txtAux(4)"
-      Tab(2).Control(6)=   "txtAux(5)"
-      Tab(2).Control(7)=   "txtAux(6)"
-      Tab(2).Control(8)=   "txtAux(7)"
-      Tab(2).Control(9)=   "txtAux(2)"
-      Tab(2).Control(10)=   "cmdAux(0)"
-      Tab(2).Control(11)=   "cmdAux(1)"
-      Tab(2).Control(12)=   "txtAux(8)"
-      Tab(2).Control(13)=   "cmdAux(2)"
+      Tab(2).Control(0)=   "cmdAux(2)"
+      Tab(2).Control(1)=   "txtAux(8)"
+      Tab(2).Control(2)=   "cmdAux(1)"
+      Tab(2).Control(3)=   "cmdAux(0)"
+      Tab(2).Control(4)=   "txtAux(2)"
+      Tab(2).Control(5)=   "txtAux(7)"
+      Tab(2).Control(6)=   "txtAux(6)"
+      Tab(2).Control(7)=   "txtAux(5)"
+      Tab(2).Control(8)=   "txtAux(4)"
+      Tab(2).Control(9)=   "txtAux(3)"
+      Tab(2).Control(10)=   "txtAux(1)"
+      Tab(2).Control(11)=   "txtAux(0)"
+      Tab(2).Control(12)=   "DataGrid1"
+      Tab(2).Control(13)=   "Label1(16)"
       Tab(2).ControlCount=   14
       TabCaption(3)   =   "Ficha reparación"
       TabPicture(3)   =   "frmRepEntReparaciones.frx":0060
-      Tab(3).ControlEnabled=   -1  'True
-      Tab(3).Control(0)=   "Line3"
-      Tab(3).Control(0).Enabled=   0   'False
-      Tab(3).Control(1)=   "Label3(1)"
-      Tab(3).Control(1).Enabled=   0   'False
-      Tab(3).Control(2)=   "Label3(2)"
-      Tab(3).Control(2).Enabled=   0   'False
-      Tab(3).Control(3)=   "Label3(3)"
-      Tab(3).Control(3).Enabled=   0   'False
-      Tab(3).Control(4)=   "Label3(4)"
-      Tab(3).Control(4).Enabled=   0   'False
-      Tab(3).Control(5)=   "Label3(5)"
-      Tab(3).Control(5).Enabled=   0   'False
-      Tab(3).Control(6)=   "Label3(6)"
-      Tab(3).Control(6).Enabled=   0   'False
-      Tab(3).Control(7)=   "Label3(7)"
-      Tab(3).Control(7).Enabled=   0   'False
-      Tab(3).Control(8)=   "Label3(8)"
-      Tab(3).Control(8).Enabled=   0   'False
-      Tab(3).Control(9)=   "Label3(9)"
-      Tab(3).Control(9).Enabled=   0   'False
-      Tab(3).Control(10)=   "Label3(10)"
-      Tab(3).Control(10).Enabled=   0   'False
-      Tab(3).Control(11)=   "Label3(12)"
-      Tab(3).Control(11).Enabled=   0   'False
-      Tab(3).Control(12)=   "Label3(13)"
-      Tab(3).Control(12).Enabled=   0   'False
-      Tab(3).Control(13)=   "Label3(14)"
-      Tab(3).Control(13).Enabled=   0   'False
-      Tab(3).Control(14)=   "Label3(15)"
-      Tab(3).Control(14).Enabled=   0   'False
-      Tab(3).Control(15)=   "Label3(16)"
-      Tab(3).Control(15).Enabled=   0   'False
-      Tab(3).Control(16)=   "Label3(17)"
-      Tab(3).Control(16).Enabled=   0   'False
-      Tab(3).Control(17)=   "Label3(18)"
-      Tab(3).Control(17).Enabled=   0   'False
-      Tab(3).Control(18)=   "Label3(19)"
-      Tab(3).Control(18).Enabled=   0   'False
-      Tab(3).Control(19)=   "Line4"
-      Tab(3).Control(19).Enabled=   0   'False
-      Tab(3).Control(20)=   "Label3(20)"
-      Tab(3).Control(20).Enabled=   0   'False
-      Tab(3).Control(21)=   "Label3(22)"
-      Tab(3).Control(21).Enabled=   0   'False
-      Tab(3).Control(22)=   "Label3(23)"
-      Tab(3).Control(22).Enabled=   0   'False
-      Tab(3).Control(23)=   "Label3(24)"
-      Tab(3).Control(23).Enabled=   0   'False
-      Tab(3).Control(24)=   "Line5"
-      Tab(3).Control(24).Enabled=   0   'False
-      Tab(3).Control(25)=   "Label3(11)"
-      Tab(3).Control(25).Enabled=   0   'False
-      Tab(3).Control(26)=   "Label3(25)"
-      Tab(3).Control(26).Enabled=   0   'False
-      Tab(3).Control(27)=   "Label3(26)"
-      Tab(3).Control(27).Enabled=   0   'False
-      Tab(3).Control(28)=   "Label3(27)"
-      Tab(3).Control(28).Enabled=   0   'False
-      Tab(3).Control(29)=   "Label3(28)"
-      Tab(3).Control(29).Enabled=   0   'False
-      Tab(3).Control(30)=   "Label3(29)"
-      Tab(3).Control(30).Enabled=   0   'False
-      Tab(3).Control(31)=   "Label3(30)"
-      Tab(3).Control(31).Enabled=   0   'False
-      Tab(3).Control(32)=   "Label3(31)"
-      Tab(3).Control(32).Enabled=   0   'False
-      Tab(3).Control(33)=   "Label3(32)"
-      Tab(3).Control(33).Enabled=   0   'False
-      Tab(3).Control(34)=   "Label3(33)"
-      Tab(3).Control(34).Enabled=   0   'False
-      Tab(3).Control(35)=   "Label3(34)"
-      Tab(3).Control(35).Enabled=   0   'False
-      Tab(3).Control(36)=   "Label3(35)"
-      Tab(3).Control(36).Enabled=   0   'False
-      Tab(3).Control(37)=   "Label3(36)"
-      Tab(3).Control(37).Enabled=   0   'False
-      Tab(3).Control(38)=   "Label3(37)"
-      Tab(3).Control(38).Enabled=   0   'False
-      Tab(3).Control(39)=   "txtEuler(7)"
-      Tab(3).Control(39).Enabled=   0   'False
-      Tab(3).Control(40)=   "chkEuler(0)"
-      Tab(3).Control(40).Enabled=   0   'False
-      Tab(3).Control(41)=   "chkEuler(1)"
-      Tab(3).Control(41).Enabled=   0   'False
-      Tab(3).Control(42)=   "chkEuler(2)"
-      Tab(3).Control(42).Enabled=   0   'False
-      Tab(3).Control(43)=   "chkEuler(3)"
-      Tab(3).Control(43).Enabled=   0   'False
-      Tab(3).Control(44)=   "chkEuler(4)"
-      Tab(3).Control(44).Enabled=   0   'False
-      Tab(3).Control(45)=   "chkEuler(5)"
-      Tab(3).Control(45).Enabled=   0   'False
-      Tab(3).Control(46)=   "chkEuler(6)"
-      Tab(3).Control(46).Enabled=   0   'False
-      Tab(3).Control(47)=   "chkEuler(7)"
-      Tab(3).Control(47).Enabled=   0   'False
-      Tab(3).Control(48)=   "chkEuler(8)"
-      Tab(3).Control(48).Enabled=   0   'False
-      Tab(3).Control(49)=   "chkEuler(9)"
-      Tab(3).Control(49).Enabled=   0   'False
-      Tab(3).Control(50)=   "txtEuler(5)"
-      Tab(3).Control(50).Enabled=   0   'False
-      Tab(3).Control(51)=   "txtEuler(6)"
-      Tab(3).Control(51).Enabled=   0   'False
-      Tab(3).Control(52)=   "txtEuler(3)"
-      Tab(3).Control(52).Enabled=   0   'False
-      Tab(3).Control(53)=   "txtEuler(4)"
-      Tab(3).Control(53).Enabled=   0   'False
-      Tab(3).Control(54)=   "txtEuler(8)"
-      Tab(3).Control(54).Enabled=   0   'False
-      Tab(3).Control(55)=   "txtEuler(10)"
-      Tab(3).Control(55).Enabled=   0   'False
-      Tab(3).Control(56)=   "txtEuler(9)"
-      Tab(3).Control(56).Enabled=   0   'False
-      Tab(3).Control(57)=   "optEuler(0)"
-      Tab(3).Control(57).Enabled=   0   'False
-      Tab(3).Control(58)=   "optEuler(1)"
-      Tab(3).Control(58).Enabled=   0   'False
-      Tab(3).Control(59)=   "txtEuler(0)"
-      Tab(3).Control(59).Enabled=   0   'False
-      Tab(3).Control(60)=   "txtEuler(1)"
-      Tab(3).Control(60).Enabled=   0   'False
-      Tab(3).Control(61)=   "Frame4"
-      Tab(3).Control(61).Enabled=   0   'False
-      Tab(3).Control(62)=   "txtEuler(2)"
-      Tab(3).Control(62).Enabled=   0   'False
-      Tab(3).Control(63)=   "txtEuler(12)"
-      Tab(3).Control(63).Enabled=   0   'False
-      Tab(3).Control(64)=   "txtEuler(13)"
-      Tab(3).Control(64).Enabled=   0   'False
-      Tab(3).Control(65)=   "txtEuler(14)"
-      Tab(3).Control(65).Enabled=   0   'False
-      Tab(3).Control(66)=   "txtEuler(16)"
-      Tab(3).Control(66).Enabled=   0   'False
-      Tab(3).Control(67)=   "txtEuler(15)"
-      Tab(3).Control(67).Enabled=   0   'False
-      Tab(3).Control(68)=   "Frame5"
-      Tab(3).Control(68).Enabled=   0   'False
-      Tab(3).Control(69)=   "txtEuler(11)"
-      Tab(3).Control(69).Enabled=   0   'False
-      Tab(3).Control(70)=   "cboEulerUd"
-      Tab(3).Control(70).Enabled=   0   'False
-      Tab(3).Control(71)=   "txtEuler(17)"
-      Tab(3).Control(71).Enabled=   0   'False
-      Tab(3).Control(72)=   "txtEuler(18)"
-      Tab(3).Control(72).Enabled=   0   'False
-      Tab(3).Control(73)=   "txtEuler(19)"
-      Tab(3).Control(73).Enabled=   0   'False
-      Tab(3).Control(74)=   "txtEuler(20)"
-      Tab(3).Control(74).Enabled=   0   'False
-      Tab(3).Control(75)=   "txtEuler(21)"
-      Tab(3).Control(75).Enabled=   0   'False
+      Tab(3).ControlEnabled=   0   'False
+      Tab(3).Control(0)=   "txtEuler(21)"
+      Tab(3).Control(1)=   "txtEuler(20)"
+      Tab(3).Control(2)=   "txtEuler(19)"
+      Tab(3).Control(3)=   "txtEuler(18)"
+      Tab(3).Control(4)=   "txtEuler(17)"
+      Tab(3).Control(5)=   "cboEulerUd"
+      Tab(3).Control(6)=   "txtEuler(11)"
+      Tab(3).Control(7)=   "Frame5"
+      Tab(3).Control(8)=   "txtEuler(15)"
+      Tab(3).Control(9)=   "txtEuler(16)"
+      Tab(3).Control(10)=   "txtEuler(14)"
+      Tab(3).Control(11)=   "txtEuler(13)"
+      Tab(3).Control(12)=   "txtEuler(12)"
+      Tab(3).Control(13)=   "txtEuler(2)"
+      Tab(3).Control(14)=   "Frame4"
+      Tab(3).Control(15)=   "txtEuler(1)"
+      Tab(3).Control(16)=   "txtEuler(0)"
+      Tab(3).Control(17)=   "optEuler(1)"
+      Tab(3).Control(18)=   "optEuler(0)"
+      Tab(3).Control(19)=   "txtEuler(9)"
+      Tab(3).Control(20)=   "txtEuler(10)"
+      Tab(3).Control(21)=   "txtEuler(8)"
+      Tab(3).Control(22)=   "txtEuler(4)"
+      Tab(3).Control(23)=   "txtEuler(3)"
+      Tab(3).Control(24)=   "txtEuler(6)"
+      Tab(3).Control(25)=   "txtEuler(5)"
+      Tab(3).Control(26)=   "chkEuler(9)"
+      Tab(3).Control(27)=   "chkEuler(8)"
+      Tab(3).Control(28)=   "chkEuler(7)"
+      Tab(3).Control(29)=   "chkEuler(6)"
+      Tab(3).Control(30)=   "chkEuler(5)"
+      Tab(3).Control(31)=   "chkEuler(4)"
+      Tab(3).Control(32)=   "chkEuler(3)"
+      Tab(3).Control(33)=   "chkEuler(2)"
+      Tab(3).Control(34)=   "chkEuler(1)"
+      Tab(3).Control(35)=   "chkEuler(0)"
+      Tab(3).Control(36)=   "txtEuler(7)"
+      Tab(3).Control(37)=   "Label3(37)"
+      Tab(3).Control(38)=   "Label3(36)"
+      Tab(3).Control(39)=   "Label3(35)"
+      Tab(3).Control(40)=   "Label3(34)"
+      Tab(3).Control(41)=   "Label3(33)"
+      Tab(3).Control(42)=   "Label3(32)"
+      Tab(3).Control(43)=   "Label3(31)"
+      Tab(3).Control(44)=   "Label3(30)"
+      Tab(3).Control(45)=   "Label3(29)"
+      Tab(3).Control(46)=   "Label3(28)"
+      Tab(3).Control(47)=   "Label3(27)"
+      Tab(3).Control(48)=   "Label3(26)"
+      Tab(3).Control(49)=   "Label3(25)"
+      Tab(3).Control(50)=   "Label3(11)"
+      Tab(3).Control(51)=   "Line5"
+      Tab(3).Control(52)=   "Label3(24)"
+      Tab(3).Control(53)=   "Label3(23)"
+      Tab(3).Control(54)=   "Label3(22)"
+      Tab(3).Control(55)=   "Label3(20)"
+      Tab(3).Control(56)=   "Line4"
+      Tab(3).Control(57)=   "Label3(19)"
+      Tab(3).Control(58)=   "Label3(18)"
+      Tab(3).Control(59)=   "Label3(17)"
+      Tab(3).Control(60)=   "Label3(16)"
+      Tab(3).Control(61)=   "Label3(15)"
+      Tab(3).Control(62)=   "Label3(14)"
+      Tab(3).Control(63)=   "Label3(13)"
+      Tab(3).Control(64)=   "Label3(12)"
+      Tab(3).Control(65)=   "Label3(10)"
+      Tab(3).Control(66)=   "Label3(9)"
+      Tab(3).Control(67)=   "Label3(8)"
+      Tab(3).Control(68)=   "Label3(7)"
+      Tab(3).Control(69)=   "Label3(6)"
+      Tab(3).Control(70)=   "Label3(5)"
+      Tab(3).Control(71)=   "Label3(4)"
+      Tab(3).Control(72)=   "Label3(3)"
+      Tab(3).Control(73)=   "Label3(2)"
+      Tab(3).Control(74)=   "Label3(1)"
+      Tab(3).Control(75)=   "Line3"
       Tab(3).ControlCount=   76
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   21
-         Left            =   2160
+         Left            =   -72840
          MaxLength       =   16
          TabIndex        =   131
          Text            =   "Text1"
@@ -279,7 +205,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   20
-         Left            =   240
+         Left            =   -74760
          MaxLength       =   16
          TabIndex        =   130
          Text            =   "Text1"
@@ -289,7 +215,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   19
-         Left            =   11880
+         Left            =   -63120
          MaxLength       =   16
          TabIndex        =   170
          Text            =   "Text1"
@@ -299,7 +225,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   18
-         Left            =   9960
+         Left            =   -65040
          MaxLength       =   16
          TabIndex        =   169
          Text            =   "Text1"
@@ -309,7 +235,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   17
-         Left            =   8040
+         Left            =   -66960
          MaxLength       =   16
          TabIndex        =   168
          Text            =   "Text1"
@@ -319,7 +245,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.ComboBox cboEulerUd 
          Height          =   315
          ItemData        =   "frmRepEntReparaciones.frx":007C
-         Left            =   5160
+         Left            =   -69840
          List            =   "frmRepEntReparaciones.frx":0089
          Style           =   2  'Dropdown List
          TabIndex        =   162
@@ -329,7 +255,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   11
-         Left            =   4200
+         Left            =   -70800
          MaxLength       =   16
          TabIndex        =   161
          Text            =   "Text1"
@@ -340,7 +266,7 @@ Begin VB.Form frmRepEntReparaciones
          BorderStyle     =   0  'None
          Caption         =   "Frame4"
          Height          =   375
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   203
          Top             =   6120
          Width           =   3015
@@ -385,7 +311,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   15
-         Left            =   8040
+         Left            =   -66960
          MaxLength       =   16
          TabIndex        =   166
          Text            =   "Text1"
@@ -395,7 +321,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   16
-         Left            =   11040
+         Left            =   -63960
          MaxLength       =   16
          TabIndex        =   167
          Text            =   "Text1"
@@ -405,7 +331,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   14
-         Left            =   8040
+         Left            =   -66960
          MaxLength       =   16
          TabIndex        =   165
          Text            =   "Text1"
@@ -415,7 +341,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   13
-         Left            =   8040
+         Left            =   -66960
          MaxLength       =   16
          TabIndex        =   164
          Text            =   "Text1"
@@ -425,7 +351,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   12
-         Left            =   8040
+         Left            =   -66960
          MaxLength       =   16
          TabIndex        =   163
          Text            =   "Text1"
@@ -435,7 +361,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   2
-         Left            =   11640
+         Left            =   -63360
          MaxLength       =   16
          TabIndex        =   138
          Text            =   "Text1"
@@ -446,7 +372,7 @@ Begin VB.Form frmRepEntReparaciones
          BorderStyle     =   0  'None
          Caption         =   "Frame4"
          Height          =   375
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   191
          Top             =   1560
          Width           =   3015
@@ -491,7 +417,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   1
-         Left            =   9240
+         Left            =   -65760
          MaxLength       =   16
          TabIndex        =   137
          Text            =   "Text1"
@@ -501,7 +427,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   0
-         Left            =   4800
+         Left            =   -70200
          MaxLength       =   16
          TabIndex        =   136
          Text            =   "Text1"
@@ -512,7 +438,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Cliente"
          Height          =   195
          Index           =   1
-         Left            =   6000
+         Left            =   -69000
          TabIndex        =   135
          Top             =   840
          Width           =   975
@@ -521,7 +447,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Agencia"
          Height          =   195
          Index           =   0
-         Left            =   4680
+         Left            =   -70320
          TabIndex        =   134
          Top             =   840
          Value           =   -1  'True
@@ -530,7 +456,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   9
-         Left            =   1080
+         Left            =   -73920
          MaxLength       =   16
          TabIndex        =   155
          Text            =   "Text1"
@@ -540,7 +466,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   10
-         Left            =   4080
+         Left            =   -70920
          MaxLength       =   16
          TabIndex        =   156
          Text            =   "Text1"
@@ -550,7 +476,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   8
-         Left            =   1080
+         Left            =   -73920
          MaxLength       =   16
          TabIndex        =   154
          Text            =   "Text1"
@@ -560,7 +486,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   4
-         Left            =   8760
+         Left            =   -66240
          MaxLength       =   16
          TabIndex        =   150
          Text            =   "Text1"
@@ -570,7 +496,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   3
-         Left            =   8760
+         Left            =   -66240
          MaxLength       =   16
          TabIndex        =   144
          Text            =   "Text1"
@@ -580,7 +506,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   6
-         Left            =   4200
+         Left            =   -70800
          MaxLength       =   16
          TabIndex        =   152
          Text            =   "Text1"
@@ -590,7 +516,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   5
-         Left            =   1080
+         Left            =   -73920
          MaxLength       =   16
          TabIndex        =   151
          Text            =   "Text1"
@@ -601,7 +527,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   9
-         Left            =   7920
+         Left            =   -67080
          TabIndex        =   149
          Top             =   3000
          Width           =   255
@@ -610,7 +536,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   8
-         Left            =   6360
+         Left            =   -68640
          TabIndex        =   148
          Top             =   3000
          Width           =   255
@@ -619,7 +545,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   7
-         Left            =   5280
+         Left            =   -69720
          TabIndex        =   147
          Top             =   3000
          Width           =   255
@@ -628,7 +554,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   6
-         Left            =   3960
+         Left            =   -71040
          TabIndex        =   146
          Top             =   3000
          Width           =   255
@@ -637,7 +563,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   5
-         Left            =   2880
+         Left            =   -72120
          TabIndex        =   145
          Top             =   3000
          Width           =   255
@@ -646,7 +572,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   4
-         Left            =   7920
+         Left            =   -67080
          TabIndex        =   143
          Top             =   2640
          Width           =   255
@@ -655,7 +581,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   3
-         Left            =   6360
+         Left            =   -68640
          TabIndex        =   142
          Top             =   2640
          Width           =   255
@@ -664,7 +590,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   2
-         Left            =   5280
+         Left            =   -69720
          TabIndex        =   141
          Top             =   2640
          Width           =   255
@@ -673,7 +599,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   1
-         Left            =   3960
+         Left            =   -71040
          TabIndex        =   140
          Top             =   2640
          Width           =   255
@@ -682,7 +608,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "chkEuler"
          Height          =   255
          Index           =   0
-         Left            =   2880
+         Left            =   -72120
          TabIndex        =   139
          Top             =   2640
          Width           =   255
@@ -690,7 +616,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   7
-         Left            =   1080
+         Left            =   -73920
          MaxLength       =   16
          TabIndex        =   153
          Text            =   "Text1"
@@ -1026,7 +952,7 @@ Begin VB.Form frmRepEntReparaciones
       Begin VB.Frame Frame3 
          BorderStyle     =   0  'None
          Height          =   3585
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   80
          Top             =   2880
          Width           =   11175
@@ -1429,7 +1355,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2385
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   73
          Top             =   360
          Width           =   5775
@@ -1630,7 +1556,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2385
-         Left            =   -67920
+         Left            =   7080
          TabIndex        =   64
          Top             =   360
          Width           =   5655
@@ -1936,7 +1862,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "T. Externo"
          Height          =   195
          Index           =   37
-         Left            =   2160
+         Left            =   -72840
          TabIndex        =   209
          Top             =   840
          Width           =   1005
@@ -1946,7 +1872,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Orden de trabajo"
          Height          =   195
          Index           =   36
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   208
          Top             =   840
          Width           =   1185
@@ -1955,7 +1881,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "RPM"
          Height          =   195
          Index           =   35
-         Left            =   11040
+         Left            =   -63960
          TabIndex        =   207
          Top             =   6000
          Width           =   705
@@ -1964,7 +1890,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Pot (Kw)"
          Height          =   195
          Index           =   34
-         Left            =   9240
+         Left            =   -65760
          TabIndex        =   206
          Top             =   6000
          Width           =   705
@@ -1973,7 +1899,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Pot(CV)"
          Height          =   195
          Index           =   33
-         Left            =   7200
+         Left            =   -67800
          TabIndex        =   205
          Top             =   6000
          Width           =   705
@@ -1982,7 +1908,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Caudal"
          Height          =   195
          Index           =   32
-         Left            =   3600
+         Left            =   -71400
          TabIndex        =   204
          Top             =   5880
          Width           =   705
@@ -1991,7 +1917,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Tipo de rodete"
          Height          =   435
          Index           =   31
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   202
          Top             =   5880
          Width           =   1905
@@ -2000,7 +1926,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "V"
          Height          =   195
          Index           =   30
-         Left            =   7200
+         Left            =   -67800
          TabIndex        =   201
          Top             =   5520
          Width           =   705
@@ -2009,7 +1935,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "I (A)"
          Height          =   195
          Index           =   29
-         Left            =   10440
+         Left            =   -64560
          TabIndex        =   200
          Top             =   5520
          Width           =   705
@@ -2018,7 +1944,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Nº Serie"
          Height          =   195
          Index           =   28
-         Left            =   7200
+         Left            =   -67800
          TabIndex        =   199
          Top             =   5040
          Width           =   705
@@ -2027,7 +1953,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Marca"
          Height          =   195
          Index           =   27
-         Left            =   7200
+         Left            =   -67800
          TabIndex        =   198
          Top             =   4080
          Width           =   705
@@ -2036,7 +1962,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Modelo"
          Height          =   195
          Index           =   26
-         Left            =   7200
+         Left            =   -67800
          TabIndex        =   197
          Top             =   4560
          Width           =   705
@@ -2054,7 +1980,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          Height          =   195
          Index           =   25
-         Left            =   9000
+         Left            =   -66000
          TabIndex        =   196
          Top             =   3720
          Width           =   2655
@@ -2073,15 +1999,15 @@ Begin VB.Form frmRepEntReparaciones
          ForeColor       =   &H00000040&
          Height          =   255
          Index           =   11
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   181
          Top             =   3360
          Width           =   4095
       End
       Begin VB.Line Line5 
          BorderWidth     =   3
-         X1              =   360
-         X2              =   12840
+         X1              =   -74640
+         X2              =   -62160
          Y1              =   3480
          Y2              =   3480
       End
@@ -2089,7 +2015,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "F. Alb"
          Height          =   195
          Index           =   24
-         Left            =   11640
+         Left            =   -63360
          TabIndex        =   195
          Top             =   1200
          Width           =   405
@@ -2098,7 +2024,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Nº Expedicion"
          Height          =   195
          Index           =   23
-         Left            =   9240
+         Left            =   -65760
          TabIndex        =   194
          Top             =   1200
          Width           =   2865
@@ -2107,7 +2033,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Agencia / Cliente / Matrícula"
          Height          =   195
          Index           =   22
-         Left            =   4800
+         Left            =   -70200
          TabIndex        =   193
          Top             =   1200
          Width           =   2865
@@ -2126,15 +2052,15 @@ Begin VB.Form frmRepEntReparaciones
          ForeColor       =   &H00000040&
          Height          =   255
          Index           =   20
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   190
          Top             =   480
          Width           =   2535
       End
       Begin VB.Line Line4 
          BorderWidth     =   3
-         X1              =   240
-         X2              =   12720
+         X1              =   -74760
+         X2              =   -62280
          Y1              =   600
          Y2              =   600
       End
@@ -2142,7 +2068,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Año"
          Height          =   195
          Index           =   19
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   189
          Top             =   5520
          Width           =   705
@@ -2151,7 +2077,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "H (m.c.a)"
          Height          =   195
          Index           =   18
-         Left            =   3120
+         Left            =   -71880
          TabIndex        =   188
          Top             =   5520
          Width           =   705
@@ -2160,7 +2086,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Nº Serie"
          Height          =   195
          Index           =   17
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   187
          Top             =   5040
          Width           =   705
@@ -2178,7 +2104,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          Height          =   195
          Index           =   16
-         Left            =   2040
+         Left            =   -72960
          TabIndex        =   186
          Top             =   3720
          Width           =   2655
@@ -2196,7 +2122,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          Height          =   195
          Index           =   15
-         Left            =   9360
+         Left            =   -65640
          TabIndex        =   185
          Top             =   2280
          Width           =   2655
@@ -2205,7 +2131,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Modelo"
          Height          =   195
          Index           =   14
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   184
          Top             =   4560
          Width           =   705
@@ -2214,7 +2140,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "NºCurva"
          Height          =   195
          Index           =   13
-         Left            =   3360
+         Left            =   -71640
          TabIndex        =   183
          Top             =   4080
          Width           =   705
@@ -2223,7 +2149,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Marca"
          Height          =   195
          Index           =   12
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   182
          Top             =   4080
          Width           =   705
@@ -2233,7 +2159,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Vertical"
          Height          =   195
          Index           =   10
-         Left            =   6240
+         Left            =   -68760
          TabIndex        =   180
          Top             =   2400
          Width           =   525
@@ -2243,7 +2169,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Pozo"
          Height          =   195
          Index           =   9
-         Left            =   5160
+         Left            =   -69840
          TabIndex        =   179
          Top             =   2400
          Width           =   360
@@ -2252,7 +2178,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Vertical"
          Height          =   195
          Index           =   8
-         Left            =   3840
+         Left            =   -71160
          TabIndex        =   178
          Top             =   2400
          Width           =   525
@@ -2261,7 +2187,7 @@ Begin VB.Form frmRepEntReparaciones
          Caption         =   "Horizontal"
          Height          =   195
          Index           =   7
-         Left            =   2640
+         Left            =   -72360
          TabIndex        =   177
          Top             =   2400
          Width           =   705
@@ -2279,7 +2205,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          Height          =   195
          Index           =   6
-         Left            =   7680
+         Left            =   -67320
          TabIndex        =   176
          Top             =   2280
          Width           =   1215
@@ -2297,7 +2223,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          Height          =   195
          Index           =   5
-         Left            =   5160
+         Left            =   -69840
          TabIndex        =   175
          Top             =   2160
          Width           =   2175
@@ -2315,7 +2241,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          Height          =   195
          Index           =   4
-         Left            =   2760
+         Left            =   -72240
          TabIndex        =   174
          Top             =   2160
          Width           =   1935
@@ -2333,7 +2259,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          Height          =   195
          Index           =   3
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   173
          Top             =   3000
          Width           =   1455
@@ -2351,7 +2277,7 @@ Begin VB.Form frmRepEntReparaciones
          EndProperty
          Height          =   195
          Index           =   2
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   172
          Top             =   2640
          Width           =   1455
@@ -2370,15 +2296,15 @@ Begin VB.Form frmRepEntReparaciones
          ForeColor       =   &H00000040&
          Height          =   255
          Index           =   1
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   171
          Top             =   1920
          Width           =   3615
       End
       Begin VB.Line Line3 
          BorderWidth     =   3
-         X1              =   240
-         X2              =   12720
+         X1              =   -74760
+         X2              =   -62280
          Y1              =   2040
          Y2              =   2040
       End
@@ -3591,14 +3517,14 @@ Private Sub frmList_DatoSeleccionado(CadenaSeleccion As String)
 'Aqui devuelve los valores que se introducen desde el Form de Listado de Pedido
 'para generar el Albaran
 Dim vSQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad1 As String, cad2 As String
 
     'Seleccionar algunos campos del Cliente
     vSQL = "Select proclien, codagent, codforpa, dtoppago, dtognral, tipofact "
     vSQL = vSQL & " FROM sclien WHERE codclien=" & Text1(6).Text
-    Set RS = New ADODB.Recordset
-    RS.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     cad1 = RecuperaValor(CadenaSeleccion, 1) 'trab. albaran
     cad2 = RecuperaValor(CadenaSeleccion, 2) 'trab. prepara material
@@ -3624,9 +3550,9 @@ Dim cad1 As String, cad2 As String
     vSQL = vSQL & DBSet(Text1(35).Text, "T", "S") & ", " & cad1 & ", "   'referenc, codtraba(ped), "
     vSQL = vSQL & DBSet(Text1(5).Text, "N", "S") & ", " 'Trabajador de pedido
     vSQL = vSQL & cad2 & ", " 'Material Preparado por
-    vSQL = vSQL & DBSet(RS!CodAgent, "N") & ", " & DBSet(RS!codforpa, "N") & ", " '"codagent, codforpa, "
+    vSQL = vSQL & DBSet(Rs!CodAgent, "N") & ", " & DBSet(Rs!codforpa, "N") & ", " '"codagent, codforpa, "
     vSQL = vSQL & RecuperaValor(CadenaSeleccion, 3) & ", " 'Cod Envio
-    vSQL = vSQL & DBSet(RS!DtoPPago, "N") & ", " & DBLet(RS!DtoGnral, "N") & ", " & DBLet(RS!TipoFact, "N") & ", " '" '"dtoppago, dtognral, tipofact,
+    vSQL = vSQL & DBSet(Rs!DtoPPago, "N") & ", " & DBLet(Rs!DtoGnral, "N") & ", " & DBLet(Rs!TipoFact, "N") & ", " '" '"dtoppago, dtognral, tipofact,
     
     'ANTIGUAS OBSERVACIONES. 19 JUN 07
     'vSQL = vSQL & DBSet(Text1(8).Text, "T") & ", " & DBSet(Text1(9).Text, "T") & ", " & DBSet(Text1(10).Text, "T") & ", " 'observa01, observa02, observa03,
@@ -3645,8 +3571,8 @@ Dim cad1 As String, cad2 As String
     'vSQL = vSQL & Text1(18).Text 'Semana entrega Pedido
     CadenaSQL = vSQL
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     CadenaSQLHco = cad1 & ", " & cad2 & ", material, tipoaver, motivore, textore1, textore2, textore3 "
     
@@ -5118,7 +5044,7 @@ End Sub
 Private Function ArticulosDelNSerie(numSerie As String) As Integer
 'Recupera si para ese numero de Serie hay varios articulos que lo tienen
 'RETURN -> Nº de articulos diferentes que tienen ese numserie
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 
     On Error Resume Next
@@ -5126,31 +5052,31 @@ Dim SQL As String
     SQL = "select distinct count(codartic) FROM sserie "
     SQL = SQL & "WHERE numserie='" & numSerie & "'"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        ArticulosDelNSerie = RS.Fields(0).Value
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        ArticulosDelNSerie = Rs.Fields(0).Value
     Else
         ArticulosDelNSerie = 0
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     If Err.Number <> 0 Then Err.Clear
 End Function
 
 
 Private Sub CargarDatosNSerie(numSerie As String, codArtic As String)
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim EnGarantia As Boolean
 
     SQL = "Select codclien, coddirec, tieneman, nummante, ultrepar, fingaran "
     SQL = SQL & "FROM sserie WHERE numserie=" & DBSet(numSerie, "T") & " and "
     SQL = SQL & " codartic=" & DBSet(codArtic, "T")
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
     
         'Si viene del formulario de AVISO
         'y estamos insertando
@@ -5158,36 +5084,44 @@ Dim EnGarantia As Boolean
         
             If EntradaEquipo <> "" Then
                 'Los datos del cliente me viene de reparacion
-                If IsNull(RS!codClien) Then
-                    RS.Close
-                    Set RS = Nothing
+                If IsNull(Rs!codClien) Then
+                    Rs.Close
+                    Set Rs = Nothing
                     Exit Sub
                 End If
             
                 SQL = RecuperaValor(EntradaEquipo, 3)
-                If Val(RS!codClien) <> Val(SQL) Then
-                    MensajeNoCoinciden CStr(Val(RS!codClien)), False
+                If Val(Rs!codClien) <> Val(SQL) Then
+                    MensajeNoCoinciden CStr(Val(Rs!codClien)), False
                     MsgBox CadenaDesdeOtroForm, vbExclamation
                     CadenaDesdeOtroForm = ""
                 End If
             End If
         End If
-        Text1(6).Text = Format(RS!codClien, "000000")
-        Text1(7).Text = Format(DBLet(RS!CodDirec), "000")
+        
+        Text1(6).Text = Format(Rs!codClien, "000000")
+        Text1(7).Text = Format(DBLet(Rs!CodDirec), "000")
         If Text1(7).Text <> "" Then Text2(7).Text = DevuelveDesdeBDNew(conAri, "sdirec", "nomdirec", "codclien", Text1(6).Text, "N", , "coddirec", Text1(7).Text, "N")
-        Text2(2).Text = DBLet(RS!ultrepar, "F")
-        Text2(3).Text = DBLet(RS!fingaran, "F")
+        
+        
+        
+        Text2(2).Text = DBLet(Rs!ultrepar, "F")
+        Text2(3).Text = DBLet(Rs!fingaran, "F")
         
         'Poner fecha prevista reparacion en funcion del param. de la aplicacion (diassiman,diasnoman)
         'dependiendo de si el numserie,codartic tiene mantenimiento (ver tabla sserie)
-        If RS!TieneMan = "1" Then
-            Text2(4).Text = DBLet(RS!nummante, "T")
+        If Rs!TieneMan = "1" Then
+            Text2(4).Text = DBLet(Rs!nummante, "T")
             If Text2(4).Text = "" Then Text2(4).Text = "SIN ESPEC."
         End If
-        PonerFechaRepar (Val(DBLet(RS!TieneMan, "N")) = 1)
+        PonerFechaRepar (Val(DBLet(Rs!TieneMan, "N")) = 1)
         'Cargar los datos del Cliente
-        PonerDatosCliente2 (Text1(6).Text), True
         
+        PonerDatosCliente2 (Text1(6).Text), True
+        If Text1(6).Text = "" Then
+            'NO esta con codigo de cliente
+            FrameClientes.Enabled = True
+        End If
         
         
         
@@ -5214,8 +5148,8 @@ Dim EnGarantia As Boolean
             End If
         End If
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Sub
 
 Private Sub PonerFechaRepar(TieneManteinimiento As Boolean)
@@ -5414,13 +5348,13 @@ End Function
 
 Private Sub BotonImprimir2(LaReparacion As Boolean, NumeroAlbaran As Long)
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
 Dim devuelve As String
 
 
     cadFormula = ""
-    CadParam = ""
+    cadParam = ""
     numParam = 0
 
 
@@ -5437,27 +5371,27 @@ Dim devuelve As String
                 '===================================================
                 '============ PARAMETROS ===========================
                 'Añadir el parametro de Empresa
-                CadParam = CadParam & "|pEmpresa=""" & UCase(vEmpresa.nomempre) & """|"
+                cadParam = cadParam & "|pEmpresa=""" & UCase(vEmpresa.nomempre) & """|"
                 numParam = numParam + 1
             
                 'Añadir el parametro con el Nº de mantenimiento si hay
                 If Trim(Text2(4).Text) <> "" Then
-                    CadParam = CadParam & "pMantenimiento=""" & Text2(4).Text & """|"
+                    cadParam = cadParam & "pMantenimiento=""" & Text2(4).Text & """|"
                     numParam = numParam + 1
                 End If
                   
                 'Añadir el parametro si esta en garantia o no
                 If Trim(Text2(3).Text) <> "" Then
                     If Format(Now, "dd/mm/yyyy") > Format(Text2(3).Text, "dd/mm/yyyy") Then
-                        CadParam = CadParam & "pGarantia=""NO""|"
+                        cadParam = cadParam & "pGarantia=""NO""|"
                     Else
-                        CadParam = CadParam & "pGarantia=""SI""|"
+                        cadParam = cadParam & "pGarantia=""SI""|"
                     End If
                     numParam = numParam + 1
                 End If
                   
                 'Nombre fichero .rpt a Imprimir
-                If Not PonerParamRPT2(24, CadParam, numParam, devuelve, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then
+                If Not PonerParamRPT2(24, cadParam, numParam, devuelve, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then
                     Exit Sub
                 End If
             
@@ -5480,7 +5414,7 @@ Dim devuelve As String
                 
                  With frmImprimir
                     .FormulaSeleccion = cadFormula
-                    .OtrosParametros = CadParam
+                    .OtrosParametros = cadParam
                     .NumeroParametros = numParam
                     .SoloImprimir = False
                     .EnvioEMail = False
@@ -5497,7 +5431,7 @@ Dim devuelve As String
             '===================================================
             '============ PARAMETROS ===========================
             
-            If Not PonerParamRPT2(36, CadParam, numParam, devuelve, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+            If Not PonerParamRPT2(36, cadParam, numParam, devuelve, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
            
                    
             'Nombre fichero .rpt a Imprimir
@@ -5508,15 +5442,15 @@ Dim devuelve As String
            
             'Añadir el codigo de usuario como parametro para link con tabla Temporal (tmptiposiva) en el Report
             'tabla temporal para el calculo del bruto total para cada tipo de IVA
-            CadParam = CadParam & "pCodUsu=" & vUsu.codigo & "|"
+            cadParam = cadParam & "pCodUsu=" & vUsu.codigo & "|"
             numParam = numParam + 1
             
             'PORTES
-            CadParam = CadParam & "vPortes=""" & vParamAplic.ArtPortesN & """|"
+            cadParam = cadParam & "vPortes=""" & vParamAplic.ArtPortesN & """|"
             numParam = numParam + 1
             
             'PUNTO VERDE
-            CadParam = CadParam & "PuntoVerde=""" & vParamAplic.ArtReciclado & """|"
+            cadParam = cadParam & "PuntoVerde=""" & vParamAplic.ArtReciclado & """|"
             numParam = numParam + 1
             
             'Si se imprimen importes y/o
@@ -5525,7 +5459,7 @@ Dim devuelve As String
             ' 0 "Todo"
             ' 1 "Cantidad y Precio"
             ' 2 "Cantidad"
-            CadParam = CadParam & "Albarcon=" & devuelve & "|"
+            cadParam = cadParam & "Albarcon=" & devuelve & "|"
             numParam = numParam + 1
             
     
@@ -5550,7 +5484,7 @@ Dim devuelve As String
             'que se aplica a ese cliente
             devuelve = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", Text1(6).Text, "N")
             If devuelve <> "" Then
-                CadParam = CadParam & "pTipoIVA=" & devuelve & "|"
+                cadParam = cadParam & "pTipoIVA=" & devuelve & "|"
                 numParam = numParam + 1
             End If
         
@@ -5571,7 +5505,7 @@ Dim devuelve As String
             
                     
                     .FormulaSeleccion = cadFormula
-                    .OtrosParametros = CadParam
+                    .OtrosParametros = cadParam
                     .NumeroParametros = numParam
                     .SoloImprimir = False
                     .EnvioEMail = False
@@ -6282,7 +6216,7 @@ Private Function SePuedeServirPedido(Optional cadErr As String) As Boolean
 Dim vCStock As CStock
 Dim SQL As String
 Dim b As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EServir
 
@@ -6293,12 +6227,12 @@ Dim RS As ADODB.Recordset
     SQL = "SELECT codalmac, codartic, SUM(cantidad) as cantidad from " & NomTablaLineas
     SQL = SQL & ObtenerWhereCP
     SQL = SQL & " GROUP by codalmac, codartic"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
     'Si no hay lineas para pasar al albaran no seguimos
-    If RS.EOF Then
+    If Rs.EOF Then
         cadErr = "No hay lineas para generar el Albaran."
         b = False
         GoTo EServir
@@ -6306,8 +6240,8 @@ Dim RS As ADODB.Recordset
     
     'para cada linea de la Reparacion comprobar el stock si no es instalacion
     b = True
-    While (Not RS.EOF) And b
-        If Not InicializarCStockAlbar(vCStock, "S", , RS) Then
+    While (Not Rs.EOF) And b
+        If Not InicializarCStockAlbar(vCStock, "S", , Rs) Then
             cadErr = "No se pudo inicializar la clase Stock"
             b = False
             GoTo EServir
@@ -6318,26 +6252,26 @@ Dim RS As ADODB.Recordset
         If vCStock.MueveStock Then
             If Not vCStock.MoverStock(False, False, True) Then b = False
         End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     Set vCStock = Nothing
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     SePuedeServirPedido = b
     
 EServir:
     If Err.Number <> 0 Then
         b = False
         Set vCStock = Nothing
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
     End If
     
     SePuedeServirPedido = b
 End Function
 
 
-Private Function InicializarCStockAlbar(ByRef vCStock As CStock, TipoM As String, Optional numlinea As String, Optional ByRef RS As ADODB.Recordset) As Boolean
+Private Function InicializarCStockAlbar(ByRef vCStock As CStock, TipoM As String, Optional numlinea As String, Optional ByRef Rs As ADODB.Recordset) As Boolean
 'Para comprobar stock al pasar de Reparacion a Albaran de Reparacion
 On Error Resume Next
     
@@ -6345,12 +6279,12 @@ On Error Resume Next
     vCStock.DetaMov = "ALR"
     vCStock.Trabajador = CLng(Text1(6).Text) 'guardamos el cliente
     vCStock.Documento = Text1(2).Text
-    vCStock.codArtic = RS!codArtic
-    vCStock.codAlmac = CInt(RS!codAlmac)
+    vCStock.codArtic = Rs!codArtic
+    vCStock.codAlmac = CInt(Rs!codAlmac)
     
-    vCStock.cantidad = CSng(RS!cantidad)
+    vCStock.cantidad = CSng(Rs!cantidad)
     'Si no se selecciona el campo importe de la tabla es que solo vamos a comprobar stock y no se necesita
-    If RS.Fields.Count > 3 Then vCStock.Importe = CCur(RS!ImporteL)
+    If Rs.Fields.Count > 3 Then vCStock.Importe = CCur(Rs!ImporteL)
     
     vCStock.LineaDocu = CInt(ComprobarCero(numlinea))
     
@@ -6561,7 +6495,7 @@ End Function
 Private Function InsertarMovStock(NumAlb As Long) As Boolean
 Dim vCStock As CStock
 Dim b As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 
     On Error GoTo EInsMov
@@ -6572,21 +6506,21 @@ Dim SQL As String
     b = True
     
     SQL = "select * from " & NomTablaLineas & ObtenerWhereCP
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada linea del Pedido Insertar en smoval y Actualizar Stock en salmac
-    While (Not RS.EOF) And b
-        If Not InicializarCStockAlbar(vCStock, "S", CStr(RS!numlinea), RS) Then Exit Function
+    While (Not Rs.EOF) And b
+        If Not InicializarCStockAlbar(vCStock, "S", CStr(Rs!numlinea), Rs) Then Exit Function
         vCStock.Documento = CStr(NumAlb)
          'en actualizar stock comprobamos si el articulo tiene control de stock
         'If vCStock.Cantidad <> 0 Then
             b = vCStock.ActualizarStock(False, False)
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     Set vCStock = Nothing
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 '    InsertarMovStock = b
     

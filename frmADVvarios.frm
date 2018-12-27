@@ -1,24 +1,24 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmADVvarios 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Form1"
-   ClientHeight    =   6990
+   ClientHeight    =   7740
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   10185
+   ClientWidth     =   13275
    Icon            =   "frmADVvarios.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6990
-   ScaleWidth      =   10185
+   ScaleHeight     =   7740
+   ScaleWidth      =   13275
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameDH 
       Height          =   4575
-      Left            =   2160
+      Left            =   3600
       TabIndex        =   4
-      Top             =   1320
+      Top             =   1560
       Visible         =   0   'False
       Width           =   5535
       Begin VB.CommandButton cmdBusqueda 
@@ -348,37 +348,37 @@ Begin VB.Form frmADVvarios
       End
    End
    Begin VB.Frame FrameSelecCampo 
-      Height          =   6855
+      Height          =   7695
       Left            =   120
       TabIndex        =   0
       Top             =   0
-      Width           =   9855
+      Width           =   13095
       Begin VB.CommandButton cmdBusq 
          Height          =   375
-         Left            =   960
+         Left            =   1080
          Picture         =   "frmADVvarios.frx":0618
          Style           =   1  'Graphical
          TabIndex        =   5
          ToolTipText     =   "Buscar"
-         Top             =   6240
+         Top             =   7200
          Width           =   375
       End
       Begin VB.CommandButton cmdSelCampo 
          Caption         =   "Regresar"
          Height          =   495
-         Left            =   7440
+         Left            =   10920
          TabIndex        =   3
-         Top             =   6240
+         Top             =   7080
          Width           =   975
       End
       Begin MSComctlLib.ListView lw11 
-         Height          =   5775
+         Height          =   6615
          Left            =   120
          TabIndex        =   2
          Top             =   360
-         Width           =   9495
-         _ExtentX        =   16748
-         _ExtentY        =   10186
+         Width           =   12855
+         _ExtentX        =   22675
+         _ExtentY        =   11668
          View            =   3
          LabelEdit       =   1
          Sorted          =   -1  'True
@@ -399,7 +399,7 @@ Begin VB.Form frmADVvarios
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
             Text            =   "Partida"
-            Object.Width           =   3087
+            Object.Width           =   4075
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
@@ -415,44 +415,44 @@ Begin VB.Form frmADVvarios
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
             Text            =   "Cliente"
-            Object.Width           =   1411
+            Object.Width           =   1587
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   5
             Text            =   "Socio"
-            Object.Width           =   1587
+            Object.Width           =   1764
          EndProperty
          BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   6
             Text            =   "Nombre"
-            Object.Width           =   3880
+            Object.Width           =   7232
          EndProperty
       End
       Begin VB.CommandButton cmdCancelar 
          Caption         =   "Salir"
          Height          =   495
          Index           =   0
-         Left            =   8640
+         Left            =   12000
          TabIndex        =   1
-         Top             =   6240
+         Top             =   7080
          Width           =   975
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   1
-         Left            =   480
+         Left            =   600
          Picture         =   "frmADVvarios.frx":101A
          ToolTipText     =   "Puntear al haber"
-         Top             =   6240
+         Top             =   7200
          Width           =   240
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   0
-         Left            =   120
+         Left            =   240
          Picture         =   "frmADVvarios.frx":1164
          ToolTipText     =   "Quitar al haber"
-         Top             =   6240
+         Top             =   7200
          Width           =   240
       End
    End
@@ -472,11 +472,11 @@ Public Opcion As Byte
     '0.- Mostrar campos para seleccionar en partes de trabajo
 
 
-Public vCampos As String
+Public vCampos As String   'Si es -1 es que quiere lanzar el modo bsqueda
 
 Dim PrimVez As Boolean
 Dim SQL As String
-Dim It As ListItem
+Dim IT As ListItem
 
 ''''''
 ''''''Private Sub chkTodos_Click()
@@ -508,8 +508,10 @@ Private Sub cmdBusqueda_Click(Index As Integer)
     Else
         SQL = "rcampos.codclien  = " & vCampos
     End If
-    CargaCampos2 SQL
     
+    Screen.MousePointer = vbHourglass
+    CargaCampos2 SQL
+    Screen.MousePointer = vbDefault
     'Uno u otro
     Me.FrameDH.visible = False
     Me.FrameSelecCampo.Enabled = True
@@ -524,6 +526,7 @@ Private Sub cmdCancelar_Click(Index As Integer)
 End Sub
 
 Private Sub cmdSelCampo_Click()
+Dim T1 As String
     If lw11.ListItems.Count = 0 Then Exit Sub
     
     SQL = ""
@@ -535,10 +538,25 @@ Private Sub cmdSelCampo_Click()
         Exit Sub
     End If
     
+    
+    If vCampos = "-1" Then
+        'Multi parte. NO puedo coger campos que no tengan cliente asociado"
+        T1 = ""
+        For NumRegElim = 1 To lw11.ListItems.Count
+            If lw11.ListItems(NumRegElim).Checked Then
+               If Trim(lw11.ListItems(NumRegElim).SubItems(4)) = "" Then T1 = T1 & "X"
+            End If
+        Next
+        If T1 <> "" Then
+            MsgBox "Existen " & Len(T1) & " campo" & IIf(Len(T1) > 1, "s", "") & " sin cliente asociado", vbExclamation
+            Exit Sub
+        End If
+    End If
+    
     CadenaDesdeOtroForm = ""
     NumRegElim = Len(SQL)
     If NumRegElim > 1 Then
-        SQL = "Va a insertar " & NumRegElim & " campos. ¿Continuar?"
+        SQL = "Ha seleccionado " & NumRegElim & " campos. ¿Continuar?"
         If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
         CadenaDesdeOtroForm = "@" 'comienza por arroba
     End If
@@ -559,7 +577,13 @@ Private Sub Form_Activate()
     If PrimVez Then
         PrimVez = False
         
-        If Opcion = 0 Then CargaCampos2 "rcampos.codclien  = " & vCampos   'Martin. Enlaza con codclien
+        If Opcion = 0 Then
+            If vCampos >= 0 Then
+                CargaCampos2 "rcampos.codclien  = " & vCampos   'Martin. Enlaza con codclien
+            Else
+                cmdBusq_Click
+            End If
+        End If
         
     End If
     Screen.MousePointer = vbDefault
@@ -613,21 +637,21 @@ Private Sub CargaCampos2(ByVal SQ As String)
     
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        Set It = lw11.ListItems.Add()
-        It.Text = Format(miRsAux!codCampo, "0000000")
-        It.SubItems(1) = miRsAux!nomparti
-        It.SubItems(2) = miRsAux!nomvarie
+        Set IT = lw11.ListItems.Add()
+        IT.Text = Format(miRsAux!codCampo, "0000000")
+        IT.SubItems(1) = miRsAux!nomparti
+        IT.SubItems(2) = miRsAux!nomvarie
         'Superficie
         
-        It.SubItems(3) = Format(DBLet(miRsAux!supsigpa, "N"), FormatoPrecio)
+        IT.SubItems(3) = Format(DBLet(miRsAux!supsigpa, "N"), FormatoPrecio)
         
-        If IsNull(miRsAux!codclien) Then
-            It.SubItems(4) = " "
+        If IsNull(miRsAux!codClien) Then
+            IT.SubItems(4) = " "
         Else
-            It.SubItems(4) = Format(miRsAux!codclien, "00000")
+            IT.SubItems(4) = Format(miRsAux!codClien, "00000")
         End If
-        It.SubItems(5) = Format(miRsAux!codsocio, "00000")
-        It.SubItems(6) = miRsAux!nomsocio
+        IT.SubItems(5) = Format(miRsAux!codsocio, "00000")
+        IT.SubItems(6) = miRsAux!nomsocio
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -671,7 +695,10 @@ Private Sub imgBusc_Click(Index As Integer)
 '        frmB.vBuscaPrevia = chkVistaPrevia
     SQL = ""
     frmB.Show vbModal
-    
+ '   Dim i As Integer
+ '   For i = 1 To Me.lw11.ColumnHeaders.Count
+ '       Debug.Print lw11.ColumnHeaders(i).Text & " " & lw11.ColumnHeaders(i).Width
+ '   Next i
     If SQL <> "" Then
         Text1(Index).Text = RecuperaValor(SQL, 1)
         Text2(Index).Text = RecuperaValor(SQL, 2)
@@ -709,8 +736,8 @@ Private Sub lw11_DblClick()
     cmdSelCampo_Click
 End Sub
 
-Private Sub lw11_ItemCheck(ByVal Item As MSComctlLib.ListItem)
-    Set lw11.SelectedItem = Item
+Private Sub lw11_ItemCheck(ByVal item As MSComctlLib.ListItem)
+    Set lw11.SelectedItem = item
 End Sub
 
 Private Sub Text1_GotFocus(Index As Integer)

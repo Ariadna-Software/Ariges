@@ -289,7 +289,7 @@ Begin VB.Form frmAlmMovimArticulos
       Left            =   1800
       MaxLength       =   16
       TabIndex        =   0
-      Tag             =   "Cod. Articulo|T|N|||smoval|codartic||N|"
+      Tag             =   "Cod. Articulo|T1|N|||smoval|codartic||N|"
       Text            =   "Text1"
       Top             =   600
       Width           =   1815
@@ -684,17 +684,17 @@ End Sub
 
 
 Private Sub Imprimir()
-Dim Cad As String
+Dim cad As String
 Dim numParam As Byte
 
     'Resto parametros
-    Cad = ""
-    Cad = Cad & "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
+    cad = ""
+    cad = cad & "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
     numParam = 1
             
     With frmImprimir
         .NombreRPT = "rAlmMovim.rpt"
-        .OtrosParametros = Cad
+        .OtrosParametros = cad
         .NumeroParametros = numParam
         .FormulaSeleccion = cadSeleccion
         .EnvioEMail = False
@@ -996,7 +996,7 @@ Private Sub Form_Load()
     chkVistaPrevia.Value = CheckValueLeer(Name)
     
     Data1.ConnectionString = conn
-    CadenaConsulta = "Select * from " & NombreTabla & " WHERE codartic = -1"
+    CadenaConsulta = "Select * from " & NombreTabla & " WHERE false"
     Data1.RecordSource = CadenaConsulta
     Data1.Refresh
     PonerCampos
@@ -1008,13 +1008,13 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
      
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data2, SQL, PrimeraVez
@@ -1091,7 +1091,7 @@ Dim SQL As String
         DataGrid1.Columns(i).AllowSizing = False
     Next i
     DataGrid1.ScrollBars = dbgAutomatic
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     If Modo = 2 Then DataGrid1.Enabled = True
     PrimeraVez = False
     
@@ -1221,19 +1221,19 @@ End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
 'Formulario para Busqueda
-Dim cadB As String
+Dim CadB As String
 
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
 
-        cadB = ""
-        cadB = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & cadB & " GROUP BY codartic " & Ordenacion
+        CadB = ""
+        CadB = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
+        CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & CadB & " GROUP BY codartic " & Ordenacion
         PonerCadenaBusqueda
         
-        cadB = RecuperaValor(CadenaDevuelta, 1)
-        cadSeleccion = "{smoval.codartic}=""" & cadB & """"
+        CadB = RecuperaValor(CadenaDevuelta, 1)
+        cadSeleccion = "{smoval.codartic}=""" & CadB & """"
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -1244,7 +1244,7 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub ImageObservaDFI_Click()
-Dim Cad As String
+Dim cad As String
 Dim Invehco As Boolean
 
     If Modo = 0 Then Exit Sub
@@ -1256,31 +1256,31 @@ Dim Invehco As Boolean
             
             Invehco = False
             'Veremos si el DFI es del utlimo inventario
-            Cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
-            Cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", Cad, CStr(Data2.Recordset!codAlmac))
+            cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
+            cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", cad, CStr(Data2.Recordset!codAlmac))
             
-            If Cad = "" Then
+            If cad = "" Then
                 'No es el de salmac. Buscamos en shinve
-                Cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
-                Cad = DevuelveDesdeBD(conAri, "existenc", "shinve", Cad, CStr(Data2.Recordset!codAlmac))
-                If Cad <> "" Then Invehco = True
+                cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
+                cad = DevuelveDesdeBD(conAri, "existenc", "shinve", cad, CStr(Data2.Recordset!codAlmac))
+                If cad <> "" Then Invehco = True
             
             End If
             
             
-            If Cad <> "" Then
+            If cad <> "" Then
                 
-                Cad = "          Existencias: " & Cad
-                If Invehco Then Cad = Cad & "    *Hco"
-                Cad = "Fecha inventario: " & Data2.Recordset!FechaMov & Cad
+                cad = "          Existencias: " & cad
+                If Invehco Then cad = cad & "    *Hco"
+                cad = "Fecha inventario: " & Data2.Recordset!FechaMov & cad
              '   Cad = vbCrLf & "Almacen: " & Data2.Recordset!codAlmac & "-" & Text2(1).Text & vbCrLf & Cad
              '   Cad = "Articulo: " & Text1(0).Text & " " & Text2(0).Text & Cad
                 
             End If
                         
-            If Not IsNull(Data2.Recordset!observa) Then Cad = Cad & vbCrLf & "Observaciones: " & vbCrLf & Data2.Recordset!observa
+            If Not IsNull(Data2.Recordset!observa) Then cad = cad & vbCrLf & "Observaciones: " & vbCrLf & Data2.Recordset!observa
             
-            If Cad <> "" Then MsgBox Cad, vbInformation
+            If cad <> "" Then MsgBox cad, vbInformation
          End If
     End If
         
@@ -1336,17 +1336,17 @@ End Sub
 
 
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtaux_GotFocus(Index As Integer)
     If (Modo = 1 And (Index = 0 Or Index = 1 Or Index = 2 Or Index = 3 Or Index = 4 Or Index = 5 Or Index = 7)) Or (Modo <> 1) Then
         ConseguirFoco txtAux(Index), Modo
     End If
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -1406,17 +1406,17 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
 
    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
@@ -1436,18 +1436,18 @@ Dim NumReg As Byte
         PonerBotonCabecera True
     End Select
            
-    b = Modo <> 0 And Modo <> 2
+    B = Modo <> 0 And Modo <> 2
   
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
+        Me.imgBuscar(i).Enabled = B
     Next i
 
     
     PonerLongCampos
 
-    b = (Kmodo >= 3) Or Modo = 1
-    Toolbar1.Buttons(1).Enabled = Not b
-    Toolbar1.Buttons(2).Enabled = Not b
+    B = (Kmodo >= 3) Or Modo = 1
+    Toolbar1.Buttons(1).Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not B
 End Sub
 
 
@@ -1565,12 +1565,12 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 Dim bol As Boolean
 
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then Me.lblIndicador.Caption = ""
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then Me.lblIndicador.Caption = ""
     
     bol = (Modo = 1 Or Modo = 2)
     Me.Label3.visible = bol
@@ -1593,10 +1593,10 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 Dim cadB2 As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
 '    If Me.Text1(0).Text <> "" Then
 '        If cadB <> "" Then cadB = cadB & " AND "
 '        cadB = cadB & "(codartic LIKE " & DBSet(Text1(0).Text, "T") & ")"
@@ -1610,19 +1610,19 @@ Dim cadB2 As String
         If vUsu.CodigoAgente > 0 Then
             'Es solo un agente. Solo puede ver sus movimientos
             If vUsu.AlmacenPorDefecto2 > 0 Then
-                If cadB <> "" Then cadB = cadB & " AND "
+                If CadB <> "" Then CadB = CadB & " AND "
                 If cadSeleccion <> "" Then cadSeleccion = cadSeleccion & " AND "
                     
-                cadB = cadB & " smoval.codalmac = " & vUsu.AlmacenPorDefecto2
+                CadB = CadB & " smoval.codalmac = " & vUsu.AlmacenPorDefecto2
                 cadSeleccion = cadSeleccion & " {smoval.codalmac} = " & vUsu.AlmacenPorDefecto2
             End If
         End If
     End If
     
     
-        If cadB <> "" Then
+        If CadB <> "" Then
             'Cadena para el Data1
-            CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & cadB & " GROUP BY codartic " & Ordenacion
+            CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & CadB & " GROUP BY codartic " & Ordenacion
             'Cadena para el Datagrid y el Data2
             'el codartic no se incluye en la cadB de las lineas pq siempre
             'se muestran las de un codartic concreto
@@ -1741,27 +1741,27 @@ ECargar:
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
-Dim tabla As String
+Dim cad As String
+Dim Tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
             
-    Cad = Cad & "Código|smoval|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
-    tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
-    tabla = tabla & " GROUP BY smoval.codartic "
+    cad = cad & "Código|smoval|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
+    Tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
+    Tabla = Tabla & " GROUP BY smoval.codartic "
     Titulo = "Movimientos de Articulos"
 
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
-        frmB.vTabla = tabla
-        frmB.vSQL = cadB
+        frmB.vCampos = cad
+        frmB.vTabla = Tabla
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = "0|1|"

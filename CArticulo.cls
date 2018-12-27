@@ -43,6 +43,8 @@ Private mTextoCom As String 'texto a mostrar para compras
 
 Private mCodProve As Long   'codigo proveedor
 
+Private mEstablecidoPrecioMinimo As Boolean
+Private mPrecioMinimo As Currency
 
 
 '------------------------------------------------
@@ -241,6 +243,20 @@ End Property
 
 
 
+'**** Precio minimo. Solo lo utlizara HERBELCA, de mommento
+Public Property Get EstablecidoPrecioMinimo() As Boolean
+     EstablecidoPrecioMinimo = mEstablecidoPrecioMinimo
+End Property
+
+Public Property Get PrecioMinimo() As Currency
+    
+     PrecioMinimo = mPrecioMinimo
+End Property
+
+
+
+
+
 
 
 '------------------------------------------------
@@ -282,7 +298,7 @@ Dim SQL As String
     On Error GoTo ELeer
     LeerDatos = False
     
-    SQL = "SELECT codartic,nomartic,codfamia,codstatu,ctrstock,preciove,unicajas,codigiva,artvario,conjunto,textoven,textocom,codcateg,preciomp,preciost,preciouc,margecom,codprove "
+    SQL = "SELECT codartic,nomartic,codfamia,codstatu,ctrstock,preciove,unicajas,codigiva,artvario,conjunto,textoven,textocom,codcateg,preciomp,preciost,preciouc,margecom,codprove,preciominvta "
     SQL = SQL & " FROM sartic "
     SQL = SQL & " WHERE codartic=" & DBSet(vCodartic, "T")
     
@@ -316,6 +332,15 @@ Dim SQL As String
         TextoCompras = DBLet(Rs!textocom, "T")
         
         Codprove = DBLet(Rs!Codprove, "N")
+        
+        mEstablecidoPrecioMinimo = False
+        If Not EsDeVarios Then
+            If DBLet(Rs!preciominvta, "N") > 0 Then
+                mEstablecidoPrecioMinimo = True
+                mPrecioMinimo = Rs!preciominvta
+            End If
+        End If
+        
         LeerDatos = True
     End If
 
@@ -1025,3 +1050,86 @@ End Function
 '    cadError = Err.Description
 'End Function
 
+
+
+
+'Solo `para herbelca, de momento. Calculará el precio minimo
+'A partir de la familia y el maximo de los descuentos
+Public Sub FijarprecioMinimo(FechaCalculo As Date, CodClien As Long)
+Dim Rs As ADODB.Recordset
+Dim Precio As Currency
+Dim Porcen As Currency
+Dim SQL As String
+Dim LlevaDescuentoEspecial As Boolean
+Dim EstaprMiniEnlaFicha As Boolean
+    On Error GoTo eFijarprecioMinimo
+
+    Set Rs = New ADODB.Recordset
+    
+    
+    EstaprMiniEnlaFicha = mEstablecidoPrecioMinimo
+    
+        
+    SQL = "select precioac,coalesce(fechanue,'2100-01-01') FE,precionu from slista WHERE codlista=1 AND codartic=" & DBSet(mCodArtic, "T")
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Precio = -1
+    If Not Rs.EOF Then
+        If FechaCalculo > CDate(Rs!FE) Then
+            Precio = DBLet(Rs!precionu, "N")
+        Else
+            Precio = Rs!precioac
+        End If
+    End If
+    Rs.Close
+    
+    If Precio < 0 Then Exit Sub
+    
+    
+    
+    'DTO ESPECIAL
+    LlevaDescuentoEspecial = False
+    If Val(CodClien) > 0 Then
+        SQL = "select dtoline1+dtoline2  from sdtofm where codclien=" & CodClien & " and codfamia=" & mCodFamia & " and dtoesp=1"
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
+            If Not IsNull(Rs.Fields(0)) Then
+                Porcen = 100 - Rs.Fields(0)
+                Porcen = Porcen / 100
+                Precio = Round(Precio * Porcen, 4)
+                LlevaDescuentoEspecial = True
+            End If
+        End If
+        Rs.Close
+    End If
+    
+    If Not LlevaDescuentoEspecial Then
+    
+        'Si el precio ya estaba establecido
+        
+        If EstaprMiniEnlaFicha Then
+            'El precio minimo es el de la ficha
+            Set Rs = Nothing
+            Exit Sub
+        End If
+    
+        
+    
+        SQL = "select dtoline1+dtoline2 from sfamiadtos,sfamiatipodto where sfamiadtos.clasifica=sfamiatipodto.clasifica and codfamia=" & mCodFamia & " ORDER BY 1 desc"
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
+            If Not IsNull(Rs.Fields(0)) Then
+                Porcen = 100 - Rs.Fields(0)
+                Porcen = Porcen / 100
+                Precio = Round(Precio * Porcen, 4)
+            End If
+        End If
+        Rs.Close
+        
+    End If
+    mEstablecidoPrecioMinimo = True
+    mPrecioMinimo = Precio
+    
+eFijarprecioMinimo:
+    If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
+    Set Rs = Nothing
+End Sub

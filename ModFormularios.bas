@@ -11,33 +11,33 @@ Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (B
 'Se puede comentar todo y asi no hace nada ni da error
 'El SQL es propio de cada tabla
 Public Function SugerirCodigoSiguienteStr(NomTabla As String, NomCodigo As String, Optional CondLineas As String) As String
-Dim SQL As String
+Dim sql As String
 Dim Rs As ADODB.Recordset
 On Error GoTo ESugerirCodigo
 
     'SQL = "Select Max(codtipar) from stipar"
-    SQL = "Select Max(" & NomCodigo & ") from " & NomTabla
+    sql = "Select Max(" & NomCodigo & ") from " & NomTabla
     If CondLineas <> "" Then
-        SQL = SQL & " WHERE " & CondLineas
+        sql = sql & " WHERE " & CondLineas
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, , , adCmdText
-    SQL = "1"
+    Rs.Open sql, conn, , , adCmdText
+    sql = "1"
     If Not Rs.EOF Then
         If Not IsNull(Rs.Fields(0)) Then
             If IsNumeric(Rs.Fields(0)) Then
-                SQL = CStr(Rs.Fields(0) + 1)
+                sql = CStr(Rs.Fields(0) + 1)
             Else
                 If Asc(Left(Rs.Fields(0), 1)) <> 122 Then 'Z
-                SQL = Left(Rs.Fields(0), 1) & CStr(Asc(Right(Rs.Fields(0), 1)) + 1)
+                sql = Left(Rs.Fields(0), 1) & CStr(Asc(Right(Rs.Fields(0), 1)) + 1)
                 End If
             End If
         End If
     End If
     Rs.Close
     Set Rs = Nothing
-    SugerirCodigoSiguienteStr = SQL
+    SugerirCodigoSiguienteStr = sql
 ESugerirCodigo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
@@ -51,7 +51,7 @@ Public Function EsCodigoCero(Cod As String, Formato As String) As Boolean
     If Cod <> "" Then
         If Val(Cod) = Val(0) Then
             EsCodigoCero = True
-            MsgBox "El código " & Formato & " no se puede modificar ni eliminar.", vbExclamation
+            MsgBox "El código " & Formato & " no se puede eliminar.", vbExclamation
             Screen.MousePointer = vbDefault
         End If
     End If
@@ -64,12 +64,12 @@ Public Sub BloquearText1(ByRef Formulario As Form, Modo As Byte)
 'IN ->  formulario: formulario en el que se van a poner los controles textbox en modo visualización
 '       Modo: modo del mantenimiento (Insertar, Modificar,Buscar...)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 Dim vtag As CTag
 On Error Resume Next
 
     With Formulario
-        b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'And ModoLineas = 1))
+        B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'And ModoLineas = 1))
         
         For i = 0 To .Text1.Count - 1 'En principio todos los TExt1 tiene TAG
             Set vtag = New CTag
@@ -79,8 +79,8 @@ On Error Resume Next
                     .Text1(i).Locked = True
                     .Text1(i).BackColor = &H80000018 'amarillo claro
                 Else
-                    .Text1(i).Locked = Not b  '((Not b) And (Modo <> 1))
-                    If b Then
+                    .Text1(i).Locked = Not B  '((Not b) And (Modo <> 1))
+                    If B Then
                         .Text1(i).BackColor = vbWhite
                     Else
                         .Text1(i).BackColor = &H80000018 'amarillo claro
@@ -88,8 +88,8 @@ On Error Resume Next
                     If Modo = 3 Then .Text1(i).Text = "" 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
                 End If
             Else
-                .Text1(i).Locked = Not b  '((Not b) And (Modo <> 1))
-                If b Then
+                .Text1(i).Locked = Not B  '((Not b) And (Modo <> 1))
+                If B Then
                     .Text1(i).BackColor = vbWhite
                 Else
                     .Text1(i).BackColor = &H80000018 'amarillo claro
@@ -103,15 +103,15 @@ On Error Resume Next
 End Sub
 
 
-Public Sub BloquearTxt(ByRef Text As TextBox, b As Boolean, Optional EsContador As Boolean)
+Public Sub BloquearTxt(ByRef Text As TextBox, B As Boolean, Optional EsContador As Boolean)
 'Bloquea un control de tipo TextBox
 'Si lo bloquea lo pone de color amarillo claro sino lo pone en color blanco (sino es contador)
 'pero si es contador lo pone color azul claro
 On Error Resume Next
 
-    Text.Locked = b
-    If Not b And Text.Enabled = False Then Text.Enabled = True
-    If b Then
+    Text.Locked = B
+    If Not B And Text.Enabled = False Then Text.Enabled = True
+    If B Then
         If EsContador Then
             'Si Es un campo que se obtiene de un contador poner color azul
 '            Text.BackColor = &H80000013 'Azul Claro
@@ -126,29 +126,29 @@ On Error Resume Next
 End Sub
 
 
-Public Sub BloquearImg(ByRef imgF As Image, b As Boolean)
+Public Sub BloquearImg(ByRef imgF As Image, B As Boolean)
 On Error Resume Next
 
-    imgF.Enabled = Not b
-    imgF.visible = Not b
+    imgF.Enabled = Not B
+    imgF.visible = Not B
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
-Public Sub BloquearCmb(ByRef cmb As ComboBox, b As Boolean, Optional EsContador As Boolean)
+Public Sub BloquearCmb(ByRef cmb As ComboBox, B As Boolean, Optional EsContador As Boolean)
 'Bloqueja un control de tipo ComboBox
 'Si el bloqueja el posa de color gris claro, sino el posa de color blanc (sino es contador)
 'pero si es contador el posa color blau clar
     On Error Resume Next
 
-    cmb.Locked = b
+    cmb.Locked = B
     cmb.Enabled = True
     
     'cmb.Enabled = Not b
     
     'If Not b And Cmb.Enabled = False Then Cmb.Enabled = True
-    If b Then
+    If B Then
         If EsContador Then
             'Si Es un campo que se obtiene de un contador poner color azul
             cmb.BackColor = &H80000013 'Azul Claro
@@ -168,11 +168,11 @@ Public Sub BloquearChecks(ByRef Formulario As Form, Modo As Byte)
 'Bloquea controles  CheckBox si no estamos en Modo: 3.-Insertar, 4.-Modificar
 'IN ->  formulario: formulario en el que se van a poner los controles textbox en modo visualización
 '       Modo: modo del mantenimiento (Insertar, Modificar,Buscar...)
-Dim b As Boolean
+Dim B As Boolean
 Dim Control As Control
 On Error Resume Next
 
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1)
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1)
     With Formulario
         For Each Control In Formulario.Controls
             If TypeOf Control Is CheckBox Then
@@ -299,6 +299,8 @@ ESituarData:
         If vData.Recordset.RecordCount > 0 Then vData.Recordset.MoveFirst
         SituarData = False
 End Function
+
+
 
 
 '===========================
@@ -655,15 +657,16 @@ EDeseleccionaGrid:
     Err.Clear
 End Sub
 
-
-Public Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, SQL As String, PrimeraVez As Boolean)
+'Para forzar rowheiht
+' vHeight
+Public Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, sql As String, PrimeraVez As Boolean, Optional vHeight As Integer)
 On Error GoTo ECargaGrid
 
     vDataGrid.Enabled = True
     
     'ANTES MARAZO 2011
     vData.ConnectionString = conn
-    vData.RecordSource = SQL
+    vData.RecordSource = sql
     vData.CursorType = adOpenDynamic
     vData.LockType = adLockPessimistic
     vDataGrid.ScrollBars = dbgNone
@@ -671,7 +674,8 @@ On Error GoTo ECargaGrid
     
     Set vDataGrid.DataSource = vData
     vDataGrid.AllowRowSizing = False
-    vDataGrid.RowHeight = 290
+    If vHeight = 0 Then vHeight = 290
+    vDataGrid.RowHeight = vHeight
 
     If PrimeraVez Then
         vDataGrid.ClearFields
@@ -725,7 +729,7 @@ Public Sub CargarCombo_Tabla(ByRef CBO As ComboBox, NomTabla As String, NomCodig
 '(IN) nomDescrip: nombre del campo descripcion de la tabla a cargar
 '(IN) strWhere: para filtrar los registros de la tabla q queremos cargar
 '(IN) ItemNulo: si es true se añade el primer item con linea en blanco
-Dim SQL As String
+Dim sql As String
 Dim Rs As ADODB.Recordset
 Dim i As Integer
 
@@ -733,18 +737,18 @@ Dim i As Integer
     
     CBO.Clear
     
-    SQL = "SELECT " & NomCodigo & "," & nomDescrip & " FROM " & NomTabla
-    If strWhere <> "" Then SQL = SQL & " WHERE " & strWhere
-    SQL = SQL & " ORDER BY "
+    sql = "SELECT " & NomCodigo & "," & nomDescrip & " FROM " & NomTabla
+    If strWhere <> "" Then sql = sql & " WHERE " & strWhere
+    sql = sql & " ORDER BY "
     If Ordenacion <> "" Then
-        SQL = SQL & Ordenacion
+        sql = sql & Ordenacion
     Else
-        SQL = SQL & nomDescrip
+        sql = sql & nomDescrip
     End If
     
 '    If AbrirRecordset(SQL, RS) Then
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     '- si valor del parametro ItemNulo=true hay que añadir linea en blanco
     If Not Rs.EOF And ItemNulo Then
@@ -796,7 +800,7 @@ Public Sub CargarCombo_TipMov(ByRef CBO As ComboBox, NomTabla As String, NomCodi
 '(IN) nomDescrip: nombre del campo descripcion de la tabla q queremos cargar
 '(IN) strWhere: para filtrar los registros de la tabla q queremos cargar
 '(IN) ItemNulo: si es true se añade el primer item con linea en blanco
-Dim SQL As String
+Dim sql As String
 Dim Rs As ADODB.Recordset
 Dim i As Integer
 
@@ -804,12 +808,12 @@ Dim i As Integer
     
     CBO.Clear
     
-    SQL = "SELECT " & NomCodigo & "," & nomDescrip & " FROM " & NomTabla
-    If strWhere <> "" Then SQL = SQL & " WHERE " & strWhere
-    SQL = SQL & " ORDER BY " & NomCodigo
+    sql = "SELECT " & NomCodigo & "," & nomDescrip & " FROM " & NomTabla
+    If strWhere <> "" Then sql = sql & " WHERE " & strWhere
+    sql = sql & " ORDER BY " & NomCodigo
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     '- si valor del parametro ItemNulo=true hay que añadir linea en blanco
     If Not Rs.EOF And ItemNulo Then
@@ -819,9 +823,9 @@ Dim i As Integer
        
     i = 1
     While Not Rs.EOF
-        SQL = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        SQL = Rs.Fields(0).Value & " - " & SQL
-        CBO.AddItem SQL 'campo del codigo
+        sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
+        sql = Rs.Fields(0).Value & " - " & sql
+        CBO.AddItem sql 'campo del codigo
         CBO.ItemData(CBO.NewIndex) = i
         i = i + 1
         Rs.MoveNext
@@ -879,11 +883,15 @@ Public Sub PonerIndicador(ByRef lblIndicador As Label, Modo As Byte)
         Case 1 'Modo Buscar
             lblIndicador.Caption = "BUSQUEDA"
         Case 2    'Preparamos para que pueda Modificar
-        
+            
         Case 3 'Modo Insertar
             lblIndicador.Caption = "INSERTAR"
         Case 4 'MODIFICAR
             lblIndicador.Caption = "MODIFICAR"
+            
+            
+            
+        
         Case Else
             lblIndicador.Caption = ""
     End Select
@@ -893,15 +901,15 @@ End Sub
 Public Sub ActualizarToolbarGnral(ByRef Toolbar1 As Toolbar, Modo As Byte, Kmodo As Byte, posic As Byte)
 'Modo: Modo antiguo
 'Kmodo: Modo que se va a poner
-Dim b As Boolean
+Dim B As Boolean
     
     '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN (se añade modo 8)
     '---- [2012] DAVID : Materias activas y equivalencias
-    b = (Modo = 5 Or Modo = 6 Or Modo = 7 Or Modo = 8 Or Modo = 9 Or Modo = 10)
+    B = (Modo = 5 Or Modo = 6 Or Modo = 7 Or Modo = 8 Or Modo = 9 Or Modo = 10)
     
     '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN (se añade modo 8)
     ' 19/12/2011  Modo 9=  Materias activas
-    If (b) And (Kmodo <> 5 And Kmodo <> 6 And Kmodo <> 7 And Kmodo <> 8 And Kmodo <> 9 And Kmodo <> 10) Then  'Cabecera
+    If (B) And (Kmodo <> 5 And Kmodo <> 6 And Kmodo <> 7 And Kmodo <> 8 And Kmodo <> 9 And Kmodo <> 10) Then  'Cabecera
         'El modo antigu era modificando las lineas
         'Luego hay que reestablecer los dibujitos y los TIPS
         '-- insertar
@@ -1397,10 +1405,10 @@ ePonerFormatoDecimal:
 End Function
 
 
-Public Function PonerNombreDeCod(ByRef txt As TextBox, bd As Byte, tabla As String, campo As String, Optional codigo As String, Optional texto As String, Optional Tipo As String) As String
+Public Function PonerNombreDeCod(ByRef txt As TextBox, bd As Byte, Tabla As String, campo As String, Optional codigo As String, Optional texto As String, Optional Tipo As String) As String
 'Devuelve el nombre/Descripción asociado al Código correspondiente
 'Además pone formato al campo txt del código a partir del Tag
-Dim SQL As String
+Dim sql As String
 Dim devuelve As String
 Dim vtag As CTag
 Dim ValorCodigo As String
@@ -1412,9 +1420,9 @@ On Error GoTo EPonerNombresDeCod
         If vtag.Cargar(txt) Then
             If codigo = "" Then codigo = vtag.columna
             If Tipo = "" Then Tipo = vtag.TipoDato
-            SQL = DevuelveDesdeBD(bd, campo, tabla, codigo, ValorCodigo, Tipo)
+            sql = DevuelveDesdeBD(bd, campo, Tabla, codigo, ValorCodigo, Tipo)
             If vtag.TipoDato = "N" Then ValorCodigo = Format(ValorCodigo, vtag.Formato)
-            If SQL = "" Then
+            If sql = "" Then
                 If texto = "" Then
                     devuelve = "No existe " & vtag.Nombre & ": " & ValorCodigo
                 Else
@@ -1426,7 +1434,7 @@ On Error GoTo EPonerNombresDeCod
 '                PonerFoco Txt
 '                Txt.SetFocus
             Else
-                PonerNombreDeCod = SQL 'Descripcion del codigo
+                PonerNombreDeCod = sql 'Descripcion del codigo
                 'Poner valor codigo formateado
                 txt.Text = ValorCodigo 'Valor codigo formateado
             End If
@@ -1453,7 +1461,7 @@ On Error GoTo EExiste
         If T.Tag <> "" Then
             Set vtag = New CTag
             If vtag.Cargar(T) Then
-                devuelve = DevuelveDesdeBDNew(conAri, vtag.tabla, vtag.columna, vtag.columna, T.Text, vtag.TipoDato)
+                devuelve = DevuelveDesdeBDNew(conAri, vtag.Tabla, vtag.columna, vtag.columna, T.Text, vtag.TipoDato)
                 If devuelve <> "" Then
                     MsgBox "Ya existe un registro para " & vtag.Nombre & ": " & T.Text, vbExclamation
                     ExisteCP = True
@@ -1589,20 +1597,20 @@ End Sub
 
 Public Function PonerNombreCuenta(ByRef txt As TextBox, Modo As Byte, Optional clien As String) As String
 Dim DevfrmCCtas As String
-Dim SQL As String
+Dim sql As String
 
      If txt.Text = "" Then
          PonerNombreCuenta = ""
          Exit Function
     End If
     DevfrmCCtas = txt.Text
-    If CuentaCorrectaUltimoNivel(DevfrmCCtas, SQL) Then
-        If InStr(SQL, "No existe la cuenta") > 0 Then
+    If CuentaCorrectaUltimoNivel(DevfrmCCtas, sql) Then
+        If InStr(sql, "No existe la cuenta") > 0 Then
             txt.Text = DevfrmCCtas
             
             If (Modo = 3 Or Modo = 4) Then  'si insertar o modificar
-                SQL = SQL & "  ¿Desea crearla?"
-                If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+                sql = sql & "  ¿Desea crearla?"
+                If MsgBox(sql, vbQuestion + vbYesNo) = vbYes Then
                     'SI MODO es insetar NO me sirve el metodo anterior. Pq? Pq aun no he creado el cli/prov
                     'De momento pondre una marca en el texto de descripcion para que la cree
                     If Modo = 3 Then
@@ -1628,15 +1636,15 @@ Dim SQL As String
                     txt.Text = ""
                 End If
             Else
-                MsgBox SQL, vbExclamation
+                MsgBox sql, vbExclamation
             End If
         Else
             txt.Text = DevfrmCCtas
-            PonerNombreCuenta = SQL
+            PonerNombreCuenta = sql
         End If
     Else
         If Modo = 3 Or Modo = 4 Or Modo = 1 Then 'si insertar o modificar
-            MsgBox SQL, vbExclamation
+            MsgBox sql, vbExclamation
 '            PonerNombreCuenta = ""
         End If
 '        Txt.Text = ""
@@ -1649,79 +1657,79 @@ End Function
 
 'He cambiado el metodo a public
 Public Function InsertarCuentaCble(Cuenta As String, cadClien As String, Optional cadProve As String, Optional cadFamia As String) As Boolean
-Dim SQL As String
+Dim sql As String
 Dim vClien As CCliente
 Dim vProve As CProveedor
 Dim Aux As String
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo EInsCta
     
     
     
-    SQL = ""
+    sql = ""
     
-    SQL = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,maidatos,webdatos,obsdatos,forpa, ctabanco, "
+    sql = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,maidatos,webdatos,obsdatos,forpa, ctabanco, "
     If vParamAplic.ContabilidadNueva Then
-        SQL = SQL & "codpais,iban"
+        sql = sql & "codpais,iban"
     Else
-        SQL = SQL & "pais,entidad, oficina, CC, CuentaBa,iban"
+        sql = sql & "pais,entidad, oficina, CC, CuentaBa,iban"
     End If
-    SQL = SQL & ") VALUES (" & DBSet(Cuenta, "T") & ","
+    sql = sql & ") VALUES (" & DBSet(Cuenta, "T") & ","
     
     If cadClien <> "" Then
         Set vClien = New CCliente
         If vClien.LeerDatos(cadClien) Then
-            SQL = SQL & DBSet(vClien.Nombre, "T") & ",'S',1," & DBSet(vClien.Nombre, "T") & "," & DBSet(vClien.Domicilio, "T") & ","
-            SQL = SQL & DBSet(vClien.CPostal, "T") & "," & DBSet(vClien.Poblacion, "T") & "," & DBSet(vClien.Provincia, "T") & "," & DBSet(vClien.NIF, "T") & "," & DBSet(vClien.EMailAdm, "T") & "," & DBSet(vClien.WebClien, "T") & "," & ValorNulo
+            sql = sql & DBSet(vClien.Nombre, "T") & ",'S',1," & DBSet(vClien.Nombre, "T") & "," & DBSet(vClien.Domicilio, "T") & ","
+            sql = sql & DBSet(vClien.CPostal, "T") & "," & DBSet(vClien.Poblacion, "T") & "," & DBSet(vClien.Provincia, "T") & "," & DBSet(vClien.NIF, "T") & "," & DBSet(vClien.EMailAdm, "T") & "," & DBSet(vClien.WebClien, "T") & "," & ValorNulo
             'Forma pago y cuenta banco por defecto
-            SQL = SQL & "," & DBSet(vClien.ForPago, "N", "S") & "," & ValorNulo & "," & DBSet(vClien.PAIS, "T", "S") & ","
+            sql = sql & "," & DBSet(vClien.ForPago, "N", "S") & "," & ValorNulo & "," & DBSet(vClien.PAIS, "T", "S") & ","
             
             'PAIS
             If vParamAplic.ContabilidadNueva Then
                 Aux = MiFormat(vClien.Iban, "") & MiFormat(vClien.Banco, "0000") & MiFormat(vClien.Sucursal, "0000") & MiFormat(vClien.DigControl, "00") & MiFormat(vClien.CuentaBan, "0000000000")
-                SQL = SQL & DBSet(Aux, "T")
+                sql = sql & DBSet(Aux, "T")
 
             Else
                 
                 If vClien.Banco = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vClien.Banco, "0000") & "'"
+                    sql = sql & "'" & Format(vClien.Banco, "0000") & "'"
                 End If
-                SQL = SQL & ","
+                sql = sql & ","
                 If vClien.Sucursal = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vClien.Sucursal, "0000") & "'"
+                    sql = sql & "'" & Format(vClien.Sucursal, "0000") & "'"
                 End If
-                SQL = SQL & ","
+                sql = sql & ","
                 If vClien.DigControl = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vClien.DigControl, "00") & "'"
+                    sql = sql & "'" & Format(vClien.DigControl, "00") & "'"
                 End If
-                SQL = SQL & ","
+                sql = sql & ","
                 If vClien.CuentaBan = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vClien.CuentaBan, "0000000000") & "'"
+                    sql = sql & "'" & Format(vClien.CuentaBan, "0000000000") & "'"
                 End If
                             
-                SQL = SQL & ","
+                sql = sql & ","
                 If vClien.Iban = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & vClien.Iban & "'"
+                    sql = sql & "'" & vClien.Iban & "'"
                 End If
             End If
-            SQL = SQL & ")"
+            sql = sql & ")"
             
-            ConnConta.Execute SQL
+            ConnConta.Execute sql
             cadClien = vClien.Nombre
-            b = True
+            B = True
         Else
-            b = False
+            B = False
         End If
         Set vClien = Nothing
     End If
@@ -1729,12 +1737,12 @@ Dim b As Boolean
     If cadProve <> "" Then
         Set vProve = New CProveedor
         If vProve.LeerDatos(cadProve) Then
-            SQL = SQL & DBSet(vProve.Nombre, "T") & ",'S',1," & DBSet(vProve.Nombre, "T") & "," & DBSet(vProve.Domicilio, "T") & ","
-            SQL = SQL & DBSet(vProve.CPostal, "T") & "," & DBSet(vProve.Poblacion, "T") & "," & DBSet(vProve.Provincia, "T") & "," & DBSet(vProve.NIF, "T") & ","
-            SQL = SQL & DBSet(vProve.EMailAdmon, "T") & "," & DBSet(vProve.WebProve, "T") & "," & ValorNulo
+            sql = sql & DBSet(vProve.Nombre, "T") & ",'S',1," & DBSet(vProve.Nombre, "T") & "," & DBSet(vProve.Domicilio, "T") & ","
+            sql = sql & DBSet(vProve.CPostal, "T") & "," & DBSet(vProve.Poblacion, "T") & "," & DBSet(vProve.Provincia, "T") & "," & DBSet(vProve.NIF, "T") & ","
+            sql = sql & DBSet(vProve.EMailAdmon, "T") & "," & DBSet(vProve.WebProve, "T") & "," & ValorNulo
             'Forma pago y cuenta banco por defecto
             cadProve = DevuelveDesdeBD(conAri, "codmacta", "sbanpr", "codbanpr", vProve.BancoPropio)
-            SQL = SQL & "," & DBSet(vProve.ForPago, "N", "S") & "," & DBSet(cadProve, "N", "S") & ","
+            sql = sql & "," & DBSet(vProve.ForPago, "N", "S") & "," & DBSet(cadProve, "N", "S") & ","
             cadProve = ""
             
             'PAIS
@@ -1748,88 +1756,88 @@ Dim b As Boolean
             Else
                 Aux = ValorNulo
             End If
-            SQL = SQL & Aux & ","
+            sql = sql & Aux & ","
             
             'CuentaBAnco
             If vParamAplic.ContabilidadNueva Then
                 Aux = MiFormat(vProve.Iban, "") & MiFormat(vProve.Banco, "0000") & MiFormat(vProve.Sucursal, "0000") & MiFormat(vProve.DigControl, "00") & MiFormat(vProve.CuentaBan, "0000000000")
-                SQL = SQL & DBSet(Aux, "T")
+                sql = sql & DBSet(Aux, "T")
 
             Else
                 
                 If vProve.Banco = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vProve.Banco, "0000") & "'"
+                    sql = sql & "'" & Format(vProve.Banco, "0000") & "'"
                 End If
-                SQL = SQL & ","
+                sql = sql & ","
                 If vProve.Sucursal = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vProve.Sucursal, "0000") & "'"
+                    sql = sql & "'" & Format(vProve.Sucursal, "0000") & "'"
                 End If
-                SQL = SQL & ","
+                sql = sql & ","
                 If vProve.DigControl = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vProve.DigControl, "00") & "'"
+                    sql = sql & "'" & Format(vProve.DigControl, "00") & "'"
                 End If
-                SQL = SQL & ","
+                sql = sql & ","
                 If vProve.CuentaBan = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vProve.CuentaBan, "0000000000") & "'"
+                    sql = sql & "'" & Format(vProve.CuentaBan, "0000000000") & "'"
                 End If
                             
-                SQL = SQL & ","
+                sql = sql & ","
                 If vProve.Iban = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & vProve.Iban & "'"
+                    sql = sql & "'" & vProve.Iban & "'"
                 End If
             End If
-            SQL = SQL & ")"
+            sql = sql & ")"
             
             
             
-            ConnConta.Execute SQL
+            ConnConta.Execute sql
             cadProve = vProve.Nombre
-            b = True
+            B = True
         Else
-            b = False
+            B = False
         End If
         Set vProve = Nothing
     
     ' ---- [02/10/2009] (LAURA): crear cuenta en familias articulos
     ElseIf cadFamia <> "" Then 'cuentas familias articulos
-        SQL = SQL & DBSet(cadFamia, "T") & ",'S',0," & DBSet(cadFamia, "T") & "," & ValorNulo & ","
-        SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+        sql = sql & DBSet(cadFamia, "T") & ",'S',0," & DBSet(cadFamia, "T") & "," & ValorNulo & ","
+        sql = sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+        sql = sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
         'Forma pago y cuenta banco por defecto
-        If Not vParamAplic.ContabilidadNueva Then SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        SQL = SQL & ValorNulo & "," & ValorNulo & ")"
+        If Not vParamAplic.ContabilidadNueva Then sql = sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+        sql = sql & ValorNulo & "," & ValorNulo & ")"
         
-        ConnConta.Execute SQL
-        b = True
+        ConnConta.Execute sql
+        B = True
     ' ----
     End If
     
 EInsCta:
     If Err.Number <> 0 Then
-        b = False
+        B = False
         MuestraError Err.Number, "Insertando cuenta contable", Err.Description
     End If
-    InsertarCuentaCble = b
+    InsertarCuentaCble = B
 End Function
 
 
 
 
 Public Function ModificarCtaContabilidad(esCliente As Boolean, Cuenta As String, codigo As Long) As Boolean
-Dim SQL As String
+Dim sql As String
 Dim vClien As CCliente
 Dim vProve As CProveedor
-Dim b As Boolean
+Dim B As Boolean
 Dim vL As String
 Dim Aux As String
 
@@ -1847,54 +1855,54 @@ Dim Aux As String
 '    SQL = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci,dirdatos,
 '   codposta,despobla,desprovi,nifdatos,maidatos,webdatos,obsdatos,pais,forpa, ctabanco) "
 '    SQL = SQL & " VALUES (" & DBSet(cuenta, "T") & ","
-    SQL = "UPDATE cuentas SET "
+    sql = "UPDATE cuentas SET "
     If esCliente Then
         Set vClien = New CCliente
         If vClien.LeerDatos(CStr(codigo)) Then
             
-            SQL = SQL & "nommacta=" & DBSet(vClien.Nombre, "T") & ", razosoci=" & DBSet(vClien.Nombre, "T") & ", dirdatos= " & DBSet(vClien.Domicilio, "T")
-            SQL = SQL & ", codposta = " & DBSet(vClien.CPostal, "T") & ", despobla=" & DBSet(vClien.Poblacion, "T") & ", desprovi=" & DBSet(vClien.Provincia, "T")
-            SQL = SQL & ", nifdatos=" & DBSet(vClien.NIF, "T") & ", maidatos=" & DBSet(vClien.EMailAdm, "T", "S") & ", webdatos=" & DBSet(vClien.WebClien, "T", "S")
+            sql = sql & "nommacta=" & DBSet(vClien.Nombre, "T") & ", razosoci=" & DBSet(vClien.Nombre, "T") & ", dirdatos= " & DBSet(vClien.Domicilio, "T")
+            sql = sql & ", codposta = " & DBSet(vClien.CPostal, "T") & ", despobla=" & DBSet(vClien.Poblacion, "T") & ", desprovi=" & DBSet(vClien.Provincia, "T")
+            sql = sql & ", nifdatos=" & DBSet(vClien.NIF, "T") & ", maidatos=" & DBSet(vClien.EMailAdm, "T", "S") & ", webdatos=" & DBSet(vClien.WebClien, "T", "S")
             'Forma pago y cuenta banco por defecto
-            SQL = SQL & ",forpa=" & DBSet(vClien.ForPago, "N", "S")
+            sql = sql & ",forpa=" & DBSet(vClien.ForPago, "N", "S")
             
             'Cuenta bancaria
             If vParamAplic.ContabilidadNueva Then
                 
                 Aux = MiFormat(vClien.Iban, "") & MiFormat(vClien.Banco, "0000") & MiFormat(vClien.Sucursal, "0000") & MiFormat(vClien.DigControl, "00") & MiFormat(vClien.CuentaBan, "0000000000")
-                SQL = SQL & ", iban=" & DBSet(Aux, "T")
+                sql = sql & ", iban=" & DBSet(Aux, "T")
             
             Else
-                SQL = SQL & ", entidad="
+                sql = sql & ", entidad="
                 If vClien.Banco = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vClien.Banco, "0000") & "'"
+                    sql = sql & "'" & Format(vClien.Banco, "0000") & "'"
                 End If
-                SQL = SQL & ", oficina="
+                sql = sql & ", oficina="
                 If vClien.Sucursal = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vClien.Sucursal, "0000") & "'"
+                    sql = sql & "'" & Format(vClien.Sucursal, "0000") & "'"
                 End If
-                SQL = SQL & ", " & IIf(vParamAplic.ContabilidadNueva, "control", "CC") & " ="
+                sql = sql & ", " & IIf(vParamAplic.ContabilidadNueva, "control", "CC") & " ="
                 If vClien.DigControl = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vClien.DigControl, "00") & "'"
+                    sql = sql & "'" & Format(vClien.DigControl, "00") & "'"
                 End If
-                SQL = SQL & ", cuentaba="
+                sql = sql & ", cuentaba="
                 If vClien.CuentaBan = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vClien.CuentaBan, "0000000000") & "'"
+                    sql = sql & "'" & Format(vClien.CuentaBan, "0000000000") & "'"
                 End If
                             
-                SQL = SQL & ", iban="
+                sql = sql & ", iban="
                 If vClien.Iban = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & vClien.Iban & "'"
+                    sql = sql & "'" & vClien.Iban & "'"
                 End If
             End If
             
@@ -1926,15 +1934,15 @@ Dim Aux As String
                 
                 End If
                 If Aux <> ValorNulo Then Aux = DBSet(Aux, "T")
-                SQL = SQL & ", codpais=" & Aux
+                sql = sql & ", codpais=" & Aux
             End If
             
             
-            SQL = SQL & " WHERE codmacta = " & DBSet(Cuenta, "T")
+            sql = sql & " WHERE codmacta = " & DBSet(Cuenta, "T")
             
             
-            ConnConta.Execute SQL
-            b = True
+            ConnConta.Execute sql
+            B = True
             
             
             
@@ -1942,7 +1950,7 @@ Dim Aux As String
             
             
         Else
-            b = False
+            B = False
         End If
         Set vClien = Nothing
     
@@ -1950,99 +1958,99 @@ Dim Aux As String
     Else
         Set vProve = New CProveedor
         If vProve.LeerDatos(CStr(codigo)) Then
-            SQL = SQL & "nommacta=" & DBSet(vProve.Nombre, "T") & ", razosoci=" & DBSet(vProve.Nombre, "T") & ", dirdatos= " & DBSet(vProve.Domicilio, "T")
-            SQL = SQL & ", codposta = " & DBSet(vProve.CPostal, "T") & ", despobla=" & DBSet(vProve.Poblacion, "T") & ",desprovi=" & DBSet(vProve.Provincia, "T")
-            SQL = SQL & ", nifdatos=" & DBSet(vProve.NIF, "T") & ", maidatos=" & DBSet(vProve.EMailAdmon, "T", "S") & ", webdatos=" & DBSet(vProve.WebProve, "T", "S")
+            sql = sql & "nommacta=" & DBSet(vProve.Nombre, "T") & ", razosoci=" & DBSet(vProve.Nombre, "T") & ", dirdatos= " & DBSet(vProve.Domicilio, "T")
+            sql = sql & ", codposta = " & DBSet(vProve.CPostal, "T") & ", despobla=" & DBSet(vProve.Poblacion, "T") & ",desprovi=" & DBSet(vProve.Provincia, "T")
+            sql = sql & ", nifdatos=" & DBSet(vProve.NIF, "T") & ", maidatos=" & DBSet(vProve.EMailAdmon, "T", "S") & ", webdatos=" & DBSet(vProve.WebProve, "T", "S")
             'Forma pago y cuenta banco por defecto
-            SQL = SQL & ",forpa=" & DBSet(vProve.ForPago, "N", "S")
+            sql = sql & ",forpa=" & DBSet(vProve.ForPago, "N", "S")
             
             'Cuenta bancaria
             If vParamAplic.ContabilidadNueva Then
             
                  Aux = MiFormat(vProve.Iban, "") & MiFormat(vProve.Banco, "0000") & MiFormat(vProve.Sucursal, "0000") & MiFormat(vProve.DigControl, "00") & MiFormat(vProve.CuentaBan, "0000000000")
-                SQL = SQL & ", iban=" & DBSet(Aux, "T")
+                sql = sql & ", iban=" & DBSet(Aux, "T")
             
             Else
-                SQL = SQL & ", entidad="
+                sql = sql & ", entidad="
                 If vProve.Banco = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vProve.Banco, "0000") & "'"
+                    sql = sql & "'" & Format(vProve.Banco, "0000") & "'"
                 End If
-                SQL = SQL & ", oficina="
+                sql = sql & ", oficina="
                 If vProve.Sucursal = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vProve.Sucursal, "0000") & "'"
+                    sql = sql & "'" & Format(vProve.Sucursal, "0000") & "'"
                 End If
                 
-                SQL = SQL & ", " & IIf(vParamAplic.ContabilidadNueva, "control", "CC") & " ="
+                sql = sql & ", " & IIf(vParamAplic.ContabilidadNueva, "control", "CC") & " ="
                 If vProve.DigControl = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vProve.DigControl, "00") & "'"
+                    sql = sql & "'" & Format(vProve.DigControl, "00") & "'"
                 End If
-                SQL = SQL & ", cuentaba="
+                sql = sql & ", cuentaba="
                 If vProve.CuentaBan = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & Format(vProve.CuentaBan, "0000000000") & "'"
+                    sql = sql & "'" & Format(vProve.CuentaBan, "0000000000") & "'"
                 End If
-                SQL = SQL & ", iban="
+                sql = sql & ", iban="
                 If vProve.Iban = "" Then
-                    SQL = SQL & "NULL"
+                    sql = sql & "NULL"
                 Else
-                    SQL = SQL & "'" & vProve.Iban & "'"
+                    sql = sql & "'" & vProve.Iban & "'"
                 End If
                 
             End If
             
-            SQL = SQL & " WHERE codmacta = " & DBSet(Cuenta, "T")
+            sql = sql & " WHERE codmacta = " & DBSet(Cuenta, "T")
             
             
-            ConnConta.Execute SQL
+            ConnConta.Execute sql
             vL = vL & vProve.Nombre
-            b = True
+            B = True
             
             
             
             
             
         Else
-            b = False
+            B = False
         End If
         Set vProve = Nothing
     End If
     
-    If b Then
+    If B Then
         'METEMOS UN LOG
         
-        codigo = InStr(1, SQL, "dirdatos")
-        If codigo > 0 Then SQL = Mid(SQL, codigo)
+        codigo = InStr(1, sql, "dirdatos")
+        If codigo > 0 Then sql = Mid(sql, codigo)
         
-        codigo = InStrRev(SQL, "WHERE codmacta")
-        If codigo > 0 Then SQL = Mid(SQL, 1, codigo - 1)
-        
-        
-        SQL = Replace(SQL, "dirdatos", "Dir")
-        SQL = Replace(SQL, "codposta", "CP")
-        SQL = Replace(SQL, "despobla", "Pob")
-        SQL = Replace(SQL, "desprovi", "Prv")
-        SQL = Replace(SQL, "nifdatos", "NIF")
-        SQL = Replace(SQL, "entidad", "Banco")
-        SQL = Replace(SQL, "oficina=", "")
-        SQL = Replace(SQL, "CC=", "")
-        SQL = Replace(SQL, "cuentaba=", "")
-        SQL = Replace(SQL, "maidatos=", "@")
-        SQL = Replace(SQL, "webdatos=", "W:")
+        codigo = InStrRev(sql, "WHERE codmacta")
+        If codigo > 0 Then sql = Mid(sql, 1, codigo - 1)
         
         
-        SQL = Replace(SQL, "'", "")
+        sql = Replace(sql, "dirdatos", "Dir")
+        sql = Replace(sql, "codposta", "CP")
+        sql = Replace(sql, "despobla", "Pob")
+        sql = Replace(sql, "desprovi", "Prv")
+        sql = Replace(sql, "nifdatos", "NIF")
+        sql = Replace(sql, "entidad", "Banco")
+        sql = Replace(sql, "oficina=", "")
+        sql = Replace(sql, "CC=", "")
+        sql = Replace(sql, "cuentaba=", "")
+        sql = Replace(sql, "maidatos=", "@")
+        sql = Replace(sql, "webdatos=", "W:")
+        
+        
+        sql = Replace(sql, "'", "")
         'Quito las comas
-        codigo = InStr(1, SQL, "CP =")
-        SQL = Replace(SQL, ",", "")
+        codigo = InStr(1, sql, "CP =")
+        sql = Replace(sql, ",", "")
         
-        vL = vL & vbCrLf & SQL
+        vL = vL & vbCrLf & sql
         Set LOG = New cLOG
         LOG.Insertar 18, vUsu, vL
         Set LOG = Nothing
@@ -2054,10 +2062,10 @@ Dim Aux As String
     
 EModCta:
     If Err.Number <> 0 Then
-        b = False
+        B = False
         MuestraError Err.Description, "Modificando cuenta contable", Err.Description
     End If
-    ModificarCtaContabilidad = b
+    ModificarCtaContabilidad = B
     
 End Function
 
@@ -2078,14 +2086,14 @@ End Function
 
 'He cambiado el metodo a public
 Public Function InsertarCuentaCbleDescripcion(Cuenta As String, Descripcion As String) As Boolean
-Dim SQL As String
+Dim sql As String
 
 
    
     
-    SQL = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci) "
-    SQL = SQL & " VALUES ('" & Cuenta & "','" & DevNombreSQL(Descripcion) & "','S',0,'" & DevNombreSQL(Descripcion) & "')"
-    ConnConta.Execute SQL
+    sql = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci) "
+    sql = sql & " VALUES ('" & Cuenta & "','" & DevNombreSQL(Descripcion) & "','S',0,'" & DevNombreSQL(Descripcion) & "')"
+    ConnConta.Execute sql
 
 End Function
 
@@ -2097,13 +2105,13 @@ End Function
 Public Function ComprobarHayStock(stockOrig As Single, stockTras As Single, codArtic As String, NomArtic As String, tipoMov As String)
 'IN: stockOrig: stock existente en almacen Origen
 '    stockTras: stock a traspasar del origen a otro almacen
-Dim b As Boolean
+Dim B As Boolean
 Dim devuelve As String
 
     ComprobarHayStock = False
     If stockOrig >= CSng(stockTras) Then
     'Si cantidad en stock > cantidad a traspasar entonces
-        b = True
+        B = True
     Else    'No hay suficiente stock en almacen origen
         devuelve = "Control de Stock : " & vbCrLf
         devuelve = devuelve & "---------------------- " & vbCrLf & vbCrLf
@@ -2117,7 +2125,7 @@ Dim devuelve As String
         Else
             If vParamAplic.ControlStock Then
             'Si hay control Stock no permitir traspaso
-                b = False
+                B = False
                 Select Case tipoMov
                     Case "REG"
                         devuelve = devuelve & vbCrLf & vbCrLf & " No se puede realizar el Movimiento de Almacen. "
@@ -2133,14 +2141,14 @@ Dim devuelve As String
                     devuelve = devuelve & vbCrLf & vbCrLf & " ¿Desea realizar el Traspaso de Almacen? "
                 End Select
                 If MsgBox(devuelve, vbQuestion + vbYesNo) = vbYes Then
-                    b = True
+                    B = True
                 Else
-                    b = False
+                    B = False
                 End If
             End If
         End If
     End If
-    ComprobarHayStock = b
+    ComprobarHayStock = B
 End Function
 
 
@@ -2308,8 +2316,8 @@ End Function
 
 'Lineas de ofertas, pedido y albaranes
 'Para decir que hace el F2
-Public Sub LabelAyudatxtAux(indice As Integer, ByRef Lbl As Label)
-    Select Case indice
+Public Sub LabelAyudatxtAux(Indice As Integer, ByRef Lbl As Label)
+    Select Case Indice
     Case 3
         'Ver referencia
         Lbl.Caption = "F2  Ver articulo"

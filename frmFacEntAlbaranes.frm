@@ -334,8 +334,8 @@ Begin VB.Form frmFacEntAlbaranes2
       _ExtentY        =   7938
       _Version        =   393216
       Style           =   1
-      Tabs            =   4
-      TabsPerRow      =   4
+      Tabs            =   5
+      TabsPerRow      =   5
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -439,14 +439,482 @@ Begin VB.Form frmFacEntAlbaranes2
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranes.frx":0081
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "FrameManipulador"
-      Tab(2).Control(1)=   "FrameCampos"
+      Tab(2).Control(0)=   "FrameCampos"
+      Tab(2).Control(1)=   "FrameManipulador"
       Tab(2).ControlCount=   2
-      TabCaption(3)   =   "Totales"
+      TabCaption(3)   =   "Carta de portes"
       TabPicture(3)   =   "frmFacEntAlbaranes.frx":009D
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "FrameFactura"
-      Tab(3).ControlCount=   1
+      Tab(3).ControlCount=   0
+      TabCaption(4)   =   "Totales"
+      TabPicture(4)   =   "frmFacEntAlbaranes.frx":00B9
+      Tab(4).ControlEnabled=   0   'False
+      Tab(4).Control(0)=   "FrameFactura"
+      Tab(4).ControlCount=   1
+      Begin VB.Frame FrameFactura 
+         Height          =   3300
+         Left            =   -73560
+         TabIndex        =   161
+         Top             =   600
+         Width           =   10575
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H00FFFFC0&
+            Height          =   285
+            Index           =   54
+            Left            =   6720
+            MaxLength       =   15
+            TabIndex        =   184
+            Text            =   "Text1 7"
+            Top             =   2160
+            Width           =   1245
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   51
+            Left            =   6120
+            MaxLength       =   5
+            TabIndex        =   183
+            Text            =   "Text1 7"
+            Top             =   2160
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H00FFFFC0&
+            Height          =   285
+            Index           =   53
+            Left            =   6720
+            MaxLength       =   15
+            TabIndex        =   182
+            Text            =   "Text1 7"
+            Top             =   1800
+            Width           =   1245
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   50
+            Left            =   6120
+            MaxLength       =   5
+            TabIndex        =   181
+            Text            =   "Text1 7"
+            Top             =   1800
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H00FFFFC0&
+            Height          =   285
+            Index           =   52
+            Left            =   6720
+            MaxLength       =   15
+            TabIndex        =   180
+            Text            =   "Text1 7"
+            Top             =   1440
+            Width           =   1245
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   49
+            Left            =   6120
+            MaxLength       =   5
+            TabIndex        =   179
+            Text            =   "Text1 7"
+            Top             =   1440
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   33
+            Left            =   240
+            MaxLength       =   15
+            TabIndex        =   178
+            Text            =   "Text1 7"
+            Top             =   555
+            Width           =   1485
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   34
+            Left            =   2160
+            MaxLength       =   15
+            TabIndex        =   177
+            Text            =   "Text1 7"
+            Top             =   555
+            Width           =   1365
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   35
+            Left            =   3960
+            MaxLength       =   15
+            TabIndex        =   176
+            Text            =   "Text1 7"
+            Top             =   555
+            Width           =   1365
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H00FFFFC0&
+            Height          =   285
+            Index           =   36
+            Left            =   5760
+            MaxLength       =   15
+            TabIndex        =   175
+            Text            =   "Text1 7"
+            Top             =   555
+            Width           =   1485
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   43
+            Left            =   2760
+            MaxLength       =   15
+            TabIndex        =   174
+            Text            =   "Text1 7"
+            Top             =   1440
+            Width           =   1125
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   37
+            Left            =   2040
+            MaxLength       =   4
+            TabIndex        =   173
+            Text            =   "Text1 7"
+            Top             =   1440
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   40
+            Left            =   4080
+            MaxLength       =   5
+            TabIndex        =   172
+            Text            =   "Text1 7"
+            Top             =   1440
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H00FFFFC0&
+            Height          =   285
+            Index           =   46
+            Left            =   4680
+            MaxLength       =   15
+            TabIndex        =   171
+            Text            =   "Text1 7"
+            Top             =   1440
+            Width           =   1245
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   44
+            Left            =   2760
+            MaxLength       =   15
+            TabIndex        =   170
+            Text            =   "Text1 7"
+            Top             =   1800
+            Width           =   1125
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   38
+            Left            =   2040
+            MaxLength       =   4
+            TabIndex        =   169
+            Text            =   "Text1 7"
+            Top             =   1800
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   41
+            Left            =   4080
+            MaxLength       =   5
+            TabIndex        =   168
+            Text            =   "Text1 7"
+            Top             =   1800
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H00FFFFC0&
+            Height          =   285
+            Index           =   47
+            Left            =   4680
+            MaxLength       =   15
+            TabIndex        =   167
+            Text            =   "Text1 7"
+            Top             =   1800
+            Width           =   1245
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   45
+            Left            =   2760
+            MaxLength       =   15
+            TabIndex        =   166
+            Text            =   "Text1 7"
+            Top             =   2160
+            Width           =   1125
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   39
+            Left            =   2040
+            MaxLength       =   4
+            TabIndex        =   165
+            Text            =   "Text1 7"
+            Top             =   2160
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   42
+            Left            =   4080
+            MaxLength       =   5
+            TabIndex        =   164
+            Text            =   "Text1 7"
+            Top             =   2160
+            Width           =   525
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H00FFFFC0&
+            Height          =   285
+            Index           =   48
+            Left            =   4680
+            MaxLength       =   15
+            TabIndex        =   163
+            Text            =   "Text1 7"
+            Top             =   2160
+            Width           =   1245
+         End
+         Begin VB.TextBox Text3 
+            Alignment       =   1  'Right Justify
+            BackColor       =   &H00C0FFC0&
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   285
+            Index           =   55
+            Left            =   6120
+            MaxLength       =   15
+            TabIndex        =   162
+            Text            =   "Text1 7"
+            Top             =   2640
+            Width           =   1845
+         End
+         Begin VB.Label Label1 
+            Caption         =   "% RE"
+            Height          =   255
+            Index           =   48
+            Left            =   6120
+            TabIndex        =   199
+            Top             =   1200
+            Width           =   495
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Imp. RE"
+            Height          =   255
+            Index           =   6
+            Left            =   6960
+            TabIndex        =   198
+            Top             =   1200
+            Width           =   735
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Base Imponible"
+            Height          =   255
+            Index           =   28
+            Left            =   2760
+            TabIndex        =   197
+            Top             =   1200
+            Width           =   1095
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Imp. Bruto"
+            Height          =   255
+            Index           =   27
+            Left            =   240
+            TabIndex        =   196
+            Top             =   360
+            Width           =   855
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Imp. Dto PP"
+            Height          =   255
+            Index           =   22
+            Left            =   2160
+            TabIndex        =   195
+            Top             =   360
+            Width           =   855
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Imp. Dto Gn"
+            Height          =   255
+            Index           =   18
+            Left            =   3960
+            TabIndex        =   194
+            Top             =   360
+            Width           =   855
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Base Imponible"
+            Height          =   255
+            Index           =   2
+            Left            =   5760
+            TabIndex        =   193
+            Top             =   360
+            Width           =   1215
+         End
+         Begin VB.Label Label1 
+            Caption         =   "-"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   30
+            Left            =   1920
+            TabIndex        =   192
+            Top             =   480
+            Width           =   135
+         End
+         Begin VB.Label Label1 
+            Caption         =   "-"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   31
+            Left            =   3720
+            TabIndex        =   191
+            Top             =   480
+            Width           =   135
+         End
+         Begin VB.Label Label1 
+            Caption         =   "="
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   32
+            Left            =   5520
+            TabIndex        =   190
+            Top             =   480
+            Width           =   135
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Imp. IVA"
+            Height          =   255
+            Index           =   33
+            Left            =   4800
+            TabIndex        =   189
+            Top             =   1200
+            Width           =   735
+         End
+         Begin VB.Line Line1 
+            X1              =   2040
+            X2              =   8040
+            Y1              =   1065
+            Y2              =   1065
+         End
+         Begin VB.Label Label1 
+            Caption         =   "+"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   12
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   36
+            Left            =   11880
+            TabIndex        =   188
+            Top             =   2160
+            Width           =   135
+         End
+         Begin VB.Label Label1 
+            Caption         =   "TOTAL ALBARAN"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00008000&
+            Height          =   285
+            Index           =   39
+            Left            =   4200
+            TabIndex        =   187
+            Top             =   2655
+            Width           =   1530
+         End
+         Begin VB.Label Label1 
+            Caption         =   "% IVA"
+            Height          =   255
+            Index           =   41
+            Left            =   4080
+            TabIndex        =   186
+            Top             =   1200
+            Width           =   495
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cod."
+            Height          =   255
+            Index           =   42
+            Left            =   2040
+            TabIndex        =   185
+            Top             =   1200
+            Width           =   735
+         End
+      End
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
@@ -455,7 +923,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Left            =   -68880
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   199
+         TabIndex        =   160
          Text            =   "Text2"
          Top             =   675
          Visible         =   0   'False
@@ -465,16 +933,16 @@ Begin VB.Form frmFacEntAlbaranes2
          Caption         =   "Campos"
          Height          =   3495
          Left            =   -66960
-         TabIndex        =   190
+         TabIndex        =   151
          Top             =   600
          Width           =   4695
          Begin VB.CommandButton cmdMtoCampos 
             Height          =   375
             Index           =   0
             Left            =   2520
-            Picture         =   "frmFacEntAlbaranes.frx":00B9
+            Picture         =   "frmFacEntAlbaranes.frx":00D5
             Style           =   1  'Graphical
-            TabIndex        =   192
+            TabIndex        =   153
             ToolTipText     =   "Añadir campo"
             Top             =   240
             Width           =   375
@@ -483,9 +951,9 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   375
             Index           =   1
             Left            =   4200
-            Picture         =   "frmFacEntAlbaranes.frx":690B
+            Picture         =   "frmFacEntAlbaranes.frx":6927
             Style           =   1  'Graphical
-            TabIndex        =   191
+            TabIndex        =   152
             ToolTipText     =   "Eliminar campo"
             Top             =   240
             Width           =   375
@@ -493,7 +961,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Begin MSComctlLib.ListView ListView1 
             Height          =   2655
             Left            =   120
-            TabIndex        =   193
+            TabIndex        =   154
             Top             =   720
             Width           =   4455
             _ExtentX        =   7858
@@ -529,7 +997,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   195
             Index           =   60
             Left            =   1920
-            TabIndex        =   195
+            TabIndex        =   156
             Top             =   360
             Width           =   690
          End
@@ -538,7 +1006,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   195
             Index           =   61
             Left            =   3600
-            TabIndex        =   194
+            TabIndex        =   155
             Top             =   360
             Width           =   690
          End
@@ -547,7 +1015,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Caption         =   "Manipulador fitosanitarios  "
          Height          =   3495
          Left            =   -74760
-         TabIndex        =   179
+         TabIndex        =   140
          Top             =   600
          Width           =   7335
          Begin VB.TextBox Text1 
@@ -555,7 +1023,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Index           =   45
             Left            =   1680
             MaxLength       =   25
-            TabIndex        =   181
+            TabIndex        =   142
             Tag             =   "ManipuladorNumCarnet|T|S|||scaalb|ManipuladorNumCarnet||N|"
             Text            =   "123456789"
             Top             =   480
@@ -564,7 +1032,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Begin VB.Frame FrameMani2 
             Height          =   2295
             Left            =   240
-            TabIndex        =   180
+            TabIndex        =   141
             Top             =   840
             Width           =   6495
             Begin VB.TextBox Text2 
@@ -574,7 +1042,7 @@ Begin VB.Form frmFacEntAlbaranes2
                Left            =   1440
                Locked          =   -1  'True
                MaxLength       =   40
-               TabIndex        =   189
+               TabIndex        =   150
                Text            =   "Tiene bajo el text1 vinculado"
                Top             =   1650
                Width           =   4080
@@ -584,7 +1052,7 @@ Begin VB.Form frmFacEntAlbaranes2
                Index           =   48
                Left            =   1560
                MaxLength       =   15
-               TabIndex        =   184
+               TabIndex        =   145
                Tag             =   "TipoCarnet|N|S|||scaalb|TipoCarnet||N|"
                Text            =   "123456789"
                Top             =   1680
@@ -595,7 +1063,7 @@ Begin VB.Form frmFacEntAlbaranes2
                Index           =   47
                Left            =   1440
                MaxLength       =   15
-               TabIndex        =   183
+               TabIndex        =   144
                Tag             =   "ManipuladorFecCaducidad|F|S|||scaalb|ManipuladorFecCaducidad||N|"
                Text            =   "123456789"
                Top             =   960
@@ -606,7 +1074,7 @@ Begin VB.Form frmFacEntAlbaranes2
                Index           =   46
                Left            =   1440
                MaxLength       =   60
-               TabIndex        =   182
+               TabIndex        =   143
                Tag             =   "ManipuladorNombre|T|S|||scaalb|ManipuladorNombre||N|"
                Text            =   "123456789"
                Top             =   360
@@ -617,7 +1085,7 @@ Begin VB.Form frmFacEntAlbaranes2
                Height          =   195
                Index           =   59
                Left            =   120
-               TabIndex        =   188
+               TabIndex        =   149
                Top             =   1680
                Width           =   1245
             End
@@ -626,7 +1094,7 @@ Begin VB.Form frmFacEntAlbaranes2
                Height          =   195
                Index           =   58
                Left            =   120
-               TabIndex        =   187
+               TabIndex        =   148
                Top             =   960
                Width           =   1245
             End
@@ -635,7 +1103,7 @@ Begin VB.Form frmFacEntAlbaranes2
                Height          =   195
                Index           =   57
                Left            =   120
-               TabIndex        =   186
+               TabIndex        =   147
                Top             =   360
                Width           =   690
             End
@@ -645,7 +1113,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   195
             Index           =   56
             Left            =   360
-            TabIndex        =   185
+            TabIndex        =   146
             Top             =   480
             Width           =   690
          End
@@ -653,474 +1121,10 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   15
             Left            =   1440
-            Picture         =   "frmFacEntAlbaranes.frx":730D
+            Picture         =   "frmFacEntAlbaranes.frx":7329
             ToolTipText     =   "Buscar cliente varios"
             Top             =   480
             Width           =   240
-         End
-      End
-      Begin VB.Frame FrameFactura 
-         Height          =   3300
-         Left            =   -73320
-         TabIndex        =   140
-         Top             =   840
-         Width           =   10575
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            BackColor       =   &H00C0FFC0&
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   285
-            Index           =   55
-            Left            =   6120
-            MaxLength       =   15
-            TabIndex        =   163
-            Text            =   "Text1 7"
-            Top             =   2640
-            Width           =   1845
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            BackColor       =   &H00FFFFC0&
-            Height          =   285
-            Index           =   48
-            Left            =   4680
-            MaxLength       =   15
-            TabIndex        =   162
-            Text            =   "Text1 7"
-            Top             =   2160
-            Width           =   1245
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   42
-            Left            =   4080
-            MaxLength       =   5
-            TabIndex        =   161
-            Text            =   "Text1 7"
-            Top             =   2160
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   39
-            Left            =   2040
-            MaxLength       =   4
-            TabIndex        =   160
-            Text            =   "Text1 7"
-            Top             =   2160
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   45
-            Left            =   2760
-            MaxLength       =   15
-            TabIndex        =   159
-            Text            =   "Text1 7"
-            Top             =   2160
-            Width           =   1125
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            BackColor       =   &H00FFFFC0&
-            Height          =   285
-            Index           =   47
-            Left            =   4680
-            MaxLength       =   15
-            TabIndex        =   158
-            Text            =   "Text1 7"
-            Top             =   1800
-            Width           =   1245
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   41
-            Left            =   4080
-            MaxLength       =   5
-            TabIndex        =   157
-            Text            =   "Text1 7"
-            Top             =   1800
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   38
-            Left            =   2040
-            MaxLength       =   4
-            TabIndex        =   156
-            Text            =   "Text1 7"
-            Top             =   1800
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   44
-            Left            =   2760
-            MaxLength       =   15
-            TabIndex        =   155
-            Text            =   "Text1 7"
-            Top             =   1800
-            Width           =   1125
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            BackColor       =   &H00FFFFC0&
-            Height          =   285
-            Index           =   46
-            Left            =   4680
-            MaxLength       =   15
-            TabIndex        =   154
-            Text            =   "Text1 7"
-            Top             =   1440
-            Width           =   1245
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   40
-            Left            =   4080
-            MaxLength       =   5
-            TabIndex        =   153
-            Text            =   "Text1 7"
-            Top             =   1440
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   37
-            Left            =   2040
-            MaxLength       =   4
-            TabIndex        =   152
-            Text            =   "Text1 7"
-            Top             =   1440
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   43
-            Left            =   2760
-            MaxLength       =   15
-            TabIndex        =   151
-            Text            =   "Text1 7"
-            Top             =   1440
-            Width           =   1125
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            BackColor       =   &H00FFFFC0&
-            Height          =   285
-            Index           =   36
-            Left            =   5760
-            MaxLength       =   15
-            TabIndex        =   150
-            Text            =   "Text1 7"
-            Top             =   555
-            Width           =   1485
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   35
-            Left            =   3960
-            MaxLength       =   15
-            TabIndex        =   149
-            Text            =   "Text1 7"
-            Top             =   555
-            Width           =   1365
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   34
-            Left            =   2160
-            MaxLength       =   15
-            TabIndex        =   148
-            Text            =   "Text1 7"
-            Top             =   555
-            Width           =   1365
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   33
-            Left            =   240
-            MaxLength       =   15
-            TabIndex        =   147
-            Text            =   "Text1 7"
-            Top             =   555
-            Width           =   1485
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   49
-            Left            =   6120
-            MaxLength       =   5
-            TabIndex        =   146
-            Text            =   "Text1 7"
-            Top             =   1440
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            BackColor       =   &H00FFFFC0&
-            Height          =   285
-            Index           =   52
-            Left            =   6720
-            MaxLength       =   15
-            TabIndex        =   145
-            Text            =   "Text1 7"
-            Top             =   1440
-            Width           =   1245
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   50
-            Left            =   6120
-            MaxLength       =   5
-            TabIndex        =   144
-            Text            =   "Text1 7"
-            Top             =   1800
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            BackColor       =   &H00FFFFC0&
-            Height          =   285
-            Index           =   53
-            Left            =   6720
-            MaxLength       =   15
-            TabIndex        =   143
-            Text            =   "Text1 7"
-            Top             =   1800
-            Width           =   1245
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   51
-            Left            =   6120
-            MaxLength       =   5
-            TabIndex        =   142
-            Text            =   "Text1 7"
-            Top             =   2160
-            Width           =   525
-         End
-         Begin VB.TextBox Text3 
-            Alignment       =   1  'Right Justify
-            BackColor       =   &H00FFFFC0&
-            Height          =   285
-            Index           =   54
-            Left            =   6720
-            MaxLength       =   15
-            TabIndex        =   141
-            Text            =   "Text1 7"
-            Top             =   2160
-            Width           =   1245
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Cod."
-            Height          =   255
-            Index           =   42
-            Left            =   2040
-            TabIndex        =   178
-            Top             =   1200
-            Width           =   735
-         End
-         Begin VB.Label Label1 
-            Caption         =   "% IVA"
-            Height          =   255
-            Index           =   41
-            Left            =   4080
-            TabIndex        =   177
-            Top             =   1200
-            Width           =   495
-         End
-         Begin VB.Label Label1 
-            Caption         =   "TOTAL ALBARAN"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00008000&
-            Height          =   285
-            Index           =   39
-            Left            =   4200
-            TabIndex        =   176
-            Top             =   2655
-            Width           =   1530
-         End
-         Begin VB.Label Label1 
-            Caption         =   "+"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   12
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   36
-            Left            =   11880
-            TabIndex        =   175
-            Top             =   2160
-            Width           =   135
-         End
-         Begin VB.Line Line1 
-            X1              =   2040
-            X2              =   8040
-            Y1              =   1065
-            Y2              =   1065
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Imp. IVA"
-            Height          =   255
-            Index           =   33
-            Left            =   4800
-            TabIndex        =   174
-            Top             =   1200
-            Width           =   735
-         End
-         Begin VB.Label Label1 
-            Caption         =   "="
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   12
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   32
-            Left            =   5520
-            TabIndex        =   173
-            Top             =   480
-            Width           =   135
-         End
-         Begin VB.Label Label1 
-            Caption         =   "-"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   12
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   31
-            Left            =   3720
-            TabIndex        =   172
-            Top             =   480
-            Width           =   135
-         End
-         Begin VB.Label Label1 
-            Caption         =   "-"
-            BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   12
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   255
-            Index           =   30
-            Left            =   1920
-            TabIndex        =   171
-            Top             =   480
-            Width           =   135
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Base Imponible"
-            Height          =   255
-            Index           =   2
-            Left            =   5760
-            TabIndex        =   170
-            Top             =   360
-            Width           =   1215
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Imp. Dto Gn"
-            Height          =   255
-            Index           =   18
-            Left            =   3960
-            TabIndex        =   169
-            Top             =   360
-            Width           =   855
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Imp. Dto PP"
-            Height          =   255
-            Index           =   22
-            Left            =   2160
-            TabIndex        =   168
-            Top             =   360
-            Width           =   855
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Imp. Bruto"
-            Height          =   255
-            Index           =   27
-            Left            =   240
-            TabIndex        =   167
-            Top             =   360
-            Width           =   855
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Base Imponible"
-            Height          =   255
-            Index           =   28
-            Left            =   2760
-            TabIndex        =   166
-            Top             =   1200
-            Width           =   1095
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Imp. RE"
-            Height          =   255
-            Index           =   6
-            Left            =   6960
-            TabIndex        =   165
-            Top             =   1200
-            Width           =   735
-         End
-         Begin VB.Label Label1 
-            Caption         =   "% RE"
-            Height          =   255
-            Index           =   48
-            Left            =   6120
-            TabIndex        =   164
-            Top             =   1200
-            Width           =   495
          End
       End
       Begin VB.TextBox txtAux 
@@ -1175,9 +1179,9 @@ Begin VB.Form frmFacEntAlbaranes2
       Begin VB.Frame FrameFacRec 
          Caption         =   "Datos Factura a rectificar "
          Height          =   615
-         Left            =   -75000
+         Left            =   -74880
          TabIndex        =   115
-         Top             =   3840
+         Top             =   4200
          Width           =   7935
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -1396,7 +1400,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   11
             Left            =   1080
-            Picture         =   "frmFacEntAlbaranes.frx":740F
+            Picture         =   "frmFacEntAlbaranes.frx":742B
             ToolTipText     =   "Buscar incidencia"
             Top             =   1320
             Width           =   240
@@ -1414,7 +1418,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   10
             Left            =   1080
-            Picture         =   "frmFacEntAlbaranes.frx":7511
+            Picture         =   "frmFacEntAlbaranes.frx":752D
             ToolTipText     =   "Buscar trabajador"
             Top             =   600
             Width           =   240
@@ -1614,7 +1618,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Caption         =   "Pedido por cliente"
             Height          =   330
             Left            =   11640
-            TabIndex        =   196
+            TabIndex        =   157
             Tag             =   "P|N|N|||scaalb|PideCliente||N|"
             Top             =   1560
             Width           =   1695
@@ -1851,9 +1855,9 @@ Begin VB.Form frmFacEntAlbaranes2
          End
          Begin VB.ComboBox cboFacturacion 
             Height          =   315
-            ItemData        =   "frmFacEntAlbaranes.frx":7613
+            ItemData        =   "frmFacEntAlbaranes.frx":762F
             Left            =   11640
-            List            =   "frmFacEntAlbaranes.frx":7615
+            List            =   "frmFacEntAlbaranes.frx":7631
             Style           =   2  'Dropdown List
             TabIndex        =   24
             Tag             =   "Tipo Facturación|N|N|||scaalb|tipofact||N|"
@@ -1876,7 +1880,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   255
             Index           =   62
             Left            =   11160
-            TabIndex        =   197
+            TabIndex        =   158
             Top             =   600
             Width           =   975
          End
@@ -1884,7 +1888,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   12
             Left            =   6600
-            Picture         =   "frmFacEntAlbaranes.frx":7617
+            Picture         =   "frmFacEntAlbaranes.frx":7633
             ToolTipText     =   "Dirección envio"
             Top             =   1200
             Width           =   240
@@ -1931,7 +1935,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   6
             Left            =   855
-            Picture         =   "frmFacEntAlbaranes.frx":7719
+            Picture         =   "frmFacEntAlbaranes.frx":7735
             ToolTipText     =   "Buscar población"
             Top             =   867
             Width           =   240
@@ -1950,7 +1954,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   2
             Left            =   6600
-            Picture         =   "frmFacEntAlbaranes.frx":781B
+            Picture         =   "frmFacEntAlbaranes.frx":7837
             ToolTipText     =   "Buscar direc./dpto"
             Top             =   165
             Width           =   240
@@ -1995,7 +1999,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   1
             Left            =   855
-            Picture         =   "frmFacEntAlbaranes.frx":791D
+            Picture         =   "frmFacEntAlbaranes.frx":7939
             ToolTipText     =   "Buscar cliente varios"
             Top             =   165
             Visible         =   0   'False
@@ -2014,7 +2018,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   5
             Left            =   6600
-            Picture         =   "frmFacEntAlbaranes.frx":7A1F
+            Picture         =   "frmFacEntAlbaranes.frx":7A3B
             ToolTipText     =   "Buscar agente"
             Top             =   516
             Width           =   240
@@ -2059,7 +2063,7 @@ Begin VB.Form frmFacEntAlbaranes2
             Height          =   240
             Index           =   4
             Left            =   6600
-            Picture         =   "frmFacEntAlbaranes.frx":7B21
+            Picture         =   "frmFacEntAlbaranes.frx":7B3D
             ToolTipText     =   "Buscar forma de pago"
             Top             =   867
             Width           =   240
@@ -2275,7 +2279,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Width           =   7485
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmFacEntAlbaranes.frx":7C23
+         Bindings        =   "frmFacEntAlbaranes.frx":7C3F
          Height          =   2040
          Left            =   195
          TabIndex        =   60
@@ -2368,7 +2372,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   255
          Index           =   63
          Left            =   -68880
-         TabIndex        =   198
+         TabIndex        =   159
          Top             =   480
          Visible         =   0   'False
          Width           =   735
@@ -2395,7 +2399,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   240
          Index           =   13
          Left            =   -66240
-         Picture         =   "frmFacEntAlbaranes.frx":7C38
+         Picture         =   "frmFacEntAlbaranes.frx":7C54
          ToolTipText     =   "Buscar forma de envio"
          Top             =   1200
          Width           =   240
@@ -2404,7 +2408,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   240
          Index           =   9
          Left            =   -66240
-         Picture         =   "frmFacEntAlbaranes.frx":7D3A
+         Picture         =   "frmFacEntAlbaranes.frx":7D56
          ToolTipText     =   "Buscar forma de envio"
          Top             =   600
          Width           =   240
@@ -2419,7 +2423,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   240
          Index           =   40
          Left            =   -62280
-         Picture         =   "frmFacEntAlbaranes.frx":7E3C
+         Picture         =   "frmFacEntAlbaranes.frx":7E58
          ToolTipText     =   "Buscar fecha"
          Top             =   600
          Width           =   240
@@ -2455,7 +2459,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   240
          Index           =   8
          Left            =   -73455
-         Picture         =   "frmFacEntAlbaranes.frx":7EC7
+         Picture         =   "frmFacEntAlbaranes.frx":7EE3
          ToolTipText     =   "Buscar trabajador"
          Top             =   1560
          Width           =   240
@@ -2473,7 +2477,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   240
          Index           =   7
          Left            =   -73440
-         Picture         =   "frmFacEntAlbaranes.frx":7FC9
+         Picture         =   "frmFacEntAlbaranes.frx":7FE5
          ToolTipText     =   "Buscar trabajador"
          Top             =   1200
          Width           =   240
@@ -2672,7 +2676,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   240
          Index           =   0
          Left            =   6180
-         Picture         =   "frmFacEntAlbaranes.frx":80CB
+         Picture         =   "frmFacEntAlbaranes.frx":80E7
          ToolTipText     =   "Buscar cliente"
          Top             =   510
          Width           =   240
@@ -2701,7 +2705,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   240
          Index           =   3
          Left            =   6180
-         Picture         =   "frmFacEntAlbaranes.frx":81CD
+         Picture         =   "frmFacEntAlbaranes.frx":81E9
          ToolTipText     =   "Buscar trabajador"
          Top             =   150
          Width           =   240
@@ -2720,7 +2724,7 @@ Begin VB.Form frmFacEntAlbaranes2
          Height          =   240
          Index           =   0
          Left            =   2835
-         Picture         =   "frmFacEntAlbaranes.frx":82CF
+         Picture         =   "frmFacEntAlbaranes.frx":82EB
          ToolTipText     =   "Buscar fecha"
          Top             =   120
          Width           =   240
@@ -2750,7 +2754,7 @@ Begin VB.Form frmFacEntAlbaranes2
       Height          =   240
       Index           =   14
       Left            =   3720
-      Picture         =   "frmFacEntAlbaranes.frx":835A
+      Picture         =   "frmFacEntAlbaranes.frx":8376
       ToolTipText     =   "Ver ampliación"
       Top             =   6000
       Width           =   240
@@ -3007,6 +3011,7 @@ Dim vAgent As cAgente
 'Para los puntos. El canje solo deberia hacerse en albaran NUEVO
 Dim EsNuevoAlbaran As Boolean
 
+Dim MostrarComision As Boolean 'SOLO herbelca, y super usuarios, veran las comisiones
 
 Private Sub cboFacturacion_KeyPress(KeyAscii As Integer)
     'KEYpress KeyAscii
@@ -3188,7 +3193,7 @@ Dim SQL As String
     If b Then
         b = ModificaDesdeFormulario(Me, 1)
         If b Then
-            SQL = "UPDATE scaalb SET nomdirec=" & DBSet(Text2(12).Text, "T") & " WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!NUmAlbar
+            SQL = "UPDATE scaalb SET nomdirec=" & DBSet(Text2(12).Text, "T") & " WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!NumAlbar
             conn.Execute SQL
         End If
 
@@ -3203,7 +3208,7 @@ Dim SQL As String
                 SQL = "UPDATE sserie SET codclien=" & DBSet(Text1(4).Text, "N") & ","
                 SQL = SQL & " fechavta=" & DBSet(Text1(1).Text, "F")
                 SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
-                SQL = SQL & " WHERE codtipom='" & CodTipoMov & "'" & " AND numalbar=" & Data1.Recordset!NUmAlbar & " and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
+                SQL = SQL & " WHERE codtipom='" & CodTipoMov & "'" & " AND numalbar=" & Data1.Recordset!NumAlbar & " and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
                 conn.Execute SQL
                 
                 'Modificar el cliente en la smoval
@@ -3254,7 +3259,7 @@ Dim SQL As String
                         BuscaChekc = "U"
                        
                     Else
-                        SQL = "UPDATE scaalb SET puntos=0 WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!NUmAlbar
+                        SQL = "UPDATE scaalb SET puntos=0 WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!NumAlbar
                         conn.Execute SQL
                         BuscaChekc = "D"
                         Text2(1).Text = ""
@@ -3453,6 +3458,12 @@ Dim TxtMotivoFra As String 'AMESA
         frmList.Show vbModal
         Set frmList = Nothing
         If cadList = "" Then Exit Sub
+        
+        
+        If Trim(Mid(cadList, 1, 12)) = "codtipom=''" Then
+            Unload Me
+            Exit Sub
+        End If
         
         'cargar los datos de la factura recuperada en el formulario
         NomTraba = "select codtipom as codtipmf,numfactu,fecfactu,codclien,nomclien,domclien,scafac.codpobla,pobclien,proclien,nifclien,telclien,"
@@ -3893,7 +3904,7 @@ Dim NumAlbElim As Long
         If vUsu.Nivel > 0 Then
             
             cad = "slialb.codartic=sartic.codartic and artvario=1 AND codtipom = '" & Data1.Recordset!codtipom & "' AND numalbar "
-            cad = DevuelveDesdeBD(conAri, "count(*)", "slialb,sartic", cad, CStr(Data1.Recordset!NUmAlbar))
+            cad = DevuelveDesdeBD(conAri, "count(*)", "slialb,sartic", cad, CStr(Data1.Recordset!NumAlbar))
             If Val(cad) > 0 Then
                 MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
                 Exit Sub
@@ -4064,7 +4075,7 @@ Private Sub cmdMtoCampos_Click(Index As Integer)
                 If MsgBox(cadList, vbQuestion + vbYesNo) = vbYes Then
                     'El tag tiene codcampo
                     cadList = "DELETE FROM slialbcampos WHERE  codtipom = " & DBSet(Data1.Recordset!codtipom, "T")
-                    cadList = cadList & " AND numalbar = " & Data1.Recordset!NUmAlbar
+                    cadList = cadList & " AND numalbar = " & Data1.Recordset!NumAlbar
                     cadList = cadList & " AND codcampo  = " & CStr(Val(Me.ListView1.SelectedItem.Text))
                     conn.Execute cadList
                     
@@ -4148,7 +4159,7 @@ Dim Aux As String
                         cad = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", CStr(Data1.Recordset!codClien))
                         'NUEVA LINEA
                         
-                        cad = " VALUES (" & Data1.Recordset!codClien & "," & Val(cad) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!NUmAlbar
+                        cad = " VALUES (" & Data1.Recordset!codClien & "," & Val(cad) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!NumAlbar
                         
                         cad = "INSERT INTO smovalpuntos(codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov)" & cad
                         cad = cad & " ," & DBSet(Data1.Recordset!FechaAlb, "F") & ",0," & DBSet(Puntos, "N") & ",now())"
@@ -4338,15 +4349,21 @@ Private Sub Form_Load()
         .Buttons(btnPrimero + 3).Image = 9 'Último
         
         If vParamAplic.TipoPortes <> 1 Then
-            .Buttons(14).Style = tbrSeparator
-            .Buttons(14).ToolTipText = ""
+            If vParamAplic.PathFirmasAlbaran <> "" Then
+                .Buttons(14).ToolTipText = "Imprimir albaran firmado"
+                .Buttons(14).Style = tbrDefault
+                .Buttons(14).Image = 54
+            Else
+                .Buttons(14).Style = tbrSeparator
+                .Buttons(14).ToolTipText = ""
+            End If
         Else
             .Buttons(14).Style = tbrDefault
             .Buttons(14).ToolTipText = "Imprimir portes"
         End If
     End With
     Me.SSTab1.Tab = 0
-      
+    SSTab1.TabVisible(3) = vParamAplic.CartaPortes
       
     'Direcion envio SOLO si esta en parametros
     Label1(53).visible = vParamAplic.DireccionesEnvio
@@ -4430,7 +4447,9 @@ Private Sub Form_Load()
     Me.FrameHco.visible = EsHistorico
     Me.FrameFacRec.visible = (CodTipoMov = "ART")
     
-    
+    MostrarComision = False
+    If vParamAplic.NumeroInstalacion = 2 And vUsu.Nivel = 0 Then MostrarComision = True
+        
     
     'Aportacion a terminal
     Label1(49).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
@@ -4521,6 +4540,13 @@ Dim Color As Long
     
     'MAYO 2015  Herbelca. ALbran ruta Castellon
     Toolbar1.Buttons(16).visible = Not esDEV 'Imprimir Pedido
+    
+    
+    
+    
+    
+    
+    
     
     'Cambios de lbl
     Toolbar1.Buttons(12).ToolTipText = IIf(esDEV, "Pasar a albaran", "Generar Factura")
@@ -5857,7 +5883,7 @@ Dim devuelve As String
     
     
     '2014 Dicimebre
-    'HERBELCA. No dejo cambiar el agente, ya que si no las comisiones no corresponderian
+1    'HERBELCA. No dejo cambiar el agente, ya que si no las comisiones no corresponderian
     If vParamAplic.NumeroInstalacion = 2 Then
         If Modo = 4 Then
         
@@ -6169,6 +6195,9 @@ Dim PuntosCliente As Currency
 Dim C2 As Currency
 Dim Comision As String
 Dim CanDispo As Currency
+Dim vPrecioFact As CPreciosFact
+Dim PrMinimo As Currency
+Dim ComprobarPrMinimo As Boolean
 
     On Error GoTo EDatosOkLinea
 
@@ -6235,7 +6264,7 @@ Dim CanDispo As Currency
                 If MsgBox(Aux, vbQuestion + vbYesNo) = vbNo Then b = False
             End If
         End If
-        Set vArtic = Nothing
+        'Set vArtic = Nothing  lo pongo a nothing bajo
 
     End If
     
@@ -6329,6 +6358,56 @@ Dim CanDispo As Currency
             End If
         End If
     
+     
+        If b Then
+            GrabaLogCambioPrecioDto = False
+            'En el procedimiento vemos prminimo, cambio en descuentos, comision agente
+            If vParamAplic.LogCambioPrecDto Then ComprobarCambioPrecioDtoyVtaBajoPrecio
+   
+        End If
+    
+        If b And vParamAplic.NumeroInstalacion = 2 Then
+            ComprobarPrMinimo = False
+            If b And vArtic.EsDeVarios = 0 And txtAux(5).Text <> "P" Then     'en herbelca. Precio minimo
+                'Si es Precio especial
+                If txtAux(5).Text <> "E" Then
+                    ComprobarPrMinimo = True
+                    
+                Else
+                    'Es precio especial.
+                    'Comporbar que no ha tocado el descuento
+                    If GrabaLogCambioPrecioDto Then ComprobarPrMinimo = True
+                
+                End If
+            End If
+            If ComprobarPrMinimo Then
+                'If Not vArtic.EstablecidoPrecioMinimo Then vArtic.FijarprecioMinimo CDate(Text1(1).Text), Val(Text1(4).Text)
+                vArtic.FijarprecioMinimo CDate(Text1(1).Text), Val(Text1(4).Text)
+                
+                If vArtic.EstablecidoPrecioMinimo Then
+                    C2 = ImporteFormateado(txtAux(3).Text)
+                    If C2 <> 0 Then
+                        C2 = Round2(ImporteFormateado(txtAux(8).Text) / C2, 4)
+                        If C2 < vArtic.PrecioMinimo Then
+                            C2 = C2 - vArtic.PrecioMinimo
+                            If Abs(C2) > 0.01 Then
+                                b = False
+                                Aux = "Precio inferior al mínimo permitido" & vbCrLf
+                                If vUsu.Nivel = 0 Then
+                                    Aux = Aux & vbCrLf & vbCrLf & "¿Continuar?"
+                                    If MsgBox(Aux, vbQuestion + vbYesNoCancel) = vbYes Then b = True
+                                Else
+                                    MsgBox Aux, vbExclamation
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    
+    
+    
         'Es correcto, y vemos la cantidad
         If b Then
             If Me.txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
@@ -6393,14 +6472,6 @@ Dim CanDispo As Currency
               
         End If
         
-        
-           
-        GrabaLogCambioPrecioDto = False
-        
-        If vParamAplic.LogCambioPrecDto Then ComprobarCambioPrecioDtoyVtaBajoPrecio
-   
-        
-        
     End If
         
     
@@ -6464,10 +6535,12 @@ Dim CanDispo As Currency
     End If
     
     DatosOkLinea = b
+    Set vArtic = Nothing
     Exit Function
     
 EDatosOkLinea:
     MsgBox Err.Number & ": " & Err.Description, vbExclamation
+    Set vArtic = Nothing
 End Function
 
 
@@ -6571,6 +6644,11 @@ Private Sub HacerToolbar(indice As Integer)
                     
                     NumRegElim = Data1.Recordset.AbsolutePosition
                     
+                    
+                    If vParamAplic.NumeroInstalacion = 2 Then
+                        If Not PrecioMinimoAlbaran Then Exit Sub
+                    End If
+                    
                     'Facturacion de Albaran de Mostrador
                     frmListadoPed.codClien = CodTipoMov  'utilizamos esta vble para pasarle el tipo de movimiento
                     frmListadoPed.NumCod = Text1(0).Text  'utilizamos esta vble para pasarle el nº albaran
@@ -6602,15 +6680,22 @@ Private Sub HacerToolbar(indice As Integer)
             
             
         Case 14
-            If vParamAplic.TipoPortes <> 1 Then Exit Sub
-                
-            BotonImprimir_ 45, True
+            If vParamAplic.TipoPortes <> 1 Then
+                If vParamAplic.PathFirmasAlbaran <> "" Then
+                    Screen.MousePointer = vbHourglass
+                    ImprimirAlbaranFirmado
+                    Screen.MousePointer = vbDefault
+                End If
+            Else
+                BotonImprimir_ 45, True
+            End If
             
         Case 15: mnImprimir_Click 'Imprimir Albaran
         
-                'Mayo 2015.  Impresion albaranes ruta CASTELLON   HERBELCA
-        Case 16: ImpresionAlbaranRutaCliente
-        
+                
+        Case 16:
+            'Mayo 2015.  Impresion albaranes ruta CASTELLON   HERBELCA
+            ImpresionAlbaranRutaCliente
         Case 17: mnSalir_Click   'Salir
             
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
@@ -6768,7 +6853,7 @@ Dim SqlIntercalar2 As String
             
             '#Este codigo esta copiado en ModificarLote
             SQL = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-            SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!NUmAlbar & "," & numlinea
+            SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!NumAlbar & "," & numlinea
             SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
             SQL = SQL & " FROM tmpnlotes  WHERE codusu = " & vUsu.codigo & " and cantidad <>0 "
 
@@ -6829,7 +6914,7 @@ Dim SqlIntercalar2 As String
                     ImpReciclado = ImporteFormateado(txtAux(3).Text)
     
                     SQL = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", CStr(Data1.Recordset!codClien))
-                    SQL = " VALUES (" & Data1.Recordset!codClien & "," & Val(SQL) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!NUmAlbar
+                    SQL = " VALUES (" & Data1.Recordset!codClien & "," & Val(SQL) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!NumAlbar
                     
                     SQL = "INSERT INTO smovalpuntos(codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov)" & SQL
                     SQL = SQL & " ," & DBSet(Data1.Recordset!FechaAlb, "F") & ",1," & DBSet(ImpReciclado, "N") & ",now())"
@@ -6909,7 +6994,7 @@ Dim ArtFitosnatiarios As Boolean
                         SQL = "UPDATE sserie SET codclien=" & ValorNulo & ",codtipom=" & ValorNulo & ", fechavta=" & ValorNulo & ",numalbar=" & ValorNulo & ",numline1=" & ValorNulo
                         SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
                         SQL = SQL & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and codtipom='" & CodTipoMov & "' and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
-                        SQL = SQL & " AND numalbar=" & Data1.Recordset!NUmAlbar & " AND numline1=" & Data2.Recordset!numlinea
+                        SQL = SQL & " AND numalbar=" & Data1.Recordset!NumAlbar & " AND numline1=" & Data2.Recordset!numlinea
                         conn.Execute SQL
                     End If
                 End If
@@ -7150,7 +7235,8 @@ Dim i As Byte
             Else
                 i = i + 1
                 
-                If vParamAplic.NumeroInstalacion = 2 Then
+                'If vParamAplic.NumeroInstalacion = 2 Then
+                If MostrarComision Then
                     vDataGrid.Columns(i).Caption = "Comi."
                     vDataGrid.Columns(i).NumberFormat = FormatoDescuento
                 Else
@@ -7178,6 +7264,10 @@ Dim i As Byte
                 i = i + 1
                 vDataGrid.Columns(i).visible = False   'comision
                 
+                If Not MostrarComision Then
+                    i = i + 1
+                    vDataGrid.Columns(i).visible = False   'comision
+                End If
             End If
             
             
@@ -7213,6 +7303,8 @@ Dim i As Byte
         cmdAux(1).visible = visible
         cmdAux(9).visible = visible
     Else
+    
+        
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
             For i = 0 To txtAux.Count - 1
@@ -7222,6 +7314,7 @@ Dim i As Byte
             
         Else 'Vamos a modificar
             For i = 0 To txtAux.Count - 1
+                
                 If i < 3 Then
                     txtAux(i).Text = DataGrid1.Columns(i + 3).Text
                 ElseIf i = 3 Then
@@ -7254,7 +7347,11 @@ Dim i As Byte
                         If CStr(Data2.Recordset!tipoprecio) <> "*" Then
                             txtAux(i).Text = ""
                         Else
-                            txtAux(i).Text = DataGrid1.Columns(14).Text
+                            If Not MostrarComision Then
+                                txtAux(i).Text = DataGrid1.Columns(19).Text 'esta en el campo 19
+                            Else
+                                txtAux(i).Text = DataGrid1.Columns(14).Text
+                            End If
                         End If
                         
                     Else
@@ -7362,6 +7459,7 @@ Dim i As Byte
             txtAux(12).Left = DataGrid1.Columns(14).Left + 210
             txtAux(12).Width = DataGrid1.Columns(14).Width - 9
             BloquearTxt txtAux(12), True
+            If Not MostrarComision Then txtAux(12).Top = 6000
         End If
         
         'Los ponemos Visibles o No
@@ -7401,7 +7499,7 @@ Dim cadkey As Integer
     End If
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     If Index = 0 And KeyCode = 38 Then Exit Sub 'campo almacen y flecha arriba
     
@@ -7647,8 +7745,8 @@ Dim PtosAuxiliar As Currency
                         Else
                             'Es un albaran. Solo HERBELCA demomento
                             devuelve = "codtipom = " & DBSet(miRsAux!codtipom, "T") & " AND numalbar"
-                            devuelve = DevuelveDesdeBD(conAri, "fechaalb", "scaalb", devuelve, miRsAux!NUmAlbar, "N", TieneDescuentos)
-                            devuelve = "Rectifica al albarán: " & miRsAux!codtipom & Format(miRsAux!NUmAlbar, "000000") & " de " & Format(devuelve, "dd/mm/yyyy")
+                            devuelve = DevuelveDesdeBD(conAri, "fechaalb", "scaalb", devuelve, miRsAux!NumAlbar, "N", TieneDescuentos)
+                            devuelve = "Rectifica al albarán: " & miRsAux!codtipom & Format(miRsAux!NumAlbar, "000000") & " de " & Format(devuelve, "dd/mm/yyyy")
                         End If
                         Text2(16).Text = devuelve
                         If TieneDescuentos = "" Then TieneDescuentos = "0|0|"
@@ -8017,7 +8115,7 @@ Dim ParaElLog As String
             SQL = "UPDATE  sserie SET codclien=" & ValorNulo & ", codtipom=" & ValorNulo & ","
             SQL = SQL & " fechavta=" & ValorNulo & ", numalbar=" & ValorNulo & ", numline1=" & ValorNulo
             SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
-            SQL = SQL & " WHERE codtipom='" & CodTipoMov & "' AND numalbar=" & Data1.Recordset!NUmAlbar & " AND fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
+            SQL = SQL & " WHERE codtipom='" & CodTipoMov & "' AND numalbar=" & Data1.Recordset!NumAlbar & " AND fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
             conn.Execute SQL
             
             
@@ -8178,9 +8276,11 @@ Dim SQL As String
         'COTUBRE
         If vParamAplic.NumeroInstalacion = 2 Then
             
-            'Octubre 2014
-            SQL = SQL & ",comisionagente,'' nomprove"
-            
+            If MostrarComision Then
+                SQL = SQL & ",comisionagente,'' nomprove"   'LO que habia antes de Sep 2018
+            Else
+                SQL = SQL & ",codprovex,'' nomprove"   'NUEVO
+            End If
         Else
             SQL = SQL & ",codprovex,nomprove"
         End If
@@ -8189,8 +8289,10 @@ Dim SQL As String
     
     
     'Para herbelca, ponemos el codprove al final
-    If vParamAplic.NumeroInstalacion = 2 Then SQL = SQL & ",codprovex,if(pvpinferior=0,'',if(pvpinferior=1,'*','m')) tipoprecio"
-        
+    If vParamAplic.NumeroInstalacion = 2 Then
+        SQL = SQL & ",codprovex,if(pvpinferior=0,'',if(pvpinferior=1,'*','m')) tipoprecio"
+        If Not MostrarComision Then SQL = SQL & ",comisionagente"   'para updaear los campos
+    End If
  
     
     
@@ -8240,12 +8342,18 @@ Dim b As Boolean
         'Toolbar1.Buttons(12).Enabled = b And (CodTipoMov = "ALM" Or CodTipoMov = "ART")
         'Ahora.  Cualquier tipo se puede generar la factura
         Toolbar1.Buttons(12).Enabled = b
+        Toolbar1.Buttons(13).Enabled = b
+        If Toolbar1.Buttons(14).Style = tbrDefault Then Toolbar1.Buttons(14).Enabled = b
+        
         
         'Imprimir
         Toolbar1.Buttons(15).Enabled = ((Modo = 2) And CodTipoMov <> "ALM")
         Me.mnImprimir.Enabled = ((Modo = 2) And CodTipoMov <> "ALM")
-        Toolbar1.Buttons(14).Enabled = Toolbar1.Buttons(15).Enabled And vParamAplic.TipoPortes = 1
-        
+        If vParamAplic.TipoPortes = 1 Then
+            Toolbar1.Buttons(14).Enabled = Toolbar1.Buttons(15).Enabled And vParamAplic.TipoPortes = 1
+        Else
+            If Toolbar1.Buttons(14).Style = tbrDefault Then Toolbar1.Buttons(14).Enabled = b
+        End If
         b = (Modo >= 3) Or Modo = 1
         'Buscar
         Toolbar1.Buttons(1).Enabled = Not b
@@ -8463,7 +8571,7 @@ Dim ImpReciclado As Single
         SQL = "UPDATE sserie SET codclien=" & ValorNulo & ",codtipom=" & ValorNulo & ", fechavta=" & ValorNulo & ",numalbar=" & ValorNulo & ",numline1=" & ValorNulo
         SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
         SQL = SQL & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and codtipom='" & CodTipoMov & "' and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        SQL = SQL & " AND numalbar=" & Data1.Recordset!NUmAlbar & " AND numline1=" & Data2.Recordset!numlinea
+        SQL = SQL & " AND numalbar=" & Data1.Recordset!NumAlbar & " AND numline1=" & Data2.Recordset!numlinea
         conn.Execute SQL
     End If
     
@@ -8537,7 +8645,7 @@ Private Sub ReestablecerLotesArticulo(linea As Integer)
         End If
         If Trim(BuscaChekc) <> "" Then
             Set miRsAux = New ADODB.Recordset
-            BuscaChekc = "Select * from slialblotes WHERE codtipom= '" & Data1.Recordset!codtipom & "' AND numalbar = " & Data1.Recordset!NUmAlbar
+            BuscaChekc = "Select * from slialblotes WHERE codtipom= '" & Data1.Recordset!codtipom & "' AND numalbar = " & Data1.Recordset!NumAlbar
             If linea >= 0 Then BuscaChekc = BuscaChekc & " AND numlinea =" & Data2.Recordset!numlinea
             miRsAux.Open BuscaChekc, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not miRsAux.EOF
@@ -9196,7 +9304,7 @@ Private Function InsertarNSerie(numSerie As String, codArtic As String, numlinea
 'existen lineas con control de Nº Serie
 Dim devuelve As String
 Dim TieneMan As Boolean
-Dim NUmAlbar As String
+Dim NumAlbar As String
 Dim nSerie As CNumSerie
 Dim b As Boolean
 
@@ -9235,10 +9343,10 @@ Dim b As Boolean
 
     
     'Comprobar si existe en la tabla sserie
-     NUmAlbar = "numalbar" 'Nº albaran de Venta
-     devuelve = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", numSerie, "T", NUmAlbar, "codartic", codArtic, "T")
+     NumAlbar = "numalbar" 'Nº albaran de Venta
+     devuelve = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", numSerie, "T", NumAlbar, "codartic", codArtic, "T")
      If devuelve <> "" Then 'EXISTE en tabla sserie
-        If NUmAlbar = "" Then b = nSerie.ActualizarNumSerie(True)
+        If NumAlbar = "" Then b = nSerie.ActualizarNumSerie(True)
      Else
         b = nSerie.InsertarNumSerie
     End If
@@ -10558,11 +10666,11 @@ Dim TipoComisionVarios As String
                 
                             
                             Impo = ImporteFormateado(txtAux(6).Text)
-                            If Impo <> CCur(vPreFact.Descuento1) Then
+                            If Impo > CCur(vPreFact.Descuento1) Then
                                 GrabaLogCambioPrecioDto = True
                             Else
                                 Impo = ImporteFormateado(txtAux(7).Text)
-                                If Impo <> CCur(vPreFact.Descuento2) Then GrabaLogCambioPrecioDto = True
+                                If Impo > CCur(vPreFact.Descuento2) Then GrabaLogCambioPrecioDto = True
                             End If
                             
                         End If
@@ -10611,6 +10719,7 @@ Dim TipoComisionVarios As String
             Else
                 If Me.txtAux(5).Text = "E" Then
                     'precio especial SIEMPRE
+                                           
                     VendeAMenorPrecio = 1
                 Else
                     
@@ -10737,9 +10846,10 @@ Dim Rc
     End If
     frmListado3.OtrosDatos = frmListado3.OtrosDatos & " Alb " & Text1(0).Text & Text1(1).Text & " Articulo " & txtAux(1).Text
     
-    
+    'para que herbelca NO vea la comision
+    txtAux(12).visible = False
     frmListado3.Show vbModal
-    
+    txtAux(12).visible = True
     
     Screen.MousePointer = Rc
     
@@ -10765,7 +10875,7 @@ Dim Aux As String
     If Val(miSQL) < 9 Then
         
         
-        RiesgoCliente miRsAux!codClien, CByte(miRsAux!TipoIVA), Now, ImpTesor, ImpAlb, Nothing
+        RiesgoCliente miRsAux!codClien, CByte(miRsAux!TipoIVA), Now, ImpTesor, ImpAlb, Nothing, 60
         Aux = Format(miRsAux!limcredi, FormatoImporte)
         If Len(Aux) < 9 Then Aux = "   " & Aux
         miSQL = "Crédito concedido:        " & Aux & vbCrLf
@@ -10852,13 +10962,13 @@ Dim VariedadPartida As String
 
 
 
-        cadList = cadList & "(select codcampo from slialbcampos where numalbar=" & Data1.Recordset!NUmAlbar
+        cadList = cadList & "(select codcampo from slialbcampos where numalbar=" & Data1.Recordset!NumAlbar
         cadList = cadList & " AND "
 
 
         cadList = "codtipom = " & DBSet(Data1.Recordset!codtipom, "T")
         cadList = cadList & " AND numalbar"
-        cadList = DevuelveDesdeBD(conAri, "max(numlinea)", "slialbcampos", cadList, CStr(Data1.Recordset!NUmAlbar), "N")
+        cadList = DevuelveDesdeBD(conAri, "max(numlinea)", "slialbcampos", cadList, CStr(Data1.Recordset!NumAlbar), "N")
         NumRegElim = 0
         If cadList <> "" Then NumRegElim = Val(cadList)
         NumRegElim = NumRegElim + 1
@@ -10887,7 +10997,7 @@ Dim VariedadPartida As String
                 If cadList <> "" Then
 
                         '  '
-                        motivo = motivo & ", (" & Data1.Recordset!NUmAlbar & ","
+                        motivo = motivo & ", (" & Data1.Recordset!NumAlbar & ","
                         motivo = motivo & DBSet(Data1.Recordset!codtipom, "T") & "," & NumRegElim & "," & cadList
                         motivo = motivo & VariedadPartida & ")"
                         NumRegElim = NumRegElim + 1
@@ -10933,7 +11043,7 @@ Dim IT
     cadList = Replace(cadList, "@#", vParamAplic.Ariagro & ".")
     
     cadList = cadList & " WHERE codcampo IN "
-    cadList = cadList & "(select codcampo from slialbcampos where numalbar=" & Data1.Recordset!NUmAlbar
+    cadList = cadList & "(select codcampo from slialbcampos where numalbar=" & Data1.Recordset!NumAlbar
     cadList = cadList & " AND codtipom = " & DBSet(Data1.Recordset!codtipom, "T")
     cadList = cadList & ")"
     ListView1.ListItems.Clear
@@ -11426,7 +11536,7 @@ Dim CadenaOR As String
         If Not vParamAplic.ManipuladorFitosanitarios2 Then Exit Sub   'Por si acaso se ha metido aqui
         If DBLet(Data2.Recordset!numLote, "T") = "" Then Exit Sub
           
-        CadenaInsertTmpLotes = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!NUmAlbar
+        CadenaInsertTmpLotes = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!NumAlbar
         CadenaInsertTmpLotes = CadenaInsertTmpLotes & " AND numlinea =" & Data2.Recordset!numlinea
         CadenaInsertTmpLotes = "Select numlote,cantidad,fecentra from slialblotes  WHERE " & CadenaInsertTmpLotes & "  order by sublinea"
  
@@ -11521,14 +11631,14 @@ Dim CadenaOR As String
                         ReestablecerLotesArticulo Data2.Recordset!numlinea
                         
                         'Borramos la linea de lotes
-                        SQL = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!NUmAlbar
+                        SQL = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!NumAlbar
                         SQL = SQL & " AND numlinea =" & Data2.Recordset!numlinea
                         SQL = "DELETE FROM slialblotes WHERE " & SQL
                         conn.Execute SQL
                         Espera 0.4
                         
                         SQL = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-                        SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!NUmAlbar & "," & Data2.Recordset!numlinea
+                        SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!NumAlbar & "," & Data2.Recordset!numlinea
                         SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
                         SQL = SQL & " FROM tmpnlotes  WHERE codusu = " & vUsu.codigo & " and cantidad <>0 "
             
@@ -11689,7 +11799,7 @@ Dim Aux As String
     
     
     Aux = " AND codtipom = " & DBSet(Data1.Recordset!codtipom, "T") & Aux & ")"
-    Aux = "Select * from slialB WHERE coalesce(comisionagente,0)=0 AND numalbar = " & Data1.Recordset!NUmAlbar & Aux
+    Aux = "Select * from slialB WHERE coalesce(comisionagente,0)=0 AND numalbar = " & Data1.Recordset!NumAlbar & Aux
         
     
     
@@ -11727,3 +11837,101 @@ Dim C As String
     C = DevuelveDesdeBD(conAri, "puntos", "scaalb", C, "1")
     Text2(1).Text = C
 End Sub
+
+
+
+
+Private Sub ImprimirAlbaranFirmado()
+Dim Cade As String
+    On Error GoTo eImprimirAlbaranFirmado
+    If Modo <> 2 Then Exit Sub
+    If Data1.Recordset.EOF Then Exit Sub
+    Cade = "_" & Data1.Recordset!codtipom & "-" & Format(Data1.Recordset!NumAlbar, "0000000")
+    Cade = vParamAplic.PathFirmasAlbaran & "\" & Format(Data1.Recordset!FechaAlb, FormatoFecha) & "\*" & Cade & "*.pdf"
+    Cade = Dir(Cade, vbArchive)
+    If Cade <> "" Then
+        Cade = vParamAplic.PathFirmasAlbaran & "\" & Format(Data1.Recordset!FechaAlb, FormatoFecha) & "\" & Cade
+        LanzaVisorMimeDocumento Me.hwnd, Cade
+    Else
+        Cade = Format(Data1.Recordset!FechaAlb, FormatoFecha) & "\*" & Data1.Recordset!codtipom & "-" & Format(Data1.Recordset!NumAlbar, "0000000") & " *"
+        Cade = "No existe ninguna documento de albaran firmado. " & vbCrLf & Cade
+        MsgBox Cade, vbExclamation
+    End If
+    Exit Sub
+eImprimirAlbaranFirmado:
+        MuestraError Err.Number, , Err.Description
+End Sub
+
+
+
+
+Private Function PrecioMinimoAlbaran() As Boolean
+Dim vPrecioFact As CPreciosFact
+Dim vArtic As CArticulo
+Dim RN As ADODB.Recordset
+Dim b As Boolean
+Dim Aux As String
+Dim PrMinimo As Currency
+Dim ErroresPrMinimo As String
+    On Error GoTo ePrecioMinimoAlbaran
+    
+    PrecioMinimoAlbaran = False
+    
+    Set vPrecioFact = New CPreciosFact
+    vPrecioFact.CodigoClien = Text1(4).Text
+    vPrecioFact.FijarTarifaActividad
+    
+    Aux = "slialb.codartic=sartic.codartic and artvario=0 and origpre<>'P' and origpre<>'E'  AND codtipom = '" & Data1.Recordset!codtipom & "' AND numalbar =" & CStr(Data1.Recordset!NumAlbar)
+    Aux = "Select slialb.* from slialb,sartic WHERE " & Aux
+    Set RN = New ADODB.Recordset
+    ErroresPrMinimo = ""
+    RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RN.EOF
+
+        If RN!cantidad <> 0 Then
+        
+            
+        
+        
+        
+        
+            PrMinimo = Round2(RN!ImporteL / RN!cantidad, 4)
+            
+            Set vArtic = New CArticulo
+            If Not vArtic.LeerDatos(RN!codArtic) Then Err.Raise 513, , "Imposible leer datos articulo: " & RN!codArtic
+            'If Not vArtic.EstablecidoPrecioMinimo Then vArtic.FijarprecioMinimo CDate(Text1(1).Text), Val(Text1(4).Text)
+            vArtic.FijarprecioMinimo CDate(Text1(1).Text), Val(Text1(4).Text)
+            If vArtic.EstablecidoPrecioMinimo Then
+                
+                If PrMinimo < vArtic.PrecioMinimo Then
+                    Aux = vbCrLf & " .- " & RN!codArtic & "   " & RN!NomArtic & " [" & vArtic.PrecioMinimo & "]"
+                    
+                    PrMinimo = PrMinimo - vArtic.PrecioMinimo
+                    If Abs(PrMinimo) > 0.01 Then ErroresPrMinimo = ErroresPrMinimo & Aux
+                End If
+            End If
+
+            Set vArtic = Nothing
+        End If
+        RN.MoveNext
+    Wend
+    RN.Close
+
+    If ErroresPrMinimo <> "" Then
+        If Len(ErroresPrMinimo) > 400 Then ErroresPrMinimo = Mid(ErroresPrMinimo, 1, 400) & "......."
+        Aux = "Precio inferior al mínimo permitido" & vbCrLf & ErroresPrMinimo
+        If vUsu.Nivel = 0 Then
+            Aux = Aux & vbCrLf & vbCrLf & "¿Continuar?"
+            If MsgBox(Aux, vbQuestion + vbYesNoCancel) = vbYes Then PrecioMinimoAlbaran = True
+        Else
+            MsgBox Aux, vbExclamation
+        End If
+    Else
+        PrecioMinimoAlbaran = True
+    End If
+ePrecioMinimoAlbaran:
+    If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
+    Set vArtic = Nothing
+    Set vPrecioFact = Nothing
+    Set RN = Nothing
+End Function

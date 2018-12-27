@@ -5,11 +5,11 @@ Begin VB.Form frmEulerReloj
    ClientHeight    =   9765
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   18960
+   ClientWidth     =   18990
    Icon            =   "frmEulerReloj.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   9765
-   ScaleWidth      =   18960
+   ScaleWidth      =   18990
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
    Begin VB.CommandButton cmdAlbaran 
@@ -45,7 +45,7 @@ Begin VB.Form frmEulerReloj
          Caption         =   "Todos"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
-            Size            =   24
+            Size            =   18
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -53,9 +53,9 @@ Begin VB.Form frmEulerReloj
             Strikethrough   =   0   'False
          EndProperty
          Height          =   435
-         Left            =   9480
+         Left            =   3960
          TabIndex        =   19
-         Top             =   1440
+         Top             =   960
          Width           =   2895
       End
       Begin VB.ComboBox Combo4 
@@ -75,7 +75,7 @@ Begin VB.Form frmEulerReloj
          Top             =   2640
          Width           =   9015
       End
-      Begin VB.ComboBox Combo3 
+      Begin VB.ComboBox cboAlb 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   18
@@ -90,7 +90,7 @@ Begin VB.Form frmEulerReloj
          Style           =   2  'Dropdown List
          TabIndex        =   10
          Top             =   1440
-         Width           =   8535
+         Width           =   11655
       End
       Begin VB.ComboBox cboTipoTrabajo 
          BeginProperty Font 
@@ -263,7 +263,7 @@ Begin VB.Form frmEulerReloj
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      NumItems        =   9
+      NumItems        =   10
       BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Text            =   "Tr"
          Object.Width           =   970
@@ -307,6 +307,11 @@ Begin VB.Form frmEulerReloj
          SubItemIndex    =   8
          Text            =   "Id Registro"
          Object.Width           =   0
+      EndProperty
+      BeginProperty ColumnHeader(10) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         SubItemIndex    =   9
+         Text            =   "Ref."
+         Object.Width           =   4304
       EndProperty
    End
    Begin VB.CommandButton cmdAceptar 
@@ -394,7 +399,7 @@ Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
 
 
-Dim cad As String
+Dim Cad As String
 Dim T1 As Date
 
 
@@ -410,31 +415,31 @@ Dim NumeroTareasPendientesCerrar As Integer
 
 
 Private Sub cmdAlbaran_Click(Index As Integer)
-    cad = ""
-    If Combo1.ListIndex < 0 Then cad = "Seleccione el trabajador "
+    Cad = ""
+    If Combo1.ListIndex < 0 Then Cad = "Seleccione el trabajador "
         
-    If Me.cboTipoTrabajo.ListIndex <= 0 Then cad = "Seleccione el tipo de albaran"
+    If Me.cboTipoTrabajo.ListIndex <= 0 Then Cad = "Seleccione el tipo de albaran"
     'If Me.cboTipoTrabajo.ListIndex = 4 Then cad = "No puede seleccionar produccion"
         
-    If cad <> "" Then
-        MsgBox cad, vbExclamation
+    If Cad <> "" Then
+        MsgBox Cad, vbExclamation
         Exit Sub
     End If
 
     
     
     
-    cad = "  " & UCase(Me.cboTipoTrabajo.Text)
+    Cad = "  " & UCase(Me.cboTipoTrabajo.Text)
         
-    cad = "Desea crear el albarán del tipo " & cad & "?"
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+    Cad = "Desea crear el albarán del tipo " & Cad & "?"
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     CrearAlbaran
 End Sub
 
 Private Sub cmdImprimir_Click()
     'VERSION RELOJ: comentar lineas #Soloreloj
-    frmListado2.Opcion = 46
-    frmListado2.Show vbModal
+    'frmListado2.opcion = 46
+    'frmListado2.Show vbModal
 End Sub
 
 Private Sub Combo1_Click()
@@ -460,9 +465,9 @@ Dim EsTrabajadorZaldibia As Boolean
     
     'Borramos nodos no trabajador
     
-    cad = "|" & Combo1.ItemData(Combo1.ListIndex) & "|"
+    Cad = "|" & Combo1.ItemData(Combo1.ListIndex) & "|"
     
-    EsTrabajadorZaldibia = InStr(1, "|" & TrabajadoresZaldibia, cad) > 0
+    EsTrabajadorZaldibia = InStr(1, "|" & TrabajadoresZaldibia, Cad) > 0
     
     'Si marca todos, no hacemos nada
     If Me.Check1.Value = 0 Then
@@ -475,7 +480,7 @@ Dim EsTrabajadorZaldibia As Boolean
             End If
         Next
     End If
-    cad = "|" & TrabajadoresZaldibia
+    Cad = "|" & TrabajadoresZaldibia
 
     
     
@@ -526,22 +531,22 @@ Dim cad2 As String
     
     
     If cboTipoTrabajo.ListIndex <= 0 Then
-        Combo3.Clear
+        cboAlb.Clear
         Combo4.Clear
         Exit Sub
     End If
     
-    cad = "ALR"
+    Cad = "ALR"
     If cboTipoTrabajo.ListIndex = 2 Then
-        cad = "ALE"
+        Cad = "ALE"
     ElseIf cboTipoTrabajo.ListIndex = 3 Then
-        cad = "ALO"
+        Cad = "ALO"
         
         
     ElseIf cboTipoTrabajo.ListIndex = 4 Then
         'Orden produccion
         'OrdenProduccion = True
-        cad = "ALV"
+        Cad = "ALV"
         
         
     End If
@@ -549,8 +554,8 @@ Dim cad2 As String
     If OrdenProduccion Then
     
             
-            cad = Format(DateAdd("yyyy", -1, Now), FormatoFecha)
-            CargarCombo_Tabla Me.Combo3, "sordprod", "concat(right(concat(""000000"",codigo),6),' - ',coalesce(descripcion,feccreacion))", "codigo", "feccreacion>='" & cad & "'"
+            Cad = Format(DateAdd("yyyy", -1, Now), FormatoFecha)
+            CargarCombo_Tabla Me.cboAlb, "sordprod", "concat(right(concat(""000000"",codigo),6),' - ',coalesce(descripcion,feccreacion))", "codigo", "feccreacion>='" & Cad & "'"
     
     Else
             Aux = ""
@@ -567,24 +572,24 @@ Dim cad2 As String
                 End If
             End If
             
-            cad = "codtipom = '" & cad & "' AND  (origdat is null or origdat<>2)" & Aux
-            CargarCombo_Tabla Me.Combo3, "scaalb", "concat(numalbar,' - ',nomclien)", "NumAlbar", cad, , "fechaalb desc,numalbar desc"
+            Cad = "codtipom = '" & Cad & "' AND  (origdat is null or origdat<>2)" & Aux
+            CargarCombo_Tabla Me.cboAlb, "scaalb", "concat(numalbar,' - ',nomclien,if(coalesce(referenc ,'')='','',concat('  [',referenc,']')))", "NumAlbar", Cad, , "fechaalb desc,numalbar desc"
                 
     End If
             
-    cad = "R"
+    Cad = "R"
     If cboTipoTrabajo.ListIndex = 2 Then
-        cad = "E"
+        Cad = "E"
     ElseIf cboTipoTrabajo.ListIndex = 3 Then
-        cad = "O"
+        Cad = "O"
     ElseIf cboTipoTrabajo.ListIndex = 4 Then
-        cad = "V"
+        Cad = "V"
         
         
         
     End If
-    cad = "codtipor like '" & cad & "_'"
-    CargarCombo_Tabla Me.Combo4, "stipor", "concat(nomtipor,' [',codtipor,']')", "1", cad
+    Cad = "codtipor like '" & Cad & "_'"
+    CargarCombo_Tabla Me.Combo4, "stipor", "concat(nomtipor,' [',codtipor,']')", "1", Cad
 
     
 End Sub
@@ -636,12 +641,12 @@ Dim C As String
         'Horas
         Debug.Print ListView2.ListItems(HayQueCerrarNodo).ListSubItems(5).Text
         If ListView2.ListItems(HayQueCerrarNodo).ListSubItems(5).ToolTipText = "" Then
-            cad = Label1(0).Caption
+            Cad = Label1(0).Caption
         Else
-            cad = ListView2.ListItems(HayQueCerrarNodo).ListSubItems(4).ToolTipText
+            Cad = ListView2.ListItems(HayQueCerrarNodo).ListSubItems(4).ToolTipText
         End If
-        cad = cad & " " & ListView2.ListItems(HayQueCerrarNodo).Tag
-        F1 = CDate(cad)
+        Cad = Cad & " " & ListView2.ListItems(HayQueCerrarNodo).Tag
+        F1 = CDate(Cad)
         Horas = DateDiff("n", F1, CDate(Label1(0).Caption & " " & Label1(1).Caption))
     
         If Horas < 0 Then
@@ -654,12 +659,12 @@ Dim C As String
         Horas = Horas + Round((linea / 60), 2)
         
        ' Fecha codtraba HoraInicio
-        cad = "UPDATE sreloj SET HoraFin =" & DBSet(Label1(0).Caption & " " & Label1(1).Caption, "FH")
-        cad = cad & " ,calculadas=" & DBSet(Horas, "N")
-        cad = cad & " WHERE codtraba = " & Combo1.ItemData(Combo1.ListIndex) & " AND fecha = " & DBSet(F1, "F")
-        cad = cad & " AND HoraInicio = " & DBSet(F1, "FH")
+        Cad = "UPDATE sreloj SET HoraFin =" & DBSet(Label1(0).Caption & " " & Label1(1).Caption, "FH")
+        Cad = Cad & " ,calculadas=" & DBSet(Horas, "N")
+        Cad = Cad & " WHERE codtraba = " & Combo1.ItemData(Combo1.ListIndex) & " AND fecha = " & DBSet(F1, "F")
+        Cad = Cad & " AND HoraInicio = " & DBSet(F1, "FH")
                         
-        conn.Execute cad
+        conn.Execute Cad
     End If
     
     'Insertamios la nueva, si es que hay que insertarla
@@ -671,14 +676,14 @@ Dim C As String
         C = Mid(C, NumRegElim + 1)
         C = Mid(C, 1, Len(C) - 1)
         
-        cad = ",'" & C & "')"
+        Cad = ",'" & C & "')"
        
-        C = Combo3.Text
+        C = cboAlb.Text
         NumRegElim = InStr(1, C, " - ")
         If NumRegElim = 0 Then Err.Raise 513, , "MAl 2"
         C = Trim(Mid(C, 1, NumRegElim))
         
-        cad = "," & C & cad 'Concatenamos
+        Cad = "," & C & Cad 'Concatenamos
         C = "'ALR'"
         If cboTipoTrabajo.ListIndex = 2 Then
             C = "'ALE'"
@@ -687,20 +692,20 @@ Dim C As String
         ElseIf cboTipoTrabajo.ListIndex = 4 Then
             C = "'ALV'"
         End If
-        cad = "," & C & cad
+        Cad = "," & C & Cad
         
-        cad = DBSet(Label1(0).Caption, "F") & "," & Combo1.ItemData(Combo1.ListIndex) & "," & DBSet(Label1(0).Caption & " " & Label1(1).Caption, "FH") & ",null,0" & cad
+        Cad = DBSet(Label1(0).Caption, "F") & "," & Combo1.ItemData(Combo1.ListIndex) & "," & DBSet(Label1(0).Caption & " " & Label1(1).Caption, "FH") & ",null,0" & Cad
         C = DevuelveDesdeBD(conAri, "max(id)", "sreloj", "1", "1")
         C = Str(Val(C) + 1)
-        cad = C & "," & cad
-        cad = "INSERT INTO sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor) VALUES (" & cad
+        Cad = C & "," & Cad
+        Cad = "INSERT INTO sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor) VALUES (" & Cad
        
-        conn.Execute cad
+        conn.Execute Cad
             
     End If
     
     
-    Combo3.Clear
+    cboAlb.Clear
     Combo4.Clear
     Combo1.ListIndex = -1
     Combo1.Tag = -1
@@ -753,16 +758,16 @@ Private Sub Form_Activate()
             
             
         miRsAux.Open "Select distinct fecha from sreloj where horafin is null and fecha<" & DBSet(Label1(1).Caption, "F"), conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        cad = ""
+        Cad = ""
         HayQueCerrarNodo = 0
         While Not miRsAux.EOF
             HayQueCerrarNodo = HayQueCerrarNodo + 1
-            cad = cad & Format(miRsAux!Fecha, "dd/mm/yyyy") & "     "
-            If (HayQueCerrarNodo Mod 3) = 0 Then cad = cad & vbCrLf
+            Cad = Cad & Format(miRsAux!Fecha, "dd/mm/yyyy") & "     "
+            If (HayQueCerrarNodo Mod 3) = 0 Then Cad = Cad & vbCrLf
             miRsAux.MoveNext
         Wend
         miRsAux.Close
-         If cad <> "" Then MsgBox "Dias por finalizar tareas: " & vbCrLf & cad, vbExclamation
+         If Cad <> "" Then MsgBox "Dias por finalizar tareas: " & vbCrLf & Cad, vbExclamation
             
             
             
@@ -794,8 +799,8 @@ Private Sub Form_Load()
     'Me.Icon = frmPpal.Icon   formulario compartido de proyecto
     
     'Cargar Trabajadores
-    cad = "fechabaj is null and codagent1 >=0 "
-    CargarCombo_Tabla Me.Combo1, "straba", "codtraba", "nomtraba", cad
+    Cad = "fechabaj is null and codagent1 >=0 "
+    CargarCombo_Tabla Me.Combo1, "straba", "codtraba", "nomtraba", Cad
     
     'Carga combo trabajos
     'ALR|ALE|ALO|
@@ -824,13 +829,13 @@ Private Sub CargaImangenBtn()
 
     If Soloreloj Then
         'Version SOLORELOJ. Comentar en NORMAL
-        Me.cmdImprimir.visible = False
+        Me.cmdImprimir.Visible = False
         cmdAlbaran(0).Picture = Nothing
         cmdAlbaran(0).Caption = "Generar"
     Else
         'Version normal
-        Me.cmdImprimir.Picture = frmPpal.imgListComun.ListImages(16).Picture
-        Me.cmdAlbaran(0).Picture = frmPpal.ImgListPpal.ListImages(10).Picture
+        Me.cmdImprimir.Picture = frmppal.imgListComun.ListImages(16).Picture
+        Me.cmdAlbaran(0).Picture = frmppal.ImgListPpal.ListImages(10).Picture
         Me.cmdAlbaran(0).Caption = ""
     End If
 End Sub
@@ -843,9 +848,15 @@ Dim H As Long
     If H < 0 Then H = 6375
     ListView2.Width = H
     
-    'H = ListView2.Width - 6500
-    'If H < 0 Then H = 1440
-    'ListView2.ColumnHeaders(6).Width = H
+    
+    H = Me.Width - 7500
+    If H < 300 Then H = 11655
+    Me.cboAlb.Width = H - 200
+    Me.Frame4.Width = H
+    
+    
+    
+    ListView2.ColumnHeaders(10).Width = IIf(Me.Width > 24000, 4500, 2300)
     
     
     H = Me.Height - 1200 - ListView2.Top
@@ -879,23 +890,23 @@ Dim H As Long
 End Sub
 
 Private Sub frmAc_DatoSeleccionado(CadenaSeleccion As String)
-    cad = CadenaSeleccion
+    Cad = CadenaSeleccion
 End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-    cad = CadenaDevuelta
+    Cad = CadenaDevuelta
 End Sub
 
 Private Sub ListView2_DblClick()
-Dim i As Integer
+Dim I As Integer
 
     If ListView2.SelectedItem Is Nothing Then Exit Sub
     
     
-    For i = 0 To Combo1.ListCount - 1
-        If Combo1.ItemData(i) = Val(ListView2.SelectedItem.Text) Then
+    For I = 0 To Combo1.ListCount - 1
+        If Combo1.ItemData(I) = Val(ListView2.SelectedItem.Text) Then
             'Este es el trabajador
-            Combo1.ListIndex = i
+            Combo1.ListIndex = I
             Exit For
         End If
     Next
@@ -903,22 +914,23 @@ Dim i As Integer
        
     Select Case UCase(Trim(ListView2.SelectedItem.SubItems(2)))
     Case "ALE"
-        i = 2
+        I = 2
     Case "ALO"
-        i = 3
+        I = 3
     Case Else
-        i = 1
+        I = 1
     End Select
-    cboTipoTrabajo.ListIndex = i
+    cboTipoTrabajo.ListIndex = I
     DoEvents
     Espera 0.1
     
-    For i = 0 To Combo3.ListCount - 1
-        cad = Combo3.List(i)
-        cad = Mid(cad, 1, InStr(1, cad, "-") - 1)
-        If Val(cad) = Val(ListView2.SelectedItem.SubItems(3)) Then
+    For I = 0 To cboAlb.ListCount - 1
+        Cad = cboAlb.List(I)
+        Cad = Mid(Cad, 1, InStr(1, Cad, "-") - 1)
+        
+        If Val(Cad) = Val(ListView2.SelectedItem.SubItems(3)) Then
             'Este es el trabajador
-            Combo3.ListIndex = i
+            cboAlb.ListIndex = I
             Exit For
         End If
     Next
@@ -926,15 +938,15 @@ Dim i As Integer
     
  
     ListView2.Tag = Trim(Mid(ListView2.SelectedItem.SubItems(4), 1, InStr(2, ListView2.SelectedItem.SubItems(4), " ")))
-    For i = 0 To Combo4.ListCount - 1
-        cad = Trim(Combo4.List(i))
+    For I = 0 To Combo4.ListCount - 1
+        Cad = Trim(Combo4.List(I))
         
-        cad = Mid(cad, InStr(1, cad, "[") + 1)  'quitamos primer corchete
-        cad = Mid(cad, 1, Len(cad) - 1)  'quitamos segundo corchete
+        Cad = Mid(Cad, InStr(1, Cad, "[") + 1)  'quitamos primer corchete
+        Cad = Mid(Cad, 1, Len(Cad) - 1)  'quitamos segundo corchete
         
-        If cad = ListView2.Tag Then
+        If Cad = ListView2.Tag Then
             'Este es el trabajador
-            Combo4.ListIndex = i
+            Combo4.ListIndex = I
             Exit For
         End If
     Next
@@ -952,7 +964,7 @@ Dim Hacer As Boolean
     Hacer = True
     If Me.Combo1.ListIndex >= 0 Then Hacer = False
     If Me.cboTipoTrabajo.ListIndex >= 0 Then Hacer = False
-    If Me.Combo3.ListIndex >= 0 Then Hacer = False
+    If Me.cboAlb.ListIndex >= 0 Then Hacer = False
     If Combo4.ListIndex >= 0 Then Hacer = False
     
     
@@ -967,9 +979,9 @@ Dim Hacer As Boolean
             Label1(1).Caption = "Leyendo"
             Label1(1).Refresh
             If miRsAux Is Nothing Then Set miRsAux = New ADODB.Recordset
-            cad = "HoraFin is null AND 1 "
-            cad = DevuelveDesdeBD(conAri, "count(*)", "sreloj", cad, "1")
-            If Val(cad) <> NumeroTareasPendientesCerrar Then
+            Cad = "HoraFin is null AND 1 "
+            Cad = DevuelveDesdeBD(conAri, "count(*)", "sreloj", Cad, "1")
+            If Val(Cad) <> NumeroTareasPendientesCerrar Then
                 Espera 0.5
                 CagarMarcajes
             Else
@@ -998,7 +1010,7 @@ End Sub
 
 Private Sub CagarMarcajes()
 Dim IT As ListItem
-Dim i As Integer
+Dim I As Integer
 
     limpiar Me
 
@@ -1009,12 +1021,12 @@ Dim i As Integer
     NumeroTareasPendientesCerrar = 0
 
     'Cargariamos las anteriores que no esten cerradas
-    cad = "select sreloj.*,nomtraba,nomclien,nomtipor from sreloj inner join straba on sreloj.codtraba=straba.codtraba"
-    cad = cad & " LEFT JOIN scaalb ON scaalb.codtipom = sreloj.codtipom AND sreloj.numalbar=scaalb.numalbar"
-    cad = cad & " LEFT JOIN stipor ON sreloj.codtipor = stipor.codtipor"
-    cad = cad & " where  fecha<" & DBSet(Label1(0).Caption, "F") & " AND horafin is null"
-    cad = cad & " ORDER BY fecha,HoraInicio"
-    miRsAux.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Cad = "select sreloj.*,nomtraba,nomclien,nomtipor,referenc from sreloj inner join straba on sreloj.codtraba=straba.codtraba"
+    Cad = Cad & " LEFT JOIN scaalb ON scaalb.codtipom = sreloj.codtipom AND sreloj.numalbar=scaalb.numalbar"
+    Cad = Cad & " LEFT JOIN stipor ON sreloj.codtipor = stipor.codtipor"
+    Cad = Cad & " where  fecha<" & DBSet(Label1(0).Caption, "F") & " AND horafin is null"
+    Cad = Cad & " ORDER BY fecha,HoraInicio"
+    miRsAux.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         
         Set IT = ListView2.ListItems.Add()
@@ -1022,15 +1034,15 @@ Dim i As Integer
         IT.SubItems(1) = miRsAux!NomTraba
         
         IT.SubItems(2) = DBLet(miRsAux!codtipom, "T") & " "
-        IT.SubItems(3) = DBLet(miRsAux!NumAlbar, "T") & " "
+        IT.SubItems(3) = DBLet(miRsAux!NUmAlbar, "T") & " "
         
         If IsNull(miRsAux!NomTipor) Then
-            cad = "--- ** No encotrado"
+            Cad = "--- ** No encotrado"
         Else
-            cad = miRsAux!NomTipor
+            Cad = miRsAux!NomTipor
         End If
-        cad = miRsAux!codtipor & " " & cad
-        IT.SubItems(4) = cad
+        Cad = miRsAux!codtipor & " " & Cad
+        IT.SubItems(4) = Cad
         IT.SubItems(5) = Format(miRsAux!horainicio, "hh:mm")
         IT.Tag = Format(miRsAux!horainicio, "hh:mm:ss")
         
@@ -1045,14 +1057,16 @@ Dim i As Integer
         
         If IsNull(miRsAux!codtipom) Then
             'ORden de produccion
-            IT.SubItems(7) = "Prod. " & Format(miRsAux!NumAlbar, "000000")
+            IT.SubItems(7) = "Prod. " & Format(miRsAux!NUmAlbar, "000000")
+            IT.SubItems(9) = " "
         Else
         
-            IT.SubItems(7) = DBLet(miRsAux!Nomclien, "T") & " "
+            IT.SubItems(7) = DBLet(miRsAux!NomClien, "T") & " "
+            IT.SubItems(9) = DBLet(miRsAux!referenc, "T") & " "
         End If
         
-        For i = 1 To IT.ListSubItems.Count
-            IT.ListSubItems(i).ToolTipText = Format(miRsAux!horainicio, "dd/mm/yyyy")
+        For I = 1 To IT.ListSubItems.Count
+            IT.ListSubItems(I).ToolTipText = Format(miRsAux!horainicio, "dd/mm/yyyy")
         Next
         NumeroTareasPendientesCerrar = NumeroTareasPendientesCerrar + 1
         miRsAux.MoveNext
@@ -1061,12 +1075,12 @@ Dim i As Integer
     
     
     
-    cad = "select sreloj.*,nomtraba,nomclien,nomtipor from sreloj inner join straba on sreloj.codtraba=straba.codtraba"
-    cad = cad & " LEFT JOIN scaalb ON scaalb.codtipom = sreloj.codtipom AND sreloj.numalbar=scaalb.numalbar"
-    cad = cad & " LEFT JOIN stipor ON sreloj.codtipor = stipor.codtipor"
-    cad = cad & " where fecha=" & DBSet(Label1(0).Caption, "F")
-    cad = cad & " ORDER BY HoraInicio,HoraFin"
-    miRsAux.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Cad = "select sreloj.*,nomtraba,nomclien,nomtipor,referenc from sreloj inner join straba on sreloj.codtraba=straba.codtraba"
+    Cad = Cad & " LEFT JOIN scaalb ON scaalb.codtipom = sreloj.codtipom AND sreloj.numalbar=scaalb.numalbar"
+    Cad = Cad & " LEFT JOIN stipor ON sreloj.codtipor = stipor.codtipor"
+    Cad = Cad & " where fecha=" & DBSet(Label1(0).Caption, "F")
+    Cad = Cad & " ORDER BY HoraInicio,HoraFin"
+    miRsAux.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         NumeroTareasPendientesCerrar = NumeroTareasPendientesCerrar + 1
         
@@ -1075,15 +1089,15 @@ Dim i As Integer
         IT.SubItems(1) = miRsAux!NomTraba
         
         IT.SubItems(2) = DBLet(miRsAux!codtipom, "T") & " "
-        IT.SubItems(3) = DBLet(miRsAux!NumAlbar, "T") & " "
+        IT.SubItems(3) = DBLet(miRsAux!NUmAlbar, "T") & " "
         
         If IsNull(miRsAux!NomTipor) Then
-            cad = "--- ** No encotrado"
+            Cad = "--- ** No encotrado"
         Else
-            cad = miRsAux!NomTipor
+            Cad = miRsAux!NomTipor
         End If
-        cad = miRsAux!codtipor & " " & cad
-        IT.SubItems(4) = cad
+        Cad = miRsAux!codtipor & " " & Cad
+        IT.SubItems(4) = Cad
         IT.SubItems(5) = Format(miRsAux!horainicio, "hh:mm")
         IT.Tag = Format(miRsAux!horainicio, "hh:mm:ss")
         
@@ -1096,10 +1110,12 @@ Dim i As Integer
         
         If IsNull(miRsAux!codtipom) Then
             'ORden de produccion
-            IT.SubItems(7) = "Prod. " & Format(miRsAux!NumAlbar, "000000")
+            IT.SubItems(7) = "Prod. " & Format(miRsAux!NUmAlbar, "000000")
+            IT.SubItems(9) = " "
         Else
         
-            IT.SubItems(7) = DBLet(miRsAux!Nomclien, "T") & " "
+            IT.SubItems(7) = DBLet(miRsAux!NomClien, "T") & " "
+            IT.SubItems(9) = DBLet(miRsAux!referenc, "T") & " "
         End If
         
         miRsAux.MoveNext
@@ -1124,19 +1140,19 @@ End Sub
 
 
 Private Sub PonerFrames2()
-Dim B As Boolean
+Dim b As Boolean
 
     
 
 
     
     If Combo1.ListIndex < 0 Then
-        B = False
+        b = False
     Else
-        B = HayQueCerrarNodo = 0
+        b = HayQueCerrarNodo = 0
     End If
     
-    Frame4.visible = True
+    Frame4.Visible = True
     
     
     
@@ -1157,36 +1173,36 @@ Dim HaCambiadoContador As Boolean
 
     
     'VErsion normal
-    cad = DBSet(vParam.CifEmpresa, "T") & " ORDER BY codclien"
+    Cad = DBSet(vParam.CifEmpresa, "T") & " ORDER BY codclien"
     
 
     
-    cad = DevuelveDesdeBD(conAri, "codclien", "sclien", "nifclien", cad)
-    If cad = "" Then Err.Raise 513, , "Obteniendo cliente EULER"
+    Cad = DevuelveDesdeBD(conAri, "codclien", "sclien", "nifclien", Cad)
+    If Cad = "" Then Err.Raise 513, , "Obteniendo cliente EULER"
     
-    If Not vCli.LeerDatos(cad) Then Err.Raise 513, , "Obteniendo datos cliente EULER " & cad
+    If Not vCli.LeerDatos(Cad) Then Err.Raise 513, , "Obteniendo datos cliente EULER " & Cad
     
     'Febrero 2016
     'Si es EUSKADI o VALENCIA para los albaranes de reparacion cogera el CAR o el ALR
     
     Select Case Me.cboTipoTrabajo.ListIndex
     Case 2
-        cad = "ALE"
+        Cad = "ALE"
     Case 3
-        cad = "ALO"
+        Cad = "ALO"
     Case 4
-        cad = "ALV"
+        Cad = "ALV"
     Case Else
             
-            cad = DevuelveDesdeBD(conAri, "codalmac", "straba", "codtraba", CStr(Combo1.ItemData(Combo1.ListIndex)))
-            If cad = "10" Then
-                cad = "CAR"
+            Cad = DevuelveDesdeBD(conAri, "codalmac", "straba", "codtraba", CStr(Combo1.ItemData(Combo1.ListIndex)))
+            If Cad = "10" Then
+                Cad = "CAR"
             Else
-                cad = "ALR"
+                Cad = "ALR"
             End If
     End Select
     
-    vC.ConseguirContador cad
+    vC.ConseguirContador Cad
     
     
 '    Cad = Trim(InputBox("Nº " & vC.NombreMovimiento, , CStr(vC.Contador + 1)))
@@ -1200,20 +1216,20 @@ Dim HaCambiadoContador As Boolean
 '        vC.Contador = Val(Cad) - 1   '
 '        HaCambiadoContador = True
 '    End If
-    cad = "INSERT INTO scaalb(codtipom,numalbar,fechaalb,factursn,codclien,"
-    cad = cad & "nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
-    cad = cad & "facturkm,codtraba,codtrab2,codagent,codforpa,codenvio,dtoppago,dtognral,tipofact,esticket) VALUES ('"
+    Cad = "INSERT INTO scaalb(codtipom,numalbar,fechaalb,factursn,codclien,"
+    Cad = Cad & "nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
+    Cad = Cad & "facturkm,codtraba,codtrab2,codagent,codforpa,codenvio,dtoppago,dtognral,tipofact,esticket) VALUES ('"
     If Me.cboTipoTrabajo.ListIndex = 1 Then
         'ALR
-         cad = cad & "ALR"
+         Cad = Cad & "ALR"
     Else
-        cad = cad & vC.TipoMovimiento
+        Cad = Cad & vC.TipoMovimiento
     End If
-    cad = cad & "'," & vC.Contador + 1 & "," & DBSet(Label1(0).Caption, "F") & ",1," & vCli.codigo
-    cad = cad & "," & DBSet(vCli.Nombre, "T") & "," & DBSet(vCli.Domicilio, "T") & "," & DBSet(vCli.CPostal, "T") & "," & DBSet(vCli.Poblacion, "T")
-    cad = cad & "," & DBSet(vCli.Provincia, "T") & "," & DBSet(vCli.NIF, "T") & "," & DBSet(vCli.TfnoClien, "T", "S") & ",0," & Val(Combo1.ItemData(Combo1.ListIndex)) & "," & Val(Combo1.ItemData(Combo1.ListIndex))
-    cad = cad & "," & DBSet(vCli.Agente, "T") & "," & DBSet(vCli.ForPago, "T") & "," & DBSet(vCli.FEnvio, "T") & ",0,0,0,0)"
-    conn.Execute cad
+    Cad = Cad & "'," & vC.Contador + 1 & "," & DBSet(Label1(0).Caption, "F") & ",1," & vCli.codigo
+    Cad = Cad & "," & DBSet(vCli.Nombre, "T") & "," & DBSet(vCli.Domicilio, "T") & "," & DBSet(vCli.CPostal, "T") & "," & DBSet(vCli.Poblacion, "T")
+    Cad = Cad & "," & DBSet(vCli.Provincia, "T") & "," & DBSet(vCli.NIF, "T") & "," & DBSet(vCli.TfnoClien, "T", "S") & ",0," & Val(Combo1.ItemData(Combo1.ListIndex)) & "," & Val(Combo1.ItemData(Combo1.ListIndex))
+    Cad = Cad & "," & DBSet(vCli.Agente, "T") & "," & DBSet(vCli.ForPago, "T") & "," & DBSet(vCli.FEnvio, "T") & ",0,0,0,0)"
+    conn.Execute Cad
     
     'If HaCambiadoContador Then vC.Contador = vC.Contador + 1
     vC.IncrementarContador vC.TipoMovimiento
@@ -1226,23 +1242,23 @@ eCrearAlbaran:
     Else
         conn.CommitTrans
         
-        cad = "Se ha generado el albaran:   " & IIf(vC.TipoMovimiento = "CAR", "ALR", vC.TipoMovimiento) & " " & Format(vC.Contador, "000000") & vbCrLf
-        cad = cad & "--> " & vC.NombreMovimiento
-        MsgBox cad, vbInformation
+        Cad = "Se ha generado el albaran:   " & IIf(vC.TipoMovimiento = "CAR", "ALR", vC.TipoMovimiento) & " " & Format(vC.Contador, "000000") & vbCrLf
+        Cad = Cad & "--> " & vC.NombreMovimiento
+        MsgBox Cad, vbInformation
         
         'Cargamos el combo de albaranes
-        cad = IIf(vC.TipoMovimiento = "CAR", "ALR", vC.TipoMovimiento)
-        cad = "codtipom = '" & cad & "'"
+        Cad = IIf(vC.TipoMovimiento = "CAR", "ALR", vC.TipoMovimiento)
+        Cad = "codtipom = '" & Cad & "'"
         
         
-        CargarCombo_Tabla Me.Combo3, "scaalb", "concat(numalbar,' - ',nomclien)", "NumAlbar", cad, , "fechaalb desc,numalbar desc"
+        CargarCombo_Tabla Me.cboAlb, "scaalb", "concat(numalbar,' - ',nomclien,if(coalesce(referenc ,'')='','',concat('  [',referenc,']')))", "NumAlbar", Cad, , "fechaalb desc,numalbar desc"
         
         'Situamos el
-        For NumRegElim = 0 To Combo3.ListCount - 1
-            cad = Mid(Combo3.List(NumRegElim), 1, InStr(1, Combo3.List(NumRegElim), "-") - 1)
-            If Val(cad) = vC.Contador Then
+        For NumRegElim = 0 To cboAlb.ListCount - 1
+            Cad = Mid(cboAlb.List(NumRegElim), 1, InStr(1, cboAlb.List(NumRegElim), "-") - 1)
+            If Val(Cad) = vC.Contador Then
                 
-                Combo3.ListIndex = NumRegElim
+                cboAlb.ListIndex = NumRegElim
             End If
             
         Next

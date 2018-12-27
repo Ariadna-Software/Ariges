@@ -208,7 +208,8 @@ Case "F"
             End If
     End If
     
-Case "T"
+Case "T", "T1"
+    'Noviembre 2018  T1:  Campos texto pero que no hay que meter en la busqueda de *
     '---------------- TEXTO ------------------
     i = CararacteresCorrectos(CADENA, "T")
     If i = 1 Then Exit Function
@@ -231,6 +232,11 @@ Case "T"
             DevSQL = "NOT (" & campo & " LIKE """ & CADENA & """)"
         End If
     Else
+        'NOVIEMBRE 2018
+        'Si ha puesto algo, Y nO es el *, lo añado yo
+        If CADENA <> "" Then
+            If Tipo = "T" Then If InStr(1, CADENA, "*") = 0 Then CADENA = "*" & CADENA & "*"
+        End If
         If Left(campo, 1) <> "{" Then
         'NO es para report
             DevSQL = campo & " LIKE '"
@@ -446,7 +452,7 @@ Public Function ContieneCaracterBusqueda(CADENA As String) As Boolean
 'Comprueba si la cadena contiene algun caracter especial de busqueda
 ' >,>,>=,: , ....
 'si encuentra algun caracter de busqueda devuelve TRUE y sale
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Integer
 Dim CH As String
 
@@ -460,20 +466,20 @@ Dim CH As String
 
     'For i = 1 To Len(cadena)
     i = 1
-    b = False
+    B = False
     Do
         CH = Mid(CADENA, i, 1)
         Select Case CH
             Case "<", ">", ":", "="
-                b = True
+                B = True
             Case "*", "%", "?", "_", "\", ":" ', "."
-                b = True
+                B = True
             Case Else
-                b = False
+                B = False
         End Select
     'Next i
         i = i + 1
-    Loop Until (b = True) Or (i > Len(CADENA))
-    ContieneCaracterBusqueda = b
+    Loop Until (B = True) Or (i > Len(CADENA))
+    ContieneCaracterBusqueda = B
 End Function
 

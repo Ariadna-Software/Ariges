@@ -179,33 +179,33 @@ Begin VB.Form frmFacClientes
       TabCaption(7)   =   "ops aseg"
       TabPicture(7)   =   "frmFacClientes.frx":00D0
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "Label1(66)"
-      Tab(7).Control(1)=   "Label1(45)"
-      Tab(7).Control(2)=   "Label1(79)"
-      Tab(7).Control(3)=   "imgFecha(2)"
-      Tab(7).Control(4)=   "Label1(80)"
-      Tab(7).Control(5)=   "Label1(81)"
-      Tab(7).Control(6)=   "Label1(82)"
-      Tab(7).Control(7)=   "Label1(83)"
-      Tab(7).Control(8)=   "Label1(92)"
-      Tab(7).Control(9)=   "imgFecha(5)"
-      Tab(7).Control(10)=   "Label1(94)"
-      Tab(7).Control(11)=   "imgFecha(4)"
-      Tab(7).Control(12)=   "Label1(117)"
+      Tab(7).Control(0)=   "Text1(63)"
+      Tab(7).Control(1)=   "cboTipoASeg"
+      Tab(7).Control(2)=   "Text1(55)"
+      Tab(7).Control(3)=   "Text1(53)"
+      Tab(7).Control(4)=   "cmdActRiesgo"
+      Tab(7).Control(5)=   "txtSit"
+      Tab(7).Control(6)=   "Text1(51)"
+      Tab(7).Control(7)=   "Text1(50)"
+      Tab(7).Control(8)=   "Text1(49)"
+      Tab(7).Control(9)=   "Text1(48)"
+      Tab(7).Control(10)=   "Text1(41)"
+      Tab(7).Control(11)=   "Text1(47)"
+      Tab(7).Control(12)=   "Text1(43)"
       Tab(7).Control(13)=   "Label1(118)"
-      Tab(7).Control(14)=   "Text1(43)"
-      Tab(7).Control(15)=   "Text1(47)"
-      Tab(7).Control(16)=   "Text1(41)"
-      Tab(7).Control(17)=   "Text1(48)"
-      Tab(7).Control(18)=   "Text1(49)"
-      Tab(7).Control(19)=   "Text1(50)"
-      Tab(7).Control(20)=   "Text1(51)"
-      Tab(7).Control(21)=   "txtSit"
-      Tab(7).Control(22)=   "cmdActRiesgo"
-      Tab(7).Control(23)=   "Text1(53)"
-      Tab(7).Control(24)=   "Text1(55)"
-      Tab(7).Control(25)=   "cboTipoASeg"
-      Tab(7).Control(26)=   "Text1(63)"
+      Tab(7).Control(14)=   "Label1(117)"
+      Tab(7).Control(15)=   "imgFecha(4)"
+      Tab(7).Control(16)=   "Label1(94)"
+      Tab(7).Control(17)=   "imgFecha(5)"
+      Tab(7).Control(18)=   "Label1(92)"
+      Tab(7).Control(19)=   "Label1(83)"
+      Tab(7).Control(20)=   "Label1(82)"
+      Tab(7).Control(21)=   "Label1(81)"
+      Tab(7).Control(22)=   "Label1(80)"
+      Tab(7).Control(23)=   "imgFecha(2)"
+      Tab(7).Control(24)=   "Label1(79)"
+      Tab(7).Control(25)=   "Label1(45)"
+      Tab(7).Control(26)=   "Label1(66)"
       Tab(7).ControlCount=   27
       TabCaption(8)   =   "Renting"
       TabPicture(8)   =   "frmFacClientes.frx":00EC
@@ -333,7 +333,7 @@ Begin VB.Form frmFacClientes
          Height          =   315
          IMEMode         =   3  'DISABLE
          Index           =   45
-         Left            =   4080
+         Left            =   3960
          MaxLength       =   20
          PasswordChar    =   "*"
          TabIndex        =   5
@@ -6832,7 +6832,7 @@ Dim ImpAlb As Currency, ImpTesor As Currency
 Dim miSQL As String
 
 
-    RiesgoCliente CLng(Text1(0).Text), Me.cboTipoIVA.ItemData(cboTipoIVA.ListIndex), Now, ImpTesor, ImpAlb, miRsAux
+    RiesgoCliente CLng(Text1(0).Text), Me.cboTipoIVA.ItemData(cboTipoIVA.ListIndex), Now, ImpTesor, ImpAlb, miRsAux, 60
     ImpTesor = ImpTesor + ImpAlb
     miSQL = "UPDATE sclien SET UtFecrecal = " & DBSet(Now, "F")
     miSQL = miSQL & ", riesgoact = " & DBSet(ImpTesor, "N")
@@ -7484,7 +7484,7 @@ Dim aModo As Byte
             'SituarCombo Me.cboFitos, DBLet(data7.Recordset!Tipo, "N")
         End If
             
-        cboFitos(1).ListIndex = Abs(UCase(DBLet(data7.Recordset!PROV, "T")) = "SI")
+        cboFitos(1).ListIndex = Abs(UCase(DBLet(data7.Recordset!Prov, "T")) = "SI")
         
         PonerFoco Me.txtauxFito(1)
         
@@ -12096,6 +12096,13 @@ Dim GroupBy As String
 Dim Kopc As Byte
 Dim MeteIT As Boolean
 Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
+Dim ImporteMostrar As Currency   'Para los cobros
+Dim TipRiesgo As Byte  '0. NO       1. Remesado   2. Documento recibido
+Dim F As Date
+Dim N As Integer
+
+
+
     On Error GoTo ECargaDatosLW
     
     If Modo <> 2 Then Exit Sub
@@ -12146,17 +12153,23 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
         If vParamAplic.ContabilidadNueva Then
             cad = "SELECT fecvenci,concat(numserie,right(concat(""00000000"",numfactu),7)),fecfactu,nomforpa,"
             cad = cad & "impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)  tot"
+            cad = cad & " ,talondias,pagaredias,remesadiasmenor,tiporem,ctabanc1,impvenci,gastos,impcobro,codrem,recedocu "
             cad = cad & " FROM  cobros scobro INNER JOIN formapago sforpa ON scobro.codforpa=sforpa.codforpa "
+            cad = cad & " LEFT JOIN bancos on ctabanc1=bancos.codmacta"
             
             
         Else
             cad = "SELECT fecvenci,concat(numserie,right(concat(""00000000"",codfaccl),7)),fecfaccl,nomforpa,"
             cad = cad & "impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)  tot"
+            
+            'Para que no de error
+            cad = cad & " 0 talondias, 0  pagaredias,0 remesadiasmenor,tiporem,ctabanc1"
             cad = cad & " FROM  scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
             
         End If
         cad = cad & " WHERE scobro.codmacta = '" & Text1(35).Text & "' "
-        cad = cad & " and recedocu=0 "
+        
+        If Not vParamAplic.ContabilidadNueva Then cad = cad & " and recedocu=0 "
 
         'PARA TEINSA
         If vParamAplic.NumeroInstalacion = 3 Then cad = cad & " AND (sforpa.tipforpa between 0 and 3) "
@@ -12221,11 +12234,51 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
         If Kopc <> 3 Then
             MeteIT = True
         Else
-            If Rs!Tot <> 0 Then
-                MeteIT = True
+            MeteIT = False
+            TipRiesgo = 0
+            If vParamAplic.ContabilidadNueva Then
+                'Veremos riesgo
+                        
+                If DBLet(Rs!codrem, "N") > 0 Then
+                    'Esta remesado
+                    N = 0
+                    If Rs!tiporem = 1 Then
+                        N = DBLet(Rs!remesadiasmenor, "N")
+                    Else
+                        If Rs!tiporem = 2 Then
+                            N = DBLet(Rs!pagaredias, "N")
+                        Else
+                            N = DBLet(Rs!talondias, "N")
+                        End If
+                    End If
+
+                    If N > 0 Then
+                        F = DateAdd("d", N, Rs!FecVenci)
+                        If F > Now Then
+                            ImporteMostrar = Rs!ImpVenci + DBLet(Rs!gastos, "N")
+                            MeteIT = True
+                            TipRiesgo = 1
+                        End If
+                    
+                    End If
+            
+                Else
+                    'Sin remesar
+                    If Rs!recedocu = 1 Then
+                        TipRiesgo = 2
+                        MeteIT = True
+                        ImporteMostrar = Rs!ImpVenci + DBLet(Rs!gastos, "N")
+                    Else
+                        TipRiesgo = 0
+                        ImporteMostrar = DBLet(Rs!Tot)
+                        MeteIT = ImporteMostrar <> 0
+                    End If
+                End If
             Else
-                MeteIT = False
-            End If
+                'Conta antigua
+                If Rs!Tot <> 0 Then MeteIT = True
+            
+            End If  '  if contanueva
         End If
         
         If MeteIT Then
@@ -12243,7 +12296,13 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
                     Else
                     
                         If lwCRM.ColumnHeaders(NumRegElim).Tag <> "" Then
-                            IT.SubItems(NumRegElim - 1) = Format(Rs.Fields(NumRegElim - 1), lwCRM.ColumnHeaders(NumRegElim).Tag)
+                            If NumRegElim = 5 And Kopc = 3 Then
+                                'Vencimiento pendiente, riesgo
+                                IT.SubItems(NumRegElim - 1) = Format(ImporteMostrar, lwCRM.ColumnHeaders(NumRegElim).Tag)
+                                
+                            Else
+                                IT.SubItems(NumRegElim - 1) = Format(Rs.Fields(NumRegElim - 1), lwCRM.ColumnHeaders(NumRegElim).Tag)
+                            End If
                         Else
                         
                             
@@ -12287,6 +12346,17 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
                 Else
                     'el resto ponemos el del toolbar
                     IT.SmallIcon = ElIcono
+                End If
+                
+                If Kopc = 3 Then
+                    'Cobros. Vemos riesgo
+                    If TipRiesgo > 0 Then
+                        IT.ForeColor = IIf(TipRiesgo = 1, vbRed, vbBlue)
+                        For NumRegElim = 1 To Me.lwCRM.ColumnHeaders.Count - 1
+                            IT.ListSubItems(NumRegElim).ForeColor = IIf(TipRiesgo = 1, vbRed, vbBlue)
+                        Next
+                        IT.ToolTipText = IIf(TipRiesgo = 1, "Riesgo", "Documento recibido")
+                    End If
                 End If
         End If
         

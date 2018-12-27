@@ -3852,7 +3852,7 @@ End Sub
 
 Private Sub cmdCRMClieAccion_Click()
 Dim AuxF As String
-Dim B As Boolean
+Dim b As Boolean
     'scrmacciones agente codtraba tipo fechora codclien
     If Me.optVarios(6).Value Then conn.Execute "DELETE from tmpcrmclien WHERE codusu = " & vUsu.codigo
     
@@ -3950,20 +3950,20 @@ Dim B As Boolean
     Me.lblIndicador(3).Caption = "Registros BD"
     Me.lblIndicador(3).Refresh
     Screen.MousePointer = vbHourglass
-    B = True
+    b = True
     If Me.optVarios(5).Value Then
-        If Not HayRegParaInforme("scrmacciones", cadSelect, True) Then B = False
+        If Not HayRegParaInforme("scrmacciones", cadSelect, True) Then b = False
         cadTitulo = "Visitados"
         cadNomRPT = "rAccionesComercVisitados.rpt"
     Else
         cadSelect = "codusu = " & vUsu.codigo
         cadFormula = "{tmpcrmclien.codusu} = " & vUsu.codigo
-        If Not HayRegParaInforme("tmpcrmclien", cadSelect, True) Then B = False
+        If Not HayRegParaInforme("tmpcrmclien", cadSelect, True) Then b = False
         cadTitulo = "No visitados"
         cadNomRPT = "rAccionesComercNOVisi.rpt"
    End If
     Me.lblIndicador(3).Caption = ""
-    If Not B Then
+    If Not b Then
         Screen.MousePointer = vbDefault
         MsgBox "No existe datos con los valores selccionados", vbExclamation
         Exit Sub
@@ -3977,7 +3977,7 @@ Dim B As Boolean
 End Sub
 
 Private Sub cmdDeclaraAlcohol_Click()
-Dim B As Boolean
+Dim b As Boolean
             
     miSQL = ""
     If Me.txtNumero(4).Text = "" Or Me.cboTrimiestre(0).ListIndex < 0 Then
@@ -3995,10 +3995,10 @@ Dim B As Boolean
     End If
         
     Screen.MousePointer = vbHourglass
-    B = GeneraDatosDeclaraAlcohol
+    b = GeneraDatosDeclaraAlcohol
     Screen.MousePointer = vbDefault
     
-    If B Then
+    If b Then
         InicializarVbles False
         
         If Me.chkVarios(4).Value = 1 Then
@@ -4180,6 +4180,19 @@ Private Sub cmdSdtofmInsert_Click()
     If txtFamia(0).Text <> "" Then miSQL = miSQL & " AND sfamiadtos.codfamia = " & txtFamia(0).Text
     conn.Execute miSQL
     
+    
+    
+    'Pequeña comprobacion
+    miSQL = "CodUsu = " & vUsu.codigo & " and not campo1 in (select codfamia from sfamia) AND 1"
+    miSQL = DevuelveDesdeBD(conAri, "campo1", "tmpinformes", CStr(miSQL), 1)
+    If miSQL <> "" Then
+        MsgBox "La familia " & miSQL & " NO existe", vbExclamation
+        Screen.MousePointer = vbDefault
+        Exit Sub
+    End If
+    
+    
+    
     'Si ha puesto solo los nuevos veo cuales tengo que borrar de la temporal
     If Me.chkVarios(1).Value = 1 Then
         Set miRsAux = New ADODB.Recordset
@@ -4213,6 +4226,40 @@ Private Sub cmdSdtofmInsert_Click()
             conn.Execute miSQL
         End If
     Else
+    
+        'Borrare SEGURO de actualizar los que tienen descuento especial a 1
+        Set miRsAux = New ADODB.Recordset
+        lblIndicador(0).Caption = "Comprobando descuentos especiales"
+        lblIndicador(0).Refresh
+        miSQL = "Select codfamia from sdtofm where  "
+        miSQL = miSQL & " codclien IS NULL AND codmarca is null "
+        If Me.txtActiv(1).Text <> "" Then miSQL = miSQL & " AND codactiv =" & Me.txtActiv(1).Text
+        If txtFamia(0).Text <> "" Then miSQL = miSQL & " AND codfamia = " & txtFamia(0).Text
+        miSQL = miSQL & " AND dtoesp= 1"
+        miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miSQL = ""
+        While Not miRsAux.EOF
+            lblIndicador(0).Caption = "Esp. Familia: " & miRsAux!Codfamia
+            lblIndicador(0).Refresh
+            miSQL = miSQL & ", " & miRsAux!Codfamia
+            If Len(miSQL) > 400 Then
+                miSQL = Mid(miSQL, 2)
+                miSQL = vUsu.codigo & " AND campo1 IN (" & miSQL & ")"
+                miSQL = "DELETE FROM tmpinformes WHERE codusu = " & miSQL
+                conn.Execute miSQL
+                miSQL = ""
+            End If
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+        If miSQL <> "" Then
+            miSQL = Mid(miSQL, 2)
+            miSQL = vUsu.codigo & " AND campo1 IN (" & miSQL & ")"
+            miSQL = "DELETE FROM tmpinformes WHERE codusu = " & miSQL
+            conn.Execute miSQL
+        End If
+    
+    
         'QUIERE METERLOS TODOS
         'Borro de sdtofm con codactiv  e inserto desde tmpinformes
         lblIndicador(0).Caption = "Eliminando registros anteriores"
@@ -4221,6 +4268,7 @@ Private Sub cmdSdtofmInsert_Click()
         If Me.txtActiv(1).Text <> "" Then miSQL = miSQL & " AND codactiv =" & txtActiv(1).Text
 
         If txtFamia(0).Text <> "" Then miSQL = miSQL & " AND codfamia = " & txtFamia(0).Text
+        miSQL = miSQL & " AND dtoesp = 0"
         conn.Execute miSQL
     End If
     
@@ -6337,7 +6385,7 @@ Dim EnAlbaranes As Boolean
             lw(4).ListItems(NumRegElim).SubItems(9) = miSQL
             
             'codtipom numfactu fecfactu codtipoa numalbar numlinea
-            miSQL = "codtipoa = " & DBSet(miRsAux!codtipoa, "T") & " AND numalbar = " & miRsAux!NUmAlbar & " AND numlinea =" & miRsAux!numlinea
+            miSQL = "codtipoa = " & DBSet(miRsAux!codtipoa, "T") & " AND numalbar = " & miRsAux!NumAlbar & " AND numlinea =" & miRsAux!numlinea
             lw(4).ListItems(NumRegElim).Tag = miSQL
             
             'Si es negativo:
@@ -6381,7 +6429,7 @@ Dim EnAlbaranes As Boolean
         While Not miRsAux.EOF
             lw(4).ListItems.Add , , miRsAux!codtipom
             NumRegElim = NumRegElim + 1
-            lw(4).ListItems(NumRegElim).SubItems(1) = Format(miRsAux!NUmAlbar, "00000")
+            lw(4).ListItems(NumRegElim).SubItems(1) = Format(miRsAux!NumAlbar, "00000")
             lw(4).ListItems(NumRegElim).SubItems(2) = Format(miRsAux!FechaAlb, "dd/mm/yyyy")
             
             lw(4).ListItems(NumRegElim).SubItems(3) = Format(miRsAux!precioar, FormatoPrecio)
@@ -6405,7 +6453,7 @@ Dim EnAlbaranes As Boolean
             lw(4).ListItems(NumRegElim).SubItems(9) = miSQL
             
             'codtipom numfactu fecfactu codtipoa numalbar numlinea
-            miSQL = "codtipom = " & DBSet(miRsAux!codtipom, "T") & " AND numalbar = " & miRsAux!NUmAlbar & " AND numlinea =" & miRsAux!numlinea
+            miSQL = "codtipom = " & DBSet(miRsAux!codtipom, "T") & " AND numalbar = " & miRsAux!NumAlbar & " AND numlinea =" & miRsAux!numlinea
             lw(4).ListItems(NumRegElim).Tag = miSQL
             
             'Si es negativo:
@@ -6812,7 +6860,7 @@ Private Sub CargaDatosReimpresion()
         lwSigno.ListItems(numParam).SmallIcon = 7
     
     
-        CadenaDesdeOtroForm = ""
+        
     Wend
     
 End Sub

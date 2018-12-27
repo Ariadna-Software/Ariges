@@ -11,8 +11,8 @@ Begin VB.Form frmGesSocAsociados
    ClientWidth     =   11955
    Icon            =   "frmGesSocAsociados.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   12630
-   ScaleWidth      =   21360
+   ScaleHeight     =   9855
+   ScaleWidth      =   11955
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame2 
       Height          =   615
@@ -157,8 +157,8 @@ Begin VB.Form frmGesSocAsociados
       Left            =   0
       TabIndex        =   37
       Top             =   0
-      Width           =   21360
-      _ExtentX        =   37677
+      Width           =   11955
+      _ExtentX        =   21087
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -1793,7 +1793,7 @@ Private Sub cmdCancelar_Click()
                     DataGrid2.Enabled = True
                     If ModificaLineas = 1 Then 'INSERTAR
                         DataGrid2.AllowAddNew = False
-                        If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
+                        If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
                     End If
             End Select
             PonerBotonCabecera True
@@ -1854,7 +1854,7 @@ Private Sub BotonAnyadirLinea()
                 End If
         Case 22 'Habilidades
         
-                AnyadirLinea DataGrid2, Data3
+                AnyadirLinea DataGrid2, data3
                 CargaTxtAux2 True, True
                 PonerFoco txtAux2
      
@@ -2031,8 +2031,8 @@ On Error GoTo EEliminarLinea
             If Data2.Recordset.EOF Then Exit Sub
             numlinea = Data2.Recordset!numlinea
         Case 2 'Habilidades
-            If Data3.Recordset.EOF Then Exit Sub
-            numlinea = Data3.Recordset!numlinea
+            If data3.Recordset.EOF Then Exit Sub
+            numlinea = data3.Recordset!numlinea
 '        Case 3 'Experiencia Laboral
 '            If Data4.Recordset.EOF Then Exit Sub
 '            numlinea = Data4.Recordset!numlinea
@@ -2116,9 +2116,9 @@ Dim Lim As Boolean
     On Error GoTo EM
     Me.txtHco(0).Text = "": Me.txtHco(1).Text = ""
     Lim = True
-    If Not Data3.Recordset.EOF Then
-            Me.txtHco(0).Text = DBLet(Data3.Recordset!Situacion, "T")
-            Me.txtHco(1).Text = Data3.Recordset!Observaciones
+    If Not data3.Recordset.EOF Then
+            Me.txtHco(0).Text = DBLet(data3.Recordset!Situacion, "T")
+            Me.txtHco(1).Text = data3.Recordset!Observaciones
             Lim = False
     End If
     
@@ -2688,7 +2688,7 @@ On Error GoTo EPonerLineas
     BuscaChekc = "select IdAsoc,FechaCambio,usuario,tipoCambio,FechaCampo ,situacion,observaciones "
     BuscaChekc = BuscaChekc & " from asociados_hcocambios where IdAsoc= " & Data1.Recordset!IdAsoc
     BuscaChekc = BuscaChekc & " order by FechaCambio desc"
-    CargaGrid1 DataGrid2, Data3, BuscaChekc
+    CargaGrid1 DataGrid2, data3, BuscaChekc
 
     
     
@@ -3586,7 +3586,7 @@ On Error Resume Next
     
       
     BuscaChekc = "select IdAsoc,FechaCambio,usuario,tipoCambio,FechaCampo,situacion,observaciones from asociados_hcocambios where IdAsoc= -1"
-    CargaGrid1 DataGrid2, Data3, BuscaChekc
+    CargaGrid1 DataGrid2, data3, BuscaChekc
     BuscaChekc = ""
     
     PrimeraVez = False
@@ -3674,7 +3674,7 @@ Private Sub CargaCombos()
     miRsAux.Open CadenaConsulta, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Combo1(1).AddItem miRsAux!nombriva
-        Combo1(1).ItemData(Combo1(1).NewIndex) = miRsAux!codigiva
+        Combo1(1).ItemData(Combo1(1).NewIndex) = miRsAux!Codigiva
         miRsAux.MoveNext
     Wend
     miRsAux.Close

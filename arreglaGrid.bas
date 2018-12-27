@@ -1,7 +1,9 @@
 Attribute VB_Name = "arreglaGrid"
 Option Explicit
 
-Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As Form)
+' vHeight :  Si no trae nada, pondra un cero. Con lo cual, dejare el valor por defecto que tenia(290)
+' Si fuerzo, pondra ese
+Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As Form, Optional vHeight As Integer)
     'Dim tots As String
     Dim camp As String
     Dim Mens As String
@@ -21,7 +23,8 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
     Dim TotalAncho As Integer
     
     grid.AllowRowSizing = False
-    grid.RowHeight = 290
+    If vHeight = 0 Then vHeight = 290
+    grid.RowHeight = vHeight
     
     '***********
     difer = 563 'dirència recomanda entre l'ample del Datagrid i la suma dels amples de les columnes

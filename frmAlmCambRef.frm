@@ -489,31 +489,31 @@ Dim PulsadoMas2 As Boolean
 Dim J As Integer
 
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 
 
     Modo = vModo
-    b = (Modo = 2)
+    B = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
          
     For J = 0 To txtAux.Count - 1
-        txtAux(J).visible = Not b
+        txtAux(J).visible = Not B
         If J = 1 Or J = 3 Or J = 4 Then
-            cmdArticulo(J).visible = Not b
-            txtAux2(J).visible = Not b
+            cmdArticulo(J).visible = Not B
+            txtAux2(J).visible = Not B
         End If
     Next
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
 
 
 
     'Si estamos insertando o busqueda
-    b = Modo <> 3 And Modo <> 1
-    BloquearTxt txtAux(0), b
-    BloquearTxt txtAux(1), b
+    B = Modo <> 3 And Modo <> 1
+    BloquearTxt txtAux(0), B
+    BloquearTxt txtAux(1), B
     
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
@@ -530,28 +530,28 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
 
     'Insertar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(10).Enabled = b
+    Toolbar1.Buttons(10).Enabled = B
 End Sub
 
 
@@ -699,7 +699,7 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim i As Integer
-Dim cadB As String
+Dim CadB As String
 
     On Error Resume Next
 
@@ -728,10 +728,10 @@ Dim cadB As String
             End If
             
         Case 1  'HacerBusqueda
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid cadB
+                CargaGrid CadB
                 PonerFocoGrid Me.DataGrid1
             End If
     End Select
@@ -912,7 +912,7 @@ End Sub
 
 Private Sub CargaGrid(Optional SQL As String)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
     
     
 
@@ -937,7 +937,7 @@ Dim b As Boolean
 
 
     
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     If SQL <> "" Then
         SQL = CadenaConsulta & " WHERE " & SQL
     Else
@@ -1043,7 +1043,7 @@ Dim b As Boolean
         mnModificar.Enabled = Not adodc1.Recordset.EOF
         mnEliminar.Enabled = Not adodc1.Recordset.EOF
    End If
-   DataGrid1.Enabled = b
+   DataGrid1.Enabled = B
    DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
@@ -1056,11 +1056,11 @@ Dim b As Boolean
    PonerOpcionesMenu
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If (Index = 1 Or Index = 3 Or Index = 4) And KeyCode = vbKeyAdd Then
         If Modo <> 2 Then
             PulsadoMas2 = True
@@ -1072,7 +1072,7 @@ Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     End If
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -1142,21 +1142,21 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
     
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
 
     'El articulo NO puede ser de varios
-    b = False
+    B = False
     CadenaConsulta = DevuelveDesdeBD(conAri, "artvario", "sartic", "codartic", Me.txtAux(1).Text, "T")
     If CadenaConsulta = "" Then
         MsgBox "No existe el articulo", vbExclamation
     ElseIf CadenaConsulta = "1" Then
         MsgBox "El articulo NO puede ser de varios", vbExclamation
     Else
-        b = True
+        B = True
     End If
     
     
@@ -1164,7 +1164,7 @@ Dim b As Boolean
     
     
     
-    If b Then
+    If B Then
         'El articulo destino NO puede estar ya en la tabla
         If Modo = 3 Then
             CadenaConsulta = ""
@@ -1175,10 +1175,10 @@ Dim b As Boolean
         CadenaConsulta = DevuelveDesdeBD(conAri, "numlinea", "sarticcambioref", CadenaConsulta, Me.txtAux(2).Text, "T")
         If CadenaConsulta <> "" Then
             MsgBox "Ya existe la nueva referencia. Linea: " & CadenaConsulta, vbExclamation
-            b = False
+            B = False
         End If
     End If
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1212,7 +1212,7 @@ End Sub
 
 Private Sub ActualizarReferencias()
 Dim H As Integer
-Dim tabla As String
+Dim Tabla As String
 Dim Cole As Collection
 Dim K As Integer
 Dim J As Integer
@@ -1234,37 +1234,37 @@ Dim CambiosOk As Boolean
     miRsAux.Close
     If CadenaConsulta <> "" Then CadenaConsulta = "A) Ya existen los artículos" & vbCrLf & CadenaConsulta
     
-    tabla = "select * from sarticcambioref where not codartic in (select codartic from sartic)"
-    miRsAux.Open tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    tabla = ""
+    Tabla = "select * from sarticcambioref where not codartic in (select codartic from sartic)"
+    miRsAux.Open Tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Tabla = ""
     While Not miRsAux.EOF
-        tabla = tabla & vbCrLf & "  -" & miRsAux!codArtic
+        Tabla = Tabla & vbCrLf & "  -" & miRsAux!codArtic
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    If tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "B) No  existen los artículos" & vbCrLf & tabla
+    If Tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "B) No  existen los artículos" & vbCrLf & Tabla
 
     
     'PROVEEDORES Y FAMILIAS
-    tabla = "select * from sarticcambioref where not codprove in (select codprove from sprove)"
-    miRsAux.Open tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    tabla = ""
+    Tabla = "select * from sarticcambioref where not codprove in (select codprove from sprove)"
+    miRsAux.Open Tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Tabla = ""
     While Not miRsAux.EOF
-        tabla = tabla & vbCrLf & "  -" & miRsAux!codArtic
+        Tabla = Tabla & vbCrLf & "  -" & miRsAux!codArtic
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    If tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "C) No  existe el proceedor para los artículos" & vbCrLf & tabla
+    If Tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "C) No  existe el proceedor para los artículos" & vbCrLf & Tabla
 
-    tabla = "select * from sarticcambioref where not codfamia in (select codfamia from sfamia)"
-    miRsAux.Open tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    tabla = ""
+    Tabla = "select * from sarticcambioref where not codfamia in (select codfamia from sfamia)"
+    miRsAux.Open Tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Tabla = ""
     While Not miRsAux.EOF
-        tabla = tabla & vbCrLf & "  -" & miRsAux!codArtic
+        Tabla = Tabla & vbCrLf & "  -" & miRsAux!codArtic
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    If tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "D) No  existe la familia para los artículos" & vbCrLf & tabla
+    If Tabla <> "" Then CadenaConsulta = CadenaConsulta & vbCrLf & "D) No  existe la familia para los artículos" & vbCrLf & Tabla
 
 
     'Vemos si hay articulos con cambio de precios
@@ -1377,6 +1377,7 @@ Dim CambiosOk As Boolean
     Cole.Add "sarti3#codartic|"
     Cole.Add "sarti5#codartic|"
     Cole.Add "sarti6#codartic|codarti1|"
+    Cole.Add "sarti7#codartic|"
     Cole.Add "sbonif#codartic|codarti1|"
     Cole.Add "scarep#codartic|"
     Cole.Add "schrep#codartic|"
@@ -1473,7 +1474,7 @@ Dim CambiosOk As Boolean
                 
                 Me.lblIndicador.Caption = miRsAux!codArtic & " " & K & "/" & Cole.Count
                 Me.lblIndicador.Refresh
-                tabla = Mid(Cole.item(K), 1, J - 1)
+                Tabla = Mid(Cole.item(K), 1, J - 1)
                 
                 DoEvents
                 Screen.MousePointer = vbHourglass
@@ -1488,7 +1489,8 @@ Dim CambiosOk As Boolean
                         CadenaConsulta = Mid(Aux, 1, J - 1)
                         Aux = Mid(Aux, J + 1)
                         
-                        CadenaConsulta = "UPDATE " & tabla & " SET " & CadenaConsulta & " = " & DBSet(miRsAux!codarti1, "T") & " WHERE " & CadenaConsulta & " = " & DBSet(miRsAux!codArtic, "T")
+                        CadenaConsulta = "UPDATE " & Tabla & " SET " & CadenaConsulta & " = " & DBSet(miRsAux!codarti1, "T") & " WHERE " & CadenaConsulta & " = " & DBSet(miRsAux!codArtic, "T")
+                        'Debug.Print CadenaConsulta
                         conn.Execute CadenaConsulta
                     End If
                         
@@ -1555,7 +1557,7 @@ End Function
 
 
 
-Private Function TablasParametros(ByVal Campos As String, tabla As String, ByRef ColArticulos As Collection) As String
+Private Function TablasParametros(ByVal Campos As String, Tabla As String, ByRef ColArticulos As Collection) As String
 Dim Aux As String
 Dim i As Byte
 Dim K As Integer
@@ -1563,7 +1565,7 @@ Dim K As Integer
     On Error GoTo eTablasParametros
     
     TablasParametros = ""
-    Aux = "Select " & Campos & " FROM " & tabla
+    Aux = "Select " & Campos & " FROM " & Tabla
     miRsAux.Open Aux, conn, adOpenKeyset, adLockPessimistic, adCmdText
     
     If Not miRsAux.EOF Then
@@ -1579,7 +1581,7 @@ Dim K As Integer
     miRsAux.Close
     
     
-    If TablasParametros <> "" Then TablasParametros = vbCrLf & tabla & " " & TablasParametros
+    If TablasParametros <> "" Then TablasParametros = vbCrLf & Tabla & " " & TablasParametros
     
 eTablasParametros:
     If Err.Number <> 0 Then

@@ -544,30 +544,30 @@ Begin VB.Form frmComEntPedidosSa
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmComEntPedidosSa.frx":02B7
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text2(4)"
-      Tab(1).Control(1)=   "Text1(31)"
-      Tab(1).Control(2)=   "Text1(30)"
-      Tab(1).Control(3)=   "Text1(29)"
-      Tab(1).Control(4)=   "Text1(28)"
-      Tab(1).Control(5)=   "Text2(27)"
-      Tab(1).Control(6)=   "Text1(27)"
-      Tab(1).Control(7)=   "FrameHco"
-      Tab(1).Control(8)=   "FrameDirFactura"
-      Tab(1).Control(9)=   "FrameDirMercancia"
-      Tab(1).Control(10)=   "Text1(21)"
-      Tab(1).Control(11)=   "Text1(20)"
-      Tab(1).Control(12)=   "Text1(19)"
-      Tab(1).Control(13)=   "Text1(18)"
-      Tab(1).Control(14)=   "Text1(17)"
-      Tab(1).Control(15)=   "imgBuscar(12)"
-      Tab(1).Control(16)=   "Label1(49)"
-      Tab(1).Control(17)=   "Label1(48)"
-      Tab(1).Control(18)=   "Label1(47)"
-      Tab(1).Control(19)=   "imgFecha(1)"
-      Tab(1).Control(20)=   "Label1(44)"
-      Tab(1).Control(21)=   "imgBuscar(11)"
-      Tab(1).Control(22)=   "Label1(28)"
-      Tab(1).Control(23)=   "Label1(45)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(28)"
+      Tab(1).Control(2)=   "imgBuscar(11)"
+      Tab(1).Control(3)=   "Label1(44)"
+      Tab(1).Control(4)=   "imgFecha(1)"
+      Tab(1).Control(5)=   "Label1(47)"
+      Tab(1).Control(6)=   "Label1(48)"
+      Tab(1).Control(7)=   "Label1(49)"
+      Tab(1).Control(8)=   "imgBuscar(12)"
+      Tab(1).Control(9)=   "Text1(17)"
+      Tab(1).Control(10)=   "Text1(18)"
+      Tab(1).Control(11)=   "Text1(19)"
+      Tab(1).Control(12)=   "Text1(20)"
+      Tab(1).Control(13)=   "Text1(21)"
+      Tab(1).Control(14)=   "FrameDirMercancia"
+      Tab(1).Control(15)=   "FrameDirFactura"
+      Tab(1).Control(16)=   "FrameHco"
+      Tab(1).Control(17)=   "Text1(27)"
+      Tab(1).Control(18)=   "Text2(27)"
+      Tab(1).Control(19)=   "Text1(28)"
+      Tab(1).Control(20)=   "Text1(29)"
+      Tab(1).Control(21)=   "Text1(30)"
+      Tab(1).Control(22)=   "Text1(31)"
+      Tab(1).Control(23)=   "Text2(4)"
       Tab(1).ControlCount=   24
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmComEntPedidosSa.frx":02D3
@@ -4570,12 +4570,12 @@ End Sub
 
 
 Private Sub PonerOpcionesMenu()
-Dim J As Byte
+Dim j As Byte
 
     PonerOpcionesMenuGeneral Me
        
-    J = Val(Me.mnGenAlbaran.HelpContextID)
-    If J < vUsu.Nivel Then Me.mnGenAlbaran.Enabled = False
+    j = Val(Me.mnGenAlbaran.HelpContextID)
+    If j < vUsu.Nivel Then Me.mnGenAlbaran.Enabled = False
 End Sub
 
 
@@ -4592,7 +4592,7 @@ Private Function InsertarLinea() As Boolean
 Dim SQL As String
 Dim numlinea As String, vWhere As String
 Dim cantidad As Currency
-Dim J As Integer
+Dim j As Integer
 Dim TipoDto  As Byte
 
 On Error GoTo EInsertarLinea
@@ -4661,8 +4661,8 @@ On Error GoTo EInsertarLinea
             SQL = ""
             While Not miRsAux.EOF
                 'Limpiamos todo menos el almacen y el CC si lo tuviera
-                For J = 1 To 7
-                    txtAux(J).Text = ""
+                For j = 1 To 7
+                    txtAux(j).Text = ""
                 Next
             
                 txtAux(1).Text = miRsAux!codarti1
@@ -5178,6 +5178,7 @@ End Sub
 
 Private Sub txtAux_GotFocus(Index As Integer)
 Dim cadkey As Integer
+    If Modo <> 5 Then Exit Sub
     txtAnterior = txtAux(Index).Text
     cadkey = ObtenerCadKey(kCampo, Index)
     kCampo = Index
@@ -6022,7 +6023,7 @@ On Error GoTo EInsertarLinAlb
                 
                 'Agosto 2015
                 If vParamAplic.NumeroInstalacion = 4 Then
-                    SQL2 = SQL2 & DBSet(Rs!codtipomV, "T", "S") & "," & DBSet(Rs!numalbarV, "T", "S") & "," & DBSet(Rs!fechaalbV, "F", "S")
+                    SQL2 = SQL2 & DBSet(Rs!codtipomv, "T", "S") & "," & DBSet(Rs!numalbarV, "T", "S") & "," & DBSet(Rs!fechaalbV, "F", "S")
                 Else
                     SQL2 = SQL2 & "NULL,NULL,NULL"
                 End If
@@ -6046,7 +6047,7 @@ On Error GoTo EInsertarLinAlb
                     SQL2 = SQL2 & DBSet(Rs!codClien, "N", "S") & "," & DBSet(Rs!CodDirec, "N", "S") & "," & DBSet(Rs!actuacion, "T", "S") & ","
                     'Agosto 2015
                     If vParamAplic.NumeroInstalacion = 4 Then
-                        SQL2 = SQL2 & DBSet(Rs!codtipomV, "T", "S") & "," & DBSet(Rs!numalbarV, "T", "S") & "," & DBSet(Rs!fechaalbV, "F", "S")
+                        SQL2 = SQL2 & DBSet(Rs!codtipomv, "T", "S") & "," & DBSet(Rs!numalbarV, "T", "S") & "," & DBSet(Rs!fechaalbV, "F", "S")
                     Else
                         SQL2 = SQL2 & "NULL,NULL,NULL"
                     End If

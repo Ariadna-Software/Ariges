@@ -101,6 +101,22 @@ Public Const SerieFraPro = "1"
 Public ResultadoFechaContaOK As Byte
 Public MensajeFechaOkConta As String
 
+
+Public Const vbLightBlue = &HFEEFDA
+Public Const vbErrorColor = &HDFE1FF      '&HFFFFC0
+Public Const vbMoreLightBlue = &HFEFBD8   ' azul clarito
+
+'++
+Public Const vbOpcionVer = 0
+Public Const vbOpcionCrearEliminar = 1
+Public Const vbOpcionModificar = 2
+Public Const vbOpcionImprimir = 3
+Public Const vbOpcionEspecial = 4
+
+
+
+
+
 'Inicio Aplicación
 Public Sub Main()
 Dim T1 As Single
@@ -989,7 +1005,7 @@ Public Function DevuelveDesdeBD(vBD As Byte, kCampo As String, Ktabla As String,
     Case "N"
         'No hacemos nada
         cad = cad & ValorCodigo
-    Case "T", "F"
+    Case "T", "F", "T1"
         cad = cad & "'" & ValorCodigo & "'"
     Case Else
         MsgBox "Tipo : " & Tipo & " no definido", vbExclamation
@@ -1040,7 +1056,7 @@ On Error GoTo EDevuelveDesdeBDnew
         Case "N"
             'No hacemos nada
             cad = cad & Val(valorCodigo1)
-        Case "T"
+        Case "T", "T1"
             cad = cad & DBSet(valorCodigo1, "T")
         Case "F"
             cad = cad & "'" & valorCodigo1 & "'"
@@ -1061,7 +1077,7 @@ On Error GoTo EDevuelveDesdeBDnew
             Else
                 cad = cad & Val(ValorCodigo2)
             End If
-        Case "T"
+        Case "T", "T1"
 '            cad = cad & "'" & ValorCodigo2 & "'"
             cad = cad & DBSet(ValorCodigo2, "T")
         Case "F"
@@ -1083,7 +1099,7 @@ On Error GoTo EDevuelveDesdeBDnew
             Else
                 cad = cad & Val(ValorCodigo3)
             End If
-        Case "T"
+        Case "T", "T1"
             cad = cad & "'" & ValorCodigo3 & "'"
         Case "F"
             cad = cad & "'" & Format(ValorCodigo3, FormatoFecha) & "'"
@@ -1395,7 +1411,7 @@ End Function
 
 'Lo que hace es comprobar que si la resolucion es mayor
 'que 800x600 lo pone en el 400
-Public Sub AjustarPantalla(ByRef formulario As Form)
+Public Sub AjustarPantalla(ByRef Formulario As Form)
 '    If Screen.Width > 13000 Then
 '        formulario.Top = 400
 '        formulario.Left = 400
@@ -1570,19 +1586,19 @@ Dim i As Integer
 Dim C As Integer
 Dim L As Integer
 Dim cad As String
-Dim b As Boolean
+Dim B As Boolean
     
     EsNumerico = False
-    b = True
+    B = True
     cad = ""
     If Not IsNumeric(texto) Then
         cad = "El campo debe ser numérico"
-        b = False
+        B = False
         '======= Añade Laura
         'formato: (.25)
         i = InStr(1, texto, ".")
         If i = 1 Then
-            If IsNumeric(Mid(texto, 2, Len(texto))) Then b = True
+            If IsNumeric(Mid(texto, 2, Len(texto))) Then B = True
         End If
         '======================
     Else
@@ -1598,7 +1614,7 @@ Dim b As Boolean
         Loop Until i = 0
         If C > 1 Then
             cad = "Numero de puntos incorrecto"
-            b = False
+            B = False
         End If
         
         'Si ha puesto mas de una coma y no tiene puntos
@@ -1613,14 +1629,14 @@ Dim b As Boolean
             Loop Until i = 0
             If C > 1 Then
                 cad = "Numero incorrecto"
-                b = False
+                B = False
             End If
         End If
     End If
-    If Not b Then
+    If Not B Then
         MsgBox cad, vbExclamation
     Else
-        EsNumerico = b
+        EsNumerico = B
     End If
 End Function
 
@@ -2453,7 +2469,7 @@ Dim RN As ADODB.Recordset
     miSQL = "Select codclien,tipoiva,if(limcredi is null,0,limcredi) limcredi,codsitua from sclien where codclien =" & codClien
     RN.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    RiesgoCliente codClien, CByte(RN!TipoIVA), Now, ImpTesor, ImpAlb, Nothing
+    RiesgoCliente codClien, CByte(RN!TipoIVA), Now, ImpTesor, ImpAlb, Nothing, 60
     ImpTesor = ImpTesor + ImpAlb
     miSQL = "UPDATE sclien SET UtFecrecal = " & DBSet(Now, "F")
     miSQL = miSQL & ", riesgoact = " & DBSet(ImpTesor, "N")
@@ -2486,7 +2502,7 @@ End Sub
 
 
 Public Sub DavidLogImpresionAlbaranes()
-Dim b As Boolean
+Dim B As Boolean
 Dim SQL As String
 
     'antes d lanzar este sub se fijaran las variables
@@ -2496,8 +2512,8 @@ Dim SQL As String
     On Error Resume Next
 
     'PrecioMinimo  mvarTipoPortes
-    b = vParamAplic.PrecioMinimo Or vParamAplic.TipoPortes = 2
-    If Not b Then Exit Sub
+    B = vParamAplic.PrecioMinimo Or vParamAplic.TipoPortes = 2
+    If Not B Then Exit Sub
 
 
     'Inserto en slog

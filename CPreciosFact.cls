@@ -386,7 +386,7 @@ End Function
 Private Function ObtenerPromocion(FechaOfe As String, PorCaja As Boolean) As String
 'Comprueba si existe una promocion en la tabla: spromo (Promociones Tarifas)
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Precio As String
 
     On Error GoTo EObtenerPromo
@@ -399,38 +399,38 @@ Dim Precio As String
     'Obtener Precio Actual
     SQL = "SELECT * FROM spromo "
     SQL = SQL & " WHERE codartic=" & DBSet(CodigoArtic, "T") & " AND codlista=" & CodigoLista2
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
     'Existe una promocion para ese articulo y tarifa, comprobar fechas
-        If EntreFechas(DBLet(RS!FechaIni), FechaOfe, DBLet(RS!FechaFin)) Then
+        If EntreFechas(DBLet(Rs!FechaIni), FechaOfe, DBLet(Rs!FechaFin)) Then
         'Dentro Periodo Promocion Actual
             If PorCaja Then
-                Precio = ComprobarCero(DBLet(RS!precioa1))
-                If Precio = "0" Then Precio = DBLet(RS!precioac)
+                Precio = ComprobarCero(DBLet(Rs!precioa1))
+                If Precio = "0" Then Precio = DBLet(Rs!precioac)
             Else
-                Precio = DBLet(RS!precioac)
+                Precio = DBLet(Rs!precioac)
             End If
             If Precio = "0" Then Precio = ""
-        ElseIf DBLet(RS!fechain1) = "" And DBLet(RS!fechafi1) = "" Then
+        ElseIf DBLet(Rs!fechain1) = "" And DBLet(Rs!fechafi1) = "" Then
             Precio = ""
-        ElseIf EntreFechas(DBLet(RS!fechain1), FechaOfe, DBLet(RS!fechafi1)) Then
+        ElseIf EntreFechas(DBLet(Rs!fechain1), FechaOfe, DBLet(Rs!fechafi1)) Then
         'DEntro Periodo Promocion Nueva
             If PorCaja Then
-                Precio = ComprobarCero(DBLet(RS!precion1))
-                If Precio = "0" Then Precio = DBLet(RS!precionu)
+                Precio = ComprobarCero(DBLet(Rs!precion1))
+                If Precio = "0" Then Precio = DBLet(Rs!precionu)
             Else
-                Precio = ComprobarCero(DBLet(RS!precionu))
+                Precio = ComprobarCero(DBLet(Rs!precionu))
             End If
         End If
-        DtoPermitido = CBool(RS!dtopermi)
+        DtoPermitido = CBool(Rs!dtopermi)
     Else 'No existe Promocion salir y pasar al siguiente paso
         Precio = ""
         DtoPermitido = False
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     ObtenerPromocion = Precio
     Exit Function
@@ -441,7 +441,7 @@ End Function
 
 
 Private Function ObtenerDescuentosOLD(FechaOfe As String, Dto2Fact, PorCaja As Boolean) As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim CampoDto1 As String, campoDto2 As String
 Dim vCodMarca As String
@@ -487,21 +487,21 @@ Dim vCodMarca As String
         SQL = SQL & " ORDER BY codmarca DESC,codfamia DESC"
     End If
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
     'Existe el descuento, y salimos con los descuentos
-        ObtenerDescuentosOLD = DBLet(RS.Fields(0).Value)
-        Dto2Fact = DBLet(RS.Fields(1).Value)
+        ObtenerDescuentosOLD = DBLet(Rs.Fields(0).Value)
+        Dto2Fact = DBLet(Rs.Fields(1).Value)
     Else
         'Buscar si existe en Promociones Nueva
         ObtenerDescuentosOLD = ""
         Dto2Fact = ""
     End If
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 
@@ -510,7 +510,7 @@ Private Function ObtenerPrecioEsp2(FechaOfe As String, PorCaja As Boolean, Dto A
 'Comprueba si existe un Precio Especial en la tabla: sprees (Precios Especiales)
 'Dim devuelve As String
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Precio As String
 On Error GoTo EObtenerPreEsp
 
@@ -520,35 +520,35 @@ On Error GoTo EObtenerPreEsp
     SQL = "SELECT * FROM sprees "
     SQL = SQL & " WHERE codclien=" & CodigoClien & " AND codartic=" & DBSet(CodigoArtic, "T")
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
         'Existe una promocion, y salimos con el precio actual o nuevo
-        DtoPermitido = CBool(RS!dtopermi)
+        DtoPermitido = CBool(Rs!dtopermi)
         
         'Marzo 2015   Antes
         'If IsNull(RS!fechanue) Or (EsFechaIgualPosterior(FechaOfe, DBLet(RS!fechanue), False)) Then
-        If Not EsFechaIgualPosteriorDavid(FechaOfe, DBLet(RS!fechanue)) Then
+        If Not EsFechaIgualPosteriorDavid(FechaOfe, DBLet(Rs!fechanue)) Then
         'Precio Actual
             If PorCaja Then
-                Precio = ComprobarCero(DBLet(RS!precioa1))
+                Precio = ComprobarCero(DBLet(Rs!precioa1))
             Else
-                Precio = DBLet(RS!precioac)
+                Precio = DBLet(Rs!precioac)
             End If
-            If DtoPermitido Then Dto = DBLet(RS!dtoespec)
+            If DtoPermitido Then Dto = DBLet(Rs!dtoespec)
         'ElseIf EsFechaIgualPosterior(RS!fechanue, FechaOfe, False) Then
         Else
             'Precio Nuevo
             If PorCaja Then
-                Precio = ComprobarCero(DBLet(RS!precion1))
+                Precio = ComprobarCero(DBLet(Rs!precion1))
             Else
-                Precio = ComprobarCero(DBLet(RS!precionu))
+                Precio = ComprobarCero(DBLet(Rs!precionu))
             End If
-            If DtoPermitido Then Dto = DBLet(RS!dtoespe1)
+            If DtoPermitido Then Dto = DBLet(Rs!dtoespe1)
         End If
         
         'Comision especial
-        ComisionEspecial = DBLet(RS!Comision)
+        ComisionEspecial = DBLet(Rs!Comision)
         
     Else  'No existe Precio Especial salir y pasar al siguiente paso
         Precio = ""
@@ -556,8 +556,8 @@ On Error GoTo EObtenerPreEsp
         Dto = ""
         ComisionEspecial = ""
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     ObtenerPrecioEsp2 = Precio
 EObtenerPreEsp:
     If Err.Number <> 0 Then MuestraError Err.Number, "Precio Especia", Err.Description
@@ -568,7 +568,7 @@ Private Function ObtenerTarifaArt(FechaOfe As String, PorCaja As Boolean) As Str
 'Comprueba si existe una Tarifa de Articulos en la tabla: slista (Tarifas Articulos)
 'Dim devuelve As String
 Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Precio As String
 
     On Error GoTo EObtenerTarifa
@@ -580,43 +580,43 @@ Dim Precio As String
     SQL = SQL & " WHERE codartic=" & DBSet(CodigoArtic, "T") & " AND codlista=" & CodigoLista2
     'SQL = SQL & " and ( isnull(fechanue) or (fechanue<= '" & Format(FechaOfe, FormatoFecha) & "'))"
 
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
     'Existe una promocion, y salimos con el precio actual o nuevo
-        DtoPermitido = CBool(RS!dtopermi)
+        DtoPermitido = CBool(Rs!dtopermi)
         
         'MARZo 2015
         'If IsNull(RS!fechanue) Or (EsFechaIgualPosterior(FechaOfe, DBLet(RS!fechanue), False)) Then
-        If Not EsFechaIgualPosteriorDavid(FechaOfe, DBLet(RS!fechanue)) Then
+        If Not EsFechaIgualPosteriorDavid(FechaOfe, DBLet(Rs!fechanue)) Then
             'Precio Actual
             If PorCaja Then
-                Precio = ComprobarCero(DBLet(RS!precioa1))
+                Precio = ComprobarCero(DBLet(Rs!precioa1))
                 'Cambio ENerp 2011.  Si va por caja, el precio por caja es 0 pongo el precio normal
-                If Precio = "0" Then Precio = DBLet(RS!precioac)
+                If Precio = "0" Then Precio = DBLet(Rs!precioac)
             
             Else
-                Precio = DBLet(RS!precioac)
+                Precio = DBLet(Rs!precioac)
             End If
         'ElseIf EsFechaIgualPosterior(RS!fechanue, FechaOfe, False) Then
         Else
             'Precio Nuevo
             If PorCaja Then
-                Precio = ComprobarCero(DBLet(RS!precion1))
+                Precio = ComprobarCero(DBLet(Rs!precion1))
                 'Cambio ENerp 2011
-                If Precio = "0" Then Precio = DBLet(RS!precionu)
+                If Precio = "0" Then Precio = DBLet(Rs!precionu)
                 
                 
             Else
-                Precio = ComprobarCero(DBLet(RS!precionu))
+                Precio = ComprobarCero(DBLet(Rs!precionu))
             End If
         End If
     Else  'No existe Precio Especial salir y pasar al siguiente paso
         Precio = ""
         DtoPermitido = False
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     ObtenerTarifaArt = Precio
 EObtenerTarifa:
     If Err.Number <> 0 Then MuestraError Err.Number, "Precio Tarifa Artículo", Err.Description
@@ -631,13 +631,13 @@ End Function
 
 Public Function ObtenerNumCajas(TUnidades As String, UniCaja As String) As Integer
 Dim NumCajas As Integer
-Dim Cantidad As Integer, UniPorCaja As Integer
+Dim cantidad As Integer, UniPorCaja As Integer
 On Error Resume Next
 
-    Cantidad = CInt(TUnidades)
+    cantidad = CInt(TUnidades)
     UniPorCaja = CInt(UniCaja)
     If UniPorCaja > 1 Then 'Se vende en cajas
-        NumCajas = Int(Cantidad / UniPorCaja)
+        NumCajas = Int(cantidad / UniPorCaja)
     Else 'No se vende por cajas
         NumCajas = 0
     End If
@@ -647,24 +647,24 @@ End Function
 
 
 Public Function FijarTarifaActividad()
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Aux As String
 
     Aux = "Select codactiv,codtarif,promocio from sclien where codclien = " & CodigoClien
     
-    Set RS = New ADODB.Recordset
-    RS.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Rs.EOF Then
         mvarCodActividad = 0
         mvarCodLista = 0
         mvarAplicaPromo = False
     Else
-        mvarAplicaPromo = DBLet(RS!promocio, "N") = 1
-        mvarCodActividad = DBLet(RS!codactiv, "N")
-        mvarCodLista = RS!codTarif
+        mvarAplicaPromo = DBLet(Rs!promocio, "N") = 1
+        mvarCodActividad = DBLet(Rs!codactiv, "N")
+        mvarCodLista = Rs!codTarif
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 End Function
 
@@ -684,7 +684,7 @@ End Function
 '---------------------------------------------------------------------------------------
 '---------------------------------------------------------------------------------------
 Private Function ObtenerDescuentosN(FechaOfe As String, Dto2Fact, PorCaja As Boolean, Comision As String) As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim CampoDto1 As String, campoDto2 As String
 Dim vCodMarca As String
@@ -729,21 +729,21 @@ Dim vCodMarca As String
         SQL = SQL & " ORDER BY codmarca DESC,codfamia DESC"
     End If
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
     'Existe el descuento, y salimos con los descuentos
-        ObtenerDescuentosN = DBLet(RS.Fields(0).Value)
-        Dto2Fact = DBLet(RS.Fields(1).Value)
-        Comision = DBLet(RS!Comision)
+        ObtenerDescuentosN = DBLet(Rs.Fields(0).Value)
+        Dto2Fact = DBLet(Rs.Fields(1).Value)
+        Comision = DBLet(Rs!Comision)
     Else
         'Buscar si existe en Promociones Nueva
         ObtenerDescuentosN = ""
         Dto2Fact = ""
     End If
     
-    RS.Close
+    Rs.Close
     
     'YA lo ha encentrado
     If ObtenerDescuentosN <> "" Then Exit Function
@@ -763,19 +763,19 @@ Dim vCodMarca As String
     End If
     
 
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
     'Existe el descuento, y salimos con los descuentos
-        ObtenerDescuentosN = DBLet(RS.Fields(0).Value)
-        Dto2Fact = DBLet(RS.Fields(1).Value)
-        Comision = DBLet(RS!Comision)
+        ObtenerDescuentosN = DBLet(Rs.Fields(0).Value)
+        Dto2Fact = DBLet(Rs.Fields(1).Value)
+        Comision = DBLet(Rs!Comision)
     Else
         'Buscar si existe en Promociones Nueva
         ObtenerDescuentosN = ""
         Dto2Fact = ""
     End If
-    RS.Close
+    Rs.Close
     
     
     'YA lo ha encentrado
@@ -791,18 +791,18 @@ Dim vCodMarca As String
     Else
         SQL = SQL & " ORDER BY codmarca DESC,codfamia DESC"
     End If
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
     'Existe el descuento, y salimos con los descuentos
-        ObtenerDescuentosN = DBLet(RS.Fields(0).Value)
-        Dto2Fact = DBLet(RS.Fields(1).Value)
+        ObtenerDescuentosN = DBLet(Rs.Fields(0).Value)
+        Dto2Fact = DBLet(Rs.Fields(1).Value)
     Else
         'Buscar si existe en Promociones Nueva
         ObtenerDescuentosN = ""
         Dto2Fact = ""
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 
@@ -984,7 +984,7 @@ End Function
 
 
 Private Function ObtenerDescuentoDeLaFamilia(Dto2Fact, PorCaja As Boolean) As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SQL As String
 Dim CampoDto1 As String, campoDto2 As String
 
@@ -997,7 +997,7 @@ Dim CampoDto1 As String, campoDto2 As String
     CampoDto1 = "dtoline1"
     campoDto2 = "dtoline2"
     If PorCaja Then 'Obtener Descuentos Por Caja
-        If vParamAplic.AlmacenB < 90 Then        'Para todos menos para herbelca
+        If vParamAplic.NumeroInstalacion <> 2 Then       'Para todos menos para herbelca
             CampoDto1 = "dtocaja1"
             campoDto2 = "dtocaja2"
         End If
@@ -1012,21 +1012,21 @@ Dim CampoDto1 As String, campoDto2 As String
     SQL = "SELECT max(dtoline1),max(dtoline2) FROM sfamiadtos "
     SQL = SQL & " WHERE  codfamia=" & CodigoFamia
         
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
     'Existe el descuento, y salimos con los descuentos
-        ObtenerDescuentoDeLaFamilia = DBLet(RS.Fields(0).Value)
-        Dto2Fact = DBLet(RS.Fields(1).Value)
+        ObtenerDescuentoDeLaFamilia = DBLet(Rs.Fields(0).Value)
+        Dto2Fact = DBLet(Rs.Fields(1).Value)
     Else
         ObtenerDescuentoDeLaFamilia = ""
         Dto2Fact = ""
     End If
     
-    RS.Close
+    Rs.Close
     
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 

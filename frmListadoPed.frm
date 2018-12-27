@@ -5274,7 +5274,7 @@ Dim UnoSolo As Boolean
         If vParamAplic.ManipuladorFitosanitarios2 Then
             Screen.MousePointer = vbHourglass
             Dim AuxCadena As String
-            
+          
             AuxCadena = ""
             If Not ComprobarFitosAlbaranesFacturasCliente(AuxCadena, cadSelect) Then AuxCadena = "NO"
             Screen.MousePointer = vbDefault
@@ -5288,6 +5288,20 @@ Dim UnoSolo As Boolean
             End If
         End If
         
+        If vParamAplic.NumeroInstalacion = 2 Then
+            Screen.MousePointer = vbHourglass
+            AuxCadena = ""
+            If Not ComprobarPrecioMinimoFacturacion(AuxCadena, cadSelect) Then AuxCadena = "NO"
+            Screen.MousePointer = vbDefault
+            If AuxCadena <> "" Then
+                AuxCadena = App.Path & "\errfacFito.txt"
+                
+                AuxCadena = "Hay precios inferiores al precio míminmo. Ver fichero:  " & AuxCadena
+                
+                If vUsu.Nivel = 0 Then AuxCadena = AuxCadena & vbCrLf & vbCrLf & "¿Continuar de igual modo? "
+                If MsgBox(AuxCadena, IIf(vUsu.Nivel = 0, vbQuestion + vbYesNoCancel, vbExclamation)) <> vbYes Then Exit Sub
+            End If
+        End If
         Me.Height = Me.Height + 300
         Me.FrameFacturar.Height = Me.FrameFacturar.Height + 300
         Me.FrameProgress.visible = True
@@ -5533,6 +5547,7 @@ End Sub
 
 
 
+
 Private Sub cmdAceptarPedxArtic_Click()
 '41: Informe de Pedidos por Articulo
 '44: Informe de Pedidos por Cliente
@@ -5701,7 +5716,11 @@ Dim indice As Integer
     '227: Listado Ventas por cliente
     'Importe ventas superior a ....
     If Me.Frame10.visible Then
-        cad = DBSet(txtCodigo(1).Text, "N")
+        If txtCodigo(1).Text <> "" Then
+            cad = DBSet(txtCodigo(1).Text, "N")
+        Else
+            cad = ""
+        End If
         
         cadParam = cadParam & "pImporte=" & cad & "|"
         numParam = numParam + 1
@@ -5885,26 +5904,26 @@ Dim indice As Integer
         cadSelect3 = cadSelect3 & SQL
         
         
+        SQL = ""
+        If Me.txtCodigo(23).Text <> "" Then SQL = SQL & " AND scafac.codagent >= " & txtCodigo(23).Text
+        If Me.txtCodigo(24).Text <> "" Then SQL = SQL & " AND scafac.codagent <= " & txtCodigo(24).Text
+        cadSelect = cadSelect & SQL
+        cadSelect2 = cadSelect2 & SQL
+        cadSelect3 = cadSelect3 & SQL
+        
+        
+        
         
         If Not TempVentasClientes(Me.Check1chkAgrupaAg.Value = 1, cadSelect, cadSelect2, cadSelect3, Label4(54), cad) Then Exit Sub
         
         
-        'Si tiene deSDE HASTA AGENTE
-        cad = ""
-        If Me.txtCodigo(23).Text <> "" Then cad = cad & " tmpinformes.campo1 < " & txtCodigo(23).Text
-        If Me.txtCodigo(24).Text <> "" Then cad = cad & " or tmpinformes.campo1 > " & txtCodigo(24).Text
-        If cad <> "" Then
-            'Ok vamos a borrar datos
-            cad = "DELETE FROM tmpinformes where codusu = " & vUsu.codigo & " AND ( " & cad & ")"
-            conn.Execute cad
-            
-            cad = DevuelveDesdeBD(conAri, "count(*)", "tmpinformes", "codusu", CStr(vUsu.codigo))
-            If cad = "" Then cad = "0"
-            If Val(cad) = 0 Then
-                MsgBox "No existen datos ", vbExclamation
-                Exit Sub
-            End If
+        cad = DevuelveDesdeBD(conAri, "count(*)", "tmpinformes", "codusu", CStr(vUsu.codigo))
+        If cad = "" Then cad = "0"
+        If Val(cad) = 0 Then
+            MsgBox "No existen datos ", vbExclamation
+            Exit Sub
         End If
+        
         
         
         'Añadir como parametros el total del periodo que devuelve en cadSelect2
@@ -7127,9 +7146,13 @@ Dim Aux As String
                             Else
                                 txtCodigo(68).Tag = txtCodigo(4).Tag
                             End If
-                            txtCodigo(68).Text = Format(txtCodigo(68).Tag, FormatoImporte)
+                            
+                            
+                            'txtCodigo(68).Text = Format(txtCodigo(68).Tag, FormatoImporte)
+                            txtCodigo(68).Text = Format(0, FormatoImporte)
                             txtCodigo(63).Text = Format(txtCodigo(63).Tag, FormatoImporte)
                             txtCodigo(4).Text = Format(txtCodigo(4).Tag, FormatoImporte)
+                            
                             H = H + 600 'FrameCanjePuntos.Height
                             FrameCanjePuntos.Left = 720
                             FrameCanjePuntos.Top = H - FrameCanjePuntos.Height - 240
@@ -8287,8 +8310,8 @@ Dim Rs As ADODB.Recordset
     If txtCodigo(57).Text <> "" Then SQL = SQL & " AND sclien.codactiv >= " & txtCodigo(57).Text
     If txtCodigo(58).Text <> "" Then SQL = SQL & " AND sclien.codactiv <= " & txtCodigo(58).Text
     'El agente
-    If Me.txtCodigo(23).Text <> "" Then SQL = SQL & " AND sclien.codagent >= " & txtCodigo(23).Text
-    If Me.txtCodigo(24).Text <> "" Then SQL = SQL & " AND sclien.codagent <= " & txtCodigo(24).Text
+    If Me.txtCodigo(23).Text <> "" Then SQL = SQL & " AND scafac.codagent >= " & txtCodigo(23).Text
+    If Me.txtCodigo(24).Text <> "" Then SQL = SQL & " AND scafac.codagent <= " & txtCodigo(24).Text
     
     
     If cadW <> "" Then SQL = SQL & " AND " & cadW
@@ -8469,11 +8492,11 @@ Dim DatosPortes As String  'nomartic|preciov|preciouc|
             FecEnvio = RSalb!FecEnvio
             cadW = DevuelveDesdeBD(conAri, "AplicaPortesFactura", "sclien", "codclien", CStr(Codclien1))
             If cadW = "1" Then ClienConPortes = True
-            cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NUmAlbar
+            cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NumAlbar
             If ClienConPortes Then
                 LblBar.Caption = "Cliente: " & Format(RSalb!codClien, "000000") & " - " & RSalb!NomClien
             Else
-                LblBar.Caption = RSalb!NUmAlbar
+                LblBar.Caption = RSalb!NumAlbar
             End If
             LblBar.Refresh
         Else
@@ -8484,12 +8507,12 @@ Dim DatosPortes As String  'nomartic|preciov|preciouc|
             
                 FecEnvio = RSalb!FecEnvio
                 
-                cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NUmAlbar
+                cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NumAlbar
                 
             Else
                 'Codclien y fechaenvio la misma
                 'Todos igual. Metemos al select el albaran
-                cadW = cadW & "," & RSalb!NUmAlbar
+                cadW = cadW & "," & RSalb!NumAlbar
             End If
         
         End If
@@ -8557,7 +8580,7 @@ End Function
 Private Function TratarLineaPortes(Comprobar As Boolean, CadWh As String, NomClien As String, DatosDeArticPortes As String, CodigoCliente As Long) As Boolean
 Dim Aux As String
 Dim RN As ADODB.Recordset
-Dim J As Integer
+Dim j As Integer
 Dim Llega As Boolean
 Dim ImporteT As Currency
 
@@ -8577,7 +8600,7 @@ Dim ImporteT As Currency
         'YA EXISTE UNA LINEA con portes
         If Comprobar Then
             Aux = "insert into `tmpsliped` (`codusu`,`numpedcl`,`numlinea`,`codalmac`,codartic,`nomartic`,codclien)  VALUES ("
-            Aux = Aux & vUsu.codigo & "," & RN!NUmAlbar & "," & RN!numlinea & "," & RN!codAlmac & "," & DBSet(RN!codtipom, "T")
+            Aux = Aux & vUsu.codigo & "," & RN!NumAlbar & "," & RN!numlinea & "," & RN!codAlmac & "," & DBSet(RN!codtipom, "T")
             Aux = Aux & "," & DBSet(NomClien, "T") & "," & CodigoCliente & ")"
             ejecutar Aux, False
         Else
@@ -8642,16 +8665,16 @@ Dim ImporteT As Currency
                 'NO llega al minimo.
                 'Sicota, cargar portes
             
-                J = InStrRev(CadWh, ",")
-                If J = 0 Then
+                j = InStrRev(CadWh, ",")
+                If j = 0 Then
                     'Solo hay un albaran
-                    J = InStrRev(CadWh, "(") 'YA NO PUEDE SER CERO
+                    j = InStrRev(CadWh, "(") 'YA NO PUEDE SER CERO
                 End If
-                Aux = Mid(CadWh, J + 1)
+                Aux = Mid(CadWh, j + 1)
                 Aux = "Select numalbar,codalmac,max(numlinea) from slialb where codtipom='ALV' AND numalbar =" & Aux & " GROUP BY 1,2"
                 RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 'NO PUEDE SER EOF
-                Aux = "'ALV'," & RN!NUmAlbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codAlmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
+                Aux = "'ALV'," & RN!NumAlbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codAlmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
                 
                 'codtipom,numalbar,numlinea,codalmac,codartic,nomartic,cantidad,numbultos,
                 'precioar,dtoline1,dtoline2,importel,origpre,codproveX,

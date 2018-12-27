@@ -365,7 +365,7 @@ Dim SQL As String
 Dim Im As Currency
 
 Private Sub cmdFacturar_Click()
-Dim I As Integer
+Dim i As Integer
 
     
     
@@ -399,12 +399,12 @@ Dim I As Integer
     
     'Vere si hay alguno marcado para facturar
     SQL = ""
-    For I = 1 To TreeView1.Nodes.Count
-        If Not TreeView1.Nodes(I).Parent Is Nothing Then
-            If TreeView1.Nodes(I).Checked Then
-                If Not TreeView1.Nodes(I).Parent.Checked Then
-                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(I).Parent.Text, vbExclamation
-                    TreeView1.Nodes(I).Parent.Checked = True
+    For i = 1 To TreeView1.Nodes.Count
+        If Not TreeView1.Nodes(i).Parent Is Nothing Then
+            If TreeView1.Nodes(i).Checked Then
+                If Not TreeView1.Nodes(i).Parent.Checked Then
+                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(i).Parent.Text, vbExclamation
+                    TreeView1.Nodes(i).Parent.Checked = True
                     Exit Sub
                 End If
                 
@@ -547,17 +547,17 @@ Dim Im As Currency
 End Sub
 
 Private Sub PonerCadenaImporte(ByRef N As Node, Padre As Boolean)
-Dim I As Integer
-Dim J As Integer
+Dim i As Integer
+Dim j As Integer
     If Padre Then
-        J = 24
+        j = 24
     Else
-        J = 45
+        j = 45
     End If
-    I = InStr(1, N.Text, ":")
-    If I > 0 Then
-        N.Text = Mid(N.Text, 1, I)
-        N.Text = N.Text & Right(Space(J) & Format(N.Tag, FormatoImporte), J)
+    i = InStr(1, N.Text, ":")
+    If i > 0 Then
+        N.Text = Mid(N.Text, 1, i)
+        N.Text = N.Text & Right(Space(j) & Format(N.Tag, FormatoImporte), j)
     End If
 End Sub
 
@@ -636,9 +636,9 @@ Private Function PonerCliente() As String
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
     If Not miRsAux.EOF Then
-        SQL = miRsAux!Nomclien
+        SQL = miRsAux!NomClien
         Me.txtNombre.Text = SQL
-        PonerCliente = miRsAux!Nomclien
+        PonerCliente = miRsAux!NomClien
         txtSitua = miRsAux!nomsitua
         txtSitua.Tag = miRsAux!Codmacta
     End If
@@ -795,20 +795,20 @@ Dim C As String
 End Sub
 
 Private Function DevuelveNumeroAlbaran(linea As String) As String
-Dim J As Integer
+Dim j As Integer
     
     DevuelveNumeroAlbaran = "0"
     
-    J = InStr(1, linea, " ")
-    If J > 0 Then
-        DevuelveNumeroAlbaran = Mid(linea, 1, J - 1)
+    j = InStr(1, linea, " ")
+    If j > 0 Then
+        DevuelveNumeroAlbaran = Mid(linea, 1, j - 1)
         DevuelveNumeroAlbaran = Mid(DevuelveNumeroAlbaran, 4) 'los tres primeros son el codtipom
     End If
 End Function
 
 
 Private Sub InsertarLineaFactura(ByRef Cole As Collection)
-Dim I As Integer
+Dim i As Integer
 Dim N As Node
 Dim TotalFra As Currency
 
@@ -827,15 +827,15 @@ Dim TotalFra As Currency
     N.Checked = True
     TotalFra = 0
     'Los albaranes que iran
-    For I = 1 To Cole.Count
+    For i = 1 To Cole.Count
         'El importe
-        SQL = RecuperaValor(Cole.item(I), 2)
+        SQL = RecuperaValor(Cole.item(i), 2)
         Im = CCur(SQL)
         TotalFra = TotalFra + Im
         
         'El importe
         SQL = Right(Space(10) & Format(Im, FormatoImporte), 10)
-        SQL = RecuperaValor(Cole.item(I), 1) & SQL
+        SQL = RecuperaValor(Cole.item(i), 1) & SQL
         Set N = TreeView1.Nodes.Add("FRA" & Format(NumRegElim, "000"), tvwChild)
         N.Text = SQL
         N.Image = 44
@@ -895,48 +895,61 @@ End Sub
 
 Private Sub HacerFacturacionCliente()
 Dim CadenaSQL As String
-Dim I As Integer
+Dim i As Integer
     
     SQL = ""
-    For I = 1 To TreeView1.Nodes.Count
-        If TreeView1.Nodes(I).Parent Is Nothing Then
+    For i = 1 To TreeView1.Nodes.Count
+        If TreeView1.Nodes(i).Parent Is Nothing Then
             'NADA
             
         Else
-            If TreeView1.Nodes(I).Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(TreeView1.Nodes(I).Text)
+            If TreeView1.Nodes(i).Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(TreeView1.Nodes(i).Text)
    
         End If
-    Next I
+    Next i
     
     SQL = Mid(SQL, 3)
     
     CadenaSQL = "scaalb.codtipom = 'ALV' AND scaalb.codclien=" & Me.txtclien.Text & " AND  scaalb.numalbar IN (" & SQL & ")"
     SQL = "SELECT scaalb.*,sclien.nomclien FROM scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien  WHERE " & CadenaSQL
     
-    I = Val(RecuperaValor(CadenaDesdeOtroForm, 3))
+    i = Val(RecuperaValor(CadenaDesdeOtroForm, 3))
     
-        
+     Dim AuxCadena As String
         
      If vParamAplic.ManipuladorFitosanitarios2 Then
-            Screen.MousePointer = vbHourglass
-            Dim AuxCadena As String
+        Screen.MousePointer = vbHourglass
+        
+        
+        AuxCadena = ""
+        If Not ComprobarFitosAlbaranesFacturasCliente(AuxCadena, CadenaSQL) Then AuxCadena = "NO"
+        Screen.MousePointer = vbDefault
+        
+        If AuxCadena <> "" Then
+            AuxCadena = App.Path & "\errfacFito.txt"
             
-            AuxCadena = ""
-            If Not ComprobarFitosAlbaranesFacturasCliente(AuxCadena, CadenaSQL) Then AuxCadena = "NO"
-            Screen.MousePointer = vbDefault
-            
-            If AuxCadena <> "" Then
-                AuxCadena = App.Path & "\errfacFito.txt"
-                
-                AuxCadena = "Hay incidencias en fitosanitarios. Vea el fichero " & AuxCadena
-                AuxCadena = AuxCadena & vbCrLf & vbCrLf & "¿Continuar de igualmente? "
-                If MsgBox(AuxCadena, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
-            End If
+            AuxCadena = "Hay incidencias en fitosanitarios. Vea el fichero " & AuxCadena
+            AuxCadena = AuxCadena & vbCrLf & vbCrLf & "¿Continuar de igualmente? "
+            If MsgBox(AuxCadena, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
         End If
-    
+    End If
+
+    If vParamAplic.NumeroInstalacion = 2 Then
+        Screen.MousePointer = vbHourglass
+        AuxCadena = ""
+        If Not ComprobarPrecioMinimoFacturacion(AuxCadena, CadenaSQL) Then AuxCadena = "NO"
+        Screen.MousePointer = vbDefault
+        If AuxCadena <> "" Then
+            AuxCadena = App.Path & "\errfacFito.txt"
+            
+            AuxCadena = "Hay precios inferiores al precio míminmo. Ver fichero:  " & AuxCadena
+            
+            If vUsu.Nivel = 0 Then AuxCadena = AuxCadena & vbCrLf & vbCrLf & "¿Continuar de igual modo? "
+            If MsgBox(AuxCadena, IIf(vUsu.Nivel = 0, vbQuestion + vbYesNoCancel, vbExclamation)) <> vbYes Then Exit Sub
+        End If
+    End If
         
-        
-    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, I = 1, "ALV", "", CByte(txtCopia.Text), True, False
+    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, i = 1, "ALV", "", CByte(txtCopia.Text), True, False
 End Sub
 
 

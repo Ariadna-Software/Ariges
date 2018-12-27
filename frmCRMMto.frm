@@ -1,10 +1,10 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmCRMMto 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   " Mantenimiento acciones comerciales"
-   ClientHeight    =   5385
+   ClientHeight    =   5505
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   13080
@@ -12,7 +12,7 @@ Begin VB.Form frmCRMMto
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5385
+   ScaleHeight     =   5505
    ScaleWidth      =   13080
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -766,27 +766,27 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
 
     
-    Cad = "¿Seguro que desea eliminar la accion comercial? " & vbCrLf
-    Cad = Cad & vbCrLf & "Usuario: " & Format(Data1.Recordset.Fields(0), "0000")
-    Cad = Cad & vbCrLf & "Cliente: " & Text1(2).Text & "     " & Text2(2).Text
-    Cad = Cad & vbCrLf & "Fecha/Hora: " & Text1(1).Text
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+    cad = "¿Seguro que desea eliminar la accion comercial? " & vbCrLf
+    cad = cad & vbCrLf & "Usuario: " & Format(Data1.Recordset.Fields(0), "0000")
+    cad = cad & vbCrLf & "Cliente: " & Text1(2).Text & "     " & Text2(2).Text
+    cad = cad & vbCrLf & "Fecha/Hora: " & Text1(1).Text
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
 
 
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        Cad = DevuelveWHERE
-        Cad = "Delete from scrmacciones where " & Cad
-        conn.Execute Cad
+        cad = DevuelveWHERE
+        cad = "Delete from scrmacciones where " & cad
+        conn.Execute cad
         
 
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -805,16 +805,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
     
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1172,23 +1172,23 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim Cad As String
+Dim cad As String
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(0), 10, "Usuario")
-        Cad = Cad & ParaGrid(Text1(1), 25, "Fecha")
-        Cad = Cad & ParaGrid(Text1(3), 10, "Codigo")
-        Cad = Cad & "Nombre|sclien|nomclien|T||50·"
+        cad = ""
+        cad = cad & ParaGrid(Text1(0), 10, "Usuario")
+        cad = cad & ParaGrid(Text1(1), 25, "Fecha")
+        cad = cad & ParaGrid(Text1(3), 10, "Codigo")
+        cad = cad & "Nombre|sclien|nomclien|T||50·"
 
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = NombreTabla & ",sclien"
             
-            Cad = "sclien.codclien=" & NombreTabla & ".codclien"
-            If cadB <> "" Then Cad = Cad & " AND " & cadB
-            frmB.vSQL = Cad
+            cad = "sclien.codclien=" & NombreTabla & ".codclien"
+            If cadB <> "" Then cad = cad & " AND " & cadB
+            frmB.vSQL = cad
             HaDevueltoDatos = False
             '###A mano
 
@@ -1271,14 +1271,14 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
 
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     PonerIndicador lblIndicador, Modo
     
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
@@ -1286,11 +1286,11 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -1301,15 +1301,15 @@ Dim NumReg As Byte
     BloquearText1 Me, Modo
     
     
-    B = Modo = 2 Or Modo = 0
-    BloquearCmb Me.Combo1(0), B, False
-    BloquearCmb Me.Combo1(1), B, False
+    b = Modo = 2 Or Modo = 0
+    BloquearCmb Me.Combo1(0), b, False
+    BloquearCmb Me.Combo1(1), b, False
     
     '---------------------------------------------
     'Modo insertar o modificar
-    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = B Or Modo = 1
-    cmdCancelar.visible = B Or Modo = 1
+    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = b Or Modo = 1
+    cmdCancelar.visible = b Or Modo = 1
     
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
@@ -1338,41 +1338,41 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
     
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    mnEliminar.Enabled = b
     
     '----------------------------------------
-    B = (Modo >= 3) 'Insertar/Modificar
+    b = (Modo >= 3) 'Insertar/Modificar
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 'Dim cad As String
 
     
 
     Text1(7).Text = Combo1(1).Text
     DatosOk = False
-    B = CompForm(Me, 1) 'Comprobar datos OK
-    If Not B Then Exit Function
+    b = CompForm(Me, 1) 'Comprobar datos OK
+    If Not b Then Exit Function
         
         
     If DevuelveDesdeBD(conConta, "codusu", "usuarios.usuarios", "login", Text1(0).Text, "T") = "" Then
@@ -1392,7 +1392,7 @@ Dim B As Boolean
         End If
     End If
         
-    DatosOk = B
+    DatosOk = b
     
 End Function
 
@@ -1474,7 +1474,7 @@ Private Function DevuelveWHERE() As String
         DevuelveWHERE = "codclien = " & Text1(2).Text & " AND usuario=" & DBSet(Text1(0).Text, "T")
         DevuelveWHERE = DevuelveWHERE & " AND fechora = " & DBSet(Text1(1).Text, "FH")
     Else
-        DevuelveWHERE = "codclien = " & Data1.Recordset!codclien & " AND usuario=" & DBSet(Data1.Recordset!Usuario, "T")
+        DevuelveWHERE = "codclien = " & Data1.Recordset!codClien & " AND usuario=" & DBSet(Data1.Recordset!Usuario, "T")
         DevuelveWHERE = DevuelveWHERE & " AND fechora = " & DBSet(Data1.Recordset!fechora, "FH")
     End If
 End Function

@@ -177,7 +177,7 @@ Begin VB.Form frmAlmMovArtSaldo
          Left            =   1440
          MaxLength       =   16
          TabIndex        =   10
-         Tag             =   "Cod. Articulo|T|N|||smoval|codartic||N|"
+         Tag             =   "Cod. Articulo|T1|N|||smoval|codartic||N|"
          Text            =   "Text1"
          Top             =   210
          Width           =   1695
@@ -677,17 +677,17 @@ End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
 'Formulario para Busqueda
-Dim cadB As String
+Dim CadB As String
 
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
 
-        cadB = ""
-        cadB = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        cadB = cadB & " AND " & ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
+        CadB = ""
+        CadB = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
+        CadB = CadB & " AND " & ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
         'CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & cadB & " GROUP BY codartic " & Ordenacion
-        CadenaConsulta = "select codartic,codalmac from " & NombreTabla & " WHERE " & cadB & " GROUP BY codartic,codalmac " & Ordenacion
+        CadenaConsulta = "select codartic,codalmac from " & NombreTabla & " WHERE " & CadB & " GROUP BY codartic,codalmac " & Ordenacion
         PonerCadenaBusqueda
         
                
@@ -1014,7 +1014,7 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
     
     
@@ -1022,22 +1022,22 @@ Dim NumReg As Byte
     lblIndicador.Refresh
     Modo = Kmodo
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     NumReg = 1
     If Not Data1.Recordset Is Nothing Then
         If Not Data1.Recordset.EOF Then
             If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
         End If
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
     
    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
-    b = Modo <> 1
+    B = Modo <> 1
     lblIndicador.Caption = "Bloq txt"
     lblIndicador.Refresh
-    BloquearTxt Text1(0), b
-    BloquearTxt Text1(1), b
+    BloquearTxt Text1(0), B
+    BloquearTxt Text1(1), B
     'BloquearText1 Me, Modo
     
     
@@ -1057,19 +1057,19 @@ Dim NumReg As Byte
         PonerBotonCabecera True
     End Select
            
-    b = Modo <> 0 And Modo <> 2
+    B = Modo <> 0 And Modo <> 2
   
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
+        Me.imgBuscar(i).Enabled = B
     Next i
 
     lblIndicador.Caption = "Poner long. campos"
     lblIndicador.Refresh
     'PonerLongCampos   'Lo acabo de comentar  03/11/2010     En ejecucion se queda colgado en este punto ¿Pq?  No lo se
 
-    b = (Kmodo >= 3) Or Modo = 1
-    Toolbar1.Buttons(1).Enabled = Not b
-    Toolbar1.Buttons(2).Enabled = Not b
+    B = (Kmodo >= 3) Or Modo = 1
+    Toolbar1.Buttons(1).Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not B
     lblIndicador.Caption = ""
     lblIndicador.Refresh
 End Sub
@@ -1193,21 +1193,21 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 Dim bol As Boolean
 
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then Me.lblIndicador.Caption = ""
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then Me.lblIndicador.Caption = ""
     
 End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 Dim cadB2 As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
     cadSeleccion2 = ObtenerBusqueda(Me, True) 'Para la consulta de report
 
 
@@ -1219,10 +1219,10 @@ Dim cadB2 As String
         If vUsu.CodigoAgente > 0 Then
             'Es solo un agente. Solo puede ver sus movimientos
             If vUsu.AlmacenPorDefecto2 > 0 Then
-                If cadB <> "" Then cadB = cadB & " AND "
+                If CadB <> "" Then CadB = CadB & " AND "
                 If cadSeleccion2 <> "" Then cadSeleccion2 = cadSeleccion2 & " AND "
                     
-                cadB = cadB & " smoval.codalmac = " & vUsu.AlmacenPorDefecto2
+                CadB = CadB & " smoval.codalmac = " & vUsu.AlmacenPorDefecto2
                 cadSeleccion2 = cadSeleccion2 & " {smoval.codalmac} = " & vUsu.AlmacenPorDefecto2
             End If
         End If
@@ -1236,9 +1236,9 @@ Dim cadB2 As String
 
 
 
-        If cadB <> "" Then
+        If CadB <> "" Then
             'Cadena para el Data1
-            CadenaConsulta = "select codartic,codalmac from " & NombreTabla & " WHERE " & cadB & " GROUP BY codartic,codalmac " & Ordenacion
+            CadenaConsulta = "select codartic,codalmac from " & NombreTabla & " WHERE " & CadB & " GROUP BY codartic,codalmac " & Ordenacion
             
         Else
             'obtener todos los articulos
@@ -1356,18 +1356,18 @@ End Sub
 
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
-Dim tabla As String
+Dim Tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
     cad = ""
             
     cad = cad & "Código|smoval|codartic|T||18·Denominacion|sartic|nomartic|T||70·Alm.|smoval|codalmac|T||7·"
-    tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
-    tabla = tabla & " GROUP BY smoval.codartic,smoval.codalmac "
+    Tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
+    Tabla = Tabla & " GROUP BY smoval.codartic,smoval.codalmac "
     Titulo = "Movimientos de Articulos"
 
            
@@ -1375,8 +1375,8 @@ Dim Titulo As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
-        frmB.vTabla = tabla
-        frmB.vSQL = cadB
+        frmB.vTabla = Tabla
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = "0|2|"
