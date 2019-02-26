@@ -423,17 +423,17 @@ Begin VB.Form frmGesSocAsociados
       TabCaption(1)   =   "Email  /  Histórico"
       TabPicture(1)   =   "frmGesSocAsociados.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "lblDpto(6)"
-      Tab(1).Control(1)=   "lblDpto(5)"
-      Tab(1).Control(2)=   "Line1"
-      Tab(1).Control(3)=   "lblDpto(0)"
-      Tab(1).Control(4)=   "DataGrid2"
+      Tab(1).Control(0)=   "Check1(0)"
+      Tab(1).Control(1)=   "Check1(1)"
+      Tab(1).Control(2)=   "Check1(2)"
+      Tab(1).Control(3)=   "Check1(3)"
+      Tab(1).Control(4)=   "txtHco(1)"
       Tab(1).Control(5)=   "txtHco(0)"
-      Tab(1).Control(6)=   "txtHco(1)"
-      Tab(1).Control(7)=   "Check1(3)"
-      Tab(1).Control(8)=   "Check1(2)"
-      Tab(1).Control(9)=   "Check1(1)"
-      Tab(1).Control(10)=   "Check1(0)"
+      Tab(1).Control(6)=   "DataGrid2"
+      Tab(1).Control(7)=   "lblDpto(0)"
+      Tab(1).Control(8)=   "Line1"
+      Tab(1).Control(9)=   "lblDpto(5)"
+      Tab(1).Control(10)=   "lblDpto(6)"
       Tab(1).ControlCount=   11
       TabCaption(2)   =   "Datos III"
       TabPicture(2)   =   "frmGesSocAsociados.frx":0044
@@ -1793,7 +1793,7 @@ Private Sub cmdCancelar_Click()
                     DataGrid2.Enabled = True
                     If ModificaLineas = 1 Then 'INSERTAR
                         DataGrid2.AllowAddNew = False
-                        If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
+                        If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
                     End If
             End Select
             PonerBotonCabecera True
@@ -1854,7 +1854,7 @@ Private Sub BotonAnyadirLinea()
                 End If
         Case 22 'Habilidades
         
-                AnyadirLinea DataGrid2, data3
+                AnyadirLinea DataGrid2, Data3
                 CargaTxtAux2 True, True
                 PonerFoco txtAux2
      
@@ -2031,8 +2031,8 @@ On Error GoTo EEliminarLinea
             If Data2.Recordset.EOF Then Exit Sub
             numlinea = Data2.Recordset!numlinea
         Case 2 'Habilidades
-            If data3.Recordset.EOF Then Exit Sub
-            numlinea = data3.Recordset!numlinea
+            If Data3.Recordset.EOF Then Exit Sub
+            numlinea = Data3.Recordset!numlinea
 '        Case 3 'Experiencia Laboral
 '            If Data4.Recordset.EOF Then Exit Sub
 '            numlinea = Data4.Recordset!numlinea
@@ -2116,9 +2116,9 @@ Dim Lim As Boolean
     On Error GoTo EM
     Me.txtHco(0).Text = "": Me.txtHco(1).Text = ""
     Lim = True
-    If Not data3.Recordset.EOF Then
-            Me.txtHco(0).Text = DBLet(data3.Recordset!Situacion, "T")
-            Me.txtHco(1).Text = data3.Recordset!Observaciones
+    If Not Data3.Recordset.EOF Then
+            Me.txtHco(0).Text = DBLet(Data3.Recordset!Situacion, "T")
+            Me.txtHco(1).Text = Data3.Recordset!Observaciones
             Lim = False
     End If
     
@@ -2252,14 +2252,14 @@ End Sub
 
 
 Private Sub frmF_Selec(vFecha As Date) 'Calendario Fechas
-Dim indice As Byte
-    indice = Val(imgFecha(0).Tag) + 11
-    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim Indice As Byte
+    Indice = Val(imgFecha(0).Tag) + 11
+    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
 Private Sub imgBuscar_Click(Index As Integer)
-Dim indice As Byte
+Dim Indice As Byte
     
     If Index = 1 Then
         VerObservaciones
@@ -2276,14 +2276,14 @@ Dim indice As Byte
             frmCP.DatosADevolverBusqueda = "0"
             frmCP.Show vbModal
             Set frmCP = Nothing
-            indice = 4
+            Indice = 4
             'VieneDeBuscar = True
             If CadenaConsulta <> "" Then
                 Text1(3).Text = RecuperaValor(CadenaConsulta, 1)
                 Text1_LostFocus 3
             End If
     End Select
-    PonerFoco Text1(indice)
+    PonerFoco Text1(Indice)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -2302,7 +2302,7 @@ Private Sub VerObservaciones()
 End Sub
 
 Private Sub imgFecha_Click(Index As Integer) 'Abre calendario Fechas
-Dim indice As Byte
+Dim Indice As Byte
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
    Screen.MousePointer = vbHourglass
@@ -2310,15 +2310,15 @@ Dim indice As Byte
    Set frmF = New frmCal
    frmF.Fecha = Now
    Me.imgFecha(0).Tag = Index
-   indice = Index + 11
+   Indice = Index + 11
    
-   PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
+   PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco Text1(indice)
+   PonerFoco Text1(Indice)
 End Sub
 
 Private Sub ImgMail_Click(Index As Integer)
@@ -2573,15 +2573,15 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
-    cadB = ObtenerBusqueda(Me, False, BuscaChekc)
+    CadB = ObtenerBusqueda(Me, False, BuscaChekc)
     'cadB = ObtenerBusqueda(Me, False)
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         PonerFoco Text1(0)
@@ -2589,7 +2589,7 @@ Dim cadB As String
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 'Dim Cad As String
 'Dim Tabla As String
@@ -2614,7 +2614,7 @@ Private Sub MandaBusquedaPrevia(cadB As String)
         Set frmB1 = New frmBuscaGrid
         frmB1.vCampos = CadenaConsulta
         frmB1.vTabla = "asociados"
-        frmB1.vSQL = cadB
+        frmB1.vSQL = CadB
         
         '###A mano
         frmB1.vDevuelve = "0|1|"
@@ -2688,7 +2688,7 @@ On Error GoTo EPonerLineas
     BuscaChekc = "select IdAsoc,FechaCambio,usuario,tipoCambio,FechaCampo ,situacion,observaciones "
     BuscaChekc = BuscaChekc & " from asociados_hcocambios where IdAsoc= " & Data1.Recordset!IdAsoc
     BuscaChekc = BuscaChekc & " order by FechaCambio desc"
-    CargaGrid1 DataGrid2, data3, BuscaChekc
+    CargaGrid1 DataGrid2, Data3, BuscaChekc
 
     
     
@@ -3586,7 +3586,7 @@ On Error Resume Next
     
       
     BuscaChekc = "select IdAsoc,FechaCambio,usuario,tipoCambio,FechaCampo,situacion,observaciones from asociados_hcocambios where IdAsoc= -1"
-    CargaGrid1 DataGrid2, data3, BuscaChekc
+    CargaGrid1 DataGrid2, Data3, BuscaChekc
     BuscaChekc = ""
     
     PrimeraVez = False
@@ -3805,7 +3805,7 @@ End Sub
 
 Private Sub ActualizarEnSecciones()
 Dim Ud As Byte
-
+Dim SituBajaAgro As String
     
     
     If ModificaLineas = 2 Then
@@ -3859,9 +3859,10 @@ Dim Ud As Byte
             MsgBox "Error en Codigo socio euroagro", vbExclamation
             Exit Sub
         Else
-            
+            SituBajaAgro = SituacionBajaAriagro(BuscaChekc <> "null")
+            If SituBajaAgro <> "" Then SituBajaAgro = ", codsitua = " & SituBajaAgro & "   "
             miSQL = " WHERE codsocio = " & miSQL
-            miSQL = "SET fechabaja = " & BuscaChekc & miSQL
+            miSQL = "SET fechabaja = " & BuscaChekc & SituBajaAgro & miSQL
             miSQL = "UPDATE Ariagro.rsocios  " & miSQL
             conn.Execute miSQL
             
@@ -3875,6 +3876,26 @@ Dim Ud As Byte
     conn.Execute miSQL
     
 End Sub
+
+'Dara la situacion mas comun para la baja o el alta segun estemos haciendo
+Private Function SituacionBajaAriagro(DarBaja As Boolean) As String
+Dim C As String
+Dim Aux As String
+    
+    'select codsitua,count(*) from rsocios where not fechabaja is null group by 1 order by 2 desc
+    C = ""
+    If DarBaja Then C = " NOT "
+    C = C & " fechabaja is null AND 1"
+    
+    Aux = "count(*)"
+    C = DevuelveDesdeBD(conAri, "codsitua", "ariagro.rsocios", C, "1  group by 1 order by 2 desc", "", Aux)
+
+        
+    SituacionBajaAriagro = C
+    
+End Function
+
+
 
 
 

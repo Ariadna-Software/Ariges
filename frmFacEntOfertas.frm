@@ -418,20 +418,47 @@ Begin VB.Form frmFacEntOfertas2
       TabCaption(2)   =   "Concepto y Gestión Oferta"
       TabPicture(2)   =   "frmFacEntOfertas.frx":039B
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label1(38)"
-      Tab(2).Control(1)=   "Label1(37)"
-      Tab(2).Control(2)=   "Label1(18)"
-      Tab(2).Control(3)=   "Label1(28)"
-      Tab(2).Control(4)=   "Text1(31)"
-      Tab(2).Control(5)=   "Text1(32)"
-      Tab(2).Control(6)=   "Text1(35)"
-      Tab(2).Control(7)=   "Text1(36)"
+      Tab(2).Control(0)=   "Text1(36)"
+      Tab(2).Control(1)=   "Text1(35)"
+      Tab(2).Control(2)=   "Text1(32)"
+      Tab(2).Control(3)=   "Text1(31)"
+      Tab(2).Control(4)=   "Label1(28)"
+      Tab(2).Control(5)=   "Label1(18)"
+      Tab(2).Control(6)=   "Label1(37)"
+      Tab(2).Control(7)=   "Label1(38)"
       Tab(2).ControlCount=   8
       TabCaption(3)   =   "Totales"
       TabPicture(3)   =   "frmFacEntOfertas.frx":03B7
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "FrameFactura"
-      Tab(3).ControlCount=   1
+      Tab(3).Control(0)=   "Text1(37)"
+      Tab(3).Control(1)=   "cboMotTra"
+      Tab(3).Control(2)=   "FrameFactura"
+      Tab(3).Control(3)=   "Label1(40)"
+      Tab(3).Control(4)=   "Label1(29)"
+      Tab(3).Control(5)=   "Label1(52)"
+      Tab(3).ControlCount=   6
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   315
+         Index           =   37
+         Left            =   -71760
+         MaxLength       =   10
+         TabIndex        =   143
+         Tag             =   "Traspasoa|F|N|||scapre|fechamov|dd/mm/yyyy|N|"
+         Top             =   540
+         Visible         =   0   'False
+         Width           =   1065
+      End
+      Begin VB.ComboBox cboMotTra 
+         Height          =   315
+         Left            =   -69600
+         Style           =   2  'Dropdown List
+         TabIndex        =   141
+         Tag             =   "Motivo|N|N|||scapre|motivoTraspaso||N|"
+         Top             =   540
+         Visible         =   0   'False
+         Width           =   3975
+      End
       Begin VB.TextBox Text1 
          Height          =   1635
          Index           =   36
@@ -470,7 +497,7 @@ Begin VB.Form frmFacEntOfertas2
          Height          =   3780
          Left            =   -74280
          TabIndex        =   89
-         Top             =   720
+         Top             =   960
          Width           =   10575
          Begin VB.TextBox Text3 
             Alignment       =   1  'Right Justify
@@ -1769,6 +1796,46 @@ Begin VB.Form frmFacEntOfertas2
          EndProperty
       End
       Begin VB.Label Label1 
+         Caption         =   "Pase a histórico"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   255
+         Index           =   40
+         Left            =   -74280
+         TabIndex        =   145
+         Top             =   600
+         Visible         =   0   'False
+         Width           =   1770
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Fecha"
+         Height          =   255
+         Index           =   29
+         Left            =   -72360
+         TabIndex        =   144
+         Top             =   600
+         Visible         =   0   'False
+         Width           =   615
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Motivo"
+         Height          =   255
+         Index           =   52
+         Left            =   -70200
+         TabIndex        =   142
+         Top             =   600
+         Visible         =   0   'False
+         Width           =   855
+      End
+      Begin VB.Label Label1 
          Caption         =   "Observaciones compra"
          Height          =   255
          Index           =   28
@@ -2213,7 +2280,7 @@ Dim ModificaLineas As Byte
 
 Dim TituloLinea As String 'Descripcion de la linea que estamos en Mantenimiento
 
-Dim PrimeraVez As Boolean
+Dim Primeravez As Boolean
 
 Dim EsCabecera2 As Byte  '0-Cabecera    1.-Coddirec   2.- direnvio
 'Para saber en MandaBusquedaPrevia si busca en la tabla scapla o en la tabla sdirec
@@ -2861,8 +2928,8 @@ Error1:
 End Sub
 
 Private Sub Form_Activate()
-    If PrimeraVez Then
-        PrimeraVez = False
+    If Primeravez Then
+        Primeravez = False
         If DatosOferta <> "" Then
             PonerModo 1
             Text1(0).Text = DatosOferta
@@ -2880,7 +2947,7 @@ End Sub
 Private Sub Form_Load()
     'Icono del formulario
     Me.Icon = frmPpal.Icon
-    PrimeraVez = True
+    Primeravez = True
     
      Me.imgBuscar(8).Picture = frmPpal.imgListComun.ListImages(19).Picture
     
@@ -2938,7 +3005,12 @@ Private Sub Form_Load()
         Label1(18).Caption = "Observaciones internas"
     End If
     
-    '## A mano
+    Label1(40).visible = EsHistorico
+    Label1(29).visible = EsHistorico
+    Label1(52).visible = EsHistorico
+    cboMotTra.visible = EsHistorico
+    Text1(37).visible = EsHistorico
+
     If Not EsHistorico Then
         NombreTabla = "scapre"
         NomTablaLineas = "slipre" 'Tabla lineas de Ofertas
@@ -2948,6 +3020,8 @@ Private Sub Form_Load()
         NomTablaLineas = "slhpre"
         CargarTagsHco Me, "scapre", NombreTabla
         Me.Caption = "Histórico Ofertas Clientes"
+        CargarCombo_Tabla cboMotTra, "smotitrasofer", "codmotiv", "descmotivo", , False, "descmotivo"
+    
     End If
     Ordenacion = " ORDER BY numofert "
 
@@ -2974,12 +3048,12 @@ Private Sub Form_Load()
     End If
     
     'Cargar el DataGrid de lineas de Revisiones inicialmente a nada DATA2
-    PrimeraVez = True
+    Primeravez = True
 
     'Poner los grid sin apuntar a nada
     LimpiarDataGrids
     
-    PrimeraVez = True
+    Primeravez = True
 End Sub
 
 
@@ -2993,7 +3067,7 @@ On Error Resume Next
     '### a mano
     Me.chkAceptado(0).Value = False
     Me.cboFacturacion.ListIndex = -1
-    
+    If EsHistorico Then Me.cboMotTra.ListIndex = -1
     Text3(0).Text = "BASE IMP."
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -3139,7 +3213,7 @@ End Sub
 
 
 Private Sub frmPlant_CargarPlantillas()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RSLineas As ADODB.Recordset
 Dim SQL As String, devuelve As String
 Dim codAlmac As String
@@ -3157,9 +3231,9 @@ Dim COntadorLInea As Integer
     '(cantidad de alguna linea de tmpscapla > 0), entonces añadimos todas las
     'lineas de esa oferta poniendo en cantidad de slipre de lineas de oferta
     'el resultado de multiplicar la cantidad de tmpscapla * cantidad de slipla
-    SQL = "SELECT * FROM tmpscapla WHERE codusu=" & vUsu.codigo & " AND cantidad>0 ORDER BY codplant"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    SQL = "SELECT * FROM tmpscapla WHERE codusu=" & vUsu.Codigo & " AND cantidad>0 ORDER BY codplant"
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     'Obtener el almacen por defecto del trabajador
     'Poner el Almacen por defecto del Trabajador
@@ -3174,10 +3248,10 @@ Dim COntadorLInea As Integer
     'Consigo el contador
     COntadorLInea = Val(SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", ObtenerWhereCP))
     
-    While Not Rs.EOF  'Para cada plantilla
+    While Not RS.EOF  'Para cada plantilla
         'Añadimos todas las lineas de esa plantilla en la cantidad correcta en las
         'lineas de la Oferta
-        SQL = "SELECT * FROM slipla WHERE codplant=" & Rs!codplant & " order by numlinea"
+        SQL = "SELECT * FROM slipla WHERE codplant=" & RS!codplant & " order by numlinea"
         Set RSLineas = New ADODB.Recordset
         RSLineas.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         While Not RSLineas.EOF
@@ -3186,7 +3260,7 @@ Dim COntadorLInea As Integer
             If devuelve <> "" Then
             'Si se puede vender por cajas(devuelve>1) poner numero de unidades/caja en una linea con el
             'precio de caja, y otra linea con el resto unidades un precio unidad
-                cantidad = (Rs!cantidad * RSLineas!cantidad)
+                cantidad = (RS!cantidad * RSLineas!cantidad)
                 NumCajas = ObtenerNumCajas(CStr(cantidad), devuelve)
                 RestoUnid = CInt(cantidad) - NumCajas * CInt(devuelve)
                 'Obtener el precio a aplicar
@@ -3221,10 +3295,10 @@ Dim COntadorLInea As Integer
         Wend
         RSLineas.Close
         Set RSLineas = Nothing
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
     'Borrar de la Tabla Temporal (tmpscapla) los registros insertados tras añadir
     'las lineas de las plantillas seleccionadas
@@ -3247,7 +3321,7 @@ End Sub
 
 
 Private Sub frmTOferta_CargarOferta2(NumOfe As String)
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim numlinea As String, vWhere As String
 Dim i  As Integer
@@ -3272,25 +3346,25 @@ Dim CopiaDesdeHco As Boolean
     Else
         SQL = "Select * from " & NomTablaLineas & " where numofert=" & RecuperaValor(NumOfe, 1)
     End If
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    While Not Rs.EOF  'Para cada linea de oferta
+    While Not RS.EOF  'Para cada linea de oferta
         'Obtener el siguiente numero de linea
         vWhere = ObtenerWhereCP
         numlinea = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", vWhere)
         
         SQL = "INSERT INTO " & NomTablaLineas & " (numofert, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,origpre,esopcion) "
-        SQL = SQL & " VALUES(" & Text1(0).Text & ", " & numlinea & ", " & Rs!codAlmac & ", " & DBSet(Rs!codArtic, "T") & ", " & DBSet(Rs!NomArtic, "T") & ", "
-        SQL = SQL & DBSet(Rs!Ampliaci, "T", "S")
-        SQL = SQL & ", " & DBSet(Rs!cantidad, "N") & ", " & DBSet(Rs!precioar, "N") & ", " & DBSet(Rs!dtoline1, "N") & ", " & DBSet(Rs!dtoline2, "N") & ", " & DBSet(Rs!ImporteL, "N") & ", "
-        SQL = SQL & DBSet(CStr(Rs!origpre), "T", "S") & ","
+        SQL = SQL & " VALUES(" & Text1(0).Text & ", " & numlinea & ", " & RS!codAlmac & ", " & DBSet(RS!codArtic, "T") & ", " & DBSet(RS!NomArtic, "T") & ", "
+        SQL = SQL & DBSet(RS!Ampliaci, "T", "S")
+        SQL = SQL & ", " & DBSet(RS!cantidad, "N") & ", " & DBSet(RS!precioar, "N") & ", " & DBSet(RS!dtoline1, "N") & ", " & DBSet(RS!dtoline2, "N") & ", " & DBSet(RS!ImporteL, "N") & ", "
+        SQL = SQL & DBSet(CStr(RS!origpre), "T", "S") & ","
         'SQL = SQL & Rs!esopcion & "," & DBSet(DBLet((Rs!observa), "T"), "T", "S") & ")"
-        SQL = SQL & Rs!esopcion & ")"
+        SQL = SQL & RS!esopcion & ")"
         conn.Execute SQL
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     
     SQL = RecuperaValor(NumOfe, 2)  'Copio observaciones
@@ -3305,8 +3379,8 @@ Dim CopiaDesdeHco As Boolean
         Else
             SQL = "Select * from " & NombreTabla & " where numofert=" & RecuperaValor(NumOfe, 1)
         End If
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then
             'UPDATEAMOS los campos de la oferta de observaciones
             SQL = ""
             If RecuperaValor(NumOfe, 2) = "1" Then 'Copio observaciones
@@ -3314,15 +3388,15 @@ Dim CopiaDesdeHco As Boolean
                 
                 For i = 1 To 5
                     vWhere = "observa0" & i
-                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(Rs.Fields(vWhere), "T"), "T", "S")
+                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(RS.Fields(vWhere), "T"), "T", "S")
                     SQL = SQL & numlinea
                 Next i
                 
                 '15 Marzo 2010. Cunado pone copiar observacinoes TB tiene que copiar el campo concepto
-                SQL = SQL & ", concepto = " & DBSet(DBLet(Rs!Concepto, "T"), "T")
+                SQL = SQL & ", concepto = " & DBSet(DBLet(RS!Concepto, "T"), "T")
                 '12 Sept 2012  Copiara tb el plazo de entrega
-                SQL = SQL & ", plazos01 = " & DBSet(DBLet(Rs!plazos01, "T"), "T", "S")
-                SQL = SQL & ", plazos02 = " & DBSet(DBLet(Rs!plazos02, "T"), "T", "S")
+                SQL = SQL & ", plazos01 = " & DBSet(DBLet(RS!plazos01, "T"), "T", "S")
+                SQL = SQL & ", plazos02 = " & DBSet(DBLet(RS!plazos02, "T"), "T", "S")
                 
                 
             End If
@@ -3330,7 +3404,7 @@ Dim CopiaDesdeHco As Boolean
             If RecuperaValor(NumOfe, 3) = "1" Then 'Copio carta
                 For i = 1 To 5
                     vWhere = "asunto0" & i
-                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(Rs.Fields(vWhere), "T"), "T", "S")
+                    numlinea = ", " & vWhere & " = " & DBSet(DBLet(RS.Fields(vWhere), "T"), "T", "S")
                     SQL = SQL & numlinea
                 Next i
                 
@@ -3339,7 +3413,7 @@ Dim CopiaDesdeHco As Boolean
             SQL = Mid(SQL, 2)  'quito la primera coma
             SQL = SQL & " WHERE numofert = " & Text1(0).Text
             SQL = "UPDATE " & NombreTabla & " SET " & SQL
-            Rs.Close
+            RS.Close
         conn.Execute SQL
         PosicionarData  'vuelvo a cargar los datos
         PonerCampos
@@ -3349,7 +3423,7 @@ Dim CopiaDesdeHco As Boolean
     End If
     
     
-    Set Rs = Nothing
+    Set RS = Nothing
 
     'Actualizar el Grid con las lineas Añadidas
     If i = 0 Then CalcularDatosFactura   'Si no mete obser y carta que carge los totales
@@ -3986,7 +4060,7 @@ End Sub
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
-Dim Tabla As String
+Dim tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
     'Llamamos a al form
@@ -3997,7 +4071,7 @@ Dim Desc As String, devuelve As String
             cad = cad & ParaGrid(Text1(1), 20, "Fecha Ofer.")
             cad = cad & ParaGrid(Text1(4), 15, "Cliente")
             cad = cad & ParaGrid(Text1(5), 50, "Nombre Cliente")
-            Tabla = NombreTabla
+            tabla = NombreTabla
             If EsHistorico Then
                 Titulo = "Histórico de Ofertas"
                 devuelve = "0|1|"
@@ -4022,7 +4096,7 @@ Dim Desc As String, devuelve As String
             Titulo = Titulo & Text1(4).Text & " - " & Text1(5).Text
             cad = cad & "Cod. " & Desc & "|sdirec|coddirec|N||15·"
             cad = cad & "Desc. " & Desc & "|sdirec|nomdirec|T||35·"
-            Tabla = "sdirec"
+            tabla = "sdirec"
             devuelve = "0|1|"
         
         Else
@@ -4031,7 +4105,7 @@ Dim Desc As String, devuelve As String
             Titulo = "Dir. envio de: " & Text1(4).Text & " - " & Text1(5).Text
             cad = cad & "Cod. envio|sdirenvio|coddiren|N||15·"
             cad = cad & "Descripcion envio|sdirenvio|nomdiren|T||35·"
-            Tabla = "sdirenvio"
+            tabla = "sdirenvio"
             devuelve = "0|1|"
         End If 'de cabecera=1
     End If
@@ -4040,7 +4114,7 @@ Dim Desc As String, devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
-        frmB.vTabla = Tabla
+        frmB.vTabla = tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -4154,7 +4228,7 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte, NumReg As Byte
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo EPonerModo
     lblF.Caption = ""
@@ -4176,12 +4250,12 @@ Dim B As Boolean
     'Modo 2. Hay datos y estamos visualizandolos
     '=========================================
     'Poner Flechas de desplazamiento visibles
-    B = (Modo = 2)
+    b = (Modo = 2)
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
         
         
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -4190,8 +4264,8 @@ Dim B As Boolean
     
     'Poner siempre el campo numOferta (contador) bloqueado, excepto cuando
     'estamos en modo de Busqueda
-    B = (Modo <> 1)
-    BloquearTxt Text1(0), B, True
+    b = (Modo <> 1)
+    BloquearTxt Text1(0), b, True
     
     '-----  Datos Totales de Factura siempre bloqueado
     For i = 33 To 56
@@ -4208,9 +4282,9 @@ Dim B As Boolean
     Text3(56).BackColor = &HC0FFC0    'Tatal factura
     '---------------------------------------------------
     
-    B = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
-    Me.cboFacturacion.Enabled = B
-    Me.chkAceptado(0).Enabled = B
+    b = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
+    Me.cboFacturacion.Enabled = b
+    Me.chkAceptado(0).Enabled = b
     
     'Si no es modo lineas Boquear los TxtAux
     For i = 0 To txtAux.Count - 1
@@ -4220,16 +4294,17 @@ Dim B As Boolean
     
     
     '---------------------------------------------
-    B = Modo <> 0 And Modo <> 2 And Modo <> 5
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2 And Modo <> 5
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
+    If EsHistorico Then BloquearCmb Me.cboMotTra, Not b
     
     For i = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(i).Enabled = B
+        Me.imgFecha(i).Enabled = b
     Next i
     
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = B
+        Me.imgBuscar(i).Enabled = b
     Next i
     Me.imgBuscar(1).visible = False
     Me.imgBuscar(8).Enabled = Modo <> 0
@@ -4261,14 +4336,14 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim devuelve As String
 
     On Error GoTo EDatosOK
 
     DatosOk = False
-    B = CompForm(Me, 1) 'Comprobar formato datos ok
-    If Not B Then Exit Function
+    b = CompForm(Me, 1) 'Comprobar formato datos ok
+    If Not b Then Exit Function
     
     'Comprobar que la Fecha Entrega es posterior a la del pedido
     If Not EsFechaIgualPosterior(Text1(1).Text, Text1(2).Text, True, "La Fecha de Entrega debe ser posterior a la Fecha del Pedido.") Then Exit Function
@@ -4281,37 +4356,37 @@ Dim devuelve As String
         If devuelve = "1" And Text1(13).Text = "" Then 'Referencia Obligatoria
             MsgBox "La Referencia del Cliente es Obligatoria.", vbInformation
             PonerFoco Text1(13)
-            B = False
+            b = False
         End If
     End If
     
-    If B Then
+    If b Then
         'Lleva direcciones de envio. Comprobamos que la que ha puesto existe...
         If vParamAplic.DireccionesEnvio Then
             If Text1(33).Text = "" Xor Text2(33).Text = "" Then
                 MsgBox "Dirección de envio INCORRECTA", vbExclamation
-                B = False
+                b = False
             End If
             'Ha puesto un codenvio y parece ser que existe... LO COMPURBEO que no hay referenciales
-            If B And Text1(33).Text <> "" Then
+            If b And Text1(33).Text <> "" Then
                 devuelve = DevuelveDesdeBDNew(1, "sdirenvio", "nomdiren", "codclien", Text1(4).Text, "N", "", "coddiren", Text1(33).Text, "N")
                 If devuelve = "" Then
                     MsgBox "NO existe la dirección de envio: " & Text1(33).Text, vbExclamation
                     PonerFoco Text1(33)
-                    B = False
+                    b = False
                 End If
             End If
          End If 'de direnvii
     End If 'de b=true
             
-    If B Then
+    If b Then
         If EsDeVarios Then
             If vParamAplic.FrasMostradorSerieDistinta Then
                 'Tiene contadores distintos.... FORMA DE PAGO deberia ser efec o tartje
                 devuelve = DevuelveDesdeBDNew(1, " sforpa", "tipforpa", "codforpa", Text1(14).Text)
                 If devuelve <> "0" And devuelve <> "6" Then
-                    If MsgBox("La forma pago deberia ser efectivo o tarjeta.   ¿Continuar? ", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then B = False
-                    If Not B Then PonerFoco Text1(14)
+                    If MsgBox("La forma pago deberia ser efectivo o tarjeta.   ¿Continuar? ", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then b = False
+                    If Not b Then PonerFoco Text1(14)
                 End If
                 devuelve = ""
             End If
@@ -4322,19 +4397,19 @@ Dim devuelve As String
     
         
         
-    If B Then
+    If b Then
         'Si el usuario conectado es agente SOLO puede ponerse a el como agente
         
         If vUsu.CodigoAgente > 0 And Val(Text1(17).Text) <> vUsu.CodigoAgente Then
             'MAL
             MsgBox "Agente distinto del conectado", vbExclamation
-            B = False
+            b = False
         End If
     End If
             
-    If Not B Then Exit Function
+    If Not b Then Exit Function
           
-    DatosOk = B
+    DatosOk = b
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -4342,7 +4417,7 @@ End Function
 
 
 Private Function DatosOkLinea(ByRef DescuentoSuperiorPermitido As Boolean) As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim i As Byte
 Dim vArtic As CArticulo
 Dim Aux As String
@@ -4369,11 +4444,11 @@ Dim Aux As String
     
     
     
-    B = True
+    b = True
     For i = 0 To txtAux.Count - 1
         If txtAux(i).Text = "" Then
             MsgBox "El campo " & txtAux(i).Tag & " no puede ser nulo", vbExclamation
-            B = False
+            b = False
             PonerFoco txtAux(i)
             Exit Function
         End If
@@ -4381,23 +4456,23 @@ Dim Aux As String
         
     'Comprobar que existe de el articulo en el almacen seleccionado
     Set vArtic = New CArticulo
-    vArtic.codigo = txtAux(1).Text
+    vArtic.Codigo = txtAux(1).Text
     If Not vArtic.ExisteEnAlmacen(txtAux(0).Text) Then
-        B = False
+        b = False
         PonerFoco txtAux(1)
     End If
     
     
     
     
-    If B Then
+    If b Then
         '--------------------------------
         'Comprobaremos que esta vendiendo por encima del dto permitido
         'Preguntaremos si sigue o para
                
         GrabaLogCambioPrecioDto = False
         PorDebajoPrecioMinimo = False
-        If B Then
+        If b Then
             'Si todo ha ido bien..
             'Y lleva el parametro
             If vParamAplic.LogCambioPrecDto Then ComprobarCambioPrecioDto vArtic
@@ -4408,7 +4483,7 @@ Dim Aux As String
                     Aux = "Precio inferior al mínimo permitido"
                     
                     MsgBox Aux, vbExclamation
-                    If vUsu.Nivel > 0 Then B = False
+                    If vUsu.Nivel > 0 Then b = False
                         
                 End If
             End If
@@ -4420,13 +4495,13 @@ Dim Aux As String
     If vParamAplic.PtosAsignar > 0 Then
         If Me.txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
             MsgBox "No puede utilizar articulo de canje", vbExclamation
-            B = False
+            b = False
         End If
     End If
     
     
     
-    DatosOkLinea = B
+    DatosOkLinea = b
     
 EDatosOkLinea:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -4570,10 +4645,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
     
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
     
     
@@ -4752,15 +4827,15 @@ End Function
 
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
+Private Sub PonerBotonCabecera(b As Boolean)
 'Pone el boton de Regresar a la Cabecera si pasamos a MAntenimiento de Lineas
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    Me.cmdRegresar.visible = B
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
-    If B Then
+    If b Then
         Me.lblIndicador.Caption = "Líneas " & TituloLinea
         PonerFocoBtn Me.cmdRegresar
         cmdRegresar.Cancel = True
@@ -4775,24 +4850,24 @@ End Sub
 
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
     On Error GoTo ECargaGrid
 
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    CargaGridGnral vDataGrid, vData, SQL, Primeravez
 
     
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
         
-    B = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
-    vDataGrid.Enabled = Not B
+    b = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
+    vDataGrid.Enabled = Not b
 
-    PrimeraVez = False
+    Primeravez = False
     Exit Sub
     
 ECargaGrid:
@@ -4977,7 +5052,7 @@ Private Sub TxtAux_Change(Index As Integer)
     If Index = 4 And ModificaLineas = 2 Then txtAux(5).Text = "M"
 End Sub
 
-Private Sub txtaux_GotFocus(Index As Integer)
+Private Sub txtAux_GotFocus(Index As Integer)
 Dim cadkey As Integer
     
     
@@ -4992,7 +5067,7 @@ Dim cadkey As Integer
     
 End Sub
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     If Not (Index = 0 And KeyCode = 38) Then KEYdown KeyCode
     
@@ -5036,7 +5111,7 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 
-Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -5049,7 +5124,7 @@ Dim vCStock As CStock
 Dim NumCajas As Integer, RestoUnid As Integer
 Dim OrigP As String 'De donde viene el precio
 Dim cantidad As String
-Dim B As Boolean
+Dim b As Boolean
 
 Dim StatusArticMayorCero As Boolean
 
@@ -5107,10 +5182,10 @@ Dim StatusArticMayorCero As Boolean
                     Me.txtAux(6).Text = ""
                     Me.txtAux(7).Text = ""
                 End If
-                B = (Me.ActiveControl.Name = "txtAux")
-                If B Then B = (Me.ActiveControl.Index = 2)
+                b = (Me.ActiveControl.Name = "txtAux")
+                If b Then b = (Me.ActiveControl.Index = 2)
                 
-                If B Then
+                If b Then
                     If txtAux(2).Locked Then
                         If StatusArticMayorCero Then PonerFoco txtAux(3)
                     Else
@@ -5143,27 +5218,27 @@ Dim StatusArticMayorCero As Boolean
         Case 3 'CANTIDAD
             If PonerFormatoDecimal(txtAux(Index), 1) Then  'Tipo 1: Decimal(12,2)
                 'Comprobar si hay suficiente stock
-                B = True
+                b = True
                 Set vCStock = New CStock
-                If Not InicializarCStock2(vCStock, "S", 0, False) Then B = False
+                If Not InicializarCStock2(vCStock, "S", 0, False) Then b = False
                 If vCStock.MueveStock Then
-                    If Not vCStock.MoverStock(False, False) Then B = False
+                    If Not vCStock.MoverStock(False, False) Then b = False
                 End If
-                If Not B Then
+                If Not b Then
                     Set vCStock = Nothing
                     Exit Sub
                 End If
                 
-                B = False
+                b = False
                 If Modo = 5 Then 'Modo lineas
                     If ModificaLineas = 1 Then 'insertar linea
-                        B = True
+                        b = True
                     ElseIf ModificaLineas = 2 Then 'modificar linea
-                        If Data2.Recordset!codArtic <> txtAux(1).Text Then B = True
+                        If Data2.Recordset!codArtic <> txtAux(1).Text Then b = True
                     End If
                 End If
                 
-                If B Then 'Modo Insertar en Mto Lineas
+                If b Then 'Modo Insertar en Mto Lineas
                     'Obtener el precio correspondiente y los descuentos
                     'Comprobar si el articulo se vende por cajas antes de entrar a la función
                     devuelve = DevuelveDesdeBDNew(conAri, "sartic", "unicajas", "codartic", txtAux(1).Text, "T")
@@ -5210,7 +5285,7 @@ Dim StatusArticMayorCero As Boolean
     '                        TxtAux(3).Text = NumCajas * CInt(devuelve)
                             PonerFoco txtAux(Index)
                         Else
-                            If (txtAux(4).Text = "") Or (txtAux(4).Text <> "" And ModificaLineas = 2 And B) Then
+                            If (txtAux(4).Text = "") Or (txtAux(4).Text <> "" And ModificaLineas = 2 And b) Then
                                 txtAux(4).Text = Precio
                                 txtAux(5).Text = OrigP 'De donde viene el precio
                             End If
@@ -5374,7 +5449,7 @@ End Function
 
 Private Sub PonerModoOpcionesMenu(Modo As Byte)
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean, bol As Boolean
+Dim b As Boolean, bol As Boolean
 Dim i As Byte
 
     'Si visualizamos el historico no mostrar botones de Mantenimiento, solo es consulta
@@ -5390,75 +5465,75 @@ Dim i As Byte
     Me.mnOferta.visible = Not EsHistorico 'Traer de Oferta
     Me.mnImpRecordatorio.visible = Not EsHistorico
     Me.mnImpValoracion.visible = Not EsHistorico
-    Me.mnBarra2.visible = Not EsHistorico
-    Me.mnBarra3.visible = Not EsHistorico
+    Me.mnbarra2.visible = Not EsHistorico
+    Me.mnbarra3.visible = Not EsHistorico
     Me.mnBarra4.visible = Not EsHistorico
     
     Me.Toolbar1.Buttons(19).Enabled = Not EsHistorico
     Me.mnImpFactProF.Enabled = Not EsHistorico
     
     If Not EsHistorico Then
-        B = (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
+        b = (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
         'Insertar
-        Toolbar1.Buttons(5).Enabled = (B Or Modo = 0)
-        Me.mnNuevo.Enabled = (B Or Modo = 0)
+        Toolbar1.Buttons(5).Enabled = (b Or Modo = 0)
+        Me.mnNuevo.Enabled = (b Or Modo = 0)
         'Modificar
-        Toolbar1.Buttons(6).Enabled = B
-        Me.mnModificar.Enabled = B
+        Toolbar1.Buttons(6).Enabled = b
+        Me.mnModificar.Enabled = b
         'eliminar
-        Toolbar1.Buttons(7).Enabled = B
-        Me.mnEliminar.Enabled = B
+        Toolbar1.Buttons(7).Enabled = b
+        Me.mnEliminar.Enabled = b
             
-        B = (Modo = 2)
+        b = (Modo = 2)
         'Mantenimiento lineas
-        Toolbar1.Buttons(10).Enabled = B
-        Me.mnLineas.Enabled = B
+        Toolbar1.Buttons(10).Enabled = b
+        Me.mnLineas.Enabled = b
         'Generar Pedido
         If Modo = 5 Then
             Toolbar1.Buttons(11).Image = 34 '.Buttons(11).Image = 26
             Toolbar1.Buttons(11).ToolTipText = "Insertar intercalando"
-            B = (ModificaLineas = 0)
+            b = (ModificaLineas = 0)
         Else
             'b=modo=2
             Toolbar1.Buttons(11).Image = 26   '26
             Toolbar1.Buttons(11).ToolTipText = "Generar Pedido"
         End If
-        Toolbar1.Buttons(11).Enabled = B
-        Me.mnGenPedido.Enabled = B And Modo <> 5
+        Toolbar1.Buttons(11).Enabled = b
+        Me.mnGenPedido.Enabled = b And Modo <> 5
         
         
-        B = (Modo = 5) And (ModificaLineas = 0)
+        b = (Modo = 5) And (ModificaLineas = 0)
         'Plantillas
-        Toolbar1.Buttons(12).visible = B
-        Toolbar1.Buttons(12).Enabled = B
-        Me.mnPlantillas.visible = B
-        Me.mnPlantillas.Enabled = B
+        Toolbar1.Buttons(12).visible = b
+        Toolbar1.Buttons(12).Enabled = b
+        Me.mnPlantillas.visible = b
+        Me.mnPlantillas.Enabled = b
         'Traer Lineas de Otra Oferta
-        Toolbar1.Buttons(13).visible = B
-        Toolbar1.Buttons(13).Enabled = B
-        Me.mnOferta.visible = B
-        Me.mnOferta.Enabled = B
+        Toolbar1.Buttons(13).visible = b
+        Toolbar1.Buttons(13).Enabled = b
+        Me.mnOferta.visible = b
+        Me.mnOferta.Enabled = b
         
         'Recordatorio
-        B = (Modo = 2)
+        b = (Modo = 2)
         bol = (Modo <> 5)
         Toolbar1.Buttons(16).visible = bol
-        Toolbar1.Buttons(16).Enabled = B
+        Toolbar1.Buttons(16).Enabled = b
         Me.mnImpRecordatorio.visible = bol
-        Me.mnImpRecordatorio.Enabled = B
+        Me.mnImpRecordatorio.Enabled = b
         'Valoración
         Toolbar1.Buttons(17).visible = bol
-        Toolbar1.Buttons(17).Enabled = B
+        Toolbar1.Buttons(17).Enabled = b
         Me.mnImpValoracion.visible = bol
-        Me.mnImpValoracion.Enabled = B
+        Me.mnImpValoracion.Enabled = b
         
-        B = (Modo >= 3) Or Modo = 1
+        b = (Modo >= 3) Or Modo = 1
         'Buscar
-        Toolbar1.Buttons(1).Enabled = Not B
-        Me.mnBuscar.Enabled = Not B
+        Toolbar1.Buttons(1).Enabled = Not b
+        Me.mnBuscar.Enabled = Not b
         'Ver Todos
-        Toolbar1.Buttons(2).Enabled = Not B
-        Me.mnVerTodos.Enabled = Not B
+        Toolbar1.Buttons(2).Enabled = Not b
+        Me.mnVerTodos.Enabled = Not b
     End If
 End Sub
 
@@ -5588,7 +5663,7 @@ Dim SQL As String
     On Error GoTo EDescargaDatos
 
     '------------- AHORA
-    SQL = "DELETE from tmpscapla" & " where codusu= " & vUsu.codigo
+    SQL = "DELETE from tmpscapla" & " where codusu= " & vUsu.Codigo
     conn.Execute SQL
     Exit Function
     
@@ -5738,7 +5813,7 @@ End Sub
 
 Private Function InsertarLineasPedido(NumPedido As String, QueLineasPasanAlPedido As String, vArticulos_NO_Rotacion As String) As Boolean
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim i As Long
     On Error GoTo Elin
 
@@ -5763,6 +5838,10 @@ Dim i As Long
      'SAIL
     SQL = SQL & ",NULL,NULL" 'centro de coste
     
+    'ENERO 2019
+    'Solicitadas
+    SQL = SQL & ",cantidad "
+    
     SQL = SQL & " FROM " & NomTablaLineas & " WHERE numofert=" & Text1(0).Text
     
     If vParamAplic.ArtSeparador <> "" Then SQL = SQL & " AND codartic <> " & DBSet(vParamAplic.ArtSeparador, "T")
@@ -5781,19 +5860,19 @@ Dim i As Long
     'Marzo 2014.
     'HERBELCA.
     'Numbultos servira para saber las servidas
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     If vParamAplic.NumeroInstalacion <> 2 Then 'para todos menos para herbelca
         SQL = "Select cantidad , unicajas,numlinea from sliped,sartic where sliped.codartic = sartic.codartic and unicajas >1 and  sliped.numpedcl = " & NumPedido
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not Rs.EOF
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not RS.EOF
             
-            i = Rs!cantidad \ CLng(Rs!unicajas)
-            If (Rs!cantidad Mod CLng(Rs!unicajas)) > 0 Then i = i + 1
-            SQL = "UPDATE sliped Set numbultos=" & i & " WHERE sliped.numpedcl = " & NumPedido & " AND numlinea = " & Rs!numlinea
+            i = RS!cantidad \ CLng(RS!unicajas)
+            If (RS!cantidad Mod CLng(RS!unicajas)) > 0 Then i = i + 1
+            SQL = "UPDATE sliped Set numbultos=" & i & " WHERE sliped.numpedcl = " & NumPedido & " AND numlinea = " & RS!numlinea
             conn.Execute SQL
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
         
     Else
         
@@ -5807,22 +5886,22 @@ Dim i As Long
         
         SQL = "Select sliped.codartic,sliped.nomartic from sliped,sartic where sliped.codartic = sartic.codartic  and  sliped.numpedcl = " & NumPedido & SQL
         SQL = SQL & " AND rotacion=0"
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not Rs.EOF
-           vArticulos_NO_Rotacion = vArticulos_NO_Rotacion & Rs!codArtic & " - " & Rs!NomArtic & vbCrLf
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not RS.EOF
+           vArticulos_NO_Rotacion = vArticulos_NO_Rotacion & RS!codArtic & " - " & RS!NomArtic & vbCrLf
             
-           Rs.MoveNext
+           RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
         
     End If
-    Set Rs = Nothing
+    Set RS = Nothing
     
     
     InsertarLineasPedido = True
     Exit Function
 Elin:
-    Set Rs = Nothing
+    Set RS = Nothing
      'Hay error , almacenamos y salimos
     InsertarLineasPedido = False
 
@@ -5916,7 +5995,7 @@ Dim limpiar As Boolean
 '            If Actualizar = False And EsDeVarios = False Then Exit Sub
             
 '            If (Not EsDeVarios) Or (EsDeVarios And modo = 3) Then
-            Text1(4).Text = Format(vCliente.codigo, "000000")
+            Text1(4).Text = Format(vCliente.Codigo, "000000")
             If (Modo = 3) Or (Modo = 4) Then
                 Text1(5).Text = vCliente.Nombre  'Nom clien
                 Text1(8).Text = vCliente.Domicilio
@@ -5966,12 +6045,12 @@ End Sub
 
 Private Sub PonerDatosClienteVario(nifClien As String)
 Dim vCliente As CCliente
-Dim B As Boolean
+Dim b As Boolean
    
     If nifClien = "" Then Exit Sub
    
     Set vCliente = New CCliente
-    B = vCliente.LeerDatosCliVario(nifClien)
+    b = vCliente.LeerDatosCliVario(nifClien)
     Text1(5).Text = vCliente.Nombre  'Nom clien
     Text1(8).Text = vCliente.Domicilio
     Text1(9).Text = vCliente.CPostal
@@ -5980,7 +6059,7 @@ Dim B As Boolean
 '    Text1(6).Text = vCliente.NIF
     Text1(7).Text = DBLet(vCliente.TfnoClien, "T")
             
-    If Not B Then PonerFoco Text1(6)
+    If Not b Then PonerFoco Text1(6)
     Set vCliente = Nothing
 End Sub
 
@@ -6215,7 +6294,7 @@ Dim vClien As CCliente
 Dim NomDpto As String
 
     Set vClien = New CCliente
-    vClien.codigo = Text1(4).Text
+    vClien.Codigo = Text1(4).Text
     'si existe el departamento para el cliente
     If vClien.DptoCliente(Text1(12).Text, NomDpto) Then
         Text2(12).Text = NomDpto
@@ -6231,7 +6310,7 @@ Private Sub ComprobarRefObligatoria()
 Dim vClien As CCliente
 
     Set vClien = New CCliente
-    vClien.codigo = Text1(4).Text
+    vClien.Codigo = Text1(4).Text
     If vClien.TieneRefObligatoria(Text1(13).Text) Then
         If Text1(13).Text = "" Then PonerFoco Text1(13)
     End If
@@ -6279,7 +6358,7 @@ Dim R As ADODB.Recordset
 Dim NuevoDto As Currency
 Dim Importe As Currency
 Dim bAct As Boolean
-
+Dim Refrescar As Boolean
     On Error GoTo EDescuentosCantidad
     
     If Not vParamAplic.DtoxCantidad Then Exit Sub ' ---- [14/09/2009] (LAURA)
@@ -6289,7 +6368,7 @@ Dim bAct As Boolean
         'Si no  tenemos portes, ni nos pasamos
         If vParamAplic.TipoPortes <> 1 Then Exit Sub
         
-        
+        Refrescar = False
         Espera 0.2
         Set miRsAux = New ADODB.Recordset
         Set R = New ADODB.Recordset
@@ -6299,8 +6378,14 @@ Dim bAct As Boolean
         ' del substring() del articulo que acabamos de insertar/actualizar o eliminar
         ' Si no lleva nada recalcular los dtos para todas la lineas
         cad = " WHERE numofert = " & Text1(0).Text
-        cad = "select substring(codartic,3,4) raiz,sum(cantidad) suma from " & NomTablaLineas & cad
-        If Articulo <> "" Then cad = cad & " AND substring(codartic,3,4)= '" & Mid(Articulo, 3, 4) & "'"
+        'cad = "select substring(codartic,3,4) raiz,sum(cantidad) suma from " & NomTablaLineas & cad
+        'If Articulo <> "" Then cad = cad & " AND substring(codartic,3,4)= '" & Mid(Articulo, 3, 4) & "'"
+        
+        cad = "select codartic ,sum(cantidad) suma from " & NomTablaLineas & cad
+        If Articulo <> "" Then cad = cad & " AND codartic= '" & Articulo & "'"
+        
+        
+        
         'Y origen PRECIO no es precio especial
         cad = cad & " AND origpre <> 'E'"
         cad = cad & " group by 1"
@@ -6308,7 +6393,7 @@ Dim bAct As Boolean
         While Not miRsAux.EOF
                 cad = TransformaComasPuntos(CStr(miRsAux!Suma))
                 cad = "select * from sdesca where desdecan <=" & cad & " and " & cad & " <= hastacan and envagran = '"
-                cad = cad & miRsAux!raiz & "'"
+                cad = cad & miRsAux!codArtic & "'"
                 R.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 cad = ""
                 If Not R.EOF Then cad = R!dtolinea
@@ -6323,7 +6408,8 @@ Dim bAct As Boolean
                     cad = " WHERE numofert = " & Text1(0).Text
                     cad = "select * from " & NomTablaLineas & cad
                     '                                 a partir de la 3era posicion
-                    cad = cad & " AND codartic like '__" & miRsAux!raiz & "%'"
+                    'cad = cad & " AND codartic like '__" & miRsAux!raiz & "%'"
+                    cad = cad & " AND codartic = " & DBSet(miRsAux!codArtic, "T")
                     R.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     While Not R.EOF
                         '-- comprobar si admite descuento
@@ -6345,6 +6431,7 @@ Dim bAct As Boolean
                             cad = cad & " WHERE numofert = " & Text1(0).Text
                             cad = cad & " and numlinea = " & R!numlinea
                             conn.Execute cad
+                            Refrescar = True
                         End If
                         'Siguiente
                         R.MoveNext
@@ -6357,6 +6444,12 @@ Dim bAct As Boolean
         Wend
         miRsAux.Close
    End If 'masl 140909
+   
+   
+   If Refrescar Then
+        CargaGrid DataGrid1, Data2, True
+        CalcularDatosFactura
+   End If
    
 EDescuentosCantidad:
     If Err.Number <> 0 Then MuestraError Err.Number, "DescuentosxCantidad"
@@ -6513,7 +6606,7 @@ Dim Caj2 As Integer
                             'If PrecioAticuloVenta < vAr.PrecioMinimo Then
                             If vAr.PrecioMinimo - PrecioAticuloVenta > 0.01 Then
                                 PorDebajoPrecioMinimo = True
-                                CadenaSQL = CadenaSQL & vbCrLf & "- " & vAr.codigo & "   " & vAr.Nombre & ": " & RN!ImporteL & " (" & vAr.PrecioMinimo & ")"
+                                CadenaSQL = CadenaSQL & vbCrLf & "- " & vAr.Codigo & "   " & vAr.Nombre & ": " & RN!ImporteL & " (" & vAr.PrecioMinimo & ")"
                             End If
                     End If
                 
@@ -6700,7 +6793,7 @@ Dim ComprobarPrecioMinimo As Boolean
     'If vParamAplic.NumeroInstalacion = 2 And ComprobarPrecioMinimo Then
     If False Then
         'En herbelca, si ha cambiado el precio, tenemos que comprobar si es menor que el precio minimo
-        El_Articulo.LeerDatos El_Articulo.codigo
+        El_Articulo.LeerDatos El_Articulo.Codigo
         SQ = ""
         If txtAux(5).Text = "P" Then SQ = "1"
         If El_Articulo.EsDeVarios = 1 Then SQ = "1"
@@ -7039,7 +7132,7 @@ End Sub
 
 Private Function GenerarAlbaransmovalFAZ() As Boolean
 Dim vCStock As CStock
-Dim B As Boolean
+Dim b As Boolean
 Dim vSQL As String
 
     On Error GoTo eGenerarAlbaransmovalFAZ
@@ -7077,7 +7170,7 @@ Dim vSQL As String
     'LOS STOCKS
     vSQL = "Select * FROM slipre WHERE " & CadenaSQL
     Set vCStock = New CStock
-    B = True
+    b = True
     
     vSQL = "select * from slipre WHERE numofert = " & Text1(0).Text & " AND " & CadenaSQL
     Set miRsAux = New ADODB.Recordset
@@ -7098,15 +7191,15 @@ Dim vSQL As String
         vCStock.codArtic = miRsAux!codArtic
         'en actualizar stock comprobamos si el articulo tiene control de stock
         If vCStock.cantidad <> 0 Then
-            B = vCStock.ActualizarStock(False, False)
-            If Not B Then miRsAux.MoveLast
+            b = vCStock.ActualizarStock(False, False)
+            If Not b Then miRsAux.MoveLast
         End If
-        If B Then miRsAux.MoveNext
+        If b Then miRsAux.MoveNext
     Wend
     
     miRsAux.Close
     
-    If B Then GenerarAlbaransmovalFAZ = True
+    If b Then GenerarAlbaransmovalFAZ = True
     
     
 eGenerarAlbaransmovalFAZ:

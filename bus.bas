@@ -1,7 +1,9 @@
 Attribute VB_Name = "bus"
 Option Explicit
 
+Public Const vbHerbelca = 2
 Public Const vbFontenas = 5
+Public Const vbFenollar = 6
 
 
 Public vUsu As Usuario  'Datos usuario
@@ -489,7 +491,7 @@ On Error GoTo EAbrirConexion
     cad = cad & ";UID=" & vParamAplic.UsuarioConta
     cad = cad & ";PWD=" & vParamAplic.PasswordConta
     '---- Laura: 29/09/2006
-    cad = cad & ";PORT=3306;OPTION=3;STMT="
+    'cad = cad & ";PORT=3306;OPTION=3;STMT="
     '----
     cad = cad & ";Persist Security Info=true"
     ConnConta.ConnectionString = cad
@@ -990,7 +992,7 @@ End Function
 
 
 Public Function DevuelveDesdeBD(vBD As Byte, kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef otroCampo As String) As String
-    Dim Rs As Recordset
+    Dim RS As Recordset
     Dim cad As String
     Dim Aux As String
     
@@ -1015,20 +1017,20 @@ Public Function DevuelveDesdeBD(vBD As Byte, kCampo As String, Ktabla As String,
 '    Debug.Print cad
     
     'Creamos el sql
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     If vBD = 1 Then 'BD 1: Ariges
-        Rs.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Else    'BD 2: Conta
-        Rs.Open cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
     End If
     
-    If Not Rs.EOF Then
-        DevuelveDesdeBD = DBLet(Rs.Fields(0))
-        If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
+    If Not RS.EOF Then
+        DevuelveDesdeBD = DBLet(RS.Fields(0))
+        If otroCampo <> "" Then otroCampo = DBLet(RS.Fields(1))
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
 EDevuelveDesdeBD:
         MuestraError Err.Number, "Devuelve DesdeBD.", Err.Description
@@ -1039,7 +1041,7 @@ End Function
 'Funciona para claves primarias formadas por 2 campos
 Public Function DevuelveDesdeBDNew(vBD As Byte, Ktabla As String, kCampo As String, Kcodigo1 As String, valorCodigo1 As String, Optional tipo1 As String, Optional ByRef otroCampo As String, Optional KCodigo2 As String, Optional ValorCodigo2 As String, Optional tipo2 As String, Optional KCodigo3 As String, Optional ValorCodigo3 As String, Optional tipo3 As String) As String
 'IN: vBD --> Base de Datos a la que se accede
-Dim Rs As Recordset
+Dim RS As Recordset
 Dim cad As String
 Dim Aux As String
     
@@ -1111,20 +1113,20 @@ On Error GoTo EDevuelveDesdeBDnew
     
     
     'Creamos el sql
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     If vBD = conAri Then 'BD 1: Ariges
-        Rs.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Else    'BD 2: Conta
-        Rs.Open cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open cad, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
     End If
     
-    If Not Rs.EOF Then
-        DevuelveDesdeBDNew = DBLet(Rs.Fields(0))
-        If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
+    If Not RS.EOF Then
+        DevuelveDesdeBDNew = DBLet(RS.Fields(0))
+        If otroCampo <> "" Then otroCampo = DBLet(RS.Fields(1))
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
     
 EDevuelveDesdeBDnew:
@@ -1586,19 +1588,19 @@ Dim i As Integer
 Dim C As Integer
 Dim L As Integer
 Dim cad As String
-Dim B As Boolean
+Dim b As Boolean
     
     EsNumerico = False
-    B = True
+    b = True
     cad = ""
     If Not IsNumeric(texto) Then
         cad = "El campo debe ser numérico"
-        B = False
+        b = False
         '======= Añade Laura
         'formato: (.25)
         i = InStr(1, texto, ".")
         If i = 1 Then
-            If IsNumeric(Mid(texto, 2, Len(texto))) Then B = True
+            If IsNumeric(Mid(texto, 2, Len(texto))) Then b = True
         End If
         '======================
     Else
@@ -1614,7 +1616,7 @@ Dim B As Boolean
         Loop Until i = 0
         If C > 1 Then
             cad = "Numero de puntos incorrecto"
-            B = False
+            b = False
         End If
         
         'Si ha puesto mas de una coma y no tiene puntos
@@ -1629,14 +1631,14 @@ Dim B As Boolean
             Loop Until i = 0
             If C > 1 Then
                 cad = "Numero incorrecto"
-                B = False
+                b = False
             End If
         End If
     End If
-    If Not B Then
+    If Not b Then
         MsgBox cad, vbExclamation
     Else
-        EsNumerico = B
+        EsNumerico = b
     End If
 End Function
 
@@ -2059,13 +2061,13 @@ End Function
 Public Function SePuedeEliminarArticulo(ByVal Articulo As String, ByRef L1 As Label) As String
 On Error GoTo Salida
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim i As Integer
 Dim C As String
 Dim nt As Integer
 
     SePuedeEliminarArticulo = ""
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     Articulo = "'" & DevNombreSQL(Articulo) & "'"
     
     
@@ -2074,7 +2076,7 @@ Dim nt As Integer
     For i = 1 To nt
         L1.Caption = RecuperaValor(SQL, i) & " (Clientes)"
         L1.Refresh
-        If TieneDatosSQLCount(Rs, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
+        If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
             
         End If
@@ -2087,7 +2089,7 @@ Dim nt As Integer
     For i = 1 To nt
         L1.Caption = RecuperaValor(SQL, i) & " (Proveedores)"
         L1.Refresh
-        If TieneDatosSQLCount(Rs, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
+        If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
         
         End If
@@ -2099,7 +2101,7 @@ Dim nt As Integer
     For i = 1 To nt
         L1.Caption = RecuperaValor(SQL, i) & " (Varios)"
         L1.Refresh
-        If TieneDatosSQLCount(Rs, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
+        If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
             
         End If
@@ -2134,14 +2136,14 @@ End Function
 
 
 
-Private Function TieneDatosSQLCount(ByRef Rs As ADODB.Recordset, vSQL As String, IndexdelCount As Integer) As Boolean
+Private Function TieneDatosSQLCount(ByRef RS As ADODB.Recordset, vSQL As String, IndexdelCount As Integer) As Boolean
     TieneDatosSQLCount = False
-    Rs.Open vSQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(IndexdelCount)) Then If Rs.Fields(IndexdelCount) > 0 Then TieneDatosSQLCount = True
+    RS.Open vSQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(IndexdelCount)) Then If RS.Fields(IndexdelCount) > 0 Then TieneDatosSQLCount = True
     End If
         
-    Rs.Close
+    RS.Close
 
 End Function
 
@@ -2429,28 +2431,32 @@ Public Function DevuelveTextoDepto(Corto As Boolean) As String
                 DevuelveTextoDepto = "Obra"
             End If
     End If
+    
+    
+    If vParamAplic.NumeroInstalacion = vbFenollar Then DevuelveTextoDepto = "Obra"
+    
 End Function
 
 
 
 Private Sub BorrarEnZbloqueos()
 Dim cad As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
     On Error GoTo EBorrarEnZbloqueos
     
     cad = "Select ariges from empresasariges"
-    Set Rs = New ADODB.Recordset
-    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
-        cad = "DELETE FROM " & Rs.Fields(0) & ".zbloqueos where codusu = " & vUsu.codigo
+    Set RS = New ADODB.Recordset
+    RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
+        cad = "DELETE FROM " & RS.Fields(0) & ".zbloqueos where codusu = " & vUsu.codigo
         ejecutar cad, True
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
 EBorrarEnZbloqueos:
    Err.Clear
-   Set Rs = Nothing
+   Set RS = Nothing
 End Sub
 
 
@@ -2502,7 +2508,7 @@ End Sub
 
 
 Public Sub DavidLogImpresionAlbaranes()
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
     'antes d lanzar este sub se fijaran las variables
@@ -2512,8 +2518,8 @@ Dim SQL As String
     On Error Resume Next
 
     'PrecioMinimo  mvarTipoPortes
-    B = vParamAplic.PrecioMinimo Or vParamAplic.TipoPortes = 2
-    If Not B Then Exit Sub
+    b = vParamAplic.PrecioMinimo Or vParamAplic.TipoPortes = 2
+    If Not b Then Exit Sub
 
 
     'Inserto en slog
@@ -2536,13 +2542,16 @@ End Sub
 
 
 
-
-Public Function ActualizarPrecioEspecialGenerico(codArt As String, Precio As Currency, BloqueaTabla As Boolean) As Boolean
+'Desde telematel, forzamos la fecha de cambio
+'N tiene sentido. Nunca entrara cuando YA haya un precionu, pero por si acaso....
+Public Function ActualizarPrecioEspecialGenerico(codArt As String, Precio As Currency, BloqueaTabla As Boolean, FechaNUeTele As String) As Boolean
 'actualizar precio especial
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim NumF As String
 Dim fec As Date
+Dim InsertaHco As Boolean
+
     On Error GoTo ErrAct
     
     
@@ -2553,52 +2562,67 @@ Dim fec As Date
     End If
     
     SQL = "SELECT * FROM sprees WHERE codartic=" & DBSet(codArt, "T")
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
     
         
     
+    
+    
+        InsertaHco = True
+        If IsNull(RS!FechaNUe) Then
+            SQL = DBSet(Now, "F")
+            If FechaNUeTele <> "" Then InsertaHco = False
+        Else
+            SQL = DBSet(RS!FechaNUe, "F")
+        End If
+        
         '-- Insertar en el historico spree1
         'numero de linea
-        NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", "codartic=" & DBSet(codArt, "T") & " AND codclien=" & Rs!codClien)
-    
-    
+        If InsertaHco Then NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", "codartic=" & DBSet(codArt, "T") & " AND codclien=" & RS!codClien)
         
-        If IsNull(Rs!fechanue) Then
-            SQL = DBSet(Now, "F")
-        Else
-            SQL = DBSet(Rs!fechanue, "F")
-        End If
         'codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec
-        SQL = Rs!codClien & "," & DBSet(codArt, "T") & "," & NumF & "," & SQL
-        
+        SQL = RS!codClien & "," & DBSet(codArt, "T") & "," & NumF & "," & SQL
         'No tiene valor siguiente. Directamente actualizamos
-        SQL = SQL & "," & DBSet(Rs!precioac, "N") & "," & DBSet(DBLet(Rs!precioa1, "N"), "N") & "," & DBSet(Rs!dtoespec, "N") & ")"
+        SQL = SQL & "," & DBSet(RS!precioac, "N") & "," & DBSet(DBLet(RS!precioa1, "N"), "N") & "," & DBSet(RS!dtoespec, "N") & ")"
         SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec) VALUES (" & SQL
-        conn.Execute SQL
+        
+        If InsertaHco Then conn.Execute SQL
         
         
         '-- Actualizar precios actuales con nuevo y resetear valores nuevos
-        If IsNull(Rs!precionu) Then
-            'Como el valor de precion1 es nulo, actualizamos directamente
-            SQL = "UPDATE sprees SET precioac=" & DBSet(Precio, "N")
+        If IsNull(RS!precionu) Then
+            If FechaNUeTele <> "" Then
+                'Viene de TELEMATEL. Lleva fecha de cambio
+                SQL = "UPDATE sprees SET precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(FechaNUeTele, "F")
+                
+            Else
+                'Lo que hacia antes de Febrero 2019
+                'Como el valor de precion1 es nulo, actualizamos directamente
+                SQL = "UPDATE sprees SET precioac=" & DBSet(Precio, "N")
             
+            End If
         Else
             
-            SQL = "UPDATE sprees SET precioac=" & DBSet(Rs!precionu, "N")
-            SQL = SQL & "," & " precioa1=" & DBSet(Rs!precion1, "N")
-            SQL = SQL & ", dtoespec=" & DBSet(Rs!dtoespe1, "N", "S")
-            SQL = SQL & ", " & "precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(Now, "F")
-        
+            SQL = "UPDATE sprees SET precioac=" & DBSet(RS!precionu, "N")
+            SQL = SQL & "," & " precioa1=" & DBSet(RS!precion1, "N")
+            SQL = SQL & ", dtoespec=" & DBSet(RS!dtoespe1, "N", "S")
+            
+            If FechaNUeTele = "" Then
+                'Antes Febrero 2019. Estaba asi!!!!
+                SQL = SQL & ", " & "precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(Now, "F")
+            Else
+                SQL = SQL & ", " & "precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(FechaNUeTele, "F")
+            End If
         End If
-        SQL = SQL & " WHERE codclien=" & Rs!codClien & " and codartic=" & DBSet(codArt, "T")
+        SQL = SQL & " WHERE codclien=" & RS!codClien & " and codartic=" & DBSet(codArt, "T")
         conn.Execute SQL
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 
 

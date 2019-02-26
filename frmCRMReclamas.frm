@@ -25,50 +25,23 @@ Begin VB.Form frmCRMReclamas
    Begin VB.CommandButton Command1 
       Cancel          =   -1  'True
       Caption         =   "Cancelar"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Index           =   1
-      Left            =   6120
+      Left            =   5880
       TabIndex        =   9
       Top             =   6840
-      Width           =   975
+      Width           =   1215
    End
    Begin VB.CommandButton Command1 
       Caption         =   "&Aceptar"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Index           =   0
-      Left            =   4920
+      Left            =   4560
       TabIndex        =   8
       Top             =   6840
-      Width           =   975
+      Width           =   1215
    End
    Begin VB.TextBox Text1 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   2175
       Index           =   7
       Left            =   240
@@ -81,15 +54,6 @@ Begin VB.Form frmCRMReclamas
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   360
       Index           =   6
       Left            =   1920
@@ -100,15 +64,6 @@ Begin VB.Form frmCRMReclamas
       Width           =   1425
    End
    Begin VB.TextBox Text1 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   360
       Index           =   5
       Left            =   240
@@ -119,15 +74,6 @@ Begin VB.Form frmCRMReclamas
       Width           =   1425
    End
    Begin VB.TextBox Text1 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   360
       Index           =   4
       Left            =   3960
@@ -138,15 +84,6 @@ Begin VB.Form frmCRMReclamas
       Width           =   465
    End
    Begin VB.TextBox Text1 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   360
       Index           =   3
       Left            =   2400
@@ -157,15 +94,6 @@ Begin VB.Form frmCRMReclamas
       Width           =   1425
    End
    Begin VB.TextBox Text1 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   360
       Index           =   2
       Left            =   840
@@ -176,15 +104,6 @@ Begin VB.Form frmCRMReclamas
       Width           =   1425
    End
    Begin VB.TextBox Text1 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   360
       Index           =   1
       Left            =   240
@@ -215,15 +134,6 @@ Begin VB.Form frmCRMReclamas
       Width           =   5205
    End
    Begin VB.TextBox Text1 
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   360
       Index           =   0
       Left            =   240
@@ -260,15 +170,6 @@ Begin VB.Form frmCRMReclamas
    End
    Begin VB.Label Label1 
       Caption         =   "Observaciones"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   7
       Left            =   240
@@ -279,15 +180,6 @@ Begin VB.Form frmCRMReclamas
    Begin VB.Label Label1 
       Alignment       =   1  'Right Justify
       Caption         =   "Importe"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   240
       Index           =   6
       Left            =   1920
@@ -297,15 +189,6 @@ Begin VB.Form frmCRMReclamas
    End
    Begin VB.Label Label1 
       Caption         =   "F. reclama."
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   240
       Index           =   5
       Left            =   240
@@ -316,15 +199,6 @@ Begin VB.Form frmCRMReclamas
    End
    Begin VB.Label Label1 
       Caption         =   "Vto"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   240
       Index           =   4
       Left            =   4080
@@ -334,15 +208,6 @@ Begin VB.Form frmCRMReclamas
    End
    Begin VB.Label Label1 
       Caption         =   "Fecha fact"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   240
       Index           =   3
       Left            =   2400
@@ -352,15 +217,6 @@ Begin VB.Form frmCRMReclamas
    End
    Begin VB.Label Label1 
       Caption         =   "Factura"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   240
       Index           =   2
       Left            =   960
@@ -426,15 +282,6 @@ Begin VB.Form frmCRMReclamas
    End
    Begin VB.Label Label1 
       Caption         =   "Serie"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   240
       Index           =   1
       Left            =   240
@@ -444,15 +291,6 @@ Begin VB.Form frmCRMReclamas
    End
    Begin VB.Label Label1 
       Caption         =   "Cuenta contable"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   240
       Index           =   0
       Left            =   240

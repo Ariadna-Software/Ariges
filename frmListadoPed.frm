@@ -4794,10 +4794,10 @@ Dim PrimeraVez As Boolean
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, 2, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, 2, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
@@ -5558,7 +5558,7 @@ Dim SQL As String
 Dim cadFormula2 As String
 Dim cadSelect2 As String
 Dim cadSelect3 As String
-Dim indice As Integer
+Dim Indice As Integer
 
 
     InicializarVbles
@@ -5749,12 +5749,12 @@ Dim indice As Integer
 '        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
         '-- Ahora en este informe hay mas posibilidades de selección [SERVICIOS]
         If vParamAplic.Servicios Then
-            indice = cmbTipAlbaran(1).ListIndex
-            If indice < 0 Then
+            Indice = cmbTipAlbaran(1).ListIndex
+            If Indice < 0 Then
                 MsgBox "Debe seleccionar el tipo o los tipos de alabarán a procesar", vbExclamation
                 Exit Sub
             Else
-                Select Case indice
+                Select Case Indice
                     Case 0 ' solo ventas
                         cad = "{" & NomTabla & ".codtipom}='ALV'"
                         If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
@@ -5862,10 +5862,10 @@ Dim indice As Integer
         SQL = ""
         'LOS SELECCIONADOS
 
-        For indice = 0 To Me.ListTipoFact.ListCount - 1
+        For Indice = 0 To Me.ListTipoFact.ListCount - 1
             'Siempre 3 carcateres
-            If Me.ListTipoFact.Selected(indice) Then
-                cad = cad & Mid(Me.ListTipoFact.List(indice), 1, 3) & "|"
+            If Me.ListTipoFact.Selected(Indice) Then
+                cad = cad & Mid(Me.ListTipoFact.List(Indice), 1, 3) & "|"
                 SQL = SQL & "X"
             End If
         Next
@@ -6008,19 +6008,19 @@ Dim indice As Integer
         'Tipos de moviemientos que van incluidos
         SQL = Trim(SQL) & "   Fact:"
         cadSelect3 = "0"
-        For indice = 0 To Me.ListTipoFact.ListCount - 1
+        For Indice = 0 To Me.ListTipoFact.ListCount - 1
             'Siempre 3 carcateres
-            If Me.ListTipoFact.Selected(indice) Then
+            If Me.ListTipoFact.Selected(Indice) Then
                 cadSelect3 = Val(cadSelect3) + 1
-                SQL = SQL & "  " & Mid(Me.ListTipoFact.List(indice), 1, 3)
-                cadSelect2 = Mid(Me.ListTipoFact.List(indice), 1, 3)
+                SQL = SQL & "  " & Mid(Me.ListTipoFact.List(Indice), 1, 3)
+                cadSelect2 = Mid(Me.ListTipoFact.List(Indice), 1, 3)
                 If cadSelect2 = "FAE" Then
                     cadSelect2 = "Exterior"
                 ElseIf cadSelect2 = "FAO" Then
                     cadSelect2 = "Orden Tr."
                 Else
                     'LO que habia
-                    cadSelect2 = Trim(Mid(Me.ListTipoFact.List(indice), 6))
+                    cadSelect2 = Trim(Mid(Me.ListTipoFact.List(Indice), 6))
                 End If
                 If InStr(1, UCase(cadSelect2), "FACTURA") > 0 Then
                     cadSelect2 = Trim(Mid(cadSelect2, InStr(1, UCase(cadSelect2), "FACTURA") + 8))
@@ -6287,7 +6287,7 @@ Private Sub cmdAceptarPreFac_Click()
 'Prevision de Facturacion de Albaranes
 Dim campo As String, cad As String
 Dim b As Boolean
-Dim indice As Integer
+Dim Indice As Integer
    
 
     If OpcionListado = 50 Then
@@ -6422,12 +6422,12 @@ Dim indice As Integer
         '   selección (se queda en rem la antigua línea) [SERVICIOS]
         
         If vParamAplic.Servicios And codClien <> "ALR" Then
-            indice = cmbTipAlbaran(0).ListIndex
-            If indice < 0 Then
+            Indice = cmbTipAlbaran(0).ListIndex
+            If Indice < 0 Then
                 MsgBox "Debe seleccionar el tipo o los tipos de alabarán a procesar", vbExclamation
                 Exit Sub
             Else
-                Select Case indice
+                Select Case Indice
                     Case 0 ' solo ventas
                         cad = " {scaalb.codtipom}='ALV' "
                         If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
@@ -6533,7 +6533,7 @@ Dim indice As Integer
         '   ha sido cargada un poco más arriba [SERVICIOS]
         
         If vParamAplic.Servicios And codClien <> "ALR" Then
-            Select Case indice
+            Select Case Indice
                 Case 0
                     Titulo = "Previsión Facturación Ventas"
                 Case 1
@@ -6948,6 +6948,28 @@ Dim Banco As Integer
             Case 43, 1000, 1010
                     '43: Generar Albaran desde Pedido (NO IMPRIME LISTADO)
                     '1000: Pedido a factura:  Piede ademas de los datos del albaran, la cta prevista
+                    
+                If OpcionListado = 43 And vParamAplic.NumeroInstalacion = vbFenollar Then
+                     
+                    cadFormula = PonerTrabajadorConectado(cadParam)
+                    If cadFormula <> "" Then
+'                        me.Label1
+                        Me.txtCodigo(17).Text = cadFormula
+                        Me.txtCodigo(18).Text = cadFormula
+                        Me.txtNombre(17).Text = cadParam
+                        Me.txtNombre(18).Text = cadParam
+                        cadParam = "sclien.codenvio=senvio.codenvio AND codclien"
+                        cadParam = DevuelveDesdeBD(conAri, "concat(sclien.codenvio,'|',nomenvio,'|')", "sclien,senvio", cadParam, CStr(davidNumalbar))
+                        If cadParam <> "" Then
+                            Me.txtCodigo(19).Text = RecuperaValor(cadParam, 1)
+                            Me.txtNombre(19).Text = RecuperaValor(cadParam, 2)
+                            
+                        End If
+                        
+                    End If
+                    cadParam = ""
+                    cadFormula = ""
+                End If
                     
                 If FramePartes.visible = True Then
                     'Es facturar parte
@@ -8298,7 +8320,7 @@ End Sub
 
 Private Function ObtenerClientesNuevo(cadW As String, Importe As String) As String
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error GoTo EClientes
     
@@ -8318,17 +8340,17 @@ Dim Rs As ADODB.Recordset
     SQL = SQL & " group by codclien "
     If Importe <> "" Then SQL = SQL & " having baseimp>" & Importe
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
-    While Not Rs.EOF
+    While Not RS.EOF
 '        If RS!BaseImp >= CCur(Importe) Then
-            SQL = SQL & Rs!codClien & ","
+            SQL = SQL & RS!codClien & ","
 '        End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     'Si no tiene DATOS es que ninguno entra dentro de estos registros
     If SQL = "" Then SQL = "-1-"
@@ -8492,11 +8514,11 @@ Dim DatosPortes As String  'nomartic|preciov|preciouc|
             FecEnvio = RSalb!FecEnvio
             cadW = DevuelveDesdeBD(conAri, "AplicaPortesFactura", "sclien", "codclien", CStr(Codclien1))
             If cadW = "1" Then ClienConPortes = True
-            cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NumAlbar
+            cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NUmAlbar
             If ClienConPortes Then
                 LblBar.Caption = "Cliente: " & Format(RSalb!codClien, "000000") & " - " & RSalb!NomClien
             Else
-                LblBar.Caption = RSalb!NumAlbar
+                LblBar.Caption = RSalb!NUmAlbar
             End If
             LblBar.Refresh
         Else
@@ -8507,12 +8529,12 @@ Dim DatosPortes As String  'nomartic|preciov|preciouc|
             
                 FecEnvio = RSalb!FecEnvio
                 
-                cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NumAlbar
+                cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NUmAlbar
                 
             Else
                 'Codclien y fechaenvio la misma
                 'Todos igual. Metemos al select el albaran
-                cadW = cadW & "," & RSalb!NumAlbar
+                cadW = cadW & "," & RSalb!NUmAlbar
             End If
         
         End If
@@ -8580,7 +8602,7 @@ End Function
 Private Function TratarLineaPortes(Comprobar As Boolean, CadWh As String, NomClien As String, DatosDeArticPortes As String, CodigoCliente As Long) As Boolean
 Dim Aux As String
 Dim RN As ADODB.Recordset
-Dim j As Integer
+Dim J As Integer
 Dim Llega As Boolean
 Dim ImporteT As Currency
 
@@ -8600,7 +8622,7 @@ Dim ImporteT As Currency
         'YA EXISTE UNA LINEA con portes
         If Comprobar Then
             Aux = "insert into `tmpsliped` (`codusu`,`numpedcl`,`numlinea`,`codalmac`,codartic,`nomartic`,codclien)  VALUES ("
-            Aux = Aux & vUsu.codigo & "," & RN!NumAlbar & "," & RN!numlinea & "," & RN!codAlmac & "," & DBSet(RN!codtipom, "T")
+            Aux = Aux & vUsu.codigo & "," & RN!NUmAlbar & "," & RN!numlinea & "," & RN!codAlmac & "," & DBSet(RN!codtipom, "T")
             Aux = Aux & "," & DBSet(NomClien, "T") & "," & CodigoCliente & ")"
             ejecutar Aux, False
         Else
@@ -8665,16 +8687,16 @@ Dim ImporteT As Currency
                 'NO llega al minimo.
                 'Sicota, cargar portes
             
-                j = InStrRev(CadWh, ",")
-                If j = 0 Then
+                J = InStrRev(CadWh, ",")
+                If J = 0 Then
                     'Solo hay un albaran
-                    j = InStrRev(CadWh, "(") 'YA NO PUEDE SER CERO
+                    J = InStrRev(CadWh, "(") 'YA NO PUEDE SER CERO
                 End If
-                Aux = Mid(CadWh, j + 1)
+                Aux = Mid(CadWh, J + 1)
                 Aux = "Select numalbar,codalmac,max(numlinea) from slialb where codtipom='ALV' AND numalbar =" & Aux & " GROUP BY 1,2"
                 RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 'NO PUEDE SER EOF
-                Aux = "'ALV'," & RN!NumAlbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codAlmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
+                Aux = "'ALV'," & RN!NUmAlbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codAlmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
                 
                 'codtipom,numalbar,numlinea,codalmac,codartic,nomartic,cantidad,numbultos,
                 'precioar,dtoline1,dtoline2,importel,origpre,codproveX,

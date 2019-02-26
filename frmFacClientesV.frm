@@ -284,7 +284,7 @@ Begin VB.Form frmFacClientesV
       Appearance      =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   16
+         NumButtons      =   19
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Buscar"
             ImageIndex      =   1
@@ -315,31 +315,40 @@ Begin VB.Form frmFacClientesV
             Style           =   3
          EndProperty
          BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
+            Object.ToolTipText     =   "Traer datos clientes potenciales"
          EndProperty
          BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-            ImageIndex      =   15
+            Style           =   3
          EndProperty
          BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Style           =   3
          EndProperty
          BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Imprimir"
          EndProperty
          BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Salir"
+            ImageIndex      =   15
+         EndProperty
+         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Primero"
             ImageIndex      =   6
          EndProperty
-         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Anterior"
             ImageIndex      =   7
          EndProperty
-         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Siguiente"
             ImageIndex      =   8
          EndProperty
-         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Último"
             ImageIndex      =   9
          EndProperty
@@ -347,7 +356,7 @@ Begin VB.Form frmFacClientesV
       Begin VB.CheckBox chkVistaPrevia 
          Caption         =   "Vista previa"
          Height          =   195
-         Left            =   5160
+         Left            =   5400
          TabIndex        =   19
          Top             =   120
          Width           =   1215
@@ -483,6 +492,10 @@ Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 Public vNif As String   'Por si he pinchado ese nif
 
+
+
+Private WithEvents frmCliPot As frmFacClienPot
+Attribute frmCliPot.VB_VarHelpID = -1
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmCP As frmCPostal 'Codigos Postales
@@ -518,7 +531,7 @@ Private VieneDeBuscar As Boolean
 'de busqueda poner el valor de poblacion seleccionado y no volver a recuperar de la Base de Datos
 
 
-Dim PrimeraVez As Boolean
+Dim Primeravez As Boolean
 
 
 
@@ -694,8 +707,8 @@ End Sub
 
 
 Private Sub Form_Activate()
-    If PrimeraVez Then
-        PrimeraVez = False
+    If Primeravez Then
+        Primeravez = False
         If Not Data1.Recordset.EOF Then
             If Modo = 2 Then PonerCampos
         End If
@@ -712,10 +725,10 @@ Private Sub Form_Load()
 Dim AbreModo1 As Boolean
     'Icono del formulario
     Me.Icon = frmPpal.Icon
-    PrimeraVez = True
+    Primeravez = True
 
     ' ICONITOS DE LA BARRA
-    btnPrimero = 13 'Boton donde empiezan las Flechas de desplazamiento de Registros
+    btnPrimero = 16 'Boton donde empiezan las Flechas de desplazamiento de Registros
     With Me.Toolbar1
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 1   'Botón Buscar
@@ -723,13 +736,17 @@ Dim AbreModo1 As Boolean
         .Buttons(5).Image = 3   'Insertar Nuevo
         .Buttons(6).Image = 4   'Modificar
         .Buttons(7).Image = 5   'Borrar
-        .Buttons(9).Image = 16  'Imp
-        .Buttons(10).Image = 15  'Salir
-        .Buttons(13).Image = 6  'Primero
-        .Buttons(14).Image = 7  'Anterior
-        .Buttons(15).Image = 8  'Siguiente
-        .Buttons(16).Image = 9  'Último
+        .Buttons(9).Image = 45   'Potenciales
+        .Buttons(9).visible = vParamAplic.ClientesPotenciales
+        .Buttons(12).Image = 16  'Imp
+        .Buttons(13).Image = 15  'Salir
+        .Buttons(btnPrimero).Image = 6   'Primero
+        .Buttons(btnPrimero + 1).Image = 7 'Anterior
+        .Buttons(btnPrimero + 2).Image = 8 'Siguiente
+        .Buttons(btnPrimero + 3).Image = 9 'Último
     End With
+    
+    
     
     LimpiarCampos
     VieneDeBuscar = False
@@ -796,7 +813,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim cadB As String
+Dim CadB As String
 Dim Aux As String
 
     If CadenaDevuelta <> "" Then
@@ -804,18 +821,22 @@ Dim Aux As String
         Screen.MousePointer = vbHourglass
         'Sabemos que campos son los que nos devuelve
         'Creamos una cadena consulta y ponemos los datos
-        cadB = ""
+        CadB = ""
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        cadB = Aux
+        CadB = Aux
         '   Como la clave principal es unica, con poner el sql apuntando
         '   al valor devuelto sobre la clave ppal es suficiente
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
 End Sub
 
+
+Private Sub frmCliPot_DatoSeleccionado(CadenaSeleccion As String)
+    CadenaConsulta = CadenaSeleccion
+End Sub
 
 Private Sub frmCP_DatoSeleccionado(CadenaSeleccion As String)
 'Formulario Mantenimiento C. Postales
@@ -939,20 +960,20 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
 
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then 'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then 'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 Dim cad As String
         'Llamamos a al form
         '##A mano
@@ -964,7 +985,7 @@ Dim cad As String
             Set frmB = New frmBuscaGrid
             frmB.vCampos = cad
             frmB.vTabla = NombreTabla
-            frmB.vSQL = cadB
+            frmB.vSQL = CadB
             HaDevueltoDatos = False
             '###A mano
             frmB.vDevuelve = "0|1|" 'Campos de la tabla que devuelve
@@ -1086,8 +1107,11 @@ Dim b As Boolean
     'eliminar
     Toolbar1.Buttons(7).Enabled = b
     mnEliminar.Enabled = b
+    
+    Toolbar1.Buttons(9).Enabled = b Or Modo = 1
+    
     'imprimir
-    Toolbar1.Buttons(9).Enabled = b Or Modo = 0
+    Toolbar1.Buttons(12).Enabled = b Or Modo = 0
     
     '---------------------------------------------
     b = (Modo >= 3)
@@ -1144,11 +1168,15 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             mnModificar_Click
         Case 7  'Borrar
             mnEliminar_Click
+            
         Case 9
+            If Not vParamAplic.ClientesPotenciales Then Exit Sub
+            LanzaClientesPotenciales
+        Case 12
             frmListado3.Opcion = 15
             frmListado3.Show vbModal
             
-        Case 10  'Salir
+        Case 13  'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
             Desplazamiento (Button.Index - btnPrimero)
@@ -1162,8 +1190,48 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
+End Sub
+
+
+
+Private Sub LanzaClientesPotenciales()
+Dim Aux As String
+
+    Set frmCliPot = New frmFacClienPot
+    frmCliPot.DatosADevolverBusqueda = "0|"
+    frmCliPot.Show vbModal
+    Set frmCliPot = Nothing
+    
+    If CadenaConsulta <> "" Then
+        'OK. Ha seleccioado un cliente
+        CadenaConsulta = RecuperaValor(CadenaConsulta, 1)
+        
+        'nifclien,nomclien,domclien,codpobla,pobclien,proclien,telclien,observa)
+        
+        Aux = DevuelveDesdeBD(conAri, "nifclien", "sclipot", "codclien", CadenaConsulta)
+        If Aux = "" Then
+            MsgBox "NIF vacio", vbExclamation
+            Exit Sub
+        End If
+        
+        Aux = "replace INTO sclvar(nifclien,nomclien,domclien,codpobla,pobclien,proclien,telclien,observa)"
+        Aux = Aux & " select nifclien,coalesce(nomclien,'Nombre vacio'),coalesce(domclien,' S/N'),coalesce(codpobla,'0'),"
+        Aux = Aux & " coalesce(pobclien,' S/N'),coalesce(proclien,' S/N'),coalesce(telclie1,'0')"
+        Aux = Aux & " ,concat('CLIENTE POTENCIAL: ' ,codclien) observa from sclipot where codclien=" & CadenaConsulta
+        
+        If ejecutar(Aux, False) Then
+            Aux = DevuelveDesdeBD(conAri, "concat(nifclien,'|',nomclien,'|')", "sclipot", "codclien", CadenaConsulta)
+            RaiseEvent DatoSeleccionado(Aux)
+            Unload Me
+        End If
+        
+        
+        
+    End If
+    
+    
 End Sub

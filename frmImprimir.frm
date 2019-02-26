@@ -326,6 +326,11 @@ Dim cad As String
     CargaICO
     cad = Dir(App.Path & "\impre.dat", vbArchive)
     HaPulsadoElBotonDeImprimir = False
+    
+    
+    
+    
+    
     'ReestableceSoloImprimir = False
     If cad = "" Then
         chkSoloImprimir.Value = 0
@@ -623,7 +628,7 @@ Dim NumParam2 As Integer
 Dim HaPulsadoImprimir As Boolean
 Dim J As Integer
 Dim EulerT As String
-
+Dim Aux As String
 
 
     Screen.MousePointer = vbHourglass
@@ -649,6 +654,23 @@ Dim EulerT As String
     CadenaDesdeOtroForm = ""
     
     With frmVisReport
+        
+        '.ForzarNombreImpresora
+        If Opcion = 45 And vParamAplic.NumeroInstalacion = vbFenollar Then
+            
+            'MUY A PIÑON. TENGO PRISA
+            
+            Aux = ""
+            If UCase(Right(NombreRPT, 5)) = "B.RPT" Then
+                Aux = vParamAplic.ImpresoraFenollarB
+            Else
+                Aux = vParamAplic.ImpresoraFenollarA
+            End If
+            If InStr(1, UCase(Aux), UCase(vUsu.PC)) = 0 Then .ForzarNombreImpresora = Aux
+            
+        End If
+        
+        
         If Me.chkEMAIL.Value = 1 Then
             'EMAIL
             

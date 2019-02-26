@@ -44,32 +44,32 @@ End Function
 
 '=== DAVID (estaban en Modulo:bus, antes era ESFechaOKString)
 Public Function EsFechaOK(T As String) As Boolean
-Dim Cad As String
+Dim cad As String
 Dim mes As String, dia As String
     
-    Cad = T
-    If InStr(1, Cad, "/") = 0 Then
+    cad = T
+    If InStr(1, cad, "/") = 0 Then
        'debe ser una cadena tipo:020105 y la convertimos a 02/01/05
-       If Not IsNumeric(Cad) Then
+       If Not IsNumeric(cad) Then
             EsFechaOK = False
             Exit Function
        End If
         
       '==== Anade: Laura 04/02/2005 =============
-        If Len(Cad) < 6 Then
+        If Len(cad) < 6 Then
             EsFechaOK = False
             Exit Function
         End If
         
         'Comprobar que el dia es correcto, valores entre 1-31
-        dia = Mid(Cad, 1, 2)
+        dia = Mid(cad, 1, 2)
         If dia < 1 Or dia > 31 Then
             EsFechaOK = False
             Exit Function
         End If
         
         'Comprobar que el mes es correcto, valores entre 1-12
-        mes = Mid(Cad, 3, 2)
+        mes = Mid(cad, 3, 2)
         If mes < 1 Or mes > 12 Then
             EsFechaOK = False
             Exit Function
@@ -77,18 +77,18 @@ Dim mes As String, dia As String
       '============================================
         
         If Len(T) = 8 Then
-            Cad = Mid(Cad, 1, 2) & "/" & Mid(Cad, 3, 2) & "/" & Mid(Cad, 5)
+            cad = Mid(cad, 1, 2) & "/" & Mid(cad, 3, 2) & "/" & Mid(cad, 5)
         Else
-            If Len(T) = 6 Then Cad = Mid(Cad, 1, 2) & "/" & Mid(Cad, 3, 2) & "/" & Mid(Cad, 5)
+            If Len(T) = 6 Then cad = Mid(cad, 1, 2) & "/" & Mid(cad, 3, 2) & "/" & Mid(cad, 5)
         End If
     Else
-        dia = Mid(Cad, 1, 2)
-        mes = Mid(Cad, 4, 2)
+        dia = Mid(cad, 1, 2)
+        mes = Mid(cad, 4, 2)
     End If
     
-    If IsDate(Cad) Then
+    If IsDate(cad) Then
         EsFechaOK = True
-        T = Format(Cad, "dd/mm/yyyy")
+        T = Format(cad, "dd/mm/yyyy")
       '==== Añade: Laura 08/02/2005
         If Month(T) <> Val(mes) Then EsFechaOK = False
         If Day(T) <> Val(dia) Then EsFechaOK = False
@@ -101,23 +101,23 @@ End Function
 
 '=== DAVID (estaba en Modulo:bus)
 Public Function EsHoraOK(T As String) As Boolean
-Dim Cad As String
+Dim cad As String
     
-    Cad = T
-    If InStr(1, Cad, ":") = 0 Then
+    cad = T
+    If InStr(1, cad, ":") = 0 Then
         Select Case Len(T)
             Case 8
-                Cad = Mid(Cad, 1, 2) & ":" & Mid(Cad, 3, 2) & ":" & Mid(Cad, 5)
+                cad = Mid(cad, 1, 2) & ":" & Mid(cad, 3, 2) & ":" & Mid(cad, 5)
             Case 6
-                Cad = Mid(Cad, 1, 2) & ":" & Mid(Cad, 3, 2) & ":" & Mid(Cad, 5)
+                cad = Mid(cad, 1, 2) & ":" & Mid(cad, 3, 2) & ":" & Mid(cad, 5)
             Case 4
-                Cad = Mid(Cad, 1, 2) & ":" & Mid(Cad, 3, 2) & ":00"
+                cad = Mid(cad, 1, 2) & ":" & Mid(cad, 3, 2) & ":00"
         End Select
     End If
     
-    If IsDate(Cad) Then
+    If IsDate(cad) Then
         EsHoraOK = True
-        T = Format(Cad, "hh:mm:ss")
+        T = Format(cad, "hh:mm:ss")
     Else
         EsHoraOK = False
     End If
@@ -126,16 +126,16 @@ End Function
 
 '==== LAURA
 Public Sub PonerFormatoFecha(ByRef T As TextBox)
-Dim Cad As String
+Dim cad As String
 
-    Cad = T.Text
-    If Cad <> "" Then
-        If Not EsFechaOK(Cad) Then
+    cad = T.Text
+    If cad <> "" Then
+        If Not EsFechaOK(cad) Then
             MsgBox "Fecha incorrecta. (dd/mm/yyyy)", vbExclamation
-            Cad = "mal"
+            cad = "mal"
         End If
-        If Cad <> "" And Cad <> "mal" Then
-            T.Text = Cad
+        If cad <> "" And cad <> "mal" Then
+            T.Text = cad
         Else
             T.Text = ""
             PonerFoco T
@@ -185,16 +185,16 @@ End Function
 
 '==== LAURA
 Public Sub PonerFormatoHora(ByRef T As TextBox)
-Dim Cad As String
+Dim cad As String
 
-        Cad = T.Text
-        If Cad <> "" Then
-            If Not EsHoraOK(Cad) Then
+        cad = T.Text
+        If cad <> "" Then
+            If Not EsHoraOK(cad) Then
                 MsgBox "Hora incorrecta. (hh:mm:ss)", vbExclamation
-                Cad = "mal"
+                cad = "mal"
             End If
-            If Cad <> "" And Cad <> "mal" Then
-                T.Text = Cad
+            If cad <> "" And cad <> "mal" Then
+                T.Text = cad
             Else
                 T.Text = ""
                 PonerFoco T

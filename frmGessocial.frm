@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmPpalGessocial 
    Caption         =   "Gestion avanzada socios. Gesocial"
    ClientHeight    =   4455
@@ -225,7 +225,7 @@ Private Sub CargaImagen()
     Image1.Height = Me.Height
     Image1.Stretch = True
     
-    Image1.Picture = LoadPicture(App.Path & "\arifon2.dat")
+    Image1.Picture = LoadPicture(App.Path & "\arifon2.dll")
     If Err.Number <> 0 Then
         Me.Picture = LoadPicture()
         Err.Clear

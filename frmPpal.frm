@@ -395,7 +395,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "18:13"
+            TextSave        =   "16:18"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -419,7 +419,7 @@ Begin VB.MDIForm frmPpal
       MaskColor       =   12632256
       _Version        =   393216
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   54
+         NumListImages   =   55
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
             Picture         =   "frmPpal.frx":6A81C
             Key             =   ""
@@ -636,6 +636,10 @@ Begin VB.MDIForm frmPpal
             Picture         =   "frmPpal.frx":A2A62
             Key             =   ""
          EndProperty
+         BeginProperty ListImage55 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmPpal.frx":A3CE4
+            Key             =   ""
+         EndProperty
       EndProperty
    End
    Begin MSComctlLib.ImageList ImageListTPV 
@@ -651,43 +655,43 @@ Begin VB.MDIForm frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   10
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A3CE4
+            Picture         =   "frmPpal.frx":A4DBE
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A5676
+            Picture         =   "frmPpal.frx":A6750
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A7008
+            Picture         =   "frmPpal.frx":A80E2
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A899A
+            Picture         =   "frmPpal.frx":A9A74
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":AA32C
+            Picture         =   "frmPpal.frx":AB406
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":ABCBE
+            Picture         =   "frmPpal.frx":ACD98
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":AD650
+            Picture         =   "frmPpal.frx":AE72A
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":AEFE2
+            Picture         =   "frmPpal.frx":B00BC
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":B5844
+            Picture         =   "frmPpal.frx":B691E
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BB036
+            Picture         =   "frmPpal.frx":BC110
             Key             =   ""
          EndProperty
       EndProperty
@@ -705,119 +709,119 @@ Begin VB.MDIForm frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   29
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BCAB8
+            Picture         =   "frmPpal.frx":BDB92
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BCF0A
+            Picture         =   "frmPpal.frx":BDFE4
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BD35C
+            Picture         =   "frmPpal.frx":BE436
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BD7AE
+            Picture         =   "frmPpal.frx":BE888
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BDC00
+            Picture         =   "frmPpal.frx":BECDA
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BE052
+            Picture         =   "frmPpal.frx":BF12C
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BE4A4
+            Picture         =   "frmPpal.frx":BF57E
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BE8F6
+            Picture         =   "frmPpal.frx":BF9D0
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BED48
+            Picture         =   "frmPpal.frx":BFE22
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C4FE2
+            Picture         =   "frmPpal.frx":C60BC
             Key             =   ""
          EndProperty
          BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C59F4
+            Picture         =   "frmPpal.frx":C6ACE
             Key             =   ""
          EndProperty
          BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":CBC8E
+            Picture         =   "frmPpal.frx":CCD68
             Key             =   ""
          EndProperty
          BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":D24F0
+            Picture         =   "frmPpal.frx":D35CA
             Key             =   ""
          EndProperty
          BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":D8D52
+            Picture         =   "frmPpal.frx":D9E2C
             Key             =   ""
          EndProperty
          BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":DF5B4
+            Picture         =   "frmPpal.frx":E068E
             Key             =   ""
          EndProperty
          BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E5E16
+            Picture         =   "frmPpal.frx":E6EF0
             Key             =   ""
          EndProperty
          BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":EC678
+            Picture         =   "frmPpal.frx":ED752
             Key             =   ""
          EndProperty
          BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F2EDA
+            Picture         =   "frmPpal.frx":F3FB4
             Key             =   ""
          EndProperty
          BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F332C
+            Picture         =   "frmPpal.frx":F4406
             Key             =   ""
          EndProperty
          BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F377E
+            Picture         =   "frmPpal.frx":F4858
             Key             =   ""
          EndProperty
          BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F3BD0
+            Picture         =   "frmPpal.frx":F4CAA
             Key             =   ""
          EndProperty
          BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F4022
+            Picture         =   "frmPpal.frx":F50FC
             Key             =   ""
          EndProperty
          BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F4474
+            Picture         =   "frmPpal.frx":F554E
             Key             =   ""
          EndProperty
          BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F48C6
+            Picture         =   "frmPpal.frx":F59A0
             Key             =   ""
          EndProperty
          BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FA4E8
+            Picture         =   "frmPpal.frx":FB5C2
             Key             =   ""
          EndProperty
          BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FB33A
+            Picture         =   "frmPpal.frx":FC414
             Key             =   ""
          EndProperty
          BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FB654
+            Picture         =   "frmPpal.frx":FC72E
             Key             =   ""
          EndProperty
          BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FB96E
+            Picture         =   "frmPpal.frx":FCA48
             Key             =   ""
          EndProperty
          BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FBC88
+            Picture         =   "frmPpal.frx":FCD62
             Key             =   ""
          EndProperty
       EndProperty
@@ -1249,6 +1253,10 @@ Begin VB.MDIForm frmPpal
             Caption         =   "&Traspaso a Histórico"
             Index           =   6
          End
+         Begin VB.Menu mnFacOfertas 
+            Caption         =   "Informe ofertas en historico"
+            Index           =   7
+         End
       End
       Begin VB.Menu mnFacPed 
          Caption         =   "&Pedidos"
@@ -1308,6 +1316,10 @@ Begin VB.MDIForm frmPpal
             Caption         =   "Pedido presupuestos"
             Index           =   13
          End
+         Begin VB.Menu mnFacPedidos 
+            Caption         =   "Agrupacion pedidos"
+            Index           =   14
+         End
       End
       Begin VB.Menu mnFacAlbaran 
          Caption         =   "&Albaranes"
@@ -1348,6 +1360,10 @@ Begin VB.MDIForm frmPpal
          Begin VB.Menu mnSituaAlba 
             Caption         =   "Control direcciones de envio"
             Index           =   4
+         End
+         Begin VB.Menu mnSituaAlba 
+            Caption         =   "Listado albaranes"
+            Index           =   5
          End
          Begin VB.Menu mnBarra5 
             Caption         =   "-"
@@ -1883,10 +1899,6 @@ Begin VB.MDIForm frmPpal
    End
    Begin VB.Menu mnAdministracion 
       Caption         =   "A&dministración"
-      Begin VB.Menu mnAdmDatosGen 
-         Caption         =   "&Datos Generales"
-         Visible         =   0   'False
-      End
       Begin VB.Menu mnAdmTrabajadores 
          Caption         =   "&Trabajadores"
       End
@@ -2442,12 +2454,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-    Option Explicit
-Dim PrimeraVez As Boolean
+Option Explicit
+Dim Primeravez As Boolean
 
 Dim TieneEditorDeMenus As Boolean
 
-
+Dim QueCaption As String
 
 Private Sub SituarArriba()
     On Error Resume Next
@@ -2457,12 +2469,12 @@ Private Sub SituarArriba()
 End Sub
 
 Private Sub MDIForm_Activate()
-Dim B As Boolean
+Dim b As Boolean
  
 
    ' AvisosPendientes = False
-    If PrimeraVez Then
-        PrimeraVez = False
+    If Primeravez Then
+        Primeravez = False
         Screen.MousePointer = vbHourglass
        ' AvisosPendientes = TieneAvisosPendientes()
         If vParamAplic.NumeroInstalacion = 4 Then SituarArriba
@@ -2483,14 +2495,14 @@ Dim B As Boolean
     
     '-- Control de si se utilizan servicios o no ( si es que no no se muestra el menú) hemos fichado gente nueva para la copa
     '   el situarlo aqui hace que no haya que salir y entrar en el programa si se
-    B = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALI", "T") <> ""
-    PuntoDeMenuVisible mnServicios(3), B
-    PuntoDeMenuVisible mnServicios(4), B And vParamAplic.NumeroInstalacion <> 4
-    PuntoDeMenuVisible mnServicios(5), B
+    b = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALI", "T") <> ""
+    PuntoDeMenuVisible mnServicios(3), b
+    PuntoDeMenuVisible mnServicios(4), b And vParamAplic.NumeroInstalacion <> 4
+    PuntoDeMenuVisible mnServicios(5), b
     PuntoDeMenuVisible mnServicios(1), vParamAplic.Servicios
     PuntoDeMenuVisible mnServicios(2), vParamAplic.Servicios And vParamAplic.NumeroInstalacion <> 4  'EULER NO los factura
-    B = B Or vParamAplic.Servicios
-    PuntoDeMenuVisible mnServicios(0), B  'la barra
+    b = b Or vParamAplic.Servicios
+    PuntoDeMenuVisible mnServicios(0), b  'la barra
     
     
     'vParamAplic.Reparaciones
@@ -2531,10 +2543,14 @@ Dim B As Boolean
         
     'Los albaranes y facturas en "B"
     'seran visibles si esta creado el tipo movimiento y tene contabilidad B
-    B = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALZ", "T") <> ""
-    B = B And vParamAplic.ContabilidadB > 0
-    PuntoDeMenuVisible Me.mnAlbaranesB, B
-    PuntoDeMenuVisible mnFacturarPresupuestos, B
+    If vParamAplic.NumeroInstalacion = vbFenollar Then
+        b = True
+    Else
+        b = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALZ", "T") <> ""
+    End If
+    b = b And vParamAplic.ContabilidadB > 0
+    PuntoDeMenuVisible Me.mnAlbaranesB, b
+    PuntoDeMenuVisible mnFacturarPresupuestos, b
    
 
        
@@ -2578,42 +2594,42 @@ Dim B As Boolean
     
     'mnAlmMovimArticulosSt.visible = False
     'Dim TieneDevolucionRMA As Boolean  'Si tiene el tipo de movimiento PEW''
-    B = False
-    If DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "PEW", "T") <> "" Then B = True
-    PuntoDeMenuVisible Me.mnFacPedidos(11), B
-    PuntoDeMenuVisible Me.mnFacPedidos(12), B
-    B = False
+    b = False
+    If DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "PEW", "T") <> "" Then b = True
+    PuntoDeMenuVisible Me.mnFacPedidos(11), b
+    PuntoDeMenuVisible Me.mnFacPedidos(12), b
+    b = False
     'If vParamAplic.AlmacenB >= 0 Then
     If vParamAplic.NumeroInstalacion = 2 Then
         'Tiene almacen B
         If DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "PEZ", "T") <> "" Then
-            If vUsu.AlmacenPorDefecto2 = CStr(vParamAplic.AlmacenB) Then B = True
+            If vUsu.AlmacenPorDefecto2 = CStr(vParamAplic.AlmacenB) Then b = True
         End If
     End If
-    PuntoDeMenuVisible Me.mnFacPedidos(13), B
+    PuntoDeMenuVisible Me.mnFacPedidos(13), b
     'QUe ponga el separador
-    If B Then
+    If b Then
         If Me.mnFacPedidos(13).visible Then Me.mnFacPedidos(11).visible = True
     End If
-    'Factura de mostrador se ve si el usuario lo tiene seleccionado
-    'PuntoDeMenuVisible mnFacAlbMostrador, vParamAplic.FrasMostradorSerieDistinta
+    
+    PuntoDeMenuVisible mnFacPedidos(14), vParamAplic.NumeroInstalacion = vbFenollar
     
     
     
         'Si es empresa de b
     'Utilidades de traspaso presu a factura
     'y eliminar presu
-    B = False
+    b = False
     'If vParamAplic.AlmacenB > 90 Then
     If vParamAplic.NumeroInstalacion = 2 Then
-        If vUsu.codigo Mod 1000 = 0 Then
-            B = True
+        If vUsu.Codigo Mod 1000 = 0 Then
+            b = True
         Else
-            B = Val(vUsu.AlmacenPorDefecto2) > 90
+            b = Val(vUsu.AlmacenPorDefecto2) > 90
         End If
     End If
-    PuntoDeMenuVisible mnUtilidadesVarias(2), B
-    PuntoDeMenuVisible mnUtilidadesVarias(3), B
+    PuntoDeMenuVisible mnUtilidadesVarias(2), b
+    PuntoDeMenuVisible mnUtilidadesVarias(3), b
     'Declaracion ALCOHOL AEAT---> Fontenas
     PuntoDeMenuVisible mnproduccion1(5), vParamAplic.NumeroInstalacion = 5
     
@@ -2662,15 +2678,15 @@ Dim B As Boolean
     
       
     'ELUER
-    B = False
-    If vParamAplic.NumeroInstalacion = 4 Then B = True
+    b = False
+    If vParamAplic.NumeroInstalacion = 4 Then b = True
     
-    PuntoDeMenuVisible mnUtilidadesVarias(4), B 'vParamAplic.NumeroInstalacion = 4
-    PuntoDeMenuVisible mnMtoEuler(0), B
-    PuntoDeMenuVisible mnMtoEuler(1), B
-    PuntoDeMenuVisible mnMtoEuler(2), B
-    PuntoDeMenuVisible mnMtoEuler(3), B
-    PuntoDeMenuVisible mnFacEstadistica2(8), B
+    PuntoDeMenuVisible mnUtilidadesVarias(4), b 'vParamAplic.NumeroInstalacion = 4
+    PuntoDeMenuVisible mnMtoEuler(0), b
+    PuntoDeMenuVisible mnMtoEuler(1), b
+    PuntoDeMenuVisible mnMtoEuler(2), b
+    PuntoDeMenuVisible mnMtoEuler(3), b
+    PuntoDeMenuVisible mnFacEstadistica2(8), b
     If vParamAplic.NumeroInstalacion = 4 Then
         PuntoDeMenuVisible mnRepAlbaranes, False
         PuntoDeMenuVisible mnRepEntReparacion, False
@@ -2719,8 +2735,8 @@ End Sub
 
 
 
-Private Sub PuntoDeMenuVisible(ByRef MnPuntoDMenu As Menu, B As Boolean)
-    If MnPuntoDMenu.visible Then MnPuntoDMenu.visible = B
+Private Sub PuntoDeMenuVisible(ByRef MnPuntoDMenu As Menu, b As Boolean)
+    If MnPuntoDMenu.visible Then MnPuntoDMenu.visible = b
     
 End Sub
 
@@ -2732,9 +2748,10 @@ Private Sub MDIForm_Load()
 
     CargaImagen
 
-    PrimeraVez = True
+    Primeravez = True
     
-    If vParamAplic.HaciendoFrmulariosGrandes Then CargaIconosDlls
+    'Cargamos los ICONOS , si o si
+    CargaIconosDlls
     
     'Botones
     With Me.Toolbar1
@@ -2812,7 +2829,7 @@ End Sub
 
 Private Sub CargaImagen()
     On Error Resume Next
-    Me.Picture = LoadPicture(App.Path & "\arifon2.dat")
+    Me.Picture = LoadPicture(App.Path & "\arifon2.dll")
     If Err.Number <> 0 Then
         Me.Picture = LoadPicture()
         Err.Clear
@@ -2917,6 +2934,8 @@ Private Sub mnAdmAgen2_Click(Index As Integer)
         AbrirListado2 49
     End Select
 End Sub
+
+
 
 
 
@@ -3026,10 +3045,17 @@ End Sub
 Private Sub mnAlbaranesB_Click()
     
     If vParamAplic.TipoFormularioClientes = 0 Then
-        frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
-        frmFacEntAlbaranes2.hcoCodTipoM = "ALZ"
-        frmFacEntAlbaranes2.EsHistorico = False
-        frmFacEntAlbaranes2.Show vbModal
+        If vParamAplic.HaciendoFrmulariosGrandes Then
+            frmFacEntAlbaranesGR.hcoCodMovim = "" 'No carga el form con datos al abrir
+            frmFacEntAlbaranesGR.hcoCodTipoM = "ALZ"
+            frmFacEntAlbaranesGR.EsHistorico = False
+            frmFacEntAlbaranesGR.Show vbModal
+        Else
+            frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
+            frmFacEntAlbaranes2.hcoCodTipoM = "ALZ"
+            frmFacEntAlbaranes2.EsHistorico = False
+            frmFacEntAlbaranes2.Show vbModal
+        End If
     Else
         frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
         frmFacEntAlbSAIL.hcoCodTipoM = "ALZ"
@@ -3049,7 +3075,7 @@ Private Sub mnAlmAlPropios_Click()
 End Sub
 
 Private Sub mnAlmArticulos_Click()
-    
+    PonerCaption False, mnAlmArticulos.Caption
     If vParamAplic.HaciendoFrmulariosGrandes Then
         frmAlmArticulosGr.DatosADevolverBusqueda = ""
         frmAlmArticulosGr.Show vbModal
@@ -3057,6 +3083,7 @@ Private Sub mnAlmArticulos_Click()
         frmAlmArticulos.DatosADevolverBusqueda = ""
         frmAlmArticulos.Show vbModal
     End If
+    PonerCaption True
 End Sub
 
 
@@ -3255,7 +3282,7 @@ Private Sub mnCambioEmpresa_Click()
     End If
 
     'Borramos temporal
-    conn.Execute "Delete from zbloqueos where codusu = " & vUsu.codigo
+    conn.Execute "Delete from zbloqueos where codusu = " & vUsu.Codigo
 
 
     CadenaDesdeOtroForm = vUsu.Login & "|" & vUsu.PasswdPROPIO & "|"
@@ -3319,7 +3346,7 @@ Private Sub mnCambioEmpresa_Click()
 
     'Ponemos primera vez a false
     PonerDatosFormulario True
-    PrimeraVez = True
+    Primeravez = True
     MDIForm_Activate
 
     
@@ -3738,13 +3765,13 @@ End Sub
 
 Private Sub mnFacClientes_Click()
 'Mantenimiento de Clientes
-
+    PonerCaption False, mnFacClientes
     If vParamAplic.HaciendoFrmulariosGrandes Then
         frmFacClientesGr.Show vbModal
     Else
         frmFacClientes.Show vbModal
     End If
-    
+    PonerCaption True
     
 End Sub
 
@@ -3771,6 +3798,9 @@ End Sub
 
 
 Private Sub mnFacEntAlbaran_Click()
+
+    PonerCaption False, mnFacEntAlbaran.Caption
+
     If vParamAplic.TipoFormularioClientes = 0 Then
     
     
@@ -3795,6 +3825,7 @@ Private Sub mnFacEntAlbaran_Click()
         frmFacEntAlbSAIL.EsHistorico = False
         frmFacEntAlbSAIL.Show vbModal
     End If
+    PonerCaption True
 End Sub
 
 
@@ -3867,7 +3898,11 @@ End Sub
 
 Private Sub mnFacFacturarAlb_Click()
 'Facturacion de Albaranes de Ventas
-
+    If vParamAplic.NumeroInstalacion = vbFenollar Then
+        MsgBox "No puede facturar desde este punto de menú.", vbExclamation
+        Exit Sub
+    End If
+    
     If vParamAplic.TipoFormularioClientes = 0 Then
 
         frmListadoPed.codClien = "ALV" 'utilizamos esta vble para pasarle el tipo de movimiento
@@ -3912,8 +3947,10 @@ End Sub
 
 Private Sub mnFacHcoFacturas_Click()
 'Histórico de Facturas
+    PonerCaption False, "Facturas"
     frmFacHcoFacturas2.hcoCodMovim = ""
     frmFacHcoFacturas2.Show vbModal
+    PonerCaption True
 End Sub
 
 
@@ -4007,16 +4044,20 @@ Private Sub mnFacOfertas_Click(Index As Integer)
         
             'Private Sub mnFacTrasHist_Click()
             'Traspaso de Ofertas a las tablas de Historico
+        CadenaDesdeOtroForm = ""
         frmListadoOfer.OpcionListado = 36
         AbrirListadoOfer (36) 'NO IMPRIME LISTADO, hace traspaso de Ofertas de la tabla (scapre) a (schpre)
-
+    
+    Case 7
+        frmListadoOfer.OpcionListado = 409
+        AbrirListadoOfer (409) 'NO IMPRIME LISTADO, hace traspaso de Ofertas de la tabla (scapre) a (schpre)
     
     End Select
 End Sub
 
 Private Sub mnFacPedidos_Click(Index As Integer)
     'Estan todos agrupados bajo el mismo mn
-  
+    PonerCaption False, mnFacPedidos(Index).Caption
     Select Case Index
     Case 0, 1
         'Mantenimiento de Pedidos  Y Histórico de Pedidos
@@ -4068,7 +4109,11 @@ Private Sub mnFacPedidos_Click(Index As Integer)
         frmFacEntPedidRMA.Show vbModal
     Case 13
         frmFacEntPedPresu.Show vbModal
+        
+    Case 14
+        frmFacPedidoAgrupados.Show vbModal
     End Select
+    PonerCaption True
 End Sub
 
 
@@ -4665,7 +4710,8 @@ Private Sub mnSituaAlba_Click(Index As Integer)
         
         AbrirListado3 47
         
-    
+    Case 5
+        MsgBox "En desarrollo", vbExclamation
     End Select
 End Sub
 
@@ -5085,13 +5131,10 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-'   frmPortesNaturaleza.Show vbModal
-'    frmPortesMatriculas.Transportista = -1
-'   frmPortesMatriculas.Show vbModal
-    
+
 '   Exit Sub
 
-        
+            
     Select Case Button.Index
     Case 1 'Mantenimiento de Artículos
         mnAlmArticulos_Click
@@ -5130,11 +5173,35 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         If Me.mnComFacturar.visible And Me.mnComFacturar.Enabled Then mnComFacturar_Click
         
     Case 21 'Mantenimientos
-        mnManEntrada_Click
+    
+        If vParamAplic.NumeroInstalacion = vbFenollar Then
+            frmFacPedidoAgrupados.Show vbModal
+        Else
+            mnManEntrada_Click
+        End If
     Case 22 'Nº Serie
-        mnRepNumSerie_Click
+    
+        If vParamAplic.NumeroInstalacion = vbFenollar Then
+            'FENOLLAR
+            
+            If Not BloqueoManual("FACTCLIF", "1") Then
+                MsgBox "Hay otro usuario facturando.", vbExclamation
+                Screen.MousePointer = vbDefault
+                Exit Sub
+            End If
+    
+            
+            frmfacFacturacion.Show vbModal
+            DesBloqueoManual ("FACTCLIF")
+        Else
+            'Numero de serie
+            mnRepNumSerie_Click
+        End If
     Case 23
         If vParamAplic.Ariagro = "" Then
+        
+        
+        
             mnRepAvisos_Click
         Else
             mnTratamientos_Click 5
@@ -5220,21 +5287,21 @@ Dim T
 End Sub
 
 Private Sub PonerMenusNivelUsuario()
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (vUsu.Nivel = 0) Or (vUsu.Nivel = 1)  'Administradores y root
+    b = (vUsu.Nivel = 0) Or (vUsu.Nivel = 1)  'Administradores y root
 
-    Me.mnConfParamAplic = B
-    mnConfManteUsuarios = B
+    Me.mnConfParamAplic = b
+    mnConfManteUsuarios = b
     
-    mnUsuarios.Enabled = B
+    mnUsuarios.Enabled = b
    ' mnNuevaEmpresa.Enabled = b
    ' mnPedirPwd.Enabled = b
     Me.mnUtiConnActivas.Enabled = (vUsu.Nivel = 0) 'solo para root
     
 
-    B = vUsu.Nivel = 3  'Es usuario de consultas
-    If B Then
+    b = vUsu.Nivel = 3  'Es usuario de consultas
+    If b Then
         'Inventario
         Me.mnAlmTomaInven.Enabled = False
         Me.mnAlmEntradaInve.Enabled = False
@@ -5337,7 +5404,7 @@ Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     
-    SQL = "Select * from usuarios.appmenususuario where aplicacion='Ariges' and codusu = " & Val(Right(CStr(vUsu.codigo), 3))
+    SQL = "Select * from usuarios.appmenususuario where aplicacion='Ariges' and codusu = " & Val(Right(CStr(vUsu.Codigo), 3))
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     SQL = ""
@@ -5466,11 +5533,11 @@ Dim Activado As Boolean
     'Mantenimientos
     Me.Toolbar1.Buttons(21).visible = ComprobarBotonMenuVisible(Me.mnManEntrada, Activado)
     Me.Toolbar1.Buttons(21).Enabled = Activado
-    
+    If vParamAplic.NumeroInstalacion = vbFenollar Then Me.Toolbar1.Buttons(21).ToolTipText = "Agrupación de pedidos"
     'Nº Serie
     Me.Toolbar1.Buttons(22).visible = ComprobarBotonMenuVisible(Me.mnRepNumSerie, Activado)
     Me.Toolbar1.Buttons(22).Enabled = Activado
-    
+    If vParamAplic.NumeroInstalacion = vbFenollar Then Me.Toolbar1.Buttons(22).ToolTipText = "FACTURACION"
     
     '-----------------------------------------------------------
     'Conuslta de precio
@@ -5541,56 +5608,56 @@ Private Function ComprobarBotonMenuVisible(objMenu As Menu, Activado As Boolean)
 '(se comprueba hasta q se encuentra el false o se llega al padre)
 Dim nomMenu As String
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim cad As String
-Dim B As Boolean
+Dim b As Boolean
 
 
     On Error GoTo EComprobar
     
-    B = objMenu.visible
+    b = objMenu.visible
     Activado = objMenu.Enabled
     
-    If B = False Then
-        ComprobarBotonMenuVisible = B
+    If b = False Then
+        ComprobarBotonMenuVisible = b
     Else
     
         nomMenu = objMenu.Name
         
-        Set Rs = New ADODB.Recordset
+        Set RS = New ADODB.Recordset
         
         'Obtener el padre del menu
         SQL = "select padre from usuarios.appmenus where aplicacion='Ariges' and name=" & DBSet(nomMenu, "T")
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then
-            cad = Rs.Fields(0).Value
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then
+            cad = RS.Fields(0).Value
         End If
-        Rs.Close
+        RS.Close
         
-        B = True
-        While B And cad <> ""
+        b = True
+        While b And cad <> ""
                 SQL = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & cad
-                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                If Not Rs.EOF Then
-                    cad = Rs!Padre
-                    nomMenu = Rs!Name
+                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If Not RS.EOF Then
+                    cad = RS!Padre
+                    nomMenu = RS!Name
                 End If
-                Rs.Close
+                RS.Close
                 
                 'comprobar si el padre esta bloqueado
-                SQL = "Select count(*) from usuarios.appmenususuario where aplicacion='Ariges' and codusu=" & Val(Right(CStr(vUsu.codigo), 3))
+                SQL = "Select count(*) from usuarios.appmenususuario where aplicacion='Ariges' and codusu=" & Val(Right(CStr(vUsu.Codigo), 3))
                 SQL = SQL & " and tag='" & nomMenu & "|'"
-                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                If Rs.Fields(0).Value > 0 Then
+                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If RS.Fields(0).Value > 0 Then
                     'Esta bloqueado el menu para el usuario
-                    B = False
+                    b = False
                     Activado = False
                 End If
-                Rs.Close
+                RS.Close
                 If cad = "0" Then cad = "" 'terminar si llegamos a la raiz
         Wend
-        ComprobarBotonMenuVisible = B
-        Set Rs = Nothing
+        ComprobarBotonMenuVisible = b
+        Set RS = Nothing
     End If
     
 EComprobar:
@@ -5657,6 +5724,26 @@ End Sub
 
 Private Sub CargaIconosDlls()
 Dim TamanyoImgComun As Integer
+
+
+
+    'Comprobacion
+    TamanyoImgComun = 0
+    If Dir(App.Path & "\iconosges.dll", vbArchive) = "" Then TamanyoImgComun = 1
+    If Dir(App.Path & "\iconosges_BN.dll", vbArchive) = "" Then TamanyoImgComun = 1
+    If Dir(App.Path & "\iconosges_OM.dll", vbArchive) = "" Then TamanyoImgComun = 1
+    
+    If TamanyoImgComun = 1 Then
+        If vParamAplic.HaciendoFrmulariosGrandes Then
+            MsgBox "Faltan librerias DLL del sistema. " & vbCrLf & "El programa continuará." & vbCrLf & vbCrLf & "Avise soporte técnico", vbExclamation
+            vParamAplic.QuitarFormulariosGrandes
+        End If
+        Exit Sub
+    End If
+
+
+
+
 
     '**  las dlls estan en raiz ariges
     ImgListComun2.ListImages.Clear
@@ -5725,4 +5812,18 @@ Private Sub InsertaIconoPDF()
      
 einsicono:
     Err.Clear
+End Sub
+
+
+
+Private Sub PonerCaption(Reestablecer As Boolean, Optional texto As String)
+
+    If vParamAplic.NumeroInstalacion <> vbFenollar Then Exit Sub
+
+    If Not Reestablecer Then
+        QueCaption = Me.Caption
+        Me.Caption = "Ariges. " & vEmpresa.nomresum & " - " & Replace(texto, "&", "")
+    Else
+        Me.Caption = QueCaption
+    End If
 End Sub

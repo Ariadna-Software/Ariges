@@ -1,26 +1,35 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacClientes3 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Clientes"
-   ClientHeight    =   6015
+   ClientHeight    =   6825
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   8985
+   ClientWidth     =   11310
    Icon            =   "frmFacClientes2.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6015
-   ScaleWidth      =   8985
+   ScaleHeight     =   6825
+   ScaleWidth      =   11310
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   2
       Left            =   4320
       MaxLength       =   30
@@ -33,7 +42,16 @@ Begin VB.Form frmFacClientes3
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   0
       Left            =   120
       MaxLength       =   6
@@ -46,7 +64,16 @@ Begin VB.Form frmFacClientes3
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   1
       Left            =   1020
       MaxLength       =   40
@@ -58,22 +85,22 @@ Begin VB.Form frmFacClientes3
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmFacClientes2.frx":000C
-      Height          =   4710
+      Height          =   5550
       Left            =   240
       TabIndex        =   9
       TabStop         =   0   'False
       Top             =   540
-      Width           =   8415
-      _ExtentX        =   14843
-      _ExtentY        =   8308
+      Width           =   10935
+      _ExtentX        =   19288
+      _ExtentY        =   9790
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -81,8 +108,8 @@ Begin VB.Form frmFacClientes3
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -130,41 +157,68 @@ Begin VB.Form frmFacClientes3
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   7620
+      Left            =   9840
       TabIndex        =   4
-      Top             =   5520
-      Width           =   1035
+      Top             =   6240
+      Width           =   1135
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   6420
+      Left            =   8520
       TabIndex        =   3
-      Top             =   5520
-      Width           =   1035
+      Top             =   6240
+      Width           =   1135
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   7620
+      Left            =   9840
       TabIndex        =   8
-      Top             =   5520
+      Top             =   6240
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1135
    End
    Begin VB.Frame Frame1 
       Height          =   555
       Left            =   120
       TabIndex        =   6
-      Top             =   5400
+      Top             =   6120
       Width           =   3435
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -184,8 +238,8 @@ Begin VB.Form frmFacClientes3
       Left            =   0
       TabIndex        =   5
       Top             =   0
-      Width           =   8985
-      _ExtentX        =   15849
+      Width           =   11310
+      _ExtentX        =   19950
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -355,22 +409,22 @@ Dim Modo As Byte
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(vModo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 
     Modo = vModo
-    B = (Modo = 2)
+    b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtAux(0).visible = Not B
-    txtAux(1).visible = Not B
-    txtAux(2).visible = Not B
+    Me.txtAux(0).visible = Not b
+    txtAux(1).visible = Not b
+    txtAux(2).visible = Not b
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
-    DataGrid1.Enabled = B
+    cmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
+    DataGrid1.Enabled = b
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     'Si estamos en insertar o modificar
     BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
@@ -386,15 +440,15 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = B
-    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(1).Enabled = b
+    Me.mnBuscar.Enabled = b
     'Ber Todos
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnVerTodos.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnVerTodos.Enabled = b
     
 '     b = b And Not DeConsulta
 '    'Añadir
@@ -438,12 +492,13 @@ End Sub
 
 
 Private Sub BotonBuscar()
-    CargaGrid2 "codclien= -1"  'para vaciar los datos del Grid
+    CargaGrid2 "false"  'para vaciar los datos del Grid
     'Buscar
     txtAux(0).Text = ""
     txtAux(1).Text = ""
     txtAux(2).Text = ""
-    LLamaLineas 750, 1
+    
+    LLamaLineas Me.DataGrid1.Top + 270, 1
     PonerFoco txtAux(1)
 End Sub
 
@@ -451,7 +506,7 @@ Private Sub BotonVerTodos()
 On Error Resume Next
 
     CargaGrid2 ""
-    If Adodc1.Recordset.RecordCount <= 0 Then
+    If adodc1.Recordset.RecordCount <= 0 Then
         MsgBox "No hay ningún registro en la tabla sactiv", vbInformation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -534,7 +589,7 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim i As Integer
-Dim cadB As String
+Dim CadB As String
 
     On Error Resume Next
 
@@ -551,10 +606,10 @@ Dim cadB As String
                 If InStr(1, txtAux(2).Text, "*") = 0 Then txtAux(2).Text = "*" & txtAux(2).Text & "*"
             End If
             
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid2 cadB
+                CargaGrid2 CadB
                 DataGrid1.SetFocus
             End If
         
@@ -609,16 +664,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
-    If Adodc1.Recordset.EOF Then
+    If adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Adodc1.Recordset.Fields(0) & "|"
-    Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = adodc1.Recordset.Fields(0) & "|"
+    cad = cad & adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -632,8 +687,8 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+    If Not adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     End If
 End Sub
 
@@ -744,10 +799,10 @@ End Sub
 
 
 Private Sub CargaGrid2(Optional SQL As String)
-Dim B As Boolean
+Dim b As Boolean
 Dim tots As String
     
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     
     If vParamAplic.NumeroInstalacion = 2 Then
         If vUsu.CodigoAgente > 0 Then
@@ -770,18 +825,18 @@ Dim tots As String
     End If
 
 
-    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.adodc1, SQL, False, 360
     
     '### a mano
-    tots = "S|txtAux(0)|T|Cliente|900|;S|txtAux(1)|T|Nombre|3900|;S|txtAux(2)|T|Nombre Comercial|3000|;"
-    arregla tots, DataGrid1, Me
+    tots = "S|txtAux(0)|T|Cliente|1100|;S|txtAux(1)|T|Nombre|4500|;S|txtAux(2)|T|Nombre Comercial|4500|;"
+    arregla tots, DataGrid1, Me, 360
     
-    DataGrid1.Enabled = B
+    DataGrid1.Enabled = b
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
-   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+   If Not adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If

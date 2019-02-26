@@ -612,7 +612,7 @@ Dim RN As ADODB.Recordset
     End If
     
     If b And vParamAplic.ActualizaPrecioEspecial Then
-        ActualizarPrecioEspecialGenerico parCodArtic, ImporteFormateado(Text1(4).Text), False
+        ActualizarPrecioEspecialGenerico parCodArtic, ImporteFormateado(Text1(4).Text), False, ""
         
     End If
     
@@ -811,10 +811,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
@@ -959,24 +959,24 @@ End Sub
 
 
 Private Sub imgFecha_Click(Index As Integer)
-Dim indice As Byte
+Dim Indice As Byte
 
 '   If Modo = 2 Or Modo = 0 Then Exit Sub
    Screen.MousePointer = vbHourglass
    
    Set frmF = New frmCal
    frmF.Fecha = Now
-   indice = Index + 1
+   Indice = Index + 1
    Me.imgFecha(0).Tag = Index
    
-   PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
+   PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco Text1(indice)
+   PonerFoco Text1(Indice)
 
 End Sub
 

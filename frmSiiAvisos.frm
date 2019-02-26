@@ -37,6 +37,7 @@ Begin VB.Form frmSiiAvisos
       Sorted          =   -1  'True
       LabelWrap       =   -1  'True
       HideSelection   =   -1  'True
+      FullRowSelect   =   -1  'True
       _Version        =   393217
       ForeColor       =   -2147483640
       BackColor       =   -2147483643
@@ -64,7 +65,7 @@ Begin VB.Form frmSiiAvisos
       BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   2
          Text            =   "Nombre"
-         Object.Width           =   7832
+         Object.Width           =   8185
       EndProperty
       BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Alignment       =   1

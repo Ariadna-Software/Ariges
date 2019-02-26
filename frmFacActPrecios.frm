@@ -456,10 +456,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    Dim cerrar As Boolean
+    Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, 2, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, 2, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
@@ -488,7 +488,7 @@ Private Sub ProcesoActualizarPrecios_Actuales(cadWhere As String, totReg As Long
 '   - actualizar slista con slista.precioac=slista.precionu
 '   - si slista.codlista es la tarifa de los parametros de la aplicacion: actualizar PVP del articulo
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
 
@@ -507,14 +507,14 @@ Dim hayErr As Boolean
     
     '-- seleccionar todos los registros actuales a procesar
     SQL = "SELECT * FROM slista,sartic WHERE " & cadWhere
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa a cambiar
     hayErr = False
-    While Not Rs.EOF
+    While Not RS.EOF
         '-- actualizar tarifas precios y PVP si corresponde
-        If Not ActualizarTarifa(DBLet(Rs!codArtic, "T"), DBLet(Rs!codlista, "N")) Then
+        If Not ActualizarTarifa(DBLet(RS!codArtic, "T"), DBLet(RS!codlista, "N")) Then
             hayErr = True
         End If
         
@@ -525,11 +525,11 @@ Dim hayErr As Boolean
         Me.lblProgreso(1).Caption = CLng((i * 100) / totReg) & " %"
         Me.lblProgreso(0).Caption = "Actualizando precios actuales.     (" & i & " de " & totReg & ")"
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     
     Screen.MousePointer = vbDefault
@@ -643,7 +643,7 @@ Private Sub ProcesoActualizarPrecios_Especiales(cadWhere As String, totReg As Lo
 '   - actualizar sprees con sprees.precioac=sprees.precionu
 '   - poner a nulos los valores nuevos
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
 
@@ -662,14 +662,14 @@ Dim hayErr As Boolean
     
     '-- seleccionar todos los registros actuales a procesar
     SQL = "SELECT * FROM sprees,sartic WHERE " & cadWhere
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada precio especial a cambiar
     hayErr = False
-    While Not Rs.EOF
+    While Not RS.EOF
         '-- actualizar precios especiales
-        If Not ActualizarPrecioEspec(Rs!codClien, Rs!codArtic) Then
+        If Not ActualizarPrecioEspec(RS!codClien, RS!codArtic) Then
             'procesar errores!!!!!!!!!!!
             hayErr = True
         End If
@@ -681,11 +681,11 @@ Dim hayErr As Boolean
         Me.lblProgreso(1).Caption = CLng((i * 100) / totReg) & " %"
         Me.lblProgreso(0).Caption = "Actualizando precios especiales.     (" & i & " de " & totReg & ")"
         If (i Mod 30) = 0 Then DoEvents
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Screen.MousePointer = vbDefault
     If Not hayErr Then
@@ -710,7 +710,7 @@ End Sub
 Private Function ActualizarPrecioEspec(codCli As Long, codArt As String) As Boolean
 'actualizar precio especial
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim NumF As String
 
     On Error GoTo ErrAct
@@ -719,30 +719,31 @@ Dim NumF As String
     ActualizarPrecioEspec = False
     
     SQL = "SELECT * FROM sprees WHERE codclien=" & codCli & " AND codartic=" & DBSet(codArt, "T")
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
         '-- Insertar en el historico spree1
         'numero de linea
         NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", "codartic=" & DBSet(codArt, "T") & " AND codclien=" & codCli)
     
         SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec) "
         SQL = SQL & " VALUES (" & codCli & "," & DBSet(codArt, "T") & "," & NumF & ","
-        SQL = SQL & DBSet(Rs!fechanue, "F") & "," & DBSet(Rs!precioac, "N") & "," & DBSet(DBLet(Rs!precioa1, "N"), "N") & "," & DBSet(Rs!dtoespec, "N") & ")"
+        SQL = SQL & DBSet(RS!fechanue, "F") & "," & DBSet(RS!precioac, "N") & "," & DBSet(DBLet(RS!precioa1, "N"), "N") & "," & DBSet(RS!dtoespec, "N") & ")"
         conn.Execute SQL
         
         
         '-- Actualizar precios actuales con nuevo y resetear valores nuevos
-        SQL = "UPDATE sprees SET precioac=" & DBSet(Rs!precionu, "N")
-        SQL = SQL & "," & " precioa1=" & DBSet(Rs!precion1, "N")
-        SQL = SQL & ", dtoespec=" & DBSet(Rs!dtoespe1, "N")
+        SQL = "UPDATE sprees SET precioac=" & DBSet(RS!precionu, "N")
+        SQL = SQL & "," & " precioa1=" & DBSet(RS!precion1, "N")
+        'Si dtosespec nuevo esta vacio(null), como esto es herbequiano, no UPDATEO el dtoespecial
+        If Not IsNull(RS!dtoespe1) Then SQL = SQL & ", dtoespec=" & DBSet(RS!dtoespe1, "N")
         SQL = SQL & ", " & "precionu=" & ValorNulo & ", fechanue=" & ValorNulo & ", precion1=" & ValorNulo
         SQL = SQL & ", dtoespe1=" & ValorNulo
         SQL = SQL & " WHERE codclien=" & codCli & " and codartic=" & DBSet(codArt, "T")
         conn.Execute SQL
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 
     conn.CommitTrans
@@ -771,7 +772,6 @@ Private Sub txtProv_LostFocus()
     If txtProv.Text <> "" Then
         If Not IsNumeric(txtProv.Text) Then
             MsgBox "Campo numerico", vbExclamation
-            
         Else
             menErrProceso = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtProv.Text)
             If menErrProceso = "" Then MsgBox "no existe existe Proveedor", vbExclamation
@@ -890,7 +890,7 @@ Private Sub ProcesoActualizarPreciosProvee(cadWhere As String, totReg As Long)
 '   - actualizar slista con slista.precioac=slista.precionu
 '   - si slista.codlista es la tarifa de los parametros de la aplicacion: actualizar PVP del articulo
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
 
@@ -909,14 +909,14 @@ Dim hayErr As Boolean
     
     '-- seleccionar todos los registros actuales a procesar
     SQL = "SELECT * FROM slispr WHERE " & cadWhere
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa a cambiar
     hayErr = False
-    While Not Rs.EOF
+    While Not RS.EOF
         '-- actualizar tarifas precios y PVP si corresponde
-        If Not ActualizarPreciosProvee(Rs) Then hayErr = True
+        If Not ActualizarPreciosProvee(RS) Then hayErr = True
         
         
         '-- actualizar la progress bar
@@ -926,11 +926,11 @@ Dim hayErr As Boolean
         Me.lblProgreso(1).Caption = CLng((i * 100) / totReg) & " %"
         Me.lblProgreso(0).Caption = "Actualizando precios actuales.     (" & i & " de " & totReg & ")"
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     
     Screen.MousePointer = vbDefault

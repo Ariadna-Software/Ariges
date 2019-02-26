@@ -1,22 +1,57 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacDtoUd 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Mantenimiento tasas"
-   ClientHeight    =   6015
+   ClientHeight    =   6090
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   5715
+   ClientWidth     =   8970
    Icon            =   "frmFacDtoUd.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6015
-   ScaleWidth      =   5715
+   ScaleHeight     =   6090
+   ScaleWidth      =   8970
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton Command1 
+      Caption         =   "+"
+      Height          =   255
+      Left            =   4800
+      TabIndex        =   15
+      Top             =   5400
+      Width           =   135
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      Height          =   270
+      Index           =   4
+      Left            =   480
+      MaxLength       =   16
+      TabIndex        =   13
+      Tag             =   "id|N|N|||sdesca|id|||"
+      Text            =   "Codi"
+      Top             =   7080
+      Width           =   800
+   End
+   Begin VB.TextBox txtAux2 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000018&
+      BorderStyle     =   0  'None
+      Height          =   270
+      Index           =   0
+      Left            =   2520
+      Locked          =   -1  'True
+      MaxLength       =   40
+      TabIndex        =   12
+      Text            =   "Descripcion"
+      Top             =   5400
+      Width           =   1755
+   End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
@@ -49,17 +84,17 @@ Begin VB.Form frmFacDtoUd
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   4260
+      Left            =   7620
       TabIndex        =   5
-      Top             =   5520
+      Top             =   5400
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   3060
+      Left            =   6420
       TabIndex        =   4
-      Top             =   5520
+      Top             =   5400
       Width           =   1035
    End
    Begin VB.TextBox txtAux 
@@ -68,7 +103,7 @@ Begin VB.Form frmFacDtoUd
       Height          =   270
       Index           =   0
       Left            =   120
-      MaxLength       =   4
+      MaxLength       =   16
       TabIndex        =   0
       Tag             =   "Envase-granel|T|N|||sdesca|envagran|||"
       Text            =   "Codi"
@@ -81,20 +116,20 @@ Begin VB.Form frmFacDtoUd
       BorderStyle     =   0  'None
       Height          =   270
       Index           =   1
-      Left            =   960
+      Left            =   1320
       MaxLength       =   40
       TabIndex        =   1
       Tag             =   "Desde|N|S|||sdesca|desdecan|0||"
       Text            =   "Descripcion"
       Top             =   5040
-      Width           =   1755
+      Width           =   1395
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   4260
+      Left            =   7620
       TabIndex        =   10
-      Top             =   5520
+      Top             =   5400
       Visible         =   0   'False
       Width           =   1035
    End
@@ -129,8 +164,8 @@ Begin VB.Form frmFacDtoUd
       Left            =   0
       TabIndex        =   6
       Top             =   0
-      Width           =   5715
-      _ExtentX        =   10081
+      Width           =   8970
+      _ExtentX        =   15822
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -243,8 +278,8 @@ Begin VB.Form frmFacDtoUd
       TabIndex        =   11
       TabStop         =   0   'False
       Top             =   540
-      Width           =   5415
-      _ExtentX        =   9551
+      Width           =   8655
+      _ExtentX        =   15266
       _ExtentY        =   8308
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -304,6 +339,15 @@ Begin VB.Form frmFacDtoUd
          EndProperty
       EndProperty
    End
+   Begin VB.Label Label1 
+      Caption         =   "El txt ID esta bajo"
+      Height          =   255
+      Left            =   2880
+      TabIndex        =   14
+      Top             =   5640
+      Visible         =   0   'False
+      Width           =   1215
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
       Begin VB.Menu mnBuscar 
@@ -353,9 +397,15 @@ Public DeConsulta As Boolean 'Muestra Form para consulta, solo buscar y ver todo
 
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
+
+Private WithEvents frmA As frmAlmArticu2
+Attribute frmA.VB_VarHelpID = -1
+
 Private CadenaConsulta As String
 Private CadAncho As Boolean  'Para saber si hemos fijado el ancho de los campos
 
+
+Dim Aux As String
 
 Dim Modo As Byte
 '-------------------------------------------------------
@@ -375,19 +425,20 @@ Dim b As Boolean
     Modo = vModo
     b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
-    
-    txtAux(0).Visible = Not b
-    txtAux(1).Visible = Not b
-    txtAux(2).Visible = Not b
-    txtAux(3).Visible = Not b
-   
-    cmdAceptar.Visible = Not b
-    cmdCancelar.Visible = Not b
+        
+    txtAux(0).visible = Not b
+    txtAux2(0).visible = Not b
+    txtAux(1).visible = Not b
+    txtAux(2).visible = Not b
+    txtAux(3).visible = Not b
+    Me.Command1.visible = Not b
+    cmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.Visible = b
+        cmdRegresar.visible = b
     End If
     
     'Si estamos insertando o busqueda
@@ -443,7 +494,8 @@ Dim anc As Single
     
     'Obtenemos la siguiente numero de factura
     LimpiarCampos
-
+    
+    txtAux(4).Text = Format(SugerirCodigoSiguienteStr("sdesca", "id"), "000000")
 
     LLamaLineas anc, 3
     
@@ -481,7 +533,7 @@ End Sub
 
 Private Sub BotonModificar()
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
 
     If adodc1.Recordset.EOF Then Exit Sub
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
@@ -489,17 +541,18 @@ Dim I As Integer
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
     anc = ObtenerAlto(DataGrid1, 10)
     
-    
-    For I = 0 To 3
-        txtAux(I).Text = DataGrid1.Columns(I).Text
-    Next I
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux2(0).Text = DataGrid1.Columns(1).Text
+    For i = 1 To 4
+        txtAux(i).Text = DataGrid1.Columns(i + 1).Text
+    Next i
 
     LLamaLineas anc, 4
    PonerFoco txtAux(0)
@@ -508,26 +561,30 @@ End Sub
 
 
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
-Dim I As Byte
+Dim i As Byte
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
     
-    
-    For I = 0 To 3
-        txtAux(I).Top = alto
+    txtAux2(0).Top = alto
+    Command1.Top = alto
+    For i = 0 To 3
+        txtAux(i).Top = alto
     Next   '
     
     'Fijamos el ancho
     txtAux(0).Left = DataGrid1.Left + 340
-    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 75
+    txtAux2(0).Left = txtAux(0).Left + txtAux(0).Width + 90
+    Me.Command1.Left = txtAux2(0).Left - 120
+    txtAux(1).Left = txtAux2(0).Left + txtAux2(0).Width + 75
     txtAux(2).Left = txtAux(1).Left + txtAux(1).Width + 70
-    txtAux(3).Left = txtAux(2).Left + txtAux(2).Width + 50
+    txtAux(3).Left = txtAux(2).Left + txtAux(2).Width + 45
     
 End Sub
 
 
 Private Sub BotonEliminar()
 Dim SQL As String
+
     On Error GoTo Error2
 
     'Ciertas comprobaciones
@@ -544,11 +601,21 @@ Dim SQL As String
         NumRegElim = Me.adodc1.Recordset.AbsolutePosition
         'Hay que eliminar
         
-        SQL = MontaClave
-        SQL = "Delete from sdesca where " & SQL
+       
+        SQL = "Delete from sdesca where id = " & adodc1.Recordset!Id
         conn.Execute SQL
+        
+        SQL = CStr(InStr(1, adodc1.RecordSource, " WHERE "))
+        If Val(SQL) > 0 Then
+            SQL = Mid(adodc1.RecordSource, Val(SQL) + 7)
+            
+            SQL = Mid(SQL, 1, InStr(1, SQL, " ORDER BY "))
+            
+        Else
+            SQL = ""
+        End If
         CancelaADODC Me.adodc1
-        CargaGrid ""
+        CargaGrid SQL
         CancelaADODC Me.adodc1
         SituarDataPosicion Me.adodc1, NumRegElim, SQL
     End If
@@ -559,8 +626,8 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim I As Integer
-Dim cadB As String
+Dim i As Long
+Dim CadB As String
 On Error Resume Next
 
     Select Case Modo
@@ -577,19 +644,19 @@ On Error Resume Next
             If DatosOk Then
                 If Modificar() Then
                    TerminaBloquear
-                   I = adodc1.Recordset.Fields(0)
+                   i = adodc1.Recordset!Id
                    PonerModo 2
                    CancelaADODC Me.adodc1
                    CargaGrid
-                   adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                   adodc1.Recordset.Find (" id =" & i)
                 End If
                 DataGrid1.SetFocus
             End If
         Case 1  'HacerBusqueda
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid cadB
+                CargaGrid CadB
                 DataGrid1.SetFocus
             End If
     End Select
@@ -637,8 +704,23 @@ Dim cad As String
 End Sub
 
 
+Private Sub Command1_Click()
+    If Modo = 2 Or Modo = 0 Then Exit Sub
+        
+    Aux = ""
+    Set frmA = New frmAlmArticu2
+    frmA.DatosADevolverBusqueda = "0|1|"
+    frmA.Show vbModal
+    Set frmA = Nothing
+    If Aux <> "" Then
+        txtAux(0).Text = RecuperaValor(Aux, 1)
+        txtAux2(0).Text = RecuperaValor(Aux, 2)
+        PonerFoco txtAux(1)
+    End If
+End Sub
+
 Private Sub DataGrid1_DblClick()
-    If cmdRegresar.Visible = True Then cmdRegresar_Click
+    If cmdRegresar.visible = True Then cmdRegresar_Click
 End Sub
 
 Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
@@ -678,11 +760,11 @@ Private Sub Form_Load()
     'Vemos como esta guardado el valor del check
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
     CadAncho = False
-    cmdRegresar.Visible = (DatosADevolverBusqueda <> "")
+    cmdRegresar.visible = (DatosADevolverBusqueda <> "")
     PonerModo 2
     
     'Cadena consulta
-    CadenaConsulta = "Select envagran,desdecan,hastacan,dtolinea from sdesca"
+    CadenaConsulta = "Select envagran,nomartic,desdecan,hastacan,dtolinea,id from sdesca inner join sartic on envagran=codartic"
     CargaGrid
 End Sub
 
@@ -690,6 +772,10 @@ Private Sub Form_Unload(Cancel As Integer)
 '    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
 End Sub
 
+
+Private Sub frmA_DatoSeleccionado(CadenaSeleccion As String)
+    Aux = CadenaSeleccion
+End Sub
 
 Private Sub mnBuscar_Click()
     BotonBuscar
@@ -734,7 +820,7 @@ End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
     
     b = DataGrid1.Enabled
@@ -747,38 +833,43 @@ Dim b As Boolean
     
     CargaGridGnral DataGrid1, Me.adodc1, SQL, False
     
-    I = 0 'Cod. Tipo Unidad
-        DataGrid1.Columns(I).Caption = RecuperaValor(txtAux(I).Tag, 1)
-        DataGrid1.Columns(I).Width = 1500
-        
-    For I = 1 To 3
-        DataGrid1.Columns(I).Caption = RecuperaValor(txtAux(I).Tag, 1)
-        If I = 3 Then
-            DataGrid1.Columns(I).Width = 900
-            DataGrid1.Columns(I).NumberFormat = "0.00"
-        Else
-            DataGrid1.Columns(I).Width = 1200
-        End If
-        DataGrid1.Columns(I).Alignment = dbgRight
-    Next I
+    i = 0 'Cod. Tipo Unidad
+        DataGrid1.Columns(i).Caption = "Articulo" 'RecuperaValor(txtAux(i).Tag, 1)
+        DataGrid1.Columns(i).Width = 1600
             
+    i = 1
+    DataGrid1.Columns(i).Caption = "Descripcion"
+    DataGrid1.Columns(i).Width = 3100
+    
+        
+    For i = 1 To 3
+        DataGrid1.Columns(i + 1).Caption = RecuperaValor(txtAux(i).Tag, 1)
+        If i = 3 Then
+            DataGrid1.Columns(i + 1).Width = 900
+            DataGrid1.Columns(i + 1).NumberFormat = "0.00"
+        Else
+            DataGrid1.Columns(i + 1).Width = 1200
+        End If
+        DataGrid1.Columns(i + 1).Alignment = dbgRight
+    Next i
+            
+    DataGrid1.Columns(i + 1).visible = False
     'Fiajamos el cadancho
     If Not CadAncho Then
         'La primera vez fijamos el ancho y alto de  los txtaux
+        txtAux(0).Width = DataGrid1.Columns(0).Width - 60
+        txtAux2(0).Width = DataGrid1.Columns(1).Width - 60
+        For i = 2 To 4
+            txtAux(i - 1).Width = DataGrid1.Columns(i).Width - 60
+        Next i
         
-        For I = 0 To 3
-            txtAux(I).Width = DataGrid1.Columns(I).Width - 60
-        Next I
-        'txtAux(1).Width = DataGrid1.Columns(1).Width - 60
-        'txtAux(1).Width = DataGrid1.Columns(1).Width - 60
-        'txtAux(1).Width = DataGrid1.Columns(1).Width - 60
         CadAncho = True
     End If
    
    'No permitir cambiar tamaño de columnas
-   For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-   Next I
+   For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+   Next i
    
     'Habilitamos botones Modificar y Eliminar
    If Toolbar1.Buttons(6).Enabled Then
@@ -817,6 +908,7 @@ End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
+Dim C As String
     'If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     txtAux(Index).Text = Trim(txtAux(Index).Text)
     If txtAux(Index).BackColor = vbYellow Then txtAux(Index).BackColor = vbWhite
@@ -830,12 +922,23 @@ Private Sub txtAux_LostFocus(Index As Integer)
             
     Case 0
         'CERO. La longitud debe ser 4
-        txtAux(0).Text = UCase(txtAux(0).Text)
-        If Len(txtAux(Index).Text) <> 4 Then
-            MsgBox "Longitud debe ser 4", vbExclamation
-            Exit Sub
+'        txtAux(0).Text = UCase(txtAux(0).Text)
+'        If Len(txtAux(Index).Text) <> 4 Then
+'            MsgBox "Longitud debe ser 4", vbExclamation
+'            Exit Sub
+'        End If
+        Aux = ""
+        If txtAux(Index).Text <> "" Then
+            C = "codartic"
+            Aux = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", txtAux(Index).Text, "T", C)
+            If Aux = "" Then
+                MsgBox "No existe el articulo", vbExclamation
+                PonerFoco txtAux(Index)
+            Else
+                txtAux(Index).Text = C
+            End If
         End If
-        
+        txtAux2(Index).Text = Aux
     Case 3
         If Not PonerFormatoDecimal(txtAux(3), 1) Then PonerFoco txtAux(3)
         
@@ -846,17 +949,17 @@ End Sub
 Private Function DatosOk() As Boolean
 Dim b As Boolean
 
-    DatosOk = True
+    DatosOk = False
 
     b = CompForm(Me, 3)
     If Not b Then Exit Function
     
     'Comprobar si ya existe el cod de tipo unidad en la tabla
     
-    If Len(txtAux(0).Text) <> 4 Then
-        MsgBox "Longitud debe ser 4", vbExclamation
-        Exit Function
-    End If
+'    If Len(txtAux(0).Text) <> 4 Then
+'        MsgBox "Longitud debe ser 4", vbExclamation
+'        Exit Function
+'    End If
     
     '    If ExisteCP(txtAux(0)) Then b = False
     
@@ -887,33 +990,27 @@ On Error Resume Next
 End Sub
 
 
-Private Function MontaClave() As String
-    MontaClave = ""
-    If Me.adodc1.Recordset.EOF Then Exit Function
-    MontaClave = " envagran ='" & adodc1.Recordset!envagran & _
-        "' AND desdecan =" & TransformaComasPuntos(CStr(adodc1.Recordset!desdecan)) & _
-        " AND hastacan =" & TransformaComasPuntos(CStr(adodc1.Recordset!hastacan))
-    
-End Function
 
 Private Function Modificar() As Boolean
 Dim C As String
-Dim I As Byte
+Dim i As Byte
+Dim J As Integer
     On Error GoTo EModificar
     Modificar = False
     
     C = ""
-    For I = 0 To 3
-        C = C & ", " & RecuperaValor(txtAux(I).Tag, 7) & " = "
-        If I = 0 Then
+    For i = 0 To 3
+        J = IIf(i = 0, 0, i + 1)
+        C = C & ", " & RecuperaValor(txtAux(i).Tag, 7) & " = "
+        If i = 0 Then
             C = C & "'" & txtAux(0) & "'"
         Else
-            C = C & TransformaComasPuntos(txtAux(I).Text)
+            C = C & TransformaComasPuntos(txtAux(i).Text)
         End If
     Next
     C = Mid(C, 2) 'quito la 1ª coma
     C = "UPDATE sdesca set " & C
-    C = C & " WHERE " & MontaClave
+    C = C & " WHERE id = " & adodc1.Recordset!Id
     conn.Execute C
     Modificar = True
     Exit Function

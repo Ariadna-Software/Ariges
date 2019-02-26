@@ -191,7 +191,7 @@ Private Sub CRViewer1_ExportButtonClicked(UseDefault As Boolean)
         
         If mrpt.ExportOptions.DiskFileName <> "" Then
             
-            
+           
             
             Caption = String(200, " ") & "Documentos PDFs....... "
             Me.Refresh
@@ -215,7 +215,7 @@ Private Sub CRViewer1_ExportButtonClicked(UseDefault As Boolean)
         
         End If
         Screen.MousePointer = vbDefault
-    Else
+        
     End If
 End Sub
 
@@ -480,6 +480,10 @@ Dim BDConta As String
         EstaImpreso = True
         If davidNumalbar > 0 Then DavidLogImpresionAlbaranes
     Else
+        If vParamAplic.NumeroInstalacion = vbFenollar Then
+        
+            If ForzarNombreImpresora <> "" Then ForzarPonerNombreImpresora
+        End If
         CRViewer1.ViewReport
     End If
     

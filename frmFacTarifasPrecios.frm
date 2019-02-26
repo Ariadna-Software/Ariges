@@ -791,7 +791,7 @@ On Error GoTo Error1
                                 
                                 'Abril 2014
                                 'Parametro para actualizar el precio especial
-                                If vParamAplic.ActualizaPrecioEspecial Then ActualizarPrecioEspecialGenerico Data1.Recordset!codArtic, CCur(Me.Text1(2).Text), False
+                                If vParamAplic.ActualizaPrecioEspecial Then ActualizarPrecioEspecialGenerico Data1.Recordset!codArtic, CCur(Me.Text1(2).Text), False, ""
         
 
                                 
@@ -944,7 +944,7 @@ Private Sub Form_Load()
     
     NombreTabla = "slista" 'Tabla Tarifas Precios de Articulos
     Ordenacion = " ORDER BY slista.codartic"
-    CadenaConsulta = "Select * from " & NombreTabla & " WHERE codartic = -1" 'No recupera datos"
+    CadenaConsulta = "Select * from " & NombreTabla & " WHERE false " 'No recupera datos"
 
     Data1.ConnectionString = conn
     Data1.RecordSource = CadenaConsulta
@@ -967,7 +967,7 @@ Dim SQL As String
     b = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.Data2, SQL, False
+    CargaGridGnral DataGrid1, Me.data2, SQL, False
 
     DataGrid1.Columns(0).visible = False 'Cod. Articulo
     DataGrid1.Columns(1).visible = False 'Cod. Lista
@@ -1020,7 +1020,7 @@ End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
 'Formulario para Busqueda
-Dim cadB As String
+Dim CadB As String
 Dim Aux As String
       
     If CadenaDevuelta <> "" Then
@@ -1031,12 +1031,12 @@ Dim Aux As String
             'Recupera todo el registro de Tarifas de Precios
             'Sabemos que campos son los que nos devuelve
             'Creamos una cadena consulta y ponemos los datos
-            cadB = ""
+            CadB = ""
             Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-            cadB = Aux
+            CadB = Aux
             Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
-            cadB = cadB & " and " & Aux
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+            CadB = CadB & " and " & Aux
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
             PonerCadenaBusqueda
     End If
     Screen.MousePointer = vbDefault
@@ -1082,7 +1082,7 @@ End Sub
 
 
 Private Sub imgFecha_Click(Index As Integer)
-Dim indice As Byte
+Dim Indice As Byte
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
    Screen.MousePointer = vbHourglass
@@ -1090,14 +1090,14 @@ Dim indice As Byte
    Set frmF = New frmCal
    frmF.Fecha = Now
    
-   indice = 4
-   PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
+   Indice = 4
+   PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco Text1(indice)
+   PonerFoco Text1(Indice)
 End Sub
 
 
@@ -1312,10 +1312,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
     If KeyAscii = 27 And Modo = 1 Then cmdCancelar_Click 'busqueda
 End Sub
 
@@ -1424,7 +1424,7 @@ Dim tabla As String
     If enlaza Then
         SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codlista=" & Data1.Recordset!codlista
     Else
-        SQL = SQL & " WHERE codartic = -1"
+        SQL = SQL & " WHERE false "
     End If
     SQL = SQL & " ORDER BY " & tabla & ".numlinea desc"
     MontaSQLCarga = SQL
@@ -1614,7 +1614,7 @@ End Function
 
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
 Dim tabla As String
@@ -1640,7 +1640,7 @@ Dim Titulo As String
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
         frmB.vTabla = tabla
-        frmB.vSQL = cadB
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = "0|2|"
@@ -1669,18 +1669,18 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
     
     If Me.mnSeleProv.Tag <> "" Then
-        If cadB <> "" Then cadB = cadB & " AND "
-        cadB = cadB & " sartic.codprove = " & mnSeleProv.Tag
+        If CadB <> "" Then CadB = CadB & " AND "
+        CadB = CadB & " sartic.codprove = " & mnSeleProv.Tag
     End If
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then 'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & ",sartic WHERE " & NombreTabla & ".codartic=sartic.codartic AND " & cadB & " " & Ordenacion
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then 'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & ",sartic WHERE " & NombreTabla & ".codartic=sartic.codartic AND " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
@@ -1753,7 +1753,7 @@ Dim SQL As String
         Exit Sub
     End If
     
-    If Data2 Is Nothing Then Exit Sub
+    If data2 Is Nothing Then Exit Sub
    
     SQL = "Actualización Tarifas de Artículos." & vbCrLf
     SQL = SQL & "-----------------------------------------" & vbCrLf & vbCrLf

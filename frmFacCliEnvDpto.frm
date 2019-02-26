@@ -147,7 +147,7 @@ Begin VB.Form frmFacCliEnvDpto
          Tag             =   "Domicilio|T|N|||sdirec|domdirec||N|"
          Text            =   "Text3"
          Top             =   1080
-         Width           =   3270
+         Width           =   3870
       End
       Begin VB.TextBox Text1 
          Height          =   315
@@ -158,7 +158,7 @@ Begin VB.Form frmFacCliEnvDpto
          Tag             =   "Población|T|N|||sdirec|pobdirec||N|"
          Text            =   "Text3"
          Top             =   1785
-         Width           =   3285
+         Width           =   2085
       End
       Begin VB.TextBox Text1 
          Height          =   315
@@ -169,7 +169,7 @@ Begin VB.Form frmFacCliEnvDpto
          Tag             =   "Provincia|T|N|||sdirec|prodirec||N|"
          Text            =   "Text3"
          Top             =   2145
-         Width           =   3285
+         Width           =   2085
       End
       Begin VB.TextBox Text1 
          Height          =   315
@@ -701,7 +701,7 @@ Private Sub chkVistaPrevia_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim b As Boolean
+Dim B As Boolean
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -712,18 +712,18 @@ Dim b As Boolean
         Case 3 'INSERTAR
             If DatosOk Then
                 If Me.DireccionesEnvio Then
-                    b = InsertarModificarLineaEnvio
+                    B = InsertarModificarLineaEnvio
                 Else
-                    b = InsertarModificarLineaDpto
+                    B = InsertarModificarLineaDpto
                 End If
                 
                     
-                If b Then
+                If B Then
                     If Data1.Recordset Is Nothing Then
-                        If Data1.Recordset.EOF Then b = False
+                        If Data1.Recordset.EOF Then B = False
                     End If
                     
-                    If Not b Then
+                    If Not B Then
                         PonerModo 2
                         BotonVerTodos
                         Exit Sub
@@ -947,6 +947,7 @@ Private Sub Form_Load()
         NombreTabla = "sdirec"
         Ordenacion2 = " coddirec"
         NumRegElim = 3195
+        Text1(2).MaxLength = 60
     Else
         Caption = "Dir. envio"
         NombreTabla = "sdirenvio"
@@ -1066,21 +1067,21 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
     
-    cadB = ObtenerBusqueda(Me, False)
-    If cadB <> "" Then cadB = cadB & " AND "
-    cadB = cadB & " codclien = " & Me.codClien
+    CadB = ObtenerBusqueda(Me, False)
+    If CadB <> "" Then CadB = CadB & " AND "
+    CadB = CadB & " codclien = " & Me.codClien
 
     'Reemplazamos tabla
-    If Me.DireccionesEnvio Then cadB = Replace(cadB, "sdirec.", "sdirenvio.")
+    If Me.DireccionesEnvio Then CadB = Replace(CadB, "sdirec.", "sdirenvio.")
         
     
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then
         
-        CadenaConsulta2 = "select * from " & NombreTabla & " WHERE " & cadB & " ORDER BY  " & Ordenacion2
+        CadenaConsulta2 = "select * from " & NombreTabla & " WHERE " & CadB & " ORDER BY  " & Ordenacion2
         PonerCadenaBusqueda
     End If
 End Sub
@@ -1142,7 +1143,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
  
@@ -1155,13 +1156,13 @@ Dim NumReg As Byte
     
     
    
-    b = Modo < 5
+    B = Modo < 5
     
     '-------------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
 
-    cmdRegresar.visible = b
+    cmdRegresar.visible = B
   
       
     
@@ -1172,10 +1173,10 @@ Dim NumReg As Byte
             If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
         End If
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
     
     'Poner Boton de Cabecera o Aceptar/Cancelar
-    PonerBotonCabecera b Or (Modo = 0)
+    PonerBotonCabecera B Or (Modo = 0)
         
     'Bloquear Registros si modo distinto de Insertar o Modificar
     BloquearText1 Me, Modo
@@ -1201,35 +1202,35 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 On Error Resume Next
 
-    b = Modo < 3
+    B = Modo < 3
 
     'Añadir
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = Modo = 2
+    B = Modo = 2
 
     
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    mnEliminar.Enabled = B
     
     
 
      '---------------------------------
-    b = (Modo >= 3)
+    B = (Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -1242,7 +1243,7 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Integer
 
     If Modo = 3 Then Text1(15).Text = codClien
@@ -1257,8 +1258,8 @@ Dim i As Integer
     Next
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
     
     If Text1(16).Text = "" Then
         MsgBox "Indique la zona", vbExclamation
@@ -1275,18 +1276,18 @@ Dim i As Integer
         If i <= 13 Then
             'Se ha salido
             MsgBox "Faltan datos para la cuenta bancaria", vbExclamation
-            b = False
+            B = False
         Else
-            b = Comprueba_CuentaBan2(Text1(10).Text & Text1(11).Text & Text1(12).Text & Text1(13).Text, False)
-            If Not b Then
-                If MsgBox("Cuenta bancaria incorrecta.    ¿Continuar?", vbQuestion + vbYesNo) = vbYes Then b = True
+            B = Comprueba_CuentaBan2(Text1(10).Text & Text1(11).Text & Text1(12).Text & Text1(13).Text, False)
+            If Not B Then
+                If MsgBox("Cuenta bancaria incorrecta.    ¿Continuar?", vbQuestion + vbYesNo) = vbYes Then B = True
             End If
         End If
     End If
     
     
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1434,17 +1435,17 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then PonerFocoBtn Me.cmdRegresar
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then PonerFocoBtn Me.cmdRegresar
     
     cmdCancelar.Cancel = True
     
     
    
-    Me.cmdRegresar.visible = b
+    Me.cmdRegresar.visible = B
     
     
     'Habilitar las opciones correctas del menu
@@ -1523,7 +1524,7 @@ End Sub
 
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 
         CadenaConsulta2 = ParaGrid(Text1(0), 10, "Código")
         CadenaConsulta2 = CadenaConsulta2 & ParaGrid(Text1(1), 75, "Nombre")
@@ -1536,7 +1537,7 @@ Private Sub MandaBusquedaPrevia(cadB As String)
         frmB.vCampos = CadenaConsulta2
         CadenaConsulta2 = ""
         frmB.vTabla = NombreTabla
-        frmB.vSQL = cadB
+        frmB.vSQL = CadB
         
         '###A mano
         frmB.vDevuelve = "0|1|"

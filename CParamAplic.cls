@@ -374,7 +374,7 @@ Private mvarNumeroInstalacion As Byte
     ' 3.- Teinsa   buscar frecuencias
     ' 4.- EULER
     ' 5.- Fontenas
-    
+    ' 6.- Fenollar
 '[14/10/2014]
 Private mvarManipuladorFitosanitarios As Boolean
 
@@ -443,7 +443,15 @@ Private mvarCartaPortes As Boolean
 Private mvarHaciendoFrmulariosGrandes As Boolean
 
 
-Private sql As String  'Para la sentencia
+
+'ENE 2019
+Private mvarImpresoraFenollarA As String
+Private mvarImpresoraFenollarB As String
+
+
+Private mvarMaximoImporteEfectivo As String
+
+Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
 
 
@@ -1487,9 +1495,6 @@ End Property
 
 
 
-
-
-
 Public Property Get RecalculoMargen() As Boolean
      RecalculoMargen = mvarRecalculoMargen
 End Property
@@ -1520,9 +1525,9 @@ Public Function LlevaADV() As Boolean
     
 
     If TieneADV = 0 Then
-        sql = DevuelveDesdeBD(conAri, "count(*)", "advparametros", "1", "1")
-        If sql = "" Then sql = "0"
-        If Val(sql) > 0 Then
+        SQL = DevuelveDesdeBD(conAri, "count(*)", "advparametros", "1", "1")
+        If SQL = "" Then SQL = "0"
+        If Val(SQL) > 0 Then
             TieneADV = 2
         Else
             TieneADV = 1
@@ -1797,6 +1802,24 @@ Public Property Get HaciendoFrmulariosGrandes() As Boolean
 End Property
 
 
+'Impresoaras ALBARANES Fenollar
+Public Property Get ImpresoraFenollarA() As String
+     ImpresoraFenollarA = mvarImpresoraFenollarA
+End Property
+Public Property Get ImpresoraFenollarB() As String
+     ImpresoraFenollarB = mvarImpresoraFenollarB
+End Property
+
+
+
+Public Property Get MaximoImporteEfectivo() As String
+     MaximoImporteEfectivo = mvarMaximoImporteEfectivo
+End Property
+
+
+
+
+
 
 
 '------------------------------------------------------------------------------------------------
@@ -1845,269 +1868,274 @@ End Property
 
 '****   LEER  ***
 Public Function Leer() As Byte
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim V As Variant
 On Error GoTo Err3
     
-    sql = "SELECT * FROM spara1 "
-    Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockOptimistic
+    SQL = "SELECT * FROM spara1 "
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
 
-    If Rs.EOF Then
+    If RS.EOF Then
         Leer = 1
     Else
-        mvarTipoDtos = Rs!TipoDtos
-        mvarOrdenDtos = Rs!ordendto
-        mvarCodTarif = Rs!codTarif
-        mvarCajaComp = Rs!cajacomp  'Cajas completas precios (S/N)
-        mvarPreuKmCli = DBLet(Rs!preukmcl, "N") 'Precio Km Desplazamiento Clientes
-        mvarPreuKmTec = DBLet(Rs!preukmtc, "N") 'Precio Km Desplazamiento Técnicos
-        mvarnomGerente = DBLet(Rs!nomgeren, "T") 'Nombre del Director Gerente
-        mvarnomAdmin = DBLet(Rs!nomadmin, "T") 'Nombre del Responsable Administración
-        mvarHayMante = Rs!haymante  'Si hay Mantenimiento (S/N)
-        mvarHayRepar = Rs!hayrepar  'Si hay Reparaciones (S/N)
-        mvarHayFrecu = Rs!hayfrecu  'Si hay Frecuencias (S/N)
-        mvarHayServicio = Rs!hayservicio  'Si hay Servicios (S/N)
-        mvarHayDeparNuevo = Rs!haydepar  'Si hay Departamento o Direccion
-        mvarCtrStock = Rs!CtrStock  'Si hay Control de Stock (S/N)
-        mvarInventar = Rs!inventar
-        mvarHaynserie = Rs!haynserie 'Si hay Nº Serie en Compras (S/N)
-        mvarDiasSiMan = Rs!diassiman 'Dias reparacion si hay Mantenimiento
-        mvarDiasNoMan = Rs!diasnoman 'Dias reparacion si NO hay Mantenimiento
-        Me.ForPagoChequeRegalo = DBLet(Rs!codforpa, "T")
+        mvarTipoDtos = RS!TipoDtos
+        mvarOrdenDtos = RS!ordendto
+        mvarCodTarif = RS!codTarif
+        mvarCajaComp = RS!cajacomp  'Cajas completas precios (S/N)
+        mvarPreuKmCli = DBLet(RS!preukmcl, "N") 'Precio Km Desplazamiento Clientes
+        mvarPreuKmTec = DBLet(RS!preukmtc, "N") 'Precio Km Desplazamiento Técnicos
+        mvarnomGerente = DBLet(RS!nomgeren, "T") 'Nombre del Director Gerente
+        mvarnomAdmin = DBLet(RS!nomadmin, "T") 'Nombre del Responsable Administración
+        mvarHayMante = RS!haymante  'Si hay Mantenimiento (S/N)
+        mvarHayRepar = RS!hayrepar  'Si hay Reparaciones (S/N)
+        mvarHayFrecu = RS!hayfrecu  'Si hay Frecuencias (S/N)
+        mvarHayServicio = RS!hayservicio  'Si hay Servicios (S/N)
+        mvarHayDeparNuevo = RS!haydepar  'Si hay Departamento o Direccion
+        mvarCtrStock = RS!CtrStock  'Si hay Control de Stock (S/N)
+        mvarInventar = RS!inventar
+        mvarHaynserie = RS!haynserie 'Si hay Nº Serie en Compras (S/N)
+        mvarDiasSiMan = RS!diassiman 'Dias reparacion si hay Mantenimiento
+        mvarDiasNoMan = RS!diasnoman 'Dias reparacion si NO hay Mantenimiento
+        Me.ForPagoChequeRegalo = DBLet(RS!codforpa, "T")
         
         'Datos Facturacion
-        mvarCodArticDes = DBLet(Rs!codartid, "T") 'articulo para facturar mantenimientos
-        mvarDiaPago1 = DBLet(Rs!DiaPago1, "N") 'dia pago 1 para compras
-        mvarDiaPago2 = DBLet(Rs!DiaPago2, "N") 'dia pago 2 para compras
-        mvarDiaPago3 = DBLet(Rs!DiaPago3, "N") 'dia pago 3 para compras
-        mvarMesnogir = DBLet(Rs!mesnogir, "N") 'mes a no girar para compras
+        mvarCodArticDes = DBLet(RS!codartid, "T") 'articulo para facturar mantenimientos
+        mvarDiaPago1 = DBLet(RS!DiaPago1, "N") 'dia pago 1 para compras
+        mvarDiaPago2 = DBLet(RS!DiaPago2, "N") 'dia pago 2 para compras
+        mvarDiaPago3 = DBLet(RS!DiaPago3, "N") 'dia pago 3 para compras
+        mvarMesnogir = DBLet(RS!mesnogir, "N") 'mes a no girar para compras
         
         'Datos de Internet
-        mvarDireMail = DBLet(Rs!DireMail, "T") 'Direccion de email
-        mvarSMTPhost = DBLet(Rs!SMTPhost, "T") 'SMTP host para el envio de email
-        mvarSMTPuser = DBLet(Rs!SMTPuser, "T") 'SMTP usuario para el envio de email
-        mvarSMTPpass = DBLet(Rs!SMTPpass, "T") 'SMTP password para el envio de email
-        mvarWebSoporte = DBLet(Rs!WebSoporte, "T") 'Web de soporte
-        mvarMailSoporte = DBLet(Rs!MailSoporte, "T") 'email de soporte
-        mvarWebVersion = DBLet(Rs!WebVersion, "T") 'Version de la Web
+        mvarDireMail = DBLet(RS!DireMail, "T") 'Direccion de email
+        mvarSMTPhost = DBLet(RS!SMTPhost, "T") 'SMTP host para el envio de email
+        mvarSMTPuser = DBLet(RS!SMTPuser, "T") 'SMTP usuario para el envio de email
+        mvarSMTPpass = DBLet(RS!SMTPpass, "T") 'SMTP password para el envio de email
+        mvarWebSoporte = DBLet(RS!WebSoporte, "T") 'Web de soporte
+        mvarMailSoporte = DBLet(RS!MailSoporte, "T") 'email de soporte
+        mvarWebVersion = DBLet(RS!WebVersion, "T") 'Version de la Web
         
         
         'Datos Contabilidad
-        mvarSerConta = DBLet(Rs!serconta, "T") 'servidor conta
-        mvarUsuConta = DBLet(Rs!UsuConta, "T") 'usuario conta
-        mvarPasConta = DBLet(Rs!pasconta, "T") 'password
-        mvarNumConta = DBLet(Rs!numconta, "N") 'numero conta
+        mvarSerConta = DBLet(RS!serconta, "T") 'servidor conta
+        mvarUsuConta = DBLet(RS!UsuConta, "T") 'usuario conta
+        mvarPasConta = DBLet(RS!pasconta, "T") 'password
+        mvarNumConta = DBLet(RS!numconta, "N") 'numero conta
         
         
         'Valores por defecto
-        mvarDefActiv = DBLet(Rs!defactividad, "N") 'numero conta
-        mvarDefEnvio = DBLet(Rs!defenvio, "N") 'numero conta
-        mvarDefZona = DBLet(Rs!defzona, "N") 'numero conta
-        mvarDefRuta = DBLet(Rs!defruta, "N") 'numero conta
-        mvarDefSitu = DBLet(Rs!defstituacion, "N") 'numero conta
-        mvarDefTarifa = DBLet(Rs!deftarifa, "N") 'numero conta
-        mvarDefAgente = DBLet(Rs!defagente, "N") 'numero conta
+        mvarDefActiv = DBLet(RS!defactividad, "N") 'numero conta
+        mvarDefEnvio = DBLet(RS!defenvio, "N") 'numero conta
+        mvarDefZona = DBLet(RS!defzona, "N") 'numero conta
+        mvarDefRuta = DBLet(RS!defruta, "N") 'numero conta
+        mvarDefSitu = DBLet(RS!defstituacion, "N") 'numero conta
+        mvarDefTarifa = DBLet(RS!deftarifa, "N") 'numero conta
+        mvarDefAgente = DBLet(RS!defagente, "N") 'numero conta
 
 
-        mvaravipedcli = DBLet(Rs!avipedcli, "N")
-        mvaravipedpro = DBLet(Rs!avipedpro, "N")
-        mvaravialbcli = DBLet(Rs!avialbcli, "N")
-        mvaravialbpro = DBLet(Rs!avialbpro, "N")
-        mvaravimanteni = DBLet(Rs!avimanteni, "N")
-        mvaravirepara = DBLet(Rs!avirepara, "N")
-        mvaraviavisos = DBLet(Rs!aviavios, "N")
+        mvaravipedcli = DBLet(RS!avipedcli, "N")
+        mvaravipedpro = DBLet(RS!avipedpro, "N")
+        mvaravialbcli = DBLet(RS!avialbcli, "N")
+        mvaravialbpro = DBLet(RS!avialbpro, "N")
+        mvaravimanteni = DBLet(RS!avimanteni, "N")
+        mvaravirepara = DBLet(RS!avirepara, "N")
+        mvaraviavisos = DBLet(RS!aviavios, "N")
         PonVariableTienAvisos
 
         
         
 
-        mvarTipoIVAre1 = DBLet(Rs!IVAre1eq, "N")
-        mvarTipoIVAre2 = DBLet(Rs!IVAre2eq, "N")
-        mvarTipoIVAre3 = DBLet(Rs!IVAre3eq, "N")
+        mvarTipoIVAre1 = DBLet(RS!IVAre1eq, "N")
+        mvarTipoIVAre2 = DBLet(RS!IVAre2eq, "N")
+        mvarTipoIVAre3 = DBLet(RS!IVAre3eq, "N")
         mvarRecargoEquivalencia = (mvarTipoIVAre1 > 0 Or mvarTipoIVAre2 > 0 Or mvarTipoIVAre3 > 0)
         
-        mvarIVA1 = DBLet(Rs!IVAre1, "N")
-        mvarIVA2 = DBLet(Rs!IVAre2, "N")
-        mvarIVA3 = DBLet(Rs!IVAre3, "N")
+        mvarIVA1 = DBLet(RS!IVAre1, "N")
+        mvarIVA2 = DBLet(RS!IVAre2, "N")
+        mvarIVA3 = DBLet(RS!IVAre3, "N")
 
         'El articulo de telefonia no lo pongo como parametros
         'codartictel
-        mvarCodarticTfnia = DBLet(Rs!codartictel, "T") 'numero conta
+        mvarCodarticTfnia = DBLet(RS!codartictel, "T") 'numero conta
                 
                 
         'Retencion
-        mvarIVAREA = DBLet(Rs!IVA_REA, "N")
-        mvarCtaReten = DBLet(Rs!CtaReten, "T")
-        mvarPorReten = DBLet(Rs!PorReten, "N")
+        mvarIVAREA = DBLet(RS!IVA_REA, "N")
+        mvarCtaReten = DBLet(RS!CtaReten, "T")
+        mvarPorReten = DBLet(RS!PorReten, "N")
                 
                 
         'IVA exento
-        mvarIVA_Exento = DBLet(Rs!ivaexento, "N")
+        mvarIVA_Exento = DBLet(RS!ivaexento, "N")
         
         
         
         'Contabilidad
-        mvarContabilidadB = DBLet(Rs!conta_B, "N")
+        mvarContabilidadB = DBLet(RS!conta_B, "N")
         
         'Contabiliza los tickets resumidos
-        mvarContabilizarTicketAgrupados = (DBLet(Rs!conttickagrupado, "N") = 1)
+        mvarContabilizarTicketAgrupados = (DBLet(RS!conttickagrupado, "N") = 1)
         
         'Cta aportacion
-        mvarctaaportacion = DBLet(Rs!ctaAportacion, "T")
+        mvarctaaportacion = DBLet(RS!ctaAportacion, "T")
         
         'produccion
-        mvarProduccion = DBLet(Rs!Produccion, "N") = 1
+        mvarProduccion = DBLet(RS!Produccion, "N") = 1
         'descriptores
-        mvarDescriptores = DBLet(Rs!Descriptores, "N") = 1
+        mvarDescriptores = DBLet(RS!Descriptores, "N") = 1
         'obs factura
-        mvarObsFactura = DBLet(Rs!ObsFactura, "N")
+        mvarObsFactura = DBLet(RS!ObsFactura, "N")
         '
-        mvarIVA_Intracomunitario = DBLet(Rs!IvaIntracom, "N")
+        mvarIVA_Intracomunitario = DBLet(RS!IvaIntracom, "N")
         'Recliclado Punto verde
-        mvarArtReciclado = DBLet(Rs!ArtReciclado, "T")
+        mvarArtReciclado = DBLet(RS!ArtReciclado, "T")
 
-        mvarArtPortes = DBLet(Rs!ArticuloPortes, "T")
-        mvarImporteMinimo = DBLet(Rs!impminped, "N")
-        mvarAbonoKilos = DBLet(Rs!AbonoKilos, "N")
+        mvarArtPortes = DBLet(RS!ArticuloPortes, "T")
+        mvarImporteMinimo = DBLet(RS!impminped, "N")
+        mvarAbonoKilos = DBLet(RS!AbonoKilos, "N")
     
-        mvarComponentePorcentaje = DBLet(Rs!compoporcen, "N") = 1
+        mvarComponentePorcentaje = DBLet(RS!compoporcen, "N") = 1
 
         ' ---- [14/09/2009] (LAURA)
-        Me.DtoxCantidad = IIf(Rs!dtoxcanti = 1, True, False)
-        Me.CreaTarifasArticulo = DBLet(Rs!creatarifart, "N")
+        Me.DtoxCantidad = IIf(RS!dtoxcanti = 1, True, False)
+        Me.CreaTarifasArticulo = DBLet(RS!creatarifart, "N")
         ' ----
         
         ' ---- [19/10/2009] [LAURA]: añadir campo modo analitica
-        Me.ModoAnalitica = Rs!modanalitica
+        Me.ModoAnalitica = RS!modanalitica
         
         
         'David 31/12/09
-        Me.EnvioDesdeOutlook = DBLet(Rs!EnvioDesdeOutlook, "N") = 1
+        Me.EnvioDesdeOutlook = DBLet(RS!EnvioDesdeOutlook, "N") = 1
         
         'David Febrero 2010
-        ExeEnvioMail = DBLet(Rs!arigesmail, "T")
-        DiasGarantia = DBLet(Rs!diasgaranrepa, "N")
+        ExeEnvioMail = DBLet(RS!arigesmail, "T")
+        DiasGarantia = DBLet(RS!diasgaranrepa, "N")
         
-        mvarTieneCRM = DBLet(Rs!TieneCRM, "N") = 1
+        mvarTieneCRM = DBLet(RS!TieneCRM, "N") = 1
         
         
         'David. Junio 2010.  Cambio IVA   EL IVA superreducido NO cambia
-        mvarOLDIVAre1 = DBLet(Rs!iva_oldre1, "N")
-        mvarOLDIVAre2 = DBLet(Rs!iva_oldre2, "N")
+        mvarOLDIVAre1 = DBLet(RS!iva_oldre1, "N")
+        mvarOLDIVAre2 = DBLet(RS!iva_oldre2, "N")
         'mvarOLDIVAre3 = DBLet(RS!iva_oldre3, "N")
         
-        mvarOLDIVA1 = DBLet(Rs!iva_old1, "N")
-        mvarOLDIVA2 = DBLet(Rs!iva_old2, "N")
+        mvarOLDIVA1 = DBLet(RS!iva_old1, "N")
+        mvarOLDIVA2 = DBLet(RS!iva_old2, "N")
         'mvarOLDIVA3 = DBLet(RS!iva_old3, "N")
 
-        mvarNumCopiasFacturacion = DBLet(Rs!NumCopias, "N")
+        mvarNumCopiasFacturacion = DBLet(RS!NumCopias, "N")
         If mvarNumCopiasFacturacion = 0 Then mvarNumCopiasFacturacion = 1
         
         'De momento NO lo tengo en la BD
         mvarTipoFormularioClientes = 0
         
-        mvarArticuloRecargoFinanciero = DBLet(Rs!artRecargoFina, "T")
+        mvarArticuloRecargoFinanciero = DBLet(RS!artRecargoFina, "T")
         
         'tIPO PORTES
         If mvarArtPortes = "" Then
             mvarTipoPortes = -1
         Else
-            sql = DBLet(Rs!TipoPortes, "T")
-            If sql = "" Then sql = "-1"
-            mvarTipoPortes = CInt(sql)
+            SQL = DBLet(RS!TipoPortes, "T")
+            If SQL = "" Then SQL = "-1"
+            mvarTipoPortes = CInt(SQL)
         End If
         
-        mvarDireccionesEnvio = (DBLet(Rs!DirecEnvio, "N") = 1)
+        mvarDireccionesEnvio = (DBLet(RS!DirecEnvio, "N") = 1)
         
         
-        mvarFrasMostradorSerieDistinta = (DBLet(Rs!FraMostra, "N") = 1)
+        mvarFrasMostradorSerieDistinta = (DBLet(RS!FraMostra, "N") = 1)
         
-        mvarMarcarAlbaranFacturar = (DBLet(Rs!AlbParaFcturar, "N") = 1)
+        mvarMarcarAlbaranFacturar = (DBLet(RS!AlbParaFcturar, "N") = 1)
         
         '`OperAseguradas`    `situbloq`
-        mvarOperacionesAseguradas = (DBLet(Rs!OperAseguradas, "N") = 1)
-        mvarSituacionBloqueoOpAseg = DBLet(Rs!situbloq, "N")
+        mvarOperacionesAseguradas = (DBLet(RS!OperAseguradas, "N") = 1)
+        mvarSituacionBloqueoOpAseg = DBLet(RS!situbloq, "N")
 
         'Rotacion
         'alter table `spara1` `mesconant1`  `mesconant2` `consummin`  `consummax`
-        mvarRot_ConsumMes1 = DBLet(Rs!mesconant1, "N")
-        mvarRot_ConsumMes2 = DBLet(Rs!mesconant2, "N")
-        mvarRot_ConsumMesMin = DBLet(Rs!consummin, "N")
-        mvarRot_ConsumMesMax = DBLet(Rs!consummax, "N")
+        mvarRot_ConsumMes1 = DBLet(RS!mesconant1, "N")
+        mvarRot_ConsumMes2 = DBLet(RS!mesconant2, "N")
+        mvarRot_ConsumMesMin = DBLet(RS!consummin, "N")
+        mvarRot_ConsumMesMax = DBLet(RS!consummax, "N")
         
-        mvarLogCambioPrecDto = DBLet(Rs!LogCambioPrecDto, "N") = 1
+        mvarLogCambioPrecDto = DBLet(RS!LogCambioPrecDto, "N") = 1
         
         'No esta en el form
         mvarAlmacenB = -1
-        If Not IsNull(Rs!AlmacenB) Then mvarAlmacenB = Rs!AlmacenB
+        If Not IsNull(RS!AlmacenB) Then mvarAlmacenB = RS!AlmacenB
         
         'IVA intracomuntario para fras proveedor
-        mvarIvaIntracomAdicional = DBLet(Rs!IvaIntracomAdicional, "N")
-        mvarCtaContabIntracom = DBLet(Rs!CtaContabIntracom, "T")
-        mvarIntracomAdicionalContab = DBLet(Rs!IntracomAdicionContab, "N") = 1
+        mvarIvaIntracomAdicional = DBLet(RS!IvaIntracomAdicional, "N")
+        mvarCtaContabIntracom = DBLet(RS!CtaContabIntracom, "T")
+        mvarIntracomAdicionalContab = DBLet(RS!IntracomAdicionContab, "N") = 1
 
         
-        mvarPathFacturaE = DBLet(Rs!PathFacturaE, "T")
+        mvarPathFacturaE = DBLet(RS!PathFacturaE, "T")
         
-        mvarNumeroCopias = DBLet(Rs!NumeroCopias, "T")
+        mvarNumeroCopias = DBLet(RS!NumeroCopias, "T")
         
-        mvarPrecioMinimo = DBLet(Rs!PrecioMinimo, "N") = 1
-        mvarArtSeparador = DBLet(Rs!ArtSeparador, "T")
-        mvarAriagro = DBLet(Rs!Ariagro, "T")
+        mvarPrecioMinimo = DBLet(RS!PrecioMinimo, "N") = 1
+        mvarArtSeparador = DBLet(RS!ArtSeparador, "T")
+        mvarAriagro = DBLet(RS!Ariagro, "T")
         
         
-        mvarRenting = DBLet(Rs!Renting, "N") = 1
-        mvarGestionFlotas = DBLet(Rs!GestionFlotas, "N") = 1
+        mvarRenting = DBLet(RS!Renting, "N") = 1
+        mvarGestionFlotas = DBLet(RS!GestionFlotas, "N") = 1
         
-        mvarPorcenPagoAgentTalPag = DBLet(Rs!PorcenpagAgenPag, "N")
+        mvarPorcenPagoAgentTalPag = DBLet(RS!PorcenpagAgenPag, "N")
         
-        mvarFechaCambioIva = Rs!FechaCambioIva 'NO ES NULL
-        mvarClientesPotenciales = DBLet(Rs!ClientesPotenciales, "N") = 1
+        mvarFechaCambioIva = RS!FechaCambioIva 'NO ES NULL
+        mvarClientesPotenciales = DBLet(RS!ClientesPotenciales, "N") = 1
         
         'Solo tiene GET
-        mvarTieneTelefonia2 = DBLet(Rs!Telefonia, "N")
-        mvarArtiTelefonia = DBLet(Rs!codartictel, "T")
+        mvarTieneTelefonia2 = DBLet(RS!Telefonia, "N")
+        mvarArtiTelefonia = DBLet(RS!codartictel, "T")
         
 
-        mvarRecMercanciaSoloPpal = DBLet(Rs!RecMercanciaSoloPpal, "N") = 1
+        mvarRecMercanciaSoloPpal = DBLet(RS!RecMercanciaSoloPpal, "N") = 1
         
-        mvarArtTfniaIvaExento = DBLet(Rs!artTfoniaIvaExento, "T") 'articulo telefonia IVA exento
+        mvarArtTfniaIvaExento = DBLet(RS!artTfoniaIvaExento, "T") 'articulo telefonia IVA exento
         
         
         'Solo tiene GET
-        mvarComprobarBancoRestoAplicaciones = DBLet(Rs!ComprobarCCC, "N")
-        mvarAguasPotables = DBLet(Rs!Agua, "N") = 1
+        mvarComprobarBancoRestoAplicaciones = DBLet(RS!ComprobarCCC, "N")
+        mvarAguasPotables = DBLet(RS!Agua, "N") = 1
         
         
-        mvarIncializarStockEnInventario = DBLet(Rs!IncializarStokInv, "N")
+        mvarIncializarStockEnInventario = DBLet(RS!IncializarStokInv, "N")
         
         
-        mvarActualizaPrecioEspecial = DBLet(Rs!ActualizaPrecioEspecial, "N") = 1
+        mvarActualizaPrecioEspecial = DBLet(RS!ActualizaPrecioEspecial, "N") = 1
         
         
-        mvarEntradaRapidaFacturasMostrador = DBLet(Rs!FrasMostradorRapida, "N") = 1
+        mvarEntradaRapidaFacturasMostrador = DBLet(RS!FrasMostradorRapida, "N") = 1
         
         'Solo tiene GET
-        mvarNumeroInstalacion = DBLet(Rs!NumInstalacion, "N")
+        mvarNumeroInstalacion = DBLet(RS!NumInstalacion, "N")
         
-        mvarManipuladorFitosanitarios = DBLet(Rs!ManipuladorFitosanitarios, "N") = 1
+        mvarManipuladorFitosanitarios = DBLet(RS!ManipuladorFitosanitarios, "N") = 1
         
-        mvarInvSujetoPasivo = DBLet(Rs!InvSujetoPasivo, "N") = 1
+        mvarInvSujetoPasivo = DBLet(RS!InvSujetoPasivo, "N") = 1
     
-        mvarRecalculoMargen = DBLet(Rs!ActualizaMargen, "N") = 1
+        mvarRecalculoMargen = DBLet(RS!ActualizaMargen, "N") = 1
     
         
-        mvarInventarioCodigoArticulo = DBLet(Rs!InventarioPorCodigo, "N") = 1
+        mvarInventarioCodigoArticulo = DBLet(RS!InventarioPorCodigo, "N") = 1
         
         
         If Me.HayDeparNuevo = 2 Then mvarTipoFormularioClientes = 1  'Obras. SAIL-Y euler
         
-        mvarPathFirmasFacturas = DBLet(Rs!PathFirmasFacturas, "T")
-        mvarPathFirmasAlbaran = DBLet(Rs!PathFirmasAlbaran, "T")
+
+        mvarPathFirmasFacturas = ""
+        If CampoNuevoBD(RS, "PathFirmasFacturas", "T", V) Then mvarPathFirmasFacturas = V
+        
+        mvarPathFirmasAlbaran = ""
+        If CampoNuevoBD(RS, "PathFirmasAlbaran", "T", V) Then mvarPathFirmasAlbaran = V
+
         
         'Solo GET
-        mvarContabilidadNueva = DBLet(Rs!NuevaContabilidad, "N") = 1
+        mvarContabilidadNueva = DBLet(RS!NuevaContabilidad, "N") = 1
         Leer = 0
         mvarSIITiene = False
         
@@ -2115,15 +2143,15 @@ On Error GoTo Err3
         
         mvarPtosAsignar = 0
         mvarPtosImporteCalculo = 0
-        If Not IsNull(Rs!PtosAsignar) Then
-            mvarPtosAsignar = Rs!PtosAsignar
-            mvarPtosImporteCalculo = DBLet(Rs!PtosImporteCalculo, "N")
-            mvarPtosEquivalencia = Rs!PtosEquivalencia
-            mvarPtosArticuloCanje = Rs!PtosArticuloCanje
-            mvarPtosFechaIncio = Rs!PtosFechaIncio
+        If Not IsNull(RS!PtosAsignar) Then
+            mvarPtosAsignar = RS!PtosAsignar
+            mvarPtosImporteCalculo = DBLet(RS!PtosImporteCalculo, "N")
+            mvarPtosEquivalencia = RS!PtosEquivalencia
+            mvarPtosArticuloCanje = RS!PtosArticuloCanje
+            mvarPtosFechaIncio = RS!PtosFechaIncio
         End If
         
-        mvarPrecioHoraCosteEUL = DBLet(Rs!preciohoracoste, "N")
+        mvarPrecioHoraCosteEUL = DBLet(RS!preciohoracoste, "N")
         
         
         'Si tiene telefonia entoces vere si tiene el modulo de venta a plazos
@@ -2141,43 +2169,52 @@ On Error GoTo Err3
         
         '
         mvarCartaPortes = False
-        If CampoNuevoBD(Rs, "cartaPortes", "B", V) Then mvarCartaPortes = CBool(V)
+        If CampoNuevoBD(RS, "cartaPortes", "B", V) Then mvarCartaPortes = CBool(V)
         
         mvarHaciendoFrmulariosGrandes = False
-        If CampoNuevoBD(Rs, "HaciendoFrmulariosGrandes", "B", V) Then mvarHaciendoFrmulariosGrandes = CBool(V)
+        If CampoNuevoBD(RS, "HaciendoFrmulariosGrandes", "B", V) Then mvarHaciendoFrmulariosGrandes = CBool(V)
+        
+        
+        If mvarNumeroInstalacion = vbFenollar Then
+            mvarImpresoraFenollarA = "\\PCPRUEBAS\CARLA"
+            mvarImpresoraFenollarB = "\\PCMAJOSE\MAJO"
+        End If
+        
+        mvarMaximoImporteEfectivo = 2500
+        If CampoNuevoBD(RS, "ImportMaxEfectivo", "N", V) Then mvarMaximoImporteEfectivo = DBLet(V)
         
         
     End If
 
-    Rs.Close
+    RS.Close
     
     If Leer = 0 Then
-        FijaParametroAlmagrupo Rs  'hacer rs=nothing
+        FijaParametroAlmagrupo RS  'hacer rs=nothing
         
         mvarQueEmpresaEs = 0
-        If ComprobarEmpresaWHOSE(Rs) Then
+        If ComprobarEmpresaWHOSE(RS) Then
             mvarQueEmpresaEs = 1
-        ElseIf ComprobarGessocial(Rs) Then mvarQueEmpresaEs = 2
+        ElseIf ComprobarGessocial(RS) Then mvarQueEmpresaEs = 2
             
         End If
         
         
         'Navarres(aunque sirve para todos)
         'Si solo tiene un banco por defecto, sera ese el cargara
-        FijarSiTieneUnSoloBancoPropio Rs
+        FijarSiTieneUnSoloBancoPropio RS
         
         
         
         'Marjal CHIPOS, para saber si es marjal sin ponerle un numero instalacion
-        FijarSiTieneHuertos Rs
+        FijarSiTieneHuertos RS
         
         
         'Lotes generalitat. Para meter los datos en
-        FijarSiTieneLotesGeneralitat Rs
+        FijarSiTieneLotesGeneralitat RS
         
     End If
     
-    Set Rs = Nothing
+    Set RS = Nothing
     
     
     Exit Function
@@ -2187,218 +2224,218 @@ Err3:
     Mens = Mens & "Número: " & Err.Number & vbCrLf
     Mens = Mens & "Descripción: " & Err.Description
     MsgBox Mens, vbExclamation
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Leer = 1
 End Function
 
 
-Public Function Modificar(codigo As Byte) As Byte
+Public Function Modificar(Codigo As Byte) As Byte
 'Modifica los parametros de la Aplicación
 'Modifica la Tabla: spara1, BD: Ariges
 On Error GoTo EModificar
 
-    sql = "UPDATE spara1 SET "
-    sql = sql & " tipodtos= " & mvarTipoDtos
-    sql = sql & ", ordendto= " & mvarOrdenDtos
-    sql = sql & ", codtarif= " & mvarCodTarif
-    sql = sql & ", cajacomp= " & DBSet(mvarCajaComp, "B")
-    sql = sql & ", preukmcl= " & DBSet(mvarPreuKmCli, "N")
-    sql = sql & ", preukmtc= " & DBSet(mvarPreuKmTec, "N")
-    sql = sql & ", nomgeren= " & DBSet(mvarnomGerente, "T")
-    sql = sql & ", nomadmin= " & DBSet(mvarnomAdmin, "T")
-    sql = sql & ", haymante = " & DBSet(mvarHayMante, "B")
-    sql = sql & ", hayrepar = " & DBSet(mvarHayRepar, "B")
-    sql = sql & ", hayfrecu = " & DBSet(mvarHayFrecu, "B")
-    sql = sql & ", hayservicio = " & DBSet(mvarHayServicio, "B")
-    sql = sql & ", haydepar = " & DBSet(mvarHayDeparNuevo, "N")
-    sql = sql & ", ctrstock = " & DBSet(mvarCtrStock, "B")
-    sql = sql & ", inventar= " & DBSet(mvarInventar, "B")
-    sql = sql & ", haynserie= " & DBSet(mvarHaynserie, "B")
-    sql = sql & ", diassiman= " & DBSet(mvarDiasSiMan, "N")
-    sql = sql & ", diasnoman= " & DBSet(mvarDiasNoMan, "N")
-    sql = sql & ", codartid= " & DBSet(mvarCodArticDes, "T")
-    sql = sql & ", diapago1= " & DBSet(mvarDiaPago1, "N")
-    sql = sql & ", diapago2= " & DBSet(mvarDiaPago2, "N")
-    sql = sql & ", diapago3= " & DBSet(mvarDiaPago3, "N")
-    sql = sql & ", mesnogir= " & DBSet(mvarMesnogir, "N")
-    sql = sql & ", codforpa= " & DBSet(mvarCodForPa, "N", "S")
-    sql = sql & ", diremail= " & DBSet(mvarDireMail, "T")
-    sql = sql & ", smtphost= " & DBSet(mvarSMTPhost, "T")
-    sql = sql & ", smtpuser= " & DBSet(mvarSMTPuser, "T")
-    sql = sql & ", smtppass= " & DBSet(mvarSMTPpass, "T")
-    sql = sql & ", websoporte= " & DBSet(mvarWebSoporte, "T")
-    sql = sql & ", mailsoporte= " & DBSet(mvarMailSoporte, "T")
-    sql = sql & ", webversion= " & DBSet(mvarWebVersion, "T")
-    sql = sql & ", serconta= " & DBSet(mvarSerConta, "T")
-    sql = sql & ", usuconta= " & DBSet(mvarUsuConta, "T")
-    sql = sql & ", pasconta= " & DBSet(mvarPasConta, "T")
-    sql = sql & ", numconta= " & DBSet(mvarNumConta, "N", "S")
+    SQL = "UPDATE spara1 SET "
+    SQL = SQL & " tipodtos= " & mvarTipoDtos
+    SQL = SQL & ", ordendto= " & mvarOrdenDtos
+    SQL = SQL & ", codtarif= " & mvarCodTarif
+    SQL = SQL & ", cajacomp= " & DBSet(mvarCajaComp, "B")
+    SQL = SQL & ", preukmcl= " & DBSet(mvarPreuKmCli, "N")
+    SQL = SQL & ", preukmtc= " & DBSet(mvarPreuKmTec, "N")
+    SQL = SQL & ", nomgeren= " & DBSet(mvarnomGerente, "T")
+    SQL = SQL & ", nomadmin= " & DBSet(mvarnomAdmin, "T")
+    SQL = SQL & ", haymante = " & DBSet(mvarHayMante, "B")
+    SQL = SQL & ", hayrepar = " & DBSet(mvarHayRepar, "B")
+    SQL = SQL & ", hayfrecu = " & DBSet(mvarHayFrecu, "B")
+    SQL = SQL & ", hayservicio = " & DBSet(mvarHayServicio, "B")
+    SQL = SQL & ", haydepar = " & DBSet(mvarHayDeparNuevo, "N")
+    SQL = SQL & ", ctrstock = " & DBSet(mvarCtrStock, "B")
+    SQL = SQL & ", inventar= " & DBSet(mvarInventar, "B")
+    SQL = SQL & ", haynserie= " & DBSet(mvarHaynserie, "B")
+    SQL = SQL & ", diassiman= " & DBSet(mvarDiasSiMan, "N")
+    SQL = SQL & ", diasnoman= " & DBSet(mvarDiasNoMan, "N")
+    SQL = SQL & ", codartid= " & DBSet(mvarCodArticDes, "T")
+    SQL = SQL & ", diapago1= " & DBSet(mvarDiaPago1, "N")
+    SQL = SQL & ", diapago2= " & DBSet(mvarDiaPago2, "N")
+    SQL = SQL & ", diapago3= " & DBSet(mvarDiaPago3, "N")
+    SQL = SQL & ", mesnogir= " & DBSet(mvarMesnogir, "N")
+    SQL = SQL & ", codforpa= " & DBSet(mvarCodForPa, "N", "S")
+    SQL = SQL & ", diremail= " & DBSet(mvarDireMail, "T")
+    SQL = SQL & ", smtphost= " & DBSet(mvarSMTPhost, "T")
+    SQL = SQL & ", smtpuser= " & DBSet(mvarSMTPuser, "T")
+    SQL = SQL & ", smtppass= " & DBSet(mvarSMTPpass, "T")
+    SQL = SQL & ", websoporte= " & DBSet(mvarWebSoporte, "T")
+    SQL = SQL & ", mailsoporte= " & DBSet(mvarMailSoporte, "T")
+    SQL = SQL & ", webversion= " & DBSet(mvarWebVersion, "T")
+    SQL = SQL & ", serconta= " & DBSet(mvarSerConta, "T")
+    SQL = SQL & ", usuconta= " & DBSet(mvarUsuConta, "T")
+    SQL = SQL & ", pasconta= " & DBSet(mvarPasConta, "T")
+    SQL = SQL & ", numconta= " & DBSet(mvarNumConta, "N", "S")
     
     'Valore por defecto
-    sql = sql & ", defactividad= " & DBSet(mvarDefActiv, "N", "N")
-    sql = sql & ", defenvio= " & DBSet(mvarDefEnvio, "N", "N")
-    sql = sql & ", defzona= " & DBSet(mvarDefZona, "N", "N")
-    sql = sql & ", defruta= " & DBSet(mvarDefRuta, "N", "N")
-    sql = sql & ", defstituacion= " & DBSet(mvarDefSitu, "N", "N")
-    sql = sql & ", deftarifa= " & DBSet(mvarDefTarifa, "N", "N")
-    sql = sql & ", defagente= " & DBSet(mvarDefAgente, "N", "N")
+    SQL = SQL & ", defactividad= " & DBSet(mvarDefActiv, "N", "N")
+    SQL = SQL & ", defenvio= " & DBSet(mvarDefEnvio, "N", "N")
+    SQL = SQL & ", defzona= " & DBSet(mvarDefZona, "N", "N")
+    SQL = SQL & ", defruta= " & DBSet(mvarDefRuta, "N", "N")
+    SQL = SQL & ", defstituacion= " & DBSet(mvarDefSitu, "N", "N")
+    SQL = SQL & ", deftarifa= " & DBSet(mvarDefTarifa, "N", "N")
+    SQL = SQL & ", defagente= " & DBSet(mvarDefAgente, "N", "N")
       
     'Telefonia
-    sql = sql & ", codartictel= " & DBSet(mvarCodarticTfnia, "T", "S")
+    SQL = SQL & ", codartictel= " & DBSet(mvarCodarticTfnia, "T", "S")
       
       
       
       
     'Avisos
-    sql = sql & ", avipedcli= " & DBSet(mvaravipedcli, "N", "S")
-    sql = sql & ", avipedpro= " & DBSet(mvaravipedpro, "N", "S")
-    sql = sql & ", avialbcli= " & DBSet(mvaravialbcli, "N", "S")
-    sql = sql & ", avialbpro= " & DBSet(mvaravialbpro, "N", "S")
-    sql = sql & ", avimanteni= " & DBSet(mvaravimanteni, "N", "S")
-    sql = sql & ", avirepara= " & DBSet(mvaravirepara, "N", "S")
-    sql = sql & ", aviavios= " & DBSet(mvaraviavisos, "N", "S")
+    SQL = SQL & ", avipedcli= " & DBSet(mvaravipedcli, "N", "S")
+    SQL = SQL & ", avipedpro= " & DBSet(mvaravipedpro, "N", "S")
+    SQL = SQL & ", avialbcli= " & DBSet(mvaravialbcli, "N", "S")
+    SQL = SQL & ", avialbpro= " & DBSet(mvaravialbpro, "N", "S")
+    SQL = SQL & ", avimanteni= " & DBSet(mvaravimanteni, "N", "S")
+    SQL = SQL & ", avirepara= " & DBSet(mvaravirepara, "N", "S")
+    SQL = SQL & ", aviavios= " & DBSet(mvaraviavisos, "N", "S")
       
     PonVariableTienAvisos
 
-    sql = sql & ", IVAre1eq= " & DBSet(mvarTipoIVAre1, "N", "S")
-    sql = sql & ", IVAre2eq= " & DBSet(mvarTipoIVAre2, "N", "S")
-    sql = sql & ", IVAre3eq= " & DBSet(mvarTipoIVAre3, "N", "S")
+    SQL = SQL & ", IVAre1eq= " & DBSet(mvarTipoIVAre1, "N", "S")
+    SQL = SQL & ", IVAre2eq= " & DBSet(mvarTipoIVAre2, "N", "S")
+    SQL = SQL & ", IVAre3eq= " & DBSet(mvarTipoIVAre3, "N", "S")
     mvarRecargoEquivalencia = (mvarTipoIVAre1 > 0 Or mvarTipoIVAre2 > 0 Or mvarTipoIVAre3 > 0)
     
-    sql = sql & ", IVAre1= " & DBSet(mvarIVA1, "N", "S")
-    sql = sql & ", IVAre2= " & DBSet(mvarIVA2, "N", "S")
-    sql = sql & ", IVAre3= " & DBSet(mvarIVA3, "N", "S")
+    SQL = SQL & ", IVAre1= " & DBSet(mvarIVA1, "N", "S")
+    SQL = SQL & ", IVAre2= " & DBSet(mvarIVA2, "N", "S")
+    SQL = SQL & ", IVAre3= " & DBSet(mvarIVA3, "N", "S")
 
     'Retencion y REA
-    sql = sql & ", IVA_REA = " & DBSet(mvarIVAREA, "N", "S")
-    sql = sql & ", CtaReten = " & DBSet(mvarCtaReten, "T", "S")
-    sql = sql & ", PorReten = " & DBSet(mvarPorReten, "N", "S")
+    SQL = SQL & ", IVA_REA = " & DBSet(mvarIVAREA, "N", "S")
+    SQL = SQL & ", CtaReten = " & DBSet(mvarCtaReten, "T", "S")
+    SQL = SQL & ", PorReten = " & DBSet(mvarPorReten, "N", "S")
 
     'IVA exento
-    sql = sql & ", ivaexento = " & DBSet(mvarIVA_Exento, "N", "S")
+    SQL = SQL & ", ivaexento = " & DBSet(mvarIVA_Exento, "N", "S")
 
 
     'Tickets agrupados
-    sql = sql & ", conttickagrupado = " & DBSet(mvarContabilizarTicketAgrupados, "B")
+    SQL = SQL & ", conttickagrupado = " & DBSet(mvarContabilizarTicketAgrupados, "B")
 
     'Contabilidad "B". Radival
-    sql = sql & ", conta_B  = " & DBSet(mvarContabilidadB, "N")
+    SQL = SQL & ", conta_B  = " & DBSet(mvarContabilidadB, "N")
 
     'Ctaa aportacion termial
-    sql = sql & ", ctaaportacion  = " & DBSet(mvarctaaportacion, "T")
+    SQL = SQL & ", ctaaportacion  = " & DBSet(mvarctaaportacion, "T")
     'Produccion
-    sql = sql & ", Produccion  = " & DBSet(mvarProduccion, "B")
+    SQL = SQL & ", Produccion  = " & DBSet(mvarProduccion, "B")
     'Descriptores
-    sql = sql & ", descriptores = " & DBSet(mvarDescriptores, "B")
+    SQL = SQL & ", descriptores = " & DBSet(mvarDescriptores, "B")
     'Observaciones factura proveedor/cliente
-    sql = sql & ", ObsFactura  = " & DBSet(mvarObsFactura, "N")
-    sql = sql & ", IvaIntracom  = " & DBSet(mvarIVA_Intracomunitario, "N")
+    SQL = SQL & ", ObsFactura  = " & DBSet(mvarObsFactura, "N")
+    SQL = SQL & ", IvaIntracom  = " & DBSet(mvarIVA_Intracomunitario, "N")
 
     'Tasa recliclado PUNTO VERDE
-    sql = sql & ", ArtReciclado  = " & DBSet(mvarArtReciclado, "T", "S")
+    SQL = SQL & ", ArtReciclado  = " & DBSet(mvarArtReciclado, "T", "S")
     
 
     'FONTENAS. Portes
-    sql = sql & ", ArticuloPortes  = " & DBSet(mvarArtPortes, "T", "S")
-    sql = sql & ", impminped  = " & DBSet(mvarImporteMinimo, "N", "S")
-    sql = sql & ", abonokilos  = " & DBSet(mvarAbonoKilos, "N", "S")
-    sql = sql & ", compoporcen = " & DBSet(mvarComponentePorcentaje, "B")
+    SQL = SQL & ", ArticuloPortes  = " & DBSet(mvarArtPortes, "T", "S")
+    SQL = SQL & ", impminped  = " & DBSet(mvarImporteMinimo, "N", "S")
+    SQL = SQL & ", abonokilos  = " & DBSet(mvarAbonoKilos, "N", "S")
+    SQL = SQL & ", compoporcen = " & DBSet(mvarComponentePorcentaje, "B")
     
     ' ---- [14/09/2009] (LAURA)
-    sql = sql & ", dtoxcanti = " & DBSet(Me.DtoxCantidad, "B")
-    sql = sql & ", creatarifart = " & DBSet(Me.CreaTarifasArticulo, "N")
+    SQL = SQL & ", dtoxcanti = " & DBSet(Me.DtoxCantidad, "B")
+    SQL = SQL & ", creatarifart = " & DBSet(Me.CreaTarifasArticulo, "N")
     '-----------------
     
     ' ---- [19/10/2009] [LAURA]: añadir campo modo analitica
-    sql = sql & ", modanalitica = " & DBSet(Me.ModoAnalitica, "N")
+    SQL = SQL & ", modanalitica = " & DBSet(Me.ModoAnalitica, "N")
     
     
     ' ---- [31/12/2009] [DAVID]
-    sql = sql & ", EnvioDesdeOutlook = " & DBSet(Me.EnvioDesdeOutlook, "B")
+    SQL = SQL & ", EnvioDesdeOutlook = " & DBSet(Me.EnvioDesdeOutlook, "B")
     
     
     ' ---- [02/02/2010] [DAVID]
-    sql = sql & ", arigesmail = " & DBSet(ExeEnvioMail, "T", "S")
+    SQL = SQL & ", arigesmail = " & DBSet(ExeEnvioMail, "T", "S")
     ' ---- [10/02/2010] [DAVID]
-    sql = sql & ", diasgaranrepa = " & DBSet(Me.DiasGarantia, "N", "S")
+    SQL = SQL & ", diasgaranrepa = " & DBSet(Me.DiasGarantia, "N", "S")
     
     
     ' ---- [09/06/2010] [DAVID] Cambio IVA
-    sql = sql & ", iva_oldre1 = " & DBSet(mvarOLDIVAre1, "N", "S")
-    sql = sql & ", iva_oldre2 = " & DBSet(mvarOLDIVAre2, "N", "S")
+    SQL = SQL & ", iva_oldre1 = " & DBSet(mvarOLDIVAre1, "N", "S")
+    SQL = SQL & ", iva_oldre2 = " & DBSet(mvarOLDIVAre2, "N", "S")
     'SQL = SQL & ", iva_oldre3 = " & DBSet(mvarOLDIVAre3, "N", "S")
     
-    sql = sql & ", iva_old1 = " & DBSet(mvarOLDIVA1, "N", "S")
-    sql = sql & ", iva_old2 = " & DBSet(mvarOLDIVA2, "N", "S")
+    SQL = SQL & ", iva_old1 = " & DBSet(mvarOLDIVA1, "N", "S")
+    SQL = SQL & ", iva_old2 = " & DBSet(mvarOLDIVA2, "N", "S")
     'SQL = SQL & ", iva_old3 = " & DBSet(mvarOLDIVA3, "N", "S")
     
-    sql = sql & ",numcopias = " & DBSet(mvarNumCopiasFacturacion, "N")
+    SQL = SQL & ",numcopias = " & DBSet(mvarNumCopiasFacturacion, "N")
     
-    sql = sql & ",artRecargoFina = " & DBSet(mvarArticuloRecargoFinanciero, "T")
+    SQL = SQL & ",artRecargoFina = " & DBSet(mvarArticuloRecargoFinanciero, "T")
     
     
     'Tipo portes
-    sql = sql & ",TipoPortes  = " & mvarTipoPortes
-    sql = sql & ",DirecEnvio  = " & DBSet(mvarDireccionesEnvio, "B")
+    SQL = SQL & ",TipoPortes  = " & mvarTipoPortes
+    SQL = SQL & ",DirecEnvio  = " & DBSet(mvarDireccionesEnvio, "B")
     
     'Fras mostrador serie distinta a facturas albaran
-    sql = sql & ",FraMostra  = " & DBSet(mvarFrasMostradorSerieDistinta, "B")
+    SQL = SQL & ",FraMostra  = " & DBSet(mvarFrasMostradorSerieDistinta, "B")
     'Alb para facturar
-    sql = sql & ",AlbParaFcturar = " & DBSet(mvarMarcarAlbaranFacturar, "B")
+    SQL = SQL & ",AlbParaFcturar = " & DBSet(mvarMarcarAlbaranFacturar, "B")
     
     '`OperAseguradas`    `situbloq`
-    sql = sql & ",OperAseguradas = " & DBSet(mvarOperacionesAseguradas, "B")
-    sql = sql & ",situbloq = " & DBSet(mvarSituacionBloqueoOpAseg, "N")
+    SQL = SQL & ",OperAseguradas = " & DBSet(mvarOperacionesAseguradas, "B")
+    SQL = SQL & ",situbloq = " & DBSet(mvarSituacionBloqueoOpAseg, "N")
 
     'Rotacion
-    sql = sql & ",mesconant1 = " & DBSet(mvarRot_ConsumMes1, "N", "S")
-    sql = sql & ",mesconant2 = " & DBSet(mvarRot_ConsumMes2, "N", "S")
-    sql = sql & ",consummin = " & DBSet(mvarRot_ConsumMesMin, "N", "S")
-    sql = sql & ",consummax = " & DBSet(mvarRot_ConsumMesMax, "N", "S")
+    SQL = SQL & ",mesconant1 = " & DBSet(mvarRot_ConsumMes1, "N", "S")
+    SQL = SQL & ",mesconant2 = " & DBSet(mvarRot_ConsumMes2, "N", "S")
+    SQL = SQL & ",consummin = " & DBSet(mvarRot_ConsumMesMin, "N", "S")
+    SQL = SQL & ",consummax = " & DBSet(mvarRot_ConsumMesMax, "N", "S")
     
-    sql = sql & ",LogCambioPrecDto = " & DBSet(mvarLogCambioPrecDto, "B")
+    SQL = SQL & ",LogCambioPrecDto = " & DBSet(mvarLogCambioPrecDto, "B")
     
-    sql = sql & ",CtaContabIntracom = " & DBSet(mvarCtaContabIntracom, "T", "S")
-    sql = sql & ",IvaIntracomAdicional = " & DBSet(mvarIvaIntracomAdicional, "N", "S")
-    sql = sql & ",IntracomAdicionContab = " & DBSet(mvarIntracomAdicionalContab, "B")
+    SQL = SQL & ",CtaContabIntracom = " & DBSet(mvarCtaContabIntracom, "T", "S")
+    SQL = SQL & ",IvaIntracomAdicional = " & DBSet(mvarIvaIntracomAdicional, "N", "S")
+    SQL = SQL & ",IntracomAdicionContab = " & DBSet(mvarIntracomAdicionalContab, "B")
    
-    sql = sql & ",PathFacturaE = " & DBSet(mvarPathFacturaE, "T")
+    SQL = SQL & ",PathFacturaE = " & DBSet(mvarPathFacturaE, "T")
     
     'Nº Copias. Es para ofertas, facturas.....
-    sql = sql & ",NumeroCopias = " & DBSet(mvarNumeroCopias, "T")
+    SQL = SQL & ",NumeroCopias = " & DBSet(mvarNumeroCopias, "T")
    
    
-    sql = sql & ",PrecioMinimo = " & DBSet(mvarPrecioMinimo, "B")
-    sql = sql & ",artSeparador = " & DBSet(mvarArtSeparador, "T")
-    sql = sql & ",PorcenpagAgenPag = " & DBSet(mvarPorcenPagoAgentTalPag, "N", "N")
+    SQL = SQL & ",PrecioMinimo = " & DBSet(mvarPrecioMinimo, "B")
+    SQL = SQL & ",artSeparador = " & DBSet(mvarArtSeparador, "T")
+    SQL = SQL & ",PorcenpagAgenPag = " & DBSet(mvarPorcenPagoAgentTalPag, "N", "N")
      
-    sql = sql & ",codartictel = " & DBSet(mvarArtiTelefonia, "T")
+    SQL = SQL & ",codartictel = " & DBSet(mvarArtiTelefonia, "T")
     
     
     
-    sql = sql & ",RecMercanciaSoloPpal = " & DBSet(mvarRecMercanciaSoloPpal, "B")
+    SQL = SQL & ",RecMercanciaSoloPpal = " & DBSet(mvarRecMercanciaSoloPpal, "B")
     
-    sql = sql & ",artTfoniaIvaExento = " & DBSet(mvarArtTfniaIvaExento, "T")
+    SQL = SQL & ",artTfoniaIvaExento = " & DBSet(mvarArtTfniaIvaExento, "T")
             
-    sql = sql & ", IncializarStokInv  = " & DBSet(IncializarStockEnInventario, "B")
+    SQL = SQL & ", IncializarStokInv  = " & DBSet(IncializarStockEnInventario, "B")
     
-    sql = sql & ", ActualizaPrecioEspecial  = " & DBSet(mvarActualizaPrecioEspecial, "B")
+    SQL = SQL & ", ActualizaPrecioEspecial  = " & DBSet(mvarActualizaPrecioEspecial, "B")
     
-    sql = sql & ", FrasMostradorRapida  = " & DBSet(mvarEntradaRapidaFacturasMostrador, "B")
-    sql = sql & ", ManipuladorFitosanitarios  = " & DBSet(mvarManipuladorFitosanitarios, "B")
+    SQL = SQL & ", FrasMostradorRapida  = " & DBSet(mvarEntradaRapidaFacturasMostrador, "B")
+    SQL = SQL & ", ManipuladorFitosanitarios  = " & DBSet(mvarManipuladorFitosanitarios, "B")
     
     
-    sql = sql & ", ActualizaMargen = " & DBSet(RecalculoMargen, "B")
+    SQL = SQL & ", ActualizaMargen = " & DBSet(RecalculoMargen, "B")
     
-    sql = sql & ", InventarioPorCodigo = " & DBSet(mvarInventarioCodigoArticulo, "B")
+    SQL = SQL & ", InventarioPorCodigo = " & DBSet(mvarInventarioCodigoArticulo, "B")
 
     'Coste hora euler
-    sql = sql & ", preciohoracoste= " & DBSet(mvarPrecioHoraCosteEUL, "N", "S")
+    SQL = SQL & ", preciohoracoste= " & DBSet(mvarPrecioHoraCosteEUL, "N", "S")
     'SIGNOTEC
     '    PathFirmasFacturas
-    sql = sql & ", PathFirmasAlbaran= " & DBSet(mvarPathFirmasAlbaran, "T", "S")
-    sql = sql & ", PathFirmasFacturas= " & DBSet(mvarPathFirmasFacturas, "T", "S")
+    SQL = SQL & ", PathFirmasAlbaran= " & DBSet(mvarPathFirmasAlbaran, "T", "S")
+    SQL = SQL & ", PathFirmasFacturas= " & DBSet(mvarPathFirmasFacturas, "T", "S")
 
 
 
@@ -2407,9 +2444,9 @@ On Error GoTo EModificar
     'GestionFlotas
     
     'where
-    sql = sql & " WHERE codigo =" & codigo & ";"
+    SQL = SQL & " WHERE codigo =" & Codigo & ";"
 
-    conn.Execute sql
+    conn.Execute SQL
 
 
 
@@ -2441,12 +2478,12 @@ End Sub
 Private Function MovimientosParaServicios() As Boolean
     '-- Esta función comprueba si los movimientos ALS y FAS están creados
     '   este es un requisito previo si se desa activar la opción de servicios
-    Dim sql As String
-    Dim Rs As ADODB.Recordset
-    sql = "select count(*) from stipom where codtipom = 'ALS' or codtipom = 'FAS'"
-    Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly
-    If Rs.Fields(0) = 2 Then
+    Dim SQL As String
+    Dim RS As ADODB.Recordset
+    SQL = "select count(*) from stipom where codtipom = 'ALS' or codtipom = 'FAS'"
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly
+    If RS.Fields(0) = 2 Then
         MovimientosParaServicios = True
     Else
         MovimientosParaServicios = False
@@ -2511,7 +2548,7 @@ End Function
 
 
 Private Sub CargarTablaTraduccionIVAS()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error GoTo ECargarTablaTraduccionIVAS
     If ConnConta Is Nothing Then
@@ -2519,35 +2556,35 @@ Dim Rs As ADODB.Recordset
         Exit Sub
     End If
     
-    sql = "DELETE FROM sivatra"
-    conn.Execute sql
+    SQL = "DELETE FROM sivatra"
+    conn.Execute SQL
     
     
-    Set Rs = New ADODB.Recordset
-    sql = "select codigiva from tiposiva"
-    Rs.Open sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
-        sql = "INSERT INTO sivatra VALUES (" & Rs!Codigiva & "," & Rs!Codigiva & ")"
+    Set RS = New ADODB.Recordset
+    SQL = "select codigiva from tiposiva"
+    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
+        SQL = "INSERT INTO sivatra VALUES (" & RS!Codigiva & "," & RS!Codigiva & ")"
         
-        conn.Execute sql
-        Rs.MoveNext
+        conn.Execute SQL
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     'Ahora acutalizo la relacion
     If mvarTipoIVAre1 > 0 Then
-        sql = "UPDATE sivatra set codigiva2=" & mvarTipoIVAre1 & " WHERE codigiva = " & mvarIVA1
-        conn.Execute sql
+        SQL = "UPDATE sivatra set codigiva2=" & mvarTipoIVAre1 & " WHERE codigiva = " & mvarIVA1
+        conn.Execute SQL
     End If
     
     If mvarTipoIVAre2 > 0 Then
-        sql = "UPDATE sivatra set codigiva2=" & mvarTipoIVAre2 & " WHERE codigiva = " & mvarIVA2
-        conn.Execute sql
+        SQL = "UPDATE sivatra set codigiva2=" & mvarTipoIVAre2 & " WHERE codigiva = " & mvarIVA2
+        conn.Execute SQL
     End If
         
     If mvarTipoIVAre3 > 0 Then
-        sql = "UPDATE sivatra set codigiva2=" & mvarTipoIVAre3 & " WHERE codigiva = " & mvarIVA3
-        conn.Execute sql
+        SQL = "UPDATE sivatra set codigiva2=" & mvarTipoIVAre3 & " WHERE codigiva = " & mvarIVA3
+        conn.Execute SQL
     End If
         
     Exit Sub
@@ -2609,11 +2646,11 @@ Private Sub FijaParametroAlmagrupo(ByRef R As ADODB.Recordset)
     On Error GoTo eMvarComunicaAlmagrupo
     Set R = New ADODB.Recordset
     mvarComunicaAlmagrupo = False
-    sql = "Select * from salmagrupoparam "
-    R.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    sql = ""
-    sql = R.Fields(0)
-    If sql <> "" Then mvarComunicaAlmagrupo = True
+    SQL = "Select * from salmagrupoparam "
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
+    SQL = R.Fields(0)
+    If SQL <> "" Then mvarComunicaAlmagrupo = True
     R.Close
 eMvarComunicaAlmagrupo:
     Err.Clear
@@ -2626,11 +2663,11 @@ Private Function ComprobarEmpresaWHOSE(ByRef R As ADODB.Recordset) As Boolean
     On Error GoTo eComprobarEmpresaWHOSE
     Set R = New ADODB.Recordset
     ComprobarEmpresaWHOSE = False
-    sql = "Select * from sparamwhose "
-    R.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    sql = ""
-    sql = R.Fields(0)
-    If sql <> "" Then ComprobarEmpresaWHOSE = True
+    SQL = "Select * from sparamwhose "
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
+    SQL = R.Fields(0)
+    If SQL <> "" Then ComprobarEmpresaWHOSE = True
     R.Close
     Exit Function
 eComprobarEmpresaWHOSE:
@@ -2644,11 +2681,11 @@ Private Function ComprobarGessocial(ByRef R As ADODB.Recordset) As Boolean
     On Error GoTo eComprobarEmpresaWHOSE
     Set R = New ADODB.Recordset
     ComprobarGessocial = False
-    sql = "Select * from asociados "
-    R.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    sql = ""
-    sql = R.Fields(0)
-    If sql <> "" Then ComprobarGessocial = True
+    SQL = "Select * from asociados "
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
+    SQL = R.Fields(0)
+    If SQL <> "" Then ComprobarGessocial = True
     R.Close
     Exit Function
 eComprobarEmpresaWHOSE:
@@ -2662,16 +2699,16 @@ Private Sub FijarSiTieneUnSoloBancoPropio(ByRef R As ADODB.Recordset)
     On Error GoTo eFijaSiTieneUnSoloBancoPropio
     Set R = New ADODB.Recordset
     mvarCodigoUnicoBancoPropio_ = 0
-    sql = "Select codbanpr from sbanpr "
-    R.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    sql = ""
+    SQL = "Select codbanpr from sbanpr "
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
     While Not R.EOF
         mvarCodigoUnicoBancoPropio_ = R!codbanpr
-        sql = sql & "X"
+        SQL = SQL & "X"
             R.MoveNext
     Wend
     R.Close
-    If Len(sql) > 1 Then mvarCodigoUnicoBancoPropio_ = 0
+    If Len(SQL) > 1 Then mvarCodigoUnicoBancoPropio_ = 0
     
      Exit Sub
 eFijaSiTieneUnSoloBancoPropio:
@@ -2691,8 +2728,8 @@ Private Sub FijarSiTieneHuertos(ByRef R As ADODB.Recordset)
     
     If mvarNumeroInstalacion > 0 Then Exit Sub
     
-    sql = "Select * from sclienhuertos where codclien=-1"
-    R.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select * from sclienhuertos where codclien=-1"
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'Si llega aqui siginifca que la tabla existe
     mvarHuertos = True
     R.Close
@@ -2715,8 +2752,8 @@ Private Sub FijarSiTieneLotesGeneralitat(ByRef R As ADODB.Recordset)
     
     If Not mvarManipuladorFitosanitarios Then Exit Sub
     
-    sql = "Select * from slotesgeneralitat where codartic='@#@@'"
-    R.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select * from slotesgeneralitat where codartic='@#@@'"
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'Si llega aqui siginifca que la tabla existe
     
     mvarLotesGeneralitat = True
@@ -2746,8 +2783,8 @@ Dim R
     End If
     Set R = New ADODB.Recordset
         
-    sql = "select SIIFechaInicio,SIIDiasAviso FROM parametros"
-    R.Open sql, ConnConta, adOpenForwardOnly, adLockOptimistic
+    SQL = "select SIIFechaInicio,SIIDiasAviso FROM parametros"
+    R.Open SQL, ConnConta, adOpenForwardOnly, adLockOptimistic
     If Not R.EOF Then
         If Not IsNull(R!SIIFechaInicio) Then
             'Tiene fecha inicio
@@ -2771,8 +2808,8 @@ Dim R
     
     Set R = New ADODB.Recordset
         
-    sql = "select VtaPlazosTelefono FROM spara2"
-    R.Open sql, conn, adOpenForwardOnly, adLockOptimistic
+    SQL = "select VtaPlazosTelefono FROM spara2"
+    R.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
     If Not R.EOF Then
         If DBLet(R!VtaPlazosTelefono, "N") = 1 Then mvarTelefoniaVtaPlazos = True
     End If
@@ -2798,7 +2835,28 @@ Private Function CampoNuevoBD(ByRef R As ADODB.Recordset, campo As String, Tipo 
         
     Else
         'OK
-        If Tipo = "B" Then ValorDevuelto = CBool(ValorDevuelto = 1)
-         CampoNuevoBD = True
+        If Tipo = "B" Then
+            ValorDevuelto = CBool(ValorDevuelto = 1)
+        Else
+            If IsNull(R(campo)) Then
+                If Tipo = "T" Then
+                    ValorDevuelto = ""
+                Else
+                    If Tipo = "F" Then
+                        ValorDevuelto = "'1900-01-01'"
+                    Else
+                        ValorDevuelto = 0
+                    End If
+                End If
+            End If
+        End If
+        CampoNuevoBD = True
     End If
 End Function
+
+
+Public Sub QuitarFormulariosGrandes()
+     mvarHaciendoFrmulariosGrandes = False
+End Sub
+
+

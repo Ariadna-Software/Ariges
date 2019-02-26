@@ -46,7 +46,7 @@ Public Function ActualizarElTraspaso(ByRef ADonde As String, cadWhere As String,
 End Function
 
 
-Private Function InsertarCabeceraHistorico(cadWhere As String, Optional cadL As String) As Boolean
+Private Function InsertarCabeceraHistorico(cadWhere As String, Optional cadeN As String) As Boolean
 Dim SQL As String
 Dim Aux As String
 
@@ -61,19 +61,19 @@ On Error Resume Next
         NomTabla = "scaped"
         NomTablaH = "schped"
         NomTablaLinH = "slhped"
-        SQL = " SELECT numpedcl,fecpedcl," & vUsu.codigo Mod 1000 & " as codigusu," & cadL & ","
+        SQL = " SELECT numpedcl,fecpedcl," & vUsu.Codigo Mod 1000 & " as codigusu," & cadeN & ","
         SQL = SQL & "fecentre,sementre,visadore,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
         SQL = SQL & "coddirec,nomdirec,referenc,codtraba,codagent,codforpa,dtoppago,dtognral,"
         SQL = SQL & "tipofact,observa01,observa02,observa03,observa04,observa05,servcomp,restoped,numofert,fecofert,observap1,observap2,recogecl,actuacion,coddiren,observacrm"
                    'Enero 2016        Nov 16
-        SQL = SQL & ", PideCliente,observaciones"
+        SQL = SQL & ", PideCliente,observaciones,cerrado"
         
         
       Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE" '[1.3.1] 'Albaran de venta a clientes
         NomTabla = "scaalb"
         NomTablaH = "schalb"
         NomTablaLinH = "slhalb"
-        SQL = " SELECT codtipom,numalbar,fechaalb," & vUsu.codigo Mod 1000 & " as codigusu," & cadL & ","
+        SQL = " SELECT codtipom,numalbar,fechaalb," & vUsu.Codigo Mod 1000 & " as codigusu," & cadeN & ","
         SQL = SQL & "factursn,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
         SQL = SQL & "coddirec,nomdirec,referenc,facturkm,cantidkm,codtraba,codtrab1,codtrab2,codagent,codforpa,codenvio,dtoppago,dtognral,"
         SQL = SQL & "tipofact,observa01,observa02,observa03,observa04,observa05,numofert,fecofert,numpedcl,fecpedcl,fecentre,sementre,esticket,numtermi,numventa "
@@ -96,7 +96,7 @@ On Error Resume Next
         SQL = " SELECT numofert, fecofert," & "'" & Format(Now, FormatoFecha) & "' as fechamov, fecentre, aceptado, codclien, nomclien, domclien, codpobla, "
         SQL = SQL & "pobclien, proclien, nifclien, telclien, coddirec, nomdirec, referenc, codtraba, codagent, codforpa, dtoppago, dtognral, tipofact, "
         SQL = SQL & "plazos01, plazos02, plazos03, asunto01, asunto02, asunto03, asunto04, asunto05, observa01, observa02, observa03, observa04, observa05, "
-        SQL = SQL & "concepto, seguiofe ,actuacion,coddiren,mailconfir,observacrm,obscompra "
+        SQL = SQL & "concepto, seguiofe ,actuacion,coddiren,mailconfir,observacrm,obscompra," & cadeN & " as motivoTraspaso "
         
       Case "ALC" 'Albaranes a Proveedores (Compras)
         NomTabla = "scaalp"
@@ -105,7 +105,7 @@ On Error Resume Next
         SQL = " (numalbar,fechaalb,codprove,codigusu,fechelim,trabelim,codincid,nomprove,domprove,"
         SQL = SQL & "codpobla,pobprove,proprove,nifprove,telprove,codforpa,codtraba,codtrab1,dtoppago,dtognral,"
         SQL = SQL & "observa1,observa2,observa3,observa4,observa5,numpedpr,fecpedpr,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega) "
-        SQL = SQL & " SELECT numalbar,fechaalb,codprove," & vUsu.codigo Mod 1000 & " as codigusu," & cadL & ","
+        SQL = SQL & " SELECT numalbar,fechaalb,codprove," & vUsu.Codigo Mod 1000 & " as codigusu," & cadeN & ","
         SQL = SQL & "nomprove,domprove,codpobla,pobprove,proprove,nifprove,telprove,"
         SQL = SQL & "codforpa,codtraba,codtrab1,dtoppago,dtognral,"
         SQL = SQL & "observa1,observa2,observa3,observa4,observa5,numpedpr,fecpedpr,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega"
@@ -114,7 +114,7 @@ On Error Resume Next
         NomTabla = "scappr"
         NomTablaH = "schppr"
         NomTablaLinH = "slhppr"
-        SQL = " SELECT numpedpr,fecpedpr," & vUsu.codigo Mod 1000 & " as codigusu," & cadL & ","
+        SQL = " SELECT numpedpr,fecpedpr," & vUsu.Codigo Mod 1000 & " as codigusu," & cadeN & ","
         SQL = SQL & "codprove,nomprove,domprove,codpobla,pobprove,proprove,nifprove,telprove,"
         SQL = SQL & "coddirea,coddiref,codforpa,codtraba,codtrab1,dtognral,dtoppago,"
         SQL = SQL & "restoped,codclien,observa1,observa2,observa3,observa4,observa5,tipoporte,obra,coddirre"
@@ -170,7 +170,7 @@ On Error Resume Next
       Case "PEV" 'pedidos ventas a clientes
         NomTablaLin = "sliped"
         NomTablaLinH = "slhped"
-        SQL = " SELECT scaped.numpedcl,scaped.fecpedcl,sliped.numlinea,sliped.codalmac,sliped.codartic,sliped.nomartic,sliped.ampliaci,sliped.cantidad,servidas,numbultos,precioar,dtoline1,dtoline2,importel,origpre,numlote,codccost,codtipor,codcapit "
+        SQL = " SELECT scaped.numpedcl,scaped.fecpedcl,sliped.numlinea,sliped.codalmac,sliped.codartic,sliped.nomartic,sliped.ampliaci,sliped.cantidad,servidas,numbultos,precioar,dtoline1,dtoline2,importel,origpre,numlote,codccost,codtipor,codcapit,solicitadas "
         SQL = SQL & " FROM scaped INNER JOIN sliped on scaped.numpedcl=sliped.numpedcl "
         SQL = SQL & " WHERE " & cadWhere
         '25-JUN: pvpInferior
@@ -234,9 +234,12 @@ On Error Resume Next
             
         'ENE 2015
         If vParamAplic.NumeroInstalacion = 4 Then
-            SQL = cadWhere
-            SQL = Replace(SQL, "scapre", "sliprePdfs")
-            SQL = "INSERT INTO slhprePdfs SELECT * from sliprePdfs WHERE " & SQL
+            
+            
+            SQL = " SELECT scapre.numofert,numlinea,ficheroDesc,ficheronombre"
+            SQL = SQL & " FROM scapre INNER JOIN sliprePdfs  on scapre.numofert=sliprePdfs.numofert"
+            SQL = "INSERT INTO slhprePdfs " & SQL
+            SQL = SQL & " WHERE " & cadWhere
             If Not ejecutar(SQL, True) Then MsgBox "Error insertando en tabla slhprePdfs " & vbCrLf & "El programa continuara generando el pedido. " & vbCrLf & "Avise a soporte técnico", vbExclamation
                 
         End If
@@ -269,7 +272,7 @@ Private Function BorrarTraspaso(EnHistorico As Boolean, cadWhere As String) As B
 'Si EnHistorico=true borra de las tablas de historico: "schtra" y "slhtra"
 'Si EnHistorico=false borra de las tablas de traspaso: "scatra" y "slitra"
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim cad As String, cadAux As String
 Dim EsAlbaran As Boolean
     BorrarTraspaso = False
@@ -295,19 +298,19 @@ Dim EsAlbaran As Boolean
     End Select
     
     If CodTipoMov <> "ALC" And CodTipoMov <> "PEC" Then
-        Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         cad = ""
-        While Not Rs.EOF
+        While Not RS.EOF
             If CodTipoMov <> "ALC" Then
-                cad = cad & Rs.Fields(0).Value & ","
+                cad = cad & RS.Fields(0).Value & ","
             Else
                 cad = cad & "numalbar="
             End If
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
         'Quitar la ultima coma de la cadena
         cad = Mid(cad, 1, Len(cad) - 1)
         

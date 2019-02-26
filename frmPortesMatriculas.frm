@@ -585,57 +585,57 @@ Dim Modo As Byte
 '   3.-  Inserció de nou registre
 '   4.-  Modificar
 '--------------------------------------------------
-Dim PrimeraVez As Boolean
+Dim Primeravez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim i As Integer
 
 Private Sub PonerModo(vModo)
-Dim B As Boolean
+Dim b As Boolean
 
     Modo = vModo
     BuscaChekc = ""
     
-    B = (Modo = 2)
-    If B Then
+    b = (Modo = 2)
+    If b Then
         PonLblIndicador lblIndicador, adodc1
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
     For i = 0 To txtAux.Count - 2
-        txtAux(i).visible = Not B
+        txtAux(i).visible = Not b
         txtAux(i).BackColor = vbWhite
     Next i
     
-    txtAux2(2).visible = Not B
-    btnBuscar(0).visible = Not B
-    Me.Combo1.visible = Not B
+    txtAux2(2).visible = Not b
+    btnBuscar(0).visible = Not b
+    Me.Combo1.visible = Not b
     txtAux(3).Left = 15000
-    txtAux(3).visible = Not B And Not VerMatriculas
+    txtAux(3).visible = Not b And Not VerMatriculas
 
 
 
 
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
-    DataGrid1.Enabled = B
+    cmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
+    DataGrid1.Enabled = b
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
     PonerOpcionesMenu  'En funcion del usuario
     
     'Si estamos modo Modificar bloquear clave primaria
-    B = False
+    b = False
     If Modo = 4 Then
-        B = True       'modificando
+        b = True       'modificando
     Else
-        If Transportista >= 0 Then B = True
+        If Transportista >= 0 Then b = True
     End If
-    BloquearTxt txtAux(0), B
-    btnBuscar(0).Enabled = B
+    BloquearTxt txtAux(0), b
+    btnBuscar(0).Enabled = b
     BloquearTxt txtAux(1), (Modo = 4)
     
 End Sub
@@ -643,30 +643,30 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnBuscar.Enabled = b
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnVerTodos.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnVerTodos.Enabled = b
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
-    Me.mnNuevo.Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = b And Not DeConsulta
+    Me.mnNuevo.Enabled = b And Not DeConsulta
     
-    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = b
+    Me.mnEliminar.Enabled = b
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = B
-    Me.mnImprimir.Enabled = B
+    Toolbar1.Buttons(8).Enabled = b
+    Me.mnImprimir.Enabled = b
     
 End Sub
 
@@ -798,7 +798,7 @@ Dim temp As Boolean
     On Error GoTo Error2
     'Ciertas comprobaciones
     If adodc1.Recordset.EOF Then Exit Sub
-    If Not SePuedeBorrar Then Exit Sub
+    If Not SepuedeBorrar Then Exit Sub
 
 
 
@@ -989,8 +989,8 @@ End Sub
 Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
 
-    If PrimeraVez Then
-        PrimeraVez = False
+    If Primeravez Then
+        Primeravez = False
         
         If Transportista >= 0 Then
             BuscaChekc = DevuelveDesdeBD(conAri, "nomenvio", "senvio", "codenvio", CStr(Transportista))
@@ -1011,7 +1011,7 @@ Private Sub Form_Load()
     'Icono del formulario
     Me.Icon = frmPpal.Icon
 
-    PrimeraVez = True
+    Primeravez = True
 
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM2
@@ -1145,12 +1145,12 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Tabla As String
+    Dim tabla As String
     Dim SQL As String
     Dim tots As String
     
-    Tabla = "sconductor"
-     If VerMatriculas Then Tabla = "smatriculas"
+    tabla = "sconductor"
+     If VerMatriculas Then tabla = "smatriculas"
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
@@ -1160,7 +1160,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     End If
     
     If Transportista >= 0 Then
-        SQL = SQL & " and " & Tabla & ".codenvio = " & Transportista
+        SQL = SQL & " and " & tabla & ".codenvio = " & Transportista
     End If
     
     
@@ -1172,7 +1172,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     End If
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, Primeravez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Codigo|1000|;S|btnBuscar(0)|B|||;S|txtAux2(2)|T|Transportista|4900|;"
@@ -1199,7 +1199,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub txtaux_GotFocus(Index As Integer)
+Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo
 End Sub
 
@@ -1224,27 +1224,27 @@ End Sub
 
 Private Function DatosOk() As Boolean
 'Dim Datos As String
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 Dim Mens As String
 
-    B = CompForm(Me, 0)
-    If Not B Then Exit Function
+    b = CompForm(Me, 0)
+    If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
         'SQL = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", txtAux(0).Text, "N", , "codcalid", txtAux(1).Text, "N", "numlinea", txtAux(2).Text, "N")
         If SQL <> "" Then
             MsgBox "Linea de calibrador existente para esta calidad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
-            B = False
+            b = False
         End If
     End If
     
-    If B And (Modo = 3 Or Modo = 4) Then
+    If b And (Modo = 3 Or Modo = 4) Then
 
     End If
     
-    If B And (Modo = 3) Then
+    If b And (Modo = 3) Then
         SQL = "select count(*) from matriculas where codenvio = " & DBSet(txtAux(0).Text, "N")
         SQL = SQL & " and matricula = " & DBSet(txtAux(1).Text, "T")
         
@@ -1252,14 +1252,14 @@ Dim Mens As String
         If TotalRegistros(SQL) <> 0 Then
             MsgBox "Ya esta la matricula para el transportista. Revise.", vbExclamation
             PonerFoco txtAux(1)
-            B = False
+            b = False
         End If
     End If
     
-    If B And (Modo = 3 Or Modo = 4) Then
+    If b And (Modo = 3 Or Modo = 4) Then
         
     End If
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -1273,7 +1273,7 @@ Private Sub printNou()
     
 End Sub
 
-Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 43 Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
@@ -1286,16 +1286,16 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Alvançar/Retrocedir els camps en les fleches de desplaçament del teclat.
     KEYdown KeyCode
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 
 End Sub
 
@@ -1326,12 +1326,13 @@ Dim C As String
 End Sub
 
 
-Private Function SePuedeBorrar() As Boolean
-    SePuedeBorrar = False
+Private Function SepuedeBorrar() As Boolean
+    SepuedeBorrar = False
     Screen.MousePointer = vbHourglass
     BuscaChekc = ""
     If VerMatriculas Then
-        Stop
+        MsgBox "Falta comprobar proceso borre. Avise soporte tecnico. El programa continuara", vbExclamation
+        Exit Function
         'FALTA###
     Else
         For i = 1 To 3
@@ -1344,7 +1345,7 @@ Private Function SePuedeBorrar() As Boolean
     If BuscaChekc <> "" Then
         MsgBox "Datos relacionados con este chófer", vbExclamation
     Else
-        SePuedeBorrar = True
+        SepuedeBorrar = True
     End If
     Screen.MousePointer = vbDefault
 End Function
