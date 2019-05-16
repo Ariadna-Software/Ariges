@@ -35,9 +35,9 @@ Begin VB.Form frmFacFormasEnvio
       Height          =   290
       Index           =   0
       Left            =   120
-      MaxLength       =   3
+      MaxLength       =   6
       TabIndex        =   0
-      Tag             =   "Código Formas de Envío|N|N|0|999|senvio|codenvio|000|S|"
+      Tag             =   "Código Formas de Envío|N|N|0|99999|senvio|codenvio|000|S|"
       Text            =   "Codigo"
       Top             =   4920
       Width           =   800
@@ -349,23 +349,23 @@ Dim Modo As Byte
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
     
     Modo = vModo
-    b = (Modo = 2)
+    B = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
-    CboEtiqueta.visible = Not b
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    txtAux(0).visible = Not B
+    txtAux(1).visible = Not B
+    CboEtiqueta.visible = Not B
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
     cmdCancelar.Cancel = True
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
         
     End If
     
@@ -384,28 +384,28 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ber Todos
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
-    b = b And Not DeConsulta
+    B = B And Not DeConsulta
     'Añadir
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(10).Enabled = b
+    Toolbar1.Buttons(10).Enabled = B
 End Sub
 
 
@@ -463,15 +463,15 @@ End Sub
 
 Private Sub BotonModificar()
 Dim anc As Single
-Dim i As Integer
+Dim I As Integer
 
     If adodc1.Recordset.EOF Then Exit Sub
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -547,35 +547,38 @@ Private Sub CboEtiqueta_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
-Dim cadB As String
+Dim I As Integer
+Dim CadB As String
 On Error GoTo EAceptar
 
     Select Case Modo
         Case 3 'Insertar
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
-                    CargaGrid
-                    BotonAnyadir
+                    cmdCancelar_Click
+                    BotonVerTodos
+                    
+                    adodc1.Recordset.MoveLast
+                    'BotonAnyadir
                 End If
             End If
         Case 4  'Modificar
             If DatosOk And BLOQUEADesdeFormulario(Me) Then
                 If ModificaDesdeFormulario(Me, 3) Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CancelaADODC Me.adodc1
                     CargaGrid
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                 End If
                 DataGrid1.SetFocus
             End If
         Case 1 'HacerBusqueda
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid cadB
+                CargaGrid CadB
                 DataGrid1.SetFocus
             End If
     End Select
@@ -634,7 +637,7 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     End If
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -689,7 +692,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1: BotonBuscar
         Case 2: BotonVerTodos
         Case 5: BotonAnyadir
@@ -706,10 +709,10 @@ End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim b As Boolean
+Dim B As Boolean
 Dim tots As String
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
 
     If SQL <> "" Then
         SQL = CadenaConsulta & " WHERE " & SQL
@@ -724,7 +727,7 @@ Dim tots As String
     tots = "S|txtAux(0)|T|Envio|700|;S|txtAux(1)|T|Denominación|2700|;S|CboEtiqueta|C|Etiqueta|820|;"
     arregla tots, DataGrid1, Me
     
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
@@ -745,44 +748,44 @@ Private Sub CargaCombo()
     CboEtiqueta.ItemData(CboEtiqueta.NewIndex) = 0
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+Private Sub txtaux_GotFocus(index As Integer)
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub txtAux_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
-    If Index = 0 Then PonerFormatoEntero txtAux(0)
+Private Sub txtAux_LostFocus(index As Integer)
+    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
+    If index = 0 Then PonerFormatoEntero txtAux(0)
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
     
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
 
     'comprobamos si ya existe la forma de envio
     If Modo = 3 Then 'Insertar
-        If ExisteCP(txtAux(0)) Then b = False
+        If ExisteCP(txtAux(0)) Then B = False
     End If
 
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 Private Sub PonerOpcionesMenu()

@@ -37,9 +37,9 @@ Public Function Comprobar_NIF(NIF As String) As Boolean
 
                 '-- Acaba en número
                 'If InStr(1, "ABCDEFGHPQSNU", Mid(NIF, 1, 1)) <> 0 Then
-                If InStr(1, "ABCDEFGHPQSNUV", Mid(NIF, 1, 1)) <> 0 Then
-
-                    '-- Es una sociedad
+                'If InStr(1, "ABCDEFGHPQSNUV", Mid(NIF, 1, 1)) <> 0 Then   Marzo 2019
+                If InStr(1, "ABCDEFGJHPQSNUV", Mid(NIF, 1, 1)) <> 0 Then
+                    '-- Es una sociedad , juridica.......
 
                     Comprobar_NIF = Comprobar_NIF_Sociedad(NIF)
 
@@ -162,7 +162,7 @@ Public Function Comprobar_NIF_Sociedad(NIF As String) As Boolean
 
     Dim mN2 As String
 
-    Dim I, i2 As Integer
+    Dim i, i2 As Integer
 
     Dim Suma, Control As Long
 
@@ -172,17 +172,17 @@ Public Function Comprobar_NIF_Sociedad(NIF As String) As Boolean
 
     '-- Sumamos las cifras pares
 
-    For I = 2 To Len(vNif) Step 2
+    For i = 2 To Len(vNif) Step 2
 
-        Suma = Suma + Val(Mid(vNif, I, 1))
+        Suma = Suma + Val(Mid(vNif, i, 1))
 
-    Next I
+    Next i
 
     '-- Ahora las impares * 2, y sumando las cifras del resultado
 
-    For I = 1 To Len(vNif) Step 2
+    For i = 1 To Len(vNif) Step 2
 
-        mN2 = CStr(Val(Mid(vNif, I, 1)) * 2)
+        mN2 = CStr(Val(Mid(vNif, i, 1)) * 2)
 
         For i2 = 1 To Len(mN2)
 
@@ -190,7 +190,7 @@ Public Function Comprobar_NIF_Sociedad(NIF As String) As Boolean
 
         Next i2
 
-    Next I
+    Next i
 
     '-- Ya tenemos la suma y calculamos el control
 

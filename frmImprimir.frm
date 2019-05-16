@@ -226,13 +226,13 @@ Private MostrarTree As Boolean
 
 Private MIPATH As String
 Private Lanzado As Boolean
-Private PrimeraVez As Boolean
+Private primeravez As Boolean
 
 
 Private EstabaMarcado As Boolean
 
 
-
+Private ImpresoraPorDefectoAnterior As String
 
 
 'Private ReestableceSoloImprimir As Boolean
@@ -261,6 +261,9 @@ Private Sub cmdImprimir_Click()
         Exit Sub
     End If
     
+    
+    
+    
     Imprime
 End Sub
 
@@ -270,21 +273,21 @@ End Sub
 
 
 Private Sub Combo1_Click()
-Dim i As Integer
+Dim I As Integer
 Dim C  As String
-    If PrimeraVez Then Exit Sub
+    If primeravez Then Exit Sub
     'En nomrpt pondra el valor entrecorchetado
     C = Combo1.Text
-    i = InStr(1, C, "[")
-    C = Mid(C, i + 1)
-    i = InStr(1, C, "]")
-    C = Mid(C, 1, i - 1)
+    I = InStr(1, C, "[")
+    C = Mid(C, I + 1)
+    I = InStr(1, C, "]")
+    C = Mid(C, 1, I - 1)
     Me.NombreRPT = C
 End Sub
 
-Private Sub Form_Activate()
-    If PrimeraVez Then
-        PrimeraVez = False
+Private Sub Form_activate()
+    If primeravez Then
+        primeravez = False
         
         
         
@@ -321,7 +324,7 @@ End Sub
 Private Sub Form_Load()
 Dim cad As String
 
-    PrimeraVez = True
+    primeravez = True
     Lanzado = False
     CargaICO
     cad = Dir(App.Path & "\impre.dat", vbArchive)
@@ -475,8 +478,12 @@ Dim cad As String
             Case 2051
                 'Text1.Text = "Compras marca-familia"
                 NombreRPT = "rFacPedxClienIVA.rpt"
+            Case 2052
+                'pEdidos por articulo agr
+                NombreRPT = "rFacPedxArticAgr.rpt"
+            Case 2053
+                Text1.Text = "Costes cliente-factura"
                 
-            
             End Select
         End If
     Else
@@ -654,20 +661,41 @@ Dim Aux As String
     CadenaDesdeOtroForm = ""
     
     With frmVisReport
-        
+            
+    
+            
         '.ForzarNombreImpresora
         If Opcion = 45 And vParamAplic.NumeroInstalacion = vbFenollar Then
             
             'MUY A PIÑON. TENGO PRISA
-            
-            Aux = ""
-            If UCase(Right(NombreRPT, 5)) = "B.RPT" Then
-                Aux = vParamAplic.ImpresoraFenollarB
-            Else
-                Aux = vParamAplic.ImpresoraFenollarA
+            If Not EnvioEMail Then
+                Aux = ""
+                If UCase(Right(NombreRPT, 5)) = "B.RPT" Then
+                    Aux = vParamAplic.ImpresoraFenollarB
+                    
+                    If UCase(vUsu.PC) = "PCMAJOSE" Then Aux = "MAJO"
+                    
+                Else
+                    Aux = vParamAplic.ImpresoraFenollarA
+                End If
+              '  If InStr(1, UCase(Aux), UCase(vUsu.PC)) = 0 Then .ForzarNombreImpresora = Aux
+                If Aux <> "" Then
+                    ForzarImpresoraPorDefecto Aux
+                    .ForzarNombreImpresora = Printer.DeviceName
+                End If
             End If
-            If InStr(1, UCase(Aux), UCase(vUsu.PC)) = 0 Then .ForzarNombreImpresora = Aux
             
+            
+        Else
+            'EPSON LQ-590 ESC/P2
+            If Opcion = 53 And vParamAplic.NumeroInstalacion = vbFenollar Then
+            
+                'MUY A PIÑON. TENGO PRISA
+                If Not EnvioEMail Then
+                  '  ForzarImpresoraPorDefecto "EPSON LQ-590 ESC/P2"
+                    .ForzarNombreImpresora = "EPSON LQ-590 ESC/P2"
+                End If
+            End If
         End If
         
         
@@ -1003,4 +1031,55 @@ Dim C As String
     Wend
     RN.Close
     Set RN = Nothing
+End Sub
+
+
+
+
+Private Sub ForzarImpresoraPorDefecto(sNombreImpresora As String)
+
+    On Error GoTo eForzarImpresoraPorDefecto
+    Dim nom As String
+    Dim bEncontrada As Boolean
+    Dim I As Integer
+    'Selecciona la impresora para imprimir, si no puede seleccionarla devuelve false
+    
+    bEncontrada = False
+    For I = 0 To Printers.Count - 1
+        If Printers(I).DeviceName = sNombreImpresora Then
+            bEncontrada = True
+            Exit For
+        End If
+    Next I
+    
+    If bEncontrada Then
+        
+        Set Printer = Printers(I)
+        
+    Else
+        
+        nom = ""
+        I = InStrRev(sNombreImpresora, "\")
+        If I > 0 Then
+            nom = Mid(sNombreImpresora, I + 1)
+            For I = 0 To Printers.Count - 1
+                If Printers(I).DeviceName = sNombreImpresora Then
+                    bEncontrada = True
+                    Exit For
+                End If
+            Next I
+            If bEncontrada Then Set Printer = Printers(I)
+            
+        
+        End If
+        
+    End If
+
+        
+    
+    
+    Exit Sub
+eForzarImpresoraPorDefecto:
+    Err.Clear
+    ImpresoraPorDefectoAnterior = ""
 End Sub

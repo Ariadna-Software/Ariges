@@ -640,8 +640,8 @@ Error1:
 End Sub
 
 
-Private Sub cmdAux_Click(Index As Integer)
-    Select Case Index
+Private Sub cmdAux_Click(index As Integer)
+    Select Case index
         Case 0 'cod. tecnico
             Set frmT = New frmAdmTrabajadores
             frmT.DatosADevolverBusqueda = "0|1|" 'Poner Modo Busqueda
@@ -830,7 +830,7 @@ Error1:
 End Sub
 
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -1017,7 +1017,7 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 Dim Aux As String
 Dim K As Integer
-    Select Case Button.Index
+    Select Case Button.index
         Case 1 'Busqueda
             mnBuscar_Click
         Case 2 'Ver Todos
@@ -1111,16 +1111,16 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim b As Boolean
-Dim i As Byte
+Dim I As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
@@ -1318,7 +1318,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim i As Integer
+Dim I As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1328,8 +1328,8 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
@@ -1470,7 +1470,7 @@ End Function
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 Dim FechaFinNula As Boolean
 
     On Error Resume Next
@@ -1480,26 +1480,26 @@ Dim FechaFinNula As Boolean
     txtAux(5).Text = ""
     txtAux(4).Text = ""
     
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
     
      
      
     If cboTipo2.ListIndex >= 0 Then
-        If cadB <> "" Then cadB = cadB & " AND "
-        cadB = cadB & " codtipom = '" & RecuperaValor("ALR|ALE|ALO|PRO|ALV|", cboTipo2.ListIndex + 1) & "'"
+        If CadB <> "" Then CadB = CadB & " AND "
+        CadB = CadB & " codtipom = '" & RecuperaValor("ALR|ALE|ALO|PRO|ALV|", cboTipo2.ListIndex + 1) & "'"
     End If
     
     If FechaFinNula Then
-        If cadB <> "" Then cadB = cadB & " AND "
-        cadB = cadB & " horafin is null"
+        If CadB <> "" Then CadB = CadB & " AND "
+        CadB = CadB & " horafin is null"
     End If
-    If cadB = "" Then Exit Sub
+    If CadB = "" Then Exit Sub
     
     If chkVistaPrevia = 1 Then
 '        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then 'Se muestran en el mismo form
+    ElseIf CadB <> "" Then 'Se muestran en el mismo form
 '        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & Ordenacion
-        CadenaBusqueda = " WHERE " & cadB
+        CadenaBusqueda = " WHERE " & CadB
         CadenaConsulta = MontaSQLCarga(True)
         PonerCadenaBusqueda
         PonerFocoGrid Me.DataGrid1
@@ -1549,73 +1549,73 @@ Private Sub PonerOpcionesMenu()
 End Sub
 
 
-Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+Private Sub txtAux_GotFocus(index As Integer)
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
-            If Index > 0 Then PonerFoco txtAux(Index - 1)
+            If index > 0 Then PonerFoco txtAux(index - 1)
                 
         Case 40 'Desplazamiento Flecha Hacia Abajo
             SendKeys "{tab}"
     End Select
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
    KEYpress KeyAscii
 End Sub
 
 
-Private Sub txtAux_LostFocus(Index As Integer)
+Private Sub txtAux_LostFocus(index As Integer)
 Dim Aux As String
 Dim Minutos As Currency
 
     On Error Resume Next
     
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
     
-    Select Case Index
+    Select Case index
         Case 0 'cod tecnico
-            If PonerFormatoEntero(txtAux(Index)) Then
-                txtAux3(Index).Text = PonerNombreDeCod(txtAux(Index), conAri, "straba", "nomtraba", "codtraba")
-                If txtAux3(Index).Text = "" Then PonerFoco txtAux(Index)
+            If PonerFormatoEntero(txtAux(index)) Then
+                txtAux3(index).Text = PonerNombreDeCod(txtAux(index), conAri, "straba", "nomtraba", "codtraba")
+                If txtAux3(index).Text = "" Then PonerFoco txtAux(index)
             Else
-                txtAux3(Index).Text = ""
+                txtAux3(index).Text = ""
             End If
         
         
         Case 1
-            If txtAux(Index).Text = "" Then
-                txtAux3(Index).Text = ""
+            If txtAux(index).Text = "" Then
+                txtAux3(index).Text = ""
             Else
-                txtAux(Index).Text = UCase(txtAux(Index).Text)
-                txtAux3(Index).Text = PonerNombreDeCod(txtAux(Index), conAri, "stipor", "nomtipor", "codtipor", , "T")
-                If Modo <> 1 And txtAux3(Index).Text = "" Then
+                txtAux(index).Text = UCase(txtAux(index).Text)
+                txtAux3(index).Text = PonerNombreDeCod(txtAux(index), conAri, "stipor", "nomtipor", "codtipor", , "T")
+                If Modo <> 1 And txtAux3(index).Text = "" Then
                    ' MsgBox "No existe el tipo de trabajo", vbExclamation
-                    txtAux(Index).Text = ""
-                    PonerFoco txtAux(Index)
+                    txtAux(index).Text = ""
+                    PonerFoco txtAux(index)
                 End If
             End If
         Case 6 'Cod. tipor
             If Modo = 1 Then Exit Sub
             If cboTipo2.ListIndex < 0 Then
-                txtAux(Index).Text = ""
+                txtAux(index).Text = ""
                 PonerFocoCbo cboTipo2
                 Exit Sub
             End If
             
-            If txtAux(Index) = "" Then
+            If txtAux(index) = "" Then
                 txtAux3(4).Text = ""
             Else
-                If PonerFormatoEntero(txtAux(Index)) Then
+                If PonerFormatoEntero(txtAux(index)) Then
                 
                     If cboTipo2.ListIndex = 3 Then
                         txtAux3(4).Text = "Produccion"
@@ -1625,7 +1625,7 @@ Dim Minutos As Currency
                         CadenaConsulta = "codtipom = '" & RecuperaValor("ALR|ALE|ALO||ALV|", cboTipo2.ListIndex + 1) & "' AND numalbar "
                        ' txtAux3(4).Text = PonerNombreDeCod(txtAux(Index), conAri, "scaalb", "nomclien", CadenaConsulta, "Albaran")
                         
-                        CadenaConsulta = DevuelveDesdeBD(conAri, "nomclien", "scaalb", CadenaConsulta, txtAux(Index).Text)
+                        CadenaConsulta = DevuelveDesdeBD(conAri, "nomclien", "scaalb", CadenaConsulta, txtAux(index).Text)
                         If CadenaConsulta = "" Then
                           '  CadenaConsulta = "No existe , o esta facturado,  " & cboTipo.Text & ": " & txtAux(Index).Text
                           '  CadenaConsulta = CadenaConsulta & vbCrLf & "   ¿Continuar?"
@@ -1638,40 +1638,40 @@ Dim Minutos As Currency
                             txtAux3(4).Text = CadenaConsulta
                         End If
                         If txtAux3(4).Text = "" Then
-                            txtAux(Index).Text = ""
-                            PonerFoco txtAux(Index)
+                            txtAux(index).Text = ""
+                            PonerFoco txtAux(index)
                         End If
                     End If
                 Else
-                    txtAux(Index).Text = ""
+                    txtAux(index).Text = ""
                    txtAux3(1).Text = ""
                 End If
             End If
         Case 2 'kms
-            PonerFormatoFecha txtAux(Index)
+            PonerFormatoFecha txtAux(index)
 '            PonerFormatoEntero txtAux(Index)
            
         Case 3  'Sum horas
-            If Not PonerFormatoDecimal(txtAux(Index), 4) Then
-                txtAux(Index).Text = ""
+            If Not PonerFormatoDecimal(txtAux(index), 4) Then
+                txtAux(index).Text = ""
             Else
                 'Dato Correcto
-                If InStr(1, txtAux(Index).Text, "-") > 0 Then
+                If InStr(1, txtAux(index).Text, "-") > 0 Then
                     MsgBox "No se permiten importes negativos", vbExclamation
-                    txtAux(Index).Text = ""
+                    txtAux(index).Text = ""
                 Else
                     If TareaADuplicar > 0 Then
                         'Esta duplicando tarea, las horas no puede ser maor o igual que las que "duplica"
-                        If ImporteFormateado(txtAux(Index).Text) >= MaximoHoras Then
+                        If ImporteFormateado(txtAux(index).Text) >= MaximoHoras Then
                             MsgBox "Las horas no pueden ser mayores que la tarea que duplica: " & MaximoHoras, vbExclamation
-                            txtAux(Index).Text = ""
-                            PonerFoco txtAux(Index)
+                            txtAux(index).Text = ""
+                            PonerFoco txtAux(index)
                         Else
                             'Es correcto. Con lo cual, cogeremos la fecha final de tarea, si esta, y le restaremos las horas introducidas
                             If Me.txtAux(5).Text <> "" Then
                            
                                 If EsFechaHoraOK(CStr(txtAux(5).Text)) Then
-                                    Minutos = ImporteFormateado(txtAux(Index).Text)
+                                    Minutos = ImporteFormateado(txtAux(index).Text)
                                     Aux = Int(Minutos) * 60
                                     Minutos = Minutos - Int(Minutos)
                                     Minutos = (Minutos * 60)
@@ -1687,12 +1687,12 @@ Dim Minutos As Currency
                 End If
             End If
         Case 4, 5 'horas
-            txtAux(Index).Text = Trim(txtAux(Index).Text)
-            If txtAux(Index).Text <> "" Then
-                txtAux(Index) = Replace(txtAux(Index), ".", ":")
-                Aux = txtAux(Index).Text
+            txtAux(index).Text = Trim(txtAux(index).Text)
+            If txtAux(index).Text <> "" Then
+                txtAux(index) = Replace(txtAux(index), ".", ":")
+                Aux = txtAux(index).Text
                 If EsFechaHoraOK(Aux) Then
-                    txtAux(Index).Text = Aux
+                    txtAux(index).Text = Aux
                     DiferenciaHoras
                 End If
             End If
@@ -1856,25 +1856,35 @@ End Function
 
 Private Sub DiferenciaHoras()
 Dim Minutos As Integer
+Dim Segundos As Long
+Dim Horas As Currency
+
     If Me.txtAux(4).Text = "" Or txtAux(5).Text = "" Then Exit Sub
     
     If CDate(txtAux(4).Text) > CDate(txtAux(5).Text) Then
         Minutos = -1
     Else
+        'Mayo 19. A segundos
         Minutos = DateDiff("n", CDate(txtAux(4).Text), CDate(txtAux(5).Text))
+        Segundos = DateDiff("s", CDate(txtAux(4).Text), CDate(txtAux(5).Text))
     End If
     If Minutos < 0 Then
         MsgBox "Diferencia de horas negativa", vbExclamation
         PonerFoco txtAux(5)
     Else
-          
-        kCampo = Minutos \ 60
-        Minutos = Minutos - (kCampo * 60)
-        txtAux(3).Text = kCampo & ","
-        kCampo = 100 * (Round((Minutos / 60), 2))
-        If kCampo = 100 Then kCampo = 99
-        txtAux(3).Text = txtAux(3).Text & Format(kCampo, "00")
+        'Mayo 2019
+       If True Then
+            Horas = Round(Segundos / 3600, 2)
+            txtAux(3).Text = Format(Horas, FormatoCantidad)
             
+        Else
+            kCampo = Minutos \ 60
+            Minutos = Minutos - (kCampo * 60)
+            txtAux(3).Text = kCampo & ","
+            kCampo = 100 * (Round((Minutos / 60), 2))
+            If kCampo = 100 Then kCampo = 99
+            txtAux(3).Text = txtAux(3).Text & Format(kCampo, "00")
+        End If
         
         
     End If

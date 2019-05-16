@@ -451,6 +451,15 @@ Private mvarImpresoraFenollarB As String
 
 Private mvarMaximoImporteEfectivo As String
 
+
+
+Private mvarPuedeModificarAriconta As Boolean
+
+
+
+Private mvarTieneComponentes_y_Produccion As Boolean
+
+
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
 
@@ -846,7 +855,7 @@ Public Property Get PorDefecto_Agente() As Integer
 End Property
 
 
-'0:NO   1:Alzira   2:Catadau(coarval)    3 ANna
+'0:NO   1:Alzira   2:Catadau(coarval)    3 ANna  / bolbaite / Navarres
 Public Property Get TieneTelefonia2() As Byte
      TieneTelefonia2 = mvarTieneTelefonia2
 End Property
@@ -1818,7 +1827,15 @@ End Property
 
 
 
+Public Property Get PuedeModificarAriconta() As Boolean
+     PuedeModificarAriconta = mvarPuedeModificarAriconta
+End Property
 
+
+'Lleva produccion y compon
+Public Property Get TieneComponentes_y_Produccion() As Boolean
+     TieneComponentes_y_Produccion = mvarTieneComponentes_y_Produccion
+End Property
 
 
 
@@ -2174,10 +2191,14 @@ On Error GoTo Err3
         mvarHaciendoFrmulariosGrandes = False
         If CampoNuevoBD(RS, "HaciendoFrmulariosGrandes", "B", V) Then mvarHaciendoFrmulariosGrandes = CBool(V)
         
+        mvarPuedeModificarAriconta = False   'Modificara o eliminara en contabilidad   SOLO conta nueva   De momento Fenollar
+        mvarTieneComponentes_y_Produccion = False
         
         If mvarNumeroInstalacion = vbFenollar Then
             mvarImpresoraFenollarA = "\\PCPRUEBAS\CARLA"
             mvarImpresoraFenollarB = "\\PCMAJOSE\MAJO"
+            mvarPuedeModificarAriconta = True
+            mvarTieneComponentes_y_Produccion = True
         End If
         
         mvarMaximoImporteEfectivo = 2500

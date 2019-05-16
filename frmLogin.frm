@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmLogin 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Inicio de sesión empresa"
@@ -190,7 +190,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim Cad As String
+Dim cad As String
 Dim ItmX As ListItem
 Dim RS As Recordset
 
@@ -220,15 +220,15 @@ Dim OK As Boolean
     vUsu.CadenaConexion = RecuperaValor(lw1.SelectedItem.Tag, 1)
             
     'Comprobamos ,k la empresa no este bloqueada
-    Conn.Execute "SET AUTOCOMMIT=0"
+    conn.Execute "SET AUTOCOMMIT=0"
     If ComprobarEmpresaBloqueada(vUsu.Codigo, vUsu.CadenaConexion) Then
-        Cad = "BLOQ"
+        cad = "BLOQ"
     Else
-        Cad = ""
+        cad = ""
     End If
-    Conn.Execute "SET AUTOCOMMIT=1"
+    conn.Execute "SET AUTOCOMMIT=1"
         
-    If Cad <> "" Then GoTo Salida   'Empresa bloqueada
+    If cad <> "" Then GoTo Salida   'Empresa bloqueada
             
     'Cerramos la ventana
     Unload Me
@@ -238,7 +238,7 @@ Salida:
 End Sub
 
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -267,6 +267,13 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 
+Private Sub lblAriges_DblClick()
+  '  If vParamAplic.NumeroInstalacion = vbFenollar Then
+        HaMostradoCanal2_elB = True
+        lblAriges.Font.Bold = False
+  '  End If
+End Sub
+
 Private Sub lw1_DblClick()
    cmdOK_Click
 End Sub
@@ -275,29 +282,29 @@ End Sub
 '===== Laura : 16/02/05
 Private Function DevuelveProhibidas() As String
 'Private Function DevuelvePermitidas() As String
-Dim i As Integer
+Dim I As Integer
 Dim SQL As String
 On Error GoTo EDevuelveProhibidas
     
     DevuelveProhibidas = ""
     Set RS = New ADODB.Recordset
-    i = vUsu.Codigo Mod 1000
+    I = vUsu.Codigo Mod 1000
 '    i = vUsu.Codigo
     'Si es Root todas permitidas
 '    If vUsu.Nivel = 0 Then
 '        SQL = "Select * from usuarios.empresasariges "
 '    Else
-        SQL = "Select * from usuarios.usuarioempresasariges WHERE codusu =" & i
+        SQL = "Select * from usuarios.usuarioempresasariges WHERE codusu =" & I
 '    End If
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    Cad = ""
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    cad = ""
     While Not RS.EOF
-        Cad = Cad & RS!codempre & "|"
+        cad = cad & RS!codempre & "|"
         RS.MoveNext
     Wend
-    If Cad <> "" Then Cad = "|" & Cad
+    If cad <> "" Then cad = "|" & cad
     RS.Close
-    DevuelveProhibidas = Cad
+    DevuelveProhibidas = cad
     
 EDevuelveProhibidas:
     Err.Clear
@@ -319,18 +326,18 @@ Set RS = New ADODB.Recordset
 'SQL = SQL & " ON usuarios.usuarioempresasariges.codempre=usuarios.empresasariges.codempre "
 'SQL = SQL & "WHERE codusu=" & vUsu.Codigo & " ORDER BY usuarios.usuarioempresasariges.codempre"
 SQL = "Select * from usuarios.empresasariges ORDER BY Codempre"
-RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
 While Not RS.EOF
-    Cad = "|" & RS!codempre & "|"
-    If InStr(1, Prohibidas, Cad) = 0 Then
-        Cad = RS!nomempre
+    cad = "|" & RS!codempre & "|"
+    If InStr(1, Prohibidas, cad) = 0 Then
+        cad = RS!nomempre
         Set ItmX = lw1.ListItems.Add()
         
-        ItmX.Text = Cad
+        ItmX.Text = cad
         ItmX.SubItems(1) = RS!nomresum
-        Cad = RS!AriGes & "|" & RS!nomresum & "|" & RS!Usuario & "|" & RS!Pass & "|"
-        ItmX.Tag = Cad
+        cad = RS!AriGes & "|" & RS!nomresum & "|" & RS!Usuario & "|" & RS!Pass & "|"
+        ItmX.Tag = cad
         ItmX.ToolTipText = RS!AriGes & " - " & RS!codempre
         ItmX.SmallIcon = 1
     End If
@@ -405,18 +412,18 @@ On Error GoTo ENumeroEmpresaMemorizar
 '            Exit Sub
         End If
     End If
-    Cad = App.Path & "\ultempre.dat"
+    cad = App.Path & "\ultempre.dat"
     If Leer Then
-        If Dir(Cad) <> "" Then
+        If Dir(cad) <> "" Then
             NF = FreeFile
-            Open Cad For Input As #NF
-            Line Input #NF, Cad
+            Open cad For Input As #NF
+            Line Input #NF, cad
             Close #NF
-            Cad = Trim(Cad)
-            If Cad <> "" Then
+            cad = Trim(cad)
+            If cad <> "" Then
                 'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
                 
-                C1 = RecuperaValor(Cad, 2)
+                C1 = RecuperaValor(cad, 2)
                 'el segundo es el
                 If C1 <> "" Then
                     For NF = 1 To Me.lw1.ListItems.Count
@@ -429,7 +436,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 
                 'El tercer pipe, si tiene es el ancho col1
-                C1 = RecuperaValor(Cad, 3)
+                C1 = RecuperaValor(cad, 3)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -437,7 +444,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 lw1.ColumnHeaders(1).Width = NF
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(Cad, 4)
+                C1 = RecuperaValor(cad, 4)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -448,16 +455,16 @@ On Error GoTo ENumeroEmpresaMemorizar
         End If
     Else 'Escribir
         NF = FreeFile
-        Open Cad For Output As #NF
-        Cad = "NO ncesito|"
+        Open cad For Output As #NF
+        cad = "NO ncesito|"
         If lw1.ListItems.Count > 0 Then
-            Cad = Cad & lw1.SelectedItem.Text
+            cad = cad & lw1.SelectedItem.Text
         Else
-            Cad = Cad & " "
+            cad = cad & " "
         End If
-        Cad = Cad & "|" & Int(Round(lw1.ColumnHeaders(1).Width, 2)) & "|" & Int(Round(lw1.ColumnHeaders(2).Width, 2)) & "|"
-        AnchoLogin = Cad
-        Print #NF, Cad
+        cad = cad & "|" & Int(Round(lw1.ColumnHeaders(1).Width, 2)) & "|" & Int(Round(lw1.ColumnHeaders(2).Width, 2)) & "|"
+        AnchoLogin = cad
+        Print #NF, cad
         Close #NF
     End If
 ENumeroEmpresaMemorizar:

@@ -33,6 +33,7 @@ Dim VerSiDamosAviso As Boolean
 Dim Mensaje As String
 Dim TicketAgrupado As String
     
+
     Mensaje = ""
     
     
@@ -47,7 +48,8 @@ Dim TicketAgrupado As String
     End If
     
     If Not vParamAplic.SII_Tiene Then
-        cad = TicketAgrupado & "  codtipom <> 'FAI' AND fecfactu>=" & DBSet(vEmpresa.FechaIni, "F") & " AND  intconta "
+        
+        cad = TicketAgrupado & "  codtipom <> 'FAI' AND fecfactu>=" & DBSet(vEmpresa.FechaIni, "F") & " AND codtipom<>'FAZ' AND  intconta "
         cad = DevuelveDesdeBD(conAri, "min(fecfactu)", "scafac", cad, "0")
         If cad <> "" Then
             Horas = DateDiff("d", CDate(cad), Now)

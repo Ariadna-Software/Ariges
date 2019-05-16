@@ -395,7 +395,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "16:18"
+            TextSave        =   "16:29"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -655,43 +655,43 @@ Begin VB.MDIForm frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   10
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A4DBE
+            Picture         =   "frmPpal.frx":A427E
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A6750
+            Picture         =   "frmPpal.frx":A5C10
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A80E2
+            Picture         =   "frmPpal.frx":A75A2
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A9A74
+            Picture         =   "frmPpal.frx":A8F34
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":AB406
+            Picture         =   "frmPpal.frx":AA8C6
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":ACD98
+            Picture         =   "frmPpal.frx":AC258
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":AE72A
+            Picture         =   "frmPpal.frx":ADBEA
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":B00BC
+            Picture         =   "frmPpal.frx":AF57C
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":B691E
+            Picture         =   "frmPpal.frx":B5DDE
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BC110
+            Picture         =   "frmPpal.frx":BB5D0
             Key             =   ""
          EndProperty
       EndProperty
@@ -709,119 +709,119 @@ Begin VB.MDIForm frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   29
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BDB92
+            Picture         =   "frmPpal.frx":BD052
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BDFE4
+            Picture         =   "frmPpal.frx":BD4A4
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BE436
+            Picture         =   "frmPpal.frx":BD8F6
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BE888
+            Picture         =   "frmPpal.frx":BDD48
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BECDA
+            Picture         =   "frmPpal.frx":BE19A
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BF12C
+            Picture         =   "frmPpal.frx":BE5EC
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BF57E
+            Picture         =   "frmPpal.frx":BEA3E
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BF9D0
+            Picture         =   "frmPpal.frx":BEE90
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BFE22
+            Picture         =   "frmPpal.frx":BF2E2
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C60BC
+            Picture         =   "frmPpal.frx":C557C
             Key             =   ""
          EndProperty
          BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C6ACE
+            Picture         =   "frmPpal.frx":C5F8E
             Key             =   ""
          EndProperty
          BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":CCD68
+            Picture         =   "frmPpal.frx":CC228
             Key             =   ""
          EndProperty
          BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":D35CA
+            Picture         =   "frmPpal.frx":D2A8A
             Key             =   ""
          EndProperty
          BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":D9E2C
+            Picture         =   "frmPpal.frx":D92EC
             Key             =   ""
          EndProperty
          BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E068E
+            Picture         =   "frmPpal.frx":DFB4E
             Key             =   ""
          EndProperty
          BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E6EF0
+            Picture         =   "frmPpal.frx":E63B0
             Key             =   ""
          EndProperty
          BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":ED752
+            Picture         =   "frmPpal.frx":ECC12
             Key             =   ""
          EndProperty
          BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F3FB4
+            Picture         =   "frmPpal.frx":F3474
             Key             =   ""
          EndProperty
          BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F4406
+            Picture         =   "frmPpal.frx":F38C6
             Key             =   ""
          EndProperty
          BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F4858
+            Picture         =   "frmPpal.frx":F3D18
             Key             =   ""
          EndProperty
          BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F4CAA
+            Picture         =   "frmPpal.frx":F416A
             Key             =   ""
          EndProperty
          BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F50FC
+            Picture         =   "frmPpal.frx":F45BC
             Key             =   ""
          EndProperty
          BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F554E
+            Picture         =   "frmPpal.frx":F4A0E
             Key             =   ""
          EndProperty
          BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F59A0
+            Picture         =   "frmPpal.frx":F4E60
             Key             =   ""
          EndProperty
          BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FB5C2
+            Picture         =   "frmPpal.frx":FAA82
             Key             =   ""
          EndProperty
          BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FC414
+            Picture         =   "frmPpal.frx":FB8D4
             Key             =   ""
          EndProperty
          BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FC72E
+            Picture         =   "frmPpal.frx":FBBEE
             Key             =   ""
          EndProperty
          BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FCA48
+            Picture         =   "frmPpal.frx":FBF08
             Key             =   ""
          EndProperty
          BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FCD62
+            Picture         =   "frmPpal.frx":FC222
             Key             =   ""
          EndProperty
       EndProperty
@@ -2358,6 +2358,10 @@ Begin VB.MDIForm frmPpal
          Caption         =   "Exportar email csv"
          Index           =   6
       End
+      Begin VB.Menu mnUtilidadesVarias 
+         Caption         =   "Listado credito y caucion"
+         Index           =   7
+      End
       Begin VB.Menu mnBarra19 
          Caption         =   "-"
       End
@@ -2455,7 +2459,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Dim Primeravez As Boolean
+Dim primeravez As Boolean
 
 Dim TieneEditorDeMenus As Boolean
 
@@ -2473,8 +2477,8 @@ Dim b As Boolean
  
 
    ' AvisosPendientes = False
-    If Primeravez Then
-        Primeravez = False
+    If primeravez Then
+        primeravez = False
         Screen.MousePointer = vbHourglass
        ' AvisosPendientes = TieneAvisosPendientes()
         If vParamAplic.NumeroInstalacion = 4 Then SituarArriba
@@ -2548,7 +2552,8 @@ Dim b As Boolean
     Else
         b = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALZ", "T") <> ""
     End If
-    b = b And vParamAplic.ContabilidadB > 0
+    
+    b = b And vParamAplic.ContabilidadB > 0 And HaMostradoCanal2_elB
     PuntoDeMenuVisible Me.mnAlbaranesB, b
     PuntoDeMenuVisible mnFacturarPresupuestos, b
    
@@ -2560,7 +2565,9 @@ Dim b As Boolean
     
        
     'Produccion
-    PuntoDeMenuVisible Me.mnproduccion, vParamAplic.Produccion
+    b = vParamAplic.Produccion
+    If Not b Then b = vParamAplic.TieneComponentes_y_Produccion
+    PuntoDeMenuVisible Me.mnproduccion, b
        
        
     PuntoDeMenuVisible Me.mnCRMmenu, vParamAplic.TieneCRM
@@ -2670,6 +2677,7 @@ Dim b As Boolean
     
     
     'Comunicacion datos ALMAGRUPO
+    PuntoDeMenuVisible mnTelematel(0), vParamAplic.ComunicaAlmagrupo
     PuntoDeMenuVisible mnTelematel(1), vParamAplic.ComunicaAlmagrupo
     
     PuntoDeMenuVisible mnAgua, vParamAplic.AguasPotables
@@ -2687,6 +2695,7 @@ Dim b As Boolean
     PuntoDeMenuVisible mnMtoEuler(2), b
     PuntoDeMenuVisible mnMtoEuler(3), b
     PuntoDeMenuVisible mnFacEstadistica2(8), b
+
     If vParamAplic.NumeroInstalacion = 4 Then
         PuntoDeMenuVisible mnRepAlbaranes, False
         PuntoDeMenuVisible mnRepEntReparacion, False
@@ -2730,6 +2739,10 @@ Dim b As Boolean
     
     '--
     Screen.MousePointer = vbDefault
+    
+    
+
+    
 End Sub
 
 
@@ -2748,7 +2761,7 @@ Private Sub MDIForm_Load()
 
     CargaImagen
 
-    Primeravez = True
+    primeravez = True
     
     'Cargamos los ICONOS , si o si
     CargaIconosDlls
@@ -2902,8 +2915,8 @@ End Sub
 
 
 
-Private Sub mnAdmAgen2_Click(Index As Integer)
-    Select Case Index
+Private Sub mnAdmAgen2_Click(index As Integer)
+    Select Case index
     Case 0
         'Ventas x agente
         AbrirListado2 36
@@ -2944,8 +2957,8 @@ Private Sub mnAdmGastosTec_Click()
     frmAdmGasTec.Show vbModal
 End Sub
 
-Private Sub mnAdministra_Click(Index As Integer)
-    Select Case Index
+Private Sub mnAdministra_Click(index As Integer)
+    Select Case index
     Case 1
         'Caluclo de riesgo
         If vUsu.Nivel > 0 Then
@@ -3001,9 +3014,9 @@ Private Sub mnAgenda_Click()
     
 End Sub
 
-Private Sub mnAguaLin_Click(Index As Integer)
+Private Sub mnAguaLin_Click(index As Integer)
 
-    Select Case Index
+    Select Case index
     Case 0
         frmAguaContadores.Show vbModal
     
@@ -3043,7 +3056,7 @@ Private Sub mnAguaLin_Click(Index As Integer)
 End Sub
 
 Private Sub mnAlbaranesB_Click()
-    
+    PonerCaption False, "Presupuestos"
     If vParamAplic.TipoFormularioClientes = 0 Then
         If vParamAplic.HaciendoFrmulariosGrandes Then
             frmFacEntAlbaranesGR.hcoCodMovim = "" 'No carga el form con datos al abrir
@@ -3062,6 +3075,7 @@ Private Sub mnAlbaranesB_Click()
         frmFacEntAlbSAIL.EsHistorico = False
         frmFacEntAlbSAIL.Show vbModal
     End If
+    PonerCaption True, ""
 End Sub
 
 
@@ -3115,11 +3129,11 @@ Private Sub mnAlmListadoInve_Click()
     AbrirListado (13)
 End Sub
 
-Private Sub mnAlmListadosVarios_Click(Index As Integer)
+Private Sub mnAlmListadosVarios_Click(index As Integer)
     
     
 
-    Select Case Index
+    Select Case index
     Case 0
             'Informe de Stocks a una Fecha
             AbrirListado (19)
@@ -3227,11 +3241,11 @@ End Sub
 
 
 
-Private Sub mnAridoc1_Click(Index As Integer)
+Private Sub mnAridoc1_Click(index As Integer)
 
 
     'Configuracion aridoc
-    If Index = 1 Then HacerMenuARidoc 0
+    If index = 1 Then HacerMenuARidoc 0
     
 End Sub
 
@@ -3240,8 +3254,8 @@ Private Sub mnAridocFacturas_Click()
     frmAridocSeleccion.Show vbModal
 End Sub
 
-Private Sub mnArticulos2_Click(Index As Integer)
-    Select Case Index
+Private Sub mnArticulos2_Click(index As Integer)
+    Select Case index
     Case 0
         frmVarios.Opcion = 1
         frmVarios.Show vbModal
@@ -3325,7 +3339,7 @@ Private Sub mnCambioEmpresa_Click()
     
     'Carga los Niveles de cuentas de Contabilidad de la empresa
     LeerNivelesEmpresa
-    
+    'HaMostradoCanal2_elB = False
     
     
     
@@ -3346,7 +3360,7 @@ Private Sub mnCambioEmpresa_Click()
 
     'Ponemos primera vez a false
     PonerDatosFormulario True
-    Primeravez = True
+    primeravez = True
     MDIForm_Activate
 
     
@@ -3393,8 +3407,8 @@ Private Sub mnComContFactu_Click()
     AbrirListado (224) 'Para pedir datos
 End Sub
 
-Private Sub mnComCtrlAlb_Click(Index As Integer)
-    If Index = 1 Then
+Private Sub mnComCtrlAlb_Click(index As Integer)
+    If index = 1 Then
         'frmComAlbAsignar.Show vbModal
         frmComCtrDoc.Show vbModal
     End If
@@ -3413,8 +3427,8 @@ End Sub
 
 
 
-Private Sub mnComEstadisticaLin_Click(Index As Integer)
-    Select Case Index
+Private Sub mnComEstadisticaLin_Click(index As Integer)
+    Select Case index
     Case 0
         'Listado de compras por proveedor
         AbrirListadoOfer (310)
@@ -3470,8 +3484,8 @@ End Sub
 
 
 
-Private Sub mnComInfVarios1_Click(Index As Integer)
-    Select Case Index
+Private Sub mnComInfVarios1_Click(index As Integer)
+    Select Case index
     Case 0
         'Informe de Proveedores
         AbrirListado (58)   ': Informe Proveedores
@@ -3490,19 +3504,19 @@ Private Sub mnComInfVarios1_Click(Index As Integer)
     
 End Sub
 
-Private Sub mnComPedidosLin_Click(Index As Integer)
+Private Sub mnComPedidosLin_Click(index As Integer)
     'Cuelga de COMPRAS --- PEDIDOS---
-    Select Case Index
+    Select Case index
     Case 0, 1
         'Mnatenimiento de Pedidos de compras
         If vParamAplic.TipoFormularioClientes = 0 Then
             frmComEntPedidos2.MostrarDatos = ""
-            frmComEntPedidos2.EsHistorico = Index = 1
+            frmComEntPedidos2.EsHistorico = index = 1
             frmComEntPedidos2.Show vbModal
         Else
             'SAIL
             frmComEntPedidosSa.MostrarDatos = ""
-            frmComEntPedidosSa.EsHistorico = Index = 1
+            frmComEntPedidosSa.EsHistorico = index = 1
                 frmComEntPedidosSa.Show vbModal
         End If
     'Case 1
@@ -3524,8 +3538,8 @@ Private Sub mnComPedidosLin_Click(Index As Integer)
     
 End Sub
 
-Private Sub mnComPreProv_Click(Index As Integer)
-    Select Case Index
+Private Sub mnComPreProv_Click(index As Integer)
+    Select Case index
     Case 0
         'precios proveedor
         frmComPreciosProv2.NuevoDato = "" 'Para que no se poing en modo insercion
@@ -3607,9 +3621,9 @@ Private Sub mnConTMovimiento_Click()
 End Sub
 
 
-Private Sub mnCRM_Click(Index As Integer)
+Private Sub mnCRM_Click(index As Integer)
     
-        Select Case Index
+        Select Case index
         Case 0
             frmCRMMto.DesdeElCliente = 0 'No clien
             frmCRMMto.TipoPredefinido = 0   'Ninguno
@@ -3646,8 +3660,8 @@ Private Sub mnEliminarFacturas_Click()
     AbrirListado 97
 End Sub
 
-Private Sub mnEnvioFactuasMail_Click(Index As Integer)
-    AbrirListadoOfer 315 + Index
+Private Sub mnEnvioFactuasMail_Click(index As Integer)
+    AbrirListadoOfer 315 + index
 End Sub
 
 Private Sub mnEstadisticaReparacionTecnico_Click()
@@ -3765,7 +3779,7 @@ End Sub
 
 Private Sub mnFacClientes_Click()
 'Mantenimiento de Clientes
-    PonerCaption False, mnFacClientes
+    PonerCaption False, "Clientes"
     If vParamAplic.HaciendoFrmulariosGrandes Then
         frmFacClientesGr.Show vbModal
     Else
@@ -3838,8 +3852,8 @@ End Sub
 
 
 
-Private Sub mnFacEstadistica2_Click(Index As Integer)
-    Select Case Index
+Private Sub mnFacEstadistica2_Click(index As Integer)
+    Select Case index
     Case 0
         'Por proveedor
         AbrirListado2 6
@@ -3868,7 +3882,9 @@ Private Sub mnFacEstadistica2_Click(Index As Integer)
         'Listado pedidos por "peticion " cliente (si-no)
         AbrirListado3 63
     Case 8
-        AbrirListado3 69  'Costes euler
+        'MAYO 2019
+        'AbrirListado3 69  'Costes euler
+        AbrirListado2 53  'Costes euler
     End Select
 End Sub
 
@@ -3973,8 +3989,8 @@ End Sub
 
 
 
-Private Sub mnFacInformesVarios_Click(Index As Integer)
-    Select Case Index
+Private Sub mnFacInformesVarios_Click(index As Integer)
+    Select Case index
     Case 0
         'Informe de Clientes Inactivos
         AbrirListadoOfer (46) '46: Informes Clientes Inactivos
@@ -4005,19 +4021,19 @@ Private Sub mnFacInformesVarios_Click(Index As Integer)
     
 End Sub
 
-Private Sub mnFacOfertas_Click(Index As Integer)
+Private Sub mnFacOfertas_Click(index As Integer)
     'Estan todos agrupados bajo el mismo mn
     
-    Select Case Index
+    Select Case index
     Case 0, 5
             'Private Sub mnFacEntOfertas_Click()
          If vParamAplic.TipoFormularioClientes = 0 Then
             frmFacEntOfertas2.DatosOferta = ""
-            frmFacEntOfertas2.EsHistorico = Index = 5
+            frmFacEntOfertas2.EsHistorico = index = 5
             frmFacEntOfertas2.Show vbModal
         Else
             frmFacEntOferSAIL.DatosOferta = ""
-            frmFacEntOferSAIL.EsHistorico = Index = 5
+            frmFacEntOferSAIL.EsHistorico = index = 5
             frmFacEntOferSAIL.Show vbModal
         End If
 
@@ -4055,20 +4071,23 @@ Private Sub mnFacOfertas_Click(Index As Integer)
     End Select
 End Sub
 
-Private Sub mnFacPedidos_Click(Index As Integer)
+Private Sub mnFacPedidos_Click(index As Integer)
     'Estan todos agrupados bajo el mismo mn
-    PonerCaption False, mnFacPedidos(Index).Caption
-    Select Case Index
+    Select Case index
     Case 0, 1
         'Mantenimiento de Pedidos  Y Histórico de Pedidos
+        PonerCaption False, "Pedidos"
         
         If vParamAplic.TipoFormularioClientes = 0 Then
-            frmFacEntPedidos.EsHistorico = Index = 1
+            frmFacEntPedidos.EsHistorico = index = 1
             frmFacEntPedidos.Show vbModal
         Else
-            frmFacEntPedSail.EsHistorico = Index = 1
+            frmFacEntPedSail.EsHistorico = index = 1
             frmFacEntPedSail.Show vbModal
         End If
+        
+        
+        If HaMostradoCanal2_elB Then Me.mnAlbaranesB.visible = True
     'Case 2  es la barra de separacion
     
     Case 3
@@ -4155,8 +4174,8 @@ End Sub
 '---------------------------------------------
 '
 '  Unico punto de menu para las tarifas venta
-Private Sub mnFacTarVen_Click(Index As Integer)
-        Select Case Index
+Private Sub mnFacTarVen_Click(index As Integer)
+        Select Case index
     Case 0
         'Tarifas Venta
         frmFacTarifas.Show vbModal
@@ -4235,8 +4254,8 @@ Private Sub mnFacFormasEnvio_Click()
 
 End Sub
 
-Private Sub mnFlotas_Click(Index As Integer)
-    Select Case Index
+Private Sub mnFlotas_Click(index As Integer)
+    Select Case index
     Case 0
         frmFlotaReg.DatosADevolverBusqueda = ""
         frmFlotaReg.Show vbModal
@@ -4260,8 +4279,8 @@ Private Sub mnHcoMaten_Click()
 End Sub
 
 
-Private Sub mnHuertos1_Click(Index As Integer)
-    If Index = 0 Then
+Private Sub mnHuertos1_Click(index As Integer)
+    If index = 0 Then
         frmListado5.OpcionListado = 15
         frmListado5.Show vbModal
     Else
@@ -4275,8 +4294,8 @@ End Sub
 
 
 
-Private Sub mnInfoAdm_Click(Index As Integer)
-    Select Case Index
+Private Sub mnInfoAdm_Click(index As Integer)
+    Select Case index
     Case 0
         '---------------------------
         '  CASE 0 y CASE 1 estan ahora en el submenu de Agentes dentro de administracion
@@ -4344,8 +4363,8 @@ Private Sub mnListadoReparacionesEfectuadas_Click()
     AbrirListado2 1
 End Sub
 
-Private Sub mnLlamadas_Click(Index As Integer)
-    Select Case Index
+Private Sub mnLlamadas_Click(index As Integer)
+    Select Case index
     Case 0
         frmLlamadas.Show vbModal
         
@@ -4377,8 +4396,8 @@ End Sub
 
 
 
-Private Sub mnManPrevFac2_Click(Index As Integer)
-    Select Case Index
+Private Sub mnManPrevFac2_Click(index As Integer)
+    Select Case index
     Case 0
          ' Previsión Facturacion de Albaranes de Mantenimiento
          '    frmListadoPed.CodClien = "ALM" 'utilizamos esta vble para pasarle el tipo de movimiento
@@ -4426,11 +4445,11 @@ Private Sub mnManTiposContrato_Click()
 End Sub
 
 
-Private Sub mnMtoEuler_Click(Index As Integer)
-    If Index > 0 Then
-        If Index = 1 Then
+Private Sub mnMtoEuler_Click(index As Integer)
+    If index > 0 Then
+        If index = 1 Then
             frmFacEntAlbSAIL.hcoCodTipoM = "ALO"
-        ElseIf Index = 2 Then
+        ElseIf index = 2 Then
             frmFacEntAlbSAIL.hcoCodTipoM = "ALE"
         Else
             frmFacEntAlbSAIL.hcoCodTipoM = "ALR"
@@ -4441,8 +4460,8 @@ Private Sub mnMtoEuler_Click(Index As Integer)
     
 End Sub
 
-Private Sub mnObra_Click(Index As Integer)
-    Select Case Index
+Private Sub mnObra_Click(index As Integer)
+    Select Case index
     Case 0
         frmObraCapitulo.Show vbModal
     Case 1
@@ -4479,8 +4498,8 @@ End Sub
 
 
 
-Private Sub mnproduccion1_Click(Index As Integer)
-    Select Case Index
+Private Sub mnproduccion1_Click(index As Integer)
+    Select Case index
     Case 0
         frmProdOrden.DatosADevolverBusqueda = ""
         frmProdOrden.Show vbModal
@@ -4508,14 +4527,14 @@ End Sub
 
 
 
-Private Sub mnRecalPrSt_Click(Index As Integer)
+Private Sub mnRecalPrSt_Click(index As Integer)
     If vUsu.Nivel > 1 Then
         MsgBox "No tiene permiso", vbExclamation
         Exit Sub
     End If
-    If Index = 0 Then
+    If index = 0 Then
         frmListado3.Opcion = 6
-    ElseIf Index = 1 Then
+    ElseIf index = 1 Then
         frmListado3.Opcion = 20
     Else
         frmListado3.Opcion = 21
@@ -4525,11 +4544,11 @@ End Sub
 
 
 
-Private Sub mnRectifInve_Click(Index As Integer)
+Private Sub mnRectifInve_Click(index As Integer)
     If vUsu.Nivel > 0 Then
         MsgBox "No tiene permiso", vbExclamation
     Else
-        AbrirListado3 IIf(Index = 1, 61, 3)
+        AbrirListado3 IIf(index = 1, 61, 3)
     End If
 End Sub
 
@@ -4648,13 +4667,13 @@ Private Sub mnSeleccionarImpresora_Click()
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub mnServicios_Click(Index As Integer)
-    If Index = 0 Then Exit Sub  'La barra no puede
-    Select Case Index
+Private Sub mnServicios_Click(index As Integer)
+    If index = 0 Then Exit Sub  'La barra no puede
+    Select Case index
     Case 1, 3
         If vParamAplic.TipoFormularioClientes = 0 Then
             frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
-            If Index = 1 Then
+            If index = 1 Then
                 frmFacEntAlbaranes2.hcoCodTipoM = "ALS"
             Else
                 frmFacEntAlbaranes2.hcoCodTipoM = "ALI"
@@ -4666,7 +4685,7 @@ Private Sub mnServicios_Click(Index As Integer)
             If vParamAplic.NumeroInstalacion = 4 Then
                 
                 frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
-                If Index = 1 Then
+                If index = 1 Then
                     frmFacEntAlbSAIL.hcoCodTipoM = "ALS"
                 Else
                     frmFacEntAlbSAIL.hcoCodTipoM = "ALI"
@@ -4677,7 +4696,7 @@ Private Sub mnServicios_Click(Index As Integer)
             End If
         End If
     Case 2, 4
-        If Index = 2 Then
+        If index = 2 Then
             frmListadoPed.codClien = "ALS" 'utilizamos esta vble para pasarle el tipo de movimiento
         Else
             frmListadoPed.codClien = "ALI" 'utilizamos esta vble para pasarle el tipo de movimiento
@@ -4692,10 +4711,10 @@ Private Sub mnServicios_Click(Index As Integer)
     
 End Sub
 
-Private Sub mnSituaAlba_Click(Index As Integer)
-    Select Case Index
+Private Sub mnSituaAlba_Click(index As Integer)
+    Select Case index
     Case 0, 3
-        If Index = 0 Then
+        If index = 0 Then
             frmListado2.Opcion = 23
         Else
             frmListado2.Opcion = 27
@@ -4711,12 +4730,21 @@ Private Sub mnSituaAlba_Click(Index As Integer)
         AbrirListado3 47
         
     Case 5
-        MsgBox "En desarrollo", vbExclamation
+    
+        '
+        frmListado5.OpcionListado = 24
+        frmListado5.Show vbModal
+        
+        
+        If HaMostradoCanal2_elB Then Me.mnAlbaranesB.visible = True
+            
+            
+        
     End Select
 End Sub
 
-Private Sub mnSociosProveedores_Click(Index As Integer)
-    Select Case Index
+Private Sub mnSociosProveedores_Click(index As Integer)
+    Select Case index
     Case 0
         'Cambiar precios proveedores /socios
          AbrirListado2 7
@@ -4740,12 +4768,12 @@ Private Sub mnSociosProveedores_Click(Index As Integer)
     End Select
 End Sub
 
-Private Sub mnSoporte_Click(Index As Integer)
+Private Sub mnSoporte_Click(index As Integer)
        
        
 
    
-    Select Case Index
+    Select Case index
     Case 4
        
         Screen.MousePointer = vbHourglass
@@ -4761,12 +4789,12 @@ Private Sub mnSoporte_Click(Index As Integer)
     
 End Sub
 
-Private Sub mnTelefonia2_Click(Index As Integer)
+Private Sub mnTelefonia2_Click(index As Integer)
     
 
     'ANTES 2013.
     'Ver seccion comenta de abajo
-    Select Case Index
+    Select Case index
     Case 0
             frmFacEntAlbaranes2.hcoCodTipoM = "ALT"
             frmFacEntAlbaranes2.EsHistorico = False
@@ -4775,7 +4803,7 @@ Private Sub mnTelefonia2_Click(Index As Integer)
     
     Case 2, 3
     
-            If Index = 2 Then
+            If index = 2 Then
                 If vParamAplic.TieneTelefonia2 = 2 Then
     
 '                    'importacion coarval
@@ -4786,7 +4814,7 @@ Private Sub mnTelefonia2_Click(Index As Integer)
             End If
             
             'Importar y el 4 verdatos
-            If Index = 2 Then
+            If index = 2 Then
                 'Importacion
                 CadenaDesdeOtroForm = ""
                 frmTelefono1.Opcion = 1 'Importar
@@ -4815,10 +4843,10 @@ Private Sub mnTelefonia2_Click(Index As Integer)
         ' 4.- Datos face
         '
         ' 6.-  Datos importados (index=!4)
-        If Index = 14 Then
+        If index = 14 Then
             frmTelefono1.Opcion = 6
         Else
-            frmTelefono1.Opcion = Index - 8 '2,3,4
+            frmTelefono1.Opcion = index - 8 '2,3,4
         End If
         frmTelefono1.Show vbModal
 
@@ -4832,8 +4860,8 @@ End Sub
 
 
 
-Private Sub mnTelefonia3_Click(Index As Integer)
-    If Index = 0 Then
+Private Sub mnTelefonia3_Click(index As Integer)
+    If index = 0 Then
             '   bolbaite
             frmTelBolbaite.QueOpcion = 1
             frmTelBolbaite.Show vbModal
@@ -4843,12 +4871,12 @@ Private Sub mnTelefonia3_Click(Index As Integer)
     
 End Sub
 
-Private Sub mnTelefonia4_Click(Index As Integer)
-    If Index = 0 Then
+Private Sub mnTelefonia4_Click(index As Integer)
+    If index = 0 Then
             'bolbaite
             frmTelBolbaite.QueOpcion = 0
             frmTelBolbaite.Show vbModal
-    ElseIf Index = 1 Then
+    ElseIf index = 1 Then
          frmTelDtoCuotas.Show vbModal
     Else
          frmTelBolbaite.QueOpcion = 2
@@ -4856,8 +4884,8 @@ Private Sub mnTelefonia4_Click(Index As Integer)
     End If
 End Sub
 
-Private Sub mnTelematel_Click(Index As Integer)
-    Select Case Index
+Private Sub mnTelematel_Click(index As Integer)
+    Select Case index
     Case 0
         frmTelematMto.Show vbModal
     Case 1
@@ -4866,9 +4894,9 @@ Private Sub mnTelematel_Click(Index As Integer)
     End Select
 End Sub
 
-Private Sub mnTicket_Click(Index As Integer)
+Private Sub mnTicket_Click(index As Integer)
     
-    If Index > 0 Then AbrirListado2 12 + Index
+    If index > 0 Then AbrirListado2 12 + index
 
     
 End Sub
@@ -4917,9 +4945,9 @@ End Sub
 
 
 
-Private Sub mnTPVLinea_Click(Index As Integer)
+Private Sub mnTPVLinea_Click(index As Integer)
             '
-    Select Case Index
+    Select Case index
     Case 0
         AbirTPVpantallaVenta
     Case 1
@@ -4952,8 +4980,8 @@ End Sub
 
 
 
-Private Sub mnTratamientos_Click(Index As Integer)
-    Select Case Index
+Private Sub mnTratamientos_Click(index As Integer)
+    Select Case index
     Case 0
         'If Index = 0 Then
         frmAlmMatAct.DatosADevolverBusqueda = ""
@@ -5026,16 +5054,16 @@ End Sub
 
 
 
-Private Sub mnUtiDeclaraLOM_Click(Index As Integer)
-    If Index = 0 Then
+Private Sub mnUtiDeclaraLOM_Click(index As Integer)
+    If index = 0 Then
         frmFacLotesGeneralitat.Show vbModal
     Else
         frmUtDeclara.Show vbModal
     End If
 End Sub
 
-Private Sub mnUtilidadesVarias_Click(Index As Integer)
-    Select Case Index
+Private Sub mnUtilidadesVarias_Click(index As Integer)
+    Select Case index
     Case 0
         AbrirListado3 16
     Case 1
@@ -5048,7 +5076,7 @@ Private Sub mnUtilidadesVarias_Click(Index As Integer)
         If vUsu.Nivel > 1 Then
             MsgBox "No tienen permiso para realizar esta accion", vbExclamation
         Else
-            If Index = 2 Then
+            If index = 2 Then
                 frmListado3.Opcion = 45
                 frmListado3.Show vbModal
             Else
@@ -5067,6 +5095,9 @@ Private Sub mnUtilidadesVarias_Click(Index As Integer)
         frmListado3.Opcion = 66
         frmListado3.Show vbModal
         
+    Case 7
+        frmListado5.OpcionListado = 25
+        frmListado5.Show vbModal
     
     End Select
 End Sub
@@ -5077,9 +5108,9 @@ End Sub
 
 
 
-Private Sub mnUtiMensLin_Click(Index As Integer)
+Private Sub mnUtiMensLin_Click(index As Integer)
     'Nuevo mensaje en la utilidad de mensajeria interna
-    Select Case Index
+    Select Case index
     Case 0
         frmMensaje2.Show vbModal
     Case 1
@@ -5094,16 +5125,16 @@ End Sub
 Private Sub mnUtiUsuActivos_Click()
 'Muestra si hay otros usuarios conectados a la Gestion
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 
     CadenaDesdeOtroForm = OtrosPCsContraContabiliad
     If CadenaDesdeOtroForm <> "" Then
-        i = 1
+        I = 1
         Me.Tag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
         Do
-            SQL = RecuperaValor(CadenaDesdeOtroForm, i)
+            SQL = RecuperaValor(CadenaDesdeOtroForm, I)
             If SQL <> "" Then Me.Tag = Me.Tag & "    - " & SQL & vbCrLf
-            i = i + 1
+            I = I + 1
         Loop Until SQL = ""
         MsgBox Me.Tag, vbExclamation
     Else
@@ -5132,10 +5163,8 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-'   Exit Sub
-
             
-    Select Case Button.Index
+    Select Case Button.index
     Case 1 'Mantenimiento de Artículos
         mnAlmArticulos_Click
     Case 2 'Movimientos Articulos
@@ -5175,7 +5204,13 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Case 21 'Mantenimientos
     
         If vParamAplic.NumeroInstalacion = vbFenollar Then
+            frmFacPedidoAgrupados.Cliente = -1
             frmFacPedidoAgrupados.Show vbModal
+            
+             If vParamAplic.NumeroInstalacion = vbFenollar Then
+                If HaMostradoCanal2_elB Then mnAlbaranesB.visible = True
+            End If
+            
         Else
             mnManEntrada_Click
         End If
@@ -5184,15 +5219,14 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         If vParamAplic.NumeroInstalacion = vbFenollar Then
             'FENOLLAR
             
-            If Not BloqueoManual("FACTCLIF", "1") Then
-                MsgBox "Hay otro usuario facturando.", vbExclamation
-                Screen.MousePointer = vbDefault
-                Exit Sub
-            End If
+          
     
             
             frmfacFacturacion.Show vbModal
-            DesBloqueoManual ("FACTCLIF")
+                        
+            If vParamAplic.NumeroInstalacion = vbFenollar Then
+                If HaMostradoCanal2_elB Then mnAlbaranesB.visible = True
+            End If
         Else
             'Numero de serie
             mnRepNumSerie_Click
@@ -5228,7 +5262,12 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             'Llamamos a frecuencias
             mnFrecuencias_Click
         Else
-            mnAgenda_Click
+        
+            If vParamAplic.NumeroInstalacion = vbFenollar Then
+                frmfacAlbaraYFac.Show vbModal
+            Else
+                mnAgenda_Click
+            End If
         End If
         
     Case 30 'Salir
@@ -5334,7 +5373,7 @@ End Sub
 
 
 Private Sub LanzaHome(Opcion As String)
-Dim i As Integer
+Dim I As Integer
 Dim cad As String
 
     On Error GoTo ELanzaHome
@@ -5447,7 +5486,7 @@ Private Function DevuelveCadenaMenu(ByRef T As Control) As String
 
 On Error GoTo EDevuelveCadenaMenu
     DevuelveCadenaMenu = T.Name & "|"
-    DevuelveCadenaMenu = DevuelveCadenaMenu & T.Index & "|"
+    DevuelveCadenaMenu = DevuelveCadenaMenu & T.index & "|"
     Exit Function
 EDevuelveCadenaMenu:
     Err.Clear
@@ -5779,7 +5818,7 @@ Dim TamanyoImgComun As Integer
 End Sub
 
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal OP As Integer, ByVal Tam As Integer)
-    Dim i As Integer
+    Dim I As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = OP
@@ -5805,6 +5844,7 @@ End Sub
 Private Sub InsertaIconoPDF()
     On Error GoTo einsicono
     
+    
     imgListComun_OM2.ListImages.Add , , Me.imgListComun.ListImages(54).Picture
     imgListComun_BN2.ListImages.Add , , Me.imgListComun.ListImages(54).Picture
     ImgListComun2.ListImages.Add , , Me.imgListComun.ListImages(54).Picture
@@ -5822,8 +5862,12 @@ Private Sub PonerCaption(Reestablecer As Boolean, Optional texto As String)
 
     If Not Reestablecer Then
         QueCaption = Me.Caption
-        Me.Caption = "Ariges. " & vEmpresa.nomresum & " - " & Replace(texto, "&", "")
+        Me.Caption = "Ariges." & Replace(texto, "&", "") & " - " & vEmpresa.nomresum
     Else
         Me.Caption = QueCaption
     End If
 End Sub
+
+
+
+

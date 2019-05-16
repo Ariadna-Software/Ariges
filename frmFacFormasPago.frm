@@ -601,7 +601,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -620,8 +620,8 @@ Dim Cad As String, Indicador As String
                 If ModificaDesdeFormulario(Me, 1) Then
                     ModificarENTesoeria
                     TerminaBloquear
-                    Cad = "(codforpa=" & Text1(0).Text & ")"
-                    If SituarData(Data1, Cad, Indicador) Then
+                    cad = "(codforpa=" & Text1(0).Text & ")"
+                    If SituarData(Data1, cad, Indicador) Then
                         PonerModo 2
                         lblIndicador.Caption = Indicador
                         PonerFoco Text1(0)
@@ -694,9 +694,9 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub Desplazamiento(Index As Integer)
+Private Sub Desplazamiento(index As Integer)
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, index
     PonerCampos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
 End Sub
@@ -717,7 +717,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
@@ -725,22 +725,26 @@ Dim Cad As String
     If Not PuedeModificarFPenContab Then Exit Sub
     
     '### a mano
-    Cad = "¿Seguro que desea eliminar la Forma de Pago?" & vbCrLf
-    Cad = Cad & vbCrLf & "Cod. Forma Pago: " & Format(Data1.Recordset.Fields(0), "000")
-    Cad = Cad & vbCrLf & "Desc. Forma Pago: " & Data1.Recordset.Fields(1)
+    cad = "¿Seguro que desea eliminar la Forma de Pago?" & vbCrLf
+    cad = cad & vbCrLf & "Cod. Forma Pago: " & Format(Data1.Recordset.Fields(0), "000")
+    cad = cad & vbCrLf & "Desc. Forma Pago: " & Data1.Recordset.Fields(1)
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         NumRegElim = Data1.Recordset.AbsolutePosition
         Screen.MousePointer = vbHourglass
 
-        Cad = "En ariges"
+        cad = "En ariges"
         Data1.Recordset.Delete
         
         
         'Para eliminar en tesoreria
-        Cad = "DELETE FROM sforpa WHERE codforpa = " & Text1(0).Text
+        If vParamAplic.ContabilidadNueva Then
+            cad = "DELETE FROM formapago WHERE codforpa = " & Text1(0).Text
+        Else
+            cad = "DELETE FROM sforpa WHERE codforpa = " & Text1(0).Text
+        End If
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
         Else 'Solo habia un registro
@@ -750,8 +754,8 @@ Dim Cad As String
         
         
         'Borro en tesoreria
-        
-        ConnConta.Execute Cad
+         
+        ConnConta.Execute cad
         
     End If
     Screen.MousePointer = vbDefault
@@ -759,22 +763,22 @@ Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
         Data1.Recordset.CancelUpdate
-        MuestraError Err.Number, "Eliminar Forma de Pago" & vbCrLf & Cad, Err.Description
+        MuestraError Err.Number, "Eliminar Forma de Pago" & vbCrLf & cad, Err.Description
     End If
 End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -783,7 +787,7 @@ Private Sub Combo1_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -881,38 +885,38 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim cadB As String
+Dim CadB As String
 Dim Aux As String
-Dim indice As Integer
+Dim Indice As Integer
 
     If CadenaDevuelta <> "" Then
         If Val(imgFPago(0).Tag) >= 0 Then 'Llama desde Prismaticos
             HaDevueltoDatos = True
             Screen.MousePointer = vbHourglass
     
-            indice = Val(Me.imgFPago(0).Tag)
-            Text1(indice + 6).Text = Format(RecuperaValor(CadenaDevuelta, 1), "000")
-            Text2(indice + 6).Text = RecuperaValor(CadenaDevuelta, 2)
+            Indice = Val(Me.imgFPago(0).Tag)
+            Text1(Indice + 6).Text = Format(RecuperaValor(CadenaDevuelta, 1), "000")
+            Text2(Indice + 6).Text = RecuperaValor(CadenaDevuelta, 2)
 
             If Modo = 3 Then
-                 Text1(indice + 8).Locked = False
-                 Text1(indice + 8).BackColor = vbWhite
+                 Text1(Indice + 8).Locked = False
+                 Text1(Indice + 8).BackColor = vbWhite
             End If
         Else
             HaDevueltoDatos = True
             Screen.MousePointer = vbHourglass
             'Sabemos que campos son los que nos devuelve
             'Creamos una cadena consulta y ponemos los datos
-            cadB = ""
+            CadB = ""
             Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-            cadB = Aux
+            CadB = Aux
             '   Como la clave principal es unica, con poner el sql apuntando
             '   al valor devuelto sobre la clave ppal es suficiente
             'Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
             'If CadB <> "" Then CadB = CadB & " AND "
             'CadB = CadB & Aux
             'Se muestran en el mismo form
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
             PonerCadenaBusqueda
             Screen.MousePointer = vbDefault
         End If
@@ -920,16 +924,16 @@ Dim indice As Integer
 End Sub
     
     
-Private Sub imgFPago_Click(Index As Integer)
+Private Sub imgFPago_Click(index As Integer)
     If Modo = 2 Or Modo = 5 Or Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
       
     'En el Tag almacenamos el indice de la imagen de
     'Busqueda que va a llamar a frmBuscaGrid para busqueda
-    imgFPago(0).Tag = Index
+    imgFPago(0).Tag = index
     MandaBusquedaPrevia ""
     imgFPago(0).Tag = -1
-    PonerFoco Text1(Index + 6)
+    PonerFoco Text1(index + 6)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -961,18 +965,18 @@ End Sub
 
 'Los metodos del text tendran que estar
 'Los descomentamos cuando esten puestos ya los controles
-Private Sub Text1_GotFocus(Index As Integer)
-    kCampo = Index
-    ConseguirFoco Text1(Index), Modo
+Private Sub Text1_GotFocus(index As Integer)
+    kCampo = index
+    ConseguirFoco Text1(index), Modo
 End Sub
 
 
-Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -984,25 +988,25 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(Index As Integer)
+Private Sub Text1_LostFocus(index As Integer)
    
-    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
     
     'Si queremos hacer algo ..
-    Select Case Index
+    Select Case index
         Case 0 'Cod Forma de Pago
-           If PonerFormatoEntero(Text1(Index)) Then
+           If PonerFormatoEntero(Text1(index)) Then
                 If Modo = 3 Then 'Insertar
-                    If ExisteCP(Text1(Index)) Then PonerFoco Text1(Index)
+                    If ExisteCP(Text1(index)) Then PonerFoco Text1(index)
                 End If
            End If
             
         Case 2 'Numero Vencimientos
-            PonerFormatoEntero Text1(Index)
-            If Val(Text1(Index).Text) = 1 Then
+            PonerFormatoEntero Text1(index)
+            If Val(Text1(index).Text) = 1 Then
                 Text1(4).Text = ""
                 BloquearTxt Text1(4), True
             Else
@@ -1010,59 +1014,59 @@ Private Sub Text1_LostFocus(Index As Integer)
             End If
                 
         Case 3, 4 'nº vencimientos
-            PonerFormatoEntero Text1(Index)
+            PonerFormatoEntero Text1(index)
         
         Case 5, 9 '5: %Gastos Financieros, 9: %Adelantado
              'Formato tipo 4: Decimal(4,2)
-             PonerFormatoDecimal Text1(Index), 4
+             PonerFormatoDecimal Text1(index), 4
 
         Case 8       '8:Importe Mínimo
             'Formato tipo 1: Decimal(12,2)
-             PonerFormatoDecimal Text1(Index), 1
+             PonerFormatoDecimal Text1(index), 1
         
         Case 6, 7 ' 6: Forma de Pago Alternativa
                   ' 7: Forma de Pago por Adelantado
-             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sforpa", "nomforpa", "codforpa", "N")
-                If Text2(Index).Text = "" Then PonerFoco Text1(Index)
-                BloquearTxt Text1(Index + 2), False
+             If PonerFormatoEntero(Text1(index)) Then
+                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sforpa", "nomforpa", "codforpa", "N")
+                If Text2(index).Text = "" Then PonerFoco Text1(index)
+                BloquearTxt Text1(index + 2), False
              Else
-                 Text2(Index).Text = ""
-                 Text1(Index + 2).Text = "" 'Importe Mínimo
+                 Text2(index).Text = ""
+                 Text1(index + 2).Text = "" 'Importe Mínimo
                  'Modo 1: Busqueda
-                 If Modo <> 1 Then BloquearTxt Text1(Index + 2), True
+                 If Modo <> 1 Then BloquearTxt Text1(index + 2), True
             End If
     End Select
 End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then 'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then 'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
-Dim Cad As String
+Private Sub MandaBusquedaPrevia(CadB As String)
+Dim cad As String
 
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(0), 30, "Código")
-        Cad = Cad & ParaGrid(Text1(1), 70, "Denominacion")
-        If Cad <> "" Then
+        cad = ""
+        cad = cad & ParaGrid(Text1(0), 30, "Código")
+        cad = cad & ParaGrid(Text1(1), 70, "Denominacion")
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = NombreTabla
-            frmB.vSQL = cadB
+            frmB.vSQL = CadB
             
             HaDevueltoDatos = False
             frmB.vDevuelve = "0|1|" 'Campos de la tabla que devuelve
@@ -1143,8 +1147,8 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte
-Dim B As Boolean
+Dim I As Byte
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1152,10 +1156,10 @@ Dim NumReg As Byte
     
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
         If Modo = 1 Then Me.lblIndicador.Caption = "BUSQUEDA"
     Else
         cmdRegresar.visible = False
@@ -1166,15 +1170,15 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     
     '----------------------------------------------
     'Modo insertar o modificar
-    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = B Or Modo = 1
-    cmdCancelar.visible = B Or Modo = 1
-    If B Or Modo = 1 Then
+    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = b Or Modo = 1
+    cmdCancelar.visible = b Or Modo = 1
+    If b Or Modo = 1 Then
         cmdCancelar.Cancel = True
     Else
         cmdCancelar.Cancel = False
@@ -1183,18 +1187,18 @@ Dim NumReg As Byte
     BloquearText1 Me, Modo
     
     'Formas de Pago
-    For i = 0 To Text2.Count - 1
-        BloquearTxt Text2(i), True
-    Next i
+    For I = 0 To Text2.Count - 1
+        BloquearTxt Text2(I), True
+    Next I
     
     Combo1.Enabled = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
     
-    B = (Modo = 3) 'Insertar
+    b = (Modo = 3) 'Insertar
     'Campos Importe Mínimo y % Adelantado
-    If B Then
-        For i = 8 To 9
-            BloquearTxt Text1(i), True
-        Next i
+    If b Then
+        For I = 8 To 9
+            BloquearTxt Text1(I), True
+        Next I
     End If
 
      chkVistaPrevia.Enabled = (Modo <= 2)
@@ -1206,74 +1210,74 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    mnEliminar.Enabled = b
     
-    B = (Modo >= 3)
+    b = (Modo >= 3)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = Not B
-    Me.mnNuevo.Enabled = Not B
+    Toolbar1.Buttons(5).Enabled = Not b
+    Me.mnNuevo.Enabled = Not b
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
     
     DatosOk = False
-    B = CompForm(Me, 1)
-    If Not B Then Exit Function
+    b = CompForm(Me, 1)
+    If Not b Then Exit Function
      
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then B = False
+        If ExisteCP(Text1(0)) Then b = False
     End If
      
-    If Not B Then Exit Function
+    If Not b Then Exit Function
     
     'Comprobar que si nº vencimientos es 1, el campo resto vencimientos no tiene valor
     If Val(Text1(2).Text) = 1 Then
         If Not EsVacio(Text1(4)) Then
             MsgBox "El campo Resto Vencimientos no puede tener valor si NºVtos=1", vbInformation
-            B = False
+            b = False
         End If
     End If
-    If Not B Then Exit Function
+    If Not b Then Exit Function
      
     'Comprobar el campo resto vencimientos
     If Not EsVacio(Text1(2)) And Not EsVacio(Text1(3)) Then
         If Val(Text1(2).Text) > 1 And EsVacio(Text1(4)) Then
             MsgBox "El Campo Resto Vencimientos debe tener valor", vbInformation
             PonerFoco Text1(4)
-            B = False
+            b = False
         End If
     End If
-    If Not B Then Exit Function
+    If Not b Then Exit Function
     
     'Comprobar el importe Mínimo
     'Requerido si se selecciona una forma de pago alternativa
     If Not EsVacio(Text1(6)) And EsVacio(Text1(8)) Then
        MsgBox "El campo Importe Mínimo debe tener valor", vbInformation
        PonerFoco Text1(8)
-       B = False
+       b = False
     End If
     'Verificar que el campo Importe Minimo no tiene valor si la forma de pago es vacio
     If EsVacio(Text1(6)) And Not EsVacio(Text1(8)) Then
         MsgBox "El campo Importe Mínimo no puede tener valor si no selecciona Forma de Pago.", vbInformation
-        B = False
+        b = False
     End If
-    If Not B Then Exit Function
+    If Not b Then Exit Function
     
     
     'Porcentaje Adelantado
@@ -1281,26 +1285,26 @@ Dim B As Boolean
     If Not EsVacio(Text1(7)) And EsVacio(Text1(9)) Then
         MsgBox "El campo % Adelantado debe tener valor", vbInformation
         PonerFoco Text1(9)
-        B = False
+        b = False
     End If
     'Verificar que el campo %adelantado no tiene valor si la forma de pago es vacio
     If EsVacio(Text1(7)) And Not EsVacio(Text1(9)) Then
         MsgBox "El campo %Adelantado no puede tener valor si no selecciona Forma de Pago.", vbInformation
-        B = False
+        b = False
     End If
-    If Not B Then Exit Function
+    If Not b Then Exit Function
         
         
     'Marzo 2011
     '----------------------------------
     'Comprobaremos que son correctas las formas de pago adelantao y alternativa, y que no son la misma
     'que la principal
-    If B Then
+    If b Then
         'Alternativa
         If Text1(6).Text <> "" Then
             If Text1(6).Text = Text1(0).Text Then
                 MsgBox "Mismo código de forma de pago y la forma de pago alternativa", vbExclamation
-                B = False
+                b = False
             End If
         End If
         
@@ -1309,7 +1313,7 @@ Dim B As Boolean
         If Text1(7).Text <> "" Then
             If Text1(7).Text = Text1(0).Text Then
                 MsgBox "Mismo código de forma de pago y la forma de pago adelantado", vbExclamation
-                B = False
+                b = False
             End If
         End If
         
@@ -1318,7 +1322,7 @@ Dim B As Boolean
         
         
         'Salimos si no esta bien
-        If Not B Then Exit Function
+        If Not b Then Exit Function
     End If
         
             
@@ -1330,17 +1334,17 @@ Dim B As Boolean
         If Not PuedeModificarFPenContab Then Exit Function
     End If
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
-Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text2_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1  'Buscar
             mnBuscar_Click
         Case 2  'Todos
@@ -1354,7 +1358,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 10  'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento (Button.Index - btnPrimero)
+            Desplazamiento (Button.index - btnPrimero)
     End Select
 End Sub
 
@@ -1365,15 +1369,15 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
 Private Function PuedeModificarFPenContab() As Boolean
-Dim Cad As String
+Dim cad As String
     PuedeModificarFPenContab = False
     Set miRsAux = New ADODB.Recordset
 
@@ -1382,12 +1386,12 @@ Dim Cad As String
     'Vere si la forma de pago es forma de pago alternativa
     If Modo = 2 Then
         NumRegElim = 0
-        Cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpaalt", CStr(Val(Text1(0).Text)))
-        If Cad = "" Then Cad = "0"
-        If Val(Cad) > 0 Then NumRegElim = 1
-        Cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpapor", Text1(0).Text)
-        If Cad = "" Then Cad = "0"
-        If Val(Cad) > 0 Then NumRegElim = 1
+        cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpaalt", CStr(Val(Text1(0).Text)))
+        If cad = "" Then cad = "0"
+        If Val(cad) > 0 Then NumRegElim = 1
+        cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpapor", Text1(0).Text)
+        If cad = "" Then cad = "0"
+        If Val(cad) > 0 Then NumRegElim = 1
         
         If NumRegElim > 0 Then
             MsgBox "La forma de pago es forma de pago alternativa o por adelantado de otra", vbExclamation
@@ -1396,9 +1400,9 @@ Dim Cad As String
         
         
         If vParamAplic.AguasPotables Then
-            Cad = DevuelveDesdeBD(conAri, "Count(*)", "aguacontadores", "codforpa", Text1(0).Text)
-            If Cad = "" Then Cad = "0"
-            If Val(Cad) > 0 Then
+            cad = DevuelveDesdeBD(conAri, "Count(*)", "aguacontadores", "codforpa", Text1(0).Text)
+            If cad = "" Then cad = "0"
+            If Val(cad) > 0 Then
                 MsgBox "Tiene contadores de agua asociados a esta forma de pago", vbExclamation
                 Exit Function
             End If
@@ -1409,24 +1413,24 @@ Dim Cad As String
 
     NumRegElim = 0
     If vParamAplic.ContabilidadNueva Then
-        Cad = "Select count(*) from cobros where codforpa=" & Text1(0).Text
+        cad = "Select count(*) from cobros where codforpa=" & Text1(0).Text
     Else
-        Cad = "Select count(*) from scobro where codforpa=" & Text1(0).Text
+        cad = "Select count(*) from scobro where codforpa=" & Text1(0).Text
     End If
     
-    miRsAux.Open Cad, ConnConta, adOpenForwardOnly, adLockPessimistic
+    miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
     If Not miRsAux.EOF Then NumRegElim = NumRegElim + DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
     
     
     If vParamAplic.ContabilidadNueva Then
-        Cad = "Select count(*) from pagos where codforpa=" & Text1(0).Text
+        cad = "Select count(*) from pagos where codforpa=" & Text1(0).Text
     Else
-        Cad = "Select count(*) from spagop where codforpa=" & Text1(0).Text
+        cad = "Select count(*) from spagop where codforpa=" & Text1(0).Text
     End If
     
     
-    miRsAux.Open Cad, ConnConta, adOpenForwardOnly, adLockPessimistic
+    miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
     If Not miRsAux.EOF Then NumRegElim = NumRegElim + DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
     

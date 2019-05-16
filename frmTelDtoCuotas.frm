@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTelDtoCuotas 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Descuentos cuotas"
@@ -504,7 +504,7 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     End If
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -591,19 +591,19 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
 Dim jj As Integer
-Dim B As Boolean
+Dim b As Boolean
 
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
     
     For jj = 0 To txtAux.Count - 1
      
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = B
+        txtAux(jj).visible = b
     Next jj
-    Combo1.visible = B
+    Combo1.visible = b
     Combo1.Top = alto
 End Sub
 
@@ -672,7 +672,7 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Select Case Button.Index
+    Select Case Button.index
         Case 1 'Busqueda
             mnBuscar_Click
         Case 2 'Ver Todos
@@ -694,21 +694,21 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     
     'Modo Buscar
     If Kmodo = 1 Then
@@ -719,9 +719,9 @@ Dim B As Boolean
 
                    
     '-----------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -741,29 +741,29 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnEliminar.Enabled = b
     
     
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     
     
-    B = ((Modo >= 3))
+    b = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
@@ -776,9 +776,9 @@ Private Sub LimpiarCampos()
 End Sub
 
 
-Private Sub Desplazamiento(Index As Integer)
+Private Sub Desplazamiento(index As Integer)
 'Botones de Desplazamiento de la Toolbar
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, index
     PonerCampos
 End Sub
 
@@ -795,7 +795,7 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 Dim SQL As String
     
     SQL = "select CodCuota,DescCuota,PorcentajeOperador,Porcentaje,"
-    SQL = SQL & "if(refacturar=0,'',if(refacturar=1,'Increm €','*'))"
+    SQL = SQL & "if(refacturar=0,'',if(refacturar=1,'Increm €','% Dto'))"
     SQL = SQL & "Texto,Valor,Refacturar  from tel_desc_cuotas "
     SQL = SQL & " where 1=1 "
     If enlaza Then
@@ -892,14 +892,14 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
-
+Dim b As Boolean
+Dim J As Currency
 
     On Error GoTo ErrDatosOK
 
     DatosOk = False
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
     CadenaConsulta = ""
     If Combo1.ListIndex = 0 Then
@@ -910,10 +910,18 @@ Dim B As Boolean
     If CadenaConsulta <> "" Then
         MsgBox CadenaConsulta, vbExclamation
         CadenaConsulta = ""
-        B = False
+        b = False
     End If
     
-    DatosOk = B
+    If b And Combo1.ListIndex = 2 Then
+        J = ImporteFormateado(txtAux(4).Text)
+        If J < 0 Or J > 100 Then
+            MsgBox "Descuento porcentual. Valores entre 0 y 100", vbExclamation
+            b = False
+        End If
+    End If
+    
+    DatosOk = b
     Exit Function
     
 ErrDatosOK:
@@ -987,22 +995,22 @@ Private Sub PonerOpcionesMenu()
 End Sub
 
 
-Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+Private Sub txtAux_GotFocus(index As Integer)
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
 
     
 
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
-                If Index > 0 Then PonerFoco txtAux(Index - 1)
+                If index > 0 Then PonerFoco txtAux(index - 1)
                 
         Case 40 'Desplazamiento Flecha Hacia Abajo
-                If Index = 3 Then
+                If index = 3 Then
                     PonerFocoBtn Me.cmdAceptar
                 Else
                     SendKeys "{tab}"
@@ -1010,24 +1018,24 @@ Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     End Select
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
    KEYpress KeyAscii
 End Sub
 
 
-Private Sub txtAux_LostFocus(Index As Integer)
+Private Sub txtAux_LostFocus(index As Integer)
 
     On Error Resume Next
     
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
     
-    Select Case Index
+    Select Case index
     
        
         Case 2, 3, 4
 
-            If txtAux(Index).Text <> "" Then
-                If Not PonerFormatoDecimal(txtAux(Index), 3) Then txtAux(Index).Text = ""
+            If txtAux(index).Text <> "" Then
+                If Not PonerFormatoDecimal(txtAux(index), 3) Then txtAux(index).Text = ""
             End If
               
         
@@ -1043,5 +1051,8 @@ Private Sub CargaCombo()
     Combo1.ItemData(Combo1.NewIndex) = 0
     Combo1.AddItem "Increm. €"
     Combo1.ItemData(Combo1.NewIndex) = 1
+    
+    Combo1.AddItem "Porcentaje"
+    Combo1.ItemData(Combo1.NewIndex) = 2
     
 End Sub

@@ -631,7 +631,7 @@ Private btnPrimero As Byte
 'Private VieneDeBuscar As Boolean
 ''Para cuando devuelve dos poblaciones con el mismo codigo Postal. Si viene de pulsar prismatico
 ''de busqueda poner el valor de poblacion seleccionado y no volver a recuperar de la Base de Datos
-Private PrimeraVez As Boolean
+Private primeravez As Boolean
 
 Private ModificandoEnCliente As Boolean
 
@@ -750,9 +750,9 @@ Dim C As String
 End Sub
 
 
-Private Sub Desplazamiento(Index As Integer)
+Private Sub Desplazamiento(index As Integer)
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, index
     PonerCampos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
 End Sub
@@ -818,14 +818,14 @@ Dim cad As String
     Unload Me
 End Sub
 
-Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Combo1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     
-    If PrimeraVez Then
-        PrimeraVez = False
+    If primeravez Then
+        primeravez = False
         If DesdeElCliente > 0 Then
             If DatosADevolverBusqueda = "" Then
                 'Es para añadir nueva
@@ -857,7 +857,7 @@ End Sub
 Private Sub Form_Load()
 Dim Vac As Boolean
     'Icono del formulario
-    PrimeraVez = True
+    primeravez = True
     ModificandoEnCliente = False
     Me.Icon = frmPpal.Icon
     Me.Width = 10800
@@ -956,7 +956,7 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim cadB As String
+Dim CadB As String
 Dim Aux As String
 
     If CadenaDevuelta <> "" Then
@@ -964,12 +964,12 @@ Dim Aux As String
         Screen.MousePointer = vbHourglass
         'Sabemos que campos son los que nos devuelve
         'Creamos una cadena consulta y ponemos los datos
-        cadB = ""
+        CadB = ""
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
         Aux = Aux & " AND " & ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
         Aux = Aux & " AND " & ValorDevueltoFormGrid(Text1(3), CadenaDevuelta, 3)
-        cadB = Aux
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        CadB = Aux
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -991,22 +991,22 @@ Private Sub frmT_DatoSeleccionado(CadenaSeleccion As String)
     Text2(5).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
-Private Sub imgBuscar_Click(Index As Integer)
+Private Sub imgBuscar_Click(index As Integer)
 
     If Modo = 2 Or Modo = 0 Then Exit Sub
     
     'Clientes
-    If Index = 3 Then
+    If index = 3 Then
         If Modo = 4 Then Exit Sub
         If Modo = 3 And Me.DesdeElCliente > 0 Then Exit Sub
     End If
     
-    If Index = 2 And TipoPredefinido > 0 Then Exit Sub
+    If index = 2 And TipoPredefinido > 0 Then Exit Sub
     
     Screen.MousePointer = vbHourglass
     HaDevueltoDatos = False
     
-    Select Case Index
+    Select Case index
     Case 2
         Set frmAcc = New frmCRMtipos
         frmAcc.DatosADevolverBusqueda = "0|1|"
@@ -1035,7 +1035,7 @@ Private Sub imgBuscar_Click(Index As Integer)
     
     End Select
 
-    If HaDevueltoDatos Then PonerFoco Text1(Index)
+    If HaDevueltoDatos Then PonerFoco Text1(index)
     HaDevueltoDatos = False
     Screen.MousePointer = vbDefault
 End Sub
@@ -1072,18 +1072,18 @@ End Sub
 '### A mano
 'Los metodos del text tendran que estar
 'Los descomentamos cuando esten puestos ya los controles
-Private Sub Text1_GotFocus(Index As Integer)
-    kCampo = Index
-    ConseguirFoco Text1(Index), Modo
+Private Sub Text1_GotFocus(index As Integer)
+    kCampo = index
+    ConseguirFoco Text1(index), Modo
 End Sub
 
 
-Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -1095,83 +1095,83 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(Index As Integer)
+Private Sub Text1_LostFocus(index As Integer)
 Dim devuelve As String
 Dim Agente As String
-    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
-    Text1(Index).Text = Trim(Text1(Index).Text)
+    Text1(index).Text = Trim(Text1(index).Text)
     
-    Select Case Index
+    Select Case index
         Case 2, 3, 4, 5
             devuelve = ""
                     
-            If PonerFormatoEntero(Text1(Index)) Then
-                If Index = 3 Then
+            If PonerFormatoEntero(Text1(index)) Then
+                If index = 3 Then
                     Agente = "codagent"
-                    devuelve = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(Index).Text, "N", Agente)
-                ElseIf Index = 4 Then
-                        devuelve = DevuelveDesdeBD(conAri, "nomagent", "sagent", "codagent", Text1(Index).Text, "N")
-                ElseIf Index = 5 Then
-                        devuelve = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", Text1(Index).Text, "N")
+                    devuelve = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(index).Text, "N", Agente)
+                ElseIf index = 4 Then
+                        devuelve = DevuelveDesdeBD(conAri, "nomagent", "sagent", "codagent", Text1(index).Text, "N")
+                ElseIf index = 5 Then
+                        devuelve = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", Text1(index).Text, "N")
                 Else
                     'index =2
-                    devuelve = DevuelveDesdeBD(conAri, "denominacion", "scrmtipo", "codigo", Text1(Index).Text, "N")
+                    devuelve = DevuelveDesdeBD(conAri, "denominacion", "scrmtipo", "codigo", Text1(index).Text, "N")
                 End If
-                If Index = 2 And devuelve <> "" Then
+                If index = 2 And devuelve <> "" Then
                     'SI NO tiene accion x defecto NO puede eligir menores <= 20
                     If TipoPredefinido > 0 Then
-                        If TipoPredefinido <> Text1(Index).Text Then
+                        If TipoPredefinido <> Text1(index).Text Then
                             MsgBox "Accion comercial debe ser " & TipoPredefinido, vbExclamation
-                            Text1(Index).Text = TipoPredefinido
+                            Text1(index).Text = TipoPredefinido
                             devuelve = ""
                         End If
                     Else
-                        If Val(Text1(Index).Text) <= 20 Then
+                        If Val(Text1(index).Text) <= 20 Then
                             If vUsu.Nivel > 0 Then
                                 MsgBox "Accion comercial debe ser mayor de 20", vbExclamation
-                                Text1(Index).Text = ""
+                                Text1(index).Text = ""
                                 devuelve = ""
                             End If
                         End If
                     End If
                 End If
             End If
-            Text2(Index).Text = devuelve
-            If Text1(Index).Text <> "" And devuelve = "" Then
+            Text2(index).Text = devuelve
+            If Text1(index).Text <> "" And devuelve = "" Then
                 MsgBox "No existe el codigo", vbExclamation
-                Text1(Index).Text = ""
-                PonerFoco Text1(Index)
+                Text1(index).Text = ""
+                PonerFoco Text1(index)
             End If
-            If Index = 3 And Agente <> "" Then Text1(4).Text = Agente
+            If index = 3 And Agente <> "" Then Text1(4).Text = Agente
         Case 1
             'FECHA HORA
-            If Not IsDate(Text1(Index).Text) Then
+            If Not IsDate(Text1(index).Text) Then
                 MsgBox "Fecha incorrecta", vbExclamation
-                Text1(Index).Text = ""
+                Text1(index).Text = ""
             End If
     End Select
 End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
     If Me.Combo1(1).Text <> "" Then Text1(7).Text = Combo1(1).Text
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
 
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then     'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then     'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 Dim cad As String
         'Llamamos a al form
         '##A mano
@@ -1187,7 +1187,7 @@ Dim cad As String
             frmB.vTabla = NombreTabla & ",sclien"
             
             cad = "sclien.codclien=" & NombreTabla & ".codclien"
-            If cadB <> "" Then cad = cad & " AND " & cadB
+            If CadB <> "" Then cad = cad & " AND " & CadB
             frmB.vSQL = cad
             HaDevueltoDatos = False
             '###A mano
@@ -1396,7 +1396,7 @@ Dim b As Boolean
     
 End Function
 
-Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text2_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -1404,7 +1404,7 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     
     
-    Select Case Button.Index
+    Select Case Button.index
         Case 1  'Buscar
             mnBuscar_Click
         Case 2  'Todos
@@ -1418,7 +1418,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 10  'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento (Button.Index - btnPrimero)
+            Desplazamiento (Button.index - btnPrimero)
     End Select
 End Sub
 
@@ -1429,10 +1429,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 

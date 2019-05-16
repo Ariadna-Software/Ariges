@@ -14,10 +14,29 @@ Begin VB.Form frmfacFacturacion
    ScaleWidth      =   17520
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.ComboBox Combo2 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      ItemData        =   "frmfacFacturacion.frx":0000
+      Left            =   6600
+      List            =   "frmfacFacturacion.frx":0007
+      Style           =   2  'Dropdown List
+      TabIndex        =   6
+      Top             =   240
+      Width           =   2535
+   End
    Begin VB.CommandButton cmdFra 
       Height          =   495
-      Left            =   16800
-      Picture         =   "frmfacFacturacion.frx":0000
+      Left            =   16680
+      Picture         =   "frmfacFacturacion.frx":0014
       Style           =   1  'Graphical
       TabIndex        =   5
       ToolTipText     =   "FACTURAR"
@@ -54,22 +73,22 @@ Begin VB.Form frmfacFacturacion
       EndProperty
       ForeColor       =   &H00808080&
       Height          =   360
-      ItemData        =   "frmfacFacturacion.frx":6852
+      ItemData        =   "frmfacFacturacion.frx":6866
       Left            =   9480
-      List            =   "frmfacFacturacion.frx":6859
+      List            =   "frmfacFacturacion.frx":686D
       Style           =   2  'Dropdown List
       TabIndex        =   3
       Top             =   240
       Width           =   4935
    End
    Begin MSComctlLib.ListView lw1 
-      Height          =   7815
+      Height          =   7575
       Left            =   120
       TabIndex        =   0
-      Top             =   720
+      Top             =   960
       Width           =   17175
       _ExtentX        =   30295
-      _ExtentY        =   13785
+      _ExtentY        =   13361
       View            =   3
       LabelEdit       =   1
       LabelWrap       =   -1  'True
@@ -127,11 +146,30 @@ Begin VB.Form frmfacFacturacion
          Object.Width           =   2540
       EndProperty
    End
+   Begin VB.Label Label1 
+      AutoSize        =   -1  'True
+      Caption         =   "Origen"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   2
+      Left            =   5760
+      TabIndex        =   7
+      Top             =   240
+      Width           =   630
+   End
    Begin VB.Image imgFecha 
       Height          =   240
       Index           =   0
       Left            =   14640
-      Picture         =   "frmfacFacturacion.frx":6868
+      Picture         =   "frmfacFacturacion.frx":687C
       ToolTipText     =   "Buscar fecha"
       Top             =   240
       Width           =   240
@@ -148,13 +186,13 @@ Begin VB.Form frmfacFacturacion
       EndProperty
       ForeColor       =   &H00800000&
       Height          =   375
-      Left            =   5520
+      Left            =   1320
       TabIndex        =   2
-      Top             =   240
-      Width           =   3615
+      Top             =   600
+      Width           =   3855
    End
    Begin VB.Label Label1 
-      Caption         =   "Albaranes para facturar"
+      Caption         =   "Pendiente facturar"
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   14.25
@@ -166,27 +204,28 @@ Begin VB.Form frmfacFacturacion
       EndProperty
       ForeColor       =   &H00800000&
       Height          =   375
+      Index           =   0
       Left            =   240
       TabIndex        =   1
       Top             =   120
-      Width           =   4215
+      Width           =   3375
    End
    Begin VB.Image imgCheck 
       Height          =   240
       Index           =   1
-      Left            =   5040
-      Picture         =   "frmfacFacturacion.frx":68F3
+      Left            =   720
+      Picture         =   "frmfacFacturacion.frx":6907
       ToolTipText     =   "Quitar seleccion"
-      Top             =   240
+      Top             =   600
       Width           =   240
    End
    Begin VB.Image imgCheck 
       Height          =   240
       Index           =   0
-      Left            =   4680
-      Picture         =   "frmfacFacturacion.frx":6A3D
+      Left            =   240
+      Picture         =   "frmfacFacturacion.frx":6A51
       ToolTipText     =   "Seleccionar todo"
-      Top             =   240
+      Top             =   600
       Width           =   240
    End
 End
@@ -203,9 +242,9 @@ Option Explicit
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 
-
+Private frmAlbG As frmFacEntAlbaranesGR
 Dim cad As String
-Dim PrimeraVez As Boolean
+Dim primeravez As Boolean
 
 
 Dim Orden As Integer
@@ -215,19 +254,22 @@ Dim Marcado As Long
 Dim ImporteTot As Currency
 
 
-Private Sub CargaDatos()
+Dim TipoAlbaSeleccionado As String
+
+
+Private Sub CargaDatos(Numalbar As Long)
 Dim IT As ListItem
     On Error GoTo ECargaDatos
     
     Screen.MousePointer = vbHourglass
-    
+     
     lw1.ListItems.Clear
     Marcado = 0
     ImporteTot = 0
-    cad = "select c.numalbar,c.fechaalb,codclien,nomclien,substring(stippa.destippa,1,5),nomforpa ,nomdirec,factursn,sum(importel) base"
+    cad = "select c.numalbar,c.fechaalb,codclien,nomclien,substring(stippa.destippa,1,5),nomforpa ,coddirec,nomdirec,referenc,factursn,sum(importel) base"
     cad = cad & " from scaalb c inner join sforpa on c.codforpa=sforpa.codforpa"
     cad = cad & " left join stippa   on stippa.tipforpa =sforpa.tipforpa"
-    cad = cad & " left join slialb l on c.codtipom=l.codtipom and c.numalbar=l.numalbar where c.codtipom='ALV' group by 1"
+    cad = cad & " left join slialb l on c.codtipom=l.codtipom and c.numalbar=l.numalbar where c.codtipom='" & TipoAlbaSeleccionado & "' group by 1"
     
     cad = cad & " ORDER BY "
     Select Case Orden
@@ -240,7 +282,7 @@ Dim IT As ListItem
     Case 4
         cad = cad & " nomclien " & IIf(Not Asc, "DESC", "") & ", codclien, numalbar  "
     Case 5
-        cad = cad & " nomdirec " & IIf(Not Asc, "DESC", "") & ", codclien, numalbar  "
+        cad = cad & " nomdirec " & IIf(Not Asc, "DESC", "") & ", referenc " & IIf(Not Asc, "DESC", "") & ", codclien, numalbar  "
     Case 6
         cad = cad & " nomforpa " & IIf(Not Asc, "DESC", "") & ", fechaalb, numalbar  "
     
@@ -254,11 +296,17 @@ Dim IT As ListItem
     miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lw1.ListItems.Add()
-        IT.Text = Format(miRsAux!NUmAlbar, "000000")
+        IT.Text = Format(miRsAux!Numalbar, "000000")
         IT.SubItems(1) = Format(miRsAux!FechaAlb, "dd/mm/yyyy")
         IT.SubItems(2) = Format(miRsAux!codClien, "00000")
         IT.SubItems(3) = miRsAux!NomClien
         IT.SubItems(4) = DBLet(miRsAux!nomdirec, "T")
+        If IT.SubItems(4) = "" Then
+            IT.SubItems(4) = DBLet(miRsAux!referenc, "T")
+        Else
+            IT.ListSubItems(4).ForeColor = vbBlue
+            IT.ListSubItems(4).ToolTipText = "obra: " & DBLet(miRsAux!CodDirec, "T")
+        End If
         IT.SubItems(5) = miRsAux!nomforpa
         IT.SubItems(6) = Format(DBLet(miRsAux!Base, "N"), FormatoImporte)
         
@@ -271,6 +319,14 @@ Dim IT As ListItem
             Marcado = Marcado + 1
             ImporteTot = ImporteTot + DBLet(miRsAux!Base, "N")
             IT.Checked = True
+        End If
+        
+        
+        
+        If miRsAux!Numalbar = Numalbar Then
+            IT.Selected = True
+            Set lw1.SelectedItem = IT
+            PonerFocoOBj lw1
         End If
         
         miRsAux.MoveNext
@@ -286,23 +342,25 @@ ECargaDatos:
 End Sub
 
 Private Sub cmdFra_Click()
-Dim NUmAlbar As String
+Dim Numalbar As String
+Dim vCli As CCliente
+
     If Combo1.ListIndex = 0 Then
         MsgBox "Seleccione banco", vbExclamation
         Exit Sub
     End If
     
-    NUmAlbar = ""
+    Numalbar = ""
     For NumRegElim = 1 To lw1.ListItems.Count
-        If lw1.ListItems(NumRegElim).Checked Then NUmAlbar = NUmAlbar & ", " & lw1.ListItems(NumRegElim).Text
+        If lw1.ListItems(NumRegElim).Checked Then Numalbar = Numalbar & ", " & lw1.ListItems(NumRegElim).Text
     Next
      
-    If NUmAlbar = "" Then
+    If Numalbar = "" Then
         MsgBox "Seleccione alguna albaran para facturar", vbExclamation
         Exit Sub
     End If
         
-    NUmAlbar = Mid(NUmAlbar, 2) 'quitamos la primera coma
+    Numalbar = Mid(Numalbar, 2) 'quitamos la primera coma
         
     If Text1.Text = Text1.Tag Then
         MsgBox "Seleccione fecha facturación", vbExclamation
@@ -317,8 +375,26 @@ Dim NUmAlbar As String
     End If
     
     
-    
-    
+    Set miRsAux = New ADODB.Recordset
+    cad = "Select codclien , nomclien from scaalb WHERE scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ") GROUP BY codclien"
+    Set vCli = New CCliente
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "OK"
+    While Not miRsAux.EOF
+        If Not vCli.LeerDatos(CStr(miRsAux!codClien)) Then
+            cad = ""
+        Else
+            If vCli.ClienteBloqueado Then
+                MsgBox "No se le puede realizar facturas : " & vbCrLf & "   -" & miRsAux!NomClien, vbExclamation
+                cad = "N"
+            End If
+        End If
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+    Set vCli = Nothing
+    If cad <> "OK" Then Exit Sub
     
     cad = vbCrLf & Replace(Me.Label2.Caption, "Selec", "Selecionados")
     cad = "Fecha factura: " & Text1.Text & vbCrLf & "Banco: " & Combo1.Text & cad & vbCrLf & vbCrLf & "¿Desea continuar con la facturación?"
@@ -326,10 +402,19 @@ Dim NUmAlbar As String
     
     
     
+    'Clientes BLOQUEADOS
+    cad = "scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ")"
+    
+
+    
+    
+    
+    
+    
     '------------------------------------------------------------------------------
     '  LOG de acciones.
     Set LOG = New cLOG
-    cad = "Albaranes: " & NUmAlbar
+    cad = "Albaranes: " & Numalbar
     LOG.Insertar 2, vUsu, cad
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
@@ -338,14 +423,14 @@ Dim NUmAlbar As String
     
     
     Screen.MousePointer = vbHourglass
-    cad = "scaalb.factursn=1  and scaalb.codtipom='ALV' AND scaalb.numalbar in (" & NUmAlbar & ")"
-    TraspasoAlbaranesFacturas "Select *  FROM  scaalb WHERE " & cad, cad, Text1.Text, Combo1.ItemData(Combo1.ListIndex), Nothing, Label2, True, "ALV", "|||", CByte(vParamAplic.NumCopiasFacturacion), True, False
+    cad = "scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ")"
+    TraspasoAlbaranesFacturas "Select *  FROM  scaalb WHERE " & cad, cad, Text1.Text, Combo1.ItemData(Combo1.ListIndex), Nothing, Label2, True, CStr(TipoAlbaSeleccionado), "|||", CByte(vParamAplic.NumCopiasFacturacion), True, False
     
     DoEvents
     Label2.Caption = "Leyendo BD"
     Label2.Refresh
     Espera 0.75
-    CargaDatos
+    CargaDatos -1
     Screen.MousePointer = vbDefault
     
     
@@ -360,26 +445,39 @@ Private Sub Combo1_Click()
     End If
 End Sub
 
-Private Sub Form_Activate()
-    If PrimeraVez Then
-        PrimeraVez = False
+Private Sub Combo2_Click()
+    If primeravez Then Exit Sub
+    If Combo2.ListIndex > 0 Then
+        TipoAlbaSeleccionado = "ALZ"
+        Me.Label1(0).ForeColor = vbRed
+    Else
+        TipoAlbaSeleccionado = "ALV"
+        Me.Label1(0).ForeColor = 8388608
+    End If
+    CargaDatos -1
+End Sub
+
+Private Sub Form_activate()
+    If primeravez Then
+        primeravez = False
         
-        CargaDatos
+        CargaDatos -1
                 
     End If
     
 End Sub
 
 Private Sub Form_Load()
-    PrimeraVez = True
+    primeravez = True
     Me.Icon = frmPpal.Icon
    ' Me.cmdFra.Picture = frmPpal.imgListComun.ListImages(5)
     Orden = 1
     Asc = True
-    
+    TipoAlbaSeleccionado = "ALV"
     CargarCombo_Tabla Me.Combo1, "sbanpr", "codbanpr", "nombanpr", , True
     Combo1.List(0) = "Seleccione banco...."
     Combo1.ListIndex = 0
+    Combo2.ListIndex = 0
     
     
     Text1.Tag = "Fecha factura"
@@ -391,20 +489,20 @@ Private Sub frmC_Selec(vFecha As Date)
     cad = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub imgCheck_Click(Index As Integer)
+Private Sub imgCheck_Click(index As Integer)
 
     
-    cad = IIf(Index = 0, "Marcar", "Desmarcar")
+    cad = IIf(index = 0, "Marcar", "Desmarcar")
     cad = cad & " los albaranes para facturar?"
     If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
     Screen.MousePointer = vbHourglass
-    cad = "UPDATE scaalb set factursn = " & IIf(Index = 0, "1", "0") & " WHERE codtipom = 'ALV'"
+    cad = "UPDATE scaalb set factursn = " & IIf(index = 0, "1", "0") & " WHERE codtipom = '" & TipoAlbaSeleccionado & "'"
     ejecutar cad, False
-    CargaDatos
+    CargaDatos -1
 End Sub
 
-Private Sub imgFecha_Click(Index As Integer)
+Private Sub imgFecha_Click(index As Integer)
     Set frmC = New frmCal
     frmC.Fecha = Now
     cad = ""
@@ -416,25 +514,58 @@ Private Sub imgFecha_Click(Index As Integer)
     End If
 End Sub
 
+Private Sub Label1_Click(index As Integer)
+    If index = 2 Then
+        If vUsu.Nivel <= 1 Then
+            If Combo2.ListCount = 1 Then
+                Combo2.AddItem "Presupuesto"
+                HaMostradoCanal2_elB = True
+            End If
+        End If
+    End If
+End Sub
+
 Private Sub lw1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.Index = Orden Then
+    If ColumnHeader.index = Orden Then
         Asc = Not Asc
     Else
         Asc = True
-        Orden = ColumnHeader.Index
+        Orden = ColumnHeader.index
     End If
-    CargaDatos
+    CargaDatos -1
 End Sub
 
-Private Sub lw1_ItemCheck(ByVal item As MSComctlLib.ListItem)
-    cad = "UPDATE scaalb set factursn = " & IIf(item.Checked, "1", "0") & " WHERE codtipom = 'ALV' AND numalbar = " & item.Text
+Private Sub lw1_DblClick()
+     Dim N As Long
+     
+     If lw1.ListItems.Count = 0 Then Exit Sub
+     If lw1.SelectedItem Is Nothing Then Exit Sub
+     N = Val(lw1.SelectedItem)
+     
+        Set frmAlbG = New frmFacEntAlbaranesGR
+                frmAlbG.hcoCodTipoM = IIf(Combo1.ListIndex > 0, "ALZ", "ALV")
+                frmAlbG.hcoCodMovim = lw1.SelectedItem.Text
+                frmAlbG.Show vbModal
+                Set frmAlbG = Nothing
+                    
+                    
+    Label2.Caption = "Leyendo BD"
+    Label2.Refresh
+    Espera 0.75
+    CargaDatos N
+    Screen.MousePointer = vbDefault
+                
+End Sub
+
+Private Sub lw1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
+    cad = "UPDATE scaalb set factursn = " & IIf(Item.Checked, "1", "0") & " WHERE codtipom = '" & TipoAlbaSeleccionado & "' AND numalbar = " & Item.Text
     
-    If item.Checked Then
+    If Item.Checked Then
         Marcado = Marcado + 1
-        ImporteTot = ImporteTot + ImporteFormateado(item.SubItems(6))
+        ImporteTot = ImporteTot + ImporteFormateado(Item.SubItems(6))
     Else
         Marcado = Marcado - 1
-        ImporteTot = ImporteTot - ImporteFormateado(item.SubItems(6))
+        ImporteTot = ImporteTot - ImporteFormateado(Item.SubItems(6))
     End If
     ejecutar cad, False
     Lbl

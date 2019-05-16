@@ -610,7 +610,7 @@ Dim Modo As Byte
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(vModo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim J As Integer
 
 '    J = 0
@@ -625,28 +625,28 @@ Dim J As Integer
 '        Next J
 '    End If
     Modo = vModo
-    B = (Modo = 2)
+    b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtAux(0).visible = Not B
-    txtAux(1).visible = Not B
-    txtAux(2).visible = Not B
-    txtAux(3).visible = Not B
-    txtAux(4).visible = Not B
+    Me.txtAux(0).visible = Not b
+    txtAux(1).visible = Not b
+    txtAux(2).visible = Not b
+    txtAux(3).visible = Not b
+    txtAux(4).visible = Not b
     If Me.DesdeTPV Then
-        txtAux(5).visible = Not B
+        txtAux(5).visible = Not b
     Else
-        txtAux(6).visible = Not B
+        txtAux(6).visible = Not b
     End If
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
-    DataGrid1.Enabled = B
+    cmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
+    DataGrid1.Enabled = b
     
         
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
      
     'Si estamos en insertar o modificar
     BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
@@ -665,15 +665,15 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = B
-    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(1).Enabled = b
+    Me.mnBuscar.Enabled = b
     'Ber Todos
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnVerTodos.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnVerTodos.Enabled = b
     
 
 End Sub
@@ -806,7 +806,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim CadB As String
 
     On Error Resume Next
@@ -1029,7 +1029,7 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " FROM  sartic ,salmac "
     If Me.DesdeTPV Then CadenaConsulta = CadenaConsulta & ", tmpinformes  "
     CadenaConsulta = CadenaConsulta & " WHERE "
-    If Me.DesdeTPV Then CadenaConsulta = CadenaConsulta & " codusu = " & vUsu.codigo & " AND "
+    If Me.DesdeTPV Then CadenaConsulta = CadenaConsulta & " codusu = " & vUsu.Codigo & " AND "
     CadenaConsulta = CadenaConsulta & " codalmac = " & parAlmacen & " AND sartic.codartic=salmac.codartic "
     If Me.DesdeTPV Then CadenaConsulta = CadenaConsulta & " AND sartic.codigiva=tmpinformes.codigo1 "
     
@@ -1079,17 +1079,17 @@ Dim C As String
 End Sub
 
 
-Private Sub mnExc_Click(Index As Integer)
-      If Index = 1 Then mnExc(1).Checked = Not mnExc(1).Checked
+Private Sub mnExc_Click(index As Integer)
+      If index = 1 Then mnExc(1).Checked = Not mnExc(1).Checked
 End Sub
 
 Private Sub mnLotes_Click()
         HacerToolbar 10
 End Sub
 
-Private Sub mnOrdenadoPor_Click(Index As Integer)
-        mnOrdenadoPor(0).Checked = Index = 0
-        mnOrdenadoPor(1).Checked = Index = 1
+Private Sub mnOrdenadoPor_Click(index As Integer)
+        mnOrdenadoPor(0).Checked = index = 0
+        mnOrdenadoPor(1).Checked = index = 1
 End Sub
 
 Private Sub mnSalir_Click()
@@ -1102,7 +1102,7 @@ Private Sub mnVerTodos_Click()
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    HacerToolbar Button.Index
+    HacerToolbar Button.index
 End Sub
 Private Sub HacerToolbar(Indice As Integer)
     Select Case Indice
@@ -1132,11 +1132,11 @@ End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim B As Boolean
+Dim b As Boolean
 Dim tots As String
 Dim cadSel As String
     
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     
     ' ---- [06/11/2009] [LAURA] : añadir la cantidad de stock
     cadSel = SQL
@@ -1176,7 +1176,7 @@ Dim cadSel As String
     ' ----
     arregla tots, DataGrid1, Me, 330
     
-    DataGrid1.Enabled = B
+    DataGrid1.Enabled = b
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
@@ -1190,12 +1190,12 @@ End Sub
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
 Dim Indice As Integer
     
-    If Button.Index = 10 Then
+    If Button.index = 10 Then
         Indice = 10 'TPV
     Else
-        If Button.Index = 8 Then
+        If Button.index = 8 Then
             Indice = 5
-        ElseIf Button.Index = 6 Then
+        ElseIf Button.index = 6 Then
             Indice = 2
         Else
             Indice = 1
@@ -1204,20 +1204,26 @@ Dim Indice As Integer
     HacerToolbar Indice
 End Sub
 
-Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+Private Sub txtAux_GotFocus(index As Integer)
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If Not (Index = 0 And KeyCode = 38) Then KEYdown KeyCode
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+    If Not (index = 0 And KeyCode = 38) Then KEYdown KeyCode
 End Sub
 
-Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
+    If index = 1 And KeyAscii = 13 Then
+        If Me.txtAux(index).Text <> "" Then
+            PonerFocoBtn Me.cmdAceptar
+            KeyAscii = 0
+        End If
+    End If
     KEYpress KeyAscii
 End Sub
 
-Private Sub txtAux_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+Private Sub txtAux_LostFocus(index As Integer)
+    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
     'If Index = 0 Then PonerFormatoEntero txtAux(Index)
 End Sub
 
@@ -1236,10 +1242,10 @@ End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 

@@ -405,8 +405,10 @@ Public vDevuelve As String 'Empipados los campos que devuelve
 'Cadena de conexión con la BD a la que hay que buscar
 Public vConexionGrid As Integer
 
+Public vDescendente As Boolean
+
 'Variables privadas
-Dim PrimeraVez As Boolean
+Dim Primeravez As Boolean
 Dim SQL As String
 
 'Las redimensionaremos
@@ -485,19 +487,19 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim vDes As String
-Dim i, J As Integer
+Dim I, J As Integer
 Dim V As String
 
 If adodc1.Recordset Is Nothing Then Exit Sub
 If adodc1.Recordset.EOF Then Exit Sub
 
-    i = 0
+    I = 0
     vDes = ""
     Do
-    J = i + 1
-    i = InStr(J, vDevuelve, "|")
-    If i > 0 Then
-        V = Mid(vDevuelve, J, i - J)
+    J = I + 1
+    I = InStr(J, vDevuelve, "|")
+    If I > 0 Then
+        V = Mid(vDevuelve, J, I - J)
         If V <> "" Then
             If IsNumeric(V) Then
                 If Val(V) <= TotalArray Then vDes = vDes & adodc1.Recordset(CabColumnas(Val(V))) & "|"
@@ -507,7 +509,7 @@ If adodc1.Recordset.EOF Then Exit Sub
 '            End If
         End If
     End If
-Loop Until i = 0
+Loop Until I = 0
 RaiseEvent Selecionado(vDes)
 Unload Me
 End Sub
@@ -554,8 +556,8 @@ End Sub
 
 Private Sub Form_Activate()
 Dim OK As Boolean
-    If PrimeraVez Then
-        PrimeraVez = False
+    If Primeravez Then
+        Primeravez = False
         Me.Refresh
         Screen.MousePointer = vbHourglass
         OK = ObtenerTamanyosArray
@@ -580,7 +582,7 @@ End Sub
 Private Sub Form_Load()
     Label4.visible = True
     Me.DataGrid1.Enabled = False
-    PrimeraVez = True
+    Primeravez = True
     Label1.Caption = vTitulo
     DbClick = True
     adodc1.password = vUsu.Passwd
@@ -590,35 +592,38 @@ Private Sub Form_Load()
         'Poner Visible el Frame y no Visible el Grid
         ConfiguraForm (1)
     End If
+    AscDesc = True
+    If vDescendente Then AscDesc = False
+    
 End Sub
 
 
 Private Function SeparaCampos() As Boolean
 Dim cad As String
 Dim Grupo As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim C As Integer 'Contrador dentro del array
 
     SeparaCampos = False
-    i = 0
+    I = 0
     C = 0
     Do
-        J = i + 1
-        i = InStr(J, vCampos, "·")
-        If i > 0 Then
-            Grupo = Mid(vCampos, J, i - J)
+        J = I + 1
+        I = InStr(J, vCampos, "·")
+        If I > 0 Then
+            Grupo = Mid(vCampos, J, I - J)
             'Y en la martriz
             InsertaGrupo Grupo, C
             C = C + 1
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     SeparaCampos = True
 End Function
 
 
 Private Sub InsertaGrupo(Grupo As String, Contador As Integer)
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim cad As String
 
@@ -686,7 +691,7 @@ End Sub
 
 
 Private Function ObtenerTamanyosArray() As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Grupo As String
 
@@ -695,8 +700,8 @@ Dim Grupo As String
     TotalArray = -1
     J = 0
     Do
-        i = J + 1
-        J = InStr(i, vCampos, "·")
+        I = J + 1
+        J = InStr(I, vCampos, "·")
         If J > 0 Then TotalArray = TotalArray + 1
     Loop Until J = 0
     If TotalArray < 0 Then Exit Function
@@ -713,23 +718,23 @@ End Function
 
 Private Sub CargaGrid()
 Dim cad As String, Orden As String
-Dim i As Integer
+Dim I As Integer
 Dim anc As Single
 On Error GoTo ECargaGrid
 
     'On Error GoTo ECargaGRid '##QUITAR
     'Generamos SQL
     cad = ""
-    For i = 0 To TotalArray
+    For I = 0 To TotalArray
         If cad <> "" Then cad = cad & ", "
-        If (InStr(CabColumnas(i), "if") > 0) Or (InStr(CabColumnas(i), "case") > 0) Then
-            cad = cad & CabColumnas(i)
+        If (InStr(CabColumnas(I), "if") > 0) Or (InStr(CabColumnas(I), "case") > 0) Then
+            cad = cad & CabColumnas(I)
         Else
             'Si no he indicado la tabla, NO la pongo, ni pongo el punto(.)
-            If CabTablas(i) <> "" Then cad = cad & CabTablas(i) & "."
-            cad = cad & CabColumnas(i)
+            If CabTablas(I) <> "" Then cad = cad & CabTablas(I) & "."
+            cad = cad & CabColumnas(I)
         End If
-    Next i
+    Next I
     cad = "SELECT " & cad & " FROM " & vTabla
     If vSQL <> "" Then
         cad = cad & " WHERE " & vSQL
@@ -761,8 +766,8 @@ On Error GoTo ECargaGrid
     'antes:
     ' cad = cad & " ORDER BY " & CabColumnas(vselElem)
     Orden = CabColumnas(vselElem)
-    i = InStr(1, Orden, " as ")
-    If i > 0 Then Orden = Mid(Orden, i + 4)
+    I = InStr(1, Orden, " as ")
+    If I > 0 Then Orden = Mid(Orden, I + 4)
     cad = cad & " ORDER BY " & Orden
     If Not AscDesc Then cad = cad & " DESC"
     '--------------------------------------------------------
@@ -785,18 +790,18 @@ On Error GoTo ECargaGrid
         'Cargamos el grid
         anc = DataGrid1.Width - 640
         
-        For i = 0 To TotalArray
-            DataGrid1.Columns(i).Caption = Cabeceras(i)
-            If FormatoCampo(i) <> "" Then
-                DataGrid1.Columns(i).NumberFormat = FormatoCampo(i)
-                If InStr(1, FormatoCampo(i), ".") Then DataGrid1.Columns(i).Alignment = dbgRight
+        For I = 0 To TotalArray
+            DataGrid1.Columns(I).Caption = Cabeceras(I)
+            If FormatoCampo(I) <> "" Then
+                DataGrid1.Columns(I).NumberFormat = FormatoCampo(I)
+                If InStr(1, FormatoCampo(I), ".") Then DataGrid1.Columns(I).Alignment = dbgRight
             End If
-            If CabAncho(i) = 0 Then
-                DataGrid1.Columns(i).visible = False
+            If CabAncho(I) = 0 Then
+                DataGrid1.Columns(I).visible = False
             Else
-                DataGrid1.Columns(i).Width = anc * (CabAncho(i) / 100)
+                DataGrid1.Columns(I).Width = anc * (CabAncho(I) / 100)
             End If
-        Next i
+        Next I
     
          'Habilitamos el text1 para que escriban
         DataGrid1.Enabled = True
@@ -809,9 +814,9 @@ On Error GoTo ECargaGrid
             
              '---- Añade: LAura 08/06/2005
             'Si hay if/case en nombre columna cogemos el renombrado: if(colum=x,,) as colum
-            i = InStr(1, cad, " as ")
-            If i > 0 Then
-                cad = Mid(cad, i + 4)
+            I = InStr(1, cad, " as ")
+            If I > 0 Then
+                cad = Mid(cad, I + 4)
                 cad = Trim(cad)
             End If
             
@@ -846,15 +851,15 @@ End Sub
 
 Private Sub CargaFrame()
 Dim cad As String
-Dim i As Integer
+Dim I As Integer
     
     frameBusqueda.visible = True
-    For i = 0 To TotalArray
-        Option1(i).Caption = Cabeceras(i)
-    Next i
-    i = 0
-    Option1(i).Value = True
-    lblBusqueda.Caption = Cabeceras(i)
+    For I = 0 To TotalArray
+        Option1(I).Caption = Cabeceras(I)
+    Next I
+    I = 0
+    Option1(I).Value = True
+    lblBusqueda.Caption = Cabeceras(I)
     txtBusqueda.Text = ""
     txtBusqueda.SetFocus
     

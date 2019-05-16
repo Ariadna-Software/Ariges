@@ -162,6 +162,10 @@ Private Function InsertarLineasHistorico(cadWhere As String) As Boolean
 Dim SQL As String
 Dim Aux As String
 Dim EsAlbaran As Boolean
+
+
+
+
 On Error Resume Next
 
 
@@ -170,7 +174,7 @@ On Error Resume Next
       Case "PEV" 'pedidos ventas a clientes
         NomTablaLin = "sliped"
         NomTablaLinH = "slhped"
-        SQL = " SELECT scaped.numpedcl,scaped.fecpedcl,sliped.numlinea,sliped.codalmac,sliped.codartic,sliped.nomartic,sliped.ampliaci,sliped.cantidad,servidas,numbultos,precioar,dtoline1,dtoline2,importel,origpre,numlote,codccost,codtipor,codcapit,solicitadas "
+        SQL = " SELECT scaped.numpedcl,scaped.fecpedcl,sliped.numlinea,sliped.codalmac,sliped.codartic,sliped.nomartic,sliped.ampliaci,sliped.cantidad,servidas,numbultos,precioar,dtoline1,dtoline2,importel,origpre,numlote,codccost,codtipor,codcapit,solicitadas,idL "
         SQL = SQL & " FROM scaped INNER JOIN sliped on scaped.numpedcl=sliped.numpedcl "
         SQL = SQL & " WHERE " & cadWhere
         '25-JUN: pvpInferior
@@ -178,7 +182,7 @@ On Error Resume Next
         NomTablaLin = "slialb"
         NomTablaLinH = "slhalb"
         SQL = " SELECT scaalb.codtipom,scaalb.numalbar,scaalb.fechaalb,slialb.numlinea,slialb.codalmac,slialb.codartic,slialb.nomartic,slialb.ampliaci,slialb.cantidad,slialb.numbultos,precioar,dtoline1,dtoline2,importel,origpre ,codproveX,numlote,codccost"
-        SQL = SQL & ",codtipor,codcapit ,precoste,slialb.codtraba,pvpInferior,comisionagente "
+        SQL = SQL & ",codtipor,codcapit ,precoste,slialb.codtraba,pvpInferior,comisionagente,idL,ordenlin "
         SQL = SQL & " FROM scaalb INNER JOIN slialb on scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
         SQL = SQL & " WHERE " & cadWhere
         EsAlbaran = True

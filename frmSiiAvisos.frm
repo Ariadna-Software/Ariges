@@ -14,9 +14,36 @@ Begin VB.Form frmSiiAvisos
    ScaleWidth      =   11580
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton cmdContabilizar 
+      Caption         =   "Contabilizar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   240
+      TabIndex        =   6
+      Top             =   7320
+      Visible         =   0   'False
+      Width           =   1575
+   End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   10080
       TabIndex        =   2
@@ -146,7 +173,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim PrimeraVez As Boolean
+Dim Primeravez As Boolean
 Dim SQL As String
 Dim AgrupaTickets As Boolean
 
@@ -158,8 +185,15 @@ Private Sub cmdCancelar_Click()
     Unload Me
 End Sub
 
+Private Sub cmdContabilizar_Click()
+     AbrirListado 223
+     Screen.MousePointer = vbHourglass
+    CargaFacturas
+    Screen.MousePointer = vbDefault
+End Sub
+
 Private Sub Combo1_Click()
-    If PrimeraVez Then Exit Sub
+    If Primeravez Then Exit Sub
     If Combo1.Tag = Combo1.ListIndex Then Exit Sub
     
     CargaFacturas
@@ -168,8 +202,8 @@ Private Sub Combo1_Click()
 End Sub
 
 Private Sub Form_Activate()
-    If PrimeraVez Then
-        PrimeraVez = False
+    If Primeravez Then
+        Primeravez = False
         CargaFacturas
         
     End If
@@ -178,7 +212,7 @@ End Sub
 
 Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
-    PrimeraVez = True
+    Primeravez = True
     Set ListView1.SmallIcons = frmPpal.ImgListPpal
         
         
@@ -200,6 +234,7 @@ Private Sub Form_Load()
         Caption = "Avisos SII"
     Else
         Caption = "Pendiente contabilidad"
+        If vParamAplic.NumeroInstalacion = vbFenollar Then cmdContabilizar.visible = True
     End If
 End Sub
 
@@ -229,9 +264,9 @@ Dim Todas As Byte
 End Sub
 
 Private Sub CargaListView(Cli As Boolean)
-Dim IT As ListItem
+Dim It As ListItem
 Dim FechaLimite As Date
-Dim i As Byte
+Dim I As Byte
 Dim Color As Long
 
     On Error GoTo eCargaListView
@@ -243,19 +278,19 @@ Dim Color As Long
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         NumRegElim = NumRegElim + 1
-        Set IT = ListView1.ListItems.Add(, "C" & Format(Now, "yymmdd" & Format(NumRegElim, "0000")))
+        Set It = ListView1.ListItems.Add(, "C" & Format(Now, "yymmdd" & Format(NumRegElim, "0000")))
         
         
-        IT.Text = Format(miRsAux!Fecha, "dd/mm/yyyy")
+        It.Text = Format(miRsAux!Fecha, "dd/mm/yyyy")
  
         
-        IT.SubItems(1) = miRsAux!Factura
-        IT.SubItems(2) = miRsAux!Nombre
+        It.SubItems(1) = miRsAux!Factura
+        It.SubItems(2) = miRsAux!Nombre
         
         
-        IT.SubItems(3) = Format(miRsAux!Importe, FormatoImporte)
+        It.SubItems(3) = Format(miRsAux!Importe, FormatoImporte)
         
-        If Not Cli Then IT.SmallIcon = 11
+        If Not Cli Then It.SmallIcon = 11
                     
         If vParamAplic.SII_Tiene Then
             Color = -1
@@ -266,13 +301,13 @@ Dim Color As Long
             End If
                 
             If Color <> -1 Then
-                IT.ForeColor = Color
-                For i = 1 To IT.ListSubItems.Count
-                    IT.ListSubItems(i).ForeColor = Color
+                It.ForeColor = Color
+                For I = 1 To It.ListSubItems.Count
+                    It.ListSubItems(I).ForeColor = Color
                 Next
             End If
         End If
-        IT.SubItems(4) = Format(miRsAux!Fecha, "yyyymmdd") & Val(Not Cli)
+        It.SubItems(4) = Format(miRsAux!Fecha, "yyyymmdd") & Val(Not Cli)
         miRsAux.MoveNext
     Wend
     miRsAux.Close

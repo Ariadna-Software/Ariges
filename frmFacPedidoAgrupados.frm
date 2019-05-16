@@ -332,13 +332,13 @@ Begin VB.Form frmFacPedidoAgrupados
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmFacPedidoAgrupados.frx":00AB
-      Height          =   7755
+      Height          =   7995
       Left            =   120
       TabIndex        =   5
       Top             =   1080
-      Width           =   16695
-      _ExtentX        =   29448
-      _ExtentY        =   13679
+      Width           =   16815
+      _ExtentX        =   29660
+      _ExtentY        =   14102
       _Version        =   393216
       AllowUpdate     =   -1  'True
       AllowArrows     =   -1  'True
@@ -479,7 +479,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-
+Public Cliente As Long
 Private WithEvents frmC3 As frmFacClientes3
 Attribute frmC3.VB_VarHelpID = -1
 Private WithEvents frmFP As frmFacFormasPago
@@ -496,7 +496,7 @@ Dim CadenaConsulta As String
 Dim gridCargado As Boolean 'Si el DataGrid ya tiene todos los Datos cargados.
                            'Para el RowColChange, si el grid no esta totalmente cargado el CargaTxtAux da error.
 
-Dim Primeravez As Boolean
+Dim primeravez As Boolean
 Dim Orden As Integer
 Dim Desce As Boolean
 
@@ -508,7 +508,8 @@ Private ColAlbaran As Collection
 
 Private Sub cmdAceptar_Click()
 Dim cad As String
-Dim i As Integer
+Dim I As Integer
+Dim TodoOk As Boolean
 
     On Error GoTo Error1
     
@@ -516,20 +517,25 @@ Dim i As Integer
    
     Set ColAlbaran = New Collection
     If PrimerasComprobaciones Then
-        For i = 1 To ColAlbaran.Count
+        TodoOk = True
+        For I = 1 To ColAlbaran.Count
             conn.BeginTrans
-            lblIndicador.Caption = "(" & i & "/" & ColAlbaran.Count & ") ..." & Mid(ColAlbaran.Item(i), 1, 0)
+            lblIndicador.Caption = "(" & I & "/" & ColAlbaran.Count & ") ..." & Mid(ColAlbaran.Item(I), 1, 0)
             lblIndicador.Refresh
-            If RealizarAlbaran(ColAlbaran.Item(i)) Then
+            If RealizarAlbaran(ColAlbaran.Item(I)) Then
                 conn.CommitTrans
-                CargaGrid
+                
             Else
                 conn.RollbackTrans
+                TodoOk = False
             End If
             lblIndicador.Caption = "actualizando"
             lblIndicador.Refresh
             Espera 1
         Next
+        
+        CargaGrid
+       
     End If
     CadenaConsulta = ""
     
@@ -539,12 +545,19 @@ Error1:
     Set ColAlbaran = Nothing
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
     lblIndicador.Caption = ""
+     If TodoOk Then
+            MsgBox "Proceso finalizado", vbInformation
+            Unload Me
+        End If
 End Sub
 
 Private Sub cmdCancelar_Click()
     On Error GoTo ECancelar
     
-     
+     If txtAux.visible Then
+        txtAux.visible = False
+        Exit Sub
+    End If
 
     lblInfInv.Caption = ""
     Unload Me
@@ -579,7 +592,24 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     End If
 End Sub
 
-Private Sub Form_Activate()
+Private Sub DataGrid1_Scroll(Cancel As Integer)
+    If txtAux.visible Then Cancel = 1
+End Sub
+
+Private Sub Form_activate()
+
+    If primeravez Then
+       
+        If Cliente >= 0 Then
+            
+            Text1(0).Text = Format(Cliente, "0000")
+            CadenaConsulta = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(0).Text)
+            Text2(0).Text = CadenaConsulta
+            CargaGrid
+                
+        End If
+    End If
+
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -594,13 +624,13 @@ Private Sub Form_Load()
     Next kCampo
 
     LimpiarCampos   'Limpia los campos TextBox
-    Primeravez = True
+    primeravez = True
     
     Text1(2).Text = Format(Now, "dd/mm/yyyy")
     PonerModo 1
     Combo1.ListIndex = 0
     Orden = 0
-    CargaGrid
+    If Cliente < 0 Then CargaGrid
         
         
     
@@ -612,7 +642,7 @@ End Sub
 
 
 Private Sub CargaGrid()
-Dim i As Byte
+Dim I As Byte
 Dim SQL As String
 On Error GoTo ECarga
 
@@ -624,9 +654,9 @@ On Error GoTo ECarga
     
     
     SQL = MontaSQLCarga()
-    CargaGridGnral DataGrid1, Me.Data1, SQL, Primeravez, 360
+    CargaGridGnral DataGrid1, Me.Data1, SQL, primeravez, 360
     
-    Primeravez = False
+    primeravez = False
         
     'Cod. Articulo
     DataGrid1.Columns(0).Caption = "NºPed."
@@ -638,46 +668,46 @@ On Error GoTo ECarga
     
     DataGrid1.Columns(2).visible = False
     
-    i = 2
-    DataGrid1.Columns(i + 1).Caption = "Articulo"
-    DataGrid1.Columns(i + 1).Width = 2050
+    DataGrid1.Columns(3).Caption = "Referencia"
+    DataGrid1.Columns(3).Width = 2250
+   
+    
+    I = 3
+    DataGrid1.Columns(I + 1).Caption = "Articulo"
+    DataGrid1.Columns(I + 1).Width = 1450
 
-    DataGrid1.Columns(i + 2).Caption = "Descripcion"
-    DataGrid1.Columns(i + 2).Width = 4500
+    DataGrid1.Columns(I + 2).Caption = "Descripcion"
+    DataGrid1.Columns(I + 2).Width = 4300
        
     
-    DataGrid1.Columns(i + 3).Caption = "Solicitadas"
-    DataGrid1.Columns(i + 3).Width = 1250
+    DataGrid1.Columns(I + 3).Caption = "Solicitadas"
+    DataGrid1.Columns(I + 3).Width = 1250
     
-    DataGrid1.Columns(i + 4).Caption = "Pdtes"
-    DataGrid1.Columns(i + 4).Width = 1260
-    
-    
-    DataGrid1.Columns(i + 5).Caption = "Precio"
-    DataGrid1.Columns(i + 5).Width = 1400
-    
-    DataGrid1.Columns(i + 6).Caption = "Servir"
-    DataGrid1.Columns(i + 6).Width = 1300
+    DataGrid1.Columns(I + 4).Caption = "Pdtes"
+    DataGrid1.Columns(I + 4).Width = 1260
     
     
-    DataGrid1.Columns(i + 7).Caption = "Resto"
-    DataGrid1.Columns(i + 7).Width = 1300
+    DataGrid1.Columns(I + 5).Caption = "Servir"
+    DataGrid1.Columns(I + 5).Width = 1300
     
     
-    DataGrid1.Columns(i + 8).Caption = "   P"
-    DataGrid1.Columns(i + 8).Width = 600
+    DataGrid1.Columns(I + 6).Caption = "Resto"
+    DataGrid1.Columns(I + 6).Width = 1300
+    
+    
+    DataGrid1.Columns(I + 7).Caption = " P"
+    DataGrid1.Columns(I + 7).Width = 600
     
     
     
-    For i = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(i).AllowSizing = False
-        DataGrid1.Columns(i).Locked = True
-        If i > 4 Then
-            DataGrid1.Columns(i).Alignment = dbgRight
-            DataGrid1.Columns(i).NumberFormat = FormatoCantidad
+    For I = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(I).AllowSizing = False
+        DataGrid1.Columns(I).Locked = True
+        If I > 5 Then
+            DataGrid1.Columns(I).Alignment = dbgRight
+            DataGrid1.Columns(I).NumberFormat = FormatoCantidad
         End If
-    Next i
-    DataGrid1.Columns(7).NumberFormat = FormatoPrecio
+    Next I
     DataGrid1.ScrollBars = dbgAutomatic
     gridCargado = True
 ECarga:
@@ -750,13 +780,13 @@ Private Sub frmFP_DatoSeleccionado(CadenaSeleccion As String)
     CadenaConsulta = CadenaSeleccion
 End Sub
 
-Private Sub imgBuscar_Click(Index As Integer)
+Private Sub imgBuscar_Click(index As Integer)
 
  
     Screen.MousePointer = vbHourglass
-    imgBuscar(0).Tag = Index
+    imgBuscar(0).Tag = index
     CadenaConsulta = ""
-    Select Case Index
+    Select Case index
         Case 0 'Codigo Almacen
             Set frmC3 = New frmFacClientes3
             frmC3.DatosADevolverBusqueda = "0|1|"
@@ -769,10 +799,10 @@ Private Sub imgBuscar_Click(Index As Integer)
             Set frmFP = Nothing
     End Select
     If CadenaConsulta <> "" Then
-        Text1(Index).Text = RecuperaValor(CadenaConsulta, 1)
-        Text2(Index).Text = RecuperaValor(CadenaConsulta, 2)
+        Text1(index).Text = RecuperaValor(CadenaConsulta, 1)
+        Text2(index).Text = RecuperaValor(CadenaConsulta, 2)
         CadenaConsulta = ""
-        If Index = 0 Then
+        If index = 0 Then
             Screen.MousePointer = vbHourglass
             txtAux.Text = ""
             Text1_LostFocus 0
@@ -785,7 +815,7 @@ Private Sub imgBuscar_Click(Index As Integer)
 End Sub
 
 
-Private Sub imgFecha_Click(Index As Integer)
+Private Sub imgFecha_Click(index As Integer)
     Screen.MousePointer = vbHourglass
    Set frmF = New frmCal
    frmF.Fecha = Now
@@ -800,35 +830,38 @@ Private Sub imgFecha_Click(Index As Integer)
    
 End Sub
 
-Private Sub Label1_Click(Index As Integer)
-    If Index = 2 Then
+Private Sub Label1_Click(index As Integer)
+    If index = 2 Then
         If vUsu.Nivel <= 1 Then
-            If Combo1.ListCount = 1 Then Combo1.AddItem "Presupuesto"
+            If Combo1.ListCount = 1 Then
+                Combo1.AddItem "Presupuesto"
+                HaMostradoCanal2_elB = True
+            End If
         End If
     End If
 End Sub
 
-Private Sub Text1_GotFocus(Index As Integer)
-    ConseguirFoco Text1(Index), 3
+Private Sub Text1_GotFocus(index As Integer)
+    ConseguirFoco Text1(index), 3
 End Sub
 
 
-Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
-Private Sub Text1_LostFocus(Index As Integer)
+Private Sub Text1_LostFocus(index As Integer)
 Dim campo As String
 Dim tabla As String
 
-    If Not PerderFocoGnral(Text1(Index), 3) Then Exit Sub
+    If Not PerderFocoGnral(Text1(index), 3) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -836,14 +869,14 @@ Dim tabla As String
     
     
     
-    If Index < 2 Then
-        If Text1(Index).Text = "" Then
-            Text2(Index).Text = ""
+    If index < 2 Then
+        If Text1(index).Text = "" Then
+            Text2(index).Text = ""
         Else
-            If Index = 1 Then
+            If index = 1 Then
                 campo = "nomforpa"
                 tabla = "sforpa"
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, tabla, campo)
+                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, tabla, campo)
                 
             
             
@@ -852,24 +885,24 @@ Dim tabla As String
                 campo = "nomclien"
                 tabla = "sclien"
                 CadenaConsulta = "codforpa"
-                Text2(Index).Text = DevuelveDesdeBD(conAri, campo, tabla, "codclien", Text1(Index).Text, "N", CadenaConsulta)
-                If Text2(Index).Text <> "" Then
+                Text2(index).Text = DevuelveDesdeBD(conAri, campo, tabla, "codclien", Text1(index).Text, "N", CadenaConsulta)
+                If Text2(index).Text <> "" Then
                     Text1(1).Text = CadenaConsulta
                     CadenaConsulta = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", CadenaConsulta)
                     Text2(1).Text = CadenaConsulta
                 End If
             End If
             
-            If Text1(Index).Text <> "" And Text2(Index).Text = "" Then
-                Text1(Index).Text = ""
-                If Index = 0 Then PonerFoco Text1(Index)
+            If Text1(index).Text <> "" And Text2(index).Text = "" Then
+                Text1(index).Text = ""
+                If index = 0 Then PonerFoco Text1(index)
             Else
-                If Index = 0 Then CargaGrid
+                If index = 0 Then CargaGrid
             End If
             
         End If
     Else
-        PonerFormatoFecha Text1(Index)
+        PonerFormatoFecha Text1(index)
     End If
 
 End Sub
@@ -940,7 +973,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte
+Dim I As Byte
 Dim b As Boolean
        
     
@@ -952,9 +985,9 @@ Dim b As Boolean
     
     b = True
     
-    For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
-    Next i
+    For I = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(I).Enabled = b
+    Next I
 
 
 
@@ -981,8 +1014,8 @@ Private Function MontaSQLCarga() As String
 '--------------------------------------------------------------------
 Dim SQL As String
 Dim miOrden As String
-
-    SQL = "select sliped.numpedcl,fecpedcl,numlinea,codartic,nomartic,solicitadas,cantidad,round((importel/cantidad),4) precio ,servidas,"
+    '                                                                                           round((importel/cantidad),4) precio ,
+    SQL = "select sliped.numpedcl,fecpedcl,numlinea,referenc,codartic,nomartic,solicitadas,cantidad,servidas,"
     SQL = SQL & " cantidad - servidas Pendiente, if(servidas>0 ,'S','') ped"
     SQL = SQL & " from sliped,scaped where sliped.numpedcl=scaped.numpedcl and cerrado=0 and cantidad >0 AND "
     
@@ -1037,8 +1070,8 @@ Dim canti As Currency
             
         Else
             If canti > Data1.Recordset!cantidad Then
-                MsgBox "No puede servir mas cantidad de la que falta", vbExclamation
-                   DatosOk = False
+                MsgBox "Cantidad superior a la pendiente", vbExclamation
+                 '  DatosOk = False
             End If
         End If
         If Not DatosOk Then txtAux.Text = ""
@@ -1064,7 +1097,7 @@ Dim ADonde As String
 
     ADonde = "Modificando datos de Inventario (Tabla: sinven)."
     SQL = "UPDATE sliped Set servidas = " & DBSet(canti, "N")
-    SQL = SQL & " WHERE numpedcl =" & Data1.Recordset!numpedcl
+    SQL = SQL & " WHERE numpedcl =" & Data1.Recordset!NumPedcl
     SQL = SQL & " AND numlinea =" & Data1.Recordset!numlinea
     conn.Execute SQL
     
@@ -1124,21 +1157,34 @@ Dim A_Servir As Currency
 Dim NuevoAlbaran As String
 Dim NumpedPed As String
 Dim RN As ADODB.Recordset
-
+Dim C1 As Currency
+Dim PedidosArticulosdistintos As String
+Dim vCli As CCliente
 
 On Error GoTo ePrimerasComprobaciones
     PrimerasComprobaciones = False
     
     
+    If Text1(0).Text = "" Then Exit Function
     
     
+    CadenaConsulta = ""
+    Set vCli = New CCliente
+    If vCli.LeerDatos(Text1(0).Text) Then
+        If vCli.ClienteBloqueado Then CadenaConsulta = "N"
+    Else
+        MsgBox "Error leyendo cliente", vbExclamation
+        CadenaConsulta = "N"
+    End If
+    Set vCli = Nothing
     
+    If CadenaConsulta <> "" Then Exit Function
     
     CadenaConsulta = "scaped.numpedcl=Sliped.numpedcl AND cantidad>0 AND codclien = " & Text1(0).Text & " AND 1"
     CadenaConsulta = DevuelveDesdeBD(conAri, "sum(servidas)", "scaped,sliped", CadenaConsulta, "1")
     If CadenaConsulta = "" Then CadenaConsulta = "0"
     
-    If Val(CadenaConsulta) = 0 Then
+    If CCur(CadenaConsulta) = 0 Then
         MsgBox "Ningun datos seleccionado para servir", vbExclamation
         Exit Function
     End If
@@ -1173,12 +1219,39 @@ On Error GoTo ePrimerasComprobaciones
         Exit Function
     End If
     
-    
-    
-    Aux = "select coddirec,referenc from scaped,sliped WHERE scaped.numpedcl=Sliped.numpedcl AND codclien = " & Text1(0).Text & " AND cantidad>0 AND servidas>0"
-    Aux = Aux & " group by 1,2"
-    Set RN = New ADODB.Recordset
     Set miRsAux = New ADODB.Recordset
+    
+    
+    PedidosArticulosdistintos = ""
+    Aux = "scaped.numpedcl=Sliped.numpedcl AND servidas>0 AND codclien = " & Text1(0).Text & " AND 1"
+    Aux = "Select scaped.numpedcl from scaped,sliped WHERE " & Aux & "  GROUP BY scaped.numpedcl"
+    miRsAux.Open Aux, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Aux = "0"
+    While Not miRsAux.EOF
+        Aux = Val(Aux) + 1
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    If Val(Aux) > 0 Then PedidosArticulosdistintos = vbCrLf & "Pedidos: " & Aux
+             
+    
+    Aux = "scaped.numpedcl=Sliped.numpedcl AND servidas>0 AND codclien = " & Text1(0).Text & " AND 1"
+    Aux = "Select codartic from scaped,sliped WHERE " & Aux & "  GROUP BY codartic"
+    miRsAux.Open Aux, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Aux = "0"
+    While Not miRsAux.EOF
+        Aux = Val(Aux) + 1
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    If Val(Aux) > 0 Then PedidosArticulosdistintos = PedidosArticulosdistintos & vbCrLf & "Articulos: " & Aux
+    
+    
+    
+    
+    Aux = "select coddirec,coalesce(referenc,'') referenc,codagent from scaped,sliped WHERE scaped.numpedcl=Sliped.numpedcl AND codclien = " & Text1(0).Text & " AND cantidad>0 AND servidas>0"
+    Aux = Aux & " group by 1,2,3"
+    Set RN = New ADODB.Recordset
     NuevoAlbaran = "-1"
     RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RN.EOF
@@ -1190,12 +1263,15 @@ On Error GoTo ePrimerasComprobaciones
         Else
             Aux = Aux & "= " & RN!CodDirec
         End If
-        Aux = Aux & " AND referenc "
+        Aux = Aux & " AND coalesce(referenc ,'')"
         If IsNull(RN!referenc) Then
             Aux = Aux & " is null"
         Else
             Aux = Aux & " = " & DBSet(RN!referenc, "T", "N")
         End If
+        
+        Aux = Aux & " AND codagent =" & RN!CodAgent
+        
         Aux = Aux & " ORDER BY scaped.numpedcl,numlinea"
         
         
@@ -1205,7 +1281,7 @@ On Error GoTo ePrimerasComprobaciones
                 
             
       
-            If InStr(1, NumpedPed, Format(miRsAux!numpedcl, "000000")) = 0 Then NumpedPed = NumpedPed & ", " & Format(miRsAux!numpedcl, "000000")
+            If InStr(1, NumpedPed, Format(miRsAux!NumPedcl, "000000")) = 0 Then NumpedPed = NumpedPed & ", " & Format(miRsAux!NumPedcl, "000000")
            
             A_Servir = A_Servir + miRsAux!servidas
             
@@ -1218,8 +1294,26 @@ On Error GoTo ePrimerasComprobaciones
     Wend
     RN.Close
     
-    Aux = "Albaranes a generar: " & Format(ColAlbaran.Count, "000") & vbCrLf
-    Aux = Aux & "Unidades totales a servir: " & Format(A_Servir, FormatoCantidad) & vbCrLf
+    Aux = "select codalmac,sliped.codartic,sliped.nomartic,sum(servidas) Cuantas from scaped,sliped,sartic "
+    Aux = Aux & " WHERE scaped.numpedcl=Sliped.numpedcl AND sliped.codartic=sartic.codartic AND artvario=0 AND codclien = " & Text1(0).Text & " AND cantidad>0 AND servidas>0 GROUP BY 1,2"
+    RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Aux = ""
+    While Not RN.EOF
+        NuevoAlbaran = "codalmac = " & RN!codAlmac & " AND codartic "
+        NuevoAlbaran = DevuelveDesdeBD(conAri, "canstock", "salmac", NuevoAlbaran, RN!codArtic, "T")
+        C1 = NuevoAlbaran
+        If DBLet(RN!cuantas, "N") > 0 Then
+            If RN!cuantas > C1 Then Aux = Aux & "  -" & RN!NomArtic & "  St: " & C1 & " Pd:" & RN!cuantas & vbCrLf
+        End If
+        
+        RN.MoveNext
+    Wend
+    RN.Close
+    
+    If Aux <> "" Then Aux = "STOCKS insuficiente" & vbCrLf & Aux & vbCrLf
+    Aux = Aux & "Albaranes a generar: " & Format(ColAlbaran.Count, "000") & vbCrLf & vbCrLf & vbCrLf
+    Aux = Aux & PedidosArticulosdistintos
+    Aux = Aux & vbCrLf & "Unidades totales a servir: " & Format(A_Servir, FormatoCantidad) & vbCrLf
     
     
     If Combo1.ListIndex = 1 Then Aux = Aux & vbCrLf & vbCrLf & "***** CANAL ******"
@@ -1248,6 +1342,7 @@ Dim linea As Integer
 Dim vCStock As CStock
 Dim vSQL As String
 Dim PesoAlbaran As Currency
+Dim Incrementa As Boolean
 
     On Error GoTo eRealizarAlbaran
     RealizarAlbaran = False
@@ -1277,13 +1372,25 @@ Dim PesoAlbaran As Currency
         'Comprobar si mientras tanto se incremento el contador de Pedidos
         'para ello vemos si existe una oferta con ese contador y si existe la incrementamos
         Do
-            NumAlb = vTipoMov.ConseguirContador(codtipom)
+        
+            NumAlb = -1
+            Incrementa = True
+            If vParamAplic.NumeroInstalacion = vbFenollar Then
+                devuelve = BuscaHueco(codtipom)
+                If devuelve <> "" Then
+                    NumAlb = Val(devuelve)
+                    Incrementa = False
+                End If
+            End If
+            If NumAlb <= 0 Then devuelve = vTipoMov.ConseguirContador(codtipom)
             devuelve = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", codtipom, "T", , "numalbar", CStr(NumAlb), "N")
             If devuelve <> "" Then
                 'Ya existe el contador incrementarlo
                 Existe = True
-                vTipoMov.IncrementarContador (codtipom)
-                NumAlb = vTipoMov.ConseguirContador(codtipom)
+                If Incrementa Then
+                    vTipoMov.IncrementarContador (codtipom)
+                    NumAlb = vTipoMov.ConseguirContador(codtipom)
+                End If
             Else
                 Existe = False
             End If
@@ -1367,13 +1474,13 @@ Dim PesoAlbaran As Currency
 
     
         vSQL = "INSERT INTO slialb (codtipom,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,"
-        vSQL = vSQL & "cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre,codprovex,numlote,codccost) "
+        vSQL = vSQL & "cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre,codprovex,numlote,codccost,idL) "
         vSQL = vSQL & " VALUES('" & codtipom & "', " & NumAlb & ", " & linea & " , "
         vSQL = vSQL & vCStock.codAlmac & ", " & DBSet(miRsAux!codArtic, "T") & ", " & DBSet(miRsAux!NomArtic, "T") & ", " & DBSet(miRsAux!Ampliaci, "T") & ", "
         vSQL = vSQL & DBSet(miRsAux!servidas, "N") & ", " & DBSet(miRsAux!servidas, "N") & ", "
         vSQL = vSQL & DBSet(miRsAux!precioar, "N") & ", " & DBSet(miRsAux!dtoline1, "N") & ", " & DBSet(miRsAux!dtoline2, "N") & ", "
         vSQL = vSQL & DBSet(vCStock.Importe, "N") & ", " & DBSet(miRsAux!origpre, "T") & ",0,null,"  '0:codprove
-        vSQL = vSQL & DBSet(miRsAux!CodCCost, "T", "S") & ")"
+        vSQL = vSQL & DBSet(miRsAux!CodCCost, "T", "S") & "," & DBSet(miRsAux!idL, "N") & ")"
         conn.Execute vSQL
 
 
@@ -1382,11 +1489,19 @@ Dim PesoAlbaran As Currency
             
         'Actualizamos la linea de pedido
         vSQL = "update sliped set cantidad=cantidad - " & DBSet(vCStock.cantidad, "N")
-        vSQL = vSQL & " WHERE numpedcl=" & miRsAux!numpedcl & " AND numlinea = " & miRsAux!numlinea
+        vSQL = vSQL & ",servidas=0"
+        vSQL = vSQL & " WHERE numpedcl=" & miRsAux!NumPedcl & " AND numlinea = " & miRsAux!numlinea
         conn.Execute vSQL
+           
             
+       If miRsAux!servidas > miRsAux!cantidad Then
+            vSQL = "update sliped set cantidad=0"
+            vSQL = vSQL & ",servidas=0"
+            vSQL = vSQL & " WHERE numpedcl=" & miRsAux!NumPedcl & " AND numlinea = " & miRsAux!numlinea
+            conn.Execute vSQL
+        End If
         'Sguiente linea
-        miRsAux.MoveNext
+       miRsAux.MoveNext
 
     Wend
     miRsAux.Close
@@ -1400,7 +1515,7 @@ Dim PesoAlbaran As Currency
     miRsAux.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         If miRsAux.Fields(1) = 0 Then
-            Aux = "UPDATE scaped set sementre=52,cerrado=1 WHERE numpedcl=" & miRsAux!numpedcl
+            Aux = "UPDATE scaped set sementre=52,cerrado=1 WHERE numpedcl=" & miRsAux!NumPedcl
             conn.Execute Aux
         End If
         miRsAux.MoveNext
@@ -1421,7 +1536,8 @@ Dim PesoAlbaran As Currency
     End If
     
     Aux = "slialb.codartic=sartic.codartic and codtipom='" & codtipom & "' and numalbar"
-    Aux = DevuelveDesdeBD(conAri, " sum(if(slialb.codartic='11001',cantidad,0))", "slialb,sartic", Aux, CStr(NumAlb))
+    
+    Aux = DevuelveDesdeBD(conAri, " sum(if(slialb.codartic in ('11000','11001','11003','11007','11010','11012'),cantidad,0))", "slialb,sartic", Aux, CStr(NumAlb))
     If Aux = "0" Then Aux = ""
     If Aux <> "" Then
         Aux = TransformaPuntosComas(Aux)
@@ -1442,4 +1558,36 @@ eRealizarAlbaran:
     Set miRsAux = Nothing
     Set vCStock = Nothing
     Set vTipoMov = Nothing
+End Function
+
+
+
+
+
+Private Function BuscaHueco(hcoCodTipoM As String) As String
+Dim RN As ADODB.Recordset
+Dim C As String
+Dim Co As Long
+    BuscaHueco = ""
+    C = "Select numalbar from scaalb where codtipom='" & hcoCodTipoM & "' AND year(fechaalb)=" & Year(CDate(Text1(2).Text))
+    C = C & " UNION Select numalbar from scafac1 where codtipoa='" & hcoCodTipoM & "' AND year(fechaalb)=" & Year(CDate(Text1(2).Text))
+    C = C & " ORDER BY numalbar DESC"
+    Set RN = New ADODB.Recordset
+    RN.Open C, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    If Not RN.EOF Then
+        Co = RN.Fields(0)
+        
+        While Not RN.EOF
+            If RN!Numalbar <> Co Then
+                
+                BuscaHueco = Co
+                RN.MoveLast
+            Else
+                Co = Co - 1
+            End If
+            RN.MoveNext
+        Wend
+    End If
+    RN.Close
+    Set RN = Nothing
 End Function

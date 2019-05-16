@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAdmGasTec 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Gastos técnicos"
@@ -690,7 +690,7 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
         txtAux(1).Text = DBLet(Data1.Recordset!codtecni, "T")
         txtAux2(1).Text = PonerNombreDeCod(txtAux(1), conAri, "straba", "nomtraba", "codtraba", "N")
 
-        txtAux(2).Text = DBLet(Data1.Recordset!codclien, "T")
+        txtAux(2).Text = DBLet(Data1.Recordset!codClien, "T")
         Me.txtAux2(2).Text = PonerNombreDeCod(txtAux(2), conAri, "sclien", "nomclien", "codclien", "N")
         
         lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -846,7 +846,7 @@ Dim SQL As String
     If Me.Data1.Recordset.EOF Then Exit Sub
     
     SQL = " fecgasto=" & DBSet(Me.Data1.Recordset!fecgasto, "F") & " AND codtecni=" & Data1.Recordset!codtecni
-    SQL = SQL & " AND codclien=" & Data1.Recordset!codclien
+    SQL = SQL & " AND codclien=" & Data1.Recordset!codClien
     If BloqueaRegistro(NombreTabla, SQL) Then BotonModificar
     
 '     If BLOQUEADesdeFormulario(Me) Then BotonModificar
@@ -888,16 +888,16 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim b As Boolean
-Dim i As Byte
+Dim I As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
@@ -915,9 +915,9 @@ Dim i As Byte
     If Kmodo = 1 Then PonerFoco txtAux(0)
                       
     'Bloquear los campos de clave primaria al modificar
-    For i = 0 To 2
-        BloquearTxt txtAux(i), (Modo = 4)
-    Next i
+    For I = 0 To 2
+        BloquearTxt txtAux(I), (Modo = 4)
+    Next I
                       
     '-----------------------------------------
     b = Modo <> 0 And Modo <> 2
@@ -1076,7 +1076,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim i As Integer
+Dim I As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1086,8 +1086,8 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
@@ -1098,16 +1098,16 @@ Dim anc As Single
     txtAux(1).Text = DBLet(DataGrid1.Columns(1).Value, "N")
     txtAux(2).Text = DBLet(DataGrid1.Columns(2).Value, "N")
     
-    For i = 3 To 8
-        txtAux(i).Text = DBLet(Data1.Recordset.Fields(i + 1).Value, "T")
-    Next i
+    For I = 3 To 8
+        txtAux(I).Text = DBLet(Data1.Recordset.Fields(I + 1).Value, "T")
+    Next I
     txtAux(9).Text = DBLet(Data1.Recordset!numviaje, "T")
     
     FormateaCampo txtAux(1)
     FormateaCampo txtAux(2)
-    For i = 4 To 8
-        FormateaCampo txtAux(i)
-    Next i
+    For I = 4 To 8
+        FormateaCampo txtAux(I)
+    Next I
 
     DataGrid1.Enabled = False
     PonerFoco txtAux(3)
@@ -1133,7 +1133,7 @@ Dim SQL As String
         'Hay que eliminar
         NumRegElim = Me.Data1.Recordset.AbsolutePosition
         SQL = "Delete from " & NombreTabla & " where fecgasto=" & DBSet(Data1.Recordset!fecgasto, "F")
-        SQL = SQL & " AND codtecni=" & Data1.Recordset!codtecni & " AND codclien=" & Data1.Recordset!codclien
+        SQL = SQL & " AND codtecni=" & Data1.Recordset!codtecni & " AND codclien=" & Data1.Recordset!codClien
         
         conn.Execute SQL
         CancelaADODC Me.Data1
@@ -1175,16 +1175,16 @@ End Function
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
     On Error Resume Next
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
     If chkVistaPrevia = 1 Then
 '        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then 'Se muestran en el mismo form
+    ElseIf CadB <> "" Then 'Se muestran en el mismo form
 '        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & Ordenacion
-        CadenaBusqueda = " WHERE " & cadB
+        CadenaBusqueda = " WHERE " & CadB
         CadenaConsulta = MontaSQLCarga(True)
         PonerCadenaBusqueda
         PonerFocoGrid Me.DataGrid1

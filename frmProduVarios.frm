@@ -2,54 +2,90 @@ VERSION 5.00
 Begin VB.Form frmProduVarios 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Multi form para muchas cosas de produccion"
-   ClientHeight    =   3750
+   ClientHeight    =   1695
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   9300
+   ClientWidth     =   7440
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   3750
-   ScaleWidth      =   9300
+   ScaleHeight     =   1695
+   ScaleWidth      =   7440
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrCierreOrdenProduccion 
-      Height          =   1335
+      Height          =   1455
       Left            =   0
       TabIndex        =   3
       Top             =   0
-      Width           =   5295
+      Width           =   6495
+      Begin VB.CheckBox chkCierreParcial 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Cierre parcial"
+         Height          =   195
+         Left            =   4560
+         TabIndex        =   8
+         Top             =   240
+         Width           =   1455
+      End
+      Begin VB.TextBox txtCantidad 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Left            =   2160
+         TabIndex        =   5
+         Text            =   "Text1"
+         Top             =   960
+         Visible         =   0   'False
+         Width           =   975
+      End
       Begin VB.CommandButton cmdCierreOrdProd 
          Caption         =   "Cerrar orden"
          Height          =   375
-         Left            =   2640
+         Left            =   3720
          TabIndex        =   1
-         Top             =   720
+         Top             =   840
          Width           =   1095
       End
       Begin VB.CommandButton cmdCancelar 
          Caption         =   "&Cancelar"
          Height          =   375
          Index           =   0
-         Left            =   3960
+         Left            =   5040
          TabIndex        =   2
-         Top             =   720
+         Top             =   840
          Width           =   1095
       End
       Begin VB.TextBox txtFecha 
          Height          =   285
          Index           =   0
-         Left            =   840
+         Left            =   600
          TabIndex        =   0
          Text            =   "Text1"
-         Top             =   720
+         Top             =   960
          Width           =   1215
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Cantidad"
+         Height          =   195
+         Left            =   2160
+         TabIndex        =   7
+         Top             =   720
+         Visible         =   0   'False
+         Width           =   885
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Fecha cierre"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   6
+         Top             =   720
+         Width           =   885
       End
       Begin VB.Label lbFec 
          AutoSize        =   -1  'True
          Caption         =   "Cierre orden de producción"
          BeginProperty Font 
             Name            =   "Tahoma"
-            Size            =   8.25
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -57,19 +93,19 @@ Begin VB.Form frmProduVarios
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00000080&
-         Height          =   195
+         Height          =   240
          Index           =   0
          Left            =   240
          TabIndex        =   4
          Top             =   240
-         Width           =   2280
+         Width           =   2640
       End
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   0
-         Left            =   480
+         Left            =   240
          Picture         =   "frmProduVarios.frx":0000
-         Top             =   720
+         Top             =   960
          Width           =   240
       End
    End
@@ -91,14 +127,28 @@ Attribute frmC.VB_VarHelpID = -1
 
 
 Dim cad As String  'multi proposito
-Dim i As Integer
+Dim I As Integer
 
-Private Sub cmdCancelar_Click(Index As Integer)
+Private Sub chkCierreParcial_Click()
+    Me.txtcantidad.visible = chkCierreParcial.Value = 1
+    Me.Label2.visible = chkCierreParcial.Value = 1
+    
+End Sub
+
+Private Sub cmdCancelar_Click(index As Integer)
     Unload Me
 End Sub
 
 Private Sub cmdCierreOrdProd_Click()
     If txtFecha(0).Text = "" Then Exit Sub
+    
+    If Me.txtcantidad.visible Then
+        If Me.txtcantidad.Text = "" Then
+            MsgBox "Cierre parcial. Indique cantidad", vbExclamation
+            Exit Sub
+        End If
+    End If
+    
     cad = "¿Seguro que desea cerrar la orden de "
     If Opcion = 0 Then
         cad = cad & "producción"
@@ -117,26 +167,32 @@ Private Sub cmdCierreOrdProd_Click()
 End Sub
 
 Private Sub Form_Load()
- Dim i As Integer
+ Dim I As Integer
     Me.Icon = frmPpal.Icon
     FrCierreOrdenProduccion.visible = False
     limpiar Me
-    i = Opcion
+    I = Opcion
     Select Case Opcion
     Case 0, 1
         PonerFrameVisible FrCierreOrdenProduccion
         Me.Caption = "Cierre orden producción"
         lbFec(0).Caption = "Cod:   " & RecuperaValor(Intercambio, 1) & "   " & RecuperaValor(Intercambio, 2) & "   "
+        chkCierreParcial.visible = False
         If Opcion = 0 Then
             lbFec(0).Caption = lbFec(0).Caption & "PROD"
+            'If vParamAplic.NumeroInstalacion = vbFenollar Then chkCierreParcial.visible = True
         Else
             lbFec(0).Caption = lbFec(0).Caption & "Envasado"
-            i = 0
+            I = 0
         End If
+        
+        
+                
+        
         
     End Select
     
-    cmdCancelar(i).Cancel = True
+    cmdCancelar(I).Cancel = True
 End Sub
 
 
@@ -153,39 +209,60 @@ End Sub
 
 
 Private Sub frmC_Selec(vFecha As Date)
-    txtFecha(i).Text = Format(vFecha, "dd/mm/yyyy")
+    txtFecha(I).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub imgFecha_Click(Index As Integer)
+Private Sub imgFecha_Click(index As Integer)
     'El index tiene que ser el mismo que el del txtfecha al que acompaña
     Set frmC = New frmCal
     frmC.Fecha = Now
-    i = Index
-    If txtFecha(Index).Text <> "" Then frmC.Fecha = CDate(txtFecha(Index).Text)
+    I = index
+    If txtFecha(index).Text <> "" Then frmC.Fecha = CDate(txtFecha(index).Text)
     frmC.Show vbModal
     Set frmC = Nothing
     
 End Sub
 
-Private Sub txtFecha_GotFocus(Index As Integer)
-    ConseguirFoco txtFecha(Index), 3
+Private Sub txtcantidad_GotFocus()
+    ConseguirFoco txtcantidad, 3
 End Sub
 
-Private Sub txtFecha_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtcantidad_KeyPress(KeyAscii As Integer)
+     KEYpressGnral KeyAscii, 2, True
+End Sub
+
+Private Sub txtcantidad_LostFocus()
+   txtcantidad.Text = Trim(txtcantidad.Text)
+    If txtcantidad.Text <> "" Then
+        If Not PonerFormatoDecimal(txtcantidad, 2) Then
+        
+            MsgBox "Cantidad incorrecta: " & txtcantidad.Text, vbExclamation
+            txtcantidad.Text = ""
+            PonerFoco txtcantidad
+        End If
+    End If
+ 
+End Sub
+
+Private Sub txtFecha_GotFocus(index As Integer)
+    ConseguirFoco txtFecha(index), 3
+End Sub
+
+Private Sub txtFecha_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtFecha_LostFocus(Index As Integer)
+Private Sub txtFecha_LostFocus(index As Integer)
 Dim T As String
-    txtFecha(Index).Text = Trim(txtFecha(Index).Text)
-    If txtFecha(Index).Text <> "" Then
-        T = txtFecha(Index).Text
+    txtFecha(index).Text = Trim(txtFecha(index).Text)
+    If txtFecha(index).Text <> "" Then
+        T = txtFecha(index).Text
         If EsFechaOK(T) Then
-            txtFecha(Index).Text = T
+            txtFecha(index).Text = T
         Else
-            MsgBox "Fecha con formato incorrecto: " & txtFecha(Index).Text, vbExclamation
-            txtFecha(Index).Text = ""
-            PonerFoco txtFecha(Index)
+            MsgBox "Fecha con formato incorrecto: " & txtFecha(index).Text, vbExclamation
+            txtFecha(index).Text = ""
+            PonerFoco txtFecha(index)
         End If
     End If
     
@@ -209,20 +286,16 @@ Dim tabla As String
     CerrarOrdenProduccion = False
     Set miRsAux = New ADODB.Recordset
     Set vCStock = New CStock
-    'Veamos las sub lineas  si tienen stock. Antes comprobabamos cantidad x sarti1.cntidad
-    'Cad = "select codarti1,codalmac,sarti1.cantidad multiplicador,sum(sliordpr.cantidad) cantilinea from sliordpr,sarti1 where "
-    'Cad = Cad & " sliordpr.codartic=sarti1.codartic and  codigo=" & RecuperaValor(Me.Intercambio, 1) & " group by 1,2,3"
-    'AHora hay una tabla para los componentes
-'    Cad = "select codarti2,sliordpr.codalmac,sliordpr2.cantidad cantilinea from sliordpr,sliordpr2 where"
-'    Cad = Cad & " sliordpr.codartic=sliordpr2.codartic and sliordpr.codalmac=sliordpr2.codalmac and"
-'    Cad = Cad & " sliordpr.codigo=1 group by 1,2"
-'
+    
     cad = "select * from " & tabla & "2 where codigo=" & RecuperaValor(Me.Intercambio, 1)
     miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     b = False
     
     If Not SoloComprobar Then conn.BeginTrans
-        
+    
+    
+    
+    
     While Not miRsAux.EOF
         b = False
         If InicializarCStock(vCStock, "S") Then
@@ -343,6 +416,7 @@ Dim CantidadNecesaria As Currency
         vCStock.DetaMov = "PRE"
     End If
     vCStock.Trabajador = PonerTrabajadorConectado(cad)
+    If cad = "" Then Err.Raise 513, , "Imposible asignar trabajador conectado"
     vCStock.Documento = RecuperaValor(Intercambio, 1)
     vCStock.FechaMov = txtFecha(0).Text '
     
@@ -355,7 +429,7 @@ Dim CantidadNecesaria As Currency
     vCStock.LineaDocu = 0
 
     If Err.Number <> 0 Then
-        MsgBox "No se han podido inicializar la clase para actualizar Stock", vbExclamation
+        MsgBox "No se han podido inicializar la clase para actualizar Stock" & vbCrLf & Err.Description, vbExclamation
         InicializarCStock = False
     Else
         InicializarCStock = True

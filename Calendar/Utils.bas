@@ -86,7 +86,7 @@ Private Const FF_DONTCARE = 0
 
 Private Declare Function CreateFont Lib "gdi32" Alias "CreateFontA" ( _
     ByVal H As Long, ByVal W As Long, ByVal E As Long, ByVal O As Long, ByVal W As Long _
-    , ByVal I As Long, ByVal u As Long, ByVal S As Long, ByVal C As Long, ByVal OP As Long _
+    , ByVal I As Long, ByVal u As Long, ByVal s As Long, ByVal C As Long, ByVal OP As Long _
     , ByVal CP As Long, ByVal Q As Long, ByVal PAF As Long, ByVal F As String) As Long
 
 Private Declare Sub SetLastError Lib "kernel32" (ByVal dwErrCode As Long)
@@ -96,6 +96,12 @@ Private Const FORMAT_MESSAGE_FROM_SYSTEM = &H1000
 Private Declare Function FormatMessage Lib "kernel32" Alias "FormatMessageA" (ByVal dwFlags As Long, lpSource As Any, ByVal dwMessageId As Long, ByVal dwLanguageId As Long, ByVal lpBuffer As String, ByVal nSize As Long, Arguments As Long) As Long
 
 Private Declare Function GetTickCount Lib "kernel32" () As Long
+
+
+
+
+
+
 
 
 Public Function ParseTimeDuration(ByVal strTime As String, ByRef pnMinutes As Long) As Boolean

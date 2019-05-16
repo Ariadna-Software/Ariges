@@ -313,7 +313,7 @@ Begin VB.Form frmManMantenimientos
             Object.ToolTipText     =   "Componentes"
          EndProperty
          BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Acciones"
          EndProperty
          BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Salir"
@@ -352,8 +352,8 @@ Begin VB.Form frmManMantenimientos
    End
    Begin MSAdodcLib.Adodc Data2 
       Height          =   330
-      Left            =   8520
-      Top             =   1440
+      Left            =   9240
+      Top             =   960
       Visible         =   0   'False
       Width           =   1335
       _ExtentX        =   2355
@@ -401,60 +401,60 @@ Begin VB.Form frmManMantenimientos
       Height          =   5520
       Left            =   120
       TabIndex        =   50
-      Top             =   1335
+      Top             =   1320
       Width           =   11175
       _ExtentX        =   19711
       _ExtentY        =   9737
       _Version        =   393216
       Style           =   1
-      Tabs            =   5
-      Tab             =   4
-      TabsPerRow      =   5
+      Tabs            =   6
+      Tab             =   5
+      TabsPerRow      =   6
       TabHeight       =   520
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManMantenimientos.frx":0199
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Text1(37)"
-      Tab(0).Control(1)=   "Text1(36)"
-      Tab(0).Control(2)=   "Text1(35)"
-      Tab(0).Control(3)=   "Text1(34)"
-      Tab(0).Control(4)=   "Text1(7)"
-      Tab(0).Control(5)=   "Text1(6)"
-      Tab(0).Control(6)=   "chkBaterias"
-      Tab(0).Control(7)=   "cboTipoPago"
-      Tab(0).Control(8)=   "Text2(5)"
-      Tab(0).Control(9)=   "Text2(4)"
-      Tab(0).Control(10)=   "Text1(5)"
-      Tab(0).Control(11)=   "Text1(4)"
-      Tab(0).Control(12)=   "Frame2"
-      Tab(0).Control(13)=   "Label1(9)"
-      Tab(0).Control(14)=   "Label1(6)"
-      Tab(0).Control(15)=   "Label1(4)"
-      Tab(0).Control(16)=   "Label1(2)"
-      Tab(0).Control(17)=   "Label1(54)"
-      Tab(0).Control(18)=   "imgBuscar(3)"
-      Tab(0).Control(19)=   "imgBuscar(2)"
-      Tab(0).Control(20)=   "Label1(7)"
-      Tab(0).Control(21)=   "Label1(36)"
-      Tab(0).Control(22)=   "Label1(15)"
-      Tab(0).Control(23)=   "Label1(34)"
+      Tab(0).Control(0)=   "Label1(34)"
+      Tab(0).Control(1)=   "Label1(15)"
+      Tab(0).Control(2)=   "Label1(36)"
+      Tab(0).Control(3)=   "Label1(7)"
+      Tab(0).Control(4)=   "imgBuscar(2)"
+      Tab(0).Control(5)=   "imgBuscar(3)"
+      Tab(0).Control(6)=   "Label1(54)"
+      Tab(0).Control(7)=   "Label1(2)"
+      Tab(0).Control(8)=   "Label1(4)"
+      Tab(0).Control(9)=   "Label1(6)"
+      Tab(0).Control(10)=   "Label1(9)"
+      Tab(0).Control(11)=   "Frame2"
+      Tab(0).Control(12)=   "Text1(4)"
+      Tab(0).Control(13)=   "Text1(5)"
+      Tab(0).Control(14)=   "Text2(4)"
+      Tab(0).Control(15)=   "Text2(5)"
+      Tab(0).Control(16)=   "cboTipoPago"
+      Tab(0).Control(17)=   "chkBaterias"
+      Tab(0).Control(18)=   "Text1(6)"
+      Tab(0).Control(19)=   "Text1(7)"
+      Tab(0).Control(20)=   "Text1(34)"
+      Tab(0).Control(21)=   "Text1(35)"
+      Tab(0).Control(22)=   "Text1(36)"
+      Tab(0).Control(23)=   "Text1(37)"
       Tab(0).ControlCount=   24
       TabCaption(1)   =   "Observaciones"
       TabPicture(1)   =   "frmManMantenimientos.frx":01B5
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(33)"
-      Tab(1).Control(1)=   "Text1(32)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(3)"
+      Tab(1).Control(0)=   "Label1(3)"
+      Tab(1).Control(1)=   "Label1(5)"
+      Tab(1).Control(2)=   "Text1(32)"
+      Tab(1).Control(3)=   "Text1(33)"
       Tab(1).ControlCount=   4
       TabCaption(2)   =   "Revisiones"
       TabPicture(2)   =   "frmManMantenimientos.frx":01D1
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "cmdAux"
-      Tab(2).Control(1)=   "TxtAux1(0)"
+      Tab(2).Control(0)=   "DataGrid1"
+      Tab(2).Control(1)=   "TxtAux1(2)"
       Tab(2).Control(2)=   "TxtAux1(1)"
-      Tab(2).Control(3)=   "TxtAux1(2)"
-      Tab(2).Control(4)=   "DataGrid1"
+      Tab(2).Control(3)=   "TxtAux1(0)"
+      Tab(2).Control(4)=   "cmdAux"
       Tab(2).ControlCount=   5
       TabCaption(3)   =   "Histórico"
       TabPicture(3)   =   "frmManMantenimientos.frx":01ED
@@ -507,23 +507,48 @@ Begin VB.Form frmManMantenimientos
       Tab(3).ControlCount=   45
       TabCaption(4)   =   "Documentos"
       TabPicture(4)   =   "frmManMantenimientos.frx":0209
-      Tab(4).ControlEnabled=   -1  'True
+      Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "Label1(10)"
-      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).Control(1)=   "ImgPDF(1)"
-      Tab(4).Control(1).Enabled=   0   'False
       Tab(4).Control(2)=   "ImgPDF(2)"
-      Tab(4).Control(2).Enabled=   0   'False
       Tab(4).Control(3)=   "ImgPDF(0)"
-      Tab(4).Control(3).Enabled=   0   'False
       Tab(4).Control(4)=   "ListView1"
-      Tab(4).Control(4).Enabled=   0   'False
       Tab(4).Control(5)=   "AcroPDF1"
-      Tab(4).Control(5).Enabled=   0   'False
-      Tab(4).ControlCount=   6
+      Tab(4).Control(6)=   "cmdPDF"
+      Tab(4).ControlCount=   7
+      TabCaption(5)   =   "Acciones mantenimiento"
+      TabPicture(5)   =   "frmManMantenimientos.frx":0225
+      Tab(5).ControlEnabled=   -1  'True
+      Tab(5).Control(0)=   "DataGrid2"
+      Tab(5).Control(0).Enabled=   0   'False
+      Tab(5).Control(1)=   "TxtAux2(0)"
+      Tab(5).Control(1).Enabled=   0   'False
+      Tab(5).ControlCount=   2
+      Begin VB.TextBox TxtAux2 
+         Appearance      =   0  'Flat
+         BorderStyle     =   0  'None
+         Height          =   315
+         Index           =   0
+         Left            =   960
+         MaxLength       =   200
+         TabIndex        =   145
+         Tag             =   "Observaciones|T|N|||slima1|observac||N|"
+         Top             =   1320
+         Visible         =   0   'False
+         Width           =   8055
+      End
+      Begin VB.CommandButton cmdPDF 
+         Height          =   315
+         Left            =   -69000
+         Picture         =   "frmManMantenimientos.frx":0241
+         Style           =   1  'Graphical
+         TabIndex        =   143
+         Top             =   480
+         Width           =   375
+      End
       Begin AcroPDFLibCtl.AcroPDF AcroPDF1 
          Height          =   4455
-         Left            =   6720
+         Left            =   -68280
          TabIndex        =   142
          Top             =   840
          Width           =   4095
@@ -993,7 +1018,7 @@ Begin VB.Form frmManMantenimientos
          ScrollBars      =   2  'Vertical
          TabIndex        =   41
          Tag             =   "Observ. Técnico|T|S|||scaman|obsertec||N|"
-         Text            =   "frmManMantenimientos.frx":0225
+         Text            =   "frmManMantenimientos.frx":14B3
          Top             =   3240
          Width           =   10485
       End
@@ -1005,7 +1030,7 @@ Begin VB.Form frmManMantenimientos
          ScrollBars      =   2  'Vertical
          TabIndex        =   40
          Tag             =   "Observ. Comercial|T|S|||scaman|observac||N|"
-         Text            =   "frmManMantenimientos.frx":022D
+         Text            =   "frmManMantenimientos.frx":14BB
          Top             =   720
          Width           =   10485
       End
@@ -1076,7 +1101,7 @@ Begin VB.Form frmManMantenimientos
          Width           =   540
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmManMantenimientos.frx":0233
+         Bindings        =   "frmManMantenimientos.frx":14C1
          Height          =   4740
          Left            =   -74640
          TabIndex        =   59
@@ -1688,7 +1713,7 @@ Begin VB.Form frmManMantenimientos
       End
       Begin MSComctlLib.ListView ListView1 
          Height          =   4455
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   140
          Top             =   840
          Width           =   6375
@@ -1715,11 +1740,80 @@ Begin VB.Form frmManMantenimientos
             Object.Width           =   0
          EndProperty
       End
+      Begin MSDataGridLib.DataGrid DataGrid2 
+         Bindings        =   "frmManMantenimientos.frx":14D6
+         Height          =   4980
+         Left            =   240
+         TabIndex        =   144
+         Top             =   600
+         Width           =   10695
+         _ExtentX        =   18865
+         _ExtentY        =   8784
+         _Version        =   393216
+         AllowUpdate     =   -1  'True
+         AllowArrows     =   -1  'True
+         ColumnHeaders   =   -1  'True
+         HeadLines       =   1
+         RowHeight       =   15
+         FormatLocked    =   -1  'True
+         BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ColumnCount     =   2
+         BeginProperty Column00 
+            DataField       =   ""
+            Caption         =   ""
+            BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+               Type            =   0
+               Format          =   ""
+               HaveTrueFalseNull=   0
+               FirstDayOfWeek  =   0
+               FirstWeekOfYear =   0
+               LCID            =   3082
+               SubFormatType   =   0
+            EndProperty
+         EndProperty
+         BeginProperty Column01 
+            DataField       =   ""
+            Caption         =   ""
+            BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+               Type            =   0
+               Format          =   ""
+               HaveTrueFalseNull=   0
+               FirstDayOfWeek  =   0
+               FirstWeekOfYear =   0
+               LCID            =   3082
+               SubFormatType   =   0
+            EndProperty
+         EndProperty
+         SplitCount      =   1
+         BeginProperty Split0 
+            BeginProperty Column00 
+            EndProperty
+            BeginProperty Column01 
+            EndProperty
+         EndProperty
+      End
       Begin VB.Image ImgPDF 
          Height          =   240
          Index           =   0
-         Left            =   840
-         Picture         =   "frmManMantenimientos.frx":0248
+         Left            =   -74160
+         Picture         =   "frmManMantenimientos.frx":14EB
          ToolTipText     =   "Nuevo documento"
          Top             =   600
          Width           =   240
@@ -1727,8 +1821,8 @@ Begin VB.Form frmManMantenimientos
       Begin VB.Image ImgPDF 
          Height          =   240
          Index           =   2
-         Left            =   1560
-         Picture         =   "frmManMantenimientos.frx":0C4A
+         Left            =   -73440
+         Picture         =   "frmManMantenimientos.frx":1EED
          ToolTipText     =   "Eliminar accion"
          Top             =   600
          Width           =   240
@@ -1736,8 +1830,8 @@ Begin VB.Form frmManMantenimientos
       Begin VB.Image ImgPDF 
          Height          =   240
          Index           =   1
-         Left            =   1200
-         Picture         =   "frmManMantenimientos.frx":164C
+         Left            =   -73800
+         Picture         =   "frmManMantenimientos.frx":28EF
          ToolTipText     =   "Modificar"
          Top             =   600
          Width           =   240
@@ -1746,7 +1840,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "PDFs"
          Height          =   255
          Index           =   10
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   141
          Top             =   600
          Width           =   735
@@ -1791,7 +1885,7 @@ Begin VB.Form frmManMantenimientos
          Height          =   480
          Index           =   1
          Left            =   -70680
-         Picture         =   "frmManMantenimientos.frx":204E
+         Picture         =   "frmManMantenimientos.frx":32F1
          Top             =   720
          Visible         =   0   'False
          Width           =   480
@@ -1800,7 +1894,7 @@ Begin VB.Form frmManMantenimientos
          Height          =   480
          Index           =   0
          Left            =   -73440
-         Picture         =   "frmManMantenimientos.frx":2490
+         Picture         =   "frmManMantenimientos.frx":3733
          Top             =   720
          Visible         =   0   'False
          Width           =   480
@@ -2143,6 +2237,53 @@ Begin VB.Form frmManMantenimientos
       Visible         =   0   'False
       Width           =   1035
    End
+   Begin MSAdodcLib.Adodc data4 
+      Height          =   1290
+      Left            =   4080
+      Top             =   6960
+      Visible         =   0   'False
+      Width           =   1575
+      _ExtentX        =   2778
+      _ExtentY        =   2275
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "Adodc1"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
    Begin VB.Label Label1 
       Caption         =   "Técnico"
       Height          =   255
@@ -2200,6 +2341,10 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "&Histórico"
          Shortcut        =   ^H
       End
+      Begin VB.Menu mnLineasAccion 
+         Caption         =   "Acciones a realizar"
+         Shortcut        =   ^L
+      End
    End
 End
 Attribute VB_Name = "frmManMantenimientos"
@@ -2234,6 +2379,7 @@ Attribute frmT.VB_VarHelpID = -1
 '   3.-  Insercion de nuevo registro
 '   4.-  Modificar
 '   5.-  Mantenimiento Lineas
+'   6.-  Acciones
 '-------------------------------------------------------------------------
 '-------------------------------------------------------------------------
 Private Modo As Byte
@@ -2246,7 +2392,7 @@ Dim NumTabMto As Byte
 
 Dim TituloLinea As String 'Descripcion de la linea que estamos en Mantenimiento
 
-Dim PrimeraVez As Boolean
+Dim primeravez As Boolean
 
 Dim EsCabecera As Boolean
 'Para saber en MandaBusquedaPrevia si busca en la tabla scaman o en la tabla sdirec
@@ -2305,11 +2451,15 @@ Private Sub cmdAceptar_Click()
                 End If
             End If
             
-         Case 5 'InsertarModificar linea
-            'Actualizar el registro en la tabla de lineas 'slima1' (Revisiones)
+         Case 5, 6 'InsertarModificar linea
+                'Actualizar el registro en la tabla de lineas 'slima1' (Revisiones)   slima2
             If ModificaLineas = 1 Then 'INSERTAR lineas
                 If InsertarLinea Then 'Revisiones
-                    If Me.SSTab1.Tab = 2 Then CargaGrid DataGrid1, Data2, True
+                    If Modo = 5 Then
+                        CargaGrid DataGrid1, Data2, True
+                    Else
+                        CargaGrid DataGrid2, data4, True
+                    End If
                     BotonAnyadirLinea
                 End If
             ElseIf ModificaLineas = 2 Then 'MODIFICAR lineas
@@ -2319,7 +2469,10 @@ Private Sub cmdAceptar_Click()
                     ModificaLineas = 0
                     If Me.SSTab1.Tab = 2 Then 'Habilidades
                         LLamaLineas 10
-                        CargaGrid2 DataGrid1, Data2
+                        CargaGrid3 DataGrid1, Data2
+                    Else
+                        TxtAux2(0).visible = False
+                        CargaGrid3 DataGrid2, data4
                     End If
                     PonerFocoBtn Me.cmdRegresar
                 End If
@@ -2371,6 +2524,21 @@ Private Sub cmdCancelar_Click()
                 DataGrid1.Enabled = True
             End If
             PonerBotonCabecera True
+        Case 6 'Lineas Detalle
+            TerminaBloquear
+            
+            If ModificaLineas = 1 Then 'INSERTAR
+                ModificaLineas = 0
+                DataGrid2.AllowAddNew = False
+                If Not data4.Recordset.EOF Then data4.Recordset.MoveFirst
+            End If
+            ModificaLineas = 0
+            
+            Me.TxtAux2(0).visible = False
+            DataGrid2.Enabled = True
+            
+            PonerBotonCabecera True
+        
     End Select
 End Sub
 
@@ -2393,7 +2561,7 @@ End Sub
 
 Private Sub BotonAnyadirLinea()
 Dim anc As Single
-Dim i As Byte
+Dim I As Byte
 
     'Si no estaba modificando lineas salimos
     ' Es decir, si estaba insertando linea no podemos hacer otra cosa
@@ -2411,13 +2579,32 @@ Dim i As Byte
     
     If Me.SSTab1.Tab = 2 Then 'Revisiones
         AnyadirLinea DataGrid1, Data2
-        For i = 0 To Me.TxtAux1.Count - 1
-            Me.TxtAux1(i).Text = ""
-        Next i
+        For I = 0 To Me.TxtAux1.Count - 1
+            Me.TxtAux1(I).Text = ""
+        Next I
         anc = ObtenerAlto(Me.DataGrid1) + 10
         LLamaLineas anc
         BloquearTxt TxtAux1(0), False
         PonerFoco TxtAux1(0)
+        
+    Else
+        'Aciones mantenimiento
+        
+        AnyadirLinea DataGrid2, data4
+
+        anc = ObtenerAlto(Me.DataGrid2) + 10
+        
+        TxtAux2(0).Text = ""
+         TxtAux2(0).Top = anc
+        TxtAux2(0).Enabled = True
+        Me.TxtAux2(0).Height = DataGrid2.RowHeight
+        TxtAux2(0).Left = DataGrid2.Left + DataGrid2.Columns(3).Left
+        TxtAux2(0).Width = DataGrid2.Columns(3).Width
+        TxtAux2(0).visible = True
+        BloquearTxt TxtAux2(0), False
+        PonerFoco TxtAux2(0)
+        
+        
     End If
 End Sub
 
@@ -2459,12 +2646,12 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub Desplazamiento(Index As Integer)
+Private Sub Desplazamiento(index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
     If Data1.Recordset.EOF Then Exit Sub
     Text2(21).Text = ""
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, index
     PonerCampos
 End Sub
 
@@ -2507,6 +2694,25 @@ Dim anc As Single
          DataGrid1.Enabled = False
          BloquearTxt TxtAux1(0), True
          PonerFoco TxtAux1(1)
+         
+         
+         
+    Else
+        anc = ObtenerAlto(Me.DataGrid2) + 10
+        
+        TxtAux2(0).Text = DataGrid2.Columns(3).Text
+        TxtAux2(0).Top = anc
+        TxtAux2(0).Enabled = True
+        Me.TxtAux2(0).Height = DataGrid2.RowHeight
+        TxtAux2(0).Left = DataGrid2.Left + DataGrid2.Columns(3).Left
+        TxtAux2(0).Width = DataGrid2.Columns(3).Width
+        TxtAux2(0).visible = True
+        DataGrid2.Enabled = False
+        BloquearTxt TxtAux2(0), False
+        PonerFoco TxtAux2(0)
+            
+         
+         
     End If
     
    
@@ -2538,36 +2744,6 @@ Dim b As Boolean
     End If
     
     
-    'ANTES DE CREAR EL HCO DE MANTENIMIENTOS ANULADOS
-    
-'    cad = "Cabecera de Mantenimientos." & vbCrLf
-'    cad = cad & "-----------------------------------" & vbCrLf & vbCrLf
-'    cad = cad & "Va a eliminar el Mantenimiento:            "
-'    cad = cad & vbCrLf & "Cliente:  " & Format(Text1(0).Text, "000000") & " - " & Text2(0).Text
-''    cad = cad & vbCrLf & "Direc.:  " & Format(Text1(1).Text, "000") & " - " & Text2(1).Text
-'    cad = cad & vbCrLf & "Nº Mante.:  " & Text1(2).Text
-'    cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
-'
-'    'Borramos
-'    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
-'        'Hay que eliminar
-'        On Error GoTo EEliminar
-'        Screen.MousePointer = vbHourglass
-'        NumRegElim = Data1.Recordset.AbsolutePosition
-'        If Not Eliminar Then
-'            Exit Sub
-'        ElseIf SituarDataTrasEliminar(Data1, NumRegElim) Then
-'            PonerCampos
-'        Else
-'            LimpiarCampos
-'            'Poner los grid sin apuntar a nada
-'            LimpiarDataGrids
-'            PonerModo 0
-'        End If
-'    End If
-
-
-'       AHORA que hay hco
     CadenaDesdeOtroForm = ""
     frmListado.OpcionListado = 99
     frmListado.Show vbModal
@@ -2626,24 +2802,43 @@ Dim FechaRev As Date
         Exit Sub
     End If
 
+    
     If Me.SSTab1.Tab = 2 Then 'Revisiones
         If Data2.Recordset.EOF Then Exit Sub
         FechaRev = Data2.Recordset!FechaRev
+    
+    
+        SQL = "¿Seguro que desea eliminar la línea de " & TituloLinea & "?      " & vbCrLf
+        SQL = SQL & vbCrLf & "Fec. Rev.: " & FechaRev
+        SQL = SQL & vbCrLf & " Técnico: " & Format(Data2.Recordset!CodTraba, "0000") & " - " & Text2(21).Text
+    Else
+        If data4.Recordset.EOF Then Exit Sub
+        SQL = "¿Seguro que desea eliminar la línea de " & TituloLinea & "?      " & vbCrLf
+        SQL = SQL & data4.Recordset!Accion
     End If
     
     ModificaLineas = 3 'Eliminar
-    SQL = "¿Seguro que desea eliminar la línea de " & TituloLinea & "?      " & vbCrLf
-    SQL = SQL & vbCrLf & "Fec. Rev.: " & FechaRev
-    SQL = SQL & vbCrLf & " Técnico: " & Format(Data2.Recordset!CodTraba, "0000") & " - " & Text2(21).Text
-    
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from " & NomTablaLineas & ObtenerWhereCP(True)
-        SQL = SQL & " and fecharev='" & Format(FechaRev, FormatoFecha) & "'"
+        If Me.SSTab1.Tab = 2 Then 'Revisiones
+            SQL = NomTablaLineas
+        Else
+            SQL = "slima2"
+        End If
+        SQL = "Delete from " & SQL & ObtenerWhereCP(True)
+        If Me.SSTab1.Tab = 2 Then 'Revisiones
+            SQL = SQL & " and fecharev='" & Format(FechaRev, FormatoFecha) & "'"
+        Else
+            SQL = SQL & " and linea=" & data4.Recordset!linea
+        End If
         conn.Execute SQL
         ModificaLineas = 0
-        If Me.SSTab1.Tab = 2 Then CargaGrid2 DataGrid1, Data2 'Revisiones
-'        CancelaADODC
+        If Me.SSTab1.Tab = 2 Then
+            CargaGrid3 DataGrid1, Data2 'Revisiones
+        Else
+            CargaGrid3 DataGrid2, data4 'acciones
+        End If
+
     End If
     PonerFocoBtn Me.cmdRegresar
     
@@ -2653,12 +2848,17 @@ EEliminarLinea:
 End Sub
 
 
+Private Sub cmdPDF_Click()
+     If Not AcroPDF1.visible Then Exit Sub
+    If AcroPDF1.src <> "" Then LanzaVisorMimeDocumento Me.hwnd, AcroPDF1.src
+End Sub
+
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
 Dim cad As String
 
     'Quitar lineas y volver a la cabecera
-    If Modo = 5 Then  'modo 5: Mantenimientos Lineas
+    If Modo >= 5 Then  'modo 5: Mantenimientos Lineas
         PonerModo 2
         Me.lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
     Else 'Se llama desde algún Prismatico de otro Form al Mantenimiento de Trabajadores
@@ -2689,7 +2889,7 @@ Error1:
 End Sub
 
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -2721,6 +2921,8 @@ Private Sub Form_Load()
         .Buttons(10).Image = 10 'Mto Lineas Revisiones
         .Buttons(11).Image = 38 'Mto Lineas Histórico
         .Buttons(12).Image = 34 'Componentes
+        .Buttons(13).Image = 35 'accopmes
+        
         .Buttons(14).Image = 15  'Salir
         .Buttons(btnPrimero).Image = 6  'Primero
         .Buttons(btnPrimero + 1).Image = 7 'Anterior
@@ -2758,12 +2960,19 @@ Private Sub Form_Load()
     End If
     
     'Cargar el DataGrid de lineas de Revisiones inicialmente a nada DATA2
-    PrimeraVez = True
+    primeravez = True
     NomTablaLineas = "slima1" 'Tabla lineas de Revisiones de MAntenimientos
     Data2.ConnectionString = conn
     Data2.RecordSource = "Select * from " & NomTablaLineas & " where codclien=-1"
     Data2.Refresh
     CargaGrid DataGrid1, Data2, False
+    
+    data4.ConnectionString = conn
+    data4.RecordSource = "Select * from slima2 where false"
+    data4.Refresh
+    CargaGrid DataGrid2, data4, False
+    
+    
     
     'Cargamos inicialmente el DATA3 a nada
     Data3.ConnectionString = conn
@@ -2782,7 +2991,7 @@ On Error Resume Next
     Me.cboTipoPago.ListIndex = -1
     Me.chkBaterias.Value = False
     Me.cmbMes.ListIndex = -1
-    
+    cmdPDF.visible = False
     Me.ListView1.ListItems.Clear
     If Me.AcroPDF1.visible Then Me.AcroPDF1.visible = False
     If Err.Number <> 0 Then Err.Clear
@@ -2795,19 +3004,19 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim cadB As String
+Dim CadB As String
 Dim Aux As String
       
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
         If EsCabecera Then 'Llama desde VerTodos del Form
-            cadB = ""
+            CadB = ""
             Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
 '            Aux = Aux & " and " & ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
             Aux = Aux & " and " & ValorDevueltoFormGrid(Text1(2), CadenaDevuelta, 3)
-            cadB = Aux
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+            CadB = Aux
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
             PonerCadenaBusqueda
         Else 'Llama desde Prismatico Direcciones/Departamentos
             Text1(1).Text = Format(RecuperaValor(CadenaDevuelta, 1), "000")
@@ -2851,19 +3060,19 @@ Private Sub frmTC_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 
-Private Sub imgBuscar_Click(Index As Integer)
-Dim indice As Byte
+Private Sub imgBuscar_Click(index As Integer)
+Dim Indice As Byte
 
     If Modo = 2 Or Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
 
-    Select Case Index
+    Select Case index
         Case 0 'Cod. Cliente
             Set frmC = New frmFacClientes
             frmC.DatosADevolverBusqueda = "0"
             frmC.Show vbModal
             Set frmC = Nothing
-            indice = Index
+            Indice = index
             
         Case 1 'Cod. Direc.
              'Mostrar las Direc. o Dptos del cliente seleccionado
@@ -2874,7 +3083,7 @@ Dim indice As Byte
              Else
                 EsCabecera = False
                 MandaBusquedaPrevia " codclien= " & Val(Text1(0).Text)
-                indice = 1
+                Indice = 1
              End If
              
         Case 2 'Cod. Tipo Contrato
@@ -2882,44 +3091,44 @@ Dim indice As Byte
             frmTC.DatosADevolverBusqueda = "0"
             frmTC.Show vbModal
             Set frmTC = Nothing
-            indice = 4
+            Indice = 4
             
         Case 3 'Cod. Formas de Pago
             Set frmFP = New frmFacFormasPago
             frmFP.DatosADevolverBusqueda = "0"
             frmFP.Show vbModal
             Set frmFP = Nothing
-            indice = 5
+            Indice = 5
     End Select
-    PonerFoco Text1(indice)
+    PonerFoco Text1(Indice)
     Screen.MousePointer = vbDefault
 End Sub
 
 
-Private Sub imgFecha_Click(Index As Integer) 'Abre calendario Fechas
-Dim indice As Byte
+Private Sub imgFecha_Click(index As Integer) 'Abre calendario Fechas
+Dim Indice As Byte
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
    Screen.MousePointer = vbHourglass
    Set frmF = New frmCal
    frmF.Fecha = Now
-   indice = Index + 3
+   Indice = index + 3
    
-   PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
+   PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco Text1(indice)
+   PonerFoco Text1(Indice)
 End Sub
 
 
-Private Sub imgFlecha_Click(Index As Integer)
+Private Sub imgFlecha_Click(index As Integer)
 'Desplazarse por los dos registros siguientes del histórico
 On Error GoTo EDesplazamiento
     
-    Select Case Index
+    Select Case index
         Case 0 'Anterior
             If Data3.Recordset.BOF Then Exit Sub
             If (Data3.Recordset.AbsolutePosition Mod 2) = 0 Then 'numero par
@@ -2943,12 +3152,12 @@ EDesplazamiento:
 End Sub
 
 
-Private Sub ImgPDF_Click(Index As Integer)
+Private Sub ImgPDF_Click(index As Integer)
 Dim cad As String
     
     If Modo <> 2 Then Exit Sub
     
-    If Index > 0 Then
+    If index > 0 Then
         CadenaDesdeOtroForm = ""
         If ListView1.ListItems.Count > 0 Then
             If Not ListView1.SelectedItem Is Nothing Then CadenaDesdeOtroForm = "OK"
@@ -2960,7 +3169,7 @@ Dim cad As String
     End If
     
     'slimanpdfs  codclien,nummante,anomante,numlinea, ficheroDesc,ficheroNombre
-    If Index = 2 Then
+    If index = 2 Then
         If MsgBox("Seguro que desea eliminar el documento seleccionado?", vbQuestion + vbYesNo) = vbYes Then
             cad = ListView1.SelectedItem.SubItems(1)
             If EliminarArhivoPDF2(CLng(Text1(0).Text), Text1(2).Text, cad) Then
@@ -2975,12 +3184,12 @@ Dim cad As String
         End If
     Else
         CadenaDesdeOtroForm = ""
-        If Index = 1 Then CadenaDesdeOtroForm = ListView1.SelectedItem.Text & "|" & ListView1.SelectedItem.SubItems(1) & "|"
-        frmEuler.Opcion = Index
+        If index = 1 Then CadenaDesdeOtroForm = ListView1.SelectedItem.Text & "|" & ListView1.SelectedItem.SubItems(1) & "|"
+        frmEuler.Opcion = index
         frmEuler.Show vbModal
         
         If CadenaDesdeOtroForm <> "" Then
-            If Index = 0 Then
+            If index = 0 Then
                 'Insertamos documento
                 cad = RecuperaValor(CadenaDesdeOtroForm, 1)
                 If Dir(cad, vbArchive) = "" Then
@@ -2999,10 +3208,15 @@ Dim cad As String
                         cad = CStr(Val(cad) + 1)
                 
                         'INSERT INTO BD
+                        TituloLinea = RecuperaValor(CadenaDesdeOtroForm, 2)
+                        If TituloLinea = "" Then TituloLinea = RecuperaValor(CadenaDesdeOtroForm, 1)
+                        
+                        
                         cad = "INSERT INTO slimanpdfs(codclien,nummante,numlinea, ficheroDesc,ficheroNombre) values ( " & Text1(0).Text & "," & DBSet(Text1(2).Text, "T") & "," & cad & ","
-                        cad = cad & DBSet(RecuperaValor(CadenaDesdeOtroForm, 3), "T") & "," & DBSet(txtAnterior & ".pdf", "T") & ")"
+                        cad = cad & DBSet(TituloLinea, "T") & "," & DBSet(txtAnterior & ".pdf", "T") & ")"
                         ejecutar cad, False
                         
+                        TituloLinea = ""
                         cargaDocumentos
                     End If
                 
@@ -3029,7 +3243,8 @@ Dim cad As String
     End If
     CargaArchivo cad
     
-
+    If cad <> "" Then cmdPDF.visible = True
+    
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -3038,7 +3253,7 @@ Private Sub mnBuscar_Click()
 End Sub
 
 Private Sub mnEliminar_Click()
-    If Modo = 5 Then 'Eliminar lineas de Mantenimiento
+    If Modo >= 5 Then 'Eliminar lineas de Mantenimiento
          BotonEliminarLinea
     Else   'Eliminar Mantenimiento
          BotonEliminar
@@ -3069,8 +3284,14 @@ Dim b As Boolean
 End Sub
 
 
+Private Sub mnLineasAccion_Click()
+'Abre Mantenimiento de lineas  de Revisiones
+    BotonMtoLineas 5, "Acciones"
+    NomTablaLineas = "slima1"
+End Sub
+
 Private Sub mnModificar_Click()
-    If Modo = 5 Then 'Modificar lineas
+    If Modo >= 5 Then 'Modificar lineas
          BotonModificarLinea
     Else   'Modificar Mantenimiento
          If SSTab1.Tab <> 0 And Me.SSTab1.Tab <> 1 Then Me.SSTab1.Tab = 0
@@ -3080,7 +3301,7 @@ End Sub
 
 
 Private Sub mnNuevo_Click()
-    If Modo = 5 Then 'Añadir lineas
+    If Modo >= 5 Then 'Añadir lineas
          BotonAnyadirLinea
     Else 'Añadir Mantenimiento
          Me.SSTab1.Tab = 0
@@ -3123,24 +3344,24 @@ End Sub
 '### A mano
 'Los metodos del text tendran que estar
 'Los descomentamos cuando esten puestos ya los controles
-Private Sub Text1_GotFocus(Index As Integer)
-    kCampo = Index
-    If Text1(Index).MultiLine = False Then
-        ConseguirFoco Text1(Index), Modo
+Private Sub Text1_GotFocus(index As Integer)
+    kCampo = index
+    If Text1(index).MultiLine = False Then
+        ConseguirFoco Text1(index), Modo
     Else
-        SituarMultiTextFinal Text1(Index)
+        SituarMultiTextFinal Text1(index)
     End If
 End Sub
 
 
-Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-    If Not Text1(Index).MultiLine Then KEYdown KeyCode
+    If Not Text1(index).MultiLine Then KEYdown KeyCode
 End Sub
 
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Not Text1(Index).MultiLine Then KEYpress KeyAscii
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+    If Not Text1(index).MultiLine Then KEYpress KeyAscii
 End Sub
 
 '----------------------------------------------------------------
@@ -3151,44 +3372,44 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(Index As Integer)
+Private Sub Text1_LostFocus(index As Integer)
 Dim devuelve As String
 Dim cadMen As String
 Dim cadDpto As String
         
-    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
     
     'Si queremos hacer algo ..
-    Select Case Index
+    Select Case index
         Case 0 'Cod. Clien
-            devuelve = PonerNombreDeCod(Text1(Index), conAri, "sclien", "nomclien")
-            Text2(Index).Text = devuelve
+            devuelve = PonerNombreDeCod(Text1(index), conAri, "sclien", "nomclien")
+            Text2(index).Text = devuelve
 
         Case 1 'Cod. Direc
-            If Text1(Index).Text = "" Then
-                Text2(Index).Text = ""
+            If Text1(index).Text = "" Then
+                Text2(index).Text = ""
             Else
                 'Comprobar que el cliente seleccionada tiene esa direccion
                 If Text1(0).Text <> "" Then 'HAY cliente
                     devuelve = DevuelveDesdeBDNew(conAri, "sdirec", "coddirec", "codclien", Text1(0).Text, "N", , "coddirec", Text1(1).Text, "N")
                     If devuelve = "" Then 'NO EXISTE el dpto para el cliente
-                        Text2(Index).Text = ""
+                        Text2(index).Text = ""
                         cadDpto = DevuelveTextoDepto(False)
                         cadMen = "No existe" & cadDpto & Text1(1).Text & " para el cliente: " & vbCrLf
                         cadMen = cadMen & vbCrLf & Text1(0).Text & " - " & Text2(0).Text
                         MsgBox cadMen, vbInformation
                         
-                        Text1(Index).Text = ""
-                        PonerFoco Text1(Index)
+                        Text1(index).Text = ""
+                        PonerFoco Text1(index)
                     Else 'EXISTE el dpto
                         '---- Laura: modificado 27/09/2006
                         'devuelve = PonerNombreDeCod(Text1(Index), conAri, "sdirec", "nomdirec")
                         devuelve = DevuelveDesdeBDNew(conAri, "sdirec", "nomdirec", "codclien", Text1(0).Text, "N", , "coddirec", Text1(1).Text, "N")
-                        Text2(Index).Text = devuelve
-                        FormateaCampo Text1(Index)
+                        Text2(index).Text = devuelve
+                        FormateaCampo Text1(index)
                     End If
                 Else
-                    Text1(Index).Text = ""
+                    Text1(index).Text = ""
                     cadDpto = DevuelveTextoDepto(False)
                     MsgBox "Debe introducir un Cliente, antes de seleccionar su " & cadDpto, vbInformation
                 End If
@@ -3206,22 +3427,22 @@ Dim cadDpto As String
 
         Case 3 'Fecha Inicio
             'Si no es modo de Busqueda poner el formato
-            If Text1(Index).Text <> "" Then PonerFormatoFecha Text1(Index)
+            If Text1(index).Text <> "" Then PonerFormatoFecha Text1(index)
         Case 4 'Tipo Contrato
-            Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "stipco", "nomtipco")
+            Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "stipco", "nomtipco")
         Case 5 'Forma de Pago
-            Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sforpa", "nomforpa")
+            Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sforpa", "nomforpa")
         Case 6, 7 'Anticipado
             'Formato 3: Decimal(10,2)
-            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 3
+            If Text1(index).Text <> "" Then PonerFormatoDecimal Text1(index), 3
         Case 8 To 31 'Meses
-            If Text1(Index).Text <> "" Then
+            If Text1(index).Text <> "" Then
                 'Formato 3: Decimal(10,2)
-                PonerFormatoDecimal Text1(Index), 3
-                If EsNumerico(Text1(Index).Text) Then
+                PonerFormatoDecimal Text1(index), 3
+                If EsNumerico(Text1(index).Text) Then
                     SumarTotal
                 Else
-                    PonerFoco Text1(Index)
+                    PonerFoco Text1(index)
                 End If
             End If
         Case 33
@@ -3231,21 +3452,21 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
     If chkVistaPrevia = 1 Then
         EsCabecera = True
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
 Dim tabla As String
@@ -3290,7 +3511,7 @@ Dim Desc As String, devuelve As String
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
         frmB.vTabla = tabla
-        frmB.vSQL = cadB
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
 '        frmB.vDevuelve = "0|1|"
@@ -3351,8 +3572,11 @@ Private Sub PonerCamposLineas()
    
     'Revisiones - Datos de la tabla slima1
     CargaGrid DataGrid1, Data2, True
+    'acciones
+    CargaGrid DataGrid2, data4, True
     
-    PrimeraVez = False
+    
+    primeravez = False
     Screen.MousePointer = vbDefault
     Exit Sub
     
@@ -3387,7 +3611,7 @@ Dim nomDirDpto As String
     Text2(1).Text = ""
     If Text1(1).Text <> "" Then
         Set cCli = New CCliente
-        cCli.codigo = Text1(0).Text
+        cCli.Codigo = Text1(0).Text
         If cCli.DptoCliente(Text1(1).Text, nomDirDpto) Then Text2(1).Text = nomDirDpto
         Set cCli = Nothing
     End If
@@ -3412,7 +3636,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte, NumReg As Byte
+Dim I As Byte, NumReg As Byte
 Dim b As Boolean
     
     On Error GoTo EPonerModo
@@ -3446,21 +3670,21 @@ Dim b As Boolean
     BloquearText1 Me, Modo
               
     '---------------------------------------------
-    b = Modo <> 0 And Modo <> 2 And Modo <> 5
+    b = Modo <> 0 And Modo <> 2 And Modo <> 5 And Modo <> 6
     cmdCancelar.visible = b
     cmdAceptar.visible = b
     Me.cmbMes.Enabled = b
     
-    For i = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(i).Enabled = b
-    Next i
+    For I = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(I).Enabled = b
+    Next I
     
 '    For i = 0 To Me.imgBuscar.Count - 1
 '        Me.imgBuscar(i).Enabled = b
 '    Next i
-   For i = 0 To Me.imgBuscar.Count - 1
-        BloquearImg Me.imgBuscar(i), Not b
-    Next i
+   For I = 0 To Me.imgBuscar.Count - 1
+        BloquearImg Me.imgBuscar(I), Not b
+    Next I
     
     
     If Modo = 4 Then 'Modificar. Bloquear clave Primaria
@@ -3538,7 +3762,7 @@ End Function
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1  'Buscar
             mnBuscar_Click
         Case 2  'Todos
@@ -3555,10 +3779,15 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             mnHistorico_Click
         Case 12 'Componentes
             BotonComponentes
+            
+        Case 13
+            mnLineasAccion_Click
+            
+        
         Case 14    'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento (Button.Index - btnPrimero)
+            Desplazamiento (Button.index - btnPrimero)
     End Select
 End Sub
 
@@ -3578,10 +3807,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
     
@@ -3593,14 +3822,39 @@ Dim SQL As String
 
     InsertarLinea = False
     SQL = ""
-    If DatosOkLinea And Me.SSTab1.Tab = 2 Then 'Revisiones
-        SQL = "INSERT INTO slima1 "
-        SQL = SQL & "(codclien, nummante, fecharev, codtraba, observac) "
-        SQL = SQL & "VALUES (" & Val(Text1(0).Text) & ", "
-        SQL = SQL & DBSet(Text1(2).Text, "T") & ", " & DBSet(TxtAux1(0).Text, "F") & ", " & TxtAux1(1).Text & ", "
-        SQL = SQL & QuitarCaracterEnter(DBSet(TxtAux1(2).Text, "T")) & ")"
-     End If
+    If Modo = 5 Then
+        
+        If DatosOkLinea And Me.SSTab1.Tab = 2 Then 'Revisiones
+            SQL = "INSERT INTO slima1 "
+            SQL = SQL & "(codclien, nummante, fecharev, codtraba, observac) "
+            SQL = SQL & "VALUES (" & Val(Text1(0).Text) & ", "
+            SQL = SQL & DBSet(Text1(2).Text, "T") & ", " & DBSet(TxtAux1(0).Text, "F") & ", " & TxtAux1(1).Text & ", "
+            SQL = SQL & QuitarCaracterEnter(DBSet(TxtAux1(2).Text, "T")) & ")"
+         End If
+            
+    Else
+        
+        TxtAux2(0).Text = Trim(TxtAux2(0).Text)
+        If TxtAux2(0).Text = "" Then
+            MsgBox "Escriba la accion a realizar", vbExclamation
+            Exit Function
+        End If
+        SQL = ObtenerWhereCP(False)
+        SQL = DevuelveDesdeBD(conAri, "max(linea)", "slima2", SQL & " AND 1", "1")
+        SQL = Val(SQL) + 1
+        
+        SQL = "," & SQL & "," & DBSet(TxtAux2(0).Text, "F") & ")"
+        SQL = "VALUES (" & Val(Text1(0).Text) & ", " & DBSet(Text1(2).Text, "T") & SQL
+        SQL = "(codclien, nummante,linea, accion) " & SQL
+        SQL = "INSERT INTO slima2 " & SQL
+        
+        
+        
+     
     
+        
+    End If
+        
     If SQL <> "" Then
         conn.Execute SQL
         InsertarLinea = True
@@ -3620,9 +3874,24 @@ Dim SQL As String
 
     ModificarLinea = False
     SQL = ""
-    If DatosOkLinea And Me.SSTab1.Tab = 2 Then 'Habilidades
-        SQL = "UPDATE slima1 Set codtraba = " & TxtAux1(1).Text & ", observac='" & QuitarCaracterEnter(TxtAux1(2).Text) & "'"
-        SQL = SQL & ObtenerWhereCP(True) & " AND fecharev='" & Format(Data2.Recordset!FechaRev, FormatoFecha) & "'"
+    
+    If Modo = 5 Then
+    
+        If DatosOkLinea And Me.SSTab1.Tab = 2 Then 'Habilidades
+            SQL = "UPDATE slima1 Set codtraba = " & TxtAux1(1).Text & ", observac='" & QuitarCaracterEnter(TxtAux1(2).Text) & "'"
+            SQL = SQL & ObtenerWhereCP(True) & " AND fecharev='" & Format(Data2.Recordset!FechaRev, FormatoFecha) & "'"
+        End If
+
+    Else
+        TxtAux2(0).Text = Trim(TxtAux2(0).Text)
+        If TxtAux2(0).Text = "" Then
+            MsgBox "Escriba la accion", vbExclamation
+            Exit Function
+        End If
+        
+        SQL = "UPDATE slima2 Set accion=" & DBSet(TxtAux2(0).Text, "T")
+        SQL = SQL & ObtenerWhereCP(True) & " AND linea=" & data4.Recordset!linea
+        
     End If
 
     If SQL <> "" Then
@@ -3658,14 +3927,14 @@ Dim SQL As String
 
     On Error GoTo ECargaGrid
 
+
     b = vDataGrid.Enabled
     
-    SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
-'    vDataGrid.RowHeight = 470
-    CargaGrid2 vDataGrid, vData
-   
-        
+    SQL = MontaSQLCarga(enlaza, Right(vDataGrid.Name, 1) = 2)
+    
+    CargaGridGnral vDataGrid, vData, SQL, primeravez
+    CargaGrid3 vDataGrid, vData
+       
     vDataGrid.ScrollBars = dbgAutomatic
     vDataGrid.Enabled = b
     
@@ -3676,25 +3945,41 @@ ECargaGrid:
 End Sub
 
 
-Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
+Private Sub CargaGrid3(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim tots As String
-
+Dim esGrid2 As Boolean
     On Error GoTo ECargaGrid
   
     vData.Refresh
     
-    'codclien,nummante
-    tots = "N||||0|;N||||0|;"
-    'fecharev,codtraba,observa
-    tots = tots & "S|TxtAux1(0)|T|Fecha Rev.|1100|;S|TxtAux1(1)|T|Técnico|820|;S|cmdAux|B||0|;S|TxtAux1(2)|T|Observaciones|8180|;"
-    arregla tots, vDataGrid, Me
+    esGrid2 = Right(vDataGrid.Name, 1) = 2
     
-     vDataGrid.Columns(3).NumberFormat = "0000"
-'     vDataGrid.Columns(4).WrapText = True
+    If esGrid2 Then
+        'codclien,nummante
+        tots = "N||||0|;N||||0|;N||||0|;"
+        'fecharev,codtraba,observa
+        tots = tots & "S|TxtAux2(0)|T|Accion|9100|;"
+        arregla tots, vDataGrid, Me
+        
+         
+         vDataGrid.Enabled = (Modo = 0) Or (Modo = 2) Or (Modo = 6 And ModificaLineas = 0)
      
-'     vDataGrid.RowHeight = 470
-
-     vDataGrid.Enabled = (Modo = 0) Or (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
+    Else
+        'codclien,nummante
+        tots = "N||||0|;N||||0|;"
+        'fecharev,codtraba,observa
+        tots = tots & "S|TxtAux1(0)|T|Fecha Rev.|1100|;S|TxtAux1(1)|T|Técnico|820|;S|cmdAux|B||0|;S|TxtAux1(2)|T|Observaciones|8180|;"
+        arregla tots, vDataGrid, Me
+        
+         vDataGrid.Columns(3).NumberFormat = "0000"
+            '     vDataGrid.Columns(4).WrapText = True
+                 
+            '     vDataGrid.RowHeight = 470
+    
+         vDataGrid.Enabled = (Modo = 0) Or (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
+     
+    End If
+     
      Exit Sub
      
 ECargaGrid:
@@ -3722,19 +4007,19 @@ Dim b As Boolean
 End Sub
 
 
-Private Sub txtAux1_GotFocus(Index As Integer)
-    If Index <> 2 Then ConseguirFoco TxtAux1(Index), Modo
+Private Sub txtAux1_GotFocus(index As Integer)
+    If index <> 2 Then ConseguirFoco TxtAux1(index), Modo
 End Sub
 
-Private Sub txtAux1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
-Private Sub txtAux1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux1_KeyPress(index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
-        If Index <> 2 Then
-            PonerFoco TxtAux1(Index + 1)
+        If index <> 2 Then
+            PonerFoco TxtAux1(index + 1)
         Else
             PonerFocoBtn Me.cmdAceptar
         End If
@@ -3742,23 +4027,23 @@ Private Sub txtAux1_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 
-Private Sub TxtAux1_LostFocus(Index As Integer)
+Private Sub TxtAux1_LostFocus(index As Integer)
 Dim devuelve As String
 
-    TxtAux1(Index).Text = Trim(TxtAux1(Index).Text)
-    If TxtAux1(Index).Text = "" Then Exit Sub
-    Select Case Index
+    TxtAux1(index).Text = Trim(TxtAux1(index).Text)
+    If TxtAux1(index).Text = "" Then Exit Sub
+    Select Case index
         Case 0 'Fecha Revision
-            PonerFormatoFecha TxtAux1(Index)
+            PonerFormatoFecha TxtAux1(index)
             
         Case 1 'Cod. Trabajador
-            If PonerFormatoEntero(Me.TxtAux1(Index)) Then
+            If PonerFormatoEntero(Me.TxtAux1(index)) Then
                 devuelve = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", TxtAux1(1).Text, "N")
                 Text2(21).Text = devuelve
                 FormateaCampo Me.TxtAux1(1)
                 If devuelve = "" Then
-                    MsgBox "No existe el Técnico: " & TxtAux1(Index).Text, vbExclamation
-                    PonerFoco TxtAux1(Index)
+                    MsgBox "No existe el Técnico: " & TxtAux1(index).Text, vbExclamation
+                    PonerFoco TxtAux1(index)
                 End If
             End If
             
@@ -3772,7 +4057,8 @@ Private Sub BotonMtoLineas(numTab As Integer, cad As String)
         Me.SSTab1.Tab = numTab
         NumTabMto = numTab
         TituloLinea = cad
-        PonerModo 5
+        
+        PonerModo IIf(numTab = 2, 5, 6)
         PonerBotonCabecera True
 End Sub
 
@@ -3792,12 +4078,15 @@ Dim SQL As String
     'Lineas Revisiones
     conn.Execute "Delete from slima1 " & SQL
     
+    'Lineas acciones
+    conn.Execute "Delete from slima2 " & SQL
+    
     'Cabecera
     conn.Execute "Delete from scaman " & SQL
 
 FinEliminar:
     If Err.Number <> 0 Then
-        MuestraError Err.Number, "Eliminar"
+        MuestraError Err.Number, "Eliminar", Err.Description
         'Conn.RollbackTrans
         Eliminar = False
     Else
@@ -3811,6 +4100,7 @@ Private Sub LimpiarDataGrids()
 'Pone los Grids sin datos, apuntando a ningún registro
 On Error Resume Next
     CargaGrid DataGrid1, Data2, False
+    CargaGrid DataGrid2, data4, False
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -3877,7 +4167,7 @@ Dim SQL As String
 End Function
 
 
-Private Function MontaSQLCarga(enlaza As Boolean) As String
+Private Function MontaSQLCarga(enlaza As Boolean, esDatagrid2 As Boolean) As String
 '--------------------------------------------------------------------
 ' MontaSQlCarga:
 '   Basándose en la información proporcionada por el vector de campos
@@ -3888,26 +4178,35 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 '--------------------------------------------------------------------
 Dim SQL As String
     
-    SQL = "SELECT * FROM slima1"
+    SQL = "1"
+    If esDatagrid2 Then SQL = "2"
+    
+    SQL = "SELECT * FROM slima" & SQL
     If enlaza Then
         SQL = SQL & " " & ObtenerWhereCP(True)
+        If esDatagrid2 Then
+            SQL = SQL & " ORDER BY linea"
+        Else
+            SQL = SQL & Ordenacion
+        End If
     Else
-        SQL = SQL & " WHERE codclien = -1"
+        SQL = SQL & " WHERE false "
+        
     End If
-    SQL = SQL & Ordenacion
+    
     MontaSQLCarga = SQL
 End Function
 
 
 Private Sub SumarTotal()
 Dim total As Currency
-Dim i As Byte
+Dim I As Byte
 
     'Calcular el total actual
     total = 0
-    For i = 8 To 30 Step 2
-        If Text1(i).Text <> "" Then total = total + CCur(Text1(i).Text)
-    Next i
+    For I = 8 To 30 Step 2
+        If Text1(I).Text <> "" Then total = total + CCur(Text1(I).Text)
+    Next I
     If total <> 0 Then
         Text2(2).Text = CStr(total)
         PonerFormatoDecimal Text2(2), 3
@@ -3917,9 +4216,9 @@ Dim i As Byte
     
     'Calcular el total Siguiente
     total = 0
-    For i = 9 To 31 Step 2
-        If Text1(i).Text <> "" Then total = total + CCur(Text1(i).Text)
-    Next i
+    For I = 9 To 31 Step 2
+        If Text1(I).Text <> "" Then total = total + CCur(Text1(I).Text)
+    Next I
     If total <> 0 Then
         Text2(3).Text = CStr(total)
         PonerFormatoDecimal Text2(3), 3
@@ -3931,30 +4230,30 @@ End Sub
 
 Private Sub SumarTotalHistorico()
 Dim total As Currency
-Dim i As Byte
+Dim I As Byte
 
     'Calcular el total actual
     total = 0
-    For i = 22 To 33
-        If Text2(i).Text <> "" Then total = total + CCur(Text2(i).Text)
-    Next i
+    For I = 22 To 33
+        If Text2(I).Text <> "" Then total = total + CCur(Text2(I).Text)
+    Next I
     If total <> 0 Then
-        Text2(i).Text = CStr(total)
-        PonerFormatoDecimal Text2(i), 3
+        Text2(I).Text = CStr(total)
+        PonerFormatoDecimal Text2(I), 3
     Else
-        Text2(i).Text = ""
+        Text2(I).Text = ""
     End If
     
     'Calcular el total Siguiente
     total = 0
-    For i = 35 To 46
-        If Text2(i).Text <> "" Then total = total + CCur(Text2(i).Text)
-    Next i
+    For I = 35 To 46
+        If Text2(I).Text <> "" Then total = total + CCur(Text2(I).Text)
+    Next I
     If total <> 0 Then
-        Text2(i).Text = CStr(total)
-        PonerFormatoDecimal Text2(i), 3
+        Text2(I).Text = CStr(total)
+        PonerFormatoDecimal Text2(I), 3
     Else
-        Text2(i).Text = ""
+        Text2(I).Text = ""
     End If
 End Sub
 
@@ -3964,7 +4263,7 @@ Private Sub PonerModoOpcionesMenu(Modo As Byte)
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
 Dim b As Boolean
 
-    b = (Modo = 2) Or (Modo = 5)
+    b = (Modo = 2) Or (Modo >= 5)
     'Insertar
     Toolbar1.Buttons(5).Enabled = (b Or Modo = 0)
     Me.mnNuevo.Enabled = (b Or Modo = 0)
@@ -3983,11 +4282,15 @@ Dim b As Boolean
     'Lineas Histórico
     Toolbar1.Buttons(11).Enabled = b
     Me.mnHistorico.Enabled = b
+    Me.mnLineasAccion.Enabled = mnHistorico.Enabled
+    
+    
     Me.mnOpciones.Enabled = b Or (Modo = 0)
     Me.mnMtoLineas.Enabled = b Or (Modo = 0)
+    
     'Componentes
     Me.Toolbar1.Buttons(12).Enabled = b
-    
+    Me.Toolbar1.Buttons(13).Enabled = mnLineasAccion.Enabled
     
     b = (Modo >= 3) Or Modo = 1
     'Buscar
@@ -4000,7 +4303,7 @@ End Sub
 
 
 Private Sub PonerCamposHistorico()
-Dim i As Integer
+Dim I As Integer
     
     On Error Resume Next
     
@@ -4014,11 +4317,11 @@ Dim i As Integer
     Me.Label1(38).Caption = Data3.Recordset.Fields(0).Value
     Me.Label1(47).Caption = Me.Label1(38).Caption
     
-    For i = 1 To 12
+    For I = 1 To 12
         
         'Text2(22).Text = Format(Data3.Recordset.Fields(4).Value, FormatoCantidad)
-        Text2(21 + i).Text = Format(Data3.Recordset.Fields(i).Value, FormatoCantidad)
-    Next i
+        Text2(21 + I).Text = Format(Data3.Recordset.Fields(I).Value, FormatoCantidad)
+    Next I
     
        
     'Segundo Año
@@ -4030,11 +4333,11 @@ Dim i As Integer
         Me.Label1(46).Caption = Me.Label1(37).Caption
         
         
-        For i = 1 To 12
+        For I = 1 To 12
             
             'Text2(22).Text = Format(Data3.Recordset.Fields(4).Value, FormatoCantidad)
-            Text2(34 + i).Text = Format(Data3.Recordset.Fields(i).Value, FormatoCantidad)
-        Next i
+            Text2(34 + I).Text = Format(Data3.Recordset.Fields(I).Value, FormatoCantidad)
+        Next I
         
         
         
@@ -4042,9 +4345,9 @@ Dim i As Integer
         Data3.Recordset.MoveLast
         Me.Label1(37).Caption = ""
         Me.Label1(46).Caption = ""
-        For i = 4 To 15
-            Text2(i + 31).Text = ""
-        Next i
+        For I = 4 To 15
+            Text2(I + 31).Text = ""
+        Next I
     End If
     SumarTotalHistorico
     
@@ -4053,7 +4356,7 @@ End Sub
 
 
 Private Sub LimpiarCamposHistorico()
-Dim i As Byte
+Dim I As Byte
 
     Me.imgFlecha(0).visible = False
     Me.imgFlecha(1).visible = False
@@ -4061,10 +4364,10 @@ Dim i As Byte
     Me.Label1(37).Caption = "Año"
     Me.Label1(46).Caption = "Año"
     Me.Label1(47).Caption = "Año"
-    For i = 4 To 15
-        Text2(i + 18).Text = ""
-        Text2(i + 31).Text = ""
-    Next i
+    For I = 4 To 15
+        Text2(I + 18).Text = ""
+        Text2(I + 31).Text = ""
+    Next I
     'Limpiar el total del Histórico
     Text2(34).Text = ""
     Text2(47).Text = ""
@@ -4109,14 +4412,14 @@ End Sub
 
 
 Private Sub Colorines()
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
     
-    i = cmbMes.ListIndex
-    For J = 1 To i
+    I = cmbMes.ListIndex
+    For J = 1 To I
         Text1(((J - 1) * 2) + 8).ForeColor = vbRed
     Next J
-    For J = i + 1 To 12
+    For J = I + 1 To 12
         Text1(((J - 1) * 2) + 8).ForeColor = vbBlack
     Next J
 End Sub
@@ -4124,7 +4427,7 @@ End Sub
 
 
 Private Function Traspasa_A_Anulados() As String
-Dim i As Integer
+Dim I As Integer
 Dim C As String
 Dim F As Date
 
@@ -4146,9 +4449,9 @@ Dim F As Date
     'Los campos son los mismos MAS :
     '           FECHABAJA,usuario(texto),codincid
     C = ""
-    For i = 0 To Data1.Recordset.Fields.Count - 1
-        C = C & "," & Data1.Recordset.Fields(i).Name
-    Next i
+    For I = 0 To Data1.Recordset.Fields.Count - 1
+        C = C & "," & Data1.Recordset.Fields(I).Name
+    Next I
     C = Mid(C, 2)
     C = "INSERT INTO scamana(fechabaj,usuario,codincid," & C & ") SELECT " & CadenaDesdeOtroForm & C & " FROM scaman WHERE codclien="
     C = C & Data1.Recordset!codClien & " AND nummante = '" & DevNombreSQL(Data1.Recordset!nummante) & "'"
@@ -4157,9 +4460,9 @@ Dim F As Date
     'Las lineas de hco de importes
     If Not (Data3.Recordset Is Nothing) Then
         C = ""
-        For i = 0 To Data3.Recordset.Fields.Count - 1
-            C = C & "," & Data3.Recordset.Fields(i).Name
-        Next i
+        For I = 0 To Data3.Recordset.Fields.Count - 1
+            C = C & "," & Data3.Recordset.Fields(I).Name
+        Next I
         CadenaDesdeOtroForm = "'" & Format(F, FormatoFecha) & "'"
         C = "INSERT INTO slimana(fechabaj" & C & ") SELECT " & CadenaDesdeOtroForm & C & " FROM sliman WHERE codclien="
         C = C & Data1.Recordset!codClien & " AND nummante = '" & DevNombreSQL(Data1.Recordset!nummante) & "'"
@@ -4189,7 +4492,7 @@ End Function
 
 
 Private Sub cargaDocumentos()
-Dim i As Integer
+Dim I As Integer
     
 Dim txtAnterior  As String
 
@@ -4202,11 +4505,11 @@ Dim txtAnterior  As String
     txtAnterior = "Select * from " & txtAnterior & " WHERE codclien =" & Text1(0).Text
     txtAnterior = txtAnterior & " AND nummante =" & DBSet(Text1(2).Text, "T") & " ORDER BY numlinea"
     miRsAux.Open txtAnterior, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    i = 0
+    I = 0
     While Not miRsAux.EOF
-        i = i + 1
+        I = I + 1
         Me.ListView1.ListItems.Add , "C" & miRsAux!numlinea, miRsAux!ficheroDesc
-        Me.ListView1.ListItems(i).SubItems(1) = miRsAux!ficheronombre
+        Me.ListView1.ListItems(I).SubItems(1) = miRsAux!ficheronombre
         miRsAux.MoveNext
         
         
@@ -4236,6 +4539,10 @@ Private Function CargaArchivo(Archivo As String) As Boolean
     
     
     CargaArchivo = True
+    
+    
+    cmdPDF.visible = Archivo <> ""
+    
     Exit Function
 eCargaArchivo:
     MuestraError Err.Number, "Carga archivo PDF"
