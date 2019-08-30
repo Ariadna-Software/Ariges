@@ -81,7 +81,7 @@ Begin VB.Form frmFacEntOferSAIL
          TabIndex        =   1
          Tag             =   "Fecha Oferta|F|N|||scapre|fecofert|dd/mm/yyyy|N|"
          Top             =   430
-         Width           =   1065
+         Width           =   1185
       End
       Begin VB.CheckBox chkAceptado 
          Caption         =   "Aceptada"
@@ -110,12 +110,12 @@ Begin VB.Form frmFacEntOferSAIL
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   2
-         Left            =   2400
+         Left            =   2520
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Fecha Entrega|F|N|||scapre|fecentre|dd/mm/yyyy|N|"
          Top             =   430
-         Width           =   1065
+         Width           =   1305
       End
       Begin VB.Image imgBuscar 
          Height          =   240
@@ -183,20 +183,20 @@ Begin VB.Form frmFacEntOferSAIL
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   1
-         Left            =   3275
+         Left            =   3600
          Picture         =   "frmFacEntOferSAIL.frx":029B
          ToolTipText     =   "Buscar fecha"
          Top             =   180
          Width           =   240
       End
       Begin VB.Label Label1 
-         Caption         =   "F. Entrega"
-         Height          =   255
+         Caption         =   "F. reclamación"
+         Height          =   195
          Index           =   51
-         Left            =   2450
+         Left            =   2520
          TabIndex        =   105
          Top             =   240
-         Width           =   735
+         Width           =   1035
       End
    End
    Begin VB.TextBox Text2 
@@ -403,85 +403,85 @@ Begin VB.Form frmFacEntOferSAIL
       TabCaption(1)   =   "Textos de la Carta"
       TabPicture(1)   =   "frmFacEntOferSAIL.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(3)"
-      Tab(1).Control(1)=   "Label1(5)"
-      Tab(1).Control(2)=   "Label1(45)"
-      Tab(1).Control(3)=   "Label1(2)"
-      Tab(1).Control(4)=   "Label1(46)"
-      Tab(1).Control(5)=   "Text1(21)"
-      Tab(1).Control(6)=   "Text1(22)"
-      Tab(1).Control(7)=   "Text1(23)"
-      Tab(1).Control(8)=   "Text1(24)"
+      Tab(1).Control(0)=   "Text1(34)"
+      Tab(1).Control(1)=   "Text1(19)"
+      Tab(1).Control(2)=   "Text1(20)"
+      Tab(1).Control(3)=   "Text1(18)"
+      Tab(1).Control(4)=   "Text1(30)"
+      Tab(1).Control(5)=   "Text1(29)"
+      Tab(1).Control(6)=   "Text1(28)"
+      Tab(1).Control(7)=   "Text1(27)"
+      Tab(1).Control(8)=   "Text1(26)"
       Tab(1).Control(9)=   "Text1(25)"
-      Tab(1).Control(10)=   "Text1(26)"
-      Tab(1).Control(11)=   "Text1(27)"
-      Tab(1).Control(12)=   "Text1(28)"
-      Tab(1).Control(13)=   "Text1(29)"
-      Tab(1).Control(14)=   "Text1(30)"
-      Tab(1).Control(15)=   "Text1(18)"
-      Tab(1).Control(16)=   "Text1(20)"
-      Tab(1).Control(17)=   "Text1(19)"
-      Tab(1).Control(18)=   "Text1(34)"
+      Tab(1).Control(10)=   "Text1(24)"
+      Tab(1).Control(11)=   "Text1(23)"
+      Tab(1).Control(12)=   "Text1(22)"
+      Tab(1).Control(13)=   "Text1(21)"
+      Tab(1).Control(14)=   "Label1(46)"
+      Tab(1).Control(15)=   "Label1(2)"
+      Tab(1).Control(16)=   "Label1(45)"
+      Tab(1).Control(17)=   "Label1(5)"
+      Tab(1).Control(18)=   "Label1(3)"
       Tab(1).ControlCount=   19
       TabCaption(2)   =   "Concepto y Gestión Oferta"
       TabPicture(2)   =   "frmFacEntOferSAIL.frx":039B
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label1(38)"
-      Tab(2).Control(1)=   "Label1(37)"
-      Tab(2).Control(2)=   "Text1(31)"
-      Tab(2).Control(3)=   "Text1(32)"
+      Tab(2).Control(0)=   "Text1(32)"
+      Tab(2).Control(1)=   "Text1(31)"
+      Tab(2).Control(2)=   "Label1(37)"
+      Tab(2).Control(3)=   "Label1(38)"
       Tab(2).ControlCount=   4
       TabCaption(3)   =   "Grupo sumergido"
       TabPicture(3)   =   "frmFacEntOferSAIL.frx":03B7
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Line2"
-      Tab(3).Control(1)=   "Label1(18)"
-      Tab(3).Control(2)=   "Label1(23)"
-      Tab(3).Control(3)=   "Label1(24)"
-      Tab(3).Control(4)=   "Label1(27)"
-      Tab(3).Control(5)=   "Label1(28)"
-      Tab(3).Control(6)=   "Label1(29)"
-      Tab(3).Control(7)=   "Label1(40)"
-      Tab(3).Control(8)=   "Label1(43)"
-      Tab(3).Control(9)=   "Label1(44)"
-      Tab(3).Control(10)=   "imgBuscar(8)"
-      Tab(3).Control(11)=   "imgBuscar(9)"
-      Tab(3).Control(12)=   "imgBuscar(10)"
-      Tab(3).Control(13)=   "Text4(0)"
-      Tab(3).Control(14)=   "Text4(1)"
-      Tab(3).Control(15)=   "Text4(2)"
-      Tab(3).Control(16)=   "Text4(3)"
-      Tab(3).Control(17)=   "Text4(4)"
+      Tab(3).Control(0)=   "Text4(23)"
+      Tab(3).Control(1)=   "Text4(22)"
+      Tab(3).Control(2)=   "Text4(21)"
+      Tab(3).Control(3)=   "Text4(20)"
+      Tab(3).Control(4)=   "Text4(19)"
+      Tab(3).Control(5)=   "Text4(18)"
+      Tab(3).Control(6)=   "Text4(17)"
+      Tab(3).Control(7)=   "Text4(16)"
+      Tab(3).Control(8)=   "Text4(15)"
+      Tab(3).Control(9)=   "Text4(14)"
+      Tab(3).Control(10)=   "Text4(13)"
+      Tab(3).Control(11)=   "Text4(12)"
+      Tab(3).Control(12)=   "Text4(11)"
+      Tab(3).Control(13)=   "Text4(10)"
+      Tab(3).Control(14)=   "Text4(9)"
+      Tab(3).Control(15)=   "Text4(8)"
+      Tab(3).Control(16)=   "Text4(7)"
+      Tab(3).Control(17)=   "Text4(6)"
       Tab(3).Control(18)=   "Text4(5)"
-      Tab(3).Control(19)=   "Text4(6)"
-      Tab(3).Control(20)=   "Text4(7)"
-      Tab(3).Control(21)=   "Text4(8)"
-      Tab(3).Control(22)=   "Text4(9)"
-      Tab(3).Control(23)=   "Text4(10)"
-      Tab(3).Control(24)=   "Text4(11)"
-      Tab(3).Control(25)=   "Text4(12)"
-      Tab(3).Control(26)=   "Text4(13)"
-      Tab(3).Control(27)=   "Text4(14)"
-      Tab(3).Control(28)=   "Text4(15)"
-      Tab(3).Control(29)=   "Text4(16)"
-      Tab(3).Control(30)=   "Text4(17)"
-      Tab(3).Control(31)=   "Text4(18)"
-      Tab(3).Control(32)=   "Text4(19)"
-      Tab(3).Control(33)=   "Text4(20)"
-      Tab(3).Control(34)=   "Text4(21)"
-      Tab(3).Control(35)=   "Text4(22)"
-      Tab(3).Control(36)=   "Text4(23)"
+      Tab(3).Control(19)=   "Text4(4)"
+      Tab(3).Control(20)=   "Text4(3)"
+      Tab(3).Control(21)=   "Text4(2)"
+      Tab(3).Control(22)=   "Text4(1)"
+      Tab(3).Control(23)=   "Text4(0)"
+      Tab(3).Control(24)=   "imgBuscar(10)"
+      Tab(3).Control(25)=   "imgBuscar(9)"
+      Tab(3).Control(26)=   "imgBuscar(8)"
+      Tab(3).Control(27)=   "Label1(44)"
+      Tab(3).Control(28)=   "Label1(43)"
+      Tab(3).Control(29)=   "Label1(40)"
+      Tab(3).Control(30)=   "Label1(29)"
+      Tab(3).Control(31)=   "Label1(28)"
+      Tab(3).Control(32)=   "Label1(27)"
+      Tab(3).Control(33)=   "Label1(24)"
+      Tab(3).Control(34)=   "Label1(23)"
+      Tab(3).Control(35)=   "Label1(18)"
+      Tab(3).Control(36)=   "Line2"
       Tab(3).ControlCount=   37
       TabCaption(4)   =   "Documentos"
       TabPicture(4)   =   "frmFacEntOferSAIL.frx":03D3
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "ImgPDF(0)"
-      Tab(4).Control(1)=   "ImgPDF(2)"
-      Tab(4).Control(2)=   "ImgPDF(1)"
+      Tab(4).Control(0)=   "cmdPDF"
+      Tab(4).Control(1)=   "AcroPDF1"
+      Tab(4).Control(2)=   "ListView1"
       Tab(4).Control(3)=   "Label1(47)"
-      Tab(4).Control(4)=   "ListView1"
-      Tab(4).Control(5)=   "AcroPDF1"
-      Tab(4).Control(6)=   "cmdPDF"
+      Tab(4).Control(4)=   "ImgPDF(1)"
+      Tab(4).Control(5)=   "ImgPDF(2)"
+      Tab(4).Control(6)=   "ImgPDF(0)"
       Tab(4).ControlCount=   7
       TabCaption(5)   =   "Totales"
       TabPicture(5)   =   "frmFacEntOferSAIL.frx":03EF
@@ -2152,6 +2152,7 @@ Begin VB.Form frmFacEntOferSAIL
          Picture         =   "frmFacEntOferSAIL.frx":1CC4
          ToolTipText     =   "Modificar"
          Top             =   600
+         Visible         =   0   'False
          Width           =   240
       End
       Begin VB.Image ImgPDF 
@@ -3484,8 +3485,10 @@ Private Sub Form_Load()
     CodTipoMov = "OFE"
     VieneDeBuscar = False 'Para el CPostal
    
-    SSTab1.TabVisible(4) = vParamAplic.NumeroInstalacion = 4
-   
+    SSTab1.TabVisible(4) = vParamAplic.NumeroInstalacion = vbEuler
+    
+    If vParamAplic.NumeroInstalacion <> vbEuler Then Label1(51).Caption = "F. entrega"
+    
    
     'Comprobar si es Departamento o Direccion
     Me.Label1(1).Caption = DevuelveTextoDepto(True)
@@ -4177,6 +4180,7 @@ End Sub
 
 Private Sub ListView1_DblClick()
 Dim C As String
+    
     C = ""
     If CarpetaDestinoOferta <> "" Then
         If ListView1.ListItems.Count > 0 Then
@@ -4267,6 +4271,7 @@ Dim LineasQueSepasan As String
         'Tenemos en CadenaSQL parte de la SELECT para insertar el Pedido
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
+        
         PasarOfertaAPedido CadenaSQL, LineasQueSepasan
 
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -6285,6 +6290,8 @@ Dim CCost As String
         SQL = SQL & "'T'"
     End If
     SQL = SQL & ",codcapit,cantidad"    'ENERO 2019  solicitadas
+    
+    SQL = SQL & ", 0 idL"    'ENERO 2019  solicitadas
     SQL = SQL & " FROM " & NomTablaLineas & " WHERE numofert=" & Text1(0).Text
 
     
@@ -6318,6 +6325,7 @@ Dim CCost As String
     InsertarLineasPedido = True
     Exit Function
 Elin:
+    MsgBox Err.Description, vbExclamation
     Set RS = Nothing
      'Hay error , almacenamos y salimos
     InsertarLineasPedido = False

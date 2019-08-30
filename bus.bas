@@ -1,11 +1,12 @@
 Attribute VB_Name = "bus"
 Option Explicit
 
+Public Const vbAlzira = 1
 Public Const vbHerbelca = 2
 Public Const vbEuler = 4
 Public Const vbFontenas = 5
 Public Const vbFenollar = 6
-
+Public Const vbAmesa = 7
 
 Public vUsu As Usuario  'Datos usuario
 Public vEmpresa As Cempresa 'Los datos de la empresa
@@ -15,7 +16,7 @@ Public vConfig As Configuracion 'Parametros Configuracion
 
 Public vParamTPV As CParamTPV 'Parametros para el TPV
 
-'LOG de acciones relevantes
+'LOG de acciones relevantesfrm
 Public LOG As cLOG   'Se instancia , se ejecuta LOG.insertar y se elimina :LOG=nothing   Ver ejemplo borre facturas
 
 
@@ -520,62 +521,21 @@ End Function
 
 
 
-'Para las cosas que tengan que ver con aridoc
-'Utilizaremos la conexion de conta
-Public Function AbrirConexionAridoc() As Boolean
-Dim cad As String
-On Error GoTo EAbrirConexion
 
+
+
+
+
+
+
+
+
+Public Sub AbrirGeolocalizacion(ByVal Coordendadas As String)
+
+    Coordendadas = "https://www.google.com/maps/?q=" & Coordendadas
+    LanzaVisorMimeDocumento frmPpal.hwnd, Coordendadas
     
-    AbrirConexionAridoc = False
-    Set ConnConta = Nothing
-    Set ConnConta = New Connection
-    ConnConta.CursorLocation = adUseServer   'Si ponemos esta alguns errores de Conn no se muestran correctamente
-
-    cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE= Aridoc;DATABASE=Aridoc"
-    'Cad = Cad & ";UID=" & vConfig.User
-    'Cad = Cad & ";PWD=" & vConfig.password
-    cad = cad & ";Persist Security Info=true"
-    
-    ConnConta.ConnectionString = cad
-    ConnConta.Open
-    ConnConta.Execute "Set AUTOCOMMIT = 1"
-    AbrirConexionAridoc = True
-    Exit Function
-    
-EAbrirConexion:
-    MuestraError Err.Number, "Abrir conexión BD:Aridoc.", Err.Description
-End Function
-
-
-
-Public Function Conexion_Aridoc_(abrir As Boolean) As Boolean
-Dim Bien As Boolean
-    Conexion_Aridoc_ = False
-    CerrarConexionConta
-    If abrir Then
-        Bien = AbrirConexionAridoc()
-    Else
-        'Reabrimos la conexion conta
-        Bien = AbrirConexionConta(False)
-    End If
-    If Not Bien Then
-        If Not abrir Then
-            MsgBox "EL PRORGRAMA FINALIZARA", vbExclamation
-            End
-        End If
-    Else
-        Conexion_Aridoc_ = True
-    End If
-    
-End Function
-
-
-
-
-
-
-
+End Sub
 
 
 
@@ -1418,7 +1378,7 @@ End Function
 
 'Lo que hace es comprobar que si la resolucion es mayor
 'que 800x600 lo pone en el 400
-Public Sub AjustarPantalla(ByRef formulario As Form)
+Public Sub AjustarPantalla(ByRef Formulario As Form)
 '    If Screen.Width > 13000 Then
 '        formulario.Top = 400
 '        formulario.Left = 400
@@ -2600,7 +2560,7 @@ Dim InsertaHco As Boolean
         If IsNull(RS!precionu) Then
             If FechaNUeTele <> "" Then
                 'Viene de TELEMATEL. Lleva fecha de cambio
-                SQL = "UPDATE sprees SET precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(FechaNUeTele, "F")
+                SQL = "UPDATE sprees SET precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(FechaNUeTele, "F") & ", precion1=null"
                 
             Else
                 'Lo que hacia antes de Febrero 2019
@@ -2683,3 +2643,47 @@ End Function
 
 
 
+Public Function DevuelveTipoFacturaDesdeAlbaran(TipoAlb As String) As String
+Dim codtipom As String
+
+     Select Case TipoAlb
+        Case "ALV", "ALM": 'ALV: Albaranes venta a clientes
+            codtipom = "FAV"
+            If TipoAlb = "ALM" Then
+                If vParamAplic.FrasMostradorSerieDistinta Then codtipom = "FMO"
+            End If
+            
+            
+        Case "ALR": 'Albaranes de reparacion en clientes
+            codtipom = "FAR"
+            
+        Case "ART": 'Albaranes de factura rectificativa
+            codtipom = "FRT"
+        Case "ALS": 'Albaranes de servicios [SERVICIOS]
+            codtipom = "FAS"
+            
+        Case "ALZ"  'Albaranes "presupuestos". Es decir, el "B"
+            codtipom = "FAZ"
+        Case "ALI"
+            codtipom = "FAI"
+        Case "ALT"
+            'Telfonia
+            codtipom = "FAT"
+            'ComprobarRecargoFinanciero = True
+        Case "ALG"
+            'Agua Bolbaite
+            codtipom = "FAG"
+                    
+        Case "ALO"
+            'Orden de trabajo
+            codtipom = "FAO"
+            
+        Case "ALE"
+            'Trabajo externo
+            codtipom = "FAE"
+            
+        Case Else
+            MsgBox TipoAlb & " no esta asociado a ningún tipo de  factura", vbExclamation
+    End Select
+    DevuelveTipoFacturaDesdeAlbaran = codtipom
+End Function

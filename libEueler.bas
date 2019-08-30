@@ -3,11 +3,11 @@ Option Explicit
 
 'Si campo2="" entonces es una oferta
 ' Si campo2<>"" es un mantenimiento
-Public Function ComprobarCarpetaPDFSMante(campo1 As Long, campo2 As String) As Boolean
+Public Function ComprobarCarpetaPDFSMante2(campo1 As Long, campo2 As String) As String
 Dim C As String
     
     On Error GoTo eComprobarCarpetaOferta
-    ComprobarCarpetaPDFSMante = False
+    ComprobarCarpetaPDFSMante2 = ""
     C = EulerParam & "\"
     
     
@@ -16,12 +16,15 @@ Dim C As String
     
     If Dir(C, vbDirectory) = "" Then MkDir C
     
-    ComprobarCarpetaPDFSMante = True
+    ComprobarCarpetaPDFSMante2 = C & "\"
     
     
     
 eComprobarCarpetaOferta:
-    If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
+    If Err.Number <> 0 Then
+        MuestraError Err.Number, Err.Description
+        C = ""
+    End If
 End Function
 
 
@@ -57,29 +60,26 @@ End Function
 
 
 
-Public Function EliminarArhivoPDF2(campo1 As Long, campo2 As String, Nombre As String) As Boolean
+Public Function EliminarArhivoPDF(campo1 As Long, campo2 As String, Nombre As String) As Boolean
 Dim C As String
     On Error Resume Next
-    EliminarArhivoPDF2 = False
+    EliminarArhivoPDF = False
     
     C = EulerParam & "\"
-    'If campo2 = "" Then
-    '    C = C & "Ofertas\" & Format(campo1, "00000") & "\" & Nombre
-    'Else
-        
-        C = C & "Mante\" & Format(campo1, "000000") & campo2 & "\" & Nombre
-    'End If
+    
+    C = C & "Mante\" & Format(campo1, "000000") & campo2 & "\" & Nombre
+
     
     
     If Dir(C, vbArchive) = "" Then
         MsgBox "No existe el archivo dentro de la oferta", vbExclamation
-        EliminarArhivoPDF2 = True 'Para que borre la BD
+        EliminarArhivoPDF = True 'Para que borre la BD
     Else
         Kill C
         If Err.Number <> 0 Then
             MuestraError Err.Number, Err.Description
         Else
-            EliminarArhivoPDF2 = True
+            EliminarArhivoPDF = True
         End If
     End If
 End Function
@@ -110,18 +110,23 @@ End Function
 ' Si campo2<>"" es un mantenimiento
 Public Function CopiaArhivoPDF2(campo1 As Long, campo2 As String, OrigenCompleto As String, Destino As String) As Boolean
 Dim C As String
-    
+Dim Extension As String  'MAYO 2019   Aceptamos todo tipo de ficvhero
+Dim J As Integer
+
+ 
     On Error GoTo eCopiaArhivoOferta
     CopiaArhivoPDF2 = False
     
-     C = EulerParam & "\"
+    C = EulerParam & "\"
     
-'    If campo2 = "" Then
-'        C = C & "Ofertas\" & Format(campo1, "00000") & "\" & Destino & ".pdf"
-'    Else
+    
+    J = InStrRev(OrigenCompleto, ".")
+    If J = 0 Then Err.Raise 513, , "Fichero si extension: " & OrigenCompleto
         
-        C = C & "Mante\" & Format(campo1, "000000") & campo2 & "\" & Destino & ".pdf"
-'    End If
+    Extension = Mid(OrigenCompleto, J)
+    If Len(Extension) > 6 Then Err.Raise 513, , "Extension incorrecta: " & Extension
+        
+    C = C & "Mante\" & Format(campo1, "000000") & campo2 & "\" & Destino & Extension
     FileCopy OrigenCompleto, C
     
     CopiaArhivoPDF2 = True

@@ -395,7 +395,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "16:29"
+            TextSave        =   "14:04"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -895,14 +895,6 @@ Begin VB.MDIForm frmPpal
       Begin VB.Menu mnConfParamRpt 
          Caption         =   "Tipos de &Documentos"
       End
-      Begin VB.Menu mnAridoc1 
-         Caption         =   "-"
-         Index           =   0
-      End
-      Begin VB.Menu mnAridoc1 
-         Caption         =   "Configuración aridoc"
-         Index           =   1
-      End
       Begin VB.Menu mnbarra1 
          Caption         =   "-"
          Index           =   1
@@ -1134,10 +1126,6 @@ Begin VB.MDIForm frmPpal
          Begin VB.Menu mnFacInformesVarios 
             Caption         =   "Clientes Inacti&vos"
             Index           =   0
-         End
-         Begin VB.Menu mnFacInformesVarios 
-            Caption         =   "&Clientes"
-            Index           =   1
          End
          Begin VB.Menu mnFacInformesVarios 
             Caption         =   "&Altas Clientes"
@@ -1741,10 +1729,6 @@ Begin VB.MDIForm frmPpal
       End
       Begin VB.Menu mnComInfVarios 
          Caption         =   "&Informes Varios"
-         Begin VB.Menu mnComInfVarios1 
-            Caption         =   "&Proveedores"
-            Index           =   0
-         End
          Begin VB.Menu mnComInfVarios1 
             Caption         =   "&Etiquetas de proveedores"
             Index           =   1
@@ -2362,6 +2346,10 @@ Begin VB.MDIForm frmPpal
          Caption         =   "Listado credito y caucion"
          Index           =   7
       End
+      Begin VB.Menu mnUtilidadesVarias 
+         Caption         =   "Importacion coarval"
+         Index           =   8
+      End
       Begin VB.Menu mnBarra19 
          Caption         =   "-"
       End
@@ -2556,12 +2544,7 @@ Dim b As Boolean
     b = b And vParamAplic.ContabilidadB > 0 And HaMostradoCanal2_elB
     PuntoDeMenuVisible Me.mnAlbaranesB, b
     PuntoDeMenuVisible mnFacturarPresupuestos, b
-   
-
-       
-    'De momento:
-    PuntoDeMenuVisible Me.mnAridoc1(0), True
-    PuntoDeMenuVisible Me.mnAridoc1(1), True
+  
     
        
     'Produccion
@@ -2716,8 +2699,9 @@ Dim b As Boolean
         PuntoDeMenuVisible mnMtoEuler(0), False
     End If
     
+    PuntoDeMenuVisible mnUtilidadesVarias(8), vParamAplic.ImportacionesCoarval
     
-    
+        
     
     'Declaracion  fitosnaitarios
     mnUtiDeclaraLOM(0).visible = vParamAplic.LotesGeneralitat 'SUBVENCIONADOS
@@ -3107,8 +3091,7 @@ Private Sub mnAlmCategoria_Click()
 End Sub
 
 Private Sub mnAlmControlStockDesdeInv_Click()
-    'frmListado3.Opcion = 27
-    'frmListado3.Show vbModal
+
     AbrirListado3 27
 End Sub
 
@@ -3239,20 +3222,6 @@ Private Sub mnAlmValoracionInve_Click()
     AbrirListado (16)
 End Sub
 
-
-
-Private Sub mnAridoc1_Click(index As Integer)
-
-
-    'Configuracion aridoc
-    If index = 1 Then HacerMenuARidoc 0
-    
-End Sub
-
-Private Sub mnAridocFacturas_Click()
-    frmAridocSeleccion.vOpcion = 1
-    frmAridocSeleccion.Show vbModal
-End Sub
 
 Private Sub mnArticulos2_Click(index As Integer)
     Select Case index
@@ -3486,9 +3455,10 @@ End Sub
 
 Private Sub mnComInfVarios1_Click(index As Integer)
     Select Case index
-    Case 0
-        'Informe de Proveedores
-        AbrirListado (58)   ': Informe Proveedores
+    'ESTA DENTRO DE PROVEEDORES
+'    Case 0
+'        'Informe de Proveedores
+'        AbrirListado (58)   ': Informe Proveedores
     Case 1
         'Etiquetas de proveedores
         AbrirListadoOfer (305) '305: Informe Etiquetas de Proveedores
@@ -5099,6 +5069,11 @@ Private Sub mnUtilidadesVarias_Click(index As Integer)
         frmListado5.OpcionListado = 25
         frmListado5.Show vbModal
     
+    Case 8
+         frmListado5.OpcionListado = 26
+        frmListado5.OtrosDatos = ""
+        frmListado5.Show vbModal
+    
     End Select
 End Sub
 
@@ -5724,26 +5699,6 @@ End Sub
 
 
 
-'----------------------------------------------------------------------
-'----------------------------------------------------------------------
-'----------------------------------------------------------------------
-'
-'
-'   ARIDOC.  para los datos de ARIDOC reutilizare la conneion conta
-'           con lo cual la cerrare y abrire tantas veces necesite
-'
-
-
-Private Sub HacerMenuARidoc(Opcion As Byte)
-    
-    If Conexion_Aridoc_(True) Then
-        Select Case Opcion
-        Case 0
-            frmAridocConfig.Show vbModal
-        End Select
-    End If
-    Conexion_Aridoc_ False
-End Sub
 
 
 

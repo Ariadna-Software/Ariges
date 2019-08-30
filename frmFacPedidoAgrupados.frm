@@ -528,6 +528,7 @@ Dim TodoOk As Boolean
             Else
                 conn.RollbackTrans
                 TodoOk = False
+                Exit For
             End If
             lblIndicador.Caption = "actualizando"
             lblIndicador.Refresh
@@ -1402,7 +1403,7 @@ Dim Incrementa As Boolean
     End If
     
     
-    
+    If NumAlb < 0 Then Err.Raise 513, , "Error consiguiendo contador"
     
     'Acabar la sql con el contador seleccionado
     vSQL = "INSERT INTO scaalb (codtipom,numalbar,fechaalb,factursn,codclien,nomclien,domclien,codpobla,pobclien,proclien"

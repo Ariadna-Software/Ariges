@@ -173,7 +173,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim Primeravez As Boolean
+Dim primeravez As Boolean
 Dim SQL As String
 Dim AgrupaTickets As Boolean
 
@@ -193,7 +193,7 @@ Private Sub cmdContabilizar_Click()
 End Sub
 
 Private Sub Combo1_Click()
-    If Primeravez Then Exit Sub
+    If primeravez Then Exit Sub
     If Combo1.Tag = Combo1.ListIndex Then Exit Sub
     
     CargaFacturas
@@ -201,9 +201,9 @@ Private Sub Combo1_Click()
     
 End Sub
 
-Private Sub Form_Activate()
-    If Primeravez Then
-        Primeravez = False
+Private Sub Form_activate()
+    If primeravez Then
+        primeravez = False
         CargaFacturas
         
     End If
@@ -212,7 +212,7 @@ End Sub
 
 Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
-    Primeravez = True
+    primeravez = True
     Set ListView1.SmallIcons = frmPpal.ImgListPpal
         
         
@@ -264,7 +264,7 @@ Dim Todas As Byte
 End Sub
 
 Private Sub CargaListView(Cli As Boolean)
-Dim It As ListItem
+Dim IT As ListItem
 Dim FechaLimite As Date
 Dim I As Byte
 Dim Color As Long
@@ -278,19 +278,19 @@ Dim Color As Long
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         NumRegElim = NumRegElim + 1
-        Set It = ListView1.ListItems.Add(, "C" & Format(Now, "yymmdd" & Format(NumRegElim, "0000")))
+        Set IT = ListView1.ListItems.Add(, "C" & Format(Now, "yymmdd" & Format(NumRegElim, "0000")))
         
         
-        It.Text = Format(miRsAux!Fecha, "dd/mm/yyyy")
+        IT.Text = Format(miRsAux!Fecha, "dd/mm/yyyy")
  
         
-        It.SubItems(1) = miRsAux!Factura
-        It.SubItems(2) = miRsAux!Nombre
+        IT.SubItems(1) = miRsAux!Factura
+        IT.SubItems(2) = miRsAux!Nombre
         
         
-        It.SubItems(3) = Format(miRsAux!Importe, FormatoImporte)
+        IT.SubItems(3) = Format(miRsAux!Importe, FormatoImporte)
         
-        If Not Cli Then It.SmallIcon = 11
+        If Not Cli Then IT.SmallIcon = 11
                     
         If vParamAplic.SII_Tiene Then
             Color = -1
@@ -301,13 +301,13 @@ Dim Color As Long
             End If
                 
             If Color <> -1 Then
-                It.ForeColor = Color
-                For I = 1 To It.ListSubItems.Count
-                    It.ListSubItems(I).ForeColor = Color
+                IT.ForeColor = Color
+                For I = 1 To IT.ListSubItems.Count
+                    IT.ListSubItems(I).ForeColor = Color
                 Next
             End If
         End If
-        It.SubItems(4) = Format(miRsAux!Fecha, "yyyymmdd") & Val(Not Cli)
+        IT.SubItems(4) = Format(miRsAux!Fecha, "yyyymmdd") & Val(Not Cli)
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -335,6 +335,9 @@ Dim cad As String
         Else
             If Me.chkTiket.Value Then cad = cad & " AND codtipom <>'FTI'    "
         End If
+        
+        cad = cad & " AND codtipom <>'FAZ'    "
+        
     Else
         cad = "Select fecrecep fecha, numfactu factura, codprove,nomprove nombre,totalfac importe  FROM scafpc WHERE "
         cad = cad & "fecrecep>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND  "

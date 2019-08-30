@@ -153,14 +153,14 @@ Public Property Let Maximo(ByVal vData As Long)
     mvarMaximo = vData
 End Property
 
-Public Property Get Tabla() As String
+Public Property Get tabla() As String
 'se usa cuando se asigna un valor a la propiedad, en el
 'lado derecho de la asignacion
 'Syntax: Debug.Print X.Tabla
-    Tabla = mvarTabla
+    tabla = mvarTabla
 End Property
 
-Public Property Let Tabla(ByVal vData As String)
+Public Property Let tabla(ByVal vData As String)
 'se usa cuando se asigna un valor a la propiedad, en el
 'lado izquierdo de la asignacion
 'Syntax: X.Tabla = 5
@@ -214,7 +214,7 @@ End Property
 Public Function Cargar(vObjetoCarga As Object) As Boolean
     
     Dim V(9) As Variant
-    Dim i As Integer
+    Dim I As Integer
     Dim i2 As Integer
     Dim mCadena As String
     Dim Mc As String
@@ -234,16 +234,16 @@ Public Function Cargar(vObjetoCarga As Object) As Boolean
         VacioMax = True
         
         '-- Limpiamos los campos
-        For i = 1 To 9
-            V(i) = ""
-        Next i
+        For I = 1 To 9
+            V(I) = ""
+        Next I
         '-- Cargamos los datos
         mCadena = ""
         Mc = ""
         i2 = 0
-        i = 1
-        While (i <= Len(vValores)) And (i2 < 10)
-            Mc = Mid(vValores, i, 1)
+        I = 1
+        While (I <= Len(vValores)) And (i2 < 10)
+            Mc = Mid(vValores, I, 1)
             If Mc = "|" Then
                 i2 = i2 + 1
                 V(i2) = mCadena
@@ -251,7 +251,7 @@ Public Function Cargar(vObjetoCarga As Object) As Boolean
             Else
                 mCadena = mCadena & Mc
             End If
-            i = i + 1
+            I = I + 1
         Wend
         If i2 <> 9 Then
         'Se han introducido más parámetros de los que se admiten
@@ -278,7 +278,7 @@ Public Function Cargar(vObjetoCarga As Object) As Boolean
             Else
                 'Novuiembre 2018
                 'T1:  Texto pero en la busqueda NO añade el *
-                If (V(2) <> "T") And (V(2) <> "F") And (V(2) <> "N") And (V(2) <> "H") And (V(2) <> "T1") Then
+                If (V(2) <> "T") And (V(2) <> "F") And (V(2) <> "N") And (V(2) <> "H") And (V(2) <> "T1") And (V(2) <> "FH") Then
                     MsgBox "Tipo de Campo desconocido"
                     Cargar = False
                     Exit Function
@@ -384,6 +384,14 @@ Public Function Comprobar(vObjetoComp As Object) As Boolean
             Case "H"
                 If Not IsDate(vValor) Then
                     Mens = "El valor de " & mvarNombre & " debe ser una hora (hh:mm)."
+                    MsgBox Mens, vbInformation, "Comprobador de campos"
+                    Comprobar = False
+                    Exit Function
+                End If
+            Case "FH"
+                
+                If Not IsDate(vValor) Then
+                    Mens = "El valor de " & mvarNombre & " debe ser campo fecha-hora (dd/mm/yyyy hh:mm)."
                     MsgBox Mens, vbInformation, "Comprobador de campos"
                     Comprobar = False
                     Exit Function

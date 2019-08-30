@@ -12,12 +12,49 @@ Begin VB.Form frmFacEulerDatosRep
    ScaleHeight     =   8550
    ScaleWidth      =   12795
    StartUpPosition =   2  'CenterScreen
+   Begin VB.ComboBox cboRecepAgenClien 
+      Height          =   315
+      ItemData        =   "frmFacEulerDatosRep.frx":0000
+      Left            =   4800
+      List            =   "frmFacEulerDatosRep.frx":0010
+      Style           =   2  'Dropdown List
+      TabIndex        =   99
+      Top             =   600
+      Width           =   2895
+   End
+   Begin VB.Frame Frame1 
+      BorderStyle     =   0  'None
+      Caption         =   "Frame1"
+      Height          =   255
+      Left            =   10200
+      TabIndex        =   96
+      Top             =   600
+      Width           =   3255
+      Begin VB.OptionButton optEule_R 
+         Caption         =   "Cliente"
+         Height          =   195
+         Index           =   1
+         Left            =   1800
+         TabIndex        =   98
+         Top             =   0
+         Width           =   975
+      End
+      Begin VB.OptionButton optEule_R 
+         Caption         =   "Agencia"
+         Height          =   195
+         Index           =   0
+         Left            =   0
+         TabIndex        =   97
+         Top             =   0
+         Width           =   975
+      End
+   End
    Begin VB.CommandButton cmdBuscar 
       Cancel          =   -1  'True
       Caption         =   "Buscar"
       Height          =   375
       Left            =   10080
-      TabIndex        =   97
+      TabIndex        =   95
       Top             =   8040
       Width           =   1215
    End
@@ -26,7 +63,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   27
       Left            =   10440
       MaxLength       =   16
-      TabIndex        =   94
+      TabIndex        =   92
       Text            =   "Text1"
       Top             =   7440
       Width           =   2175
@@ -36,7 +73,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   26
       Left            =   10440
       MaxLength       =   16
-      TabIndex        =   93
+      TabIndex        =   91
       Text            =   "Text1"
       Top             =   7080
       Width           =   2175
@@ -46,7 +83,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   25
       Left            =   5880
       MaxLength       =   16
-      TabIndex        =   90
+      TabIndex        =   88
       Text            =   "Text1"
       Top             =   7440
       Width           =   2175
@@ -56,7 +93,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   24
       Left            =   5880
       MaxLength       =   16
-      TabIndex        =   85
+      TabIndex        =   83
       Text            =   "Text1"
       Top             =   7080
       Width           =   2175
@@ -66,7 +103,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   23
       Left            =   2280
       MaxLength       =   16
-      TabIndex        =   81
+      TabIndex        =   79
       Text            =   "Text1"
       Top             =   7440
       Width           =   1575
@@ -76,7 +113,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   22
       Left            =   2280
       MaxLength       =   50
-      TabIndex        =   80
+      TabIndex        =   78
       Text            =   "Text1"
       Top             =   7080
       Width           =   1575
@@ -85,7 +122,7 @@ Begin VB.Form frmFacEulerDatosRep
       Caption         =   "Cerrar"
       Height          =   375
       Left            =   11400
-      TabIndex        =   78
+      TabIndex        =   76
       Top             =   8040
       Width           =   1215
    End
@@ -94,18 +131,18 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   11
       Left            =   4080
       MaxLength       =   16
-      TabIndex        =   74
+      TabIndex        =   72
       Text            =   "Text1"
       Top             =   6120
       Width           =   855
    End
    Begin VB.ComboBox cboEulerUdR 
       Height          =   315
-      ItemData        =   "frmFacEulerDatosRep.frx":0000
+      ItemData        =   "frmFacEulerDatosRep.frx":003D
       Left            =   5040
-      List            =   "frmFacEulerDatosRep.frx":000D
+      List            =   "frmFacEulerDatosRep.frx":004A
       Style           =   2  'Dropdown List
-      TabIndex        =   73
+      TabIndex        =   71
       Top             =   6120
       Width           =   735
    End
@@ -114,7 +151,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   17
       Left            =   7920
       MaxLength       =   16
-      TabIndex        =   72
+      TabIndex        =   70
       Text            =   "Text1"
       Top             =   6000
       Width           =   855
@@ -124,7 +161,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   18
       Left            =   9840
       MaxLength       =   16
-      TabIndex        =   71
+      TabIndex        =   69
       Text            =   "Text1"
       Top             =   6000
       Width           =   855
@@ -134,7 +171,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   19
       Left            =   11760
       MaxLength       =   16
-      TabIndex        =   70
+      TabIndex        =   68
       Text            =   "Text1"
       Top             =   6000
       Width           =   855
@@ -144,7 +181,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   4
       Left            =   1560
-      TabIndex        =   69
+      TabIndex        =   67
       Top             =   6240
       Width           =   615
    End
@@ -153,7 +190,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   5
       Left            =   960
-      TabIndex        =   68
+      TabIndex        =   66
       Top             =   6240
       Width           =   615
    End
@@ -162,7 +199,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   6
       Left            =   2760
-      TabIndex        =   67
+      TabIndex        =   65
       Top             =   6240
       Width           =   615
    End
@@ -171,7 +208,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   7
       Left            =   2160
-      TabIndex        =   66
+      TabIndex        =   64
       Top             =   6240
       Value           =   -1  'True
       Width           =   615
@@ -181,7 +218,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   7
       Left            =   960
       MaxLength       =   50
-      TabIndex        =   49
+      TabIndex        =   47
       Text            =   "Text1"
       Top             =   4560
       Width           =   4815
@@ -191,7 +228,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   5
       Left            =   960
       MaxLength       =   50
-      TabIndex        =   48
+      TabIndex        =   46
       Text            =   "Text1"
       Top             =   4080
       Width           =   2175
@@ -201,7 +238,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   6
       Left            =   4080
       MaxLength       =   50
-      TabIndex        =   47
+      TabIndex        =   45
       Text            =   "Text1"
       Top             =   4080
       Width           =   1695
@@ -211,7 +248,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   8
       Left            =   960
       MaxLength       =   50
-      TabIndex        =   46
+      TabIndex        =   44
       Text            =   "Text1"
       Top             =   5040
       Width           =   4815
@@ -221,7 +258,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   10
       Left            =   3960
       MaxLength       =   100
-      TabIndex        =   45
+      TabIndex        =   43
       Text            =   "Text1"
       Top             =   5520
       Width           =   1815
@@ -231,7 +268,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   9
       Left            =   960
       MaxLength       =   50
-      TabIndex        =   44
+      TabIndex        =   42
       Text            =   "Text1"
       Top             =   5520
       Width           =   1575
@@ -241,7 +278,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   12
       Left            =   7920
       MaxLength       =   50
-      TabIndex        =   43
+      TabIndex        =   41
       Text            =   "Text1"
       Top             =   4080
       Width           =   2175
@@ -251,7 +288,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   13
       Left            =   7920
       MaxLength       =   50
-      TabIndex        =   42
+      TabIndex        =   40
       Text            =   "Text1"
       Top             =   4560
       Width           =   4695
@@ -261,7 +298,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   14
       Left            =   7920
       MaxLength       =   50
-      TabIndex        =   41
+      TabIndex        =   39
       Text            =   "Text1"
       Top             =   5040
       Width           =   4695
@@ -271,7 +308,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   16
       Left            =   10920
       MaxLength       =   50
-      TabIndex        =   40
+      TabIndex        =   38
       Text            =   "Text1"
       Top             =   5520
       Width           =   1695
@@ -281,7 +318,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   15
       Left            =   7920
       MaxLength       =   50
-      TabIndex        =   39
+      TabIndex        =   37
       Text            =   "Text1"
       Top             =   5520
       Width           =   1575
@@ -291,7 +328,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   0
       Left            =   2760
-      TabIndex        =   27
+      TabIndex        =   25
       Top             =   2640
       Width           =   255
    End
@@ -300,7 +337,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   1
       Left            =   3840
-      TabIndex        =   26
+      TabIndex        =   24
       Top             =   2640
       Width           =   255
    End
@@ -309,7 +346,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   2
       Left            =   5160
-      TabIndex        =   25
+      TabIndex        =   23
       Top             =   2640
       Width           =   255
    End
@@ -318,7 +355,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   3
       Left            =   6240
-      TabIndex        =   24
+      TabIndex        =   22
       Top             =   2640
       Width           =   255
    End
@@ -327,7 +364,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   4
       Left            =   7800
-      TabIndex        =   23
+      TabIndex        =   21
       Top             =   2640
       Width           =   255
    End
@@ -336,7 +373,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   5
       Left            =   2760
-      TabIndex        =   22
+      TabIndex        =   20
       Top             =   3000
       Width           =   255
    End
@@ -345,7 +382,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   6
       Left            =   3840
-      TabIndex        =   21
+      TabIndex        =   19
       Top             =   3000
       Width           =   255
    End
@@ -354,7 +391,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   7
       Left            =   5160
-      TabIndex        =   20
+      TabIndex        =   18
       Top             =   3000
       Width           =   255
    End
@@ -363,7 +400,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   8
       Left            =   6240
-      TabIndex        =   19
+      TabIndex        =   17
       Top             =   3000
       Width           =   255
    End
@@ -372,7 +409,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   9
       Left            =   7800
-      TabIndex        =   18
+      TabIndex        =   16
       Top             =   3000
       Width           =   255
    End
@@ -381,7 +418,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   3
       Left            =   8640
       MaxLength       =   16
-      TabIndex        =   17
+      TabIndex        =   15
       Text            =   "Text1"
       Top             =   2640
       Width           =   3975
@@ -391,7 +428,7 @@ Begin VB.Form frmFacEulerDatosRep
       Index           =   4
       Left            =   8640
       MaxLength       =   16
-      TabIndex        =   16
+      TabIndex        =   14
       Text            =   "Text1"
       Top             =   3000
       Width           =   3975
@@ -401,7 +438,7 @@ Begin VB.Form frmFacEulerDatosRep
       Caption         =   "Frame4"
       Height          =   375
       Left            =   240
-      TabIndex        =   12
+      TabIndex        =   10
       Top             =   1320
       Width           =   3015
       Begin VB.OptionButton optEule_R 
@@ -409,7 +446,7 @@ Begin VB.Form frmFacEulerDatosRep
          Height          =   195
          Index           =   2
          Left            =   600
-         TabIndex        =   14
+         TabIndex        =   12
          Top             =   0
          Value           =   -1  'True
          Width           =   975
@@ -419,7 +456,7 @@ Begin VB.Form frmFacEulerDatosRep
          Height          =   195
          Index           =   3
          Left            =   1680
-         TabIndex        =   13
+         TabIndex        =   11
          Top             =   0
          Width           =   975
       End
@@ -437,28 +474,10 @@ Begin VB.Form frmFacEulerDatosRep
          Height          =   195
          Index           =   21
          Left            =   0
-         TabIndex        =   15
+         TabIndex        =   13
          Top             =   0
          Width           =   1935
       End
-   End
-   Begin VB.OptionButton optEule_R 
-      Caption         =   "Agencia"
-      Height          =   195
-      Index           =   0
-      Left            =   4680
-      TabIndex        =   6
-      Top             =   600
-      Width           =   975
-   End
-   Begin VB.OptionButton optEule_R 
-      Caption         =   "Cliente"
-      Height          =   195
-      Index           =   1
-      Left            =   6000
-      TabIndex        =   5
-      Top             =   600
-      Width           =   975
    End
    Begin VB.TextBox txtEule_R 
       Height          =   315
@@ -515,7 +534,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   47
       Left            =   9720
-      TabIndex        =   96
+      TabIndex        =   94
       Top             =   7080
       Width           =   705
    End
@@ -524,7 +543,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   46
       Left            =   9720
-      TabIndex        =   95
+      TabIndex        =   93
       Top             =   7440
       Width           =   705
    End
@@ -533,7 +552,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   45
       Left            =   5280
-      TabIndex        =   92
+      TabIndex        =   90
       Top             =   7080
       Width           =   705
    End
@@ -543,7 +562,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   44
       Left            =   1200
-      TabIndex        =   91
+      TabIndex        =   89
       Top             =   7440
       Width           =   450
    End
@@ -561,8 +580,8 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   43
       Left            =   8640
-      TabIndex        =   89
-      Top             =   7200
+      TabIndex        =   87
+      Top             =   7080
       Width           =   975
    End
    Begin VB.Label Label3E 
@@ -579,7 +598,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   42
       Left            =   4320
-      TabIndex        =   88
+      TabIndex        =   86
       Top             =   7080
       Width           =   975
    End
@@ -597,7 +616,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   41
       Left            =   120
-      TabIndex        =   87
+      TabIndex        =   85
       Top             =   7080
       Width           =   975
    End
@@ -607,7 +626,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   40
       Left            =   1200
-      TabIndex        =   86
+      TabIndex        =   84
       Top             =   7080
       Width           =   780
    End
@@ -616,7 +635,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   39
       Left            =   4800
-      TabIndex        =   84
+      TabIndex        =   82
       Top             =   960
       Width           =   2865
    End
@@ -625,7 +644,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   38
       Left            =   5280
-      TabIndex        =   83
+      TabIndex        =   81
       Top             =   7440
       Width           =   705
    End
@@ -634,7 +653,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   22
       Left            =   4680
-      TabIndex        =   82
+      TabIndex        =   80
       Top             =   7080
       Width           =   705
    End
@@ -653,7 +672,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   0
       Left            =   120
-      TabIndex        =   79
+      TabIndex        =   77
       Top             =   6600
       Width           =   3015
    End
@@ -670,7 +689,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   33
       Left            =   7080
-      TabIndex        =   77
+      TabIndex        =   75
       Top             =   6000
       Width           =   705
    End
@@ -679,7 +698,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   34
       Left            =   9120
-      TabIndex        =   76
+      TabIndex        =   74
       Top             =   6000
       Width           =   705
    End
@@ -688,7 +707,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   35
       Left            =   10920
-      TabIndex        =   75
+      TabIndex        =   73
       Top             =   6000
       Width           =   705
    End
@@ -697,7 +716,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   31
       Left            =   120
-      TabIndex        =   65
+      TabIndex        =   63
       Top             =   6000
       Width           =   1035
    End
@@ -706,7 +725,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   32
       Left            =   3480
-      TabIndex        =   64
+      TabIndex        =   62
       Top             =   6000
       Width           =   705
    End
@@ -715,7 +734,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   12
       Left            =   120
-      TabIndex        =   63
+      TabIndex        =   61
       Top             =   4080
       Width           =   705
    End
@@ -724,7 +743,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   13
       Left            =   3240
-      TabIndex        =   62
+      TabIndex        =   60
       Top             =   4080
       Width           =   705
    End
@@ -733,7 +752,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   14
       Left            =   120
-      TabIndex        =   61
+      TabIndex        =   59
       Top             =   4560
       Width           =   705
    End
@@ -751,7 +770,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   16
       Left            =   1920
-      TabIndex        =   60
+      TabIndex        =   58
       Top             =   3720
       Width           =   2655
    End
@@ -760,7 +779,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   17
       Left            =   120
-      TabIndex        =   59
+      TabIndex        =   57
       Top             =   5040
       Width           =   705
    End
@@ -769,7 +788,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   18
       Left            =   3000
-      TabIndex        =   58
+      TabIndex        =   56
       Top             =   5520
       Width           =   705
    End
@@ -778,7 +797,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   19
       Left            =   120
-      TabIndex        =   57
+      TabIndex        =   55
       Top             =   5520
       Width           =   705
    End
@@ -797,7 +816,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   11
       Left            =   120
-      TabIndex        =   56
+      TabIndex        =   54
       Top             =   3360
       Width           =   4095
    End
@@ -815,7 +834,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   25
       Left            =   8880
-      TabIndex        =   55
+      TabIndex        =   53
       Top             =   3720
       Width           =   2655
    End
@@ -824,7 +843,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   26
       Left            =   7080
-      TabIndex        =   54
+      TabIndex        =   52
       Top             =   4560
       Width           =   705
    End
@@ -833,7 +852,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   27
       Left            =   7080
-      TabIndex        =   53
+      TabIndex        =   51
       Top             =   4080
       Width           =   705
    End
@@ -842,7 +861,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   28
       Left            =   7080
-      TabIndex        =   52
+      TabIndex        =   50
       Top             =   5040
       Width           =   705
    End
@@ -851,7 +870,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   29
       Left            =   10320
-      TabIndex        =   51
+      TabIndex        =   49
       Top             =   5520
       Width           =   705
    End
@@ -860,7 +879,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   30
       Left            =   7080
-      TabIndex        =   50
+      TabIndex        =   48
       Top             =   5520
       Width           =   705
    End
@@ -879,7 +898,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   1
       Left            =   120
-      TabIndex        =   38
+      TabIndex        =   36
       Top             =   1920
       Width           =   3615
    End
@@ -897,7 +916,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   2
       Left            =   120
-      TabIndex        =   37
+      TabIndex        =   35
       Top             =   2640
       Width           =   1455
    End
@@ -915,7 +934,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   3
       Left            =   120
-      TabIndex        =   36
+      TabIndex        =   34
       Top             =   3000
       Width           =   1455
    End
@@ -933,7 +952,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   4
       Left            =   2640
-      TabIndex        =   35
+      TabIndex        =   33
       Top             =   2160
       Width           =   1935
    End
@@ -951,7 +970,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   5
       Left            =   5040
-      TabIndex        =   34
+      TabIndex        =   32
       Top             =   2160
       Width           =   2175
    End
@@ -969,7 +988,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   6
       Left            =   7560
-      TabIndex        =   33
+      TabIndex        =   31
       Top             =   2280
       Width           =   1215
    End
@@ -978,7 +997,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   7
       Left            =   2520
-      TabIndex        =   32
+      TabIndex        =   30
       Top             =   2400
       Width           =   705
    End
@@ -987,7 +1006,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   8
       Left            =   3720
-      TabIndex        =   31
+      TabIndex        =   29
       Top             =   2400
       Width           =   525
    End
@@ -997,7 +1016,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   9
       Left            =   5040
-      TabIndex        =   30
+      TabIndex        =   28
       Top             =   2400
       Width           =   360
    End
@@ -1007,7 +1026,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   10
       Left            =   6120
-      TabIndex        =   29
+      TabIndex        =   27
       Top             =   2400
       Width           =   525
    End
@@ -1025,7 +1044,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   15
       Left            =   9240
-      TabIndex        =   28
+      TabIndex        =   26
       Top             =   2280
       Width           =   2655
    End
@@ -1044,7 +1063,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   255
       Index           =   20
       Left            =   240
-      TabIndex        =   11
+      TabIndex        =   9
       Top             =   240
       Width           =   2535
    End
@@ -1053,7 +1072,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   23
       Left            =   9240
-      TabIndex        =   10
+      TabIndex        =   8
       Top             =   960
       Width           =   2865
    End
@@ -1062,7 +1081,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   24
       Left            =   11640
-      TabIndex        =   9
+      TabIndex        =   7
       Top             =   960
       Width           =   405
    End
@@ -1072,7 +1091,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   36
       Left            =   240
-      TabIndex        =   8
+      TabIndex        =   6
       Top             =   600
       Width           =   1185
    End
@@ -1081,7 +1100,7 @@ Begin VB.Form frmFacEulerDatosRep
       Height          =   195
       Index           =   37
       Left            =   2160
-      TabIndex        =   7
+      TabIndex        =   5
       Top             =   600
       Width           =   1005
    End
@@ -1222,9 +1241,13 @@ Dim SQL As String
         Next
     
         'Agencia cliente
-        N = 1
-        If DBLet(miRsAux!RecepAgenClien, "N") = 0 Then N = 0
-        optEule_R(N).Value = True
+        'N = 1
+        'If DBLet(miRsAux!RecepAgenClien, "N") = 0 Then N = 0
+        'optEule_R(N).Value = True
+        
+        cboRecepAgenClien.ListIndex = -1
+        If Not IsNull(miRsAux!RecepAgenClien) Then cboRecepAgenClien.ListIndex = miRsAux!RecepAgenClien
+        
         
         N = 3
         If DBLet(miRsAux!RecepPortes, "N") = 1 Then N = 2
@@ -1337,7 +1360,7 @@ Dim K As Integer
         miRsAux.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         SQL = ""
         While Not miRsAux.EOF
-            SQL = SQL & ", ('" & miRsAux!codtipom & "'," & miRsAux!NumFactu & "," & DBSet(miRsAux!FecFactu, "F") & ")"
+            SQL = SQL & ", ('" & miRsAux!codtipom & "'," & miRsAux!Numfactu & "," & DBSet(miRsAux!FecFactu, "F") & ")"
             miRsAux.MoveNext
         Wend
         miRsAux.Close

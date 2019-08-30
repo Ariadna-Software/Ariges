@@ -63,6 +63,7 @@ Public Sub limpiar(ByRef formulario As Form)
             Control.Text = ""
         End If
     Next Control
+    
 End Sub
 
 '-----------------------------------
@@ -101,6 +102,10 @@ Dim V
             Dev = CStr(Valor)
             NombreSQL Dev
             Dev = "'" & Dev & "'"
+            
+        Case "FH"
+        
+            Dev = "'" & Format(Valor, FormatoFecha & " hh:mm:ss") & "'"
         Case Else
             Dev = "'" & Valor & "'"
         End Select
@@ -1672,7 +1677,7 @@ Dim bus As Boolean
         If Not RA.EOF Then Aux = DBLet(RA.Fields(0), "N") + DBLet(RA.Fields(1), "N")
         RA.Close
         
-        'Lo remesado, en funcion de los das de riesgo
+        'Lo remesado, en funcion de los dias de riesgo
         C2 = 0
         C1 = "Select impvenci,impcobro,gastos,fecvenci,talondias,pagaredias,remesadiasmenor,tiporem,ctabanc1 FROM "
         C1 = C1 & " cobros  left join bancos on cobros.ctabanc1=bancos.codmacta " & SQL
@@ -3022,13 +3027,21 @@ Dim ImporteCredito As Currency
     ComprobarTotalPendienteFormasPagoRecFinan = True
     
     Set R = New ADODB.Recordset
-    SQL = "Select codmacta,limcredi from sclien where codclien=" & Cliente
+    SQL = "Select codmacta,limcredi,Recargofinanciero from sclien where codclien=" & Cliente
     R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'NO puede ser eof
+    SQL = ""
     Cta = DBLet(R.Fields(0), "T")
     ImporteCredito = DBLet(R!limcredi, "N")
+    If DBLet(R!RecargoFinanciero, "N") = 0 Then SQL = "El cliente NO tiene recargo financiero y la forma de pago SI "
     R.Close
         
+    If SQL <> "" Then
+        MsgBox SQL, vbExclamation
+        ComprobarTotalPendienteFormasPagoRecFinan = False
+        Set R = Nothing
+        Exit Function
+    End If
     Importe = 0
         
     'VEMOS EN TESORERIA

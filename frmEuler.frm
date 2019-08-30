@@ -193,7 +193,7 @@ Public Opcion As Byte
     ' 0.- Insertar documento en oferta
     ' 1.- Modificar / er observaciones
     
-Private Sub cmdAceptarFich_Click(Index As Integer)
+Private Sub cmdAceptarFich_Click(index As Integer)
 
 
     If Opcion = 0 Then
@@ -214,7 +214,7 @@ Private Sub cmdAceptarFich_Click(Index As Integer)
     Unload Me
 End Sub
 
-Private Sub cmdCancelar_Click(Index As Integer)
+Private Sub cmdCancelar_Click(index As Integer)
     Unload Me
 End Sub
 
@@ -245,57 +245,60 @@ Private Sub PonerFrameVisible(ByRef Fr As Frame)
     Me.Height = Fr.Height + 520
 End Sub
 
-Private Sub imgDir_Click(Index As Integer)
+Private Sub imgDir_Click(index As Integer)
      cd1.FileName = ""
     cd1.InitDir = "c:\"
     cd1.CancelError = False
-    If Index = 0 Then
+    If index = 0 Then
         'cd1.Filter = "Adobe PDF (*.pdf)|*.pdf|MS Office WORD (*.doc)|*.doc|MS Office WORD 2007|*.docx"
-        cd1.Filter = "Adobe PDF (*.pdf)|*.pdf"
+        cd1.Filter = "Adobe PDF (*.pdf)|*.pdf|imagenes (*.jpg)|*.jpg|Todos (*.*) |*.*"
         cd1.FilterIndex = 0
     End If
     cd1.ShowOpen
     If cd1.FileName = "" Then Exit Sub
-    If UCase(Right(cd1.FileName, 4)) <> ".PDF" Then
-        MsgBox "Solo PDFs", vbExclamation
-        Exit Sub
-    End If
+    
+    'MAYO 2019
+    'Dejo pasr
+    'If UCase(Right(cd1.FileName, 4)) <> ".PDF" Then
+    '    MsgBox "Solo PDFs", vbExclamation
+    '    Exit Sub
+    'End If
     
     
-    Text1(Index).Text = cd1.FileName
+    Text1(index).Text = cd1.FileName
     
-    PonerRestoCamposInsertarFichero Index
+    PonerRestoCamposInsertarFichero index
 End Sub
 
-Private Sub Text1_OLEDragDrop(Index As Integer, data As DataObject, Effect As Long, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Text1_OLEDragDrop(index As Integer, data As DataObject, Effect As Long, Button As Integer, Shift As Integer, X As Single, Y As Single)
         Dim V
     NumRegElim = 0
     For Each V In data.Files
         Debug.Print V
-        Text1(Index).Text = V
+        Text1(index).Text = V
         NumRegElim = NumRegElim + 1
         
     Next V
     If NumRegElim > 1 Then MsgBox "Solo se contempla un archivo", vbExclamation
         
-    PonerRestoCamposInsertarFichero Index
+    PonerRestoCamposInsertarFichero index
 End Sub
 
-Private Sub PonerRestoCamposInsertarFichero(Index As Integer)
-    If UCase(Right(Text1(Index).Text, 4)) <> ".PDF" Then
-        MsgBox "Solo PDFs", vbExclamation
-        Text1(Index).Text = ""
-    End If
-    NumRegElim = InStrRev(Text1(Index).Text, "\")
+Private Sub PonerRestoCamposInsertarFichero(index As Integer)
+  '  If UCase(Right(Text1(index).Text, 4)) <> ".PDF" Then
+  '      MsgBox "Solo PDFs", vbExclamation
+  '      Text1(index).Text = ""
+  '  End If
+    NumRegElim = InStrRev(Text1(index).Text, "\")
     If NumRegElim > 0 Then
-        txtDescripcion(Index).Text = Mid(Text1(Index).Text, NumRegElim + 1)
-        txtDescripcion(Index).Text = Mid(txtDescripcion(Index).Text, 1, Len(txtDescripcion(Index).Text) - 4)
+        txtDescripcion(index).Text = Mid(Text1(index).Text, NumRegElim + 1)
+        txtDescripcion(index).Text = Mid(txtDescripcion(index).Text, 1, Len(txtDescripcion(index).Text) - 4)
 
     End If
 End Sub
 
-Private Sub txtDescripcion_LostFocus(Index As Integer)
-    If Index = 0 Then
+Private Sub txtDescripcion_LostFocus(index As Integer)
+    If index = 0 Then
         If txtDescripcion(1).Text = "" Then txtDescripcion(1).Text = txtDescripcion(0).Text
     End If
 End Sub

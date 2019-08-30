@@ -865,7 +865,7 @@ End Function
 
 Public Function InsertarEnTesoreria(vTextosCSB As String, MenError As String) As Boolean
 'Guarda datos de Tesoreria en tablas: ariges.svenci y en conta.scobros
-Dim B As Boolean
+Dim b As Boolean
 Dim RS As ADODB.Recordset
 Dim rsVenci As ADODB.Recordset
 Dim SQL As String, Codmacta As String, textcsb33 As String
@@ -1111,7 +1111,7 @@ Dim TextoAuxiliar As String
             
     End If
     
-    B = False
+    b = False
     InsertarEnTesoreria = False
     CadValues3 = ""
     CadValues = ""
@@ -1432,7 +1432,7 @@ Dim TextoAuxiliar As String
             
         Else
             'totalfac =0 and numerovtos >=1
-            B = True
+            b = True
         End If
         
         Set RS = Nothing
@@ -1456,16 +1456,16 @@ Dim TextoAuxiliar As String
                 'antes de grabar en la scobro comprobar que existe en conta.sforpa la
                 'forma de pago de la factura. Sino existe insertarla
                 'vemos si existe en la conta
-                B = InsertarFormaPagoEnConta(ForPago, MenError)
+                b = InsertarFormaPagoEnConta(ForPago, MenError)
                 
                 'si hay cheque regalo comprobar q existe su forma de pago en conta
                 'sino insertarla
-                If B And ImpCheque > 0 Then B = InsertarFormaPagoEnConta(vParamAplic.ForPagoChequeRegalo, MenError)
+                If b And ImpCheque > 0 Then b = InsertarFormaPagoEnConta(vParamAplic.ForPagoChequeRegalo, MenError)
 
 
                 
                 
-                If B Then
+                If b Then
                     'Insertamos en la tabla scobro de la CONTA
                     If vParamAplic.ContabilidadNueva Then
                         SQL = "INSERT INTO cobros (numserie, numfactu, fecfactu,text41csb, "
@@ -1488,7 +1488,7 @@ Dim TextoAuxiliar As String
                 'DAVID ####
                 'ENERO 2008
                 'Si no inserto en tesoreria por que ctaprvsta="" entonces dejo continuar
-                B = True
+                b = True
         
         End If
 
@@ -1508,21 +1508,21 @@ Dim TextoAuxiliar As String
     
 EInsertarTesoreria:
     If Err.Number <> 0 Then
-        B = False
+        b = False
         If vParamAplic.NumeroInstalacion = vbFenollar Then
             If ConnConta.Errors.Count > 0 Then
                 If ConnConta.Errors(0).NativeError = 1062 Then
                     'ENtrada duplicada
                     'En fenollar, aviso, y seguimos
                     MsgBox "Error insertando el cobro. Ya existia.  " & mLetraSer & Numfactu & " - " & FecFactu & vbCrLf & "Revise tesoreria. El programa continúa", vbExclamation
-                    B = True
+                    b = True
                 End If
             End If
         End If
-        If Not B Then MenError = "Insertar en Tesoreria: " & vbCrLf & Err.Description
+        If Not b Then MenError = "Insertar en Tesoreria: " & vbCrLf & Err.Description
         
     End If
-    InsertarEnTesoreria = B
+    InsertarEnTesoreria = b
 End Function
 
 
@@ -1866,9 +1866,33 @@ Dim InsertandoFAM As Boolean
             If TotalKm > 0 Then vBruto = vBruto + ImporteL
             
             If exento_IVA = 2 Then
-                'Exento normal
-                If vParamAplic.IVA_Exento2 = 0 Then MsgBox "Falta configurar el IVA exento", vbExclamation
-                TipoIVA1 = vParamAplic.IVA_Exento2
+            
+            
+                'Para la cona antigua lo dejo como estaba
+                cadAux = ""
+                
+                If vParamAplic.ContabilidadNueva And vParamAplic.NumeroInstalacion = vbFenollar Then
+                
+                    'Exento normal
+                    If mPais = "" Then
+                        '
+                        cadAux = DevuelveDesdeBD(conAri, "codpais", "sclien", "codclien", mCodClien)
+                        If cadAux = "" Then cadAux = "ES"
+                            
+                            
+                        If cadAux <> "ES" Then cadAux = ""
+                            
+                    End If
+                End If
+                
+                If cadAux = "" Then
+                
+                    If vParamAplic.IVA_Exento2 = 0 Then MsgBox "Falta configurar el IVA exento", vbExclamation
+                    TipoIVA1 = vParamAplic.IVA_Exento2
+                    
+                Else
+                    TipoIVA1 = 6 'FALTA#### Esta a piñon
+                End If
             Else
                 'exento intracom
                 If vParamAplic.IVA_Intracomunitario = 0 Then MsgBox "Falta configurar el IVA intracomunitario", vbExclamation
@@ -2005,7 +2029,7 @@ Public Function PasarAlbaranesAFactura(TipoAlb As String, cadSQL As String, text
 'IN ->  cadSQL: cadena para seleccion de los Albaranes que vamos a Facturar
 '       TextosCSB:  Para la tesoreria
 'Desde Albaranes Genera las Facturas correspondientes
-Dim B As Boolean
+Dim b As Boolean
 Dim MenError As String
 Dim HacerCambioIVA As Boolean
 Dim Aux As String
@@ -2017,9 +2041,13 @@ Dim PorceRecargo As Currency
     On Error GoTo ETraspasoAlbFac
 
     PasarAlbaranesAFactura = False
-    B = True
+    b = True
     ErroresAux = ""
     ComprobarRecargoFinanciero = False
+     
+     
+    'ATENCION ####
+    'La function en el modulo bus.bas DevuelveTipoFacturaDesdeAlbaran esta copiada de aqui. Si añadimos algio aqui, hacerlo alli tambien
     
     Select Case TipoAlb
         Case "ALV", "ALM": 'ALV: Albaranes venta a clientes
@@ -2047,6 +2075,7 @@ Dim PorceRecargo As Currency
         Case "ALT"
             'Telfonia
             codtipom = "FAT"
+            'ComprobarRecargoFinanciero = True
         Case "ALG"
             'Agua Bolbaite
             codtipom = "FAG"
@@ -2055,10 +2084,11 @@ Dim PorceRecargo As Currency
         Case "ALO"
             'Orden de trabajo
             codtipom = "FAO"
+            ComprobarRecargoFinanciero = True
         Case "ALE"
             'Trabajo externo
             codtipom = "FAE"
-            
+            ComprobarRecargoFinanciero = True
             
     End Select
       
@@ -2110,9 +2140,9 @@ Dim PorceRecargo As Currency
         If Val(Aux) = 0 Then
             MenError = "Precálculo total factura"
             Aux = cadSQL  'Como lo va a cambiar en la funcion, la guardo antes
-            B = CalcularDatosFactura(cadSQL, "scaalb", "slialb", False)
+            b = CalcularDatosFactura(cadSQL, "scaalb", "slialb", False)
             cadSQL = Aux 'reestablezco cadsql
-            If B Then
+            If b Then
                 'AQUI es donde, al ultimo albaran, le meto la linea de recargo financiero
                 Aux = cadSQL & " AND 1"
                 Aux = DevuelveDesdeBD(conAri, "max(numalbar)", "scaalb", Aux, "1", "N")
@@ -2150,33 +2180,33 @@ Dim PorceRecargo As Currency
     End If
     
     'Insertar la Factura (scafac,scafac1,slifac)
-    If B Then
+    If b Then
         MenError = "Error al Insertar en tablas de factura."
-        B = InsertarFactura(cadSQL, , HacerCambioIVA, EsTraspasoOfeFAZ)
-        If Not B Then ErroresAux = "Albaranes: " & cadSQL
+        b = InsertarFactura(cadSQL, , HacerCambioIVA, EsTraspasoOfeFAZ)
+        If Not b Then ErroresAux = "Albaranes: " & cadSQL
     End If
     
     'Insertar los Vencimientos de la Factura. Tabla: svenci
     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
     '#Laura: 14/11/2006 Recuperar facturas Alzira
-    If B Then
+    If b Then
         MenError = "Error al actualizar en Tesoreria."
-        B = InsertarEnTesoreria(textoCSB, MenError)
+        b = InsertarEnTesoreria(textoCSB, MenError)
     End If
     
     
     
     'Eliminar los Albaranes incluidos en la Factura
-    If B Then
+    If b Then
         MenError = "Error al eliminar los albaranes."
-        B = EliminarAlbaranes(cadSQL)
+        b = EliminarAlbaranes(cadSQL)
     End If
     
     'Si alguna linea de albaran tiene asociados num. serie actualizar
     'el campo numfactu de dichos num serie
-    If B Then
+    If b Then
         MenError = "Error al actualizar los Nº de serie."
-        B = ActualizarNumSeries(cadSQL)
+        b = ActualizarNumSeries(cadSQL)
     End If
     
     
@@ -2184,10 +2214,10 @@ ETraspasoAlbFac:
     If Err.Number <> 0 Then
         ErroresAux = Err.Description
         Err.Clear
-        B = False
+        b = False
     End If
   
-    If B Then
+    If b Then
         conn.CommitTrans
         ConnConta.CommitTrans
         PasarAlbaranesAFactura = True
@@ -2205,14 +2235,14 @@ End Function
 Public Function PasarMtosAFactura(TipCo As String, Operador As String, mes As String, nMante As String, CenCoste As String) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Mantenimientos que vamos a Facturar
 'Desde Mantenimientos Genera las Facturas correspondientes
-Dim B As Boolean
+Dim b As Boolean
 Dim MenError As String
 Dim CC As String
 
     On Error GoTo ETraspasoFac
 
     PasarMtosAFactura = False
-    B = False
+    b = False
       
     codtipom = "FAM"
     
@@ -2271,10 +2301,10 @@ Dim CC As String
        
     'Insertar la Factura (scafac,scafac1,slifac)
     MenError = "Error al Insertar en tablas de factura"
-    B = InsertarFactura("")
+    b = InsertarFactura("")
     
     
-    If B Then
+    If b Then
         'Insertar en la Tabla para detalle equipos, para reimprimir
        MenError = "Error al insertar detalle de equipos."
        InsertarDetEquip
@@ -2283,15 +2313,15 @@ Dim CC As String
     
     'Insertar los Vencimientos de la Factura. Tabla: svenci
     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
-    If B Then
+    If b Then
         MenError = "Error al actualizar en Tesoreria"
-        B = InsertarEnTesoreria("", MenError)
+        b = InsertarEnTesoreria("", MenError)
     End If
     
    
    
     'Actualizo en la tabla mantenimientos la fecha ultimio mantenimiento
-    If B Then
+    If b Then
         MenError = "Actualizar fecha ultimo mantenimiento"
         ArticFac = "UPDATE scaman SET ulmesfac = " & mes & " WHERE codclien = " & Cliente & " AND nummante= '" & nummante & "'"
         conn.Execute ArticFac
@@ -2301,9 +2331,9 @@ ETraspasoFac:
     If Err.Number <> 0 Then
         Screen.MousePointer = vbDefault
         MuestraError Err.Number, "Pasando Mantenimientos a Factura.", Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         ConnConta.CommitTrans
         PasarMtosAFactura = True
@@ -2320,7 +2350,7 @@ End Function
 Public Function PasarTicketAFactura(cadSQL As String, Optional ErroresAux As String, Optional NTicket As String, Optional NAlbTicket As String, Optional impRegalo As String) As Boolean
 'IN -> cadSQL: cadena para seleccion de las ventas del ticket que vamos a Facturar
 'Desde ventas Genera las Facturas de ticket correspondiente
-Dim B As Boolean
+Dim b As Boolean
 Dim MenError As String
 
     On Error GoTo ETrasTicFac
@@ -2331,7 +2361,7 @@ Dim MenError As String
     ImpCheque = CCur(ComprobarCero(impRegalo)) 'importe del cheque regalo (si hay)
     
     PasarTicketAFactura = False
-    B = False
+    b = False
     ErroresAux = ""
       
       
@@ -2345,14 +2375,14 @@ Dim MenError As String
     
     'Insertar la Factura (scafac,scafac1,slifac)
     MenError = "Error al Insertar en tablas de factura."
-    B = InsertarFacturaTicket(cadSQL)
+    b = InsertarFacturaTicket(cadSQL)
     
     
     'Insertar los Vencimientos de la Factura. Tabla: svenci
     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
-    If B Then
+    If b Then
         MenError = "Error al actualizar en Tesoreria."
-        B = InsertarEnTesoreria("", MenError)
+        b = InsertarEnTesoreria("", MenError)
     End If
     
     
@@ -2367,9 +2397,9 @@ Dim MenError As String
     
     
     'Eliminar los Albaranes incluidos en la Factura
-    If B Then
+    If b Then
         MenError = "Error al eliminar la venta."
-        B = EliminarVenta(cadSQL)
+        b = EliminarVenta(cadSQL)
     End If
     
     
@@ -2378,11 +2408,11 @@ ETrasTicFac:
     If Err.Number <> 0 Then
         ErroresAux = Err.Description
         Err.Clear
-        B = False
+        b = False
     End If
   
-    If Not B Then ErroresAux = MenError & vbCrLf & ErroresAux & vbCrLf
-    PasarTicketAFactura = B
+    If Not b Then ErroresAux = MenError & vbCrLf & ErroresAux & vbCrLf
+    PasarTicketAFactura = b
 End Function
 
 Private Sub AjustarCantidadLotes(ElTiket As String)
@@ -2415,7 +2445,7 @@ End Sub
 
 Private Function InsertarFactura(cadSQL As String, Optional cadNumFac As String, Optional HacerCambiosIVA As Boolean, Optional EsTraspasoOfeFAZ As Boolean) As Boolean
 'Insertamos en las tablas de factura de cliente: scafac, scafac1, slifac
-Dim B As Boolean
+Dim b As Boolean
 Dim vTipoMov As CTiposMov
 Dim Existe As Boolean
 Dim devuelve As String
@@ -2495,34 +2525,34 @@ Dim devuelve As String
     LetraSerie = Trim(vTipoMov.LetraSerie) 'la guardamos para INSERT en scobro de la Conta
 
     'calcular el total de la factura antes de insertar
-    B = CalcularDatosFactura(cadSQL, "scaalb", "slialb", HacerCambiosIVA)
-    If Not B Then Exit Function
+    b = CalcularDatosFactura(cadSQL, "scaalb", "slialb", HacerCambiosIVA)
+    If Not b Then Exit Function
     
     '### Laura: 14/11/2006 Recuperar facturas Alzira
     devuelve = ""
     
     'Cabecera Factura
-    B = InsertarCabeceraFactu
-    If Not B Then Exit Function
+    b = InsertarCabeceraFactu
+    If Not b Then Exit Function
     
     'Cabeceras Albaranes de la Factura
-    B = InsertarCabAlbaranesFactu(cadSQL)
-    If Not B Then Exit Function
+    b = InsertarCabAlbaranesFactu(cadSQL)
+    If Not b Then Exit Function
     
     'Insertar lineas de la factura
-    B = InsertarLineasFactu(cadSQL)
-    If Not B Then Exit Function
+    b = InsertarLineasFactu(cadSQL)
+    If Not b Then Exit Function
     
     'Comprobar si los albaranes tienen km de desplazamiento e insertar
     'lineas de factura del desplazamiento e incrementar el bruto de la factura
     'Insertar lineas de desplazamiento
-    B = InsertarDesplaz
-    If Not B Then Exit Function
+    b = InsertarDesplaz
+    If Not b Then Exit Function
     
     'si hay bonificaciones en la factura
     If SQLBonif <> "" Then
-        B = InsertarBonificaciones
-        If Not B Then Exit Function
+        b = InsertarBonificaciones
+        If Not b Then Exit Function
     End If
     
    
@@ -2580,7 +2610,7 @@ End Function
 Private Function InsertarFacturaTicket(cadSQL As String) As Boolean
 'Insertamos en las tablas de factura de cliente: scafac, scafac1, slifac
 'Es un ticket de venta
-Dim B As Boolean
+Dim b As Boolean
 Dim devuelve As String
 
     InsertarFacturaTicket = False
@@ -2588,21 +2618,21 @@ Dim devuelve As String
     
     'Calcular los campos de la factura y cuadrarla al
     'pasar las lineas sin IVA
-    B = CalcularDatosFacturaTicket(cadSQL)
-    If Not B Then Exit Function
+    b = CalcularDatosFacturaTicket(cadSQL)
+    If Not b Then Exit Function
 
     
     'Cabecera Factura
-    B = InsertarCabeceraFactu
-    If Not B Then Exit Function
+    b = InsertarCabeceraFactu
+    If Not b Then Exit Function
     
     'Cabeceras Albaranes de la Factura
-    B = InsertarCabAlbaranesFactu(cadSQL)
-    If Not B Then Exit Function
+    b = InsertarCabAlbaranesFactu(cadSQL)
+    If Not b Then Exit Function
 
     'Insertar lineas de la factura
-    B = InsertarLineasFactu(cadSQL)
-    If Not B Then Exit Function
+    b = InsertarLineasFactu(cadSQL)
+    If Not b Then Exit Function
     
        
 '    'Incrementar contador del tipo de movimiento
@@ -2623,7 +2653,7 @@ Dim vClien As CCliente
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim ctaDpto As Boolean
-Dim Cad As String, cad2 As String
+Dim cad As String, cad2 As String
 
     On Error GoTo EInsertar
 
@@ -2654,27 +2684,27 @@ Dim Cad As String, cad2 As String
             If Me.DirDpto <> "" Then
                 'comprobar que el dpto del cliente tiene cta bancaria
                 cad2 = "digcontr"
-                Cad = DevuelveDesdeBDNew(conAri, "sdirec", "cuentaba", "codclien", Me.Cliente, "N", cad2, "coddirec", Me.DirDpto, "N")
-                If Cad <> "" And cad2 <> "" Then ctaDpto = True
+                cad = DevuelveDesdeBDNew(conAri, "sdirec", "cuentaba", "codclien", Me.Cliente, "N", cad2, "coddirec", Me.DirDpto, "N")
+                If cad <> "" And cad2 <> "" Then ctaDpto = True
             End If
         End If
         
         If ctaDpto Then 'cogemos la cta bancaria del departamento
-            Me.CuentaBan = Cad
+            Me.CuentaBan = cad
 '            cad = DevuelveDesdeBDNew(conAri, "sdirec", "digcontr", "codclien", Me.Cliente, "N", , "coddirec", Me.DirDpto, "N")
             Me.DigControl = cad2
             cad2 = "concat(codsucur,'|',iban,'|')"
-            Cad = DevuelveDesdeBDNew(conAri, "sdirec", "codbanco", "codclien", Me.Cliente, "N", cad2, "coddirec", Me.DirDpto, "N")
+            cad = DevuelveDesdeBDNew(conAri, "sdirec", "codbanco", "codclien", Me.Cliente, "N", cad2, "coddirec", Me.DirDpto, "N")
             
             If InStr(1, cad2, "concat(") > 0 Then
                 Iban = "ERR"
                 cad2 = "0000"
-                Cad = "0"
+                cad = "0"
             Else
                 Iban = RecuperaValor(cad2, 2)
                 cad2 = RecuperaValor(cad2, 1)
             End If
-            Me.Banco = Cad
+            Me.Banco = cad
             Me.Sucursal = cad2
         Else 'cuenta bancaria del cliente
             Set vClien = New CCliente
@@ -2764,7 +2794,12 @@ Dim RTiket As ADODB.Recordset
     SQL = "INSERT INTO scafac1 (codtipom,numfactu,fecfactu,codtipoa,numalbar,fechaalb,numpedcl,fecpedcl,sementre,numofert,fecofert,"
     SQL = SQL & "referenc,codenvio,codtraba,codtrab1,codtrab2,observa1,observa2,observa3,observa4,observa5,numtermi,numventa,actuacion,tipoimp ,"
     SQL = SQL & "origdat,fecenvio,docarchiv,coddiren,SerieTfno, ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente,numbultos,fechaAux,puntos"
-    'sql = sql & ", codinter,codnatura,notasportes"
+    SQL = SQL & ", codinter,codnatura,notasportes"
+    
+    'Jun19
+    SQL = SQL & " ,fechaent,perrecep,dnient,latitud,longitud"
+    
+    
     SQL = SQL & ")"
      
     
@@ -2819,7 +2854,10 @@ Dim RTiket As ADODB.Recordset
             End If
         End If
         SQL = SQL & devuelve & ",0,NULL,null,0"   'pidecli y numbultos fechaAux, puntos
-        'sql = sql & ",null,null,null"   'codinter,codnatura notasportes
+        SQL = SQL & ",null,null,null"   'codinter,codnatura notasportes
+        
+        'fechaent,perrecep,dnient,latitud,longitud
+        SQL = SQL & ",null,null,null,null,null"
         SQL = SQL & ")"
         RTiket.Close
     ElseIf (codtipom <> "FAM" And codtipom <> "FTI") And cadSQL <> "" Then 'Facturas de VEnta
@@ -2836,7 +2874,14 @@ Dim RTiket As ADODB.Recordset
         SQL = SQL & " , ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,PideCliente,numbultos,fechaAux,puntos"
         
         'Fenollar
-        'sql = sql & " ,codinter,codnatura ,notasportes "
+        SQL = SQL & " ,codinter,codnatura ,notasportes "
+        
+        'fechaent,perrecep,dnient,latitud,longitud
+        If vParamAplic.NumeroInstalacion = vbEuler Then
+            SQL = SQL & ",fechaent,perrecep,dnient,latitud,longitud"
+        Else
+            SQL = SQL & ",null,null,null,null,null"
+        End If
         
         SQL = SQL & " FROM scaalb WHERE " & cadSQL
         
@@ -2935,7 +2980,12 @@ Dim RTiket As ADODB.Recordset
         ' ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet,pidecli numbulto fechaAux , puntos
         SQL = SQL & ",NULL,NULL,NULL,NULL,0,null,null,0"
         ' codinter,codnatura notasportes
-        'sql = sql & ",null,null,null)"
+        SQL = SQL & ",null,null,null"
+        
+        
+        'fechaent,perrecep,dnient,latitud,longitud
+        SQL = SQL & ",null,null,null,null,null"
+        
         SQL = SQL & ")"
     End If
     
@@ -3004,7 +3054,7 @@ End Function
 Private Function InsertarLineasFactu(cadSQL As String) As Boolean
 'Insertar las lineas de los Albaranes de la factura en la tabla: slifac
 Dim SQL As String
-Dim Cad As String
+Dim cad As String
 Dim cad2 As String
 Dim cart As CArticulo
 Dim Observas As Boolean   'DE SAIL. Tabla slialt
@@ -3062,7 +3112,7 @@ Dim Aux2 As String
                     If ArticFac <> "" Then
                         Set cart = New CArticulo
                         If cart.LeerDatos(ArticFac) Then
-                            Cad = cart.Nombre   'Aunque luego machaco cad con la nueva amplicacion: contrato + numerocontrato
+                            cad = cart.Nombre   'Aunque luego machaco cad con la nueva amplicacion: contrato + numerocontrato
                         End If
             
                     End If
@@ -3070,22 +3120,22 @@ Dim Aux2 As String
                     'Como "NOMARTIC", vamos a poner Referencia: referenciarenting
                     
                     If RL!TipoFraRenting = 3 Then
-                        Cad = " Trimestre: " & ((Month(FechaFacturarRenting) - 1) \ 3) + 1 & "º"
+                        cad = " Trimestre: " & ((Month(FechaFacturarRenting) - 1) \ 3) + 1 & "º"
                       
                     ElseIf RL!TipoFraRenting = 6 Then
-                        Cad = " Semestre: " & ((Month(FechaFacturarRenting) - 1) \ 6) + 1 & "º"
+                        cad = " Semestre: " & ((Month(FechaFacturarRenting) - 1) \ 6) + 1 & "º"
                     ElseIf RL!TipoFraRenting = 12 Then
-                        Cad = " Año: " & Year(FechaFacturarRenting)
+                        cad = " Año: " & Year(FechaFacturarRenting)
                     Else
-                        Cad = " MES: " & Format(FechaFacturarRenting, "mm/yyyy")
+                        cad = " MES: " & Format(FechaFacturarRenting, "mm/yyyy")
                     End If
                     
                     
                     'Teinsa lo dejo como esta
                     
                     If vParamAplic.NumeroInstalacion = 3 Then
-                        Cad = "Referencia: " & RL!Referencia & Cad
-                        Cad = DBSet(Cad, "T")
+                        cad = "Referencia: " & RL!Referencia & cad
+                        cad = DBSet(cad, "T")
                     Else
                         'aPara el resto.  De momento nosotros
                         Aux2 = Trim(DBLet(RL!obser, "T"))
@@ -3097,23 +3147,23 @@ Dim Aux2 As String
                             Aux2 = Aux2 & "\r\n"
                         End If
                         
-                        Cad = Aux2 & "Periodo " & Cad
-                        Cad = "'" & Cad & "'"
+                        cad = Aux2 & "Periodo " & cad
+                        cad = "'" & cad & "'"
                         
                     
                     End If
                   
                   
                     'Ampliacion=aux2
-                    Aux2 = Cad
-                    Cad = DBSet(cart.Nombre, "T")
+                    Aux2 = cad
+                    cad = DBSet(cart.Nombre, "T")
                     
 
-                    Cad = Cad & "," & Aux2
+                    cad = cad & "," & Aux2
                     
                     NumAlbTicket = NumAlbTicket & ", ('" & codtipom & "'," & Numfactu & ",'" & Format(FecFactu, FormatoFecha) & "','',0," & mNumventa & ","
                 
-                    NumAlbTicket = NumAlbTicket & DBSet(AlmFactu, "N") & "," & DBSet(cart.Codigo, "T") & "," & Cad & ","
+                    NumAlbTicket = NumAlbTicket & DBSet(AlmFactu, "N") & "," & DBSet(cart.Codigo, "T") & "," & cad & ","
                         
                     'cantidad,numbultos, precio, dtos
                     If InStr(1, RL.Source, " AND id =") Then
@@ -3163,21 +3213,21 @@ Dim Aux2 As String
             If ArticFac <> "" Then
                 Set cart = New CArticulo
                 If cart.LeerDatos(ArticFac) Then
-                    Cad = cart.Nombre   'Aunque luego machaco cad con la nueva amplicacion: contrato + numerocontrato
+                    cad = cart.Nombre   'Aunque luego machaco cad con la nueva amplicacion: contrato + numerocontrato
                 End If
     '            cad2 = "preciomp"
     '            cad = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", ArticFac, "T", cad2)
             End If
             
-            Cad = DevuelveDesdeBDNew(conAri, "stipco", "nomtipco", "codtipco", TipCoMan, "T")
-            Cad = Cad & "  Nº: " & nummante
+            cad = DevuelveDesdeBDNew(conAri, "stipco", "nomtipco", "codtipco", TipCoMan, "T")
+            cad = cad & "  Nº: " & nummante
             
-            SQL = SQL & DBSet(Cad, "T") & ","
+            SQL = SQL & DBSet(cad, "T") & ","
                 
     
-            Cad = mObservacion
+            cad = mObservacion
             
-            SQL = SQL & DBSet(Cad, "T") & ","
+            SQL = SQL & DBSet(cad, "T") & ","
                 
             'cantidad,numbultos, precio, dtos
             SQL = SQL & "1,1," & DBSet(BrutoFac, "N") & ", 0,0, "
@@ -3596,7 +3646,7 @@ End Function
 
 Private Function InsertarDetEquip() As Boolean
 Dim SQL As String
-Dim Cad As String
+Dim cad As String
 
     'si son facturas de MAntenimiento y parametro de stipco: detallar equipos en la factura=true
     'guardar en una tabla el resumen por tipo de articulo de los Nº Series de equipos
@@ -3608,11 +3658,11 @@ Dim Cad As String
     SQL = DevuelveDesdeBDNew(conAri, "stipco", "detequip", "codtipco", TipCoMan, "T")
     
     If SQL = "1" Then 'Detalla Equipo
-        Cad = ObtenerSQLcomponentes(" WHERE codclien=" & Cliente & " AND nummante=" & DBSet(nummante, "T"))
+        cad = ObtenerSQLcomponentes(" WHERE codclien=" & Cliente & " AND nummante=" & DBSet(nummante, "T"))
         SQL = "Select distinct '" & codtipom & "' as codtipom," & Numfactu & " as numfactu,'" & Format(FecFactu, FormatoFecha) & "' as fecfactu,"
-        Cad = Replace(Cad, "Select distinct", SQL)
+        cad = Replace(cad, "Select distinct", SQL)
         SQL = "INSERT INTO srecom (codtipom,numfactu,fecfactu,codtipar,nomtipar,cantidad) "
-        SQL = SQL & Cad
+        SQL = SQL & cad
 
         conn.Execute SQL
     End If
@@ -3651,8 +3701,8 @@ Private Function InsertarDesplaz() As Boolean
 'Añadir cantkm * preciokm al bruto de la factura
 'Insertar linea en tabla slifac con el importe del desplazamiento
 Dim SQL As String
-Dim Cad As String
-Dim B As Boolean
+Dim cad As String
+Dim b As Boolean
 
     On Error GoTo EDesplaz
     InsertarDesplaz = False
@@ -3660,8 +3710,8 @@ Dim B As Boolean
     If TotalKm > 0 Then
         'Insertar en scafac1 un albaran a 9999999, para el desplazamiento (y servira tb para bonificaciones)
         '-----------------------------------------------------------
-        B = InsertarCabAlbaranesFactu("")
-        If Not B Then Exit Function
+        b = InsertarCabAlbaranesFactu("")
+        If Not b Then Exit Function
             
                
         'Insertar linea de Desplazamiento en tabla: slifac (lineas factura)
@@ -3675,8 +3725,8 @@ Dim B As Boolean
         SQL = SQL & DBSet(AlmFactu, "N") & ","
             
         'codartic,nomartic,ampliaci
-        Cad = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", codArtic, "T")
-        SQL = SQL & DBSet(codArtic, "T") & "," & DBSet(Cad, "T") & "," & DBSet(Ampliacion, "T") & ","
+        cad = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", codArtic, "T")
+        SQL = SQL & DBSet(codArtic, "T") & "," & DBSet(cad, "T") & "," & DBSet(Ampliacion, "T") & ","
         'cantidad,precioar,dtoline1,dtoline2,importel,origpre
         SQL = SQL & DBSet(TotalKm, "N") & "," & DBSet(PrecioKm, "N") & ",0,0," & DBSet(ImporteL, "N") & ",'M')"
         
@@ -3907,7 +3957,7 @@ Private Function InsertarBonificaciones() As Boolean
 'añadirlos a la factura
 'Insertar lineas en tabla slifac con el importe de las bonificaciones
 Dim SQL As String
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo EBonifica
 
@@ -3920,8 +3970,8 @@ Dim B As Boolean
         SQL = "(codtipom='" & codtipom & "' and numfactu=" & Numfactu & " and fecfactu=" & DBSet(FecFactu, "F") & " and codtipoa='' and numalbar=9999999)"
         SQL = "Select count(*) from scafac1 where " & SQL
         If RegistrosAListar(SQL) = 0 Then
-            B = InsertarCabAlbaranesFactu("")
-            If Not B Then Exit Function
+            b = InsertarCabAlbaranesFactu("")
+            If Not b Then Exit Function
         End If
                
         'Insertar lineas de Desplazamiento en tabla: slifac (lineas factura)
@@ -3969,7 +4019,7 @@ End Function
 
 
 Private Function CalcularDatosFacturaTicket(cadSQL As String) As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim I As Byte
@@ -4051,15 +4101,15 @@ Dim ImpDif As Currency
 '        ImpTotal = (BaseIVA1 + ImpIVA1) + (BaseIVA2 + ImpIVA2) + (BaseIVA3 + ImpIVA3)
     End If
     
-    B = True
+    b = True
     
     
 ETicket:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Calculando datos de ticket a factura.", Err.Description
-        B = False
+        b = False
     End If
-    CalcularDatosFacturaTicket = B
+    CalcularDatosFacturaTicket = b
 End Function
 
 
@@ -4077,7 +4127,7 @@ Dim SQL As String
     'vemos si existe en la conta
     If vParamAplic.ContabilidadNueva Then
         cadAux = DevuelveDesdeBDNew(conConta, "formapago", "codforpa", "codforpa", nForPa, "N")
-        If cadAux = "" Then Err.Raise 513, , "No existe forma de pago: " & nForPa   'para que no
+        'If cadAux = "" Then Err.Raise 513, , "No existe forma de pago: " & nForPa   'para que no
     Else
         cadAux = DevuelveDesdeBDNew(conConta, "sforpa", "codforpa", "codforpa", nForPa, "N")
     End If
@@ -4086,10 +4136,13 @@ Dim SQL As String
     'si no existe la forma de pago en conta, insertamos la de ariges
     If cadAux = "" Then
         cadAux2 = "tipforpa"
+
         cadAux = DevuelveDesdeBDNew(conAri, "sforpa", "nomforpa", "codforpa", nForPa, "N", cadAux2)
         If cadAux <> "" Then
             'insertamos e sforpa de la CONTA
-            SQL = "INSERT INTO sforpa(codforpa,nomforpa,tipforpa)"
+            SQL = "sforpa"
+            If vParamAplic.ContabilidadNueva Then SQL = "formapago"
+            SQL = "INSERT INTO " & SQL & "(codforpa,nomforpa,tipforpa)"
             SQL = SQL & " VALUES(" & nForPa & ", " & DBSet(cadAux, "T") & ", " & cadAux2 & ")"
             ConnConta.Execute SQL
             InsertarFormaPagoEnConta = True
@@ -4139,14 +4192,14 @@ End Function
 Public Function PasarRentingAFactura(TipCo As String, Operador As String, CenCoste As String, CadenaSQL As String, PeridoFacturar As Date) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Mantenimientos que vamos a Facturar
 'Desde Mantenimientos Genera las Facturas correspondientes
-Dim B As Boolean
+Dim b As Boolean
 Dim MenError As String
 Dim CC As String
 
     On Error GoTo ETraspasoFac
 
     PasarRentingAFactura = False
-    B = False
+    b = False
       
     codtipom = "FAM"
     
@@ -4212,22 +4265,22 @@ Dim CC As String
     MenError = "Error al Insertar en tablas de factura"
     mLetraSer = "UNOSOLO"
     NumAlbTicket = CadenaSQL
-    B = InsertarFactura(NumAlbTicket)
+    b = InsertarFactura(NumAlbTicket)
 
     mLetraSer = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", codtipom, "T")
 
     'Insertar los Vencimientos de la Factura. Tabla: svenci
     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
-    If B Then
+    If b Then
         MenError = "Error al actualizar en Tesoreria"
-        B = InsertarEnTesoreria("", MenError)
+        b = InsertarEnTesoreria("", MenError)
     End If
     
     NumAlbTicket = ""
     mLetraSer = "" 'reutilizada
    
     'Actualizo en la tabla mantenimientos la fecha ultimio mantenimiento
-    If B Then
+    If b Then
         MenError = "Actualizar fecha ultimo renting"
         mCodAgent = DiasMes(Month(PeridoFacturar), Year(PeridoFacturar))
         ArticFac = "UPDATE sclienrenting,sclien set ultfec= '" & Format(PeridoFacturar, "yyyy-mm-") & Format(mCodAgent, "00") & "'  " & CadenaSQL
@@ -4240,9 +4293,9 @@ ETraspasoFac:
     If Err.Number <> 0 Then
         Screen.MousePointer = vbDefault
         MuestraError Err.Number, "Pasando Mantenimientos a Factura.", Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         ConnConta.CommitTrans
         PasarRentingAFactura = True

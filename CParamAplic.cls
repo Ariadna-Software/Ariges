@@ -460,6 +460,8 @@ Private mvarPuedeModificarAriconta As Boolean
 Private mvarTieneComponentes_y_Produccion As Boolean
 
 
+Private mvarImportacionesCoarval As Boolean
+
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
 
@@ -1746,8 +1748,8 @@ End Property
 
 
 'Indicara la empresa en la que estamos
-' 0 Sin especificar        1.- ALZIRA    2.- HERBELCA   3.-TEinsa      4.- EULER
-' 5 FONTENAS      6.-FENOLLAR
+' 0 Sin especificar     1.- ALZIRA    2.- HERBELCA   3.-TEinsa      4.- EULER
+' 5 FONTENAS            6.-FENOLLAR   7.- AMESA
 Public Property Get NumeroInstalacion() As Byte
      NumeroInstalacion = mvarNumeroInstalacion
 End Property
@@ -1836,6 +1838,15 @@ End Property
 Public Property Get TieneComponentes_y_Produccion() As Boolean
      TieneComponentes_y_Produccion = mvarTieneComponentes_y_Produccion
 End Property
+
+
+Public Property Get ImportacionesCoarval() As Boolean
+    ImportacionesCoarval = mvarImportacionesCoarval
+End Property
+     
+
+
+
 
 
 
@@ -2232,6 +2243,9 @@ On Error GoTo Err3
         
         'Lotes generalitat. Para meter los datos en
         FijarSiTieneLotesGeneralitat RS
+        
+        'Importaciones COARVAL
+        FijarSiTieneImporCoarval RS
         
     End If
     
@@ -2785,6 +2799,31 @@ eFijarSiTieneHuertos:
     Set R = Nothing
     
 End Sub
+
+
+'Fijar lotes generalitat
+Private Sub FijarSiTieneImporCoarval(ByRef R As ADODB.Recordset)
+    
+    On Error GoTo eFijarSiTieneHuertos
+    Set R = Nothing
+    Set R = New ADODB.Recordset
+    mvarImportacionesCoarval = False
+    
+    
+    
+    SQL = "Select * from sparamcoarval "
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    'Si llega aqui siginifca que la tabla existe
+    If Not IsNull(R.Fields(0)) Then mvarImportacionesCoarval = True
+
+    R.Close
+eFijarSiTieneHuertos:
+    Err.Clear
+    conn.Errors.Clear
+    Set R = Nothing
+    
+End Sub
+
 
 
 

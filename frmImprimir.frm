@@ -483,7 +483,8 @@ Dim cad As String
                 NombreRPT = "rFacPedxArticAgr.rpt"
             Case 2053
                 Text1.Text = "Costes cliente-factura"
-                
+            Case 2054
+                Text1.Text = "Ficha mantenimiento"
             End Select
         End If
     Else
@@ -522,6 +523,8 @@ Dim cad As String
                     Case 40 'Confirmacion de Pedido
                         Text1.Text = "Confirmación de Pedido"
                         ConSubInforme = True
+                        
+                    
                     Case Else
                         Text1.Text = "Opcion incorrecta"
                         Me.cmdImprimir.Enabled = False
@@ -915,6 +918,9 @@ Dim Lanza As String
         'RECORDATORIO OFERTA
         Aux = "REC_OFE_" & Me.outClaveNombreArchiv & ".pdf"
     
+    Case 7
+        'ALbaran facturado
+        Aux = "" & Me.outClaveNombreArchiv & ".pdf"
     Case 51
         Aux = "PEDP" & Me.outClaveNombreArchiv & ".pdf"
     End Select
@@ -944,6 +950,8 @@ Dim Lanza As String
         
     Case 6
         Aux = "Recordatorio de oferta."
+    Case 7
+        Aux = "Albaran facturado."
     '--------------------------------------------------
     Case 51
         Aux = "Pedido proveedor nº: " & outClaveNombreArchiv
@@ -984,7 +992,7 @@ Dim otromail As String
     
     If outTipoDocumento < 50 Then
         
-        If outTipoDocumento = 1 Or outTipoDocumento = 2 Or outTipoDocumento = 3 Then
+        If outTipoDocumento = 1 Or outTipoDocumento = 2 Or outTipoDocumento = 3 Or outTipoDocumento = 7 Then
             campoemail = "maiclie1"
             otromail = "maiclie2"
         Else

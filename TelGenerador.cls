@@ -4516,7 +4516,7 @@ Dim I As Integer
         
         If (I Mod 50) = 0 Then DoEvents
                 
-                'If RTef!ELTELEFONO = "655867673" Then Stop
+                 
                 
                 'Cogera los datos de la sclien
                 mSQL = "select nifclien nifclien,nomclien,domclien,codpobla,pobclien,proclien,operador,CodDirec,sclientfno.codclien"

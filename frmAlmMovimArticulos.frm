@@ -733,16 +733,16 @@ Private Sub DataGrid1_DblClick()
 'Abrir el formulario del Mantenimiento del que viene el Movimiento
 'Se busca en histórico o en Form
 Dim SQL As String
-Dim NumAlbar As String
+Dim Numalbar As String
 Dim Codtipm As String
 
-    Select Case data2.Recordset!DetaMovi
+    Select Case Data2.Recordset!detamovi
         Case "TRA" 'traspaso de almacenes
             'Traspaso de Almacen
             With frmAlmTraspaso
                 .EsHistorico = True
-                .hcoCodMovim = data2.Recordset!document
-                .hcoFechaMovim = data2.Recordset!FechaMov
+                .hcoCodMovim = Data2.Recordset!document
+                .hcoFechaMovim = Data2.Recordset!FechaMov
                 .Show vbModal
             End With
             
@@ -750,8 +750,8 @@ Dim Codtipm As String
                     'Movimientos de Almacen
             With frmAlmMovimientos
                 .EsHistorico = True
-                .hcoCodMovim = Val(data2.Recordset!document)
-                .hcoFechaMovim = data2.Recordset!FechaMov
+                .hcoCodMovim = Val(Data2.Recordset!document)
+                .hcoFechaMovim = Data2.Recordset!FechaMov
                 .Show vbModal
             End With
 
@@ -766,30 +766,30 @@ Dim Codtipm As String
             'si esta ya facturado abrir el histórico de facturas: frmFacHcoFacturas
             If vParamAplic.NumeroInstalacion = 2 Then
                 If Val(vUsu.AlmacenPorDefecto2) <> vParamAplic.AlmacenB Then
-                    If data2.Recordset!DetaMovi = "ALZ" Then Exit Sub
+                    If Data2.Recordset!detamovi = "ALZ" Then Exit Sub
                 End If
             End If
                 
             
-            NumAlbar = data2.Recordset!document
-            Codtipm = data2.Recordset!DetaMovi
+            Numalbar = Data2.Recordset!document
+            Codtipm = Data2.Recordset!detamovi
             
-            If data2.Recordset!DetaMovi = "MAT" Then
-                Codtipm = Mid(data2.Recordset!document, 1, 3)
-                NumAlbar = Mid(data2.Recordset!document, 4)
+            If Data2.Recordset!detamovi = "MAT" Then
+                Codtipm = Mid(Data2.Recordset!document, 1, 3)
+                Numalbar = Mid(Data2.Recordset!document, 4)
             End If
             
             'consultamos si existe el albaran en la tabla de albaranes: scaalb
-            SQL = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", Codtipm, "T", , "numalbar", NumAlbar, "N")
+            SQL = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", Codtipm, "T", , "numalbar", Numalbar, "N")
             If SQL <> "" Then 'existe el Albaran
                 If vParamAplic.TipoFormularioClientes = 0 Then
                          With frmFacEntAlbaranes2
-                            If EsNumerico(data2.Recordset!document) Then
-                                .hcoCodMovim = Format(data2.Recordset!document, "0000000")
+                            If EsNumerico(Data2.Recordset!document) Then
+                                .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
                             Else
-                                .hcoCodMovim = data2.Recordset!document
+                                .hcoCodMovim = Data2.Recordset!document
                             End If
-                            .hcoCodTipoM = data2.Recordset!DetaMovi
+                            .hcoCodTipoM = Data2.Recordset!detamovi
                             .Show vbModal
                         End With
                         
@@ -799,7 +799,7 @@ Dim Codtipm As String
                          '   If EsNumerico(Data2.Recordset!document) Then
                          '       .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
                          '   Else
-                                .hcoCodMovim = NumAlbar  ' Data2.Recordset!document
+                                .hcoCodMovim = Numalbar  ' Data2.Recordset!document
                          '   End If
                             .hcoCodTipoM = Codtipm
                             .Show vbModal
@@ -809,13 +809,13 @@ Dim Codtipm As String
             Else 'No existe en albaran, abrir Historico Factura
                 With frmFacHcoFacturas2
                     .DesdeFichaCliente = False
-                    If EsNumerico(data2.Recordset!document) Then
-                        .hcoCodMovim = Format(data2.Recordset!document, "0000000")
+                    If EsNumerico(Data2.Recordset!document) Then
+                        .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
                     Else
-                        .hcoCodMovim = NumAlbar ' Data2.Recordset!document
+                        .hcoCodMovim = Numalbar ' Data2.Recordset!document
                     End If
                     .hcoCodTipoM = Codtipm 'Data2.Recordset!detamovi
-                    If data2.Recordset!DetaMovi <> "MAT" Then .hcoFechaMov = data2.Recordset!FechaMov
+                    If Data2.Recordset!detamovi <> "MAT" Then .hcoFechaMov = Data2.Recordset!FechaMov
                     
                     .Show vbModal
                 End With
@@ -824,12 +824,12 @@ Dim Codtipm As String
         Case "ALR" 'Albaran de Reparacion (a clientes)
                 If vParamAplic.TipoFormularioClientes = 0 Then
                      With frmFacEntAlbaranes2
-                        If EsNumerico(data2.Recordset!document) Then
-                            .hcoCodMovim = Format(data2.Recordset!document, "0000000")
+                        If EsNumerico(Data2.Recordset!document) Then
+                            .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
                         Else
-                            .hcoCodMovim = data2.Recordset!document
+                            .hcoCodMovim = Data2.Recordset!document
                         End If
-                        .hcoCodTipoM = data2.Recordset!DetaMovi
+                        .hcoCodTipoM = Data2.Recordset!detamovi
                         .Show vbModal
                     End With
                 End If
@@ -839,43 +839,43 @@ Dim Codtipm As String
             'si esta ya facturado abrir el histórico de facturas: frmComHcoFacturas
             
             'consultamos si existe el albaran en la tabla de albaranes: scaalp
-            SQL = DevuelveDesdeBDNew(conAri, "scaalp", "numalbar", "codprove", data2.Recordset!codigope, "N", , "numalbar", data2.Recordset!document, "T", "fechaalb", data2.Recordset!FechaMov, "F")
+            SQL = DevuelveDesdeBDNew(conAri, "scaalp", "numalbar", "codprove", Data2.Recordset!codigope, "N", , "numalbar", Data2.Recordset!document, "T", "fechaalb", Data2.Recordset!FechaMov, "F")
             If SQL <> "" Then 'existe el Albaran
                 If vParamAplic.TipoFormularioClientes = 0 Then
                     With frmComEntAlbaranes
-                        .hcoCodMovim = data2.Recordset!document
-                        .hcoFechaMovim = data2.Recordset!FechaMov
-                        .hcoCodProve = data2.Recordset!codigope 'aqui es el proveedor
+                        .hcoCodMovim = Data2.Recordset!document
+                        .hcoFechaMovim = Data2.Recordset!FechaMov
+                        .hcoCodProve = Data2.Recordset!codigope 'aqui es el proveedor
                         .EsHistorico = False
                         .Show vbModal
                     End With
                 Else
                     'SAIL
                     With frmComEntAlbaranSA
-                        .hcoCodMovim = data2.Recordset!document
-                        .hcoFechaMovim = data2.Recordset!FechaMov
-                        .hcoCodProve = data2.Recordset!codigope 'aqui es el proveedor
+                        .hcoCodMovim = Data2.Recordset!document
+                        .hcoFechaMovim = Data2.Recordset!FechaMov
+                        .hcoCodProve = Data2.Recordset!codigope 'aqui es el proveedor
                         .EsHistorico = False
                         .Show vbModal
                     End With
                 End If
             Else
-                SQL = DevuelveDesdeBDNew(conAri, "schalp", "numalbar", "codprove", data2.Recordset!codigope, "N", , "numalbar", data2.Recordset!document, "T", "fechaalb", data2.Recordset!FechaMov, "F")
+                SQL = DevuelveDesdeBDNew(conAri, "schalp", "numalbar", "codprove", Data2.Recordset!codigope, "N", , "numalbar", Data2.Recordset!document, "T", "fechaalb", Data2.Recordset!FechaMov, "F")
                 If SQL <> "" Then 'existe el Albaran
                     If vParamAplic.TipoFormularioClientes = 0 Then
                         With frmComEntAlbaranes
-                            .hcoCodMovim = data2.Recordset!document
-                            .hcoFechaMovim = data2.Recordset!FechaMov
-                            .hcoCodProve = data2.Recordset!codigope 'aqui es el proveedor
+                            .hcoCodMovim = Data2.Recordset!document
+                            .hcoFechaMovim = Data2.Recordset!FechaMov
+                            .hcoCodProve = Data2.Recordset!codigope 'aqui es el proveedor
                             .EsHistorico = True
                             .Show vbModal
                         End With
                     Else
                         'SAIL
                         With frmComEntAlbaranSA
-                            .hcoCodMovim = data2.Recordset!document
-                            .hcoFechaMovim = data2.Recordset!FechaMov
-                            .hcoCodProve = data2.Recordset!codigope 'aqui es el proveedor
+                            .hcoCodMovim = Data2.Recordset!document
+                            .hcoFechaMovim = Data2.Recordset!FechaMov
+                            .hcoCodProve = Data2.Recordset!codigope 'aqui es el proveedor
                             .EsHistorico = True
                             .Show vbModal
                         End With
@@ -885,15 +885,15 @@ Dim Codtipm As String
                     'No existe en albaran, abrir Historico Factura
                     If vParamAplic.TipoFormularioClientes = 0 Then
                         With frmComHcoFacturas2
-                            .hcoCodMovim = data2.Recordset!document
-                            .hcoFechaMovim = data2.Recordset!FechaMov
-                            .hcoCodProve = data2.Recordset!codigope 'aqui es el proveedor
+                            .hcoCodMovim = Data2.Recordset!document
+                            .hcoFechaMovim = Data2.Recordset!FechaMov
+                            .hcoCodProve = Data2.Recordset!codigope 'aqui es el proveedor
                             .Show vbModal
                         End With
                     Else
-                            frmComHcoFacturSA.hcoCodMovim = data2.Recordset!document
-                            frmComHcoFacturSA.hcoCodProve = data2.Recordset!codigope  'aqui es el proveedor
-                            frmComHcoFacturSA.hcoFechaMovim = data2.Recordset!FechaMov
+                            frmComHcoFacturSA.hcoCodMovim = Data2.Recordset!document
+                            frmComHcoFacturSA.hcoCodProve = Data2.Recordset!codigope  'aqui es el proveedor
+                            frmComHcoFacturSA.hcoFechaMovim = Data2.Recordset!FechaMov
                             frmComHcoFacturSA.Show vbModal
                     End If
                 
@@ -909,22 +909,22 @@ Dim Codtipm As String
             'Abrir el historico de facturas
              With frmFacHcoFacturas2
                 .DesdeFichaCliente = False
-                If EsNumerico(data2.Recordset!document) Then
-                    .hcoCodMovim = Format(data2.Recordset!document, "0000000")
+                If EsNumerico(Data2.Recordset!document) Then
+                    .hcoCodMovim = Format(Data2.Recordset!document, "0000000")
                 Else
-                    .hcoCodMovim = data2.Recordset!document
+                    .hcoCodMovim = Data2.Recordset!document
                 End If
-                .hcoCodTipoM = data2.Recordset!DetaMovi
-                .hcoFechaMov = data2.Recordset!FechaMov
+                .hcoCodTipoM = Data2.Recordset!detamovi
+                .hcoFechaMov = Data2.Recordset!FechaMov
                 .Show vbModal
             End With
             
         Case "PRO"
-            frmProdOrden.DatosADevolverBusqueda = data2.Recordset!document
+            frmProdOrden.DatosADevolverBusqueda = Data2.Recordset!document
             frmProdOrden.Show vbModal
     
         Case "PRE"
-              frmProdEnvas.DatosADevolverBusqueda = data2.Recordset!document
+              frmProdEnvas.DatosADevolverBusqueda = Data2.Recordset!document
               frmProdEnvas.Show vbModal
     
     
@@ -942,13 +942,13 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
 Dim Codigo As Long
 Dim movim As String
     ImageObservaDFI.visible = False
-    If Not data2.Recordset.EOF Then
+    If Not Data2.Recordset.EOF Then
         'Poner descripcion del almacen
-        Text2(1).Text = data2.Recordset.Fields(2).Value
+        Text2(1).Text = Data2.Recordset.Fields(2).Value
         
         'Poner descripcion del Cliente/Proveedor
-        Codigo = data2.Recordset!codigope
-        movim = data2.Recordset!DetaMovi
+        Codigo = Data2.Recordset!codigope
+        movim = Data2.Recordset!detamovi
         Text2(2).Text = PonerNombreCliente(Codigo, movim)
         ImageObservaDFI.visible = movim = "DFI"
     End If
@@ -1008,16 +1008,16 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim B As Boolean
+Dim b As Boolean
 Dim I As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
 
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
      
     SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.data2, SQL, primeravez
+    CargaGridGnral DataGrid1, Me.Data2, SQL, primeravez
     
     DataGrid1.Columns(0).visible = False 'Cod. Artic
     DataGrid1.Columns(2).visible = False 'Nombre Almacen
@@ -1091,7 +1091,7 @@ Dim SQL As String
         DataGrid1.Columns(I).AllowSizing = False
     Next I
     DataGrid1.ScrollBars = dbgAutomatic
-    DataGrid1.Enabled = B
+    DataGrid1.Enabled = b
     If Modo = 2 Then DataGrid1.Enabled = True
     primeravez = False
     
@@ -1229,7 +1229,7 @@ Dim CadB As String
 
         CadB = ""
         CadB = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & CadB & " GROUP BY codartic " & Ordenacion
+        CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & CadB & " GROUP BY codartic ORDER BY codartic"
         PonerCadenaBusqueda
         
         CadB = RecuperaValor(CadenaDevuelta, 1)
@@ -1249,20 +1249,20 @@ Dim Invehco As Boolean
 
     If Modo = 0 Then Exit Sub
     
-    If Not data2.Recordset.EOF Then
+    If Not Data2.Recordset.EOF Then
         'Poner descripcion del almacen
-        If data2.Recordset!DetaMovi = "DFI" Then
+        If Data2.Recordset!detamovi = "DFI" Then
             'Vemos datos de invemtario
             
             Invehco = False
             'Veremos si el DFI es del utlimo inventario
-            cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(data2.Recordset!FechaMov, "F") & " AND codalmac"
-            cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", cad, CStr(data2.Recordset!codAlmac))
+            cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
+            cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", cad, CStr(Data2.Recordset!codAlmac))
             
             If cad = "" Then
                 'No es el de salmac. Buscamos en shinve
-                cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(data2.Recordset!FechaMov, "F") & " AND codalmac"
-                cad = DevuelveDesdeBD(conAri, "existenc", "shinve", cad, CStr(data2.Recordset!codAlmac))
+                cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
+                cad = DevuelveDesdeBD(conAri, "existenc", "shinve", cad, CStr(Data2.Recordset!codAlmac))
                 If cad <> "" Then Invehco = True
             
             End If
@@ -1272,13 +1272,13 @@ Dim Invehco As Boolean
                 
                 cad = "          Existencias: " & cad
                 If Invehco Then cad = cad & "    *Hco"
-                cad = "Fecha inventario: " & data2.Recordset!FechaMov & cad
+                cad = "Fecha inventario: " & Data2.Recordset!FechaMov & cad
              '   Cad = vbCrLf & "Almacen: " & Data2.Recordset!codAlmac & "-" & Text2(1).Text & vbCrLf & Cad
              '   Cad = "Articulo: " & Text1(0).Text & " " & Text2(0).Text & Cad
                 
             End If
                         
-            If Not IsNull(data2.Recordset!observa) Then cad = cad & vbCrLf & "Observaciones: " & vbCrLf & data2.Recordset!observa
+            If Not IsNull(Data2.Recordset!observa) Then cad = cad & vbCrLf & "Observaciones: " & vbCrLf & Data2.Recordset!observa
             
             If cad <> "" Then MsgBox cad, vbInformation
          End If
@@ -1336,17 +1336,17 @@ End Sub
 
 
 
-Private Sub txtaux_GotFocus(index As Integer)
+Private Sub txtAux_GotFocus(index As Integer)
     If (Modo = 1 And (index = 0 Or index = 1 Or index = 2 Or index = 3 Or index = 4 Or index = 5 Or index = 7)) Or (Modo <> 1) Then
         ConseguirFoco txtAux(index), Modo
     End If
 End Sub
 
-Private Sub txtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub txtaux_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -1406,17 +1406,17 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim I As Byte
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
 
    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
@@ -1436,18 +1436,18 @@ Dim NumReg As Byte
         PonerBotonCabecera True
     End Select
            
-    B = Modo <> 0 And Modo <> 2
+    b = Modo <> 0 And Modo <> 2
   
     For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = B
+        Me.imgBuscar(I).Enabled = b
     Next I
 
     
     PonerLongCampos
 
-    B = (Kmodo >= 3) Or Modo = 1
-    Toolbar1.Buttons(1).Enabled = Not B
-    Toolbar1.Buttons(2).Enabled = Not B
+    b = (Kmodo >= 3) Or Modo = 1
+    Toolbar1.Buttons(1).Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not b
 End Sub
 
 
@@ -1564,19 +1564,19 @@ Private Sub BotonVerTodos()
         MandaBusquedaPrevia ""
         CargaGrid True
     Else
-        CadenaConsulta = "Select codartic from " & NombreTabla & " group by codartic " & Ordenacion
+        CadenaConsulta = "Select codartic from " & NombreTabla & " group by codartic ORDER BY codartic"
         PonerCadenaBusqueda
         Toolbar1.Buttons(5).Enabled = False 'Imprimir
     End If
 End Sub
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
+Private Sub PonerBotonCabecera(b As Boolean)
 Dim bol As Boolean
 
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    If B Then Me.lblIndicador.Caption = ""
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    If b Then Me.lblIndicador.Caption = ""
     
     bol = (Modo = 1 Or Modo = 2)
     Me.Label3.visible = bol
@@ -1628,7 +1628,7 @@ Dim cadB2 As String
     
         If CadB <> "" Then
             'Cadena para el Data1
-            CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & CadB & " GROUP BY codartic " & Ordenacion
+            CadenaConsulta = "select codartic from " & NombreTabla & " WHERE " & CadB & " GROUP BY codartic  ORDER BY codartic " '" & Ordenacion
             'Cadena para el Datagrid y el Data2
             'el codartic no se incluye en la cadB de las lineas pq siempre
             'se muestran las de un codartic concreto
@@ -1643,7 +1643,7 @@ Dim cadB2 As String
             
         Else
             'obtener todos los articulos
-            CadenaConsulta = "select codartic from " & NombreTabla & " GROUP BY codartic " & Ordenacion
+            CadenaConsulta = "select codartic from " & NombreTabla & " GROUP BY codartic ORDER BY codartic " '& Ordenacion
             CadenaBusqueda = ""
         End If
         PonerCadenaBusqueda

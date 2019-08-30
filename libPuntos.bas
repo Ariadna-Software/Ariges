@@ -16,7 +16,7 @@ Option Explicit
 
 
 Public Function CalcularPuntosAlbaran(cadWhere As String, FechaAlbaran As Date) As Currency
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim C As String
 Dim Importe As Currency
 
@@ -31,26 +31,26 @@ Dim Importe As Currency
     'El canje suma tambien
     'C = C & " AND slialb.codartic<>" & DBSet(vParamAplic.PtosArticuloCanje, "T")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            Importe = Rs.Fields(0) * vParamAplic.PtosAsignar
+    Set RS = New ADODB.Recordset
+    RS.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            Importe = RS.Fields(0) * vParamAplic.PtosAsignar
             CalcularPuntosAlbaran = Round2(Importe / vParamAplic.PtosImporteCalculo, 2)
         End If
     End If
-    Rs.Close
+    RS.Close
     
 eCalcularPuntosAlbaran:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
-    Set Rs = Nothing
+    Set RS = Nothing
     
 End Function
 
 
 
 Public Function CalcularPuntosAlbaranCABEL(cadWhere As String, FechaAlbaran As Date, ByRef ImporteLineasTotal As String, ByRef Comision As String) As Currency
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim C As String
 Dim Importe As Currency
 
@@ -69,22 +69,22 @@ Dim Importe As Currency
     C = C & " AND slialb.codartic<>" & DBSet(vParamAplic.PtosArticuloCanje, "T")
     
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        If Not IsNull(Rs.Fields(0)) Then
-            Importe = Rs.Fields(0) * vParamAplic.PtosAsignar
+    Set RS = New ADODB.Recordset
+    RS.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        If Not IsNull(RS.Fields(0)) Then
+            Importe = RS.Fields(0) * vParamAplic.PtosAsignar
             CalcularPuntosAlbaranCABEL = Round2(Importe / vParamAplic.PtosImporteCalculo, 2)
-            ImporteLineasTotal = DBLet(Rs.Fields(1), "N")
-            If Not IsNull(Rs.Fields(2)) Then Comision = Format(Rs.Fields(2), FormatoImporte)
+            ImporteLineasTotal = DBLet(RS.Fields(0), "N")  'AGosto 2019. Ponia field(1) que es sum(importel)
+            If Not IsNull(RS.Fields(2)) Then Comision = Format(RS.Fields(2), FormatoImporte)
                 
         End If
     End If
-    Rs.Close
+    RS.Close
     
 eCalcularPuntosAlbaran:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
-        Set Rs = Nothing
+        Set RS = Nothing
     
 End Function
 

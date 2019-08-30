@@ -975,7 +975,7 @@ Begin VB.Form frmFacHcoFacturas2
          Left            =   -68880
          MaxLength       =   30
          TabIndex        =   36
-         Tag             =   "Dir envio|N|S|0|9999|scafac1|coddiren|0000|N|"
+         Tag             =   "Dir envio|N|S|0|99999|scafac1|coddiren|0000|N|"
          Text            =   "Text1"
          Top             =   2160
          Width           =   660
@@ -2545,11 +2545,163 @@ Begin VB.Form frmFacHcoFacturas2
          Caption         =   "Observaciones"
          ForeColor       =   &H00972E0B&
          Height          =   2055
-         Left            =   -74760
+         Left            =   -74880
          TabIndex        =   106
          Tag             =   "Observación 4|T|S|||scafac1|observa4||N|"
          Top             =   2640
          Width           =   13695
+         Begin VB.Frame FrameRecepMercan 
+            Caption         =   "Recepción mercancia"
+            Height          =   1815
+            Left            =   7920
+            TabIndex        =   219
+            Top             =   120
+            Visible         =   0   'False
+            Width           =   5655
+            Begin VB.TextBox Text3 
+               Height          =   300
+               Index           =   27
+               Left            =   4320
+               MaxLength       =   80
+               TabIndex        =   224
+               Tag             =   "Geo-Long|N|S|||scafac1|longitud|#0.00000|N|"
+               Text            =   "Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Te"
+               Top             =   1320
+               Width           =   1185
+            End
+            Begin VB.TextBox Text3 
+               Height          =   300
+               Index           =   26
+               Left            =   2760
+               MaxLength       =   80
+               TabIndex        =   223
+               Tag             =   "Geo-Latitud|N|S|||scafac1|latitud|#0.00000|N|"
+               Text            =   "Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Te"
+               Top             =   1320
+               Width           =   1185
+            End
+            Begin VB.TextBox Text3 
+               Height          =   300
+               Index           =   25
+               Left            =   240
+               MaxLength       =   80
+               TabIndex        =   222
+               Tag             =   "T|T|S|||scafac1|dnient||N|"
+               Text            =   "Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Te"
+               Top             =   1320
+               Width           =   2025
+            End
+            Begin VB.TextBox Text3 
+               Height          =   300
+               Index           =   24
+               Left            =   2160
+               MaxLength       =   80
+               TabIndex        =   221
+               Tag             =   "C|T|S|||scafac1|perrecep||N|"
+               Text            =   "Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Text1 Te"
+               Top             =   600
+               Width           =   3345
+            End
+            Begin VB.TextBox Text3 
+               Height          =   300
+               Index           =   23
+               Left            =   240
+               MaxLength       =   80
+               TabIndex        =   220
+               Tag             =   "Observación 1|FH|S|||scafac1|fechaent|dd/mm/yyy hh:nn:ss||"
+               Top             =   600
+               Width           =   1665
+            End
+            Begin VB.Image imgFirmaRecep 
+               Height          =   480
+               Left            =   5160
+               Picture         =   "frmFacHcoFacturas.frx":E544
+               ToolTipText     =   "Firma de la recepción del albaran"
+               Top             =   0
+               Visible         =   0   'False
+               Width           =   480
+            End
+            Begin VB.Label Label1 
+               AutoSize        =   -1  'True
+               Caption         =   "Recepción mercancia"
+               BeginProperty Font 
+                  Name            =   "MS Sans Serif"
+                  Size            =   8.25
+                  Charset         =   0
+                  Weight          =   700
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   195
+               Index           =   59
+               Left            =   120
+               TabIndex        =   230
+               Top             =   0
+               Width           =   1845
+            End
+            Begin VB.Image imgGeolocalizacion 
+               Height          =   255
+               Left            =   3840
+               Picture         =   "frmFacHcoFacturas.frx":E84E
+               Stretch         =   -1  'True
+               Tag             =   "-1"
+               ToolTipText     =   "Abrir web"
+               Top             =   1080
+               Width           =   255
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Fecha"
+               Height          =   255
+               Index           =   78
+               Left            =   240
+               TabIndex        =   229
+               Top             =   360
+               Width           =   735
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Persona recepcion"
+               Height          =   195
+               Index           =   80
+               Left            =   2160
+               TabIndex        =   228
+               Top             =   360
+               Width           =   1335
+            End
+            Begin VB.Label Label1 
+               Caption         =   "DNI"
+               Height          =   195
+               Index           =   81
+               Left            =   240
+               TabIndex        =   227
+               Top             =   1080
+               Width           =   1335
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Latitud"
+               Height          =   195
+               Index           =   82
+               Left            =   2760
+               TabIndex        =   226
+               Top             =   1080
+               Width           =   480
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Longitud"
+               Height          =   195
+               Index           =   83
+               Left            =   4320
+               TabIndex        =   225
+               Top             =   1080
+               Width           =   615
+            End
+            Begin VB.Line Line3 
+               X1              =   0
+               X2              =   0
+               Y1              =   240
+               Y2              =   1680
+            End
+         End
          Begin VB.TextBox Text3 
             Height          =   300
             Index           =   13
@@ -3383,6 +3535,7 @@ Private BuscaChekc As String
 
 Private LetrasFraTelefonia As String
 Private SolapaCamposFito As Boolean
+Dim CarpetaImagenesEULER  As String
 
 
 Private Sub Check1_Click()
@@ -3659,7 +3812,7 @@ Dim EnTesoreria  As String
     'Añadiremos el boton de aceptar y demas objetos para insertar
     PonerModo 4
     
-    PonerFocoChk Me.Check1
+    'PonerFocoChk Me.Check1
         
     'Inserto en slog
     
@@ -4298,7 +4451,11 @@ Dim b As Boolean
     Next I
 
     
-    
+    If vParamAplic.NumeroInstalacion = vbEuler Then
+        For I = 23 To 27
+            BloquearTxt Text3(I), (Modo <> 4 And Modo <> 1)
+        Next I
+    End If
     
     
     b = Modo <> 1
@@ -4486,7 +4643,20 @@ Dim I As Byte
         chkPedxCli.Value = DBLet(data3.Recordset!PideCliente, "N")
         
         'EULER
-        If vParamAplic.NumeroInstalacion = 4 Then VisualizarPorTipoAlbaran
+        If vParamAplic.NumeroInstalacion = 4 Then
+            VisualizarPorTipoAlbaran
+            'Recepcion mercancia
+            For I = 23 To 27
+                Text3(I).Text = DBLet(data3.Recordset.Fields(I + 7), "T")
+                
+                If I = 23 And Text3(I).Text <> "" Then Text3(I).Text = Format(data3.Recordset.Fields(I + 7), "dd/mm/yyyy hh:nn:ss")
+                If I = 26 And Text3(I).Text <> "" Then Text3(I).Text = Format(data3.Recordset.Fields(I + 7), "#0.00000")
+                If I = 27 And Text3(I).Text <> "" Then Text3(I).Text = Format(data3.Recordset.Fields(I + 7), "#0.00000")
+            Next
+            
+            PonerImagenFirma
+            
+        End If
         
         
         'Si lleva fitosanitarios
@@ -4535,6 +4705,7 @@ Private Sub Form_activate()
                 PonerCadenaBusqueda
             Else
                 PonerCampos
+                DataGrid1_RowColChange 0, 0
             End If
         End If
     End If
@@ -4617,7 +4788,7 @@ Dim B1 As Boolean
     
     'El boton de imprimir campos lo usare en euler para los costes
     Me.SSTab1.TabVisible(2) = False
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If vParamAplic.NumeroInstalacion = vbEuler Then
         Toolbar1.Buttons(14).Image = 36
         Toolbar1.Buttons(14).visible = True
         Toolbar1.Buttons(14).ToolTipText = "Costes"
@@ -4628,6 +4799,17 @@ Dim B1 As Boolean
         Me.cmdLineasCostes(2).Picture = frmPpal.imgListComun.ListImages(14).Picture
         
         
+        
+        For kCampo = 9 To 13
+            Text3(kCampo).Left = 240
+            Text3(kCampo).Width = 7305
+        Next
+        FrameRecepMercan.BorderStyle = 0
+        FrameRecepMercan.visible = True
+        primeravez = True
+        CarpetaImagenesEULER = DevuelveDesdeBD(conAri, "pathDocs", "eulerparam", "1", "1")
+        PonerImagenFirma
+        primeravez = False
     End If
     
     EsDeVarios = False
@@ -4794,7 +4976,10 @@ On Error Resume Next
         Me.ListView2.ListItems.Clear
         Me.ListView3.ListItems.Clear
     End If
-    If vParamAplic.NumeroInstalacion = 4 Then lwCostes.ListItems.Clear
+    If vParamAplic.NumeroInstalacion = vbEuler Then
+        lwCostes.ListItems.Clear
+        imgFirmaRecep.visible = False
+    End If
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -5051,6 +5236,23 @@ Dim Aux As String
 End Sub
 
 
+
+Private Sub imgFirmaRecep_Click()
+    If Modo <> 2 Then Exit Sub
+    If imgFirmaRecep.Tag = "" Then Exit Sub
+    
+    LanzaVisorMimeDocumento Me.hwnd, imgFirmaRecep.Tag
+End Sub
+
+Private Sub imgGeolocalizacion_Click()
+    If Modo <> 2 Then Exit Sub
+     If Text3(26).Text <> "" And Text3(27).Text <> "" Then
+        BuscaChekc = TransformaComasPuntos(Text3(26).Text) & "," & TransformaComasPuntos(Text3(27).Text)
+        AbrirGeolocalizacion BuscaChekc
+        
+        BuscaChekc = ""
+    End If
+End Sub
 
 Private Sub lwCostes_DblClick()
 Dim C1 As String
@@ -6104,6 +6306,13 @@ Dim bT As Boolean
     End If
         
         
+        
+    If vParamAplic.NumeroInstalacion = vbEuler Then
+        
+    
+    End If
+        
+        
     DatosOk = b
     
 EDatosOK:
@@ -6202,6 +6411,13 @@ Private Sub Text3_LostFocus(index As Integer)
                     PonerFoco Text3(18)
                 End If
             End If
+        Case 23
+            'FH
+            If Not EsFechaHoraOK(Text3(index)) Then
+                                
+            End If
+        Case 26, 27
+            If Not PonerFormatoDecimal(Text3(index), 8) Then Text3(index).Text = ""
     End Select
 End Sub
 
@@ -6488,7 +6704,10 @@ Dim B1 As Boolean
             
             'Mani`pulador fitosantiarios  pidecliente
             tots = tots & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
-            
+            '                                                       fechaent,perrecep,dnient,latitud,longitud"
+            If vParamAplic.NumeroInstalacion = vbEuler Then tots = tots & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
+                    
+                        
             arregla tots, DataGrid2, Me
                      
             DataGrid2_RowColChange 1, 1
@@ -6801,6 +7020,10 @@ Dim B1 As Boolean
         'Fitos
         
         SQL = SQL & ",ManipuladorNumCarnet,ManipuladorFecCaducidad,ManipuladorNombre,TipoCarnet,PideCliente "
+        
+        If vParamAplic.NumeroInstalacion = vbEuler Then SQL = SQL & ",fechaent,perrecep,dnient,latitud,longitud"
+        
+        
         SQL = SQL & " FROM scafac1 " 'cabeceras albaranes de la factura
     End If
     
@@ -6957,7 +7180,7 @@ Dim b As Boolean
             FormateaCampo Text1(19)
             Text1(20).Text = vCliente.DigControl
             Text1(21).Text = vCliente.CuentaBan
-            
+            Text1(46).Text = vCliente.Iban
             'Comprobar si el cliente tiene cobros pendientes
             ComprobarCobrosCliente codClien, Text1(1).Text
         End If
@@ -7205,7 +7428,14 @@ Dim b As Boolean
     SQL = SQL & ", PideCliente = " & Me.chkPedxCli.Value
     If vParamAplic.DireccionesEnvio Then SQL = SQL & ", coddiren=" & DBSet(Text3(18).Text, "N", "S")   'Direnvio
         
-    
+    If vParamAplic.NumeroInstalacion = vbEuler Then
+        For kCampo = 23 To 27
+            SQL = SQL & "," & RecuperaValor("fechaent|perrecep|dnient|latitud|longitud|", kCampo - 22)
+            SQL = SQL & " = " & DBSet(Text3(kCampo).Text, IIf(kCampo = 23, "FH", IIf(kCampo > 25, "N", "T")), "S")
+        Next kCampo
+        kCampo = 0
+       
+    End If
     
     SQL = SQL & ObtenerWhereCP(True)
     SQL = SQL & " AND codtipoa='" & data3.Recordset.Fields!codtipoa & "' AND numalbar=" & data3.Recordset.Fields!Numalbar
@@ -7958,9 +8188,9 @@ Dim devuelve As String
                 '.outCodigoCliProv = Text1(4).Text
                 '.outTipoDocumento = 2
                 
-                .outClaveNombreArchiv = ""
-                .outCodigoCliProv = 0
-                .outTipoDocumento = 0
+                .outClaveNombreArchiv = data3.Recordset!codtipoa & Format(data3.Recordset!Numalbar, "0000000")
+                .outCodigoCliProv = Text1(4).Text
+                .outTipoDocumento = 7
                 .SeleccionaRPTCodigo = pRptvMultiInforme
                 
                 
@@ -9000,7 +9230,7 @@ Dim Impo As Currency
             
             cad2 = DBLet(miRsAux!RecepAgenCliMat, "T")
             If cad2 <> "" Then
-                SQL = SQL & vbCrLf & "Agen/Cli/Matr: " & cad2
+                SQL = SQL & vbCrLf & "Agen/Cli/Matr: " '& cad2
                 cad2 = cad2 & "  [" & IIf(DBLet(miRsAux!RecepAgenClien, "T") = 0, "Agencia", "Cliente") & "]"
                 
                 If Not IsNull(miRsAux!RecpNumExp) Then cad2 = cad2 & "  Expediente: " & miRsAux!RecpNumExp & " " & DBLet(miRsAux!FechaAlb, "T")
@@ -9772,3 +10002,50 @@ Private Sub txtCostes_LostFocus(index As Integer)
     
     
 End Sub
+
+Private Sub PonerImagenFirma()
+Dim C As String
+    On Error GoTo ePonerImagenFirma
+    
+    If CarpetaImagenesEULER = "" Then Exit Sub
+    
+    If primeravez Then
+        If Dir(CarpetaImagenesEULER, vbDirectory) = "" Then
+            MsgBox "No existe carpeta: " & CarpetaImagenesEULER, vbExclamation
+            CarpetaImagenesEULER = ""
+        
+        Else
+            C = DevuelveDesdeBD(conAri, "carpetafirmas", "eulerparam", "1", "1")
+            CarpetaImagenesEULER = CarpetaImagenesEULER & "\" & C
+            
+                
+            If Dir(CarpetaImagenesEULER, vbDirectory) = "" Then
+                MsgBox "No existe carpeta: " & CarpetaImagenesEULER, vbExclamation
+                CarpetaImagenesEULER = ""
+            End If
+        End If
+        Exit Sub
+    End If
+    imgFirmaRecep.visible = False
+    If Modo <> 2 Then Exit Sub
+    
+    If data3.Recordset.EOF Then
+        C = ""
+    Else
+        C = CarpetaImagenesEULER & "\" & Mid(data3.Recordset!codtipoa & "   ", 1, 3) & Format(data3.Recordset!Numalbar, "0000000") & ".jpg"
+    End If
+    If Dir(C, vbArchive) = "" Then C = ""
+        
+    If C <> "" Then
+        imgFirmaRecep.visible = True
+        imgFirmaRecep.Tag = C
+    End If
+    
+    
+    
+    Exit Sub
+ePonerImagenFirma:
+    Err.Clear
+    CarpetaImagenesEULER = ""
+End Sub
+

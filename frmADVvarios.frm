@@ -347,16 +347,144 @@ Begin VB.Form frmADVvarios
          Width           =   735
       End
    End
+   Begin VB.Frame FrameAgrupadoCampos 
+      Height          =   7695
+      Left            =   0
+      TabIndex        =   29
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   13095
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "Salir"
+         Height          =   495
+         Index           =   1
+         Left            =   12000
+         TabIndex        =   33
+         Top             =   7080
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdRegresar2 
+         Caption         =   "Regresar"
+         Height          =   495
+         Left            =   10920
+         TabIndex        =   31
+         Top             =   7080
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdBUs2 
+         Height          =   375
+         Left            =   1080
+         Picture         =   "frmADVvarios.frx":0618
+         Style           =   1  'Graphical
+         TabIndex        =   30
+         ToolTipText     =   "Buscar"
+         Top             =   7200
+         Width           =   375
+      End
+      Begin MSComctlLib.ListView lwCamposAgrupados 
+         Height          =   6255
+         Left            =   120
+         TabIndex        =   32
+         Top             =   720
+         Width           =   12855
+         _ExtentX        =   22675
+         _ExtentY        =   11033
+         View            =   3
+         LabelEdit       =   1
+         Sorted          =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   7
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "NroCampo"
+            Object.Width           =   2029
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Partida"
+            Object.Width           =   4075
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Variedad"
+            Object.Width           =   3529
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   3
+            Text            =   "Sup(ha)"
+            Object.Width           =   1411
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "Cliente"
+            Object.Width           =   1587
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
+            Text            =   "Socio"
+            Object.Width           =   1764
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
+            Text            =   "Nombre"
+            Object.Width           =   7232
+         EndProperty
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Agrupado por NºCampo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   240
+         TabIndex        =   34
+         Top             =   240
+         Width           =   4215
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   3
+         Left            =   240
+         Picture         =   "frmADVvarios.frx":101A
+         ToolTipText     =   "Quitar al haber"
+         Top             =   7200
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   2
+         Left            =   600
+         Picture         =   "frmADVvarios.frx":1164
+         ToolTipText     =   "Puntear al haber"
+         Top             =   7200
+         Width           =   240
+      End
+   End
    Begin VB.Frame FrameSelecCampo 
       Height          =   7695
       Left            =   120
       TabIndex        =   0
-      Top             =   0
+      Top             =   6000
+      Visible         =   0   'False
       Width           =   13095
       Begin VB.CommandButton cmdBusq 
          Height          =   375
          Left            =   1080
-         Picture         =   "frmADVvarios.frx":0618
+         Picture         =   "frmADVvarios.frx":12AE
          Style           =   1  'Graphical
          TabIndex        =   5
          ToolTipText     =   "Buscar"
@@ -441,7 +569,7 @@ Begin VB.Form frmADVvarios
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmADVvarios.frx":101A
+         Picture         =   "frmADVvarios.frx":1CB0
          ToolTipText     =   "Puntear al haber"
          Top             =   7200
          Width           =   240
@@ -450,7 +578,7 @@ Begin VB.Form frmADVvarios
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmADVvarios.frx":1164
+         Picture         =   "frmADVvarios.frx":1DFA
          ToolTipText     =   "Quitar al haber"
          Top             =   7200
          Width           =   240
@@ -470,13 +598,19 @@ Attribute frmB.VB_VarHelpID = -1
 
 Public Opcion As Byte
     '0.- Mostrar campos para seleccionar en partes de trabajo
-
+    '1.-   " todo igual pero con campos agrupados
 
 Public vCampos As String   'Si es -1 es que quiere lanzar el modo bsqueda
 
 Dim PrimVez As Boolean
 Dim SQL As String
 Dim IT As ListItem
+
+Private Sub cmdBUs2_Click()
+  Me.FrameDH.visible = True
+    Me.FrameAgrupadoCampos.Enabled = False
+    PonerFoco Text1(0)
+End Sub
 
 ''''''
 ''''''Private Sub chkTodos_Click()
@@ -492,9 +626,9 @@ Private Sub cmdBusq_Click()
     PonerFoco Text1(0)
 End Sub
 
-Private Sub cmdBusqueda_Click(Index As Integer)
-     If Index = 0 Then
-        SQL = ""
+Private Sub cmdBusqueda_Click(index As Integer)
+     If index = 0 Then
+        SQL = "      rcampos.codclien > 0"
             'rcampos inner join @#rpartida on rcampos.codparti = rpartida.codparti)"
             'variedades on rcampos.codvarie = variedades.codvarie)"
             'SQL = SQL & " inner join @#rsocios on rsocios.codsocio=rcampos.codsocio"
@@ -510,18 +644,75 @@ Private Sub cmdBusqueda_Click(Index As Integer)
     End If
     
     Screen.MousePointer = vbHourglass
-    CargaCampos2 SQL
-    Screen.MousePointer = vbDefault
-    'Uno u otro
-    Me.FrameDH.visible = False
-    Me.FrameSelecCampo.Enabled = True
     
+    
+    
+    'Uno u otro
+    If Opcion = 0 Then
+        CargaCampos2 SQL
+        Me.FrameSelecCampo.Enabled = True
+    Else
+        CargaCamposAgr SQL
+        Me.FrameAgrupadoCampos.Enabled = True
+    End If
+    Screen.MousePointer = vbDefault
+    Me.FrameDH.visible = False
+   
     
 End Sub
 
-Private Sub cmdCancelar_Click(Index As Integer)
+Private Sub cmdCancelar_Click(index As Integer)
 
     CadenaDesdeOtroForm = ""  'por si las moscas
+    Unload Me
+End Sub
+
+Private Sub cmdRegresar2_Click()
+Dim T1 As String
+     
+    If lwCamposAgrupados.ListItems.Count = 0 Then Exit Sub
+    
+    SQL = ""
+    For NumRegElim = 1 To lwCamposAgrupados.ListItems.Count
+        If lwCamposAgrupados.ListItems(NumRegElim).Checked Then SQL = SQL & "1"
+    Next
+    If SQL = "" Then
+        MsgBox "Seleccione algun campo", vbExclamation
+        Exit Sub
+    End If
+    
+    
+    If vCampos = "-1" Then
+        'Multi parte. NO puedo coger campos que no tengan cliente asociado"
+        T1 = ""
+        For NumRegElim = 1 To lwCamposAgrupados.ListItems.Count
+            If lwCamposAgrupados.ListItems(NumRegElim).Checked Then
+               If Trim(lwCamposAgrupados.ListItems(NumRegElim).SubItems(4)) = "" Then T1 = T1 & "X"
+            End If
+        Next
+        If T1 <> "" Then
+            MsgBox "Existen " & Len(T1) & " campo" & IIf(Len(T1) > 1, "s", "") & " sin cliente asociado", vbExclamation
+            Exit Sub
+        End If
+    End If
+    
+    CadenaDesdeOtroForm = ""
+    NumRegElim = Len(SQL)
+    If NumRegElim > 1 Then
+        SQL = "Ha seleccionado " & NumRegElim & " AGRUPACIONES de campos. ¿Continuar?"
+        If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        CadenaDesdeOtroForm = "@" 'comienza por arroba
+    End If
+
+    
+    For NumRegElim = 1 To lwCamposAgrupados.ListItems.Count
+        If lwCamposAgrupados.ListItems(NumRegElim).Checked Then
+            SQL = lwCamposAgrupados.ListItems(NumRegElim).Text & "|" & lwCamposAgrupados.ListItems(NumRegElim).SubItems(1) & "|" & lwCamposAgrupados.ListItems(NumRegElim).SubItems(2) & "|" & lwCamposAgrupados.ListItems(NumRegElim).Tag & "|" & "·#"   'tag=codvarie
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & SQL
+        End If
+    Next
+        
+    
     Unload Me
 End Sub
 
@@ -573,7 +764,15 @@ Dim T1 As String
     Unload Me
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Command1_Click()
+
+End Sub
+
+Private Sub Command2_Click()
+
+End Sub
+
+Private Sub Form_activate()
     If PrimVez Then
         PrimVez = False
         
@@ -583,6 +782,10 @@ Private Sub Form_Activate()
             Else
                 cmdBusq_Click
             End If
+        
+        Else
+            cmdBUs2_Click
+        
         End If
         
     End If
@@ -599,7 +802,13 @@ Private Sub Form_Load()
     Select Case Opcion
     Case 0
         Caption = "Campos"
+        
         PonerFrameVisible Me.FrameSelecCampo
+            
+    Case 1
+        Caption = "Campos agrupados"
+        PonerFrameVisible Me.FrameAgrupadoCampos
+        
     End Select
     
     Me.cmdCancelar(Opcion).Cancel = True
@@ -663,20 +872,77 @@ End Sub
 
 
 
+
+
+Private Sub CargaCamposAgr(ByVal SQ As String)
+
+    On Error GoTo ecargaCampos
+    Set miRsAux = New ADODB.Recordset
+    
+    Me.lwCamposAgrupados.ListItems.Clear
+    'Para no meter MUCHOS ariagro.tabla
+    'Pongo @# y luego lo reemplazo por vparamaplic.Ariagro.
+    SQL = "select rcampos.nrocampo, rpartida.nomparti, variedades.nomvarie,rcampos.codclien,rsocios.codsocio,rsocios.nomsocio,"
+    SQL = SQL & " sum(rcampos.supsigpa) supsigpa,nomclien,rcampos.codvarie"
+    SQL = SQL & " from ((@#rcampos inner join @#rpartida on rcampos.codparti = rpartida.codparti)"
+    SQL = SQL & " inner join @#variedades on rcampos.codvarie = variedades.codvarie)"
+    SQL = SQL & " inner join @#rsocios on rsocios.codsocio=rcampos.codsocio"
+    SQL = SQL & " left join sclien on rcampos.codclien=sclien.codclien"
+    'where socio
+    If SQ <> "" Then SQL = SQL & " WHERE " & SQ
+    
+    SQL = Replace(SQL, "@#", vParamAplic.Ariagro & ".")
+    
+    SQL = SQL & " GROUP BY nrocampo,rcampos.codvarie"
+    
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+        Set IT = lwCamposAgrupados.ListItems.Add()
+        IT.Text = Format(miRsAux!nrocampo, "0000000")
+        IT.SubItems(1) = miRsAux!nomparti
+        IT.SubItems(2) = miRsAux!nomvarie
+        'Superficie
+        
+        IT.SubItems(3) = Format(DBLet(miRsAux!supsigpa, "N"), FormatoPrecio)
+        
+        If IsNull(miRsAux!codClien) Then
+            IT.SubItems(4) = " "
+        Else
+            IT.SubItems(4) = Format(miRsAux!codClien, "00000")
+        End If
+        IT.SubItems(5) = Format(miRsAux!codsocio, "00000")
+        If IsNull(miRsAux!NomClien) Then
+            IT.SubItems(6) = miRsAux!nomsocio
+        Else
+            IT.SubItems(6) = miRsAux!NomClien
+        End If
+        IT.Tag = miRsAux!codvarie
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+ecargaCampos:
+    If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
+    Set miRsAux = Nothing
+End Sub
+
+
+
+
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
     SQL = CadenaDevuelta
 End Sub
 
-Private Sub imgBusc_Click(Index As Integer)
+Private Sub imgBusc_Click(index As Integer)
     
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
     
-    If Index < 2 Then
+    If index < 2 Then
         frmB.vCampos = "Codigo|" & vParamAplic.Ariagro & ".rsocios|codsocio|N|0000000|20·Nombre|" & vParamAplic.Ariagro & ".rsocios|nomsocio|T||70·"
         frmB.vTabla = vParamAplic.Ariagro & ".rsocios"
         frmB.vTitulo = "Socios"
-    ElseIf Index < 4 Then
+    ElseIf index < 4 Then
         frmB.vCampos = "Codigo|sclien|codclien|N|0000000|20·Nombre|sclien|nomclien|T||70·"
         frmB.vTabla = "sclien"
         frmB.vTitulo = "Clientes"
@@ -700,27 +966,33 @@ Private Sub imgBusc_Click(Index As Integer)
  '       Debug.Print lw11.ColumnHeaders(i).Text & " " & lw11.ColumnHeaders(i).Width
  '   Next i
     If SQL <> "" Then
-        Text1(Index).Text = RecuperaValor(SQL, 1)
-        Text2(Index).Text = RecuperaValor(SQL, 2)
+        Text1(index).Text = RecuperaValor(SQL, 1)
+        Text2(index).Text = RecuperaValor(SQL, 2)
         SQL = ""
-        If Index = 5 Then
+        If index = 5 Then
             PonerFocoBtn Me.cmdBusqueda(0)
         Else
-            PonerFoco Text1(Index + 1)
+            PonerFoco Text1(index + 1)
         End If
     End If
 End Sub
 
-Private Sub imgCheck_Click(Index As Integer)
-        
-    For NumRegElim = 1 To lw11.ListItems.Count
-        lw11.ListItems(NumRegElim).Checked = Index = 1
-    Next
+Private Sub imgCheck_Click(index As Integer)
+    If index <= 1 Then
+        For NumRegElim = 1 To lw11.ListItems.Count
+           lw11.ListItems(NumRegElim).Checked = index = 1
+        Next
+    Else
+            
+        For NumRegElim = 1 To lwCamposAgrupados.ListItems.Count
+             Me.lwCamposAgrupados.ListItems(NumRegElim).Checked = index = 2
+        Next
+    End If
 End Sub
 
 Private Sub lw11_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.Index - 1 <> Me.lw11.SortKey Then
-        lw11.SortKey = ColumnHeader.Index - 1
+    If ColumnHeader.index - 1 <> Me.lw11.SortKey Then
+        lw11.SortKey = ColumnHeader.index - 1
         lw11.SortOrder = lvwAscending
     Else
         If lw11.SortOrder = lvwAscending Then
@@ -736,41 +1008,54 @@ Private Sub lw11_DblClick()
     cmdSelCampo_Click
 End Sub
 
-Private Sub lw11_ItemCheck(ByVal item As MSComctlLib.ListItem)
-    Set lw11.SelectedItem = item
+Private Sub lw11_ItemCheck(ByVal Item As MSComctlLib.ListItem)
+    Set lw11.SelectedItem = Item
 End Sub
 
-Private Sub Text1_GotFocus(Index As Integer)
-    ConseguirFoco Text1(Index), 3
+Private Sub lwCamposAgrupados_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+    If ColumnHeader.index - 1 <> Me.lwCamposAgrupados.SortKey Then
+        lwCamposAgrupados.SortKey = ColumnHeader.index - 1
+        lwCamposAgrupados.SortOrder = lvwAscending
+    Else
+        If lwCamposAgrupados.SortOrder = lvwAscending Then
+            lwCamposAgrupados.SortOrder = lvwDescending
+        Else
+            lwCamposAgrupados.SortOrder = lvwAscending
+        End If
+    End If
 End Sub
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text1_GotFocus(index As Integer)
+    ConseguirFoco Text1(index), 3
+End Sub
+
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub Text1_LostFocus(Index As Integer)
-    Text1(Index).Text = Trim(Text1(Index).Text)
+Private Sub Text1_LostFocus(index As Integer)
+    Text1(index).Text = Trim(Text1(index).Text)
     SQL = ""
-    If Text1(Index).Text <> "" Then
-        If Not PonerFormatoEntero(Text1(Index)) Then
-            Text1(Index).Text = ""
+    If Text1(index).Text <> "" Then
+        If Not PonerFormatoEntero(Text1(index)) Then
+            Text1(index).Text = ""
         
         Else
-            If Index < 2 Then
+            If index < 2 Then
                 'Socio
-                SQL = DevuelveDesdeBD(conAri, "nomsocio", vParamAplic.Ariagro & ".rsocios", "codsocio", Text1(Index).Text)
+                SQL = DevuelveDesdeBD(conAri, "nomsocio", vParamAplic.Ariagro & ".rsocios", "codsocio", Text1(index).Text)
                 If SQL = "" Then SQL = "NO existe el socio"
-            ElseIf Index < 4 Then
-                SQL = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(Index).Text)
+            ElseIf index < 4 Then
+                SQL = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(index).Text)
                 If SQL = "" Then SQL = "NO existe el cliente"
                     
             Else
                 'Variedad
-                SQL = DevuelveDesdeBD(conAri, "nomvarie", vParamAplic.Ariagro & ".variedades", "codvarie", Text1(Index).Text)
+                SQL = DevuelveDesdeBD(conAri, "nomvarie", vParamAplic.Ariagro & ".variedades", "codvarie", Text1(index).Text)
                 If SQL = "" Then SQL = "NO existe la variedad"
             End If
             
         End If
     End If
-    Text2(Index).Text = SQL
+    Text2(index).Text = SQL
 End Sub

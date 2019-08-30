@@ -27,35 +27,48 @@ Public Function ActualizarElTraspaso(ByRef ADonde As String, cadWhere As String,
     'Insertamos en cabeceras Historico
     ADonde = "Insertando datos en histórico cabeceras "
     If Not InsertarCabeceraHistorico(cadWhere, cadL) Then Exit Function
-'    IncrementarProgres 2
      
     'Insertamos en lineas Historico
     ADonde = "Insertando datos en Histórico lineas "
     If Not InsertarLineasHistorico(cadWhere) Then Exit Function
     
-    
-    
     'Borramos cabeceras y lineas
     ADonde = "Borrar cabeceras y lineas"
     If Not BorrarTraspaso(False, cadWhere) Then Exit Function
 
-
-
-
     ActualizarElTraspaso = True
 End Function
+
+Public Function ActualizarElTraspasoSinBorrar(ByRef ADonde As String, cadWhere As String, codMovim As String, Optional cadL As String) As Boolean
+    ActualizarElTraspasoSinBorrar = False
+    CodTipoMov = codMovim
+    
+    'Insertamos en cabeceras Historico
+    ADonde = "Insertando datos en histórico cabeceras "
+    If Not InsertarCabeceraHistorico(cadWhere, cadL) Then Exit Function
+'    IncrementarProgres 2
+     
+    'Insertamos en lineas Historico
+    ADonde = "Insertando datos en Histórico lineas "
+    If Not InsertarLineasHistorico(cadWhere) Then Exit Function
+
+
+    ActualizarElTraspasoSinBorrar = True
+End Function
+
 
 
 Private Function InsertarCabeceraHistorico(cadWhere As String, Optional cadeN As String) As Boolean
 Dim SQL As String
 Dim Aux As String
-
+Dim SegundaTablaCabeceras As Boolean
 On Error Resume Next
 
     
 
     NomTablaLinH = ""
-
+    SegundaTablaCabeceras = False
+    
     Select Case CodTipoMov
       Case "PEV" 'pedidos de venta a clientes
         NomTabla = "scaped"
@@ -88,7 +101,11 @@ On Error Resume Next
         SQL = SQL & ", PideCliente,numbultos,fechaAux,puntos"
         'NOV 2018
         SQL = SQL & ", codinter,codnatura,notasportes,chofer "
-        
+        'JUN 19
+        SQL = SQL & ", FechaEnt , perrecep, dnient, latitud, Longitud"
+            
+        If vParamAplic.NumeroInstalacion = vbEuler Then SegundaTablaCabeceras = True
+            
       Case "OFE" 'Ofertas a Clientes
         NomTabla = "scapre"
         NomTablaH = "schpre"
@@ -142,12 +159,44 @@ On Error Resume Next
     Aux = "DELETE FROM " & NomTablaH & " WHERE " & Aux
     conn.Execute Aux
            
-    NomTablaLinH = ""
-    
+        
     SQL = SQL & " FROM " & NomTabla & " WHERE " & cadWhere
     SQL = "INSERT INTO " & NomTablaH & SQL
     
     conn.Execute SQL
+    
+    
+    
+    
+    
+    If SegundaTablaCabeceras Then
+       
+        
+        NomTablaLinH = "bombamarca,bombaModelo,motormarca,motorModelo,observaciones,TrabajoExterior,TipoPortes,ReferPedido,FechaPed,numrepar,Rep_OrdenTrabajo"
+        NomTablaLinH = NomTablaLinH & ",Rep_TrabajoExterior,RecepAgenClien , RecepPortes, RecepAgenCliMat, RecpNumExp, FechaAlb, TipoBombResSuperHor,"
+        NomTablaLinH = NomTablaLinH & "TipoBombResSuperVer, TipoBombLimSuperHor, TipoBombLimSuperVer, TipoBombResSumPoz, TipoBombLimSumPoz, TipoBombResSumVer,"
+        NomTablaLinH = NomTablaLinH & "TipoBombLimSumVer, TipoBomAgitadorRes, TipoBomAgitadorLim, TipoBomResOtrosEqu, TipoBomLimOtrosEqu, DatosBommarca,"
+        NomTablaLinH = NomTablaLinH & "DatosBomNumCurva, DatosBomModelo, DatosBomNumSerie, DatosBomAno, DatosBomH, DatosBomTipoRodete, DatosBomCaudal,"
+        NomTablaLinH = NomTablaLinH & "DatosBomUdCaudal, DatosMotorMarca, DatosMotorModelo, DatosMotorNumSerie, DatosMotorV, DatosMotorI,DatosMotorCV,"
+        NomTablaLinH = NomTablaLinH & "DatosMotorKw,DatosMotorrpm,NumParteTrabajo,NumTrabajExterno,Rep_Reparacion"
+        
+        
+        
+        
+        SQL = DevuelveDesdeBD(conAri, "fechaalb", "scaalb", cadWhere & " AND 1", "1")
+        If SQL = "" Then MsgBox "Error obeniendo fecha albaran. Avise soporte tecnico. El programa continua", vbExclamation
+        SQL = " SELECT codtipom,numalbar," & DBSet(SQL, "F") & " fechaalb," & vUsu.Codigo Mod 1000 & " as codigusu," & cadeN & "," & NomTablaLinH
+        Aux = Replace(cadWhere, "scaalb", "scaalb_eu")
+        SQL = SQL & " FROM scaalb_eu WHERE " & Aux
+        SQL = "INSERT INTO schalb_eu(codtipom,numalbar,fechaalb1,codigusu,fechelim ,trabelim ,codincid," & NomTablaLinH & ") " & SQL
+        conn.Execute SQL
+    End If
+    
+    
+    NomTablaLinH = ""
+    
+    
+    
     
     If Err.Number <> 0 Then
          'Hay error , almacenamos y salimos

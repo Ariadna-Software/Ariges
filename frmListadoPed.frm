@@ -5087,7 +5087,15 @@ Dim UnoSolo As Boolean
         End If
     End If
     
-
+    
+    If Not ComprobarSecuencialFactura Then Exit Sub
+    
+    
+    
+    
+    
+    
+    
     indCodigo = 0
     cad = ""
     campo = ""
@@ -5422,6 +5430,37 @@ Dim UnoSolo As Boolean
         Unload Me
     End If
 End Sub
+
+'Cuando genera UNA factura, comprobaremos que la fecha introducida es secuencial. No es anterior a una factura de esa serie
+Private Function ComprobarSecuencialFactura() As Boolean
+    
+    ComprobarSecuencialFactura = False
+    
+    If vParamAplic.NumeroInstalacion = vbAlzira And codClien = "ART" Then
+        'En alzira, las rectificativas , para usuario standard, solo puede ser de HOY
+         If CDate(txtCodigo(34).Text) <> CDate(Now) Then
+            MsgBox "La fecha debe ser la de hoy", vbExclamation
+            txtCodigo(34).Text = Format(Now, "dd/mm/yyyy")
+            Exit Function
+        End If
+    End If
+
+    cadParam = DevuelveTipoFacturaDesdeAlbaran(codClien)
+    If cadParam <> "" Then
+        cadFormula = Year(CDate(txtCodigo(34).Text))
+        cadFormula = "fecfactu > " & DBSet(txtCodigo(34).Text, "F") & " AND fecfactu <= '" & cadFormula & "-12-31' AND codtipom"
+        
+        cadFormula = DevuelveDesdeBD(conAri, "count(*)", "scafac", cadFormula, cadParam, "T")
+        If Val(cadFormula) > 0 Then
+            cadFormula = "Hay facturas (" & cadFormula & ") de las serie  " & cadParam & " con fecha posterior a  " & txtCodigo(34).Text
+            cadFormula = cadFormula & vbCrLf & "¿Continuar?"
+            If MsgBox(cadFormula, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
+        End If
+    End If
+    cadFormula = ""
+    cadParam = ""
+    ComprobarSecuencialFactura = True
+End Function
 
 
 
@@ -6428,7 +6467,7 @@ End Sub
 Private Sub cmdAceptarPreFac_Click()
 'Prevision de Facturacion de Albaranes
 Dim campo As String, cad As String
-Dim B As Boolean
+Dim b As Boolean
 Dim Indice As Integer
    
 
@@ -6446,7 +6485,7 @@ Dim Indice As Integer
 
 
     InicializarVbles
-    B = (OpcionListado = 50)
+    b = (OpcionListado = 50)
     
     'If (Not B) Or (B And codClien = "ALV") Then
         'Pasar nombre de la Empresa como parametro
@@ -6478,7 +6517,7 @@ Dim Indice As Integer
         If Not PonerDesdeHasta(campo, "N", 28, 29, cad) Then Exit Sub
     End If
   
-    If B Then 'opcionlistado=50
+    If b Then 'opcionlistado=50
         'Cadena para seleccion FORMA PAGO
         '--------------------------------------------
         NumCod = ""   'reutilizo
@@ -6754,7 +6793,7 @@ Dim Indice As Integer
 
         
         
-        B = False 'PARA QUE NO ENTRE EN LO DE ABAJO y vaya a imprimir
+        b = False 'PARA QUE NO ENTRE EN LO DE ABAJO y vaya a imprimir
     End If
     
 
@@ -6775,12 +6814,12 @@ Private Sub cmdAceptarPreFacMan_Click()
 '74: PreFacturar Mantenimientos
 '75: Facturar Mantenimientos
 Dim campo As String, cad As String
-Dim B As Boolean
+Dim b As Boolean
 Dim PreguntaHecha As Boolean
 
      InicializarVbles
-     B = (OpcionListado = 74) 'Prefacturar (mostrar listado)
-     If Not B Then chkSituFacMant.Value = 0 'por si acaso
+     b = (OpcionListado = 74) 'Prefacturar (mostrar listado)
+     If Not b Then chkSituFacMant.Value = 0 'por si acaso
      
      'Introducir el mes que se va a facturar
      If txtCodigo(46).Text = "" Then
@@ -6802,7 +6841,7 @@ Dim PreguntaHecha As Boolean
         End If
     End If
      
-    If Not B Then 'Vamos a facturar
+    If Not b Then 'Vamos a facturar
         'si vamos a facturar comprobar que la fecha de factura tiene valor
         cad = ""
         If txtCodigo(44).Text = "" Then cad = " - El campo Fecha Factura" & vbCrLf
@@ -6902,7 +6941,7 @@ Dim PreguntaHecha As Boolean
     
     
     
-    If B Then
+    If b Then
         'Prevision
         cad = "0"
         
@@ -6955,7 +6994,7 @@ Dim PreguntaHecha As Boolean
     
     'Aqui deberiamos comporbar si el periodo indicado YA esta facturado o no
     PreguntaHecha = False
-    If Not B Then
+    If Not b Then
         'FACTURACION
         
         ResultadoFechaContaOK = EsFechaOKConta(CDate(txtCodigo(44).Text), True)
@@ -7003,7 +7042,7 @@ Dim PreguntaHecha As Boolean
         End If
     End If
     
-    If B Then 'OpcionListado = 74 'NO Imprime, mostrar resultado en pantalla
+    If b Then 'OpcionListado = 74 'NO Imprime, mostrar resultado en pantalla
         
         If Me.chkSituFacMant.Value = 0 Then
             Titulo = "Prefacturación Mantenimientos"
@@ -7615,7 +7654,7 @@ Private Sub frmZ_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 
-Private Sub imgayuda_Click(index As Integer)
+Private Sub imgAyuda_Click(index As Integer)
 Dim Ayuda As String
 
     'Sera las ayuda. Tampoco queiero la biblia, pero,
@@ -8252,7 +8291,7 @@ End Sub
 
 Private Sub PonerFramePreFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame del Prevision Facturacion Albaran Visible y Ajustado al Formulario, y visualiza los controles
-Dim B As Boolean
+Dim b As Boolean
 Dim cad As String
 
     H = 7095  '6355
@@ -8267,39 +8306,39 @@ Dim cad As String
     'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
     PonerFrameVisible Me.FramePreFacturar, visible, H, W
     If visible = True Then
-        B = (OpcionListado = 50)
-        Label4(41).visible = B
-        Me.imgBuscarOfer(16).visible = B
-        Me.imgBuscarOfer(17).visible = B
-        Me.txtCodigo(30).visible = B
-        Me.txtCodigo(31).visible = B
-        Me.txtNombre(30).visible = B
-        Me.txtNombre(31).visible = B
-        Me.Frame6.visible = Not B
+        b = (OpcionListado = 50)
+        Label4(41).visible = b
+        Me.imgBuscarOfer(16).visible = b
+        Me.imgBuscarOfer(17).visible = b
+        Me.txtCodigo(30).visible = b
+        Me.txtCodigo(31).visible = b
+        Me.txtNombre(30).visible = b
+        Me.txtNombre(31).visible = b
+        Me.Frame6.visible = Not b
         Me.Frame6.Top = 2750
         Me.Frame6.Left = 460
         
         'solo albaranes a facturar
-        Me.chkSoloFacturar.visible = B
+        Me.chkSoloFacturar.visible = b
         Me.chkSoloFacturar.Value = 1
         
         'Detalle o resumen
-        Me.Frame7.visible = B And codClien = "ALV"
-        Me.Frame7.visible = B 'And CodClien = "ALV"
+        Me.Frame7.visible = b And codClien = "ALV"
+        Me.Frame7.visible = b 'And CodClien = "ALV"
         If vParamAplic.NumeroInstalacion = 5 Then
             'En fontenas no quitamos solo facturar
             Me.OptDetalle(4).Value = True
-            If B Then Me.chkSoloFacturar.Value = 0
+            If b Then Me.chkSoloFacturar.Value = 0
         Else
             Me.OptDetalle(0).Value = True
         End If
         'Sept 2015. Periodo facturacion
-        Me.Label4(24).visible = B
-        Me.txtCodigo(61).visible = B
-        Me.imgAyuda(1).visible = B
+        Me.Label4(24).visible = b
+        Me.txtCodigo(61).visible = b
+        Me.imgAyuda(1).visible = b
         
         
-        If Not B Then
+        If Not b Then
             Me.Label9(0).Caption = "Incum. plazos entrega"
         Else 'Prevision Facturacion
             Select Case codClien 'aqui guardamos el tipo de movimiento
@@ -8351,14 +8390,14 @@ End Sub
 
 Private Sub PonerFramePreFacManteVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame del Prevision Facturacion Albaran Mantenimientos Visible y Ajustado al Formulario, y visualiza los controles
-Dim B As Boolean
+Dim b As Boolean
 Dim cad As String
 
     
     If visible = True Then
-        B = (OpcionListado = 74) 'prefacturar
+        b = (OpcionListado = 74) 'prefacturar
         W = 7120
-        If B Then 'prefacturar
+        If b Then 'prefacturar
             'H = 5600
             H = 7600
         Else 'facturar
@@ -8371,7 +8410,7 @@ Dim cad As String
         'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
         PonerFrameVisible Me.FramePreFacMante, visible, H, W
         
-        If B Then 'prefacturar
+        If b Then 'prefacturar
             Me.Frame2(0).visible = False
             Me.Frame2(1).visible = False
             Me.Frame1.Top = Me.Frame1.Top - 800
@@ -8384,9 +8423,9 @@ Dim cad As String
             Me.txtCodigo(44).Text = Format(Now, "dd/mm/yyyy")
             Me.txtCodigo(47).Text = PonerTrabajadorConectado(cad)
             Me.txtNombre(47).Text = cad
-            B = False                            'Si es por proyecto pedira el CC, si no cojera el tel trab o la familia
-            If vEmpresa.TieneAnalitica Then B = vParamAplic.ModoAnalitica = 2
-            Me.Frame2(1).visible = B
+            b = False                            'Si es por proyecto pedira el CC, si no cojera el tel trab o la familia
+            If vEmpresa.TieneAnalitica Then b = vParamAplic.ModoAnalitica = 2
+            Me.Frame2(1).visible = b
         End If
         Me.lblFactMant.Top = H - Me.lblFactMant.Height - 120
     End If
@@ -8670,11 +8709,11 @@ Dim DatosPortes As String  'nomartic|preciov|preciouc|
             FecEnvio = RSalb!FecEnvio
             cadW = DevuelveDesdeBD(conAri, "AplicaPortesFactura", "sclien", "codclien", CStr(Codclien1))
             If cadW = "1" Then ClienConPortes = True
-            cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NUmAlbar
+            cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!Numalbar
             If ClienConPortes Then
                 LblBar.Caption = "Cliente: " & Format(RSalb!codClien, "000000") & " - " & RSalb!NomClien
             Else
-                LblBar.Caption = RSalb!NUmAlbar
+                LblBar.Caption = RSalb!Numalbar
             End If
             LblBar.Refresh
         Else
@@ -8685,12 +8724,12 @@ Dim DatosPortes As String  'nomartic|preciov|preciouc|
             
                 FecEnvio = RSalb!FecEnvio
                 
-                cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!NUmAlbar
+                cadW = " (slialb.codtipom='ALV' AND slialb.numalbar IN (" & RSalb!Numalbar
                 
             Else
                 'Codclien y fechaenvio la misma
                 'Todos igual. Metemos al select el albaran
-                cadW = cadW & "," & RSalb!NUmAlbar
+                cadW = cadW & "," & RSalb!Numalbar
             End If
         
         End If
@@ -8778,7 +8817,7 @@ Dim ImporteT As Currency
         'YA EXISTE UNA LINEA con portes
         If Comprobar Then
             Aux = "insert into `tmpsliped` (`codusu`,`numpedcl`,`numlinea`,`codalmac`,codartic,`nomartic`,codclien)  VALUES ("
-            Aux = Aux & vUsu.Codigo & "," & RN!NUmAlbar & "," & RN!numlinea & "," & RN!codAlmac & "," & DBSet(RN!codtipom, "T")
+            Aux = Aux & vUsu.Codigo & "," & RN!Numalbar & "," & RN!numlinea & "," & RN!codAlmac & "," & DBSet(RN!codtipom, "T")
             Aux = Aux & "," & DBSet(NomClien, "T") & "," & CodigoCliente & ")"
             ejecutar Aux, False
         Else
@@ -8852,7 +8891,7 @@ Dim ImporteT As Currency
                 Aux = "Select numalbar,codalmac,max(numlinea) from slialb where codtipom='ALV' AND numalbar =" & Aux & " GROUP BY 1,2"
                 RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 'NO PUEDE SER EOF
-                Aux = "'ALV'," & RN!NUmAlbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codAlmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
+                Aux = "'ALV'," & RN!Numalbar & "," & DBLet(RN.Fields(2), "N") + 1 & "," & RN!codAlmac & "," & DBSet(vParamAplic.ArtPortesN, "T") & ","
                 
                 'codtipom,numalbar,numlinea,codalmac,codartic,nomartic,cantidad,numbultos,
                 'precioar,dtoline1,dtoline2,importel,origpre,codproveX,
@@ -9045,4 +9084,7 @@ Dim NombreFich As String
 eLeeGuardaListFacturas:
     MuestraError Err.Number, Err.Description
 End Function
+
+
+
 

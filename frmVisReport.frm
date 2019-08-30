@@ -785,6 +785,7 @@ End Sub
 Private Function RedireccionamosTabla(tabla As String) As Boolean
     'If (InStr(1, smrpt.Database.Tables(i).Name, "_") = 0) Then
     If InStr(1, tabla, "_") = 0 Then
+    
         RedireccionamosTabla = True
     Else
         If Mid(tabla, 1, 3) = "tel" Then
@@ -792,7 +793,11 @@ Private Function RedireccionamosTabla(tabla As String) As Boolean
             RedireccionamosTabla = True
         Else
             'resto
-            RedireccionamosTabla = False
+            If LCase(Right(tabla, 3)) = "_eu" Then
+                RedireccionamosTabla = True
+            Else
+                RedireccionamosTabla = False
+            End If
         End If
     End If
     

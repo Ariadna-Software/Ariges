@@ -20,12 +20,21 @@ Begin VB.Form frmTelefono1
       TabIndex        =   0
       Top             =   0
       Width           =   8295
+      Begin VB.CommandButton cmdAriadna 
+         Caption         =   "Ariadna"
+         Height          =   495
+         Left            =   5640
+         TabIndex        =   35
+         Top             =   6600
+         Visible         =   0   'False
+         Width           =   975
+      End
       Begin VB.CommandButton cmdEliminarDatosFracion 
          Caption         =   "Elim. fich."
          Height          =   495
          Left            =   120
          TabIndex        =   34
-         Top             =   6480
+         Top             =   6600
          Width           =   975
       End
       Begin VB.CheckBox chkMostrarBase 
@@ -33,7 +42,7 @@ Begin VB.Form frmTelefono1
          Height          =   255
          Left            =   2280
          TabIndex        =   33
-         Top             =   6660
+         Top             =   6780
          Width           =   1575
       End
       Begin VB.ComboBox cboFichero 
@@ -50,7 +59,7 @@ Begin VB.Form frmTelefono1
          Height          =   495
          Left            =   1200
          TabIndex        =   14
-         Top             =   6480
+         Top             =   6600
          Width           =   975
       End
       Begin VB.CommandButton cmdSalir 
@@ -59,7 +68,7 @@ Begin VB.Form frmTelefono1
          Index           =   0
          Left            =   6840
          TabIndex        =   11
-         Top             =   6480
+         Top             =   6600
          Width           =   1215
       End
       Begin MSComctlLib.ListView lwT 
@@ -108,13 +117,31 @@ Begin VB.Form frmTelefono1
             Object.Width           =   0
          EndProperty
       End
+      Begin VB.Label lblI 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Datos fichero"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Left            =   4200
+         TabIndex        =   36
+         Top             =   6240
+         Width           =   3630
+      End
       Begin VB.Label Label1 
          Caption         =   "Ficheros disponibles:"
          Height          =   195
          Index           =   5
          Left            =   3960
          TabIndex        =   17
-         Top             =   6660
+         Top             =   6780
          Width           =   2775
       End
       Begin VB.Label Label1 
@@ -453,13 +480,36 @@ Private Sub cboCompanyia2_KeyPress(KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub cboFichero_Click(index As Integer)
-    If index = 0 Then
-        If Me.cboFichero(index).ListIndex < 0 Then Exit Sub
+Private Sub cboFichero_Click(Index As Integer)
+    If Index = 0 Then
+        If Me.cboFichero(Index).ListIndex < 0 Then Exit Sub
         Screen.MousePointer = vbHourglass
-        CargarListView cboFichero(index).List(cboFichero(index).ListIndex)
+        CargarListView cboFichero(Index).List(cboFichero(Index).ListIndex)
         Screen.MousePointer = vbDefault
     End If
+End Sub
+
+Private Sub cmdAriadna_Click()
+Dim Normales As Boolean
+Dim idBanco As Integer
+Dim Sql As String
+
+        Normales = True
+        If MsgBox("Normales", vbQuestion + vbYesNo) <> vbNo Then Normales = False
+
+        Sql = InputBox("banco", "", "1")
+        If Sql = "" Then Exit Sub
+        idBanco = Val(Sql)
+        
+        Sql = InputBox("Fichero", "", "")
+        If Sql = "" Then Exit Sub
+        
+        EstableceValoresFacturaTelefoniaROOT Sql
+        
+        'cboFichero(0).List(cboFichero(0).ListIndex), Label1(5), CInt(CadenaDesdeOtroForm))
+        '(cboFichero(0).ListIndex), Label1(5), CInt(CadenaDesdeOtroForm))
+         GenerarFacturasTelefonia idBanco, Label1(5), Normales, False
+
 End Sub
 
 Private Sub cmdCSV_Click()
@@ -534,7 +584,7 @@ Private Sub HacerCoarval()
     
     If GenerarImportacionCatadau(I) Then InsertarFacturasTelefonoCoarval
     
-    Me.lblInf.Caption = ""
+    Me.lblinf.Caption = ""
     Set miRsAux = Nothing
     Screen.MousePointer = vbDefault
 End Sub
@@ -957,7 +1007,7 @@ Private Sub HacerAccionesDelJOinDeRafa()
 'ORDER BY Porc, Nombre;
 End Sub
 
-Private Sub cmdSalir_Click(index As Integer)
+Private Sub cmdSalir_Click(Index As Integer)
     Unload Me
 End Sub
 
@@ -1155,19 +1205,19 @@ Private Sub HacerImportacion()
         Screen.MousePointer = vbHourglass
          resultado = False
         If Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex) = 1 Then
-            resultado = mGen2.cargarBaseDatosMOVISTAR(Text1, lblInf)
+            resultado = mGen2.cargarBaseDatosMOVISTAR(Text1, lblinf)
             'resultado = True
         ElseIf Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex) = 2 Then
            
             
             'Le paso el fichero fisico, el nombre estara en: FicheroOrange
-            resultado = mGen2.cargarBaseDatosOrange(Text1.Text, lblInf)
+            resultado = mGen2.cargarBaseDatosOrange(Text1.Text, lblinf)
             
         Else
             'VODAFONE
-            resultado = mGen2.cargarBaseDatosVODAFONE(Text1.Text, lblInf)
+            resultado = mGen2.cargarBaseDatosVODAFONE(Text1.Text, lblinf)
         End If
-        lblInf.Caption = ""
+        lblinf.Caption = ""
         Screen.MousePointer = vbDefault
         If Not resultado Then Exit Sub
         
@@ -1175,8 +1225,8 @@ Private Sub HacerImportacion()
         
         
         'LLamadas entre coooperativistas
-        lblInf.Caption = "Acciones cooperativa"
-        lblInf.Refresh
+        lblinf.Caption = "Acciones cooperativa"
+        lblinf.Refresh
         
         
         'Si hay conceptos o cuotas nuevas las mete en tmpinformes para listarlas luego
@@ -1184,12 +1234,12 @@ Private Sub HacerImportacion()
         conn.Execute "DELETE from tmpinformes WHERE codusu = " & vUsu.Codigo
         
         If vParamAplic.TieneTelefonia2 = 3 Then
-                mGen2.RecalcularImporteLlamadasCoperativa Me.lblInf, cboCompanyia2.ItemData(cboCompanyia2.ListIndex)
+                mGen2.RecalcularImporteLlamadasCoperativa Me.lblinf, cboCompanyia2.ItemData(cboCompanyia2.ListIndex)
         End If
         
         
          'VEmos cuotas
-         resultado = mGen2.AjusteCuotasNuevas2(cboCompanyia2.ItemData(cboCompanyia2.ListIndex), Right(Text1, 12), Me.lblInf)
+         resultado = mGen2.AjusteCuotasNuevas2(cboCompanyia2.ItemData(cboCompanyia2.ListIndex), Right(Text1, 12), Me.lblinf)
          
          'refacturamos
          If resultado Then mGen2.ComprobarConceptosFacturacion
@@ -1213,7 +1263,7 @@ Private Sub HacerImportacion()
         Screen.MousePointer = vbDefault
         DoEvents
         
-        resultado = mGen2.EmitirFacturas_(FicheroOrange, Text2(0), Me.lblInf, CByte(Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex)))
+        resultado = mGen2.EmitirFacturas_(FicheroOrange, Text2(0), Me.lblinf, CByte(Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex)))
         'TRUE=Error
         If resultado Then
             Mens = "Se ha producido incidencias durante el proceso de generación. " & _
@@ -1232,7 +1282,7 @@ Private Sub HacerImportacion()
     
     
     Set mGen2 = Nothing
-    lblInf.Caption = ""
+    lblinf.Caption = ""
      
     
     If vParamAplic.TieneTelefonia2 = 3 Then NuevasCuotasConceptos
@@ -1296,6 +1346,7 @@ Private Sub Form_Load()
     I = Opcion
     Select Case Opcion
     Case 0
+        lblI.Caption = ""
         Me.lwT.ColumnHeaders(3).Width = IIf(vParamAplic.TelefoniaVtaPlazos, 600, 0)
         PonerFrameVisible Me.FrameVerdatos
         CargaCombo Me.cboFichero(0), True
@@ -1330,7 +1381,7 @@ Private Sub Form_Load()
     End Select
     
     cmdSalir(I).Cancel = True
-    lblInf.Caption = ""
+    lblinf.Caption = ""
     
     Label1(5).Caption = ""
     Screen.MousePointer = vbDefault
@@ -1462,6 +1513,9 @@ Dim ImpoAux As Currency
     'End If
     
     
+    lblI.Caption = "Telefonos a facturar: " & lwT.ListItems.Count
+    
+    
     
      Set miRsAux = Nothing
     Set Rc = Nothing
@@ -1537,9 +1591,9 @@ eComprobarAlbaranesPendientes:
 End Sub
 
 
-Private Sub imgBuscar_Click(index As Integer)
+Private Sub imgBuscar_Click(Index As Integer)
     cmmDia.ShowOpen
-    If index = 0 Then
+    If Index = 0 Then
         Text1.Text = cmmDia.FileName
     Else
        ' Me.txtCatadau(0).Text = cmmDia.FileName
@@ -1578,9 +1632,15 @@ Private Sub CargaCombo(ByRef CBO As ComboBox, FaltaProcesar As Boolean)
 End Sub
 
 
+Private Sub Label1_Click(Index As Integer)
+    If vUsu.Login = "root" Then
+            cmdAriadna.visible = True
+    End If
+End Sub
+
 Private Sub lwT_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    I = ColumnHeader.index - 1
-    If ColumnHeader.index = 4 Then I = 4
+    I = ColumnHeader.Index - 1
+    If ColumnHeader.Index = 4 Then I = 4
     
     If I = lwT.SortKey Then
         If lwT.SortOrder = lvwAscending Then
@@ -1589,10 +1649,10 @@ Private Sub lwT_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
             lwT.SortOrder = lvwAscending
         End If
     Else
-        If ColumnHeader.index = 4 Then
+        If ColumnHeader.Index = 4 Then
             lwT.SortKey = 4
         Else
-            lwT.SortKey = ColumnHeader.index - 1
+            lwT.SortKey = ColumnHeader.Index - 1
         End If
         lwT.SortOrder = lvwAscending
     End If
@@ -1606,37 +1666,37 @@ Private Sub lwT_DblClick()
     frmTelefonoVerFra.Show vbModal
 End Sub
 
-Private Sub Text2_GotFocus(index As Integer)
-    ConseguirFoco Text2(index), 3
+Private Sub Text2_GotFocus(Index As Integer)
+    ConseguirFoco Text2(Index), 3
 End Sub
 
-Private Sub Text2_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub Text2_LostFocus(index As Integer)
+Private Sub Text2_LostFocus(Index As Integer)
 Dim T As String
 Dim BorrarCampo As Boolean
-    Text2(index).Text = Trim(Text2(index).Text)
+    Text2(Index).Text = Trim(Text2(Index).Text)
     BorrarCampo = False
-    If Text2(index).Text <> "" Then
-        T = Text2(index).Text
+    If Text2(Index).Text <> "" Then
+        T = Text2(Index).Text
         If EsFechaOK(T) Then
-            If index = 0 Then
+            If Index = 0 Then
                 If CDate(T) < vEmpresa.FechaIni Or CDate(T) > DateAdd("yyyy", 1, vEmpresa.FechaFin) Then
                     MsgBox "Fechas fuera de ejercicio", vbExclamation
                     BorrarCampo = True
                 End If
             End If
-            Text2(index).Text = T
+            Text2(Index).Text = T
         Else
-            MsgBox "Fecha con formato incorrecto: " & Text2(index).Text, vbExclamation
+            MsgBox "Fecha con formato incorrecto: " & Text2(Index).Text, vbExclamation
             BorrarCampo = True
         End If
     End If
     If BorrarCampo Then
-        Text2(index).Text = ""
-        PonerFoco Text2(index)
+        Text2(Index).Text = ""
+        PonerFoco Text2(Index)
     End If
 End Sub
 
@@ -1844,7 +1904,7 @@ eGenerarImportacionCatadau:
     
 End Function
 
-Private Sub txtCatadau_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtCatadau_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, False
 End Sub
 
@@ -1856,7 +1916,7 @@ Private Sub InsertarFacturasTelefonoCoarval()
     frmListado3.Show vbModal
     If CadenaDesdeOtroForm <> "" Then
         Screen.MousePointer = vbHourglass
-        traspasofacturasTelefoniaCOARVAL Me.lblInf, CInt(CadenaDesdeOtroForm)
+        traspasofacturasTelefoniaCOARVAL Me.lblinf, CInt(CadenaDesdeOtroForm)
     End If
 End Sub
 

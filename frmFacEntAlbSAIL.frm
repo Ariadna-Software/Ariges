@@ -40,7 +40,7 @@ Begin VB.Form frmFacEntAlbSAIL
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   14160
-      TabIndex        =   99
+      TabIndex        =   97
       Top             =   8640
       Width           =   1035
    End
@@ -48,7 +48,7 @@ Begin VB.Form frmFacEntAlbSAIL
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   12960
-      TabIndex        =   98
+      TabIndex        =   96
       Top             =   8640
       Width           =   1035
    End
@@ -163,16 +163,16 @@ Begin VB.Form frmFacEntAlbSAIL
             Object.ToolTipText     =   "Marcar facturar"
          EndProperty
          BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Cambiar TIPO albaran"
          EndProperty
          BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir Albaran"
+            Style           =   3
          EndProperty
          BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
+            Object.ToolTipText     =   "Imprimir Albaran"
          EndProperty
          BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Salir"
          EndProperty
          BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Style           =   3
@@ -213,7 +213,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   0
          Left            =   11880
          MaxLength       =   15
-         TabIndex        =   144
+         TabIndex        =   142
          Text            =   "BASE IMP."
          Top             =   100
          Width           =   1490
@@ -225,7 +225,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   56
          Left            =   13440
          MaxLength       =   15
-         TabIndex        =   143
+         TabIndex        =   141
          Text            =   "Text1 7"
          Top             =   80
          Width           =   1530
@@ -393,48 +393,66 @@ Begin VB.Form frmFacEntAlbSAIL
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbSAIL.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(43)"
-      Tab(1).Control(1)=   "Text1(40)"
-      Tab(1).Control(2)=   "chkFacturarKm"
-      Tab(1).Control(3)=   "Text1(34)"
-      Tab(1).Control(4)=   "FrameFactura"
-      Tab(1).Control(5)=   "FrameFacRec"
-      Tab(1).Control(6)=   "FrameHco"
-      Tab(1).Control(7)=   "Text1(29)"
-      Tab(1).Control(8)=   "Text2(29)"
-      Tab(1).Control(9)=   "Text1(28)"
-      Tab(1).Control(10)=   "Text2(28)"
-      Tab(1).Control(11)=   "Text1(27)"
-      Tab(1).Control(12)=   "Text2(27)"
-      Tab(1).Control(13)=   "Text1(2)"
-      Tab(1).Control(14)=   "Text1(25)"
-      Tab(1).Control(15)=   "Text1(26)"
-      Tab(1).Control(16)=   "Text1(24)"
-      Tab(1).Control(17)=   "Text1(23)"
-      Tab(1).Control(18)=   "Text1(22)"
-      Tab(1).Control(19)=   "Text1(21)"
-      Tab(1).Control(20)=   "Text1(20)"
-      Tab(1).Control(21)=   "Text1(19)"
-      Tab(1).Control(22)=   "Text1(18)"
-      Tab(1).Control(23)=   "Text1(38)"
-      Tab(1).Control(24)=   "chkDocArchi"
-      Tab(1).Control(25)=   "Text1(39)"
-      Tab(1).Control(26)=   "Label1(61)"
-      Tab(1).Control(27)=   "Label1(49)"
-      Tab(1).Control(28)=   "Label1(43)"
-      Tab(1).Control(29)=   "imgBuscar(9)"
-      Tab(1).Control(30)=   "Label1(24)"
-      Tab(1).Control(31)=   "Label1(23)"
-      Tab(1).Control(32)=   "imgBuscar(8)"
-      Tab(1).Control(33)=   "Label1(9)"
-      Tab(1).Control(34)=   "imgBuscar(7)"
-      Tab(1).Control(35)=   "Label1(12)"
-      Tab(1).Control(36)=   "Label1(11)"
-      Tab(1).Control(37)=   "Label1(10)"
-      Tab(1).Control(38)=   "Label1(5)"
-      Tab(1).Control(39)=   "Label1(3)"
-      Tab(1).Control(40)=   "Label1(45)"
-      Tab(1).ControlCount=   41
+      Tab(1).Control(0)=   "Label1(77)"
+      Tab(1).Control(1)=   "Label1(78)"
+      Tab(1).Control(2)=   "Label1(79)"
+      Tab(1).Control(3)=   "Label1(73)"
+      Tab(1).Control(4)=   "Label1(45)"
+      Tab(1).Control(5)=   "Label1(3)"
+      Tab(1).Control(6)=   "Label1(5)"
+      Tab(1).Control(7)=   "Label1(10)"
+      Tab(1).Control(8)=   "Label1(11)"
+      Tab(1).Control(9)=   "Label1(12)"
+      Tab(1).Control(10)=   "imgBuscar(7)"
+      Tab(1).Control(11)=   "Label1(9)"
+      Tab(1).Control(12)=   "imgBuscar(8)"
+      Tab(1).Control(13)=   "Label1(23)"
+      Tab(1).Control(14)=   "Label1(24)"
+      Tab(1).Control(15)=   "imgBuscar(9)"
+      Tab(1).Control(16)=   "Label1(43)"
+      Tab(1).Control(17)=   "Label1(49)"
+      Tab(1).Control(18)=   "Label1(61)"
+      Tab(1).Control(19)=   "Label1(72)"
+      Tab(1).Control(20)=   "imgFecha(44)"
+      Tab(1).Control(21)=   "Label1(80)"
+      Tab(1).Control(22)=   "Label1(81)"
+      Tab(1).Control(23)=   "Label1(82)"
+      Tab(1).Control(24)=   "Label1(83)"
+      Tab(1).Control(25)=   "imgGeolocalizacion"
+      Tab(1).Control(26)=   "imgFirmaRecep"
+      Tab(1).Control(27)=   "Text1(39)"
+      Tab(1).Control(28)=   "chkDocArchi"
+      Tab(1).Control(29)=   "Text1(38)"
+      Tab(1).Control(30)=   "Text1(18)"
+      Tab(1).Control(31)=   "Text1(19)"
+      Tab(1).Control(32)=   "Text1(20)"
+      Tab(1).Control(33)=   "Text1(21)"
+      Tab(1).Control(34)=   "Text1(22)"
+      Tab(1).Control(35)=   "Text1(23)"
+      Tab(1).Control(36)=   "Text1(24)"
+      Tab(1).Control(37)=   "Text1(26)"
+      Tab(1).Control(38)=   "Text1(25)"
+      Tab(1).Control(39)=   "Text1(2)"
+      Tab(1).Control(40)=   "Text2(27)"
+      Tab(1).Control(41)=   "Text1(27)"
+      Tab(1).Control(42)=   "Text2(28)"
+      Tab(1).Control(43)=   "Text1(28)"
+      Tab(1).Control(44)=   "Text2(29)"
+      Tab(1).Control(45)=   "Text1(29)"
+      Tab(1).Control(46)=   "FrameFacRec"
+      Tab(1).Control(47)=   "FrameFactura"
+      Tab(1).Control(48)=   "Text1(34)"
+      Tab(1).Control(49)=   "chkFacturarKm"
+      Tab(1).Control(50)=   "Text1(40)"
+      Tab(1).Control(51)=   "Text1(43)"
+      Tab(1).Control(52)=   "cboTipopEnvio"
+      Tab(1).Control(53)=   "FrameHco"
+      Tab(1).Control(54)=   "Text1(45)"
+      Tab(1).Control(55)=   "Text1(46)"
+      Tab(1).Control(56)=   "Text1(47)"
+      Tab(1).Control(57)=   "Text1(48)"
+      Tab(1).Control(58)=   "Text1(49)"
+      Tab(1).ControlCount=   59
       TabCaption(2)   =   "O.trab /ext"
       TabPicture(2)   =   "frmFacEntAlbSAIL.frx":0044
       Tab(2).ControlEnabled=   0   'False
@@ -453,101 +471,102 @@ Begin VB.Form frmFacEntAlbSAIL
       TabCaption(3)   =   "Reparaciones"
       TabPicture(3)   =   "frmFacEntAlbSAIL.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "txtEule_R(21)"
-      Tab(3).Control(1)=   "txtEule_R(20)"
-      Tab(3).Control(2)=   "txtEule_R(2)"
-      Tab(3).Control(3)=   "txtEule_R(1)"
-      Tab(3).Control(4)=   "txtEule_R(0)"
-      Tab(3).Control(5)=   "optEule_R(1)"
-      Tab(3).Control(6)=   "optEule_R(0)"
-      Tab(3).Control(7)=   "Frame4R"
-      Tab(3).Control(8)=   "txtEule_R(4)"
-      Tab(3).Control(9)=   "txtEule_R(3)"
-      Tab(3).Control(10)=   "chkEuler(9)"
-      Tab(3).Control(11)=   "chkEuler(8)"
-      Tab(3).Control(12)=   "chkEuler(7)"
-      Tab(3).Control(13)=   "chkEuler(6)"
-      Tab(3).Control(14)=   "chkEuler(5)"
-      Tab(3).Control(15)=   "chkEuler(4)"
-      Tab(3).Control(16)=   "chkEuler(3)"
-      Tab(3).Control(17)=   "chkEuler(2)"
-      Tab(3).Control(18)=   "chkEuler(1)"
-      Tab(3).Control(19)=   "chkEuler(0)"
-      Tab(3).Control(20)=   "txtEule_R(15)"
-      Tab(3).Control(21)=   "txtEule_R(16)"
-      Tab(3).Control(22)=   "txtEule_R(14)"
-      Tab(3).Control(23)=   "txtEule_R(13)"
-      Tab(3).Control(24)=   "txtEule_R(12)"
-      Tab(3).Control(25)=   "txtEule_R(9)"
-      Tab(3).Control(26)=   "txtEule_R(10)"
-      Tab(3).Control(27)=   "txtEule_R(8)"
-      Tab(3).Control(28)=   "txtEule_R(6)"
-      Tab(3).Control(29)=   "txtEule_R(5)"
-      Tab(3).Control(30)=   "txtEule_R(7)"
-      Tab(3).Control(31)=   "optEule_R(7)"
-      Tab(3).Control(32)=   "optEule_R(6)"
-      Tab(3).Control(33)=   "optEule_R(5)"
-      Tab(3).Control(34)=   "optEule_R(4)"
-      Tab(3).Control(35)=   "txtEule_R(19)"
-      Tab(3).Control(36)=   "txtEule_R(18)"
-      Tab(3).Control(37)=   "txtEule_R(17)"
-      Tab(3).Control(38)=   "cboEulerUdR"
-      Tab(3).Control(39)=   "txtEule_R(11)"
-      Tab(3).Control(40)=   "Label3E(37)"
-      Tab(3).Control(41)=   "Label3E(36)"
-      Tab(3).Control(42)=   "Label3E(24)"
-      Tab(3).Control(43)=   "Label3E(23)"
-      Tab(3).Control(44)=   "Label3E(20)"
-      Tab(3).Control(45)=   "Label3E(15)"
-      Tab(3).Control(46)=   "Label3E(10)"
-      Tab(3).Control(47)=   "Label3E(9)"
-      Tab(3).Control(48)=   "Label3E(8)"
-      Tab(3).Control(49)=   "Label3E(7)"
-      Tab(3).Control(50)=   "Label3E(6)"
-      Tab(3).Control(51)=   "Label3E(5)"
-      Tab(3).Control(52)=   "Label3E(4)"
-      Tab(3).Control(53)=   "Label3E(3)"
-      Tab(3).Control(54)=   "Label3E(2)"
-      Tab(3).Control(55)=   "Label3E(1)"
-      Tab(3).Control(56)=   "Label3E(30)"
-      Tab(3).Control(57)=   "Label3E(29)"
-      Tab(3).Control(58)=   "Label3E(28)"
-      Tab(3).Control(59)=   "Label3E(27)"
-      Tab(3).Control(60)=   "Label3E(26)"
-      Tab(3).Control(61)=   "Label3E(25)"
-      Tab(3).Control(62)=   "Label3E(11)"
-      Tab(3).Control(63)=   "Label3E(19)"
-      Tab(3).Control(64)=   "Label3E(18)"
-      Tab(3).Control(65)=   "Label3E(17)"
-      Tab(3).Control(66)=   "Label3E(16)"
-      Tab(3).Control(67)=   "Label3E(14)"
-      Tab(3).Control(68)=   "Label3E(13)"
-      Tab(3).Control(69)=   "Label3E(12)"
-      Tab(3).Control(70)=   "Label3E(32)"
-      Tab(3).Control(71)=   "Label3E(31)"
-      Tab(3).Control(72)=   "Label3E(35)"
-      Tab(3).Control(73)=   "Label3E(34)"
-      Tab(3).Control(74)=   "Label3E(33)"
-      Tab(3).Control(75)=   "Line4"
-      Tab(3).Control(76)=   "Line3"
-      Tab(3).Control(77)=   "Line5"
+      Tab(3).Control(0)=   "Line5"
+      Tab(3).Control(1)=   "Line3"
+      Tab(3).Control(2)=   "Line4"
+      Tab(3).Control(3)=   "Label3E(33)"
+      Tab(3).Control(4)=   "Label3E(34)"
+      Tab(3).Control(5)=   "Label3E(35)"
+      Tab(3).Control(6)=   "Label3E(31)"
+      Tab(3).Control(7)=   "Label3E(32)"
+      Tab(3).Control(8)=   "Label3E(12)"
+      Tab(3).Control(9)=   "Label3E(13)"
+      Tab(3).Control(10)=   "Label3E(14)"
+      Tab(3).Control(11)=   "Label3E(16)"
+      Tab(3).Control(12)=   "Label3E(17)"
+      Tab(3).Control(13)=   "Label3E(18)"
+      Tab(3).Control(14)=   "Label3E(19)"
+      Tab(3).Control(15)=   "Label3E(11)"
+      Tab(3).Control(16)=   "Label3E(25)"
+      Tab(3).Control(17)=   "Label3E(26)"
+      Tab(3).Control(18)=   "Label3E(27)"
+      Tab(3).Control(19)=   "Label3E(28)"
+      Tab(3).Control(20)=   "Label3E(29)"
+      Tab(3).Control(21)=   "Label3E(30)"
+      Tab(3).Control(22)=   "Label3E(1)"
+      Tab(3).Control(23)=   "Label3E(2)"
+      Tab(3).Control(24)=   "Label3E(3)"
+      Tab(3).Control(25)=   "Label3E(4)"
+      Tab(3).Control(26)=   "Label3E(5)"
+      Tab(3).Control(27)=   "Label3E(6)"
+      Tab(3).Control(28)=   "Label3E(7)"
+      Tab(3).Control(29)=   "Label3E(8)"
+      Tab(3).Control(30)=   "Label3E(9)"
+      Tab(3).Control(31)=   "Label3E(10)"
+      Tab(3).Control(32)=   "Label3E(15)"
+      Tab(3).Control(33)=   "Label3E(20)"
+      Tab(3).Control(34)=   "Label3E(23)"
+      Tab(3).Control(35)=   "Label3E(24)"
+      Tab(3).Control(36)=   "Label3E(36)"
+      Tab(3).Control(37)=   "Label3E(37)"
+      Tab(3).Control(38)=   "txtEule_R(11)"
+      Tab(3).Control(39)=   "cboEulerUdR"
+      Tab(3).Control(40)=   "txtEule_R(17)"
+      Tab(3).Control(41)=   "txtEule_R(18)"
+      Tab(3).Control(42)=   "txtEule_R(19)"
+      Tab(3).Control(43)=   "optEule_R(4)"
+      Tab(3).Control(44)=   "optEule_R(5)"
+      Tab(3).Control(45)=   "optEule_R(6)"
+      Tab(3).Control(46)=   "optEule_R(7)"
+      Tab(3).Control(47)=   "txtEule_R(7)"
+      Tab(3).Control(48)=   "txtEule_R(5)"
+      Tab(3).Control(49)=   "txtEule_R(6)"
+      Tab(3).Control(50)=   "txtEule_R(8)"
+      Tab(3).Control(51)=   "txtEule_R(10)"
+      Tab(3).Control(52)=   "txtEule_R(9)"
+      Tab(3).Control(53)=   "txtEule_R(12)"
+      Tab(3).Control(54)=   "txtEule_R(13)"
+      Tab(3).Control(55)=   "txtEule_R(14)"
+      Tab(3).Control(56)=   "txtEule_R(16)"
+      Tab(3).Control(57)=   "txtEule_R(15)"
+      Tab(3).Control(58)=   "chkEuler(0)"
+      Tab(3).Control(59)=   "chkEuler(1)"
+      Tab(3).Control(60)=   "chkEuler(2)"
+      Tab(3).Control(61)=   "chkEuler(3)"
+      Tab(3).Control(62)=   "chkEuler(4)"
+      Tab(3).Control(63)=   "chkEuler(5)"
+      Tab(3).Control(64)=   "chkEuler(6)"
+      Tab(3).Control(65)=   "chkEuler(7)"
+      Tab(3).Control(66)=   "chkEuler(8)"
+      Tab(3).Control(67)=   "chkEuler(9)"
+      Tab(3).Control(68)=   "txtEule_R(3)"
+      Tab(3).Control(69)=   "txtEule_R(4)"
+      Tab(3).Control(70)=   "Frame4R"
+      Tab(3).Control(71)=   "txtEule_R(0)"
+      Tab(3).Control(72)=   "txtEule_R(1)"
+      Tab(3).Control(73)=   "txtEule_R(2)"
+      Tab(3).Control(74)=   "txtEule_R(20)"
+      Tab(3).Control(75)=   "txtEule_R(21)"
+      Tab(3).Control(76)=   "Frame3"
+      Tab(3).Control(77)=   "cboRecepAgenClien"
       Tab(3).ControlCount=   78
       TabCaption(4)   =   "Costes"
       TabPicture(4)   =   "frmFacEntAlbSAIL.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "cmdLineasCostes(3)"
-      Tab(4).Control(1)=   "cmdLineasCostes(2)"
-      Tab(4).Control(2)=   "cmdLineasCostes(0)"
-      Tab(4).Control(3)=   "cmdLineasCostes(1)"
-      Tab(4).Control(4)=   "ListView2"
-      Tab(4).Control(5)=   "Label1(71)"
-      Tab(4).Control(6)=   "Label1(70)"
-      Tab(4).Control(7)=   "Label1(69)"
-      Tab(4).Control(8)=   "Label1(68)"
-      Tab(4).Control(9)=   "Label1(67)"
-      Tab(4).Control(10)=   "Label1(66)"
-      Tab(4).Control(11)=   "Label3E(22)"
-      Tab(4).ControlCount=   12
+      Tab(4).Control(0)=   "cmdLineasCostes(4)"
+      Tab(4).Control(1)=   "cmdLineasCostes(3)"
+      Tab(4).Control(2)=   "cmdLineasCostes(2)"
+      Tab(4).Control(3)=   "cmdLineasCostes(0)"
+      Tab(4).Control(4)=   "cmdLineasCostes(1)"
+      Tab(4).Control(5)=   "ListView2"
+      Tab(4).Control(6)=   "Label1(71)"
+      Tab(4).Control(7)=   "Label1(70)"
+      Tab(4).Control(8)=   "Label1(69)"
+      Tab(4).Control(9)=   "Label1(68)"
+      Tab(4).Control(10)=   "Label1(67)"
+      Tab(4).Control(11)=   "Label1(66)"
+      Tab(4).Control(12)=   "Label3E(22)"
+      Tab(4).ControlCount=   13
       TabCaption(5)   =   "Fichadas"
       TabPicture(5)   =   "frmFacEntAlbSAIL.frx":0098
       Tab(5).ControlEnabled=   0   'False
@@ -557,11 +576,260 @@ Begin VB.Form frmFacEntAlbSAIL
       Tab(5).Control(3)=   "Label1(63)"
       Tab(5).Control(4)=   "Label1(62)"
       Tab(5).ControlCount=   5
+      Begin VB.CommandButton cmdLineasCostes 
+         Height          =   375
+         Index           =   4
+         Left            =   -72120
+         Style           =   1  'Graphical
+         TabIndex        =   333
+         ToolTipText     =   "Pedir proveedor"
+         Top             =   600
+         Width           =   375
+      End
+      Begin VB.TextBox Text1 
+         Height          =   315
+         Index           =   49
+         Left            =   -65880
+         MaxLength       =   35
+         TabIndex        =   331
+         Tag             =   "latitud|N|S|||scaalb|longitud|#0.00000|N|"
+         Text            =   "01/01/2019 18:50:89"
+         Top             =   2160
+         Width           =   1185
+      End
+      Begin VB.TextBox Text1 
+         Height          =   315
+         Index           =   48
+         Left            =   -67200
+         MaxLength       =   35
+         TabIndex        =   329
+         Tag             =   "Fecha auxiliar  Albaran|N|S|||scaalb|latitud|#0.00000|N|"
+         Text            =   "01/01/2019 18:50:89"
+         Top             =   2160
+         Width           =   1185
+      End
+      Begin VB.TextBox Text1 
+         Height          =   315
+         Index           =   47
+         Left            =   -62280
+         MaxLength       =   35
+         TabIndex        =   327
+         Tag             =   "DNO entraga|T|S|||scaalb|dnient||N|"
+         Text            =   "01/01/2019 18:50:89"
+         Top             =   1440
+         Width           =   2025
+      End
+      Begin VB.TextBox Text1 
+         Height          =   315
+         Index           =   46
+         Left            =   -65280
+         MaxLength       =   35
+         TabIndex        =   325
+         Tag             =   "R|T|S|||scaalb|perrecep|||"
+         Text            =   "01/01/2019 18:50:89"
+         Top             =   1440
+         Width           =   2865
+      End
+      Begin VB.TextBox Text1 
+         Height          =   315
+         Index           =   45
+         Left            =   -67200
+         MaxLength       =   20
+         TabIndex        =   322
+         Tag             =   "Fecha entrega mercancia|FH|S|||scaalb|fechaent|dd/mm/yyyy hh:nn:ss|N|"
+         Text            =   "01/01/2019 18:50:89"
+         Top             =   1440
+         Width           =   1785
+      End
+      Begin VB.Frame FrameHco 
+         Height          =   615
+         Left            =   -74880
+         TabIndex        =   143
+         Top             =   6480
+         Width           =   14895
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Height          =   315
+            Index           =   33
+            Left            =   11160
+            Locked          =   -1  'True
+            MaxLength       =   40
+            TabIndex        =   151
+            Text            =   "Text2"
+            Top             =   180
+            Width           =   3645
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   33
+            Left            =   10440
+            MaxLength       =   30
+            TabIndex        =   150
+            Text            =   "Text1"
+            Top             =   180
+            Width           =   660
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Height          =   315
+            Index           =   32
+            Left            =   5400
+            Locked          =   -1  'True
+            MaxLength       =   40
+            TabIndex        =   148
+            Text            =   "Text2"
+            Top             =   180
+            Width           =   3525
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   32
+            Left            =   4680
+            MaxLength       =   30
+            TabIndex        =   147
+            Text            =   "Text1"
+            Top             =   180
+            Width           =   660
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   31
+            Left            =   2040
+            MaxLength       =   10
+            TabIndex        =   145
+            Top             =   180
+            Width           =   1185
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Eliminacion"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   240
+            Index           =   75
+            Left            =   120
+            TabIndex        =   319
+            Top             =   217
+            Width           =   1215
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   11
+            Left            =   10200
+            Picture         =   "frmFacEntAlbSAIL.frx":00B4
+            ToolTipText     =   "Buscar incidencia"
+            Top             =   210
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Incidencia"
+            Height          =   255
+            Index           =   40
+            Left            =   9240
+            TabIndex        =   152
+            Top             =   210
+            Width           =   825
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   10
+            Left            =   4320
+            Picture         =   "frmFacEntAlbSAIL.frx":01B6
+            ToolTipText     =   "Buscar trabajador"
+            Top             =   210
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Trabajador"
+            Height          =   255
+            Index           =   38
+            Left            =   3480
+            TabIndex        =   149
+            Top             =   210
+            Width           =   825
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Fecha "
+            Height          =   255
+            Index           =   37
+            Left            =   1560
+            TabIndex        =   146
+            Top             =   210
+            Width           =   1335
+         End
+         Begin VB.Label Label1 
+            Height          =   255
+            Index           =   29
+            Left            =   360
+            TabIndex        =   144
+            Top             =   240
+            Width           =   735
+         End
+      End
+      Begin VB.ComboBox cboTipopEnvio 
+         Height          =   315
+         ItemData        =   "frmFacEntAlbSAIL.frx":02B8
+         Left            =   -62640
+         List            =   "frmFacEntAlbSAIL.frx":02C8
+         Style           =   2  'Dropdown List
+         TabIndex        =   316
+         Tag             =   "Origen Datos|N|S|||scaalb|codinter|||"
+         Top             =   675
+         Width           =   2415
+      End
+      Begin VB.ComboBox cboRecepAgenClien 
+         Height          =   315
+         ItemData        =   "frmFacEntAlbSAIL.frx":02F5
+         Left            =   -69240
+         List            =   "frmFacEntAlbSAIL.frx":0305
+         Style           =   2  'Dropdown List
+         TabIndex        =   314
+         Top             =   1080
+         Width           =   2895
+      End
+      Begin VB.Frame Frame3 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame3"
+         Height          =   375
+         Left            =   -63480
+         TabIndex        =   311
+         Top             =   840
+         Visible         =   0   'False
+         Width           =   2775
+         Begin VB.OptionButton optEule_R 
+            Caption         =   "Cliente"
+            Height          =   195
+            Index           =   1
+            Left            =   1560
+            TabIndex        =   313
+            Top             =   120
+            Width           =   975
+         End
+         Begin VB.OptionButton optEule_R 
+            Caption         =   "Agencia"
+            Height          =   195
+            Index           =   0
+            Left            =   0
+            TabIndex        =   312
+            Top             =   120
+            Width           =   975
+         End
+      End
       Begin VB.TextBox txtEuler 
          Height          =   315
          Index           =   8
          Left            =   -72720
-         TabIndex        =   309
+         TabIndex        =   307
          Text            =   "Text4"
          Top             =   660
          Width           =   1335
@@ -570,7 +838,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   315
          Index           =   9
          Left            =   -69720
-         TabIndex        =   308
+         TabIndex        =   306
          Text            =   "Text4"
          Top             =   660
          Width           =   1455
@@ -578,9 +846,9 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.CommandButton cmdLineasCostes 
          Height          =   375
          Index           =   3
-         Left            =   -71640
+         Left            =   -71400
          Style           =   1  'Graphical
-         TabIndex        =   303
+         TabIndex        =   301
          ToolTipText     =   "Imprimir costes"
          Top             =   600
          Width           =   375
@@ -590,7 +858,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   2
          Left            =   -72600
          Style           =   1  'Graphical
-         TabIndex        =   302
+         TabIndex        =   300
          ToolTipText     =   "eliminar articulo"
          Top             =   600
          Width           =   375
@@ -600,7 +868,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   0
          Left            =   -73560
          Style           =   1  'Graphical
-         TabIndex        =   301
+         TabIndex        =   299
          ToolTipText     =   "Insertar articulo"
          Top             =   600
          Width           =   375
@@ -610,7 +878,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   1
          Left            =   -73080
          Style           =   1  'Graphical
-         TabIndex        =   300
+         TabIndex        =   298
          ToolTipText     =   "Modificar articulo"
          Top             =   600
          Width           =   375
@@ -618,7 +886,7 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin MSComctlLib.ListView ListView1 
          Height          =   4575
          Left            =   -74520
-         TabIndex        =   290
+         TabIndex        =   288
          Top             =   960
          Width           =   13575
          _ExtentX        =   23945
@@ -706,7 +974,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   2
          Left            =   -62280
          MaxLength       =   16
-         TabIndex        =   65
+         TabIndex        =   63
          Text            =   "Text1"
          Top             =   1560
          Width           =   1095
@@ -716,7 +984,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   1
          Left            =   -64680
          MaxLength       =   50
-         TabIndex        =   64
+         TabIndex        =   62
          Text            =   "Text1"
          Top             =   1560
          Width           =   2055
@@ -724,37 +992,19 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.TextBox txtEule_R 
          Height          =   315
          Index           =   0
-         Left            =   -69120
+         Left            =   -69240
          MaxLength       =   50
-         TabIndex        =   63
+         TabIndex        =   61
          Text            =   "Text1"
          Top             =   1560
-         Width           =   4215
-      End
-      Begin VB.OptionButton optEule_R 
-         Caption         =   "Cliente"
-         Height          =   195
-         Index           =   1
-         Left            =   -67920
-         TabIndex        =   62
-         Top             =   960
-         Width           =   975
-      End
-      Begin VB.OptionButton optEule_R 
-         Caption         =   "Agencia"
-         Height          =   195
-         Index           =   0
-         Left            =   -69240
-         TabIndex        =   61
-         Top             =   960
-         Width           =   975
+         Width           =   4335
       End
       Begin VB.Frame Frame4R 
          BorderStyle     =   0  'None
          Caption         =   "Frame4"
          Height          =   375
          Left            =   -73680
-         TabIndex        =   253
+         TabIndex        =   251
          Top             =   1680
          Width           =   3015
          Begin VB.OptionButton optEule_R 
@@ -790,7 +1040,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   21
             Left            =   0
-            TabIndex        =   254
+            TabIndex        =   252
             Top             =   0
             Width           =   1935
          End
@@ -800,7 +1050,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   4
          Left            =   -65280
          MaxLength       =   50
-         TabIndex        =   77
+         TabIndex        =   75
          Text            =   "Text1"
          Top             =   3360
          Width           =   3975
@@ -810,7 +1060,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   3
          Left            =   -65280
          MaxLength       =   50
-         TabIndex        =   71
+         TabIndex        =   69
          Text            =   "Text1"
          Top             =   3000
          Width           =   3975
@@ -820,7 +1070,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   9
          Left            =   -66120
-         TabIndex        =   76
+         TabIndex        =   74
          Top             =   3360
          Width           =   255
       End
@@ -829,7 +1079,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   8
          Left            =   -67680
-         TabIndex        =   75
+         TabIndex        =   73
          Top             =   3360
          Width           =   255
       End
@@ -838,7 +1088,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   7
          Left            =   -68760
-         TabIndex        =   74
+         TabIndex        =   72
          Top             =   3360
          Width           =   255
       End
@@ -847,7 +1097,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   6
          Left            =   -70080
-         TabIndex        =   73
+         TabIndex        =   71
          Top             =   3360
          Width           =   255
       End
@@ -856,7 +1106,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   5
          Left            =   -71160
-         TabIndex        =   72
+         TabIndex        =   70
          Top             =   3360
          Width           =   255
       End
@@ -865,7 +1115,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   4
          Left            =   -66120
-         TabIndex        =   70
+         TabIndex        =   68
          Top             =   3000
          Width           =   255
       End
@@ -874,7 +1124,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   3
          Left            =   -67680
-         TabIndex        =   69
+         TabIndex        =   67
          Top             =   3000
          Width           =   255
       End
@@ -883,7 +1133,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   2
          Left            =   -68760
-         TabIndex        =   68
+         TabIndex        =   66
          Top             =   3000
          Width           =   255
       End
@@ -892,7 +1142,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   1
          Left            =   -70080
-         TabIndex        =   67
+         TabIndex        =   65
          Top             =   3000
          Width           =   255
       End
@@ -901,7 +1151,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   0
          Left            =   -71160
-         TabIndex        =   66
+         TabIndex        =   64
          Top             =   3000
          Width           =   255
       End
@@ -910,7 +1160,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   15
          Left            =   -66000
          MaxLength       =   50
-         TabIndex        =   93
+         TabIndex        =   91
          Text            =   "Text1"
          Top             =   5880
          Width           =   1575
@@ -920,7 +1170,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   16
          Left            =   -63000
          MaxLength       =   16
-         TabIndex        =   94
+         TabIndex        =   92
          Text            =   "Text1"
          Top             =   5880
          Width           =   1695
@@ -930,7 +1180,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   14
          Left            =   -66000
          MaxLength       =   50
-         TabIndex        =   92
+         TabIndex        =   90
          Text            =   "Text1"
          Top             =   5400
          Width           =   4695
@@ -940,7 +1190,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   13
          Left            =   -66000
          MaxLength       =   50
-         TabIndex        =   91
+         TabIndex        =   89
          Text            =   "Text1"
          Top             =   4920
          Width           =   4695
@@ -950,7 +1200,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   12
          Left            =   -66000
          MaxLength       =   50
-         TabIndex        =   90
+         TabIndex        =   88
          Text            =   "Text1"
          Top             =   4440
          Width           =   2175
@@ -960,7 +1210,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   9
          Left            =   -72960
          MaxLength       =   50
-         TabIndex        =   82
+         TabIndex        =   80
          Text            =   "Text1"
          Top             =   5880
          Width           =   1575
@@ -970,7 +1220,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   10
          Left            =   -69960
          MaxLength       =   50
-         TabIndex        =   83
+         TabIndex        =   81
          Text            =   "Text1"
          Top             =   5880
          Width           =   1815
@@ -980,7 +1230,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   8
          Left            =   -72960
          MaxLength       =   50
-         TabIndex        =   81
+         TabIndex        =   79
          Text            =   "Text1"
          Top             =   5400
          Width           =   4815
@@ -990,7 +1240,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   6
          Left            =   -69840
          MaxLength       =   50
-         TabIndex        =   79
+         TabIndex        =   77
          Text            =   "Text1"
          Top             =   4440
          Width           =   1695
@@ -1000,7 +1250,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   5
          Left            =   -72960
          MaxLength       =   50
-         TabIndex        =   78
+         TabIndex        =   76
          Text            =   "Text1"
          Top             =   4440
          Width           =   2175
@@ -1010,7 +1260,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   7
          Left            =   -72960
          MaxLength       =   50
-         TabIndex        =   80
+         TabIndex        =   78
          Text            =   "Text1"
          Top             =   4920
          Width           =   4815
@@ -1020,7 +1270,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   7
          Left            =   -71760
-         TabIndex        =   86
+         TabIndex        =   84
          Top             =   6600
          Value           =   -1  'True
          Width           =   615
@@ -1030,7 +1280,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   6
          Left            =   -71160
-         TabIndex        =   87
+         TabIndex        =   85
          Top             =   6600
          Width           =   615
       End
@@ -1039,7 +1289,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   5
          Left            =   -72960
-         TabIndex        =   84
+         TabIndex        =   82
          Top             =   6600
          Width           =   615
       End
@@ -1048,7 +1298,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   4
          Left            =   -72360
-         TabIndex        =   85
+         TabIndex        =   83
          Top             =   6600
          Width           =   615
       End
@@ -1057,7 +1307,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   19
          Left            =   -62160
          MaxLength       =   16
-         TabIndex        =   97
+         TabIndex        =   95
          Text            =   "Text1"
          Top             =   6360
          Width           =   855
@@ -1067,7 +1317,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   18
          Left            =   -64080
          MaxLength       =   16
-         TabIndex        =   96
+         TabIndex        =   94
          Text            =   "Text1"
          Top             =   6360
          Width           =   855
@@ -1077,18 +1327,18 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   17
          Left            =   -66000
          MaxLength       =   16
-         TabIndex        =   95
+         TabIndex        =   93
          Text            =   "Text1"
          Top             =   6360
          Width           =   855
       End
       Begin VB.ComboBox cboEulerUdR 
          Height          =   315
-         ItemData        =   "frmFacEntAlbSAIL.frx":00B4
+         ItemData        =   "frmFacEntAlbSAIL.frx":0332
          Left            =   -68880
-         List            =   "frmFacEntAlbSAIL.frx":00C1
+         List            =   "frmFacEntAlbSAIL.frx":033F
          Style           =   2  'Dropdown List
-         TabIndex        =   89
+         TabIndex        =   87
          Top             =   6480
          Width           =   735
       End
@@ -1097,7 +1347,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   11
          Left            =   -69840
          MaxLength       =   16
-         TabIndex        =   88
+         TabIndex        =   86
          Text            =   "Text1"
          Top             =   6480
          Width           =   855
@@ -1105,14 +1355,14 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.Frame FrameOT 
          Height          =   5535
          Left            =   -74640
-         TabIndex        =   239
+         TabIndex        =   237
          Top             =   1200
          Width           =   6975
          Begin VB.TextBox txtEuler 
             Height          =   315
             Index           =   0
             Left            =   1440
-            TabIndex        =   231
+            TabIndex        =   229
             Text            =   "Text4"
             Top             =   1320
             Width           =   2415
@@ -1121,7 +1371,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   315
             Index           =   5
             Left            =   1320
-            TabIndex        =   236
+            TabIndex        =   234
             Text            =   "Text1"
             Top             =   4560
             Width           =   4815
@@ -1130,7 +1380,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   315
             Index           =   1
             Left            =   5040
-            TabIndex        =   232
+            TabIndex        =   230
             Text            =   "Text1"
             Top             =   1320
             Width           =   1695
@@ -1140,7 +1390,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Caption         =   "Frame4"
             Height          =   375
             Left            =   240
-            TabIndex        =   246
+            TabIndex        =   244
             Top             =   360
             Width           =   4935
             Begin VB.OptionButton optEuler 
@@ -1148,7 +1398,7 @@ Begin VB.Form frmFacEntAlbSAIL
                Height          =   195
                Index           =   0
                Left            =   1080
-               TabIndex        =   229
+               TabIndex        =   227
                Top             =   0
                Width           =   975
             End
@@ -1157,7 +1407,7 @@ Begin VB.Form frmFacEntAlbSAIL
                Height          =   195
                Index           =   1
                Left            =   2400
-               TabIndex        =   230
+               TabIndex        =   228
                Top             =   0
                Value           =   -1  'True
                Width           =   975
@@ -1176,7 +1426,7 @@ Begin VB.Form frmFacEntAlbSAIL
                Height          =   195
                Index           =   21
                Left            =   0
-               TabIndex        =   247
+               TabIndex        =   245
                Top             =   0
                Width           =   1935
             End
@@ -1185,7 +1435,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   315
             Index           =   3
             Left            =   1320
-            TabIndex        =   234
+            TabIndex        =   232
             Text            =   "Text1"
             Top             =   3120
             Width           =   4815
@@ -1194,7 +1444,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   315
             Index           =   2
             Left            =   1320
-            TabIndex        =   233
+            TabIndex        =   231
             Text            =   "Text1"
             Top             =   2640
             Width           =   2175
@@ -1203,7 +1453,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   315
             Index           =   4
             Left            =   1320
-            TabIndex        =   235
+            TabIndex        =   233
             Text            =   "Text1"
             Top             =   4080
             Width           =   2175
@@ -1213,7 +1463,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   4
             Left            =   4080
-            TabIndex        =   252
+            TabIndex        =   250
             Top             =   1380
             Width           =   945
          End
@@ -1231,7 +1481,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   3
             Left            =   240
-            TabIndex        =   251
+            TabIndex        =   249
             Top             =   960
             Width           =   2655
          End
@@ -1240,7 +1490,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   2
             Left            =   480
-            TabIndex        =   250
+            TabIndex        =   248
             Top             =   1380
             Width           =   945
          End
@@ -1249,7 +1499,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   12
             Left            =   480
-            TabIndex        =   245
+            TabIndex        =   243
             Top             =   2640
             Width           =   705
          End
@@ -1258,7 +1508,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   14
             Left            =   480
-            TabIndex        =   244
+            TabIndex        =   242
             Top             =   3120
             Width           =   705
          End
@@ -1276,7 +1526,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   16
             Left            =   240
-            TabIndex        =   243
+            TabIndex        =   241
             Top             =   2160
             Width           =   2655
          End
@@ -1294,7 +1544,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   25
             Left            =   240
-            TabIndex        =   242
+            TabIndex        =   240
             Top             =   3720
             Width           =   2655
          End
@@ -1303,7 +1553,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   26
             Left            =   480
-            TabIndex        =   241
+            TabIndex        =   239
             Top             =   4560
             Width           =   705
          End
@@ -1312,7 +1562,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   27
             Left            =   480
-            TabIndex        =   240
+            TabIndex        =   238
             Top             =   4080
             Width           =   705
          End
@@ -1323,8 +1573,8 @@ Begin VB.Form frmFacEntAlbSAIL
          Left            =   -67200
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   238
-         Text            =   "frmFacEntAlbSAIL.frx":00D5
+         TabIndex        =   236
+         Text            =   "frmFacEntAlbSAIL.frx":0353
          Top             =   1560
          Width           =   6975
       End
@@ -1334,20 +1584,20 @@ Begin VB.Form frmFacEntAlbSAIL
          Left            =   -74640
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   237
-         Text            =   "frmFacEntAlbSAIL.frx":00DB
+         TabIndex        =   235
+         Text            =   "frmFacEntAlbSAIL.frx":0359
          Top             =   1560
          Width           =   6975
       End
       Begin VB.TextBox Text1 
-         Height          =   645
+         Height          =   555
          Index           =   43
-         Left            =   -68520
+         Left            =   -67200
          MaxLength       =   80
          TabIndex        =   28
          Tag             =   "ObsCRM|T|S|||scaalb|observacrm|||"
-         Top             =   1320
-         Width           =   5085
+         Top             =   5760
+         Width           =   7125
       End
       Begin VB.TextBox txtaux 
          Alignment       =   1  'Right Justify
@@ -1366,7 +1616,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   315
          Index           =   17
          Left            =   12480
-         TabIndex        =   222
+         TabIndex        =   220
          Text            =   "codc"
          Top             =   6600
          Width           =   2175
@@ -1375,21 +1625,21 @@ Begin VB.Form frmFacEntAlbSAIL
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   40
-         Left            =   -63480
+         Left            =   -71880
          MaxLength       =   7
-         TabIndex        =   218
+         TabIndex        =   216
          Tag             =   "Descuento General|N|S|||scaalb|aportacion|#0.00|N|"
          Text            =   "Text1 7"
-         Top             =   2760
+         Top             =   1800
          Width           =   1020
       End
       Begin VB.CheckBox chkFacturarKm 
          Caption         =   "Facturar Km"
          Height          =   375
-         Left            =   -65400
-         TabIndex        =   216
+         Left            =   -71040
+         TabIndex        =   214
          Tag             =   "Facturar Km|N|N|||scaalb|facturkm||N|"
-         Top             =   2400
+         Top             =   1800
          Visible         =   0   'False
          Width           =   1215
       End
@@ -1397,13 +1647,13 @@ Begin VB.Form frmFacEntAlbSAIL
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   34
-         Left            =   -64080
+         Left            =   -70080
          MaxLength       =   30
-         TabIndex        =   215
+         TabIndex        =   213
          Tag             =   "Cant. Km|N|S|0|99999|scaalb|cantidkm||N|"
          Text            =   "Text1"
-         Top             =   2125
-         Width           =   705
+         Top             =   1440
+         Width           =   945
       End
       Begin VB.TextBox txtaux 
          Alignment       =   1  'Right Justify
@@ -1424,7 +1674,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Left            =   11640
          Locked          =   -1  'True
          MaxLength       =   60
-         TabIndex        =   213
+         TabIndex        =   211
          Text            =   "nom capit"
          Top             =   5880
          Width           =   3165
@@ -1448,7 +1698,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Left            =   11640
          Locked          =   -1  'True
          MaxLength       =   60
-         TabIndex        =   211
+         TabIndex        =   209
          Text            =   "nom capit"
          Top             =   5160
          Width           =   3165
@@ -1460,7 +1710,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Left            =   11640
          Locked          =   -1  'True
          MaxLength       =   60
-         TabIndex        =   209
+         TabIndex        =   207
          Text            =   "nom capit"
          Top             =   4440
          Width           =   3165
@@ -1479,10 +1729,10 @@ Begin VB.Form frmFacEntAlbSAIL
       End
       Begin VB.Frame FrameFactura 
          Height          =   3060
-         Left            =   -73560
-         TabIndex        =   169
-         Top             =   3720
-         Width           =   8175
+         Left            =   -74880
+         TabIndex        =   167
+         Top             =   3240
+         Width           =   7455
          Begin VB.TextBox Text3 
             Alignment       =   1  'Right Justify
             BackColor       =   &H00C0FFC0&
@@ -1497,9 +1747,9 @@ Begin VB.Form frmFacEntAlbSAIL
             EndProperty
             Height          =   285
             Index           =   55
-            Left            =   6120
+            Left            =   5400
             MaxLength       =   15
-            TabIndex        =   192
+            TabIndex        =   190
             Text            =   "Text1 7"
             Top             =   2640
             Width           =   1845
@@ -1509,9 +1759,9 @@ Begin VB.Form frmFacEntAlbSAIL
             BackColor       =   &H00FFFFC0&
             Height          =   285
             Index           =   48
-            Left            =   4680
+            Left            =   3960
             MaxLength       =   15
-            TabIndex        =   191
+            TabIndex        =   189
             Text            =   "Text1 7"
             Top             =   2160
             Width           =   1245
@@ -1520,9 +1770,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   42
-            Left            =   4080
+            Left            =   3360
             MaxLength       =   5
-            TabIndex        =   190
+            TabIndex        =   188
             Text            =   "Text1 7"
             Top             =   2160
             Width           =   525
@@ -1531,9 +1781,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   39
-            Left            =   2040
+            Left            =   1320
             MaxLength       =   4
-            TabIndex        =   189
+            TabIndex        =   187
             Text            =   "Text1 7"
             Top             =   2160
             Width           =   525
@@ -1542,9 +1792,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   45
-            Left            =   2760
+            Left            =   2040
             MaxLength       =   15
-            TabIndex        =   188
+            TabIndex        =   186
             Text            =   "Text1 7"
             Top             =   2160
             Width           =   1125
@@ -1554,9 +1804,9 @@ Begin VB.Form frmFacEntAlbSAIL
             BackColor       =   &H00FFFFC0&
             Height          =   285
             Index           =   47
-            Left            =   4680
+            Left            =   3960
             MaxLength       =   15
-            TabIndex        =   187
+            TabIndex        =   185
             Text            =   "Text1 7"
             Top             =   1800
             Width           =   1245
@@ -1565,9 +1815,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   41
-            Left            =   4080
+            Left            =   3360
             MaxLength       =   5
-            TabIndex        =   186
+            TabIndex        =   184
             Text            =   "Text1 7"
             Top             =   1800
             Width           =   525
@@ -1576,9 +1826,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   38
-            Left            =   2040
+            Left            =   1320
             MaxLength       =   4
-            TabIndex        =   185
+            TabIndex        =   183
             Text            =   "Text1 7"
             Top             =   1800
             Width           =   525
@@ -1587,9 +1837,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   44
-            Left            =   2760
+            Left            =   2040
             MaxLength       =   15
-            TabIndex        =   184
+            TabIndex        =   182
             Text            =   "Text1 7"
             Top             =   1800
             Width           =   1125
@@ -1599,9 +1849,9 @@ Begin VB.Form frmFacEntAlbSAIL
             BackColor       =   &H00FFFFC0&
             Height          =   285
             Index           =   46
-            Left            =   4680
+            Left            =   3960
             MaxLength       =   15
-            TabIndex        =   183
+            TabIndex        =   181
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   1245
@@ -1610,9 +1860,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   40
-            Left            =   4080
+            Left            =   3360
             MaxLength       =   5
-            TabIndex        =   182
+            TabIndex        =   180
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   525
@@ -1621,9 +1871,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   37
-            Left            =   2040
+            Left            =   1320
             MaxLength       =   4
-            TabIndex        =   181
+            TabIndex        =   179
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   525
@@ -1632,9 +1882,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   43
-            Left            =   2760
+            Left            =   2040
             MaxLength       =   15
-            TabIndex        =   180
+            TabIndex        =   178
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   1125
@@ -1646,7 +1896,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Index           =   36
             Left            =   5760
             MaxLength       =   15
-            TabIndex        =   179
+            TabIndex        =   177
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1485
@@ -1657,7 +1907,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Index           =   35
             Left            =   3960
             MaxLength       =   15
-            TabIndex        =   178
+            TabIndex        =   176
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1365
@@ -1668,7 +1918,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Index           =   34
             Left            =   2160
             MaxLength       =   15
-            TabIndex        =   177
+            TabIndex        =   175
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1365
@@ -1679,7 +1929,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Index           =   33
             Left            =   240
             MaxLength       =   15
-            TabIndex        =   176
+            TabIndex        =   174
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1485
@@ -1688,9 +1938,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   49
-            Left            =   6120
+            Left            =   5400
             MaxLength       =   5
-            TabIndex        =   175
+            TabIndex        =   173
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   525
@@ -1700,9 +1950,9 @@ Begin VB.Form frmFacEntAlbSAIL
             BackColor       =   &H00FFFFC0&
             Height          =   285
             Index           =   52
-            Left            =   6720
+            Left            =   6000
             MaxLength       =   15
-            TabIndex        =   174
+            TabIndex        =   172
             Text            =   "Text1 7"
             Top             =   1440
             Width           =   1245
@@ -1711,9 +1961,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   50
-            Left            =   6120
+            Left            =   5400
             MaxLength       =   5
-            TabIndex        =   173
+            TabIndex        =   171
             Text            =   "Text1 7"
             Top             =   1800
             Width           =   525
@@ -1723,9 +1973,9 @@ Begin VB.Form frmFacEntAlbSAIL
             BackColor       =   &H00FFFFC0&
             Height          =   285
             Index           =   53
-            Left            =   6720
+            Left            =   6000
             MaxLength       =   15
-            TabIndex        =   172
+            TabIndex        =   170
             Text            =   "Text1 7"
             Top             =   1800
             Width           =   1245
@@ -1734,9 +1984,9 @@ Begin VB.Form frmFacEntAlbSAIL
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   51
-            Left            =   6120
+            Left            =   5400
             MaxLength       =   5
-            TabIndex        =   171
+            TabIndex        =   169
             Text            =   "Text1 7"
             Top             =   2160
             Width           =   525
@@ -1746,19 +1996,38 @@ Begin VB.Form frmFacEntAlbSAIL
             BackColor       =   &H00FFFFC0&
             Height          =   285
             Index           =   54
-            Left            =   6720
+            Left            =   6000
             MaxLength       =   15
-            TabIndex        =   170
+            TabIndex        =   168
             Text            =   "Text1 7"
             Top             =   2160
             Width           =   1245
          End
          Begin VB.Label Label1 
+            Caption         =   "TOTAL "
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00008000&
+            Height          =   195
+            Index           =   74
+            Left            =   240
+            TabIndex        =   318
+            Top             =   0
+            Width           =   795
+         End
+         Begin VB.Label Label1 
             Caption         =   "Cod."
             Height          =   255
             Index           =   42
-            Left            =   2040
-            TabIndex        =   207
+            Left            =   1320
+            TabIndex        =   205
             Top             =   1200
             Width           =   735
          End
@@ -1766,8 +2035,8 @@ Begin VB.Form frmFacEntAlbSAIL
             Caption         =   "% IVA"
             Height          =   255
             Index           =   41
-            Left            =   4080
-            TabIndex        =   206
+            Left            =   3360
+            TabIndex        =   204
             Top             =   1200
             Width           =   495
          End
@@ -1785,8 +2054,8 @@ Begin VB.Form frmFacEntAlbSAIL
             ForeColor       =   &H00008000&
             Height          =   285
             Index           =   39
-            Left            =   4200
-            TabIndex        =   205
+            Left            =   3480
+            TabIndex        =   203
             Top             =   2655
             Width           =   1530
          End
@@ -1804,13 +2073,13 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   36
             Left            =   11880
-            TabIndex        =   204
+            TabIndex        =   202
             Top             =   2160
             Width           =   135
          End
          Begin VB.Line Line1 
-            X1              =   2040
-            X2              =   8040
+            X1              =   1320
+            X2              =   7320
             Y1              =   1065
             Y2              =   1065
          End
@@ -1818,8 +2087,8 @@ Begin VB.Form frmFacEntAlbSAIL
             Caption         =   "Imp. IVA"
             Height          =   255
             Index           =   33
-            Left            =   4800
-            TabIndex        =   203
+            Left            =   4080
+            TabIndex        =   201
             Top             =   1200
             Width           =   735
          End
@@ -1837,7 +2106,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   32
             Left            =   5520
-            TabIndex        =   202
+            TabIndex        =   200
             Top             =   480
             Width           =   135
          End
@@ -1855,7 +2124,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   31
             Left            =   3720
-            TabIndex        =   201
+            TabIndex        =   199
             Top             =   480
             Width           =   135
          End
@@ -1873,7 +2142,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   30
             Left            =   1920
-            TabIndex        =   200
+            TabIndex        =   198
             Top             =   480
             Width           =   135
          End
@@ -1882,7 +2151,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   2
             Left            =   5760
-            TabIndex        =   199
+            TabIndex        =   197
             Top             =   360
             Width           =   1215
          End
@@ -1891,7 +2160,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   18
             Left            =   3960
-            TabIndex        =   198
+            TabIndex        =   196
             Top             =   360
             Width           =   855
          End
@@ -1900,7 +2169,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   22
             Left            =   2160
-            TabIndex        =   197
+            TabIndex        =   195
             Top             =   360
             Width           =   855
          End
@@ -1909,7 +2178,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   27
             Left            =   240
-            TabIndex        =   196
+            TabIndex        =   194
             Top             =   360
             Width           =   855
          End
@@ -1917,8 +2186,8 @@ Begin VB.Form frmFacEntAlbSAIL
             Caption         =   "Base Imponible"
             Height          =   255
             Index           =   28
-            Left            =   2760
-            TabIndex        =   195
+            Left            =   2040
+            TabIndex        =   193
             Top             =   1200
             Width           =   1095
          End
@@ -1926,8 +2195,8 @@ Begin VB.Form frmFacEntAlbSAIL
             Caption         =   "Imp. RE"
             Height          =   255
             Index           =   6
-            Left            =   6960
-            TabIndex        =   194
+            Left            =   6240
+            TabIndex        =   192
             Top             =   1200
             Width           =   735
          End
@@ -1935,8 +2204,8 @@ Begin VB.Form frmFacEntAlbSAIL
             Caption         =   "% RE"
             Height          =   255
             Index           =   48
-            Left            =   6120
-            TabIndex        =   193
+            Left            =   5400
+            TabIndex        =   191
             Top             =   1200
             Width           =   495
          End
@@ -1950,7 +2219,7 @@ Begin VB.Form frmFacEntAlbSAIL
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   52
-         Text            =   "frmFacEntAlbSAIL.frx":00E1
+         Text            =   "frmFacEntAlbSAIL.frx":035F
          Top             =   3360
          Width           =   3765
       End
@@ -1961,7 +2230,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Left            =   11760
          Locked          =   -1  'True
          MaxLength       =   60
-         TabIndex        =   166
+         TabIndex        =   164
          Text            =   "nom ccoste"
          Top             =   2640
          Width           =   2925
@@ -1972,7 +2241,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   11
          Left            =   13200
          MaxLength       =   15
-         TabIndex        =   164
+         TabIndex        =   162
          Text            =   "numlote"
          Top             =   3000
          Visible         =   0   'False
@@ -2006,268 +2275,172 @@ Begin VB.Form frmFacEntAlbSAIL
          Width           =   735
       End
       Begin VB.Frame FrameFacRec 
-         Caption         =   "Datos Factura a rectificar "
-         Height          =   1815
-         Left            =   -62760
-         TabIndex        =   155
-         Top             =   480
-         Width           =   2535
+         Height          =   615
+         Left            =   -74880
+         TabIndex        =   153
+         Top             =   2520
+         Width           =   7455
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   315
             Index           =   37
-            Left            =   1080
+            Left            =   2280
             MaxLength       =   10
-            TabIndex        =   160
+            TabIndex        =   158
             Tag             =   "Tipo Mov. Factura|T|S|||scaalb|codtipmf||N|"
-            Top             =   360
-            Width           =   1185
+            Text            =   "MMM"
+            Top             =   240
+            Width           =   585
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   315
             Index           =   36
-            Left            =   1080
+            Left            =   3960
             MaxLength       =   10
-            TabIndex        =   158
+            TabIndex        =   156
             Tag             =   "Nº. Factura|N|S|0||scaalb|numfactu|0000000|N|"
-            Top             =   750
-            Width           =   1185
+            Text            =   "4000000000"
+            Top             =   240
+            Width           =   1065
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   315
             Index           =   35
-            Left            =   1080
+            Left            =   6240
             MaxLength       =   10
-            TabIndex        =   156
+            TabIndex        =   154
             Tag             =   "Fecha Factura|F|S|||scaalb|fecfactu|dd/mm/yyyy|N|"
-            Top             =   1200
-            Width           =   1185
+            Text            =   "99/99/9999"
+            Top             =   240
+            Width           =   960
          End
          Begin VB.Label Label1 
-            Caption         =   "Tipo Mov."
-            Height          =   255
-            Index           =   47
+            Caption         =   "Factura a rectificar "
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00800000&
+            Height          =   195
+            Index           =   76
             Left            =   120
-            TabIndex        =   161
-            Top             =   360
-            Width           =   855
+            TabIndex        =   320
+            Top             =   270
+            Width           =   1695
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Tipo"
+            Height          =   195
+            Index           =   47
+            Left            =   1920
+            TabIndex        =   159
+            Top             =   300
+            Width           =   315
          End
          Begin VB.Label Label1 
             Caption         =   "Nº Factura"
-            Height          =   255
+            Height          =   195
             Index           =   46
-            Left            =   120
-            TabIndex        =   159
-            Top             =   780
-            Width           =   855
+            Left            =   3000
+            TabIndex        =   157
+            Top             =   300
+            Width           =   765
          End
          Begin VB.Label Label1 
             Caption         =   "Fecha Fact."
-            Height          =   255
+            Height          =   195
             Index           =   44
-            Left            =   120
-            TabIndex        =   157
-            Top             =   1200
+            Left            =   5280
+            TabIndex        =   155
+            Top             =   300
             Width           =   855
          End
       End
-      Begin VB.Frame FrameHco 
-         Height          =   2775
-         Left            =   -64800
-         TabIndex        =   145
-         Top             =   3960
-         Width           =   4455
-         Begin VB.TextBox Text2 
-            BackColor       =   &H80000018&
-            Height          =   315
-            Index           =   33
-            Left            =   795
-            Locked          =   -1  'True
-            MaxLength       =   40
-            TabIndex        =   153
-            Text            =   "Text2"
-            Top             =   2055
-            Width           =   3525
-         End
-         Begin VB.TextBox Text1 
-            Alignment       =   1  'Right Justify
-            Height          =   315
-            Index           =   33
-            Left            =   135
-            MaxLength       =   30
-            TabIndex        =   152
-            Text            =   "Text1"
-            Top             =   2055
-            Width           =   660
-         End
-         Begin VB.TextBox Text2 
-            BackColor       =   &H80000018&
-            Height          =   315
-            Index           =   32
-            Left            =   795
-            Locked          =   -1  'True
-            MaxLength       =   40
-            TabIndex        =   150
-            Text            =   "Text2"
-            Top             =   1335
-            Width           =   3525
-         End
-         Begin VB.TextBox Text1 
-            Alignment       =   1  'Right Justify
-            Height          =   315
-            Index           =   32
-            Left            =   135
-            MaxLength       =   30
-            TabIndex        =   149
-            Text            =   "Text1"
-            Top             =   1335
-            Width           =   660
-         End
-         Begin VB.TextBox Text1 
-            Alignment       =   1  'Right Justify
-            Height          =   315
-            Index           =   31
-            Left            =   120
-            MaxLength       =   10
-            TabIndex        =   147
-            Top             =   480
-            Width           =   1185
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   11
-            Left            =   1080
-            Picture         =   "frmFacEntAlbSAIL.frx":011E
-            ToolTipText     =   "Buscar incidencia"
-            Top             =   1815
-            Width           =   240
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Incidencia"
-            Height          =   255
-            Index           =   40
-            Left            =   120
-            TabIndex        =   154
-            Top             =   1815
-            Width           =   825
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   10
-            Left            =   1080
-            Picture         =   "frmFacEntAlbSAIL.frx":0220
-            ToolTipText     =   "Buscar trabajador"
-            Top             =   1095
-            Width           =   240
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Trabajador"
-            Height          =   255
-            Index           =   38
-            Left            =   120
-            TabIndex        =   151
-            Top             =   1110
-            Width           =   825
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Fecha Eliminación"
-            Height          =   255
-            Index           =   37
-            Left            =   120
-            TabIndex        =   148
-            Top             =   240
-            Width           =   1335
-         End
-         Begin VB.Label Label1 
-            Height          =   255
-            Index           =   29
-            Left            =   360
-            TabIndex        =   146
-            Top             =   240
-            Width           =   735
-         End
-      End
       Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   29
-         Left            =   -68520
+         Left            =   -67200
          MaxLength       =   30
          TabIndex        =   27
          Tag             =   "Cod. Envío|N|N|0|999|scaalb|codenvio|000|N|"
          Text            =   "Text1"
-         Top             =   720
+         Top             =   675
          Width           =   780
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   29
-         Left            =   -67680
+         Left            =   -66360
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   134
+         TabIndex        =   132
          Text            =   "Text2"
-         Top             =   720
-         Width           =   4245
+         Top             =   675
+         Width           =   3645
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   28
-         Left            =   -73185
+         Left            =   -74760
          MaxLength       =   30
          TabIndex        =   26
          Tag             =   "Preparador Material|N|N|0|9999|scaalb|codtrab2|0000|N|"
          Text            =   "Text1"
-         Top             =   1680
+         Top             =   2160
          Width           =   660
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   28
-         Left            =   -72480
+         Left            =   -73920
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   132
+         TabIndex        =   130
          Text            =   "Text2"
-         Top             =   1680
+         Top             =   2160
          Width           =   3525
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   27
-         Left            =   -73185
+         Left            =   -74760
          MaxLength       =   30
          TabIndex        =   25
          Tag             =   "Trabajador pedido|N|S|0|9999|scaalb|codtrab1|0000|N|"
          Text            =   "Text1"
-         Top             =   1200
-         Width           =   660
+         Top             =   1440
+         Width           =   585
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   27
-         Left            =   -72480
+         Left            =   -73920
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   130
+         TabIndex        =   128
          Text            =   "Text2"
-         Top             =   1200
+         Top             =   1440
          Width           =   3525
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   2
-         Left            =   -72645
+         Left            =   -72480
          MaxLength       =   10
-         TabIndex        =   128
+         TabIndex        =   126
          Tag             =   "Semana Entrega|N|S|||scaalb|sementre||N|"
          Top             =   675
          Width           =   705
@@ -2276,9 +2449,9 @@ Begin VB.Form frmFacEntAlbSAIL
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   25
-         Left            =   -74880
+         Left            =   -74760
          MaxLength       =   7
-         TabIndex        =   125
+         TabIndex        =   123
          Tag             =   "Nº Pedido|N|S|||scaalb|numpedcl|0000000|N|"
          Text            =   "Text1 7"
          Top             =   675
@@ -2288,9 +2461,9 @@ Begin VB.Form frmFacEntAlbSAIL
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   26
-         Left            =   -73905
+         Left            =   -73800
          MaxLength       =   10
-         TabIndex        =   124
+         TabIndex        =   122
          Tag             =   "Fecha Pedido|F|S|||scaalb|fecpedcl|dd/mm/yyyy|N|"
          Top             =   675
          Width           =   1185
@@ -2301,7 +2474,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   24
          Left            =   -70200
          MaxLength       =   10
-         TabIndex        =   120
+         TabIndex        =   118
          Tag             =   "Fecha Oferta|F|S|||scaalb|fecofert|dd/mm/yyyy|N|"
          Top             =   675
          Width           =   1185
@@ -2312,7 +2485,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   23
          Left            =   -71160
          MaxLength       =   7
-         TabIndex        =   119
+         TabIndex        =   117
          Tag             =   "Nº Oferta|N|S|||scaalb|numofert|0000000|N|"
          Text            =   "Text1 7"
          Top             =   675
@@ -2338,14 +2511,14 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.Frame FrameCliente 
          Height          =   1950
          Left            =   200
-         TabIndex        =   104
+         TabIndex        =   102
          Top             =   315
          Width           =   14580
          Begin VB.ComboBox cboTipoImpr 
             Height          =   315
-            ItemData        =   "frmFacEntAlbSAIL.frx":0322
+            ItemData        =   "frmFacEntAlbSAIL.frx":039C
             Left            =   12600
-            List            =   "frmFacEntAlbSAIL.frx":0335
+            List            =   "frmFacEntAlbSAIL.frx":03AF
             Style           =   2  'Dropdown List
             TabIndex        =   24
             Tag             =   "TipoImp|N|S|||scaalb|tipoimp|||"
@@ -2354,9 +2527,9 @@ Begin VB.Form frmFacEntAlbSAIL
          End
          Begin VB.ComboBox cboTipoDat 
             Height          =   315
-            ItemData        =   "frmFacEntAlbSAIL.frx":036D
+            ItemData        =   "frmFacEntAlbSAIL.frx":03E7
             Left            =   12600
-            List            =   "frmFacEntAlbSAIL.frx":037A
+            List            =   "frmFacEntAlbSAIL.frx":03F4
             Style           =   2  'Dropdown List
             TabIndex        =   23
             Tag             =   "Origen Datos|N|S|||scaalb|origdat|||"
@@ -2381,7 +2554,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Left            =   8400
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   220
+            TabIndex        =   218
             Text            =   "Text2"
             Top             =   513
             Width           =   2445
@@ -2416,7 +2589,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Left            =   7470
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   116
+            TabIndex        =   114
             Tag             =   "Direccion/Dpto.|T|S|||scaalb|nomdirec||N|"
             Text            =   "Text2"
             Top             =   165
@@ -2508,7 +2681,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Left            =   7470
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   111
+            TabIndex        =   109
             Text            =   "Text2"
             Top             =   861
             Width           =   3405
@@ -2532,7 +2705,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Left            =   7470
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   106
+            TabIndex        =   104
             Text            =   "Text2"
             Top             =   1215
             Width           =   3405
@@ -2585,7 +2758,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   0
             Left            =   14160
-            Picture         =   "frmFacEntAlbSAIL.frx":0396
+            Picture         =   "frmFacEntAlbSAIL.frx":0410
             ToolTipText     =   "Limpiar campo"
             Top             =   1200
             Visible         =   0   'False
@@ -2595,7 +2768,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   1
             Left            =   14160
-            Picture         =   "frmFacEntAlbSAIL.frx":6BE8
+            Picture         =   "frmFacEntAlbSAIL.frx":6C62
             ToolTipText     =   "Limpiar campo"
             Top             =   1560
             Visible         =   0   'False
@@ -2606,7 +2779,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   60
             Left            =   11160
-            TabIndex        =   226
+            TabIndex        =   224
             Top             =   1200
             Width           =   1335
          End
@@ -2615,7 +2788,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   59
             Left            =   11160
-            TabIndex        =   225
+            TabIndex        =   223
             Top             =   1620
             Width           =   1335
          End
@@ -2624,7 +2797,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   195
             Index           =   52
             Left            =   11160
-            TabIndex        =   224
+            TabIndex        =   222
             Top             =   720
             Width           =   975
          End
@@ -2632,7 +2805,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   40
             Left            =   12240
-            Picture         =   "frmFacEntAlbSAIL.frx":D43A
+            Picture         =   "frmFacEntAlbSAIL.frx":D4B4
             ToolTipText     =   "Buscar fecha"
             Top             =   720
             Width           =   240
@@ -2641,7 +2814,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   12
             Left            =   6600
-            Picture         =   "frmFacEntAlbSAIL.frx":D4C5
+            Picture         =   "frmFacEntAlbSAIL.frx":D53F
             ToolTipText     =   "Buscar forma de pago"
             Top             =   540
             Width           =   240
@@ -2651,7 +2824,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   57
             Left            =   5580
-            TabIndex        =   221
+            TabIndex        =   219
             Top             =   540
             Width           =   855
          End
@@ -2660,7 +2833,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   13
             Left            =   120
-            TabIndex        =   123
+            TabIndex        =   121
             Top             =   1590
             Width           =   855
          End
@@ -2669,7 +2842,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   6
             Left            =   855
-            Picture         =   "frmFacEntAlbSAIL.frx":D5C7
+            Picture         =   "frmFacEntAlbSAIL.frx":D641
             ToolTipText     =   "Buscar población"
             Top             =   867
             Width           =   240
@@ -2679,7 +2852,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   1
             Left            =   5580
-            TabIndex        =   118
+            TabIndex        =   116
             Top             =   165
             Width           =   855
          End
@@ -2688,7 +2861,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   2
             Left            =   6600
-            Picture         =   "frmFacEntAlbSAIL.frx":D6C9
+            Picture         =   "frmFacEntAlbSAIL.frx":D743
             ToolTipText     =   "Buscar direc./dpto"
             Top             =   165
             Width           =   240
@@ -2698,7 +2871,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   17
             Left            =   120
-            TabIndex        =   117
+            TabIndex        =   115
             Top             =   1209
             Width           =   735
          End
@@ -2707,7 +2880,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   16
             Left            =   120
-            TabIndex        =   115
+            TabIndex        =   113
             Top             =   861
             Width           =   735
          End
@@ -2716,7 +2889,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   19
             Left            =   2445
-            TabIndex        =   114
+            TabIndex        =   112
             Top             =   165
             Width           =   735
          End
@@ -2725,7 +2898,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   20
             Left            =   120
-            TabIndex        =   113
+            TabIndex        =   111
             Top             =   165
             Width           =   615
          End
@@ -2733,7 +2906,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   1
             Left            =   855
-            Picture         =   "frmFacEntAlbSAIL.frx":D7CB
+            Picture         =   "frmFacEntAlbSAIL.frx":D845
             ToolTipText     =   "Buscar cliente varios"
             Top             =   165
             Visible         =   0   'False
@@ -2744,7 +2917,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   34
             Left            =   5580
-            TabIndex        =   112
+            TabIndex        =   110
             Top             =   870
             Width           =   615
          End
@@ -2752,7 +2925,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   5
             Left            =   6600
-            Picture         =   "frmFacEntAlbSAIL.frx":D8CD
+            Picture         =   "frmFacEntAlbSAIL.frx":D947
             ToolTipText     =   "Buscar agente"
             Top             =   870
             Width           =   240
@@ -2762,7 +2935,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   15
             Left            =   5580
-            TabIndex        =   110
+            TabIndex        =   108
             Top             =   1215
             Width           =   855
          End
@@ -2771,7 +2944,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   25
             Left            =   5580
-            TabIndex        =   109
+            TabIndex        =   107
             Top             =   1590
             Width           =   975
          End
@@ -2780,7 +2953,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   26
             Left            =   7920
-            TabIndex        =   108
+            TabIndex        =   106
             Top             =   1590
             Width           =   735
          End
@@ -2789,7 +2962,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   4
             Left            =   11160
-            TabIndex        =   107
+            TabIndex        =   105
             Top             =   240
             Width           =   1095
          End
@@ -2797,7 +2970,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   240
             Index           =   4
             Left            =   6600
-            Picture         =   "frmFacEntAlbSAIL.frx":D9CF
+            Picture         =   "frmFacEntAlbSAIL.frx":DA49
             ToolTipText     =   "Buscar forma de pago"
             Top             =   1230
             Width           =   240
@@ -2807,7 +2980,7 @@ Begin VB.Form frmFacEntAlbSAIL
             Height          =   255
             Index           =   7
             Left            =   120
-            TabIndex        =   105
+            TabIndex        =   103
             Top             =   513
             Width           =   735
          End
@@ -2818,7 +2991,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   315
          Index           =   1
          Left            =   2640
-         TabIndex        =   103
+         TabIndex        =   101
          ToolTipText     =   "Buscar artículo"
          Top             =   3960
          Visible         =   0   'False
@@ -2830,7 +3003,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   315
          Index           =   0
          Left            =   960
-         TabIndex        =   102
+         TabIndex        =   100
          ToolTipText     =   "Buscar almacen"
          Top             =   3960
          Visible         =   0   'False
@@ -2861,7 +3034,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   8
          Left            =   9240
          MaxLength       =   12
-         TabIndex        =   100
+         TabIndex        =   98
          Tag             =   "Importe"
          Text            =   "Importe"
          Top             =   3960
@@ -2965,58 +3138,59 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   22
-         Left            =   -73560
+         Left            =   -67200
          MaxLength       =   80
          TabIndex        =   33
          Tag             =   "Observación 5|T|S|||scaalb|observa05||N|"
-         Top             =   3120
-         Width           =   7845
+         Top             =   5040
+         Width           =   7125
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   21
-         Left            =   -73560
+         Left            =   -67200
          MaxLength       =   80
          TabIndex        =   32
          Tag             =   "Observación 4|T|S|||scaalb|observa04||N|"
-         Top             =   2880
-         Width           =   7845
+         Top             =   4680
+         Width           =   7125
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   20
-         Left            =   -73560
+         Left            =   -67200
          MaxLength       =   80
          TabIndex        =   31
          Tag             =   "Observación 3|T|S|||scaalb|observa03||N|"
-         Top             =   2640
-         Width           =   7845
+         Top             =   4320
+         Width           =   7125
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   19
-         Left            =   -73560
+         Left            =   -67200
          MaxLength       =   80
          TabIndex        =   30
          Tag             =   "Observación 2|T|S|||scaalb|observa02||N|"
-         Top             =   2400
-         Width           =   7845
+         Top             =   3960
+         Width           =   7125
       End
       Begin VB.TextBox Text1 
          Height          =   280
          Index           =   18
-         Left            =   -73560
+         Left            =   -67200
          MaxLength       =   80
          TabIndex        =   29
          Tag             =   "Observación 1|T|S|||scaalb|observa01||N|"
-         Top             =   2160
-         Width           =   7845
+         Text            =   "ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ"
+         Top             =   3600
+         Width           =   7125
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmFacEntAlbSAIL.frx":DAD1
+         Bindings        =   "frmFacEntAlbSAIL.frx":DB4B
          Height          =   4680
          Left            =   195
-         TabIndex        =   101
+         TabIndex        =   99
          Top             =   2325
          Width           =   10740
          _ExtentX        =   18944
@@ -3087,7 +3261,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   38
          Left            =   -70080
          MaxLength       =   10
-         TabIndex        =   162
+         TabIndex        =   160
          Tag             =   "Nº terminal|N|S|||scaalb|numtermi||N|"
          Top             =   675
          Width           =   705
@@ -3107,7 +3281,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Index           =   39
          Left            =   -71160
          MaxLength       =   7
-         TabIndex        =   163
+         TabIndex        =   161
          Tag             =   "Nº Venta|N|S|||scaalb|numventa|0000000|N|"
          Text            =   "Text1 7"
          Top             =   675
@@ -3116,7 +3290,7 @@ Begin VB.Form frmFacEntAlbSAIL
       Begin MSComctlLib.ListView ListView2 
          Height          =   5175
          Left            =   -74760
-         TabIndex        =   295
+         TabIndex        =   293
          Top             =   1080
          Width           =   14295
          _ExtentX        =   25215
@@ -3196,6 +3370,78 @@ Begin VB.Form frmFacEntAlbSAIL
             Object.Width           =   0
          EndProperty
       End
+      Begin VB.Image imgFirmaRecep 
+         Height          =   1095
+         Left            =   -64320
+         Stretch         =   -1  'True
+         Top             =   2160
+         Width           =   2415
+      End
+      Begin VB.Image imgGeolocalizacion 
+         Height          =   255
+         Left            =   -66240
+         Picture         =   "frmFacEntAlbSAIL.frx":DB60
+         Stretch         =   -1  'True
+         Tag             =   "-1"
+         ToolTipText     =   "Abrir web"
+         Top             =   1920
+         Visible         =   0   'False
+         Width           =   255
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Longitud"
+         Height          =   195
+         Index           =   83
+         Left            =   -65880
+         TabIndex        =   332
+         Top             =   1920
+         Width           =   1335
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Latitud"
+         Height          =   195
+         Index           =   82
+         Left            =   -67200
+         TabIndex        =   330
+         Top             =   1920
+         Width           =   1335
+      End
+      Begin VB.Label Label1 
+         Caption         =   "DNI"
+         Height          =   195
+         Index           =   81
+         Left            =   -62280
+         TabIndex        =   328
+         Top             =   1200
+         Width           =   1335
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Persona recepcion"
+         Height          =   195
+         Index           =   80
+         Left            =   -65280
+         TabIndex        =   326
+         Top             =   1200
+         Width           =   1335
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   44
+         Left            =   -66720
+         Picture         =   "frmFacEntAlbSAIL.frx":E0EA
+         ToolTipText     =   "Buscar fecha"
+         Top             =   1200
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Tipo envio"
+         Height          =   255
+         Index           =   72
+         Left            =   -62640
+         TabIndex        =   315
+         Top             =   480
+         Width           =   1095
+      End
       Begin VB.Label Label3 
          Caption         =   "Albaran"
          BeginProperty Font 
@@ -3211,7 +3457,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   5
          Left            =   -74640
-         TabIndex        =   312
+         TabIndex        =   310
          Top             =   720
          Width           =   975
       End
@@ -3220,7 +3466,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   6
          Left            =   -73680
-         TabIndex        =   311
+         TabIndex        =   309
          Top             =   720
          Width           =   945
       End
@@ -3230,7 +3476,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   7
          Left            =   -71160
-         TabIndex        =   310
+         TabIndex        =   308
          Top             =   720
          Width           =   1305
       End
@@ -3248,7 +3494,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   71
          Left            =   -67920
-         TabIndex        =   307
+         TabIndex        =   305
          Top             =   6630
          Width           =   1335
       End
@@ -3265,7 +3511,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   70
          Left            =   -70080
-         TabIndex        =   306
+         TabIndex        =   304
          Top             =   6630
          Width           =   2100
       End
@@ -3283,7 +3529,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   69
          Left            =   -73200
-         TabIndex        =   305
+         TabIndex        =   303
          Top             =   6630
          Width           =   1335
       End
@@ -3300,7 +3546,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   68
          Left            =   -74640
-         TabIndex        =   304
+         TabIndex        =   302
          Top             =   6630
          Width           =   1350
       End
@@ -3318,7 +3564,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   67
          Left            =   -64200
-         TabIndex        =   299
+         TabIndex        =   297
          Top             =   6630
          Width           =   1575
       End
@@ -3337,7 +3583,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   66
          Left            =   -62160
-         TabIndex        =   298
+         TabIndex        =   296
          Top             =   6630
          Width           =   1335
       End
@@ -3356,7 +3602,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   22
          Left            =   -74760
-         TabIndex        =   297
+         TabIndex        =   295
          Top             =   690
          Width           =   1215
       End
@@ -3375,7 +3621,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   0
          Left            =   -74520
-         TabIndex        =   296
+         TabIndex        =   294
          Top             =   600
          Width           =   2535
       End
@@ -3393,7 +3639,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   64
          Left            =   -64080
-         TabIndex        =   293
+         TabIndex        =   291
          Top             =   5640
          Width           =   1455
       End
@@ -3411,7 +3657,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   63
          Left            =   -62520
-         TabIndex        =   292
+         TabIndex        =   290
          Top             =   5640
          Width           =   1455
       End
@@ -3429,7 +3675,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   62
          Left            =   -65640
-         TabIndex        =   291
+         TabIndex        =   289
          Top             =   5640
          Width           =   975
       End
@@ -3445,7 +3691,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   37
          Left            =   -71760
-         TabIndex        =   289
+         TabIndex        =   287
          Top             =   960
          Width           =   1005
       End
@@ -3455,27 +3701,27 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   36
          Left            =   -73680
-         TabIndex        =   288
+         TabIndex        =   286
          Top             =   960
          Width           =   1185
       End
       Begin VB.Label Label3E 
-         Caption         =   "F. Alb"
+         Caption         =   "F. Recepcion"
          Height          =   195
          Index           =   24
          Left            =   -62280
-         TabIndex        =   287
+         TabIndex        =   285
          Top             =   1320
-         Width           =   405
+         Width           =   960
       End
       Begin VB.Label Label3E 
          Caption         =   "Nº Expedicion"
          Height          =   195
          Index           =   23
          Left            =   -64680
-         TabIndex        =   286
+         TabIndex        =   284
          Top             =   1320
-         Width           =   2865
+         Width           =   2025
       End
       Begin VB.Label Label3E 
          Caption         =   "Recepcion del equipo"
@@ -3492,7 +3738,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   20
          Left            =   -73680
-         TabIndex        =   285
+         TabIndex        =   283
          Top             =   600
          Width           =   2535
       End
@@ -3510,7 +3756,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   15
          Left            =   -64680
-         TabIndex        =   284
+         TabIndex        =   282
          Top             =   2640
          Width           =   2655
       End
@@ -3520,7 +3766,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   10
          Left            =   -67800
-         TabIndex        =   283
+         TabIndex        =   281
          Top             =   2760
          Width           =   525
       End
@@ -3530,7 +3776,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   9
          Left            =   -68880
-         TabIndex        =   282
+         TabIndex        =   280
          Top             =   2760
          Width           =   360
       End
@@ -3539,7 +3785,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   8
          Left            =   -70200
-         TabIndex        =   281
+         TabIndex        =   279
          Top             =   2760
          Width           =   525
       End
@@ -3548,7 +3794,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   7
          Left            =   -71400
-         TabIndex        =   280
+         TabIndex        =   278
          Top             =   2760
          Width           =   705
       End
@@ -3566,7 +3812,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   6
          Left            =   -66360
-         TabIndex        =   279
+         TabIndex        =   277
          Top             =   2640
          Width           =   1215
       End
@@ -3584,7 +3830,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   5
          Left            =   -68880
-         TabIndex        =   278
+         TabIndex        =   276
          Top             =   2520
          Width           =   2175
       End
@@ -3602,7 +3848,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   4
          Left            =   -71280
-         TabIndex        =   277
+         TabIndex        =   275
          Top             =   2520
          Width           =   1935
       End
@@ -3620,7 +3866,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   3
          Left            =   -73800
-         TabIndex        =   276
+         TabIndex        =   274
          Top             =   3360
          Width           =   1455
       End
@@ -3638,7 +3884,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   2
          Left            =   -73800
-         TabIndex        =   275
+         TabIndex        =   273
          Top             =   3000
          Width           =   1455
       End
@@ -3657,7 +3903,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   1
          Left            =   -73800
-         TabIndex        =   274
+         TabIndex        =   272
          Top             =   2280
          Width           =   3615
       End
@@ -3666,7 +3912,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   30
          Left            =   -66840
-         TabIndex        =   273
+         TabIndex        =   271
          Top             =   5880
          Width           =   705
       End
@@ -3675,7 +3921,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   29
          Left            =   -63600
-         TabIndex        =   272
+         TabIndex        =   270
          Top             =   5880
          Width           =   705
       End
@@ -3684,7 +3930,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   28
          Left            =   -66840
-         TabIndex        =   271
+         TabIndex        =   269
          Top             =   5400
          Width           =   705
       End
@@ -3693,7 +3939,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   27
          Left            =   -66840
-         TabIndex        =   270
+         TabIndex        =   268
          Top             =   4440
          Width           =   705
       End
@@ -3702,7 +3948,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   26
          Left            =   -66840
-         TabIndex        =   269
+         TabIndex        =   267
          Top             =   4920
          Width           =   705
       End
@@ -3720,7 +3966,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   25
          Left            =   -65040
-         TabIndex        =   268
+         TabIndex        =   266
          Top             =   4080
          Width           =   2655
       End
@@ -3739,7 +3985,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   11
          Left            =   -73800
-         TabIndex        =   267
+         TabIndex        =   265
          Top             =   3720
          Width           =   4095
       End
@@ -3748,7 +3994,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   19
          Left            =   -73800
-         TabIndex        =   266
+         TabIndex        =   264
          Top             =   5880
          Width           =   705
       End
@@ -3757,7 +4003,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   18
          Left            =   -70920
-         TabIndex        =   265
+         TabIndex        =   263
          Top             =   5880
          Width           =   705
       End
@@ -3766,7 +4012,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   17
          Left            =   -73800
-         TabIndex        =   264
+         TabIndex        =   262
          Top             =   5400
          Width           =   705
       End
@@ -3784,7 +4030,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   16
          Left            =   -72000
-         TabIndex        =   263
+         TabIndex        =   261
          Top             =   4080
          Width           =   2655
       End
@@ -3793,7 +4039,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   14
          Left            =   -73800
-         TabIndex        =   262
+         TabIndex        =   260
          Top             =   4920
          Width           =   705
       End
@@ -3802,7 +4048,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   13
          Left            =   -70680
-         TabIndex        =   261
+         TabIndex        =   259
          Top             =   4440
          Width           =   705
       End
@@ -3811,7 +4057,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   12
          Left            =   -73800
-         TabIndex        =   260
+         TabIndex        =   258
          Top             =   4440
          Width           =   705
       End
@@ -3820,7 +4066,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   32
          Left            =   -70440
-         TabIndex        =   259
+         TabIndex        =   257
          Top             =   6360
          Width           =   705
       End
@@ -3829,7 +4075,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   31
          Left            =   -73800
-         TabIndex        =   258
+         TabIndex        =   256
          Top             =   6360
          Width           =   1035
       End
@@ -3838,7 +4084,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   35
          Left            =   -63000
-         TabIndex        =   257
+         TabIndex        =   255
          Top             =   6360
          Width           =   705
       End
@@ -3847,7 +4093,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   34
          Left            =   -64800
-         TabIndex        =   256
+         TabIndex        =   254
          Top             =   6360
          Width           =   705
       End
@@ -3856,7 +4102,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   33
          Left            =   -66840
-         TabIndex        =   255
+         TabIndex        =   253
          Top             =   6360
          Width           =   705
       End
@@ -3874,7 +4120,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   1
          Left            =   -67200
-         TabIndex        =   249
+         TabIndex        =   247
          Top             =   1320
          Width           =   2655
       End
@@ -3892,7 +4138,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   195
          Index           =   0
          Left            =   -74640
-         TabIndex        =   248
+         TabIndex        =   246
          Top             =   1320
          Width           =   2655
       End
@@ -3910,17 +4156,17 @@ Begin VB.Form frmFacEntAlbSAIL
          ForeColor       =   &H00000080&
          Height          =   345
          Left            =   -66120
-         TabIndex        =   228
+         TabIndex        =   226
          Top             =   360
          Width           =   5850
       End
       Begin VB.Label Label1 
-         Caption         =   "Observaciones"
+         Caption         =   "Observaciones CRM"
          Height          =   255
          Index           =   61
-         Left            =   -68520
-         TabIndex        =   227
-         Top             =   1080
+         Left            =   -67200
+         TabIndex        =   225
+         Top             =   5520
          Width           =   3975
       End
       Begin VB.Image imgObserva 
@@ -3935,7 +4181,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   58
          Left            =   12480
-         TabIndex        =   223
+         TabIndex        =   221
          Top             =   6360
          Width           =   1095
       End
@@ -3943,18 +4189,18 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "APORTACION TERMINAL"
          Height          =   255
          Index           =   49
-         Left            =   -65520
-         TabIndex        =   219
-         Top             =   2880
+         Left            =   -72240
+         TabIndex        =   217
+         Top             =   1920
          Width           =   2175
       End
       Begin VB.Label Label1 
          Caption         =   "Km a facturar"
          Height          =   255
          Index           =   43
-         Left            =   -65400
-         TabIndex        =   217
-         Top             =   2160
+         Left            =   -70080
+         TabIndex        =   215
+         Top             =   1200
          Width           =   975
       End
       Begin VB.Label Label1 
@@ -3962,7 +4208,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   56
          Left            =   11040
-         TabIndex        =   214
+         TabIndex        =   212
          Top             =   6360
          Width           =   975
       End
@@ -3970,7 +4216,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   0
          Left            =   11880
-         Picture         =   "frmFacEntAlbSAIL.frx":DAE6
+         Picture         =   "frmFacEntAlbSAIL.frx":E175
          ToolTipText     =   "Buscar forma de pago"
          Top             =   5640
          Visible         =   0   'False
@@ -3981,7 +4227,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   55
          Left            =   11040
-         TabIndex        =   212
+         TabIndex        =   210
          Top             =   5640
          Width           =   975
       End
@@ -3989,7 +4235,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   13
          Left            =   11400
-         Picture         =   "frmFacEntAlbSAIL.frx":DBE8
+         Picture         =   "frmFacEntAlbSAIL.frx":E277
          ToolTipText     =   "Buscar forma de pago"
          Top             =   4920
          Visible         =   0   'False
@@ -4000,7 +4246,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   54
          Left            =   11040
-         TabIndex        =   210
+         TabIndex        =   208
          Top             =   4920
          Width           =   975
       End
@@ -4008,7 +4254,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   9
          Left            =   12000
-         Picture         =   "frmFacEntAlbSAIL.frx":DCEA
+         Picture         =   "frmFacEntAlbSAIL.frx":E379
          ToolTipText     =   "Buscar forma de pago"
          Top             =   2400
          Visible         =   0   'False
@@ -4018,7 +4264,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   12
          Left            =   11760
-         Picture         =   "frmFacEntAlbSAIL.frx":DDEC
+         Picture         =   "frmFacEntAlbSAIL.frx":E47B
          ToolTipText     =   "Buscar forma de pago"
          Top             =   4185
          Visible         =   0   'False
@@ -4029,7 +4275,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   53
          Left            =   11040
-         TabIndex        =   208
+         TabIndex        =   206
          Top             =   4200
          Width           =   975
       End
@@ -4038,7 +4284,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   35
          Left            =   11040
-         TabIndex        =   168
+         TabIndex        =   166
          Top             =   3120
          Width           =   1335
       End
@@ -4047,60 +4293,69 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   51
          Left            =   11040
-         TabIndex        =   167
+         TabIndex        =   165
          Top             =   2400
          Width           =   975
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   9
-         Left            =   -67560
-         Picture         =   "frmFacEntAlbSAIL.frx":DEEE
+         Left            =   -66600
+         Picture         =   "frmFacEntAlbSAIL.frx":E57D
          ToolTipText     =   "Buscar forma de envio"
          Top             =   480
          Width           =   240
       End
       Begin VB.Label Label1 
-         Caption         =   "Cod. Envío"
+         Caption         =   "Envío merc."
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   24
-         Left            =   -68520
-         TabIndex        =   135
-         Top             =   480
-         Width           =   810
+         Left            =   -68640
+         TabIndex        =   133
+         Top             =   720
+         Width           =   1170
       End
       Begin VB.Label Label1 
          Caption         =   "Preparador Material"
          Height          =   255
          Index           =   23
-         Left            =   -74880
-         TabIndex        =   133
-         Top             =   1680
+         Left            =   -74760
+         TabIndex        =   131
+         Top             =   1920
          Width           =   1425
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   8
-         Left            =   -73455
-         Picture         =   "frmFacEntAlbSAIL.frx":DFF0
+         Left            =   -73200
+         Picture         =   "frmFacEntAlbSAIL.frx":E67F
          ToolTipText     =   "Buscar trabajador"
-         Top             =   1680
+         Top             =   1920
          Width           =   240
       End
       Begin VB.Label Label1 
          Caption         =   "Trabajador Pedido"
          Height          =   255
          Index           =   9
-         Left            =   -74880
-         TabIndex        =   131
-         Top             =   1215
+         Left            =   -74760
+         TabIndex        =   129
+         Top             =   1200
          Width           =   1425
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   7
-         Left            =   -73455
-         Picture         =   "frmFacEntAlbSAIL.frx":E0F2
+         Left            =   -73200
+         Picture         =   "frmFacEntAlbSAIL.frx":E781
          ToolTipText     =   "Buscar trabajador"
          Top             =   1215
          Width           =   240
@@ -4109,8 +4364,8 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "Sem. Entrega"
          Height          =   255
          Index           =   12
-         Left            =   -72645
-         TabIndex        =   129
+         Left            =   -72600
+         TabIndex        =   127
          Top             =   480
          Width           =   975
       End
@@ -4118,8 +4373,8 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "Nº Pedido"
          Height          =   255
          Index           =   11
-         Left            =   -74880
-         TabIndex        =   127
+         Left            =   -74760
+         TabIndex        =   125
          Top             =   480
          Width           =   735
       End
@@ -4127,8 +4382,8 @@ Begin VB.Form frmFacEntAlbSAIL
          Caption         =   "Fecha Pedido"
          Height          =   255
          Index           =   10
-         Left            =   -73905
-         TabIndex        =   126
+         Left            =   -73800
+         TabIndex        =   124
          Top             =   480
          Width           =   1095
       End
@@ -4137,7 +4392,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   5
          Left            =   -70200
-         TabIndex        =   122
+         TabIndex        =   120
          Top             =   480
          Width           =   1095
       End
@@ -4146,18 +4401,27 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   3
          Left            =   -71160
-         TabIndex        =   121
+         TabIndex        =   119
          Top             =   480
          Width           =   735
       End
       Begin VB.Label Label1 
          Caption         =   "Observaciones"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   45
-         Left            =   -74880
+         Left            =   -67200
          TabIndex        =   41
-         Top             =   2160
-         Width           =   1095
+         Top             =   3240
+         Width           =   1575
       End
       Begin VB.Line Line4 
          BorderWidth     =   3
@@ -4182,6 +4446,62 @@ Begin VB.Form frmFacEntAlbSAIL
          Y1              =   3840
          Y2              =   3840
       End
+      Begin VB.Label Label1 
+         Caption         =   "Tipo envio: codinter  Puede ser NULL"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   73
+         Left            =   -66120
+         TabIndex        =   317
+         Top             =   480
+         Visible         =   0   'False
+         Width           =   3255
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Codigo"
+         Height          =   255
+         Index           =   79
+         Left            =   -67200
+         TabIndex        =   324
+         Top             =   480
+         Width           =   975
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Fecha"
+         Height          =   255
+         Index           =   78
+         Left            =   -67200
+         TabIndex        =   323
+         Top             =   1200
+         Width           =   735
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Entrega merca."
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   77
+         Left            =   -68640
+         TabIndex        =   321
+         ToolTipText     =   "Entrega mercancia"
+         Top             =   1200
+         Width           =   1605
+      End
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
@@ -4195,7 +4515,7 @@ Begin VB.Form frmFacEntAlbSAIL
    Begin VB.Frame Frame2 
       Height          =   855
       Left            =   120
-      TabIndex        =   136
+      TabIndex        =   134
       Top             =   360
       Width           =   15015
       Begin VB.TextBox Text1 
@@ -4251,7 +4571,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Left            =   9105
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   141
+         TabIndex        =   139
          Text            =   "Text2"
          Top             =   120
          Width           =   4080
@@ -4304,7 +4624,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   43
          Left            =   4035
-         Picture         =   "frmFacEntAlbSAIL.frx":E1F4
+         Picture         =   "frmFacEntAlbSAIL.frx":E883
          ToolTipText     =   "Buscar fecha"
          Top             =   120
          Width           =   240
@@ -4314,7 +4634,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   65
          Left            =   3240
-         TabIndex        =   294
+         TabIndex        =   292
          Top             =   150
          Width           =   735
       End
@@ -4322,7 +4642,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   0
          Left            =   7980
-         Picture         =   "frmFacEntAlbSAIL.frx":E27F
+         Picture         =   "frmFacEntAlbSAIL.frx":E90E
          ToolTipText     =   "Buscar cliente"
          Top             =   510
          Width           =   240
@@ -4332,7 +4652,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   0
          Left            =   6915
-         TabIndex        =   142
+         TabIndex        =   140
          Top             =   495
          Width           =   615
       End
@@ -4341,7 +4661,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   21
          Left            =   6915
-         TabIndex        =   140
+         TabIndex        =   138
          Top             =   165
          Width           =   1050
       End
@@ -4349,7 +4669,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   3
          Left            =   7980
-         Picture         =   "frmFacEntAlbSAIL.frx":E381
+         Picture         =   "frmFacEntAlbSAIL.frx":EA10
          ToolTipText     =   "Buscar trabajador"
          Top             =   150
          Width           =   240
@@ -4359,7 +4679,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   14
          Left            =   2040
-         TabIndex        =   139
+         TabIndex        =   137
          Top             =   150
          Width           =   735
       End
@@ -4367,7 +4687,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   240
          Index           =   0
          Left            =   2835
-         Picture         =   "frmFacEntAlbSAIL.frx":E483
+         Picture         =   "frmFacEntAlbSAIL.frx":EB12
          ToolTipText     =   "Buscar fecha"
          Top             =   120
          Width           =   240
@@ -4377,7 +4697,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   50
          Left            =   240
-         TabIndex        =   138
+         TabIndex        =   136
          Top             =   150
          Width           =   855
       End
@@ -4386,7 +4706,7 @@ Begin VB.Form frmFacEntAlbSAIL
          Height          =   255
          Index           =   8
          Left            =   1275
-         TabIndex        =   137
+         TabIndex        =   135
          Top             =   150
          Width           =   735
       End
@@ -4404,7 +4724,7 @@ Begin VB.Form frmFacEntAlbSAIL
       EndProperty
       Height          =   255
       Left            =   2400
-      TabIndex        =   165
+      TabIndex        =   163
       Top             =   8640
       Width           =   3615
    End
@@ -4609,6 +4929,7 @@ Dim AlmacenLineas As Integer
 
 Dim LineaIntercalar As Integer 'NO reutilizar
 
+Dim CarpetaImagenesEULER As String
 
 
 
@@ -4628,6 +4949,10 @@ End Sub
 
 
   
+Private Sub cboTipopEnvio_KeyPress(KeyAscii As Integer)
+        KEYpress KeyAscii
+End Sub
+
 Private Sub chkDocArchi_KeyDown(KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
@@ -4796,6 +5121,9 @@ Dim SQL As String
                 SQL = SQL & " and fechamov=" & DBSet(Data1.Recordset!FechaAlb, "F")
                 conn.Execute SQL
             End If
+            
+             CrearCarpetaComun True, 0
+            
         End If
     End If
     
@@ -5172,7 +5500,8 @@ Dim cad As String
 '    LimpiarCampos
     If chkVistaPrevia.Value = 1 Then
         EsCabecera = True
-        cad = " codtipom='" & CodTipoMov & "'"
+        cad = ""
+        If Not EsHistorico Then cad = " codtipom='" & CodTipoMov & "'"
         MandaBusquedaPrevia cad, False
     Else
         LimpiarCampos
@@ -5375,6 +5704,7 @@ Dim C As String
 Dim R As Boolean
 
     If Modo <> 2 Then Exit Sub
+    If EsHistorico Then Exit Sub
     If Data1.Recordset Is Nothing Then Exit Sub
     If Data1.Recordset.EOF Then Exit Sub
     
@@ -5383,6 +5713,15 @@ Dim R As Boolean
         'IMPRESION
         If ListView2.ListItems.Count = 0 Then Exit Sub
         ImprimirCostesEuler
+        Exit Sub
+    End If
+    
+    If index = 4 Then
+        'NUEVO PEDIDO PROVEEDOR DESDE ALbaran
+        frmComEntPedidosSa.AlbaranVenta = Data1.Recordset!codtipom & Format(Data1.Recordset!FechaAlb, "ddmmyyyy") & Data1.Recordset!Numalbar
+        frmComEntPedidosSa.Show vbModal
+        
+        If True Then CargaCostesEuler False
         Exit Sub
     End If
     
@@ -5815,21 +6154,27 @@ Private Sub Form_Load()
         .Buttons(13).Image = 30 'Marcar a facturar
         
         .Buttons(14).Image = 27 'Imprimir portes
-        .Buttons(15).Image = 16 'Imprimir Pedido
-'
-        .Buttons(16).Image = 15  'Salir
+       
+        
+        .Buttons(16).Image = 16 'Imprimir
+        .Buttons(17).Image = 15  'Salir
         .Buttons(btnPrimero).Image = 6  'Primero
         .Buttons(btnPrimero + 1).Image = 7 'Anterior
         .Buttons(btnPrimero + 2).Image = 8 'Siguiente
         .Buttons(btnPrimero + 3).Image = 9 'Último
         
-        If vParamAplic.TipoPortes <> 1 Then
-            .Buttons(14).Style = tbrSeparator
-            .Buttons(14).ToolTipText = ""
-        Else
-            .Buttons(14).Style = tbrDefault
-            .Buttons(14).ToolTipText = "Imprimir portes"
-        End If
+        
+        
+        'ANTES ERAN PORTES. EN sail y EULER NO hay portes
+        'ES el boton de cambiar de tipo
+        'If vParamAplic.TipoPortes <> 1 Then
+        '    .Buttons(14).Style = tbrSeparator
+        '    .Buttons(14).ToolTipText = ""
+        'Else
+        '    .Buttons(14).Style = tbrDefault
+        '    .Buttons(14).ToolTipText = "Imprimir portes"
+        'End If
+        
     End With
     Me.SSTab1.Tab = 0
       
@@ -5853,12 +6198,15 @@ Private Sub Form_Load()
     SSTab1.TabVisible(5) = Modo = 1 'Fichadas. PARA ALE,ALO,
     SSTab1.TabVisible(4) = Modo = 1 'Costes. PARA ALE,ALO,
     
-    
+    primeravez = True
     Modo = 0
     cadList = "Albaranes Clientes"
     EulerParam = ""
+    CarpetaImagenesEULER = ""
     If vParamAplic.NumeroInstalacion = 4 Then
+        Label1(60).Caption = "Estado"
         FrameOT.visible = False
+        CarpetaImagenesEULER = DevuelveDesdeBD(conAri, "pathDocs", "eulerparam", "1", "1")
         lblTituloEst.Caption = ""
         
         If CodTipoMov = "ALO" Then
@@ -5876,10 +6224,13 @@ Private Sub Form_Load()
             Label3(7).Caption = "Orden trabajo"
         ElseIf CodTipoMov = "ALR" Then
             SSTab1.TabVisible(3) = True
-            If vParamAplic.NumeroInstalacion = vbEuler Then EulerParam = DevuelveDesdeBD(conAri, "pathDocs", "eulerparam", "1", "1")
+            If vParamAplic.NumeroInstalacion = vbEuler Then EulerParam = CarpetaImagenesEULER
            
         End If
         lblTituloEst.Caption = cadList
+        
+        
+        PonerImagenFirma
         
         'Referencia cliente
         Text1(13).Width = 4005
@@ -5890,7 +6241,18 @@ Private Sub Form_Load()
         Me.cmdLineasCostes(0).Picture = frmPpal.imgListComun.ListImages(3).Picture
         Me.cmdLineasCostes(1).Picture = frmPpal.imgListComun.ListImages(4).Picture
         Me.cmdLineasCostes(2).Picture = frmPpal.imgListComun.ListImages(14).Picture
-        Me.cmdLineasCostes(3).Picture = frmPpal.imgListComun.ListImages(40).Picture
+        cmdLineasCostes(3).Picture = frmPpal.imgListComun.ListImages(40).Picture
+        cmdLineasCostes(4).Picture = frmPpal.ImgListPpal.ListImages(9).Picture
+        
+        
+        If EsHistorico Then
+            cmdLineasCostes(0).Enabled = False
+            cmdLineasCostes(1).Enabled = False
+            cmdLineasCostes(2).Enabled = False
+            cmdLineasCostes(3).Enabled = False
+            cmdLineasCostes(4).Enabled = False
+        End If
+        
     End If
     Me.Caption = cadList
     
@@ -6026,6 +6388,7 @@ On Error Resume Next
     Me.cboFacturacion.ListIndex = -1
     cboTipoDat.ListIndex = -1
     cboTipoImpr.ListIndex = -1
+    cboTipopEnvio.ListIndex = -1
     Me.chkFacturar.Value = 0
     Me.chkFacturarKm.Value = 0
     Me.chkDocArchi.Value = 0
@@ -6035,6 +6398,9 @@ On Error Resume Next
     If SSTab1.TabVisible(2) Or SSTab1.TabVisible(3) Then LimpiarFichaTecnica False
     If SSTab1.TabVisible(5) Then ListView1.ListItems.Clear: Label1(63).Caption = "": Label1(64).Caption = ""
     CargaCostesEuler True
+    
+    If vParamAplic.NumeroInstalacion = vbEuler Then Me.imgFirmaRecep.Picture = LoadPicture("")
+    
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -6151,6 +6517,9 @@ Private Sub frmF_Selec(vFecha As Date) 'Calendario Fechas
 Dim Indice As Byte
     Indice = CByte(Me.imgFecha(0).Tag)
     Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+    
+    
+    
 End Sub
 
 
@@ -6473,12 +6842,26 @@ End Sub
 
 Private Sub imgFecha_Click(index As Integer) 'Abre calendario Fechas
 Dim Indice As Byte
+Dim hora As String
+
+
+    
+
+
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
+   
    Screen.MousePointer = vbHourglass
+   
+   hora = ""
+   Indice = index + 1
+   If index = 44 Then
+        If Text1(Indice).Text <> "" Then hora = Trim(Mid(Text1(Indice).Text, 11))
+        If Not EsHoraOK(hora) Then hora = ""
+    End If
    Set frmF = New frmCal
    frmF.Fecha = Now
-   Indice = index + 1
+   
    
   
    Me.imgFecha(0).Tag = Indice
@@ -6489,9 +6872,24 @@ Dim Indice As Byte
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
+   If index = 44 Then
+     If hora = "" Then hora = Format(Now, "hh:mm:ss")
+     If hora = "00:00:00" Then hora = Format(Now, "hh:mm:ss")
+        If Len(Text1(Indice).Text) = 10 Then Text1(Indice).Text = Text1(Indice).Text & " " & hora
+   End If
    PonerFoco Text1(Indice)
+   
 End Sub
 
+
+Private Sub imgGeolocalizacion_Click()
+    If Text1(48).Text <> "" And Text1(49).Text <> "" Then
+        txtAnterior = TransformaComasPuntos(Text1(48).Text) & "," & TransformaComasPuntos(Text1(49).Text)
+        AbrirGeolocalizacion txtAnterior
+        
+        txtAnterior = ""
+    End If
+End Sub
 
 Private Sub imgNull_Click(index As Integer)
     If index = 0 Then
@@ -6773,6 +7171,15 @@ Dim campo As String
         Case 1, 41, 44 'Fecha Albaran,fecenvio
                 If Text1(index).Text <> "" Then PonerFormatoFecha Text1(index)
                 
+        Case 45
+                If Text1(index).Text <> "" Then
+                    If IsDate(Text1(index).Text) Then
+                        Text1(index).Text = Format(Text1(index).Text, "dd/mm/yyyy hh:nn:ss")
+                    Else
+                        Text1(index).Text = ""
+                        PonerFoco Text1(index)
+                    End If
+                End If
         Case 3, 27, 28 'Cod Vendedor
             If PonerFormatoEntero(Text1(index)) Then
                 Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "straba", "nomtraba", "codtraba")
@@ -6878,8 +7285,18 @@ Dim campo As String
                 If Text1(42).Text = "" Then PonerFoco Text1(42)
             End If
             
-
-                
+        
+        Case 48, 49
+            
+            If Text1(index).Text <> "" Then
+                If InStr(1, Text1(index).Text, ".") > 0 Then Text1(index).Text = Replace(Text1(index).Text, ".", ",")
+                If IsNumeric(Text1(index).Text) Then
+                    
+                    Text1(index).Text = Format(Text1(index).Text, "0.000000")
+                Else
+                    Text1(index).Text = ""
+                End If
+            End If
     End Select
 End Sub
 
@@ -6894,7 +7311,11 @@ Dim C As String
     CadB = ObtenerBusqueda(Me, False)
     
     If vParamAplic.NumeroInstalacion = 4 Then
-        C = BuscaEnBDFicha
+        If Not EsHistorico Then
+            C = BuscaEnBDFicha
+        Else
+            C = ""
+        End If
         'Cadb siempre llevara codtipom=hcodtipom
         If C <> "" Then CadB = CadB & " AND " & C
     End If
@@ -7066,22 +7487,40 @@ End Sub
 
 Private Sub PonerCampos()
 Dim b As Boolean
-
+Dim Movi As String
     On Error Resume Next
 
     If Data1.Recordset.EOF Then Exit Sub
     
+    
+    
+    
+    
+    
      'Si es un Albaran de Ticket visualizamos unos datos y sino otros
     b = (Data1.Recordset!EsTicket = 1)
     Me.Toolbar1.Buttons(11).Enabled = (Not b) And (Not EsHistorico)
-    
+        
+        
+    Movi = hcoCodTipoM
+        
+    If EsHistorico Then
+        If Modo = 2 Then
+            If Not Data1.Recordset.EOF Then Movi = Data1.Recordset!codtipom
+            
+            SSTab1.TabVisible(3) = Movi = "ALR"
+            SSTab1.TabVisible(2) = Movi = "ALO" Or Movi = "ALE"
+            FrameOT.visible = Movi = "ALO"
+        End If
+    End If
+        
 
-    If hcoCodTipoM <> "ALR" Then
+    If Movi <> "ALR" Then
         'sem. entrega pedido
         Label1(12).visible = Not b
         Text1(2).visible = Not b
         'num oferta
-        Text1(23).visible = Not b And hcoCodTipoM <> "ALR"
+        Text1(23).visible = Not b And Movi <> "ALR"
         'fecha oferta
         Text1(24).visible = Not b
         'nº terminal
@@ -7130,7 +7569,8 @@ Dim b As Boolean
     'Septiembre. Si tipomimp es NULL NO debe poner valor en el combo
     If IsNull(Data1.Recordset!tipoimp) Then cboTipoImpr.ListIndex = -1
     If IsNull(Data1.Recordset!origdat) Then Me.cboTipoDat.ListIndex = -1
-
+    If IsNull(Data1.Recordset!codinter) Then Me.cboTipopEnvio.ListIndex = -1
+    
 
 
 
@@ -7145,6 +7585,9 @@ Dim b As Boolean
     PonerCampoActuacion
     
     CargaCostesEuler False
+    
+    
+    PonerImagenFirma
     
     'Me.lblTipo(0).Caption = PonerCampoTipoSail(43)
     'Me.lblTipo(1).Caption = PonerCampoTipoSail(44)
@@ -7182,6 +7625,13 @@ Dim b As Boolean
         cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
+    End If
+        
+    If EsHistorico Then
+        If Modo < 2 And vParamAplic.NumeroInstalacion = vbEuler Then
+            SSTab1.TabVisible(3) = False
+            SSTab1.TabVisible(2) = False
+        End If
     End If
         
     'Poner Flechas de desplazamiento visibles
@@ -7266,8 +7716,12 @@ Dim b As Boolean
     imgNull(1).visible = b
     cboTipoDat.Enabled = b
     cboTipoImpr.Enabled = b
+    cboTipopEnvio.Enabled = b
     imgObserva(0).visible = Modo > 1
     imgObserva(1).visible = Modo > 1
+    
+    imgGeolocalizacion.visible = Modo = 2
+    
     
     'Si no es modo lineas Boquear los TxtAux
     For I = 0 To txtAux.Count - 1
@@ -7333,7 +7787,7 @@ Private Function DatosOk() As Boolean
 'la cabecera del Pedido
 Dim b As Boolean
 Dim devuelve As String
-
+Dim I As Byte
     On Error GoTo EDatosOK
 
     DatosOk = False
@@ -7370,6 +7824,7 @@ Dim devuelve As String
                         b = False
                     End If
                 End If
+                
             End If
     
         End If
@@ -7379,6 +7834,26 @@ Dim devuelve As String
             b = False
         End If
     
+        'La referencia NO puede contener caracteres NO validos para la creacion de nombres de carpeta
+        'DE MOEMENTO reemplazamos en el nombre carpeta por " "
+'        If Me.hcoCodTipoM = "ALR" And Me.Text1(0).Text <> "" Then
+'            devuelve = ""
+'            For I = 1 To 9
+'                If I = 9 Then
+'                    Precio = """"
+'                Else
+'
+'                End If
+'
+'                If InStr(1, Text1(13).Text, Precio) > 0 Then devuelve = devuelve & " " & Precio
+'            Next
+'            If devuelve <> "" Then
+'                MsgBox "Caracteres NO validos en el campo referencia:  " & vbCrLf & devuelve, vbExclamation
+'                b = False
+'                PonerFoco Text1(13)
+'            End If
+'
+'        End If
     End If
     
     
@@ -7550,13 +8025,19 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             Screen.MousePointer = vbDefault
             
         Case 14
-            If vParamAplic.TipoPortes <> 1 Then Exit Sub
             
-                
-            BotonImprimir 45, True
+            If Modo <> 2 Then Exit Sub
+            If vUsu.Nivel > 1 Then
+                MsgBox "No tiene pemiso para realizar la operacion", vbExclamation
+            Else
+                HacerCambioTipoAlbaran
+            End If
+            'Cuando eran portes
+            'If vParamAplic.TipoPortes <> 1 Then Exit Sub
+            'BotonImprimir 45, True
             
-        Case 15: mnImprimir_Click 'Imprimir Albaran
-        Case 16: mnSalir_Click   'Salir
+        Case 16: mnImprimir_Click 'Imprimir Albaran
+        Case 17: mnSalir_Click   'Salir
             
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
             Desplazamiento (Button.index - btnPrimero)
@@ -8809,9 +9290,9 @@ Dim b As Boolean
         Toolbar1.Buttons(12).Enabled = b
         
         'Imprimir
-        Toolbar1.Buttons(15).Enabled = ((Modo = 2) And CodTipoMov <> "ALM")
+        Toolbar1.Buttons(16).Enabled = ((Modo = 2) And CodTipoMov <> "ALM")
         Me.mnImprimir.Enabled = ((Modo = 2) And CodTipoMov <> "ALM")
-        Toolbar1.Buttons(14).Enabled = Toolbar1.Buttons(15).Enabled And vParamAplic.TipoPortes = 1
+        'Toolbar1.Buttons(14).Enabled = Toolbar1.Buttons(15).Enabled And vParamAplic.TipoPortes = 1
         
         b = (Modo >= 3) Or Modo = 1
         'Buscar
@@ -9374,7 +9855,7 @@ Dim SQL As String
             If SSTab1.TabVisible(3) = True Then ActualizaBDFicha
         
         
-            CrearCarpetaComun
+            CrearCarpetaComun False, 0
         
             CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
             
@@ -10948,6 +11429,22 @@ Private Sub txtEule_R_LostFocus(index As Integer)
                 End If
             End If
         End If
+    Else
+        If index = 2 Then
+            txtEule_R(index).Text = Trim(txtEule_R(index).Text)
+            If txtEule_R(index).Text <> "" Then
+            
+                txtAnterior = txtEule_R(index).Text
+                If Not EsFechaOK(txtAnterior) Then
+                    MsgBox "Fecha incorrecta", vbExclamation
+                    txtEule_R(index).Text = ""
+                    PonerFoco txtEule_R(index)
+                Else
+                    txtEule_R(index).Text = txtAnterior
+                End If
+                txtAnterior = ""
+            End If
+        End If
     End If
         
 End Sub
@@ -11019,10 +11516,15 @@ End Sub
 
 Private Sub LimpiarFichaTecnica(SinTxts As Boolean)
 Dim N As Byte
+Dim AuxTipom As String
     
-    
-    
-    If CodTipoMov = "ALR" Then
+    AuxTipom = CodTipoMov
+    If EsHistorico Then
+        If Modo > 0 Then
+            If Data1.Recordset.EOF Then AuxTipom = Data1.Recordset!codtipom
+        End If
+    End If
+    If AuxTipom = "ALR" Then
          If Not SinTxts Then
             For N = 0 To Me.txtEule_R.Count - 1
                 txtEule_R(N).Text = ""
@@ -11039,7 +11541,7 @@ Dim N As Byte
          
          cboEulerUdR.ListIndex = -1
         
-         
+         cboRecepAgenClien.ListIndex = -1
     Else
         If Not SinTxts Then
             For N = 0 To Me.txtEuler.Count - 1
@@ -11055,10 +11557,13 @@ End Sub
 
 Private Sub BloquearFicha(Bloquea As Boolean)
 Dim N As Byte
-    
-    
+Dim AuxTipom As String
         
-        If CodTipoMov = "ALR" Then
+        AuxTipom = CodTipoMov
+        If EsHistorico Then
+            If Not Data1.Recordset.EOF Then AuxTipom = Data1.Recordset!codtipom
+        End If
+        If AuxTipom = "ALR" Then
             
                 cboEulerUdR.Enabled = Not Bloquea
                  
@@ -11075,7 +11580,7 @@ Dim N As Byte
                 Next
         
                 
-        
+                cboRecepAgenClien.Locked = Bloquea
         Else
             'cboEulerT.Enabled = Not Bloquea
             'cboEulerUd.Enabled = Not Bloquea
@@ -11113,7 +11618,9 @@ Dim N As Byte
 Dim SQL As String
     
     SQL = CamposSQlFicha()
-    SQL = "Select " & SQL & " FROM scaalb_eu WHERE numalbar = " & Text1(0).Text & " AND codtipom = " & DBSet(Text1(30).Text, "T")
+    'schalb_eu
+    SQL = "Select " & SQL & " FROM " & IIf(EsHistorico, "schalb_eu", "scaalb_eu") & " WHERE numalbar = " & Text1(0).Text & " AND codtipom = " & DBSet(Text1(30).Text, "T")
+    
         
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -11172,7 +11679,13 @@ Dim N As Byte
     
     
     'numrepar ,  RecepAgenClien,RecepPortes, DatosBomUdCaudal,DatosBomTipoRodete"
-    s = s & Abs(Me.optEule_R(1).Value) & "," & Abs(Me.optEule_R(2).Value) & ","
+    If cboRecepAgenClien.ListIndex < 0 Then
+        s = s & "NULL"
+    Else
+        s = s & cboRecepAgenClien.ListIndex
+    End If
+    's = s & Abs(Me.optEule_R(1).Value) & "," & Abs(Me.optEule_R(2).Value) & ","
+    s = s & "," & Abs(Me.optEule_R(2).Value) & ","
     
     s = s & IIf(Me.cboEulerUdR.ListIndex < 1, "null", cboEulerUdR.ListIndex) & ","
     'Rodete
@@ -11223,7 +11736,7 @@ Dim N As Byte
     BuscaEnBDFicha = ""
     
     
-    If hcoCodTipoM <> "ALR" Then
+    If hcoCodTipoM = "ALO" Or hcoCodTipoM = "ALE" Then
     
         Columnas = CamposSQlFicha()
         Columnas = Replace(Columnas, ",", "|")
@@ -11265,50 +11778,51 @@ Dim N As Byte
    Else
    
         'Albaranes de reparacion
-        Columnas = CamposSQlFichaReparacion()
-        Columnas = Replace(Columnas, ",", "|")
-    
-        For N = 0 To txtEule_R.Count - 1
+        If hcoCodTipoM = "ALR" Then
+            Columnas = CamposSQlFichaReparacion()
+            Columnas = Replace(Columnas, ",", "|")
+        
+            For N = 0 To txtEule_R.Count - 1
+                If Trim(txtEule_R(N).Text) <> "" Then
+                    SQ = RecuperaValor(Columnas, CInt(N + 1))
+                    If InStr(1, txtEule_R(N).Text, "*") > 0 Then
+                        SQ = SQ & " like " & DBSet(Replace(Me.txtEule_R(N).Text, "*", "%"), "T")
+                    Else
+                        SQ = SQ & " = " & DBSet(txtEule_R(N), "T", "S")
+                    End If
+                    BuscaEnBDFicha = BuscaEnBDFicha & " AND " & SQ
+                End If
+            Next
+        
+            For N = 0 To Me.chkEuler.Count - 1
+                If chkEuler(N).Value = 1 Then
+                    'El primero es Bombas horizontal superficie
+                    SQ = RecuperaValor(Columnas, CInt(N + 23)) & " = 1"
+                    BuscaEnBDFicha = BuscaEnBDFicha & " AND " & SQ
+                End If
+            Next
+            
+            'DatosBomTipoRodete ,DatosBomCaudal DatosBomUdCaudal
+            SQ = ""
+            For N = 4 To 7
+                If Me.optEule_R(N).Value Then SQ = "DatosBomTipoRodete =" & N
+            Next
+            If SQ <> "" Then BuscaEnBDFicha = BuscaEnBDFicha & " AND " & SQ
+            
+            'Bomba caudal
+            N = 11
             If Trim(txtEule_R(N).Text) <> "" Then
-                SQ = RecuperaValor(Columnas, CInt(N + 1))
-                If InStr(1, txtEule_R(N).Text, "*") > 0 Then
-                    SQ = SQ & " like " & DBSet(Replace(Me.txtEule_R(N).Text, "*", "%"), "T")
-                Else
-                    SQ = SQ & " = " & DBSet(txtEule_R(N), "T", "S")
-                End If
-                BuscaEnBDFicha = BuscaEnBDFicha & " AND " & SQ
+                    If InStr(1, txtEule_R(N).Text, "*") > 0 Then
+                        SQ = SQ & " like " & DBSet(Replace(Me.txtEule_R(N).Text, "*", "%"), "T")
+                    Else
+                        SQ = SQ & " = " & DBSet(txtEule_R(N), "T", "S")
+                    End If
+                    BuscaEnBDFicha = BuscaEnBDFicha & " AND " & SQ
             End If
-        Next
-    
-        For N = 0 To Me.chkEuler.Count - 1
-            If chkEuler(N).Value = 1 Then
-                'El primero es Bombas horizontal superficie
-                SQ = RecuperaValor(Columnas, CInt(N + 23)) & " = 1"
-                BuscaEnBDFicha = BuscaEnBDFicha & " AND " & SQ
-            End If
-        Next
-        
-        'DatosBomTipoRodete ,DatosBomCaudal DatosBomUdCaudal
-        SQ = ""
-        For N = 4 To 7
-            If Me.optEule_R(N).Value Then SQ = "DatosBomTipoRodete =" & N
-        Next
-        If SQ <> "" Then BuscaEnBDFicha = BuscaEnBDFicha & " AND " & SQ
-        
-        'Bomba caudal
-        N = 11
-        If Trim(txtEule_R(N).Text) <> "" Then
-                If InStr(1, txtEule_R(N).Text, "*") > 0 Then
-                    SQ = SQ & " like " & DBSet(Replace(Me.txtEule_R(N).Text, "*", "%"), "T")
-                Else
-                    SQ = SQ & " = " & DBSet(txtEule_R(N), "T", "S")
-                End If
-                BuscaEnBDFicha = BuscaEnBDFicha & " AND " & SQ
-        End If
-                
-        If Me.cboEulerUdR.ListIndex >= 0 Then BuscaEnBDFicha = BuscaEnBDFicha & " AND  codtipom='ALR' AND DatosBomUdCaudal = " & cboEulerUdR.ListIndex
-        
-
+                    
+            If Me.cboEulerUdR.ListIndex >= 0 Then BuscaEnBDFicha = BuscaEnBDFicha & " AND  codtipom='ALR' AND DatosBomUdCaudal = " & cboEulerUdR.ListIndex
+            
+        End If 'ALR
         
         
    
@@ -11381,9 +11895,15 @@ Dim SQL As String
         Next
     
         'Agencia cliente
-        N = 1
-        If DBLet(miRsAux!RecepAgenClien, "N") = 0 Then N = 0
-        optEule_R(N).Value = True
+        'N = 1
+        'If DBLet(miRsAux!RecepAgenClien, "N") = 0 Then N = 0
+        'optEule_R(N).Value = True
+        
+        If IsNull(miRsAux!RecepAgenClien) Then
+            Me.cboRecepAgenClien.ListIndex = -1
+        Else
+            Me.cboRecepAgenClien.ListIndex = miRsAux!RecepAgenClien
+        End If
         
         N = 3
         If DBLet(miRsAux!RecepPortes, "N") = 1 Then N = 2
@@ -11539,7 +12059,7 @@ Dim Aux1 As Currency
     For N = 66 To 71
         Label1(N).Caption = ""
     Next
-    
+        
     If limpiar Then Exit Sub
     If Text1(0).Text = "" Then Exit Sub
     
@@ -11977,14 +12497,19 @@ eImprimirCostesEuler:
 End Sub
 
 
+'Agosto19.  Desde cambio albaran
+Private Sub CrearCarpetaComun(Modificando As Boolean, NUmeroNuevoDeAlbaranRepacacion As Long)
+Dim Referencia As String
+Dim OtraCadena As String
+Dim J As Byte
+Dim Numalbar As Long
 
-Private Sub CrearCarpetaComun()
     On Error GoTo eCrearCarpetaComun
 
     If vParamAplic.NumeroInstalacion <> vbEuler Then Exit Sub
     If EsHistorico Then Exit Sub
     
-    If hcoCodTipoM <> "ALR" Then Exit Sub
+    If NUmeroNuevoDeAlbaranRepacacion = 0 Then If hcoCodTipoM <> "ALR" Then Exit Sub
     
     If EulerParam = "" Then Exit Sub
 
@@ -11993,16 +12518,243 @@ Private Sub CrearCarpetaComun()
     If CadenaConsulta = "" Then Err.Raise 513, , "Obteniendo centro trabajo (coste) trabajador " & Text1(3).Text
     
     If CadenaConsulta = "1" Then
-        CadenaConsulta = "ZALDIVIA"
+        CadenaConsulta = "ZALDIBIA"
     Else
         CadenaConsulta = "VALENCIA"
     End If
     
-    CadenaConsulta = EulerParam & "\" & CadenaConsulta & "\REPARACIONES\" & Year(CDate(Text1(1).Text)) & "\" & Format(Text1(0).Text, "0000000")
-    If Dir(CadenaConsulta, vbDirectory) <> "" Then Err.Raise 513, , "Ya existe la carpeta: " & CadenaConsulta
         
-    MkDir CadenaConsulta
-
+    
+    
+    'cOMPRUEBO EL AÑO
+    txtAnterior = EulerParam & "\REPARACIONES\" & CadenaConsulta & "\" & Year(CDate(Text1(1).Text))
+    If Dir(txtAnterior, vbDirectory) = "" Then MkDir txtAnterior
+    
+    
+    'Reemplazamos los carteres especiales de carpeta \/:*?<>| por espacios en blanco
+    Referencia = Text1(13).Text
+    For J = 1 To Len(Referencia)
+        Referencia = Replace(Referencia, Mid("\/:*""?<>|", J, 1), " ")
+    Next
+    
+    If NUmeroNuevoDeAlbaranRepacacion = 0 Then
+        Numalbar = Val(Text1(0).Text)
+    Else
+        Numalbar = NUmeroNuevoDeAlbaranRepacacion
+    End If
+    
+    Referencia = Trim(Format(Numalbar, "0000000") & " " & Referencia)
+     
+    
+    
+    CadenaConsulta = txtAnterior & "\" & Referencia
+    If Dir(CadenaConsulta, vbDirectory) <> "" Then
+        If Not Modificando Then Err.Raise 513, , "Ya existe la carpeta: " & CadenaConsulta
+    Else
+        'NO existe vemos, si existe una carpeta que empieza por numreparacion
+        OtraCadena = txtAnterior & "\" & Format(Numalbar, "0000000") & "*"
+        OtraCadena = Dir(OtraCadena, vbDirectory)
+        If OtraCadena <> "" Then
+            OtraCadena = txtAnterior & "\" & OtraCadena
+            Name OtraCadena As CadenaConsulta
+            OtraCadena = ""
+        Else
+            MkDir CadenaConsulta
+        End If
+    End If
+    
+    'Documentacion interna
+    
+    CadenaConsulta = CadenaConsulta & "\Documentacion interna"
+    If Dir(CadenaConsulta, vbDirectory) <> "" Then
+        If Not Modificando Then Err.Raise 513, , "Ya existe la carpeta: " & CadenaConsulta
+    Else
+        MkDir CadenaConsulta
+    End If
 eCrearCarpetaComun:
-    If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
+    If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description & vbCrLf & CadenaConsulta & vbCrLf & OtraCadena
 End Sub
+
+
+
+Private Sub PonerImagenFirma()
+Dim C As String
+    On Error GoTo ePonerImagenFirma
+    
+    If CarpetaImagenesEULER = "" Then Exit Sub
+    
+    If primeravez Then
+        If Dir(CarpetaImagenesEULER, vbDirectory) = "" Then
+            MsgBox "No existe carpeta: " & CarpetaImagenesEULER, vbExclamation
+            CarpetaImagenesEULER = ""
+        
+        Else
+            C = DevuelveDesdeBD(conAri, "carpetafirmas", "eulerparam", "1", "1")
+            CarpetaImagenesEULER = CarpetaImagenesEULER & "\" & C
+            
+                
+            If Dir(CarpetaImagenesEULER, vbDirectory) = "" Then
+                MsgBox "No existe carpeta: " & CarpetaImagenesEULER, vbExclamation
+                CarpetaImagenesEULER = ""
+            End If
+        End If
+        Exit Sub
+    End If
+    
+    If Modo <> 2 Then Exit Sub
+    
+    C = CarpetaImagenesEULER & "\" & Mid(Data1.Recordset!codtipom & "   ", 1, 3) & Format(Data1.Recordset!Numalbar, "0000000") & ".jpg"
+    If Dir(C, vbArchive) = "" Then C = ""
+    Me.imgFirmaRecep.Picture = LoadPicture(C)
+    
+    
+    Exit Sub
+ePonerImagenFirma:
+    Err.Clear
+    CarpetaImagenesEULER = ""
+End Sub
+
+
+
+Private Sub HacerCambioTipoAlbaran()
+        
+        
+        
+    cadList = DevuelveDesdeBD(conAri, "IncidenciaCambiarTipo", "eulerparam", "1", "1")
+    If cadList = "" Then Exit Sub
+        
+        
+        
+    CadenaDesdeOtroForm = Data1.Recordset!codtipom
+    frmVarios.Opcion = 15
+    frmVarios.Show vbModal
+    If CadenaDesdeOtroForm = "" Then Exit Sub
+    
+    Screen.MousePointer = vbHourglass
+    conn.BeginTrans
+    
+    If Not hazCambioTipodeAlbaran Then
+        conn.RollbackTrans
+    Else
+        conn.CommitTrans
+        PosicionarDataTrasEliminar
+        
+        Screen.MousePointer = vbHourglass
+     
+        
+        cadList = "Cambio realizado.  " & cadList
+        
+        
+        MsgBox cadList, vbInformation
+    End If
+    Screen.MousePointer = vbDefault
+    
+    
+End Sub
+
+Private Function hazCambioTipodeAlbaran() As Boolean
+Dim vTipoMov As CTiposMov
+Dim Aux As String
+Dim SQL As String
+Dim A_Reparacion As Boolean
+On Error GoTo ehazCambioTipodeAlbaran
+
+    AlmacenLineas = 0
+    Set vTipoMov = New CTiposMov
+    Aux = CadenaDesdeOtroForm
+    A_Reparacion = False
+    If CadenaDesdeOtroForm = "ALR" Then
+        
+        Aux = DevuelveDesdeBD(conAri, "codalmac", "straba", "codtraba", Text1(3).Text)
+        If Aux = "10" Then
+            Aux = "CAR"
+        Else
+            Aux = "ALR"
+        End If
+        A_Reparacion = True
+    End If
+    If Not vTipoMov.Leer(Aux) Then Err.Raise 513, , "Error leyendo tipo movimiento: " & Aux
+    Aux = CadenaDesdeOtroForm
+    'Fecha elim y codinicidencia eliminar
+    SQL = PonerTrabajadorConectado("")
+    If SQL = "" Then Err.Raise 513, , "Imposible obtener trabajador conectado"
+    cadList = DBSet(Now, "F") & " as fechaelim, " & SQL & " as trabaelim ,'" & cadList & "' as codinicid"
+    
+    'Lo pasamos a HISTORICO
+    SQL = ObtenerWhereCP(False)
+    If Not ActualizarElTraspasoSinBorrar(txtAnterior, SQL, CodTipoMov, cadList) Then Err.Raise 513, , txtAnterior
+    
+    
+    'UPDATES y ELMINAR scaalb eu y slialb_eu
+    txtAnterior = "Eliminando datos EULER"
+    cadList = Replace(SQL, "scaalb", "slialb_eu")
+    cadList = "DELETE FROM slialb_eu WHERE " & cadList
+    conn.Execute cadList
+    
+    cadList = Replace(SQL, "scaalb", "scaalb_eu")
+    cadList = "DELETE FROM scaalb_eu WHERE " & cadList
+    conn.Execute cadList
+    
+    txtAnterior = "Actualizando TIPO y numero albaran"
+    conn.Execute "SET FOREIGN_KEY_CHECKS=0"
+    AlmacenLineas = 1
+    
+    cadList = Trim("TipoAnt: " & Data1.Recordset!codtipom & Format(Data1.Recordset!Numalbar, "0000000") & "     " & Text1(43).Text)
+    
+    cadList = ", observacrm = " & DBSet(cadList, "T")
+    cadList = "UPDATE scaalb set codtipom=" & DBSet(Aux, "T") & ", numalbar = " & vTipoMov.Contador + 1 & cadList
+    cadList = cadList & " WHERE " & SQL
+    conn.Execute cadList
+    
+    
+    
+    cadList = Replace(SQL, "scaalb", "slialb")
+    cadList = " WHERE " & cadList
+    cadList = "UPDATE slialb set codtipom=" & DBSet(Aux, "T") & ", numalbar = " & vTipoMov.Contador + 1 & " " & cadList
+    conn.Execute cadList
+    
+    
+    
+    txtAnterior = "Actualizando movimientos"
+    SQL = " fechamov=" & DBSet(Data1.Recordset!FechaAlb, "F") & " AND detamovi=" & DBSet(Data1.Recordset!codtipom, "T")
+    SQL = SQL & " AND document='" & Format(Data1.Recordset!Numalbar, "0000000") & "'"
+    cadList = "detamovi =" & DBSet(Aux, "T") & " , document ='" & Format(vTipoMov.Contador + 1, "0000000") & "'"
+    SQL = "UPDATE smoval SET " & cadList & " WHERE " & SQL
+    conn.Execute SQL
+    
+    
+    
+    
+    
+    
+    SQL = "Origen: " & Data1.Recordset!codtipom & " " & Format(Data1.Recordset!Numalbar, "0000000") & "    " & Format(Data1.Recordset!FechaAlb, "dd/mm/yyyy") & vbCrLf
+    SQL = SQL & "Destino: " & Aux & " " & Format(vTipoMov.Contador + 1, "0000000")
+    cadList = "Albaran creado: " & Aux & Format(vTipoMov.Contador + 1, "0000000")
+    Set LOG = New cLOG
+    LOG.Insertar 38, vUsu, SQL
+    Set LOG = Nothing
+        
+    
+    
+    vTipoMov.IncrementarContador vTipoMov.TipoMovimiento
+    
+    
+    
+    Espera 0.5
+    If A_Reparacion Then
+        If EulerParam = "" Then EulerParam = DevuelveDesdeBD(conAri, "pathDocs", "eulerparam", "1", "1")
+        CrearCarpetaComun False, vTipoMov.Contador + 1
+        
+    End If
+        
+    
+    hazCambioTipodeAlbaran = True
+    
+ehazCambioTipodeAlbaran:
+    If Err.Number <> 0 Then MuestraError Err.Number, txtAnterior, Err.Description
+    Set vTipoMov = Nothing
+    If AlmacenLineas = 1 Then ejecutar "SET FOREIGN_KEY_CHECKS=1", False
+    AlmacenLineas = 0
+    txtAnterior = ""
+    If hcoCodTipoM <> "ALR" Then EulerParam = ""
+End Function

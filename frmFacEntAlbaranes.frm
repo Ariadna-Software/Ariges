@@ -389,58 +389,58 @@ Begin VB.Form frmFacEntAlbaranes2
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbaranes.frx":0065
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text2(1)"
-      Tab(1).Control(1)=   "Text1(44)"
-      Tab(1).Control(2)=   "Text2(43)"
-      Tab(1).Control(3)=   "Text1(43)"
-      Tab(1).Control(4)=   "FrameFacRec"
-      Tab(1).Control(5)=   "chkDocArchi"
-      Tab(1).Control(6)=   "Text1(41)"
-      Tab(1).Control(7)=   "Text1(39)"
-      Tab(1).Control(8)=   "FrameHco"
-      Tab(1).Control(9)=   "Text1(29)"
-      Tab(1).Control(10)=   "Text2(29)"
-      Tab(1).Control(11)=   "Text1(28)"
-      Tab(1).Control(12)=   "Text2(28)"
-      Tab(1).Control(13)=   "Text1(27)"
-      Tab(1).Control(14)=   "Text2(27)"
-      Tab(1).Control(15)=   "Text1(2)"
-      Tab(1).Control(16)=   "Text1(25)"
-      Tab(1).Control(17)=   "Text1(26)"
-      Tab(1).Control(18)=   "Text1(24)"
-      Tab(1).Control(19)=   "Text1(23)"
-      Tab(1).Control(20)=   "Text1(22)"
-      Tab(1).Control(21)=   "Text1(21)"
-      Tab(1).Control(22)=   "Text1(20)"
-      Tab(1).Control(23)=   "Text1(19)"
-      Tab(1).Control(24)=   "Text1(18)"
-      Tab(1).Control(25)=   "Text1(38)"
-      Tab(1).Control(26)=   "chkImpreso"
-      Tab(1).Control(27)=   "Label1(63)"
-      Tab(1).Control(28)=   "Label1(55)"
-      Tab(1).Control(29)=   "Label1(54)"
-      Tab(1).Control(30)=   "imgBuscar(13)"
-      Tab(1).Control(31)=   "imgBuscar(9)"
-      Tab(1).Control(32)=   "Shape1"
-      Tab(1).Control(33)=   "imgFecha(40)"
-      Tab(1).Control(34)=   "Label1(52)"
-      Tab(1).Control(35)=   "Label1(24)"
-      Tab(1).Control(36)=   "Label1(23)"
-      Tab(1).Control(37)=   "imgBuscar(8)"
-      Tab(1).Control(38)=   "Label1(9)"
-      Tab(1).Control(39)=   "imgBuscar(7)"
-      Tab(1).Control(40)=   "Label1(12)"
-      Tab(1).Control(41)=   "Label1(11)"
-      Tab(1).Control(42)=   "Label1(10)"
-      Tab(1).Control(43)=   "Label1(5)"
-      Tab(1).Control(44)=   "Label1(3)"
-      Tab(1).Control(45)=   "Label1(45)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(10)"
+      Tab(1).Control(4)=   "Label1(11)"
+      Tab(1).Control(5)=   "Label1(12)"
+      Tab(1).Control(6)=   "imgBuscar(7)"
+      Tab(1).Control(7)=   "Label1(9)"
+      Tab(1).Control(8)=   "imgBuscar(8)"
+      Tab(1).Control(9)=   "Label1(23)"
+      Tab(1).Control(10)=   "Label1(24)"
+      Tab(1).Control(11)=   "Label1(52)"
+      Tab(1).Control(12)=   "imgFecha(40)"
+      Tab(1).Control(13)=   "Shape1"
+      Tab(1).Control(14)=   "imgBuscar(9)"
+      Tab(1).Control(15)=   "imgBuscar(13)"
+      Tab(1).Control(16)=   "Label1(54)"
+      Tab(1).Control(17)=   "Label1(55)"
+      Tab(1).Control(18)=   "Label1(63)"
+      Tab(1).Control(19)=   "chkImpreso"
+      Tab(1).Control(20)=   "Text1(38)"
+      Tab(1).Control(21)=   "Text1(18)"
+      Tab(1).Control(22)=   "Text1(19)"
+      Tab(1).Control(23)=   "Text1(20)"
+      Tab(1).Control(24)=   "Text1(21)"
+      Tab(1).Control(25)=   "Text1(22)"
+      Tab(1).Control(26)=   "Text1(23)"
+      Tab(1).Control(27)=   "Text1(24)"
+      Tab(1).Control(28)=   "Text1(26)"
+      Tab(1).Control(29)=   "Text1(25)"
+      Tab(1).Control(30)=   "Text1(2)"
+      Tab(1).Control(31)=   "Text2(27)"
+      Tab(1).Control(32)=   "Text1(27)"
+      Tab(1).Control(33)=   "Text2(28)"
+      Tab(1).Control(34)=   "Text1(28)"
+      Tab(1).Control(35)=   "Text2(29)"
+      Tab(1).Control(36)=   "Text1(29)"
+      Tab(1).Control(37)=   "FrameHco"
+      Tab(1).Control(38)=   "Text1(39)"
+      Tab(1).Control(39)=   "Text1(41)"
+      Tab(1).Control(40)=   "chkDocArchi"
+      Tab(1).Control(41)=   "FrameFacRec"
+      Tab(1).Control(42)=   "Text1(43)"
+      Tab(1).Control(43)=   "Text2(43)"
+      Tab(1).Control(44)=   "Text1(44)"
+      Tab(1).Control(45)=   "Text2(1)"
       Tab(1).ControlCount=   46
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranes.frx":0081
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "FrameCampos"
-      Tab(2).Control(1)=   "FrameManipulador"
+      Tab(2).Control(0)=   "FrameManipulador"
+      Tab(2).Control(1)=   "FrameCampos"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Carta de portes"
       TabPicture(3)   =   "frmFacEntAlbaranes.frx":009D
@@ -3181,23 +3181,23 @@ End Sub
 
 
 Private Function ModificarCabAlbaran() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 
     On Error GoTo EModificaAlb
     conn.BeginTrans
     
     'Si es cliente de varios actualizar datos cliente en tabla:sclvar
-    B = ActualizarClienteVarios(Text1(4).Text, Text1(6).Text)
+    b = ActualizarClienteVarios(Text1(4).Text, Text1(6).Text)
     
-    If B Then
-        B = ModificaDesdeFormulario(Me, 1)
-        If B Then
-            SQL = "UPDATE scaalb SET nomdirec=" & DBSet(Text2(12).Text, "T") & " WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!NumAlbar
+    If b Then
+        b = ModificaDesdeFormulario(Me, 1)
+        If b Then
+            SQL = "UPDATE scaalb SET nomdirec=" & DBSet(Text2(12).Text, "T") & " WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!Numalbar
             conn.Execute SQL
         End If
 
-        If B Then
+        If b Then
             'comprobar si se ha cambiado el cliente
             'o si se ha cambiado la fecha del albaran
             'If (CInt(Me.Data1.Recordset!CodClien) <> CInt(Text1(4).Text)) Or (CDate(Data1.Recordset!FechaAlb) <> CDate(Text1(1).Text)) Then
@@ -3208,7 +3208,7 @@ Dim SQL As String
                 SQL = "UPDATE sserie SET codclien=" & DBSet(Text1(4).Text, "N") & ","
                 SQL = SQL & " fechavta=" & DBSet(Text1(1).Text, "F")
                 SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
-                SQL = SQL & " WHERE codtipom='" & CodTipoMov & "'" & " AND numalbar=" & Data1.Recordset!NumAlbar & " and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
+                SQL = SQL & " WHERE codtipom='" & CodTipoMov & "'" & " AND numalbar=" & Data1.Recordset!Numalbar & " and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
                 conn.Execute SQL
                 
                 'Modificar el cliente en la smoval
@@ -3259,7 +3259,7 @@ Dim SQL As String
                         BuscaChekc = "U"
                        
                     Else
-                        SQL = "UPDATE scaalb SET puntos=0 WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!NumAlbar
+                        SQL = "UPDATE scaalb SET puntos=0 WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!Numalbar
                         conn.Execute SQL
                         BuscaChekc = "D"
                         Text2(1).Text = ""
@@ -3311,13 +3311,13 @@ Dim SQL As String
     
     
 EModificaAlb:
-    If Err.Number <> 0 Then B = False
-    If B Then
+    If Err.Number <> 0 Then b = False
+    If b Then
         conn.CommitTrans
     Else
         conn.RollbackTrans
     End If
-    ModificarCabAlbaran = B
+    ModificarCabAlbaran = b
     If Err.Number <> 0 Then MuestraError Err.Number, "Modificar cabecera Albaran.", Err.Description
 End Function
 
@@ -3325,7 +3325,7 @@ End Function
 
 
 Private Sub cmdAux_Click(index As Integer)
-Dim B As Boolean
+Dim b As Boolean
 
     Select Case index
         Case 0 'Busqueda de Cod. Almacen
@@ -3335,7 +3335,7 @@ Dim B As Boolean
             Set frmAlm = Nothing
             
         Case 1 'Busqueda de Cod. Artic
-            B = True
+            b = True
             If CodTipoMov = "ART" Then
                 If MsgBox("¿Desea traer líneas de la factura que va a rectificar?", vbQuestion + vbYesNo) = vbYes Then
                 
@@ -3345,7 +3345,7 @@ Dim B As Boolean
                     If Text1(36).Text = "" Then
                         MsgBox "No se ha encotrado la factura a la que rectifica", vbExclamation
                     Else
-                        B = False
+                        b = False
                         Set frmMen = New frmMensajes
                         frmMen.cadWhere = " codtipom=" & DBSet(Text1(37).Text, "T") & " and numfactu=" & Text1(36).Text & " and fecfactu=" & DBSet(Text1(35).Text, "F")
                         frmMen.OpcionMensaje = 11 'Lineas Factura a Rectificar
@@ -3358,7 +3358,7 @@ Dim B As Boolean
             End If
             
             
-            If B Then
+            If b Then
                 Set FrmArt = New frmAlmArticu2
                 'FrmArt.DatosADevolverBusqueda3 = "@1@" 'Poner en Modo busqueda
                 FrmArt.DesdeTPV = False
@@ -3478,6 +3478,9 @@ Dim TxtMotivoFra As String 'AMESA
         PonerModo 3
         
         If Not RS.EOF Then
+        
+            Text1(1).Text = Format(Now, "dd/mm/yyyy")  'Julio 19
+        
             Text1(4).Text = RS!codClien
             FormateaCampo Text1(4)
             Text1(5).Text = RS!NomClien
@@ -3904,7 +3907,7 @@ Dim NumAlbElim As Long
         If vUsu.Nivel > 0 Then
             
             cad = "slialb.codartic=sartic.codartic and artvario=1 AND codtipom = '" & Data1.Recordset!codtipom & "' AND numalbar "
-            cad = DevuelveDesdeBD(conAri, "count(*)", "slialb,sartic", cad, CStr(Data1.Recordset!NumAlbar))
+            cad = DevuelveDesdeBD(conAri, "count(*)", "slialb,sartic", cad, CStr(Data1.Recordset!Numalbar))
             If Val(cad) > 0 Then
                 MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
                 Exit Sub
@@ -4075,7 +4078,7 @@ Private Sub cmdMtoCampos_Click(index As Integer)
                 If MsgBox(cadList, vbQuestion + vbYesNo) = vbYes Then
                     'El tag tiene codcampo
                     cadList = "DELETE FROM slialbcampos WHERE  codtipom = " & DBSet(Data1.Recordset!codtipom, "T")
-                    cadList = cadList & " AND numalbar = " & Data1.Recordset!NumAlbar
+                    cadList = cadList & " AND numalbar = " & Data1.Recordset!Numalbar
                     cadList = cadList & " AND codcampo  = " & CStr(Val(Me.ListView1.SelectedItem.Text))
                     conn.Execute cadList
                     
@@ -4159,7 +4162,7 @@ Dim Aux As String
                         cad = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", CStr(Data1.Recordset!codClien))
                         'NUEVA LINEA
                         
-                        cad = " VALUES (" & Data1.Recordset!codClien & "," & Val(cad) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!NumAlbar
+                        cad = " VALUES (" & Data1.Recordset!codClien & "," & Val(cad) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!Numalbar
                         
                         cad = "INSERT INTO smovalpuntos(codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov)" & cad
                         cad = cad & " ," & DBSet(Data1.Recordset!FechaAlb, "F") & ",0," & DBSet(Puntos, "N") & ",now())"
@@ -4428,15 +4431,15 @@ Private Sub Form_Load()
     End If
     
     
-    Dim B As Boolean
-    B = False
+    Dim b As Boolean
+    b = False
     If vParamAplic.NumeroInstalacion = 3 Or vParamAplic.NumeroInstalacion = 2 Then
-        B = True
+        b = True
     Else
-        If hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> "" Then B = True
+        If hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> "" Then b = True
     End If
     
-    If B Then
+    If b Then
     
     Else
         Text1(13).Width = 4125
@@ -5570,32 +5573,32 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim B As Boolean
+Dim b As Boolean
 
     On Error Resume Next
 
     If Data1.Recordset.EOF Then Exit Sub
     
      'Si es un Albaran de Ticket visualizamos unos datos y sino otros
-    B = (Data1.Recordset!EsTicket = 1)
-    Me.Toolbar1.Buttons(11).Enabled = (Not B) And (Not EsHistorico)
+    b = (Data1.Recordset!EsTicket = 1)
+    Me.Toolbar1.Buttons(11).Enabled = (Not b) And (Not EsHistorico)
     
 
     If hcoCodTipoM <> "ALR" Then
         'sem. entrega pedido
-        Label1(12).visible = Not B
-        Text1(2).visible = Not B
+        Label1(12).visible = Not b
+        Text1(2).visible = Not b
         'num oferta
-        Text1(23).visible = Not B And hcoCodTipoM <> "ALR"
+        Text1(23).visible = Not b And hcoCodTipoM <> "ALR"
         'fecha oferta
-        Text1(24).visible = Not B
+        Text1(24).visible = Not b
         'nº terminal
-        Text1(38).visible = B
+        Text1(38).visible = b
         'nº venta
-        Text1(39).visible = B
+        Text1(39).visible = b
     
     
-        If B Then
+        If b Then
         'El albaran se genero a partir de un ticket
             Me.Label1(11).Caption = "Nº Ticket"
             Me.Label1(10).Caption = "Fecha Ticket"
@@ -5668,7 +5671,7 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
 Dim I As Byte, NumReg As Byte
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo EPonerModo
 
@@ -5683,10 +5686,10 @@ Dim B As Boolean
     
     'Modo 2. Hay datos y estamos visualizandolos
     '=========================================
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -5696,39 +5699,39 @@ Dim B As Boolean
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
         
         
         
     
-    If B Then 'modo=2
+    If b Then 'modo=2
         If Me.FrameCampos.visible Then
             'Tiene campos visibles
-            If Not Data1.Recordset.EOF Then B = True
+            If Not Data1.Recordset.EOF Then b = True
         Else
-            B = False
+            b = False
         End If
     End If
-    Me.cmdMtoCampos(0).Enabled = B
-    Me.cmdMtoCampos(1).Enabled = B
+    Me.cmdMtoCampos(0).Enabled = b
+    Me.cmdMtoCampos(1).Enabled = b
     
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
     BloquearText1 Me, Modo
     'Campo Nº Albaran y Tipo Movim. siempre bloqueado, excepto si estamos en modo de busqueda
-    B = (Modo <> 1)
-    BloquearTxt Text1(0), B, True
-    BloquearTxt Text1(30), B
+    b = (Modo <> 1)
+    BloquearTxt Text1(0), b, True
+    BloquearTxt Text1(30), b
     'Bloquear los campos de Oferta
     If Text1(23).visible Then
-        BloquearTxt Text1(23), B
-        BloquearTxt Text1(24), B
+        BloquearTxt Text1(23), b
+        BloquearTxt Text1(24), b
     End If
     'Bloquear los campos de Pedido
     For I = 25 To 27
-        BloquearTxt Text1(I), B
+        BloquearTxt Text1(I), b
     Next I
-    BloquearTxt Text1(2), B
+    BloquearTxt Text1(2), b
     
     'Si lleva lotes
     If vParamAplic.ManipuladorFitosanitarios2 Then
@@ -5744,13 +5747,13 @@ Dim B As Boolean
     
     'bloquea los datos de venta del TPV (si hay)
     If Text1(38).visible Then
-        BloquearTxt Text1(38), B
-        BloquearTxt Text1(39), B
+        BloquearTxt Text1(38), b
+        BloquearTxt Text1(39), b
     End If
     
     'Bloquea los campos de Factura (si visibles, ed, si es Rectificativa)
     For I = 35 To 37
-        BloquearTxt Text1(I), B
+        BloquearTxt Text1(I), b
     Next I
   
     '-----  Datos Totales de Factura siempre bloqueado
@@ -5770,15 +5773,15 @@ Dim B As Boolean
     Text3(56).BackColor = &HC0FFC0    'Tatal factura
     '---------------------------------------------------
     
-    B = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
-    Me.cboFacturacion.Enabled = B
-    Me.chkFacturar.Enabled = B
-    Me.chkFacturarKm.Enabled = B
-    Me.chkDocArchi.Enabled = B
-    Me.chkConTransporte.Enabled = B
-    Me.chkImpreso.Enabled = B
+    b = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
+    Me.cboFacturacion.Enabled = b
+    Me.chkFacturar.Enabled = b
+    Me.chkFacturarKm.Enabled = b
+    Me.chkDocArchi.Enabled = b
+    Me.chkConTransporte.Enabled = b
+    Me.chkImpreso.Enabled = b
     
-    chkPideCliente.Enabled = B 'Modo = 1 Or (B And vUsu.Nivel < 1)
+    chkPideCliente.Enabled = b 'Modo = 1 Or (B And vUsu.Nivel < 1)
     
     'Si no es modo lineas Boquear los TxtAux
     For I = 0 To txtAux.Count - 1
@@ -5789,15 +5792,15 @@ Dim B As Boolean
     
     
     '---------------------------------------------
-    B = (Modo <> 0 And Modo <> 2 And Modo <> 5)
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
     
-    Me.imgFecha(0).Enabled = B
-    Me.imgFecha(40).Enabled = B
+    Me.imgFecha(0).Enabled = b
+    Me.imgFecha(40).Enabled = b
     
     For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = B
+        Me.imgBuscar(I).Enabled = b
     Next I
     Me.imgBuscar(1).visible = False
     Me.imgBuscar(7).Enabled = (Modo = 1)
@@ -5835,7 +5838,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
-Dim B As Boolean
+Dim b As Boolean
 Dim devuelve As String
 
     On Error GoTo EDatosOK
@@ -5848,8 +5851,8 @@ Dim devuelve As String
     'Asignarle el valor del Combo Tipo de Movimiento al texto oculto text1(30)
 '    Text1(30).Text = ObtenerCodTipom
     
-    B = CompForm(Me, 1) 'Comprobar formato datos ok
-    If Not B Then Exit Function
+    b = CompForm(Me, 1) 'Comprobar formato datos ok
+    If Not b Then Exit Function
     
     
     
@@ -5876,10 +5879,10 @@ Dim devuelve As String
         If devuelve = "1" And Text1(13).Text = "" Then 'Referencia Obligatoria
             MsgBox "La Referencia del Cliente es Obligatoria.", vbInformation
             PonerFoco Text1(13)
-            B = False
+            b = False
         End If
     End If
-    If Not B Then Exit Function
+    If Not b Then Exit Function
     
     
     '2014 Dicimebre
@@ -6000,16 +6003,16 @@ Dim devuelve As String
     If vParamAplic.DireccionesEnvio Then
         If Text1(42).Text = "" Xor Text2(42).Text = "" Then
             MsgBox "Dirección de envio INCORRECTA", vbExclamation
-            B = False
+            b = False
             PonerFoco Text1(42)
         End If
         'Ha puesto un codenvio y parece ser que existe... LO COMPURBEO que no hay referenciales
-        If B And Text1(42).Text <> "" Then
+        If b And Text1(42).Text <> "" Then
             BuscaChekc = DevuelveDesdeBDNew(1, "sdirenvio", "nomdiren", "codclien", Text1(4).Text, "N", "", "coddiren", Text1(42).Text, "N")
             If BuscaChekc = "" Then
                 MsgBox "NO existe la dirección de envio: " & Text1(42).Text, vbExclamation
                 PonerFoco Text1(42)
-                B = False
+                b = False
             End If
             BuscaChekc = ""
         End If
@@ -6019,16 +6022,16 @@ Dim devuelve As String
     'Estamos en facturas mostrador
     'El cliente esta bloqueado (le hemos dejado pasar, pese a dar el mensaje)
     'La forma de pago solo puede ser EFECTIVO o TARJETA
-    If Not ClienteBloqueadoYFormaPagoCorrecta Then B = False
+    If Not ClienteBloqueadoYFormaPagoCorrecta Then b = False
 
-    If B Then
+    If b Then
         If Me.hcoCodTipoM = "ALM" Then
             If vParamAplic.FrasMostradorSerieDistinta Then
                 'Tiene contadores distintos.... FORMA DE PAGO deberia ser efec o tartje
                 BuscaChekc = DevuelveDesdeBDNew(1, " sforpa", "tipforpa", "codforpa", Text1(14).Text)
                 If BuscaChekc <> "0" And BuscaChekc <> "6" Then
-                    If MsgBox("La forma pago deberia ser efectivo o tarjeta.   ¿Continuar? ", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then B = False
-                    If Not B Then PonerFoco Text1(14)
+                    If MsgBox("La forma pago deberia ser efectivo o tarjeta.   ¿Continuar? ", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then b = False
+                    If Not b Then PonerFoco Text1(14)
                 End If
                 BuscaChekc = ""
             End If
@@ -6037,13 +6040,13 @@ Dim devuelve As String
     
     
     
-    If B And Modo = 3 Then
+    If b And Modo = 3 Then
         'En devoluciones NO compruebo
         If hcoCodTipoM <> "ALR" Then
             'Si esta bien y estamos insertando
             If vParamAplic.OperacionesAseguradas Then
                 'Si tiene Operaciones ASEGURADAS
-                If Not Riesgo Then B = False
+                If Not Riesgo Then b = False
             End If
         End If
     End If
@@ -6052,7 +6055,7 @@ Dim devuelve As String
     'Abril 2015.
     'El NIF no puede ser el de la empresa para albaranes normales, y solo puede ser el de la empresa para
     ' albranes interno
-    If B Then
+    If b Then
         devuelve = ""
         If hcoCodTipoM = "ALI" Then
             If Text1(6).Text <> vParam.CifEmpresa Then devuelve = "Facturas internas sólo pueden ser a NIF empresa(" & vParam.CifEmpresa & ")"
@@ -6061,13 +6064,13 @@ Dim devuelve As String
         End If
         If devuelve <> "" Then
             MsgBox devuelve, vbExclamation
-            B = False
+            b = False
         End If
     End If
     
     'Albaranes de TELEFONIA.  TIENE QUE existir el telefono, y este debe estar en
     'el campo referencia
-    If B Then
+    If b Then
         If hcoCodTipoM = "ALT" Then
             'Albaranes de telefonia introducidos a mano, la marca del cliente debe de estar,
             'Cuando se genereren autmaticamente (facturacion desde fichero) pondre un 0
@@ -6112,7 +6115,7 @@ Dim devuelve As String
             If devuelve <> "" Then
                 MsgBox devuelve, vbExclamation
                 PonerFoco Text1(13)
-                B = False
+                b = False
             End If
             
         End If
@@ -6162,7 +6165,7 @@ Dim devuelve As String
 '    End If
     
     
-    DatosOk = B
+    DatosOk = b
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
@@ -6186,7 +6189,7 @@ Private Function ClienteBloqueadoYFormaPagoCorrecta() As Boolean
 End Function
 
 Private Function DatosOkLinea(ByRef vCStock As CStock, ByRef ARticuloFitosantiario As Boolean) As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim I As Byte
 Dim Aux As String
 Dim AUx3 As String
@@ -6214,13 +6217,13 @@ Dim ComprobarPrMinimo As Boolean
     
     
         
-    B = True
+    b = True
     For I = 0 To 10
         If txtAux(I).Text = "" And I <> 5 Then
             'El campo 5= origpre puede ser nulo (en alb.repar)
             
             MsgBox "El campo " & txtAux(I).Tag & " no puede ser nulo", vbExclamation
-            B = False
+            b = False
             PonerFoco txtAux(I)
             Exit Function
         End If
@@ -6240,32 +6243,32 @@ Dim ComprobarPrMinimo As Boolean
     
     'Comprobar si se mueve mover stock (hay stock, o si no hay pero no control de stock)
     If vCStock.MueveStock Then
-        B = vCStock.MoverStock(False, False)
+        b = vCStock.MoverStock(False, False)
     End If
     
     
     
     
-    If B Then
+    If b Then
 
-
-        'Octubre 2011
-        ' Comprobar que este articulo, para este cliente, no esta en otro pedido
-        Set vArtic = New CArticulo
-        vArtic.LeerDatos txtAux(1).Text
-        If vArtic.EsDeVarios = 0 Then
-            Aux = "scaped.numpedcl=sliped.numpedcl  AND codclien = " & Text1(4).Text & "  AND sliped.codartic"
-            Aux = DevuelveDesdeBD(conAri, "concat(sliped.numpedcl,"" de fecha "",DATE_FORMAT(fecpedcl,'%d %M %Y'))", "scaped,sliped", Aux, txtAux(1).Text, "T")
-            If Aux <> "" Then
-                
-                Aux = "Artículo: " & vArtic.Codigo & "   " & vArtic.Nombre & vbCrLf & vbCrLf & "Esta en el pedido: " & Aux
-                Aux = "Cliente: " & Text1(4).Text & "   " & Text1(5).Text & vbCrLf & vbCrLf & Aux
-                Aux = Aux & vbCrLf & vbCrLf & "¿Continuar?"
-                If MsgBox(Aux, vbQuestion + vbYesNo) = vbNo Then B = False
+        If hcoCodTipoM <> "ART" Then
+            'Octubre 2011
+            ' Comprobar que este articulo, para este cliente, no esta en otro pedido
+            Set vArtic = New CArticulo
+            vArtic.LeerDatos txtAux(1).Text
+            If vArtic.EsDeVarios = 0 Then
+                Aux = "scaped.numpedcl=sliped.numpedcl  AND codclien = " & Text1(4).Text & "  AND sliped.codartic"
+                Aux = DevuelveDesdeBD(conAri, "concat(sliped.numpedcl,"" de fecha "",DATE_FORMAT(fecpedcl,'%d %M %Y'))", "scaped,sliped", Aux, txtAux(1).Text, "T")
+                If Aux <> "" Then
+                    
+                    Aux = "Artículo: " & vArtic.Codigo & "   " & vArtic.Nombre & vbCrLf & vbCrLf & "Esta en el pedido: " & Aux
+                    Aux = "Cliente: " & Text1(4).Text & "   " & Text1(5).Text & vbCrLf & vbCrLf & Aux
+                    Aux = Aux & vbCrLf & vbCrLf & "¿Continuar?"
+                    If MsgBox(Aux, vbQuestion + vbYesNo) = vbNo Then b = False
+                End If
             End If
+            'Set vArtic = Nothing  lo pongo a nothing bajo
         End If
-        'Set vArtic = Nothing  lo pongo a nothing bajo
-
     End If
     
     
@@ -6281,13 +6284,13 @@ Dim ComprobarPrMinimo As Boolean
                 'El articulo ahora debe ser el de canje. NO lo puede modificar
                 If txtAux(1).Text <> vParamAplic.PtosArticuloCanje Then
                     MsgBox "No puede reemplzar el articulo de canje en esta linea", vbExclamation
-                    B = False
+                    b = False
                 End If
             Else
                 If txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
                     'No podemos sustituir un articulo por el articulo de canje
                     MsgBox "No puede reemplzar un articulo por el de canje ", vbExclamation
-                    B = False
+                    b = False
                 End If
             End If
         Else
@@ -6300,7 +6303,7 @@ Dim ComprobarPrMinimo As Boolean
                 Aux = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text, "N", AUx3)
                 If Val(Aux) = 0 Then
                     MsgBox "El cliente no tiene marca de Puntos", vbExclamation
-                    B = False
+                    b = False
                 Else
                     If AUx3 = "" Then AUx3 = "0"
                     PuntosCliente = CCur(AUx3)
@@ -6308,19 +6311,19 @@ Dim ComprobarPrMinimo As Boolean
                     If Not EsNuevoAlbaran Then
                         If vUsu.Nivel > 0 Then
                             MsgBox "No es albaran nuevo. No puede utilizar articulo canje", vbExclamation
-                            B = False
+                            b = False
                         Else
-                            If MsgBox("No es un albaran nuevo. ¿Desea continuar con el canje?", vbQuestion + vbYesNo) <> vbYes Then B = False
+                            If MsgBox("No es un albaran nuevo. ¿Desea continuar con el canje?", vbQuestion + vbYesNo) <> vbYes Then b = False
                         End If
                     End If
                     
-                    If Not B Then Exit Function
+                    If Not b Then Exit Function
                     
                      Aux = Replace(ObtenerWhereCP(False), "scaalb", "slialb") & " AND codartic "
                      Aux = DevuelveDesdeBD(conAri, "codartic", "slialb", Aux, txtAux(1).Text, "T")
                      If Aux <> "" Then
                          MsgBox "Ya esta el articulo de canje en este albarán", vbExclamation
-                         B = False
+                         b = False
                      
                      Else
                          'De momento Veo si hay algun articulo de familias de canje
@@ -6331,7 +6334,7 @@ Dim ComprobarPrMinimo As Boolean
                             'No hacemos nada
                             MsgBox "No tiene articulos de las familias de canje", vbInformation
                             
-                            If Not Data2.Recordset.EOF Then B = False
+                            If Not Data2.Recordset.EOF Then b = False
                          Else
                            
                             C2 = Round2(CCur(AUx3) / vParamAplic.PtosEquivalencia, 2) '-> necesito como mucho estos puntos
@@ -6346,7 +6349,7 @@ Dim ComprobarPrMinimo As Boolean
                          
                             If -ImporteFormateado(txtAux(3).Text) > CCur(Aux) Then
                                 MsgBox "No puede canjear mas de " & Aux, vbExclamation
-                                B = False
+                                b = False
                             End If
                             
                             
@@ -6359,16 +6362,16 @@ Dim ComprobarPrMinimo As Boolean
         End If
     
      
-        If B Then
+        If b Then
             GrabaLogCambioPrecioDto = False
             'En el procedimiento vemos prminimo, cambio en descuentos, comision agente
             If vParamAplic.LogCambioPrecDto Then ComprobarCambioPrecioDtoyVtaBajoPrecio
    
         End If
     
-        If B And vParamAplic.NumeroInstalacion = 2 Then
+        If b And vParamAplic.NumeroInstalacion = 2 Then
             ComprobarPrMinimo = False
-            If B And vArtic.EsDeVarios = 0 And txtAux(5).Text <> "P" Then     'en herbelca. Precio minimo
+            If b And vArtic.EsDeVarios = 0 And txtAux(5).Text <> "P" Then     'en herbelca. Precio minimo
                 'Si es Precio especial
                 If txtAux(5).Text <> "E" Then
                     ComprobarPrMinimo = True
@@ -6391,11 +6394,11 @@ Dim ComprobarPrMinimo As Boolean
                         If C2 < vArtic.PrecioMinimo Then
                             C2 = C2 - vArtic.PrecioMinimo
                             If Abs(C2) > 0.01 Then
-                                B = False
+                                b = False
                                 Aux = "Precio inferior al mínimo permitido" & vbCrLf
                                 If vUsu.Nivel = 0 Then
                                     Aux = Aux & vbCrLf & vbCrLf & "¿Continuar?"
-                                    If MsgBox(Aux, vbQuestion + vbYesNoCancel) = vbYes Then B = True
+                                    If MsgBox(Aux, vbQuestion + vbYesNoCancel) = vbYes Then b = True
                                 Else
                                     MsgBox Aux, vbExclamation
                                 End If
@@ -6409,7 +6412,7 @@ Dim ComprobarPrMinimo As Boolean
     
     
         'Es correcto, y vemos la cantidad
-        If B Then
+        If b Then
             If Me.txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
                 'Los puntos son positivos de normal . El ya los restar (o sumara en los de devolucion
                 Aux = ""
@@ -6421,7 +6424,7 @@ Dim ComprobarPrMinimo As Boolean
                 End If
                 If Aux <> "" Then
                     MsgBox Aux, vbExclamation
-                    B = False
+                    b = False
                 End If
             End If
         End If
@@ -6429,7 +6432,7 @@ Dim ComprobarPrMinimo As Boolean
     End If
     
     
-    If Not B Then Exit Function
+    If Not b Then Exit Function
     
     If vParamAplic.NumeroInstalacion = 2 And hcoCodTipoM = "ALM" Then
         AUx3 = ""
@@ -6465,7 +6468,7 @@ Dim ComprobarPrMinimo As Boolean
     
     
     
-    If B Then
+    If b Then
         If hcoCodTipoM <> "FMO" Then
             'En facturas de mostrador NO lo compurbeo para acelerar el prloceso
             vCStock.ComprobarFechaInventario True, ""
@@ -6477,7 +6480,7 @@ Dim ComprobarPrMinimo As Boolean
     
     
     ' Articulos de varios en negativo NO pueden
-    If B Then
+    If b Then
         If vParamAplic.NumeroInstalacion = 2 Then
             'HERBELCA
             If vUsu.Nivel > 0 Then
@@ -6486,17 +6489,17 @@ Dim ComprobarPrMinimo As Boolean
                     Aux = DevuelveDesdeBD(conAri, "count(*)", "sartic", Aux, txtAux(1).Text, "T")
                     If Val(Aux) > 0 Then
                         MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
-                        B = False
+                        b = False
                     End If
                 
                 
-                    If B And (vUsu.AlmacenPorDefecto2 = 3 Or vUsu.AlmacenPorDefecto2 = 2) Then
+                    If b And (vUsu.AlmacenPorDefecto2 = 3 Or vUsu.AlmacenPorDefecto2 = 2) Then
                         'Los usuarios de CASTELLON NO pueden realizar abonos sobre materia no rotacion
                         Aux = "artvario=0 AND sartic.codartic"
                         Aux = DevuelveDesdeBD(conAri, "rotacion", "sartic", Aux, txtAux(1).Text, "T")
                         If Val(Aux) = 0 Then
                             MsgBox "Material de NO rotación. No se permite el abono", vbExclamation
-                            B = False
+                            b = False
                         End If
                     End If
                 End If
@@ -6505,11 +6508,11 @@ Dim ComprobarPrMinimo As Boolean
     End If
     
     
-    If B Then
+    If b Then
         'Fitosanitarios para los que llevan control
         If vParamAplic.ManipuladorFitosanitarios2 Then
             If ModificaLineas = 1 Then
-                 B = DatosLotesFitosOk(ARticuloFitosantiario)
+                 b = DatosLotesFitosOk(ARticuloFitosantiario)
             Else
                 'select * from sartic,scateg where
                 Aux = " sartic.codcateg=scateg.codcateg and ctrlotes =1 and codartic"
@@ -6527,14 +6530,14 @@ Dim ComprobarPrMinimo As Boolean
                     If Aux <> "" Then
                         Aux = "Error lotes fitosanitarios. No puede cambiar: " & vbCrLf & vbCrLf & Aux
                         MsgBox Aux, vbExclamation
-                        B = False
+                        b = False
                     End If
                 End If
             End If
         End If
     End If
     
-    DatosOkLinea = B
+    DatosOkLinea = b
     Set vArtic = Nothing
     Exit Function
     
@@ -6633,6 +6636,9 @@ Private Sub HacerToolbar(Indice As Integer)
                     End If
                     Exit Sub
                 Else
+                    
+                    If Not CuantosTiposDeIva Then Exit Sub
+                
                                     'Factura NORMAl
                     If vParamAplic.MaximoImporteEfectivo > 0 Then
                     Dim Aux As String
@@ -6740,7 +6746,7 @@ Private Function InsertarLinea(numlinea As String, DesdeRecuperaParaRectificativ
 'Inserta un registro en la tabla de lineas de Albaranes: slialb
 Dim SQL As String
 Dim vWhere As String
-Dim B As Boolean
+Dim b As Boolean
 Dim vCStock As CStock
 Dim ImpReciclado As Single
 Dim DentroTRANS As Boolean
@@ -6792,12 +6798,12 @@ Dim SqlIntercalar2 As String
     '24 Febrero 2015
     If DesdeRecuperaParaRectificativa2 Then
         
-        B = True
+        b = True
     Else
-        B = DatosOkLinea(vCStock, ArtFitosnatiarios)
+        b = DatosOkLinea(vCStock, ArtFitosnatiarios)
     End If
     
-    If B Then 'Lineas de Albaranes
+    If b Then 'Lineas de Albaranes
     
         'Inserta en tabla "slialb"
         SQL = "INSERT INTO " & NomTablaLineas
@@ -6859,7 +6865,7 @@ Dim SqlIntercalar2 As String
         'si hay control de stock para el articulo actualizar en salmac e insertar en smoval
         'en actualizar stock comprobamos si el articulo tiene control de stock
         If hcoCodTipoM <> "DEV" Then
-            B = vCStock.ActualizarStock(False, True)
+            b = vCStock.ActualizarStock(False, True)
         
             'Si ha cambiado, si tiene el parametro... todo esta ahi
             TrataCambioPrecioDto
@@ -6870,7 +6876,7 @@ Dim SqlIntercalar2 As String
             
             '#Este codigo esta copiado en ModificarLote
             SQL = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-            SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!NumAlbar & "," & numlinea
+            SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!Numalbar & "," & numlinea
             SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
             SQL = SQL & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
 
@@ -6898,7 +6904,7 @@ Dim SqlIntercalar2 As String
         End If
         
         'Si ha actualizado el sctock
-        If B Then
+        If b Then
             If ClienteConTasaReciclado And Not DesdeRecuperaParaRectificativa2 Then
                 If ArticuloConTasaReciclado(txtAux(1).Text, ImpReciclado) Then
                     'Insertamos la linea del reciclado
@@ -6924,14 +6930,14 @@ Dim SqlIntercalar2 As String
             End If  'Cliente con tasa reciclado
         End If 'ok actualiza stock
         
-        If B Then
+        If b Then
             If vParamAplic.PtosAsignar > 0 Then
                 If txtAux(1).Text = vParamAplic.PtosArticuloCanje Then
                     
                     ImpReciclado = ImporteFormateado(txtAux(3).Text)
     
                     SQL = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", CStr(Data1.Recordset!codClien))
-                    SQL = " VALUES (" & Data1.Recordset!codClien & "," & Val(SQL) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!NumAlbar
+                    SQL = " VALUES (" & Data1.Recordset!codClien & "," & Val(SQL) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!Numalbar
                     
                     SQL = "INSERT INTO smovalpuntos(codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov)" & SQL
                     SQL = SQL & " ," & DBSet(Data1.Recordset!FechaAlb, "F") & ",1," & DBSet(ImpReciclado, "N") & ",now())"
@@ -6950,7 +6956,7 @@ Dim SqlIntercalar2 As String
     
     
     
-    If B Then
+    If b Then
         conn.CommitTrans
         InsertarLinea = True
         AlmacenLineas = CInt(txtAux(0).Text)
@@ -6979,7 +6985,7 @@ Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Albaran: slialb
 Dim SQL As String
 Dim vCStock As CStock
-Dim B As Boolean
+Dim b As Boolean
 Dim ImpReciclado As Single
 Dim ArtFitosnatiarios As Boolean
 
@@ -7000,33 +7006,33 @@ Dim ArtFitosnatiarios As Boolean
         
 '        Set vCStock = New CStock
         'iniciamos la clase con los valores anteriores para deshacer lo q insertamos antes
-        B = InicializarCStock(vCStock, "E")
-        If B Then
+        b = InicializarCStock(vCStock, "E")
+        If b Then
             If hcoCodTipoM <> "DEV" Then
-                B = vCStock.DevolverStock2 'eliminamos de smoval y devolvemos stock valores anteriores
-                If B Then
+                b = vCStock.DevolverStock2 'eliminamos de smoval y devolvemos stock valores anteriores
+                If b Then
                     'si se ha modificado el articulo
                     If CStr(Data2.Recordset!codArtic) <> txtAux(1).Text Then
                         'si la linea tenia numero de serie vaciar los campos correspondien al albaran venta
                         SQL = "UPDATE sserie SET codclien=" & ValorNulo & ",codtipom=" & ValorNulo & ", fechavta=" & ValorNulo & ",numalbar=" & ValorNulo & ",numline1=" & ValorNulo
                         SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
                         SQL = SQL & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and codtipom='" & CodTipoMov & "' and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
-                        SQL = SQL & " AND numalbar=" & Data1.Recordset!NumAlbar & " AND numline1=" & Data2.Recordset!numlinea
+                        SQL = SQL & " AND numalbar=" & Data1.Recordset!Numalbar & " AND numline1=" & Data2.Recordset!numlinea
                         conn.Execute SQL
                     End If
                 End If
                 'ahora leemos los valores nuevos
-                If B Then B = InicializarCStock(vCStock, "S")
+                If b Then b = InicializarCStock(vCStock, "S")
                 'insertamos en smoval y actualizamos stock a los valores nuevos
                 vCStock.cantidad = CSng(ComprobarCero(txtAux(3).Text))
-                If B Then B = vCStock.ActualizarStock(False, True)
+                If b Then b = vCStock.ActualizarStock(False, True)
                 
             Else
-                B = True
+                b = True
             End If
     
             'actualizar la linea de Albaran
-            If B Then
+            If b Then
                 SQL = "UPDATE " & NomTablaLineas & " Set codalmac = " & txtAux(0).Text & ", codartic=" & DBSet(txtAux(1).Text, "T") & ", "
                 SQL = SQL & "nomartic=" & DBSet(txtAux(2).Text, "T") & ", ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
                 SQL = SQL & "cantidad= " & DBSet(txtAux(3).Text, "N") & ", numbultos=" & DBSet(txtAux(10).Text, "N") & ","
@@ -7114,9 +7120,9 @@ Dim ArtFitosnatiarios As Boolean
 EModificarLinea:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Modificar Lineas Albaran" & vbCrLf & Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         ModificarLinea = True
         
@@ -7127,16 +7133,16 @@ EModificarLinea:
 End Function
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
+Private Sub PonerBotonCabecera(b As Boolean)
 'Pone el boton de Regresar a la Cabecera si pasamos a MAntenimiento de Lineas
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
     
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    Me.cmdRegresar.visible = B
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
-    If B Then
+    If b Then
         Me.cmdRegresar.Cancel = True
         Me.lblIndicador.Caption = "Líneas " & TituloLinea
         PonerFocoBtn Me.cmdRegresar
@@ -7152,20 +7158,20 @@ End Sub
 
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
     
     On Error GoTo ECargaGrid
 
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral vDataGrid, vData, SQL, primeravez
     
     CargaGrid2 vDataGrid, vData
     
-    B = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
-    vDataGrid.Enabled = Not B
+    b = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
+    vDataGrid.Enabled = Not b
     vDataGrid.ScrollBars = dbgAutomatic
     primeravez = False
     Exit Sub
@@ -7502,7 +7508,7 @@ Private Sub TxtAux_Change(index As Integer)
     End If
 End Sub
 
-Private Sub txtaux_GotFocus(index As Integer)
+Private Sub txtAux_GotFocus(index As Integer)
 Dim cadkey As Integer
 
     cadkey = ObtenerCadKey(kCampo, index)
@@ -7516,7 +7522,7 @@ Dim cadkey As Integer
     End If
 End Sub
 
-Private Sub txtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     If index = 0 And KeyCode = 38 Then Exit Sub 'campo almacen y flecha arriba
     
@@ -7562,7 +7568,7 @@ Private Sub AccionesF2(index As Integer)
     End If
 End Sub
 
-Private Sub txtaux_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -7575,7 +7581,7 @@ Dim NumCajas As Integer, RestoUnid As Integer
 Dim OrigP As String 'De donde viene el precio
 Dim cantidad As String
 Dim vCStock As CStock
-Dim B As Boolean
+Dim b As Boolean
 Dim okArticulo As Boolean
 Dim DtoPermitido As Boolean
 Dim AbrirDevoluciones As Boolean
@@ -7644,9 +7650,9 @@ Dim PtosAuxiliar As Currency
                         Me.txtAux(9).Text = ""
                     End If
                 End If
-                B = (Me.ActiveControl.Name = "txtAux")
-                If B Then B = (Me.ActiveControl.index = 0)
-                If Not B Then
+                b = (Me.ActiveControl.Name = "txtAux")
+                If b Then b = (Me.ActiveControl.index = 0)
+                If Not b Then
                     If txtAux(2).Locked Then
                         If StatusArticMayorCero Then PonerFoco txtAux(3)
                     End If
@@ -7762,8 +7768,8 @@ Dim PtosAuxiliar As Currency
                         Else
                             'Es un albaran. Solo HERBELCA demomento
                             devuelve = "codtipom = " & DBSet(miRsAux!codtipom, "T") & " AND numalbar"
-                            devuelve = DevuelveDesdeBD(conAri, "fechaalb", "scaalb", devuelve, miRsAux!NumAlbar, "N", TieneDescuentos)
-                            devuelve = "Rectifica al albarán: " & miRsAux!codtipom & Format(miRsAux!NumAlbar, "000000") & " de " & Format(devuelve, "dd/mm/yyyy")
+                            devuelve = DevuelveDesdeBD(conAri, "fechaalb", "scaalb", devuelve, miRsAux!Numalbar, "N", TieneDescuentos)
+                            devuelve = "Rectifica al albarán: " & miRsAux!codtipom & Format(miRsAux!Numalbar, "000000") & " de " & Format(devuelve, "dd/mm/yyyy")
                         End If
                         Text2(16).Text = devuelve
                         If TieneDescuentos = "" Then TieneDescuentos = "0|0|"
@@ -7804,7 +7810,7 @@ Dim PtosAuxiliar As Currency
                                 
                                 'Siginifica que tiene articvulos CABEL
                                 If CCur(cantidad) > 0 Then
-                                    'Tiene cable. Vamos a ver cuantos puntos necesita como maximo para el importe de este albaran
+                                    'Tiene cabel. Vamos a ver cuantos puntos necesita como maximo para el importe de este albaran
                                     PtosAuxiliar = Round2(CCur(AUx3) / vParamAplic.PtosEquivalencia, 2) '-> necesito como mucho estos puntos
                                     If PtosAuxiliar > devuelve Then
                                         txtAux(3).Text = Format(-1 * CCur(devuelve), FormatoCantidad)
@@ -7863,7 +7869,7 @@ Dim PtosAuxiliar As Currency
                   End If
                 End If
                 
-                B = False
+                b = False
                 If Modo = 5 Then 'Modo lineas
                     'Comprobar si el articulo se vende por cajas antes de entrar a la función
                     devuelve = DevuelveDesdeBDNew(conAri, "sartic", "unicajas", "codartic", txtAux(1).Text, "T")
@@ -7874,13 +7880,13 @@ Dim PtosAuxiliar As Currency
                     End If
                     
                     If ModificaLineas = 1 Then 'insertar linea
-                        B = True
+                        b = True
                     ElseIf ModificaLineas = 2 Then 'modificar linea
-                        If Data2.Recordset!codArtic <> txtAux(1).Text Then B = True
+                        If Data2.Recordset!codArtic <> txtAux(1).Text Then b = True
                     End If
                 End If
                 
-                If B Then 'Modo Insertar en Mto Lineas
+                If b Then 'Modo Insertar en Mto Lineas
                     'Obtener el precio correspondiente y los descuentos
                     If devuelve <> "" Then
 '                        '- obtener el nº bultos: cantidad/unids.caja
@@ -7928,7 +7934,7 @@ Dim PtosAuxiliar As Currency
                             cadMen = cadMen & vbCrLf & "   Linea 2:  " & CInt(cantidad) - NumCajas * CInt(devuelve) & " uds a Precio Unidad"
                             MsgBox cadMen, vbInformation
                         Else
-                            If (txtAux(4).Text = "") Or (txtAux(4).Text <> "" And ModificaLineas = 2 And B) Then
+                            If (txtAux(4).Text = "") Or (txtAux(4).Text <> "" And ModificaLineas = 2 And b) Then
                                 txtAux(4).Text = Precio
                                 'txtAux(5).Text = OrigP 'De donde viene el precio
                             Else
@@ -8084,7 +8090,7 @@ End Sub
 
 Private Function Eliminar(NumAlbElim As Long) As Boolean
 Dim SQL As String
-Dim B As Boolean
+Dim b As Boolean
 Dim vTipoMov As CTiposMov
 Dim MenError As String
 Dim ParaElLog As String
@@ -8106,18 +8112,18 @@ Dim ParaElLog As String
     MenError = "Restableciendo stocks de almacen."
     
     If CodTipoMov = "DEV" Then
-        B = True 'No reestblecemos stock
+        b = True 'No reestblecemos stock
     Else
-        B = ReestablecerStock
+        b = ReestablecerStock
     End If
     
     
-    
-    If B Then
+    Screen.MousePointer = vbHourglass
+    If b Then
         'eliminamos de albaranes y pasamos al historico
         'Para los DEV NO
         If CodTipoMov <> "DEV" Then
-            B = ActualizarElTraspaso(MenError, SQL, CodTipoMov, cadList)
+            b = ActualizarElTraspaso(MenError, SQL, CodTipoMov, cadList)
         Else
             'Borramos de scaalb
             SQL = ObtenerWhereCP(True)
@@ -8126,21 +8132,21 @@ Dim ParaElLog As String
             
         End If
         
-        If B Then
+        If b Then
             MenError = "Actualizando numeros de serie."
             'Actualizar los posibles num. serie de ese albaran. vaciar los campos
             SQL = "UPDATE  sserie SET codclien=" & ValorNulo & ", codtipom=" & ValorNulo & ","
             SQL = SQL & " fechavta=" & ValorNulo & ", numalbar=" & ValorNulo & ", numline1=" & ValorNulo
             SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
-            SQL = SQL & " WHERE codtipom='" & CodTipoMov & "' AND numalbar=" & Data1.Recordset!NumAlbar & " AND fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
+            SQL = SQL & " WHERE codtipom='" & CodTipoMov & "' AND numalbar=" & Data1.Recordset!Numalbar & " AND fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
             conn.Execute SQL
             
             
-           
+           Screen.MousePointer = vbHourglass
             
             
             
-            If B Then
+            If b Then
                 'Actualiamos el riesgo
                 If CodTipoMov <> "DEV" Then
                     If vParamAplic.OperacionesAseguradas Then
@@ -8161,7 +8167,7 @@ Dim ParaElLog As String
     End If
         
         
-    If B Then
+    If b Then
          If vParamAplic.PtosAsignar > 0 Then
             'Sistema de puntos
             If DBLet(Data1.Recordset!Puntos, "N") <> 0 Then
@@ -8195,10 +8201,10 @@ Dim ParaElLog As String
 
 FinEliminar:
     If Err.Number <> 0 Then
-        B = False
+        b = False
         MuestraError Err.Number, MenError, Err.Description
     End If
-    If Not B Then
+    If Not b Then
         conn.RollbackTrans
         
         
@@ -8214,12 +8220,12 @@ FinEliminar:
         
         'Lo ponermos FUERA de la transaccion YA que lleva commits y demas
         Set vTipoMov = New CTiposMov
-        B = CBool(vTipoMov.DevolverContador(CodTipoMov, NumAlbElim))
+        b = CBool(vTipoMov.DevolverContador(CodTipoMov, NumAlbElim))
         Set vTipoMov = Nothing
         
         
     End If
-    Eliminar = B
+    Eliminar = b
 End Function
 
 
@@ -8332,35 +8338,35 @@ End Function
 
 Private Sub PonerModoOpcionesMenu(Modo As Byte)
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-        B = ((Modo = 2) Or (Modo = 5 And ModificaLineas = 0))
+        b = ((Modo = 2) Or (Modo = 5 And ModificaLineas = 0))
         'Insertar
-        Toolbar1.Buttons(5).Enabled = (B Or Modo = 0) And Not EsHistorico
-        Me.mnNuevo.Enabled = (B Or Modo = 0) And Not EsHistorico
+        Toolbar1.Buttons(5).Enabled = (b Or Modo = 0) And Not EsHistorico
+        Me.mnNuevo.Enabled = (b Or Modo = 0) And Not EsHistorico
         'Modificar
-        Toolbar1.Buttons(6).Enabled = B And Not EsHistorico
-        Me.mnModificar.Enabled = B And Not EsHistorico
+        Toolbar1.Buttons(6).Enabled = b And Not EsHistorico
+        Me.mnModificar.Enabled = b And Not EsHistorico
         'eliminar
-        Toolbar1.Buttons(7).Enabled = B And Not EsHistorico
-        Me.mnEliminar.Enabled = B And Not EsHistorico
+        Toolbar1.Buttons(7).Enabled = b And Not EsHistorico
+        Me.mnEliminar.Enabled = b And Not EsHistorico
             
-        B = (Modo = 2) And Not EsHistorico
+        b = (Modo = 2) And Not EsHistorico
         'Mantenimiento lineas
-        Toolbar1.Buttons(10).Enabled = B
-        Me.mnLineas.Enabled = B
+        Toolbar1.Buttons(10).Enabled = b
+        Me.mnLineas.Enabled = b
         
         'Nº Series
-        Toolbar1.Buttons(11).Enabled = B And Not EsHistorico
+        Toolbar1.Buttons(11).Enabled = b And Not EsHistorico
         
         'Generar Factura
         'DAVID###
         'Antes:
         'Toolbar1.Buttons(12).Enabled = b And (CodTipoMov = "ALM" Or CodTipoMov = "ART")
         'Ahora.  Cualquier tipo se puede generar la factura
-        Toolbar1.Buttons(12).Enabled = B
-        Toolbar1.Buttons(13).Enabled = B
-        If Toolbar1.Buttons(14).Style = tbrDefault Then Toolbar1.Buttons(14).Enabled = B
+        Toolbar1.Buttons(12).Enabled = b
+        Toolbar1.Buttons(13).Enabled = b
+        If Toolbar1.Buttons(14).Style = tbrDefault Then Toolbar1.Buttons(14).Enabled = b
         
         
         'Imprimir
@@ -8369,25 +8375,25 @@ Dim B As Boolean
         If vParamAplic.TipoPortes = 1 Then
             Toolbar1.Buttons(14).Enabled = Toolbar1.Buttons(15).Enabled And vParamAplic.TipoPortes = 1
         Else
-            If Toolbar1.Buttons(14).Style = tbrDefault Then Toolbar1.Buttons(14).Enabled = B
+            If Toolbar1.Buttons(14).Style = tbrDefault Then Toolbar1.Buttons(14).Enabled = b
         End If
-        B = (Modo >= 3) Or Modo = 1
+        b = (Modo >= 3) Or Modo = 1
         'Buscar
-        Toolbar1.Buttons(1).Enabled = Not B
-        Me.mnBuscar.Enabled = Not B
+        Toolbar1.Buttons(1).Enabled = Not b
+        Me.mnBuscar.Enabled = Not b
         'Ver Todos
-        Toolbar1.Buttons(2).Enabled = Not B
-        Me.mnVerTodos.Enabled = Not B
+        Toolbar1.Buttons(2).Enabled = Not b
+        Me.mnVerTodos.Enabled = Not b
         
         'Insertar intercalando
         If Modo = 5 Then
-            B = (ModificaLineas = 0)
+            b = (ModificaLineas = 0)
             Toolbar1.Buttons(11).Image = 34 '.Buttons(11).Image = 26
             Toolbar1.Buttons(11).ToolTipText = "Insertar intercalando"
             '
             Toolbar1.Buttons(13).ToolTipText = "Lotes articulo"
             Toolbar1.Buttons(13).Image = 52
-            Toolbar1.Buttons(13).Enabled = B And vParamAplic.ManipuladorFitosanitarios2
+            Toolbar1.Buttons(13).Enabled = b And vParamAplic.ManipuladorFitosanitarios2
             
             
             
@@ -8396,14 +8402,14 @@ Dim B As Boolean
             
         Else
             'b=modo=2
-            B = B And Not EsHistorico
+            b = b And Not EsHistorico
             Toolbar1.Buttons(11).Image = 33
             Toolbar1.Buttons(11).ToolTipText = "Nº de serie"
             
             Toolbar1.Buttons(13).ToolTipText = "Marcar para facturar"
             Toolbar1.Buttons(13).Image = 30
         End If
-        Toolbar1.Buttons(11).Enabled = B
+        Toolbar1.Buttons(11).Enabled = b
         
         
 End Sub
@@ -8522,7 +8528,7 @@ End Sub
 Private Function EliminarLinea() As Boolean
 Dim vCStock As CStock
 Dim SQL As String
-Dim B As Boolean
+Dim b As Boolean
 Dim ImpReciclado As Single
 
 
@@ -8548,13 +8554,13 @@ Dim ImpReciclado As Single
     conn.BeginTrans
     conn.Execute SQL 'Eliminar linea
     If hcoCodTipoM <> "DEV" Then
-        B = vCStock.DevolverStock2
+        b = vCStock.DevolverStock2
     Else
-        B = True
+        b = True
     End If
     Set vCStock = Nothing
     
-    If B Then
+    If b Then
         'Ha borrado la linea y ha devuelvto correctamente el sctock
                    'Llegado aqui, si tiene Punto verde(tasa ecologica)
                 'Y el cliente tiene tasa recliclado
@@ -8588,7 +8594,7 @@ Dim ImpReciclado As Single
         SQL = "UPDATE sserie SET codclien=" & ValorNulo & ",codtipom=" & ValorNulo & ", fechavta=" & ValorNulo & ",numalbar=" & ValorNulo & ",numline1=" & ValorNulo
         SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
         SQL = SQL & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and codtipom='" & CodTipoMov & "' and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        SQL = SQL & " AND numalbar=" & Data1.Recordset!NumAlbar & " AND numline1=" & Data2.Recordset!numlinea
+        SQL = SQL & " AND numalbar=" & Data1.Recordset!Numalbar & " AND numline1=" & Data2.Recordset!numlinea
         conn.Execute SQL
     End If
     
@@ -8636,9 +8642,9 @@ Dim ImpReciclado As Single
 EEliminarLinea:
      If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar Linea Albaran " & vbCrLf & Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
         EliminarLinea = True
         
@@ -8662,7 +8668,7 @@ Private Sub ReestablecerLotesArticulo(linea As Integer)
         End If
         If Trim(BuscaChekc) <> "" Then
             Set miRsAux = New ADODB.Recordset
-            BuscaChekc = "Select * from slialblotes WHERE codtipom= '" & Data1.Recordset!codtipom & "' AND numalbar = " & Data1.Recordset!NumAlbar
+            BuscaChekc = "Select * from slialblotes WHERE codtipom= '" & Data1.Recordset!codtipom & "' AND numalbar = " & Data1.Recordset!Numalbar
             If linea >= 0 Then BuscaChekc = BuscaChekc & " AND numlinea =" & Data2.Recordset!numlinea
             miRsAux.Open BuscaChekc, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not miRsAux.EOF
@@ -8761,26 +8767,26 @@ End Function
 
 Private Function ReestablecerStock() As Boolean
 Dim vCStock As CStock
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo ERestablecer
     
     ReestablecerStock = False
-    B = True
+    b = True
     
     If Data2.Recordset.RecordCount > 0 Then
        Data2.Refresh
        Data2.Recordset.MoveFirst
     
        'Para cada linea de albaran reestablecer el stock
-       While (Not Data2.Recordset.EOF) And B
+       While (Not Data2.Recordset.EOF) And b
            Set vCStock = New CStock
            If InicializarCStock(vCStock, "E", Data2.Recordset!numlinea) Then
                 
                'Actualiza el stock en salmac y borra de smoval
-               If Not vCStock.DevolverStock2() Then B = False
+               If Not vCStock.DevolverStock2() Then b = False
            Else
-               B = False
+               b = False
            End If
            Data2.Recordset.MoveNext
            Set vCStock = Nothing
@@ -8793,8 +8799,8 @@ Dim B As Boolean
         
         
 ERestablecer:
-    If Err.Number <> 0 Then B = False
-    ReestablecerStock = B
+    If Err.Number <> 0 Then b = False
+    ReestablecerStock = b
 End Function
 
 
@@ -9275,7 +9281,7 @@ Private Sub CargarNumSeries()
 'Nº de Serie introducidos en la Tabla Temporal o actualizarlo
 Dim RStmp As ADODB.Recordset
 Dim SQL As String
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo ECargar
     
@@ -9298,17 +9304,17 @@ Dim B As Boolean
     Set RStmp = New ADODB.Recordset
     RStmp.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                 
-    B = True
-    While Not RStmp.EOF And B
-        B = InsertarNSerie(RStmp!numSerie, RStmp!codArtic, RStmp!numlinealb, DBLet(RStmp!nummante, "T"))
+    b = True
+    While Not RStmp.EOF And b
+        b = InsertarNSerie(RStmp!numSerie, RStmp!codArtic, RStmp!numlinealb, DBLet(RStmp!nummante, "T"))
         RStmp.MoveNext
     Wend
     RStmp.Close
     Set RStmp = Nothing
     
 ECargar:
-    If Err.Number <> 0 Then B = False
-    If B Then
+    If Err.Number <> 0 Then b = False
+    If b Then
         conn.CommitTrans
     Else
         conn.RollbackTrans
@@ -9321,9 +9327,9 @@ Private Function InsertarNSerie(numSerie As String, codArtic As String, numlinea
 'existen lineas con control de Nº Serie
 Dim devuelve As String
 Dim TieneMan As Boolean
-Dim NumAlbar As String
+Dim Numalbar As String
 Dim nSerie As CNumSerie
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo EInsertarNSerie
 
@@ -9360,19 +9366,19 @@ Dim B As Boolean
 
     
     'Comprobar si existe en la tabla sserie
-     NumAlbar = "numalbar" 'Nº albaran de Venta
-     devuelve = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", numSerie, "T", NumAlbar, "codartic", codArtic, "T")
+     Numalbar = "numalbar" 'Nº albaran de Venta
+     devuelve = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", numSerie, "T", Numalbar, "codartic", codArtic, "T")
      If devuelve <> "" Then 'EXISTE en tabla sserie
-        If NumAlbar = "" Then B = nSerie.ActualizarNumSerie(True)
+        If Numalbar = "" Then b = nSerie.ActualizarNumSerie(True)
      Else
-        B = nSerie.InsertarNumSerie
+        b = nSerie.InsertarNumSerie
     End If
     InsertarNSerie = True
     Set nSerie = Nothing
     
 EInsertarNSerie:
-    If Err.Number <> 0 Then B = False
-    If B Then
+    If Err.Number <> 0 Then b = False
+    If b Then
         InsertarNSerie = True
     Else
         InsertarNSerie = False
@@ -9405,7 +9411,7 @@ End Sub
 Private Sub PonerDatosCliente(codClien As String, Optional nifClien As String)
 Dim vCliente As CCliente
 Dim Observaciones As String
-Dim B As Boolean
+Dim b As Boolean
     
     
     On Error GoTo EPonerDatos
@@ -9518,17 +9524,17 @@ Dim B As Boolean
             'Comprobar si el cliente tiene cobros pendientes
             'MARZO 2014
             'Para HERBELCA, en mostrador, no comprobaremos los cobros pendientes
-            B = True
+            b = True
             If hcoCodTipoM = "ALM" Then
             
                 If vParamAplic.NumeroInstalacion = 2 Then
                 'If vParamAplic.AlmacenB > 90 Then
-                    B = False
+                    b = False
                 Else
-                    If vParamAplic.EntradaRapidaFacturasMostrador Then B = False
+                    If vParamAplic.EntradaRapidaFacturasMostrador Then b = False
                 End If
             End If
-            If B Then ComprobarCobrosCliente codClien, Text1(1).Text
+            If b Then ComprobarCobrosCliente codClien, Text1(1).Text
         End If
     Else
         LimpiarDatosCliente
@@ -9542,15 +9548,15 @@ End Sub
 
 Private Sub PonerDatosClienteVario(nifClien As String)
 Dim vCliente As CCliente
-Dim B As Boolean
+Dim b As Boolean
 Dim RN As ADODB.Recordset
 Dim Aux As String
 
     If nifClien = "" Then Exit Sub
    
     Set vCliente = New CCliente
-    B = vCliente.LeerDatosCliVario(nifClien)
-    If B Then Text1(5).Text = vCliente.Nombre         'Nom clien
+    b = vCliente.LeerDatosCliVario(nifClien)
+    If b Then Text1(5).Text = vCliente.Nombre         'Nom clien
     Text1(8).Text = vCliente.Domicilio
     Text1(9).Text = vCliente.CPostal
     Text1(10).Text = vCliente.Poblacion
@@ -9559,7 +9565,7 @@ Dim Aux As String
             
             
     'Si tiene manipulador de fitosnaitarios
-    If B Then
+    If b Then
         If vParamAplic.ManipuladorFitosanitarios2 Then
             Set RN = New ADODB.Recordset
             Aux = "Select ManipuladorNumCarnet , fcaducidad "
@@ -9650,19 +9656,19 @@ End Function
 
 Private Function ActualizarFecMovCliente() As Boolean
 Dim vCliente As CCliente
-Dim B As Boolean
+Dim b As Boolean
 
     On Error GoTo EActFecha
 
     ActualizarFecMovCliente = False
     Set vCliente = New CCliente
     vCliente.Codigo = Text1(4).Text
-    B = vCliente.ActualizaUltFecMovim(Text1(1).Text)
+    b = vCliente.ActualizaUltFecMovim(Text1(1).Text)
     Set vCliente = Nothing
     
 EActFecha:
-    If Err.Number <> 0 Then B = False
-    ActualizarFecMovCliente = B
+    If Err.Number <> 0 Then b = False
+    ActualizarFecMovCliente = b
 End Function
 
 
@@ -9948,7 +9954,7 @@ Dim Cant As Integer
 Dim cadSerie As String
 Dim nSerie As CNumSerie
 Dim devuelve As String
-Dim B As Boolean
+Dim b As Boolean
     
     'Para cada valor empipado actualizar la tabla sserie
     
@@ -9965,13 +9971,13 @@ Dim B As Boolean
         nSerie.NumAlbaran = Text1(0).Text
         nSerie.FechaVta = Text1(1).Text
         nSerie.NumLinAlb = ComprobarCero(Me.cmdAux(0).Tag)
-        B = nSerie.BorrarNumSeriesAlbVta
+        b = nSerie.BorrarNumSeriesAlbVta
         Set nSerie = Nothing
     Else
-        B = True
+        b = True
     End If
         
-    If B Then
+    If b Then
         Set nSerie = New CNumSerie
         nSerie.Articulo = txtAux(1).Text
         nSerie.Cliente = CLng(Text1(4).Text)
@@ -9989,7 +9995,7 @@ Dim B As Boolean
             cadSerie = RecuperaValor(cadSel, I + 1)
             If cadSerie <> "" Then
                 nSerie.numSerie = cadSerie
-                If nSerie.ActualizarNumSerie(True) = False And B Then B = False
+                If nSerie.ActualizarNumSerie(True) = False And b Then b = False
             End If
         Next I
         Set nSerie = Nothing
@@ -9997,14 +10003,14 @@ Dim B As Boolean
 ErrorNSerie:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Actualizar tabla Nº Series", Err.Description
-        B = False
+        b = False
     End If
-    If B Then
+    If b Then
         conn.CommitTrans
     Else
         conn.RollbackTrans
     End If
-    AsignarNumSeriesAlbVenta = B
+    AsignarNumSeriesAlbVenta = b
 End Function
 
 
@@ -10073,13 +10079,13 @@ Dim numSerie As String
 Dim codArtic As String
 Dim nSerie As CNumSerie
 Dim Grupo As String
-Dim B As Boolean
+Dim b As Boolean
     
     'Para cada valor empipado actualizar la tabla sserie
    
     On Error GoTo ErrorNSerie
     
-    B = True
+    b = True
     While cadSel <> ""
         I = InStr(1, cadSel, "·")
         If I > 0 Then
@@ -10092,7 +10098,7 @@ Dim B As Boolean
                 Set nSerie = New CNumSerie
                 nSerie.numSerie = numSerie
                 nSerie.Articulo = codArtic
-                B = B And nSerie.ActualizarNumSerie(True)
+                b = b And nSerie.ActualizarNumSerie(True)
                 Set nSerie = Nothing
             End If
         End If
@@ -10102,9 +10108,9 @@ ErrorNSerie:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Actualizar tabla Nº Series", Err.Description
         Set nSerie = Nothing
-        B = False
+        b = False
     End If
-    QuitarNumSeriesAlbVenta = B
+    QuitarNumSeriesAlbVenta = b
 End Function
 
 
@@ -10990,13 +10996,13 @@ Dim VariedadPartida As String
 
 
 
-        cadList = cadList & "(select codcampo from slialbcampos where numalbar=" & Data1.Recordset!NumAlbar
+        cadList = cadList & "(select codcampo from slialbcampos where numalbar=" & Data1.Recordset!Numalbar
         cadList = cadList & " AND "
 
 
         cadList = "codtipom = " & DBSet(Data1.Recordset!codtipom, "T")
         cadList = cadList & " AND numalbar"
-        cadList = DevuelveDesdeBD(conAri, "max(numlinea)", "slialbcampos", cadList, CStr(Data1.Recordset!NumAlbar), "N")
+        cadList = DevuelveDesdeBD(conAri, "max(numlinea)", "slialbcampos", cadList, CStr(Data1.Recordset!Numalbar), "N")
         NumRegElim = 0
         If cadList <> "" Then NumRegElim = Val(cadList)
         NumRegElim = NumRegElim + 1
@@ -11025,7 +11031,7 @@ Dim VariedadPartida As String
                 If cadList <> "" Then
 
                         '  '
-                        motivo = motivo & ", (" & Data1.Recordset!NumAlbar & ","
+                        motivo = motivo & ", (" & Data1.Recordset!Numalbar & ","
                         motivo = motivo & DBSet(Data1.Recordset!codtipom, "T") & "," & NumRegElim & "," & cadList
                         motivo = motivo & VariedadPartida & ")"
                         NumRegElim = NumRegElim + 1
@@ -11071,7 +11077,7 @@ Dim IT
     cadList = Replace(cadList, "@#", vParamAplic.Ariagro & ".")
     
     cadList = cadList & " WHERE codcampo IN "
-    cadList = cadList & "(select codcampo from slialbcampos where numalbar=" & Data1.Recordset!NumAlbar
+    cadList = cadList & "(select codcampo from slialbcampos where numalbar=" & Data1.Recordset!Numalbar
     cadList = cadList & " AND codtipom = " & DBSet(Data1.Recordset!codtipom, "T")
     cadList = cadList & ")"
     ListView1.ListItems.Clear
@@ -11324,7 +11330,7 @@ Dim CadenaInsertTmpLotes  As String
 Dim NumerloLote As String
 Dim CuantosLotesDistintos As Integer
 Dim CantidadEnTotal As Currency
-Dim B As Boolean
+Dim b As Boolean
 
     
     ArticuloConFitosantiarios = False
@@ -11334,8 +11340,8 @@ Dim B As Boolean
         DatosLotesFitosOk = True
         Exit Function
     End If
-    B = False
-    DatosLotesFitosOk = B
+    b = False
+    DatosLotesFitosOk = b
     
     
     
@@ -11451,7 +11457,7 @@ Dim B As Boolean
                 'Luego reeplazo esto por la cantidad del albaran
                 SQL = TransformaComasPuntos(CStr(ImporteFormateado(txtAux(3).Text)))
                 CadenaInsertTmpLotes = Replace(CadenaInsertTmpLotes, ",0,'", "," & SQL & ",'")
-                B = True
+                b = True
             End If
         Else
             'Hay mas de un LOTE - Fecha entrada
@@ -11500,10 +11506,10 @@ Dim B As Boolean
                     Wend
                     miRsAux.Close
                     Set miRsAux = Nothing
-                    B = True
+                    b = True
                 End If 'Cantidad suficoente
             Else
-                B = True 'Que lanze frmasignarlotes
+                b = True 'Que lanze frmasignarlotes
             End If  'mas de un lote
         End If
     
@@ -11511,7 +11517,7 @@ Dim B As Boolean
         Screen.MousePointer = vbHourglass
         
         
-        If B Then
+        If b Then
             conn.Execute "DELETE FROM tmpnlotes where codusu =" & vUsu.Codigo
             Espera 0.3
             CadenaInsertTmpLotes = Mid(CadenaInsertTmpLotes, 2)
@@ -11564,7 +11570,7 @@ Dim CadenaOR As String
         If Not vParamAplic.ManipuladorFitosanitarios2 Then Exit Sub   'Por si acaso se ha metido aqui
         If DBLet(Data2.Recordset!numLote, "T") = "" Then Exit Sub
           
-        CadenaInsertTmpLotes = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!NumAlbar
+        CadenaInsertTmpLotes = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!Numalbar
         CadenaInsertTmpLotes = CadenaInsertTmpLotes & " AND numlinea =" & Data2.Recordset!numlinea
         CadenaInsertTmpLotes = "Select numlote,cantidad,fecentra from slialblotes  WHERE " & CadenaInsertTmpLotes & "  order by sublinea"
  
@@ -11659,14 +11665,14 @@ Dim CadenaOR As String
                         ReestablecerLotesArticulo Data2.Recordset!numlinea
                         
                         'Borramos la linea de lotes
-                        SQL = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!NumAlbar
+                        SQL = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!Numalbar
                         SQL = SQL & " AND numlinea =" & Data2.Recordset!numlinea
                         SQL = "DELETE FROM slialblotes WHERE " & SQL
                         conn.Execute SQL
                         Espera 0.4
                         
                         SQL = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-                        SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!NumAlbar & "," & Data2.Recordset!numlinea
+                        SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!Numalbar & "," & Data2.Recordset!numlinea
                         SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
                         SQL = SQL & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
             
@@ -11827,7 +11833,7 @@ Dim Aux As String
     
     
     Aux = " AND codtipom = " & DBSet(Data1.Recordset!codtipom, "T") & Aux & ")"
-    Aux = "Select * from slialB WHERE coalesce(comisionagente,0)=0 AND numalbar = " & Data1.Recordset!NumAlbar & Aux
+    Aux = "Select * from slialB WHERE coalesce(comisionagente,0)=0 AND numalbar = " & Data1.Recordset!Numalbar & Aux
         
     
     
@@ -11874,14 +11880,14 @@ Dim Cade As String
     On Error GoTo eImprimirAlbaranFirmado
     If Modo <> 2 Then Exit Sub
     If Data1.Recordset.EOF Then Exit Sub
-    Cade = "_" & Data1.Recordset!codtipom & "-" & Format(Data1.Recordset!NumAlbar, "0000000")
+    Cade = "_" & Data1.Recordset!codtipom & "-" & Format(Data1.Recordset!Numalbar, "0000000")
     Cade = vParamAplic.PathFirmasAlbaran & "\" & Format(Data1.Recordset!FechaAlb, FormatoFecha) & "\*" & Cade & "*.pdf"
     Cade = Dir(Cade, vbArchive)
     If Cade <> "" Then
         Cade = vParamAplic.PathFirmasAlbaran & "\" & Format(Data1.Recordset!FechaAlb, FormatoFecha) & "\" & Cade
         LanzaVisorMimeDocumento Me.hwnd, Cade
     Else
-        Cade = Format(Data1.Recordset!FechaAlb, FormatoFecha) & "\*" & Data1.Recordset!codtipom & "-" & Format(Data1.Recordset!NumAlbar, "0000000") & " *"
+        Cade = Format(Data1.Recordset!FechaAlb, FormatoFecha) & "\*" & Data1.Recordset!codtipom & "-" & Format(Data1.Recordset!Numalbar, "0000000") & " *"
         Cade = "No existe ninguna documento de albaran firmado. " & vbCrLf & Cade
         MsgBox Cade, vbExclamation
     End If
@@ -11897,7 +11903,7 @@ Private Function PrecioMinimoAlbaran() As Boolean
 Dim vPrecioFact As CPreciosFact
 Dim vArtic As CArticulo
 Dim RN As ADODB.Recordset
-Dim B As Boolean
+Dim b As Boolean
 Dim Aux As String
 Dim PrMinimo As Currency
 Dim ErroresPrMinimo As String
@@ -11909,7 +11915,7 @@ Dim ErroresPrMinimo As String
     vPrecioFact.CodigoClien = Text1(4).Text
     vPrecioFact.FijarTarifaActividad
     
-    Aux = "slialb.codartic=sartic.codartic and artvario=0 and origpre<>'P' and origpre<>'E'  AND codtipom = '" & Data1.Recordset!codtipom & "' AND numalbar =" & CStr(Data1.Recordset!NumAlbar)
+    Aux = "slialb.codartic=sartic.codartic and artvario=0 and origpre<>'P' and origpre<>'E'  AND codtipom = '" & Data1.Recordset!codtipom & "' AND numalbar =" & CStr(Data1.Recordset!Numalbar)
     Aux = "Select slialb.* from slialb,sartic WHERE " & Aux
     Set RN = New ADODB.Recordset
     ErroresPrMinimo = ""
@@ -11962,4 +11968,29 @@ ePrecioMinimoAlbaran:
     Set vArtic = Nothing
     Set vPrecioFact = Nothing
     Set RN = Nothing
+End Function
+
+
+
+
+
+Private Function CuantosTiposDeIva() As Boolean
+    
+    CuantosTiposDeIva = True
+    BuscaChekc = Replace(ObtenerWhereCP(False), "scaalb", "slialb")
+    BuscaChekc = "Select codigiva from slialb ,sartic where slialb.codartic =sartic.codartic and  " & BuscaChekc & " GROUP BY 1"
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open BuscaChekc, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    BuscaChekc = ""
+    While Not miRsAux.EOF
+        BuscaChekc = BuscaChekc & "X"
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+    If Len(BuscaChekc) > 3 Then
+        MsgBox "Mas de 3 IVAS en factura", vbExclamation
+        CuantosTiposDeIva = False
+    End If
+    BuscaChekc = ""
 End Function

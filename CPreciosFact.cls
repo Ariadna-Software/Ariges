@@ -480,7 +480,7 @@ Dim vCodMarca As String
     CampoDto1 = "dtoline1"
     campoDto2 = "dtoline2"
     If PorCaja Then 'Obtener Descuentos Por Caja
-        If vParamAplic.AlmacenB < 90 Then   'PARA TODOS menos para herbelca
+        If vParamAplic.NumeroInstalacion <> vbHerbelca Then  'PARA TODOS menos para herbelca
             CampoDto1 = "dtocaja1"
             campoDto2 = "dtocaja2"
         End If
@@ -547,6 +547,9 @@ On Error GoTo EObtenerPreEsp
         'Precio Actual
             If PorCaja Then
                 Precio = ComprobarCero(DBLet(RS!precioa1))
+                'Agos2019
+                If Precio = "0" Then Precio = DBLet(RS!precioac)
+                
             Else
                 Precio = DBLet(RS!precioac)
             End If
@@ -556,6 +559,8 @@ On Error GoTo EObtenerPreEsp
             'Precio Nuevo
             If PorCaja Then
                 Precio = ComprobarCero(DBLet(RS!precion1))
+                'Agos2019
+                If Precio = "0" Then Precio = DBLet(RS!precionu)
             Else
                 Precio = ComprobarCero(DBLet(RS!precionu))
             End If
@@ -620,8 +625,6 @@ Dim Precio As String
                 Precio = ComprobarCero(DBLet(RS!precion1))
                 'Cambio ENerp 2011
                 If Precio = "0" Then Precio = DBLet(RS!precionu)
-                
-                
             Else
                 Precio = ComprobarCero(DBLet(RS!precionu))
             End If
@@ -720,7 +723,7 @@ Dim vCodMarca As String
     CampoDto1 = "dtoline1"
     campoDto2 = "dtoline2"
     If PorCaja Then 'Obtener Descuentos Por Caja
-        If vParamAplic.AlmacenB < 90 Then        'Para todos menos para herbelca
+        If vParamAplic.NumeroInstalacion <> vbHerbelca Then       'Para todos menos para herbelca
             CampoDto1 = "dtocaja1"
             campoDto2 = "dtocaja2"
         End If
@@ -1024,7 +1027,7 @@ Dim CampoDto1 As String, campoDto2 As String
     CampoDto1 = "dtoline1"
     campoDto2 = "dtoline2"
     If PorCaja Then 'Obtener Descuentos Por Caja
-        If vParamAplic.NumeroInstalacion <> 2 Then       'Para todos menos para herbelca
+        If vParamAplic.NumeroInstalacion <> vbHerbelca Then       'Para todos menos para herbelca
             CampoDto1 = "dtocaja1"
             campoDto2 = "dtocaja2"
         End If

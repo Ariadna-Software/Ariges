@@ -13,6 +13,89 @@ Begin VB.Form frmVarios
    ScaleHeight     =   7125
    ScaleWidth      =   11565
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameCambioTipoAlbaran 
+      Height          =   4455
+      Left            =   3000
+      TabIndex        =   124
+      Top             =   1080
+      Visible         =   0   'False
+      Width           =   5655
+      Begin VB.CommandButton cmdCambiarTipoAlbaran 
+         Caption         =   "&Cam&biar"
+         Height          =   375
+         Left            =   2760
+         TabIndex        =   128
+         Top             =   3720
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   3
+         Left            =   4200
+         TabIndex        =   125
+         Top             =   3720
+         Width           =   1215
+      End
+      Begin MSComctlLib.ListView ListView4 
+         Height          =   2535
+         Left            =   360
+         TabIndex        =   126
+         Top             =   960
+         Width           =   5055
+         _ExtentX        =   8916
+         _ExtentY        =   4471
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   0   'False
+         HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Tahoma"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   2
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Tipo"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Descripcion"
+            Object.Width           =   6068
+         EndProperty
+      End
+      Begin VB.Label lblTitulo 
+         Caption         =   "Cambiar tipo de albarán"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   15
+         Left            =   840
+         TabIndex        =   127
+         Top             =   360
+         Width           =   4635
+      End
+   End
    Begin VB.Frame FrameFenollar 
       Height          =   2415
       Left            =   5760
@@ -1678,6 +1761,10 @@ Public Opcion As Byte
     
     ' 14.  Imprimersion albaranes FENOLLAR
     
+    
+    ' 15.  Cambiar tipo Albaran (EULER)
+    
+    
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmA As frmAlmArticu2
@@ -1828,6 +1915,35 @@ Private Sub cmdActuDtoFamMar_Click()
     lblInd(1).Refresh
     Espera 0.5
     Unload Me
+End Sub
+
+Private Sub cmdCambiarTipoAlbaran_Click()
+    cad = ""
+     ListView4.Tag = ""
+     CadenaDesdeOtroForm = ""
+    For NumRegElim = 1 To ListView4.ListItems.Count
+        If ListView4.ListItems(NumRegElim).Checked Then
+            cad = cad & ListView4.ListItems(NumRegElim).Text
+            CadenaDesdeOtroForm = ListView4.ListItems(NumRegElim).Text
+            ListView4.Tag = ListView4.ListItems(NumRegElim).Text & " - " & ListView4.ListItems(NumRegElim).SubItems(1)
+        End If
+    Next
+    If cad = "" Or Len(cad) > 3 Then
+        CadenaDesdeOtroForm = ""
+        If Len(cad) > 3 Then cad = " (y solo uno)"
+        cad = "Seleccion uno " & cad & " tipo de albaran"
+        MsgBox cad, vbExclamation
+        Exit Sub
+    End If
+    
+    cad = "Va a cambiar el tipo de albaran a: " & vbCrLf & vbCrLf & ListView4.Tag & vbCrLf & vbCrLf & "¿Continuar?"
+    If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then
+        CadenaDesdeOtroForm = ""
+        Exit Sub
+    End If
+    
+    Unload Me
+        
 End Sub
 
 Private Sub cmdCambiFecReestbFact_Click()
@@ -2266,14 +2382,14 @@ Private Sub cmdpedxZon_Click()
 Dim N As Node
 Dim I As Byte
 
-    If Tv1.Nodes.Count = 0 Then Exit Sub
+    If tv1.Nodes.Count = 0 Then Exit Sub
     'Nos recorreemos el tv1 por si a desmarcado alguno
     'Lo borraremos de la tabla tmpsliped
     lblInd(0).Caption = "Preparando datos"
     lblInd(0).Refresh
     
     I = 0
-    Set N = Tv1.Nodes(1)
+    Set N = tv1.Nodes(1)
     While Not N Is Nothing
         NumRegElim = -1
         If Not N.Checked Then
@@ -2284,7 +2400,7 @@ Dim I As Byte
         End If
         
         Set N = N.Next
-        If NumRegElim > 0 Then Tv1.Nodes.Remove NumRegElim
+        If NumRegElim > 0 Then tv1.Nodes.Remove NumRegElim
     Wend
     
     If I = 0 Then
@@ -2333,14 +2449,14 @@ End Sub
 
 Private Sub cmdZonaxAlb_Click()
 Dim N
-    If Tv1.Nodes.Count = 0 Then Exit Sub
+    If tv1.Nodes.Count = 0 Then Exit Sub
     'Nos recorreemos el tv1 por si a desmarcado alguno
     'Lo borraremos de la tabla tmpsliped
     lblInd(0).Caption = "Devuelve datos"
     lblInd(0).Refresh
     
 
-    Set N = Tv1.Nodes(1)
+    Set N = tv1.Nodes(1)
     NumRegElim = 0  'Los nodos NO chequeados
     cad = ""
     While Not N Is Nothing
@@ -2403,6 +2519,10 @@ Private Sub Form_activate()
             CadenaDesdeOtroForm = ""
         Case 13
              If vParamAplic.NumeroInstalacion = vbFenollar Then optElimFact(1).Value = True
+        
+        Case 15
+            CargaTiposALbaran
+        
         End Select
         PrimeraVez1 = 2
     End If
@@ -2534,6 +2654,10 @@ Dim IndexOpcion As Integer
         cmdImprAlbaFenoll.Default = True
         PonerFocoBtn cmdImprAlbaFenoll
         CadenaDesdeOtroForm = ""
+    Case 15
+        PonerFrameVisible FrameCambioTipoAlbaran
+        
+        
     End Select
     
     'If Opcion <> 3 Then cmdCancelar(Opcion).Cancel = True
@@ -2708,6 +2832,12 @@ Private Sub imgProv_Click(index As Integer)
 
 End Sub
   
+Private Sub ListView4_ItemCheck(ByVal Item As MSComctlLib.ListItem)
+    For NumRegElim = 1 To ListView4.ListItems.Count
+        If ListView4.ListItems(NumRegElim).Text <> Item.Text Then ListView4.ListItems(NumRegElim).Checked = False
+    Next
+End Sub
+
 Private Sub optElimFact_Click(index As Integer)
     FrameNuevaFecFac.visible = index = 0
 End Sub
@@ -2990,7 +3120,7 @@ End Sub
 
 Private Sub CargaZonas()
 Dim N
-    Tv1.Nodes.Clear
+    tv1.Nodes.Clear
     cad = "select codzona,numpedcl,nomzonas from tmpsliped,szonas  where codzona=codzonas and tmpsliped.codusu="
     cad = cad & vUsu.Codigo & " group by 1,2 ORDER BY 1,2"
     NumRegElim = 0
@@ -3001,7 +3131,7 @@ Dim N
             NumRegElim = miRsAux!CodZona
             cad = DBLet(miRsAux!nomzonas, "T")
             If cad = "" Then cad = "ERROR: " & NumRegElim
-            Set N = Tv1.Nodes.Add(, , "C" & NumRegElim, cad)
+            Set N = tv1.Nodes.Add(, , "C" & NumRegElim, cad)
             N.Checked = True
         End If
         
@@ -3020,7 +3150,7 @@ End Sub
 
 Private Sub CargaZonasAlbaranTransporte()
 Dim N
-    Tv1.Nodes.Clear
+    tv1.Nodes.Clear
     cad = "select  scaalb.codzonas,nomzonas from scaalb,szonas where scaalb.codzonas=szonas.codzonas and "
     cad = cad & CadenaDesdeOtroForm & " group by scaalb.codzonas ORDER BY scaalb.codzonas"
     NumRegElim = 0
@@ -3031,7 +3161,7 @@ Dim N
             NumRegElim = miRsAux!codzonas
             cad = DBLet(miRsAux!nomzonas, "T")
             If cad = "" Then cad = "ERROR: " & NumRegElim
-            Set N = Tv1.Nodes.Add(, , "C" & NumRegElim, cad)
+            Set N = tv1.Nodes.Add(, , "C" & NumRegElim, cad)
             N.Checked = True
         End If
         
@@ -3102,7 +3232,10 @@ Dim SQL As String
         'STOCK
         cad = Col.Item(NumRegElim)
         cad = "(" & cad & ")"
-        cad = "select codartic,sum(canstock) total from salmac where codartic IN " & cad & " GROUP BY codartic"
+        cad = "select codartic,sum(canstock) total from salmac where codartic IN " & cad
+        'Julio19 HERBLECA NO pone almacen 4 y 20
+        If vParamAplic.NumeroInstalacion = vbHerbelca Then cad = cad & " AND codalmac<>4 and codalmac<>20"
+        cad = cad & " GROUP BY codartic"
         miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             cad = "UPDATE tmpsliped set stocktot= " & TransformaComasPuntos(DBLet(miRsAux!total, "N"))
@@ -3520,3 +3653,20 @@ Private Sub txtProv_LostFocus(index As Integer)
 End Sub
 
 
+Private Sub CargaTiposALbaran()
+    Set miRsAux = New ADODB.Recordset
+    cad = "'ALV','ALR','ALO','ALE'"
+    cad = "Select * from stipom where codtipom in (" & cad & ") AND codtipom <>'" & CadenaDesdeOtroForm & "' ORDER BY 1"
+    CadenaDesdeOtroForm = ""
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    NumRegElim = 0
+    While Not miRsAux.EOF
+        NumRegElim = NumRegElim + 1
+        ListView4.ListItems.Add , , miRsAux!codtipom
+        ListView4.ListItems(NumRegElim).SubItems(1) = miRsAux!nomtipom
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+    
+End Sub

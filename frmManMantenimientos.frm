@@ -269,7 +269,7 @@ Begin VB.Form frmManMantenimientos
       Appearance      =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   20
+         NumButtons      =   25
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Buscar"
             Object.Width           =   1e-4
@@ -313,30 +313,45 @@ Begin VB.Form frmManMantenimientos
             Object.ToolTipText     =   "Componentes"
          EndProperty
          BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Acciones"
+            Object.ToolTipText     =   "Acciones mtos."
          EndProperty
          BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
+            Style           =   3
          EndProperty
          BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Imprimir hoja mantenimiento"
          EndProperty
          BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Style           =   3
          EndProperty
          BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.Visible         =   0   'False
+         EndProperty
+         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.Visible         =   0   'False
+         EndProperty
+         BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Salir"
+         EndProperty
+         BeginProperty Button20 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button21 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button22 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Primero"
             ImageIndex      =   6
          EndProperty
-         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button23 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Anterior"
             ImageIndex      =   7
          EndProperty
-         BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button24 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Siguiente"
             ImageIndex      =   8
          EndProperty
-         BeginProperty Button20 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button25 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Último"
             ImageIndex      =   9
          EndProperty
@@ -344,7 +359,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.CheckBox chkVistaPrevia 
          Caption         =   "Vista previa"
          Height          =   195
-         Left            =   8400
+         Left            =   9720
          TabIndex        =   49
          Top             =   120
          Width           =   1215
@@ -408,36 +423,59 @@ Begin VB.Form frmManMantenimientos
       _Version        =   393216
       Style           =   1
       Tabs            =   6
-      Tab             =   5
       TabsPerRow      =   6
       TabHeight       =   520
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManMantenimientos.frx":0199
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1(34)"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(15)"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "Label1(36)"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "Label1(7)"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "imgBuscar(2)"
+      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "imgBuscar(3)"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "Label1(54)"
+      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "Label1(2)"
+      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).Control(8)=   "Label1(4)"
+      Tab(0).Control(8).Enabled=   0   'False
       Tab(0).Control(9)=   "Label1(6)"
+      Tab(0).Control(9).Enabled=   0   'False
       Tab(0).Control(10)=   "Label1(9)"
+      Tab(0).Control(10).Enabled=   0   'False
       Tab(0).Control(11)=   "Frame2"
+      Tab(0).Control(11).Enabled=   0   'False
       Tab(0).Control(12)=   "Text1(4)"
+      Tab(0).Control(12).Enabled=   0   'False
       Tab(0).Control(13)=   "Text1(5)"
+      Tab(0).Control(13).Enabled=   0   'False
       Tab(0).Control(14)=   "Text2(4)"
+      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "Text2(5)"
+      Tab(0).Control(15).Enabled=   0   'False
       Tab(0).Control(16)=   "cboTipoPago"
+      Tab(0).Control(16).Enabled=   0   'False
       Tab(0).Control(17)=   "chkBaterias"
+      Tab(0).Control(17).Enabled=   0   'False
       Tab(0).Control(18)=   "Text1(6)"
+      Tab(0).Control(18).Enabled=   0   'False
       Tab(0).Control(19)=   "Text1(7)"
+      Tab(0).Control(19).Enabled=   0   'False
       Tab(0).Control(20)=   "Text1(34)"
+      Tab(0).Control(20).Enabled=   0   'False
       Tab(0).Control(21)=   "Text1(35)"
+      Tab(0).Control(21).Enabled=   0   'False
       Tab(0).Control(22)=   "Text1(36)"
+      Tab(0).Control(22).Enabled=   0   'False
       Tab(0).Control(23)=   "Text1(37)"
+      Tab(0).Control(23).Enabled=   0   'False
       Tab(0).ControlCount=   24
       TabCaption(1)   =   "Observaciones"
       TabPicture(1)   =   "frmManMantenimientos.frx":01B5
@@ -509,16 +547,23 @@ Begin VB.Form frmManMantenimientos
       TabPicture(4)   =   "frmManMantenimientos.frx":0209
       Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "Label1(10)"
+      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).Control(1)=   "ImgPDF(1)"
+      Tab(4).Control(1).Enabled=   0   'False
       Tab(4).Control(2)=   "ImgPDF(2)"
+      Tab(4).Control(2).Enabled=   0   'False
       Tab(4).Control(3)=   "ImgPDF(0)"
+      Tab(4).Control(3).Enabled=   0   'False
       Tab(4).Control(4)=   "ListView1"
+      Tab(4).Control(4).Enabled=   0   'False
       Tab(4).Control(5)=   "AcroPDF1"
+      Tab(4).Control(5).Enabled=   0   'False
       Tab(4).Control(6)=   "cmdPDF"
+      Tab(4).Control(6).Enabled=   0   'False
       Tab(4).ControlCount=   7
-      TabCaption(5)   =   "Acciones mantenimiento"
+      TabCaption(5)   =   "Acciones a realizar"
       TabPicture(5)   =   "frmManMantenimientos.frx":0225
-      Tab(5).ControlEnabled=   -1  'True
+      Tab(5).ControlEnabled=   0   'False
       Tab(5).Control(0)=   "DataGrid2"
       Tab(5).Control(0).Enabled=   0   'False
       Tab(5).Control(1)=   "TxtAux2(0)"
@@ -529,7 +574,7 @@ Begin VB.Form frmManMantenimientos
          BorderStyle     =   0  'None
          Height          =   315
          Index           =   0
-         Left            =   960
+         Left            =   -74040
          MaxLength       =   200
          TabIndex        =   145
          Tag             =   "Observaciones|T|N|||slima1|observac||N|"
@@ -558,7 +603,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   37
-         Left            =   -71520
+         Left            =   3480
          MaxLength       =   30
          TabIndex        =   8
          Tag             =   "P|T|S|||scaman|attetiqu||N|"
@@ -569,7 +614,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   36
-         Left            =   -73320
+         Left            =   1680
          MaxLength       =   60
          TabIndex        =   11
          Tag             =   "P|T|S|||scaman|concefac||N|"
@@ -580,7 +625,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   35
-         Left            =   -67920
+         Left            =   7080
          MaxLength       =   15
          TabIndex        =   13
          Tag             =   "P|T|S|||scaman|producto||N|"
@@ -591,7 +636,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.TextBox Text1 
          Height          =   315
          Index           =   34
-         Left            =   -73320
+         Left            =   1680
          MaxLength       =   35
          TabIndex        =   12
          Tag             =   "P|T|S|||scaman|persconta||N|"
@@ -990,7 +1035,7 @@ Begin VB.Form frmManMantenimientos
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   7
-         Left            =   -73800
+         Left            =   1200
          MaxLength       =   15
          TabIndex        =   5
          Tag             =   "Anticipado Sig.|N|S|0||scaman|anticip2|##,###,##0.00|N|"
@@ -1002,7 +1047,7 @@ Begin VB.Form frmManMantenimientos
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   6
-         Left            =   -73800
+         Left            =   1200
          MaxLength       =   15
          TabIndex        =   4
          Tag             =   "Anticipado Act.|N|S|0||scaman|anticip1|##,###,##0.00|N|"
@@ -1037,7 +1082,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.CheckBox chkBaterias 
          Caption         =   "Baterias"
          Height          =   255
-         Left            =   -69720
+         Left            =   5280
          TabIndex        =   7
          Tag             =   "Baterías|N|N|||scaman|baterias||N|"
          Top             =   480
@@ -1045,7 +1090,7 @@ Begin VB.Form frmManMantenimientos
       End
       Begin VB.ComboBox cboTipoPago 
          Height          =   315
-         Left            =   -71520
+         Left            =   3480
          Style           =   2  'Dropdown List
          TabIndex        =   6
          Tag             =   "Tipo de Pago|N|N|||scaman|tipopago||N|"
@@ -1056,7 +1101,7 @@ Begin VB.Form frmManMantenimientos
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   5
-         Left            =   -66840
+         Left            =   8160
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   55
@@ -1068,7 +1113,7 @@ Begin VB.Form frmManMantenimientos
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   4
-         Left            =   -66840
+         Left            =   8160
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   54
@@ -1080,7 +1125,7 @@ Begin VB.Form frmManMantenimientos
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   5
-         Left            =   -67395
+         Left            =   7605
          MaxLength       =   30
          TabIndex        =   10
          Tag             =   "Forma de Pago|N|N|0|999|scaman|codforpa|000|N|"
@@ -1092,7 +1137,7 @@ Begin VB.Form frmManMantenimientos
          Alignment       =   1  'Right Justify
          Height          =   315
          Index           =   4
-         Left            =   -67410
+         Left            =   7590
          MaxLength       =   30
          TabIndex        =   9
          Tag             =   "Tipo Contrato|T|N|||scaman|codtipco||N|"
@@ -1171,7 +1216,7 @@ Begin VB.Form frmManMantenimientos
       End
       Begin VB.Frame Frame2 
          Height          =   3195
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   106
          Top             =   2160
          Width           =   10740
@@ -1742,13 +1787,13 @@ Begin VB.Form frmManMantenimientos
       End
       Begin MSDataGridLib.DataGrid DataGrid2 
          Bindings        =   "frmManMantenimientos.frx":14D6
-         Height          =   4980
-         Left            =   240
+         Height          =   4500
+         Left            =   -74760
          TabIndex        =   144
          Top             =   600
          Width           =   10695
          _ExtentX        =   18865
-         _ExtentY        =   8784
+         _ExtentY        =   7938
          _Version        =   393216
          AllowUpdate     =   -1  'True
          AllowArrows     =   -1  'True
@@ -1821,7 +1866,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.Image ImgPDF 
          Height          =   240
          Index           =   2
-         Left            =   -73440
+         Left            =   -73680
          Picture         =   "frmManMantenimientos.frx":1EED
          ToolTipText     =   "Eliminar accion"
          Top             =   600
@@ -1834,6 +1879,7 @@ Begin VB.Form frmManMantenimientos
          Picture         =   "frmManMantenimientos.frx":28EF
          ToolTipText     =   "Modificar"
          Top             =   600
+         Visible         =   0   'False
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -1849,7 +1895,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Att ETIQ."
          Height          =   255
          Index           =   9
-         Left            =   -72360
+         Left            =   2640
          TabIndex        =   139
          Top             =   885
          Width           =   855
@@ -1858,7 +1904,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Concepto factura"
          Height          =   255
          Index           =   6
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   136
          Top             =   1320
          Width           =   1455
@@ -1867,7 +1913,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Producto"
          Height          =   255
          Index           =   4
-         Left            =   -68760
+         Left            =   6240
          TabIndex        =   135
          Top             =   1840
          Width           =   855
@@ -1876,7 +1922,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Persona contacto"
          Height          =   255
          Index           =   2
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   134
          Top             =   1800
          Width           =   1575
@@ -1903,7 +1949,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Anticipado 2"
          Height          =   255
          Index           =   54
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   105
          Top             =   840
          Width           =   975
@@ -2113,7 +2159,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   -67680
+         Left            =   7320
          ToolTipText     =   "Buscar forma de pago"
          Top             =   885
          Width           =   240
@@ -2121,7 +2167,7 @@ Begin VB.Form frmManMantenimientos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   -67680
+         Left            =   7320
          ToolTipText     =   "Buscar tipo contrato"
          Top             =   510
          Width           =   240
@@ -2130,7 +2176,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Anticipado 1"
          Height          =   255
          Index           =   7
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   58
          Top             =   495
          Width           =   975
@@ -2157,7 +2203,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Tipo Pago"
          Height          =   255
          Index           =   36
-         Left            =   -72360
+         Left            =   2640
          TabIndex        =   53
          Top             =   480
          Width           =   735
@@ -2166,7 +2212,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Forma Pago"
          Height          =   255
          Index           =   15
-         Left            =   -68640
+         Left            =   6360
          TabIndex        =   52
          Top             =   855
          Width           =   855
@@ -2175,7 +2221,7 @@ Begin VB.Form frmManMantenimientos
          Caption         =   "Tipo Contrato"
          Height          =   255
          Index           =   34
-         Left            =   -68640
+         Left            =   6360
          TabIndex        =   51
          Top             =   495
          Width           =   975
@@ -2910,7 +2956,7 @@ Private Sub Form_Load()
 
     ' ICONITOS DE LA BARRA
     btnAnyadir = 5
-    btnPrimero = 17
+    btnPrimero = 22
     With Me.Toolbar1
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 1   'Botón Buscar
@@ -2921,9 +2967,12 @@ Private Sub Form_Load()
         .Buttons(10).Image = 10 'Mto Lineas Revisiones
         .Buttons(11).Image = 38 'Mto Lineas Histórico
         .Buttons(12).Image = 34 'Componentes
-        .Buttons(13).Image = 35 'accopmes
+        .Buttons(13).Image = 35 'acciones mtos
         
-        .Buttons(14).Image = 15  'Salir
+        .Buttons(15).Image = 16 'accopmes
+        
+        
+        .Buttons(19).Image = 15  'Salir
         .Buttons(btnPrimero).Image = 6  'Primero
         .Buttons(btnPrimero + 1).Image = 7 'Anterior
         .Buttons(btnPrimero + 2).Image = 8 'Siguiente
@@ -3155,6 +3204,7 @@ End Sub
 Private Sub ImgPDF_Click(index As Integer)
 Dim cad As String
     
+    
     If Modo <> 2 Then Exit Sub
     
     If index > 0 Then
@@ -3172,11 +3222,11 @@ Dim cad As String
     If index = 2 Then
         If MsgBox("Seguro que desea eliminar el documento seleccionado?", vbQuestion + vbYesNo) = vbYes Then
             cad = ListView1.SelectedItem.SubItems(1)
-            If EliminarArhivoPDF2(CLng(Text1(0).Text), Text1(2).Text, cad) Then
-                cad = "DELETE FROM `slimanpdfs` WHERE codclien =" & Text1(0).Text
-                cad = cad & " AND nummante =" & DBSet(Text1(2).Text, "T")
-                cad = cad & " AND numlinea = " & Mid(ListView1.SelectedItem.Key, 2)
-                ejecutar cad, False
+            If EliminarArhivoPDF(CLng(Text1(0).Text), Text1(2).Text, cad) Then
+            '    cad = "DELETE FROM `slimanpdfs` WHERE codclien =" & Text1(0).Text
+            '    cad = cad & " AND nummante =" & DBSet(Text1(2).Text, "T")
+            '    cad = cad & " AND numlinea = " & Mid(ListView1.SelectedItem.Key, 2)
+            '    ejecutar cad, False
                 cargaDocumentos
             End If
         
@@ -3196,27 +3246,37 @@ Dim cad As String
                     MsgBox "No existe fichero", vbExclamation
                     
                 Else
-                    If Not ComprobarCarpetaPDFSMante(CLng(Text1(0).Text), Text1(2).Text) Then Exit Sub
-                    cad = RecuperaValor(CadenaDesdeOtroForm, 2)
+                
+                
+                    
+                    If ComprobarCarpetaPDFSMante2(CLng(Text1(0).Text), Text1(2).Text) = "" Then Exit Sub
+                    
                     Dim txtAnterior As String
+                    cad = RecuperaValor(CadenaDesdeOtroForm, 2)
                     txtAnterior = NombreArchivoEULER(cad)
-                
+                    txtAnterior = txtAnterior
+                    
                     If CopiaArhivoPDF2(Text1(0).Text, Text1(2).Text, RecuperaValor(CadenaDesdeOtroForm, 1), txtAnterior) Then
-                        cad = "nummante = " & DBSet(Text1(2).Text, "T") & " AND codclien "
-                        cad = DevuelveDesdeBD(conAri, "max(numlinea)", "slimanpdfs", cad, Text1(0).Text)
-                        If cad = "" Then cad = "0"
-                        cad = CStr(Val(cad) + 1)
-                
-                        'INSERT INTO BD
-                        TituloLinea = RecuperaValor(CadenaDesdeOtroForm, 2)
-                        If TituloLinea = "" Then TituloLinea = RecuperaValor(CadenaDesdeOtroForm, 1)
+                    
+                        'MAYO 2019. NO insertamos en BD, copiamos directamente
+                        
+                        'cad = "nummante = " & DBSet(Text1(2).Text, "T") & " AND codclien "
+                        'cad = DevuelveDesdeBD(conAri, "max(numlinea)", "slimanpdfs", cad, Text1(0).Text)
+                        'If cad = "" Then cad = "0"
+                        'cad = CStr(Val(cad) + 1)
+                        '
+                        ''INSERT INTO BD
+                        'TituloLinea = RecuperaValor(CadenaDesdeOtroForm, 2)
+                        'If TituloLinea = "" Then TituloLinea = RecuperaValor(CadenaDesdeOtroForm, 1)
+                       '
+                       '
+                       ' cad = "INSERT INTO slimanpdfs(codclien,nummante,numlinea, ficheroDesc,ficheroNombre) values ( " & Text1(0).Text & "," & DBSet(Text1(2).Text, "T") & "," & cad & ","
+                       ' cad = cad & DBSet(TituloLinea, "T") & "," & DBSet(txtAnterior & ".pdf", "T") & ")"
+                       ' ejecutar cad, False
+                        
+                       ' TituloLinea = ""
                         
                         
-                        cad = "INSERT INTO slimanpdfs(codclien,nummante,numlinea, ficheroDesc,ficheroNombre) values ( " & Text1(0).Text & "," & DBSet(Text1(2).Text, "T") & "," & cad & ","
-                        cad = cad & DBSet(TituloLinea, "T") & "," & DBSet(txtAnterior & ".pdf", "T") & ")"
-                        ejecutar cad, False
-                        
-                        TituloLinea = ""
                         cargaDocumentos
                     End If
                 
@@ -3237,14 +3297,40 @@ Dim cad As String
     cad = ""
     If ListView1.ListItems.Count > 0 Then
         If Not ListView1.SelectedItem Is Nothing Then
-            cad = EulerPathMante(CLng(Text1(0).Text), Text1(2).Text, ListView1.SelectedItem.SubItems(1))
-            'Caption = Cad
+            If UCase(Right(ListView1.SelectedItem.SubItems(1), 3)) = "PDF" Then
+                cad = ListView1.SelectedItem.ListSubItems(1).Tag
+            End If
         End If
     End If
+    
+    
+    
     CargaArchivo cad
     
     If cad <> "" Then cmdPDF.visible = True
     
+End Sub
+
+Private Sub ListView1_DblClick()
+Dim C As String
+    
+        
+    C = ""
+  
+    If ListView1.ListItems.Count > 0 Then
+        If Not ListView1.SelectedItem Is Nothing Then C = ListView1.SelectedItem.ListSubItems(1).Tag
+    
+    End If
+
+    
+    
+    If C <> "" Then
+        If Dir(C, vbArchive) = "" Then
+            MsgBox "No se ha encontrado el archivo" & vbCrLf & C
+        Else
+            LanzaVisorMimeDocumento Me.hwnd, C
+        End If
+    End If
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -3783,8 +3869,9 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 13
             mnLineasAccion_Click
             
-        
-        Case 14    'Salir
+        Case 15
+            ImprimeMto
+        Case 19    'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
             Desplazamiento (Button.index - btnPrimero)
@@ -4493,31 +4580,99 @@ End Function
 
 Private Sub cargaDocumentos()
 Dim I As Integer
-    
-Dim txtAnterior  As String
+Dim CarpetaDest As String
+'Dim txtAnterior  As String
+Dim Archvi  As String
 
+
+    
+    
+    'mayo 2019.
+    'nO VA SOBRE LA bd, VA SOBRE LA CARPETA EULERPARAM
+    
+    
+    
+    
+    
     Me.ListView1.ListItems.Clear
     
-    Set miRsAux = New ADODB.Recordset
-    txtAnterior = "slimanpdfs"
     
+    Archvi = "SI"
     
-    txtAnterior = "Select * from " & txtAnterior & " WHERE codclien =" & Text1(0).Text
-    txtAnterior = txtAnterior & " AND nummante =" & DBSet(Text1(2).Text, "T") & " ORDER BY numlinea"
-    miRsAux.Open txtAnterior, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 0
-    While Not miRsAux.EOF
-        I = I + 1
-        Me.ListView1.ListItems.Add , "C" & miRsAux!numlinea, miRsAux!ficheroDesc
-        Me.ListView1.ListItems(I).SubItems(1) = miRsAux!ficheronombre
-        miRsAux.MoveNext
-        
-        
-    Wend
-    miRsAux.Close
+    I = Year(CDate(Text1(2).Text))
+    'If i < 2017 Then Archvi = ""
+    
+    CarpetaDest = ComprobarCarpetaPDFSMante2(CLng(Text1(0).Text), Text1(2).Text)
+    If CarpetaDest = "" Then Archvi = ""
+    
+    If Archvi = "" Then
+        ListView1_Click
+        Exit Sub
+    End If
+    
+    'Set miRsAux = New ADODB.Recordset
+    'txtAnterior = "sliprePdfs"
+    'If EsHistorico Then txtAnterior = "slhprePdfs"
+   '
+   ' txtAnterior = "Select * from " & txtAnterior & " WHERE numofert =" & Text1(0).Text & " ORDER BY numlinea"
+   ' miRsAux.Open txtAnterior, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+   ' i = 0
+   ' While Not miRsAux.EOF
+   '     i = i + 1
+   '     Me.ListView1.ListItems.Add , "C" & miRsAux!numlinea, miRsAux!ficheroDesc
+   '     Me.ListView1.ListItems(i).SubItems(1) = miRsAux!ficheronombre
+   '     miRsAux.MoveNext
+   '
+   '
+   ' Wend
+   ' miRsAux.Close
+     I = 0
+    Archvi = Dir(CarpetaDest, vbDirectory)   ' Recupera la primera entrada.
+    Do While Archvi <> ""   ' Inicia el bucle.
+        ' Ignora el directorio actual y el que lo abarca.
+        If Archvi <> "." And Archvi <> ".." Then
+           ' Realiza una comparación a nivel de bit para asegurarse de que MiNombre es un directorio.
+           If (GetAttr(CarpetaDest & Archvi) And vbDirectory) <> vbDirectory Then
+                'Debug.Print MiNombre   ' Muestra la entrada
+                
+                 I = I + 1
+                 Me.ListView1.ListItems.Add , "C" & I, Archvi
+                 
+                 Me.ListView1.ListItems(I).SubItems(1) = Archvi
+                 Me.ListView1.ListItems(I).ListSubItems(1).Tag = CarpetaDest & Archvi
+           End If   ' solamente si representa un directorio.
+        End If
+        Archvi = Dir   ' Obtiene siguiente entrada.
+    Loop
+
+    
     
     ListView1_Click
     Set miRsAux = Nothing
+    
+    
+    
+    'MAYO 2019. Comentado
+'    Set miRsAux = New ADODB.Recordset
+'    txtAnterior = "slimanpdfs"
+'
+'
+'    txtAnterior = "Select * from " & txtAnterior & " WHERE codclien =" & Text1(0).Text
+'    txtAnterior = txtAnterior & " AND nummante =" & DBSet(Text1(2).Text, "T") & " ORDER BY numlinea"
+'    miRsAux.Open txtAnterior, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+'    I = 0
+'    While Not miRsAux.EOF
+'        I = I + 1
+'        Me.ListView1.ListItems.Add , "C" & miRsAux!numlinea, miRsAux!ficheroDesc
+'        Me.ListView1.ListItems(I).SubItems(1) = miRsAux!ficheronombre
+'        miRsAux.MoveNext
+'
+'
+'    Wend
+'    miRsAux.Close
+'
+'    ListView1_Click
+'    Set miRsAux = Nothing
     
 End Sub
 
@@ -4534,6 +4689,7 @@ Private Function CargaArchivo(Archivo As String) As Boolean
         AcroPDF1.LoadFile (Archivo)
         AcroPDF1.Tag = Archivo
         AcroPDF1.visible = True
+        
     End If
     Screen.MousePointer = vbDefault
     
@@ -4548,3 +4704,39 @@ eCargaArchivo:
     MuestraError Err.Number, "Carga archivo PDF"
 End Function
 
+
+
+
+Private Sub ImprimeMto()
+Dim C As String
+    If Modo <> 2 Then Exit Sub
+
+    '=======================================================================
+    '=============== FORMULA    ============================================
+    
+    CadenaConsulta = ""
+    pPdfRpt = ""
+    C = "{" & NombreTabla & ".codclien}=" & Val(Text1(0).Text)
+    If Not AnyadirAFormula(pPdfRpt, C) Then Exit Sub
+
+    C = "{" & NombreTabla & ".nummante}=" & DBSet(Data1.Recordset!nummante, "T")
+    If Not AnyadirAFormula(pPdfRpt, C) Then Exit Sub
+    
+    C = pPdfRpt
+    'If Not PonerParamRPT2(9, cadParam, numParam, nomDocu, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+    pPdfRpt = "rManteImpr.rpt"
+    With frmImprimir
+        .NombreRPT = pPdfRpt
+        .NombrePDF = pPdfRpt
+        .SeleccionaRPTCodigo = pRptvMultiInforme
+        .FormulaSeleccion = C
+        .OtrosParametros = "pEmpresa=""" & vEmpresa.nomempre & """|"
+        .NumeroParametros = 1
+        .SoloImprimir = False
+        .EnvioEMail = False
+        .Opcion = 2054
+        .Titulo = ""
+        .Show vbModal
+    End With
+
+End Sub

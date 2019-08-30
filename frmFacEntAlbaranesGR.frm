@@ -548,69 +548,69 @@ Begin VB.Form frmFacEntAlbaranesGR
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbaranesGR.frx":0065
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(54)"
-      Tab(1).Control(1)=   "Text2(54)"
-      Tab(1).Control(2)=   "cmdAux2(0)"
-      Tab(1).Control(3)=   "txtAux2(1)"
-      Tab(1).Control(4)=   "txtAux2(0)"
-      Tab(1).Control(5)=   "Text1(53)"
-      Tab(1).Control(6)=   "Text2(52)"
-      Tab(1).Control(7)=   "Text1(52)"
-      Tab(1).Control(8)=   "FrameToolAux(1)"
-      Tab(1).Control(9)=   "Text2(51)"
-      Tab(1).Control(10)=   "Text1(51)"
-      Tab(1).Control(11)=   "Text2(1)"
-      Tab(1).Control(12)=   "Text1(44)"
-      Tab(1).Control(13)=   "Text2(43)"
-      Tab(1).Control(14)=   "Text1(43)"
-      Tab(1).Control(15)=   "chkDocArchi"
-      Tab(1).Control(16)=   "Text1(41)"
-      Tab(1).Control(17)=   "Text1(39)"
-      Tab(1).Control(18)=   "Text1(29)"
-      Tab(1).Control(19)=   "Text2(29)"
-      Tab(1).Control(20)=   "Text1(28)"
-      Tab(1).Control(21)=   "Text2(28)"
-      Tab(1).Control(22)=   "Text1(27)"
-      Tab(1).Control(23)=   "Text2(27)"
-      Tab(1).Control(24)=   "Text1(2)"
-      Tab(1).Control(25)=   "Text1(25)"
-      Tab(1).Control(26)=   "Text1(26)"
-      Tab(1).Control(27)=   "Text1(24)"
-      Tab(1).Control(28)=   "Text1(23)"
-      Tab(1).Control(29)=   "Text1(22)"
-      Tab(1).Control(30)=   "Text1(21)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(10)"
+      Tab(1).Control(4)=   "Label1(11)"
+      Tab(1).Control(5)=   "Label1(12)"
+      Tab(1).Control(6)=   "imgBuscar(7)"
+      Tab(1).Control(7)=   "Label1(9)"
+      Tab(1).Control(8)=   "imgBuscar(8)"
+      Tab(1).Control(9)=   "Label1(23)"
+      Tab(1).Control(10)=   "Label1(24)"
+      Tab(1).Control(11)=   "Label1(52)"
+      Tab(1).Control(12)=   "imgFecha(40)"
+      Tab(1).Control(13)=   "imgBuscar(9)"
+      Tab(1).Control(14)=   "imgBuscar(13)"
+      Tab(1).Control(15)=   "Label1(54)"
+      Tab(1).Control(16)=   "Label1(55)"
+      Tab(1).Control(17)=   "Label1(63)"
+      Tab(1).Control(18)=   "Label1(65)"
+      Tab(1).Control(19)=   "imgBuscar(16)"
+      Tab(1).Control(20)=   "Label1(36)"
+      Tab(1).Control(21)=   "imgBuscar(17)"
+      Tab(1).Control(22)=   "Label1(66)"
+      Tab(1).Control(23)=   "Label1(67)"
+      Tab(1).Control(24)=   "Label1(60)"
+      Tab(1).Control(25)=   "imgBuscar(18)"
+      Tab(1).Control(26)=   "DataGrid2"
+      Tab(1).Control(27)=   "chkImpreso"
+      Tab(1).Control(28)=   "Text1(38)"
+      Tab(1).Control(29)=   "Text1(18)"
+      Tab(1).Control(30)=   "Text1(19)"
       Tab(1).Control(31)=   "Text1(20)"
-      Tab(1).Control(32)=   "Text1(19)"
-      Tab(1).Control(33)=   "Text1(18)"
-      Tab(1).Control(34)=   "Text1(38)"
-      Tab(1).Control(35)=   "chkImpreso"
-      Tab(1).Control(36)=   "DataGrid2"
-      Tab(1).Control(37)=   "imgBuscar(18)"
-      Tab(1).Control(38)=   "Label1(60)"
-      Tab(1).Control(39)=   "Label1(67)"
-      Tab(1).Control(40)=   "Label1(66)"
-      Tab(1).Control(41)=   "imgBuscar(17)"
-      Tab(1).Control(42)=   "Label1(36)"
-      Tab(1).Control(43)=   "imgBuscar(16)"
-      Tab(1).Control(44)=   "Label1(65)"
-      Tab(1).Control(45)=   "Label1(63)"
-      Tab(1).Control(46)=   "Label1(55)"
-      Tab(1).Control(47)=   "Label1(54)"
-      Tab(1).Control(48)=   "imgBuscar(13)"
-      Tab(1).Control(49)=   "imgBuscar(9)"
-      Tab(1).Control(50)=   "imgFecha(40)"
-      Tab(1).Control(51)=   "Label1(52)"
-      Tab(1).Control(52)=   "Label1(24)"
-      Tab(1).Control(53)=   "Label1(23)"
-      Tab(1).Control(54)=   "imgBuscar(8)"
-      Tab(1).Control(55)=   "Label1(9)"
-      Tab(1).Control(56)=   "imgBuscar(7)"
-      Tab(1).Control(57)=   "Label1(12)"
-      Tab(1).Control(58)=   "Label1(11)"
-      Tab(1).Control(59)=   "Label1(10)"
-      Tab(1).Control(60)=   "Label1(5)"
-      Tab(1).Control(61)=   "Label1(3)"
-      Tab(1).Control(62)=   "Label1(45)"
+      Tab(1).Control(32)=   "Text1(21)"
+      Tab(1).Control(33)=   "Text1(22)"
+      Tab(1).Control(34)=   "Text1(23)"
+      Tab(1).Control(35)=   "Text1(24)"
+      Tab(1).Control(36)=   "Text1(26)"
+      Tab(1).Control(37)=   "Text1(25)"
+      Tab(1).Control(38)=   "Text1(2)"
+      Tab(1).Control(39)=   "Text2(27)"
+      Tab(1).Control(40)=   "Text1(27)"
+      Tab(1).Control(41)=   "Text2(28)"
+      Tab(1).Control(42)=   "Text1(28)"
+      Tab(1).Control(43)=   "Text2(29)"
+      Tab(1).Control(44)=   "Text1(29)"
+      Tab(1).Control(45)=   "Text1(39)"
+      Tab(1).Control(46)=   "Text1(41)"
+      Tab(1).Control(47)=   "chkDocArchi"
+      Tab(1).Control(48)=   "Text1(43)"
+      Tab(1).Control(49)=   "Text2(43)"
+      Tab(1).Control(50)=   "Text1(44)"
+      Tab(1).Control(51)=   "Text2(1)"
+      Tab(1).Control(52)=   "Text1(51)"
+      Tab(1).Control(53)=   "Text2(51)"
+      Tab(1).Control(54)=   "FrameToolAux(1)"
+      Tab(1).Control(55)=   "Text1(52)"
+      Tab(1).Control(56)=   "Text2(52)"
+      Tab(1).Control(57)=   "Text1(53)"
+      Tab(1).Control(58)=   "txtAux2(0)"
+      Tab(1).Control(59)=   "txtAux2(1)"
+      Tab(1).Control(60)=   "cmdAux2(0)"
+      Tab(1).Control(61)=   "Text2(54)"
+      Tab(1).Control(62)=   "Text1(54)"
       Tab(1).ControlCount=   63
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranesGR.frx":0081
@@ -10264,7 +10264,7 @@ Dim b As Boolean
                 DevolverNumSeries
             End If
                 
-                
+                 
                 
             If hcoCodTipoM = "DEV" Then
             
@@ -10286,6 +10286,9 @@ Dim b As Boolean
                 End If
                 Exit Sub
             Else
+                If Not CuantosTiposDeIva Then Exit Sub
+            
+            
                 'Factura NORMAl
                 If vParamAplic.MaximoImporteEfectivo > 0 Then
                     Aux = DevuelveDesdeBD(conAri, "tipforpa", "sforpa", "codforpa", Text1(14).Text)
@@ -11430,7 +11433,7 @@ Private Sub CargarComboFacturacion()
 End Sub
 
 
-Private Function InsertarOferta(vSQL As String, vTipoMov As CTiposMov) As Boolean
+Private Function InsertarOferta(vSQL As String, vTipoMov As CTiposMov, HaEncontradoHueco As Boolean) As Boolean
 Dim MenError As String
 Dim bol As Boolean, Existe As Boolean
 Dim cambiaSQL As Boolean
@@ -11443,20 +11446,22 @@ Dim devuelve As String
     cambiaSQL = False
     'Comprobar si mientras tanto se incremento el contador de Pedidos
     'para ello vemos si existe una oferta con ese contador y si existe la incrementamos
-    Do
-        devuelve = DevuelveDesdeBDNew(conAri, NombreTabla, "numalbar", "codtipom", Text1(30).Text, "T", , "numalbar", Text1(0).Text, "N")
-        If devuelve <> "" Then
-            'Ya existe el contador incrementarlo
-            Existe = True
-            vTipoMov.IncrementarContador (CodTipoMov)
-            Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-            cambiaSQL = True
-        Else
-            Existe = False
-        End If
-    Loop Until Not Existe
-    If cambiaSQL Then vSQL = CadenaInsertarDesdeForm(Me)
-    
+    If Not HaEncontradoHueco Then
+        Do
+            devuelve = DevuelveDesdeBDNew(conAri, NombreTabla, "numalbar", "codtipom", Text1(30).Text, "T", , "numalbar", Text1(0).Text, "N")
+            If devuelve <> "" Then
+                'Ya existe el contador incrementarlo
+                Existe = True
+                vTipoMov.IncrementarContador (CodTipoMov)
+                Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
+                cambiaSQL = True
+            Else
+                Existe = False
+            End If
+        Loop Until Not Existe
+        If cambiaSQL Then vSQL = CadenaInsertarDesdeForm(Me)
+        
+    End If
     
     'Aqui empieza transaccion
     conn.BeginTrans
@@ -11476,8 +11481,9 @@ Dim devuelve As String
         bol = ActualizarFecMovCliente
         
         MenError = "Error al actualizar el contador del Pedido."
-    '    bol = vTipoMov.IncrementarContador("REG")
-        vTipoMov.IncrementarContador (CodTipoMov)
+    
+    
+        If Not HaEncontradoHueco Then vTipoMov.IncrementarContador (CodTipoMov)
     End If
     
 EInsertarOferta:
@@ -12182,6 +12188,8 @@ End Sub
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
 Dim SQL As String
+Dim HaEncontradoHueco As Boolean
+
     On Error GoTo EInsertarCab
     
     Set vTipoMov = New CTiposMov
@@ -12190,14 +12198,22 @@ Dim SQL As String
         'Herbelca , control puntos
         'If vParamAplic.PtosAsignar > 0 Then Text1(43).Text = CalcularPuntosAlbaran
             
-            
-        If vParamAplic.NumeroInstalacion = vbFenollar Then Text1(0).Text = BuscaHueco
+        
+        HaEncontradoHueco = False
+        If vParamAplic.NumeroInstalacion = vbFenollar Then
+            Text1(0).Text = BuscaHueco
+            If Text1(0).Text <> "" Then HaEncontradoHueco = True
+        End If
         
         If Text1(0).Text = "" Then Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
         
+        
+        If Val(Text1(0).Text) = 0 Then Err.Raise 513, , "Error obteniendo contador. "
+        
         SQL = CadenaInsertarDesdeForm(Me)
+        
         If SQL <> "" Then
-            If InsertarOferta(SQL, vTipoMov) Then
+            If InsertarOferta(SQL, vTipoMov, HaEncontradoHueco) Then
             
                 If vParamAplic.CartaPortes Then
                     'Vemos si el transportista tiene matricula por defecto
@@ -15576,3 +15592,27 @@ Dim Carga As Boolean
     End If
     
 End Function
+
+
+
+Private Function CuantosTiposDeIva() As Boolean
+    
+    CuantosTiposDeIva = True
+    BuscaChekc = Replace(ObtenerWhereCP(False), "scaalb", "slialb")
+    BuscaChekc = "Select codigiva from slialb ,sartic where slialb.codartic =sartic.codartic and  " & BuscaChekc & " GROUP BY 1"
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open BuscaChekc, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    BuscaChekc = ""
+    While Not miRsAux.EOF
+        BuscaChekc = BuscaChekc & "X"
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+    If Len(BuscaChekc) > 3 Then
+        MsgBox "Mas de 3 IVAS en factura", vbExclamation
+        CuantosTiposDeIva = False
+    End If
+    BuscaChekc = ""
+End Function
+
