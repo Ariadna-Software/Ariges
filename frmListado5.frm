@@ -7522,9 +7522,8 @@ Dim RS As ADODB.Recordset
 Dim fin As Boolean
 Dim Entradas As Currency
 Dim Salidas As Currency
-Dim AntiguoNumeroOrden As Long
-Dim UltimaLinea As Integer
 Dim SQLNumlinea As String
+
     On Error GoTo eGeneraDatosDeclaraAlcohol
     GeneraDatosDeclaraAlcohol = False
     
@@ -7579,8 +7578,8 @@ Dim SQLNumlinea As String
     fin = miRsAux.EOF And RS.EOF   'Los dos vacios
     'insert into `tmpinformes` (`codusu`,`codigo1`,`campo1`,`campo2`,`nombre1`,`nombre2`,`nombre3`,`importe1`,`importe2`,`importe3`,`importe4`,`importe5`,`porcen1`,`porcen2`,`importeb1`,`importeb2`,`importeb3`,`importeb4`,`importeb5`,`fecha1`,`fecha2`,`obser`) values ( '0','1','12',NULL,'lote1','loteventa','descrip','1000','2',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'20010101','201012012','12')
     cadPDFrpt = "" 'El insert into
-    AntiguoNumeroOrden = -1
-    UltimaLinea = 0
+    
+    
     While Not fin
         
         'Comun
@@ -7622,25 +7621,12 @@ Dim SQLNumlinea As String
        
         cadNomRPT = "NULL,NULL,NULL,NULL,NULL"
         If Not RS.EOF Then
-            
-            If IsNumeric(RS!document) Then
-                If AntiguoNumeroOrden = RS!document Then
-                    
-                    UltimaLinea = SQLNumlinea
-                Else
-                    UltimaLinea = 0
-                    AntiguoNumeroOrden = RS!document
-                End If
-            Else
-                UltimaLinea = 0
-                AntiguoNumeroOrden = RS!document
-            End If
+    
             If RS!detamovi = "PRE" Then
-                SQLNumlinea = "numlinea"
+                SQLNumlinea = "if (round(cantidad,2) -" & DBSet(RS!cantidad, "N") & "=0,0,1)"
                 OtrosDatos = ""
-                If UltimaLinea > 0 Then OtrosDatos = " AND numlinea >" & UltimaLinea
                 OtrosDatos = "slienvpr2.codartic=sartic.codartic and sartic.codfamia=sfamia.codfamia " & OtrosDatos & " and codarti2='0ALC99AL' and codigo"
-                miSQL = DevuelveDesdeBD(conAri, "concat(numlote,'|',nomfamia,'|')", "slienvpr2,sartic,sfamia", OtrosDatos, RS!document, , SQLNumlinea)
+                miSQL = DevuelveDesdeBD(conAri, "concat(numlote,'|',nomfamia,'|')", "slienvpr2,sartic,sfamia", OtrosDatos, RS!document & " ORDER BY 2 ASC", , SQLNumlinea)
                 If miSQL = "" Then
                     MsgBox "No se encuentra el movimiento: " & RS!FechaMov & " " & RS!codArtic & " ENV: " & RS!document
                 Else
@@ -7651,17 +7637,17 @@ Dim SQLNumlinea As String
                 End If
             
             Else
-                SQLNumlinea = "numlinea"
+                SQLNumlinea = "if (round(cantidad,2) -" & DBSet(RS!cantidad, "N") & "=0,0,1)"
                 
                 OtrosDatos = ""
-                If UltimaLinea > 0 Then OtrosDatos = " AND numlinea >" & UltimaLinea
+               
                 OtrosDatos = "sliordpr2.codartic=sartic.codartic and sartic.codfamia=sfamia.codfamia and codarti2='0ALC99AL' " & OtrosDatos & " and codigo"
-                miSQL = DevuelveDesdeBD(conAri, "concat(numlote,'|',nomfamia,'|')", "sliordpr2,sartic,sfamia", OtrosDatos, RS!document, , SQLNumlinea)
+                miSQL = DevuelveDesdeBD(conAri, "concat(numlote,'|',nomfamia,'|')", "sliordpr2,sartic,sfamia", OtrosDatos, RS!document & " ORDER BY 2 ASC", , SQLNumlinea)
                 If miSQL = "" Then
                     MsgBox "No se encuentra el movimiento: " & RS!FechaMov & " " & RS!codArtic & " Prod: " & RS!document, vbExclamation
                     
                 Else
-                    OtrosDatos = DevuelveDesdeBD(conAri, "cantidad", "sliordpr", "codigo", RS!document)  'Canitdad producida
+                    OtrosDatos = DevuelveDesdeBD(conAri, "cantidad", "sliordpr", "codigo", RS!document)  'Cantidad producida
                     Salidas = Salidas + RS!cantidad
                     cadNomRPT = "'" & OtrosDatos & "L'," & DBSet(RecuperaValor(miSQL, 1), "T") & "," & DBSet(RecuperaValor(miSQL, 2), "T")
                     cadNomRPT = cadNomRPT & "," & DBSet(RS!cantidad, "N") & "," & DBSet(RS!FechaMov, "F")
