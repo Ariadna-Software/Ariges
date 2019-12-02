@@ -1896,7 +1896,7 @@ Dim NumTabMto As Byte 'Indica que numero de Tab que esta en modo Mantenimiento
 
 Dim TituloLinea As String 'Descripcion de la linea que estamos en Mantenimiento
 
-Dim PrimeraVez As Boolean
+Dim primeravez As Boolean
 
 Private CadenaConsulta As String 'SQL de la tabla principal del formulario
 Private Ordenacion As String
@@ -1956,7 +1956,7 @@ Dim cad As String, Indicador As String
                         Case 1 'Estudios/Formacion - Datos de la tabla strab1
                             CargaGrid DataGrid1, Data2, cad
                         Case 2 'Habilidades
-                            CargaGrid DataGrid2, Data3, cad
+                            CargaGrid DataGrid2, data3, cad
                         Case 3 'Experiencia Laboral
                             CargaGrid DataGrid3, data4, cad
                         Case 4 'Formacion Realizada
@@ -1980,11 +1980,11 @@ Dim cad As String, Indicador As String
                             CargaGrid2 DataGrid1, Data2
                             SituarDataPosicion Data2, NumRegElim, Indicador
                         Case 2 'Habilidades
-                            NumRegElim = Data3.Recordset.AbsolutePosition
+                            NumRegElim = data3.Recordset.AbsolutePosition
                             CargaTxtAux2 False, False
                             'CargaGrid DataGrid2, Data3, cad
-                            CargaGrid2 DataGrid2, Data3
-                            SituarDataPosicion Data3, NumRegElim, Indicador
+                            CargaGrid2 DataGrid2, data3
+                            SituarDataPosicion data3, NumRegElim, Indicador
                         Case 3 'Experiencia Laboral
                             NumRegElim = data4.Recordset.AbsolutePosition
                             CargaTxtAux3 False, False
@@ -2043,7 +2043,7 @@ Private Sub cmdCancelar_Click()
                     DataGrid2.Enabled = True
                     If ModificaLineas = 1 Then 'INSERTAR
                         DataGrid2.AllowAddNew = False
-                        If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
+                        If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
                     End If
                 Case 3 'Experiencia Laboral
                     CargaTxtAux3 False, False
@@ -2112,7 +2112,7 @@ Private Sub BotonAnyadirLinea()
                 CargaTxtAux1 True, True
                 PonerFoco txtAux1(0)
         Case 2 'Habilidades
-                AnyadirLinea DataGrid2, Data3
+                AnyadirLinea DataGrid2, data3
                 CargaTxtAux2 True, True
                 PonerFoco txtAux2
         Case 3 'Experiencia Laboral
@@ -2165,11 +2165,11 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub Desplazamiento(Index As Integer)
+Private Sub Desplazamiento(index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
     If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, index
     PonerCampos
 End Sub
 
@@ -2205,8 +2205,8 @@ Dim vWhere As String
                 DataGrid1.Enabled = False
                 PonerFoco txtAux1(0)
         Case 2 'Habilidades
-                If Data3.Recordset.EOF Then Exit Sub
-                vWhere = vWhere & Data3.Recordset!numlinea
+                If data3.Recordset.EOF Then Exit Sub
+                vWhere = vWhere & data3.Recordset!numlinea
                 If Not BloqueaRegistro(NomTablaLineas, vWhere) Then Exit Sub
                 CargaTxtAux2 True, False
                 DataGrid2.Enabled = False
@@ -2310,8 +2310,8 @@ On Error GoTo EEliminarLinea
             If Data2.Recordset.EOF Then Exit Sub
             numlinea = Data2.Recordset!numlinea
         Case 2 'Habilidades
-            If Data3.Recordset.EOF Then Exit Sub
-            numlinea = Data3.Recordset!numlinea
+            If data3.Recordset.EOF Then Exit Sub
+            numlinea = data3.Recordset!numlinea
         Case 3 'Experiencia Laboral
             If data4.Recordset.EOF Then Exit Sub
             numlinea = data4.Recordset!numlinea
@@ -2341,7 +2341,7 @@ On Error GoTo EEliminarLinea
                 CargaGrid2 DataGrid1, Data2
 '                CancelaADODC (Data2)
             Case 2: 'Habilidades
-                CargaGrid2 DataGrid2, Data3
+                CargaGrid2 DataGrid2, data3
             Case 3: 'Experiencia Laboral
                 CargaGrid2 DataGrid3, data4
             Case 4 'Formacion Realizada
@@ -2381,7 +2381,7 @@ Dim cad As String
 End Sub
 
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
     If Modo = 1 Then PonerFoco Text1(0)
 End Sub
@@ -2426,7 +2426,7 @@ Private Sub Form_Load()
       
     LimpiarCampos   'Limpia los campos TextBox
     VieneDeBuscar = False
-    PrimeraVez = True
+    primeravez = True
          
     '## A mano
     NombreTabla = "straba"
@@ -2441,7 +2441,7 @@ Private Sub Form_Load()
     Data1.Refresh
     
     
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         Label1(6).Caption = "Reloj"
     Else
         Label1(6).Caption = "Agente móvil"
@@ -2499,14 +2499,14 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim cadB As String
+Dim CadB As String
       
     If CadenaDevuelta <> "" Then
         HaDevueltoDatos = True
         If Me.imgFecha(0).Tag = 0 Then
             Screen.MousePointer = vbHourglass
-            cadB = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+            CadB = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
             PonerCadenaBusqueda
         Else
             'Centro de coste
@@ -2526,38 +2526,38 @@ End Sub
 
 Private Sub frmCP_DatoSeleccionado(CadenaSeleccion As String)
 'Formulario Mantenimiento C. Postales
-Dim indice As Byte
+Dim Indice As Byte
 Dim devuelve As String
     
-    indice = 3
-    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
+    Indice = 3
+    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
     'Poblacion
-    Text1(indice + 1).Text = ObtenerPoblacion(Text1(indice).Text, devuelve)
+    Text1(Indice + 1).Text = ObtenerPoblacion(Text1(Indice).Text, devuelve)
     'provincia
-    Text1(indice + 2).Text = devuelve
+    Text1(Indice + 2).Text = devuelve
 End Sub
 
 
 Private Sub frmF_Selec(vFecha As Date) 'Calendario Fechas
-Dim indice As Byte
-    indice = Val(imgFecha(0).Tag) + 11
-    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim Indice As Byte
+    Indice = Val(imgFecha(0).Tag) + 11
+    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
-Private Sub imgBuscar_Click(Index As Integer)
-Dim indice As Byte
+Private Sub imgBuscar_Click(index As Integer)
+Dim Indice As Byte
 
     If Modo = 2 Or Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
 
-    Select Case Index
+    Select Case index
         Case 0 'CPostal
             Set frmCP = New frmCPostal
             frmCP.DatosADevolverBusqueda = "0"
             frmCP.Show vbModal
             Set frmCP = Nothing
-            indice = 4
+            Indice = 4
             VieneDeBuscar = True
             
         Case 1 'Almacen por defecto del trabajador
@@ -2565,7 +2565,7 @@ Dim indice As Byte
             frmAlm.DatosADevolverBusqueda = "0"
             frmAlm.Show vbModal
             Set frmAlm = Nothing
-            indice = 24
+            Indice = 24
             
         Case 2 'Centros de coste de la conta
             Me.imgFecha(0).Tag = 10
@@ -2590,7 +2590,7 @@ Dim indice As Byte
             
         
         Case 3, 4 'Agentes comerciales
-            If Index = 3 Then
+            If index = 3 Then
                 Me.imgFecha(0).Tag = 25
             Else
                Me.imgFecha(0).Tag = 28
@@ -2614,38 +2614,38 @@ Dim indice As Byte
             Set frmB = Nothing
                
     End Select
-    PonerFoco Text1(indice)
+    PonerFoco Text1(Indice)
     Screen.MousePointer = vbDefault
 End Sub
 
 
-Private Sub imgFecha_Click(Index As Integer) 'Abre calendario Fechas
-Dim indice As Byte
+Private Sub imgFecha_Click(index As Integer) 'Abre calendario Fechas
+Dim Indice As Byte
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
    Screen.MousePointer = vbHourglass
    
    Set frmF = New frmCal
    frmF.Fecha = Now
-   Me.imgFecha(0).Tag = Index
-   indice = Index + 11
+   Me.imgFecha(0).Tag = index
+   Indice = index + 11
    
-   PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
+   PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco Text1(indice)
+   PonerFoco Text1(Indice)
 End Sub
 
-Private Sub ImgMail_Click(Index As Integer)
+Private Sub ImgMail_Click(index As Integer)
 'Abrir Outlook para enviar e-mail
 Dim dirMail As String
 
     If Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
-    If Index = 0 Then
+    If index = 0 Then
         dirMail = Text1(9).Text
     End If
     If LanzaMailGnral(dirMail) Then Espera 2
@@ -2730,19 +2730,19 @@ End Sub
 '### A mano
 'Los metodos del text tendran que estar
 'Los descomentamos cuando esten puestos ya los controles
-Private Sub Text1_GotFocus(Index As Integer)
-    kCampo = Index
-    ConseguirFoco Text1(Index), Modo
+Private Sub Text1_GotFocus(index As Integer)
+    kCampo = index
+    ConseguirFoco Text1(index), Modo
 End Sub
 
 
-Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-    If Index = 0 And KeyCode = 38 Then Exit Sub
+    If index = 0 And KeyCode = 38 Then Exit Sub
     KEYdown KeyCode
 End Sub
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -2754,71 +2754,71 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(Index As Integer)
+Private Sub Text1_LostFocus(index As Integer)
 Dim devuelve As String
     
-    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
     
     'Si queremos hacer algo ..
-    Select Case Index
+    Select Case index
         Case 0 'Cod. Trabajador
-            If PonerFormatoEntero(Text1(Index)) Then
+            If PonerFormatoEntero(Text1(index)) Then
                 'Comprobar si ya existe el cod de trabajador en la tabla
                 If Modo = 3 Then 'Insertar
-                    If ExisteCP(Text1(Index)) Then PonerFoco Text1(Index)
+                    If ExisteCP(Text1(index)) Then PonerFoco Text1(index)
                 End If
             End If
             
         Case 3 'CPostal
              If Not VieneDeBuscar Then
-                Text1(Index + 1).Text = ObtenerPoblacion(Text1(Index).Text, devuelve)
-                Text1(Index + 2).Text = devuelve
+                Text1(index + 1).Text = ObtenerPoblacion(Text1(index).Text, devuelve)
+                Text1(index + 2).Text = devuelve
             End If
             VieneDeBuscar = False
             
         Case 6 'NIF
-            Text1(Index).Text = UCase(Text1(Index).Text)
-            ValidarNIF Text1(Index).Text
+            Text1(index).Text = UCase(Text1(index).Text)
+            ValidarNIF Text1(index).Text
             
             
         Case 10
             ' ---- [19/10/2009] [LAURA] : Añadir funcion generica de ccoste
-            Me.Text2(Index).Text = PonerNombreCCoste(Me.Text1(Index))
+            Me.Text2(index).Text = PonerNombreCCoste(Me.Text1(index))
 '            PonceCentroCoste
             
         Case 11, 12, 13 'Fecha Nacimiento, Fecha alta, Fecha baja
             'Si no es modo de Busqueda poner el formato
-             If Text1(Index).Text <> "" Then PonerFormatoFecha Text1(Index)
+             If Text1(index).Text <> "" Then PonerFormatoFecha Text1(index)
              
         Case 24 'Cod almacen
-            If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "salmpr", "nomalmac", "codalmac")
+            If PonerFormatoEntero(Text1(index)) Then
+                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "salmpr", "nomalmac", "codalmac")
             Else
-                Text2(Index).Text = ""
+                Text2(index).Text = ""
             End If
         Case 25, 28
             'Agente
-            If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sagent", "nomagent", "codagent")
-                If Text2(Index).Text = "" Then
-                    Text1(Index).Text = ""
-                    PonerFoco Text1(Index)
+            If PonerFormatoEntero(Text1(index)) Then
+                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sagent", "nomagent", "codagent")
+                If Text2(index).Text = "" Then
+                    Text1(index).Text = ""
+                    PonerFoco Text1(index)
                 End If
             Else
-                Text2(Index).Text = ""
+                Text2(index).Text = ""
             End If
             
         Case 15, 16, 19, 20 'cod. banco, cod. sucursal
-            PonerFormatoEntero Text1(Index)
+            PonerFormatoEntero Text1(index)
             
         Case 18, 22
             'Cuenta banco.
             'Si esta bien puesta la cuenta calculamos el iban
-            If Me.Text1(Index).Text <> "" Then
-                Me.Text1(Index).Text = Right(String(10, "0") & Text1(Index).Text, 10)
-                devuelve = Text1(Index - 3).Text & Me.Text1(Index - 2).Text & Me.Text1(Index - 1).Text & Me.Text1(Index).Text
+            If Me.Text1(index).Text <> "" Then
+                Me.Text1(index).Text = Right(String(10, "0") & Text1(index).Text, 10)
+                devuelve = Text1(index - 3).Text & Me.Text1(index - 2).Text & Me.Text1(index - 1).Text & Me.Text1(index).Text
                 kCampo = 26
-                If Index = 22 Then kCampo = 27
+                If index = 22 Then kCampo = 27
                 If Len(devuelve) = 20 Then
                     DevuelveIBAN2 "ES", devuelve, devuelve
                     If Len(devuelve) = 2 Then
@@ -2831,7 +2831,7 @@ Dim devuelve As String
                     End If
                 End If
                 devuelve = ""
-                kCampo = Index
+                kCampo = index
             End If
 
             
@@ -2857,14 +2857,14 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         PonerFoco Text1(0)
@@ -2872,7 +2872,7 @@ Dim cadB As String
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
 Dim tabla As String
@@ -2893,7 +2893,7 @@ Dim Titulo As String
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
         frmB.vTabla = tabla
-        frmB.vSQL = cadB
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = "0|1|"
@@ -2965,7 +2965,7 @@ On Error GoTo EPonerLineas
     'Habilidades
     SQL = "Select * from strab2 " & vWhere 'where codtraba= " & Data1.Recordset!codtraba
     SQL = SQL & " order by numlinea"
-    CargaGrid DataGrid2, Data3, SQL
+    CargaGrid DataGrid2, data3, SQL
 
     'Experiencia Laboral
     SQL = "Select * from strab3 " & vWhere 'where codtraba= " & Data1.Recordset!codtraba
@@ -2982,7 +2982,7 @@ On Error GoTo EPonerLineas
     SQL = SQL & " order by numlinea"
     CargaGrid DataGrid5, data6, SQL
 
-    PrimeraVez = False
+    primeravez = False
     Screen.MousePointer = vbDefault
     Exit Sub
 EPonerLineas:
@@ -3018,7 +3018,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte, NumReg As Byte
+Dim I As Byte, NumReg As Byte
 Dim b As Boolean
 On Error GoTo EPonerModo
 
@@ -3062,13 +3062,13 @@ On Error GoTo EPonerModo
     cmdCancelar.visible = b
     cmdAceptar.visible = b
     
-    For i = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(i).Enabled = b
-    Next i
+    For I = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(I).Enabled = b
+    Next I
     
-    For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
-    Next i
+    For I = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(I).Enabled = b
+    Next I
     
     chkVistaPrevia.Enabled = (Modo <= 2)
     
@@ -3088,7 +3088,7 @@ End Sub
 Private Sub PonerModoOpcionesMenu(Modo)
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
 Dim b As Boolean
-Dim i As Byte
+Dim I As Byte
 Dim EsBusqueda As Boolean
 
     EsBusqueda = Me.DatosADevolverBusqueda <> ""
@@ -3107,9 +3107,9 @@ Dim EsBusqueda As Boolean
     
     'Mantenimiento lineas
     b = (Modo = 2) And Not EsBusqueda
-    For i = 10 To 14
-        Toolbar1.Buttons(i).Enabled = b
-    Next i
+    For I = 10 To 14
+        Toolbar1.Buttons(I).Enabled = b
+    Next I
     Toolbar1.Buttons(16).Enabled = b Or Modo = 0
     Me.mnEstudios.Enabled = b
     Me.mnExperiencia.Enabled = b
@@ -3194,7 +3194,7 @@ End Function
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Select Case Button.Index
+    Select Case Button.index
         Case 1  'Buscar
            mnBuscar_Click
         Case 2  'Todos
@@ -3225,7 +3225,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 17    'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento (Button.Index - btnPrimero)
+            Desplazamiento (Button.index - btnPrimero)
     End Select
 End Sub
 
@@ -3236,10 +3236,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
    
     
@@ -3310,7 +3310,7 @@ On Error GoTo EModificarLinea
                 SQL = SQL & " WHERE " & vWhere & " AND numlinea=" & Data2.Recordset!numlinea
             Case 2 'Habilidades
                 SQL = "UPDATE strab2 Set habilida = " & DBSet(txtAux2.Text, "T")
-                SQL = SQL & " WHERE " & vWhere & " AND numlinea=" & Data3.Recordset!numlinea
+                SQL = SQL & " WHERE " & vWhere & " AND numlinea=" & data3.Recordset!numlinea
             Case 3 'Experiencia Laboral
                 SQL = "UPDATE strab3 Set periodo1 = " & DBSet(txtAux3(0).Text, "T") & ", "
                 SQL = SQL & "experien=" & DBSet(txtAux3(1).Text, "T")
@@ -3356,7 +3356,7 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, SQL As String)
 On Error GoTo ECargaGrid
 
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    CargaGridGnral vDataGrid, vData, SQL, primeravez
     vDataGrid.RowHeight = 320
      
     CargaGrid2 vDataGrid, vData
@@ -3369,7 +3369,7 @@ End Sub
 
 
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
-Dim i As Integer
+Dim I As Integer
 
 On Error GoTo ECargaGrid
 
@@ -3415,10 +3415,10 @@ On Error GoTo ECargaGrid
     End Select
 
     vDataGrid.Enabled = (Modo = 0) Or (Modo = 2) Or (Modo = 5 And ModificaLineas = 0)
-    For i = 0 To vDataGrid.Columns.Count - 1
-        vDataGrid.Columns(i).Locked = True
-        vDataGrid.Columns(i).AllowSizing = False
-    Next i
+    For I = 0 To vDataGrid.Columns.Count - 1
+        vDataGrid.Columns(I).Locked = True
+        vDataGrid.Columns(I).AllowSizing = False
+    Next I
 
     Exit Sub
 ECargaGrid:
@@ -3431,26 +3431,26 @@ Private Sub CargaTxtAux1(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim i As Byte
+Dim I As Byte
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For i = 0 To txtAux1.Count - 1 'TextBox
-            txtAux1(i).Top = 290
-            txtAux1(i).visible = visible
-        Next i
+        For I = 0 To txtAux1.Count - 1 'TextBox
+            txtAux1(I).Top = 290
+            txtAux1(I).visible = visible
+        Next I
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
-            For i = 0 To txtAux1.Count - 1
-                txtAux1(i).Text = ""
-                BloquearTxt txtAux1(i), False
-            Next i
+            For I = 0 To txtAux1.Count - 1
+                txtAux1(I).Text = ""
+                BloquearTxt txtAux1(I), False
+            Next I
         Else
-            For i = 0 To txtAux1.Count - 1
-                txtAux1(i).Text = DataGrid1.Columns(i + 2).Text
-                BloquearTxt txtAux1(i), False
-            Next i
+            For I = 0 To txtAux1.Count - 1
+                txtAux1(I).Text = DataGrid1.Columns(I + 2).Text
+                BloquearTxt txtAux1(I), False
+            Next I
         End If
 
 
@@ -3458,10 +3458,10 @@ Dim i As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid1, 8)
         
-        For i = 0 To txtAux1.Count - 1
-            txtAux1(i).Top = alto
-            txtAux1(i).Height = DataGrid1.RowHeight
-        Next i
+        For I = 0 To txtAux1.Count - 1
+            txtAux1(I).Top = alto
+            txtAux1(I).Height = DataGrid1.RowHeight
+        Next I
         
         'Fijamos anchura y posicion Left
         '--------------------------------
@@ -3474,9 +3474,9 @@ Dim i As Byte
         
         'Los ponemos Visibles o No
         '--------------------------
-        For i = 0 To txtAux1.Count - 1
-            txtAux1(i).visible = visible
-        Next i
+        For I = 0 To txtAux1.Count - 1
+            txtAux1(I).visible = visible
+        Next I
     End If
 End Sub
 
@@ -3526,26 +3526,26 @@ Private Sub CargaTxtAux3(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim i As Byte
+Dim I As Byte
     
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For i = 0 To txtAux3.Count - 1 'TextBox
-            txtAux3(i).Top = 290
-            txtAux3(i).visible = visible
-        Next i
+        For I = 0 To txtAux3.Count - 1 'TextBox
+            txtAux3(I).Top = 290
+            txtAux3(I).visible = visible
+        Next I
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid3
-            For i = 0 To txtAux3.Count - 1
-                txtAux3(i).Text = ""
-                BloquearTxt txtAux3(i), False
-            Next i
+            For I = 0 To txtAux3.Count - 1
+                txtAux3(I).Text = ""
+                BloquearTxt txtAux3(I), False
+            Next I
         Else
-            For i = 0 To txtAux3.Count - 1
-                txtAux3(i).Text = DataGrid3.Columns(i + 2).Text
-                BloquearTxt txtAux3(i), False
-            Next i
+            For I = 0 To txtAux3.Count - 1
+                txtAux3(I).Text = DataGrid3.Columns(I + 2).Text
+                BloquearTxt txtAux3(I), False
+            Next I
         End If
 
 
@@ -3553,10 +3553,10 @@ Dim i As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid3, 8)
         
-        For i = 0 To txtAux3.Count - 1
-            txtAux3(i).Top = alto
-            txtAux3(i).Height = DataGrid3.RowHeight
-        Next i
+        For I = 0 To txtAux3.Count - 1
+            txtAux3(I).Top = alto
+            txtAux3(I).Height = DataGrid3.RowHeight
+        Next I
         
         'Fijamos anchura y posicion Left
         '--------------------------------
@@ -3569,9 +3569,9 @@ Dim i As Byte
         
         'Los ponemos Visibles o No
         '--------------------------
-        For i = 0 To txtAux3.Count - 1
-            txtAux3(i).visible = visible
-        Next i
+        For I = 0 To txtAux3.Count - 1
+            txtAux3(I).visible = visible
+        Next I
     End If
 End Sub
 
@@ -3580,26 +3580,26 @@ Private Sub CargaTxtAux4(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim i As Byte
+Dim I As Byte
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For i = 0 To TxtAux4.Count - 1 'TextBox
-            TxtAux4(i).Top = 290
-            TxtAux4(i).visible = visible
-        Next i
+        For I = 0 To TxtAux4.Count - 1 'TextBox
+            TxtAux4(I).Top = 290
+            TxtAux4(I).visible = visible
+        Next I
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid4
-            For i = 0 To TxtAux4.Count - 1
-                TxtAux4(i).Text = ""
-                BloquearTxt TxtAux4(i), False
-            Next i
+            For I = 0 To TxtAux4.Count - 1
+                TxtAux4(I).Text = ""
+                BloquearTxt TxtAux4(I), False
+            Next I
         Else
-            For i = 0 To TxtAux4.Count - 1
-                TxtAux4(i).Text = DataGrid4.Columns(i + 2).Text
-                BloquearTxt TxtAux4(i), False
-            Next i
+            For I = 0 To TxtAux4.Count - 1
+                TxtAux4(I).Text = DataGrid4.Columns(I + 2).Text
+                BloquearTxt TxtAux4(I), False
+            Next I
         End If
 
 
@@ -3607,10 +3607,10 @@ Dim i As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid4, 8)
         
-        For i = 0 To TxtAux4.Count - 1
-            TxtAux4(i).Top = alto
-            TxtAux4(i).Height = DataGrid4.RowHeight
-        Next i
+        For I = 0 To TxtAux4.Count - 1
+            TxtAux4(I).Top = alto
+            TxtAux4(I).Height = DataGrid4.RowHeight
+        Next I
         
         'Fijamos anchura y posicion Left
         '--------------------------------
@@ -3618,16 +3618,16 @@ Dim i As Byte
         TxtAux4(0).Left = DataGrid4.Left + 320
         TxtAux4(0).Width = DataGrid4.Columns(2).Width - 20
         'Fecha Evaluacion
-        For i = 1 To 4
-            TxtAux4(i).Left = TxtAux4(i - 1).Left + TxtAux4(i - 1).Width + 20
-            TxtAux4(i).Width = DataGrid4.Columns(i + 2).Width - 20
-        Next i
+        For I = 1 To 4
+            TxtAux4(I).Left = TxtAux4(I - 1).Left + TxtAux4(I - 1).Width + 20
+            TxtAux4(I).Width = DataGrid4.Columns(I + 2).Width - 20
+        Next I
         
         'Los ponemos Visibles o No
         '--------------------------
-        For i = 0 To TxtAux4.Count - 1
-            TxtAux4(i).visible = visible
-        Next i
+        For I = 0 To TxtAux4.Count - 1
+            TxtAux4(I).visible = visible
+        Next I
     End If
 End Sub
 
@@ -3636,28 +3636,28 @@ Private Sub CargaTxtAux5(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim i As Byte
+Dim I As Byte
 
 'Formacion Empresa
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For i = 0 To TxtAux5.Count - 1 'TextBox
-            TxtAux5(i).Top = 290
-            TxtAux5(i).visible = visible
-        Next i
+        For I = 0 To TxtAux5.Count - 1 'TextBox
+            TxtAux5(I).Top = 290
+            TxtAux5(I).visible = visible
+        Next I
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid5
-            For i = 0 To TxtAux5.Count - 1
-                TxtAux5(i).Text = ""
-                BloquearTxt TxtAux5(i), False
-            Next i
+            For I = 0 To TxtAux5.Count - 1
+                TxtAux5(I).Text = ""
+                BloquearTxt TxtAux5(I), False
+            Next I
         Else
-            For i = 0 To TxtAux5.Count - 1
-                TxtAux5(i).Text = DataGrid5.Columns(i + 2).Text
-                BloquearTxt TxtAux5(i), False
-            Next i
+            For I = 0 To TxtAux5.Count - 1
+                TxtAux5(I).Text = DataGrid5.Columns(I + 2).Text
+                BloquearTxt TxtAux5(I), False
+            Next I
         End If
 
 
@@ -3665,10 +3665,10 @@ Dim i As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid5, 8)
         
-        For i = 0 To TxtAux5.Count - 1
-            TxtAux5(i).Top = alto
-            TxtAux5(i).Height = DataGrid5.RowHeight
-        Next i
+        For I = 0 To TxtAux5.Count - 1
+            TxtAux5(I).Top = alto
+            TxtAux5(I).Height = DataGrid5.RowHeight
+        Next I
         
         'Fijamos anchura y posicion Left
         '--------------------------------
@@ -3684,25 +3684,25 @@ Dim i As Byte
                 
         'Los ponemos Visibles o No
         '--------------------------
-        For i = 0 To TxtAux5.Count - 1
-            TxtAux5(i).visible = visible
-        Next i
+        For I = 0 To TxtAux5.Count - 1
+            TxtAux5(I).visible = visible
+        Next I
     End If
 End Sub
 
 
-Private Sub txtAux1_GotFocus(Index As Integer)
-    ConseguirFoco txtAux1(Index), Modo
+Private Sub txtAux1_GotFocus(index As Integer)
+    ConseguirFoco txtAux1(index), Modo
 End Sub
 
-Private Sub txtAux1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-      If Not (Index = 0 And KeyCode = 38) Then
+      If Not (index = 0 And KeyCode = 38) Then
             KEYdown KeyCode
       End If
 End Sub
 
-Private Sub txtAux1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -3715,8 +3715,8 @@ Private Sub BotonMtoLineas(numTab As Integer, cad As String)
 End Sub
 
 
-Private Sub TxtAux1_LostFocus(Index As Integer)
-    If Index = 1 And Me.SSTab1.Tab = 1 Then
+Private Sub TxtAux1_LostFocus(index As Integer)
+    If index = 1 And Me.SSTab1.Tab = 1 Then
         PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
@@ -3733,19 +3733,19 @@ Private Sub txtAux2_KeyPress(KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtAux3(Index), Modo
+Private Sub TxtAux3_GotFocus(index As Integer)
+    ConseguirFoco txtAux3(index), Modo
 End Sub
 
-Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux3_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-    If Not (Index = 0 And KeyCode = 38) Then
+    If Not (index = 0 And KeyCode = 38) Then
            KEYdown KeyCode
     End If
 End Sub
 
-Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
-     If Index = 1 And KeyAscii = 13 Then
+Private Sub TxtAux3_KeyPress(index As Integer, KeyAscii As Integer)
+     If index = 1 And KeyAscii = 13 Then
         PonerFocoBtn Me.cmdAceptar
     Else
         KEYpress KeyAscii
@@ -3753,57 +3753,57 @@ Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 
-Private Sub TxtAux4_GotFocus(Index As Integer)
-    ConseguirFoco TxtAux4(Index), Modo
+Private Sub TxtAux4_GotFocus(index As Integer)
+    ConseguirFoco TxtAux4(index), Modo
 End Sub
 
 
-Private Sub TxtAux4_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux4_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-    If Not (Index = 0 And KeyCode = 38) Then
+    If Not (index = 0 And KeyCode = 38) Then
            KEYdown KeyCode
     End If
 End Sub
 
-Private Sub TxtAux4_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 4 And KeyAscii = 13 Then
+Private Sub TxtAux4_KeyPress(index As Integer, KeyAscii As Integer)
+    If index = 4 And KeyAscii = 13 Then
         PonerFocoBtn Me.cmdAceptar
     Else
         KEYpress KeyAscii
     End If
 End Sub
 
-Private Sub TxtAux4_LostFocus(Index As Integer)
-    If Trim(TxtAux4(Index).Text) = "" Then Exit Sub
+Private Sub TxtAux4_LostFocus(index As Integer)
+    If Trim(TxtAux4(index).Text) = "" Then Exit Sub
     
-    Select Case Index
+    Select Case index
         Case 0, 1
-             PonerFormatoFecha TxtAux4(Index)
+             PonerFormatoFecha TxtAux4(index)
     End Select
 End Sub
 
 
-Private Sub TxtAux5_GotFocus(Index As Integer)
-    ConseguirFoco TxtAux5(Index), Modo
+Private Sub TxtAux5_GotFocus(index As Integer)
+    ConseguirFoco TxtAux5(index), Modo
 End Sub
 
-Private Sub TxtAux5_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux5_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-    If Not (Index = 0 And KeyCode = 38) Then
+    If Not (index = 0 And KeyCode = 38) Then
         KEYdown KeyCode
     End If
 End Sub
 
-Private Sub TxtAux5_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub TxtAux5_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
-Private Sub TxtAux5_LostFocus(Index As Integer)
-    If Trim(TxtAux5(Index).Text) = "" Then Exit Sub
-    Select Case Index
+Private Sub TxtAux5_LostFocus(index As Integer)
+    If Trim(TxtAux5(index).Text) = "" Then Exit Sub
+    Select Case index
         Case 0
-            PonerFormatoFecha TxtAux5(Index)
+            PonerFormatoFecha TxtAux5(index)
         Case 2
 '            If Me.ActiveControl.TabIndex <> 72 Then PonerFocoBtn Me.cmdAceptar
             PonerFocoBtn Me.cmdAceptar
@@ -3852,7 +3852,7 @@ On Error Resume Next
     cad = "Select * from strab1 where codtraba= -1"
     CargaGrid DataGrid1, Data2, cad
     cad = "Select * from strab2 where codtraba= -1"
-    CargaGrid DataGrid2, Data3, cad
+    CargaGrid DataGrid2, data3, cad
     cad = "Select * from strab3 where codtraba= -1"
     CargaGrid DataGrid3, data4, cad
     cad = "Select * from strab4 where codtraba= -1"
@@ -3860,7 +3860,7 @@ On Error Resume Next
     cad = "Select * from strab5 where codtraba= -1"
     CargaGrid DataGrid5, data6, cad
     
-    PrimeraVez = False
+    primeravez = False
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -3890,7 +3890,7 @@ Dim Aux As String
     
     If HayRegParaInforme("sctrcompr", "codtraba = " & Text1(0).Text, True) Then Aux = Aux & vbCrLf & " -Control albaranes proveedor(1)"
     If HayRegParaInforme("sctrcompr", "codtrab1 = " & Text1(0).Text, True) Then Aux = Aux & vbCrLf & " -Control albaranes proveedor(2)"
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         If HayRegParaInforme("sreloj", "codtraba = " & Text1(0).Text, True) Then Aux = Aux & vbCrLf & " -Tareas productividad"
     End If
     

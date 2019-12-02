@@ -1,0 +1,6 @@
+((scaalb.fechaalb >= '2016-11-30') and (scaalb.fechaalb <= '2016-11-30')) AND ( scaalb.codtipom = 'ALV')
+
+
+, ('ALV',4623460)
+
+FIN

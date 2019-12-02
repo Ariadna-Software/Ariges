@@ -552,30 +552,30 @@ Begin VB.Form frmComEntPedidosSa
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmComEntPedidosSa.frx":02B7
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text2(4)"
-      Tab(1).Control(1)=   "Text1(31)"
-      Tab(1).Control(2)=   "Text1(30)"
-      Tab(1).Control(3)=   "Text1(29)"
-      Tab(1).Control(4)=   "Text1(28)"
-      Tab(1).Control(5)=   "Text2(27)"
-      Tab(1).Control(6)=   "Text1(27)"
-      Tab(1).Control(7)=   "FrameHco"
-      Tab(1).Control(8)=   "FrameDirFactura"
-      Tab(1).Control(9)=   "FrameDirMercancia"
-      Tab(1).Control(10)=   "Text1(21)"
-      Tab(1).Control(11)=   "Text1(20)"
-      Tab(1).Control(12)=   "Text1(19)"
-      Tab(1).Control(13)=   "Text1(18)"
-      Tab(1).Control(14)=   "Text1(17)"
-      Tab(1).Control(15)=   "imgBuscar(12)"
-      Tab(1).Control(16)=   "Label1(49)"
-      Tab(1).Control(17)=   "Label1(48)"
-      Tab(1).Control(18)=   "Label1(47)"
-      Tab(1).Control(19)=   "imgFecha(1)"
-      Tab(1).Control(20)=   "Label1(44)"
-      Tab(1).Control(21)=   "imgBuscar(11)"
-      Tab(1).Control(22)=   "Label1(28)"
-      Tab(1).Control(23)=   "Label1(45)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(28)"
+      Tab(1).Control(2)=   "imgBuscar(11)"
+      Tab(1).Control(3)=   "Label1(44)"
+      Tab(1).Control(4)=   "imgFecha(1)"
+      Tab(1).Control(5)=   "Label1(47)"
+      Tab(1).Control(6)=   "Label1(48)"
+      Tab(1).Control(7)=   "Label1(49)"
+      Tab(1).Control(8)=   "imgBuscar(12)"
+      Tab(1).Control(9)=   "Text1(17)"
+      Tab(1).Control(10)=   "Text1(18)"
+      Tab(1).Control(11)=   "Text1(19)"
+      Tab(1).Control(12)=   "Text1(20)"
+      Tab(1).Control(13)=   "Text1(21)"
+      Tab(1).Control(14)=   "FrameDirMercancia"
+      Tab(1).Control(15)=   "FrameDirFactura"
+      Tab(1).Control(16)=   "FrameHco"
+      Tab(1).Control(17)=   "Text1(27)"
+      Tab(1).Control(18)=   "Text2(27)"
+      Tab(1).Control(19)=   "Text1(28)"
+      Tab(1).Control(20)=   "Text1(29)"
+      Tab(1).Control(21)=   "Text1(30)"
+      Tab(1).Control(22)=   "Text1(31)"
+      Tab(1).Control(23)=   "Text2(4)"
       Tab(1).ControlCount=   24
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmComEntPedidosSa.frx":02D3
@@ -2781,7 +2781,7 @@ Private Sub cmdAux_Click(index As Integer)
             PonerFoco txtAux(index)
             
         Case 1 'Busqueda de Cod. Artic
-            If vParamAplic.NumeroInstalacion = 4 Then
+            If InstalacionEsEulerTaxco Then
                 'EULER  As
                 Set FrmArtEul = New frmAlmArticuEUL
                 'frmArt.DatosADevolverBusqueda3 = "@1@" 'Poner en modo busqueda
@@ -3801,7 +3801,7 @@ Private Sub imgBuscar2_Click(index As Integer)
     ElseIf index = 0 Or index = 2 Then
         'EULER
         If ModificaLineas = 0 Then Exit Sub
-        If vParamAplic.NumeroInstalacion = 4 Then LanzarBuscarAlbaranEuler index = 2 'Abrimos
+        If InstalacionEsEulerTaxco Then LanzarBuscarAlbaranEuler index = 2 'Abrimos
         
         
     ElseIf index = 9 Then
@@ -3814,7 +3814,7 @@ Private Sub imgBuscar2_Click(index As Integer)
                 txtAux(9).Text = RecuperaValor(CadenaSQL, 1) 'Cod cliente
                 Me.txtDesc(9).Text = RecuperaValor(CadenaSQL, 2) 'Nom clien
                 CadenaSQL = ""
-                If vParamAplic.NumeroInstalacion = 4 Then
+                If InstalacionEsEulerTaxco Then
                     LanzarBuscarAlbaranEuler False  'Abrimos
                 Else
                     PonerFoco txtAux(10)
@@ -4591,7 +4591,7 @@ Dim cad As String
             'Ha puesto alguno de los campos(no deberia haber pasado)
             If txtAux(9).Text = "" Or txtAux(10).Text = "" Or txtAux(11).Text = "" Then
                  'Si es euler NO controlo este error
-                If vParamAplic.NumeroInstalacion = 4 Then
+                If InstalacionEsEulerTaxco Then
                     Aux = ""
                 Else
                     Aux = "Faltan campos en la obra actuacion"
@@ -4608,7 +4608,7 @@ Dim cad As String
     
     
     'Numerero de albaran
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         Aux = ""
         cad = "" 'para saber si ha puesto alguna de ellas
         For I = 12 To 14
@@ -4769,7 +4769,7 @@ On Error GoTo EInsertarLinea
         SQL = SQL & DBSet(txtAux(10).Text, "T", "S") & "," 'obra 'LE pongo TXT
         SQL = SQL & DBSet(txtAux(11).Text, "T", "S") 'actuac
         
-         If vParamAplic.NumeroInstalacion = 4 Then
+         If InstalacionEsEulerTaxco Then
             SQL = SQL & "," & DBSet(txtAux(12).Text, "T", "S")
             SQL = SQL & "," & DBSet(txtAux(13).Text, "N", "S")
             SQL = SQL & "," & DBSet(txtAux(14).Text, "F", "S")
@@ -4889,7 +4889,7 @@ On Error GoTo EModificarLinea
         SQL = SQL & "actuacion= " & DBSet(txtAux(11).Text, "T", "S")
                 
         'Agosto 2015. Euler
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             'codtipomV numalbarV fechaalbV
             SQL = SQL & "," & "codtipomv=" & DBSet(txtAux(12).Text, "T", "S")
             SQL = SQL & "," & "numalbarV=" & DBSet(txtAux(13).Text, "N", "S")
@@ -5142,7 +5142,7 @@ Dim I As Byte
                 PonerClieObraActuacion CInt(I), True
                 BloquearTxt txtAux(I), True
             Next I
-            If vParamAplic.NumeroInstalacion = 4 Then
+            If InstalacionEsEulerTaxco Then
                 For I = 12 To 15
                     Me.txtAux(I).Text = DBLet(Me.Data2.Recordset.Fields(I + 3), IIf(I = 14, "F", "T"))
                     BloquearTxt txtAux(I), True
@@ -5264,15 +5264,15 @@ Dim I As Byte
     
         
         
-    Me.imgBuscar2(1).visible = visible And vParamAplic.NumeroInstalacion = 4
-    Me.imgBuscar2(0).visible = visible And vParamAplic.NumeroInstalacion = 4
-    Me.imgBuscar2(2).visible = visible And vParamAplic.NumeroInstalacion = 4
+    Me.imgBuscar2(1).visible = visible And InstalacionEsEulerTaxco 'vParamAplic.NumeroInstalacion = vbEuler
+    Me.imgBuscar2(0).visible = visible And InstalacionEsEulerTaxco 'vParamAplic.NumeroInstalacion = vbEuler
+    Me.imgBuscar2(2).visible = visible And InstalacionEsEulerTaxco 'vParamAplic.NumeroInstalacion = vbEuler
     'Anlitica
     'Me.imgBuscar2(9).visible = visible And vEmpresa.TieneAnalitica
     
     Me.imgBuscar2(9).visible = visible
-    Me.imgBuscar2(10).visible = visible And vParamAplic.NumeroInstalacion <> 4
-    Me.imgBuscar2(11).visible = visible And vParamAplic.NumeroInstalacion <> 4
+    Me.imgBuscar2(10).visible = visible And Not InstalacionEsEulerTaxco   'vParamAplic.NumeroInstalacion <> 4
+    Me.imgBuscar2(11).visible = visible And Not InstalacionEsEulerTaxco   'vParamAplic.NumeroInstalacion <> 4
         
         
 End Sub
@@ -5571,7 +5571,7 @@ Dim b As Boolean
         Case 9, 10, 11
             PonerClieObraActuacion index, False
             If index = 9 Then
-                If vParamAplic.NumeroInstalacion = 4 Then LanzarBuscarAlbaranEuler False  'Abrimos
+                If InstalacionEsEulerTaxco Then LanzarBuscarAlbaranEuler False  'Abrimos
             End If
             
             'EULER
@@ -6198,7 +6198,7 @@ On Error GoTo EInsertarLinAlb
                 SQL2 = SQL2 & DBSet(RS!codClien, "N", "S") & "," & DBSet(RS!CodDirec, "N", "S") & "," & DBSet(RS!actuacion, "T", "S") & ","
                 
                 'Agosto 2015
-                If vParamAplic.NumeroInstalacion = 4 Then
+                If InstalacionEsEulerTaxco Then
                     SQL2 = SQL2 & DBSet(RS!codtipomv, "T", "S") & "," & DBSet(RS!numalbarV, "T", "S") & "," & DBSet(RS!fechaalbV, "F", "S") & "," & DBSet(RS!numpedv, "T", "S")
                 Else
                     SQL2 = SQL2 & "NULL,NULL,NULL,NULL"
@@ -6222,7 +6222,7 @@ On Error GoTo EInsertarLinAlb
                     'Sept 2012   client obra actuacion
                     SQL2 = SQL2 & DBSet(RS!codClien, "N", "S") & "," & DBSet(RS!CodDirec, "N", "S") & "," & DBSet(RS!actuacion, "T", "S") & ","
                     'Agosto 2015
-                    If vParamAplic.NumeroInstalacion = 4 Then
+                    If InstalacionEsEulerTaxco Then
                         SQL2 = SQL2 & DBSet(RS!codtipomv, "T", "S") & "," & DBSet(RS!numalbarV, "T", "S") & "," & DBSet(RS!fechaalbV, "F", "S") & "," & DBSet(RS!numpedv, "T", "S")
                     Else
                         SQL2 = SQL2 & "NULL,NULL,NULL,NULL"
@@ -7489,7 +7489,7 @@ Dim b As Boolean
     PonerClieObraActuacion 11, True
     
     
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         If b Then
             Me.txtAux(12).Text = DBLet(Me.Data2.Recordset.Fields(15), "T")
             Me.txtAux(13).Text = DBLet(Me.Data2.Recordset.Fields(16), "T")
@@ -7537,7 +7537,7 @@ Private Sub Euler_O_Sail()
 Dim Euler As Boolean
     
     'En euler saldran codtipon numalbar fechaalb   y para sail saldran codcapit y numlotes
-    Euler = vParamAplic.NumeroInstalacion = 4
+    Euler = InstalacionEsEulerTaxco   'vParamAplic.NumeroInstalacion = vbEuler
         
     'SAIL
     Me.txtAux(10).visible = Not Euler

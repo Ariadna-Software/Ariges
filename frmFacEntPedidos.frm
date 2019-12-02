@@ -610,25 +610,25 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(34)"
-      Tab(1).Control(1)=   "Text1(33)"
-      Tab(1).Control(2)=   "Text1(29)"
-      Tab(1).Control(3)=   "Text1(30)"
-      Tab(1).Control(4)=   "FrameHco"
-      Tab(1).Control(5)=   "Text1(25)"
-      Tab(1).Control(6)=   "Text1(24)"
-      Tab(1).Control(7)=   "Text1(23)"
-      Tab(1).Control(8)=   "Text1(22)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(18)"
+      Tab(1).Control(4)=   "Label1(27)"
+      Tab(1).Control(5)=   "Label1(28)"
+      Tab(1).Control(6)=   "imgBuscar(11)"
+      Tab(1).Control(7)=   "Text1(19)"
+      Tab(1).Control(8)=   "Text1(20)"
       Tab(1).Control(9)=   "Text1(21)"
-      Tab(1).Control(10)=   "Text1(20)"
-      Tab(1).Control(11)=   "Text1(19)"
-      Tab(1).Control(12)=   "imgBuscar(11)"
-      Tab(1).Control(13)=   "Label1(28)"
-      Tab(1).Control(14)=   "Label1(27)"
-      Tab(1).Control(15)=   "Label1(18)"
-      Tab(1).Control(16)=   "Label1(5)"
-      Tab(1).Control(17)=   "Label1(3)"
-      Tab(1).Control(18)=   "Label1(45)"
+      Tab(1).Control(10)=   "Text1(22)"
+      Tab(1).Control(11)=   "Text1(23)"
+      Tab(1).Control(12)=   "Text1(24)"
+      Tab(1).Control(13)=   "Text1(25)"
+      Tab(1).Control(14)=   "FrameHco"
+      Tab(1).Control(15)=   "Text1(30)"
+      Tab(1).Control(16)=   "Text1(29)"
+      Tab(1).Control(17)=   "Text1(33)"
+      Tab(1).Control(18)=   "Text1(34)"
       Tab(1).ControlCount=   19
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
@@ -8170,7 +8170,7 @@ Dim CuantosPuntos As Currency
         If Not PasarTambienAFacturar Then
             If EsAMostrador2 = 2 Then
                 MsgBox "El Pedido  Nº: " & Format(numPed, "0000000") & vbCrLf & vbCrLf & "ha generado el presupuesto: " & Format(NumAlb, "0000000"), vbInformation
-                HaMostradoCanal2_elB = True
+                HaMostradoCanal2_El_B = True
             Else
                 MsgBox "El Pedido  Nº: " & Format(numPed, "0000000") & vbCrLf & vbCrLf & "ha generado el Albaran Nº: " & Format(NumAlb, "0000000"), vbInformation
             End If

@@ -2517,7 +2517,7 @@ Private Sub cmdAceptar_Click()
                         LLamaLineas 10
                         CargaGrid3 DataGrid1, Data2
                     Else
-                        TxtAux2(0).visible = False
+                        txtAux2(0).visible = False
                         CargaGrid3 DataGrid2, data4
                     End If
                     PonerFocoBtn Me.cmdRegresar
@@ -2538,7 +2538,7 @@ Private Sub cmdAux_Click()
     frmT.DatosADevolverBusqueda = "0|1|"
     frmT.Show vbModal
     Set frmT = Nothing
-    PonerFoco Me.TxtAux1(1)
+    PonerFoco Me.txtAux1(1)
 End Sub
 
 
@@ -2580,7 +2580,7 @@ Private Sub cmdCancelar_Click()
             End If
             ModificaLineas = 0
             
-            Me.TxtAux2(0).visible = False
+            Me.txtAux2(0).visible = False
             DataGrid2.Enabled = True
             
             PonerBotonCabecera True
@@ -2625,13 +2625,13 @@ Dim I As Byte
     
     If Me.SSTab1.Tab = 2 Then 'Revisiones
         AnyadirLinea DataGrid1, Data2
-        For I = 0 To Me.TxtAux1.Count - 1
-            Me.TxtAux1(I).Text = ""
+        For I = 0 To Me.txtAux1.Count - 1
+            Me.txtAux1(I).Text = ""
         Next I
         anc = ObtenerAlto(Me.DataGrid1) + 10
         LLamaLineas anc
-        BloquearTxt TxtAux1(0), False
-        PonerFoco TxtAux1(0)
+        BloquearTxt txtAux1(0), False
+        PonerFoco txtAux1(0)
         
     Else
         'Aciones mantenimiento
@@ -2640,15 +2640,15 @@ Dim I As Byte
 
         anc = ObtenerAlto(Me.DataGrid2) + 10
         
-        TxtAux2(0).Text = ""
-         TxtAux2(0).Top = anc
-        TxtAux2(0).Enabled = True
-        Me.TxtAux2(0).Height = DataGrid2.RowHeight
-        TxtAux2(0).Left = DataGrid2.Left + DataGrid2.Columns(3).Left
-        TxtAux2(0).Width = DataGrid2.Columns(3).Width
-        TxtAux2(0).visible = True
-        BloquearTxt TxtAux2(0), False
-        PonerFoco TxtAux2(0)
+        txtAux2(0).Text = ""
+         txtAux2(0).Top = anc
+        txtAux2(0).Enabled = True
+        Me.txtAux2(0).Height = DataGrid2.RowHeight
+        txtAux2(0).Left = DataGrid2.Left + DataGrid2.Columns(3).Left
+        txtAux2(0).Width = DataGrid2.Columns(3).Width
+        txtAux2(0).visible = True
+        BloquearTxt txtAux2(0), False
+        PonerFoco txtAux2(0)
         
         
     End If
@@ -2733,29 +2733,29 @@ Dim anc As Single
          If Not BloqueaRegistro(NomTablaLineas, vWhere) Then Exit Sub
          anc = ObtenerAlto(Me.DataGrid1) + 10
          'Llamamos al form
-         Me.TxtAux1(0).Text = DataGrid1.Columns(2).Text
-         Me.TxtAux1(1).Text = DataGrid1.Columns(3).Text
-         Me.TxtAux1(2).Text = DataGrid1.Columns(4).Text
+         Me.txtAux1(0).Text = DataGrid1.Columns(2).Text
+         Me.txtAux1(1).Text = DataGrid1.Columns(3).Text
+         Me.txtAux1(2).Text = DataGrid1.Columns(4).Text
          LLamaLineas anc
          DataGrid1.Enabled = False
-         BloquearTxt TxtAux1(0), True
-         PonerFoco TxtAux1(1)
+         BloquearTxt txtAux1(0), True
+         PonerFoco txtAux1(1)
          
          
          
     Else
         anc = ObtenerAlto(Me.DataGrid2) + 10
         
-        TxtAux2(0).Text = DataGrid2.Columns(3).Text
-        TxtAux2(0).Top = anc
-        TxtAux2(0).Enabled = True
-        Me.TxtAux2(0).Height = DataGrid2.RowHeight
-        TxtAux2(0).Left = DataGrid2.Left + DataGrid2.Columns(3).Left
-        TxtAux2(0).Width = DataGrid2.Columns(3).Width
-        TxtAux2(0).visible = True
+        txtAux2(0).Text = DataGrid2.Columns(3).Text
+        txtAux2(0).Top = anc
+        txtAux2(0).Enabled = True
+        Me.txtAux2(0).Height = DataGrid2.RowHeight
+        txtAux2(0).Left = DataGrid2.Left + DataGrid2.Columns(3).Left
+        txtAux2(0).Width = DataGrid2.Columns(3).Width
+        txtAux2(0).visible = True
         DataGrid2.Enabled = False
-        BloquearTxt TxtAux2(0), False
-        PonerFoco TxtAux2(0)
+        BloquearTxt txtAux2(0), False
+        PonerFoco txtAux2(0)
             
          
          
@@ -2988,7 +2988,7 @@ Private Sub Form_Load()
     Me.Label1(1).Caption = "Cod. " & DevuelveTextoDepto(True)
     
         
-    SSTab1.TabVisible(4) = vParamAplic.NumeroInstalacion = 4
+    SSTab1.TabVisible(4) = InstalacionEsEulerTaxco  'vParamAplic.NumeroInstalacion = vbEuler
         
     '## A mano
     NombreTabla = "scaman"
@@ -3024,9 +3024,9 @@ Private Sub Form_Load()
     
     
     'Cargamos inicialmente el DATA3 a nada
-    Data3.ConnectionString = conn
-    Data3.RecordSource = "select * from sliman where codclien=-1"
-    Data3.Refresh
+    data3.ConnectionString = conn
+    data3.RecordSource = "select * from sliman where codclien=-1"
+    data3.Refresh
 End Sub
 
 
@@ -3097,8 +3097,8 @@ End Sub
 
 Private Sub frmT_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Trabajadores
-    Me.TxtAux1(1).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod trabajador
-    FormateaCampo Me.TxtAux1(1)
+    Me.txtAux1(1).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod trabajador
+    FormateaCampo Me.txtAux1(1)
     Text2(21).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom trabajador
 End Sub
 
@@ -3179,19 +3179,19 @@ On Error GoTo EDesplazamiento
     
     Select Case index
         Case 0 'Anterior
-            If Data3.Recordset.BOF Then Exit Sub
-            If (Data3.Recordset.AbsolutePosition Mod 2) = 0 Then 'numero par
-                Data3.Recordset.Move -3
+            If data3.Recordset.BOF Then Exit Sub
+            If (data3.Recordset.AbsolutePosition Mod 2) = 0 Then 'numero par
+                data3.Recordset.Move -3
             Else 'numero impar
-                Data3.Recordset.Move -2
+                data3.Recordset.Move -2
             End If
-            If Data3.Recordset.BOF Then Exit Sub
+            If data3.Recordset.BOF Then Exit Sub
         Case 1 'Siguiente
-            If Data3.Recordset.EOF Then Exit Sub
-            If Not Data3.Recordset.BOF Then
-                Data3.Recordset.MoveNext
+            If data3.Recordset.EOF Then Exit Sub
+            If Not data3.Recordset.BOF Then
+                data3.Recordset.MoveNext
             Else
-                Data3.Recordset.Move 3
+                data3.Recordset.Move 3
             End If
     End Select
     PonerCamposHistorico
@@ -3355,14 +3355,14 @@ Dim b As Boolean
     Me.SSTab1.Tab = 3
     'ASignamos un SQL al DATA3
 '    Data3.ConnectionString = Conn
-    Data3.RecordSource = "Select anomante,mes01man,mes02man,mes03man,mes04man,mes05man,mes06man,mes07man,mes08man,mes09man,mes10man,mes11man,mes12man from " & NomTablaLineas & ObtenerWhereCP(True)
-    Data3.CursorType = adOpenStatic
-    Data3.Refresh
-    If Data3.Recordset.EOF Then
+    data3.RecordSource = "Select anomante,mes01man,mes02man,mes03man,mes04man,mes05man,mes06man,mes07man,mes08man,mes09man,mes10man,mes11man,mes12man from " & NomTablaLineas & ObtenerWhereCP(True)
+    data3.CursorType = adOpenStatic
+    data3.Refresh
+    If data3.Recordset.EOF Then
         MsgBox "No existen datos en el Histórico para ese cliente y Direc./Dpto.", vbInformation
         Exit Sub
     Else
-        b = Data3.Recordset.RecordCount > 2
+        b = data3.Recordset.RecordCount > 2
         Me.imgFlecha(0).visible = b
         Me.imgFlecha(1).visible = b
     End If
@@ -3709,7 +3709,7 @@ Dim nomDirDpto As String
     SumarTotal
     
     
-     If vParamAplic.NumeroInstalacion = 4 Then cargaDocumentos
+     If InstalacionEsEulerTaxco Then cargaDocumentos
     
     '-- Esto permanece para saber donde estamos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -3802,7 +3802,7 @@ Dim J As Integer
     
     
     'Si lleva PDFS, en numero mantenimiento NO dejare poner ningun caracter que no entre para la carpeta
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         For J = 1 To 9
             If InStr(1, Text1(1).Text, Mid("\/:*?""<>|", J, 1)) > 0 Then
                 MsgBox "Caracteres no permitidos:  \/:*?""<>|", vbCritical
@@ -3829,12 +3829,12 @@ Dim b As Boolean
     b = True
 
     If Me.SSTab1.Tab = 2 Then 'Fecha Revision
-        If Trim(TxtAux1(0).Text) = "" Then
+        If Trim(txtAux1(0).Text) = "" Then
             MsgBox "El campo Fecha Revisión no puede ser nulo", vbExclamation
             b = False
         End If
         
-        If Trim(TxtAux1(1).Text) = "" Then 'Tecnico
+        If Trim(txtAux1(1).Text) = "" Then 'Tecnico
             MsgBox "El campo Cod. Técnico no puede ser nulo", vbExclamation
             b = False
         End If
@@ -3915,14 +3915,14 @@ Dim SQL As String
             SQL = "INSERT INTO slima1 "
             SQL = SQL & "(codclien, nummante, fecharev, codtraba, observac) "
             SQL = SQL & "VALUES (" & Val(Text1(0).Text) & ", "
-            SQL = SQL & DBSet(Text1(2).Text, "T") & ", " & DBSet(TxtAux1(0).Text, "F") & ", " & TxtAux1(1).Text & ", "
-            SQL = SQL & QuitarCaracterEnter(DBSet(TxtAux1(2).Text, "T")) & ")"
+            SQL = SQL & DBSet(Text1(2).Text, "T") & ", " & DBSet(txtAux1(0).Text, "F") & ", " & txtAux1(1).Text & ", "
+            SQL = SQL & QuitarCaracterEnter(DBSet(txtAux1(2).Text, "T")) & ")"
          End If
             
     Else
         
-        TxtAux2(0).Text = Trim(TxtAux2(0).Text)
-        If TxtAux2(0).Text = "" Then
+        txtAux2(0).Text = Trim(txtAux2(0).Text)
+        If txtAux2(0).Text = "" Then
             MsgBox "Escriba la accion a realizar", vbExclamation
             Exit Function
         End If
@@ -3930,7 +3930,7 @@ Dim SQL As String
         SQL = DevuelveDesdeBD(conAri, "max(linea)", "slima2", SQL & " AND 1", "1")
         SQL = Val(SQL) + 1
         
-        SQL = "," & SQL & "," & DBSet(TxtAux2(0).Text, "F") & ")"
+        SQL = "," & SQL & "," & DBSet(txtAux2(0).Text, "F") & ")"
         SQL = "VALUES (" & Val(Text1(0).Text) & ", " & DBSet(Text1(2).Text, "T") & SQL
         SQL = "(codclien, nummante,linea, accion) " & SQL
         SQL = "INSERT INTO slima2 " & SQL
@@ -3965,18 +3965,18 @@ Dim SQL As String
     If Modo = 5 Then
     
         If DatosOkLinea And Me.SSTab1.Tab = 2 Then 'Habilidades
-            SQL = "UPDATE slima1 Set codtraba = " & TxtAux1(1).Text & ", observac='" & QuitarCaracterEnter(TxtAux1(2).Text) & "'"
+            SQL = "UPDATE slima1 Set codtraba = " & txtAux1(1).Text & ", observac='" & QuitarCaracterEnter(txtAux1(2).Text) & "'"
             SQL = SQL & ObtenerWhereCP(True) & " AND fecharev='" & Format(Data2.Recordset!FechaRev, FormatoFecha) & "'"
         End If
 
     Else
-        TxtAux2(0).Text = Trim(TxtAux2(0).Text)
-        If TxtAux2(0).Text = "" Then
+        txtAux2(0).Text = Trim(txtAux2(0).Text)
+        If txtAux2(0).Text = "" Then
             MsgBox "Escriba la accion", vbExclamation
             Exit Function
         End If
         
-        SQL = "UPDATE slima2 Set accion=" & DBSet(TxtAux2(0).Text, "T")
+        SQL = "UPDATE slima2 Set accion=" & DBSet(txtAux2(0).Text, "T")
         SQL = SQL & ObtenerWhereCP(True) & " AND linea=" & data4.Recordset!linea
         
     End If
@@ -4082,10 +4082,10 @@ Dim b As Boolean
     
     b = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2) 'Insertar o Modificar Lineas
    
-    For jj = 0 To Me.TxtAux1.Count - 1
-        Me.TxtAux1(jj).Height = DataGrid1.RowHeight
-        Me.TxtAux1(jj).Top = alto
-        Me.TxtAux1(jj).visible = b
+    For jj = 0 To Me.txtAux1.Count - 1
+        Me.txtAux1(jj).Height = DataGrid1.RowHeight
+        Me.txtAux1(jj).Top = alto
+        Me.txtAux1(jj).visible = b
     Next jj
 
     Me.cmdAux.Height = DataGrid1.RowHeight
@@ -4095,7 +4095,7 @@ End Sub
 
 
 Private Sub txtAux1_GotFocus(index As Integer)
-    If index <> 2 Then ConseguirFoco TxtAux1(index), Modo
+    If index <> 2 Then ConseguirFoco txtAux1(index), Modo
 End Sub
 
 Private Sub txtAux1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
@@ -4106,7 +4106,7 @@ End Sub
 Private Sub txtAux1_KeyPress(index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
         If index <> 2 Then
-            PonerFoco TxtAux1(index + 1)
+            PonerFoco txtAux1(index + 1)
         Else
             PonerFocoBtn Me.cmdAceptar
         End If
@@ -4117,20 +4117,20 @@ End Sub
 Private Sub TxtAux1_LostFocus(index As Integer)
 Dim devuelve As String
 
-    TxtAux1(index).Text = Trim(TxtAux1(index).Text)
-    If TxtAux1(index).Text = "" Then Exit Sub
+    txtAux1(index).Text = Trim(txtAux1(index).Text)
+    If txtAux1(index).Text = "" Then Exit Sub
     Select Case index
         Case 0 'Fecha Revision
-            PonerFormatoFecha TxtAux1(index)
+            PonerFormatoFecha txtAux1(index)
             
         Case 1 'Cod. Trabajador
-            If PonerFormatoEntero(Me.TxtAux1(index)) Then
-                devuelve = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", TxtAux1(1).Text, "N")
+            If PonerFormatoEntero(Me.txtAux1(index)) Then
+                devuelve = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", txtAux1(1).Text, "N")
                 Text2(21).Text = devuelve
-                FormateaCampo Me.TxtAux1(1)
+                FormateaCampo Me.txtAux1(1)
                 If devuelve = "" Then
-                    MsgBox "No existe el Técnico: " & TxtAux1(index).Text, vbExclamation
-                    PonerFoco TxtAux1(index)
+                    MsgBox "No existe el Técnico: " & txtAux1(index).Text, vbExclamation
+                    PonerFoco txtAux1(index)
                 End If
             End If
             
@@ -4394,42 +4394,42 @@ Dim I As Integer
     
     On Error Resume Next
     
-    If Data3.Recordset.EOF Then
-        Data3.Recordset.MoveLast
+    If data3.Recordset.EOF Then
+        data3.Recordset.MoveLast
         Exit Sub
     End If
     'Pone 2 años (2 registros) cada vez
     'Primer Año
     '----------------------------------------------------------------------------
-    Me.Label1(38).Caption = Data3.Recordset.Fields(0).Value
+    Me.Label1(38).Caption = data3.Recordset.Fields(0).Value
     Me.Label1(47).Caption = Me.Label1(38).Caption
     
     For I = 1 To 12
         
         'Text2(22).Text = Format(Data3.Recordset.Fields(4).Value, FormatoCantidad)
-        Text2(21 + I).Text = Format(Data3.Recordset.Fields(I).Value, FormatoCantidad)
+        Text2(21 + I).Text = Format(data3.Recordset.Fields(I).Value, FormatoCantidad)
     Next I
     
        
     'Segundo Año
     '----------------------------------------------------------------------------
-    Data3.Recordset.MoveNext
-    If Not Data3.Recordset.EOF Then
+    data3.Recordset.MoveNext
+    If Not data3.Recordset.EOF Then
         'Poner el año siguiente
-        Me.Label1(37).Caption = Data3.Recordset.Fields(0).Value
+        Me.Label1(37).Caption = data3.Recordset.Fields(0).Value
         Me.Label1(46).Caption = Me.Label1(37).Caption
         
         
         For I = 1 To 12
             
             'Text2(22).Text = Format(Data3.Recordset.Fields(4).Value, FormatoCantidad)
-            Text2(34 + I).Text = Format(Data3.Recordset.Fields(I).Value, FormatoCantidad)
+            Text2(34 + I).Text = Format(data3.Recordset.Fields(I).Value, FormatoCantidad)
         Next I
         
         
         
     Else
-        Data3.Recordset.MoveLast
+        data3.Recordset.MoveLast
         Me.Label1(37).Caption = ""
         Me.Label1(46).Caption = ""
         For I = 4 To 15
@@ -4545,10 +4545,10 @@ Dim F As Date
     conn.Execute C
     
     'Las lineas de hco de importes
-    If Not (Data3.Recordset Is Nothing) Then
+    If Not (data3.Recordset Is Nothing) Then
         C = ""
-        For I = 0 To Data3.Recordset.Fields.Count - 1
-            C = C & "," & Data3.Recordset.Fields(I).Name
+        For I = 0 To data3.Recordset.Fields.Count - 1
+            C = C & "," & data3.Recordset.Fields(I).Name
         Next I
         CadenaDesdeOtroForm = "'" & Format(F, FormatoFecha) & "'"
         C = "INSERT INTO slimana(fechabaj" & C & ") SELECT " & CadenaDesdeOtroForm & C & " FROM sliman WHERE codclien="

@@ -17552,7 +17552,7 @@ Dim I As Integer
     End If
     
     
-    If vParamAplic.NumeroInstalacion = vbEuler Then
+    If InstalacionEsEulerTaxco Then
         If Me.cboTipoDat.ListIndex > 0 Then   'el CERO es el vacio
             If Me.cboTipoDat.ListIndex = 1 Then
                 campo = " AND isnull({scaalb.origdat})"
@@ -18060,7 +18060,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgayuda
+    For Each Ima In Me.imgAyuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear
@@ -18247,8 +18247,8 @@ Dim IndiceCancel As Integer
     Case 23
         PonerFrameVisible FrameSituAlbaranes, H, W
         CargaListMov
-        cboTipoDat.visible = vParamAplic.NumeroInstalacion = vbEuler
-        lblDpto(79).visible = vParamAplic.NumeroInstalacion = vbEuler
+        cboTipoDat.visible = InstalacionEsEulerTaxco
+        lblDpto(79).visible = InstalacionEsEulerTaxco
         
     Case 24
         PonerFrameVisible FrameFrecuencia, H, W
@@ -18287,7 +18287,7 @@ Dim IndiceCancel As Integer
         cboProPed(0).ListIndex = 1
         cboProPed(1).ListIndex = 1
         Label3(100).Caption = ""
-        imgayuda(2).ToolTipText = lblTitulo(29).Caption
+        imgAyuda(2).ToolTipText = lblTitulo(29).Caption
         Me.txtAnyo(5).Text = 70
     Case 33
         PonerFrameVisible FrameDtoCompra, H, W
@@ -18636,7 +18636,7 @@ Dim Ayuda As String
         Ayuda = Ayuda & vbCrLf & " Los prismaticos permiten buscar un hueco a partir del codigo introducido."
         Ayuda = Ayuda & vbCrLf & "-Cuenta contable . Puede ya existir. Insertara con esa cuenta el cliente"
     End Select
-    Ayuda = imgayuda(index).ToolTipText & vbCrLf & String(47, "=") & vbCrLf & vbCrLf & Ayuda
+    Ayuda = imgAyuda(index).ToolTipText & vbCrLf & String(47, "=") & vbCrLf & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 End Sub

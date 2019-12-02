@@ -3060,6 +3060,21 @@ Dim IT As ListItem
     CadenaSQL = ""
     While Not miRsAux.EOF
         Set IT = Me.lwC.ListItems.Add()
+        
+        'QUE NO SEA NULL
+        If IsNull(miRsAux!codClien) Then
+            CadenaSQL = ""
+            For cCli = 0 To miRsAux.Fields.Count - 1
+                CadenaSQL = CadenaSQL & miRsAux.Fields(cCli).Name & ":   " & DBLet(miRsAux.Fields(cCli), "T") & vbCrLf
+            Next
+            CadenaSQL = "ERROR grave: " & vbCrLf & vbCrLf & CadenaSQL
+            
+            MsgBox CadenaSQL, vbCritical
+            CadenaSQL = ""
+            cmdMultiParte(0).Enabled = False
+            miRsAux.Close
+            Exit Sub
+        End If
         If miRsAux!codClien <> cCli Then
             cCli = miRsAux!codClien
             IT.Text = Format(cCli, "0000")
@@ -3090,7 +3105,7 @@ Dim IT As ListItem
     Wend
     miRsAux.Close
     
-    
+    cmdMultiParte(0).Enabled = True
 End Sub
 
 
@@ -3985,6 +4000,9 @@ Dim C2 As String
 Dim RsPpal As ADODB.Recordset
 Dim N As Long
 Dim cadenapartes As String
+Dim CamposIm As String
+
+
     If Modo <> 2 Then Exit Sub
     
     If Data1.Recordset.EOF Then Exit Sub
@@ -4019,6 +4037,7 @@ Dim cadenapartes As String
     conn.Execute D
     
     cadenapartes = ""
+    CamposIm = ""
     While Not RsPpal.EOF
     
         cadenapartes = cadenapartes & ", " & RsPpal!numparte
@@ -4113,21 +4132,17 @@ Dim cadenapartes As String
        
         While Not miRsAux.EOF
             
-                NumRegElim = NumRegElim + 1
-                'tmpslipreu`   `codusu`,`numofert` ,`numlinea`,`codartic`,`nomartic`,`ampliaci`
-                FechaAlb = FechaAlb & ", (" & vUsu.Codigo & "," & DBLet(miRsAux!codCampo, "N") & "," & DBSet(CStr(miRsAux!codsocio), "T")
-                FechaAlb = FechaAlb & "," & DBSet(miRsAux!nomsocio, "T") & ")"
+               ' NumRegElim = NumRegElim + 1
+               ' 'tmpslipreu`   `codusu`,`numofert` ,`numlinea`,`codartic`,`nomartic`,`ampliaci`
+               ' FechaAlb = FechaAlb & ", (" & vUsu.Codigo & "," & DBLet(miRsAux!codCampo, "N") & "," & DBSet(CStr(miRsAux!codsocio), "T")
+               ' FechaAlb = FechaAlb & "," & DBSet(miRsAux!nomsocio, "T") & ")"
+                
+                CamposIm = CamposIm & ", " & miRsAux!codCampo
 
                 miRsAux.MoveNext
         Wend
         miRsAux.Close
-        If FechaAlb <> "" Then
-          
-            FechaAlb = Mid(FechaAlb, 2) 'qito la coma
-            D = D & FechaAlb
-            ejecutar D, False
-        End If
-    
+        
 
         
         
@@ -4171,6 +4186,33 @@ Dim cadenapartes As String
     Wend 'rsppal
     RsPpal.Close
         
+    
+    If CamposIm <> "" Then
+        CamposIm = Mid(CamposIm, 2)
+        C2 = Data2.RecordSource
+        N = InStr(1, C2, " WHERE ")
+        C2 = Mid(C2, 1, N) & " WHERE codcampo IN (" & CamposIm & ")"
+        
+       
+        
+        FechaAlb = ""
+        miRsAux.Open C2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not miRsAux.EOF
+            
+               ' NumRegElim = NumRegElim + 1
+               ' 'tmpslipreu`   `codusu`,`numofert` ,`numlinea`,`codartic`,`nomartic`,`ampliaci`
+                FechaAlb = FechaAlb & ", (" & vUsu.Codigo & "," & DBLet(miRsAux!codCampo, "N") & "," & DBSet(CStr(miRsAux!codsocio), "T")
+                FechaAlb = FechaAlb & "," & DBSet(miRsAux!nomsocio, "T") & ")"
+                miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+        
+        If FechaAlb <> "" Then
+            FechaAlb = Mid(FechaAlb, 2)
+             D = "insert IGNORE into tmpslipreu(`codusu`,`numofert` ,`codartic`,`nomartic`) values " & FechaAlb
+             conn.Execute D
+        End If
+    End If
     
     
     
@@ -5675,7 +5717,7 @@ Private Sub UpdateaCambioLitros()
             
             'Mayo 2012
             'Error calculando lineas con dto
-            BuscaChekc = CalcularImporte(CStr(cantidad), CStr(miRsAux!PrecioVe), CStr(miRsAux!dtoline1), CStr(miRsAux!dtoline2), vParamAplic.TipoDtos)
+            BuscaChekc = CalcularImporte(CStr(cantidad), CStr(miRsAux!preciove), CStr(miRsAux!dtoline1), CStr(miRsAux!dtoline2), vParamAplic.TipoDtos)
             
             'importel
 
@@ -6582,7 +6624,7 @@ Dim Aux As String
             D = "UPDATE advparteslineas set cantidad=" & DBSet(cantidad, "N")
             
             
-            Aux = CalcularImporte(CStr(cantidad), CStr(miRsAux!PrecioVe), CStr(miRsAux!dtoline1), CStr(miRsAux!dtoline2), vParamAplic.TipoDtos)
+            Aux = CalcularImporte(CStr(cantidad), CStr(miRsAux!preciove), CStr(miRsAux!dtoline1), CStr(miRsAux!dtoline2), vParamAplic.TipoDtos)
             
             D = D & ", importel= " & DBSet(Aux, "N")
             D = D & " WHERE  numparte=" & DBSet(Text1(0).Text, "N") & " AND numlinea = " & miRsAux!numlinea
@@ -6616,7 +6658,7 @@ Dim Aux As String
                 D = "UPDATE advparteslineas set cantidad=" & DBSet(cantidad, "N")
                 
                 
-                Aux = CalcularImporte(CStr(cantidad), CStr(miRsAux!PrecioVe), CStr(miRsAux!dtoline1), CStr(miRsAux!dtoline2), vParamAplic.TipoDtos)
+                Aux = CalcularImporte(CStr(cantidad), CStr(miRsAux!preciove), CStr(miRsAux!dtoline1), CStr(miRsAux!dtoline2), vParamAplic.TipoDtos)
                 
                 D = D & ", importel= " & DBSet(Aux, "N")
                 D = D & " WHERE  numparte=" & DBSet(Text1(0).Text, "N") & " AND numlinea = " & miRsAux!numlinea
@@ -6929,6 +6971,7 @@ On Error GoTo eGenerarPartes
                 End If
                 Agrupacion = Val(lwC.ListItems(pos).SubItems(5))
                  Cli = lwC.ListItems(pos).Tag
+                 
                 Campos = ""
             Else
                 'Esta seleccionado

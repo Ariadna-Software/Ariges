@@ -1,27 +1,27 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmTipoArticulo 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Tipos de Articulos"
    ClientHeight    =   6015
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   4425
+   ClientWidth     =   5220
    Icon            =   "frmAlmTipoArticulo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6015
-   ScaleWidth      =   4425
+   ScaleWidth      =   5220
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   3180
+      Left            =   3840
       TabIndex        =   3
       Top             =   5520
       Width           =   1035
@@ -29,7 +29,7 @@ Begin VB.Form frmAlmTipoArticulo
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   2050
+      Left            =   2640
       TabIndex        =   2
       Top             =   5520
       Width           =   1035
@@ -40,12 +40,12 @@ Begin VB.Form frmAlmTipoArticulo
       Height          =   270
       Index           =   0
       Left            =   120
-      MaxLength       =   2
+      MaxLength       =   8
       TabIndex        =   0
       Tag             =   "Código Tipo Articulo|T|N|||stipar|codtipar||S|"
       Text            =   "Dat"
       Top             =   4920
-      Width           =   800
+      Width           =   915
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
@@ -63,7 +63,7 @@ Begin VB.Form frmAlmTipoArticulo
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   3180
+      Left            =   3840
       TabIndex        =   8
       Top             =   5520
       Visible         =   0   'False
@@ -100,8 +100,8 @@ Begin VB.Form frmAlmTipoArticulo
       Left            =   0
       TabIndex        =   4
       Top             =   0
-      Width           =   4425
-      _ExtentX        =   7805
+      Width           =   5220
+      _ExtentX        =   9208
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -214,8 +214,8 @@ Begin VB.Form frmAlmTipoArticulo
       TabIndex        =   9
       TabStop         =   0   'False
       Top             =   540
-      Width           =   3975
-      _ExtentX        =   7011
+      Width           =   4695
+      _ExtentX        =   8281
       _ExtentY        =   8308
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -452,7 +452,7 @@ End Sub
 Private Sub BotonModificar()
 Dim cad As String
 Dim anc As Single
-Dim i As Integer
+Dim I As Integer
 
     If adodc1.Recordset.EOF Then Exit Sub
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
@@ -460,17 +460,17 @@ Dim i As Integer
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
     anc = ObtenerAlto(DataGrid1, 10)
     
     cad = ""
-    For i = 0 To 1
-        cad = cad & DataGrid1.Columns(i).Text & "|"
-    Next i
+    For I = 0 To 1
+        cad = cad & DataGrid1.Columns(I).Text & "|"
+    Next I
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
@@ -519,8 +519,8 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim i As String
-Dim cadB As String
+Dim I As String
+Dim CadB As String
 On Error GoTo EAceptar
 
     Select Case Modo
@@ -535,19 +535,19 @@ On Error GoTo EAceptar
              If DatosOk And BLOQUEADesdeFormulario(Me) Then
                  If ModificaDesdeFormulario(Me, 3) Then
                       TerminaBloquear
-                      i = adodc1.Recordset.Fields(0)
+                      I = adodc1.Recordset.Fields(0)
                       PonerModo 2
                       CancelaADODC Me.adodc1
                       CargaGrid
-                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " = '" & i & "'")
+                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " = '" & I & "'")
                   End If
                   DataGrid1.SetFocus
             End If
         Case 1 'HacerBusqueda
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid cadB
+                CargaGrid CadB
                 DataGrid1.SetFocus
             End If
     End Select
@@ -599,7 +599,7 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     End If
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -660,7 +660,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1: mnBuscar_Click
         Case 2: mnVerTodos_Click
         Case 5: mnNuevo_Click
@@ -677,7 +677,7 @@ End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim i As Byte
+Dim I As Byte
 Dim b As Boolean
     
     b = DataGrid1.Enabled
@@ -691,13 +691,13 @@ Dim b As Boolean
     
     CargaGridGnral DataGrid1, Me.adodc1, SQL, False
 
-    i = 0  'Cod. Tipo Articulo
-        DataGrid1.Columns(i).Caption = "Articulo"
-        DataGrid1.Columns(i).Width = 900
+    I = 0  'Cod. Tipo Articulo
+        DataGrid1.Columns(I).Caption = "Tipo"
+        DataGrid1.Columns(I).Width = 1500
     
-    i = 1 'Desc. Tipo Articulo
-        DataGrid1.Columns(i).Caption = "Denominación"
-        DataGrid1.Columns(i).Width = 2500
+    I = 1 'Desc. Tipo Articulo
+        DataGrid1.Columns(I).Caption = "Denominación"
+        DataGrid1.Columns(I).Width = 2500
             
     'Fiajamos el cadancho
     If Not CadAncho Then
@@ -708,9 +708,9 @@ Dim b As Boolean
     End If
    
    'No permitir cambiar tamaño de columnas
-   For i = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(i).AllowSizing = False
-   Next i
+   For I = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(I).AllowSizing = False
+   Next I
    
    Me.DataGrid1.ScrollBars = dbgAutomatic
    
@@ -732,22 +732,22 @@ Dim b As Boolean
    End If
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+Private Sub txtAux_GotFocus(index As Integer)
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
-Private Sub txtAux_LostFocus(Index As Integer)
-     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+Private Sub txtAux_LostFocus(index As Integer)
+     If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
 End Sub
 
 
@@ -767,10 +767,10 @@ End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 

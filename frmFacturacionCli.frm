@@ -365,7 +365,7 @@ Dim SQL As String
 Dim Im As Currency
 
 Private Sub cmdFacturar_Click()
-Dim i As Integer
+Dim I As Integer
 
     
     
@@ -399,12 +399,12 @@ Dim i As Integer
     
     'Vere si hay alguno marcado para facturar
     SQL = ""
-    For i = 1 To TreeView1.Nodes.Count
-        If Not TreeView1.Nodes(i).Parent Is Nothing Then
-            If TreeView1.Nodes(i).Checked Then
-                If Not TreeView1.Nodes(i).Parent.Checked Then
-                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(i).Parent.Text, vbExclamation
-                    TreeView1.Nodes(i).Parent.Checked = True
+    For I = 1 To TreeView1.Nodes.Count
+        If Not TreeView1.Nodes(I).Parent Is Nothing Then
+            If TreeView1.Nodes(I).Checked Then
+                If Not TreeView1.Nodes(I).Parent.Checked Then
+                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(I).Parent.Text, vbExclamation
+                    TreeView1.Nodes(I).Parent.Checked = True
                     Exit Sub
                 End If
                 
@@ -454,7 +454,7 @@ Private Sub frmCli_DatoSeleccionado(CadenaSeleccion As String)
     txtclien.Text = RecuperaValor(CadenaSeleccion, 1)
 End Sub
 
-Private Sub imgBuscarG_Click(Index As Integer)
+Private Sub imgBuscarG_Click(index As Integer)
     SQL = txtclien.Text
     Set frmCli = New frmFacClientes3
     frmCli.DatosADevolverBusqueda = "0|1|"
@@ -464,9 +464,9 @@ Private Sub imgBuscarG_Click(Index As Integer)
         
 End Sub
 
-Private Sub imgCheck_Click(Index As Integer)
+Private Sub imgCheck_Click(index As Integer)
     For NumRegElim = 1 To TreeView1.Nodes.Count
-        TreeView1.Nodes(NumRegElim).Checked = Index = 1
+        TreeView1.Nodes(NumRegElim).Checked = index = 1
     Next
 End Sub
 
@@ -547,17 +547,17 @@ Dim Im As Currency
 End Sub
 
 Private Sub PonerCadenaImporte(ByRef N As Node, Padre As Boolean)
-Dim i As Integer
-Dim j As Integer
+Dim I As Integer
+Dim J As Integer
     If Padre Then
-        j = 24
+        J = 24
     Else
-        j = 45
+        J = 45
     End If
-    i = InStr(1, N.Text, ":")
-    If i > 0 Then
-        N.Text = Mid(N.Text, 1, i)
-        N.Text = N.Text & Right(Space(j) & Format(N.Tag, FormatoImporte), j)
+    I = InStr(1, N.Text, ":")
+    If I > 0 Then
+        N.Text = Mid(N.Text, 1, I)
+        N.Text = N.Text & Right(Space(J) & Format(N.Tag, FormatoImporte), J)
     End If
 End Sub
 
@@ -737,7 +737,11 @@ Dim Col As Collection
     '(scaalb.fechaalb <= '2010-04-06') AND
     SQL = SQL & " (scaalb.codclien = " & txtclien.Text
     SQL = SQL & ") AND ( scaalb.codtipom='ALV' ) AND ( scaalb.factursn=1)  and ((scaalb.codtipom,scaalb.numalbar) in (select distinct codtipom,numalbar from slialb))"
-    SQL = SQL & " ORDER BY scaalb.tipofact, scaalb.codclien, scaalb.coddirec, codforpa, dtoppago, dtognral "
+    If vParamAplic.HayDeparNuevo > 0 Then
+        SQL = SQL & " ORDER BY scaalb.tipofact, scaalb.codclien, scaalb.coddirec, codforpa, dtoppago, dtognral "
+    Else
+        SQL = SQL & " ORDER BY scaalb.tipofact, scaalb.codclien, codforpa, dtoppago, dtognral, scaalb.coddirec "
+    End If
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Anterior = ""
     NumRegElim = 1
@@ -779,7 +783,12 @@ End Sub
 
 Private Function CadenaIndentificacionAlbaran() As String
   '  direc|forpa|dtopp|dtogn|
-    CadenaIndentificacionAlbaran = Format(DBLet(miRsAux!CodDirec, "N"), "000") & "|" & Format(DBLet(miRsAux!codforpa, "N"), "000") & "|"
+    If vParamAplic.HayDeparNuevo > 0 Then
+        CadenaIndentificacionAlbaran = Format(DBLet(miRsAux!CodDirec, "N"), "000")
+    Else
+        CadenaIndentificacionAlbaran = ""
+    End If
+    CadenaIndentificacionAlbaran = CadenaIndentificacionAlbaran & "|" & Format(DBLet(miRsAux!codforpa, "N"), "000") & "|"
     CadenaIndentificacionAlbaran = CadenaIndentificacionAlbaran & Format(miRsAux!DtoPPago * 100, "0000") & "|" & Format(miRsAux!DtoGnral * 100, "0000") & "|"
 End Function
 
@@ -787,28 +796,28 @@ Private Sub CadenaAlbaran(ByRef Cole As Collection)
 Dim C As String
 
     C = " codtipom = '" & miRsAux!codtipom & "' AND numalbar"
-    C = DevuelveDesdeBD(conAri, "sum(importel)", "slialb", C, miRsAux!NumAlbar)
+    C = DevuelveDesdeBD(conAri, "sum(importel)", "slialb", C, miRsAux!Numalbar)
     
     'Ira codtipomNumalbar sapacioblanco fecha  espacios importe
-    Cole.Add miRsAux!codtipom & Format(miRsAux!NumAlbar, "000000") & "  " & Format(miRsAux!FechaAlb, "dd/mm/yyyy") & "|" & C & "|"
+    Cole.Add miRsAux!codtipom & Format(miRsAux!Numalbar, "000000") & "  " & Format(miRsAux!FechaAlb, "dd/mm/yyyy") & "|" & C & "|"
     
 End Sub
 
 Private Function DevuelveNumeroAlbaran(linea As String) As String
-Dim j As Integer
+Dim J As Integer
     
     DevuelveNumeroAlbaran = "0"
     
-    j = InStr(1, linea, " ")
-    If j > 0 Then
-        DevuelveNumeroAlbaran = Mid(linea, 1, j - 1)
+    J = InStr(1, linea, " ")
+    If J > 0 Then
+        DevuelveNumeroAlbaran = Mid(linea, 1, J - 1)
         DevuelveNumeroAlbaran = Mid(DevuelveNumeroAlbaran, 4) 'los tres primeros son el codtipom
     End If
 End Function
 
 
 Private Sub InsertarLineaFactura(ByRef Cole As Collection)
-Dim i As Integer
+Dim I As Integer
 Dim N As Node
 Dim TotalFra As Currency
 
@@ -827,15 +836,15 @@ Dim TotalFra As Currency
     N.Checked = True
     TotalFra = 0
     'Los albaranes que iran
-    For i = 1 To Cole.Count
+    For I = 1 To Cole.Count
         'El importe
-        SQL = RecuperaValor(Cole.item(i), 2)
+        SQL = RecuperaValor(Cole.Item(I), 2)
         Im = CCur(SQL)
         TotalFra = TotalFra + Im
         
         'El importe
         SQL = Right(Space(10) & Format(Im, FormatoImporte), 10)
-        SQL = RecuperaValor(Cole.item(i), 1) & SQL
+        SQL = RecuperaValor(Cole.Item(I), 1) & SQL
         Set N = TreeView1.Nodes.Add("FRA" & Format(NumRegElim, "000"), tvwChild)
         N.Text = SQL
         N.Image = 44
@@ -874,11 +883,11 @@ Dim N As Node
         Set Col = New Collection
         CadenaAlbaran Col
         
-        SQL = RecuperaValor(Col.item(1), 2)
+        SQL = RecuperaValor(Col.Item(1), 2)
         
         'El importe
         SQL = Right(Space(10) & Format(SQL, FormatoImporte), 10)
-        SQL = RecuperaValor(Col.item(1), 1) & SQL
+        SQL = RecuperaValor(Col.Item(1), 1) & SQL
         Set N = TreeView2.Nodes.Add()
         N.Text = SQL
         N.Image = 44
@@ -895,25 +904,25 @@ End Sub
 
 Private Sub HacerFacturacionCliente()
 Dim CadenaSQL As String
-Dim i As Integer
+Dim I As Integer
     
     SQL = ""
-    For i = 1 To TreeView1.Nodes.Count
-        If TreeView1.Nodes(i).Parent Is Nothing Then
+    For I = 1 To TreeView1.Nodes.Count
+        If TreeView1.Nodes(I).Parent Is Nothing Then
             'NADA
             
         Else
-            If TreeView1.Nodes(i).Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(TreeView1.Nodes(i).Text)
+            If TreeView1.Nodes(I).Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(TreeView1.Nodes(I).Text)
    
         End If
-    Next i
+    Next I
     
     SQL = Mid(SQL, 3)
     
     CadenaSQL = "scaalb.codtipom = 'ALV' AND scaalb.codclien=" & Me.txtclien.Text & " AND  scaalb.numalbar IN (" & SQL & ")"
     SQL = "SELECT scaalb.*,sclien.nomclien FROM scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien  WHERE " & CadenaSQL
     
-    i = Val(RecuperaValor(CadenaDesdeOtroForm, 3))
+    I = Val(RecuperaValor(CadenaDesdeOtroForm, 3))
     
      Dim AuxCadena As String
         
@@ -949,7 +958,7 @@ Dim i As Integer
         End If
     End If
         
-    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, i = 1, "ALV", "", CByte(txtCopia.Text), True, False
+    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, I = 1, "ALV", "", CByte(txtCopia.Text), True, False
 End Sub
 
 

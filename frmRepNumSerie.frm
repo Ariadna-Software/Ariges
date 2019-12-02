@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmRepNumSerie2 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Numeros de Serie"
@@ -876,24 +876,24 @@ Begin VB.Form frmRepNumSerie2
          Height          =   315
          Index           =   2
          Left            =   1350
-         MaxLength       =   2
+         MaxLength       =   8
          TabIndex        =   2
          Tag             =   "Cod. Tipo Artículo|T|N|||sserie|codtipar||N|"
          Text            =   "Te"
          Top             =   960
-         Width           =   525
+         Width           =   1005
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   2
-         Left            =   1920
+         Left            =   2400
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   24
          Text            =   "Text2"
          Top             =   960
-         Width           =   3285
+         Width           =   3405
       End
       Begin VB.Image imgFecha 
          Height          =   240
@@ -1304,7 +1304,7 @@ Private Modo As Byte
 Private ModoAnterior As Byte
 
 
-Dim PrimeraVez As Boolean
+Dim primeravez As Boolean
 
 Dim NombreTabla As String
 Dim Ordenacion As String
@@ -1413,18 +1413,18 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|" 'num serie
-    Cad = Cad & Data1.Recordset.Fields(1) & "|" 'cod artic
-    Cad = Cad & Text2(1).Text & "|"  'nom artic
-    Cad = Cad & Data1.Recordset.Fields(3) & "|" 'cod cliente
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|" 'num serie
+    cad = cad & Data1.Recordset.Fields(1) & "|" 'cod artic
+    cad = cad & Text2(1).Text & "|"  'nom artic
+    cad = cad & Data1.Recordset.Fields(3) & "|" 'cod cliente
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1440,17 +1440,17 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
         txtAux2(2).Text = DBLet(Me.adodc1.Recordset!nummante, "T")
         txtAux2(3).Text = DBLet(Me.adodc1.Recordset!codtipom, "T")
         
-        txtAux2(4).Text = DBLet(Me.adodc1.Recordset!NumAlbar, "T")
-        txtAux2(5).Text = DBLet(Me.adodc1.Recordset!NumFactu, "T")
+        txtAux2(4).Text = DBLet(Me.adodc1.Recordset!Numalbar, "T")
+        txtAux2(5).Text = DBLet(Me.adodc1.Recordset!Numfactu, "T")
         txtAux2(6).Text = DBLet(Me.adodc1.Recordset!FechaVta, "F")
         txtAux2(7).Text = DBLet(Me.adodc1.Recordset!numline1, "T")
 '    End If
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
-    If PrimeraVez Then
-        PrimeraVez = False
+    If primeravez Then
+        primeravez = False
         If Me.DatoAInsertar <> "" Then
             BotonAnyadir
             Text1(0).Text = DatoAInsertar
@@ -1461,7 +1461,7 @@ End Sub
 
 Private Sub Form_Load()
 
-    PrimeraVez = True
+    primeravez = True
     
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -1549,7 +1549,7 @@ End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
 'Formulario para Busqueda
-Dim cadB As String
+Dim CadB As String
 Dim Aux As String
       
     If CadenaDevuelta <> "" Then
@@ -1560,14 +1560,14 @@ Dim Aux As String
                 'Recupera todo el registro de Nº Serie
                 'Sabemos que campos son los que nos devuelve
                 'Creamos una cadena consulta y ponemos los datos
-                cadB = ""
+                CadB = ""
                 '                       El primero es un pipe
                 If Mid(CadenaDevuelta, 1, 1) = "|" Then CadenaDevuelta = """""" & CadenaDevuelta
                 Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-                cadB = Aux
+                CadB = Aux
                 Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
-                cadB = cadB & " and " & Aux
-                CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+                CadB = CadB & " and " & Aux
+                CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
                 PonerCadenaBusqueda
         Else  'Llama desde Prismatico Direcciones/Departamentos
                 Text1(7).Text = Format(RecuperaValor(CadenaDevuelta, 1), "000")
@@ -1610,14 +1610,14 @@ Private Sub frmTA_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 
-Private Sub imgBuscar_Click(Index As Integer)
+Private Sub imgBuscar_Click(index As Integer)
 Dim Indice As Byte
 
     If Modo = 2 Or Modo = 0 Then Exit Sub
  
     Screen.MousePointer = vbHourglass
 
-    Select Case Index
+    Select Case index
         Case 0 'Codigo Articulo
             Set frmA = New frmAlmArticu2
             'frmA.DatosADevolverBusqueda3 = "@1@" 'Abrir en Modo busqueda
@@ -1660,7 +1660,7 @@ Dim Indice As Byte
 End Sub
 
 
-Private Sub imgFecha_Click(Index As Integer)
+Private Sub imgFecha_Click(index As Integer)
 Dim Indice As Byte
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
@@ -1669,7 +1669,7 @@ Dim Indice As Byte
    Set frmF = New frmCal
    frmF.Fecha = Now
    
-   Select Case Index
+   Select Case index
         Case 0: Indice = 4 'Fecha ult. compra
         Case 1: Indice = 5 'Fecha fin garantia
         Case 2: Indice = 18 'fecha baja equipo
@@ -1728,26 +1728,26 @@ Private Sub mnVerTodos_Click()
     BotonVerTodos
 End Sub
 
-Private Sub Text1_GotFocus(Index As Integer)
-    kCampo = Index
-    ConseguirFoco Text1(Index), Modo
+Private Sub Text1_GotFocus(index As Integer)
+    kCampo = index
+    ConseguirFoco Text1(index), Modo
 End Sub
 
 
-Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
-Private Sub Text1_LostFocus(Index As Integer)
+Private Sub Text1_LostFocus(index As Integer)
 Dim devuelve As String
 
-    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -1755,57 +1755,57 @@ Dim devuelve As String
 
 
 
-    Select Case Index
+    Select Case index
         Case 1 'Codigo Articulo
-            If Text1(Index).Text <> "" Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sartic", "nomartic")
+            If Text1(index).Text <> "" Then
+                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sartic", "nomartic")
                 devuelve = "nseriesn"
-                Text1(Index + 1).Text = DevuelveDesdeBDNew(conAri, "sartic", "codtipar", "codartic", Text1(Index).Text, "T", devuelve)
+                Text1(index + 1).Text = DevuelveDesdeBDNew(conAri, "sartic", "codtipar", "codartic", Text1(index).Text, "T", devuelve)
                 If devuelve = "1" Then
-                    Text2(Index + 1).Text = DevuelveDesdeBDNew(conAri, "stipar", "nomtipar", "codtipar", Text1(Index + 1).Text, "T")
+                    Text2(index + 1).Text = DevuelveDesdeBDNew(conAri, "stipar", "nomtipar", "codtipar", Text1(index + 1).Text, "T")
                 Else
-                    Text2(Index + 1).Text = ""
-                    Text1(Index + 1).Text = ""
-                    Text2(Index).Text = ""
+                    Text2(index + 1).Text = ""
+                    Text1(index + 1).Text = ""
+                    Text2(index).Text = ""
                     MsgBox "El artículo no tiene control de nº de serie.", vbInformation
-                    PonerFoco Text1(Index)
+                    PonerFoco Text1(index)
                 End If
             Else
-                Text2(Index).Text = ""
+                Text2(index).Text = ""
             End If
             
         Case 2 'Codigo Tipo de Articulo
-            Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "stipar", "nomtipar")
-            Text1(Index).Text = DevuelveDesdeBD(conAri, "codtipar", "stipar", "codtipar", Text1(Index).Text, "T")
+            Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "stipar", "nomtipar")
+            Text1(index).Text = DevuelveDesdeBD(conAri, "codtipar", "stipar", "codtipar", Text1(index).Text, "T")
             
         Case 6 'Cliente
             
-            Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sclien", "nomclien")
+            Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sclien", "nomclien")
             
         Case 7 'Direc/dpto del cliente
-            If Text1(Index).Text = "" Then
-                Text2(Index).Text = ""
+            If Text1(index).Text = "" Then
+                Text2(index).Text = ""
                 Exit Sub
             End If
-            Text1(Index).Text = Format(Text1(Index).Text, "000")
+            Text1(index).Text = Format(Text1(index).Text, "000")
             
             'Comprobar que el cliente seleccionado tiene esa direccion o dpto
             devuelve = DevuelveDesdeBDNew(conAri, "sdirec", "nomdirec", "codclien", Text1(6).Text, "N", , "coddirec", Text1(7).Text, "N")
-            Text2(Index).Text = devuelve 'Nombre direc. o dpto
+            Text2(index).Text = devuelve 'Nombre direc. o dpto
             If devuelve = "" Then 'No existe el dpto
                 
                 devuelve = DevuelveTextoDepto(False)
-                devuelve = "No existe" & devuelve & Text1(Index).Text & " para el cliente: "
+                devuelve = "No existe" & devuelve & Text1(index).Text & " para el cliente: "
                 devuelve = devuelve & Text1(6).Text & " - " & Text2(6).Text
                 MsgBox devuelve, vbInformation
-                PonerFoco Text1(Index)
+                PonerFoco Text1(index)
             End If
             
         Case 12 'Proveedor
-            Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sprove", "nomprove")
+            Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sprove", "nomprove")
             
         Case 4, 5, 10, 14 'Fechas ult. modif., fin garantia
-            If Text1(Index).Text <> "" And Text1(Index).Locked = False Then PonerFormatoFecha Text1(Index)
+            If Text1(index).Text <> "" And Text1(index).Locked = False Then PonerFormatoFecha Text1(index)
             
             
         Case 18 'fecha de baja
@@ -1819,7 +1819,7 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    Select Case Button.Index
+    Select Case Button.index
         Case 1: mnBuscar_Click 'Busqueda
         Case 2: mnVerTodos_Click 'Ver Todos
             
@@ -1835,23 +1835,23 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 16: mnSalir_Click  'Salir
              
         Case btnPrimero To btnPrimero + 3 'Flechas de Desplazamiento
-            Desplazamiento (Button.Index - btnPrimero)
+            Desplazamiento (Button.index - btnPrimero)
     End Select
 End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
     If KeyAscii = 27 And Modo = 1 Then cmdCancelar_Click 'busqueda
 End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim I As Byte
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1864,10 +1864,10 @@ Dim NumReg As Byte
     End If
     DesplazamientoVisible Me.Toolbar1, btnPrimero, (Modo = 2), NumReg
         
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -1882,10 +1882,10 @@ Dim NumReg As Byte
     
             
     'Modo INSERTAR
-    B = (Modo = 3) Or (Modo = 4)
+    b = (Modo = 3) Or (Modo = 4)
     If Modo = 3 Then Me.chkTieneMan.Value = 1
-    Me.chkTieneMan.Enabled = B 'Insertar o Modificar
-    If B Then BloquearTxt Text1(3), Not CBool(Me.chkTieneMan.Value)
+    Me.chkTieneMan.Enabled = b 'Insertar o Modificar
+    If b Then BloquearTxt Text1(3), Not CBool(Me.chkTieneMan.Value)
     Me.cboTipomov.Enabled = False 'Insertar o Modificar
 
     
@@ -1895,17 +1895,17 @@ Dim NumReg As Byte
     '##
     
     '------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
     
     For I = 0 To Me.imgBuscar.Count - 1
 '        Me.imgBuscar(i).Enabled = b
-        BloquearImg Me.imgBuscar(I), Not B
+        BloquearImg Me.imgBuscar(I), Not b
     Next I
     
     For I = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(I).Enabled = B 'Si es insertar o modificar
+        Me.imgFecha(I).Enabled = b 'Si es insertar o modificar
     Next I
     
     'Si Modificar y se ha insertado un nº Albaran no modificar datos
@@ -1933,42 +1933,42 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnEliminar.Enabled = b
 
     'Sustituir
-    Toolbar1.Buttons(10).Enabled = B
-    Me.mnSustituir.Enabled = B
+    Toolbar1.Buttons(10).Enabled = b
+    Me.mnSustituir.Enabled = b
     
     'recuperar nº serie
-    Toolbar1.Buttons(11).Enabled = B And Text1(6).Text <> ""
+    Toolbar1.Buttons(11).Enabled = b And Text1(6).Text <> ""
 
     'Componentes
-    Toolbar1.Buttons(12).Enabled = B
-    Me.mnComponentes.Enabled = B
+    Toolbar1.Buttons(12).Enabled = b
+    Me.mnComponentes.Enabled = b
     
 
     '-------------------------------------
-    B = (Modo >= 3)
+    b = (Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'Ver Todos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
@@ -1983,10 +1983,10 @@ Private Sub LimpiarCampos()
 End Sub
 
 
-Private Sub Desplazamiento(Index As Integer)
+Private Sub Desplazamiento(index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, index
     PonerCampos
     
 End Sub
@@ -2111,15 +2111,15 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
-    B = CompForm(Me, 1)
-    If Not B Then Exit Function
+    b = CompForm(Me, 1)
+    If Not b Then Exit Function
  
     'Comprobar que se introduce valor en fecha fin garantia
     If Text1(5).Text = "" Then
         MsgBox "El valor de fecha fin garantia no puede ser nulo.", vbInformation
-        B = False
+        b = False
     End If
     
     '## LAURA 19/06/2008
@@ -2129,32 +2129,32 @@ Dim B As Boolean
         Me.cboMotivoBaja.ListIndex = -1
     ElseIf Trim(cboMotivoBaja.List(cboMotivoBaja.ListIndex)) = "" Then
         MsgBox "Debe seleccionar un motivo de baja si hay valor en la fecha de baja.", vbInformation
-        B = False
+        b = False
     End If
     '##
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim tabla As String
 Dim Titulo As String, Desc As String
 Dim selElem As Byte
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     If EsCabecera Then
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: sserie
-        Cad = Cad & ParaGrid(Text1(0), 15, "Nº Serie")
-        Cad = Cad & ParaGrid(Text1(1), 20, "Artic.")
-        Cad = Cad & "Desc. Artic.|sartic|nomartic|T||38·"
-        Cad = Cad & ParaGrid(Text1(2), 6, "TArt.")
-        Cad = Cad & "Desc. Tipo|stipar|nomtipar|T||20·"
+        cad = cad & ParaGrid(Text1(0), 15, "Nº Serie")
+        cad = cad & ParaGrid(Text1(1), 20, "Artic.")
+        cad = cad & "Desc. Artic.|sartic|nomartic|T||38·"
+        cad = cad & ParaGrid(Text1(2), 6, "TArt.")
+        cad = cad & "Desc. Tipo|stipar|nomtipar|T||20·"
     
         tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ")"
         tabla = tabla & " LEFT JOIN stipar ON " & NombreTabla & ".codtipar=stipar.codtipar"
@@ -2173,18 +2173,18 @@ Dim selElem As Byte
             Desc = "Obra"
         End If
         Titulo = Titulo & Text1(6).Text & " - " & Text2(6).Text 'Cod y Desc. Cliente
-        Cad = Cad & "Cod. " & Desc & "|sdirec|coddirec|N||20·"
-        Cad = Cad & "Desc. " & Desc & "|sdirec|nomdirec|T||40·"
+        cad = cad & "Cod. " & Desc & "|sdirec|coddirec|N||20·"
+        cad = cad & "Desc. " & Desc & "|sdirec|nomdirec|T||40·"
         tabla = "sdirec"
         selElem = 1
     End If
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vTabla = tabla
-        frmB.vSQL = cadB
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = "0|1|"
@@ -2217,14 +2217,14 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
     EsCabecera = True
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then 'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then 'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
@@ -2458,7 +2458,7 @@ Dim tots As String
 '    b = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral DataGrid1, Me.adodc1, SQL, primeravez
     
     tots = "N||||0|;N||||0|;N||||0|;"
     SQL = DevuelveTextoDepto(True)

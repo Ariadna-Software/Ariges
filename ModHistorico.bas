@@ -102,9 +102,9 @@ On Error Resume Next
         'NOV 2018
         SQL = SQL & ", codinter,codnatura,notasportes,chofer "
         'JUN 19
-        SQL = SQL & ", FechaEnt , perrecep, dnient, latitud, Longitud"
+        SQL = SQL & ", FechaEnt , perrecep, dnirecep, latitud, Longitud"
             
-        If vParamAplic.NumeroInstalacion = vbEuler Then SegundaTablaCabeceras = True
+        If InstalacionEsEulerTaxco Then SegundaTablaCabeceras = True
             
       Case "OFE" 'Ofertas a Clientes
         NomTabla = "scapre"
@@ -172,13 +172,13 @@ On Error Resume Next
     If SegundaTablaCabeceras Then
        
         
-        NomTablaLinH = "bombamarca,bombaModelo,motormarca,motorModelo,observaciones,TrabajoExterior,TipoPortes,ReferPedido,FechaPed,numrepar,Rep_OrdenTrabajo"
-        NomTablaLinH = NomTablaLinH & ",Rep_TrabajoExterior,RecepAgenClien , RecepPortes, RecepAgenCliMat, RecpNumExp, FechaAlb, TipoBombResSuperHor,"
+        NomTablaLinH = "bombamarca,bombaModelo,motormarca,motorModelo,observaciones,TrabajoExterior,TipoPortes,ReferPedido,FechaPed,numrepar"
+        NomTablaLinH = NomTablaLinH & ",RecepAgenClien , RecepPortes, RecepAgenCliMat, RecpNumExp, FechaAlb, TipoBombResSuperHor,"
         NomTablaLinH = NomTablaLinH & "TipoBombResSuperVer, TipoBombLimSuperHor, TipoBombLimSuperVer, TipoBombResSumPoz, TipoBombLimSumPoz, TipoBombResSumVer,"
         NomTablaLinH = NomTablaLinH & "TipoBombLimSumVer, TipoBomAgitadorRes, TipoBomAgitadorLim, TipoBomResOtrosEqu, TipoBomLimOtrosEqu, DatosBommarca,"
         NomTablaLinH = NomTablaLinH & "DatosBomNumCurva, DatosBomModelo, DatosBomNumSerie, DatosBomAno, DatosBomH, DatosBomTipoRodete, DatosBomCaudal,"
         NomTablaLinH = NomTablaLinH & "DatosBomUdCaudal, DatosMotorMarca, DatosMotorModelo, DatosMotorNumSerie, DatosMotorV, DatosMotorI,DatosMotorCV,"
-        NomTablaLinH = NomTablaLinH & "DatosMotorKw,DatosMotorrpm,NumParteTrabajo,NumTrabajExterno,Rep_Reparacion"
+        NomTablaLinH = NomTablaLinH & "DatosMotorKw,DatosMotorrpm,NumParteTrabajo,NumTrabajExterno,NumReparacion,NumAlbaranVenta"
         
         
         
@@ -286,7 +286,7 @@ On Error Resume Next
             
             
         'ENE 2015
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             
             
             SQL = " SELECT scapre.numofert,numlinea,ficheroDesc,ficheronombre"
@@ -300,12 +300,17 @@ On Error Resume Next
     
     
     If EsAlbaran Then
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             SQL = cadWhere
             SQL = Replace(SQL, "scaalb", "slialb_eu")
             SQL = "INSERT INTO slhalb_eu SELECT * from slialb_eu WHERE " & SQL
             If Not ejecutar(SQL, True) Then MsgBox "Error insertando en tabla hco costes " & vbCrLf & "El programa continuara generando el pedido. " & vbCrLf & "Avise a soporte técnico", vbExclamation
                 
+            SQL = cadWhere
+            SQL = Replace(SQL, "scaalb", "slialb_eu2")
+            SQL = "INSERT INTO slhalb_eu2 SELECT * from slialb_eu2 WHERE " & SQL
+            If Not ejecutar(SQL, True) Then MsgBox "Error insertando en tabla hco lineas especiales " & vbCrLf & "El programa continuara generando el pedido. " & vbCrLf & "Avise a soporte técnico", vbExclamation
+            
         End If
     End If
 
@@ -383,7 +388,7 @@ Dim EsAlbaran As Boolean
         ejecutar SQL, False  'Si da error me da lo mismo. Qu siga la fiesta
         
         
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             SQL = "DELETE FROM sliprePdfs   WHERE " & cadAux
             ejecutar SQL, False  'Si da error me da lo mismo. Qu siga la fiesta
         End If
@@ -405,10 +410,16 @@ Dim EsAlbaran As Boolean
         End If
         
         
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
                 SQL = "DELETE from slialb_eu where "
                 SQL = SQL & cadAux
                 ejecutar SQL, False
+                
+                SQL = "DELETE from slialb_eu2 where "
+                SQL = SQL & cadAux
+                ejecutar SQL, False
+                
+                
         End If
     
         If vParamAplic.CartaPortes Then

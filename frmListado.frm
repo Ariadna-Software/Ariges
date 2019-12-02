@@ -13856,7 +13856,7 @@ Dim H As Integer, W As Integer
     limpiar Me
     CargaIconosAyuda
     'Ocultar todos los Frames de Formulario
-    frameListado.visible = False
+    FrameListado.visible = False
     FrameInfAlmacen.visible = False
     FrameMovArtic.visible = False
     FrameInventario.visible = False
@@ -15446,7 +15446,7 @@ Private Sub PonerFrameListadoVisible(visible As Boolean, ByRef H As Integer, ByR
 
     H = 4695
     W = 6555
-    PonerFrameVisible Me.frameListado, visible, H, W
+    PonerFrameVisible Me.FrameListado, visible, H, W
 
     If visible = True Then
         Me.Optcodigo.Value = True
@@ -15810,7 +15810,7 @@ Dim b As Boolean
     chkImpEtiq(0).visible = b
     chkImpEtiq(1).visible = b
     chkImpEtiq(3).visible = b
-    Me.imgayuda(0).visible = b
+    Me.imgAyuda(0).visible = b
     If b Then
         Me.Label9.Caption = "Informe de Articulos"
        
@@ -17058,6 +17058,8 @@ On Error Resume Next
             tipoMov = 1
         ElseIf cantidad < 0 Then 'Insertar Movimiento de Salida en Almacen
             tipoMov = 0
+            cantidad = -cantidad 'Sept 2019 la cantidad va en valor absoluto
+            vImporte = Abs(vImporte)
         End If
         
         SQL = "INSERT INTO smoval (codartic, codalmac, fechamov, horamovi, tipomovi, detamovi, cantidad, impormov, codigope, letraser, document, numlinea) "
@@ -19240,7 +19242,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgayuda
+    For Each Ima In Me.imgAyuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear

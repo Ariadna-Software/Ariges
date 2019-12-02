@@ -2797,7 +2797,7 @@ Dim RTiket As ADODB.Recordset
     SQL = SQL & ", codinter,codnatura,notasportes"
     
     'Jun19
-    SQL = SQL & " ,fechaent,perrecep,dnient,latitud,longitud"
+    SQL = SQL & " ,fechaent,perrecep,dnirecep,latitud,longitud"
     
     
     SQL = SQL & ")"
@@ -2856,7 +2856,7 @@ Dim RTiket As ADODB.Recordset
         SQL = SQL & devuelve & ",0,NULL,null,0"   'pidecli y numbultos fechaAux, puntos
         SQL = SQL & ",null,null,null"   'codinter,codnatura notasportes
         
-        'fechaent,perrecep,dnient,latitud,longitud
+        'fechaent,perrecep,dnirecep,latitud,longitud
         SQL = SQL & ",null,null,null,null,null"
         SQL = SQL & ")"
         RTiket.Close
@@ -2876,9 +2876,9 @@ Dim RTiket As ADODB.Recordset
         'Fenollar
         SQL = SQL & " ,codinter,codnatura ,notasportes "
         
-        'fechaent,perrecep,dnient,latitud,longitud
-        If vParamAplic.NumeroInstalacion = vbEuler Then
-            SQL = SQL & ",fechaent,perrecep,dnient,latitud,longitud"
+        'fechaent,perrecep,dnirecep,latitud,longitud
+        If InstalacionEsEulerTaxco Then
+            SQL = SQL & ",fechaent,perrecep,dnirecep,latitud,longitud"
         Else
             SQL = SQL & ",null,null,null,null,null"
         End If
@@ -2983,7 +2983,7 @@ Dim RTiket As ADODB.Recordset
         SQL = SQL & ",null,null,null"
         
         
-        'fechaent,perrecep,dnient,latitud,longitud
+        'fechaent,perrecep,dnirecep,latitud,longitud
         SQL = SQL & ",null,null,null,null,null"
         
         SQL = SQL & ")"
@@ -2996,17 +2996,17 @@ Dim RTiket As ADODB.Recordset
 
     'SOLO PARA EULER
     '.----------------------------------
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         'METERA EN UNA TABLA que es scafac_EU
         If codtipom = "FAO" Or codtipom = "FAE" Or codtipom = "FAR" Then
             devuelve = "bombamarca,bombaModelo,motormarca,motorModelo,observaciones,TrabajoExterior,TipoPortes,ReferPedido,FechaPed"
             
             'Febrero 2016
-            devuelve = devuelve & ",Rep_OrdenTrabajo,Rep_TrabajoExterior,RecepAgenClien,RecepPortes,RecepAgenCliMat,RecpNumExp,FechaAlb,TipoBombResSuperHor"
+            devuelve = devuelve & ",RecepAgenClien,RecepPortes,RecepAgenCliMat,RecpNumExp,FechaAlb,TipoBombResSuperHor"
             devuelve = devuelve & ",TipoBombResSuperVer,TipoBombLimSuperHor,TipoBombLimSuperVer,TipoBombResSumPoz,TipoBombLimSumPoz,TipoBombResSumVer"
             devuelve = devuelve & ",TipoBombLimSumVer,TipoBomAgitadorRes,TipoBomAgitadorLim,TipoBomResOtrosEqu,TipoBomLimOtrosEqu,DatosBommarca,DatosBomNumCurva"
             devuelve = devuelve & ",DatosBomModelo,DatosBomNumSerie,DatosBomAno,DatosBomH,DatosBomTipoRodete,DatosBomCaudal,DatosBomUdCaudal,DatosMotorMarca"
-            devuelve = devuelve & ",DatosMotorModelo , DatosMotorNumSerie, DatosMotorV, DatosMotorI, DatosMotorCV, DatosMotorKw, DatosMotorrpm, NumParteTrabajo, NumTrabajExterno"
+            devuelve = devuelve & ",DatosMotorModelo , DatosMotorNumSerie, DatosMotorV, DatosMotorI, DatosMotorCV, DatosMotorKw, DatosMotorrpm, NumParteTrabajo, NumTrabajExterno, NumAlbaranVenta"
             
             
             SQL = "INSERT INTO scafac_eu(codtipom,numfactu,fecfactu,codtipoa,numalbar," & devuelve & ") "
@@ -3416,7 +3416,7 @@ Dim Aux2 As String
     End If
 
 
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         
         'EULER slialb_eu  -> slifac_eu
         'Llevara costes hora, albaran prov, fra pro y las mismas lineas de este albaran introducidas a precio coste
@@ -3550,6 +3550,29 @@ Dim TipoA As String
     
     
     
+    
+    
+    
+    
+    
+    'Lineas ESPECIALES facturas
+    '----------------------------
+    SQL = "INSERT INTO slifac_eu2(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,articulo,descrarticulo,cantidad,precioar,dtoline1,importel)"
+    
+    SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "codtipom as codtipoa, "
+    SQL = SQL & "numalbar,numlinea,articulo,descrarticulo,cantidad,precioar,dtoline1,importel"
+    SQL = SQL & " FROM slialb_eu2 "
+    '--
+    SQL = SQL & " WHERE " & Replace(CadenaAlbaran, "scaalb", "slialb_eu2")
+    conn.Execute SQL
+
+    
+    
+    
+    
+    
+    
+    
 End Sub
 
 
@@ -3568,12 +3591,15 @@ Dim SQL As String
         SQL = SQL & " WHERE " & Replace(cadSQL, "scaalb", "slialt")
         conn.Execute SQL
         
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             
             SQL = "DELETE FROM slialb_eu "
             SQL = SQL & " WHERE " & Replace(cadSQL, "scaalb", "slialb_eu")
             conn.Execute SQL
             
+            SQL = "DELETE FROM slialb_eu2 "
+            SQL = SQL & " WHERE " & Replace(cadSQL, "scaalb", "slialb_eu2")
+            conn.Execute SQL
             
             
             SQL = "DELETE FROM scaalb_eu "

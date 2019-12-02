@@ -1540,7 +1540,7 @@ Dim HOraInve As Date
     End If
     
     If vParamAplic.NumeroInstalacion = vbFenollar Then
-        If Not HaMostradoCanal2_elB Then Aux = Aux & " AND detamovi<>'ALZ'"
+        If Not HaMostradoCanal2_El_B Then Aux = Aux & " AND detamovi<>'ALZ'"
     End If
     Aux = Aux & " order by Fechamov , horamovi "
      RS.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1602,7 +1602,7 @@ Dim HOraInve As Date
     'Si es el mismo importe k el stock
     Aux = ""
     If vParamAplic.NumeroInstalacion = vbFenollar Then
-        If Not HaMostradoCanal2_elB Then Aux = "N"
+        If Not HaMostradoCanal2_El_B Then Aux = "N"
     End If
     
     

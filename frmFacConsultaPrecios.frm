@@ -796,27 +796,27 @@ Private WithEvents frmC As frmFacClientes3
 Attribute frmC.VB_VarHelpID = -1
 Private frmAlb As frmFacEntAlbaranes2
 
-Dim Cad As String
+Dim cad As String
 Dim IT As ListItem
 
 Dim Valor As Currency
 Dim AntiguoTxt As String
-Dim PrimeraVez As Boolean
+Dim primeravez As Boolean
 
 
 
 Private Sub LimpiarResultados()
 Dim T As TextBox
-Dim Index As Integer
+Dim index As Integer
     lblIndicador.Caption = ""
     For Each T In Me.txtResultado
-        Index = T.Index
-        If Index <> 0 And Index <> 1 And Index <> 8 And Index <> 9 Then T.Text = ""
+        index = T.index
+        If index <> 0 And index <> 1 And index <> 8 And index <> 9 Then T.Text = ""
     Next
     Me.listTarifa.ListItems.Clear
     Me.ListStock.ListItems.Clear
     Me.listDatos.ListItems.Clear
-    label2(4).Caption = ""
+    Label2(4).Caption = ""
 
     lblSituacion.Caption = ""
     
@@ -825,11 +825,11 @@ Dim Index As Integer
     
 End Sub
 
-Private Sub cmdCancelar_Click(Index As Integer)
-    If Index = 1 Then
+Private Sub cmdCancelar_Click(index As Integer)
+    If index = 1 Then
         'PonerVisiblePedir True
         Unload Me
-    ElseIf Index = 2 Then
+    ElseIf index = 2 Then
         limpiar Me
         LimpiarResultados
     Else
@@ -840,7 +840,7 @@ End Sub
 
 
 Private Sub Combo1_Click()
-    If PrimeraVez Then Exit Sub
+    If primeravez Then Exit Sub
     '------------------------------------------
     Screen.MousePointer = vbHourglass
     Me.lblIndicador.Caption = "Leyendo BD"
@@ -860,9 +860,9 @@ Private Sub Command1_Click()
     End If
 End Sub
 
-Private Sub Form_Activate()
-    If PrimeraVez Then
-        PrimeraVez = False
+Private Sub Form_activate()
+    If primeravez Then
+        primeravez = False
         If Fecha = "" Then Fecha = Now
         Caption = Caption & "     (" & Format(Fecha, "dd/mm/yyyy") & ")"
         If ConsultaDesdeFrm <> "" Then
@@ -876,7 +876,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-    PrimeraVez = True
+    primeravez = True
     Me.Icon = frmPpal.Icon
     limpiar Me
     Caption = "Consulta precios"
@@ -887,7 +887,7 @@ Private Sub Form_Load()
     If ConsultaDesdeFrm <> "" Then Me.Combo1.ListIndex = 1
         
     
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         Me.Width = 16965
     Else
         Me.Width = 11775
@@ -907,20 +907,20 @@ End Sub
 Private Sub frmA_DatoSeleccionado(CadenaSeleccion As String)
     txtCodigo(1).Text = RecuperaValor(CadenaSeleccion, 1)
     txtResultado(9).Text = RecuperaValor(CadenaSeleccion, 2)
-    Cad = "O"
+    cad = "O"
 End Sub
 
 Private Sub frmC_DatoSeleccionado(CadenaSeleccion As String)
     txtCodigo(0).Text = RecuperaValor(CadenaSeleccion, 1)
     txtResultado(1).Text = RecuperaValor(CadenaSeleccion, 2)
-    Cad = "O"
+    cad = "O"
 End Sub
 
-Private Sub imgBuscarG_Click(Index As Integer)
+Private Sub imgBuscarG_Click(index As Integer)
 Dim KCargo As Integer
     KCargo = -1
-    Cad = "" 'Para ver si devuelve datos
-    If Index = 0 Then
+    cad = "" 'Para ver si devuelve datos
+    If index = 0 Then
         'Cliente
         
         Set frmC = New frmFacClientes3
@@ -928,7 +928,7 @@ Dim KCargo As Integer
         frmC.Show vbModal
         Set frmC = Nothing
         'If Cad <> "" Then PonerFoco txtCodigo(1)
-        If Cad <> "" Then
+        If cad <> "" Then
             'cmdBuscar_Click
             KCargo = 0
             If txtCodigo(1).Text <> "" Then KCargo = 2
@@ -941,13 +941,13 @@ Dim KCargo As Integer
         frmA.DesdeTPV = False
         frmA.Show vbModal
         Set frmA = Nothing
-        If Cad <> "" Then
+        If cad <> "" Then
             'cmdBuscar_Click
             KCargo = 1
             If txtCodigo(0).Text <> "" Then KCargo = 2
         End If
     End If
-    Cad = ""
+    cad = ""
     Set miRsAux = New ADODB.Recordset
     If KCargo >= 0 Then CargarDatos CByte(KCargo)
     Set miRsAux = Nothing
@@ -1049,7 +1049,7 @@ Dim SQL As String
         
     'Pase lo que pase, por si acaso, cargamos el lw
     listDatos.SetFocus
-    Seleccionado = listDatos.SelectedItem.Index
+    Seleccionado = listDatos.SelectedItem.index
     
     Combo1_Click
     If Not listDatos.SelectedItem Is Nothing Then listDatos.SelectedItem.Selected = False
@@ -1063,66 +1063,66 @@ Dim SQL As String
 
 End Sub
 
-Private Sub txtCodigo_GotFocus(Index As Integer)
-    AntiguoTxt = txtCodigo(Index).Text
-    ConseguirFoco txtCodigo(Index), 3
+Private Sub txtCodigo_GotFocus(index As Integer)
+    AntiguoTxt = txtCodigo(index).Text
+    ConseguirFoco txtCodigo(index), 3
 End Sub
 
 
 
-Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtCodigo_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub txtCodigo_LostFocus(Index As Integer)
+Private Sub txtCodigo_LostFocus(index As Integer)
 Dim Opc As Byte
-    txtCodigo(Index).Text = Trim(txtCodigo(Index))
-    If AntiguoTxt = txtCodigo(Index).Text Then Exit Sub
-    Cad = ""
+    txtCodigo(index).Text = Trim(txtCodigo(index))
+    If AntiguoTxt = txtCodigo(index).Text Then Exit Sub
+    cad = ""
     Opc = 100
-    If Index = 0 Then
+    If index = 0 Then
         lblIndicador.Caption = ""
         
         'Cliente
-        If txtCodigo(Index).Text <> "" Then
-            If Not IsNumeric(txtCodigo(Index).Text) Then
+        If txtCodigo(index).Text <> "" Then
+            If Not IsNumeric(txtCodigo(index).Text) Then
                 MsgBox "Campo codigo cliente debe ser numérico", vbExclamation
                 
             Else
-                Cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtCodigo(Index).Text, "N")
-                If Cad = "" Then
-                    MsgBox "No existe el cliente : " & txtCodigo(Index).Text, vbExclamation
+                cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtCodigo(index).Text, "N")
+                If cad = "" Then
+                    MsgBox "No existe el cliente : " & txtCodigo(index).Text, vbExclamation
                 End If
             End If
         End If
-        If Cad <> "" Then
+        If cad <> "" Then
             Opc = 0
             If txtCodigo(1).Text <> "" Then Opc = 2
             
         End If
     Else
         'articulo
-        If txtCodigo(Index).Text <> "" Then
-            Cad = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", txtCodigo(Index).Text, "T")
-            If Cad = "" Then
-                MsgBox "No existe el articulo: " & txtCodigo(Index).Text, vbExclamation
-                PonerFoco txtCodigo(Index)
+        If txtCodigo(index).Text <> "" Then
+            cad = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", txtCodigo(index).Text, "T")
+            If cad = "" Then
+                MsgBox "No existe el articulo: " & txtCodigo(index).Text, vbExclamation
+                PonerFoco txtCodigo(index)
             End If
         End If
-        If Cad <> "" Then
+        If cad <> "" Then
             Opc = 1
             If txtCodigo(0).Text <> "" Then Opc = 2
         End If
     End If
     'Me.txtNombre(Index).Text = Cad
-    If Cad = "" Then
-        txtCodigo(Index).Text = ""
-        PonerFoco txtCodigo(Index)
+    If cad = "" Then
+        txtCodigo(index).Text = ""
+        PonerFoco txtCodigo(index)
     End If
     If Opc = 100 Then
         'Mal. Borramos los campos
         
-        LimpiarlosCampos CByte(Index)
+        LimpiarlosCampos CByte(index)
         
             
     Else
@@ -1140,9 +1140,9 @@ Dim J As Integer
     Valor = 0
     ListStock.ListItems.Clear
     txtResultado(13).Text = ""
-    Cad = "select salmac.codalmac,nomalmac,canstock   from salmac,salmpr where salmac.codalmac="
-    Cad = Cad & "salmpr.codalmac AND  codartic=" & DBSet(txtCodigo(1).Text, "T") & " ORDER BY salmac.codalmac"
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "select salmac.codalmac,nomalmac,canstock   from salmac,salmpr where salmac.codalmac="
+    cad = cad & "salmpr.codalmac AND  codartic=" & DBSet(txtCodigo(1).Text, "T") & " ORDER BY salmac.codalmac"
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = ListStock.ListItems.Add()
         IT.Text = miRsAux!codAlmac
@@ -1163,10 +1163,10 @@ Dim J As Integer
     'FALTA###
     'If chkCtrolStock.Value Then
     If True Then
-        Cad = "select codalmac,sum(cantidad) as cuantos"
-        Cad = Cad & " from sliped where codartic='"
-        Cad = Cad & DevNombreSQL(txtCodigo(1).Text) & "' GROUP BY 1"
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cad = "select codalmac,sum(cantidad) as cuantos"
+        cad = cad & " from sliped where codartic='"
+        cad = cad & DevNombreSQL(txtCodigo(1).Text) & "' GROUP BY 1"
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
               For J = 1 To ListStock.ListItems.Count
                     If ListStock.ListItems(J).Text = CStr(miRsAux.Fields(0)) Then
@@ -1190,10 +1190,10 @@ Dim J As Integer
 '    C = C & " from scappr,slippr where scappr.numpedpr=slippr.numpedpr  and codartic='"
 '    C = C & DevNombreSQL(Data1.Recordset!codArtic) & "' group by 1"
 
-        Cad = "select codalmac,sum(cantidad) as cuantos"
-        Cad = Cad & " from slippr where codartic='"
-        Cad = Cad & DevNombreSQL(txtCodigo(1).Text) & "' GROUP BY 1"
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cad = "select codalmac,sum(cantidad) as cuantos"
+        cad = cad & " from slippr where codartic='"
+        cad = cad & DevNombreSQL(txtCodigo(1).Text) & "' GROUP BY 1"
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
               For J = 1 To ListStock.ListItems.Count
                     If ListStock.ListItems(J).Text = CStr(miRsAux.Fields(0)) Then
@@ -1230,9 +1230,9 @@ Dim F As Date
     
     
     listTarifa.ListItems.Clear
-    Cad = "select slista.codlista,nomlista,precioac,fechanue,precionu from slista,starif where slista.codlista="
-    Cad = Cad & "starif.codlista and codartic = " & DBSet(txtCodigo(1).Text, "T") & " ORDER BY slista.codlista"
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "select slista.codlista,nomlista,precioac,fechanue,precionu from slista,starif where slista.codlista="
+    cad = cad & "starif.codlista and codartic = " & DBSet(txtCodigo(1).Text, "T") & " ORDER BY slista.codlista"
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = listTarifa.ListItems.Add()
         IT.Text = miRsAux!codlista
@@ -1267,9 +1267,9 @@ Dim F As Date
     miRsAux.Close
     
     If listTarifa.ListItems.Count > 6 Then
-        listTarifa.ColumnHeaders.item(2).Width = 2600
+        listTarifa.ColumnHeaders.Item(2).Width = 2600
     Else
-        listTarifa.ColumnHeaders.item(2).Width = 2800
+        listTarifa.ColumnHeaders.Item(2).Width = 2800
     End If
     
 End Sub
@@ -1286,20 +1286,20 @@ Dim marca As Integer
 
     On Error GoTo EC
     
-    Cad = "OK"
+    cad = "OK"
 
     If Opcion <> 1 Then
         lblIndicador.Caption = "Datos cliente"
         lblIndicador.Refresh
         
-        Cad = "select codclien ,nomclien ,dtoppago ,dtognral  ,codsitua ,codmacta,codforpa,codtarif  from sclien where codclien =" & Me.txtCodigo(0).Text
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cad = "select codclien ,nomclien ,dtoppago ,dtognral  ,codsitua ,codmacta,codforpa,codtarif  from sclien where codclien =" & Me.txtCodigo(0).Text
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
         'Ponemos los campos
         '--------------------------------------------------------
         Me.txtCodigo(0).Text = miRsAux!codClien
-        Me.txtResultado(1).Text = miRsAux!Nomclien
+        Me.txtResultado(1).Text = miRsAux!NomClien
         Me.txtResultado(2).Text = miRsAux!codforpa
         Me.txtResultado(3).Text = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", miRsAux!codforpa, "N")
         Me.txtResultado(4).Text = DevuelveDesdeBD(conAri, "nomsitua", "ssitua", "codsitua", miRsAux!codsitua, "N")
@@ -1307,7 +1307,7 @@ Dim marca As Integer
         Me.txtResultado(7).Text = Format(miRsAux!DtoPPago, FormatoDescuento)
         
         'Cargo la cta contable
-        Cad = DBLet(miRsAux!Codmacta, "T")
+        cad = DBLet(miRsAux!Codmacta, "T")
         
         'Cargo la tarifa
         Me.listTarifa.Tag = miRsAux!codTarif
@@ -1321,7 +1321,7 @@ Dim marca As Integer
         lblIndicador.Caption = "Cobros pendientes"
         lblIndicador.Refresh
     
-        PonerCobrosPendientes Cad
+        PonerCobrosPendientes cad
     
         txtResultado(5).Text = Format(Valor, FormatoImporte)
     
@@ -1332,8 +1332,8 @@ Dim marca As Integer
         lblIndicador.Caption = "Articulo"
         lblIndicador.Refresh
         
-        Cad = "select codartic,nomartic,preciouc,preciomp,preciove,unicajas,codstatu,ctrstock,codfamia,codmarca  from sartic where codartic =" & DBSet(Me.txtCodigo(1).Text, "T")
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        cad = "select codartic,nomartic,preciouc,preciomp,preciove,unicajas,codstatu,ctrstock,codfamia,codmarca  from sartic where codartic =" & DBSet(Me.txtCodigo(1).Text, "T")
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         Me.txtCodigo(1).Text = miRsAux!codArtic
         Me.txtResultado(9).Text = miRsAux!NomArtic
         Me.txtResultado(10).Text = Format(DBLet(miRsAux!precioUC, "N"), FormatoPrecio)
@@ -1369,22 +1369,22 @@ Dim marca As Integer
         CargaTarifas
     
     
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             'Si la familia, marca tiene catalogo lo mostrara
-            Cad = "Select * from eulerprecios  WHERE "
-            Cad = Cad & "( codfamia =" & Familia & " AND codmarca =" & marca & ")"
-            Cad = Cad & " OR ( codfamia =" & Familia & " AND codmarca is null )"
-            Cad = Cad & " OR ( codfamia is NULL AND codmarca =" & marca & ")"
-            miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            Cad = ""
+            cad = "Select * from eulerprecios  WHERE "
+            cad = cad & "( codfamia =" & Familia & " AND codmarca =" & marca & ")"
+            cad = cad & " OR ( codfamia =" & Familia & " AND codmarca is null )"
+            cad = cad & " OR ( codfamia is NULL AND codmarca =" & marca & ")"
+            miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            cad = ""
             If Not miRsAux.EOF Then
                 'OOOOOOK
                 'Tiene un documento asociado
-                Cad = miRsAux!Documento
+                cad = miRsAux!Documento
                 
             End If
             miRsAux.Close
-            CargaArchivo Cad
+            CargaArchivo cad
             
         End If
         DoEvents
@@ -1405,12 +1405,12 @@ Dim marca As Integer
         If ConsultaDesdeFrm = "" Then
             lblIndicador.Caption = "Ins. log"
             lblIndicador.Refresh
-            Cad = "insert into `sconsulta` (`DiaHora`,`Usuario`,`codclien`,`nomclien`,"
+            cad = "insert into `sconsulta` (`DiaHora`,`Usuario`,`codclien`,`nomclien`,"
             '----------                                       cogera la fecha del mysql
-            Cad = Cad & "`codartic`,`nomartic`) values (" & "concat(curdate(),' ',curtime())" & ","
-            Cad = Cad & DBSet(vUsu.Nombre, "T") & "," & txtCodigo(0).Text & "," & DBSet(txtResultado(1), "T")
-            Cad = Cad & "," & DBSet(txtCodigo(1), "T") & "," & DBSet(txtResultado(9), "T") & ")"
-            conn.Execute Cad
+            cad = cad & "`codartic`,`nomartic`) values (" & "concat(curdate(),' ',curtime())" & ","
+            cad = cad & DBSet(vUsu.Nombre, "T") & "," & txtCodigo(0).Text & "," & DBSet(txtResultado(1), "T")
+            cad = cad & "," & DBSet(txtCodigo(1), "T") & "," & DBSet(txtResultado(9), "T") & ")"
+            conn.Execute cad
             Espera 0.3
             
         End If
@@ -1430,18 +1430,18 @@ Private Sub PonerCobrosPendientes(ByVal Codmacta As String)
     Valor = 0
     If Codmacta = "" Then Exit Sub
     'Obtener a partir de la cuenta del cliente si hay cobros pendientes en Contabilidad
-    Cad = " WHERE scobro.codmacta = '" & Codmacta & "'"
-    Cad = Cad & " AND fecvenci <= ' " & Format(Now, FormatoFecha) & "' "
-    Cad = Cad & " AND (sforpa.tipforpa between 0 and 3)"
+    cad = " WHERE scobro.codmacta = '" & Codmacta & "'"
+    cad = cad & " AND fecvenci <= ' " & Format(Now, FormatoFecha) & "' "
+    cad = cad & " AND (sforpa.tipforpa between 0 and 3)"
     
     If vParamAplic.ContabilidadNueva Then
-        Cad = " cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa " & Cad
+        cad = " cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa " & cad
     Else
-        Cad = " scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa " & Cad
+        cad = " scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa " & cad
     End If
-    Cad = "SELECT sum(impvenci + coalesce(gastos,0) - coalesce(impcobro,0)) FROM " & Cad
+    cad = "SELECT sum(impvenci + coalesce(gastos,0) - coalesce(impcobro,0)) FROM " & cad
     'Lee de la Base de Datos de CONTABILIDAD
-    miRsAux.Open Cad, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not miRsAux.EOF Then Valor = DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
@@ -1470,48 +1470,48 @@ Dim Ico As Integer
     Select Case Ktabla
     Case 3
         Ico = 5
-        Cad = "slipre,scapre WHERE slipre.numofert=scapre.numofert"
+        cad = "slipre,scapre WHERE slipre.numofert=scapre.numofert"
         Aux = " '' as Primero,slipre.numofert as elnumero,fecofert as fecha"
         Me.lblIndicador.Caption = "Ofertas"
     Case 2
         Ico = 6
-        Cad = "sliped,scaped where sliped.numpedcl=scaped.numpedcl"
+        cad = "sliped,scaped where sliped.numpedcl=scaped.numpedcl"
         Aux = " '' as Primero,sliped.numpedcl as elnumero,fecpedcl  as fecha"
         Me.lblIndicador.Caption = "Pedidos"
     Case 1
         Ico = 7
-        Cad = "slialb,scaalb where slialb.numalbar=scaalb.numalbar and slialb.codtipom=scaalb.codtipom"
+        cad = "slialb,scaalb where slialb.numalbar=scaalb.numalbar and slialb.codtipom=scaalb.codtipom"
         Aux = " slialb.codtipom as Primero,slialb.numalbar as elnumero,fechaalb as fecha"
         Me.lblIndicador.Caption = "Albaranes"
     Case 0
         Ico = 8
-        Cad = " slifac,scafac where slifac.numfactu=scafac.numfactu and slifac.codtipom=scafac.codtipom and slifac.fecfactu=scafac.fecfactu"
+        cad = " slifac,scafac where slifac.numfactu=scafac.numfactu and slifac.codtipom=scafac.codtipom and slifac.fecfactu=scafac.fecfactu"
         Aux = "slifac.codtipom as primero,slifac.numfactu as elnumero,slifac.fecfactu as fecha"
         Me.lblIndicador.Caption = "Facturas"
     End Select
     Me.lblIndicador.Refresh
     
-    Aux = "Select " & Aux & ",Cantidad, precioar, dtoline1, dtoline2, ImporteL FROM " & Cad
-    Cad = Aux & " AND codartic = " & DBSet(Me.txtCodigo(1).Text, "T")
-    Cad = Cad & " AND codclien = " & txtCodigo(0).Text
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Aux = "Select " & Aux & ",Cantidad, precioar, dtoline1, dtoline2, ImporteL FROM " & cad
+    cad = Aux & " AND codartic = " & DBSet(Me.txtCodigo(1).Text, "T")
+    cad = cad & " AND codclien = " & txtCodigo(0).Text
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = Me.listDatos.ListItems.Add()
-        Cad = miRsAux!primero & Format(miRsAux!elnumero, "000000")
+        cad = miRsAux!primero & Format(miRsAux!elnumero, "000000")
         IT.Text = ""
         
         IT.SubItems(1) = Format(miRsAux!Fecha, "dd/mm/yyyy")
         
         'Nuevo. El documento
-        IT.SubItems(2) = Cad
+        IT.SubItems(2) = cad
         IT.SubItems(3) = Format(miRsAux!cantidad, FormatoCantidad)
         IT.SubItems(4) = Format(miRsAux!precioar, FormatoPrecio)
         IT.SubItems(5) = Format(miRsAux!dtoline1, FormatoDescuento)
         IT.SubItems(6) = Format(miRsAux!dtoline2, FormatoDescuento)
         IT.SubItems(7) = Format(miRsAux!ImporteL, FormatoImporte)
         IT.SmallIcon = Ico
-        IT.Tag = Cad
-        IT.ToolTipText = Me.lblIndicador.Caption & " " & Cad
+        IT.Tag = cad
+        IT.ToolTipText = Me.lblIndicador.Caption & " " & cad
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1544,15 +1544,15 @@ Dim NumCajas As Integer
                 
                
                 PorCaja = (NumCajas > 0)
-                Precio = CPrecioFact.ObtenerPrecio(PorCaja, CStr(Fecha), Cad, "")
+                Precio = CPrecioFact.ObtenerPrecio(PorCaja, CStr(Fecha), cad, "")
                     
                 'En cad TENGO el origen del precio
-                Select Case Cad
-                    Case "P": label2(4).Caption = "Promoción"
-                    Case "E": label2(4).Caption = "Precio Especial"
-                    Case "T": label2(4).Caption = "Tarifa Artículo"
-                    Case "A": label2(4).Caption = "Precio Artículo"
-                    Case "M": label2(4).Caption = "Manual"
+                Select Case cad
+                    Case "P": Label2(4).Caption = "Promoción"
+                    Case "E": Label2(4).Caption = "Precio Especial"
+                    Case "T": Label2(4).Caption = "Tarifa Artículo"
+                    Case "A": Label2(4).Caption = "Precio Artículo"
+                    Case "M": Label2(4).Caption = "Manual"
                 End Select
                 
                     txtResultado(14).Text = Precio
@@ -1599,7 +1599,7 @@ Dim I As Integer
     For I = 14 To 17
             txtResultado(I).Text = ""
     Next I
-    label2(4).Caption = ""
+    Label2(4).Caption = ""
     lblSituacion.Caption = ""
 End Sub
 

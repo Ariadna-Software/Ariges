@@ -650,7 +650,7 @@ Private Sub cmdAux_Click(index As Integer)
             Set frmT = Nothing
             If CadenaConsulta <> "" Then
                 txtAux(0).Text = RecuperaValor(CadenaConsulta, 1)
-                txtAux3(0).Text = RecuperaValor(CadenaConsulta, 2)
+                TxtAux3(0).Text = RecuperaValor(CadenaConsulta, 2)
             End If
         Case 1
             'Orden trabajo
@@ -676,7 +676,7 @@ Private Sub cmdAux_Click(index As Integer)
             Set frmB = Nothing
             If CadenaConsulta <> "" Then
                 txtAux(1).Text = RecuperaValor(CadenaConsulta, 1)
-                txtAux3(1).Text = RecuperaValor(CadenaConsulta, 2)
+                TxtAux3(1).Text = RecuperaValor(CadenaConsulta, 2)
             End If
             
         Case 100 'albaran
@@ -933,9 +933,9 @@ Dim b As Boolean
         txtAux(jj).Top = alto
         txtAux(jj).visible = b
         If jj < 2 Then
-            txtAux3(jj).Height = DataGrid1.RowHeight
-            txtAux3(jj).Top = alto
-            txtAux3(jj).visible = b
+            TxtAux3(jj).Height = DataGrid1.RowHeight
+            TxtAux3(jj).Top = alto
+            TxtAux3(jj).visible = b
             
             Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
             Me.cmdAux(jj).Top = alto
@@ -1261,7 +1261,7 @@ End Function
 
 Private Sub BotonBuscar()
 Dim anc As Single
-
+    
     'Buscar
     EsBusqueda = True
     LimpiarCampos
@@ -1337,10 +1337,10 @@ Dim anc As Single
 
     'poner valores grabados
     txtAux(0).Text = DBLet(DataGrid1.Columns(0).Value, "N")
-    txtAux3(0).Text = DBLet(DataGrid1.Columns(1).Value, "F")
+    TxtAux3(0).Text = DBLet(DataGrid1.Columns(1).Value, "F")
     
     txtAux(1).Text = DBLet(DataGrid1.Columns(2).Value, "N")
-    txtAux3(1).Text = DBLet(DataGrid1.Columns(3).Value, "F")
+    TxtAux3(1).Text = DBLet(DataGrid1.Columns(3).Value, "F")
         
     txtAux(2).Text = DBLet(Data1.Recordset!Fecha, "F")
     
@@ -1585,20 +1585,20 @@ Dim Minutos As Currency
     Select Case index
         Case 0 'cod tecnico
             If PonerFormatoEntero(txtAux(index)) Then
-                txtAux3(index).Text = PonerNombreDeCod(txtAux(index), conAri, "straba", "nomtraba", "codtraba")
-                If txtAux3(index).Text = "" Then PonerFoco txtAux(index)
+                TxtAux3(index).Text = PonerNombreDeCod(txtAux(index), conAri, "straba", "nomtraba", "codtraba")
+                If TxtAux3(index).Text = "" Then PonerFoco txtAux(index)
             Else
-                txtAux3(index).Text = ""
+                TxtAux3(index).Text = ""
             End If
         
         
         Case 1
             If txtAux(index).Text = "" Then
-                txtAux3(index).Text = ""
+                TxtAux3(index).Text = ""
             Else
                 txtAux(index).Text = UCase(txtAux(index).Text)
-                txtAux3(index).Text = PonerNombreDeCod(txtAux(index), conAri, "stipor", "nomtipor", "codtipor", , "T")
-                If Modo <> 1 And txtAux3(index).Text = "" Then
+                TxtAux3(index).Text = PonerNombreDeCod(txtAux(index), conAri, "stipor", "nomtipor", "codtipor", , "T")
+                If Modo <> 1 And TxtAux3(index).Text = "" Then
                    ' MsgBox "No existe el tipo de trabajo", vbExclamation
                     txtAux(index).Text = ""
                     PonerFoco txtAux(index)
@@ -1613,12 +1613,12 @@ Dim Minutos As Currency
             End If
             
             If txtAux(index) = "" Then
-                txtAux3(4).Text = ""
+                TxtAux3(4).Text = ""
             Else
                 If PonerFormatoEntero(txtAux(index)) Then
                 
                     If cboTipo2.ListIndex = 3 Then
-                        txtAux3(4).Text = "Produccion"
+                        TxtAux3(4).Text = "Produccion"
                     Else
                         
                     
@@ -1632,19 +1632,19 @@ Dim Minutos As Currency
                           '  If MsgBox(CadenaConsulta, vbQuestion + vbYesNo) = vbNo Then
                           '      txtAux3(4).Text = ""
                           '  Else
-                                txtAux3(4).Text = "NO encontrado"
+                                TxtAux3(4).Text = "NO encontrado"
                           '  End If
                         Else
-                            txtAux3(4).Text = CadenaConsulta
+                            TxtAux3(4).Text = CadenaConsulta
                         End If
-                        If txtAux3(4).Text = "" Then
+                        If TxtAux3(4).Text = "" Then
                             txtAux(index).Text = ""
                             PonerFoco txtAux(index)
                         End If
                     End If
                 Else
                     txtAux(index).Text = ""
-                   txtAux3(1).Text = ""
+                   TxtAux3(1).Text = ""
                 End If
             End If
         Case 2 'kms
@@ -1718,14 +1718,14 @@ Dim Limp As Boolean
         txtAux(4).Text = ""
         txtAux(5).Text = ""
         txtAux(6).Text = ""
-        txtAux3(4).Text = ""
+        TxtAux3(4).Text = ""
 
     Else
         'EL
         txtAux(4).Text = PonerCampoAux2(1)
         txtAux(5).Text = PonerCampoAux2(2)
         txtAux(6).Text = PonerCampoAux2(3)
-        txtAux3(4).Text = ""
+        TxtAux3(4).Text = ""
         PonerCampoAux2 4
         
         
@@ -1803,7 +1803,7 @@ Dim C As String
                 C = "Produccion"
             End If
             
-            Me.txtAux3(4).Text = C
+            Me.TxtAux3(4).Text = C
         End If
     End If
 End Function
@@ -1919,9 +1919,9 @@ Dim J As Integer
     
     
     Me.txtAux(0).Text = RecuperaValor(Cd, 1)
-    txtAux3(0).Text = RecuperaValor(Cd, 2)
+    TxtAux3(0).Text = RecuperaValor(Cd, 2)
     Me.txtAux(1).Text = RecuperaValor(Cd, 3)
-    txtAux3(1).Text = RecuperaValor(Cd, 4)
+    TxtAux3(1).Text = RecuperaValor(Cd, 4)
     Me.txtAux(2).Text = RecuperaValor(Cd, 5)
 '    Me.txtAux(3).Text = RecuperaValor(Cd, 6)
     txtAux(4).Text = ""

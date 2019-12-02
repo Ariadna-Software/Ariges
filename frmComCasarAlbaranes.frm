@@ -364,7 +364,7 @@ Private Sub VincularAlbaran()
         ejecutar miSQL, False
     End If
     PVez = True
-    Form_Activate
+    Form_activate
 End Sub
 
 Private Sub Command1_Click()
@@ -404,7 +404,7 @@ Private Sub Command3_Click()
     Unload Me
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbHourglass
     If PVez Then
         PVez = False
@@ -413,7 +413,7 @@ Private Sub Form_Activate()
         Label2(4).Refresh
         CargaProveedor
         DoEvents
-        Me.Refresh
+        
         CargaClientes
         Set miRsAux = Nothing
         Label2(4).visible = False
@@ -438,7 +438,7 @@ Private Sub CargaProveedor()
     ListView2.ListItems.Clear
     'Si queremos meter los albaranes....
     miSQL = "select numalbar,fechaalb,null numfactu,null fecfactu ,albcli,codtipom,fecalbcli from scaalp where codprove =" & Codprove
-    miSQL = miSQL & " and fechaalb >= '2014-09-01'"
+    miSQL = miSQL & " and fechaalb >= '2019-09-01'"
     miSQL = miSQL & " and codtipom is null and albcli is null"
     miSQL = miSQL & " Union"
     
@@ -447,14 +447,14 @@ Private Sub CargaProveedor()
     
     
     miSQL = miSQL & " select numalbar,fechaalb, numfactu, fecfactu  from scafpa where codprove =" & Codprove
-    miSQL = miSQL & " and fecfactu >= '2014-09-01'"
+    miSQL = miSQL & " and fecfactu >= '2019-09-01'"
     miSQL = miSQL & " and not (numfactu, fecfactu) IN (select numfacpr,fecfacpr from scafpaVinc where codprove = " & Codprove
     miSQL = miSQL & ") ORDER BY 1,2"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         
         Set IT = ListView2.ListItems.Add()
-        IT.Text = miRsAux!NumAlbar
+        IT.Text = miRsAux!Numalbar
         IT.SubItems(1) = miRsAux!FechaAlb
         IT.SubItems(2) = DBLet(miRsAux!Numfactu, "T") & " "
         IT.SubItems(3) = DBLet(miRsAux!FecFactu, "T") & " "
@@ -467,13 +467,13 @@ Private Sub CargaProveedor()
     
     'Los que estaan
     ListView3.ListItems.Clear
-    miSQL = "select numalbar,fechaalb,null numfactu,null fecfactu ,albcli,codtipom,fecalbcli from scaalp where codprove =" & Codprove
-    miSQL = miSQL & " and  codtipom <>'' and albcli >=0"
-    miSQL = miSQL & " Union"
-    miSQL = miSQL & " select numalbar,fechaalb, numfactu, fecfactu ,albcli,codtipom,fecalbcli from scafpa where codprove =" & Codprove
-    miSQL = miSQL & " and codtipom <>'' and albcli >=0"
-    miSQL = miSQL & " ORDER BY 2,3"
-    
+'    miSQL = "select numalbar,fechaalb,null numfactu,null fecfactu ,albcli,codtipom,fecalbcli from scaalp where codprove =" & Codprove
+'    miSQL = miSQL & " and  codtipom <>'' and albcli >=0"
+'    miSQL = miSQL & " Union"
+'    miSQL = miSQL & " select numalbar,fechaalb, numfactu, fecfactu ,albcli,codtipom,fecalbcli from scafpa where codprove =" & Codprove
+'    miSQL = miSQL & " and codtipom <>'' and albcli >=0"
+'    miSQL = miSQL & " ORDER BY 2,3"
+'
     
     'MARZO 2015
         
@@ -489,7 +489,7 @@ Private Sub CargaProveedor()
         IT.SubItems(2) = DBLet(miRsAux!numfacpr, "T") & " "
         IT.SubItems(3) = DBLet(miRsAux!fecfacpr, "T") & " "
         IT.SubItems(4) = DBLet(miRsAux!codtipom, "T") & " "
-        IT.SubItems(5) = DBLet(miRsAux!NumAlbar, "T") & " "
+        IT.SubItems(5) = DBLet(miRsAux!Numalbar, "T") & " "
         IT.SubItems(6) = DBLet(miRsAux!fecfaccl, "T") & " "
         
         
@@ -505,6 +505,9 @@ End Sub
 
 Private Sub CargaClientes()
 Dim RN As ADODB.Recordset
+Dim F As Date
+
+    F = DateAdd("m", -3, CDate("01/09/2019"))
 
     'Cargo un RS con todos los partes vinculados al proveedor
     miSQL = "select numparte from advpartes where codflota in (select codflota from sflotas where codprove=" & Codprove & ")"
@@ -517,8 +520,8 @@ Dim RN As ADODB.Recordset
     
     miSQL = "select numalbar,fechaalb,codtipom codtipoa,null numfactu,null fecfactu,null codtipom,referenc,codclien,nomclien,0.00 BrutoFac  from scaalb where  referenc like 'part%' "
     miSQL = miSQL & " and codtipom in ('ALS','ALI') AND not (numalbar,codtipom)"
-    miSQL = miSQL & " in (select codtipom,numalbar from scafpaVinc WHERE codprove=" & Codprove & ")  "
-    
+    'miSQL = miSQL & " in (select codtipom,numalbar from scafpaVinc WHERE codprove=" & Codprove & ")  "
+    miSQL = miSQL & " in (select codtipom,numalbar from scafpaVinc WHERE fecfaccl>=" & DBSet(F, "F") & ")"
     CargaLWClientes
     
     Screen.MousePointer = vbHourglass
@@ -527,11 +530,12 @@ Dim RN As ADODB.Recordset
     miSQL = " select numalbar,fechaalb,codtipoa, scafac1.numfactu, scafac1.fecfactu,scafac1.codtipom,"
     miSQL = miSQL & "  referenc,codclien,nomclien,brutofac from scafac,scafac1 where "
     miSQL = miSQL & "  scafac.numfactu = scafac1.numfactu and scafac.codtipom = scafac1.codtipom and scafac.fecfactu = scafac1.fecfactu "
-    miSQL = miSQL & "  and codtipoa in ('ALS','ALI') AND referenc like 'part%' and scafac.fecfactu>='2015-01-01'"
+    miSQL = miSQL & "  and codtipoa in ('ALS','ALI') AND referenc like 'part%' and scafac.fecfactu>="
+    miSQL = miSQL & DBSet(F, "F")
     miSQL = miSQL & "  AND not (numalbar,codtipoa,scafac1.fecfactu)"
-    miSQL = miSQL & " in (select codtipom,numalbar,fecfaccl from scafpaVinc WHERE codprove=" & Codprove & ")  "
-    
-'    miSQL = "select numalbar,fechaalb,codtipoa, scafac1.numfactu, scafac1.fecfactu,scafac1.codtipom,  referenc,codclien,nomclien,brutofac from scafac,scafac1 where   scafac.numfactu = scafac1.numfactu and scafac.codtipom = scafac1.codtipom and scafac.fecfactu = scafac1.fecfactu   and codtipoa in ('ALV','ALS','ALI') AND referenc like '%a%' and scafac.fecfactu>='2014-01-01'  AND not (numalbar,codtipoa,scafac1.fecfactu) in (select codtipom,numalbar,fecfaccl from scafpaVinc WHERE codprove=6)  "
+    'miSQL = miSQL & " in (select codtipom,numalbar,fecfaccl from scafpaVinc WHERE codprove=" & Codprove & ")  "
+    miSQL = miSQL & " in (select codtipom,numalbar,fecfaccl from scafpaVinc WHERE fecfaccl>=" & DBSet(F, "F") & ")"
+
 '
     CargaLWClientes
     
@@ -542,17 +546,17 @@ End Sub
 
 
 Private Sub CargaLWClientes()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
     
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     'MISQL llevará el sql vinculado a uno u otro
-    Rs.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
+    RS.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
             'Parte: 14119
-            Label2(4).Caption = "Refer: " & Rs!referenc
+            Label2(4).Caption = "Refer: " & RS!referenc
             Label2(4).Refresh
-            miSQL = Trim(Mid(Rs!referenc, 7))
+            miSQL = Trim(Mid(RS!referenc, 7))
             
             If miSQL <> "" Then
                 If Not IsNumeric(miSQL) Then
@@ -570,23 +574,23 @@ Dim Rs As ADODB.Recordset
         
         
                 Set IT = ListView1.ListItems.Add()
-                IT.Text = Rs!NumAlbar
-                IT.SubItems(1) = Rs!FechaAlb
-                IT.SubItems(2) = DBLet(Rs!codtipoa, "T") & " "
-                IT.SubItems(3) = DBLet(Rs!Numfactu, "T") & " "
-                IT.SubItems(4) = DBLet(Rs!FecFactu, "T") & " "
-                IT.SubItems(5) = DBLet(Rs!codtipom, "T") & " "
-                IT.SubItems(6) = Rs!referenc
-                IT.SubItems(7) = Format(Rs!codClien, "0000")
-                IT.SubItems(8) = Rs!NomClien
-                If Rs!BrutoFac <> 0 Then IT.SubItems(9) = Rs!BrutoFac
+                IT.Text = RS!Numalbar
+                IT.SubItems(1) = RS!FechaAlb
+                IT.SubItems(2) = DBLet(RS!codtipoa, "T") & " "
+                IT.SubItems(3) = DBLet(RS!Numfactu, "T") & " "
+                IT.SubItems(4) = DBLet(RS!FecFactu, "T") & " "
+                IT.SubItems(5) = DBLet(RS!codtipom, "T") & " "
+                IT.SubItems(6) = RS!referenc
+                IT.SubItems(7) = Format(RS!codClien, "0000")
+                IT.SubItems(8) = RS!NomClien
+                If RS!BrutoFac <> 0 Then IT.SubItems(9) = RS!BrutoFac
             End If
             
-            Rs.MoveNext
+            RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
-    Set Rs = Nothing
+    Set RS = Nothing
 End Sub
 
 
@@ -605,7 +609,7 @@ Private Sub Desvincular()
             
             ejecutar miSQL, False
             PVez = True
-            Form_Activate
+            Form_activate
         
     End If
 End Sub

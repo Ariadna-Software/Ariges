@@ -451,16 +451,20 @@ Private mvarImpresoraFenollarB As String
 
 Private mvarMaximoImporteEfectivo As String
 
-
-
 Private mvarPuedeModificarAriconta As Boolean
-
-
-
 Private mvarTieneComponentes_y_Produccion As Boolean
-
-
 Private mvarImportacionesCoarval As Boolean
+
+
+
+'Nov2019.   Gasolinera
+Private mvarGasolArticuloNormal As String
+Private mvarGasolArticuloReducido As String
+Private mvarGasolArticuloSuperReducido  As String
+Private mvarGasolArticuloExento As String
+Private mvarGasolClienteVario As Long
+
+
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
@@ -1844,6 +1848,39 @@ Public Property Get ImportacionesCoarval() As Boolean
     ImportacionesCoarval = mvarImportacionesCoarval
 End Property
      
+     
+'llevan GET y let
+Public Property Get GasolArticuloNormal() As String
+     GasolArticuloNormal = mvarGasolArticuloNormal
+End Property
+Public Property Let GasolArticuloNormal(ByVal ArticuloNormal As String)
+     mvarGasolArticuloNormal = ArticuloNormal
+End Property
+Public Property Get GasolArticuloReducido() As String
+     GasolArticuloReducido = mvarGasolArticuloReducido
+End Property
+Public Property Let GasolArticuloReducido(ByVal ArticuloReducido As String)
+     mvarGasolArticuloReducido = ArticuloReducido
+End Property
+Public Property Get GasolArticuloSuperReducido() As String
+     GasolArticuloSuperReducido = mvarGasolArticuloSuperReducido
+End Property
+Public Property Let GasolArticuloSuperReducido(ByVal ArticuloSuperReducido As String)
+     mvarGasolArticuloSuperReducido = ArticuloSuperReducido
+End Property
+Public Property Get GasolArticuloExento() As String
+     GasolArticuloExento = mvarGasolArticuloExento
+End Property
+Public Property Let GasolArticuloExento(ByVal ArticuloExento As String)
+     mvarGasolArticuloExento = ArticuloExento
+End Property
+Public Property Get GasolClienteVario() As Long
+     GasolClienteVario = mvarGasolClienteVario
+End Property
+Public Property Let GasolClienteVario(ByVal Cli As Long)
+     mvarGasolClienteVario = Cli
+End Property
+     
 
 
 
@@ -2142,6 +2179,7 @@ On Error GoTo Err3
         'Solo tiene GET
         mvarNumeroInstalacion = DBLet(RS!NumInstalacion, "N")
         
+        
         mvarManipuladorFitosanitarios = DBLet(RS!ManipuladorFitosanitarios, "N") = 1
         
         mvarInvSujetoPasivo = DBLet(RS!InvSujetoPasivo, "N") = 1
@@ -2164,6 +2202,20 @@ On Error GoTo Err3
         
         'Solo GET
         mvarContabilidadNueva = DBLet(RS!NuevaContabilidad, "N") = 1
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         Leer = 0
         mvarSIITiene = False
         
@@ -2215,6 +2267,12 @@ On Error GoTo Err3
         mvarMaximoImporteEfectivo = 2500
         If CampoNuevoBD(RS, "ImportMaxEfectivo", "N", V) Then mvarMaximoImporteEfectivo = DBLet(V)
         
+        
+        mvarGasolArticuloNormal = DBLet(RS!GasolArticuloNormal, "T")
+        mvarGasolArticuloReducido = DBLet(RS!GasolArticuloReducido, "T")
+        mvarGasolArticuloSuperReducido = DBLet(RS!GasolArticuloSuperReducido, "T")
+        mvarGasolArticuloExento = DBLet(RS!GasolArticuloExento, "T")
+        mvarGasolClienteVario = DBLet(RS!GasolClienteVario, "N")
         
     End If
 
@@ -2472,7 +2530,12 @@ On Error GoTo EModificar
     SQL = SQL & ", PathFirmasAlbaran= " & DBSet(mvarPathFirmasAlbaran, "T", "S")
     SQL = SQL & ", PathFirmasFacturas= " & DBSet(mvarPathFirmasFacturas, "T", "S")
 
-
+    'Gasolinera
+    SQL = SQL & ", GasolArticuloNormal= " & DBSet(mvarGasolArticuloNormal, "T", "S")
+    SQL = SQL & ", GasolArticuloReducido= " & DBSet(mvarGasolArticuloReducido, "T", "S")
+    SQL = SQL & ", GasolArticuloSuperReducido= " & DBSet(mvarGasolArticuloSuperReducido, "T", "S")
+    SQL = SQL & ", GasolArticuloExento= " & DBSet(mvarGasolArticuloExento, "T", "S")
+    SQL = SQL & ", GasolClienteVario= " & DBSet(mvarGasolClienteVario, "N", "S")
 
     'Solo desde OG
     'SQL = SQL & ",Renting = " & DBSet(mvarRenting, "B")

@@ -2558,7 +2558,7 @@ Private Sub cmdAux_Click(index As Integer)
             
         Case 1 'Busqueda de Cod. Artic
             
-            If vParamAplic.NumeroInstalacion = 4 Then
+            If InstalacionEsEulerTaxco Then
                 'EULER  As
                 Set FrmArtEul = New frmAlmArticuEUL
                 'frmArt.DatosADevolverBusqueda3 = "@1@" 'Poner en modo busqueda
@@ -2646,7 +2646,7 @@ Dim NomTraba As String
     PonerModo 3
 
 
-    If vParamAplic.NumeroInstalacion = 4 Then chkVisadoRes.Value = 1
+    If InstalacionEsEulerTaxco Then chkVisadoRes.Value = 1
 
     'Poner el nombre del trabajador que esta conectado
     Text1(3).Text = PonerTrabajadorConectado(NomTraba)
@@ -6077,7 +6077,7 @@ Dim ObtenerContador As Boolean
     
     ObtenerContador = True   'Obtener contador
     codtipomAUX = codtipom
-    If vParamAplic.NumeroInstalacion = vbEuler Then
+    If InstalacionEsEulerTaxco Then
         If codtipom = "ALR" Then
        
             
@@ -6121,7 +6121,7 @@ Dim ObtenerContador As Boolean
     vSQL = vSQL & "SELECT '" & codtipom & "' as codtipom, " & NumAlb & " as numalbar, " & devuelve
     'SAIL
     vSQL = vSQL & ",actuacion"
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         vSQL = vSQL & "," & DBSet(FechaAlb, "F", "N")
     Else
         vSQL = vSQL & ",null"
@@ -6140,7 +6140,7 @@ Dim ObtenerContador As Boolean
     
     
     'EN EULER
-    If vParamAplic.NumeroInstalacion = vbEuler Then
+    If InstalacionEsEulerTaxco Then
         
         devuelve = ""
         If Not AlbCompleto Then

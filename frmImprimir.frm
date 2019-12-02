@@ -237,11 +237,11 @@ Private ImpresoraPorDefectoAnterior As String
 
 'Private ReestableceSoloImprimir As Boolean
 Private Sub chkEMAIL_Click()
-    If chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 0
+    If chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 0
 End Sub
 
 Private Sub chkSoloImprimir_Click()
-    If Me.chkSoloImprimir.Value = 1 Then Me.chkEMAIL.Value = 0
+    If Me.chkSoloImprimir.Value = 1 Then Me.chkEmail.Value = 0
 End Sub
 
 
@@ -256,7 +256,7 @@ End Sub
 
 Private Sub cmdImprimir_Click()
  
-    If Me.chkSoloImprimir.Value = 1 And Me.chkEMAIL.Value = 1 Then
+    If Me.chkSoloImprimir.Value = 1 And Me.chkEmail.Value = 1 Then
         MsgBox "Si desea enviar por mail no debe marcar vista preliminar", vbExclamation
         Exit Sub
     End If
@@ -301,7 +301,7 @@ Private Sub Form_activate()
         ElseIf Me.EnvioEMail Then
             Me.Hide
             DoEvents
-            chkEMAIL.Value = 1
+            chkEmail.Value = 1
             Imprime
             Unload Me
         
@@ -322,12 +322,12 @@ End Sub
 'Si no he ajustado el NombrePDF y no le he puesto valor entonces,
 'cogera el mismo que tiene en NombreRPT
 Private Sub Form_Load()
-Dim cad As String
+Dim Cad As String
 
     primeravez = True
     Lanzado = False
     CargaICO
-    cad = Dir(App.Path & "\impre.dat", vbArchive)
+    Cad = Dir(App.Path & "\impre.dat", vbArchive)
     HaPulsadoElBotonDeImprimir = False
     
     
@@ -335,7 +335,7 @@ Dim cad As String
     
     
     'ReestableceSoloImprimir = False
-    If cad = "" Then
+    If Cad = "" Then
         chkSoloImprimir.Value = 0
     Else
         chkSoloImprimir.Value = 1
@@ -600,8 +600,8 @@ Dim cad As String
                         Titulo = "Etiquetas de mantenimiento"
                         'NombreRPT = "rManClienEtiq.rpt"
                         
-
-                    
+                    Case 230
+                        
                     ' ---- [06/11/2009] [LAURA] : corregir informe de frecuencias
                     '      estos valores se pasan ya al llamar al form desde mto frecuencias
 '                    Case 96
@@ -617,6 +617,8 @@ Dim cad As String
                             Me.cmdImprimir.Enabled = False
                         End If
                     End Select
+                Else
+                    If Opcion = 230 Then MostrarTree = MostrarTreeDesdeFuera
                 End If
 End If
     If Titulo <> "" Then
@@ -645,7 +647,7 @@ Dim Aux As String
     OtrosParam2 = OtrosParametros
     NumParam2 = NumeroParametros
     HaPulsadoImprimir = False
-    If Opcion = 53 And Me.chkEMAIL.Value = 0 Then
+    If Opcion = 53 And Me.chkEmail.Value = 0 Then
         'Estamos en
         '   -reimpresion de facturas
         '   -facturacion
@@ -702,12 +704,12 @@ Dim Aux As String
         End If
         
         
-        If Me.chkEMAIL.Value = 1 Then
+        If Me.chkEmail.Value = 1 Then
             'EMAIL
             
             'En EULER, el rp
             If SeleccionaRPTCodigo > 0 Then
-                If vParamAplic.NumeroInstalacion = 4 Then NombrePDF = NombreRPT
+                If InstalacionEsEulerTaxco Then NombrePDF = NombreRPT
             End If
             .Informe = MIPATH & NombrePDF
         Else
@@ -726,7 +728,7 @@ Dim Aux As String
             .NumCopias = NumeroCopias
         End If
         .Opcion = Opcion
-        .ExportarPDF = (chkEMAIL.Value = 1)
+        .ExportarPDF = (chkEmail.Value = 1)
         .MostrarTree = MostrarTree
         .Show vbModal
         HaPulsadoImprimir = .EstaImpreso
@@ -775,7 +777,7 @@ Dim Aux As String
     
     
     
-    If Me.chkEMAIL.Value = 1 Then
+    If Me.chkEmail.Value = 1 Then
         If CadenaDesdeOtroForm <> "" Then 'se exporto el informe OK (.pdf)
             
             If Me.EnvioEMail Then  'se llamo desde envio masivo
@@ -798,7 +800,7 @@ Dim Aux As String
                 
                 
                     
-                    If vParamAplic.NumeroInstalacion = 4 Then
+                    If InstalacionEsEulerTaxco Then
                         If davidCodtipom <> "" Then
                             If Dir(davidCodtipom, vbDirectory) <> "" Then LanzaVisorMimeDocumento Me.hwnd, davidCodtipom
                             
@@ -825,7 +827,7 @@ End Function
 
 
 Private Sub Form_Unload(Cancel As Integer)
-    If Me.chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 1
+    If Me.chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 1
     'If ReestableceSoloImprimir Then SoloImprimir = False
     'Dejo la marca como estaba
     If SoloImprimir Then

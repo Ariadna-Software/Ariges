@@ -287,12 +287,51 @@ Begin VB.Form frmListadoPed
          End
       End
       Begin VB.Frame FrameTiposFactura 
-         Height          =   1335
-         Left            =   360
+         Height          =   1695
+         Left            =   240
          TabIndex        =   285
-         Top             =   3600
+         Top             =   4680
          Visible         =   0   'False
          Width           =   5895
+         Begin VB.ComboBox cboAnyos 
+            Height          =   315
+            ItemData        =   "frmListadoPed.frx":0414
+            Left            =   4680
+            List            =   "frmListadoPed.frx":0424
+            Style           =   2  'Dropdown List
+            TabIndex        =   332
+            Top             =   1320
+            Visible         =   0   'False
+            Width           =   615
+         End
+         Begin VB.ComboBox cboTipoCredito 
+            Height          =   315
+            Left            =   2400
+            Style           =   2  'Dropdown List
+            TabIndex        =   331
+            Top             =   1320
+            Visible         =   0   'False
+            Width           =   1455
+         End
+         Begin VB.CheckBox chkPedxClixSemEntrega 
+            Caption         =   "Comparativo fechas"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00000080&
+            Height          =   255
+            Index           =   4
+            Left            =   120
+            TabIndex        =   330
+            Top             =   1380
+            Width           =   2175
+         End
          Begin VB.ListBox ListTipoFact 
             Height          =   960
             Left            =   1320
@@ -300,6 +339,26 @@ Begin VB.Form frmListadoPed
             TabIndex        =   31
             Top             =   240
             Width           =   3975
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Años"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   76
+            Left            =   4320
+            TabIndex        =   333
+            Top             =   1350
+            Visible         =   0   'False
+            Width           =   360
          End
          Begin VB.Label Label4 
             AutoSize        =   -1  'True
@@ -473,7 +532,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   41
             Left            =   1200
-            Picture         =   "frmListadoPed.frx":0414
+            Picture         =   "frmListadoPed.frx":0434
             Top             =   1920
             Width           =   240
          End
@@ -500,7 +559,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   40
             Left            =   1200
-            Picture         =   "frmListadoPed.frx":0516
+            Picture         =   "frmListadoPed.frx":0536
             Top             =   1560
             Width           =   240
          End
@@ -566,7 +625,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   37
             Left            =   1200
-            Picture         =   "frmListadoPed.frx":0618
+            Picture         =   "frmListadoPed.frx":0638
             Top             =   960
             Width           =   240
          End
@@ -613,7 +672,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   36
             Left            =   1200
-            Picture         =   "frmListadoPed.frx":071A
+            Picture         =   "frmListadoPed.frx":073A
             Top             =   600
             Width           =   240
          End
@@ -810,7 +869,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   34
             Left            =   1200
-            Picture         =   "frmListadoPed.frx":081C
+            Picture         =   "frmListadoPed.frx":083C
             Top             =   1680
             Width           =   240
          End
@@ -837,7 +896,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   33
             Left            =   1200
-            Picture         =   "frmListadoPed.frx":091E
+            Picture         =   "frmListadoPed.frx":093E
             Top             =   1320
             Width           =   240
          End
@@ -864,7 +923,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   13
             Left            =   1200
-            Picture         =   "frmListadoPed.frx":0A20
+            Picture         =   "frmListadoPed.frx":0A40
             Top             =   600
             Width           =   240
          End
@@ -911,7 +970,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   3
             Left            =   1200
-            Picture         =   "frmListadoPed.frx":0B22
+            Picture         =   "frmListadoPed.frx":0B42
             Top             =   240
             Width           =   240
          End
@@ -919,9 +978,9 @@ Begin VB.Form frmListadoPed
       Begin VB.ComboBox cmbTipAlbaran 
          Height          =   315
          Index           =   1
-         ItemData        =   "frmListadoPed.frx":0C24
+         ItemData        =   "frmListadoPed.frx":0C44
          Left            =   2640
-         List            =   "frmListadoPed.frx":0C31
+         List            =   "frmListadoPed.frx":0C51
          Style           =   2  'Dropdown List
          TabIndex        =   228
          Top             =   4920
@@ -1006,7 +1065,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   1
             Left            =   1080
-            Picture         =   "frmListadoPed.frx":0C64
+            Picture         =   "frmListadoPed.frx":0C84
             Top             =   360
             Width           =   240
          End
@@ -1053,7 +1112,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   2
             Left            =   1080
-            Picture         =   "frmListadoPed.frx":0D66
+            Picture         =   "frmListadoPed.frx":0D86
             Top             =   720
             Width           =   240
          End
@@ -1149,7 +1208,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   12
             Left            =   1080
-            Picture         =   "frmListadoPed.frx":0E68
+            Picture         =   "frmListadoPed.frx":0E88
             Top             =   720
             Width           =   240
          End
@@ -1196,7 +1255,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   11
             Left            =   1080
-            Picture         =   "frmListadoPed.frx":0F6A
+            Picture         =   "frmListadoPed.frx":0F8A
             Top             =   360
             Width           =   240
          End
@@ -1254,7 +1313,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   4
             Left            =   960
-            Picture         =   "frmListadoPed.frx":106C
+            Picture         =   "frmListadoPed.frx":108C
             Top             =   360
             Width           =   240
          End
@@ -1301,7 +1360,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   5
             Left            =   960
-            Picture         =   "frmListadoPed.frx":116E
+            Picture         =   "frmListadoPed.frx":118E
             Top             =   720
             Width           =   240
          End
@@ -1378,7 +1437,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   6
             Left            =   960
-            Picture         =   "frmListadoPed.frx":1270
+            Picture         =   "frmListadoPed.frx":1290
             Top             =   480
             Width           =   240
          End
@@ -1425,7 +1484,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   7
             Left            =   960
-            Picture         =   "frmListadoPed.frx":1372
+            Picture         =   "frmListadoPed.frx":1392
             Top             =   840
             Width           =   240
          End
@@ -1580,7 +1639,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   7
          Left            =   3840
-         Picture         =   "frmListadoPed.frx":1474
+         Picture         =   "frmListadoPed.frx":1494
          Top             =   1440
          Width           =   240
       End
@@ -1645,7 +1704,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   6
          Left            =   1440
-         Picture         =   "frmListadoPed.frx":14FF
+         Picture         =   "frmListadoPed.frx":151F
          Top             =   1440
          Width           =   240
       End
@@ -1803,9 +1862,9 @@ Begin VB.Form frmListadoPed
                Strikethrough   =   0   'False
             EndProperty
             Height          =   315
-            ItemData        =   "frmListadoPed.frx":158A
+            ItemData        =   "frmListadoPed.frx":15AA
             Left            =   3600
-            List            =   "frmListadoPed.frx":1591
+            List            =   "frmListadoPed.frx":15B1
             Style           =   2  'Dropdown List
             TabIndex        =   327
             Top             =   300
@@ -1869,9 +1928,9 @@ Begin VB.Form frmListadoPed
          Width           =   4935
          Begin VB.ComboBox cboTipoAlbaranEuler 
             Height          =   315
-            ItemData        =   "frmListadoPed.frx":159E
+            ItemData        =   "frmListadoPed.frx":15BE
             Left            =   720
-            List            =   "frmListadoPed.frx":15AE
+            List            =   "frmListadoPed.frx":15CE
             Style           =   2  'Dropdown List
             TabIndex        =   38
             Top             =   360
@@ -2071,7 +2130,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   35
             Left            =   120
-            Picture         =   "frmListadoPed.frx":15E9
+            Picture         =   "frmListadoPed.frx":1609
             Top             =   240
             Width           =   240
          End
@@ -2144,7 +2203,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   0
             Left            =   0
-            Picture         =   "frmListadoPed.frx":16EB
+            Picture         =   "frmListadoPed.frx":170B
             Top             =   240
             Width           =   240
          End
@@ -2297,7 +2356,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   0
          Left            =   2040
-         Picture         =   "frmListadoPed.frx":17ED
+         Picture         =   "frmListadoPed.frx":180D
          Top             =   4440
          Width           =   240
       End
@@ -2324,7 +2383,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   10
          Left            =   840
-         Picture         =   "frmListadoPed.frx":1878
+         Picture         =   "frmListadoPed.frx":1898
          Top             =   3240
          Width           =   240
       End
@@ -2351,7 +2410,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   9
          Left            =   840
-         Picture         =   "frmListadoPed.frx":197A
+         Picture         =   "frmListadoPed.frx":199A
          Top             =   2520
          Width           =   240
       End
@@ -2416,7 +2475,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   8
          Left            =   840
-         Picture         =   "frmListadoPed.frx":1A7C
+         Picture         =   "frmListadoPed.frx":1A9C
          Top             =   1800
          Width           =   240
       End
@@ -2538,9 +2597,9 @@ Begin VB.Form frmListadoPed
       Begin VB.ComboBox cmbTipAlbaran 
          Height          =   315
          Index           =   0
-         ItemData        =   "frmListadoPed.frx":1B7E
+         ItemData        =   "frmListadoPed.frx":1B9E
          Left            =   2400
-         List            =   "frmListadoPed.frx":1B8B
+         List            =   "frmListadoPed.frx":1BAB
          Style           =   2  'Dropdown List
          TabIndex        =   86
          Top             =   6120
@@ -2709,7 +2768,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   19
             Left            =   960
-            Picture         =   "frmListadoPed.frx":1BBE
+            Picture         =   "frmListadoPed.frx":1BDE
             Top             =   615
             Width           =   240
          End
@@ -2737,7 +2796,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   18
             Left            =   960
-            Picture         =   "frmListadoPed.frx":1CC0
+            Picture         =   "frmListadoPed.frx":1CE0
             Top             =   255
             Width           =   240
          End
@@ -2932,7 +2991,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   10
          Left            =   1440
-         Picture         =   "frmListadoPed.frx":1DC2
+         Picture         =   "frmListadoPed.frx":1DE2
          Top             =   960
          Width           =   240
       End
@@ -2998,7 +3057,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   11
          Left            =   3600
-         Picture         =   "frmListadoPed.frx":1E4D
+         Picture         =   "frmListadoPed.frx":1E6D
          Top             =   960
          Width           =   240
       End
@@ -3006,7 +3065,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   16
          Left            =   1320
-         Picture         =   "frmListadoPed.frx":1ED8
+         Picture         =   "frmListadoPed.frx":1EF8
          Top             =   2775
          Width           =   240
       End
@@ -3053,7 +3112,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   17
          Left            =   1320
-         Picture         =   "frmListadoPed.frx":1FDA
+         Picture         =   "frmListadoPed.frx":1FFA
          Top             =   3135
          Width           =   240
       End
@@ -3099,7 +3158,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   15
          Left            =   1440
-         Picture         =   "frmListadoPed.frx":20DC
+         Picture         =   "frmListadoPed.frx":20FC
          Top             =   2040
          Width           =   240
       End
@@ -3146,7 +3205,7 @@ Begin VB.Form frmListadoPed
          Height          =   240
          Index           =   14
          Left            =   1440
-         Picture         =   "frmListadoPed.frx":21DE
+         Picture         =   "frmListadoPed.frx":21FE
          Top             =   1680
          Width           =   240
       End
@@ -3435,7 +3494,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   22
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":22E0
+            Picture         =   "frmListadoPed.frx":2300
             Top             =   2520
             Width           =   240
          End
@@ -3482,7 +3541,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   23
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":23E2
+            Picture         =   "frmListadoPed.frx":2402
             Top             =   2880
             Width           =   240
          End
@@ -3509,7 +3568,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   20
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":24E4
+            Picture         =   "frmListadoPed.frx":2504
             Top             =   1680
             Width           =   240
          End
@@ -3517,7 +3576,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   21
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":25E6
+            Picture         =   "frmListadoPed.frx":2606
             Top             =   2040
             Width           =   240
          End
@@ -3602,7 +3661,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   12
             Left            =   2280
-            Picture         =   "frmListadoPed.frx":26E8
+            Picture         =   "frmListadoPed.frx":2708
             Top             =   1215
             Width           =   240
          End
@@ -3649,7 +3708,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   13
             Left            =   4680
-            Picture         =   "frmListadoPed.frx":2773
+            Picture         =   "frmListadoPed.frx":2793
             Top             =   1215
             Width           =   240
          End
@@ -3793,7 +3852,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   14
             Left            =   2280
-            Picture         =   "frmListadoPed.frx":27FE
+            Picture         =   "frmListadoPed.frx":281E
             Top             =   240
             Width           =   240
          End
@@ -3821,7 +3880,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   24
             Left            =   1920
-            Picture         =   "frmListadoPed.frx":2889
+            Picture         =   "frmListadoPed.frx":28A9
             Top             =   600
             Width           =   240
          End
@@ -3919,7 +3978,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   54
             Left            =   1560
-            Picture         =   "frmListadoPed.frx":298B
+            Picture         =   "frmListadoPed.frx":29AB
             Top             =   240
             Width           =   240
          End
@@ -4026,7 +4085,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   31
             Left            =   1730
-            Picture         =   "frmListadoPed.frx":2A8D
+            Picture         =   "frmListadoPed.frx":2AAD
             Top             =   600
             Width           =   240
          End
@@ -4054,7 +4113,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   26
             Left            =   1730
-            Picture         =   "frmListadoPed.frx":2B8F
+            Picture         =   "frmListadoPed.frx":2BAF
             Top             =   945
             Width           =   240
          End
@@ -4062,7 +4121,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   15
             Left            =   1730
-            Picture         =   "frmListadoPed.frx":2C91
+            Picture         =   "frmListadoPed.frx":2CB1
             Top             =   240
             Width           =   240
          End
@@ -4102,9 +4161,9 @@ Begin VB.Form frmListadoPed
             Width           =   6135
             Begin VB.ComboBox cboSituMan 
                Height          =   315
-               ItemData        =   "frmListadoPed.frx":2D1C
+               ItemData        =   "frmListadoPed.frx":2D3C
                Left            =   1680
-               List            =   "frmListadoPed.frx":2D29
+               List            =   "frmListadoPed.frx":2D49
                Style           =   2  'Dropdown List
                TabIndex        =   273
                Top             =   720
@@ -4329,7 +4388,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   39
             Left            =   1125
-            Picture         =   "frmListadoPed.frx":2D5A
+            Picture         =   "frmListadoPed.frx":2D7A
             Top             =   3480
             Width           =   240
          End
@@ -4357,7 +4416,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   38
             Left            =   1125
-            Picture         =   "frmListadoPed.frx":2E5C
+            Picture         =   "frmListadoPed.frx":2E7C
             Top             =   3120
             Width           =   240
          End
@@ -4384,7 +4443,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   29
             Left            =   1080
-            Picture         =   "frmListadoPed.frx":2F5E
+            Picture         =   "frmListadoPed.frx":2F7E
             Top             =   2160
             Width           =   240
          End
@@ -4431,7 +4490,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   30
             Left            =   1080
-            Picture         =   "frmListadoPed.frx":3060
+            Picture         =   "frmListadoPed.frx":3080
             Top             =   2520
             Width           =   240
          End
@@ -4477,7 +4536,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   28
             Left            =   1080
-            Picture         =   "frmListadoPed.frx":3162
+            Picture         =   "frmListadoPed.frx":3182
             Top             =   1560
             Width           =   240
          End
@@ -4524,7 +4583,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   27
             Left            =   1080
-            Picture         =   "frmListadoPed.frx":3264
+            Picture         =   "frmListadoPed.frx":3284
             Top             =   1200
             Width           =   240
          End
@@ -4572,7 +4631,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   25
             Left            =   1380
-            Picture         =   "frmListadoPed.frx":3366
+            Picture         =   "frmListadoPed.frx":3386
             Top             =   240
             Width           =   240
          End
@@ -4694,7 +4753,7 @@ Begin VB.Form frmListadoPed
             Height          =   240
             Index           =   32
             Left            =   705
-            Picture         =   "frmListadoPed.frx":3468
+            Picture         =   "frmListadoPed.frx":3488
             Top             =   120
             Width           =   240
          End
@@ -4922,8 +4981,32 @@ End Sub
 
 
 
+Private Sub chkPedxClixSemEntrega_Click(index As Integer)
+      If index = 4 Then
+        If chkPedxClixSemEntrega(4).Value = 1 Then
+            If Me.cboTipoCredito.ListCount = 0 Then
+                If vParamAplic.OperacionesAseguradas Then
+                    CargarCombo_Tabla cboTipoCredito, "stipocredito", "codTipoCredito", "nomTipoCredito", , True
+                Else
+                    cboTipoCredito.AddItem "Todos"
+                    
+                End If
+            End If
+            If cboAnyos.ListIndex < 0 Then cboAnyos.ListIndex = 0
+            cboTipoCredito.visible = True
+            cboAnyos.visible = True
+            Label4(76).visible = True
+        Else
+            cboTipoCredito.visible = False
+            cboAnyos.visible = False
+            Label4(76).visible = False
+        End If
+    End If
+End Sub
+
 Private Sub chkPedxClixSemEntrega_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
+  
 End Sub
 
 Private Sub chkSituFacMant_Click()
@@ -4950,32 +5033,32 @@ Dim campo As String
 
     
     'El campo AÑO es obligarotorio
-    txtCodigo(53).Text = Trim(txtCodigo(53).Text)
-    If txtCodigo(53).Text = "" Then
+    txtcodigo(53).Text = Trim(txtcodigo(53).Text)
+    If txtcodigo(53).Text = "" Then
         MsgBox "Debe seleccionar una año para el informe.", vbInformation
         Exit Sub
     Else
         campo = "year({scafac.fecfactu})"
-        cadFormula = campo & " = " & txtCodigo(53).Text
+        cadFormula = campo & " = " & txtcodigo(53).Text
 '        campo = campo & " = " & CInt(txtCodigo(53).Text) - 1
 '        cadFormula = "(" & cadFormula & " OR " & campo & ")"
         
         'Parametro del año solicitado para el informe
         'Pasar el año solicitado como parametro
-        cadParam = cadParam & "pAnyo=""" & "Año: " & txtCodigo(53).Text & """|"
+        cadParam = cadParam & "pAnyo=""" & "Año: " & txtcodigo(53).Text & """|"
         numParam = numParam + 1
     End If
     
     'Campo seleccion de un CLIENTE
-    txtCodigo(8).Text = Trim(txtCodigo(8).Text)
-    If txtCodigo(8).Text <> "" Then
+    txtcodigo(8).Text = Trim(txtcodigo(8).Text)
+    If txtcodigo(8).Text <> "" Then
         campo = "{scafac.codclien}"
-        cadFormula = cadFormula & " AND (" & campo & " =" & txtCodigo(8).Text & ")"
+        cadFormula = cadFormula & " AND (" & campo & " =" & txtcodigo(8).Text & ")"
         'Pasar el cliente solicitado como parametro
-        cadParam = cadParam & "pDHCliente=""" & "Cliente: " & txtCodigo(8).Text & " - " & txtNombre(8).Text & """|"
+        cadParam = cadParam & "pDHCliente=""" & "Cliente: " & txtcodigo(8).Text & " - " & txtNombre(8).Text & """|"
     Else
         'Mostrar en el informe el total del Año Anterior
-        campo = campo & " = " & CInt(txtCodigo(53).Text) - 1
+        campo = campo & " = " & CInt(txtcodigo(53).Text) - 1
         cadFormula = "(" & cadFormula & " OR " & campo & ")"
         
         cadParam = cadParam & "pDHCliente=""" & "Cliente: Todos" & """|"
@@ -4992,7 +5075,7 @@ Dim campo As String
     BorrarTempInformes
     
     'Generar la temporal con los totales por año, mes y cliente (tmpinformes)
-    If Not TempVentasMeses(cadSelect, txtCodigo(53).Text) Then
+    If Not TempVentasMeses(cadSelect, txtcodigo(53).Text) Then
         'Borrar los registros generados por el usuario de la temporal
         BorrarTempInformes
         Exit Sub
@@ -5018,7 +5101,7 @@ End Sub
 
 Private Sub cmdAceptarFac_Click()
 'Facturacion de Albaranes
-Dim campo As String, cad As String
+Dim campo As String, Cad As String
 Dim cadFrom As String
 Dim cadSQL As String 'Para seleccionar los Albaranes del rango seleccion
                       'que no se van a facturar
@@ -5032,12 +5115,12 @@ Dim UnoSolo As Boolean
     
     CambiamosConta = False
     '--- Comprobar q los campos tienen valor
-    If Trim(txtCodigo(34).Text) = "" Then 'Fecha factura
+    If Trim(txtcodigo(34).Text) = "" Then 'Fecha factura
         MsgBox "El campo Fecha Factura debe tener valor.", vbExclamation
         Exit Sub
     End If
     
-    If Trim(txtCodigo(0).Text) = "" Or txtNombre(0).Text = "" Then 'Banco propio
+    If Trim(txtcodigo(0).Text) = "" Or txtNombre(0).Text = "" Then 'Banco propio
         MsgBox "El campo cta. prevista de cobro debe tener valor.", vbExclamation
         Exit Sub
     End If
@@ -5046,11 +5129,11 @@ Dim UnoSolo As Boolean
     'Junio 2014. Para el proceso de facturacion hemos añadido TIPOS de pago
     'Alguno debe estar marcado
     If OpcionListado = 52 Then
-        cad = ""
+        Cad = ""
         For indCodigo = 0 To 6   'LOS SEIS PRIMEROS
-            If Me.chkTpPago2(indCodigo).Value = 1 Then cad = "1"
+            If Me.chkTpPago2(indCodigo).Value = 1 Then Cad = "1"
         Next indCodigo
-        If cad = "" Then
+        If Cad = "" Then
             MsgBox "Seleccione algun tipo de pago", vbExclamation
             Exit Sub
         End If
@@ -5059,7 +5142,7 @@ Dim UnoSolo As Boolean
 
 
     'FechaOK
-    ResultadoFechaContaOK = EsFechaOKConta(CDate(Me.txtCodigo(34).Text), True)
+    ResultadoFechaContaOK = EsFechaOKConta(CDate(Me.txtcodigo(34).Text), True)
     If ResultadoFechaContaOK <> 0 Then
         If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
         Exit Sub
@@ -5067,22 +5150,22 @@ Dim UnoSolo As Boolean
     
     'Mayo 2013
     'Fechas contabilizacion de facturas
-    cad = "concat(anofactu,'|',perfactu,'|')"
+    Cad = "concat(anofactu,'|',perfactu,'|')"
     
-    cadFrom = DevuelveDesdeBD(conConta, "periodos", "Parametros", "1", "1", "N", cad)
+    cadFrom = DevuelveDesdeBD(conConta, "periodos", "Parametros", "1", "1", "N", Cad)
     If cadFrom <> "" Then
         indCodigo = 1
         If cadFrom = "0" Then indCodigo = 3
-        campo = RecuperaValor(cad, 2)
+        campo = RecuperaValor(Cad, 2)
         'MEs
         If campo <> "" Then
             cadFrom = CStr(CByte(campo) * indCodigo)
-            cad = RecuperaValor(cad, 1)
-            indCodigo = DiasMes(CByte(cadFrom), CInt(cad))
-            cad = indCodigo & "/" & Format(cadFrom, "00") & "/" & cad
-            If CDate(cad) > CDate(txtCodigo(34).Text) Then
-                cad = "El periodo de facturacion del IVA ya esta cerrado.  ¿Desea continuar?"
-                If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
+            Cad = RecuperaValor(Cad, 1)
+            indCodigo = DiasMes(CByte(cadFrom), CInt(Cad))
+            Cad = indCodigo & "/" & Format(cadFrom, "00") & "/" & Cad
+            If CDate(Cad) > CDate(txtcodigo(34).Text) Then
+                Cad = "El periodo de facturacion del IVA ya esta cerrado.  ¿Desea continuar?"
+                If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
             End If
         End If
     End If
@@ -5097,7 +5180,7 @@ Dim UnoSolo As Boolean
     
     
     indCodigo = 0
-    cad = ""
+    Cad = ""
     campo = ""
     cadFrom = ""
     UnoSolo = False
@@ -5106,39 +5189,39 @@ Dim UnoSolo As Boolean
                                  '222: Facturas de Mostrador/Rectificativa
         'Desde/Hasta Nº ALBARAN
         '-------------------------
-        If txtCodigo(36).Text <> "" Or txtCodigo(37).Text <> "" Then
+        If txtcodigo(36).Text <> "" Or txtcodigo(37).Text <> "" Then
             campo = NomTabla & ".numalbar"
-            cad = ""
-            If Not PonerDesdeHasta(campo, "N", 36, 37, cad) Then Exit Sub
+            Cad = ""
+            If Not PonerDesdeHasta(campo, "N", 36, 37, Cad) Then Exit Sub
         End If
     
         'Desde/Hasta FECHA del ALBARAN
         '--------------------------------------------
-        If txtCodigo(38).Text <> "" Or txtCodigo(39).Text <> "" Then
+        If txtcodigo(38).Text <> "" Or txtcodigo(39).Text <> "" Then
             'Para MySQL
             campo = "scaalb.fechaalb"
-            cad = CadenaDesdeHastaBD(txtCodigo(38).Text, txtCodigo(39).Text, campo, "F")
-            If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+            Cad = CadenaDesdeHastaBD(txtcodigo(38).Text, txtcodigo(39).Text, campo, "F")
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
             'Para Crystal Report
             campo = "{scaalb.fechaalb}"
-            cad = "pDHFecha=""Fecha: "
-            If Not PonerDesdeHasta(campo, "F", 38, 39, cad) Then Exit Sub
+            Cad = "pDHFecha=""Fecha: "
+            If Not PonerDesdeHasta(campo, "F", 38, 39, Cad) Then Exit Sub
         End If
     
         'Cadena para seleccion D/H CLIENTE
         '----------------------------------------
-        If txtCodigo(40).Text <> "" Or txtCodigo(41).Text <> "" Then
+        If txtcodigo(40).Text <> "" Or txtcodigo(41).Text <> "" Then
             campo = "scaalb.codclien"
-            cad = ""
-            If Not PonerDesdeHasta(campo, "N", 40, 41, cad) Then Exit Sub
+            Cad = ""
+            If Not PonerDesdeHasta(campo, "N", 40, 41, Cad) Then Exit Sub
         End If
     
         'Cadena para seleccion FORMA PAGO
         '--------------------------------------------
-        If txtCodigo(42).Text <> "" Or txtCodigo(43).Text <> "" Then
+        If txtcodigo(42).Text <> "" Or txtcodigo(43).Text <> "" Then
             campo = "scaalb.codforpa"
-            cad = " "
-            If Not PonerDesdeHasta(campo, "N", 42, 43, cad) Then Exit Sub
+            Cad = " "
+            If Not PonerDesdeHasta(campo, "N", 42, 43, Cad) Then Exit Sub
         End If
 
     
@@ -5147,39 +5230,39 @@ Dim UnoSolo As Boolean
         ' Tipos de pago. Si estan todos NO haremos select
         If OpcionListado = 52 Then
             
-            cad = ""
+            Cad = ""
             Titulo = ""
             For numParam = 0 To 6
                 If Me.chkTpPago2(numParam).Value = 1 Then
-                    cad = cad & "1"
+                    Cad = Cad & "1"
                     Titulo = Titulo & ", " & numParam
                 End If
             Next numParam
             
-            If Len(cad) = 7 Then
+            If Len(Cad) = 7 Then
                 'LOS HA COGIDO TODOS. NO lo incluyo en el desde hasta
             Else
                 Set RT = New ADODB.Recordset
                 Titulo = Mid(Titulo, 2)
-                cad = "Select codforpa from sforpa where tipforpa in (" & Titulo & ")"
-                RT.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                cad = ""
+                Cad = "Select codforpa from sforpa where tipforpa in (" & Titulo & ")"
+                RT.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Cad = ""
                 While Not RT.EOF
-                    cad = cad & ", " & RT!codforpa
+                    Cad = Cad & ", " & RT!codforpa
                     RT.MoveNext
                 Wend
                 RT.Close
                 Set RT = Nothing
                 
-                If cad = "" Then
+                If Cad = "" Then
                     'MAL. NInguna forpa de pago con ese tipo de pago. Fuerzo un -1
-                    cad = "-1"
+                    Cad = "-1"
                 Else
-                    cad = Mid(cad, 2)
+                    Cad = Mid(Cad, 2)
                 End If
                 Titulo = ""
-                cad = " scaalb.codforpa IN (" & cad & ")"
-                If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+                Cad = " scaalb.codforpa IN (" & Cad & ")"
+                If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
             End If
                 
             
@@ -5190,24 +5273,24 @@ Dim UnoSolo As Boolean
         'Seleccionar de la Tabla de albaranes scaalb, solo los Albaranes que sean
         'del tipo:Ventas o Reparacion o Mantenimiento
     '    cad = " scaalb.codtipom='ALV' "
-        cad = " scaalb.codtipom='" & codClien & "' " 'filtrar por tipo de albaran segun llamado de Alb.Ventas o Alb. Reparacion
+        Cad = " scaalb.codtipom='" & codClien & "' " 'filtrar por tipo de albaran segun llamado de Alb.Ventas o Alb. Reparacion
         'Solo lo añadimos a CadSelect porque vamos a Facturar y no a sacar un listado
-        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
     
     
         'Seleccionar los Albanares de la Periodicidad indicada
-        If txtCodigo(35).Text <> "" Then
-            cad = " sclien.periodof=" & txtCodigo(35).Text
-            If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+        If txtcodigo(35).Text <> "" Then
+            Cad = " sclien.periodof=" & txtcodigo(35).Text
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
             cadFrom = " scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien "
         End If
         
     Else
         'Facturar UNA solo
-        cad = ""
-        If codClien = "ALM" And vParamAplic.EntradaRapidaFacturasMostrador Then cad = "NO"
+        Cad = ""
+        If codClien = "ALM" And vParamAplic.EntradaRapidaFacturasMostrador Then Cad = "NO"
         
-        If cad = "" Then
+        If Cad = "" Then
             If MsgBox("Generar la factura?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
         End If
         
@@ -5224,17 +5307,17 @@ Dim UnoSolo As Boolean
                                                                 
     'Pequeña comprobacion de los centros de coste
     If vEmpresa.TieneAnalitica Then
-        cad = "select count(*) from slialb where codccost is null and (codtipom,numalbar) in ("
-        cad = cad & "select codtipom,numalbar from scaalb where "
-        cad = cad & cadSelect
-        cad = cad & " AND  scaalb.factursn=1 )"
-        cad = Replace(cad, "{", "(")
-        cad = Replace(cad, "}", ")")
-        NumRegElim = CInt(NumRegistros(cad))
+        Cad = "select count(*) from slialb where codccost is null and (codtipom,numalbar) in ("
+        Cad = Cad & "select codtipom,numalbar from scaalb where "
+        Cad = Cad & cadSelect
+        Cad = Cad & " AND  scaalb.factursn=1 )"
+        Cad = Replace(Cad, "{", "(")
+        Cad = Replace(Cad, "}", ")")
+        NumRegElim = CInt(NumRegistros(Cad))
         If NumRegElim > 0 Then
-             cad = "Existen lineas de albaran(" & NumRegElim & ") sin asignar centro de coste"
-             cad = cad & vbCrLf & vbCrLf & Space(30) & "¿Continuar?"
-             If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+             Cad = "Existen lineas de albaran(" & NumRegElim & ") sin asignar centro de coste"
+             Cad = Cad & vbCrLf & vbCrLf & Space(30) & "¿Continuar?"
+             If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
         End If
         
     End If
@@ -5244,25 +5327,25 @@ Dim UnoSolo As Boolean
                                                                 
                                                                 'Septiembre 2009
     'Seleccionar los Albaranes que tiene scaalb.factursn=1     y TENGAN lineas
-    cad = " {scaalb.factursn=1} "
-    If vParamAplic.NumeroInstalacion = vbFenollar And UnoSolo Then cad = " {scaalb.factursn>=0} "
+    Cad = " {scaalb.factursn=1} "
+    If vParamAplic.NumeroInstalacion = vbFenollar And UnoSolo Then Cad = " {scaalb.factursn>=0} "
         
     'cad = cad & " and (scaalb.codtipom,scaalb.numalbar) in (select codtipom,numalbar from slialb group by codtipom,numalbar)"
-    If Not UnoSolo Then cad = cad & " and (scaalb.codtipom,scaalb.numalbar) in (select distinct codtipom,numalbar from slialb)"
+    If Not UnoSolo Then Cad = Cad & " and (scaalb.codtipom,scaalb.numalbar) in (select distinct codtipom,numalbar from slialb)"
     
     
-    If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
         
     
-    AnyadirAFormula cadFormula, cad
+    AnyadirAFormula cadFormula, Cad
     
     
     
     
     '--- Comprobar q se han Seleccionados registros de Albaran con esos criterios
-    cad = "Select count(*) " ' & NomTabla & " INNER JOIN " & nomTablaLin
+    Cad = "Select count(*) " ' & NomTabla & " INNER JOIN " & nomTablaLin
     If cadFrom = "" Then cadFrom = " scaalb "
-    cad = cad & " FROM " & cadFrom
+    Cad = Cad & " FROM " & cadFrom
 
     If Not HayRegParaInforme(cadFrom, cadSelect) Then Exit Sub
     
@@ -5278,7 +5361,7 @@ Dim UnoSolo As Boolean
         'Seleccionar los Albaranes que tiene scaalb.factursn=0
         campo = " scaalb.factursn=0 "
         If Not AnyadirAFormula(cadSQL, campo) Then Exit Sub
-        cadSQL = cad & " WHERE " & cadSQL
+        cadSQL = Cad & " WHERE " & cadSQL
         If RegistrosAListar(cadSQL) > 0 Then
             'Mostrar los Albaranes que no se van a Facturar
             cadSQL = Replace(cadSQL, "count(*)", "scaalb.codtipom,scaalb.numalbar,scaalb.fechaalb,scaalb.codclien,scaalb.nomclien")
@@ -5289,16 +5372,16 @@ Dim UnoSolo As Boolean
         End If
     End If
     
-    cad = cad & " WHERE " & cadSelect
+    Cad = Cad & " WHERE " & cadSelect
     
 
     
     
     'Pasar Albaranes a Facturas
-    If InStr(cad, "sclien") <> 0 Then 'hay JOIN con sclien
-        cad = Replace(cad, "count(*)", "scaalb.*, sclien.periodof")
+    If InStr(Cad, "sclien") <> 0 Then 'hay JOIN con sclien
+        Cad = Replace(Cad, "count(*)", "scaalb.*, sclien.periodof")
     Else
-        cad = Replace(cad, "count(*)", "*")
+        Cad = Replace(Cad, "count(*)", "*")
     End If
 
 
@@ -5310,8 +5393,8 @@ Dim UnoSolo As Boolean
     'Albarananes EN B
     If codClien = "ALZ" Then
         If Not AbrirConexionConta(True) Then
-            cad = "Error MUY grave." & vbCrLf & "Error conectando con BD: " & vParamAplic.ContabilidadB
-            MsgBox cad, vbCritical
+            Cad = "Error MUY grave." & vbCrLf & "Error conectando con BD: " & vParamAplic.ContabilidadB
+            MsgBox Cad, vbCritical
             End
             Exit Sub
         End If
@@ -5386,7 +5469,7 @@ Dim UnoSolo As Boolean
             'tipo portes HERBELCA.
             campo = lblProgess(0).Caption
             lblProgess(0).Caption = "Portes:"
-            If Not ProcesoPortesTipoHerbelca(cad, cadSelect, lblProgess(1)) Then Seguir = False
+            If Not ProcesoPortesTipoHerbelca(Cad, cadSelect, lblProgess(1)) Then Seguir = False
             lblProgess(0).Caption = campo
             campo = ""
         End If
@@ -5411,7 +5494,7 @@ Dim UnoSolo As Boolean
         'ABRIL 2014.
         'El parametro que le enviamos si se muestra el mensaje de que se ha generado correctamente(ultimo parametro)
         'AHORA le enviamos FALSE
-        TraspasoAlbaranesFacturas cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, Me.ProgressBar1, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False
+        TraspasoAlbaranesFacturas Cad, cadSelect, txtcodigo(34).Text, txtcodigo(0).Text, Me.ProgressBar1, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False
     End If
 
     Screen.MousePointer = vbDefault
@@ -5438,21 +5521,23 @@ Private Function ComprobarSecuencialFactura() As Boolean
     
     If vParamAplic.NumeroInstalacion = vbAlzira And codClien = "ART" Then
         'En alzira, las rectificativas , para usuario standard, solo puede ser de HOY
-         If CDate(txtCodigo(34).Text) <> CDate(Now) Then
-            MsgBox "La fecha debe ser la de hoy", vbExclamation
-            txtCodigo(34).Text = Format(Now, "dd/mm/yyyy")
+         If CDate(txtcodigo(34).Text) <> CDate(Format(Now, "dd/mm/yyyy")) Then
+            cadParam = "La fecha deberia ser ser la de hoy" & vbCrLf '& " ¿Continuar?"
+            
+            MsgBox cadParam, vbExclamation
+            txtcodigo(34).Text = Format(Now, "dd/mm/yyyy")
             Exit Function
         End If
     End If
 
     cadParam = DevuelveTipoFacturaDesdeAlbaran(codClien)
     If cadParam <> "" Then
-        cadFormula = Year(CDate(txtCodigo(34).Text))
-        cadFormula = "fecfactu > " & DBSet(txtCodigo(34).Text, "F") & " AND fecfactu <= '" & cadFormula & "-12-31' AND codtipom"
+        cadFormula = Year(CDate(txtcodigo(34).Text))
+        cadFormula = "fecfactu > " & DBSet(txtcodigo(34).Text, "F") & " AND fecfactu <= '" & cadFormula & "-12-31' AND codtipom"
         
         cadFormula = DevuelveDesdeBD(conAri, "count(*)", "scafac", cadFormula, cadParam, "T")
         If Val(cadFormula) > 0 Then
-            cadFormula = "Hay facturas (" & cadFormula & ") de las serie  " & cadParam & " con fecha posterior a  " & txtCodigo(34).Text
+            cadFormula = "Hay facturas (" & cadFormula & ") de las serie  " & cadParam & " con fecha posterior a  " & txtcodigo(34).Text
             cadFormula = cadFormula & vbCrLf & "¿Continuar?"
             If MsgBox(cadFormula, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
         End If
@@ -5467,29 +5552,29 @@ End Function
 
 Private Sub cmdAceptarGenAlb_Click()
 'Solicitar datos para Generar Albaran a partir de un Pedido
-Dim cad As String
+Dim Cad As String
 
     'DAVID
     'Comprobar que me han puesto algun dato
     '-------------------------------------------------------------------
-    cad = ""
-    If txtCodigo(17).Text = "" Or txtCodigo(18).Text = "" Or txtCodigo(19).Text = "" Or txtCodigo(25).Text = "" Then cad = "M"
+    Cad = ""
+    If txtcodigo(17).Text = "" Or txtcodigo(18).Text = "" Or txtcodigo(19).Text = "" Or txtcodigo(25).Text = "" Then Cad = "M"
     If OpcionListado = 1000 Or OpcionListado = 1010 Then
-        If txtCodigo(5).Text = "" Then cad = "M"
-        If txtNombre(5).Text = "" Then cad = "M"
+        If txtcodigo(5).Text = "" Then Cad = "M"
+        If txtNombre(5).Text = "" Then Cad = "M"
     End If
-    If txtNombre(17).Text = "" Or txtNombre(18).Text = "" Or txtNombre(19).Text = "" Then cad = "M"
+    If txtNombre(17).Text = "" Or txtNombre(18).Text = "" Or txtNombre(19).Text = "" Then Cad = "M"
     
-    If cad <> "" Then
+    If Cad <> "" Then
         MsgBox "Campos obligatorios ", vbExclamation
         Exit Sub
     End If
     
     If vParamAplic.PtosAsignar > 0 Then
         If Me.FrameCanjePuntos.visible Then
-            If txtCodigo(68).Text <> "" Then
-                If ImporteFormateado(txtCodigo(68).Text) > CCur(txtCodigo(68).Tag) Then
-                    MsgBox "No puede canjear mas de " & txtCodigo(68).Tag & " puntos", vbExclamation
+            If txtcodigo(68).Text <> "" Then
+                If ImporteFormateado(txtcodigo(68).Text) > CCur(txtcodigo(68).Tag) Then
+                    MsgBox "No puede canjear mas de " & txtcodigo(68).Tag & " puntos", vbExclamation
                     Exit Sub
                 End If
             End If
@@ -5508,15 +5593,15 @@ Dim cad As String
     
     
     If Me.FrameZona.visible Then
-        cad = ""
-        If txtCodigo(22).Text = "" Xor txtNombre(22).Text = "" Then
-            cad = "Zona incorrecta"
+        Cad = ""
+        If txtcodigo(22).Text = "" Xor txtNombre(22).Text = "" Then
+            Cad = "Zona incorrecta"
             
         Else
-            If txtCodigo(22).Text = "" Then cad = "Zona incorrecta. Indique una"
+            If txtcodigo(22).Text = "" Then Cad = "Zona incorrecta. Indique una"
         End If
-        If cad <> "" Then
-            MsgBox cad, vbExclamation
+        If Cad <> "" Then
+            MsgBox Cad, vbExclamation
             Exit Sub
         End If
     End If
@@ -5524,12 +5609,12 @@ Dim cad As String
     If Me.chkFraMostrador.visible Then
         'SI NO VA A FACTURA DE MOSTRADOR AVISAMOS
         If chkFraMostrador.Value = 0 Then
-            cad = String(60, "*") & vbCrLf
-            cad = vbCrLf & cad & cad & cad & vbCrLf
-            cad = cad & "    Va a generar una factura de albarán,   NO de mostrador" & "" _
-                & vbCrLf & vbCrLf & "             ¿Continuar?" & vbCrLf & cad
+            Cad = String(60, "*") & vbCrLf
+            Cad = vbCrLf & Cad & Cad & Cad & vbCrLf
+            Cad = Cad & "    Va a generar una factura de albarán,   NO de mostrador" & "" _
+                & vbCrLf & vbCrLf & "             ¿Continuar?" & vbCrLf & Cad
             If vParamAplic.NumeroInstalacion <> 1 Then
-                If MsgBox(cad, vbQuestion + vbYesNoCancel + vbDefaultButton3) <> vbYes Then Exit Sub
+                If MsgBox(Cad, vbQuestion + vbYesNoCancel + vbDefaultButton3) <> vbYes Then Exit Sub
             End If
         End If
     End If
@@ -5537,19 +5622,19 @@ Dim cad As String
        
        
     If FramePartes.visible Then
-        If Me.txtCodigo(59).Text = "" Then
+        If Me.txtcodigo(59).Text = "" Then
             MsgBox "Introduzca litros reales", vbExclamation
-            PonerFoco txtCodigo(59)
+            PonerFoco txtcodigo(59)
             Exit Sub
         End If
         
         'MSGBOX
-        cad = "Desea cerrar el parte de produccion con:" & vbCrLf
-        cad = cad & "       Litros real: " & txtCodigo(59).Text & vbCrLf
-        cad = cad & "       Cantidad: " & txtCodigo(60).Text & vbCrLf
-        If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+        Cad = "Desea cerrar el parte de produccion con:" & vbCrLf
+        Cad = Cad & "       Litros real: " & txtcodigo(59).Text & vbCrLf
+        Cad = Cad & "       Cantidad: " & txtcodigo(60).Text & vbCrLf
+        If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
         
-        CadenaDesdeOtroForm = txtCodigo(59).Text & "|" & Me.chkFrInterna.Value & "|" & txtCodigo(60).Text & "|"
+        CadenaDesdeOtroForm = txtcodigo(59).Text & "|" & Me.chkFrInterna.Value & "|" & txtcodigo(60).Text & "|"
         ' 17 Abril 2012
         'Tipo facturacion
         CadenaDesdeOtroForm = CadenaDesdeOtroForm & Me.cboFacturacion.ListIndex & "|"
@@ -5564,75 +5649,75 @@ Dim cad As String
     'Enero 2011
     'la factura a la k rectifica la llevo a una temporal, para no crear mas variables
     If Me.FramRectARM.visible Then
-        cad = "Insert into tmpcrmmsg (`codusu`,`codigo`,`asun_obs`) values (" & vUsu.Codigo & ",'1'," & DBSet(Me.txtFraRectifica.Tag, "T") & ")"
-        If Not ejecutar(cad, False) Then Exit Sub
+        Cad = "Insert into tmpcrmmsg (`codusu`,`codigo`,`asun_obs`) values (" & vUsu.Codigo & ",'1'," & DBSet(Me.txtFraRectifica.Tag, "T") & ")"
+        If Not ejecutar(Cad, False) Then Exit Sub
     End If
     
-    cad = txtCodigo(17).Text & "|"
-    cad = cad & txtCodigo(18).Text & "|"
-    cad = cad & txtCodigo(19).Text & "|"
-    cad = cad & txtCodigo(25).Text & "|"
-    cad = cad & Me.chkImpAlbaran.Value & "|"
-    cad = cad & Me.chkImpEtiq.Value & "|"
-    cad = cad & Me.chkImpHojaExped.Value & "|"
+    Cad = txtcodigo(17).Text & "|"
+    Cad = Cad & txtcodigo(18).Text & "|"
+    Cad = Cad & txtcodigo(19).Text & "|"
+    Cad = Cad & txtcodigo(25).Text & "|"
+    Cad = Cad & Me.chkImpAlbaran.Value & "|"
+    Cad = Cad & Me.chkImpEtiq.Value & "|"
+    Cad = Cad & Me.chkImpHojaExped.Value & "|"
     'mando el banco propio
     'Octubre 2010
     '--------------------------------------------------------------
     'Ahora siempre mando el banco. Cuando es albaran NO le hago caso
-    cad = cad & txtCodigo(5).Text & "|"
+    Cad = Cad & txtcodigo(5).Text & "|"
     'Y mando tb, si esta visible, la zona d eenvio
-    If Me.FrameZona.visible Then cad = cad & txtCodigo(22).Text
-    cad = cad & "|"
+    If Me.FrameZona.visible Then Cad = Cad & txtcodigo(22).Text
+    Cad = Cad & "|"
     
     '10 Enero 2011
     'Si tiene vParamAplic.FrasMostradorSerieDistinta podria pasar el pedido a
     'fra mostrador. Se le habra puesto visible el check
     If Me.chkFraMostrador.visible Then
         If vParamAplic.FrasMostradorSerieDistinta Then
-            If Me.chkFraMostrador.Value = 1 Then cad = cad & "1" 'PASAMOS A FRAS/alb MOSTRADOR(primero a alb mostrador)
+            If Me.chkFraMostrador.Value = 1 Then Cad = Cad & "1" 'PASAMOS A FRAS/alb MOSTRADOR(primero a alb mostrador)
         End If
     End If
-    cad = cad & "|"
+    Cad = Cad & "|"
     
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         Select Case Me.cboTipoAlbaranEuler.ListIndex
         Case 1
-            cad = cad & "ALE"
+            Cad = Cad & "ALE"
         Case 2
-            cad = cad & "ALO"
+            Cad = Cad & "ALO"
         Case 3
-            cad = cad & "ALR"
+            Cad = Cad & "ALR"
         Case Else
-            cad = cad & "ALV"
+            Cad = Cad & "ALV"
         End Select
         
         
     Else
-         If vParamAplic.NumeroInstalacion = vbFenollar Then cad = cad & IIf(cboDestinoB.ListIndex = 1, "ALZ", "ALV")
+         If vParamAplic.NumeroInstalacion = vbFenollar Then Cad = Cad & IIf(cboDestinoB.ListIndex = 1, "ALZ", "ALV")
          
     End If
-    cad = cad & "|"
+    Cad = Cad & "|"
     
     
     
     'Numero de bultos
     If Not Me.FrameBultosHerbelca.visible Then
-        cad = cad & "0"
+        Cad = Cad & "0"
     Else
-        cad = cad & CInt(Val(Me.txtCodigo(62).Text))
+        Cad = Cad & CInt(Val(Me.txtcodigo(62).Text))
     End If
-    cad = cad & "|"
+    Cad = Cad & "|"
     
     'Mayo 2018
     '--------------------
     If vParamAplic.PtosAsignar > 0 Then
         If Me.FrameCanjePuntos.visible Then
-            If txtCodigo(68).Text <> "" Then cad = cad & ImporteFormateado(txtCodigo(68).Text)
+            If txtcodigo(68).Text <> "" Then Cad = Cad & ImporteFormateado(txtcodigo(68).Text)
         End If
     End If
-    cad = cad & "|"
+    Cad = Cad & "|"
     
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     
     
     
@@ -5647,18 +5732,18 @@ Private Sub cmdAceptarPedxArtic_Click()
 '44: Informe de Pedidos por Cliente
 '49: Informe de Albaranes por Artículo
 Dim campo As String
-Dim cad As String
+Dim Cad As String
 Dim SQL As String
 Dim cadFormula2 As String
-Dim cadSelect2 As String
+Dim Cadselect2 As String
 Dim cadSelect3 As String
 Dim Indice As Integer
 
 Dim Tocho As String
-
+Dim Fec As Date
     InicializarVbles
     cadFormula2 = ""
-    cadSelect2 = ""
+    Cadselect2 = ""
     cadSelect3 = ""
     
     'Pasar nombre de la Empresa como parametro
@@ -5674,18 +5759,18 @@ Dim Tocho As String
     'Desde/Hasta FECHA
     'para el informe 227 fecha requerida
     If OpcionListado = 227 Then
-        If txtCodigo(11).Text = "" Or txtCodigo(12).Text = "" Then
+        If txtcodigo(11).Text = "" Or txtcodigo(12).Text = "" Then
             MsgBox "Los campos D/H fecha factura deben tener valor.", vbInformation
             Exit Sub
         End If
         
-        If DateDiff("d", txtCodigo(11).Text, txtCodigo(12).Text) > 365 Then
+        If DateDiff("d", txtcodigo(11).Text, txtcodigo(12).Text) > 365 Then
             MsgBox "El intervalo de fechas no puede ser superior a un año.", vbInformation
             Exit Sub
         End If
     End If
     
-    If txtCodigo(11).Text <> "" Or txtCodigo(12).Text <> "" Then
+    If txtcodigo(11).Text <> "" Or txtcodigo(12).Text <> "" Then
         If OpcionListado = 227 Or OpcionListado = 228 Then
             campo = "{" & NomTabla & ".fecfactu}"
         ElseIf OpcionListado = 49 Then
@@ -5693,37 +5778,37 @@ Dim Tocho As String
         Else
             campo = "{" & NomTabla & ".fecpedcl}"
         End If
-        cad = "pDHFecha=""Fecha: "
-        If Not PonerDesdeHasta(campo, "F", 11, 12, cad) Then Exit Sub
-        cadSelect = CadenaDesdeHastaBD(txtCodigo(11).Text, txtCodigo(12).Text, campo, "F")
+        Cad = "pDHFecha=""Fecha: "
+        If Not PonerDesdeHasta(campo, "F", 11, 12, Cad) Then Exit Sub
+        cadSelect = CadenaDesdeHastaBD(txtcodigo(11).Text, txtcodigo(12).Text, campo, "F")
         
         'Guardamos el periodo para calcular las ventas
         If OpcionListado = 227 Then
             cadFormula2 = cadFormula
-            cadSelect2 = cadSelect
+            Cadselect2 = cadSelect
             'obtenemos el periodo anterior de ventas
-            cad = "": SQL = ""
-            If txtCodigo(11).Text <> "" Then cad = Day(txtCodigo(11).Text) & "/" & Month(txtCodigo(11).Text) & "/" & Year(txtCodigo(11).Text) - 1
-            If txtCodigo(12).Text <> "" Then SQL = Day(txtCodigo(12).Text) & "/" & Month(txtCodigo(12).Text) & "/" & Year(txtCodigo(12).Text) - 1
-            cadSelect3 = CadenaDesdeHastaBD(cad, SQL, campo, "F")
+            Cad = "": SQL = ""
+            If txtcodigo(11).Text <> "" Then Cad = Day(txtcodigo(11).Text) & "/" & Month(txtcodigo(11).Text) & "/" & Year(txtcodigo(11).Text) - 1
+            If txtcodigo(12).Text <> "" Then SQL = Day(txtcodigo(12).Text) & "/" & Month(txtcodigo(12).Text) & "/" & Year(txtcodigo(12).Text) - 1
+            cadSelect3 = CadenaDesdeHastaBD(Cad, SQL, campo, "F")
         
         ElseIf OpcionListado = 41 Or OpcionListado = 42 Then '42:Disponibilidad Stock
         'pasar D/H fecha como parametro para enlazar con la cabecera de pedidos proveedor
         'que esta como subinforme y que seleccione el mismo rango de fecha que
         'para la cabecera de pedidos de cliente
-            If txtCodigo(11).Text <> "" Then
-                cad = "pFechaD=" & "Date(" & Year(txtCodigo(11).Text) & ", " & Month(txtCodigo(11).Text) & ", " & Day(txtCodigo(11).Text) & ")"
+            If txtcodigo(11).Text <> "" Then
+                Cad = "pFechaD=" & "Date(" & Year(txtcodigo(11).Text) & ", " & Month(txtcodigo(11).Text) & ", " & Day(txtcodigo(11).Text) & ")"
             Else
-                cad = "pFechaD=" & "Date(1900,01,01)"
+                Cad = "pFechaD=" & "Date(1900,01,01)"
             End If
-            cadParam = cadParam & cad & "|"
+            cadParam = cadParam & Cad & "|"
             numParam = numParam + 1
-            If txtCodigo(12).Text <> "" Then
-                cad = "pFechaH=" & "Date(" & Year(txtCodigo(12).Text) & ", " & Month(txtCodigo(12).Text) & ", " & Day(txtCodigo(12).Text) & ")"
+            If txtcodigo(12).Text <> "" Then
+                Cad = "pFechaH=" & "Date(" & Year(txtcodigo(12).Text) & ", " & Month(txtcodigo(12).Text) & ", " & Day(txtcodigo(12).Text) & ")"
             Else
-                cad = "pFechaH=" & "Date(9999,12,31)"
+                Cad = "pFechaH=" & "Date(9999,12,31)"
             End If
-            cadParam = cadParam & cad & "|"
+            cadParam = cadParam & Cad & "|"
             numParam = numParam + 1
         End If
     End If
@@ -5731,11 +5816,11 @@ Dim Tocho As String
     'Cadena para seleccion ALMACEN
     '--------------------------------------------
     If Me.Frame9.visible Then
-        If txtCodigo(13).Text <> "" Or txtCodigo(14).Text <> "" Then
+        If txtcodigo(13).Text <> "" Or txtcodigo(14).Text <> "" Then
             campo = "{" & NomTablaLin & ".codalmac}"
             'Parametro Desde/Hasta Almacen
-            cad = "pDHAlmacen=""Almacen: "
-            If Not PonerDesdeHasta(campo, "N", 13, 14, cad) Then Exit Sub
+            Cad = "pDHAlmacen=""Almacen: "
+            If Not PonerDesdeHasta(campo, "N", 13, 14, Cad) Then Exit Sub
         End If
     End If
     
@@ -5743,11 +5828,11 @@ Dim Tocho As String
     'Cadena para seleccion ARTICULO
     '--------------------------------------------
     If Me.Frame8.visible Then
-        If txtCodigo(15).Text <> "" Or txtCodigo(16).Text <> "" Then
+        If txtcodigo(15).Text <> "" Or txtcodigo(16).Text <> "" Then
             campo = "{" & NomTablaLin & ".codartic}"
             'Parametro Desde/Hasta Articulo
-            cad = "pDHArticulo=""Artículo: "
-             If Not PonerDesdeHasta(campo, "T", 15, 16, cad) Then Exit Sub
+            Cad = "pDHArticulo=""Artículo: "
+             If Not PonerDesdeHasta(campo, "T", 15, 16, Cad) Then Exit Sub
         End If
     End If
     
@@ -5756,13 +5841,13 @@ Dim Tocho As String
     If Me.Frame5.visible Then
         If OpcionListado = 44 Then
             CadenaDesdeOtroForm = ""
-            If txtCodigo(20).Text <> "" Or txtCodigo(21).Text <> "" Then
+            If txtcodigo(20).Text <> "" Or txtcodigo(21).Text <> "" Then
                 campo = "{" & NomTabla & ".codclien}"
                 'Parametro Desde/Hasta Cliente
-                cad = "Cliente: "
-                If Not PonerDesdeHasta(campo, "N", 20, 21, cad) Then Exit Sub
+                Cad = "Cliente: "
+                If Not PonerDesdeHasta(campo, "N", 20, 21, Cad) Then Exit Sub
             End If
-            If cad <> "" Then CadenaDesdeOtroForm = cad
+            If Cad <> "" Then CadenaDesdeOtroForm = Cad
             If chkPedxClixSemEntrega(0).Value = 0 Then
                 If Me.cboTipocliente.ItemData(cboTipocliente.ListIndex) >= 0 Then
                     'Tiene seleccionado UN tipo de cliente
@@ -5770,26 +5855,26 @@ Dim Tocho As String
                 End If
             End If
             If CadenaDesdeOtroForm <> "" Then
-                cad = "pDHCliente=""" & CadenaDesdeOtroForm & """|"
-                cadParam = cadParam & cad
+                Cad = "pDHCliente=""" & CadenaDesdeOtroForm & """|"
+                cadParam = cadParam & Cad
                 numParam = numParam + 1
                 CadenaDesdeOtroForm = ""
             End If
                 
                         
-            cad = "observas=" & chkPedxClixSemEntrega(1).Value & "|"
-            cadParam = cadParam & cad
+            Cad = "observas=" & chkPedxClixSemEntrega(1).Value & "|"
+            cadParam = cadParam & Cad
             numParam = numParam + 1
             
             
                 
                 
         Else
-            If txtCodigo(20).Text <> "" Or txtCodigo(21).Text <> "" Then
+            If txtcodigo(20).Text <> "" Or txtcodigo(21).Text <> "" Then
                 campo = "{" & NomTabla & ".codclien}"
                 'Parametro Desde/Hasta Cliente
-                cad = "pDHCliente=""Cliente: "
-                If Not PonerDesdeHasta(campo, "N", 20, 21, cad) Then Exit Sub
+                Cad = "pDHCliente=""Cliente: "
+                If Not PonerDesdeHasta(campo, "N", 20, 21, Cad) Then Exit Sub
             End If
         End If
     End If
@@ -5798,11 +5883,11 @@ Dim Tocho As String
     'Cadena para seleccion TRABAJADOR
     '--------------------------------------------
     If Me.Frame12.visible Then
-        If txtCodigo(2).Text <> "" Or txtCodigo(3).Text <> "" Then
+        If txtcodigo(2).Text <> "" Or txtcodigo(3).Text <> "" Then
             campo = "{scafac1.codtraba}"
             'Parametro Desde/Hasta Trabajador
-            cad = "pDHTrabajador=""Trabajador: "
-            If Not PonerDesdeHasta(campo, "N", 2, 3, cad) Then Exit Sub
+            Cad = "pDHTrabajador=""Trabajador: "
+            If Not PonerDesdeHasta(campo, "N", 2, 3, Cad) Then Exit Sub
         End If
     End If
     
@@ -5811,26 +5896,26 @@ Dim Tocho As String
     '227: Listado Ventas por cliente
     'Importe ventas superior a ....
     If Me.Frame10.visible Then
-        If txtCodigo(1).Text <> "" Then
-            cad = DBSet(txtCodigo(1).Text, "N")
+        If txtcodigo(1).Text <> "" Then
+            Cad = DBSet(txtcodigo(1).Text, "N")
         Else
-            cad = ""
+            Cad = ""
         End If
         
-        cadParam = cadParam & "pImporte=" & cad & "|"
+        cadParam = cadParam & "pImporte=" & Cad & "|"
         numParam = numParam + 1
             
         'En este sub meteremos la actividad tb
-        If txtCodigo(1).Text <> "" Or txtCodigo(57).Text <> "" Or txtCodigo(58).Text <> "" Or txtCodigo(23).Text <> "" Or txtCodigo(24).Text <> "" Then
+        If txtcodigo(1).Text <> "" Or txtcodigo(57).Text <> "" Or txtcodigo(58).Text <> "" Or txtcodigo(23).Text <> "" Or txtcodigo(24).Text <> "" Then
             'seleccionar solo los clientes que el total de la BaseImp supere esa cantidad
             'y esten en el desde hasta que marcamos aqui
-            If cadSelect <> "" Then SQL = cadSelect2 & " AND "
-            cad = ObtenerClientesNuevo(cadSelect, cad)
-            cadSelect = SQL & cad
+            If cadSelect <> "" Then SQL = Cadselect2 & " AND "
+            Cad = ObtenerClientesNuevo(cadSelect, Cad)
+            cadSelect = SQL & Cad
 '            If cadSelect3 <> "" Then cadSelect3 = cadSelect3 & " AND "
 '            cadSelect3 = cadSelect3 & cad
             If cadFormula2 <> "" Then cadFormula2 = cadFormula2 & " AND "
-            cadFormula = cadFormula2 & cad
+            cadFormula = cadFormula2 & Cad
         End If
         
         
@@ -5851,27 +5936,27 @@ Dim Tocho As String
             Else
                 Select Case Indice
                     Case 0 ' solo ventas
-                        cad = "{" & NomTabla & ".codtipom}='ALV'"
-                        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-                        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+                        Cad = "{" & NomTabla & ".codtipom}='ALV'"
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
                         Titulo = "Albaranes por artículo (Ventas)"
                     Case 1 ' solo servicios
-                        cad = "{" & NomTabla & ".codtipom}='ALS'"
-                        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-                        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+                        Cad = "{" & NomTabla & ".codtipom}='ALS'"
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
                         Titulo = "Albaranes por artículo (Servicios)"
                     Case 2 ' ventas y servicios
-                        cad = " ({" & NomTabla & ".codtipom}='ALV'" & _
+                        Cad = " ({" & NomTabla & ".codtipom}='ALV'" & _
                                 " OR {" & NomTabla & ".codtipom}='ALS')"
-                        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-                        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
                         Titulo = "Albaranes por artículo (Ventas y servicios)"
                 End Select
             End If
         Else
-            cad = "{" & NomTabla & ".codtipom}='ALV'"
-            If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-            If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+            Cad = "{" & NomTabla & ".codtipom}='ALV'"
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
             Titulo = "Albaranes por artículo (Ventas)"
         End If
         'Pasar nombre el título del informe
@@ -5895,11 +5980,11 @@ Dim Tocho As String
             If Me.cboTipocliente.ItemData(cboTipocliente.ListIndex) >= 0 Then
                 'Voy montar un select que devuelva de los clientes que esan en pedidos
                 'y sean del tipo ese
-                cad = DevuelveClientesPedidosPorTipo
-                If cad = "" Then cad = "-1"
-                CadenaDesdeOtroForm = "{" & NomTabla & ".codclien} IN [" & cad & "]"
+                Cad = DevuelveClientesPedidosPorTipo
+                If Cad = "" Then Cad = "-1"
+                CadenaDesdeOtroForm = "{" & NomTabla & ".codclien} IN [" & Cad & "]"
                 If Not AnyadirAFormula(cadFormula, CadenaDesdeOtroForm) Then Exit Sub
-                CadenaDesdeOtroForm = "{" & NomTabla & ".codclien} IN (" & cad & ")"
+                CadenaDesdeOtroForm = "{" & NomTabla & ".codclien} IN (" & Cad & ")"
                 If Not AnyadirAFormula(cadSelect, CadenaDesdeOtroForm) Then Exit Sub
                 CadenaDesdeOtroForm = ""
             End If
@@ -5909,14 +5994,14 @@ Dim Tocho As String
     
     If vParamAplic.NumeroInstalacion = vbFenollar Then
 
-        cad = "{" & NomTabla & ".cerrado} = 0"
-        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+        Cad = "{" & NomTabla & ".cerrado} = 0"
+        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
         
         If OpcionListado = 41 And Me.chkPedxClixSemEntrega(3).Value = 1 Then
             'Listado agrupado por articulo unicamente por articulo  almacen. Solo contro stock
-              cad = "{sartic.ctrstock} = 1"
-            If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
+              Cad = "{sartic.ctrstock} = 1"
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
            '  cad = "{sartic.ctrstock} = 1"
            ' If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
         End If
@@ -5927,18 +6012,34 @@ Dim Tocho As String
     
         
     
-        cad = NomTabla
-        Titulo = "Ventas por Cliente"
-        If Me.Check1chkAgrupaAg.Value = 1 Then
-            'Agrupa cliente
-            Titulo = Titulo & " Por cliente"
-            nomRPT = "rFacVentasxClienAg.rpt"
+        Cad = NomTabla
+        
+        If chkPedxClixSemEntrega(4).Value = 1 Then
+            If Check1chkAgrupaAg.Value = 1 Then
+                MsgBox "No se agrupa por agente", vbExclamation
+                Check1chkAgrupaAg.Value = 0
+            End If
+            'Noviembre 2019
+            'Anual
+            Titulo = "Ventas por cliente anual"
+            nomRPT = "rFacVentasxClienPeriodoComparativo.rpt"
         Else
-            nomRPT = "rFacVentasxClien.rpt"
+            'Lo que habia
+            Titulo = "Ventas por Cliente"
+            If Me.Check1chkAgrupaAg.Value = 1 Then
+                'Agrupa cliente
+                Titulo = Titulo & " (cliente)"
+                nomRPT = "rFacVentasxClienAg.rpt"
+            Else
+                nomRPT = "rFacVentasxClien.rpt"
+            End If
+            
         End If
+        
+        
         conSubRPT = False
     ElseIf OpcionListado = 228 Then
-        cad = NomTabla & " INNER JOIN scafac1 ON scafac.codtipom=scafac1.codtipom and scafac.fecfactu=scafac1.fecfactu and scafac.numfactu=scafac1.numfactu"
+        Cad = NomTabla & " INNER JOIN scafac1 ON scafac.codtipom=scafac1.codtipom and scafac.fecfactu=scafac1.fecfactu and scafac.numfactu=scafac1.numfactu"
         Titulo = "Ventas por Trabajador"
         If Me.OptDetalle(2).Value = True Then 'Inf. Detalle
             nomRPT = "rFacVentasxTrabaDet.rpt"
@@ -5948,12 +6049,12 @@ Dim Tocho As String
             conSubRPT = False
         End If
     Else
-       cad = NomTabla & " INNER JOIN " & NomTablaLin
-       cad = cad & " ON " & NomTabla & campo & "=" & NomTablaLin & campo
-       If OpcionListado = 49 Then cad = cad & " AND " & NomTabla & ".codtipom=" & NomTablaLin & ".codtipom "
+       Cad = NomTabla & " INNER JOIN " & NomTablaLin
+       Cad = Cad & " ON " & NomTabla & campo & "=" & NomTablaLin & campo
+       If OpcionListado = 49 Then Cad = Cad & " AND " & NomTabla & ".codtipom=" & NomTablaLin & ".codtipom "
     End If
     
-    If Not HayRegParaInforme(cad, cadSelect) Then Exit Sub
+    If Not HayRegParaInforme(Cad, cadSelect) Then Exit Sub
     
     
     If OpcionListado = 227 Then
@@ -5961,8 +6062,8 @@ Dim Tocho As String
         
         'Pasar los datos a la tabla temporal tmpInformes y luego mostrar
         'el informe de esta tabla
-        cadSelect2 = Replace(cadSelect2, "{", "")
-        cadSelect2 = Replace(cadSelect2, "}", "")
+        Cadselect2 = Replace(Cadselect2, "{", "")
+        Cadselect2 = Replace(Cadselect2, "}", "")
         
         cadSelect3 = Replace(cadSelect3, "{", "")
         cadSelect3 = Replace(cadSelect3, "}", "")
@@ -5970,68 +6071,88 @@ Dim Tocho As String
         
         'JULIO 2013
         'QUe tipo de facturas entran
-        cad = ""
+        Cad = ""
         SQL = ""
         'LOS SELECCIONADOS
 
         For Indice = 0 To Me.ListTipoFact.ListCount - 1
             'Siempre 3 carcateres
             If Me.ListTipoFact.Selected(Indice) Then
-                cad = cad & Mid(Me.ListTipoFact.List(Indice), 1, 3) & "|"
+                Cad = Cad & Mid(Me.ListTipoFact.List(Indice), 1, 3) & "|"
                 SQL = SQL & "X"
             End If
         Next
     
         
-            '4
-        If Len(SQL) > 5 Or Len(SQL) < 1 Then
-            MsgBox "Maximo 5 tipos de facturas", vbExclamation
-             Exit Sub
-        Else
+        If chkPedxClixSemEntrega(4).Value = 1 Then
+            'Nuevo informe ANUAL
+            'AÑADIREMOS DESDE HASTA tipocredito
             
-            If Len(SQL) = 5 Then
-                'Si son 5 tipos de factura y NO esta agrupado por cliente es otro rpt
-                If Me.Check1chkAgrupaAg.Value = 0 Then nomRPT = "rFacVentasxClien5.rpt"
-            End If
-            SQL = ""
+        Else
+            'lo que habia
+              If Len(SQL) > 5 Or Len(SQL) < 1 Then
+                  MsgBox "Maximo 5 tipos de facturas", vbExclamation
+                   Exit Sub
+              Else
+                  
+                  If Len(SQL) = 5 Then
+                      'Si son 5 tipos de factura y NO esta agrupado por cliente es otro rpt
+                      If Me.Check1chkAgrupaAg.Value = 0 Then nomRPT = "rFacVentasxClien5.rpt"
+                  End If
+                  SQL = ""
+              End If
+            
         End If
-      
-        
         
         Screen.MousePointer = vbHourglass
         
         
         SQL = ""
-        If txtCodigo(64).Text <> "" Then SQL = SQL & " AND (sclien.codzonas)>= " & txtCodigo(64).Text
-        If txtCodigo(65).Text <> "" Then SQL = SQL & " AND (sclien.codzonas)<= " & txtCodigo(64).Text
+        If txtcodigo(64).Text <> "" Then SQL = SQL & " AND (sclien.codzonas)>= " & txtcodigo(64).Text
+        If txtcodigo(65).Text <> "" Then SQL = SQL & " AND (sclien.codzonas)<= " & txtcodigo(65).Text
         cadSelect = cadSelect & SQL
-        cadSelect2 = cadSelect2 & SQL
+        Cadselect2 = Cadselect2 & SQL
         cadSelect3 = cadSelect3 & SQL
         
         SQL = ""
-        If txtCodigo(66).Text <> "" Then SQL = SQL & " AND (sclien.codrutas)>= " & txtCodigo(66).Text
-        If txtCodigo(67).Text <> "" Then SQL = SQL & " AND (sclien.codrutas)<= " & txtCodigo(67).Text
+        If txtcodigo(66).Text <> "" Then SQL = SQL & " AND (sclien.codrutas)>= " & txtcodigo(66).Text
+        If txtcodigo(67).Text <> "" Then SQL = SQL & " AND (sclien.codrutas)<= " & txtcodigo(67).Text
         cadSelect = cadSelect & SQL
-        cadSelect2 = cadSelect2 & SQL
+        Cadselect2 = Cadselect2 & SQL
         cadSelect3 = cadSelect3 & SQL
         
         
         SQL = ""
-        If Me.txtCodigo(23).Text <> "" Then SQL = SQL & " AND scafac.codagent >= " & txtCodigo(23).Text
-        If Me.txtCodigo(24).Text <> "" Then SQL = SQL & " AND scafac.codagent <= " & txtCodigo(24).Text
+        If Me.txtcodigo(23).Text <> "" Then SQL = SQL & " AND scafac.codagent >= " & txtcodigo(23).Text
+        If Me.txtcodigo(24).Text <> "" Then SQL = SQL & " AND scafac.codagent <= " & txtcodigo(24).Text
         cadSelect = cadSelect & SQL
-        cadSelect2 = cadSelect2 & SQL
+        Cadselect2 = Cadselect2 & SQL
         cadSelect3 = cadSelect3 & SQL
         
+         If chkPedxClixSemEntrega(4).Value = 1 And vParamAplic.OperacionesAseguradas Then
+            
+            SQL = ""
+            If Me.cboTipoCredito.ListIndex >= 1 Then SQL = SQL & " AND sclien.credipriv = " & cboTipoCredito.ItemData(cboTipoCredito.ListIndex)
+            cadSelect = cadSelect & SQL
+            'Cadselect2 = Cadselect2 & SQL
+            'cadSelect3 = cadSelect3 & SQL
+           
+        End If
         
         
+        If chkPedxClixSemEntrega(4).Value = 1 Then
+            'Noviembre 2019
+            If cboAnyos.ListIndex = -1 Then cboAnyos.ListIndex = 0
+            If Not TempVentasClientesPeriodoComparativo(Me.Check1chkAgrupaAg.Value = 1, cadSelect, Cadselect2, cadSelect3, Label4(54), Cad, CDate(txtcodigo(11).Text), CDate(txtcodigo(12).Text), CInt(cboAnyos.Text)) Then Exit Sub
+            cadSelect3 = "0"
+        Else
+            'lo que hacia antes
+            If Not TempVentasClientes(Me.Check1chkAgrupaAg.Value = 1, cadSelect, Cadselect2, cadSelect3, Label4(54), Cad) Then Exit Sub
+        End If
         
-        If Not TempVentasClientes(Me.Check1chkAgrupaAg.Value = 1, cadSelect, cadSelect2, cadSelect3, Label4(54), cad) Then Exit Sub
-        
-        
-        cad = DevuelveDesdeBD(conAri, "count(*)", "tmpinformes", "codusu", CStr(vUsu.Codigo))
-        If cad = "" Then cad = "0"
-        If Val(cad) = 0 Then
+        Cad = DevuelveDesdeBD(conAri, "count(*)", "tmpinformes", "codusu", CStr(vUsu.Codigo))
+        If Cad = "" Then Cad = "0"
+        If Val(Cad) = 0 Then
             MsgBox "No existen datos ", vbExclamation
             Exit Sub
         End If
@@ -6040,7 +6161,7 @@ Dim Tocho As String
         
         'Añadir como parametros el total del periodo que devuelve en cadSelect2
         'y añadir el parametro del total periodo anterior q devuelve en cadSelect3
-        cadParam = cadParam & "pTotal=" & cadSelect2 & "|"
+        cadParam = cadParam & "pTotal=" & Cadselect2 & "|"
         numParam = numParam + 1
         cadParam = cadParam & "pTotalAnt=" & cadSelect3 & "|"
         numParam = numParam + 1
@@ -6048,33 +6169,40 @@ Dim Tocho As String
         'Añadir el parametro para el orden del informe
         'Orden del Informe
         If Me.OptOrdenCodclien.Value Then
-            cad = "{tmpinformes.codigo1}"
+            Cad = "{tmpinformes.codigo1}"
             SQL = "Orden: Cod. cliente"
         ElseIf Me.OptOrdenNomclien.Value Then
-            cad = "{tmpinformes.nombre1}"
+            Cad = "{tmpinformes.nombre1}"
             SQL = "Orden: Nombre cliente"
         ElseIf Me.OptOrdenVentas.Value Then
-            cad = "{@paraOrdenarVolumen}" '"{tmpinformes.importe5}"
+           
+            Cad = "{@paraOrdenarVolumen}" '"{tmpinformes.importe5}"
             SQL = "Orden: Volumen ventas"
+        End If
+        
+        
+        
+        If chkPedxClixSemEntrega(4).Value = 1 And vParamAplic.OperacionesAseguradas Then
+            If Me.cboTipoCredito.ListIndex > 0 Then SQL = SQL & "   " & UCase(cboTipoCredito.Text)
         End If
         
         'Si lleva d/H agente
         SQL = SQL & "               "
         campo = ""
-        If txtCodigo(23).Text <> "" Then campo = campo & "    desde " & txtCodigo(23).Text & "  " & Me.txtNombre(23).Text
-        If txtCodigo(24).Text <> "" Then campo = campo & "    hasta " & txtCodigo(24).Text & "  " & Me.txtNombre(24).Text
+        If txtcodigo(23).Text <> "" Then campo = campo & "    desde " & txtcodigo(23).Text & "  " & Me.txtNombre(23).Text
+        If txtcodigo(24).Text <> "" Then campo = campo & "    hasta " & txtcodigo(24).Text & "  " & Me.txtNombre(24).Text
         If campo <> "" Then campo = "Agente " & Trim(campo)
         SQL = SQL & campo
         
         'Si lleva actividad
         SQL = SQL & "     "
         campo = ""
-        If txtCodigo(57).Text <> "" Then
-            campo = campo & "    desde " & txtCodigo(57).Text
+        If txtcodigo(57).Text <> "" Then
+            campo = campo & "    desde " & txtcodigo(57).Text
             If Len(SQL) < 115 Then campo = campo & "  " & Me.txtNombre(57).Text
         End If
-        If txtCodigo(58).Text <> "" Then
-            campo = campo & "    hasta " & txtCodigo(58).Text
+        If txtcodigo(58).Text <> "" Then
+            campo = campo & "    hasta " & txtcodigo(58).Text
             If Len(SQL) < 125 Then campo = campo & "  " & Me.txtNombre(58).Text
         End If
         If campo <> "" Then campo = "Act: " & Trim(campo)
@@ -6084,31 +6212,31 @@ Dim Tocho As String
         'Si lleva ZONA
         SQL = SQL & "     "
         campo = ""
-        If txtCodigo(64).Text <> "" Then
-            campo = campo & "    desde " & txtCodigo(64).Text
+        If txtcodigo(64).Text <> "" Then
+            campo = campo & "    desde " & txtcodigo(64).Text
             If Len(SQL) < 115 Then campo = campo & "  " & Me.txtNombre(64).Text
         End If
-        If txtCodigo(65).Text <> "" Then
-            campo = campo & "    hasta " & txtCodigo(65).Text
+        If txtcodigo(65).Text <> "" Then
+            campo = campo & "    hasta " & txtcodigo(65).Text
             If Len(SQL) < 125 Then campo = campo & "  " & Me.txtNombre(65).Text
         End If
         If campo <> "" Then campo = "Zona: " & Trim(campo)
         SQL = SQL & campo
         
         'Si lleva RUTA
-        If txtCodigo(66).Text <> "" Or txtCodigo(67).Text <> "" Then
+        If txtcodigo(66).Text <> "" Or txtcodigo(67).Text <> "" Then
             
             SQL = SQL & "     "
             campo = ""
-            If txtCodigo(66).Text <> "" Or txtCodigo(67).Text <> "" Then
-                campo = txtCodigo(66).Text & " " & txtNombre(66).Text
+            If txtcodigo(66).Text <> "" Or txtcodigo(67).Text <> "" Then
+                campo = txtcodigo(66).Text & " " & txtNombre(66).Text
             Else
-                If txtCodigo(66).Text <> "" Then
-                    campo = campo & "    desde " & txtCodigo(66).Text
+                If txtcodigo(66).Text <> "" Then
+                    campo = campo & "    desde " & txtcodigo(66).Text
                     If Len(SQL) < 115 Then campo = campo & "  " & Me.txtNombre(66).Text
                 End If
-                If txtCodigo(67).Text <> "" Then
-                    campo = campo & "    hasta " & txtCodigo(67).Text
+                If txtcodigo(67).Text <> "" Then
+                    campo = campo & "    hasta " & txtcodigo(67).Text
                     If Len(SQL) < 125 Then campo = campo & "  " & Me.txtNombre(67).Text
                 End If
             End If
@@ -6125,29 +6253,52 @@ Dim Tocho As String
             If Me.ListTipoFact.Selected(Indice) Then
                 cadSelect3 = Val(cadSelect3) + 1
                 SQL = SQL & "  " & Mid(Me.ListTipoFact.List(Indice), 1, 3)
-                cadSelect2 = Mid(Me.ListTipoFact.List(Indice), 1, 3)
-                If cadSelect2 = "FAE" Then
-                    cadSelect2 = "Exterior"
-                ElseIf cadSelect2 = "FAO" Then
-                    cadSelect2 = "Orden Tr."
+                Cadselect2 = Mid(Me.ListTipoFact.List(Indice), 1, 3)
+                If Cadselect2 = "FAE" Then
+                    Cadselect2 = "Exterior"
+                ElseIf Cadselect2 = "FAO" Then
+                    Cadselect2 = "Orden Tr."
                 Else
                     'LO que habia
-                    cadSelect2 = Trim(Mid(Me.ListTipoFact.List(Indice), 6))
+                    Cadselect2 = Trim(Mid(Me.ListTipoFact.List(Indice), 6))
                 End If
-                If InStr(1, UCase(cadSelect2), "FACTURA") > 0 Then
-                    cadSelect2 = Trim(Mid(cadSelect2, InStr(1, UCase(cadSelect2), "FACTURA") + 8))
+                If InStr(1, UCase(Cadselect2), "FACTURA") > 0 Then
+                    Cadselect2 = Trim(Mid(Cadselect2, InStr(1, UCase(Cadselect2), "FACTURA") + 8))
                 End If
-                If Len(cadSelect2) > 5 Then cadSelect2 = Mid(cadSelect2, 1, 5) & "."
-                cadParam = cadParam & "C" & cadSelect3 & "=""" & cadSelect2 & """|"
-                numParam = numParam + 1
+                If Len(Cadselect2) > 5 Then Cadselect2 = Mid(Cadselect2, 1, 5) & "."
                 
+                If chkPedxClixSemEntrega(4).Value = 1 Then
+                    'No hacemos nada
+                
+                Else
+                    cadParam = cadParam & "C" & cadSelect3 & "=""" & Cadselect2 & """|"
+                    numParam = numParam + 1
+                End If
                 
             End If
         Next
-            
+        If chkPedxClixSemEntrega(4).Value = 1 Then
+            For Indice = 2 To 5
+                
+                If Indice > Val(Me.cboAnyos.Text) Then
+                    Cadselect2 = ""
+                Else
+                    Fec = CDate(txtcodigo(11).Text)
+                    Fec = DateAdd("yyyy", -(Indice - 1), Fec)
+                    Cadselect2 = Format(Fec, "dd/mm/yy")
+                    Fec = CDate(txtcodigo(12).Text)
+                    Fec = DateAdd("yyyy", -(Indice - 1), Fec)
+                    Cadselect2 = Cadselect2 & "-" & Format(Fec, "dd/mm/yy")
+                    
+                    
+                End If
+                cadParam = cadParam & "C" & Indice & "=""" & Cadselect2 & """|"
+                numParam = numParam + 1
+            Next
+        End If
         
         
-        cadParam = cadParam & "pOrden=" & cad & "|"
+        cadParam = cadParam & "pOrden=" & Cad & "|"
         numParam = numParam + 1
         cadParam = cadParam & "pCadOrden=""" & SQL & """|"
         numParam = numParam + 1
@@ -6161,31 +6312,31 @@ Dim Tocho As String
         'If Me.optOrdePed(0).Value Then
         '    Cad = "{sliped.codartic}"
         'Else
-            cad = "{scaped.numpedcl}"
+            Cad = "{scaped.numpedcl}"
         'End If
-        cadParam = cadParam & "rOrden=" & cad & "|"
+        cadParam = cadParam & "rOrden=" & Cad & "|"
         numParam = numParam + 1
         
-        cadParam = cadParam & "Observas=" & cad & "|"
+        cadParam = cadParam & "Observas=" & Cad & "|"
         numParam = numParam + 1
         
         
         'MArzo 2010
         SQL = ""
-        If txtCodigo(6).Text <> "" Or txtCodigo(7).Text <> "" Then
+        If txtcodigo(6).Text <> "" Or txtcodigo(7).Text <> "" Then
             campo = "{scaped.codagent}"
             'Parametro Desde/Hasta agente
-            cad = "@=""Agente: "
-            If Not PonerDesdeHasta(campo, "N", 6, 7, cad) Then Exit Sub
-            SQL = Mid(cad, 4)
+            Cad = "@=""Agente: "
+            If Not PonerDesdeHasta(campo, "N", 6, 7, Cad) Then Exit Sub
+            SQL = Mid(Cad, 4)
         End If
-        If txtCodigo(9).Text <> "" Or txtCodigo(10).Text <> "" Then
+        If txtcodigo(9).Text <> "" Or txtcodigo(10).Text <> "" Then
             campo = "{sclien.codzonas}"
             'Parametro Desde/Hasta zona
-            cad = "@=""Zonas: "
-            If Not PonerDesdeHasta(campo, "N", 9, 10, cad) Then Exit Sub
-            cad = Mid(cad, 4)
-            SQL = Trim(SQL & "    " & cad)
+            Cad = "@=""Zonas: "
+            If Not PonerDesdeHasta(campo, "N", 9, 10, Cad) Then Exit Sub
+            Cad = Mid(Cad, 4)
+            SQL = Trim(SQL & "    " & Cad)
         End If
         If SQL <> "" Then
             SQL = """" & SQL & """"
@@ -6326,9 +6477,9 @@ Dim Tocho As String
         
         
         'Pongo los nuevos valores para la cadformula
-        cad = "{tmpsliped.codusu}=" & vUsu.Codigo
+        Cad = "{tmpsliped.codusu}=" & vUsu.Codigo
         cadFormula = ""
-        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
         'Añado si detalla o no
         cadParam = cadParam & "Detalle= " & Me.chkDispo(0).Value & "|"
         numParam = numParam + 1
@@ -6466,17 +6617,17 @@ End Sub
 
 Private Sub cmdAceptarPreFac_Click()
 'Prevision de Facturacion de Albaranes
-Dim campo As String, cad As String
+Dim campo As String, Cad As String
 Dim b As Boolean
 Dim Indice As Integer
    
 
     If OpcionListado = 50 Then
-        cad = ""
+        Cad = ""
         For indCodigo = 10 To 16   'LOS SEIS PRIMEROS
-            If Me.chkTpPago2(indCodigo).Value = 1 Then cad = "1"
+            If Me.chkTpPago2(indCodigo).Value = 1 Then Cad = "1"
         Next indCodigo
-        If cad = "" Then
+        If Cad = "" Then
             MsgBox "Seleccione algun tipo de pago", vbExclamation
             Exit Sub
         End If
@@ -6496,93 +6647,93 @@ Dim Indice As Integer
     
     'Desde/Hasta FECHA del ALBARAN
     '--------------------------------------------
-    If Trim(txtCodigo(26).Text) <> "" Or Trim(txtCodigo(27).Text) <> "" Then
+    If Trim(txtcodigo(26).Text) <> "" Or Trim(txtcodigo(27).Text) <> "" Then
 
             campo = "scaalb.fechaalb"
-            cadSelect = CadenaDesdeHastaBD(txtCodigo(26).Text, txtCodigo(27).Text, campo, "F")
+            cadSelect = CadenaDesdeHastaBD(txtcodigo(26).Text, txtcodigo(27).Text, campo, "F")
             'Para Crystal Report
             campo = "{scaalb.fechaalb}"
-            cad = "pDHFecha=""Fecha: "
-            If Not PonerDesdeHasta(campo, "F", 26, 27, cad) Then Exit Sub
+            Cad = "pDHFecha=""Fecha: "
+            If Not PonerDesdeHasta(campo, "F", 26, 27, Cad) Then Exit Sub
 
     End If
 
     'Cadena para seleccion CLIENTE
     '--------------------------------------------
-    If txtCodigo(28).Text <> "" Or txtCodigo(29).Text <> "" Then
+    If txtcodigo(28).Text <> "" Or txtcodigo(29).Text <> "" Then
       
             campo = "{scaalb.codclien}"
-            cad = "pDHCliente=""Cliente: "
+            Cad = "pDHCliente=""Cliente: "
    
-        If Not PonerDesdeHasta(campo, "N", 28, 29, cad) Then Exit Sub
+        If Not PonerDesdeHasta(campo, "N", 28, 29, Cad) Then Exit Sub
     End If
   
     If b Then 'opcionlistado=50
         'Cadena para seleccion FORMA PAGO
         '--------------------------------------------
         NumCod = ""   'reutilizo
-        If txtCodigo(30).Text <> "" Or txtCodigo(31).Text <> "" Then
+        If txtcodigo(30).Text <> "" Or txtcodigo(31).Text <> "" Then
           
             campo = "{scaalb.codforpa}"
-            cad = "Forma Pago: "
-            If Not PonerDesdeHasta(campo, "N", 30, 31, cad) Then Exit Sub
-            NumCod = cad
+            Cad = "Forma Pago: "
+            If Not PonerDesdeHasta(campo, "N", 30, 31, Cad) Then Exit Sub
+            NumCod = Cad
         End If
         
         'Sep 2015
-        If Me.txtCodigo(61).Text <> "" Then
+        If Me.txtcodigo(61).Text <> "" Then
             campo = "{sclien.periodof}"
-            cad = ""
-            If Not PonerDesdeHasta(campo, "N", 61, 61, cad) Then Exit Sub
-            cad = "    Periodo: " & Me.txtCodigo(61).Text & "."
-            NumCod = Trim(NumCod & cad)
+            Cad = ""
+            If Not PonerDesdeHasta(campo, "N", 61, 61, Cad) Then Exit Sub
+            Cad = "    Periodo: " & Me.txtcodigo(61).Text & "."
+            NumCod = Trim(NumCod & Cad)
         End If
         
         
         'JUNIO 2014
         If OpcionListado = 50 Then
-            cad = ""
+            Cad = ""
             campo = ""
             For NumRegElim = 10 To 16
                 If Me.chkTpPago2(NumRegElim).Value = 1 Then
-                    cad = cad & "1"
+                    Cad = Cad & "1"
                     campo = campo & ", " & NumRegElim - 10
                 End If
             Next
             
-            If Len(cad) = 7 Then
+            If Len(Cad) = 7 Then
                 'LOS HA COGIDO TODOS. NO lo incluyo en el desde hasta
             Else
                 Set miRsAux = New ADODB.Recordset
                 campo = Mid(campo, 2)
-                cad = "Select codforpa from sforpa where tipforpa in (" & campo & ")"
-                miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                cad = ""
+                Cad = "Select codforpa from sforpa where tipforpa in (" & campo & ")"
+                miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Cad = ""
                 While Not miRsAux.EOF
-                    cad = cad & ", " & miRsAux!codforpa
+                    Cad = Cad & ", " & miRsAux!codforpa
                     miRsAux.MoveNext
                 Wend
                 miRsAux.Close
                 Set miRsAux = Nothing
                 
-                If cad = "" Then
+                If Cad = "" Then
                     'MAL. NInguna forpa de pago con ese tipo de pago. Fuerzo un -1
-                    cad = "-1"
+                    Cad = "-1"
                 Else
-                    cad = Mid(cad, 2)
+                    Cad = Mid(Cad, 2)
                 End If
                 
                 
-                If Not AnyadirAFormula(cadSelect, "scaalb.codforpa IN (" & cad & ")") Then Exit Sub
-                If Not AnyadirAFormula(cadFormula, "{scaalb.codforpa} IN [" & cad & "]") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "scaalb.codforpa IN (" & Cad & ")") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "{scaalb.codforpa} IN [" & Cad & "]") Then Exit Sub
                 
                 'Para el rpt saber que tipo de pago llevo
-                cad = ""
+                Cad = ""
                 For NumRegElim = 10 To 16
-                    If Me.chkTpPago2(NumRegElim).Value = 1 Then cad = cad & "- " & Mid(chkTpPago2(NumRegElim).Caption, 1, 5) & "."
+                    If Me.chkTpPago2(NumRegElim).Value = 1 Then Cad = Cad & "- " & Mid(chkTpPago2(NumRegElim).Caption, 1, 5) & "."
                 Next
-                cad = "        Tipo pago: " & Mid(cad, 2)
-                NumCod = Trim(NumCod & cad)
+                Cad = "        Tipo pago: " & Mid(Cad, 2)
+                NumCod = Trim(NumCod & Cad)
             End If
                 
                 
@@ -6610,46 +6761,46 @@ Dim Indice As Integer
             Else
                 Select Case Indice
                     Case 0 ' solo ventas
-                        cad = " {scaalb.codtipom}='ALV' "
-                        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-                        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+                        Cad = " {scaalb.codtipom}='ALV' "
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
                     Case 1 ' solo servicios
-                        cad = " {scaalb.codtipom}='ALS' "
-                        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-                        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+                        Cad = " {scaalb.codtipom}='ALS' "
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
                     Case 2 ' ventas y servicios
-                        cad = " ({scaalb.codtipom}='ALV'" & _
+                        Cad = " ({scaalb.codtipom}='ALV'" & _
                                 " OR {scaalb.codtipom}='ALS') "
-                        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-                        If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+                        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
                 End Select
             End If
         Else
         
             
-            If vParamAplic.NumeroInstalacion = 4 Then
+            If InstalacionEsEulerTaxco Then
                 'Añadimos todos los tipos de albaran en la prefacturacion
-                cad = " {scaalb.codtipom} IN ['ALV','ALR','ALE','ALO','ALM'] "
+                Cad = " {scaalb.codtipom} IN ['ALV','ALR','ALE','ALO','ALM'] "
             Else
-                cad = " {scaalb.codtipom}='" & codClien & "' "
+                Cad = " {scaalb.codtipom}='" & codClien & "' "
             End If
-            If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-            If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
         End If
         'Seleccionar los que esten marcados para facturar
         'Seleccionar solo aquellos que el campo scaalb.factursn=1
         If Me.chkSoloFacturar.Value = 1 Then
-            cad = " {scaalb.factursn}=1 "
-            If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
-            If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
+            Cad = " {scaalb.factursn}=1 "
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, Cad) Then Exit Sub
         End If
     Else
         'Cadena para seleccion AGENTE
         '--------------------------------------------
-        If txtCodigo(32).Text <> "" Or txtCodigo(33).Text <> "" Then
+        If txtcodigo(32).Text <> "" Or txtcodigo(33).Text <> "" Then
             campo = "{scaalb.codagent}"
-            cad = "pDHAgente="""
-            If Not PonerDesdeHasta(campo, "N", 32, 33, cad) Then Exit Sub
+            Cad = "pDHAgente="""
+            If Not PonerDesdeHasta(campo, "N", 32, 33, Cad) Then Exit Sub
         End If
         
         'Seleccionar solo aquellos que tienen Nº de Pedido para comparar los Plazos de Entrega
@@ -6729,7 +6880,7 @@ Dim Indice As Integer
         conSubRPT = True
         If Me.OptDetalle(0).Value = True Then
         
-            If vParamAplic.NumeroInstalacion = 4 Then
+            If InstalacionEsEulerTaxco Then
                 'EULER llamara a la suya
                 nomRPT = "eulFacPrevFactDetalle.rpt"
             Else
@@ -6746,49 +6897,49 @@ Dim Indice As Integer
             nomRPT = "rFacPrevFactDetalleCole.rpt"
         End If
         
-        cad = "pCodUsu=" & vUsu.Codigo & "|"
-        cadParam = cadParam & cad
+        Cad = "pCodUsu=" & vUsu.Codigo & "|"
+        cadParam = cadParam & Cad
         numParam = numParam + 1
         
         '-- Ahora el título depende de los tipos de albaranes seleccionados [SERVICIOS]
-        cad = "pTitulo=""" & Titulo & """|"
-        cadParam = cadParam & cad
+        Cad = "pTitulo=""" & Titulo & """|"
+        cadParam = cadParam & Cad
         numParam = numParam + 1
         
         
         '--  Mostrara , o no, el subreport con el resumen por forma pago
-        cad = "pVerForpa=" & Abs(chkResumenForpa.Value) & "|"
-        cadParam = cadParam & cad
+        Cad = "pVerForpa=" & Abs(chkResumenForpa.Value) & "|"
+        cadParam = cadParam & Cad
         numParam = numParam + 1
         
         '--- departamentos
         'cad = "TieneDpto=" & Abs(vParamAplic.Departamento) & "|"
-        cad = "TieneDpto=" & Abs(vParamAplic.HayDeparNuevo > 0) & "|"
-        cadParam = cadParam & cad
+        Cad = "TieneDpto=" & Abs(vParamAplic.HayDeparNuevo > 0) & "|"
+        cadParam = cadParam & Cad
         numParam = numParam + 1
         
         
         
         
         On Error GoTo EPreFact
-        cad = "delete from tmpstockfec where codusu=" & vUsu.Codigo
-        conn.Execute cad
+        Cad = "delete from tmpstockfec where codusu=" & vUsu.Codigo
+        conn.Execute Cad
         
         
         
         
         'Insertar total bonificaciones por cliente,articulo en una TEMPORAL
-        cad = "SELECT " & vUsu.Codigo & " as codusu,  slialb.codartic,scaalb.codclien,sum(slialb.cantidad) as stock "
-        cad = cad & "FROM (((scaalb INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar) "
-        cad = cad & " INNER JOIN sbonif ON slialb.codartic=sbonif.codartic ) "
-        cad = cad & " INNER JOIN sclien ON scaalb.codclien=sclien.codclien) "
-        cad = cad & " INNER JOIN starif ON sclien.codtarif=starif.codlista "
-        cad = cad & "WHERE " & cadSelect
-        cad = cad & " AND starif.bonifica=1 "
-        cad = cad & " GROUP BY scaalb.codclien,slialb.codartic"
+        Cad = "SELECT " & vUsu.Codigo & " as codusu,  slialb.codartic,scaalb.codclien,sum(slialb.cantidad) as stock "
+        Cad = Cad & "FROM (((scaalb INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar) "
+        Cad = Cad & " INNER JOIN sbonif ON slialb.codartic=sbonif.codartic ) "
+        Cad = Cad & " INNER JOIN sclien ON scaalb.codclien=sclien.codclien) "
+        Cad = Cad & " INNER JOIN starif ON sclien.codtarif=starif.codlista "
+        Cad = Cad & "WHERE " & cadSelect
+        Cad = Cad & " AND starif.bonifica=1 "
+        Cad = Cad & " GROUP BY scaalb.codclien,slialb.codartic"
         
-        cad = "INSERT INTO tmpstockfec (codusu,codartic,codalmac,stock) " & cad
-        conn.Execute cad
+        Cad = "INSERT INTO tmpstockfec (codusu,codartic,codalmac,stock) " & Cad
+        conn.Execute Cad
         
 
         
@@ -6800,8 +6951,8 @@ Dim Indice As Integer
     LlamarImprimir
     
     If OpcionListado = 50 Then
-        cad = "delete from tmpstockfec where codusu=" & vUsu.Codigo
-        conn.Execute cad
+        Cad = "delete from tmpstockfec where codusu=" & vUsu.Codigo
+        conn.Execute Cad
     End If
 EPreFact:
     If Err.Number <> 0 Then
@@ -6813,7 +6964,7 @@ End Sub
 Private Sub cmdAceptarPreFacMan_Click()
 '74: PreFacturar Mantenimientos
 '75: Facturar Mantenimientos
-Dim campo As String, cad As String
+Dim campo As String, Cad As String
 Dim b As Boolean
 Dim PreguntaHecha As Boolean
 
@@ -6822,7 +6973,7 @@ Dim PreguntaHecha As Boolean
      If Not b Then chkSituFacMant.Value = 0 'por si acaso
      
      'Introducir el mes que se va a facturar
-     If txtCodigo(46).Text = "" Then
+     If txtcodigo(46).Text = "" Then
         MsgBox "Debe introducir el mes a Facturar.", vbInformation
         Exit Sub
     End If
@@ -6831,11 +6982,11 @@ Dim PreguntaHecha As Boolean
     'Febrero 2011
     'Ha puesto departamento.
     If Me.chkSituFacMant.Value = 0 Then
-        If Me.txtCodigo(55).Text <> "" Or txtCodigo(56).Text <> "" Then
+        If Me.txtcodigo(55).Text <> "" Or txtcodigo(56).Text <> "" Then
             'SI no este el mismo cliente... NO seguimos
-            If txtCodigo(48).Text <> txtCodigo(49).Text Or txtCodigo(49).Text = "" Then
+            If txtcodigo(48).Text <> txtcodigo(49).Text Or txtcodigo(49).Text = "" Then
                 MsgBox "Seleccione un cliente para poder indicar departamento", vbExclamation
-                PonerFoco txtCodigo(48)
+                PonerFoco txtcodigo(48)
                 Exit Sub
             End If
         End If
@@ -6843,27 +6994,27 @@ Dim PreguntaHecha As Boolean
      
     If Not b Then 'Vamos a facturar
         'si vamos a facturar comprobar que la fecha de factura tiene valor
-        cad = ""
-        If txtCodigo(44).Text = "" Then cad = " - El campo Fecha Factura" & vbCrLf
+        Cad = ""
+        If txtcodigo(44).Text = "" Then Cad = " - El campo Fecha Factura" & vbCrLf
             
         
         'si vamos a facturar debe haber una cta prev. de cobro
-        If txtCodigo(52).Text = "" Then cad = cad & " - El campo Cta. Prev. de cobro " & vbCrLf
+        If txtcodigo(52).Text = "" Then Cad = Cad & " - El campo Cta. Prev. de cobro " & vbCrLf
             
         
         'si vamos a facturar comprobar que el cod. de operador tiene valor
-        If txtCodigo(47).Text = "" Then cad = cad & " - El campo operador " & vbCrLf
+        If txtcodigo(47).Text = "" Then Cad = Cad & " - El campo operador " & vbCrLf
             
         
         
         'Si tienen analitcia y es por proyecto, la esta pidiendo en el fram2
         'Con lo cual es un campo obligatorio
         If Me.Frame2(1).visible Then
-            If txtCodigo(54).Text = "" Then cad = cad & " - Centro de coste"
+            If txtcodigo(54).Text = "" Then Cad = Cad & " - Centro de coste"
         End If
         
-        If cad <> "" Then
-            MsgBox "Debe comprobar: " & vbCrLf & vbCrLf & cad, vbExclamation
+        If Cad <> "" Then
+            MsgBox "Debe comprobar: " & vbCrLf & vbCrLf & Cad, vbExclamation
             Exit Sub
         End If
     End If
@@ -6876,15 +7027,15 @@ Dim PreguntaHecha As Boolean
      
     'Cadena para seleccion TIPO CONTRATO
     '--------------------------------------------
-    If txtCodigo(45).Text <> "" Then
+    If txtcodigo(45).Text <> "" Then
         campo = "{scaman.codtipco}"
 '        If Not PonerDesdeHasta(campo, "N", 48, 49, cad) Then Exit Sub
-        cad = campo & "= '" & txtCodigo(45).Text & "'"
-        If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
+        Cad = campo & "= '" & txtcodigo(45).Text & "'"
+        If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
         
         'Parametro
-        cad = "pTipCo=""Tipo Contrato: "
-        cadParam = cadParam & cad & txtCodigo(45).Text & " - " & txtNombre(45).Text & """|"
+        Cad = "pTipCo=""Tipo Contrato: "
+        cadParam = cadParam & Cad & txtcodigo(45).Text & " - " & txtNombre(45).Text & """|"
         numParam = numParam + 1
     End If
      
@@ -6893,17 +7044,17 @@ Dim PreguntaHecha As Boolean
     '--------------------------------------------
     CadenaDesdeOtroForm = ""
     If Me.chkSituFacMant.Value = 0 Then
-        If txtCodigo(48).Text <> "" Or txtCodigo(49).Text <> "" Then
+        If txtcodigo(48).Text <> "" Or txtcodigo(49).Text <> "" Then
             campo = "{scaman.codclien}"
-            cad = "Cliente: "
-            If Not PonerDesdeHasta(campo, "N", 48, 49, cad) Then Exit Sub
-            CadenaDesdeOtroForm = CadenaDesdeOtroForm & cad
+            Cad = "Cliente: "
+            If Not PonerDesdeHasta(campo, "N", 48, 49, Cad) Then Exit Sub
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & Cad
         End If
-        If txtCodigo(55).Text <> "" Or txtCodigo(56).Text <> "" Then
+        If txtcodigo(55).Text <> "" Or txtcodigo(56).Text <> "" Then
             campo = "{scaman.coddirec}"
-            cad = "Dpto: "
-            If Not PonerDesdeHasta(campo, "N", 55, 56, cad) Then Exit Sub
-            CadenaDesdeOtroForm = Trim(CadenaDesdeOtroForm & Space(10) & cad)
+            Cad = "Dpto: "
+            If Not PonerDesdeHasta(campo, "N", 55, 56, Cad) Then Exit Sub
+            CadenaDesdeOtroForm = Trim(CadenaDesdeOtroForm & Space(10) & Cad)
         End If
     End If
     
@@ -6916,10 +7067,10 @@ Dim PreguntaHecha As Boolean
     'Cadena para seleccion FORMA PAGO
     '--------------------------------------------
     If Me.chkSituFacMant.Value = 0 Then
-        If txtCodigo(50).Text <> "" Or txtCodigo(51).Text <> "" Then
+        If txtcodigo(50).Text <> "" Or txtcodigo(51).Text <> "" Then
             campo = "{scaman.codforpa}"
-            cad = "pDHForpa=""Forma Pago: "
-            If Not PonerDesdeHasta(campo, "N", 50, 51, cad) Then Exit Sub
+            Cad = "pDHForpa=""Forma Pago: "
+            If Not PonerDesdeHasta(campo, "N", 50, 51, Cad) Then Exit Sub
         End If
     End If
             
@@ -6927,38 +7078,38 @@ Dim PreguntaHecha As Boolean
     'MES A FACTURAR
     'Seleccionar solo aquellos que el campo del mes seleccionado sea no nulo
     '------------------------------------------------------------------------
-    cad = Format(txtCodigo(46).Text, "00")
-    campo = "mes" & cad & "act"
-    cad = "(NOT ISNULL({scaman." & campo & "})) and ({scaman." & campo & "}<>0)"
-    If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
+    Cad = Format(txtcodigo(46).Text, "00")
+    campo = "mes" & Cad & "act"
+    Cad = "(NOT ISNULL({scaman." & campo & "})) and ({scaman." & campo & "}<>0)"
+    If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
     'Parametro
-    cad = "pCampoMes={scaman." & campo & "}" & "|"
-    cadParam = cadParam & cad
+    Cad = "pCampoMes={scaman." & campo & "}" & "|"
+    cadParam = cadParam & Cad
     numParam = numParam + 1
-    cad = "pMes=""Mes a Facturar: " & UCase(txtNombre(46).Text) & """|"
-    cadParam = cadParam & cad
+    Cad = "pMes=""Mes a Facturar: " & UCase(txtNombre(46).Text) & """|"
+    cadParam = cadParam & Cad
     numParam = numParam + 1
     
     
     
     If b Then
         'Prevision
-        cad = "0"
+        Cad = "0"
         
-        If txtCodigo(48).Text = txtCodigo(49).Text And txtCodigo(49).Text <> "" Then
+        If txtcodigo(48).Text = txtcodigo(49).Text And txtcodigo(49).Text <> "" Then
             'Mismo cliente
-            If Me.txtCodigo(55).Text <> "" Or txtCodigo(56).Text <> "" Then cad = "1"
+            If Me.txtcodigo(55).Text <> "" Or txtcodigo(56).Text <> "" Then Cad = "1"
         End If
-        cad = "DetallaDir=" & cad & "|"
-        cadParam = cadParam & cad
+        Cad = "DetallaDir=" & Cad & "|"
+        cadParam = cadParam & Cad
         numParam = numParam + 1
     End If
     
     
     'Comprobamos si ha seleccionado
     If Me.chkSituFacMant.Value = 1 Then
-        cad = "NumeroMes=" & txtCodigo(46).Text & "|"
-        cadParam = cadParam & cad
+        Cad = "NumeroMes=" & txtcodigo(46).Text & "|"
+        cadParam = cadParam & Cad
         numParam = numParam + 1
         
         campo = "Facturado y pendiente"
@@ -6968,19 +7119,19 @@ Dim PreguntaHecha As Boolean
             
             If Me.cboSituMan.ListIndex = 1 Then
                 'FACTURADOS.  Luego ult mesfac tiene que ser mayor o igual
-                cad = " >= "
+                Cad = " >= "
                 campo = "Facturado"
             Else
-                cad = "<"
+                Cad = "<"
                 campo = "Pendiente"
             End If
-            cad = "({scaman.ulmesfac}" & cad & txtCodigo(46).Text & ")"
-            If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
+            Cad = "({scaman.ulmesfac}" & Cad & txtcodigo(46).Text & ")"
+            If Not AnyadirAFormula(cadFormula, Cad) Then Exit Sub
             
         End If
         'Reutilizare:
-        cad = "pDHForpa=""Situacion: " & campo & """|"
-        cadParam = cadParam & cad
+        Cad = "pDHForpa=""Situacion: " & campo & """|"
+        cadParam = cadParam & Cad
         numParam = numParam + 1
         
     End If
@@ -6997,11 +7148,11 @@ Dim PreguntaHecha As Boolean
     If Not b Then
         'FACTURACION
         
-        ResultadoFechaContaOK = EsFechaOKConta(CDate(txtCodigo(44).Text), True)
+        ResultadoFechaContaOK = EsFechaOKConta(CDate(txtcodigo(44).Text), True)
         If ResultadoFechaContaOK > 0 Then
             If MensajeFechaOkConta <> 4 Then
-                cad = MensajeFechaOkConta & ". ¿Continuar?"
-                If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+                Cad = MensajeFechaOkConta & ". ¿Continuar?"
+                If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
             End If
             PreguntaHecha = True
         End If
@@ -7013,15 +7164,15 @@ Dim PreguntaHecha As Boolean
     If Me.chkSituFacMant.Value = 0 Then
         'facturacion o listado normal
     
-        cad = "Select * from " & cadFormula
+        Cad = "Select * from " & cadFormula
         If miRsAux Is Nothing Then Set miRsAux = New ADODB.Recordset
-        cad = "SELECT scaman.codclien,nomclien,coddirec "
-        cad = cad & " FROM scaman INNER JOIN sclien ON scaman.codclien=sclien.codclien "
-        cad = cad & " WHERE " & cadSelect
+        Cad = "SELECT scaman.codclien,nomclien,coddirec "
+        Cad = Cad & " FROM scaman INNER JOIN sclien ON scaman.codclien=sclien.codclien "
+        Cad = Cad & " WHERE " & cadSelect
         'Que el ultimo mes de facturado sea mayor o igual  al que voy a facturar
-        cad = cad & " AND ulmesfac >= " & txtCodigo(46).Text
-        miRsAux.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-        cad = ""
+        Cad = Cad & " AND ulmesfac >= " & txtcodigo(46).Text
+        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Cad = ""
         While Not miRsAux.EOF
             Titulo = ""
             If Not IsNull(miRsAux!CodDirec) Then
@@ -7029,15 +7180,15 @@ Dim PreguntaHecha As Boolean
                 Titulo = "( " & miRsAux!CodDirec & " " & Titulo & ")"
                 
             End If
-            cad = cad & "    .- " & miRsAux!NomClien & Titulo & vbCrLf
+            Cad = Cad & "    .- " & miRsAux!NomClien & Titulo & vbCrLf
             miRsAux.MoveNext
         Wend
         miRsAux.Close
         Set miRsAux = Nothing
-        If cad <> "" Then
-            cad = "Los siguientes mantenimientos ya estan facturados: " & vbCrLf & cad & vbCrLf & vbCrLf
-            cad = cad & "¿Continuar?"
-            If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
+        If Cad <> "" Then
+            Cad = "Los siguientes mantenimientos ya estan facturados: " & vbCrLf & Cad & vbCrLf & vbCrLf
+            Cad = Cad & "¿Continuar?"
+            If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
             PreguntaHecha = True
         End If
     End If
@@ -7056,16 +7207,16 @@ Dim PreguntaHecha As Boolean
     
         
         If Not PreguntaHecha Then
-            cad = "¿Seguro que desea seguir con el proceso?"
-            If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+            Cad = "¿Seguro que desea seguir con el proceso?"
+            If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
         End If
             
         
         '------------------------------------------------------------------------------
         '  LOG de acciones
         Set LOG = New cLOG
-        cad = "MANTENIMIENTOS: " & vbCrLf & cadSelect
-        LOG.Insertar 2, vUsu, cad
+        Cad = "MANTENIMIENTOS: " & vbCrLf & cadSelect
+        LOG.Insertar 2, vUsu, Cad
         Set LOG = Nothing
         '-----------------------------------------------------------------------------
         
@@ -7073,18 +7224,18 @@ Dim PreguntaHecha As Boolean
         
         'Generar facturas de los mantenimientos seleccionados para facturar
         'cada mantenimiento genera una factura
-        cad = "SELECT scaman.codclien,scaman.coddirec,sdirec.nomdirec,nummante,fechaini,codtipco,codforpa,tipopago," & campo & " as importe "
+        Cad = "SELECT scaman.codclien,scaman.coddirec,sdirec.nomdirec,nummante,fechaini,codtipco,codforpa,tipopago," & campo & " as importe "
         'David
         'Necesito el campo concefaccl y el tipopago(mensual...)
-        cad = cad & ", concefac"
-        cad = cad & " FROM scaman LEFT OUTER JOIN sdirec ON scaman.codclien=sdirec.codclien AND scaman.coddirec=sdirec.coddirec "
-        cad = cad & " WHERE " & cadSelect
+        Cad = Cad & ", concefac"
+        Cad = Cad & " FROM scaman LEFT OUTER JOIN sdirec ON scaman.codclien=sdirec.codclien AND scaman.coddirec=sdirec.coddirec "
+        Cad = Cad & " WHERE " & cadSelect
         
         lblFactMant.Caption = "Obteniendo datos"
         lblFactMant.Refresh
         'Pasamos la SQL que selecciona los mantenimientos a facturar y
         'le pasamos la fecha y operador de la factura.
-        If TraspasoMtosAFacturas(cad, cadSelect, txtCodigo(44).Text, txtCodigo(47).Text, txtCodigo(52).Text, txtCodigo(46).Text, lblFactMant, txtCodigo(54).Text) Then 'Fecha de la factura, Operador
+        If TraspasoMtosAFacturas(Cad, cadSelect, txtcodigo(44).Text, txtcodigo(47).Text, txtcodigo(52).Text, txtcodigo(46).Text, lblFactMant, txtcodigo(54).Text) Then 'Fecha de la factura, Operador
             Unload Me
         End If
         lblFactMant.Caption = ""
@@ -7125,7 +7276,7 @@ Dim Banco As Integer
                         '44: Informe de Pedidos por Cliente
                         '49: Informe de Albaranes por Articulo
                         '227: Inf. estadistica Ventas por cliente
-                PonerFoco txtCodigo(11)
+                PonerFoco txtcodigo(11)
             Case 43, 1000, 1010
                     '43: Generar Albaran desde Pedido (NO IMPRIME LISTADO)
                     '1000: Pedido a factura:  Piede ademas de los datos del albaran, la cta prevista
@@ -7135,14 +7286,14 @@ Dim Banco As Integer
                     cadFormula = PonerTrabajadorConectado(cadParam)
                     If cadFormula <> "" Then
 '                        me.Label1
-                        Me.txtCodigo(17).Text = cadFormula
-                        Me.txtCodigo(18).Text = cadFormula
+                        Me.txtcodigo(17).Text = cadFormula
+                        Me.txtcodigo(18).Text = cadFormula
                         Me.txtNombre(17).Text = cadParam
                         Me.txtNombre(18).Text = cadParam
                         cadParam = "sclien.codenvio=senvio.codenvio AND codclien"
                         cadParam = DevuelveDesdeBD(conAri, "concat(sclien.codenvio,'|',nomenvio,'|')", "sclien,senvio", cadParam, CStr(davidNumalbar))
                         If cadParam <> "" Then
-                            Me.txtCodigo(19).Text = RecuperaValor(cadParam, 1)
+                            Me.txtcodigo(19).Text = RecuperaValor(cadParam, 1)
                             Me.txtNombre(19).Text = RecuperaValor(cadParam, 2)
                             
                         End If
@@ -7161,9 +7312,9 @@ Dim Banco As Integer
                     txtNombre(18).Text = txtNombre(17).Text
                     txtCodigo_LostFocus 19
                             
-                    PonerFoco txtCodigo(25)
+                    PonerFoco txtcodigo(25)
                 Else
-                    PonerFoco txtCodigo(17)
+                    PonerFoco txtcodigo(17)
                 End If
                 
                 
@@ -7172,7 +7323,7 @@ Dim Banco As Integer
                 
             Case 50, 51 '50: Prevision de Facturacion Albaranes (NO IMPRIME LISTADO)
                         '51: Inf. Incumplimiento Plazos de Entrega
-                PonerFoco txtCodigo(26)
+                PonerFoco txtcodigo(26)
             Case 52, 222
                 '52: Facturacion de Albaranes
                 '222: Factura de Mostrador
@@ -7185,23 +7336,23 @@ Dim Banco As Integer
                     If vParamAplic.NumeroInstalacion = 2 And codClien = "ALM" Then Banco = 7
                 End If
                 If Banco > 0 Then
-                    txtCodigo(0).Text = Banco
-                    txtNombre(0).Text = PonerNombreDeCod(txtCodigo(0), conAri, "sbanpr", "nombanpr", "codbanpr", "Bancos Propios")
+                    txtcodigo(0).Text = Banco
+                    txtNombre(0).Text = PonerNombreDeCod(txtcodigo(0), conAri, "sbanpr", "nombanpr", "codbanpr", "Bancos Propios")
                     If vParamAplic.EntradaRapidaFacturasMostrador And codClien = "ALM" Then indCodigo = 1
                 End If
                 If indCodigo = 0 Then
-                    PonerFoco txtCodigo(34)
+                    PonerFoco txtcodigo(34)
                 Else
                     PonerFocoBtn cmdAceptarFac
                 End If
                     
                 
             Case 74 '74: Previsión facturación Mantenimientos
-                PonerFoco txtCodigo(45)
+                PonerFoco txtcodigo(45)
             Case 75 '75: Facturacion de Mantenimientos
-                PonerFoco txtCodigo(44)
+                PonerFoco txtcodigo(44)
             Case 229 '229: Inf. estadistica ventas por meses
-                PonerFoco txtCodigo(53)
+                PonerFoco txtcodigo(53)
         End Select
     End If
     Screen.MousePointer = vbDefault
@@ -7280,8 +7431,8 @@ Dim Aux As String
                 NomTablaLin = "slifac"
                 
                 'poner por defecto las fechas del ejercicio contable
-                Me.txtCodigo(11).Text = vEmpresa.FechaIni
-                Me.txtCodigo(12).Text = vEmpresa.FechaFin
+                Me.txtcodigo(11).Text = vEmpresa.FechaIni
+                Me.txtcodigo(12).Text = vEmpresa.FechaFin
                 
                 
                 Label4(54).Top = 5880
@@ -7335,7 +7486,7 @@ Dim Aux As String
                 If vParamAplic.NumeroInstalacion = vbFenollar Then cboDestinoB.ListIndex = 0
                 H = FrameGenAlbaran.Height
                 If W = 1 Then
-                    txtCodigo(22).Text = RecuperaValor(codClien, 1)
+                    txtcodigo(22).Text = RecuperaValor(codClien, 1)
                     txtNombre(22).Text = RecuperaValor(codClien, 2)
                     FrameZona.visible = True
                 End If
@@ -7346,21 +7497,21 @@ Dim Aux As String
                         Aux = RecuperaValor(codClien, 4)
                         If Aux <> "" Then
                         
-                            txtCodigo(4).Tag = Aux
+                            txtcodigo(4).Tag = Aux
                             Aux = RecuperaValor(codClien, 5)
                             
-                            txtCodigo(63).Tag = Aux
-                            If CCur(txtCodigo(4).Tag) > CCur(txtCodigo(63).Tag) Then
-                                txtCodigo(68).Tag = txtCodigo(63).Tag
+                            txtcodigo(63).Tag = Aux
+                            If CCur(txtcodigo(4).Tag) > CCur(txtcodigo(63).Tag) Then
+                                txtcodigo(68).Tag = txtcodigo(63).Tag
                             Else
-                                txtCodigo(68).Tag = txtCodigo(4).Tag
+                                txtcodigo(68).Tag = txtcodigo(4).Tag
                             End If
                             
                             
                             'txtCodigo(68).Text = Format(txtCodigo(68).Tag, FormatoImporte)
-                            txtCodigo(68).Text = Format(0, FormatoImporte)
-                            txtCodigo(63).Text = Format(txtCodigo(63).Tag, FormatoImporte)
-                            txtCodigo(4).Text = Format(txtCodigo(4).Tag, FormatoImporte)
+                            txtcodigo(68).Text = Format(0, FormatoImporte)
+                            txtcodigo(63).Text = Format(txtcodigo(63).Tag, FormatoImporte)
+                            txtcodigo(4).Text = Format(txtcodigo(4).Tag, FormatoImporte)
                             
                             H = H + 600 'FrameCanjePuntos.Height
                             FrameCanjePuntos.Left = 720
@@ -7385,7 +7536,7 @@ Dim Aux As String
                 Label5.Top = cmdAceptarGenAlb.Top
                 
                 PonerFrameVisible Me.FrameGenAlbaran, True, H, W
-                txtCodigo(25).Text = Format(Now, "dd/mm/yyyy")
+                txtcodigo(25).Text = Format(Now, "dd/mm/yyyy")
                 indFrame = 3
                 chkImpAlbaran.Caption = "Impimir "
                 If OpcionListado = 1000 Then
@@ -7401,7 +7552,7 @@ Dim Aux As String
                     Else
                         Label3.Caption = "Pasar Pedido a Albaran"
                         
-                        If vParamAplic.NumeroInstalacion = 4 Then
+                        If InstalacionEsEulerTaxco Then
                             FrameGenAlbEuler.BorderStyle = 0
                             FrameGenAlbEuler.visible = True
                             Me.cboTipoAlbaranEuler.ListIndex = 0
@@ -7423,12 +7574,12 @@ Dim Aux As String
                             
       
                             'CadenaDesdeOtroForm = 'trab,fecha,interna
-                            txtCodigo(17).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
-                            txtCodigo(18).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
-                            txtCodigo(19).Text = vParamAplic.PorDefecto_Envio
-                            txtCodigo(25).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
-                            txtCodigo(59).Text = "0" 'cantidad litros
-                            txtCodigo(60).Text = "1,00" 'cantidad otros
+                            txtcodigo(17).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
+                            txtcodigo(18).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
+                            txtcodigo(19).Text = vParamAplic.PorDefecto_Envio
+                            txtcodigo(25).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
+                            txtcodigo(59).Text = "0" 'cantidad litros
+                            txtcodigo(60).Text = "1,00" 'cantidad otros
                             
                             Titulo = RecuperaValor(CadenaDesdeOtroForm, 3)
                             If Titulo = "1" Then
@@ -7518,8 +7669,8 @@ Dim Aux As String
                     '222: Factura de Mostrador
                     
             PonerFrameFacVisible True, H, W
-            txtCodigo(34).Text = Format(Now, "dd/mm/yyyy")
-            txtCodigo(39).Text = Format(CDate(txtCodigo(34).Text) - 1, "dd/mm/yyyy")
+            txtcodigo(34).Text = Format(Now, "dd/mm/yyyy")
+            txtcodigo(39).Text = Format(CDate(txtcodigo(34).Text) - 1, "dd/mm/yyyy")
             indFrame = 6
             
             NomTabla = "scaalb"
@@ -7570,7 +7721,7 @@ End Sub
 
 
 Private Sub Form_Unload(Cancel As Integer)
-    If OpcionListado = 227 And vParamAplic.NumeroInstalacion = 4 Then LeeGuardaListFacturas False
+    If OpcionListado = 227 And InstalacionEsEulerTaxco Then LeeGuardaListFacturas False
 End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -7578,13 +7729,13 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
 End Sub
 
 Private Sub frmDptoEnvio_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
-    txtCodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
+    txtcodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
@@ -7595,61 +7746,61 @@ End Sub
 
 Private Sub frmMtoAgente_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Agente
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmMtoAlmacen_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Almacen
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmMtoArticulo_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Articulos
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmMtoBancosPro_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Bancos Propios
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub frmMtoClient_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Clientes
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmMtoFEnvio_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Formas de Envio
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmMtoFPago_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Formas de Pabo
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmMtoTipCo_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Tipos de Contrato del Mantenimiento
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmMtoTraba_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Trabajadores
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmZ_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -7689,7 +7840,7 @@ Private Sub imgBuscarOfer_Click(index As Integer)
             End Select
             Set frmMtoClient = New frmFacClientes3
             frmMtoClient.DatosADevolverBusqueda = "0|1|"
-            If Not IsNumeric(txtCodigo(indCodigo).Text) Then txtCodigo(indCodigo).Text = ""
+            If Not IsNumeric(txtcodigo(indCodigo).Text) Then txtcodigo(indCodigo).Text = ""
             frmMtoClient.Show vbModal
             Set frmMtoClient = Nothing
             
@@ -7698,7 +7849,7 @@ Private Sub imgBuscarOfer_Click(index As Integer)
             If index = 5 Then indCodigo = 14
             Set frmMtoAlmacen = New frmAlmAlPropios
             frmMtoAlmacen.DatosADevolverBusqueda = "0|1|"
-            If Not IsNumeric(txtCodigo(indCodigo).Text) Then txtCodigo(indCodigo).Text = ""
+            If Not IsNumeric(txtcodigo(indCodigo).Text) Then txtcodigo(indCodigo).Text = ""
             frmMtoAlmacen.Show vbModal
             Set frmMtoAlmacen = Nothing
             
@@ -7740,7 +7891,7 @@ Private Sub imgBuscarOfer_Click(index As Integer)
             End Select
             Set frmMtoFPago = New frmFacFormasPago
             frmMtoFPago.DatosADevolverBusqueda = "0|1|"
-            If Not IsNumeric(txtCodigo(indCodigo).Text) Then txtCodigo(indCodigo).Text = ""
+            If Not IsNumeric(txtcodigo(indCodigo).Text) Then txtcodigo(indCodigo).Text = ""
             frmMtoFPago.Show vbModal
             Set frmMtoFPago = Nothing
             
@@ -7759,7 +7910,7 @@ Private Sub imgBuscarOfer_Click(index As Integer)
             End If
             Set frmMtoAgente = New frmFacAgentesCom
             frmMtoAgente.DatosADevolverBusqueda = "0|1|"
-            If Not IsNumeric(txtCodigo(indCodigo).Text) Then txtCodigo(indCodigo).Text = ""
+            If Not IsNumeric(txtcodigo(indCodigo).Text) Then txtcodigo(indCodigo).Text = ""
             frmMtoAgente.Show vbModal
             Set frmMtoAgente = Nothing
             
@@ -7798,7 +7949,7 @@ Private Sub imgBuscarOfer_Click(index As Integer)
         Case 38, 39
                 
                 If index = 38 Or index = 39 Then
-                    If txtCodigo(48).Text <> txtCodigo(49).Text Or txtCodigo(49).Text = "" Then
+                    If txtcodigo(48).Text <> txtcodigo(49).Text Or txtcodigo(49).Text = "" Then
                         MsgBox "Seleccione un cliente para podre indicar departamento", vbExclamation
                         Exit Sub
                     End If
@@ -7812,12 +7963,12 @@ Private Sub imgBuscarOfer_Click(index As Integer)
                 End If
                 Set frmDptoEnvio = New frmFacCliEnvDpto
                 frmDptoEnvio.DireccionesEnvio = False
-                If txtCodigo(index).Text <> "" Then
-                    frmDptoEnvio.VerDatoDpto = CInt(txtCodigo(index).Text)
+                If txtcodigo(index).Text <> "" Then
+                    frmDptoEnvio.VerDatoDpto = CInt(txtcodigo(index).Text)
                 Else
                     frmDptoEnvio.VerDatoDpto = -1
                 End If
-                frmDptoEnvio.codClien = CLng(txtCodigo(48).Text)
+                frmDptoEnvio.codClien = CLng(txtcodigo(48).Text)
                 frmDptoEnvio.NomClien = txtNombre(48).Text
                 frmDptoEnvio.Show vbModal
                 Set frmDptoEnvio = Nothing
@@ -7834,7 +7985,7 @@ Private Sub imgBuscarOfer_Click(index As Integer)
             indCodigo = 54
             AbrirBuscaGrid indCodigo
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 
@@ -7869,13 +8020,13 @@ Private Sub imgFecha_Click(index As Integer)
             indCodigo = 34
    End Select
    
-   PonerFormatoFecha txtCodigo(indCodigo)
-   If txtCodigo(indCodigo).Text <> "" Then frmF.Fecha = CDate(txtCodigo(indCodigo).Text)
+   PonerFormatoFecha txtcodigo(indCodigo)
+   If txtcodigo(indCodigo).Text <> "" Then frmF.Fecha = CDate(txtcodigo(indCodigo).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco txtCodigo(indCodigo)
+   PonerFoco txtcodigo(indCodigo)
 End Sub
 
 
@@ -7915,7 +8066,7 @@ Private Sub OptOrdenVentas_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(index As Integer)
-    ConseguirFoco txtCodigo(index), 3
+    ConseguirFoco txtcodigo(index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
@@ -7934,24 +8085,25 @@ Dim tabla As String
       
     Select Case index
         Case 1, 60, 68 'Importe (Decimal(12,2))
-            If Not PonerFormatoDecimal(txtCodigo(index), 1) Then
-                If index = 68 Then txtCodigo(index) = ""
+            If Not PonerFormatoDecimal(txtcodigo(index), 1) Then
+                If index = 68 Then txtcodigo(index) = ""
+                If index = 1 Then txtcodigo(index) = ""
             End If
             'Puntos
             If index = 68 Then
-                If txtCodigo(index) = "" Then txtCodigo(index) = "0"
-                If ImporteFormateado(txtCodigo(index).Text) > CCur(txtCodigo(index).Tag) Then
-                    MsgBox "Maximo puntos a canjear: " & txtCodigo(index).Tag, vbExclamation
-                    txtCodigo(68).Text = Format(txtCodigo(68).Tag, FormatoImporte)
+                If txtcodigo(index) = "" Then txtcodigo(index) = "0"
+                If ImporteFormateado(txtcodigo(index).Text) > CCur(txtcodigo(index).Tag) Then
+                    MsgBox "Maximo puntos a canjear: " & txtcodigo(index).Tag, vbExclamation
+                    txtcodigo(68).Text = Format(txtcodigo(68).Tag, FormatoImporte)
                 End If
             End If
         Case 0, 5, 52 'Bancos Propios
-            If PonerFormatoEntero(txtCodigo(index)) Then
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, "sbanpr", "nombanpr", "codbanpr", "Bancos Propios")
-                If txtCodigo(index).Text <> "" And txtNombre(index).Text <> "" Then
-                    txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
+            If PonerFormatoEntero(txtcodigo(index)) Then
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, "sbanpr", "nombanpr", "codbanpr", "Bancos Propios")
+                If txtcodigo(index).Text <> "" And txtNombre(index).Text <> "" Then
+                    txtcodigo(index).Text = Format(txtcodigo(index).Text, "0000")
                 Else
-                    PonerFoco txtCodigo(index)
+                    PonerFoco txtcodigo(index)
                 End If
             Else
                 txtNombre(index).Text = ""
@@ -7959,60 +8111,60 @@ Dim tabla As String
         
         'FECHA Desde Hasta
         Case 11, 12, 25, 26, 27, 34, 38, 39, 44
-            If txtCodigo(index).Text <> "" Then
-                PonerFormatoFecha txtCodigo(index)
+            If txtcodigo(index).Text <> "" Then
+                PonerFormatoFecha txtcodigo(index)
                 If index = 34 Then _
-                    txtCodigo(39).Text = Format(CDate(txtCodigo(34).Text) - 1, "dd/mm/yyyy")
+                    txtcodigo(39).Text = Format(CDate(txtcodigo(34).Text) - 1, "dd/mm/yyyy")
             End If
            
 '            'Fecha entrega para Pedido. Poner la semana
 '            If Index = 26 Then txtNombre(4).Text = CalculaSemana(CDate(txtCodigo(26).Text))
         
         Case 53, 59 'AÑO - litros reales partes trabajo
-             If Not PonerFormatoEntero(txtCodigo(index)) Then
-                If index = 59 Then txtCodigo(index).Text = ""
+             If Not PonerFormatoEntero(txtcodigo(index)) Then
+                If index = 59 Then txtcodigo(index).Text = ""
              End If
         
         Case 36, 37, 62 'Nº de Pedido / Albaran
-            If PonerFormatoEntero(txtCodigo(index)) Then
-                If index <> 62 Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000000")
+            If PonerFormatoEntero(txtcodigo(index)) Then
+                If index <> 62 Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "0000000")
             Else
-                txtCodigo(index).Text = ""
+                txtcodigo(index).Text = ""
             End If
             
 
         Case 35  'Num coppias y Periodicidad Facturacion
-            PonerFormatoEntero txtCodigo(index)
+            PonerFormatoEntero txtcodigo(index)
 
         Case 8, 20, 21, 28, 29, 40, 41, 48, 49 'Cod. CLIENTE
-            If PonerFormatoEntero(txtCodigo(index)) Then
+            If PonerFormatoEntero(txtcodigo(index)) Then
                 NomCampo = "nomclien"
                 tabla = "sclien"
                 codCampo = "codclien"
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, tabla, NomCampo, codCampo, "Cliente")
-                If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000000")
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, tabla, NomCampo, codCampo, "Cliente")
+                If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "000000")
             Else
                 txtNombre(index).Text = ""
             End If
             
         Case 13, 14 'ALMACEN
-            If PonerFormatoEntero(txtCodigo(index)) Then
+            If PonerFormatoEntero(txtcodigo(index)) Then
                 NomCampo = "nomalmac"
                 tabla = "salmpr"
                 codCampo = "codalmac"
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, tabla, NomCampo, codCampo, "Almacen")
-                If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, tabla, NomCampo, codCampo, "Almacen")
+                If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "000")
             Else
                 txtNombre(index).Text = ""
             End If
      
         Case 2, 3, 17, 18, 47 'Cod. Trabajador
-            If PonerFormatoEntero(txtCodigo(index)) Then
+            If PonerFormatoEntero(txtcodigo(index)) Then
                 NomCampo = "nomtraba"
                 tabla = "straba"
                 codCampo = "codtraba"
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, tabla, NomCampo, codCampo, "Trabajador")
-                If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, tabla, NomCampo, codCampo, "Trabajador")
+                If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "0000")
             Else
                 txtNombre(index).Text = ""
             End If
@@ -8021,53 +8173,53 @@ Dim tabla As String
             NomCampo = "nomenvio"
             tabla = "senvio"
             codCampo = "codenvio"
-            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, tabla, NomCampo, codCampo, "Forma de Envío")
-            If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
+            txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, tabla, NomCampo, codCampo, "Forma de Envío")
+            If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "000")
             
             
         Case 30, 31, 42, 43, 50, 51 'Cod. Formas de PAGO
-            If PonerFormatoEntero(txtCodigo(index)) Then
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, "sforpa", "nomforpa", "codforpa", "Formas de Pago")
-                If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
+            If PonerFormatoEntero(txtcodigo(index)) Then
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, "sforpa", "nomforpa", "codforpa", "Formas de Pago")
+                If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "000")
             Else
                 txtNombre(index).Text = ""
-                txtCodigo(index).Text = ""
+                txtcodigo(index).Text = ""
             End If
         
         Case 6, 7, 32, 33, 23, 24 'AGENTE
-            If PonerFormatoEntero(txtCodigo(index)) Then
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, "sagent", "nomagent", "codagent", "Agente")
-                If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
+            If PonerFormatoEntero(txtcodigo(index)) Then
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, "sagent", "nomagent", "codagent", "Agente")
+                If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "0000")
             Else
                 txtNombre(index).Text = ""
-                txtCodigo(index).Text = ""
+                txtcodigo(index).Text = ""
             End If
         Case 9, 10, 22, 64, 65 'ZONA
-            If PonerFormatoEntero(txtCodigo(index)) Then
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, "szonas", "nomzonas", "codzonas", "Zonas")
+            If PonerFormatoEntero(txtcodigo(index)) Then
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, "szonas", "nomzonas", "codzonas", "Zonas")
                 If index = 22 Then
                     'Si pone ZONA tiene que existir
-                    If txtNombre(index).Text = "" Then txtCodigo(index).Text = ""
+                    If txtNombre(index).Text = "" Then txtcodigo(index).Text = ""
                 End If
-                If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
+                If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "0000")
             Else
                 txtNombre(index).Text = ""
-                txtCodigo(index).Text = ""
+                txtcodigo(index).Text = ""
             End If
             
         Case 45 'TIPO CONTRATO
-            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, "stipco", "nomtipco", "codtipco", "Tipo Contrato", "T")
+            txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, "stipco", "nomtipco", "codtipco", "Tipo Contrato", "T")
             
         Case 46 'MES a facturar
-            If PonerFormatoEntero(txtCodigo(index)) Then
+            If PonerFormatoEntero(txtcodigo(index)) Then
                 'Comprobar que el mes es correcto, valores entre 1-12
-                devuelve = txtCodigo(index).Text
+                devuelve = txtcodigo(index).Text
                 If (CByte(devuelve) >= 1) And (CByte(devuelve) <= 12) Then
                     txtNombre(index).Text = UCase(MonthName(CLng(devuelve)))
                 Else
                     MsgBox "El valor introducido no es un MES válido.(1-12).", vbInformation
-                    txtCodigo(index).Text = ""
-                    PonerFoco txtCodigo(index)
+                    txtcodigo(index).Text = ""
+                    PonerFoco txtcodigo(index)
                 End If
             Else
                 txtNombre(index).Text = ""
@@ -8076,19 +8228,19 @@ Dim tabla As String
             
         Case 54
             'Centro de coste
-            txtCodigo(index).Text = Trim(txtCodigo(index).Text)
+            txtcodigo(index).Text = Trim(txtcodigo(index).Text)
             codCampo = ""
-            If txtCodigo(index).Text <> "" Then
+            If txtcodigo(index).Text <> "" Then
                 
                 codCampo = "nomccost"
-                tabla = DevuelveDesdeBD(conConta, "codccost", "cabccost", "codccost", txtCodigo(index).Text, "T", codCampo)
+                tabla = DevuelveDesdeBD(conConta, "codccost", "cabccost", "codccost", txtcodigo(index).Text, "T", codCampo)
             
                 If tabla = "" Then
-                    MsgBox "No existe el centro de coste: " & txtCodigo(index).Text, vbExclamation
+                    MsgBox "No existe el centro de coste: " & txtcodigo(index).Text, vbExclamation
                     
                 End If
                 If codCampo = "nomccost" Then codCampo = ""
-                txtCodigo(index).Text = tabla
+                txtcodigo(index).Text = tabla
             End If
             txtNombre(index).Text = codCampo
             
@@ -8098,56 +8250,56 @@ Dim tabla As String
             'DEPARTAMENTO
             codCampo = ""
             devuelve = ""
-            If txtCodigo(index).Text = "" Then
+            If txtcodigo(index).Text = "" Then
                 txtNombre(index).Text = codCampo
                 Exit Sub
             End If
             
             If index = 55 Or index = 56 Then
                 'Departemento. Tienen que poner un UNICO cliente
-                If txtCodigo(48).Text <> txtCodigo(49).Text Or txtCodigo(49).Text = "" Then
+                If txtcodigo(48).Text <> txtcodigo(49).Text Or txtcodigo(49).Text = "" Then
                     MsgBox "Seleccione un cliente para poder indicar departamento", vbExclamation
-                    txtCodigo(index).Text = ""
-                    PonerFoco txtCodigo(48)
+                    txtcodigo(index).Text = ""
+                    PonerFoco txtcodigo(48)
                     devuelve = "NO"
                 End If
             End If
             If devuelve = "" Then
-                If PonerFormatoEntero(txtCodigo(index)) Then
-                    codCampo = PonerNombreDeCod(txtCodigo(index), conAri, "sdirec", "nomdirec", "codclien=" & txtCodigo(48).Text & " AND coddirec ", "Departamentos")
-                    If txtCodigo(index).Text <> "" And codCampo <> "" Then
-                        txtCodigo(index).Text = Format(txtCodigo(index).Text, "0000")
+                If PonerFormatoEntero(txtcodigo(index)) Then
+                    codCampo = PonerNombreDeCod(txtcodigo(index), conAri, "sdirec", "nomdirec", "codclien=" & txtcodigo(48).Text & " AND coddirec ", "Departamentos")
+                    If txtcodigo(index).Text <> "" And codCampo <> "" Then
+                        txtcodigo(index).Text = Format(txtcodigo(index).Text, "0000")
                     Else
-                        txtCodigo(index).Text = ""
-                        PonerFoco txtCodigo(index)
+                        txtcodigo(index).Text = ""
+                        PonerFoco txtcodigo(index)
                     End If
                 Else
-                    txtCodigo(index).Text = ""
+                    txtcodigo(index).Text = ""
                 End If
             End If
             txtNombre(index).Text = codCampo
             
         Case 57, 58
-            If PonerFormatoEntero(txtCodigo(index)) Then
+            If PonerFormatoEntero(txtcodigo(index)) Then
                 NomCampo = "nomactiv"
                 tabla = "sactiv"
                 codCampo = "codactiv"
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, tabla, NomCampo, codCampo, "Actividad")
-                If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, tabla, NomCampo, codCampo, "Actividad")
+                If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "000")
             Else
-                txtCodigo(index).Text = ""
+                txtcodigo(index).Text = ""
                 txtNombre(index).Text = ""
             End If
         
         Case 66, 67
-             If PonerFormatoEntero(txtCodigo(index)) Then
+             If PonerFormatoEntero(txtcodigo(index)) Then
                 NomCampo = "nomrutas"
                 tabla = "srutas"
                 codCampo = "codrutas"
-                txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, tabla, NomCampo, codCampo, IIf(vParamAplic.NumeroInstalacion = 2, "Asociacion", "Ruta"))
-                If txtCodigo(index).Text <> "" Then txtCodigo(index).Text = Format(txtCodigo(index).Text, "000")
+                txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, tabla, NomCampo, codCampo, IIf(vParamAplic.NumeroInstalacion = 2, "Asociacion", "Ruta"))
+                If txtcodigo(index).Text <> "" Then txtcodigo(index).Text = Format(txtcodigo(index).Text, "000")
             Else
-                txtCodigo(index).Text = ""
+                txtcodigo(index).Text = ""
                 txtNombre(index).Text = ""
             End If
         
@@ -8173,7 +8325,7 @@ Private Sub PonerFramePedxArticVisible(visible As Boolean, ByRef H As Integer, B
         If OpcionListado = 44 Then
             H = 8080
         Else
-            If OpcionListado = 227 Then H = 9000 '8080
+            If OpcionListado = 227 Then H = 9500 '8080
         End If
     End If
     cmdAceptarPedxArtic.Top = H
@@ -8200,7 +8352,7 @@ Private Sub PonerFramePedxArticVisible(visible As Boolean, ByRef H As Integer, B
         If OpcionListado = 44 Then
             H = 8575
         Else
-            If OpcionListado = 227 Then H = 9500 '8500
+            If OpcionListado = 227 Then H = 10000 '8500
         End If
     End If
     W = 7515
@@ -8254,7 +8406,7 @@ Private Sub PonerFramePedxArticVisible(visible As Boolean, ByRef H As Integer, B
             Label4(4).Caption = "Fecha Factura"
             
             
-            Label4(72).Caption = IIf(vParamAplic.NumeroInstalacion = 2, "Asociacion", "Rutas")
+            Label4(72).Caption = IIf(vParamAplic.NumeroInstalacion = vbHerbelca, "Asociacion", "Rutas")
             Frame10.BorderStyle = 0
             FrameZonaCli.BorderStyle = 0
             
@@ -8292,7 +8444,7 @@ End Sub
 Private Sub PonerFramePreFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame del Prevision Facturacion Albaran Visible y Ajustado al Formulario, y visualiza los controles
 Dim b As Boolean
-Dim cad As String
+Dim Cad As String
 
     H = 7095  '6355
     If OpcionListado = 51 Then 'Inf. Incum. plazos entrega
@@ -8310,8 +8462,8 @@ Dim cad As String
         Label4(41).visible = b
         Me.imgBuscarOfer(16).visible = b
         Me.imgBuscarOfer(17).visible = b
-        Me.txtCodigo(30).visible = b
-        Me.txtCodigo(31).visible = b
+        Me.txtcodigo(30).visible = b
+        Me.txtcodigo(31).visible = b
         Me.txtNombre(30).visible = b
         Me.txtNombre(31).visible = b
         Me.Frame6.visible = Not b
@@ -8334,7 +8486,7 @@ Dim cad As String
         End If
         'Sept 2015. Periodo facturacion
         Me.Label4(24).visible = b
-        Me.txtCodigo(61).visible = b
+        Me.txtcodigo(61).visible = b
         Me.imgAyuda(1).visible = b
         
         
@@ -8342,11 +8494,11 @@ Dim cad As String
             Me.Label9(0).Caption = "Incum. plazos entrega"
         Else 'Prevision Facturacion
             Select Case codClien 'aqui guardamos el tipo de movimiento
-                Case "ALV": cad = "" ' antes "(Ventas)" [SERVICIOS]
-                Case "ALR": cad = "(Reparaciones)"
-                Case "ALM": cad = "(Mantenimientos)"
+                Case "ALV": Cad = "" ' antes "(Ventas)" [SERVICIOS]
+                Case "ALR": Cad = "(Reparaciones)"
+                Case "ALM": Cad = "(Mantenimientos)"
             End Select
-            Me.Label9(0).Caption = "Previsión de facturación " & cad
+            Me.Label9(0).Caption = "Previsión de facturación " & Cad
         End If
     End If
 End Sub
@@ -8354,33 +8506,33 @@ End Sub
 
 Private Sub PonerFrameFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Facturacion de Albaran Visible y Ajustado al Formulario, y visualiza los controles
-Dim cad As String
+Dim Cad As String
 
     H = 7100 + 180
     W = 7480
     
     If visible = True Then
          Select Case codClien 'aqui guardamos el tipo de movimiento
-            Case "ALV": cad = "(Ventas)"
-            Case "ALR": cad = "(Reparaciones)"
+            Case "ALV": Cad = "(Ventas)"
+            Case "ALR": Cad = "(Reparaciones)"
             Case "ALM", "ART":
                 If codClien = "ALM" Then
-                    cad = "(Mostrador)"
+                    Cad = "(Mostrador)"
                 Else
-                    cad = "(Rectificativa)"
+                    Cad = "(Rectificativa)"
                 End If
                 'Me.Frame3.Top = 1200
                 Me.Frame4.visible = False
                 H = 4000
                 Me.cmdAceptarFac.Top = 3200
                 Me.cmdCancel(6).Top = Me.cmdAceptarFac.Top
-            Case "ALS": cad = "(Servicios)"
+            Case "ALS": Cad = "(Servicios)"
                 
                 
         End Select
         
         'marzo 2016
-        Me.Label10(0).Caption = "Facturación de Albaranes " & cad
+        Me.Label10(0).Caption = "Facturación de Albaranes " & Cad
         Me.Caption = "Facturación"
     End If
     
@@ -8391,7 +8543,7 @@ End Sub
 Private Sub PonerFramePreFacManteVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame del Prevision Facturacion Albaran Mantenimientos Visible y Ajustado al Formulario, y visualiza los controles
 Dim b As Boolean
-Dim cad As String
+Dim Cad As String
 
     
     If visible = True Then
@@ -8420,41 +8572,41 @@ Dim cad As String
             Me.cmdCancel(7).Top = cmdAceptarPreFacMan.Top
         Else 'facturar
             Me.Label7(1).Caption = "Facturación Mantenimientos"
-            Me.txtCodigo(44).Text = Format(Now, "dd/mm/yyyy")
-            Me.txtCodigo(47).Text = PonerTrabajadorConectado(cad)
-            Me.txtNombre(47).Text = cad
+            Me.txtcodigo(44).Text = Format(Now, "dd/mm/yyyy")
+            Me.txtcodigo(47).Text = PonerTrabajadorConectado(Cad)
+            Me.txtNombre(47).Text = Cad
             b = False                            'Si es por proyecto pedira el CC, si no cojera el tel trab o la familia
             If vEmpresa.TieneAnalitica Then b = vParamAplic.ModoAnalitica = 2
             Me.Frame2(1).visible = b
         End If
         Me.lblFactMant.Top = H - Me.lblFactMant.Height - 120
     End If
-    txtCodigo(54).Text = ""
+    txtcodigo(54).Text = ""
 End Sub
 
 
 
-Private Function AnyadirParametroDH(cad As String, indD As Byte, indH As Byte) As String
+Private Function AnyadirParametroDH(Cad As String, indD As Byte, indH As Byte) As String
 On Error Resume Next
 
-    If txtCodigo(indD).Text <> "" And txtCodigo(indH).Text <> "" Then
-        If txtCodigo(indD).Text = txtCodigo(indH).Text Then
-            cad = cad & txtCodigo(indD).Text
-            If txtNombre(indD).Text <> "" Then cad = cad & " - " & txtNombre(indD).Text
-            AnyadirParametroDH = cad
+    If txtcodigo(indD).Text <> "" And txtcodigo(indH).Text <> "" Then
+        If txtcodigo(indD).Text = txtcodigo(indH).Text Then
+            Cad = Cad & txtcodigo(indD).Text
+            If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
+            AnyadirParametroDH = Cad
             Exit Function
         End If
     End If
     
-    If txtCodigo(indD).Text <> "" Then
-        cad = cad & "desde " & txtCodigo(indD).Text
-        If txtNombre(indD).Text <> "" Then cad = cad & " - " & txtNombre(indD).Text
+    If txtcodigo(indD).Text <> "" Then
+        Cad = Cad & "desde " & txtcodigo(indD).Text
+        If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
     End If
-    If txtCodigo(indH).Text <> "" Then
-        cad = cad & "  hasta " & txtCodigo(indH).Text
-        If txtNombre(indH).Text <> "" Then cad = cad & " - " & txtNombre(indH).Text
+    If txtcodigo(indH).Text <> "" Then
+        Cad = Cad & "  hasta " & txtcodigo(indH).Text
+        If txtNombre(indH).Text <> "" Then Cad = Cad & " - " & txtNombre(indH).Text
     End If
-    AnyadirParametroDH = cad
+    AnyadirParametroDH = Cad
 End Function
 
 
@@ -8462,7 +8614,7 @@ Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, 
 Dim devuelve As String
 
     PonerDesdeHasta = False
-    devuelve = CadenaDesdeHasta(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
+    devuelve = CadenaDesdeHasta(txtcodigo(indD).Text, txtcodigo(indH).Text, campo, Tipo)
     If devuelve = "Error" Then Exit Function
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
     If Tipo <> "F" Then
@@ -8505,7 +8657,7 @@ End Sub
 Private Sub txtCodigo_Validate(index As Integer, Cancel As Boolean)
     Select Case index
            Case 15, 16 'ARTICULO
-            txtNombre(index).Text = PonerNombreDeCod(txtCodigo(index), conAri, "sartic", "nomartic", "codartic", "Articulo", "T")
+            txtNombre(index).Text = PonerNombreDeCod(txtcodigo(index), conAri, "sartic", "nomartic", "codartic", "Articulo", "T")
             'If txtNombre(Index).Text = "" And txtCodigo(Index) <> "" Then Cancel = True
     End Select
 End Sub
@@ -8524,11 +8676,11 @@ Dim RS As ADODB.Recordset
     
     SQL = "select scafac.codclien,scafac.nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1)+ sum(if(isnull(baseimp2),0,baseimp2))+ sum(if(isnull(baseimp3),0,baseimp3)) as BaseImp"
     SQL = SQL & " From scafac,sclien WHERE scafac.codclien=sclien.codclien "
-    If txtCodigo(57).Text <> "" Then SQL = SQL & " AND sclien.codactiv >= " & txtCodigo(57).Text
-    If txtCodigo(58).Text <> "" Then SQL = SQL & " AND sclien.codactiv <= " & txtCodigo(58).Text
+    If txtcodigo(57).Text <> "" Then SQL = SQL & " AND sclien.codactiv >= " & txtcodigo(57).Text
+    If txtcodigo(58).Text <> "" Then SQL = SQL & " AND sclien.codactiv <= " & txtcodigo(58).Text
     'El agente
-    If Me.txtCodigo(23).Text <> "" Then SQL = SQL & " AND scafac.codagent >= " & txtCodigo(23).Text
-    If Me.txtCodigo(24).Text <> "" Then SQL = SQL & " AND scafac.codagent <= " & txtCodigo(24).Text
+    If Me.txtcodigo(23).Text <> "" Then SQL = SQL & " AND scafac.codagent >= " & txtcodigo(23).Text
+    If Me.txtcodigo(24).Text <> "" Then SQL = SQL & " AND scafac.codagent <= " & txtcodigo(24).Text
     
     
     If cadW <> "" Then SQL = SQL & " AND " & cadW
@@ -8615,7 +8767,7 @@ Private Sub AbrirBuscaGrid(OP As Integer)
     If cadFormula <> "" Then
         'Ha devuelto algun dato
         'If Op = 54 Then
-            txtCodigo(OP).Text = RecuperaValor(cadFormula, 1)
+            txtcodigo(OP).Text = RecuperaValor(cadFormula, 1)
             txtNombre(OP).Text = RecuperaValor(cadFormula, 2)
         'End If
     End If
@@ -8977,7 +9129,7 @@ Dim Marcar As Boolean
     Titulo = "FAV|FRT|"
     
     
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         'Leeremos los seleccionad
        
         LeeGuardaListFacturas True
@@ -8985,7 +9137,7 @@ Dim Marcar As Boolean
     Else
         'Herbelca
         'If vParamAplic.AlmacenB > 90 Then
-        If vParamAplic.NumeroInstalacion = 2 Then
+        If vParamAplic.NumeroInstalacion = vbHerbelca Then
             'MOstraremos tb las de mostrador
             Titulo = Titulo & "FMO|FTI|"
         Else

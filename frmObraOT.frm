@@ -408,7 +408,7 @@ Private Sub BotonAnyadir()
 Dim anc As Single
     
     'Situamos el grid al final
-    AnyadirLinea DataGrid1, Adodc1
+    AnyadirLinea DataGrid1, adodc1
       
     anc = ObtenerAlto(DataGrid1, 10)
     
@@ -433,7 +433,7 @@ End Sub
 Private Sub BotonVerTodos()
 On Error Resume Next
     CargaGrid ""
-    If Adodc1.Recordset.RecordCount <= 0 Then
+    If adodc1.Recordset.RecordCount <= 0 Then
          'MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
          MsgBox "No hay ningún registro en la tabla mantenimiento de capitulos", vbInformation
          Screen.MousePointer = vbDefault
@@ -450,12 +450,12 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim Cad As String
+Dim cad As String
 Dim anc As Single
 Dim I As Integer
 
-    If Adodc1.Recordset.EOF Then Exit Sub
-    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
     Screen.MousePointer = vbHourglass
     
@@ -467,9 +467,9 @@ Dim I As Integer
     
     anc = ObtenerAlto(DataGrid1, 10)
     
-    Cad = ""
+    cad = ""
     For I = 0 To 1
-        Cad = Cad & DataGrid1.Columns(I).Text & "|"
+        cad = cad & DataGrid1.Columns(I).Text & "|"
     Next I
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
@@ -496,7 +496,7 @@ Dim SQL As String
     On Error GoTo Error2
 
     'Ciertas comprobaciones
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
     
     If Not SePuedeEliminar Then Exit Sub
@@ -504,19 +504,19 @@ Dim SQL As String
     
     '### a mano
     SQL = "¿Seguro que desea eliminar el tipo de órden de trabajo? " & vbCrLf
-    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Nombre: " & Adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
     
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-        NumRegElim = Me.Adodc1.Recordset.AbsolutePosition
+        NumRegElim = Me.adodc1.Recordset.AbsolutePosition
         'Hay que eliminar
-        SQL = "Delete from stipor where codtipor= '" & Adodc1.Recordset!codtipor & "'"
+        SQL = "Delete from stipor where codtipor= '" & adodc1.Recordset!codtipor & "'"
         conn.Execute SQL
         CadenaConsulta = "Select * from stipor "
-        CancelaADODC Me.Adodc1
+        CancelaADODC Me.adodc1
         CargaGrid ""
-        CancelaADODC Me.Adodc1
-        SituarDataPosicion Me.Adodc1, NumRegElim, SQL
+        CancelaADODC Me.adodc1
+        SituarDataPosicion Me.adodc1, NumRegElim, SQL
     End If
 Error2:
     Screen.MousePointer = vbDefault
@@ -526,7 +526,7 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim I As Integer
-Dim cadB As String
+Dim CadB As String
 On Error Resume Next
 
     Select Case Modo
@@ -542,19 +542,19 @@ On Error Resume Next
             If DatosOk And BLOQUEADesdeFormulario(Me) Then
                 If ModificaDesdeFormulario(Me, 3) Then
                    TerminaBloquear
-                   I = Adodc1.Recordset.Fields(0)
+                   I = adodc1.Recordset.Fields(0)
                    PonerModo 2
-                   CancelaADODC Me.Adodc1
+                   CancelaADODC Me.adodc1
                    CargaGrid
-                   Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & I)
+                   adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                 End If
                 DataGrid1.SetFocus
             End If
         Case 1  'HacerBusqueda
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid cadB
+                CargaGrid CadB
                 DataGrid1.SetFocus
             End If
     End Select
@@ -570,10 +570,10 @@ On Error Resume Next
         Me.lblIndicador.Caption = ""
         DataGrid1.AllowAddNew = False
         'CargaGrid
-        If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
     Case 4 'Modificar
         TerminaBloquear
-        Me.lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+        Me.lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     Case 1 'Busqueda
         CargaGrid
     End Select
@@ -585,18 +585,18 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
 
 
-        If Adodc1.Recordset.EOF Then
+        If adodc1.Recordset.EOF Then
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
     
-        Cad = Adodc1.Recordset.Fields(0) & "|"
-        Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(Cad)
+        cad = adodc1.Recordset.Fields(0) & "|"
+        cad = cad & adodc1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(cad)
         Unload Me
 
 End Sub
@@ -611,12 +611,12 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+    If Not adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     End If
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -683,7 +683,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1: BotonBuscar
         Case 2: BotonVerTodos
         Case 5: BotonAnyadir
@@ -728,7 +728,7 @@ Dim b As Boolean
     End If
     SQL = SQL & " ORDER BY codtipor"
     
-    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
     
     I = 0 'Cod. Tipo Unidad
         DataGrid1.Columns(I).Caption = "Codigo"
@@ -756,10 +756,10 @@ Dim b As Boolean
    
     'Habilitamos botones Modificar y Eliminar
    If Toolbar1.Buttons(6).Enabled Then
-        Toolbar1.Buttons(6).Enabled = Not Adodc1.Recordset.EOF
-        Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
-        mnModificar.Enabled = Not Adodc1.Recordset.EOF
-        mnEliminar.Enabled = Not Adodc1.Recordset.EOF
+        Toolbar1.Buttons(6).Enabled = Not adodc1.Recordset.EOF
+        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
+        mnModificar.Enabled = Not adodc1.Recordset.EOF
+        mnEliminar.Enabled = Not adodc1.Recordset.EOF
    End If
    DataGrid1.Enabled = b
    DataGrid1.ScrollBars = dbgAutomatic
@@ -767,39 +767,39 @@ Dim b As Boolean
    PonerOpcionesMenu
    
    'Actualizar indicador
-   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+   If Not adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If
 End Sub
 
 
-Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+Private Sub txtAux_GotFocus(index As Integer)
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
-Private Sub txtAux_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
-    txtAux(Index).Text = Trim(txtAux(Index))
-    If Index = 0 Then
+Private Sub txtAux_LostFocus(index As Integer)
+    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
+    txtAux(index).Text = Trim(txtAux(index))
+    If index = 0 Then
         If Modo > 2 Then
             txtAux(0).Text = UCase(txtAux(0).Text)
-            If Len(txtAux(Index).Text) > 2 Then
+            If Len(txtAux(index).Text) > 2 Then
                 MsgBox "Codigo debe ser de dos carcacteres.", vbExclamation
                 'txtAux(Index).Text = Mid(txtAux(Index), 1, 1)
-                PonerFoco txtAux(Index)
+                PonerFoco txtAux(index)
             End If
         End If
     End If
@@ -828,10 +828,10 @@ End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
@@ -858,7 +858,7 @@ Dim J As Byte
     
     Me.Tag = "sliparte|slialb|slifac|"
     J = 3
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         Me.Tag = Me.Tag & "sreloj|"
         J = 4
     End If
@@ -867,7 +867,7 @@ Dim J As Byte
         
         CadenaConsulta = RecuperaValor(Me.Tag, CInt(I))
         
-        If Val(DevuelveDesdeBD(conAri, "count(*)", CadenaConsulta, "codtipor", Adodc1.Recordset!codtipor, "T")) > 0 Then
+        If Val(DevuelveDesdeBD(conAri, "count(*)", CadenaConsulta, "codtipor", adodc1.Recordset!codtipor, "T")) > 0 Then
             MsgBox "Existen datos relacionados (" & CadenaConsulta & ")", vbExclamation
             Exit Function
         End If

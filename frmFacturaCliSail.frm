@@ -449,8 +449,8 @@ Private Sub cboTipo2_Click()
    ' CargarDatos
 End Sub
 
-Private Sub cmdFacturar_Click(Index As Integer)
-Dim i As Integer
+Private Sub cmdFacturar_Click(index As Integer)
+Dim I As Integer
 
     
     
@@ -483,12 +483,12 @@ Dim i As Integer
     
     'Vere si hay alguno marcado para facturar
     SQL = ""
-    For i = 1 To TreeView1.Nodes.Count
-        If Not TreeView1.Nodes(i).Parent Is Nothing Then
-            If TreeView1.Nodes(i).Checked Then
-                If Not TreeView1.Nodes(i).Parent.Checked Then
-                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(i).Parent.Text, vbExclamation
-                    TreeView1.Nodes(i).Parent.Checked = True
+    For I = 1 To TreeView1.Nodes.Count
+        If Not TreeView1.Nodes(I).Parent Is Nothing Then
+            If TreeView1.Nodes(I).Checked Then
+                If Not TreeView1.Nodes(I).Parent.Checked Then
+                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(I).Parent.Text, vbExclamation
+                    TreeView1.Nodes(I).Parent.Checked = True
                     Exit Sub
                 End If
                 
@@ -509,18 +509,18 @@ Dim i As Integer
 
 
     'Si hay alguno para facturar compruebo que todas las facturas tengan al menos un albaran seleccionado
-    For i = 1 To TreeView1.Nodes.Count
-        If TreeView1.Nodes(i).Parent Is Nothing Then
-            If TreeView1.Nodes(i).Checked Then
+    For I = 1 To TreeView1.Nodes.Count
+        If TreeView1.Nodes(I).Parent Is Nothing Then
+            If TreeView1.Nodes(I).Checked Then
                 'Comprobar si algun nodo esta seleccionado
-                If Not ComprobarSubNodoSeleccionado(i) Then Exit Sub
+                If Not ComprobarSubNodoSeleccionado(I) Then Exit Sub
             End If
         End If
     Next
 
 
     'SI NO ES ALBARAN VENTA, preguntaremos
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         If Me.cboTipo2.ItemData(Me.cboTipo2.ListIndex) > 0 Then
             CadenaDesdeOtroForm = String(43, "**") & vbCrLf
             CadenaDesdeOtroForm = CadenaDesdeOtroForm & vbCrLf & "Va a generar factura    " & UCase(Me.cboTipo2.Text) & vbCrLf & vbCrLf & CadenaDesdeOtroForm
@@ -554,12 +554,12 @@ Private Sub cmdSalir_Click()
     Unload Me
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     If PriVez Then
         PriVez = False
         
         If Not ImprimirCertificacion Then CargaComboTipos
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
            If Me.cboTipo2.ListCount > 0 Then Me.cboTipo2.ListIndex = 0
         End If
         
@@ -618,9 +618,9 @@ Private Sub frmF_Selec(vFecha As Date)
     Me.txtFec.Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub imgBuscarG_Click(Index As Integer)
+Private Sub imgBuscarG_Click(index As Integer)
 
-    If Index = 0 Then
+    If index = 0 Then
         'FECHA
         Set frmF = New frmCal
         frmF.Fecha = Now
@@ -641,9 +641,9 @@ Private Sub imgBuscarG_Click(Index As Integer)
     End If
 End Sub
 
-Private Sub imgCheck_Click(Index As Integer)
+Private Sub imgCheck_Click(index As Integer)
     For NumRegElim = 1 To TreeView1.Nodes.Count
-        TreeView1.Nodes(NumRegElim).Checked = Index = 1
+        TreeView1.Nodes(NumRegElim).Checked = index = 1
     Next
 End Sub
 
@@ -726,7 +726,7 @@ Dim Im As Currency
 End Sub
 
 Private Sub PonerCadenaImporte(ByRef N As Node, Padre As Boolean)
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
     'Silo puede llevar los dops puntos UNA vez
 
@@ -735,9 +735,9 @@ Dim J As Integer
     Else
         J = 45
     End If
-    i = InStr(1, N.Text, ":")
-    If i > 0 Then
-        N.Text = Mid(N.Text, 1, i)
+    I = InStr(1, N.Text, ":")
+    If I > 0 Then
+        N.Text = Mid(N.Text, 1, I)
         N.Text = N.Text & Right(Space(J) & Format(N.Tag, FormatoImporte), J)
     End If
 End Sub
@@ -1003,10 +1003,10 @@ Private Sub CadenaAlbaran(ByRef Cole As Collection)
 Dim C As String
 
     C = " codtipom = '" & miRsAux!codtipom & "' AND numalbar"
-    C = DevuelveDesdeBD(conAri, "sum(importel)", "slialb", C, miRsAux!NumAlbar)
+    C = DevuelveDesdeBD(conAri, "sum(importel)", "slialb", C, miRsAux!Numalbar)
     
     'Ira codtipomNumalbar sapacioblanco fecha  espacios importe
-    Cole.Add miRsAux!codtipom & Format(miRsAux!NumAlbar, "000000") & "  " & Format(miRsAux!FechaAlb, "dd/mm/yyyy") & "|" & C & "|"
+    Cole.Add miRsAux!codtipom & Format(miRsAux!Numalbar, "000000") & "  " & Format(miRsAux!FechaAlb, "dd/mm/yyyy") & "|" & C & "|"
     
 End Sub
 
@@ -1029,7 +1029,7 @@ End Function
 
 
 Private Sub InsertarLineaFactura(ByRef Cole As Collection, CadenaFactura As String)
-Dim i As Integer
+Dim I As Integer
 Dim N As Node
 Dim TotalFra As Currency
 Dim Aux As String
@@ -1061,15 +1061,15 @@ Dim Aux As String
     N.Checked = True
     TotalFra = 0
     'Los albaranes que iran
-    For i = 1 To Cole.Count
+    For I = 1 To Cole.Count
         'El importe
-        Aux = RecuperaValor(Cole.item(i), 2)
+        Aux = RecuperaValor(Cole.Item(I), 2)
         Im = CCur(Aux)
         TotalFra = TotalFra + Im
         
         'El importe
         Aux = Right(Space(10) & Format(Im, FormatoImporte), 10)
-        Aux = RecuperaValor(Cole.item(i), 1) & Aux
+        Aux = RecuperaValor(Cole.Item(I), 1) & Aux
         Set N = TreeView1.Nodes.Add("FRA" & Format(NumRegElim, "000"), tvwChild)
         N.Text = Aux
         N.Image = 44
@@ -1111,11 +1111,11 @@ Dim N As Node
         Set Col = New Collection
         CadenaAlbaran Col
         
-        SQL = RecuperaValor(Col.item(1), 2)
+        SQL = RecuperaValor(Col.Item(1), 2)
         
         'El importe
         SQL = Right(Space(10) & Format(SQL, FormatoImporte), 10)
-        SQL = RecuperaValor(Col.item(1), 1) & SQL
+        SQL = RecuperaValor(Col.Item(1), 1) & SQL
         Set N = TreeView2.Nodes.Add()
         N.Text = SQL
         N.Image = 44
@@ -1140,11 +1140,11 @@ Dim Mal As Byte
     Do
         CadenaDesdeOtroForm = Aux
         If NO.Checked Then
-            If HacerFacturacionClienteSAIL(NO.Index) Then
+            If HacerFacturacionClienteSAIL(NO.index) Then
                 OK = OK + 1
             Else
                 Mal = Mal + 1
-                lblInd.Caption = "Error factura: " & NO.Index
+                lblInd.Caption = "Error factura: " & NO.index
                 lblInd.Refresh
                 DoEvents
                 Espera 0.5
@@ -1187,7 +1187,7 @@ Dim TipoFactura As String
         
         
         
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             TipoFactura = Replace(DevuelveTipoDocumento2, ",", "|") & "|" 'Coge todo
             TipoFactura = Replace(TipoFactura, "'", "")   'quita comillas
             TipoFactura = RecuperaValor(TipoFactura, Me.cboTipo2.ItemData(cboTipo2.ListIndex))
@@ -1244,10 +1244,10 @@ End Function
 
 
 Private Sub ImprimirCerti()
-Dim i As Byte
+Dim I As Byte
 Dim NO As Node
 
-    SQL = "DELETE from tmpnlotes where codusu = " & vUsu.codigo
+    SQL = "DELETE from tmpnlotes where codusu = " & vUsu.Codigo
     conn.Execute SQL
     
     
@@ -1255,7 +1255,7 @@ Dim NO As Node
     Do
         If NO.Checked Then
             'Insertamos albaranes
-            If Not InsertarAlbaranesCertificacion(NO.Index, Val(Mid(NO.Key, 4))) Then
+            If Not InsertarAlbaranesCertificacion(NO.index, Val(Mid(NO.Key, 4))) Then
                 Set NO = Nothing
                 Exit Sub
             End If
@@ -1265,24 +1265,24 @@ Dim NO As Node
     
     
     'Llegados aquin vemos si hay alguno reg insertado
-    SQL = DevuelveDesdeBD(conAri, "count(*)", "tmpnlotes", "codusu", CStr(vUsu.codigo))
+    SQL = DevuelveDesdeBD(conAri, "count(*)", "tmpnlotes", "codusu", CStr(vUsu.Codigo))
     If SQL = "" Then SQL = "0"
     If Val(SQL) = 0 Then
         MsgBox "Ningun registro generado", vbExclamation
         Exit Sub
     End If
     
-    If PonerParamRPT2(47, SQL, i, CadenaDesdeOtroForm, False, "", pRptvMultiInforme) Then
+    If PonerParamRPT2(47, SQL, I, CadenaDesdeOtroForm, False, "", pRptvMultiInforme) Then
         SQL = SQL & "|pFecha=""" & txtFec.Text & """|"
-        i = i + 1
+        I = I + 1
         With frmImprimir
             .ConSubInforme = False
-            .FormulaSeleccion = "{tmpnlotes.codusu} = " & vUsu.codigo
+            .FormulaSeleccion = "{tmpnlotes.codusu} = " & vUsu.Codigo
             .NombreRPT = CadenaDesdeOtroForm
             .NombrePDF = pPdfRpt
             .Titulo = "Certificación"
             .OtrosParametros = SQL
-            .NumeroParametros = i
+            .NumeroParametros = I
             .SeleccionaRPTCodigo = pRptvMultiInforme
             .Opcion = 2003 'Esta libre
             .Show vbModal
@@ -1294,7 +1294,7 @@ End Sub
 Private Function InsertarAlbaranesCertificacion(Indi As Integer, NumeroFac As Integer) As Boolean
 Dim NO As Node
 Dim Aux As String
-Dim i As Integer
+Dim I As Integer
        Set NO = TreeView1.Nodes(Indi).Child
        '                                    nsecuen             nºALBA      codtipom
        'insert into `tmpnlotes` (`codusu`,`numalbar`,`codprove`,`numlotes`) values
@@ -1309,7 +1309,7 @@ Dim i As Integer
                 Aux = Mid(Aux, InStr(1, Aux, ",") + 1)
                 Aux = Mid(Aux, 1, Len(Aux) - 1)
                 
-                SQL = SQL & ", (" & vUsu.codigo & "," & NumeroFac & "," & Aux
+                SQL = SQL & ", (" & vUsu.Codigo & "," & NumeroFac & "," & Aux
                 Aux = Mid(NO.Text, 1, 3)
                 SQL = SQL & ",'" & Aux & "')"
                 
@@ -1346,7 +1346,7 @@ End Sub
 
 Private Function DevuelveTipoDocumento2() As String
 
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         DevuelveTipoDocumento2 = "'ALV','ALR','ALO','ALE'"
     Else
         If cboTipo2.ListIndex = -1 Then
@@ -1364,7 +1364,7 @@ End Function
 
 
 Private Sub CargaComboTipos()
-Dim i As Byte
+Dim I As Byte
 
 
     
@@ -1392,9 +1392,9 @@ Dim i As Byte
         Else
         
             SQL = "Venta|Reparación|Orden trabajo|Trabajo externo|"
-            For i = 1 To 4
-                    cboTipo2.AddItem RecuperaValor(SQL, CInt(i))
-                    cboTipo2.ItemData(cboTipo2.NewIndex) = i
+            For I = 1 To 4
+                    cboTipo2.AddItem RecuperaValor(SQL, CInt(I))
+                    cboTipo2.ItemData(cboTipo2.NewIndex) = I
             Next
             
 '            SQL = "Select codtipom from scaalb where codclien=" & txtclien.Text & " AND codtipom IN ('ALV','ALR','ALO','ALE') GROUP BY 1"

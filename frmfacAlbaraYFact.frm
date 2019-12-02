@@ -680,7 +680,7 @@ Private Sub Label1_Click(index As Integer)
                 
                 
                 
-                HaMostradoCanal2_elB = True
+                HaMostradoCanal2_El_B = True
             End If
         End If
     End If

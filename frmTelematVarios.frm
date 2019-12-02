@@ -603,7 +603,7 @@ Begin VB.Form frmTelematVarios
          BackColor       =   -2147483643
          BorderStyle     =   1
          Appearance      =   1
-         NumItems        =   8
+         NumItems        =   9
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Cod.Tele."
             Object.Width           =   2540
@@ -632,17 +632,22 @@ Begin VB.Form frmTelematVarios
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   2
             SubItemIndex    =   5
+            Text            =   "Ud Emb,"
+            Object.Width           =   1411
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
             Text            =   "M"
             Object.Width           =   529
          EndProperty
-         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
-            SubItemIndex    =   6
+            SubItemIndex    =   7
             Text            =   "Precio"
             Object.Width           =   2134
          EndProperty
-         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   7
+         BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   8
             Text            =   "Familia"
             Object.Width           =   0
          EndProperty
@@ -1294,8 +1299,8 @@ Dim FamiliasSeleccionadas As String
     
     
     
-    pb1.Max = Len(SQL)
-    pb1.Value = 0
+    Pb1.Max = Len(SQL)
+    Pb1.Value = 0
     
     
     'Si en el desde / hasta hay fechanue NO puede seguir.Tiene
@@ -1371,8 +1376,8 @@ Dim FamiliasSeleccionadas As String
     NumRegElim = 0
     For N = 1 To lw1.ListItems.Count
         If lw1.ListItems(N).Checked Then
-            If InStr(1, SQL, "," & Trim(lw1.ListItems(N).SubItems(7)) & ",") = 0 Then
-                SQL = SQL & Trim(lw1.ListItems(N).SubItems(7)) & ","
+            If InStr(1, SQL, "," & Trim(lw1.ListItems(N).SubItems(8)) & ",") = 0 Then
+                SQL = SQL & Trim(lw1.ListItems(N).SubItems(8)) & ","
                 NumRegElim = NumRegElim + 1
             End If
         End If
@@ -1419,7 +1424,7 @@ Dim FamiliasSeleccionadas As String
             If lw1.ListItems(N).Checked Then
                 
                 IncrementaPG lw1.ListItems(N).SubItems(2), 1
-                If (pb1.Value Mod 10) = 0 Then
+                If (Pb1.Value Mod 10) = 0 Then
                     Me.Refresh
                     DoEvents
                 End If
@@ -1429,7 +1434,7 @@ Dim FamiliasSeleccionadas As String
                 'NUEVO
                 'MARZO 2015
                 'Si no es de las familias seleccionadas NO hacemos nada
-                SQL = "|" & lw1.ListItems(N).SubItems(7) & "|"
+                SQL = "|" & lw1.ListItems(N).SubItems(8) & "|"
                 
                 If InStr(1, FamiliasSeleccionadas, SQL) = 0 Then
                     'Esa familia NO la ha seleccionado
@@ -1454,7 +1459,7 @@ Private Sub IncrementaPG(texto As String, Inc As Integer)
 On Error Resume Next
     Me.Label2.Caption = texto
     Me.Label2.Refresh
-    pb1.Value = pb1.Value + Inc
+    Pb1.Value = Pb1.Value + Inc
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -1532,7 +1537,7 @@ Private Sub CruzarReferenciasProveedor()
     Set miRsAux = Nothing
 End Sub
 
-Private Sub cmdCancel_Click(index As Integer)
+Private Sub cmdCancel_Click(Index As Integer)
     Unload Me
 End Sub
 
@@ -1862,6 +1867,9 @@ Private Sub cmdVerArt_Click()
 Dim RT As ADODB.Recordset
 Dim Importe As Currency
 Dim K As Long
+Dim TipoUdCompra As Byte
+Dim Importe2 As Currency
+Dim Porcen As Currency
 
     Label5.visible = False
     
@@ -1875,6 +1883,9 @@ Dim K As Long
         MsgBox SQL, vbExclamation
         Exit Sub
     End If
+    
+    Porcen = 0
+    If txtDecimal(0).Text <> "" Then Porcen = ImporteFormateado(Me.txtDecimal(0).Text) / 100
     
     'Si habia datos...
     
@@ -1892,9 +1903,7 @@ Dim K As Long
     'Limpiamos
     lw1.ListItems.Clear
     
-    SQL = "Select  stelem.*,preciove,codfamia from stelem "
-    'Marzo 2015
-    'SQL = SQL & " left join sartic on stelem.codartic=sartic.codartic"
+    SQL = "Select  stelem.*,preciove,codfamia,unicajas ,unidadesCompra from stelem "
     SQL = SQL & " inner join sartic on stelem.codartic=sartic.codartic"
     
     SQL = SQL & " Where stelem.codArtic <> """" AND stelem.codprove "
@@ -1919,21 +1928,65 @@ Dim K As Long
         IT.SubItems(2) = miRsAux!codArtic
         IT.SubItems(3) = Format(miRsAux!FechaCambio, "dd/mm/yyyy")
         
+        
         IT.SubItems(5) = " "
-        If IsNull(miRsAux!PrecioVe) Then
-            IT.SubItems(4) = " "
-        Else
-            IT.SubItems(4) = Format(miRsAux!PrecioVe, FormatoPrecio)
-            Importe = ImporteFormateado(Me.txtDecimal(0).Text)
-            Importe = (Importe + 100) / 100
-            Importe = miRsAux!PrecioVe * Importe
-            If miRsAux!Precio > Importe Then IT.SubItems(5) = "*"
+        TipoUdCompra = 0
+        If DBLet(miRsAux!unicajas, "N") > 0 Then
+            If miRsAux!unidadesCompra = 0 Then
+                'Significa que tiene unidades cajas, pero NO cambia lleva tipo UD compra
+                IT.SubItems(5) = "-"
+            Else
+                IT.SubItems(5) = miRsAux!unicajas
+                TipoUdCompra = miRsAux!unidadesCompra
+            End If
         End If
         
-        'IT.SubItems(4) = Format(miRsAux!Precio, FormatoPrecio)
-        IT.SubItems(6) = Format(miRsAux!Precio, FormatoPrecio)
         
-        IT.SubItems(7) = DBLet(miRsAux!Codfamia, "T") 'La familia del articulo
+        
+        IT.SubItems(6) = " "
+        IT.SubItems(7) = " "
+        IT.SubItems(8) = DBLet(miRsAux!Codfamia, "T") 'La familia del articulo
+
+        
+        If IsNull(miRsAux!PrecioVe) Then
+            IT.SubItems(4) = " "
+            Importe = 0
+        Else
+            Importe = miRsAux!PrecioVe
+            IT.SubItems(4) = Format(Importe, FormatoPrecio)
+        End If
+        
+                    
+        Importe2 = miRsAux!Precio
+        If TipoUdCompra > 0 Then
+            If TipoUdCompra = 1 Then
+                'Mayor, divide
+                Importe2 = Importe2 / miRsAux!unicajas
+            Else
+                'Menor, multimplica
+                Importe2 = Importe2 * miRsAux!unicajas
+            End If
+            SQL = Format(miRsAux!Precio, FormatoPrecio)
+            IT.ToolTipText = SQL
+            For N = 1 To 7
+                IT.ListSubItems(N).ToolTipText = SQL
+            Next
+        End If
+                
+        
+        
+        IT.SubItems(7) = Format(Importe2, FormatoPrecio)
+            
+        If Porcen > 0 Then
+            If Importe2 > 0 Then
+                Importe = Abs(Importe - Importe2)
+                Importe = Importe / Importe2
+                
+                If Importe > Porcen Then IT.SubItems(6) = "M"
+            End If
+        End If
+    
+        
         
         
         
@@ -1956,6 +2009,19 @@ Dim K As Long
             IT.ListSubItems(4).ForeColor = vbRed
             IT.ListSubItems(5).ForeColor = vbRed
             IT.ListSubItems(6).ForeColor = vbRed
+            IT.ListSubItems(7).ForeColor = vbRed
+            
+        Else
+            If TipoUdCompra > 0 Then
+                IT.ForeColor = vbBlue
+                IT.ListSubItems(1).ForeColor = vbBlue
+                IT.ListSubItems(2).ForeColor = vbBlue
+                IT.ListSubItems(3).ForeColor = vbBlue
+                IT.ListSubItems(4).ForeColor = vbBlue
+                IT.ListSubItems(5).ForeColor = vbBlue
+                IT.ListSubItems(6).ForeColor = vbBlue
+                IT.ListSubItems(7).ForeColor = vbBlue
+            End If
         End If
         
         miRsAux.MoveNext
@@ -2043,9 +2109,9 @@ Private Sub frmC_Selec(vFecha As Date)
     SQL = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub imgAyuda_Click(index As Integer)
+Private Sub imgAyuda_Click(Index As Integer)
 Dim Men As String
-    Select Case index
+    Select Case Index
     Case 0
         Men = "Busca en los datos importados de telematel, aquellos que no esten asignados y el codigo de proveedor "
         Men = Men & " este vacio " & vbCrLf & "Para saber si ese articulo ya lo tenemos cruzado busca en "
@@ -2059,38 +2125,38 @@ Dim Men As String
     MsgBox Men, vbExclamation
 End Sub
 
-Private Sub imgCheck_Click(index As Integer)
-    If index < 2 Then
+Private Sub imgCheck_Click(Index As Integer)
+    If Index < 2 Then
         For N = 1 To lw1.ListItems.Count
-            lw1.ListItems(N).Checked = index = 0
+            lw1.ListItems(N).Checked = Index = 0
         Next
-    ElseIf index < 4 Then
+    ElseIf Index < 4 Then
         For N = 1 To lw2.ListItems.Count
-            lw2.ListItems(N).Checked = index = 3
+            lw2.ListItems(N).Checked = Index = 3
         Next
     Else
         For N = 1 To lw3.ListItems.Count
-            lw3.ListItems(N).Checked = index = 5
+            lw3.ListItems(N).Checked = Index = 5
         Next
     End If
 End Sub
 
-Private Sub imgF_Click(index As Integer)
+Private Sub imgF_Click(Index As Integer)
     SQL = ""
     Set frmC = New frmCal
     frmC.Fecha = Now
-    If txtFecha(index).Text <> "" Then frmC.Fecha = CDate(txtFecha(index).Text)
+    If txtFecha(Index).Text <> "" Then frmC.Fecha = CDate(txtFecha(Index).Text)
     frmC.Show vbModal
     Set frmC = Nothing
     If SQL <> "" Then
-        txtFecha(index).Text = SQL
-        If index = 2 Then txtFecha_LostFocus 2
+        txtFecha(Index).Text = SQL
+        If Index = 2 Then txtFecha_LostFocus 2
     End If
     SQL = ""
     
 End Sub
 
-Private Sub imgFamilia_Click(index As Integer)
+Private Sub imgFamilia_Click(Index As Integer)
     SQL = ""
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
@@ -2107,84 +2173,84 @@ Private Sub imgFamilia_Click(index As Integer)
     Screen.MousePointer = vbDefault
     If SQL <> "" Then
         
-        Me.txtFamia(index).Text = RecuperaValor(SQL, 1)
-        Me.txtDescFamia(index).Text = RecuperaValor(SQL, 2)
-        PonerFoco txtFamia(index)
+        Me.txtFamia(Index).Text = RecuperaValor(SQL, 1)
+        Me.txtDescFamia(Index).Text = RecuperaValor(SQL, 2)
+        PonerFoco txtFamia(Index)
         SQL = ""
     End If
 End Sub
 
-Private Sub imgPorv_Click(index As Integer)
+Private Sub imgPorv_Click(Index As Integer)
     lanzaBusqueda 0
     If SQL <> "" Then
-        txtProve(index).Text = RecuperaValor(SQL, 1)
-        txtDescProve(index).Text = RecuperaValor(SQL, 2)
+        txtProve(Index).Text = RecuperaValor(SQL, 1)
+        txtDescProve(Index).Text = RecuperaValor(SQL, 2)
         SQL = ""
-        If index = 6 Then txtProve_LostFocus index
+        If Index = 6 Then txtProve_LostFocus Index
     End If
 End Sub
 
-Private Sub txtFamia_GotFocus(index As Integer)
-    ConseguirFoco txtFamia(index), 3
+Private Sub txtFamia_GotFocus(Index As Integer)
+    ConseguirFoco txtFamia(Index), 3
 End Sub
 
-Private Sub txtFamia_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtFamia_KeyPress(Index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtFamia_LostFocus(index As Integer)
-    txtFamia(index).Text = Trim(txtFamia(index).Text)
+Private Sub txtFamia_LostFocus(Index As Integer)
+    txtFamia(Index).Text = Trim(txtFamia(Index).Text)
     SQL = ""
-    If txtFamia(index).Text <> "" Then
-        If IsNumeric(txtFamia(index).Text) Then
-            SQL = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(index).Text, "N")
+    If txtFamia(Index).Text <> "" Then
+        If IsNumeric(txtFamia(Index).Text) Then
+            SQL = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(Index).Text, "N")
             If SQL = "" Then MsgBox "El codigo no pertence a ningun familia", vbExclamation
         Else
             MsgBox "Campo numerico", vbExclamation
-            txtFamia(index).Text = ""
-            PonerFoco txtFamia(index)
+            txtFamia(Index).Text = ""
+            PonerFoco txtFamia(Index)
         End If
     End If
      
-    Me.txtDescFamia(index).Text = SQL
+    Me.txtDescFamia(Index).Text = SQL
     
 End Sub
 
 
-Private Sub txtFecha_GotFocus(index As Integer)
-     ConseguirFoco txtFecha(index), 3
+Private Sub txtFecha_GotFocus(Index As Integer)
+     ConseguirFoco txtFecha(Index), 3
 End Sub
 
-Private Sub txtFecha_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtFecha_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
 
 
-Private Sub txtFecha_LostFocus(index As Integer)
-    PonerFormatoFecha txtFecha(index)
+Private Sub txtFecha_LostFocus(Index As Integer)
+    PonerFormatoFecha txtFecha(Index)
    
 End Sub
 
-Private Sub txtProve_GotFocus(index As Integer)
-     ConseguirFoco txtProve(index), 3
+Private Sub txtProve_GotFocus(Index As Integer)
+     ConseguirFoco txtProve(Index), 3
 End Sub
 
-Private Sub txtProve_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtProve_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub txtProve_LostFocus(index As Integer)
+Private Sub txtProve_LostFocus(Index As Integer)
     SQL = ""
-    If txtProve(index).Text <> "" Then
-        If Not PonerFormatoEntero(txtProve(index)) Then
-            txtProve(index).Text = ""
+    If txtProve(Index).Text <> "" Then
+        If Not PonerFormatoEntero(txtProve(Index)) Then
+            txtProve(Index).Text = ""
         Else
-            SQL = PonerNombreDeCod(txtProve(index), conAri, "sprove", "nomprove", "codprove")
+            SQL = PonerNombreDeCod(txtProve(Index), conAri, "sprove", "nomprove", "codprove")
             
         End If
     End If
-    Me.txtDescProve(index).Text = SQL
+    Me.txtDescProve(Index).Text = SQL
     If SQL = "" Then
         'Segun sea la opcin pondre un lw u otra a blanco
         
@@ -2194,27 +2260,27 @@ Private Sub txtProve_LostFocus(index As Integer)
 End Sub
 
 
-Private Sub txtDecimal_GotFocus(index As Integer)
-    ConseguirFoco txtDecimal(index), 3
+Private Sub txtDecimal_GotFocus(Index As Integer)
+    ConseguirFoco txtDecimal(Index), 3
 End Sub
 
-Private Sub txtDecimal_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtDecimal_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtDecimal_LostFocus(index As Integer)
+Private Sub txtDecimal_LostFocus(Index As Integer)
 Dim b As Boolean
-    txtDecimal(index).Text = Trim(txtDecimal(index).Text)
-    If txtDecimal(index).Text <> "" Then
+    txtDecimal(Index).Text = Trim(txtDecimal(Index).Text)
+    If txtDecimal(Index).Text <> "" Then
        ' If Index = 0 Then
-            b = PonerFormatoDecimal(txtDecimal(index), 4)
+            b = PonerFormatoDecimal(txtDecimal(Index), 4)
        ' Else
        '     B = PonerFormatoDecimal(txtDecimal(Index), 3)
        ' End If
         If b Then
 
         Else
-            txtDecimal(index).Text = ""
+            txtDecimal(Index).Text = ""
         End If
     End If
 End Sub
@@ -2265,7 +2331,7 @@ Dim MenError As String
    
     
 
-    PVP = ImporteFormateado(lw1.ListItems(N).SubItems(6))
+    PVP = ImporteFormateado(lw1.ListItems(N).SubItems(7))
     
   
                 

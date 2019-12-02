@@ -519,7 +519,7 @@ Private Sub Label1_Click(index As Integer)
         If vUsu.Nivel <= 1 Then
             If Combo2.ListCount = 1 Then
                 Combo2.AddItem "Presupuesto"
-                HaMostradoCanal2_elB = True
+                HaMostradoCanal2_El_B = True
             End If
         End If
     End If

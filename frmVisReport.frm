@@ -184,7 +184,7 @@ End Sub
 
 Private Sub CRViewer1_ExportButtonClicked(UseDefault As Boolean)
     
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         
         UseDefault = False
         mrpt.ExportOptions.DiskFileName = ""
@@ -251,7 +251,7 @@ Dim Inicial As Integer
     
     If EstaImpreso Then
         'Demomento solo EULER
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             If mrpt.PrintingStatus.Progress <> crPrintingCancelled Then
                 If mrpt.PrintingStatus.Progress = crPrintingCompleted Then
                     'OK. Ha pulsadi imprimir
@@ -597,7 +597,7 @@ Private Sub Form_Unload(Cancel As Integer)
     NumCopias = 0 ' (RAFA/ALZIRA 31082006) por si acaso
     ForzarNombreImpresora = ""  'Para evitar problemas
     
-    If vParamAplic.NumeroInstalacion = 4 Then ejecutar "DELETE from tmpImpresionAuxliar WHERE codusu = " & vUsu.Codigo, False
+    If InstalacionEsEulerTaxco Then ejecutar "DELETE from tmpImpresionAuxliar WHERE codusu = " & vUsu.Codigo, False
     
 End Sub
 

@@ -983,10 +983,10 @@ Private Sub Form_Load()
     NombreTabla = "smoval"
         
         
-    If vParamAplic.NumeroInstalacion = 2 Then
-        Ordenacion = " ORDER BY codartic,fechamov desc, horamovi ," & NombreTabla & ".codalmac "
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then
+        Ordenacion = " ORDER BY codartic,fechamov desc, horamovi desc," & NombreTabla & ".codalmac "
     Else
-        Ordenacion = " ORDER BY codartic," & NombreTabla & ".codalmac, fechamov desc, horamovi "
+        Ordenacion = " ORDER BY codartic," & NombreTabla & ".codalmac, fechamov desc, horamovi desc"
     End If
     
     
@@ -1520,7 +1520,7 @@ Dim I As Integer
     
     
     If vParamAplic.NumeroInstalacion = vbFenollar Then
-        If Not HaMostradoCanal2_elB Then SQL = SQL & " AND detamovi<>'ALZ'"
+        If Not HaMostradoCanal2_El_B Then SQL = SQL & " AND detamovi<>'ALZ'"
     End If
     
     SQL = SQL & " " & Ordenacion & " DESC "
@@ -1727,7 +1727,7 @@ On Error GoTo ECargar
         index = 1 'Combo Detalle Movimiento
         SQL = "select codtipom,nomtipom from stipom"
         If vParamAplic.NumeroInstalacion = vbFenollar Then
-            If Not HaMostradoCanal2_elB Then SQL = SQL & " WHERE codtipom<>'ALZ'"
+            If Not HaMostradoCanal2_El_B Then SQL = SQL & " WHERE codtipom<>'ALZ'"
         End If
         Set RS = New ADODB.Recordset
         RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText

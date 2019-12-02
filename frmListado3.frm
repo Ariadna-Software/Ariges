@@ -20402,6 +20402,8 @@ Public Opcion As Byte
     
     '72 .- Derrama Marjal Chipos
     
+    '73 .- Lineas albaran EULER     Son unas lineas que llevan codigo/descrip(precio  para pintar luego en factura
+    
     
 Public OtrosDatos As String
     
@@ -20485,11 +20487,11 @@ Private Sub CostesEulerDatosVisibles(visible As Boolean)
 End Sub
 
 
-Private Sub cboMes_Click(Index As Integer)
-    If Index = 0 Then PrecargaSaldosBanco
+Private Sub cboMes_Click(index As Integer)
+    If index = 0 Then PrecargaSaldosBanco
 End Sub
 
-Private Sub cboMes_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub cboMes_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
@@ -20498,7 +20500,7 @@ End Sub
 
 
 
-Private Sub chkRecalPrStd_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub chkRecalPrStd_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
@@ -20506,22 +20508,22 @@ Private Sub chkRenove_KeyPress(KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub chkVarios_Click(Index As Integer)
-    If Index = 16 Then
+Private Sub chkVarios_Click(index As Integer)
+    If index = 16 Then
         'Renovacion
-        FrameRenovacionTfno.visible = Me.chkVarios(Index).Value = 1
+        FrameRenovacionTfno.visible = Me.chkVarios(index).Value = 1
         lblDpto(46).Caption = "Fecha "
-        If Me.chkVarios(Index).Value = 1 Then
+        If Me.chkVarios(index).Value = 1 Then
             lblDpto(46).Caption = lblDpto(46).Caption & "renovación"
         Else
             lblDpto(46).Caption = lblDpto(46).Caption & "alta"
         End If
-    ElseIf Index = 26 Then
-        Me.chkVarios(33).visible = Me.chkVarios(Index).Value = 1
+    ElseIf index = 26 Then
+        Me.chkVarios(33).visible = Me.chkVarios(index).Value = 1
     End If
 End Sub
 
-Private Sub chkVarios_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub chkVarios_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
     
     
@@ -21512,17 +21514,17 @@ Private Sub cmdArtMasVendidos_Click()
 
 End Sub
 
-Private Sub cmdBanco_Click(Index As Integer)
+Private Sub cmdBanco_Click(index As Integer)
 Dim V As Currency
 
     If ListView1(3).ListItems.Count = 0 Then Exit Sub
     If ListView1(3).SelectedItem Is Nothing Then Exit Sub
     
-    If Index = 2 Then
+    If index = 2 Then
         'Eliminar
         
         miSQL = "Seguro que quiere quitar del listado a " & ListView1(3).SelectedItem.SubItems(1) & "?"
-        If MsgBox(miSQL, vbQuestion + vbYesNo) = vbYes Then ListView1(3).ListItems.Remove ListView1(3).SelectedItem.Index
+        If MsgBox(miSQL, vbQuestion + vbYesNo) = vbYes Then ListView1(3).ListItems.Remove ListView1(3).SelectedItem.index
     Else
         miSQL = InputBox("Nuevo importe: " & ListView1(3).SelectedItem.SubItems(1), "Banco", ListView1(3).SelectedItem.SubItems(2))
         If miSQL <> "" Then
@@ -21586,12 +21588,12 @@ Private Sub cmdCalcPortes_Click()
     Unload Me
 End Sub
 
-Private Sub cmdCancelar_Click(Index As Integer)
-    If Index = 0 Then
+Private Sub cmdCancelar_Click(index As Integer)
+    If index = 0 Then
         MsgBox "Debes indicar el motivo del cambio de precio/descuento", vbExclamation
         Exit Sub
     End If
-    If Index = 10 Or Index = 28 Or Index = 45 Or Index = 54 Then CadenaDesdeOtroForm = ""
+    If index = 10 Or index = 28 Or index = 45 Or index = 54 Then CadenaDesdeOtroForm = ""
     
     
     Unload Me
@@ -22673,7 +22675,7 @@ End Sub
 
 
 
-Private Sub cmdImpSimulacionPedProv_Click(Index As Integer)
+Private Sub cmdImpSimulacionPedProv_Click(index As Integer)
 Dim Au As String
 
     If Me.txtCodProve(29).Text = "" Then Exit Sub
@@ -22685,7 +22687,7 @@ Dim Au As String
         Exit Sub
     End If
     
-    If Index = 0 Then
+    If index = 0 Then
         'IMPRIMIR
     
         
@@ -25260,7 +25262,7 @@ Dim W As Integer
         
     Case 22, 23
         Caption = RentingLB & " y servicios"
-        imgAyuda(2).ToolTipText = "Facturación " & Caption
+        imgayuda(2).ToolTipText = "Facturación " & Caption
         lblTitulo(20).Caption = "Facturar "
         PonerFrameVisible FrameFacturarRenting, H, W
         Label3(47).Caption = ""
@@ -25282,7 +25284,7 @@ Dim W As Integer
         imgBanco(0).visible = vMostrarTree
         txtBanco(0).visible = vMostrarTree
         txtDescBanco(0).visible = vMostrarTree
-        imgAyuda(2).visible = vMostrarTree
+        imgayuda(2).visible = vMostrarTree
         lblDpto(25).visible = vMostrarTree
         imgFecha(24).visible = vMostrarTree
         txtFecha(24).visible = vMostrarTree
@@ -25463,7 +25465,7 @@ Dim W As Integer
     Case 52, 53
         conSubRPT = Opcion = 52
         PonerFrameVisible FrameImportarAgua, H, W
-        imgAyuda(8).visible = conSubRPT
+        imgayuda(8).visible = conSubRPT
         If conSubRPT Then
             '52
             lblTitulo(48).Caption = "Importar lectura contadores agua"
@@ -25697,7 +25699,7 @@ Private Sub frmZ_DatoSeleccionado(CadenaSeleccion As String)
      miSQL = CadenaSeleccion
 End Sub
 
-Private Sub imgActividad_Click(Index As Integer)
+Private Sub imgActividad_Click(index As Integer)
 
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
@@ -25717,14 +25719,14 @@ Private Sub imgActividad_Click(Index As Integer)
     Screen.MousePointer = vbDefault
     If miSQL <> "" Then
         
-        Me.txtcodactiv(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescActiv(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtcodactiv(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescActiv(index).Text = RecuperaValor(miSQL, 2)
        
     End If
 
 End Sub
 
-Private Sub imgAgente_Click(Index As Integer)
+Private Sub imgAgente_Click(index As Integer)
     miSQL = ""
     Set frmAg = New frmFacAgentesCom
     frmAg.DatosADevolverBusqueda = "0|1|"
@@ -25733,13 +25735,13 @@ Private Sub imgAgente_Click(Index As Integer)
     
      If miSQL <> "" Then
          
-        txtAgente(Index).Text = RecuperaValor(miSQL, 1)
-        txtDescAgente(Index).Text = RecuperaValor(miSQL, 2)
+        txtAgente(index).Text = RecuperaValor(miSQL, 1)
+        txtDescAgente(index).Text = RecuperaValor(miSQL, 2)
        
     End If
 End Sub
 
-Private Sub imgAlma_Click(Index As Integer)
+Private Sub imgAlma_Click(index As Integer)
     
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
@@ -25760,17 +25762,17 @@ Private Sub imgAlma_Click(Index As Integer)
     Screen.MousePointer = vbDefault
     If miSQL <> "" Then
         
-        Me.txtAlma(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescAlma(Index).Text = RecuperaValor(miSQL, 2)
-        PonerFoco txtAlma(Index)
-        If Index = 0 Then cargarUltimoIventario
+        Me.txtAlma(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescAlma(index).Text = RecuperaValor(miSQL, 2)
+        PonerFoco txtAlma(index)
+        If index = 0 Then cargarUltimoIventario
     End If
 End Sub
 
-Private Sub imgArticulo_Click(Index As Integer)
+Private Sub imgArticulo_Click(index As Integer)
     
     miSQL = ""
-    If Index = 18 Then
+    If index = 18 Then
         'Costes euler
             Set FrmArtEul = New frmAlmArticuEUL
             'frmArt.DatosADevolverBusqueda3 = "@1@" 'Poner en modo busqueda
@@ -25794,23 +25796,23 @@ Private Sub imgArticulo_Click(Index As Integer)
     
     End If
     If miSQL <> "" Then
-        Me.txtArticulo(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescArticulo(Index).Text = RecuperaValor(miSQL, 2)
-        PonerFoco txtArticulo(Index)
-        If Index = 0 Then cargarUltimoIventario
-        If Index = 8 Then CargaPrecioCompraProve
-        If Index = 6 Then CargaPrecioCosteArticulo CByte(Index)
-        If Index = 18 Then CargaPrecioCosteArticulo CByte(Index)
+        Me.txtArticulo(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescArticulo(index).Text = RecuperaValor(miSQL, 2)
+        PonerFoco txtArticulo(index)
+        If index = 0 Then cargarUltimoIventario
+        If index = 8 Then CargaPrecioCompraProve
+        If index = 6 Then CargaPrecioCosteArticulo CByte(index)
+        If index = 18 Then CargaPrecioCosteArticulo CByte(index)
     End If
 End Sub
 
 
-Private Sub imgAyuda_Click(Index As Integer)
+Private Sub imgayuda_Click(index As Integer)
 Dim Ayuda As String
 
     'Sera las ayuda. Tampoco queiero la biblia, pero,
     'si un "pelin" de ayuda no me vendria mal a mi, imaginemos a el cliente final
-    Select Case Index
+    Select Case index
     Case 0
         'recalculo ultimo precio compra
         Ayuda = vbCrLf & " Fecha:    Fecha a partir de la cual NO se modificará el UPC"
@@ -25864,12 +25866,12 @@ Dim Ayuda As String
         Ayuda = vbCrLf & "Presupuestos:  O normal o presupuesto  "
     End Select
     
-    Ayuda = imgAyuda(Index).ToolTipText & vbCrLf & String(40, "=") & vbCrLf & Ayuda
+    Ayuda = imgayuda(index).ToolTipText & vbCrLf & String(40, "=") & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 End Sub
 
-Private Sub imgBanco_Click(Index As Integer)
+Private Sub imgBanco_Click(index As Integer)
  
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
@@ -25890,13 +25892,13 @@ Private Sub imgBanco_Click(Index As Integer)
     Screen.MousePointer = vbDefault
     If miSQL <> "" Then
         
-        Me.txtBanco(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescBanco(Index).Text = RecuperaValor(miSQL, 2)
-        PonerFoco txtBanco(Index)
+        Me.txtBanco(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescBanco(index).Text = RecuperaValor(miSQL, 2)
+        PonerFoco txtBanco(index)
     End If
 End Sub
 
-Private Sub imgCC_Click(Index As Integer)
+Private Sub imgCC_Click(index As Integer)
     Screen.MousePointer = vbHourglass
     miSQL = ""
     Set frmB = New frmBuscaGrid
@@ -25910,63 +25912,63 @@ Private Sub imgCC_Click(Index As Integer)
     frmB.Show vbModal
     Set frmB = Nothing
     If miSQL <> "" Then
-        txtCCoste(Index).Text = RecuperaValor(miSQL, 1)
-        txtDescCC(Index).Text = RecuperaValor(miSQL, 2)
+        txtCCoste(index).Text = RecuperaValor(miSQL, 1)
+        txtDescCC(index).Text = RecuperaValor(miSQL, 2)
     End If
 
 End Sub
 
-Private Sub imgCheck_Click(Index As Integer)
+Private Sub imgCheck_Click(index As Integer)
 Dim Cual As Byte
 Dim Chec As Boolean
 
-    If Index < 6 Then
+    If index < 6 Then
         'trabajadores....
-        Cual = Index \ 2
+        Cual = index \ 2
         Chec = True
-        If (Index Mod 2) = 0 Then Chec = False
+        If (index Mod 2) = 0 Then Chec = False
     
         For NumRegElim = 1 To ListView1(Cual).ListItems.Count
             ListView1(Cual).ListItems(NumRegElim).Checked = Chec
         Next
         
-    ElseIf Index < 8 Then
+    ElseIf index < 8 Then
         'INCIDENCIAS
         ' 6-7
         Chec = True
-        If (Index Mod 2) = 0 Then Chec = False
+        If (index Mod 2) = 0 Then Chec = False
     
         For NumRegElim = 1 To lwInci.ListItems.Count
             lwInci.ListItems(NumRegElim).Checked = Chec
         Next
         
-    ElseIf Index < 10 Then
+    ElseIf index < 10 Then
         'Familias
         ' 8-9
         Chec = True
-        If (Index Mod 2) = 1 Then Chec = False
+        If (index Mod 2) = 1 Then Chec = False
     
         For NumRegElim = 1 To lwFam.ListItems.Count
             lwFam.ListItems(NumRegElim).Checked = Chec
         Next
         
-    ElseIf Index < 12 Then
+    ElseIf index < 12 Then
         'Facturas
         '10-11
         Chec = False
-        If (Index Mod 2) = 1 Then Chec = True
+        If (index Mod 2) = 1 Then Chec = True
     
          
         For NumRegElim = 1 To lwFact.ListItems.Count
             lwFact.ListItems(NumRegElim).Checked = Chec
         Next
     
-    ElseIf Index < 14 Then
+    ElseIf index < 14 Then
         'Incidencias flotas
         '12-13
         Cual = 4
         Chec = True
-        If (Index Mod 2) = 0 Then Chec = False
+        If (index Mod 2) = 0 Then Chec = False
     
         For NumRegElim = 1 To ListView1(Cual).ListItems.Count
             ListView1(Cual).ListItems(NumRegElim).Checked = Chec
@@ -25976,7 +25978,7 @@ Dim Chec As Boolean
         '12-13
         Cual = 5
         Chec = True
-        If (Index Mod 2) = 0 Then Chec = False
+        If (index Mod 2) = 0 Then Chec = False
     
         For NumRegElim = 1 To ListView1(Cual).ListItems.Count
             ListView1(Cual).ListItems(NumRegElim).Checked = Chec
@@ -25987,7 +25989,7 @@ End Sub
 
 
 
-Private Sub imgCliente_Click(Index As Integer)
+Private Sub imgCliente_Click(index As Integer)
     Screen.MousePointer = vbHourglass
     miSQL = ""
     Set frmCli = New frmFacClientes3
@@ -25995,12 +25997,12 @@ Private Sub imgCliente_Click(Index As Integer)
     frmCli.Show vbModal
     Set frmCli = Nothing
     If miSQL <> "" Then
-        Me.txtCliente(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescClie(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtCliente(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescClie(index).Text = RecuperaValor(miSQL, 2)
     End If
 End Sub
 
-Private Sub imgCommonDialog_Click(Index As Integer)
+Private Sub imgCommonDialog_Click(index As Integer)
 On Error GoTo eDialog
     cd1.CancelError = True
     cd1.DefaultExt = ".csv" 'extension por defecto
@@ -26012,10 +26014,10 @@ On Error GoTo eDialog
     
 eDialog:
     If Err.Number <> 0 Then Err.Clear
-    If cd1.FileName <> "" Then Me.TxtFichero(Index).Text = cd1.FileName
+    If cd1.FileName <> "" Then Me.TxtFichero(index).Text = cd1.FileName
 End Sub
 
-Private Sub imgFamilia_Click(Index As Integer)
+Private Sub imgFamilia_Click(index As Integer)
     miSQL = ""
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
@@ -26034,42 +26036,42 @@ Private Sub imgFamilia_Click(Index As Integer)
     Screen.MousePointer = vbDefault
     If miSQL <> "" Then
         
-        Me.txtFamia(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescFamia(Index).Text = RecuperaValor(miSQL, 2)
-        PonerFoco txtFamia(Index)
+        Me.txtFamia(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescFamia(index).Text = RecuperaValor(miSQL, 2)
+        PonerFoco txtFamia(index)
         miSQL = ""
     End If
 End Sub
 
 
-Private Sub imgFecha_Click(Index As Integer)
+Private Sub imgFecha_Click(index As Integer)
    miSQL = ""
    Set frmC = New frmCal
    frmC.Fecha = Now
-   If txtFecha(Index).Text <> "" Then
-        If IsDate(txtFecha(Index).Text) Then frmC.Fecha = CDate(txtFecha(Index).Text)
+   If txtFecha(index).Text <> "" Then
+        If IsDate(txtFecha(index).Text) Then frmC.Fecha = CDate(txtFecha(index).Text)
    End If
    frmC.Show vbModal
    Set frmC = Nothing
-   If miSQL <> "" Then txtFecha(Index).Text = miSQL
+   If miSQL <> "" Then txtFecha(index).Text = miSQL
 End Sub
 
-Private Sub imgForPa_Click(Index As Integer)
+Private Sub imgForPa_Click(index As Integer)
     miSQL = ""
     Set frmFP = New frmFacFormasPago
     frmFP.DatosADevolverBusqueda = "0|1|"
     frmFP.Show vbModal
     Set frmFP = Nothing
     If miSQL <> "" Then
-        Me.txtForpa(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescForpa(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtForpa(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescForpa(index).Text = RecuperaValor(miSQL, 2)
         miSQL = ""
-        PonerFoco txtForpa(Index)
+        PonerFoco txtForpa(index)
     End If
 
 End Sub
 
-Private Sub imgMarca_Click(Index As Integer)
+Private Sub imgMarca_Click(index As Integer)
     
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
@@ -26089,9 +26091,9 @@ Private Sub imgMarca_Click(Index As Integer)
     Screen.MousePointer = vbDefault
     If miSQL <> "" Then
         
-        Me.txtmarca(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescmarca(Index).Text = RecuperaValor(miSQL, 2)
-        If Index = 0 Then
+        Me.txtmarca(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescmarca(index).Text = RecuperaValor(miSQL, 2)
+        If index = 0 Then
             'PonerFoco txtmarca(1)
         Else
             'PonerFocoBtn Me.cmdPropuestaPedido
@@ -26099,47 +26101,47 @@ Private Sub imgMarca_Click(Index As Integer)
     End If
 End Sub
 
-Private Sub imgModelo_Click(Index As Integer)
+Private Sub imgModelo_Click(index As Integer)
     miSQL = ""
     Set frmModeloTel = New frmTelefoniaModelos
     frmModeloTel.DatosADevolverBusqueda = "0|1|"
     frmModeloTel.Show vbModal
     Set frmModeloTel = Nothing
     If miSQL <> "" Then
-        Me.txtModelo(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescModelo(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtModelo(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescModelo(index).Text = RecuperaValor(miSQL, 2)
         miSQL = ""
         PonerFoco txtNumEntero(0)
     End If
 End Sub
 
-Private Sub imgProveedor_Click(Index As Integer)
+Private Sub imgProveedor_Click(index As Integer)
     miSQL = ""
     Set frmPr = New frmComProveedores
     frmPr.DatosADevolverBusqueda = "0|1|"
     frmPr.Show vbModal
     Set frmPr = Nothing
     If miSQL <> "" Then
-        Me.txtCodProve(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescProve(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtCodProve(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescProve(index).Text = RecuperaValor(miSQL, 2)
         miSQL = ""
-        PonerFoco txtCodProve(Index)
-        If Index = 8 Then CargaPrecioCompraProve
-        If Index = 13 Then CargarFamiliasProveedor
-        If Index = 29 Then HacerSimulacionPedidoProveedor
+        PonerFoco txtCodProve(index)
+        If index = 8 Then CargaPrecioCompraProve
+        If index = 13 Then CargarFamiliasProveedor
+        If index = 29 Then HacerSimulacionPedidoProveedor
     End If
 End Sub
 
 
-Private Sub imgSitua_Click(Index As Integer)
+Private Sub imgSitua_Click(index As Integer)
     miSQL = ""
     
     
     'No me deja crear mas controloes. Aprovecho los que tengo
-    If Index = 4 Or Index = 5 Then
+    If index = 4 Or index = 5 Then
         Set frmR = New frmFacRutas
         frmR.DatosADevolverBusqueda = "0"
-        If Not IsNumeric(txtSitua(Index)) Then txtSitua(Index).Text = ""
+        If Not IsNumeric(txtSitua(index)) Then txtSitua(index).Text = ""
         frmR.Show vbModal
         Set frmR = Nothing
     Else
@@ -26149,28 +26151,28 @@ Private Sub imgSitua_Click(Index As Integer)
         Set frmS = Nothing
     End If
     If miSQL <> "" Then
-        Me.txtSitua(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDesSitua(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtSitua(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDesSitua(index).Text = RecuperaValor(miSQL, 2)
         miSQL = ""
-        PonerFoco txtSitua(Index)
+        PonerFoco txtSitua(index)
     End If
 End Sub
 
-Private Sub imgTraba_Click(Index As Integer)
+Private Sub imgTraba_Click(index As Integer)
     miSQL = ""
     Set frmT = New frmAdmTrabajadores
     frmT.DatosADevolverBusqueda = "0|1|"
     frmT.Show vbModal
     Set frmT = Nothing
     If miSQL <> "" Then
-        Me.txtCodTraba(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescTraba(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtCodTraba(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescTraba(index).Text = RecuperaValor(miSQL, 2)
         miSQL = ""
-        PonerFoco txtCodTraba(Index)
+        PonerFoco txtCodTraba(index)
     End If
 End Sub
 
-Private Sub imgVehiculo_Click(Index As Integer)
+Private Sub imgVehiculo_Click(index As Integer)
     miSQL = ""
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
@@ -26189,32 +26191,32 @@ Private Sub imgVehiculo_Click(Index As Integer)
     Screen.MousePointer = vbDefault
     If miSQL <> "" Then
         
-        Me.txtVehiculo(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescVehiculo(Index).Text = RecuperaValor(miSQL, 2)
-        PonerFoco txtVehiculo(Index)
+        Me.txtVehiculo(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescVehiculo(index).Text = RecuperaValor(miSQL, 2)
+        PonerFoco txtVehiculo(index)
         miSQL = ""
     End If
 
 
 End Sub
 
-Private Sub imgZona_Click(Index As Integer)
+Private Sub imgZona_Click(index As Integer)
     miSQL = ""
     Set frmZ = New frmFacZonas
     frmZ.DatosADevolverBusqueda = "0|1|"
     frmZ.Show vbModal
     Set frmZ = Nothing
     If miSQL <> "" Then
-        Me.txtZona(Index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescZona(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtZona(index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescZona(index).Text = RecuperaValor(miSQL, 2)
         miSQL = ""
-        PonerFoco txtZona(Index)
+        PonerFoco txtZona(index)
     End If
 
 End Sub
 
-Private Sub ListView1_DblClick(Index As Integer)
-    If Index = 3 Then cmdBanco_Click 1
+Private Sub ListView1_DblClick(index As Integer)
+    If index = 3 Then cmdBanco_Click 1
 End Sub
 
 
@@ -26228,57 +26230,57 @@ Private Sub lwPrecUC_KeyPress(KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub optArtMasVendidos_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub optArtMasVendidos_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub optCtrlStock_Click(Index As Integer)
+Private Sub optCtrlStock_Click(index As Integer)
     FrameVtasPer.visible = optCtrlStock(2).Value
 End Sub
 
-Private Sub optExporCliPro_Click(Index As Integer)
-    FrameExpClientes.visible = Index = 0
-    FrameEmailProv.visible = Index <> 0
-    chkVarios(43).visible = Index = 1
-    lblDpto(97).visible = Index = 0
-    cboMarcaaEnvioCorreo(0).visible = Index = 0
+Private Sub optExporCliPro_Click(index As Integer)
+    FrameExpClientes.visible = index = 0
+    FrameEmailProv.visible = index <> 0
+    chkVarios(43).visible = index = 1
+    lblDpto(97).visible = index = 0
+    cboMarcaaEnvioCorreo(0).visible = index = 0
     
-    If Index = 0 Then
+    If index = 0 Then
         PonerFoco Me.txtAgente(16)
     Else
         PonerFoco txtForpa(2)
     End If
 End Sub
 
-Private Sub optModEstVta_Click(Index As Integer)
-    Me.FrameMoDVtaArt(Index).visible = True
+Private Sub optModEstVta_Click(index As Integer)
+    Me.FrameMoDVtaArt(index).visible = True
     NumRegElim = 0
-    If Index = 0 Then NumRegElim = 1
+    If index = 0 Then NumRegElim = 1
     Me.FrameMoDVtaArt(NumRegElim).visible = False
     PonerFoco txtFecha(7)
 End Sub
 
-Private Sub optPrevision_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub optPrevision_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
 
 
-Private Sub optTipoPrecio_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub optTipoPrecio_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub optVarios_Click(Index As Integer)
+Private Sub optVarios_Click(index As Integer)
     'Orden 2 visible si orden1 es Poblacion
-    If Index = 3 Or Index = 2 Then
-        FrameOrden2.visible = Index = 3
+    If index = 3 Or index = 2 Then
+        FrameOrden2.visible = index = 3
     End If
         
  
         
 End Sub
 
-Private Sub optVarios_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub optVarios_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
@@ -26287,134 +26289,134 @@ Private Sub Text1_KeyPress(KeyAscii As Integer)
 End Sub
 
 
-Private Sub txtAgente_GotFocus(Index As Integer)
-    ConseguirFoco txtAgente(Index), 3
+Private Sub txtAgente_GotFocus(index As Integer)
+    ConseguirFoco txtAgente(index), 3
 End Sub
 
-Private Sub txtAgente_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAgente_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgAgente_Click Index
+        If KeyCode = 65 Then imgAgente_Click index
     End If
 End Sub
 
-Private Sub txtAgente_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAgente_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtAgente_LostFocus(Index As Integer)
+Private Sub txtAgente_LostFocus(index As Integer)
     miSQL = ""
-    txtAgente(Index).Text = Trim(txtAgente(Index).Text)
-    If txtAgente(Index).Text <> "" Then
-        If PonerFormatoEntero(txtAgente(Index)) Then
+    txtAgente(index).Text = Trim(txtAgente(index).Text)
+    If txtAgente(index).Text <> "" Then
+        If PonerFormatoEntero(txtAgente(index)) Then
             
-            miSQL = DevuelveDesdeBD(conAri, "nomagent", "sagent", "codagent", txtAgente(Index).Text)
-            If miSQL = "" Then MsgBox "No existe el agente: " & txtArticulo(Index).Text, vbExclamation
+            miSQL = DevuelveDesdeBD(conAri, "nomagent", "sagent", "codagent", txtAgente(index).Text)
+            If miSQL = "" Then MsgBox "No existe el agente: " & txtArticulo(index).Text, vbExclamation
         End If
     End If
-    Me.txtDescAgente(Index).Text = miSQL
+    Me.txtDescAgente(index).Text = miSQL
     miSQL = ""
 End Sub
 
-Private Sub txtArticulo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtArticulo_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgArticulo_Click Index
+        If KeyCode = 65 Then imgArticulo_Click index
     End If
 End Sub
 
-Private Sub txtBanco_GotFocus(Index As Integer)
-    ConseguirFoco txtBanco(Index), 3
+Private Sub txtBanco_GotFocus(index As Integer)
+    ConseguirFoco txtBanco(index), 3
 End Sub
 
-Private Sub txtBanco_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtBanco_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtBanco_LostFocus(Index As Integer)
+Private Sub txtBanco_LostFocus(index As Integer)
     miSQL = ""
-    txtBanco(Index).Text = Trim(txtBanco(Index).Text)
-    If txtBanco(Index).Text <> "" Then
-        If Not IsNumeric(txtBanco(Index).Text) Then
+    txtBanco(index).Text = Trim(txtBanco(index).Text)
+    If txtBanco(index).Text <> "" Then
+        If Not IsNumeric(txtBanco(index).Text) Then
             MsgBox "Campo codigo banco debe ser numérico", vbExclamation
 
         Else
-            miSQL = DevuelveDesdeBD(conAri, "nombanpr", "sbanpr", "codbanpr", txtBanco(Index).Text, "N")
-            If miSQL = "" Then MsgBox "No existe el banco : " & txtBanco(Index).Text, vbExclamation
+            miSQL = DevuelveDesdeBD(conAri, "nombanpr", "sbanpr", "codbanpr", txtBanco(index).Text, "N")
+            If miSQL = "" Then MsgBox "No existe el banco : " & txtBanco(index).Text, vbExclamation
                 
             
         End If
         
     End If
-    Me.txtDescBanco(Index).Text = miSQL
+    Me.txtDescBanco(index).Text = miSQL
     If miSQL = "" Then
-        If txtBanco(Index).Text <> "" Then
-            txtBanco(Index).Text = ""
-            PonerFoco txtBanco(Index)
+        If txtBanco(index).Text <> "" Then
+            txtBanco(index).Text = ""
+            PonerFoco txtBanco(index)
         End If
     End If
 End Sub
 
 
 
-Private Sub txtCCoste_GotFocus(Index As Integer)
-     ConseguirFoco txtCCoste(Index), 3
+Private Sub txtCCoste_GotFocus(index As Integer)
+     ConseguirFoco txtCCoste(index), 3
 End Sub
 
-Private Sub txtCCoste_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtCCoste_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgCC_Click Index
+        If KeyCode = 65 Then imgCC_Click index
     End If
 End Sub
 
-Private Sub txtCCoste_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtCCoste_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtCCoste_LostFocus(Index As Integer)
+Private Sub txtCCoste_LostFocus(index As Integer)
     miSQL = ""
-    txtCCoste(Index).Text = Trim(txtCCoste(Index).Text)
-    If txtCCoste(Index).Text <> "" Then
-        miSQL = DevuelveDesdeBD(conConta, "nomccost", IIf(vParamAplic.ContabilidadNueva, "ccoste", "cabccost"), "codccost", txtCCoste(Index).Text, "T")
-        If miSQL = "" Then MsgBox "No existe el centro de coste : " & txtCCoste(Index).Text, vbExclamation
+    txtCCoste(index).Text = Trim(txtCCoste(index).Text)
+    If txtCCoste(index).Text <> "" Then
+        miSQL = DevuelveDesdeBD(conConta, "nomccost", IIf(vParamAplic.ContabilidadNueva, "ccoste", "cabccost"), "codccost", txtCCoste(index).Text, "T")
+        If miSQL = "" Then MsgBox "No existe el centro de coste : " & txtCCoste(index).Text, vbExclamation
 
     End If
-    txtDescCC(Index).Text = miSQL
+    txtDescCC(index).Text = miSQL
 End Sub
 
-Private Sub txtCliente_GotFocus(Index As Integer)
-    ConseguirFoco txtCliente(Index), 3
+Private Sub txtCliente_GotFocus(index As Integer)
+    ConseguirFoco txtCliente(index), 3
 End Sub
 
-Private Sub txtCliente_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtCliente_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgCliente_Click Index
+        If KeyCode = 65 Then imgCliente_Click index
     End If
 End Sub
 
-Private Sub txtCliente_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtCliente_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtCliente_LostFocus(Index As Integer)
+Private Sub txtCliente_LostFocus(index As Integer)
 Dim Descri As String
     
     Descri = ""
-    txtCliente(Index).Text = Trim(txtCliente(Index).Text)
-    If txtCliente(Index).Text <> "" Then
-        If Not IsNumeric(txtCliente(Index).Text) Then
+    txtCliente(index).Text = Trim(txtCliente(index).Text)
+    If txtCliente(index).Text <> "" Then
+        If Not IsNumeric(txtCliente(index).Text) Then
             MsgBox "Campo codigo cliente debe ser numérico", vbExclamation
-            PonerFoco txtCliente(Index)
+            PonerFoco txtCliente(index)
         Else
-            Descri = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtCliente(Index).Text, "N")
+            Descri = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtCliente(index).Text, "N")
             If Descri = "" Then
-                MsgBox "No existe el cliente : " & txtCliente(Index).Text, vbExclamation
+                MsgBox "No existe el cliente : " & txtCliente(index).Text, vbExclamation
             End If
         End If
     End If
-    Me.txtDescClie(Index).Text = Descri
+    Me.txtDescClie(index).Text = Descri
     
     
     
@@ -26422,91 +26424,91 @@ End Sub
 
 
 
-Private Sub txtcodactiv_GotFocus(Index As Integer)
-    ConseguirFoco txtcodactiv(Index), 3
+Private Sub txtcodactiv_GotFocus(index As Integer)
+    ConseguirFoco txtcodactiv(index), 3
 End Sub
 
-Private Sub txtcodactiv_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtcodactiv_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgActividad_Click Index
+        If KeyCode = 65 Then imgActividad_Click index
     End If
     
 End Sub
 
-Private Sub txtcodactiv_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtcodactiv_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtcodactiv_LostFocus(Index As Integer)
- txtcodactiv(Index).Text = Trim(txtcodactiv(Index).Text)
+Private Sub txtcodactiv_LostFocus(index As Integer)
+ txtcodactiv(index).Text = Trim(txtcodactiv(index).Text)
     Codigo = ""
     miSQL = ""
-    If txtcodactiv(Index).Text <> "" Then
-        If IsNumeric(txtcodactiv(Index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nomactiv", "sactiv", "codactiv", txtcodactiv(Index).Text, "N")
+    If txtcodactiv(index).Text <> "" Then
+        If IsNumeric(txtcodactiv(index).Text) Then
+            Codigo = DevuelveDesdeBD(conAri, "nomactiv", "sactiv", "codactiv", txtcodactiv(index).Text, "N")
         Else
             miSQL = "Campo numerico"
         End If
     End If
-    Me.txtDescActiv(Index).Text = Codigo
+    Me.txtDescActiv(index).Text = Codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
-        txtcodactiv(Index).Text = ""
-        PonerFoco txtcodactiv(Index)
+        txtcodactiv(index).Text = ""
+        PonerFoco txtcodactiv(index)
     End If
 End Sub
 
-Private Sub txtCodProve_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtCodProve_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 
 
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgProveedor_Click Index
+        If KeyCode = 65 Then imgProveedor_Click index
     End If
     
     
 End Sub
 
-Private Sub txtCodTraba_GotFocus(Index As Integer)
-    ConseguirFoco txtFamia(Index), 3
+Private Sub txtCodTraba_GotFocus(index As Integer)
+    ConseguirFoco txtFamia(index), 3
 End Sub
 
 
-Private Sub txtCodTraba_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtCodTraba_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtCodTraba_LostFocus(Index As Integer)
-    txtCodTraba(Index).Text = Trim(txtCodTraba(Index).Text)
+Private Sub txtCodTraba_LostFocus(index As Integer)
+    txtCodTraba(index).Text = Trim(txtCodTraba(index).Text)
       
     Codigo = ""
     miSQL = ""
-    If txtCodTraba(Index).Text <> "" Then
-        If IsNumeric(txtCodTraba(Index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", txtCodTraba(Index).Text, "N")
+    If txtCodTraba(index).Text <> "" Then
+        If IsNumeric(txtCodTraba(index).Text) Then
+            Codigo = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", txtCodTraba(index).Text, "N")
             If Codigo = "" Then MsgBox "El codigo no pertence a ningun trabajador", vbExclamation
         Else
             miSQL = "Campo numerico"
         End If
     End If
      
-    Me.txtDescTraba(Index).Text = Codigo
+    Me.txtDescTraba(index).Text = Codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
-        txtCodTraba(Index).Text = ""
-        PonerFoco txtFamia(Index)
+        txtCodTraba(index).Text = ""
+        PonerFoco txtFamia(index)
     End If
     
 End Sub
 
-Private Sub txtContadorAgua_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtContadorAgua_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtContadorAgua_LostFocus(Index As Integer)
-    If Index = 1 Then Exit Sub
+Private Sub txtContadorAgua_LostFocus(index As Integer)
+    If index = 1 Then Exit Sub
     
     
     txtContadorAgua(0).Text = Trim(txtContadorAgua(0).Text)
@@ -26544,56 +26546,56 @@ Private Sub txtContadorAgua_LostFocus(Index As Integer)
     
 End Sub
 
-Private Sub txtCpostal_GotFocus(Index As Integer)
-    ConseguirFoco txtCpostal(Index), 3
+Private Sub txtCpostal_GotFocus(index As Integer)
+    ConseguirFoco txtCpostal(index), 3
 End Sub
 
-Private Sub txtCpostal_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtCpostal_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtCpostal_LostFocus(Index As Integer)
-    If PonerFormatoEntero(txtAgente(Index)) Then txtCpostal(Index).Text = ""
+Private Sub txtCpostal_LostFocus(index As Integer)
+    If PonerFormatoEntero(txtAgente(index)) Then txtCpostal(index).Text = ""
 End Sub
 
-Private Sub txtDecimal_GotFocus(Index As Integer)
-    ConseguirFoco txtDecimal(Index), 3
+Private Sub txtDecimal_GotFocus(index As Integer)
+    ConseguirFoco txtDecimal(index), 3
 End Sub
 
-Private Sub txtDecimal_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtDecimal_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtDecimal_LostFocus(Index As Integer)
+Private Sub txtDecimal_LostFocus(index As Integer)
 Dim b As Boolean
-    txtDecimal(Index).Text = Trim(txtDecimal(Index).Text)
-    If txtDecimal(Index).Text <> "" Then
-        If Index = 0 Or Index = 9 Or Index = 17 Or Index = 20 Then
-            b = PonerFormatoDecimal(txtDecimal(Index), 2)
+    txtDecimal(index).Text = Trim(txtDecimal(index).Text)
+    If txtDecimal(index).Text <> "" Then
+        If index = 0 Or index = 9 Or index = 17 Or index = 20 Then
+            b = PonerFormatoDecimal(txtDecimal(index), 2)
         Else
-            If Index = 18 Then
+            If index = 18 Then
                 'Decimal 2
-                b = PonerFormatoDecimal(txtDecimal(Index), 4)
+                b = PonerFormatoDecimal(txtDecimal(index), 4)
             Else
-                b = PonerFormatoDecimal(txtDecimal(Index), 3)
+                b = PonerFormatoDecimal(txtDecimal(index), 3)
             End If
         End If
         If b Then
 
         Else
-            txtDecimal(Index).Text = ""
+            txtDecimal(index).Text = ""
         End If
     End If
     
     'EULER costes
-    If Index = 19 Or Index = 20 Then
+    If index = 19 Or index = 20 Then
         txtDecimal(21).Text = ""
         If txtDecimal(19).Text <> "" Then
             If txtDecimal(20).Text <> "" Then txtDecimal(21).Text = Format(ImporteFormateado(txtDecimal(19).Text) * ImporteFormateado(txtDecimal(20).Text), FormatoImporte)
         End If
         
     Else
-        If Index = 22 Or Index = 23 Then
+        If index = 22 Or index = 23 Then
             txtDecimal(24).Text = ""
             If txtDecimal(22).Text <> "" Then
                 If txtDecimal(22).Text <> "" Then txtDecimal(24).Text = Format(ImporteFormateado(txtDecimal(23).Text) * ImporteFormateado(txtDecimal(22).Text), FormatoImporte)
@@ -26604,64 +26606,64 @@ End Sub
 
 
 
-Private Sub txtDescArticulo_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtDescArticulo_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtDescArticulo_LostFocus(Index As Integer)
-    If Index = 18 Then PonerFoco txtDecimal(19)
+Private Sub txtDescArticulo_LostFocus(index As Integer)
+    If index = 18 Then PonerFoco txtDecimal(19)
 End Sub
 
-Private Sub txtFamia_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtFamia_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgFamilia_Click Index
+        If KeyCode = 65 Then imgFamilia_Click index
     End If
 End Sub
 
 
 
-Private Sub txtForpa_GotFocus(Index As Integer)
-     ConseguirFoco txtmarca(Index), 3
+Private Sub txtForpa_GotFocus(index As Integer)
+     ConseguirFoco txtmarca(index), 3
 End Sub
 
-Private Sub txtForpa_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtForpa_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtForpa_LostFocus(Index As Integer)
+Private Sub txtForpa_LostFocus(index As Integer)
     miSQL = ""
-    txtForpa(Index).Text = Trim(txtForpa(Index).Text)
-    If txtForpa(Index).Text <> "" Then
-        If PonerFormatoEntero(txtForpa(Index)) Then
+    txtForpa(index).Text = Trim(txtForpa(index).Text)
+    If txtForpa(index).Text <> "" Then
+        If PonerFormatoEntero(txtForpa(index)) Then
             
-            miSQL = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", txtForpa(Index).Text)
-            If miSQL = "" Then MsgBox "No existe la forma de pago: " & txtForpa(Index).Text, vbExclamation
+            miSQL = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", txtForpa(index).Text)
+            If miSQL = "" Then MsgBox "No existe la forma de pago: " & txtForpa(index).Text, vbExclamation
         Else
-            txtForpa(Index).Text = ""
+            txtForpa(index).Text = ""
         End If
     End If
-    Me.txtDescForpa(Index).Text = miSQL
+    Me.txtDescForpa(index).Text = miSQL
     miSQL = ""
 
 End Sub
 
-Private Sub txtmarca_GotFocus(Index As Integer)
-    ConseguirFoco txtmarca(Index), 3
+Private Sub txtmarca_GotFocus(index As Integer)
+    ConseguirFoco txtmarca(index), 3
 End Sub
 
-Private Sub txtmarca_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtmarca_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtmarca_LostFocus(Index As Integer)
-    txtmarca(Index).Text = Trim(txtmarca(Index).Text)
+Private Sub txtmarca_LostFocus(index As Integer)
+    txtmarca(index).Text = Trim(txtmarca(index).Text)
     Codigo = ""
     miSQL = ""
 
-    If txtmarca(Index).Text <> "" Then
-        If IsNumeric(txtmarca(Index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nommarca", "smarca", "codmarca", txtmarca(Index).Text, "N")
+    If txtmarca(index).Text <> "" Then
+        If IsNumeric(txtmarca(index).Text) Then
+            Codigo = DevuelveDesdeBD(conAri, "nommarca", "smarca", "codmarca", txtmarca(index).Text, "N")
             If Codigo = "" Then MsgBox "El código no pertence a ninguna marca", vbExclamation
             
         Else
@@ -26669,123 +26671,123 @@ Private Sub txtmarca_LostFocus(Index As Integer)
         End If
     End If
     
-    Me.txtDescmarca(Index).Text = Codigo
+    Me.txtDescmarca(index).Text = Codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
-        If Index = 0 Then 'Obligado marca
-            txtmarca(Index).Text = ""
-            PonerFoco txtmarca(Index)
+        If index = 0 Then 'Obligado marca
+            txtmarca(index).Text = ""
+            PonerFoco txtmarca(index)
         End If
     End If
 End Sub
 
 
 
-Private Sub txtModelo_GotFocus(Index As Integer)
-    ConseguirFoco txtModelo(Index), 3
+Private Sub txtModelo_GotFocus(index As Integer)
+    ConseguirFoco txtModelo(index), 3
 End Sub
 
-Private Sub txtModelo_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtModelo_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtModelo_LostFocus(Index As Integer)
+Private Sub txtModelo_LostFocus(index As Integer)
     miSQL = ""
-    txtModelo(Index).Text = Trim(txtModelo(Index).Text)
-    If txtModelo(Index).Text <> "" Then
-        If Not IsNumeric(txtModelo(Index).Text) Then
+    txtModelo(index).Text = Trim(txtModelo(index).Text)
+    If txtModelo(index).Text <> "" Then
+        If Not IsNumeric(txtModelo(index).Text) Then
             MsgBox "Campo codigo modelo debe ser numérico", vbExclamation
 
         Else
-            miSQL = DevuelveDesdeBD(conAri, "descripcion", "stfnomodel", "codmodelo", txtModelo(Index).Text, "N")
-            If miSQL = "" Then MsgBox "No existe el modelo : " & txtModelo(Index).Text, vbExclamation
+            miSQL = DevuelveDesdeBD(conAri, "descripcion", "stfnomodel", "codmodelo", txtModelo(index).Text, "N")
+            If miSQL = "" Then MsgBox "No existe el modelo : " & txtModelo(index).Text, vbExclamation
             
         End If
         If miSQL = "" Then
-            Me.txtModelo(Index).Text = ""
-            PonerFoco txtModelo(Index)
+            Me.txtModelo(index).Text = ""
+            PonerFoco txtModelo(index)
         End If
     End If
-    Me.txtDescModelo(Index).Text = miSQL
+    Me.txtDescModelo(index).Text = miSQL
     
 End Sub
 
-Private Sub txtNumEntero_GotFocus(Index As Integer)
-    ConseguirFoco txtNumEntero(Index), 3
+Private Sub txtNumEntero_GotFocus(index As Integer)
+    ConseguirFoco txtNumEntero(index), 3
 End Sub
 
-Private Sub txtNumEntero_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtNumEntero_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtNumEntero_LostFocus(Index As Integer)
-    txtNumEntero(Index).Text = Trim(txtNumEntero(Index).Text)
-    If txtNumEntero(Index).Text <> "" Then
-        If PonerFormatoEntero(txtNumEntero(Index)) Then
+Private Sub txtNumEntero_LostFocus(index As Integer)
+    txtNumEntero(index).Text = Trim(txtNumEntero(index).Text)
+    If txtNumEntero(index).Text <> "" Then
+        If PonerFormatoEntero(txtNumEntero(index)) Then
 
         Else
-            txtNumEntero(Index).Text = ""
+            txtNumEntero(index).Text = ""
         End If
     End If
 End Sub
 
 
 
-Private Sub txtAlma_GotFocus(Index As Integer)
-    ConseguirFoco txtAlma(Index), 3
+Private Sub txtAlma_GotFocus(index As Integer)
+    ConseguirFoco txtAlma(index), 3
 End Sub
 
 
 
-Private Sub txtAlma_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAlma_KeyPress(index As Integer, KeyAscii As Integer)
       KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtAlma_LostFocus(Index As Integer)
-    txtAlma(Index).Text = Trim(txtAlma(Index).Text)
+Private Sub txtAlma_LostFocus(index As Integer)
+    txtAlma(index).Text = Trim(txtAlma(index).Text)
     Codigo = ""
     miSQL = ""
-    If txtAlma(Index).Text <> "" Then
-        If IsNumeric(txtAlma(Index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nomalmac", "salmpr", "codalmac", txtAlma(Index).Text, "N")
+    If txtAlma(index).Text <> "" Then
+        If IsNumeric(txtAlma(index).Text) Then
+            Codigo = DevuelveDesdeBD(conAri, "nomalmac", "salmpr", "codalmac", txtAlma(index).Text, "N")
             If Codigo = "" Then miSQL = "El codigo no pertence a ningun almacén"
         Else
             miSQL = "Campo numerico"
         End If
     End If
      
-    Me.txtDescAlma(Index).Text = Codigo
+    Me.txtDescAlma(index).Text = Codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
-        txtAlma(Index).Text = ""
-        PonerFoco txtAlma(Index)
+        txtAlma(index).Text = ""
+        PonerFoco txtAlma(index)
     End If
     
-    If Index = 0 Then cargarUltimoIventario
+    If index = 0 Then cargarUltimoIventario
 End Sub
-Private Sub txtanyo_GotFocus(Index As Integer)
-     ConseguirFoco txtAnyo(Index), 3
+Private Sub txtanyo_GotFocus(index As Integer)
+     ConseguirFoco txtAnyo(index), 3
 End Sub
 
-Private Sub txtanyo_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtanyo_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 
 End Sub
 
-Private Sub txtanyo_LostFocus(Index As Integer)
+Private Sub txtanyo_LostFocus(index As Integer)
     
-    txtAnyo(Index).Text = Trim(txtAnyo(Index).Text)
-    If txtAnyo(Index).Text <> "" Then
-        If PonerFormatoEntero(txtAnyo(Index)) Then
-            If Val(txtAnyo(Index).Text) < 1000 Then
+    txtAnyo(index).Text = Trim(txtAnyo(index).Text)
+    If txtAnyo(index).Text <> "" Then
+        If PonerFormatoEntero(txtAnyo(index)) Then
+            If Val(txtAnyo(index).Text) < 1000 Then
                 MsgBox "Año incorrecto", vbExclamation
-                txtAnyo(Index).Text = ""
+                txtAnyo(index).Text = ""
             End If
         Else
-            txtAnyo(Index).Text = ""
+            txtAnyo(index).Text = ""
         End If
     End If
-    If Index = 0 Then PrecargaSaldosBanco
+    If index = 0 Then PrecargaSaldosBanco
 End Sub
 
 
@@ -27692,47 +27694,47 @@ Dim N As Node
     Set miRsAux = Nothing
 End Sub
 
-Private Sub txtArticulo_GotFocus(Index As Integer)
-    ConseguirFoco txtArticulo(Index), 3
+Private Sub txtArticulo_GotFocus(index As Integer)
+    ConseguirFoco txtArticulo(index), 3
 End Sub
 
-Private Sub txtArticulo_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtArticulo_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
     
 End Sub
 
 
-Private Sub txtArticulo_LostFocus(Index As Integer)
+Private Sub txtArticulo_LostFocus(index As Integer)
 Dim T As String
     
-    txtArticulo(Index).Text = Trim(txtArticulo(Index).Text)
-    If Index = 18 Then BloquearTxt txtDescArticulo(Index), True
-    If txtArticulo(Index).Text = "" Then
+    txtArticulo(index).Text = Trim(txtArticulo(index).Text)
+    If index = 18 Then BloquearTxt txtDescArticulo(index), True
+    If txtArticulo(index).Text = "" Then
         'EN blanco
-        txtDescArticulo(Index).Text = ""
+        txtDescArticulo(index).Text = ""
         Exit Sub
     End If
     
     
     T = "codartic"
-    Codigo = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", txtArticulo(Index).Text, "T", T)
+    Codigo = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", txtArticulo(index).Text, "T", T)
     If Codigo = "" Then
-        MsgBox "No existe el artículo : " & txtArticulo(Index).Text, vbExclamation
-        If Index = 0 Or Index = 5 Or Index = 18 Then
-            txtArticulo(Index).Text = ""
-            PonerFoco txtArticulo(Index)
+        MsgBox "No existe el artículo : " & txtArticulo(index).Text, vbExclamation
+        If index = 0 Or index = 5 Or index = 18 Then
+            txtArticulo(index).Text = ""
+            PonerFoco txtArticulo(index)
         End If
     Else
     
-        txtArticulo(Index).Text = T
+        txtArticulo(index).Text = T
     End If
-    Me.txtDescArticulo(Index).Text = Codigo
+    Me.txtDescArticulo(index).Text = Codigo
     Codigo = ""
-    If Index = 0 Then cargarUltimoIventario
-    If Index = 5 Then CargaPrecioCompraProve
-    If Index = 6 Then CargaPrecioCosteArticulo CByte(Index)
-    If Index = 18 Then CargaPrecioCosteArticulo CByte(Index)
-    If Index = 19 Then CargaPrecioCosteArticulo CByte(Index)
+    If index = 0 Then cargarUltimoIventario
+    If index = 5 Then CargaPrecioCompraProve
+    If index = 6 Then CargaPrecioCosteArticulo CByte(index)
+    If index = 18 Then CargaPrecioCosteArticulo CByte(index)
+    If index = 19 Then CargaPrecioCosteArticulo CByte(index)
 End Sub
 
 
@@ -27831,19 +27833,19 @@ End Sub
 
 
 
-Private Sub txtcantidad_GotFocus(Index As Integer)
-    ConseguirFoco txtcantidad(Index), 3
+Private Sub txtcantidad_GotFocus(index As Integer)
+    ConseguirFoco txtcantidad(index), 3
 End Sub
 
-Private Sub txtcantidad_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtcantidad_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
 
 
 
-Private Sub txtcantidad_LostFocus(Index As Integer)
-    If Not PonerFormatoDecimal(txtcantidad(Index), 3) Then txtcantidad(Index).Text = ""
+Private Sub txtcantidad_LostFocus(index As Integer)
+    If Not PonerFormatoDecimal(txtcantidad(index), 3) Then txtcantidad(index).Text = ""
 End Sub
 
 
@@ -28046,23 +28048,23 @@ EHacerActualizacion:
 
 End Function
 
-Private Sub txtCodProve_GotFocus(Index As Integer)
-    ConseguirFoco txtCodProve(Index), 3
+Private Sub txtCodProve_GotFocus(index As Integer)
+    ConseguirFoco txtCodProve(index), 3
 End Sub
 
-Private Sub txtCodProve_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtCodProve_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtCodProve_LostFocus(Index As Integer)
-    txtCodProve(Index).Text = Trim(txtCodProve(Index).Text)
+Private Sub txtCodProve_LostFocus(index As Integer)
+    txtCodProve(index).Text = Trim(txtCodProve(index).Text)
     Codigo = ""
     miSQL = ""
-    If txtCodProve(Index).Text <> "" Then
-        If IsNumeric(txtCodProve(Index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtCodProve(Index).Text, "N")
+    If txtCodProve(index).Text <> "" Then
+        If IsNumeric(txtCodProve(index).Text) Then
+            Codigo = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtCodProve(index).Text, "N")
             If Codigo = "" Then
-                If Index < 0 Then   'dE MOMENTO NO ES REQUERIDO PARA NINGUNO
+                If index < 0 Then   'dE MOMENTO NO ES REQUERIDO PARA NINGUNO
                     'Codprove REQUERIDO
                     miSQL = "No existe proveedor"
                 Else
@@ -28073,16 +28075,16 @@ Private Sub txtCodProve_LostFocus(Index As Integer)
             miSQL = "Campo numerico"
         End If
     End If
-    Me.txtDescProve(Index).Text = Codigo
+    Me.txtDescProve(index).Text = Codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
-        txtCodProve(Index).Text = ""
-        PonerFoco txtCodProve(Index)
+        txtCodProve(index).Text = ""
+        PonerFoco txtCodProve(index)
     End If
     
-    If Index = 8 Then CargaPrecioCompraProve
-    If Index = 13 Then CargarFamiliasProveedor
-    If Index = 29 Then HacerSimulacionPedidoProveedor
+    If index = 8 Then CargaPrecioCompraProve
+    If index = 13 Then CargarFamiliasProveedor
+    If index = 29 Then HacerSimulacionPedidoProveedor
 End Sub
 
 
@@ -28673,52 +28675,52 @@ On Error Resume Next
     If Err.Number <> 0 Then Err.Clear
 End Function
 
-Private Sub txtFamia_GotFocus(Index As Integer)
-    ConseguirFoco txtFamia(Index), 3
+Private Sub txtFamia_GotFocus(index As Integer)
+    ConseguirFoco txtFamia(index), 3
 End Sub
 
-Private Sub txtFamia_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtFamia_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtFamia_LostFocus(Index As Integer)
-    txtFamia(Index).Text = Trim(txtFamia(Index).Text)
+Private Sub txtFamia_LostFocus(index As Integer)
+    txtFamia(index).Text = Trim(txtFamia(index).Text)
     Codigo = ""
     miSQL = ""
-    If txtFamia(Index).Text <> "" Then
-        If IsNumeric(txtFamia(Index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(Index).Text, "N")
+    If txtFamia(index).Text <> "" Then
+        If IsNumeric(txtFamia(index).Text) Then
+            Codigo = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(index).Text, "N")
             If Codigo = "" Then MsgBox "El codigo no pertence a ningun familia", vbExclamation
         Else
             miSQL = "Campo numerico"
         End If
     End If
      
-    Me.txtDescFamia(Index).Text = Codigo
+    Me.txtDescFamia(index).Text = Codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
-        txtFamia(Index).Text = ""
-        PonerFoco txtFamia(Index)
+        txtFamia(index).Text = ""
+        PonerFoco txtFamia(index)
         'If Index = 16 Then
             
     End If
     
     
-    If Index = 16 And Codigo = "" Then
-        If txtFamia(Index).Text <> "" Then
-            txtFamia(Index).Text = ""
-            PonerFoco txtFamia(Index)
+    If index = 16 And Codigo = "" Then
+        If txtFamia(index).Text <> "" Then
+            txtFamia(index).Text = ""
+            PonerFoco txtFamia(index)
         End If
     End If
 End Sub
 
-Private Sub txtFecha_GotFocus(Index As Integer)
-    ConseguirFoco txtFecha(Index), 3
+Private Sub txtFecha_GotFocus(index As Integer)
+    ConseguirFoco txtFecha(index), 3
 End Sub
 
-Private Sub txtFecha_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtFecha_KeyPress(index As Integer, KeyAscii As Integer)
 
-    If Index = 76 Then
+    If index = 76 Then
         
         If KeyAscii = 13 Then
             KeyAscii = 0
@@ -28733,20 +28735,20 @@ Private Sub txtFecha_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub txtFecha_LostFocus(Index As Integer)
+Private Sub txtFecha_LostFocus(index As Integer)
 Dim T As String
-    txtFecha(Index).Text = Trim(txtFecha(Index).Text)
-    If txtFecha(Index).Text <> "" Then
-        T = txtFecha(Index).Text
+    txtFecha(index).Text = Trim(txtFecha(index).Text)
+    If txtFecha(index).Text <> "" Then
+        T = txtFecha(index).Text
         If EsFechaOK(T) Then
-            txtFecha(Index).Text = T
+            txtFecha(index).Text = T
         Else
-            MsgBox "Fecha con formato incorrecto: " & txtFecha(Index).Text, vbExclamation
-            txtFecha(Index).Text = ""
-            PonerFoco txtFecha(Index)
+            MsgBox "Fecha con formato incorrecto: " & txtFecha(index).Text, vbExclamation
+            txtFecha(index).Text = ""
+            PonerFoco txtFecha(index)
         End If
     End If
-    If Index = 76 And OtrosDatos <> "" Then PonerFoco txtDecimal(20): PonerFoco txtDecimal(19)
+    If index = 76 And OtrosDatos <> "" Then PonerFoco txtDecimal(20): PonerFoco txtDecimal(19)
     
 End Sub
 
@@ -30577,7 +30579,7 @@ End Function
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgAyuda
+    For Each Ima In Me.imgayuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear
@@ -32243,72 +32245,72 @@ Dim Aux As String
     
 End Function
 
-Private Sub txtSitua_GotFocus(Index As Integer)
-    ConseguirFoco txtSitua(Index), 3
+Private Sub txtSitua_GotFocus(index As Integer)
+    ConseguirFoco txtSitua(index), 3
 End Sub
 
-Private Sub txtSitua_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtSitua_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtSitua_LostFocus(Index As Integer)
+Private Sub txtSitua_LostFocus(index As Integer)
     miSQL = ""
-    txtSitua(Index).Text = Trim(txtSitua(Index).Text)
-    If txtSitua(Index).Text <> "" Then
-        If PonerFormatoEntero(txtSitua(Index)) Then
-            If Index = 4 Or Index = 5 Then
-                miSQL = DevuelveDesdeBD(conAri, "nomrutas", "srutas", "codrutas", txtSitua(Index).Text, "N")
+    txtSitua(index).Text = Trim(txtSitua(index).Text)
+    If txtSitua(index).Text <> "" Then
+        If PonerFormatoEntero(txtSitua(index)) Then
+            If index = 4 Or index = 5 Then
+                miSQL = DevuelveDesdeBD(conAri, "nomrutas", "srutas", "codrutas", txtSitua(index).Text, "N")
             Else
-                miSQL = DevuelveDesdeBD(conAri, "nomsitua", "ssitua", "codsitua", txtSitua(Index).Text, "N")
+                miSQL = DevuelveDesdeBD(conAri, "nomsitua", "ssitua", "codsitua", txtSitua(index).Text, "N")
             End If
-            If miSQL = "" Then MsgBox "No existe en la BD el codigo : " & txtSitua(Index).Text, vbExclamation
+            If miSQL = "" Then MsgBox "No existe en la BD el codigo : " & txtSitua(index).Text, vbExclamation
         Else
-            txtSitua(Index).Text = ""
+            txtSitua(index).Text = ""
         End If
     End If
-    Me.txtDesSitua(Index).Text = miSQL
+    Me.txtDesSitua(index).Text = miSQL
     miSQL = ""
 End Sub
 
-Private Sub txtVehiculo_GotFocus(Index As Integer)
-    ConseguirFoco txtFecha(Index), 3
+Private Sub txtVehiculo_GotFocus(index As Integer)
+    ConseguirFoco txtFecha(index), 3
 End Sub
 
-Private Sub txtVehiculo_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtVehiculo_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtVehiculo_LostFocus(Index As Integer)
+Private Sub txtVehiculo_LostFocus(index As Integer)
     miSQL = ""
-    txtVehiculo(Index).Text = Trim(txtVehiculo(Index).Text)
-    If txtVehiculo(Index).Text <> "" Then
-            miSQL = DevuelveDesdeBD(conAri, "nomflota", "sflotas", "codflota", txtVehiculo(Index).Text, "T")
-            If miSQL = "" Then MsgBox "No existe el vehiculo: " & txtVehiculo(Index).Text, vbExclamation
+    txtVehiculo(index).Text = Trim(txtVehiculo(index).Text)
+    If txtVehiculo(index).Text <> "" Then
+            miSQL = DevuelveDesdeBD(conAri, "nomflota", "sflotas", "codflota", txtVehiculo(index).Text, "T")
+            If miSQL = "" Then MsgBox "No existe el vehiculo: " & txtVehiculo(index).Text, vbExclamation
     End If
-    Me.txtDescVehiculo(Index).Text = miSQL
+    Me.txtDescVehiculo(index).Text = miSQL
     miSQL = ""
 End Sub
 
-Private Sub txtZona_GotFocus(Index As Integer)
-     ConseguirFoco txtZona(Index), 3
+Private Sub txtZona_GotFocus(index As Integer)
+     ConseguirFoco txtZona(index), 3
 End Sub
 
-Private Sub txtZona_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtZona_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtZona_LostFocus(Index As Integer)
+Private Sub txtZona_LostFocus(index As Integer)
 
         miSQL = ""
-    txtZona(Index).Text = Trim(txtZona(Index).Text)
-    If txtZona(Index).Text <> "" Then
-        If PonerFormatoEntero(txtZona(Index)) Then
+    txtZona(index).Text = Trim(txtZona(index).Text)
+    If txtZona(index).Text <> "" Then
+        If PonerFormatoEntero(txtZona(index)) Then
             
-            miSQL = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", txtZona(Index).Text, "T")
-            If miSQL = "" Then MsgBox "No existe la zona: " & txtZona(Index).Text, vbExclamation
+            miSQL = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", txtZona(index).Text, "T")
+            If miSQL = "" Then MsgBox "No existe la zona: " & txtZona(index).Text, vbExclamation
         End If
     End If
-    Me.txtDescZona(Index).Text = miSQL
+    Me.txtDescZona(index).Text = miSQL
     miSQL = ""
 End Sub
 

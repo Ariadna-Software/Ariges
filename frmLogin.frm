@@ -269,7 +269,7 @@ End Sub
 
 Private Sub lblAriges_DblClick()
   '  If vParamAplic.NumeroInstalacion = vbFenollar Then
-        HaMostradoCanal2_elB = True
+        HaMostradoCanal2_El_B = True
         lblAriges.Font.Bold = False
   '  End If
 End Sub

@@ -2486,7 +2486,7 @@ Dim b As Boolean
                 BloquearTxt txtAux(8), Not b
             End If
             
-            If vParamAplic.NumeroInstalacion = 4 Then
+            If InstalacionEsEulerTaxco Then
                 b = CDate(Text1(31).Text) >= vEmpresa.FechaIni
                 b = b And Habilitar
                 For J = 12 To 14
@@ -2959,7 +2959,7 @@ Private Sub Form_Load()
     txtAux(8).visible = (vEmpresa.TieneAnalitica)
         
         
-    primeravez = vParamAplic.NumeroInstalacion = 4
+    primeravez = InstalacionEsEulerTaxco
     FrameEuler.visible = primeravez
     FrameEuler.BorderStyle = 0
     Me.txtAux(10).visible = Not primeravez
@@ -3860,7 +3860,7 @@ On Error GoTo EDatosOkLinea
             End If
         End If
     End If
-    If vParamAplic.NumeroInstalacion = 4 Then BuscaChekc = ""
+    If InstalacionEsEulerTaxco Then BuscaChekc = ""
     
     If BuscaChekc <> "" Then
         MsgBox BuscaChekc, vbExclamation
@@ -3872,7 +3872,7 @@ On Error GoTo EDatosOkLinea
             
             
     'EULER y numero de albaran
-    If vParamAplic.NumeroInstalacion = 4 Then
+    If InstalacionEsEulerTaxco Then
         
         BuscaChekc = "" 'para saber si ha puesto alguna de ellas
         For I = 12 To 14
@@ -4062,7 +4062,7 @@ Dim b As Boolean
         If vEmpresa.TieneAnalitica Then SQL = SQL & ", codccost=" & DBSet(txtAux(8).Text, "T", "S")
         
         'Julio 2015. Euler
-        If vParamAplic.NumeroInstalacion = 4 Then
+        If InstalacionEsEulerTaxco Then
             'codtipomV numalbarV fechaalbV
             SQL = SQL & "," & "codtipomv=" & DBSet(txtAux(12).Text, "T", "S")
             SQL = SQL & "," & "numalbarV=" & DBSet(txtAux(13).Text, "N", "S")
@@ -4995,7 +4995,7 @@ On Error GoTo Error1
             Me.Text2(17).Text = DBLet(Data2.Recordset!numlotes, "T")
             Me.Text2(16).Text = DBLet(Data2.Recordset!Ampliaci, "T")
             
-             If vParamAplic.NumeroInstalacion = 4 Then
+             If InstalacionEsEulerTaxco Then
                 For J = 12 To 14
                         If IsNull(Data2.Recordset.Fields(J + 7)) Then
                             Me.txtAux(J).Text = ""
