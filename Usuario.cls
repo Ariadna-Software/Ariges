@@ -31,7 +31,11 @@ Private mvarAlmacenPorDefecto As String
 
 Private mvarCodigoAgente As Integer
 
-Private Rs As ADODB.Recordset
+Private mvarNivel2 As Byte   'Aplicara un segundo nivel para tema de permisos
+
+
+
+Private RS As ADODB.Recordset
 Private SQL As String
 Private Mens As String
 
@@ -140,18 +144,18 @@ End Property
 
 
 
-Public Property Let codigo(ByVal vData As Long)
-Attribute codigo.VB_Description = "Código del grupo de formas de cobro"
+Public Property Let Codigo(ByVal vData As Long)
+Attribute Codigo.VB_Description = "Código del grupo de formas de cobro"
 'se usa cuando se asigna un valor a una propiedad, en el lado izquierdo de la asignación.
 'Syntax: X.Codigo= 5
     mvarCodigo = vData
 End Property
 
 
-Public Property Get codigo() As Long
+Public Property Get Codigo() As Long
 'se usa cuando se asigna un valor a una propiedad, en el lado derecho de la asignación.
 'Syntax: Debug.Print X.Codigo
-    codigo = mvarCodigo
+    Codigo = mvarCodigo
 End Property
 
 Public Property Get PC() As String
@@ -160,38 +164,47 @@ Public Property Get PC() As String
     PC = mvarPC
 End Property
 
+'Aplicara un segundo nivel para tema de permisos
+' Taxco.  Quien tenga ese nivel a 2 NO puede modificar precio
+Public Property Get Nivel2() As Byte
+    Nivel2 = mvarNivel2
+End Property
+
+
+
+
 
 
 Public Function Leer(ByVal vlogin As String) As Byte
 Attribute Leer.VB_Description = "Lee un grupo de formas de cobro en función del código que se le ha pasado. Si devuelve 0 se ha conseguido leer el dato."
-Dim i As Long
+Dim I As Long
     On Error GoTo Err1
     
     SQL = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
     SQL = SQL & " AND NivelAriges >=0"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If Rs.EOF Then
+    If RS.EOF Then
         Leer = 1
     Else
-        i = DevuelveAumentoPC
-        mvarCodigo = Val(DBLet(Rs!CodUsu)) + i
-        mvarNombre = DBLet(Rs!nomusu)
-        mvarNivel = Val(DBLet(Rs!nivelariges))
-        mvarPasswdPROPIO = Rs!passwordpropio
+        I = DevuelveAumentoPC
+        mvarCodigo = Val(DBLet(RS!CodUsu)) + I
+        mvarNombre = DBLet(RS!nomusu)
+        mvarNivel = Val(DBLet(RS!nivelariges))
+        mvarPasswdPROPIO = RS!passwordpropio
         mvarlogin = vlogin  'por si acasp esta escroto en mayus, minusclu....
-        mvarlogin = Rs!Login
+        mvarlogin = RS!Login
         mvarCadenaConexion = ""  'Se le asigna en tiempo de diseño
         Leer = 0
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Exit Function
 Err1:
     Mens = "Error: " & Err.Number & " : " & Err.Description
     MsgBox Mens, vbExclamation
-    Rs.Close
+    RS.Close
     Leer = 1
 End Function
 
@@ -207,18 +220,35 @@ If SQL <> "" Then DevuelveAumentoPC = Val(SQL) * 1000
 End Function
 
 
-'Almacen por defecto y CODAGENT
+'Almacen por defecto y CODAGENT,   Nivel2:Aplicara un segundo nivel para tema de permisos
 Public Sub FijarOtrosValoresUsuario()
-Dim Agente As String
+Dim R As ADODB.Recordset
 
-
-    Agente = "codagent"
-    mvarAlmacenPorDefecto = DevuelveDesdeBD(conAri, "codalmac", "straba", "login", Me.Login, "T", Agente)
-    If mvarAlmacenPorDefecto = "" Then mvarAlmacenPorDefecto = "1"
-    If Agente = "codagent" Then Agente = ""
-    If Agente = "" Then Agente = "0"
+    
+    On Error GoTo eFijarOtrosValoresUsuario
+    
+    mvarAlmacenPorDefecto = "1"
+    mvarCodigoAgente = 0
+    mvarNivel2 = 0
+    Set R = New ADODB.Recordset
+    SQL = "Select codalmac,codagent,nrosegur FROM straba WHERE login = " & DBSet(Login, "T")
+    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not R.EOF Then
+        If Not IsNull(R!codAlmac) Then mvarAlmacenPorDefecto = R!codAlmac
+        If Not IsNull(R!CodAgent) Then mvarCodigoAgente = R!CodAgent
         
-    mvarCodigoAgente = Val(Agente)
+        If vParamAplic.NumeroInstalacion = vbTaxco Then
+            If UCase(DBLet(R!nrosegur, "T")) = "TALLER" Then mvarNivel2 = 2
+        End If
+    End If
+    R.Close
+eFijarOtrosValoresUsuario:
+    If Err.Number <> 0 Then
+        MsgBox "Leyendo datos trabajador " & vbCrLf & Err.Description, vbExclamation
+        conn.Errors.Clear
+        Err.Clear
+    End If
+    Set R = Nothing
 End Sub
 
 

@@ -4490,11 +4490,13 @@ Dim I As Integer
  
     Set vC = New CTiposMov
     If Not vC.Leer("FAT") Then Exit Function
-    Set vI = New CTiposMov                          'LAS INTERNAS
-    If Not vI.Leer("FAI") Then Exit Function
-    ContadorFAI_Incial = vI.Contador
-    vI.Contador = vI.Contador + 1000  'para evitar problemas luego
-        
+    
+    If vParamAplic.FacturasInternasTelefonia Then
+        Set vI = New CTiposMov                          'LAS INTERNAS
+        If Not vI.Leer("FAI") Then Exit Function
+        ContadorFAI_Incial = vI.Contador
+        vI.Contador = vI.Contador + 1000  'para evitar problemas luego
+    End If
         
     mSQL = DevuelveDesdeBD(conAri, "codigiva", "sartic", "codartic", vParamAplic.ArtiTelefonia, "T")
     mSQL = DevuelveDesdeBD(conConta, "porceiva", "tiposiva", "codigiva", mSQL)
@@ -4612,13 +4614,14 @@ Dim I As Integer
     vC.Contador = vC.Contador - 1
     vC.IncrementarContador vC.TipoMovimiento
     'Ver contador FAIs
-    If vI.Contador <> ContadorFAI_Incial Then
-        vI.Contador = ContadorFAI_Incial - 1
-        vI.IncrementarContador vI.TipoMovimiento
+    If vParamAplic.FacturasInternasTelefonia Then
+        If vI.Contador <> ContadorFAI_Incial Then
+            vI.Contador = ContadorFAI_Incial - 1
+            vI.IncrementarContador vI.TipoMovimiento
+        End If
     End If
     
     
-    'ENERO 2015
     'Hay cuotas VODAFONE refacturables
     mSQL = "Select CodCuota,refacturar,valor from tel_desc_cuotas where refacturar >0 "
     RsCuotasRefacturar.Open mSQL, conn, adOpenKeyset, adLockPessimistic, adCmdText

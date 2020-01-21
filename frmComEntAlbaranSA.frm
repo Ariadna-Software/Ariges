@@ -3264,7 +3264,7 @@ Private Sub LimpiarCampos()
 On Error Resume Next
     limpiar Me   'Metodo general: Limpia los controles TextBox
     lblIndicador.Caption = ""
-    
+   
     'Aqui va el especifico de cada form es
     '### a mano
     chkDocArchi.Value = 0
@@ -4999,6 +4999,7 @@ Dim b As Boolean
                 If I >= 10 And I <= 12 Then Me.txtDesc(I).Text = ""
             Next I
             Me.txtDesc(0).Text = ""
+            txtAux2(9).Text = ""
         Else 'Vamos a modificar
             For I = 0 To txtAux.Count - 1
                 If I < 3 Then 'campos anteriores a ampliacion linea (ampliaci)
@@ -5096,7 +5097,7 @@ Dim b As Boolean
     Me.imgBuscar2(2).visible = visible And InstalacionEsEulerTaxco
     Me.imgBuscar2(9).visible = visible And vEmpresa.TieneAnalitica
     Me.imgBuscar2(10).visible = visible
-    Me.imgBuscar2(11).visible = visible And InstalacionEsEulerTaxco
+    Me.imgBuscar2(11).visible = visible  'TODOS la ven
     Me.imgBuscar2(12).visible = visible And InstalacionEsEulerTaxco
     
 End Sub
@@ -5104,7 +5105,7 @@ End Sub
 
 Private Sub txtAux_GotFocus(index As Integer)
 Dim cadkey As Integer
-    Debug.Print "GT: " & index
+    
     
     'cadkey = ObtenerCadKey(kCampo, index)
     kCampo = index
@@ -5269,7 +5270,7 @@ Dim BuscarReferenciaEnCliente As Boolean
         Case 5, 6 'Descuentos
             PonerFormatoDecimal txtAux(index), 4 'Tipo 4: Decimal(4,2)
         Case 7 'Importe Linea
-            If txtAux(index).Text <> "" Then
+        If txtAux(index).Text <> "" Then
                 If Not PonerFormatoDecimal(txtAux(index), 1) Then  'Tipo 3: Decimal(12,2)
                     If ModificaLineas = 2 Then
                         'Ponemos el importe que tenia
@@ -6650,8 +6651,9 @@ Private Sub AbrirForm_CentroCoste()
     
 
     Set frmB = New frmBuscaGrid
-    frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
-    frmB.vTabla = "cabccost"
+     
+    frmB.vCampos = "Codigo|" & IIf(vParamAplic.ContabilidadNueva, "ccoste", "cabccost") & "|codccost|T||20·Descripción|" & IIf(vParamAplic.ContabilidadNueva, "ccoste", "cabccost") & "|nomccost|T||70·"
+    frmB.vTabla = IIf(vParamAplic.ContabilidadNueva, "ccoste", "cabccost")
     frmB.vSQL = ""
     HaDevueltoDatos = False
     '###A mano
@@ -7174,15 +7176,15 @@ Dim Euler As Boolean
     Me.txtAux(12).visible = Not Euler
     Me.txtDesc(12).visible = Not Euler
     Me.txtAux(13).visible = Not Euler
-    Me.txtAux(11).visible = Not Euler
-    Me.txtDesc(11).visible = Not Euler
+    
     Label1(13).visible = Not Euler
     Label1(28).visible = Not Euler
     Label1(9).visible = Not Euler
     Me.imgBuscar2(12).visible = Not Euler
     Me.imgBuscar2(11).visible = Not Euler
     
-    
+    Me.txtAux(11).visible = True
+    Me.txtDesc(11).visible = True
 
     
     'EULER

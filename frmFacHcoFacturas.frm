@@ -43,7 +43,7 @@ Begin VB.Form frmFacHcoFacturas2
          Style           =   2  'Dropdown List
          TabIndex        =   3
          Top             =   315
-         Width           =   1665
+         Width           =   2505
       End
       Begin VB.TextBox Text1 
          Height          =   315
@@ -106,11 +106,20 @@ Begin VB.Form frmFacHcoFacturas2
       Begin VB.CheckBox Check1 
          Caption         =   "Contabilizado"
          Height          =   375
-         Left            =   4920
+         Left            =   5320
          TabIndex        =   4
          Tag             =   "Contabilizado|N|N|0|1|scafac|intconta||N|"
          Top             =   240
          Width           =   1335
+      End
+      Begin VB.Label lblSerie 
+         Caption         =   "Label2"
+         Height          =   255
+         Left            =   3840
+         TabIndex        =   255
+         Top             =   360
+         Visible         =   0   'False
+         Width           =   855
       End
       Begin VB.Label Label1 
          Caption         =   "Cliente"
@@ -595,23 +604,23 @@ Begin VB.Form frmFacHcoFacturas2
             TabIndex        =   236
             Top             =   120
             Visible         =   0   'False
-            Width           =   9225
+            Width           =   8865
             Begin VB.TextBox txtTaxco 
                Height          =   315
                Index           =   5
-               Left            =   120
+               Left            =   1080
                TabIndex        =   243
                Text            =   "Text5"
-               Top             =   2160
+               Top             =   1920
                Width           =   1815
             End
             Begin VB.TextBox txtTaxco 
                Height          =   315
                Index           =   6
-               Left            =   3960
+               Left            =   5400
                TabIndex        =   244
                Text            =   "Text5"
-               Top             =   2160
+               Top             =   1920
                Width           =   1815
             End
             Begin VB.TextBox txtTaxco 
@@ -635,37 +644,37 @@ Begin VB.Form frmFacHcoFacturas2
             Begin VB.TextBox txtTaxco 
                Height          =   315
                Index           =   1
-               Left            =   120
+               Left            =   1080
                TabIndex        =   239
                Text            =   "Text5"
-               Top             =   960
+               Top             =   840
                Width           =   3135
             End
             Begin VB.TextBox txtTaxco 
                Height          =   315
                Index           =   2
-               Left            =   3960
+               Left            =   5400
                TabIndex        =   240
                Text            =   "Text5"
-               Top             =   960
+               Top             =   840
                Width           =   3375
             End
             Begin VB.TextBox txtTaxco 
                Height          =   315
                Index           =   3
-               Left            =   120
+               Left            =   1080
                TabIndex        =   241
                Text            =   "Text5"
-               Top             =   1560
+               Top             =   1380
                Width           =   3135
             End
             Begin VB.TextBox txtTaxco 
                Height          =   315
                Index           =   4
-               Left            =   3960
+               Left            =   5400
                TabIndex        =   242
                Text            =   "Text5"
-               Top             =   1560
+               Top             =   1380
                Width           =   1935
             End
             Begin VB.TextBox txtTaxco 
@@ -688,9 +697,9 @@ Begin VB.Form frmFacHcoFacturas2
             End
             Begin VB.Line Line2 
                X1              =   120
-               X2              =   7440
-               Y1              =   600
-               Y2              =   600
+               X2              =   8760
+               Y1              =   690
+               Y2              =   690
             End
             Begin VB.Label Label3 
                Caption         =   "Licencia"
@@ -698,17 +707,17 @@ Begin VB.Form frmFacHcoFacturas2
                Index           =   22
                Left            =   120
                TabIndex        =   252
-               Top             =   1920
+               Top             =   1980
                Width           =   945
             End
             Begin VB.Label Label3 
                Caption         =   "Taximetro"
                Height          =   195
                Index           =   24
-               Left            =   3960
+               Left            =   4440
                TabIndex        =   251
-               Top             =   1920
-               Width           =   945
+               Top             =   1980
+               Width           =   690
             End
             Begin VB.Label Label3 
                Caption         =   "Kms"
@@ -752,17 +761,17 @@ Begin VB.Form frmFacHcoFacturas2
                Index           =   15
                Left            =   120
                TabIndex        =   248
-               Top             =   720
+               Top             =   900
                Width           =   945
             End
             Begin VB.Label Label3 
                Caption         =   "Motor"
                Height          =   195
                Index           =   17
-               Left            =   3960
+               Left            =   4440
                TabIndex        =   247
-               Top             =   720
-               Width           =   945
+               Top             =   900
+               Width           =   405
             End
             Begin VB.Label Label3 
                Caption         =   "Marca/Modelo"
@@ -770,17 +779,17 @@ Begin VB.Form frmFacHcoFacturas2
                Index           =   18
                Left            =   120
                TabIndex        =   246
-               Top             =   1320
+               Top             =   1440
                Width           =   945
             End
             Begin VB.Label Label3 
                Caption         =   "Neumáticos"
                Height          =   195
                Index           =   20
-               Left            =   3960
+               Left            =   4440
                TabIndex        =   245
-               Top             =   1320
-               Width           =   945
+               Top             =   1440
+               Width           =   840
             End
          End
          Begin VB.Frame FrameReparEuler 
@@ -789,6 +798,24 @@ Begin VB.Form frmFacHcoFacturas2
             TabIndex        =   203
             Top             =   120
             Width           =   13440
+            Begin VB.TextBox TextmatriculaTaxco 
+               BeginProperty Font 
+                  Name            =   "Verdana"
+                  Size            =   9.75
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   405
+               Left            =   3600
+               TabIndex        =   254
+               Text            =   "Text4"
+               Top             =   1920
+               Visible         =   0   'False
+               Width           =   1935
+            End
             Begin VB.TextBox txtEuler 
                BeginProperty Font 
                   Name            =   "MS Sans Serif"
@@ -820,6 +847,26 @@ Begin VB.Form frmFacHcoFacturas2
                ToolTipText     =   "Ver datos reparacion"
                Top             =   240
                Width           =   375
+            End
+            Begin VB.Label Label1 
+               Alignment       =   1  'Right Justify
+               Caption         =   "Matrícula"
+               BeginProperty Font 
+                  Name            =   "MS Sans Serif"
+                  Size            =   9.75
+                  Charset         =   0
+                  Weight          =   400
+                  Underline       =   0   'False
+                  Italic          =   0   'False
+                  Strikethrough   =   0   'False
+               EndProperty
+               Height          =   240
+               Index           =   60
+               Left            =   840
+               TabIndex        =   253
+               Top             =   1920
+               Visible         =   0   'False
+               Width           =   2160
             End
             Begin VB.Label Label1 
                Alignment       =   1  'Right Justify
@@ -4273,7 +4320,7 @@ Dim EstaEnTesoreria As String
     
     
     vWhere = ObtenerWhereCP(False)
-    vWhere = vWhere & " AND codtipoa='" & data3.Recordset.Fields!codtipoa & "' AND numalbar=" & data3.Recordset.Fields!Numalbar
+    vWhere = vWhere & " AND codtipoa='" & data3.Recordset.Fields!Codtipoa & "' AND numalbar=" & data3.Recordset.Fields!Numalbar
     vWhere = vWhere & " and numlinea=" & Data2.Recordset!numlinea
     If Not BloqueaRegistro(NomTablaLineas, vWhere) Then
         TerminaBloquear
@@ -4588,14 +4635,14 @@ Dim Aux As String
             If index = 0 Then
                 
                 Aux = ObtenerWhereCP(False)
-                Aux = Aux & " AND codtipoa='" & data3.Recordset.Fields!codtipoa & "' "
+                Aux = Aux & " AND codtipoa='" & data3.Recordset.Fields!Codtipoa & "' "
                 Aux = Aux & " AND numalbar=" & data3.Recordset.Fields!Numalbar & " AND 1"
                 Aux = DevuelveDesdeBD(conAri, "Max(numlinea)", "slifac_eu", Aux, "1")
                 BuscaChekc = Val(Aux) + 1
                 
                 'slifac_eu(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,Tipo)
                 Aux = "('" & Data2.Recordset!codtipom & "'," & Data1.Recordset!Numfactu & "," & DBSet(Data1.Recordset!FecFactu, "F") & ",'"
-                Aux = Aux & data3.Recordset!codtipoa & "'," & data3.Recordset!Numalbar & "," & BuscaChekc & ","
+                Aux = Aux & data3.Recordset!Codtipoa & "'," & data3.Recordset!Numalbar & "," & BuscaChekc & ","
                 If Tipo = 0 Then
                     Aux = Aux & DBSet(data3.Recordset!FecFactu, "F")
                 Else
@@ -4673,7 +4720,7 @@ Private Sub cmdLineasImpresion_Click(index As Integer)
         Else
             CadenaDesdeOtroForm = ""  '"" = nuevo   id= linea
         End If
-        frmListado5.OtrosDatos = Data1.Recordset!codtipom & "|" & Data1.Recordset!Numfactu & "|" & Data1.Recordset!FecFactu & "|" & data3.Recordset!codtipoa & "|" & data3.Recordset!Numalbar & "|"
+        frmListado5.OtrosDatos = Data1.Recordset!codtipom & "|" & Data1.Recordset!Numfactu & "|" & Data1.Recordset!FecFactu & "|" & data3.Recordset!Codtipoa & "|" & data3.Recordset!Numalbar & "|"
         frmListado5.OpcionListado = 27
         frmListado5.Show vbModal
         
@@ -4686,7 +4733,7 @@ Private Sub cmdLineasImpresion_Click(index As Integer)
             BuscaChekc = BuscaChekc & "Importe : " & Me.lwEulerLineas.SelectedItem.SubItems(4) & vbCrLf
             If MsgBox(BuscaChekc, vbQuestion + vbYesNoCancel) = vbYes Then
                 BuscaChekc = " WHERE codtipom='" & Data1.Recordset!codtipom & "' AND numfactu = " & Data1.Recordset!Numfactu
-                BuscaChekc = BuscaChekc & " AND fecfactu = " & DBSet(Data1.Recordset!FecFactu, "F") & " AND codtipoa = '" & data3.Recordset!codtipoa & "' AND numalbar = " & data3.Recordset!Numalbar
+                BuscaChekc = BuscaChekc & " AND fecfactu = " & DBSet(Data1.Recordset!FecFactu, "F") & " AND codtipoa = '" & data3.Recordset!Codtipoa & "' AND numalbar = " & data3.Recordset!Numalbar
                 BuscaChekc = "DELETE FROM slifac_eu2 " & BuscaChekc & " AND numlinea= " & Mid(Me.lwEulerLineas.SelectedItem.Key, 2, 3)
                 If ejecutar(BuscaChekc, False) Then CadenaDesdeOtroForm = "OK"
             End If
@@ -4759,13 +4806,13 @@ Private Sub cmdObserva3_Click()
     cmdObserva3.Tag = cmdObserva3.Tag + 1
     
     'Campos, pero SI no hay parametros..
-    ''vuelve al  cero
+    
     If cmdObserva3.Tag = 2 Then
         If Not SolapaCamposFito Then
             If vParamAplic.TieneTelefonia2 > 0 Then
                 cmdObserva3.Tag = 3
             Else
-                If InstalacionEsEulerTaxco Then
+                If vParamAplic.NumeroInstalacion = vbEuler Then
                     cmdObserva3.Tag = 4
                 Else
                     cmdObserva3.Tag = 0
@@ -4776,7 +4823,8 @@ Private Sub cmdObserva3_Click()
          If Not vParamAplic.TieneTelefonia2 > 0 Then cmdObserva3.Tag = 0
          
     ElseIf cmdObserva3.Tag = 4 Then
-        If vParamAplic.NumeroInstalacion <> InstalacionEsEulerTaxco Then cmdObserva3.Tag = 0
+        If Not InstalacionEsEulerTaxco Then cmdObserva3.Tag = 0
+
     End If
     If cmdObserva3.Tag >= 5 Then cmdObserva3.Tag = 0
     
@@ -4797,20 +4845,20 @@ Private Sub VisualizarPorTipoAlbaran()
     Me.FrameCampos.visible = cmdObserva3.Tag = 2
     Me.FrameTelefonia.visible = cmdObserva3.Tag = 3
     Me.FrameEuler.visible = cmdObserva3.Tag = 4
-    FrameTaxco.visible = False
+    
     If Not InstalacionEsEulerTaxco Then
         FrameALE.visible = False
-        FrameTaxco.visible = False
+        FrameTAXCO.visible = False
     Else
         If Modo = 2 Then
         
             If vParamAplic.NumeroInstalacion = vbEuler Then
-                FrameALE.visible = data3.Recordset!codtipoa = "ALE" 'Or Data3.Recordset!codtipoa = "ALO"
+                FrameALE.visible = data3.Recordset!Codtipoa = "ALE" 'Or Data3.Recordset!codtipoa = "ALO"
             ElseIf vParamAplic.NumeroInstalacion = vbTaxco Then
-                FrameALE.visible = data3.Recordset!codtipoa = "ALE" 'Or Data3.Recordset!codtipoa = "ALO"
-                FrameTaxco.visible = data3.Recordset!codtipoa = "ALO"
+                FrameALE.visible = data3.Recordset!Codtipoa = "ALE" 'Or Data3.Recordset!codtipoa = "ALO"
+                FrameTAXCO.visible = data3.Recordset!Codtipoa = "ALO"
             End If
-            FrameReparEuler.visible = data3.Recordset!codtipoa = "ALR"
+            FrameReparEuler.visible = data3.Recordset!Codtipoa = "ALR"
             
             If FrameEuler.visible Then FrameEuler.Enabled = FrameReparEuler.visible
             
@@ -4967,7 +5015,7 @@ End Sub
 Private Sub cmdReparEuler_Click(index As Integer)
     If Modo <> 2 Then Exit Sub
     CadenaDesdeOtroForm = ObtenerWhereCP(True)
-    CadenaDesdeOtroForm = CadenaDesdeOtroForm & " AND codtipoa='" & data3.Recordset.Fields!codtipoa & "' "
+    CadenaDesdeOtroForm = CadenaDesdeOtroForm & " AND codtipoa='" & data3.Recordset.Fields!Codtipoa & "' "
     CadenaDesdeOtroForm = CadenaDesdeOtroForm & " AND numalbar=" & data3.Recordset.Fields!Numalbar
     frmFacEulerDatosRep.Buscar = False
     frmFacEulerDatosRep.Show vbModal
@@ -5274,7 +5322,11 @@ Dim B1 As Boolean
         If vParamAplic.NumeroInstalacion = vbEuler Then
             FrameALE.Left = 240
         Else
-            FrameTaxco.visible = True
+            FrameTAXCO.BorderStyle = 0
+            FrameTAXCO.visible = True
+        
+            lblSerie.visible = True
+            lblSerie.Caption = ""
         End If
         
     End If
@@ -5907,9 +5959,9 @@ Dim TipoA As String
     
     'Albaranes que no se pueden montar
     Seguir = False
-    If Not IsNull(data3.Recordset!codtipoa) Then
-        If data3.Recordset!codtipoa <> "" Then
-            TipoA = CStr(data3.Recordset!codtipoa)
+    If Not IsNull(data3.Recordset!Codtipoa) Then
+        If data3.Recordset!Codtipoa <> "" Then
+            TipoA = CStr(data3.Recordset!Codtipoa)
             If TipoA = "FTI" Or TipoA = "ALM" Then
                 Seguir = False
             Else
@@ -6024,7 +6076,7 @@ Private Sub mnModLotes_Click()
         Exit Sub
     End If
     
-    If DBLet(data3.Recordset!codtipoa, "T") = "" Then
+    If DBLet(data3.Recordset!Codtipoa, "T") = "" Then
         MsgBox "Tipo albaran incorrecto", vbExclamation
         Exit Sub
     End If
@@ -6052,7 +6104,7 @@ Dim vWhere As String
     
     
     vWhere = ObtenerWhereCP(True)
-    vWhere = vWhere & " AND codtipoa='" & data3.Recordset.Fields!codtipoa & "' "
+    vWhere = vWhere & " AND codtipoa='" & data3.Recordset.Fields!Codtipoa & "' "
     vWhere = vWhere & " AND numalbar=" & data3.Recordset.Fields!Numalbar
     vWhere = " FROM slifac " & vWhere
     'tmpnlotes codusu,numalbar,fechaalb,codprove,numlinea,codartic,codalmac,nomartic,cantidad,numlotes
@@ -6069,7 +6121,7 @@ Dim vWhere As String
         Set frmNLote = New frmAlmCargarNLote
         'EN esta cadena ira para el SQL
         vWhere = ObtenerWhereCP(True)
-        vWhere = vWhere & " AND codtipoa='" & data3.Recordset.Fields!codtipoa & "' "
+        vWhere = vWhere & " AND codtipoa='" & data3.Recordset.Fields!Codtipoa & "' "
         vWhere = vWhere & " AND numalbar=" & data3.Recordset.Fields!Numalbar
         frmNLote.Desde2 = vWhere
         'Para el select del frm
@@ -6302,11 +6354,24 @@ Dim OtraBusq As String
     End If
     
     If InstalacionEsEulerTaxco Then
-        OtraBusq = DevuelveBusquedaCostesEuler
-        If OtraBusq <> "" Then
-            If CadB <> "" Then CadB = CadB & " AND "
-            CadB = CadB & " (scafac.codtipom,scafac.numfactu,scafac.fecfactu) IN (Select  distinct codtipom,numfactu,fecfactu  FROM  slifac_eu  where " & OtraBusq & ")"
+        If vParamAplic.NumeroInstalacion = vbEuler Then
+            OtraBusq = DevuelveBusquedaCostesEuler
+            If OtraBusq <> "" Then
+                If CadB <> "" Then CadB = CadB & " AND "
+                CadB = CadB & " (scafac.codtipom,scafac.numfactu,scafac.fecfactu) IN (Select  distinct codtipom,numfactu,fecfactu  FROM  slifac_eu  where " & OtraBusq & ")"
+            End If
+    
+        ElseIf vParamAplic.NumeroInstalacion = vbTaxco Then
+            OtraBusq = DevuelveBusquedaTaxco
+            
+            If OtraBusq <> "" Then
+                If CadB <> "" Then CadB = CadB & " AND "
+                CadB = CadB & " (scafac.codtipom,scafac.numfactu,scafac.fecfactu) IN (Select  distinct codtipom,numfactu,fecfactu  FROM  scafac_eu  where " & OtraBusq & ")"
+            End If
         End If
+        
+    
+    
     End If
     '--- Laura 12/01/2007
     Text1(5).Text = cadAux
@@ -6459,7 +6524,7 @@ Dim b2 As Boolean
     If Not data3.Recordset.EOF Then
         If Not IsNull(data3.Recordset!NumVenta) Then
             b = True
-            If data3.Recordset!codtipom = "FAV" And data3.Recordset!codtipoa <> "FTI" Then b2 = True
+            If data3.Recordset!codtipom = "FAV" And data3.Recordset!Codtipoa <> "FTI" Then b2 = True
         End If
     End If
     
@@ -6517,6 +6582,18 @@ Dim BrutoFac As Single
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
     
+    If Text1(1).Text = "" Then
+        If vUsu.Login = "root" Then MsgBox "Codtipom VACIO"
+        Text1(1).Text = Data1.Recordset!codtipom
+    End If
+    
+    If lblSerie.visible Then
+        If lblSerie.Tag <> Data1.Recordset!codtipom Then
+             lblSerie.Caption = "Serie " & DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", Text1(1).Text, "T")
+             lblSerie.Tag = Text1(1).Text
+        End If
+    End If
+        
     
     If Text1(16).Text = "0,00" Then Text1(16).Text = ""
     If Text1(17).Text = "0,00" Then Text1(17).Text = ""
@@ -6654,6 +6731,14 @@ Dim b As Boolean
     Me.txtAux2(9).visible = (Modo = 5) And b
     
     imgBuscarEULER.visible = Modo = 1 And vParamAplic.NumeroInstalacion = vbEuler
+    
+    If vParamAplic.NumeroInstalacion = vbTaxco Then
+        TextmatriculaTaxco.visible = Modo = 1
+        Label1(60).visible = Modo = 1
+        FrameTAXCO.visible = Modo = 1
+        lblSerie.visible = Modo = 2
+        lblSerie.Tag = ""
+    End If
     
     Me.Combo1.visible = (Modo = 1)
 
@@ -7021,7 +7106,7 @@ Dim b As Boolean
     If Data2.Recordset.EOF Then Exit Function
     
     vWhere = ObtenerWhereCP(True)
-    vWhere = vWhere & " AND codtipoa='" & data3.Recordset.Fields!codtipoa & "' "
+    vWhere = vWhere & " AND codtipoa='" & data3.Recordset.Fields!Codtipoa & "' "
     vWhere = vWhere & " AND numalbar=" & data3.Recordset.Fields!Numalbar
     vWhere = vWhere & " AND numlinea=" & Data2.Recordset.Fields!numlinea
     
@@ -7240,7 +7325,11 @@ Private Sub txtAux_LostFocus(index As Integer)
               If txtAux(9).Text <> "" Then
                     If vEmpresa.TieneAnalitica Then
                         txtAux(9).Text = UCase(txtAux(9).Text)
-                        txtAux2(index).Text = DevuelveDesdeBD(conConta, "nomccost", "cabccost", "codccost", txtAux(9).Text, "T")
+                        If vParamAplic.ContabilidadNueva Then
+                            txtAux2(index).Text = DevuelveDesdeBD(conConta, "nomccost", "ccoste", "codccost", txtAux(9).Text, "T")
+                        Else
+                            txtAux2(index).Text = DevuelveDesdeBD(conConta, "nomccost", "cabccost", "codccost", txtAux(9).Text, "T")
+                        End If
                         If txtAux2(index).Text = "" Then
                             MsgBox "No existe centro de coste: " & txtAux(9).Text, vbExclamation
                             txtAux(9).Text = ""
@@ -7918,7 +8007,7 @@ Dim b As Boolean
     End If
     
     SQL = SQL & ObtenerWhereCP(True)
-    SQL = SQL & " AND codtipoa='" & data3.Recordset.Fields!codtipoa & "' AND numalbar=" & data3.Recordset.Fields!Numalbar
+    SQL = SQL & " AND codtipoa='" & data3.Recordset.Fields!Codtipoa & "' AND numalbar=" & data3.Recordset.Fields!Numalbar
     conn.Execute SQL
     ModificaAlbxFac = True
     
@@ -7965,7 +8054,7 @@ Dim TocarEnTesoreria As Boolean
     'Si es tiket y solo cambia la forma de pago NO recalculo
      ElseIf CInt(Data1.Recordset!codforpa) <> CInt(Text1(15).Text) Then
         'si se ha cambiado la forma de pago
-        If Me.data3.Recordset!codtipoa <> "ATI" Then recalcular = True
+        If Me.data3.Recordset!Codtipoa <> "ATI" Then recalcular = True
     End If
     
     
@@ -8109,7 +8198,7 @@ Dim TocarEnTesoreria As Boolean
                     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
                     If bol Then
                         vFactura.Agente = Text1(14).Text
-                        bol = vFactura.InsertarEnTesoreria("", MenError)
+                        bol = vFactura.InsertarEnTesoreria("", MenError, True)
                     End If
                 End If
                 Set vFactura = Nothing
@@ -8628,7 +8717,7 @@ Dim devuelve As String
         
         
         'cODTIPOA
-        devuelve = "{scafac1.codtipoa}=" & DBSet(data3.Recordset!codtipoa, "T")
+        devuelve = "{scafac1.codtipoa}=" & DBSet(data3.Recordset!Codtipoa, "T")
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
         
         'Numalbar
@@ -8668,7 +8757,7 @@ Dim devuelve As String
                 '.outCodigoCliProv = Text1(4).Text
                 '.outTipoDocumento = 2
                 
-                .outClaveNombreArchiv = data3.Recordset!codtipoa & Format(data3.Recordset!Numalbar, "0000000")
+                .outClaveNombreArchiv = data3.Recordset!Codtipoa & Format(data3.Recordset!Numalbar, "0000000")
                 .outCodigoCliProv = Text1(4).Text
                 .outTipoDocumento = 7
                 .SeleccionaRPTCodigo = pRptvMultiInforme
@@ -8900,9 +8989,9 @@ Dim CambiaIVA As Boolean
                 'montanmos el SQL del insert en buscchec
                 'insert into `slifac` (`codtipom`,`numfactu`,`fecfactu`,`codtipoa`,`numalbar`,`numlinea`,
                 BuscaChekc = "(" & DBSet(Raux!codtipom, "T") & "," & DBSet(Raux!Numfactu, "N") & "," & DBSet(Raux!FecFactu, "F") & ","
-                BuscaChekc = BuscaChekc & DBSet(Raux!codtipoa, "T") & "," & DBSet(Raux!Numalbar, "N") & ","
+                BuscaChekc = BuscaChekc & DBSet(Raux!Codtipoa, "T") & "," & DBSet(Raux!Numalbar, "N") & ","
                 Aux = ObtenerWhereCP(True)
-                Aux = Aux & " AND codtipoa = " & DBSet(Raux!codtipoa, "T") & " AND numalbar = " & Raux!Numalbar
+                Aux = Aux & " AND codtipoa = " & DBSet(Raux!Codtipoa, "T") & " AND numalbar = " & Raux!Numalbar
             End If
             Raux.Close
             Aux = "Select max(numlinea),min(codalmac) FROM slifac " & Aux
@@ -9002,7 +9091,7 @@ Dim VariedadPartida As String
 
                         '  slifaccampos(codtipom,numfactu,fecfactu,codtipoa,numalbar,,numlinea,codcampo)
                         C = C & ", (" & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!Numfactu
-                        C = C & "," & DBSet(data3.Recordset!FecFactu, "F") & "," & DBSet(data3.Recordset!codtipoa, "T")
+                        C = C & "," & DBSet(data3.Recordset!FecFactu, "F") & "," & DBSet(data3.Recordset!Codtipoa, "T")
                         C = C & "," & DBSet(data3.Recordset!Numalbar, "N") & "," & NumRegElim & "," & BuscaChekc & "," & DBSet(Now, "FH")
                         C = C & VariedadPartida & ")" ' ",NULL,NULL" & ")"   ',nomvarie , nompartida
                         NumRegElim = NumRegElim + 1
@@ -9669,8 +9758,14 @@ Dim Impo As Currency
 
     If Todo Then
     
-        Me.FrameALE.visible = data3.Recordset!codtipoa = "ALO"     'Text1(1).Text = "FAE"
-        Me.FrameReparEuler.visible = data3.Recordset!codtipoa = "ALR"      'Text1(1).Text = "FAE"
+    
+        If vParamAplic.NumeroInstalacion = vbEuler Then
+            Me.FrameALE.visible = data3.Recordset!Codtipoa = "ALO"     'Text1(1).Text = "FAE"
+        Else
+            FrameALE.visible = False
+            Me.FrameTAXCO.visible = data3.Recordset!Codtipoa = "ALO"     'Text1(1).Text = "FAE"
+        End If
+        Me.FrameReparEuler.visible = data3.Recordset!Codtipoa = "ALR"      'Text1(1).Text = "FAE"
         
         SQL = "ReferPedido,FechaPed,bombamarca,bombaModelo,motormarca,motorModelo"
         SQL = SQL & ",TrabajoExterior,observaciones,TipoPortes"
@@ -9680,6 +9775,7 @@ Dim Impo As Currency
         SQL = SQL & ",TipoBombLimSumVer,TipoBomAgitadorRes,TipoBomAgitadorLim,TipoBomResOtrosEqu,TipoBomLimOtrosEqu,DatosBommarca,DatosBomNumCurva"
         SQL = SQL & ",DatosBomModelo,DatosBomNumSerie,DatosBomAno,DatosBomH,DatosBomTipoRodete,DatosBomCaudal,DatosBomUdCaudal,DatosMotorMarca"
         SQL = SQL & ",DatosMotorModelo , DatosMotorNumSerie, DatosMotorV, DatosMotorI, DatosMotorCV, DatosMotorKw, DatosMotorrpm, NumParteTrabajo, NumTrabajExterno"
+        SQL = SQL & ",numrepar"
         lwCostes.ListItems.Add , , "Leyendo"
         
         
@@ -9697,9 +9793,43 @@ Dim Impo As Currency
             'cboEulerT.ListIndex = DBLet(miRsAux!partetrabajo)  '0 1
             
             'EL SQL estara montaddo para que coincida el orden del columna con el index
+            
+            
             For N = 0 To txtEuler.Count - 1
                 txtEuler(N).Text = DBLet(miRsAux.Fields(CInt(N)), "T")
             Next
+        
+            'Relamente , lo de arriba no haria falta en TAXCO
+            If vParamAplic.NumeroInstalacion = vbTaxco Then
+            
+            
+                If Data1.Recordset!codtipom = "FAO" And FrameTAXCO.visible Then
+                 
+                    'bombamarca -Matricula
+                    'bombaModelo -bastidor
+                    'motorModelo -marca / modelo
+                    'motormarca -motor
+                    'ReferPedido -neumaticos
+                    'RecepAgenCliMat -licencia
+                    'RecpNumExp -taximetro
+                    'numrepar -kms
+                    
+                    Me.txtTaxco(0).Text = DBLet(miRsAux!bombamarca, "T")
+                    Me.txtTaxco(1).Text = DBLet(miRsAux!bombaModelo, "T")
+                    Me.txtTaxco(2).Text = DBLet(miRsAux!motorModelo, "T")
+                    Me.txtTaxco(3).Text = DBLet(miRsAux!motormarca, "T")
+                    Me.txtTaxco(4).Text = DBLet(miRsAux!ReferPedido, "T")
+                    Me.txtTaxco(5).Text = DBLet(miRsAux!RecepAgenCliMat, "T")
+                    Me.txtTaxco(6).Text = DBLet(miRsAux!RecpNumExp, "T")
+                    Me.txtTaxco(7).Text = DBLet(miRsAux!numrepar, "T")
+                    
+                Else
+                    For N = 0 To txtTaxco.Count - 1
+                        txtTaxco(N).Text = ""
+                    Next
+        
+                End If
+            End If
         
             'Agencia cliente
             N = 1
@@ -9714,7 +9844,7 @@ Dim Impo As Currency
             'Next
             
             txtEuler(8).Text = ""
-            If data3.Recordset!codtipoa = "ALR" Then
+            If data3.Recordset!Codtipoa = "ALR" Then
                 
                 SQL = ""
                 cad2 = DBLet(miRsAux!NumParteTrabajo, "T")
@@ -9855,7 +9985,7 @@ Dim Impo As Currency
             'Para modificar y borrar
             'KEY
             'codtipom numfactu fecfactu codtipoa numalbar numlinea Tipo
-            SQL = miRsAux!codtipom & "|" & miRsAux!Numfactu & "|" & miRsAux!FecFactu & "|" & miRsAux!codtipoa & "|" & miRsAux!Numalbar & "|" & miRsAux!numlinea & "|" & miRsAux!Tipo & "|"
+            SQL = miRsAux!codtipom & "|" & miRsAux!Numfactu & "|" & miRsAux!FecFactu & "|" & miRsAux!Codtipoa & "|" & miRsAux!Numalbar & "|" & miRsAux!numlinea & "|" & miRsAux!Tipo & "|"
             lwCostes.ListItems(N2).Tag = SQL
             
             If miRsAux!Tipo >= 3 Then lwCostes.ListItems(N2).ListSubItems(2).ToolTipText = DBLet(miRsAux!Documento, "T")
@@ -9950,6 +10080,14 @@ Dim N As Byte
         For N = 0 To Me.txtEuler.Count - 1
             txtEuler(N).Text = ""
         Next
+        
+        
+        
+        If vParamAplic.NumeroInstalacion = vbTaxco Then
+            For N = 0 To Me.txtTaxco.Count - 1
+                txtTaxco(N).Text = ""
+            Next
+        End If
     End If
     
     Me.optEuler(0).Value = True
@@ -10029,7 +10167,7 @@ Dim SQL As String
         Set miRsAux = New ADODB.Recordset
         'codtipom numfactu fecfactu codtipoa numalbar numlinea
         CadenaInsertTmpLotes = "codtipom ='" & Data1.Recordset!codtipom & "' AND numfactu =" & Data1.Recordset!Numfactu
-        CadenaInsertTmpLotes = CadenaInsertTmpLotes & " AND fecfactu='" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND codtipoa = '" & data3.Recordset!codtipoa
+        CadenaInsertTmpLotes = CadenaInsertTmpLotes & " AND fecfactu='" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND codtipoa = '" & data3.Recordset!Codtipoa
         CadenaInsertTmpLotes = CadenaInsertTmpLotes & "' AND numalbar = " & data3.Recordset!Numalbar & " AND numlinea =" & Data2.Recordset!numlinea
         CadenaInsertTmpLotes = "Select numlote,cantidad,fecentra from slifaclotes  WHERE " & CadenaInsertTmpLotes & "  order by sublinea"
  
@@ -10127,7 +10265,7 @@ Dim SQL As String
                         Espera 0.4
                         
                         SQL = "INSERT INTO slifaclotes(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-                        SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!Numfactu & ",'" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' ,'" & data3.Recordset!codtipoa
+                        SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!Numfactu & ",'" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' ,'" & data3.Recordset!Codtipoa
                         SQL = SQL & "'," & data3.Recordset!Numalbar & "," & Data2.Recordset!numlinea
                         SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
                         SQL = SQL & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
@@ -10172,7 +10310,7 @@ End Sub
 
 Private Function Sql_Lineas_Lotes() As String
         Sql_Lineas_Lotes = "codtipom ='" & Data1.Recordset!codtipom & "' AND numfactu =" & Data1.Recordset!Numfactu
-        Sql_Lineas_Lotes = Sql_Lineas_Lotes & " AND fecfactu='" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND codtipoa = '" & data3.Recordset!codtipoa
+        Sql_Lineas_Lotes = Sql_Lineas_Lotes & " AND fecfactu='" & Format(Data1.Recordset!FecFactu, FormatoFecha) & "' AND codtipoa = '" & data3.Recordset!Codtipoa
         Sql_Lineas_Lotes = Sql_Lineas_Lotes & "' AND numalbar = " & data3.Recordset!Numalbar & " AND numlinea =" & Data2.Recordset!numlinea
         Sql_Lineas_Lotes = "Select * from slifaclotes  WHERE " & Sql_Lineas_Lotes
         Sql_Lineas_Lotes = Sql_Lineas_Lotes & " AND numlinea =" & Data2.Recordset!numlinea
@@ -10341,12 +10479,12 @@ Dim C As String
         While Not miRsAux.EOF
             
             '20762090J_ALV-0010699.pdf_       B96940374_ALV-0012320_16.47.47.5916
-            C = DBLet(miRsAux!codtipoa, "T")
+            C = DBLet(miRsAux!Codtipoa, "T")
             C = "_" & C & "-" & Format(miRsAux!Numalbar, "0000000")
             C = Dir(vParamAplic.PathFirmasAlbaran & "\" & Format(miRsAux!FechaAlb, FormatoFecha) & "\*" & C & "*.pdf", vbArchive)
             If C <> "" Then
                 C = vParamAplic.PathFirmasAlbaran & "\" & Format(miRsAux!FechaAlb, FormatoFecha) & "\" & C
-                AnchoLogin = Format(miRsAux!FechaAlb, "dd/mm/yyyy") & miRsAux!codtipoa & Format(miRsAux!Numalbar, "0000000") & "#"
+                AnchoLogin = Format(miRsAux!FechaAlb, "dd/mm/yyyy") & miRsAux!Codtipoa & Format(miRsAux!Numalbar, "0000000") & "#"
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & AnchoLogin & C & "@"
             End If
         
@@ -10399,7 +10537,7 @@ Dim C As String
             C = Dir(vParamAplic.PathFirmasAlbaran & "\" & C & "*.pdf", vbArchive)
             If C <> "" Then
                 C = vParamAplic.PathFirmasAlbaran & "\" & Year(miRsAux!FechaAlb) & "\" & Format(Month(miRsAux!FechaAlb), "00") & "\" & C
-                AnchoLogin = Format(miRsAux!FechaAlb, "dd/mm/yyyy") & miRsAux!codtipoa & Format(miRsAux!Numalbar, "0000000") & "#"
+                AnchoLogin = Format(miRsAux!FechaAlb, "dd/mm/yyyy") & miRsAux!Codtipoa & Format(miRsAux!Numalbar, "0000000") & "#"
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & AnchoLogin & C & "@"
             End If
         
@@ -10521,6 +10659,53 @@ Dim J As Integer
     
 End Function
 
+
+
+Private Function DevuelveBusquedaTaxco() As String
+Dim I As Byte
+Dim EsLike As Boolean
+Dim Aux As String
+Dim J As Integer
+
+    DevuelveBusquedaTaxco = ""
+
+    For I = 0 To Me.txtTaxco.Count - 1
+        Me.txtTaxco(I).Text = Trim(Me.txtTaxco(I).Text)
+        If Me.txtTaxco(I).Text <> "" Then
+
+            
+            If I = 7 Then
+                'kilomnetros
+                If SeparaCampoBusqueda("N", "numrepar", txtTaxco(I).Text, Aux) > 0 Then
+                    Aux = ""
+                Else
+                    Aux = " AND " & Aux
+                End If
+            
+            Else
+                'resto camopos
+                'bombamarca|bombaModelo|motorModelo|motormarca|ReferPedido|RecepAgenCliMat|RecpNumExp|
+                If InStr(1, txtTaxco(I).Text, "*") > 0 Then
+                    Aux = " like " & DBSet(Replace(Me.txtTaxco(I).Text, "*", "%"), "T")
+                Else
+                    Aux = " = " & DBSet(Me.txtTaxco(I).Text, "T")
+                End If
+                Aux = " AND " & RecuperaValor("bombamarca|bombaModelo|motorModelo|motormarca|ReferPedido|RecepAgenCliMat|RecpNumExp|", I + 1) & Aux
+                
+            End If
+            If Aux <> "" Then DevuelveBusquedaTaxco = DevuelveBusquedaTaxco & Aux
+        End If
+    Next
+
+    If DevuelveBusquedaTaxco <> "" Then DevuelveBusquedaTaxco = Mid(DevuelveBusquedaTaxco, 5)       'quitamos el primer and
+
+
+    
+End Function
+
+
+
+
 Private Sub txtCostes_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -10569,7 +10754,7 @@ Dim C As String
     If data3.Recordset.EOF Then
         C = ""
     Else
-        C = CarpetaImagenesEULER & "\" & Mid(data3.Recordset!codtipoa & "   ", 1, 3) & Format(data3.Recordset!Numalbar, "0000000") & ".jpg"
+        C = CarpetaImagenesEULER & "\" & Mid(data3.Recordset!Codtipoa & "   ", 1, 3) & Format(data3.Recordset!Numalbar, "0000000") & ".jpg"
     End If
     If Dir(C, vbArchive) = "" Then C = ""
         

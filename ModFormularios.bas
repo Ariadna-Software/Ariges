@@ -2227,13 +2227,22 @@ Public Function PonerArticulo(ByRef txtCod As TextBox, ByRef txtNom As TextBox, 
 Dim vArtic As CArticulo
 Dim Bloquea As Boolean
 Dim NoSeguir As Boolean
-
+Dim N As Integer
+Dim L As Integer
 
     PonerArticulo = False
     sConLotes = False
     
     Set vArtic = New CArticulo
         
+    If vParamAplic.DigitosCodartic > 0 Then
+        'Sutituyen punto por cero hasta digitos codartic
+        N = InStr(1, txtCod.Text, ".")
+        If N > 0 Then
+            L = vParamAplic.DigitosCodartic - (Len(txtCod.Text) - 1)
+            If L > 0 Then txtCod.Text = Mid(txtCod.Text, 1, N - 1) & String(CLng(L), "0") & Mid(txtCod.Text, N + 1)
+        End If
+    End If
     If vArtic.Existe(txtCod.Text) Then
         If vArtic.LeerDatos(txtCod.Text) Then
             'comprobar que existe el articulo en el almacen del movimiento
@@ -2372,7 +2381,7 @@ Public Sub AbrirForm_Articulos(Articulo As String)
 Dim FrmArt As frmAlmArticulos
 
     If Trim(Articulo) = "" Then Exit Sub
-    
+    If vUsu.Nivel2 = 2 Then Exit Sub  'No tiene permiso
     Set FrmArt = New frmAlmArticulos
     FrmArt.DeConsulta = True
     FrmArt.DatosADevolverBusqueda = "::" & Trim(Articulo)

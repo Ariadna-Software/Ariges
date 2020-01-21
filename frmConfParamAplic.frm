@@ -148,12 +148,11 @@ Begin VB.Form frmConfParamAplic
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   6
       TabsPerRow      =   7
       TabHeight       =   520
       TabCaption(0)   =   "Datos Varios"
       TabPicture(0)   =   "frmConfParamAplic.frx":000C
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1(6)"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(5)"
@@ -204,260 +203,105 @@ Begin VB.Form frmConfParamAplic
       TabCaption(1)   =   "Datos Facturación"
       TabPicture(1)   =   "frmConfParamAplic.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(76)"
-      Tab(1).Control(1)=   "Frame15"
-      Tab(1).Control(2)=   "Frame12"
-      Tab(1).Control(3)=   "Frame10"
-      Tab(1).Control(4)=   "Frame9"
-      Tab(1).Control(5)=   "FrameTelefoniaArtic"
-      Tab(1).Control(6)=   "Frame2"
-      Tab(1).Control(7)=   "Label1(86)"
+      Tab(1).Control(0)=   "Label1(86)"
+      Tab(1).Control(1)=   "Frame2"
+      Tab(1).Control(2)=   "FrameTelefoniaArtic"
+      Tab(1).Control(3)=   "Frame9"
+      Tab(1).Control(4)=   "Frame10"
+      Tab(1).Control(5)=   "Frame12"
+      Tab(1).Control(6)=   "Frame15"
+      Tab(1).Control(7)=   "Text1(76)"
       Tab(1).ControlCount=   8
       TabCaption(2)   =   "Datos compras / Copias"
       TabPicture(2)   =   "frmConfParamAplic.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Text1(78)"
-      Tab(2).Control(1)=   "Text1(77)"
-      Tab(2).Control(2)=   "FrameSepOfertas"
-      Tab(2).Control(3)=   "Text1(72)"
-      Tab(2).Control(4)=   "Text1(65)"
-      Tab(2).Control(5)=   "Text2(65)"
-      Tab(2).Control(6)=   "Frame16"
-      Tab(2).Control(7)=   "Frame4"
-      Tab(2).Control(8)=   "Frame14"
-      Tab(2).Control(9)=   "FrameNumCopias"
-      Tab(2).Control(10)=   "Frame11"
-      Tab(2).Control(11)=   "Frame3"
-      Tab(2).Control(12)=   "Label1(88)"
-      Tab(2).Control(13)=   "Label1(87)"
-      Tab(2).Control(14)=   "Label1(75)"
-      Tab(2).Control(15)=   "Label1(67)"
-      Tab(2).Control(16)=   "imgayuda(6)"
-      Tab(2).Control(17)=   "imgBuscar(65)"
+      Tab(2).Control(0)=   "imgBuscar(65)"
+      Tab(2).Control(1)=   "imgayuda(6)"
+      Tab(2).Control(2)=   "Label1(67)"
+      Tab(2).Control(3)=   "Label1(75)"
+      Tab(2).Control(4)=   "Label1(87)"
+      Tab(2).Control(5)=   "Label1(88)"
+      Tab(2).Control(6)=   "Frame3"
+      Tab(2).Control(7)=   "Frame11"
+      Tab(2).Control(8)=   "FrameNumCopias"
+      Tab(2).Control(9)=   "Frame14"
+      Tab(2).Control(10)=   "Frame4"
+      Tab(2).Control(11)=   "Frame16"
+      Tab(2).Control(12)=   "Text2(65)"
+      Tab(2).Control(13)=   "Text1(65)"
+      Tab(2).Control(14)=   "Text1(72)"
+      Tab(2).Control(15)=   "FrameSepOfertas"
+      Tab(2).Control(16)=   "Text1(77)"
+      Tab(2).Control(17)=   "Text1(78)"
       Tab(2).ControlCount=   18
       TabCaption(3)   =   "Datos Contabilidad "
       TabPicture(3)   =   "frmConfParamAplic.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "CboModAnalitica"
-      Tab(3).Control(1)=   "Text1(71)"
-      Tab(3).Control(2)=   "Text2(71)"
-      Tab(3).Control(3)=   "chkContabIntraCom"
-      Tab(3).Control(4)=   "Text1(70)"
-      Tab(3).Control(5)=   "Text2(70)"
-      Tab(3).Control(6)=   "Frame8"
-      Tab(3).Control(7)=   "Text1(50)"
-      Tab(3).Control(8)=   "Text1(52)"
-      Tab(3).Control(9)=   "Text2(52)"
-      Tab(3).Control(10)=   "cboObsFactura"
-      Tab(3).Control(11)=   "Text2(48)"
-      Tab(3).Control(12)=   "Text1(48)"
-      Tab(3).Control(13)=   "Text1(49)"
-      Tab(3).Control(14)=   "Text2(47)"
-      Tab(3).Control(15)=   "Text1(47)"
-      Tab(3).Control(16)=   "Text1(46)"
-      Tab(3).Control(17)=   "Text2(46)"
-      Tab(3).Control(18)=   "Text1(23)"
-      Tab(3).Control(19)=   "Text1(22)"
-      Tab(3).Control(20)=   "Text1(21)"
-      Tab(3).Control(21)=   "Text1(20)"
-      Tab(3).Control(22)=   "imgayuda(9)"
-      Tab(3).Control(23)=   "imgayuda(8)"
-      Tab(3).Control(24)=   "Label1(74)"
-      Tab(3).Control(25)=   "imgBuscar(66)"
-      Tab(3).Control(26)=   "Label1(73)"
-      Tab(3).Control(27)=   "Label1(72)"
-      Tab(3).Control(28)=   "imgBuscar(67)"
-      Tab(3).Control(29)=   "Label2(4)"
-      Tab(3).Control(30)=   "Label1(58)"
-      Tab(3).Control(31)=   "Label1(51)"
-      Tab(3).Control(32)=   "Label1(47)"
-      Tab(3).Control(33)=   "imgBuscar(45)"
-      Tab(3).Control(34)=   "Label1(53)"
-      Tab(3).Control(35)=   "Label1(52)"
-      Tab(3).Control(36)=   "imgBuscar(41)"
-      Tab(3).Control(37)=   "Label1(50)"
-      Tab(3).Control(38)=   "Label1(49)"
-      Tab(3).Control(39)=   "Label2(6)"
-      Tab(3).Control(40)=   "Label2(7)"
-      Tab(3).Control(41)=   "imgBuscar(40)"
-      Tab(3).Control(42)=   "Label1(48)"
-      Tab(3).Control(43)=   "imgBuscar(39)"
-      Tab(3).Control(44)=   "Label1(19)"
-      Tab(3).Control(45)=   "Label1(18)"
-      Tab(3).Control(46)=   "Label1(17)"
-      Tab(3).Control(47)=   "Label1(15)"
+      Tab(3).Control(0)=   "Label1(15)"
+      Tab(3).Control(1)=   "Label1(17)"
+      Tab(3).Control(2)=   "Label1(18)"
+      Tab(3).Control(3)=   "Label1(19)"
+      Tab(3).Control(4)=   "imgBuscar(39)"
+      Tab(3).Control(5)=   "Label1(48)"
+      Tab(3).Control(6)=   "imgBuscar(40)"
+      Tab(3).Control(7)=   "Label2(7)"
+      Tab(3).Control(8)=   "Label2(6)"
+      Tab(3).Control(9)=   "Label1(49)"
+      Tab(3).Control(10)=   "Label1(50)"
+      Tab(3).Control(11)=   "imgBuscar(41)"
+      Tab(3).Control(12)=   "Label1(52)"
+      Tab(3).Control(13)=   "Label1(53)"
+      Tab(3).Control(14)=   "imgBuscar(45)"
+      Tab(3).Control(15)=   "Label1(47)"
+      Tab(3).Control(16)=   "Label1(51)"
+      Tab(3).Control(17)=   "Label1(58)"
+      Tab(3).Control(18)=   "Label2(4)"
+      Tab(3).Control(19)=   "imgBuscar(67)"
+      Tab(3).Control(20)=   "Label1(72)"
+      Tab(3).Control(21)=   "Label1(73)"
+      Tab(3).Control(22)=   "imgBuscar(66)"
+      Tab(3).Control(23)=   "Label1(74)"
+      Tab(3).Control(24)=   "imgayuda(8)"
+      Tab(3).Control(25)=   "imgayuda(9)"
+      Tab(3).Control(26)=   "Text1(20)"
+      Tab(3).Control(27)=   "Text1(21)"
+      Tab(3).Control(28)=   "Text1(22)"
+      Tab(3).Control(29)=   "Text1(23)"
+      Tab(3).Control(30)=   "Text2(46)"
+      Tab(3).Control(31)=   "Text1(46)"
+      Tab(3).Control(32)=   "Text1(47)"
+      Tab(3).Control(33)=   "Text2(47)"
+      Tab(3).Control(34)=   "Text1(49)"
+      Tab(3).Control(35)=   "Text1(48)"
+      Tab(3).Control(36)=   "Text2(48)"
+      Tab(3).Control(37)=   "cboObsFactura"
+      Tab(3).Control(38)=   "Text2(52)"
+      Tab(3).Control(39)=   "Text1(52)"
+      Tab(3).Control(40)=   "Text1(50)"
+      Tab(3).Control(41)=   "Frame8"
+      Tab(3).Control(42)=   "Text2(70)"
+      Tab(3).Control(43)=   "Text1(70)"
+      Tab(3).Control(44)=   "chkContabIntraCom"
+      Tab(3).Control(45)=   "Text2(71)"
+      Tab(3).Control(46)=   "Text1(71)"
+      Tab(3).Control(47)=   "CboModAnalitica"
       Tab(3).ControlCount=   48
       TabCaption(4)   =   "Internet"
       TabPicture(4)   =   "frmConfParamAplic.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "FrameSoporte"
-      Tab(4).Control(1)=   "FrameEMail"
+      Tab(4).Control(0)=   "FrameEMail"
+      Tab(4).Control(1)=   "FrameSoporte"
       Tab(4).ControlCount=   2
       TabCaption(5)   =   "Valores por defecto / AVISOS"
       TabPicture(5)   =   "frmConfParamAplic.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame7"
-      Tab(5).Control(1)=   "Frame5"
+      Tab(5).Control(0)=   "Frame5"
+      Tab(5).Control(1)=   "Frame7"
       Tab(5).ControlCount=   2
-      TabCaption(6)   =   "Otros datos albaranes"
+      TabCaption(6)   =   "Disponible"
       TabPicture(6)   =   "frmConfParamAplic.frx":00B4
-      Tab(6).ControlEnabled=   -1  'True
-      Tab(6).Control(0)=   "Label1(89)"
-      Tab(6).Control(0).Enabled=   0   'False
-      Tab(6).Control(1)=   "imgBuscar(79)"
-      Tab(6).Control(1).Enabled=   0   'False
-      Tab(6).Control(2)=   "Label3"
-      Tab(6).Control(2).Enabled=   0   'False
-      Tab(6).Control(3)=   "Label1(90)"
-      Tab(6).Control(3).Enabled=   0   'False
-      Tab(6).Control(4)=   "imgBuscar(80)"
-      Tab(6).Control(4).Enabled=   0   'False
-      Tab(6).Control(5)=   "Label1(91)"
-      Tab(6).Control(5).Enabled=   0   'False
-      Tab(6).Control(6)=   "imgBuscar(81)"
-      Tab(6).Control(6).Enabled=   0   'False
-      Tab(6).Control(7)=   "Label1(92)"
-      Tab(6).Control(7).Enabled=   0   'False
-      Tab(6).Control(8)=   "imgBuscar(82)"
-      Tab(6).Control(8).Enabled=   0   'False
-      Tab(6).Control(9)=   "Label1(93)"
-      Tab(6).Control(9).Enabled=   0   'False
-      Tab(6).Control(10)=   "Text1(79)"
-      Tab(6).Control(10).Enabled=   0   'False
-      Tab(6).Control(11)=   "Text2(79)"
-      Tab(6).Control(11).Enabled=   0   'False
-      Tab(6).Control(12)=   "Text1(80)"
-      Tab(6).Control(12).Enabled=   0   'False
-      Tab(6).Control(13)=   "Text2(80)"
-      Tab(6).Control(13).Enabled=   0   'False
-      Tab(6).Control(14)=   "Text1(81)"
-      Tab(6).Control(14).Enabled=   0   'False
-      Tab(6).Control(15)=   "Text2(81)"
-      Tab(6).Control(15).Enabled=   0   'False
-      Tab(6).Control(16)=   "Text1(82)"
-      Tab(6).Control(16).Enabled=   0   'False
-      Tab(6).Control(17)=   "Text2(82)"
-      Tab(6).Control(17).Enabled=   0   'False
-      Tab(6).Control(18)=   "Text1(83)"
-      Tab(6).Control(18).Enabled=   0   'False
-      Tab(6).Control(19)=   "Text2(83)"
-      Tab(6).Control(19).Enabled=   0   'False
-      Tab(6).ControlCount=   20
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Height          =   315
-         Index           =   83
-         Left            =   4080
-         Locked          =   -1  'True
-         MaxLength       =   40
-         TabIndex        =   295
-         Text            =   "Text2"
-         Top             =   2520
-         Width           =   4665
-      End
-      Begin VB.TextBox Text1 
-         Height          =   320
-         Index           =   83
-         Left            =   3000
-         MaxLength       =   16
-         TabIndex        =   285
-         Tag             =   "GasolClienteVario |N|S|||spara1|GasolClienteVario|||"
-         Text            =   "Text1 "
-         Top             =   2520
-         Width           =   975
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Height          =   315
-         Index           =   82
-         Left            =   4800
-         Locked          =   -1  'True
-         MaxLength       =   40
-         TabIndex        =   293
-         Text            =   "Text2"
-         Top             =   2040
-         Width           =   4665
-      End
-      Begin VB.TextBox Text1 
-         Height          =   320
-         Index           =   82
-         Left            =   3000
-         MaxLength       =   16
-         TabIndex        =   284
-         Tag             =   "GasolArticuloExento|T|S|||spara1|GasolArticuloExento|||"
-         Text            =   "Text1 "
-         Top             =   2040
-         Width           =   1815
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Height          =   315
-         Index           =   81
-         Left            =   4800
-         Locked          =   -1  'True
-         MaxLength       =   40
-         TabIndex        =   291
-         Text            =   "Text2"
-         Top             =   1680
-         Width           =   4665
-      End
-      Begin VB.TextBox Text1 
-         Height          =   320
-         Index           =   81
-         Left            =   3000
-         MaxLength       =   16
-         TabIndex        =   283
-         Tag             =   "GasolArticuloSuperReducido |T|S|||spara1|GasolArticuloSuperReducido|||"
-         Text            =   "Text1 "
-         Top             =   1680
-         Width           =   1815
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Height          =   315
-         Index           =   80
-         Left            =   4800
-         Locked          =   -1  'True
-         MaxLength       =   40
-         TabIndex        =   289
-         Text            =   "Text2"
-         Top             =   1320
-         Width           =   4665
-      End
-      Begin VB.TextBox Text1 
-         Height          =   320
-         Index           =   80
-         Left            =   3000
-         MaxLength       =   16
-         TabIndex        =   282
-         Tag             =   "GasolArticuloReducido|T|S|||spara1|GasolArticuloReducido|||"
-         Text            =   "Text1 "
-         Top             =   1320
-         Width           =   1815
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Height          =   315
-         Index           =   79
-         Left            =   4800
-         Locked          =   -1  'True
-         MaxLength       =   40
-         TabIndex        =   286
-         Text            =   "Text2"
-         Top             =   960
-         Width           =   4665
-      End
-      Begin VB.TextBox Text1 
-         Height          =   320
-         Index           =   79
-         Left            =   3000
-         MaxLength       =   16
-         TabIndex        =   281
-         Tag             =   "GasolArticuloNormal|T|S|||spara1|GasolArticuloNormal|||"
-         Text            =   "Text1 "
-         Top             =   960
-         Width           =   1815
-      End
+      Tab(6).ControlEnabled=   0   'False
+      Tab(6).ControlCount=   0
       Begin VB.TextBox Text1 
          Height          =   320
          Index           =   78
@@ -1953,7 +1797,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.ComboBox cboDpto 
          Height          =   315
          ItemData        =   "frmConfParamAplic.frx":00D0
-         Left            =   -73080
+         Left            =   1920
          List            =   "frmConfParamAplic.frx":00DD
          Style           =   2  'Dropdown List
          TabIndex        =   6
@@ -2455,7 +2299,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   735
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   176
          Top             =   6120
          Width           =   3375
@@ -2484,7 +2328,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.ComboBox cboCreaTarifa 
          Height          =   315
          ItemData        =   "frmConfParamAplic.frx":0104
-         Left            =   -73080
+         Left            =   1920
          List            =   "frmConfParamAplic.frx":0111
          Style           =   2  'Dropdown List
          TabIndex        =   5
@@ -2975,7 +2819,7 @@ Begin VB.Form frmConfParamAplic
          BackColor       =   &H80000018&
          Height          =   315
          Index           =   1
-         Left            =   -71640
+         Left            =   3360
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   134
@@ -3032,7 +2876,7 @@ Begin VB.Form frmConfParamAplic
       End
       Begin VB.ComboBox cboOrdenDtos 
          Height          =   315
-         Left            =   -73080
+         Left            =   1920
          Style           =   2  'Dropdown List
          TabIndex        =   3
          Tag             =   "Orden Descuentos|N|N|||spara1|ordendto|||"
@@ -3100,7 +2944,7 @@ Begin VB.Form frmConfParamAplic
       End
       Begin VB.ComboBox cboTipodtos 
          Height          =   315
-         Left            =   -73080
+         Left            =   1920
          Style           =   2  'Dropdown List
          TabIndex        =   4
          Tag             =   "Tipo Descuentos|N|N|||spara1|tipodtos|||"
@@ -3111,7 +2955,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   320
          Index           =   1
-         Left            =   -72360
+         Left            =   2640
          MaxLength       =   3
          TabIndex        =   2
          Tag             =   "Código Tarifa PVP|N|N|||spara1|codtarif|000||"
@@ -3132,7 +2976,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1070
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   117
          Top             =   3840
          Width           =   3375
@@ -3182,7 +3026,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   320
          Index           =   4
-         Left            =   -73320
+         Left            =   1680
          MaxLength       =   35
          TabIndex        =   0
          Tag             =   "Nombre Director Gerente|T|S|||spara1|nomgeren|||"
@@ -3193,7 +3037,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   320
          Index           =   5
-         Left            =   -68520
+         Left            =   6480
          MaxLength       =   35
          TabIndex        =   1
          Tag             =   "Nombre responsable Admon|T|S|||spara1|nomadmin|||"
@@ -3214,7 +3058,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   5295
-         Left            =   -70800
+         Left            =   4200
          TabIndex        =   116
          Top             =   1440
          Width           =   6135
@@ -3527,7 +3371,7 @@ Begin VB.Form frmConfParamAplic
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1095
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   113
          Top             =   4920
          Width           =   3375
@@ -3577,118 +3421,13 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   0
-         Left            =   -71040
+         Left            =   3960
          MaxLength       =   15
          TabIndex        =   124
          Tag             =   "Código Parámetros Aplic|N|N|||spara1|codigo||S|"
          Text            =   "Text1"
          Top             =   480
          Width           =   645
-      End
-      Begin VB.Label Label1 
-         AutoSize        =   -1  'True
-         Caption         =   "Cliente varios "
-         Height          =   195
-         Index           =   93
-         Left            =   720
-         TabIndex        =   296
-         Top             =   2520
-         Width           =   990
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   82
-         Left            =   2760
-         Tag             =   "-1"
-         ToolTipText     =   "Buscar artículo"
-         Top             =   2070
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         AutoSize        =   -1  'True
-         Caption         =   "Artículo IVA exento"
-         Height          =   195
-         Index           =   92
-         Left            =   720
-         TabIndex        =   294
-         Top             =   2040
-         Width           =   1380
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   81
-         Left            =   2760
-         Tag             =   "-1"
-         ToolTipText     =   "Buscar artículo"
-         Top             =   1680
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         AutoSize        =   -1  'True
-         Caption         =   "Artículo IVA superreducido"
-         Height          =   195
-         Index           =   91
-         Left            =   720
-         TabIndex        =   292
-         Top             =   1680
-         Width           =   1905
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   80
-         Left            =   2760
-         Tag             =   "-1"
-         ToolTipText     =   "Buscar artículo"
-         Top             =   1350
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         AutoSize        =   -1  'True
-         Caption         =   "Artículo IVA reducido"
-         Height          =   195
-         Index           =   90
-         Left            =   720
-         TabIndex        =   290
-         Top             =   1320
-         Width           =   1515
-      End
-      Begin VB.Label Label3 
-         AutoSize        =   -1  'True
-         Caption         =   "Parámetros gasolinera"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   240
-         Left            =   240
-         TabIndex        =   288
-         Top             =   600
-         Width           =   2475
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   79
-         Left            =   2760
-         Tag             =   "-1"
-         ToolTipText     =   "Buscar artículo"
-         Top             =   990
-         Width           =   240
-      End
-      Begin VB.Label Label1 
-         AutoSize        =   -1  'True
-         Caption         =   "Artículo IVA normal"
-         Height          =   195
-         Index           =   89
-         Left            =   720
-         TabIndex        =   287
-         Top             =   960
-         Width           =   1365
       End
       Begin VB.Label Label1 
          Caption         =   "Albaranes firmados"
@@ -3854,7 +3593,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgayuda 
          Height          =   255
          Index           =   2
-         Left            =   -71280
+         Left            =   3720
          ToolTipText     =   "Departamento-Direcciones"
          Top             =   3360
          Width           =   375
@@ -3863,7 +3602,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Departamento"
          Height          =   255
          Index           =   63
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   185
          Top             =   3390
          Width           =   1455
@@ -3872,7 +3611,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Crear tarifas"
          Height          =   255
          Index           =   59
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   175
          Top             =   2970
          Width           =   1455
@@ -4087,7 +3826,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   1
-         Left            =   -73035
+         Left            =   1965
          Tag             =   "-1"
          ToolTipText     =   "Buscar tarifa"
          Top             =   960
@@ -4133,7 +3872,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Orden Descuentos"
          Height          =   255
          Index           =   14
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   129
          Top             =   2130
          Width           =   1575
@@ -4142,7 +3881,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Tipo de Descuentos"
          Height          =   255
          Index           =   0
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   123
          Top             =   2550
          Width           =   1575
@@ -4151,7 +3890,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Código Tarifa de PVP"
          Height          =   255
          Index           =   1
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   122
          Top             =   960
          Width           =   1575
@@ -4160,7 +3899,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Director Gerente"
          Height          =   255
          Index           =   4
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   121
          Top             =   513
          Width           =   1455
@@ -4169,7 +3908,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Responsable Admon."
          Height          =   195
          Index           =   5
-         Left            =   -70200
+         Left            =   4800
          TabIndex        =   120
          Top             =   543
          Width           =   1515
@@ -4178,7 +3917,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Código"
          Height          =   255
          Index           =   6
-         Left            =   -71880
+         Left            =   3120
          TabIndex        =   125
          Top             =   600
          Width           =   495
@@ -4720,13 +4459,6 @@ Dim kms As Currency
             vParamAplic.PathFirmasAlbaran = Text1(78).Text
             
             
-            'Los ivas
-            vParamAplic.GasolArticuloNormal = Text1(79).Text
-            vParamAplic.GasolArticuloReducido = Text1(80).Text
-            vParamAplic.GasolArticuloSuperReducido = Text1(81).Text
-            vParamAplic.GasolArticuloExento = Text1(82).Text
-            vParamAplic.GasolClienteVario = Val(Text1(83).Text)
-            
             
             
             
@@ -4826,6 +4558,8 @@ Dim Im
     LimpiarCampos   'Limpia los campos TextBox
     Me.SSTab1.Tab = 0
     
+    SSTab1.TabVisible(6) = False
+    
     CargarComboTipoDtos
     CargarComboOrdenDtos
     CargaComoboObsFactura
@@ -4874,6 +4608,11 @@ Dim Im
     'Ope. aseguradas lo habilitamos por el YOG. Auqi solo puede cambiar la situbloq
     chkAseguradas.visible = False
     imgAyuda(5).visible = False
+    
+    
+    
+    
+    
     
     PonerModo 0
 End Sub
@@ -5373,7 +5112,7 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo ErrOK
 
@@ -5518,26 +5257,6 @@ Dim Cad As String
     
     
     
-    'Noviembre 2019
-    ' Gasolinera. Si tiene alguno, tienen que ser todos
-    Cad = ""
-    For NumRegElim = 79 To 83
-        Me.Text1(NumRegElim).Text = Trim(Me.Text1(NumRegElim).Text)
-        If Me.Text1(NumRegElim).Text <> "" Then
-            If Text2(NumRegElim).Text = "" Then
-                MsgBox "Campo gasolinera incorrecto", vbExclamation
-                b = False
-            Else
-                Cad = Cad & "X"
-            End If
-        End If
-    Next
-    If Len(Cad) > 0 And Len(Cad) < 5 Then
-        Cad = "Si indica campos de gasolinera, debe indicarlos todos"
-        MsgBox Cad, vbExclamation
-        b = False
-    End If
-    
     
     
     DatosOk = b
@@ -5606,10 +5325,7 @@ On Error GoTo EPonerCampos
     'Numeros de copia
     PonerValoresNumerosDeCopia
     
-    'Gasolinera
-    For NumRegElim = 79 To 83
-        Text1_LostFocus CInt(NumRegElim)
-    Next
+  
     
     
     

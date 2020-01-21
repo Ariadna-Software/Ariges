@@ -405,40 +405,40 @@ Begin VB.Form frmAdmTrabajadores
       TabCaption(1)   =   "Estudios/Formación"
       TabPicture(1)   =   "frmAdmTrabajadores.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "txtAux1(1)"
+      Tab(1).Control(0)=   "DataGrid1"
       Tab(1).Control(1)=   "txtAux1(0)"
-      Tab(1).Control(2)=   "DataGrid1"
+      Tab(1).Control(2)=   "txtAux1(1)"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Habilidades"
       TabPicture(2)   =   "frmAdmTrabajadores.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "txtAux2"
-      Tab(2).Control(1)=   "DataGrid2"
+      Tab(2).Control(0)=   "DataGrid2"
+      Tab(2).Control(1)=   "txtAux2"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Experiencia Laboral"
       TabPicture(3)   =   "frmAdmTrabajadores.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "TxtAux3(1)"
+      Tab(3).Control(0)=   "DataGrid3"
       Tab(3).Control(1)=   "TxtAux3(0)"
-      Tab(3).Control(2)=   "DataGrid3"
+      Tab(3).Control(2)=   "TxtAux3(1)"
       Tab(3).ControlCount=   3
       TabCaption(4)   =   "Formación Realizada"
       TabPicture(4)   =   "frmAdmTrabajadores.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "TxtAux4(4)"
-      Tab(4).Control(1)=   "TxtAux4(3)"
-      Tab(4).Control(2)=   "TxtAux4(2)"
-      Tab(4).Control(3)=   "TxtAux4(1)"
-      Tab(4).Control(4)=   "TxtAux4(0)"
-      Tab(4).Control(5)=   "DataGrid4"
+      Tab(4).Control(0)=   "DataGrid4"
+      Tab(4).Control(1)=   "TxtAux4(0)"
+      Tab(4).Control(2)=   "TxtAux4(1)"
+      Tab(4).Control(3)=   "TxtAux4(2)"
+      Tab(4).Control(4)=   "TxtAux4(3)"
+      Tab(4).Control(5)=   "TxtAux4(4)"
       Tab(4).ControlCount=   6
       TabCaption(5)   =   "Formación Empresa"
       TabPicture(5)   =   "frmAdmTrabajadores.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "TxtAux5(2)"
-      Tab(5).Control(1)=   "TxtAux5(1)"
-      Tab(5).Control(2)=   "TxtAux5(0)"
-      Tab(5).Control(3)=   "DataGrid5"
+      Tab(5).Control(0)=   "DataGrid5"
+      Tab(5).Control(1)=   "TxtAux5(0)"
+      Tab(5).Control(2)=   "TxtAux5(1)"
+      Tab(5).Control(3)=   "TxtAux5(2)"
       Tab(5).ControlCount=   4
       Begin VB.TextBox Text1 
          Height          =   315
@@ -2443,6 +2443,10 @@ Private Sub Form_Load()
     
     If InstalacionEsEulerTaxco Then
         Label1(6).Caption = "Reloj"
+        
+        Label1(40).Caption = "Permiso"
+        
+        
     Else
         Label1(6).Caption = "Agente móvil"
     End If
@@ -2574,8 +2578,13 @@ Dim Indice As Byte
         
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
-            frmB.vTabla = "cabccost"
+            If vParamAplic.ContabilidadNueva Then
+                frmB.vCampos = "Codigo|ccoste|codccost|T||20·Descripción|ccoste|nomccost|T||70·"
+                frmB.vTabla = "ccoste"
+            Else
+                frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
+                frmB.vTabla = "cabccost"
+            End If
             frmB.vSQL = ""
             HaDevueltoDatos = False
             '###A mano

@@ -23249,7 +23249,7 @@ Dim Aux As Currency
             miSQL = miSQL & ", preciomp = " & DBSet(Aux, "N")
             miSQL = miSQL & ",preciost = " & DBSet(Aux, "N")
             miSQL = miSQL & " WHERE codtipom='" & miRsAux!codtipom & "' AND numfactu = " & miRsAux!Numfactu
-            miSQL = miSQL & " AND fecfactu=" & DBSet(miRsAux!FecFactu, "F") & " AND codtipoa = '" & miRsAux!codtipoa & "'"
+            miSQL = miSQL & " AND fecfactu=" & DBSet(miRsAux!FecFactu, "F") & " AND codtipoa = '" & miRsAux!Codtipoa & "'"
             miSQL = miSQL & " AND numalbar=" & miRsAux!Numalbar & " AND numlinea = " & miRsAux!numlinea
             conn.Execute miSQL
         End If
@@ -25807,7 +25807,7 @@ Private Sub imgArticulo_Click(index As Integer)
 End Sub
 
 
-Private Sub imgayuda_Click(index As Integer)
+Private Sub imgAyuda_Click(index As Integer)
 Dim Ayuda As String
 
     'Sera las ayuda. Tampoco queiero la biblia, pero,
@@ -25902,8 +25902,13 @@ Private Sub imgCC_Click(index As Integer)
     Screen.MousePointer = vbHourglass
     miSQL = ""
     Set frmB = New frmBuscaGrid
-    frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
-    frmB.vTabla = "cabccost"
+    If vParamAplic.ContabilidadNueva Then
+        frmB.vCampos = "Codigo|ccoste|codccost|T||20·Descripción|ccoste|nomccost|T||70·"
+        frmB.vTabla = "ccoste"
+    Else
+        frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
+        frmB.vTabla = "cabccost"
+    End If
     frmB.vSQL = ""
     frmB.vDevuelve = "0|1|"
     frmB.vTitulo = "Centros de coste"
@@ -30802,7 +30807,7 @@ Dim I As Integer
             cadNomRPT = miSQL
         End If
         
-        Codigo = Codigo & DBSet(cadNomRPT, "T") & "," & DBSet(miRsAux!fechahora, "F") & ")"
+        Codigo = Codigo & DBSet(cadNomRPT, "T") & "," & DBSet(miRsAux!FechaHora, "F") & ")"
         
         
         If Len(Codigo) > 2000 Then

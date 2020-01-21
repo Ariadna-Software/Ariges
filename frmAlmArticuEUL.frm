@@ -409,13 +409,13 @@ Dim b As Boolean
     b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
-    txtAux(2).visible = Not b
-    txtAux(3).visible = Not b
-    txtAux(4).visible = Not b
+    Me.txtaux(0).visible = Not b
+    txtaux(1).visible = Not b
+    txtaux(2).visible = Not b
+    txtaux(3).visible = Not b
+    txtaux(4).visible = Not b
     
-    txtAux(5).visible = Not b And Not DesdeVentas
+    txtaux(5).visible = Not b And Not DesdeVentas
 
     
     cmdAceptar.visible = Not b
@@ -426,10 +426,10 @@ Dim b As Boolean
     If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     'Si estamos en insertar o modificar
-    BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
+    BloquearTxt txtaux(0), (Modo <> 3 And Modo <> 1)
     
     'El PVP IVA NO SE PUEDE BUSCAR
-    BloquearTxt txtAux(5), True
+    BloquearTxt txtaux(5), True
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -498,9 +498,9 @@ Private Sub BotonBuscar()
     limpiar Me
     LLamaLineas 750, 1
     If vParamAplic.SituaEnCodigoArticulo Then
-        PonerFoco txtAux(0)
+        PonerFoco txtaux(0)
     Else
-        PonerFoco txtAux(1)
+        PonerFoco txtaux(1)
     End If
 End Sub
 
@@ -551,12 +551,12 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
     'Fijamos el ancho
-    txtAux(0).Top = alto
-    txtAux(1).Top = alto
-    txtAux(2).Top = alto
-    txtAux(3).Top = alto
-    txtAux(4).Top = alto
-    txtAux(5).Top = alto
+    txtaux(0).Top = alto
+    txtaux(1).Top = alto
+    txtaux(2).Top = alto
+    txtaux(3).Top = alto
+    txtaux(4).Top = alto
+    txtaux(5).Top = alto
     'txtAux(6).Top = alto
 '    txtAux(0).Left = DataGrid1.Left + 340
 '    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
@@ -594,8 +594,8 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
-Dim cadB As String
+Dim I As Integer
+Dim CadB As String
 
     On Error Resume Next
 
@@ -603,18 +603,18 @@ Dim cadB As String
         Case 1 'HacerBusqueda
         
             'Modificacion para que no tenga que poner *
-            For i = 0 To 4
-                If i <> 2 Then
-                    If txtAux(i).Text <> "" Then
+            For I = 0 To 4
+                If I <> 2 Then
+                    If txtaux(I).Text <> "" Then
                         'No lo ha puesto el. Se lo pongo YO
-                        If InStr(1, txtAux(i).Text, "*") = 0 Then txtAux(i).Text = "*" & txtAux(i).Text & "*"
+                        If InStr(1, txtaux(I).Text, "*") = 0 Then txtaux(I).Text = "*" & txtaux(I).Text & "*"
                     End If
                 End If
-            Next i
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" Then
+            Next I
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid cadB
+                CargaGrid CadB
                 DataGrid1.SetFocus
             End If
         
@@ -706,13 +706,13 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     End If
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
     If Modo = 1 Then
         If vParamAplic.SituaEnCodigoArticulo Then
-            PonerFoco txtAux(0)
+            PonerFoco txtaux(0)
         Else
-            PonerFoco txtAux(1)
+            PonerFoco txtaux(1)
         End If
     End If
 End Sub
@@ -731,7 +731,12 @@ Private Sub Form_Load()
         .Buttons(11).Image = 15  'Botón Salir
     End With
     
-    
+     'If vUsu.Nivel2 = 2 Then
+     If False Then
+        'NO pueden BUSCAR en matenimiento Clientes
+        mnBusqAvan.Enabled = False
+        Toolbar1.Buttons(5).Enabled = False
+    End If
     
     FormatoCod = CheckValueLeer(Me.Name)
     If FormatoCod <> "1" Then FormatoCod = "0"
@@ -740,7 +745,7 @@ Private Sub Form_Load()
     
     
     
-    FormatoCod = FormatoCampo(txtAux(0))
+    FormatoCod = FormatoCampo(txtaux(0))
     
     
     'SIEMPRE VIENEN EN MODO BUSQUEDA
@@ -802,9 +807,9 @@ Dim C As String
     CadenaConsulta = C
 End Sub
 
-Private Sub mnOrdenadoPor_Click(Index As Integer)
-        mnOrdenadoPor(0).Checked = Index = 0
-        mnOrdenadoPor(1).Checked = Index = 1
+Private Sub mnOrdenadoPor_Click(index As Integer)
+        mnOrdenadoPor(0).Checked = index = 0
+        mnOrdenadoPor(1).Checked = index = 1
 End Sub
 
 Private Sub mnSalir_Click()
@@ -817,7 +822,7 @@ Private Sub mnVerTodos_Click()
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1: mnBuscar_Click
         Case 2: mnVerTodos_Click
         Case 5:
@@ -879,20 +884,20 @@ Dim cadSel As String
    End If
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+Private Sub txtAux_GotFocus(index As Integer)
+    ConseguirFoco txtaux(index), Modo
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If Not (Index = 0 And KeyCode = 38) Then KEYdown KeyCode
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+    If Not (index = 0 And KeyCode = 38) Then KEYdown KeyCode
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub txtAux_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+Private Sub txtAux_LostFocus(index As Integer)
+    If Not PerderFocoGnral(txtaux(index), Modo) Then Exit Sub
     'If Index = 0 Then PonerFormatoEntero txtAux(Index)
 End Sub
 
@@ -911,10 +916,10 @@ End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 

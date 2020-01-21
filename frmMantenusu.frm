@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMantenusu 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Mantenimiento de usuarios"
@@ -56,7 +56,7 @@ Begin VB.Form frmMantenusu
          Caption         =   "Guardar"
          Height          =   375
          Index           =   0
-         Left            =   7080
+         Left            =   6960
          TabIndex        =   36
          Top             =   5400
          Width           =   975
@@ -565,9 +565,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim PrimeraVez As Boolean
+Dim primeravez As Boolean
 Dim SQL As String
-Dim i As Integer
+Dim I As Integer
 
 Dim miRsAux As ADODB.Recordset
 
@@ -590,8 +590,8 @@ Private Sub cmdConfigMenu_Click()
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub cmdEditorMenus_Click(Index As Integer)
-    If Index = 0 Then
+Private Sub cmdEditorMenus_Click(index As Integer)
+    If index = 0 Then
         
         GuardarMenuUsuario
     
@@ -601,7 +601,7 @@ Private Sub cmdEditorMenus_Click(Index As Integer)
     
 End Sub
 
-Private Sub cmdEmp_Click(Index As Integer)
+Private Sub cmdEmp_Click(index As Integer)
 Dim cont As Integer
 
     If ListView1.SelectedItem Is Nothing Then
@@ -612,7 +612,7 @@ Dim cont As Integer
         MsgBox "Solo el administrador puede bloquear empresas", vbExclamation
         Exit Sub
     End If
-    If Index = 0 Then
+    If index = 0 Then
 
 
         'nueva Empresa bloqueada para el usuario
@@ -622,13 +622,13 @@ Dim cont As Integer
         If CadenaDesdeOtroForm <> "" Then
             cont = RecuperaValor(CadenaDesdeOtroForm, 1)
             If cont = 0 Then Exit Sub
-            For i = 1 To cont
+            For I = 1 To cont
                 'No hacemos nada
-            Next i
-            For i = 0 To cont - 1
-                SQL = RecuperaValor(CadenaDesdeOtroForm, i + cont + 2)
+            Next I
+            For I = 0 To cont - 1
+                SQL = RecuperaValor(CadenaDesdeOtroForm, I + cont + 2)
                 InsertarEmpresa CInt(SQL)
-            Next i
+            Next I
         
         Else
             Exit Sub
@@ -668,20 +668,20 @@ Private Sub InsertarEmpresa(Empresa As Integer)
 End Sub
 
 
-Private Sub cmdFrameUsu_Click(Index As Integer)
+Private Sub cmdFrameUsu_Click(index As Integer)
 
 
 
-    If Index = 0 Then
-        For i = 0 To Text2.Count - 1
-            Text2(i).Text = Trim(Text2(i).Text)
-            If i < 4 Then
-                If Text2(i).Text = "" Then
-                    MsgBox Label4(i).Caption & " requerido.", vbExclamation
+    If index = 0 Then
+        For I = 0 To Text2.Count - 1
+            Text2(I).Text = Trim(Text2(I).Text)
+            If I < 4 Then
+                If Text2(I).Text = "" Then
+                    MsgBox Label4(I).Caption & " requerido.", vbExclamation
                     Exit Sub
                 End If
             End If
-        Next i
+        Next I
         
         If Combo2.ListIndex < 0 Then
             MsgBox "Seleccione un nivel de acceso", vbExclamation
@@ -697,9 +697,9 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
         
         'Ahora vamos con los campos de e-mail
         CadenaDesdeOtroForm = ""
-        For i = 4 To 7
-            If Text2(i).Text <> "" Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "1"
-        Next i
+        For I = 4 To 7
+            If Text2(I).Text <> "" Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "1"
+        Next I
         
         If Len(CadenaDesdeOtroForm) > 0 And Len(CadenaDesdeOtroForm) <> 4 Then
             MsgBox "Falta por rellenar correctamente los datos del e-mail.", vbExclamation
@@ -713,7 +713,7 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
         
         
         'Compruebo que el login es unico
-        i = 0
+        I = 0
         If UCase(Label6.Caption) = "NUEVO" Then
             Set miRsAux = New ADODB.Recordset
             SQL = "Select login from usuarios.usuarios where login='" & Text2(0).Text & "'"
@@ -730,15 +730,15 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
             'MODIFICAR
             If FrameUsuario.Tag = 0 Then
                 'Estoy modificando un dato normal
-                i = CInt(ListView1.SelectedItem.Text)
+                I = CInt(ListView1.SelectedItem.Text)
             Else
                 'Estoy agregando un usuario que ya existia en contabiñlidad
                 'es decir, le estoy asignando su NIVELUSU de contabilidad
-                i = CInt(FrameUsuario.Tag)
+                I = CInt(FrameUsuario.Tag)
             End If
         End If
         
-        InsertarModificar i
+        InsertarModificar I
         
         
     End If
@@ -761,12 +761,12 @@ Private Sub cmdFrameUsu_Click(Index As Integer)
     
     CargaUsuarios
     If CadenaDesdeOtroForm <> "" Then
-        For i = 1 To ListView1.ListItems.Count
-                If ListView1.ListItems(i).Text = CadenaDesdeOtroForm Then
-                    Set ListView1.SelectedItem = ListView1.ListItems(i)
+        For I = 1 To ListView1.ListItems.Count
+                If ListView1.ListItems(I).Text = CadenaDesdeOtroForm Then
+                    Set ListView1.SelectedItem = ListView1.ListItems(I)
                     Exit For
                 End If
-        Next i
+        Next I
     End If
     DatosUsusario
     CadenaDesdeOtroForm = ""
@@ -779,7 +779,7 @@ End Sub
 
 Private Sub InsertarModificar(ByVal CodigoUsuario As Integer)
 Dim Ant As Integer
-Dim Fin As Boolean
+Dim fin As Boolean
 
 On Error GoTo EInsertarModificar
 
@@ -789,21 +789,22 @@ On Error GoTo EInsertarModificar
         'Nuevo
         SQL = "Select codusu from usuarios.usuarios where codusu > 0"
         miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        Fin = False
+        fin = miRsAux.EOF
         Ant = 1
-        While Not Fin
+        I = Ant 'Inicializamos a 1
+        While Not fin
             If miRsAux!CodUsu - Ant > 0 Then
                 'Hay un salto
-                i = Ant
-                Fin = True
+                I = Ant
+                fin = True
             Else
                 Ant = Ant + 1
             End If
-            If Not Fin Then
+            If Not fin Then
                 miRsAux.MoveNext
                 If miRsAux.EOF Then
-                    Fin = True
-                    i = Ant
+                    fin = True
+                    I = Ant
                 End If
             End If
         Wend
@@ -811,7 +812,7 @@ On Error GoTo EInsertarModificar
 
         
         SQL = "INSERT INTO usuarios.usuarios (codusu, nomusu,  nivelariges, login, passwordpropio,dirfich) VALUES ("
-        SQL = SQL & i
+        SQL = SQL & I
         SQL = SQL & ",'" & Text2(1).Text & "',"
         'Combo
         SQL = SQL & Combo2.ItemData(Combo2.ListIndex) & ",'"
@@ -822,9 +823,9 @@ On Error GoTo EInsertarModificar
             CadenaDesdeOtroForm = "NULL"
         Else
             CadenaDesdeOtroForm = ""
-            For i = 4 To 7
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text2(i).Text & "|"
-            Next i
+            For I = 4 To 7
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text2(I).Text & "|"
+            Next I
             CadenaDesdeOtroForm = "'" & CadenaDesdeOtroForm & "'"
         End If
         SQL = SQL & CadenaDesdeOtroForm & ")"
@@ -836,14 +837,14 @@ On Error GoTo EInsertarModificar
         If Combo2.ListIndex = 2 Then
             'Si el combo1 es 3 entonces es super
             If Combo1.ListIndex = 3 Then
-                i = 0
+                I = 0
             Else
-                i = 1
+                I = 1
             End If
         Else
-            i = Combo2.ItemData(Combo2.ListIndex)
+            I = Combo2.ItemData(Combo2.ListIndex)
         End If
-        SQL = SQL & " , nivelariges =" & i
+        SQL = SQL & " , nivelariges =" & I
         'SQL = SQL & "  , login = '" & Text2(2).Text
         SQL = SQL & "  , passwordpropio = '" & Text2(3).Text & "'"
         
@@ -853,9 +854,9 @@ On Error GoTo EInsertarModificar
             CadenaDesdeOtroForm = "NULL"
         Else
             CadenaDesdeOtroForm = ""
-            For i = 4 To 7
-                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text2(i).Text & "|"
-            Next i
+            For I = 4 To 7
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & Text2(I).Text & "|"
+            Next I
             CadenaDesdeOtroForm = "'" & CadenaDesdeOtroForm & "'"
         End If
         SQL = SQL & " ,dirfich = " & CadenaDesdeOtroForm
@@ -878,26 +879,26 @@ End Sub
 
 
 
-Private Sub cmdUsu_Click(Index As Integer)
+Private Sub cmdUsu_Click(index As Integer)
     If vUsu.Nivel > 1 Then
         MsgBox "Solo usuarios administradores pueden modificar", vbExclamation
         Exit Sub
     End If
     
-    Select Case Index
+    Select Case index
     Case 0, 1
         limpiar Me
-        If Index = 0 Then
+        If index = 0 Then
             'Nuevo usuario
             
             Label6.Caption = "NUEVO"
-            i = 0 'Para el foco
+            I = 0 'Para el foco
         Else
             'Modificar
             If ListView1.SelectedItem Is Nothing Then Exit Sub
             
-            i = vUsu.Codigo Mod 1000
-            If i = CInt(ListView1.SelectedItem.Text) Then
+            I = vUsu.Codigo Mod 1000
+            If I = CInt(ListView1.SelectedItem.Text) Then
                 MsgBox "El usuario es el mismo con el que esta trabajando actualmente", vbInformation
                 Exit Sub
             End If
@@ -913,22 +914,22 @@ Private Sub cmdUsu_Click(Index As Integer)
                 'LimpiarCamposUsuario
                 PonerDatosUsuario
             End If
-            i = 1 'Para el foco
+            I = 1 'Para el foco
             FrameUsuario.Tag = 0  'Marcamos que es una modificacion desde un usuario existente
         End If
-        Text2(0).Enabled = (Index = 0)
+        Text2(0).Enabled = (index = 0)
         Me.FrameNormal.Enabled = False
         Me.FrameUsuario.visible = True
-        Text2(i).SetFocus
+        Text2(I).SetFocus
     Case 2, 3
         If ListView1.SelectedItem Is Nothing Then Exit Sub
-        i = vUsu.Codigo Mod 1000
-        If i = CInt(ListView1.SelectedItem.Text) Then
+        I = vUsu.Codigo Mod 1000
+        If I = CInt(ListView1.SelectedItem.Text) Then
             MsgBox "El usuario es el mismo con el que esta trabajando actualmente", vbInformation
             Exit Sub
         End If
         
-        If Index = 2 Then
+        If index = 2 Then
             
             SQL = "El usuario " & ListView1.SelectedItem.SubItems(1) & " será eliminado y no tendra acceso a los programas de Ariadna (AriConta, AriGes....) ." & vbCrLf
             SQL = SQL & vbCrLf & "                              ¿Desea continuar?"
@@ -946,7 +947,7 @@ Private Sub cmdUsu_Click(Index As Integer)
         
             '//El codigo siguiente seria mas logico meterlo en el modulo de usuario
             '   pero de momento un saco de cemento
-            If Index = 2 Then EliminarAuxiliaresUsuario CInt(ListView1.SelectedItem.Text)
+            If index = 2 Then EliminarAuxiliaresUsuario CInt(ListView1.SelectedItem.Text)
         
             CargaUsuarios
         Screen.MousePointer = vbDefault
@@ -990,12 +991,12 @@ Private Sub PonerDatosUsuario()
             Text2(1).Text = miRsAux!nomusu
             Text2(2).Text = miRsAux!passwordpropio
             Text2(3).Text = miRsAux!passwordpropio
-            i = miRsAux!nivelariges
-            If i = -1 Then i = 3
-            If i < 2 Then
+            I = miRsAux!nivelariges
+            If I = -1 Then I = 3
+            If I < 2 Then
                 Combo2.ListIndex = 2
             Else
-                If i = 2 Then
+                If I = 2 Then
                     Combo2.ListIndex = 1
                 Else
                     Combo2.ListIndex = 0
@@ -1006,9 +1007,9 @@ Private Sub PonerDatosUsuario()
         'Cargamos los datos del correo e-mail
         SQL = Trim(DBLet(miRsAux!Dirfich, "T"))
         If SQL <> "" Then
-            For i = 1 To 4
-                Text2(3 + i).Text = RecuperaValor(SQL, i)
-            Next i
+            For I = 1 To 4
+                Text2(3 + I).Text = RecuperaValor(SQL, I)
+            Next I
         End If
 
 End Sub
@@ -1025,9 +1026,9 @@ Private Sub Command1_Click()
     Unload Me
 End Sub
 
-Private Sub Form_Activate()
-    If PrimeraVez Then
-        PrimeraVez = False
+Private Sub Form_activate()
+    If primeravez Then
+        primeravez = False
         Me.ListView1.SmallIcons = frmPpal.ImageListB
         Me.ListView2.SmallIcons = frmPpal.ImageListB
         CargaUsuarios
@@ -1039,7 +1040,7 @@ End Sub
 
 
 Private Sub Form_Load()
-    PrimeraVez = True
+    primeravez = True
     Me.Icon = frmPpal.Icon
     Me.FrameUsuario.visible = False
     Me.FrameNormal.Enabled = True
@@ -1141,7 +1142,7 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
     SQL = CadenaDevuelta
 End Sub
 
-Private Sub ListView1_ItemClick(ByVal item As MSComctlLib.ListItem)
+Private Sub ListView1_ItemClick(ByVal Item As MSComctlLib.ListItem)
     Screen.MousePointer = vbHourglass
     DatosUsusario
     Screen.MousePointer = vbDefault
@@ -1149,27 +1150,27 @@ End Sub
 
 
 
-Private Sub Text2_GotFocus(Index As Integer)
-    With Text2(Index)
+Private Sub Text2_GotFocus(index As Integer)
+    With Text2(index)
         .SelStart = 0
         .SelLength = Len(.Text)
     End With
 End Sub
 
-Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text2_KeyPress(index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
         KeyAscii = 0
         SendKeys "{tab}"
     End If
 End Sub
 
-Private Sub Text2_LostFocus(Index As Integer)
+Private Sub Text2_LostFocus(index As Integer)
 Dim AsignarDatos As Boolean
 
-    Text2(Index).Text = Trim(Text2(Index).Text)
-    If Text2(Index).Text = "" Then Exit Sub
+    Text2(index).Text = Trim(Text2(index).Text)
+    If Text2(index).Text = "" Then Exit Sub
     
-    If Index = 0 Then
+    If index = 0 Then
         If UCase(Label6.Caption) = "NUEVO" Then
         
             'Si es nuevo entonces, primero compruebo que no existe el login
@@ -1215,9 +1216,9 @@ Dim AsignarDatos As Boolean
 End Sub
 
 Private Sub LimpiarCamposUsuario()
-    For i = 0 To 7
-        Text2(i).Text = ""
-    Next i
+    For I = 0 To 7
+        Text2(I).Text = ""
+    Next I
 End Sub
 Private Sub LeerEditorMenus()
     On Error GoTo ELeerEditorMenus
@@ -1257,7 +1258,7 @@ Dim J As Integer
             Set Nod = TreeView1.Nodes.Add(SQL, tvwChild, "C" & miRsAux!Contador)
         End If
         SQL = miRsAux!Name & "|"
-        If Not IsNull(miRsAux!indice) Then SQL = SQL & miRsAux!indice
+        If Not IsNull(miRsAux!Indice) Then SQL = SQL & miRsAux!Indice
         Nod.Tag = SQL
    
         Nod.Text = miRsAux!Caption
@@ -1272,14 +1273,14 @@ Dim J As Integer
     SQL = "Select * from usuarios.appmenusUsuario where aplicacion='Ariges' AND codusu =" & ListView1.SelectedItem.Text
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        For i = 1 To TreeView1.Nodes.Count
+        For I = 1 To TreeView1.Nodes.Count
             SQL = miRsAux!Tag
-            If TreeView1.Nodes(i).Tag = SQL Then
-                TreeView1.Nodes(i).Checked = False
-                If TreeView1.Nodes(i).Children > 0 Then Recursivo2 TreeView1.Nodes(i).Child, TreeView1.Nodes(i).Checked
+            If TreeView1.Nodes(I).Tag = SQL Then
+                TreeView1.Nodes(I).Checked = False
+                If TreeView1.Nodes(I).Children > 0 Then Recursivo2 TreeView1.Nodes(I).Child, TreeView1.Nodes(I).Checked
                 Exit For
             End If
-        Next i
+        Next I
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1336,16 +1337,16 @@ Private Sub GuardarMenuUsuario()
     SQL = "DELETE from usuarios.appmenusUsuario where aplicacion='Ariges' AND codusu =" & ListView1.SelectedItem.Text
     conn.Execute SQL
     
-    i = 0
+    I = 0
     SQL = "INSERT INTO usuarios.appmenususuario (aplicacion, codusu, codigo, tag) VALUES ('Ariges'," & ListView1.SelectedItem.Text & ","
     RecursivoBD TreeView1.Nodes(1)
 End Sub
 
 Private Sub InsertaBD(vtag As String)
 Dim C As String
-    i = i + 1
+    I = I + 1
     'SQL = "INSERT INTO appmenususuario (aplicacion, codusu, codigo, tag)
-    C = SQL & i & ",'" & vtag & "')"
+    C = SQL & I & ",'" & vtag & "')"
     conn.Execute C
 End Sub
 

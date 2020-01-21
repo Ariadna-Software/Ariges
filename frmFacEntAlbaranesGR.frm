@@ -13659,8 +13659,13 @@ Private Sub AbrirForm_CentroCoste()
     
 
     Set frmB = New frmBuscaGrid
-    frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
-    frmB.vTabla = "cabccost"
+    If vParamAplic.ContabilidadNueva Then
+        frmB.vCampos = "Codigo|ccoste|codccost|T||20·Descripción|ccoste|nomccost|T||70·"
+        frmB.vTabla = "ccoste"
+    Else
+        frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
+        frmB.vTabla = "cabccost"
+    End If
     frmB.vSQL = ""
     HaDevueltoDatos = False
     '###A mano

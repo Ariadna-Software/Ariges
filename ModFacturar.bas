@@ -26,7 +26,7 @@ Dim Errores As String
 Dim ErroresAux As String
 
 
-Public Function TraspasoAlbaranesFacturas(cadSQL As String, cadWhere As String, FechaFact As String, banPr As String, ByRef PBar1 As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef vTipoM As String, TextosCSB As String, NumeroCopias As Byte, MostrarMsgOK As Boolean, EsTraspasoOfeFAZ As Boolean) As Boolean
+Public Function TraspasoAlbaranesFacturas(cadSQL As String, cadWhere As String, FechaFact As String, banPr As String, ByRef PBar1 As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef vTipoM As String, TextosCSB As String, NumeroCopias As Byte, MostrarMsgOK As Boolean, EsTraspasoOfeFAZ As Boolean, EsUnUnicoAlbaran As Boolean) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Albaranes que vamos a Facturar
 '      FechaFact: Fecha de la Factura
 '      BanPr: Cod. de Banco Propio
@@ -36,15 +36,14 @@ Public Function TraspasoAlbaranesFacturas(cadSQL As String, cadWhere As String, 
 '
 '       vTipom:  Que tipo de albaran es, para luego la impresion saber que factura imprime
 '      TextosCSB:  Si lleva llevara 3 lineas para meter ent tesoreria
-
-'   Abril
+'
 '   EsTraspasoOfeFAZ    Traspasa directamente una OFE a un FAZ
-
+'   EsUnUnicoAlbaran    Se factura solo un albaran.  En alguas empresas(Taxco) un mismo tipo albaran va a dos tipos de factura
 
 'Desde Albaranes Genera las Facturas correspondientes
 Dim RSalb As ADODB.Recordset 'Ordenados por: tipofac,clien,dpto,forma pago, dtoppago, dtognral
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 
 'Aqui Guardamos los datos del Albaran Anterior para comparar con el actual
 Dim antClien As Long
@@ -87,8 +86,8 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
     
     'Bloqueamos todos los albaranes que vamos a facturar (cabeceras y lineas)
     'Nota: esta bloqueando tambien los registros de la tabla clientes: sclien correspondientes
-    Sql = " (scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien ) INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
-    If Not BloqueaRegistro(Sql, cadWhere) Then
+    SQL = " (scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien ) INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
+    If Not BloqueaRegistro(SQL, cadWhere) Then
         Screen.MousePointer = vbDefault
         'comprobamos que no haya nadie facturando
         DesBloqueoManual ("VENFAC")
@@ -103,14 +102,14 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
     End If
     If PgbVisible Then
         If InStr(1, cadSQL, "sclien") Then
-            Sql = Replace(cadSQL, "scaalb.*, sclien.periodof", "count(*)") 'si hay INNER JOIN con sclien
+            SQL = Replace(cadSQL, "scaalb.*, sclien.periodof", "count(*)") 'si hay INNER JOIN con sclien
         Else
-            Sql = Replace(cadSQL, "*", "count(*)") 'si NO hay INNER JOIN con sclien
+            SQL = Replace(cadSQL, "*", "count(*)") 'si NO hay INNER JOIN con sclien
         End If
         
         
         Set RSalb = New ADODB.Recordset
-        RSalb.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RSalb.EOF Then
             CargarProgresNew PBar1, CInt(RSalb.Fields(0))
             LblBar.Caption = "Inicializando el proceso..."
@@ -145,12 +144,12 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         
     'Marcar Albaranes que se van a Facturar
     '----------------------------------------
-    Sql = cadSQL & " ORDER BY scaalb.tipofact, scaalb.codclien, scaalb.coddirec, codforpa, dtoppago, dtognral "
+    SQL = cadSQL & " ORDER BY scaalb.tipofact, scaalb.codclien, scaalb.coddirec, codforpa, dtoppago, dtognral "
     
-    If vParamAplic.NumeroInstalacion = vbFenollar Then Sql = Sql & ", codagent, referenc"
+    If vParamAplic.NumeroInstalacion = vbFenollar Then SQL = SQL & ", codagent, referenc"
     
     Set RSalb = New ADODB.Recordset
-    RSalb.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
     'Agrupar los Albaranes posibles en una misma Factura
@@ -188,7 +187,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
             LblBar.Refresh
             If cadW <> "" Then 'Facturacion pendiente
                 cadW = cadW & ")) "
-                If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ) Then
+                If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ, False) Then
                     If b Then b = False
                     AnyadirAvisos ErroresAux
                 Else 'a?adirlo a la lista de facturas a imprimir
@@ -231,7 +230,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
 
                 
                 
-            If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ) Then
+            If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ, EsUnUnicoAlbaran) Then
                 If b Then b = False
                 AnyadirAvisos ErroresAux
             Else 'a?adirlo a la lista de facturas a imprimir
@@ -287,7 +286,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
              
                 If cadW <> "" Then 'Facturacion PEndiente
                     cadW = cadW & ")) "
-                    If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ) Then
+                    If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ, False) Then
                         If b Then b = False
                         AnyadirAvisos ErroresAux
                     Else 'a?adirlo a la lista de facturas a imprimir
@@ -360,7 +359,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         cadW = cadW & "))"
         If PgbVisible Then LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " - " & vFactu.NombreClien
         
-        If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ) Then
+        If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ, EsUnUnicoAlbaran) Then
             If b Then b = False
             AnyadirAvisos "Error Facturando el Cliente: " & Format(vFactu.Cliente, "000000") & " " & vFactu.NombreClien & vbCrLf & ErroresAux
         Else 'a?adirlo a la lista de facturas a imprimir
@@ -387,8 +386,8 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         If MostrarMsgOK Then MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente.", vbInformation
     Else
         LblBar.Caption = "Proceso finalizado con errores."
-        Sql = "ATENCION:" & vbCrLf
-        MsgBox Sql & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
+        SQL = "ATENCION:" & vbCrLf
+        MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
         If Errores <> "" Then MostrarAvisos
     End If
     
@@ -631,7 +630,7 @@ End Function
 
 
 
-Public Sub ImprimirHojaExpedicion(OpcionListado As Byte, NumAlb As String, tipMov As String, Optional fecAlb As String)
+Public Sub ImprimirHojaExpedicion(OpcionListado As Byte, NumAlb As String, TipMov As String, Optional fecAlb As String)
 Dim cadFormula As String
 Dim cadParam As String
 Dim cadSelect As String 'select para insertar en tabla temporal
@@ -724,7 +723,7 @@ Dim NomTablaLineas As String
     '---------------------------------------------------
     If NumAlb <> "" Then
         '- Cod Tipo Movimiento
-        devuelve = "{" & NombreTabla & ".codtipom}='" & tipMov & "'"
+        devuelve = "{" & NombreTabla & ".codtipom}='" & TipMov & "'"
         If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
         '- N? Albaran
         devuelve = "{" & NombreTabla & ".numalbar}=" & Val(NumAlb)
@@ -791,7 +790,7 @@ End Sub
 '               EULER
 '               4.- Orden de trabajo
 '               5.- Trabajo exterior
-Public Sub ImprimirFacturas(listaF As String, fechaF As String, Sql As String, FormatoFactura As Byte, NumeroCopias As Byte, OrdenadoPorCliente As Boolean, HazPulsarAceptar As Boolean, EsDeReimpresionFacturas As Boolean)
+Public Sub ImprimirFacturas(listaF As String, fechaF As String, SQL As String, FormatoFactura As Byte, NumeroCopias As Byte, OrdenadoPorCliente As Boolean, HazPulsarAceptar As Boolean, EsDeReimpresionFacturas As Boolean)
 Dim cadFormula As String
 Dim cadParam As String
 Dim numParam As Byte
@@ -821,7 +820,7 @@ Dim ListaFacturasDefinitiva As String
         
         
         
-        If Sql = "" And listaF <> "" Then
+        If SQL = "" And listaF <> "" Then
             'Si solo viene una factura, dejamos pasar
             cadParam = CStr(listaF)
             devuelve = "1"
@@ -917,10 +916,10 @@ Dim ListaFacturasDefinitiva As String
         frmImprimir.NombrePDF = pPdfRpt
     End If
 
-    If Sql <> "" Then
+    If SQL <> "" Then
         'Llamo desde el menu de Reimprimir facturas y tengo construida la
         'cadena de seleccion D/H tipoMov, D/H NumFactu, D/H fecfactu
-        cadSelect = Sql
+        cadSelect = SQL
         'cadFormula = cadSelect
         cadParam = cadParam & fechaF
         numParam = numParam + 1
@@ -990,7 +989,7 @@ Public Function TraspasoMtosAFacturas(cadSQL As String, cadSel As String, FechaF
 'Desde Mantenimientos Genera las Facturas correspondientes
 Dim RSmto As ADODB.Recordset 'Ordenados por: clien,dpto,forma pago, dtoppago, dtognral
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 
 Dim vClien As CCliente 'aqui cargamos los datos del cliente del mantenimiento para grabar en scafac
 Dim vFactu As CFactura
@@ -1013,9 +1012,9 @@ Dim Conta2 As Long
     
     'Bloqueamos todos los mantenimientos que vamos a facturar (cabeceras y lineas)
 '    SQL = " (scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien ) INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
-    Sql = " scaman "
+    SQL = " scaman "
     
-    If Not BloqueaRegistro(Sql, cadSel) Then
+    If Not BloqueaRegistro(SQL, cadSel) Then
         Screen.MousePointer = vbDefault
         'comprobamos que no haya nadie facturando
         DesBloqueoManual ("VENFAC")
@@ -1043,7 +1042,7 @@ Dim Conta2 As Long
     'Marcar Mantenimientos que se van a Facturar
     '----------------------------------------
     
-    Sql = cadSQL & " ORDER BY scaman.codclien, scaman.coddirec, scaman.nummante "
+    SQL = cadSQL & " ORDER BY scaman.codclien, scaman.coddirec, scaman.nummante "
     Set RSmto = New ADODB.Recordset
     Conta2 = InStr(1, cadSQL, " FROM ")
     ListFactu = "Select count(*) " & Mid(cadSQL, Conta2)
@@ -1058,7 +1057,7 @@ Dim Conta2 As Long
     
     Conta2 = 0
     ListFactu = ""
-    RSmto.Open Sql, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    RSmto.Open SQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
     'Le pongo                KEYSET      pq quiero contar los registros
     'Cada MAntenimiento genera una factura
     'Calcular y Grabar Factura en las Tablas de Facturas
@@ -1135,8 +1134,8 @@ Dim Conta2 As Long
     If b Then
         MsgBox "Las Facturas de los Mantenimientos seleccionados se generaron correctamente.", vbInformation
     Else
-        Sql = "ATENCIÓN:" & vbCrLf
-        MsgBox Sql & "No todas las Facturas se generaron correctamente!!!.", vbInformation
+        SQL = "ATENCIÓN:" & vbCrLf
+        MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbInformation
     End If
     
     'Desbloqueamos ya no estamos facturando
@@ -1242,7 +1241,7 @@ End Sub
 '=================================================================
 Public Function EliminarVenta(cadSQL As String) As Boolean
 'Eliminamos de las tablas de ventas: scaven, sliven
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EElimVen
 
@@ -1250,25 +1249,25 @@ Dim Sql As String
     
     'Diciembre 2012
     'Se pueden asociar tikets a campos
-    Sql = "DELETE FROM sliven2 "
-    Sql = Sql & " WHERE " & Replace(cadSQL, "scaven", "sliven2")
-    conn.Execute Sql
+    SQL = "DELETE FROM sliven2 "
+    SQL = SQL & " WHERE " & Replace(cadSQL, "scaven", "sliven2")
+    conn.Execute SQL
     
     'ELiminar lineas venta
-    Sql = "DELETE FROM sliven "
-    Sql = Sql & " WHERE " & Replace(cadSQL, "scaven", "sliven")
-    conn.Execute Sql
+    SQL = "DELETE FROM sliven "
+    SQL = SQL & " WHERE " & Replace(cadSQL, "scaven", "sliven")
+    conn.Execute SQL
     
    
-    Sql = "DELETE FROM slivenlotes "
-    Sql = Sql & " WHERE " & Replace(cadSQL, "scaven", "slivenlotes")
-    conn.Execute Sql
+    SQL = "DELETE FROM slivenlotes "
+    SQL = SQL & " WHERE " & Replace(cadSQL, "scaven", "slivenlotes")
+    conn.Execute SQL
 
     
     'Eliminar Cabeceras venta
-    Sql = "DELETE FROM scaven "
-    Sql = Sql & " WHERE " & Replace(cadSQL, "sliven", "scaven")
-    conn.Execute Sql
+    SQL = "DELETE FROM scaven "
+    SQL = SQL & " WHERE " & Replace(cadSQL, "sliven", "scaven")
+    conn.Execute SQL
         
     EliminarVenta = True
 
@@ -1457,7 +1456,7 @@ Private Function FacturarRentingCliDpto(cadSQL As String, Fecfact As String, Ope
 'Desde Mantenimientos Genera las Facturas correspondientes
 Dim RSmto As ADODB.Recordset 'Ordenados por:
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 
 Dim vClien As CCliente 'aqui cargamos los datos del cliente del renting para grabar en scafac
 Dim vFactu As CFactura
@@ -1492,7 +1491,7 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
     'Marcar Mantenimientos que se van a Facturar
     '----------------------------------------
     cadSQL = " FROM sclienrenting,sclien WHERE sclienrenting.codclien=sclien.codclien AND " & cadSQL
-    Sql = cadSQL & "  GROUP BY sclienrenting.codclien ORDER BY sclienrenting.codclien"
+    SQL = cadSQL & "  GROUP BY sclienrenting.codclien ORDER BY sclienrenting.codclien"
     Set RSmto = New ADODB.Recordset
     Conta2 = InStr(1, cadSQL, " FROM ")
 
@@ -1507,8 +1506,8 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
     
     Conta2 = 0
     
-    Sql = "SELECT sclienrenting.codclien,codtipco,sum(importe) importe " & Sql
-    RSmto.Open Sql, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    SQL = "SELECT sclienrenting.codclien,codtipco,sum(importe) importe " & SQL
+    RSmto.Open SQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
     'Le pongo                KEYSET      pq quiero contar los registros
     'Cada MAntenimiento genera una factura
     'Calcular y Grabar Factura en las Tablas de Facturas
@@ -1799,7 +1798,7 @@ Public Function GenerarFacturasTelefonia(banPr As Integer, LblBar As Label, Fras
 '            Segundo   las internas
 Dim RSalb As ADODB.Recordset 'Ordenados por: tipofac,clien,dpto,forma pago, dtoppago, dtognral
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 
 'Aqui Guardamos los datos del Albaran Anterior para comparar con el actual
 Dim antClien As Long
@@ -1846,22 +1845,22 @@ Dim RTT As ADODB.Recordset
     For J = 1 To 2
     
         If J = 1 Then
-            Sql = "Select * from scaalb WHERE codtipom = 'ALI' and referenc='" & TipoAlb & "' ORDER BY numalbar"
+            SQL = "Select * from scaalb WHERE codtipom = 'ALI' and referenc='" & TipoAlb & "' ORDER BY numalbar"
             TipoAlb = ""
         Else
-            Sql = "Select * from scaalb WHERE codtipom = 'ALT' "
+            SQL = "Select * from scaalb WHERE codtipom = 'ALT' "
             'Si tiene nombre de fichero es que no viene ficheros movistar, vodafone. Viene de COARVAL
-            If Not Coarval Then Sql = Sql & " and referenc='" & Fichero & "'"
-            Sql = Sql & " ORDER BY numalbar"
+            If Not Coarval Then SQL = SQL & " and referenc='" & Fichero & "'"
+            SQL = SQL & " ORDER BY numalbar"
         End If
         Set RSalb = New ADODB.Recordset
-        RSalb.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         Set RTT = New ADODB.Recordset
         If Not Coarval Then
             If J > 1 Then
                 'NO internas. ALT
-                Sql = "Select numalbar,codclien,coddirec,referenc from scaalb WHERE codtipom = 'ALT' AND factursn=1 and referenc<>'" & Fichero & "' ORDER BY codclien,coddirec"
-                RTT.Open Sql, conn, adOpenKeyset, adLockPessimistic, adCmdText
+                SQL = "Select numalbar,codclien,coddirec,referenc from scaalb WHERE codtipom = 'ALT' AND factursn=1 and referenc<>'" & Fichero & "' ORDER BY codclien,coddirec"
+                RTT.Open SQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
             End If
         End If
         
@@ -1883,10 +1882,10 @@ Dim RTT As ADODB.Recordset
                 'Los Albaranes que tengan tipofact=1 "factura x Albaran" generar una factura
                 'para cada uno de ellos
                 If J = 1 Then    'INTERNOS
-                    Sql = " scaalb.codtipom='" & RSalb!codtipom & "' AND scaalb.numalbar=" & RSalb!Numalbar
+                    SQL = " scaalb.codtipom='" & RSalb!codtipom & "' AND scaalb.numalbar=" & RSalb!Numalbar
                 Else
                     'FAT
-                    Sql = RSalb!Numalbar 'en la funcion de pasaralbfras YA montar? el SELECT 'FUERZA EL NUMERO
+                    SQL = RSalb!Numalbar 'en la funcion de pasaralbfras YA montar? el SELECT 'FUERZA EL NUMERO
                     
                     If Not Coarval Then
                         'PUEDE ser que tengamos albaranes de telefonia introducidos "a mano"
@@ -1902,7 +1901,7 @@ Dim RTT As ADODB.Recordset
                                         
                                             'OK. Este tenemos que facturarlo aqui
                                         
-                                            Sql = Sql & ", " & RTT!Numalbar
+                                            SQL = SQL & ", " & RTT!Numalbar
                                         End If
                                     End If
                                 End If
@@ -1938,7 +1937,7 @@ Dim RTT As ADODB.Recordset
     
                     
                     
-                If Not vFactu.PasarAlbaranesAFactura(TipoAlb, Sql, "", ErroresAux, False) Then
+                If Not vFactu.PasarAlbaranesAFactura(TipoAlb, SQL, "", ErroresAux, False, False) Then
                     b = False
                     AnyadirAvisos ErroresAux
                 Else
@@ -1999,8 +1998,8 @@ Dim RTT As ADODB.Recordset
         MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente." & cadW, vbInformation
     Else
         LblBar.Caption = "Proceso finalizado con errores."
-        Sql = "ATENCI?N:" & vbCrLf
-        MsgBox Sql & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
+        SQL = "ATENCI?N:" & vbCrLf
+        MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
         If Errores <> "" Then MostrarAvisos
     End If
     
@@ -2019,18 +2018,18 @@ ETraspasoAlbFac:
 End Function
 
 Private Sub ActualizaEnCabFacTel(Fichero As String, Where As String, Nuevo As Long)
-Dim Sq As String
+Dim SQ As String
 Dim J As Byte
 
     On Error GoTo eAct
     
     
     For J = 1 To 5
-        Sq = RecuperaValor("tel_cab_factura|tel_lin_factura_consumos|tel_lin_factura_cuotas|tel_lin_factura_descuentos|tel_lin_factura_especial|", CInt(J))
+        SQ = RecuperaValor("tel_cab_factura|tel_lin_factura_consumos|tel_lin_factura_cuotas|tel_lin_factura_descuentos|tel_lin_factura_especial|", CInt(J))
         
-        Sq = "UPDATE " & Sq & " SET NumFact =" & Nuevo & " WHERE " & Where
-        If J = 1 Then Sq = Sq & " AND fichero = '" & Fichero & "'"
-        conn.Execute Sq
+        SQ = "UPDATE " & SQ & " SET NumFact =" & Nuevo & " WHERE " & Where
+        If J = 1 Then SQ = SQ & " AND fichero = '" & Fichero & "'"
+        conn.Execute SQ
     Next J
     
     Exit Sub
@@ -2038,11 +2037,11 @@ eAct:
     Err.Clear
     '-----------------
     'tmpcrmmsg(codusu,codigo,tipo,fechahora,asun_obs)
-    Sq = DevNombreSQL(Sq)
+    SQ = DevNombreSQL(SQ)
     'SQ = "INSERT INTO tmpcrmmsg(codusu,codigo,tipo,fechahora,asun_obs)"
-    Sq = vUsu.Codigo & "," & Nuevo & ",0,now(),'" & Sq & "')"
-    Sq = "INSERT INTO tmpcrmmsg(codusu,codigo,tipo,fechahora,asun_obs) VALUES (" & Sq
-    ejecutar Sq, True
+    SQ = vUsu.Codigo & "," & Nuevo & ",0,now(),'" & SQ & "')"
+    SQ = "INSERT INTO tmpcrmmsg(codusu,codigo,tipo,fechahora,asun_obs) VALUES (" & SQ
+    ejecutar SQ, True
     
 End Sub
 
@@ -2589,7 +2588,7 @@ Public Function FacturarContadoresAgua(Fecfact As String, banPr As String, ByRef
 
 Dim RSalb As ADODB.Recordset 'Ordenados por: tipofac,clien,dpto,forma pago, dtoppago, dtognral
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Aux As String
 Dim vFactu As CFactura
 Dim Inc As Integer
@@ -2616,11 +2615,11 @@ Dim RTT As ADODB.Recordset
     
     
     
-    Sql = "Select * from scaalb WHERE codtipom = " & DBSet(TipoAlb, "T")
-    Sql = Sql & " ORDER BY numalbar"
+    SQL = "Select * from scaalb WHERE codtipom = " & DBSet(TipoAlb, "T")
+    SQL = SQL & " ORDER BY numalbar"
 
     Set RSalb = New ADODB.Recordset
-    RSalb.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
     Set RTT = New ADODB.Recordset
@@ -2693,8 +2692,8 @@ Dim RTT As ADODB.Recordset
             End If
             
             If DatosOk_ Then
-                Sql = " scaalb.codtipom='" & RSalb!codtipom & "' AND scaalb.numalbar=" & RSalb!Numalbar
-                If Not vFactu.PasarAlbaranesAFactura(TipoAlb, Sql, "", ErroresAux, False) Then
+                SQL = " scaalb.codtipom='" & RSalb!codtipom & "' AND scaalb.numalbar=" & RSalb!Numalbar
+                If Not vFactu.PasarAlbaranesAFactura(TipoAlb, SQL, "", ErroresAux, False, False) Then
                     b = False
                     AnyadirAvisos ErroresAux
                 End If
@@ -2722,8 +2721,8 @@ Dim RTT As ADODB.Recordset
         MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente." & cadW, vbInformation
     Else
         LblBar.Caption = "Proceso finalizado con errores."
-        Sql = "ATENCI?N:" & vbCrLf
-        MsgBox Sql & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
+        SQL = "ATENCI?N:" & vbCrLf
+        MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
         If Errores <> "" Then MostrarAvisos
     End If
     
@@ -2757,7 +2756,7 @@ Public Function TraspasoAlbaranesFacturasCliente(cadSQL As String, cadWhere As S
 'Desde Albaranes Genera las Facturas correspondientes
 Dim RSalb As ADODB.Recordset 'Ordenados por: tipofac,clien,dpto,forma pago, dtoppago, dtognral
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 
 'Aqui Guardamos los datos del Albaran Anterior para comparar con el actual
 Dim antClien As Long
@@ -2796,8 +2795,8 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
     
     'Bloqueamos todos los albaranes que vamos a facturar (cabeceras y lineas)
     'Nota: esta bloqueando tambien los registros de la tabla clientes: sclien correspondientes
-    Sql = " (scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien ) INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
-    If Not BloqueaRegistro(Sql, cadWhere) Then
+    SQL = " (scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien ) INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
+    If Not BloqueaRegistro(SQL, cadWhere) Then
         Screen.MousePointer = vbDefault
         'comprobamos que no haya nadie facturando
         DesBloqueoManual ("VENFAC")
@@ -2812,14 +2811,14 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
     End If
     If PgbVisible Then
         If InStr(1, cadSQL, "sclien") Then
-            Sql = Replace(cadSQL, "scaalb.*, sclien.periodof", "count(*)") 'si hay INNER JOIN con sclien
+            SQL = Replace(cadSQL, "scaalb.*, sclien.periodof", "count(*)") 'si hay INNER JOIN con sclien
         Else
-            Sql = Replace(cadSQL, "*", "count(*)") 'si NO hay INNER JOIN con sclien
+            SQL = Replace(cadSQL, "*", "count(*)") 'si NO hay INNER JOIN con sclien
         End If
         
         
         Set RSalb = New ADODB.Recordset
-        RSalb.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RSalb.EOF Then
             CargarProgresNew PBar1, CInt(RSalb.Fields(0))
             LblBar.Caption = "Inicializando el proceso..."
@@ -2854,9 +2853,9 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         
     'Marcar Albaranes que se van a Facturar
     '----------------------------------------
-    Sql = cadSQL & " ORDER BY scaalb.tipofact, scaalb.codclien, scaalb.coddirec, codforpa, dtoppago, dtognral "
+    SQL = cadSQL & " ORDER BY scaalb.tipofact, scaalb.codclien, scaalb.coddirec, codforpa, dtoppago, dtognral "
     Set RSalb = New ADODB.Recordset
-    RSalb.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
     'Agrupar los Albaranes posibles en una misma Factura
@@ -2891,7 +2890,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
             LblBar.Refresh
             If cadW <> "" Then 'Facturacion pendiente
                 cadW = cadW & ") "
-                If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False) Then
+                If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False, False) Then
                     If b Then b = False
                     AnyadirAvisos ErroresAux
                 Else 'a?adirlo a la lista de facturas a imprimir
@@ -2931,7 +2930,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
 
                 
                 
-            If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False) Then
+            If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False, False) Then
                 If b Then b = False
                 AnyadirAvisos ErroresAux
             Else 'a?adirlo a la lista de facturas a imprimir
@@ -2975,7 +2974,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
              '-----
                 If cadW <> "" Then 'Facturacion PEndiente
                     cadW = cadW & ") "
-                    If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False) Then
+                    If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False, False) Then
                         If b Then b = False
                         AnyadirAvisos ErroresAux
                     Else 'a?adirlo a la lista de facturas a imprimir
@@ -3037,7 +3036,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         cadW = cadW & ")"
         If PgbVisible Then LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " - " & vFactu.NombreClien
         
-        If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False) Then
+        If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, False, False) Then
             If b Then b = False
             AnyadirAvisos "Error Facturando el Cliente: " & Format(vFactu.Cliente, "000000") & " " & vFactu.NombreClien & vbCrLf & ErroresAux
         Else 'a?adirlo a la lista de facturas a imprimir
@@ -3060,8 +3059,8 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         If MostrarMsgOK Then MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente.", vbInformation
     Else
         LblBar.Caption = "Proceso finalizado con errores."
-        Sql = "ATENCI?N:" & vbCrLf
-        MsgBox Sql & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
+        SQL = "ATENCI?N:" & vbCrLf
+        MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
         If Errores <> "" Then MostrarAvisos
     End If
     
@@ -3106,7 +3105,7 @@ End Function
 
 Public Function ComprobarFitosAlbaranesFacturasCliente(cadSQL As String, cadWhere As String) As Boolean
 Dim RN As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Col As Collection
 Dim ErroL As String
 
@@ -3120,65 +3119,65 @@ Dim ErroL As String
     
     
     
-    Sql = "DELETE FROM tmpnseries WHERE codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "DELETE FROM tmpnseries WHERE codusu = " & vUsu.Codigo
+    conn.Execute SQL
     Espera 0.5
     ErroL = ""
     
     Set RN = New ADODB.Recordset
     
     'Vamos a ver todos los albaranes que vamos a facturar
-    Sql = "insert into tmpnseries(codusu,codartic,numlinealb,nummante) "
-    Sql = Sql & " select " & vUsu.Codigo & ",codtipom,numalbar,'' from  scaalb,sclien where scaalb.codclien=sclien.codclien AND " & cadWhere
-    conn.Execute Sql
+    SQL = "insert into tmpnseries(codusu,codartic,numlinealb,nummante) "
+    SQL = SQL & " select " & vUsu.Codigo & ",codtipom,numalbar,'' from  scaalb,sclien where scaalb.codclien=sclien.codclien AND " & cadWhere
+    conn.Execute SQL
 
     'Quitamos los que no llevan articulos fitosnaitarios
-    Sql = "delete from tmpnseries where codusu=" & vUsu.Codigo & " and (codartic,numlinealb)"
-    Sql = Sql & " in (select codtipom,numalbar from slialb inner join sartic on slialb.codartic=sartic.codartic group by 1,2 having sum(if(numserie<>'',1,0))=0)"
-    conn.Execute Sql
+    SQL = "delete from tmpnseries where codusu=" & vUsu.Codigo & " and (codartic,numlinealb)"
+    SQL = SQL & " in (select codtipom,numalbar from slialb inner join sartic on slialb.codartic=sartic.codartic group by 1,2 having sum(if(numserie<>'',1,0))=0)"
+    conn.Execute SQL
 
     'Veremos cuales de los albaranes NO esta identificado el manipulador
-    Sql = "select * from scaalb where (codtipom,numalbar) in (select codartic,numlinealb from tmpnseries where codusu = " & vUsu.Codigo & ") and coalesce(manipuladornumcarnet,'')='' ORDER BY codtipom,numalbar"
-    RN.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "select * from scaalb where (codtipom,numalbar) in (select codartic,numlinealb from tmpnseries where codusu = " & vUsu.Codigo & ") and coalesce(manipuladornumcarnet,'')='' ORDER BY codtipom,numalbar"
+    RN.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RN.EOF
-        Sql = RN!codtipom & " " & Format(RN!Numalbar, "000000") & "  " & RN!NomClien & vbCrLf
-        ErroL = ErroL & Sql
+        SQL = RN!codtipom & " " & Format(RN!Numalbar, "000000") & "  " & RN!NomClien & vbCrLf
+        ErroL = ErroL & SQL
         RN.MoveNext
     Wend
     RN.Close
 
     If ErroL <> "" Then
-        Sql = "Falta identificar carnet manipulador fitosanitarios" & vbCrLf & String(60, "=") & vbCrLf
-        ErroL = Sql & ErroL
+        SQL = "Falta identificar carnet manipulador fitosanitarios" & vbCrLf & String(60, "=") & vbCrLf
+        ErroL = SQL & ErroL
     End If
     
     'Vamos a ver que todos los articulos con fitosanitarios tiene asignado los numeros de lote
     
     'Priemro veremos la cantidad en los albaranes
-    Sql = "select codtipom,numalbar,sum(cantidad) lacanti from slialb inner join sartic on slialb.codartic=sartic.codartic where numserie<>''"
-    Sql = Sql & " and (codtipom,numalbar) in (select codartic,numlinealb from tmpnseries where codusu = " & vUsu.Codigo & " ) group by 1,2"
-    RN.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    SQL = "select codtipom,numalbar,sum(cantidad) lacanti from slialb inner join sartic on slialb.codartic=sartic.codartic where numserie<>''"
+    SQL = SQL & " and (codtipom,numalbar) in (select codartic,numlinealb from tmpnseries where codusu = " & vUsu.Codigo & " ) group by 1,2"
+    RN.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RN.EOF
         'numserie
-        Sql = Format(RN!lacanti * 100, "000000000")  '9 posiciones mas el signo
-        Sql = "UPDATE tmpnseries SET numserie='" & Sql & "' WHERE codusu =" & vUsu.Codigo
-        Sql = Sql & " AND codartic= '" & RN!codtipom & "' AND numlinealb = " & RN!Numalbar
-        conn.Execute Sql
+        SQL = Format(RN!lacanti * 100, "000000000")  '9 posiciones mas el signo
+        SQL = "UPDATE tmpnseries SET numserie='" & SQL & "' WHERE codusu =" & vUsu.Codigo
+        SQL = SQL & " AND codartic= '" & RN!codtipom & "' AND numlinealb = " & RN!Numalbar
+        conn.Execute SQL
     
         RN.MoveNext
     Wend
     RN.Close
     
     'Ahora  veremos la cantidad en los lotes
-    Sql = "select codtipom,numalbar,sum(cantidad) lacanti from slialblotes WHERE "
-    Sql = Sql & " (codtipom,numalbar) in (select codartic,numlinealb from tmpnseries where codusu = " & vUsu.Codigo & " ) group by 1,2"
-    RN.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    SQL = "select codtipom,numalbar,sum(cantidad) lacanti from slialblotes WHERE "
+    SQL = SQL & " (codtipom,numalbar) in (select codartic,numlinealb from tmpnseries where codusu = " & vUsu.Codigo & " ) group by 1,2"
+    RN.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RN.EOF
         '  nummante
-        Sql = Format(RN!lacanti * 100, "000000000") '9 posiciones mas el signo
-        Sql = "UPDATE tmpnseries SET nummante='" & Sql & "' WHERE codusu =" & vUsu.Codigo
-        Sql = Sql & " AND codartic= '" & RN!codtipom & "' AND numlinealb = " & RN!Numalbar
-        conn.Execute Sql
+        SQL = Format(RN!lacanti * 100, "000000000") '9 posiciones mas el signo
+        SQL = "UPDATE tmpnseries SET nummante='" & SQL & "' WHERE codusu =" & vUsu.Codigo
+        SQL = SQL & " AND codartic= '" & RN!codtipom & "' AND numlinealb = " & RN!Numalbar
+        conn.Execute SQL
     
         RN.MoveNext
     Wend
@@ -3186,30 +3185,30 @@ Dim ErroL As String
     
     
     'Ahora veremos la cantidad de distintos que hay
-    Sql = " select * from tmpnseries where codusu = " & vUsu.Codigo & " AND nummante<>numserie order by codartic,numlinealb "
-    RN.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    Sql = ""
+    SQL = " select * from tmpnseries where codusu = " & vUsu.Codigo & " AND nummante<>numserie order by codartic,numlinealb "
+    RN.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    SQL = ""
     While Not RN.EOF
     
-        Sql = Sql & RN!codArtic & Format(RN!numlinealb, "0000000") & " -> "
+        SQL = SQL & RN!codArtic & Format(RN!numlinealb, "0000000") & " -> "
     
         If RN!nummante = "" Then
-            Sql = Sql & " sin asignar lotes"
+            SQL = SQL & " sin asignar lotes"
         Else
-            Sql = Sql & " Lineas albaran: " & Format(Val(RN!numSerie / 100), FormatoCantidad)
-            Sql = Sql & " //   Lotes  : " & Format(Val(RN!nummante / 100), FormatoCantidad)
+            SQL = SQL & " Lineas albaran: " & Format(Val(RN!numSerie / 100), FormatoCantidad)
+            SQL = SQL & " //   Lotes  : " & Format(Val(RN!nummante / 100), FormatoCantidad)
             
         End If
-        Sql = Sql & vbCrLf
+        SQL = SQL & vbCrLf
         
         RN.MoveNext
     Wend
     RN.Close
     
-    If Sql <> "" Then
+    If SQL <> "" Then
         If ErroL <> "" Then ErroL = ErroL & vbCrLf & vbCrLf & vbCrLf
         ErroL = ErroL & "Lotes mal asignados: " & vbCrLf & String(60, "=") & vbCrLf
-        ErroL = ErroL & Sql
+        ErroL = ErroL & SQL
 
     End If
     
@@ -3263,7 +3262,7 @@ End Sub
 '************************************************************************************************************
 Public Function ComprobarPrecioMinimoFacturacion(cadSQL As String, cadWhere As String) As Boolean
 Dim RN As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim ErroL As String
 Dim vArtic As CArticulo
 Dim PrCalculado As Currency
@@ -3276,12 +3275,12 @@ Dim Aux As String
     
     Set RN = New ADODB.Recordset
     Errores = ""
-    Sql = " select scaalb.codtipom,scaalb.numalbar,fechaalb,slialb.codartic,cantidad,precioar,scaalb.codclien,importel,cantidad from  scaalb ,sclien ,slialb,sartic where scaalb.codclien=sclien.codclien "
-    Sql = Sql & " and scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar AND "
-    Sql = Sql & " slialb.codartic=sartic.codartic AND artvario=0 and origpre<>'P' and cantidad<>0 and " & cadWhere
-    Sql = Sql & " ORDER BY scaalb.codclien,scaalb.codtipom,scaalb.numalbar,fechaalb"
+    SQL = " select scaalb.codtipom,scaalb.numalbar,fechaalb,slialb.codartic,cantidad,precioar,scaalb.codclien,importel,cantidad from  scaalb ,sclien ,slialb,sartic where scaalb.codclien=sclien.codclien "
+    SQL = SQL & " and scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar AND "
+    SQL = SQL & " slialb.codartic=sartic.codartic AND artvario=0 and origpre<>'P' and cantidad<>0 and " & cadWhere
+    SQL = SQL & " ORDER BY scaalb.codclien,scaalb.codtipom,scaalb.numalbar,fechaalb"
         
-    RN.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RN.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set vArtic = New CArticulo
     While Not RN.EOF
     
@@ -3310,8 +3309,8 @@ Dim Aux As String
         
         
         If ErroL <> "" Then
-            Sql = RN!codtipom & " " & Format(RN!Numalbar, "00000") & "  " & Mid(RN!codArtic & Space(16), 1, 16) & " -> " & ErroL
-            Errores = Errores & vbCrLf & Sql
+            SQL = RN!codtipom & " " & Format(RN!Numalbar, "00000") & "  " & Mid(RN!codArtic & Space(16), 1, 16) & " -> " & ErroL
+            Errores = Errores & vbCrLf & SQL
         End If
         
         RN.MoveNext
@@ -3335,5 +3334,203 @@ eComprobarPrecioMinimoFacturacion:
     If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
     Set vArtic = New CArticulo
     Set RN = Nothing
+End Function
+
+
+
+
+
+
+
+
+
+
+
+'---------------------------------------------------------------------------------------------------------------------------
+' Facturacion desde gasolinera
+'*****************************************************************************************************
+' ALVIC
+Public Function TraspasoFacturasGasol(cadSQL As String, cadWhere As String, FechaFact As String, banPr As String, ByRef PBar1 As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef TipoDeFactura As String, ForzarNumeroFactura As String, NumeroCopias As Byte, MostrarMsgOK As Boolean) As Boolean
+
+'Desde Albaranes Genera las Facturas correspondientes
+Dim RSalb As ADODB.Recordset 'Ordenados por: tipofac,clien,dpto,forma pago, dtoppago, dtognral
+Dim b As Boolean
+Dim SQL As String
+
+'Aqui Guardamos los datos del Albaran Anterior para comparar con el actual
+Dim antClien As Long
+Dim antDirec As Long
+Dim antForpa As Integer
+Dim antDtoPP As Single, antDtoGn As Single
+
+'direc/dpto actual para controlar el valor nulo
+Dim actDirec As Long
+
+'Concatenamos todas las facturas generadas para listarlas en el informe
+Dim ListFactu As String
+Dim vFactu As CFactura
+Dim Inc As Integer
+Dim condicion As Boolean 'condicion que comprueba para romper la agrupacion de albaranes a 1 factura
+
+'Por si no mando una progressbar, que no de errores
+Dim PgbVisible As Boolean
+
+
+Dim HazPulsarAceptarEnFrmImprimir As Boolean
+
+    On Error GoTo ETraspasoAlbFac
+
+    TraspasoFacturasGasol = False
+
+    ListFactu = ""
+    
+    'Inicializar la Progress Bar
+    PgbVisible = False
+    If Not (PBar1 Is Nothing) Then
+        If PBar1.visible Then PgbVisible = True
+    End If
+    If PgbVisible Then
+        If InStr(1, cadSQL, "sclien") Then
+            SQL = Replace(cadSQL, "scaalb.*, sclien.periodof", "count(*)") 'si hay INNER JOIN con sclien
+        Else
+            SQL = Replace(cadSQL, "*", "count(*)") 'si NO hay INNER JOIN con sclien
+        End If
+        
+        
+        Set RSalb = New ADODB.Recordset
+        RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RSalb.EOF Then
+            CargarProgresNew PBar1, CInt(RSalb.Fields(0))
+            LblBar.Caption = "Inicializando el proceso..."
+            LblBar.Refresh
+            
+        End If
+        RSalb.Close
+        Set RSalb = Nothing
+    End If
+    
+        
+    'EMPEZAMOS LA FACTURA
+    Set vFactu = New CFactura
+    vFactu.FecFactu = FechaFact 'Fecha para las Facturas
+
+    'Cuenta Prevista de Cobro de las Facturas
+    vFactu.BancoPr = banPr
+    vFactu.CuentaPrev = DevuelveDesdeBDNew(conAri, "sbanpr", "codmacta", "codbanpr", banPr, "N")
+    
+       
+       
+       
+       
+        
+    'Marcar Albaranes que se van a Facturar
+    '----------------------------------------
+    SQL = "Select * from scaalb where " & cadWhere
+    SQL = SQL & " ORDER BY scaalb.tipofact, scaalb.codclien, scaalb.coddirec, codforpa, dtoppago, dtognral "
+    Set RSalb = New ADODB.Recordset
+    RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        
+        
+    'Agrupar los Albaranes posibles en una misma Factura
+    'Calcular y Grabar Factura en la Tabla de Facturas
+    'Albaran(scaalb, slialb) -> Factura (scafac,scafac1,slifac)
+    '----------------------------------------------------
+    'Se factura por cliente y departamento
+    'Agrupar albaranes en 1 factura por : tipofact,codclien,coddirec,codforpa,dtoppago, dtognral
+    antClien = 0 'cliente
+    antDirec = 0 'direccion/departamento
+    antForpa = 0 'forma de pago
+    antDtoPP = 0 'dto pronto pago
+    antDtoGn = 0 'dto general
+    
+    cadW = ""
+    Errores = ""
+    Inc = 0
+    condicion = True
+    While Not RSalb.EOF
+        TipoAlb = TipoDeFactura     'RSalb!codtipom   siempre el tipo final
+        Inc = Inc + 1
+        actDirec = -1
+
+             LblBar.Caption = "Facturando: Facturas colectivas"
+             LblBar.Refresh
+             If condicion Then
+                
+                'Generar una Factura nueva
+                vFactu.Cliente = RSalb!codClien
+                vFactu.NombreClien = RSalb!NomClien
+                vFactu.DomicilioClien = DBLet(RSalb!domclien, "T")
+                vFactu.CPostal = DBLet(RSalb!codpobla, "T")
+                vFactu.Poblacion = DBLet(RSalb!pobclien, "T")
+                vFactu.Provincia = DBLet(RSalb!proclien, "T")
+                vFactu.NIF = DBLet(RSalb!nifClien, "T")
+                vFactu.Telefono = DBLet(RSalb!telclien, "T")
+                vFactu.DirDpto = DBLet(RSalb!CodDirec, "T")
+                vFactu.NombreDirDpto = DBLet(RSalb!nomdirec, "T")
+                vFactu.Agente = RSalb!CodAgent
+                vFactu.ForPago = RSalb!codforpa
+                vFactu.TipForPago = DevuelveDesdeBDNew(conAri, "sforpa", "tipforpa", "codforpa", RSalb!codforpa, "N")
+                vFactu.DtoPPago = CCur(RSalb!DtoPPago)
+                vFactu.DtoGnral = CCur(RSalb!DtoGnral)
+                vFactu.Aportacion = 0
+                'If RSalb!codtipom = "ALM" Then vFactu.Aportacion = DBLet(RSalb!Aportacion, "N")
+                cadW = " (scaalb.codtipom,scaalb.numalbar) IN (('" & RSalb!codtipom & "'," & RSalb!Numalbar & ")"
+                condicion = False
+            Else
+                cadW = cadW & ",  ('" & RSalb!codtipom & "'," & RSalb!Numalbar & ")"
+            End If
+        
+       
+        RSalb.MoveNext
+    Wend
+    RSalb.Close
+    Set RSalb = Nothing
+        
+    'Facturar la ultima Factura generada del blucle
+    If cadW <> "" Then
+        cadW = cadW & ")"
+        b = True
+        If PgbVisible Then LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " - " & vFactu.NombreClien
+        
+        If Trim(ForzarNumeroFactura) <> "" Then vFactu.FijarNumeroFactura CLng(ForzarNumeroFactura)
+        
+        '......................................                                            TRUE:= Factura al momento
+        If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, "", ErroresAux, False, True) Then
+            If b Then b = False
+            AnyadirAvisos "Error Facturando el Cliente: " & Format(vFactu.Cliente, "000000") & " " & vFactu.NombreClien & vbCrLf & ErroresAux
+        Else 'a?adirlo a la lista de facturas a imprimir
+            ListFactu = ListFactu & "," & vFactu.Numfactu
+        End If
+        If ForzarNumeroFactura <> "" Then vFactu.FijarNumeroFactura 0  'lo dejamos en cero otra vez
+        If PgbVisible Then
+'            LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " - " & vFactu.NombreClien
+            IncrementarProgresNew PBar1, Inc
+        End If
+        Espera 0.2
+    End If
+    
+    TipoFac = vFactu.codtipom
+    Set vFactu = Nothing
+    
+    
+    If b Then
+        TraspasoFacturasGasol = True
+        LblBar.Caption = "Proceso finalizado correctamente."
+        If MostrarMsgOK Then MsgBox "Las Facturas de los Albaranes seleccionados se generaron correctamente.", vbInformation
+    Else
+        LblBar.Caption = "Proceso finalizado con errores."
+        SQL = "ATENCIÓN:" & vbCrLf
+        MsgBox SQL & "No todas las Facturas se generaron correctamente!!!.", vbExclamation
+        If Errores <> "" Then MostrarAvisos
+    End If
+    
+    Espera 0.2
+    
+    
+ETraspasoAlbFac:
+    If Err.Number <> 0 Then
+        MuestraError Err.Number, "Facturando Albaranes", Err.Description
+       
+    End If
 End Function
 

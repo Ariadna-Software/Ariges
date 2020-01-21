@@ -8,6 +8,7 @@ Begin VB.Form frmPpalGessocial
    ClientWidth     =   12510
    Icon            =   "frmGessocial.frx":0000
    LinkTopic       =   "Form1"
+   MinButton       =   0   'False
    ScaleHeight     =   4455
    ScaleWidth      =   12510
    ShowInTaskbar   =   0   'False
@@ -159,7 +160,7 @@ End Sub
 
 
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -190,11 +191,11 @@ Private Sub Form_Unload(Cancel As Integer)
     End If
 End Sub
 
-Private Sub mnGeneral1_Click(Index As Integer)
+Private Sub mnGeneral1_Click(index As Integer)
 
 
 
-    Select Case Index
+    Select Case index
     Case 0
             frmGesSocAsociados.Show vbModal
     Case 1
@@ -233,12 +234,12 @@ Private Sub CargaImagen()
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
     Case 1, 2
-        mnGeneral1_Click Button.Index - 1
+        mnGeneral1_Click Button.index - 1
         
     Case 10, 11
-        mnGeneral1_Click Button.Index - 7
+        mnGeneral1_Click Button.index - 7
     
     
     

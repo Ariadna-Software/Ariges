@@ -14922,7 +14922,7 @@ Private Sub ContabilizarTickets()
             cadFrom = cadFrom & "- Trabajador sin CC asignado: " & txtTrab(2).Text & vbCrLf
         Else
             'Tiene CC puesto. Veremos que existe en la conta
-            devuelve = DevuelveDesdeBD(conConta, "nomccost", "cabccost", "codccost", campo, "T")
+            devuelve = DevuelveDesdeBD(conConta, "nomccost", IIf(vParamAplic.ContabilidadNueva, "ccoste", "cabccost"), "codccost", campo, "T")
             If devuelve = "" Then cadFrom = cadFrom & "- Centro de coste del trabajador NO existe." & campo
         End If
         
@@ -15872,7 +15872,7 @@ Dim MensajeError As String
         miSQL = "SELECT scaalb.*,sclien.nomclien FROM scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien "
         miSQL = miSQL & " WHERE " & campo
         
-        TraspasoAlbaranesFacturas miSQL, campo, CStr(Now), txtBancoPr(1).Text, pb1, lblIndicadorT, True, "ALV", "", 1, True, False
+        TraspasoAlbaranesFacturas miSQL, campo, CStr(Now), txtBancoPr(1).Text, pb1, lblIndicadorT, True, "ALV", "", 1, True, False, False
         
     Else
         MensajeError = "No se ha generado ningun albaran" & MensajeError
@@ -18060,7 +18060,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgAyuda
+    For Each Ima In Me.imgayuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear
@@ -18287,7 +18287,7 @@ Dim IndiceCancel As Integer
         cboProPed(0).ListIndex = 1
         cboProPed(1).ListIndex = 1
         Label3(100).Caption = ""
-        imgAyuda(2).ToolTipText = lblTitulo(29).Caption
+        imgayuda(2).ToolTipText = lblTitulo(29).Caption
         Me.txtAnyo(5).Text = 70
     Case 33
         PonerFrameVisible FrameDtoCompra, H, W
@@ -18636,7 +18636,7 @@ Dim Ayuda As String
         Ayuda = Ayuda & vbCrLf & " Los prismaticos permiten buscar un hueco a partir del codigo introducido."
         Ayuda = Ayuda & vbCrLf & "-Cuenta contable . Puede ya existir. Insertara con esa cuenta el cliente"
     End Select
-    Ayuda = imgAyuda(index).ToolTipText & vbCrLf & String(47, "=") & vbCrLf & vbCrLf & Ayuda
+    Ayuda = imgayuda(index).ToolTipText & vbCrLf & String(47, "=") & vbCrLf & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 End Sub
@@ -18651,10 +18651,13 @@ End Sub
 
 Private Sub imgCC_Click(index As Integer)
     Screen.MousePointer = vbHourglass
-    miSQL = ""
+    
     Set frmB = New frmBuscaGrid
-    frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
-    frmB.vTabla = "cabccost"
+    miSQL = "cabccost"
+    If vParamAplic.ContabilidadNueva Then miSQL = "ccoste"
+    frmB.vCampos = "Codigo|" & miSQL & "|codccost|T||20·Descripción|" & miSQL & "|nomccost|T||70·"
+    frmB.vTabla = miSQL
+    miSQL = ""
     frmB.vSQL = ""
     frmB.vDevuelve = "0|1|"
     frmB.vTitulo = "Centros de coste"
@@ -20391,7 +20394,7 @@ Dim Esta As Boolean
     If miRsAux.EOF Then Exit Sub
     fin = False
     While Not fin
-        If miRsAux!codtipoa = codtipom Then
+        If miRsAux!Codtipoa = codtipom Then
             If miRsAux!Numalbar = alb Then
                 If miRsAux!FechaAlb = fech Then
                     'AQUI ESTA
@@ -22897,7 +22900,7 @@ Dim RT As ADODB.Recordset
          
             
             'Alguna tiene valor
-            If DBLet(miRsAux!ns, "N") = 0 And DBLet(miRsAux!u1, "N") = 0 And DBLet(miRsAux!u2, "N") = 0 And DBLet(miRsAux!p1, "N") = 0 Then
+            If DBLet(miRsAux!ns, "N") = 0 And DBLet(miRsAux!u1, "N") = 0 And DBLet(miRsAux!u2, "N") = 0 And DBLet(miRsAux!P1, "N") = 0 Then
                 'TODAS SON CERO. NO hacemos nada
             Else
                 miSQL = "Select tmppedprov.*,sartic.codprove,sartic.codfamia,canstock from tmppedprov,sartic,salmac WHERE tmppedprov.codartic=sartic.codartic and salmac.codartic=sartic.codartic"
@@ -22916,7 +22919,7 @@ Dim RT As ADODB.Recordset
                     miSQL = "UPDATE tmppedprov SET esescandallo =1 ,nsal=nsal + " & DBLet(miRsAux!ns, "N")
                     miSQL = miSQL & " ,ult_1=ult_1 + " & DBLet(miRsAux!u1, "N")
                     miSQL = miSQL & " ,ult_2=ult_2 + " & DBLet(miRsAux!u2, "N")
-                    miSQL = miSQL & " ,pedcli1=pedcli1 + " & DBLet(miRsAux!p1, "N")
+                    miSQL = miSQL & " ,pedcli1=pedcli1 + " & DBLet(miRsAux!P1, "N")
                     miSQL = miSQL & " ,pedcli2=pedcli2 + " & DBLet(miRsAux!p2, "N")
                     miSQL = miSQL & " ,pedcli3=pedcli3 + " & DBLet(miRsAux!p3, "N")
                     miSQL = miSQL & " WHERE codusu = " & vUsu.Codigo & " AND codartic= " & DBSet(miRsAux!codarti1, "T")

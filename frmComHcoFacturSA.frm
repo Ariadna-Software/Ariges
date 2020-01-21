@@ -259,9 +259,9 @@ Begin VB.Form frmComHcoFacturSA
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmComHcoFacturSA.frx":0B10
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "FrameObserva"
+      Tab(0).Control(0)=   "FrameCliente"
       Tab(0).Control(1)=   "FrameFactura"
-      Tab(0).Control(2)=   "FrameCliente"
+      Tab(0).Control(2)=   "FrameObserva"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmComHcoFacturSA.frx":0B2C
@@ -4232,7 +4232,7 @@ Private Sub txtAux_LostFocus(index As Integer)
         Case 8
             txtAux(index).Text = UCase(Trim(txtAux(index).Text))
             If txtAux(index).Text <> "" Then
-                BuscaChekc = DevuelveDesdeBD(conConta, "nomccost", "cabccost", "codccost", txtAux(index).Text, "T")
+                BuscaChekc = DevuelveDesdeBD(conConta, "nomccost", IIf(vParamAplic.ContabilidadNueva, "ccoste", "cabccost"), "codccost", txtAux(index).Text, "T")
                 If BuscaChekc = "" Then
                     MsgBox "No existe el centro de coste: " & txtAux(index).Text, vbExclamation
                     PonerFoco txtAux(index)

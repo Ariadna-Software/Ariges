@@ -2336,9 +2336,9 @@ Private Sub cmdCambiarPasswd_Click()
     
 End Sub
 
-Private Sub cmdCancelar_Click(index As Integer)
-    If index = 0 Then CadenaDesdeOtroForm = ""
-    If index = 5 Then AsignarValoresLineasPedidoPrecioECO
+Private Sub cmdCancelar_Click(Index As Integer)
+    If Index = 0 Then CadenaDesdeOtroForm = ""
+    If Index = 5 Then AsignarValoresLineasPedidoPrecioECO
     
     Unload Me
 End Sub
@@ -2487,7 +2487,7 @@ Dim vCli As New CCliente
                             If CambiarFactura_A_FAS(cTipo.Contador, vCli) Then
                                 
                                 cTipo.IncrementarContador cTipo.TipoMovimiento
-                                lw(4).ListItems.Remove lw(4).ListItems(NumRegElim).index
+                                lw(4).ListItems.Remove lw(4).ListItems(NumRegElim).Index
                             Else
                                 lw(4).ListItems(NumRegElim).ForeColor = vbRed
                                 lw(4).ListItems(NumRegElim).Checked = False
@@ -2720,10 +2720,10 @@ Private Function CargarDatosImprimeAlbaranConTransporte() As Boolean
     End If
     
 End Function
-Private Sub cmdTfnia_Click(index As Integer)
-    If index < 2 Then
+Private Sub cmdTfnia_Click(Index As Integer)
+    If Index < 2 Then
         'LEER /guardar
-        If index = 1 Then
+        If Index = 1 Then
             If lw(5).ListItems.Count = 0 Then
                 MsgBox "Ningun dato para guardar", vbExclamation
                 Exit Sub
@@ -2762,11 +2762,11 @@ Private Sub cmdTfnia_Click(index As Integer)
     End If
 End Sub
 
-Private Sub cmdtreeview1_Click(index As Integer)
+Private Sub cmdtreeview1_Click(Index As Integer)
 
     If Me.TreeView1.SelectedItem Is Nothing Then Exit Sub
 
-    If index = 0 Then
+    If Index = 0 Then
         'Modificar label identificativo
         If Mid(Me.TreeView1.SelectedItem.Key, 1, 1) = "F" Then
             
@@ -2791,7 +2791,7 @@ Private Sub cmdtreeview1_Click(index As Integer)
         
     Else
         
-        If index = 1 Then
+        If Index = 1 Then
             If Mid(Me.TreeView1.SelectedItem.Key, 1, 1) <> "N" Then
                 MsgBox "Seleccione el nodo donde insertar", vbExclamation
             Else
@@ -2821,7 +2821,7 @@ Private Sub cmdtreeview1_Click(index As Integer)
                 MsgBox "No se puede eliminar-modificar datos que no sean familias", vbExclamation
         
             Else
-                If index = 3 Then
+                If Index = 3 Then
                     'eliminar
                     SQL = "Va a eliminar la familia: " & TreeView1.SelectedItem.FullPath & vbCrLf & "¿Continuar?"
                     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
@@ -2830,7 +2830,7 @@ Private Sub cmdtreeview1_Click(index As Integer)
                         SQL = SQL & " AND columna = " & Mid(TreeView1.SelectedItem.Parent.Key, 4, 4)
                         SQL = SQL & " AND familia = " & Mid(TreeView1.SelectedItem.Text, 1, 4)
                         SQL = "DELETE FROM sventasalzira WHERE " & SQL
-                        If ejecutar(SQL, False) Then TreeView1.Nodes.Remove TreeView1.SelectedItem.index
+                        If ejecutar(SQL, False) Then TreeView1.Nodes.Remove TreeView1.SelectedItem.Index
                     End If
                 Else
                     'modificar
@@ -3231,15 +3231,15 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
     SQL = CadenaDevuelta
 End Sub
 
-Private Sub Imga_Click(index As Integer)
-    Select Case index
+Private Sub Imga_Click(Index As Integer)
+    Select Case Index
     Case 0
         LanzaBuscaGrid 0
     
     Case 1, 3, 5
         numParam = 5
-        If index = 3 Then numParam = 6
-        If index = 5 Then numParam = 9
+        If Index = 3 Then numParam = 6
+        If Index = 5 Then numParam = 9
             
         If lw(numParam).SelectedItem Is Nothing Then
             MsgBox "Seleccione un dato  a borrar", vbExclamation
@@ -3251,7 +3251,7 @@ Private Sub Imga_Click(index As Integer)
         If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
         
         
-        lw(numParam).ListItems.Remove lw(numParam).SelectedItem.index
+        lw(numParam).ListItems.Remove lw(numParam).SelectedItem.Index
         
         
     Case 2
@@ -3274,13 +3274,13 @@ Private Sub Imga_Click(index As Integer)
     End Select
 End Sub
 
-Private Sub imgAyuda_Click(index As Integer)
+Private Sub imgAyuda_Click(Index As Integer)
 Dim Ayuda As String
 
     
     'Sera las ayuda. Tampoco queiero la biblia, pero,
     'si un "pelin" de ayuda no me vendria mal a mi, imaginemos a el cliente final
-    Select Case index
+    Select Case Index
     Case 0
         
         Ayuda = vbCrLf & "Establecerá para las lineas de artículos varios "
@@ -3294,44 +3294,44 @@ Dim Ayuda As String
         Ayuda = Ayuda & vbCrLf & "%Comision:  Que llevara la linea"
     End Select
     
-    Ayuda = imgAyuda(index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
+    Ayuda = imgAyuda(Index).ToolTipText & vbCrLf & String(45, "=") & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 
 
 End Sub
 
-Private Sub imgCheck_Click(index As Integer)
+Private Sub imgCheck_Click(Index As Integer)
 Dim Cual As Byte
 Dim Chec As Boolean
 Dim Importe As Currency
 
-    If index < 2 Then
+    If Index < 2 Then
         'trabajadores....
         Cual = 0
         Chec = True
-        If (index Mod 2) = 0 Then Chec = False
-    ElseIf index < 4 Then
+        If (Index Mod 2) = 0 Then Chec = False
+    ElseIf Index < 4 Then
         Cual = 1
         Chec = True
-        If (index Mod 2) = 1 Then Chec = False
-    ElseIf index < 6 Then
+        If (Index Mod 2) = 1 Then Chec = False
+    ElseIf Index < 6 Then
         Cual = 2
         Chec = True
-        If (index Mod 2) = 0 Then Chec = False
+        If (Index Mod 2) = 0 Then Chec = False
         vCadena = "OK" 'para saber que han cambiado cosas
-    ElseIf index < 8 Then
+    ElseIf Index < 8 Then
         '6 7
         Cual = 4
-        Chec = (index Mod 2) = 1
-    ElseIf index < 10 Then
+        Chec = (Index Mod 2) = 1
+    ElseIf Index < 10 Then
         '8 9
         Cual = 8
-        Chec = (index Mod 2) = 1
+        Chec = (Index Mod 2) = 1
     Else
         '10   11
         Cual = 10
-        Chec = (index Mod 2) = 1
+        Chec = (Index Mod 2) = 1
     End If
          
     For NumRegElim = 1 To lw(Cual).ListItems.Count
@@ -3383,32 +3383,32 @@ End Sub
 
 
 
-Private Sub lw_ColumnClick(index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If index = 5 Then
+Private Sub lw_ColumnClick(Index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+    If Index = 5 Then
         'Telefonos para las acciones masivas
-        lw(5).SortKey = ColumnHeader.index - 1
+        lw(5).SortKey = ColumnHeader.Index - 1
         
         
-    ElseIf index = 7 Then
+    ElseIf Index = 7 Then
     
         'For numParam = 1 To lw(7).ColumnHeaders.Count: Debug.Print numParam & " " & (7); lw(7).ColumnHeaders(numParam).Width: Next numParam
     
-        If lw(7).SortKey = ColumnHeader.index - 1 Then
+        If lw(7).SortKey = ColumnHeader.Index - 1 Then
             If lw(7).SortOrder = lvwAscending Then
                 lw(7).SortOrder = lvwDescending
             Else
                 lw(7).SortOrder = lvwAscending
             End If
         Else
-            lw(7).SortKey = ColumnHeader.index - 1
+            lw(7).SortKey = ColumnHeader.Index - 1
         End If
     End If
 End Sub
 
-Private Sub lw_DblClick(index As Integer)
-    If Me.lw(index).SelectedItem Is Nothing Then Exit Sub
+Private Sub lw_DblClick(Index As Integer)
+    If Me.lw(Index).SelectedItem Is Nothing Then Exit Sub
 
-    If index = 0 Then
+    If Index = 0 Then
         
         
         frmAlmArticulos.DeConsulta = True
@@ -3418,9 +3418,9 @@ Private Sub lw_DblClick(index As Integer)
         
     Else
         Screen.MousePointer = vbHourglass
-        If index = 3 Then
+        If Index = 3 Then
         
-                SQL = Trim(lw(index).SelectedItem.Text)
+                SQL = Trim(lw(Index).SelectedItem.Text)
                 SQL = "telefono = '" & SQL & "' AND fichero "
                 
                 SQL = DevuelveDesdeBD(conAri, "concat(serie,'|',ano,'|',numfact,'|')", "tel_cab_factura", SQL, vCadena, "T")
@@ -3436,7 +3436,7 @@ Private Sub lw_DblClick(index As Integer)
                     Set miRsAux = New ADODB.Recordset
                 End If
                 
-        ElseIf index = 2 Then
+        ElseIf Index = 2 Then
         
            '
         
@@ -3475,7 +3475,7 @@ Dim HayError As Boolean
                 NumRegElim = Me.lw(0).ListItems.Count + 1
             Else
                 vCadena = vCadena & "  ·  " & DBSet(lw(0).ListItems(NumRegElim).Text, "T")
-                lw(0).ListItems.Remove lw(0).ListItems(NumRegElim).index
+                lw(0).ListItems.Remove lw(0).ListItems(NumRegElim).Index
                 
                 If Len(vCadena) > 230 Then InsertaLog  'y pone vcdena a ""
                     
@@ -3550,12 +3550,12 @@ End Sub
 
 
 
-Private Sub lw_ItemCheck(index As Integer, ByVal Item As MSComctlLib.ListItem)
+Private Sub lw_ItemCheck(Index As Integer, ByVal Item As MSComctlLib.ListItem)
 Dim Importe As Currency
-    If index = 2 Then
+    If Index = 2 Then
         vCadena = "Cambiado"
     
-    ElseIf index = 4 Then
+    ElseIf Index = 4 Then
         'PRESU a FAS
         Importe = ImporteFormateado(Item.SubItems(8))
         If Not Item.Checked Then Importe = Importe * -1
@@ -3567,21 +3567,21 @@ Dim Importe As Currency
     End If
 End Sub
 
-Private Sub optAgua_Click(index As Integer)
+Private Sub optAgua_Click(Index As Integer)
     
-    lw(9).SortKey = index
-    
-End Sub
-
-Private Sub optAgua2_Click(index As Integer)
-    lblTitulo(16).visible = index = 0
-    lblTitulo(17).visible = index = 0
-    Text1.visible = index = 0
-    Me.txtDecimal(0).visible = index = 0
+    lw(9).SortKey = Index
     
 End Sub
 
-Private Sub optTelefono_Click(index As Integer)
+Private Sub optAgua2_Click(Index As Integer)
+    lblTitulo(16).visible = Index = 0
+    lblTitulo(17).visible = Index = 0
+    Text1.visible = Index = 0
+    Me.txtDecimal(0).visible = Index = 0
+    
+End Sub
+
+Private Sub optTelefono_Click(Index As Integer)
     Me.lw(3).ListItems.Clear
     cboTelefono.Clear
 
@@ -3592,41 +3592,41 @@ Private Sub optTelefono_Click(index As Integer)
     
 End Sub
 
-Private Sub optTfnia_Click(index As Integer)
-    lw(5).SortKey = index
+Private Sub optTfnia_Click(Index As Integer)
+    lw(5).SortKey = Index
 End Sub
 
-Private Sub txtDecimal_GotFocus(index As Integer)
-    ConseguirFoco txtDecimal(index), 3
+Private Sub txtDecimal_GotFocus(Index As Integer)
+    ConseguirFoco txtDecimal(Index), 3
 End Sub
 
-Private Sub txtDecimal_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtDecimal_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtDecimal_LostFocus(index As Integer)
+Private Sub txtDecimal_LostFocus(Index As Integer)
 Dim b As Boolean
-    txtDecimal(index).Text = Trim(txtDecimal(index).Text)
-    If txtDecimal(index).Text <> "" Then
+    txtDecimal(Index).Text = Trim(txtDecimal(Index).Text)
+    If txtDecimal(Index).Text <> "" Then
        ' If Index = 0 Or Index = 9 Then
        '     B = PonerFormatoDecimal(txtDecimal(Index), 2)
        ' Else
-            b = PonerFormatoDecimal(txtDecimal(index), 5)
+            b = PonerFormatoDecimal(txtDecimal(Index), 5)
        ' End If
         If b Then
 
         Else
-            txtDecimal(index).Text = ""
+            txtDecimal(Index).Text = ""
         End If
     End If
 End Sub
 
 
-Private Sub txtPassword_GotFocus(index As Integer)
-    ConseguirFoco txtPassword(index), 3
+Private Sub txtPassword_GotFocus(Index As Integer)
+    ConseguirFoco txtPassword(Index), 3
 End Sub
 
-Private Sub txtPassword_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtPassword_KeyPress(Index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
@@ -3692,9 +3692,9 @@ Dim MasDeUnAlbaran As Boolean
     SQL = ""
     MasDeUnAlbaran = False
     While Not miRsAux.EOF
-        Set IT = lw(2).ListItems.Add(, "C" & Mid(DBLet(miRsAux!codtipoa, "T"), 1, 3) & Format(miRsAux!Numalbar, "0000000") & Format(miRsAux!numlinea, "000000"))
+        Set IT = lw(2).ListItems.Add(, "C" & Mid(DBLet(miRsAux!Codtipoa, "T"), 1, 3) & Format(miRsAux!Numalbar, "0000000") & Format(miRsAux!numlinea, "000000"))
         
-        IT.Text = DBLet(miRsAux!codtipoa, "T") & Format(miRsAux!Numalbar, "0000000")
+        IT.Text = DBLet(miRsAux!Codtipoa, "T") & Format(miRsAux!Numalbar, "0000000")
         IT.SubItems(1) = miRsAux!codArtic 'nomartic
         IT.SubItems(2) = miRsAux!NomArtic 'nomartic
         IT.SubItems(3) = Format(miRsAux!cantidad, FormatoPorcen)  'cantidad o servidas
@@ -3704,7 +3704,7 @@ Dim MasDeUnAlbaran As Boolean
         IT.SubItems(7) = Format(miRsAux!ImporteL, FormatoImporte)
         
         '(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea)
-        IT.Tag = "(" & DBSet(miRsAux!codtipoa, "T", "N") & "," & miRsAux!Numalbar & "," & miRsAux!numlinea & ")"
+        IT.Tag = "(" & DBSet(miRsAux!Codtipoa, "T", "N") & "," & miRsAux!Numalbar & "," & miRsAux!numlinea & ")"
         
         
         'Diciembre 2014
@@ -4454,7 +4454,7 @@ Dim vFac As CFactura
             'Diciembre 2014. Vuelven a querer el vto en tesoreria
             vFac.CuentaPrev = DevuelveDesdeBD(conAri, "codmacta", "sbanpr", "codbanpr", vFac.BancoPr)
             'vFac.CuentaPrev = ""
-            If Not vFac.InsertarEnTesoreria(vFac.codtipom & vFac.Numfactu & "||", SQL) Then MsgBox SQL, vbExclamation
+            If Not vFac.InsertarEnTesoreria(vFac.codtipom & vFac.Numfactu & "||", SQL, True) Then MsgBox SQL, vbExclamation
             
         End If
     End If
@@ -4942,7 +4942,7 @@ Private Sub CargaControlDireccionesEnvio()
 End Sub
 
 Private Sub CargaItemDireccionEnvio(ByRef elit As ListItem)
-        elit.Text = miRsAux!codtipoa
+        elit.Text = miRsAux!Codtipoa
         elit.SubItems(1) = Format(miRsAux!Numalbar, "000000")
         elit.SubItems(2) = Format(miRsAux!FechaAlb, FormatoFecha)
         elit.SubItems(3) = Format(miRsAux!codClien, "00000")

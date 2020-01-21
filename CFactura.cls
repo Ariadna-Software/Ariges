@@ -152,6 +152,9 @@ Private NuevasNormasBancarias As Boolean
 Dim FechaFacturarRenting As Date
                                  
 
+Dim NumeroDeFacturaPreasignado As Long
+
+
 
 '------------------------------------------------
 'Propiedades del modulo CFactura
@@ -763,6 +766,14 @@ End Property
 
 
 
+'En ALVIC, hay unas facturas que ya vienen dado el numero. NO hay que buscarlo en contadores
+
+Public Sub FijarNumeroFactura(NumeroAsignado As Long)
+    NumeroDeFacturaPreasignado = NumeroAsignado
+End Sub
+
+
+
 '------------------------------------------------
 'Procedimientos del modulo CFactura
 '------------------------------------------------
@@ -862,8 +873,10 @@ End Function
 '======================================================================
 'GRABAR EN TESORERIA
 '======================================================================
-
-Public Function InsertarEnTesoreria(vTextosCSB As String, MenError As String) As Boolean
+'
+'  Svenci_y_Cobros :  Si es false, NO inserta en COBROS de ariconta
+'
+Public Function InsertarEnTesoreria(vTextosCSB As String, MenError As String, Svenci_y_Cobros As Boolean) As Boolean
 'Guarda datos de Tesoreria en tablas: ariges.svenci y en conta.scobros
 Dim b As Boolean
 Dim RS As ADODB.Recordset
@@ -1481,7 +1494,10 @@ Dim TextoAuxiliar As String
                     End If
                     SQL = SQL & ",nomclien,domclien,pobclien, cpclien,proclien)"   '=Datos fiscales. para conta nueva meto el NIF mNIFClien
                     SQL = SQL & " VALUES " & CadValues2
-                    ConnConta.Execute SQL
+                    
+                    If Svenci_y_Cobros Then ConnConta.Execute SQL
+                    
+                    
                 End If
                 
             Else
@@ -1603,6 +1619,9 @@ Dim ImporteParaComparar As Currency
 Dim NueroIvas As Integer
 Dim InsertandoFAM As Boolean
 
+Dim DesdeAlvic As Boolean
+Dim ImportePoste As Currency
+
     CalcularDatosFactura = False
     On Error GoTo ECalcular
 
@@ -1633,7 +1652,7 @@ Dim InsertandoFAM As Boolean
    End If
    
    InsertandoFAM = False
-   
+   DesdeAlvic = False
    If exento_IVA = 2 Or exento_IVA = 3 Then
         cadWhere = Replace(cadWhere, NomTabla, NomTablaLin)
         SQL = "SELECT sum(importel) as bruto"
@@ -1670,6 +1689,12 @@ Dim InsertandoFAM As Boolean
             
                 'NORMAL, todo normal
                 SQL = "SELECT sartic.codigiva,sum(importel) as bruto"
+                
+                
+                If codtipom = "FAD" Or codtipom = "FAB" Then
+                    DesdeAlvic = True
+                    SQL = SQL & " , precoste ImportepagadoAlvic"
+                End If
             End If
             SQL = SQL & " FROM " & NomTablaLin & " LEFT OUTER JOIN sartic ON " & NomTablaLin & ".codartic=sartic.codartic"
             SQL = SQL & " WHERE " & cadWhere
@@ -1693,10 +1718,30 @@ Dim InsertandoFAM As Boolean
         While Not RS.EOF
             TotBruto = DBLet(RS!bruto, "N")
             ImporteParaComparar = ImporteParaComparar + TotBruto
+            
+            If NueroIvas = 0 And DesdeAlvic Then
+                ImportePoste = DBLet(RS!ImportepagadoAlvic, "N")
+                If ImportePoste = 0 Then DesdeAlvic = False
+            End If
+            
             NueroIvas = NueroIvas + 1
             RS.MoveNext
         Wend
-    
+        
+        
+        If DesdeAlvic Then
+            
+            'Solo podremos ajustar si hay un UNICO tipo de iva
+            If NueroIvas > 1 Then
+                DesdeAlvic = False
+                ImportePoste = 0
+            End If
+            
+            
+            
+        End If
+        
+        
     End If
     If NueroIvas > 0 Then
         TotImpIVA = CalcularPorcentaje(ImporteParaComparar, DtoPPago, 2)
@@ -1815,6 +1860,8 @@ Dim InsertandoFAM As Boolean
             TotImpIVA = TotImpIVA + ImpIva
             
             
+            
+            
             Select Case I
                 Case 1  'IVA 1
                     TipoIVA1 = TipoIVAAplicable    'Antes Rs!codigiva
@@ -1829,7 +1876,27 @@ Dim InsertandoFAM As Boolean
                     'Recargo equivalencia
                     PorceIVA1RE = RE1
                     ImpIVA1RE = impRE
-                     
+                    
+                    
+                    'Desde ALVIC
+                    'SOLO habra un tipo de IVA, con lo cual, el importe es base + ivas
+                    If DesdeAlvic Then
+                            '' ImportePoste
+                        Impaux = BaseIVA1 + ImpIVA1 + ImpIVA1RE
+                        
+                        Impaux = Impaux - ImportePoste
+                        If Abs(Impaux) < 0.03 Then
+                            
+                        Else
+                            
+                        End If
+                        
+                    End If
+                    
+                    
+                    
+                    
+                    
                 Case 2  'IVA 2
                     TipoIVA2 = TipoIVAAplicable     'Antes Rs!codigiva
                     
@@ -1934,7 +2001,7 @@ Dim InsertandoFAM As Boolean
     'si no calcularlo
     If TotalKm > 0 And conDesplaz = False Then
     
-        'FALTA##### con la conversion del Tipo de iva a RE
+        
     
         TotBruto = TotBruto + ImporteL
         vBruto = ImporteL
@@ -2025,9 +2092,12 @@ End Function
 
 
 
-Public Function PasarAlbaranesAFactura(TipoAlb As String, cadSQL As String, textoCSB As String, Optional ErroresAux As String, Optional EsTraspasoOfeFAZ As Boolean) As Boolean
+Public Function PasarAlbaranesAFactura(TipoAlb As String, cadSQL As String, textoCSB As String, ErroresAux As String, EsTraspasoOfeFAZ As Boolean, UnaUnicaFactura As Boolean) As Boolean
 'IN ->  cadSQL: cadena para seleccion de los Albaranes que vamos a Facturar
 '       TextosCSB:  Para la tesoreria
+'       UnaUnicaFactura: Cuando factura directamente un unico albaran. En taxco, por ejemplo, coge otra serie
+
+
 'Desde Albaranes Genera las Facturas correspondientes
 Dim b As Boolean
 Dim MenError As String
@@ -2035,8 +2105,8 @@ Dim HacerCambioIVA As Boolean
 Dim Aux As String
 Dim ComprobarRecargoFinanciero As Boolean
 Dim PorceRecargo As Currency
-'Dim PortesTipoHerbelca As Currency
 
+Dim Insertar_En_Tambien_En_CobrosTesoreria As Boolean
 
     On Error GoTo ETraspasoAlbFac
 
@@ -2044,9 +2114,9 @@ Dim PorceRecargo As Currency
     b = True
     ErroresAux = ""
     ComprobarRecargoFinanciero = False
+    Insertar_En_Tambien_En_CobrosTesoreria = True
      
-     
-    'ATENCION ####
+    'ATENCION ###########################################################################
     'La function en el modulo bus.bas DevuelveTipoFacturaDesdeAlbaran esta copiada de aqui. Si añadimos algio aqui, hacerlo alli tambien
     
     Select Case TipoAlb
@@ -2057,8 +2127,11 @@ Dim PorceRecargo As Currency
             '#David 08/11/2010 recuperar facturas de Alzira
             If TipoAlb = "ALM" Then
                 If vParamAplic.FrasMostradorSerieDistinta Then codtipom = "FMO"
+            Else
+                If vParamAplic.NumeroInstalacion = vbTaxco Then
+                    If UnaUnicaFactura Then codtipom = "FA4"
+                End If
             End If
-            
             ComprobarRecargoFinanciero = True
         Case "ALR": 'Albaranes de reparacion en clientes
             codtipom = "FAR"
@@ -2079,16 +2152,50 @@ Dim PorceRecargo As Currency
         Case "ALG"
             'Agua Bolbaite
             codtipom = "FAG"
-            
+        
+        
+        
         'EULER
         Case "ALO"
             'Orden de trabajo
             codtipom = "FAO"
             ComprobarRecargoFinanciero = True
+            
+            
+            'En taxco, si S
+            If vParamAplic.NumeroInstalacion = vbTaxco Then
+                
+                If UnaUnicaFactura Then codtipom = "FA5"
+            End If
+            
+            
         Case "ALE"
             'Trabajo externo
             codtipom = "FAE"
             ComprobarRecargoFinanciero = True
+            
+            
+        Case "ALD"
+            codtipom = "FAD"
+            'En taxco, si S
+            If vParamAplic.NumeroInstalacion = vbTaxco Then
+                Insertar_En_Tambien_En_CobrosTesoreria = False
+                If UnaUnicaFactura Then codtipom = "FA1"
+            End If
+        
+        Case "ALB"
+            codtipom = "FAB"
+            'En taxco, si S
+            If vParamAplic.NumeroInstalacion = vbTaxco Then
+                Insertar_En_Tambien_En_CobrosTesoreria = False
+                If UnaUnicaFactura Then codtipom = "FA2"
+            End If
+            
+        'Gasolinera tipos
+        Case "FAX", "FAY", "FAW", "FA3", "FA1", "FA2"
+        
+            Insertar_En_Tambien_En_CobrosTesoreria = False
+            codtipom = TipoAlb
             
     End Select
       
@@ -2188,10 +2295,10 @@ Dim PorceRecargo As Currency
     
     'Insertar los Vencimientos de la Factura. Tabla: svenci
     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
-    '#Laura: 14/11/2006 Recuperar facturas Alzira
+    'Si son facturas ALVIC, el cobro ya se contabilizo. Luego NO tienen que entrar
     If b Then
         MenError = "Error al actualizar en Tesoreria."
-        b = InsertarEnTesoreria(textoCSB, MenError)
+        b = InsertarEnTesoreria(textoCSB, MenError, Insertar_En_Tambien_En_CobrosTesoreria)
     End If
     
     
@@ -2315,7 +2422,7 @@ Dim CC As String
     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
     If b Then
         MenError = "Error al actualizar en Tesoreria"
-        b = InsertarEnTesoreria("", MenError)
+        b = InsertarEnTesoreria("", MenError, True)
     End If
     
    
@@ -2382,7 +2489,7 @@ Dim MenError As String
     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
     If b Then
         MenError = "Error al actualizar en Tesoreria."
-        b = InsertarEnTesoreria("", MenError)
+        b = InsertarEnTesoreria("", MenError, True)
     End If
     
     
@@ -2449,6 +2556,7 @@ Dim b As Boolean
 Dim vTipoMov As CTiposMov
 Dim Existe As Boolean
 Dim devuelve As String
+Dim EsFacturaALvic As Boolean
 
     InsertarFactura = False
     
@@ -2500,17 +2608,30 @@ Dim devuelve As String
                             Numfactu = DevuelveHuecoNumeroFactura()
                             If Numfactu = 0 Then Numfactu = vTipoMov.ConseguirContador(codtipom)
                         Else
-                            'Resto como estaba
-                            Numfactu = vTipoMov.ConseguirContador(codtipom)
+                        
+                        
+                            'Se le ha asignado el numero desde vfactu.asignarnumerofactura
+                            If NumeroDeFacturaPreasignado > 0 Then
+                                Numfactu = NumeroDeFacturaPreasignado
+                            Else
+                                'Resto como estaba
+                                Numfactu = vTipoMov.ConseguirContador(codtipom)
+                            End If
                         End If
                         
                         
                         devuelve = DevuelveDesdeBDNew(conAri, "scafac", "numfactu", "codtipom", codtipom, "T", , "numfactu", CStr(Numfactu), "N", "fecfactu", FecFactu, "F")
                         If devuelve <> "" Then
                             'Ya existe el contador incrementarlo
-                            Existe = True
-                            vTipoMov.IncrementarContador (codtipom)
-                            Numfactu = vTipoMov.ConseguirContador(codtipom)
+                            
+                            If NumeroDeFacturaPreasignado > 0 Then
+                                'NO DEBERIA HABER PASADO
+                                Err.Raise 513, , "Ya existe factura: " & codtipom & " " & Numfactu
+                            Else
+                                Existe = True
+                                vTipoMov.IncrementarContador (codtipom)
+                                Numfactu = vTipoMov.ConseguirContador(codtipom)
+                            End If
                         Else
                             Existe = False
                         End If
@@ -2522,6 +2643,13 @@ Dim devuelve As String
         Exit Function
     End If
         
+'    EsFacturaALvic = False
+'    If vTipoMov.TipoMovimiento = "FAX" Or vTipoMov.TipoMovimiento = "FAY" Or vTipoMov.TipoMovimiento = "FAW" Or vTipoMov.TipoMovimiento = "FAB" Then
+'        EsFacturaALvic = True
+'    Else
+'        If vTipoMov.TipoMovimiento = "FA1" Or vTipoMov.TipoMovimiento = "FA2" Or vTipoMov.TipoMovimiento = "FA3" Or vTipoMov.TipoMovimiento = "FAD" Then EsFacturaALvic = True
+'    End If
+    
     LetraSerie = Trim(vTipoMov.LetraSerie) 'la guardamos para INSERT en scobro de la Conta
 
     'calcular el total de la factura antes de insertar
@@ -2998,7 +3126,7 @@ Dim RTiket As ADODB.Recordset
     '.----------------------------------
     If InstalacionEsEulerTaxco Then
         'METERA EN UNA TABLA que es scafac_EU
-        If codtipom = "FAO" Or codtipom = "FAE" Or codtipom = "FAR" Then
+        If codtipom = "FAO" Or codtipom = "FAE" Or codtipom = "FAR" Or codtipom = "FA5" Then
             devuelve = "bombamarca,bombaModelo,motormarca,motorModelo,observaciones,TrabajoExterior,TipoPortes,ReferPedido,FechaPed"
             
             'Febrero 2016
@@ -3473,7 +3601,12 @@ Dim TipoA As String
     SQL = SQL & " Where slialb.NumAlbar = scaalb.NumAlbar And slialb.codtipom = scaalb.codtipom And slialb.codArtic = sartic.codArtic AND slialb.precoste <>0 AND "
     SQL = SQL & Replace(CadenaAlbaran, "scaalb", "slialb")
 
-    conn.Execute SQL
+
+    TipoA = ""
+    If InStr(1, CadenaAlbaran, "'ALD'") > 0 Then TipoA = "N"
+    If InStr(1, CadenaAlbaran, "'ALB'") > 0 Then TipoA = "N"
+    
+    If TipoA = "" Then conn.Execute SQL
     
     
     
@@ -4299,7 +4432,7 @@ Dim CC As String
     'Grabar en TESORERIA. Tabla de Contabilidad: sconta.scobros
     If b Then
         MenError = "Error al actualizar en Tesoreria"
-        b = InsertarEnTesoreria("", MenError)
+        b = InsertarEnTesoreria("", MenError, True)
     End If
     
     NumAlbTicket = ""
@@ -4374,4 +4507,5 @@ End Sub
 
 Private Sub Class_Initialize()
     NuevasNormasBancarias = False
+    NumeroDeFacturaPreasignado = 0
 End Sub

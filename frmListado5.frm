@@ -15,6 +15,173 @@ Begin VB.Form frmListado5
    ScaleWidth      =   20805
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame frameAlvic 
+      Height          =   9015
+      Left            =   600
+      TabIndex        =   322
+      Top             =   0
+      Width           =   8055
+      Begin VB.CommandButton cmdAlvic 
+         Caption         =   "Aceptar"
+         Height          =   375
+         Left            =   5400
+         TabIndex        =   326
+         Top             =   8520
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   30
+         Left            =   6600
+         TabIndex        =   323
+         Top             =   8520
+         Width           =   975
+      End
+      Begin MSComctlLib.ListView lw 
+         Height          =   3135
+         Index           =   9
+         Left            =   360
+         TabIndex        =   324
+         Top             =   720
+         Width           =   7335
+         _ExtentX        =   12938
+         _ExtentY        =   5530
+         View            =   3
+         LabelEdit       =   1
+         SortOrder       =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   3
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Codigo"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Forma de pago"
+            Object.Width           =   7126
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   2
+            Text            =   "Importe"
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin MSComctlLib.ListView lw 
+         Height          =   3255
+         Index           =   10
+         Left            =   360
+         TabIndex        =   329
+         Top             =   5040
+         Width           =   7335
+         _ExtentX        =   12938
+         _ExtentY        =   5741
+         View            =   3
+         LabelEdit       =   1
+         SortOrder       =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   2
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Campo"
+            Object.Width           =   3528
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Observacion"
+            Object.Width           =   7832
+         EndProperty
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Infrmación adicional"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00008000&
+         Height          =   345
+         Index           =   29
+         Left            =   360
+         TabIndex        =   328
+         Top             =   4560
+         Width           =   6495
+      End
+      Begin VB.Label lblDpto 
+         Caption         =   "M"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H000000FF&
+         Height          =   195
+         Index           =   42
+         Left            =   360
+         TabIndex        =   327
+         Top             =   3960
+         Width           =   4815
+      End
+      Begin VB.Label Label9 
+         Caption         =   "ALVIC"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   28
+         Left            =   360
+         TabIndex        =   325
+         Top             =   240
+         Width           =   6495
+      End
+   End
    Begin VB.Frame FrameTaxcoNuevaTaller 
       Height          =   6015
       Left            =   960
@@ -4726,6 +4893,7 @@ Public OtrosDatos As String
     '   27.-  Lineas especiales albaran euler  FACTURA
     '   28.-    "       ""                     ALBARANES
     '   29.-    Taxco   Nueva entrad vehcilu.
+    '   30.-  importe cierre turno traspaso ALVIC
     
 Private WithEvents frmCli As frmFacClientes3
 Attribute frmCli.VB_VarHelpID = -1
@@ -4857,6 +5025,36 @@ Private Sub cmdAceptarLinEspEuler_Click()
         Unload Me
     End If
     
+End Sub
+
+Private Sub cmdAlvic_Click()
+    
+    
+    'Comprobaciones
+    ComprobarImportesAlvic
+    
+    If lblDpto(42).Tag <> 0 Then
+        MsgBox "Existe diferencia entre importes ajustados y traspaso" & vbCrLf & vbCrLf & lblDpto(42).Caption, vbExclamation
+    
+    Else
+        'Ajustamos
+        
+        miSQL = ""
+        For numParam = 1 To lw(9).ListItems.Count
+            miSQL = miSQL & ", (" & vUsu.Codigo & "," & lw(9).ListItems(numParam).Text & "," & DBSet(lw(9).ListItems(numParam).Tag, "N") & ")"
+        Next
+        If miSQL <> "" Then
+            miSQL = Mid(miSQL, 2)
+            
+            miSQL = "REPLACE INTO tmpscapla (codusu,codplant,cantidad ) VALUES " & miSQL
+            If ejecutar(miSQL, False) Then
+                CadenaDesdeOtroForm = "OK"
+                Unload Me
+            Else
+                CadenaDesdeOtroForm = ""
+            End If
+        End If
+    End If
 End Sub
 
 Private Sub cmdCambiarConsumo_Click()
@@ -5957,6 +6155,8 @@ Private Sub Form_activate()
         If OpcionListado = 26 Then cmdImpFraCoarval_Click
         If OpcionListado = 27 Or OpcionListado = 28 Then datosLineasAlbarEulerEspecial
         If OpcionListado = 29 Then PonerFoco txtModificable(6)
+        If OpcionListado = 30 Then PonerImportesFormaPagoALVIC
+        
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -5996,6 +6196,7 @@ Dim Indice As Byte
     FrameCoarval.visible = False
     FrameLineasAlbaFalsoEuler.visible = False
     FrameTaxcoNuevaTaller.visible = False
+    frameAlvic.visible = False
     Indice = OpcionListado
     Me.Caption = "Listado"
     Select Case OpcionListado
@@ -6161,7 +6362,6 @@ Dim Indice As Byte
             Indice = 27
         Else
             Me.Caption = "Euler (Facturas)"
-            
         End If
         PonerFrameVisible FrameLineasAlbaFalsoEuler
         
@@ -6169,7 +6369,11 @@ Dim Indice As Byte
         'TAXCO
         'Nueva entrada vehiculo
         PonerFrameVisible FrameTaxcoNuevaTaller
-        
+    Case 30
+        PonerFrameVisible frameAlvic
+        Label9(28).Caption = "Importes traspaso ALVIC (" & Format(CCur(OtrosDatos), FormatoImporte) & ")"
+        lblDpto(42).Caption = ""
+        lblDpto(42).Tag = 0
     End Select
     
     Me.cmdCancelar(CInt(Indice)).Cancel = True
@@ -6382,15 +6586,17 @@ Private Sub lblDestinoB_Click()
 End Sub
 
 Private Sub lw_DblClick(index As Integer)
-    If index = 4 Then
+    Select Case index
+    Case 3
+        cmdSelecAlbaran_Click
+    Case 4
         cmdTraerLineaCompraCliente_Click
-    Else
-        If index = 8 Then
-            cmdTaxcoNuevoEntradaVehiculo_Click
-        Else
-            cmdSelecAlbaran_Click
-        End If
-    End If
+    
+    Case 8
+        cmdTaxcoNuevoEntradaVehiculo_Click
+    Case 9
+        CambiarImporteALvic
+    End Select
 End Sub
 
 Private Sub lw_KeyPress(index As Integer, KeyAscii As Integer)
@@ -8025,7 +8231,7 @@ Dim EnAlbaranes As Boolean
             lw(4).ListItems(NumRegElim).SubItems(9) = miSQL
             
             'codtipom numfactu fecfactu codtipoa numalbar numlinea
-            miSQL = "codtipoa = " & DBSet(miRsAux!codtipoa, "T") & " AND numalbar = " & miRsAux!Numalbar & " AND numlinea =" & miRsAux!numlinea
+            miSQL = "codtipoa = " & DBSet(miRsAux!Codtipoa, "T") & " AND numalbar = " & miRsAux!Numalbar & " AND numlinea =" & miRsAux!numlinea
             lw(4).ListItems(NumRegElim).Tag = miSQL
             
             'Si es negativo:
@@ -8684,7 +8890,7 @@ Private Function ListadoFacturasAlbaranes() As Boolean
             
             'tmpinformes   codusu codigo1   campo1 nombre1 fecha1      nombre2    importe1   nombre3 fecha2
         
-            miSQL = ", (" & vUsu.Codigo & "," & NumRegElim & ",'" & miRsAux!codtipoa & "'," & miRsAux!Numalbar & "," & DBSet(miRsAux!FechaAlb, "F")
+            miSQL = ", (" & vUsu.Codigo & "," & NumRegElim & ",'" & miRsAux!Codtipoa & "'," & miRsAux!Numalbar & "," & DBSet(miRsAux!FechaAlb, "F")
             miSQL = miSQL & "," & DBSet(Format(miRsAux!codClien, "00000") & "   " & miRsAux!NomClien, "T") & "," & DBSet(miRsAux!Import, "N")
             miSQL = miSQL & "," & DBSet(miRsAux!codtipom & Format(miRsAux!Numfactu, "000000"), "T") & "," & DBSet(miRsAux!FecFactu, "F") & ")"
             
@@ -9342,7 +9548,7 @@ Private Sub LeerMatriculaTaxco()
             IT.SubItems(5) = "f" & Format(miRsAux!FechaAlb, "yyyymmdd") & Format(miRsAux!Numalbar, "00000")
     
             IT.Tag = "  scafac.codtipom=" & DBSet(miRsAux!codtipom, "T") & " AND scafac.numfactu=" & miRsAux!Numfactu & " AND scafac.fecfactu =" & DBSet(miRsAux!FecFactu, "F")
-            IT.Tag = IT.Tag & " ## AND  scafac.codtipoa=" & DBSet(miRsAux!codtipoa, "T") & " AND scafac.numalbar=" & miRsAux!Numalbar
+            IT.Tag = IT.Tag & " ## AND  scafac.codtipoa=" & DBSet(miRsAux!Codtipoa, "T") & " AND scafac.numalbar=" & miRsAux!Numalbar
     
         miRsAux.MoveNext
     Wend
@@ -9371,7 +9577,7 @@ Private Sub LeerMatriculaTaxco()
             'IT.Tag = "  scafac.codtipom=" & DBSet(miRsAux!codtipom, "T") & " AND scafac.numfactu=" & miRsAux!Numfactu & " AND scafac.fecfactu =" & DBSet(miRsAux!FecFactu, "F")
             'IT.Tag = IT.Tag & " ## AND  scafac.codtipoa=" & DBSet(miRsAux!codtipoa, "T") & " AND scafac.numalbar=" & miRsAux!Numalbar
     
-            IT.Tag = "smatriculataller = " & DBSet(miRsAux!Matricula, "T")
+            IT.Tag = "smatriculataller.matricula = " & DBSet(miRsAux!Matricula, "T")
     
         miRsAux.MoveNext
     Wend
@@ -9383,5 +9589,193 @@ Private Sub LeerMatriculaTaxco()
         Set lw(8).SelectedItem = lw(8).ListItems(1)
     Else
         If NumRegElim = 0 Then PonerFoco txtModificable(6)
+    End If
+End Sub
+
+
+
+'
+Private Sub PonerImportesFormaPagoALVIC()
+    Dim IT As ListItem
+    Me.lw(9).ListItems.Clear
+    
+
+    Set miRsAux = New ADODB.Recordset
+    
+      
+    
+    'Por si hay en albaranes
+    miSQL = "select codforpa,nomforpa,cantidad from tmpscapla ,sforpa where codusu=" & vUsu.Codigo & " and codplant=codforpa ORDER BY codforpa"
+    miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    NumRegElim = 0
+    While Not miRsAux.EOF
+        
+            NumRegElim = NumRegElim + 1
+            
+            
+            
+            Set IT = lw(9).ListItems.Add(, , Format(miRsAux!codforpa, "0000"))
+            
+            If miRsAux!codforpa = 2 Then
+                'Credito. NO suma
+                IT.SubItems(1) = miRsAux!nomforpa & "  " & Format(miRsAux!cantidad, FormatoImporte)
+                IT.SubItems(2) = " "
+                 IT.Tag = 0
+                'El importe lo resto
+                OtrosDatos = CCur(OtrosDatos) - miRsAux!cantidad
+                Label9(28).Caption = "Importes traspaso ALVIC (" & Format(CCur(OtrosDatos), FormatoImporte) & ")"
+            Else
+                IT.SubItems(1) = miRsAux!nomforpa
+                IT.SubItems(2) = Format(miRsAux!cantidad, FormatoImporte)
+                IT.Tag = miRsAux!cantidad
+            End If
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+    
+    
+    'informacion adicional
+    Me.lw(10).ListItems.Clear
+    miSQL = "select mid(numalbaran,1,1) tipo , if(numfactura is null,'Albaran','Factura') facturado, count(*) cuanto,min(numalbaran) minimo,max(numalbaran) maximo"
+    miSQL = miSQL & "  from tmpgasolimport where codusu =" & vUsu.Codigo & " group by 1,2 order by 1 asc , 2 asc"
+    miRsAux.Open miSQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    miSQL = ""
+    cadFormula = ""
+    While Not miRsAux.EOF
+        If miRsAux!Tipo <> cadFormula Then
+            If cadFormula <> "" Then
+                AnyadeItemObservaTaxco
+            
+            End If
+            
+            'Es otro tipo
+            cadFormula = miRsAux!Tipo
+            
+            miSQL = miRsAux!Tipo & "|"
+           
+        End If
+        miSQL = miSQL & miRsAux!facturado & "*" & miRsAux!cuanto & "*" & miRsAux!Minimo & "*" & miRsAux!Maximo & "*|"
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    If cadFormula <> "" Then AnyadeItemObservaTaxco
+    
+    
+    For numParam = 1 To 3
+        cadFormula = RecuperaValor("GASOIL|GASOLINA|FICHA|", CInt(numParam))
+        miSQL = "select CodigoProducto,min(codigo) linea,count(*) veces from tmpgasolimport where codusu =" & vUsu.Codigo
+        miSQL = miSQL & " and  CodigoProducto like '%" & cadFormula & "%'"
+        miSQL = miSQL & " and NOT CodigoProducto  in (select artculoAlvic from sarticalvic ) group by 1"
+        
+        miRsAux.Open miSQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
+        miSQL = ""
+        cadFormula = ""
+        While Not miRsAux.EOF
+            Set IT = lw(10).ListItems.Add(, , miRsAux!CodigoProducto)
+            cadFormula = "Linea: " & miRsAux!linea & "    Veces: " & miRsAux!Veces
+            IT.SubItems(1) = cadFormula
+            
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+    
+    Next
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    Set miRsAux = Nothing
+    numParam = 0
+    cadFormula = ""
+    cadSelect = ""
+    cmdAlvic.Enabled = NumRegElim > 0
+End Sub
+
+
+Private Sub AnyadeItemObservaTaxco()
+Dim IT As ListItem
+
+    
+    
+    cadSelect = RecuperaValor(miSQL, 2)
+    cadSelect = Replace(cadSelect, "*", "|")
+    If cadSelect <> "" Then
+        cadNomRPT = "Tipo " & RecuperaValor(miSQL, 1)
+        cadNomRPT = cadNomRPT & " - " & RecuperaValor(cadSelect, 1)
+        
+        Set IT = lw(10).ListItems.Add(, , cadNomRPT)
+        
+        cadNomRPT = "Nº " & Right("00000" & RecuperaValor(cadSelect, 2), 5) & "   Min: " & RecuperaValor(cadSelect, 3) & "    Max: " & RecuperaValor(cadSelect, 4)
+        
+        
+        IT.SubItems(1) = cadNomRPT
+    End If
+
+    cadSelect = RecuperaValor(miSQL, 3)
+    cadSelect = Replace(cadSelect, "*", "|")
+    If cadSelect <> "" Then
+        cadNomRPT = "Tipo " & RecuperaValor(miSQL, 1)
+        cadNomRPT = cadNomRPT & " - " & RecuperaValor(cadSelect, 1)
+        
+        Set IT = lw(10).ListItems.Add(, , cadNomRPT)
+        
+        cadNomRPT = "Nº " & Right("00000" & RecuperaValor(cadSelect, 2), 5) '& "   Min: " & RecuperaValor(cadSelect, 3) & "    Max: " & RecuperaValor(cadSelect, 4)
+        
+        
+        IT.SubItems(1) = cadNomRPT
+    End If
+
+End Sub
+
+
+
+Private Sub CambiarImporteALvic()
+Dim Importe As Currency
+    If lw(9).SelectedItem Is Nothing Then Exit Sub
+    If Val(lw(9).SelectedItem.Text) = 2 Then Exit Sub 'Credito NO se modifica
+    miSQL = lw(9).SelectedItem.SubItems(1)
+    Importe = lw(9).SelectedItem.Tag + lblDpto(42).Tag
+    miSQL = InputBox(miSQL, "Ajustar importe", Importe)
+    Importe = 0
+    If miSQL <> "" Then
+        cadFormula = ""
+        If Not IsNumeric(miSQL) Then
+            cadFormula = "Campo no numerico"
+        Else
+            Importe = CCur(TransformaPuntosComas(miSQL))
+            
+        End If
+        If cadFormula <> "" Then
+            MsgBox cadFormula, vbExclamation
+        Else
+            lw(9).SelectedItem.SubItems(2) = Format(Importe, FormatoImporte)
+            lw(9).SelectedItem.Tag = Importe
+            ComprobarImportesAlvic
+        End If
+    End If
+End Sub
+
+
+Private Sub ComprobarImportesAlvic()
+Dim Importe As Currency
+
+    Importe = 0
+    For numParam = 1 To lw(9).ListItems.Count
+        Importe = Importe + lw(9).ListItems(numParam).Tag
+    Next
+    Importe = CCur(OtrosDatos) - Importe
+    If Importe <> 0 Then
+        lblDpto(42).Caption = "Diferencia: " & Format(Importe, FormatoImporte)
+        lblDpto(42).Tag = Importe
+    Else
+        lblDpto(42).Caption = ""
+        lblDpto(42).Tag = 0
     End If
 End Sub

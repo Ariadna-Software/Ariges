@@ -458,11 +458,18 @@ Private mvarImportacionesCoarval As Boolean
 
 
 'Nov2019.   Gasolinera
-Private mvarGasolArticuloNormal As String
-Private mvarGasolArticuloReducido As String
-Private mvarGasolArticuloSuperReducido  As String
-Private mvarGasolArticuloExento As String
-Private mvarGasolClienteVario As Long
+Private mvarLlevaGasolinera As Boolean
+
+
+
+'hace como la conta
+' rellena a ceros el codartic
+' De momento TAXCO, con lo cual NO hay parametros
+Private mvarDigitosCodartic As Byte
+
+
+Private mvarFacturasInternasTelefonia As Boolean  'No lleva parametros. De momento, todos los que tengan telefonia(cooperativas) menos taxco, las tienen
+
 
 
 
@@ -1850,37 +1857,20 @@ End Property
      
      
 'llevan GET y let
-Public Property Get GasolArticuloNormal() As String
-     GasolArticuloNormal = mvarGasolArticuloNormal
+Public Property Get TieneGasolinera() As Boolean
+     TieneGasolinera = mvarLlevaGasolinera
 End Property
-Public Property Let GasolArticuloNormal(ByVal ArticuloNormal As String)
-     mvarGasolArticuloNormal = ArticuloNormal
+
+
+Public Property Get DigitosCodartic() As Byte
+     DigitosCodartic = mvarDigitosCodartic
 End Property
-Public Property Get GasolArticuloReducido() As String
-     GasolArticuloReducido = mvarGasolArticuloReducido
+
+
+'Solo get
+Public Property Get FacturasInternasTelefonia() As Boolean
+     FacturasInternasTelefonia = mvarFacturasInternasTelefonia
 End Property
-Public Property Let GasolArticuloReducido(ByVal ArticuloReducido As String)
-     mvarGasolArticuloReducido = ArticuloReducido
-End Property
-Public Property Get GasolArticuloSuperReducido() As String
-     GasolArticuloSuperReducido = mvarGasolArticuloSuperReducido
-End Property
-Public Property Let GasolArticuloSuperReducido(ByVal ArticuloSuperReducido As String)
-     mvarGasolArticuloSuperReducido = ArticuloSuperReducido
-End Property
-Public Property Get GasolArticuloExento() As String
-     GasolArticuloExento = mvarGasolArticuloExento
-End Property
-Public Property Let GasolArticuloExento(ByVal ArticuloExento As String)
-     mvarGasolArticuloExento = ArticuloExento
-End Property
-Public Property Get GasolClienteVario() As Long
-     GasolClienteVario = mvarGasolClienteVario
-End Property
-Public Property Let GasolClienteVario(ByVal Cli As Long)
-     mvarGasolClienteVario = Cli
-End Property
-     
 
 
 
@@ -2208,6 +2198,10 @@ On Error GoTo Err3
         
         
         
+        If mvarTieneTelefonia2 > 0 Then
+            mvarFacturasInternasTelefonia = False
+            If mvarNumeroInstalacion <> vbTaxco Then mvarFacturasInternasTelefonia = True
+        End If
         
         
         
@@ -2215,8 +2209,6 @@ On Error GoTo Err3
         
         
         
-        
-        Leer = 0
         mvarSIITiene = False
         
         
@@ -2267,12 +2259,19 @@ On Error GoTo Err3
         mvarMaximoImporteEfectivo = 2500
         If CampoNuevoBD(RS, "ImportMaxEfectivo", "N", V) Then mvarMaximoImporteEfectivo = DBLet(V)
         
+        mvarLlevaGasolinera = False
+        mvarDigitosCodartic = 0
+        If MovimientosParaGasolinera Then
+            mvarLlevaGasolinera = True
+            mvarDigitosCodartic = 13
+        End If
         
-        mvarGasolArticuloNormal = DBLet(RS!GasolArticuloNormal, "T")
-        mvarGasolArticuloReducido = DBLet(RS!GasolArticuloReducido, "T")
-        mvarGasolArticuloSuperReducido = DBLet(RS!GasolArticuloSuperReducido, "T")
-        mvarGasolArticuloExento = DBLet(RS!GasolArticuloExento, "T")
-        mvarGasolClienteVario = DBLet(RS!GasolClienteVario, "N")
+        
+        If mvarNumeroInstalacion = vbTaxco Then mvarArtReciclado = "SI"
+        
+        
+        
+        Leer = 0
         
     End If
 
@@ -2530,13 +2529,7 @@ On Error GoTo EModificar
     SQL = SQL & ", PathFirmasAlbaran= " & DBSet(mvarPathFirmasAlbaran, "T", "S")
     SQL = SQL & ", PathFirmasFacturas= " & DBSet(mvarPathFirmasFacturas, "T", "S")
 
-    'Gasolinera
-    SQL = SQL & ", GasolArticuloNormal= " & DBSet(mvarGasolArticuloNormal, "T", "S")
-    SQL = SQL & ", GasolArticuloReducido= " & DBSet(mvarGasolArticuloReducido, "T", "S")
-    SQL = SQL & ", GasolArticuloSuperReducido= " & DBSet(mvarGasolArticuloSuperReducido, "T", "S")
-    SQL = SQL & ", GasolArticuloExento= " & DBSet(mvarGasolArticuloExento, "T", "S")
-    SQL = SQL & ", GasolClienteVario= " & DBSet(mvarGasolClienteVario, "N", "S")
-
+    
     'Solo desde OG
     'SQL = SQL & ",Renting = " & DBSet(mvarRenting, "B")
     'GestionFlotas
@@ -2586,6 +2579,36 @@ Private Function MovimientosParaServicios() As Boolean
     Else
         MovimientosParaServicios = False
     End If
+    RS.Close
+     Set RS = New ADODB.Recordset
+End Function
+
+
+Private Function MovimientosParaGasolinera() As Boolean
+    '-- Esta función comprueba si los movimientos ALS y FAS están creados
+    '   este es un requisito previo si se desa activar la opción de servicios
+    
+    On Error GoTo eMovimientosParaGasolinera
+    
+    Dim SQL As String
+    Dim RS As ADODB.Recordset
+    SQL = "select count(*) from stipom where codtipom = 'ALD' or codtipom = 'FAD'"
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly
+    If RS.Fields(0) = 2 Then
+        MovimientosParaGasolinera = True
+    Else
+        MovimientosParaGasolinera = False
+    End If
+    RS.Close
+    
+    
+eMovimientosParaGasolinera:
+    If Err.Number <> 0 Then
+        Err.Clear
+        conn.Errors.Clear
+    End If
+    Set RS = New ADODB.Recordset
 End Function
 
 

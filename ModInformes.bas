@@ -40,21 +40,21 @@ End Function
 Public Function NumRegistros(vSQL As String, Optional vBD As Byte) As Integer
 'Devuelve si hay registros con la seleccion
 'realizada. Si no hay nada que mostrar devuelve 0
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error Resume Next
 
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     If vBD = conConta Then
-        Rs.Open vSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open vSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     Else
-        Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     End If
     
     NumRegistros = 0
-    If Not Rs.EOF Then
-        If Rs.Fields(0).Value > 0 Then
-            NumRegistros = Rs.Fields(0).Value
+    If Not RS.EOF Then
+        If RS.Fields(0).Value > 0 Then
+            NumRegistros = RS.Fields(0).Value
 '            If RS.Fields(0).Value = 1 Then
 '                RegistrosAListar = 1  'Solo es para saber que hay registros que mostrar
 '            Else
@@ -62,8 +62,8 @@ Dim Rs As ADODB.Recordset
 '            End If
         End If
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
     If Err.Number <> 0 Then
         NumRegistros = 0
@@ -76,29 +76,29 @@ End Function
 Public Function RegistrosAListar(vSQL As String, Optional vBD As Byte) As Byte
 'Devuelve si hay algun registro para mostrar en el Informe con la seleccion
 'realizada. Si no hay nada que mostrar devuelve 0 y no abrirá el informe
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error GoTo ErrReg
 
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     If vBD = conConta Then
-        Rs.Open vSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open vSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     Else
-        Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     End If
     
     RegistrosAListar = 0
-    If Not Rs.EOF Then
-        If Rs.Fields(0).Value > 0 Then
-            If Rs.Fields(0).Value = 1 Then
+    If Not RS.EOF Then
+        If RS.Fields(0).Value > 0 Then
+            If RS.Fields(0).Value = 1 Then
                 RegistrosAListar = 1  'Solo es para saber que hay registros que mostrar
             Else
                 RegistrosAListar = 2  'Solo es para saber que hay registros que mostrar
             End If
         End If
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
     Exit Function
     
@@ -327,17 +327,17 @@ End Function
 Public Function QuitarCaracterACadena(cadForm As String, Caracter As String) As String
 'IN: [cadForm] es la cadena en la que se eliminara todos los caractes iguales a la vble [Caracter]
 'OUT: cadena sin los caracteres
-Dim i As Long
+Dim I As Long
 Dim J As Long
 Dim Aux As String
 
     Aux = cadForm
-    i = InStr(1, Aux, Caracter, vbTextCompare)
-    While i > 0
-        i = InStr(1, Aux, Caracter, vbTextCompare)
-        If i > 0 Then
+    I = InStr(1, Aux, Caracter, vbTextCompare)
+    While I > 0
+        I = InStr(1, Aux, Caracter, vbTextCompare)
+        If I > 0 Then
             J = Len(Caracter)
-            Aux = Mid(Aux, 1, i - 1) & Mid(Aux, i + J, Len(Aux) - 1)
+            Aux = Mid(Aux, 1, I - 1) & Mid(Aux, I + J, Len(Aux) - 1)
         End If
     Wend
     QuitarCaracterACadena = Aux
@@ -413,7 +413,7 @@ Dim cad As String
 End Function
 
 
-Public Function PonerParamRPT2(indice As Byte, cadParam As String, numParam As Byte, nomDocu As String, ByRef ImpresionDirecta As Boolean, NomPDF As String, ByRef MultiInforme As Integer) As Boolean
+Public Function PonerParamRPT2(Indice As Byte, cadParam As String, numParam As Byte, nomDocu As String, ByRef ImpresionDirecta As Boolean, NomPDF As String, ByRef MultiInforme As Integer) As Boolean
 Dim vParamRpt As CParamRpt 'Tipos de Documentos
 Dim cad As String
 
@@ -422,7 +422,7 @@ Dim cad As String
     NomPDF = ""  'Reestablezco
     ImpresionDirecta = False 'psi acaso
     
-    If vParamRpt.Leer(indice) = 1 Then
+    If vParamRpt.Leer(Indice) = 1 Then
         cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
         MsgBox cad & "Debe configurar la aplicación.", vbExclamation
         Set vParamRpt = Nothing
@@ -479,43 +479,43 @@ Public Sub PonerParamCadOferta(cadParam As String, numParam As Byte, cadSelect A
 'RPT que lo utiliza: AriOfertas.rpt
 Dim cadOfertas As String
 Dim SQL As String
-Dim i As Byte
-Dim Rs As ADODB.Recordset
+Dim I As Byte
+Dim RS As ADODB.Recordset
 
     On Error GoTo EPonParam
     
     cadOfertas = ""
     SQL = "scapre"
 
-    i = InStr(1, cadSelect, "scapre")
-    If Not (i > 0) Then SQL = "schpre"
+    I = InStr(1, cadSelect, "scapre")
+    If Not (I > 0) Then SQL = "schpre"
 
     cadSelect = QuitarCaracterACadena(cadSelect, "{")
     cadSelect = QuitarCaracterACadena(cadSelect, "}")
 
     SQL = "SELECT distinct numofert from  " & SQL
     SQL = SQL & " WHERE " & cadSelect
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
-    While Not Rs.EOF
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
+    While Not RS.EOF
         If Len(cadOfertas) > 75 Then
             If InStr(cadOfertas, "...") > 0 Then
-                Rs.MoveNext
+                RS.MoveNext
             Else
                 cadOfertas = cadOfertas & ", ..."
             End If
             
         Else
             If cadOfertas = "" Then
-                cadOfertas = Format(Rs.Fields(0).Value, "0000000")
+                cadOfertas = Format(RS.Fields(0).Value, "0000000")
             Else
-                cadOfertas = cadOfertas & ", " & Format(Rs.Fields(0).Value, "0000000")
+                cadOfertas = cadOfertas & ", " & Format(RS.Fields(0).Value, "0000000")
             End If
-            Rs.MoveNext
+            RS.MoveNext
         End If
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
     cadParam = cadParam & "pCadOfertas=""" & cadOfertas & """|"
     numParam = numParam + 1
@@ -608,20 +608,20 @@ End Function
 
 Public Function SaltosDeLinea(ByVal CADENA As String) As String
     Dim Devu As String
-    Dim i As Integer
+    Dim I As Integer
     
     Devu = ""
     Do
-        i = InStr(1, CADENA, vbCrLf)
-        If i > 0 Then
+        I = InStr(1, CADENA, vbCrLf)
+        If I > 0 Then
             If Devu <> "" Then Devu = Devu & """ + chr(13) + """
-            Devu = Devu & Mid(CADENA, 1, i - 1)
-            CADENA = Mid(CADENA, i + 2)
+            Devu = Devu & Mid(CADENA, 1, I - 1)
+            CADENA = Mid(CADENA, I + 2)
             
        Else
             Devu = Devu & CADENA
        End If
-    Loop While i > 0
+    Loop While I > 0
     SaltosDeLinea = Devu
 End Function
 
@@ -634,19 +634,7 @@ End Function
 
 '**********************************************************
 Public Sub GenerarEtiquetasEstanterias(ByRef lw, CADENA As String)
-Dim i As Integer
-        'Febrero 2011
-        'Al añadir sarti3 para los EAN, hay que grabarlos en la tabla
-        'numserie sera el EAB
-        
-        'Cargo la tabla temporal con los datos que qeuremos imprimir
-        
-        
-        'Febrero 2012
-        'Lo sacamos del frmmensajes.
-        'Puede pasar un lw o una cadena con los articulos a imprimir   LW es desde imprimir etiquetas caja
-        
-        'Cuidado, utiliza NumRegElim
+Dim I As Integer
         
         
         If lw Is Nothing Then
@@ -662,7 +650,7 @@ Dim i As Integer
             For NumRegElim = 1 To lw.ListItems.Count
                 '                                                En el tag YA esta grabado
                 If lw.ListItems(NumRegElim).Checked Then
-                    CADENA = CADENA & ",(" & vUsu.codigo & "," & lw.ListItems(NumRegElim).Tag & ",0)"
+                    CADENA = CADENA & ",(" & vUsu.Codigo & "," & lw.ListItems(NumRegElim).Tag & ",0)"
                     If (NumRegElim Mod 25) = 0 Then
                         conn.Execute "insert into `tmpnseries` (`codusu`,`codartic`,`numlinea`,numserie,`numlinealb`) VALUES " & Mid(CADENA, 2) & ";"
                         CADENA = ""

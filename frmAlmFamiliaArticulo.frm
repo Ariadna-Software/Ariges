@@ -253,12 +253,12 @@ Begin VB.Form frmAlmFamiliaArticulo
       TabCaption(1)   =   "Descuentos"
       TabPicture(1)   =   "frmAlmFamiliaArticulo.frx":0232
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(10)"
-      Tab(1).Control(1)=   "DataGrid1"
-      Tab(1).Control(2)=   "txtAux(1)"
-      Tab(1).Control(3)=   "txtAux(0)"
-      Tab(1).Control(4)=   "Combo1"
-      Tab(1).Control(5)=   "Text1(10)"
+      Tab(1).Control(0)=   "Text1(10)"
+      Tab(1).Control(1)=   "Combo1"
+      Tab(1).Control(2)=   "txtAux(0)"
+      Tab(1).Control(3)=   "txtAux(1)"
+      Tab(1).Control(4)=   "DataGrid1"
+      Tab(1).Control(5)=   "Label1(10)"
       Tab(1).ControlCount=   6
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -1304,9 +1304,9 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub Desplazamiento(Index As Integer)
+Private Sub Desplazamiento(index As Integer)
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, index
     PonerCampos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
 End Sub
@@ -1420,7 +1420,7 @@ Private Sub Combo1_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -1515,9 +1515,9 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim cadB As String
+Dim CadB As String
 Dim Aux As String
-Dim indice As Byte
+Dim Indice As Byte
     
     If CadenaDevuelta <> "" Then
         If Val(imgCuentas(0).Tag) >= 0 Then
@@ -1526,35 +1526,35 @@ Dim indice As Byte
             HaDevueltoDatos = True
             Screen.MousePointer = vbHourglass
     
-            indice = Val(Me.imgCuentas(0).Tag)
-            If indice < 6 Then
-                indice = indice + 2
+            Indice = Val(Me.imgCuentas(0).Tag)
+            If Indice < 6 Then
+                Indice = Indice + 2
             Else
-                indice = indice + 5
+                Indice = Indice + 5
             End If
-            Text1(indice).Text = RecuperaValor(CadenaDevuelta, 1)
-            Text2(indice).Text = RecuperaValor(CadenaDevuelta, 2)
+            Text1(Indice).Text = RecuperaValor(CadenaDevuelta, 1)
+            Text2(Indice).Text = RecuperaValor(CadenaDevuelta, 2)
         ElseIf Val(imgBuscar(0).Tag) >= 0 Then
-            indice = 8 + Val(imgBuscar(0).Tag)
+            Indice = 8 + Val(imgBuscar(0).Tag)
             '0.- Centro de coste   1.- Proveedor
-            Text1(indice).Text = RecuperaValor(CadenaDevuelta, 1)
-            Text2(indice).Text = RecuperaValor(CadenaDevuelta, 2)
+            Text1(Indice).Text = RecuperaValor(CadenaDevuelta, 1)
+            Text2(Indice).Text = RecuperaValor(CadenaDevuelta, 2)
         Else
             'Recupera todo el registro de Banco Propio
             HaDevueltoDatos = True
             Screen.MousePointer = vbHourglass
             'Sabemos que campos son los que nos devuelve
             'Creamos una cadena consulta y ponemos los datos
-            cadB = ""
+            CadB = ""
             Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-            cadB = Aux
+            CadB = Aux
             '   Como la clave principal es unica, con poner el sql apuntando
             '   al valor devuelto sobre la clave ppal es suficiente
             'Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 2)
             'If CadB <> "" Then CadB = CadB & " AND "
             'CadB = CadB & Aux
             'Se muestran en el mismo form
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
             PonerCadenaBusqueda
             Screen.MousePointer = vbDefault
         End If
@@ -1562,18 +1562,23 @@ Dim indice As Byte
 End Sub
 
 
-Private Sub imgBuscar_Click(Index As Integer)
+Private Sub imgBuscar_Click(index As Integer)
     ' ---- [19/10/2009] [LAURA]: añadir campo centro de coste familia
     
     If Modo = 2 Or Modo = 5 Or Modo = 0 Then Exit Sub
     
-    Select Case Index
+    Select Case index
         Case 0 'Centros de coste de la conta
             Screen.MousePointer = vbHourglass
-            Me.imgBuscar(0).Tag = Index
+            Me.imgBuscar(0).Tag = index
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
-            frmB.vTabla = "cabccost"
+            If vParamAplic.ContabilidadNueva Then
+                frmB.vCampos = "Codigo|ccoste|codccost|T||20·Descripción|ccoste|nomccost|T||70·"
+                frmB.vTabla = "ccoste"
+            Else
+                frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
+                frmB.vTabla = "cabccost"
+            End If
             frmB.vSQL = ""
             HaDevueltoDatos = False
             '###A mano
@@ -1590,7 +1595,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             
         Case 1
             Screen.MousePointer = vbHourglass
-            Me.imgBuscar(0).Tag = Index
+            Me.imgBuscar(0).Tag = index
             Set frmB = New frmBuscaGrid
             frmB.vCampos = "Codigo|sprove|codprove|N||20·Nombre|sprove|nomprove|T||70·"
             frmB.vTabla = "sprove"
@@ -1611,15 +1616,15 @@ Private Sub imgBuscar_Click(Index As Integer)
 End Sub
 
 
-Private Sub imgCuentas_Click(Index As Integer)
+Private Sub imgCuentas_Click(index As Integer)
 
     If Modo = 2 Or Modo = 5 Or Modo = 0 Then Exit Sub
  
     Screen.MousePointer = vbHourglass
-    imgCuentas(0).Tag = Index
+    imgCuentas(0).Tag = index
     MandaBusquedaPrevia "apudirec='S'"
     imgCuentas(0).Tag = -1
-    PonerFoco Text1(Index + 2)
+    PonerFoco Text1(index + 2)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -1668,20 +1673,20 @@ Private Sub mnVerTodos_Click()
 End Sub
 
 
-Private Sub Text1_GotFocus(Index As Integer)
+Private Sub Text1_GotFocus(index As Integer)
     
-    kCampo = Index
-    If Index = 14 Then Exit Sub
-    ConseguirFoco Text1(Index), Modo
+    kCampo = index
+    If index = 14 Then Exit Sub
+    ConseguirFoco Text1(index), Modo
 End Sub
 
-Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If Index = 14 Then Exit Sub
-    If Not (Index = 0 And KeyCode = 38) Then KEYdown KeyCode
+Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+    If index = 14 Then Exit Sub
+    If Not (index = 0 And KeyCode = 38) Then KEYdown KeyCode
 End Sub
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 14 Then Exit Sub
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+    If index = 14 Then Exit Sub
     KEYpress KeyAscii
 End Sub
 
@@ -1694,22 +1699,22 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(Index As Integer)
+Private Sub Text1_LostFocus(index As Integer)
         
-    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
     
     'Si queremos hacer algo ..
-    Select Case Index
+    Select Case index
         Case 0 'Codigo familia
 '            If Text1(Index).Text <> "" Then
-             If PonerFormatoEntero(Text1(Index)) Then
+             If PonerFormatoEntero(Text1(index)) Then
                 'Comprobar si ya existe el cod de familia en la tabla
                 If Modo = 3 Then 'Insertar
-                    If ExisteCP(Text1(Index)) Then PonerFoco Text1(Index)
+                    If ExisteCP(Text1(index)) Then PonerFoco Text1(index)
                 End If
             End If
         '#### lo hemos puesto en el evento VALIDATE
@@ -1718,32 +1723,32 @@ Private Sub Text1_LostFocus(Index As Integer)
         '####
         '---> Por algun motivo habian comentado ese trozo
         Case 2, 3, 4, 5, 6, 7, 11, 12, 13 'Cuentas
-            Text2(Index).Text = PonerNombreCuenta(Text1(Index), Modo, Text1(1).Text)
-            If Text2(Index).Text = "" Then Text1(Index).Text = ""
+            Text2(index).Text = PonerNombreCuenta(Text1(index), Modo, Text1(1).Text)
+            If Text2(index).Text = "" Then Text1(index).Text = ""
             
             If Modo = 3 Then
-              If Index = 2 And Text1(11).Text = "" Then
-                    Text1(11).Text = Text1(Index).Text
-                    Text2(11).Text = Text2(Index).Text
-               ElseIf Index = 6 And Text1(12).Text = "" Then
-                    Text1(12).Text = Text1(Index).Text
-                    Text2(12).Text = Text2(Index).Text
+              If index = 2 And Text1(11).Text = "" Then
+                    Text1(11).Text = Text1(index).Text
+                    Text2(11).Text = Text2(index).Text
+               ElseIf index = 6 And Text1(12).Text = "" Then
+                    Text1(12).Text = Text1(index).Text
+                    Text2(12).Text = Text2(index).Text
                 End If
             End If
         ' ---- [19/10/2009] [LAURA]: añadir campo centro de coste familia
-        Case 8: Me.Text2(Index).Text = PonerNombreCCoste(Me.Text1(Index))
+        Case 8: Me.Text2(index).Text = PonerNombreCCoste(Me.Text1(index))
         
         Case 9
-            If Not PonerFormatoEntero(Text1(Index)) Then
-                If Text1(Index).Text <> "" Then Text1(Index).Text = ""
-                Text2(Index).Text = ""
+            If Not PonerFormatoEntero(Text1(index)) Then
+                If Text1(index).Text <> "" Then Text1(index).Text = ""
+                Text2(index).Text = ""
             Else
                 
                 'Text2(Index).Text = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", Text1(Index).Text, "N")
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sprove", "nomprove")
-                If Text2(Index).Text = "" Then
-                    Text1(Index).Text = ""
-                    PonerFoco Text1(Index)
+                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sprove", "nomprove")
+                If Text2(index).Text = "" Then
+                    Text1(index).Text = ""
+                    PonerFoco Text1(index)
                 End If
             End If
         Case 10
@@ -1753,23 +1758,23 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim cadB As String
+Dim CadB As String
     
-    cadB = ObtenerBusqueda(Me, False)
+    CadB = ObtenerBusqueda(Me, False)
 
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia cadB
+        MandaBusquedaPrevia CadB
     Else
         'Se muestran en el mismo form
-        If cadB <> "" Then
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        If CadB <> "" Then
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
 Dim tabla As String
@@ -1805,7 +1810,7 @@ Dim Conexion As Byte
             Set frmB = New frmBuscaGrid
             frmB.vCampos = cad
             frmB.vTabla = tabla
-            frmB.vSQL = cadB
+            frmB.vSQL = CadB
             HaDevueltoDatos = False
             '###A mano
             frmB.vDevuelve = "0|1|"
@@ -1866,19 +1871,19 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim i As Byte
+Dim I As Byte
     
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
     
     'poner la descripcion de las cuentas
-    For i = 2 To 7
-        Text2(i).Text = PonerNombreCuenta(Text1(i), Modo)
-    Next i
-    For i = 11 To 13
+    For I = 2 To 7
+        Text2(I).Text = PonerNombreCuenta(Text1(I), Modo)
+    Next I
+    For I = 11 To 13
         
-        Text2(i).Text = PonerNombreCuenta(Text1(i), Modo)
-    Next i
+        Text2(I).Text = PonerNombreCuenta(Text1(I), Modo)
+    Next I
     ' ---- [19/10/2009] [LAURA]: añadir campo centro de coste familia
     If vEmpresa.TieneAnalitica Then Me.Text2(8).Text = PonerNombreCCoste(Me.Text1(8))
         
@@ -2042,7 +2047,7 @@ End Function
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1: mnBuscar_Click
         Case 2: mnVerTodos_Click
         Case 5  'Nuevo
@@ -2064,7 +2069,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             
         Case 13: mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento (Button.Index - btnPrimero)
+            Desplazamiento (Button.index - btnPrimero)
     End Select
 End Sub
 
@@ -2075,10 +2080,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
@@ -2148,17 +2153,17 @@ End Sub
 
 
 Private Sub TratarCtaContable()
-Dim i As Integer
+Dim I As Integer
 Dim CtaCreadas As String
-    For i = 2 To 7
-        If Text2(i).Text = vbCrearNuevaCta Then
-            If InStr(1, CtaCreadas, Text1(i).Text & "|") = 0 Then
-                InsertarCuentaCble Text1(i).Text, "", "", Text1(1).Text
-                CtaCreadas = CtaCreadas & Text1(i).Text & "|"
+    For I = 2 To 7
+        If Text2(I).Text = vbCrearNuevaCta Then
+            If InStr(1, CtaCreadas, Text1(I).Text & "|") = 0 Then
+                InsertarCuentaCble Text1(I).Text, "", "", Text1(1).Text
+                CtaCreadas = CtaCreadas & Text1(I).Text & "|"
             End If
-            Text2(i).Text = Text1(1).Text
+            Text2(I).Text = Text1(1).Text
         End If
-    Next i
+    Next I
 End Sub
 
 Private Sub BotonMtoLineas()
@@ -2349,7 +2354,7 @@ End Sub
 
 
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
-Dim i As Integer
+Dim I As Integer
 
     On Error GoTo ECargaGrid
 
@@ -2374,10 +2379,10 @@ Dim i As Integer
                 
 
 
-    For i = 0 To vDataGrid.Columns.Count - 1
-        vDataGrid.Columns(i).Locked = True
-        vDataGrid.Columns(i).AllowSizing = False
-    Next i
+    For I = 0 To vDataGrid.Columns.Count - 1
+        vDataGrid.Columns(I).Locked = True
+        vDataGrid.Columns(I).AllowSizing = False
+    Next I
     vDataGrid.HoldFields
     Exit Sub
 ECargaGrid:
@@ -2390,30 +2395,30 @@ Private Sub CargaTxtAux(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim i As Byte
+Dim I As Byte
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For i = 0 To txtAux.Count - 1 'TextBox
-            txtAux(i).Top = 290
-            txtAux(i).visible = visible
-        Next i
+        For I = 0 To txtAux.Count - 1 'TextBox
+            txtAux(I).Top = 290
+            txtAux(I).visible = visible
+        Next I
         Combo1.visible = False
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
-            For i = 0 To txtAux.Count - 1
-                txtAux(i).Text = ""
+            For I = 0 To txtAux.Count - 1
+                txtAux(I).Text = ""
               '  BloquearTxt txtAux(i), False  'Todos menos el nombre
-            Next i
+            Next I
 
         Else 'Vamos a modificar
-            For i = 0 To txtAux.Count - 1
+            For I = 0 To txtAux.Count - 1
          
-                txtAux(i).Text = DataGrid1.Columns(i + 2).Text
+                txtAux(I).Text = DataGrid1.Columns(I + 2).Text
             
-                txtAux(i).Locked = False
-            Next i
+                txtAux(I).Locked = False
+            Next I
         End If
         
 
@@ -2422,10 +2427,10 @@ Dim i As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid1, 10)
         
-        For i = 0 To txtAux.Count - 1
-            txtAux(i).Top = alto
-            txtAux(i).Height = DataGrid1.RowHeight
-        Next i
+        For I = 0 To txtAux.Count - 1
+            txtAux(I).Top = alto
+            txtAux(I).Height = DataGrid1.RowHeight
+        Next I
         Combo1.Top = alto
         'Fijamos anchura y posicion Left
         '--------------------------------
@@ -2434,50 +2439,50 @@ Dim i As Byte
         'Precio, Dto1, Dto2, Precio
         Combo1.Left = DataGrid1.Left + 340
         Combo1.Width = DataGrid1.Columns(2).Left - DataGrid1.Left - 240
-        For i = 0 To txtAux.Count - 1
-            txtAux(i).Left = DataGrid1.Columns(i + 2).Left + 10 + 120
-            txtAux(i).Width = DataGrid1.Columns(i + 2).Width - 10
-        Next i
+        For I = 0 To txtAux.Count - 1
+            txtAux(I).Left = DataGrid1.Columns(I + 2).Left + 10 + 120
+            txtAux(I).Width = DataGrid1.Columns(I + 2).Width - 10
+        Next I
         
 
         Combo1.visible = limpiar
         'Los ponemos Visibles o No
         '--------------------------
-        For i = 0 To txtAux.Count - 1
-            txtAux(i).visible = visible
-        Next i
+        For I = 0 To txtAux.Count - 1
+            txtAux(I).visible = visible
+        Next I
         
     End If
 
 End Sub
 
 
-Private Sub TxtAux_Change(Index As Integer)
+Private Sub TxtAux_Change(index As Integer)
     'Precio y Modo Borrar Lineas
-    If Index = 4 And ModificaLineas = 2 Then txtAux(5).Text = "M"
+    If index = 4 And ModificaLineas = 2 Then txtAux(5).Text = "M"
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtAux_GotFocus(index As Integer)
 Dim cadkey As Integer
 
-    cadkey = ObtenerCadKey(kCampo, Index)
-    kCampo = Index
+    cadkey = ObtenerCadKey(kCampo, index)
+    kCampo = index
 '    ConseguirFoco txtAux(Index), Modo, cadkey
-    ConseguirFocoLin txtAux(Index), cadkey
+    ConseguirFocoLin txtAux(index), cadkey
     
 
     
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-    If Not (Index = 0 And KeyCode = 38) Then KEYdown KeyCode
+    If Not (index = 0 And KeyCode = 38) Then KEYdown KeyCode
     
 
 End Sub
 
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -2595,10 +2600,10 @@ EModificarLinea:
     CadenaConsulta = ""
 End Function
 
-Private Sub txtAux_LostFocus(Index As Integer)
-    txtAux(Index).Text = Trim(txtAux(Index).Text)
-    If txtAux(Index).Text = "" Then Exit Sub
-    If Not PonerFormatoDecimal(txtAux(Index), 4) Then txtAux(Index).Text = ""
+Private Sub txtAux_LostFocus(index As Integer)
+    txtAux(index).Text = Trim(txtAux(index).Text)
+    If txtAux(index).Text = "" Then Exit Sub
+    If Not PonerFormatoDecimal(txtAux(index), 4) Then txtAux(index).Text = ""
     
     
 End Sub

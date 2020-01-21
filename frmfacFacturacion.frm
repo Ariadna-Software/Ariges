@@ -396,7 +396,7 @@ Dim vCli As CCliente
     Set vCli = Nothing
     If cad <> "OK" Then Exit Sub
     
-    cad = vbCrLf & Replace(Me.Label2.Caption, "Selec", "Selecionados")
+    cad = vbCrLf & Replace(Me.label2.Caption, "Selec", "Selecionados")
     cad = "Fecha factura: " & Text1.Text & vbCrLf & "Banco: " & Combo1.Text & cad & vbCrLf & vbCrLf & "¿Desea continuar con la facturación?"
     If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
@@ -424,11 +424,11 @@ Dim vCli As CCliente
     
     Screen.MousePointer = vbHourglass
     cad = "scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ")"
-    TraspasoAlbaranesFacturas "Select *  FROM  scaalb WHERE " & cad, cad, Text1.Text, Combo1.ItemData(Combo1.ListIndex), Nothing, Label2, True, CStr(TipoAlbaSeleccionado), "|||", CByte(vParamAplic.NumCopiasFacturacion), True, False
+    TraspasoAlbaranesFacturas "Select *  FROM  scaalb WHERE " & cad, cad, Text1.Text, Combo1.ItemData(Combo1.ListIndex), Nothing, label2, True, CStr(TipoAlbaSeleccionado), "|||", CByte(vParamAplic.NumCopiasFacturacion), True, False, False
     
     DoEvents
-    Label2.Caption = "Leyendo BD"
-    Label2.Refresh
+    label2.Caption = "Leyendo BD"
+    label2.Refresh
     Espera 0.75
     CargaDatos -1
     Screen.MousePointer = vbDefault
@@ -449,10 +449,10 @@ Private Sub Combo2_Click()
     If primeravez Then Exit Sub
     If Combo2.ListIndex > 0 Then
         TipoAlbaSeleccionado = "ALZ"
-        Me.Label1(0).ForeColor = vbRed
+        Me.label1(0).ForeColor = vbRed
     Else
         TipoAlbaSeleccionado = "ALV"
-        Me.Label1(0).ForeColor = 8388608
+        Me.label1(0).ForeColor = 8388608
     End If
     CargaDatos -1
 End Sub
@@ -549,8 +549,8 @@ Private Sub lw1_DblClick()
                 Set frmAlbG = Nothing
                     
                     
-    Label2.Caption = "Leyendo BD"
-    Label2.Refresh
+    label2.Caption = "Leyendo BD"
+    label2.Refresh
     Espera 0.75
     CargaDatos N
     Screen.MousePointer = vbDefault
@@ -574,9 +574,9 @@ End Sub
 
 Private Sub Lbl()
     If Marcado > 0 Then
-        Label2.Caption = "Selec: " & Marcado & "     €:" & Format(ImporteTot, FormatoImporte)
+        label2.Caption = "Selec: " & Marcado & "     €:" & Format(ImporteTot, FormatoImporte)
     Else
-        Label2.Caption = ""
+        label2.Caption = ""
     End If
 End Sub
 

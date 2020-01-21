@@ -416,8 +416,9 @@ Dim BDConta As String
     
     
     If ConSubInforme Then
-        If Opcion = 228 Or Opcion = 240 Then
-             smrpt.RecordSelectionFormula = mrpt.RecordSelectionFormula
+        'If Opcion = 228 Or Opcion = 240 Then  ENERO 2020
+        If Opcion = 240 Then
+            If Not smrpt Is Nothing Then smrpt.RecordSelectionFormula = mrpt.RecordSelectionFormula
         End If
     End If
     

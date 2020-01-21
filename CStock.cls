@@ -345,6 +345,7 @@ Dim HazPRegunta As Boolean
                 '// en fenollar, si pone olcutalar MSG, lo ocultamos y seguimos adelante
                 HazPRegunta = True
                 If vParamAplic.NumeroInstalacion = vbFenollar Then HazPRegunta = MuestraMenCStock
+                If vParamAplic.NumeroInstalacion = vbTaxco Then HazPRegunta = MuestraMenCStock
                 
                 If HazPRegunta Then
                     If MsgBox(devuelve, vbQuestion + vbYesNo) = vbYes Then

@@ -6605,6 +6605,7 @@ Private Sub BotonMtoLineas(numTab As Integer, cad As String)
         LineaIntercalar = 0
         If vParamAplic.ArtReciclado <> "" Then
             ClienteConTasaReciclado = Val(DevuelveDesdeBD(conAri, "tasareciclado", "sclien", "codclien", Text1(4).Text)) = 1
+            
         Else
             ClienteConTasaReciclado = False
         End If
@@ -8196,7 +8197,7 @@ Dim CuantosPuntos As Currency
             'CadenaSQL = "scaalb.codtipom = 'ALV' AND scaalb.numalbar = " & NumAlb
             Precio = "SELECT scaalb.* FROM scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien "
             Precio = Precio & " WHERE " & CadenaSQL
-            TraspasoAlbaranesFacturas Precio, CadenaSQL, FechaAlb, CtaBancoPropi, Nothing, lblIndicador, ImprimeFactura, SQL, "", 1, True, False
+            TraspasoAlbaranesFacturas Precio, CadenaSQL, FechaAlb, CtaBancoPropi, Nothing, lblIndicador, ImprimeFactura, SQL, "", 1, True, False, False
         End If
             
         
@@ -9252,8 +9253,13 @@ Private Sub AbrirForm_CentroCoste()
     
 
     Set frmB = New frmBuscaGrid
-    frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
-    frmB.vTabla = "cabccost"
+    If vParamAplic.ContabilidadNueva Then
+        frmB.vCampos = "Codigo|ccoste|codccost|T||20·Descripción|ccoste|nomccost|T||70·"
+        frmB.vTabla = "ccoste"
+    Else
+        frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
+        frmB.vTabla = "cabccost"
+    End If
     frmB.vSQL = ""
     HaDevueltoDatos = False
     '###A mano

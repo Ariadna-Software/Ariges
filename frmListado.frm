@@ -13366,6 +13366,39 @@ Dim Codfamia As Integer
     If Not HayRegParaInforme(tabla, cadFormula) Then Exit Sub
     
     
+    If OpcionListado = 513 And vParamAplic.NumeroInstalacion = vbTaxco Then
+        'La cantidad será la que tenga el albaran
+        tabla = "Select codartic,cantidad from slialp " & NumCod & " AND cantidad >1 "
+        tabla = tabla & " AND codartic IN (select codartic from tmpnseries WHERE codusu = " & vUsu.Codigo & ")"
+        Set miRsAux = New ADODB.Recordset
+        
+        
+        miRsAux.Open tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Codfamia = -1
+        While Not miRsAux.EOF
+            Codigo = "codartic = " & DBSet(miRsAux!codArtic, "T") & " AND codusu "
+            tabla = DevuelveDesdeBD(conAri, "numserie", "tmpnseries", Codigo, vUsu.Codigo)
+            Codigo = ""
+            If tabla = "" Then
+                MsgBox "Error leyendo talba temporal", vbExclamation
+            Else
+                indCodigo = miRsAux!cantidad - 1
+                While indCodigo <> 0
+                    'tmpnseries(codusu,codartic,numserie,numlinealb,numlinea)
+                    Codigo = Codigo & ", (" & vUsu.Codigo & "," & DBSet(miRsAux!codArtic, "T") & "," & DBSet(tabla, "T")
+                    Codigo = Codigo & "," & indCodigo & ",1)"
+                    indCodigo = indCodigo - 1
+                Wend
+                Codigo = Mid(Codigo, 2)
+                Codigo = "INSERT INTO tmpnseries(codusu,codartic,numserie,numlinealb,numlinea) VALUES " & Codigo
+                ejecutar Codigo, False
+            End If
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+        Set miRsAux = Nothing
+    End If
+    
     'Para los articulos que hay que mostrar, si tienen dto hay que poner
     'cargalro
     If Me.chkDtoFM.Value = 1 Then
@@ -13834,6 +13867,10 @@ Dim IndiceFoco As Integer
         Case 513
             'etquietas estanteria desde albaran compra
             PonerFocoCbo cboDecimal
+            
+            
+            If vParamAplic.NumeroInstalacion = vbTaxco Then cmdEtiqEstanteria_Click
+            
         Case 514
             PonerDatosFacturaProveedorAcabadaRecepcionar
         Case 100
@@ -14054,7 +14091,7 @@ Dim H As Integer, W As Integer
             H = InStr(1, UCase(NumCod), " ORDER BY")
             NumCod = Mid(NumCod, 1, H)
             
-            
+            If vParamAplic.NumeroInstalacion = vbTaxco Then chkImprimeCodigoBarras.Value = 1
         End If
         
         H = Me.FrameEtiqEstanteria.Height

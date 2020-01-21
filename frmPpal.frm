@@ -395,7 +395,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "22:22"
+            TextSave        =   "12:01"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1431,6 +1431,33 @@ Begin VB.MDIForm frmPpal
             Caption         =   "&Contabilizar Facturas"
          End
       End
+      Begin VB.Menu mnGasolineraPpal 
+         Caption         =   "&Gasolinera"
+         Begin VB.Menu mnGasolinera 
+            Caption         =   "Albaranes gasolinera"
+            Index           =   1
+         End
+         Begin VB.Menu mnGasolinera 
+            Caption         =   "Albaranes tienda"
+            Index           =   2
+         End
+         Begin VB.Menu mnGasolinera 
+            Caption         =   "Facturacion albaranes gasolinera"
+            Index           =   3
+            Begin VB.Menu mnGasolFacturar 
+               Caption         =   "Combustible"
+               Index           =   0
+            End
+            Begin VB.Menu mnGasolFacturar 
+               Caption         =   "Tienda"
+               Index           =   1
+            End
+         End
+         Begin VB.Menu mnGasolinera 
+            Caption         =   "Importar fichero gasolinera"
+            Index           =   4
+         End
+      End
       Begin VB.Menu mnTelefonia 
          Caption         =   "&Telefonía"
          Begin VB.Menu mnTelefonia2 
@@ -2453,6 +2480,9 @@ Dim TieneEditorDeMenus As Boolean
 
 Dim QueCaption As String
 
+
+
+
 Private Sub SituarArriba()
     On Error Resume Next
     Me.Top = 0
@@ -2497,7 +2527,18 @@ Dim b As Boolean
     PuntoDeMenuVisible mnServicios(0), b  'la barra
     
     
-    'vParamAplic.Reparaciones
+    
+    'Noviembre 2019. Gasolinera
+    PuntoDeMenuVisible mnGasolineraPpal, vParamAplic.TieneGasolinera
+    
+    
+    
+    
+    PuntoDeMenuVisible mnFacPedidos(14), vParamAplic.NumeroInstalacion = vbFenollar
+    
+    
+    
+    
     
     'MAntenimientos y reparaciones
     'mnMantenimientos.visible = vParamAplic.Mantenimientos
@@ -2682,13 +2723,19 @@ Dim b As Boolean
     b = False
     If InstalacionEsEulerTaxco Then
         b = True
-        If vParamAplic.NumeroInstalacion = vbTaxco Then mnMtoEuler(1).Caption = "Orden de taller"
+        If vParamAplic.NumeroInstalacion = vbTaxco Then
+            mnMtoEuler(1).Caption = "Orden de taller"
+            mnMtoEuler(2).Caption = "Albaran tienda ALVIC"
+
+        End If
     End If
     
     PuntoDeMenuVisible mnUtilidadesVarias(4), b 'vParamAplic.NumeroInstalacion = vbEuler
     PuntoDeMenuVisible mnMtoEuler(0), b
     PuntoDeMenuVisible mnMtoEuler(1), b
+    'ALE Euler trabajo exterior    ---> Taxco  Albaran tienda
     PuntoDeMenuVisible mnMtoEuler(2), vParamAplic.NumeroInstalacion = vbEuler  'b
+    
     PuntoDeMenuVisible mnMtoEuler(3), vParamAplic.NumeroInstalacion = vbEuler  'b
     PuntoDeMenuVisible mnFacEstadistica2(8), vParamAplic.NumeroInstalacion = vbEuler  'b
 
@@ -2696,13 +2743,11 @@ Dim b As Boolean
         PuntoDeMenuVisible mnRepAlbaranes, False
         PuntoDeMenuVisible mnRepEntReparacion, False
         
-        
-        
         'Quito los de mantenimientos
         '
         PuntoDeMenuVisible mnRepEntReparacion, False
         PuntoDeMenuVisible mnRepControlRep, False
-        PuntoDeMenuVisible mnRepNumSerie, False
+        PuntoDeMenuVisible mnRepNumSerie, vParamAplic.NumeroInstalacion = vbTaxco
         PuntoDeMenuVisible mnRepMotivosBaja, False
         PuntoDeMenuVisible mnRepMotivosPend, False
         PuntoDeMenuVisible mnRepHistorico, False
@@ -2896,7 +2941,7 @@ End Sub
 
 Private Sub MDIForm_Unload(Cancel As Integer)
 'Formulario Principal
-Dim Cad As String
+Dim cad As String
 
 
     'Elimnar bloquo BD
@@ -3005,6 +3050,7 @@ Private Sub mnAdmNominas_Click()
 End Sub
 
 Private Sub mnAdmTrabajadores_Click()
+    If vUsu.Nivel2 = 2 Then Exit Sub
     frmAdmTrabajadores.Show vbModal
 End Sub
 
@@ -3060,27 +3106,58 @@ Private Sub mnAguaLin_Click(index As Integer)
 End Sub
 
 Private Sub mnAlbaranesB_Click()
-    PonerCaption False, "Presupuestos"
+    AbrirFormularioGeneral "Presupuestos", "ALZ", False
+'    PonerCaption False, "Presupuestos"
+'    If vParamAplic.TipoFormularioClientes = 0 Then
+'        If vParamAplic.HaciendoFrmulariosGrandes Then
+'            frmFacEntAlbaranesGR.hcoCodMovim = "" 'No carga el form con datos al abrir
+'            frmFacEntAlbaranesGR.hcoCodTipoM = "ALZ"
+'            frmFacEntAlbaranesGR.EsHistorico = False
+'            frmFacEntAlbaranesGR.Show vbModal
+'        Else
+'            frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
+'            frmFacEntAlbaranes2.hcoCodTipoM = "ALZ"
+'            frmFacEntAlbaranes2.EsHistorico = False
+'            frmFacEntAlbaranes2.Show vbModal
+'        End If
+'    Else
+'        frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
+'        frmFacEntAlbSAIL.hcoCodTipoM = "ALZ"
+'        frmFacEntAlbSAIL.EsHistorico = False
+'        frmFacEntAlbSAIL.Show vbModal
+'    End If
+'    PonerCaption True, ""
+End Sub
+
+
+'NOVIEMBRE Intentando unificar las llamadas a abri formulario
+Private Sub AbrirFormularioGeneral(textoCaption As String, tipoMov As String, EnHistorico As Boolean)
+    PonerCaption False, textoCaption
     If vParamAplic.TipoFormularioClientes = 0 Then
         If vParamAplic.HaciendoFrmulariosGrandes Then
             frmFacEntAlbaranesGR.hcoCodMovim = "" 'No carga el form con datos al abrir
-            frmFacEntAlbaranesGR.hcoCodTipoM = "ALZ"
-            frmFacEntAlbaranesGR.EsHistorico = False
+            frmFacEntAlbaranesGR.hcoCodTipoM = tipoMov
+            frmFacEntAlbaranesGR.EsHistorico = EnHistorico
             frmFacEntAlbaranesGR.Show vbModal
         Else
             frmFacEntAlbaranes2.hcoCodMovim = "" 'No carga el form con datos al abrir
-            frmFacEntAlbaranes2.hcoCodTipoM = "ALZ"
-            frmFacEntAlbaranes2.EsHistorico = False
+            frmFacEntAlbaranes2.hcoCodTipoM = tipoMov
+            frmFacEntAlbaranes2.EsHistorico = EnHistorico
             frmFacEntAlbaranes2.Show vbModal
         End If
     Else
         frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
-        frmFacEntAlbSAIL.hcoCodTipoM = "ALZ"
-        frmFacEntAlbSAIL.EsHistorico = False
+        frmFacEntAlbSAIL.hcoCodTipoM = tipoMov
+        frmFacEntAlbSAIL.EsHistorico = EnHistorico
         frmFacEntAlbSAIL.Show vbModal
     End If
     PonerCaption True, ""
 End Sub
+
+
+
+
+
 
 
 
@@ -3093,6 +3170,10 @@ Private Sub mnAlmAlPropios_Click()
 End Sub
 
 Private Sub mnAlmArticulos_Click()
+
+   
+
+
     PonerCaption False, mnAlmArticulos.Caption
     If vParamAplic.HaciendoFrmulariosGrandes Then
         frmAlmArticulosGr.DatosADevolverBusqueda = ""
@@ -3334,7 +3415,7 @@ Private Sub mnCambioEmpresa_Click()
     
     If vParamAplic.QueEmpresaEs = 2 Then
         Me.Hide
-        frmPpalGessocial.Show vbModal
+        frmPpalGessocial.Show vbModal, Me
         Me.Show
         mnCambioEmpresa_Click
         Exit Sub
@@ -3715,6 +3796,12 @@ Private Sub mnFacAlbMostrador_Click()
             frmFacEntAlbaranes2.EsHistorico = False
             frmFacEntAlbaranes2.Show vbModal
         End If
+        
+    Else
+            frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
+            frmFacEntAlbSAIL.hcoCodTipoM = "ALM"
+            frmFacEntAlbSAIL.EsHistorico = False
+            frmFacEntAlbSAIL.Show vbModal
     End If
 End Sub
 
@@ -3769,6 +3856,10 @@ End Sub
 
 Private Sub mnFacClientes_Click()
 'Mantenimiento de Clientes
+
+    If vUsu.Nivel2 = 2 Then Exit Sub
+
+
     PonerCaption False, "Clientes"
     If vParamAplic.HaciendoFrmulariosGrandes Then
         frmFacClientesGr.Show vbModal
@@ -3803,6 +3894,7 @@ End Sub
 
 Private Sub mnFacEntAlbaran_Click()
 
+
     PonerCaption False, mnFacEntAlbaran.Caption
 
     If vParamAplic.TipoFormularioClientes = 0 Then
@@ -3825,7 +3917,7 @@ Private Sub mnFacEntAlbaran_Click()
     
     Else
         frmFacEntAlbSAIL.hcoCodMovim = "" 'No carga el form con datos al abrir
-        frmFacEntAlbSAIL.hcoCodTipoM = "ALV"
+        frmFacEntAlbSAIL.hcoCodTipoM = "ALV"    'IIf(vParamAplic.NumeroInstalacion = vbTaxco, "ALO", "ALV")
         frmFacEntAlbSAIL.EsHistorico = False
         frmFacEntAlbSAIL.Show vbModal
     End If
@@ -3903,13 +3995,20 @@ End Sub
 
 
 Private Sub mnFacFacturarAlb_Click()
+Dim b As Boolean
 'Facturacion de Albaranes de Ventas
     If vParamAplic.NumeroInstalacion = vbFenollar Then
         MsgBox "No puede facturar desde este punto de menú.", vbExclamation
         Exit Sub
     End If
     
+    b = False
     If vParamAplic.TipoFormularioClientes = 0 Then
+        b = True
+    Else
+        If vParamAplic.NumeroInstalacion = vbTaxco Then b = True
+    End If
+    If b Then
 
         frmListadoPed.codClien = "ALV" 'utilizamos esta vble para pasarle el tipo de movimiento
         AbrirListadoPed (52)
@@ -4073,7 +4172,7 @@ Private Sub mnFacPedidos_Click(index As Integer)
             frmFacEntPedidos.Show vbModal
         Else
             frmFacEntPedSail.EsHistorico = index = 1
-            frmFacEntPedSail.Show vbModal
+                frmFacEntPedSail.Show vbModal
         End If
         
         If vParamAplic.NumeroInstalacion = vbFenollar Then
@@ -4263,6 +4362,29 @@ End Sub
 
 Private Sub mnFrecuencias_Click()
     frmFrecuencias.Show vbModal
+End Sub
+
+Private Sub mnGasolFacturar_Click(index As Integer)
+    frmListadoPed.codClien = IIf(index = 0, "ALD", "ALB")
+    AbrirListadoPed (52)
+End Sub
+
+Private Sub mnGasolinera_Click(index As Integer)
+       
+        'GASOLINERA
+        If index = 3 Then
+            'Facturar
+            
+        ElseIf index = 4 Then
+            frmTrasAlvic.Show vbModal
+        Else
+            If index = 1 Then
+                AbrirFormularioGeneral "Gasolinera", "ALD", False
+             Else
+                AbrirFormularioGeneral "Tienda Gasol.", "ALB", False
+            End If
+        End If
+
 End Sub
 
 Private Sub mnHcoMaten_Click()
@@ -4698,6 +4820,9 @@ Private Sub mnServicios_Click(index As Integer)
         'Lisatado albaranes internos
         frmListado5.OpcionListado = 13
         frmListado5.Show vbModal
+        
+        
+        
     End Select
     
 End Sub
@@ -5032,7 +5157,7 @@ End Sub
 
 Private Sub mnUtiConnActivas_Click()
 'ver las conexiones a donde apuntan
-Dim Cad As String
+Dim cad As String
 '    cad = "Conexiones:" & vbCrLf
 '    cad = cad & "------------------" & vbCrLf & vbCrLf
 '    cad = cad & "Ariges: " & vbCrLf & conn.ConnectionString & vbCrLf & vbCrLf
@@ -5159,12 +5284,7 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
-    If False Then
 
-        frmTrasAlvic.Show vbModal
-        Exit Sub
-    End If
-    
     Select Case Button.index
     Case 1 'Mantenimiento de Artículos
         mnAlmArticulos_Click
@@ -5183,8 +5303,9 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         mnFacPedidos_Click 0
     Case 11 'Albaranes a Clientes
     
-        mnFacEntAlbaran_Click
-        
+    
+            mnFacEntAlbaran_Click
+    
         
     Case 12 'Hist. Albaranes (Facturas)
         mnFacHcoFacturas_Click
@@ -5228,7 +5349,10 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             If vParamAplic.NumeroInstalacion = vbFenollar Then
                 If HaMostradoCanal2_El_B Then mnAlbaranesB.visible = True
             End If
+        ElseIf vParamAplic.NumeroInstalacion = vbTaxco Then
+            mnMtoEuler_Click 1
         Else
+        
             'Numero de serie
             mnRepNumSerie_Click
         End If
@@ -5279,13 +5403,13 @@ End Sub
 
 Private Sub PonerDatosVisiblesForm()
 'Escribe texto de la barra de la aplicación
-Dim Cad As String
-    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
-    Cad = Cad & ", " & Format(Now, "d")
-    Cad = Cad & " de " & Format(Now, "mmmm")
-    Cad = Cad & " de " & Format(Now, "yyyy")
-    Cad = "    " & Cad & "    "
-    Me.StatusBar1.Panels(5).Text = Cad
+Dim cad As String
+    cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
+    cad = cad & ", " & Format(Now, "d")
+    cad = cad & " de " & Format(Now, "mmmm")
+    cad = cad & " de " & Format(Now, "yyyy")
+    cad = "    " & cad & "    "
+    Me.StatusBar1.Panels(5).Text = cad
     If vEmpresa Is Nothing Then
         Caption = "ARIGES" & " ver. " & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & "   Usuario: " & vUsu.Nombre & " FALTA CONFIGURAR"
         'Panel con el nombre de la empresa
@@ -5299,11 +5423,11 @@ End Sub
 
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim Cad As String
+Dim cad As String
 
     
     For Each T In Me
-        Cad = T.Name
+        cad = T.Name
         If Mid(T.Name, 1, 2) = "mn" Then
             If LCase(Mid(T.Caption, 1, 1)) <> "-" Then T.Enabled = Habilitar
         End If
@@ -5375,7 +5499,7 @@ End Sub
 
 Private Sub LanzaHome(Opcion As String)
 Dim I As Integer
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo ELanzaHome
 
@@ -5405,7 +5529,7 @@ Dim Cad As String
 '        LanzaHome = True
 '    End If
 ELanzaHome:
-    If Err.Number <> 0 Then MuestraError Err.Number, Cad & vbCrLf & Err.Description
+    If Err.Number <> 0 Then MuestraError Err.Number, cad & vbCrLf & Err.Description
     CadenaDesdeOtroForm = ""
 End Sub
 
@@ -5578,6 +5702,7 @@ Dim Activado As Boolean
     Me.Toolbar1.Buttons(22).visible = ComprobarBotonMenuVisible(Me.mnRepNumSerie, Activado)
     Me.Toolbar1.Buttons(22).Enabled = Activado
     If vParamAplic.NumeroInstalacion = vbFenollar Then Me.Toolbar1.Buttons(22).ToolTipText = "FACTURACION"
+    If vParamAplic.NumeroInstalacion = vbTaxco Then Me.Toolbar1.Buttons(22).ToolTipText = "ORDEN TALLER"
     
     '-----------------------------------------------------------
     'Conuslta de precio
@@ -5649,7 +5774,7 @@ Private Function ComprobarBotonMenuVisible(objMenu As Menu, Activado As Boolean)
 Dim nomMenu As String
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim b As Boolean
 
 
@@ -5670,16 +5795,16 @@ Dim b As Boolean
         SQL = "select padre from usuarios.appmenus where aplicacion='Ariges' and name=" & DBSet(nomMenu, "T")
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
-            Cad = RS.Fields(0).Value
+            cad = RS.Fields(0).Value
         End If
         RS.Close
         
         b = True
-        While b And Cad <> ""
-                SQL = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & Cad
+        While b And cad <> ""
+                SQL = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & cad
                 RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Not RS.EOF Then
-                    Cad = RS!Padre
+                    cad = RS!Padre
                     nomMenu = RS!Name
                 End If
                 RS.Close
@@ -5694,7 +5819,7 @@ Dim b As Boolean
                     Activado = False
                 End If
                 RS.Close
-                If Cad = "0" Then Cad = "" 'terminar si llegamos a la raiz
+                If cad = "0" Then cad = "" 'terminar si llegamos a la raiz
         Wend
         ComprobarBotonMenuVisible = b
         Set RS = Nothing

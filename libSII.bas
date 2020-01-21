@@ -90,9 +90,18 @@ Dim TicketAgrupado As String
             End If
         End If
     End If
+    
+    
+    
+    
     If Mensaje <> "" Then
         'Damos mensaje
-        frmSiiAvisos.Show vbModal
+        If vUsu.Nivel2 = 2 Then
+            'No hacemos nada
+            
+        Else
+            frmSiiAvisos.Show vbModal
+        End If
     End If
 
     

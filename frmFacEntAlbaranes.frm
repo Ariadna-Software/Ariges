@@ -389,58 +389,58 @@ Begin VB.Form frmFacEntAlbaranes2
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbaranes.frx":0065
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(3)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(10)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Label1(12)"
-      Tab(1).Control(6)=   "imgBuscar(7)"
-      Tab(1).Control(7)=   "Label1(9)"
-      Tab(1).Control(8)=   "imgBuscar(8)"
-      Tab(1).Control(9)=   "Label1(23)"
-      Tab(1).Control(10)=   "Label1(24)"
-      Tab(1).Control(11)=   "Label1(52)"
-      Tab(1).Control(12)=   "imgFecha(40)"
-      Tab(1).Control(13)=   "Shape1"
-      Tab(1).Control(14)=   "imgBuscar(9)"
-      Tab(1).Control(15)=   "imgBuscar(13)"
-      Tab(1).Control(16)=   "Label1(54)"
-      Tab(1).Control(17)=   "Label1(55)"
-      Tab(1).Control(18)=   "Label1(63)"
-      Tab(1).Control(19)=   "chkImpreso"
-      Tab(1).Control(20)=   "Text1(38)"
-      Tab(1).Control(21)=   "Text1(18)"
-      Tab(1).Control(22)=   "Text1(19)"
-      Tab(1).Control(23)=   "Text1(20)"
-      Tab(1).Control(24)=   "Text1(21)"
-      Tab(1).Control(25)=   "Text1(22)"
-      Tab(1).Control(26)=   "Text1(23)"
-      Tab(1).Control(27)=   "Text1(24)"
-      Tab(1).Control(28)=   "Text1(26)"
-      Tab(1).Control(29)=   "Text1(25)"
-      Tab(1).Control(30)=   "Text1(2)"
-      Tab(1).Control(31)=   "Text2(27)"
-      Tab(1).Control(32)=   "Text1(27)"
-      Tab(1).Control(33)=   "Text2(28)"
-      Tab(1).Control(34)=   "Text1(28)"
-      Tab(1).Control(35)=   "Text2(29)"
-      Tab(1).Control(36)=   "Text1(29)"
-      Tab(1).Control(37)=   "FrameHco"
-      Tab(1).Control(38)=   "Text1(39)"
-      Tab(1).Control(39)=   "Text1(41)"
-      Tab(1).Control(40)=   "chkDocArchi"
-      Tab(1).Control(41)=   "FrameFacRec"
-      Tab(1).Control(42)=   "Text1(43)"
-      Tab(1).Control(43)=   "Text2(43)"
-      Tab(1).Control(44)=   "Text1(44)"
-      Tab(1).Control(45)=   "Text2(1)"
+      Tab(1).Control(0)=   "Text2(1)"
+      Tab(1).Control(1)=   "Text1(44)"
+      Tab(1).Control(2)=   "Text2(43)"
+      Tab(1).Control(3)=   "Text1(43)"
+      Tab(1).Control(4)=   "FrameFacRec"
+      Tab(1).Control(5)=   "chkDocArchi"
+      Tab(1).Control(6)=   "Text1(41)"
+      Tab(1).Control(7)=   "Text1(39)"
+      Tab(1).Control(8)=   "FrameHco"
+      Tab(1).Control(9)=   "Text1(29)"
+      Tab(1).Control(10)=   "Text2(29)"
+      Tab(1).Control(11)=   "Text1(28)"
+      Tab(1).Control(12)=   "Text2(28)"
+      Tab(1).Control(13)=   "Text1(27)"
+      Tab(1).Control(14)=   "Text2(27)"
+      Tab(1).Control(15)=   "Text1(2)"
+      Tab(1).Control(16)=   "Text1(25)"
+      Tab(1).Control(17)=   "Text1(26)"
+      Tab(1).Control(18)=   "Text1(24)"
+      Tab(1).Control(19)=   "Text1(23)"
+      Tab(1).Control(20)=   "Text1(22)"
+      Tab(1).Control(21)=   "Text1(21)"
+      Tab(1).Control(22)=   "Text1(20)"
+      Tab(1).Control(23)=   "Text1(19)"
+      Tab(1).Control(24)=   "Text1(18)"
+      Tab(1).Control(25)=   "Text1(38)"
+      Tab(1).Control(26)=   "chkImpreso"
+      Tab(1).Control(27)=   "Label1(63)"
+      Tab(1).Control(28)=   "Label1(55)"
+      Tab(1).Control(29)=   "Label1(54)"
+      Tab(1).Control(30)=   "imgBuscar(13)"
+      Tab(1).Control(31)=   "imgBuscar(9)"
+      Tab(1).Control(32)=   "Shape1"
+      Tab(1).Control(33)=   "imgFecha(40)"
+      Tab(1).Control(34)=   "Label1(52)"
+      Tab(1).Control(35)=   "Label1(24)"
+      Tab(1).Control(36)=   "Label1(23)"
+      Tab(1).Control(37)=   "imgBuscar(8)"
+      Tab(1).Control(38)=   "Label1(9)"
+      Tab(1).Control(39)=   "imgBuscar(7)"
+      Tab(1).Control(40)=   "Label1(12)"
+      Tab(1).Control(41)=   "Label1(11)"
+      Tab(1).Control(42)=   "Label1(10)"
+      Tab(1).Control(43)=   "Label1(5)"
+      Tab(1).Control(44)=   "Label1(3)"
+      Tab(1).Control(45)=   "Label1(45)"
       Tab(1).ControlCount=   46
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranes.frx":0081
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "FrameManipulador"
-      Tab(2).Control(1)=   "FrameCampos"
+      Tab(2).Control(0)=   "FrameCampos"
+      Tab(2).Control(1)=   "FrameManipulador"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Carta de portes"
       TabPicture(3)   =   "frmFacEntAlbaranes.frx":009D
@@ -7489,7 +7489,7 @@ Dim I As Byte
         
         
         'Solo herbelca
-        If vParamAplic.NumeroInstalacion = 2 Then
+        If vParamAplic.NumeroInstalacion = vbHerbelca Then
             txtAux(12).Left = DataGrid1.Columns(14).Left + 210
             txtAux(12).Width = DataGrid1.Columns(14).Width - 9
             BloquearTxt txtAux(12), True
@@ -10518,8 +10518,13 @@ Private Sub AbrirForm_CentroCoste()
     
 
     Set frmB = New frmBuscaGrid
-    frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
-    frmB.vTabla = "cabccost"
+    If vParamAplic.ContabilidadNueva Then
+        frmB.vCampos = "Codigo|ccoste|codccost|T||20·Descripción|ccoste|nomccost|T||70·"
+        frmB.vTabla = "ccoste"
+    Else
+        frmB.vCampos = "Codigo|cabccost|codccost|T||20·Descripción|cabccost|nomccost|T||70·"
+        frmB.vTabla = "cabccost"
+    End If
     frmB.vSQL = ""
     HaDevueltoDatos = False
     '###A mano

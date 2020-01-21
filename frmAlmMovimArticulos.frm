@@ -684,17 +684,17 @@ End Sub
 
 
 Private Sub Imprimir()
-Dim cad As String
+Dim Cad As String
 Dim numParam As Byte
 
     'Resto parametros
-    cad = ""
-    cad = cad & "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
+    Cad = ""
+    Cad = Cad & "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
     numParam = 1
             
     With frmImprimir
         .NombreRPT = "rAlmMovim.rpt"
-        .OtrosParametros = cad
+        .OtrosParametros = Cad
         .NumeroParametros = numParam
         .FormulaSeleccion = cadSeleccion
         .EnvioEMail = False
@@ -1244,7 +1244,7 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub ImageObservaDFI_Click()
-Dim cad As String
+Dim Cad As String
 Dim Invehco As Boolean
 
     If Modo = 0 Then Exit Sub
@@ -1256,31 +1256,31 @@ Dim Invehco As Boolean
             
             Invehco = False
             'Veremos si el DFI es del utlimo inventario
-            cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
-            cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", cad, CStr(Data2.Recordset!codAlmac))
+            Cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
+            Cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", Cad, CStr(Data2.Recordset!codAlmac))
             
-            If cad = "" Then
+            If Cad = "" Then
                 'No es el de salmac. Buscamos en shinve
-                cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
-                cad = DevuelveDesdeBD(conAri, "existenc", "shinve", cad, CStr(Data2.Recordset!codAlmac))
-                If cad <> "" Then Invehco = True
+                Cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(Data2.Recordset!FechaMov, "F") & " AND codalmac"
+                Cad = DevuelveDesdeBD(conAri, "existenc", "shinve", Cad, CStr(Data2.Recordset!codAlmac))
+                If Cad <> "" Then Invehco = True
             
             End If
             
             
-            If cad <> "" Then
+            If Cad <> "" Then
                 
-                cad = "          Existencias: " & cad
-                If Invehco Then cad = cad & "    *Hco"
-                cad = "Fecha inventario: " & Data2.Recordset!FechaMov & cad
+                Cad = "          Existencias: " & Cad
+                If Invehco Then Cad = Cad & "    *Hco"
+                Cad = "Fecha inventario: " & Data2.Recordset!FechaMov & Cad
              '   Cad = vbCrLf & "Almacen: " & Data2.Recordset!codAlmac & "-" & Text2(1).Text & vbCrLf & Cad
              '   Cad = "Articulo: " & Text1(0).Text & " " & Text2(0).Text & Cad
                 
             End If
                         
-            If Not IsNull(Data2.Recordset!observa) Then cad = cad & vbCrLf & "Observaciones: " & vbCrLf & Data2.Recordset!observa
+            If Not IsNull(Data2.Recordset!observa) Then Cad = Cad & vbCrLf & "Observaciones: " & vbCrLf & Data2.Recordset!observa
             
-            If cad <> "" Then MsgBox cad, vbInformation
+            If Cad <> "" Then MsgBox Cad, vbInformation
          End If
     End If
         
@@ -1523,7 +1523,7 @@ Dim I As Integer
         If Not HaMostradoCanal2_El_B Then SQL = SQL & " AND detamovi<>'ALZ'"
     End If
     
-    SQL = SQL & " " & Ordenacion & " DESC "
+    SQL = SQL & " " & Ordenacion '& " DESC "
     '---- Laura: 27/09/2006
     cadSelGrid = SQL
     SQL = selSQL & SQL
@@ -1752,23 +1752,23 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    cad = ""
+    Cad = ""
             
-    cad = cad & "Código|smoval|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
+    Cad = Cad & "Código|smoval|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
     tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
     tabla = tabla & " GROUP BY smoval.codartic "
     Titulo = "Movimientos de Articulos"
 
            
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
+        frmB.vCampos = Cad
         frmB.vTabla = tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False

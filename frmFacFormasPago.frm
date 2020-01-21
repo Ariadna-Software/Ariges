@@ -23,7 +23,7 @@ Begin VB.Form frmFacFormasPago
       Index           =   11
       Left            =   4320
       MaxLength       =   5
-      TabIndex        =   35
+      TabIndex        =   8
       Tag             =   "Primer Vencimiento|N|S|0||sforpa|idForpaT||N|"
       Text            =   "Text1"
       Top             =   2280
@@ -66,7 +66,7 @@ Begin VB.Form frmFacFormasPago
       ForeColor       =   &H00972E0B&
       Height          =   975
       Left            =   120
-      TabIndex        =   29
+      TabIndex        =   30
       Top             =   3960
       Width           =   7695
       Begin VB.TextBox Text2 
@@ -75,7 +75,7 @@ Begin VB.Form frmFacFormasPago
          Index           =   7
          Left            =   1965
          MaxLength       =   30
-         TabIndex        =   16
+         TabIndex        =   17
          Text            =   "Text2"
          Top             =   360
          Width           =   2685
@@ -86,7 +86,7 @@ Begin VB.Form frmFacFormasPago
          Index           =   9
          Left            =   6120
          MaxLength       =   5
-         TabIndex        =   11
+         TabIndex        =   12
          Tag             =   "% Adelantado|N|S|0|99.90|sforpa|poradela|#0.00|N|"
          Text            =   "Text1"
          Top             =   360
@@ -98,7 +98,7 @@ Begin VB.Form frmFacFormasPago
          Index           =   7
          Left            =   1320
          MaxLength       =   15
-         TabIndex        =   10
+         TabIndex        =   11
          Tag             =   "Forma de Pago por adelantado|N|S|0|999|sforpa|forpapor|000|N|"
          Text            =   "Text1"
          Top             =   360
@@ -118,7 +118,7 @@ Begin VB.Form frmFacFormasPago
          Height          =   255
          Index           =   11
          Left            =   5040
-         TabIndex        =   31
+         TabIndex        =   32
          Top             =   375
          Width           =   975
       End
@@ -127,7 +127,7 @@ Begin VB.Form frmFacFormasPago
          Height          =   315
          Index           =   7
          Left            =   270
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   370
          Width           =   615
       End
@@ -195,7 +195,7 @@ Begin VB.Form frmFacFormasPago
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   6780
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   5235
       Visible         =   0   'False
       Width           =   1035
@@ -214,7 +214,7 @@ Begin VB.Form frmFacFormasPago
    Begin VB.Frame Frame1 
       Height          =   540
       Left            =   150
-      TabIndex        =   17
+      TabIndex        =   18
       Top             =   5115
       Width           =   3135
       Begin VB.Label lblIndicador 
@@ -222,7 +222,7 @@ Begin VB.Form frmFacFormasPago
          Caption         =   "Label2"
          Height          =   255
          Left            =   240
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   210
          Width           =   2715
       End
@@ -232,7 +232,7 @@ Begin VB.Form frmFacFormasPago
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   6780
-      TabIndex        =   14
+      TabIndex        =   15
       Top             =   5235
       Width           =   1035
    End
@@ -240,7 +240,7 @@ Begin VB.Form frmFacFormasPago
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   5520
-      TabIndex        =   12
+      TabIndex        =   13
       Top             =   5235
       Width           =   1035
    End
@@ -305,7 +305,7 @@ Begin VB.Form frmFacFormasPago
       ForeColor       =   &H00972E0B&
       Height          =   975
       Left            =   120
-      TabIndex        =   27
+      TabIndex        =   28
       Top             =   2760
       Width           =   7695
       Begin VB.TextBox Text1 
@@ -314,7 +314,7 @@ Begin VB.Form frmFacFormasPago
          Index           =   6
          Left            =   1320
          MaxLength       =   15
-         TabIndex        =   8
+         TabIndex        =   9
          Tag             =   "Forma de Pago alternativa|N|S|0|999|sforpa|forpaalt|000|N|"
          Text            =   "Text1"
          Top             =   360
@@ -335,7 +335,7 @@ Begin VB.Form frmFacFormasPago
          Index           =   8
          Left            =   6120
          MaxLength       =   15
-         TabIndex        =   9
+         TabIndex        =   10
          Tag             =   "Importe Mínimo|N|S|0||sforpa|impormin|#,###,###,##0.00|N|"
          Text            =   "Text1"
          Top             =   360
@@ -347,7 +347,7 @@ Begin VB.Form frmFacFormasPago
          Index           =   6
          Left            =   1965
          MaxLength       =   30
-         TabIndex        =   15
+         TabIndex        =   16
          Text            =   "Text2"
          Top             =   360
          Width           =   2685
@@ -357,7 +357,7 @@ Begin VB.Form frmFacFormasPago
          Height          =   315
          Index           =   9
          Left            =   270
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   370
          Width           =   615
       End
@@ -366,7 +366,7 @@ Begin VB.Form frmFacFormasPago
          Height          =   315
          Index           =   6
          Left            =   4920
-         TabIndex        =   28
+         TabIndex        =   29
          Top             =   375
          Width           =   1095
       End
@@ -385,7 +385,7 @@ Begin VB.Form frmFacFormasPago
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   22
+      TabIndex        =   23
       Top             =   0
       Width           =   8205
       _ExtentX        =   14473
@@ -460,7 +460,7 @@ Begin VB.Form frmFacFormasPago
          Caption         =   "Vista previa"
          Height          =   195
          Left            =   5280
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   120
          Width           =   1215
       End
@@ -479,7 +479,7 @@ Begin VB.Form frmFacFormasPago
       Height          =   255
       Index           =   8
       Left            =   240
-      TabIndex        =   34
+      TabIndex        =   35
       Top             =   2040
       Width           =   1695
    End
@@ -488,7 +488,7 @@ Begin VB.Form frmFacFormasPago
       Height          =   255
       Index           =   5
       Left            =   4200
-      TabIndex        =   33
+      TabIndex        =   34
       Top             =   1320
       Width           =   1575
    End
@@ -497,7 +497,7 @@ Begin VB.Form frmFacFormasPago
       Height          =   255
       Index           =   4
       Left            =   2805
-      TabIndex        =   26
+      TabIndex        =   27
       Top             =   1320
       Width           =   855
    End
@@ -506,7 +506,7 @@ Begin VB.Form frmFacFormasPago
       Height          =   255
       Index           =   3
       Left            =   1575
-      TabIndex        =   25
+      TabIndex        =   26
       Top             =   1320
       Width           =   855
    End
@@ -515,7 +515,7 @@ Begin VB.Form frmFacFormasPago
       Height          =   255
       Index           =   2
       Left            =   240
-      TabIndex        =   24
+      TabIndex        =   25
       Top             =   1320
       Width           =   1215
    End
@@ -524,7 +524,7 @@ Begin VB.Form frmFacFormasPago
       Height          =   195
       Index           =   10
       Left            =   4200
-      TabIndex        =   21
+      TabIndex        =   22
       Top             =   600
       Width           =   1080
    End
@@ -533,7 +533,7 @@ Begin VB.Form frmFacFormasPago
       Height          =   255
       Index           =   1
       Left            =   1005
-      TabIndex        =   20
+      TabIndex        =   21
       Top             =   600
       Width           =   1695
    End
@@ -542,7 +542,7 @@ Begin VB.Form frmFacFormasPago
       Height          =   255
       Index           =   0
       Left            =   300
-      TabIndex        =   19
+      TabIndex        =   20
       Top             =   600
       Width           =   495
    End
@@ -622,7 +622,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -641,8 +641,8 @@ Dim Cad As String, Indicador As String
                 If ModificaDesdeFormulario(Me, 1) Then
                     ModificarENTesoeria
                     TerminaBloquear
-                    Cad = "(codforpa=" & Text1(0).Text & ")"
-                    If SituarData(Data1, Cad, Indicador) Then
+                    cad = "(codforpa=" & Text1(0).Text & ")"
+                    If SituarData(Data1, cad, Indicador) Then
                         PonerModo 2
                         lblIndicador.Caption = Indicador
                         PonerFoco Text1(0)
@@ -715,9 +715,9 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub Desplazamiento(index As Integer)
+Private Sub Desplazamiento(Index As Integer)
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, index
+    DesplazamientoData Data1, Index
     PonerCampos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
 End Sub
@@ -738,7 +738,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
@@ -746,25 +746,25 @@ Dim Cad As String
     If Not PuedeModificarFPenContab Then Exit Sub
     
     '### a mano
-    Cad = "¿Seguro que desea eliminar la Forma de Pago?" & vbCrLf
-    Cad = Cad & vbCrLf & "Cod. Forma Pago: " & Format(Data1.Recordset.Fields(0), "000")
-    Cad = Cad & vbCrLf & "Desc. Forma Pago: " & Data1.Recordset.Fields(1)
+    cad = "¿Seguro que desea eliminar la Forma de Pago?" & vbCrLf
+    cad = cad & vbCrLf & "Cod. Forma Pago: " & Format(Data1.Recordset.Fields(0), "000")
+    cad = cad & vbCrLf & "Desc. Forma Pago: " & Data1.Recordset.Fields(1)
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         NumRegElim = Data1.Recordset.AbsolutePosition
         Screen.MousePointer = vbHourglass
 
-        Cad = "En ariges"
+        cad = "En ariges"
         Data1.Recordset.Delete
         
         
         'Para eliminar en tesoreria
         If vParamAplic.ContabilidadNueva Then
-            Cad = "DELETE FROM formapago WHERE codforpa = " & Text1(0).Text
+            cad = "DELETE FROM formapago WHERE codforpa = " & Text1(0).Text
         Else
-            Cad = "DELETE FROM sforpa WHERE codforpa = " & Text1(0).Text
+            cad = "DELETE FROM sforpa WHERE codforpa = " & Text1(0).Text
         End If
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
@@ -776,7 +776,7 @@ Dim Cad As String
         
         'Borro en tesoreria
          
-        ConnConta.Execute Cad
+        ConnConta.Execute cad
         
     End If
     Screen.MousePointer = vbDefault
@@ -784,22 +784,22 @@ Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
         Data1.Recordset.CancelUpdate
-        MuestraError Err.Number, "Eliminar Forma de Pago" & vbCrLf & Cad, Err.Description
+        MuestraError Err.Number, "Eliminar Forma de Pago" & vbCrLf & cad, Err.Description
     End If
 End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -945,16 +945,16 @@ Dim Indice As Integer
 End Sub
     
     
-Private Sub imgFPago_Click(index As Integer)
+Private Sub imgFPago_Click(Index As Integer)
     If Modo = 2 Or Modo = 5 Or Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
       
     'En el Tag almacenamos el indice de la imagen de
     'Busqueda que va a llamar a frmBuscaGrid para busqueda
-    imgFPago(0).Tag = index
+    imgFPago(0).Tag = Index
     MandaBusquedaPrevia ""
     imgFPago(0).Tag = -1
-    PonerFoco Text1(index + 6)
+    PonerFoco Text1(Index + 6)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -986,18 +986,18 @@ End Sub
 
 'Los metodos del text tendran que estar
 'Los descomentamos cuando esten puestos ya los controles
-Private Sub Text1_GotFocus(index As Integer)
-    kCampo = index
-    ConseguirFoco Text1(index), Modo
+Private Sub Text1_GotFocus(Index As Integer)
+    kCampo = Index
+    ConseguirFoco Text1(Index), Modo
 End Sub
 
 
-Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
-Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -1009,25 +1009,25 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(index As Integer)
+Private Sub Text1_LostFocus(Index As Integer)
    
-    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
     
     'Si queremos hacer algo ..
-    Select Case index
+    Select Case Index
         Case 0 'Cod Forma de Pago
-           If PonerFormatoEntero(Text1(index)) Then
+           If PonerFormatoEntero(Text1(Index)) Then
                 If Modo = 3 Then 'Insertar
-                    If ExisteCP(Text1(index)) Then PonerFoco Text1(index)
+                    If ExisteCP(Text1(Index)) Then PonerFoco Text1(Index)
                 End If
            End If
             
         Case 2 'Numero Vencimientos
-            PonerFormatoEntero Text1(index)
-            If Val(Text1(index).Text) = 1 Then
+            PonerFormatoEntero Text1(Index)
+            If Val(Text1(Index).Text) = 1 Then
                 Text1(4).Text = ""
                 BloquearTxt Text1(4), True
             Else
@@ -1035,27 +1035,27 @@ Private Sub Text1_LostFocus(index As Integer)
             End If
                 
         Case 3, 4 'nº vencimientos
-            PonerFormatoEntero Text1(index)
+            PonerFormatoEntero Text1(Index)
         
         Case 5, 9 '5: %Gastos Financieros, 9: %Adelantado
              'Formato tipo 4: Decimal(4,2)
-             PonerFormatoDecimal Text1(index), 4
+             PonerFormatoDecimal Text1(Index), 4
 
         Case 8       '8:Importe Mínimo
             'Formato tipo 1: Decimal(12,2)
-             PonerFormatoDecimal Text1(index), 1
+             PonerFormatoDecimal Text1(Index), 1
         
         Case 6, 7 ' 6: Forma de Pago Alternativa
                   ' 7: Forma de Pago por Adelantado
-             If PonerFormatoEntero(Text1(index)) Then
-                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sforpa", "nomforpa", "codforpa", "N")
-                If Text2(index).Text = "" Then PonerFoco Text1(index)
-                BloquearTxt Text1(index + 2), False
+             If PonerFormatoEntero(Text1(Index)) Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sforpa", "nomforpa", "codforpa", "N")
+                If Text2(Index).Text = "" Then PonerFoco Text1(Index)
+                BloquearTxt Text1(Index + 2), False
              Else
-                 Text2(index).Text = ""
-                 Text1(index + 2).Text = "" 'Importe Mínimo
+                 Text2(Index).Text = ""
+                 Text1(Index + 2).Text = "" 'Importe Mínimo
                  'Modo 1: Busqueda
-                 If Modo <> 1 Then BloquearTxt Text1(index + 2), True
+                 If Modo <> 1 Then BloquearTxt Text1(Index + 2), True
             End If
     End Select
 End Sub
@@ -1075,17 +1075,17 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-Dim Cad As String
+Dim cad As String
 
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(0), 30, "Código")
-        Cad = Cad & ParaGrid(Text1(1), 70, "Denominacion")
-        If Cad <> "" Then
+        cad = ""
+        cad = cad & ParaGrid(Text1(0), 30, "Código")
+        cad = cad & ParaGrid(Text1(1), 70, "Denominacion")
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = NombreTabla
             frmB.vSQL = CadB
             
@@ -1256,7 +1256,7 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim Cad As String
+Dim cad As String
 
     DatosOk = False
     b = CompForm(Me, 1)
@@ -1350,13 +1350,13 @@ Dim Cad As String
     'Codigo integrracion
     'idForpaT
     If Text1(11).Text <> "" Then
-        Cad = ""
-        If Modo = 4 Then Cad = "codforpa <> " & Text1(0).Text & " AND "
-        Cad = Cad & "idForpaT "
-        Cad = DevuelveDesdeBD(conAri, "concat(codforpa,' - ',nomforpa)", "sforpa", Cad, Text1(11).Text)
-        If Cad <> "" Then
-            Cad = "Codigo integracion ya esta en la forma de pago: " & Cad
-            MsgBox Cad, vbExclamation
+        cad = ""
+        If Modo = 4 Then cad = "codforpa <> " & Text1(0).Text & " AND "
+        cad = cad & "idForpaT "
+        cad = DevuelveDesdeBD(conAri, "concat(codforpa,' - ',nomforpa)", "sforpa", cad, Text1(11).Text)
+        If cad <> "" Then
+            cad = "Codigo integracion ya esta en la forma de pago: " & cad
+            MsgBox cad, vbExclamation
             b = False
         End If
     End If
@@ -1370,13 +1370,13 @@ Dim Cad As String
 End Function
 
 
-Private Sub Text2_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.index
+    Select Case Button.Index
         Case 1  'Buscar
             mnBuscar_Click
         Case 2  'Todos
@@ -1390,7 +1390,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 10  'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento (Button.index - btnPrimero)
+            Desplazamiento (Button.Index - btnPrimero)
     End Select
 End Sub
 
@@ -1409,7 +1409,7 @@ End Sub
 
 
 Private Function PuedeModificarFPenContab() As Boolean
-Dim Cad As String
+Dim cad As String
     PuedeModificarFPenContab = False
     Set miRsAux = New ADODB.Recordset
 
@@ -1418,12 +1418,12 @@ Dim Cad As String
     'Vere si la forma de pago es forma de pago alternativa
     If Modo = 2 Then
         NumRegElim = 0
-        Cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpaalt", CStr(Val(Text1(0).Text)))
-        If Cad = "" Then Cad = "0"
-        If Val(Cad) > 0 Then NumRegElim = 1
-        Cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpapor", Text1(0).Text)
-        If Cad = "" Then Cad = "0"
-        If Val(Cad) > 0 Then NumRegElim = 1
+        cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpaalt", CStr(Val(Text1(0).Text)))
+        If cad = "" Then cad = "0"
+        If Val(cad) > 0 Then NumRegElim = 1
+        cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpapor", Text1(0).Text)
+        If cad = "" Then cad = "0"
+        If Val(cad) > 0 Then NumRegElim = 1
         
         If NumRegElim > 0 Then
             MsgBox "La forma de pago es forma de pago alternativa o por adelantado de otra", vbExclamation
@@ -1432,9 +1432,9 @@ Dim Cad As String
         
         
         If vParamAplic.AguasPotables Then
-            Cad = DevuelveDesdeBD(conAri, "Count(*)", "aguacontadores", "codforpa", Text1(0).Text)
-            If Cad = "" Then Cad = "0"
-            If Val(Cad) > 0 Then
+            cad = DevuelveDesdeBD(conAri, "Count(*)", "aguacontadores", "codforpa", Text1(0).Text)
+            If cad = "" Then cad = "0"
+            If Val(cad) > 0 Then
                 MsgBox "Tiene contadores de agua asociados a esta forma de pago", vbExclamation
                 Exit Function
             End If
@@ -1445,24 +1445,24 @@ Dim Cad As String
 
     NumRegElim = 0
     If vParamAplic.ContabilidadNueva Then
-        Cad = "Select count(*) from cobros where codforpa=" & Text1(0).Text
+        cad = "Select count(*) from cobros where codforpa=" & Text1(0).Text
     Else
-        Cad = "Select count(*) from scobro where codforpa=" & Text1(0).Text
+        cad = "Select count(*) from scobro where codforpa=" & Text1(0).Text
     End If
     
-    miRsAux.Open Cad, ConnConta, adOpenForwardOnly, adLockPessimistic
+    miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
     If Not miRsAux.EOF Then NumRegElim = NumRegElim + DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
     
     
     If vParamAplic.ContabilidadNueva Then
-        Cad = "Select count(*) from pagos where codforpa=" & Text1(0).Text
+        cad = "Select count(*) from pagos where codforpa=" & Text1(0).Text
     Else
-        Cad = "Select count(*) from spagop where codforpa=" & Text1(0).Text
+        cad = "Select count(*) from spagop where codforpa=" & Text1(0).Text
     End If
     
     
-    miRsAux.Open Cad, ConnConta, adOpenForwardOnly, adLockPessimistic
+    miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
     If Not miRsAux.EOF Then NumRegElim = NumRegElim + DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
     
@@ -1484,37 +1484,37 @@ End Function
 
 
 Private Sub ModificarENTesoeria()
-Dim C As String
+Dim c As String
 
     If vParamAplic.ContabilidadNueva Then
-        C = DevuelveDesdeBD(conConta, "codforpa", "formapago", "codforpa", Text1(0).Text)
-        If C = "" Then
+        c = DevuelveDesdeBD(conConta, "codforpa", "formapago", "codforpa", Text1(0).Text)
+        If c = "" Then
             InsertarEnTesoreria
         Else
-            C = "UPDATE formapago set nomforpa = '" & DevNombreSQL(Text1(1).Text) & "', tipforpa=" & Me.Combo1.ItemData(Combo1.ListIndex)
-            C = C & ", numerove =" & Text1(2).Text & ",primerve = " & Text1(3).Text & " ,restoven =" & DBSet(Text1(4).Text, "N", "S")
-            C = C & " WHERE codforpa = " & Text1(0).Text
+            c = "UPDATE formapago set nomforpa = '" & DevNombreSQL(Text1(1).Text) & "', tipforpa=" & Me.Combo1.ItemData(Combo1.ListIndex)
+            c = c & ", numerove =" & Text1(2).Text & ",primerve = " & Text1(3).Text & " ,restoven =" & DBSet(Text1(4).Text, "N", "S")
+            c = c & " WHERE codforpa = " & Text1(0).Text
         End If
     Else
-        C = "UPDATE sforpa set nomforpa = '" & DevNombreSQL(Text1(1).Text) & "', tipforpa=" & Me.Combo1.ItemData(Combo1.ListIndex)
-        C = C & " WHERE codforpa = " & Text1(0).Text
+        c = "UPDATE sforpa set nomforpa = '" & DevNombreSQL(Text1(1).Text) & "', tipforpa=" & Me.Combo1.ItemData(Combo1.ListIndex)
+        c = c & " WHERE codforpa = " & Text1(0).Text
     End If
-    If C <> "" Then ConnConta.Execute C
+    If c <> "" Then ConnConta.Execute c
 End Sub
 
 
 Private Sub InsertarEnTesoreria()
-Dim C As String
+Dim c As String
     On Error Resume Next
     
     If vParamAplic.ContabilidadNueva Then
-        C = "INSERT INTO formapago(codforpa,nomforpa, tipforpa,numerove,primerve,restoven) VALUES ("
-        C = C & Text1(0).Text & ",'" & DevNombreSQL(Text1(1).Text) & "'," & Me.Combo1.ItemData(Combo1.ListIndex) & ","
-        C = C & Text1(2).Text & ",'" & Text1(3).Text & "'," & DBSet(Text1(4).Text, "N", "S") & ")"
+        c = "INSERT INTO formapago(codforpa,nomforpa, tipforpa,numerove,primerve,restoven) VALUES ("
+        c = c & Text1(0).Text & ",'" & DevNombreSQL(Text1(1).Text) & "'," & Me.Combo1.ItemData(Combo1.ListIndex) & ","
+        c = c & Text1(2).Text & ",'" & Text1(3).Text & "'," & DBSet(Text1(4).Text, "N", "S") & ")"
     Else
-        C = "INSERT INTO sforpa(codforpa,nomforpa, tipforpa) VALUES (" & Text1(0).Text & ",'" & DevNombreSQL(Text1(1).Text) & "'," & Me.Combo1.ItemData(Combo1.ListIndex) & ")"
+        c = "INSERT INTO sforpa(codforpa,nomforpa, tipforpa) VALUES (" & Text1(0).Text & ",'" & DevNombreSQL(Text1(1).Text) & "'," & Me.Combo1.ItemData(Combo1.ListIndex) & ")"
     End If
-    ConnConta.Execute C
+    ConnConta.Execute c
     If Err.Number <> 0 Then
         MsgBox "Error insertando en tesoreria: " & vbCrLf & Err.Description, vbExclamation
         Err.Clear

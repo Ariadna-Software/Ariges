@@ -3922,7 +3922,7 @@ Private Sub chkConjunto_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub chkCtrStock_Click()
- If Modo = 1 Then CheckCadenaBusqueda chkCtrStock, BuscaChekc
+ If Modo = 1 Then CheckCadenaBusqueda chkctrstock, BuscaChekc
 
 End Sub
 
@@ -4384,7 +4384,7 @@ Private Sub BotonAnyadir()
     Me.SSTab1.Tab = 0
     
     'Poner valores por defecto
-    Me.chkCtrStock.Value = 1 'por defecto hay control de stock
+    Me.chkctrstock.Value = 1 'por defecto hay control de stock
     Me.Text1(10).Text = Format(Now, "dd/mm/yyyy") 'fecha alta
     Me.cboArticuloVarios.ListIndex = 0
     Me.cboStatus.ListIndex = 0
@@ -5232,7 +5232,7 @@ Private Sub AbreFrmBuscaGrid_El2(DesdeEquivalencias As Boolean)
                 If pRptvMultiInforme < 8 Then Text1_LostFocus CInt(pRptvMultiInforme)
             Next
             'Controstock. Campo 12 de rs
-            chkCtrStock.Value = miRsAux!CtrStock
+            chkctrstock.Value = miRsAux!CtrStock
             
             PonerFoco Text1(1)
             Text1(1).SelStart = Len(Text1(1).Text)
@@ -5555,8 +5555,6 @@ Private Sub Form_Load()
         'HERBELCA
         cboTipoComiArtVario.visible = True
         Label1(44).visible = True
-        CargarComboComisionArticulosVarios
-        
         Label1(20).Caption = "Ud. embalaje grande"
         Label1(42).Caption = "Ud. embalaje pequeña"
         
@@ -5567,7 +5565,7 @@ Private Sub Form_Load()
         cboTipoComiArtVario.visible = False
         Label1(44).visible = False
     End If
-    
+    CargarComboUnidadesCompra
 
     
     LimpiarCampos   'Limpia los campos TextBox
@@ -5694,7 +5692,7 @@ Private Sub LimpiarCampos()
     Me.chkSeries.Value = 0
     chkRotacion.Value = 0
     Me.chkProduccion.Value = 0
-    Me.chkCtrStock.Value = 0
+    Me.chkctrstock.Value = 0
     Me.chkMateriaPrima.Value = 0
     Me.chkWeb.Value = 0
     Me.cboArticuloVarios.ListIndex = -1
@@ -5849,28 +5847,28 @@ Private Sub frmUbic_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub imgAyuda_Click(index As Integer)
-    imgAyuda(index).Tag = ""
+    imgayuda(index).Tag = ""
     If index = 0 Then
-        imgAyuda(index).Tag = imgAyuda(index).ToolTipText & vbCrLf & vbCrLf
-        imgAyuda(index).Tag = imgAyuda(index).Tag & "Stock:   cantidad stock total actual" & vbCrLf
+        imgayuda(index).Tag = imgayuda(index).ToolTipText & vbCrLf & vbCrLf
+        imgayuda(index).Tag = imgayuda(index).Tag & "Stock:   cantidad stock total actual" & vbCrLf
         If vParamAplic.Produccion Then
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "En produccion: " & vbCrLf
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "        Cantidad en produccion pendiente de cerrar. " & vbCrLf
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "               En postivo las cantidades a producir" & vbCrLf
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "               En negativo si es componente en produccion"
+            imgayuda(index).Tag = imgayuda(index).Tag & "En produccion: " & vbCrLf
+            imgayuda(index).Tag = imgayuda(index).Tag & "        Cantidad en produccion pendiente de cerrar. " & vbCrLf
+            imgayuda(index).Tag = imgayuda(index).Tag & "               En postivo las cantidades a producir" & vbCrLf
+            imgayuda(index).Tag = imgayuda(index).Tag & "               En negativo si es componente en produccion"
             If vParamAplic.NumeroInstalacion <> vbAmesa Then
-                imgAyuda(index).Tag = imgAyuda(index).Tag & vbCrLf & "               Restará la cantidad pendiente de servir. Ped. cliente"
+                imgayuda(index).Tag = imgayuda(index).Tag & vbCrLf & "               Restará la cantidad pendiente de servir. Ped. cliente"
             End If
         Else
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "Reservas:  cantidad pendiente de servir en pedidos cliente"
+            imgayuda(index).Tag = imgayuda(index).Tag & "Reservas:  cantidad pendiente de servir en pedidos cliente"
         End If
-        imgAyuda(index).Tag = imgAyuda(index).Tag & vbCrLf & "Pedido prov:  cantidad pedido proveedor "
+        imgayuda(index).Tag = imgayuda(index).Tag & vbCrLf & "Pedido prov:  cantidad pedido proveedor "
           
-        imgAyuda(index).Tag = imgAyuda(index).Tag & vbCrLf & vbCrLf & "Disponible: la suma de las cantidades"
+        imgayuda(index).Tag = imgayuda(index).Tag & vbCrLf & vbCrLf & "Disponible: la suma de las cantidades"
     End If
-    MsgBox imgAyuda(index).Tag, vbInformation
+    MsgBox imgayuda(index).Tag, vbInformation
     
-    imgAyuda(index).Tag = ""
+    imgayuda(index).Tag = ""
 End Sub
 
 
@@ -7053,7 +7051,7 @@ Dim I As Byte
         'Cuando modificamos, si pasamos un articulo a CADUCADO, entonces comproaremos
         'si tiene sctock. Si es asi NO dejammos continuar
         If Me.cboStatus.ListIndex = 3 And Val(Data1.Recordset!codstatu) < 3 Then
-            If Me.chkCtrStock.Value = 1 Then
+            If Me.chkctrstock.Value = 1 Then
                 'Lleva stcok
                 'Comprobamos k valor tiene
                 BuscaChekc = TotalRegistros("select sum(canstock) from salmac where codartic='" & DevNombreSQL(Text1(0).Text) & "'")

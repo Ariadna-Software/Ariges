@@ -510,7 +510,7 @@ Dim F As Date
     F = DateAdd("m", -3, CDate("01/09/2019"))
 
     'Cargo un RS con todos los partes vinculados al proveedor
-    miSQL = "select numparte from advpartes where codflota in (select codflota from sflotas where codprove=" & Codprove & ")"
+    miSQL = "select numparte from advpartes where esexterno=1 and codflota in (select codflota from sflotas where codprove=" & Codprove & ")"
     miRsAux.Open miSQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
 
     Label2(4).Caption = "Albaranes"
@@ -576,7 +576,7 @@ Dim RS As ADODB.Recordset
                 Set IT = ListView1.ListItems.Add()
                 IT.Text = RS!Numalbar
                 IT.SubItems(1) = RS!FechaAlb
-                IT.SubItems(2) = DBLet(RS!codtipoa, "T") & " "
+                IT.SubItems(2) = DBLet(RS!Codtipoa, "T") & " "
                 IT.SubItems(3) = DBLet(RS!Numfactu, "T") & " "
                 IT.SubItems(4) = DBLet(RS!FecFactu, "T") & " "
                 IT.SubItems(5) = DBLet(RS!codtipom, "T") & " "

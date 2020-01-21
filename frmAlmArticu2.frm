@@ -628,15 +628,15 @@ Dim J As Integer
     b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
-    txtAux(2).visible = Not b
-    txtAux(3).visible = Not b
-    txtAux(4).visible = Not b
+    Me.txtaux(0).visible = Not b
+    txtaux(1).visible = Not b
+    txtaux(2).visible = Not b
+    txtaux(3).visible = Not b
+    txtaux(4).visible = Not b
     If Me.DesdeTPV Then
-        txtAux(5).visible = Not b
+        txtaux(5).visible = Not b
     Else
-        txtAux(6).visible = Not b
+        txtaux(6).visible = Not b
     End If
     
     cmdAceptar.visible = Not b
@@ -649,10 +649,10 @@ Dim J As Integer
     If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
      
     'Si estamos en insertar o modificar
-    BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
+    BloquearTxt txtaux(0), (Modo <> 3 And Modo <> 1)
     
     'El PVP IVA NO SE PUEDE BUSCAR
-    BloquearTxt txtAux(5), True
+    BloquearTxt txtaux(5), True
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -710,9 +710,9 @@ Private Sub BotonBuscar()
     limpiar Me
     LLamaLineas ObtenerAlto(DataGrid1, 45), 1
     If vParamAplic.SituaEnCodigoArticulo Then
-        PonerFoco txtAux(0)
+        PonerFoco txtaux(0)
     Else
-        PonerFoco txtAux(1)
+        PonerFoco txtaux(1)
     End If
 End Sub
 
@@ -763,13 +763,13 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
     'Fijamos el ancho
-    txtAux(0).Top = alto
-    txtAux(1).Top = alto
-    txtAux(2).Top = alto
-    txtAux(3).Top = alto
-    txtAux(4).Top = alto
-    txtAux(5).Top = alto
-    txtAux(6).Top = alto
+    txtaux(0).Top = alto
+    txtaux(1).Top = alto
+    txtaux(2).Top = alto
+    txtaux(3).Top = alto
+    txtaux(4).Top = alto
+    txtaux(5).Top = alto
+    txtaux(6).Top = alto
 '    txtAux(0).Left = DataGrid1.Left + 340
 '    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
 '    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
@@ -916,9 +916,9 @@ Private Sub Form_activate()
     Screen.MousePointer = vbDefault
     If Modo = 1 Then
         If vParamAplic.SituaEnCodigoArticulo Then
-            PonerFoco txtAux(0)
+            PonerFoco txtaux(0)
         Else
-            PonerFoco txtAux(1)
+            PonerFoco txtaux(1)
         End If
     End If
 End Sub
@@ -989,10 +989,16 @@ Private Sub Form_Load()
     If FormatoCod <> "1" Then FormatoCod = "0"
     Me.mnOrdenadoPor(CInt(FormatoCod)).Checked = True
         
-    
-    
-    
-    FormatoCod = FormatoCampo(txtAux(0))
+    'If vUsu.Nivel2 = 2 Then
+    If False Then
+        If vParamAplic.HaciendoFrmulariosGrandes Then
+            Toolbar2.Buttons(8).Enabled = False
+        Else
+            Toolbar1.Buttons(5).Enabled = False
+        End If
+        mnBusqAvan.Enabled = False
+    End If
+    FormatoCod = FormatoCampo(txtaux(0))
     
     
     'SIEMPRE VIENEN EN MODO BUSQUEDA
@@ -1205,7 +1211,7 @@ Dim Indice As Integer
 End Sub
 
 Private Sub txtAux_GotFocus(index As Integer)
-    ConseguirFoco txtAux(index), Modo
+    ConseguirFoco txtaux(index), Modo
 End Sub
 
 Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1214,7 +1220,7 @@ End Sub
 
 Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     If index = 1 And KeyAscii = 13 Then
-        If Me.txtAux(index).Text <> "" Then
+        If Me.txtaux(index).Text <> "" Then
             PonerFocoBtn Me.cmdAceptar
             KeyAscii = 0
         End If
@@ -1223,7 +1229,7 @@ Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAux_LostFocus(index As Integer)
-    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux(index), Modo) Then Exit Sub
     'If Index = 0 Then PonerFormatoEntero txtAux(Index)
 End Sub
 

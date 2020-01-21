@@ -958,7 +958,7 @@ Dim I As Integer
         End If
     End If
         
-    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, I = 1, "ALV", "", CByte(txtCopia.Text), True, False
+    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, I = 1, "ALV", "", CByte(txtCopia.Text), True, False, False
 End Sub
 
 
