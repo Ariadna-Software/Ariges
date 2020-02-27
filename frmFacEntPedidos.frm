@@ -421,7 +421,7 @@ Begin VB.Form frmFacEntPedidos
             Object.ToolTipText     =   "Pasar pedido a oferta"
          EndProperty
          BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Crear pedido proveedor"
          EndProperty
          BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Duplicar pedido"
@@ -610,25 +610,25 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(3)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(18)"
-      Tab(1).Control(4)=   "Label1(27)"
-      Tab(1).Control(5)=   "Label1(28)"
-      Tab(1).Control(6)=   "imgBuscar(11)"
-      Tab(1).Control(7)=   "Text1(19)"
-      Tab(1).Control(8)=   "Text1(20)"
+      Tab(1).Control(0)=   "Text1(34)"
+      Tab(1).Control(1)=   "Text1(33)"
+      Tab(1).Control(2)=   "Text1(29)"
+      Tab(1).Control(3)=   "Text1(30)"
+      Tab(1).Control(4)=   "FrameHco"
+      Tab(1).Control(5)=   "Text1(25)"
+      Tab(1).Control(6)=   "Text1(24)"
+      Tab(1).Control(7)=   "Text1(23)"
+      Tab(1).Control(8)=   "Text1(22)"
       Tab(1).Control(9)=   "Text1(21)"
-      Tab(1).Control(10)=   "Text1(22)"
-      Tab(1).Control(11)=   "Text1(23)"
-      Tab(1).Control(12)=   "Text1(24)"
-      Tab(1).Control(13)=   "Text1(25)"
-      Tab(1).Control(14)=   "FrameHco"
-      Tab(1).Control(15)=   "Text1(30)"
-      Tab(1).Control(16)=   "Text1(29)"
-      Tab(1).Control(17)=   "Text1(33)"
-      Tab(1).Control(18)=   "Text1(34)"
+      Tab(1).Control(10)=   "Text1(20)"
+      Tab(1).Control(11)=   "Text1(19)"
+      Tab(1).Control(12)=   "imgBuscar(11)"
+      Tab(1).Control(13)=   "Label1(28)"
+      Tab(1).Control(14)=   "Label1(27)"
+      Tab(1).Control(15)=   "Label1(18)"
+      Tab(1).Control(16)=   "Label1(5)"
+      Tab(1).Control(17)=   "Label1(3)"
+      Tab(1).Control(18)=   "Label1(45)"
       Tab(1).ControlCount=   19
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
@@ -2449,35 +2449,70 @@ Private Sub chkPedPorCliente_KeyPress(KeyAscii As Integer)
      
 End Sub
 
+
+
+
+
+
+
 Private Sub chkRecogeClien_Click()
-     If Modo = 3 Or Modo = 4 Then
-        'RECOGE EL CLIENTE
-        CtaBancoPropi = "RECOGE EL CLIENTE"
-        CodZona = 19
-        If Me.chkRecogeClien.Value = 1 Then
-            
-               
-                If InStr(1, Text1(CodZona).Text, CtaBancoPropi) > 0 Then
-                    
-                Else
-                    If Len(Text1(CodZona).Text) < 62 Then
-                        Text1(CodZona).Text = CtaBancoPropi & " " & Text1(CodZona).Text
-                    End If
-                End If
-        Else
-                If InStr(1, Text1(CodZona).Text, CtaBancoPropi) > 0 Then Text1(CodZona).Text = Replace(Text1(CodZona).Text, CtaBancoPropi, "")
-        End If
-        CtaBancoPropi = ""
-        CodZona = 0
-    End If
-  
+    'RECOGE EL CLIENTE
+    If Modo = 3 Or Modo = 4 Then HacerCheckParaObservaciones True, chkRecogeClien.Value
+      
 End Sub
+
+
+Private Sub HacerCheckParaObservaciones(RecogeCliente As Boolean, Poner As Boolean)
+    
+    If vParamAplic.NumeroInstalacion <> vbHerbelca Then Exit Sub
+    
+    'En el campo observacione1 vamos a poner RECOGECLIEN y /o SERVIR COMPLETO
+    
+    'Primero Recoge cliente
+    If RecogeCliente Then
+        CtaBancoPropi = "RECOGE EL CLIENTE"
+    Else
+        CtaBancoPropi = "SERVIR COMPLETO"
+    End If
+    
+    If Poner Then
+        'Añadimos
+        
+        If InStr(1, Text1(19).Text, CtaBancoPropi) = 0 Then
+            'AÑADIMOS
+            CodZona = 0
+            If Not RecogeCliente Then CodZona = InStr(1, Text1(19).Text, "RECOGE EL CLIENTE")
+            
+            If CodZona = 0 Then
+                Text1(19).Text = Trim(CtaBancoPropi & " " & Text1(19).Text)
+            Else
+                Text1(19).Text = Trim("RECOGE CLIENTE  " & CtaBancoPropi & Mid(Text1(19).Text, CodZona + 16))
+            End If
+        End If
+    Else
+        'QUITAMOS
+        If InStr(1, Text1(19).Text, CtaBancoPropi) > 0 Then Text1(19).Text = Trim(Replace(Text1(19).Text, CtaBancoPropi, ""))
+    End If
+    
+    
+    
+    
+    CtaBancoPropi = ""
+    CodZona = 0
+        
+
+End Sub
+
 
 Private Sub chkRecogeClien_KeyPress(KeyAscii As Integer)
 
 
     KEYpress KeyAscii
      
+End Sub
+
+Private Sub chkServirCom_Click()
+    If Modo = 3 Or Modo = 4 Then HacerCheckParaObservaciones False, chkServirCom.Value
 End Sub
 
 Private Sub chkServirCom_KeyPress(KeyAscii As Integer)
@@ -3187,7 +3222,7 @@ End Sub
 
 
 Private Sub DataGrid1_DblClick()
-    'STOP
+    'ST OP
     If Modo = 2 Then
         If Not Data2.Recordset.EOF Then AbrirForm_Articulos DBLet(Data2.Recordset!codArtic, "T")
     End If
@@ -3259,7 +3294,7 @@ Error1:
 End Sub
 
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     If Me.Tag <> "" Then
         Me.Tag = ""
         PonerCampos
@@ -3299,6 +3334,7 @@ Private Sub Form_Load()
         End If
         .Buttons(16).Image = 40 'confirmación de entrega
         .Buttons(17).Image = 43 'confirmación de entrega
+        .Buttons(18).Image = 38 'pasr pedprov
         
         .Buttons(19).Image = 32  '
         .Buttons(20).Image = 34  '
@@ -3310,15 +3346,15 @@ Private Sub Form_Load()
         
         
         'Para busar imagen
-        'Dim H As Integer
-        'H = 30
-        '.Buttons(19).Image = H  'Salir
-        '.Buttons(20).Image = H + 1 'Salir
-        '.Buttons(21).Image = H + 2
-        '.Buttons(btnPrimero).Image = H + 3
-        '.Buttons(btnPrimero + 1).Image = H + 4
-        '.Buttons(btnPrimero + 2).Image = H + 5
-        '.Buttons(btnPrimero + 3).Image = H + 6
+'        Dim H As Integer
+'        H = 13
+'        .Buttons(19).Image = H  'Salir
+'        .Buttons(20).Image = H + 1 'Salir
+'        .Buttons(21).Image = H + 2
+'        .Buttons(btnPrimero).Image = H + 3
+'        .Buttons(btnPrimero + 1).Image = H + 4
+'        .Buttons(btnPrimero + 2).Image = H + 5
+'        .Buttons(btnPrimero + 3).Image = H + 6
         
         
     End With
@@ -5552,7 +5588,10 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         
         Case 17: mnPasarA_Oferta_Click
                 
-                
+        Case 18
+            'Crear pedido proveedor
+            CreaPedidoProveedor
+            
         Case 19
             If Modo <> 2 Then Exit Sub
             frmListado2.Opcion = 51
@@ -6809,7 +6848,10 @@ Dim b As Boolean
         'Mantenimiento lineas
         Toolbar1.Buttons(10).Enabled = b And Not EsHistorico
         Me.mnLineas.Enabled = b And Not EsHistorico
-        
+        Toolbar1.Buttons(15).Enabled = b And Not EsHistorico
+         Toolbar1.Buttons(16).Enabled = b And Not EsHistorico
+        Toolbar1.Buttons(17).Enabled = b And Not EsHistorico
+        Toolbar1.Buttons(18).Enabled = b And Not EsHistorico
         
         Toolbar1.Buttons(19).Enabled = b And Not EsHistorico
         If vParamAplic.NumeroInstalacion = vbFenollar Then
@@ -8398,7 +8440,8 @@ Dim mi As String
                 mi = Data1.Recordset!CodTraba
                 mi = DevuelveDesdeBD(conAri, "login", "straba", "codtraba", mi)
                 If mi <> "" Then
-                    mi = DevuelveDesdeBD(conAri, "nivelariges", "usuarios.usuarios", "login", mi, "T")
+                    mi = UCase(mi)
+                    mi = DevuelveDesdeBD(conAri, "nivelariges", "usuarios.usuarios", "ucase(login)", mi, "T")
                     If mi <> "" Then
                         If Val(mi) > 0 Then
                             mi = ""
@@ -10190,4 +10233,30 @@ Dim Co As Long
     RN.Close
     Set RN = Nothing
 End Function
+
+
+Private Sub CreaPedidoProveedor()
+Dim C As String
+
+    If Modo <> 2 Then Exit Sub
+    If Data1.Recordset.EOF Then Exit Sub
+    
+
+
+
+    C = "sliped left join sartic on sliped.codartic=sartic.codartic left join sprove on sartic.codprove=sprove.codprove"
+    txtAnterior = "artvario = 1 and numpedcl=" & Data1.Recordset!NumPedcl & " AND 1"
+    C = DevuelveDesdeBD(conAri, "count(*)", C, txtAnterior, "1")
+    
+    If Val(C) = 0 Then
+        MsgBox "Ninguna linea para poder generar pedido de proveedor", vbExclamation
+        Exit Sub
+    End If
+
+    Screen.MousePointer = vbHourglass
+    frmListado5.OtrosDatos = Data1.Recordset!NumPedcl
+    frmListado5.OpcionListado = 32
+    frmListado5.Show vbModal
+
+End Sub
 

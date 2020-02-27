@@ -1111,7 +1111,7 @@ Dim Impor As Currency
     End If
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
     If VerAlbaranes Then RefrescarAlbaranes
     VerAlbaranes = False
@@ -1424,7 +1424,17 @@ Dim C As String
                     If DateAdd("yyyy", -5, Now) > CDate(Text1(index).Text) Then
                         MsgBox "Fecha factura incorrecta. Fuera plazo años presentacion" & vbCrLf & vbCrLf & Text1(index).Text, vbExclamation
                         Text1(index).Text = ""
+                    Else
+                        If CDate(Text1(index).Text) > DateAdd("yyyy", 1, vEmpresa.FechaFin) Then
+                            If MsgBox("Fecha factura mayor que fin de ejercicios" & vbCrLf & vbCrLf & "¿Continuar?", vbQuestion + vbYesNoCancel) <> vbYes Then
+                                Text1(index).Text = ""
+                                PonerFoco Text1(index)
+                            End If
+                        End If
                     End If
+                    
+                    
+                    
                 End If
                 If Text1(index).Text <> "" Then
                     ' No debe existir el número de factura para el proveedor en hco
@@ -1699,7 +1709,9 @@ Dim I As Byte
     End If
     
     'Comprobar que la fecha de RECEPCION esta dentro de los ejercicios contables
-    ResultadoFechaContaOK = EsFechaOKConta(CDate(Text1(2).Text), True)
+    'ResultadoFechaContaOK = EsFechaOKConta(CDate(Text1(2).Text), True)
+    ResultadoFechaContaOK = EsFechaOKConta_SinSII(CDate(Text1(2).Text), True)
+    
     If ResultadoFechaContaOK > 0 Then
         If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
         Exit Function

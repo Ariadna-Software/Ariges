@@ -1190,7 +1190,7 @@ On Error GoTo EBloqueaRegistro
         
 EBloqueaRegistro:
     If Err.Number <> 0 Then
-        MuestraError Err.Number, "Bloqueo tabla"
+        MuestraError Err.Number, "Bloqueo tabla" & vbCrLf & Err.Description
         TerminaBloquear
     End If
 End Function
@@ -2815,14 +2815,24 @@ Dim ArtiVarios As String
             cad = ""
             While Not miRsAux.EOF
                 
+                
+                
+                
                 ArtiVarios = ""
                 'SOLO HERBELCA
-                If vParamAplic.NumeroInstalacion = 2 Then
-                    'Si el almacen es gandia y castellon NO sale si el stock es cero
+                If vParamAplic.NumeroInstalacion = vbHerbelca Then
+                    'Si el almacen es gandia y castellon NO sale si el stock no es cero
                     If miRsAux!codAlmac = 2 Or miRsAux!codAlmac = 4 Then
-                        'If miRsAux!CanStock <= 0 Then ArtiVarios = "NO"
+                        '#TANIA#
                         If miRsAux!CanStock <> 0 Then
-                            If miRsAux!artvario = 0 Then ArtiVarios = "NO"
+                            If miRsAux!artvario = 0 Then
+                            
+                                'Febrero 2020. Quitamos esta caracterisitca.
+                                'Avisara de todos los pedidos pendientes de servir
+                                'If DBLet(miRsAux!CanStock, "N") - DBLet(miRsAux!cantidad, "N") > 0 Then ArtiVarios = "NO"
+                                
+                                
+                            End If
                         End If
                     End If
                 End If

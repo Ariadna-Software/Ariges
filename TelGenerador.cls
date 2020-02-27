@@ -133,6 +133,7 @@ Public Function cargarBaseDatosMOVISTAR(mfichero As String, ByRef LB As Label) A
 End Function
 
 Private Sub cargaDatosPrincipales(CADENA As String)
+    
     Dim mSQL As String
     With mdbFac2
         mSQL = "insert into telefono.ficheros values("
@@ -3489,8 +3490,9 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
     
     cargarBaseDatosVODAFONE = False
     '-- el fichero existe y vamos a procesar sus datos, lo abrimos
+
     mFicheroCorto = Right(mfichero, 12)
-    
+  
     EliminarTodoElFichero mFicheroCorto, LB
 
     
@@ -3510,6 +3512,8 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
     '--- Para no tener que pasar variables a todas y cada un
     'ya que las funciones las he hecho copiando pegando
     'del .NET
+    
+    
     GuardarNombreFichero = mFicheroCorto
     
     CadenaInsert = ""
@@ -3649,6 +3653,7 @@ Public Function cargarBaseDatosVODAFONE(mfichero As String, ByRef LB As Label) A
                 Case Else ' desconocido
                     '-- Registro no contemplado
                     '
+                    Debug.Print leido
                     If Mid(leido, 6, 3) = "CAB" Then
                         'Son las cabeceras
                         '
@@ -4354,7 +4359,7 @@ Dim I As Integer
     
     If Conceptos <> "|" Then Conceptos = Mid(Conceptos, 2)
     While Conceptos <> ""
-        Debug.Print Conceptos
+        'Debug.Print Conceptos
         I = InStr(1, Conceptos, "|")
         If I = 0 Then
             If Conceptos <> "" Then Err.Raise 513, , "Comprobando cuotas trafico vodafone(1)"
@@ -4470,7 +4475,7 @@ Dim TotalPrevio As Currency
 Dim ImporteAjusteMinimo As Currency
 Dim ImporteparaElCalculoDelMinimo As Currency
 Dim I As Integer
-
+Dim PorTelefono As String
 
     On Error GoTo eEmitirFacturasVODAFONE
     
@@ -4487,16 +4492,34 @@ Dim I As Integer
     Set RTef = New ADODB.Recordset
     Set RsCuotasRefacturar = New ADODB.Recordset
     
- 
+    
+    If False Then
+        mSQL = "select distinct(substring(telef,1,9)) elTelefono from vodafonetxt.dcul_cab"
+        mSQL = mSQL & " where  not substring(telef,1,9) IN (select IdTelefono from sclientfno)"
+        I = 0
+        RTef.Open mSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        mSQL = ""
+        While Not RTef.EOF
+            mSQL = mSQL & "-" & RTef!eltelefono
+            I = I + 1
+            RTef.MoveNext
+        Wend
+        RTef.Close
+        
+        If I > 0 Then Err.Raise 513, , "Telefonos NO existe:" & vbCrLf & mSQL
+        
+    End If
+    
+    
     Set vC = New CTiposMov
     If Not vC.Leer("FAT") Then Exit Function
     
-    If vParamAplic.FacturasInternasTelefonia Then
-        Set vI = New CTiposMov                          'LAS INTERNAS
-        If Not vI.Leer("FAI") Then Exit Function
-        ContadorFAI_Incial = vI.Contador
-        vI.Contador = vI.Contador + 1000  'para evitar problemas luego
-    End If
+    
+    Set vI = New CTiposMov                          'LAS INTERNAS
+    If Not vI.Leer("FAI") Then Exit Function
+    ContadorFAI_Incial = vI.Contador
+    vI.Contador = vI.Contador + 1000  'para evitar problemas luego
+
         
     mSQL = DevuelveDesdeBD(conAri, "codigiva", "sartic", "codartic", vParamAplic.ArtiTelefonia, "T")
     mSQL = DevuelveDesdeBD(conConta, "porceiva", "tiposiva", "codigiva", mSQL)
@@ -4505,7 +4528,9 @@ Dim I As Integer
     mValorIva = CCur(mSQL)
         
     mSQL = "select distinct(substring(telef,1,9)) elTelefono from vodafonetxt.dcul_cab order by 1"
-             
+    If False Then
+        mSQL = ""
+    End If
     IntentaEliminarFicheroLog
     NF = FreeFile()
     Open App.Path & "\emitefac.log" For Output As #NF
@@ -4513,7 +4538,7 @@ Dim I As Integer
     RTef.Open mSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RTef.EOF
         I = I + 1
-        Lbl.Caption = I & "  " & RTef!ELTELEFONO
+        Lbl.Caption = I & "  " & RTef!eltelefono
         Lbl.Refresh
         
         If (I Mod 50) = 0 Then DoEvents
@@ -4523,12 +4548,12 @@ Dim I As Integer
                 'Cogera los datos de la sclien
                 mSQL = "select nifclien nifclien,nomclien,domclien,codpobla,pobclien,proclien,operador,CodDirec,sclientfno.codclien"
                 mSQL = mSQL & " from sclien,sclientfno  where sclien.codclien=sclientfno.codclien AND "
-                mSQL = mSQL & " IdTelefono = " & mdbFac2.texto(RTef!ELTELEFONO)
+                mSQL = mSQL & " IdTelefono = " & mdbFac2.texto(RTef!eltelefono)
                 
                 miRsAux.Open mSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 'NO PUEDE SER EOF
                 
-                If miRsAux.EOF Then Err.Raise 513, , "No existe NIF para telefono: " & RTef!ELTELEFONO
+                If miRsAux.EOF Then Err.Raise 513, , "No existe NIF para telefono: " & RTef!eltelefono
                 
                 If miRsAux!nifClien = vParam.CifEmpresa Then
                     vI.Contador = vI.Contador + 1
@@ -4551,7 +4576,7 @@ Dim I As Integer
                 
                 mSQL = mSQL & mdbFac2.texto(mfichero) & "," ' Fichero
                 mSQL = mSQL & mdbFac2.Fecha(mfecha) & "," ' Fecha
-                mSQL = mSQL & mdbFac2.texto(RTef!ELTELEFONO) & "," ' Telefono
+                mSQL = mSQL & mdbFac2.texto(RTef!eltelefono) & "," ' Telefono
                 
                 
                 mSQL = mSQL & mdbFac2.texto(miRsAux!nifClien) & ","
@@ -4583,7 +4608,7 @@ Dim I As Integer
                         Apell1 = "": Apell2 = ""
                         If miRsAux.EOF Then Err.Raise 513, , "Error leyendo dpto /dir : " & miRsAux.Source
                     Else
-                        Print #NF, "Codirec: " & RTef!ELTELEFONO & " " & Apell2
+                        Print #NF, "Codirec: " & RTef!eltelefono & " " & Apell2
                     End If
                 End If
                 
@@ -4614,12 +4639,12 @@ Dim I As Integer
     vC.Contador = vC.Contador - 1
     vC.IncrementarContador vC.TipoMovimiento
     'Ver contador FAIs
-    If vParamAplic.FacturasInternasTelefonia Then
-        If vI.Contador <> ContadorFAI_Incial Then
-            vI.Contador = ContadorFAI_Incial - 1
-            vI.IncrementarContador vI.TipoMovimiento
-        End If
+    
+    If vI.Contador <> ContadorFAI_Incial Then
+        vI.Contador = ContadorFAI_Incial - 1
+        vI.IncrementarContador vI.TipoMovimiento
     End If
+
     
     
     'Hay cuotas VODAFONE refacturables
@@ -5288,7 +5313,7 @@ Dim Id As Long
 '                dl.Importe = dr.Importe;
                
             Id = Id + 1
-            SQ = ", (" & Id & "," & DBSet(miRsAux!fact_no, "T") & "," & DBSet(miRsAux!telef_ext, "T") & "," & DBSet(miRsAux!Tipo, "T")
+            SQ = ", (" & Id & "," & DBSet(miRsAux!fact_no, "T") & "," & DBSet(miRsAux!TELEF_EXT, "T") & "," & DBSet(miRsAux!Tipo, "T")
             SQ = SQ & "," & DBSet(miRsAux!Tipo, "T") & "," & DBSet(miRsAux!Tipo, "T") & "," & DBSet(miRsAux!Destino, "T", "S") & ","
             SQ = SQ & DBSet(miRsAux!Destino, "T", "S") & "," & DBSet(miRsAux!no_recep, "T", "S") & ",'" & Format(miRsAux!fecha_hora, "mmdd") & "','"
             SQ = SQ & Format(miRsAux!fecha_hora, "hhnn") & "','Segundos'," & DBSet(miRsAux!duracion, "N") & "," & DBSet(miRsAux!Importe, "N") & ")"
@@ -5332,7 +5357,7 @@ Dim Id As Long
             CadenaInsert = DBSet(Now, "F") & "," & DBSet(Now, "F")
         Else
             'fecha_inicio  fecha_fin
-            CadenaInsert = DBSet(miRsAux!fecha_inicio, "F") & "," & DBSet(miRsAux!fecha_fin, "F")
+            CadenaInsert = DBSet(miRsAux!FECHA_INICIO, "F") & "," & DBSet(miRsAux!fecha_fin, "F")
             Espera 1
         End If
         miRsAux.Close

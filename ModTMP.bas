@@ -354,13 +354,13 @@ Private Function TotMovimientosStock2(cadSQL As String, vTipomovi As Byte) As Si
 'Para un tipo de Movimiento vtipomovi(0=Salida, 1=Entrada) devolver
 'la cantidad de stock para esos registros de la select
 Dim RSmov As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 
         TotMovimientosStock2 = 0
-        Cad = cadSQL & " AND tipomovi=" & vTipomovi
+        cad = cadSQL & " AND tipomovi=" & vTipomovi
         
         Set RSmov = New ADODB.Recordset
-        RSmov.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RSmov.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not RSmov.EOF Then
             If Not IsNull(RSmov.Fields(0).Value) Then _
@@ -375,15 +375,15 @@ Private Sub TotMovimientosStockAgrup(cadSQL As String, ByRef Entradas As Currenc
 'Para un tipo de Movimiento vtipomovi(0=Salida, 1=Entrada) devolver
 'la cantidad de stock para esos registros de la select
 Dim RSmov As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 
     
         Entradas = 0
         Salidas = 0
-        Cad = cadSQL & " GROUP BY tipomovi"
+        cad = cadSQL & " GROUP BY tipomovi"
         
         Set RSmov = New ADODB.Recordset
-        RSmov.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RSmov.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
         While Not RSmov.EOF
@@ -1408,13 +1408,13 @@ Dim NuevoCliente As Boolean
                 FinBucle = True
             Else
                 NuevoCliente = Cliente <> RS!codClien
-                'If RS!codClien = 925 Then Stop
+                'If RS!codClien = 925 Then St op
             End If
             If NuevoCliente Then
                 Lbl.Caption = "Reg. cliente: " & Cliente
                 Lbl.Refresh
                 If SQL <> "" Then
-                    'If Cliente = 925 Then Stop
+                    'If Cliente = 925 Then St op
                     If PorAgente Then T5 = T1 + T4
                     'importe1,importe2,importe3,importe4,importe5
                     SQL = SQL & DBSet(T1, "N") & "," & DBSet(T2, "N") & "," & DBSet(T3, "N") & "," & DBSet(T4, "N") & "," & DBSet(T5, "N") & ","

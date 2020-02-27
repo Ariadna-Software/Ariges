@@ -602,7 +602,11 @@ Dim mGen2 As TelGenerador
     If MsgBox("Seguro que desea eliminar el fichero?", vbQuestion + vbYesNo) <> vbYes Then Exit Sub
     
     Screen.MousePointer = vbHourglass
+    
     Set mGen2 = New TelGenerador
+
+'mGen2.EliminarTodoElFichero "CI0915168016", Label1(5)
+
 
     mGen2.EliminarTodoElFichero cboFichero(0).Text, Label1(5)
     
@@ -1057,7 +1061,8 @@ Private Sub HacerImportacion()
         Else
             'Comprobaremos si el fichero NO ha sido PROCESADO del todo, es decir, metido tb en scafac,slifac...
             'FALTA###
-            
+                    
+                    
             Mens = Text1.Text
             
             
@@ -1082,11 +1087,16 @@ Private Sub HacerImportacion()
             
     End If
     
-    
+    If Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex) = 3 Then
+        If Text1.Text <> "" Then
+            If InStr(1, Text1.Text, ".") > 0 Then Mens = Mens & vbCrLf & "El fichero de VODAFONE no debe llevar extension"
+        End If
+    End If
+            
     
     If Mens <> "" Then
         Mens = "Campos obligados" & vbCrLf & vbCrLf & Mens
-        MsgBox Mens, vbInformation
+        MsgBox Mens, vbExclamation
         Exit Sub
     End If
     
@@ -1273,7 +1283,8 @@ Private Sub HacerImportacion()
                 Shell "notepad " & App.Path & "\emitefac.log", vbMaximizedFocus
             End If
         End If
-        mGen2.calculaInformeDescuentos Right(Text1, 12)
+
+        mGen2.calculaInformeDescuentos Mens
     
     
     

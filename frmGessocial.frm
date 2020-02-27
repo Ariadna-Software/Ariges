@@ -8,7 +8,6 @@ Begin VB.Form frmPpalGessocial
    ClientWidth     =   12510
    Icon            =   "frmGessocial.frx":0000
    LinkTopic       =   "Form1"
-   MinButton       =   0   'False
    ScaleHeight     =   4455
    ScaleWidth      =   12510
    ShowInTaskbar   =   0   'False
@@ -150,7 +149,7 @@ Dim QuiereCambiarEmpresa As Boolean
 Private Sub AccionesCerrar()
     On Error Resume Next
     
-    Unload frmPpal
+   ' Unload frmPpal
     
     'cerrar las conexiones
     conn.Close
@@ -160,7 +159,7 @@ End Sub
 
 
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
 End Sub
 

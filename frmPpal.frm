@@ -395,7 +395,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "12:01"
+            TextSave        =   "17:30"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1445,12 +1445,16 @@ Begin VB.MDIForm frmPpal
             Caption         =   "Facturacion albaranes gasolinera"
             Index           =   3
             Begin VB.Menu mnGasolFacturar 
-               Caption         =   "Combustible"
+               Caption         =   "Prevision"
                Index           =   0
             End
             Begin VB.Menu mnGasolFacturar 
-               Caption         =   "Tienda"
+               Caption         =   "Combustible"
                Index           =   1
+            End
+            Begin VB.Menu mnGasolFacturar 
+               Caption         =   "Tienda"
+               Index           =   2
             End
          End
          Begin VB.Menu mnGasolinera 
@@ -2554,7 +2558,8 @@ Dim b As Boolean
     
     '--------------------
     'TElefonia
-    mnTelefonia.visible = vParamAplic.TieneTelefonia2 > 0
+    
+    PuntoDeMenuVisible mnTelefonia, vParamAplic.TieneTelefonia2 > 0
     If vParamAplic.TieneTelefonia2 > 0 Then
         'Catadau
         'If vParamAplic.TieneTelefonia2 = 2 Then Me.mnTelefonia1(2).Caption = "Importar fichero COARVAL"
@@ -2611,7 +2616,8 @@ Dim b As Boolean
     PuntoDeMenuVisible Me.mnAdministra(6), vParamAplic.GestionFlotas
        
     'Obras
-    Me.mnObra1.visible = vParamAplic.HayDeparNuevo = 2
+    PuntoDeMenuVisible mnObra1, vParamAplic.HayDeparNuevo = 2
+    
     'Mensajeria
     mnUtiMensInt.visible = False
     mnBarra21.visible = False
@@ -2725,7 +2731,7 @@ Dim b As Boolean
         b = True
         If vParamAplic.NumeroInstalacion = vbTaxco Then
             mnMtoEuler(1).Caption = "Orden de taller"
-            mnMtoEuler(2).Caption = "Albaran tienda ALVIC"
+            mnMtoEuler(2).Caption = "Gestoria"
 
         End If
     End If
@@ -2733,8 +2739,8 @@ Dim b As Boolean
     PuntoDeMenuVisible mnUtilidadesVarias(4), b 'vParamAplic.NumeroInstalacion = vbEuler
     PuntoDeMenuVisible mnMtoEuler(0), b
     PuntoDeMenuVisible mnMtoEuler(1), b
-    'ALE Euler trabajo exterior    ---> Taxco  Albaran tienda
-    PuntoDeMenuVisible mnMtoEuler(2), vParamAplic.NumeroInstalacion = vbEuler  'b
+    'ALE Euler trabajo exterior    ---> Taxco  GESTORIA
+    PuntoDeMenuVisible mnMtoEuler(2), b And vUsu.Nivel2 < 2
     
     PuntoDeMenuVisible mnMtoEuler(3), vParamAplic.NumeroInstalacion = vbEuler  'b
     PuntoDeMenuVisible mnFacEstadistica2(8), vParamAplic.NumeroInstalacion = vbEuler  'b
@@ -3171,11 +3177,17 @@ End Sub
 
 Private Sub mnAlmArticulos_Click()
 
-   
+  Dim ElNuevo As Boolean
 
 
     PonerCaption False, mnAlmArticulos.Caption
-    If vParamAplic.HaciendoFrmulariosGrandes Then
+    
+    ElNuevo = vParamAplic.HaciendoFrmulariosGrandes
+    
+    ElNuevo = True 'Siempre sale el grande
+    
+    
+    If ElNuevo Then
         frmAlmArticulosGr.DatosADevolverBusqueda = ""
         frmAlmArticulosGr.Show vbModal
     Else
@@ -3855,13 +3867,21 @@ End Sub
 
 
 Private Sub mnFacClientes_Click()
+Dim VerGrande As Boolean
 'Mantenimiento de Clientes
 
-    If vUsu.Nivel2 = 2 Then Exit Sub
-
+   
+    
 
     PonerCaption False, "Clientes"
+    VerGrande = False
     If vParamAplic.HaciendoFrmulariosGrandes Then
+        VerGrande = True
+    Else
+        If vParamAplic.NumeroInstalacion = vbTaxco Then VerGrande = True
+    End If
+    
+    If VerGrande Then
         frmFacClientesGr.Show vbModal
     Else
         frmFacClientes.Show vbModal
@@ -3897,7 +3917,7 @@ Private Sub mnFacEntAlbaran_Click()
 
     PonerCaption False, mnFacEntAlbaran.Caption
 
-    If vParamAplic.TipoFormularioClientes = 0 Then
+      If vParamAplic.TipoFormularioClientes = 0 Then
     
     
     
@@ -4365,8 +4385,16 @@ Private Sub mnFrecuencias_Click()
 End Sub
 
 Private Sub mnGasolFacturar_Click(index As Integer)
-    frmListadoPed.codClien = IIf(index = 0, "ALD", "ALB")
-    AbrirListadoPed (52)
+
+    If index = 0 Then
+        frmListado5.OpcionListado = 31
+        frmListado5.Show vbModal
+    Else
+
+        frmListadoPed.codClien = IIf(index = 1, "ALD", "ALB")
+        AbrirListadoPed (52)
+    End If
+
 End Sub
 
 Private Sub mnGasolinera_Click(index As Integer)
@@ -4697,7 +4725,11 @@ End Sub
 
 Private Sub mnRepFactAlb_Click()
 'Facturacion de Albaranes de Reparacion
-    frmListadoPed.codClien = "ALR" 'utilizamos esta vble para pasarle el tipo de movimiento
+    If vParamAplic.NumeroInstalacion = vbTaxco Then
+        frmListadoPed.codClien = "ALO" 'utilizamos esta vble para pasarle el tipo de movimiento
+    Else
+        frmListadoPed.codClien = "ALR" 'utilizamos esta vble para pasarle el tipo de movimiento
+    End If
     AbrirListadoPed (52)
 End Sub
 
@@ -4752,7 +4784,12 @@ End Sub
 
 Private Sub mnRepPrevFact_Click()
 ' Previsión Facturacion de Albaranes de Reparacion
-    frmListadoPed.codClien = "ALR" 'utilizamos esta vble para pasarle el tipo de movimiento
+
+    If vParamAplic.NumeroInstalacion = vbTaxco Then
+        frmListadoPed.codClien = "ALO" 'utilizamos esta vble para pasarle el tipo de movimiento
+    Else
+        frmListadoPed.codClien = "ALR" 'utilizamos esta vble para pasarle el tipo de movimiento
+    End If
     AbrirListadoPed (50) 'NO IMPRIME LISTADO
 
 End Sub
@@ -4937,14 +4974,15 @@ Private Sub mnTelefonia2_Click(index As Integer)
                 frmTelefono1.Show vbModal
                 If CadenaDesdeOtroForm = "" Then Exit Sub
                 Screen.MousePointer = vbHourglass
-                Espera 0.5
+                Espera 0.2
                 DoEvents
+                FuerzaCiereFormTelefonia
             End If
         
             frmTelefono1.Opcion = 0
             frmTelefono1.Show vbModal
 
-
+            Debug.Print ""
 
     Case 7
         frmTelBolbaite.QueOpcion = 3
@@ -5954,7 +5992,7 @@ Private Sub InsertaIconoPDF()
     imgListComun_OM2.ListImages.Add , , Me.imgListComun.ListImages(54).Picture
     imgListComun_BN2.ListImages.Add , , Me.imgListComun.ListImages(54).Picture
     ImgListComun2.ListImages.Add , , Me.imgListComun.ListImages(54).Picture
-    'Stop
+    'Sto p
      
 einsicono:
     Err.Clear
@@ -5976,4 +6014,10 @@ End Sub
 
 
 
+
+Private Sub FuerzaCiereFormTelefonia()
+    On Error Resume Next
+    Unload frmTelefono1
+    If Err.Number <> 0 Then Err.Clear
+End Sub
 

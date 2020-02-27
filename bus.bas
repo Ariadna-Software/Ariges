@@ -1383,7 +1383,7 @@ End Function
 
 'Lo que hace es comprobar que si la resolucion es mayor
 'que 800x600 lo pone en el 400
-Public Sub AjustarPantalla(ByRef Formulario As Form)
+Public Sub AjustarPantalla(ByRef formulario As Form)
 '    If Screen.Width > 13000 Then
 '        formulario.Top = 400
 '        formulario.Left = 400
@@ -1895,6 +1895,32 @@ Dim F2 As Date
 End Function
 
 
+'Para proveedores la necesito
+Public Function EsFechaOKConta_SinSII(Fecha As Date, DejarContinuarSII As Boolean) As Byte
+Dim F2 As Date
+    
+    
+    If vEmpresa.FechaIni > Fecha Then
+        EsFechaOKConta_SinSII = 1
+    Else
+        F2 = DateAdd("yyyy", 1, vEmpresa.FechaFin)
+        If Fecha > F2 Then
+            EsFechaOKConta_SinSII = 2
+        Else
+            'OK. Dentro de los ejercicios contables
+            EsFechaOKConta_SinSII = 0
+        End If
+    End If
+    If EsFechaOKConta_SinSII = 0 Then
+       
+    Else
+        MensajeFechaOkConta = "Fuera de ejercicios contables"
+    End If
+End Function
+
+
+
+
 
 '--------------------------------------------------------------------
 '-------------------------------------------------------------------
@@ -2230,6 +2256,10 @@ Dim DejandoContinuar As String
 
     On Error GoTo EPuedeEliminarCliente
     PuedeEliminarCliente = False
+
+    If vUsu.Nivel2 = 2 Then Exit Function  'En taxco
+
+
 
     'Tabla de partes de trabajo
     cad = DevuelveDesdeBD(conAri, "Count(*)", "sliparte", "codclien", CStr(codClien))

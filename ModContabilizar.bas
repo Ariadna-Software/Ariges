@@ -61,11 +61,18 @@ Dim SQL As String
     
     SQL = "CREATE TEMPORARY TABLE tmpFactu ( "
     If cadTabla = "scafac" Then
-        SQL = SQL & "codtipom char(3) NOT NULL default '',"
+        SQL = SQL & "codtipom char(3) "
+        If vParamAplic.NumeroInstalacion = vbFontenas Then SQL = SQL & " COLLATE latin1_spanish_ci "
+        SQL = SQL & "NOT NULL default '',"
         SQL = SQL & "numfactu mediumint(7) unsigned NOT NULL default '0',"
     Else
         SQL = SQL & "codprove int(6) unsigned NOT NULL default '0',"
-        SQL = SQL & "numfactu varchar(20)  NOT NULL ,"
+        SQL = SQL & "numfactu varchar(20) "
+        
+        
+        If vParamAplic.NumeroInstalacion = vbFontenas Then SQL = SQL & " COLLATE latin1_spanish_ci "
+        
+        SQL = SQL & " NOT NULL  ,"
     End If
     SQL = SQL & "fecfactu date NOT NULL default '0000-00-00') "
     conn.Execute SQL
@@ -3003,7 +3010,15 @@ Dim LineaCentroCoste  As Boolean
         SQL = " SELECT codigiva,'" & SQL & "' as LetraSer,slifac.codtipom," & cad & cadCampo & " as cuenta,sum(importel) as importe"
         
         'Tiene analitica. Luego el codtraba tiene que aparecer
-        If vCCos > 0 Then SQL = SQL & "," & Aux & " as CodTraba"
+        If vCCos > 0 Then
+            If vParamAplic.ContabilidadNueva Then
+                SQL = SQL & ", coalesce(slifac.codccost ,sfamia.codccost) as codccost"
+            Else
+                SQL = SQL & "," & Aux & " as CodTraba"
+            End If
+        End If
+        
+        
         
         SQL = SQL & " FROM ((slifac inner join stipom on slifac.codtipom=stipom.codtipom) "
         SQL = SQL & " inner join sartic on slifac.codartic=sartic.codartic) "
@@ -3039,8 +3054,13 @@ Dim LineaCentroCoste  As Boolean
         SQL = SQL & " GROUP BY "
         
         'Si tiene mas de una trabajador con ditintos CC agrupamos en 1er nivel por codtraba
-        If vCCos = 2 Then SQL = SQL & " codtraba, "
-                  
+        If vCCos = 2 Then
+            If vParamAplic.ContabilidadNueva Then
+                SQL = SQL & " codccost, "
+            Else
+                SQL = SQL & " codtraba, "
+            End If
+        End If
         'Agrupemos por trabajador o no, tambien agrupamos por la cuenta
         SQL = SQL & cadCampo
         If vParamAplic.ContabilidadNueva Then

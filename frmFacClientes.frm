@@ -7959,7 +7959,7 @@ Private Sub DataGrid5_Click()
     If Not data8.Recordset.EOF And ModificaLineas <> 1 Then PonerDatosForaGridCamposHuertos False
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
     If PriVezForm Then
         PriVezForm = False
@@ -10037,6 +10037,8 @@ Dim b As Boolean
     If vParamAplic.NumeroInstalacion = 2 Then
         If vUsu.CodigoAgente > 0 Then b = False
     End If
+    If vUsu.Nivel2 = 2 Then b = False
+    
     
     'Modificar
     Toolbar1.Buttons(7).Enabled = b
@@ -10048,6 +10050,7 @@ Dim b As Boolean
     'Lineas Direcciones/Departamentos
     b = Modo = 2
     If vParamAplic.NumeroInstalacion = 2 Then b = b And vUsu.CodigoAgente = 0
+    If vUsu.Nivel2 = 2 Then b = False
     
     Toolbar1.Buttons(10).Enabled = b '(Modo = 2) And vUsu.CodigoAgente = 0
     If vParamAplic.DireccionesEnvio Then Toolbar1.Buttons(11).Enabled = b  '(Modo = 2) And vUsu.CodigoAgente = 0
@@ -11519,13 +11522,13 @@ Dim C As ColumnHeader
         Else
             LabelDoc.Caption = "Albaranes"
         End If
-        Columnas = "Tipo|Numero|Fecha|Importe|"
-        Ancho = "1000|2000|1200|2500|"
+        Columnas = "Tipo|Numero|Fecha|Referencia/Dpto|Importe|"
+        Ancho = "1000|1300|1100|1800|1100|"
         'vwColumnRight =1  left=0   center=2
-        Alinea = "0|0|0|1|"
+        Alinea = "0|0|0|0|1|"
         'Formatos
-        Formato = "|00000000|dd/mm/yyyy|" & FormatoImporte & "|"
-        Ncol = 4
+        Formato = "|00000000|dd/mm/yyyy||" & FormatoImporte & "|"
+        Ncol = 5
                
     Case 0, 1
         'OFERTAS  y PEDIDOS. Tienen la msimas colimnas (aprox)
@@ -11654,7 +11657,7 @@ Dim TemaPuntos As Boolean
     Select Case CByte(RecuperaValor(lw1.Tag, 1))
     Case 2
         'ALBARANES
-        cad = "select c.codtipom,c.numalbar,fechaalb,sum(importel) from scaalb c,slialb l where c.codtipom=l.codtipom and c.numalbar=l.numalbar"
+        cad = "select c.codtipom,c.numalbar,fechaalb,referenc,sum(importel) from scaalb c,slialb l where c.codtipom=l.codtipom and c.numalbar=l.numalbar"
         GroupBy = "1,2,3"
         BuscaChekc = "fechaalb"
         
@@ -11680,7 +11683,9 @@ Dim TemaPuntos As Boolean
         BuscaChekc = "fecpedcl"
         GroupBy = "1,2"
     Case 3
-        cad = "select codtipom,numfactu,fecfactu,totalfac from scafac WHERE 1=1"
+        cad = "select codtipom,numfactu,fecfactu,"
+        cad = cad & " if(codtipom='FAT',telclien,trim(concat(coalesce(coddirec,''),' ',coalesce(nomdirec,''))))"
+        cad = cad & " referenc,totalfac from scafac WHERE 1=1"
         BuscaChekc = "fecfactu"
         GroupBy = "1,2,3"
     Case 4
@@ -13005,7 +13010,7 @@ Dim HaCambiadoFacturaImpresa As Boolean 'Feb 2014
             Next I
             SQL = SQL & "," & DBSet(txtauxTfno(9).Text, "F", "S")
             'Si la fecha renovacion es "" pongo la fecha de alta
-            If Me.txtauxTfno(10).Text = "" Then txtauxTfno(10).Text = txtauxTfno(9).Text
+            'If Me.txtauxTfno(10).Text = "" Then txtauxTfno(10).Text = txtauxTfno(9).Text  Feb2020. Lo comento
             SQL = SQL & "," & DBSet(txtauxTfno(10).Text, "F", "S")
             SQL = SQL & "," & cboOperadorTfnnia2(0).ItemData(cboOperadorTfnnia2(0).ListIndex)
             SQL = SQL & "," & cboOperadorTfnnia2(1).ItemData(cboOperadorTfnnia2(1).ListIndex)

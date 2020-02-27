@@ -397,45 +397,45 @@ Begin VB.Form frmFacEntOfertas2
       TabCaption(1)   =   "Textos de la Carta"
       TabPicture(1)   =   "frmFacEntOfertas.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(19)"
-      Tab(1).Control(1)=   "Text1(20)"
-      Tab(1).Control(2)=   "Text1(18)"
-      Tab(1).Control(3)=   "Text1(30)"
-      Tab(1).Control(4)=   "Text1(29)"
-      Tab(1).Control(5)=   "Text1(28)"
-      Tab(1).Control(6)=   "Text1(27)"
-      Tab(1).Control(7)=   "Text1(26)"
+      Tab(1).Control(0)=   "Label1(3)"
+      Tab(1).Control(1)=   "Label1(5)"
+      Tab(1).Control(2)=   "Label1(45)"
+      Tab(1).Control(3)=   "Label1(2)"
+      Tab(1).Control(4)=   "Text1(21)"
+      Tab(1).Control(5)=   "Text1(22)"
+      Tab(1).Control(6)=   "Text1(23)"
+      Tab(1).Control(7)=   "Text1(24)"
       Tab(1).Control(8)=   "Text1(25)"
-      Tab(1).Control(9)=   "Text1(24)"
-      Tab(1).Control(10)=   "Text1(23)"
-      Tab(1).Control(11)=   "Text1(22)"
-      Tab(1).Control(12)=   "Text1(21)"
-      Tab(1).Control(13)=   "Label1(2)"
-      Tab(1).Control(14)=   "Label1(45)"
-      Tab(1).Control(15)=   "Label1(5)"
-      Tab(1).Control(16)=   "Label1(3)"
+      Tab(1).Control(9)=   "Text1(26)"
+      Tab(1).Control(10)=   "Text1(27)"
+      Tab(1).Control(11)=   "Text1(28)"
+      Tab(1).Control(12)=   "Text1(29)"
+      Tab(1).Control(13)=   "Text1(30)"
+      Tab(1).Control(14)=   "Text1(18)"
+      Tab(1).Control(15)=   "Text1(20)"
+      Tab(1).Control(16)=   "Text1(19)"
       Tab(1).ControlCount=   17
       TabCaption(2)   =   "Concepto y Gestión Oferta"
       TabPicture(2)   =   "frmFacEntOfertas.frx":039B
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Text1(36)"
-      Tab(2).Control(1)=   "Text1(35)"
-      Tab(2).Control(2)=   "Text1(32)"
-      Tab(2).Control(3)=   "Text1(31)"
-      Tab(2).Control(4)=   "Label1(28)"
-      Tab(2).Control(5)=   "Label1(18)"
-      Tab(2).Control(6)=   "Label1(37)"
-      Tab(2).Control(7)=   "Label1(38)"
+      Tab(2).Control(0)=   "Label1(38)"
+      Tab(2).Control(1)=   "Label1(37)"
+      Tab(2).Control(2)=   "Label1(18)"
+      Tab(2).Control(3)=   "Label1(28)"
+      Tab(2).Control(4)=   "Text1(31)"
+      Tab(2).Control(5)=   "Text1(32)"
+      Tab(2).Control(6)=   "Text1(35)"
+      Tab(2).Control(7)=   "Text1(36)"
       Tab(2).ControlCount=   8
       TabCaption(3)   =   "Totales"
       TabPicture(3)   =   "frmFacEntOfertas.frx":03B7
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Text1(37)"
-      Tab(3).Control(1)=   "cboMotTra"
-      Tab(3).Control(2)=   "FrameFactura"
-      Tab(3).Control(3)=   "Label1(40)"
-      Tab(3).Control(4)=   "Label1(29)"
-      Tab(3).Control(5)=   "Label1(52)"
+      Tab(3).Control(0)=   "Label1(52)"
+      Tab(3).Control(1)=   "Label1(29)"
+      Tab(3).Control(2)=   "Label1(40)"
+      Tab(3).Control(3)=   "FrameFactura"
+      Tab(3).Control(4)=   "cboMotTra"
+      Tab(3).Control(5)=   "Text1(37)"
       Tab(3).ControlCount=   6
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -2715,7 +2715,7 @@ Private Sub BotonEliminar()
 Dim cad As String
 Dim vTipoMov As CTiposMov
 Dim NumOferElim As Long
-
+Dim Borra As Boolean
     
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
@@ -2728,7 +2728,16 @@ Dim NumOferElim As Long
     cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarla? "
     
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    Borra = False
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then Borra = True
+    
+    If Borra And vParamAplic.NumeroInstalacion = vbEuler Then
+        cad = String(50, "*") & vbCrLf
+        cad = cad & cad & cad
+        cad = cad & vbCrLf & vbCrLf & "¿SEGURO QUE QUIERE BORRAR LA OFERTA ? " & vbCrLf & vbCrLf & cad
+        If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Borra = False
+    End If
+    If Borra Then
         'Hay que eliminar
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass

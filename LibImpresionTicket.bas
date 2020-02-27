@@ -60,6 +60,7 @@ Dim NomImpre As String
             .NombrePDF = pPdfRpt
             .ConSubInforme = True
             .Show vbModal
+         
          End With
         
         
@@ -95,7 +96,7 @@ Public Sub ImprimirElTicketDirecto2(NumTicket As String, FechaTicket As Date, Pr
     Dim rs4 As ADODB.Recordset
     Dim SQL As String
     Dim Lin As String ' línea de impresión
-    Dim i As Integer
+    Dim I As Integer
     Dim N As Integer
     Dim ImporteIva As Currency
     Dim EnEfectivo As Boolean
@@ -143,14 +144,14 @@ On Error GoTo EImpTickD
             If Not rs3.EOF Then
                 '-- Impresión de la cabecera
 
-                For i = 1 To 5
+                For I = 1 To 5
                    ' If Not IsNull(rs11.Fields("cabtick" & CStr(I))) Then
                    '     Lin = LineaCentrada(rs11.Fields("cabtick" & CStr(I)))
                    '     If Lin <> "" Then Printer.Print Lin
                    ' End If
-                   Lin = Trim(vParamTPV.CabeceraTiket(i - 1))
+                   Lin = Trim(vParamTPV.CabeceraTiket(I - 1))
                    If Lin <> "" Then Printer.Print LineaCentrada(Lin)
-                Next i
+                Next I
                 
                 
 
@@ -163,10 +164,10 @@ On Error GoTo EImpTickD
                 SQL = CuadraParteD(20, " Fecha " & Format(FechaTicket, "dd/mm/yyyy hh:mm"))
                 Lin = "Número:" & Format(NumTicket, "0000000")
                 SQL = "Fecha: " & Format(FechaTicket, "dd/mm/yyyy hh:mm")
-                i = Len(Lin & SQL)
-                If i < 40 And i > 0 Then
-                    i = 40 - i
-                    Lin = Lin & Space(i)
+                I = Len(Lin & SQL)
+                If I < 40 And I > 0 Then
+                    I = 40 - I
+                    Lin = Lin & Space(I)
                 End If
                 
                 
@@ -276,19 +277,19 @@ On Error GoTo EImpTickD
                     'Los tpios de IVA
                     Printer.Print "Detalle desglose IVA"
                     
-                    For i = 1 To 3
-                        If Not IsNull(rs2.Fields("porciva" & CStr(i))) Then
+                    For I = 1 To 3
+                        If Not IsNull(rs2.Fields("porciva" & CStr(I))) Then
                             'Lleva TIPO IVA
-                            SQL = Format(DBLet(rs2.Fields("porciva" & CStr(i)), "N"), "0.00") & "%"
+                            SQL = Format(DBLet(rs2.Fields("porciva" & CStr(I)), "N"), "0.00") & "%"
                             Lin = CuadraParteD(6, SQL)
                             'base
-                            ImporteIva = DBLet(rs2.Fields("baseimp" & CStr(i)), "N")
+                            ImporteIva = DBLet(rs2.Fields("baseimp" & CStr(I)), "N")
                             SQL = Format(ImporteIva, "0.00")
                             Lin = Lin & CuadraParteD(10, SQL)
                             
                             'iva
-                            SQL = Format(DBLet(rs2.Fields("imporiv" & CStr(i)), "N"), "0.00")
-                            ImporteIva = ImporteIva + DBLet(rs2.Fields("imporiv" & CStr(i)), "N")
+                            SQL = Format(DBLet(rs2.Fields("imporiv" & CStr(I)), "N"), "0.00")
+                            ImporteIva = ImporteIva + DBLet(rs2.Fields("imporiv" & CStr(I)), "N")
                             Lin = Lin & CuadraParteD(10, SQL)
                             'total
                             
@@ -296,7 +297,7 @@ On Error GoTo EImpTickD
                             Lin = Lin & CuadraParteD(14, SQL)
                             Printer.Print Lin
                         End If
-                    Next i
+                    Next I
                     Printer.Print ""
                 End If
                 '-- (RAFA 15/05/2008) -- Para Quatretonda
@@ -332,18 +333,18 @@ On Error GoTo EImpTickD
                 
                 '-- Impresion del pie
                 Printer.Print String(40, " ")
-                For i = 1 To 3
+                For I = 1 To 3
                     'If Not IsNull(rs11.Fields("pietick" & CStr(I))) Then
                     '    Lin = LineaCentrada(rs11.Fields("pietick" & CStr(I)))
                     '    If Lin <> "" Then Printer.Print Lin
                     'End If
-                    Lin = Trim(vParamTPV.PieTiket(i - 1))
+                    Lin = Trim(vParamTPV.PieTiket(I - 1))
                     If Lin <> "" Then Printer.Print LineaCentrada(Lin)
                     
-                Next i
-                For i = 1 To 8
+                Next I
+                For I = 1 To 8
                     Printer.Print String(40, " ")
-                Next i
+                Next I
                 
                 '-- Fin de impresión
                 Printer.NewPage

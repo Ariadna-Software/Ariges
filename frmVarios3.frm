@@ -805,7 +805,7 @@ Dim LinkaPorCodmacta As Byte   'LinkaPorCodmacta    '0. Codmacta   1.- Codclien
                         CadenaDesdeOtroForm = CadenaDesdeOtroForm & "·" 'Para el LOG
                     End If
                     conn.Execute miSQL
-                    miSQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.codigo
+                    miSQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
                     miSQL = miSQL & " AND codigo1=" & ListView1.ListItems(davidNumalbar)
                     miSQL = miSQL & " AND campo1=" & ListView1.ListItems(NumRegElim).SubItems(7)
                     conn.Execute miSQL
@@ -927,9 +927,9 @@ Dim CodmactaIndicada As Boolean
 End Function
 
 
-Private Sub cmdCancelar_Click(Index As Integer)
-    If Index = 0 Then CadenaDesdeOtroForm = "" 'por si acaso
-    If Index = 3 Then
+Private Sub cmdCancelar_Click(index As Integer)
+    If index = 0 Then CadenaDesdeOtroForm = "" 'por si acaso
+    If index = 3 Then
         If MsgBox("Si cancela va a parar el proceso de facturacion del fichero de telefonia." & vbCrLf & "¿Continuar?", vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
         CadenaDesdeOtroForm = "" 'facturacion telefonia
     End If
@@ -1081,7 +1081,7 @@ Dim FacturaTodos As Boolean  'Siginifica que va a continuar sin quitar ningun te
         If FacturaTodos Then
             
             'Eso significa borrar toos los de la tabla para que no quite ninguno del proceso
-            ejecutar "DELETE from tmpnseries WHERE codusu = " & vUsu.codigo, False
+            ejecutar "DELETE from tmpnseries WHERE codusu = " & vUsu.Codigo, False
             
         Else
             miSQL = ""
@@ -1108,7 +1108,7 @@ End Sub
 
 Private Sub cmdImprimirErrores_Click()
     With frmImprimir
-        .FormulaSeleccion = "{tmpcrmclien.codusu} = " & vUsu.codigo & " AND {tmpInformes.campo1}>0"
+        .FormulaSeleccion = "{tmpcrmclien.codusu} = " & vUsu.Codigo & " AND {tmpInformes.campo1}>0"
         .OtrosParametros = "|pEmpresa=""" & vParam.NombreEmpresa & """|" & Me.cmdImprimirErrores.Tag
         .NumeroParametros = 2 'numParam
 
@@ -1134,7 +1134,7 @@ Private Sub Command1_Click()
     
 End Sub
 
-Private Sub Form_Activate()
+Private Sub Form_activate()
     If PrimVez Then
         PrimVez = False
         PulsadoCerrar = True
@@ -1156,7 +1156,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim indice As Integer
+Dim Indice As Integer
 Dim H As Integer
 
     Me.Icon = frmPpal.Icon
@@ -1167,7 +1167,7 @@ Dim H As Integer
     FramePresuElim.visible = False
     limpiar Me
     PrimVez = True
-    indice = Opcion
+    Indice = Opcion
     Select Case Opcion
     Case 0
         PonerFrameVisible FrameNuevaFamiliaAgrupado
@@ -1199,7 +1199,7 @@ Dim H As Integer
         
         PonerFrameVisible FrameCutoaTfno
         Caption = "Cuotas propias telefonía"
-        If Opcion = 4 Then indice = 2
+        If Opcion = 4 Then Indice = 2
     Case 3
         'CadenaDesdeOtroForm   1 Si muestra o no lw plazos      2 Operador   3 Nomfichero
         lw(5).visible = False
@@ -1212,7 +1212,7 @@ Dim H As Integer
         FrameTelefonosSinConsumo.Width = NumRegElim
         Me.cmdCancelar(3).Left = NumRegElim - 1935
         Me.cmdEliminarFrasSinConsumo.Left = NumRegElim - 4335
-        imgayuda(0).Left = NumRegElim - 735
+        imgAyuda(0).Left = NumRegElim - 735
         
         PonerFrameVisible FrameTelefonosSinConsumo
         Caption = "Telefonos sin consumo"
@@ -1224,7 +1224,7 @@ Dim H As Integer
         Label4(4).Caption = ""
     End Select
     
-    Me.cmdCancelar(indice).Cancel = True
+    Me.cmdCancelar(Indice).Cancel = True
     
 End Sub
 
@@ -1249,9 +1249,9 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
 End Sub
 
 
-Private Sub imgAyuda_Click(Index As Integer)
+Private Sub imgAyuda_Click(index As Integer)
     miSQL = ""
-    If Index = 0 Then
+    If index = 0 Then
         miSQL = miSQL & "Errores " & vbCrLf
         miSQL = miSQL & "     Inact. Tiene la marca de inactivo(rojo)" & vbCrLf
         miSQL = miSQL & "     ErrOP  Compañia telefono distinta del fichero(azul) " & vbCrLf
@@ -1268,24 +1268,24 @@ Private Sub imgAyuda_Click(Index As Integer)
         End If
     End If
     
-    miSQL = Me.imgayuda(Index).ToolTipText & vbCrLf & miSQL
+    miSQL = Me.imgAyuda(index).ToolTipText & vbCrLf & miSQL
     MsgBox miSQL, vbInformation
 End Sub
 
-Private Sub imgCheck_Click(Index As Integer)
-    If Index < 2 Then
+Private Sub imgCheck_Click(index As Integer)
+    If index < 2 Then
     
         For NumRegElim = 1 To Me.ListView1.ListItems.Count
-            ListView1.ListItems(NumRegElim).Checked = Index = 1
+            ListView1.ListItems(NumRegElim).Checked = index = 1
         Next
 
-    ElseIf Index < 4 Then
+    ElseIf index < 4 Then
         For NumRegElim = 1 To Me.lwTelefoDe.ListItems.Count
-            lwTelefoDe.ListItems(NumRegElim).Checked = Index = 3
+            lwTelefoDe.ListItems(NumRegElim).Checked = index = 3
         Next
     Else
         For NumRegElim = 1 To Me.lwPresuElim.ListItems.Count
-            lwPresuElim.ListItems(NumRegElim).Checked = Index = 4
+            lwPresuElim.ListItems(NumRegElim).Checked = index = 4
         Next
     End If
 End Sub
@@ -1313,13 +1313,13 @@ Private Sub imgCuota_Click()
     End If
 End Sub
 
-Private Sub imgFamilia_Click(Index As Integer)
+Private Sub imgFamilia_Click(index As Integer)
     LanzaBuscaGrid 0
     If miSQL <> "" Then
         
-        Me.txtFamia(Index).Text = RecuperaValor(miSQL, 2)
-        Me.txtDescFamia(Index).Text = RecuperaValor(miSQL, 3)
-        PonerFoco txtFamia(Index)
+        Me.txtFamia(index).Text = RecuperaValor(miSQL, 2)
+        Me.txtDescFamia(index).Text = RecuperaValor(miSQL, 3)
+        PonerFoco txtFamia(index)
         miSQL = ""
     End If
 End Sub
@@ -1366,10 +1366,10 @@ Private Sub LanzaBuscaGrid(LOpcion As Byte)
 End Sub
 
 
-Private Sub ListView1_ItemCheck(ByVal item As MSComctlLib.ListItem)
-    If item.Tag = 0 Then
+Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
+    If Item.Tag = 0 Then
         'Ha pinchado sobre el nodo "padre"
-        NumRegElim = item.Index + 1
+        NumRegElim = Item.index + 1
         Do
             If NumRegElim > ListView1.ListItems.Count Then
                 NumRegElim = 0
@@ -1377,7 +1377,7 @@ Private Sub ListView1_ItemCheck(ByVal item As MSComctlLib.ListItem)
                 If ListView1.ListItems(NumRegElim).Tag = 0 Then
                     NumRegElim = 0
                 Else
-                    ListView1.ListItems(NumRegElim).Checked = item.Checked
+                    ListView1.ListItems(NumRegElim).Checked = Item.Checked
                     NumRegElim = NumRegElim + 1
                 End If
             End If
@@ -1385,21 +1385,21 @@ Private Sub ListView1_ItemCheck(ByVal item As MSComctlLib.ListItem)
     End If
 End Sub
 
-Private Sub lw_ColumnClick(Index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-      If ColumnHeader.Index - 1 = lw(Index).SortKey Then
-        If lw(Index).SortOrder = lvwAscending Then
-            lw(Index).SortOrder = lvwDescending
+Private Sub lw_ColumnClick(index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+      If ColumnHeader.index - 1 = lw(index).SortKey Then
+        If lw(index).SortOrder = lvwAscending Then
+            lw(index).SortOrder = lvwDescending
         Else
-            lw(Index).SortOrder = lvwAscending
+            lw(index).SortOrder = lvwAscending
         End If
     Else
-        lw(Index).SortOrder = lvwAscending
-        lw(Index).SortKey = ColumnHeader.Index - 1
+        lw(index).SortOrder = lvwAscending
+        lw(index).SortKey = ColumnHeader.index - 1
     End If
 End Sub
 
 Private Sub lwTelefoDe_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.Index - 1 = lwTelefoDe.SortKey Then
+    If ColumnHeader.index - 1 = lwTelefoDe.SortKey Then
         If lwTelefoDe.SortOrder = lvwAscending Then
             lwTelefoDe.SortOrder = lvwDescending
         Else
@@ -1407,35 +1407,35 @@ Private Sub lwTelefoDe_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeade
         End If
     Else
         lwTelefoDe.SortOrder = lvwAscending
-        lwTelefoDe.SortKey = ColumnHeader.Index - 1
+        lwTelefoDe.SortKey = ColumnHeader.index - 1
     End If
 End Sub
 
-Private Sub txtFamia_GotFocus(Index As Integer)
-    ConseguirFoco txtFamia(Index), 3
+Private Sub txtFamia_GotFocus(index As Integer)
+    ConseguirFoco txtFamia(index), 3
 End Sub
 
-Private Sub txtFamia_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtFamia_KeyPress(index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtFamia_LostFocus(Index As Integer)
-    txtFamia(Index).Text = Trim(txtFamia(Index).Text)
+Private Sub txtFamia_LostFocus(index As Integer)
+    txtFamia(index).Text = Trim(txtFamia(index).Text)
     miSQL = ""
-    If txtFamia(Index).Text <> "" Then
-        If PonerFormatoEntero(txtFamia(Index)) Then
-            miSQL = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(Index).Text, "N")
+    If txtFamia(index).Text <> "" Then
+        If PonerFormatoEntero(txtFamia(index)) Then
+            miSQL = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(index).Text, "N")
             If miSQL = "" Then
                 MsgBox "El codigo no pertence a ningun familia", vbExclamation
-                txtFamia(Index).Text = ""
+                txtFamia(index).Text = ""
             End If
         Else
-            txtFamia(Index).Text = ""
+            txtFamia(index).Text = ""
         End If
     End If
      
-    Me.txtDescFamia(Index).Text = miSQL
-    If txtFamia(Index).Text = "" Then PonerFoco txtFamia(Index)
+    Me.txtDescFamia(index).Text = miSQL
+    If txtFamia(index).Text = "" Then PonerFoco txtFamia(index)
     
 End Sub
 
@@ -1451,7 +1451,7 @@ Dim N As Integer
     miSQL = miSQL & " from tmpcrmclien inner join sclien on tmpcrmclien.codclien=sclien.codclien  "
     miSQL = miSQL & " left join tmpinformes on tmpcrmclien.CodUsu = tmpinformes.CodUsu And "
     miSQL = miSQL & " tmpcrmclien.codclien = tmpinformes.Codigo1"
-    miSQL = miSQL & " where tmpcrmclien.codusu=" & vUsu.codigo
+    miSQL = miSQL & " where tmpcrmclien.codusu=" & vUsu.Codigo
     miSQL = miSQL & " and campo1>0 order by tmpcrmclien.codclien,campo1"
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1473,7 +1473,7 @@ Dim N As Integer
             NumRegElim = miRsAux!codClien
             Label4(1).Caption = IT.Text
             Label4(1).Refresh
-            davidNumalbar = IT.Index
+            davidNumalbar = IT.index
         End If
         
         
@@ -1527,21 +1527,21 @@ End Sub
  
 
 
-Private Sub txtImporte_GotFocus(Index As Integer)
-    ConseguirFoco txtimporte(Index), 3
+Private Sub txtImporte_GotFocus(index As Integer)
+    ConseguirFoco txtimporte(index), 3
 End Sub
 
-Private Sub txtImporte_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtImporte_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtImporte_LostFocus(Index As Integer)
-    txtimporte(Index).Text = Trim(txtimporte(Index).Text)
-    If txtimporte(Index).Text = "" Then Exit Sub
+Private Sub txtImporte_LostFocus(index As Integer)
+    txtimporte(index).Text = Trim(txtimporte(index).Text)
+    If txtimporte(index).Text = "" Then Exit Sub
 '    Select Case Index
 '    Case 0
     
-        PonerFormatoDecimal txtimporte(Index), 2   'decimal 10,4  en formato decimal
+        PonerFormatoDecimal txtimporte(index), 2   'decimal 10,4  en formato decimal
 '    Case 1
 '        'El uno es obligado el campo
 '        If Not PonerFormatoDecimal(txtimporte(Index), 3) Then txtimporte(Index).Text = ""   'importe
@@ -1553,11 +1553,11 @@ End Sub
 
 
 
-Private Sub txtTextoPlano_GotFocus(Index As Integer)
-    ConseguirFoco txtTextoPlano(Index), 3
+Private Sub txtTextoPlano_GotFocus(index As Integer)
+    ConseguirFoco txtTextoPlano(index), 3
 End Sub
 
-Private Sub txtTextoPlano_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtTextoPlano_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
@@ -1605,7 +1605,7 @@ Dim N As Integer
     Label4(1).Caption = "Leyendo BD" 'indicador
     Label4(1).Refresh
     miSQL = "select tmpnseries.codartic,sclientfno.codclien,nomclien,numlinea,PlazosMeses from tmpnseries left join sclientfno on sclientfno.idtelefono=tmpnseries.codartic left join sclien on sclientfno.codclien=sclien.codclien "
-    miSQL = miSQL & " WHERE tmpnseries.codusu=" & vUsu.codigo & " order by 1"
+    miSQL = miSQL & " WHERE tmpnseries.codusu=" & vUsu.Codigo & " order by 1"
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
@@ -1654,6 +1654,26 @@ Dim N As Integer
         miRsAux.MoveNext
     Wend
     miRsAux.Close
+    
+    miSQL = "select sclientfno.codclien,idtelefono,nomclien from sclientfno,sclien where "
+    miSQL = miSQL & " sclientfno.codclien = sclien.codclien "
+    miSQL = miSQL & " AND inactivo=0 and operador =" & RecuperaValor(Me.Tag, 2)
+    miSQL = miSQL & " AND idtelefono IN (select Numero_de_telefono from telefono.telefono where "
+    miSQL = miSQL & " Fichero = '" & RecuperaValor(Me.Tag, 3) & "')"
+    miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not miRsAux.EOF
+            
+        Set IT = lwTelefoDe.ListItems.Add
+        IT.Text = miRsAux!idtelefono
+        IT.SubItems(1) = Format(miRsAux!codClien, "0000")
+        IT.SubItems(2) = DBLet(miRsAux!NomClien, "T")
+    
+        IT.ForeColor = vbRed
+        IT.ToolTipText = "No viene en fichero"
+        miRsAux.MoveNext
+    Wend
+    
     Set miRsAux = Nothing
 End Sub
 
@@ -1706,7 +1726,7 @@ End Sub
 
 'CadenaDesdeOtroForm   1 Si muestra o no lw lazos      2 Operador   3 Nomfichero
 Private Sub CargarDatosTelefoniaVentaPlazos()
-    Dim i As Integer
+    Dim I As Integer
     Dim ImporteTotalFacturaVtaPlz As Currency
     Dim Color As Long
     Dim IT As ListItem
@@ -1717,14 +1737,14 @@ Private Sub CargarDatosTelefoniaVentaPlazos()
         lw(5).Tag = ""
         ImporteTotalFacturaVtaPlz = 0
         'Cargaremos el listview con los telefono a plazos
-        For i = 1 To 2
+        For I = 1 To 2
             'Primera pasada.
             ' Articulos que estando en el fichero les queda , o no , plazo
             'Segunda
             ' articulos con plazo que NO vienen en el fichero
             miSQL = "select IdTelefono ,nomclien,sclientfno.codclien,ImportePlazo,PlazosMeses,ArtPlazos from sclientfno"
             miSQL = miSQL & ",sclien where sclientfno.codclien=sclien.codclien AND operador = " & RecuperaValor(Me.Tag, 2) & " and ArtPlazos<>'' "
-            If i = 1 Then
+            If I = 1 Then
                 miSQL = miSQL & " AND "
             Else
                 miSQL = miSQL & " AND PlazosMeses >0 AND NOT "
@@ -1744,7 +1764,7 @@ Private Sub CargarDatosTelefoniaVentaPlazos()
                 IT.SubItems(3) = miRsAux!artplazos
                 IT.SubItems(4) = Format(miRsAux!ImportePlazo, FormatoCantidad)
                 IT.SubItems(5) = CStr(miRsAux!PlazosMeses)
-                If i = 1 Then
+                If I = 1 Then
                     If miRsAux!PlazosMeses > 0 Then
                         ImporteTotalFacturaVtaPlz = ImporteTotalFacturaVtaPlz + miRsAux!ImportePlazo
                         lw(5).Tag = lw(5).Tag & "X"

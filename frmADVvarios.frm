@@ -592,9 +592,14 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+
+'[ARIGES-ARITPV]
+'   Revisar en programa ARITPV
+'------------------------------------------------
+
+
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
-
 
 Public Opcion As Byte
     '0.- Mostrar campos para seleccionar en partes de trabajo
@@ -772,7 +777,7 @@ Private Sub Command2_Click()
 
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     If PrimVez Then
         PrimVez = False
         

@@ -439,8 +439,8 @@ Begin VB.Form frmComEntAlbaranes
    End
    Begin MSAdodcLib.Adodc Data2 
       Height          =   330
-      Left            =   960
-      Top             =   5160
+      Left            =   1560
+      Top             =   4920
       Visible         =   0   'False
       Width           =   1335
       _ExtentX        =   2355
@@ -513,70 +513,72 @@ Begin VB.Form frmComEntAlbaranes
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(35)"
       Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "DataGrid1"
+      Tab(0).Control(2)=   "imgBuscar(9)"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "txtAux(0)"
+      Tab(0).Control(3)=   "DataGrid1"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "txtAux(1)"
+      Tab(0).Control(4)=   "txtAux(0)"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "txtAux(3)"
+      Tab(0).Control(5)=   "txtAux(1)"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "txtAux(4)"
+      Tab(0).Control(6)=   "txtAux(3)"
       Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "txtAux(5)"
+      Tab(0).Control(7)=   "txtAux(4)"
       Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "txtAux(6)"
+      Tab(0).Control(8)=   "txtAux(5)"
       Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "txtAux(7)"
+      Tab(0).Control(9)=   "txtAux(6)"
       Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "txtAux(2)"
+      Tab(0).Control(10)=   "txtAux(7)"
       Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "cmdAux(0)"
+      Tab(0).Control(11)=   "txtAux(2)"
       Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "cmdAux(1)"
+      Tab(0).Control(12)=   "cmdAux(0)"
       Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "FrameCliente"
+      Tab(0).Control(13)=   "cmdAux(1)"
       Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Text2(17)"
+      Tab(0).Control(14)=   "FrameCliente"
       Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Text2(16)"
+      Tab(0).Control(15)=   "Text2(17)"
       Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "txtAux(8)"
+      Tab(0).Control(16)=   "Text2(16)"
       Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "txtAux(9)"
+      Tab(0).Control(17)=   "txtAux(8)"
       Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "cmdAux(2)"
+      Tab(0).Control(18)=   "txtAux(9)"
       Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).ControlCount=   19
+      Tab(0).Control(19)=   "cmdAux(2)"
+      Tab(0).Control(19).Enabled=   0   'False
+      Tab(0).ControlCount=   20
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmComEntAlbaranes.frx":02B7
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(29)"
-      Tab(1).Control(1)=   "Text1(28)"
-      Tab(1).Control(2)=   "Text1(27)"
-      Tab(1).Control(3)=   "Text1(26)"
-      Tab(1).Control(4)=   "Text2(26)"
-      Tab(1).Control(5)=   "chkDocArchi"
-      Tab(1).Control(6)=   "Text1(25)"
-      Tab(1).Control(7)=   "FrameHco"
-      Tab(1).Control(8)=   "Text2(21)"
-      Tab(1).Control(9)=   "Text1(21)"
-      Tab(1).Control(10)=   "Text1(19)"
-      Tab(1).Control(11)=   "Text1(18)"
-      Tab(1).Control(12)=   "Text1(17)"
-      Tab(1).Control(13)=   "Text1(16)"
-      Tab(1).Control(14)=   "Text1(15)"
-      Tab(1).Control(15)=   "Label1(48)"
-      Tab(1).Control(16)=   "Label1(47)"
-      Tab(1).Control(17)=   "imgFecha(2)"
-      Tab(1).Control(18)=   "Label1(4)"
-      Tab(1).Control(19)=   "imgBuscar(8)"
-      Tab(1).Control(20)=   "imgFecha(1)"
-      Tab(1).Control(21)=   "Label1(3)"
-      Tab(1).Control(22)=   "imgBuscar(4)"
-      Tab(1).Control(23)=   "Label1(1)"
-      Tab(1).Control(24)=   "Label1(45)"
-      Tab(1).Control(25)=   "Label1(44)"
+      Tab(1).Control(0)=   "Label1(44)"
+      Tab(1).Control(1)=   "Label1(45)"
+      Tab(1).Control(2)=   "Label1(1)"
+      Tab(1).Control(3)=   "imgBuscar(4)"
+      Tab(1).Control(4)=   "Label1(3)"
+      Tab(1).Control(5)=   "imgFecha(1)"
+      Tab(1).Control(6)=   "imgBuscar(8)"
+      Tab(1).Control(7)=   "Label1(4)"
+      Tab(1).Control(8)=   "imgFecha(2)"
+      Tab(1).Control(9)=   "Label1(47)"
+      Tab(1).Control(10)=   "Label1(48)"
+      Tab(1).Control(11)=   "Text1(15)"
+      Tab(1).Control(12)=   "Text1(16)"
+      Tab(1).Control(13)=   "Text1(17)"
+      Tab(1).Control(14)=   "Text1(18)"
+      Tab(1).Control(15)=   "Text1(19)"
+      Tab(1).Control(16)=   "Text1(21)"
+      Tab(1).Control(17)=   "Text2(21)"
+      Tab(1).Control(18)=   "FrameHco"
+      Tab(1).Control(19)=   "Text1(25)"
+      Tab(1).Control(20)=   "chkDocArchi"
+      Tab(1).Control(21)=   "Text2(26)"
+      Tab(1).Control(22)=   "Text1(26)"
+      Tab(1).Control(23)=   "Text1(27)"
+      Tab(1).Control(24)=   "Text1(28)"
+      Tab(1).Control(25)=   "Text1(29)"
       Tab(1).ControlCount=   26
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmComEntAlbaranes.frx":02D3
@@ -707,9 +709,9 @@ Begin VB.Form frmComEntAlbaranes
          Index           =   16
          Left            =   1800
          Locked          =   -1  'True
-         MaxLength       =   60
+         MultiLine       =   -1  'True
          TabIndex        =   45
-         Text            =   "Text2 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqa"
+         Text            =   "frmComEntAlbaranes.frx":02EF
          Top             =   3960
          Visible         =   0   'False
          Width           =   6765
@@ -822,7 +824,7 @@ Begin VB.Form frmComEntAlbaranes
             Height          =   240
             Index           =   6
             Left            =   1080
-            Picture         =   "frmComEntAlbaranes.frx":02EF
+            Picture         =   "frmComEntAlbaranes.frx":032C
             ToolTipText     =   "Buscar trabajador"
             Top             =   630
             Width           =   240
@@ -840,7 +842,7 @@ Begin VB.Form frmComEntAlbaranes
             Height          =   240
             Index           =   7
             Left            =   1080
-            Picture         =   "frmComEntAlbaranes.frx":03F1
+            Picture         =   "frmComEntAlbaranes.frx":042E
             ToolTipText     =   "Buscar incidencia"
             Top             =   1000
             Width           =   240
@@ -1390,7 +1392,7 @@ Begin VB.Form frmComEntAlbaranes
             Height          =   240
             Index           =   5
             Left            =   960
-            Picture         =   "frmComEntAlbaranes.frx":04F3
+            Picture         =   "frmComEntAlbaranes.frx":0530
             ToolTipText     =   "Buscar proveedor vario"
             Top             =   240
             Width           =   240
@@ -1400,7 +1402,7 @@ Begin VB.Form frmComEntAlbaranes
             Height          =   240
             Index           =   2
             Left            =   975
-            Picture         =   "frmComEntAlbaranes.frx":05F5
+            Picture         =   "frmComEntAlbaranes.frx":0632
             ToolTipText     =   "Buscar población"
             Top             =   916
             Width           =   240
@@ -1472,7 +1474,7 @@ Begin VB.Form frmComEntAlbaranes
             Height          =   240
             Index           =   3
             Left            =   6600
-            Picture         =   "frmComEntAlbaranes.frx":06F7
+            Picture         =   "frmComEntAlbaranes.frx":0734
             ToolTipText     =   "Buscar forma de pago"
             Top             =   190
             Width           =   240
@@ -1688,7 +1690,7 @@ Begin VB.Form frmComEntAlbaranes
          Width           =   8445
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmComEntAlbaranes.frx":07F9
+         Bindings        =   "frmComEntAlbaranes.frx":0836
          Height          =   2025
          Left            =   225
          TabIndex        =   47
@@ -1756,6 +1758,15 @@ Begin VB.Form frmComEntAlbaranes
             EndProperty
          EndProperty
       End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   9
+         Left            =   1560
+         Picture         =   "frmComEntAlbaranes.frx":084B
+         ToolTipText     =   "Buscar forma de pago"
+         Top             =   3960
+         Width           =   240
+      End
       Begin VB.Label Label1 
          Caption         =   "Su referencia"
          Height          =   255
@@ -1778,7 +1789,7 @@ Begin VB.Form frmComEntAlbaranes
          Height          =   240
          Index           =   2
          Left            =   -73920
-         Picture         =   "frmComEntAlbaranes.frx":080E
+         Picture         =   "frmComEntAlbaranes.frx":094D
          ToolTipText     =   "Buscar fecha"
          Top             =   1920
          Width           =   240
@@ -1797,7 +1808,7 @@ Begin VB.Form frmComEntAlbaranes
          Height          =   240
          Index           =   8
          Left            =   -73680
-         Picture         =   "frmComEntAlbaranes.frx":0899
+         Picture         =   "frmComEntAlbaranes.frx":09D8
          ToolTipText     =   "Buscar trabajador"
          Top             =   960
          Width           =   240
@@ -1806,7 +1817,7 @@ Begin VB.Form frmComEntAlbaranes
          Height          =   240
          Index           =   1
          Left            =   -73920
-         Picture         =   "frmComEntAlbaranes.frx":099B
+         Picture         =   "frmComEntAlbaranes.frx":0ADA
          ToolTipText     =   "Buscar fecha"
          Top             =   1320
          Width           =   240
@@ -1824,7 +1835,7 @@ Begin VB.Form frmComEntAlbaranes
          Caption         =   "Ampliación Línea"
          Height          =   255
          Index           =   35
-         Left            =   480
+         Left            =   240
          TabIndex        =   114
          Top             =   3960
          Visible         =   0   'False
@@ -1844,7 +1855,7 @@ Begin VB.Form frmComEntAlbaranes
          Height          =   240
          Index           =   4
          Left            =   -73800
-         Picture         =   "frmComEntAlbaranes.frx":0A26
+         Picture         =   "frmComEntAlbaranes.frx":0B65
          ToolTipText     =   "Buscar trabajador"
          Top             =   495
          Width           =   240
@@ -3172,7 +3183,11 @@ End Sub
 Private Sub imgBuscar_Click(index As Integer)
 Dim Indice As Byte
 
-    If Modo = 2 Or Modo = 0 Then Exit Sub
+    If index = 9 Then
+        If Modo = 0 Then Exit Sub
+    Else
+        If Modo = 2 Or Modo = 0 Then Exit Sub
+    End If
     Screen.MousePointer = vbHourglass
 
     Select Case index
@@ -3223,6 +3238,20 @@ Dim Indice As Byte
             frmFE.DatosADevolverBusqueda = "0"
             frmFE.Show vbModal
             Set frmFE = Nothing
+            
+        Case 9
+        
+                CadenaDesdeOtroForm = Text2(16).Text
+                frmFacClienteObser.Modificar = Modo = 5 And ModificaLineas > 0
+                frmFacClienteObser.Text1 = CadenaDesdeOtroForm
+                frmFacClienteObser.Show vbModal
+                'Llevara DOS VALORES.
+                'Si modifica y el texto
+                If Modo = 5 And ModificaLineas > 0 Then
+                    If RecuperaValor(CadenaDesdeOtroForm, 1) = "1" Then Text2(16).Text = Mid(CadenaDesdeOtroForm, 3)
+                End If
+                CadenaDesdeOtroForm = ""
+        
     End Select
     PonerFoco Text1(Indice)
     Screen.MousePointer = vbDefault
@@ -3714,10 +3743,13 @@ Dim b As Boolean
     Next I
     Me.imgBuscar(4).Enabled = (Modo = 1)
     Me.imgBuscar(0).Enabled = (Modo = 3 Or Modo = 1)
-              
+    imgBuscar(9).Enabled = True
+    
+    
     'Modo Linea de Albaranes. Campo Ampliacion Linea
     Me.Label1(35).visible = (Modo = 5)
     Me.Text2(16).visible = (Modo = 5)
+    imgBuscar(9).visible = (Modo = 5)
     BloquearTxt Text2(16), True
     'Modo Linea de Albaranes. Campo num_lote
     Me.Label1(2).visible = (Modo = 5)
@@ -3968,7 +4000,7 @@ Private Sub Text2_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer
         If index = 16 And Text2(17).Locked Then PonerFocoBtn Me.cmdAceptar
         If index = 17 Then PonerFocoBtn Me.cmdAceptar
     Else
-        KEYdown KeyCode
+        If index <> 16 Then KEYdown KeyCode
     End If
 End Sub
 

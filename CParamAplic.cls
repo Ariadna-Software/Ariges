@@ -468,10 +468,6 @@ Private mvarLlevaGasolinera As Boolean
 Private mvarDigitosCodartic As Byte
 
 
-Private mvarFacturasInternasTelefonia As Boolean  'No lleva parametros. De momento, todos los que tengan telefonia(cooperativas) menos taxco, las tienen
-
-
-
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
@@ -1867,14 +1863,6 @@ Public Property Get DigitosCodartic() As Byte
 End Property
 
 
-'Solo get
-Public Property Get FacturasInternasTelefonia() As Boolean
-     FacturasInternasTelefonia = mvarFacturasInternasTelefonia
-End Property
-
-
-
-
 
 
 '------------------------------------------------------------------------------------------------
@@ -2192,21 +2180,6 @@ On Error GoTo Err3
         
         'Solo GET
         mvarContabilidadNueva = DBLet(RS!NuevaContabilidad, "N") = 1
-        
-        
-        
-        
-        
-        
-        If mvarTieneTelefonia2 > 0 Then
-            mvarFacturasInternasTelefonia = False
-            If mvarNumeroInstalacion <> vbTaxco Then mvarFacturasInternasTelefonia = True
-        End If
-        
-        
-        
-        
-        
         
         
         mvarSIITiene = False

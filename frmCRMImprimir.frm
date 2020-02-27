@@ -262,7 +262,7 @@ Option Explicit
 
 
 Public N 'As Node
-Private Primeravez As Boolean
+Private primeravez As Boolean
 Private WithEvents frmC2 As frmFacClientes3
 Attribute frmC2.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
@@ -323,7 +323,7 @@ Private Sub CargaAdmon()
     Set N = tv1.Nodes.Add(, , "ADM")
     N.Text = "Datos dpto de administración"
     N.Bold = True
-    N.Checked = NodoPadreCheckeado(N.Index)    '
+    N.Checked = NodoPadreCheckeado(N.index)    '
     
     FijarNodo3 N, "ADM", "adm1", True, True, "Volumen facturación"
     N.Tag = "pVisVolVenta|pDesdeAnyo|"
@@ -362,7 +362,7 @@ Private Sub CargaComercial()
     N.Text = "Datos dpto de comercial"
     N.Tag = "||"
     N.Bold = True
-    N.Checked = NodoPadreCheckeado(N.Index)
+    N.Checked = NodoPadreCheckeado(N.index)
      
     FijarNodo3 N, "COM", "com1", True, False, "Detalle ofertas pendientes"
     N.Tag = "pVisOfertas|pDesdeOferta|"
@@ -427,7 +427,7 @@ Private Sub CargaSAT()
     Set N = tv1.Nodes.Add(, , "SAT")
     N.Text = "Datos dpto de S.A.T."
     N.Bold = True
-    N.Checked = NodoPadreCheckeado(N.Index)
+    N.Checked = NodoPadreCheckeado(N.index)
     
     
  
@@ -586,9 +586,9 @@ End Sub
 
 
 Private Sub Form_Activate()
-    If Primeravez Then
+    If primeravez Then
         Screen.MousePointer = vbHourglass
-        Primeravez = False
+        primeravez = False
         CargaDatosAux
         
     End If
@@ -597,7 +597,7 @@ End Sub
 
 Private Sub Form_Load()
 
-    Primeravez = True
+    primeravez = True
     Me.Icon = frmPpal.Icon
     CargaTreeView
     For J = 1 To tv1.Nodes.Count
@@ -636,18 +636,18 @@ Private Sub Image1_Click()
     End If
 End Sub
 
-Private Sub imgCheck_Click(Index As Integer)
-    If Index < 2 Then
+Private Sub imgCheck_Click(index As Integer)
+    If index < 2 Then
 
         If tv3.Nodes.Count = 0 Then Exit Sub
         For J = 1 To tv3.Nodes.Count
-            tv3.Nodes(J).Checked = Index = 1
+            tv3.Nodes(J).Checked = index = 1
         Next J
 
     Else
         If tv2.Nodes.Count = 0 Then Exit Sub
         For J = 1 To tv2.Nodes.Count
-            tv2.Nodes(J).Checked = Index = 3
+            tv2.Nodes(J).Checked = index = 3
         Next J
     
     End If
@@ -696,7 +696,7 @@ End Sub
 Private Sub Tv1_NodeCheck(ByVal Node As MSComctlLib.Node)
 Dim CH As Boolean
 
-    If Primeravez Then Exit Sub
+    If primeravez Then Exit Sub
     
     
    
@@ -717,7 +717,7 @@ Dim NO
     
     Set NO = N
     NO.Checked = Checkar
-    If EsElTV2 Then CheckeaTambienEnElTv3 NO.Index, Checkar
+    If EsElTV2 Then CheckeaTambienEnElTv3 NO.index, Checkar
     Set NO = N.Child
     While Not NO Is Nothing
         CheckSubNodo NO, Checkar, EsElTV2
@@ -1098,7 +1098,7 @@ Dim Procesar As Boolean
                         NumRegElim = NumRegElim + 1
                         SQL = "insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,"
                         SQL = SQL & "`trabajador`,`adjuntos`) values ( " & vUsu.Codigo & "," & NumRegElim & ",1,"  '1.email
-                        SQL = SQL & DBSet(RS!fechahora, "FH") & ","
+                        SQL = SQL & DBSet(RS!FechaHora, "FH") & ","
                         'En sllama siempre son RECIBIDAS
                         If Val(RS!Enviado) = 1 Then
                             SQL = SQL & "'Enviado',"
@@ -1311,11 +1311,11 @@ Dim N As Integer
         
         If vParamAplic.ContabilidadNueva Then
             SQL = "SELECT impvenci,impcobro,numfactu codfaccl,numserie,fecvenci,fecfactu fecfaccl,Departamento,scobro.codforpa,nomforpa,  talondias ,pagaredias ,remesadiasmenor,gastos "
-            SQL = SQL & " ,fecultco,sforpa.tipforpa,codrem,tiporem FROM cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa "
+            SQL = SQL & " ,fecultco,sforpa.tipforpa,codrem,tiporem,recedocu FROM cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa "
             SQL = SQL & " LEFT JOIN bancos ON scobro.ctabanc1=bancos.codmacta "
         Else
             SQL = "SELECT impcobro,Codfaccl,numserie,fecvenci,fecfaccl,Departamento,scobro.codforpa,nomforpa,  talondias , pagaredias ,remesadiasmayor"
-            SQL = SQL & ",fecultco, sforpa.tipforpa FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+            SQL = SQL & ",fecultco, sforpa.tipforpa,recedocu FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
             SQL = SQL & " LEFT JOIN ctabancaria bancos ON scobro.ctabanc1=bancos.codmacta "
         End If
         
@@ -1341,7 +1341,8 @@ Dim N As Integer
         
         While Not RS.EOF
         
-        
+                
+                
                 If Not vParamAplic.ContabilidadNueva Then
                     DiasRiesgo = 1  'lo que hacia. No tocamos nada
                         Impor1 = RS!impcobro
@@ -1352,7 +1353,13 @@ Dim N As Integer
                         If DBLet(RS!impcobro, "N") = 0 Then
                             DiasRiesgo = 0
                         Else
-                            Impor1 = RS!ImpVenci + DBLet(RS!gastos, "N") - DBLet(RS!impcobro, "N")
+                            If DBLet(RS!recedocu, "N") = 1 Then
+                                'Nuevo Febrero 2020
+                                Impor1 = RS!ImpVenci + DBLet(RS!gastos, "N") 'QUitamos el cobrado para indicar que esta en recepcion documento
+                            Else
+                                'Lo que habia
+                                Impor1 = RS!ImpVenci + DBLet(RS!gastos, "N") - DBLet(RS!impcobro, "N")
+                            End If
                             DiasRiesgo = IIf(Impor1 <> 0, 1, 0)
                         End If
                     Else
@@ -1550,7 +1557,7 @@ Dim leido As Boolean
     End If
         
     If leido Then
-        If Nod.Index > DatosGuardados.Count Then
+        If Nod.index > DatosGuardados.Count Then
             leido = False
         End If
     End If
@@ -1560,7 +1567,7 @@ Dim leido As Boolean
         Nod.Checked = True
         
     Else
-        Nod.Checked = RecuperaValor(DatosGuardados(Nod.Index), 1) = "1"
+        Nod.Checked = RecuperaValor(DatosGuardados(Nod.index), 1) = "1"
         'Debug.Print Nod.Text & " " & Nod.Checked
     End If
     
@@ -1568,7 +1575,7 @@ Dim leido As Boolean
         If Not leido Then
             Fecha = "01/01/2010"
         Else
-            Aux = RecuperaValor(DatosGuardados(Nod.Index), 2)
+            Aux = RecuperaValor(DatosGuardados(Nod.index), 2)
             If Aux = "" Then
                 Aux = "01/10/2010"
             Else
@@ -1821,8 +1828,8 @@ Dim N
     Wend
     RS.Close
     If PpalInsertado Then
-        tv2.Nodes(N.Index).EnsureVisible
-        tv3.Nodes(N.Index).EnsureVisible
+        tv2.Nodes(N.index).EnsureVisible
+        tv3.Nodes(N.index).EnsureVisible
     End If
     
     
@@ -1862,8 +1869,8 @@ Dim N
     Wend
     RS.Close
     If PpalInsertado Then
-        tv2.Nodes(N.Index).EnsureVisible
-        tv3.Nodes(N.Index).EnsureVisible
+        tv2.Nodes(N.index).EnsureVisible
+        tv3.Nodes(N.index).EnsureVisible
     End If
     
     
@@ -1892,7 +1899,7 @@ Dim N
             PpalInsertado = True
         End If
         
-        SQL = RS!codtipom & Format(RS!NUmAlbar, "000000") & "  -  " & Format(RS!FechaAlb, "dd/mm/yy")
+        SQL = RS!codtipom & Format(RS!Numalbar, "000000") & "  -  " & Format(RS!FechaAlb, "dd/mm/yy")
         Set N = tv2.Nodes.Add("ALB", tvwChild)
         N.Checked = True
         N.Text = SQL
@@ -1904,8 +1911,8 @@ Dim N
     Wend
     RS.Close
     If PpalInsertado Then
-        tv2.Nodes(N.Index).EnsureVisible
-        tv3.Nodes(N.Index).EnsureVisible
+        tv2.Nodes(N.index).EnsureVisible
+        tv3.Nodes(N.index).EnsureVisible
     End If
     
 End Sub
@@ -1922,10 +1929,10 @@ End Function
 
 Private Sub tv2_NodeCheck(ByVal Node As MSComctlLib.Node)
     On Error Resume Next
-    If Primeravez Then Exit Sub
+    If primeravez Then Exit Sub
     
     'Pong el nodo en el tv3 chcec(unche
-    tv3.Nodes(Node.Index).Checked = Node.Checked
+    tv3.Nodes(Node.index).Checked = Node.Checked
     
     Dim CH As Boolean
     
@@ -1941,7 +1948,7 @@ End Sub
 
 Private Sub tv3_NodeCheck(ByVal Node As MSComctlLib.Node)
 Dim CH As Boolean
-    If Primeravez Then Exit Sub
+    If primeravez Then Exit Sub
     
     If Node.Checked Then
         If Not Node.Parent Is Nothing Then Node.Parent.Checked = True
@@ -1955,7 +1962,7 @@ Dim CH As Boolean
 End Sub
 
 
-Private Function CadenaOfePedAlb(Index As Integer, CadenaSQL_ As String) As Boolean
+Private Function CadenaOfePedAlb(index As Integer, CadenaSQL_ As String) As Boolean
 Dim J As Integer
 Dim N As Node
 Dim Pad As Node
@@ -1967,7 +1974,7 @@ Dim C2 As String
     
     Set Pad = tv2.Nodes(1)
     
-    Select Case Index
+    Select Case index
     Case 7
         'OFERTAS
         If Pad.Key <> "OFE" Then Exit Function
@@ -2044,7 +2051,7 @@ Dim C2 As String
             CadenaSQL_ = Mid(CadenaSQL_, 2)
             CadenaOfePedAlb = True
        
-            InsertarEnTmpsOfePedAlb Index, CadenaSQL_
+            InsertarEnTmpsOfePedAlb index, CadenaSQL_
        
        
        
@@ -2132,7 +2139,7 @@ Dim C2 As String
             C = "insert into `tmpinformes` (`codusu`,`codigo1`,`campo1`,`nombre1`,`nombre2`,`nombre3`,`importe1`,`fecha1`,`fecha2`,obser)"
             C = C & " VALUES (" & vUsu.Codigo & "," & NumRegElim & ",3,"  '3 de alb
             'identificador
-            C = C & "'" & RS!codtipom & Format(RS!NUmAlbar, "000000") & "',"
+            C = C & "'" & RS!codtipom & Format(RS!Numalbar, "000000") & "',"
             If IsNull(RS!CodDirec) Then
                 C2 = "NULL"
             Else
@@ -2140,7 +2147,7 @@ Dim C2 As String
             End If
             '               vacio de momento
             C = C & C2 & ",NULL,"
-            C2 = DevuelveDesdeBD(conAri, "sum(importel)", "slialb", "codtipom = '" & RS!codtipom & "' AND numalbar", RS!NUmAlbar, "N")
+            C2 = DevuelveDesdeBD(conAri, "sum(importel)", "slialb", "codtipom = '" & RS!codtipom & "' AND numalbar", RS!Numalbar, "N")
             If C2 = "" Then C2 = "0"
             C = C & TransformaComasPuntos(C2)
             C = C & "," & DBSet(RS!FechaAlb, "F") & ",NULL" & "," & DBSet(RS!observacrm, "T", "S") & ")"

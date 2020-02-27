@@ -188,11 +188,10 @@ Begin VB.Form frmComEntPedidos2
       Index           =   16
       Left            =   2400
       Locked          =   -1  'True
-      MaxLength       =   60
+      MultiLine       =   -1  'True
       TabIndex        =   52
-      Text            =   "Text2 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwqa"
+      Text            =   "frmComEntPedidos.frx":029B
       Top             =   6900
-      Visible         =   0   'False
       Width           =   6885
    End
    Begin VB.Frame Frame1 
@@ -503,7 +502,7 @@ Begin VB.Form frmComEntPedidos2
          Strikethrough   =   0   'False
       EndProperty
       TabCaption(0)   =   "Datos básicos"
-      TabPicture(0)   =   "frmComEntPedidos.frx":029B
+      TabPicture(0)   =   "frmComEntPedidos.frx":02D8
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "DataGrid1"
       Tab(0).Control(0).Enabled=   0   'False
@@ -535,7 +534,7 @@ Begin VB.Form frmComEntPedidos2
       Tab(0).Control(13).Enabled=   0   'False
       Tab(0).ControlCount=   14
       TabCaption(1)   =   "Otros Datos"
-      TabPicture(1)   =   "frmComEntPedidos.frx":02B7
+      TabPicture(1)   =   "frmComEntPedidos.frx":02F4
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Label1(44)"
       Tab(1).Control(1)=   "Label1(45)"
@@ -563,7 +562,7 @@ Begin VB.Form frmComEntPedidos2
       Tab(1).Control(23)=   "Text1(29)"
       Tab(1).ControlCount=   24
       TabCaption(2)   =   "Totales"
-      TabPicture(2)   =   "frmComEntPedidos.frx":02D3
+      TabPicture(2)   =   "frmComEntPedidos.frx":0310
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameFactura"
       Tab(2).ControlCount=   1
@@ -768,7 +767,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   9
             Left            =   1080
-            Picture         =   "frmComEntPedidos.frx":02EF
+            Picture         =   "frmComEntPedidos.frx":032C
             ToolTipText     =   "Buscar trabajador"
             Top             =   900
             Width           =   240
@@ -786,7 +785,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   10
             Left            =   1080
-            Picture         =   "frmComEntPedidos.frx":03F1
+            Picture         =   "frmComEntPedidos.frx":042E
             ToolTipText     =   "Buscar incidencia"
             Top             =   1320
             Width           =   240
@@ -1281,7 +1280,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   5
             Left            =   720
-            Picture         =   "frmComEntPedidos.frx":04F3
+            Picture         =   "frmComEntPedidos.frx":0530
             ToolTipText     =   "Buscar dirección"
             Top             =   360
             Width           =   240
@@ -1453,7 +1452,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   4
             Left            =   720
-            Picture         =   "frmComEntPedidos.frx":05F5
+            Picture         =   "frmComEntPedidos.frx":0632
             ToolTipText     =   "Buscar dirección"
             Top             =   240
             Width           =   240
@@ -1652,7 +1651,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   8
             Left            =   6645
-            Picture         =   "frmComEntPedidos.frx":06F7
+            Picture         =   "frmComEntPedidos.frx":0734
             ToolTipText     =   "Buscar trabajador"
             Top             =   560
             Width           =   240
@@ -1670,7 +1669,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   7
             Left            =   6645
-            Picture         =   "frmComEntPedidos.frx":07F9
+            Picture         =   "frmComEntPedidos.frx":0836
             ToolTipText     =   "Buscar cliente"
             Top             =   210
             Width           =   240
@@ -1688,7 +1687,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   6
             Left            =   900
-            Picture         =   "frmComEntPedidos.frx":08FB
+            Picture         =   "frmComEntPedidos.frx":0938
             ToolTipText     =   "Buscar proveedor varios"
             Top             =   210
             Visible         =   0   'False
@@ -1708,7 +1707,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   1
             Left            =   900
-            Picture         =   "frmComEntPedidos.frx":09FD
+            Picture         =   "frmComEntPedidos.frx":0A3A
             ToolTipText     =   "Buscar población"
             Top             =   940
             Width           =   240
@@ -1780,7 +1779,7 @@ Begin VB.Form frmComEntPedidos2
             Height          =   240
             Index           =   3
             Left            =   6645
-            Picture         =   "frmComEntPedidos.frx":0AFF
+            Picture         =   "frmComEntPedidos.frx":0B3C
             ToolTipText     =   "Buscar forma de pago"
             Top             =   930
             Width           =   240
@@ -1996,7 +1995,7 @@ Begin VB.Form frmComEntPedidos2
          Width           =   7485
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmComEntPedidos.frx":0C01
+         Bindings        =   "frmComEntPedidos.frx":0C3E
          Height          =   2865
          Left            =   240
          TabIndex        =   54
@@ -2087,7 +2086,7 @@ Begin VB.Form frmComEntPedidos2
          Height          =   240
          Index           =   12
          Left            =   -72720
-         Picture         =   "frmComEntPedidos.frx":0C16
+         Picture         =   "frmComEntPedidos.frx":0C53
          ToolTipText     =   "Buscar dirección"
          Top             =   3000
          Width           =   240
@@ -2096,7 +2095,7 @@ Begin VB.Form frmComEntPedidos2
          Height          =   240
          Index           =   1
          Left            =   -73800
-         Picture         =   "frmComEntPedidos.frx":0D18
+         Picture         =   "frmComEntPedidos.frx":0D55
          ToolTipText     =   "Buscar fecha"
          Top             =   3000
          Width           =   240
@@ -2115,7 +2114,7 @@ Begin VB.Form frmComEntPedidos2
          Height          =   240
          Index           =   11
          Left            =   -73920
-         Picture         =   "frmComEntPedidos.frx":0DA3
+         Picture         =   "frmComEntPedidos.frx":0DE0
          ToolTipText     =   "Buscar dirección"
          Top             =   2400
          Width           =   240
@@ -2157,6 +2156,15 @@ Begin VB.Form frmComEntPedidos2
       Visible         =   0   'False
       Width           =   1035
    End
+   Begin VB.Image imgBuscar 
+      Height          =   240
+      Index           =   13
+      Left            =   3720
+      Picture         =   "frmComEntPedidos.frx":0EE2
+      ToolTipText     =   "Ampliacion"
+      Top             =   6660
+      Width           =   240
+   End
    Begin VB.Label lblF 
       Caption         =   "Label2"
       BeginProperty Font 
@@ -2191,7 +2199,6 @@ Begin VB.Form frmComEntPedidos2
       Left            =   2400
       TabIndex        =   42
       Top             =   6720
-      Visible         =   0   'False
       Width           =   1335
    End
    Begin VB.Menu mnOpciones 
@@ -2912,6 +2919,10 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
         Else
             txtAux2(8).Text = ""
         End If
+    Else
+        If Modo = 2 Then
+            If Not Data2.Recordset.EOF Then Text2(16).Text = DBLet(Data2.Recordset!Ampliaci, "T")
+        End If
     End If
     Exit Sub
     
@@ -3251,7 +3262,13 @@ End Sub
 Private Sub imgBuscar_Click(index As Integer)
 Dim Indice As Byte
 
-    If Modo = 2 Or Modo = 0 Then Exit Sub
+    If index = 13 Then
+        If Modo = 0 Then Exit Sub
+        If Not (Modo = 2 Or Modo = 5) Then Exit Sub
+                
+    Else
+        If Modo = 2 Or Modo = 0 Then Exit Sub
+    End If
     Screen.MousePointer = vbHourglass
     Indice = 0
     Select Case index
@@ -3352,6 +3369,20 @@ Dim Indice As Byte
                 CadenaSQL = ""
             End If
 
+
+        Case 13
+                CadenaDesdeOtroForm = Text2(16).Text
+                frmFacClienteObser.Modificar = Modo = 5 And ModificaLineas > 0
+                frmFacClienteObser.Text1 = CadenaDesdeOtroForm
+                frmFacClienteObser.Show vbModal
+                'Llevara DOS VALORES.
+                'Si modifica y el texto
+                If Modo = 5 And ModificaLineas > 0 Then
+                    If RecuperaValor(CadenaDesdeOtroForm, 1) = "1" Then Text2(16).Text = Mid(CadenaDesdeOtroForm, 3)
+                End If
+                CadenaDesdeOtroForm = ""
+
+
     End Select
     If Indice > 0 Then PonerFoco Text1(Indice)
     Screen.MousePointer = vbDefault
@@ -3371,8 +3402,6 @@ Dim Indice As Byte
         Indice = 28
    End If
 
-   
-   
    
    Me.imgFecha(0).Tag = Indice
    
@@ -3964,11 +3993,12 @@ On Error GoTo EPonerModo
     For I = 0 To Me.imgBuscar.Count - 1
         Me.imgBuscar(I).Enabled = b
     Next I
+    Me.imgBuscar(13).Enabled = Modo = 2 Or Modo = 5
     Me.imgBuscar(1).visible = False
            
     'Modo Linea de Ofertas. Poner el campo ampliacion linea
-    Me.Label1(35).visible = (Modo = 5)
-    Me.Text2(16).visible = (Modo = 5)
+  '  Me.Label1(35).visible = (Modo = 5)
+  '  Me.Text2(16).visible = (Modo = 5)
     BloquearTxt Text2(16), True
     
     ' ---- [20/10/2009] [LAURA] : añadir del centro de coste
@@ -4485,6 +4515,9 @@ On Error GoTo ECargaGrid
                 Else
                     vDataGrid.Columns(I).visible = False
                 End If
+                
+                I = I + 1
+                vDataGrid.Columns(I).visible = False  'ampliacion
                 
 '                vDataGrid.Columns(i).Alignment = dbgRight
 '                vDataGrid.Columns(i).NumberFormat = FormatoImporte
@@ -5040,7 +5073,7 @@ Dim SQL As String
     SQL = "SELECT numpedpr, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad, "
     If conServidas Then SQL = SQL & "recibida, "
 '    SQL = SQL & "precioar, origpre, dtoline1, dtoline2,importel "
-    SQL = SQL & "precioar, dtoline1, dtoline2,importel,codccost "
+    SQL = SQL & "precioar, dtoline1, dtoline2,importel,codccost,ampliaci "
     SQL = SQL & " FROM " & NomTablaLineas
     If enlaza Then
         SQL = SQL & " " & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)

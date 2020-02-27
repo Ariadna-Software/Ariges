@@ -62,13 +62,15 @@ Private Function InsertarCabeceraHistorico(cadWhere As String, Optional cadeN As
 Dim SQL As String
 Dim Aux As String
 Dim SegundaTablaCabeceras As Boolean
+Dim CadenaInsercicon As String
+
 On Error Resume Next
 
     
 
     NomTablaLinH = ""
     SegundaTablaCabeceras = False
-    
+    CadenaInsercicon = ""
     Select Case CodTipoMov
       Case "PEV" 'pedidos de venta a clientes
         NomTabla = "scaped"
@@ -100,9 +102,27 @@ On Error Resume Next
         'Enero 2016               abri16      ago17
         SQL = SQL & ", PideCliente,numbultos,fechaAux,puntos"
         'NOV 2018
-        SQL = SQL & ", codinter,codnatura,notasportes,chofer "
-        'JUN 19
-        SQL = SQL & ", FechaEnt , perrecep, dnirecep, latitud, Longitud"
+        SQL = SQL & ", codinter,codnatura,chofer,notasportes"
+        'JUN 19-DIC19
+        SQL = SQL & ",  FechaEnt , perrecep ,  latitud, Longitud ,dnirecep"
+            
+        CadenaInsercicon = " codtipom,numalbar,fechaalb,codigusu,fechelim,trabelim,codincid,"
+        CadenaInsercicon = CadenaInsercicon & "factursn,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
+        CadenaInsercicon = CadenaInsercicon & "coddirec,nomdirec,referenc,facturkm,cantidkm,codtraba,codtrab1,codtrab2,codagent,codforpa,codenvio,dtoppago,dtognral,"
+        CadenaInsercicon = CadenaInsercicon & "tipofact,observa01,observa02,observa03,observa04,observa05,numofert,fecofert,numpedcl,fecpedcl,fecentre,sementre,esticket,numtermi,numventa "
+        CadenaInsercicon = CadenaInsercicon & ",aportacion, pesoalba, portes, fecenvio, docarchiv"
+        CadenaInsercicon = CadenaInsercicon & ",tipliquid, actuacion,tipoimp,origdat,coddiren,tipAlbaran,albImpreso , codzonas,observacrm"
+        'Ocvubre 2015
+        CadenaInsercicon = CadenaInsercicon & ", ManipuladorNumCarnet , ManipuladorFecCaducidad , ManipuladorNombre,TipoCarnet"
+        'Enero 2016               abri16      ago17
+        CadenaInsercicon = CadenaInsercicon & ", PideCliente,numbultos,fechaAux,puntos"
+        'NOV 2018
+        CadenaInsercicon = CadenaInsercicon & ", codinter,codnatura,chofer,notasportes"
+        'JUN 19-DIC19
+        CadenaInsercicon = CadenaInsercicon & ",  FechaEnt , perrecep ,  latitud, Longitud ,dnirecep"
+            
+        CadenaInsercicon = "(" & CadenaInsercicon & ")  "
+            
             
         If InstalacionEsEulerTaxco Then SegundaTablaCabeceras = True
             
@@ -161,10 +181,13 @@ On Error Resume Next
            
         
     SQL = SQL & " FROM " & NomTabla & " WHERE " & cadWhere
-    SQL = "INSERT INTO " & NomTablaH & SQL
+    SQL = "INSERT INTO " & NomTablaH & CadenaInsercicon & SQL
     
     conn.Execute SQL
-    
+    If Err.Number <> 0 Then
+        MuestraError Err.Number, Err.Description
+        Exit Function
+    End If
     
     
     
@@ -231,7 +254,7 @@ On Error Resume Next
         NomTablaLin = "slialb"
         NomTablaLinH = "slhalb"
         SQL = " SELECT scaalb.codtipom,scaalb.numalbar,scaalb.fechaalb,slialb.numlinea,slialb.codalmac,slialb.codartic,slialb.nomartic,slialb.ampliaci,slialb.cantidad,slialb.numbultos,precioar,dtoline1,dtoline2,importel,origpre ,codproveX,numlote,codccost"
-        SQL = SQL & ",codtipor,codcapit ,precoste,slialb.codtraba,pvpInferior,comisionagente,idL,ordenlin "
+        SQL = SQL & ",codtipor,codcapit ,precoste,slialb.codtraba,pvpInferior,comisionagente,idL,ordenlin,dtoCantidad "
         SQL = SQL & " FROM scaalb INNER JOIN slialb on scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
         SQL = SQL & " WHERE " & cadWhere
         EsAlbaran = True
@@ -269,8 +292,10 @@ On Error Resume Next
     SQL = "INSERT INTO " & NomTablaLinH & SQL
     
     conn.Execute SQL
-    
-    
+    If Err.Number <> 0 Then
+        MuestraError Err.Number, , Err.Description
+        Exit Function
+    End If
     'DAVID 03/NOV/2010
     'En ofertas, ademas de cbeceras lineas, hay lineas 2
     If CodTipoMov = "OFE" Then

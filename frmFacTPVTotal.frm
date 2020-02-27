@@ -878,6 +878,13 @@ Dim cad As String
         .Buttons(12).Image = 14  'Salir
     End With
     
+    If vParamAplic.NumeroInstalacion = vbTaxco Then
+        Toolbar1.Buttons(4).Enabled = False 'Generar Albaran
+        Toolbar1.Buttons(6).Enabled = False    'Generar Factura
+        BloquearTxt Text1(4), True
+    End If
+    
+    
     miFechaTicket = Now 'FECHA DE HOY
     
     primeravez = True

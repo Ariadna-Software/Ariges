@@ -9,31 +9,31 @@ Attribute VB_Name = "Errores"
 
 Public Sub ControlamosError(ByRef CADENA As String)
 
-Select Case Conn.Errors(0).NativeError
+Select Case conn.Errors(0).NativeError
 Case 0
     CADENA = "El controlador ODBC no admite las propiedades solicitadas."
 Case 1044
-    CADENA = "Acceso denegado para usuario: " & CadenaDesde(15, Conn.Errors(0).Description, ":")
+    CADENA = "Acceso denegado para usuario: " & CadenaDesde(15, conn.Errors(0).Description, ":")
 Case 1045
-    CADENA = "Acceso denegado para usuario: " & CadenaDesde(15, Conn.Errors(0).Description, ":")
+    CADENA = "Acceso denegado para usuario: " & CadenaDesde(15, conn.Errors(0).Description, ":")
 Case 1048
-    CADENA = "Columna no puede ser nula: " & CadenaDesde(1, Conn.Errors(0).Description, ":")
+    CADENA = "Columna no puede ser nula: " & CadenaDesde(1, conn.Errors(0).Description, ":")
 Case 1049
-    CADENA = "Base de datos desconocida: " & CadenaDesde(1, Conn.Errors(0).Description, "'")
+    CADENA = "Base de datos desconocida: " & CadenaDesde(1, conn.Errors(0).Description, "'")
 Case 1052
-    CADENA = "La columna :" & CadenaDesde(1, Conn.Errors(0).Description, "'") & " tiene un nombre ambiguo "
+    CADENA = "La columna :" & CadenaDesde(1, conn.Errors(0).Description, "'") & " tiene un nombre ambiguo "
 Case 1054
     CADENA = "Columna desconocida en cadena SQL."
 Case 1062
-    CADENA = "Entrada duplicada en BD." & vbCrLf & CadenaDesde(60, Conn.Errors(0).Description, "'")
+    CADENA = "Entrada duplicada en BD." & vbCrLf & CadenaDesde(60, conn.Errors(0).Description, "'")
 Case 1064
     CADENA = "Error en el SQL."
 Case 1109
-    CADENA = "Tabla desconocida:  " & CadenaDesde(1, Conn.Errors(0).Description, "'")
+    CADENA = "Tabla desconocida:  " & CadenaDesde(1, conn.Errors(0).Description, "'")
 Case 1110
-    CADENA = "Columna : " & CadenaDesde(1, Conn.Errors(0).Description, "'") & " especificada dos veces"
+    CADENA = "Columna : " & CadenaDesde(1, conn.Errors(0).Description, "'") & " especificada dos veces"
 Case 1146
-    CADENA = "Tabla no existe:  " & CadenaDesde(1, Conn.Errors(0).Description, "'")
+    CADENA = "Tabla no existe:  " & CadenaDesde(1, conn.Errors(0).Description, "'")
 Case 1136
     CADENA = "Nº de columnas en el SQL incorrectos."
 Case 1205
@@ -43,9 +43,9 @@ Case 1216
 Case 1217
     CADENA = "El registro es clave referencial en otras tablas"
 Case 2003
-    CADENA = "Imposible conectar con el servidor " & CadenaDesde(15, Conn.Errors(0).Description, "'")
+    CADENA = "Imposible conectar con el servidor " & CadenaDesde(15, conn.Errors(0).Description, "'")
 Case 2005
-    CADENA = "Servidor host MYSQL desconocido:  " & CadenaDesde(1, Conn.Errors(0).Description, "'")
+    CADENA = "Servidor host MYSQL desconocido:  " & CadenaDesde(1, conn.Errors(0).Description, "'")
 Case 2013
     CADENA = "Se ha perdido la conexión con el servidor MySQL durante la ejecución."
 Case Else
@@ -269,7 +269,7 @@ End Function
 '"Tabla '%-.64s' está marcada como crashed y la última reparación (automactica?) falló",
 '"Aviso:  Algunas tablas no transancionales no pueden tener rolled back",
 '"Multipla transición necesita mas que 'max_binlog_cache_size' bytes de almacenamiento. Aumente esta variable mysqld y tente de nuevo',
-'"Esta operación no puede ser hecha con el esclavo funcionando, primero use SLAVE STOP",
+'"Esta operación no puede ser hecha con el esclavo funcionando, primero use SLAVE ST OP",
 '"Esta operación necesita el esclavo funcionando, configure esclavo y haga el SLAVE START",
 '"El servidor no está configurado como esclavo, edite el archivo config file o con CHANGE MASTER TO",
 '"No puedo inicializar la estructura info del master, verifique permisiones en el master.info",

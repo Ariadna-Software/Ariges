@@ -1621,7 +1621,7 @@ Dim InsertandoFAM As Boolean
 
 Dim DesdeAlvic As Boolean
 Dim ImportePoste As Currency
-
+Dim AjustarCentimo As Boolean
     CalcularDatosFactura = False
     On Error GoTo ECalcular
 
@@ -1690,10 +1690,10 @@ Dim ImportePoste As Currency
                 'NORMAL, todo normal
                 SQL = "SELECT sartic.codigiva,sum(importel) as bruto"
                 
-                
-                If codtipom = "FAD" Or codtipom = "FAB" Then
+  
+                If codtipom = "FAD" Or codtipom = "FAB" Or codtipom = "FA1" Then
                     DesdeAlvic = True
-                    SQL = SQL & " , precoste ImportepagadoAlvic"
+                    SQL = SQL & " , sum(coalesce(precoste,0)) ImportepagadoAlvic"
                 End If
             End If
             SQL = SQL & " FROM " & NomTablaLin & " LEFT OUTER JOIN sartic ON " & NomTablaLin & ".codartic=sartic.codartic"
@@ -1707,7 +1707,7 @@ Dim ImportePoste As Currency
     RS.Open SQL, conn, adOpenKeyset, adLockOptimistic, adCmdText
     NueroIvas = 0 'Numero IVAS
     ImporteParaComparar = 0
-    
+    ImportePoste = 0
     'VEre cuantos IVAS tiene y el bruto. Para cuadrar los decimales
     'If codtipom = "FAM" Then
     If InsertandoFAM Then
@@ -1720,7 +1720,7 @@ Dim ImportePoste As Currency
             ImporteParaComparar = ImporteParaComparar + TotBruto
             
             If NueroIvas = 0 And DesdeAlvic Then
-                ImportePoste = DBLet(RS!ImportepagadoAlvic, "N")
+                ImportePoste = ImportePoste + DBLet(RS!ImportepagadoAlvic, "N")
                 If ImportePoste = 0 Then DesdeAlvic = False
             End If
             
@@ -1884,11 +1884,40 @@ Dim ImportePoste As Currency
                             '' ImportePoste
                         Impaux = BaseIVA1 + ImpIVA1 + ImpIVA1RE
                         
-                        Impaux = Impaux - ImportePoste
-                        If Abs(Impaux) < 0.03 Then
+                        Impaux = ImportePoste - Impaux
+                        If Abs(Impaux) <> 0 Then
+                            If ImportePoste >= 60 Then
+                                If ImportePoste >= 100 Then
+                                    If ImportePoste >= 200 Then
+                                        AjustarCentimo = Abs(Impaux) < 0.08
+                                    Else
+                                        AjustarCentimo = Abs(Impaux) < 0.06
+                                    End If
+                                Else
+                                    AjustarCentimo = Abs(Impaux) < 0.05
+                                End If
+                                
+                            Else
+                                AjustarCentimo = Abs(Impaux) < 0.03
+                            End If
+                            If AjustarCentimo Then
                             
-                        Else
-                            
+                                If Abs(Impaux) >= 0.03 And PorceIVA1RE = 0 Then
+                                    Debug.Print "M"
+                                    Impaux = (100 + PorceIVA1) / 100
+                                    Impaux = Round2(ImportePoste / Impaux, 2)
+                                    BaseIVA1 = Impaux
+                                    ImpIVA1 = ImportePoste - BaseIVA1
+                                
+                                Else
+                                
+                                    ImpIVA1 = ImpIVA1 + Impaux
+                                    TotImpIVA = TotImpIVA + Impaux
+                                    'BaseIVA1 ImpIVA1 + ImpIVA1RE
+                                End If
+                            Else
+                                Debug.Print "M"
+                            End If
                         End If
                         
                     End If
@@ -2180,7 +2209,11 @@ Dim Insertar_En_Tambien_En_CobrosTesoreria As Boolean
             'En taxco, si S
             If vParamAplic.NumeroInstalacion = vbTaxco Then
                 Insertar_En_Tambien_En_CobrosTesoreria = False
-                If UnaUnicaFactura Then codtipom = "FA1"
+                If UnaUnicaFactura Then
+                    codtipom = "FA1"
+                Else
+                    If mCodForpa = 2 Then Insertar_En_Tambien_En_CobrosTesoreria = True
+                End If
             End If
         
         Case "ALB"
@@ -2188,7 +2221,11 @@ Dim Insertar_En_Tambien_En_CobrosTesoreria As Boolean
             'En taxco, si S
             If vParamAplic.NumeroInstalacion = vbTaxco Then
                 Insertar_En_Tambien_En_CobrosTesoreria = False
-                If UnaUnicaFactura Then codtipom = "FA2"
+                If UnaUnicaFactura Then
+                    codtipom = "FA2"
+                Else
+                    If mCodForpa = 2 Then Insertar_En_Tambien_En_CobrosTesoreria = True
+                End If
             End If
             
         'Gasolinera tipos
@@ -3196,7 +3233,8 @@ Dim Aux2 As String
     '   si cojo slialb:  tengo la columna
 
 
-
+  
+        
     'Otra modificacion:   16 Mayo 08
     ' Se permiten dtos, con lo cual la donde ponia 0 as dto ya no vale
     
@@ -3212,7 +3250,10 @@ Dim Aux2 As String
     
     
     'Febrero 2019.  IDL y ordenlin
-    SQL = SQL & ", idL , ordenlin )"
+    SQL = SQL & ", idL , ordenlin "
+    'Feb 2020     ALVIC.   Dto cantidad. Para pintarlo en el
+    SQL = SQL & ",  dtoCantidad )"
+
     Observas = False
     If codtipom = "FAM" Then 'facturas de mantenimientos
     
@@ -3316,7 +3357,7 @@ Dim Aux2 As String
                     NumAlbTicket = NumAlbTicket & ",NULL,NULL,NULL,NULL,0,0"
                     'idl orden lin
                     NumAlbTicket = NumAlbTicket & ",0,0"
-                    NumAlbTicket = NumAlbTicket & ")"
+                    NumAlbTicket = NumAlbTicket & ", 0)"
                     Set cart = Nothing
     
     
@@ -3370,8 +3411,8 @@ Dim Aux2 As String
             SQL = SQL & DBSet(manCCost, "T", "S")
             'SAIL codtipor codcapit precoste codtraba   pvpinf comisionagente
             SQL = SQL & ",NULL,NULL,NULL,NULL,0,0"
-            'idl orden lin
-            SQL = SQL & ",0,0"
+            'idl orden lin  dtoCantidad
+            SQL = SQL & ",0,0 , 0"
             SQL = SQL & ")"
             Set cart = Nothing
         End If
@@ -3390,7 +3431,7 @@ Dim Aux2 As String
         'SAIL codtipor codcapit precoste codtraba ,ppvpinferior,comisionagente
         SQL = SQL & ",NULL,NULL,NULL,NULL,0,0"
         'idl  orden lin
-        SQL = SQL & ",0,0"
+        SQL = SQL & ",0,0 , 0"
         
         
         '--
@@ -3421,8 +3462,8 @@ Dim Aux2 As String
         SQL = SQL & ",codccost"
         'SAIL codtipor codcapit precoste codtraba pvp inf comisionagente
         SQL = SQL & ",NULL,NULL,NULL,NULL,0,0"
-        'idl  orden lin
-        SQL = SQL & ",0,0"
+        'idl  orden lin  dtoCantidad
+        SQL = SQL & ",0,0 , 0"
         
         '--
         SQL = SQL & " FROM sliven "
@@ -3441,8 +3482,8 @@ Dim Aux2 As String
         
         'SAIL
         SQL = SQL & ",codtipor, codcapit, precoste, codtraba,pvpInferior,comisionagente"
-        'idl  orden lin
-        SQL = SQL & ",idL ,ordenlin "
+        'idl  orden lin   dtoCantidad
+        SQL = SQL & ",idL ,ordenlin, dtoCantidad "
             
         SQL = SQL & " FROM slialb "
         '-- Laura 15/09/2006: añadir precios del articulo a las lineas de factura
@@ -3460,13 +3501,16 @@ Dim Aux2 As String
     'Para SAIL
     If vParamAplic.TipoFormularioClientes = 1 And Observas Then
         'Para SAIL
-        SQL = "INSERT INTO slifaT (codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,observa)"
-        SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "codtipom as codtipoa, "
-        SQL = SQL & "numalbar,numlinea,observa "
-        SQL = SQL & " FROM slialt "
-        '--
-        SQL = SQL & " WHERE " & Replace(cadSQL, "scaalb", "slialt")
-        conn.Execute SQL
+        If vParamAplic.NumeroInstalacion <> vbTaxco Then
+        
+            SQL = "INSERT INTO slifaT (codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,observa)"
+            SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "codtipom as codtipoa, "
+            SQL = SQL & "numalbar,numlinea,observa "
+            SQL = SQL & " FROM slialt "
+            '--
+            SQL = SQL & " WHERE " & Replace(cadSQL, "scaalb", "slialt")
+            conn.Execute SQL
+        End If
     End If
 
 
@@ -3544,7 +3588,7 @@ Dim Aux2 As String
     End If
 
 
-    If InstalacionEsEulerTaxco Then
+    If InstalacionEsEulerTaxco And codtipom <> "FTI" Then
         
         'EULER slialb_eu  -> slifac_eu
         'Llevara costes hora, albaran prov, fra pro y las mismas lineas de este albaran introducidas a precio coste
@@ -3665,7 +3709,9 @@ Dim TipoA As String
     SQL = SQL & TipoA
     
     SQL = SQL & "  ORDER BY Fechaalb"
-    conn.Execute SQL
+    
+    'SOLO EULER. Taxco NO, si no podira estar bloqueado scafac
+    If vParamAplic.NumeroInstalacion = vbEuler Then conn.Execute SQL
     
     
     
@@ -3679,7 +3725,8 @@ Dim TipoA As String
     SQL = SQL & ",concat(nomprove ,' (' ,scafpc.codprove ,')'),concat('FAC_',scafpc.numfactu)  FROM scafpc,slifpc, (SELECT @rownum:=70) r "
     SQL = SQL & "  where scafpc.codprove = scafpc.codprove And scafpc.numfactu = slifpc.numfactu And scafpc.fecfactu = slifpc.fecfactu AND "
     SQL = SQL & TipoA
-    conn.Execute SQL
+    'SOLO EULER. Taxco NO, si no podira estar bloqueado scafac
+    If vParamAplic.NumeroInstalacion = vbEuler Then conn.Execute SQL
     
     
     

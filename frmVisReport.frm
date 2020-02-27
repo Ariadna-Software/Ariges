@@ -297,7 +297,7 @@ Dim C As Integer
 End Function
 
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
 Dim Incio As Single
 Dim fin As Boolean
     If primeravez Then
@@ -361,7 +361,12 @@ Dim BDConta As String
                 
             'If (InStr(1, mrpt.Database.Tables(i).Name, "_") = 0) Then
             If RedireccionamosTabla(CStr(mrpt.Database.Tables(I).Name)) Then
+        
                mrpt.Database.Tables(I).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(I).Name
+            Else
+                'Febrero2020
+                If vUsu.Login = "root" Then MsgBox "El programa continuará.         Redireccionando _ "
+                mrpt.Database.Tables(I).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(I).Location
             End If
     
     

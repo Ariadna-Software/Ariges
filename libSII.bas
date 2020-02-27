@@ -82,7 +82,10 @@ Dim TicketAgrupado As String
             If Horas > 1 Then Mensaje = "O"
         End If
         If Mensaje = "" Then
+            
             cad = "fecrecep>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND intconta "
+            'Solo aviso intconta.  Las facturas suben al sii con fecha integracion contable
+            cad = " intconta "
             cad = DevuelveDesdeBD(conAri, "min(fecrecep)", "scafpc", cad, "0")
             If cad <> "" Then
                 Horas = DateDiff("d", CDate(cad), Now)

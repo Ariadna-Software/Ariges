@@ -776,7 +776,7 @@ Dim Documento As String
                 .Show vbModal
             End With
 
-        Case "ALV", "ART", "ALM", "ALZ", "ALI", "ALS", "ALO", "ALE", "ALR"
+        Case "ALV", "ART", "ALM", "ALZ", "ALI", "ALS", "ALO", "ALE", "ALR", "ALD", "ALB"
                                 'ALV:Albaran de Venta (a clientes)
                                 'ART: Albaran rectificativo
                                 'ALM: ALbaran Mostrador

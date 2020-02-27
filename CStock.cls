@@ -507,7 +507,7 @@ Dim AuxD As String
                     If AuxD = "1" And vParamAplic.TieneComponentes_y_Produccion Then
                         AuxD = DevuelveDesdeBDNew(conAri, "sartic", "EsProduccion", "codartic", mvarCodArtic, "T")
                         If AuxD = "1" Then
-                            AuxD = "0"          ': Stop 'No lo meto. Es produccion
+                            AuxD = "0"          ': St op 'No lo meto. Es produccion
                         Else
                             AuxD = "1"          'Es virtual, componentes
                         End If
@@ -706,7 +706,7 @@ Dim AnyadirArticCompo As Boolean
         If cadMen = 1 Then
             If vParamAplic.TieneComponentes_y_Produccion Then
                 AuxD = DevuelveDesdeBDNew(conAri, "sartic", "EsProduccion", "codartic", mvarCodArtic, "T")
-                If AuxD = "1" Then cadMen = 0   ': Stop 'No lo meto
+                If AuxD = "1" Then cadMen = 0   ': Sto p 'No lo meto
             End If
         End If
         If Val(cadMen) = 1 And Not vParamAplic.Produccion Then AñadirArticulosConjunto vD
@@ -915,7 +915,7 @@ Dim EliminarPrimeraEntradaPpal As Boolean   'HERBELCA Mayo 2018
  
         If vParamAplic.TieneComponentes_y_Produccion Then
             AuxD = DevuelveDesdeBDNew(conAri, "sartic", "EsProduccion", "codartic", mvarCodArtic, "T")
-            If AuxD = "1" Then cadMen = 0   ': Stop 'No lo meto
+            If AuxD = "1" Then cadMen = 0   ': St op 'No lo meto
         End If
 
         

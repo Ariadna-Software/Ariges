@@ -790,6 +790,8 @@ End Sub
 '               EULER
 '               4.- Orden de trabajo
 '               5.- Trabajo exterior
+'               'TAXCO
+'               6.- Tienda alvic
 Public Sub ImprimirFacturas(listaF As String, fechaF As String, SQL As String, FormatoFactura As Byte, NumeroCopias As Byte, OrdenadoPorCliente As Boolean, HazPulsarAceptar As Boolean, EsDeReimpresionFacturas As Boolean)
 Dim cadFormula As String
 Dim cadParam As String
@@ -887,6 +889,8 @@ Dim ListaFacturasDefinitiva As String
         indRPT = 78  'orden de trabajo
     ElseIf FormatoFactura = 5 Then
         indRPT = 79     'trabjo exterior
+    ElseIf FormatoFactura = 6 Then
+        indRPT = 93
     End If
     
     

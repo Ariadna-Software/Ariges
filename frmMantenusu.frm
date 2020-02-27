@@ -1382,10 +1382,10 @@ End Sub
 Private Sub MandaBusquedaPrevia()
 
         'Vere que usuarios tienen configuracion de menus echa
-        SQL = "Select distinct(codusu) from usuarios.appmenususuario where codusu <> " & ListView1.SelectedItem.Text
+        SQL = "Select distinct(codusu) from usuarios.appmenususuario where  aplicacion='Ariges' and codusu <> " & ListView1.SelectedItem.Text
         
         Set miRsAux = New ADODB.Recordset
-        miRsAux.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         SQL = ""
         While Not miRsAux.EOF
             SQL = SQL & ", " & miRsAux!CodUsu
@@ -1401,7 +1401,7 @@ Private Sub MandaBusquedaPrevia()
         
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = "Codigo|usuarios|codusu|N||25·Nombre|usuarios|nomusu|n||25·"""
+        frmB.vCampos = "Codigo|usuarios|codusu|N||25·Nombre|usuarios|nomusu|n||75·"""
         frmB.vTabla = "usuarios.usuarios"
         frmB.vSQL = SQL
         '###A mano
@@ -1409,7 +1409,7 @@ Private Sub MandaBusquedaPrevia()
 '        frmB.vDevuelve = devuelve
         frmB.vTitulo = "Usuarios conf. menu"
         frmB.vselElem = 1
-        frmB.vConexionGrid = conConta    'conAri  Conexión a BD: Ariges  conConta a la conta
+        frmB.vConexionGrid = conAri    'conAri  Conexión a BD: Ariges  conConta a la conta
         SQL = ""
         frmB.Show vbModal
         Set frmB = Nothing
@@ -1421,12 +1421,13 @@ Private Sub MandaBusquedaPrevia()
             CadenaDesdeOtroForm = CadenaDesdeOtroForm & vbCrLf & vbCrLf & "¿Continuar?"
             If MsgBox(CadenaDesdeOtroForm, vbQuestion + vbYesNoCancel) = vbYes Then
                 'Borro si tuviera configuracion
-                CadenaDesdeOtroForm = "DELETE FROM usuarios.appmenususuario WHERE codusu = " & Me.ListView1.SelectedItem.Text
-                ConnConta.Execute CadenaDesdeOtroForm
+                CadenaDesdeOtroForm = "DELETE FROM usuarios.appmenususuario WHERE  aplicacion='Ariges' and codusu = " & Me.ListView1.SelectedItem.Text
+                conn.Execute CadenaDesdeOtroForm
                 'Inserto la del usuario
-                CadenaDesdeOtroForm = "select aplicacion," & Me.ListView1.SelectedItem.Text & ",codigo,tag from usuarios.appmenususuario where codusu = " & RecuperaValor(SQL, 1)
+                CadenaDesdeOtroForm = "select aplicacion," & Me.ListView1.SelectedItem.Text & ",codigo,tag from usuarios.appmenususuario "
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & " where  aplicacion='Ariges'  and codusu = " & RecuperaValor(SQL, 1)
                 CadenaDesdeOtroForm = "INSERT INTO usuarios.appmenususuario(aplicacion,codusu,codigo,tag)  " & CadenaDesdeOtroForm
-                ConnConta.Execute CadenaDesdeOtroForm
+                conn.Execute CadenaDesdeOtroForm
                 
                 MsgBox "Datos copiados", vbInformation
             End If

@@ -504,7 +504,7 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     End If
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -590,19 +590,19 @@ End Sub
 
 
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
-Dim jj As Integer
+Dim Jj As Integer
 Dim b As Boolean
 
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
     b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
     
-    For jj = 0 To txtAux.Count - 1
+    For Jj = 0 To txtAux.Count - 1
      
-        txtAux(jj).Height = DataGrid1.RowHeight
-        txtAux(jj).Top = alto
-        txtAux(jj).visible = b
-    Next jj
+        txtAux(Jj).Height = DataGrid1.RowHeight
+        txtAux(Jj).Top = alto
+        txtAux(Jj).visible = b
+    Next Jj
     Combo1.visible = b
     Combo1.Top = alto
 End Sub
@@ -915,8 +915,8 @@ Dim J As Currency
     
     If b And Combo1.ListIndex = 2 Then
         J = ImporteFormateado(txtAux(4).Text)
-        If J < 0 Or J > 100 Then
-            MsgBox "Descuento porcentual. Valores entre 0 y 100", vbExclamation
+        If J < -100 Or J > 100 Then
+            MsgBox "Descuento porcentual. Valores entre -100 y 100", vbExclamation
             b = False
         End If
     End If

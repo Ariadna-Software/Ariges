@@ -265,7 +265,7 @@ Dim numlinea As Integer
 Dim Importe As Currency
 Dim DatosRetencion As String
 Dim Cliente As String
-
+Dim C22 As String
     On Error GoTo EIntegraLaFactura
     'Sabemos que
     'numfac     --> CODIGO FACTURA
@@ -372,7 +372,11 @@ Dim Cliente As String
     Else
         DocConcAmp = RecuperaValor(AmpliacionFacurasCli, 3)
     End If
-    DocConcAmp = "'" & Format(numFac, "00000") & "'," & DocConcAmp & ",'"
+    
+    
+    C22 = Format(numFac, "00000") 'lo que habia
+    If vParamAplic.NumeroInstalacion = vbTaxco Then C22 = RF!numSerie & C22
+    DocConcAmp = "'" & C22 & "'," & DocConcAmp & ",'"
     
     
     'Ampliacion segun parametros

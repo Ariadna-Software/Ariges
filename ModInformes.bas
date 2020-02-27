@@ -650,15 +650,21 @@ Dim I As Integer
             For NumRegElim = 1 To lw.ListItems.Count
                 '                                                En el tag YA esta grabado
                 If lw.ListItems(NumRegElim).Checked Then
-                    CADENA = CADENA & ",(" & vUsu.Codigo & "," & lw.ListItems(NumRegElim).Tag & ",0)"
+                    CADENA = CADENA & ",(" & vUsu.Codigo & "," & lw.ListItems(NumRegElim).Tag & ",0,"
+                    If lw.Name = "ListView3" Then
+                         CADENA = CADENA & lw.ListItems(NumRegElim).SubItems(3)
+                    Else
+                         CADENA = CADENA & "1"
+                    End If
+                    CADENA = CADENA & ")"
                     If (NumRegElim Mod 25) = 0 Then
-                        conn.Execute "insert into `tmpnseries` (`codusu`,`codartic`,`numlinea`,numserie,`numlinealb`) VALUES " & Mid(CADENA, 2) & ";"
+                        conn.Execute "insert into `tmpnseries` (`codusu`,`codartic`,`numlinea`,numserie,`numlinealb`,nummante) VALUES " & Mid(CADENA, 2) & ";"
                         CADENA = ""
                         DoEvents
                     End If
                 End If
             Next NumRegElim
-            If CADENA <> "" Then conn.Execute "insert into `tmpnseries` (`codusu`,`codartic`,`numlinea`,numserie,`numlinealb`) VALUES " & Mid(CADENA, 2) & ";"
+            If CADENA <> "" Then conn.Execute "insert into `tmpnseries` (`codusu`,`codartic`,`numlinea`,numserie,`numlinealb`,nummante) VALUES " & Mid(CADENA, 2) & ";"
 
         End If
 

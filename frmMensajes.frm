@@ -16,6 +16,109 @@ Begin VB.Form frmMensajes
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.Frame FrameEtiqEstant 
+      Height          =   7455
+      Left            =   0
+      TabIndex        =   31
+      Top             =   -120
+      Width           =   8535
+      Begin VB.CommandButton cmdEtiqEstan 
+         Caption         =   "Imprimir"
+         Height          =   375
+         Index           =   1
+         Left            =   5520
+         TabIndex        =   34
+         Top             =   6960
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdEtiqEstan 
+         Caption         =   "Cancelar"
+         Height          =   375
+         Index           =   0
+         Left            =   6960
+         TabIndex        =   33
+         Top             =   6960
+         Width           =   1215
+      End
+      Begin MSComctlLib.ListView ListView3 
+         Height          =   6495
+         Left            =   240
+         TabIndex        =   32
+         Top             =   360
+         Width           =   8055
+         _ExtentX        =   14208
+         _ExtentY        =   11456
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   5
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Descripcion"
+            Object.Width           =   6703
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   1
+            Text            =   "Precio"
+            Object.Width           =   2117
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Familia"
+            Object.Width           =   4057
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Cant."
+            Object.Width           =   1058
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "Codalmac"
+            Object.Width           =   0
+         EndProperty
+      End
+      Begin VB.Label Label6 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   13.5
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   1320
+         TabIndex        =   63
+         Top             =   6960
+         Width           =   4095
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   1
+         Left            =   600
+         Picture         =   "frmMensajes.frx":000C
+         Top             =   6960
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   0
+         Left            =   240
+         Picture         =   "frmMensajes.frx":0156
+         Top             =   6960
+         Width           =   240
+      End
+   End
    Begin VB.Frame FrameAcercaDe 
       BorderStyle     =   0  'None
       Height          =   3855
@@ -151,7 +254,7 @@ Begin VB.Form frmMensajes
       Begin VB.Image Image2 
          Height          =   735
          Left            =   0
-         Picture         =   "frmMensajes.frx":000C
+         Picture         =   "frmMensajes.frx":02A0
          Stretch         =   -1  'True
          Top             =   2880
          Width           =   1920
@@ -596,7 +699,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   67
-         Text            =   "frmMensajes.frx":042A
+         Text            =   "frmMensajes.frx":06BE
          Top             =   840
          Width           =   5895
       End
@@ -714,99 +817,6 @@ Begin VB.Form frmMensajes
          Top             =   240
          Visible         =   0   'False
          Width           =   5295
-      End
-   End
-   Begin VB.Frame FrameEtiqEstant 
-      Height          =   7455
-      Left            =   0
-      TabIndex        =   31
-      Top             =   -120
-      Width           =   8535
-      Begin VB.CommandButton cmdEtiqEstan 
-         Caption         =   "Imprimir"
-         Height          =   375
-         Index           =   1
-         Left            =   5520
-         TabIndex        =   34
-         Top             =   6960
-         Width           =   1215
-      End
-      Begin VB.CommandButton cmdEtiqEstan 
-         Caption         =   "Cancelar"
-         Height          =   375
-         Index           =   0
-         Left            =   6960
-         TabIndex        =   33
-         Top             =   6960
-         Width           =   1215
-      End
-      Begin MSComctlLib.ListView ListView3 
-         Height          =   6495
-         Left            =   240
-         TabIndex        =   32
-         Top             =   360
-         Width           =   8055
-         _ExtentX        =   14208
-         _ExtentY        =   11456
-         View            =   3
-         LabelEdit       =   1
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         Checkboxes      =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         NumItems        =   3
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Descripcion"
-            Object.Width           =   6703
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   1
-            Text            =   "Precio"
-            Object.Width           =   2117
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   2
-            Text            =   "Familia"
-            Object.Width           =   4410
-         EndProperty
-      End
-      Begin VB.Label Label6 
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   13.5
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   1320
-         TabIndex        =   63
-         Top             =   6960
-         Width           =   4095
-      End
-      Begin VB.Image imgCheck 
-         Height          =   240
-         Index           =   1
-         Left            =   600
-         Picture         =   "frmMensajes.frx":0430
-         Top             =   6960
-         Width           =   240
-      End
-      Begin VB.Image imgCheck 
-         Height          =   240
-         Index           =   0
-         Left            =   240
-         Picture         =   "frmMensajes.frx":057A
-         Top             =   6960
-         Width           =   240
       End
    End
    Begin VB.Frame FrameEmail 
@@ -2014,7 +2024,7 @@ On Error Resume Next
     FrameEtiqEstant.visible = False
     FrameCorreccionPrecios.visible = False
     FrameTraspasoMante.visible = False
-    FrameEMail.visible = False
+    FrameEmail.visible = False
     FrameErrorCC.visible = False
     FrameArticulosAgrupados.visible = False
     PulsadoSalir = True
@@ -2146,11 +2156,12 @@ On Error Resume Next
             H = FrameEtiqEstant.Height
             W = FrameEtiqEstant.Width
             PonerFrameVisible FrameEtiqEstant, True, H, W
-            
             If OpcionMensaje = 23 Then
                 ListView3.ColumnHeaders(3).Text = "Precio tarifa"
                 ListView3.ColumnHeaders(3).Alignment = lvwColumnRight
             End If
+            
+            
         Case 16, 20
             
             
@@ -2179,9 +2190,9 @@ On Error Resume Next
         Case 21
             'Ver email
             limpiar Me
-            H = FrameEMail.Height
-            W = FrameEMail.Width
-            PonerFrameVisible FrameEMail, True, H, W
+            H = FrameEmail.Height
+            W = FrameEmail.Width
+            PonerFrameVisible FrameEmail, True, H, W
             If cadWHERE2 = "0" Then
                 Caption = "Enviados"
                 Label5(0).Caption = "Para"
@@ -3221,6 +3232,19 @@ Private Sub Label9_Click()
         LanzaVisorMimeDocumento Me.hwnd, "http://help-ariges.ariadnasw.com/Versiones.html"
 End Sub
 
+Private Sub ListView3_DblClick()
+    If ListView3.ListItems.Count = 0 Then Exit Sub
+    If ListView3.SelectedItem Is Nothing Then Exit Sub
+    vCampos = InputBox("Art: " & ListView3.SelectedItem.Text, "Cambiar cantidad", Val(ListView3.SelectedItem.SubItems(3)))
+    If vCampos <> "" Then
+        If Val(vCampos) > 0 Then ListView3.SelectedItem.SubItems(3) = Val(vCampos)
+    End If
+End Sub
+
+Private Sub ListView3_KeyPress(KeyAscii As Integer)
+    ListView3_DblClick
+End Sub
+
 Private Sub lwArticulosAgrupados_DblClick()
     cmdArtAgrupado_Click 0
 End Sub
@@ -3288,7 +3312,9 @@ Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim IT As ListItem
 Dim RBarras As ADODB.Recordset
-    
+Dim J As Integer
+Dim Aux As String
+
     
     Set RBarras = New ADODB.Recordset
     Label6.Caption = "Cargando"
@@ -3315,6 +3341,7 @@ Dim RBarras As ADODB.Recordset
         RBarras.Find "codartic = " & DBSet(RS!codArtic, "T"), , adSearchForward, 1
         If RBarras.EOF Then
             SQL = ""
+            If vParamAplic.NumeroInstalacion = vbTaxco Then SQL = RS!codArtic
         Else
             SQL = RBarras!codigoea
         End If
@@ -3323,6 +3350,28 @@ Dim RBarras As ADODB.Recordset
         IT.Text = RS!NomArtic
         IT.SubItems(1) = Format(RS!PrecioVe, cadWHERE2)
         IT.SubItems(2) = RS!nomfamia
+        
+        IT.SubItems(3) = 1
+        IT.SubItems(4) = 1 'cdoalmac
+        
+        
+        If InStr(1, cadWhere, "slialp") > 0 Then
+            J = InStr(cadWhere, "1  and codartic in (")
+            If J > 0 Then
+                SQL = Mid(cadWhere, J + 20)    'len("1  and codartic in (")  = 20
+                SQL = Mid(SQL, 1, Len(SQL) - 1)
+                J = InStr(1, SQL, " WHERE ")
+                If J > 0 Then
+                    SQL = Mid(SQL, J + 7) & " AND codartic "
+                    Aux = "codalmac"
+                    SQL = DevuelveDesdeBD(conAri, "cantidad", "slialp", SQL, RS!codArtic, "T", Aux)
+                    If SQL <> "" Then
+                        IT.SubItems(3) = Val(SQL)
+                        IT.SubItems(4) = Aux
+                    End If
+                End If
+            End If
+        End If
         IT.Checked = True
         RS.MoveNext
         TotalArray = TotalArray + 1

@@ -6906,12 +6906,15 @@ Dim Indice As Integer
         Else
         
             
-            If InstalacionEsEulerTaxco Then
+            If vParamAplic.NumeroInstalacion = vbEuler Then
                 'Añadimos todos los tipos de albaran en la prefacturacion
                 cad = " {scaalb.codtipom} IN ['ALV','ALR','ALE','ALO','ALM','ALD','ALB','ALT'] "
             Else
                 cad = " {scaalb.codtipom}='" & codClien & "' "
             End If
+            
+           
+            
             If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
             If Not AnyadirAFormula(cadSelect, cad) Then Exit Sub
         End If
@@ -6988,6 +6991,7 @@ Dim Indice As Integer
     
         Titulo = "Previsión Facturación Ventas"
         If codClien = "ALR" Then Titulo = Titulo & "(REP)"
+        If codClien = "ALO" And vParamAplic.NumeroInstalacion = vbTaxco Then Titulo = "Prevision taller"
         '-- Si estan activos los servicios hay diferentes posibilidades y el título
         '   las refleja, la variabele 'indice' lleva la información del combo seleccionado y
         '   ha sido cargada un poco más arriba [SERVICIOS]
@@ -7815,9 +7819,16 @@ Dim Aux As String
             FramTaxcoTrabajador.visible = False
             Frame4.visible = (OpcionListado = 52)
             If OpcionListado = 52 Then
-                Label10(10).Caption = ""
+                cadFormula = codClien
+                If codClien = "ALD" Then cadFormula = "GASOLINERA"
+                If codClien = "ALB" Then cadFormula = "TIENDA"
+                
+                Label10(0).Caption = "Facturación de Albaranes " & cadFormula
                 Me.Frame15.Top = 5040
                 Frame15.visible = True
+                cadFormula = ""
+                
+                
             Else
                 Label10(10).Caption = "Albarán:     " & codClien & "   " & NumCod
                 Me.Frame15.Top = 1800
@@ -8252,7 +8263,7 @@ Dim tabla As String
             If PonerFormatoEntero(txtcodigo(index)) Then
             
                 If OpcionListado = 222 Then
-                    If vParamAplic.NumeroInstalacion = vbTaxco Then
+                    If vParamAplic.NumeroInstalacion = vbTaxco And codClien <> "ALE" Then
                         tabla = ""
                         If Val(txtcodigo(index)) < 1 Then tabla = "N"
                         If Val(txtcodigo(index)) > 3 Then tabla = "N"

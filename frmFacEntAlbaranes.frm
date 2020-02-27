@@ -389,58 +389,58 @@ Begin VB.Form frmFacEntAlbaranes2
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbaranes.frx":0065
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text2(1)"
-      Tab(1).Control(1)=   "Text1(44)"
-      Tab(1).Control(2)=   "Text2(43)"
-      Tab(1).Control(3)=   "Text1(43)"
-      Tab(1).Control(4)=   "FrameFacRec"
-      Tab(1).Control(5)=   "chkDocArchi"
-      Tab(1).Control(6)=   "Text1(41)"
-      Tab(1).Control(7)=   "Text1(39)"
-      Tab(1).Control(8)=   "FrameHco"
-      Tab(1).Control(9)=   "Text1(29)"
-      Tab(1).Control(10)=   "Text2(29)"
-      Tab(1).Control(11)=   "Text1(28)"
-      Tab(1).Control(12)=   "Text2(28)"
-      Tab(1).Control(13)=   "Text1(27)"
-      Tab(1).Control(14)=   "Text2(27)"
-      Tab(1).Control(15)=   "Text1(2)"
-      Tab(1).Control(16)=   "Text1(25)"
-      Tab(1).Control(17)=   "Text1(26)"
-      Tab(1).Control(18)=   "Text1(24)"
-      Tab(1).Control(19)=   "Text1(23)"
-      Tab(1).Control(20)=   "Text1(22)"
-      Tab(1).Control(21)=   "Text1(21)"
-      Tab(1).Control(22)=   "Text1(20)"
-      Tab(1).Control(23)=   "Text1(19)"
-      Tab(1).Control(24)=   "Text1(18)"
-      Tab(1).Control(25)=   "Text1(38)"
-      Tab(1).Control(26)=   "chkImpreso"
-      Tab(1).Control(27)=   "Label1(63)"
-      Tab(1).Control(28)=   "Label1(55)"
-      Tab(1).Control(29)=   "Label1(54)"
-      Tab(1).Control(30)=   "imgBuscar(13)"
-      Tab(1).Control(31)=   "imgBuscar(9)"
-      Tab(1).Control(32)=   "Shape1"
-      Tab(1).Control(33)=   "imgFecha(40)"
-      Tab(1).Control(34)=   "Label1(52)"
-      Tab(1).Control(35)=   "Label1(24)"
-      Tab(1).Control(36)=   "Label1(23)"
-      Tab(1).Control(37)=   "imgBuscar(8)"
-      Tab(1).Control(38)=   "Label1(9)"
-      Tab(1).Control(39)=   "imgBuscar(7)"
-      Tab(1).Control(40)=   "Label1(12)"
-      Tab(1).Control(41)=   "Label1(11)"
-      Tab(1).Control(42)=   "Label1(10)"
-      Tab(1).Control(43)=   "Label1(5)"
-      Tab(1).Control(44)=   "Label1(3)"
-      Tab(1).Control(45)=   "Label1(45)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(10)"
+      Tab(1).Control(4)=   "Label1(11)"
+      Tab(1).Control(5)=   "Label1(12)"
+      Tab(1).Control(6)=   "imgBuscar(7)"
+      Tab(1).Control(7)=   "Label1(9)"
+      Tab(1).Control(8)=   "imgBuscar(8)"
+      Tab(1).Control(9)=   "Label1(23)"
+      Tab(1).Control(10)=   "Label1(24)"
+      Tab(1).Control(11)=   "Label1(52)"
+      Tab(1).Control(12)=   "imgFecha(40)"
+      Tab(1).Control(13)=   "Shape1"
+      Tab(1).Control(14)=   "imgBuscar(9)"
+      Tab(1).Control(15)=   "imgBuscar(13)"
+      Tab(1).Control(16)=   "Label1(54)"
+      Tab(1).Control(17)=   "Label1(55)"
+      Tab(1).Control(18)=   "Label1(63)"
+      Tab(1).Control(19)=   "chkImpreso"
+      Tab(1).Control(20)=   "Text1(38)"
+      Tab(1).Control(21)=   "Text1(18)"
+      Tab(1).Control(22)=   "Text1(19)"
+      Tab(1).Control(23)=   "Text1(20)"
+      Tab(1).Control(24)=   "Text1(21)"
+      Tab(1).Control(25)=   "Text1(22)"
+      Tab(1).Control(26)=   "Text1(23)"
+      Tab(1).Control(27)=   "Text1(24)"
+      Tab(1).Control(28)=   "Text1(26)"
+      Tab(1).Control(29)=   "Text1(25)"
+      Tab(1).Control(30)=   "Text1(2)"
+      Tab(1).Control(31)=   "Text2(27)"
+      Tab(1).Control(32)=   "Text1(27)"
+      Tab(1).Control(33)=   "Text2(28)"
+      Tab(1).Control(34)=   "Text1(28)"
+      Tab(1).Control(35)=   "Text2(29)"
+      Tab(1).Control(36)=   "Text1(29)"
+      Tab(1).Control(37)=   "FrameHco"
+      Tab(1).Control(38)=   "Text1(39)"
+      Tab(1).Control(39)=   "Text1(41)"
+      Tab(1).Control(40)=   "chkDocArchi"
+      Tab(1).Control(41)=   "FrameFacRec"
+      Tab(1).Control(42)=   "Text1(43)"
+      Tab(1).Control(43)=   "Text2(43)"
+      Tab(1).Control(44)=   "Text1(44)"
+      Tab(1).Control(45)=   "Text2(1)"
       Tab(1).ControlCount=   46
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranes.frx":0081
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "FrameCampos"
-      Tab(2).Control(1)=   "FrameManipulador"
+      Tab(2).Control(0)=   "FrameManipulador"
+      Tab(2).Control(1)=   "FrameCampos"
       Tab(2).ControlCount=   2
       TabCaption(3)   =   "Carta de portes"
       TabPicture(3)   =   "frmFacEntAlbaranes.frx":009D
@@ -4292,7 +4292,7 @@ Error1:
     MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     
     If primeravez Then
         
@@ -5646,7 +5646,7 @@ Dim b As Boolean
     End If
     
     
-    If vParamAplic.PtosAsignar > 0 Then ObtenerPuntos
+    If vParamAplic.PtosAsignar > 0 And Not EsHistorico Then ObtenerPuntos
     
    
     If Me.FrameCampos.visible Then CargaDatosCampos
@@ -6192,7 +6192,7 @@ Private Function DatosOkLinea(ByRef vCStock As CStock, ByRef ARticuloFitosantiar
 Dim b As Boolean
 Dim I As Byte
 Dim Aux As String
-Dim AUx3 As String
+Dim Aux3 As String
 Dim vArtic As CArticulo
 Dim PuntosCliente As Currency
 Dim C2 As Currency
@@ -6302,14 +6302,14 @@ Dim B_Aux As Boolean
             
              
                 'El cliente tiene puntos
-                AUx3 = "puntos"
-                Aux = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text, "N", AUx3)
+                Aux3 = "puntos"
+                Aux = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text, "N", Aux3)
                 If Val(Aux) = 0 Then
                     MsgBox "El cliente no tiene marca de Puntos", vbExclamation
                     b = False
                 Else
-                    If AUx3 = "" Then AUx3 = "0"
-                    PuntosCliente = CCur(AUx3)
+                    If Aux3 = "" Then Aux3 = "0"
+                    PuntosCliente = CCur(Aux3)
                     'Si no es nuevo albaran, solo superusuarios pueden insertar canje
                     If Not EsNuevoAlbaran Then
                         If vUsu.Nivel > 0 Then
@@ -6330,7 +6330,7 @@ Dim B_Aux As Boolean
                      
                      Else
                          'De momento Veo si hay algun articulo de familias de canje
-                         Aux = CalcularPuntosAlbaranCABEL(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), Data1.Recordset!FechaAlb, AUx3, Comision)
+                         Aux = CalcularPuntosAlbaranCABEL(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), Data1.Recordset!FechaAlb, Aux3, Comision)
                          
                          If Aux = "" Then Aux = "0"
                          If CCur(Aux) = 0 Then
@@ -6340,7 +6340,7 @@ Dim B_Aux As Boolean
                             If Not Data2.Recordset.EOF Then b = False
                          Else
                            
-                            C2 = Round2(CCur(AUx3) / vParamAplic.PtosEquivalencia, 2) '-> necesito como mucho estos puntos
+                            C2 = Round2(CCur(Aux3) / vParamAplic.PtosEquivalencia, 2) '-> necesito como mucho estos puntos
                             If C2 > PuntosCliente Then
                                 Aux = PuntosCliente
                             Else
@@ -6446,31 +6446,31 @@ Dim B_Aux As Boolean
     If Not b Then Exit Function
     
     If vParamAplic.NumeroInstalacion = 2 And hcoCodTipoM = "ALM" Then
-        AUx3 = ""
+        Aux3 = ""
         If Val(txtAux(0).Text) = 1 Then
-            AUx3 = DevuelveDesdeBD(conAri, "ctrstock", "sartic", "codartic", txtAux(1).Text, "T")
+            Aux3 = DevuelveDesdeBD(conAri, "ctrstock", "sartic", "codartic", txtAux(1).Text, "T")
         End If
-        If AUx3 = "1" Then
-            AUx3 = "sum(cantidad)"
+        If Aux3 = "1" Then
+            Aux3 = "sum(cantidad)"
             '                                           cualqueir almacen
             Aux = "scaped.numpedcl=sliped.numpedcl  AND codalmac>=" & txtAux(0).Text & " AND codartic "
-            Aux = DevuelveDesdeBD(conAri, "max(fecpedcl)", "scaped,sliped", Aux, txtAux(1).Text, "T", AUx3)
+            Aux = DevuelveDesdeBD(conAri, "max(fecpedcl)", "scaped,sliped", Aux, txtAux(1).Text, "T", Aux3)
             If Aux <> "" Then
-                C2 = CCur(AUx3)
+                C2 = CCur(Aux3)
                 
                
-                AUx3 = "codalmac>=" & txtAux(0).Text & " AND codartic "
-                AUx3 = DevuelveDesdeBD(conAri, "sum(canstock)", "salmac", AUx3, txtAux(1).Text, "T")
-                CanDispo = CCur(AUx3) 'en stock para el almacen hay candispo unidades
+                Aux3 = "codalmac>=" & txtAux(0).Text & " AND codartic "
+                Aux3 = DevuelveDesdeBD(conAri, "sum(canstock)", "salmac", Aux3, txtAux(1).Text, "T")
+                CanDispo = CCur(Aux3) 'en stock para el almacen hay candispo unidades
                 
                 If CanDispo < vCStock.cantidad + C2 Then
                   'Las cantiodades que ha pedido mas las hay en pedidos superan
-                  AUx3 = "Hay pedidos con este articulo pendientes de servir" & vbCrLf & vbCrLf
-                  AUx3 = AUx3 & "Stock articulo:     " & CanDispo & vbCrLf
-                  AUx3 = AUx3 & "Unidades en pedidos: " & C2
+                  Aux3 = "Hay pedidos con este articulo pendientes de servir" & vbCrLf & vbCrLf
+                  Aux3 = Aux3 & "Stock articulo:     " & CanDispo & vbCrLf
+                  Aux3 = Aux3 & "Unidades en pedidos: " & C2
                   
-                  AUx3 = AUx3 & vbCrLf & vbCrLf & "¿Continuar?"
-                  If MsgBox(AUx3, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
+                  Aux3 = Aux3 & vbCrLf & vbCrLf & "¿Continuar?"
+                  If MsgBox(Aux3, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
                 End If
 
             End If
@@ -7598,7 +7598,7 @@ Dim DtoPermitido As Boolean
 Dim AbrirDevoluciones As Boolean
 Dim StatusArticMayorCero As Boolean
 Dim TieneDescuentos As String
-Dim AUx3 As String
+Dim Aux3 As String
 Dim PtosAuxiliar As Currency
 
 
@@ -7816,13 +7816,13 @@ Dim PtosAuxiliar As Currency
                               
                             'Diciembre. Lo quitamos. Puede canjear todos los puntos que tenga el cliente en la ficha
                             If CCur(devuelve) > 0 Then
-                                cantidad = CalcularPuntosAlbaranCABEL(Replace(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), NombreTabla, NomTablaLineas), Data1.Recordset!FechaAlb, AUx3, "")
+                                cantidad = CalcularPuntosAlbaranCABEL(Replace(Replace(ObtenerWhereCP(False), "scaalb", "slialb"), NombreTabla, NomTablaLineas), Data1.Recordset!FechaAlb, Aux3, "")
                                 If cantidad = "" Then cantidad = "0"
                                 
                                 'Siginifica que tiene articvulos CABEL
                                 If CCur(cantidad) > 0 Then
                                     'Tiene cabel. Vamos a ver cuantos puntos necesita como maximo para el importe de este albaran
-                                    PtosAuxiliar = Round2(CCur(AUx3) / vParamAplic.PtosEquivalencia, 2) '-> necesito como mucho estos puntos
+                                    PtosAuxiliar = Round2(CCur(Aux3) / vParamAplic.PtosEquivalencia, 2) '-> necesito como mucho estos puntos
                                     If PtosAuxiliar > devuelve Then
                                         txtAux(3).Text = Format(-1 * CCur(devuelve), FormatoCantidad)
                                     Else

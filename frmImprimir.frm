@@ -237,11 +237,11 @@ Private ImpresoraPorDefectoAnterior As String
 
 'Private ReestableceSoloImprimir As Boolean
 Private Sub chkEMAIL_Click()
-    If chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 0
+    If chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 0
 End Sub
 
 Private Sub chkSoloImprimir_Click()
-    If Me.chkSoloImprimir.Value = 1 Then Me.chkEmail.Value = 0
+    If Me.chkSoloImprimir.Value = 1 Then Me.chkEMAIL.Value = 0
 End Sub
 
 
@@ -256,7 +256,7 @@ End Sub
 
 Private Sub cmdImprimir_Click()
  
-    If Me.chkSoloImprimir.Value = 1 And Me.chkEmail.Value = 1 Then
+    If Me.chkSoloImprimir.Value = 1 And Me.chkEMAIL.Value = 1 Then
         MsgBox "Si desea enviar por mail no debe marcar vista preliminar", vbExclamation
         Exit Sub
     End If
@@ -285,7 +285,7 @@ Dim C  As String
     Me.NombreRPT = C
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     If primeravez Then
         primeravez = False
         
@@ -301,7 +301,7 @@ Private Sub Form_activate()
         ElseIf Me.EnvioEMail Then
             Me.Hide
             DoEvents
-            chkEmail.Value = 1
+            chkEMAIL.Value = 1
             Imprime
             Unload Me
         
@@ -322,12 +322,12 @@ End Sub
 'Si no he ajustado el NombrePDF y no le he puesto valor entonces,
 'cogera el mismo que tiene en NombreRPT
 Private Sub Form_Load()
-Dim Cad As String
+Dim cad As String
 
     primeravez = True
     Lanzado = False
     CargaICO
-    Cad = Dir(App.Path & "\impre.dat", vbArchive)
+    cad = Dir(App.Path & "\impre.dat", vbArchive)
     HaPulsadoElBotonDeImprimir = False
     
     
@@ -335,7 +335,7 @@ Dim Cad As String
     
     
     'ReestableceSoloImprimir = False
-    If Cad = "" Then
+    If cad = "" Then
         chkSoloImprimir.Value = 0
     Else
         chkSoloImprimir.Value = 1
@@ -647,7 +647,7 @@ Dim Aux As String
     OtrosParam2 = OtrosParametros
     NumParam2 = NumeroParametros
     HaPulsadoImprimir = False
-    If Opcion = 53 And Me.chkEmail.Value = 0 Then
+    If Opcion = 53 And Me.chkEMAIL.Value = 0 Then
         'Estamos en
         '   -reimpresion de facturas
         '   -facturacion
@@ -670,41 +670,15 @@ Dim Aux As String
     
             
         '.ForzarNombreImpresora
-        If Opcion = 45 And vParamAplic.NumeroInstalacion = vbFenollar Then
             
-            'MUY A PIÑON. TENGO PRISA
-            If Not EnvioEMail Then
-                Aux = ""
-                If UCase(Right(NombreRPT, 5)) = "B.RPT" Then
-                    Aux = vParamAplic.ImpresoraFenollarB
-                    
-                    If UCase(vUsu.PC) = "PCMAJOSE" Then Aux = "MAJO"
-                    
-                Else
-                    Aux = vParamAplic.ImpresoraFenollarA
-                End If
-              '  If InStr(1, UCase(Aux), UCase(vUsu.PC)) = 0 Then .ForzarNombreImpresora = Aux
-                If Aux <> "" Then
-                    ForzarImpresoraPorDefecto Aux
-                    .ForzarNombreImpresora = Printer.DeviceName
-                End If
-            End If
-            
-            
-        Else
-            'EPSON LQ-590 ESC/P2
-            If Opcion = 53 And vParamAplic.NumeroInstalacion = vbFenollar Then
-            
-                'MUY A PIÑON. TENGO PRISA
-                If Not EnvioEMail Then
-                  '  ForzarImpresoraPorDefecto "EPSON LQ-590 ESC/P2"
-                    .ForzarNombreImpresora = "EPSON LQ-590 ESC/P2"
-                End If
-            End If
+        If Opcion = 513 And vParamAplic.NumeroInstalacion = vbTaxco Then
+            .ForzarNombreImpresora = "GODEX500"
+            .SoloImprimir = True
         End If
+    
         
         
-        If Me.chkEmail.Value = 1 Then
+        If Me.chkEMAIL.Value = 1 Then
             'EMAIL
             
             'En EULER, el rp
@@ -728,7 +702,8 @@ Dim Aux As String
             .NumCopias = NumeroCopias
         End If
         .Opcion = Opcion
-        .ExportarPDF = (chkEmail.Value = 1)
+        
+        .ExportarPDF = (chkEMAIL.Value = 1)
         .MostrarTree = MostrarTree
         .Show vbModal
         HaPulsadoImprimir = .EstaImpreso
@@ -777,7 +752,7 @@ Dim Aux As String
     
     
     
-    If Me.chkEmail.Value = 1 Then
+    If Me.chkEMAIL.Value = 1 Then
         If CadenaDesdeOtroForm <> "" Then 'se exporto el informe OK (.pdf)
             
             If Me.EnvioEMail Then  'se llamo desde envio masivo
@@ -827,7 +802,7 @@ End Function
 
 
 Private Sub Form_Unload(Cancel As Integer)
-    If Me.chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 1
+    If Me.chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 1
     'If ReestableceSoloImprimir Then SoloImprimir = False
     'Dejo la marca como estaba
     If SoloImprimir Then
