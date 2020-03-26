@@ -1588,7 +1588,7 @@ Public Function CalcularDatosFactura(cadWhere As String, NomTabla As String, Nom
 'nomTabla: nombre de la tabla de albaranes(scaalp) o de AlbaranesXFactura(scafpa)
 '           segun llamemos desde recepcion de facturas o desde Hco de Facturas
 Dim RS As ADODB.Recordset
-Dim I As Integer
+Dim i As Integer
 
 Dim SQL As String
 Dim cadAux As String
@@ -1753,7 +1753,7 @@ Dim AjustarCentimo As Boolean
     TotBruto = 0
     TotImpIVA = 0
     TotRe = 0
-    I = 1
+    i = 1
     conDesplaz = False
 
     While Not RS.EOF
@@ -1810,7 +1810,7 @@ Dim AjustarCentimo As Boolean
             'NUEVO. 22 Mayo 2008
             'Si tiene mas de un tipo de iva, compruebo en la ultima de las bases
             'Si el total sera igual al total a comparar
-            If I > 1 And I = NueroIvas Then
+            If i > 1 And i = NueroIvas Then
                 'ImporteParaComparar
                 If ImporteParaComparar - ImpBImIVA <> 0 Then
                     ImpBImIVA = ImporteParaComparar
@@ -1862,7 +1862,7 @@ Dim AjustarCentimo As Boolean
             
             
             
-            Select Case I
+            Select Case i
                 Case 1  'IVA 1
                     TipoIVA1 = TipoIVAAplicable    'Antes Rs!codigiva
                     
@@ -1889,34 +1889,33 @@ Dim AjustarCentimo As Boolean
                             If ImportePoste >= 60 Then
                                 If ImportePoste >= 100 Then
                                     If ImportePoste >= 200 Then
-                                        AjustarCentimo = Abs(Impaux) < 0.08
+                                        AjustarCentimo = Abs(Impaux) < 0.15
                                     Else
-                                        AjustarCentimo = Abs(Impaux) < 0.06
+                                        AjustarCentimo = Abs(Impaux) < 0.08
                                     End If
                                 Else
                                     AjustarCentimo = Abs(Impaux) < 0.05
                                 End If
                                 
                             Else
-                                AjustarCentimo = Abs(Impaux) < 0.03
+                                AjustarCentimo = Abs(Impaux) < 0.04
                             End If
                             If AjustarCentimo Then
-                            
-                                If Abs(Impaux) >= 0.03 And PorceIVA1RE = 0 Then
-                                    Debug.Print "M"
-                                    Impaux = (100 + PorceIVA1) / 100
-                                    Impaux = Round2(ImportePoste / Impaux, 2)
-                                    BaseIVA1 = Impaux
-                                    ImpIVA1 = ImportePoste - BaseIVA1
                                 
-                                Else
+                                If PorceIVA1RE > 0 Then MsgBox "lleva RECARGO", vbExclamation
                                 
-                                    ImpIVA1 = ImpIVA1 + Impaux
-                                    TotImpIVA = TotImpIVA + Impaux
-                                    'BaseIVA1 ImpIVA1 + ImpIVA1RE
-                                End If
+                                'Debug.Print "M"
+                                Impaux = (100 + PorceIVA1) / 100
+                                Impaux = Round2(ImportePoste / Impaux, 2)
+                                BaseIVA1 = Impaux
+                                ImpBImIVA = Impaux
+                                vBruto = Impaux
+                                TotBruto = Impaux
+                                ImpIVA1 = ImportePoste - BaseIVA1
+                                TotImpIVA = ImpIVA1
+                                
                             Else
-                                Debug.Print "M"
+                                'Debug.Print "M"
                             End If
                         End If
                         
@@ -1956,7 +1955,7 @@ Dim AjustarCentimo As Boolean
                     ImpIVA3RE = impRE
                     
             End Select
-            I = I + 1
+            i = i + 1
         Else 'EXENTO DE IVA
             'si hay que factura KM añadirlos al bruto
             If TotalKm > 0 Then vBruto = vBruto + ImporteL
@@ -2061,7 +2060,7 @@ Dim AjustarCentimo As Boolean
         'los vamos acumulando
         TotImpIVA = TotImpIVA + ImpIva
         
-        Select Case I
+        Select Case i
             Case 2 'IVA 2
                 TipoIVA2 = despIVA
                 
@@ -2625,13 +2624,13 @@ Dim EsFacturaALvic As Boolean
                 If EsTraspasoOfeFAZ Then
                     'Es un traspaso de una oferta a FAZ
                     
-                    Dim I As Integer
-                    I = InStr(1, cadSQL, " IN (")
-                    If I = 0 Then Err.Raise 513, "Imposible obtener numero albaran"
-                    devuelve = Mid(cadSQL, I + 5)
-                    I = InStr(1, devuelve, ")")
-                    If I = 0 Then Err.Raise 513, "Imposible obtener numero albaran (II)"
-                    devuelve = Mid(devuelve, 1, I - 1)
+                    Dim i As Integer
+                    i = InStr(1, cadSQL, " IN (")
+                    If i = 0 Then Err.Raise 513, "Imposible obtener numero albaran"
+                    devuelve = Mid(cadSQL, i + 5)
+                    i = InStr(1, devuelve, ")")
+                    If i = 0 Then Err.Raise 513, "Imposible obtener numero albaran (II)"
+                    devuelve = Mid(devuelve, 1, i - 1)
                     Numfactu = CLng(devuelve)
                 Else
                     'Comprobar si mientras tanto se incremento el contador de Facturas
@@ -4228,7 +4227,7 @@ Private Function CalcularDatosFacturaTicket(cadSQL As String) As Boolean
 Dim b As Boolean
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim I As Byte
+Dim i As Byte
 Dim ImpTotal As Currency
 Dim ImpDif As Currency
 
@@ -4247,10 +4246,10 @@ Dim ImpDif As Currency
     SQL = SQL & " group by codigiva"
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 1
-    While Not RS.EOF And I <= 3
+    i = 1
+    While Not RS.EOF And i <= 3
         SQL = DevuelveDesdeBDNew(conConta, "tiposiva", "porceiva", "codigiva", CStr(RS!Codigiva), "N")
-        Select Case I
+        Select Case i
             Case 1
                 TipoIVA1 = RS.Fields(0).Value
                 PorceIVA1 = CCur(SQL)
@@ -4278,7 +4277,7 @@ Dim ImpDif As Currency
     
         End Select
         RS.MoveNext
-        I = I + 1
+        i = i + 1
     Wend
     RS.Close
     Set RS = Nothing

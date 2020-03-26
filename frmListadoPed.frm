@@ -183,7 +183,7 @@ Begin VB.Form frmListadoPed
          Top             =   6240
          Visible         =   0   'False
          Width           =   4695
-         Begin MSComctlLib.ProgressBar ProgressBar1 
+         Begin MSComctlLib.ProgressBar PB_Fact 
             Height          =   345
             Left            =   120
             TabIndex        =   215
@@ -5380,8 +5380,16 @@ Dim vCli As CCliente
                         If vCli.ClienteBloqueado Then
                             campo = ""
                         Else
-                            If vCli.Observaciones <> "" Then MsgBox vCli.Observaciones, vbInformation
+                            If vCli.Observaciones <> "" Then
+                                MsgBox vCli.Observaciones, vbInformation
+                            Else
+                                If MsgBox("Vas a hacer un CREDITO, ¿Continuar?", vbQuestion + vbYesNoCancel) <> vbYes Then campo = ""
+                            End If
                         End If
+                        
+                        
+                        
+                        
                     End If
                 Else
                     campo = ""
@@ -5578,8 +5586,8 @@ Dim vCli As CCliente
         Me.FrameFacturar.Height = Me.FrameFacturar.Height + 300
         Me.FrameProgress.visible = True
         Me.FrameProgress.Top = 6250
-        Me.ProgressBar1.Left = 200
-        Me.ProgressBar1.Value = 0
+        Me.PB_Fact.Left = 200
+        Me.PB_Fact.Value = 0
         Me.lblProgess(1).Caption = "Inicializando el proceso..."
         
         
@@ -5619,7 +5627,7 @@ Dim vCli As CCliente
         'campo = txtCSB(0).Text & "|" & txtCSB(1).Text & "|" & txtCSB(2).Text & "|"
         campo = "|||"
 
-        TraspasoAlbaranesFacturas cad, cadSelect, txtcodigo(34).Text, txtcodigo(0).Text, Me.ProgressBar1, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False, UnoSolo
+        TraspasoAlbaranesFacturas cad, cadSelect, txtcodigo(34).Text, txtcodigo(0).Text, Me.PB_Fact, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False, UnoSolo
     End If
 
     Screen.MousePointer = vbDefault
@@ -5634,6 +5642,8 @@ Dim vCli As CCliente
         Me.FrameFacturar.Height = Me.FrameFacturar.Height - 300
         Me.FrameProgress.visible = False
     Else
+        If OpcionListado = 222 And vParamAplic.NumeroInstalacion = vbTaxco And codClien = "ALO" Then davidNumalbar = 0
+    
         'Cierro y salgo
         Unload Me
     End If
@@ -7377,13 +7387,39 @@ End Sub
 
 
 Private Sub cmdCancel_Click(index As Integer)
+
+
+     If OpcionListado = 222 And vParamAplic.NumeroInstalacion = vbTaxco And codClien = "ALO" Then
+        'SI es taxco, ha cerrado un OT de CONTADO.
+        'O factura o no sale de ahi
+        If davidNumalbar > 0 Then
+        
+            If davidNumalbar > 2 Then
+                cadFormula = "Si continua se le quitará  la marca de cerrado. ¿Continuar?"
+                If MsgBox(cadFormula, vbQuestion + vbYesNoCancel) = vbYes Then
+                    cadFormula = "UPDATE scaalb set factursn=0"
+                    cadFormula = cadFormula & " WHERE codtipom='" & codClien & "' AND numalbar=" & NumCod
+                    If ejecutar(cadFormula, False) Then davidNumalbar = 0
+                    
+                End If
+                cadFormula = ""
+            Else
+                MsgBox "Ha cerrado una orden de taller no de crédito. Debes facturarla", vbCritical
+            
+                davidNumalbar = davidNumalbar + 3
+            End If
+            
+        End If
+    End If
+
+
     Unload Me
      
 End Sub
 
 
 Private Sub Command1_Click()
-
+    
         
 End Sub
 
@@ -7397,7 +7433,7 @@ Private Sub cmdSelFraRect_Click()
         
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
 Dim Banco As Integer
 
     If primeravez Then
@@ -7878,6 +7914,12 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     If OpcionListado = 227 And InstalacionEsEulerTaxco Then LeeGuardaListFacturas False
+    
+    If OpcionListado = 222 And vParamAplic.NumeroInstalacion = vbTaxco And codClien = "ALO" Then
+        'SI es taxco, ha cerrado un OT de CONTADO. O factura o no sale de ahi
+        If davidNumalbar > 0 Then Cancel = 1
+    End If
+    
 End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -9303,7 +9345,7 @@ End Sub
 
 
 Private Sub CargaListTipoFacturas()
-Dim I As Integer
+Dim i As Integer
 Dim Rectifica As Byte '0. Sin cargar  1.- Cargada
 Dim Marcar As Boolean
     
@@ -9352,9 +9394,9 @@ Dim Marcar As Boolean
         If miRsAux!Marcar = 1 Then Marcar = True
        
         
-        If Marcar Then ListTipoFact.Selected(I) = True
+        If Marcar Then ListTipoFact.Selected(i) = True
         
-        I = I + 1
+        i = i + 1
             
         miRsAux.MoveNext
     Wend

@@ -395,7 +395,7 @@ Begin VB.MDIForm frmPpal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "17:30"
+            TextSave        =   "11:20"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2523,6 +2523,7 @@ Dim b As Boolean
     '   el situarlo aqui hace que no haya que salir y entrar en el programa si se
     b = DevuelveDesdeBD(conAri, "codtipom", "stipom", "codtipom", "ALI", "T") <> ""
     PuntoDeMenuVisible mnServicios(3), b
+    If b And vParamAplic.NumeroInstalacion = vbTaxco Then mnServicios(3).Caption = "Albarán de garantías"
     PuntoDeMenuVisible mnServicios(4), b And vParamAplic.NumeroInstalacion <> 4
     PuntoDeMenuVisible mnServicios(5), b
     PuntoDeMenuVisible mnServicios(1), vParamAplic.Servicios
@@ -5284,16 +5285,16 @@ End Sub
 Private Sub mnUtiUsuActivos_Click()
 'Muestra si hay otros usuarios conectados a la Gestion
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
 
     CadenaDesdeOtroForm = OtrosPCsContraContabiliad
     If CadenaDesdeOtroForm <> "" Then
-        I = 1
+        i = 1
         Me.Tag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
         Do
-            SQL = RecuperaValor(CadenaDesdeOtroForm, I)
+            SQL = RecuperaValor(CadenaDesdeOtroForm, i)
             If SQL <> "" Then Me.Tag = Me.Tag & "    - " & SQL & vbCrLf
-            I = I + 1
+            i = i + 1
         Loop Until SQL = ""
         MsgBox Me.Tag, vbExclamation
     Else
@@ -5536,7 +5537,7 @@ End Sub
 
 
 Private Sub LanzaHome(Opcion As String)
-Dim I As Integer
+Dim i As Integer
 Dim cad As String
 
     On Error GoTo ELanzaHome
@@ -5962,7 +5963,7 @@ Dim TamanyoImgComun As Integer
 End Sub
 
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal OP As Integer, ByVal Tam As Integer)
-    Dim I As Integer
+    Dim i As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = OP

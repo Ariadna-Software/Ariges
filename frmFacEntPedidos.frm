@@ -610,25 +610,25 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(34)"
-      Tab(1).Control(1)=   "Text1(33)"
-      Tab(1).Control(2)=   "Text1(29)"
-      Tab(1).Control(3)=   "Text1(30)"
-      Tab(1).Control(4)=   "FrameHco"
-      Tab(1).Control(5)=   "Text1(25)"
-      Tab(1).Control(6)=   "Text1(24)"
-      Tab(1).Control(7)=   "Text1(23)"
-      Tab(1).Control(8)=   "Text1(22)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(18)"
+      Tab(1).Control(4)=   "Label1(27)"
+      Tab(1).Control(5)=   "Label1(28)"
+      Tab(1).Control(6)=   "imgBuscar(11)"
+      Tab(1).Control(7)=   "Text1(19)"
+      Tab(1).Control(8)=   "Text1(20)"
       Tab(1).Control(9)=   "Text1(21)"
-      Tab(1).Control(10)=   "Text1(20)"
-      Tab(1).Control(11)=   "Text1(19)"
-      Tab(1).Control(12)=   "imgBuscar(11)"
-      Tab(1).Control(13)=   "Label1(28)"
-      Tab(1).Control(14)=   "Label1(27)"
-      Tab(1).Control(15)=   "Label1(18)"
-      Tab(1).Control(16)=   "Label1(5)"
-      Tab(1).Control(17)=   "Label1(3)"
-      Tab(1).Control(18)=   "Label1(45)"
+      Tab(1).Control(10)=   "Text1(22)"
+      Tab(1).Control(11)=   "Text1(23)"
+      Tab(1).Control(12)=   "Text1(24)"
+      Tab(1).Control(13)=   "Text1(25)"
+      Tab(1).Control(14)=   "FrameHco"
+      Tab(1).Control(15)=   "Text1(30)"
+      Tab(1).Control(16)=   "Text1(29)"
+      Tab(1).Control(17)=   "Text1(33)"
+      Tab(1).Control(18)=   "Text1(34)"
       Tab(1).ControlCount=   19
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
@@ -1351,6 +1351,15 @@ Begin VB.Form frmFacEntPedidos
          TabIndex        =   62
          Top             =   310
          Width           =   12855
+         Begin VB.ComboBox cboEstado 
+            Height          =   315
+            Left            =   6720
+            Style           =   2  'Dropdown List
+            TabIndex        =   151
+            Tag             =   "Estado|N|N|||scaped|estado||N|"
+            Top             =   1920
+            Width           =   1215
+         End
          Begin VB.CheckBox chkPedPorCliente 
             Caption         =   "Pedido por cliente"
             Enabled         =   0   'False
@@ -1390,22 +1399,22 @@ Begin VB.Form frmFacEntPedidos
             Caption         =   "Enviado e-mail confirmación"
             Enabled         =   0   'False
             Height          =   240
-            Left            =   10200
+            Left            =   10320
             TabIndex        =   145
             Tag             =   "Enviado e-mail confirmación|N|N|||scaped|envconfir||N|"
             Top             =   1680
-            Width           =   2415
+            Width           =   2295
          End
          Begin VB.TextBox Text1 
             Height          =   315
             Index           =   31
-            Left            =   7800
+            Left            =   8400
             MaxLength       =   40
             TabIndex        =   26
             Tag             =   "E-mail confirmación|T|S|||scaped|mailconfir||N|"
             Text            =   "Text1 wwwwwwwwwwwwwwwwwwwwwwwwww aqteter"
             Top             =   1920
-            Width           =   4875
+            Width           =   4275
          End
          Begin VB.CheckBox chkRecogeClien 
             Caption         =   "Recoge cliente"
@@ -1572,7 +1581,7 @@ Begin VB.Form frmFacEntPedidos
             Alignment       =   1  'Right Justify
             Height          =   315
             Index           =   16
-            Left            =   2730
+            Left            =   2610
             MaxLength       =   7
             TabIndex        =   18
             Tag             =   "Descuento General|N|N|0|99.90|scaped|dtognral|#0.00|N|"
@@ -1582,12 +1591,12 @@ Begin VB.Form frmFacEntPedidos
          End
          Begin VB.ComboBox cboFacturacion 
             Height          =   315
-            Left            =   4680
+            Left            =   4320
             Style           =   2  'Dropdown List
             TabIndex        =   21
             Tag             =   "Tipo Facturación|N|N|||scaped|tipofact||N|"
             Top             =   1920
-            Width           =   1820
+            Width           =   1695
          End
          Begin VB.TextBox Text1 
             Height          =   315
@@ -1600,13 +1609,32 @@ Begin VB.Form frmFacEntPedidos
             Top             =   516
             Width           =   4170
          End
+         Begin VB.Image imgEstado 
+            Height          =   240
+            Index           =   1
+            Left            =   7920
+            Picture         =   "frmFacEntPedidos.frx":05BB
+            ToolTipText     =   "En produccion"
+            Top             =   1920
+            Visible         =   0   'False
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Situacion"
+            Height          =   255
+            Index           =   29
+            Left            =   6000
+            TabIndex        =   152
+            Top             =   1980
+            Width           =   735
+         End
          Begin VB.Image imgCerrado 
             Height          =   480
-            Left            =   7200
-            Picture         =   "frmFacEntPedidos.frx":05BB
+            Left            =   5400
+            Picture         =   "frmFacEntPedidos.frx":6E0D
             Stretch         =   -1  'True
             ToolTipText     =   "Pedido cerrado"
-            Top             =   1800
+            Top             =   960
             Visible         =   0   'False
             Width           =   480
          End
@@ -1614,7 +1642,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   240
             Index           =   9
             Left            =   7350
-            Picture         =   "frmFacEntPedidos.frx":0CFE
+            Picture         =   "frmFacEntPedidos.frx":7550
             ToolTipText     =   "Buscar forma de pago"
             Top             =   1200
             Width           =   240
@@ -1632,7 +1660,7 @@ Begin VB.Form frmFacEntPedidos
             Caption         =   "E-mail confirmación"
             Height          =   255
             Index           =   23
-            Left            =   7800
+            Left            =   8400
             TabIndex        =   144
             Top             =   1680
             Width           =   1455
@@ -1642,7 +1670,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   240
             Index           =   6
             Left            =   900
-            Picture         =   "frmFacEntPedidos.frx":0E00
+            Picture         =   "frmFacEntPedidos.frx":7652
             ToolTipText     =   "Buscar población"
             Top             =   880
             Width           =   240
@@ -1661,7 +1689,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   240
             Index           =   2
             Left            =   7350
-            Picture         =   "frmFacEntPedidos.frx":0F02
+            Picture         =   "frmFacEntPedidos.frx":7754
             ToolTipText     =   "Buscar direc./dpto"
             Top             =   180
             Width           =   240
@@ -1706,7 +1734,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   240
             Index           =   1
             Left            =   900
-            Picture         =   "frmFacEntPedidos.frx":1004
+            Picture         =   "frmFacEntPedidos.frx":7856
             ToolTipText     =   "Buscar cliente varios"
             Top             =   180
             Visible         =   0   'False
@@ -1734,7 +1762,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   240
             Index           =   5
             Left            =   7350
-            Picture         =   "frmFacEntPedidos.frx":1106
+            Picture         =   "frmFacEntPedidos.frx":7958
             ToolTipText     =   "Buscar agente"
             Top             =   525
             Width           =   240
@@ -1761,16 +1789,16 @@ Begin VB.Form frmFacEntPedidos
             Caption         =   "Dto. Gral"
             Height          =   255
             Index           =   26
-            Left            =   1980
+            Left            =   1860
             TabIndex        =   66
             Top             =   1980
             Width           =   735
          End
          Begin VB.Label Label1 
-            Caption         =   "Tipo Facturación"
+            Caption         =   "tipo facturacion"
             Height          =   255
             Index           =   4
-            Left            =   3360
+            Left            =   3240
             TabIndex        =   65
             Top             =   1980
             Width           =   1335
@@ -1779,7 +1807,7 @@ Begin VB.Form frmFacEntPedidos
             Height          =   240
             Index           =   4
             Left            =   7350
-            Picture         =   "frmFacEntPedidos.frx":1208
+            Picture         =   "frmFacEntPedidos.frx":7A5A
             ToolTipText     =   "Buscar forma de pago"
             Top             =   900
             Width           =   240
@@ -1792,6 +1820,26 @@ Begin VB.Form frmFacEntPedidos
             TabIndex        =   63
             Top             =   516
             Width           =   735
+         End
+         Begin VB.Image imgEstado 
+            Height          =   240
+            Index           =   2
+            Left            =   7920
+            Picture         =   "frmFacEntPedidos.frx":7B5C
+            ToolTipText     =   "CERRADO"
+            Top             =   1920
+            Visible         =   0   'False
+            Width           =   240
+         End
+         Begin VB.Image imgEstado 
+            Height          =   240
+            Index           =   0
+            Left            =   7920
+            Picture         =   "frmFacEntPedidos.frx":95CE
+            ToolTipText     =   "Abierto"
+            Top             =   1920
+            Visible         =   0   'False
+            Width           =   240
          End
       End
       Begin VB.CommandButton cmdAux 
@@ -1996,7 +2044,7 @@ Begin VB.Form frmFacEntPedidos
          Width           =   8445
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmFacEntPedidos.frx":130A
+         Bindings        =   "frmFacEntPedidos.frx":FE20
          Height          =   2760
          Left            =   195
          TabIndex        =   59
@@ -2068,7 +2116,7 @@ Begin VB.Form frmFacEntPedidos
          Height          =   240
          Index           =   11
          Left            =   -64320
-         Picture         =   "frmFacEntPedidos.frx":131F
+         Picture         =   "frmFacEntPedidos.frx":FE35
          ToolTipText     =   "Buscar forma de pago"
          Top             =   1440
          Width           =   240
@@ -2141,7 +2189,7 @@ Begin VB.Form frmFacEntPedidos
       Height          =   240
       Index           =   10
       Left            =   3240
-      Picture         =   "frmFacEntPedidos.frx":1421
+      Picture         =   "frmFacEntPedidos.frx":FF37
       ToolTipText     =   "Buscar cliente varios"
       Top             =   7080
       Width           =   240
@@ -2424,6 +2472,10 @@ Dim LineasArticulosEnPedidosProveedor As String
 
 
 Dim FenollarArtMed As String
+
+Private Sub cboEstado_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
 
 '================================================================================
 
@@ -2737,6 +2789,7 @@ Dim NomTraba As String
     'Visado responsable
     If vParamAplic.MarcarAlbaranFacturar Then chkVisadoRes.Value = 1
 
+    cboEstado.ListIndex = 0
 
     If vParamAplic.NumeroInstalacion = vbFenollar Then Me.chkServirCom.Value = 1
 
@@ -2850,7 +2903,17 @@ Dim CadB As String
 '    LimpiarCampos
     If chkVistaPrevia.Value = 1 Then
         EsCabecera2 = 0
-        MandaBusquedaPrevia CadB
+        
+        If vParamAplic.NumeroInstalacion = vbFontenas Then
+            CadenaDesdeOtroForm = CadB
+            AbrirVistaPreviaFontenas
+        Else
+            MandaBusquedaPrevia CadB
+        End If
+        
+        
+        
+        
     Else
         LimpiarCampos
         LimpiarDataGrids
@@ -3364,7 +3427,7 @@ Private Sub Form_Load()
     LimpiarCampos   'Limpia los campos TextBox
     
     
-    CargarComboFacturacion
+    CargarCombos
     CodTipoMov = "PEV"
     VieneDeBuscar = False
    
@@ -3431,6 +3494,9 @@ Private Sub Form_Load()
         CodTipoMov = DatosADevolverBusqueda2
     End If
     
+    
+    PonerVisibleEstado -1  'Visible FALSE
+    
     'ASignamos un SQL al DATA1
     Data1.ConnectionString = conn
     Data1.RecordSource = "Select * from " & NombreTabla & " where numpedcl=" & CodTipoMov
@@ -3465,6 +3531,7 @@ On Error Resume Next
     'Aqui va el especifico de cada form es
     '### a mano
     Me.cboFacturacion.ListIndex = -1
+    cboEstado.ListIndex = -1
     Me.chkVisadoRes.Value = 0
     Me.chkRestoPed.Value = 0
     Me.chkServirCom.Value = 0
@@ -3473,6 +3540,7 @@ On Error Resume Next
     chkPedPorCliente.Value = 0
     Text3(0).Text = "BASE IMP."
     imgCerrado.visible = False
+    PonerVisibleEstado -1
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -3707,7 +3775,7 @@ End Sub
 Private Sub frmMen_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mensaje de Nº de Serie disponibles
 'En cadena seleccion estan concatenados los seleccionados
-Dim I As Integer, J As Integer, K As Integer
+Dim i As Integer, J As Integer, K As Integer
 Dim nSerie As String
 Dim SQL As String
 Dim devuelve As String
@@ -3720,12 +3788,12 @@ Dim numSerie As CNumSerie
     On Error GoTo ErrorNSerie
     
     'Para cada articulo (separado por ., obtener los nº de serie empipados
-    I = 0
-    J = I + 1
-    I = InStr(J, CadenaSeleccion, "·")
+    i = 0
+    J = i + 1
+    i = InStr(J, CadenaSeleccion, "·")
     
-    While I > 0
-        cadSel = Mid(CadenaSeleccion, J, I - J)
+    While i > 0
+        cadSel = Mid(CadenaSeleccion, J, i - J)
         
         'Para cada valor empipado actualizar la tabla sserie
         K = InStr(1, cadSel, "|")
@@ -3774,8 +3842,8 @@ Dim numSerie As CNumSerie
             RS.Close
             Set RS = Nothing
         End If
-        J = I + 1
-        I = InStr(J, CadenaSeleccion, "·")
+        J = i + 1
+        i = InStr(J, CadenaSeleccion, "·")
     Wend
     
 ErrorNSerie:
@@ -3792,7 +3860,7 @@ Private Sub frmNSerie_CargarNumSeries()
 Dim RStmp As ADODB.Recordset
 Dim RSalb As ADODB.Recordset
 Dim SQL As String
-Dim I As Byte
+Dim i As Byte
 
     On Error GoTo EInsertar
     
@@ -3815,7 +3883,7 @@ Dim I As Byte
         'If Not RStmp.EOF Then RStmp.MoveFirst
         'Intentar asignar un Nº serie al total de cantidad del articulo
         
-        For I = 1 To RSalb!cantidad
+        For i = 1 To RSalb!cantidad
             If Not RStmp.EOF Then
                 InsertarNSerie RStmp!numSerie, RStmp!codArtic, RSalb!numlinea, DBLet(RStmp!nummante, "T")
                 
@@ -3828,7 +3896,7 @@ Dim I As Byte
                 ejecutar SQL, True
                 RStmp.MoveNext
             End If
-        Next I
+        Next i
         RStmp.Close
         Set RStmp = Nothing
         RSalb.MoveNext
@@ -4765,7 +4833,13 @@ Dim CadB As String
     
     If chkVistaPrevia = 1 Then
         EsCabecera2 = 0
-        MandaBusquedaPrevia CadB
+        If vParamAplic.NumeroInstalacion = vbFontenas Then
+            '
+            CadenaDesdeOtroForm = CadB
+            AbrirVistaPreviaFontenas
+        Else
+            MandaBusquedaPrevia CadB
+        End If
     ElseIf CadB <> "" Then
         'Se muestran en el mismo form
         CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
@@ -4874,6 +4948,7 @@ Private Sub PonerCadenaBusqueda()
         Screen.MousePointer = vbDefault
         If Modo = 1 Then
             Me.cboFacturacion.ListIndex = -1
+            cboEstado.ListIndex = -1
             PonerFoco Text1(kCampo)
 '            Text1(0).BackColor = vbYellow
         End If
@@ -4942,6 +5017,8 @@ On Error Resume Next
         Text2(28).Text = PonerNombreDeCod(Text1(28), conAri, "sincid", "nomincid", "codincid")
     End If
     
+    PonerVisibleEstado IIf(IsNull(Data1.Recordset!Estado), -1, Data1.Recordset!Estado)
+    
     CalcularDatosFactura
     
     imgCerrado.visible = False
@@ -4962,7 +5039,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte, NumReg As Byte
+Dim i As Byte, NumReg As Byte
 Dim b As Boolean
 
     On Error GoTo EPonerModo
@@ -5009,15 +5086,15 @@ Dim b As Boolean
     'BloquearTxt Text1(18), True
     
     '-----  Datos Totales de Factura siempre bloqueado
-    For I = 33 To 56
-        BloquearTxt Text3(I), True
-    Next I
+    For i = 33 To 56
+        BloquearTxt Text3(i), True
+    Next i
     'Campo B.Imp y Imp. IVA siempre en azul
     Text3(36).BackColor = &HFFFFC0
-    For I = 46 To 48
-        Text3(I).BackColor = &HFFFFC0
-        Text3(I + 6).BackColor = &HFFFFC0
-    Next I
+    For i = 46 To 48
+        Text3(i).BackColor = &HFFFFC0
+        Text3(i + 6).BackColor = &HFFFFC0
+    Next i
     'Campos total Factura en verde
     Text3(55).BackColor = &HC0FFC0
     Text3(56).BackColor = &HC0FFC0    'Tatal factura
@@ -5026,6 +5103,7 @@ Dim b As Boolean
     
     b = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
     Me.cboFacturacion.Enabled = b
+    cboEstado.Enabled = b
     Me.chkVisadoRes.Enabled = b
     Me.chkServirCom.Enabled = b
     Me.chkRecogeClien.Enabled = b
@@ -5033,9 +5111,9 @@ Dim b As Boolean
     chkPedPorCliente.Enabled = b
     
     'Si no es modo lineas Boquear los TxtAux
-    For I = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(I), (Modo <> 5)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(i), (Modo <> 5)
+    Next i
     BloquearTxt Text2(16), (Modo <> 5)
     
     
@@ -5044,13 +5122,13 @@ Dim b As Boolean
     cmdCancelar.visible = b
     cmdAceptar.visible = b
     
-    For I = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(i).Enabled = b
+    Next i
     
-    For I = 0 To Me.imgBuscar.Count - 2  'Ya que l ampliacion linea es count -2 y siempre esta enabled
-        Me.imgBuscar(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 2  'Ya que l ampliacion linea es count -2 y siempre esta enabled
+        Me.imgBuscar(i).Enabled = b
+    Next i
     Me.imgBuscar(1).visible = False
     imgBuscar(10).Enabled = Modo >= 2
     
@@ -5236,7 +5314,7 @@ Private Function DatosOkLinea() As Boolean
 'Comprueba si los datos de una linea son correctos antes de Insertar o Modificar
 'una linea del Pedido
 Dim b As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim vArtic As CArticulo
 Dim Aux As String
 Dim Valor As Currency
@@ -5258,18 +5336,18 @@ Dim ComprobarPrecioMinimo As Boolean
 
 
     'Comprobar que los campos NOT NULL tienen valor
-    For I = 0 To txtAux.Count - 1
-        If txtAux(I).Text = "" And I <> 10 Then
-            If I = 11 And vEmpresa.TieneAnalitica = False Then
+    For i = 0 To txtAux.Count - 1
+        If txtAux(i).Text = "" And i <> 10 Then
+            If i = 11 And vEmpresa.TieneAnalitica = False Then
                 'puede ser nulo
             Else
-                MsgBox "El campo " & txtAux(I).Tag & " no puede ser nulo", vbExclamation
+                MsgBox "El campo " & txtAux(i).Tag & " no puede ser nulo", vbExclamation
                 b = False
-                PonerFoco txtAux(I)
+                PonerFoco txtAux(i)
                 Exit Function
             End If
         End If
-    Next I
+    Next i
         
     'Comprobar que existe el articulo en el almacen seleccionado
     Set vArtic = New CArticulo
@@ -5316,18 +5394,18 @@ Dim ComprobarPrecioMinimo As Boolean
         'Esta modificando. Un usuario que no es  nivel 0
         If vUsu.Nivel > 0 Then
             
-            For I = 0 To 8
+            For i = 0 To 8
                 'Menos el 5 y el 2 que dejamos cambiar, el resto no puede tocar nada, de nada
-                If I <> 2 And I <> 5 Then
+                If i <> 2 And i <> 5 Then
                    
-                    If I = 1 Then
+                    If i = 1 Then
                         'Texto.  El codartic
                          Aux = ""
-                        If txtAux(I).Text <> Data2.Recordset!codArtic Then Aux = "A"
+                        If txtAux(i).Text <> Data2.Recordset!codArtic Then Aux = "A"
                     Else
                         ''Campos numericos
-                        Valor = ImporteFormateado(txtAux(I).Text)
-                        Aux = RecuperaValor("codalmac|codartic||cantidad|precioar||dtoline1|dtoline2|importel|", I + 1)
+                        Valor = ImporteFormateado(txtAux(i).Text)
+                        Aux = RecuperaValor("codalmac|codartic||cantidad|precioar||dtoline1|dtoline2|importel|", i + 1)
                         If Valor = CCur(Data2.Recordset.Fields(Aux)) Then Aux = ""
                     End If
                     
@@ -5339,7 +5417,7 @@ Dim ComprobarPrecioMinimo As Boolean
                     
                     End If
                 End If
-            Next I
+            Next i
             'Si ha llegado aqui es que no ha tocado precio/dtos
             ComprobarPrecioMinimo = False
         End If
@@ -5832,7 +5910,7 @@ End Sub
 
 
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, Optional conServidas As Boolean)
-Dim I As Byte
+Dim i As Byte
 Dim L As Integer
     On Error GoTo ECargaGrid
 
@@ -5879,7 +5957,7 @@ Dim L As Integer
                 vDataGrid.Columns(7).Width = 1000
                 vDataGrid.Columns(7).Alignment = dbgRight
                 vDataGrid.Columns(7).NumberFormat = FormatoImporte
-                I = 8
+                i = 8
             Else
                 If conServidas Then
                     'Cargar el grid con la columna de cantidad servida
@@ -5887,55 +5965,55 @@ Dim L As Integer
                     vDataGrid.Columns(7).Width = 1000
                     vDataGrid.Columns(7).Alignment = dbgRight
                     vDataGrid.Columns(7).NumberFormat = FormatoImporte
-                    I = 8
+                    i = 8
                 Else
-                    I = 7
+                    i = 7
                 End If
             End If
                             
             'En fenollar NO llevan BUltos ni preparadas
             If vParamAplic.NumeroInstalacion <> vbFenollar Then
                 If vParamAplic.NumeroInstalacion = vbHerbelca Then
-                    vDataGrid.Columns(I).Caption = "Prepar."
+                    vDataGrid.Columns(i).Caption = "Prepar."
                 Else
-                    vDataGrid.Columns(I).Caption = "Bultos"
+                    vDataGrid.Columns(i).Caption = "Bultos"
                 End If
-                vDataGrid.Columns(I).Width = 760
-                vDataGrid.Columns(I).Alignment = dbgRight
-                I = I + 1
+                vDataGrid.Columns(i).Width = 760
+                vDataGrid.Columns(i).Alignment = dbgRight
+                i = i + 1
             End If
                 
             
-            vDataGrid.Columns(I).Caption = "Precio"
-            vDataGrid.Columns(I).Width = IIf(vParamAplic.NumeroInstalacion = vbFenollar, 1200, 1000)
-            vDataGrid.Columns(I).Alignment = dbgRight
-            vDataGrid.Columns(I).NumberFormat = FormatoPrecio
+            vDataGrid.Columns(i).Caption = "Precio"
+            vDataGrid.Columns(i).Width = IIf(vParamAplic.NumeroInstalacion = vbFenollar, 1200, 1000)
+            vDataGrid.Columns(i).Alignment = dbgRight
+            vDataGrid.Columns(i).NumberFormat = FormatoPrecio
             
-            I = I + 1
-            vDataGrid.Columns(I).Caption = "OP"
-            vDataGrid.Columns(I).Width = 340
-            vDataGrid.Columns(I).Alignment = dbgCenter
+            i = i + 1
+            vDataGrid.Columns(i).Caption = "OP"
+            vDataGrid.Columns(i).Width = 340
+            vDataGrid.Columns(i).Alignment = dbgCenter
                 
-            I = I + 1
-            vDataGrid.Columns(I).Caption = "Dto.1"
-            vDataGrid.Columns(I).Width = 570
-            vDataGrid.Columns(I).Alignment = dbgRight
-            vDataGrid.Columns(I).NumberFormat = FormatoDescuento
+            i = i + 1
+            vDataGrid.Columns(i).Caption = "Dto.1"
+            vDataGrid.Columns(i).Width = 570
+            vDataGrid.Columns(i).Alignment = dbgRight
+            vDataGrid.Columns(i).NumberFormat = FormatoDescuento
                 
-            I = I + 1
-            vDataGrid.Columns(I).Caption = "Dto.2"
+            i = i + 1
+            vDataGrid.Columns(i).Caption = "Dto.2"
 '            If conServidas Then
-                vDataGrid.Columns(I).Width = 570
+                vDataGrid.Columns(i).Width = 570
 '            Else
 '                vDataGrid.Columns(i).Width = 560
 '            End If
-            vDataGrid.Columns(I).Alignment = dbgRight
-            vDataGrid.Columns(I).NumberFormat = FormatoDescuento
+            vDataGrid.Columns(i).Alignment = dbgRight
+            vDataGrid.Columns(i).NumberFormat = FormatoDescuento
             
-            I = I + 1
-            vDataGrid.Columns(I).Caption = "Importe"
+            i = i + 1
+            vDataGrid.Columns(i).Caption = "Importe"
             If conServidas Then
-                vDataGrid.Columns(I).Width = 1200
+                vDataGrid.Columns(i).Width = 1200
             Else
                 If vEmpresa.TieneAnalitica Then
                     L = 1250 'vDataGrid.Columns(i).Width = 1250
@@ -5943,32 +6021,32 @@ Dim L As Integer
                     L = 1300 'vDataGrid.Columns(i).Width = 1400
                 End If
                 L = L - IIf(vParamAplic.NumeroInstalacion = vbFenollar, 0, 300)
-                vDataGrid.Columns(I).Width = L
+                vDataGrid.Columns(i).Width = L
             End If
-            vDataGrid.Columns(I).Alignment = dbgRight
-            vDataGrid.Columns(I).NumberFormat = FormatoImporte
+            vDataGrid.Columns(i).Alignment = dbgRight
+            vDataGrid.Columns(i).NumberFormat = FormatoImporte
             
             
-             I = I + 1
+             i = i + 1
             If vEmpresa.TieneAnalitica And conServidas = False Then
-                vDataGrid.Columns(I).Caption = "CCost"
-                vDataGrid.Columns(I).Width = 640
+                vDataGrid.Columns(i).Caption = "CCost"
+                vDataGrid.Columns(i).Width = 640
             Else
-                vDataGrid.Columns(I).visible = False 'centro de coste
+                vDataGrid.Columns(i).visible = False 'centro de coste
             End If
             
-           I = I + 1
+           i = i + 1
            If vParamAplic.NumeroInstalacion <> vbFenollar Then
-                vDataGrid.Columns(I).Caption = "Nº Lote"
+                vDataGrid.Columns(i).Caption = "Nº Lote"
                 If conServidas Then
                     
-                   vDataGrid.Columns(I).Width = 1220
-                   vDataGrid.Columns(I).visible = False
+                   vDataGrid.Columns(i).Width = 1220
+                   vDataGrid.Columns(i).visible = False
                 Else
                     If vEmpresa.TieneAnalitica Then
-                        vDataGrid.Columns(I).Width = 600
+                        vDataGrid.Columns(i).Width = 600
                     Else
-                        vDataGrid.Columns(I).Width = 1230
+                        vDataGrid.Columns(i).Width = 1230
                     End If
                 End If
             End If
@@ -5978,10 +6056,10 @@ Dim L As Integer
             
     End Select
 
-    For I = 0 To vDataGrid.Columns.Count - 1
-        vDataGrid.Columns(I).Locked = True
-        vDataGrid.Columns(I).AllowSizing = False
-    Next I
+    For i = 0 To vDataGrid.Columns.Count - 1
+        vDataGrid.Columns(i).Locked = True
+        vDataGrid.Columns(i).AllowSizing = False
+    Next i
     vDataGrid.HoldFields
     Exit Sub
     
@@ -5995,53 +6073,53 @@ Private Sub CargaTxtAux(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim I As Byte
+Dim i As Byte
 
     On Error Resume Next
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For I = 0 To txtAux.Count - 1 'TextBox
-            txtAux(I).Top = 290
-            txtAux(I).visible = visible
-        Next I
+        For i = 0 To txtAux.Count - 1 'TextBox
+            txtAux(i).Top = 290
+            txtAux(i).visible = visible
+        Next i
         cmdAux(0).visible = visible
         cmdAux(1).visible = visible
         cmdAux(2).visible = visible
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
-            For I = 0 To txtAux.Count - 1
-                txtAux(I).Text = ""
-                BloquearTxt txtAux(I), False
-            Next I
+            For i = 0 To txtAux.Count - 1
+                txtAux(i).Text = ""
+                BloquearTxt txtAux(i), False
+            Next i
         Else 'Vamos a modificar
-            For I = 0 To txtAux.Count - 1
-                If I < 3 Then
-                    txtAux(I).Text = DataGrid1.Columns(I + 2).Text
-                ElseIf I = 3 Then
-                    txtAux(I).Text = DataGrid1.Columns(I + 3).Text
-                ElseIf I >= 4 And I < 9 Then
-                    txtAux(I).Text = DataGrid1.Columns(I + 4).Text
-                ElseIf I = 9 Then
-                    txtAux(I).Text = DataGrid1.Columns(7).Text
-                ElseIf I = 10 Then
+            For i = 0 To txtAux.Count - 1
+                If i < 3 Then
+                    txtAux(i).Text = DataGrid1.Columns(i + 2).Text
+                ElseIf i = 3 Then
+                    txtAux(i).Text = DataGrid1.Columns(i + 3).Text
+                ElseIf i >= 4 And i < 9 Then
+                    txtAux(i).Text = DataGrid1.Columns(i + 4).Text
+                ElseIf i = 9 Then
+                    txtAux(i).Text = DataGrid1.Columns(7).Text
+                ElseIf i = 10 Then
                     'NUMERO DE LOTE
                     If vEmpresa.TieneAnalitica Then
                         
-                        txtAux(I).Text = DataGrid1.Columns(9 + 5).Text
+                        txtAux(i).Text = DataGrid1.Columns(9 + 5).Text
                     Else
-                        txtAux(I).Text = DataGrid1.Columns(I + 4).Text
+                        txtAux(i).Text = DataGrid1.Columns(i + 4).Text
                     End If
-                ElseIf I = 11 Then
+                ElseIf i = 11 Then
                     If vEmpresa.TieneAnalitica Then
-                        txtAux(I).Text = DataGrid1.Columns(I + 3).Text
+                        txtAux(i).Text = DataGrid1.Columns(i + 3).Text
                    
                     End If
                 End If
-                txtAux(I).Locked = False
+                txtAux(i).Locked = False
                 
-            Next I
+            Next i
         End If
                
         'El Campo de Origen del precio se actualiza por programa al modificar el precio
@@ -6065,10 +6143,10 @@ Dim I As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid1, 10)
         
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).Top = alto
-            txtAux(I).Height = DataGrid1.RowHeight
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Top = alto
+            txtAux(i).Height = DataGrid1.RowHeight
+        Next i
         cmdAux(0).Top = alto
         cmdAux(1).Top = alto
         cmdAux(2).Top = alto
@@ -6100,10 +6178,10 @@ Dim I As Byte
         txtAux(4).Width = DataGrid1.Columns(8).Width - 10
         
         'OP,Dto1, Dto2, Importe
-        For I = 5 To 8
-            txtAux(I).Left = txtAux(I - 1).Left + txtAux(I - 1).Width + 10
-            txtAux(I).Width = DataGrid1.Columns(I + 4).Width - 10
-        Next I
+        For i = 5 To 8
+            txtAux(i).Left = txtAux(i - 1).Left + txtAux(i - 1).Width + 10
+            txtAux(i).Width = DataGrid1.Columns(i + 4).Width - 10
+        Next i
         
         If vEmpresa.TieneAnalitica Then
             '- centro de coste
@@ -6140,14 +6218,14 @@ Dim I As Byte
         
         'Los ponemos Visibles o No
         '--------------------------
-        For I = 0 To txtAux.Count - 1
+        For i = 0 To txtAux.Count - 1
             'El cc depende de la anilitaca ect
-            If I <> 11 Then
-                txtAux(I).visible = visible
+            If i <> 11 Then
+                txtAux(i).visible = visible
             Else
-                txtAux(I).visible = visible And vEmpresa.TieneAnalitica
+                txtAux(i).visible = visible And vEmpresa.TieneAnalitica
             End If
-        Next I
+        Next i
         txtAux(10).visible = vParamAplic.NumeroInstalacion = vbFontenas  'Enero 19
         cmdAux(0).visible = visible
         cmdAux(1).visible = visible
@@ -6161,18 +6239,18 @@ Private Sub CargaTxtAuxServidas(visible As Boolean, limpiar As Boolean)
 '    limpiar: si es true vaciar los txtAux
 'Carga el TxtAux(3) con el campo servidas de la tabla sliped
 Dim alto As Single
-Dim I As Byte, i2 As Byte
+Dim i As Byte, i2 As Byte
 
     On Error Resume Next
 
-    I = 3
+    i = 3
     i2 = 9
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        txtAux(I).Top = 290
-        txtAux(I).visible = visible
-        txtAux(I).BackColor = vbWhite
-        txtAux(I).ForeColor = vbBlack
+        txtAux(i).Top = 290
+        txtAux(i).visible = visible
+        txtAux(i).BackColor = vbWhite
+        txtAux(i).ForeColor = vbBlack
         
         txtAux(i2).Top = 290
         txtAux(i2).visible = visible
@@ -6181,10 +6259,10 @@ Dim I As Byte, i2 As Byte
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
-            txtAux(I).Text = ""
-            BloquearTxt txtAux(I), False
-            txtAux(I).BackColor = &HC0C0C0      '&H80000013
-            txtAux(I).ForeColor = vbWhite
+            txtAux(i).Text = ""
+            BloquearTxt txtAux(i), False
+            txtAux(i).BackColor = &HC0C0C0      '&H80000013
+            txtAux(i).ForeColor = vbWhite
             
             txtAux(i2).Text = ""
             BloquearTxt txtAux(i2), False
@@ -6200,8 +6278,8 @@ Dim I As Byte, i2 As Byte
             alto = DataGrid1.Top + DataGrid1.RowTop(DataGrid1.Row) + 10
         End If
         
-        txtAux(I).Top = alto
-        txtAux(I).Height = DataGrid1.RowHeight
+        txtAux(i).Top = alto
+        txtAux(i).Height = DataGrid1.RowHeight
         
         txtAux(i2).Top = alto
         txtAux(i2).Height = DataGrid1.RowHeight
@@ -6211,20 +6289,20 @@ Dim I As Byte, i2 As Byte
         'Cantidad servida
         alto = DataGrid1.Left + 330 + DataGrid1.Columns(2).Width + DataGrid1.Columns(3).Width
         alto = alto + DataGrid1.Columns(4).Width + DataGrid1.Columns(6).Width
-        txtAux(I).Left = alto + 10
-        txtAux(I).Width = DataGrid1.Columns(7).Width - 30
+        txtAux(i).Left = alto + 10
+        txtAux(i).Width = DataGrid1.Columns(7).Width - 30
         
         txtAux(i2).Left = alto + 10 + DataGrid1.Columns(7).Width
         txtAux(i2).Width = DataGrid1.Columns(8).Width - 30
         
         'Los ponemos Visibles o No
         '--------------------------
-        txtAux(I).visible = visible
+        txtAux(i).visible = visible
         txtAux(i2).visible = visible
         If kCampo = 3 Or kCampo = 9 Then
             PonerFoco txtAux(kCampo)
         Else
-            PonerFoco txtAux(I)
+            PonerFoco txtAux(i)
         End If
     End If
     If Err.Number <> 0 Then Err.Clear
@@ -6897,7 +6975,7 @@ Dim b As Boolean
 End Sub
 
 
-Private Sub CargarComboFacturacion()
+Private Sub CargarCombos()
 '### Combo Tipo Facturación
 'Cargaremos el combo, o bien desde una tabla o con valores fijos o como
 'se quiera, la cuestion es cargarlo
@@ -6912,6 +6990,20 @@ Private Sub CargarComboFacturacion()
 
     cboFacturacion.AddItem "Factura x Albaran"
     cboFacturacion.ItemData(cboFacturacion.NewIndex) = 1
+
+
+
+'Situacion
+    cboEstado.Clear
+    cboEstado.AddItem "Abierto"
+    cboEstado.ItemData(cboEstado.NewIndex) = 0
+
+    cboEstado.AddItem "En proceso"
+    cboEstado.ItemData(cboEstado.NewIndex) = 1
+
+    cboEstado.AddItem "Cerrado"
+    cboEstado.ItemData(cboEstado.NewIndex) = 2
+
 
 End Sub
 
@@ -6977,15 +7069,15 @@ End Function
 
 Private Sub LimpiarDatosCliente()
 'Limpia los campos del Form con datos del cliente
-Dim I As Byte
+Dim i As Byte
 
-    For I = 4 To 13
-        Text1(I).Text = ""
-    Next I
+    For i = 4 To 13
+        Text1(i).Text = ""
+    Next i
     If Modo = 3 Then
-        For I = 14 To 17
-            Text1(I).Text = ""
-        Next I
+        For i = 14 To 17
+            Text1(i).Text = ""
+        Next i
         Text2(12).Text = ""
         Text2(14).Text = ""
         Text2(17).Text = ""
@@ -8783,7 +8875,7 @@ End Sub
 
 
 Private Sub BloquearDatosCliente(bol As Boolean)
-Dim I As Byte
+Dim i As Byte
 
     'bloquear/desbloquear campos de datos segun sea de varios o no
     If Modo <> 5 Then
@@ -8791,9 +8883,9 @@ Dim I As Byte
         Me.imgBuscar(1).Enabled = bol
         Me.imgBuscar(6).Enabled = bol
         
-        For I = 5 To 11 'si no es de varios no se pueden modificar los datos
-            BloquearTxt Text1(I), Not bol
-        Next I
+        For i = 5 To 11 'si no es de varios no se pueden modificar los datos
+            BloquearTxt Text1(i), Not bol
+        Next i
     End If
 End Sub
 
@@ -8831,15 +8923,15 @@ End Function
 
 
 Private Sub CalcularDatosFactura()
-Dim I As Integer
+Dim i As Integer
 Dim cadWhere As String, SQL As String
 Dim vFactu As CFactura
 
     'Limpiar en el form los datos calculados de la factura
     'y volvemos a recalcular
-    For I = 33 To 56
-         Text3(I).Text = ""
-    Next I
+    For i = 33 To 56
+         Text3(i).Text = ""
+    Next i
     
      'Comprobar que hay lineas de albaran para calcular totales
     cadWhere = ObtenerWhereCP
@@ -8890,34 +8982,34 @@ End Sub
 
 
 Private Function FormatoDatosTotales()
-Dim I As Byte
+Dim i As Byte
 
-    For I = 33 To 36
-        Text3(I).Text = QuitarCero(Text3(I).Text)
-        Text3(I).Text = Format(Text3(I).Text, FormatoImporte)
-    Next I
+    For i = 33 To 36
+        Text3(i).Text = QuitarCero(Text3(i).Text)
+        Text3(i).Text = Format(Text3(i).Text, FormatoImporte)
+    Next i
  
-    For I = 49 To 54
-        Text3(I).Text = QuitarCero(Text3(I).Text)
-        Text3(I).Text = Format(Text3(I).Text, FormatoImporte)
-    Next I
+    For i = 49 To 54
+        Text3(i).Text = QuitarCero(Text3(i).Text)
+        Text3(i).Text = Format(Text3(i).Text, FormatoImporte)
+    Next i
  
  
     'Desglose B.Imponible por IVA
-    For I = 43 To 45
-        If Text3(I).Text <> "" Then
-             If CSng(Text3(I).Text) = 0 Then
-                Text3(I).Text = QuitarCero(Text3(I).Text)
-                Text3(I - 3).Text = QuitarCero(Text3(I - 3).Text)
-                Text3(I - 6).Text = QuitarCero(Text3(I - 6).Text)
-                Text3(I + 3).Text = QuitarCero(Text3(I).Text)
+    For i = 43 To 45
+        If Text3(i).Text <> "" Then
+             If CSng(Text3(i).Text) = 0 Then
+                Text3(i).Text = QuitarCero(Text3(i).Text)
+                Text3(i - 3).Text = QuitarCero(Text3(i - 3).Text)
+                Text3(i - 6).Text = QuitarCero(Text3(i - 6).Text)
+                Text3(i + 3).Text = QuitarCero(Text3(i).Text)
             Else
-                Text3(I).Text = Format(Text3(I).Text, FormatoImporte)
-                Text3(I - 3) = Format(Text3(I - 3).Text, FormatoDescuento)
-                Text3(I + 3).Text = Format(Text3(I + 3).Text, FormatoImporte)
+                Text3(i).Text = Format(Text3(i).Text, FormatoImporte)
+                Text3(i - 3) = Format(Text3(i - 3).Text, FormatoDescuento)
+                Text3(i + 3).Text = Format(Text3(i + 3).Text, FormatoImporte)
             End If
         End If
-    Next I
+    Next i
     
     'TOTALES
     Text3(55).Text = Format(Text3(55).Text, FormatoImporte)
@@ -10260,3 +10352,28 @@ Dim C As String
 
 End Sub
 
+Private Sub PonerVisibleEstado(Cual As Integer)
+    If vParamAplic.NumeroInstalacion <> vbFontenas Then Exit Sub
+    Me.imgEstado(0).visible = Cual = 0
+    Me.imgEstado(1).visible = Cual = 1
+    Me.imgEstado(2).visible = Cual = 2
+End Sub
+
+
+
+Private Sub AbrirVistaPreviaFontenas()
+    
+
+    CadenaDesdeOtroForm = " left join  sprioridades on sclien.prioridad=sprioridades.prioridad WHERE " & CadenaDesdeOtroForm
+    CadenaDesdeOtroForm = " FROM " & NombreTabla & " as scaped inner join sclien on scaped.codclien=Sclien.codclien" & CadenaDesdeOtroForm
+    CadenaDesdeOtroForm = "Select numpedcl ,fecpedcl ,scaped.codclien , scaped.nomclien,sclien.prioridad,estado,sprioridades.Descripcion " & CadenaDesdeOtroForm
+    frmListado5.OtrosDatos = CadenaDesdeOtroForm
+    frmListado5.OpcionListado = 33
+    frmListado5.Show vbModal
+    If CadenaDesdeOtroForm <> "" Then
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE numpedcl=" & CadenaDesdeOtroForm & " " & Ordenacion
+        CadenaDesdeOtroForm = ""
+        PonerCadenaBusqueda
+    End If
+    
+End Sub

@@ -1612,18 +1612,37 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     On Error GoTo Error1
-    'cerramos el puerto serie del visor
-    If Not vParamTPV Is Nothing Then
-        If vParamTPV.HayVisor Then
-            If Me.MSComm1.PortOpen Then
-                Me.MSComm1.Output = Mid(vEmpresa.nomempre & Space(40), 1, 40)
-                Me.MSComm1.PortOpen = False
-            End If
-        End If
+    
+    
+    If vParamAplic.NumeroInstalacion = vbTaxco Then
+        'NO SE PUEDEN QUEDAR VENTAS ABIERTAS
         
-        Set vParamTPV = Nothing
+        SQL = DevuelveDesdeBD(conAri, "count(*)", "sliven", "numtermi", CStr(NumTermi))
+        If Val(SQL) > 0 Then
+            MsgBox "Tiene ventas abiertas sin realizar tickets", vbCritical
+            Cancel = 1
+            
+        Else
+            SQL = "DELETE FROM scaven WHERE numtermi=" & NumTermi & " AND NOT (numtermi,numventa,fecventa) "
+            SQL = SQL & " IN (select numtermi,numventa,fecventa from sliven )"
+            ejecutar SQL, True
+        End If
+            
     End If
     
+    'cerramos el puerto serie del visor
+    If Cancel = 0 Then
+        If Not vParamTPV Is Nothing Then
+            If vParamTPV.HayVisor Then
+                If Me.MSComm1.PortOpen Then
+                    Me.MSComm1.Output = Mid(vEmpresa.nomempre & Space(40), 1, 40)
+                    Me.MSComm1.PortOpen = False
+                End If
+            End If
+            
+            Set vParamTPV = Nothing
+        End If
+    End If
 Error1:
     If Err.Number Then Err.Clear
 End Sub

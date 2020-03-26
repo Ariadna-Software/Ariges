@@ -4061,7 +4061,7 @@ Private Sub chkConjunto_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub chkCtrStock_Click()
- If Modo = 1 Then CheckCadenaBusqueda chkCtrStock, BuscaChekc
+ If Modo = 1 Then CheckCadenaBusqueda chkctrstock, BuscaChekc
 
 End Sub
 
@@ -4523,7 +4523,7 @@ Private Sub BotonAnyadir()
     Me.SSTab1.Tab = 0
     
     'Poner valores por defecto
-    Me.chkCtrStock.Value = 1 'por defecto hay control de stock
+    Me.chkctrstock.Value = 1 'por defecto hay control de stock
     Me.Text1(10).Text = Format(Now, "dd/mm/yyyy") 'fecha alta
     Me.cboArticuloVarios.ListIndex = 0
     Me.cboStatus.ListIndex = 0
@@ -4815,7 +4815,7 @@ End Sub
 
 Private Sub BotonModificarConjunto(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
 
     If vData.Recordset.EOF Then Exit Sub
     If vData.Recordset.RecordCount < 1 Then Exit Sub
@@ -5343,7 +5343,7 @@ Private Sub AbreFrmBuscaGrid_El(DesdeEquivalencias As Byte)
     Set frmB2 = Nothing
     If BuscaChekc <> "" Then
     
-        If DesdeEquivalencias Then
+        If DesdeEquivalencias = 1 Then
             Text6(0).Text = RecuperaValor(BuscaChekc, 1)
             Text6(1).Text = RecuperaValor(BuscaChekc, 2)
     
@@ -5375,7 +5375,7 @@ Private Sub AbreFrmBuscaGrid_El(DesdeEquivalencias As Byte)
                 If pRptvMultiInforme < 8 Then Text1_LostFocus CInt(pRptvMultiInforme)
             Next
             'Controstock. Campo 12 de rs
-            chkCtrStock.Value = miRsAux!CtrStock
+            chkctrstock.Value = miRsAux!CtrStock
             
             PonerFoco Text1(1)
             Text1(1).SelStart = Len(Text1(1).Text)
@@ -5836,7 +5836,7 @@ Private Sub LimpiarCampos()
     Me.chkSeries.Value = 0
     chkRotacion.Value = 0
     Me.chkProduccion.Value = 0
-    Me.chkCtrStock.Value = 0
+    Me.chkctrstock.Value = 0
     Me.chkMateriaPrima.Value = 0
     Me.chkWeb.Value = 0
     Me.cboArticuloVarios.ListIndex = -1
@@ -5849,11 +5849,11 @@ End Sub
 
 
 Private Sub LimpiarCamposAlmacenes()
-Dim I As Byte
+Dim i As Byte
     Text3(0).BackColor = vbRed
-    For I = 0 To Text3.Count - 1
-        Text3(I).Text = ""
-    Next I
+    For i = 0 To Text3.Count - 1
+        Text3(i).Text = ""
+    Next i
     Text2(8).Text = ""
     Me.chkInventario.Value = 0
     lblIndicador.Caption = ""
@@ -5991,28 +5991,28 @@ Private Sub frmUbic_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub imgAyuda_Click(index As Integer)
-    imgAyuda(index).Tag = ""
+    imgayuda(index).Tag = ""
     If index = 0 Then
-        imgAyuda(index).Tag = imgAyuda(index).ToolTipText & vbCrLf & vbCrLf
-        imgAyuda(index).Tag = imgAyuda(index).Tag & "Stock:   cantidad stock total actual" & vbCrLf
+        imgayuda(index).Tag = imgayuda(index).ToolTipText & vbCrLf & vbCrLf
+        imgayuda(index).Tag = imgayuda(index).Tag & "Stock:   cantidad stock total actual" & vbCrLf
         If vParamAplic.Produccion Then
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "En produccion: " & vbCrLf
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "        Cantidad en produccion pendiente de cerrar. " & vbCrLf
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "               En postivo las cantidades a producir" & vbCrLf
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "               En negativo si es componente en produccion"
+            imgayuda(index).Tag = imgayuda(index).Tag & "En produccion: " & vbCrLf
+            imgayuda(index).Tag = imgayuda(index).Tag & "        Cantidad en produccion pendiente de cerrar. " & vbCrLf
+            imgayuda(index).Tag = imgayuda(index).Tag & "               En postivo las cantidades a producir" & vbCrLf
+            imgayuda(index).Tag = imgayuda(index).Tag & "               En negativo si es componente en produccion"
             If vParamAplic.NumeroInstalacion <> vbAmesa Then
-                imgAyuda(index).Tag = imgAyuda(index).Tag & vbCrLf & "               Restará la cantidad pendiente de servir. Ped. cliente"
+                imgayuda(index).Tag = imgayuda(index).Tag & vbCrLf & "               Restará la cantidad pendiente de servir. Ped. cliente"
             End If
         Else
-            imgAyuda(index).Tag = imgAyuda(index).Tag & "Reservas:  cantidad pendiente de servir en pedidos cliente"
+            imgayuda(index).Tag = imgayuda(index).Tag & "Reservas:  cantidad pendiente de servir en pedidos cliente"
         End If
-        imgAyuda(index).Tag = imgAyuda(index).Tag & vbCrLf & "Pedido prov:  cantidad pedido proveedor "
+        imgayuda(index).Tag = imgayuda(index).Tag & vbCrLf & "Pedido prov:  cantidad pedido proveedor "
           
-        imgAyuda(index).Tag = imgAyuda(index).Tag & vbCrLf & vbCrLf & "Disponible: la suma de las cantidades"
+        imgayuda(index).Tag = imgayuda(index).Tag & vbCrLf & vbCrLf & "Disponible: la suma de las cantidades"
     End If
-    MsgBox imgAyuda(index).Tag, vbInformation
+    MsgBox imgayuda(index).Tag, vbInformation
     
-    imgAyuda(index).Tag = ""
+    imgayuda(index).Tag = ""
 End Sub
 
 
@@ -6237,7 +6237,7 @@ End Sub
 Private Sub ModificarLineas()
 Dim cad As String
 Dim Aux As String
-Dim I As Integer
+Dim i As Integer
 
     Select Case Modo
         Case 5  'Modificar lineas Artículos x Almacen
@@ -6429,7 +6429,7 @@ Dim Rotacion As String
                     Text1(index).Text = ""
                 Else
                     If Modo = 3 Then
-                        If InstalacionEsEulerTaxco Then
+                        If vParamAplic.NumeroInstalacion = vbEuler Then
                             'EULER. El codartic lo monta desde la familia mas un secuencial
                             PonerCodigoArticuloEULER False
                 
@@ -6533,7 +6533,7 @@ Dim Rotacion As String
             
         Case 36
             Text2(9).Text = PonerNombreDeCod(Text1(index), conAri, "sartic", "nomartic")
-            If Text1(index).Text <> "" And Text2(index - 2).Text = "" Then PonerFoco Text1(index)
+            If Text1(index).Text <> "" And Text2(9).Text = "" Then PonerFoco Text1(index)
 
     End Select
 End Sub
@@ -6823,7 +6823,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
 Dim NumReg As Byte
 
@@ -6904,10 +6904,10 @@ Dim NumReg As Byte
     
     'Bloquear los checkbox
     BloquearChecks Me, Modo
-    Me.imgFecha(I).Enabled = b
-    For I = 0 To 5
-        Me.imgCuentas(I).Enabled = b
-    Next I
+    Me.imgFecha(i).Enabled = b
+    For i = 0 To 5
+        Me.imgCuentas(i).Enabled = b
+    Next i
     b = b Or Modo > 3
     cmdCancelar.visible = b
     cmdAceptar.visible = b
@@ -7010,15 +7010,15 @@ End Sub
 
 
 Private Sub PonerModoFrame(Kmodo As Byte)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
     ModoFrame = Kmodo
     
     Select Case ModoFrame
         Case 0  'MODO INICIAL
-                For I = 0 To Me.Text3.Count - 1
-                    BloquearTxt Text3(I), True
-                Next I
+                For i = 0 To Me.Text3.Count - 1
+                    BloquearTxt Text3(i), True
+                Next i
                 Me.imgFecha(2).Enabled = False
                 Me.imgCuentas(6).Enabled = False
                 Me.imgCuentas(7).Enabled = False
@@ -7036,22 +7036,22 @@ Dim b As Boolean
         ' Ni stock, ni los datos de inventario se pueden insertar
         BloquearTxt Text3(0), ModoFrame = 3
         
-        For I = 1 To Me.Text3.Count - 1
+        For i = 1 To Me.Text3.Count - 1
         
-            If I = 2 Or I >= 6 Then
+            If i = 2 Or i >= 6 Then
                 b = True
             Else
                 b = False
             End If
-            BloquearTxt Text3(I), b
+            BloquearTxt Text3(i), b
             If ModoFrame = 3 Then
-                If b And I = 2 Then
-                    Text3(I).Text = "0"
+                If b And i = 2 Then
+                    Text3(i).Text = "0"
                 Else
-                    Text3(I).Text = ""
+                    Text3(i).Text = ""
                 End If
             End If
-        Next I
+        Next i
         chkInventario.Enabled = False
         Me.imgFecha(2).Enabled = False
         Me.imgCuentas(6).Enabled = (ModoFrame = 3)
@@ -7063,7 +7063,7 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim I As Byte
+Dim i As Byte
 
     DatosOk = False
     
@@ -7076,8 +7076,8 @@ Dim I As Byte
     
     'Para los valores de fam,mar,tipo... es obligado que exista el codigo
     BuscaChekc = ""
-    For I = 2 To 7
-        If Me.Text1(I).Text = "" Xor Text2(I - 2).Text = "" Then BuscaChekc = BuscaChekc & "  -" & RecuperaValor(Text1(I).Tag, 1) & vbCrLf
+    For i = 2 To 7
+        If Me.Text1(i).Text = "" Xor Text2(i - 2).Text = "" Then BuscaChekc = BuscaChekc & "  -" & RecuperaValor(Text1(i).Tag, 1) & vbCrLf
     Next
     If BuscaChekc <> "" Then
         MsgBox "Error en campos: " & vbCrLf & BuscaChekc, vbExclamation
@@ -7136,7 +7136,7 @@ Dim I As Byte
             End If
             '----  modo=3
             
-            If InstalacionEsEulerTaxco Then PonerCodigoArticuloEULER True
+            If vParamAplic.NumeroInstalacion = vbEuler Then PonerCodigoArticuloEULER True
             
         End If
         
@@ -7203,7 +7203,7 @@ Dim I As Byte
         'Cuando modificamos, si pasamos un articulo a CADUCADO, entonces comproaremos
         'si tiene sctock. Si es asi NO dejammos continuar
         If Me.cboStatus.ListIndex = 3 And Val(Data1.Recordset!codstatu) < 3 Then
-            If Me.chkCtrStock.Value = 1 Then
+            If Me.chkctrstock.Value = 1 Then
                 'Lleva stcok
                 'Comprobamos k valor tiene
                 BuscaChekc = TotalRegistros("select sum(canstock) from salmac where codartic='" & DevNombreSQL(Text1(0).Text) & "'")
@@ -8080,7 +8080,7 @@ End Function
    
     
 Private Function InsertarModificarLinea() As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim SQL As String
 
     On Error GoTo EInsertarModificarLinea
@@ -8098,9 +8098,9 @@ Dim SQL As String
             
             'Campos Stocks (Son Decimales)
             SQL = SQL & DBSet(Text3(2).Text, "N", "N") & ", "
-            For I = 3 To 6
-                SQL = SQL & DBSet(Text3(I).Text, "N", "S") & ", "
-            Next I
+            For i = 3 To 6
+                SQL = SQL & DBSet(Text3(i).Text, "N", "S") & ", "
+            Next i
         
             'Campo Fecha
             SQL = SQL & DBSet(Text3(7).Text, "F", "S") & ", "
@@ -8924,30 +8924,30 @@ End Sub
 
 
 Private Sub AccionesSobreTagText3_(Guardar As Boolean, Cargando As Boolean)
-Dim I As Integer
+Dim i As Integer
 
   
     If Guardar Then
         If Cargando Then TagText3 = ""
-        For I = 0 To Text3.Count - 1
-            If Cargando Then TagText3 = TagText3 & Replace(Text3(I).Tag, "|", ";") & "|"
-            Text3(I).Tag = ""
-        Next I
+        For i = 0 To Text3.Count - 1
+            If Cargando Then TagText3 = TagText3 & Replace(Text3(i).Tag, "|", ";") & "|"
+            Text3(i).Tag = ""
+        Next i
         
         'AÑADIMOS EL CHECK chkInventario.
         If Cargando Then TagText3 = TagText3 & Replace(chkInventario.Tag, "|", ";") & "|"
         chkInventario.Tag = ""
     Else
-        For I = 0 To Text3.Count - 1
-            Text3(I).Tag = Replace(RecuperaValor(TagText3, I + 1), ";", "|")
-        Next I
-        chkInventario.Tag = Replace(RecuperaValor(TagText3, I + 1), ";", "|")
+        For i = 0 To Text3.Count - 1
+            Text3(i).Tag = Replace(RecuperaValor(TagText3, i + 1), ";", "|")
+        Next i
+        chkInventario.Tag = Replace(RecuperaValor(TagText3, i + 1), ";", "|")
     End If
 End Sub
 
 
 Private Sub PonerDatosForaGrid(ForzarLimpiar As Boolean)
-Dim I As Integer
+Dim i As Integer
 Dim Limp As Boolean
 
     Limp = True
@@ -8961,9 +8961,9 @@ Dim Limp As Boolean
     If Limp Then
 
         'Limpiamos
-        For I = 0 To Text3.Count - 1
-            Text3(I).Text = ""
-        Next I
+        For i = 0 To Text3.Count - 1
+            Text3(i).Text = ""
+        Next i
         Text2(6).Text = ""
         Text2(8).Text = ""
         chkInventario.Value = 0
@@ -9687,7 +9687,7 @@ Dim cad As String
             cad = Mid(Text2(1).Text, 1, 3) & cad
             If DesdeCmdAceptar Then
                 If Text1(0).Text <> cad Then
-                    If MsgBox("Le corresponde el articulo: " & cad & vbCrLf & "¿Continuar de igual modo?", vbQuestion + vbYesNo) = vbYes Then Exit Sub
+                    If MsgBox("Le corresponde el articulo: " & cad & vbCrLf & "¿Continuar de con el introducido manualmente?", vbQuestion + vbYesNo) = vbYes Then Exit Sub
                     
                 End If
             End If

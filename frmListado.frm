@@ -11280,20 +11280,49 @@ Dim PrevioArticulos As Boolean
             
             
             If vParamAplic.NumeroInstalacion = vbTaxco Then
-                cadTitulo = "Select tmpnseries.codartic,ubialmac from tmpnseries left join salmac ON tmpnseries.codartic=salmac.codartic "
+                cadTitulo = "Select tmpnseries.*,ubialmac from tmpnseries left join salmac ON tmpnseries.codartic=salmac.codartic "
                 cadTitulo = cadTitulo & " and codalmac=1 "
                 cadTitulo = cadTitulo & " WHERE codusu = " & vUsu.Codigo
                 
                 miRsAux.Open cadTitulo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 While Not miRsAux.EOF
+                    cadFormula = miRsAux!nummante
                     cadTitulo = DBLet(miRsAux!ubialmac, "T")
-                    If Asc(cadTitulo) = 13 Then cadTitulo = ""
+                    Codigo = ""
+                    
+                    'numero de etiquetas
+                    
+                    If Val(cadFormula) > 0 Then
+                        indCodigo = Val(cadFormula) - 1
+                    Else
+                        indCodigo = miRsAux!cantidad - 1
+                    End If
+                    While indCodigo <> 0
+                        'tmpnseries(codusu,codartic,numserie,numlinealb,numlinea)
+                        Codigo = Codigo & ", (" & vUsu.Codigo & "," & DBSet(miRsAux!codArtic, "T") & "," & DBSet(miRsAux!numSerie, "T")
+                        Codigo = Codigo & "," & indCodigo & ",1)"
+                        indCodigo = indCodigo - 1
+                    Wend
+                    If Codigo <> "" Then
+                        Codigo = Mid(Codigo, 2)
+                        Codigo = "INSERT INTO tmpnseries(codusu,codartic,numserie,numlinealb,numlinea) VALUES " & Codigo
+                        ejecutar Codigo, False
+                        Espera 0.15
+                    End If
+                    
+                    
+                    If cadTitulo <> "" Then
+                        If Asc(cadTitulo) = 13 Then cadTitulo = ""
+                    End If
                     If cadTitulo <> "" Then
                     
                         cadTitulo = "UPDATE tmpnseries SET nummante= " & DBSet(miRsAux!ubialmac, "T")
                         cadTitulo = cadTitulo & " WHERE codusu = " & vUsu.Codigo & " AND codartic = " & DBSet(miRsAux!codArtic, "T")
                         conn.Execute cadTitulo
                     End If
+                    
+                    
+                    
                     miRsAux.MoveNext
                 Wend
                 miRsAux.Close
@@ -11465,9 +11494,19 @@ Dim PrevioArticulos As Boolean
     If Not HayRegParaInforme(cadFrom, cadSelect) Then Exit Sub
         
         
+    indCodigo = 0
+    If OpcionListado = 6 Then
+        If chkImpEtiq(0).Value = 1 Then
+            OpcionListado = 513   'para que imprmia etiquetas directamente
+            indCodigo = 1 'Indicamos que hemos cambiado
+        End If
+    End If
     
-        
     LlamarImprimir False
+    
+    If indCodigo = 1 Then OpcionListado = 6
+    
+    
 End Sub
 
 
@@ -13774,7 +13813,7 @@ End Sub
 
 
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
 Dim IndiceFoco As Integer
 
     If primeravez Then

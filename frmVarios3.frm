@@ -19,6 +19,16 @@ Begin VB.Form frmVarios3
       TabIndex        =   22
       Top             =   0
       Width           =   14415
+      Begin VB.CommandButton cmdOcultarNoVienenFichero 
+         Caption         =   "Ocultar"
+         Height          =   375
+         Left            =   1560
+         TabIndex        =   36
+         ToolTipText     =   "Ocultar lineas no viene fichero"
+         Top             =   7080
+         Visible         =   0   'False
+         Width           =   975
+      End
       Begin VB.CommandButton cmdEliminarFrasSinConsumo 
          Caption         =   "Continuar facturacion"
          Height          =   375
@@ -1052,6 +1062,14 @@ End Sub
 Private Sub cmdEliminarFrasSinConsumo_Click()
 Dim FacturaTodos As Boolean  'Siginifica que va a continuar sin quitar ningun telefono del proceso
     
+    
+    If Me.cmdOcultarNoVienenFichero.visible Then
+        OcultarNoVienenFichero
+        MsgBox "Ocultadas lineas que no vienen en el fichero", vbExclamation
+        Exit Sub
+    End If
+
+    
     miSQL = ""
     For NumRegElim = 1 To Me.lwTelefoDe.ListItems.Count
         If Me.lwTelefoDe.ListItems(NumRegElim).Checked Then
@@ -1124,6 +1142,11 @@ End Sub
 
 
 
+Private Sub cmdOcultarNoVienenFichero_Click()
+    OcultarNoVienenFichero
+    cmdOcultarNoVienenFichero.visible = False
+End Sub
+
 Private Sub cmdVentasAgrupadas_Click()
     If Me.txtFamia(0).Text = "" Then Exit Sub
     CadenaDesdeOtroForm = txtFamia(0).Text & "|" & Format(txtFamia(0).Text, "0000") & " - " & Me.txtDescFamia(0).Text & "|" & Me.cboTipoFra.ListIndex & "|"
@@ -1134,7 +1157,7 @@ Private Sub Command1_Click()
     
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     If PrimVez Then
         PrimVez = False
         PulsadoCerrar = True
@@ -1538,17 +1561,8 @@ End Sub
 Private Sub txtImporte_LostFocus(index As Integer)
     txtimporte(index).Text = Trim(txtimporte(index).Text)
     If txtimporte(index).Text = "" Then Exit Sub
-'    Select Case Index
-'    Case 0
     
         PonerFormatoDecimal txtimporte(index), 2   'decimal 10,4  en formato decimal
-'    Case 1
-'        'El uno es obligado el campo
-'        If Not PonerFormatoDecimal(txtimporte(Index), 3) Then txtimporte(Index).Text = ""   'importe
-'
-'    Case 2
-'        PonerFormatoDecimal txtimporte(Index), 1   '2 decimales
-'    End Select
 End Sub
 
 
@@ -1636,6 +1650,8 @@ Dim N As Integer
                 IT.SubItems(4) = "*"
                 IT.ForeColor = vbBlue
             End If
+        Else
+            IT.ToolTipText = "Sin consumo"
         End If
         
         
@@ -1650,7 +1666,7 @@ Dim N As Integer
                 End If
             End If
         End If
-
+        IT.Tag = 0
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1658,7 +1674,7 @@ Dim N As Integer
     miSQL = "select sclientfno.codclien,idtelefono,nomclien from sclientfno,sclien where "
     miSQL = miSQL & " sclientfno.codclien = sclien.codclien "
     miSQL = miSQL & " AND inactivo=0 and operador =" & RecuperaValor(Me.Tag, 2)
-    miSQL = miSQL & " AND idtelefono IN (select Numero_de_telefono from telefono.telefono where "
+    miSQL = miSQL & " AND not idtelefono IN (select Numero_de_telefono from telefono.telefono where "
     miSQL = miSQL & " Fichero = '" & RecuperaValor(Me.Tag, 3) & "')"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
@@ -1669,11 +1685,14 @@ Dim N As Integer
         IT.SubItems(1) = Format(miRsAux!codClien, "0000")
         IT.SubItems(2) = DBLet(miRsAux!NomClien, "T")
     
-        IT.ForeColor = vbRed
+        IT.ForeColor = vbBlue
+        IT.Bold = True
         IT.ToolTipText = "No viene en fichero"
+        IT.Tag = 1
+        miSQL = ""
         miRsAux.MoveNext
     Wend
-    
+    If miSQL = "" Then cmdOcultarNoVienenFichero.visible = True
     Set miRsAux = Nothing
 End Sub
 
@@ -1726,7 +1745,7 @@ End Sub
 
 'CadenaDesdeOtroForm   1 Si muestra o no lw lazos      2 Operador   3 Nomfichero
 Private Sub CargarDatosTelefoniaVentaPlazos()
-    Dim I As Integer
+    Dim i As Integer
     Dim ImporteTotalFacturaVtaPlz As Currency
     Dim Color As Long
     Dim IT As ListItem
@@ -1737,14 +1756,14 @@ Private Sub CargarDatosTelefoniaVentaPlazos()
         lw(5).Tag = ""
         ImporteTotalFacturaVtaPlz = 0
         'Cargaremos el listview con los telefono a plazos
-        For I = 1 To 2
+        For i = 1 To 2
             'Primera pasada.
             ' Articulos que estando en el fichero les queda , o no , plazo
             'Segunda
             ' articulos con plazo que NO vienen en el fichero
             miSQL = "select IdTelefono ,nomclien,sclientfno.codclien,ImportePlazo,PlazosMeses,ArtPlazos from sclientfno"
             miSQL = miSQL & ",sclien where sclientfno.codclien=sclien.codclien AND operador = " & RecuperaValor(Me.Tag, 2) & " and ArtPlazos<>'' "
-            If I = 1 Then
+            If i = 1 Then
                 miSQL = miSQL & " AND "
             Else
                 miSQL = miSQL & " AND PlazosMeses >0 AND NOT "
@@ -1764,7 +1783,7 @@ Private Sub CargarDatosTelefoniaVentaPlazos()
                 IT.SubItems(3) = miRsAux!artplazos
                 IT.SubItems(4) = Format(miRsAux!ImportePlazo, FormatoCantidad)
                 IT.SubItems(5) = CStr(miRsAux!PlazosMeses)
-                If I = 1 Then
+                If i = 1 Then
                     If miRsAux!PlazosMeses > 0 Then
                         ImporteTotalFacturaVtaPlz = ImporteTotalFacturaVtaPlz + miRsAux!ImportePlazo
                         lw(5).Tag = lw(5).Tag & "X"
@@ -1816,3 +1835,17 @@ End Sub
 
 
 
+
+
+Private Sub OcultarNoVienenFichero()
+    
+    miSQL = 0
+    For NumRegElim = lwTelefoDe.ListItems.Count To 1 Step -1
+        If lwTelefoDe.ListItems(NumRegElim).Tag = 1 Then
+            'NO viene en fichero. Las esta ocultando
+            miSQL = Val(miSQL) + 1
+            lwTelefoDe.ListItems.Remove NumRegElim
+        End If
+    Next
+    cmdOcultarNoVienenFichero.visible = False
+End Sub

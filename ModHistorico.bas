@@ -80,8 +80,20 @@ On Error Resume Next
         SQL = SQL & "fecentre,sementre,visadore,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
         SQL = SQL & "coddirec,nomdirec,referenc,codtraba,codagent,codforpa,dtoppago,dtognral,"
         SQL = SQL & "tipofact,observa01,observa02,observa03,observa04,observa05,servcomp,restoped,numofert,fecofert,observap1,observap2,recogecl,actuacion,coddiren,observacrm"
-                   'Enero 2016        Nov 16
-        SQL = SQL & ", PideCliente,observaciones,cerrado"
+        SQL = SQL & ", PideCliente,observaciones,cerrado,estado "
+        
+        
+        
+        
+        CadenaInsercicon = " numpedcl,fecpedcl,codigusu,fechelim,trabelim,codincid,"
+        CadenaInsercicon = CadenaInsercicon & "fecentre,sementre,visadore,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,"
+        CadenaInsercicon = CadenaInsercicon & "coddirec,nomdirec,referenc,codtraba,codagent,codforpa,dtoppago,dtognral,"
+        CadenaInsercicon = CadenaInsercicon & "tipofact,observa01,observa02,observa03,observa04,observa05,servcomp,restoped,numofert,fecofert,observap1,observap2,recogecl,actuacion,coddiren,observacrm"
+        CadenaInsercicon = CadenaInsercicon & ", PideCliente,observaciones,cerrado,estado "
+        CadenaInsercicon = "(" & CadenaInsercicon & ")  "
+        
+        
+        
         
         
       Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE" '[1.3.1] 'Albaran de venta a clientes

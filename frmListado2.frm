@@ -22169,7 +22169,7 @@ Private Sub MontaSQL_InformePedidoProveedor()
         miSQL = miSQL & " AND codProve = " & txtCodProve(17).Text
     Else
         'Si no indica proveedor solo articulos con codigo AUNA o centro logistico
-        miSQL = miSQL & " AND auna_idarti <>''"
+        miSQL = miSQL & " AND auna_puedecomprar = 1"
     End If
     'Situacion
     If Me.cboProPed(1).ListIndex > 0 Then miSQL = miSQL & " AND codstatu = " & Me.cboProPed(1).ListIndex - 1
@@ -23172,7 +23172,8 @@ Dim b As Boolean
         Exit Function
     End If
     
-    
+    CadenaDeTipar = "|"
+    ContadorCodtipar = 0
     
     'FACTURAS
     '---------------------------------
@@ -23199,8 +23200,7 @@ Dim b As Boolean
         marca = -1
         miSQL = ""
         TiparArt = ""
-        CadenaDeTipar = "|"
-        ContadorCodtipar = 0
+        
         Visitador = -1
         While Not miRsAux.EOF
             Label3(122).Caption = ColAgent.Item(J) & ". " & Label4(31).Caption & ":  " & miRsAux.Fields(0)

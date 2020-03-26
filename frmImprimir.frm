@@ -273,15 +273,15 @@ End Sub
 
 
 Private Sub Combo1_Click()
-Dim I As Integer
+Dim i As Integer
 Dim C  As String
     If primeravez Then Exit Sub
     'En nomrpt pondra el valor entrecorchetado
     C = Combo1.Text
-    I = InStr(1, C, "[")
-    C = Mid(C, I + 1)
-    I = InStr(1, C, "]")
-    C = Mid(C, 1, I - 1)
+    i = InStr(1, C, "[")
+    C = Mid(C, i + 1)
+    i = InStr(1, C, "]")
+    C = Mid(C, 1, i - 1)
     Me.NombreRPT = C
 End Sub
 
@@ -299,11 +299,10 @@ Private Sub Form_Activate()
             Unload Me
             
         ElseIf Me.EnvioEMail Then
-            Me.Hide
-            DoEvents
-            chkEMAIL.Value = 1
-            Imprime
+            
             Unload Me
+            
+           
         
         Else
             
@@ -313,7 +312,7 @@ Private Sub Form_Activate()
                 
 
         End If
-        Espera 0.1
+        If Not EnvioEMail Then Espera 0.1
         CommitConexion
     End If
     Screen.MousePointer = vbDefault
@@ -485,6 +484,9 @@ Dim cad As String
                 Text1.Text = "Costes cliente-factura"
             Case 2054
                 Text1.Text = "Ficha mantenimiento"
+                
+            Case 2055
+                Text1.Text = "Etiquetas QR envasado"
             End Select
         End If
     Else
@@ -628,6 +630,8 @@ End If
     
     If NombrePDF = "" Then NombrePDF = NombreRPT
     
+    If EnvioEMail Then Imprime
+    
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -641,7 +645,7 @@ Dim HaPulsadoImprimir As Boolean
 Dim J As Integer
 Dim EulerT As String
 Dim Aux As String
-
+Dim EsPorEmail As Boolean
 
     Screen.MousePointer = vbHourglass
     OtrosParam2 = OtrosParametros
@@ -670,15 +674,23 @@ Dim Aux As String
     
             
         '.ForzarNombreImpresora
-            
+        'ETIQUETAS TAXCo
         If Opcion = 513 And vParamAplic.NumeroInstalacion = vbTaxco Then
             .ForzarNombreImpresora = "GODEX500"
             .SoloImprimir = True
         End If
-    
+         If Opcion = 2055 And vParamAplic.NumeroInstalacion = vbFontenas Then
+            .ForzarNombreImpresora = "Godex G500-1"
+            .SoloImprimir = True
+        End If
         
-        
-        If Me.chkEMAIL.Value = 1 Then
+        EsPorEmail = False
+        If EnvioEMail Then
+            EsPorEmail = True
+        Else
+            If Me.chkEMAIL.Value = 1 Then EsPorEmail = True
+        End If
+        If EsPorEmail Then
             'EMAIL
             
             'En EULER, el rp
@@ -703,9 +715,18 @@ Dim Aux As String
         End If
         .Opcion = Opcion
         
-        .ExportarPDF = (chkEMAIL.Value = 1)
+        .ExportarPDF = EsPorEmail
         .MostrarTree = MostrarTree
-        .Show vbModal
+        
+        If EsPorEmail Then
+            Load frmVisReport
+            Unload frmVisReport
+        Else
+            .Show vbModal
+        End If
+        
+        
+        
         HaPulsadoImprimir = .EstaImpreso
         HaPulsadoElBotonDeImprimir = HaPulsadoImprimir
       End With
@@ -795,13 +816,27 @@ Dim Aux As String
     End If
     
 
-    Unload Me
+    If Not EnvioEMail Then Unload Me
     
     
 End Function
 
 
 Private Sub Form_Unload(Cancel As Integer)
+
+    NumeroCopias = 0
+    outTipoDocumento = 0 'Para restear esta variable
+    davidNumalbar = 0 'Log impresion albaranes  tb la reestablezco
+    PulsaAceptar = False
+    SeleccionaRPTCodigo = 0
+    NombreSubRptConta = ""
+    NombrePDF = ""
+    MostrarTreeDesdeFuera = False
+    Titulo = ""
+
+    If EnvioEMail Then Exit Sub
+    
+
     If Me.chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 1
     'If ReestableceSoloImprimir Then SoloImprimir = False
     'Dejo la marca como estaba
@@ -810,16 +845,10 @@ Private Sub Form_Unload(Cancel As Integer)
     End If
     
     OperacionesArchivoDefecto
-    NombreSubRptConta = ""
-    NombrePDF = ""
-    MostrarTreeDesdeFuera = False
-    Titulo = ""
     
-    NumeroCopias = 0
-    outTipoDocumento = 0 'Para restear esta variable
-    davidNumalbar = 0 'Log impresion albaranes  tb la reestablezco
-    PulsaAceptar = False
-    SeleccionaRPTCodigo = 0
+    
+    
+
 End Sub
 
 Private Sub OperacionesArchivoDefecto()
@@ -1026,34 +1055,34 @@ Private Sub ForzarImpresoraPorDefecto(sNombreImpresora As String)
     On Error GoTo eForzarImpresoraPorDefecto
     Dim nom As String
     Dim bEncontrada As Boolean
-    Dim I As Integer
+    Dim i As Integer
     'Selecciona la impresora para imprimir, si no puede seleccionarla devuelve false
     
     bEncontrada = False
-    For I = 0 To Printers.Count - 1
-        If Printers(I).DeviceName = sNombreImpresora Then
+    For i = 0 To Printers.Count - 1
+        If Printers(i).DeviceName = sNombreImpresora Then
             bEncontrada = True
             Exit For
         End If
-    Next I
+    Next i
     
     If bEncontrada Then
         
-        Set Printer = Printers(I)
+        Set Printer = Printers(i)
         
     Else
         
         nom = ""
-        I = InStrRev(sNombreImpresora, "\")
-        If I > 0 Then
-            nom = Mid(sNombreImpresora, I + 1)
-            For I = 0 To Printers.Count - 1
-                If Printers(I).DeviceName = sNombreImpresora Then
+        i = InStrRev(sNombreImpresora, "\")
+        If i > 0 Then
+            nom = Mid(sNombreImpresora, i + 1)
+            For i = 0 To Printers.Count - 1
+                If Printers(i).DeviceName = sNombreImpresora Then
                     bEncontrada = True
                     Exit For
                 End If
-            Next I
-            If bEncontrada Then Set Printer = Printers(I)
+            Next i
+            If bEncontrada Then Set Printer = Printers(i)
             
         
         End If

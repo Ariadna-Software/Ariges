@@ -26,7 +26,7 @@ Dim Errores As String
 Dim ErroresAux As String
 
 
-Public Function TraspasoAlbaranesFacturas(cadSQL As String, cadWhere As String, FechaFact As String, banPr As String, ByRef PBar1 As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef vTipoM As String, TextosCSB As String, NumeroCopias As Byte, MostrarMsgOK As Boolean, EsTraspasoOfeFAZ As Boolean, EsUnUnicoAlbaran As Boolean) As Boolean
+Public Function TraspasoAlbaranesFacturas(cadSQL As String, cadWhere As String, FechaFact As String, banPr As String, ByRef PBarFac As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef vTipoM As String, TextosCSB As String, NumeroCopias As Byte, MostrarMsgOK As Boolean, EsTraspasoOfeFAZ As Boolean, EsUnUnicoAlbaran As Boolean) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Albaranes que vamos a Facturar
 '      FechaFact: Fecha de la Factura
 '      BanPr: Cod. de Banco Propio
@@ -68,6 +68,11 @@ Dim condicion As Boolean 'condicion que comprueba para romper la agrupacion de a
 Dim PgbVisible As Boolean
 
 
+'Desde que entra Taxco, puede factura + de 32000
+'con lo c llevaremos
+'Dim NumeroRegistros As Long
+'Dim RegistroActual As Long
+
 Dim HazPulsarAceptarEnFrmImprimir As Boolean
 
     On Error GoTo ETraspasoAlbFac
@@ -78,12 +83,14 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         
     'comprobamos que no haya nadie facturando
     DesBloqueoManual ("VENFAC") 'facturas de venta
-    If Not BloqueoManual("VENFAC", "1") Then
-        MsgBox "No se puede facturar. Hay otro usuario facturando.", vbExclamation
-        Screen.MousePointer = vbDefault
-        Exit Function
+    If Not EsUnUnicoAlbaran Then
+        If Not BloqueoManual("VENFAC", "1") Then
+            MsgBox "No se puede facturar. Hay otro usuario facturando.", vbExclamation
+            Screen.MousePointer = vbDefault
+            Exit Function
+        End If
     End If
-    
+        
     'Bloqueamos todos los albaranes que vamos a facturar (cabeceras y lineas)
     'Nota: esta bloqueando tambien los registros de la tabla clientes: sclien correspondientes
     SQL = " (scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien ) INNER JOIN slialb ON scaalb.codtipom=slialb.codtipom AND scaalb.numalbar=slialb.numalbar "
@@ -97,8 +104,8 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
    
     'Inicializar la Progress Bar
     PgbVisible = False
-    If Not (PBar1 Is Nothing) Then
-        If PBar1.visible Then PgbVisible = True
+    If Not (PBarFac Is Nothing) Then
+        If PBarFac.visible Then PgbVisible = True
     End If
     If PgbVisible Then
         If InStr(1, cadSQL, "sclien") Then
@@ -110,8 +117,12 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         
         Set RSalb = New ADODB.Recordset
         RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        'NumeroRegistros = 1
+        'RegistroActual = 0
         If Not RSalb.EOF Then
-            CargarProgresNew PBar1, CInt(RSalb.Fields(0))
+            'NumeroRegistros = Val(SQL)
+            SQL = DBLet(RSalb.Fields(0), "N")
+            CargarProgresNew PBarFac, CInt(SQL)
             LblBar.Caption = "Inicializando el proceso..."
             LblBar.Refresh
             
@@ -198,7 +209,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
                     End If
                 End If
                 If PgbVisible Then
-                    IncrementarProgresNew PBar1, Inc - 1
+                    IncrementarProgresNew PBarFac, Inc - 1
                     LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " " & vFactu.NombreClien
                     LblBar.Refresh
                 End If
@@ -244,7 +255,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
                 Inc = 1 '1 albaran x factura
                 LblBar.Caption = "Cliente: " & Format(RSalb!codClien, "000000") & " - " & RSalb!NomClien
                 LblBar.Refresh
-                IncrementarProgresNew PBar1, Inc
+                IncrementarProgresNew PBarFac, Inc
                 Inc = 0
             End If
             Espera 0.2
@@ -299,7 +310,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
                     If PgbVisible Then
                         LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " " & vFactu.NombreClien
                         LblBar.Refresh
-                        IncrementarProgresNew PBar1, Inc
+                        IncrementarProgresNew PBarFac, Inc
                         Inc = 0
                     End If
                     Espera 0.2
@@ -371,7 +382,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         End If
         If PgbVisible Then
 '            LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " - " & vFactu.NombreClien
-            IncrementarProgresNew PBar1, Inc
+            IncrementarProgresNew PBarFac, Inc
         End If
         Espera 0.2
     End If

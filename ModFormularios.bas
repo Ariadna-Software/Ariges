@@ -1543,8 +1543,9 @@ End Sub
 
 Public Sub CargarProgresNew(ByRef PBar As ProgressBar, Valor As Integer)
 On Error Resume Next
-    PBar.Max = Valor
     PBar.Value = 0
+    PBar.Max = Valor
+    
 '    PBar.Tag = Valor
     If Err.Number <> 0 Then Err.Clear
 End Sub

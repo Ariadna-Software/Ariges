@@ -835,8 +835,7 @@ Begin VB.Form frmProdEnvas
             Object.ToolTipText     =   "Imprimir "
          EndProperty
          BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Imprimir Orden Instal."
+            Object.ToolTipText     =   "Imprimir etiquetas QR"
          EndProperty
          BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Style           =   3
@@ -1979,7 +1978,7 @@ Private Sub DataGrid3_DblClick()
     'PonerFoco txtCalidad(3)
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     If Me.Tag <> "" Then
         Me.Tag = ""
         PonerCampos
@@ -2013,7 +2012,7 @@ Private Sub Form_Load()
         
         
         .Buttons(14).Image = 16 'Imprimir Pedido
-      '  .Buttons(15).Image = 27 'Imprimir Orden Instalacion
+        .Buttons(15).Image = 27 'Imprimir ETIQUETAS QR
         .Buttons(17).Image = 15  'Salir
         .Buttons(btnPrimero).Image = 6  'Primero
         .Buttons(btnPrimero + 1).Image = 7 'Anterior
@@ -2206,57 +2205,57 @@ End Sub
 
 
 
-
-
-Private Sub mnImpOrde_Click()
-'Impreme la Orden de Instalacion de un pedido
-Dim cadFormula As String, cadParam As String
-Dim devuelve As String, nomDocu As String
-Dim numParam As Byte
-
-    'Comprobar que hay un pedido seleccionado
-    If Text1(0).Text = "" Then
-        MsgBox "No hay ningún Pedido seleccionado.", vbInformation
-        Exit Sub
-    End If
-
-    ''Comprobar que algun Articulo pertenece a la familia de Instalaciones
-    'If Not PedidoConInstalaciones Then
-    '    MsgBox "El Pedido no tiene ningún Artículo que sea Instalación.", vbInformation
-    '    Exit Sub
-    'End If
-
-    '=======================================================================
-    '=============== FORMULA    ============================================
-    cadFormula = ""
-    cadParam = ""
-    numParam = 0
-    
-    If Text1(0).Text <> "" Then 'Seleccionar el Pedido
-        devuelve = "{" & NombreTabla & ".numpedcl}=" & Val(Text1(0).Text)
-        If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
-    End If
-    
-    'Seleccionar solo las lineas de Articulos que son de una familia que es Instalacion
-    devuelve = "{sfamia.instalac}=1"
-    If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
-    
-    If Not PonerParamRPT2(9, cadParam, numParam, nomDocu, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
-
-    With frmImprimir
-        .NombreRPT = nomDocu
-        .NombrePDF = pPdfRpt
-        .FormulaSeleccion = cadFormula
-        .SeleccionaRPTCodigo = pRptvMultiInforme
-        .OtrosParametros = cadParam
-        .NumeroParametros = numParam
-        .SoloImprimir = False
-        .EnvioEMail = False
-        .Opcion = 39
-        .Titulo = ""
-        .Show vbModal
-    End With
-End Sub
+'
+'
+'Private Sub mnImpOrde_Click()
+''Impreme la Orden de Instalacion de un pedido
+'Dim cadFormula As String, cadParam As String
+'Dim devuelve As String, nomDocu As String
+'Dim numParam As Byte
+'
+'    'Comprobar que hay un pedido seleccionado
+'    If Text1(0).Text = "" Then
+'        MsgBox "No hay ningún Pedido seleccionado.", vbInformation
+'        Exit Sub
+'    End If
+'
+'    ''Comprobar que algun Articulo pertenece a la familia de Instalaciones
+'    'If Not PedidoConInstalaciones Then
+'    '    MsgBox "El Pedido no tiene ningún Artículo que sea Instalación.", vbInformation
+'    '    Exit Sub
+'    'End If
+'
+'    '=======================================================================
+'    '=============== FORMULA    ============================================
+'    cadFormula = ""
+'    cadParam = ""
+'    numParam = 0
+'
+'    If Text1(0).Text <> "" Then 'Seleccionar el Pedido
+'        devuelve = "{" & NombreTabla & ".numpedcl}=" & Val(Text1(0).Text)
+'        If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
+'    End If
+'
+'    'Seleccionar solo las lineas de Articulos que son de una familia que es Instalacion
+'    devuelve = "{sfamia.instalac}=1"
+'    If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
+'
+'    If Not PonerParamRPT2(9, cadParam, numParam, nomDocu, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+'
+'    With frmImprimir
+'        .NombreRPT = nomDocu
+'        .NombrePDF = pPdfRpt
+'        .FormulaSeleccion = cadFormula
+'        .SeleccionaRPTCodigo = pRptvMultiInforme
+'        .OtrosParametros = cadParam
+'        .NumeroParametros = numParam
+'        .SoloImprimir = False
+'        .EnvioEMail = False
+'        .Opcion = 39
+'        .Titulo = ""
+'        .Show vbModal
+'    End With
+'End Sub
 
 
 
@@ -2577,7 +2576,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte, NumReg As Byte
+Dim i As Byte, NumReg As Byte
 Dim b As Boolean
 
     On Error GoTo EPonerModo
@@ -2623,9 +2622,9 @@ Dim b As Boolean
   
     
     'Si no es modo lineas Boquear los TxtAux
-    For I = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(I), (Modo <> 5)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(i), (Modo <> 5)
+    Next i
   
     
     
@@ -2636,9 +2635,9 @@ Dim b As Boolean
     
     'Las imagenes añadimos el modo 6
     b = b And Modo <> 6
-    For I = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(i).Enabled = b
+    Next i
     imgBuscar(0).visible = b
 
 
@@ -2647,9 +2646,9 @@ Dim b As Boolean
     
     'Solo en modificamos cantidad en modo6
     b = Modo = 6
-    For I = 0 To txtComponentes.Count - 1
-        txtComponentes(I).visible = False
-    Next I
+    For i = 0 To txtComponentes.Count - 1
+        txtComponentes(i).visible = False
+    Next i
     Me.cmdAux2(0).visible = False 'b FALTA###
     
     If Modo = 2 Then
@@ -2739,7 +2738,7 @@ Private Function DatosOkLinea() As Boolean
 'Comprueba si los datos de una linea son correctos antes de Insertar o Modificar
 'una linea del Pedido
 Dim b As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim vArtic As CArticulo
 
     On Error GoTo EDatosOkLinea
@@ -2748,14 +2747,14 @@ Dim vArtic As CArticulo
     b = True
 
     'Comprobar que los campos NOT NULL tienen valor
-    For I = 0 To txtAux.Count - 1
-        If txtAux(I).Text = "" And I <> 3 Then
-            MsgBox "El campo " & txtAux(I).Tag & " no puede ser nulo", vbExclamation
+    For i = 0 To txtAux.Count - 1
+        If txtAux(i).Text = "" And i <> 3 Then
+            MsgBox "El campo " & txtAux(i).Tag & " no puede ser nulo", vbExclamation
             b = False
-            PonerFoco txtAux(I)
+            PonerFoco txtAux(i)
             Exit Function
         End If
-    Next I
+    Next i
         
     
     DatosOkLinea = b
@@ -2888,6 +2887,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
                     .NombreRPT = "rOrdenEnvasado.rpt"
                     .OtrosParametros = "|pNomEmpre=""" & vParam.NombreEmpresa & """|"
                     .NumeroParametros = 1
+                    .SoloImprimir = False
                     .Titulo = "Orden de produccion"
                     .Opcion = 2003 'Esta libre
                     .Show vbModal
@@ -2895,7 +2895,8 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             End If
 
         Case 15 'Imprimir Orden Instalacion
-            mnImpOrde_Click
+            'mnImpOrde_Click
+            ImprimirEtiquetaQR
         Case 17    'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
@@ -3207,7 +3208,7 @@ End Sub
 
 
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
-Dim I As Byte
+Dim i As Byte
 
     On Error GoTo ECargaGrid
 
@@ -3237,10 +3238,10 @@ Dim I As Byte
              
     End Select
 
-    For I = 0 To vDataGrid.Columns.Count - 1
-        vDataGrid.Columns(I).Locked = True
-        vDataGrid.Columns(I).AllowSizing = False
-    Next I
+    For i = 0 To vDataGrid.Columns.Count - 1
+        vDataGrid.Columns(i).Locked = True
+        vDataGrid.Columns(i).AllowSizing = False
+    Next i
     vDataGrid.HoldFields
     Exit Sub
 ECargaGrid:
@@ -3324,30 +3325,30 @@ Private Sub CargaTxtAux(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim alto As Single
-Dim I As Byte
+Dim i As Byte
 
     On Error Resume Next
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For I = 0 To txtAux.Count - 1 'TextBox
-            txtAux(I).Top = 290
-            txtAux(I).visible = visible
-        Next I
+        For i = 0 To txtAux.Count - 1 'TextBox
+            txtAux(i).Top = 290
+            txtAux(i).visible = visible
+        Next i
         cmdAux(0).visible = visible
         cmdAux(1).visible = visible
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
-            For I = 0 To txtAux.Count - 1
-                txtAux(I).Text = ""
-                BloquearTxt txtAux(I), False
-            Next I
+            For i = 0 To txtAux.Count - 1
+                txtAux(i).Text = ""
+                BloquearTxt txtAux(i), False
+            Next i
         Else 'Vamos a modificar
-            For I = 0 To txtAux.Count - 1
-                txtAux(I).Text = DataGrid1.Columns(I).Text
-                txtAux(I).Locked = I < 2
-            Next I
+            For i = 0 To txtAux.Count - 1
+                txtAux(i).Text = DataGrid1.Columns(i).Text
+                txtAux(i).Locked = i < 2
+            Next i
         End If
                
 '        'El Campo de Origen del precio se actualiza por programa al modificar el precio
@@ -3360,10 +3361,10 @@ Dim I As Byte
         '-------------------------------
         alto = ObtenerAlto(DataGrid1, 10)
         
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).Top = alto
-            txtAux(I).Height = DataGrid1.RowHeight
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Top = alto
+            txtAux(i).Height = DataGrid1.RowHeight
+        Next i
         cmdAux(0).Top = alto
         cmdAux(1).Top = alto
         cmdAux(0).Height = DataGrid1.RowHeight
@@ -3391,9 +3392,9 @@ Dim I As Byte
         
         'Los ponemos Visibles o No
         '--------------------------
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).visible = visible
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).visible = visible
+        Next i
         cmdAux(0).visible = visible
         cmdAux(1).visible = visible
         cmdAux(0).Enabled = ModificaLineas = 1
@@ -3659,7 +3660,7 @@ Dim b As Boolean
         Toolbar1.Buttons(13).Enabled = b
         
         
-        
+        Toolbar1.Buttons(15).Enabled = b
       
         b = (Modo >= 3) Or Modo = 1
         'Buscar
@@ -3898,34 +3899,34 @@ End Sub
 
 'Praparamos para modificar la cantidad de los compoenntes
 Private Sub ModificarCantidadComponentes(visible As Boolean)
-Dim I As Integer
+Dim i As Integer
     
     
     If visible Then
-        For I = 0 To 3
+        For i = 0 To 3
             If data3.Recordset.EOF Then
-                Me.txtComponentes(I).Top = DataGrid2.Top + DataGrid2.RowTop(0) + 10
+                Me.txtComponentes(i).Top = DataGrid2.Top + DataGrid2.RowTop(0) + 10
             Else
-                Me.txtComponentes(I).Top = DataGrid2.Top + DataGrid2.RowTop(DataGrid2.Row) + 10
+                Me.txtComponentes(i).Top = DataGrid2.Top + DataGrid2.RowTop(DataGrid2.Row) + 10
             End If
-            Me.txtComponentes(I).Left = DataGrid2.Left + DataGrid2.Columns(2 + I).Left
-            Me.txtComponentes(I).Width = DataGrid2.Columns(2 + I).Width
+            Me.txtComponentes(i).Left = DataGrid2.Left + DataGrid2.Columns(2 + i).Left
+            Me.txtComponentes(i).Width = DataGrid2.Columns(2 + i).Width
             If ModificaLineas = 2 Then
-                txtComponentes(I).Text = DataGrid2.Columns(2 + I).Text
+                txtComponentes(i).Text = DataGrid2.Columns(2 + i).Text
             Else
-                txtComponentes(I).Text = ""
+                txtComponentes(i).Text = ""
             End If
         Next
-        For I = 0 To 1
-            Me.txtComponentes(4 + I).Left = DataGrid2.Left + DataGrid2.Columns(I).Left
-            Me.txtComponentes(4 + I).Top = Me.txtComponentes(1).Top
+        For i = 0 To 1
+            Me.txtComponentes(4 + i).Left = DataGrid2.Left + DataGrid2.Columns(i).Left
+            Me.txtComponentes(4 + i).Top = Me.txtComponentes(1).Top
             If ModificaLineas = 2 Then
-                txtComponentes(4 + I).Text = DataGrid2.Columns(I).Text
+                txtComponentes(4 + i).Text = DataGrid2.Columns(i).Text
             Else
-                txtComponentes(4 + I).Text = ""
+                txtComponentes(4 + i).Text = ""
             End If
-            Me.txtComponentes(4 + I).Width = DataGrid2.Columns(I).Width
-        Next I
+            Me.txtComponentes(4 + i).Width = DataGrid2.Columns(i).Width
+        Next i
         cmdAux2(0).Left = txtComponentes(2).Left - 90
         cmdAux2(0).Top = Me.txtComponentes(0).Top
         cmdAux2(1).Top = Me.txtComponentes(0).Top
@@ -3939,10 +3940,10 @@ Dim I As Integer
     
     cmdAux2(0).visible = visible
     cmdAux2(1).visible = visible And ModificaLineas = 1
-    For I = 0 To Me.txtComponentes.Count - 1
+    For i = 0 To Me.txtComponentes.Count - 1
         
-        txtComponentes(I).visible = visible
-        If I >= 4 And ModificaLineas <> 1 Then txtComponentes(I).visible = False
+        txtComponentes(i).visible = visible
+        If i >= 4 And ModificaLineas <> 1 Then txtComponentes(i).visible = False
 
     Next
     
@@ -4063,7 +4064,7 @@ End Sub
 
 'Praparamos para modificar la cantidad de los compoenntes
 Private Sub ModificarDatosCalidad(visible As Boolean)
-Dim I As Integer
+Dim i As Integer
     
     cmdAux2(2).visible = False
     
@@ -4084,23 +4085,23 @@ Dim I As Integer
         Else
             cboCalidad.visible = True
             cmdAux2(2).visible = True
-            For I = 0 To 3
-                If I < 2 Then
-                    Me.txtCalidad(I).Left = DataGrid3.Left + DataGrid3.Columns(I).Left
-                    Me.txtCalidad(I).Width = DataGrid3.Columns(I).Width
+            For i = 0 To 3
+                If i < 2 Then
+                    Me.txtCalidad(i).Left = DataGrid3.Left + DataGrid3.Columns(i).Left
+                    Me.txtCalidad(i).Width = DataGrid3.Columns(i).Width
                 Else
-                    Me.txtCalidad(I).Left = DataGrid3.Left + DataGrid3.Columns(I + 1).Left + 30
-                    Me.txtCalidad(I).Width = DataGrid3.Columns(I + 1).Width - 30
+                    Me.txtCalidad(i).Left = DataGrid3.Left + DataGrid3.Columns(i + 1).Left + 30
+                    Me.txtCalidad(i).Width = DataGrid3.Columns(i + 1).Width - 30
                 End If
                 cboCalidad.Top = Me.txtCalidad(3).Top
                 cboCalidad.Left = DataGrid3.Left + DataGrid3.Columns(2).Left + 45
                 cboCalidad.Width = DataGrid3.Columns(2).Width - 15
                 cmdAux2(2).Top = Me.txtCalidad(3).Top
                 cmdAux2(2).Left = txtCalidad(1).Left - 60
-                Me.txtCalidad(I).Top = Me.txtCalidad(3).Top
-                txtCalidad(I).visible = True
-                txtCalidad(I).Text = ""
-            Next I
+                Me.txtCalidad(i).Top = Me.txtCalidad(3).Top
+                txtCalidad(i).visible = True
+                txtCalidad(i).Text = ""
+            Next i
             BloquearTxt txtCalidad(1), True
             BloquearTxt txtCalidad(2), True
             
@@ -4110,9 +4111,9 @@ Dim I As Integer
         Me.chkCalidad.visible = True
         chkCalidad.Top = txtCalidad(3).Top
     Else
-        For I = 0 To Me.txtCalidad.Count - 1
-            txtCalidad(I).visible = visible
-        Next I
+        For i = 0 To Me.txtCalidad.Count - 1
+            txtCalidad(i).visible = visible
+        Next i
         Me.chkCalidad.visible = False
         cboCalidad.visible = False
         
@@ -4177,33 +4178,33 @@ End Function
 
 
 Private Function DevuelveBusquedaLineas() As String
-Dim I As Byte
+Dim i As Byte
 Dim EsLike As Boolean
 Dim Aux As String
 Dim J As Integer
 
     DevuelveBusquedaLineas = ""
     
-    For I = 0 To Me.txtAux.Count - 1
-        Me.txtAux(I).Text = Trim(Me.txtAux(I).Text)
-        If Me.txtAux(I).Text <> "" Then
+    For i = 0 To Me.txtAux.Count - 1
+        Me.txtAux(i).Text = Trim(Me.txtAux(i).Text)
+        If Me.txtAux(i).Text <> "" Then
         
             'codigo,codalmac,codartic,cantidad,numlote
             'Los textos
-            If I = 1 Or I = 3 Then
-                Aux = RecuperaValor("|codartic||numlote|", I + 1)
+            If i = 1 Or i = 3 Then
+                Aux = RecuperaValor("|codartic||numlote|", i + 1)
                 DevuelveBusquedaLineas = DevuelveBusquedaLineas & " AND " & Aux
-                Aux = txtAux(I).Text
+                Aux = txtAux(i).Text
             
                 If InStr(1, Aux, "*") > 0 Then
-                    Aux = " like " & DBSet(Replace(Me.txtAux(I).Text, "*", "%"), "T")
+                    Aux = " like " & DBSet(Replace(Me.txtAux(i).Text, "*", "%"), "T")
                 Else
-                    Aux = " = " & DBSet(Me.txtAux(I).Text, "T")
+                    Aux = " = " & DBSet(Me.txtAux(i).Text, "T")
                 End If
 
             Else
                 
-                If SeparaCampoBusqueda("N", RecuperaValor("codalmac||||cantidad||", CInt(I) + 1), txtAux(I).Text, Aux) > 0 Then
+                If SeparaCampoBusqueda("N", RecuperaValor("codalmac||||cantidad||", CInt(i) + 1), txtAux(i).Text, Aux) > 0 Then
                     Aux = ""
                 Else
                     Aux = " AND " & Aux
@@ -4222,3 +4223,57 @@ Dim J As Integer
     End If
 End Function
 
+
+
+
+Private Sub ImprimirEtiquetaQR()
+
+    
+    If Modo <> 2 Then Exit Sub
+    
+    If Me.Data2.Recordset.EOF Then Exit Sub
+    
+    If DBLet(Data2.Recordset!numLote, "T") = "" Then
+        MsgBox "Sin numero de lote", vbExclamation
+        Exit Sub
+    End If
+    
+    
+    Set miRsAux = New ADODB.Recordset
+    Screen.MousePointer = vbHourglass
+    CadenaDesdeOtroForm = "Select  txtauxdocumento,nomartic,unicajas,codigoea from sartic left join sarti3 ON sartic.codartic=sarti3.codartic WHERE sartic.codartic =" & DBSet(Data2.Recordset!codArtic, "T")
+    miRsAux.Open CadenaDesdeOtroForm, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If miRsAux.EOF Then
+        MsgBox "Error grave obteniendo articulo", vbCritical
+        CadenaDesdeOtroForm = ""
+    Else
+    
+        '                       codigo envasado
+        NumRegElim = DBLet(miRsAux!unicajas, "N")
+        If NumRegElim = 0 Then NumRegElim = 1
+        
+        
+        kCampo = DBLet(Data2.Recordset!cantidad, "N") Mod NumRegElim
+        If kCampo > 0 Then kCampo = 1
+        NumRegElim = (DBLet(Data2.Recordset!cantidad, "N") \ NumRegElim) + kCampo
+        
+        
+        'O nomartic o txtauxdocum
+        If Trim(DBLet(miRsAux!txtauxdocumento, "T")) = "" Then
+            CadenaDesdeOtroForm = miRsAux!NomArtic
+        Else
+            CadenaDesdeOtroForm = miRsAux!txtauxdocumento
+        End If
+        
+        CadenaDesdeOtroForm = Data1.Recordset!Codigo & "|" & Data2.Recordset!codArtic & "|" & NumRegElim & "|" & CadenaDesdeOtroForm & "|"
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & DBLet(miRsAux!unicajas, "N") & "|" & DBLet(miRsAux!codigoea, "T") & "|"   'DBLet(Data2.Recordset!cantidad, "N")
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & Data2.Recordset!numLote & "|"
+        frmAlmEtiqQR.Opcion = 0
+        frmAlmEtiqQR.Datos = CStr(CadenaDesdeOtroForm)
+        frmAlmEtiqQR.Show vbModal
+        
+    End If
+    miRsAux.Close
+    Set miRsAux = Nothing
+    Screen.MousePointer = vbDefault
+End Sub
