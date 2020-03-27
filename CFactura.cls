@@ -1665,8 +1665,9 @@ Dim AjustarCentimo As Boolean
             'el articulo que se va a utilizar para facturar los mantenimientos
     '        CadAux = DevuelveDesdeBDNew(conAri, "stipco", "codartic", "codtipco", TipCoMan, "T")
             If ArticFac <> "" Then 'tenemos el articulo
-                SQL = "SELECT codartic,nomartic,sartic.codigiva, tiposiva.porceiva "
-                SQL = SQL & " FROM sartic INNER JOIN conta" & vParamAplic.NumeroConta & ".tiposiva ON sartic.codigiva=conta" & vParamAplic.NumeroConta & ".tiposiva.codigiva"
+                SQL = "SELECT codartic,nomartic,sartic.codigiva, tiposiva.porceiva FROM sartic INNER JOIN "
+                SQL = SQL & IIf(vParamAplic.ContabilidadNueva, "ariconta", " conta") & vParamAplic.NumeroConta
+                SQL = SQL & ".tiposiva ON sartic.codigiva=tiposiva.codigiva"
                 SQL = SQL & " WHERE codartic=" & DBSet(ArticFac, "T")
                 InsertandoFAM = True
             Else

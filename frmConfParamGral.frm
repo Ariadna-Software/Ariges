@@ -1,10 +1,10 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmConfParamGral 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Parámetros Generales"
-   ClientHeight    =   5700
+   ClientHeight    =   6060
    ClientLeft      =   45
    ClientTop       =   735
    ClientWidth     =   6720
@@ -12,24 +12,34 @@ Begin VB.Form frmConfParamGral
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5700
+   ScaleHeight     =   6060
    ScaleWidth      =   6720
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox Text2 
+      Height          =   315
+      Left            =   1680
+      MaxLength       =   40
+      TabIndex        =   29
+      Tag             =   "Nombre de la Empresa|T|N|||sparam|nomempre|||"
+      Text            =   "Text1"
+      Top             =   4800
+      Width           =   1725
+   End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   4755
+      Left            =   4800
       TabIndex        =   28
-      Top             =   5160
+      Top             =   5520
       Width           =   1035
    End
    Begin VB.Frame Frame1 
       Height          =   540
       Left            =   720
       TabIndex        =   26
-      Top             =   5040
+      Top             =   5400
       Width           =   2355
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -154,16 +164,16 @@ Begin VB.Form frmConfParamGral
       Height          =   375
       Left            =   3600
       TabIndex        =   11
-      Top             =   5160
+      Top             =   5520
       Visible         =   0   'False
       Width           =   1035
    End
    Begin VB.CommandButton cmdSalir 
       Caption         =   "&Salir"
       Height          =   375
-      Left            =   4755
+      Left            =   4800
       TabIndex        =   12
-      Top             =   5160
+      Top             =   5520
       Width           =   1035
    End
    Begin VB.TextBox Text1 
@@ -262,6 +272,14 @@ Begin VB.Form frmConfParamGral
          Strikethrough   =   0   'False
       EndProperty
       _Version        =   393216
+   End
+   Begin VB.Label Label2 
+      Caption         =   "Nom. resum"
+      Height          =   195
+      Left            =   720
+      TabIndex        =   30
+      Top             =   4800
+      Width           =   840
    End
    Begin VB.Image ImgMail 
       Height          =   240
@@ -470,6 +488,12 @@ Private Sub cmdAceptar_Click()
         vParam.Modificar
         TerminaBloquear
         
+        If Modo = 4 Then
+            If Text2.Text <> "" Then
+                If ejecutar("UPDATE usuarios.empresasariges SET nomresum=" & DBSet(Text2.Text, "T") & " WHERE codempre =" & vEmpresa.codempre, False) Then vEmpresa.nomresum = Text2.Text
+            End If
+        End If
+        
         Me.imgBuscar.Enabled = False
         PonerModo 0
         PonerFocoBtn Me.cmdSalir
@@ -519,7 +543,7 @@ Private Sub Form_Load()
     NombreTabla = "sparam"
     Ordenacion = " ORDER BY codigo"
     'ASignamos un SQL al DATA1
-    Data1.ConnectionString = Conn
+    Data1.ConnectionString = conn
     CadenaConsulta = "Select * from " & NombreTabla & Ordenacion
     Data1.RecordSource = CadenaConsulta
     Data1.Refresh
@@ -558,6 +582,11 @@ Private Sub PonerCampos()
     PonerCamposForma Me, Data1
     If Trim(Text1(3).Text) = "0" Then Text1(3).Text = ""
     If Trim(Text1(6).Text) = "0" Then Text1(6).Text = ""
+    
+    
+    Text2.Text = vEmpresa.nomresum
+    
+    
 End Sub
 
 
@@ -589,18 +618,18 @@ Private Sub imgBuscar_Click()
 End Sub
 
 
-Private Sub ImgMail_Click(Index As Integer)
+Private Sub ImgMail_Click(index As Integer)
 'Abrir Outlook para enviar e-mail
 Dim dirMail As String
 
 '    If Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
     
-    Select Case Index
+    Select Case index
         Case 0: dirMail = Text1(10).Text
     End Select
 
-    If LanzaMailGnral(dirMail) Then espera 2
+    If LanzaMailGnral(dirMail) Then Espera 2
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -610,7 +639,7 @@ Private Sub imgWeb_Click()
 '    If Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
 
-    If LanzaHomeGnral(Text1(9).Text) Then espera 2
+    If LanzaHomeGnral(Text1(9).Text) Then Espera 2
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -622,28 +651,28 @@ Private Sub mnSalir_Click()
     Unload Me
 End Sub
 
-Private Sub Text1_GotFocus(Index As Integer)
-    ConseguirFoco Text1(Index), 3
+Private Sub Text1_GotFocus(index As Integer)
+    ConseguirFoco Text1(index), 3
 End Sub
 
-Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
 
-Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress (KeyAscii)
 End Sub
 
 
-Private Sub Text1_LostFocus(Index As Integer)
+Private Sub Text1_LostFocus(index As Integer)
 Dim devuelve As String
 
-    Select Case Index
+    Select Case index
         Case 3 'CPostal
-            If Text1(Index).Text <> "" And Not VieneDeBuscar Then
-                Text1(4).Text = ObtenerPoblacion(Text1(Index).Text, devuelve)
+            If Text1(index).Text <> "" And Not VieneDeBuscar Then
+                Text1(4).Text = ObtenerPoblacion(Text1(index).Text, devuelve)
                 Text1(5).Text = devuelve
             End If
             VieneDeBuscar = False
@@ -652,7 +681,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1  'Modificar
                 mnModificar_Click
         Case 3 'Salir
@@ -679,10 +708,10 @@ End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 
@@ -706,6 +735,10 @@ Dim b As Boolean
     'Si estamos en Insertar además limpia los campos Text1
     BloquearText1 Me, Modo
     
+    
+    BloquearTxt Text2, Modo <> 4
+    
+    
     'Poner Botones Aceptar/Cancelar si estamos Modificando datos
     PonerBotonCabecera b
     
@@ -715,6 +748,10 @@ Dim b As Boolean
     'Modificar
     Toolbar1.Buttons(1).Enabled = b
     Me.mnModificar.Enabled = b
+
+
+    
+
 
     PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario

@@ -10,7 +10,7 @@ Public Function ComprobarDatosProcesoCCC(DesdeHasta As String, ByRef L As Label,
     ComprobarDatosProcesoCCC = False
     If FaseCargaDatosAProcesarCCC(DesdeHasta) Then
         Fase2 L, ContabilidadAriagro
-        DesdeHasta = DevuelveDesdeBD(conAri, "count(*)", "tmpinformes", "codusu", vUsu.codigo)
+        DesdeHasta = DevuelveDesdeBD(conAri, "count(*)", "tmpinformes", "codusu", vUsu.Codigo)
         If Val(DesdeHasta) > 0 Then ComprobarDatosProcesoCCC = True
     End If
 End Function
@@ -20,7 +20,7 @@ End Function
 Private Function FaseCargaDatosAProcesarCCC(DesdeHasta As String) As Boolean   'podemos reutilizar DesdeHasta
 Dim cad As String
 
-    conn.Execute "DELETE from tmpcrmclien WHERE codusu = " & vUsu.codigo
+    conn.Execute "DELETE from tmpcrmclien WHERE codusu = " & vUsu.Codigo
    
 
     Set miRsAux = New ADODB.Recordset
@@ -35,7 +35,7 @@ Dim cad As String
     While Not miRsAux.EOF
         NumRegElim = NumRegElim + 1
         'Los 10 primeros (relleando a blancos sera el codmacta, los siguientes desde el 11 el NIF
-        cad = cad & ", (" & vUsu.codigo & "," & miRsAux!codClien & ",'"
+        cad = cad & ", (" & vUsu.Codigo & "," & miRsAux!codClien & ",'"
         cad = cad & Mid(miRsAux!Codmacta & "          ", 1, 10) & DBLet(miRsAux!nifClien, "T") & "','"
         'Formateamos la cadena del banco
         cad = cad & FormatearCadenaBanco2(3, miRsAux)
@@ -98,10 +98,10 @@ Dim RN3 As ADODB.Recordset
     'Hay I registros. Los dividiremmos en grupos de 200 maximos
     L.Caption = "Obteniendo errores"
     L.Refresh
-    cad = DevuelveDesdeBD(conAri, "count(*)", "tmpcrmclien", "codusu", vUsu.codigo)
+    cad = DevuelveDesdeBD(conAri, "count(*)", "tmpcrmclien", "codusu", vUsu.Codigo)
     i = Val(cad)
     J = (i \ 200) + 1
-     conn.Execute "DELETE from tmpinformes WHERE codusu = " & vUsu.codigo
+     conn.Execute "DELETE from tmpinformes WHERE codusu = " & vUsu.Codigo
 
 
     'Si tiene ARIAGRO, veremos las distintas secciones con sus contabilidades
@@ -144,7 +144,7 @@ Dim RN3 As ADODB.Recordset
         L.Caption = "Comprobar (" & i & "/" & J & ")"
         L.Refresh
         cad = "select codclien,trim(substring(nomforpa,1,10)) LaCta,substring(nomforpa,11) ElNif,nomactiv CtaDelBanco from tmpcrmclien"
-        cad = cad & " WHERE codusu = " & vUsu.codigo
+        cad = cad & " WHERE codusu = " & vUsu.Codigo
         cad = cad & " order by 1 limit " & (i - 1) * 200 & ",200"
         
         Set RN = New ADODB.Recordset
@@ -169,7 +169,8 @@ Dim RN3 As ADODB.Recordset
             '--------------------------------
             L.Caption = i & "/" & J & " - Contab. ariges"
             L.Refresh
-            cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from conta" & vParamAplic.NumeroConta & ".cuentas WHERE codmacta"
+            cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from " & IIf(vParamAplic.ContabilidadNueva, "ariconta", "conta")
+            cad = cad & vParamAplic.NumeroConta & ".cuentas WHERE codmacta"
             cad = cad & " IN (" & CuentasAtratar & ")"
             miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
@@ -182,7 +183,7 @@ Dim RN3 As ADODB.Recordset
                     'tmpinformes(codusu,codigo1,campo1,caampo2,nombre1,nombre2,nombre3)
                     'la funcion retorna los valores para nom1,nom2,nom3 ya en formato SQL
                     
-                    cad = vUsu.codigo & "," & RN!codClien & ",1,'conta" & vParamAplic.NumeroConta & "'," & cad
+                    cad = vUsu.Codigo & "," & RN!codClien & ",1,'conta" & vParamAplic.NumeroConta & "'," & cad
                     cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,obser,nombre1,nombre2,nombre3) VALUES (" & cad & ")"
                     conn.Execute cad
                 End If
@@ -218,7 +219,7 @@ Dim RN3 As ADODB.Recordset
                             'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,nombre3)
                             'la funcion retorna los valores para nom1,nom2,nom3 ya en formato SQL
                             
-                            cad = vUsu.codigo & "," & RN!codClien & ",2,'arigasol'," & cad
+                            cad = vUsu.Codigo & "," & RN!codClien & ",2,'arigasol'," & cad
                             cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,obser,nombre1,nombre2,nombre3) VALUES (" & cad & ")"
                             conn.Execute cad
                         End If
@@ -235,7 +236,7 @@ Dim RN3 As ADODB.Recordset
                     
                         L.Caption = i & "/" & J & " - Contab. gasol"
                         L.Refresh
-                        cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from conta" & ContaGasol & ".cuentas WHERE codmacta"
+                        cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from " & IIf(vParamAplic.ContabilidadNueva, "ariconta", "conta") & ContaGasol & ".cuentas WHERE codmacta"
                         cad = cad & " IN (" & CuentasAtratar & ")"
                         miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                         
@@ -248,7 +249,7 @@ Dim RN3 As ADODB.Recordset
                                 'tmpinformes(codusu,codigo1,campo1,caampo2,nombre1,nombre2,nombre3)
                                 'la funcion retorna los valores para nom1,nom2,nom3 ya en formato SQL
                                 
-                                cad = vUsu.codigo & "," & RN!codClien & ",3,'conta" & ContaGasol & "'," & cad
+                                cad = vUsu.Codigo & "," & RN!codClien & ",3,'conta" & ContaGasol & "'," & cad
                                 cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,obser,nombre1,nombre2,nombre3) VALUES (" & cad & ")"
                                 conn.Execute cad
                             End If
@@ -266,7 +267,7 @@ Dim RN3 As ADODB.Recordset
                     For K = 1 To ColAriagro.Count
                         '----------------------------------
                         
-                        cad = ColAriagro.item(K)
+                        cad = ColAriagro.Item(K)
                         Aux2 = RecuperaValor(cad, 1) 'la conta
                         ContaAgro = CInt(Aux2)
                         Aux2 = RecuperaValor(cad, 2) 'las seccciones con esa conta
@@ -304,7 +305,7 @@ Dim RN3 As ADODB.Recordset
                                 'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,nombre3)
                                 'la funcion retorna los valores para nom1,nom2,nom3 ya en formato SQL
                                 If K = 1 Then
-                                    cad = vUsu.codigo & "," & RN!codClien & ",4,'" & Ariagro & "'," & cad
+                                    cad = vUsu.Codigo & "," & RN!codClien & ",4,'" & Ariagro & "'," & cad
                                     cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,obser,nombre1,nombre2,nombre3) VALUES (" & cad & ")"
                                     conn.Execute cad
                                 End If
@@ -321,7 +322,7 @@ Dim RN3 As ADODB.Recordset
                                     End If
                                     If cad <> "" Then
                                         cad = "WHERE codmacta = '" & cad & "'"
-                                        cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from conta" & ContaAgro & ".cuentas " & cad
+                                        cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from " & IIf(vParamAplic.ContabilidadNueva, "ariconta", "conta") & ContaAgro & ".cuentas " & cad
                                         
                                         RN3.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                                         cad = ComprobarAricontaArialgo2(RN3, RN, VinculaPorCodmacta)
@@ -332,7 +333,7 @@ Dim RN3 As ADODB.Recordset
                                             'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,nombre3)
                                             'la funcion retorna los valores para nom1,nom2,nom3 ya en formato SQL
                                             
-                                            cad = vUsu.codigo & "," & RN!codClien & ",5,'conta" & ContaAgro & "'," & cad
+                                            cad = vUsu.Codigo & "," & RN!codClien & ",5,'conta" & ContaAgro & "'," & cad
                                             cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,obser,nombre1,nombre2,nombre3) VALUES (" & cad & ")"
                                             conn.Execute cad
                                         Else
@@ -352,7 +353,7 @@ Dim RN3 As ADODB.Recordset
                                     
                                     
                                         cad = "WHERE codmacta = '" & cad & "'"
-                                        cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from conta" & ContaAgro & ".cuentas " & cad
+                                        cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from " & IIf(vParamAplic.ContabilidadNueva, "ariconta", "conta") & ContaAgro & ".cuentas " & cad
                                         
                                         RProv.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                                         cad = ComprobarAricontaProveedor(RN, RProv)
@@ -364,7 +365,7 @@ Dim RN3 As ADODB.Recordset
                                             'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,nombre3)
                                             'la funcion retorna los valores para nom1,nom2,nom3 ya en formato SQL
                                             
-                                            cad = vUsu.codigo & "," & RN!codClien & ",6,'conta" & ContaAgro & "'," & cad
+                                            cad = vUsu.Codigo & "," & RN!codClien & ",6,'conta" & ContaAgro & "'," & cad
                                             cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,obser,nombre1,nombre2,nombre3) VALUES (" & cad & ")"
                                             conn.Execute cad
                                         End If
@@ -406,7 +407,7 @@ End Sub
 
 'Dado un RS, normalmente miRsaux, a partir de la poscion indicers estaran los 4 campos
 ' entidad,oficina,
-Private Function FormatearCadenaBanco2(IndiceRS As Integer, ByRef Rs As ADODB.Recordset) As String
+Private Function FormatearCadenaBanco2(IndiceRS As Integer, ByRef RS As ADODB.Recordset) As String
 
     'OCUTBRE 2014
     '---->  Ponemos el iban antes de codmacta
@@ -414,8 +415,8 @@ Private Function FormatearCadenaBanco2(IndiceRS As Integer, ByRef Rs As ADODB.Re
     'Cadena = Cadena & Format(miRsAux!entidad, "0000") & Format(DBLet(miRsAux!oficina, "N"), "0000")
     'Cadena = Cadena & Right("00" & DBLet(miRsAux!CC, "T"), 2) & Right(String(10, "0") & DBLet(miRsAux!cuentaba, "T"), 10) & "')"
     
-    FormatearCadenaBanco2 = Right("    " & DBLet(Rs.Fields(IndiceRS), "N"), 4) & Format(DBLet(Rs.Fields(IndiceRS + 1), "N"), "0000") & Format(DBLet(Rs.Fields(IndiceRS + 2), "N"), "0000")
-    FormatearCadenaBanco2 = FormatearCadenaBanco2 & Right("00" & DBLet(Rs.Fields(IndiceRS + 3), "T"), 2) & Right(String(10, "0") & DBLet(Rs.Fields(IndiceRS + 4), "T"), 10)
+    FormatearCadenaBanco2 = Right("    " & DBLet(RS.Fields(IndiceRS), "N"), 4) & Format(DBLet(RS.Fields(IndiceRS + 1), "N"), "0000") & Format(DBLet(RS.Fields(IndiceRS + 2), "N"), "0000")
+    FormatearCadenaBanco2 = FormatearCadenaBanco2 & Right("00" & DBLet(RS.Fields(IndiceRS + 3), "T"), 2) & Right(String(10, "0") & DBLet(RS.Fields(IndiceRS + 4), "T"), 10)
     
 
 End Function
