@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmHcoInven 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Histórico Inventario"
@@ -457,7 +457,7 @@ Attribute frmB.VB_VarHelpID = -1
 'Private WithEvents frmF As frmCal 'Calendario de Fechas
 Private WithEvents frmA As frmAlmAlPropios 'Almacen Origen/Destino
 Attribute frmA.VB_VarHelpID = -1
-Private WithEvents frmArtic As frmAlmArticu2  'Articulos
+Private WithEvents frmArtic As frmBasico2  'Articulos
 Attribute frmArtic.VB_VarHelpID = -1
 
 Dim NombreTabla As String
@@ -479,7 +479,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim I As Integer
+Dim i As Integer
 On Error GoTo Error1
     
     Screen.MousePointer = vbHourglass
@@ -491,12 +491,12 @@ On Error GoTo Error1
 '                If ModificaDesdeFormulario(Me, 3) Then
                 If ModificarLinea Then
                       TerminaBloquear
-                      I = Data1.Recordset.Fields(0)
+                      i = data1.Recordset.Fields(0)
 '                      LLamaLineas Modo, 0
                       PonerModo 2
                       CancelaADODC Me.Data2
                       
-                      Data1.Recordset.Find (Data1.Recordset.Fields(0).Name & " =" & I)
+                      data1.Recordset.Find (data1.Recordset.Fields(0).Name & " =" & i)
                       CargaGrid True
                   End If
                   DataGrid1.SetFocus
@@ -550,7 +550,7 @@ Private Sub cmdAux_Click()
     frmA.DatosADevolverBusqueda = "0"
     frmA.Show vbModal
     Set frmA = Nothing
-    PonerFoco txtaux(0)
+    PonerFoco txtAux(0)
 End Sub
 
 
@@ -612,10 +612,10 @@ Private Sub Form_Load()
     'Vemos como esta guardado el valor del check
     chkVistaPrevia.Value = CheckValueLeer(Name)
     
-    Data1.ConnectionString = conn
+    data1.ConnectionString = conn
     CadenaConsulta = "Select * from " & NombreTabla & " WHERE codartic = -1"
-    Data1.RecordSource = CadenaConsulta
-    Data1.Refresh
+    data1.RecordSource = CadenaConsulta
+    data1.Refresh
     PonerCampos
     PonerModo 0
     
@@ -654,7 +654,7 @@ End Sub
 
 Private Sub frmA_DatoSeleccionado(CadenaSeleccion As String)
 'Almacen Propios
-    txtaux(0).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtAux(0).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtAux2(0).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -691,10 +691,11 @@ Private Sub imgBuscar_Click(Index As Integer)
     
     'Codigo Articulos
     If Index = 0 Then
-        Set frmArtic = New frmAlmArticu2
+        Set frmArtic = New frmBasico2
         'frmArtic.DatosADevolverBusqueda3 = "@1@" 'Abrimos en Modo Busqueda
-        frmArtic.DesdeTPV = False
-        frmArtic.Show vbModal
+'        frmArtic.DesdeTPV = False
+'        frmArtic.Show vbModal
+        AyudaArticulos frmArtic, Text1(0)
         Set frmArtic = Nothing
     End If
     PonerFoco Text1(0)
@@ -729,7 +730,7 @@ End Sub
 
 Private Sub txtAux_GotFocus(Index As Integer)
     If Modo = 1 Then
-        ConseguirFoco txtaux(Index), Modo
+        ConseguirFoco txtAux(Index), Modo
     End If
 End Sub
 
@@ -753,31 +754,31 @@ End Sub
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim devuelve As String 'Para mensajes
 
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 0 'cod. almacen
-            If txtaux(Index).Text = "" Then
+            If txtAux(Index).Text = "" Then
              
             Else
-                devuelve = DevuelveDesdeBD(conAri, "nomalmac", "salmpr", "codalmac", txtaux(Index).Text, "N")
+                devuelve = DevuelveDesdeBD(conAri, "nomalmac", "salmpr", "codalmac", txtAux(Index).Text, "N")
 '                Text2(1).Text = SQL
                 If devuelve = "" Then 'No existe
                     devuelve = "No existe el Almacen" & vbCrLf
-                    devuelve = devuelve & "Código: " & txtaux(Index).Text
+                    devuelve = devuelve & "Código: " & txtAux(Index).Text
                     MsgBox devuelve, vbExclamation
-                    PonerFoco txtaux(Index)
+                    PonerFoco txtAux(Index)
                 Else
-                    txtaux(Index).Text = Format(txtaux(Index).Text, "000")
+                    txtAux(Index).Text = Format(txtAux(Index).Text, "000")
                 End If
             End If
             
         Case 1 'Fecha Movimiento
-             If txtaux(Index).Text <> "" Then PonerFormatoFecha txtaux(Index)
+             If txtAux(Index).Text <> "" Then PonerFormatoFecha txtAux(Index)
         Case 3
-            If txtaux(Index).Text <> "" Then
-                If Not PonerFormatoDecimal(txtaux(Index), 1) Then
-                    PonerFoco txtaux(Index)
+            If txtAux(Index).Text <> "" Then
+                If Not PonerFormatoDecimal(txtAux(Index), 1) Then
+                    PonerFoco txtAux(Index)
 '                Else
 '                    PonerFocoBtn Me.cmdAceptar
                 End If
@@ -814,7 +815,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
 Dim NumReg As Byte
 
@@ -825,8 +826,8 @@ Dim NumReg As Byte
     PonerIndicador Me.lblIndicador, Modo
     
     NumReg = 1
-    If Not Data1.Recordset.EOF Then
-        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
+    If Not data1.Recordset.EOF Then
+        If data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
     DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
 
@@ -839,9 +840,9 @@ Dim NumReg As Byte
               
     b = Modo <> 0 And Modo <> 2
   
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = b
+    Next i
     
     PonerModoOpcionesMenu 'Activar opciones de menu según Modo
     PonerOpcionesMenu   'Activar opciones de menu según nivel
@@ -885,7 +886,7 @@ End Sub
 Private Sub Desplazamiento(Index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, Index
+    DesplazamientoData data1, Index
     PonerCampos
     CargaGrid True
 End Sub
@@ -938,7 +939,7 @@ Dim anc As Single
         Text1(0).BackColor = vbYellow
     Else
         HacerBusqueda
-        If Data1.Recordset.EOF Then
+        If data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
             Text1(kCampo).BackColor = vbYellow
             PonerFoco Text1(kCampo)
@@ -949,7 +950,7 @@ End Sub
 
 Private Sub BotonModificar()
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
     
     If Data2.Recordset.EOF Then Exit Sub
     If Data2.Recordset.RecordCount < 1 Then Exit Sub
@@ -957,8 +958,8 @@ Dim I As Integer
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -967,14 +968,14 @@ Dim I As Integer
     anc = ObtenerAlto(Me.DataGrid1)
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(1).Text
-    txtaux(1).Text = DataGrid1.Columns(3).Text
-    txtaux(2).Text = DataGrid1.Columns(4).Text
-    txtaux(3).Text = DataGrid1.Columns(5).Text
+    txtAux(0).Text = DataGrid1.Columns(1).Text
+    txtAux(1).Text = DataGrid1.Columns(3).Text
+    txtAux(2).Text = DataGrid1.Columns(4).Text
+    txtAux(3).Text = DataGrid1.Columns(5).Text
     LLamaLineas anc
    
    'Como es modificar
-    PonerFoco txtaux(1)
+    PonerFoco txtAux(1)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -1031,21 +1032,21 @@ End Sub
 
 
 Private Sub PonerCadenaBusqueda()
-Dim I As Byte
+Dim i As Byte
 Screen.MousePointer = vbHourglass
 On Error GoTo EEPonerBusq
 
-    Data1.RecordSource = CadenaConsulta
+    data1.RecordSource = CadenaConsulta
 
-    Data1.Refresh
-    If Data1.Recordset.RecordCount <= 0 Then
+    data1.Refresh
+    If data1.Recordset.RecordCount <= 0 Then
         MsgBox "No hay ningún registro en la tabla " & NombreTabla & " para ese criterio de búsqueda", vbInformation
         Screen.MousePointer = vbDefault
         PonerFoco Text1(0)
         'Limpiar los Campos Auxiliares
-        For I = 0 To txtaux.Count - 1
-            txtaux(I).Text = ""
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Text = ""
+        Next i
         Exit Sub
     Else
         PonerModo 2
@@ -1066,13 +1067,13 @@ End Sub
 Private Sub PonerCampos()
 On Error GoTo EPonerCampos
 
-    If Data1.Recordset.EOF Then Exit Sub
+    If data1.Recordset.EOF Then Exit Sub
     
-    PonerCamposForma Me, Data1
+    PonerCamposForma Me, data1
     Text2(0).Text = PonerNombreDeCod(Text1(0), conAri, "sartic", "nomartic")
     
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+    lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
     
 EPonerCampos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo Campos", Err.Description
@@ -1082,14 +1083,14 @@ End Sub
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
-Dim Tabla As String
+Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
     cad = ""
             
     cad = cad & "Articulo|shinve|codartic|T||25·Denominacion|sartic|nomartic|T||70·"
-    Tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
+    tabla = "(" & NombreTabla & " LEFT JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic" & ") "
 '        tabla = tabla & " GROUP BY shinve.codartic "
     'tabla = "sartic"
     Titulo = "Histórico Inventario"
@@ -1098,7 +1099,7 @@ Dim Titulo As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
-        frmB.vTabla = Tabla
+        frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
         '###A mano
@@ -1139,10 +1140,10 @@ Dim b As Boolean
         ini = 0
     End If
     
-    For jj = ini To txtaux.Count - 1
-        txtaux(jj).Height = DataGrid1.RowHeight
-        txtaux(jj).Top = alto
-        txtaux(jj).visible = b
+    For jj = ini To txtAux.Count - 1
+        txtAux(jj).Height = DataGrid1.RowHeight
+        txtAux(jj).Top = alto
+        txtAux(jj).visible = b
     Next jj
 
     b = (Modo = 1)
@@ -1157,9 +1158,9 @@ Dim SQL As String
 On Error GoTo EModificar
 
     ModificarLinea = False
-    SQL = "UPDATE " & NombreTabla & " SET fechainv=" & DBSet(txtaux(1).Text, "F")
-    SQL = SQL & ", horainve='" & Format(txtaux(1).Text & " " & txtaux(2).Text, "yyyy-mm-dd hh:mm:ss") & "'"
-    SQL = SQL & ", existenc=" & DBSet(txtaux(3).Text, "N")
+    SQL = "UPDATE " & NombreTabla & " SET fechainv=" & DBSet(txtAux(1).Text, "F")
+    SQL = SQL & ", horainve='" & Format(txtAux(1).Text & " " & txtAux(2).Text, "yyyy-mm-dd hh:mm:ss") & "'"
+    SQL = SQL & ", existenc=" & DBSet(txtAux(3).Text, "N")
     SQL = SQL & " WHERE codartic=" & DBSet(Text1(0).Text, "T") & " AND codalmac=" & Me.Data2.Recordset.Fields(1).Value
     conn.Execute SQL
     ModificarLinea = True

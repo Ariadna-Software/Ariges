@@ -459,9 +459,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private WithEvents frmMtoCli As frmFacClientes
+Private WithEvents frmMtoCli As frmBasico2 'frmFacClientesGr
 Attribute frmMtoCli.VB_VarHelpID = -1
-Private WithEvents frmMtoBanPr As frmFacBancosPropios
+Private WithEvents frmMtoBanPr As frmBasico2 'frmFacBancosPropios
 Attribute frmMtoBanPr.VB_VarHelpID = -1
 
 Private NombreTabla As String  'Nombre de la tabla o de la

@@ -25,13 +25,14 @@ Private mvarDirFich As String 'copia local
 Private mvarNivel As Long 'copia local
 Private mvarCadenaConexion As String
 Private mvarPC As String
-
+Private mvarSkin As Integer
 
 Private mvarAlmacenPorDefecto As String
 
 Private mvarCodigoAgente As Integer
 
 Private mvarNivel2 As Byte   'Aplicara un segundo nivel para tema de permisos
+Private mvarId As Long    'Aplicara un segundo nivel para tema de permisos
 
 
 
@@ -171,13 +172,42 @@ Public Property Get Nivel2() As Byte
 End Property
 
 
+Public Property Let ID(ByVal vData As Long)
+    mvarId = vData
+End Property
+
+
+Public Property Get ID() As Long
+    ID = mvarId
+End Property
+
+
+
+Public Property Get Skin() As Integer
+    Skin = mvarSkin
+End Property
+Public Property Let Skin(ByVal vData As Integer)
+    mvarSkin = vData
+End Property
+
+Public Property Let TabPorDefecto(ByVal vData As Integer)
+    'mvarTabPorDefecto = vData
+End Property
+
+
+Public Property Get TabPorDefecto() As Integer
+    TabPorDefecto = 1 ' mvarTabPorDefecto
+End Property
+
+
+
 
 
 
 
 Public Function Leer(ByVal vlogin As String) As Byte
 Attribute Leer.VB_Description = "Lee un grupo de formas de cobro en función del código que se le ha pasado. Si devuelve 0 se ha conseguido leer el dato."
-Dim I As Long
+Dim i As Long
     On Error GoTo Err1
     
     SQL = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
@@ -188,14 +218,21 @@ Dim I As Long
     If RS.EOF Then
         Leer = 1
     Else
-        I = DevuelveAumentoPC
-        mvarCodigo = Val(DBLet(RS!CodUsu)) + I
+        mvarId = DBLet(RS!CodUsu)
+        i = DevuelveAumentoPC
+        mvarCodigo = Val(DBLet(RS!CodUsu)) + i
         mvarNombre = DBLet(RS!nomusu)
         mvarNivel = Val(DBLet(RS!nivelariges))
         mvarPasswdPROPIO = RS!passwordpropio
         mvarlogin = vlogin  'por si acasp esta escroto en mayus, minusclu....
         mvarlogin = RS!Login
         mvarCadenaConexion = ""  'Se le asigna en tiempo de diseño
+        
+        
+        mvarSkin = -1
+        'If Not IsNull(RS!skinariges) Then mvarSkin = RS!skinariges
+        FijarSkinAriges
+        
         Leer = 0
     End If
     RS.Close
@@ -207,6 +244,19 @@ Err1:
     RS.Close
     Leer = 1
 End Function
+
+Private Function FijarSkinAriges()
+
+    On Error Resume Next
+    SQL = RS!skinariges
+    If Err.Number <> 0 Then
+        Err.Clear
+        conn.Errors.Clear
+    Else
+         mvarSkin = RS!skinariges
+    End If
+End Function
+
 
 
 Private Function DevuelveAumentoPC() As Long
@@ -253,5 +303,22 @@ End Sub
 
 
 
+Public Sub ActualizarSkin()
+    SQL = "UPDATE usuarios.usuarios SET skin=" & mvarSkin & " WHERE codusu = " & vUsu.ID
+   
+    ejecutar SQL, False
+End Sub
+Public Sub LeerFiltros(aplicacion As String, idPrg As Integer)
 
+End Sub
+Public Sub GuardarTabPorDefecto()
 
+End Sub
+
+Public Sub InicializaFiltrosEmpresa()
+        
+        'Filtros por defecto
+       ' mvarFiltroCompensacionHco = 0
+       ' mvarFiltroCompensacionHco2 = 0
+    
+End Sub

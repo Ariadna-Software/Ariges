@@ -241,7 +241,7 @@ Private Function HayStock(ByRef ColArt As Collection, vCantidad As Single, ByRef
 End Function
 
 
-Private Function ControlStock2(CL As Collection) As Boolean
+Private Function ControlStock2(cl As Collection) As Boolean
 'Si hay control de Stock no se permite realizar el movimiento
 'Sino hay control se pregunta si se permite realizar el movimiento
 Dim devuelve As String
@@ -251,16 +251,16 @@ Dim Rotacion As String
 Dim HazPRegunta As Boolean
         
         devuelve = "Control de Stock  "
-        If CL.Count > 1 Then devuelve = devuelve & "(Conjuntos)"
+        If cl.Count > 1 Then devuelve = devuelve & "(Conjuntos)"
         devuelve = devuelve & ": " & vbCrLf & "----------------------" & vbCrLf & vbCrLf & vbCrLf
         devuelve = devuelve & " No hay suficiente Stock en el almacen  para: "
-        For nI = 1 To CL.Count
+        For nI = 1 To cl.Count
 
                 Rotacion = "concat(rotacion,""|"",codprove)"
-                NomArtic = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", CL(nI).codArtic, "T", Rotacion)
-                NomArtic = CL(nI).codArtic & " - " & NomArtic & " ("
+                NomArtic = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", cl(nI).codArtic, "T", Rotacion)
+                NomArtic = cl(nI).codArtic & " - " & NomArtic & " ("
                 
-                NomArtic = NomArtic & CL(nI).cantidadStock & ")"
+                NomArtic = NomArtic & cl(nI).cantidadStock & ")"
                 If nI > 1 Then NomArtic = "       L: " & NomArtic
                 If nI = 2 Then NomArtic = "----------------------------" & vbCrLf & NomArtic
                 devuelve = devuelve & vbCrLf & NomArtic
@@ -276,7 +276,7 @@ Dim HazPRegunta As Boolean
                         
                         'Marzo 2012.
                         'Va a por UNICAJAS, no a por cantmini
-                        Rotacion = DevuelveDesdeBDNew(conAri, "sartic", "unicajas", "codartic", CL(nI).codArtic, "T")
+                        Rotacion = DevuelveDesdeBDNew(conAri, "sartic", "unicajas", "codartic", cl(nI).codArtic, "T")
                         If Rotacion = "" Then Rotacion = "0"
                         
                         If Val(Rotacion) > 1 Then
@@ -288,7 +288,7 @@ Dim HazPRegunta As Boolean
                         
                                     'Marzo 2012
                                     Rotacion = "            Unidades caja: " & Right("     " & Rotacion, 6) & vbCrLf
-                                    Rotacion = vbCrLf & Rotacion & Space(25) & "Stock: " & Right("     " & CL(nI).cantidadStock, 6) & vbCrLf & vbCrLf
+                                    Rotacion = vbCrLf & Rotacion & Space(25) & "Stock: " & Right("     " & cl(nI).cantidadStock, 6) & vbCrLf & vbCrLf
                                     Rotacion = String(43, "*") & vbCrLf & String(43, "*") & vbCrLf & Rotacion & String(43, "*") & vbCrLf & String(43, "*")
                                     devuelve = "Material de NO rotacion. " & vbCrLf & vbCrLf & vbCrLf & devuelve & vbCrLf & vbCrLf & Rotacion
                                 End If
@@ -309,7 +309,7 @@ Dim HazPRegunta As Boolean
         
         If DetaMov = "OFE" Or DetaMov = "PEV" Or DetaMov = "PEW" Or DetaMov = "PEZ" Then 'No hay control de stock para bloquear solo informa
             If HayArticulosEquivalenciaConStock Then
-                LanzaEquivalencias CL(1).codArtic, devuelve
+                LanzaEquivalencias cl(1).codArtic, devuelve
             Else
                 If vParamAplic.NumeroInstalacion <> vbFenollar Then MsgBox devuelve, vbInformation
             End If
@@ -575,7 +575,7 @@ Dim AuxD As String
 End Function
 
 
-Private Sub MostrarMensajePuntopedidoMinimo(CL As Collection, InsertaEnBD As Boolean, MuestraMSG As Boolean)
+Private Sub MostrarMensajePuntopedidoMinimo(cl As Collection, InsertaEnBD As Boolean, MuestraMSG As Boolean)
 Dim devuelve As String
 Dim cad As String
 Dim Esta As Boolean
@@ -586,8 +586,8 @@ Dim Can As Single
         If artPuntoPedido <> "" Then artPuntoPedido = "|" & artPuntoPedido
         If artsotckminimo <> "" Then artsotckminimo = "|" & artsotckminimo
         devuelve = ""
-        For nI = 1 To CL.Count
-                cad = "|" & CL(nI).codArtic & "|"
+        For nI = 1 To cl.Count
+                cad = "|" & cl(nI).codArtic & "|"
                 If InStr(1, artsotckminimo, cad) > 0 Then
                     Esta = True
                     Minimo = True
@@ -603,8 +603,8 @@ Dim Can As Single
              
                 If Esta Then
                     
-                    cad = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", CL(nI).codArtic, "T")
-                    cad = CL(nI).codArtic & " - " & cad '& " ("
+                    cad = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", cl(nI).codArtic, "T")
+                    cad = cl(nI).codArtic & " - " & cad '& " ("
                     If Minimo Then
                         cad = "MINIMO STOCK   " & cad
                         'Cad = Cad & CL(nI).cantidadStock & ")"
@@ -622,13 +622,13 @@ Dim Can As Single
                             SQL = "insert into `spedidos` (`fechahora`,`codusu`,`codalmac`,`codartic`,`minimo`,`puntope`,"
                             SQL = SQL & "`cantidad`,`proceso`) values (concat(curdate(),' ' ,curtime())," & vUsu.Codigo
                             SQL = SQL & "," & mvarCodAlmac
-                            SQL = SQL & "," & DBSet(CL(nI).codArtic, "T")
-                            SQL = SQL & "," & DBSet(CL(nI).cantidadMinimo, "N")
-                            SQL = SQL & "," & DBSet(CL(nI).cantidadPuntoPedido, "N")
+                            SQL = SQL & "," & DBSet(cl(nI).codArtic, "T")
+                            SQL = SQL & "," & DBSet(cl(nI).cantidadMinimo, "N")
+                            SQL = SQL & "," & DBSet(cl(nI).cantidadPuntoPedido, "N")
                             
                             'Necesaria
-                            Can = CL(nI).cantidadStock
-                            Can = CL(nI).CantidadNecesaria * Can
+                            Can = cl(nI).cantidadStock
+                            Can = cl(nI).CantidadNecesaria * Can
                             SQL = SQL & "," & DBSet(Can, "N")
 
                             
@@ -651,7 +651,7 @@ Dim Can As Single
                 
         'Mostramos el msgh
         devuelve = vbCrLf & String(40, "-") & vbCrLf & devuelve & vbCrLf & vbCrLf
-        If CL.Count > 1 Then devuelve = devuelve & "(Conjuntos)" & vbCrLf
+        If cl.Count > 1 Then devuelve = devuelve & "(Conjuntos)" & vbCrLf
         devuelve = "STOCKs.  Punto pedido / minimo  " & devuelve
                 
         MsgBox devuelve, vbInformation
@@ -906,8 +906,7 @@ Dim EliminarPrimeraEntradaPpal As Boolean   'HERBELCA Mayo 2018
     If cadMen = "" Then cadMen = "0"
     If AuxD = "0" Then EliminarPrimeraEntradaPpal = True   'Abril19
     
-    'ANTES NOVIEMBRE 2013
-   'If Val(cadMen) = 1 And Not vParamAplic.Produccion Then AñadirArticulosConjunto vD
+    
     If Val(cadMen) = 1 And Not vParamAplic.Produccion Then
     
         
@@ -938,8 +937,12 @@ Dim EliminarPrimeraEntradaPpal As Boolean   'HERBELCA Mayo 2018
         'Eliminar en Movimientos Artículos
         ADonde = "Eliminando datos en Movimientos de Articulos (tabla: smoval)."
         
+        
+        'MAYO 2021.
+        '       Creo que esto para articulos de varios esta mal, ya que en este sitio estamos borrando de SMOVAL, y tiene que hacerlo SIEMPRE
+        '       Con lo cual COMENTO la linea de EliminarPrimeraEntradaPpal
         'Abril 2019
-        If EliminarPrimeraEntradaPpal Then cArticulos.Remove 1              'Quito el ppal , ya que no tiene control stock
+        'If EliminarPrimeraEntradaPpal Then cArticulos.Remove 1              'Quito el ppal , ya que no tiene control stock
           
         
         

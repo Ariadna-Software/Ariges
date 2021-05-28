@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmagrupo 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Mantenimiento comunicación datos ALMAGRUPO "
@@ -546,9 +546,9 @@ Option Explicit
 
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
-Private WithEvents FrmArt As frmAlmArticu2
+Private WithEvents FrmArt As frmBasico2
 Attribute FrmArt.VB_VarHelpID = -1
-Private WithEvents frmP As frmComProveedores
+Private WithEvents frmP As frmBasico2 '%=%=frmComProveedores
 Attribute frmP.VB_VarHelpID = -1
 
 '  Variables comunes a todos los formularios
@@ -876,10 +876,11 @@ Private Sub imgBuscar_Click(Index As Integer)
     CadenaConsulta2 = ""
     If Index = 2 Then
         'Articulos
-        Set FrmArt = New frmAlmArticu2
+        Set FrmArt = New frmBasico2
         'FrmArt.DatosADevolverBusqueda3 = "@1@" 'Poner en Modo busqueda
-        FrmArt.DesdeTPV = False
-        FrmArt.Show vbModal
+'        FrmArt.DesdeTPV = False
+'        FrmArt.Show vbModal
+        AyudaArticulos FrmArt, Text1(2)
         Set FrmArt = Nothing
         If CadenaConsulta2 <> "" Then
             Me.Text1(2).Text = RecuperaValor(CadenaConsulta2, 1)
@@ -890,9 +891,11 @@ Private Sub imgBuscar_Click(Index As Integer)
     
     Else
         'Proveedor
-        Set frmP = New frmComProveedores
-        frmP.DatosADevolverBusqueda = "0|1|"
-        frmP.Show vbModal
+'        Set frmP = New frmComProveedores
+'        frmP.DatosADevolverBusqueda = "0|1|"
+'        frmP.Show vbModal
+        Set frmP = New frmBasico2
+        AyudaProveedores frmP, IIf(Index = 0, Text1(3), Text1(5))
         Set frmP = Nothing
         If CadenaConsulta2 <> "" Then
             If Index = 0 Then
@@ -1039,22 +1042,22 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim Cad As String
+Dim cad As String
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(1), 7, "Año")
-        Cad = Cad & ParaGrid(Text1(0), 10, "Mes")
-        Cad = Cad & ParaGrid(Text1(2), 25, "Articulo")
-        Cad = Cad & "Descripcion|sartic|nomartic|T||50·"
+        cad = ""
+        cad = cad & ParaGrid(Text1(1), 7, "Año")
+        cad = cad & ParaGrid(Text1(0), 10, "Mes")
+        cad = cad & ParaGrid(Text1(2), 25, "Articulo")
+        cad = cad & "Descripcion|sartic|nomartic|T||50·"
         '"Cod Diag.|tabla|columna|tipo|formato|10
         
         If cadB <> "" Then cadB = " AND " & cadB
         cadB = NombreTabla & ".codartic = sartic.codartic" & cadB
-        If Cad <> "" Then
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = NombreTabla & ",sartic"
             frmB.vSQL = cadB
             HaDevueltoDatos = False
@@ -1129,14 +1132,14 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
 
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     PonerIndicador lblIndicador, Modo
     
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
@@ -1144,7 +1147,7 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
    ' If DatosADevolverBusqueda <> "" Then
@@ -1156,25 +1159,25 @@ Dim NumReg As Byte
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
     BloquearText1 Me, Modo
-    B = Modo = 1 Or Modo >= 3 'busqueda o inser/mod
+    b = Modo = 1 Or Modo >= 3 'busqueda o inser/mod
     
     'Nombre proveedor
-    B = Modo <> 1
-    BloquearTxt Me.Text1(8), B
-    BloquearTxt Me.Text1(9), B
+    b = Modo <> 1
+    BloquearTxt Me.Text1(8), b
+    BloquearTxt Me.Text1(9), b
 
     '---------------------------------------------
     'Modo insertar o modificar
-    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = B Or Modo = 1
-    cmdCancelar.visible = B Or Modo = 1
+    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = b Or Modo = 1
+    cmdCancelar.visible = b Or Modo = 1
     
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
     Else
         cmdCancelar.Cancel = False
     End If
-    FrameTipoRegistro.Enabled = Not B
+    FrameTipoRegistro.Enabled = Not b
     
     chkVistaPrevia.Enabled = (Modo <= 2)
 
@@ -1197,38 +1200,38 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
     
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    mnEliminar.Enabled = b
     
     '----------------------------------------
-    B = (Modo >= 3) 'Insertar/Modificar
+    b = (Modo >= 3) 'Insertar/Modificar
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
-Dim Cad As String
+Dim b As Boolean
+Dim cad As String
 
     DatosOk = False
-    B = CompForm(Me, 1) 'Comprobar datos OK
-    If Not B Then Exit Function
+    b = CompForm(Me, 1) 'Comprobar datos OK
+    If Not b Then Exit Function
         
         
     'Que exista NOMARTIC
@@ -1265,29 +1268,29 @@ Dim Cad As String
     
     If CadenaConsulta2 <> "" Then
         MsgBox CadenaConsulta2, vbExclamation
-        B = False
+        b = False
         CadenaConsulta2 = ""
     End If
     
     
     'Comprobaciones
-    Cad = "codtelem"
+    cad = "codtelem"
     CadenaConsulta2 = "sartic.codfamia=sfamia.codfamia AND codartic"
-    CadenaConsulta2 = DevuelveDesdeBD(conAri, "comunica", "sartic,sfamia", CadenaConsulta2, Text1(2).Text, "T", Cad)
+    CadenaConsulta2 = DevuelveDesdeBD(conAri, "comunica", "sartic,sfamia", CadenaConsulta2, Text1(2).Text, "T", cad)
     If CadenaConsulta2 = "" Then CadenaConsulta2 = "0"
     If Val(CadenaConsulta2) <> 1 Then
         CadenaConsulta2 = "Famila NO se comunica"
     Else
         CadenaConsulta2 = ""
     End If
-    If Cad = "" Then CadenaConsulta2 = CadenaConsulta2 & vbCrLf & "No tiene codigo telematel"
+    If cad = "" Then CadenaConsulta2 = CadenaConsulta2 & vbCrLf & "No tiene codigo telematel"
     If CadenaConsulta2 <> "" Then
         MsgBox CadenaConsulta2, vbExclamation
-        B = False
+        b = False
         CadenaConsulta2 = ""
     End If
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)

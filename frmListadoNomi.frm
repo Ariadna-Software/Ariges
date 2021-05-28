@@ -1130,9 +1130,9 @@ Public parOpcion As Integer
 
 Private WithEvents frmF As frmCal 'Calendario de Fechas
 Attribute frmF.VB_VarHelpID = -1
-Private WithEvents frmMtoTraba As frmAdmTrabajadores
+Private WithEvents frmMtoTraba As frmBasico2 'frmAdmTrabajadores
 Attribute frmMtoTraba.VB_VarHelpID = -1
-Private WithEvents frmMtoBancosPro As frmFacBancosPropios
+Private WithEvents frmMtoBancosPro As frmBasico2 'frmFacBancosPropios
 Attribute frmMtoBancosPro.VB_VarHelpID = -1
 
 
@@ -1567,7 +1567,7 @@ Dim cad As String
         If Not AnyadirAFormula(cadFormula, cad) Then Exit Sub
          
         'Montamos el select para los registros
-        cadParam = cadParam & "pcodusu= " & vUsu.codigo & "|"
+        cadParam = cadParam & "pcodusu= " & vUsu.Codigo & "|"
         numParam = numParam + 1
         
         'Fecha recibo
@@ -1689,16 +1689,22 @@ Private Sub imgBuscar_Click(Index As Integer)
     
     Select Case Index
         Case 6, 7, 15, 16 'TRABAJADOR
-            Set frmMtoTraba = New frmAdmTrabajadores
-            frmMtoTraba.DatosADevolverBusqueda = "0|1|"
-            frmMtoTraba.Show vbModal
+'            Set frmMtoTraba = New frmAdmTrabajadores
+'            frmMtoTraba.DatosADevolverBusqueda = "0|1|"
+'            frmMtoTraba.Show vbModal
+            Set frmMtoTraba = New frmBasico2
+            AyudaTrabajadores frmMtoTraba, txtCodigo(indCodigo)
             Set frmMtoTraba = Nothing
             
         Case 8 'BANCO PROPIO
-            Set frmMtoBancosPro = New frmFacBancosPropios
-            frmMtoBancosPro.DatosADevolverBusqueda = "0|1|"
-            frmMtoBancosPro.Show vbModal
+'            Set frmMtoBancosPro = New frmFacBancosPropios
+'            frmMtoBancosPro.DatosADevolverBusqueda = "0|1|"
+'            frmMtoBancosPro.Show vbModal
+'            Set frmMtoBancosPro = Nothing
+            Set frmMtoBancosPro = New frmBasico2
+            AyudaBancosPropios frmMtoBancosPro, txtCodigo(indCodigo)
             Set frmMtoBancosPro = Nothing
+
     End Select
     
     PonerFoco Me.txtCodigo(indCodigo)
@@ -1864,7 +1870,7 @@ Dim DescripTr As String 'descripcion de la orden
     '-- total registros a processar para ProgressBar
     SQL = "SELECT count(*) FROM snomin WHERE " & cadWhere
     totReg = TotalRegistros(SQL)
-    CargarProgresNew Me.ProgressBar1, totReg
+    CargarProgresNew Me.ProgressBar1, CLng(totReg)
 
     
     '-- seleccionar registros a procesar: datos y cuenta bancaria trabajador
@@ -2182,7 +2188,7 @@ Dim Base As Currency
     On Error GoTo EGeneraDatosRecibos
     GeneraDatosRecibos = False
     Set miRsAux = New ADODB.Recordset
-    conn.Execute "DELETE FROM tmpinformes WHERE codusu = " & vUsu.codigo
+    conn.Execute "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
     
     'Creo la lista clientes
     cadSelect = "Select codclien,nomclien,pobclien from sclien WHERE not codpobla like '460%' AND clivario=0 "
@@ -2246,7 +2252,7 @@ Dim Base As Currency
                 NumRegElim = NumRegElim + 1
                 Aux = Int((ListaClientes.Count * Rnd) + 1)
                 cadSelect = "insert into `tmpinformes` (`codusu`,`codigo1`,`campo1`,`campo2`,nombre1,nombre2) VALUES ("
-                cadSelect = cadSelect & vUsu.codigo & "," & NumRegElim & "," & miRsAux!CodTraba & ","
+                cadSelect = cadSelect & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!CodTraba & ","
                 cadSelect = cadSelect & RecuperaValor(ListaClientes(Aux), 1) & ",'"
                 cadSelect = cadSelect & DevNombreSQL(RecuperaValor(ListaClientes(Aux), 2)) & "','"
                 cadSelect = cadSelect & DevNombreSQL(RecuperaValor(ListaClientes(Aux), 3)) & "')"

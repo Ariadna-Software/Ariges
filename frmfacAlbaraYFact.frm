@@ -406,13 +406,13 @@ Option Explicit
 
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmCli As frmFacClientes3
+Private WithEvents frmCli As frmBasico2
 Attribute frmCli.VB_VarHelpID = -1
 Private frmAlbG As frmFacEntAlbaranesGR
 
 
 Dim cad As String
-Dim primeravez As Boolean
+Dim PrimeraVez As Boolean
 
 
 Dim Orden As Integer
@@ -542,7 +542,7 @@ Dim Indice As Integer
             IT.SubItems(8) = Format(miRsAux!FecFactu, "dd/mm/yyyy")
         Else
             cad = " "
-            IT.SubItems(8) = miRsAux!codtipoa
+            IT.SubItems(8) = miRsAux!Codtipoa
         End If
         IT.SubItems(7) = cad
         
@@ -552,7 +552,7 @@ Dim Indice As Integer
             Set lw1.SelectedItem = IT
             IT.EnsureVisible
             PonerFocoOBj lw1
-            Indice = IT.index
+            Indice = IT.Index
         End If
         
         miRsAux.MoveNext
@@ -574,7 +574,7 @@ End Sub
 
 
 Private Sub combo3_Click()
-    If primeravez Then Exit Sub
+    If PrimeraVez Then Exit Sub
     
     Me.lw1.ColumnHeaders.Item(1).Text = "Albarán"
     Me.lw1.ColumnHeaders.Item(8).Text = "Factura"
@@ -600,9 +600,9 @@ Private Sub combo3_Click()
    CargaDatos3 -1
 End Sub
 
-Private Sub Form_activate()
-    If primeravez Then
-        primeravez = False
+Private Sub Form_Activate()
+    If PrimeraVez Then
+        PrimeraVez = False
         
         CargaDatos3 -1
                 
@@ -611,7 +611,7 @@ Private Sub Form_activate()
 End Sub
 
 Private Sub Form_Load()
-    primeravez = True
+    PrimeraVez = True
     Me.Icon = frmPpal.Icon
    ' Me.cmdFra.Picture = frmPpal.imgListComun.ListImages(5)
     Orden = 1
@@ -639,15 +639,19 @@ Private Sub frmCli_DatoSeleccionado(CadenaSeleccion As String)
     cad = RecuperaValor(CadenaSeleccion, 1)
 End Sub
 
-Private Sub imgFecha_Click(index As Integer)
+Private Sub imgFecha_Click(Index As Integer)
 
-    If index = 2 Then
+    If Index = 2 Then
 
             cad = ""
-            Set frmCli = New frmFacClientes3
-            frmCli.DatosADevolverBusqueda = "0"
-            frmCli.Show vbModal
+
+            
+            Set frmCli = New frmBasico2
+            AyudaClientes frmCli, Text1(2).Text
             Set frmCli = Nothing
+
+            
+            
             
             If cad <> "" Then
                 Text1(2).Text = cad
@@ -663,14 +667,14 @@ Private Sub imgFecha_Click(index As Integer)
         frmC.Show vbModal
         Set frmC = Nothing
         If cad <> "" Then
-            Text1(index).Text = cad
-            Text1_LostFocus index
+            Text1(Index).Text = cad
+            Text1_LostFocus Index
         End If
     End If
 End Sub
 
-Private Sub Label1_Click(index As Integer)
-    If index = 2 Then
+Private Sub Label1_Click(Index As Integer)
+    If Index = 2 Then
         If vUsu.Nivel <= 1 Then
             If Combo3.ListCount = 2 Then
                 
@@ -687,11 +691,11 @@ Private Sub Label1_Click(index As Integer)
 End Sub
 
 Private Sub lw1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.index = Orden Then
+    If ColumnHeader.Index = Orden Then
         Asc = Not Asc
     Else
         Asc = True
-        Orden = ColumnHeader.index
+        Orden = ColumnHeader.Index
     End If
     CargaDatos3 -1
 End Sub
@@ -745,7 +749,7 @@ End Sub
 
 
 Private Sub lw1_ItemClick(ByVal Item As MSComctlLib.ListItem)
-    CargaLineas Item.index
+    CargaLineas Item.Index
 End Sub
 
 Private Sub CargaLineas(Indice As Integer)
@@ -807,46 +811,46 @@ eCargaLineas:
 End Sub
 
 
-Private Sub Text1_GotFocus(index As Integer)
-    ConseguirFoco Text1(index), 3
+Private Sub Text1_GotFocus(Index As Integer)
+    ConseguirFoco Text1(Index), 3
 End Sub
 
-Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub Text1_LostFocus(index As Integer)
+Private Sub Text1_LostFocus(Index As Integer)
 
 
-    If index = 2 Then
+    If Index = 2 Then
 
         
         cad = ""
-        If Text1(index).Text = "" Then
+        If Text1(Index).Text = "" Then
             
         Else
-            If Not IsNumeric(Text1(index).Text) Then
-                Text1(index).Text = ""
+            If Not IsNumeric(Text1(Index).Text) Then
+                Text1(Index).Text = ""
             Else
-                cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", CStr(CLng(Text1(index).Text)))
+                cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", CStr(CLng(Text1(Index).Text)))
                 If cad = "" Then cad = "No existe el cliente"
             End If
         End If
         Text1(3).Text = cad
 
     Else
-        If index = 3 Then
+        If Index = 3 Then
             'Nomclien, nbo hgao nada
             
         Else
-            If Text1(index).Text = Text1(index).Tag Then Exit Sub
+            If Text1(Index).Text = Text1(Index).Tag Then Exit Sub
             
-            PonerFormatoFecha Text1(index)
-            If Text1(index).Text = "" Then
-                Text1(index).ForeColor = &H808080
-                Text1(index).Text = Text1(index).Tag
+            PonerFormatoFecha Text1(Index)
+            If Text1(Index).Text = "" Then
+                Text1(Index).ForeColor = &H808080
+                Text1(Index).Text = Text1(Index).Tag
             Else
-                Text1(index).ForeColor = vbBlack
+                Text1(Index).ForeColor = vbBlack
             End If
         End If
     End If
@@ -962,7 +966,7 @@ Dim Indice As Integer
             Set lw1.SelectedItem = IT
             IT.EnsureVisible
             PonerFocoOBj lw1
-            Indice = IT.index
+            Indice = IT.Index
         End If
         
         miRsAux.MoveNext

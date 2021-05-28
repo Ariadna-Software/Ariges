@@ -5,23 +5,68 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmRepCargarNSerie 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Introducir Nº Series"
-   ClientHeight    =   6015
+   ClientHeight    =   6180
    ClientLeft      =   45
-   ClientTop       =   630
-   ClientWidth     =   8520
+   ClientTop       =   330
+   ClientWidth     =   11025
    ClipControls    =   0   'False
    Icon            =   "frmRepCargarNSerie.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6015
-   ScaleWidth      =   8520
+   ScaleHeight     =   6180
+   ScaleWidth      =   11025
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   135
+      TabIndex        =   10
+      Top             =   135
+      Width           =   1905
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   240
+         TabIndex        =   11
+         Top             =   180
+         Width           =   1590
+         _ExtentX        =   2805
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   4
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Cargar Series"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+         EndProperty
+      End
+   End
    Begin VB.TextBox txtauz 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   320
       Left            =   2280
       Locked          =   -1  'True
@@ -33,16 +78,34 @@ Begin VB.Form frmRepCargarNSerie
    End
    Begin VB.CheckBox chkConsecutivos 
       Caption         =   "Consecutivos"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
-      Left            =   6720
+      Left            =   9225
       TabIndex        =   4
-      Top             =   480
-      Width           =   1335
+      Top             =   405
+      Width           =   1650
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   320
       Left            =   1200
       Locked          =   -1  'True
@@ -56,15 +119,15 @@ Begin VB.Form frmRepCargarNSerie
       Height          =   540
       Index           =   0
       Left            =   120
-      TabIndex        =   9
-      Top             =   5355
+      TabIndex        =   8
+      Top             =   5445
       Width           =   2775
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -73,99 +136,94 @@ Begin VB.Form frmRepCargarNSerie
          EndProperty
          Height          =   240
          Left            =   240
-         TabIndex        =   10
+         TabIndex        =   9
          Top             =   180
          Width           =   2355
       End
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   5760
+      Left            =   8640
       TabIndex        =   2
-      Top             =   5520
+      Top             =   5565
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   7035
+      Left            =   9825
       TabIndex        =   3
-      Top             =   5520
+      Top             =   5565
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
-      Height          =   375
-      Left            =   7035
-      TabIndex        =   5
-      Top             =   5520
-      Visible         =   0   'False
-      Width           =   1035
-   End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   420
-      Left            =   0
-      TabIndex        =   7
-      Top             =   0
-      Width           =   8520
-      _ExtentX        =   15028
-      _ExtentY        =   741
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   4
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Cargar Series"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
       EndProperty
+      Height          =   375
+      Left            =   9825
+      TabIndex        =   5
+      Top             =   5565
+      Visible         =   0   'False
+      Width           =   1065
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmRepCargarNSerie.frx":000C
-      Height          =   4485
+      Height          =   4320
       Left            =   120
       TabIndex        =   6
-      Top             =   840
-      Width           =   8295
-      _ExtentX        =   14631
-      _ExtentY        =   7911
+      Top             =   975
+      Width           =   10795
+      _ExtentX        =   19050
+      _ExtentY        =   7620
       _Version        =   393216
       AllowUpdate     =   -1  'True
       AllowArrows     =   -1  'True
       ColumnHeaders   =   -1  'True
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       FormatLocked    =   -1  'True
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -267,13 +325,15 @@ Begin VB.Form frmRepCargarNSerie
       EndProperty
       Height          =   255
       Left            =   240
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   8220
       Visible         =   0   'False
       Width           =   3495
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnModificar 
          Caption         =   "&Modificar"
          HelpContextID   =   2
@@ -417,13 +477,23 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
 
     'ICONOS de La toolbar
+'    With Toolbar1
+'        .ImageList = frmPpal.imgListComun
+'        'ASignamos botones
+'        .Buttons(1).Image = 4 'Modificar
+'        .Buttons(2).Image = 21 'Cargar Nº Series
+'        .Buttons(4).Image = 15 'Salir
+'    End With
+    
     With Toolbar1
-        .ImageList = frmPpal.imgListComun
+        .ImageList = frmPpal.ImgListComun2
+        .DisabledImageList = frmPpal.imgListComun_BN2
         'ASignamos botones
-        .Buttons(1).Image = 4 'Modificar
-        .Buttons(2).Image = 21 'Cargar Nº Series
+        .Buttons(1).Image = 4  ' Modificar
+        .Buttons(2).Image = 47 ' Cargar Nº Series
         .Buttons(4).Image = 15 'Salir
     End With
+    
     
     PulsadoSalir = False
     PrimeraVez = True
@@ -455,19 +525,23 @@ On Error GoTo ECarga
     'Cod. Artic
     DataGrid1.Columns(0).visible = False
     
-    DataGrid1.Columns(1).Caption = "Articulo"
-    DataGrid1.Columns(1).Width = 1500
+    DataGrid1.Columns(1).Caption = "Artículo"
+    DataGrid1.Columns(1).Width = 2000
 
-    DataGrid1.Columns(2).Caption = "Desc. Articulo"
-    DataGrid1.Columns(2).Width = 3200
+    DataGrid1.Columns(2).Caption = "Descripción"
+    If DeVentas Then
+        DataGrid1.Columns(2).Width = 4420
+    Else
+        DataGrid1.Columns(2).Width = 6240
+    End If
        
     'Nº Serie
     DataGrid1.Columns(3).Caption = "Nº Serie"
-    DataGrid1.Columns(3).Width = 1500
+    DataGrid1.Columns(3).Width = 2000
         
-        'Nº Serie
+    'Nº Serie
     DataGrid1.Columns(4).Caption = "Mantenimiento"
-    DataGrid1.Columns(4).Width = 1290
+    DataGrid1.Columns(4).Width = 1810
     DataGrid1.Columns(4).visible = DeVentas
     
     DataGrid1.Columns(5).visible = False
@@ -477,6 +551,8 @@ On Error GoTo ECarga
         DataGrid1.Columns(i).Locked = True
     Next i
     DataGrid1.ScrollBars = dbgVertical
+    '++
+    DataGrid1.RowHeight = 350
     gridCargado = True
 ECarga:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid: " & DataGrid1.Tag, Err.Description
@@ -560,27 +636,27 @@ Dim RStmp As ADODB.Recordset
 Dim cadExisten As String
 Dim cadExisten2 As String
 Dim devuelve As String
-Dim B As Boolean
+Dim b As Boolean
 
-    B = True
+    b = True
     'Antes de salir de ventana de carga de Nº series comprobar que en la tabla TMP
     'se han cargado todos los Nº de Serie
-    SQL = "select numserie from tmpnseries where (numserie='' or numserie=' ') AND codusu=" & vUsu.codigo
+    SQL = "select numserie from tmpnseries where (numserie='' or numserie=' ') AND codusu=" & vUsu.Codigo
     Set RStmp = New ADODB.Recordset
     RStmp.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RStmp.EOF Then
         MsgBox " Debe Introducir todos los Nº de Serie antes de Salir.", vbExclamation
-        B = False
+        b = False
     End If
     RStmp.Close
     Set RStmp = Nothing
-    If Not B Then Exit Sub
+    If Not b Then Exit Sub
     
     'Comprobar que los Nº de Serie cargados en la temporal no esten asignados ya
     cadExisten = ""
     cadExisten2 = ""
     SQL = "SELECT numserie, codartic FROM tmpnseries "
-    SQL = SQL & " WHERE codusu=" & vUsu.codigo
+    SQL = SQL & " WHERE codusu=" & vUsu.Codigo
     SQL = SQL & " ORDER BY codartic "
     Set RStmp = New ADODB.Recordset
     RStmp.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -617,14 +693,14 @@ Dim B As Boolean
             cadExisten = "Los siguientes Nº Serie ya estan asignados a un Albaran de VENTA:" & vbCrLf & vbCrLf & cadExisten
             cadExisten = cadExisten & vbCrLf & vbCrLf & "Introduzca otro Nº."
             MsgBox cadExisten, vbExclamation
-            B = False
+            b = False
         End If
         
         If cadExisten2 <> "" Then 'Se han encontrado Nº Series ya asignados a Facturas
             cadExisten2 = "Los siguientes Nº Serie ya estan asignados a una Factura de VENTA:" & vbCrLf & cadExisten2
             cadExisten2 = cadExisten2 & vbCrLf & vbCrLf & "Introduzca otro Nº."
             MsgBox cadExisten2, vbExclamation
-            B = False
+            b = False
         End If
         
         
@@ -646,7 +722,7 @@ Dim B As Boolean
             cadExisten = "Los siguientes Nº Serie ya estan asignados a un Albaran de COMPRA:" & vbCrLf & vbCrLf & cadExisten
             cadExisten = cadExisten & vbCrLf & vbCrLf & "Introduzca otro Nº."
             MsgBox cadExisten, vbExclamation
-           B = False
+           b = False
         End If
         
         'Comprobar que los Nº de Serie introducidos no esten repetidos en la tabla temporal
@@ -654,7 +730,7 @@ Dim B As Boolean
     End If
     RStmp.Close
     Set RStmp = Nothing
-    If Not B Then Exit Sub
+    If Not b Then Exit Sub
     
     'Cargar las lineas de las plantilla como lineas de la Oferta y Salir (Volver a Mto Ofertas)
     PulsadoSalir = True
@@ -682,7 +758,7 @@ Private Sub txtAux_GotFocus()
     ConseguirFoco txtAux, 3
 End Sub
 
-Private Sub txtAux_KeyDown(KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(KeyCode As Integer, Shift As Integer)
     gridCargado = False
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
@@ -741,17 +817,17 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
        
     Modo = Kmodo
     PonerIndicador lblIndicador, Modo
     
     'MODIFICAR
-    B = (Modo = 4)
-    Me.cmdAceptar.visible = B
-    Me.cmdCancelar.visible = B
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnModificar.Enabled = Not B
+    b = (Modo = 4)
+    Me.cmdAceptar.visible = b
+    Me.cmdCancelar.visible = b
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnModificar.Enabled = Not b
     
     PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario
@@ -774,7 +850,7 @@ Dim SQL As String
      'TEINSA. Puede ser que haya dos lineas con el mismo articulo y distintos num serie
      SQL = SQL & " ,numlinealb"
      SQL = SQL & " FROM " & NombreTabla & " INNER JOIN sartic ON " & NombreTabla & ".codartic=sartic.codartic "
-     SQL = SQL & " WHERE codusu=" & vUsu.codigo
+     SQL = SQL & " WHERE codusu=" & vUsu.Codigo
      SQL = SQL & Ordenacion
     
      MontaSQLCarga = SQL
@@ -807,7 +883,7 @@ On Error GoTo EActualizar
     
     'Modificacion
     SQL = SQL & " , nummante = " & DBSet(nummante, "T")
-    SQL = SQL & " WHERE codusu=" & vUsu.codigo & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+    SQL = SQL & " WHERE codusu=" & vUsu.Codigo & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
     SQL = SQL & " AND numlinea=" & Data1.Recordset!numlinea
     'Junio2010
     SQL = SQL & " AND numlinealb = " & Data1.Recordset!numlinealb
@@ -828,47 +904,47 @@ End Function
 
 Private Function DatosOk(nSerie As String) As Boolean
 Dim devuelve As String
-Dim B As Boolean
-Dim NumAlbar As String
+Dim b As Boolean
+Dim Numalbar As String
 
     DatosOk = False
-    B = True
+    b = True
     If Data1.Recordset.EOF Then Exit Function
     
     'Comprobar si existe en la tabla sserie, y ya esta comprado
     If DeVentas Then
-        NumAlbar = "numalbar"
+        Numalbar = "numalbar"
     Else
-        NumAlbar = "numalbpr"
+        Numalbar = "numalbpr"
     End If
     
-    devuelve = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", nSerie, "T", NumAlbar, "codartic", Data1.Recordset!codArtic, "T")
+    devuelve = DevuelveDesdeBDNew(conAri, "sserie", "numserie", "numserie", nSerie, "T", Numalbar, "codartic", Data1.Recordset!codArtic, "T")
     If devuelve <> "" Then  'Existe en tabla sserie
         'Comprobar si ya ha sido comprado en otro albaran
-        If NumAlbar <> "" Then
+        If Numalbar <> "" Then
             If DeVentas Then
-                If Val(NumAlbar) <> Val(NumAlb) Then
-                    devuelve = "El Nº de Serie ya ha sido vendido en el Albaran Nº: " & Format(NumAlbar, "0000000")
+                If Val(Numalbar) <> Val(NumAlb) Then
+                    devuelve = "El Nº de Serie ya ha sido vendido en el Albaran Nº: " & Format(Numalbar, "0000000")
                     MsgBox devuelve, vbExclamation
-                    B = False
+                    b = False
                 End If
-            ElseIf NumAlbar <> NumAlb Then
-                    devuelve = "El Nº de Serie ya ha sido comprado en el Albaran Nº: " & NumAlbar
+            ElseIf Numalbar <> NumAlb Then
+                    devuelve = "El Nº de Serie ya ha sido comprado en el Albaran Nº: " & Numalbar
                     MsgBox devuelve, vbExclamation
-                    B = False
+                    b = False
             End If
         End If
     End If
     
         'comprobar si existe en la tabla temporal con lo cual quiere decir que ya hemos
         'introducido ese nº de serie
-        devuelve = "select count(*) from tmpnseries WHERE codusu=" & vUsu.codigo
+        devuelve = "select count(*) from tmpnseries WHERE codusu=" & vUsu.Codigo
         devuelve = devuelve & " and codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " and numserie=" & DBSet(nSerie, "T")
         devuelve = devuelve & " and numlinea <>" & Data1.Recordset!numlinea
         If RegistrosAListar(devuelve) > 0 Then
             devuelve = "Ya ha introducido una linea con el nº de serie: " & nSerie
             MsgBox devuelve, vbInformation
-            B = False
+            b = False
         End If
         
         
@@ -882,7 +958,7 @@ Dim NumAlbar As String
 '            End If
 '        End If
 '    End If
-    DatosOk = B
+    DatosOk = b
 End Function
 
 

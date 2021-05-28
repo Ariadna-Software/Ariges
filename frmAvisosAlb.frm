@@ -40,7 +40,6 @@ Begin VB.Form frmAvisosAlb
       Width           =   10695
       _ExtentX        =   18865
       _ExtentY        =   9340
-      SortKey         =   4
       View            =   3
       LabelEdit       =   1
       Sorted          =   -1  'True
@@ -61,7 +60,7 @@ Begin VB.Form frmAvisosAlb
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      NumItems        =   6
+      NumItems        =   5
       BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Text            =   "Fecha"
          Object.Width           =   3952
@@ -74,7 +73,7 @@ Begin VB.Form frmAvisosAlb
       BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   2
          Text            =   "Nombre"
-         Object.Width           =   8185
+         Object.Width           =   7832
       EndProperty
       BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Alignment       =   1
@@ -84,12 +83,7 @@ Begin VB.Form frmAvisosAlb
       EndProperty
       BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   4
-         Text            =   "FechaOculta"
-         Object.Width           =   0
-      EndProperty
-      BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-         SubItemIndex    =   5
-         Text            =   "ImporteOculto"
+         Text            =   "entregado"
          Object.Width           =   0
       EndProperty
    End
@@ -99,6 +93,15 @@ Begin VB.Form frmAvisosAlb
       TabIndex        =   0
       Top             =   0
       Width           =   10695
+      Begin VB.CommandButton cmdInmprimir 
+         Height          =   375
+         Left            =   3720
+         Picture         =   "frmAvisosAlb.frx":0000
+         Style           =   1  'Graphical
+         TabIndex        =   5
+         Top             =   240
+         Width           =   615
+      End
       Begin VB.ComboBox Combo1 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -110,9 +113,9 @@ Begin VB.Form frmAvisosAlb
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         ItemData        =   "frmAvisosAlb.frx":0000
-         Left            =   360
-         List            =   "frmAvisosAlb.frx":0007
+         ItemData        =   "frmAvisosAlb.frx":0A02
+         Left            =   240
+         List            =   "frmAvisosAlb.frx":0A09
          Style           =   2  'Dropdown List
          TabIndex        =   3
          Tag             =   "0"
@@ -147,7 +150,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim primeravez As Boolean
+Dim PrimeraVez As Boolean
 Dim SQL As String
 
 
@@ -161,8 +164,32 @@ End Sub
 
 
 
+Private Sub cmdInmprimir_Click()
+    
+    
+    If GeneraDatosTmpAlba Then LLamaImprimir
+
+    
+End Sub
+
+Private Sub LLamaImprimir()
+    With frmImprimir
+        .FormulaSeleccion = " {tmpInformes.codusu}= " & vUsu.Codigo
+        .OtrosParametros = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+        .NumeroParametros = 1 'numParam
+
+        .SoloImprimir = False
+        .EnvioEMail = False
+        .Opcion = 3002
+        .Titulo = "Listado albaranes entregados"
+        .NombreRPT = "rListaAlbEntregado.rpt"
+        .ConSubInforme = False
+        .Show vbModal
+    End With
+End Sub
+
 Private Sub Combo1_Click()
-    If primeravez Then Exit Sub
+    If PrimeraVez Then Exit Sub
     If Combo1.Tag = Combo1.ListIndex Then Exit Sub
     
     CargaAlbanres
@@ -170,9 +197,9 @@ Private Sub Combo1_Click()
     
 End Sub
 
-Private Sub Form_activate()
-    If primeravez Then
-        primeravez = False
+Private Sub Form_Activate()
+    If PrimeraVez Then
+        PrimeraVez = False
         CargaAlbanres
         
     End If
@@ -181,7 +208,7 @@ End Sub
 
 Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
-    primeravez = True
+    PrimeraVez = True
     Set ListView1.SmallIcons = frmPpal.ImgListPpal
 
     Combo1.ListIndex = 0
@@ -211,7 +238,7 @@ End Sub
 Private Sub CargaListView()
 Dim IT As ListItem
 
-Dim I As Byte
+Dim i As Byte
 Dim Color As Long
 
     On Error GoTo eCargaListView
@@ -231,7 +258,9 @@ Dim Color As Long
         
         
         IT.SubItems(3) = Format(miRsAux!Importe, FormatoImporte)
+        IT.SubItems(4) = Format(miRsAux!FechaEnt, "dd/mm/yyyy")
         
+        IT.Tag = miRsAux!codClien
         IT.SmallIcon = 11
 
         miRsAux.MoveNext
@@ -246,20 +275,20 @@ End Sub
 
 
 Private Function DameSQL() As String
-Dim cad As String
+Dim Cad As String
 
     
 
    
-        cad = "Select scaalb.fechaalb fecha, concat(scaalb.codtipom,scaalb.numalbar) factura, codclien,nomclien nombre,sum(importel) importe "
-        cad = cad & "  FROM scaalb,slialb WHERE scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar"
-        cad = cad & " AND not fechaent is null"
-        cad = cad & " GROUP BY  scaalb.codtipom,scaalb.fechaalb "
-        cad = cad & " ORDER BY  scaalb.codtipom,scaalb.fechaalb "
+        Cad = "Select scaalb.fechaalb fecha, concat(scaalb.codtipom,Lpad(scaalb.numalbar ,7,'0')) factura, codclien,nomclien nombre,sum(importel) importe ,fechaent"
+        Cad = Cad & "  FROM scaalb,slialb WHERE scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar"
+        Cad = Cad & " AND not fechaent is null"
+        Cad = Cad & " GROUP BY  scaalb.codtipom,scaalb.fechaalb "
+        Cad = Cad & " ORDER BY  scaalb.codtipom,scaalb.fechaalb "
     
    
     
-    DameSQL = cad
+    DameSQL = Cad
 
 End Function
 
@@ -273,3 +302,30 @@ Private Sub ListView1_DblClick()
         End With
     
 End Sub
+
+
+Private Function GeneraDatosTmpAlba() As Boolean
+
+
+    On Error GoTo eGEneraDatosTMpAlba
+    GeneraDatosTmpAlba = False
+    
+    conn.Execute "DELETE FROM tmpinformes where codusu =" & vUsu.Codigo
+    SQL = ""
+    For NumRegElim = 1 To ListView1.ListItems.Count
+        'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,nombre3,fecha1,importe1
+        SQL = SQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & ListView1.ListItems(NumRegElim).Tag & ",'" & ListView1.ListItems(NumRegElim).SubItems(1) & "',"
+        SQL = SQL & DBSet(ListView1.ListItems(NumRegElim).SubItems(2), "T") & ",'',"
+        SQL = SQL & DBSet(ListView1.ListItems(NumRegElim).Text, "F") & "," & DBSet(ListView1.ListItems(NumRegElim).SubItems(4), "F") & ","
+        SQL = SQL & DBSet(ListView1.ListItems(NumRegElim).SubItems(3), "N") & ")"
+    Next
+    If NumRegElim > 0 Then
+        SQL = Mid(SQL, 2)
+        SQL = "INSERT INTO tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,nombre3,fecha1,fecha2,importe1) values " & SQL
+        conn.Execute SQL
+        GeneraDatosTmpAlba = True
+    End If
+eGEneraDatosTMpAlba:
+    If Err.Number <> 0 Then MuestraError Err.Number
+
+End Function

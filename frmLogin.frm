@@ -190,7 +190,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim cad As String
+Dim Cad As String
 Dim ItmX As ListItem
 Dim RS As Recordset
 
@@ -199,7 +199,7 @@ Private Sub cmdCancel_Click()
     Unload Me
 End Sub
 
-Private Sub cmdOK_Click()
+Private Sub cmdOk_Click()
 Dim OK As Boolean
   
     If lw1.ListItems.Count = 0 Then
@@ -222,13 +222,13 @@ Dim OK As Boolean
     'Comprobamos ,k la empresa no este bloqueada
     conn.Execute "SET AUTOCOMMIT=0"
     If ComprobarEmpresaBloqueada(vUsu.Codigo, vUsu.CadenaConexion) Then
-        cad = "BLOQ"
+        Cad = "BLOQ"
     Else
-        cad = ""
+        Cad = ""
     End If
     conn.Execute "SET AUTOCOMMIT=1"
         
-    If cad <> "" Then GoTo Salida   'Empresa bloqueada
+    If Cad <> "" Then GoTo Salida   'Empresa bloqueada
             
     'Cerramos la ventana
     Unload Me
@@ -238,7 +238,7 @@ Salida:
 End Sub
 
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -275,36 +275,36 @@ Private Sub lblAriges_DblClick()
 End Sub
 
 Private Sub lw1_DblClick()
-   cmdOK_Click
+   cmdOk_Click
 End Sub
 
 
 '===== Laura : 16/02/05
 Private Function DevuelveProhibidas() As String
 'Private Function DevuelvePermitidas() As String
-Dim I As Integer
+Dim i As Integer
 Dim SQL As String
 On Error GoTo EDevuelveProhibidas
     
     DevuelveProhibidas = ""
     Set RS = New ADODB.Recordset
-    I = vUsu.Codigo Mod 1000
+    i = vUsu.Codigo Mod 1000
 '    i = vUsu.Codigo
     'Si es Root todas permitidas
 '    If vUsu.Nivel = 0 Then
 '        SQL = "Select * from usuarios.empresasariges "
 '    Else
-        SQL = "Select * from usuarios.usuarioempresasariges WHERE codusu =" & I
+        SQL = "Select * from usuarios.usuarioempresasariges WHERE codusu =" & i
 '    End If
     RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    cad = ""
+    Cad = ""
     While Not RS.EOF
-        cad = cad & RS!codempre & "|"
+        Cad = Cad & RS!codempre & "|"
         RS.MoveNext
     Wend
-    If cad <> "" Then cad = "|" & cad
+    If Cad <> "" Then Cad = "|" & Cad
     RS.Close
-    DevuelveProhibidas = cad
+    DevuelveProhibidas = Cad
     
 EDevuelveProhibidas:
     Err.Clear
@@ -329,15 +329,15 @@ SQL = "Select * from usuarios.empresasariges ORDER BY Codempre"
 RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
 While Not RS.EOF
-    cad = "|" & RS!codempre & "|"
-    If InStr(1, Prohibidas, cad) = 0 Then
-        cad = RS!nomempre
+    Cad = "|" & RS!codempre & "|"
+    If InStr(1, Prohibidas, Cad) = 0 Then
+        Cad = RS!nomempre
         Set ItmX = lw1.ListItems.Add()
         
-        ItmX.Text = cad
+        ItmX.Text = Cad
         ItmX.SubItems(1) = RS!nomresum
-        cad = RS!AriGes & "|" & RS!nomresum & "|" & RS!Usuario & "|" & RS!Pass & "|"
-        ItmX.Tag = cad
+        Cad = RS!AriGes & "|" & RS!nomresum & "|" & RS!Usuario & "|" & RS!Pass & "|"
+        ItmX.Tag = Cad
         ItmX.ToolTipText = RS!AriGes & " - " & RS!codempre
         ItmX.SmallIcon = 1
     End If
@@ -412,18 +412,22 @@ On Error GoTo ENumeroEmpresaMemorizar
 '            Exit Sub
         End If
     End If
-    cad = App.Path & "\ultempre.dat"
+    Cad = App.Path & "\ultempre.dat"
     If Leer Then
-        If Dir(cad) <> "" Then
+        If Dir(Cad) <> "" Then
             NF = FreeFile
-            Open cad For Input As #NF
-            Line Input #NF, cad
+            Open Cad For Input As #NF
+            Line Input #NF, Cad
             Close #NF
-            cad = Trim(cad)
-            If cad <> "" Then
+            Cad = Trim(Cad)
+            If Cad <> "" Then
+            
+                
+            
+            
                 'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
                 
-                C1 = RecuperaValor(cad, 2)
+                C1 = RecuperaValor(Cad, 2)
                 'el segundo es el
                 If C1 <> "" Then
                     For NF = 1 To Me.lw1.ListItems.Count
@@ -436,7 +440,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 
                 'El tercer pipe, si tiene es el ancho col1
-                C1 = RecuperaValor(cad, 3)
+                C1 = RecuperaValor(Cad, 3)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -444,7 +448,7 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 lw1.ColumnHeaders(1).Width = NF
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(cad, 4)
+                C1 = RecuperaValor(Cad, 4)
                 If Val(C1) > 0 Then
                     NF = Val(C1)
                 Else
@@ -455,16 +459,16 @@ On Error GoTo ENumeroEmpresaMemorizar
         End If
     Else 'Escribir
         NF = FreeFile
-        Open cad For Output As #NF
-        cad = "NO ncesito|"
+        Open Cad For Output As #NF
+        Cad = "NO ncesito|"
         If lw1.ListItems.Count > 0 Then
-            cad = cad & lw1.SelectedItem.Text
+            Cad = Cad & lw1.SelectedItem.Text
         Else
-            cad = cad & " "
+            Cad = Cad & " "
         End If
-        cad = cad & "|" & Int(Round(lw1.ColumnHeaders(1).Width, 2)) & "|" & Int(Round(lw1.ColumnHeaders(2).Width, 2)) & "|"
-        AnchoLogin = cad
-        Print #NF, cad
+        Cad = Cad & "|" & Int(Round(lw1.ColumnHeaders(1).Width, 2)) & "|" & Int(Round(lw1.ColumnHeaders(2).Width, 2)) & "|"
+        AnchoLogin = Cad
+        Print #NF, Cad
         Close #NF
     End If
 ENumeroEmpresaMemorizar:

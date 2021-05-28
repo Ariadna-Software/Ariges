@@ -214,7 +214,7 @@ End Property
 Public Function Cargar(vObjetoCarga As Object) As Boolean
     
     Dim V(9) As Variant
-    Dim I As Integer
+    Dim i As Integer
     Dim i2 As Integer
     Dim mCadena As String
     Dim Mc As String
@@ -234,16 +234,16 @@ Public Function Cargar(vObjetoCarga As Object) As Boolean
         VacioMax = True
         
         '-- Limpiamos los campos
-        For I = 1 To 9
-            V(I) = ""
-        Next I
+        For i = 1 To 9
+            V(i) = ""
+        Next i
         '-- Cargamos los datos
         mCadena = ""
         Mc = ""
         i2 = 0
-        I = 1
-        While (I <= Len(vValores)) And (i2 < 10)
-            Mc = Mid(vValores, I, 1)
+        i = 1
+        While (i <= Len(vValores)) And (i2 < 10)
+            Mc = Mid(vValores, i, 1)
             If Mc = "|" Then
                 i2 = i2 + 1
                 V(i2) = mCadena
@@ -251,7 +251,7 @@ Public Function Cargar(vObjetoCarga As Object) As Boolean
             Else
                 mCadena = mCadena & Mc
             End If
-            I = I + 1
+            i = i + 1
         Wend
         If i2 <> 9 Then
         'Se han introducido más parámetros de los que se admiten
@@ -326,6 +326,9 @@ Public Function Cargar(vObjetoCarga As Object) As Boolean
         End If
     End If
 End Function
+
+
+
 
 '****************************   COMPROBAR ********************************
 

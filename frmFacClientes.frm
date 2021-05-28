@@ -133,9 +133,9 @@ Begin VB.Form frmFacClientes
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacClientes.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "frameDptoDirec"
+      Tab(1).Control(0)=   "frameDptoVentas"
       Tab(1).Control(1)=   "frameDptoAdmon"
-      Tab(1).Control(2)=   "frameDptoVentas"
+      Tab(1).Control(2)=   "frameDptoDirec"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Direcciones"
       TabPicture(2)   =   "frmFacClientes.frx":0044
@@ -146,30 +146,30 @@ Begin VB.Form frmFacClientes
       TabCaption(3)   =   "Dir. Envio"
       TabPicture(3)   =   "frmFacClientes.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "FrameDireccionEnvio"
-      Tab(3).Control(1)=   "Toolaux2"
+      Tab(3).Control(0)=   "Toolaux2"
+      Tab(3).Control(1)=   "FrameDireccionEnvio"
       Tab(3).ControlCount=   2
       TabCaption(4)   =   "Documentos"
       TabPicture(4)   =   "frmFacClientes.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label3"
-      Tab(4).Control(1)=   "imgFecha(3)"
-      Tab(4).Control(2)=   "LabelDoc"
-      Tab(4).Control(3)=   "lw1"
-      Tab(4).Control(4)=   "Frame3(0)"
-      Tab(4).Control(5)=   "Text1(46)"
-      Tab(4).Control(6)=   "FrameVisorDocumentos"
-      Tab(4).Control(7)=   "FramePuntos"
+      Tab(4).Control(0)=   "FramePuntos"
+      Tab(4).Control(1)=   "FrameVisorDocumentos"
+      Tab(4).Control(2)=   "Text1(46)"
+      Tab(4).Control(3)=   "Frame3(0)"
+      Tab(4).Control(4)=   "lw1"
+      Tab(4).Control(5)=   "LabelDoc"
+      Tab(4).Control(6)=   "imgFecha(3)"
+      Tab(4).Control(7)=   "Label3"
       Tab(4).ControlCount=   8
       TabCaption(5)   =   "CRM"
       TabPicture(5)   =   "frmFacClientes.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame3(1)"
-      Tab(5).Control(1)=   "cmdAccCRM(0)"
-      Tab(5).Control(2)=   "cmdAccCRM(1)"
-      Tab(5).Control(3)=   "cmdAccCRM(2)"
-      Tab(5).Control(4)=   "lwCRM"
-      Tab(5).Control(5)=   "LabelCRM"
+      Tab(5).Control(0)=   "LabelCRM"
+      Tab(5).Control(1)=   "lwCRM"
+      Tab(5).Control(2)=   "cmdAccCRM(2)"
+      Tab(5).Control(3)=   "cmdAccCRM(1)"
+      Tab(5).Control(4)=   "cmdAccCRM(0)"
+      Tab(5).Control(5)=   "Frame3(1)"
       Tab(5).ControlCount=   6
       TabCaption(6)   =   "Datos contacto"
       TabPicture(6)   =   "frmFacClientes.frx":00B4
@@ -179,57 +179,57 @@ Begin VB.Form frmFacClientes
       TabCaption(7)   =   "ops aseg"
       TabPicture(7)   =   "frmFacClientes.frx":00D0
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "Label1(66)"
-      Tab(7).Control(1)=   "Label1(45)"
-      Tab(7).Control(2)=   "Label1(79)"
-      Tab(7).Control(3)=   "imgFecha(2)"
-      Tab(7).Control(4)=   "Label1(80)"
-      Tab(7).Control(5)=   "Label1(81)"
-      Tab(7).Control(6)=   "Label1(82)"
-      Tab(7).Control(7)=   "Label1(83)"
-      Tab(7).Control(8)=   "Label1(92)"
-      Tab(7).Control(9)=   "imgFecha(5)"
-      Tab(7).Control(10)=   "Label1(94)"
-      Tab(7).Control(11)=   "imgFecha(4)"
-      Tab(7).Control(12)=   "Label1(117)"
+      Tab(7).Control(0)=   "Text1(63)"
+      Tab(7).Control(1)=   "cboTipoASeg"
+      Tab(7).Control(2)=   "Text1(55)"
+      Tab(7).Control(3)=   "Text1(53)"
+      Tab(7).Control(4)=   "cmdActRiesgo"
+      Tab(7).Control(5)=   "txtSit"
+      Tab(7).Control(6)=   "Text1(51)"
+      Tab(7).Control(7)=   "Text1(50)"
+      Tab(7).Control(8)=   "Text1(49)"
+      Tab(7).Control(9)=   "Text1(48)"
+      Tab(7).Control(10)=   "Text1(41)"
+      Tab(7).Control(11)=   "Text1(47)"
+      Tab(7).Control(12)=   "Text1(43)"
       Tab(7).Control(13)=   "Label1(118)"
-      Tab(7).Control(14)=   "Text1(43)"
-      Tab(7).Control(15)=   "Text1(47)"
-      Tab(7).Control(16)=   "Text1(41)"
-      Tab(7).Control(17)=   "Text1(48)"
-      Tab(7).Control(18)=   "Text1(49)"
-      Tab(7).Control(19)=   "Text1(50)"
-      Tab(7).Control(20)=   "Text1(51)"
-      Tab(7).Control(21)=   "txtSit"
-      Tab(7).Control(22)=   "cmdActRiesgo"
-      Tab(7).Control(23)=   "Text1(53)"
-      Tab(7).Control(24)=   "Text1(55)"
-      Tab(7).Control(25)=   "cboTipoASeg"
-      Tab(7).Control(26)=   "Text1(63)"
+      Tab(7).Control(14)=   "Label1(117)"
+      Tab(7).Control(15)=   "imgFecha(4)"
+      Tab(7).Control(16)=   "Label1(94)"
+      Tab(7).Control(17)=   "imgFecha(5)"
+      Tab(7).Control(18)=   "Label1(92)"
+      Tab(7).Control(19)=   "Label1(83)"
+      Tab(7).Control(20)=   "Label1(82)"
+      Tab(7).Control(21)=   "Label1(81)"
+      Tab(7).Control(22)=   "Label1(80)"
+      Tab(7).Control(23)=   "imgFecha(2)"
+      Tab(7).Control(24)=   "Label1(79)"
+      Tab(7).Control(25)=   "Label1(45)"
+      Tab(7).Control(26)=   "Label1(66)"
       Tab(7).ControlCount=   27
       TabCaption(8)   =   "Renting"
       TabPicture(8)   =   "frmFacClientes.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "cmdRenting(3)"
-      Tab(8).Control(1)=   "txtauxRent(10)"
-      Tab(8).Control(2)=   "txtauxRent(9)"
-      Tab(8).Control(3)=   "txtauxRent(8)"
-      Tab(8).Control(4)=   "cmdRenting(2)"
-      Tab(8).Control(5)=   "txtauxRent(7)"
-      Tab(8).Control(6)=   "txtauxRent(11)"
-      Tab(8).Control(7)=   "txtauxRent(6)"
-      Tab(8).Control(8)=   "txtauxRent(5)"
-      Tab(8).Control(9)=   "txtauxRent(4)"
-      Tab(8).Control(10)=   "txtauxRent(3)"
-      Tab(8).Control(11)=   "cmdRenting(1)"
-      Tab(8).Control(12)=   "cmdRenting(0)"
-      Tab(8).Control(13)=   "txtauxRent(2)"
-      Tab(8).Control(14)=   "txtauxRent(0)"
-      Tab(8).Control(15)=   "txtauxRent(1)"
-      Tab(8).Control(16)=   "DataGrid2"
-      Tab(8).Control(17)=   "Label1(90)"
-      Tab(8).Control(18)=   "Label1(89)"
-      Tab(8).Control(19)=   "Label1(88)"
+      Tab(8).Control(0)=   "Label1(88)"
+      Tab(8).Control(1)=   "Label1(89)"
+      Tab(8).Control(2)=   "Label1(90)"
+      Tab(8).Control(3)=   "DataGrid2"
+      Tab(8).Control(4)=   "txtauxRent(1)"
+      Tab(8).Control(5)=   "txtauxRent(0)"
+      Tab(8).Control(6)=   "txtauxRent(2)"
+      Tab(8).Control(7)=   "cmdRenting(0)"
+      Tab(8).Control(8)=   "cmdRenting(1)"
+      Tab(8).Control(9)=   "txtauxRent(3)"
+      Tab(8).Control(10)=   "txtauxRent(4)"
+      Tab(8).Control(11)=   "txtauxRent(5)"
+      Tab(8).Control(12)=   "txtauxRent(6)"
+      Tab(8).Control(13)=   "txtauxRent(11)"
+      Tab(8).Control(14)=   "txtauxRent(7)"
+      Tab(8).Control(15)=   "cmdRenting(2)"
+      Tab(8).Control(16)=   "txtauxRent(8)"
+      Tab(8).Control(17)=   "txtauxRent(9)"
+      Tab(8).Control(18)=   "txtauxRent(10)"
+      Tab(8).Control(19)=   "cmdRenting(3)"
       Tab(8).ControlCount=   20
       TabCaption(9)   =   "tf"
       TabPicture(9)   =   "frmFacClientes.frx":0108
@@ -279,57 +279,57 @@ Begin VB.Form frmFacClientes
       TabCaption(10)  =   "Fito"
       TabPicture(10)  =   "frmFacClientes.frx":0124
       Tab(10).ControlEnabled=   0   'False
-      Tab(10).Control(0)=   "Label1(33)"
-      Tab(10).Control(1)=   "Label1(35)"
-      Tab(10).Control(2)=   "Label1(104)"
-      Tab(10).Control(3)=   "imgFecha(6)"
-      Tab(10).Control(4)=   "Label1(105)"
-      Tab(10).Control(5)=   "Label1(107)"
-      Tab(10).Control(6)=   "Label1(108)"
-      Tab(10).Control(7)=   "Label1(109)"
-      Tab(10).Control(8)=   "ImageFito(0)"
-      Tab(10).Control(9)=   "ImageFito(1)"
-      Tab(10).Control(10)=   "ImageFito(2)"
-      Tab(10).Control(11)=   "ImageFito(3)"
-      Tab(10).Control(12)=   "Label1(115)"
-      Tab(10).Control(13)=   "ImageFito(4)"
-      Tab(10).Control(14)=   "DataGrid4"
-      Tab(10).Control(15)=   "cboManipulador"
-      Tab(10).Control(16)=   "Text1(57)"
-      Tab(10).Control(17)=   "txtauxFito(3)"
-      Tab(10).Control(18)=   "txtauxFito(2)"
-      Tab(10).Control(19)=   "txtauxFito(1)"
-      Tab(10).Control(20)=   "cboFitos(0)"
-      Tab(10).Control(21)=   "txtauxFito(0)"
-      Tab(10).Control(22)=   "txtauxFito(4)"
-      Tab(10).Control(23)=   "Text1(58)"
-      Tab(10).Control(24)=   "cmdFitos(0)"
-      Tab(10).Control(25)=   "txtauxFito(5)"
-      Tab(10).Control(26)=   "chkManiProv"
-      Tab(10).Control(27)=   "cboFitos(1)"
+      Tab(10).Control(0)=   "cboFitos(1)"
+      Tab(10).Control(1)=   "chkManiProv"
+      Tab(10).Control(2)=   "txtauxFito(5)"
+      Tab(10).Control(3)=   "cmdFitos(0)"
+      Tab(10).Control(4)=   "Text1(58)"
+      Tab(10).Control(5)=   "txtauxFito(4)"
+      Tab(10).Control(6)=   "txtauxFito(0)"
+      Tab(10).Control(7)=   "cboFitos(0)"
+      Tab(10).Control(8)=   "txtauxFito(1)"
+      Tab(10).Control(9)=   "txtauxFito(2)"
+      Tab(10).Control(10)=   "txtauxFito(3)"
+      Tab(10).Control(11)=   "Text1(57)"
+      Tab(10).Control(12)=   "cboManipulador"
+      Tab(10).Control(13)=   "DataGrid4"
+      Tab(10).Control(14)=   "ImageFito(4)"
+      Tab(10).Control(15)=   "Label1(115)"
+      Tab(10).Control(16)=   "ImageFito(3)"
+      Tab(10).Control(17)=   "ImageFito(2)"
+      Tab(10).Control(18)=   "ImageFito(1)"
+      Tab(10).Control(19)=   "ImageFito(0)"
+      Tab(10).Control(20)=   "Label1(109)"
+      Tab(10).Control(21)=   "Label1(108)"
+      Tab(10).Control(22)=   "Label1(107)"
+      Tab(10).Control(23)=   "Label1(105)"
+      Tab(10).Control(24)=   "imgFecha(6)"
+      Tab(10).Control(25)=   "Label1(104)"
+      Tab(10).Control(26)=   "Label1(35)"
+      Tab(10).Control(27)=   "Label1(33)"
       Tab(10).ControlCount=   28
       TabCaption(11)  =   "Marja"
       TabPicture(11)  =   "frmFacClientes.frx":0140
       Tab(11).ControlEnabled=   0   'False
-      Tab(11).Control(0)=   "cbomarjal"
-      Tab(11).Control(1)=   "txtauxMarja(6)"
-      Tab(11).Control(2)=   "txtauxMarja(8)"
-      Tab(11).Control(3)=   "txtauxMarja(9)"
-      Tab(11).Control(4)=   "txtauxMarja(5)"
-      Tab(11).Control(5)=   "txtauxMarja(7)"
-      Tab(11).Control(6)=   "txtauxMarja(4)"
-      Tab(11).Control(7)=   "txtauxMarja(3)"
-      Tab(11).Control(8)=   "txtauxMarja(2)"
+      Tab(11).Control(0)=   "imgFechaCampos(7)"
+      Tab(11).Control(1)=   "Label1(110)"
+      Tab(11).Control(2)=   "Label1(111)"
+      Tab(11).Control(3)=   "imgFechaCampos(8)"
+      Tab(11).Control(4)=   "Label1(112)"
+      Tab(11).Control(5)=   "imgFechaCampos(9)"
+      Tab(11).Control(6)=   "Label1(113)"
+      Tab(11).Control(7)=   "DataGrid5"
+      Tab(11).Control(8)=   "txtauxMarja(0)"
       Tab(11).Control(9)=   "txtauxMarja(1)"
-      Tab(11).Control(10)=   "txtauxMarja(0)"
-      Tab(11).Control(11)=   "DataGrid5"
-      Tab(11).Control(12)=   "Label1(113)"
-      Tab(11).Control(13)=   "imgFechaCampos(9)"
-      Tab(11).Control(14)=   "Label1(112)"
-      Tab(11).Control(15)=   "imgFechaCampos(8)"
-      Tab(11).Control(16)=   "Label1(111)"
-      Tab(11).Control(17)=   "Label1(110)"
-      Tab(11).Control(18)=   "imgFechaCampos(7)"
+      Tab(11).Control(10)=   "txtauxMarja(2)"
+      Tab(11).Control(11)=   "txtauxMarja(3)"
+      Tab(11).Control(12)=   "txtauxMarja(4)"
+      Tab(11).Control(13)=   "txtauxMarja(7)"
+      Tab(11).Control(14)=   "txtauxMarja(5)"
+      Tab(11).Control(15)=   "txtauxMarja(9)"
+      Tab(11).Control(16)=   "txtauxMarja(8)"
+      Tab(11).Control(17)=   "txtauxMarja(6)"
+      Tab(11).Control(18)=   "cbomarjal"
       Tab(11).ControlCount=   19
       Begin VB.ComboBox cboOperadorTfnnia2 
          Height          =   315
@@ -5537,7 +5537,7 @@ Begin VB.Form frmFacClientes
       Begin VB.CheckBox chkVistaPrevia 
          Caption         =   "Vista previa"
          Height          =   195
-         Left            =   9360
+         Left            =   10440
          TabIndex        =   122
          Top             =   120
          Width           =   1215
@@ -5955,6 +5955,23 @@ Begin VB.Form frmFacClientes
          Shortcut        =   ^S
       End
    End
+   Begin VB.Menu mnFiltroTelefonia 
+      Caption         =   "Fiiltro telefonos"
+      Visible         =   0   'False
+      Begin VB.Menu mnFiltroTf 
+         Caption         =   "Todos"
+         Checked         =   -1  'True
+         Index           =   0
+      End
+      Begin VB.Menu mnFiltroTf 
+         Caption         =   "Activos"
+         Index           =   1
+      End
+      Begin VB.Menu mnFiltroTf 
+         Caption         =   "Inactivos"
+         Index           =   2
+      End
+   End
 End
 Attribute VB_Name = "frmFacClientes"
 Attribute VB_GlobalNameSpace = False
@@ -5987,9 +6004,9 @@ Private WithEvents frmZ As frmFacZonas
 Attribute frmZ.VB_VarHelpID = -1
 Private WithEvents frmR As frmFacRutas
 Attribute frmR.VB_VarHelpID = -1
-Private WithEvents frmFP As frmFacFormasPago
+Private WithEvents frmFP As frmBasico2 'frmFacFormasPago
 Attribute frmFP.VB_VarHelpID = -1
-Private WithEvents frmAc As frmFacAgentesCom
+Private WithEvents frmAc As frmBasico2 '%=%=frmFacAgentesCom
 Attribute frmAc.VB_VarHelpID = -1
 Private WithEvents frmT As frmFacTarifas
 Attribute frmT.VB_VarHelpID = -1
@@ -6001,7 +6018,7 @@ Private WithEvents frmMtoTipCo As frmManTiposContrato
 Attribute frmMtoTipCo.VB_VarHelpID = -1
 Private WithEvents frmModeloTel As frmTelefoniaModelos
 Attribute frmModeloTel.VB_VarHelpID = -1
-Private WithEvents FrmArt As frmAlmArticu2
+Private WithEvents FrmArt As frmBasico2
 Attribute FrmArt.VB_VarHelpID = -1
 
 
@@ -6088,13 +6105,13 @@ End Sub
 
 
 
-Private Sub cboOperadorTfnnia_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub cboOperadorTfnnia_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
 
-Private Sub cboFitos_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub cboFitos_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -6112,8 +6129,8 @@ Private Sub cbomarjal_KeyPress(KeyAscii As Integer)
      KEYpress KeyAscii
 End Sub
 
-Private Sub cboOperadorTfnnia2_KeyPress(index As Integer, KeyAscii As Integer)
-    If index = 1 Then
+Private Sub cboOperadorTfnnia2_KeyPress(Index As Integer, KeyAscii As Integer)
+    If Index = 1 Then
         If KeyAscii = 13 Then
             KeyAscii = 0
             PonerFocoBtn cmdAceptar
@@ -6310,14 +6327,14 @@ Private Sub chkTasaReciclado_KeyPress(KeyAscii As Integer)
 End Sub
 
 
-Private Sub chkTelefonia_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub chkTelefonia_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub cmdAccCRM_Click(index As Integer)
+Private Sub cmdAccCRM_Click(Index As Integer)
     
     'Acciones parar el CRM
-    Select Case index
+    Select Case Index
     Case 1
         If Modo <> 2 Then Exit Sub
         If Data1.Recordset.EOF Then Exit Sub
@@ -6403,12 +6420,12 @@ Private Sub cmdAccCRM_Click(index As Integer)
     End Select
 End Sub
 
-Private Sub cmdAccDocs_Click(index As Integer)
+Private Sub cmdAccDocs_Click(Index As Integer)
 Dim SQL As String
-    If index <> 2 And index <> 4 Then
+    If Index <> 2 And Index <> 4 Then
         If Modo <> 2 Then Exit Sub
     End If
-    Select Case index
+    Select Case Index
         Case 0
             
             LanzaAnyadirImagenDocumento 0
@@ -6421,7 +6438,7 @@ Dim SQL As String
             If Me.lw1.SelectedItem Is Nothing Then Exit Sub
             
             
-            If index = 2 Then
+            If Index = 2 Then
                 ImprimirImagen
             Else
                 EliminarImagen
@@ -6431,14 +6448,14 @@ Dim SQL As String
         'PUNTOS
         Case 3, 4, 5, 6
         
-            If index = 4 Then
+            If Index = 4 Then
                 ImprimirHcoPuntos
                 Exit Sub
             End If
             
             If Text1(0).Text = "" Then Exit Sub
             
-            If index = 3 Then
+            If Index = 3 Then
                 'Sin definir
             
             Else
@@ -6448,7 +6465,7 @@ Dim SQL As String
                 End If
             
                 CadenaDesdeOtroForm = ""
-                If index = 5 Then
+                If Index = 5 Then
                     'Nuevo
                     
                     frmListado5.OtrosDatos = Text1(0).Text & "|" & Text1(1).Text & "|"
@@ -6482,22 +6499,22 @@ Dim SQL As String
     End Select
 End Sub
 
-Private Sub cmdAccionesTfno_Click(index As Integer)
+Private Sub cmdAccionesTfno_Click(Index As Integer)
 Dim Seguir As Boolean
 
     If Me.data6.Recordset.EOF Then Exit Sub
 
     Seguir = False
-    If index < 2 Or index > 4 Then
+    If Index < 2 Or Index > 4 Then
         If Modo = 2 Or Modo = 9 Then Seguir = True
     Else
         If Modo = 9 And ModificaLineas = 0 Then Seguir = True
     End If
     
     If Not Seguir Then Exit Sub
-    Select Case index
+    Select Case Index
     Case 0, 5
-        Renovar_Cambiar_Telefono index = 0
+        Renovar_Cambiar_Telefono Index = 0
         
     Case 1
     
@@ -6554,7 +6571,7 @@ Dim Seguir As Boolean
     Case 2, 3
         'Insertar modificar cuota propia de telefonia
         
-        If index = 2 Then
+        If Index = 2 Then
             'NUEVO
             kCampo = Me.lwTfnoCuotas.ListItems.Count
             If kCampo > 0 Then
@@ -6701,7 +6718,7 @@ Dim NombreModificado As Boolean
                 If Modo = 5 Then
                     b = SituarData(Data2, cad, Indicador)
                 ElseIf Modo = 6 Then
-                    b = SituarData(data3, cad, Indicador)
+                    b = SituarData(Data3, cad, Indicador)
                     
                 ElseIf Modo = 7 Then
                 
@@ -6946,15 +6963,15 @@ Dim Indicador As String
             'Modificar direcciones de envio
             PonerModoFrame 0, Modo
             If ModificaLineas = 1 Or ModificaLineas = 5 Then '1 = Insertar
-                If Not data3.Recordset.EOF Then
-                    data3.Recordset.MoveFirst
+                If Not Data3.Recordset.EOF Then
+                    Data3.Recordset.MoveFirst
                     PonerCamposDireccionesEnvio
                 Else
                     LimpiarCamposDirecciones2 True
                 End If
             ElseIf ModificaLineas = 2 Then 'Modificar
                  cad = "(coddiren=" & Text4(0).Text & ")"
-                 If SituarData(data3, cad, Indicador) Then PonerCamposDireccionesEnvio
+                 If SituarData(Data3, cad, Indicador) Then PonerCamposDireccionesEnvio
             End If
             ModificaLineas = 0
             PonerModoOpcionesMenu
@@ -7272,6 +7289,7 @@ Dim vWhere As String
         
         
         'Algunos valores por defecto
+        lwTfnoCuotas.ListItems.Clear
         Me.cboOperadorTfnnia2(1).ListIndex = 0
         Me.cboOperadorTfnnia2(2).ListIndex = 0
         txtauxTfno(9).Text = Format(Now, "dd/mm/yyyy")
@@ -7340,23 +7358,23 @@ Dim cad As String
 End Sub
 
 
-Private Sub Desplazamiento(index As Integer)
+Private Sub Desplazamiento(Index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
 
     Select Case Modo
         Case 5 'Modo Mantenimiento de Direcc./Dptos (Lineas)
             If Data2.Recordset.EOF Then Exit Sub
-            DesplazamientoData Data2, index
+            DesplazamientoData Data2, Index
             PonerCamposDirecciones
           
         Case 6
-            If data3.Recordset.EOF Then Exit Sub
-            DesplazamientoData data3, index
+            If Data3.Recordset.EOF Then Exit Sub
+            DesplazamientoData Data3, Index
             PonerCamposDirecciones
         Case Else 'Datos de Cabecera
             If Data1.Recordset.EOF Then Exit Sub
-            DesplazamientoData Data1, index
+            DesplazamientoData Data1, Index
             PonerCampos
             MostrarSituacion True
             CargaFrameDirec2 0   'los dos
@@ -7368,12 +7386,12 @@ End Sub
 
 '0- Departamentos.    1- Direccioens de envio
 'Si index=-1 Significa que no quiero que haga el mover el recordset. Vengo de la busqueda de dienvivio
-Private Sub DesplazamientoLineas(index As Integer, Cual As Byte)
+Private Sub DesplazamientoLineas(Index As Integer, Cual As Byte)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
     If Cual = 0 Then
             If Data2.Recordset.EOF Then Exit Sub
-            DesplazamientoData Data2, index
+            DesplazamientoData Data2, Index
             PonerCamposDirecciones
             If Modo = 5 And ModoFrame2 = 0 Then
                 Me.lblIndicador.Caption = "Lineas Detalle"
@@ -7381,12 +7399,12 @@ Private Sub DesplazamientoLineas(index As Integer, Cual As Byte)
             End If
         
     Else
-            If data3.Recordset.EOF Then Exit Sub
-            If index >= 0 Then DesplazamientoData data3, index
+            If Data3.Recordset.EOF Then Exit Sub
+            If Index >= 0 Then DesplazamientoData Data3, Index
             PonerCamposDireccionesEnvio
             If Modo = 6 And ModoFrame2 = 0 Then
                 Me.lblIndicador.Caption = "Lineas envio"
-                If Not data3.Recordset.EOF Then Me.lblIndicador.Caption = Me.lblIndicador.Caption & ": " & Me.data3.Recordset.AbsolutePosition & " de " & Me.data3.Recordset.RecordCount
+                If Not Data3.Recordset.EOF Then Me.lblIndicador.Caption = Me.lblIndicador.Caption & ": " & Me.Data3.Recordset.AbsolutePosition & " de " & Me.Data3.Recordset.RecordCount
             End If
     End If
 End Sub
@@ -7419,8 +7437,8 @@ Dim aModo As Byte
         If Data2.Recordset.RecordCount < 1 Then Exit Sub
         Me.SSTab1.Tab = 2
     ElseIf aModo = 6 Then
-        If data3.Recordset.EOF Then Exit Sub
-        If data3.Recordset.RecordCount < 1 Then Exit Sub
+        If Data3.Recordset.EOF Then Exit Sub
+        If Data3.Recordset.RecordCount < 1 Then Exit Sub
         Me.SSTab1.Tab = 3
     ElseIf aModo = 7 Then
         If data4.Recordset.EOF Then Exit Sub
@@ -7702,31 +7720,31 @@ Private Sub BotonEliminarLineaDirEnvio()
 Dim cad As String
 Dim i As Integer
 
-    If data3.Recordset.EOF Then Exit Sub
-    If data3.Recordset.RecordCount < 1 Then Exit Sub
+    If Data3.Recordset.EOF Then Exit Sub
+    If Data3.Recordset.RecordCount < 1 Then Exit Sub
     
     'Si no estaba modificando lineas salimos
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 1 Or ModificaLineas = 2 Then Exit Sub '1= Insertar, 2=Modificar
        
-    If Not PuedeEliminarDirecEnvio(True, Text1(0).Text, CInt(data3.Recordset!coddiren)) Then Exit Sub
+    If Not PuedeEliminarDirecEnvio(True, Text1(0).Text, CInt(Data3.Recordset!coddiren)) Then Exit Sub
     
     ModificaLineas = 3 'Eliminar
     
     
     cad = "¿Seguro que desea eliminar la direccion de envio" & cad & vbCrLf
-    cad = cad & vbCrLf & "Codigo:  " & Format(data3.Recordset.Fields(1), FormatoCampo(Text4(0)))
-    cad = cad & vbCrLf & "Nombre:  " & data3.Recordset.Fields(2)
+    cad = cad & vbCrLf & "Codigo:  " & Format(Data3.Recordset.Fields(1), FormatoCampo(Text4(0)))
+    cad = cad & vbCrLf & "Nombre:  " & Data3.Recordset.Fields(2)
     
     'Borramos
     If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
-        NumRegElim = data3.Recordset.AbsolutePosition
-        data3.Recordset.Delete
+        NumRegElim = Data3.Recordset.AbsolutePosition
+        Data3.Recordset.Delete
         
-        If SituarDataTrasEliminar(data3, NumRegElim) Then
+        If SituarDataTrasEliminar(Data3, NumRegElim) Then
             PonerCamposDireccionesEnvio
         Else
              'Solo habia un registro
@@ -7742,7 +7760,7 @@ Dim i As Integer
 Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
-        data3.Recordset.CancelUpdate
+        Data3.Recordset.CancelUpdate
         MsgBox Err.Number & ": " & Err.Description, vbExclamation
     End If
 End Sub
@@ -7805,8 +7823,8 @@ Private Sub cmdCancelar_GotFocus()
   '
 End Sub
 
-Private Sub cmdFitos_Click(index As Integer)
-     If index = 0 Then
+Private Sub cmdFitos_Click(Index As Integer)
+     If Index = 0 Then
          
         imgFecha(0).Tag = 3000
         Set frmF = New frmCal
@@ -7907,9 +7925,9 @@ Private Sub Renovar_Cambiar_Telefono(Renovar As Boolean)
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub cmdRenting_Click(index As Integer)
+Private Sub cmdRenting_Click(Index As Integer)
 
-   If index = 0 Then
+   If Index = 0 Then
         'Departamento
         imgBuscar(0).Tag = 1000
         MandaBusquedaPrevia2 "codclien=" & Text1(0).Text
@@ -7917,7 +7935,7 @@ Private Sub cmdRenting_Click(index As Integer)
         
         
         
-   ElseIf index = 3 Then
+   ElseIf Index = 3 Then
         'tipco
         BuscaChekc = ""
         Set frmMtoTipCo = New frmManTiposContrato
@@ -7935,7 +7953,7 @@ Private Sub cmdRenting_Click(index As Integer)
    
    Else
         'FECHAS
-        If index = 1 Then
+        If Index = 1 Then
             imgFecha(0).Tag = 1004
         Else
             imgFecha(0).Tag = 1006
@@ -8152,6 +8170,14 @@ Private Sub Form_Load()
         FrameModuloVtaPlazos.visible = vParamAplic.TelefoniaVtaPlazos
         txtauxTfno(3).Width = IIf(vParamAplic.TelefoniaVtaPlazos, 2925, 7365)
         If vParamAplic.TelefoniaVtaPlazos Then FrameModuloVtaPlazos.BorderStyle = 0
+        
+        
+        cboOperadorTfnnia2(2).visible = vParamAplic.AgrupaTfnosFacturacionCliente
+        Label1(125).visible = vParamAplic.AgrupaTfnosFacturacionCliente
+        
+        
+        mnFiltroTelefonia.visible = True
+        
     End If
     'Si tienen renting
     cboFraRenting.visible = vParamAplic.Renting
@@ -8451,7 +8477,7 @@ Private Sub frmArt_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim CadB As String
+Dim cadB As String
 Dim Aux As String
   
     If CadenaDevuelta <> "" Then
@@ -8491,10 +8517,10 @@ Dim Aux As String
             'Recupera todo el registro de Artículos
             'Sabemos que campos son los que nos devuelve
             'Creamos una cadena consulta y ponemos los datos
-            CadB = ""
+            cadB = ""
             Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-            CadB = Aux
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+            cadB = Aux
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
     End If
@@ -8659,13 +8685,13 @@ Private Sub Image1_Click()
     End If
 End Sub
 
-Private Sub ImageFito_Click(index As Integer)
+Private Sub ImageFito_Click(Index As Integer)
 Dim Puede As Boolean
 Dim J As Integer
     
     
     'Listado fito
-    If index = 4 Then
+    If Index = 4 Then
         frmListado3.Opcion = 64
         frmListado3.Show vbModal
         Exit Sub
@@ -8674,7 +8700,7 @@ Dim J As Integer
     Puede = False
     If Modo <> 2 Then
         If Modo = 4 Then
-            If index <= 1 Then Puede = True
+            If Index <= 1 Then Puede = True
         Else
             If Modo = 10 And ModificaLineas = 0 Then Puede = True
         End If
@@ -8686,7 +8712,7 @@ Dim J As Integer
     
     'Asociados
     If Puede Then
-        If index >= 2 Then
+        If Index >= 2 Then
             'Tiene que tener ADO con datos
             If data7.Recordset.EOF Then Puede = False
         End If
@@ -8696,22 +8722,22 @@ Dim J As Integer
     If Not Puede Then Exit Sub
             
     'Si no existe lo metemos
-    If index < 2 Then
+    If Index < 2 Then
         'Carnet y DNI del asociado PPAL
         
-        CadenaConsulta = DevuelveDesdeBD(conAri, "codigo", "sfichdocs", "codclien = " & Text1(0).Text & " AND TipoDoc ", CStr(index + 1))
+        CadenaConsulta = DevuelveDesdeBD(conAri, "codigo", "sfichdocs", "codclien = " & Text1(0).Text & " AND TipoDoc ", CStr(Index + 1))
         
         If CadenaConsulta = "" Then
             'NO EXISTE. La creamos
             'EXISTE. la vemos
-            LanzaAnyadirImagenDocumento index + 1
+            LanzaAnyadirImagenDocumento Index + 1
         Else
             If RecuperaValor(lw1.Tag, 1) <> "6" Then Hacer_ButtonClick 13, 6                'Ponemos visible los documentos
                 
             'Si existe. Lo busco en los lw
             For J = 1 To lw1.ListItems.Count
                 'eN SUBITEM4 TENEMOS 0 DOC  1 dni  2 cARNET
-                If lw1.ListItems(J).SubItems(4) = index + 1 Then
+                If lw1.ListItems(J).SubItems(4) = Index + 1 Then
                     Set lw1.SelectedItem = lw1.ListItems(J)
                     lw1.ListItems(J).Selected = True
                     
@@ -8724,14 +8750,14 @@ Dim J As Integer
         'Del autorizado
         'Si existe, lo traere y lo visualizare
         J = 7
-        If index = 3 Then J = 8
+        If Index = 3 Then J = 8
         
         If data7.Recordset.Fields(J) = "" Then
             'NO existe
-            LanzaAnyadirImagenDocumento 199 + index
+            LanzaAnyadirImagenDocumento 199 + Index
         Else
             'Lo traemos y los mostramos
-            If index = 2 Then
+            If Index = 2 Then
                 CadenaConsulta = "ImgDNI,DocDNI"
             Else
                 CadenaConsulta = "ImgManipula , DocManipula"
@@ -8755,20 +8781,20 @@ Dim J As Integer
     
 End Sub
 
-Private Sub imgBuscar_Click(index As Integer)
+Private Sub imgBuscar_Click(Index As Integer)
 Dim Indice As Byte
 
     'Disitnto de Observaciones
-    If index = 11 Or index = 17 Or index = 21 Then
+    If Index = 11 Or Index = 17 Or Index = 21 Then
         'Observaciones
     
     Else
         'Si no son las de telefonia
-        If Not (index = 18 Or index = 19 Or index = 20 Or index = 23) Then
+        If Not (Index = 18 Or Index = 19 Or Index = 20 Or Index = 23) Then
             If Modo = 2 Or Modo = 0 Or Modo > 4 Then Exit Sub
         End If
         
-        If index = 13 Then
+        If Index = 13 Then
             'En insertar NO VA direccion envio habitual
             If Modo = 3 Then
                 MsgBox "Hasta que no cree el cliente no podra tener direcciones envio", vbExclamation
@@ -8776,7 +8802,7 @@ Dim Indice As Byte
             End If
         End If
     End If
-    If index = 18 Or index = 19 Or index = 20 Or index = 23 Then
+    If Index = 18 Or Index = 19 Or Index = 20 Or Index = 23 Then
         If Modo <> 9 Then
             If Modo <> 1 Then Exit Sub
         Else
@@ -8786,7 +8812,7 @@ Dim Indice As Byte
     
     Screen.MousePointer = vbHourglass
 
-    Select Case index
+    Select Case Index
         Case 0 'Codigo Actividad
             Indice = 9
             Set frmA = New frmFacActividades
@@ -8813,10 +8839,10 @@ Dim Indice As Byte
             BuscaChekc = ""
             Set frmZ = New frmFacZonas
             frmZ.DatosADevolverBusqueda = "0"
-            If index = 2 Then
+            If Index = 2 Then
                 If Not IsNumeric(Text1(Indice)) Then Text1(Indice).Text = ""
             Else
-                BuscaChekc = index
+                BuscaChekc = Index
                 Indice = 101 'para que bajo no haga ponerofo
             End If
             
@@ -8833,28 +8859,33 @@ Dim Indice As Byte
             
         Case 4  'Cod. Forma de Pago
             Indice = 23
-            Set frmFP = New frmFacFormasPago
-            frmFP.DatosADevolverBusqueda = "0"
+'            Set frmFP = New frmFacFormasPago
+'            frmFP.DatosADevolverBusqueda = "0"
             If Not IsNumeric(Text1(Indice)) Then Text1(Indice).Text = ""
-            frmFP.Show vbModal
+'            frmFP.Show vbModal
+            Set frmFP = New frmBasico2
+            AyudaFormasPago frmFP, Text1(Indice)
             Set frmFP = Nothing
+
             
         Case 5  'Cuenta Contable
-            imgBuscar(0).Tag = index
+            imgBuscar(0).Tag = Index
             MandaBusquedaPrevia2 "apudirec= 'S'"
             imgBuscar(0).Tag = -1
             Indice = 35
             
         Case 6, 22 'Código de Agente
             Indice = 36
-            If index = 22 Then Indice = 61
+            If Index = 22 Then Indice = 61
             BuscaChekc = Indice
-            Set frmAc = New frmFacAgentesCom
-            frmAc.DatosADevolverBusqueda = "0"
+'            Set frmAc = New frmFacAgentesCom
+'            frmAc.DatosADevolverBusqueda = "0"
             If Not IsNumeric(Text1(Indice)) Then Text1(Indice).Text = ""
-            frmAc.Show vbModal
+'            frmAc.Show vbModal
+            Set frmAc = New frmBasico2
+            AyudaAgentesComerciales frmAc, Text1(Indice), , True
             Set frmAc = Nothing
-            
+
         Case 7 'Código de Tarifa
             Indice = 37
             Set frmT = New frmFacTarifas
@@ -8872,12 +8903,12 @@ Dim Indice As Byte
             Set frmS = Nothing
             
         Case 9, 10, 12 'CPostal
-            Me.imgBuscar(0).Tag = index
+            Me.imgBuscar(0).Tag = Index
             Set frmCP = New frmCPostal
             frmCP.DatosADevolverBusqueda = "0"
             frmCP.Show vbModal
             Set frmCP = Nothing
-            If index = 9 Then
+            If Index = 9 Then
                 Indice = 4
             Else
                 PonerFoco Text3(3)
@@ -8893,7 +8924,7 @@ Dim Indice As Byte
             Else
                 
                 If Modo = 3 Or Modo = 4 Then
-                    If index = 11 Then
+                    If Index = 11 Then
                         CadenaDesdeOtroForm = Text1(22).Text
                     Else
                         CadenaDesdeOtroForm = Text1(54).Text
@@ -8902,7 +8933,7 @@ Dim Indice As Byte
                 Else
                     CadenaDesdeOtroForm = ""
                     If Not Data1.Recordset.EOF Then
-                        If index = 11 Then
+                        If Index = 11 Then
                             CadenaDesdeOtroForm = DBLet(Data1.Recordset!observac, "T")
                         Else
                             CadenaDesdeOtroForm = DBLet(Data1.Recordset!obsfacturacion, "T")
@@ -8916,7 +8947,7 @@ Dim Indice As Byte
                 'Si modifica y el texto
                 If Modo = 3 Or Modo = 4 Then
                     If RecuperaValor(CadenaDesdeOtroForm, 1) = "1" Then
-                        If index = 11 Then
+                        If Index = 11 Then
                             Text1(22).Text = Mid(CadenaDesdeOtroForm, 3)
                         Else
                             Text1(54).Text = Mid(CadenaDesdeOtroForm, 3)
@@ -8969,9 +9000,10 @@ Dim Indice As Byte
         Case 23
                 'Articulo para telefonia
                 CadenaDesdeOtroForm = ""
-                Set FrmArt = New frmAlmArticu2
-                FrmArt.DesdeTPV = False
-                FrmArt.Show vbModal
+                Set FrmArt = New frmBasico2
+'                FrmArt.DesdeTPV = False
+'                FrmArt.Show vbModal
+                AyudaArticulos FrmArt, txtauxTfno(11)
                 Set FrmArt = Nothing
                 If CadenaDesdeOtroForm <> "" Then
                     Me.txtauxTfno(11).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
@@ -8980,26 +9012,26 @@ Dim Indice As Byte
                 End If
     End Select
     
-    If index < 20 Then
-        If index <> 10 Or index <> 12 Then PonerFoco Text1(Indice)
+    If Index < 20 Then
+        If Index <> 10 Or Index <> 12 Then PonerFoco Text1(Indice)
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
 
-Private Sub imgFecha_Click(index As Integer)
+Private Sub imgFecha_Click(Index As Integer)
 Dim Indice As Byte
 
    If Modo = 2 Or Modo = 0 Or Modo > 4 Then
-        If index <> 3 Then Exit Sub
+        If Index <> 3 Then Exit Sub
    End If
    
    Screen.MousePointer = vbHourglass
-   imgFecha(0).Tag = index
+   imgFecha(0).Tag = Index
    Set frmF = New frmCal
    frmF.Fecha = Now
    
-   Select Case index
+   Select Case Index
      Case 0
         Indice = 13
      Case 1
@@ -9024,13 +9056,13 @@ Dim Indice As Byte
    Set frmF = Nothing
    
    'Para la fecha de la navegacion
-   If index = 3 And Text1(46).Text <> "" Then
+   If Index = 3 And Text1(46).Text <> "" Then
         imgFecha(3).Tag = Text1(46).Text
         CargaDatosLWDoc
     End If
 End Sub
 
-Private Sub imgFechaCampos_Click(index As Integer)
+Private Sub imgFechaCampos_Click(Index As Integer)
 Dim b As Boolean
         
         b = False
@@ -9041,7 +9073,7 @@ Dim b As Boolean
         End If
         
         
-        If index = 9 Then
+        If Index = 9 Then
             'Campo mobservaciones
                 frmFacClienteObser.Modificar = b
                 CadenaDesdeOtroForm = ""
@@ -9059,16 +9091,16 @@ Dim b As Boolean
                 
             If Not b Then Exit Sub
             
-            imgFecha(0).Tag = 4000 + index
+            imgFecha(0).Tag = 4000 + Index
             Set frmF = New frmCal
             frmF.Fecha = Now
-            If Me.txtauxMarja(index).Text <> "" Then frmF.Fecha = CDate(txtauxMarja(index).Text)
+            If Me.txtauxMarja(Index).Text <> "" Then frmF.Fecha = CDate(txtauxMarja(Index).Text)
             frmF.Show vbModal
         End If
-        PonerFoco txtauxTfno(index)
+        PonerFoco txtauxTfno(Index)
 End Sub
 
-Private Sub imgFechaTf_Click(index As Integer)
+Private Sub imgFechaTf_Click(Index As Integer)
         
         If Modo <> 1 Then
             If Modo <> 9 Then
@@ -9080,24 +9112,24 @@ Private Sub imgFechaTf_Click(index As Integer)
                 
         
         
-        imgFecha(0).Tag = 2000 + index
+        imgFecha(0).Tag = 2000 + Index
         Set frmF = New frmCal
         frmF.Fecha = Now
-        If Me.txtauxTfno(index).Text <> "" Then frmF.Fecha = CDate(txtauxTfno(index).Text)
+        If Me.txtauxTfno(Index).Text <> "" Then frmF.Fecha = CDate(txtauxTfno(Index).Text)
         frmF.Show vbModal
         
-        PonerFoco txtauxTfno(index)
+        PonerFoco txtauxTfno(Index)
         
 End Sub
 
-Private Sub ImgMail_Click(index As Integer)
+Private Sub ImgMail_Click(Index As Integer)
 'Abrir Outlook para enviar e-mail
 Dim dirMail As String
 
     If Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
     
-    Select Case index
+    Select Case Index
         Case 0: dirMail = Text1(17).Text
         Case 1: dirMail = Text1(21).Text
         Case 2: dirMail = Text3(9).Text
@@ -9240,7 +9272,7 @@ Dim Seleccionado As Long
         
     'Pase lo que pase, por si acaso, cargamos el lw
     lw1.SetFocus
-    Seleccionado = lw1.SelectedItem.index
+    Seleccionado = lw1.SelectedItem.Index
     CargaDatosLWDoc
     If Not lw1.SelectedItem Is Nothing Then
         lw1.SelectedItem.Selected = False
@@ -9389,6 +9421,12 @@ Private Sub mnEliminar_Click()
      End If
 End Sub
 
+Private Sub mnFiltroTf_Click(Index As Integer)
+    mnFiltroTf(0).Checked = Index = 0
+    mnFiltroTf(1).Checked = Index = 1
+    mnFiltroTf(2).Checked = Index = 2
+End Sub
+
 Private Sub mnModificar_Click()
      If Modo >= 5 Then 'Modificar lineas Artículos x Almacen
         'FALTA: bloquear la linea !!!!
@@ -9424,18 +9462,18 @@ End Sub
 
 
 
-Private Sub Text1_Change(index As Integer)
-    If index = 4 Then HaCambiadoCP = True 'CPostal ha cambiado
+Private Sub Text1_Change(Index As Integer)
+    If Index = 4 Then HaCambiadoCP = True 'CPostal ha cambiado
 End Sub
 
 '### A mano
 'Los metodos del text tendran que estar
 'Los descomentamos cuando esten puestos ya los controles
-Private Sub Text1_GotFocus(index As Integer)
-    kCampo = index
-    If index = 4 Then HaCambiadoCP = False
+Private Sub Text1_GotFocus(Index As Integer)
+    kCampo = Index
+    If Index = 4 Then HaCambiadoCP = False
     'If Index <> 22 Then ConseguirFoco Text1(Index), Modo
-    If Not EsCampoMemo(index) Then ConseguirFoco Text1(index), Modo
+    If Not EsCampoMemo(Index) Then ConseguirFoco Text1(Index), Modo
 End Sub
 
 Private Function EsCampoMemo(Indice As Integer) As Boolean
@@ -9444,17 +9482,17 @@ Private Function EsCampoMemo(Indice As Integer) As Boolean
 End Function
 
 
-Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
-    If EsCampoMemo(index) And KeyCode = 40 Then 'Flecha abajo
+Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    If EsCampoMemo(Index) And KeyCode = 40 Then 'Flecha abajo
         Me.SSTab1.Tab = 1
-        PonerFoco Text1(index)
+        PonerFoco Text1(Index)
     Else
         KEYdown KeyCode
     End If
 End Sub
 
-Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
-    If Not EsCampoMemo(index) Then KEYpress KeyAscii
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+    If Not EsCampoMemo(Index) Then KEYpress KeyAscii
 End Sub
 
 '----------------------------------------------------------------
@@ -9465,49 +9503,49 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(index As Integer)
+Private Sub Text1_LostFocus(Index As Integer)
 Dim campo As String
 Dim Codigo As String
 Dim tabla As String
 Dim Titulo As String
 
-    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
     
     'Si queremos hacer algo ..
-    Select Case index
+    Select Case Index
         Case 0 'Cod Cliente
-            If PonerFormatoEntero(Text1(index)) Then
+            If PonerFormatoEntero(Text1(Index)) Then
                 If Modo = 3 Then 'Insertar
-                    If ExisteCP(Text1(index)) Then PonerFoco Text1(index)
+                    If ExisteCP(Text1(Index)) Then PonerFoco Text1(Index)
                 End If
             End If
             
             
         Case 1
             If Modo = 3 Then
-                If Text1(index).Text <> "" Then Text1(2).Text = Text1(index).Text
+                If Text1(Index).Text <> "" Then Text1(2).Text = Text1(Index).Text
             End If
             
             
         Case 4 'CPostal
              If (Not VieneDeBuscar) Or (VieneDeBuscar And HaCambiadoCP) Then
-                Text1(index + 1).Text = ObtenerPoblacion(Text1(index).Text, campo)
-                Text1(index + 2).Text = campo
+                Text1(Index + 1).Text = ObtenerPoblacion(Text1(Index).Text, campo)
+                Text1(Index + 2).Text = campo
              End If
              VieneDeBuscar = False
         
         Case 7 'NIF
-            If Text1(index).Text <> "" And Me.chkClienteV.Value = False Then
-                Text1(index).Text = UCase(Text1(index).Text)
-                ValidarNIF Text1(index).Text
+            If Text1(Index).Text <> "" And Me.chkClienteV.Value = False Then
+                Text1(Index).Text = UCase(Text1(Index).Text)
+                ValidarNIF Text1(Index).Text
                 If Modo = 3 Then
-                    If Text1(45).Text = "" Then Text1(45).Text = Text1(index).Text
+                    If Text1(45).Text = "" Then Text1(45).Text = Text1(Index).Text
                     'Veremos si ya existe un cliente con este NIF
-                    Codigo = DevuelveDesdeBD(conAri, "concat(codclien,' - ',nomclien)", "sclien", "nifclien", Text1(index).Text, "T")
+                    Codigo = DevuelveDesdeBD(conAri, "concat(codclien,' - ',nomclien)", "sclien", "nifclien", Text1(Index).Text, "T")
                     If Codigo <> "" Then MsgBox "Ya existe un cliente con este NIF" & vbCrLf & Codigo, vbExclamation
                     Codigo = ""
                 End If
@@ -9543,7 +9581,7 @@ Dim Titulo As String
                 'esta en la otra pestaña. si movemos foco a otro campo de la
                 'misma pestaña no cambiamos
                 If Screen.ActiveControl.Name = "Text1" Then
-                    If Screen.ActiveControl.index = 23 Then
+                    If Screen.ActiveControl.Index = 23 Then
                         Me.SSTab1.Tab = 1
                         PonerFoco Text1(23)
                     End If
@@ -9558,16 +9596,16 @@ Dim Titulo As String
             
         Case 24, 25, 59 'Descuento Pronto Pago, Descuento General  y comision
                 'Formato tipo 4: Decimal(4,2)
-            If Text1(index).Text <> "" And Modo <> 1 Then PonerFormatoDecimal Text1(index), 4
+            If Text1(Index).Text <> "" And Modo <> 1 Then PonerFormatoDecimal Text1(Index), 4
             
         Case 31, 32 'codbanco, sucursal
-            PonerFormatoEntero Text1(index)
+            PonerFormatoEntero Text1(Index)
             
             
         Case 34
             'Si hay valor en la cuenta le calculamos el IBAN
-            If Me.Text1(index).Text <> "" Then
-                Me.Text1(index).Text = Right(String(10, "0") & Text1(index).Text, 10)
+            If Me.Text1(Index).Text <> "" Then
+                Me.Text1(Index).Text = Right(String(10, "0") & Text1(Index).Text, 10)
                 campo = Text1(31).Text & Me.Text1(32).Text & Me.Text1(33).Text & Me.Text1(34).Text
             
                 If Len(campo) = 20 Then
@@ -9584,14 +9622,14 @@ Dim Titulo As String
                 campo = ""
             End If
         Case 35 'Cuenta contable
-            Text2(index).Text = PonerNombreCuenta(Text1(index), Modo, Text1(0).Text)
+            Text2(Index).Text = PonerNombreCuenta(Text1(Index), Modo, Text1(0).Text)
             
         Case 36, 61 'Codigo Agente Comercial
             campo = "nomagent"
             tabla = "sagent"
             Codigo = "codagent"
             Titulo = "Agente Comercial"
-            If index = 51 Then Titulo = "Visitador"
+            If Index = 51 Then Titulo = "Visitador"
                 
             
         Case 37 'Codigo Tarifa
@@ -9601,7 +9639,7 @@ Dim Titulo As String
             Titulo = "Tarifa"
                                     
         Case 13, 40, 41, 48, 53, 58 'Fecha alta, Fecha último mov.,fecha reclamación solicredito
-             If Text1(index).Text <> "" Then PonerFormatoFecha Text1(index)
+             If Text1(Index).Text <> "" Then PonerFormatoFecha Text1(Index)
              
         Case 42 'Código Situación
             campo = "nomsitua"
@@ -9611,14 +9649,14 @@ Dim Titulo As String
             
         Case 43, 47, 49, 63 'Límite Crédito , solicitado y riesgo actual ,credito concedido
             'Formato tipo 1: Decimal(12,2)
-            If Text1(index).Text <> "" Then
-                If Not PonerFormatoDecimal(Text1(index), 1) Then Text1(index).Text = ""
+            If Text1(Index).Text <> "" Then
+                If Not PonerFormatoDecimal(Text1(Index), 1) Then Text1(Index).Text = ""
             End If
         Case 44
             '44   Distancia Km
             
 '            PonerFormatoDecimal Text1(Index), 5
-            PonerFormatoEntero Text1(index)
+            PonerFormatoEntero Text1(Index)
             
             
         
@@ -9633,28 +9671,28 @@ Dim Titulo As String
         
     End Select
     
-    If (index >= 9 And index <= 12) Or index = 23 Or index = 36 Or index = 37 Or index = 42 Or index = 52 Or index = 61 Then
-        If PonerFormatoEntero(Text1(index)) Then
-            Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, tabla, campo, Codigo, Titulo)
-            If Text2(index).Text = "" Then
-                PonerFoco Text1(index)
-                If index = 52 Then Text1(index).Text = ""
+    If (Index >= 9 And Index <= 12) Or Index = 23 Or Index = 36 Or Index = 37 Or Index = 42 Or Index = 52 Or Index = 61 Then
+        If PonerFormatoEntero(Text1(Index)) Then
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, tabla, campo, Codigo, Titulo)
+            If Text2(Index).Text = "" Then
+                PonerFoco Text1(Index)
+                If Index = 52 Then Text1(Index).Text = ""
             End If
             
         Else
-            Text2(index).Text = ""
+            Text2(Index).Text = ""
         End If
         
-        If index = 42 Then txtSit.Text = Text2(index).Text
-        If index = 36 Then
-            If Modo = 3 And Text2(index).Text <> "" And Text1(61).Text = "" Then Text1(61).Text = Text1(index).Text
+        If Index = 42 Then txtSit.Text = Text2(Index).Text
+        If Index = 36 Then
+            If Modo = 3 And Text2(Index).Text <> "" And Text1(61).Text = "" Then Text1(61).Text = Text1(Index).Text
         End If
     End If
 End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 Dim cadB2 As String
 
     If vParamAplic.TieneTelefonia2 > 0 Then
@@ -9669,33 +9707,33 @@ Dim cadB2 As String
     
     
     
-    CadB = ObtenerBusqueda(Me, False, BuscaChekc)
+    cadB = ObtenerBusqueda(Me, False, BuscaChekc)
     
         
     If vParamAplic.NumeroInstalacion = 2 Then
         If vUsu.CodigoAgente > 0 Then
-            If CadB <> "" Then CadB = CadB & " AND "
-            CadB = CadB & " codagent = " & vUsu.CodigoAgente
+            If cadB <> "" Then cadB = cadB & " AND "
+            cadB = cadB & " codagent = " & vUsu.CodigoAgente
         End If
     End If
     
     If cadB2 <> "" Then
-        If CadB <> "" Then CadB = CadB & " AND "
-        CadB = CadB & " codclien IN (Select codclien from sclientfno WHERE " & cadB2 & ")"
+        If cadB <> "" Then cadB = cadB & " AND "
+        cadB = cadB & " codclien IN (Select codclien from sclientfno WHERE " & cadB2 & ")"
     End If
     
     
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia2 CadB
-    ElseIf CadB <> "" Then
+        MandaBusquedaPrevia2 cadB
+    ElseIf cadB <> "" Then
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia2(CadB As String)
+Private Sub MandaBusquedaPrevia2(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
 Dim tabla As String
@@ -9753,7 +9791,7 @@ Dim Conexion As Byte
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
         frmB.vTabla = tabla
-        frmB.vSQL = CadB
+        frmB.vSQL = cadB
         HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = "0|1|"
@@ -9866,9 +9904,9 @@ End Sub
 Private Sub PonerCamposDireccionesEnvio()
 Dim X As Boolean
 
-    If data3.Recordset.EOF Then Exit Sub
+    If Data3.Recordset.EOF Then Exit Sub
     
-    X = PonerCamposFormaFrame(Me, "Text4", data3)
+    X = PonerCamposFormaFrame(Me, "Text4", Data3)
     
     Me.txtZona(10).Text = ""
     If Text4(10).Text <> "" Then
@@ -10154,7 +10192,7 @@ Dim b As Boolean
     
     If vParamAplic.DireccionesEnvio Then
             Me.Toolaux2.visible = (Modo <> 0)
-            If Me.Toolaux2.visible Then Me.Toolaux2.visible = (Me.data3.Recordset.RecordCount > 0)
+            If Me.Toolaux2.visible Then Me.Toolaux2.visible = (Me.Data3.Recordset.RecordCount > 0)
             If Me.Toolaux2.visible Then
                 b = Not (Modo = 6 And (ModoFrame2 = 3 Or ModoFrame2 = 4))
                 Me.Toolaux2.Buttons(1).Enabled = b
@@ -10200,10 +10238,10 @@ On Error GoTo EPonerModoFr
         End If
     Case 6
         If ModoFrame2 = 0 Then
-            If data3.Recordset.RecordCount > 5 Then
+            If Data3.Recordset.RecordCount > 5 Then
                 i = 5
             Else
-                i = data3.Recordset.RecordCount
+                i = Data3.Recordset.RecordCount
             End If
             DesplazamientoVisible Me.Toolaux2, 1, True, i
         Else
@@ -10869,25 +10907,25 @@ End Function
 
 
 
-Private Sub Text3_Change(index As Integer)
-    If index = 3 Then HaCambiadoCP = True
-     If index = 2 Then Text3(index).ToolTipText = Text3(index).Text
+Private Sub Text3_Change(Index As Integer)
+    If Index = 3 Then HaCambiadoCP = True
+     If Index = 2 Then Text3(Index).ToolTipText = Text3(Index).Text
 End Sub
 
-Private Sub Text3_GotFocus(index As Integer)
-    If index = 3 Then HaCambiadoCP = False
-    ConseguirFoco Text3(index), 3
+Private Sub Text3_GotFocus(Index As Integer)
+    If Index = 3 Then HaCambiadoCP = False
+    ConseguirFoco Text3(Index), 3
 End Sub
 
-Private Sub Text3_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub Text3_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text3_KeyPress(Index As Integer, KeyAscii As Integer)
 On Error Resume Next
     If KeyAscii = 13 Then 'ENTER
         KeyAscii = 0
-        If (index = 9 And Me.FrameCtaBanDpto.visible = False) Or index = 13 Then
+        If (Index = 9 And Me.FrameCtaBanDpto.visible = False) Or Index = 13 Then
             PonerFocoBtn Me.cmdAceptar
         Else
             SendKeys "{tab}"
@@ -10897,35 +10935,35 @@ On Error Resume Next
 End Sub
 
 
-Private Sub Text3_LostFocus(index As Integer)
+Private Sub Text3_LostFocus(Index As Integer)
 Dim devuelve As String
 
     On Error Resume Next
     
-    If Not PerderFocoGnralLineas(Text3(index), ModificaLineas) Then Exit Sub
+    If Not PerderFocoGnralLineas(Text3(Index), ModificaLineas) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
-    Select Case index
+    Select Case Index
         Case 0 'Codigo Direc/Dpto
-            If Trim(Text3(index).Text) = "" Then Exit Sub
-            FormateaCampo Text3(index)
+            If Trim(Text3(Index).Text) = "" Then Exit Sub
+            FormateaCampo Text3(Index)
 
         Case 3 'Cod. Postal
             If (Not VieneDeBuscar) Or (VieneDeBuscar And HaCambiadoCP) Then
-                Text3(index + 1).Text = ObtenerPoblacion(Text3(index).Text, devuelve)
-                Text3(index + 2).Text = devuelve
+                Text3(Index + 1).Text = ObtenerPoblacion(Text3(Index).Text, devuelve)
+                Text3(Index + 2).Text = devuelve
             End If
             VieneDeBuscar = False
             
         Case 10, 11 'codbanco, sucursal
-            PonerFormatoEntero Text3(index)
+            PonerFormatoEntero Text3(Index)
             
         Case 12, 13 'DC, cta banco
-            FormateaCampo Text3(index)
-            If index = 13 Then
+            FormateaCampo Text3(Index)
+            If Index = 13 Then
                 devuelve = Me.Text3(10).Text & Text3(11).Text & Text3(12).Text & Text3(13).Text
                 
                 If Len(devuelve) = 20 Then
@@ -10944,17 +10982,17 @@ Dim devuelve As String
             
         Case 14
             devuelve = ""
-            If PonerFormatoEntero(Text3(index)) Then
-                devuelve = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", Text3(index).Text, "N")
+            If PonerFormatoEntero(Text3(Index)) Then
+                devuelve = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", Text3(Index).Text, "N")
                 If devuelve = "" Then
                     MsgBox "No existe la zona", vbExclamation
-                    Text3(index).Text = ""
-                    PonerFoco Text3(index)
+                    Text3(Index).Text = ""
+                    PonerFoco Text3(Index)
                 End If
             Else
-                Text3(index).Text = ""
+                Text3(Index).Text = ""
             End If
-            Me.txtZona(index).Text = devuelve
+            Me.txtZona(Index).Text = devuelve
     End Select
     
     If Err.Number <> 0 Then Err.Clear
@@ -10963,24 +11001,24 @@ End Sub
 
 
 'Text4    Direnvio
-Private Sub Text4_Change(index As Integer)
-    If index = 3 Then HaCambiadoCP = True
+Private Sub Text4_Change(Index As Integer)
+    If Index = 3 Then HaCambiadoCP = True
 End Sub
 
-Private Sub Text4_GotFocus(index As Integer)
-    If index = 3 Then HaCambiadoCP = False
-    ConseguirFoco Text4(index), 3
+Private Sub Text4_GotFocus(Index As Integer)
+    If Index = 3 Then HaCambiadoCP = False
+    ConseguirFoco Text4(Index), 3
 End Sub
 
-Private Sub Text4_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text4_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub Text4_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text4_KeyPress(Index As Integer, KeyAscii As Integer)
     
     If KeyAscii = 13 Then 'ENTER
         
-        If index <> 9 Then
+        If Index <> 9 Then
             KeyAscii = 0
             SendKeys "{tab}"
         Else
@@ -10991,43 +11029,43 @@ Private Sub Text4_KeyPress(index As Integer, KeyAscii As Integer)
 End Sub
 
 
-Private Sub Text4_LostFocus(index As Integer)
+Private Sub Text4_LostFocus(Index As Integer)
 Dim devuelve As String
 
     On Error Resume Next
     
-    If Not PerderFocoGnralLineas(Text4(index), ModificaLineas) Then Exit Sub
+    If Not PerderFocoGnralLineas(Text4(Index), ModificaLineas) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
-    Select Case index
+    Select Case Index
         Case 0 'Codigo Direc/Dpto
-            If Trim(Text4(index).Text) = "" Then Exit Sub
-            FormateaCampo Text4(index)
+            If Trim(Text4(Index).Text) = "" Then Exit Sub
+            FormateaCampo Text4(Index)
 
         Case 3 'Cod. Postal
             If (Not VieneDeBuscar) Or (VieneDeBuscar And HaCambiadoCP) Then
-                Text4(index + 1).Text = ObtenerPoblacion(Text4(index).Text, devuelve)
-                Text4(index + 2).Text = devuelve
+                Text4(Index + 1).Text = ObtenerPoblacion(Text4(Index).Text, devuelve)
+                Text4(Index + 2).Text = devuelve
             End If
             VieneDeBuscar = False
         Case 8
             'PonerFocoBtn cmdAceptar
             
         Case 10
-            If PonerFormatoEntero(Text4(index)) Then
-                devuelve = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", Text4(index).Text, "N")
+            If PonerFormatoEntero(Text4(Index)) Then
+                devuelve = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", Text4(Index).Text, "N")
                 If devuelve = "" Then
                     MsgBox "No existe la zona", vbExclamation
-                    Text4(index).Text = ""
-                    PonerFoco Text4(index)
+                    Text4(Index).Text = ""
+                    PonerFoco Text4(Index)
                 End If
             Else
-                Text4(index).Text = ""
+                Text4(Index).Text = ""
             End If
-            Me.txtZona(index).Text = devuelve
+            Me.txtZona(Index).Text = devuelve
     End Select
     
     If Err.Number <> 0 Then Err.Clear
@@ -11039,9 +11077,9 @@ End Sub
 
 Private Sub ToolAux_ButtonClick(ByVal Button As MSComctlLib.Button)
     If Modo < 2 Or Modo = 3 Then Exit Sub
-    Select Case Button.index
+    Select Case Button.Index
         Case 1 To 4 'Flechas Desplazamiento
-            DesplazamientoLineas (Button.index - 1), 0
+            DesplazamientoLineas (Button.Index - 1), 0
         Case 6
             frmObraListado.Opcion = 2
             frmObraListado.Show vbModal
@@ -11053,9 +11091,9 @@ Private Sub Toolaux2_ButtonClick(ByVal Button As MSComctlLib.Button)
     
     If ModoFrame2 <> 0 Then Exit Sub
     
-    Select Case Button.index
+    Select Case Button.Index
         Case 1 To 4 'Flechas Desplazamiento
-            DesplazamientoLineas (Button.index - 1), 1
+            DesplazamientoLineas (Button.Index - 1), 1
         Case 6
             'If Modo = 6 Then
                 BuscaChekc = ""
@@ -11063,10 +11101,10 @@ Private Sub Toolaux2_ButtonClick(ByVal Button As MSComctlLib.Button)
                                                 
                 If BuscaChekc <> "" Then
                     BuscaChekc = "coddiren = " & BuscaChekc
-                    data3.Recordset.Find BuscaChekc
-                    If data3.Recordset.EOF Then
+                    Data3.Recordset.Find BuscaChekc
+                    If Data3.Recordset.EOF Then
                         MsgBox "Error buscando direccion envio devuelta"
-                        data3.Recordset.MoveFirst
+                        Data3.Recordset.MoveFirst
                     End If
                     DesplazamientoLineas -1, 1
                     BuscaChekc = ""
@@ -11081,7 +11119,7 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
      
-    Select Case Button.index
+    Select Case Button.Index
         Case 1  'Buscar
             mnBuscar_Click
         Case 2  'Todos
@@ -11097,14 +11135,14 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             'Direcciones/Departamentos    -----
             ' y direccion de envio y Renting y telefonia(ene2013)
             ' campos(huertos) SEPT 2015
-            BotonDirecciones Button.index - 5   'sera 5 o 6
+            BotonDirecciones Button.Index - 5   'sera 5 o 6
         
         Case 21
             AbrirListadoOfer (47) '47: Informes Clientes
         Case 23    'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento (Button.index - btnPrimero)
+            Desplazamiento (Button.Index - btnPrimero)
     End Select
 End Sub
 
@@ -11114,10 +11152,10 @@ Private Sub PonerOpcionesMenu()
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 
@@ -11358,7 +11396,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
             If Not Data2.Recordset.EOF Then Me.lblIndicador.Caption = Me.lblIndicador.Caption & ": " & Me.Data2.Recordset.AbsolutePosition & " de " & Me.Data2.Recordset.RecordCount
         ElseIf Modo = 6 Then
             Me.lblIndicador.Caption = "Lineas direnvio:"
-            If Not data3.Recordset.EOF Then Me.lblIndicador.Caption = Me.lblIndicador.Caption & Me.data3.Recordset.AbsolutePosition & " de " & Me.data3.Recordset.RecordCount
+            If Not Data3.Recordset.EOF Then Me.lblIndicador.Caption = Me.lblIndicador.Caption & Me.Data3.Recordset.AbsolutePosition & " de " & Me.Data3.Recordset.RecordCount
         ElseIf Modo = 7 Then
             Me.lblIndicador.Caption = "Datos contacto"
         ElseIf Modo = 8 Then
@@ -11475,24 +11513,24 @@ Dim cadCli As String
 
     'Crear las lineas de Direcciones/Departamentos para el cliente
     'ASignamos un SQL al DATA2
-    Me.data3.ConnectionString = conn
+    Me.Data3.ConnectionString = conn
     If Text1(0).Text = "" Then
         cadCli = -1
     Else
         cadCli = Val(Text1(0).Text)
     End If
-    data3.RecordSource = "Select * from sdirenvio where codclien = " & cadCli & " ORDER BY coddiren;"
-    data3.Refresh
+    Data3.RecordSource = "Select * from sdirenvio where codclien = " & cadCli & " ORDER BY coddiren;"
+    Data3.Refresh
     
     
-    If data3.Recordset.RecordCount > 0 Then
-        data3.Recordset.MoveFirst
+    If Data3.Recordset.RecordCount > 0 Then
+        Data3.Recordset.MoveFirst
         PonerCamposDireccionesEnvio
     Else
         LimpiarCamposDirecciones2 True
     End If
     PonerModoOpcionesMenu
-    DesplazamientoVisible Me.Toolaux2, 1, True, CByte(IIf(data3.Recordset.RecordCount > 100, 100, data3.Recordset.RecordCount))
+    DesplazamientoVisible Me.Toolaux2, 1, True, CByte(IIf(Data3.Recordset.RecordCount > 100, 100, Data3.Recordset.RecordCount))
 End Sub
 
 '-----------------------------------------------------------------------------------------
@@ -11567,17 +11605,17 @@ End Sub
 
 
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Hacer_ButtonClick Button.index, Button.Tag
+    Hacer_ButtonClick Button.Index, Button.Tag
 End Sub
 
 Private Sub Hacer_ButtonClick(Indice As Integer, ElTag As String)
     
     If ElTag = "" Then Exit Sub
-    LabelDoc.Caption = ""
+    LabelDOC.Caption = ""
     'Levantamos todos los botones y dejamos pulsado el de ahora
     For NumRegElim = 1 To Toolbar2.Buttons.Count
         If Toolbar2.Buttons(NumRegElim).Tag <> "" Then
-            If Toolbar2.Buttons(NumRegElim).index <> Indice Then Toolbar2.Buttons(NumRegElim).Value = tbrUnpressed
+            If Toolbar2.Buttons(NumRegElim).Index <> Indice Then Toolbar2.Buttons(NumRegElim).Value = tbrUnpressed
         End If
     Next NumRegElim
     CargaColumnas CByte(ElTag)
@@ -11599,9 +11637,9 @@ Dim C As ColumnHeader
     Case 2, 3
         'ALBARANES
         If OpcionList = 3 Then
-            LabelDoc.Caption = "Facturas"
+            LabelDOC.Caption = "Facturas"
         Else
-            LabelDoc.Caption = "Albaranes"
+            LabelDOC.Caption = "Albaranes"
         End If
         Columnas = "Tipo|Numero|Fecha|Referencia/Dpto|Importe|"
         Ancho = "1000|1300|1100|1800|1100|"
@@ -11614,10 +11652,10 @@ Dim C As ColumnHeader
     Case 0, 1
         'OFERTAS  y PEDIDOS. Tienen la msimas colimnas (aprox)
         If OpcionList = 0 Then
-            LabelDoc.Caption = "Ofertas"
+            LabelDOC.Caption = "Ofertas"
             Columnas = "Acep."
         Else
-            LabelDoc.Caption = "Pedidos"
+            LabelDOC.Caption = "Pedidos"
             Columnas = "Visado"
         End If
         Columnas = "Numero|Fecha |Fec. entrega|" & Columnas & "|Importe|"
@@ -11632,7 +11670,7 @@ Dim C As ColumnHeader
         
     Case 4
         'PRECIOS ESPECIALES
-        LabelDoc.Caption = "Precios especiales"
+        LabelDOC.Caption = "Precios especiales"
         Columnas = "Artículo|Descripcion |Precio|"
         Ancho = "2100|3500|1300|"
         'vwColumnRight =1  left=0   center=2
@@ -11642,7 +11680,7 @@ Dim C As ColumnHeader
         Ncol = 3
     Case 5
         'DTO FAMILIA MARCA
-        LabelDoc.Caption = "Dto Familia/Marca"
+        LabelDOC.Caption = "Dto Familia/Marca"
         Columnas = "Fecha|Dto1|Dto2|Familia|Marca|"
         Ancho = "1500|675|675|2000|2000|"
         'vwColumnRight =1  left=0   center=2
@@ -11653,7 +11691,7 @@ Dim C As ColumnHeader
     
     Case 6
         'DOCUMENTOS ASOCIADOS AL CLIENTE
-        LabelDoc.Caption = "Documentos asociados"
+        LabelDOC.Caption = "Documentos asociados"
         Columnas = "orden|Descripción|docum|codigo|leido|TipoDoc|"
         Ancho = "1000|4000|0|0|0|0|"
         'vwColumnRight =1  left=0   center=2
@@ -11666,7 +11704,7 @@ Dim C As ColumnHeader
         
         
     Case 7
-        LabelDoc.Caption = "Puntos ventas"
+        LabelDOC.Caption = "Puntos ventas"
         'numero,codtipom,numalbar,fechaalb,concepto,puntos
         Columnas = "Fecha|Descripción|Tipo|Id|puntos|saldo|"
         Ancho = "1800|1400|600|900|1000|1000|"
@@ -11703,7 +11741,7 @@ Dim C As String
 Dim bs As Byte
     bs = Screen.MousePointer
     C = Me.lblIndicador.Caption
-    lblIndicador.Caption = "Leyendo " & LabelDoc.Caption
+    lblIndicador.Caption = "Leyendo " & LabelDOC.Caption
     lblIndicador.Refresh
     CargaDatosLWDoc2
     Me.lblIndicador.Caption = C
@@ -12022,7 +12060,7 @@ Private Sub Toolbar3_ButtonClick(ByVal Button As MSComctlLib.Button)
     'Levantamos todos los botones y dejamos pulsado el de ahora
     For NumRegElim = 1 To Toolbar3.Buttons.Count
         If Toolbar3.Buttons(NumRegElim).Tag <> "" Then
-            If Toolbar3.Buttons(NumRegElim).index <> Button.index Then Toolbar3.Buttons(NumRegElim).Value = tbrUnpressed
+            If Toolbar3.Buttons(NumRegElim).Index <> Button.Index Then Toolbar3.Buttons(NumRegElim).Value = tbrUnpressed
         End If
     Next NumRegElim
     CargaColumnasCRM CByte(Button.Tag)
@@ -12653,10 +12691,18 @@ Dim SQL As String
                 Else
                     SQL = SQL & " -1"
                 End If
+                
+                
+                'Abril20
+                'Filtro
+                If Me.mnFiltroTf(1).Checked Then SQL = SQL & " AND Inactivo = 0"
+                If Me.mnFiltroTf(2).Checked Then SQL = SQL & " AND Inactivo = 1"
+                
+                
                 SQL = SQL & " ORDER BY  IdTelefono"
                 CargaGridGnral DataGrid3, Me.data6, SQL, True
-                SQL = "S|txtauxTfno(0)|T|Teléfono|1120|;S|cboOperadorTfnnia2(0)|C|Operador|1290|;N|||||;"
-                SQL = SQL & "S|txtauxTfno(1)|T|IMEI|1610|;S|txtauxTfno(2)|T|SIM|1500|;"
+                SQL = "S|txtauxTfno(0)|T|Teléfono|1090|;S|cboOperadorTfnnia2(0)|C|Operador|1230|;N|||||;"
+                SQL = SQL & "S|txtauxTfno(1)|T|IMEI|1610|;S|txtauxTfno(2)|T|SIM|1470|;"
                 
                 'Los campos que no se ven que van FUERA DEL GRID
                 SQL = SQL & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
@@ -12667,9 +12713,9 @@ Dim SQL As String
                 arregla SQL, DataGrid3, Me
                 DataGrid3.ScrollBars = dbgAutomatic
                 
-                SQL = IIf(vParamAplic.TelefoniaVtaPlazos, 22, 19)
+                SQL = IIf(vParamAplic.TelefoniaVtaPlazos, 23, 19)
                 DataGrid3.Columns(CInt(SQL)).Width = 240  'si se añade algun campo al select esto cambia  antes era 21,18
-                DataGrid3.Columns(CInt(SQL) + 1).Width = 270 'si se añade algun campo al select esto cambia  antes era 21,18
+                DataGrid3.Columns(CInt(SQL) + 1).Width = IIf(vParamAplic.AgrupaTfnosFacturacionCliente, 270, 0)
             End If
         End If
         
@@ -13438,13 +13484,13 @@ End Function
 
 
 
-Private Sub txtauxDC_GotFocus(index As Integer)
-    If index <> 7 Then ConseguirFoco txtauxDC(index), 3
+Private Sub txtauxDC_GotFocus(Index As Integer)
+    If Index <> 7 Then ConseguirFoco txtauxDC(Index), 3
 End Sub
 
-Private Sub txtauxDC_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtauxDC_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
-        If index <> 7 Then
+        If Index <> 7 Then
             KeyAscii = 0
             SendKeys "{tab}"
         Else
@@ -13453,9 +13499,9 @@ Private Sub txtauxDC_KeyPress(index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub txtauxDC_LostFocus(index As Integer)
+Private Sub txtauxDC_LostFocus(Index As Integer)
     'Si quisieramos comprobar algo
-    txtauxDC(index).Text = Trim(txtauxDC(index).Text)
+    txtauxDC(Index).Text = Trim(txtauxDC(Index).Text)
 End Sub
 
 
@@ -13785,7 +13831,7 @@ End Sub
 'Comprobaremos que ha cambiado los campos que enlazan con conta. nombre nif.....
 Private Function HayQueActualizarenContabilidad() As Boolean
 Dim QueCampos As String
-Dim mTag As CTag
+Dim mTag As cTag
 Dim i As Integer
 Dim fin As Boolean
 Dim txt As String
@@ -13818,7 +13864,7 @@ Dim Valor
     If vParamAplic.ContabilidadNueva Then QueCampos = QueCampos & "60|"   'PAIS
     
     fin = False
-    Set mTag = New CTag
+    Set mTag = New cTag
     
     
     
@@ -13965,13 +14011,13 @@ Dim i As Integer
 End Sub
 
 
-Private Sub txtauxFito_GotFocus(index As Integer)
-    ConseguirFoco txtauxFito(index), 3
+Private Sub txtauxFito_GotFocus(Index As Integer)
+    ConseguirFoco txtauxFito(Index), 3
 End Sub
 
-Private Sub txtauxFito_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtauxFito_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
-        If index <> 3 Then
+        If Index <> 3 Then
             KeyAscii = 0
             SendKeys "{tab}"
         Else
@@ -13981,19 +14027,19 @@ Private Sub txtauxFito_KeyPress(index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub txtauxFito_LostFocus(index As Integer)
+Private Sub txtauxFito_LostFocus(Index As Integer)
     If Modo <> 10 Then Exit Sub
     'If Index = 2 Then If Not PonerFormatoEntero(txtauxFito(Index)) Then txtauxFito(Index).Text = ""
-    If index = 5 Then PonerFormatoFecha txtauxFito(index)
-    If index = 0 Then
-        If txtauxFito(index).Text <> "" Then
-            txtauxFito(index).Text = UCase(txtauxFito(index).Text)
-            If Not Comprobar_NIF(txtauxFito(index)) Then MsgBox "El NIF parace incorrecto. ", vbExclamation
+    If Index = 5 Then PonerFormatoFecha txtauxFito(Index)
+    If Index = 0 Then
+        If txtauxFito(Index).Text <> "" Then
+            txtauxFito(Index).Text = UCase(txtauxFito(Index).Text)
+            If Not Comprobar_NIF(txtauxFito(Index)) Then MsgBox "El NIF parace incorrecto. ", vbExclamation
             'ManipuladortipoCarnet ManipuladorNumCarnet ManipuladorFecCaducidad
             If ModificaLineas = 1 Then
                 BuscaChekc = "concat(coalesce(ManipuladortipoCarnet ,''),'|',coalesce(ManipuladorNumCarnet,''),'|',coalesce(ManipuladorFecCaducidad,''),'|'"
                 BuscaChekc = BuscaChekc & ",coalesce(nomclien,''),'|')"
-                BuscaChekc = DevuelveDesdeBD(conAri, BuscaChekc, "sclien", "nifclien", txtauxFito(index).Text, "T")
+                BuscaChekc = DevuelveDesdeBD(conAri, BuscaChekc, "sclien", "nifclien", txtauxFito(Index).Text, "T")
                 If BuscaChekc = "" Then BuscaChekc = "0|"
                 'A28226256
                 If RecuperaValor(BuscaChekc, 1) > 0 Then
@@ -14004,19 +14050,19 @@ Private Sub txtauxFito_LostFocus(index As Integer)
                     Me.cboFitos(0).ListIndex = CInt(RecuperaValor(BuscaChekc, 1)) - 1
                 End If
             End If
-            If txtauxFito(2).Text = "" Then txtauxFito(2).Text = txtauxFito(index).Text
+            If txtauxFito(2).Text = "" Then txtauxFito(2).Text = txtauxFito(Index).Text
         End If
     End If
 End Sub
 
-Private Sub txtauxMarja_GotFocus(index As Integer)
-    If index <> 9 Then ConseguirFoco txtauxMarja(index), 3
+Private Sub txtauxMarja_GotFocus(Index As Integer)
+    If Index <> 9 Then ConseguirFoco txtauxMarja(Index), 3
 End Sub
 
 
-Private Sub txtauxMarja_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtauxMarja_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
-        If index <> 9 Then
+        If Index <> 9 Then
             KeyAscii = 0
             SendKeys "{tab}"
         
@@ -14024,23 +14070,23 @@ Private Sub txtauxMarja_KeyPress(index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub txtauxMarja_LostFocus(index As Integer)
-    txtauxMarja(index).Text = Trim(txtauxMarja(index).Text)
-    Select Case index
+Private Sub txtauxMarja_LostFocus(Index As Integer)
+    txtauxMarja(Index).Text = Trim(txtauxMarja(Index).Text)
+    Select Case Index
     Case 1, 3
            'txtauxRent
            BuscaChekc = ""
-           If txtauxMarja(index).Text <> "" Then
-              If Not PonerFormatoEntero(txtauxMarja(index)) Then txtauxMarja(index).Text = ""
+           If txtauxMarja(Index).Text <> "" Then
+              If Not PonerFormatoEntero(txtauxMarja(Index)) Then txtauxMarja(Index).Text = ""
           End If
         
        
     Case 7, 8
-          If txtauxMarja(index).Text <> "" Then PonerFormatoFecha txtauxMarja(index)
+          If txtauxMarja(Index).Text <> "" Then PonerFormatoFecha txtauxMarja(Index)
     
     Case 4, 5
           
-          If Not PonerFormatoDecimal(txtauxMarja(index), 3) Then txtauxMarja(index).Text = ""
+          If Not PonerFormatoDecimal(txtauxMarja(Index), 3) Then txtauxMarja(Index).Text = ""
     Case 9
         PonerFocoBtn cmdAceptar
         DoEvents
@@ -14048,13 +14094,13 @@ Private Sub txtauxMarja_LostFocus(index As Integer)
     End Select
 End Sub
 
-Private Sub txtauxRent_GotFocus(index As Integer)
-    ConseguirFoco txtauxRent(index), 3
+Private Sub txtauxRent_GotFocus(Index As Integer)
+    ConseguirFoco txtauxRent(Index), 3
 End Sub
 
-Private Sub txtauxRent_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtauxRent_KeyPress(Index As Integer, KeyAscii As Integer)
  If KeyAscii = 13 Then
-        If index <> 10 Then
+        If Index <> 10 Then
             KeyAscii = 0
             SendKeys "{tab}"
         Else
@@ -14065,30 +14111,30 @@ Private Sub txtauxRent_KeyPress(index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub txtauxRent_LostFocus(index As Integer)
-      txtauxRent(index).Text = Trim(txtauxRent(index).Text)
-      Select Case index
+Private Sub txtauxRent_LostFocus(Index As Integer)
+      txtauxRent(Index).Text = Trim(txtauxRent(Index).Text)
+      Select Case Index
       Case 1
              'txtauxRent
              BuscaChekc = ""
-             If txtauxRent(index).Text <> "" Then
-                If PonerFormatoEntero(txtauxRent(index)) Then
+             If txtauxRent(Index).Text <> "" Then
+                If PonerFormatoEntero(txtauxRent(Index)) Then
                     BuscaChekc = "codclien = " & Text1(0).Text & " AND coddirec "
-                    BuscaChekc = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", BuscaChekc, txtauxRent(index).Text, "N")
+                    BuscaChekc = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", BuscaChekc, txtauxRent(Index).Text, "N")
                 End If
             End If
             Me.txtauxRent(2).Text = BuscaChekc
             If BuscaChekc = "" Then
-                If Me.txtauxRent(index).Text <> "" Then
-                    txtauxRent(index).Text = ""
+                If Me.txtauxRent(Index).Text <> "" Then
+                    txtauxRent(Index).Text = ""
                     
                 End If
             End If
          
       Case 4, 6
-            If txtauxRent(index).Text <> "" Then PonerFormatoFecha txtauxRent(index)
+            If txtauxRent(Index).Text <> "" Then PonerFormatoFecha txtauxRent(Index)
       Case 5
-            If PonerFormatoEntero(txtauxRent(index)) Then
+            If PonerFormatoEntero(txtauxRent(Index)) Then
                 'Si la fecha es correcta
                 If Me.txtauxRent(4).Text <> "" Then
                     'n cutoas
@@ -14099,17 +14145,17 @@ Private Sub txtauxRent_LostFocus(index As Integer)
             End If
         
       Case 7
-            If Not PonerFormatoDecimal(txtauxRent(index), 3) Then txtauxRent(index).Text = ""
+            If Not PonerFormatoDecimal(txtauxRent(Index), 3) Then txtauxRent(Index).Text = ""
             
       Case 8
             'tipo de contrato
             BuscaChekc = ""
-            If txtauxRent(index).Text <> "" Then
-                BuscaChekc = DevuelveDesdeBD(conAri, "nomtipco", "stipco", "codtipco", txtauxRent(index).Text, "T")
+            If txtauxRent(Index).Text <> "" Then
+                BuscaChekc = DevuelveDesdeBD(conAri, "nomtipco", "stipco", "codtipco", txtauxRent(Index).Text, "T")
                 If BuscaChekc = "" Then
                     MsgBox "No existe el tipo de contrato", vbExclamation
-                    txtauxRent(index).Text = ""
-                    PonerFoco txtauxRent(index)
+                    txtauxRent(Index).Text = ""
+                    PonerFoco txtauxRent(Index)
                 End If
             End If
             txtauxRent(9).Text = BuscaChekc
@@ -14295,6 +14341,17 @@ Dim J As Integer
     If Me.cboOperadorTfnnia2(1).ListIndex >= 0 Then DevuelveBusquedaTelefonia = DevuelveBusquedaTelefonia & " AND procedencia = " & cboOperadorTfnnia2(1).ItemData(cboOperadorTfnnia2(1).ListIndex)
     If Me.cboOperadorTfnnia2(2).ListIndex >= 0 Then DevuelveBusquedaTelefonia = DevuelveBusquedaTelefonia & " AND agrupacion = " & cboOperadorTfnnia2(2).ItemData(cboOperadorTfnnia2(2).ListIndex)
     
+    Aux = ""
+    If Me.mnFiltroTf(1).Checked Then
+        Aux = "0"
+    Else
+        If Me.mnFiltroTf(2).Checked Then Aux = "1"
+    End If
+    If Aux <> "" Then DevuelveBusquedaTelefonia = DevuelveBusquedaTelefonia & " AND inactivo = " & Aux
+    
+    
+    
+    
     If DevuelveBusquedaTelefonia <> "" Then
         DevuelveBusquedaTelefonia = Mid(DevuelveBusquedaTelefonia, 5) 'quitamos el primer and
     
@@ -14303,19 +14360,19 @@ Dim J As Integer
 End Function
 
 
-Private Sub txtauxTfno_GotFocus(index As Integer)
-    If index <> 3 Then ConseguirFoco txtauxTfno(index), 3
+Private Sub txtauxTfno_GotFocus(Index As Integer)
+    If Index <> 3 Then ConseguirFoco txtauxTfno(Index), 3
 End Sub
 
-Private Sub txtauxTfno_KeyPress(index As Integer, KeyAscii As Integer)
-    If index <> 3 Then KEYpress KeyAscii
+Private Sub txtauxTfno_KeyPress(Index As Integer, KeyAscii As Integer)
+    If Index <> 3 Then KEYpress KeyAscii
            
 End Sub
 
-Private Sub txtauxTfno_LostFocus(index As Integer)
+Private Sub txtauxTfno_LostFocus(Index As Integer)
 Dim C As String
     
-    Select Case index
+    Select Case Index
     Case 3
         'KEYpress 13  'son textos
         'PonerFocoBtn Me.cmdAceptar
@@ -14323,24 +14380,24 @@ Dim C As String
      Case 3 To 8
         'Cliente, departamento
         
-        If Me.txtauxTfno(index).Text <> "" Then
+        If Me.txtauxTfno(Index).Text <> "" Then
             
             If Modo <> 1 Then
                 BuscaChekc = ""
-                If Not IsNumeric(txtauxTfno(index).Text) Then
+                If Not IsNumeric(txtauxTfno(Index).Text) Then
                     MsgBox "Campo numerico", vbExclamation
                 Else
-                    If index < 7 Then
-                        If index = 4 Then
-                            BuscaChekc = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", "codclien=" & Text1(0).Text & " AND coddirec", Me.txtauxTfno(index).Text)
-                        ElseIf index = 5 Then
-                            BuscaChekc = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Me.txtauxTfno(index).Text)
+                    If Index < 7 Then
+                        If Index = 4 Then
+                            BuscaChekc = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", "codclien=" & Text1(0).Text & " AND coddirec", Me.txtauxTfno(Index).Text)
+                        ElseIf Index = 5 Then
+                            BuscaChekc = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Me.txtauxTfno(Index).Text)
                         Else
-                            BuscaChekc = DevuelveDesdeBD(conAri, "descripcion", "stfnoModel", "codmodelo", Me.txtauxTfno(index).Text)
+                            BuscaChekc = DevuelveDesdeBD(conAri, "descripcion", "stfnoModel", "codmodelo", Me.txtauxTfno(Index).Text)
                         End If
                         If BuscaChekc = "" Then
-                            MsgBox "No existe ningun dato(telefonia:" & index & ") en la BD con ese valor", vbExclamation
-                            txtauxTfno(index).Text = ""
+                            MsgBox "No existe ningun dato(telefonia:" & Index & ") en la BD con ese valor", vbExclamation
+                            txtauxTfno(Index).Text = ""
                         End If
                     Else
                         'El 8 nada y el
@@ -14348,52 +14405,52 @@ Dim C As String
                     End If
                 End If
 
-                If index < 7 Then
-                    If BuscaChekc = "" Then PonerFoco Me.txtauxTfno(index)
-                    Me.Text5(index).Text = BuscaChekc
+                If Index < 7 Then
+                    If BuscaChekc = "" Then PonerFoco Me.txtauxTfno(Index)
+                    Me.Text5(Index).Text = BuscaChekc
                 End If
                 BuscaChekc = ""
                 
             End If
         Else
-            If index < 7 Then Text5(index).Text = ""
+            If Index < 7 Then Text5(Index).Text = ""
         End If
     'ElseIf Index >= 9 And Index <= 10 Then
     Case 9, 10
         If Modo > 1 Then
-            BuscaChekc = Trim(Me.txtauxTfno(index).Text)
+            BuscaChekc = Trim(Me.txtauxTfno(Index).Text)
             If BuscaChekc <> "" Then
                 If Not EsFechaOK(BuscaChekc) Then
-                    MsgBox "Fecha incorrecta: " & txtauxTfno(index).Text, vbExclamation
-                    txtauxTfno(index).Text = ""
-                    PonerFoco txtauxTfno(index)
+                    MsgBox "Fecha incorrecta: " & txtauxTfno(Index).Text, vbExclamation
+                    txtauxTfno(Index).Text = ""
+                    PonerFoco txtauxTfno(Index)
                 Else
-                    txtauxTfno(index).Text = BuscaChekc
+                    txtauxTfno(Index).Text = BuscaChekc
                 End If
                 BuscaChekc = ""
             End If
         End If
     Case 12, 13, 11, 14
-        If Me.txtauxTfno(index).Text <> "" And Modo <> 1 Then
-            If index = 12 Or index = 14 Then
-                If Not PonerFormatoEntero(txtauxTfno(index)) Then Me.txtauxTfno(index).Text = ""
-            ElseIf index = 13 Then
-                If Not PonerFormatoDecimal(txtauxTfno(index), 2) Then Me.txtauxTfno(index).Text = ""
+        If Me.txtauxTfno(Index).Text <> "" And Modo <> 1 Then
+            If Index = 12 Or Index = 14 Then
+                If Not PonerFormatoEntero(txtauxTfno(Index)) Then Me.txtauxTfno(Index).Text = ""
+            ElseIf Index = 13 Then
+                If Not PonerFormatoDecimal(txtauxTfno(Index), 2) Then Me.txtauxTfno(Index).Text = ""
             Else
                 'codartic
                 C = "codartic"
-                BuscaChekc = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", Me.txtauxTfno(index).Text, "T", C)
+                BuscaChekc = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", Me.txtauxTfno(Index).Text, "T", C)
                 If BuscaChekc = "" Then
                     MsgBox "No existe el articulo", vbExclamation
-                    Me.txtauxTfno(index).Text = ""
+                    Me.txtauxTfno(Index).Text = ""
                 Else
-                    Me.txtauxTfno(index).Text = C
+                    Me.txtauxTfno(Index).Text = C
                 End If
                 Text5(11).Text = BuscaChekc
             End If
-            If Me.txtauxTfno(index).Text = "" Then PonerFoco txtauxTfno(index)
+            If Me.txtauxTfno(Index).Text = "" Then PonerFoco txtauxTfno(Index)
         Else
-            If index = 11 Then Text5(11).Text = ""
+            If Index = 11 Then Text5(11).Text = ""
         End If
     End Select
     

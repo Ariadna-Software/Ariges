@@ -1,166 +1,214 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmCategorias 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Categorías"
-   ClientHeight    =   6015
+   ClientHeight    =   7515
    ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   5670
+   ClientTop       =   30
+   ClientWidth     =   6525
    Icon            =   "frmAlmCategorias.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6015
-   ScaleWidth      =   5670
+   ScaleHeight     =   7515
+   ScaleWidth      =   6525
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.ComboBox CboCtrLotes 
       Appearance      =   0  'Flat
-      Height          =   315
-      ItemData        =   "frmAlmCategorias.frx":000C
-      Left            =   2400
-      List            =   "frmAlmCategorias.frx":000E
-      Style           =   2  'Dropdown List
-      TabIndex        =   2
-      Tag             =   "Control de lotes|N|N|||scateg|ctrlotes||N|"
-      Top             =   4920
-      Width           =   975
-   End
-   Begin VB.TextBox txtAux 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
-      Height          =   290
-      Index           =   0
-      Left            =   120
-      MaxLength       =   3
-      TabIndex        =   0
-      Tag             =   "Código Categoría|T|N|||scateg|codcateg||S|"
-      Text            =   "Codigo"
-      Top             =   4920
-      Width           =   800
-   End
-   Begin VB.TextBox txtAux 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
-      Height          =   290
-      Index           =   1
-      Left            =   960
-      MaxLength       =   30
-      TabIndex        =   1
-      Tag             =   "Descripción Categoría|T|N|||scateg|descateg||N|"
-      Text            =   "Descripcion"
-      Top             =   4920
-      Width           =   1395
-   End
-   Begin MSDataGridLib.DataGrid DataGrid1 
-      Bindings        =   "frmAlmCategorias.frx":0010
-      Height          =   4710
-      Left            =   120
-      TabIndex        =   9
-      TabStop         =   0   'False
-      Top             =   585
-      Width           =   5295
-      _ExtentX        =   9340
-      _ExtentY        =   8308
-      _Version        =   393216
-      AllowUpdate     =   0   'False
-      BorderStyle     =   0
-      HeadLines       =   1
-      RowHeight       =   15
-      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ColumnCount     =   2
-      BeginProperty Column00 
-         DataField       =   ""
-         Caption         =   ""
-         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-            Type            =   0
-            Format          =   ""
-            HaveTrueFalseNull=   0
-            FirstDayOfWeek  =   0
-            FirstWeekOfYear =   0
-            LCID            =   3082
-            SubFormatType   =   0
+      Height          =   360
+      ItemData        =   "frmAlmCategorias.frx":000C
+      Left            =   3015
+      List            =   "frmAlmCategorias.frx":000E
+      Style           =   2  'Dropdown List
+      TabIndex        =   2
+      Tag             =   "Control de lotes|N|N|||scateg|ctrlotes||N|"
+      Top             =   5040
+      Width           =   975
+   End
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   135
+      TabIndex        =   8
+      Top             =   45
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   180
+         TabIndex        =   9
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
          EndProperty
+      End
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
       EndProperty
-      BeginProperty Column01 
-         DataField       =   ""
-         Caption         =   ""
-         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-            Type            =   0
-            Format          =   ""
-            HaveTrueFalseNull=   0
-            FirstDayOfWeek  =   0
-            FirstWeekOfYear =   0
-            LCID            =   3082
-            SubFormatType   =   0
-         EndProperty
+      Height          =   330
+      Index           =   0
+      Left            =   120
+      MaxLength       =   4
+      TabIndex        =   0
+      Tag             =   "Código Categoría|T|N|||scateg|codcateg||S|"
+      Text            =   "Dat"
+      Top             =   5040
+      Width           =   800
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
       EndProperty
-      SplitCount      =   1
-      BeginProperty Split0 
-         BeginProperty Column00 
-         EndProperty
-         BeginProperty Column01 
-         EndProperty
-      EndProperty
+      Height          =   330
+      Index           =   1
+      Left            =   1320
+      MaxLength       =   25
+      TabIndex        =   1
+      Tag             =   "Descripción Categoría|T|N|||scateg|descateg||N|"
+      Text            =   "Dato2"
+      Top             =   5040
+      Width           =   1395
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   4380
+      Left            =   5310
       TabIndex        =   4
-      Top             =   5520
-      Width           =   1035
+      Top             =   7020
+      Width           =   1065
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   3180
+      Left            =   4065
       TabIndex        =   3
-      Top             =   5520
-      Width           =   1035
+      Top             =   7005
+      Width           =   1065
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   4380
-      TabIndex        =   8
-      Top             =   5520
+      Left            =   5310
+      TabIndex        =   7
+      Top             =   7020
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.Frame Frame1 
       Height          =   555
-      Left            =   90
-      TabIndex        =   6
-      Top             =   5400
-      Width           =   2115
+      Left            =   135
+      TabIndex        =   5
+      Top             =   6870
+      Width           =   1755
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -168,77 +216,20 @@ Begin VB.Form frmAlmCategorias
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   240
-         TabIndex        =   7
-         Top             =   240
-         Width           =   1680
+         Left            =   225
+         TabIndex        =   6
+         Top             =   180
+         Width           =   1200
       End
    End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   420
-      Left            =   0
-      TabIndex        =   5
-      Top             =   0
-      Width           =   5670
-      _ExtentX        =   10001
-      _ExtentY        =   741
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   11
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
-            ImageIndex      =   16
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-            ImageIndex      =   15
-         EndProperty
-      EndProperty
-   End
    Begin MSAdodcLib.Adodc adodc1 
-      Height          =   330
-      Left            =   1440
-      Top             =   5640
+      Height          =   495
+      Left            =   0
+      Top             =   30
       Visible         =   0   'False
       Width           =   2055
       _ExtentX        =   3625
-      _ExtentY        =   582
+      _ExtentY        =   873
       ConnectMode     =   0
       CursorLocation  =   3
       IsolationLevel  =   -1
@@ -278,8 +269,80 @@ Begin VB.Form frmAlmCategorias
       EndProperty
       _Version        =   393216
    End
+   Begin MSDataGridLib.DataGrid DataGrid1 
+      Bindings        =   "frmAlmCategorias.frx":0010
+      Height          =   5985
+      Left            =   135
+      TabIndex        =   10
+      Top             =   810
+      Width           =   6225
+      _ExtentX        =   10980
+      _ExtentY        =   10557
+      _Version        =   393216
+      AllowUpdate     =   0   'False
+      BorderStyle     =   0
+      HeadLines       =   1
+      RowHeight       =   19
+      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ColumnCount     =   2
+      BeginProperty Column00 
+         DataField       =   ""
+         Caption         =   ""
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column01 
+         DataField       =   ""
+         Caption         =   ""
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      SplitCount      =   1
+      BeginProperty Split0 
+         AllowFocus      =   0   'False
+         AllowRowSizing  =   0   'False
+         AllowSizing     =   0   'False
+         BeginProperty Column00 
+         EndProperty
+         BeginProperty Column01 
+         EndProperty
+      EndProperty
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -320,13 +383,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-'+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-'CATEGORIAS DE ARTICULOS
-'Autor: Laura
-'Fecha creación: 10/08/2006
-'Fecha modificacion:
-'+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
 Option Explicit
 
 Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
@@ -334,10 +390,10 @@ Public DeConsulta As Boolean 'Muestra Form para consulta, solo buscar y ver todo
 
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
-
 Private CadenaConsulta As String
+Private CadAncho As Boolean  'Para saber si hemos fijado el ancho de los campos
 
-'Dim FormatoCod As String 'formato del campo de codigo
+Dim FormatoCod As String 'formato del campo de codigo
 Dim Modo As Byte
 '-------------------------------------------------------
 'Se distinguen varios MODOS
@@ -348,13 +404,8 @@ Dim Modo As Byte
 '   3.-  Insercion de nuevo registro
 '   4.-  Modificar
 '   5.-  Mantenimiento Lineas
-'-------------------------------------------------------
 
 
-'----------------------------------------------------------------
-'----------------------------------------------------------------
-'   En PONERMODO se habilitan, o no, los diverso campos del
-'   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(vModo As Byte)
 Dim b As Boolean
     
@@ -364,25 +415,32 @@ Dim b As Boolean
     
     txtAux(0).visible = Not b
     txtAux(1).visible = Not b
+    txtAux(0).BackColor = vbWhite
+    txtAux(1).BackColor = vbWhite
+    
     Me.CboCtrLotes.visible = Not b
+    Me.CboCtrLotes.BackColor = vbWhite
     
     cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
-    
+
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
-    
+    If DatosADevolverBusqueda <> "" Then
+        cmdRegresar.visible = b
+    End If
+
     'Si estamos insertando o busqueda
     BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
-        
+    
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
     PonerLongCampos
-    
+
     PonerModoOpcionesMenu 'Activar opciones de menu según Modo
+    'PonerModoUsuarioGnral Modo, "ariagro"
     PonerOpcionesMenu   'Activar opciones de menu según nivel
-                            'de permisos del usuario
+                        'de permisos del usuario
 End Sub
 
 
@@ -391,24 +449,25 @@ Dim b As Boolean
 
     b = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnBuscar.Enabled = b
-    'Ber Todos
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnVerTodos.Enabled = b
-    
-    b = b And Not DeConsulta
-    'Añadir
     Toolbar1.Buttons(5).Enabled = b
+    Me.mnBuscar.Enabled = b
+    'Ver Todos
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnVerTodos.Enabled = b
+   
+    b = b And Not DeConsulta
+    'Insertar
+    Toolbar1.Buttons(1).Enabled = b
     Me.mnNuevo.Enabled = b
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
+    Toolbar1.Buttons(2).Enabled = b
     Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(7).Enabled = b
+    Toolbar1.Buttons(3).Enabled = b
     Me.mnEliminar.Enabled = b
+    
     'Imprimir
-    Toolbar1.Buttons(10).Enabled = b
+    Toolbar1.Buttons(8).Enabled = b
 End Sub
 
 
@@ -423,7 +482,7 @@ Private Sub BotonAnyadir()
 Dim anc As Single
 
     'Situamos el grid al final
-    AnyadirLinea DataGrid1, adodc1
+    AnyadirLinea DataGrid1, Adodc1
     
     'Limpiamos los campos para insertar
     txtAux(0).Text = ""
@@ -431,7 +490,7 @@ Dim anc As Single
     'por defecto control de lotes vale NO
     Me.CboCtrLotes.ListIndex = 0
     
-    anc = ObtenerAlto(DataGrid1)
+    anc = ObtenerAltoNew(DataGrid1)
     LLamaLineas anc, 3
     
     'Ponemos el foco
@@ -444,22 +503,21 @@ Private Sub BotonBuscar()
     txtAux(0).Text = ""
     txtAux(1).Text = ""
     Me.CboCtrLotes.ListIndex = -1
-    LLamaLineas 790, 1
+    LLamaLineas DataGrid1.Top + 240, 1
     PonerFoco txtAux(0)
 End Sub
 
 
 Private Sub BotonVerTodos()
-    On Error Resume Next
-
+On Error Resume Next
     CargaGrid ""
-    If adodc1.Recordset.RecordCount <= 0 Then
-         MsgBox "No hay ningún registro en la tabla scateg", vbInformation
+    If Adodc1.Recordset.RecordCount <= 0 Then
+         'MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
+         MsgBox "No hay ningún registro en la tabla CATEGORIAS", vbInformation
          Screen.MousePointer = vbDefault
          Exit Sub
     Else
-        PonerModo 2
-        PonerFocoGrid DataGrid1
+        DataGrid1.SetFocus
     End If
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -469,8 +527,8 @@ Private Sub BotonModificar()
 Dim anc As Single
 Dim i As Integer
 
-    If adodc1.Recordset.EOF Then Exit Sub
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
@@ -483,12 +541,6 @@ Dim i As Integer
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
     PosicionarCombo Me.CboCtrLotes, CInt(DataGrid1.Columns(2).Text)
-'    Select Case DataGrid1.Columns(2).Value
-'        Case "No"
-'            Me.CboCtrLotes.ListIndex = 0
-'        Case "Si"
-'            Me.CboCtrLotes.ListIndex = 1
-'    End Select
     
     anc = ObtenerAlto(DataGrid1)
     LLamaLineas anc, 4
@@ -500,16 +552,16 @@ End Sub
 
 
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
-    DeseleccionaGrid Me.DataGrid1
+    DeseleccionaGrid DataGrid1
     PonerModo xModo
     'Fijamos el ancho
     txtAux(0).Top = alto
     txtAux(1).Top = alto
-    Me.CboCtrLotes.Top = alto - 15
-'    txtAux(0).Left = DataGrid1.Left + 340
-'    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
-'    Me.CboCtrLotes.Left = txtAux(1).Left + txtAux(1).Width + 55
+    Me.CboCtrLotes.Top = alto
+    txtAux(0).Left = DataGrid1.Left + 340
+    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
 End Sub
+
 
 Private Sub BotonEliminar()
 Dim SQL As String
@@ -517,22 +569,21 @@ Dim SQL As String
     On Error GoTo Error2
     
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
 
     '### a mano
     SQL = "¿Seguro que desea eliminar la Categoría?" & vbCrLf
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Descripción: " & Adodc1.Recordset.Fields(1)
     
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = Me.adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from scateg where codcateg=" & DBSet(adodc1.Recordset!codcateg, "T")
-        Conn.Execute SQL
-        CancelaADODC Me.adodc1
+        NumRegElim = Me.Adodc1.Recordset.AbsolutePosition
+        SQL = "Delete from scateg where codcateg=" & DBSet(Adodc1.Recordset!codCateg, "T")
+        conn.Execute SQL
+        CancelaADODC Me.Adodc1
         CargaGrid ""
-'        CancelaADODC Me.adodc1
-        SituarDataPosicion Me.adodc1, NumRegElim, SQL
+        SituarDataPosicion Me.Adodc1, NumRegElim, SQL
     End If
     
 Error2:
@@ -541,90 +592,76 @@ Error2:
 End Sub
 
 
-
-Private Sub CboCtrLotes_KeyPress(KeyAscii As Integer)
-    KEYpress KeyAscii
-End Sub
-
 Private Sub cmdAceptar_Click()
-Dim i As String
+Dim i As Integer
 Dim cadB As String
-
-    On Error GoTo EAceptar
+On Error Resume Next
 
     Select Case Modo
-        Case 3 'Insertar
+        Case 3   'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
                     CargaGrid
                     BotonAnyadir
                 End If
             End If
-        
-        Case 4  'Modificar
-            If DatosOk Then
-                If BLOQUEADesdeFormulario(Me) Then
-                    If ModificaDesdeFormulario(Me, 3) Then
-                        TerminaBloquear
-                        i = adodc1.Recordset.Fields(0)
-                        PonerModo 2
-                        CancelaADODC Me.adodc1
-                        CargaGrid
-                        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & DBSet(i, "T"))
-                    End If
-                    PonerFocoGrid DataGrid1
+            
+        Case 4  'MODIFICAR
+            If DatosOk And BLOQUEADesdeFormulario(Me) Then
+                If ModificaDesdeFormulario(Me, 3) Then
+                    TerminaBloquear
+                    i = Adodc1.Recordset.Fields(0)
+                    PonerModo 2
+                    CancelaADODC Me.Adodc1
+                    CargaGrid
+                    Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
                 End If
+                DataGrid1.SetFocus
             End If
             
-        Case 1 'HacerBusqueda
+        Case 1 'BUSQUEDA
             cadB = ObtenerBusqueda(Me, False)
             If cadB <> "" Then
+                'Encuentra registros
                 PonerModo 2
                 CargaGrid cadB
-                PonerFocoGrid DataGrid1
+                DataGrid1.SetFocus
             End If
     End Select
-    
-EAceptar:
-    If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
+    If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
 Private Sub cmdCancelar_Click()
-    On Error Resume Next
-
     Select Case Modo
-        Case 1 'Busqueda
-            CargaGrid
         Case 3 'Insertar
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
         Case 4 'Modificar
-            TerminaBloquear
-            Me.lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+            Me.lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+        Case 1 'Buscar
+            CargaGrid
     End Select
-    
     PonerModo 2
-    PonerFocoGrid DataGrid1
-    
-    If Err.Number <> 0 Then Err.Clear
+    DataGrid1.SetFocus
 End Sub
 
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
 
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = adodc1.Recordset.Fields(0) & "|"
-    cad = cad & adodc1.Recordset.Fields(1) & "|"
+    cad = Adodc1.Recordset.Fields(0) & "|"
+    cad = cad & Adodc1.Recordset.Fields(1) & "|"
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
+
 
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible = True Then cmdRegresar_Click
@@ -635,8 +672,8 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-     If Not adodc1.Recordset.EOF Then
-        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
     End If
 End Sub
 
@@ -645,27 +682,41 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+
     ' ICONITOS DE LA BARRA
-    With Me.Toolbar1
-        .ImageList = frmPpal.imgListComun
-        .Buttons(1).Image = 1   'Botón Buscar
-        .Buttons(2).Image = 2   'Botón Recuperar Todos
-        .Buttons(5).Image = 3   'Botón Añadir Nuevo Registro
-        .Buttons(6).Image = 4   'Botón Modificar Registro
-        .Buttons(7).Image = 5   'Botón Borrar Registro
-        .Buttons(10).Image = 16  'Botón Imprimir
-        .Buttons(11).Image = 15  'Botón Salir
+     With Me.Toolbar1
+        .HotImageList = frmPpal.imgListComun_OM2
+        .DisabledImageList = frmPpal.imgListComun_BN2
+        .ImageList = frmPpal.ImgListComun2
+        .Buttons(1).Image = 3
+        .Buttons(2).Image = 4
+        .Buttons(3).Image = 5
+        .Buttons(5).Image = 1
+        .Buttons(6).Image = 2
+        .Buttons(8).Image = 16
+        
     End With
+    FormatoCod = FormatoCampo(txtAux(0))
     
-    
+    '## A mano
+    'Vemos como esta guardado el valor del check
+'    chkVistaPrevia.Value = CheckValueLeer(Name)
+    DataGrid1.ClearFields
+
+    CadAncho = False
     cmdRegresar.visible = (DatosADevolverBusqueda <> "")
     PonerModo 2
-    
+      
     'Cadena consulta
     CadenaConsulta = "Select codcateg,descateg,ctrlotes,If(ctrlotes=1,""Si"",""No"") AS Dctrlotes from scateg"
     CargaGrid
     CargaCombo
 End Sub
+
+Private Sub Form_Unload(Cancel As Integer)
+'    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
+End Sub
+
 
 Private Sub mnBuscar_Click()
     BotonBuscar
@@ -692,27 +743,35 @@ Private Sub mnVerTodos_Click()
     BotonVerTodos
 End Sub
 
+Private Sub CboCtrLotes_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
-        Case 1: mnBuscar_Click
-        Case 2: mnVerTodos_Click
-        Case 5: mnNuevo_Click
-        Case 6: mnModificar_Click
-        Case 7: mnEliminar_Click
-'        Case 10 'Imprimir listado de Formas de Envío
-'                Me.Hide
-'                AbrirListado (23) 'OpcionListado=23
-'                Me.Show vbModal
-        Case 11: mnSalir_Click  'Salir
+        Case 1: mnNuevo_Click
+        Case 2: mnModificar_Click
+        Case 3: mnEliminar_Click
+        
+        Case 5: mnBuscar_Click
+        Case 6: mnVerTodos_Click
+        
+        Case 8   'Imprimir Listado de Categorias
+            Me.Hide
+            frmInformesNew.OpcionListado = 23 '6 'OpcionListado=1
+            frmInformesNew.Show vbModal
+            Me.Show vbModal
     End Select
 End Sub
 
 
+
 Private Sub CargaGrid(Optional SQL As String)
+Dim i As Byte
 Dim b As Boolean
 Dim tots As String
-
+    
     b = DataGrid1.Enabled
 
     If SQL <> "" Then
@@ -722,31 +781,21 @@ Dim tots As String
     End If
     SQL = SQL & " ORDER BY codcateg"
     
-    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
 
     '### a mano
-    tots = "S|txtAux(0)|T|Cod.|800|;S|txtAux(1)|T|Descripción|3200|;N||||0|;S|CboCtrLotes|C|Ctr.Lotes|900|;"
-    arregla tots, DataGrid1, Me
+    tots = "S|txtAux(0)|T|Codigo|800|;S|txtAux(1)|T|Descripción|3200|;N||||0|;S|CboCtrLotes|C|Control Lotes|1500|;"
+    arregla tots, DataGrid1, Me, 350
 
     DataGrid1.Enabled = b
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
-   If Not adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If
-End Sub
-
-Private Sub CargaCombo()
-    'Carga la lista de impresión de etiquetas
-    Me.CboCtrLotes.Clear
-    CboCtrLotes.AddItem "No"
-    CboCtrLotes.ItemData(CboCtrLotes.NewIndex) = 0
-    
-    CboCtrLotes.AddItem "Si"
-    CboCtrLotes.ItemData(CboCtrLotes.NewIndex) = 1
 End Sub
 
 Private Sub txtAux_GotFocus(Index As Integer)
@@ -761,6 +810,7 @@ Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
+
 Private Sub txtAux_LostFocus(Index As Integer)
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
 End Sub
@@ -768,16 +818,21 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-    
+
     b = CompForm(Me, 3)
     If Not b Then Exit Function
-
-    'comprobamos si ya existe la forma de envio
+    
+    'Comprobar si ya existe el cod de marca en la tabla
     If Modo = 3 Then 'Insertar
         If ExisteCP(txtAux(0)) Then b = False
     End If
-
+    
     DatosOk = b
+End Function
+
+
+Private Function SepuedeBorrar() As Boolean
+    SepuedeBorrar = True
 End Function
 
 
@@ -791,3 +846,14 @@ End Sub
 Private Sub PonerOpcionesMenu()
     PonerOpcionesMenuGeneral Me
 End Sub
+
+Private Sub CargaCombo()
+    'Carga la lista de impresión de etiquetas
+    Me.CboCtrLotes.Clear
+    CboCtrLotes.AddItem "No"
+    CboCtrLotes.ItemData(CboCtrLotes.NewIndex) = 0
+    
+    CboCtrLotes.AddItem "Si"
+    CboCtrLotes.ItemData(CboCtrLotes.NewIndex) = 1
+End Sub
+

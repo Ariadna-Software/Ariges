@@ -631,8 +631,8 @@ Private Sub cmdBusq_Click()
     PonerFoco Text1(0)
 End Sub
 
-Private Sub cmdBusqueda_Click(index As Integer)
-     If index = 0 Then
+Private Sub cmdBusqueda_Click(Index As Integer)
+     If Index = 0 Then
         SQL = "      rcampos.codclien > 0"
             'rcampos inner join @#rpartida on rcampos.codparti = rpartida.codparti)"
             'variedades on rcampos.codvarie = variedades.codvarie)"
@@ -666,7 +666,7 @@ Private Sub cmdBusqueda_Click(index As Integer)
     
 End Sub
 
-Private Sub cmdCancelar_Click(index As Integer)
+Private Sub cmdCancelar_Click(Index As Integer)
 
     CadenaDesdeOtroForm = ""  'por si las moscas
     Unload Me
@@ -938,16 +938,16 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
     SQL = CadenaDevuelta
 End Sub
 
-Private Sub imgBusc_Click(index As Integer)
+Private Sub imgBusc_Click(Index As Integer)
     
     Screen.MousePointer = vbHourglass
     Set frmB = New frmBuscaGrid
     
-    If index < 2 Then
+    If Index < 2 Then
         frmB.vCampos = "Codigo|" & vParamAplic.Ariagro & ".rsocios|codsocio|N|0000000|20·Nombre|" & vParamAplic.Ariagro & ".rsocios|nomsocio|T||70·"
         frmB.vTabla = vParamAplic.Ariagro & ".rsocios"
         frmB.vTitulo = "Socios"
-    ElseIf index < 4 Then
+    ElseIf Index < 4 Then
         frmB.vCampos = "Codigo|sclien|codclien|N|0000000|20·Nombre|sclien|nomclien|T||70·"
         frmB.vTabla = "sclien"
         frmB.vTitulo = "Clientes"
@@ -971,33 +971,33 @@ Private Sub imgBusc_Click(index As Integer)
  '       Debug.Print lw11.ColumnHeaders(i).Text & " " & lw11.ColumnHeaders(i).Width
  '   Next i
     If SQL <> "" Then
-        Text1(index).Text = RecuperaValor(SQL, 1)
-        Text2(index).Text = RecuperaValor(SQL, 2)
+        Text1(Index).Text = RecuperaValor(SQL, 1)
+        Text2(Index).Text = RecuperaValor(SQL, 2)
         SQL = ""
-        If index = 5 Then
+        If Index = 5 Then
             PonerFocoBtn Me.cmdBusqueda(0)
         Else
-            PonerFoco Text1(index + 1)
+            PonerFoco Text1(Index + 1)
         End If
     End If
 End Sub
 
-Private Sub imgCheck_Click(index As Integer)
-    If index <= 1 Then
+Private Sub imgCheck_Click(Index As Integer)
+    If Index <= 1 Then
         For NumRegElim = 1 To lw11.ListItems.Count
-           lw11.ListItems(NumRegElim).Checked = index = 1
+           lw11.ListItems(NumRegElim).Checked = Index = 1
         Next
     Else
             
         For NumRegElim = 1 To lwCamposAgrupados.ListItems.Count
-             Me.lwCamposAgrupados.ListItems(NumRegElim).Checked = index = 2
+             Me.lwCamposAgrupados.ListItems(NumRegElim).Checked = Index = 2
         Next
     End If
 End Sub
 
 Private Sub lw11_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.index - 1 <> Me.lw11.SortKey Then
-        lw11.SortKey = ColumnHeader.index - 1
+    If ColumnHeader.Index - 1 <> Me.lw11.SortKey Then
+        lw11.SortKey = ColumnHeader.Index - 1
         lw11.SortOrder = lvwAscending
     Else
         If lw11.SortOrder = lvwAscending Then
@@ -1018,8 +1018,8 @@ Private Sub lw11_ItemCheck(ByVal Item As MSComctlLib.ListItem)
 End Sub
 
 Private Sub lwCamposAgrupados_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.index - 1 <> Me.lwCamposAgrupados.SortKey Then
-        lwCamposAgrupados.SortKey = ColumnHeader.index - 1
+    If ColumnHeader.Index - 1 <> Me.lwCamposAgrupados.SortKey Then
+        lwCamposAgrupados.SortKey = ColumnHeader.Index - 1
         lwCamposAgrupados.SortOrder = lvwAscending
     Else
         If lwCamposAgrupados.SortOrder = lvwAscending Then
@@ -1030,37 +1030,37 @@ Private Sub lwCamposAgrupados_ColumnClick(ByVal ColumnHeader As MSComctlLib.Colu
     End If
 End Sub
 
-Private Sub Text1_GotFocus(index As Integer)
-    ConseguirFoco Text1(index), 3
+Private Sub Text1_GotFocus(Index As Integer)
+    ConseguirFoco Text1(Index), 3
 End Sub
 
-Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub Text1_LostFocus(index As Integer)
-    Text1(index).Text = Trim(Text1(index).Text)
+Private Sub Text1_LostFocus(Index As Integer)
+    Text1(Index).Text = Trim(Text1(Index).Text)
     SQL = ""
-    If Text1(index).Text <> "" Then
-        If Not PonerFormatoEntero(Text1(index)) Then
-            Text1(index).Text = ""
+    If Text1(Index).Text <> "" Then
+        If Not PonerFormatoEntero(Text1(Index)) Then
+            Text1(Index).Text = ""
         
         Else
-            If index < 2 Then
+            If Index < 2 Then
                 'Socio
-                SQL = DevuelveDesdeBD(conAri, "nomsocio", vParamAplic.Ariagro & ".rsocios", "codsocio", Text1(index).Text)
+                SQL = DevuelveDesdeBD(conAri, "nomsocio", vParamAplic.Ariagro & ".rsocios", "codsocio", Text1(Index).Text)
                 If SQL = "" Then SQL = "NO existe el socio"
-            ElseIf index < 4 Then
-                SQL = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(index).Text)
+            ElseIf Index < 4 Then
+                SQL = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(Index).Text)
                 If SQL = "" Then SQL = "NO existe el cliente"
                     
             Else
                 'Variedad
-                SQL = DevuelveDesdeBD(conAri, "nomvarie", vParamAplic.Ariagro & ".variedades", "codvarie", Text1(index).Text)
+                SQL = DevuelveDesdeBD(conAri, "nomvarie", vParamAplic.Ariagro & ".variedades", "codvarie", Text1(Index).Text)
                 If SQL = "" Then SQL = "NO existe la variedad"
             End If
             
         End If
     End If
-    Text2(index).Text = SQL
+    Text2(Index).Text = SQL
 End Sub

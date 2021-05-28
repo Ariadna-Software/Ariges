@@ -43,7 +43,7 @@ Private mTextoCom As String 'texto a mostrar para compras
 
 Private mCodProve As Long   'codigo proveedor
 
-Private mEstablecidoPrecioMinimo As Boolean
+Private mEstablecidoPrecioMinimo2 As Boolean
 Private mPrecioMinimo As Currency
 
 
@@ -248,7 +248,7 @@ End Property
 
 '**** Precio minimo. Solo lo utlizara HERBELCA, de mommento
 Public Property Get EstablecidoPrecioMinimo() As Boolean
-     EstablecidoPrecioMinimo = mEstablecidoPrecioMinimo
+     EstablecidoPrecioMinimo = mEstablecidoPrecioMinimo2
 End Property
 
 Public Property Get PrecioMinimo() As Currency
@@ -344,10 +344,10 @@ Dim SQL As String
         
         Codprove = DBLet(RS!Codprove, "N")
         
-        mEstablecidoPrecioMinimo = False
+        mEstablecidoPrecioMinimo2 = False
         If Not EsDeVarios Then
             If DBLet(RS!preciominvta, "N") > 0 Then
-                mEstablecidoPrecioMinimo = True
+                mEstablecidoPrecioMinimo2 = True
                 mPrecioMinimo = RS!preciominvta
             End If
         End If
@@ -1070,20 +1070,26 @@ End Function
 
 'Solo `para herbelca, de momento. Calculará el precio minimo
 'A partir de la familia y el maximo de los descuentos
-Public Sub FijarprecioMinimo(FechaCalculo As Date, codClien As Long)
+Public Sub FijarprecioMinimo_(FechaCalculo As Date, codClien As Long)
 Dim RS As ADODB.Recordset
 Dim Precio As Currency
 Dim Porcen As Currency
 Dim SQL As String
 Dim LlevaDescuentoEspecial As Boolean
-Dim EstaprMiniEnlaFicha As Boolean
+Dim EstaprMinimoEnlaFicha As Boolean
+Dim DtoAdicional As Currency
+Dim Porcen1 As Currency
+Dim Porcen2 As Currency
+
     On Error GoTo eFijarprecioMinimo
 
     Set RS = New ADODB.Recordset
+
     
-    
-    EstaprMiniEnlaFicha = mEstablecidoPrecioMinimo
-    
+    EstaprMinimoEnlaFicha = mEstablecidoPrecioMinimo2
+    'Herbelca 29 Cotuber 2020     HERBELCA Dic2020, volvemos a qie no recalcule si esta en la ficha
+    'Siempre recalcula
+    'EstaprMinimoEnlaFicha = False
         
     SQL = "select precioac,coalesce(fechanue,'2100-01-01') FE,precionu from slista WHERE codlista=1 AND codartic=" & DBSet(mCodArtic, "T")
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1100,6 +1106,15 @@ Dim EstaprMiniEnlaFicha As Boolean
     If Precio < 0 Then Exit Sub
     
     
+    DtoAdicional = 0
+    SQL = "select  dtopmv from sfamia where codfamia=" & mCodFamia
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then DtoAdicional = DBLet(RS!Dtopmv, "N")
+    RS.Close
+    
+    
+    
+    
     
     'DTO ESPECIAL
     LlevaDescuentoEspecial = False
@@ -1108,7 +1123,7 @@ Dim EstaprMiniEnlaFicha As Boolean
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
             If Not IsNull(RS.Fields(0)) Then
-                Porcen = 100 - RS.Fields(0)
+                Porcen = 100 - (RS.Fields(0) + DtoAdicional)
                 Porcen = Porcen / 100
                 Precio = Round(Precio * Porcen, 4)
                 LlevaDescuentoEspecial = True
@@ -1121,27 +1136,72 @@ Dim EstaprMiniEnlaFicha As Boolean
     
         'Si el precio ya estaba establecido
         
-        If EstaprMiniEnlaFicha Then
+        If EstaprMinimoEnlaFicha Then
             'El precio minimo es el de la ficha
+            If DtoAdicional > 0 Then mPrecioMinimo = Round(mPrecioMinimo * ((100 - DtoAdicional) / 100), 2)
             Set RS = Nothing
             Exit Sub
         End If
     
-        
     
-        SQL = "select dtoline1+dtoline2 from sfamiadtos,sfamiatipodto where sfamiadtos.clasifica=sfamiatipodto.clasifica and codfamia=" & mCodFamia & " ORDER BY 1 desc"
+        Porcen1 = 0
+        Porcen2 = 0
+            
+        SQL = "select dtoline1,dtoline2 from sfamiadtos,sfamiatipodto where sfamiadtos.clasifica=sfamiatipodto.clasifica and codfamia=" & mCodFamia & " ORDER BY 1 desc"
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
-            If Not IsNull(RS.Fields(0)) Then
-                Porcen = 100 - RS.Fields(0)
-                Porcen = Porcen / 100
-                Precio = Round(Precio * Porcen, 4)
-            End If
+            If Not IsNull(RS.Fields(0)) Then Porcen1 = RS.Fields(0)
+            If Not IsNull(RS.Fields(1)) Then Porcen2 = RS.Fields(1)
+                
+''''                'Aditivos
+''''                'Porcen = 100 - (RS.Fields(0) + DtoAdicional)
+''''                'Porcen = Porcen / 100
+''''                'Precio = Round(Precio * Porcen, 4)
+''''
+''''
+''''
+''''                Porcen = 100 - (RS.Fields(0))
+''''                Porcen = Porcen / 100
+''''                Precio = Round(Precio * Porcen, 4)
+''''
+''''
+''''                Porcen = 100 - DtoAdicional
+''''                Porcen = Porcen / 100
+''''                Precio = Round(Precio * Porcen, 4)
+''''
+                            
         End If
         RS.Close
         
+
+        If Porcen1 = 0 And Porcen2 = 0 And DtoAdicional = 0 Then SQL = ""
+
+        
+        If SQL <> "" Then
+                ''''                'Aditivos
+                If vParamAplic.TipoDtos = 0 Then
+                    'Aditivos
+                    Porcen = 100 - (Porcen1 + Porcen2)
+                    Porcen = Porcen / 100
+                    Precio = Round(Precio * Porcen, 4)
+                                
+                Else
+                    'Sobre resto
+                    Porcen = 100 - (Porcen1)
+                    Porcen = Porcen / 100
+                    Precio = Round(Precio * Porcen, 4)
+                    Porcen = 100 - (Porcen2)
+                    Porcen = Porcen / 100
+                    Precio = Round(Precio * Porcen, 4)
+                End If
+                Porcen = 100 - DtoAdicional
+                Porcen = Porcen / 100
+                Precio = Round(Precio * Porcen, 4)
+        End If
+        
+        
     End If
-    mEstablecidoPrecioMinimo = True
+    mEstablecidoPrecioMinimo2 = True
     mPrecioMinimo = Precio
     
 eFijarprecioMinimo:

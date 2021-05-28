@@ -3,19 +3,40 @@ Begin VB.Form frmIdentifica
    BackColor       =   &H00800000&
    BorderStyle     =   0  'None
    Caption         =   "Form1"
-   ClientHeight    =   6105
+   ClientHeight    =   5655
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   7590
+   ClientWidth     =   8790
+   KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
-   ScaleHeight     =   6105
-   ScaleWidth      =   7590
+   ScaleHeight     =   5655
+   ScaleWidth      =   8790
    StartUpPosition =   2  'CenterScreen
+   Begin VB.ComboBox Combo1 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   390
+      ItemData        =   "frmIdentifica.frx":0000
+      Left            =   4440
+      List            =   "frmIdentifica.frx":0002
+      Style           =   2  'Dropdown List
+      TabIndex        =   0
+      Top             =   2880
+      Width           =   2925
+   End
    Begin VB.Timer Timer1 
       Enabled         =   0   'False
       Interval        =   1000
-      Left            =   1080
-      Top             =   5280
+      Left            =   5760
+      Top             =   480
    End
    Begin VB.TextBox Text1 
       Alignment       =   2  'Center
@@ -39,7 +60,7 @@ Begin VB.Form frmIdentifica
       TabIndex        =   1
       Text            =   "Text1"
       Top             =   4560
-      Width           =   3015
+      Width           =   2895
    End
    Begin VB.TextBox Text1 
       Alignment       =   2  'Center
@@ -48,20 +69,67 @@ Begin VB.Form frmIdentifica
       BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Verdana"
-         Size            =   12
+         Size            =   8.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   210
       Index           =   0
       Left            =   4320
-      TabIndex        =   0
+      TabIndex        =   2
       Text            =   "Text1"
       Top             =   1920
-      Width           =   3015
+      Width           =   1575
+   End
+   Begin VB.Image imgBl 
+      Height          =   240
+      Left            =   4080
+      Picture         =   "frmIdentifica.frx":0004
+      Top             =   4920
+      Visible         =   0   'False
+      Width           =   240
+   End
+   Begin VB.Label lblMay 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Tecla Bloq. Mayús esta activada"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00808080&
+      Height          =   375
+      Left            =   4440
+      TabIndex        =   8
+      Top             =   5280
+      Visible         =   0   'False
+      Width           =   3375
+   End
+   Begin VB.Label lblInd 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Cargando ..."
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00765341&
+      Height          =   285
+      Left            =   960
+      TabIndex        =   7
+      Top             =   5160
+      Width           =   3495
    End
    Begin VB.Label lblTiempo 
       BackStyle       =   0  'Transparent
@@ -82,25 +150,6 @@ Begin VB.Form frmIdentifica
       Top             =   0
       Width           =   7335
    End
-   Begin VB.Label Label11 
-      BackStyle       =   0  'Transparent
-      Caption         =   "Usuario"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   120
-      TabIndex        =   5
-      Top             =   5520
-      Width           =   2175
-   End
    Begin VB.Label Label1 
       BackStyle       =   0  'Transparent
       Caption         =   "Cargando ....."
@@ -116,9 +165,9 @@ Begin VB.Form frmIdentifica
       ForeColor       =   &H00FFFFFF&
       Height          =   375
       Index           =   2
-      Left            =   5160
-      TabIndex        =   4
-      Top             =   4560
+      Left            =   5280
+      TabIndex        =   5
+      Top             =   5160
       Width           =   2175
    End
    Begin VB.Label Label1 
@@ -137,7 +186,7 @@ Begin VB.Form frmIdentifica
       Height          =   375
       Index           =   1
       Left            =   4320
-      TabIndex        =   3
+      TabIndex        =   4
       Top             =   4560
       Width           =   2175
    End
@@ -157,7 +206,7 @@ Begin VB.Form frmIdentifica
       Height          =   375
       Index           =   0
       Left            =   4320
-      TabIndex        =   2
+      TabIndex        =   3
       Top             =   3600
       Width           =   2175
    End
@@ -165,7 +214,7 @@ Begin VB.Form frmIdentifica
       Height          =   5655
       Left            =   0
       Top             =   0
-      Width           =   7575
+      Width           =   8775
    End
 End
 Attribute VB_Name = "frmIdentifica"
@@ -178,6 +227,39 @@ Option Explicit
 Dim PrimeraVez As Boolean
 Dim T1 As Single
 Dim Segundos As Integer
+
+
+
+
+Dim UltUsu_ As String
+Dim UltEmpre_ As String
+
+
+
+
+
+
+Private Sub Combo1_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub KEYpress(KeyAscii As Integer)
+Dim cerrar As Boolean
+    
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+End Sub
+
+
+Private Sub Combo1_LostFocus()
+    Text1(0).Text = Combo1.Text
+End Sub
+
+
+
+
+
+
 
 Private Sub Form_Activate()
     If PrimeraVez Then
@@ -216,7 +298,13 @@ Private Sub Form_Activate()
          GestionaPC
         
          'Leemos el ultimo usuario conectado
-         NumeroEmpresaMemorizar True
+         UltimoUsuarioLogado True, UltUsu_
+         Text1(0).Text = UltUsu_
+         
+         
+         CargaCombo
+         PosicionarCombo2 Combo1, Text1(0)
+         
          
          T1 = T1 + 2.5 - Timer
          If T1 > 0 Then Espera T1
@@ -233,10 +321,16 @@ Private Sub Form_Activate()
             PonerFoco Text1(0)
          End If
         
+        
+        LeeMayusculas_
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
+
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+    LeeMayusculas_
+End Sub
 
 Private Sub Form_Load()
     Screen.MousePointer = vbHourglass
@@ -245,7 +339,7 @@ Private Sub Form_Load()
     Text1(0).Text = ""
     Text1(1).Text = ""
     lblTiempo.Caption = ""
-    Label11.Caption = "Ver. " & App.Major & "." & App.Minor & "." & App.Revision
+    lblInd.Caption = "Ver. " & App.Major & "." & App.Minor & "." & App.Revision
     PrimeraVez = True
     CargaImagen
 End Sub
@@ -269,26 +363,36 @@ End Sub
 Private Sub FijarText()
 Dim L As Long
     On Error GoTo EF
-    L = Me.Width - Text1(0).Width - 120
+    L = Me.Width - Text1(1).Width - 120
     Text1(0).Left = L
     Text1(1).Left = L
     Me.Label1(0).Left = L
     Me.Label1(1).Left = L
     Me.Label1(2).Left = L
-    
-    
-    L = Me.Height - Label1(2).Height - 120
+    lblMay.Left = L
+    Combo1.Left = L
+    Me.imgBl.Left = L - Me.imgBl.Width - 30
+    L = Label1(2).Height + 220
+    L = Me.Height - L
+    L = IIf(L <= 500, 500, L)
     Me.Label1(2).Top = L
     Text1(1).Top = L
+    imgBl.Top = L
     L = L - 320   '375 + algo
     Label1(1).Top = L
     L = L - 350 '330+20
     Text1(0).Top = L
+    Combo1.Top = L - 90
     L = L - 380
     Label1(0).Top = L
     
     
-    Label11.Top = Me.Height - Label11.Height
+    
+    
+    lblInd.Top = Me.Height - lblInd.Height - 15
+    lblMay.Top = lblInd.Top
+    
+    
     
 EF:
     If Err.Number <> 0 Then MuestraError Err.Number
@@ -297,7 +401,7 @@ End Sub
 
 
 Private Sub Form_Unload(Cancel As Integer)
-    NumeroEmpresaMemorizar False
+    If Text1(0).Text <> UltUsu_ Then UltimoUsuarioLogado False, Text1(0).Text
 End Sub
 
 
@@ -339,8 +443,16 @@ Private Sub Text1_LostFocus(Index As Integer)
     If Text1(0).Text <> "" And Text1(1).Text <> "" Then
         'Probar conexion usuario
         Validar
+    
+    Else
+        If Index = 1 Then
+            If Text1(1).Text = "" Then PonerFocoOBj Me.Combo1
+        End If
+    
+    
     End If
         
+    
 End Sub
 
 
@@ -366,12 +478,20 @@ Dim OK As Byte
     
     If OK <> 0 Then
         MsgBox "Usuario-Clave Incorrecto", vbExclamation
-
+            LeeMayusculas_
             Text1(1).Text = ""
             PonerFoco Text1(0)
+            
+            
+            
+            
     Else
         'OK
         Timer1.Enabled = False
+       
+        
+                                'Con codejcok
+        If vUsu.Skin >= 0 Then UsuarioCorrecto
         CadenaDesdeOtroForm = "OK"
         Unload Me
     End If
@@ -382,6 +502,7 @@ End Sub
 Private Sub PonerVisible(visible As Boolean)
     Label1(2).visible = Not visible  'Cargando
     Text1(0).visible = visible
+    Combo1.visible = visible
     Text1(1).visible = visible
     Label1(0).visible = visible
     Label1(1).visible = visible
@@ -389,39 +510,6 @@ End Sub
 
 
 
-
-'Lo que haremos aqui es ver, o guardar, el ultimo numero de empresa
-'a la que ha entrado, y el usuario
-Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
-Dim NF As Integer
-Dim cad As String
-On Error GoTo ENumeroEmpresaMemorizar
-
-
-        
-    cad = App.Path & "\ultusu.dat"
-    If Leer Then
-        If Dir(cad) <> "" Then
-            NF = FreeFile
-            Open cad For Input As #NF
-            Line Input #NF, cad
-            Close #NF
-            cad = Trim(cad)
-            
-                'El primer pipe es el usuario
-                Text1(0).Text = cad
-    
-        End If
-    Else 'Escribir
-        NF = FreeFile
-        Open cad For Output As #NF
-        cad = Text1(0).Text
-        Print #NF, cad
-        Close #NF
-    End If
-ENumeroEmpresaMemorizar:
-    Err.Clear
-End Sub
 
 Private Sub Timer1_Timer()
     Segundos = Segundos - 1
@@ -437,3 +525,205 @@ Private Sub Timer1_Timer()
         End If
     End If
 End Sub
+
+Private Sub LeeMayusculas_()
+Dim Tmp
+Dim keys(0 To 255) As Byte
+Dim VK_CAPITAL 'As Byte
+    On Error GoTo el
+    imgBl.visible = False
+    lblMay.visible = False
+    
+    
+       ' Tmp = GetKeyState(vbKeyCapital)
+       ' If Tmp = 1 Then
+       '     Image2.visible = True
+       '     Me.Label1(4).visible = True
+       ' End If
+        
+        GetKeyboardState keys(0)
+        VK_CAPITAL = &H14
+       ' Debug.Print Timer & " " & keys(VK_CAPITAL)
+        If keys(VK_CAPITAL) = 1 Or keys(VK_CAPITAL) = 129 Then
+            imgBl.visible = True
+            lblMay.visible = True
+        End If
+   
+el:
+    Err.Clear
+End Sub
+
+Private Sub CargaCombo()
+'Dim miRsAux As ADODB.Recordset
+
+    Combo1.Clear
+    'Conceptos
+    Set miRsAux = New ADODB.Recordset
+    
+    miRsAux.Open "Select * from usuarios.usuarios where nivelusu <> -1 order by login", conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+
+    
+    While Not miRsAux.EOF
+        Combo1.AddItem miRsAux!Login
+        Combo1.ItemData(Combo1.NewIndex) = miRsAux!CodUsu
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+    'Aprovecho aqui para leer unas para el calendario
+    TextosLabelEspanol = "select texto from usuarios.calendaretiquetas order by id"
+    miRsAux.Open TextosLabelEspanol, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    TextosLabelEspanol = ""
+    While Not miRsAux.EOF
+        TextosLabelEspanol = TextosLabelEspanol & miRsAux!texto & "|"
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+        
+    If TextosLabelEspanol = "" Then
+        TextosLabelEspanol = "Ninguna|Importante|Negocios|Personal|Vacaciones|Atender|Viaje|"
+        TextosLabelEspanol = TextosLabelEspanol & "Preparar|Cumpleaños|Aniversario|Llamada|"
+    End If
+
+    
+    
+    Set miRsAux = Nothing
+    
+End Sub
+
+
+Public Sub pLabel(texto As String)
+
+    Me.Label1(2).Caption = texto
+    Label1(2).Refresh
+    Espera 0.1
+End Sub
+
+
+
+Private Sub UsuarioCorrecto()
+Dim SQL As String
+Dim PrimeraBD As String
+Dim EmpreProhibid As String
+
+        Screen.MousePointer = vbHourglass
+        CadenaDesdeOtroForm = "OK"
+        Label1(2).Caption = "Leyendo ."  'Si tarda pondremos texto aquin
+        
+        PonerVisible False
+        Me.Refresh
+        Espera 0.1
+        Me.Refresh
+
+        Screen.MousePointer = vbHourglass
+        
+        
+        pLabel "Conectando BD"
+        
+       Screen.MousePointer = vbHourglass
+       
+       EmpreProhibid = DevuelveProhibidasSys
+        
+       UltimoEmpresaLogada True, UltEmpre_
+       
+                                    'Va por modo antiguo. Vamos a buscar su empresa vinculada (arigesXX y guardarlo sin mas)
+       If InStr(1, UltEmpre_, "|") > 0 Then
+            DevuelveArigesXXX
+            If UltEmpre_ <> "" Then UltimoEmpresaLogada False, UltEmpre_
+        Else
+            
+        End If
+        ' antes de cerrar la conexion cojo de usuarios.empresasariconta la primera que encuentre
+        ' que no este bloqueada
+        SQL = "select min(codempre) from usuarios.empresasariges  "
+        SQL = SQL & " WHERE codempre>0 and not codempre in (select codempre from usuarios.usuarioempresasariges where codusu =" & vUsu.ID & ")"
+        
+        PrimeraBD = DevuelveValor(SQL)
+    
+        If UltEmpre_ = "" And PrimeraBD <> "" Then
+            UltEmpre_ = PrimeraBD
+            UltimoEmpresaLogada False, UltEmpre_
+        End If
+        CadenaDesdeOtroForm = UltEmpre_
+        
+        'Veo si la empresa prohibida es esta
+        If EmpreProhibid <> "" Then
+            SQL = Trim(Replace(CadenaDesdeOtroForm, "ariges", ""))
+            SQL = "|" & SQL & "|"
+            If InStr(1, EmpreProhibid, SQL) > 0 Then
+                'Empresa entre las prohibidas. BUscamois otra
+                If PrimeraBD = 0 Then
+                    MsgBox "NO teiene acceso a empresas del sistema", vbCritical
+                    Set conn = Nothing
+                    End
+                Else
+                    CadenaDesdeOtroForm = "ariges" & PrimeraBD
+                End If
+            End If
+                 
+        End If
+        pLabel "Abriendo " & CadenaDesdeOtroForm
+        vUsu.CadenaConexion = CadenaDesdeOtroForm
+        If AbrirConexion() = False Then
+            CadenaDesdeOtroForm = "ariges" & PrimeraBD
+            vUsu.CadenaConexion = CadenaDesdeOtroForm
+            If AbrirConexion() = False Then
+                End
+            End If
+        End If
+        
+        Screen.MousePointer = vbHourglass
+        pLabel "Leyendo parametros"
+        LeerDatosEmpresa
+        LeerParametros
+        
+        If AbrirConexionConta(False) = False Then
+            MsgBox "La aplicación no puede continuar sin acceso a los datos contables. ", vbCritical
+            End
+        End If
+        
+        
+        'Otras acciones
+        OtrasAcciones
+
+        'La madre de todas las batallas
+        pLabel "Cargando principal"
+
+        Load frmPpal
+        Load frmPpalN
+End Sub
+
+
+Private Function DevuelveProhibidasSys() As String
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open "Select * from usuarios.usuarioempresasariges WHERE codusu =" & vUsu.ID, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    DevuelveProhibidasSys = ""
+    While Not miRsAux.EOF
+        DevuelveProhibidasSys = DevuelveProhibidasSys & miRsAux.Fields(1) & "|"
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+    If DevuelveProhibidasSys <> "" Then DevuelveProhibidasSys = "|" & DevuelveProhibidasSys
+End Function
+
+Private Sub DevuelveArigesXXX()
+Dim B As Boolean
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open "Select nomempre,ariges from usuarios.empresasariges WHERE ariges<>''", conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    B = False
+    UltEmpre_ = Replace(UltEmpre_, "|", "")
+    While Not miRsAux.EOF
+        If Not B Then
+            If miRsAux!nomempre = UltEmpre_ Then
+                UltEmpre_ = miRsAux!AriGes
+                B = True
+            End If
+        End If
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+    If Not B Then UltEmpre_ = ""
+End Sub
+

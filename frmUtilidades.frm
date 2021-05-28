@@ -1,18 +1,18 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmUtilidades 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Utilidades"
    ClientHeight    =   5985
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   6840
+   ClientWidth     =   7830
    Icon            =   "frmUtilidades.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5985
-   ScaleWidth      =   6840
+   ScaleWidth      =   7830
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame frameCLI 
@@ -20,55 +20,100 @@ Begin VB.Form frmUtilidades
       Left            =   120
       TabIndex        =   12
       Top             =   4800
-      Width           =   5055
+      Width           =   6180
       Begin VB.ComboBox cboTipoMov 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Left            =   3000
          Style           =   2  'Dropdown List
          TabIndex        =   4
          Top             =   480
-         Width           =   1935
+         Width           =   2925
       End
       Begin VB.TextBox Text1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
          Left            =   200
          TabIndex        =   2
          Text            =   "Text1"
          Top             =   480
-         Width           =   1150
+         Width           =   1350
       End
       Begin VB.TextBox Text1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
          Left            =   1550
          TabIndex        =   3
          Text            =   "Text1"
          Top             =   480
-         Width           =   1150
+         Width           =   1350
       End
       Begin VB.Label Label3 
-         Caption         =   "Fecha Inicio"
+         Caption         =   "Fec.Inicio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   3
-         Left            =   200
+         Left            =   195
          TabIndex        =   15
-         Top             =   240
-         Width           =   900
+         Top             =   195
+         Width           =   990
       End
       Begin VB.Label Label3 
          Caption         =   "Fecha Fin"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   2
-         Left            =   1550
+         Left            =   1545
          TabIndex        =   14
-         Top             =   240
-         Width           =   810
+         Top             =   195
+         Width           =   1080
       End
       Begin VB.Image imfech 
          Height          =   240
          Index           =   3
-         Left            =   1110
+         Left            =   1245
          Picture         =   "frmUtilidades.frx":000C
          Top             =   240
          Width           =   240
@@ -76,50 +121,42 @@ Begin VB.Form frmUtilidades
       Begin VB.Image imfech 
          Height          =   240
          Index           =   2
-         Left            =   2460
+         Left            =   2640
          Picture         =   "frmUtilidades.frx":0097
          Top             =   240
          Width           =   240
       End
       Begin VB.Label Label5 
-         Caption         =   "Tipo Mov."
+         Caption         =   "Tipo Movimiento"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   3000
          TabIndex        =   13
-         Top             =   240
-         Width           =   1215
-      End
-   End
-   Begin VB.Frame frameBus2 
-      Height          =   1095
-      Left            =   120
-      TabIndex        =   9
-      Top             =   4680
-      Width           =   5055
-      Begin MSComctlLib.ProgressBar pb2 
-         Height          =   375
-         Left            =   120
-         TabIndex        =   10
-         Top             =   540
-         Width           =   4815
-         _ExtentX        =   8493
-         _ExtentY        =   661
-         _Version        =   393216
-         Appearance      =   1
-         Max             =   1000
-      End
-      Begin VB.Label Label4 
-         Height          =   255
-         Left            =   120
-         TabIndex        =   11
-         Top             =   240
-         Width           =   4035
+         Top             =   195
+         Width           =   1890
       End
    End
    Begin VB.CommandButton cmdBus 
       Caption         =   "&Buscar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   5400
+      Left            =   6480
       TabIndex        =   5
       Top             =   4860
       Width           =   1215
@@ -127,8 +164,17 @@ Begin VB.Form frmUtilidades
    Begin VB.CommandButton cmdCancel 
       Cancel          =   -1  'True
       Caption         =   "Can"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   5400
+      Left            =   6480
       TabIndex        =   6
       Top             =   5400
       Width           =   1215
@@ -138,8 +184,8 @@ Begin VB.Form frmUtilidades
       Left            =   120
       TabIndex        =   1
       Top             =   480
-      Width           =   6555
-      _ExtentX        =   11562
+      Width           =   7555
+      _ExtentX        =   13335
       _ExtentY        =   7329
       View            =   3
       LabelEdit       =   1
@@ -151,6 +197,15 @@ Begin VB.Form frmUtilidades
       BackColor       =   -2147483643
       BorderStyle     =   1
       Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       NumItems        =   0
    End
    Begin MSComctlLib.ProgressBar pb1 
@@ -165,6 +220,32 @@ Begin VB.Form frmUtilidades
       Appearance      =   1
       Max             =   1000
    End
+   Begin VB.Frame frameBus2 
+      Height          =   1095
+      Left            =   120
+      TabIndex        =   9
+      Top             =   4680
+      Width           =   6225
+      Begin MSComctlLib.ProgressBar pb2 
+         Height          =   375
+         Left            =   120
+         TabIndex        =   10
+         Top             =   540
+         Width           =   5940
+         _ExtentX        =   10478
+         _ExtentY        =   661
+         _Version        =   393216
+         Appearance      =   1
+         Max             =   1000
+      End
+      Begin VB.Label Label4 
+         Height          =   255
+         Left            =   120
+         TabIndex        =   11
+         Top             =   240
+         Width           =   4035
+      End
+   End
    Begin VB.Label Label2 
       Caption         =   "Label2"
       Height          =   255
@@ -176,7 +257,7 @@ Begin VB.Form frmUtilidades
    Begin VB.Label Label1 
       Caption         =   "Cuentas sin movimientos"
       BeginProperty Font 
-         Name            =   "Tahoma"
+         Name            =   "Verdana"
          Size            =   14.25
          Charset         =   0
          Weight          =   700
@@ -189,7 +270,7 @@ Begin VB.Form frmUtilidades
       Left            =   120
       TabIndex        =   0
       Top             =   60
-      Width           =   6615
+      Width           =   7515
    End
 End
 Attribute VB_Name = "frmUtilidades"
@@ -335,7 +416,7 @@ Private Sub Form_Load()
     Case 5     'Saltos en Facturas clientes
         Me.frameCLI.visible = True
         Label5.visible = Opcion = 5
-        Me.cboTipoMov.visible = Opcion = 5
+        Me.cboTipomov.visible = Opcion = 5
         CargaComboTipoMov
 '        FechasEjercicioConta FechaIni, FechaFin
         Text1(2).Text = Format(Now, "dd/mm/yyyy")
@@ -347,7 +428,7 @@ Private Sub Form_Load()
               '7: Facturas pendientes de contabilizar (Proveedores)
         Me.frameCLI.visible = True
         Label5.visible = Opcion = 5
-        Me.cboTipoMov.visible = False
+        Me.cboTipomov.visible = False
         Text1(2).Text = Format(Now, "dd/mm/yyyy")
         Text1(3).Text = Format(Now - 365, "dd/mm/yyyy")
         
@@ -372,7 +453,7 @@ Private Sub PonerCampos(NuevoEstado As Byte)
     Select Case NuevoEstado
     Case 0
         Me.Label2.Caption = ""
-        Me.pb1.visible = False
+        Me.Pb1.visible = False
         Me.cmdCancel.Caption = "&Salir"
         Me.cmdBus.Caption = "&Iniciar"
     Case 1
@@ -406,8 +487,8 @@ Dim clmX As ColumnHeader
         
         Set clmX = ListView1.ColumnHeaders.Add()
         clmX.Text = "T.Mov."
-        clmX.Width = 800
-        i = 3400
+        clmX.Width = 1000 '800
+        i = 4200 '3400
         SQL = "Codigo"
         
         Set clmX = ListView1.ColumnHeaders.Add()
@@ -428,22 +509,22 @@ Dim clmX As ColumnHeader
         If Opcion = 6 Then
             Set clmX = ListView1.ColumnHeaders.Add()
             clmX.Text = "T.Mov."
-            clmX.Width = 800
+            clmX.Width = 1000 '800
         End If
 '        i = 3400
 '        SQL = "Nº Factura"
         
         Set clmX = ListView1.ColumnHeaders.Add()
         clmX.Text = "Nº Factura"
-        clmX.Width = 1200
+        clmX.Width = 1500 '1200
         
         Set clmX = ListView1.ColumnHeaders.Add()
         clmX.Text = "Fecha"
-        clmX.Width = 1200
+        clmX.Width = 1500 '1200
         
         If Opcion = 7 Then
             Set clmX = ListView1.ColumnHeaders.Add()
-            clmX.Text = "Cod.Prov."
+            clmX.Text = "Código" '"Cod.Prov."
             clmX.Width = 1000
         End If
         
@@ -454,7 +535,7 @@ Dim clmX As ColumnHeader
             SQL = "Proveedor"
         End If
         clmX.Text = SQL
-        clmX.Width = 3000
+        clmX.Width = 3250 '3000
            
          
     End Select
@@ -546,10 +627,10 @@ Dim J As Integer
 '        Aux = Aux & cad & " <= " & DBSet(Text1(2).Text, "F")
 '    End If
     
-    If Me.cboTipoMov.List(Me.cboTipoMov.ListIndex) <> "" Then
+    If Me.cboTipomov.List(Me.cboTipomov.ListIndex) <> "" Then
 '    If txtCLI.Text <> "" Then
         If Aux <> "" Then Aux = Aux & " AND "
-        Aux = Aux & " codtipom = '" & Mid(Me.cboTipoMov.List(Me.cboTipoMov.ListIndex), 1, 3) & "'"
+        Aux = Aux & " codtipom = '" & Mid(Me.cboTipomov.List(Me.cboTipomov.ListIndex), 1, 3) & "'"
     End If
     
     
@@ -561,16 +642,16 @@ Dim J As Integer
        
     'Vale. Ya tenemos montado el SQL
     Set RS = New ADODB.Recordset
-    RS.Open "SELECT " & SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open "SELECT " & SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'Serie
     Aux = ""
     Anyo = 0
     While Not RS.EOF
 '        If Opcion = 5 Then
-        If RS!codTipoM <> Aux Then
+        If RS!codtipom <> Aux Then
             'Nueva SERIE
-            Aux = RS!codTipoM
+            Aux = RS!codtipom
             Anyo = RS!Anyo
             i = RS!Codigo
         End If
@@ -593,7 +674,7 @@ Dim J As Integer
                 'SALTO
                 cad = Format(RS!Codigo - 1, "0000000")
                '--- Para clientes
-                Set ItmX = ListView1.ListItems.Add(, , RS!codTipoM)
+                Set ItmX = ListView1.ListItems.Add(, , RS!codtipom)
                 ItmX.SubItems(1) = cad
                 J = 2
                 '----
@@ -605,7 +686,7 @@ Dim J As Integer
                 'HUECO
                 cad = Format(i, "0000000")
                 '--- Para clientes
-                Set ItmX = ListView1.ListItems.Add(, , RS!codTipoM)
+                Set ItmX = ListView1.ListItems.Add(, , RS!codtipom)
                 ItmX.SubItems(1) = cad
                 J = 2
                 '---
@@ -637,17 +718,17 @@ Dim i As Byte
     
     On Error Resume Next
     
-    Me.cboTipoMov.Clear
+    Me.cboTipomov.Clear
     
     SQL = "SELECT codtipom,nomtipom FROM stipom WHERE codtipom LIKE 'F%'"
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RS.EOF
         SQL = RS!nomtipom
         SQL = Replace(SQL, "Factura", "Fact.")
-        cboTipoMov.AddItem RS!codTipoM & " - " & SQL
-        cboTipoMov.ItemData(cboTipoMov.NewIndex) = i
+        cboTipomov.AddItem RS!codtipom & " - " & SQL
+        cboTipomov.ItemData(cboTipomov.NewIndex) = i
         i = i + 1
         RS.MoveNext
     Wend
@@ -656,9 +737,9 @@ Dim i As Byte
     
     
     'Situamos el combo en las facturas de venta que son mas comunes
-    For i = 0 To Me.cboTipoMov.ListCount - 1
-        If InStr(1, Me.cboTipoMov.List(i), "FAV") Then
-            Me.cboTipoMov.ListIndex = i
+    For i = 0 To Me.cboTipomov.ListCount - 1
+        If InStr(1, Me.cboTipomov.List(i), "FAV") Then
+            Me.cboTipomov.ListIndex = i
             Exit For
         End If
     Next i
@@ -697,25 +778,25 @@ Dim cad As String, Aux As String
     SQL = SQL & " and intconta = 0 "
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RS.EOF
         If Opcion = 6 Then
             '--- Para clientes
-            Set ItmX = ListView1.ListItems.Add(, , RS!codTipoM)
-            ItmX.SubItems(1) = Format(RS!NumFactu, "0000000")
+            Set ItmX = ListView1.ListItems.Add(, , RS!codtipom)
+            ItmX.SubItems(1) = Format(RS!Numfactu, "0000000")
             J = 2
             '----
         Else
-            Set ItmX = ListView1.ListItems.Add(, , Format(RS!NumFactu, "0000000"))
+            Set ItmX = ListView1.ListItems.Add(, , Format(RS!Numfactu, "0000000"))
             J = 1
         End If
         
         ItmX.SubItems(J) = RS!FecFactu
 '        ItmX.SubItems(J + 1) = "Salto desde codigo: " & Format(i, "0000000")
         If Opcion = 6 Then
-            ItmX.SubItems(J + 1) = RS!nomclien
+            ItmX.SubItems(J + 1) = RS!NomClien
         Else
-            ItmX.SubItems(J + 1) = Format(RS!codProve, "000000")
+            ItmX.SubItems(J + 1) = Format(RS!Codprove, "000000")
             ItmX.SubItems(J + 2) = RS!nomprove
         End If
         ItmX.SmallIcon = 9

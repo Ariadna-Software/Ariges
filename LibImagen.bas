@@ -50,7 +50,7 @@ Public TotalTipos As Integer   'Menos 1. Es decir, si hay tres tipos la var vale
 Public Sub PonerArrayTiposMensaje()
 Dim L As Long
 Dim fin As Integer
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Cortar11 As String
 'Public Type RegistroTipoMensaje   ' Crea un tipo definido por el usuario.
@@ -76,7 +76,7 @@ Dim Cortar11 As String
     Cortar11 = "Select * from mailtipo order by tipo "
     miRsAux.Open Cortar11, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     J = 0
-    I = 0
+    i = 0
     
     
     While Not miRsAux.EOF
@@ -88,16 +88,16 @@ Dim Cortar11 As String
                 ArrayTipoMen(fin).Descripcion = ""
                 ArrayTipoMen(fin).Icono = 0
             Next fin
-            I = miRsAux!Tipo
+            i = miRsAux!Tipo
         End If
         
-        ArrayTipoMen(I).Color = DBLet(miRsAux!Color, "N")
-        ArrayTipoMen(I).Descripcion = miRsAux!Descripcion
-        ArrayTipoMen(I).Icono = miRsAux!numico
+        ArrayTipoMen(i).Color = DBLet(miRsAux!Color, "N")
+        ArrayTipoMen(i).Descripcion = miRsAux!Descripcion
+        ArrayTipoMen(i).Icono = miRsAux!numico
         J = miRsAux!Tipo
         
         miRsAux.MoveNext
-        I = I + 1
+        i = i + 1
     Wend
     miRsAux.Close
     Set miRsAux = Nothing
@@ -135,3 +135,60 @@ End Sub
 '    End If
 'End Sub
 '
+
+
+
+
+
+'Riesgo.  Se llamara en pase Ped-->Alb
+'         Y en albaranes cuando pase a cabecera
+Public Sub ActualizaRiesgoCliente(codClien As Long)
+Dim ImpAlb As Currency, ImpTesor As Currency
+Dim miSQL As String
+Dim RN As ADODB.Recordset
+    
+    On Error GoTo EActualizaRiesgoCliente
+
+    Set RN = New ADODB.Recordset
+    '                               ponia credisol
+    miSQL = "Select codclien,tipoiva,if(limcredi is null,0,limcredi) limcredi,codsitua,prioridad from sclien where codclien =" & codClien
+    RN.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    RiesgoCliente codClien, CByte(RN!TipoIVA), Now, ImpTesor, ImpAlb, Nothing, 60
+    ImpTesor = ImpTesor + ImpAlb
+    miSQL = "UPDATE sclien SET UtFecrecal = " & DBSet(Now, "F")
+    miSQL = miSQL & ", riesgoact = " & DBSet(ImpTesor, "N")
+        
+    ImpAlb = RN!limcredi
+    
+    If ImpTesor <= ImpAlb Then
+    
+        'NO supera el limite
+        If DBLet(RN!codsitua, "N") > 0 Then
+            'Estaba bloqueado por riesgo. Le quito la marca
+            If CInt(RN!codsitua) = vParamAplic.SituacionBloqueoOpAseg Then miSQL = miSQL & " ,codsitua = 0"
+            If CInt(RN!codsitua) = vParamAplic.SituacionBloqueoOpAsegSinbloq Then miSQL = miSQL & " ,codsitua = 0"
+        End If
+    Else
+        'SUPERA EL RIESGO
+        If DBLet(RN!codsitua, "N") = 0 Then
+        
+            If DBLet(RN!prioridad, "N") = 9 Then
+                'Situacion 9 es que puede elegir una situacion distinata(que solo avise, que no bloquee
+                miSQL = miSQL & " ,codsitua = " & vParamAplic.SituacionBloqueoOpAsegSinbloq
+            Else
+                'la noramal
+                miSQL = miSQL & " ,codsitua = " & vParamAplic.SituacionBloqueoOpAseg
+            End If
+        End If
+    End If
+    miSQL = miSQL & " WHERE codclien = " & codClien
+    conn.Execute miSQL
+    Espera 0.2
+    RN.Close
+    
+EActualizaRiesgoCliente:
+    If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
+    Set RN = Nothing
+End Sub
+

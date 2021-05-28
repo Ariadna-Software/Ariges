@@ -237,7 +237,7 @@ Dim rUd As ADODB.Recordset
 Dim Codmacta As String
 
 Dim UltimoNivel As Byte
-Dim i As Byte
+Dim I As Byte
 
     Set RS = New ADODB.Recordset
     Set rUd = New ADODB.Recordset
@@ -263,16 +263,16 @@ Dim i As Byte
                     End If
                     rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     'NO PUEDE SER EOF
-                    i = rs2!numnivel
-                    UltimoNivel = rs2.Fields("numdigi" & CStr(i))
+                    I = rs2!numnivel
+                    UltimoNivel = rs2.Fields("numdigi" & CStr(I))
                     rs2.Close
                     
                     
                     
                     'Para la gasolinera siempre cojera IdASOC
                     If rUd!IdUnidad = QueUDEsGasolinera Then
-                        i = UltimoNivel - Len(rUd!raiz_cliente_asociado)
-                        Codmacta = String(CLng(i), "0")
+                        I = UltimoNivel - Len(rUd!raiz_cliente_asociado)
+                        Codmacta = String(CLng(I), "0")
                          
                         Codmacta = rUd!raiz_cliente_asociado & Format(IdAsoc, Codmacta)
                         
@@ -283,8 +283,8 @@ Dim i As Byte
                         'Pueden ser varias cuentas a actualizar
                         If rUd!raiz_cliente_socio <> "" And RS!essocio = 1 Then
                             '
-                             i = UltimoNivel - Len(rUd!raiz_cliente_socio)
-                             Codmacta = String(CLng(i), "0")
+                             I = UltimoNivel - Len(rUd!raiz_cliente_socio)
+                             Codmacta = String(CLng(I), "0")
                              
                              Codmacta = rUd!raiz_cliente_socio & Format(RS!CodSocEuroagro, Codmacta)
                              
@@ -293,8 +293,8 @@ Dim i As Byte
                         End If
                                                 
                         If rUd!raiz_cliente_asociado <> "" And RS!essocio = 0 Then
-                            i = UltimoNivel - Len(rUd!raiz_cliente_asociado)
-                            Codmacta = String(CLng(i), "0")
+                            I = UltimoNivel - Len(rUd!raiz_cliente_asociado)
+                            Codmacta = String(CLng(I), "0")
                              
                             Codmacta = rUd!raiz_cliente_asociado & Format(IdAsoc, Codmacta)
                             
@@ -308,8 +308,8 @@ Dim i As Byte
                         
                         
                 If rUd!raiz_proveedor <> "" Then
-                    i = UltimoNivel - Len(rUd!raiz_proveedor)
-                    Codmacta = String(CLng(i), "0")
+                    I = UltimoNivel - Len(rUd!raiz_proveedor)
+                    Codmacta = String(CLng(I), "0")
                     
                     If RS!essocio = 1 Then
                         Codmacta = rUd!raiz_proveedor & Format(RS!CodSocEuroagro, Codmacta)
@@ -438,7 +438,7 @@ End Sub
 
 Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
     '-- Montamos el bucle de lectura de todos los asociados / socios
-    Dim i As Long
+    Dim I As Long
     Dim rs3 As ADODB.Recordset
     Dim CodMacCli As String
     Dim CodMacPro As String
@@ -497,7 +497,7 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
             SQL = SQL & DBSet(RS!fechabaja, "F", "S") & ","
             SQL = SQL & DBSet(RS!Correo, "T") & ","
             'Enero 2019. Codigiva
-            SQL = SQL & DBSet(RS!codiva, "N") & ","
+            SQL = SQL & DBSet(RS!CodIVA, "N") & ","
             SQL = SQL & DBSet(RS!TipoIrpf, "N") & ","
             SQL = SQL & "0,1)"
                 
@@ -538,7 +538,7 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
             SQL = SQL & " fechaalta = " & DBSet(RS!fechaalta, "F") & ","
             'Sql = Sql & " fechabaja = " & DBSet(RS!fechabaja, "F", "S") & ","
             SQL = SQL & " correo = " & DBSet(RS!Correo, "N") & ","
-            SQL = SQL & " codiva = " & DBSet(RS!codiva, "N") & ","
+            SQL = SQL & " codiva = " & DBSet(RS!CodIVA, "N") & ","
             SQL = SQL & " TipoIrpf = " & DBSet(RS!TipoIrpf, "N")
             
             SQL = SQL & " WHERE codsocio = " & DBSet(RS!CodSocEuroagro, "N")
@@ -568,15 +568,15 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
             End If
             rs3.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             'NO PUEDE SER EOF
-            i = rs3!numnivel
-            i = rs3.Fields("numdigi" & CStr(i))
+            I = rs3!numnivel
+            I = rs3.Fields("numdigi" & CStr(I))
             rs3.Close
            
             
             CodMacCli = ""
-            If DBLet(rs2!raiz_cliente_asociado, "T") <> "" Then CodMacCli = rs2!raiz_cliente_asociado & Format(RS!CodSocEuroagro, String(i - Len(rs2!raiz_cliente_asociado), "0"))
+            If DBLet(rs2!raiz_cliente_asociado, "T") <> "" Then CodMacCli = rs2!raiz_cliente_asociado & Format(RS!CodSocEuroagro, String(I - Len(rs2!raiz_cliente_asociado), "0"))
             CodMacPro = ""
-            If DBLet(rs2!raiz_proveedor, "T") <> "" Then CodMacPro = rs2!raiz_proveedor & Format(RS!CodSocEuroagro, String(i - Len(rs2!raiz_proveedor), "0"))
+            If DBLet(rs2!raiz_proveedor, "T") <> "" Then CodMacPro = rs2!raiz_proveedor & Format(RS!CodSocEuroagro, String(I - Len(rs2!raiz_proveedor), "0"))
 
             
             SQL = " codsocio = " & RS!CodSocEuroagro & " and codsecci "
@@ -590,7 +590,7 @@ Public Function ActualizaSocioAriagro(IdAsoc As Long) As Boolean
                 SQL = SQL & DBSet(RS!fechabaja, "F", "S") & ","
                 SQL = SQL & DBSet(CodMacCli, "T", "S") & ","
                 SQL = SQL & DBSet(CodMacPro, "T", "S") & ","
-                SQL = SQL & RS!codiva & ")"
+                SQL = SQL & RS!CodIVA & ")"
             Else
                 '-- Si existe y se modifica
                 SQL = "update ariagro.rsocios_seccion set "
@@ -708,8 +708,8 @@ Dim TipoConta As Byte
           '  End If
             '-- Ya exite, lo modificamos, aunque hay muchos campos que no se tocan
             SQL = "update " & ElArigaso & ".ssocio set "
-            'FALTA###
-            SQL = SQL & "codcoope=" & IdEntidadCoop & ","
+           
+            'SQL = SQL & "codcoope=" & IdEntidadCoop & ","   MARZO 2021   Lo quitamos
             SQL = SQL & "nomsocio=" & DBSet(RS!nomlargo, "T") & ","
             SQL = SQL & "domsocio=" & DBSet(RS!Direccion, "T") & ","
             SQL = SQL & "codposta=" & DBSet(RS!CodPostal, "T") & ","
@@ -764,180 +764,190 @@ End Function
 'Crear en Arifacelec
 Public Function ActAriFacElec(IdAsoc As Long) As Boolean
     
-    Set RS = New ADODB.Recordset
-    Set rs2 = New ADODB.Recordset
-    Dim Aux As String
-    Dim i As Integer
-    Dim idArifacelec As Long
-    Dim Actualizar As Boolean
-    Dim NombeyEmail As String
-    Dim AltaNueva As Boolean
-    Dim ACtualizaIdGesso As Boolean
+'Agosto 2020
+'           facelec YA no esta ahi, con lo cual nada de lo que hacia debe hacerlo.
+'           De momento lo comento todo.  Pero habria que quitarlo
     
-    SQL = "select * from asociados where IdAsoc = " & CStr(IdAsoc)
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        AltaNueva = False
-        ACtualizaIdGesso = False
-        
-        '-- Ahora miramos si el asociado ya existe en la aplicación
-        SQL = "select * from facelec_ariadna.cliente where cod_gessoc = " & CStr(IdAsoc)
-        rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        
-        If rs2.EOF Then
-        
-            'No eixste. Podria ser que con el mismo NIF estuviera dado de alta como ARIGES
-            
-            SQL = ""
-            
-            'Veremos si esta con codigo de ariges, o codigo ariges2
-            rs2.Close
-            
-            SQL = "select * from facelec_ariadna.cliente where codclien_ariges =" & CStr(IdAsoc) & " OR cod_clien_ariges2= " & CStr(IdAsoc)
-            SQL = SQL & " ORDER BY codclien_ariges,cod_clien_ariges2"
-            rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            SQL = ""
-            If rs2.EOF Then
-                AltaNueva = True
-            End If
-            ACtualizaIdGesso = True
-        End If
-        
-        
-        If AltaNueva Then
-
-            '-- No existe y hay que darlo de alta
-            '   Para darlo de alta hay que conocer la entidad a la que pertenece
-            '   y comprobar que está dada de alta en la gasolinera.
-        
-        
-            'No lleva la columna ID
-            SQL = "insert into facelec_ariadna.cliente (nombre,  login,    f_nueva,  id_empresa,  email,  contrasena, cif ,codclien_ariges" & _
-                    ",codclien__arigasol,  codclien_ariagro,  tiene_factura_p_r_o_v,  cod_socio_ariagro,  cod_clien_ariges2,cod_teletaxi,  cod_gessoc"
-                    
-            SQL = SQL & ") VALUES ("
-            SQL = SQL & DBSet(RS!nomlargo, "T") & ","
-            SQL = SQL & DBSet(RS!NIF, "T") & ",0,1,"   'nueva y id_empresa
-            SQL = SQL & DBSet(RS!mail, "T", "T") & ","
-            'contrasena, cif
-            SQL = SQL & DBSet(RS!NIF, "T") & "," & DBSet(RS!NIF, "T") & ","
-            'Codclien ariges codclien__arigasol ....
-            SQL = SQL & "0,0,0,0,0,0,0,"
-            SQL = SQL & IdAsoc & ")"
-            conn.Execute SQL
-            
-            'PARA QUE NO MUESTRE MSGBOX abajo
-            SQL = ""
-            
-        Else
-          
-            '-- Ya exite, Comprobamos el NIF, y comprobamos varias cosas
-            '--
-            SQL = ""
-            Actualizar = True
-            idArifacelec = rs2!i_d
-            NombeyEmail = RS!nomlargo & "|" & DBLet(RS!mail, "T") & "|"
-            If rs2!CIF <> RS!NIF Then
-                SQL = SQL & "    -CIF:  " & vbCrLf
-                Actualizar = False
-            End If
-            
-            If rs2!Nombre <> RS!nomlargo Then SQL = SQL & "    -nombre:" & rs2!Nombre & vbCrLf
-            If rs2!Login <> RS!NIF Then
-                SQL = SQL & "    -Login ()" & vbCrLf
-                Actualizar = False
-            End If
-            
-            
-            If rs2!codclien__arigasol > 0 Then
-                If rs2!codclien__arigasol <> RS!IdAsoc Then
-                    SQL = SQL & "-Facelec  arigasol" & vbCrLf
-                    Actualizar = False
-                End If
-            End If
-            If rs2!codclien_ariges > 0 Then
-                If rs2!codclien_ariges <> RS!IdAsoc Then
-                    SQL = SQL & "-Facelec  ariges(1)" & vbCrLf
-                    Actualizar = False
-                End If
-            End If
-            If rs2!cod_clien_ariges2 > 0 Then
-                If rs2!cod_clien_ariges2 <> RS!IdAsoc Then
-                    SQL = SQL & "-Facelec  ariges(2)" & vbCrLf
-                    Actualizar = False
-                End If
-            End If
-            
-            
-            If rs2!cod_socio_ariagro > 0 Then
-                If rs2!cod_socio_ariagro <> RS!CodSocEuroagro Then
-                    SQL = SQL & "-Facelec  socio euroagro" & vbCrLf
-                    Actualizar = False
-                End If
-            End If
-            
-            
-            
-        End If
-        
-        'Busco si hay algun cif o login en facelec que sea el del cliente y no sea el codigo asociado
-        rs2.Close
-        
-        'Comprobaremos si hay algun datao en facelec.clientes que tenga ya ese nif o ese login
-        ' el codasco NO sea el de aqui
-            'Octubre 2014. Metemos or cod_gessoc is null
-            Aux = "select * from facelec_ariadna.cliente where (cod_gessoc<>" & RS!IdAsoc & " or cod_gessoc is null )"
-            Aux = Aux & " and (login=" & DBSet(RS!NIF, "T") & " or cif=" & DBSet(RS!NIF, "T") & ") ORDER BY i_d"
-            rs2.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            Aux = ""
-            i = 0
-            While Not rs2.EOF
-                i = i + 1
-                Aux = Aux & "     " & Format(rs2!i_d, "00000")
-                If i > 4 Then
-                    Aux = Aux & vbCrLf
-                    i = 0
-                End If
-                rs2.MoveNext
-            Wend
-            
-            If Aux <> "" Then
-                Aux = "Errores vinculados al NIF(login-CIF)" & vbCrLf & Aux
-                If SQL <> "" Then SQL = SQL & vbCrLf & vbCrLf
-                SQL = SQL & Aux
-                Actualizar = False
-            End If
-            
-            If SQL <> "" Then
-                SQL = "Campos erroneos en Facturacion Electronica" & vbCrLf & vbCrLf & SQL
-                If Actualizar Then
-                    SQL = SQL & vbCrLf & " Desea continuar de igual modo?"
-                    If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Actualizar = False
-                Else
-                    MsgBox SQL, vbExclamation
-                End If
-                
-            End If
-        
-            If Actualizar Then
-                'Actualizaremos Nombre, email y nada mas
-                SQL = "UPDATE facelec_ariadna.cliente SET nombre=" & DBSet(RecuperaValor(NombeyEmail, 1), "T")
-                SQL = SQL & ", email=" & DBSet(RecuperaValor(NombeyEmail, 2), "T", "S")
-                'Actualizamos ges_soc y ariges
-                If ACtualizaIdGesso Then SQL = SQL & ", cod_gessoc =" & RS!IdAsoc
-                SQL = SQL & " WHERE i_d =" & idArifacelec
-                conn.Execute SQL
-            End If
-        
-        rs2.Close
-
-        ActAriFacElec = True
-    End If
-    RS.Close
-    Set RS = New ADODB.Recordset
-    Set rs2 = New ADODB.Recordset
-
+    ActAriFacElec = True
     
+    
+    
+    
+    
+'    Set RS = New ADODB.Recordset
+'    Set rs2 = New ADODB.Recordset
+'    Dim Aux As String
+'    Dim I As Integer
+'    Dim idArifacelec As Long
+'    Dim Actualizar As Boolean
+'    Dim NombeyEmail As String
+'    Dim AltaNueva As Boolean
+'    Dim ACtualizaIdGesso As Boolean
+'
+'    SQL = "select * from asociados where IdAsoc = " & CStr(IdAsoc)
+'    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+'    If Not RS.EOF Then
+'        AltaNueva = False
+'        ACtualizaIdGesso = False
+'
+'        '-- Ahora miramos si el asociado ya existe en la aplicación
+'        SQL = "select * from facelec_ariadna.cliente where cod_gessoc = " & CStr(IdAsoc)
+'        rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+'
+'        If rs2.EOF Then
+'
+'            'No eixste. Podria ser que con el mismo NIF estuviera dado de alta como ARIGES
+'
+'            SQL = ""
+'
+'            'Veremos si esta con codigo de ariges, o codigo ariges2
+'            rs2.Close
+'
+'            SQL = "select * from facelec_ariadna.cliente where codclien_ariges =" & CStr(IdAsoc) & " OR cod_clien_ariges2= " & CStr(IdAsoc)
+'            SQL = SQL & " ORDER BY codclien_ariges,cod_clien_ariges2"
+'            rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+'            SQL = ""
+'            If rs2.EOF Then
+'                AltaNueva = True
+'            End If
+'            ACtualizaIdGesso = True
+'        End If
+'
+'
+'        If AltaNueva Then
+'
+'            '-- No existe y hay que darlo de alta
+'            '   Para darlo de alta hay que conocer la entidad a la que pertenece
+'            '   y comprobar que está dada de alta en la gasolinera.
+'
+'
+'            'No lleva la columna ID
+'            SQL = "insert into facelec_ariadna.cliente (nombre,  login,    f_nueva,  id_empresa,  email,  contrasena, cif ,codclien_ariges" & _
+'                    ",codclien__arigasol,  codclien_ariagro,  tiene_factura_p_r_o_v,  cod_socio_ariagro,  cod_clien_ariges2,cod_teletaxi,  cod_gessoc"
+'
+'            SQL = SQL & ") VALUES ("
+'            SQL = SQL & DBSet(RS!nomlargo, "T") & ","
+'            SQL = SQL & DBSet(RS!NIF, "T") & ",0,1,"   'nueva y id_empresa
+'            SQL = SQL & DBSet(RS!mail, "T", "T") & ","
+'            'contrasena, cif
+'            SQL = SQL & DBSet(RS!NIF, "T") & "," & DBSet(RS!NIF, "T") & ","
+'            'Codclien ariges codclien__arigasol ....
+'            SQL = SQL & "0,0,0,0,0,0,0,"
+'            SQL = SQL & IdAsoc & ")"
+'            conn.Execute SQL
+'
+'            'PARA QUE NO MUESTRE MSGBOX abajo
+'            SQL = ""
+'
+'        Else
+'
+'            '-- Ya exite, Comprobamos el NIF, y comprobamos varias cosas
+'            '--
+'            SQL = ""
+'            Actualizar = True
+'            idArifacelec = rs2!i_d
+'            NombeyEmail = RS!nomlargo & "|" & DBLet(RS!mail, "T") & "|"
+'            If rs2!CIF <> RS!NIF Then
+'                SQL = SQL & "    -CIF:  " & vbCrLf
+'                Actualizar = False
+'            End If
+'
+'            If rs2!Nombre <> RS!nomlargo Then SQL = SQL & "    -nombre:" & rs2!Nombre & vbCrLf
+'            If rs2!Login <> RS!NIF Then
+'                SQL = SQL & "    -Login ()" & vbCrLf
+'                Actualizar = False
+'            End If
+'
+'
+'            If rs2!codclien__arigasol > 0 Then
+'                If rs2!codclien__arigasol <> RS!IdAsoc Then
+'                    SQL = SQL & "-Facelec  arigasol" & vbCrLf
+'                    Actualizar = False
+'                End If
+'            End If
+'            If rs2!codclien_ariges > 0 Then
+'                If rs2!codclien_ariges <> RS!IdAsoc Then
+'                    SQL = SQL & "-Facelec  ariges(1)" & vbCrLf
+'                    Actualizar = False
+'                End If
+'            End If
+'            If rs2!cod_clien_ariges2 > 0 Then
+'                If rs2!cod_clien_ariges2 <> RS!IdAsoc Then
+'                    SQL = SQL & "-Facelec  ariges(2)" & vbCrLf
+'                    Actualizar = False
+'                End If
+'            End If
+'
+'
+'            If rs2!cod_socio_ariagro > 0 Then
+'                If rs2!cod_socio_ariagro <> RS!CodSocEuroagro Then
+'                    SQL = SQL & "-Facelec  socio euroagro" & vbCrLf
+'                    Actualizar = False
+'                End If
+'            End If
+'
+'
+'
+'        End If
+'
+'        'Busco si hay algun cif o login en facelec que sea el del cliente y no sea el codigo asociado
+'        rs2.Close
+'
+'        'Comprobaremos si hay algun datao en facelec.clientes que tenga ya ese nif o ese login
+'        ' el codasco NO sea el de aqui
+'            'Octubre 2014. Metemos or cod_gessoc is null
+'            Aux = "select * from facelec_ariadna.cliente where (cod_gessoc<>" & RS!IdAsoc & " or cod_gessoc is null )"
+'            Aux = Aux & " and (login=" & DBSet(RS!NIF, "T") & " or cif=" & DBSet(RS!NIF, "T") & ") ORDER BY i_d"
+'            rs2.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+'            Aux = ""
+'            I = 0
+'            While Not rs2.EOF
+'                I = I + 1
+'                Aux = Aux & "     " & Format(rs2!i_d, "00000")
+'                If I > 4 Then
+'                    Aux = Aux & vbCrLf
+'                    I = 0
+'                End If
+'                rs2.MoveNext
+'            Wend
+'
+'            If Aux <> "" Then
+'                Aux = "Errores vinculados al NIF(login-CIF)" & vbCrLf & Aux
+'                If SQL <> "" Then SQL = SQL & vbCrLf & vbCrLf
+'                SQL = SQL & Aux
+'                Actualizar = False
+'            End If
+'
+'            If SQL <> "" Then
+'                SQL = "Campos erroneos en Facturacion Electronica" & vbCrLf & vbCrLf & SQL
+'                If Actualizar Then
+'                    SQL = SQL & vbCrLf & " Desea continuar de igual modo?"
+'                    If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Actualizar = False
+'                Else
+'                    MsgBox SQL, vbExclamation
+'                End If
+'
+'            End If
+'
+'            If Actualizar Then
+'                'Actualizaremos Nombre, email y nada mas
+'                SQL = "UPDATE facelec_ariadna.cliente SET nombre=" & DBSet(RecuperaValor(NombeyEmail, 1), "T")
+'                SQL = SQL & ", email=" & DBSet(RecuperaValor(NombeyEmail, 2), "T", "S")
+'                'Actualizamos ges_soc y ariges
+'                If ACtualizaIdGesso Then SQL = SQL & ", cod_gessoc =" & RS!IdAsoc
+'                SQL = SQL & " WHERE i_d =" & idArifacelec
+'                conn.Execute SQL
+'            End If
+'
+'        rs2.Close
+'
+'        ActAriFacElec = True
+'    End If
+'    RS.Close
+'    Set RS = New ADODB.Recordset
+'    Set rs2 = New ADODB.Recordset
+'
+'
     
 End Function
 

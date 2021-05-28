@@ -5,26 +5,115 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAdmGasTec 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Gastos técnicos"
-   ClientHeight    =   6120
+   ClientHeight    =   9135
    ClientLeft      =   45
-   ClientTop       =   630
-   ClientWidth     =   11070
+   ClientTop       =   330
+   ClientWidth     =   16065
    ClipControls    =   0   'False
    Icon            =   "frmAdmGasTec.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6120
-   ScaleWidth      =   11070
+   ScaleHeight     =   9135
+   ScaleWidth      =   16065
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   135
+      TabIndex        =   23
+      Top             =   90
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   180
+         TabIndex        =   24
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.CheckBox chkVistaPrevia 
+      Caption         =   "Vista previa"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Left            =   14355
+      TabIndex        =   22
+      Top             =   225
+      Visible         =   0   'False
+      Width           =   1485
+   End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   9
-      Left            =   3240
+      Left            =   6795
       MaxLength       =   5
       TabIndex        =   3
       Tag             =   "Nº viajes|N|S|0|99|sgaste|numviaje|0|N|"
@@ -37,9 +126,18 @@ Begin VB.Form frmAdmGasTec
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   8
-      Left            =   8760
+      Left            =   12315
       MaxLength       =   16
       TabIndex        =   9
       Tag             =   "Importe varios|N|S|0||sgaste|impvario|#,###,###,##0.00|N|"
@@ -52,9 +150,18 @@ Begin VB.Form frmAdmGasTec
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   7
-      Left            =   7560
+      Left            =   11115
       MaxLength       =   16
       TabIndex        =   8
       Tag             =   "Importe taxi|N|S|0||sgaste|impotaxi|#,###,###,##0.00|N|"
@@ -67,9 +174,18 @@ Begin VB.Form frmAdmGasTec
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   6
-      Left            =   6480
+      Left            =   10035
       MaxLength       =   16
       TabIndex        =   7
       Tag             =   "Importe parking|N|S|0||sgaste|impparki|#,###,###,##0.00|N|"
@@ -82,9 +198,18 @@ Begin VB.Form frmAdmGasTec
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   5
-      Left            =   5280
+      Left            =   8835
       MaxLength       =   16
       TabIndex        =   6
       Tag             =   "Importe autopista|N|S|0||sgaste|impautop|#,###,###,##0.00|N|"
@@ -97,9 +222,18 @@ Begin VB.Form frmAdmGasTec
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   4
-      Left            =   4200
+      Left            =   7755
       MaxLength       =   16
       TabIndex        =   5
       Tag             =   "Importe comida|N|S|0||sgaste|impcomid|#,###,###,##0.00|N|"
@@ -111,33 +245,63 @@ Begin VB.Form frmAdmGasTec
    Begin VB.CommandButton cmdAux 
       Appearance      =   0  'Flat
       Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       Left            =   3000
-      TabIndex        =   24
+      TabIndex        =   21
       ToolTipText     =   "Buscar artículo"
       Top             =   3600
       Visible         =   0   'False
       Width           =   195
    End
    Begin VB.TextBox txtAux2 
+      Appearance      =   0  'Flat
       BackColor       =   &H80000018&
-      Height          =   315
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   2
-      Left            =   6570
+      Left            =   3240
       Locked          =   -1  'True
-      TabIndex        =   22
+      TabIndex        =   20
       Text            =   "Text2"
-      Top             =   5040
-      Width           =   4365
+      Top             =   3600
+      Visible         =   0   'False
+      Width           =   3465
    End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   3
-      Left            =   3720
+      Left            =   7275
       MaxLength       =   5
       TabIndex        =   4
       Tag             =   "Kilometros|N|S|0|99999|sgaste|kilometr|0|N|"
@@ -149,16 +313,16 @@ Begin VB.Form frmAdmGasTec
    Begin VB.Frame Frame1 
       Height          =   540
       Index           =   0
-      Left            =   240
-      TabIndex        =   19
-      Top             =   5400
+      Left            =   150
+      TabIndex        =   17
+      Top             =   8460
       Width           =   2535
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -167,7 +331,7 @@ Begin VB.Form frmAdmGasTec
          EndProperty
          Height          =   240
          Left            =   240
-         TabIndex        =   20
+         TabIndex        =   18
          Top             =   180
          Width           =   2115
       End
@@ -175,10 +339,19 @@ Begin VB.Form frmAdmGasTec
    Begin VB.CommandButton cmdAux 
       Appearance      =   0  'Flat
       Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   1800
-      TabIndex        =   18
+      TabIndex        =   16
       ToolTipText     =   "Buscar artículo"
       Top             =   3600
       Visible         =   0   'False
@@ -186,18 +359,36 @@ Begin VB.Form frmAdmGasTec
    End
    Begin VB.TextBox txtAux2 
       BackColor       =   &H80000018&
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   1
-      Left            =   960
+      Left            =   4020
       Locked          =   -1  'True
-      TabIndex        =   17
+      TabIndex        =   15
       Text            =   "Text2"
-      Top             =   5040
-      Width           =   4245
+      Top             =   8505
+      Width           =   7350
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   240
@@ -212,6 +403,15 @@ Begin VB.Form frmAdmGasTec
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       Left            =   2160
@@ -225,33 +425,69 @@ Begin VB.Form frmAdmGasTec
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   8520
+      Left            =   13515
       TabIndex        =   10
-      Top             =   5565
-      Width           =   1035
+      Top             =   8535
+      Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   9675
+      Left            =   14760
       TabIndex        =   11
-      Top             =   5565
-      Width           =   1035
+      Top             =   8535
+      Width           =   1065
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   9675
+      Left            =   14760
       TabIndex        =   12
-      Top             =   5565
+      Top             =   8550
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   1080
@@ -262,69 +498,6 @@ Begin VB.Form frmAdmGasTec
       Top             =   3600
       Visible         =   0   'False
       Width           =   615
-   End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   420
-      Left            =   0
-      TabIndex        =   14
-      Top             =   0
-      Width           =   11070
-      _ExtentX        =   19526
-      _ExtentY        =   741
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   11
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver Todos"
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-      EndProperty
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   315
-         Left            =   9240
-         TabIndex        =   16
-         Top             =   0
-         Visible         =   0   'False
-         Width           =   1215
-      End
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
@@ -375,32 +548,32 @@ Begin VB.Form frmAdmGasTec
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmAdmGasTec.frx":000C
-      Height          =   4425
-      Left            =   240
+      Height          =   7395
+      Left            =   150
       TabIndex        =   13
-      Top             =   495
-      Width           =   10695
-      _ExtentX        =   18865
-      _ExtentY        =   7805
+      Top             =   900
+      Width           =   15695
+      _ExtentX        =   27675
+      _ExtentY        =   13044
       _Version        =   393216
       AllowUpdate     =   0   'False
       AllowArrows     =   -1  'True
       ColumnHeaders   =   -1  'True
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       FormatLocked    =   -1  'True
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -443,22 +616,22 @@ Begin VB.Form frmAdmGasTec
       EndProperty
    End
    Begin VB.Label Label1 
-      Caption         =   "Cliente"
-      Height          =   255
-      Index           =   1
-      Left            =   6000
-      TabIndex        =   23
-      Top             =   5040
-      Width           =   495
-   End
-   Begin VB.Label Label1 
       Caption         =   "Técnico"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
-      Left            =   240
-      TabIndex        =   21
-      Top             =   5040
-      Width           =   615
+      Left            =   3105
+      TabIndex        =   19
+      Top             =   8550
+      Width           =   795
    End
    Begin VB.Label Label10 
       Caption         =   "Cargando datos ........."
@@ -473,13 +646,15 @@ Begin VB.Form frmAdmGasTec
       EndProperty
       Height          =   255
       Left            =   240
-      TabIndex        =   15
-      Top             =   8220
+      TabIndex        =   14
+      Top             =   8580
       Visible         =   0   'False
       Width           =   3495
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -527,9 +702,9 @@ Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 'Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 'Private WithEvents frmF As frmCal 'Calendario de Fechas
-Private WithEvents frmT As frmAdmTrabajadores  'Form Mantenimiento Trabajadores
+Private WithEvents frmT As frmBasico2 'frmAdmTrabajadores  'Form Mantenimiento Trabajadores
 Attribute frmT.VB_VarHelpID = -1
-Private WithEvents frmC As frmFacClientes   'Form Mantenimiento Clientes
+Private WithEvents frmC As frmBasico2 'frmFacClientesGr   'Form Mantenimiento Clientes
 Attribute frmC.VB_VarHelpID = -1
 
 
@@ -600,16 +775,21 @@ End Sub
 Private Sub cmdAux_Click(Index As Integer)
     Select Case Index
         Case 1 'cod. tecnico
-            Set frmT = New frmAdmTrabajadores
-            frmT.DatosADevolverBusqueda = "0|1|" 'Poner Modo Busqueda
-            frmT.Show vbModal
+'            Set frmT = New frmAdmTrabajadores
+'            frmT.DatosADevolverBusqueda = "0|1|" 'Poner Modo Busqueda
+'            frmT.Show vbModal
+            Set frmT = New frmBasico2
+            AyudaTrabajadores frmT, txtAux(Index)
             Set frmT = Nothing
             
         Case 2 'cod. cliente
-            Set frmC = New frmFacClientes
-            frmC.DatosADevolverBusqueda = "0|1|" 'Poner Modo Busqueda
-            frmC.Show vbModal
+'            Set frmC = New frmFacClientesGr
+'            frmC.DatosADevolverBusqueda = "0|1|" 'Poner Modo Busqueda
+'            frmC.Show vbModal
+            Set frmC = New frmBasico2
+            AyudaClientes frmC, txtAux(Index).Text
             Set frmC = Nothing
+
     End Select
     PonerFoco txtAux(Index)
 End Sub
@@ -712,17 +892,30 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
 
     'ICONOS de La toolbar
-    With Toolbar1
-        .ImageList = frmPpal.imgListComun
-        'ASignamos botones
-        .Buttons(1).Image = 1   'Buscar
-        .Buttons(2).Image = 2 'Ver Todos
-        .Buttons(5).Image = 3 'Añadir
-        .Buttons(6).Image = 4 'Modificar
-        .Buttons(7).Image = 5 'Eliminar
-        .Buttons(10).Image = 16 'Imprimir
-        .Buttons(11).Image = 15 'Salir
+'    With Toolbar1
+'        .ImageList = frmPpal.imgListComun
+'        'ASignamos botones
+'        .Buttons(1).Image = 1   'Buscar
+'        .Buttons(2).Image = 2 'Ver Todos
+'        .Buttons(5).Image = 3 'Añadir
+'        .Buttons(6).Image = 4 'Modificar
+'        .Buttons(7).Image = 5 'Eliminar
+'        .Buttons(10).Image = 16 'Imprimir
+'        .Buttons(11).Image = 15 'Salir
+'    End With
+    
+    With Me.Toolbar1
+        .HotImageList = frmPpal.imgListComun_OM2
+        .DisabledImageList = frmPpal.imgListComun_BN2
+        .ImageList = frmPpal.ImgListComun2
+        .Buttons(1).Image = 3
+        .Buttons(2).Image = 4
+        .Buttons(3).Image = 5
+        .Buttons(5).Image = 1
+        .Buttons(6).Image = 2
+        .Buttons(8).Image = 16
     End With
+    
     
     LimpiarCampos   'Limpia los campos TextBox
     DataGrid1.ClearFields
@@ -756,19 +949,22 @@ Dim tots As String
     
     CargaGridGnral DataGrid1, Me.Data1, tots, False
     
-    tots = "S|txtAux(0)|T|Fecha|1050|;S|txtAux(1)|T|Técnico|850|;S|cmdAux(1)|B||0|;S|txtAux(2)|T|Cliente|850|;S|cmdAux(2)|B||0|;"
-    tots = tots & "S|txtAux(9)|T|Viajes|650|;S|txtAux(3)|T|Kms|700|;S|txtAux(4)|T|Imp. Comida|1200|;S|txtAux(5)|T|Imp. Autopista|1350|;S|txtAux(6)|T|Imp. Parking|1200|;S|txtAux(7)|T|Imp. Taxi|1100|;S|txtAux(8)|T|Imp. Varios|1150|;"
+    tots = "S|txtAux(0)|T|Fecha|1350|;S|txtAux(1)|T|Técnico|850|;S|cmdAux(1)|B||0|;S|txtAux(2)|T|Código|1050|;S|cmdAux(2)|B||0|;S|txtAux2(2)|T|Cliente|4180|;"
+    tots = tots & "S|txtAux(9)|T|Viajes|750|;S|txtAux(3)|T|Kms|700|;S|txtAux(4)|T|Comida|1250|;S|txtAux(5)|T|Autopista|1250|;S|txtAux(6)|T|Parking|1250|;S|txtAux(7)|T|Taxi|1250|;S|txtAux(8)|T|Varios|1250|;"
     
-    arregla tots, DataGrid1, Me
+    arregla tots, DataGrid1, Me, 350
+    
 
     'dtos alineados a la dcha
-    DataGrid1.Columns(3).Alignment = dbgRight
-    DataGrid1.Columns(4).Alignment = dbgRight
+    DataGrid1.Columns(1).Alignment = dbgLeft
+    DataGrid1.Columns(2).Alignment = dbgLeft
+    DataGrid1.Columns(3).Alignment = dbgLeft
     DataGrid1.Columns(5).Alignment = dbgRight
     DataGrid1.Columns(6).Alignment = dbgRight
     DataGrid1.Columns(7).Alignment = dbgRight
     DataGrid1.Columns(8).Alignment = dbgRight
     DataGrid1.Columns(9).Alignment = dbgRight
+    DataGrid1.Columns(10).Alignment = dbgRight
 
     DataGrid1.ScrollBars = dbgAutomatic
     
@@ -808,6 +1004,11 @@ Dim b As Boolean
         Me.cmdAux(jj).visible = b
         Me.cmdAux(jj).Enabled = b And (Modo <> 4)
     Next jj
+    
+    txtAux2(2).Height = Me.DataGrid1.RowHeight
+    txtAux2(2).Top = alto
+    txtAux2(2).visible = b
+    txtAux2(2).Enabled = b And (Modo <> 4)
     
     If Err.Number Then Err.Clear
 End Sub
@@ -868,36 +1069,34 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
     Select Case Button.Index
-        Case 1 'Busqueda
-            mnBuscar_Click
-        Case 2 'Ver Todos
-            mnVerTodos_Click
-        Case 5 'Nuevo
+        Case 1 'Nuevo
             mnNuevo_Click
-        Case 6  'Modificar
+        Case 2  'Modificar
             mnModificar_Click
-        Case 7 'Eliminar
+        Case 3 'Eliminar
             mnEliminar_Click
-        Case 10 'Imprimir
+        Case 5 'Busqueda
+            mnBuscar_Click
+        Case 6 'Ver Todos
+            mnVerTodos_Click
+        Case 8 'Imprimir
             AbrirListadoOfer (92)
             
-        Case 11  'Salir
-            mnSalir_Click
     End Select
 End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim b As Boolean
-Dim I As Byte
+Dim i As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
@@ -915,9 +1114,9 @@ Dim I As Byte
     If Kmodo = 1 Then PonerFoco txtAux(0)
                       
     'Bloquear los campos de clave primaria al modificar
-    For I = 0 To 2
-        BloquearTxt txtAux(I), (Modo = 4)
-    Next I
+    For i = 0 To 2
+        BloquearTxt txtAux(i), (Modo = 4)
+    Next i
                       
     '-----------------------------------------
     b = Modo <> 0 And Modo <> 2
@@ -949,23 +1148,23 @@ Dim b As Boolean
 
     b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = b
+    Toolbar1.Buttons(1).Enabled = b
     Me.mnNuevo.Enabled = b
     
     b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
+    Toolbar1.Buttons(2).Enabled = b
     Me.mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = b
+    Toolbar1.Buttons(3).Enabled = b
     Me.mnEliminar.Enabled = b
     
     b = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not b
     Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not b
     Me.mnVerTodos.Enabled = Not b
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo opciones del menú.", Err.Description
@@ -993,9 +1192,9 @@ Dim SQL As String
     
     On Error GoTo ErrSQL
     
-    SQL = "SELECT fecgasto, codtecni, " & NombreTabla & ".codclien,numviaje,kilometr,impcomid,impautop,impparki,impotaxi,impvario "
+    SQL = "SELECT fecgasto, codtecni, " & NombreTabla & ".codclien,sclien.nomclien,numviaje," & NombreTabla & ".kilometr,impcomid,impautop,impparki,impotaxi,impvario "
     SQL = SQL & " FROM " & NombreTabla
-'    SQL = SQL & " INNER JOIN sclien ON " & NombreTabla & ".codclien = sclien.codclien "
+    SQL = SQL & " INNER JOIN sclien ON " & NombreTabla & ".codclien = sclien.codclien "
         
     If enlaza Then
         If EsBusqueda And CadenaBusqueda <> "" Then
@@ -1029,7 +1228,7 @@ Dim anc As Single
         PonerModo 1
         'Ponemos el grid lineasfacturas enlazando a ningun sitio
         CargaGrid False
-        anc = ObtenerAlto(Me.DataGrid1, 10)
+        anc = ObtenerAlto(Me.DataGrid1, 25)
         LLamaLineas anc
         'Si pasamos el control aqui lo ponemos en amarillo
         PonerFoco txtAux(0)
@@ -1076,7 +1275,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1086,8 +1285,8 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
@@ -1097,17 +1296,18 @@ Dim anc As Single
     txtAux(0).Text = DBLet(DataGrid1.Columns(0).Value, "F")
     txtAux(1).Text = DBLet(DataGrid1.Columns(1).Value, "N")
     txtAux(2).Text = DBLet(DataGrid1.Columns(2).Value, "N")
+    txtAux2(2).Text = DBLet(DataGrid1.Columns(3).Value, "T")
     
-    For I = 3 To 8
-        txtAux(I).Text = DBLet(Data1.Recordset.Fields(I + 1).Value, "T")
-    Next I
+    For i = 4 To 8
+        txtAux(i - 1).Text = DBLet(Data1.Recordset.Fields(i + 1).Value, "T")
+    Next i
     txtAux(9).Text = DBLet(Data1.Recordset!numviaje, "T")
     
     FormateaCampo txtAux(1)
     FormateaCampo txtAux(2)
-    For I = 4 To 8
-        FormateaCampo txtAux(I)
-    Next I
+    For i = 4 To 9
+        FormateaCampo txtAux(i)
+    Next i
 
     DataGrid1.Enabled = False
     PonerFoco txtAux(3)
@@ -1175,16 +1375,16 @@ End Function
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 
     On Error Resume Next
 
-    CadB = ObtenerBusqueda(Me, False)
+    cadB = ObtenerBusqueda(Me, False)
     If chkVistaPrevia = 1 Then
 '        MandaBusquedaPrevia cadB
-    ElseIf CadB <> "" Then 'Se muestran en el mismo form
+    ElseIf cadB <> "" Then 'Se muestran en el mismo form
 '        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & Ordenacion
-        CadenaBusqueda = " WHERE " & CadB
+        CadenaBusqueda = " WHERE " & cadB
         CadenaConsulta = MontaSQLCarga(True)
         PonerCadenaBusqueda
         PonerFocoGrid Me.DataGrid1
@@ -1251,8 +1451,22 @@ Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
-   KEYpress KeyAscii
+    If KeyAscii = teclaBuscar Then
+        Select Case Index
+            Case 1: KEYBusqueda KeyAscii, 1 'tecnico
+            Case 2: KEYBusqueda KeyAscii, 2 'cliente
+        End Select
+    Else
+        KEYpress KeyAscii
+    End If
+
 End Sub
+
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    cmdAux_Click (Indice)
+End Sub
+
 
 
 Private Sub txtAux_LostFocus(Index As Integer)

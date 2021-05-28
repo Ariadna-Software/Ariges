@@ -585,7 +585,7 @@ Public parAlmacen As String
 ' ----
 
 
-Private WithEvents frmA As frmAlmArticulos
+Private WithEvents frmA As frmAlmArticulosGr
 Attribute frmA.VB_VarHelpID = -1
 
 Private CadenaConsulta As String
@@ -628,15 +628,15 @@ Dim J As Integer
     b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtaux(0).visible = Not b
-    txtaux(1).visible = Not b
-    txtaux(2).visible = Not b
-    txtaux(3).visible = Not b
-    txtaux(4).visible = Not b
+    Me.txtAux(0).visible = Not b
+    txtAux(1).visible = Not b
+    txtAux(2).visible = Not b
+    txtAux(3).visible = Not b
+    txtAux(4).visible = Not b
     If Me.DesdeTPV Then
-        txtaux(5).visible = Not b
+        txtAux(5).visible = Not b
     Else
-        txtaux(6).visible = Not b
+        txtAux(6).visible = Not b
     End If
     
     cmdAceptar.visible = Not b
@@ -649,10 +649,10 @@ Dim J As Integer
     If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
      
     'Si estamos en insertar o modificar
-    BloquearTxt txtaux(0), (Modo <> 3 And Modo <> 1)
+    BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
     
     'El PVP IVA NO SE PUEDE BUSCAR
-    BloquearTxt txtaux(5), True
+    BloquearTxt txtAux(5), True
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -710,9 +710,9 @@ Private Sub BotonBuscar()
     limpiar Me
     LLamaLineas ObtenerAlto(DataGrid1, 45), 1
     If vParamAplic.SituaEnCodigoArticulo Then
-        PonerFoco txtaux(0)
+        PonerFoco txtAux(0)
     Else
-        PonerFoco txtaux(1)
+        PonerFoco txtAux(1)
     End If
 End Sub
 
@@ -720,7 +720,7 @@ Private Sub BotonVerTodos()
 On Error Resume Next
 
     CargaGrid ""
-    If adodc1.Recordset.RecordCount <= 0 Then
+    If Adodc1.Recordset.RecordCount <= 0 Then
         MsgBox "No hay ningún registro en la tabla artic.", vbInformation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -763,13 +763,13 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
     'Fijamos el ancho
-    txtaux(0).Top = alto
-    txtaux(1).Top = alto
-    txtaux(2).Top = alto
-    txtaux(3).Top = alto
-    txtaux(4).Top = alto
-    txtaux(5).Top = alto
-    txtaux(6).Top = alto
+    txtAux(0).Top = alto
+    txtAux(1).Top = alto
+    txtAux(2).Top = alto
+    txtAux(3).Top = alto
+    txtAux(4).Top = alto
+    txtAux(5).Top = alto
+    txtAux(6).Top = alto
 '    txtAux(0).Left = DataGrid1.Left + 340
 '    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
 '    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
@@ -886,13 +886,13 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim cad As String
 
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = adodc1.Recordset.Fields(0) & "|"
-    cad = cad & adodc1.Recordset.Fields(1) & "|"
+    cad = Adodc1.Recordset.Fields(0) & "|"
+    cad = cad & Adodc1.Recordset.Fields(1) & "|"
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -907,18 +907,18 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not adodc1.Recordset.EOF Then 'And Modo = 0 Then
-        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
     End If
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
     If Modo = 1 Then
         If vParamAplic.SituaEnCodigoArticulo Then
-            PonerFoco txtaux(0)
+            PonerFoco txtAux(0)
         Else
-            PonerFoco txtaux(1)
+            PonerFoco txtAux(1)
         End If
     End If
 End Sub
@@ -998,7 +998,7 @@ Private Sub Form_Load()
         End If
         mnBusqAvan.Enabled = False
     End If
-    FormatoCod = FormatoCampo(txtaux(0))
+    FormatoCod = FormatoCampo(txtAux(0))
     
     
     'SIEMPRE VIENEN EN MODO BUSQUEDA
@@ -1070,7 +1070,7 @@ Private Sub mnBusqAvan_Click()
 Dim C As String
     C = CadenaConsulta
     CadenaConsulta = ""
-    Set frmA = New frmAlmArticulos
+    Set frmA = New frmAlmArticulosGr
     frmA.DatosADevolverBusqueda = "@1@" 'Poner en modo busqueda
     frmA.Show vbModal
     Set frmA = Nothing
@@ -1163,7 +1163,7 @@ Dim cadSel As String
         SQL = SQL & " ORDER BY sartic.codartic"
     End If
 
-    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
     
     '### a mano
     tots = "S|txtAux(0)|T|Codigo|2100|;S|txtAux(1)|T|Descripcion|4640|;S|txtAux(2)|T|Cod. Asoc.|1500|;"
@@ -1186,8 +1186,8 @@ Dim cadSel As String
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
-   If Not adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If
@@ -1211,7 +1211,7 @@ Dim Indice As Integer
 End Sub
 
 Private Sub txtAux_GotFocus(index As Integer)
-    ConseguirFoco txtaux(index), Modo
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
 Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1220,7 +1220,7 @@ End Sub
 
 Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     If index = 1 And KeyAscii = 13 Then
-        If Me.txtaux(index).Text <> "" Then
+        If Me.txtAux(index).Text <> "" Then
             PonerFocoBtn Me.cmdAceptar
             KeyAscii = 0
         End If
@@ -1229,7 +1229,7 @@ Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAux_LostFocus(index As Integer)
-    If Not PerderFocoGnral(txtaux(index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
     'If Index = 0 Then PonerFormatoEntero txtAux(Index)
 End Sub
 

@@ -72,17 +72,17 @@ Begin VB.Form frmTrasAlvic
             TabIndex        =   0
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   495
-            Width           =   1080
+            Width           =   1200
          End
          Begin VB.TextBox txtcodigo 
             Alignment       =   1  'Right Justify
             Height          =   285
             Index           =   1
             Left            =   2730
-            MaxLength       =   6
+            MaxLength       =   10
             TabIndex        =   1
             Top             =   960
-            Width           =   1050
+            Width           =   1170
          End
          Begin VB.Image imgFec 
             Height          =   240
@@ -217,7 +217,7 @@ Dim cadTabla As String
 
 Dim vContad As Long
 
-Dim primeravez As Boolean
+Dim PrimeraVez As Boolean
 
 Dim ArtFamGenerica As String
 
@@ -235,16 +235,24 @@ Dim sparamalvic As ADODB.Recordset
 Dim FechaFichero As Date
 Dim IdTurno As Long  'Si importa un turno, puede coger DOS dias. Seran seguidos ye la fecha sera del inicio
 
-Dim UltimoTurnoLeido As Long
+Dim UltimoTurnoLeido2 As Long
 Dim TipoFicheroNormal As Boolean
 Dim Vec() As String
 Dim Turno3 As Boolean
 
-Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, 0, Cerrar
-    If Cerrar Then Unload Me
+
+Dim EsAlvic2 As Boolean 'Llegado el caso, habra que parametrizar
+
+
+
+
+
+Private Sub KEYpress(KeyAscii As Integer)
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 
@@ -277,7 +285,7 @@ On Error GoTo eError
     
     CommonDialog1.DefaultExt = ".TXT"
     
-    CADENA = Format(CDate(txtcodigo(0).Text), FormatoFecha)
+    CADENA = Format(CDate(txtCodigo(0).Text), FormatoFecha)
     CommonDialog1.FilterIndex = 1
     CommonDialog1.CancelError = True
     Me.CommonDialog1.ShowOpen
@@ -293,9 +301,10 @@ On Error GoTo eError
         InicializarTabla
         cadSelect = "INSERT INTO tmpgasolimport(codusu,codigo,NumAlbaran,NumFactura,fechahora,IdVendedor,"
         cadSelect = cadSelect & "Cliente,NombreCliente,NifCliente,Matricula,CodigoProducto"
-        cadSelect = cadSelect & ",surtidor,manguera,Precio,cantidad,descuento,importel,idtipopago,tipoIVa,importeConIva,ccoste,turno,ClivarioAlvic ) VALUES "
+        cadSelect = cadSelect & ",surtidor,manguera,Precio,cantidad,descuento,importel,idtipopago,tipoIVa,importeConIva,ccoste,turno,ClivarioAlvic,doc_original,doc_relacionado ) VALUES "
         cadFormula = ""
-
+        
+        '#aqui aqui aqui
 
           If ProcesarFichero2(Me.CommonDialog1.FileName) Then
                 cadTabla = "tmpinformes"
@@ -359,11 +368,11 @@ On Error GoTo eError
                         GenerarFacturasScafac
                         
                         
-                        If txtcodigo(1).Text <> "" Then
-                            cadFormula = "UPDATE sparamalvic set ultimoturno =  " & txtcodigo(1).Text
+                        If txtCodigo(1).Text <> "" Then
+                            cadFormula = "UPDATE sparamalvic set ultimoturno =  " & txtCodigo(1).Text
                             ejecutar cadFormula, False
-                            UltimoTurnoLeido = IdTurno
-                             txtcodigo(1).Text = UltimoTurnoLeido + 1
+                            UltimoTurnoLeido2 = IdTurno
+                             txtCodigo(1).Text = IncremetaUnTurno()
                         End If
                     End If
 
@@ -402,6 +411,37 @@ eError:
     
 End Sub
 
+
+Private Function IncremetaUnTurno() As String
+Dim FechaTurnoUlt As String
+    If EsAlvic2 Then
+        IncremetaUnTurno = UltimoTurnoLeido2 + 1
+    Else
+        'stop
+        
+        If UltimoTurnoLeido2 > 100 Then
+            
+            'Las dos ultimas cifras son Parte X  Cierre W
+            ' yymmddXW
+            FechaTurnoUlt = Right(UltimoTurnoLeido2, 1)
+            If FechaTurnoUlt = 3 Then
+                'Ultimo turno dia. Es dia siguiente
+                FechaTurnoUlt = Mid(CStr(UltimoTurnoLeido2), 1, 6)
+                FechaTurnoUlt = Mid(FechaTurnoUlt, 5, 2) & "/" & Mid(FechaTurnoUlt, 3, 2) & "/20" & Mid(FechaTurnoUlt, 1, 2)
+                
+                FechaTurnoUlt = DateAdd("d", 1, CDate(FechaTurnoUlt))
+                IncremetaUnTurno = Format(FechaTurnoUlt, "yymmdd") & "11"
+            Else
+                IncremetaUnTurno = UltimoTurnoLeido2 + 1
+            End If
+        Else
+            MsgBox "Ultimo turno guardado. " & UltimoTurnoLeido2, vbExclamation
+        
+        End If
+        
+    End If
+End Function
+
     
 Private Sub BorrarArchivo(Archivo As String)
     On Error Resume Next
@@ -424,9 +464,9 @@ End Sub
 
 
 Private Sub Form_Activate()
-    If primeravez Then
-        primeravez = False
-        PonerFoco txtcodigo(0)
+    If PrimeraVez Then
+        PrimeraVez = False
+        PonerFoco txtCodigo(0)
         
         
         
@@ -506,9 +546,9 @@ Private Sub Form_Activate()
             If cadFormula <> "" Then cadSelect = cadSelect & cadFormula & vbCrLf
             
             
-            UltimoTurnoLeido = DBLet(sparamalvic!ultimoturno, "N")
-            If UltimoTurnoLeido > 0 Then txtcodigo(1).Text = UltimoTurnoLeido + 1
-            
+            UltimoTurnoLeido2 = DBLet(sparamalvic!ultimoturno, "N")
+            If UltimoTurnoLeido2 > 0 Then txtCodigo(1).Text = IncremetaUnTurno
+                
             
             
         End If
@@ -531,11 +571,14 @@ Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
 
-    primeravez = True
+    PrimeraVez = True
     limpiar Me
 
+
+    EsAlvic2 = True    '######
+
     
-    txtcodigo(0).Text = Format(Now - 1, "dd/mm/yyyy")
+    txtCodigo(0).Text = Format(Now - 1, "dd/mm/yyyy")
      
     FrameCobrosVisible True, H, W
     Pb1.visible = False
@@ -553,12 +596,12 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
-Private Sub imgAyuda_Click(index As Integer)
+Private Sub imgAyuda_Click(Index As Integer)
 Dim vCadena As String
-    Select Case index
+    Select Case Index
         Case 0
            ' "____________________________________________________________"
             vCadena = "Si se ha eliminado un turno, el check ha de estar desmarcado. " & vbCrLf & vbCrLf & _
@@ -571,19 +614,19 @@ Dim vCadena As String
     
 End Sub
 
-Private Sub imgFec_Click(index As Integer)
+Private Sub imgFec_Click(Index As Integer)
 'FEchas
     Dim esq, dalt As Long
     Dim obj As Object
     
     Set frmC = New frmCal
 
-    esq = imgFec(index).Left
-    dalt = imgFec(index).Top
+    esq = imgFec(Index).Left
+    dalt = imgFec(Index).Top
 
-    Set obj = imgFec(index).Container
+    Set obj = imgFec(Index).Container
 
-    While imgFec(index).Parent.Name <> obj.Name
+    While imgFec(Index).Parent.Name <> obj.Name
         esq = esq + obj.Left
         dalt = dalt + obj.Top
         Set obj = obj.Container
@@ -591,17 +634,17 @@ Private Sub imgFec_Click(index As Integer)
        
     
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
-    imgFec(0).Tag = index 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtcodigo(index).Text <> "" Then frmC.Fecha = txtcodigo(index).Text
+    imgFec(0).Tag = Index 'independentment de les dates que tinga, sempre pose l'index en la 27
+    If txtCodigo(Index).Text <> "" Then frmC.Fecha = txtCodigo(Index).Text
        
     ' es desplega dalt i cap a la esquerra
-    frmC.Left = esq + imgFec(index).Parent.Left + 30
-    frmC.Top = dalt + imgFec(index).Parent.Top + imgFec(index).Height + 420 + 30
+    frmC.Left = esq + imgFec(Index).Parent.Left + 30
+    frmC.Top = dalt + imgFec(Index).Parent.Top + imgFec(Index).Height + 420 + 30
 
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtcodigo(CByte(imgFec(0).Tag) + 1)
+    PonerFoco txtCodigo(CByte(imgFec(0).Tag) + 1)
     ' ***************************
 End Sub
 
@@ -612,19 +655,19 @@ End Sub
 
 
 
-Private Sub txtCodigo_GotFocus(index As Integer)
-    ConseguirFoco txtcodigo(index), 3
+Private Sub txtCodigo_GotFocus(Index As Integer)
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
-Private Sub txtCodigo_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub txtCodigo_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
     
     'If KeyAscii = teclaBuscar Then
     If Chr(KeyAscii) = "+" Then
-        Select Case index
+        Select Case Index
             Case 0: KEYFecha KeyAscii, 0 'fecha
         End Select
     Else
@@ -638,24 +681,24 @@ Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     imgFec_Click (Indice)
 End Sub
 
-Private Sub txtCodigo_LostFocus(index As Integer)
+Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(index).Text = Trim(txtcodigo(index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
 
-    txtcodigo(index).Text = Trim(txtcodigo(index))
-    Select Case index
+    txtCodigo(Index).Text = Trim(txtCodigo(Index))
+    Select Case Index
         Case 0 'FECHAS
-            If txtcodigo(index).Text <> "" Then PonerFormatoFecha txtcodigo(index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
                     
         Case 1
-            If txtcodigo(index).Text <> "" Then
-                If Not PonerFormatoEntero(txtcodigo(index)) Then txtcodigo(index).Text = ""
+            If txtCodigo(Index).Text <> "" Then
+                If Not PonerFormatoEntero(txtCodigo(Index)) Then txtCodigo(Index).Text = ""
             End If
     End Select
 End Sub
@@ -709,15 +752,15 @@ Dim b As Boolean
 
    b = True
 
-   If txtcodigo(0).Text = "" And b Then
+   If txtCodigo(0).Text = "" And b Then
         MsgBox "El campo fecha debe de tener un valor. Reintroduzca.", vbExclamation
         b = False
-        PonerFoco txtcodigo(0)
+        PonerFoco txtCodigo(0)
     End If
     
  
-     If txtcodigo(1).Text <> "" Then
-        If CLng(txtcodigo(1).Text) <= UltimoTurnoLeido Then
+     If txtCodigo(1).Text <> "" Then
+        If CLng(txtCodigo(1).Text) <= UltimoTurnoLeido2 Then
             MsgBox "Turno menor que el ultimo traspasado", vbExclamation
             
             If vUsu.Nivel = 0 Then
@@ -734,25 +777,39 @@ Dim b As Boolean
     Codigo = "referenc like 'Turno:%' AND codtipom in ('ALD','ALB','ALW') AND 1"
     Codigo = DevuelveDesdeBD(conAri, "count(*)", "scaalb", Codigo, "1")
     If Val(Codigo) > 0 Then
+        
         MsgBox "ERROR GRAVE. Datos sin traspasar del turno anterior", vbCritical
-        b = False
+        
+        If b = True Then
+            b = False
+            'Enero 2021
+            If vUsu.Nivel = 0 Then
+                Codigo = "Si se han borrado de albaranes los datos que faltan por procesar "
+                Codigo = Codigo & vbCrLf & "y vienen en este fichero, NO habra problema." & vbCrLf & vbCrLf
+                Codigo = Codigo & vbCrLf & "1.- Comprobar que no existe en albaranes NINGUNO de los que lleva el fichero"
+                Codigo = Codigo & vbCrLf & "2.- Si se importa correctamente, hay que buscar el apunte del cobro que se genera "
+                Codigo = Codigo & " y borrarlo. Ya  hizo la generación en su momento"
+                Codigo = Codigo & vbCrLf & vbCrLf & vbCrLf & "¿Continuar?"
+                If MsgBox(Codigo, vbQuestion + vbYesNoCancel + vbDefaultButton2) = vbYes Then b = True
+            End If
+        End If
     End If
     DatosOk = b
 End Function
 
 
-
-Private Function RecuperaFichero() As Boolean
-Dim NF As Integer
-
-    RecuperaFichero = False
-    NF = FreeFile
-    Open App.Path For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
-    Line Input #NF, cad
-    Close #NF
-    If cad <> "" Then RecuperaFichero = True
-    
-End Function
+'
+'Private Function RecuperaFichero() As Boolean
+'Dim NF As Integer
+'
+'    RecuperaFichero = False
+'    NF = FreeFile
+'    Open App.Path For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
+'    Line Input #NF, cad
+'    Close #NF
+'    If cad <> "" Then RecuperaFichero = True
+'
+'End Function
 
 
 Private Function GenerarFacturasAlbaranes() As Boolean
@@ -905,6 +962,8 @@ Dim Col As Collection
             cad = cad & " GROUP  BY numalbaran  "
             
             
+            
+  
             AlbaranFactura = ""
             miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not miRsAux.EOF
@@ -916,8 +975,7 @@ Dim Col As Collection
             Wend
             miRsAux.Close
             If AlbaranFactura <> "" Then Col.Add AlbaranFactura
-            
-            
+
             
             If Col.Count > 0 Then
                 AlbaranesFacturaAgrupada = ""
@@ -1742,20 +1800,20 @@ Dim b As Boolean
 Dim CodCCost As String
 Dim Impor1 As Currency
 Dim Tot As Currency
-Dim Jj As Byte
+Dim jj As Byte
 Dim R2 As ADODB.Recordset
 
     On Error GoTo eProcesarFichero2
     
     IdTurno = 0
-    If txtcodigo(1).Text <> "" Then IdTurno = CLng(txtcodigo(1).Text)
+    If txtCodigo(1).Text <> "" Then IdTurno = CLng(txtCodigo(1).Text)
     
     FechaFichero = CDate("01/01/2000")
     Turno3 = False
     ProcesarFichero2 = False
     
     NF = FreeFile
-    Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
+    Open nomFich For Input As #NF
     
     
     
@@ -1769,6 +1827,11 @@ Dim R2 As ADODB.Recordset
     
     
     TipoFicheroNormal = chkSeparadoTabulador.Value = 0
+    
+    
+    
+  
+        
     
     
     NumRegElim = 0
@@ -1795,7 +1858,7 @@ Dim R2 As ADODB.Recordset
             End If
               
             
-            If cad <> "" Then b = ComprobarRegistroAlz(cad, CodCCost)
+            If cad <> "" Then b = ComprobarRegistroLineaFichero(cad, CodCCost)
             If Not b Then
                 I = 0
                 cadFormula = "" 'Ha habido error
@@ -1846,7 +1909,7 @@ Dim R2 As ADODB.Recordset
                 cad = "No existe la forma de pago Alvic"
                 SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
                       "importe3, importe4, importe5, nombre1) values (" & _
-                      vUsu.Codigo & ",'0'," & DBSet(Me.txtcodigo(0).Text, "F")
+                      vUsu.Codigo & ",'0'," & DBSet(Me.txtCodigo(0).Text, "F")
                 SQL = SQL & ",23,59,-1," & DBSet(miRsAux.Fields(0), "T") & "," & _
                         DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(cad, "T") & ")"
                 
@@ -1869,7 +1932,7 @@ Dim R2 As ADODB.Recordset
                 cad = "No existe el trabajador Alvic"
                 SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
                       "importe3, importe4, importe5, nombre1) values (" & _
-                      vUsu.Codigo & ",'0'," & DBSet(Me.txtcodigo(0).Text, "F")
+                      vUsu.Codigo & ",'0'," & DBSet(Me.txtCodigo(0).Text, "F")
                 SQL = SQL & ",23,59,-1," & DBSet(miRsAux.Fields(0), "T") & "," & _
                         DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(cad, "T") & ")"
                 
@@ -1901,7 +1964,7 @@ Dim R2 As ADODB.Recordset
             cad = "NIF distinto " & DBLet(miRsAux!NifCliente, "T") & " // " & DBLet(miRsAux!nifClien, "T")
             SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
                   "importe3, importe4, importe5, nombre1) values (" & _
-                  vUsu.Codigo & ",'" & miRsAux!Codigo & "'," & DBSet(Me.txtcodigo(0).Text, "F")
+                  vUsu.Codigo & ",'" & miRsAux!Codigo & "'," & DBSet(Me.txtCodigo(0).Text, "F")
             SQL = SQL & ",23,59,-1," & DBSet(miRsAux.Fields(0), "T") & "," & _
                     DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(cad, "T") & ")"
 
@@ -1936,7 +1999,7 @@ Dim R2 As ADODB.Recordset
                 cad = "Series" & Trim(SQL)
                 SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
                       "importe3, importe4, importe5, nombre1) values (" & _
-                      vUsu.Codigo & ",'0'," & DBSet(Me.txtcodigo(0).Text, "F")
+                      vUsu.Codigo & ",'0'," & DBSet(Me.txtCodigo(0).Text, "F")
                 SQL = SQL & ",23,59,-1,'Albaran'," & _
                         DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(cad, "T") & ")"
                 
@@ -1961,7 +2024,7 @@ Dim R2 As ADODB.Recordset
                 cad = "Articulo tratado codigo iva distinto. " & miRsAux!artculoAlvic
                 SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
                       "importe3, importe4, importe5, nombre1) values (" & _
-                      vUsu.Codigo & ",'0'," & DBSet(Me.txtcodigo(0).Text, "F")
+                      vUsu.Codigo & ",'0'," & DBSet(Me.txtCodigo(0).Text, "F")
                 SQL = SQL & ",23,59,-1,'IVA'," & _
                         DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(cad, "T") & ")"
                 conn.Execute SQL
@@ -1981,16 +2044,16 @@ Dim R2 As ADODB.Recordset
         '               2.-  Entre 60000 y 65000
         '               3-4  Entre 0 y 60000 y entre 65000 y 128000
         If vParamAplic.NumeroInstalacion = vbTaxco Then
-            For Jj = 1 To 4
+            For jj = 1 To 4
                 DoEvents
-                lblProgres(1).Caption = "Clientes nuevos: " & Jj
+                lblProgres(1).Caption = "Clientes nuevos: " & jj
                 lblProgres(1).Refresh
     
-                If Jj = 1 Then
+                If jj = 1 Then
                     SQL = " AND cliente >128000 "
-                ElseIf Jj = 2 Then
+                ElseIf jj = 2 Then
                     SQL = " AND cliente between 60001 AND 62998 "
-                ElseIf Jj = 3 Then
+                ElseIf jj = 3 Then
                     SQL = " AND  cliente < 60001 "
                 Else
                     SQL = " AND cliente between  62998 and 128000"
@@ -2000,7 +2063,7 @@ Dim R2 As ADODB.Recordset
                 miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 SQL = ""
                 While Not miRsAux.EOF
-                    If Jj = 1 Then
+                    If jj = 1 Then
                         'Son nuevos . De momento los creo automaticamente
                         'Los creo en contablididad
                         SQL = "insert into ariconta" & vParamAplic.NumeroConta & ".cuentas(codmacta,nommacta,razosoci,apudirec,nifdatos) VALUES ("
@@ -2025,7 +2088,7 @@ Dim R2 As ADODB.Recordset
                      Else
                         
                         
-                        If Jj = 2 Then
+                        If jj = 2 Then
                             'Vehiculos de socios PARTICULARs, es decir , las facturas no se las pueden desgrabar
                             SQL = "insert into sclien(codclien,nomclien,nomcomer,domclien,codpobla,pobclien,proclien,nifclien,fechaalt,codactiv,codenvio,codzonas,codrutas,codagent"
                             SQL = SQL & " ,codforpa,codmacta,maiclie1,visitador,codtarif,tipocredito) SELECT "
@@ -2050,7 +2113,7 @@ Dim R2 As ADODB.Recordset
                         
                         
                         'En la  conta  ******
-                        If Jj = 2 Then
+                        If jj = 2 Then
                             'Vehiculos de socios PARTICULARs, es decir , las facturas no se las pueden desgrabar
                             SQL = " SELECT '43" & Right("00000000" & miRsAux!Cliente, 8) & "' codmacta,nomclien,nomcomer,'S' apudirec,nifclien nifdatos,domclien dirdatos,codpobla codposta,pobclien despobla,proclien desprovi "
                             SQL = SQL & " FROM sclien where codclien =" & miRsAux!Cliente - 60000 & " AND nifclien = " & DBSet(miRsAux!NifCliente, "T")
@@ -2080,7 +2143,7 @@ Dim R2 As ADODB.Recordset
                 Wend
                 miRsAux.Close
             
-            Next Jj
+            Next jj
         End If
         If SQL <> "" Then Espera 1
 
@@ -2103,7 +2166,7 @@ Dim R2 As ADODB.Recordset
                 cad = "No existe el cliente Ariges"
                 SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
                       "importe3, importe4, importe5, nombre1) values (" & _
-                      vUsu.Codigo & ",'" & miRsAux!linea & "'," & DBSet(Me.txtcodigo(0).Text, "F")
+                      vUsu.Codigo & ",'" & miRsAux!linea & "'," & DBSet(Me.txtCodigo(0).Text, "F")
                 SQL = SQL & ",23,59,-1," & DBSet(miRsAux.Fields(0), "T") & "," & _
                         DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(cad, "T") & ")"
             
@@ -2122,7 +2185,22 @@ Dim R2 As ADODB.Recordset
         miRsAux.Close
             
             
-            
+        'JUNIO 2020
+        'Si el cliente es FACE, entonces tenemos que si tiene dtoporcantidad, se pone a cero y el precio ar es importel/cantidad
+        lblProgres(1).Caption = "FACE"
+        lblProgres(1).Refresh
+        Espera 0.25
+        SQL = "select  tmpgasolimport.* FROM  tmpgasolimport  left join sclien on cliente=codclien "
+        SQL = SQL & " WHERE codusu = " & vUsu.Codigo & "  And organogestor <> ''"
+        miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not miRsAux.EOF
+            SQL = "UPDATE tmpgasolimport SET descuento=0,precio=round((importel/cantidad),4)"
+            SQL = SQL & " WHERE codusu = " & vUsu.Codigo & " AND codigo = " & miRsAux!Codigo
+            conn.Execute SQL
+            miRsAux.MoveNext
+        Wend
+        miRsAux.Close
+        
         Espera 0.25
         SQL = DevuelveDesdeBD(conAri, "count(*)", "tmpinformes", "codusu", CStr(vUsu.Codigo))
         If Val(SQL) = 0 Then
@@ -2190,28 +2268,36 @@ Dim R2 As ADODB.Recordset
                 conn.Execute Sql1
             End If
         End If
+        
+            
+            
+        If Not EsAlvic2 Then
+            lblProgres(1).Caption = "Comporbacion anulaciones"
+            lblProgres(1).Refresh
+            
+            SQL = "select * from tmpgasolimport where codusu=" & vUsu.Codigo & "  and doc_relacionado<>''"
+            SQL = SQL & " and not doc_relacionado  in (select doc_original from tmpgasolimport where codusu=" & vUsu.Codigo & ")"
+            miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not miRsAux.EOF
+            
+                
+                cad = "Error doc-vinculado. " & miRsAux!doc_relacionado
+                SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
+                      "importe3, importe4, importe5, nombre1) values (" & _
+                      vUsu.Codigo & ",'" & miRsAux!Codigo & "'," & DBSet(Me.txtCodigo(0).Text, "F")
+                SQL = SQL & ",23,59,-1,'Doc. vinc'," & _
+                        DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(cad, "T") & ")"
+                conn.Execute SQL
+        
+                miRsAux.MoveNext
+            Wend
+            miRsAux.Close
+        End If
+            
+            
         Set miRsAux = Nothing
             
-    
     End If
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     Pb1.visible = False
@@ -2230,7 +2316,7 @@ eProcesarFichero2:
     Set R2 = Nothing
 End Function
 
-Private Function ComprobarRegistroAlz(cad As String, ccoste As String) As Boolean
+Private Function ComprobarRegistroLineaFichero(cad As String, ccoste As String) As Boolean
 Dim SQL As String
 
 Dim Base As String
@@ -2287,101 +2373,258 @@ Dim TIpoDeIva_D As Byte  '0. No establecido  1. Normal   2 REducido  3 Supe redu
 Dim idClienteVarioAlvic As String
 Dim Aux3 As Currency
 
+' GESVEN.  Cuando un ticket lo pasan a factura, existe un ticket, una anulacion y una factura identificada
+Dim DocumentoOriginal As String
+Dim DocumentoRelacionado As String
+
+
+Dim CampoNumeroFacturaAvalon As String 'le quito la primera letra y formateamos a 6 digitos
 
     On Error GoTo eComprobarRegistroAlz
 
-    ComprobarRegistroAlz = True
+    ComprobarRegistroLineaFichero = True
 
+    DocumentoRelacionado = ""
+    DocumentoOriginal = ""
+    If EsAlvic2 Then
+        'ALVIC
 
-    If TipoFicheroNormal Then
-    
-    
-        Base = Mid(cad, 1, 10)
-        NombreBase = Mid(cad, 11, 50)
-        turno = Trim(Mid(cad, 61, 10))
-    
-        NumAlbaran = Trim(Mid(cad, 71, 20))
-        NumFactura = Trim(Mid(cad, 91, 20))
-        IdVendedor = Trim(Mid(cad, 121, 10))
-        NombreVendedor = Mid(cad, 131, 50)
-        FechaHora = Trim(Mid(cad, 181, 14))
-        Fecha = Mid(FechaHora, 7, 2) & "/" & Mid(FechaHora, 5, 2) & "/" & Mid(FechaHora, 1, 4)
-        hora = Mid(FechaHora, 9, 6)
-        NombreCliente = Trim(Mid(cad, 215, 70))
-        tarjeta = Trim(Mid(cad, 195, 20))
-        Matricula = Trim(Mid(cad, 370, 20))
-        IdProducto = Trim(Mid(cad, 493, 20))
-        surtidor = Trim(Mid(cad, 538, 10))
-        manguera = Trim(Mid(cad, 548, 10))
-    
-        PrecioLitro = Trim(Mid(cad, 568, 18))
-        cantidad = Trim(Mid(cad, 650, 18))
-        Importe = Trim(Mid(cad, 668, 18))
-        descuento = Trim(Mid(cad, 586, 18))
-        idtipopago = Trim(Mid(cad, 784, 10))
-        DescrTipoPago = Trim(Mid(cad, 794, 25))
-        CodigoTipoPago = Trim(Mid(cad, 1, 10))
-        NifCliente = Trim(Mid(cad, 834, 9))
-        
-        IvaArticulo = Trim(Mid(cad, 609, 5))
-        NombreArticulo = Trim(Mid(cad, 513, 25))
-        Kilometros = Trim(Mid(cad, 415, 18))
+        If TipoFicheroNormal Then
         
         
-    Else
-        Vec = Split(cad, Chr(9))
-       
-        Base = Vec(0)
-        NombreBase = Vec(1)
-        turno = Vec(2)
-    
-        NumAlbaran = Trim(Vec(3))
-        NumFactura = Trim(Vec(4))
-        IdVendedor = Trim(Vec(6))
-        NombreVendedor = Vec(7)
-        FechaHora = Trim(Vec(8))
-        Fecha = Mid(FechaHora, 7, 2) & "/" & Mid(FechaHora, 5, 2) & "/" & Mid(FechaHora, 1, 4)
-        hora = Mid(FechaHora, 9, 6)
-        NombreCliente = Trim(Vec(10))
-        tarjeta = Trim(Vec(9))
-        Matricula = Trim(Vec(15))
-        IdProducto = Trim(Vec(20))
-        surtidor = Trim(Vec(22))
-        manguera = Trim(Vec(23))
+            Base = Mid(cad, 1, 10)
+            NombreBase = Mid(cad, 11, 50)
+            turno = Trim(Mid(cad, 61, 10))
+        
+            NumAlbaran = Trim(Mid(cad, 71, 20))
+            NumFactura = Trim(Mid(cad, 91, 20))
+            IdVendedor = Trim(Mid(cad, 121, 10))
+            NombreVendedor = Mid(cad, 131, 50)
+            FechaHora = Trim(Mid(cad, 181, 14))
+            Fecha = Mid(FechaHora, 7, 2) & "/" & Mid(FechaHora, 5, 2) & "/" & Mid(FechaHora, 1, 4)
+            hora = Mid(FechaHora, 9, 6)
+            NombreCliente = Trim(Mid(cad, 215, 70))
+            tarjeta = Trim(Mid(cad, 195, 20))
+            Matricula = Trim(Mid(cad, 370, 20))
+            IdProducto = Trim(Mid(cad, 493, 20))
+            surtidor = Trim(Mid(cad, 538, 10))
+            manguera = Trim(Mid(cad, 548, 10))
+        
+            PrecioLitro = Trim(Mid(cad, 568, 18))
+            cantidad = Trim(Mid(cad, 650, 18))
+            Importe = Trim(Mid(cad, 668, 18))
+            descuento = Trim(Mid(cad, 586, 18))
+            idtipopago = Trim(Mid(cad, 784, 10))
+            DescrTipoPago = Trim(Mid(cad, 794, 25))
+            CodigoTipoPago = Trim(Mid(cad, 1, 10))
+            NifCliente = Trim(Mid(cad, 834, 9))
             
-        PrecioLitro = Trim(Vec(25))
+            IvaArticulo = Trim(Mid(cad, 609, 5))
+            NombreArticulo = Trim(Mid(cad, 513, 25))
+            Kilometros = Trim(Mid(cad, 415, 18))
+            
+            
+        Else
         
         
-        cantidad = Trim(Vec(31))
-        Importe = Trim(Vec(32))
-        descuento = Trim(Vec(26))
-       
+            Vec = Split(cad, Chr(9))
+           
+            Base = Vec(0)
+            NombreBase = Vec(1)
+            turno = Vec(2)
         
+            NumAlbaran = Trim(Vec(3))
+            NumFactura = Trim(Vec(4))
+            IdVendedor = Trim(Vec(6))
+            NombreVendedor = Vec(7)
+            FechaHora = Trim(Vec(8))
+            Fecha = Mid(FechaHora, 7, 2) & "/" & Mid(FechaHora, 5, 2) & "/" & Mid(FechaHora, 1, 4)
+            hora = Mid(FechaHora, 9, 6)
+            NombreCliente = Trim(Vec(10))
+            tarjeta = Trim(Vec(9))
+            Matricula = Trim(Vec(15))
+            IdProducto = Trim(Vec(20))
+            surtidor = Trim(Vec(22))
+            manguera = Trim(Vec(23))
+                
+            PrecioLitro = Trim(Vec(25))
+            
+            
+            cantidad = Trim(Vec(31))
+            Importe = Trim(Vec(32))
+            descuento = Trim(Vec(26))
+           
+            
+            
+            
+            idtipopago = Trim(Vec(38))
+            DescrTipoPago = Trim(Vec(39))
+            CodigoTipoPago = Trim(Vec(40))
+            NifCliente = Trim(Vec(41))
+            
+            'If idtipopago <> CodigoTipoPago Then Stop
+            
+            
+            IvaArticulo = Trim(Vec(28))
+            NombreArticulo = Trim(Vec(21))
+            Kilometros = Trim(Vec(17))
+            
+            
+            
+            
+        End If
+        DocumentoOriginal = NumAlbaran
+    Else
+        'AVALON    AGosto 2020
+            'Vec = Split(cad, ";")
+            Vec = Split(cad, Chr(9))
+            
+            'Debug.Print UBound(Vec)
+            If False Then
+                    For NumRegElim = 0 To UBound(Vec) - 1
+                        Debug.Print Vec(NumRegElim)
+                        
+                    Next
+            End If
+                        
+            Base = Vec(0)
+            NombreBase = Vec(0)
+            '-----
+            'turno
+            SQL = Vec(2)
+            
+            turno = Val(SQL)   ' seeraá yymmddPC donde año mes dia campo P y C
+                       
+                        
+            'Cliente
+            tarjeta = Trim(Vec(13))
+            If tarjeta = "UNKNOWN" Then tarjeta = sparamalvic!Clivario
+
+            NifCliente = Trim(Vec(15))
+                        
         
-        
-        idtipopago = Trim(Vec(38))
-        DescrTipoPago = Trim(Vec(39))
-        CodigoTipoPago = Trim(Vec(40))
-        NifCliente = Trim(Vec(41))
-        
-        IvaArticulo = Trim(Vec(28))
-        NombreArticulo = Trim(Vec(21))
-        Kilometros = Trim(Vec(17))
-        
-        
-        
+            
+            
+            'Factura / ALbaran
+            DocumentoOriginal = Trim(Vec(6))
+            
+            SQL = LCase(Trim(Vec(3)))
+            CampoNumeroFacturaAvalon = Right("000000" & Mid(Vec(5), 2), 6)
+            If SQL = "factura simplificada" Then
+                
+                
+                
+                'TICKET
+                
+                
+                'En alvic
+                'D0031350
+                If Vec(9) = "Venta" Then
+                    DocumentoRelacionado = ""
+                    'Ticket normal
+                    SQL = "D"
+                            
+
+                Else
+                    'DocumentoRelacionado
+                    SQL = Mid(Vec(8), 1, 1)
+                    SQL = SQL & Right("000000" & Mid(Vec(8), 2), 6)
+                    DocumentoRelacionado = SQL
+                
+                
+                    'ANULACION. Sera un albaran pero en negativo. Por si coincide
+                    SQL = "D1"
+                    
+                End If
+                SQL = SQL & CampoNumeroFacturaAvalon
+                'Se hace una factura por cada ticket
+                NumAlbaran = SQL
+                NumFactura = ""
+            Else
+            
+                Stop
+                        
+                'AVALON
+                
+                If Mid(LCase(SQL), 1, 5) = "albar" Then 'cuidado con formato fichero. Quito el acento pq pude ser que venga como caracter especial
+                    'ALBARAN
+                    CampoNumeroFacturaAvalon = Right("000000" & Mid(Vec(5), 2), 6)
+                    SQL = "D" & Right(Vec(7), 6)
+                    NumFactura = ""
+                Else
+                    
+                    If SQL = "factura" Then
+                        
+     
+                        NumAlbaran = Mid(DocumentoRelacionado, 1, 1) & Right("000000" & Mid(DocumentoRelacionado, 2), 6)
+                        
+                        
+                        NumFactura = Mid(Vec(7), 1, 1) & Right("000000" & Mid(Vec(7), 2), 6)
+                        
+                    Else
+                        Err.Raise 513, , "Tipo documento incorrecto: " & SQL
+                    End If
+                End If
+                
+               
+            End If
+           
+            
+            'Vendedor
+            ' 001001_5651 BENITEZ
+            IdVendedor = Trim(Vec(10))
+            NombreVendedor = Vec(11)
+  
+                FechaHora = Trim(Vec(12))
+                
+            '    FechaHora = "20210213164926"
+                
+                
+                 Fecha = Mid(FechaHora, 7, 2) & "/" & Mid(FechaHora, 5, 2) & "/" & Mid(FechaHora, 1, 4)
+                hora = Mid(FechaHora, 9, 8)
+         
+            NombreCliente = Trim(Vec(14))
+           ' If NombreCliente <> "UNKNOWN" Then Stop
+            
+            
+            Matricula = Trim(Vec(16))
+            IdProducto = Trim(Vec(17))
+            surtidor = ""
+            manguera = ""
+                
+            PrecioLitro = Trim(Vec(17))   ''120500   =1.20500
+            If PrecioLitro <> "" And PrecioLitro <> "0,00" Then PrecioLitro = CCur(PrecioLitro) * 100000
+                
+            
+            cantidad = Trim(Vec(24)) * 100 'bajo lo trata divido /100
+            Importe = Trim(Vec(25)) * 100
+            descuento = Vec(21)
+            If descuento <> "" And descuento <> "0" Then descuento = CCur(descuento) * 100000
+                
+ 
+            DescrTipoPago = Trim(Vec(28))
+            idtipopago = Trim(Vec(27))
+            idtipopago = 0
+            
+            IvaArticulo = CCur(Trim(Vec(23))) * "100"  'Son 4 decimales
+            NombreArticulo = Trim(Vec(18))
+            Kilometros = 0 '
+                
         
     End If
         
+        
+        
+        
+    'Esto ers comun
+    'CUIDADO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     If vParamAplic.NumeroInstalacion = vbTaxco Then IdVendedor = Val(IdVendedor) + 500
         
         
     
-    If Trim(Importe) = "" Then
-        Exit Function
-    Else
-        If CCur(Importe) = 0 Then Exit Function
-    End If
+    If Trim(Importe) = "" Then Importe = 0
+    If CCur(Importe) = 0 Then Exit Function
+    
     
     
     idClienteVarioAlvic = ""
@@ -2395,24 +2638,24 @@ Dim Aux3 As Currency
     
     If FechaFichero < CDate("01/01/01") Then
         'Es la primera linea procesada
-        FechaFichero = CDate(txtcodigo(0).Text)
+        FechaFichero = CDate(txtCodigo(0).Text)
     
         'Es la primera linea. La fecha debe coincidir con la del fichero
         If CDate(Fecha) <> FechaFichero Then
             Mens = "Fechas: " & Fecha & "  // " & FechaFichero
                 SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, importe3, importe4, importe5, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(NumAlbaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N") & _
-                  "," & DBSet(Mid(hora, 3, 2), "N") & "," & DBSet(Tarje, "N") & "," & DBSet(NifCliente, "T") & "," & DBSet(c_Cantidad, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(Mens, "T") & ")"
+                  vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N") & _
+                  "," & DBSet(Mid(hora, 4, 2), "N") & "," & DBSet(tarjeta, "N") & "," & DBSet(NifCliente, "T") & "," & DBSet(c_Cantidad, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(Mens, "T") & ")"
                 conn.Execute SQL
         End If
     End If
     
     If IdTurno > 0 Then
         If Val(turno) <> IdTurno Then
-            Mens = "Err.turno:Fichero " & turno & "  // " & IdTurno
+            Mens = "Err.turno:Fichero " & turno & "//" & IdTurno
             SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, importe3, importe4, importe5, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(NumAlbaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N") & _
-                  "," & DBSet(Mid(hora, 3, 2), "N") & "," & DBSet(Tarje, "N") & "," & DBSet(NifCliente, "T") & "," & DBSet(c_Cantidad, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(Mens, "T") & ")"
+                  vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N") & _
+                  "," & DBSet(Mid(hora, 4, 2), "N") & "," & DBSet(Tarje, "N") & "," & DBSet(NifCliente, "T") & "," & DBSet(c_Cantidad, "N") & "," & DBSet(0, "N") & "," & DBSet(0, "N") & "," & DBSet(Mens, "T") & ")"
             conn.Execute SQL
         End If
     End If
@@ -2423,10 +2666,13 @@ Dim Aux3 As Currency
     c_Precio = Round2(CCur(PrecioLitro) / 100000, 4)
     
     
-    
+    'If vContad = 285 Then Stop
     
     
     'Comprobamos que el IVA esta en alguno de los articulos de parametros
+    
+   
+    
     Mens = ""
     TIpoDeIva_D = 0
     Porciva = Round2(CInt(ComprobarCero(IvaArticulo)) / 100, 0)
@@ -2451,7 +2697,7 @@ Dim Aux3 As Currency
         'Metemos en errores
         SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
               "importe3, importe4, importe5, nombre1) values (" & _
-              vUsu.Codigo & "," & DBSet(NumAlbaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
+              vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
         SQL = SQL & "," & DBSet(Mid(hora, 3, 2), "N") & "," & DBSet(CodigoCliente, "N") & "," & DBSet(IdProducto, "T") & "," & _
               DBSet(c_Cantidad, "N") & "," & DBSet(c_Precio, "N") & "," & DBSet(c_Importe, "N") & "," & DBSet(Mens, "T") & ")"
               
@@ -2460,7 +2706,7 @@ Dim Aux3 As Currency
     End If
     
     
-    
+   ' If IvaArticulo <> "2100" Then Stop
     If Trim(descuento) <> "" Then
         If CCur(descuento) <> 0 Then
             c_Descuento = Round2(CCur(descuento) / 100000, 5)
@@ -2476,8 +2722,14 @@ Dim Aux3 As Currency
     
     
     c_PrecioSinIVA = 1 + (Porciva / 100)   'factor IVA
-    
-    c_Importe1 = (importeConIva / c_PrecioSinIVA)
+    If Not EsAlvic2 Then
+        'EL importe IVA nos lo indican en el fichero
+        c_PrecioSinIVA = Trim(Vec(25))
+        c_Importe1 = importeConIva - c_PrecioSinIVA
+    Else
+        'Lo que habia
+        c_Importe1 = (importeConIva / c_PrecioSinIVA)
+    End If
     c_Importe2 = c_Importe1 / c_Cantidad
     If c_Descuento > 0 Then
         'EL DESCUENTO ES POR CANTIDAD !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!    Febrero 2020
@@ -2502,11 +2754,11 @@ Dim Aux3 As Currency
             If Tarje = "" Then
                     
                    Mens = "No existe NIF en clientes"
-                    SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, importe3, importe4, importe5, nombre1) values (" & _
-                          vUsu.Codigo & "," & DBSet(NumAlbaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N") & _
+                   SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, importe3, importe4, importe5, nombre1) values (" & _
+                          vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N") & _
                           "," & DBSet(Mid(hora, 3, 2), "N") & "," & DBSet(tarjeta, "N") & "," & DBSet(NifCliente, "T") & "," & DBSet(c_Cantidad, "N") & "," & DBSet(c_Precio, "N") & "," & DBSet(c_Importe, "N") & "," & DBSet(Mens, "T") & ")"
                     
-                    conn.Execute SQL
+                   conn.Execute SQL
             End If
             CodigoCliente = Tarje
         End If
@@ -2523,7 +2775,7 @@ Dim Aux3 As Currency
             Mens = "Fecha incorrecta"
             SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, importe3, " & _
                   "importe4, importe5, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(NumAlbaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
+                  vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
             SQL = SQL & "," & DBSet(Mid(hora, 3, 2), "N") & "," & DBSet(CodigoCliente, "N") & "," & DBSet(Fecha, "T") & "," & _
                   DBSet(c_Cantidad, "N") & "," & DBSet(c_Precio, "N") & "," & DBSet(c_Importe, "N") & "," & DBSet(Mens, "T") & ")"
             
@@ -2533,7 +2785,7 @@ Dim Aux3 As Currency
         b = True  'ok por defecto
         If IdTurno > 0 Then
             'Esta traspasadno un turno. La fecha puede ser de la seleccionada, o un dia mas
-            If CDate(Fecha) <> FechaFichero Then FechaFichero = DateAdd("d", 1, CDate(txtcodigo(0).Text)): Turno3 = True
+            If CDate(Fecha) <> FechaFichero Then FechaFichero = DateAdd("d", 1, CDate(txtCodigo(0).Text)): Turno3 = True
             
         
         End If
@@ -2548,8 +2800,8 @@ Dim Aux3 As Currency
             Mens = "Fecha no es del traspaso" ' o no es del turno"
             SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, importe3, " & _
                   "importe4, importe5, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(NumAlbaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
-            SQL = SQL & "," & DBSet(Mid(hora, 3, 2), "N") & "," & DBSet(CodigoCliente, "N") & "," & DBSet(Fecha, "T") & "," & _
+                  vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
+            SQL = SQL & "," & DBSet(Val(Mid(hora, 3, 2)), "N") & "," & DBSet(CodigoCliente, "N") & "," & DBSet(Fecha, "T") & "," & _
                   DBSet(c_Cantidad, "N") & "," & DBSet(c_Precio, "N") & "," & DBSet(c_Importe, "N") & "," & DBSet(Mens, "T") & ")"
             
             conn.Execute SQL
@@ -2569,7 +2821,7 @@ Dim Aux3 As Currency
         Mens = "Forma de pago incorrecta "
         SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
               "importe3, importe4, importe5, nombre1) values (" & _
-              vUsu.Codigo & "," & DBSet(NumAlbaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
+              vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
         SQL = SQL & "," & DBSet(Mid(hora, 3, 2), "N") & "," & DBSet(CodigoCliente, "N") & "," & DBSet(idtipopago, "T") & "," & _
                 DBSet(c_Cantidad, "N") & "," & DBSet(c_Precio, "N") & "," & DBSet(c_Importe, "N") & "," & DBSet(Mens, "T") & ")"
         
@@ -2588,7 +2840,7 @@ Dim Aux3 As Currency
         Mens = "Codigo trabajador incorreto"
         SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
               "importe3, importe4, importe5, nombre1) values (" & _
-              vUsu.Codigo & "," & DBSet(NumAlbaran, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
+              vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N")
         SQL = SQL & "," & DBSet(Mid(hora, 3, 2), "N") & "," & DBSet(CodigoCliente, "N") & "," & DBSet(IdVendedor, "T") & "," & _
               DBSet(c_Cantidad, "N") & "," & DBSet(c_Precio, "N") & "," & DBSet(c_Importe, "N") & "," & DBSet(Mens, "T") & ")"
               
@@ -2601,7 +2853,7 @@ Dim Aux3 As Currency
     '------------------------------------------------------------------------------------------
     '----------------------------------------------------------------------------------------------------------------------------
     'INSERTAMOS EN TMP
-    'cadSelect = "INSERT INTO tmpgasolimport(codusu,codigo,NumAlbaran,NumFactura,fechahora,IdVendedor,Cliente,NombreCliente,NifCliente,Matricula,CodigoProducto,surtidor,manguera,Precio,cantidad,descuento,idtipopago,importeConIva)"
+    'cadSelect = "INSERT INTO tmpgasolimport(codusu,codigo,NumAlbaran,NumFactura,fechahora,IdVendedor,Cliente,NombreCliente,NifCliente,Matricula,CodigoProducto,surtidor,manguera,Precio,cantidad,descuento,idtipopago,importeConIva,doc_relacionado)"
     hora = Mid(hora, 1, 2) & ":" & Mid(hora, 3, 2) & ":" & Mid(hora, 5, 2)
     Mens = Format(Fecha, FormatoFecha) & " " & hora
     
@@ -2622,14 +2874,18 @@ Dim Aux3 As Currency
     ',Precio,cantidad,descuento,importel,idtipopago ,ccoste)"
     SQL = SQL & "," & DBSet(c_PrecioSinIVA, "N", "N") & "," & DBSet(c_Cantidad, "N", "N") & "," & DBSet(c_Descuento, "N", "N")
     SQL = SQL & "," & DBSet(c_Importe1, "N", "N") & "," & DBSet(idtipopago, "T", "N") & "," & TIpoDeIva_D & "," & DBSet(importeConIva, "N")
-    SQL = SQL & "," & DBSet(ccoste, "T", "N") & ",'" & turno & "','" & idClienteVarioAlvic & "')"
+    SQL = SQL & "," & DBSet(ccoste, "T", "N") & ",'" & turno & "','" & idClienteVarioAlvic & "',"
     
+    'DocumentoOriginal DocumentoRelacionado
+    SQL = SQL & DBSet(DocumentoOriginal, "T", "N") & "," & DBSet(DocumentoRelacionado, "T") & ")"
+    
+    'insertamos
     cadFormula = cadFormula & SQL
     
   
 eComprobarRegistroAlz:
     If Err.Number <> 0 Then
-        ComprobarRegistroAlz = False
+        ComprobarRegistroLineaFichero = False
         Err.Raise 513, , Err.Description
     End If
 End Function
@@ -2688,7 +2944,7 @@ Dim Importe As Currency
 
 Set Mc = New Contadores
     
-    FechaAsi = CDate(txtcodigo(0).Text)
+    FechaAsi = CDate(txtCodigo(0).Text)
     Mc.ConseguirContador "0", FechaAsi <= vEmpresa.FechaFin, False
     cad = "Cierre caja ALVIC "
     If IdTurno > 0 Then cad = cad & "   turno: " & Format(IdTurno, "00000")
@@ -2763,7 +3019,7 @@ Set Mc = New Contadores
         SQL = SQL & "codconce,ampconce, timporteD, timporteH,codccost, ctacontr, idcontab, punteada) VALUES "
         SQL = SQL & Mid(cad, 2) & NumRegElim & "," & DBSet(cadTitulo, "T") & "," & DBSet("cierre turno", "T")
         'codconce,ampconce,
-        SQL = SQL & ",1," & DBSet("Cierre " & txtcodigo(0).Text, "T") & ","
+        SQL = SQL & ",1," & DBSet("Cierre " & txtCodigo(0).Text, "T") & ","
         ' timporteD, timporteH,
         SQL = SQL & DBSet(Importe, "N") & ",NULL"
         'codccost, ctacontr, idcontab, punteada
@@ -2777,7 +3033,7 @@ Set Mc = New Contadores
         SQL = SQL & "codconce,ampconce, timporteD, timporteH,codccost, ctacontr, idcontab, punteada) VALUES "
         SQL = SQL & Mid(cad, 2) & NumRegElim & "," & DBSet(cadTitulo, "T") & "," & DBSet("cierre turno", "T")
         'codconce,ampconce,
-        SQL = SQL & ",1," & DBSet("Cierre " & txtcodigo(0).Text, "T") & ","
+        SQL = SQL & ",1," & DBSet("Cierre " & txtCodigo(0).Text, "T") & ","
         ' timporteD, timporteH,
         SQL = SQL & "NULL," & DBSet(Importe, "N")
         'codccost, ctacontr, idcontab, punteada
@@ -2811,7 +3067,7 @@ Set Mc = New Contadores
         
         
         'codconce,ampconce,
-        SQL = SQL & ",1," & DBSet("Cierre turno " & txtcodigo(1).Text, "T") & ","
+        SQL = SQL & ",1," & DBSet("Cierre turno " & txtCodigo(1).Text, "T") & ","
         ' timporteD, timporteH,
         SQL = SQL & DBSet(miRsAux!cantidad, "N") & ",NULL"
         'codccost, ctacontr, idcontab, punteada
@@ -2913,7 +3169,7 @@ Dim Fecha As Date
                 cadTabla = "numalbaran = '" & cadTabla & "' AND codusu "
                 cadTabla = DevuelveDesdeBD(conAri, "fechahora", "tmpgasolimport", cadTabla, CStr(vUsu.Codigo))
             End If
-            If cadTabla = "" Then cadTabla = Me.txtcodigo(0).Text
+            If cadTabla = "" Then cadTabla = Me.txtCodigo(0).Text
              Fecha = Format(cadTabla, "dd/mm/yyyy")
                 
             Codigo = RT!NomArtic & RT!codArtic
@@ -2953,7 +3209,7 @@ Dim Resumen As Boolean
     
     If Not Turno3 Then Resumen = False
     
-    If Resumen Then FE = DateAdd("d", 1, CDate(txtcodigo(0).Text))
+    If Resumen Then FE = DateAdd("d", 1, CDate(txtCodigo(0).Text))
     
     
     

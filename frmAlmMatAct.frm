@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAlmMatAct 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Materias activas"
@@ -479,16 +479,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -587,15 +587,15 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim B As Boolean
+Dim b As Boolean
 
     DeseleccionaGrid Me.DataGrid1
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To txtAux.Count - 1
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = B
+        txtAux(jj).visible = b
     Next jj
     
 End Sub
@@ -688,16 +688,16 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
      'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -710,9 +710,9 @@ Dim B As Boolean
 
                       
     '-----------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -732,28 +732,28 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnEliminar.Enabled = b
     
-    B = ((Modo >= 3))
+    b = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
@@ -925,29 +925,38 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
-Dim cArt As CArticulo
+Dim b As Boolean
+
 
     On Error GoTo ErrDatosOK
 
     DatosOk = False
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
     
     'comprobar que el articulo insertado tiene control de numero de serie
     If Modo = 3 Then
-        Set cArt = New CArticulo
-        If cArt.LeerDatos(txtAux(0).Text) Then
-            If Not cArt.TieneNumLote Then
-                B = False
-                MsgBox "El artículo no tiene control de nº de lote.", vbInformation
-            End If
-        End If
-        Set cArt = Nothing
+        
+        'Abril 2021
+        'Debia aser un error
+        ' No teiene sentido el trooz de abjao. NO puede comprobar sobrer articulos !!!!
+        'Dim cart As CArticulo
+        'Set cart = New CArticulo
+        'If cart.LeerDatos(txtAux(0).Text) Then
+        '    If Not cart.TieneNumLote Then
+        '        b = False
+        '        MsgBox "El artículo no tiene control de nº de lote.", vbInformation
+        '    End If
+        'End If
+        'Set cart = Nothing
+    
+    
+    
+    
     End If
     
-    DatosOk = B
+    DatosOk = b
     Exit Function
     
 ErrDatosOK:

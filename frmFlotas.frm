@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFlotas 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Flotas-Maquinaria"
@@ -771,7 +771,7 @@ Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmP As frmComProveedores
+Private WithEvents frmP As frmBasico2 '%=%=frmComProveedores
 Attribute frmP.VB_VarHelpID = -1
 
 Dim NombreTabla As String
@@ -829,13 +829,13 @@ On Error GoTo Error1
                If DatosOk Then
                     If ModificaDesdeFormulario(Me, 1) Then
                         'Si me cambia el proveedor, entonces guardo el LOG
-                        If Val(DBLet(Data1.Recordset!CodProve, "N")) <> Val(Text1(14).Text) Then
+                        If Val(DBLet(Data1.Recordset!Codprove, "N")) <> Val(Text1(14).Text) Then
                                 'Ha cambiado el proveedor
                                 Set LOG = New cLOG
                                 
-                                CadenaConsulta2 = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", CStr(DBLet(Data1.Recordset!CodProve, "N")))
+                                CadenaConsulta2 = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", CStr(DBLet(Data1.Recordset!Codprove, "N")))
                                 
-                                CadenaConsulta2 = "Anterior: " & DBLet(Data1.Recordset!CodProve, "T") & " - " & CadenaConsulta2
+                                CadenaConsulta2 = "Anterior: " & DBLet(Data1.Recordset!Codprove, "T") & " - " & CadenaConsulta2
                                 CadenaConsulta2 = "Actual: " & Text1(14).Text & " - " & Text2(14).Text & vbCrLf & CadenaConsulta2
                                 CadenaConsulta2 = "[FLOTAS]" & vbCrLf & CadenaConsulta2
                                 LOG.Insertar 29, vUsu, CadenaConsulta2
@@ -1124,9 +1124,11 @@ Private Sub imgBuscar_Click(Index As Integer)
     CadenaConsulta2 = ""
     Select Case Index
         Case 14  '
-                Set frmP = New frmComProveedores
-                frmP.DatosADevolverBusqueda = "0"
-                frmP.Show vbModal
+'                Set frmP = New frmComProveedores
+'                frmP.DatosADevolverBusqueda = "0"
+'                frmP.Show vbModal
+                Set frmP = New frmBasico2
+                AyudaProveedores frmP, Text1(2)
                 Set frmP = Nothing
     End Select
     PonerFoco Text1(2)
@@ -2058,9 +2060,9 @@ Private Sub Imprimir()
         .SoloImprimir = False
         .EnvioEMail = False
         .Titulo = "Flotas"
-        .opcion = 3000   'VAN TODOS EN ESTE SACO
+        .Opcion = 3000   'VAN TODOS EN ESTE SACO
         .NombrePDF = "rFlota.rpt"
-        .NombreRpt = .NombrePDF
+        .NombreRPT = .NombrePDF
         .ConSubInforme = False
         .MostrarTreeDesdeFuera = False
         .Show vbModal

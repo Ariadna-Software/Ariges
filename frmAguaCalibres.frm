@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAguaCalibres 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Calibres - Aguas"
@@ -570,7 +570,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -589,8 +589,8 @@ Dim Cad As String, Indicador As String
                 If ModificaDesdeFormulario(Me, 1) Then
                    
                     TerminaBloquear
-                    Cad = "(codcalibre=" & Text1(0).Text & ")"
-                    If SituarData(Data1, Cad, Indicador) Then
+                    cad = "(codcalibre=" & Text1(0).Text & ")"
+                    If SituarData(Data1, cad, Indicador) Then
                         PonerModo 2
                         lblIndicador.Caption = Indicador
                         PonerFoco Text1(0)
@@ -681,7 +681,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
@@ -689,11 +689,11 @@ Dim Cad As String
     If Not PuedeEliminar Then Exit Sub
     
     '### a mano
-    Cad = "¿Seguro que desea eliminar el calibre?" & vbCrLf
-    Cad = Cad & vbCrLf & "Codigo: " & Format(Data1.Recordset.Fields(0), "000")
-    Cad = Cad & vbCrLf & "Descripcion: " & Data1.Recordset.Fields(1)
+    cad = "¿Seguro que desea eliminar el calibre?" & vbCrLf
+    cad = cad & vbCrLf & "Codigo: " & Format(Data1.Recordset.Fields(0), "000")
+    cad = cad & vbCrLf & "Descripcion: " & Data1.Recordset.Fields(1)
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         NumRegElim = Data1.Recordset.AbsolutePosition
@@ -716,22 +716,22 @@ Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
         Data1.Recordset.CancelUpdate
-        MuestraError Err.Number, "Eliminar Forma de Pago" & vbCrLf & Cad, Err.Description
+        MuestraError Err.Number, "Eliminar Forma de Pago" & vbCrLf & cad, Err.Description
     End If
 End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -822,7 +822,7 @@ End Sub
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
 Dim cadB As String
 Dim Aux As String
-Dim indice As Integer
+Dim Indice As Integer
 
     If CadenaDevuelta <> "" Then
         
@@ -942,17 +942,17 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim Cad As String
+Dim cad As String
 
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(0), 30, "Código")
-        Cad = Cad & ParaGrid(Text1(1), 70, "Denominacion")
-        If Cad <> "" Then
+        cad = ""
+        cad = cad & ParaGrid(Text1(0), 30, "Código")
+        cad = cad & ParaGrid(Text1(1), 70, "Denominacion")
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = NombreTabla
             frmB.vSQL = cadB
             
@@ -1033,8 +1033,8 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
-Dim B As Boolean
+Dim i As Byte
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1042,10 +1042,10 @@ Dim NumReg As Byte
     
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
         If Modo = 1 Then Me.lblIndicador.Caption = "BUSQUEDA"
     Else
         cmdRegresar.visible = False
@@ -1056,15 +1056,15 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     
     '----------------------------------------------
     'Modo insertar o modificar
-    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = B Or Modo = 1
-    cmdCancelar.visible = B Or Modo = 1
-    If B Or Modo = 1 Then
+    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = b Or Modo = 1
+    cmdCancelar.visible = b Or Modo = 1
+    If b Or Modo = 1 Then
         cmdCancelar.Cancel = True
     Else
         cmdCancelar.Cancel = False
@@ -1085,45 +1085,45 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    mnEliminar.Enabled = b
     
-    B = (Modo >= 3)
+    b = (Modo >= 3)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = Not B
-    Me.mnNuevo.Enabled = Not B
+    Toolbar1.Buttons(5).Enabled = Not b
+    Me.mnNuevo.Enabled = Not b
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
     
     DatosOk = False
-    B = CompForm(Me, 1)
-    If Not B Then Exit Function
+    b = CompForm(Me, 1)
+    If Not b Then Exit Function
      
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then B = False
+        If ExisteCP(Text1(0)) Then b = False
     End If
      
-    If Not B Then Exit Function
+    If Not b Then Exit Function
         
 
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -1163,13 +1163,13 @@ End Sub
 
 
 Private Function PuedeEliminar() As Boolean
-Dim Cad As String
+Dim cad As String
     PuedeEliminar = False
     
     
           
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "aguacontadores", "codcalibre", Text1(0).Text)
-    If Val(Cad) > 0 Then
+    cad = DevuelveDesdeBD(conAri, "count(*)", "aguacontadores", "codcalibre", Text1(0).Text)
+    If Val(cad) > 0 Then
         MsgBox "Existen contadores de este calibre", vbExclamation
     Else
         PuedeEliminar = True

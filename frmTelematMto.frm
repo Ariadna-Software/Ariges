@@ -493,8 +493,6 @@ Private WithEvents frmB As frmBuscaGrid 'Form para busquedas
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmP As frmComProveedores
-Attribute frmP.VB_VarHelpID = -1
 
 '-------------------------------------------------------------------------
 '-------------------------------------------------------------------------
@@ -574,7 +572,7 @@ Private Sub cmdCancelar_Click()
             PonerModo 2
             PonerCampos
     End Select
-    PonerFoco text1(0)
+    PonerFoco Text1(0)
 End Sub
 
 
@@ -594,14 +592,14 @@ Private Sub BotonBuscar()
         LimpiarCampos
         PonerModo 1
         'Si pasamos el control aqui lo ponemos en amarillo
-        PonerFoco text1(0)
-        text1(0).BackColor = vbYellow
+        PonerFoco Text1(0)
+        Text1(0).BackColor = vbYellow
     Else 'Modo=1 Busqueda
         HacerBusqueda
         If Data1.Recordset.EOF Then
-            text1(kCampo).Text = ""
-            text1(kCampo).BackColor = vbYellow
-            PonerFoco text1(kCampo)
+            Text1(kCampo).Text = ""
+            Text1(kCampo).BackColor = vbYellow
+            PonerFoco Text1(kCampo)
         End If
     End If
 End Sub
@@ -634,7 +632,7 @@ Private Sub BotonModificar()
     
     'Añadiremos el boton de aceptar y demas objetos para insertar
     PonerModo 4
-    PonerFoco text1(1)
+    PonerFoco Text1(1)
 End Sub
 
 
@@ -650,7 +648,7 @@ Dim cad As String
     
     '### a mano
     cad = "¿Seguro que desea eliminar la Familia de Artículo?:" & vbCrLf
-    cad = cad & vbCrLf & "Cod. : " & Format(Data1.Recordset.Fields(0), FormatoCampo(text1(0)))
+    cad = cad & vbCrLf & "Cod. : " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
     cad = cad & vbCrLf & "Desc.: " & Data1.Recordset.Fields(1)
 
     'Borramos
@@ -776,7 +774,7 @@ End Sub
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
 Dim cadB As String
 Dim Aux As String
-Dim indice As Byte
+Dim Indice As Byte
     
     If CadenaDevuelta <> "" Then
             
@@ -788,7 +786,7 @@ Dim indice As Byte
                     'Sabemos que campos son los que nos devuelve
                     'Creamos una cadena consulta y ponemos los datos
                     cadB = ""
-                    Aux = ValorDevueltoFormGrid(text1(0), CadenaDevuelta, 1)
+                    Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
                     cadB = Aux
                     '   Como la clave principal es unica, con poner el sql apuntando
                     '   al valor devuelto sobre la clave ppal es suficiente
@@ -802,7 +800,7 @@ Dim indice As Byte
             Else
             
                 'prove
-                text1(3).Text = RecuperaValor(CadenaDevuelta, 1)
+                Text1(3).Text = RecuperaValor(CadenaDevuelta, 1)
                 Text2(3).Text = RecuperaValor(CadenaDevuelta, 2)
             End If
     End If
@@ -865,7 +863,7 @@ End Sub
 
 Private Sub Text1_GotFocus(Index As Integer)
     kCampo = Index
-    ConseguirFoco text1(Index), Modo
+    ConseguirFoco Text1(Index), Modo
 End Sub
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -888,7 +886,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim C As String
 
-    If Not PerderFocoGnral(text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -898,10 +896,10 @@ Dim C As String
     Select Case Index
         Case 0 'Codigo
 
-             If PonerFormatoEntero(text1(Index)) Then
+             If PonerFormatoEntero(Text1(Index)) Then
                 'Comprobar si ya existe el cod
                 If Modo = 3 Then 'Insertar
-                    If ExisteCP(text1(Index)) Then PonerFoco text1(Index)
+                    If ExisteCP(Text1(Index)) Then PonerFoco Text1(Index)
                 End If
             End If
 
@@ -909,11 +907,11 @@ Dim C As String
         Case 3
             'Codprove
             C = ""
-            If text1(3).Text <> "" Then
-                If Not PonerFormatoEntero(text1(3)) Then
-                    text1(3).Text = ""
+            If Text1(3).Text <> "" Then
+                If Not PonerFormatoEntero(Text1(3)) Then
+                    Text1(3).Text = ""
                 Else
-                    C = PonerNombreDeCod(text1(3), conAri, "sprove", "nomprove", "codprove")
+                    C = PonerNombreDeCod(Text1(3), conAri, "sprove", "nomprove", "codprove")
                     
                 End If
             End If
@@ -952,9 +950,9 @@ Dim cad As String
              Set frmB = New frmBuscaGrid
             If EsBusqueda Then
                 '
-                cad = cad & ParaGrid(text1(0), 14, "Código")
-                cad = cad & ParaGrid(text1(1), 61, "Nombre")
-                cad = cad & ParaGrid(text1(4), 25, "Ref prove")
+                cad = cad & ParaGrid(Text1(0), 14, "Código")
+                cad = cad & ParaGrid(Text1(1), 61, "Nombre")
+                cad = cad & ParaGrid(Text1(4), 25, "Ref prove")
                 frmB.vTabla = "stelem"
                 frmB.vTitulo = "Fichero telematel"
             Else
@@ -992,7 +990,7 @@ Private Sub PonerCadenaBusqueda()
     If Data1.Recordset.RecordCount <= 0 Then
         If Modo = 1 Then 'Busqueda
              MsgBox "No hay ningún registro en la tabla " & NombreTabla & " para ese criterio de Búsqueda.", vbInformation
-             PonerFoco text1(0)
+             PonerFoco Text1(0)
         Else
             MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
         End If
@@ -1020,8 +1018,8 @@ Dim i As Byte
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
     
-    Text2(2).Text = PonerNombreDeCod(text1(2), conAri, "sartic", "nomartic", "codartic")
-    Text2(3).Text = PonerNombreDeCod(text1(3), conAri, "sprove", "nomprove", "codprove")
+    Text2(2).Text = PonerNombreDeCod(Text1(2), conAri, "sartic", "nomartic", "codartic")
+    Text2(3).Text = PonerNombreDeCod(Text1(3), conAri, "sprove", "nomprove", "codprove")
     
     '-- Esto permanece para saber donde estamos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -1140,7 +1138,7 @@ Dim b As Boolean
     
     'Comprobar si ya existe el cod de familia en la tabla
     If Modo = 3 Then 'Insertar
-        If ExisteCP(text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then b = False
     End If
     
     DatosOk = b
@@ -1186,14 +1184,14 @@ Dim Precio As Currency
                     MsgBox "Ya tiene asignado articulo", vbExclamation
                     Exit Sub
                 End If
-                Precio = ImporteFormateado(text1(7).Text)
-                NumRegElim = Val(text1(6).Text)
+                Precio = ImporteFormateado(Text1(7).Text)
+                NumRegElim = Val(Text1(6).Text)
                 Precio = Precio / NumRegElim
                 CadenaDesdeOtroForm = ""
                 With frmAlmArticulos
                     'codprove|nomprove|refprove|precio|nomartic|ean|codtelem|
-                   .DatosADevolverBusqueda = "··" & text1(3).Text & "|" & Text2(3).Text & "|" & text1(4).Text & "|" & CStr(Precio) & "|" & text1(1).Text & _
-                        "|" & text1(5) & "|" & text1(0).Text & "|"
+                   .DatosADevolverBusqueda = "··" & Text1(3).Text & "|" & Text2(3).Text & "|" & Text1(4).Text & "|" & CStr(Precio) & "|" & Text1(1).Text & _
+                        "|" & Text1(5) & "|" & Text1(0).Text & "|"
                    .Show vbModal
                 End With
                 
@@ -1281,7 +1279,7 @@ End Sub
 Private Sub PosicionarData()
 Dim cad As String, Indicador As String
 
-    cad = "(codtelem=" & text1(0).Text & ")"
+    cad = "(codtelem=" & Text1(0).Text & ")"
     If SituarData(Data1, cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador

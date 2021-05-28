@@ -140,7 +140,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Command1_Click()
-    frmFacClientes.Show vbModal
+    frmFacClientesGr.Show vbModal
     
 End Sub
 
@@ -168,12 +168,12 @@ Private Sub Form_Unload(Cancel As Integer)
     End
 End Sub
 
-Private Sub mnClientes1_Click(Index As Integer)
+Private Sub mnClientes1_Click(index As Integer)
     Screen.MousePointer = vbHourglass
-    Select Case Index
+    Select Case index
     Case 0
         'mto
-        frmFacClientes.Show vbModal
+        frmFacClientesGr.Show vbModal
         
         
     Case 1
@@ -208,9 +208,9 @@ Private Sub mnClientes1_Click(Index As Integer)
 End Sub
 
 
-Private Sub mnCRM_Click(Index As Integer)
+Private Sub mnCRM_Click(index As Integer)
     
-        Select Case Index
+        Select Case index
         Case 0
             frmCRMMto.DesdeElCliente = 0 'No clien
             frmCRMMto.TipoPredefinido = 0   'Ninguno
@@ -235,8 +235,8 @@ Private Sub mnCRM_Click(Index As Integer)
 End Sub
 
 
-Private Sub mnInformes1_Click(Index As Integer)
-    Select Case Index
+Private Sub mnInformes1_Click(index As Integer)
+    Select Case index
     Case 0
         AbrirListadoPed (227)
         BorrarTempInformes

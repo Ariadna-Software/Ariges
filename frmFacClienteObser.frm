@@ -67,6 +67,7 @@ Private Sub Command1_Click(Index As Integer)
         CadenaDesdeOtroForm = "0|"
     Else
         'Desde el 3 en adelante
+        If Text1.Text = vbCrLf Then Text1.Text = ""
         CadenaDesdeOtroForm = "1|" & Text1.Text
     End If
     Unload Me

@@ -413,8 +413,7 @@ Dim TrabajadoresZaldibia As String
 
 Dim NumeroTareasPendientesCerrar As Integer
 
-
-Private Sub cmdAlbaran_Click(index As Integer)
+Private Sub cmdAlbaran_Click(Index As Integer)
     cad = ""
     If Combo1.ListIndex < 0 Then cad = "Seleccione el trabajador "
         
@@ -438,8 +437,8 @@ End Sub
 
 Private Sub cmdImprimir_Click()
     'VERSION RELOJ: comentar lineas #Soloreloj
-    'frmListado2.opcion = 46
-    'frmListado2.Show vbModal
+    frmListado2.Opcion = 46
+    frmListado2.Show vbModal
 End Sub
 
 Private Sub Combo1_Click()
@@ -482,12 +481,7 @@ Dim EsTrabajadorZaldibia As Boolean
     End If
     cad = "|" & TrabajadoresZaldibia
 
-    
-    
-
-
-
-    BuscarNodo
+    BuscarNodo True
 End Sub
 
 Private Sub Combo1_KeyPress(KeyAscii As Integer)
@@ -496,28 +490,103 @@ Private Sub Combo1_KeyPress(KeyAscii As Integer)
     If Combo1.ListIndex < 0 Then Exit Sub
 
     
-    BuscarNodo
+    BuscarNodo True
+    
 End Sub
 
-Private Sub BuscarNodo()
-Dim K As Integer
+Private Sub BuscarNodo(DesdeTrabajador As Boolean)
+Dim k As Integer
+Dim NodosFechasAnteriores As Boolean
+Dim fin As Boolean
+Dim NodoCierreAnterior As Integer
+Dim Horas As Currency
+Dim F1 As Date
 
     HayQueCerrarNodo = 0
-    For K = ListView2.ListItems.Count To 1 Step -1
-        ListView2.ListItems(K).ForeColor = vbBlack
-        ListView2.ListItems(K).Bold = False
-        If Combo1.ListIndex >= 0 Then
-            If Val(ListView2.ListItems(K).Text) = Val(Combo1.ItemData(Combo1.ListIndex)) Then
+    NodosFechasAnteriores = False
+    fin = False
+    
+    Do
+            For k = ListView2.ListItems.Count To 1 Step -1
+                ListView2.ListItems(k).ForeColor = vbBlack
+                ListView2.ListItems(k).Bold = False
+                If Combo1.ListIndex >= 0 Then
+                    If Val(ListView2.ListItems(k).Text) = Val(Combo1.ItemData(Combo1.ListIndex)) Then
+                        
+                        ListView2.ListItems(k).Bold = True
+                        If Trim(ListView2.ListItems(k).SubItems(6)) = "" Then
+                            HayQueCerrarNodo = k
+                            ListView2.ListItems(k).ForeColor = vbBlue
+                            
+                            'Fechas anteriores
+                            If ListView2.ListItems(k).ListSubItems(5).ForeColor = vbRed Then
+                                NodosFechasAnteriores = True
+                                NodoCierreAnterior = k
+                            End If
+                        End If
+                    End If
+                End If
+            Next
+            
+            If Not NodosFechasAnteriores Then
+                fin = True
+            Else
                 
-                ListView2.ListItems(K).Bold = True
-                If Trim(ListView2.ListItems(K).SubItems(6)) = "" Then
-                    HayQueCerrarNodo = K
-                    ListView2.ListItems(K).ForeColor = vbBlue
+                
+                'El nodo es del dia anterior,   Vamos a cerrar con la fecha de ayer
+                cad = "Trabajador : " & ListView2.ListItems(NodoCierreAnterior).ListSubItems(1).Text & vbCrLf
+                cad = cad & "FECHA : " & ListView2.ListItems(NodoCierreAnterior).ListSubItems(5).ToolTipText & vbCrLf
+                cad = cad & "hora inicio : " & ListView2.ListItems(NodoCierreAnterior).ListSubItems(5).Text
+                cad = InputBox(cad, "Cierre dia anterior", "23:45")
+                If cad = "" Then
+                    'Fin = True
+                    
+                Else
+                    cad = Trim(Replace(cad, ".", ":"))
+                    If Not EsHoraOK(cad) Then
+                        MsgBox "Formato hora incorrecto", vbExclamation
+                        cad = ""
+                    Else
+                    
+                    End If
+                End If
+                If cad = "" Then
+                    fin = True
+                    Command2_Click
+              
+                Else
+                    'UPDATEAMOS
+                    
+                    RedondeaLaHora cad
+                    
+                    
+                    cad = ListView2.ListItems(NodoCierreAnterior).ListSubItems(5).ToolTipText & " " & cad
+                    
+                   
+                    F1 = CDate(ListView2.ListItems(NodoCierreAnterior).ListSubItems(5).ToolTipText & " " & ListView2.ListItems(NodoCierreAnterior).Tag)
+                    
+        
+                    'lo paso a segundos y divido por 3600
+                    Horas = DateDiff("s", CDate(cad), F1)
+                    Horas = Abs(Round2(Horas / 3600, 2))
+                    
+                    'Cad = "UPDATE sreloj SET HoraFin =" & DBSet(Label1(0).Caption & " " & Label1(1).Caption, "FH")
+                    
+                    cad = "UPDATE sreloj SET HoraFin =" & DBSet(cad, "FH")
+                    
+                    cad = cad & " ,calculadas=" & DBSet(Horas, "N")
+                    cad = cad & " WHERE codtraba = " & Combo1.ItemData(Combo1.ListIndex) & " AND fecha = "
+                    cad = cad & DBSet(F1, "F")
+                    cad = cad & " AND HoraInicio = " & DBSet(F1, "FH")
+                    
+                    If ejecutar(cad, False) Then
+                        ListView2.ListItems.Remove NodoCierreAnterior
+                        fin = True
+                    End If
                 End If
             End If
-        End If
-    Next
-        
+            
+      Loop Until fin
     PonerFrames2
     
 End Sub
@@ -526,7 +595,7 @@ End Sub
 Private Sub cboTipoTrabajo_Click()
 Dim OrdenProduccion As Boolean
 Dim Aux As String
-Dim cad2 As String
+Dim Cad2 As String
     OrdenProduccion = False
     
     
@@ -561,14 +630,17 @@ Dim cad2 As String
             Aux = ""
             If Combo1.ListIndex >= 0 Then
                 If Me.Check1.Value = 0 Then
-                    Aux = "|" & Combo1.ItemData(Combo1.ListIndex) & "|"
-                    If InStr(1, "|" & TrabajadoresZaldibia, Aux) > 0 Then
-                        Aux = ""
-                    Else
-                        Aux = "NOT"
+                    If TrabajadoresZaldibia <> "" Then
+                        Aux = "|" & Combo1.ItemData(Combo1.ListIndex) & "|"
+                        If InStr(1, "|" & TrabajadoresZaldibia, Aux) > 0 Then
+                            Aux = ""
+                        Else
+                            Aux = "NOT"
+                        End If
+                    
+                        Cad2 = Mid(TrabajadoresZaldibia, 1, Len(TrabajadoresZaldibia) - 1) 'quito el ultimo pipe
+                        Aux = " AND " & Aux & " codtraba IN (" & Replace(Cad2, "|", ",") & ")"
                     End If
-                    cad2 = Mid(TrabajadoresZaldibia, 1, Len(TrabajadoresZaldibia) - 1) 'quito el ultimo pipe
-                    Aux = " AND " & Aux & " codtraba IN (" & Replace(cad2, "|", ",") & ")"
                 End If
             End If
             
@@ -603,6 +675,7 @@ Dim F1 As Date
 Dim linea As Integer
 Dim Horas As Currency
 Dim C As String
+
     'Por si las moscas
     
     On Error GoTo EC
@@ -639,7 +712,7 @@ Dim C As String
         End If
         
         'Horas
-        Debug.Print ListView2.ListItems(HayQueCerrarNodo).ListSubItems(5).Text
+        'Debug.Print ListView2.ListItems(HayQueCerrarNodo).ListSubItems(5).Text
         If ListView2.ListItems(HayQueCerrarNodo).ListSubItems(5).ToolTipText = "" Then
             cad = Label1(0).Caption
         Else
@@ -709,7 +782,7 @@ Dim C As String
         
         cad = DBSet(Label1(0).Caption, "F") & "," & Combo1.ItemData(Combo1.ListIndex) & "," & DBSet(Label1(0).Caption & " " & Label1(1).Caption, "FH") & ",null,0" & cad
         C = DevuelveDesdeBD(conAri, "max(id)", "sreloj", "1", "1")
-        C = Str(Val(C) + 1)
+        C = str(Val(C) + 1)
         cad = C & "," & cad
         cad = "INSERT INTO sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor) VALUES (" & cad
        
@@ -738,7 +811,7 @@ Private Sub Command2_Click()
     CagarMarcajes
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     
     If Me.Command1.Tag = 1 Then
     
@@ -913,6 +986,7 @@ End Sub
 Private Sub ListView2_DblClick()
 Dim I As Integer
 
+    
     If ListView2.SelectedItem Is Nothing Then Exit Sub
     
     
@@ -924,6 +998,7 @@ Dim I As Integer
         End If
     Next
     
+    If ListView2.SelectedItem Is Nothing Then Exit Sub
        
     Select Case UCase(Trim(ListView2.SelectedItem.SubItems(2)))
     Case "ALE"
@@ -1063,6 +1138,7 @@ Dim I As Integer
         If IsNull(miRsAux!HoraFin) Then
             IT.SubItems(6) = " "
             IT.ListSubItems(5).ForeColor = vbRed
+            
         Else
             IT.SubItems(6) = Format(miRsAux!HoraFin, "hh:mm")
         End If
@@ -1288,32 +1364,49 @@ Dim Numalbar As Long
 Dim trab As Long
 Dim CadenaConsulta As String
 Dim txtAnterior As String
+Dim CarpetaTipoAlbaran As String
+
 
     On Error GoTo eCrearCarpetaComun
 
     If Not InstalacionEsEulerTaxco Then Exit Sub
     
-    
-    If NUmeroNuevoDeAlbaranRepacacion = 0 Then If hcoCodTipoM <> "ALR" Then Exit Sub
-    
     If EulerParam = "" Then Exit Sub
+    
+    
+    J = 0
+    
+    CarpetaTipoAlbaran = ""
+    If hcoCodTipoM = "ALR" Then J = 1: CarpetaTipoAlbaran = "REPARACIONES"
+    If hcoCodTipoM = "ALO" Then J = 2: CarpetaTipoAlbaran = "orden de trabajo"
+    If hcoCodTipoM = "ALE" Then J = 3: CarpetaTipoAlbaran = "trabajo exterior"
+    If J = 0 Then Exit Sub
+    
 
-    'Z:(VALENCIA O ZALDIVIA)REPARACIONES\YYYY\NNNNNNN\
-    trab = Combo1.ItemData(Combo1.ListIndex)
-    CadenaConsulta = DevuelveDesdeBDNew(conAri, "straba", "codccost", "codtraba", CStr(trab), "N")
-    If CadenaConsulta = "" Then Err.Raise 513, , "Obteniendo centro trabajo (coste) trabajador " & trab
+
+
     
-    If CadenaConsulta = "1" Then
-        CadenaConsulta = "ZALDIBIA"
+    If hcoCodTipoM = "ALR" Then
+        'Z:(VALENCIA O ZALDIVIA)REPARACIONES\YYYY\NNNNNNN\
+        trab = Combo1.ItemData(Combo1.ListIndex)
+        CadenaConsulta = DevuelveDesdeBDNew(conAri, "straba", "codccost", "codtraba", CStr(trab), "N")
+        If CadenaConsulta = "" Then Err.Raise 513, , "Obteniendo centro trabajo (coste) trabajador " & trab
+        
+        If CadenaConsulta = "1" Then
+            CadenaConsulta = "ZALDIBIA"
+        Else
+            CadenaConsulta = "VALENCIA"
+        End If
+        
+        'cOMPRUEBO EL AÑO
+        'txtAnterior = EulerParam & "\REPARACIONES\" & CadenaConsulta & "\" & Year(CDate(Label1(0).Caption))
+        txtAnterior = EulerParam & "\" & CarpetaTipoAlbaran & "\" & CadenaConsulta & "\" & Year(CDate(Label1(0).Caption))
     Else
-        CadenaConsulta = "VALENCIA"
+        txtAnterior = EulerParam & "\" & CarpetaTipoAlbaran & "\" & Year(CDate(Label1(0).Caption))
     End If
-    
+        
         
     
-    
-    'cOMPRUEBO EL AÑO
-    txtAnterior = EulerParam & "\REPARACIONES\" & CadenaConsulta & "\" & Year(CDate(Label1(0).Caption))
     If Dir(txtAnterior, vbDirectory) = "" Then MkDir txtAnterior
     
     
@@ -1356,5 +1449,37 @@ Dim txtAnterior As String
     End If
 eCrearCarpetaComun:
     If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description & vbCrLf & CadenaConsulta & vbCrLf & OtraCadena
+End Sub
+
+Private Sub RedondeaLaHora(HoraTexto As String)
+Dim F As Date
+Dim min As Integer
+Dim Ya As Boolean
+    
+    min = Minute(CDate(HoraTexto))
+
+    If min < 8 Then
+        min = 0
+    ElseIf min < 23 Then
+        min = 15
+    ElseIf min < 38 Then
+        min = 30
+    ElseIf min < 53 Then
+        min = 45
+    Else
+        min = -1
+    End If
+            
+    If min < 0 Then
+        min = Hour(CDate(HoraTexto)) + 1
+        If min >= 24 Then
+            HoraTexto = "23:59:59"
+        Else
+            HoraTexto = Format(min, "00") & ":00:00"
+        End If
+    Else
+        HoraTexto = Format(HoraTexto, "hh:") & Format(min, "00") & ":00"
+    End If
+    
 End Sub
 

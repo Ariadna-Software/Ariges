@@ -262,8 +262,8 @@ Option Explicit
 
 
 Public N 'As Node
-Private primeravez As Boolean
-Private WithEvents frmC2 As frmFacClientes3
+Private PrimeraVez As Boolean
+Private WithEvents frmC2 As frmBasico2
 Attribute frmC2.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
@@ -323,7 +323,7 @@ Private Sub CargaAdmon()
     Set N = tv1.Nodes.Add(, , "ADM")
     N.Text = "Datos dpto de administración"
     N.Bold = True
-    N.Checked = NodoPadreCheckeado(N.index)    '
+    N.Checked = NodoPadreCheckeado(N.Index)    '
     
     FijarNodo3 N, "ADM", "adm1", True, True, "Volumen facturación"
     N.Tag = "pVisVolVenta|pDesdeAnyo|"
@@ -362,7 +362,7 @@ Private Sub CargaComercial()
     N.Text = "Datos dpto de comercial"
     N.Tag = "||"
     N.Bold = True
-    N.Checked = NodoPadreCheckeado(N.index)
+    N.Checked = NodoPadreCheckeado(N.Index)
      
     FijarNodo3 N, "COM", "com1", True, False, "Detalle ofertas pendientes"
     N.Tag = "pVisOfertas|pDesdeOferta|"
@@ -427,7 +427,7 @@ Private Sub CargaSAT()
     Set N = tv1.Nodes.Add(, , "SAT")
     N.Text = "Datos dpto de S.A.T."
     N.Bold = True
-    N.Checked = NodoPadreCheckeado(N.index)
+    N.Checked = NodoPadreCheckeado(N.Index)
     
     
  
@@ -586,9 +586,9 @@ End Sub
 
 
 Private Sub Form_Activate()
-    If primeravez Then
+    If PrimeraVez Then
         Screen.MousePointer = vbHourglass
-        primeravez = False
+        PrimeraVez = False
         CargaDatosAux
         
     End If
@@ -597,7 +597,7 @@ End Sub
 
 Private Sub Form_Load()
 
-    primeravez = True
+    PrimeraVez = True
     Me.Icon = frmPpal.Icon
     CargaTreeView
     For J = 1 To tv1.Nodes.Count
@@ -625,9 +625,8 @@ End Sub
 
 Private Sub Image1_Click()
     SQL = ""
-    Set frmC2 = New frmFacClientes3
-    frmC2.DatosADevolverBusqueda = "0|1|"
-    frmC2.Show vbModal
+    Set frmC2 = New frmBasico2
+    AyudaClientes frmC2, Text1.Text
     Set frmC2 = Nothing
     If SQL <> "" Then
         Me.Text1.Text = RecuperaValor(SQL, 1)
@@ -636,18 +635,18 @@ Private Sub Image1_Click()
     End If
 End Sub
 
-Private Sub imgCheck_Click(index As Integer)
-    If index < 2 Then
+Private Sub imgCheck_Click(Index As Integer)
+    If Index < 2 Then
 
         If tv3.Nodes.Count = 0 Then Exit Sub
         For J = 1 To tv3.Nodes.Count
-            tv3.Nodes(J).Checked = index = 1
+            tv3.Nodes(J).Checked = Index = 1
         Next J
 
     Else
         If tv2.Nodes.Count = 0 Then Exit Sub
         For J = 1 To tv2.Nodes.Count
-            tv2.Nodes(J).Checked = index = 3
+            tv2.Nodes(J).Checked = Index = 3
         Next J
     
     End If
@@ -696,7 +695,7 @@ End Sub
 Private Sub Tv1_NodeCheck(ByVal Node As MSComctlLib.Node)
 Dim CH As Boolean
 
-    If primeravez Then Exit Sub
+    If PrimeraVez Then Exit Sub
     
     
    
@@ -717,7 +716,7 @@ Dim NO
     
     Set NO = N
     NO.Checked = Checkar
-    If EsElTV2 Then CheckeaTambienEnElTv3 NO.index, Checkar
+    If EsElTV2 Then CheckeaTambienEnElTv3 NO.Index, Checkar
     Set NO = N.Child
     While Not NO Is Nothing
         CheckSubNodo NO, Checkar, EsElTV2
@@ -911,11 +910,11 @@ End Sub
 
 
 Private Function DevuelveIndiceNodo(Clave As String) As Integer
-Dim I As Integer
+Dim i As Integer
     
-    For I = 1 To tv1.Nodes.Count
-        If tv1.Nodes(I).Key = Clave Then
-            DevuelveIndiceNodo = I
+    For i = 1 To tv1.Nodes.Count
+        If tv1.Nodes(i).Key = Clave Then
+            DevuelveIndiceNodo = i
             Exit Function
         End If
     Next
@@ -1557,7 +1556,7 @@ Dim leido As Boolean
     End If
         
     If leido Then
-        If Nod.index > DatosGuardados.Count Then
+        If Nod.Index > DatosGuardados.Count Then
             leido = False
         End If
     End If
@@ -1567,7 +1566,7 @@ Dim leido As Boolean
         Nod.Checked = True
         
     Else
-        Nod.Checked = RecuperaValor(DatosGuardados(Nod.index), 1) = "1"
+        Nod.Checked = RecuperaValor(DatosGuardados(Nod.Index), 1) = "1"
         'Debug.Print Nod.Text & " " & Nod.Checked
     End If
     
@@ -1575,7 +1574,7 @@ Dim leido As Boolean
         If Not leido Then
             Fecha = "01/01/2010"
         Else
-            Aux = RecuperaValor(DatosGuardados(Nod.index), 2)
+            Aux = RecuperaValor(DatosGuardados(Nod.Index), 2)
             If Aux = "" Then
                 Aux = "01/10/2010"
             Else
@@ -1628,7 +1627,7 @@ End Sub
 
 'Dado un NODO
 Private Function HayKprocesarNodo(Indice As Integer, ByRef Fecha As Date) As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim Valor As String
 Dim TieneFecha As Boolean
 Dim CadenaFecha As String
@@ -1638,12 +1637,12 @@ Dim NodoOfertaPedidoAlbaran As Boolean
 
 
     Fecha = CDate("01/01/2007")
-    I = InStr(1, tv1.Nodes(Indice).Text, "[")
-    TieneFecha = I > 0
+    i = InStr(1, tv1.Nodes(Indice).Text, "[")
+    TieneFecha = i > 0
     
     
     If TieneFecha Then
-        Valor = Mid(tv1.Nodes(Indice).Text, I + 1)
+        Valor = Mid(tv1.Nodes(Indice).Text, i + 1)
         Valor = Mid(Valor, 1, Len(Valor) - 1)
     End If
     
@@ -1717,7 +1716,7 @@ End Sub
 
 Private Function ProcFicheroConfig(Leer As Boolean) As Boolean
 Dim TieneF As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim Aux As String
 Dim NF As Integer
 
@@ -1739,12 +1738,12 @@ Dim NF As Integer
     
         Open SQL For Output As #NF
         For J = 1 To tv1.Nodes.Count
-            I = InStr(1, tv1.Nodes(J), "[")
-            TieneF = I > 0
+            i = InStr(1, tv1.Nodes(J), "[")
+            TieneF = i > 0
             
             SQL = Abs(tv1.Nodes(J).Checked) & "|"
             If TieneF Then
-                Aux = Mid(tv1.Nodes(J).Text, I + 1)
+                Aux = Mid(tv1.Nodes(J).Text, i + 1)
                 Aux = Mid(Aux, 1, Len(Aux) - 1)
                 If Len(Aux) = 4 Then Aux = "01/01/" & Aux
                 
@@ -1828,8 +1827,8 @@ Dim N
     Wend
     RS.Close
     If PpalInsertado Then
-        tv2.Nodes(N.index).EnsureVisible
-        tv3.Nodes(N.index).EnsureVisible
+        tv2.Nodes(N.Index).EnsureVisible
+        tv3.Nodes(N.Index).EnsureVisible
     End If
     
     
@@ -1869,8 +1868,8 @@ Dim N
     Wend
     RS.Close
     If PpalInsertado Then
-        tv2.Nodes(N.index).EnsureVisible
-        tv3.Nodes(N.index).EnsureVisible
+        tv2.Nodes(N.Index).EnsureVisible
+        tv3.Nodes(N.Index).EnsureVisible
     End If
     
     
@@ -1911,28 +1910,28 @@ Dim N
     Wend
     RS.Close
     If PpalInsertado Then
-        tv2.Nodes(N.index).EnsureVisible
-        tv3.Nodes(N.index).EnsureVisible
+        tv2.Nodes(N.Index).EnsureVisible
+        tv3.Nodes(N.Index).EnsureVisible
     End If
     
 End Sub
 
 
 Private Function DevFecha(Indice As Integer, CampoBD As String) As String
-Dim I As Integer
+Dim i As Integer
 Dim F As String
     F = CDate("01/01/1900")
-    I = InStr(1, tv1.Nodes(Indice).Text, "[")
-    If I > 0 Then F = Mid(tv1.Nodes(Indice), I + 1, 10)
+    i = InStr(1, tv1.Nodes(Indice).Text, "[")
+    If i > 0 Then F = Mid(tv1.Nodes(Indice), i + 1, 10)
     DevFecha = CampoBD & " >= '" & Format(F, FormatoFecha) & "'"
 End Function
 
 Private Sub tv2_NodeCheck(ByVal Node As MSComctlLib.Node)
     On Error Resume Next
-    If primeravez Then Exit Sub
+    If PrimeraVez Then Exit Sub
     
     'Pong el nodo en el tv3 chcec(unche
-    tv3.Nodes(Node.index).Checked = Node.Checked
+    tv3.Nodes(Node.Index).Checked = Node.Checked
     
     Dim CH As Boolean
     
@@ -1948,7 +1947,7 @@ End Sub
 
 Private Sub tv3_NodeCheck(ByVal Node As MSComctlLib.Node)
 Dim CH As Boolean
-    If primeravez Then Exit Sub
+    If PrimeraVez Then Exit Sub
     
     If Node.Checked Then
         If Not Node.Parent Is Nothing Then Node.Parent.Checked = True
@@ -1962,7 +1961,7 @@ Dim CH As Boolean
 End Sub
 
 
-Private Function CadenaOfePedAlb(index As Integer, CadenaSQL_ As String) As Boolean
+Private Function CadenaOfePedAlb(Index As Integer, CadenaSQL_ As String) As Boolean
 Dim J As Integer
 Dim N As Node
 Dim Pad As Node
@@ -1974,7 +1973,7 @@ Dim C2 As String
     
     Set Pad = tv2.Nodes(1)
     
-    Select Case index
+    Select Case Index
     Case 7
         'OFERTAS
         If Pad.Key <> "OFE" Then Exit Function
@@ -2051,7 +2050,7 @@ Dim C2 As String
             CadenaSQL_ = Mid(CadenaSQL_, 2)
             CadenaOfePedAlb = True
        
-            InsertarEnTmpsOfePedAlb index, CadenaSQL_
+            InsertarEnTmpsOfePedAlb Index, CadenaSQL_
        
        
        

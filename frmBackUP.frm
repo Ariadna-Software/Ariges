@@ -113,12 +113,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Option Explicit
+  Option Explicit
 
 Private Tablas() As String
 Private NumTablas As Integer
 
-Dim Rs As Recordset
+Dim RS As Recordset
 Dim NF As Integer
 Dim Archivo As String
 Dim Izquierda As String
@@ -187,34 +187,34 @@ End Sub
 Private Sub CopiaTodo()
 
 
-    Set Rs = New ADODB.Recordset
-    Rs.Open "SHOW TABLES", Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open "SHOW TABLES", conn, adOpenKeyset, adLockOptimistic, adCmdText
     NumTablas = 0
-    While Not Rs.EOF
-        If LCase(Mid(Rs.Fields(0), 1, 3)) = "tmp" Then
+    While Not RS.EOF
+        If LCase(Mid(RS.Fields(0), 1, 3)) = "tmp" Then
             'Las temporales no hacemos nada
         Else
             NumTablas = NumTablas + 1
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.MoveFirst
+    RS.MoveFirst
     
     ReDim Tablas(NumTablas - 1)
     NumTablas = 0
-    While Not Rs.EOF
-        If LCase(Mid(Rs.Fields(0), 1, 3)) = "tmp" Then
+    While Not RS.EOF
+        If LCase(Mid(RS.Fields(0), 1, 3)) = "tmp" Then
             'Las temporales no hacemos nada
         Else
-            Tablas(NumTablas) = Rs.Fields(0)
+            Tablas(NumTablas) = RS.Fields(0)
             NumTablas = NumTablas + 1
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 End Sub
 
@@ -235,7 +235,7 @@ End Sub
 
 
 Private Sub HacerBackUp()
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo EBackUp
 
@@ -249,11 +249,11 @@ Dim I As Integer
     End If
         
     
-    For I = 0 To NumTablas - 1
-        Label1.Caption = Tablas(I) & "     (" & I + 1 & " de " & NumTablas & ")"
+    For i = 0 To NumTablas - 1
+        Label1.Caption = Tablas(i) & "     (" & i + 1 & " de " & NumTablas & ")"
         Label1.Refresh
-        BKTablas (Tablas(I))
-    Next I
+        BKTablas (Tablas(i))
+    Next i
     
     Exit Sub
     
@@ -265,7 +265,7 @@ End Sub
 
 Private Function FijarCarpeta() As String
 Dim FE As String
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo EFijarCarpeta
 
@@ -274,18 +274,18 @@ Dim I As Integer
     
     Derecha = App.Path & "\BACKUP\"
     Izquierda = Format(Now, "yymmdd")
-    I = -1
+    i = -1
     Do
-        I = I + 1
-        FE = Format(I, "00")
+        i = i + 1
+        FE = Format(i, "00")
         FE = Derecha & Izquierda & FE
         If Dir(FE, vbDirectory) = "" Then
             'OK
             MkDir FE
             FijarCarpeta = FE
-            I = 100
+            i = 100
         End If
-    Loop Until I > 99
+    Loop Until i > 99
     Exit Function
     
 EFijarCarpeta:
@@ -294,28 +294,28 @@ End Function
 
 
 
-Private Sub BKTablas(Tabla As String)
+Private Sub BKTablas(tabla As String)
 Dim cad As String
 
-    Set Rs = New ADODB.Recordset
-    Rs.Open Tabla, Conn, adOpenForwardOnly, adLockPessimistic, adCmdTable
-    If Rs.EOF Then
+    Set RS = New ADODB.Recordset
+    RS.Open tabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdTable
+    If RS.EOF Then
         'No hace falta hacer back up
     
     Else
         NF = FreeFile
-        Open Archivo & "\" & Tabla & ".sql" For Output As #NF
-        BACKUP_TablaIzquierda Rs, Izquierda
-        While Not Rs.EOF
-            BACKUP_Tabla Rs, Derecha
-            cad = "INSERT INTO " & Tabla & " " & Izquierda & " VALUES " & Derecha & ";"
+        Open Archivo & "\" & tabla & ".sql" For Output As #NF
+        BACKUP_TablaIzquierda RS, Izquierda
+        While Not RS.EOF
+            BACKUP_Tabla RS, Derecha
+            cad = "INSERT INTO " & tabla & " " & Izquierda & " VALUES " & Derecha & ";"
             Print #NF, cad
-            Rs.MoveNext
+            RS.MoveNext
         Wend
         Close #NF
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 End Sub
 
 

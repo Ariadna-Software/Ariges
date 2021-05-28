@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmEulerPrecios 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "PDFs Tarifas"
@@ -406,7 +406,7 @@ Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 Attribute frmB.VB_VarHelpID = -1
 
 
-Private WithEvents frmFam As frmAlmFamiliaArticulo  'Form Mantenimiento Familias Articulos
+Private WithEvents frmFam As frmBasico2 'frmAlmFamiliaArticulo  'Form Mantenimiento Familias Articulos
 Attribute frmFam.VB_VarHelpID = -1
 Private WithEvents frmM As frmAlmMarcas  'Form Mantenimiento Marcas
 Attribute frmM.VB_VarHelpID = -1
@@ -480,9 +480,11 @@ Private Sub cmdAux_Click(Index As Integer)
     Select Case Index
         
         Case 0 'Cod Familia
-            Set frmFam = New frmAlmFamiliaArticulo
-            frmFam.DatosADevolverBusqueda = "0"
-            frmFam.Show vbModal
+'            Set frmFam = New frmAlmFamiliaArticulo
+'            frmFam.DatosADevolverBusqueda = "0"
+'            frmFam.Show vbModal
+            Set frmFam = New frmBasico2
+            AyudaFamilias frmFam, txtAux(0).Text
             Set frmFam = Nothing
         Case 1 'Cod Marca
             Set frmM = New frmAlmMarcas
@@ -617,15 +619,15 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim B As Boolean
+Dim b As Boolean
 
         DeseleccionaGrid Me.DataGrid1
-        B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+        b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
         For jj = 0 To txtAux.Count - 1
             txtAux(jj).Height = DataGrid1.RowHeight
             txtAux(jj).Top = alto
-            txtAux(jj).visible = B
+            txtAux(jj).visible = b
         Next jj
 
         
@@ -633,7 +635,7 @@ Dim B As Boolean
         For jj = 0 To Me.cmdAux.Count - 1
             Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
             Me.cmdAux(jj).Top = alto
-            Me.cmdAux(jj).visible = B
+            Me.cmdAux(jj).visible = b
         Next jj
 End Sub
 
@@ -730,7 +732,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 9
             'Generar desde sfamiadtos
             CadenaDesdeOtroForm = ""
-            frmVarios.opcion = 7
+            frmVarios.Opcion = 7
             frmVarios.Show vbModal
             If CadenaDesdeOtroForm <> "" Then
                 'Ha generado datos
@@ -747,7 +749,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         
         Case 10
             CadenaDesdeOtroForm = ""
-            frmListado3.opcion = 17
+            frmListado3.Opcion = 17
             frmListado3.Show vbModal
             If CadenaDesdeOtroForm <> "" Then
                 'Ha generado datos
@@ -783,7 +785,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
@@ -798,9 +800,9 @@ Dim B As Boolean
     BloquearClavesP (Modo = 4) ' si modificar
            
     '-----------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
        
     Me.DataGrid1.Enabled = (Modo = 2)
     
@@ -815,30 +817,30 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = (B Or (Modo = 0))
-    Me.mnNuevo.Enabled = (B Or (Modo = 0))
+    Toolbar1.Buttons(5).Enabled = (b Or (Modo = 0))
+    Me.mnNuevo.Enabled = (b Or (Modo = 0))
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnEliminar.Enabled = b
     
     Toolbar1.Buttons(9).Enabled = Toolbar1.Buttons(5).Enabled
     Toolbar1.Buttons(10).Enabled = Toolbar1.Buttons(5).Enabled
     
-    B = (Modo >= 3) Or Modo = 1
+    b = (Modo >= 3) Or Modo = 1
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'Ver Todos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
@@ -959,7 +961,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -967,22 +969,22 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1)
     LLamaLineas anc
     
     'poner valores grabados
-    For I = 0 To 4
-        If Not IsNull(Data1.Recordset.Fields(I)) Then
-            txtAux(I).Text = DBLet(Data1.Recordset.Fields(I), "N")
-            If I = 0 Or I = 2 Then FormateaCampo txtAux(I)
+    For i = 0 To 4
+        If Not IsNull(Data1.Recordset.Fields(i)) Then
+            txtAux(i).Text = DBLet(Data1.Recordset.Fields(i), "N")
+            If i = 0 Or i = 2 Then FormateaCampo txtAux(i)
         Else
-            txtAux(I).Text = ""
+            txtAux(i).Text = ""
         End If
-    Next I
+    Next i
 
 
     PonerFoco txtAux(4)
@@ -1020,14 +1022,14 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
-Dim Rs As ADODB.Recordset
+Dim b As Boolean
+Dim RS As ADODB.Recordset
 Dim C As String
 Dim C2 As String
 
     DatosOk = False
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
     'es obligado O EL Cliente o la actividad
     If txtAux(0).Text = "" And txtAux(2).Text = "" Then
@@ -1038,19 +1040,19 @@ Dim C2 As String
     
     
     'Como NO hay clave primaria tengo que comprobar que NO exista un valor
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     
     If Modo = 3 Then
         'Esta INSERTAND
         C = "Select * from eulerprecios"
         C = C & " WHERE " & MontaWHERE(True)
-        Rs.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then
+        RS.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then
             MsgBox "Ya existe un registro con esos datos!", vbExclamation
         Else
             C = ""
         End If
-        Rs.Close
+        RS.Close
         If C <> "" Then Exit Function
     Else
         'Compruebo si ha cambiado de la clave primaria
@@ -1183,12 +1185,12 @@ Private Sub BloquearClavesP(bol As Boolean)
 'Si BloquearClavesPrimarias=true deshablilita los textbox de codigos y lo pone amarillo
 'y habilita el resto de campos para introducir nuevos valores
 'Si BloquearClavesPrimarias=false habilita los textbox de codigos para introducir
-Dim I As Byte
+Dim i As Byte
 
-    For I = 0 To 1 'Codigos
-        BloquearTxt txtAux(I), bol
-        Me.cmdAux(I).Enabled = Not bol
-    Next I
+    For i = 0 To 1 'Codigos
+        BloquearTxt txtAux(i), bol
+        Me.cmdAux(i).Enabled = Not bol
+    Next i
     BloquearTxt txtAux(1), True
     BloquearTxt txtAux(3), True
 End Sub

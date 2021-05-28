@@ -5,14 +5,20 @@ Option Explicit
 ' Si campo2<>"" es un mantenimiento
 Public Function ComprobarCarpetaPDFSMante2(campo1 As Long, campo2 As String) As String
 Dim C As String
-    
+Dim Referencia As String
+Dim I As Integer
     On Error GoTo eComprobarCarpetaOferta
     ComprobarCarpetaPDFSMante2 = ""
     C = EulerParam & "\"
     
     
+    Referencia = CStr(campo2)
+    For I = 1 To Len(Referencia)
+        Referencia = Replace(Referencia, Mid("\/:*""?<>|", I, 1), " ")
+    Next
+    
         
-    C = C & "Mante\" & Format(campo1, "000000") & campo2
+    C = C & "Mante\" & Format(campo1, "000000") & Referencia
     
     If Dir(C, vbDirectory) = "" Then MkDir C
     
@@ -62,12 +68,24 @@ End Function
 
 Public Function EliminarArhivoPDF(campo1 As Long, campo2 As String, Nombre As String) As Boolean
 Dim C As String
+Dim Referencia As String
+Dim J As Integer
     On Error Resume Next
+    
     EliminarArhivoPDF = False
     
     C = EulerParam & "\"
     
-    C = C & "Mante\" & Format(campo1, "000000") & campo2 & "\" & Nombre
+    
+    
+    Referencia = CStr(campo2)
+    For J = 1 To Len(Referencia)
+        Referencia = Replace(Referencia, Mid("\/:*""?<>|", J, 1), " ")
+    Next
+    
+    
+    
+    C = C & "Mante\" & Format(campo1, "000000") & Referencia & "\" & Nombre
 
     
     
@@ -95,7 +113,7 @@ Dim C As String
         MsgBox "No existe el archivo dentro de la oferta", vbExclamation
         
     Else
-        Kill C
+        Kill Destino
         If Err.Number <> 0 Then
             MuestraError Err.Number, Err.Description
         Else
@@ -110,9 +128,9 @@ End Function
 ' Si campo2<>"" es un mantenimiento
 Public Function CopiaArhivoPDF2(campo1 As Long, campo2 As String, OrigenCompleto As String, Destino As String) As Boolean
 Dim C As String
-Dim Extension As String  'MAYO 2019   Aceptamos todo tipo de ficvhero
+Dim extension As String  'MAYO 2019   Aceptamos todo tipo de ficvhero
 Dim J As Integer
-
+Dim Referencia As String
  
     On Error GoTo eCopiaArhivoOferta
     CopiaArhivoPDF2 = False
@@ -123,10 +141,19 @@ Dim J As Integer
     J = InStrRev(OrigenCompleto, ".")
     If J = 0 Then Err.Raise 513, , "Fichero si extension: " & OrigenCompleto
         
-    Extension = Mid(OrigenCompleto, J)
-    If Len(Extension) > 6 Then Err.Raise 513, , "Extension incorrecta: " & Extension
+    extension = Mid(OrigenCompleto, J)
+    If Len(extension) > 6 Then Err.Raise 513, , "Extension incorrecta: " & extension
         
-    C = C & "Mante\" & Format(campo1, "000000") & campo2 & "\" & Destino & Extension
+        
+    Referencia = CStr(campo2)
+    For J = 1 To Len(Referencia)
+        Referencia = Replace(Referencia, Mid("\/:*""?<>|", J, 1), " ")
+    Next
+        
+        
+        
+        
+    C = C & "Mante\" & Format(campo1, "000000") & Referencia & "\" & Destino & extension
     FileCopy OrigenCompleto, C
     
     CopiaArhivoPDF2 = True
@@ -141,7 +168,7 @@ End Function
 Public Function CopiaArhivoPDFOfertaEuler(CarpetaDestino As String, OrigenCompleto As String) As Boolean
 Dim C As String
 Dim J As Integer
-Dim K As Integer
+Dim k As Integer
 
     On Error GoTo eCopiaArhivoOferta
     CopiaArhivoPDFOfertaEuler = False

@@ -603,7 +603,7 @@ Begin VB.Form frmTelematVarios
          BackColor       =   -2147483643
          BorderStyle     =   1
          Appearance      =   1
-         NumItems        =   9
+         NumItems        =   10
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Cod.Tele."
             Object.Width           =   2540
@@ -649,6 +649,11 @@ Begin VB.Form frmTelematVarios
          BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   8
             Text            =   "Familia"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(10) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   9
+            Text            =   "EAN"
             Object.Width           =   0
          EndProperty
       End
@@ -1521,6 +1526,9 @@ Private Sub CruzarReferenciasProveedor()
         
         'Ahora cojo y en desde el final voy intentando conseguir
         For N = lw2.ListItems.Count To 1 Step -1
+            Label3.Caption = "Cruzando datos articulos " & N
+            Label3.Refresh
+            
             SQL = "referprov = " & DBSet(lw2.ListItems(N).Text, "T")
             miRsAux.Find SQL, , adSearchForward, 1
             If miRsAux.EOF Then
@@ -1923,8 +1931,12 @@ Dim Porcen As Currency
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lw1.ListItems.Add()
+        
+        'If miRsAux!codtelem = "326000519" Then Stop
+        
+        
         IT.Text = miRsAux!codtelem
-        IT.SubItems(1) = miRsAux!Nombre
+        IT.SubItems(1) = RevisaCaracterMultibase(miRsAux!Nombre)
         IT.SubItems(2) = miRsAux!codArtic
         IT.SubItems(3) = Format(miRsAux!FechaCambio, "dd/mm/yyyy")
         
@@ -1946,7 +1958,7 @@ Dim Porcen As Currency
         IT.SubItems(6) = " "
         IT.SubItems(7) = " "
         IT.SubItems(8) = DBLet(miRsAux!Codfamia, "T") 'La familia del articulo
-
+        IT.SubItems(9) = DBLet(miRsAux!codean, "T") 'EAN descargado de
         
         If IsNull(miRsAux!PrecioVe) Then
             IT.SubItems(4) = " "
@@ -2023,12 +2035,13 @@ Dim Porcen As Currency
                 IT.ListSubItems(7).ForeColor = vbBlue
             End If
         End If
-        
+        IT.ToolTipText = CStr(IT.SubItems(1))
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     
-    RT.Close
+    
+    If lw1.ListItems.Count > 1 Then RT.Close
     Set miRsAux = Nothing
     Set RT = Nothing
     
@@ -2382,6 +2395,15 @@ Dim MenError As String
 
     End If   'del check
 
+    'Septiembre 2020
+    'ACtualizaremos el codigo EAN si tiene
+    If Trim(lw1.ListItems(N).SubItems(9)) <> "" Then
+        SQL = DevuelveDesdeBD(conAri, "max(numlinea)", "sarti3", "codartic", lw1.ListItems(N).SubItems(2), "T")
+        SQL = Val(SQL) + 1
+        SQL = "(" & DBSet(lw1.ListItems(N).SubItems(2), "T") & "," & SQL & "," & DBSet(lw1.ListItems(N).SubItems(9), "T") & ")"
+        SQL = "INSERT IGNORE INTO sarti3(codartic,numlinea,codigoea) VALUES " & SQL
+        conn.Execute SQL
+    End If
 
 
     ActualizarPrecio2 = True
@@ -2631,7 +2653,7 @@ End Sub
 Private Sub CargaIconosAyuda()
 Dim Ima As Image
     On Error Resume Next 'mejor que no diera errores, pero bien, tampoco vamos a enfadarnos
-    For Each Ima In Me.imgAyuda
+    For Each Ima In Me.imgayuda
         Ima.Picture = frmPpal.imgListComun.ListImages(46).Picture
     Next
     Err.Clear

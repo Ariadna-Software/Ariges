@@ -190,13 +190,13 @@ Private Sub Form_Unload(Cancel As Integer)
     End If
 End Sub
 
-Private Sub mnGeneral1_Click(index As Integer)
+Private Sub mnGeneral1_Click(Index As Integer)
 
 
 
-    Select Case index
+    Select Case Index
     Case 0
-            frmGesSocAsociados.Show vbModal
+            frmGesSocAsociadosGR.Show vbModal
     Case 1
             frmGesUdsNegocio.Show vbModal
     Case 3
@@ -233,12 +233,12 @@ Private Sub CargaImagen()
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.index
+    Select Case Button.Index
     Case 1, 2
-        mnGeneral1_Click Button.index - 1
+        mnGeneral1_Click Button.Index - 1
         
     Case 10, 11
-        mnGeneral1_Click Button.index - 7
+        mnGeneral1_Click Button.Index - 7
     
     
     

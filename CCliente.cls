@@ -75,12 +75,12 @@ Private mPuntos As Boolean
 
 '**** Codigo del cliente
 
-Public Property Let codigo(ByVal vData As String)
+Public Property Let Codigo(ByVal vData As String)
      mCodClien = vData
 End Property
 
-Public Property Get codigo() As String
-     codigo = mCodClien
+Public Property Get Codigo() As String
+     Codigo = mCodClien
 End Property
 
 
@@ -605,34 +605,66 @@ EActualizarCliente:
     End If
 End Function
 
+'DesdeOFertasPedidos=
 
-Public Function ClienteBloqueado(Optional DesdeOFertasPedidos As Boolean) As Boolean
+'0:  Albaranes donde puede "pasar" en efectivo
+'1:  Desde ofertas pedidos
+'2:  Otros: Donde bloqueo es bloqueo
+'
+'
+Public Function ClienteBloqueado(DesdeOFertasPedidos As Byte, ByRef SoloEnEfectivo As Boolean) As Boolean
 'NUEVO
 'Diciembre 2010
 'Si esta en ofertas / pedidos CLIENTE buscaremos en la tabla el campo: clioferped
 ' Si es 1 tb bloquea la creacion de ofertas / pedidos
-
-
 'devuelve true si el cliente esta bloqueado
 'si la situación del cliente es distinta de NORMAL(codsitua=0) entonces
 'mostrar un mensaje con la situación especial del cliente
 Dim Tipo As String
 Dim devuelve As String
-
+Dim EfectivoAlbaranes As String
+Dim Bloqueado As Boolean
     On Error GoTo EBloqueado
     ClienteBloqueado = False
-    
+    SoloEnEfectivo = False
     If Situacion <> 0 Then '0: situacion normal
-        If DesdeOFertasPedidos Then
+        If DesdeOFertasPedidos = 1 Then
             Tipo = "clioferped"
         Else
             Tipo = "tipositu"
         End If
-        devuelve = DevuelveDesdeBDNew(conAri, "ssitua", "nomsitua", "codsitua", Situacion, "N", Tipo)
+        EfectivoAlbaranes = "PermiteEfectAalb"
         
+        
+        'Febrero 2021 ESTABA como lo comentado
+        
+                        ''FALTA DevuelveDesdeBD2 donde pondremos que devuelve el valor:
+                        'EfectivoAlbaranes = "1"
+                        ''devuelve = DevuelveDesdeBD2(conAri, "nomsitua", "ssitua", "codsitua", Situacion, "N", Tipo, EfectivoAlbaranes)
+                        'devuelve = DevuelveDesdeBD(conAri, "nomsitua", "ssitua", "codsitua", Situacion, "N", Tipo)
+        'Pongo asi
+        devuelve = DevuelveDesdeBD2(conAri, "nomsitua", "ssitua", "codsitua", Situacion, "N", Tipo, EfectivoAlbaranes)
+        '--------------------------------------------------------
+                
+            
         If Tipo = "1" Then 'Cliente Bloqueado por Situación Especial.
-            MsgBox UCase("Cliente Bloqueado por: ") & vbCrLf & devuelve, vbInformation, "Situación Especial del Cliente."
-            ClienteBloqueado = True
+            Bloqueado = True
+            SoloEnEfectivo = False
+            If DesdeOFertasPedidos = 0 Then  'Son albaranes donde dejara pasar para forzar forma de pago a efectivo
+                SoloEnEfectivo = EfectivoAlbaranes = "1"
+                If SoloEnEfectivo Then Bloqueado = False
+            
+            End If
+            
+            
+            If Bloqueado Then
+                MsgBox UCase("Cliente Bloqueado por: ") & vbCrLf & devuelve, vbInformation, "Situación Especial del Cliente."
+                ClienteBloqueado = True
+            Else
+                devuelve = "" & devuelve
+                If SoloEnEfectivo Then devuelve = devuelve & vbCrLf & vbCrLf & " ***** SOLO EFECTIVO *****"
+                 MsgBox devuelve, vbExclamation, "Situación Especial del Cliente."
+            End If
         Else
             MsgBox devuelve, vbInformation, "Situación Especial del Cliente."
         End If
@@ -651,7 +683,7 @@ Public Function DptoCliente(vCodDpto As String, NomDpto As String) As Boolean
 Dim devuelve As String
 Dim cadDpto As String
     
-    If codigo = "" Then
+    If Codigo = "" Then
         devuelve = "Debe introducir valor al campo Cliente, para cargar sus "
         If vParamAplic.HayDeparNuevo = 1 Then 'Se trabaja con dpto
             devuelve = devuelve & "Departamentos. "
@@ -667,7 +699,7 @@ Dim cadDpto As String
     End If
 
     'Comprobar que el cliente seleccionado tiene esa direccion
-    devuelve = DevuelveDesdeBDNew(conAri, "sdirec", "nomdirec", "codclien", codigo, "N", , "coddirec", vCodDpto, "N")
+    devuelve = DevuelveDesdeBDNew(conAri, "sdirec", "nomdirec", "codclien", Codigo, "N", , "coddirec", vCodDpto, "N")
     NomDpto = devuelve
     If devuelve = "" Then
         DptoCliente = False
@@ -682,7 +714,7 @@ Dim cadDpto As String
         End If
         
         devuelve = "No existe" & cadDpto & vCodDpto & " para el cliente: "
-        devuelve = devuelve & codigo
+        devuelve = devuelve & Codigo
         MsgBox devuelve, vbInformation
     Else
         DptoCliente = True
@@ -695,7 +727,7 @@ Public Function TieneRefObligatoria(vReferen As String) As Boolean
 'al introducir datos de ese cliente
 Dim devuelve As String
 
-    devuelve = DevuelveDesdeBDNew(conAri, "sclien", "referobl", "codclien", codigo, "N")
+    devuelve = DevuelveDesdeBDNew(conAri, "sclien", "referobl", "codclien", Codigo, "N")
     If devuelve = "1" And vReferen = "" Then 'Referencia Obligatoria
         TieneRefObligatoria = True
         devuelve = "La Referencia del Cliente es Obligatoria."
@@ -711,7 +743,7 @@ Public Function exentoIVA() As Byte
 'albaranes, facturas,...
 'Dim devuelve As String
 
-    exentoIVA = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", codigo, "N")
+    exentoIVA = DevuelveDesdeBDNew(conAri, "sclien", "tipoiva", "codclien", Codigo, "N")
     
     '0.- Normal    1.- R.equival     2 Exento     3.- Exento Intracom   4.- Reducido
     
@@ -729,7 +761,7 @@ Dim cad As String
     On Error GoTo EBonifica
     Bonifica = False
     
-    cad = DevuelveDesdeBDNew(conAri, "sclien", "codtarif", "codclien", codigo, "N")
+    cad = DevuelveDesdeBDNew(conAri, "sclien", "codtarif", "codclien", Codigo, "N")
     If cad <> "" Then
         cad = DevuelveDesdeBDNew(conAri, "starif", "bonifica", "codlista", cad, "N")
         If cad <> "" Then Bonifica = CBool(cad)
@@ -752,7 +784,7 @@ Dim actualiza As Boolean
     On Error GoTo EActFecha
     
     If FechaUltMov = "" Then _
-        FechaUltMov = DevuelveDesdeBDNew(conAri, "sclien", "fechamov", "codclien", codigo, "N")
+        FechaUltMov = DevuelveDesdeBDNew(conAri, "sclien", "fechamov", "codclien", Codigo, "N")
     
     
     If FechaUltMov = "" Then
@@ -765,7 +797,7 @@ Dim actualiza As Boolean
     
     If actualiza Then
         SQL = "UPDATE sclien SET fechamov=" & DBSet(vFecha, "F")
-        SQL = SQL & " WHERE codclien=" & codigo
+        SQL = SQL & " WHERE codclien=" & Codigo
         conn.Execute SQL, , adCmdText
     End If
     b = True
@@ -827,17 +859,17 @@ Dim dirMail As String
     
     '1º) email para el cliente-departamento
     If codDpto <> "" Then
-        dirMail = DevuelveDesdeBDNew(conAri, "sdirec", "maidirec", "codclien", Me.codigo, "N", , "coddirec", codDpto, "N")
+        dirMail = DevuelveDesdeBDNew(conAri, "sdirec", "maidirec", "codclien", Me.Codigo, "N", , "coddirec", codDpto, "N")
     End If
     
     '2º) si no email comercial cliente
     If dirMail = "" Then
-        dirMail = DevuelveDesdeBDNew(conAri, "sclien", "maiclie2", "codclien", Me.codigo, "N")
+        dirMail = DevuelveDesdeBDNew(conAri, "sclien", "maiclie2", "codclien", Me.Codigo, "N")
     End If
     
     '3º) si no email administracion cliente
     If dirMail = "" Then
-        dirMail = DevuelveDesdeBDNew(conAri, "sclien", "maiclie1", "codclien", Me.codigo, "N")
+        dirMail = DevuelveDesdeBDNew(conAri, "sclien", "maiclie1", "codclien", Me.Codigo, "N")
     End If
     
     Obtener_EMailConfirmacion = dirMail
@@ -849,7 +881,7 @@ Public Sub PonDatosDireccionEnvio(ByRef txtCod As TextBox, txtName As TextBox)
         
         If Me.DirEnvioHabitual >= 0 Then
             txtCod.Text = Me.DirEnvioHabitual
-            txtName.Text = DevuelveDesdeBDNew(conAri, "sdirenvio", "nomdiren", "codclien=" & Me.codigo & " AND coddiren", CStr(Me.DirEnvioHabitual), "N")
+            txtName.Text = DevuelveDesdeBDNew(conAri, "sdirenvio", "nomdiren", "codclien=" & Me.Codigo & " AND coddiren", CStr(Me.DirEnvioHabitual), "N")
         Else
             txtCod.Text = ""
             txtName.Text = ""

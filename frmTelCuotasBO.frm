@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTelBolbaite 
    BorderStyle     =   3  'Fixed Dialog
    ClientHeight    =   6120
@@ -357,7 +357,7 @@ Option Explicit
 'Es comun para las cuotas y para los conceptos ya que comparten muchas carctarisiticas
 ' operadora, solo se modifica o elimina
 'y ahorrar un poco de fuente
-Public QueOpcion As Byte
+Public queOpcion As Byte
     '0  Cuotas
     '1  conceptos llamadas
     '2  Cuotas propias coooperativa
@@ -395,10 +395,10 @@ Dim b As Boolean
     
     txtAux(0).visible = Not b
     txtAux(1).visible = Not b
-    txtAux(2).visible = Not b And QueOpcion <> 1 And QueOpcion <> 3
+    txtAux(2).visible = Not b And queOpcion <> 1 And queOpcion <> 3
     Me.cboOperadora.visible = Not b
-    Me.CboAcciones.visible = Not b And QueOpcion < 2  'visibles 0,1
-    Me.CboMensual.visible = Not b And QueOpcion <> 2
+    Me.CboAcciones.visible = Not b And queOpcion < 2  'visibles 0,1
+    Me.CboMensual.visible = Not b And queOpcion <> 2
     cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
@@ -430,7 +430,7 @@ Dim b As Boolean
     Toolbar1.Buttons(2).Enabled = b
     Me.mnVerTodos.Enabled = b
     
-    b = b And QueOpcion = 2 'Solo el 2
+    b = b And queOpcion = 2 'Solo el 2
     'Añadir
     Toolbar1.Buttons(5).Enabled = b
     Me.mnNuevo.Enabled = b
@@ -459,7 +459,7 @@ Private Sub BotonAnyadir()
 Dim anc As Single
    
     'Situamos el grid al final
-    AnyadirLinea DataGrid1, adodc1
+    AnyadirLinea DataGrid1, Adodc1
     'De momento solo para queopcion=2
     
     'Limpiamos los campos para insertar
@@ -495,7 +495,7 @@ Private Sub BotonVerTodos()
     On Error Resume Next
 
     CargaGrid ""
-    If adodc1.Recordset.RecordCount <= 0 Then
+    If Adodc1.Recordset.RecordCount <= 0 Then
          MsgBox "No hay ningún registro en la tabla ", vbInformation
          Screen.MousePointer = vbDefault
          Exit Sub
@@ -509,19 +509,19 @@ End Sub
 
 Private Sub BotonModificar()
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
 
-    If adodc1.Recordset.EOF Then Exit Sub
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
-    SituarCombo Me.cboOperadora, CByte(adodc1.Recordset!Operadora)
+    SituarCombo Me.cboOperadora, CByte(Adodc1.Recordset!Operadora)
 '    If LCase(DataGrid1.Columns(0).Text) = "movistar" Then
 '        Me.cboOperadora.ListIndex = 0
 '    Else
@@ -532,14 +532,14 @@ Dim I As Integer
     txtAux(0).Text = DataGrid1.Columns(1).Text
     txtAux(1).Text = DataGrid1.Columns(2).Text
     
-    If QueOpcion = 0 Then
+    If queOpcion = 0 Then
         txtAux(2).Text = DataGrid1.Columns(7).Text
          PosicionarCombo Me.CboAcciones, CInt(DataGrid1.Columns(3).Text)
         PosicionarCombo CboMensual, CInt(DataGrid1.Columns(5).Text)
-    ElseIf QueOpcion = 1 Then
+    ElseIf queOpcion = 1 Then
         PosicionarCombo CboMensual, CInt(DataGrid1.Columns(3).Text)
         PosicionarCombo CboAcciones, CInt(DataGrid1.Columns(5).Text)
-    ElseIf QueOpcion = 2 Then
+    ElseIf queOpcion = 2 Then
         txtAux(2).Text = DataGrid1.Columns(3).Text
     Else
         PosicionarCombo CboMensual, CInt(DataGrid1.Columns(4).Text)
@@ -575,38 +575,38 @@ Dim SQL As String
     On Error GoTo Error2
     
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
 
     '### a mano
-    If QueOpcion <> 1 Then
+    If queOpcion <> 1 Then
         SQL = "cuota"
     Else
         SQL = "concepto"
     End If
     SQL = "¿Seguro que desea eliminar la " & SQL & "?" & vbCrLf
-    SQL = SQL & vbCrLf & "Operadora: " & adodc1.Recordset!laoperadora
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(2)
+    SQL = SQL & vbCrLf & "Operadora: " & Adodc1.Recordset!laoperadora
+    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Descripción: " & Adodc1.Recordset.Fields(2)
     
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = Me.adodc1.Recordset.AbsolutePosition
-        If QueOpcion = 0 Then
-            SQL = "Delete from tel_descuentoscuotas where  codigo_de_cuota=" & DBSet(adodc1.Recordset!codigo_de_cuota, "T")
-        ElseIf QueOpcion = 1 Then
-            SQL = "Delete from el_conceptosllamadas where Codigo_de_tipo_de_trafico=" & DBSet(adodc1.Recordset!Codigo_de_tipo_de_trafico, "N")
-        ElseIf QueOpcion = 2 Then
-            SQL = "Delete from stfnocuotaspropias where  codigoCuota=" & DBSet(adodc1.Recordset!codigoCuota, "T")
+        NumRegElim = Me.Adodc1.Recordset.AbsolutePosition
+        If queOpcion = 0 Then
+            SQL = "Delete from tel_descuentoscuotas where  codigo_de_cuota=" & DBSet(Adodc1.Recordset!codigo_de_cuota, "T")
+        ElseIf queOpcion = 1 Then
+            SQL = "Delete from tel_conceptosllamadas where Codigo_de_tipo_de_trafico=" & DBSet(Adodc1.Recordset!Codigo_de_tipo_de_trafico, "N")
+        ElseIf queOpcion = 2 Then
+            SQL = "Delete from stfnocuotaspropias where  codigoCuota=" & DBSet(Adodc1.Recordset!codigoCuota, "T")
         Else
-            SQL = "Delete from tel_cargo_varios where  CodigoVario=" & DBSet(adodc1.Recordset!CodigoVario, "T")
+            SQL = "Delete from tel_cargo_varios where  CodigoVario=" & DBSet(Adodc1.Recordset!CodigoVario, "T")
         End If
-        SQL = SQL & " AND operadora= " & adodc1.Recordset!Operadora
+        SQL = SQL & " AND operadora= " & Adodc1.Recordset!Operadora
         
         conn.Execute SQL
-        CancelaADODC Me.adodc1
+        CancelaADODC Me.Adodc1
         CargaGrid ""
 '        CancelaADODC Me.adodc1
-        SituarDataPosicion Me.adodc1, NumRegElim, SQL
+        SituarDataPosicion Me.Adodc1, NumRegElim, SQL
     End If
     
 Error2:
@@ -632,8 +632,8 @@ Private Sub cboOperadora_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim I As String
-Dim cadB As String
+Dim i As String
+Dim CadB As String
 
     On Error GoTo EAceptar
 
@@ -651,21 +651,21 @@ Dim cadB As String
                 
                     If InsertModifica Then
                         TerminaBloquear
-                        I = adodc1.Recordset.Fields(0)
+                        i = Adodc1.Recordset.Fields(0)
                         PonerModo 2
-                        CancelaADODC Me.adodc1
+                        CancelaADODC Me.Adodc1
                         CargaGrid
-                        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & DBSet(I, "T"))
+                        Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & DBSet(i, "T"))
                     End If
                     PonerFocoGrid DataGrid1
            
             End If
             
         Case 1 'HacerBusqueda
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid cadB
+                CargaGrid CadB
                 PonerFocoGrid DataGrid1
             End If
     End Select
@@ -684,10 +684,10 @@ Private Sub cmdCancelar_Click()
         Case 3 'Insertar
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
         Case 4 'Modificar
             TerminaBloquear
-            Me.lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+            Me.lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
     End Select
     
     PonerModo 2
@@ -708,8 +708,8 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-     If Not adodc1.Recordset.EOF Then
-        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+     If Not Adodc1.Recordset.EOF Then
+        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
     End If
 End Sub
 
@@ -719,7 +719,7 @@ End Sub
 
 Private Sub MontaSQL()
 
-    If QueOpcion = 0 Then
+    If queOpcion = 0 Then
 
         CadenaConsulta = "codigo_de_cuota,Descripcion_de_cuota,accion,"
         CadenaConsulta = CadenaConsulta & "if(accion=0,'NADA',if (accion=1,'Eliminar',if(accion=2,'Refacturar x importe','Refacturar x descuento'))),"
@@ -727,12 +727,12 @@ Private Sub MontaSQL()
         CadenaConsulta = CadenaConsulta & ",stfnooperador where codoperador = operadora"
         
         
-    ElseIf QueOpcion = 1 Then
+    ElseIf queOpcion = 1 Then
         CadenaConsulta = "Codigo_de_tipo_de_trafico,Tipo_de_trafico,refacturar,if(refacturar=0,'','Si'),TraficoSegundos,if(TraficoSegundos=0,'','Si'),operadora"
         CadenaConsulta = CadenaConsulta & " FROM tel_conceptosllamadas,stfnooperador where codoperador = operadora"
         
         
-    ElseIf QueOpcion = 2 Then
+    ElseIf queOpcion = 2 Then
         CadenaConsulta = "codigoCuota,stfnocuotaspropias.nombre,importe,operadora from stfnocuotaspropias,stfnooperador where codoperador = operadora"
     Else
         CadenaConsulta = "CodigoVario ,Descripcion ,if(CargarEnFactura=0,'','Si'),CargarEnFactura,operadora FROM tel_cargo_varios "
@@ -766,7 +766,7 @@ Private Sub Form_Load()
     
     'Cadena consulta
     'tel_descuentoscuotas  tel_conceptosllamadas stfnocuotaspropias
-    If QueOpcion = 0 Then
+    If queOpcion = 0 Then
         Caption = "Cuotas telefonía recalculables"
         
         Me.DataGrid1.Width = 11095
@@ -777,7 +777,7 @@ Private Sub Form_Load()
         Me.CboAcciones.Tag = "accion|N|N|0||@@|accion|0||"
         Me.CboMensual.Tag = "mensual|N|N|0||@@|mensual|0||"
         
-    ElseIf QueOpcion = 1 Then
+    ElseIf queOpcion = 1 Then
     
     
         Caption = "Conceptos telefonía refacturables"
@@ -790,7 +790,7 @@ Private Sub Form_Load()
         Me.txtAux(2).Tag = "Valor|N|N|0|||@@|Valor|#0.0000||"
         Me.CboMensual.Tag = "refacturar|N|N|0||@@|refacturar|0||"
         Me.CboAcciones.Tag = "TraficoSegundos|N|N|0||@@|TraficoSegundos|0||"
-    ElseIf QueOpcion = 2 Then
+    ElseIf queOpcion = 2 Then
         Caption = "Cuotas propias cooperativa"
         
         Me.txtAux(0).Tag = "codigoCuota|T|N|||@@|codigoCuota|||"
@@ -811,11 +811,11 @@ Private Sub Form_Load()
     cboOperadora.Tag = "Operadora|N|N|0||@@|operadora|0||"
     CadenaConsulta = "tel_descuentoscuotas|tel_conceptosllamadas|stfnocuotaspropias|tel_cargo_varios|"
     For Modo = 0 To 2
-        Me.txtAux(Modo).Tag = Replace(Me.txtAux(Modo).Tag, "@@", RecuperaValor(CadenaConsulta, QueOpcion + 1), 1)
+        Me.txtAux(Modo).Tag = Replace(Me.txtAux(Modo).Tag, "@@", RecuperaValor(CadenaConsulta, queOpcion + 1), 1)
     Next
-    Me.CboAcciones.Tag = Replace(CboAcciones.Tag, "@@", RecuperaValor(CadenaConsulta, QueOpcion + 1), 1)
-    Me.CboMensual.Tag = Replace(CboMensual.Tag, "@@", RecuperaValor(CadenaConsulta, QueOpcion + 1), 1)
-    Me.cboOperadora.Tag = Replace(cboOperadora.Tag, "@@", RecuperaValor(CadenaConsulta, QueOpcion + 1), 1)
+    Me.CboAcciones.Tag = Replace(CboAcciones.Tag, "@@", RecuperaValor(CadenaConsulta, queOpcion + 1), 1)
+    Me.CboMensual.Tag = Replace(CboMensual.Tag, "@@", RecuperaValor(CadenaConsulta, queOpcion + 1), 1)
+    Me.cboOperadora.Tag = Replace(cboOperadora.Tag, "@@", RecuperaValor(CadenaConsulta, queOpcion + 1), 1)
     'accion|N|N|||tel_descuentoscuotas|accion||
     CargarCombo_Tabla cboOperadora, "stfnoOperador", "codoperador", "nombre", "codoperador <=3"
     
@@ -858,7 +858,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
+    Select Case Button.index
         Case 1: mnBuscar_Click
         Case 2: mnVerTodos_Click
         Case 5: mnNuevo_Click
@@ -888,28 +888,28 @@ Dim tots As String
     SQL = CadenaConsulta & SQL
 
     SQL = SQL & " ORDER BY operadora,"
-    If QueOpcion = 0 Then
+    If queOpcion = 0 Then
         SQL = SQL & "codigo_de_cuota"
-    ElseIf QueOpcion = 1 Then
+    ElseIf queOpcion = 1 Then
         SQL = SQL & "Codigo_de_tipo_de_trafico"
-    ElseIf QueOpcion = 2 Then
+    ElseIf queOpcion = 2 Then
         SQL = SQL & "codigoCuota"
     Else
         SQL = SQL & "CodigoVario"
     End If
     
-    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
 
     '### a mano
-    If QueOpcion = 0 Then
+    If queOpcion = 0 Then
         tots = "S|txtAux(0)|T|Cod.|800|;S|txtAux(1)|T|Descripción|4500|;N||||0|;"
         tots = tots & "S|CboAcciones|C|Accion|1900|;N||||0|;S|CboMensual|C|Aplicar|1000|;S|txtAux(2)|T|Valor|1200|;N||||0|;"
         
-    ElseIf QueOpcion = 1 Then
+    ElseIf queOpcion = 1 Then
         tots = "S|txtAux(0)|T|Cod.|800|;S|txtAux(1)|T|Descripción|4500|;N||||0|;S|CboMensual|C|Refacturar|1000|;"
         tots = tots & "N||||0|;S|CboAcciones|C|Seg.|800|;N||||0|;"
     
-    ElseIf QueOpcion = 2 Then
+    ElseIf queOpcion = 2 Then
         
         tots = "S|txtAux(0)|T|Cod.|800|;S|txtAux(1)|T|Descripción|4500|;S|txtAux(2)|T|Importe|1000|;N||||0|;"
         
@@ -927,8 +927,8 @@ Dim tots As String
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
-   If Not adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If
@@ -939,14 +939,14 @@ Private Sub CargaCombo()
     
     Me.CboMensual.Clear
     
-    If QueOpcion = 0 Then
+    If queOpcion = 0 Then
     
         CboMensual.AddItem "Mes"
         CboMensual.ItemData(CboMensual.NewIndex) = 0
         
         CboMensual.AddItem "Prorratea"
         CboMensual.ItemData(CboMensual.NewIndex) = 1
-    ElseIf QueOpcion = 1 Or QueOpcion = 3 Then
+    ElseIf queOpcion = 1 Or queOpcion = 3 Then
         CboMensual.AddItem "No"
         CboMensual.ItemData(CboMensual.NewIndex) = 0
         
@@ -956,7 +956,7 @@ Private Sub CargaCombo()
     
     'if (accion=1,'Eliminar',if(accion=2,'Refacturar x importe','Refacturar x descuento')),"
     CboAcciones.Clear
-    If QueOpcion = 0 Then
+    If queOpcion = 0 Then
         CboAcciones.AddItem "NADA"
         CboAcciones.ItemData(CboAcciones.NewIndex) = 0
         CboAcciones.AddItem "Eliminar"
@@ -965,7 +965,7 @@ Private Sub CargaCombo()
         CboAcciones.ItemData(CboAcciones.NewIndex) = 2
         CboAcciones.AddItem "Refacturar x descuento"
         CboAcciones.ItemData(CboAcciones.NewIndex) = 3
-    ElseIf QueOpcion = 1 Then
+    ElseIf queOpcion = 1 Then
         'TraficoSegundos
         CboAcciones.AddItem "No"
         CboAcciones.ItemData(CboAcciones.NewIndex) = 0
@@ -975,28 +975,28 @@ Private Sub CargaCombo()
     End If
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+Private Sub txtAux_GotFocus(index As Integer)
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub txtAux_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+Private Sub txtAux_LostFocus(index As Integer)
+    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
     
-    If Index = 0 And QueOpcion = 2 Then
+    If index = 0 And queOpcion = 2 Then
         'SOLO PARA CUOTAS PROPIAS
         If Not PonerFormatoEntero(Me.txtAux(0)) Then txtAux(0).Text = ""
     End If
         
-    If Index = 2 Then
-        If Not PonerFormatoDecimal(txtAux(Index), 2) Then txtAux(Index).Text = ""
+    If index = 2 Then
+        If Not PonerFormatoDecimal(txtAux(index), 2) Then txtAux(index).Text = ""
     End If
 End Sub
 
@@ -1027,10 +1027,10 @@ End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim cerrar As Boolean
+Dim Cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, cerrar
-    If cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, Cerrar
+    If Cerrar Then Unload Me
 End Sub
 
 Private Sub PonerOpcionesMenu()
@@ -1048,7 +1048,7 @@ Dim C As String
         
         
         
-        If QueOpcion <> 2 Then Exit Function
+        If queOpcion <> 2 Then Exit Function
         
         
         
@@ -1060,7 +1060,7 @@ Dim C As String
     
     Else
         'MOdificar
-        If QueOpcion = 0 Then
+        If queOpcion = 0 Then
             C = "UPDATE tel_descuentoscuotas SET "
             C = C & "Descripcion_de_cuota=" & DBSet(Me.txtAux(1).Text, "T")
             C = C & ",Valor=" & DBSet(Me.txtAux(2).Text, "N")
@@ -1069,18 +1069,18 @@ Dim C As String
             C = C & " WHERE operadora =" & Me.cboOperadora.ItemData(cboOperadora.ListIndex)
             C = C & " and codigo_de_cuota =" & DBSet(Me.txtAux(0), "T")
     
-        ElseIf QueOpcion = 1 Then
+        ElseIf queOpcion = 1 Then
             C = "UPDATE tel_conceptosllamadas SET "
             C = C & "refacturar=" & Me.CboMensual.ItemData(CboMensual.ListIndex)
             C = C & ",TraficoSegundos=" & Me.CboAcciones.ItemData(CboAcciones.ListIndex)
             C = C & " WHERE operadora =" & Me.cboOperadora.ItemData(cboOperadora.ListIndex) & " and Codigo_de_tipo_de_trafico =" & DBSet(Me.txtAux(0), "T")
             
-        ElseIf QueOpcion = 2 Then
+        ElseIf queOpcion = 2 Then
             C = "UPDATE stfnocuotaspropias SET "
             C = C & "importe=" & DBSet(Me.txtAux(2).Text, "N")
             C = C & " WHERE operadora =" & Me.cboOperadora.ItemData(cboOperadora.ListIndex) & " and codigoCuota =" & DBSet(Me.txtAux(0), "T")
             
-        ElseIf QueOpcion = 3 Then
+        ElseIf queOpcion = 3 Then
             
             'tel_cargo_varios CodigoVario Descripcion CargarEnFactura
             C = "UPDATE tel_cargo_varios SET "
@@ -1090,5 +1090,5 @@ Dim C As String
         End If
     
     End If
-    If Ejecutar(C, False) Then InsertModifica = True
+    If ejecutar(C, False) Then InsertModifica = True
 End Function

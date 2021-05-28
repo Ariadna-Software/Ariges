@@ -240,7 +240,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private WithEvents frmP As frmComProveedores
+Private WithEvents frmP As frmBasico2
 Attribute frmP.VB_VarHelpID = -1
 
 Dim cad As String
@@ -614,15 +614,16 @@ Private Sub frmP_DatoSeleccionado(CadenaSeleccion As String)
     
 End Sub
 
-Private Sub imgayuda_Click(index As Integer)
+Private Sub imgAyuda_Click(Index As Integer)
     MsgBox "Al importar los datos en telematel, los inserta sin asignarle codigo de proveedor", vbExclamation
 End Sub
 
-Private Sub imgBuscarG_Click(index As Integer)
-    If index = 0 Then
-        Set frmP = New frmComProveedores
-        frmP.DatosADevolverBusqueda = "0|1|"
-        frmP.Show vbModal
+Private Sub imgBuscarG_Click(Index As Integer)
+    If Index = 0 Then
+        Set frmP = New frmBasico2
+'        frmP.DatosADevolverBusqueda = "0|1|"
+'        frmP.Show vbModal
+        AyudaProveedores frmP, txtProv(0)
         Set frmP = Nothing
     
     Else
@@ -659,7 +660,7 @@ On Error GoTo EprocesarFichero
         Line Input #NF, cad
         Set IT = lw1.ListItems.Add()
         If Not ProcesarLinea(IT) Then
-            lw1.ListItems.Remove IT.index
+            lw1.ListItems.Remove IT.Index
             '¿Continuamos?
             'if msgbox("¿Continuar
             OK = True
@@ -682,35 +683,35 @@ End Sub
 Private Function ProcesarLinea(ByRef IT As ListItem) As Boolean
 Dim J As Integer
 Dim Inicio As Integer
-Dim I As Integer
+Dim i As Integer
 Dim Aux As String
     
     
     ProcesarLinea = False
     Inicio = 1
-    For I = 1 To 7
+    For i = 1 To 7
         J = InStr(Inicio, cad, ";")
         If J = 0 Then
-            MsgBox "No se ha encontrado el separador " & J & ". Campo: " & I, vbExclamation
+            MsgBox "No se ha encontrado el separador " & J & ". Campo: " & i, vbExclamation
             Exit Function
         Else
             Aux = Mid(cad, Inicio, J - Inicio)
             Aux = Trim(Aux)
-            If I = 1 Then
+            If i = 1 Then
                 IT.Text = Aux
             Else
-                If I = 6 Then Aux = Val(Aux)
+                If i = 6 Then Aux = Val(Aux)
                 
-                IT.SubItems(I - 1) = Aux
+                IT.SubItems(i - 1) = Aux
             End If
             Inicio = J + 1
             
             
             
-            If I = 2 Then
+            If i = 2 Then
                 If Len(Aux) > NumRegElim Then
                     NumRegElim = Len(Aux)
-                    CadenaDesdeOtroForm = IT.index
+                    CadenaDesdeOtroForm = IT.Index
                 End If
             End If
         End If
@@ -719,16 +720,16 @@ Dim Aux As String
 End Function
 
 
-Private Sub txtProv_GotFocus(index As Integer)
-    ConseguirFoco txtProv(index), 3
+Private Sub txtProv_GotFocus(Index As Integer)
+    ConseguirFoco txtProv(Index), 3
 End Sub
 
-Private Sub txtProv_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtProv_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
 End Sub
 
-Private Sub txtProv_LostFocus(index As Integer)
-    If index = 0 Then
+Private Sub txtProv_LostFocus(Index As Integer)
+    If Index = 0 Then
         cad = ""
         txtProv(0).Text = Trim(txtProv(0).Text)
         If txtProv(0).Text <> "" Then
@@ -764,12 +765,12 @@ End Function
 
 
 Private Function FicheroExcelConvertido() As String
-Dim I As Integer
+Dim i As Integer
 
 
-    I = InStrRev(Text1.Text, ".")
+    i = InStrRev(Text1.Text, ".")
     
-    FicheroExcelConvertido = Mid(Text1.Text, 1, I) & "txt"
+    FicheroExcelConvertido = Mid(Text1.Text, 1, i) & "txt"
 
 
 
@@ -777,7 +778,7 @@ End Function
 
 Private Function ProcesarFicheroExcel() As Boolean
 Dim Aux As String
-Dim I As Integer
+Dim i As Integer
     
     On Error GoTo eProcesarFicheroExcel:
 
@@ -786,24 +787,24 @@ Dim I As Integer
     Aux = App.Path & "\aTelemat.exe  /" & Text1.Text
     Shell Aux, vbNormalFocus
     Aux = FicheroExcelConvertido
-    I = 0
+    i = 0
     'Como mucho un minuto
     Caption = "     ******  Procesando fichero XLS   ******"
     Do
        
        If Dir(Aux, vbArchive) <> "" Then
             'OK, ya se ha creado el archivo
-            I = 61
+            i = 61
             ProcesarFicheroExcel = True
         Else
-            I = I + 1
+            i = i + 1
             Me.Refresh
             Screen.MousePointer = vbHourglass
             DoEvents
             Espera 0.9
         End If
        
-    Loop Until I > 60
+    Loop Until i > 60
     
 eProcesarFicheroExcel:
     If Err.Number <> 0 Then MuestraError Err.Number

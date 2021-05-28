@@ -367,9 +367,9 @@ Option Explicit
 Private WithEvents frmA As frmAlmAlPropios 'Almacen Origen/Destino
 Attribute frmA.VB_VarHelpID = -1
 'Segun el Parametro se trabajara con Familia o con Proveedor (frmFA o frmP)
-Private WithEvents frmFA As frmAlmFamiliaArticulo
+Private WithEvents frmFA As frmBasico2 'frmAlmFamiliaArticulo
 Attribute frmFA.VB_VarHelpID = -1
-Private WithEvents frmP As frmComProveedores
+Private WithEvents frmP As frmBasico2 '%=%=frmComProveedores
 Attribute frmP.VB_VarHelpID = -1
 Private WithEvents frmFI As frmInvPistolas
 Attribute frmFI.VB_VarHelpID = -1
@@ -516,7 +516,7 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim i As Byte
+Dim I As Byte
 Dim SQL As String
 On Error GoTo ECarga
 
@@ -554,10 +554,10 @@ On Error GoTo ECarga
     DataGrid1.Columns(5).Width = 1500
     DataGrid1.Columns(5).Alignment = dbgCenter
     
-    For i = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(i).AllowSizing = False
-        DataGrid1.Columns(i).Locked = True
-    Next i
+    For I = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(I).AllowSizing = False
+        DataGrid1.Columns(I).Locked = True
+    Next I
     
     DataGrid1.ScrollBars = dbgAutomatic
     gridCargado = True
@@ -666,14 +666,18 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 1 'Codigo Familia / Cod. Proveedor
             If vParamAplic.InventarioxProv Then
                 'Realizar inventario por Proveedor
-                Set frmP = New frmComProveedores
-                frmP.DatosADevolverBusqueda = "0"
-                frmP.Show vbModal
+'                Set frmP = New frmComProveedores
+'                frmP.DatosADevolverBusqueda = "0"
+'                frmP.Show vbModal
+                Set frmP = New frmBasico2
+                AyudaProveedores frmP, Text1(Index)
                 Set frmP = Nothing
             Else 'Cod. Familia
-                Set frmFA = New frmAlmFamiliaArticulo
-                frmFA.DatosADevolverBusqueda = "0"
-                frmFA.Show vbModal
+'                Set frmFA = New frmAlmFamiliaArticulo
+'                frmFA.DatosADevolverBusqueda = "0"
+'                frmFA.Show vbModal
+                Set frmFA = New frmBasico2
+                AyudaFamilias frmFA, Text1(Index)
                 Set frmFA = Nothing
             End If
     End Select
@@ -818,7 +822,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte
+Dim I As Byte
 Dim b As Boolean
        
     Modo = Kmodo
@@ -855,9 +859,9 @@ Dim b As Boolean
            
     b = Modo <> 0 And Modo <> 2 And Modo <> 4
    
-    For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
-    Next i
+    For I = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(I).Enabled = b
+    Next I
 
     b = (Modo = 1)
     Toolbar1.Buttons(1).Enabled = Not b
@@ -1104,9 +1108,9 @@ Private Function ProcesarFicheroInventario(Fichero As String) As Boolean
     Dim NfLog As Integer ' controlador del fichero log
     Dim LineaLeida As String ' la linea leida del fichero
     Dim LineaLog As String ' la linea a grabar en el log
-    Dim codigo As String
+    Dim Codigo As String
     Dim cantidad As String
-    Dim i As Integer
+    Dim I As Integer
     Dim pos As Integer
     On Error GoTo err_ProcesarFichero
     ProcesarFicheroInventario = True ' por defecto consideramos que todo va a ir bien
@@ -1116,18 +1120,18 @@ Private Function ProcesarFicheroInventario(Fichero As String) As Boolean
     Open App.Path & "\INV" & Format(Now, "ddMMyyhhmmss") & ".log" For Output As #NfLog '-- fichero log
     While Not EOF(NfLeer)
         Line Input #NfLeer, LineaLeida
-        i = i + 1
-        lblInfInv.Caption = "Registro " & CStr(i)
+        I = I + 1
+        lblInfInv.Caption = "Registro " & CStr(I)
         lblInfInv.Refresh
         DoEvents
         pos = InStr(1, LineaLeida, ",")
         If pos Then
-            codigo = Mid(LineaLeida, 1, pos - 1)
+            Codigo = Mid(LineaLeida, 1, pos - 1)
             cantidad = Right(LineaLeida, Len(LineaLeida) - pos)
             '-- Ahora hay que buscar el artículo asociado
             '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN y quitar de la cabecera
 '            Sql = "select * from sartic where codigoea = '" & Codigo & "'"
-            SQL = "select * from sarti3 where codigoea = '" & codigo & "'"
+            SQL = "select * from sarti3 where codigoea = '" & Codigo & "'"
             '----
             
             Set RS = New ADODB.Recordset
@@ -1135,22 +1139,22 @@ Private Function ProcesarFicheroInventario(Fichero As String) As Boolean
             If Not RS.EOF Then
                 '-- Si que lo ha encontrado vamos a actualizarlo
                 If Not ActualizarExistencia2(cantidad, RS!codArtic) Then
-                    LineaLog = "Linea:" & CStr(i) & "|Error actualizando existencias " & _
-                        " EAN: " & codigo & _
+                    LineaLog = "Linea:" & CStr(I) & "|Error actualizando existencias " & _
+                        " EAN: " & Codigo & _
                         " ARTICULO: " & RS!codArtic & _
                         " CANTIDAD: " & cantidad
                     Print #NfLog, LineaLog
                     ProcesarFicheroInventario = False
                 End If
             Else
-                LineaLog = "Linea:" & CStr(i) & "|No se ha encontrado artículo asociado " & _
-                    " EAN: " & codigo & _
+                LineaLog = "Linea:" & CStr(I) & "|No se ha encontrado artículo asociado " & _
+                    " EAN: " & Codigo & _
                     " CANTIDAD: " & cantidad
                 Print #NfLog, LineaLog
                 ProcesarFicheroInventario = False
             End If
         Else
-            LineaLog = "Linea:" & CStr(i) & "|No se reconoce el formato de la línea"
+            LineaLog = "Linea:" & CStr(I) & "|No se reconoce el formato de la línea"
             Print #NfLog, LineaLog
             ProcesarFicheroInventario = False
         End If

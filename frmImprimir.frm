@@ -226,7 +226,7 @@ Private MostrarTree As Boolean
 
 Private MIPATH As String
 Private Lanzado As Boolean
-Private primeravez As Boolean
+Private PrimeraVez As Boolean
 
 
 Private EstabaMarcado As Boolean
@@ -237,11 +237,11 @@ Private ImpresoraPorDefectoAnterior As String
 
 'Private ReestableceSoloImprimir As Boolean
 Private Sub chkEMAIL_Click()
-    If chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 0
+    If chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 0
 End Sub
 
 Private Sub chkSoloImprimir_Click()
-    If Me.chkSoloImprimir.Value = 1 Then Me.chkEMAIL.Value = 0
+    If Me.chkSoloImprimir.Value = 1 Then Me.chkEmail.Value = 0
 End Sub
 
 
@@ -256,7 +256,7 @@ End Sub
 
 Private Sub cmdImprimir_Click()
  
-    If Me.chkSoloImprimir.Value = 1 And Me.chkEMAIL.Value = 1 Then
+    If Me.chkSoloImprimir.Value = 1 And Me.chkEmail.Value = 1 Then
         MsgBox "Si desea enviar por mail no debe marcar vista preliminar", vbExclamation
         Exit Sub
     End If
@@ -273,21 +273,21 @@ End Sub
 
 
 Private Sub Combo1_Click()
-Dim i As Integer
+Dim I As Integer
 Dim C  As String
-    If primeravez Then Exit Sub
+    If PrimeraVez Then Exit Sub
     'En nomrpt pondra el valor entrecorchetado
     C = Combo1.Text
-    i = InStr(1, C, "[")
-    C = Mid(C, i + 1)
-    i = InStr(1, C, "]")
-    C = Mid(C, 1, i - 1)
+    I = InStr(1, C, "[")
+    C = Mid(C, I + 1)
+    I = InStr(1, C, "]")
+    C = Mid(C, 1, I - 1)
     Me.NombreRPT = C
 End Sub
 
 Private Sub Form_Activate()
-    If primeravez Then
-        primeravez = False
+    If PrimeraVez Then
+        PrimeraVez = False
         
         
         
@@ -321,12 +321,12 @@ End Sub
 'Si no he ajustado el NombrePDF y no le he puesto valor entonces,
 'cogera el mismo que tiene en NombreRPT
 Private Sub Form_Load()
-Dim cad As String
+Dim Cad As String
 
-    primeravez = True
+    PrimeraVez = True
     Lanzado = False
     CargaICO
-    cad = Dir(App.Path & "\impre.dat", vbArchive)
+    Cad = Dir(App.Path & "\impre.dat", vbArchive)
     HaPulsadoElBotonDeImprimir = False
     
     
@@ -334,7 +334,7 @@ Dim cad As String
     
     
     'ReestableceSoloImprimir = False
-    If cad = "" Then
+    If Cad = "" Then
         chkSoloImprimir.Value = 0
     Else
         chkSoloImprimir.Value = 1
@@ -375,7 +375,8 @@ Dim cad As String
                 NombreRPT = "rRepEfectuadas.rpt"
                  Titulo = ""
             Case 2002
-                Text1.Text = "Listado reparacion x tecnico"
+                
+                Text1.Text = IIf(Titulo = "", "Listado reparacion x tecnico", Titulo)
                  Titulo = ""
             
             Case 2003
@@ -498,11 +499,12 @@ Dim cad As String
                     '---------------- Algunos listados basicos
                     Case 5
                         'Tipos de contrato de mantenimiento
-                        Text1.Text = "Tipo contrato mantimiento"
+                        Text1.Text = "Tipo contrato mantenimiento"
                         
                     Case 18 'Informe Stocks Maximos o Minimos
                         Text1.Text = "Stocks Máximos-Mínimos"
-                
+                    Case 30
+                        MostrarTree = True
                     Case 31 'Listado de Ofertas
                         Text1.Text = "Listado de Ofertas"
                         ConSubInforme = True
@@ -630,9 +632,19 @@ End If
     
     If NombrePDF = "" Then NombrePDF = NombreRPT
     
-    If EnvioEMail Then Imprime
+    If EnvioEMail Then
+        Imprime
+        Screen.MousePointer = vbDefault
+    Else
+        'Enero 2021
+        'Si es factura cliente(53) y solo imprimir tambien lo lanzo aqui
+        If Opcion = 53 And SoloImprimir Then
+            Screen.MousePointer = vbHourglass
+            Imprime   'para que no haga la hola
+        End If
+    End If
     
-    Screen.MousePointer = vbDefault
+    
 End Sub
 
 
@@ -651,7 +663,7 @@ Dim EsPorEmail As Boolean
     OtrosParam2 = OtrosParametros
     NumParam2 = NumeroParametros
     HaPulsadoImprimir = False
-    If Opcion = 53 And Me.chkEMAIL.Value = 0 Then
+    If Opcion = 53 And Me.chkEmail.Value = 0 Then
         'Estamos en
         '   -reimpresion de facturas
         '   -facturacion
@@ -671,7 +683,8 @@ Dim EsPorEmail As Boolean
     
     With frmVisReport
             
-    
+        .CambiaODBC = False
+        .OcultarElMensajeDeError = False
             
         '.ForzarNombreImpresora
         'ETIQUETAS TAXCo
@@ -688,7 +701,7 @@ Dim EsPorEmail As Boolean
         If EnvioEMail Then
             EsPorEmail = True
         Else
-            If Me.chkEMAIL.Value = 1 Then EsPorEmail = True
+            If Me.chkEmail.Value = 1 Then EsPorEmail = True
         End If
         If EsPorEmail Then
             'EMAIL
@@ -729,7 +742,7 @@ Dim EsPorEmail As Boolean
         
         HaPulsadoImprimir = .EstaImpreso
         HaPulsadoElBotonDeImprimir = HaPulsadoImprimir
-      End With
+    End With
     
     
     
@@ -766,6 +779,13 @@ Dim EsPorEmail As Boolean
                 End With
             Next
         End If
+            
+            
+        If HaPulsadoImprimir Then
+            'Vamos a guardar con que RPT han impreso la factura
+            CadenaRPTFactura True, NombreRPT, FormulaSeleccion
+        End If
+        
     End If
     
     
@@ -773,7 +793,7 @@ Dim EsPorEmail As Boolean
     
     
     
-    If Me.chkEMAIL.Value = 1 Then
+    If Me.chkEmail.Value = 1 Then
         If CadenaDesdeOtroForm <> "" Then 'se exporto el informe OK (.pdf)
             
             If Me.EnvioEMail Then  'se llamo desde envio masivo
@@ -785,11 +805,18 @@ Dim EsPorEmail As Boolean
                 ' Nuevo
                 LanzaAbrirOutlook = False
                 If vParamAplic.ExeEnvioMail <> "" Then
-                    If Me.outTipoDocumento = 0 Then
-                        'MsgBox "Tipo de documento sin definir en el envio.", vbExclamation
-                    Else
-                        LanzaAbrirOutlook = True
-                    End If
+                
+                    '28 MAYO 2021
+                    'Todos se envian por outlook (si tiene el parametro)
+                    ' Si no se personaliza, se envia como generico
+                
+                    'LO que habia
+                    'If Me.outTipoDocumento = 0 Then
+                    '    'MsgBox "Tipo de documento sin definir en el envio.", vbExclamation
+                    'Else
+                    '    LanzaAbrirOutlook = True
+                    'End If
+                    LanzaAbrirOutlook = True
                 End If
             
                 If LanzaAbrirOutlook Then
@@ -815,9 +842,17 @@ Dim EsPorEmail As Boolean
         End If
     End If
     
-
-    If Not EnvioEMail Then Unload Me
-    
+    Dim HazUnload As Boolean
+    HazUnload = False
+    'If Not EnvioEMail Then Unload Me
+    If Not EnvioEMail Then
+        If Opcion = 53 And SoloImprimir Then
+            HazUnload = False 'para que no haga la hola
+        Else
+            HazUnload = True
+        End If
+    End If
+    If HazUnload Then Unload Me
     
 End Function
 
@@ -837,7 +872,7 @@ Private Sub Form_Unload(Cancel As Integer)
     If EnvioEMail Then Exit Sub
     
 
-    If Me.chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 1
+    If Me.chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 1
     'If ReestableceSoloImprimir Then SoloImprimir = False
     'Dejo la marca como estaba
     If SoloImprimir Then
@@ -900,6 +935,7 @@ Private Sub LanzaProgramaAbrirOutlook()
 Dim NombrePDF As String
 Dim Aux As String
 Dim Lanza As String
+Dim I As Integer
 
     On Error GoTo ELanzaProgramaAbrirOutlook
 
@@ -929,6 +965,19 @@ Dim Lanza As String
         Aux = "" & Me.outClaveNombreArchiv & ".pdf"
     Case 51
         Aux = "PEDP" & Me.outClaveNombreArchiv & ".pdf"
+        
+        
+    Case Else
+        'GENERICO.  Sin especificar.
+        'Con lo cual pondremos Documento
+        Aux = Text1.Text
+        If Aux <> "" Then
+            For I = 1 To Len(Aux)
+                Aux = Replace(Aux, Mid("\/:*""?<>|", I, 1), " ")
+            Next
+            Aux = Aux & ".pdf"
+        End If
+        If Aux = "" Then Aux = "Documento.pdf"
     End Select
     NombrePDF = App.Path & "\temp\" & Aux
     If Dir(NombrePDF, vbArchive) <> "" Then Kill NombrePDF
@@ -961,6 +1010,11 @@ Dim Lanza As String
     '--------------------------------------------------
     Case 51
         Aux = "Pedido proveedor nº: " & outClaveNombreArchiv
+    
+    
+    Case Else
+        'Todos los demas
+        Aux = "Informe.  " & Text1.Text
     End Select
     
     Lanza = Lanza & Aux & "|"
@@ -996,30 +1050,39 @@ Dim otromail As String
     FijaDireccionEmail = ""
     
     
-    If outTipoDocumento < 50 Then
-        
-        If outTipoDocumento = 1 Or outTipoDocumento = 2 Or outTipoDocumento = 3 Or outTipoDocumento = 7 Then
-            campoemail = "maiclie1"
-            otromail = "maiclie2"
-        Else
-            campoemail = "maiclie2"
-            otromail = "maiclie1"
-        End If
-        campoemail = DevuelveDesdeBD(conAri, campoemail, "sclien", "codclien", Me.outCodigoCliProv, "N", otromail)
-        If campoemail = "" Then campoemail = otromail
+    If outTipoDocumento = 0 Then
+        '28 Mayo 21
+        'GENERICO. NO especifo direccion email
+        campoemail = ""
+    
+    
     Else
-        'Para provedores
-        If outTipoDocumento = 52 Or outTipoDocumento = 53 Then
-            campoemail = "maiprov1"
-            otromail = "maiprov2"
+        'LO que habia
+        If outTipoDocumento < 50 Then
+            
+            If outTipoDocumento = 1 Or outTipoDocumento = 2 Or outTipoDocumento = 3 Or outTipoDocumento = 7 Then
+                campoemail = "maiclie1"
+                otromail = "maiclie2"
+            Else
+                campoemail = "maiclie2"
+                otromail = "maiclie1"
+            End If
+            campoemail = DevuelveDesdeBD(conAri, campoemail, "sclien", "codclien", Me.outCodigoCliProv, "N", otromail)
+            If campoemail = "" Then campoemail = otromail
         Else
-            'outTipoDocumento = 51  LO paso aqui bajo. Ped prov
-            campoemail = "maiprov2"
-            otromail = "maiprov1"
+            'Para provedores
+            If outTipoDocumento = 52 Or outTipoDocumento = 53 Then
+                campoemail = "maiprov1"
+                otromail = "maiprov2"
+            Else
+                'outTipoDocumento = 51  LO paso aqui bajo. Ped prov
+                campoemail = "maiprov2"
+                otromail = "maiprov1"
+            End If
+            campoemail = DevuelveDesdeBD(conAri, campoemail, "sprove", "codprove", Me.outCodigoCliProv, "N", otromail)
+            If campoemail = "" Then campoemail = otromail
+            
         End If
-        campoemail = DevuelveDesdeBD(conAri, campoemail, "sprove", "codprove", Me.outCodigoCliProv, "N", otromail)
-        If campoemail = "" Then campoemail = otromail
-        
     End If
     FijaDireccionEmail = campoemail
 End Function
@@ -1055,34 +1118,34 @@ Private Sub ForzarImpresoraPorDefecto(sNombreImpresora As String)
     On Error GoTo eForzarImpresoraPorDefecto
     Dim nom As String
     Dim bEncontrada As Boolean
-    Dim i As Integer
+    Dim I As Integer
     'Selecciona la impresora para imprimir, si no puede seleccionarla devuelve false
     
     bEncontrada = False
-    For i = 0 To Printers.Count - 1
-        If Printers(i).DeviceName = sNombreImpresora Then
+    For I = 0 To Printers.Count - 1
+        If Printers(I).DeviceName = sNombreImpresora Then
             bEncontrada = True
             Exit For
         End If
-    Next i
+    Next I
     
     If bEncontrada Then
         
-        Set Printer = Printers(i)
+        Set Printer = Printers(I)
         
     Else
         
         nom = ""
-        i = InStrRev(sNombreImpresora, "\")
-        If i > 0 Then
-            nom = Mid(sNombreImpresora, i + 1)
-            For i = 0 To Printers.Count - 1
-                If Printers(i).DeviceName = sNombreImpresora Then
+        I = InStrRev(sNombreImpresora, "\")
+        If I > 0 Then
+            nom = Mid(sNombreImpresora, I + 1)
+            For I = 0 To Printers.Count - 1
+                If Printers(I).DeviceName = sNombreImpresora Then
                     bEncontrada = True
                     Exit For
                 End If
-            Next i
-            If bEncontrada Then Set Printer = Printers(i)
+            Next I
+            If bEncontrada Then Set Printer = Printers(I)
             
         
         End If

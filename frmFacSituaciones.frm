@@ -1,28 +1,120 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacSituaciones 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Situaciones Especiales"
-   ClientHeight    =   6015
+   ClientHeight    =   7860
    ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   7890
+   ClientTop       =   30
+   ClientWidth     =   11805
    Icon            =   "frmFacSituaciones.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6015
-   ScaleWidth      =   7890
+   ScaleHeight     =   7860
+   ScaleWidth      =   11805
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   90
+      TabIndex        =   12
+      Top             =   90
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   180
+         TabIndex        =   13
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.ComboBox cbopermitefecti 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      ItemData        =   "frmFacSituaciones.frx":000C
+      Left            =   6480
+      List            =   "frmFacSituaciones.frx":000E
+      Style           =   2  'Dropdown List
+      TabIndex        =   5
+      Tag             =   "permite efectivo en albarnes|N|N|||ssitua|PermiteEfectAalb||N|"
+      Top             =   4920
+      Width           =   1215
+   End
    Begin VB.ComboBox cboBusqweb 
       Appearance      =   0  'Flat
-      Height          =   315
-      ItemData        =   "frmFacSituaciones.frx":000C
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      ItemData        =   "frmFacSituaciones.frx":0010
       Left            =   5160
-      List            =   "frmFacSituaciones.frx":000E
+      List            =   "frmFacSituaciones.frx":0012
       Style           =   2  'Dropdown List
       TabIndex        =   4
       Tag             =   "Ocultar busqueda clientes WEB|N|N|||ssitua|ocultarbus||N|"
@@ -31,10 +123,19 @@ Begin VB.Form frmFacSituaciones
    End
    Begin VB.ComboBox cboclioferped 
       Appearance      =   0  'Flat
-      Height          =   315
-      ItemData        =   "frmFacSituaciones.frx":0010
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      ItemData        =   "frmFacSituaciones.frx":0014
       Left            =   3840
-      List            =   "frmFacSituaciones.frx":0012
+      List            =   "frmFacSituaciones.frx":0016
       Style           =   2  'Dropdown List
       TabIndex        =   3
       Tag             =   "Bloquea ofertas pedidos cliente|N|N|||ssitua|clioferped||N|"
@@ -43,10 +144,19 @@ Begin VB.Form frmFacSituaciones
    End
    Begin VB.ComboBox CboTipoSitu 
       Appearance      =   0  'Flat
-      Height          =   315
-      ItemData        =   "frmFacSituaciones.frx":0014
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      ItemData        =   "frmFacSituaciones.frx":0018
       Left            =   2400
-      List            =   "frmFacSituaciones.frx":0016
+      List            =   "frmFacSituaciones.frx":001A
       Style           =   2  'Dropdown List
       TabIndex        =   2
       Tag             =   "Bloquea|N|N|||ssitua|tipositu||N|"
@@ -56,7 +166,16 @@ Begin VB.Form frmFacSituaciones
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   0
       Left            =   120
       MaxLength       =   2
@@ -69,7 +188,16 @@ Begin VB.Form frmFacSituaciones
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   1
       Left            =   960
       MaxLength       =   30
@@ -80,32 +208,32 @@ Begin VB.Form frmFacSituaciones
       Width           =   1395
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
-      Bindings        =   "frmFacSituaciones.frx":0018
-      Height          =   4845
-      Left            =   120
+      Bindings        =   "frmFacSituaciones.frx":001C
+      Height          =   5985
+      Left            =   90
       TabIndex        =   11
       TabStop         =   0   'False
-      Top             =   540
-      Width           =   7575
-      _ExtentX        =   13361
-      _ExtentY        =   8546
+      Top             =   945
+      Width           =   11535
+      _ExtentX        =   20346
+      _ExtentY        =   10557
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -150,41 +278,68 @@ Begin VB.Form frmFacSituaciones
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   6660
-      TabIndex        =   6
-      Top             =   5520
-      Width           =   1035
+      Left            =   10530
+      TabIndex        =   7
+      Top             =   7185
+      Width           =   1065
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   5460
-      TabIndex        =   5
-      Top             =   5520
-      Width           =   1035
+      Left            =   9360
+      TabIndex        =   6
+      Top             =   7200
+      Width           =   1065
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   6660
+      Left            =   10530
       TabIndex        =   10
-      Top             =   5520
+      Top             =   7200
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.Frame Frame1 
       Height          =   555
       Left            =   90
       TabIndex        =   8
-      Top             =   5355
+      Top             =   7110
       Width           =   2115
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -194,66 +349,9 @@ Begin VB.Form frmFacSituaciones
          Height          =   255
          Left            =   210
          TabIndex        =   9
-         Top             =   210
+         Top             =   165
          Width           =   1800
       End
-   End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   420
-      Left            =   0
-      TabIndex        =   7
-      Top             =   0
-      Width           =   7890
-      _ExtentX        =   13917
-      _ExtentY        =   741
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   11
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
-            ImageIndex      =   16
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-            ImageIndex      =   15
-         EndProperty
-      EndProperty
    End
    Begin MSAdodcLib.Adodc adodc1 
       Height          =   495
@@ -304,6 +402,8 @@ Begin VB.Form frmFacSituaciones
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -379,6 +479,7 @@ Dim b As Boolean
     CboTipoSitu.visible = Not b
     cboclioferped.visible = Not b
     cboBusqweb.visible = Not b
+    cbopermitefecti.visible = Not b
     cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
@@ -405,24 +506,24 @@ Dim b As Boolean
 
     b = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = b
+    Toolbar1.Buttons(5).Enabled = b
     Me.mnBuscar.Enabled = b
     'Ber Todos
-    Toolbar1.Buttons(2).Enabled = b
+    Toolbar1.Buttons(6).Enabled = b
     Me.mnVerTodos.Enabled = b
     
     b = b And Not DeConsulta
     'Añadir
-    Toolbar1.Buttons(5).Enabled = b
+    Toolbar1.Buttons(1).Enabled = b
     Me.mnNuevo.Enabled = b
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
+    Toolbar1.Buttons(2).Enabled = b
     Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(7).Enabled = b
+    Toolbar1.Buttons(3).Enabled = b
     Me.mnEliminar.Enabled = b
     'Imprimir
-    Toolbar1.Buttons(10).Enabled = b
+    Toolbar1.Buttons(8).Enabled = b
 End Sub
 
 
@@ -437,7 +538,7 @@ Private Sub BotonAnyadir()
 Dim anc As Single
     
     'Situamos el grid al final
-    AnyadirLinea DataGrid1, Adodc1
+    AnyadirLinea DataGrid1, adodc1
     
     'Obtenemos la siguiente numero de codigo de Situaciones
     txtAux(0).Text = SugerirCodigoSiguienteStr("ssitua", "codsitua")
@@ -446,6 +547,7 @@ Dim anc As Single
     CboTipoSitu.ListIndex = 1
     cboclioferped.ListIndex = 1
     cboBusqweb.ListIndex = 0
+    cbopermitefecti.ListIndex = 0
     anc = ObtenerAlto(DataGrid1)
     LLamaLineas anc, 3
     
@@ -461,7 +563,8 @@ Private Sub BotonBuscar()
     Me.CboTipoSitu.ListIndex = -1
     cboclioferped.ListIndex = -1
     cboBusqweb.ListIndex = -1
-    LLamaLineas 750, 1
+    cbopermitefecti.ListIndex = -1
+    LLamaLineas DataGrid1.Top + 240, 1
     PonerFoco txtAux(0)
 End Sub
 
@@ -470,7 +573,7 @@ Private Sub BotonVerTodos()
 On Error Resume Next
 
     CargaGrid ""
-    If Adodc1.Recordset.RecordCount <= 0 Then
+    If adodc1.Recordset.RecordCount <= 0 Then
          MsgBox "No hay ningún registro en la tabla ssitua", vbInformation
          Screen.MousePointer = vbDefault
           Exit Sub
@@ -486,11 +589,11 @@ Private Sub BotonModificar()
 Dim anc As Single
 Dim i As Integer
 
-    If Adodc1.Recordset.EOF Then Exit Sub
-    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
     
     'El registro de codigo 0 no se puede Modificar ni Eliminar
-    If EsCodigoCero(CStr(Adodc1.Recordset.Fields(0).Value), FormatoCod) Then Exit Sub
+    If EsCodigoCero(CStr(adodc1.Recordset.Fields(0).Value), FormatoCod) Then Exit Sub
 
     Screen.MousePointer = vbHourglass
     
@@ -519,6 +622,15 @@ Dim i As Integer
     Else
             cboBusqweb.ListIndex = 0
     End If
+    If CStr(DataGrid1.Columns(5).Value) = "Si" Then
+            cbopermitefecti.ListIndex = 1
+    Else
+            cbopermitefecti.ListIndex = 0
+    End If
+    
+    
+    
+    
     anc = ObtenerAlto(DataGrid1)
     LLamaLineas anc, 4
    
@@ -537,11 +649,13 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     CboTipoSitu.Top = alto - 15
     cboclioferped.Top = alto - 15
     cboBusqweb.Top = alto - 15
+    cbopermitefecti.Top = cboBusqweb.Top
     txtAux(0).Left = DataGrid1.Left + 340
     txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
     CboTipoSitu.Left = txtAux(1).Left + txtAux(1).Width + 65
     cboclioferped.Left = CboTipoSitu.Left + CboTipoSitu.Width + 9
     cboBusqweb.Left = cboclioferped.Left + cboclioferped.Width + 0
+    cbopermitefecti.Left = cboBusqweb.Left + cboBusqweb.Width + 9
     
 End Sub
 
@@ -550,24 +664,24 @@ Private Sub BotonEliminar()
 Dim SQL As String
 On Error GoTo Error2
     'Ciertas comprobaciones
-    If Adodc1.Recordset.EOF Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
     
     'El registro de codigo 0 no se puede Modificar ni Eliminar
-    If EsCodigoCero(CStr(Adodc1.Recordset.Fields(0).Value), FormatoCod) Then Exit Sub
+    If EsCodigoCero(CStr(adodc1.Recordset.Fields(0).Value), FormatoCod) Then Exit Sub
 
     '### a mano
     SQL = "¿Seguro que desea eliminar la Situación?" & vbCrLf
-    SQL = SQL & vbCrLf & "Código: " & Format(Adodc1.Recordset.Fields(0), FormatoCod)
-    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & Format(adodc1.Recordset.Fields(0), FormatoCod)
+    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = Me.Adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from ssitua where codsitua=" & Adodc1.Recordset!codsitua
+        NumRegElim = Me.adodc1.Recordset.AbsolutePosition
+        SQL = "Delete from ssitua where codsitua=" & adodc1.Recordset!codsitua
         conn.Execute SQL
-        CancelaADODC Me.Adodc1
+        CancelaADODC Me.adodc1
         CargaGrid ""
-        CancelaADODC Me.Adodc1
-        SituarDataPosicion Me.Adodc1, NumRegElim, SQL
+        CancelaADODC Me.adodc1
+        SituarDataPosicion Me.adodc1, NumRegElim, SQL
     End If
     
 Error2:
@@ -577,6 +691,12 @@ End Sub
 
 
 Private Sub cboBusqweb_KeyPress(KeyAscii As Integer)
+     KEYpress KeyAscii
+End Sub
+
+
+
+Private Sub cbopermitefecti_KeyPress(KeyAscii As Integer)
      KEYpress KeyAscii
 End Sub
 
@@ -612,11 +732,11 @@ On Error Resume Next
             If DatosOk And BLOQUEADesdeFormulario(Me) Then
                 If ModificaDesdeFormulario(Me, 3) Then
                    TerminaBloquear
-                   i = Adodc1.Recordset.Fields(0)
+                   i = adodc1.Recordset.Fields(0)
                    PonerModo 2
-                   CancelaADODC Me.Adodc1
+                   CancelaADODC Me.adodc1
                    CargaGrid
-                   Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
+                   adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                 End If
                 DataGrid1.SetFocus
             End If
@@ -633,10 +753,10 @@ On Error GoTo ECancelar
         Case 3
             DataGrid1.AllowAddNew = False
             'CargaGrid
-            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
+            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
         Case 4 'Modificar
             TerminaBloquear
-            Me.lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+            Me.lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     End Select
     PonerModo 2
     DataGrid1.SetFocus
@@ -648,13 +768,13 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim cad As String
 
-    If Adodc1.Recordset.EOF Then
+    If adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Adodc1.Recordset.Fields(0) & "|"
-    cad = cad & Adodc1.Recordset.Fields(1) & "|"
+    cad = adodc1.Recordset.Fields(0) & "|"
+    cad = cad & adodc1.Recordset.Fields(1) & "|"
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -669,8 +789,8 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+    If Not adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
     End If
 End Sub
 
@@ -680,16 +800,18 @@ End Sub
 
 
 Private Sub Form_Load()
+
     ' ICONITOS DE LA BARRA
     With Me.Toolbar1
-        .ImageList = frmPpal.imgListComun
-        .Buttons(1).Image = 1   'Botón Buscar
-        .Buttons(2).Image = 2   'Botón Recuperar Todos
-        .Buttons(5).Image = 3   'Botón Añadir Nuevo Registro
-        .Buttons(6).Image = 4   'Botón Modificar Registro
-        .Buttons(7).Image = 5   'Botón Borrar Registro
-        .Buttons(10).Image = 16  'Botón Imprimir
-        .Buttons(11).Image = 15  'Botón Salir
+        .HotImageList = frmPpal.imgListComun_OM2
+        .DisabledImageList = frmPpal.imgListComun_BN2
+        .ImageList = frmPpal.ImgListComun2
+        .Buttons(1).Image = 3
+        .Buttons(2).Image = 4
+        .Buttons(3).Image = 5
+        .Buttons(5).Image = 1
+        .Buttons(6).Image = 2
+        .Buttons(8).Image = 16
     End With
     
     FormatoCod = FormatoCampo(txtAux(0))
@@ -700,6 +822,7 @@ Private Sub Form_Load()
     'Cadena consulta
     CadenaConsulta = "Select codsitua,nomsitua,If(tipositu=1,""Si"",""No"") AS tipositu,"
     CadenaConsulta = CadenaConsulta & "If(clioferped=1,""Si"",""No"") AS bloqoferped ,If(ocultarbus=1,""Si"",""No"") AS bloqoferped "
+    CadenaConsulta = CadenaConsulta & ",If(PermiteEfectAalb=1,""Si"",""No"") AS PermiteEfectAalb "
     CadenaConsulta = CadenaConsulta & " from ssitua"
     
     CargaGrid
@@ -734,17 +857,15 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
-        Case 1: BotonBuscar
-        Case 2: BotonVerTodos
-        Case 5: BotonAnyadir
-        Case 6: BotonModificar
-        Case 7: BotonEliminar
-        Case 10 'Imprimir listado de Situaciones Especiales
-                Me.Hide
-                AbrirListado (27) 'OpcionListado=27
-                Me.Show vbModal
-        Case 11 'Salir
-                mnSalir_Click
+        Case 1: BotonAnyadir
+        Case 2: BotonModificar
+        Case 3: BotonEliminar
+        Case 5: BotonBuscar
+        Case 6: BotonVerTodos
+        Case 8 'Imprimir listado de Situaciones Especiales
+                'AbrirListado (27) 'OpcionListado=27
+                frmInformesNew.OpcionListado = 27
+                frmInformesNew.Show vbModal
     End Select
 End Sub
 
@@ -762,20 +883,20 @@ Dim tots As String
     End If
     SQL = SQL & " ORDER BY codsitua"
     
-    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
     
     '### a mano
-    tots = "S|txtAux(0)|T|Situación|900|;S|txtAux(1)|T|Denominación|2700|;S|CboTipoSitu|C|Bloquea|800|;"
-    tots = tots & "S|cboclioferped|C|Blq ofe/ped|1050|;S|cboBusqweb|C|Busq. web|1050|;"
+    tots = "S|txtAux(0)|T|Situación|1200|;S|txtAux(1)|T|Denominación|4400|;S|CboTipoSitu|C|Bloquea|1000|;"
+    tots = tots & "S|cboclioferped|C|Blq OFE-PED|1450|;S|cboBusqweb|C|Blq. WEB|1450|;S|cbopermitefecti|C|Alb.Efectivo|1450|;"
     
-    arregla tots, DataGrid1, Me
+    arregla tots, DataGrid1, Me, 350
     
     DataGrid1.Enabled = b
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
-   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
+   If Not adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If
@@ -799,7 +920,6 @@ Private Sub CargaCombo()
     
     CboTipoSitu.AddItem "No"
     CboTipoSitu.ItemData(CboTipoSitu.NewIndex) = 0
-    
     CboTipoSitu.AddItem "Si"
     CboTipoSitu.ItemData(CboTipoSitu.NewIndex) = 1
     
@@ -807,22 +927,26 @@ Private Sub CargaCombo()
     
     'Carga la lista de impresión de etiquetas
     cboclioferped.Clear
-    
     cboclioferped.AddItem "No"
     cboclioferped.ItemData(cboclioferped.NewIndex) = 0
-    
     cboclioferped.AddItem "Si"
     cboclioferped.ItemData(cboclioferped.NewIndex) = 1
     
     
     'Carga bloquea en web
     cboBusqweb.Clear
-    
     cboBusqweb.AddItem "No"
     cboBusqweb.ItemData(cboBusqweb.NewIndex) = 0
-    
     cboBusqweb.AddItem "Si"
     cboBusqweb.ItemData(cboBusqweb.NewIndex) = 1
+    
+    
+    'Permite efectivo
+    cbopermitefecti.Clear
+    cbopermitefecti.AddItem "No"
+    cbopermitefecti.ItemData(cbopermitefecti.NewIndex) = 0
+    cbopermitefecti.AddItem "Si"
+    cbopermitefecti.ItemData(cbopermitefecti.NewIndex) = 1
     
     
 End Sub

@@ -36,11 +36,11 @@ Private Const COLOR_32 = 4
 Public Declare Function LoadLibraryEx Lib "kernel32.DLL" Alias "LoadLibraryExA" (ByVal lpLibFileName As String, ByVal hFile As Long, ByVal dwFlags As Long) As Long
 Public Const DONT_RESOLVE_DLL_REFERENCES = &H1
 Public Const LOAD_LIBRARY_AS_DATAFILE = &H2
-Public Declare Function FreeLibrary Lib "kernel32" (ByVal hLibModule As Long) As Long
-Public Declare Function EnumResourceNames Lib "kernel32" Alias "EnumResourceNamesA" (ByVal ghmodule As Long, ByVal lpType As ResType, ByVal lpEnumFunc As Long, ByVal lParam As Long) As Long
+Public Declare Function FreeLibrary Lib "KERNEL32" (ByVal hLibModule As Long) As Long
+Public Declare Function EnumResourceNames Lib "KERNEL32" Alias "EnumResourceNamesA" (ByVal ghmodule As Long, ByVal lpType As ResType, ByVal lpEnumFunc As Long, ByVal lParam As Long) As Long
 'String management
-Public Declare Function StrLen Lib "kernel32" Alias "lstrlenA" (ByVal lpString As Long) As Long
-Public Declare Function StrCpy Lib "kernel32" Alias "lstrcpyA" (ByVal lpString1 As String, ByVal lpString2 As Long) As Long
+Public Declare Function StrLen Lib "KERNEL32" Alias "lstrlenA" (ByVal lpString As Long) As Long
+Public Declare Function StrCpy Lib "KERNEL32" Alias "lstrcpyA" (ByVal lpString1 As String, ByVal lpString2 As Long) As Long
 Private Const DIFFERENCE = 11
 Public Enum ResType ' Resource Types
     RT_FIRST = 1&
@@ -95,16 +95,16 @@ Public Declare Function LoadImage Lib "user32" Alias "LoadImageA" (ByVal hInst A
 Public Declare Function LoadLibrary Lib "kernel32.DLL" Alias "LoadLibraryA" (ByVal lpLibFileName As String) As Long
 
 Private Declare Function FindResource Lib "kernel32.DLL" Alias "FindResourceA" (ByVal hInstance As Long, ByVal lpName As String, ByVal lpType As String) As Long
-Private Declare Function FindResourceByNum Lib "kernel32" Alias "FindResourceA" (ByVal hInstance As Long, ByVal lpName As String, ByVal lpType As Long) As Long
+Private Declare Function FindResourceByNum Lib "KERNEL32" Alias "FindResourceA" (ByVal hInstance As Long, ByVal lpName As String, ByVal lpType As Long) As Long
 
 Private Declare Function LoadResource Lib "kernel32.DLL" (ByVal hInstance As Long, ByVal hResInfo As Long) As Long
 Private Declare Function CreateIconFromResourceEx Lib "user32" (presbits As Byte, ByVal dwResSize As Long, ByVal fIcon As Long, ByVal dwVer As Long, ByVal cxDesired As Long, ByVal cyDesired As Long, ByVal uFlags As Long) As Long
-Private Declare Function LockResource Lib "kernel32" (ByVal hResData As Long) As Long
-Private Declare Function SizeofResource Lib "kernel32" (ByVal hInstance As Long, ByVal hResInfo As Long) As Long
-Private Declare Function FreeResource Lib "kernel32" (ByVal hResData As Long) As Long
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
+Private Declare Function LockResource Lib "KERNEL32" (ByVal hResData As Long) As Long
+Private Declare Function SizeofResource Lib "KERNEL32" (ByVal hInstance As Long, ByVal hResInfo As Long) As Long
+Private Declare Function FreeResource Lib "KERNEL32" (ByVal hResData As Long) As Long
+Private Declare Sub CopyMemory Lib "KERNEL32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
 
-Private Type PictDesc
+Private Type PICTDESC
     cbSizeofStruct As Long
     PicType As Long
     hImage As Long
@@ -114,13 +114,13 @@ End Type
 Private Type GUID
     Data1 As Long
     Data2 As Integer
-    data3 As Integer
+    Data3 As Integer
     data4(0 To 7) As Byte
 End Type
-Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (lpPictDesc As PictDesc, riid As GUID, ByVal fPictureOwnsHandle As Long, ipic As IPicture) As Long
+Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (lpPictDesc As PICTDESC, riid As GUID, ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
 
 'Private Declare Function GetBitmapDimensionEx Lib "gdi32.dll" (ByVal hBitmap As Long, lpDimension As SIZE) As Long
-Private Type SIZE
+Private Type Size
     cx As Long
     cy As Long
 End Type
@@ -178,7 +178,7 @@ Private Function IconToPicture(ByVal hIcon As Long) As StdPicture
     
     If hIcon = 0 Then Exit Function
     Dim oNewPic As Picture
-    Dim tPicConv As PictDesc
+    Dim tPicConv As PICTDESC
     Dim IGuid As GUID
     With tPicConv
         .cbSizeofStruct = Len(tPicConv)
@@ -188,7 +188,7 @@ Private Function IconToPicture(ByVal hIcon As Long) As StdPicture
     With IGuid
         .Data1 = &H7BF80980
         .Data2 = &HBF32
-        .data3 = &H101A
+        .Data3 = &H101A
         .data4(0) = &H8B
         .data4(1) = &HBB
         .data4(2) = &H0
@@ -347,10 +347,12 @@ Public Sub LoadIconRes(ByVal sResType As ResType, ByVal sResNumber As String, By
     H = iSize
        
     If Not hPicture Is Nothing Then
+            
 
-    
+            
+            'NORMAL. LO que habia
             If opcio = 1 Then
-            '    frmPpal.ImageList1.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
+            '    frmPpaln.ImageList1.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
             ElseIf opcio = 2 Then
                 frmPpal.ImgListComun2.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
             '++
@@ -366,6 +368,9 @@ Public Sub LoadIconRes(ByVal sResType As ResType, ByVal sResNumber As String, By
                 frmPpal.imgListComun_OM16.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
         
             End If
+            
+
+        
     End If
     
 End Sub

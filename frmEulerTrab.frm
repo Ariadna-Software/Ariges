@@ -549,7 +549,7 @@ Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 'Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 'Private WithEvents frmF As frmCal 'Calendario de Fechas
-Private WithEvents frmT As frmAdmTrabajadores  'Form Mantenimiento Trabajadores
+Private WithEvents frmT As frmBasico2 'frmAdmTrabajadores  'Form Mantenimiento Trabajadores
 Attribute frmT.VB_VarHelpID = -1
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
@@ -640,17 +640,20 @@ Error1:
 End Sub
 
 
-Private Sub cmdAux_Click(index As Integer)
-    Select Case index
+Private Sub cmdAux_Click(Index As Integer)
+    Select Case Index
         Case 0 'cod. tecnico
-            Set frmT = New frmAdmTrabajadores
-            frmT.DatosADevolverBusqueda = "0|1|" 'Poner Modo Busqueda
+'            Set frmT = New frmAdmTrabajadores
+'            frmT.DatosADevolverBusqueda = "0|1|" 'Poner Modo Busqueda
             CadenaConsulta = ""
-            frmT.Show vbModal
+'            frmT.Show vbModal
+            Set frmT = New frmBasico2
+            AyudaTrabajadores frmT, txtAux(0)
             Set frmT = Nothing
+            
             If CadenaConsulta <> "" Then
                 txtAux(0).Text = RecuperaValor(CadenaConsulta, 1)
-                TxtAux3(0).Text = RecuperaValor(CadenaConsulta, 2)
+                txtAux3(0).Text = RecuperaValor(CadenaConsulta, 2)
             End If
         Case 1
             'Orden trabajo
@@ -676,7 +679,7 @@ Private Sub cmdAux_Click(index As Integer)
             Set frmB = Nothing
             If CadenaConsulta <> "" Then
                 txtAux(1).Text = RecuperaValor(CadenaConsulta, 1)
-                TxtAux3(1).Text = RecuperaValor(CadenaConsulta, 2)
+                txtAux3(1).Text = RecuperaValor(CadenaConsulta, 2)
             End If
             
         Case 100 'albaran
@@ -830,7 +833,7 @@ Error1:
 End Sub
 
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -933,9 +936,9 @@ Dim b As Boolean
         txtAux(jj).Top = alto
         txtAux(jj).visible = b
         If jj < 2 Then
-            TxtAux3(jj).Height = DataGrid1.RowHeight
-            TxtAux3(jj).Top = alto
-            TxtAux3(jj).visible = b
+            txtAux3(jj).Height = DataGrid1.RowHeight
+            txtAux3(jj).Top = alto
+            txtAux3(jj).visible = b
             
             Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
             Me.cmdAux(jj).Top = alto
@@ -995,7 +998,7 @@ Dim SQL As String
 
     If Me.Data1.Recordset.EOF Then Exit Sub
     
-    SQL = " ID=" & Data1.Recordset!Id
+    SQL = " ID=" & Data1.Recordset!ID
     If BloqueaRegistro("sreloj", SQL) Then BotonModificar
     
 '     If BLOQUEADesdeFormulario(Me) Then BotonModificar
@@ -1017,7 +1020,7 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 Dim Aux As String
 Dim K As Integer
-    Select Case Button.index
+    Select Case Button.Index
         Case 1 'Busqueda
             mnBuscar_Click
         Case 2 'Ver Todos
@@ -1111,16 +1114,16 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim b As Boolean
-Dim I As Byte
+Dim i As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
@@ -1318,7 +1321,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1328,8 +1331,8 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
@@ -1337,10 +1340,10 @@ Dim anc As Single
 
     'poner valores grabados
     txtAux(0).Text = DBLet(DataGrid1.Columns(0).Value, "N")
-    TxtAux3(0).Text = DBLet(DataGrid1.Columns(1).Value, "F")
+    txtAux3(0).Text = DBLet(DataGrid1.Columns(1).Value, "F")
     
     txtAux(1).Text = DBLet(DataGrid1.Columns(2).Value, "N")
-    TxtAux3(1).Text = DBLet(DataGrid1.Columns(3).Value, "F")
+    txtAux3(1).Text = DBLet(DataGrid1.Columns(3).Value, "F")
         
     txtAux(2).Text = DBLet(Data1.Recordset!Fecha, "F")
     
@@ -1370,7 +1373,7 @@ Dim SQL As String
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Me.Data1.Recordset.AbsolutePosition
-        SQL = "Delete from sreloj where ID=" & Data1.Recordset!Id
+        SQL = "Delete from sreloj where ID=" & Data1.Recordset!ID
         
         conn.Execute SQL
         CancelaADODC Me.Data1
@@ -1470,7 +1473,7 @@ End Function
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 Dim FechaFinNula As Boolean
 
     On Error Resume Next
@@ -1480,26 +1483,26 @@ Dim FechaFinNula As Boolean
     txtAux(5).Text = ""
     txtAux(4).Text = ""
     
-    CadB = ObtenerBusqueda(Me, False)
+    cadB = ObtenerBusqueda(Me, False)
     
      
      
     If cboTipo2.ListIndex >= 0 Then
-        If CadB <> "" Then CadB = CadB & " AND "
-        CadB = CadB & " codtipom = '" & RecuperaValor("ALR|ALE|ALO|PRO|ALV|", cboTipo2.ListIndex + 1) & "'"
+        If cadB <> "" Then cadB = cadB & " AND "
+        cadB = cadB & " codtipom = '" & RecuperaValor("ALR|ALE|ALO|PRO|ALV|", cboTipo2.ListIndex + 1) & "'"
     End If
     
     If FechaFinNula Then
-        If CadB <> "" Then CadB = CadB & " AND "
-        CadB = CadB & " horafin is null"
+        If cadB <> "" Then cadB = cadB & " AND "
+        cadB = cadB & " horafin is null"
     End If
-    If CadB = "" Then Exit Sub
+    If cadB = "" Then Exit Sub
     
     If chkVistaPrevia = 1 Then
 '        MandaBusquedaPrevia cadB
-    ElseIf CadB <> "" Then 'Se muestran en el mismo form
+    ElseIf cadB <> "" Then 'Se muestran en el mismo form
 '        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & Ordenacion
-        CadenaBusqueda = " WHERE " & CadB
+        CadenaBusqueda = " WHERE " & cadB
         CadenaConsulta = MontaSQLCarga(True)
         PonerCadenaBusqueda
         PonerFocoGrid Me.DataGrid1
@@ -1549,129 +1552,129 @@ Private Sub PonerOpcionesMenu()
 End Sub
 
 
-Private Sub txtAux_GotFocus(index As Integer)
-    ConseguirFoco txtAux(index), Modo
+Private Sub txtAux_GotFocus(Index As Integer)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
-Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
-            If index > 0 Then PonerFoco txtAux(index - 1)
+            If Index > 0 Then PonerFoco txtAux(Index - 1)
                 
         Case 40 'Desplazamiento Flecha Hacia Abajo
             SendKeys "{tab}"
     End Select
 End Sub
 
-Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
    KEYpress KeyAscii
 End Sub
 
 
-Private Sub txtAux_LostFocus(index As Integer)
+Private Sub txtAux_LostFocus(Index As Integer)
 Dim Aux As String
 Dim Minutos As Currency
 
     On Error Resume Next
     
-    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
     
-    Select Case index
+    Select Case Index
         Case 0 'cod tecnico
-            If PonerFormatoEntero(txtAux(index)) Then
-                TxtAux3(index).Text = PonerNombreDeCod(txtAux(index), conAri, "straba", "nomtraba", "codtraba")
-                If TxtAux3(index).Text = "" Then PonerFoco txtAux(index)
+            If PonerFormatoEntero(txtAux(Index)) Then
+                txtAux3(Index).Text = PonerNombreDeCod(txtAux(Index), conAri, "straba", "nomtraba", "codtraba")
+                If txtAux3(Index).Text = "" Then PonerFoco txtAux(Index)
             Else
-                TxtAux3(index).Text = ""
+                txtAux3(Index).Text = ""
             End If
         
         
         Case 1
-            If txtAux(index).Text = "" Then
-                TxtAux3(index).Text = ""
+            If txtAux(Index).Text = "" Then
+                txtAux3(Index).Text = ""
             Else
-                txtAux(index).Text = UCase(txtAux(index).Text)
-                TxtAux3(index).Text = PonerNombreDeCod(txtAux(index), conAri, "stipor", "nomtipor", "codtipor", , "T")
-                If Modo <> 1 And TxtAux3(index).Text = "" Then
+                txtAux(Index).Text = UCase(txtAux(Index).Text)
+                txtAux3(Index).Text = PonerNombreDeCod(txtAux(Index), conAri, "stipor", "nomtipor", "codtipor", , "T")
+                If Modo <> 1 And txtAux3(Index).Text = "" Then
                    ' MsgBox "No existe el tipo de trabajo", vbExclamation
-                    txtAux(index).Text = ""
-                    PonerFoco txtAux(index)
+                    txtAux(Index).Text = ""
+                    PonerFoco txtAux(Index)
                 End If
             End If
         Case 6 'Cod. tipor
             If Modo = 1 Then Exit Sub
             If cboTipo2.ListIndex < 0 Then
-                txtAux(index).Text = ""
+                txtAux(Index).Text = ""
                 PonerFocoCbo cboTipo2
                 Exit Sub
             End If
             
-            If txtAux(index) = "" Then
-                TxtAux3(4).Text = ""
+            If txtAux(Index) = "" Then
+                txtAux3(4).Text = ""
             Else
-                If PonerFormatoEntero(txtAux(index)) Then
+                If PonerFormatoEntero(txtAux(Index)) Then
                 
                     If cboTipo2.ListIndex = 3 Then
-                        TxtAux3(4).Text = "Produccion"
+                        txtAux3(4).Text = "Produccion"
                     Else
                         
                     
                         CadenaConsulta = "codtipom = '" & RecuperaValor("ALR|ALE|ALO||ALV|", cboTipo2.ListIndex + 1) & "' AND numalbar "
                        ' txtAux3(4).Text = PonerNombreDeCod(txtAux(Index), conAri, "scaalb", "nomclien", CadenaConsulta, "Albaran")
                         
-                        CadenaConsulta = DevuelveDesdeBD(conAri, "nomclien", "scaalb", CadenaConsulta, txtAux(index).Text)
+                        CadenaConsulta = DevuelveDesdeBD(conAri, "nomclien", "scaalb", CadenaConsulta, txtAux(Index).Text)
                         If CadenaConsulta = "" Then
                           '  CadenaConsulta = "No existe , o esta facturado,  " & cboTipo.Text & ": " & txtAux(Index).Text
                           '  CadenaConsulta = CadenaConsulta & vbCrLf & "   ¿Continuar?"
                           '  If MsgBox(CadenaConsulta, vbQuestion + vbYesNo) = vbNo Then
                           '      txtAux3(4).Text = ""
                           '  Else
-                                TxtAux3(4).Text = "NO encontrado"
+                                txtAux3(4).Text = "NO encontrado"
                           '  End If
                         Else
-                            TxtAux3(4).Text = CadenaConsulta
+                            txtAux3(4).Text = CadenaConsulta
                         End If
-                        If TxtAux3(4).Text = "" Then
-                            txtAux(index).Text = ""
-                            PonerFoco txtAux(index)
+                        If txtAux3(4).Text = "" Then
+                            txtAux(Index).Text = ""
+                            PonerFoco txtAux(Index)
                         End If
                     End If
                 Else
-                    txtAux(index).Text = ""
-                   TxtAux3(1).Text = ""
+                    txtAux(Index).Text = ""
+                   txtAux3(1).Text = ""
                 End If
             End If
         Case 2 'kms
-            PonerFormatoFecha txtAux(index)
+            PonerFormatoFecha txtAux(Index)
 '            PonerFormatoEntero txtAux(Index)
            
         Case 3  'Sum horas
-            If Not PonerFormatoDecimal(txtAux(index), 4) Then
-                txtAux(index).Text = ""
+            If Not PonerFormatoDecimal(txtAux(Index), 4) Then
+                txtAux(Index).Text = ""
             Else
                 'Dato Correcto
-                If InStr(1, txtAux(index).Text, "-") > 0 Then
+                If InStr(1, txtAux(Index).Text, "-") > 0 Then
                     MsgBox "No se permiten importes negativos", vbExclamation
-                    txtAux(index).Text = ""
+                    txtAux(Index).Text = ""
                 Else
                     If TareaADuplicar > 0 Then
                         'Esta duplicando tarea, las horas no puede ser maor o igual que las que "duplica"
-                        If ImporteFormateado(txtAux(index).Text) >= MaximoHoras Then
+                        If ImporteFormateado(txtAux(Index).Text) >= MaximoHoras Then
                             MsgBox "Las horas no pueden ser mayores que la tarea que duplica: " & MaximoHoras, vbExclamation
-                            txtAux(index).Text = ""
-                            PonerFoco txtAux(index)
+                            txtAux(Index).Text = ""
+                            PonerFoco txtAux(Index)
                         Else
                             'Es correcto. Con lo cual, cogeremos la fecha final de tarea, si esta, y le restaremos las horas introducidas
                             If Me.txtAux(5).Text <> "" Then
                            
                                 If EsFechaHoraOK(CStr(txtAux(5).Text)) Then
-                                    Minutos = ImporteFormateado(txtAux(index).Text)
+                                    Minutos = ImporteFormateado(txtAux(Index).Text)
                                     Aux = Int(Minutos) * 60
                                     Minutos = Minutos - Int(Minutos)
                                     Minutos = (Minutos * 60)
@@ -1687,12 +1690,12 @@ Dim Minutos As Currency
                 End If
             End If
         Case 4, 5 'horas
-            txtAux(index).Text = Trim(txtAux(index).Text)
-            If txtAux(index).Text <> "" Then
-                txtAux(index) = Replace(txtAux(index), ".", ":")
-                Aux = txtAux(index).Text
+            txtAux(Index).Text = Trim(txtAux(Index).Text)
+            If txtAux(Index).Text <> "" Then
+                txtAux(Index) = Replace(txtAux(Index), ".", ":")
+                Aux = txtAux(Index).Text
                 If EsFechaHoraOK(Aux) Then
-                    txtAux(index).Text = Aux
+                    txtAux(Index).Text = Aux
                     DiferenciaHoras
                 End If
             End If
@@ -1718,14 +1721,14 @@ Dim Limp As Boolean
         txtAux(4).Text = ""
         txtAux(5).Text = ""
         txtAux(6).Text = ""
-        TxtAux3(4).Text = ""
+        txtAux3(4).Text = ""
 
     Else
         'EL
         txtAux(4).Text = PonerCampoAux2(1)
         txtAux(5).Text = PonerCampoAux2(2)
         txtAux(6).Text = PonerCampoAux2(3)
-        TxtAux3(4).Text = ""
+        txtAux3(4).Text = ""
         PonerCampoAux2 4
         
         
@@ -1803,7 +1806,7 @@ Dim C As String
                 C = "Produccion"
             End If
             
-            Me.TxtAux3(4).Text = C
+            Me.txtAux3(4).Text = C
         End If
     End If
 End Function
@@ -1845,7 +1848,7 @@ Dim cad As String
         
         cad = cad & ",Calculadas=" & DBSet(txtAux(3).Text, "N") & ",numalbar=" & DBSet(txtAux(6).Text, "N")
         cad = cad & ",codtipom='" & RecuperaValor("ALR|ALE|ALO|PROD|ALV|", cboTipo2.ListIndex + 1)
-        cad = cad & "' WHERE ID =" & Data1.Recordset!Id
+        cad = cad & "' WHERE ID =" & Data1.Recordset!ID
     End If
     
     InsertarModificar = ejecutar(cad, False)
@@ -1901,7 +1904,7 @@ Dim J As Integer
     If Me.Data1.Recordset.EOF Then Exit Sub
     If Modo <> 2 Then Exit Sub
     
-    TareaADuplicar = Data1.Recordset!Id
+    TareaADuplicar = Data1.Recordset!ID
     CadenaBusqueda = " WHERE ID = " & TareaADuplicar
     EsBusqueda = True
     CadenaConsulta = MontaSQLCarga(True)
@@ -1919,9 +1922,9 @@ Dim J As Integer
     
     
     Me.txtAux(0).Text = RecuperaValor(Cd, 1)
-    TxtAux3(0).Text = RecuperaValor(Cd, 2)
+    txtAux3(0).Text = RecuperaValor(Cd, 2)
     Me.txtAux(1).Text = RecuperaValor(Cd, 3)
-    TxtAux3(1).Text = RecuperaValor(Cd, 4)
+    txtAux3(1).Text = RecuperaValor(Cd, 4)
     Me.txtAux(2).Text = RecuperaValor(Cd, 5)
 '    Me.txtAux(3).Text = RecuperaValor(Cd, 6)
     txtAux(4).Text = ""

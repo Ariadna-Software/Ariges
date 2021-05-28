@@ -256,7 +256,7 @@ Begin VB.Form frmComProveedoresGr
             Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
@@ -368,8 +368,6 @@ Begin VB.Form frmComProveedoresGr
       _ExtentX        =   25215
       _ExtentY        =   14631
       _Version        =   393216
-      Style           =   1
-      Tab             =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Verdana"
@@ -382,107 +380,166 @@ Begin VB.Form frmComProveedoresGr
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmComProveedoresGr.frx":000C
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1(6)"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(4)"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "Label1(3)"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "Label1(5)"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "Label1(2)"
+      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "Label1(7)"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "Label1(8)"
+      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "Label1(9)"
+      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).Control(8)=   "Label1(11)"
+      Tab(0).Control(8).Enabled=   0   'False
       Tab(0).Control(9)=   "Label1(10)"
+      Tab(0).Control(9).Enabled=   0   'False
       Tab(0).Control(10)=   "imgCuentas(1)"
+      Tab(0).Control(10).Enabled=   0   'False
       Tab(0).Control(11)=   "Label1(20)"
+      Tab(0).Control(11).Enabled=   0   'False
       Tab(0).Control(12)=   "Label1(12)"
+      Tab(0).Control(12).Enabled=   0   'False
       Tab(0).Control(13)=   "imgCuentas(2)"
+      Tab(0).Control(13).Enabled=   0   'False
       Tab(0).Control(14)=   "Label1(14)"
+      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "Label1(13)"
+      Tab(0).Control(15).Enabled=   0   'False
       Tab(0).Control(16)=   "Label1(19)"
+      Tab(0).Control(16).Enabled=   0   'False
       Tab(0).Control(17)=   "imgCuentas(0)"
+      Tab(0).Control(17).Enabled=   0   'False
       Tab(0).Control(18)=   "imgFecha(0)"
+      Tab(0).Control(18).Enabled=   0   'False
       Tab(0).Control(19)=   "imgFecha(1)"
+      Tab(0).Control(19).Enabled=   0   'False
       Tab(0).Control(20)=   "imgCuentas(3)"
+      Tab(0).Control(20).Enabled=   0   'False
       Tab(0).Control(21)=   "Label1(21)"
+      Tab(0).Control(21).Enabled=   0   'False
       Tab(0).Control(22)=   "Label1(62)"
+      Tab(0).Control(22).Enabled=   0   'False
       Tab(0).Control(23)=   "imgCuentas(4)"
+      Tab(0).Control(23).Enabled=   0   'False
       Tab(0).Control(24)=   "Label1(15)"
+      Tab(0).Control(24).Enabled=   0   'False
       Tab(0).Control(25)=   "ImgMail(2)"
+      Tab(0).Control(25).Enabled=   0   'False
       Tab(0).Control(26)=   "imgWeb"
+      Tab(0).Control(26).Enabled=   0   'False
       Tab(0).Control(27)=   "Label2(10)"
+      Tab(0).Control(27).Enabled=   0   'False
       Tab(0).Control(28)=   "Label2(0)"
+      Tab(0).Control(28).Enabled=   0   'False
       Tab(0).Control(29)=   "Label2(13)"
+      Tab(0).Control(29).Enabled=   0   'False
       Tab(0).Control(30)=   "Text1(39)"
+      Tab(0).Control(30).Enabled=   0   'False
       Tab(0).Control(31)=   "Text1(6)"
+      Tab(0).Control(31).Enabled=   0   'False
       Tab(0).Control(32)=   "Text1(4)"
+      Tab(0).Control(32).Enabled=   0   'False
       Tab(0).Control(33)=   "Text1(3)"
+      Tab(0).Control(33).Enabled=   0   'False
       Tab(0).Control(34)=   "Text1(2)"
+      Tab(0).Control(34).Enabled=   0   'False
       Tab(0).Control(35)=   "Text1(7)"
+      Tab(0).Control(35).Enabled=   0   'False
       Tab(0).Control(36)=   "Text1(8)"
+      Tab(0).Control(36).Enabled=   0   'False
       Tab(0).Control(37)=   "Text1(9)"
+      Tab(0).Control(37).Enabled=   0   'False
       Tab(0).Control(38)=   "Text1(10)"
+      Tab(0).Control(38).Enabled=   0   'False
       Tab(0).Control(39)=   "cboTipoDto"
+      Tab(0).Control(39).Enabled=   0   'False
       Tab(0).Control(40)=   "Text1(14)"
+      Tab(0).Control(40).Enabled=   0   'False
       Tab(0).Control(41)=   "Text1(15)"
+      Tab(0).Control(41).Enabled=   0   'False
       Tab(0).Control(42)=   "Text1(16)"
+      Tab(0).Control(42).Enabled=   0   'False
       Tab(0).Control(43)=   "Text1(17)"
+      Tab(0).Control(43).Enabled=   0   'False
       Tab(0).Control(44)=   "Text1(18)"
+      Tab(0).Control(44).Enabled=   0   'False
       Tab(0).Control(45)=   "Text1(13)"
+      Tab(0).Control(45).Enabled=   0   'False
       Tab(0).Control(46)=   "Text1(12)"
+      Tab(0).Control(46).Enabled=   0   'False
       Tab(0).Control(47)=   "Text2(1)"
+      Tab(0).Control(47).Enabled=   0   'False
       Tab(0).Control(48)=   "Text2(2)"
+      Tab(0).Control(48).Enabled=   0   'False
       Tab(0).Control(49)=   "Text1(11)"
+      Tab(0).Control(49).Enabled=   0   'False
       Tab(0).Control(50)=   "Text1(5)"
+      Tab(0).Control(50).Enabled=   0   'False
       Tab(0).Control(51)=   "cboTipoProv"
+      Tab(0).Control(51).Enabled=   0   'False
       Tab(0).Control(52)=   "Text2(0)"
+      Tab(0).Control(52).Enabled=   0   'False
       Tab(0).Control(53)=   "Text1(29)"
+      Tab(0).Control(53).Enabled=   0   'False
       Tab(0).Control(54)=   "Text2(29)"
+      Tab(0).Control(54).Enabled=   0   'False
       Tab(0).Control(55)=   "checkAlbFac"
+      Tab(0).Control(55).Enabled=   0   'False
       Tab(0).Control(56)=   "ckhOcultarEnListado"
+      Tab(0).Control(56).Enabled=   0   'False
       Tab(0).Control(57)=   "Text1(37)"
+      Tab(0).Control(57).Enabled=   0   'False
       Tab(0).Control(58)=   "cboPais"
+      Tab(0).Control(58).Enabled=   0   'False
       Tab(0).Control(59)=   "Frame1"
+      Tab(0).Control(59).Enabled=   0   'False
       Tab(0).Control(60)=   "Frame2(13)"
+      Tab(0).Control(60).Enabled=   0   'False
       Tab(0).Control(61)=   "Text1(36)"
+      Tab(0).Control(61).Enabled=   0   'False
       Tab(0).Control(62)=   "Text1(40)"
+      Tab(0).Control(62).Enabled=   0   'False
       Tab(0).Control(63)=   "Text1(27)"
+      Tab(0).Control(63).Enabled=   0   'False
       Tab(0).ControlCount=   64
       TabCaption(1)   =   "Direcciones/Observaciones"
       TabPicture(1)   =   "frmComProveedoresGr.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(31)"
-      Tab(1).Control(1)=   "Text1(32)"
-      Tab(1).Control(2)=   "Text1(33)"
-      Tab(1).Control(3)=   "Text1(34)"
-      Tab(1).Control(4)=   "Text1(35)"
-      Tab(1).Control(5)=   "Text1(38)"
-      Tab(1).Control(6)=   "Text1(28)"
+      Tab(1).Control(0)=   "Label2(1)"
+      Tab(1).Control(1)=   "imgCuentas(5)"
+      Tab(1).Control(2)=   "Label2(11)"
+      Tab(1).Control(3)=   "Label2(14)"
+      Tab(1).Control(4)=   "imgCuentas(6)"
+      Tab(1).Control(5)=   "Label2(12)"
+      Tab(1).Control(6)=   "DataGrid1"
       Tab(1).Control(7)=   "FrameToolAux(1)"
-      Tab(1).Control(8)=   "DataGrid1"
-      Tab(1).Control(9)=   "Label2(12)"
-      Tab(1).Control(10)=   "imgCuentas(6)"
-      Tab(1).Control(11)=   "Label2(14)"
-      Tab(1).Control(12)=   "Label2(11)"
-      Tab(1).Control(13)=   "imgCuentas(5)"
-      Tab(1).Control(14)=   "Label2(1)"
+      Tab(1).Control(8)=   "Text1(28)"
+      Tab(1).Control(9)=   "Text1(38)"
+      Tab(1).Control(10)=   "Text1(35)"
+      Tab(1).Control(11)=   "Text1(34)"
+      Tab(1).Control(12)=   "Text1(33)"
+      Tab(1).Control(13)=   "Text1(32)"
+      Tab(1).Control(14)=   "Text1(31)"
       Tab(1).ControlCount=   15
       TabCaption(2)   =   "Documentos"
       TabPicture(2)   =   "frmComProveedoresGr.frx":0044
-      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Label3"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "imgFecha(2)"
-      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).Control(2)=   "imgDocumentos"
-      Tab(2).Control(2).Enabled=   0   'False
-      Tab(2).Control(3)=   "lw1"
-      Tab(2).Control(3).Enabled=   0   'False
-      Tab(2).Control(4)=   "Text1(30)"
-      Tab(2).Control(4).Enabled=   0   'False
-      Tab(2).Control(5)=   "FrameNavegaDoc"
-      Tab(2).Control(5).Enabled=   0   'False
-      Tab(2).ControlCount=   6
+      Tab(2).Control(3)=   "LabelDOC"
+      Tab(2).Control(4)=   "lw1"
+      Tab(2).Control(5)=   "Text1(30)"
+      Tab(2).Control(6)=   "FrameNavegaDoc"
+      Tab(2).ControlCount=   7
       Begin VB.TextBox Text1 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -637,7 +694,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   27
-         Left            =   -66240
+         Left            =   8760
          MaxLength       =   40
          TabIndex        =   37
          Tag             =   "Web|T|S|||sprove|wwwprove|||"
@@ -657,7 +714,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   40
-         Left            =   -73560
+         Left            =   1440
          MaxLength       =   40
          TabIndex        =   36
          Tag             =   "eMail Administración|T|S|||sprove|emailPed|||"
@@ -677,7 +734,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   36
-         Left            =   -73560
+         Left            =   1440
          MaxLength       =   80
          TabIndex        =   35
          Tag             =   "H|T|S|||sprove|horario|||"
@@ -699,7 +756,7 @@ Begin VB.Form frmComProveedoresGr
          ForeColor       =   &H00972E0B&
          Height          =   2205
          Index           =   13
-         Left            =   -67800
+         Left            =   7200
          TabIndex        =   91
          Top             =   4500
          Width           =   6855
@@ -878,7 +935,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2205
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   86
          Top             =   4500
          Width           =   6855
@@ -1047,9 +1104,9 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Frame FrameNavegaDoc 
          Enabled         =   0   'False
          Height          =   735
-         Left            =   840
+         Left            =   -74700
          TabIndex        =   82
-         Top             =   360
+         Top             =   855
          Width           =   7695
          Begin VB.OptionButton optDoc 
             Caption         =   "Facturas"
@@ -1067,7 +1124,7 @@ Begin VB.Form frmComProveedoresGr
             Left            =   5040
             TabIndex        =   85
             Tag             =   "7"
-            Top             =   360
+            Top             =   315
             Width           =   2175
          End
          Begin VB.OptionButton optDoc 
@@ -1086,7 +1143,7 @@ Begin VB.Form frmComProveedoresGr
             Left            =   2520
             TabIndex        =   84
             Tag             =   "6"
-            Top             =   360
+            Top             =   315
             Value           =   -1  'True
             Width           =   2145
          End
@@ -1106,7 +1163,7 @@ Begin VB.Form frmComProveedoresGr
             Left            =   360
             TabIndex        =   83
             Tag             =   "5"
-            Top             =   360
+            Top             =   315
             Width           =   1455
          End
       End
@@ -1155,7 +1212,7 @@ Begin VB.Form frmComProveedoresGr
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Left            =   -70440
+         Left            =   4560
          Style           =   2  'Dropdown List
          TabIndex        =   9
          Top             =   2460
@@ -1173,7 +1230,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   37
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   4
          TabIndex        =   10
          Tag             =   "IBAN|T|S|||sprove|iban|||"
@@ -1193,7 +1250,7 @@ Begin VB.Form frmComProveedoresGr
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Left            =   -66960
+         Left            =   8040
          TabIndex        =   25
          Tag             =   "s|N|N|||sprove|OcultarEnListDto||N|"
          Top             =   4080
@@ -1212,10 +1269,10 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   30
-         Left            =   11640
+         Left            =   -63225
          TabIndex        =   68
          Text            =   "Text4"
-         Top             =   600
+         Top             =   1005
          Width           =   1575
       End
       Begin VB.CheckBox checkAlbFac 
@@ -1230,7 +1287,7 @@ Begin VB.Form frmComProveedoresGr
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Left            =   -63960
+         Left            =   11040
          TabIndex        =   26
          Tag             =   "s|N|N|||sprove|albaranxfactura||N|"
          Top             =   4080
@@ -1249,7 +1306,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   29
-         Left            =   -72120
+         Left            =   2880
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   66
@@ -1270,7 +1327,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   29
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   2
          TabIndex        =   16
          Tag             =   "Cod. Situación|N|N|0|99|sprove|codsitua|0|N|"
@@ -1291,7 +1348,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   -71520
+         Left            =   3480
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   43
@@ -1310,7 +1367,7 @@ Begin VB.Form frmComProveedoresGr
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Left            =   -65760
+         Left            =   9240
          TabIndex        =   17
          Tag             =   "Tipo de Proveedor|N|N|||sprove|tipprove||N|"
          Text            =   "Combo1"
@@ -1329,7 +1386,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   -70920
+         Left            =   4080
          MaxLength       =   30
          TabIndex        =   6
          Tag             =   "Población|T|N|||sprove|pobprove||N|"
@@ -1359,7 +1416,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   11
-         Left            =   -63240
+         Left            =   11760
          MaxLength       =   5
          TabIndex        =   22
          Tag             =   "Dto. General|N|S|0|99.90|sprove|dtognral|#0.00||"
@@ -1380,7 +1437,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   -65040
+         Left            =   9960
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   47
@@ -1401,7 +1458,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   -65040
+         Left            =   9960
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   45
@@ -1421,7 +1478,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   12
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   10
          TabIndex        =   15
          Tag             =   "Cuenta Contable|T|N|||sprove|codmacta|||"
@@ -1442,7 +1499,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   13
-         Left            =   -65760
+         Left            =   9240
          MaxLength       =   3
          TabIndex        =   23
          Tag             =   "Forma Pago|N|N|0|999|sprove|codforpa|000|N|"
@@ -1462,7 +1519,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   18
-         Left            =   -70200
+         Left            =   4800
          MaxLength       =   10
          TabIndex        =   14
          Tag             =   "Cuenta Bancaria|T|S|||sprove|cuentaba|0000000000||"
@@ -1482,7 +1539,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   17
-         Left            =   -70680
+         Left            =   4320
          MaxLength       =   2
          TabIndex        =   13
          Tag             =   "Digito Control|T|S|||sprove|digcontr|00||"
@@ -1502,7 +1559,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   16
-         Left            =   -71400
+         Left            =   3600
          MaxLength       =   4
          TabIndex        =   12
          Tag             =   "Sucursal|N|S|0|9999|sprove|codsucur|0000||"
@@ -1522,7 +1579,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   15
-         Left            =   -72120
+         Left            =   2880
          MaxLength       =   4
          TabIndex        =   11
          Tag             =   "Banco|N|S|0|9999|sprove|codbanco|0000||"
@@ -1543,7 +1600,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   14
-         Left            =   -65760
+         Left            =   9240
          MaxLength       =   4
          TabIndex        =   24
          Tag             =   "Banco Propio|N|N|0|9999|sprove|codbanpr|0000||"
@@ -1562,7 +1619,7 @@ Begin VB.Form frmComProveedoresGr
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Left            =   -65760
+         Left            =   9240
          Style           =   2  'Dropdown List
          TabIndex        =   20
          Tag             =   "Tipo Descuento|N|N|||sprove|tipodtos||N|"
@@ -1591,7 +1648,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   10
-         Left            =   -65760
+         Left            =   9240
          MaxLength       =   5
          TabIndex        =   21
          Tag             =   "Dto. Pronto Pago|N|S|0|99.90|sprove|dtoppago|#0.00||"
@@ -1620,7 +1677,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   9
-         Left            =   -65760
+         Left            =   9240
          MaxLength       =   10
          TabIndex        =   19
          Tag             =   "Fecha última compra|F|S|||sprove|fechamov|dd/mm/yyyy||"
@@ -1649,7 +1706,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   8
-         Left            =   -65760
+         Left            =   9240
          MaxLength       =   10
          TabIndex        =   18
          Tag             =   "Fecha de Alta|F|N|||sprove|fecprove|dd/mm/yyyy||"
@@ -1669,7 +1726,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   15
          TabIndex        =   8
          Tag             =   "N.I.F.|T|N|||sprove|nifprove|||"
@@ -1689,7 +1746,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   30
          TabIndex        =   3
          Tag             =   "Nombre Comercial|T|N|||sprove|nomcomer||N|"
@@ -1709,7 +1766,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   35
          TabIndex        =   4
          Tag             =   "Domicilio|T|S|||sprove|domprove||N|"
@@ -1729,7 +1786,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   6
          TabIndex        =   5
          Tag             =   "CPostal|T|N|||sprove|codpobla||N|"
@@ -1749,7 +1806,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   360
          Index           =   6
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   30
          TabIndex        =   7
          Tag             =   "Provincia|T|N|||sprove|proprove|||"
@@ -1759,9 +1816,9 @@ Begin VB.Form frmComProveedoresGr
       End
       Begin MSComctlLib.ListView lw1 
          Height          =   6375
-         Left            =   240
+         Left            =   -74730
          TabIndex        =   70
-         Top             =   1200
+         Top             =   1695
          Width           =   13455
          _ExtentX        =   23733
          _ExtentY        =   11245
@@ -1855,13 +1912,31 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   39
-         Left            =   -70800
+         Left            =   4200
          MaxLength       =   15
          TabIndex        =   74
          Tag             =   "pais|T|S|||sprove|codpais|||"
          Text            =   "Text1"
          Top             =   1995
          Width           =   375
+      End
+      Begin VB.Label LabelDOC 
+         Caption         =   "Label2"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00808000&
+         Height          =   420
+         Left            =   -74100
+         TabIndex        =   109
+         Top             =   450
+         Width           =   5745
       End
       Begin VB.Label Label2 
          Caption         =   "Observaciones del pedido"
@@ -1947,7 +2022,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   13
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   98
          Top             =   7080
          Width           =   735
@@ -1965,7 +2040,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   0
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   97
          Top             =   7680
          Width           =   495
@@ -1983,14 +2058,14 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   10
-         Left            =   -67200
+         Left            =   7800
          TabIndex        =   96
          Top             =   7800
          Width           =   495
       End
       Begin VB.Image imgWeb 
          Height          =   255
-         Left            =   -66600
+         Left            =   8400
          Picture         =   "frmComProveedoresGr.frx":006E
          Stretch         =   -1  'True
          Tag             =   "-1"
@@ -2001,7 +2076,7 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Image ImgMail 
          Height          =   240
          Index           =   2
-         Left            =   -74040
+         Left            =   960
          Tag             =   "-1"
          ToolTipText     =   "Enviar e-mail"
          Top             =   7680
@@ -2009,7 +2084,7 @@ Begin VB.Form frmComProveedoresGr
       End
       Begin VB.Image imgDocumentos 
          Height          =   375
-         Left            =   240
+         Left            =   -74670
          Stretch         =   -1  'True
          Top             =   480
          Width           =   375
@@ -2027,7 +2102,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   255
          Index           =   15
-         Left            =   -71040
+         Left            =   3960
          TabIndex        =   73
          Top             =   2520
          Width           =   375
@@ -2054,10 +2129,10 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   2
-         Left            =   11280
+         Left            =   -63585
          Picture         =   "frmComProveedoresGr.frx":05F8
          ToolTipText     =   "Buscar fecha"
-         Top             =   600
+         Top             =   1005
          Width           =   240
       End
       Begin VB.Label Label3 
@@ -2072,15 +2147,15 @@ Begin VB.Form frmComProveedoresGr
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   10680
+         Left            =   -64185
          TabIndex        =   69
-         Top             =   600
+         Top             =   1005
          Width           =   615
       End
       Begin VB.Image imgCuentas 
          Height          =   240
          Index           =   4
-         Left            =   -73200
+         Left            =   1800
          ToolTipText     =   "Buscar situación"
          Top             =   3960
          Width           =   240
@@ -2098,7 +2173,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   62
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   67
          Top             =   3960
          Width           =   1440
@@ -2116,7 +2191,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   195
          Index           =   21
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   62
          Top             =   2990
          Width           =   1320
@@ -2124,7 +2199,7 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Image imgCuentas 
          Height          =   240
          Index           =   3
-         Left            =   -73320
+         Left            =   1680
          Tag             =   "-1"
          ToolTipText     =   "Buscar población"
          Top             =   1440
@@ -2133,7 +2208,7 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   1
-         Left            =   -66120
+         Left            =   8880
          Picture         =   "frmComProveedoresGr.frx":0683
          ToolTipText     =   "Buscar fecha"
          Top             =   1440
@@ -2142,7 +2217,7 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   0
-         Left            =   -66120
+         Left            =   8880
          Picture         =   "frmComProveedoresGr.frx":070E
          ToolTipText     =   "Buscar fecha"
          Top             =   960
@@ -2151,7 +2226,7 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Image imgCuentas 
          Height          =   240
          Index           =   0
-         Left            =   -73200
+         Left            =   1800
          Tag             =   "-1"
          ToolTipText     =   "Buscar cuenta contable"
          Top             =   3480
@@ -2170,7 +2245,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   19
-         Left            =   -67680
+         Left            =   7320
          TabIndex        =   61
          Top             =   510
          Width           =   1485
@@ -2188,7 +2263,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   13
-         Left            =   -64560
+         Left            =   10440
          TabIndex        =   60
          Top             =   2474
          Width           =   1230
@@ -2206,7 +2281,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   14
-         Left            =   -67680
+         Left            =   7320
          TabIndex        =   57
          Top             =   3480
          Width           =   1275
@@ -2214,7 +2289,7 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Image imgCuentas 
          Height          =   240
          Index           =   2
-         Left            =   -66120
+         Left            =   8880
          ToolTipText     =   "Buscar banco propio"
          Top             =   3480
          Width           =   240
@@ -2232,7 +2307,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   12
-         Left            =   -67680
+         Left            =   7320
          TabIndex        =   56
          Top             =   2474
          Width           =   1695
@@ -2250,7 +2325,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   20
-         Left            =   -67680
+         Left            =   7320
          TabIndex        =   55
          Top             =   1983
          Width           =   1545
@@ -2258,7 +2333,7 @@ Begin VB.Form frmComProveedoresGr
       Begin VB.Image imgCuentas 
          Height          =   240
          Index           =   1
-         Left            =   -66120
+         Left            =   8880
          ToolTipText     =   "Buscar forma de pago"
          Top             =   3000
          Width           =   240
@@ -2276,7 +2351,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   10
-         Left            =   -67680
+         Left            =   7320
          TabIndex        =   54
          Top             =   3000
          Width           =   1470
@@ -2294,7 +2369,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   11
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   53
          Top             =   3480
          Width           =   1290
@@ -2312,7 +2387,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   9
-         Left            =   -67680
+         Left            =   7320
          TabIndex        =   52
          Top             =   1492
          Width           =   1830
@@ -2330,7 +2405,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   8
-         Left            =   -67680
+         Left            =   7320
          TabIndex        =   51
          Top             =   1001
          Width           =   1380
@@ -2348,7 +2423,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   7
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   50
          Top             =   2494
          Width           =   555
@@ -2366,7 +2441,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   2
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   49
          Top             =   510
          Width           =   1755
@@ -2384,7 +2459,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   255
          Index           =   5
-         Left            =   -72000
+         Left            =   3000
          TabIndex        =   48
          Top             =   1560
          Width           =   1200
@@ -2402,7 +2477,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   3
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   46
          Top             =   1006
          Width           =   840
@@ -2420,7 +2495,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   4
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   44
          Top             =   1502
          Width           =   1125
@@ -2438,7 +2513,7 @@ Begin VB.Form frmComProveedoresGr
          EndProperty
          Height          =   240
          Index           =   6
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   42
          Top             =   1998
          Width           =   885
@@ -2553,6 +2628,8 @@ Private kCampo As Integer
 Private Ordenacion As String
 Private CadenaConsulta As String
 
+Private WithEvents frmB2 As frmBasico2 'Form para busquedas
+Attribute frmB2.VB_VarHelpID = -1
 Private WithEvents frmB As frmBuscaGrid 'Form para busquedas
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal 'Form Calendario Fecha
@@ -2560,9 +2637,9 @@ Attribute frmF.VB_VarHelpID = -1
 Private WithEvents frmCP As frmCPostal 'Codigos Postales
 Attribute frmCP.VB_VarHelpID = -1
 
-Private WithEvents frmFP As frmFacFormasPago 'Form Formas de Pago en menu Facturacion
+Private WithEvents frmFP As frmBasico2 'frmFacFormasPago 'Form Formas de Pago en menu Facturacion
 Attribute frmFP.VB_VarHelpID = -1
-Private WithEvents frmBP As frmFacBancosPropios
+Private WithEvents frmBP As frmBasico2 'frmFacBancosPropios
 Attribute frmBP.VB_VarHelpID = -1
 Private WithEvents frmS As frmFacSituaciones
 Attribute frmS.VB_VarHelpID = -1
@@ -2603,7 +2680,7 @@ Private Sub ckhOcultarEnListado_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim I As Integer
+Dim i As Integer
 Dim CambioNombreProveedor As Boolean
 
     Screen.MousePointer = vbHourglass
@@ -2617,14 +2694,14 @@ Dim CambioNombreProveedor As Boolean
     Case 2, 4 'MODIFICAR
         If DatosOk Then
             If Data1.Recordset.EOF Then
-                I = InsertarDesdeForm(Me)
+                i = InsertarDesdeForm(Me)
             Else
                 CambioNombreProveedor = False
                                                                             'EL NOMBRE DEL PROVEEDOR HA CAMBIADO
                 If Trim(DevNombreSQL(Data1.Recordset!nomprove)) <> Trim(Text1(1).Text) Then CambioNombreProveedor = True
                 
                 
-                I = ModificaDesdeFormulario(Me, 1)
+                i = ModificaDesdeFormulario(Me, 1)
                 TerminaBloquear
                 
                 'Actualizadmos en contabilidad
@@ -2700,6 +2777,7 @@ Dim cad As String
     cad = Data1.Recordset.Fields(0) & "|"
     cad = cad & Data1.Recordset.Fields(1) & "|"
     RaiseEvent DatoSeleccionado(cad)
+    VariePublic = Text1(0).Text
     Unload Me
 End Sub
 
@@ -2707,7 +2785,7 @@ Private Sub DataGrid1_DblClick()
     VerLineasDirecciones True
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
     If Modo = 1 Then PonerFoco Text1(0)
 End Sub
@@ -2761,7 +2839,7 @@ Private Sub Form_Load()
         
         '.Buttons(1).Image = 3
         .Buttons(1).visible = False
-        .Buttons(2).Image = 21
+        .Buttons(2).Image = 4
         '.Buttons(3).Image = 5
         .Buttons(3).visible = False
     End With
@@ -2822,9 +2900,9 @@ End Sub
 
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
-Dim CadB As String
+Dim cadB As String
 Dim Aux As String
-Dim Indice As Byte
+Dim indice As Byte
       
     If CadenaDevuelta <> "" Then
         If Val(imgCuentas(0).Tag) >= 0 Then
@@ -2834,9 +2912,9 @@ Dim Indice As Byte
             HaDevueltoDatos = True
             Screen.MousePointer = vbHourglass
     
-            Indice = Val(Me.imgCuentas(0).Tag)
-            Text1(Indice + 12).Text = RecuperaValor(CadenaDevuelta, 1)
-            Text2(Indice).Text = RecuperaValor(CadenaDevuelta, 2)
+            indice = Val(Me.imgCuentas(0).Tag)
+            Text1(indice + 12).Text = RecuperaValor(CadenaDevuelta, 1)
+            Text2(indice).Text = RecuperaValor(CadenaDevuelta, 2)
 
         Else
             'Recupera todo el registro de Proveedor
@@ -2844,18 +2922,56 @@ Dim Indice As Byte
             Screen.MousePointer = vbHourglass
             'Sabemos que campos son los que nos devuelve
             'Creamos una cadena consulta y ponemos los datos
-            CadB = ""
+            cadB = ""
             Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-            CadB = Aux
+            cadB = Aux
     
             'Se muestran en el mismo form
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
             Screen.MousePointer = vbDefault
         End If
     End If
 End Sub
 
+
+
+
+Private Sub frmB2_DatoSeleccionado(CadenaSeleccion As String)
+Dim cadB As String
+Dim Aux As String
+Dim indice As Byte
+
+    If CadenaSeleccion <> "" Then
+        If Val(imgCuentas(0).Tag) >= 0 Then
+            'Se llama desde un botón de busqueda de los campos
+            'Cuenta Contable, Forma Pago, Banco Propio
+            'Recuperar solo el campo código y Descripción
+            HaDevueltoDatos = True
+            Screen.MousePointer = vbHourglass
+    
+            indice = Val(Me.imgCuentas(0).Tag)
+            Text1(indice + 12).Text = RecuperaValor(CadenaSeleccion, 1)
+            Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2)
+
+        Else
+            'Recupera todo el registro de Proveedor
+            HaDevueltoDatos = True
+            Screen.MousePointer = vbHourglass
+            'Sabemos que campos son los que nos devuelve
+            'Creamos una cadena consulta y ponemos los datos
+            cadB = ""
+            Aux = ValorDevueltoFormGrid(Text1(0), CadenaSeleccion, 1)
+            cadB = Aux
+    
+            'Se muestran en el mismo form
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+            PonerCadenaBusqueda
+            Screen.MousePointer = vbDefault
+        End If
+    End If
+
+End Sub
 
 Private Sub frmBP_DatoSeleccionado(CadenaSeleccion As String)
 'Banco Propio
@@ -2866,24 +2982,24 @@ End Sub
 
 Private Sub frmCP_DatoSeleccionado(CadenaSeleccion As String)
 'Formulario Mantenimiento C. Postales
-Dim Indice As Byte
+Dim indice As Byte
 Dim devuelve As String
 
-    Indice = 4
-    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
+    indice = 4
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
     'Poblacion
-    Text1(Indice + 1).Text = ObtenerPoblacion(Text1(Indice).Text, devuelve)
+    Text1(indice + 1).Text = ObtenerPoblacion(Text1(indice).Text, devuelve)
     'provincia
-    Text1(Indice + 2).Text = devuelve
+    Text1(indice + 2).Text = devuelve
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
-Dim Indice As Byte
+Dim indice As Byte
     
-    Indice = CByte(Val(imgFecha(0).Tag))
-    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+    indice = CByte(Val(imgFecha(0).Tag))
+    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
     
-    If Indice = 30 Then imgFecha(2).Tag = vFecha
+    If indice = 30 Then imgFecha(2).Tag = vFecha
     
 End Sub
 
@@ -2900,41 +3016,47 @@ Private Sub frmS_DatoSeleccionado(CadenaSeleccion As String)
     Text2(29).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
-Private Sub imgCuentas_Click(index As Integer)
-Dim Indice As Byte
+Private Sub imgCuentas_Click(Index As Integer)
+Dim indice As Byte
     
-    If index <> 5 And index <> 6 Then
+    If Index <> 5 And Index <> 6 Then
         If Modo = 2 Or Modo = 5 Or Modo = 0 Then Exit Sub
     End If
     Screen.MousePointer = vbHourglass
 
-    Select Case index
+    Select Case Index
         Case 0 'Cuenta Contable
-            imgCuentas(0).Tag = index
+            imgCuentas(0).Tag = Index
             'Conexión a BD: Conta, Tabla: Cuentas
             MandaBusquedaPrevia "apudirec='S'"
             imgCuentas(0).Tag = -1 'Abre el frmBuscaGrid para la conexión
                                    'de la BD: Ariges
-            Indice = 12
+            indice = 12
         Case 1 'Forma de Pago
-            Set frmFP = New frmFacFormasPago
-            frmFP.DatosADevolverBusqueda = "0"
-            frmFP.Show vbModal
+'            Set frmFP = New frmFacFormasPago
+'            frmFP.DatosADevolverBusqueda = "0"
+'            frmFP.Show vbModal
+            indice = 13
+            Set frmFP = New frmBasico2
+            AyudaFormasPago frmFP, Text1(indice)
             Set frmFP = Nothing
-            Indice = 13
         Case 2 'Banco Propio
-            Set frmBP = New frmFacBancosPropios
-            frmBP.DatosADevolverBusqueda = "0"
-            frmBP.Show vbModal
+'            Set frmBP = New frmFacBancosPropios
+'            frmBP.DatosADevolverBusqueda = "0"
+'            frmBP.Show vbModal
+'            Set frmBP = Nothing
+            indice = 14
+            Set frmBP = New frmBasico2
+            AyudaBancosPropios frmBP, Text1(indice)
             Set frmBP = Nothing
-            Indice = 14
+            
         Case 3 'Cod. Postal
             Set frmCP = New frmCPostal
             frmCP.DatosADevolverBusqueda = "0"
             frmCP.Show vbModal
             Set frmCP = Nothing
             VieneDeBuscar = True
-            Indice = 4
+            indice = 4
         Case 4
             Set frmS = New frmFacSituaciones
             frmS.DatosADevolverBusqueda = "0"
@@ -2947,7 +3069,7 @@ Dim Indice As Byte
                Else
                 
                     If Modo = 3 Or Modo = 4 Then
-                        If index = 5 Then
+                        If Index = 5 Then
                             CadenaDesdeOtroForm = Text1(28).Text
                         Else
                             CadenaDesdeOtroForm = Text1(38).Text
@@ -2955,7 +3077,7 @@ Dim Indice As Byte
                     Else
                         CadenaDesdeOtroForm = ""
                         If Not Data1.Recordset.EOF Then
-                            If index = 5 Then
+                            If Index = 5 Then
                                 CadenaDesdeOtroForm = DBLet(Data1.Recordset!observac, "T")
                             Else
                                 CadenaDesdeOtroForm = DBLet(Data1.Recordset!observacomer, "T")
@@ -2969,7 +3091,7 @@ Dim Indice As Byte
                     'Si modifica y el texto
                     If Modo = 3 Or Modo = 4 Then
                         If RecuperaValor(CadenaDesdeOtroForm, 1) = "1" Then
-                            If index = 5 Then
+                            If Index = 5 Then
                                 Text1(28).Text = Mid(CadenaDesdeOtroForm, 3)
                             Else
                                 Text1(38).Text = Mid(CadenaDesdeOtroForm, 3)
@@ -2980,56 +3102,56 @@ Dim Indice As Byte
             End If
         
     End Select
-    PonerFoco Text1(Indice)
+    PonerFoco Text1(indice)
     Screen.MousePointer = vbDefault
 End Sub
 
 
-Private Sub imgFecha_Click(index As Integer)
-Dim Indice As Integer
+Private Sub imgFecha_Click(Index As Integer)
+Dim indice As Integer
 
    If Modo = 2 Or Modo = 5 Or Modo = 0 Then
-        If index <> 2 Then Exit Sub
+        If Index <> 2 Then Exit Sub
     End If
    Screen.MousePointer = vbHourglass
    
    
-   If index < 2 Then
-        Indice = 8 + index
+   If Index < 2 Then
+        indice = 8 + Index
    Else
         'text1)30)
-        Indice = 30
+        indice = 30
    End If
-   imgFecha(0).Tag = Indice
+   imgFecha(0).Tag = indice
    'FECHA
    Set frmF = New frmCal
    frmF.Fecha = Now
    
-   PonerFormatoFecha Text1(Indice)
-   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
+   PonerFormatoFecha Text1(indice)
+   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
 
    frmF.Show vbModal
    Set frmF = Nothing
-   If index <> 2 Then
-        PonerFoco Text1(Indice)
+   If Index <> 2 Then
+        PonerFoco Text1(indice)
     Else
         CargaDatosLW
     End If
 End Sub
 
 
-Private Sub ImgMail_Click(index As Integer)
+Private Sub ImgMail_Click(Index As Integer)
 'Abrir Outlook para enviar e-mail
 Dim dirMail As String
 
     If Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
-    If index = 0 Then
+    If Index = 0 Then
         dirMail = Text1(20).Text
-    ElseIf index = 1 Then
+    ElseIf Index = 1 Then
         dirMail = Text1(24).Text
         
-    ElseIf index = 2 Then
+    ElseIf Index = 2 Then
         dirMail = Text1(40).Text
     End If
     If LanzaMailGnral(dirMail) Then Espera 2
@@ -3068,12 +3190,12 @@ Dim Seleccionado As Long
         'Set frmAlb = New frmFacEntAlbaranes
         If vParamAplic.TipoFormularioClientes = 0 Then
             
-            frmComEntAlbaranes.cadSelAlbaranes = " numalbar='" & DevNombreSQL(lw1.SelectedItem.Text) & _
+            frmComEntAlbaranesGR.cadSelAlbaranes = " numalbar='" & DevNombreSQL(lw1.SelectedItem.Text) & _
             "' AND fechaalb= '" & Format(lw1.SelectedItem.SubItems(1), "yyyy-mm-dd") & _
             "' AND codprove = " & Data1.Recordset!Codprove
         
-            frmComEntAlbaranes.Show vbModal
-            frmComEntAlbaranes.cadSelAlbaranes = ""
+            frmComEntAlbaranesGR.Show vbModal
+            frmComEntAlbaranesGR.cadSelAlbaranes = ""
         Else
             frmComEntAlbaranSA.cadSelAlbaranes = " numalbar='" & DevNombreSQL(lw1.SelectedItem.Text) & _
             "' AND fechaalb= '" & Format(lw1.SelectedItem.SubItems(1), "yyyy-mm-dd") & _
@@ -3103,7 +3225,7 @@ Dim Seleccionado As Long
         
     'Pase lo que pase, por si acaso, cargamos el lw
     lw1.SetFocus
-    Seleccionado = lw1.SelectedItem.index
+    Seleccionado = lw1.SelectedItem.Index
     CargaDatosLW
     lw1.SelectedItem.Selected = False
     Set lw1.SelectedItem = Nothing
@@ -3140,13 +3262,13 @@ Private Sub mnVerTodos_Click()
     BotonVerTodos
 End Sub
 
-Private Sub optDoc_Click(index As Integer)
+Private Sub optDoc_Click(Index As Integer)
  Dim ElTag As Byte
     If Modo = 0 Then Exit Sub
-    ElTag = CByte(optDoc(index).Tag)
+    ElTag = CByte(optDoc(Index).Tag)
     ImagenDocumento ElTag
     lw1.ListItems.Clear
-    CargaColumnas CByte(index)
+    CargaColumnas CByte(Index)
     
     'Hacemos las acciones
     If Modo = 2 Then CargaDatosLW
@@ -3154,18 +3276,18 @@ End Sub
 
 'Los metodos del text tendran que estar
 'Los descomentamos cuando esten puestos ya los controles
-Private Sub Text1_GotFocus(index As Integer)
-     kCampo = index
-     ConseguirFoco Text1(index), Modo
+Private Sub Text1_GotFocus(Index As Integer)
+     kCampo = Index
+     ConseguirFoco Text1(Index), Modo
 End Sub
 
 
-Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
-Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -3177,76 +3299,76 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(index As Integer)
+Private Sub Text1_LostFocus(Index As Integer)
 Dim devuelve As String
 On Error Resume Next
 
     'Si no estamos Insertando o Modificando no hacemos nada
-    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
     If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
     
-    Select Case index
+    Select Case Index
         Case 0 'proveedor
-            PonerFormatoEntero Text1(index)
+            PonerFormatoEntero Text1(Index)
             
         Case 1
             If Modo = 3 Then
-                If Me.Text1(index).Text <> "" Then Text1(2).Text = Text1(index).Text
+                If Me.Text1(Index).Text <> "" Then Text1(2).Text = Text1(Index).Text
             End If
                 
             
         Case 4 'Cod. Postal
-            If Text1(index).Locked Then Exit Sub
-            If Text1(index).Text <> "" And Not VieneDeBuscar Then
-                Text1(index + 1).Text = ObtenerPoblacion(Text1(index).Text, devuelve)
-                Text1(index + 2).Text = devuelve
+            If Text1(Index).Locked Then Exit Sub
+            If Text1(Index).Text <> "" And Not VieneDeBuscar Then
+                Text1(Index + 1).Text = ObtenerPoblacion(Text1(Index).Text, devuelve)
+                Text1(Index + 2).Text = devuelve
             Else
-                Text1(index + 1).Text = ""
-                Text1(index + 2).Text = ""
+                Text1(Index + 1).Text = ""
+                Text1(Index + 2).Text = ""
             End If
             VieneDeBuscar = False
             
         Case 7 'NIF
-            If Text1(index).Text <> "" Then
-                Text1(index).Text = UCase(Text1(index).Text)
-                If ValidarNIF(Text1(index).Text) Then
+            If Text1(Index).Text <> "" Then
+                Text1(Index).Text = UCase(Text1(Index).Text)
+                If ValidarNIF(Text1(Index).Text) Then
                      'select codprove, nomprove ,nifprove  from sprove
-                     devuelve = DevuelveDesdeBD(conAri, "concat(codprove,' - ',nomprove)", "sprove", "nifprove", Text1(index).Text, "T")
+                     devuelve = DevuelveDesdeBD(conAri, "concat(codprove,' - ',nomprove)", "sprove", "nifprove", Text1(Index).Text, "T")
                      If devuelve <> "" Then MsgBox "Ya existe un proveedor con este NIF" & vbCrLf & devuelve, vbExclamation
                      devuelve = ""
                 End If
             End If
        
         Case 8, 9 'Fechas
-            If Text1(index).Text <> "" Then PonerFormatoFecha Text1(index)
+            If Text1(Index).Text <> "" Then PonerFormatoFecha Text1(Index)
             
         Case 10, 11 'Descuentos
             'Formato tipo 4: Decimal(4,2)
-            If Text1(index).Text <> "" Then PonerFormatoDecimal Text1(index), 4
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 4
             
         Case 12 'Cta Contable
-            Text2(0).Text = PonerNombreCuenta(Text1(index), Modo, Text1(0).Text)
+            Text2(0).Text = PonerNombreCuenta(Text1(Index), Modo, Text1(0).Text)
             
         Case 13 ' Forma Pago
-            If PonerFormatoEntero(Text1(index)) Then
-                Text2(1).Text = PonerNombreDeCod(Text1(index), conAri, "sforpa", "nomforpa", "codforpa")
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(1).Text = PonerNombreDeCod(Text1(Index), conAri, "sforpa", "nomforpa", "codforpa")
             Else
                 Text2(1).Text = ""
             End If
             
         Case 14 'Banco Propio
-            If PonerFormatoEntero(Text1(index)) Then
-                Text2(2).Text = PonerNombreDeCod(Text1(index), conAri, "sbanpr", "nombanpr", "codbanpr")
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(2).Text = PonerNombreDeCod(Text1(Index), conAri, "sbanpr", "nombanpr", "codbanpr")
             Else
                 Text2(2).Text = ""
             End If
             
         Case 15, 16, 17, 18 'cuenta bancaria
-            PonerFormatoEntero Text1(index)
-            If index = 18 Then
+            PonerFormatoEntero Text1(Index)
+            If Index = 18 Then
                 devuelve = Text1(15).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text
                 If Len(devuelve) = 20 Then
                     DevuelveIBAN2 "ES", devuelve, devuelve
@@ -3271,7 +3393,7 @@ On Error Resume Next
                 Text2(29).Text = ""
             End If
         Case 37
-            If Me.Text1(index).Text <> "" Then IBAN_Correcto Me.Text1(index)
+            If Me.Text1(Index).Text <> "" Then IBAN_Correcto Me.Text1(Index)
     End Select
 End Sub
 
@@ -3283,7 +3405,7 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 '
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
 Dim NumReg As Byte
 
@@ -3436,6 +3558,18 @@ Dim X As String
     b = CompForm(Me, 1)
     If Not b Then Exit Function
         
+        
+        
+    'Campos nombre direccion... NO pueden tener *
+    If ComprobarTieneAsteriscosEnTextbox("1|2|") Then
+        If Modo = 3 Then
+            b = False
+            Exit Function
+        End If
+    End If
+    
+        
+        
     'Validar que la cuenta bancaria es correcta
     
     If Comprueba_CuentaBan2(Text1(15).Text & Text1(16).Text & Text1(17).Text & Text1(18).Text, False) Then
@@ -3488,12 +3622,12 @@ Dim X As String
 End Function
 
 
-Private Sub Text2_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.index
+    Select Case Button.Index
         
         Case 1  'Nuevo
            mnNuevo_Click
@@ -3509,7 +3643,9 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         
         Case 8
             'IMPRMIR
-            AbrirListado (58)   ': Informe Proveedores
+            'AbrirListado (58)   ': Informe Proveedores
+            frmInformesNew.OpcionListado = 58
+            frmInformesNew.Show vbModal
 
     End Select
 
@@ -3678,10 +3814,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 
@@ -3700,28 +3836,28 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim CadB As String
+Dim cadB As String
 
 
     If vParamAplic.ContabilidadNueva Then Text1(39).Text = PaisSeleccionado
 
 
-    CadB = ObtenerBusqueda(Me, False)
+    cadB = ObtenerBusqueda(Me, False)
     
     
     If chkVistaPrevia = 1 Then
-        MandaBusquedaPrevia CadB
+        MandaBusquedaPrevia cadB
     Else
         'Se muestran en el mismo form
-        If CadB <> "" Then
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        If cadB <> "" Then
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
     End If
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim cad As String
 Dim tabla As String
@@ -3738,6 +3874,14 @@ Dim Conexion As String
             tabla = "cuentas"
             Titulo = "Cuentas"
             Conexion = conConta    'Conexión a BD: Conta
+            
+            Set frmB2 = New frmBasico2
+            
+            AyudaCtasContables frmB2, Text1(12)
+            
+            Set frmB2 = Nothing
+            
+            
         Case Else 'Se llama a Busqueda desde el registro Proveedor
             cad = cad & ParaGrid(Text1(0), 20, "Código")
             cad = cad & ParaGrid(Text1(1), 40, "Nombre")
@@ -3745,34 +3889,44 @@ Dim Conexion As String
             tabla = "sprove"
             Titulo = "Proveedores"
             Conexion = conAri    'Conexión a BD: Ariges
+    
+            Set frmB2 = New frmBasico2
+            
+            AyudaProveedores frmB2, , cadB, True
+            
+            Set frmB2 = Nothing
+    
+    
     End Select
         
     If cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vTabla = tabla
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        '###A mano
-        frmB.vDevuelve = "0|1|"
-        frmB.vTitulo = Titulo
-        frmB.vselElem = 1
-        frmB.vConexionGrid = Conexion
-        frmB.vCargaFrame = (Conexion = 2)
-'        frmB.vBuscaPrevia = chkVistaPrevia
-        '#
-        frmB.Show vbModal
-        Set frmB = Nothing
-        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
-        'tendremos que cerrar el form lanzando el evento
-        If HaDevueltoDatos Then
-            PonerFoco Text1(kCampo + 1)
-'                If (Not adodc1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-'                    cmdRegresar_Click
-        Else   'de ha devuelto datos, es decir NO ha devuelto datos
-            PonerFoco Text1(kCampo)
-        End If
+'        Screen.MousePointer = vbHourglass
+'        Set frmB = New frmBuscaGrid
+'        frmB.vCampos = cad
+'        frmB.vTabla = tabla
+'        frmB.vSQL = cadB
+'        HaDevueltoDatos = False
+'        '###A mano
+'        frmB.vDevuelve = "0|1|"
+'        frmB.vTitulo = Titulo
+'        frmB.vselElem = 1
+'        frmB.vConexionGrid = Conexion
+'        frmB.vCargaFrame = (Conexion = 2)
+''        frmB.vBuscaPrevia = chkVistaPrevia
+'        '#
+'        frmB.Show vbModal
+'        Set frmB = Nothing
+'        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
+'        'tendremos que cerrar el form lanzando el evento
+'        If HaDevueltoDatos Then
+'            PonerFoco Text1(kCampo + 1)
+''                If (Not adodc1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+''                    cmdRegresar_Click
+'        Else   'de ha devuelto datos, es decir NO ha devuelto datos
+'            PonerFoco Text1(kCampo)
+'        End If
+
+
     End If
 End Sub
 
@@ -3809,9 +3963,9 @@ EEPonerBusq:
 End Sub
 
 
-Private Sub Desplazamiento(index As Integer)
+Private Sub Desplazamiento(Index As Integer)
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, index
+    DesplazamientoData Data1, Index
     PonerCampos
     lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
 End Sub
@@ -3876,6 +4030,8 @@ Dim C As ColumnHeader
 
     Select Case OpcionList
     Case 1
+        LabelDoc.Caption = "Albaranes"
+
         'ALBARANES
         'Label2(0).Caption = "Albaranes"
         Columnas = "Albaran|Fecha|Cod.|Forma de pago|Dto.gral|Dto.pp|Importe|"
@@ -3888,6 +4044,7 @@ Dim C As ColumnHeader
                
                
     Case 2
+        LabelDoc.Caption = "Facturas"
         
         'Label2(0).Caption = "Facturas"
         Columnas = "Numero|Fecha|F. recepcion|Codigo|Forma de pago|Dto.gral|Dto.pp|Importe|"
@@ -3900,7 +4057,8 @@ Dim C As ColumnHeader
                
     Case 0
         'PEDIDOS
-        
+        LabelDoc.Caption = "Pedidos"
+
         'Label2(0).Caption = "Pedidos"
         Columnas = "Visado"
         
@@ -4082,7 +4240,7 @@ Dim s As String
     
     If s <> "" Then
         If vParamAplic.TipoFormularioClientes = 0 Then
-            With frmComHcoFacturas2
+            With frmComHcoFacturas2GR
                 .hcoCodMovim = RecuperaValor(s, 1)
                 .hcoFechaMovim = RecuperaValor(s, 2)
                 .hcoCodProve = Data1.Recordset!Codprove
@@ -4142,39 +4300,39 @@ End Sub
 
 
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
-Dim I As Byte
+Dim i As Byte
     
     On Error GoTo ECargaGrid
 
    
 
-            I = 0
-            vDataGrid.Columns(I).Caption = "Cod."
-            vDataGrid.Columns(I).Width = 970
-            vDataGrid.Columns(I).NumberFormat = "000"
+            i = 0
+            vDataGrid.Columns(i).Caption = "Cod."
+            vDataGrid.Columns(i).Width = 970
+            vDataGrid.Columns(i).NumberFormat = "000"
             
-            I = I + 1 '4
-            vDataGrid.Columns(I).Caption = "Descripcion"
-            vDataGrid.Columns(I).Width = 4200
-            I = I + 1 '5
-            vDataGrid.Columns(I).Caption = "C.P."
-            vDataGrid.Columns(I).Width = 1100
+            i = i + 1 '4
+            vDataGrid.Columns(i).Caption = "Descripcion"
+            vDataGrid.Columns(i).Width = 4200
+            i = i + 1 '5
+            vDataGrid.Columns(i).Caption = "C.P."
+            vDataGrid.Columns(i).Width = 1100
 
-            I = I + 1
-            vDataGrid.Columns(I).Caption = "Poblacion"
-            vDataGrid.Columns(I).Width = 3200
+            i = i + 1
+            vDataGrid.Columns(i).Caption = "Poblacion"
+            vDataGrid.Columns(i).Width = 3200
             
 
             
-            I = I + 1
-            vDataGrid.Columns(I).Caption = "Telefono"
-            vDataGrid.Columns(I).Width = 2900
+            i = i + 1
+            vDataGrid.Columns(i).Caption = "Telefono"
+            vDataGrid.Columns(i).Width = 2900
             
             
-    For I = 0 To vDataGrid.Columns.Count - 1
-        vDataGrid.Columns(I).Locked = True
-        vDataGrid.Columns(I).AllowSizing = False
-    Next I
+    For i = 0 To vDataGrid.Columns.Count - 1
+        vDataGrid.Columns(i).Locked = True
+        vDataGrid.Columns(i).AllowSizing = False
+    Next i
 
     Exit Sub
     
@@ -4247,8 +4405,8 @@ End Function
 'Comprobaremos que ha cambiado los campos que enlazan con conta. nombre nif.....
 Private Function HayQueActualizarenContabilidad() As Boolean
 Dim QueCampos As String
-Dim mTag As CTag
-Dim I As Integer
+Dim mTag As cTag
+Dim i As Integer
 Dim fin As Boolean
 Dim txt As String
 Dim Valor
@@ -4258,15 +4416,15 @@ Dim Valor
     'Vere si el campo que habia al que hay ha cambiado
     QueCampos = "0|1|3|4|5|6|7|12|13|15|16|17|18|37|"
     fin = False
-    Set mTag = New CTag
+    Set mTag = New cTag
     
     While Not fin
-      I = InStr(1, QueCampos, "|")
+      i = InStr(1, QueCampos, "|")
       'NO puede ser ccero
-      txt = Mid(QueCampos, 1, I - 1)
-      QueCampos = Mid(QueCampos, I + 1)
-      I = CInt(txt)
-      mTag.Cargar Text1(I)
+      txt = Mid(QueCampos, 1, i - 1)
+      QueCampos = Mid(QueCampos, i + 1)
+      i = CInt(txt)
+      mTag.Cargar Text1(i)
     'TIENE QUE ESTAR CARGADO  If mTag.Cargado Then
 
                 Debug.Print mTag.columna
@@ -4298,7 +4456,7 @@ Dim Valor
                     End If
                 End If
 
-                If Text1(I).Text <> txt Then
+                If Text1(i).Text <> txt Then
                     fin = True
                     'Por si acaso el campo que cambia ES EL ULTIMO
                     If QueCampos = "" Then QueCampos = "NO"
@@ -4319,10 +4477,10 @@ End Function
 
 
 Private Sub UpdatearNomProve()
-Dim I As Byte
+Dim i As Byte
     
-    For I = 1 To 5
-        CadenaConsulta = RecuperaValor("scappr|scaalp|scafpc|schalp|schppr|", CInt(I))
+    For i = 1 To 5
+        CadenaConsulta = RecuperaValor("scappr|scaalp|scafpc|schalp|schppr|", CInt(i))
         lblIndicador.Caption = "Actualiza " & CadenaConsulta
         lblIndicador.Refresh
         CadenaConsulta = "UPDATE " & CadenaConsulta & " SET nomprove=" & DBSet(Text1(1).Text, "T")
@@ -4367,32 +4525,32 @@ Private Function PaisSeleccionado() As String
 End Function
 
 Private Sub PonerPais()
-Dim I As Integer
+Dim i As Integer
 
     
     
     If DBLet(Data1.Recordset!codpais, "T") = "" Then
-        I = -1
+        i = -1
     Else
-        For I = 0 To cboPais.ListCount - 1
-            If InStr(1, cboPais.List(I), "(" & Data1.Recordset!codpais & ")") > 0 Then
+        For i = 0 To cboPais.ListCount - 1
+            If InStr(1, cboPais.List(i), "(" & Data1.Recordset!codpais & ")") > 0 Then
                 'Este es el pais
                 Exit For
             End If
         Next
-        If I >= cboPais.ListCount Then I = -1
+        If i >= cboPais.ListCount Then i = -1
     End If
     
-    cboPais.ListIndex = I
+    cboPais.ListIndex = i
 End Sub
 
-Private Sub ToolbarAux_ButtonClick(index As Integer, ByVal Button As MSComctlLib.Button)
+Private Sub ToolbarAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Button)
     
     VerLineasDirecciones False
 End Sub
 
 Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Desplazamiento Button.index - 1
+    Desplazamiento Button.Index - 1
 End Sub
 
 
@@ -4409,5 +4567,37 @@ Private Sub DespalzamientoVisible(bol As Boolean)
     FrameDesplazamiento.visible = bol
     FrameDesplazamiento.Enabled = bol
 End Sub
+
+
+
+
+
+'  Vamos a ver que en los campos Text1(1) , Text1(2)  TExt1(4) NO hayan *
+'  ComprobarAsteriscosEnTextbox Text1(1) , "1|2|4|"
+Private Function ComprobarTieneAsteriscosEnTextbox(ByVal secuencia As String) As Boolean
+Dim i As Integer
+Dim N As Integer
+Dim C As String
+
+    ComprobarTieneAsteriscosEnTextbox = False
+    Do
+        i = InStr(1, secuencia, "|")
+        If i = 0 Then
+            secuencia = ""
+        Else
+            C = Mid(secuencia, 1, i - 1)
+            secuencia = Mid(secuencia, i + 1)
+            N = CInt(C)
+            If TieneCampoTextoAsterisco(Text1(N)) Then
+                ComprobarTieneAsteriscosEnTextbox = True
+                MsgBox "Carcater asterisco NO permitido: " & vbCrLf & Text1(N).Text, vbExclamation
+                secuencia = ""
+                PonerFoco Text1(N)
+            End If
+        End If
+    Loop Until secuencia = ""
+End Function
+
+
 
 

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmObrpartesTra 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Partes  diarios de trabajo"
@@ -664,7 +664,7 @@ Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal 'Calendario de Fechas
 Attribute frmF.VB_VarHelpID = -1
-Private WithEvents frmT As frmAdmTrabajadores 'Mto de Trabajadores
+Private WithEvents frmT As frmBasico2 'frmAdmTrabajadores 'Mto de Trabajadores
 Attribute frmT.VB_VarHelpID = -1
 'Private WithEvents frmCl As frmFacClientes
 Private WithEvents frmAc As frmObraActua
@@ -940,13 +940,13 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim B As Boolean
-Dim I As Byte
+Dim b As Boolean
+Dim i As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
 
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data2, SQL, False
@@ -954,63 +954,63 @@ Dim SQL As String
     DataGrid1.Columns(0).visible = False 'linea
 
     
-    I = 1
+    i = 1
     'Cod. Artículo
-    DataGrid1.Columns(I).Caption = "Cod clien"
-    DataGrid1.Columns(I).Width = 900
-    DataGrid1.Columns(I).NumberFormat = "00000"
+    DataGrid1.Columns(i).Caption = "Cod clien"
+    DataGrid1.Columns(i).Width = 900
+    DataGrid1.Columns(i).NumberFormat = "00000"
     
     'Nombre Artículo
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "Cod.Obra"
-    DataGrid1.Columns(I).Width = 900
-    DataGrid1.Columns(I).NumberFormat = "0000"
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "Obra"
-    DataGrid1.Columns(I).Width = 2500
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "Cod.Obra"
+    DataGrid1.Columns(i).Width = 900
+    DataGrid1.Columns(i).NumberFormat = "0000"
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "Obra"
+    DataGrid1.Columns(i).Width = 2500
     
     
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "Actuacion"
-    DataGrid1.Columns(I).Width = 1200
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "Actuacion"
+    DataGrid1.Columns(i).Width = 1200
     
     
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "Descripción"
-    DataGrid1.Columns(I).Width = 3200
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "Descripción"
+    DataGrid1.Columns(i).Width = 3200
     
     
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "OT"
-    DataGrid1.Columns(I).Width = 700
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "Trabajo"
-    DataGrid1.Columns(I).Width = 2000
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "OT"
+    DataGrid1.Columns(i).Width = 700
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "Trabajo"
+    DataGrid1.Columns(i).Width = 2000
     
     
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "P.T."
-    DataGrid1.Columns(I).Width = 600
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "P.T."
+    DataGrid1.Columns(i).Width = 600
     
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "P.P."
-    DataGrid1.Columns(I).Width = 600
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "P.P."
+    DataGrid1.Columns(i).Width = 600
     
     'Cantidad
-    I = I + 1
-    DataGrid1.Columns(I).Caption = "Cantidad"
-    DataGrid1.Columns(I).Width = 1400
-    DataGrid1.Columns(I).Alignment = dbgRight
-    DataGrid1.Columns(I).NumberFormat = FormatoImporte & " "
-    I = I + 1
-    DataGrid1.Columns(I).visible = False 'linea
-    DataGrid1.Columns(I + 1).visible = False 'linea
-    DataGrid1.Columns(I + 2).visible = False 'linea
-    For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-    Next I
+    i = i + 1
+    DataGrid1.Columns(i).Caption = "Cantidad"
+    DataGrid1.Columns(i).Width = 1400
+    DataGrid1.Columns(i).Alignment = dbgRight
+    DataGrid1.Columns(i).NumberFormat = FormatoImporte & " "
+    i = i + 1
+    DataGrid1.Columns(i).visible = False 'linea
+    DataGrid1.Columns(i + 1).visible = False 'linea
+    DataGrid1.Columns(i + 2).visible = False 'linea
+    For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+    Next i
        
-    DataGrid1.Enabled = B
+    DataGrid1.Enabled = b
     DataGrid1.ScrollBars = dbgAutomatic
     
 ECarga:
@@ -1022,46 +1022,46 @@ End Sub
 Private Sub CargaTxtAux(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
-Dim I As Byte
+Dim i As Byte
 Dim alto As Single
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
         alto = 290
-        For I = 0 To txtAux.Count - 1
-            If I <> 6 Then txtAux(I).Top = alto
-        Next I
+        For i = 0 To txtAux.Count - 1
+            If i <> 6 Then txtAux(i).Top = alto
+        Next i
         cmdAux1.Top = alto
         cmdOT.Top = alto
     Else
         DeseleccionaGrid Me.DataGrid1
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
-            For I = 0 To txtAux.Count - 1
-                txtAux(I).Text = ""
-            Next I
+            For i = 0 To txtAux.Count - 1
+                txtAux(i).Text = ""
+            Next i
             Combo1.ListIndex = -1
             Combo2.ListIndex = -1
         End If
         
         If ModificaLineas = 1 Then 'Insertar
-            For I = 0 To txtAux.Count - 1
+            For i = 0 To txtAux.Count - 1
                 
-                BloquearTxt txtAux(I), I = 2 Or I = 6 Or I = 8 ' he puesto un 7 en vez de un 6 masl
+                BloquearTxt txtAux(i), i = 2 Or i = 6 Or i = 8 ' he puesto un 7 en vez de un 6 masl
                 
-            Next I
+            Next i
            
         ElseIf ModificaLineas = 2 Then
             'Poner valor a los txtAux
             
-            For I = 0 To 4
-                txtAux(I).Text = DataGrid1.Columns(I + 1).Text
-            Next I
-            txtAux(I).Text = DataGrid1.Columns(I + 5).Text  'i es 5
+            For i = 0 To 4
+                txtAux(i).Text = DataGrid1.Columns(i + 1).Text
+            Next i
+            txtAux(i).Text = DataGrid1.Columns(i + 5).Text  'i es 5
             Combo1.ListIndex = DBLet(Data2.Recordset!partet, "N")
             Combo2.ListIndex = DBLet(Data2.Recordset!partep, "N")
-            For I = 7 To 8
-                txtAux(I).Text = DataGrid1.Columns(I - 1).Text ' he cambiado 2 por 3 masl
-            Next I
+            For i = 7 To 8
+                txtAux(i).Text = DataGrid1.Columns(i - 1).Text ' he cambiado 2 por 3 masl
+            Next i
             
         End If
         
@@ -1078,12 +1078,12 @@ Dim alto As Single
         cmdOT.Top = alto
         cmdOT.Height = DataGrid1.RowHeight
         
-        For I = 0 To txtAux.Count - 1  'EL 6 no lo toco
-            If I <> 6 Then
-                txtAux(I).Top = alto
-                txtAux(I).Height = DataGrid1.RowHeight
+        For i = 0 To txtAux.Count - 1  'EL 6 no lo toco
+            If i <> 6 Then
+                txtAux(i).Top = alto
+                txtAux(i).Height = DataGrid1.RowHeight
             End If
-        Next I
+        Next i
         
         
         'Fijamos anchura y posicion Left
@@ -1094,31 +1094,31 @@ Dim alto As Single
         
         
 
-        For I = 2 To 8  ' el ultimo NO esta aqui
-            If I <> 6 Then
-                If I = 5 Then
-                    txtAux(I).Left = DataGrid1.Columns(I + 5).Left + DataGrid1.Left + 15
-                    txtAux(I).Width = DataGrid1.Columns(I + 5).Width - 35
+        For i = 2 To 8  ' el ultimo NO esta aqui
+            If i <> 6 Then
+                If i = 5 Then
+                    txtAux(i).Left = DataGrid1.Columns(i + 5).Left + DataGrid1.Left + 15
+                    txtAux(i).Width = DataGrid1.Columns(i + 5).Width - 35
                 Else
                 
-                    If I > 6 Then
+                    If i > 6 Then
                 
-                        txtAux(I).Left = DataGrid1.Columns(I - 1).Left + DataGrid1.Left + 15
-                        txtAux(I).Width = DataGrid1.Columns(I - 1).Width - 35
-                        If I = 8 Then
+                        txtAux(i).Left = DataGrid1.Columns(i - 1).Left + DataGrid1.Left + 15
+                        txtAux(i).Width = DataGrid1.Columns(i - 1).Width - 35
+                        If i = 8 Then
                             cmdOT.Left = txtAux(8).Left - 150
                         End If
                     Else
-                        txtAux(I).Left = DataGrid1.Columns(I + 1).Left + DataGrid1.Left + 15
-                        txtAux(I).Width = DataGrid1.Columns(I + 1).Width - 35
+                        txtAux(i).Left = DataGrid1.Columns(i + 1).Left + DataGrid1.Left + 15
+                        txtAux(i).Width = DataGrid1.Columns(i + 1).Width - 35
                     End If
-                    If I = 3 Then
-                        txtAux(I).Width = txtAux(I).Width - 170
+                    If i = 3 Then
+                        txtAux(i).Width = txtAux(i).Width - 170
                         cmdAux1.Left = txtAux(3).Left + txtAux(3).Width
                     End If
                 End If
             End If
-        Next I
+        Next i
         Me.Combo1.Top = alto
         Combo1.Left = DataGrid1.Columns(8).Left + DataGrid1.Left + 15
         Me.Combo2.Top = alto
@@ -1126,9 +1126,9 @@ Dim alto As Single
     End If
 
     'Los ponemos Visibles o No
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = visible
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = visible
+    Next i
     cmdAux1.visible = visible
     cmdOT.visible = visible
     Me.Combo1.visible = visible
@@ -1209,9 +1209,11 @@ Private Sub imgBuscar_Click(Index As Integer)
     Select Case Index
 
         Case 2  'Cod. Trabajador
-            Set frmT = New frmAdmTrabajadores
-            frmT.DatosADevolverBusqueda = "0"
-            frmT.Show vbModal
+'            Set frmT = New frmAdmTrabajadores
+'            frmT.DatosADevolverBusqueda = "0"
+'            frmT.Show vbModal
+            Set frmT = New frmBasico2
+            AyudaTrabajadores frmT, Text1(Index)
             Set frmT = Nothing
     End Select
     If cadSeleccion <> "" Then
@@ -1224,17 +1226,17 @@ Private Sub imgBuscar_Click(Index As Integer)
 End Sub
 
 Private Sub imgFecha_Click(Index As Integer)
-Dim indice As Byte
+Dim Indice As Byte
 
    Screen.MousePointer = vbHourglass
    imgFecha(0).Tag = Index
    Set frmF = New frmCal
    frmF.Fecha = Now
    
-   indice = 1
+   Indice = 1
    
-   PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
+   PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
@@ -1455,7 +1457,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             BotonLineas
             
         Case 12 'Imprimir
-            frmObraListado.opcion = 0
+            frmObraListado.Opcion = 0
             frmObraListado.Show vbModal
             
         Case 13  'Salir
@@ -1475,8 +1477,8 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
-Dim B As Boolean
+Dim i As Byte
+Dim b As Boolean
 Dim NumReg As Byte
 
     'Actualiza Iconos Insertar,Modificar,Eliminar
@@ -1487,13 +1489,13 @@ Dim NumReg As Byte
 
     'Modo 2. Hay datos y estamos visualizandolos
     '-------------------------------------------
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     'Poner Flechas de desplazamiento visibles
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -1505,16 +1507,16 @@ Dim NumReg As Byte
     
     'Modo 1:Busqueda / Modo 3: Insertar / Modo 4: Modificar
     '-------------------------------------------------------
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1)
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1)
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
     
-    For I = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(I).Enabled = B
-    Next I
+    For i = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(i).Enabled = b
+    Next i
     
     
-    Me.imgBuscar(2).Enabled = B
+    Me.imgBuscar(2).Enabled = b
     Me.chkVistaPrevia.Enabled = (Modo <= 2)
     
     PonerLongCampos
@@ -1531,41 +1533,41 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
-Dim I As Byte
+Dim b As Boolean
+Dim i As Byte
     
 
 
     
  
-         B = (Modo = 2) Or (Modo = 5)
+         b = (Modo = 2) Or (Modo = 5)
         'Insertar
-        Toolbar1.Buttons(5).Enabled = (B Or Modo = 0)
-        Me.mnNuevo.Enabled = (B Or Modo = 0)
+        Toolbar1.Buttons(5).Enabled = (b Or Modo = 0)
+        Me.mnNuevo.Enabled = (b Or Modo = 0)
         'Modificar
-        Toolbar1.Buttons(6).Enabled = B
-        Me.mnModificar.Enabled = B
+        Toolbar1.Buttons(6).Enabled = b
+        Me.mnModificar.Enabled = b
         'eliminar
-        Toolbar1.Buttons(7).Enabled = B
-        Me.mnEliminar.Enabled = B
+        Toolbar1.Buttons(7).Enabled = b
+        Me.mnEliminar.Enabled = b
         
         '--------------------------------
-        B = (Modo = 2)
+        b = (Modo = 2)
         'Lineas Traspaso Almacenes
-        Toolbar1.Buttons(9).Enabled = B
+        Toolbar1.Buttons(9).Enabled = b
         'Actualizar
-        Toolbar1.Buttons(10).Enabled = B
+        Toolbar1.Buttons(10).Enabled = b
         'Imprimir
-        Toolbar1.Buttons(12).Enabled = B Or Modo = 0
+        Toolbar1.Buttons(12).Enabled = b Or Modo = 0
             
         '-------------------------------
-        B = (Modo >= 3) Or Modo = 1
+        b = (Modo >= 3) Or Modo = 1
         'Buscar
-        Toolbar1.Buttons(1).Enabled = Not B
-        Me.mnBuscar.Enabled = Not B
+        Toolbar1.Buttons(1).Enabled = Not b
+        Me.mnBuscar.Enabled = Not b
         'VerTodos
-        Toolbar1.Buttons(2).Enabled = Not B
-        Me.mnVerTodos.Enabled = Not B
+        Toolbar1.Buttons(2).Enabled = Not b
+        Me.mnVerTodos.Enabled = Not b
   
 End Sub
 
@@ -1732,7 +1734,7 @@ Private Sub BotonModificar()
 End Sub
 
 Private Sub BotonModificarLinea()
-Dim I As Integer
+Dim i As Integer
 
     If Data2.Recordset.EOF Then Exit Sub
     If Data2.Recordset.RecordCount < 1 Then Exit Sub
@@ -1749,8 +1751,8 @@ Dim I As Integer
     Me.lblIndicador.Caption = "MODIFICAR"
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -1846,7 +1848,7 @@ On Error GoTo Error2
     
     '### a mano
     SQL = "Seguro que desea eliminar la línea del parte:"
-    SQL = SQL & vbCrLf & "Actuacion: " & Data2.Recordset!codclien & " " & Data2.Recordset!Nomclien & " / " & Data2.Recordset!nomdirec
+    SQL = SQL & vbCrLf & "Actuacion: " & Data2.Recordset!codClien & " " & Data2.Recordset!NomClien & " / " & Data2.Recordset!nomdirec
     SQL = SQL & vbCrLf & "Descripción: " & Data2.Recordset.Fields(5)
     
     If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
@@ -1868,26 +1870,26 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
     DatosOk = False
-    B = CompForm(Me, 1)
+    b = CompForm(Me, 1)
 
-    If B Then
+    If b Then
         'No se repite dia 7trabajador
         cadSeleccion = "fecha=" & DBSet(Text1(1).Text, "F") & " AND codtraba"
         cadSeleccion = DevuelveDesdeBD(conAri, "count(*)", "scaparte", cadSeleccion, Text1(2).Text, "N")
         If cadSeleccion <> "" Then
             If Val(cadSeleccion) > 0 Then
                 MsgBox "Ya tiene datos el trabajador " & Me.Text2(2).Text & " para el dia " & Text1(1).Text, vbExclamation
-                B = False
+                b = False
             End If
             cadSeleccion = ""
         End If
      End If
 
 
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -1896,10 +1898,10 @@ End Function
 
 
 Private Function DatosOkLinea() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
     DatosOkLinea = False
-    B = True
+    b = True
         
         
     For NumRegElim = 0 To txtAux.Count - 1
@@ -1910,7 +1912,7 @@ Dim B As Boolean
             If txtAux(NumRegElim).Text = "" Then
                 MsgBox "Campos obligatorios", vbExclamation
                 PonerFoco txtAux(NumRegElim)
-                B = False
+                b = False
                 Exit Function
             End If
         End Select
@@ -1919,9 +1921,9 @@ Dim B As Boolean
     'Comprobamos el campo Cantidad
     If Not IsNumeric(txtAux(5).Text) Then
         MsgBox "El campo horas debe ser numérico", vbExclamation
-        B = False
+        b = False
     End If
-    If Not B Then
+    If Not b Then
         PonerFoco txtAux(5)
         Exit Function
     End If
@@ -1929,31 +1931,31 @@ Dim B As Boolean
     If Combo1.ListIndex < 0 Then
         MsgBox "Selecciona Parte Trabajo", vbExclamation
         PonerFocoCbo Combo1
-        B = False
+        b = False
     End If
     If Combo2.ListIndex < 0 Then
         MsgBox "Selecciona Parte Privado", vbExclamation
         PonerFocoCbo Combo2
-        B = False
+        b = False
     End If
         
     If txtAux(7).Text = "" Xor txtAux(8).Text = "" Then
         MsgBox "Error en orden de trabajo", vbExclamation
-        If B Then PonerFoco txtAux(7)
-        B = False
+        If b Then PonerFoco txtAux(7)
+        b = False
     End If
 
-    DatosOkLinea = B
+    DatosOkLinea = b
 End Function
 
 
-Private Sub PonerBotonCabecera(B As Boolean)
+Private Sub PonerBotonCabecera(b As Boolean)
 On Error Resume Next
-    Me.cmdAceptar.visible = Not B
-    Me.cmdCancelar.visible = Not B
-    Me.cmdRegresar.visible = B
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
-    If B Then
+    If b Then
         Me.lblIndicador.Caption = "LINEAS DETALLE"
     Else
         Me.lblIndicador.Caption = ""
@@ -2016,18 +2018,18 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     If Modo <> 5 Then 'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: scatra
-        Cad = Cad & ParaGrid(Text1(0), 15, "Numero")
-        Cad = Cad & ParaGrid(Text1(1), 18, "Fecha")
-        Cad = Cad & ParaGrid(Text1(2), 13, "Cod.trab")
-        Cad = Cad & "Trabajador|straba|nomtraba|T||30·"
+        cad = cad & ParaGrid(Text1(0), 15, "Numero")
+        cad = cad & ParaGrid(Text1(1), 18, "Fecha")
+        cad = cad & ParaGrid(Text1(2), 13, "Cod.trab")
+        cad = cad & "Trabajador|straba|nomtraba|T||30·"
         
         
         tabla = "(" & NombreTabla & " LEFT JOIN straba ON " & NombreTabla & ".codtraba=straba.codtraba" & ")"
@@ -2036,15 +2038,15 @@ Dim Titulo As String
         ' tabla = "scatra"
         Titulo = Me.Caption
     Else 'Estamos en modo Lineas
-        Cad = Cad & "Código|sclien|nomclien|N||30·Nombre|sclien|nomartic|T||70·"
+        cad = cad & "Código|sclien|nomclien|N||30·Nombre|sclien|nomartic|T||70·"
         tabla = "sartic"
         Titulo = "Articulos"
     End If
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
@@ -2142,7 +2144,7 @@ End Sub
 
 Private Function ActualizarStocks() As Boolean
 Dim SQL As String
-Dim Cantidad As Single
+Dim cantidad As Single
 Dim devuelve As String
 Dim RS As ADODB.Recordset
 
@@ -2161,10 +2163,10 @@ Dim RS As ADODB.Recordset
         devuelve = DevuelveDesdeBDNew(conAri, "sartic", "ctrstock", "codartic", RS!codArtic, "T")
         If Val(devuelve) = 1 Then
 
-            Cantidad = CSng(RS!Cantidad) 'Cant a traspasar
+            cantidad = CSng(RS!cantidad) 'Cant a traspasar
             
             '==== Almacen Origen
-            SQL = "UPDATE salmac Set canstock = canstock - " & DBSet(Cantidad, "N")
+            SQL = "UPDATE salmac Set canstock = canstock - " & DBSet(cantidad, "N")
             SQL = SQL & " WHERE codartic =" & DBSet(RS!codArtic, "T") & " AND "
             SQL = SQL & " codalmac =" & Data1.Recordset!almaorig
             conn.Execute SQL
@@ -2174,9 +2176,9 @@ Dim RS As ADODB.Recordset
             devuelve = DevuelveDesdeBDNew(conAri, "salmac", "codalmac", "codartic", RS!codArtic, "T", , "codalmac", Text1(3).Text, "N")
             If devuelve = "" Then 'No hay de ese artículo en Destino
                 SQL = "INSERT INTO salmac (codartic,codalmac,ubialmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin)"
-                SQL = SQL & " VALUES (" & DBSet(RS!codArtic, "T") & "," & Val(Text1(3).Text) & ",''," & DBSet(Cantidad, "N") & ",0,0,0,0,NULL,NULL,0)"
+                SQL = SQL & " VALUES (" & DBSet(RS!codArtic, "T") & "," & Val(Text1(3).Text) & ",''," & DBSet(cantidad, "N") & ",0,0,0,0,NULL,NULL,0)"
             Else 'Existe el artic en almac. Dest -> Aumentar stock
-                SQL = "UPDATE salmac Set canstock = canstock + " & DBSet(Cantidad, "N")
+                SQL = "UPDATE salmac Set canstock = canstock + " & DBSet(cantidad, "N")
                 SQL = SQL & " WHERE codartic =" & DBSet(RS!codArtic, "T") & " AND "
                 SQL = SQL & " codalmac =" & Data1.Recordset!almadest
             End If

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmWH_SelExp 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "WHOSE"
@@ -173,7 +173,9 @@ Option Explicit
 
 Private WithEvents frmCliPot As frmFacClienPot
 Attribute frmCliPot.VB_VarHelpID = -1
-Dim Cad As String
+
+
+Dim cad As String
 Dim IT As ListItem
 Dim OrdenIncial As Byte  'para no tocar el fichero a todas horas
 Dim PrimVez As Boolean
@@ -184,12 +186,12 @@ Dim PrimVez As Boolean
 
 Private Sub CargaClientesPotenciales2()
   
-    Cad = "select whoExpedientePot.codclien,nomclien,fechaalt,telclie1 from whoExpedientePot,sclipot where sclipot.codclien=whoExpedientePot.codclien"
+    cad = "select whoExpedientePot.codclien,nomclien,fechaalt,telclie1 from whoExpedientePot,sclipot where sclipot.codclien=whoExpedientePot.codclien"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         'Metemos  el nodo
-        NumRegElim = miRsAux!codclien
+        NumRegElim = miRsAux!codClien
         Set IT = Me.lw1.ListItems.Add(, "P" & Format(NumRegElim, "000000"))
         IT.SmallIcon = 1
         IT.Text = Format(NumRegElim, "000000")
@@ -203,14 +205,14 @@ End Sub
 
 Private Sub CargaExpedientesClientes2()
 
-    Cad = "select whoexpedientecli.codclien,nomclien,expediente,anoexp,nombre from whoexpedientecli"
-    Cad = Cad & " inner join sclien on whoexpedientecli.codclien=sclien.codclien"
-    Cad = Cad & " left join whoobrascli on whoexpedientecli.codclien=whoobrascli.codclien     "
+    cad = "select whoexpedientecli.codclien,nomclien,expediente,anoexp,nombre from whoexpedientecli"
+    cad = cad & " inner join sclien on whoexpedientecli.codclien=sclien.codclien"
+    cad = cad & " left join whoobrascli on whoexpedientecli.codclien=whoobrascli.codclien     "
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         'Metemos  el nodo
-        NumRegElim = miRsAux!codclien
+        NumRegElim = miRsAux!codClien
         
         Set IT = Me.lw1.ListItems.Add()
         IT.SmallIcon = 2
@@ -238,7 +240,7 @@ Private Sub cmdCancelar_Click(Index As Integer)
 End Sub
 
 Private Sub cmdEliminarExp_Click()
-    MsgBox "No tiene permisos", vbExclamation
+    MsgBox "No tiene suficientes privilegios. Consulte al administrador del sistema. ", vbExclamation
     
 End Sub
 
@@ -249,16 +251,16 @@ End Sub
 
 Private Sub NuevoExpediente()
     'Seleccionamos Cliente potencial
-    Cad = ""
+    cad = ""
     CadenaDesdeOtroForm = ""
     Set frmCliPot = New frmFacClienPot
     frmCliPot.DatosADevolverBusqueda = "0|"
     frmCliPot.Show vbModal
     Set frmCliPot = Nothing
     
-    If Cad <> "" Then
+    If cad <> "" Then
         'OK. Ha seleccioado un cliente
-        NumRegElim = RecuperaValor(Cad, 1)
+        NumRegElim = RecuperaValor(cad, 1)
         CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "codclien", "whoexpedientepot", "codclien", CStr(NumRegElim))
         If CadenaDesdeOtroForm <> "" Then
             MsgBox "Ya existe expediente", vbExclamation
@@ -267,13 +269,13 @@ Private Sub NuevoExpediente()
             If GenerarEstructuraPotencial(NumRegElim) Then
                 'Insertamos enla tabla, e insertamos el NODO
                 CadenaDesdeOtroForm = "INSERT INTO whoexpedientepot(codclien) VALUES (" & NumRegElim & ")"
-                If Ejecutar(CadenaDesdeOtroForm, False) Then
+                If ejecutar(CadenaDesdeOtroForm, False) Then
                 
                     'Metemos  el nodo
                     Set IT = Me.lw1.ListItems.Add(, "P" & Format(NumRegElim, "000000"))
                     IT.SmallIcon = 1
                     IT.Text = Format(NumRegElim, "000000")
-                    IT.SubItems(1) = RecuperaValor(Cad, 2)
+                    IT.SubItems(1) = RecuperaValor(cad, 2)
                     IT.EnsureVisible
                     IT.Selected = True
                     Set lw1.SelectedItem = IT
@@ -308,22 +310,21 @@ Private Sub cmdVerClientePotencial_Click()
         frmCliPot.Show vbModal
         Set frmCliPot = Nothing
     
-        Cad = DevuelveDesdeBD(conAri, "nomclien", "sclipot", "codclien", Mid(lw1.SelectedItem.Key, 2))
+        cad = DevuelveDesdeBD(conAri, "nomclien", "sclipot", "codclien", Mid(lw1.SelectedItem.Key, 2))
         
     Else
-        frmFacClientes.VerCliente = Val(lw1.SelectedItem.Text)
-        frmFacClientes.DatosADevolverBusqueda = ""
-        frmFacClientes.Show vbModal
+        frmFacClientesGr.VerCliente = Val(lw1.SelectedItem.Text)
+        frmFacClientesGr.DatosADevolverBusqueda = ""
+        frmFacClientesGr.Show vbModal
             
-            
-        Cad = ""
+        cad = ""
     End If
-    If Cad <> "" Then lw1.SelectedItem.SubItems(1) = Cad
+    If cad <> "" Then lw1.SelectedItem.SubItems(1) = cad
 End Sub
 
 Private Sub Command1_Click(Index As Integer)
 Dim J As Integer
-Dim I As Integer
+Dim i As Integer
 Dim fin As Boolean
 Dim Inicio As Integer
 
@@ -339,23 +340,23 @@ Dim Inicio As Integer
 
     If Index = 1 Then
         'Siguiente
-        For I = lw1.SelectedItem.Index + 1 To lw1.ListItems.Count
+        For i = lw1.SelectedItem.Index + 1 To lw1.ListItems.Count
             If lw1.SortKey = 0 Then
                 'TEXT
-                J = InStr(1, lw1.ListItems(I).Text, Text1.Text, vbTextCompare)
+                J = InStr(1, lw1.ListItems(i).Text, Text1.Text, vbTextCompare)
             Else
-                J = InStr(1, lw1.ListItems(I).SubItems(lw1.SortKey), Text1.Text, vbTextCompare)
+                J = InStr(1, lw1.ListItems(i).SubItems(lw1.SortKey), Text1.Text, vbTextCompare)
             End If
             If J > 0 Then Exit For
         Next
         
     Else
-        For I = lw1.SelectedItem.Index - 1 To 1 Step -1
+        For i = lw1.SelectedItem.Index - 1 To 1 Step -1
             If lw1.SortKey = 0 Then
                 'TEXT
-                J = InStr(1, lw1.ListItems(I).Text, Text1.Text, vbTextCompare)
+                J = InStr(1, lw1.ListItems(i).Text, Text1.Text, vbTextCompare)
             Else
-                J = InStr(1, lw1.ListItems(I).SubItems(lw1.SortKey), Text1.Text, vbTextCompare)
+                J = InStr(1, lw1.ListItems(i).SubItems(lw1.SortKey), Text1.Text, vbTextCompare)
             End If
             If J > 0 Then Exit For
             
@@ -363,8 +364,8 @@ Dim Inicio As Integer
         
     End If
     If J > 0 Then
-        lw1.ListItems(I).Selected = True
-        Set lw1.SelectedItem = lw1.ListItems(I)
+        lw1.ListItems(i).Selected = True
+        Set lw1.SelectedItem = lw1.ListItems(i)
     Else
         MsgBox "No se ha encotrado ninguna coincidencia", vbExclamation
     End If
@@ -422,7 +423,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub frmCliPot_DatoSeleccionado(CadenaSeleccion As String)
-    Cad = CadenaSeleccion
+    cad = CadenaSeleccion
 End Sub
 
 
@@ -486,10 +487,10 @@ Dim Clave As String
         CargaDatos_
             
             
-        Cad = RecuperaValor(CadenaDesdeOtroForm, 1)
+        cad = RecuperaValor(CadenaDesdeOtroForm, 1)
         For NumRegElim = 1 To lw1.ListItems.Count
             
-            If Cad = lw1.ListItems(NumRegElim).Text Then
+            If cad = lw1.ListItems(NumRegElim).Text Then
                 If RecuperaValor(CadenaDesdeOtroForm, 2) = lw1.ListItems(NumRegElim).SmallIcon Then
                     If RecuperaValor(CadenaDesdeOtroForm, 3) = Trim(lw1.ListItems(NumRegElim).SubItems(2)) Then
                         If RecuperaValor(CadenaDesdeOtroForm, 4) = Trim(lw1.ListItems(NumRegElim).SubItems(3)) Then
@@ -515,33 +516,33 @@ Dim NF As Integer
     On Error GoTo eLeerorden
 
     NF = FreeFile
-    Cad = App.Path & "\whoselecexp.dat"
+    cad = App.Path & "\whoselecexp.dat"
     If Leer Then
         
-        If Dir(Cad, vbArchive) <> "" Then
+        If Dir(cad, vbArchive) <> "" Then
             
-            Open Cad For Input As #NF
-            Line Input #NF, Cad
+            Open cad For Input As #NF
+            Line Input #NF, cad
             Close #NF
-            Cad = Trim(Cad)
-            If Cad <> "" Then
-                If Not IsNumeric(Cad) Then
-                    Cad = ""
+            cad = Trim(cad)
+            If cad <> "" Then
+                If Not IsNumeric(cad) Then
+                    cad = ""
                 Else
-                    If Val(Cad) > 3 Then Cad = ""
+                    If Val(cad) > 3 Then cad = ""
                 End If
             End If
         Else
-            Cad = ""
+            cad = ""
         End If
-        If Cad = "" Then Cad = "0"
-        Me.lw1.SortKey = CInt(Cad)
+        If cad = "" Then cad = "0"
+        Me.lw1.SortKey = CInt(cad)
         OrdenIncial = lw1.SortKey
         Label2.Caption = "Buscar " & lw1.ColumnHeaders(OrdenIncial + 1).Text
         
     Else
         If OrdenIncial <> lw1.SortKey Then
-            Open Cad For Output As #NF
+            Open cad For Output As #NF
             Print #NF, lw1.SortKey
             Close #NF
         End If

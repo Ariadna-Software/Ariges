@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacCosteLin 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Correción costes articulos varios en facturas"
@@ -505,12 +505,12 @@ Dim NumReg As Long
             If DatosOk And BLOQUEADesdeFormulario(Me) Then
                  If ModificaLinea Then
                      TerminaBloquear
-                     NumReg = Data1.Recordset.AbsolutePosition
+                     NumReg = data1.Recordset.AbsolutePosition
                      PonerModo 2
-                     CancelaADODC Me.Data1
+                     CancelaADODC Me.data1
                      CargaGrid True
                      LLamaLineas 10
-                     SituarDataPosicion Data1, NumReg, Indicador
+                     SituarDataPosicion data1, NumReg, Indicador
                  End If
                  lblIndicador.Caption = Indicador
                  PonerFocoGrid DataGrid1
@@ -582,10 +582,10 @@ Dim Indicador As String
         Case 3 'Insertar
             DataGrid1.AllowAddNew = False
             DataGrid1.Enabled = True
-            If Not Data1.Recordset.EOF Then
-                Data1.Recordset.MoveFirst
+            If Not data1.Recordset.EOF Then
+                data1.Recordset.MoveFirst
                 PonerModo 2
-                lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+                lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
             Else
                 PonerModo 0
             End If
@@ -593,12 +593,12 @@ Dim Indicador As String
             
         Case 4  'Modificar
             TerminaBloquear
-            NumRegElim = Data1.Recordset.AbsolutePosition
-            If Not Data1.Recordset.EOF Then Data1.Recordset.MoveFirst
+            NumRegElim = data1.Recordset.AbsolutePosition
+            If Not data1.Recordset.EOF Then data1.Recordset.MoveFirst
             PonerModo 2
             LLamaLineas 10
             DataGrid1.Enabled = True
-            SituarDataPosicion Data1, NumRegElim, Indicador
+            SituarDataPosicion data1, NumRegElim, Indicador
             DeseleccionaGrid Me.DataGrid1
             lblIndicador.Caption = Indicador
             PonerFocoGrid DataGrid1
@@ -623,8 +623,8 @@ End Sub
 
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not Data1.Recordset.EOF Then
-        lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+    If Not data1.Recordset.EOF Then
+        lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
     End If
 End Sub
 
@@ -661,9 +661,9 @@ Private Sub Form_Load()
 
     Ordenacion = " ORDER BY 1,2,3 "
     CadenaConsulta = MontaSQLCarga(False)
-    Data1.ConnectionString = conn
-    Data1.RecordSource = CadenaConsulta
-    Data1.Refresh
+    data1.ConnectionString = conn
+    data1.RecordSource = CadenaConsulta
+    data1.Refresh
     
    
         PonerModo 0
@@ -681,7 +681,7 @@ Dim tots As String
     On Error GoTo ECarga
     
     SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.Data1, SQL, False
+    CargaGridGnral DataGrid1, Me.data1, SQL, False
     
     
     tots = "S|txtAux(0)|T|Tipo|500|;S|txtAux(1)|T|Factura|1250|;S|txtAux(2)|T|Fecha|1200|;S|cmdAux(0)|B||0|;"
@@ -699,8 +699,8 @@ Dim tots As String
     
     
    'Actualizar indicador
-   If Not Data1.Recordset.EOF And (Modo = 0) Then
-        lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+   If Not data1.Recordset.EOF And (Modo = 0) Then
+        lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If
@@ -713,20 +713,20 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim B As Boolean
+Dim b As Boolean
 
     DeseleccionaGrid Me.DataGrid1
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To txtAux.Count - 1
         If jj < 2 Then
             txtAux2(jj).Height = Me.DataGrid1.RowHeight
             txtAux2(jj).Top = alto
-            txtAux2(jj).visible = B
+            txtAux2(jj).visible = b
         End If
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = B
+        txtAux(jj).visible = b
     Next jj
 
 '    Me.Combo1.visible = B
@@ -738,7 +738,7 @@ Dim B As Boolean
         'If jj <> 2 Then
             Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
             Me.cmdAux(jj).Top = alto
-            Me.cmdAux(jj).visible = B
+            Me.cmdAux(jj).visible = b
         'End If
     Next jj
 End Sub
@@ -773,20 +773,20 @@ End Sub
 Private Sub mnModAdv_Click()
     If Modo <> 2 Then Exit Sub
 
-    If Data1.Recordset.EOF Then Exit Sub
+    If data1.Recordset.EOF Then Exit Sub
 
     If vUsu.Nivel > 1 Then
-        MsgBox "No tiene permiso", vbExclamation
+        MsgBox "No tiene suficientes privilegios. Consulte al administrador del sistema. ", vbExclamation
         Exit Sub
     End If
 
     
     CadenaDesdeOtroForm = ""
     frmListado3.Opcion = 14
-    frmListado3.OtrosDatos = Data1.RecordSource
+    frmListado3.OtrosDatos = data1.RecordSource
     frmListado3.Show vbModal
     If CadenaDesdeOtroForm <> "" Then
-        CadenaConsulta = Data1.RecordSource
+        CadenaConsulta = data1.RecordSource
         PonerCadenaBusqueda
     End If
 
@@ -839,13 +839,13 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
 
                       
     If Kmodo = 1 Then 'Modo Buscar
@@ -863,9 +863,9 @@ Dim B As Boolean
     Me.cmdAux(2).Enabled = (Modo = 4)
                    
     '-----------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -885,7 +885,7 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
     
     'Insertar
@@ -893,24 +893,24 @@ Dim B As Boolean
     Me.mnNuevo.Enabled = False
 
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     'Modificar avanzada
-    Toolbar1.Buttons(7).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    Me.mnModificar.Enabled = b
     
-    Toolbar1.Buttons(9).Enabled = B
-    Me.mnModAdv.Enabled = B
+    Toolbar1.Buttons(9).Enabled = b
+    Me.mnModAdv.Enabled = b
     
-    B = ((Modo >= 3))
+    b = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
@@ -924,7 +924,7 @@ End Sub
 
 Private Sub Desplazamiento(Index As Integer)
 'Botones de Desplazamiento de la Toolbar
-    DesplazamientoData Data1, Index
+    DesplazamientoData data1, Index
     PonerCampos
 End Sub
 
@@ -973,7 +973,7 @@ Dim anc As Single
         PonerFoco txtAux(0)
     Else
         HacerBusqueda
-        If Data1.Recordset.EOF Then
+        If data1.Recordset.EOF Then
             txtAux(kCampo).Text = ""
             PonerFoco txtAux(kCampo)
         End If
@@ -998,7 +998,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1006,17 +1006,17 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
     LLamaLineas anc
     
  
-    For I = 0 To 2
-        txtAux(I).Text = DBLet(DataGrid1.Columns(I).Value, "T")
-    Next I
+    For i = 0 To 2
+        txtAux(i).Text = DBLet(DataGrid1.Columns(i).Value, "T")
+    Next i
 
     txtAux2(0).Text = DBLet(DataGrid1.Columns(3).Value, "T")
     
@@ -1047,19 +1047,19 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
 
     On Error GoTo ErrDatosOK
 
     DatosOk = False
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
 
 
     
-    DatosOk = B
+    DatosOk = b
     Exit Function
     
 ErrDatosOK:
@@ -1140,9 +1140,9 @@ Private Sub PonerCadenaBusqueda()
     Screen.MousePointer = vbHourglass
     On Error GoTo EEPonerBusq
 
-    Data1.RecordSource = CadenaConsulta
-    Data1.Refresh
-    If Data1.Recordset.RecordCount <= 0 Then
+    data1.RecordSource = CadenaConsulta
+    data1.Refresh
+    If data1.Recordset.RecordCount <= 0 Then
         CargaGrid False
         MsgBox "No hay ningún registro en la tabla para ese criterio de Búsqueda.", vbInformation
         Screen.MousePointer = vbDefault
@@ -1166,12 +1166,12 @@ End Sub
 Private Sub PonerCampos()
 On Error GoTo EPonerCampos
 
-    If Data1.Recordset.EOF Then Exit Sub
-    PonerCamposForma Me, Data1
+    If data1.Recordset.EOF Then Exit Sub
+    PonerCamposForma Me, data1
     CargaGrid True
     
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+    lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
     
 EPonerCampos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo Campos", Err.Description
@@ -1226,7 +1226,7 @@ Dim cad As String
         Case 3
             
             'Esta el que estaba
-            If DBLet(Data1.Recordset!codArtic, "T") = txtAux(Index).Text Then Exit Sub
+            If DBLet(data1.Recordset!codArtic, "T") = txtAux(Index).Text Then Exit Sub
             
             
             If txtAux(Index).Text <> "" Then
@@ -1243,7 +1243,7 @@ Dim cad As String
             End If
             If Modo = 4 Then
                 If cad = "" Then
-                    cad = Data1.Recordset!codArtic 'para que no de error bajo
+                    cad = data1.Recordset!codArtic 'para que no de error bajo
                     txtAux(3).Text = cad
                     PonerFoco txtAux(Index)
                     'txtAux2(1).Text = DBLet(Data1.Recordset!NomArtic, "T")
@@ -1271,9 +1271,9 @@ Private Function ModificaLinea() As Boolean
     HaDevueltoDatos = HaDevueltoDatos & ", preciomp = " & DBSet(txtAux(4).Text, "N")
     HaDevueltoDatos = HaDevueltoDatos & ",preciost = " & DBSet(txtAux(4).Text, "N")
     HaDevueltoDatos = HaDevueltoDatos & ",codartic = " & DBSet(txtAux(3).Text, "T")
-    HaDevueltoDatos = HaDevueltoDatos & " WHERE codtipom='" & Data1.Recordset!codtipom & "' AND numfactu = " & Data1.Recordset!NumFactu
-    HaDevueltoDatos = HaDevueltoDatos & " AND fecfactu=" & DBSet(Data1.Recordset!FecFactu, "F") & " AND codtipoa = '" & Data1.Recordset!codtipoa & "'"
-    HaDevueltoDatos = HaDevueltoDatos & " AND numalbar=" & Data1.Recordset!NumAlbar & " AND numlinea = " & Data1.Recordset!numlinea
-    If Ejecutar(HaDevueltoDatos, False) Then ModificaLinea = True
+    HaDevueltoDatos = HaDevueltoDatos & " WHERE codtipom='" & data1.Recordset!codtipom & "' AND numfactu = " & data1.Recordset!Numfactu
+    HaDevueltoDatos = HaDevueltoDatos & " AND fecfactu=" & DBSet(data1.Recordset!FecFactu, "F") & " AND codtipoa = '" & data1.Recordset!Codtipoa & "'"
+    HaDevueltoDatos = HaDevueltoDatos & " AND numalbar=" & data1.Recordset!Numalbar & " AND numlinea = " & data1.Recordset!numlinea
+    If ejecutar(HaDevueltoDatos, False) Then ModificaLinea = True
     HaDevueltoDatos = ""
 End Function

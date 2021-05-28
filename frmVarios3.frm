@@ -6,54 +6,80 @@ Begin VB.Form frmVarios3
    ClientHeight    =   8745
    ClientLeft      =   45
    ClientTop       =   345
-   ClientWidth     =   17490
+   ClientWidth     =   17760
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   8745
-   ScaleWidth      =   17490
+   ScaleWidth      =   17760
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameTelefonosSinConsumo 
-      Height          =   7605
-      Left            =   0
+      Height          =   8685
+      Left            =   -135
       TabIndex        =   22
       Top             =   0
-      Width           =   14415
-      Begin VB.CommandButton cmdOcultarNoVienenFichero 
-         Caption         =   "Ocultar"
-         Height          =   375
+      Width           =   17790
+      Begin VB.CheckBox chkCompaActivoSinVenr 
+         Caption         =   "Activos no vienen"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
          Left            =   1560
          TabIndex        =   36
-         ToolTipText     =   "Ocultar lineas no viene fichero"
-         Top             =   7080
-         Visible         =   0   'False
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdEliminarFrasSinConsumo 
-         Caption         =   "Continuar facturacion"
-         Height          =   375
-         Left            =   4080
-         TabIndex        =   25
-         Top             =   7080
+         Top             =   8235
+         Value           =   1  'Checked
          Width           =   2175
       End
+      Begin VB.CommandButton cmdEliminarFrasSinConsumo 
+         Caption         =   "Continuar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   4815
+         TabIndex        =   25
+         Top             =   8100
+         Width           =   1920
+      End
       Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Cancelar proceso"
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   3
-         Left            =   6480
+         Left            =   7020
          TabIndex        =   24
-         Top             =   7080
-         Width           =   1695
+         Top             =   8100
+         Width           =   1740
       End
       Begin MSComctlLib.ListView lwTelefoDe 
-         Height          =   6495
-         Left            =   120
+         Height          =   7530
+         Left            =   165
          TabIndex        =   23
          Top             =   480
-         Width           =   7935
-         _ExtentX        =   13996
-         _ExtentY        =   11456
+         Width           =   8655
+         _ExtentX        =   15266
+         _ExtentY        =   13282
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -65,31 +91,40 @@ Begin VB.Form frmVarios3
          BackColor       =   -2147483643
          BorderStyle     =   1
          Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          NumItems        =   6
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Telefono"
-            Object.Width           =   2452
+            Object.Width           =   2805
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
             SubItemIndex    =   1
             Text            =   "Codigo"
-            Object.Width           =   1235
+            Object.Width           =   1588
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
             Text            =   "Nombre"
-            Object.Width           =   5644
+            Object.Width           =   7479
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "Inact."
-            Object.Width           =   1587
+            Text            =   "In."
+            Object.Width           =   882
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
-            Text            =   "ErrOP."
-            Object.Width           =   1411
+            Text            =   "Er."
+            Object.Width           =   882
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   5
@@ -98,15 +133,15 @@ Begin VB.Form frmVarios3
          EndProperty
       End
       Begin MSComctlLib.ListView lw 
-         Height          =   6495
+         Height          =   7530
          Index           =   5
-         Left            =   8280
+         Left            =   8955
          TabIndex        =   33
          Top             =   480
          Visible         =   0   'False
-         Width           =   8415
-         _ExtentX        =   14843
-         _ExtentY        =   11456
+         Width           =   8685
+         _ExtentX        =   15319
+         _ExtentY        =   13282
          View            =   3
          LabelEdit       =   1
          Sorted          =   -1  'True
@@ -119,8 +154,8 @@ Begin VB.Form frmVarios3
          BorderStyle     =   1
          Appearance      =   1
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -134,24 +169,24 @@ Begin VB.Form frmVarios3
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
-            Text            =   "Cliente"
-            Object.Width           =   6482
+            Text            =   "Codigo"
+            Object.Width           =   1764
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
-            Text            =   "Codigo"
-            Object.Width           =   1559
+            Text            =   "Cliente"
+            Object.Width           =   6482
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "Articulo"
-            Object.Width           =   1587
+            Text            =   "Art."
+            Object.Width           =   1058
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
             SubItemIndex    =   4
             Text            =   "Importe"
-            Object.Width           =   1552
+            Object.Width           =   2258
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
@@ -164,46 +199,46 @@ Begin VB.Form frmVarios3
          AutoSize        =   -1  'True
          Caption         =   "Leyendo"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00000000&
-         Height          =   195
+         Height          =   240
          Index           =   8
-         Left            =   10080
+         Left            =   11025
          TabIndex        =   35
-         Top             =   7080
-         Width           =   720
+         Top             =   8115
+         Width           =   825
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
          Caption         =   "Facturar(Lineas/€)"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
-         Height          =   195
+         Height          =   240
          Index           =   7
-         Left            =   8400
+         Left            =   9030
          TabIndex        =   34
-         Top             =   7080
-         Width           =   1605
+         Top             =   8115
+         Width           =   1875
       End
       Begin VB.Image imgAyuda 
          Height          =   240
          Index           =   0
-         Left            =   7680
+         Left            =   8535
          Picture         =   "frmVarios3.frx":0000
          ToolTipText     =   "Importar fichero telefonia"
          Top             =   180
@@ -213,41 +248,41 @@ Begin VB.Form frmVarios3
          AutoSize        =   -1  'True
          Caption         =   "Información venta plazos"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
-         Height          =   195
+         Height          =   240
          Index           =   6
-         Left            =   8400
+         Left            =   8985
          TabIndex        =   32
          Top             =   240
-         Width           =   2160
+         Width           =   2535
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
-         Caption         =   "Error telefonos"
+         Caption         =   "Error teléfonos"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H000000C0&
-         Height          =   195
+         ForeColor       =   &H00800000&
+         Height          =   240
          Index           =   5
-         Left            =   240
+         Left            =   195
          TabIndex        =   31
          Top             =   240
-         Width           =   1260
+         Width           =   1500
       End
       Begin VB.Image imgCheck 
          Height          =   240
@@ -255,7 +290,7 @@ Begin VB.Form frmVarios3
          Left            =   240
          Picture         =   "frmVarios3.frx":0B3A
          ToolTipText     =   "Puntear al haber"
-         Top             =   7200
+         Top             =   8235
          Width           =   240
       End
       Begin VB.Image imgCheck 
@@ -264,7 +299,7 @@ Begin VB.Form frmVarios3
          Left            =   720
          Picture         =   "frmVarios3.frx":0C84
          ToolTipText     =   "Quitar al haber"
-         Top             =   7200
+         Top             =   8235
          Width           =   240
       End
    End
@@ -278,7 +313,7 @@ Begin VB.Form frmVarios3
       Begin VB.CommandButton cmdEliminarFAZ 
          Caption         =   "Eliminar"
          Height          =   375
-         Left            =   8760
+         Left            =   8850
          TabIndex        =   29
          Top             =   8160
          Width           =   1095
@@ -287,7 +322,7 @@ Begin VB.Form frmVarios3
          Caption         =   "&Salir"
          Height          =   375
          Index           =   5
-         Left            =   10080
+         Left            =   10170
          TabIndex        =   27
          Top             =   8160
          Width           =   1095
@@ -311,6 +346,15 @@ Begin VB.Form frmVarios3
          BackColor       =   -2147483643
          BorderStyle     =   1
          Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          NumItems        =   5
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Codigo"
@@ -374,201 +418,6 @@ Begin VB.Form frmVarios3
          ToolTipText     =   "Puntear al haber"
          Top             =   8280
          Width           =   240
-      End
-   End
-   Begin VB.Frame FrameNuevaFamiliaAgrupado 
-      Height          =   2175
-      Left            =   120
-      TabIndex        =   4
-      Top             =   0
-      Width           =   6615
-      Begin VB.CommandButton cmdVentasAgrupadas 
-         Caption         =   "Aceptar"
-         Height          =   375
-         Left            =   4080
-         TabIndex        =   2
-         Top             =   1440
-         Width           =   975
-      End
-      Begin VB.ComboBox cboTipoFra 
-         Height          =   315
-         ItemData        =   "frmVarios3.frx":1062
-         Left            =   1440
-         List            =   "frmVarios3.frx":106F
-         Style           =   2  'Dropdown List
-         TabIndex        =   1
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   2175
-      End
-      Begin VB.TextBox txtFamia 
-         Height          =   285
-         Index           =   0
-         Left            =   1440
-         TabIndex        =   0
-         Text            =   "Text1"
-         Top             =   720
-         Width           =   1095
-      End
-      Begin VB.TextBox txtDescFamia 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   0
-         Left            =   2640
-         Locked          =   -1  'True
-         TabIndex        =   5
-         Text            =   "Text5"
-         Top             =   720
-         Width           =   3615
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Salir"
-         Height          =   375
-         Index           =   0
-         Left            =   5280
-         TabIndex        =   3
-         Top             =   1440
-         Width           =   1095
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Tipo factura"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   0
-         Left            =   240
-         TabIndex        =   7
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   1020
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Familia"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   96
-         Left            =   240
-         TabIndex        =   6
-         Top             =   720
-         Width           =   600
-      End
-      Begin VB.Image imgFamilia 
-         Height          =   240
-         Index           =   0
-         Left            =   1200
-         Picture         =   "frmVarios3.frx":10A0
-         Top             =   720
-         Width           =   240
-      End
-   End
-   Begin VB.Frame FrameCutoaTfno 
-      Height          =   1935
-      Left            =   120
-      TabIndex        =   15
-      Top             =   2280
-      Visible         =   0   'False
-      Width           =   6255
-      Begin VB.TextBox txtimporte 
-         Alignment       =   1  'Right Justify
-         Height          =   375
-         Index           =   0
-         Left            =   4560
-         TabIndex        =   17
-         Text            =   "Text2"
-         Top             =   720
-         Width           =   1335
-      End
-      Begin VB.CommandButton cmdCuotaTfno 
-         Caption         =   "Aceptar"
-         Height          =   375
-         Left            =   3600
-         TabIndex        =   18
-         Top             =   1320
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Salir"
-         Height          =   375
-         Index           =   2
-         Left            =   4800
-         TabIndex        =   19
-         Top             =   1320
-         Width           =   1095
-      End
-      Begin VB.TextBox txtTextoPlano 
-         Height          =   375
-         Index           =   0
-         Left            =   360
-         TabIndex        =   16
-         Text            =   "Text1"
-         Top             =   720
-         Width           =   3975
-      End
-      Begin VB.Image imgCuota 
-         Height          =   240
-         Left            =   960
-         Picture         =   "frmVarios3.frx":11A2
-         Top             =   480
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Precio"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   3
-         Left            =   4560
-         TabIndex        =   21
-         Top             =   480
-         Width           =   525
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Cuota"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   2
-         Left            =   360
-         TabIndex        =   20
-         Top             =   480
-         Width           =   495
       End
    End
    Begin VB.Frame FrameVerificarCCCAriadna 
@@ -675,7 +524,7 @@ Begin VB.Form frmVarios3
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmVarios3.frx":12A4
+         Picture         =   "frmVarios3.frx":1062
          ToolTipText     =   "Puntear al haber"
          Top             =   8040
          Width           =   240
@@ -684,7 +533,7 @@ Begin VB.Form frmVarios3
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmVarios3.frx":13EE
+         Picture         =   "frmVarios3.frx":11AC
          ToolTipText     =   "Quitar al haber"
          Top             =   8040
          Width           =   240
@@ -708,6 +557,201 @@ Begin VB.Form frmVarios3
          TabIndex        =   13
          Top             =   8160
          Width           =   105
+      End
+   End
+   Begin VB.Frame FrameNuevaFamiliaAgrupado 
+      Height          =   2175
+      Left            =   120
+      TabIndex        =   4
+      Top             =   0
+      Width           =   6615
+      Begin VB.CommandButton cmdVentasAgrupadas 
+         Caption         =   "Aceptar"
+         Height          =   375
+         Left            =   4080
+         TabIndex        =   2
+         Top             =   1440
+         Width           =   975
+      End
+      Begin VB.ComboBox cboTipoFra 
+         Height          =   315
+         ItemData        =   "frmVarios3.frx":12F6
+         Left            =   1440
+         List            =   "frmVarios3.frx":1303
+         Style           =   2  'Dropdown List
+         TabIndex        =   1
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   2175
+      End
+      Begin VB.TextBox txtFamia 
+         Height          =   285
+         Index           =   0
+         Left            =   1440
+         TabIndex        =   0
+         Text            =   "Text1"
+         Top             =   720
+         Width           =   1095
+      End
+      Begin VB.TextBox txtDescFamia 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   0
+         Left            =   2640
+         Locked          =   -1  'True
+         TabIndex        =   5
+         Text            =   "Text5"
+         Top             =   720
+         Width           =   3615
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Salir"
+         Height          =   375
+         Index           =   0
+         Left            =   5280
+         TabIndex        =   3
+         Top             =   1440
+         Width           =   1095
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Tipo factura"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   0
+         Left            =   240
+         TabIndex        =   7
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   1020
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Familia"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   96
+         Left            =   240
+         TabIndex        =   6
+         Top             =   720
+         Width           =   600
+      End
+      Begin VB.Image imgFamilia 
+         Height          =   240
+         Index           =   0
+         Left            =   1200
+         Picture         =   "frmVarios3.frx":1334
+         Top             =   720
+         Width           =   240
+      End
+   End
+   Begin VB.Frame FrameCutoaTfno 
+      Height          =   1935
+      Left            =   120
+      TabIndex        =   15
+      Top             =   2280
+      Visible         =   0   'False
+      Width           =   6255
+      Begin VB.TextBox txtimporte 
+         Alignment       =   1  'Right Justify
+         Height          =   375
+         Index           =   0
+         Left            =   4560
+         TabIndex        =   17
+         Text            =   "Text2"
+         Top             =   720
+         Width           =   1335
+      End
+      Begin VB.CommandButton cmdCuotaTfno 
+         Caption         =   "Aceptar"
+         Height          =   375
+         Left            =   3600
+         TabIndex        =   18
+         Top             =   1320
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Salir"
+         Height          =   375
+         Index           =   2
+         Left            =   4800
+         TabIndex        =   19
+         Top             =   1320
+         Width           =   1095
+      End
+      Begin VB.TextBox txtTextoPlano 
+         Height          =   375
+         Index           =   0
+         Left            =   360
+         TabIndex        =   16
+         Text            =   "Text1"
+         Top             =   720
+         Width           =   3975
+      End
+      Begin VB.Image imgCuota 
+         Height          =   240
+         Left            =   960
+         Picture         =   "frmVarios3.frx":1436
+         Top             =   480
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Precio"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   3
+         Left            =   4560
+         TabIndex        =   21
+         Top             =   480
+         Width           =   525
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Cuota"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   195
+         Index           =   2
+         Left            =   360
+         TabIndex        =   20
+         Top             =   480
+         Width           =   495
       End
    End
 End
@@ -745,6 +789,16 @@ Dim IT As ListItem
 
 Private Sub cboTipoFra_KeyPress(KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
+End Sub
+
+Private Sub chkCompaActivoSinVenr_Click()
+    Screen.MousePointer = vbHourglass
+    If chkCompaActivoSinVenr.Value = 1 Then
+        CargarNoVieneFicheroYEstanACtivos
+    Else
+        OcultarNoVienenFichero
+    End If
+    Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub cmdActualErroresCCC_Click()
@@ -937,9 +991,9 @@ Dim CodmactaIndicada As Boolean
 End Function
 
 
-Private Sub cmdCancelar_Click(index As Integer)
-    If index = 0 Then CadenaDesdeOtroForm = "" 'por si acaso
-    If index = 3 Then
+Private Sub cmdCancelar_Click(Index As Integer)
+    If Index = 0 Then CadenaDesdeOtroForm = "" 'por si acaso
+    If Index = 3 Then
         If MsgBox("Si cancela va a parar el proceso de facturacion del fichero de telefonia." & vbCrLf & "¿Continuar?", vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
         CadenaDesdeOtroForm = "" 'facturacion telefonia
     End If
@@ -1063,9 +1117,10 @@ Private Sub cmdEliminarFrasSinConsumo_Click()
 Dim FacturaTodos As Boolean  'Siginifica que va a continuar sin quitar ningun telefono del proceso
     
     
-    If Me.cmdOcultarNoVienenFichero.visible Then
+    If Me.chkCompaActivoSinVenr.Value = 1 Then
         OcultarNoVienenFichero
         MsgBox "Ocultadas lineas que no vienen en el fichero", vbExclamation
+        Me.chkCompaActivoSinVenr.Value = 0
         Exit Sub
     End If
 
@@ -1142,10 +1197,7 @@ End Sub
 
 
 
-Private Sub cmdOcultarNoVienenFichero_Click()
-    OcultarNoVienenFichero
-    cmdOcultarNoVienenFichero.visible = False
-End Sub
+
 
 Private Sub cmdVentasAgrupadas_Click()
     If Me.txtFamia(0).Text = "" Then Exit Sub
@@ -1170,6 +1222,7 @@ Private Sub Form_Activate()
         If Opcion = 3 Then
             PulsadoCerrar = False
             CargaTelefonosSinConsumo
+            CargarNoVieneFicheroYEstanACtivos
             If lw(5).visible Then CargarDatosTelefoniaVentaPlazos
         End If
         
@@ -1226,19 +1279,24 @@ Dim H As Integer
     Case 3
         'CadenaDesdeOtroForm   1 Si muestra o no lw plazos      2 Operador   3 Nomfichero
         lw(5).visible = False
-        NumRegElim = 8315
+        NumRegElim = 9000 '8315
         Me.Tag = CadenaDesdeOtroForm
         If RecuperaValor(CadenaDesdeOtroForm, 1) = 1 Then
             lw(5).visible = True
-            NumRegElim = 17055
+            NumRegElim = 17790 '17055
         End If
         FrameTelefonosSinConsumo.Width = NumRegElim
         Me.cmdCancelar(3).Left = NumRegElim - 1935
         Me.cmdEliminarFrasSinConsumo.Left = NumRegElim - 4335
-        imgAyuda(0).Left = NumRegElim - 735
+        imgayuda(0).Left = NumRegElim - 735
         
         PonerFrameVisible FrameTelefonosSinConsumo
-        Caption = "Telefonos sin consumo"
+        
+        CadenaDesdeOtroForm = RecuperaValor(CadenaDesdeOtroForm, 2)
+        
+        Caption = "Telefonos sin consumo " & " - " & Format(CadenaDesdeOtroForm, "00")
+        
+        
         CadenaDesdeOtroForm = ""
     Case 5
         
@@ -1272,43 +1330,45 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
 End Sub
 
 
-Private Sub imgAyuda_Click(index As Integer)
+Private Sub imgAyuda_Click(Index As Integer)
     miSQL = ""
-    If index = 0 Then
+    If Index = 0 Then
         miSQL = miSQL & "Errores " & vbCrLf
         miSQL = miSQL & "     Inact. Tiene la marca de inactivo(rojo)" & vbCrLf
         miSQL = miSQL & "     ErrOP  Compañia telefono distinta del fichero(azul) " & vbCrLf
         miSQL = miSQL & "     Sin ninguna marca(negro). Sin consumo " & vbCrLf
+        miSQL = miSQL & "     (Check) Activos,de la compñia y no viene en el fichero(verde) " & vbCrLf
+        
         If vParamAplic.TelefoniaVtaPlazos Then miSQL = miSQL & "     Pl. Avisa de articulo vta plazos" & vbCrLf
         
         If Me.lw(5).visible Then
             miSQL = miSQL & vbCrLf & "Vta plazos "
             miSQL = miSQL & vbCrLf & "     Articulo: que se facturará"
             miSQL = miSQL & vbCrLf & "     PL   plazos que le faltan"
-            miSQL = miSQL & vbCrLf & "     AZUL. No tiene mas plazos  ROJO no viene en el fichero " & vbCrLf
+            miSQL = miSQL & vbCrLf & "     AZUL. No tiene mas plazos  ROJO no viene ene  el fichero " & vbCrLf
             
         
         End If
     End If
     
-    miSQL = Me.imgAyuda(index).ToolTipText & vbCrLf & miSQL
+    miSQL = Me.imgayuda(Index).ToolTipText & vbCrLf & miSQL
     MsgBox miSQL, vbInformation
 End Sub
 
-Private Sub imgCheck_Click(index As Integer)
-    If index < 2 Then
+Private Sub imgCheck_Click(Index As Integer)
+    If Index < 2 Then
     
         For NumRegElim = 1 To Me.ListView1.ListItems.Count
-            ListView1.ListItems(NumRegElim).Checked = index = 1
+            ListView1.ListItems(NumRegElim).Checked = Index = 1
         Next
 
-    ElseIf index < 4 Then
+    ElseIf Index < 4 Then
         For NumRegElim = 1 To Me.lwTelefoDe.ListItems.Count
-            lwTelefoDe.ListItems(NumRegElim).Checked = index = 3
+            lwTelefoDe.ListItems(NumRegElim).Checked = Index = 3
         Next
     Else
         For NumRegElim = 1 To Me.lwPresuElim.ListItems.Count
-            lwPresuElim.ListItems(NumRegElim).Checked = index = 4
+            lwPresuElim.ListItems(NumRegElim).Checked = Index = 4
         Next
     End If
 End Sub
@@ -1336,13 +1396,13 @@ Private Sub imgCuota_Click()
     End If
 End Sub
 
-Private Sub imgFamilia_Click(index As Integer)
+Private Sub imgFamilia_Click(Index As Integer)
     LanzaBuscaGrid 0
     If miSQL <> "" Then
         
-        Me.txtFamia(index).Text = RecuperaValor(miSQL, 2)
-        Me.txtDescFamia(index).Text = RecuperaValor(miSQL, 3)
-        PonerFoco txtFamia(index)
+        Me.txtFamia(Index).Text = RecuperaValor(miSQL, 2)
+        Me.txtDescFamia(Index).Text = RecuperaValor(miSQL, 3)
+        PonerFoco txtFamia(Index)
         miSQL = ""
     End If
 End Sub
@@ -1362,9 +1422,9 @@ Private Sub LanzaBuscaGrid(LOpcion As Byte)
         frmB.vSQL = ""
     Else
         frmB.vTitulo = "Cuotas propias"
-        miSQL = "Codigo|stfnocuotaspropias|codigoCuota|N||30·"
-        miSQL = miSQL & "descripcion|stfnocuotaspropias|nombre|T||50·"
-        miSQL = miSQL & "Importe|stfnocuotaspropias|Importe|N||10·"
+        miSQL = "Codigo|stfnocuotaspropias|codigoCuota|N||20·"
+        miSQL = miSQL & "descripcion|stfnocuotaspropias|nombre|T||60·"
+        miSQL = miSQL & "Importe|stfnocuotaspropias|Importe|N||17·"
         frmB.vTabla = "stfnocuotaspropias"
         If Opcion = 2 Then
             frmB.vSQL = " operadora = " & RecuperaValor(CadenaDesdeOtroForm, 5)
@@ -1392,7 +1452,7 @@ End Sub
 Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
     If Item.Tag = 0 Then
         'Ha pinchado sobre el nodo "padre"
-        NumRegElim = Item.index + 1
+        NumRegElim = Item.Index + 1
         Do
             If NumRegElim > ListView1.ListItems.Count Then
                 NumRegElim = 0
@@ -1408,21 +1468,21 @@ Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
     End If
 End Sub
 
-Private Sub lw_ColumnClick(index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-      If ColumnHeader.index - 1 = lw(index).SortKey Then
-        If lw(index).SortOrder = lvwAscending Then
-            lw(index).SortOrder = lvwDescending
+Private Sub lw_ColumnClick(Index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+      If ColumnHeader.Index - 1 = lw(Index).SortKey Then
+        If lw(Index).SortOrder = lvwAscending Then
+            lw(Index).SortOrder = lvwDescending
         Else
-            lw(index).SortOrder = lvwAscending
+            lw(Index).SortOrder = lvwAscending
         End If
     Else
-        lw(index).SortOrder = lvwAscending
-        lw(index).SortKey = ColumnHeader.index - 1
+        lw(Index).SortOrder = lvwAscending
+        lw(Index).SortKey = ColumnHeader.Index - 1
     End If
 End Sub
 
 Private Sub lwTelefoDe_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.index - 1 = lwTelefoDe.SortKey Then
+    If ColumnHeader.Index - 1 = lwTelefoDe.SortKey Then
         If lwTelefoDe.SortOrder = lvwAscending Then
             lwTelefoDe.SortOrder = lvwDescending
         Else
@@ -1430,35 +1490,35 @@ Private Sub lwTelefoDe_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeade
         End If
     Else
         lwTelefoDe.SortOrder = lvwAscending
-        lwTelefoDe.SortKey = ColumnHeader.index - 1
+        lwTelefoDe.SortKey = ColumnHeader.Index - 1
     End If
 End Sub
 
-Private Sub txtFamia_GotFocus(index As Integer)
-    ConseguirFoco txtFamia(index), 3
+Private Sub txtFamia_GotFocus(Index As Integer)
+    ConseguirFoco txtFamia(Index), 3
 End Sub
 
-Private Sub txtFamia_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtFamia_KeyPress(Index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtFamia_LostFocus(index As Integer)
-    txtFamia(index).Text = Trim(txtFamia(index).Text)
+Private Sub txtFamia_LostFocus(Index As Integer)
+    txtFamia(Index).Text = Trim(txtFamia(Index).Text)
     miSQL = ""
-    If txtFamia(index).Text <> "" Then
-        If PonerFormatoEntero(txtFamia(index)) Then
-            miSQL = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(index).Text, "N")
+    If txtFamia(Index).Text <> "" Then
+        If PonerFormatoEntero(txtFamia(Index)) Then
+            miSQL = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(Index).Text, "N")
             If miSQL = "" Then
                 MsgBox "El codigo no pertence a ningun familia", vbExclamation
-                txtFamia(index).Text = ""
+                txtFamia(Index).Text = ""
             End If
         Else
-            txtFamia(index).Text = ""
+            txtFamia(Index).Text = ""
         End If
     End If
      
-    Me.txtDescFamia(index).Text = miSQL
-    If txtFamia(index).Text = "" Then PonerFoco txtFamia(index)
+    Me.txtDescFamia(Index).Text = miSQL
+    If txtFamia(Index).Text = "" Then PonerFoco txtFamia(Index)
     
 End Sub
 
@@ -1496,7 +1556,7 @@ Dim N As Integer
             NumRegElim = miRsAux!codClien
             Label4(1).Caption = IT.Text
             Label4(1).Refresh
-            davidNumalbar = IT.index
+            davidNumalbar = IT.Index
         End If
         
         
@@ -1550,28 +1610,28 @@ End Sub
  
 
 
-Private Sub txtImporte_GotFocus(index As Integer)
-    ConseguirFoco txtimporte(index), 3
+Private Sub txtImporte_GotFocus(Index As Integer)
+    ConseguirFoco txtimporte(Index), 3
 End Sub
 
-Private Sub txtImporte_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtImporte_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtImporte_LostFocus(index As Integer)
-    txtimporte(index).Text = Trim(txtimporte(index).Text)
-    If txtimporte(index).Text = "" Then Exit Sub
+Private Sub txtImporte_LostFocus(Index As Integer)
+    txtimporte(Index).Text = Trim(txtimporte(Index).Text)
+    If txtimporte(Index).Text = "" Then Exit Sub
     
-        PonerFormatoDecimal txtimporte(index), 2   'decimal 10,4  en formato decimal
+        PonerFormatoDecimal txtimporte(Index), 2   'decimal 10,4  en formato decimal
 End Sub
 
 
 
-Private Sub txtTextoPlano_GotFocus(index As Integer)
-    ConseguirFoco txtTextoPlano(index), 3
+Private Sub txtTextoPlano_GotFocus(Index As Integer)
+    ConseguirFoco txtTextoPlano(Index), 3
 End Sub
 
-Private Sub txtTextoPlano_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtTextoPlano_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
@@ -1607,6 +1667,8 @@ Dim N As Integer
     lwTelefoDe.Sorted = True
     lwTelefoDe.ListItems.Clear
     
+    '++
+'    lwTelefoDe.SmallIcons = frmPpal.ImgListPpal
     
     
     'Hay venta plazos
@@ -1630,7 +1692,10 @@ Dim N As Integer
         IT.SubItems(1) = " "
         IT.SubItems(2) = " "
         If Not IsNull(miRsAux!codClien) Then IT.SubItems(1) = Format(miRsAux!codClien, "0000")
-        If Not IsNull(miRsAux!NomClien) Then IT.SubItems(2) = miRsAux!NomClien
+        If Not IsNull(miRsAux!NomClien) Then
+            IT.SubItems(2) = miRsAux!NomClien
+            IT.ListSubItems(2).ToolTipText = miRsAux!NomClien '++
+         End If
         
         
         'Febrero 2014
@@ -1645,9 +1710,13 @@ Dim N As Integer
             If miRsAux!numlinea = 2 Then
                 'INACTIVO
                 IT.SubItems(3) = "SI"
+                IT.ListSubItems(3).ToolTipText = "Inactivo" '++
+                
                 IT.ForeColor = vbRed
             ElseIf miRsAux!numlinea >= 5 Then
                 IT.SubItems(4) = "*"
+                IT.ListSubItems(4).ToolTipText = "Error Operador" '++
+                
                 IT.ForeColor = vbBlue
             End If
         Else
@@ -1670,29 +1739,6 @@ Dim N As Integer
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    
-    miSQL = "select sclientfno.codclien,idtelefono,nomclien from sclientfno,sclien where "
-    miSQL = miSQL & " sclientfno.codclien = sclien.codclien "
-    miSQL = miSQL & " AND inactivo=0 and operador =" & RecuperaValor(Me.Tag, 2)
-    miSQL = miSQL & " AND not idtelefono IN (select Numero_de_telefono from telefono.telefono where "
-    miSQL = miSQL & " Fichero = '" & RecuperaValor(Me.Tag, 3) & "')"
-    miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    
-    While Not miRsAux.EOF
-            
-        Set IT = lwTelefoDe.ListItems.Add
-        IT.Text = miRsAux!idtelefono
-        IT.SubItems(1) = Format(miRsAux!codClien, "0000")
-        IT.SubItems(2) = DBLet(miRsAux!NomClien, "T")
-    
-        IT.ForeColor = vbBlue
-        IT.Bold = True
-        IT.ToolTipText = "No viene en fichero"
-        IT.Tag = 1
-        miSQL = ""
-        miRsAux.MoveNext
-    Wend
-    If miSQL = "" Then cmdOcultarNoVienenFichero.visible = True
     Set miRsAux = Nothing
 End Sub
 
@@ -1745,31 +1791,50 @@ End Sub
 
 'CadenaDesdeOtroForm   1 Si muestra o no lw lazos      2 Operador   3 Nomfichero
 Private Sub CargarDatosTelefoniaVentaPlazos()
-    Dim i As Integer
+    Dim I As Integer
     Dim ImporteTotalFacturaVtaPlz As Currency
     Dim Color As Long
     Dim IT As ListItem
+    
         Set miRsAux = New ADODB.Recordset
+          
+          
+        'Lo primero  primero, ver si hay que borrar vta plazos finalizadas
+        
+        miSQL = DevuelveDesdeBD(conAri, "count(*)", "sclientfno,sclien", "sclientfno.codclien=sclien.codclien AND ArtPlazos<>'' AND PlazosMeses =0 AND 1", "1")
+        If miSQL = "" Then miSQL = "0"
+        If Val(miSQL) > 0 Then
+            frmVarios.Opcion = 16
+            frmVarios.Show vbModal
+            Set miRsAux = New ADODB.Recordset
+        End If
+          
           
         lw(5).ListItems.Clear
         NumRegElim = 0
         lw(5).Tag = ""
         ImporteTotalFacturaVtaPlz = 0
         'Cargaremos el listview con los telefono a plazos
-        For i = 1 To 2
+        For I = 1 To 2
             'Primera pasada.
             ' Articulos que estando en el fichero les queda , o no , plazo
             'Segunda
             ' articulos con plazo que NO vienen en el fichero
             miSQL = "select IdTelefono ,nomclien,sclientfno.codclien,ImportePlazo,PlazosMeses,ArtPlazos from sclientfno"
             miSQL = miSQL & ",sclien where sclientfno.codclien=sclien.codclien AND operador = " & RecuperaValor(Me.Tag, 2) & " and ArtPlazos<>'' "
-            If i = 1 Then
+            If I = 1 Then
                 miSQL = miSQL & " AND "
             Else
                 miSQL = miSQL & " AND PlazosMeses >0 AND NOT "
             End If
-            miSQL = miSQL & "idtelefono IN (select Numero_de_telefono from telefono.telefono where "
-            miSQL = miSQL & " Fichero = '" & RecuperaValor(Me.Tag, 3) & "')"
+            miSQL = miSQL & "idtelefono IN "
+            
+            If RecuperaValor(Me.Tag, 2) = 3 Then   'vodafone
+                miSQL = miSQL & " (select cuenta_no from vodafonetxt.fac_cab)"
+            Else
+                miSQL = miSQL & " (select Numero_de_telefono from telefono.telefono where "
+                miSQL = miSQL & " Fichero = '" & RecuperaValor(Me.Tag, 3) & "')"
+            End If
             miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             
@@ -1777,13 +1842,15 @@ Private Sub CargarDatosTelefoniaVentaPlazos()
                 Color = -1
                 Set IT = lw(5).ListItems.Add(, , CStr(miRsAux!idtelefono))
                  
-                IT.SubItems(1) = CStr(miRsAux!NomClien)
-                IT.SubItems(2) = CStr(miRsAux!codClien)
+                IT.SubItems(1) = CStr(miRsAux!codClien)
+                IT.SubItems(2) = CStr(miRsAux!NomClien)
+                IT.ListSubItems(2).ToolTipText = miRsAux!NomClien '++
                 
                 IT.SubItems(3) = miRsAux!artplazos
+                IT.ListSubItems(3).ToolTipText = miRsAux!artplazos '++
                 IT.SubItems(4) = Format(miRsAux!ImportePlazo, FormatoCantidad)
                 IT.SubItems(5) = CStr(miRsAux!PlazosMeses)
-                If i = 1 Then
+                If I = 1 Then
                     If miRsAux!PlazosMeses > 0 Then
                         ImporteTotalFacturaVtaPlz = ImporteTotalFacturaVtaPlz + miRsAux!ImportePlazo
                         lw(5).Tag = lw(5).Tag & "X"
@@ -1832,7 +1899,41 @@ Private Sub CargarDatosTelefoniaVentaPlazos()
 End Sub
 
 
+Private Sub CargarNoVieneFicheroYEstanACtivos()
+    
+    Set miRsAux = New ADODB.Recordset
+    
+    miSQL = "select sclientfno.codclien,idtelefono,nomclien from sclientfno,sclien where "
+    miSQL = miSQL & " sclientfno.codclien = sclien.codclien "
+    miSQL = miSQL & " AND inactivo=0 and operador =" & RecuperaValor(Me.Tag, 2)
+    miSQL = miSQL & " AND not idtelefono IN (select Numero_de_telefono from telefono.telefono where "
+    miSQL = miSQL & " Fichero = '" & RecuperaValor(Me.Tag, 3) & "')"
+    miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If miRsAux.EOF Then
+        Me.chkCompaActivoSinVenr.Value = 0
+    
+    Else
+        While Not miRsAux.EOF
+                
+            Set IT = lwTelefoDe.ListItems.Add
+            IT.Text = miRsAux!idtelefono
+            IT.SubItems(1) = Format(miRsAux!codClien, "0000")
+            IT.SubItems(2) = DBLet(miRsAux!NomClien, "T")
+            IT.ListSubItems(2).ToolTipText = miRsAux!NomClien '++
+            
+            IT.ForeColor = vbGreen
+            IT.Bold = True
+            IT.ToolTipText = "No viene en fichero"
+            IT.Tag = 1
+            miSQL = ""
+            miRsAux.MoveNext
+        Wend
+    
+    End If
+    miRsAux.Close
+    Set miRsAux = Nothing
 
+End Sub
 
 
 
@@ -1847,5 +1948,9 @@ Private Sub OcultarNoVienenFichero()
             lwTelefoDe.ListItems.Remove NumRegElim
         End If
     Next
-    cmdOcultarNoVienenFichero.visible = False
+    'cmdOcultarNoVienenFichero.visible = False
 End Sub
+
+
+
+

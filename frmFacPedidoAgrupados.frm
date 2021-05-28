@@ -480,9 +480,9 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Public Cliente As Long
-Private WithEvents frmC3 As frmFacClientes3
+Private WithEvents frmC3 As frmBasico2
 Attribute frmC3.VB_VarHelpID = -1
-Private WithEvents frmFP As frmFacFormasPago
+Private WithEvents frmFP As frmBasico2 'frmFacFormasPago
 Attribute frmFP.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
@@ -496,7 +496,7 @@ Dim CadenaConsulta As String
 Dim gridCargado As Boolean 'Si el DataGrid ya tiene todos los Datos cargados.
                            'Para el RowColChange, si el grid no esta totalmente cargado el CargaTxtAux da error.
 
-Dim primeravez As Boolean
+Dim PrimeraVez As Boolean
 Dim Orden As Integer
 Dim Desce As Boolean
 
@@ -508,7 +508,7 @@ Private ColAlbaran As Collection
 
 Private Sub cmdAceptar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim TodoOk As Boolean
 
     On Error GoTo Error1
@@ -518,11 +518,11 @@ Dim TodoOk As Boolean
     Set ColAlbaran = New Collection
     If PrimerasComprobaciones Then
         TodoOk = True
-        For I = 1 To ColAlbaran.Count
+        For i = 1 To ColAlbaran.Count
             conn.BeginTrans
-            lblIndicador.Caption = "(" & I & "/" & ColAlbaran.Count & ") ..." & Mid(ColAlbaran.Item(I), 1, 0)
+            lblIndicador.Caption = "(" & i & "/" & ColAlbaran.Count & ") ..." & Mid(ColAlbaran.Item(i), 1, 0)
             lblIndicador.Refresh
-            If RealizarAlbaran(ColAlbaran.Item(I)) Then
+            If RealizarAlbaran(ColAlbaran.Item(i)) Then
                 conn.CommitTrans
                 
             Else
@@ -597,9 +597,9 @@ Private Sub DataGrid1_Scroll(Cancel As Integer)
     If txtAux.visible Then Cancel = 1
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
 
-    If primeravez Then
+    If PrimeraVez Then
        
         If Cliente >= 0 Then
             
@@ -625,7 +625,7 @@ Private Sub Form_Load()
     Next kCampo
 
     LimpiarCampos   'Limpia los campos TextBox
-    primeravez = True
+    PrimeraVez = True
     
     Text1(2).Text = Format(Now, "dd/mm/yyyy")
     PonerModo 1
@@ -643,7 +643,7 @@ End Sub
 
 
 Private Sub CargaGrid()
-Dim I As Byte
+Dim i As Byte
 Dim SQL As String
 On Error GoTo ECarga
 
@@ -655,9 +655,9 @@ On Error GoTo ECarga
     
     
     SQL = MontaSQLCarga()
-    CargaGridGnral DataGrid1, Me.Data1, SQL, primeravez, 360
+    CargaGridGnral DataGrid1, Me.Data1, SQL, PrimeraVez, 360
     
-    primeravez = False
+    PrimeraVez = False
         
     'Cod. Articulo
     DataGrid1.Columns(0).Caption = "NºPed."
@@ -673,42 +673,42 @@ On Error GoTo ECarga
     DataGrid1.Columns(3).Width = 2250
    
     
-    I = 3
-    DataGrid1.Columns(I + 1).Caption = "Articulo"
-    DataGrid1.Columns(I + 1).Width = 1450
+    i = 3
+    DataGrid1.Columns(i + 1).Caption = "Articulo"
+    DataGrid1.Columns(i + 1).Width = 1450
 
-    DataGrid1.Columns(I + 2).Caption = "Descripcion"
-    DataGrid1.Columns(I + 2).Width = 4300
+    DataGrid1.Columns(i + 2).Caption = "Descripcion"
+    DataGrid1.Columns(i + 2).Width = 4300
        
     
-    DataGrid1.Columns(I + 3).Caption = "Solicitadas"
-    DataGrid1.Columns(I + 3).Width = 1250
+    DataGrid1.Columns(i + 3).Caption = "Solicitadas"
+    DataGrid1.Columns(i + 3).Width = 1250
     
-    DataGrid1.Columns(I + 4).Caption = "Pdtes"
-    DataGrid1.Columns(I + 4).Width = 1260
-    
-    
-    DataGrid1.Columns(I + 5).Caption = "Servir"
-    DataGrid1.Columns(I + 5).Width = 1300
+    DataGrid1.Columns(i + 4).Caption = "Pdtes"
+    DataGrid1.Columns(i + 4).Width = 1260
     
     
-    DataGrid1.Columns(I + 6).Caption = "Resto"
-    DataGrid1.Columns(I + 6).Width = 1300
+    DataGrid1.Columns(i + 5).Caption = "Servir"
+    DataGrid1.Columns(i + 5).Width = 1300
     
     
-    DataGrid1.Columns(I + 7).Caption = " P"
-    DataGrid1.Columns(I + 7).Width = 600
+    DataGrid1.Columns(i + 6).Caption = "Resto"
+    DataGrid1.Columns(i + 6).Width = 1300
+    
+    
+    DataGrid1.Columns(i + 7).Caption = " P"
+    DataGrid1.Columns(i + 7).Width = 600
     
     
     
-    For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-        DataGrid1.Columns(I).Locked = True
-        If I > 5 Then
-            DataGrid1.Columns(I).Alignment = dbgRight
-            DataGrid1.Columns(I).NumberFormat = FormatoCantidad
+    For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+        DataGrid1.Columns(i).Locked = True
+        If i > 5 Then
+            DataGrid1.Columns(i).Alignment = dbgRight
+            DataGrid1.Columns(i).NumberFormat = FormatoCantidad
         End If
-    Next I
+    Next i
     DataGrid1.ScrollBars = dbgAutomatic
     gridCargado = True
 ECarga:
@@ -781,29 +781,30 @@ Private Sub frmFP_DatoSeleccionado(CadenaSeleccion As String)
     CadenaConsulta = CadenaSeleccion
 End Sub
 
-Private Sub imgBuscar_Click(index As Integer)
+Private Sub imgBuscar_Click(Index As Integer)
 
  
     Screen.MousePointer = vbHourglass
-    imgBuscar(0).Tag = index
+    imgBuscar(0).Tag = Index
     CadenaConsulta = ""
-    Select Case index
+    Select Case Index
         Case 0 'Codigo Almacen
-            Set frmC3 = New frmFacClientes3
-            frmC3.DatosADevolverBusqueda = "0|1|"
-            frmC3.Show vbModal
+            Set frmC3 = New frmBasico2
+            AyudaClientes frmC3, Text1(Index)
             Set frmC3 = Nothing
         Case 1 'Codigo Familia / Cod. Proveedor
-            Set frmFP = New frmFacFormasPago
-            frmFP.DatosADevolverBusqueda = "0|1|"
-            frmFP.Show vbModal
+'            Set frmFP = New frmFacFormasPago
+'            frmFP.DatosADevolverBusqueda = "0|1|"
+'            frmFP.Show vbModal
+            Set frmFP = New frmBasico2
+            AyudaFormasPago frmFP, Text1(Index)
             Set frmFP = Nothing
     End Select
     If CadenaConsulta <> "" Then
-        Text1(index).Text = RecuperaValor(CadenaConsulta, 1)
-        Text2(index).Text = RecuperaValor(CadenaConsulta, 2)
+        Text1(Index).Text = RecuperaValor(CadenaConsulta, 1)
+        Text2(Index).Text = RecuperaValor(CadenaConsulta, 2)
         CadenaConsulta = ""
-        If index = 0 Then
+        If Index = 0 Then
             Screen.MousePointer = vbHourglass
             txtAux.Text = ""
             Text1_LostFocus 0
@@ -816,7 +817,7 @@ Private Sub imgBuscar_Click(index As Integer)
 End Sub
 
 
-Private Sub imgFecha_Click(index As Integer)
+Private Sub imgFecha_Click(Index As Integer)
     Screen.MousePointer = vbHourglass
    Set frmF = New frmCal
    frmF.Fecha = Now
@@ -831,8 +832,8 @@ Private Sub imgFecha_Click(index As Integer)
    
 End Sub
 
-Private Sub Label1_Click(index As Integer)
-    If index = 2 Then
+Private Sub Label1_Click(Index As Integer)
+    If Index = 2 Then
         If vUsu.Nivel <= 1 Then
             If Combo1.ListCount = 1 Then
                 Combo1.AddItem "Presupuesto"
@@ -842,27 +843,27 @@ Private Sub Label1_Click(index As Integer)
     End If
 End Sub
 
-Private Sub Text1_GotFocus(index As Integer)
-    ConseguirFoco Text1(index), 3
+Private Sub Text1_GotFocus(Index As Integer)
+    ConseguirFoco Text1(Index), 3
 End Sub
 
 
-Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
 
-Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
 
-Private Sub Text1_LostFocus(index As Integer)
+Private Sub Text1_LostFocus(Index As Integer)
 Dim campo As String
 Dim tabla As String
 
-    If Not PerderFocoGnral(Text1(index), 3) Then Exit Sub
+    If Not PerderFocoGnral(Text1(Index), 3) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -870,14 +871,14 @@ Dim tabla As String
     
     
     
-    If index < 2 Then
-        If Text1(index).Text = "" Then
-            Text2(index).Text = ""
+    If Index < 2 Then
+        If Text1(Index).Text = "" Then
+            Text2(Index).Text = ""
         Else
-            If index = 1 Then
+            If Index = 1 Then
                 campo = "nomforpa"
                 tabla = "sforpa"
-                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, tabla, campo)
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, tabla, campo)
                 
             
             
@@ -886,24 +887,24 @@ Dim tabla As String
                 campo = "nomclien"
                 tabla = "sclien"
                 CadenaConsulta = "codforpa"
-                Text2(index).Text = DevuelveDesdeBD(conAri, campo, tabla, "codclien", Text1(index).Text, "N", CadenaConsulta)
-                If Text2(index).Text <> "" Then
+                Text2(Index).Text = DevuelveDesdeBD(conAri, campo, tabla, "codclien", Text1(Index).Text, "N", CadenaConsulta)
+                If Text2(Index).Text <> "" Then
                     Text1(1).Text = CadenaConsulta
                     CadenaConsulta = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", CadenaConsulta)
                     Text2(1).Text = CadenaConsulta
                 End If
             End If
             
-            If Text1(index).Text <> "" And Text2(index).Text = "" Then
-                Text1(index).Text = ""
-                If index = 0 Then PonerFoco Text1(index)
+            If Text1(Index).Text <> "" And Text2(Index).Text = "" Then
+                Text1(Index).Text = ""
+                If Index = 0 Then PonerFoco Text1(Index)
             Else
-                If index = 0 Then CargaGrid
+                If Index = 0 Then CargaGrid
             End If
             
         End If
     Else
-        PonerFormatoFecha Text1(index)
+        PonerFormatoFecha Text1(Index)
     End If
 
 End Sub
@@ -966,15 +967,15 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, 3, Cerrar
+    KEYpressGnral KeyAscii, 3, cerrar
    ' If cerrar Then Unload Me
 End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
        
     
@@ -986,9 +987,9 @@ Dim b As Boolean
     
     b = True
     
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = b
+    Next i
 
 
 
@@ -1172,7 +1173,7 @@ On Error GoTo ePrimerasComprobaciones
     CadenaConsulta = ""
     Set vCli = New CCliente
     If vCli.LeerDatos(Text1(0).Text) Then
-        If vCli.ClienteBloqueado Then CadenaConsulta = "N"
+        If vCli.ClienteBloqueado(2, False) Then CadenaConsulta = "N"
     Else
         MsgBox "Error leyendo cliente", vbExclamation
         CadenaConsulta = "N"

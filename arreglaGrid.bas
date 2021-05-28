@@ -8,7 +8,7 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
     Dim camp As String
     Dim Mens As String
     Dim difer As Integer
-    Dim i As Integer
+    Dim I As Integer
     Dim K As Integer
     Dim posi As Integer
     Dim posi2 As Integer
@@ -123,7 +123,7 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
                         'en obj_ant tindré el 1r objecte per darrere que siga visible
                         Select Case A(2, fil - O)
                             Case "T" 'objecte anterior a text es text
-                                obj.Width = grid.Columns(C).Width - 55
+                                obj.Width = grid.Columns(C).Width - 60 '???
                                 'obj.Width = grid.Columns(c).Width - 38
                                 obj.Left = obj_ant.Left + obj_ant.Width + 60
                                 'obj.Left = obj_ant.Left + obj_ant.Width + 38
@@ -200,10 +200,10 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
     Wend
 
     'No permitir canviar tamany de columnes
-    For i = 0 To grid.Columns.Count - 1
-         grid.Columns(i).Locked = True
-         grid.Columns(i).AllowSizing = False
-    Next i
+    For I = 0 To grid.Columns.Count - 1
+         grid.Columns(I).Locked = True
+         grid.Columns(I).AllowSizing = False
+    Next I
 
 '    If grid.Width - TotalAncho <> difer Then
 '        mens = "Es recomana que el total d'amples de les columnes per a este DataGrid siga de "
@@ -254,11 +254,11 @@ End Function
 
 Public Function FormatoCampo2(ByRef objec As Object) As String
 'Devuelve el formato del campo en el TAg: "0000"
-Dim mTag As CTag
+Dim mTag As cTag
 Dim cad As String
 On Error GoTo EFormatoCampo2
 
-    Set mTag = New CTag
+    Set mTag = New cTag
     mTag.Cargar objec
     If mTag.Cargado Then
         FormatoCampo2 = mTag.Formato

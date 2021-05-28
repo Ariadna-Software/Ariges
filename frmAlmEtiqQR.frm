@@ -60,7 +60,6 @@ Begin VB.Form frmAlmEtiqQR
          Height          =   375
          Index           =   2
          Left            =   3840
-         Locked          =   -1  'True
          MaxLength       =   700
          MultiLine       =   -1  'True
          TabIndex        =   10
@@ -347,8 +346,13 @@ Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub Text1_LostFocus(index As Integer)
-    If index = 3 Then
-        If Not PonerFormatoEntero(Text1(index)) Then Text1(index).Text = "1"
+    If index = 2 Or index = 3 Then
+        If Not PonerFormatoEntero(Text1(index)) Then
+            Text1(index).Text = "1"
+            If index = 2 Then Text1(index).Text = RecuperaValor(Datos, 5)
+            If Text1(index).Text = "" Then Text1(index).Text = "1"
+            
+        End If
     End If
 End Sub
 
@@ -413,19 +417,19 @@ Private Function InsertarTmp() As Boolean
     Datos = Datos & "," & DBSet(Text1(2).Text, "T") & "," & DBSet(Me.lblEan.Caption, "T") & ")"
     If Not ejecutar(Datos, False) Then Exit Function
     
-    adodc1.ConnectionString = conn
-    adodc1.RecordSource = "Select * from tmpetienvas WHERE codusu =" & vUsu.Codigo
-    adodc1.Refresh
+    Adodc1.ConnectionString = conn
+    Adodc1.RecordSource = "Select * from tmpetienvas WHERE codusu =" & vUsu.Codigo
+    Adodc1.Refresh
 '
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         'MAAAAAAAAAAAAL
         MsgBox "Error insertando imagen", vbExclamation
         Exit Function
     Else
         
         
-        GuardarBinary adodc1.Recordset!img, App.Path & "\p1.jpg"
-        adodc1.Recordset.Update
+        GuardarBinary Adodc1.Recordset!img, App.Path & "\p1.jpg"
+        Adodc1.Recordset.Update
         
         
         

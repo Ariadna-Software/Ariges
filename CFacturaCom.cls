@@ -640,7 +640,7 @@ End Sub
 
 Public Function InsertarEnTesoreria(MenError As String) As Boolean
 'Guarda datos de Tesoreria en tablas: ariges.svenci y en conta.scobros
-Dim b As Boolean
+Dim B As Boolean
 Dim RS As ADODB.Recordset
 Dim rsVenci As ADODB.Recordset
 Dim SQL As String
@@ -888,14 +888,14 @@ Dim I As Byte
         ConnConta.Execute SQL
     End If
 
-    b = True
+    B = True
     
 EInsertarTesoreria:
     If Err.Number <> 0 Then
-        b = False
+        B = False
         MenError = "Error al insertar en Tesoreria: " & Err.Description
     End If
-    InsertarEnTesoreria = b
+    InsertarEnTesoreria = B
 End Function
 
 'Si es LiquidacionProveedores entonces
@@ -906,7 +906,7 @@ End Function
 Public Function TraspasoAlbaranesAFactura(cadSQL As String, InsertarEnLaTesoreria As Boolean, MarcarAlbaranesComoContabilizados As Boolean, LiquidacionProveedores As Boolean) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Albaranes que vamos a Facturar
 'Desde Albaranes Genera las Facturas correspondientes
-Dim b As Boolean
+Dim B As Boolean
 Dim MenError As String
 Dim ImporteAuxiliarTesoreria As Currency
 
@@ -925,29 +925,29 @@ Dim ImporteAuxiliarTesoreria As Currency
     
     
     'Insertar la Factura
-    b = InsertarFactura(cadSQL, MenError)
+    B = InsertarFactura(cadSQL, MenError)
     
-    If b Then
+    If B Then
         'Insertar en Tesoreria
         
         If InsertarEnLaTesoreria Then
             
-            b = InsertarEnTesoreria(MenError)
+            B = InsertarEnTesoreria(MenError)
             
         End If
         
         
         If MarcarAlbaranesComoContabilizados Then
-            If b Then b = Me.MarcarContabilizada(MenError)
+            If B Then B = Me.MarcarContabilizada(MenError)
         End If
         
         'Eliminar los Albaranes y sus lineas
-        If b Then
-            b = EliminarAlbaranes(cadSQL, MenError)
+        If B Then
+            B = EliminarAlbaranes(cadSQL, MenError)
         End If
     End If
 
-     If b Then
+     If B Then
         conn.CommitTrans
         ConnConta.CommitTrans
         TraspasoAlbaranesAFactura = True
@@ -975,29 +975,29 @@ End Function
 
 Private Function InsertarFactura(cadSQL As String, cadError As String) As Boolean
 'Insertamos en las tablas de factura de proveedor: scafpc, scafpa, slifpc
-Dim b As Boolean
+Dim B As Boolean
     
     InsertarFactura = False
     
     
     'Cabecera Factura
     cadError = ""
-    b = InsertarCabeceraFactu(cadError)
-    If Not b Then
+    B = InsertarCabeceraFactu(cadError)
+    If Not B Then
 '        cadError = "Error al insertar cabecera de factura"
         Exit Function
     End If
     
     'Cabeceras Albaranes de la Factura
-    b = InsertarCabAlbaranesFactu(cadSQL, cadError)
-    If Not b Then
+    B = InsertarCabAlbaranesFactu(cadSQL, cadError)
+    If Not B Then
 '        cadError = "Error al insertar cabecera albaranes de factura"
         Exit Function
     End If
     
     'Insertar lineas de la factura
-    b = InsertarLineasFactu(cadSQL, cadError)
-    If Not b Then
+    B = InsertarLineasFactu(cadSQL, cadError)
+    If Not B Then
 '        cadError = "Error al insertar líneas de factura"
         Exit Function
     End If
@@ -1077,8 +1077,8 @@ Dim SQL As String
 
     On Error GoTo EInsertarAlb
 
-    SQL = "INSERT INTO scafpa (codprove,numfactu,fecfactu,numalbar,fechaalb,numpedpr,fecpedpr,codtrab1,codtrab2,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega) "
-    SQL = SQL & " SELECT " & Proveedor & " as codprove," & DBSet(Numfactu, "T") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & " numalbar,fechaalb,numpedpr,fecpedpr,codtrab1,codtraba,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega "
+    SQL = "INSERT INTO scafpa (codprove,numfactu,fecfactu,numalbar,fechaalb,numpedpr,fecpedpr,codtrab1,codtrab2,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega,fentrada) "
+    SQL = SQL & " SELECT " & Proveedor & " as codprove," & DBSet(Numfactu, "T") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & " numalbar,fechaalb,numpedpr,fecpedpr,codtrab1,codtraba,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega,fentrada "
     SQL = SQL & " FROM scaalp WHERE " & cadSQL
     conn.Execute SQL
 

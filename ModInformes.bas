@@ -77,9 +77,12 @@ Public Function RegistrosAListar(vSQL As String, Optional vBD As Byte) As Byte
 'Devuelve si hay algun registro para mostrar en el Informe con la seleccion
 'realizada. Si no hay nada que mostrar devuelve 0 y no abrirá el informe
 Dim RS As ADODB.Recordset
+Dim RrCursor As Byte
 
     On Error GoTo ErrReg
 
+    RrCursor = Screen.MousePointer
+    Screen.MousePointer = vbHourglass
     Set RS = New ADODB.Recordset
     If vBD = conConta Then
         RS.Open vSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -99,12 +102,13 @@ Dim RS As ADODB.Recordset
     End If
     RS.Close
     Set RS = Nothing
-
+    Screen.MousePointer = RrCursor
     Exit Function
     
 ErrReg:
     RegistrosAListar = 0
     MuestraError Err.Number, "Comprobar si hay registros seleccionados", Err.Description
+    Screen.MousePointer = RrCursor
 End Function
 
 
@@ -395,73 +399,73 @@ End Sub
 Public Function PonerParamEmpresa(cadParam As String, numParam As Byte) As Boolean
 Dim DomiEmp As String
 Dim WebEmp As String
-Dim cad As String
+Dim Cad As String
 
         DomiEmp = vParam.DomicilioEmpresa & " - " & vParam.CPostal & " " & vParam.Poblacion
         If vParam.Provincia <> vParam.Poblacion Then DomiEmp = DomiEmp & " " & vParam.Provincia
         DomiEmp = DomiEmp & " - Telf. " & vParam.Telefono & " - Fax. " & vParam.Fax
         WebEmp = "Internet: " & vParam.WebEmpresa & " - E-mail: " & vParam.MailEmpresa
         'Resto parametros
-        cad = ""
-        cad = cad & "pNomEmpre=""" & vParam.NombreEmpresa & """|"
-        cad = cad & "pDomEmpre=""" & DomiEmp & """|"
-        cad = cad & "pWebEmpre=""" & WebEmp & """|"
+        Cad = ""
+        Cad = Cad & "pNomEmpre=""" & vParam.NombreEmpresa & """|"
+        Cad = Cad & "pDomEmpre=""" & DomiEmp & """|"
+        Cad = Cad & "pWebEmpre=""" & WebEmp & """|"
         
         numParam = numParam + 3
-        cadParam = cadParam & cad
+        cadParam = cadParam & Cad
         PonerParamEmpresa = True
 End Function
 
 
-Public Function PonerParamRPT2(Indice As Byte, cadParam As String, numParam As Byte, nomDocu As String, ByRef ImpresionDirecta As Boolean, NomPDF As String, ByRef MultiInforme As Integer) As Boolean
+Public Function PonerParamRPT2(indice As Byte, cadParam As String, numParam As Byte, nomDocu As String, ByRef ImpresionDirecta As Boolean, NomPDF As String, ByRef MultiInforme As Integer) As Boolean
 Dim vParamRpt As CParamRpt 'Tipos de Documentos
-Dim cad As String
+Dim Cad As String
 
     Set vParamRpt = New CParamRpt
     MultiInforme = 0
     NomPDF = ""  'Reestablezco
     ImpresionDirecta = False 'psi acaso
     
-    If vParamRpt.Leer(Indice) = 1 Then
-        cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
-        MsgBox cad & "Debe configurar la aplicación.", vbExclamation
+    If vParamRpt.Leer(indice) = 1 Then
+        Cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
+        MsgBox Cad & "Debe configurar la aplicación.", vbExclamation
         Set vParamRpt = Nothing
         PonerParamRPT2 = False
         Exit Function
     Else
         If cadParam = "" Then
-            cad = "|"
+            Cad = "|"
         Else
-            cad = ""
+            Cad = ""
         End If
-        cad = cad & "pCodigoISO=""" & vParamRpt.CodigoISO & """|"
+        Cad = Cad & "pCodigoISO=""" & vParamRpt.CodigoISO & """|"
         If vParamRpt.CodigoRevision = -1 Then
-            cad = cad & "pCodigoRev=""" & "" & """|"
+            Cad = Cad & "pCodigoRev=""" & "" & """|"
         Else
-            cad = cad & "pCodigoRev=""" & Format(vParamRpt.CodigoRevision, "00") & """|"
+            Cad = Cad & "pCodigoRev=""" & Format(vParamRpt.CodigoRevision, "00") & """|"
         End If
         numParam = numParam + 2
         If vParamRpt.LineaPie1 <> "" Then
-            cad = cad & "pLinea1=""" & vParamRpt.LineaPie1 & """|"
+            Cad = Cad & "pLinea1=""" & vParamRpt.LineaPie1 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie2 <> "" Then
-            cad = cad & "pLinea2=""" & vParamRpt.LineaPie2 & """|"
+            Cad = Cad & "pLinea2=""" & vParamRpt.LineaPie2 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie3 <> "" Then
-            cad = cad & "pLinea3=""" & vParamRpt.LineaPie3 & """|"
+            Cad = Cad & "pLinea3=""" & vParamRpt.LineaPie3 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie4 <> "" Then
-            cad = cad & "pLinea4=""" & vParamRpt.LineaPie4 & """|"
+            Cad = Cad & "pLinea4=""" & vParamRpt.LineaPie4 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie5 <> "" Then
-            cad = cad & "pLinea5=""" & vParamRpt.LineaPie5 & """|"
+            Cad = Cad & "pLinea5=""" & vParamRpt.LineaPie5 & """|"
             numParam = numParam + 1
         End If
-        cadParam = cadParam & cad
+        cadParam = cadParam & Cad
         nomDocu = vParamRpt.Documento
         NomPDF = vParamRpt.PDFrpt
         ImpresionDirecta = vParamRpt.ImprimeDirecto

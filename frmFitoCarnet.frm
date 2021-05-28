@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFitoCarnet 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Carnet manipulador fitosanitarios"
@@ -183,7 +183,7 @@ Option Explicit
 
 Public Cliente As Long
 
-Private WithEvents frmCli As frmFacClientes3
+Private WithEvents frmCli As frmBasico2
 Attribute frmCli.VB_VarHelpID = -1
 
 Dim cad As String

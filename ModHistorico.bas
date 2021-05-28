@@ -96,7 +96,7 @@ On Error Resume Next
         
         
         
-      Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE" '[1.3.1] 'Albaran de venta a clientes
+      Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE", "ALB", "ALD" '[1.3.1] 'Albaran de venta a clientes
         NomTabla = "scaalb"
         NomTablaH = "schalb"
         NomTablaLinH = "slhalb"
@@ -153,11 +153,11 @@ On Error Resume Next
         NomTablaLinH = "slhalp"
         SQL = " (numalbar,fechaalb,codprove,codigusu,fechelim,trabelim,codincid,nomprove,domprove,"
         SQL = SQL & "codpobla,pobprove,proprove,nifprove,telprove,codforpa,codtraba,codtrab1,dtoppago,dtognral,"
-        SQL = SQL & "observa1,observa2,observa3,observa4,observa5,numpedpr,fecpedpr,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega) "
+        SQL = SQL & "observa1,observa2,observa3,observa4,observa5,numpedpr,fecpedpr,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega,fentrada) "
         SQL = SQL & " SELECT numalbar,fechaalb,codprove," & vUsu.Codigo Mod 1000 & " as codigusu," & cadeN & ","
         SQL = SQL & "nomprove,domprove,codpobla,pobprove,proprove,nifprove,telprove,"
         SQL = SQL & "codforpa,codtraba,codtrab1,dtoppago,dtognral,"
-        SQL = SQL & "observa1,observa2,observa3,observa4,observa5,numpedpr,fecpedpr,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega"
+        SQL = SQL & "observa1,observa2,observa3,observa4,observa5,numpedpr,fecpedpr,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega,fentrada"
       
       Case "PEC" 'Pedidos a Proveedores (Compras)
         NomTabla = "scappr"
@@ -258,11 +258,11 @@ On Error Resume Next
       Case "PEV" 'pedidos ventas a clientes
         NomTablaLin = "sliped"
         NomTablaLinH = "slhped"
-        SQL = " SELECT scaped.numpedcl,scaped.fecpedcl,sliped.numlinea,sliped.codalmac,sliped.codartic,sliped.nomartic,sliped.ampliaci,sliped.cantidad,servidas,numbultos,precioar,dtoline1,dtoline2,importel,origpre,numlote,codccost,codtipor,codcapit,solicitadas,idL "
+        SQL = " SELECT scaped.numpedcl,scaped.fecpedcl,sliped.numlinea,sliped.codalmac,sliped.codartic,sliped.nomartic,sliped.ampliaci,sliped.cantidad,servidas,numbultos,precioar,dtoline1,dtoline2,importel,origpre,numlote,codccost,codtipor,codcapit,solicitadas,idL,precoste "
         SQL = SQL & " FROM scaped INNER JOIN sliped on scaped.numpedcl=sliped.numpedcl "
         SQL = SQL & " WHERE " & cadWhere
         '25-JUN: pvpInferior
-      Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE" '[1.3.1] 'Albaranes ventas a clientes, Mantenimientos y Reparaciones
+      Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE", "ALD", "ALB" '[1.3.1] 'Albaranes ventas a clientes, Mantenimientos y Reparaciones
         NomTablaLin = "slialb"
         NomTablaLinH = "slhalb"
         SQL = " SELECT scaalb.codtipom,scaalb.numalbar,scaalb.fechaalb,slialb.numlinea,slialb.codalmac,slialb.codartic,slialb.nomartic,slialb.ampliaci,slialb.cantidad,slialb.numbultos,precioar,dtoline1,dtoline2,importel,origpre ,codproveX,numlote,codccost"
@@ -380,7 +380,7 @@ Dim EsAlbaran As Boolean
       Case "PEV" 'pedidos ventas  a clientes
         SQL = "Select numpedcl from scaped WHERE " & cadWhere
         cadAux = " numpedcl IN "
-      Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE" '[1.3.1] 'albaranes ventas a clientes,Mantenimientos y Reparaciones
+      Case "ALV", "ALM", "ALR", "ALS", "ART", "ALI", "ALT", "ALO", "ALE", "ALD", "ALB" '[1.3.1] 'albaranes ventas a clientes,Mantenimientos y Reparaciones
         SQL = "Select numalbar from scaalb WHERE " & cadWhere
         cadAux = "codtipom=" & DBSet(CodTipoMov, "T") & " AND numalbar IN "
         EsAlbaran = True
@@ -456,6 +456,9 @@ Dim EsAlbaran As Boolean
                 SQL = SQL & cadAux
                 ejecutar SQL, False
                 
+                SQL = "DELETE from scaalb_eu where "
+                SQL = SQL & cadAux
+                ejecutar SQL, False
                 
         End If
     

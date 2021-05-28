@@ -746,11 +746,11 @@ Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que 
 Public DeConsulta As Boolean 'Muestra Form para consulta, solo buscar y ver todos activos
 
 Public Event DatoSeleccionado(CadenaSeleccion As String)
-Private WithEvents frmC As frmFacClientes3
+Private WithEvents frmC As frmBasico2
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents FrmArt As frmAlmArticu2   'Form Articulos
+Private WithEvents FrmArt As frmBasico2   'Form Articulos
 Attribute FrmArt.VB_VarHelpID = -1
-Private WithEvents frmProv As frmComProveedores
+Private WithEvents frmProv As frmBasico2 '%=%=frmComProveedores
 Attribute frmProv.VB_VarHelpID = -1
 
 Dim PrimeraVez As Boolean
@@ -938,7 +938,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim Cad As String
+Dim cad As String
 Dim anc As Single
 Dim i As Integer
 
@@ -984,9 +984,9 @@ Dim i As Integer
          
          anc = ObtenerAlto(DataGrid1, 10)
          PonerModo 4
-         Cad = ""
+         cad = ""
          For i = 0 To 2
-             Cad = Cad & DataGrid1.Columns(i).Text & "|"
+             cad = cad & DataGrid1.Columns(i).Text & "|"
          Next i
          'Llamamos al form
          For i = 0 To txtAux.Count - 1
@@ -1075,13 +1075,13 @@ Dim SQL As String
         If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     
         SQL = "DELETE FROM slotesgeneralitatmov"
-        SQL = SQL & " WHERE idlote =" & adodc1.Recordset!Id & " AND idmov=" & Adodc2.Recordset!idmov
+        SQL = SQL & " WHERE idlote =" & adodc1.Recordset!ID & " AND idmov=" & Adodc2.Recordset!idmov
         conn.Execute SQL
         CargaGrid2 True
         PonerFora True
     Else
         'Eliminar normal
-        SQL = DevuelveDesdeBD(conAri, "idlote", "slotesgeneralitatmov", "idlote", CStr(adodc1.Recordset!Id))
+        SQL = DevuelveDesdeBD(conAri, "idlote", "slotesgeneralitatmov", "idlote", CStr(adodc1.Recordset!ID))
         If SQL <> "" Then
             MsgBox "Existen movimientos de ese LOTE", vbExclamation
             Exit Sub
@@ -1095,7 +1095,7 @@ Dim SQL As String
         If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
             NumRegElim = Me.adodc1.Recordset.AbsolutePosition
             'Hay que eliminar
-            SQL = "Delete from slotesgeneralitat where id=" & adodc1.Recordset!Id
+            SQL = "Delete from slotesgeneralitat where id=" & adodc1.Recordset!ID
             conn.Execute SQL
             limpiar Me
             CancelaADODC Me.adodc1
@@ -1112,7 +1112,7 @@ End Sub
 
 
 Private Function InserarModificar() As Boolean
-Dim vtag As CTag
+Dim vtag As cTag
 Dim SQL As String
 
     On Error GoTo eInserarModificar
@@ -1120,7 +1120,7 @@ Dim SQL As String
     CadenaConsulta = "(ID"
     SQL = ""
     If Modo = 3 Then SQL = Val(DevuelveDesdeBD(conAri, "max(id)", "slotesgeneralitat", "1", "1")) + 1
-    Set vtag = New CTag
+    Set vtag = New cTag
     'vtAG(0) NO entra
     For i = 1 To Me.txtAux.Count - 1
         If Not (i = 3 Or i = 5) Then '3l 3 es nomartic
@@ -1148,7 +1148,7 @@ Dim SQL As String
     
     Else
         SQL = Mid(SQL, 2)
-        SQL = "UPDATE slotesgeneralitat SET " & SQL & " WHERE id =" & adodc1.Recordset!Id
+        SQL = "UPDATE slotesgeneralitat SET " & SQL & " WHERE id =" & adodc1.Recordset!ID
     End If
     
     conn.Execute SQL
@@ -1253,10 +1253,11 @@ Private Sub cmdAux_Click(Index As Integer)
     
     CadenaConsulta = ""
     If Index = 0 Then
-        Set FrmArt = New frmAlmArticu2
+        Set FrmArt = New frmBasico2
         'FrmArt.DatosADevolverBusqueda3 = "@1@" 'Poner en Modo busqueda
-        FrmArt.DesdeTPV = False
-        FrmArt.Show vbModal
+'        FrmArt.DesdeTPV = False
+'        FrmArt.Show vbModal
+        AyudaArticulos FrmArt, txtAux(2).Text
         Set FrmArt = Nothing
         If CadenaConsulta <> "" Then
             Me.txtAux(2).Text = RecuperaValor(CadenaConsulta, 1)
@@ -1267,10 +1268,13 @@ Private Sub cmdAux_Click(Index As Integer)
     Else
         'Proveedor
         
-        Set frmProv = New frmComProveedores
-        frmProv.DatosADevolverBusqueda = "1"
-        frmProv.Show vbModal
+'        Set frmProv = New frmComProveedores
+'        frmProv.DatosADevolverBusqueda = "1"
+'        frmProv.Show vbModal
+        Set frmProv = New frmBasico2
+        AyudaProveedores frmProv, txtAux(4)
         Set frmProv = Nothing
+        
         If CadenaConsulta <> "" Then
             Me.txtAux(4).Text = RecuperaValor(CadenaConsulta, 1)
             Me.txtAux(5).Text = RecuperaValor(CadenaConsulta, 2)
@@ -1281,10 +1285,10 @@ Private Sub cmdAux_Click(Index As Integer)
 End Sub
 
 Private Sub cmdAux2_Click()
-Dim Cad As String
+Dim cad As String
 Dim MostrarAutorizados As Boolean
 
-        Cad = ""
+        cad = ""
         MostrarAutorizados = False
         'Llamamos al manipulador de carnet fitosnaitarios
         'NO tiene puesto cliente
@@ -1292,11 +1296,9 @@ Dim MostrarAutorizados As Boolean
             'LLAMAMOS A CLIENTE
               'Cliente
             CadenaConsulta = ""
-            Set frmC = New frmFacClientes3
-            frmC.DatosADevolverBusqueda = "1|"
-            frmC.Show vbModal
+            Set frmC = New frmBasico2
+            AyudaClientes frmC, txtAux2(1)
             Set frmC = Nothing
-            
         
             If CadenaConsulta = "" Then
                 CadenaConsultaSelect
@@ -1304,33 +1306,33 @@ Dim MostrarAutorizados As Boolean
             End If
             txtAux2(1).Text = RecuperaValor(CadenaConsulta, 1)
             txtAux2(2).Text = RecuperaValor(CadenaConsulta, 2)
-            Cad = RecuperaValor(CadenaConsulta, 1)
+            cad = RecuperaValor(CadenaConsulta, 1)
         Else
-            Cad = txtAux2(1).Text
-            CadenaConsulta = Cad & "|" & txtAux2(2).Text & "|"
+            cad = txtAux2(1).Text
+            CadenaConsulta = cad & "|" & txtAux2(2).Text & "|"
         End If
         
         'Veremos si tiene autrizados
-        Cad = DevuelveDesdeBD(conAri, "count(*)", "sclienmani", "codclien", Cad)
+        cad = DevuelveDesdeBD(conAri, "count(*)", "sclienmani", "codclien", cad)
         
         'Si tiene autirzados muestro el frm de seleeccionar
-        If Val(Cad) > 0 Then
+        If Val(cad) > 0 Then
             MostrarAutorizados = True
             CadenaDesdeOtroForm = ""
         Else
             'Voy a poner los datos del cliente ya que NO tiene autirzados
             'ListView1.ListItems(NumRegElim).SubItems(4) = IIf(miRsAux!Tipo = 2, "Cualificado", "Básico")
-            Cad = "concat(coalesce(ManipuladorNumCarnet,''),'|',coalesce(DATE_FORMAT(ManipuladorFecCaducidad,'%d/%m/%Y'),''),'|',coalesce(nomclien,''),'|'"
-            Cad = Cad & ",coalesce(If(ManipuladortipoCarnet = 2, ""Cualificado"", ""Básico""),'|'),'|')"
-            Cad = DevuelveDesdeBD(conAri, Cad, "sclien", "codclien", RecuperaValor(CadenaConsulta, 1))
+            cad = "concat(coalesce(ManipuladorNumCarnet,''),'|',coalesce(DATE_FORMAT(ManipuladorFecCaducidad,'%d/%m/%Y'),''),'|',coalesce(nomclien,''),'|'"
+            cad = cad & ",coalesce(If(ManipuladortipoCarnet = 2, ""Cualificado"", ""Básico""),'|'),'|')"
+            cad = DevuelveDesdeBD(conAri, cad, "sclien", "codclien", RecuperaValor(CadenaConsulta, 1))
             
-            If Len(Cad) <= 4 Then
-                Cad = ""
+            If Len(cad) <= 4 Then
+                cad = ""
             Else
-                If Trim(RecuperaValor(Cad, 1)) = "" Then Cad = ""
+                If Trim(RecuperaValor(cad, 1)) = "" Then cad = ""
             End If
             
-            If Cad = "" Then
+            If cad = "" Then
                 MsgBox "Sin carnet de manipulador ni autorizados" & vbCrLf & RecuperaValor(CadenaConsulta, 2), vbExclamation
                 txtAux2(2).Text = ""
                 txtAux2(1).Text = ""
@@ -1343,7 +1345,7 @@ Dim MostrarAutorizados As Boolean
                 txtAux2(1).Text = RecuperaValor(CadenaConsulta, 1)
                 txtAux2(2).Text = RecuperaValor(CadenaConsulta, 2)
             End If
-            CadenaDesdeOtroForm = Cad
+            CadenaDesdeOtroForm = cad
         End If
         CadenaConsultaSelect
             
@@ -1421,7 +1423,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Modo = 5 Then
         Me.lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
@@ -1437,9 +1439,9 @@ Dim Cad As String
             Exit Sub
         End If
     
-        Cad = adodc1.Recordset.Fields(0) & "|"
-        Cad = Cad & adodc1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(Cad)
+        cad = adodc1.Recordset.Fields(0) & "|"
+        cad = cad & adodc1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(cad)
         Unload Me
     End If
 End Sub
@@ -1890,7 +1892,7 @@ Dim SQL As String
     SQL = SQL & " slotesgeneralitatmov.ManipuladorFecCaducidad ,If(TipoCarnet = 2, ""Cualificado"", ""Básico"") , observa, idMov"
     SQL = SQL & " from slotesgeneralitatmov,sclien where slotesgeneralitatmov.codclien=sclien.codclien and idLote = "
     If enlaza Then
-        SQL = SQL & adodc1.Recordset!Id
+        SQL = SQL & adodc1.Recordset!ID
     Else
         SQL = SQL & " -1"
     End If
@@ -1960,7 +1962,7 @@ Private Sub txtAux2_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAux2_LostFocus(Index As Integer)
-Dim Cad As String
+Dim cad As String
 
     Select Case Index
     Case 0
@@ -1968,24 +1970,24 @@ Dim Cad As String
             
     
     Case 1
-        Cad = ""
+        cad = ""
         
         If PonerFormatoEntero(txtAux2(Index)) Then
             
-            Cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtAux2(Index))
-            If Cad = "" Then
+            cad = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtAux2(Index))
+            If cad = "" Then
                 MsgBox "No existe el cliente: " & txtAux2(Index).Text, vbExclamation
                 txtAux2(Index) = ""
                 PonerFoco txtAux2(Index)
                 
             Else
-                txtAux2(Index + 1) = Cad
+                txtAux2(Index + 1) = cad
                 cmdAux2_Click
             End If
             
         End If
         
-        If Cad = "" Then
+        If cad = "" Then
             For i = 1 To 7
                 If i <> 3 Then txtAux2(i).Text = ""
             Next
@@ -2020,7 +2022,7 @@ Dim Suma As Currency
     C = ""
     If ModificaLineas = 2 Then C = " idmov<>" & Adodc2.Recordset!idmov & " AND "
     C = C & " idLote "
-    C = DevuelveDesdeBD(conAri, "sum(cantidad)", "slotesgeneralitatmov", C, CStr(adodc1.Recordset!Id))
+    C = DevuelveDesdeBD(conAri, "sum(cantidad)", "slotesgeneralitatmov", C, CStr(adodc1.Recordset!ID))
     If C = "" Then C = "0"
     Suma = ImporteFormateado(C)
     
@@ -2072,14 +2074,14 @@ Dim Suma As Currency
         CadenaConsulta = Replace(CadenaDesdeOtroForm, "|", ",")
         CadenaConsulta = Mid(CadenaConsulta, 1, Len(CadenaConsulta) - 1) 'quitamos el ultimo pipe
         CadenaConsulta = "INSERT INTO slotesgeneralitatmov(idMov,idLote," & CadenaConsulta
-        CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "max(idMov)", "slotesgeneralitatmov", "idlote", CStr(adodc1.Recordset!Id))
-        CadenaConsulta = CadenaConsulta & ") VALUES (" & Val(CadenaDesdeOtroForm) + 1 & "," & CStr(adodc1.Recordset!Id)
+        CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "max(idMov)", "slotesgeneralitatmov", "idlote", CStr(adodc1.Recordset!ID))
+        CadenaConsulta = CadenaConsulta & ") VALUES (" & Val(CadenaDesdeOtroForm) + 1 & "," & CStr(adodc1.Recordset!ID)
         C = CadenaConsulta & C & ")"
     
     Else
         C = Mid(C, 2)
         C = "UPDATE slotesgeneralitatmov SET " & C
-        C = C & " WHERE idmov=" & Adodc2.Recordset!idmov & " AND idlote =" & adodc1.Recordset!Id
+        C = C & " WHERE idmov=" & Adodc2.Recordset!idmov & " AND idlote =" & adodc1.Recordset!ID
     End If
     conn.Execute C
     InsertarModificar = True

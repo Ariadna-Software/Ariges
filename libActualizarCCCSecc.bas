@@ -61,7 +61,7 @@ End Function
 Private Sub Fase2(ByRef L As Label, EnlasContabilidadesDeAriagro As Boolean)
 Dim cad As String
 Dim TieneArigasol As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim RN As ADODB.Recordset
 Dim RProv As ADODB.Recordset
@@ -99,8 +99,8 @@ Dim RN3 As ADODB.Recordset
     L.Caption = "Obteniendo errores"
     L.Refresh
     cad = DevuelveDesdeBD(conAri, "count(*)", "tmpcrmclien", "codusu", vUsu.Codigo)
-    i = Val(cad)
-    J = (i \ 200) + 1
+    I = Val(cad)
+    J = (I \ 200) + 1
      conn.Execute "DELETE from tmpinformes WHERE codusu = " & vUsu.Codigo
 
 
@@ -112,13 +112,13 @@ Dim RN3 As ADODB.Recordset
             
      
             miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            i = 0
+            I = 0
             cad = ""
             While Not miRsAux.EOF
-                If i <> miRsAux!empresa_conta Then
-                    If i > 0 Then ColAriagro.Add cad & "|"
+                If I <> miRsAux!empresa_conta Then
+                    If I > 0 Then ColAriagro.Add cad & "|"
                     cad = miRsAux!empresa_conta & "|"
-                    i = miRsAux!empresa_conta
+                    I = miRsAux!empresa_conta
                 Else
                     cad = cad & ","
                 End If
@@ -140,12 +140,12 @@ Dim RN3 As ADODB.Recordset
     End If
     
     'Cuentas a comprobar
-    For i = 1 To J
-        L.Caption = "Comprobar (" & i & "/" & J & ")"
+    For I = 1 To J
+        L.Caption = "Comprobar (" & I & "/" & J & ")"
         L.Refresh
         cad = "select codclien,trim(substring(nomforpa,1,10)) LaCta,substring(nomforpa,11) ElNif,nomactiv CtaDelBanco from tmpcrmclien"
         cad = cad & " WHERE codusu = " & vUsu.Codigo
-        cad = cad & " order by 1 limit " & (i - 1) * 200 & ",200"
+        cad = cad & " order by 1 limit " & (I - 1) * 200 & ",200"
         
         Set RN = New ADODB.Recordset
         RN.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
@@ -167,31 +167,33 @@ Dim RN3 As ADODB.Recordset
             
             'Comprobar en ariconta de ariges
             '--------------------------------
-            L.Caption = i & "/" & J & " - Contab. ariges"
+            L.Caption = I & "/" & J & " - Contab. ariges"
             L.Refresh
-            cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from " & IIf(vParamAplic.ContabilidadNueva, "ariconta", "conta")
-            cad = cad & vParamAplic.NumeroConta & ".cuentas WHERE codmacta"
-            cad = cad & " IN (" & CuentasAtratar & ")"
-            miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            
-            While Not RN.EOF
-                cad = ComprobarAricontaAriges2(RN)
-                If cad <> "" Then
-                    'HA habido algun error
-                    '                   cliente,                   '
-                    '                           aplic   conta noEXISTE niferro  ctaerr
-                    'tmpinformes(codusu,codigo1,campo1,caampo2,nombre1,nombre2,nombre3)
-                    'la funcion retorna los valores para nom1,nom2,nom3 ya en formato SQL
+            'Agosto
+            If False Then
+                    cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from " & IIf(vParamAplic.ContabilidadNueva, "ariconta", "conta")
+                    cad = cad & vParamAplic.NumeroConta & ".cuentas WHERE codmacta"
+                    cad = cad & " IN (" & CuentasAtratar & ")"
+                    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     
-                    cad = vUsu.Codigo & "," & RN!codClien & ",1,'conta" & vParamAplic.NumeroConta & "'," & cad
-                    cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,obser,nombre1,nombre2,nombre3) VALUES (" & cad & ")"
-                    conn.Execute cad
-                End If
-                RN.MoveNext
-            Wend
-            miRsAux.Close
-            RN.MoveFirst
-            
+                    While Not RN.EOF
+                        cad = ComprobarAricontaAriges2(RN)
+                        If cad <> "" Then
+                            'HA habido algun error
+                            '                   cliente,                   '
+                            '                           aplic   conta noEXISTE niferro  ctaerr
+                            'tmpinformes(codusu,codigo1,campo1,caampo2,nombre1,nombre2,nombre3)
+                            'la funcion retorna los valores para nom1,nom2,nom3 ya en formato SQL
+                            
+                            cad = vUsu.Codigo & "," & RN!codClien & ",1,'conta" & vParamAplic.NumeroConta & "'," & cad
+                            cad = "INSERT INTO tmpinformes(codusu,codigo1,campo1,obser,nombre1,nombre2,nombre3) VALUES (" & cad & ")"
+                            conn.Execute cad
+                        End If
+                        RN.MoveNext
+                    Wend
+                    miRsAux.Close
+                    RN.MoveFirst
+        End If
             
             Set RN3 = New ADODB.Recordset
             If vParamAplic.ComprobarBancoRestoAplicaciones Then
@@ -202,7 +204,7 @@ Dim RN3 As ADODB.Recordset
                 'Comprobar en ARIGASOL
                 '--------------------------------
                 If TieneArigasol Then
-                    L.Caption = i & "/" & J & " - GASOL"
+                    L.Caption = I & "/" & J & " - GASOL"
                     L.Refresh
                     
                    
@@ -234,7 +236,7 @@ Dim RN3 As ADODB.Recordset
                     If ContaGasol <> vParamAplic.NumeroConta Then
                     
                     
-                        L.Caption = i & "/" & J & " - Contab. gasol"
+                        L.Caption = I & "/" & J & " - Contab. gasol"
                         L.Refresh
                         cad = "Select codmacta,nifdatos,iban,entidad,oficina,CC,cuentaba from " & IIf(vParamAplic.ContabilidadNueva, "ariconta", "conta") & ContaGasol & ".cuentas WHERE codmacta"
                         cad = cad & " IN (" & CuentasAtratar & ")"
@@ -272,7 +274,7 @@ Dim RN3 As ADODB.Recordset
                         ContaAgro = CInt(Aux2)
                         Aux2 = RecuperaValor(cad, 2) 'las seccciones con esa conta
                         
-                        L.Caption = i & "/" & J & " - AriAGRO (" & K & " de " & ColAriagro.Count & ")"
+                        L.Caption = I & "/" & J & " - AriAGRO (" & K & " de " & ColAriagro.Count & ")"
                         L.Refresh
                         
                         cad = "select distinct  codmaccli,codmacpro,nifsocio,iban,codbanco,codsucur,digcontr,cuentaba,rsocios.codsocio from "
@@ -295,7 +297,7 @@ Dim RN3 As ADODB.Recordset
                         'While Not miRsAux.EOF
                         RN.MoveFirst
                         While Not RN.EOF
-                            L.Caption = i & "/" & J & "." & K & " - AriAGRO (" & RN!codClien & ")"
+                            L.Caption = I & "/" & J & "." & K & " - AriAGRO (" & RN!codClien & ")"
                             L.Refresh
                             cad = ComprobarArigroSocio2(RN, VinculaPorCodmacta)
                             If cad <> "" Then

@@ -1350,9 +1350,9 @@ Public Opcion As Byte
     
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmCli As frmFacClientes
+Private WithEvents frmCli As frmBasico2 'frmFacClientesGr
 Attribute frmCli.VB_VarHelpID = -1
-Private WithEvents frmT As frmAdmTrabajadores
+Private WithEvents frmT As frmBasico2 'frmAdmTrabajadores
 Attribute frmT.VB_VarHelpID = -1
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
@@ -1446,7 +1446,7 @@ Private Sub cmdFraActuacion_Click()
         
     
         With frmImprimir
-            .FormulaSeleccion = "{tmpinformes.codusu}=" & vUsu.codigo
+            .FormulaSeleccion = "{tmpinformes.codusu}=" & vUsu.Codigo
             
             'D/H
             .NumeroParametros = 1
@@ -1455,7 +1455,7 @@ Private Sub cmdFraActuacion_Click()
             .EnvioEMail = False
             .Opcion = 5
             .Titulo = "Facturas por obra-actuacion"
-            .NombreRpt = "saiObrasFras.rpt"
+            .NombreRPT = "saiObrasFras.rpt"
             
             .MostrarTreeDesdeFuera = True
             .Show vbModal
@@ -1755,9 +1755,11 @@ End Sub
 
 Private Sub imgCli_Click(Index As Integer)
     CadenaDesdeForms = ""
-    Set frmCli = New frmFacClientes
-    frmCli.DatosADevolverBusqueda = "0|1|"
-    frmCli.Show vbModal
+'    Set frmCli = New frmFacClientesGr
+'    frmCli.DatosADevolverBusqueda = "0|1|"
+'    frmCli.Show vbModal
+    Set frmCli = New frmBasico2
+    AyudaClientes frmCli, txtCli(Index).Text
     Set frmCli = Nothing
     If CadenaDesdeForms <> "" Then
         txtCli(Index).Text = RecuperaValor(CadenaDesdeForms, 1)
@@ -1832,9 +1834,11 @@ End Sub
 
 Private Sub imgT_Click(Index As Integer)
     CadenaDesdeForms = ""
-        Set frmT = New frmAdmTrabajadores
-        frmT.DatosADevolverBusqueda = "0|1|"
-        frmT.Show vbModal
+'        Set frmT = New frmAdmTrabajadores
+'        frmT.DatosADevolverBusqueda = "0|1|"
+'        frmT.Show vbModal
+        Set frmT = New frmBasico2
+        AyudaTrabajadores frmT, txtTra(Index)
         Set frmT = Nothing
     If CadenaDesdeForms <> "" Then
         txtTra(Index).Text = RecuperaValor(CadenaDesdeForms, 1)
@@ -1974,7 +1978,7 @@ Private Sub LlamarImprimir()
         .Opcion = 2000 '2000 generico
         .NombrePDF = ""
         ' PongoNombrePDF Then .NombrePDF = cadPDFrpt
-        .NombreRpt = cadNomRPT
+        .NombreRPT = cadNomRPT
         .ConSubInforme = conSubRPT
         .Show vbModal
     End With
@@ -1983,7 +1987,7 @@ End Sub
 
 Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
 Dim devuelve As String
-Dim Cad As String
+Dim cad As String
 Dim Subtipo As String 'F: fecha   N: numero   T: texto  H: HORA
 Dim TDes As TextBox
 Dim THas As TextBox
@@ -2041,8 +2045,8 @@ Dim DesH As TextBox '    "       HASTA
         If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        Cad = CadenaDesdeHastaBD(TDes.Text, THas.Text, campo, Subtipo)
-        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Function
+        cad = CadenaDesdeHastaBD(TDes.Text, THas.Text, campo, Subtipo)
+        If Not AnyadirAFormula(cadSelect, cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
@@ -2056,19 +2060,19 @@ Dim DesH As TextBox '    "       HASTA
 End Function
 
 
-Private Function AnyadirParametroDH(Cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
+Private Function AnyadirParametroDH(cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
 On Error Resume Next
     
      If TextoDESDE.Text <> "" Then
-        Cad = Cad & "desde " & TextoDESDE.Text
-        If TD.Text <> "" Then Cad = Cad & " - " & TD.Text
+        cad = cad & "desde " & TextoDESDE.Text
+        If TD.Text <> "" Then cad = cad & " - " & TD.Text
     End If
     If TextoHasta.Text <> "" Then
-        Cad = Cad & "  hasta " & TextoHasta.Text
-        If TH <> "" Then Cad = Cad & " - " & TH.Text
+        cad = cad & "  hasta " & TextoHasta.Text
+        If TH <> "" Then cad = cad & " - " & TH.Text
     End If
     
-    AnyadirParametroDH = Cad
+    AnyadirParametroDH = cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
@@ -2084,7 +2088,7 @@ On Error GoTo eGeneraFraActuacion
     GeneraFraActuacion = False
     Indicador 0, "Preparando datos"
     
-    conn.Execute "DELETE FROM tmpinformes WHERE codusu =" & vUsu.codigo
+    conn.Execute "DELETE FROM tmpinformes WHERE codusu =" & vUsu.Codigo
     
     
     'INSERT PARA TODOS
@@ -2094,7 +2098,7 @@ On Error GoTo eGeneraFraActuacion
     
     'Empezamos metiendo en tmp los albaranes venta
     Indicador 0, "Albaran venta"
-    Aux = "select " & vUsu.codigo & ",codclien,coddirec,0,actuacion,"
+    Aux = "select " & vUsu.Codigo & ",codclien,coddirec,0,actuacion,"
     Aux = Aux & "concat(slialb.codtipom,right(concat(""000000"",slialb.numalbar),6)),"
     Aux = Aux & " sum(importel),0,fechaalb,null,null from "
     Aux = Aux & "slialb,scaalb where slialb.numalbar=scaalb.numalbar and  slialb.codtipom=slialb.codtipom "
@@ -2108,7 +2112,7 @@ On Error GoTo eGeneraFraActuacion
     
     'Factura venta
     Indicador 0, "Factura venta"
-    Aux = "select " & vUsu.codigo & ",codclien,coddirec,1,actuacion,"
+    Aux = "select " & vUsu.Codigo & ",codclien,coddirec,1,actuacion,"
     Aux = Aux & "concat(scafac.codtipom,right(concat(""000000"",scafac.numfactu),6)),"
     Aux = Aux & "brutofac,0,scafac.fecfactu,null,null from scafac,scafac1"
     Aux = Aux & " Where scafac.NumFactu = scafac1.NumFactu And scafac.codtipom = scafac1.codtipom"
@@ -2121,7 +2125,7 @@ On Error GoTo eGeneraFraActuacion
 
     'Albaran compra
     Indicador 0, "albaran compra"
-    Aux = "select " & vUsu.codigo & ",codclien,coddirec,2,actuacion,"
+    Aux = "select " & vUsu.Codigo & ",codclien,coddirec,2,actuacion,"
     Aux = Aux & " concat(numalbar,""("",codprove,"")""),0,sum(importel),fechaalb,null,codprove"
     Aux = Aux & " From slialp WHERE 1=1"
     PonDesdehastaObraActuacion ""
@@ -2132,7 +2136,7 @@ On Error GoTo eGeneraFraActuacion
     
     'Factura compra
     Indicador 0, "Factura compra"
-    Aux = "select " & vUsu.codigo & ",codclien,coddirec,3,actuacion,"
+    Aux = "select " & vUsu.Codigo & ",codclien,coddirec,3,actuacion,"
     Aux = Aux & " concat(numfactu,""("",codprove,"")""),0,sum(importel),fecfactu,null,codprove"
     Aux = Aux & " From slifpc WHERE 1=1"
     PonDesdehastaObraActuacion ""
@@ -2145,7 +2149,7 @@ On Error GoTo eGeneraFraActuacion
     'Pedido compra
     Indicador 0, "Ped compra"
       
-    Aux = "select " & vUsu.codigo & ",slippr.codclien,coddirec,4,actuacion,"
+    Aux = "select " & vUsu.Codigo & ",slippr.codclien,coddirec,4,actuacion,"
     Aux = Aux & " concat(slippr.numpedpr,""("",codprove,"")""),0,sum(importel),fecpedpr,null,codprove"
     Aux = Aux & " From slippr,scappr WHERE slippr.numpedpr=scappr.numpedpr"
     PonDesdehastaObraActuacion "slippr."
@@ -2155,7 +2159,7 @@ On Error GoTo eGeneraFraActuacion
     
     'ACtualizamos proveedores
     Indicador 0, "Ajustar proveedor"
-    Aux = "Select nombre3 from tmpinformes where codusu = " & vUsu.codigo & " GROUP BY 1"
+    Aux = "Select nombre3 from tmpinformes where codusu = " & vUsu.Codigo & " GROUP BY 1"
     miRsAux.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     devuelve = ""
     While Not miRsAux.EOF
@@ -2164,7 +2168,7 @@ On Error GoTo eGeneraFraActuacion
             Aux = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", miRsAux!nombre3)
             If Aux <> "" Then
 
-                Aux = "UPDATE tmpinformes SET nombre3=" & DBSet(Aux, "T") & " WHERE tmpinformes.codusu = " & vUsu.codigo
+                Aux = "UPDATE tmpinformes SET nombre3=" & DBSet(Aux, "T") & " WHERE tmpinformes.codusu = " & vUsu.Codigo
                 Aux = Aux & " AND nombre3 = '" & miRsAux!nombre3 & "'"
                 conn.Execute Aux
             End If

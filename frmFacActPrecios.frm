@@ -17,51 +17,80 @@ Begin VB.Form frmFacActPrecios2
    StartUpPosition =   2  'CenterScreen
    Begin VB.CheckBox chkCabel 
       Caption         =   "CABEL"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
-      Left            =   360
+      Left            =   450
       TabIndex        =   2
-      Top             =   2040
+      Top             =   2070
       Width           =   2655
    End
    Begin VB.Frame Frameprov 
       Caption         =   "Proveedor"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000080&
-      Height          =   735
+      ForeColor       =   &H00800000&
+      Height          =   825
       Left            =   360
       TabIndex        =   13
-      Top             =   1080
+      Top             =   1170
       Width           =   6735
       Begin VB.TextBox txtDescProv 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   315
-         Left            =   1800
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   1620
          TabIndex        =   14
          Text            =   "Text1"
-         Top             =   360
-         Width           =   4335
+         Top             =   315
+         Width           =   4830
       End
       Begin VB.TextBox txtProv 
-         Height          =   315
-         Left            =   360
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Left            =   270
          TabIndex        =   1
          Text            =   "Text1"
-         Top             =   360
-         Width           =   855
+         Top             =   315
+         Width           =   990
       End
       Begin VB.Image imgProve 
          Height          =   240
-         Left            =   1320
+         Left            =   1305
          Picture         =   "frmFacActPrecios.frx":000C
+         Tag             =   "-1"
+         ToolTipText     =   "Buscar proveedor"
          Top             =   360
          Width           =   240
       End
@@ -80,70 +109,124 @@ Begin VB.Form frmFacActPrecios2
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
-      Height          =   375
-      Left            =   4920
-      TabIndex        =   5
-      Top             =   2880
-      Width           =   975
-   End
-   Begin VB.CommandButton cmdCancel 
-      Cancel          =   -1  'True
-      Caption         =   "&Cancelar"
-      Height          =   375
-      Left            =   6000
-      TabIndex        =   6
-      Top             =   2880
-      Width           =   975
-   End
-   Begin VB.Frame Frame1 
-      Caption         =   "Actualizar "
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000080&
+      Height          =   375
+      Left            =   4875
+      TabIndex        =   5
+      Top             =   2880
+      Width           =   1065
+   End
+   Begin VB.CommandButton cmdCancel 
+      Cancel          =   -1  'True
+      Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   6000
+      TabIndex        =   6
+      Top             =   2880
+      Width           =   1065
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "Actualizar "
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00800000&
       Height          =   1215
       Left            =   360
       TabIndex        =   8
       Top             =   2040
-      Width           =   3135
+      Width           =   3720
       Begin VB.CheckBox chkPreuEsp 
          Caption         =   "Precios especiales"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   240
          TabIndex        =   4
          Top             =   720
          Value           =   1  'Checked
-         Width           =   1815
+         Width           =   2490
       End
       Begin VB.CheckBox chkPreuAct 
          Caption         =   "Precios actuales"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   240
          TabIndex        =   3
          Top             =   360
          Value           =   1  'Checked
-         Width           =   2655
+         Width           =   3330
       End
    End
    Begin VB.TextBox txtCodigo 
       Alignment       =   1  'Right Justify
-      Height          =   285
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   0
-      Left            =   2400
+      Left            =   2520
       TabIndex        =   0
       Top             =   720
-      Width           =   1215
+      Width           =   1350
    End
    Begin VB.Label lblProgreso 
       Alignment       =   2  'Center
       BorderStyle     =   1  'Fixed Single
       Caption         =   "Label1"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   1
       Left            =   6105
@@ -155,6 +238,15 @@ Begin VB.Form frmFacActPrecios2
    Begin VB.Label lblProgreso 
       BorderStyle     =   1  'Fixed Single
       Caption         =   "Label1"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   360
@@ -165,7 +257,7 @@ Begin VB.Form frmFacActPrecios2
    End
    Begin VB.Label lblTitulo 
       BeginProperty Font 
-         Name            =   "Tahoma"
+         Name            =   "Verdana"
          Size            =   14.25
          Charset         =   0
          Weight          =   700
@@ -179,34 +271,34 @@ Begin VB.Form frmFacActPrecios2
       Left            =   360
       TabIndex        =   9
       Top             =   120
-      Width           =   4215
+      Width           =   6330
    End
    Begin VB.Label Label4 
       AutoSize        =   -1  'True
       Caption         =   "Fecha de cambio"
       BeginProperty Font 
-         Name            =   "Tahoma"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000080&
-      Height          =   195
+      ForeColor       =   &H00800000&
+      Height          =   240
       Index           =   21
-      Left            =   480
+      Left            =   360
       TabIndex        =   7
-      Top             =   720
-      Width           =   1410
+      Top             =   765
+      Width           =   1800
    End
    Begin VB.Image imgFecha 
       Height          =   240
       Index           =   0
-      Left            =   1920
-      Picture         =   "frmFacActPrecios.frx":010E
-      Top             =   720
+      Left            =   2205
+      Picture         =   "frmFacActPrecios.frx":0A0E
+      Top             =   765
       Width           =   240
    End
 End
@@ -222,7 +314,7 @@ Public Proveedor As Boolean
 
 Private WithEvents frmF As frmCal 'Calendario de Fechas
 Attribute frmF.VB_VarHelpID = -1
-Private WithEvents frmProv As frmComProveedores
+Private WithEvents frmProv As frmBasico2 '%=%=frmComProveedores
 Attribute frmProv.VB_VarHelpID = -1
 
 Private menErrProceso As String 'mensaje final del proceso actualizacion de precios
@@ -397,7 +489,7 @@ Private Sub Form_Load()
     Me.txtDescProv.Text = ""
     If Me.Proveedor Then
         Me.lblTitulo(3).Caption = "Actualizar precios proveedor"
-        Caption = "PROVEEDORR"
+        Caption = "PROVEEDOR"
 
     Else
         Caption = "TARIFAS "
@@ -436,9 +528,11 @@ End Sub
 
 
 Private Sub imgProve_Click()
-    Set frmProv = New frmComProveedores
-    frmProv.DatosADevolverBusqueda = "0"
-    frmProv.Show vbModal
+'    Set frmProv = New frmComProveedores
+'    frmProv.DatosADevolverBusqueda = "0"
+'    frmProv.Show vbModal
+    Set frmProv = New frmBasico2
+    AyudaProveedores frmProv, txtProv
     Set frmProv = Nothing
 End Sub
 
@@ -451,15 +545,25 @@ Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Int
 End Sub
 
 Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
-    KEYpress KeyAscii
+'    KEYpress KeyAscii
+    If KeyAscii = teclaBuscar Then
+        KEYFecha KeyAscii, 0 'fechar
+    Else
+        KEYpress KeyAscii
+    End If
+End Sub
+
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgFecha_Click (Indice)
 End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    Dim Cerrar As Boolean
+    Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, 2, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, 2, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
@@ -762,8 +866,17 @@ Private Sub txtProv_GotFocus()
     ConseguirFoco txtProv, 3
 End Sub
 
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgProve_Click
+End Sub
+
 Private Sub txtProv_KeyPress(KeyAscii As Integer)
-    KEYpress KeyAscii
+    If KeyAscii = teclaBuscar Then
+        KEYBusqueda KeyAscii, 0 'proveedor
+    Else
+        KEYpress KeyAscii
+    End If
 End Sub
 
 Private Sub txtProv_LostFocus()

@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacPlantilla 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Plantillas"
@@ -526,7 +526,7 @@ Option Explicit
 
 Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 Attribute frmB.VB_VarHelpID = -1
-Private WithEvents frmA As frmAlmArticu2  'Form Mantenimiento Articulos
+Private WithEvents frmA As frmBasico2  'Form Mantenimiento Articulos
 Attribute frmA.VB_VarHelpID = -1
 Private WithEvents frmGP As frmFacGrupoPlantilla 'Form Mantenimiento Grupos Plantillas
 Attribute frmGP.VB_VarHelpID = -1
@@ -628,10 +628,11 @@ End Sub
 
 
 Private Sub cmdAux_Click(Index As Integer)
-    Set frmA = New frmAlmArticu2
+    Set frmA = New frmBasico2
     'frmA.DatosADevolverBusqueda3 = "@1@" 'Poner en modo Busqueda
-    frmA.DesdeTPV = False
-    frmA.Show vbModal
+'    frmA.DesdeTPV = False
+'    frmA.Show vbModal
+    AyudaArticulos frmA, txtAux(0)
     Set frmA = Nothing
     PonerFoco txtAux(0)
 End Sub
@@ -730,9 +731,9 @@ Private Sub Form_Load()
     NomTablaLineas = "slipla" 'Tabla Lineas Plantillas
     Ordenacion = " ORDER BY codplant"
     CadenaConsulta = "Select * from " & NombreTabla & " WHERE codplant = -1" 'No recupera datos
-    Data1.ConnectionString = conn
-    Data1.RecordSource = CadenaConsulta
-    Data1.Refresh
+    data1.ConnectionString = conn
+    data1.RecordSource = CadenaConsulta
+    data1.Refresh
     
     PonerModo 0
     CargaGrid (Modo = 2)
@@ -996,7 +997,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
 Dim NumReg As Byte
 
@@ -1011,8 +1012,8 @@ Dim NumReg As Byte
     b = (Kmodo = 2)
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
     NumReg = 1
-    If Not Data1.Recordset.EOF Then
-        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
+    If Not data1.Recordset.EOF Then
+        If data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
     DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
        
@@ -1026,9 +1027,9 @@ Dim NumReg As Byte
     cmdCancelar.visible = b
     cmdAceptar.visible = b
     cmdRegresar.visible = (Modo = 5)
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = b
+    Next i
     
     chkVistaPrevia.Enabled = (Modo <= 2)
      
@@ -1095,7 +1096,7 @@ End Sub
 Private Sub Desplazamiento(Index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, Index
+    DesplazamientoData data1, Index
     PonerCampos
 End Sub
 
@@ -1110,17 +1111,17 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
 Dim SQL As String
-Dim Tabla As String
+Dim tabla As String
     
-    Tabla = "slipla"
-    SQL = "SELECT codplant,numlinea," & Tabla & ".codartic, sartic.nomartic, cantidad "
-    SQL = SQL & " FROM " & Tabla & " LEFT JOIN sartic ON " & Tabla & ".codartic=sartic.codartic"
+    tabla = "slipla"
+    SQL = "SELECT codplant,numlinea," & tabla & ".codartic, sartic.nomartic, cantidad "
+    SQL = SQL & " FROM " & tabla & " LEFT JOIN sartic ON " & tabla & ".codartic=sartic.codartic"
     If enlaza Then
         SQL = SQL & " WHERE codplant=" & Text1(0).Text 'Data1.Recordset!codPlant
     Else
         SQL = SQL & " WHERE codplant = -1"
     End If
-    SQL = SQL & " ORDER BY " & Tabla & ".numlinea "
+    SQL = SQL & " ORDER BY " & tabla & ".numlinea "
     MontaSQLCarga = SQL
 End Function
 
@@ -1137,7 +1138,7 @@ Private Sub BotonBuscar()
         Text1(0).BackColor = vbYellow
     Else
         HacerBusqueda
-        If Data1.Recordset.EOF Then
+        If data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
             Text1(kCampo).BackColor = vbYellow
             PonerFoco Text1(kCampo)
@@ -1237,7 +1238,7 @@ Private Sub BotonEliminar()
 Dim SQL As String
 
     'Ciertas comprobaciones
-    If Data1.Recordset.EOF Then Exit Sub
+    If data1.Recordset.EOF Then Exit Sub
     
     SQL = "Cabecera Plantillas.                 " & vbCrLf
     SQL = SQL & "----------------------------" & vbCrLf & vbCrLf
@@ -1250,9 +1251,9 @@ Dim SQL As String
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
-        NumRegElim = Data1.Recordset.AbsolutePosition
+        NumRegElim = data1.Recordset.AbsolutePosition
         If Not Eliminar Then Exit Sub
-        If SituarDataTrasEliminar(Data1, NumRegElim) Then
+        If SituarDataTrasEliminar(data1, NumRegElim) Then
             PonerCampos
         Else
             LimpiarCampos
@@ -1265,7 +1266,7 @@ Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar Plantilla", Err.Description
-        Data1.Recordset.CancelUpdate
+        data1.Recordset.CancelUpdate
     End If
 End Sub
 
@@ -1274,12 +1275,12 @@ Private Function Eliminar() As Boolean
 Dim SQL As String
 On Error GoTo FinEliminar
         
-        If Data1.Recordset.EOF Then
+        If data1.Recordset.EOF Then
             Eliminar = False
             Exit Function
         End If
         conn.BeginTrans
-        SQL = " WHERE codplant=" & Val(Data1.Recordset!codplant)
+        SQL = " WHERE codplant=" & Val(data1.Recordset!codplant)
         
         'Lineas
         conn.Execute "Delete  from slipla " & SQL
@@ -1313,27 +1314,27 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
-Dim Tabla As String
+Dim cad As String
+Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: scapla
-    Cad = Cad & ParaGrid(Text1(0), 12, "Código")
-    Cad = Cad & ParaGrid(Text1(1), 45, "Nombre Plantilla")
-    Cad = Cad & ParaGrid(Text1(2), 12, "Grupo")
-    Cad = Cad & "Nom. Grupo|sgrupl|nomgrupl|T||28·"
+    cad = cad & ParaGrid(Text1(0), 12, "Código")
+    cad = cad & ParaGrid(Text1(1), 45, "Nombre Plantilla")
+    cad = cad & ParaGrid(Text1(2), 12, "Grupo")
+    cad = cad & "Nom. Grupo|sgrupl|nomgrupl|T||28·"
     
-    Tabla = "(" & NombreTabla & " LEFT JOIN sgrupl ON " & NombreTabla & ".codgrupl=sgrupl.codgrupl" & ") "
+    tabla = "(" & NombreTabla & " LEFT JOIN sgrupl ON " & NombreTabla & ".codgrupl=sgrupl.codgrupl" & ") "
     Titulo = "Plantillas"
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vCampos = cad
+        frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
         '###A mano
@@ -1379,9 +1380,9 @@ Dim cadMen As String
     Screen.MousePointer = vbHourglass
     On Error GoTo EEPonerBusq
 
-    Data1.RecordSource = CadenaConsulta
-    Data1.Refresh
-    If Data1.Recordset.RecordCount <= 0 Then
+    data1.RecordSource = CadenaConsulta
+    data1.Refresh
+    If data1.Recordset.RecordCount <= 0 Then
         cadMen = "No hay ningún registro en la tabla " & NombreTabla
         If Modo = 1 Then
             MsgBox cadMen & " para ese criterio de Búsqueda.", vbInformation
@@ -1394,7 +1395,7 @@ Dim cadMen As String
         Exit Sub
     Else
         PonerModo 2
-        Data1.Recordset.MoveFirst
+        data1.Recordset.MoveFirst
         PonerCampos
     End If
     Screen.MousePointer = vbDefault
@@ -1410,13 +1411,13 @@ End Sub
 Private Sub PonerCampos()
 On Error GoTo EPonerCampos
 
-    If Data1.Recordset.EOF Then Exit Sub
-    PonerCamposForma Me, Data1
+    If data1.Recordset.EOF Then Exit Sub
+    PonerCamposForma Me, data1
     '--Poner el nombre del Grupo Plantilla
     Text2(2).Text = PonerNombreDeCod(Text1(2), 1, "sgrupl", "nomgrupl")
     CargaGrid True
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+    lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
 EPonerCampos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo Campos", Err.Description
 End Sub
@@ -1429,7 +1430,7 @@ Dim SQL As String
 On Error Resume Next
 
     SQL = "UPDATE " & NombreTabla & " SET precioac=precionu, precioa1=precion1, dtoespec=dtoespe1, fechanue=null, precionu=0, precion1=0"
-    SQL = SQL & " WHERE codclien=" & Data1.Recordset!codclien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+    SQL = SQL & " WHERE codclien=" & data1.Recordset!codClien & " AND codartic=" & DBSet(data1.Recordset!codArtic, "T")
 
     conn.Execute SQL
 
@@ -1452,9 +1453,9 @@ Dim Indicador As String
 Dim vWhere As String
 
     vWhere = Mid(ObtenerWhereCP, 7)
-    If SituarData(Data1, vWhere, Indicador) Then
+    If SituarData(data1, vWhere, Indicador) Then
         PonerModo 2
-        Indicador = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+        Indicador = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
         lblIndicador.Caption = Indicador
     Else
         PonerModo 0
@@ -1606,7 +1607,7 @@ Private Sub BotonModificarLinea()
 'Modificar una linea
 Dim vWhere As String
 Dim anc As Single
-Dim I As Byte
+Dim i As Byte
 
     On Error GoTo EModificarLinea
 
@@ -1631,9 +1632,9 @@ Dim I As Byte
     LLamaLineas anc
     
     'cargamos los datos
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = DataGrid1.Columns(I + 2).Text
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = DataGrid1.Columns(i + 2).Text
+    Next i
     
     PonerFoco txtAux(0)
     

@@ -117,12 +117,15 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         
         Set RSalb = New ADODB.Recordset
         RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        'NumeroRegistros = 1
-        'RegistroActual = 0
+       'NumeroRegistros = 1
+       'RegistroActual = 0
         If Not RSalb.EOF Then
             'NumeroRegistros = Val(SQL)
             SQL = DBLet(RSalb.Fields(0), "N")
-            CargarProgresNew PBarFac, CInt(SQL)
+            
+            
+            
+            CargarProgresNew PBarFac, CLng(SQL)
             LblBar.Caption = "Inicializando el proceso..."
             LblBar.Refresh
             
@@ -339,11 +342,20 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
 
                 
                 If RSalb!codtipom = "ALM" Then vFactu.Aportacion = DBLet(RSalb!Aportacion, "N")
-                cadW = " (scaalb.codtipom='" & RSalb!codtipom & "' AND scaalb.numalbar IN (" & RSalb!Numalbar
+                
+                If vTipoM = "ALY" Then
+                    'Abril 2021
+                    cadW = " (scaalb.codtipom,scaalb.numalbar) IN (('" & RSalb!codtipom & "'," & RSalb!Numalbar & ")"
+                Else
+                    cadW = " (scaalb.codtipom='" & RSalb!codtipom & "' AND scaalb.numalbar IN (" & RSalb!Numalbar
+                End If
             Else
-                
-                cadW = cadW & ", " & RSalb!Numalbar
-                
+                If vTipoM = "ALY" Then
+                    'Abril 2021
+                    cadW = cadW & ", ('" & RSalb!codtipom & "'," & RSalb!Numalbar & ")"
+                Else
+                    cadW = cadW & ", " & RSalb!Numalbar
+                End If
               
             End If
         
@@ -367,8 +379,18 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         
     'Facturar la ultima Factura generada del blucle
     If cadW <> "" Then
-        cadW = cadW & "))"
+    
+        If vTipoM = "ALY" Then
+            'Abril 2021
+            cadW = cadW & ")"
+        Else
+            cadW = cadW & "))"
+        End If
         If PgbVisible Then LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " - " & vFactu.NombreClien
+        
+        'Abril 2021
+        If vTipoM = "ALY" Then TipoAlb = "FPY"
+        
         
         If Not vFactu.PasarAlbaranesAFactura(TipoAlb, cadW, TextosCSB, ErroresAux, EsTraspasoOfeFAZ, EsUnUnicoAlbaran) Then
             If b Then b = False
@@ -412,7 +434,12 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
     If ImprimeLasFacturasGeneradas Then
         If ListFactu <> "" Then
             HazPulsarAceptarEnFrmImprimir = False
-            If vTipoM = "ALM" And vParamAplic.EntradaRapidaFacturasMostrador Then HazPulsarAceptarEnFrmImprimir = True
+            If vTipoM = "ALM" Then
+                If vParamAplic.EntradaRapidaFacturasMostrador Then HazPulsarAceptarEnFrmImprimir = True
+                NumeroCopias = vParamAplic.NumCop_FraMostrador
+                If Val(NumeroCopias) = 0 Then NumeroCopias = 1
+            End If
+                
             
             ImprimirFacturas ListFactu, FechaFact, "", DevuelveTipoDocumentoFactura(vTipoM), NumeroCopias, False, HazPulsarAceptarEnFrmImprimir, False
 
@@ -916,7 +943,7 @@ Dim ListaFacturasDefinitiva As String
     If Not PonerParamRPT2(indRPT, cadParam, numParam, nomDocu, ImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then
         Exit Sub
     End If
-
+  
 
 
     'PUNTO VERDE
@@ -988,7 +1015,37 @@ Dim ListaFacturasDefinitiva As String
                 .Titulo = ""
                 .SeleccionaRPTCodigo = pRptvMultiInforme
                 .Show vbModal
+                
+                
+                
+                
         End With
+        
+        
+        
+        'Imprime precursor explosivos en las FMO
+        If vParamAplic.NumeroInstalacion = vbHerbelca Then
+            If InStr(1, cadFormula, "FMO") > 0 Then
+                'Si en lo que ha facturado lleva Prcursor de explosivos
+                devuelve = "(codtipom,numfactu,fecfactu) in ("
+                devuelve = devuelve & " select codtipom,numfactu,fecfactu from scafac WHERE " & cadSelect & ") AND 1"
+                devuelve = DevuelveDesdeBD(conAri, "codnatura", "scafac1", devuelve, "1")
+                If Val(devuelve) > 0 Then
+                    'Imprimimios el precursor de explosivos
+                    frmImprimir.NumeroCopias = 1
+                    frmImprimir.NombreRPT = "herFacturaPrecursor.rpt"
+                    frmImprimir.NombrePDF = frmImprimir.NombreRPT
+                    frmImprimir.FormulaSeleccion = cadFormula
+                    frmImprimir.NumeroParametros = 0
+                    frmImprimir.SoloImprimir = False
+                    frmImprimir.EnvioEMail = False
+                    frmImprimir.Opcion = 231
+                    frmImprimir.Titulo = "Precursor explosivos"
+                    frmImprimir.Show vbModal
+                End If
+            End If
+        End If
+        
     End If
 End Sub
 
@@ -1729,13 +1786,16 @@ End Sub
 '   Con lo cual, ahora, desde esa tabla creamos el albaran.
 '   El resumen de la linea va al articulo de telefonia.
 '   El numero de factura, y la fecha SON las indicadas en la linea
+'   Abril 2020.
+'   Se pueden facturar varios telefono es una sola factura.
+'   En esos casos habrá una linea de factura con cada albaran
 Public Function traspasofacturasTelefonia(Fichero As String, ByRef L As Label, ByVal idBanco As Integer) As Boolean
 Dim b As Boolean
     
     traspasofacturasTelefonia = False
     
     'Bloqueamos proceso
-    If Not BloqueoManual("VENFAC", "1") Then
+    If Not BloqueoManual("TELFAC", "1") Then
         'MsgBox "No se puede facturar TELEFONIA. Hay otro usuario facturando.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -1796,7 +1856,7 @@ Dim b As Boolean
     End If
     
     'Desbloqueamos ya no estamos facturando
-    DesBloqueoManual ("VENFAC")
+    DesBloqueoManual ("TELFAC")
     TerminaBloquear
     
 
@@ -1827,9 +1887,18 @@ Dim Fichero As String
 
 Dim RTT As ADODB.Recordset
 
+'Agosto 2020
+'Catadau quiere que las internas NO se facturen
+Dim DarInternasContabilizadas As Boolean
+
+
 
     antClien = 0 'cliente
     
+    
+    DarInternasContabilizadas = False
+    'Deberaimos poner parametro
+    If InStr(1, LCase(vEmpresa.nomempre), "catadau") > 0 Then DarInternasContabilizadas = True
     
     
     Errores = ""
@@ -1887,7 +1956,7 @@ Dim RTT As ADODB.Recordset
                 vFactu.NombreClien = Trim(RSalb!NomClien)
                 LblBar.Caption = "Cliente: " & Format(vFactu.Cliente, "000000") & " " & Mid(vFactu.NombreClien, 1, 25)
                 LblBar.Refresh
-                
+                    
                 Espera 0.15
                 If Inc = 5 Then
                     DoEvents
@@ -1905,6 +1974,10 @@ Dim RTT As ADODB.Recordset
                     If Not Coarval Then
                         'PUEDE ser que tengamos albaranes de telefonia introducidos "a mano"
                         'Habra que verlos
+                        
+                        'If RSalb!codClien = 700174 Then Stop
+                        
+                        
                         If Not RTT.EOF Then
                             While Not RTT.EOF
                                 If RTT!codClien = RSalb!codClien Then
@@ -1912,11 +1985,17 @@ Dim RTT As ADODB.Recordset
                                     
                                         'Habra que ver si el telefono es el mismo que facturamos
                                         'en esta factura
-                                        If Trim(RSalb!observa04) = Trim(RTT!referenc) Then
                                         
-                                            'OK. Este tenemos que facturarlo aqui
-                                        
+                                        'Agrupacion
+                                        If InStr(1, RSalb!observa04, "/") > 0 Then
+                                            'ES una agrupacion, si es cliente y codirec FACTURAMOS
                                             SQL = SQL & ", " & RTT!Numalbar
+                                        Else
+                                            If Trim(RSalb!observa04) = Trim(RTT!referenc) Then
+                                            
+                                                'OK. Este tenemos que facturarlo aqui
+                                                SQL = SQL & ", " & RTT!Numalbar
+                                            End If
                                         End If
                                     End If
                                 End If
@@ -1964,8 +2043,21 @@ Dim RTT As ADODB.Recordset
                         
                         'Marzo 2014. Hay que actualizar numofert y serietfno de scafac1
                         cadW = "UPDATE scafac1 SET numofert=" & vFactu.Numfactu & ", serietfno='" & vFactu.LetraSerie & "'"
+                        
                         cadW = cadW & " WHERE codtipom='FAI' AND numfactu=" & vFactu.Numfactu & " AND fecfactu=" & DBSet(vFactu.FecFactu, "F")
                         ejecutar cadW, False
+                        
+                        
+                        'Agosto 2020
+                        'Catadau quiere que las internas NO se facturen
+                        If DarInternasContabilizadas Then
+                            cadW = "UPDATE scafac SET intconta=1 WHERE"
+                            cadW = cadW & " codtipom='FAI' AND numfactu=" & vFactu.Numfactu & " AND fecfactu=" & DBSet(vFactu.FecFactu, "F")
+                            ejecutar cadW, True
+                        End If
+                        
+                        
+                        
                         
                     End If
                 End If
@@ -2000,7 +2092,8 @@ Dim RTT As ADODB.Recordset
         cadW = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", "FAI", "T")
         cadW = "UPDATE scafac1 SET serietfno='" & cadW & "' WHERE"
         cadW = cadW & " codtipom='FAI' AND referenc=" & DBSet(Fichero, "T")
-        If Not ejecutar(cadW, False) Then MsgBox "Error actualizando referencias INTERNAS(serietfno). El proceso continua. Avise soporte t?cnico", vbExclamation
+        If Not ejecutar(cadW, False) Then MsgBox "Error actualizando referencias INTERNAS(serietfno). El proceso continua. Avise soporte técnico", vbExclamation
+            
             
         cadW = "codtipom = 'ALT' AND factursn"
         cadW = DevuelveDesdeBD(conAri, "count(*)", "scaalb", cadW, "1")
@@ -2038,9 +2131,10 @@ Dim J As Byte
 
     On Error GoTo eAct
     
+    '#falta tel_cab_factura_agr
     
-    For J = 1 To 5
-        SQ = RecuperaValor("tel_cab_factura|tel_lin_factura_consumos|tel_lin_factura_cuotas|tel_lin_factura_descuentos|tel_lin_factura_especial|", CInt(J))
+    For J = 1 To 6
+        SQ = RecuperaValor("tel_cab_factura|tel_lin_factura_consumos|tel_lin_factura_cuotas|tel_lin_factura_descuentos|tel_lin_factura_especial|tel_cab_factura_agr|", CInt(J))
         
         SQ = "UPDATE " & SQ & " SET NumFact =" & Nuevo & " WHERE " & Where
         If J = 1 Then SQ = SQ & " AND fichero = '" & Fichero & "'"
@@ -2061,7 +2155,7 @@ eAct:
 End Sub
 
 Private Function GenerarAlbaranesTelefonia(ByRef L As Label) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad As String
 Dim vCli As CCliente
 Dim Tr As Integer
@@ -2074,11 +2168,15 @@ Dim LineaVtaPlazos As Boolean
 Dim cT As CTiposMov
 Dim cTi As CTiposMov
 Dim NumAlbPz As Long
-
+Dim esAgrupacion As Boolean
+Dim numFac As String
+Dim COntadorLInea As Integer
+Dim Aux As String
+Dim TieneVtaPlazos As Boolean
     On Error GoTo eGenerarAlbaranesTelefonia
 
     GenerarAlbaranesTelefonia = False
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
 
     L.Caption = "Calculando lineas"
     L.Refresh
@@ -2115,8 +2213,15 @@ Dim NumAlbPz As Long
 
     L.Caption = "Obteniendo registros"
     L.Refresh
-    cad = "Select * from  tel_cab_factura,sclientfno where IdTelefono=Telefono AND fichero= '" & TipoFac & "' ORDER BY numfact"
-    RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    
+    cad = "Select tel_cab_factura.*,sclientfno.* FROM tel_cab_factura  inner join tel_cab_factura_agr  on"
+    cad = cad & " tel_cab_factura.Serie = tel_cab_factura_agr.Serie And tel_cab_factura.Ano = tel_cab_factura_agr.Ano "
+    cad = cad & " And tel_cab_factura.NumFact = tel_cab_factura_agr.NumFact"
+    cad = cad & " inner join sclientfno on IdTelefono=tel_cab_factura_agr.Telefono"  'l.telefobno son de tel_cab_factura_agr
+    '                                                   Marzo 2021. Por si coinciden numero factura hay que ordenar primero SERIE
+    cad = cad & " WHERE fichero= '" & TipoFac & "' ORDER BY  tel_cab_factura.serie,tel_cab_factura.numfact ,tel_cab_factura_agr.telefono"
+    Rs.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
     
     
     Errores = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", vParamAplic.ArtiTelefonia, "T")
@@ -2169,27 +2274,35 @@ Dim NumAlbPz As Long
         End If
     End If
     
+    
+    
+    '     debe llevar linalbar,   aqui aqui
+    
     Set vCli = New CCliente
     cad = ""
-    While Not RS.EOF
-        L.Caption = RS!Telefono
+    numFac = ""
+    While Not Rs.EOF
+        L.Caption = Rs!Telefono
         L.Refresh
-        If Not vCli.LeerDatos(CStr(RS!codClien)) Then Err.Raise 513, , "Error leyendo el cliente: " & RS!codClien
+        
+        'If RS!Telefono = "070121/01" Then Stop
+        
+        If Not vCli.LeerDatos(CStr(Rs!codClien)) Then Err.Raise 513, , "Error leyendo el cliente: " & Rs!codClien
 
         'YA tengo el cliente
         'Vamos p'alla
         '(codtipom,numalbar,fechaalb,factursn,codclien,nomclien,domclien,codpobla,pobclien,
         'proclien,nifclien,telclien,referenc,facturkm,codtraba,codtrab1,codtrab2,codagent,
         'codforpa,codenvio,dtoppago,dtognral,tipofact,observa01,observa02,observa03,observa04,observa04,esticket)
-        If RS!Serie = Internas Then
+        If Rs!Serie = Internas Then
             cad = "ALI"
         Else
             cad = "ALT"
         End If
-        cad = "('" & cad & "'," & RS!NumFact & "," & DBSet(RS!Fecha, "F") & ",1," & vCli.Codigo & "," & DBSet(vCli.Nombre, "T")
-        cad = cad & "," & DBSet(vCli.Domicilio, "T") & "," & DBSet(vCli.CPostal, "T")
+        cad = "('" & cad & "'," & Rs!NumFact & "," & DBSet(Rs!Fecha, "F") & ",1," & vCli.Codigo & "," & DBSet(vCli.Nombre, "T")
+        cad = cad & "," & DBSet(vCli.Domicilio, "T") & "," & DBSet(IIf(vCli.CPostal = "", "46", vCli.CPostal), "T")
         cad = cad & "," & DBSet(vCli.Poblacion, "T") & "," & DBSet(vCli.Provincia, "T")
-        cad = cad & "," & DBSet(vCli.NIF, "T") & "," & DBSet(RS!Telefono, "T") & ",'" & TipoFac & "',"
+        cad = cad & "," & DBSet(vCli.NIF, "T") & "," & DBSet(Rs!Telefono, "T") & ",'" & TipoFac & "',"
         
         cad = cad & "0," & Tr & "," & Tr & "," & Tr & "," & vCli.Agente
         cad = cad & "," & vCli.ForPago & "," & vParamAplic.PorDefecto_Envio & ",0,0,1"
@@ -2199,56 +2312,84 @@ Dim NumAlbPz As Long
         'Grabaremos en el campo numpedcl
         'un 1 si se imprime o un 0 si debe ir por email
         LetraSer = "0"
-        If RS!Factura = 0 Then LetraSer = "1"  'si sclientfno.factura=0 es que no quiere la factura-->email
+        If Rs!Factura = 0 Then LetraSer = "1"  'si sclientfno.factura=0 es que no quiere la factura-->email
         cad = cad & "," & LetraSer
         
         'En las observaciones podemos poner DATOS de la facturacion
         'Observa 01.  Nombre
         LetraSer = ""
-        If Not IsNull(RS!apellido1) Then LetraSer = RS!apellido1
-        If Not IsNull(RS!apellido2) Then LetraSer = Trim(LetraSer & " " & RS!apellido2)
-        If Not IsNull(RS!Nombre) Then
+        If Not IsNull(Rs!apellido1) Then LetraSer = Rs!apellido1
+        If Not IsNull(Rs!apellido2) Then LetraSer = Trim(LetraSer & " " & Rs!apellido2)
+        If Not IsNull(Rs!Nombre) Then
              If LetraSer <> "" Then LetraSer = LetraSer & ","
-             LetraSer = Trim(LetraSer & " " & RS!Nombre)
+             LetraSer = Trim(LetraSer & " " & Rs!Nombre)
         End If
         cad = cad & "," & DBSet(LetraSer, "T")
         'Observa2
-        LetraSer = Trim(DBLet(RS!CodPostal, "T") & "  " & DBLet(RS!Direccion, "T"))
+        LetraSer = Trim(DBLet(Rs!CodPostal, "T") & "  " & DBLet(Rs!Direccion, "T"))
         cad = cad & "," & DBSet(LetraSer, "T")
         'Obs3
-        LetraSer = Trim(DBLet(RS!Provincia, "T") & "  " & DBLet(RS!Companyia, "T"))
+        LetraSer = Trim(DBLet(Rs!Provincia, "T") & "  " & DBLet(Rs!Companyia, "T"))
         cad = cad & "," & DBSet(LetraSer, "T")
         'Octubre 2013
         'Observa3,4 y 5 ->> N? telefono y periodo facturacion
         'Cad = Cad & ",NULL,NULL,0,"
-        cad = cad & "," & DBSet(RS!idtelefono, "T") & "," & DBSet(PeriodoFacturacion, "T") & ",0,"
+        cad = cad & "," & DBSet(Rs!Telefono, "T") & "," & DBSet(PeriodoFacturacion, "T") & ",0,"
         
         
         
         'Abril 2013
         'coddirec, nommdirec
-        If IsNull(RS!CodDirec) Then
+        If IsNull(Rs!CodDirec) Then
             cad = cad & "NULL,NULL"
         Else
-            cad = cad & RS!CodDirec & ",'"
-            cad = cad & DevuelveDesdeBD(conAri, "nomdirec", "sdirec", "codclien = " & vCli.Codigo & " AND coddirec  ", RS!CodDirec) & "'"
+            cad = cad & Rs!CodDirec & ",'"
+            cad = cad & DevuelveDesdeBD(conAri, "nomdirec", "sdirec", "codclien = " & vCli.Codigo & " AND coddirec  ", Rs!CodDirec) & "'"
         End If
-        cad = cad & "," & RS!NumFact & "," & RS!Ano
+        cad = cad & "," & Rs!NumFact & "," & Rs!Ano
         cad = cad & ")"
         cad = cadW & cad
         conn.Execute cad
         
-        'La linea
+        'Veremos si es una linea por factura o es mas
+        'para ello
+        'Si es agrupacion grabará una linea por cada telefono
+        numFac = Rs!Serie & Format(Rs!NumFact, "0000000")
+        Aux = Rs!idtelefono
+        COntadorLInea = 0
+        esAgrupacion = False
+        Do
+                    
+            Rs.MoveNext
+            If Rs.EOF Then
+                COntadorLInea = 1
+            Else
+                cad = Rs!Serie & Format(Rs!NumFact, "0000000")
+                If cad <> numFac Then
+                    'Es otra factura
+                    COntadorLInea = 1
+                Else
+                    Aux = Aux & " " & Rs!idtelefono
+                    esAgrupacion = True
+                End If
+            End If
+        Loop Until COntadorLInea = 1
+        
+        Rs.MovePrevious  'lo movemos otra vez a la ultima linea facturando
+        
+        Aux = TipoFac & "  Tfno: " & Aux
+        
+        
         cad = "INSERT INTO slialb (codtipom,numalbar,numlinea,codalmac,codartic,nomartic,"
         cad = cad & "ampliaci,cantidad,numbultos,precioar , dtoline1, dtoline2, ImporteL, origpre, codproveX,codccost) VALUES ("
-        If RS!Serie = Internas Then
+        If Rs!Serie = Internas Then
             cad = cad & "'ALI'"
         Else
             cad = cad & "'ALT'"
         End If
-        cad = cad & "," & RS!NumFact & ",1,1," & DBSet(vParamAplic.ArtiTelefonia, "T") & ","
-        cad = cad & DBSet(Errores, "T") & ",'" & TipoFac & "',1,0,"
-        cad = cad & DBSet(RS!BaseImponible, "N") & ",0,0," & DBSet(RS!BaseImponible, "N") & ",'M',0,"
+        cad = cad & "," & Rs!NumFact & ",1,1," & DBSet(vParamAplic.ArtiTelefonia, "T") & ","
+        cad = cad & DBSet(Errores, "T") & ",'" & Aux & "'"
+        cad = cad & ",1,0," & DBSet(Rs!BaseImponible, "N") & ",0,0," & DBSet(Rs!BaseImponible, "N") & ",'M',0,"
         cad = cad & RecuperaValor(CodCCost, 1) & ")"
         conn.Execute cad
         
@@ -2257,17 +2398,17 @@ Dim NumAlbPz As Long
         'Segunda linea
         'IVA exento. Que estara en un campo
         ' De momento solo esta para los ficheros VODAFONE
-        If DBLet(RS!base_exenta, "N") > 0 Then
+        If DBLet(Rs!base_exenta, "N") > 0 Then
             cad = "INSERT INTO slialb (codtipom,numalbar,numlinea,codalmac,codartic,nomartic,"
             cad = cad & "ampliaci,cantidad,numbultos,precioar , dtoline1, dtoline2, ImporteL, origpre, codproveX,codccost) VALUES ("
-            If RS!Serie = Internas Then
+            If Rs!Serie = Internas Then
                 cad = cad & "'ALI'"
             Else
                 cad = cad & "'ALT'"
             End If
-            cad = cad & "," & RS!NumFact & ",2,1," & DBSet(vParamAplic.ArtTfniaIvaExento, "T") & ","
+            cad = cad & "," & Rs!NumFact & ",2,1," & DBSet(vParamAplic.ArtTfniaIvaExento, "T") & ","
             cad = cad & DBSet(Errores, "T") & ",'" & TipoFac & "',1,0,"
-            cad = cad & DBSet(RS!base_exenta, "N") & ",0,0," & DBSet(RS!base_exenta, "N") & ",'M',0,"
+            cad = cad & DBSet(Rs!base_exenta, "N") & ",0,0," & DBSet(Rs!base_exenta, "N") & ",'M',0,"
             'Septiembre 2014
             cad = cad & RecuperaValor(CodCCost, 2) & ")"
             conn.Execute cad
@@ -2277,98 +2418,135 @@ Dim NumAlbPz As Long
         
         
         If vParamAplic.TelefoniaVtaPlazos Then
-            If DBLet(RS!PlazosMeses, "N") > 0 Then
-                
-                If RS!Serie = Internas Then
-                    cad = "ALI"
-                    NumAlbPz = cTi.Contador
-                Else
-                    cad = "ALT"
-                    NumAlbPz = cT.Contador
-                End If
-                NumAlbPz = NumAlbPz + 1
-                cad = "('" & cad & "'," & NumAlbPz & "," & DBSet(RS!Fecha, "F") & ",1," & vCli.Codigo & "," & DBSet(vCli.Nombre, "T")
-                cad = cad & "," & DBSet(vCli.Domicilio, "T") & "," & DBSet(vCli.CPostal, "T")
-                cad = cad & "," & DBSet(vCli.Poblacion, "T") & "," & DBSet(vCli.Provincia, "T")
-                cad = cad & "," & DBSet(vCli.NIF, "T") & "," & DBSet(RS!Telefono, "T") & "," & DBSet(RS!Telefono, "T") & ","
-                
-                cad = cad & "0," & Tr & "," & Tr & "," & Tr & "," & vCli.Agente
-                cad = cad & "," & vCli.ForPago & "," & vParamAplic.PorDefecto_Envio & ",0,0,1"
-                                
-                'Para la reimpresion de facturas de telefonia.
-                'Grabaremos en el campo numpedcl
-                'un 1 si se imprime o un 0 si debe ir por email
-                LetraSer = "0"
-                If RS!Factura = 0 Then LetraSer = "1"  'si sclientfno.factura=0 es que no quiere la factura-->email
-                cad = cad & "," & LetraSer
-                
-                'En las observaciones podemos poner DATOS de la facturacion
-                'Observa 01.  Nombre
-                LetraSer = "Fichero vinculado: " & TipoFac
-                cad = cad & "," & DBSet(LetraSer, "T")
-                'Observa2
-                LetraSer = DBLet(RS!PlazosOrigen, "N") - RS!PlazosMeses + 1
-                LetraSer = "Venta a plazos: " & LetraSer & " / " & DBSet(RS!PlazosOrigen, "N")
-                cad = cad & "," & DBSet(LetraSer, "T")
-                'Obs3
-                LetraSer = "Importe mes: " & DBSet(RS!ImportePlazo, "N") & " s/i           Articulo: " & RS!artplazos
-                cad = cad & "," & DBSet(LetraSer, "T")
-                'Observa,4 y 5 ->> N? telefono y periodo facturacion
-                'Cad = Cad & ",NULL,NULL,0,"
-                cad = cad & "," & DBSet(RS!idtelefono, "T") & "," & DBSet(PeriodoFacturacion, "T") & ",0,"
-                
-                'coddirec, nommdirec
-                If IsNull(RS!CodDirec) Then
-                    cad = cad & "NULL,NULL"
-                Else
-                    cad = cad & RS!CodDirec & ",'"
-                    cad = cad & DevuelveDesdeBD(conAri, "nomdirec", "sdirec", "codclien = " & vCli.Codigo & " AND coddirec  ", RS!CodDirec) & "'"
-                End If
-                
-                'Octrubre 2013
-                cad = cad & ",NULL,NULL)"
-                cad = cadW & cad
-                conn.Execute cad
-                
-                'La linea
-                cad = "INSERT INTO slialb (codtipom,numalbar,numlinea,codalmac,codartic,nomartic,"
-                cad = cad & "ampliaci,cantidad,numbultos,precioar , dtoline1, dtoline2, ImporteL, origpre, codproveX,codccost) VALUES ("
-                If RS!Serie = Internas Then
-                    cad = cad & "'ALI'"
-                Else
-                    cad = cad & "'ALT'"
-                End If
-                cad = cad & "," & NumAlbPz & ",1,1," & DBSet(RS!artplazos, "T") & ","
-                LetraSer = DBLet(RS!PlazosOrigen, "N") - RS!PlazosMeses + 1
-                LetraSer = "Venta a plazos: " & LetraSer & " / " & DBSet(RS!PlazosOrigen, "N")
-                cad = cad & DBSet(DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", RS!artplazos, "T"), "T", "N") & "," & DBSet(LetraSer, "T") & ",1,0,"
-                cad = cad & DBSet(RS!ImportePlazo, "N") & ",0,0," & DBSet(Round2(RS!ImportePlazo, 2), "N") & ",'M',0,"
-                'Septiembre 2014
-                cad = cad & RecuperaValor(CodCCost, 1) & ")"
-                conn.Execute cad
-                
-                        
-            
-                'ACutalizamos resto datos.
-                'Contadores
-                If RS!Serie = Internas Then
-                    cTi.IncrementarContador cTi.TipoMovimiento
-                    
-                Else
-                    cT.IncrementarContador cT.TipoMovimiento
-                    
-                End If
-                
-                'IMPORTANTE. Disminuimos 1 el plazo
-                cad = "UPDATE sclientfno set  PlazosMeses=PlazosMeses -1 WHERE idtelefono =" & DBSet(RS!idtelefono, "T")
-                ejecutar cad, False
+            If esAgrupacion Then
+                numFac = Rs!Serie & Format(Rs!NumFact, "0000000")
+                Aux = ""
+                COntadorLInea = 0
+                Do
+                    Rs.MovePrevious
+                    If Rs.BOF Then
+                        'Ya estoy ubicado
+                        COntadorLInea = 1
+                    Else
+                        Aux = Rs!Serie & Format(Rs!NumFact, "0000000")
+                        If Aux <> numFac Then COntadorLInea = 1
+                    End If
+                Loop Until COntadorLInea = 1
+                Rs.MoveNext
             End If
-        
+                
+            COntadorLInea = 0
+            Do
+                If DBLet(Rs!PlazosMeses, "N") > 0 Then
+                    
+                    If Rs!Serie = Internas Then
+                        cad = "ALI"
+                        NumAlbPz = cTi.Contador
+                    Else
+                        cad = "ALT"
+                        NumAlbPz = cT.Contador
+                    End If
+                    NumAlbPz = NumAlbPz + 1
+                    cad = "('" & cad & "'," & NumAlbPz & "," & DBSet(Rs!Fecha, "F") & ",1," & vCli.Codigo & "," & DBSet(vCli.Nombre, "T")
+                    cad = cad & "," & DBSet(vCli.Domicilio, "T") & "," & DBSet(IIf(vCli.CPostal = "", "46", vCli.CPostal), "T")
+                    cad = cad & "," & DBSet(vCli.Poblacion, "T") & "," & DBSet(vCli.Provincia, "T")
+                    cad = cad & "," & DBSet(vCli.NIF, "T") & "," & DBSet(Rs!Telefono, "T") & "," & DBSet(Rs!Telefono, "T") & ","
+                    
+                    cad = cad & "0," & Tr & "," & Tr & "," & Tr & "," & vCli.Agente
+                    cad = cad & "," & vCli.ForPago & "," & vParamAplic.PorDefecto_Envio & ",0,0,1"
+                                    
+                    'Para la reimpresion de facturas de telefonia.
+                    'Grabaremos en el campo numpedcl
+                    'un 1 si se imprime o un 0 si debe ir por email
+                    LetraSer = "0"
+                    If Rs!Factura = 0 Then LetraSer = "1"  'si sclientfno.factura=0 es que no quiere la factura-->email
+                    cad = cad & "," & LetraSer
+                    
+                    'En las observaciones podemos poner DATOS de la facturacion
+                    'Observa 01.  Nombre
+                    LetraSer = "Fichero vinculado: " & TipoFac
+                    cad = cad & "," & DBSet(LetraSer, "T")
+                    'Observa2
+                    LetraSer = DBLet(Rs!PlazosOrigen, "N") - Rs!PlazosMeses + 1
+                    LetraSer = "Venta a plazos: " & LetraSer & " / " & DBSet(Rs!PlazosOrigen, "N")
+                    cad = cad & "," & DBSet(LetraSer, "T")
+                    'Obs3
+                    LetraSer = "Importe mes: " & DBSet(Rs!ImportePlazo, "N") & " s/i           Articulo: " & Rs!artplazos
+                    cad = cad & "," & DBSet(LetraSer, "T")
+                    'Observa,4 y 5 ->> N? telefono y periodo facturacion
+                    'Cad = Cad & ",NULL,NULL,0,"
+                    cad = cad & "," & DBSet(Rs!idtelefono, "T") & "," & DBSet(PeriodoFacturacion, "T") & ",0,"
+                    
+                    'coddirec, nommdirec
+                    If IsNull(Rs!CodDirec) Then
+                        cad = cad & "NULL,NULL"
+                    Else
+                        cad = cad & Rs!CodDirec & ",'"
+                        cad = cad & DevuelveDesdeBD(conAri, "nomdirec", "sdirec", "codclien = " & vCli.Codigo & " AND coddirec  ", Rs!CodDirec) & "'"
+                    End If
+                    
+                    'Octrubre 2013
+                    cad = cad & ",NULL,NULL)"
+                    cad = cadW & cad
+                    conn.Execute cad
+                    
+                    'La linea
+                    cad = "INSERT INTO slialb (codtipom,numalbar,numlinea,codalmac,codartic,nomartic,"
+                    cad = cad & "ampliaci,cantidad,numbultos,precioar , dtoline1, dtoline2, ImporteL, origpre, codproveX,codccost) VALUES ("
+                    If Rs!Serie = Internas Then
+                        cad = cad & "'ALI'"
+                    Else
+                        cad = cad & "'ALT'"
+                    End If
+                    cad = cad & "," & NumAlbPz & ",1,1," & DBSet(Rs!artplazos, "T") & ","
+                    LetraSer = DBLet(Rs!PlazosOrigen, "N") - Rs!PlazosMeses + 1
+                    LetraSer = "Venta a plazos: " & LetraSer & " / " & DBSet(Rs!PlazosOrigen, "N")
+                    cad = cad & DBSet(DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", Rs!artplazos, "T"), "T", "N") & "," & DBSet(LetraSer, "T") & ",1,0,"
+                    cad = cad & DBSet(Rs!ImportePlazo, "N") & ",0,0," & DBSet(Round2(Rs!ImportePlazo, 2), "N") & ",'M',0,"
+                    'Septiembre 2014
+                    cad = cad & RecuperaValor(CodCCost, 1) & ")"
+                    conn.Execute cad
+                    
+                            
+                
+                    'ACutalizamos resto datos.
+                    'Contadores
+                    If Rs!Serie = Internas Then
+                        cTi.IncrementarContador cTi.TipoMovimiento
+                        
+                    Else
+                        cT.IncrementarContador cT.TipoMovimiento
+                        
+                    End If
+                    
+                    'IMPORTANTE. Disminuimos 1 el plazo
+                    cad = "UPDATE sclientfno set  PlazosMeses=PlazosMeses -1 WHERE idtelefono =" & DBSet(Rs!idtelefono, "T")
+                    ejecutar cad, False
+                End If
+                
+                
+                If esAgrupacion Then
+                    
+                    Rs.MoveNext
+                    If Rs.EOF Then
+                        COntadorLInea = 1
+                    Else
+                        Aux = Rs!Serie & Format(Rs!NumFact, "0000000")
+                        If Aux <> numFac Then
+                            COntadorLInea = 1
+                            Rs.MovePrevious
+                        End If
+                    End If
+                Else
+                    COntadorLInea = 1
+                End If
+            Loop Until COntadorLInea = 1
+            If Rs.EOF Then Rs.MovePrevious
         End If
         'Sig
-        RS.MoveNext
+       Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     
     
@@ -2381,7 +2559,7 @@ Dim NumAlbPz As Long
 eGenerarAlbaranesTelefonia:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
     Set vCli = Nothing
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -2440,6 +2618,7 @@ Dim b As Boolean
         
         'Generaremos las ALT, las normales
         'y 'las ALI que sean de telefonia
+        
         b = GenerarFacturasTelefonia(idBanco, L, True, True)
         If b Then traspasofacturasTelefoniaCOARVAL = True
     End If
@@ -2463,7 +2642,7 @@ End Function
 
 
 Private Function GenerarAlbaranesTelefoniaCOARVAL(ByRef L As Label) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim cad As String
 Dim vCli As CCliente
 Dim Tr As Integer
@@ -2472,7 +2651,7 @@ Dim Internas As String
     On Error GoTo eGenerarAlbaranesTelefonia2
 
     GenerarAlbaranesTelefoniaCOARVAL = False
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
 
     L.Caption = "Calculando lineas"
     L.Refresh
@@ -2487,7 +2666,7 @@ Dim Internas As String
     L.Caption = "Obteniendo registros"
     L.Refresh
     cad = "Select * from tmpinformes WHERE codusu = " & vUsu.Codigo & " ORDER BY codigo1"
-    RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
     Errores = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", vParamAplic.ArtiTelefonia, "T")
@@ -2510,10 +2689,10 @@ Dim Internas As String
     
     Set vCli = New CCliente
     cad = ""
-    While Not RS.EOF
-        L.Caption = DBLet(RS!nombre1, "T")
+    While Not Rs.EOF
+        L.Caption = DBLet(Rs!nombre1, "T")
         L.Refresh
-        If Not vCli.LeerDatos(CStr(RS!campo1)) Then Err.Raise 513, , "Error leyendo el cliente: " & RS!campo1
+        If Not vCli.LeerDatos(CStr(Rs!campo1)) Then Err.Raise 513, , "Error leyendo el cliente: " & Rs!campo1
 
         
         'If Rs!serie = Internas Then
@@ -2521,7 +2700,7 @@ Dim Internas As String
         'Else
             cad = "ALT"
         'End If
-        cad = "('" & cad & "'," & RS!Codigo1 & "," & DBSet(RS!fecha1, "F") & ",1," & vCli.Codigo & "," & DBSet(vCli.Nombre, "T")
+        cad = "('" & cad & "'," & Rs!Codigo1 & "," & DBSet(Rs!fecha1, "F") & ",1," & vCli.Codigo & "," & DBSet(vCli.Nombre, "T")
         cad = cad & "," & DBSet(vCli.Domicilio, "T") & "," & DBSet(vCli.CPostal, "T")
         cad = cad & "," & DBSet(vCli.Poblacion, "T") & "," & DBSet(vCli.Provincia, "T")
         cad = cad & "," & DBSet(vCli.NIF, "T") & "," & DBSet(vCli.TfnoClien, "T") & ",'" & TipoFac & "',"
@@ -2557,17 +2736,17 @@ Dim Internas As String
         'La linea
         cad = "INSERT INTO slialb (codtipom,numalbar,numlinea,codalmac,codartic,nomartic,"
         cad = cad & "ampliaci,cantidad,numbultos,precioar , dtoline1, dtoline2, ImporteL, origpre, codproveX) VALUES ("
-        cad = cad & "'ALT'," & RS!Codigo1 & ",1,1," & DBSet(vParamAplic.ArtiTelefonia, "T") & ","
+        cad = cad & "'ALT'," & Rs!Codigo1 & ",1,1," & DBSet(vParamAplic.ArtiTelefonia, "T") & ","
         cad = cad & DBSet(Errores, "T") & ",NULL,1,0,"
-        cad = cad & DBSet(RS!Importe1, "N") & ",0,0," & DBSet(RS!Importe1, "N") & ",'M',0)"
+        cad = cad & DBSet(Rs!Importe1, "N") & ",0,0," & DBSet(Rs!Importe1, "N") & ",'M',0)"
         conn.Execute cad
         
         
 
         'Sig
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     
     
@@ -2578,7 +2757,7 @@ Dim Internas As String
 eGenerarAlbaranesTelefonia2:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
     Set vCli = Nothing
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -2835,7 +3014,7 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         Set RSalb = New ADODB.Recordset
         RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RSalb.EOF Then
-            CargarProgresNew PBar1, CInt(RSalb.Fields(0))
+            CargarProgresNew PBar1, CLng(RSalb.Fields(0))
             LblBar.Caption = "Inicializando el proceso..."
             LblBar.Refresh
             
@@ -3307,7 +3486,7 @@ Dim Aux As String
             ErroL = " Leyendo clase articulo "
         Else
             
-            vArtic.FijarprecioMinimo RN!FechaAlb, RN!codClien
+            vArtic.FijarprecioMinimo_ RN!FechaAlb, RN!codClien
             
             If vArtic.EstablecidoPrecioMinimo Then
                 PrCalculado = Round2(RN!ImporteL / RN!cantidad, 4)
@@ -3415,7 +3594,10 @@ Dim HazPulsarAceptarEnFrmImprimir As Boolean
         Set RSalb = New ADODB.Recordset
         RSalb.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RSalb.EOF Then
-            CargarProgresNew PBar1, CInt(RSalb.Fields(0))
+            SQL = RSalb.Fields(0)
+            
+        
+            CargarProgresNew PBar1, CLng(SQL)
             LblBar.Caption = "Inicializando el proceso..."
             LblBar.Refresh
             

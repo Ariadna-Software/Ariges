@@ -16,6 +16,9 @@ Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 Option Explicit
 
 
+Dim OcultarMensajes As Boolean  'Para cuando lanza el SPIA
+
+
 'Variables locales que contienen valores de propiedad
 'Variables asociadas a cada campo de la tabla de parametros SPARA1
 Private mvarTipoDtos As Byte      'Tipo de Descuentos: 0= Aditivo 1=Sobre Resto
@@ -226,6 +229,7 @@ Private mvarMarcarAlbaranFacturar As Boolean
 '[17/12/2010] [DAVID]
 Private mvarOperacionesAseguradas As Boolean
 Private mvarSituacionBloqueoOpAseg As Integer
+Private mvarSituacionBloqueoOpAsegSinBloq As Integer '[29/12/2020] [DAVID]  Situacion si tipo prioridad =9
 
 
 ' Rotacion.  Valores para el listado de rotacion
@@ -285,10 +289,6 @@ Private mvarRenting As Boolean
 Private mvarGestionFlotas As Boolean
 
 
-'ALMAGRUPO.  En teoria solo Herbelca
-'Parametro SIN parametro
-'Si existe una tabla y esta tiene valor es que COMUNICA
-Private mvarComunicaAlmagrupo As Boolean
 
 
 '[09/08/2012]
@@ -468,6 +468,21 @@ Private mvarLlevaGasolinera As Boolean
 Private mvarDigitosCodartic As Byte
 
 
+
+
+Private mvarAgrupaTfnosFacturacionCliente As Boolean
+
+
+Private mvarDiasCaducidadPuntos As Integer
+
+
+
+
+
+'TAXCO
+'Cuando factura OTs final de mes, el trabajador será otro, para que no le aparezca en
+' ventas por trabajador
+Private mvarTrabajadorFinMesFacturacion As Integer
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
@@ -1369,6 +1384,13 @@ End Property
 Public Property Let SituacionBloqueoOpAseg(ByVal vData As Integer)
      mvarSituacionBloqueoOpAseg = vData
 End Property
+Public Property Get SituacionBloqueoOpAsegSinbloq() As Integer
+     SituacionBloqueoOpAsegSinbloq = mvarSituacionBloqueoOpAsegSinBloq
+End Property
+
+Public Property Let SituacionBloqueoOpAsegSinbloq(ByVal vData As Integer)
+     mvarSituacionBloqueoOpAsegSinBloq = vData
+End Property
 
 
 
@@ -1459,7 +1481,7 @@ End Property
 
 '----------------------------------------------------------------------
 ' GETS para los numeros de copia
-'      1ofer  2pedido  3ped_ruta  4alb  5alb_ruta  6FraRect
+'      1ofer  2pedido  3ped_ruta  4alb  5alb_ruta  6FraRect 7Framostrador
 Public Property Get NumeroCopias() As String
      NumeroCopias = mvarNumeroCopias
 End Property
@@ -1485,7 +1507,9 @@ End Property
 Public Property Get NumCop_FraRectifica() As Integer
     NumCop_FraRectifica = DevuelveNumeroCopias(6)
 End Property
-
+Public Property Get NumCop_FraMostrador() As Integer
+    NumCop_FraMostrador = DevuelveNumeroCopias(7)
+End Property
 
 'CUIDADO A CAMBIAR ESTA VARIABLE
 ' Para el LOG de impresion de albaranes  UTILIZO PrecioMinimo
@@ -1566,10 +1590,6 @@ Public Property Get GestionFlotas() As Boolean
      GestionFlotas = mvarGestionFlotas
 End Property
 
-'No tienen coluimna en La BD
-Public Property Get ComunicaAlmagrupo() As Boolean
-     ComunicaAlmagrupo = mvarComunicaAlmagrupo
-End Property
 
 
 
@@ -1852,7 +1872,7 @@ Public Property Get ImportacionesCoarval() As Boolean
 End Property
      
      
-'llevan GET y let
+'llevan GET
 Public Property Get TieneGasolinera() As Boolean
      TieneGasolinera = mvarLlevaGasolinera
 End Property
@@ -1861,6 +1881,27 @@ End Property
 Public Property Get DigitosCodartic() As Byte
      DigitosCodartic = mvarDigitosCodartic
 End Property
+
+
+
+'Si puede agrupara los telefonos de un cliente (Los que eleija) en una factura
+Public Property Get AgrupaTfnosFacturacionCliente() As Boolean
+     AgrupaTfnosFacturacionCliente = mvarAgrupaTfnosFacturacionCliente
+End Property
+
+
+Public Property Let TrabajadorFinMesFacturacion(ByVal vData As Integer)
+     mvarTrabajadorFinMesFacturacion = vData
+End Property
+Public Property Get TrabajadorFinMesFacturacion() As Integer
+     TrabajadorFinMesFacturacion = mvarTrabajadorFinMesFacturacion
+End Property
+
+Public Property Get DiasCaducidadPuntos() As Integer
+     DiasCaducidadPuntos = mvarDiasCaducidadPuntos
+End Property
+
+
 
 
 
@@ -1910,10 +1951,12 @@ End Property
 '------------------------------------------------
 
 '****   LEER  ***
-Public Function Leer() As Byte
+Public Function Leer(OcultarLosMensajes As Boolean) As Byte
 Dim RS As ADODB.Recordset
 Dim V As Variant
 On Error GoTo Err3
+    
+    OcultarMensajes = OcultarLosMensajes
     
     SQL = "SELECT * FROM spara1 "
     Set RS = New ADODB.Recordset
@@ -2196,8 +2239,9 @@ On Error GoTo Err3
             mvarPtosFechaIncio = RS!PtosFechaIncio
         End If
         
-        mvarPrecioHoraCosteEUL = DBLet(RS!preciohoracoste, "N")
         
+        mvarPrecioHoraCosteEUL = 0
+        If CampoNuevoBD(RS, "preciohoracoste", "N", V) Then mvarPrecioHoraCosteEUL = CCur(V)
         
         'Si tiene telefonia entoces vere si tiene el modulo de venta a plazos
         mvarTelefoniaVtaPlazos = False
@@ -2222,12 +2266,12 @@ On Error GoTo Err3
         mvarPuedeModificarAriconta = False   'Modificara o eliminara en contabilidad   SOLO conta nueva   De momento Fenollar
         mvarTieneComponentes_y_Produccion = False
         
-        If mvarNumeroInstalacion = vbFenollar Then
-            mvarImpresoraFenollarA = "\\PCPRUEBAS\CARLA"
-            mvarImpresoraFenollarB = "\\PCMAJOSE\MAJO"
-            mvarPuedeModificarAriconta = True
-            mvarTieneComponentes_y_Produccion = True
-        End If
+'        If mvarNumeroInstalacion = vbFenollar Then
+'            mvarImpresoraFenollarA = "\\PCPRUEBAS\CARLA"
+'            mvarImpresoraFenollarB = "\\PCMAJOSE\MAJO"
+'            mvarPuedeModificarAriconta = True
+'            mvarTieneComponentes_y_Produccion = True
+'        End If
         
         mvarMaximoImporteEfectivo = 2500
         If CampoNuevoBD(RS, "ImportMaxEfectivo", "N", V) Then mvarMaximoImporteEfectivo = DBLet(V)
@@ -2242,6 +2286,28 @@ On Error GoTo Err3
         
         If mvarNumeroInstalacion = vbTaxco Then mvarArtReciclado = "SI"
         
+        mvarAgrupaTfnosFacturacionCliente = False
+        If CampoNuevoBD(RS, "AgrupTfnoFactCli", "B", V) Then mvarAgrupaTfnosFacturacionCliente = CBool(V)
+
+
+        'Taxco (de momento)
+        'Cuando factura a final de mes las OTs , pondra este trabajador. Se lo asignara antes de la facturacioon
+        mvarTrabajadorFinMesFacturacion = -1
+        
+        
+        
+        'Dic2020
+        mvarSituacionBloqueoOpAsegSinBloq = 0
+        If CampoNuevoBD(RS, "situ_riesgo_Nobloq", "N", V) Then mvarSituacionBloqueoOpAsegSinBloq = DBLet(V)
+        If mvarOperacionesAseguradas Then
+            If mvarSituacionBloqueoOpAsegSinBloq = 0 Then mvarSituacionBloqueoOpAsegSinBloq = mvarSituacionBloqueoOpAseg
+        End If
+        
+        
+        'Mayo2021
+        mvarDiasCaducidadPuntos = 0
+        If CampoNuevoBD(RS, "diascaducidadpuntos", "N", V) Then mvarDiasCaducidadPuntos = DBLet(V)
+        
         
         
         Leer = 0
@@ -2251,7 +2317,7 @@ On Error GoTo Err3
     RS.Close
     
     If Leer = 0 Then
-        FijaParametroAlmagrupo RS  'hacer rs=nothing
+        
         
         mvarQueEmpresaEs = 0
         If ComprobarEmpresaWHOSE(RS) Then
@@ -2277,6 +2343,8 @@ On Error GoTo Err3
         'Importaciones COARVAL
         FijarSiTieneImporCoarval RS
         
+        
+        
     End If
     
     Set RS = Nothing
@@ -2288,7 +2356,7 @@ Err3:
     Mens = "Se ha producido un error(Leer Parametros)" & vbCrLf
     Mens = Mens & "Número: " & Err.Number & vbCrLf
     Mens = Mens & "Descripción: " & Err.Description
-    MsgBox Mens, vbExclamation
+    If Not OcultarMensajes Then MsgBox Mens, vbExclamation
     RS.Close
     Set RS = Nothing
     Leer = 1
@@ -2452,6 +2520,9 @@ On Error GoTo EModificar
     '`OperAseguradas`    `situbloq`
     SQL = SQL & ",OperAseguradas = " & DBSet(mvarOperacionesAseguradas, "B")
     SQL = SQL & ",situbloq = " & DBSet(mvarSituacionBloqueoOpAseg, "N")
+    SQL = SQL & ",situ_riesgo_Nobloq = " & DBSet(mvarSituacionBloqueoOpAsegSinBloq, "N")
+    
+    
 
     'Rotacion
     SQL = SQL & ",mesconant1 = " & DBSet(mvarRot_ConsumMes1, "N", "S")
@@ -2518,6 +2589,17 @@ On Error GoTo EModificar
     ' iva sin retencion, iva con retencion
     'Entocnes cuando modifico, borro las entradas y las vuevlo a generer
     CargarTablaTraduccionIVAS
+    
+    
+    
+    'Si tiene Menu nuevo, habra que actualizar a partir de las opciones
+    'Si tiene telefonia, si tiene.......
+    If vUsu.Skin >= 0 Then ActualizarTablasMenusArigesNuevo
+    
+    
+    
+    
+    
     
     
     'Todo bien
@@ -2598,7 +2680,7 @@ Dim devuelve As Integer
     ElseIf TipoIVAOrigen = TipoIVA3 Then
         devuelve = TipoIVAre3
     Else
-        MsgBox "NO se ha encontrado la correspondencia para el IVA RE: " & TipoIVAOrigen, vbExclamation
+        If Not OcultarMensajes Then MsgBox "NO se ha encontrado la correspondencia para el IVA RE: " & TipoIVAOrigen, vbExclamation
     End If
     DevuleveTipoIVA_RE = devuelve
 End Function
@@ -2693,7 +2775,7 @@ On Error GoTo EC
 
     If Me.ExeEnvioMail <> "" Then
         If Dir(App.Path & "\" & Me.ExeEnvioMail, vbArchive) = "" Then
-            MsgBox "No existe en este PC el archivo: " & Me.ExeEnvioMail, vbInformation
+            If Not OcultarMensajes Then MsgBox "No existe en este PC el archivo: " & Me.ExeEnvioMail, vbInformation
             ExeEnvioMail = ""
         End If
     End If
@@ -2709,10 +2791,9 @@ End Sub
 
 ' Las facturas VAN por otro proceso
 'Posiciones
-' CINCO primeras
-'      ofer  pedido  ped_ruta  alb  alb_ruta
-' SIG
-'       FraRect
+' 6 primeras
+'      ofer  pedido  ped_ruta  alb  alb_ruta    FraRect
+' Ene 21.   Fra mostrador (7)
 Private Function DevuelveNumeroCopias(posicion As Byte) As Integer
 Dim C As String
 
@@ -2735,21 +2816,6 @@ End Function
 
 
 
-'Si existe la tabla de parametros de almagrupo Y NO es EOF
-Private Sub FijaParametroAlmagrupo(ByRef R As ADODB.Recordset)
-    On Error GoTo eMvarComunicaAlmagrupo
-    Set R = New ADODB.Recordset
-    mvarComunicaAlmagrupo = False
-    SQL = "Select * from salmagrupoparam "
-    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    SQL = ""
-    SQL = R.Fields(0)
-    If SQL <> "" Then mvarComunicaAlmagrupo = True
-    R.Close
-eMvarComunicaAlmagrupo:
-    Err.Clear
-    
-End Sub
 
 
 'Si existe la tabla de parametros de whose
@@ -2977,5 +3043,8 @@ End Function
 Public Sub QuitarFormulariosGrandes()
      mvarHaciendoFrmulariosGrandes = False
 End Sub
+
+
+
 
 

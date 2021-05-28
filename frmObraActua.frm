@@ -614,7 +614,7 @@ Private Sub Form_Load()
     
 
     
-    NombreTabla = "sactuaobra" 'Tabla Promociones Tarifas
+    NombreTabla = "sactuaobra" 'Tabla
     Ordenacion = " ORDER BY coddirec"
     CadenaConsulta = "Select * from " & NombreTabla & " WHERE coddirec = -1" 'No recupera datos
     Data1.ConnectionString = conn

@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
 Object = "{05BFD3F1-6319-4F30-B752-C7A22889BCC4}#1.0#0"; "AcroPDF.dll"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmWH_Expedientes 
    Caption         =   "WHOSE"
    ClientHeight    =   10980
@@ -857,7 +857,7 @@ Public expediente As Long
 Public Ano As Integer
 
 Dim IT As ListItem
-Dim Cad As String
+Dim cad As String
 
 
 Dim PrimVez As Boolean
@@ -884,7 +884,7 @@ End Sub
 
 
 Private Sub cmdVerPDF_Click()
-    LanzaVisorMimeDocumento Me.hWnd, AcroPDF1.Tag
+    LanzaVisorMimeDocumento Me.hwnd, AcroPDF1.Tag
     
 End Sub
 
@@ -924,13 +924,13 @@ Private Sub Form_Load()
     
     
     
-    Dim I
-    For I = 0 To Me.Image3.Count - 1
+    Dim i
+    For i = 0 To Me.Image3.Count - 1
         'El 5 NO existe
-        If I <> 5 Then CursorParaIconos Image3(I)
+        If i <> 5 Then CursorParaIconos Image3(i)
     Next
     CursorParaIconos imgWeb
-    CursorParaIconos imgMail
+    CursorParaIconos ImgMail
     
     'Solo admin podrá...
     Me.Image3(17).visible = False  'eliminar un contrato
@@ -964,15 +964,15 @@ End Sub
 
 
 Private Sub Image1_Click()
-    frmFacClientes.VerCliente = Cliente
-    frmFacClientes.DatosADevolverBusqueda = ""
-    frmFacClientes.Show vbModal
+    frmFacClientesGr.VerCliente = Cliente
+    frmFacClientesGr.DatosADevolverBusqueda = ""
+    frmFacClientesGr.Show vbModal
     
     Set miRsAux = Nothing
     Set miRsAux = New ADODB.Recordset
     
-    Cad = "Select nomclien,telclie1,telclie2 from sclien where codclien =" & Cliente
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "Select nomclien,telclie1,telclie2 from sclien where codclien =" & Cliente
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'NO PUEDE SER EOF
     Me.Text1(1).Text = miRsAux!NomClien
     Me.Text1(2).Text = DBLet(miRsAux!telclie1, "T")
@@ -993,11 +993,11 @@ Private Sub Image3_Click(Index As Integer)
     Select Case Index
     Case 0, 1
         If Index = 0 Then
-            frmWH_Varios.opcion = 4
+            frmWH_Varios.Opcion = 4
             frmWH_Varios.ExtraData2 = Cliente
         Else
             If Me.lwObras.SelectedItem Is Nothing Then Exit Sub
-            frmWH_Varios.opcion = 5
+            frmWH_Varios.Opcion = 5
             frmWH_Varios.ExtraData2 = Cliente & "|" & lwObras.SelectedItem.Text & "|" & lwObras.SelectedItem.SubItems(1) & "|"
         End If
         
@@ -1020,16 +1020,16 @@ Private Sub Image3_Click(Index As Integer)
         
             
         'NUEVA. O esta rechazada la anterior
-        Cad = ""
+        cad = ""
         If lwPRI.ListItems.Count > 0 Then
             If Trim(lwPRI.ListItems(1).SubItems(1)) = "" Then
-                Cad = "NO hay contestacion a la anterior"
+                cad = "NO hay contestacion a la anterior"
             Else
-                If lwPRI.ListItems(1).SubItems(2) = "SI" Then Cad = "YA esta aceptada"
+                If lwPRI.ListItems(1).SubItems(2) = "SI" Then cad = "YA esta aceptada"
             End If
         End If
-        If Cad <> "" Then
-            MsgBox Cad, vbExclamation
+        If cad <> "" Then
+            MsgBox cad, vbExclamation
             Exit Sub
         End If
     
@@ -1037,7 +1037,7 @@ Private Sub Image3_Click(Index As Integer)
         If lwPRI.ListItems.Count > 0 Then CadenaDesdeOtroForm = Me.lwPRI.ListItems(1).SubItems(1)
         frmWH_Varios.ExtraData2 = Format(Cliente, "000000") & "|" & expediente & "|" & Ano & "|" & CadenaDesdeOtroForm & "|" '& "|1|"
         CadenaDesdeOtroForm = ""
-        frmWH_Varios.opcion = 6
+        frmWH_Varios.Opcion = 6
         frmWH_Varios.Show vbModal
         If CadenaDesdeOtroForm <> "" Then CargaListviewExpPRI Me.lwPRI, Ano, expediente
  
@@ -1046,29 +1046,29 @@ Private Sub Image3_Click(Index As Integer)
         'Aceptado 3-4
         
         CadenaDesdeOtroForm = ""
-        Cad = ""
+        cad = ""
         If Index = 7 Or Index = 3 Then
             If Me.lwPRI.SelectedItem Is Nothing Then Exit Sub
-            If Trim(lwPRI.SelectedItem.SubItems(1)) <> "" Then Cad = "*"
+            If Trim(lwPRI.SelectedItem.SubItems(1)) <> "" Then cad = "*"
             CadenaDesdeOtroForm = lwPRI.SelectedItem.Text & "|Prop. intelectual|"
         Else
             If Me.lwSGD.SelectedItem Is Nothing Then Exit Sub
-            If Trim(lwSGD.SelectedItem.SubItems(3)) <> "" Then Cad = "*"
+            If Trim(lwSGD.SelectedItem.SubItems(3)) <> "" Then cad = "*"
             CadenaDesdeOtroForm = lwSGD.SelectedItem.SubItems(2) & "|SGD|"
         End If
  
-        If Cad <> "" Then
-            Cad = "Ya esta contestado"
-            MsgBox Cad, vbExclamation
+        If cad <> "" Then
+            cad = "Ya esta contestado"
+            MsgBox cad, vbExclamation
             Exit Sub
         End If
         
         frmWH_Varios.ExtraData2 = CStr(CadenaDesdeOtroForm)
         CadenaDesdeOtroForm = ""
         If Index >= 7 Then
-            frmWH_Varios.opcion = 13
+            frmWH_Varios.Opcion = 13
         Else
-            frmWH_Varios.opcion = 14
+            frmWH_Varios.Opcion = 14
         End If
         frmWH_Varios.Show vbModal
         
@@ -1077,24 +1077,24 @@ Private Sub Image3_Click(Index As Integer)
             If Index = 7 Or Index = 3 Then
                 'PRopiedad intelectual
                 'whoobrascli pifcontesta aceptado  where expediente  anoexp  idPI
-                Cad = "UPDATE  whoobrasclipi SET fcontesta =" & DBSet(CadenaDesdeOtroForm, "F") & ", aceptado=" & Abs(Index = 3)
-                Cad = Cad & " WHERE expediente=" & expediente & " AND anoexp=" & Ano
-                Cad = Cad & " AND idPI =" & Mid(Me.lwPRI.SelectedItem.Key, 2)
-                If Ejecutar(Cad, False) Then
+                cad = "UPDATE  whoobrasclipi SET fcontesta =" & DBSet(CadenaDesdeOtroForm, "F") & ", aceptado=" & Abs(Index = 3)
+                cad = cad & " WHERE expediente=" & expediente & " AND anoexp=" & Ano
+                cad = cad & " AND idPI =" & Mid(Me.lwPRI.SelectedItem.Key, 2)
+                If ejecutar(cad, False) Then
                     lwPRI.SelectedItem.SubItems(1) = CadenaDesdeOtroForm
                     If Index = 3 Then lwPRI.SelectedItem.SubItems(2) = "SI"
                 End If
             Else
                 'SGD
                 'whoobrasclisgd  fcontesta  aceptado    expediente  anoexp  SGD  IdPres
-                Cad = "UPDATE whoobrasclisgd SET fcontesta =" & DBSet(CadenaDesdeOtroForm, "F") & ", aceptado=" & Abs(Index = 4)
-                Cad = Cad & " WHERE expediente=" & expediente & " AND anoexp=" & Ano
+                cad = "UPDATE whoobrasclisgd SET fcontesta =" & DBSet(CadenaDesdeOtroForm, "F") & ", aceptado=" & Abs(Index = 4)
+                cad = cad & " WHERE expediente=" & expediente & " AND anoexp=" & Ano
                 
                 
-                Cad = Cad & " AND SGD =" & lwSGD.SelectedItem.Text
+                cad = cad & " AND SGD =" & lwSGD.SelectedItem.Text
                 
-                Cad = Cad & " AND IdPres =" & Mid(Me.lwSGD.SelectedItem.Key, 4)
-                If Ejecutar(Cad, False) Then
+                cad = cad & " AND IdPres =" & Mid(Me.lwSGD.SelectedItem.Key, 4)
+                If ejecutar(cad, False) Then
                     lwSGD.SelectedItem.SubItems(3) = CadenaDesdeOtroForm
                     If Index = 4 Then lwSGD.SelectedItem.SubItems(4) = "SI"
                 End If
@@ -1109,16 +1109,16 @@ Private Sub Image3_Click(Index As Integer)
             
         
         'NUEVA. O esta rechazada la anterior
-        Cad = ""
+        cad = ""
         If lwSGD.ListItems.Count > 0 Then
             If Trim(lwSGD.ListItems(1).SubItems(1)) = "" Then
-                Cad = "NO hay contestacion a la anterior"
+                cad = "NO hay contestacion a la anterior"
             Else
-                If lwSGD.ListItems(1).SubItems(2) = "SI" Then Cad = "YA esta aceptada"
+                If lwSGD.ListItems(1).SubItems(2) = "SI" Then cad = "YA esta aceptada"
             End If
         End If
-        If Cad <> "" Then
-            MsgBox Cad, vbExclamation
+        If cad <> "" Then
+            MsgBox cad, vbExclamation
             Exit Sub
         End If
         
@@ -1127,7 +1127,7 @@ Private Sub Image3_Click(Index As Integer)
         
         
         CadenaDesdeOtroForm = ""
-        frmWH_Varios.opcion = 7
+        frmWH_Varios.Opcion = 7
         frmWH_Varios.Show vbModal
         If CadenaDesdeOtroForm <> "" Then CargaListviewExpSGD Me.lwSGD, Ano, expediente
  
@@ -1139,7 +1139,7 @@ Private Sub Image3_Click(Index As Integer)
         frmWH_Varios.ExtraData2 = Format(Cliente, "000000") & "|" & expediente & "|" & Ano & "|"
         If Index = 13 Then frmWH_Varios.ExtraData2 = frmWH_Varios.ExtraData2 & Mid(Me.lwActuaciones.SelectedItem.Key, 2) & "|"
         CadenaDesdeOtroForm = ""
-        frmWH_Varios.opcion = Index - 3 '9 y 10---> 12-3
+        frmWH_Varios.Opcion = Index - 3 '9 y 10---> 12-3
         frmWH_Varios.Show vbModal
         If CadenaDesdeOtroForm <> "" Then CargaActuaciones
             
@@ -1152,13 +1152,13 @@ Private Sub Image3_Click(Index As Integer)
         
         If Index = 11 Then
             'ELIMINAR
-            Cad = "Va a eliminar el elemento: " & vbCrLf & Me.lwTitularidad.SelectedItem.Text & vbCrLf & vbCrLf & "¿Continuar?"
-            If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+            cad = "Va a eliminar el elemento: " & vbCrLf & Me.lwTitularidad.SelectedItem.Text & vbCrLf & vbCrLf & "¿Continuar?"
+            If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
             
-            Cad = " DELETE FROM whotitularidadcli  WHERE codclien =" & Cliente
+            cad = " DELETE FROM whotitularidadcli  WHERE codclien =" & Cliente
             
-            Cad = Cad & " AND idTitularidad =" & Mid(lwTitularidad.SelectedItem.Key, 2)
-            If Ejecutar(Cad, False) Then
+            cad = cad & " AND idTitularidad =" & Mid(lwTitularidad.SelectedItem.Key, 2)
+            If ejecutar(cad, False) Then
                 CadenaDesdeOtroForm = "OK"
             Else
                 CadenaDesdeOtroForm = "" 'MAL. QUe no refresque
@@ -1166,20 +1166,20 @@ Private Sub Image3_Click(Index As Integer)
         
         Else
             If Index = 2 Then
-                Cad = lwTitularidad.SelectedItem.Text & "|" & lwTitularidad.SelectedItem.SubItems(1) & "|" & Mid(lwTitularidad.SelectedItem.Key, 2) & "|"
-                frmWH_Varios.opcion = 12
+                cad = lwTitularidad.SelectedItem.Text & "|" & lwTitularidad.SelectedItem.SubItems(1) & "|" & Mid(lwTitularidad.SelectedItem.Key, 2) & "|"
+                frmWH_Varios.Opcion = 12
             Else
-                Cad = ""
-                frmWH_Varios.opcion = 11
+                cad = ""
+                frmWH_Varios.Opcion = 11
             End If
-            frmWH_Varios.ExtraData2 = Format(Cliente, "000000") & "|" & Cad
+            frmWH_Varios.ExtraData2 = Format(Cliente, "000000") & "|" & cad
             frmWH_Varios.Show vbModal
         End If
         
         If CadenaDesdeOtroForm <> "" Then CargaTitularidad
         
     Case 14
-        MsgBox "No tiene permisos", vbExclamation
+        MsgBox "No tiene suficientes privilegios. Consulte al administrador del sistema. ", vbExclamation
  
  
     Case 15, 16, 17
@@ -1201,9 +1201,9 @@ Private Sub Image3_Click(Index As Integer)
             
             If Index = 15 Then
                 
-                frmWH_Varios.opcion = 15
+                frmWH_Varios.Opcion = 15
             Else
-                frmWH_Varios.opcion = 16
+                frmWH_Varios.Opcion = 16
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & Mid(lwContrato.SelectedItem.Key, 2) & "|"
                 If Trim(lwContrato.SelectedItem.SubItems(1)) <> "" Then
                     CadenaDesdeOtroForm = CadenaDesdeOtroForm & "0|" & lwContrato.SelectedItem.SubItems(1) & "|"
@@ -1230,24 +1230,24 @@ End Sub
 
 Private Sub ImgMail_Click()
     Screen.MousePointer = vbHourglass
-    Cad = DevuelveDesdeBD(conAri, "maiclie1", "sclien", "codclien", Me.Text1(0).Text)
-    If Cad = "" Then
+    cad = DevuelveDesdeBD(conAri, "maiclie1", "sclien", "codclien", Me.Text1(0).Text)
+    If cad = "" Then
         MsgBox "No tiene direccion de email administración", vbExclamation
     Else
-        If LanzaMailGnral(Cad) Then Espera 1
+        If LanzaMailGnral(cad) Then Espera 1
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub imgWeb_Click()
     Screen.MousePointer = vbHourglass
-    Cad = DevuelveDesdeBD(conAri, "wwwclien", "sclien", "codclien", Me.Text1(0).Text)
-    If Cad = "" Then
+    cad = DevuelveDesdeBD(conAri, "wwwclien", "sclien", "codclien", Me.Text1(0).Text)
+    If cad = "" Then
         MsgBox "No tiene direccion web asignada", vbExclamation
     Else
-        Cad = "http://" & Cad
+        cad = "http://" & cad
         'If LanzaHomeGnral(Cad) Then Espera 2
-        LanzaVisorMimeDocumento Me.hWnd, Cad
+        LanzaVisorMimeDocumento Me.hwnd, cad
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -1255,8 +1255,8 @@ End Sub
 Private Sub lwActuaciones_DblClick()
     If lwActuaciones.SelectedItem Is Nothing Then Exit Sub
     
-    Cad = DevuelveNombreArhivoITEMClientes(lwActuaciones.SelectedItem, 5, Cliente)
-    If Cad <> "" Then LanzaVisorMimeDocumento Me.hWnd, Cad
+    cad = DevuelveNombreArhivoITEMClientes(lwActuaciones.SelectedItem, 5, Cliente)
+    If cad <> "" Then LanzaVisorMimeDocumento Me.hwnd, cad
 End Sub
 
 Private Sub lwActuaciones_ItemClick(ByVal Item As MSComctlLib.ListItem)
@@ -1268,7 +1268,7 @@ Private Sub lwActuaciones_ItemClick(ByVal Item As MSComctlLib.ListItem)
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub lwActuaciones_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lwActuaciones_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     QUienHaLlamadoAlContextual = 5 'actuaciones
     AbrirContextual Button
 End Sub
@@ -1277,7 +1277,7 @@ Private Sub lwContrato_ItemClick(ByVal Item As MSComctlLib.ListItem)
     PonerPDF lwContrato, 1
 End Sub
 
-Private Sub lwContrato_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lwContrato_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     QUienHaLlamadoAlContextual = 0 'contratos
     AbrirContextual Button
 End Sub
@@ -1290,8 +1290,8 @@ Private Sub lwPRI_DblClick()
  
     If lwPRI.SelectedItem Is Nothing Then Exit Sub
     
-    Cad = DevuelveNombreArhivoITEMClientes(lwPRI.SelectedItem, 3, Cliente)
-    If Cad <> "" Then LanzaVisorMimeDocumento Me.hWnd, Cad
+    cad = DevuelveNombreArhivoITEMClientes(lwPRI.SelectedItem, 3, Cliente)
+    If cad <> "" Then LanzaVisorMimeDocumento Me.hwnd, cad
  
 End Sub
 
@@ -1306,22 +1306,22 @@ End Sub
 'OBRAS
 Private Sub CargaExpedientes()
     lwObras.ListItems.Clear
-    Cad = "SELECT expediente,anoexp,codclien,nombre,fecaltobra,extension,desRelacion FROM whoobrascli,whorelacioncliobra  "
-    Cad = Cad & " WHERE whoobrascli.tipoPresentador=whorelacioncliobra.idRelacion "
-    Cad = Cad & "  AND codclien =" & Cliente
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "SELECT expediente,anoexp,codclien,nombre,fecaltobra,extension,desRelacion FROM whoobrascli,whorelacioncliobra  "
+    cad = cad & " WHERE whoobrascli.tipoPresentador=whorelacioncliobra.idRelacion "
+    cad = cad & "  AND codclien =" & Cliente
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = Me.lwObras.ListItems.Add()
         IT.Text = Format(miRsAux!expediente, "000000")
         IT.SubItems(1) = miRsAux!anoexp
-        IT.SubItems(2) = miRsAux!nombre
+        IT.SubItems(2) = miRsAux!Nombre
         IT.SubItems(3) = miRsAux!fecaltobra
         
         IT.SubItems(4) = miRsAux!desRelacion
         
-        IT.SmallIcon = DevuelveIconoWHOSE(miRsAux!extension)
+        IT.SmallIcon = DevuelveIconoWHOSE(miRsAux!Extension)
         
-        IT.Tag = IT.Text & IT.SubItems(1) & "." & miRsAux!extension
+        IT.Tag = IT.Text & IT.SubItems(1) & "." & miRsAux!Extension
         
         miRsAux.MoveNext
     Wend
@@ -1343,9 +1343,9 @@ Private Sub CargaExpedientes()
 End Sub
 
 Private Sub CargaDatosCliente()
-    Cad = "select whoexpedientecli.*,nomclien,telclie1,telclie2 from whoexpedientecli inner join sclien on"
-    Cad = Cad & " whoexpedientecli.codclien=sclien.codclien WHERE whoexpedientecli.codclien =" & Cliente
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = "select whoexpedientecli.*,nomclien,telclie1,telclie2 from whoexpedientecli inner join sclien on"
+    cad = cad & " whoexpedientecli.codclien=sclien.codclien WHERE whoexpedientecli.codclien =" & Cliente
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'NO PUEDE SER EOF
     Me.Text1(0).Text = Format(Cliente, "000000")
     Me.Text1(1).Text = miRsAux!NomClien
@@ -1370,12 +1370,12 @@ Private Sub CargaTitularidad()
     lwTitularidad.ListItems.Clear
     If miRsAux Is Nothing Then Set miRsAux = New ADODB.Recordset
     'whotitularidadcli (   codclien,idTitularidad ,nombre ,relacion )
-    Cad = " select * from whotitularidadcli WHERE codclien=" & Cliente
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    cad = " select * from whotitularidadcli WHERE codclien=" & Cliente
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = Me.lwTitularidad.ListItems.Add(, "K" & Format(miRsAux!idTitularidad, "00000"))
         
-        IT.Text = miRsAux!nombre
+        IT.Text = miRsAux!Nombre
         IT.SubItems(1) = miRsAux!relacion
       
         miRsAux.MoveNext
@@ -1392,8 +1392,8 @@ Dim cu As Byte
     expediente = CLng(Me.lwObras.SelectedItem.Text)
     Ano = lwObras.SelectedItem.SubItems(1)
     
-    Cad = "Expediente = " & expediente & " AND anoexp =" & Ano & " AND codclien"
-    txtDescObra.Text = DevuelveDesdeBD(conAri, "Descripcion", "whoobrascli", Cad, CStr(Cliente))
+    cad = "Expediente = " & expediente & " AND anoexp =" & Ano & " AND codclien"
+    txtDescObra.Text = DevuelveDesdeBD(conAri, "Descripcion", "whoobrascli", cad, CStr(Cliente))
          
     'Cargamos mas cosas
      
@@ -1421,9 +1421,9 @@ End Sub
 
 Private Sub CargaActuaciones()
     lwActuaciones.ListItems.Clear
-    Cad = "Select f_preact,importe,horas,observa,extension,idactua from whoobrascliactua WHERE expediente =  " & expediente & " AND anoexp = " & Ano & " ORDER BY   IdActua desc"
+    cad = "Select f_preact,importe,horas,observa,extension,idactua from whoobrascliactua WHERE expediente =  " & expediente & " AND anoexp = " & Ano & " ORDER BY   IdActua desc"
     If miRsAux Is Nothing Then Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = Me.lwActuaciones.ListItems.Add(, "K" & Format(miRsAux!idActua, "00000"))
         
@@ -1432,17 +1432,17 @@ Private Sub CargaActuaciones()
         If Not IsNull(miRsAux!Importe) Then IT.SubItems(1) = Format(miRsAux!Importe, FormatoImporte)
         IT.SubItems(2) = " "
         If Not IsNull(miRsAux!Horas) Then IT.SubItems(2) = Format(miRsAux!Horas, FormatoImporte)
-        Cad = DBLet(miRsAux!observa, "T") & " "
-        Cad = Replace(Cad, vbCrLf, " ")
-        IT.SubItems(3) = Cad
+        cad = DBLet(miRsAux!observa, "T") & " "
+        cad = Replace(cad, vbCrLf, " ")
+        IT.SubItems(3) = cad
         
-        IT.SmallIcon = DevuelveIconoWHOSE(miRsAux!extension)
-        If miRsAux!extension <> "" Then
-            Cad = Format(expediente, "000000") & Ano & Format(miRsAux!idActua, "000") & "." & miRsAux!extension
+        IT.SmallIcon = DevuelveIconoWHOSE(miRsAux!Extension)
+        If miRsAux!Extension <> "" Then
+            cad = Format(expediente, "000000") & Ano & Format(miRsAux!idActua, "000") & "." & miRsAux!Extension
         Else
-            Cad = ""
+            cad = ""
         End If
-        IT.Tag = Cad
+        IT.Tag = cad
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1460,14 +1460,14 @@ Private Sub CargaTrabajadoresActuacion()
     If Me.lwActuaciones.ListItems.Count = 0 Then Exit Sub
     If Me.lwActuaciones.SelectedItem Is Nothing Then Exit Sub
     
-    Cad = "Select whoobrascliactuatrab.codtraba,nomtraba from whoobrascliactuatrab,straba WHERE whoobrascliactuatrab.codtraba=straba.codtraba AND"
-    Cad = Cad & " expediente =  " & expediente & " AND anoexp = " & Ano & " AND idactua = " & Mid(Me.lwActuaciones.SelectedItem.Key, 2)
+    cad = "Select whoobrascliactuatrab.codtraba,nomtraba from whoobrascliactuatrab,straba WHERE whoobrascliactuatrab.codtraba=straba.codtraba AND"
+    cad = cad & " expediente =  " & expediente & " AND anoexp = " & Ano & " AND idactua = " & Mid(Me.lwActuaciones.SelectedItem.Key, 2)
     If miRsAux Is Nothing Then Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
-        Cad = Format(miRsAux!CodTraba, "00000")
-        Set IT = Me.lwTrabajadores.ListItems.Add(, "K" & Cad)
-        IT.Text = Cad
+        cad = Format(miRsAux!CodTraba, "00000")
+        Set IT = Me.lwTrabajadores.ListItems.Add(, "K" & cad)
+        IT.Text = cad
         IT.SubItems(1) = miRsAux!NomTraba
         miRsAux.MoveNext
     Wend
@@ -1485,22 +1485,22 @@ End Sub
 Private Sub lwContrato_DblClick()
     If lwContrato.SelectedItem Is Nothing Then Exit Sub
     
-    Cad = DevuelveNombreArhivoITEMClientes(lwContrato.SelectedItem, 1, Cliente)
-    If Cad <> "" Then LanzaVisorMimeDocumento Me.hWnd, Cad
+    cad = DevuelveNombreArhivoITEMClientes(lwContrato.SelectedItem, 1, Cliente)
+    If cad <> "" Then LanzaVisorMimeDocumento Me.hwnd, cad
 End Sub
 
 Private Sub lwObras_DblClick()
     If lwObras.SelectedItem Is Nothing Then Exit Sub
     
-    Cad = DevuelveNombreArhivoITEMClientes(lwObras.SelectedItem, 2, Cliente)
-    If Cad <> "" Then LanzaVisorMimeDocumento Me.hWnd, Cad
+    cad = DevuelveNombreArhivoITEMClientes(lwObras.SelectedItem, 2, Cliente)
+    If cad <> "" Then LanzaVisorMimeDocumento Me.hwnd, cad
 End Sub
 
 Private Sub lwPRI_ItemClick(ByVal Item As MSComctlLib.ListItem)
     PonerPDF lwPRI, 3
 End Sub
 
-Private Sub lwPRI_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lwPRI_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     QUienHaLlamadoAlContextual = 3 'PRI
     AbrirContextual Button
 End Sub
@@ -1508,8 +1508,8 @@ End Sub
 Private Sub lwPropCom_DblClick()
     If lwPropCom.SelectedItem Is Nothing Then Exit Sub
     
-    Cad = DevuelveNombreArhivoITEMClientes(lwPropCom.SelectedItem, 0, Cliente)
-    If Cad <> "" Then LanzaVisorMimeDocumento Me.hWnd, Cad
+    cad = DevuelveNombreArhivoITEMClientes(lwPropCom.SelectedItem, 0, Cliente)
+    If cad <> "" Then LanzaVisorMimeDocumento Me.hwnd, cad
 End Sub
 
 
@@ -1518,7 +1518,7 @@ Private Sub lwPropCom_ItemClick(ByVal Item As MSComctlLib.ListItem)
     PonerPDF lwPropCom, 0
 End Sub
 
-Private Sub lwPropCom_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lwPropCom_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     QUienHaLlamadoAlContextual = 1  'proupesta comercial
     AbrirContextual Button
 End Sub
@@ -1526,8 +1526,8 @@ End Sub
 Private Sub lwSGD_DblClick()
     If lwSGD.SelectedItem Is Nothing Then Exit Sub
     
-    Cad = DevuelveNombreArhivoITEMClientes(lwSGD.SelectedItem, 4, Cliente)
-    If Cad <> "" Then LanzaVisorMimeDocumento Me.hWnd, Cad
+    cad = DevuelveNombreArhivoITEMClientes(lwSGD.SelectedItem, 4, Cliente)
+    If cad <> "" Then LanzaVisorMimeDocumento Me.hwnd, cad
 
 End Sub
 
@@ -1538,7 +1538,7 @@ Private Sub lwSGD_ItemClick(ByVal Item As MSComctlLib.ListItem)
     PonerPDF lwSGD, 4
 End Sub
 
-Private Sub lwSGD_MouseDown(Button As Integer, Shift As Integer, x As Single, Y As Single)
+Private Sub lwSGD_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     QUienHaLlamadoAlContextual = 4 'SGD
     AbrirContextual Button
 End Sub
@@ -1556,8 +1556,8 @@ Private Sub PonerPDF(ByRef LISTV As ListView, Tipo As Byte)
         
     If LCase(Right(LISTV.SelectedItem.Tag, 3)) <> "pdf" Then Exit Sub
     
-    Cad = DevuelveNombreArhivoITEMClientes(LISTV.SelectedItem, Tipo, Cliente)
-    If Cad <> "" Then
+    cad = DevuelveNombreArhivoITEMClientes(LISTV.SelectedItem, Tipo, Cliente)
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Me.lblTituloDoc.Caption = LISTV.Tag & " " & LISTV.SelectedItem.Tag
         Me.lblTituloDoc.Refresh
@@ -1585,8 +1585,8 @@ Private Function CargaArchivo() As Boolean
     CargaArchivo = False
     
     
-    AcroPDF1.LoadFile (Cad)
-    AcroPDF1.Tag = Cad
+    AcroPDF1.LoadFile (cad)
+    AcroPDF1.Tag = cad
     AcroPDF1.visible = True
     Screen.MousePointer = vbDefault
     
@@ -1607,7 +1607,7 @@ Private Sub AbrirContextual(Buton As Integer)
 End Sub
 
 Private Sub mnPop1_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo eEma
 
@@ -1618,28 +1618,28 @@ Dim I As Integer
     'YA se cual es el archivo. Lo copio en \tmp
     If Index = 0 Then
     
-            I = Len(vParamAplic.PathDocsWHOSE)
-            CadenaDesdeOtroForm = Mid(Cad, I + 2)
+            i = Len(vParamAplic.PathDocsWHOSE)
+            CadenaDesdeOtroForm = Mid(cad, i + 2)
             CadenaDesdeOtroForm = Replace(CadenaDesdeOtroForm, "\", "_")
             
             
-            FileCopy Cad, App.Path & "\temp\" & CadenaDesdeOtroForm
+            FileCopy cad, App.Path & "\temp\" & CadenaDesdeOtroForm
             
             
             'LLega aqui, ha ido bien
             CadenaDesdeOtroForm = App.Path & "\temp\" & CadenaDesdeOtroForm
             'Nombre para|email para|Asunto|Mensaje|
-            Cad = DevuelveDesdeBD(conAri, "maiclie1", "sclien", "codclien", Me.Text1(0).Text)
-            Cad = Me.Text1(1).Text & "|" & Cad & "|" & AsuntoContextual & "|" & "|" & CadenaDesdeOtroForm & "|"
+            cad = DevuelveDesdeBD(conAri, "maiclie1", "sclien", "codclien", Me.Text1(0).Text)
+            cad = Me.Text1(1).Text & "|" & cad & "|" & AsuntoContextual & "|" & "|" & CadenaDesdeOtroForm & "|"
             
-            frmEMail.DatosEnvio = Cad
-            frmEMail.opcion = 0
+            frmEMail.DatosEnvio = cad
+            frmEMail.Opcion = 0
             frmEMail.Show vbModal
     
     Else
     
-            I = InStrRev(Cad, ".")
-            CadenaDesdeOtroForm = Mid(Cad, I + 1)
+            i = InStrRev(cad, ".")
+            CadenaDesdeOtroForm = Mid(cad, i + 1)
      
             cd1.Filter = "Archivo " & CadenaDesdeOtroForm & "|*." & CadenaDesdeOtroForm
             cd1.FileName = ""
@@ -1647,7 +1647,7 @@ Dim I As Integer
             cd1.CancelError = False
             cd1.ShowSave
             If cd1.FileName = "" Then Exit Sub
-            FileCopy Cad, cd1.FileName
+            FileCopy cad, cd1.FileName
     
     
     
@@ -1712,11 +1712,11 @@ Private Function ItemCorrectoParaEnvioEmail() As Boolean
     End Select
     
     If IT Is Nothing Then
-        Cad = ""
+        cad = ""
     Else
-        Cad = DevuelveNombreArhivoITEMClientes(IT, QUienHaLlamadoAlContextual, Val(Me.Text1(0).Text))
+        cad = DevuelveNombreArhivoITEMClientes(IT, QUienHaLlamadoAlContextual, Val(Me.Text1(0).Text))
     End If
-    If Cad = "" Then Exit Function
+    If cad = "" Then Exit Function
     
     AsuntoContextual = AsuntoContextual & " Exp " & expediente & " / " & Ano & " - -" & IT.Text
     

@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmComAlbAsignar 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Control de albaranes compras"
@@ -699,29 +699,29 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim B As Boolean
+Dim b As Boolean
 
     DeseleccionaGrid Me.DataGrid1
-    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To txtAux.Count - 1
         If jj < 2 Then
             txtAux2(jj).Height = Me.DataGrid1.RowHeight
             txtAux2(jj).Top = alto
-            txtAux2(jj).visible = B
+            txtAux2(jj).visible = b
         End If
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = B
+        txtAux(jj).visible = b
     Next jj
 
-    Me.Combo1.visible = B
+    Me.Combo1.visible = b
     Me.Combo1.Top = alto
     
     For jj = 0 To Me.cmdAux.Count - 1
         Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
         Me.cmdAux(jj).Top = alto
-        Me.cmdAux(jj).visible = B
+        Me.cmdAux(jj).visible = b
     Next jj
 End Sub
 
@@ -798,13 +798,13 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
 
                       
     If Kmodo = 1 Then 'Modo Buscar
@@ -817,9 +817,9 @@ Dim B As Boolean
     Me.cmdAux(0).Enabled = (Modo <> 4)
                    
     '-----------------------------------------
-    B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    b = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = b
+    cmdAceptar.visible = b
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -839,7 +839,7 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
     
     'Insertar
@@ -849,19 +849,19 @@ Dim B As Boolean
     Toolbar1.Buttons(7).Enabled = False
     Me.mnEliminar.Enabled = False
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnModificar.Enabled = b
     
     
-    B = ((Modo >= 3))
+    b = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
 End Sub
 
 
@@ -946,7 +946,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -954,17 +954,17 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
     LLamaLineas anc
     
  
-    For I = 0 To 2
-        txtAux(I).Text = DBLet(DataGrid1.Columns(I).Value, "T")
-    Next I
+    For i = 0 To 2
+        txtAux(i).Text = DBLet(DataGrid1.Columns(i).Value, "T")
+    Next i
 
     
     
@@ -997,20 +997,20 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
 
     On Error GoTo ErrDatosOK
 
     DatosOk = False
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
 '    If Me.Combo1.ListIndex = 1 Then
 '        If txtAux(3).Text = "" Then
 '            if msgbox(2
     
-    DatosOk = B
+    DatosOk = b
     Exit Function
     
 ErrDatosOK:
@@ -1022,18 +1022,18 @@ End Function
 
 Private Sub MandaBusquedaPrevia2()
 ''Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
         
         'If Envio Then
-            Cad = "Codigo|sprove|codprove|N||20·"
-            Cad = Cad & "Nombre|sprove|nomprove|T||60·"
+            cad = "Codigo|sprove|codprove|N||20·"
+            cad = cad & "Nombre|sprove|nomprove|T||60·"
         'Else
         '    Cad = "Codigo|szonas|codzonas|N||20·"
         '    Cad = Cad & "Decripcion|szonas|nomzonas|T||60·"
         'End If
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         
         'frmB.vTabla = tabla
         frmB.vSQL = ""
@@ -1157,12 +1157,12 @@ Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub LanzaImg(txtIndex As Integer)
-Dim I As Integer
-    I = -1
-    If txtIndex = 2 Then I = 0
-    If txtIndex = 4 Then I = 2
-    If txtIndex = 3 Then I = 1
-    If I >= 0 Then cmdAux_Click I
+Dim i As Integer
+    i = -1
+    If txtIndex = 2 Then i = 0
+    If txtIndex = 4 Then i = 2
+    If txtIndex = 3 Then i = 1
+    If i >= 0 Then cmdAux_Click i
     
 End Sub
 
@@ -1172,7 +1172,7 @@ End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-Dim Cad As String
+Dim cad As String
 
     On Error Resume Next
     
@@ -1182,41 +1182,41 @@ Dim Cad As String
     If txtAux(Index).Text = "+" Then txtAux(Index).Text = ""
     Select Case Index
         Case 1
-            Cad = ""
+            cad = ""
             If txtAux(Index).Text <> "" Then
                 If Not IsNumeric(txtAux(Index).Text) Then
                     MsgBox "Campo numerico", vbExclamation
                     txtAux(Index).Text = ""
                 Else
                     'If Index = 3 Then
-                        Cad = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtAux(Index).Text)
+                        cad = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtAux(Index).Text)
                     'Else
                     '    Cad = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", txtAux(Index).Text)
                     'End If
-                    If Cad = "" Then MsgBox "No existe el valor en la BD: " & txtAux(Index).Text, vbExclamation
+                    If cad = "" Then MsgBox "No existe el valor en la BD: " & txtAux(Index).Text, vbExclamation
                 End If
-                If Cad = "" And txtAux(Index).Text <> "" Then
+                If cad = "" And txtAux(Index).Text <> "" Then
                     txtAux(Index).Text = ""
                     PonerFoco txtAux(Index)
                 End If
                       
             End If
-            txtAux2(Index - 1).Text = Cad
+            txtAux2(Index - 1).Text = cad
         Case 1, 3 'fecha
               PonerFormatoFecha txtAux(Index)
               
         Case 4
-            Cad = ""
+            cad = ""
             If PonerFormatoEntero(txtAux(Index)) Then
-                Cad = PonerNombreDeCod(txtAux(Index), conAri, "senvio", "nomenvio", "codenvio", "Forma de envio", "N")
-                If Cad = "" And Modo <> 1 Then
+                cad = PonerNombreDeCod(txtAux(Index), conAri, "senvio", "nomenvio", "codenvio", "Forma de envio", "N")
+                If cad = "" And Modo <> 1 Then
                     PonerFoco txtAux(Index)
                     txtAux(Index).Text = ""
                 End If
             Else
                 txtAux(Index).Text = ""
             End If
-            txtAux2(1).Text = Cad
+            txtAux2(1).Text = cad
     End Select
     
     If Err.Number <> 0 Then Err.Clear

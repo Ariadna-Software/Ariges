@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmComprasVentas 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Asociar albaranes compras / ventas"
@@ -1177,16 +1177,16 @@ Private Const vbVerde = &H8000&       'Indicara que se puede asignar
 Private Const vbMorado = &H800080     'Indicara que es el mismo albaran
 
 
-Private WithEvents frmCli As frmFacClientes
+Private WithEvents frmCli As frmBasico2 'frmFacClientesGr
 Attribute frmCli.VB_VarHelpID = -1
-Private WithEvents frmPro As frmComProveedores
+Private WithEvents frmPro As frmBasico2 '%=%=frmComProveedores
 Attribute frmPro.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmArt As frmAlmArticulos
-Attribute frmArt.VB_VarHelpID = -1
-Private WithEvents FrmB As frmBuscaGrid
-Attribute FrmB.VB_VarHelpID = -1
+Private WithEvents FrmArt As frmAlmArticulos
+Attribute FrmArt.VB_VarHelpID = -1
+Private WithEvents frmB As frmBuscaGrid
+Attribute frmB.VB_VarHelpID = -1
 
 
 Private DatosModificados As Boolean
@@ -1331,7 +1331,7 @@ Dim C2 As String
     
     '`numalbarc`,`fechaalbc`,`codprovec`,`numlineac` & ","
     C2 = "insert into `slcomven` (`numalbarc`,`fechaalbc`,`codprovec`,`numlineac`,`codartic`,`codtipom`,`numalbarv`,`numlineav`,`fechaalbv`,`cantidad`) VALUES ("
-    C2 = C2 & "'" & Adodc2.Recordset!NumAlbar & "','" & Format(Adodc2.Recordset!FechaAlb, FormatoFecha) & "'," & Adodc1.Recordset!codProve & ","
+    C2 = C2 & "'" & Adodc2.Recordset!Numalbar & "','" & Format(Adodc2.Recordset!FechaAlb, FormatoFecha) & "'," & Adodc1.Recordset!Codprove & ","
     C2 = C2 & Adodc2.Recordset!numlinea & ",'" & DevNombreSQL(Adodc1.Recordset!codArtic) & "',"
        
 
@@ -1358,7 +1358,7 @@ Dim C2 As String
      Me.Refresh
      DatosModificados = False
      
-     SQL = Adodc2.Recordset!NumAlbar & "|" & Format(Adodc2.Recordset!FechaAlb, "dd/mm/yyyy") & "|" & Adodc2.Recordset!numlinea & "|"
+     SQL = Adodc2.Recordset!Numalbar & "|" & Format(Adodc2.Recordset!FechaAlb, "dd/mm/yyyy") & "|" & Adodc2.Recordset!numlinea & "|"
      CargaAlbaranesCompras
      DoEvents
      Me.lblInd.Caption = "Situando...."
@@ -1394,7 +1394,7 @@ Private Sub Form_Load()
         
     End With
     
-    limpiar Me
+    Limpiar Me
     
     CargaList2 True
     Frame1.Enabled = False
@@ -1414,7 +1414,7 @@ Dim SQL As String
     
     'EL WHERE
     'aqui aqui aqui. No me enalza bien
-    SQL = SQL & " WHERE s.codprove=" & Adodc1.Recordset!codProve
+    SQL = SQL & " WHERE s.codprove=" & Adodc1.Recordset!Codprove
     SQL = SQL & " AND s.codartic='" & Adodc1.Recordset!codArtic & "'"
     
     'AHora meto los desde hasta fecha albaran
@@ -1473,12 +1473,12 @@ Private Sub PonerCamposCompras()
         Impo = Adodc2.Recordset!asig
         
     End If
-    Text3(3).Text = Adodc2.Recordset!Cantidad - Impo
+    Text3(3).Text = Adodc2.Recordset!cantidad - Impo
     Text3(4).Text = ""
     CargaList2 False
 End Sub
 
-Private Sub CargaList2(limpiar As Boolean)
+Private Sub CargaList2(Limpiar As Boolean)
 Dim SQL As String
 
 Dim b As Boolean
@@ -1487,7 +1487,7 @@ Dim Codigo As String
 On Error GoTo EcargaList
     
     lwV.ListItems.Clear
-    If limpiar Then Exit Sub
+    If Limpiar Then Exit Sub
     
     Set miRsAux = New ADODB.Recordset
     
@@ -1518,11 +1518,11 @@ On Error GoTo EcargaList
     'EL WHERE desde / hasta
     SQL = SQL & Codigo
     'Prove articulo
-    SQL = SQL & " codprovex=" & Adodc1.Recordset!codProve 'Este SEGURO
+    SQL = SQL & " codprovex=" & Adodc1.Recordset!Codprove 'Este SEGURO
     SQL = SQL & " AND slialb.codartic='" & DevNombreSQL(Adodc1.Recordset!codArtic) & "'"
     
     'Primero cargaremos los que ya tiene asignados
-    SQL = SQL & " AND numalbarc= '" & DevNombreSQL(Adodc2.Recordset!NumAlbar) & "'"
+    SQL = SQL & " AND numalbarc= '" & DevNombreSQL(Adodc2.Recordset!Numalbar) & "'"
     SQL = SQL & " AND fechaalbc= '" & Format(Adodc2.Recordset!FechaAlb, FormatoFecha) & "'"
     SQL = SQL & " AND numlineac= " & Adodc2.Recordset!numlinea
     
@@ -1555,7 +1555,7 @@ On Error GoTo EcargaList
     'EL WHERE desde / hasta
     SQL = SQL & Codigo
     'Prove articulo
-    SQL = SQL & " codprovex=" & Adodc1.Recordset!codProve 'Este SEGURO
+    SQL = SQL & " codprovex=" & Adodc1.Recordset!Codprove 'Este SEGURO
     SQL = SQL & " AND slialb.codartic='" & DevNombreSQL(Adodc1.Recordset!codArtic) & "'"
     SQL = SQL & " group by 1,2,3,4,5,6"
     SQL = SQL & " order by codclien,fechaalb,codtipom,numalbar,numlinea"
@@ -1581,12 +1581,12 @@ On Error GoTo EcargaList
     SQL = SQL & " ((scafac1 INNER JOIN slifac ON (scafac1.numalbar = slifac.numalbar) AND (scafac1.codtipoa = slifac.codtipoa))"
     SQL = SQL & " LEFT JOIN slcomven ON (slifac.numlinea = slcomven.numlineav) AND"
     SQL = SQL & " (slifac.numalbar = slcomven.numalbarv) AND (slifac.codtipoa = slcomven.codtipom) and slifac.codartic=slcomven.codartic)"
-    SQL = SQL & " WHERE codprovex=" & Adodc1.Recordset!codProve 'Este SEGURO
+    SQL = SQL & " WHERE codprovex=" & Adodc1.Recordset!Codprove 'Este SEGURO
     SQL = SQL & " AND slifac.codartic='" & DevNombreSQL(Adodc1.Recordset!codArtic) & "'"
     SQL = SQL & " AND not (slcomven.cantidad is null) "
     
     'Primero cargaremos los que ya tiene asignados
-    SQL = SQL & " AND numalbarc= '" & DevNombreSQL(Adodc2.Recordset!NumAlbar) & "'"
+    SQL = SQL & " AND numalbarc= '" & DevNombreSQL(Adodc2.Recordset!Numalbar) & "'"
     SQL = SQL & " AND fechaalbc= '" & Format(Adodc2.Recordset!FechaAlb, FormatoFecha) & "'"
     SQL = SQL & " AND numlineac= " & Adodc2.Recordset!numlinea
     
@@ -1619,8 +1619,8 @@ End Sub
 '0: Ya asignados
 '1: pendientes asignar
 '2: FACTURADOS
-Private Sub MeterEnListView(opcion As Byte)
-Dim It As ListItem
+Private Sub MeterEnListView(Opcion As Byte)
+Dim IT As ListItem
 Dim C As String
 Dim Impo2 As Currency
 
@@ -1628,55 +1628,55 @@ Dim Impo2 As Currency
 
 
     Impo = DBLet(miRsAux!asig, "N")
-    Impo2 = miRsAux!Cantidad - Impo
+    Impo2 = miRsAux!cantidad - Impo
     
     'Añadimos otros albaranes, pero no tienen cantidad para asignar
-    If opcion = 1 And Impo2 = 0 Then Exit Sub
+    If Opcion = 1 And Impo2 = 0 Then Exit Sub
     
 
 
     
    'trozo comun
-    Set It = lwV.ListItems.Add()
+    Set IT = lwV.ListItems.Add()
    
     'pAra evitar duplicados
-    If opcion <> 2 Then
-        It.Key = FijarCampoClaveLw
-        It.Text = miRsAux!nomclien
+    If Opcion <> 2 Then
+        IT.Key = FijarCampoClaveLw
+        IT.Text = miRsAux!NomClien
     Else
-        It.Text = "FACTURADO"
+        IT.Text = "FACTURADO"
     End If
    
-    It.SubItems(1) = miRsAux!codtipom
-    It.SubItems(2) = miRsAux!NumAlbar
-    It.SubItems(3) = miRsAux!FechaAlb
-    It.SubItems(4) = miRsAux!numlinea
-    It.SubItems(5) = miRsAux!Cantidad
-    It.SubItems(6) = Impo
-    It.SubItems(7) = Impo2
+    IT.SubItems(1) = miRsAux!codtipom
+    IT.SubItems(2) = miRsAux!Numalbar
+    IT.SubItems(3) = miRsAux!FechaAlb
+    IT.SubItems(4) = miRsAux!numlinea
+    IT.SubItems(5) = miRsAux!cantidad
+    IT.SubItems(6) = Impo
+    IT.SubItems(7) = Impo2
     
     
-    If opcion = 0 Then
-        It.ForeColor = vbMorado
-    ElseIf opcion = 2 Then
-        It.ForeColor = vbVerde
+    If Opcion = 0 Then
+        IT.ForeColor = vbMorado
+    ElseIf Opcion = 2 Then
+        IT.ForeColor = vbVerde
     End If
             
 
         
     
-    It.SubItems(8) = 0
+    IT.SubItems(8) = 0
     
     Exit Sub
 EMeterEnListView:
     NumRegElim = Err.Number
     C = Err.Description
-    If opcion = 1 Then
+    If Opcion = 1 Then
         'Error 35602:  Clave duplicada
         '
         If Err.Number = 35602 Then
             C = ""
-            lwV.ListItems.Remove It.Index
+            lwV.ListItems.Remove IT.Index
         End If
     End If
         
@@ -1687,7 +1687,7 @@ End Sub
 
 
 Private Function FijarCampoClaveLw() As String
-    FijarCampoClaveLw = miRsAux!codtipom & Format(miRsAux!NumAlbar, "00000000") & _
+    FijarCampoClaveLw = miRsAux!codtipom & Format(miRsAux!Numalbar, "00000000") & _
             Format(miRsAux!FechaAlb, "ddmmyy") & Format(miRsAux!numlinea, "0000")
 End Function
 
@@ -1715,25 +1715,29 @@ Private Sub imgBuscar_Click(Index As Integer)
     Select Case Index
     Case 0, 1
         'proveedor
-        Set frmPro = New frmComProveedores
-        frmPro.DatosADevolverBusqueda = "0|1|"
-        frmPro.Show vbModal
+'        Set frmPro = New frmComProveedores
+'        frmPro.DatosADevolverBusqueda = "0|1|"
+'        frmPro.Show vbModal
+        Set frmPro = New frmBasico2
+        AyudaProveedores frmPro, txtCodigo(Index)
         Set frmPro = Nothing
         
     Case 2, 3
         'cliente
-        Set frmCli = New frmFacClientes
-        frmCli.DatosADevolverBusqueda = "0|1|"
-        frmCli.Show vbModal
+'        Set frmCli = New frmFacClientesGr
+'        frmCli.DatosADevolverBusqueda = "0|1|"
+'        frmCli.Show vbModal
+        Set frmCli = New frmBasico2
+        AyudaClientes frmCli, txtCodigo(Index).Text
         Set frmCli = Nothing
         
     Case 4, 5
         'articulo
         
-        Set frmArt = New frmAlmArticulos
-        frmArt.DatosADevolverBusqueda = "@1@"
-        frmArt.Show vbModal
-        Set frmArt = Nothing
+        Set FrmArt = New frmAlmArticulos
+        FrmArt.DatosADevolverBusqueda = "@1@"
+        FrmArt.Show vbModal
+        Set FrmArt = Nothing
         
         
     End Select
@@ -1996,9 +2000,9 @@ Private Sub PonerCampos()
         CargaList2 True
     Else
         'SI datos
-        If Text1.Tag <> CStr(Adodc1.Recordset!codProve) Then
-            Text1.Text = DevuelveDesdeBDNew(conAri, "sprove", "nomprove", "codprove", CStr(Adodc1.Recordset!codProve), "N")
-            Text1.Tag = CStr(Adodc1.Recordset!codProve)
+        If Text1.Tag <> CStr(Adodc1.Recordset!Codprove) Then
+            Text1.Text = DevuelveDesdeBDNew(conAri, "sprove", "nomprove", "codprove", CStr(Adodc1.Recordset!Codprove), "N")
+            Text1.Tag = CStr(Adodc1.Recordset!Codprove)
         End If
         If Text2.Tag <> CStr(Adodc1.Recordset!codArtic) Then
             Text2.Text = DevuelveDesdeBDNew(conAri, "sartic", "nomartic", "codartic", CStr(Adodc1.Recordset!codArtic), "T")
@@ -2024,18 +2028,18 @@ EP:
 End Sub
 
 
-Private Sub HacerDesplaz(opcion As Integer)
+Private Sub HacerDesplaz(Opcion As Integer)
 Dim b As Boolean
-    If opcion = 17 Or opcion = 20 Then
+    If Opcion = 17 Or Opcion = 20 Then
         b = True
-        If opcion = 17 Then
+        If Opcion = 17 Then
             Adodc1.Recordset.MoveFirst
         Else
             Adodc1.Recordset.MoveLast
         End If
     Else
         b = False
-        If opcion = 18 Then
+        If Opcion = 18 Then
             If Not Adodc1.Recordset.BOF Then
                 Adodc1.Recordset.MovePrevious
                 b = True
@@ -2109,9 +2113,9 @@ Dim Cad As String
 
     Cad = Cad & vbCrLf & "Proveedor: " & Text1.Text
     Cad = Cad & vbCrLf & "Artículo: " & Text2.Text
-    Cad = Cad & vbCrLf & "Albarán: " & Adodc2.Recordset!NumAlbar & " / " & Adodc2.Recordset!numlinea
+    Cad = Cad & vbCrLf & "Albarán: " & Adodc2.Recordset!Numalbar & " / " & Adodc2.Recordset!numlinea
     Cad = Cad & vbCrLf & "Fecha: " & Adodc2.Recordset!FechaAlb
-    Cad = Cad & vbCrLf & "Cantidad: " & Adodc2.Recordset!Cantidad
+    Cad = Cad & vbCrLf & "Cantidad: " & Adodc2.Recordset!cantidad
     If AlbaranVenta Then
         Cad = Cad & vbCrLf & String(60, "-")
         Cad = Cad & vbCrLf & "Cliente: " & lwV.SelectedItem.Text
@@ -2127,9 +2131,9 @@ Dim Cad As String
     Screen.MousePointer = vbHourglass
 
     'Hacemos un delete de la tabla
-    Cad = "DELETE FROM slcomven WHERE codprovec=" & Adodc1.Recordset!codProve
+    Cad = "DELETE FROM slcomven WHERE codprovec=" & Adodc1.Recordset!Codprove
     Cad = Cad & " AND codartic = '" & DevNombreSQL(CStr(Adodc1.Recordset!codArtic)) & "'"
-    Cad = Cad & " AND numalbarc = '" & DevNombreSQL(Adodc2.Recordset!NumAlbar) & "'"
+    Cad = Cad & " AND numalbarc = '" & DevNombreSQL(Adodc2.Recordset!Numalbar) & "'"
     Cad = Cad & " AND fechaalbc = '" & Format(Adodc2.Recordset!FechaAlb, FormatoFecha) & "'"
     Cad = Cad & " AND numlineac = " & Adodc2.Recordset!numlinea
 
@@ -2143,7 +2147,7 @@ Dim Cad As String
     conn.Execute Cad
     
     'Cargamos los datos OTRA VEZ
-    Cad = Adodc2.Recordset!NumAlbar & "|" & Format(Adodc2.Recordset!FechaAlb, "dd/mm/yyyy") & "|" & Adodc2.Recordset!numlinea & "|"
+    Cad = Adodc2.Recordset!Numalbar & "|" & Format(Adodc2.Recordset!FechaAlb, "dd/mm/yyyy") & "|" & Adodc2.Recordset!numlinea & "|"
     CargaAlbaranesCompras
     DoEvents
     Me.lblInd.Caption = "Situando...."
@@ -2160,23 +2164,23 @@ End Sub
 Private Sub SituarADO2(Referencia As String)
 Dim Esta As Boolean
 Dim C As String
-Dim Fin As Boolean
+Dim fin As Boolean
 
     
-    Fin = False
+    fin = False
     Esta = False
-    While Not Fin
+    While Not fin
         If Adodc2.Recordset.EOF Then
-            Fin = True
+            fin = True
         Else
             C = RecuperaValor(Referencia, 1)
-            If C = Adodc2.Recordset!NumAlbar Then
+            If C = Adodc2.Recordset!Numalbar Then
                 C = RecuperaValor(Referencia, 2)
                 If C = Format(Adodc2.Recordset!FechaAlb) Then
                     C = RecuperaValor(Referencia, 3)
                     If C = CStr(Adodc2.Recordset!numlinea) Then
                         Esta = True
-                        Fin = True
+                        fin = True
                         
                     End If
                 End If

@@ -565,7 +565,7 @@ Public Transportista As String
 Public VerMatriculas As Boolean
 
 Private CadenaConsulta As String
-Private CadB As String
+Private cadB As String
 
 Private WithEvents frmEnv As frmFacFormasEnvio
 Attribute frmEnv.VB_VarHelpID = -1
@@ -585,7 +585,7 @@ Dim Modo As Byte
 '   3.-  Inserció de nou registre
 '   4.-  Modificar
 '--------------------------------------------------
-Dim Primeravez As Boolean
+Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim i As Integer
 
@@ -712,7 +712,7 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub BotonVerTodos()
-    CadB = ""
+    cadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -827,7 +827,7 @@ Dim temp As Boolean
             SQL = SQL & " Set sconductor.defecto = 1 where sconductor.chofer=aa.chofer"
             ejecutar SQL, False
         End If
-        CargaGrid CadB
+        CargaGrid cadB
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
         PonerModoOpcionesMenu
         adodc1.Recordset.Cancel
@@ -872,9 +872,9 @@ Private Sub cmdAceptar_Click()
     
     Select Case Modo
         Case 1 'BUSQUEDA
-            CadB = ObtenerBusqueda(Me, False)
-            If CadB <> "" Then
-                CargaGrid CadB
+            cadB = ObtenerBusqueda(Me, False)
+            If cadB <> "" Then
+                CargaGrid cadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -886,16 +886,16 @@ Private Sub cmdAceptar_Click()
                     
                     PorDefecto
                     
-                    CargaGrid CadB
+                    CargaGrid cadB
                     If (DatosADevolverBusqueda <> "") Then 'And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
                         If Not adodc1.Recordset.EOF Then
-                            CadB = "dni"
-                            If VerMatriculas Then CadB = "matricula"
-                            CadB = CadB & " = " & DBSet(txtAux(1), "T")
-                            SituarData adodc1, CadB, lblIndicador.Caption
-                            CadB = ""
+                            cadB = "dni"
+                            If VerMatriculas Then cadB = "matricula"
+                            cadB = cadB & " = " & DBSet(txtAux(1), "T")
+                            SituarData adodc1, cadB, lblIndicador.Caption
+                            cadB = ""
                             'SituarDataMULTI adodc1, "codenvio = " & txtAux(0) & " and matricula= " & DBSet(txtAux(1), "T"), lblIndicador.Caption
                         End If
                         cmdRegresar_Click
@@ -915,7 +915,7 @@ Private Sub cmdAceptar_Click()
                     
                     i = adodc1.Recordset.AbsolutePosition
                     PonerModo 2
-                    CargaGrid CadB
+                    CargaGrid cadB
                     If i > 0 Then adodc1.Recordset.Move i - 1
                     PonerFocoGrid Me.DataGrid1
                 End If
@@ -928,7 +928,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid CadB
+            CargaGrid cadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             'CargaGrid
@@ -989,8 +989,8 @@ End Sub
 Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
 
-    If Primeravez Then
-        Primeravez = False
+    If PrimeraVez Then
+        PrimeraVez = False
         
         If Transportista >= 0 Then
             BuscaChekc = DevuelveDesdeBD(conAri, "nomenvio", "senvio", "codenvio", CStr(Transportista))
@@ -1011,7 +1011,7 @@ Private Sub Form_Load()
     'Icono del formulario
     Me.Icon = frmPpal.Icon
 
-    Primeravez = True
+    PrimeraVez = True
 
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM2
@@ -1065,7 +1065,7 @@ Private Sub Form_Load()
        
     End If
     LblMostr.Caption = Me.Caption
-    CadB = ""
+    cadB = ""
     CargaGrid
     
 End Sub
@@ -1172,7 +1172,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     End If
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, Primeravez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Codigo|1000|;S|btnBuscar(0)|B|||;S|txtAux2(2)|T|Transportista|4900|;"
@@ -1292,10 +1292,10 @@ Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 
 End Sub
 

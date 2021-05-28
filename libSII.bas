@@ -26,7 +26,7 @@ End Sub
  
 
 Private Sub DarAvisoContabilizadas()
-Dim cad As String
+Dim Cad As String
 Dim FecUltAviso As Date
 Dim Horas As Long
 Dim VerSiDamosAviso As Boolean
@@ -49,19 +49,19 @@ Dim TicketAgrupado As String
     
     If Not vParamAplic.SII_Tiene Then
         
-        cad = TicketAgrupado & "  codtipom <> 'FAI' AND fecfactu>=" & DBSet(vEmpresa.FechaIni, "F") & " AND codtipom<>'FAZ' AND  intconta "
-        cad = DevuelveDesdeBD(conAri, "min(fecfactu)", "scafac", cad, "0")
-        If cad <> "" Then
-            Horas = DateDiff("d", CDate(cad), Now)
-            If Horas > 1 Then Mensaje = "Cliente: " & cad & vbCrLf
+        Cad = TicketAgrupado & "  codtipom <> 'FAI' AND fecfactu>=" & DBSet(vEmpresa.FechaIni, "F") & " AND codtipom<>'FAZ' AND  intconta "
+        Cad = DevuelveDesdeBD(conAri, "min(fecfactu)", "scafac", Cad, "0")
+        If Cad <> "" Then
+            Horas = DateDiff("d", CDate(Cad), Now)
+            If Horas > 1 Then Mensaje = "Cliente: " & Cad & vbCrLf
         End If
         
         If Mensaje = "" Then
-            cad = "fecrecep>=" & DBSet(vEmpresa.FechaIni, "F") & " AND  intconta "
-            cad = DevuelveDesdeBD(conAri, "min(fecrecep)", "scafpc", cad, "0")
-            If cad <> "" Then
-                Horas = DateDiff("d", CDate(cad), Now)
-                If Horas > 1 Then Mensaje = Mensaje & "Proveedor: " & cad & vbCrLf
+            Cad = "fecrecep>=" & DBSet(vEmpresa.FechaIni, "F") & " AND  intconta "
+            Cad = DevuelveDesdeBD(conAri, "min(fecrecep)", "scafpc", Cad, "0")
+            If Cad <> "" Then
+                Horas = DateDiff("d", CDate(Cad), Now)
+                If Horas > 1 Then Mensaje = Mensaje & "Proveedor: " & Cad & vbCrLf
             End If
         End If
                 
@@ -74,21 +74,22 @@ Dim TicketAgrupado As String
     Else
         '****************************  Tiene SII
         'Veremos un poco mas el mensaje de facturas contabilizadas
-        
-        cad = "fecfactu>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND intconta "
-        cad = DevuelveDesdeBD(conAri, "min(fecfactu)", "scafac", cad, "0")
-        If cad <> "" Then
-            Horas = DateDiff("d", CDate(cad), Now)
+        Cad = ""
+        If TicketAgrupado <> "" Then Cad = TicketAgrupado
+        Cad = Cad & "fecfactu>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND intconta "
+        Cad = DevuelveDesdeBD(conAri, "min(fecfactu)", "scafac", Cad, "0")
+        If Cad <> "" Then
+            Horas = DateDiff("d", CDate(Cad), Now)
             If Horas > 1 Then Mensaje = "O"
         End If
         If Mensaje = "" Then
             
-            cad = "fecrecep>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND intconta "
+            Cad = "fecrecep>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND intconta "
             'Solo aviso intconta.  Las facturas suben al sii con fecha integracion contable
-            cad = " intconta "
-            cad = DevuelveDesdeBD(conAri, "min(fecrecep)", "scafpc", cad, "0")
-            If cad <> "" Then
-                Horas = DateDiff("d", CDate(cad), Now)
+            Cad = " intconta "
+            Cad = DevuelveDesdeBD(conAri, "min(fecrecep)", "scafpc", Cad, "0")
+            If Cad <> "" Then
+                Horas = DateDiff("d", CDate(Cad), Now)
                 If Horas > 1 Then Mensaje = Mensaje & "0"
             End If
         End If
@@ -103,11 +104,18 @@ Dim TicketAgrupado As String
             'No hacemos nada
             
         Else
+
             frmSiiAvisos.Show vbModal
+            
         End If
     End If
 
-    
+
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then
+        If vUsu.Nivel <= 1 Then
+            
+        End If
+    End If
     
     
 

@@ -65,7 +65,11 @@ Option Explicit
 '       35 .- Tabla numeros de lote. Modificar
 '       36 .- Cambio agente pedido
 '       37 .- Eliminar linea albaran
-'       38. Cambiar Tipo alb.
+'       38 . Cambiar Tipo alb.
+'       39 . Gasloniera TAXCO
+'       40 -  Cambio cliente
+'       41 -  usuarios
+
 Public Function Insertar(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String) As Boolean
 Dim SQL As String
 
@@ -112,7 +116,7 @@ Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
     ListaAcciones.Add "15|OFE. precios cambiados|"   ' OFERTA. Cuando pasa a pedido el precio del articulo ha cambiado desde que se hizo
     ListaAcciones.Add "16|Actualizar dto-fam-marca|"
     ListaAcciones.Add "17|Alb-Pedido con riesgo superado|"
-    ListaAcciones.Add "18|Modificar cuenta contabilidad|"
+    ListaAcciones.Add "18|Mod. datos vinculados cuentas|"  'cuentas contabilidad
     ListaAcciones.Add "19|Recalculo PMP-UPC|"
     ListaAcciones.Add "20|Cambio trabajador albaran|"
     ListaAcciones.Add "21|Nombre prov-clien|"
@@ -133,6 +137,9 @@ Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
     ListaAcciones.Add "36|Cambio agente pedido|"
     ListaAcciones.Add "37|Eliminar linea albaran|"
     ListaAcciones.Add "38|Cambiar tipo albaran|"
+    ListaAcciones.Add "39|Gasolinera|"
+    ListaAcciones.Add "40|Cambio cliente|"
+    ListaAcciones.Add "41|Usuarios|"
     DevuelveAcciones = True
     Exit Function
 EDevuelveAcciones:

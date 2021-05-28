@@ -608,9 +608,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private WithEvents frmMtoCli As frmFacClientes
+Private WithEvents frmMtoCli As frmBasico2 'frmFacClientesGr
 Attribute frmMtoCli.VB_VarHelpID = -1
-Private WithEvents frmMtoBanPr As frmFacBancosPropios
+Private WithEvents frmMtoBanPr As frmBasico2 'frmFacBancosPropios
 Attribute frmMtoBanPr.VB_VarHelpID = -1
 
 Private NombreTabla As String  'Nombre de la tabla o de la
@@ -903,17 +903,24 @@ End Sub
 Private Sub imgBuscar_Click(Index As Integer)
     Select Case Index
         Case 8 'cod. cliente
-            Set frmMtoCli = New frmFacClientes
-            frmMtoCli.DatosADevolverBusqueda = "1"
-            frmMtoCli.Show vbModal
+'            Set frmMtoCli = New frmFacClientesGr
+'            frmMtoCli.DatosADevolverBusqueda = "1"
+'            frmMtoCli.Show vbModal
+            Set frmMtoCli = New frmBasico2
+            AyudaClientes frmMtoCli, Text1(Index).Text
             Set frmMtoCli = Nothing
+            
             PonerFoco Text1(Index)
         
         Case 9 'Bancos propios (cta prev. cobro)
-            Set frmMtoBanPr = New frmFacBancosPropios
-            frmMtoBanPr.DatosADevolverBusqueda = "0|1|"
-            frmMtoBanPr.Show vbModal
+'            Set frmMtoBanPr = New frmFacBancosPropios
+'            frmMtoBanPr.DatosADevolverBusqueda = "0|1|"
+'            frmMtoBanPr.Show vbModal
+'            Set frmMtoBanPr = Nothing
+            Set frmMtoBanPr = New frmBasico2
+            AyudaBancosPropios frmMtoBanPr, Text1(Index)
             Set frmMtoBanPr = Nothing
+
             PonerFoco Text1(Index)
     End Select
 End Sub

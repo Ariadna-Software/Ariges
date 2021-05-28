@@ -1,4 +1,6 @@
 Attribute VB_Name = "modImpresion"
+
+
 'convertix una posició d'un Adodc en una Selection Formula SF
 Public Function POS2SF(ByRef ado As Adodc, ByRef formu As Form, Optional opcio As Integer, Optional nom_frame As String) As String
 'si opcio = 1 OR opcio = 1 => funcionament normal
@@ -6,10 +8,10 @@ Public Function POS2SF(ByRef ado As Adodc, ByRef formu As Form, Optional opcio A
     Dim cadSQL2 As String
     Dim nom_camp As String
     Dim Control As Object
-    Dim mTag As CTag
+    Dim mTag As cTag
     Dim i As Integer
     
-    Set mTag = New CTag
+    Set mTag = New cTag
     cadSQL2 = ""
 
     For Each Control In formu.Controls
@@ -136,4 +138,21 @@ Public Function Like2SF(CADENA As String) As String
     Like2SF = CADENA
     
 End Function
+
+Public Function ObtenerAltoNew(ByRef vDataGrid As DataGrid, Optional alto As Integer) As Single
+Dim anc As Single
+    anc = vDataGrid.Top + alto
+    If vDataGrid.Row < 0 Then
+        anc = anc + 230
+    Else
+        anc = anc + vDataGrid.RowTop(vDataGrid.Row)
+    End If
+    ObtenerAltoNew = anc
+End Function
+
+Public Sub PonerFocoLw(ByRef lw As ListView)
+    On Error Resume Next
+    lw.SetFocus
+    If Err.Number <> 0 Then Err.Clear
+End Sub
 

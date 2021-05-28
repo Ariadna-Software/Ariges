@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmAguaContadores 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Contadores "
@@ -1317,9 +1317,9 @@ Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmCP As frmCPostal 'Codigos Postales
 Attribute frmCP.VB_VarHelpID = -1
-Private WithEvents frmCli As frmFacClientes3
+Private WithEvents frmCli As frmBasico2
 Attribute frmCli.VB_VarHelpID = -1
-Private WithEvents frmFP As frmFacFormasPago
+Private WithEvents frmFP As frmBasico2 'frmFacFormasPago
 Attribute frmFP.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
@@ -1397,7 +1397,7 @@ Private Sub cmdAceptar_Click()
                     End If
                     CadenaConsulta = CadenaConsulta & " WHERE  contador =" & DBSet(Text1(0).Text, "T")
                     CadenaConsulta = CadenaConsulta & " AND codconceAg = " & Mid(ListView1.ListItems(NumRegElim).Key, 2)
-                    If Ejecutar(CadenaConsulta, False) Then ListView1.ListItems(NumRegElim).SubItems(2) = IIf(Abs(ListView1.ListItems(NumRegElim).Checked) = 1, "Si", "")
+                    If ejecutar(CadenaConsulta, False) Then ListView1.ListItems(NumRegElim).SubItems(2) = IIf(Abs(ListView1.ListItems(NumRegElim).Checked) = 1, "Si", "")
                     
                 End If
             Next
@@ -1490,7 +1490,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
@@ -1500,15 +1500,15 @@ Dim Cad As String
     
     
     'Copmpruebo si esta vinculado a algun trabajador
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "aguahcolecturas", "contador", CStr(Data1.Recordset!Contador), "T")
-    If Cad = "" Then Cad = "0"
-    If Val(Cad) > 0 Then
+    cad = DevuelveDesdeBD(conAri, "count(*)", "aguahcolecturas", "contador", CStr(Data1.Recordset!Contador), "T")
+    If cad = "" Then cad = "0"
+    If Val(cad) > 0 Then
         MsgBox "Historico lectura. No se puede eliminar", vbExclamation
         Exit Sub
     End If
-    Cad = DevuelveDesdeBD(conAri, "count(*)", "scafac1", "codtipom='FAG' AND referenc", CStr(Data1.Recordset!Contador), "T")
-    If Cad = "" Then Cad = "0"
-    If Val(Cad) > 0 Then
+    cad = DevuelveDesdeBD(conAri, "count(*)", "scafac1", "codtipom='FAG' AND referenc", CStr(Data1.Recordset!Contador), "T")
+    If cad = "" Then cad = "0"
+    If Val(cad) > 0 Then
         MsgBox "El contador tiene facturas", vbExclamation
         Exit Sub
     End If
@@ -1518,10 +1518,10 @@ Dim Cad As String
 '
 
 
-        Cad = "¿Seguro que desea eliminar el contador? " & vbCrLf
-        Cad = Cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), "0000")
-        Cad = Cad & vbCrLf & "Cliente: " & Data1.Recordset!codclien & " " & Me.Text2(7).Text
-        If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        cad = "¿Seguro que desea eliminar el contador? " & vbCrLf
+        cad = cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), "0000")
+        cad = cad & vbCrLf & "Cliente: " & Data1.Recordset!codClien & " " & Me.Text2(7).Text
+        If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
 
 
         'Hay que eliminar
@@ -1530,11 +1530,11 @@ Dim Cad As String
         NumRegElim = Data1.Recordset.AbsolutePosition
         
         
-        Cad = "Delete from aguacontadoresconce where contador=" & DBSet(Data1.Recordset!Contador, "T")
-        conn.Execute Cad
+        cad = "Delete from aguacontadoresconce where contador=" & DBSet(Data1.Recordset!Contador, "T")
+        conn.Execute cad
         
-        Cad = "Delete from aguacontadores where contador=" & DBSet(Data1.Recordset!Contador, "T")
-        conn.Execute Cad
+        cad = "Delete from aguacontadores where contador=" & DBSet(Data1.Recordset!Contador, "T")
+        conn.Execute cad
         
         
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -1553,16 +1553,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
     
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1757,14 +1757,14 @@ End Sub
 
 Private Sub frmCP_DatoSeleccionado(CadenaSeleccion As String)
 'Formulario Mantenimiento C. Postales
-Dim indice As Byte
+Dim Indice As Byte
 Dim devuelve As String
 
-    indice = 3
-    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
-    Text1(indice + 1).Text = ObtenerPoblacion(Text1(indice).Text, devuelve)  'Poblacion
+    Indice = 3
+    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
+    Text1(Indice + 1).Text = ObtenerPoblacion(Text1(Indice).Text, devuelve)  'Poblacion
     'provincia
-    Text1(indice + 2).Text = devuelve
+    Text1(Indice + 2).Text = devuelve
 End Sub
 
 
@@ -1796,9 +1796,8 @@ Private Sub imgBuscar_Click(Index As Integer)
         Select Case Index
         Case 7
             
-            Set frmCli = New frmFacClientes3
-            frmCli.DatosADevolverBusqueda = "0|1|"
-            frmCli.Show vbModal
+            Set frmCli = New frmBasico2
+            AyudaClientes frmCli, Text1(7)
             Set frmCli = Nothing
             
             If CadenaConsulta <> "" Then
@@ -1808,9 +1807,11 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 14
              'FORPA
             
-            Set frmFP = New frmFacFormasPago
-            frmFP.DatosADevolverBusqueda = "0|1|"
-            frmFP.Show vbModal
+'            Set frmFP = New frmFacFormasPago
+'            frmFP.DatosADevolverBusqueda = "0|1|"
+'            frmFP.Show vbModal
+            Set frmFP = New frmBasico2
+            AyudaFormasPago frmFP, Text1(Index)
             Set frmFP = Nothing
         
             If CadenaConsulta <> "" Then
@@ -1841,7 +1842,7 @@ Private Sub ListView1_DblClick()
     If ListView1.SelectedItem.Key <> "K7" Then Exit Sub
     
     CadenaDesdeOtroForm = ""
-    frmListado3.opcion = 54
+    frmListado3.Opcion = 54
     frmListado3.Show vbModal
     
     If CadenaDesdeOtroForm <> "" Then
@@ -1966,7 +1967,7 @@ Dim vCli As CCliente
                     If Modo = 3 Then
                         Set vCli = New CCliente
                         vCli.LeerDatos Text1(Index).Text
-                        If vCli.ClienteBloqueado Then
+                        If vCli.ClienteBloqueado(2, False) Then
                             devuelve = ""
                         Else
                             Me.Text1(2).Text = vCli.Domicilio
@@ -1974,7 +1975,7 @@ Dim vCli As CCliente
                             Me.Text1(4).Text = vCli.Poblacion
                             Me.Text1(5).Text = vCli.Provincia
                             Me.Text1(21).Text = vCli.Nombre
-                            Me.Text1(16).Text = vCli.IBAN
+                            Me.Text1(16).Text = vCli.Iban
                             Me.Text1(17).Text = Right("0000" & vCli.Banco, 4)
                             Me.Text1(18).Text = Right("0000" & vCli.Sucursal, 4)
                             Me.Text1(19).Text = vCli.DigControl
@@ -2064,18 +2065,18 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim Cad As String
+Dim cad As String
         'Llamamos a al form
         '##A mano
-        Cad = ""
-        Cad = Cad & ParaGrid(Text1(0), 30, "Código")
-        Cad = Cad & ParaGrid(Text1(7), 15, "Cod. Cliente")
-        Cad = Cad & "Nombre|sclien|nomclien|T||45·"
+        cad = ""
+        cad = cad & ParaGrid(Text1(0), 30, "Código")
+        cad = cad & ParaGrid(Text1(7), 15, "Cod. Cliente")
+        cad = cad & "Nombre|sclien|nomclien|T||45·"
 
-        If Cad <> "" Then
+        If cad <> "" Then
             Screen.MousePointer = vbHourglass
             Set frmB = New frmBuscaGrid
-            frmB.vCampos = Cad
+            frmB.vCampos = cad
             frmB.vTabla = " aguacontadores left join sclien on aguacontadores.codclien=sclien.codclien"
             frmB.vSQL = cadB
             HaDevueltoDatos = False
@@ -2153,14 +2154,14 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
 
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    B = (Kmodo = 2)
+    b = (Kmodo = 2)
     PonerIndicador lblIndicador, Modo
     
     
@@ -2178,11 +2179,11 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     Else
         cmdRegresar.visible = False
     End If
@@ -2191,32 +2192,32 @@ Dim NumReg As Byte
     'Si estamos en Insertar además limpia los campos Text1
     BloquearText1 Me, Modo
     
-    B = Modo = 1 Or Modo = 3 Or Modo = 4
+    b = Modo = 1 Or Modo = 3 Or Modo = 4
     
-    Me.Check1(0).Enabled = B: Me.Check1(1).Enabled = B
-    BloquearCmb Combo1(0), Not B
-    BloquearCmb Combo1(1), Not B
-    BloquearCmb Combo1(2), Not B
+    Me.Check1(0).Enabled = b: Me.Check1(1).Enabled = b
+    BloquearCmb Combo1(0), Not b
+    BloquearCmb Combo1(1), Not b
+    BloquearCmb Combo1(2), Not b
     
     
     '---------------------------------------------
     'Modo insertar o modificar
-    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    B = B Or Modo = 1
-    Combo2(0).visible = B
-    Combo2(1).visible = B
-    Combo2(2).visible = B
+    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    b = b Or Modo = 1
+    Combo2(0).visible = b
+    Combo2(1).visible = b
+    Combo2(2).visible = b
     
     
     'Modos: 1-3-4-5
-    B = B Or Modo = 5
-    cmdAceptar.visible = B
-    cmdCancelar.visible = B
+    b = b Or Modo = 5
+    cmdAceptar.visible = b
+    cmdCancelar.visible = b
     
     
     
-    B = Modo = 5
-    ListView1.Checkboxes = B
+    b = Modo = 5
+    ListView1.Checkboxes = b
     If Modo = 5 Then
         ListView1.ColumnHeaders(3).Width = 0
         For NumReg = 1 To ListView1.ListItems.Count
@@ -2256,32 +2257,32 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
     
-    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnNuevo.Enabled = b
     
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = B
-    mnModificar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    mnModificar.Enabled = b
     'eliminar
-    Toolbar1.Buttons(7).Enabled = B
-    mnEliminar.Enabled = B
+    Toolbar1.Buttons(7).Enabled = b
+    mnEliminar.Enabled = b
     
-    Toolbar1.Buttons(10).Enabled = B
-    Me.mnLineas.Enabled = B
+    Toolbar1.Buttons(10).Enabled = b
+    Me.mnLineas.Enabled = b
     
     
     '----------------------------------------
-    B = (Modo >= 3) 'Insertar/Modificar
+    b = (Modo >= 3) 'Insertar/Modificar
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not B
-    Me.mnBuscar.Enabled = Not B
-    Toolbar1.Buttons(2).Enabled = Not B
-    Me.mnVerTodos.Enabled = Not B
+    Toolbar1.Buttons(1).Enabled = Not b
+    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not b
+    Me.mnVerTodos.Enabled = Not b
     
     
     
@@ -2292,12 +2293,12 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 Dim BuscaChekc As String
 
     DatosOk = False
-    B = CompForm(Me, 1) 'Comprobar datos OK
-    If Not B Then Exit Function
+    b = CompForm(Me, 1) 'Comprobar datos OK
+    If Not b Then Exit Function
         
     BuscaChekc = ""
     
@@ -2369,7 +2370,7 @@ Dim BuscaChekc As String
             
             
         
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
@@ -2415,14 +2416,14 @@ End Sub
 
 
 Private Sub PosicionarData()
-Dim Cad As String
+Dim cad As String
 Dim Indicador As String
 
-    Cad = "(contador=" & DBSet(Text1(0).Text, "T") & ")"
+    cad = "(contador=" & DBSet(Text1(0).Text, "T") & ")"
     
-    If Modo = 3 Then Data1.RecordSource = "select * from aguacontadores WHERE " & Cad
+    If Modo = 3 Then Data1.RecordSource = "select * from aguacontadores WHERE " & cad
     
-    If SituarData(Data1, Cad, Indicador) Then
+    If SituarData(Data1, cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -2487,21 +2488,21 @@ End Sub
 
 
 Private Sub CargaConceptosContador()
-Dim It As ListItem
+Dim IT As ListItem
 
     Me.ListView1.ListItems.Clear
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open "select * from aguacontadoresConce  where contador=" & DBSet(Data1.Recordset!Contador, "T") & " order by codconceag", conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         'codconceAg descripcion importeconcepto
-        Set It = ListView1.ListItems.Add(, "K" & miRsAux!codconceAg)
-        It.Text = miRsAux!Descripcion
+        Set IT = ListView1.ListItems.Add(, "K" & miRsAux!codconceAg)
+        IT.Text = miRsAux!Descripcion
         If DBLet(miRsAux!importeconcepto, "N") > 0 Then
-            It.SubItems(1) = Format(miRsAux!importeconcepto, FormatoPrecio)
+            IT.SubItems(1) = Format(miRsAux!importeconcepto, FormatoPrecio)
         Else
-            It.SubItems(1) = " "
+            IT.SubItems(1) = " "
         End If
-        It.SubItems(2) = IIf(miRsAux!facturar = 1, "Si", "")
+        IT.SubItems(2) = IIf(miRsAux!facturar = 1, "Si", "")
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -2547,6 +2548,6 @@ Private Sub InsertarEnConceptosContador()
     CadenaConsulta = "INSERT INTO  aguacontadoresconce  "
     CadenaConsulta = CadenaConsulta & " select " & DBSet(Text1(0).Text, "T") & ",codconceAg "
     CadenaConsulta = CadenaConsulta & ",descconceAg, 0, if(codconceAg=7,0,1)  from aguaconceptos"
-    If Not Ejecutar(CadenaConsulta, True) Then MsgBox "Error insertando conceptos. Avise soporte técnico", vbExclamation
+    If Not ejecutar(CadenaConsulta, True) Then MsgBox "Error insertando conceptos. Avise soporte técnico", vbExclamation
     
 End Sub

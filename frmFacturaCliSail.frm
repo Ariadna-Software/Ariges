@@ -431,7 +431,7 @@ Public ImprimirCertificacion As Boolean
     '                   pero sin haber pasado los datos a scafac,scafac1 y slifac
     '
     
-Private WithEvents frmCli As frmFacClientes
+Private WithEvents frmCli As frmBasico2 'frmFacClientesGr
 Attribute frmCli.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
@@ -449,7 +449,7 @@ Private Sub cboTipo2_Click()
    ' CargarDatos
 End Sub
 
-Private Sub cmdFacturar_Click(index As Integer)
+Private Sub cmdFacturar_Click(Index As Integer)
 Dim I As Integer
 
     
@@ -521,11 +521,18 @@ Dim I As Integer
 
     'SI NO ES ALBARAN VENTA, preguntaremos
     If InstalacionEsEulerTaxco Then
+    
+        If Not HacerComprobarProyectosEuler Then Exit Sub
+    
+    
+    
         If Me.cboTipo2.ItemData(Me.cboTipo2.ListIndex) > 0 Then
             CadenaDesdeOtroForm = String(43, "**") & vbCrLf
             CadenaDesdeOtroForm = CadenaDesdeOtroForm & vbCrLf & "Va a generar factura    " & UCase(Me.cboTipo2.Text) & vbCrLf & vbCrLf & CadenaDesdeOtroForm
             MsgBox CadenaDesdeOtroForm, vbInformation
         End If
+        
+        
     End If
     
     'AQUI segun sea Imprimir o facturar hara unas cosas U otras
@@ -554,7 +561,7 @@ Private Sub cmdSalir_Click()
     Unload Me
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     If PriVez Then
         PriVez = False
         
@@ -618,9 +625,9 @@ Private Sub frmF_Selec(vFecha As Date)
     Me.txtFec.Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub imgBuscarG_Click(index As Integer)
+Private Sub imgBuscarG_Click(Index As Integer)
 
-    If index = 0 Then
+    If Index = 0 Then
         'FECHA
         Set frmF = New frmCal
         frmF.Fecha = Now
@@ -630,9 +637,11 @@ Private Sub imgBuscarG_Click(index As Integer)
         
     Else
         SQL = txtclien.Text
-        Set frmCli = New frmFacClientes
-        frmCli.DatosADevolverBusqueda = "0|1|"
-        frmCli.Show vbModal
+'        Set frmCli = New frmFacClientesGr
+'        frmCli.DatosADevolverBusqueda = "0|1|"
+'        frmCli.Show vbModal
+        Set frmCli = New frmBasico2
+        AyudaClientes frmCli, txtclien.Text
         Set frmCli = Nothing
         If txtclien.Text <> SQL Then
             PonerFoco txtclien
@@ -641,9 +650,9 @@ Private Sub imgBuscarG_Click(index As Integer)
     End If
 End Sub
 
-Private Sub imgCheck_Click(index As Integer)
+Private Sub imgCheck_Click(Index As Integer)
     For NumRegElim = 1 To TreeView1.Nodes.Count
-        TreeView1.Nodes(NumRegElim).Checked = index = 1
+        TreeView1.Nodes(NumRegElim).Checked = Index = 1
     Next
 End Sub
 
@@ -1140,11 +1149,11 @@ Dim Mal As Byte
     Do
         CadenaDesdeOtroForm = Aux
         If NO.Checked Then
-            If HacerFacturacionClienteSAIL(NO.index) Then
+            If HacerFacturacionClienteSAIL(NO.Index) Then
                 OK = OK + 1
             Else
                 Mal = Mal + 1
-                lblInd.Caption = "Error factura: " & NO.index
+                lblInd.Caption = "Error factura: " & NO.Index
                 lblInd.Refresh
                 DoEvents
                 Espera 0.5
@@ -1167,16 +1176,16 @@ Dim Mal As Byte
 End Sub
 
 
-Private Function HacerFacturacionClienteSAIL(Ind As Integer) As Boolean
+Private Function HacerFacturacionClienteSAIL(ind As Integer) As Boolean
 Dim CadenaSQL As String
 Dim N As Node
 Dim TipoFactura As String
     
-    lblInd.Caption = TreeView1.Nodes(Ind).Text
+    lblInd.Caption = TreeView1.Nodes(ind).Text
     lblInd.Refresh
     HacerFacturacionClienteSAIL = True
     SQL = ""
-    Set N = TreeView1.Nodes(Ind).Child
+    Set N = TreeView1.Nodes(ind).Child
     Do
         If N.Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(N.Text)
         Set N = N.Next
@@ -1207,6 +1216,60 @@ Dim TipoFactura As String
         End If
     End If
 End Function
+
+
+
+Private Function HacerComprobarProyectosEuler() As Boolean
+Dim N As Node
+
+    HacerComprobarProyectosEuler = True
+    Set N = TreeView1.Nodes(1)
+    Do
+        lblInd.Caption = "Comprobar: " & N.Text
+        lblInd.Refresh
+        If N.Checked Then
+            If Not HacerComprobarProyectosEuler_nodo(N.Index) Then HacerComprobarProyectosEuler = False
+        End If
+        Set N = N.Next
+        
+    Loop Until N Is Nothing
+    
+    lblInd.Caption = ""
+    
+End Function
+
+Private Function HacerComprobarProyectosEuler_nodo(ind As Integer) As Boolean
+ Dim N As Node
+ 
+    lblInd.Caption = TreeView1.Nodes(ind).Text
+    lblInd.Refresh
+    HacerComprobarProyectosEuler_nodo = True
+    SQL = ""
+    Set N = TreeView1.Nodes(ind).Child
+    Do
+        If N.Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(N.Text)
+        Set N = N.Next
+        
+    Loop Until N Is Nothing
+    If SQL <> "" Then
+        SQL = Mid(SQL, 3)
+        
+        
+        
+        SQL = " (codtipoa,numalbar) IN (" & SQL & ")  AND 1"
+        SQL = DevuelveDesdeBD(conAri, "numproyec", "sproyectolin", SQL, "1")
+        If Val(SQL) > 0 Then
+            SQL = "Albaranes para la factura: " & TreeView1.Nodes(ind).Text & vbCrLf & " vinculados en el proyecto: " & SQL
+            MsgBox SQL, vbExclamation
+            HacerComprobarProyectosEuler_nodo = False
+        End If
+
+    End If
+End Function
+
+
+
+
 
 
 Private Sub txtCopia_GotFocus()
@@ -1255,7 +1318,7 @@ Dim NO As Node
     Do
         If NO.Checked Then
             'Insertamos albaranes
-            If Not InsertarAlbaranesCertificacion(NO.index, Val(Mid(NO.Key, 4))) Then
+            If Not InsertarAlbaranesCertificacion(NO.Index, Val(Mid(NO.Key, 4))) Then
                 Set NO = Nothing
                 Exit Sub
             End If

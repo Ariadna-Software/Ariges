@@ -173,7 +173,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim primeravez As Boolean
+Dim PrimeraVez As Boolean
 Dim SQL As String
 Dim AgrupaTickets As Boolean
 
@@ -186,14 +186,14 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdContabilizar_Click()
-     AbrirListado 223
-     Screen.MousePointer = vbHourglass
+    AbrirListado 223
+    Screen.MousePointer = vbHourglass
     CargaFacturas
     Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Combo1_Click()
-    If primeravez Then Exit Sub
+    If PrimeraVez Then Exit Sub
     If Combo1.Tag = Combo1.ListIndex Then Exit Sub
     
     CargaFacturas
@@ -201,9 +201,9 @@ Private Sub Combo1_Click()
     
 End Sub
 
-Private Sub Form_activate()
-    If primeravez Then
-        primeravez = False
+Private Sub Form_Activate()
+    If PrimeraVez Then
+        PrimeraVez = False
         CargaFacturas
         
     End If
@@ -212,7 +212,7 @@ End Sub
 
 Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
-    primeravez = True
+    PrimeraVez = True
     Set ListView1.SmallIcons = frmPpal.ImgListPpal
         
         
@@ -266,7 +266,7 @@ End Sub
 Private Sub CargaListView(Cli As Boolean)
 Dim IT As ListItem
 Dim FechaLimite As Date
-Dim I As Byte
+Dim i As Byte
 Dim Color As Long
 
     On Error GoTo eCargaListView
@@ -302,8 +302,8 @@ Dim Color As Long
                 
             If Color <> -1 Then
                 IT.ForeColor = Color
-                For I = 1 To IT.ListSubItems.Count
-                    IT.ListSubItems(I).ForeColor = Color
+                For i = 1 To IT.ListSubItems.Count
+                    IT.ListSubItems(i).ForeColor = Color
                 Next
             End If
         End If
@@ -339,9 +339,14 @@ Dim cad As String
         cad = cad & " AND codtipom <>'FAZ'    "
         
     Else
-        cad = "Select fecrecep fecha, numfactu factura, codprove,nomprove nombre,totalfac importe  FROM scafpc WHERE "
-        cad = cad & "fecrecep>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND  "
-        cad = cad & "fecrecep<=DATE_ADD(now(), INTERVAL -1 DAY) AND  intconta =0 "
+        If vEmpresa.FechaIni > vParamAplic.Sii_Finicio Then
+            cad = vEmpresa.FechaIni
+        Else
+            cad = vParamAplic.Sii_Finicio
+        End If
+        cad = "fecrecep>=" & DBSet(cad, "F")
+        cad = "Select fecrecep fecha, numfactu factura, codprove,nomprove nombre,totalfac importe  FROM scafpc WHERE " & cad
+        cad = cad & " AND fecrecep<=DATE_ADD(now(), INTERVAL -1 DAY) AND  intconta =0 "
 
     
     End If

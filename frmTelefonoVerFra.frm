@@ -4,41 +4,99 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmTelefonoVerFra 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Ver datos prefactura"
-   ClientHeight    =   10155
+   ClientHeight    =   10995
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   11715
+   ClientWidth     =   14715
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   10155
-   ScaleWidth      =   11715
+   ScaleHeight     =   10995
+   ScaleWidth      =   14715
    StartUpPosition =   2  'CenterScreen
-   Begin VB.TextBox Text1 
-      Alignment       =   1  'Right Justify
-      Height          =   285
-      Index           =   9
-      Left            =   3720
-      Locked          =   -1  'True
-      TabIndex        =   26
-      Text            =   "Text2"
-      Top             =   3240
-      Width           =   855
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   135
+      TabIndex        =   31
+      Top             =   45
+      Width           =   1875
+      Begin MSComctlLib.Toolbar Toolbar5 
+         Height          =   330
+         Left            =   135
+         TabIndex        =   32
+         Top             =   180
+         Width           =   1635
+         _ExtentX        =   2884
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   5
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Suma datos seleccionados"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Exportar csv"
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+         EndProperty
+      End
    End
-   Begin VB.TextBox Text1 
-      Alignment       =   1  'Right Justify
-      Height          =   285
-      Index           =   8
-      Left            =   2520
-      Locked          =   -1  'True
-      TabIndex        =   24
-      Text            =   "Text2"
-      Top             =   3240
-      Width           =   855
-   End
-   Begin VB.TextBox Text1 
+   Begin VB.OptionButton Option1 
+      Caption         =   "Teléfonos"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00800000&
+      Height          =   255
+      Index           =   1
+      Left            =   8595
+      TabIndex        =   29
+      Top             =   840
+      Width           =   1815
+   End
+   Begin VB.OptionButton Option1 
+      Caption         =   "Resumen"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000080&
+      Height          =   255
+      Index           =   0
+      Left            =   6675
+      TabIndex        =   28
+      Top             =   840
+      Value           =   -1  'True
+      Width           =   1815
+   End
+   Begin VB.CheckBox Check1 
+      Alignment       =   1  'Right Justify
+      Caption         =   "Ocultar cero"
+      BeginProperty Font 
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -46,29 +104,95 @@ Begin VB.Form frmTelefonoVerFra
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   375
-      Index           =   7
-      Left            =   120
-      Locked          =   -1  'True
-      TabIndex        =   22
-      Text            =   "Text1"
-      Top             =   2280
-      Width           =   5295
+      Height          =   195
+      Left            =   13005
+      TabIndex        =   27
+      Top             =   840
+      Width           =   1545
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
-      Height          =   285
-      Index           =   6
-      Left            =   1320
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Index           =   9
+      Left            =   7170
       Locked          =   -1  'True
-      TabIndex        =   20
+      TabIndex        =   25
       Text            =   "Text2"
-      Top             =   3240
-      Width           =   975
+      Top             =   4095
+      Width           =   2070
+   End
+   Begin VB.TextBox Text1 
+      Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Index           =   8
+      Left            =   4860
+      Locked          =   -1  'True
+      TabIndex        =   23
+      Text            =   "Text2"
+      Top             =   4095
+      Width           =   2070
+   End
+   Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   615
+      Index           =   7
+      Left            =   120
+      Locked          =   -1  'True
+      MultiLine       =   -1  'True
+      TabIndex        =   21
+      Text            =   "frmTelefonoVerFra.frx":0000
+      Top             =   2925
+      Width           =   6510
+   End
+   Begin VB.TextBox Text1 
+      Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Index           =   6
+      Left            =   2550
+      Locked          =   -1  'True
+      TabIndex        =   19
+      Text            =   "Text2"
+      Top             =   4095
+      Width           =   2070
    End
    Begin MSComDlg.CommonDialog cd1 
-      Left            =   0
-      Top             =   120
+      Left            =   5985
+      Top             =   675
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
@@ -76,28 +200,28 @@ Begin VB.Form frmTelefonoVerFra
    Begin VB.CommandButton cmdExport 
       Height          =   375
       Index           =   1
-      Left            =   3600
-      Picture         =   "frmTelefonoVerFra.frx":0000
+      Left            =   195
+      Picture         =   "frmTelefonoVerFra.frx":0006
       Style           =   1  'Graphical
-      TabIndex        =   19
+      TabIndex        =   18
       ToolTipText     =   "Suma datos seleccionados"
-      Top             =   360
+      Top             =   270
       Width           =   375
    End
    Begin VB.CommandButton cmdExport 
       Height          =   375
       Index           =   0
-      Left            =   4080
-      Picture         =   "frmTelefonoVerFra.frx":0A02
+      Left            =   795
+      Picture         =   "frmTelefonoVerFra.frx":0A08
       Style           =   1  'Graphical
-      TabIndex        =   18
+      TabIndex        =   17
       ToolTipText     =   "Exportar csv"
-      Top             =   360
+      Top             =   270
       Width           =   375
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
          Weight          =   700
@@ -108,61 +232,79 @@ Begin VB.Form frmTelefonoVerFra
       ForeColor       =   &H00800000&
       Height          =   375
       Index           =   2
-      Left            =   1920
+      Left            =   2505
       Locked          =   -1  'True
-      TabIndex        =   16
+      TabIndex        =   15
       Text            =   "Text1"
-      Top             =   360
+      Top             =   1080
       Width           =   1575
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   360
       Index           =   5
-      Left            =   7920
+      Left            =   12015
       Locked          =   -1  'True
       TabIndex        =   11
       Text            =   "Text2"
-      Top             =   3240
-      Width           =   1215
+      Top             =   4095
+      Width           =   2070
    End
    Begin VB.CommandButton Command1 
       Cancel          =   -1  'True
       Caption         =   "&Salir"
-      Height          =   735
-      Left            =   10440
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   555
+      Left            =   1260
       TabIndex        =   10
-      Top             =   2880
-      Width           =   1095
+      Top             =   135
+      Width           =   690
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
-      Height          =   285
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   4
-      Left            =   5280
+      Left            =   9480
       Locked          =   -1  'True
       TabIndex        =   8
       Text            =   "Text2"
-      Top             =   3240
-      Width           =   855
+      Top             =   4095
+      Width           =   2070
    End
    Begin MSComctlLib.ListView ListView1 
-      Height          =   2445
-      Left            =   5640
+      Height          =   2355
+      Left            =   6675
       TabIndex        =   7
-      Top             =   330
-      Width           =   5895
-      _ExtentX        =   10398
-      _ExtentY        =   4313
+      Top             =   1200
+      Width           =   7890
+      _ExtentX        =   13917
+      _ExtentY        =   4154
       View            =   3
       LabelEdit       =   1
       LabelWrap       =   -1  'True
@@ -173,32 +315,50 @@ Begin VB.Form frmTelefonoVerFra
       BackColor       =   -2147483643
       BorderStyle     =   1
       Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       NumItems        =   2
       BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Text            =   "Concepto"
-         Object.Width           =   6853
+         Object.Width           =   9852
       EndProperty
       BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Alignment       =   1
          SubItemIndex    =   1
          Text            =   "Importe"
-         Object.Width           =   2540
+         Object.Width           =   3422
       EndProperty
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
-      Height          =   285
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   3
       Left            =   240
       Locked          =   -1  'True
       TabIndex        =   4
       Text            =   "Text2"
-      Top             =   3240
-      Width           =   855
+      Top             =   4095
+      Width           =   2070
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -212,12 +372,12 @@ Begin VB.Form frmTelefonoVerFra
       Locked          =   -1  'True
       TabIndex        =   2
       Text            =   "Text1"
-      Top             =   1200
-      Width           =   5415
+      Top             =   1920
+      Width           =   6540
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
          Weight          =   700
@@ -232,17 +392,17 @@ Begin VB.Form frmTelefonoVerFra
       Locked          =   -1  'True
       TabIndex        =   1
       Text            =   "Text1"
-      Top             =   360
-      Width           =   1575
+      Top             =   1080
+      Width           =   1980
    End
    Begin MSComctlLib.ListView ListView2 
-      Height          =   6135
+      Height          =   6045
       Left            =   120
-      TabIndex        =   14
-      Top             =   3960
-      Width           =   11415
-      _ExtentX        =   20135
-      _ExtentY        =   10821
+      TabIndex        =   13
+      Top             =   4860
+      Width           =   14415
+      _ExtentX        =   25426
+      _ExtentY        =   10663
       View            =   3
       LabelEdit       =   1
       MultiSelect     =   -1  'True
@@ -254,99 +414,194 @@ Begin VB.Form frmTelefonoVerFra
       BackColor       =   -2147483643
       BorderStyle     =   1
       Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       NumItems        =   7
       BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Text            =   "Destino"
-         Object.Width           =   2141
+         Object.Width           =   3023
       EndProperty
       BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   1
          Text            =   "Fecha-Hora"
-         Object.Width           =   2170
+         Object.Width           =   3052
       EndProperty
       BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   2
          Text            =   "Codigo"
-         Object.Width           =   1305
+         Object.Width           =   1833
       EndProperty
       BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   3
          Text            =   "Descripcion"
-         Object.Width           =   6242
+         Object.Width           =   8006
       EndProperty
       BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Alignment       =   1
          SubItemIndex    =   4
          Text            =   "Duracion"
-         Object.Width           =   2540
+         Object.Width           =   3069
       EndProperty
       BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          SubItemIndex    =   5
          Text            =   "Unidad"
-         Object.Width           =   1940
+         Object.Width           =   2469
       EndProperty
       BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Alignment       =   1
          SubItemIndex    =   6
          Text            =   "Importe"
-         Object.Width           =   2141
+         Object.Width           =   3199
+      EndProperty
+   End
+   Begin MSComctlLib.ListView lwTelef 
+      Height          =   2355
+      Left            =   6675
+      TabIndex        =   30
+      Top             =   1200
+      Width           =   7890
+      _ExtentX        =   13917
+      _ExtentY        =   4154
+      View            =   3
+      LabelEdit       =   1
+      LabelWrap       =   -1  'True
+      HideSelection   =   -1  'True
+      Checkboxes      =   -1  'True
+      FullRowSelect   =   -1  'True
+      _Version        =   393217
+      ForeColor       =   -2147483640
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      NumItems        =   2
+      BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         Text            =   "Telefono"
+         Object.Width           =   8617
+      EndProperty
+      BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+         Alignment       =   1
+         SubItemIndex    =   1
+         Text            =   "Importe"
+         Object.Width           =   4304
       EndProperty
    End
    Begin VB.Shape Shape1 
-      Height          =   735
+      BorderWidth     =   2
+      Height          =   960
       Left            =   120
-      Top             =   2910
-      Width           =   9975
+      Top             =   3630
+      Width           =   14385
    End
    Begin VB.Label Label1 
       Caption         =   "Vta plazos"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   12
-      Left            =   3720
-      TabIndex        =   27
-      Top             =   3000
-      Width           =   975
+      Left            =   7185
+      TabIndex        =   26
+      Top             =   3765
+      Width           =   1155
    End
    Begin VB.Label Label1 
       Caption         =   "Albaranes"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   11
-      Left            =   2520
-      TabIndex        =   25
-      Top             =   3000
+      Left            =   4905
+      TabIndex        =   24
+      Top             =   3765
       Width           =   975
    End
    Begin VB.Label Label1 
       Caption         =   "Vta plazos"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   10
       Left            =   120
-      TabIndex        =   23
-      Top             =   2040
-      Width           =   975
+      TabIndex        =   22
+      Top             =   2640
+      Width           =   1815
    End
    Begin VB.Label Label1 
       Caption         =   "Exento"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   9
-      Left            =   1320
-      TabIndex        =   21
-      Top             =   3000
-      Width           =   975
+      Left            =   2580
+      TabIndex        =   20
+      Top             =   3765
+      Width           =   1200
    End
    Begin VB.Label Label1 
       Caption         =   "Nombre"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   8
       Left            =   120
-      TabIndex        =   17
-      Top             =   1650
-      Width           =   5295
+      TabIndex        =   16
+      Top             =   2370
+      Width           =   6510
    End
    Begin VB.Label Label1 
       Caption         =   "Detalle"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
          Weight          =   700
@@ -358,15 +613,68 @@ Begin VB.Form frmTelefonoVerFra
       Height          =   255
       Index           =   7
       Left            =   120
-      TabIndex        =   15
-      Top             =   3720
+      TabIndex        =   14
+      Top             =   4620
       Width           =   975
    End
    Begin VB.Label Label1 
-      Alignment       =   1  'Right Justify
-      Caption         =   "Resumen"
+      Caption         =   "TOTAL FACTURA"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   5
+      Left            =   12015
+      TabIndex        =   12
+      Top             =   3780
+      Width           =   1965
+   End
+   Begin VB.Label Label1 
+      Caption         =   "IVA"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   4
+      Left            =   9495
+      TabIndex        =   9
+      Top             =   3765
+      Width           =   1335
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Imponible"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   3
+      Left            =   240
+      TabIndex        =   6
+      Top             =   3765
+      Width           =   1215
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Fecha"
+      BeginProperty Font 
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
          Weight          =   700
@@ -374,67 +682,48 @@ Begin VB.Form frmTelefonoVerFra
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000080&
-      Height          =   255
-      Index           =   6
-      Left            =   5400
-      TabIndex        =   13
-      Top             =   60
-      Width           =   1215
-   End
-   Begin VB.Label Label1 
-      Caption         =   "TOTAL"
-      Height          =   255
-      Index           =   5
-      Left            =   8400
-      TabIndex        =   12
-      Top             =   3000
-      Width           =   615
-   End
-   Begin VB.Label Label1 
-      Caption         =   "IVA"
-      Height          =   255
-      Index           =   4
-      Left            =   5400
-      TabIndex        =   9
-      Top             =   3000
-      Width           =   975
-   End
-   Begin VB.Label Label1 
-      Caption         =   "Imponible"
-      Height          =   255
-      Index           =   3
-      Left            =   240
-      TabIndex        =   6
-      Top             =   3000
-      Width           =   1215
-   End
-   Begin VB.Label Label1 
-      Caption         =   "Fecha"
       Height          =   255
       Index           =   2
-      Left            =   1920
+      Left            =   2505
       TabIndex        =   5
-      Top             =   120
+      Top             =   840
       Width           =   975
    End
    Begin VB.Label Label1 
       Caption         =   "Nombre"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   1
       Left            =   120
       TabIndex        =   3
-      Top             =   960
+      Top             =   1680
       Width           =   975
    End
    Begin VB.Label Label1 
-      Caption         =   "Teléfono"
+      Caption         =   "Tfno / agrupación"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   120
       TabIndex        =   0
-      Top             =   120
-      Width           =   975
+      Top             =   840
+      Width           =   2040
    End
 End
 Attribute VB_Name = "frmTelefonoVerFra"
@@ -446,12 +735,21 @@ Option Explicit
 
 Public Where2 As String   'fichero|where|
 Public TieneAlbaranes As Boolean
+Public esAgrupacion As Boolean
+
 
 
 Private UnaVez As Boolean
-Dim Cad As String
+Dim cad As String
 
 
+
+Private Sub Check1_Click()
+    If UnaVez Then Exit Sub
+    Screen.MousePointer = vbHourglass
+    CargarDatos True
+    Screen.MousePointer = vbDefault
+End Sub
 
 Private Sub Command1_Click()
     Unload Me
@@ -476,23 +774,23 @@ Dim Seleccionados As Integer
             Exit Sub
         End If
         
-        Cad = "|"
+        cad = "|"
         For NumRegElim = 1 To ListView2.ListItems.Count
             If ListView2.ListItems(NumRegElim).Selected Then
-                If InStr(1, Cad, "|" & Me.ListView2.ListItems(NumRegElim).SubItems(2) & "|") = 0 Then Cad = Cad & ListView2.ListItems(NumRegElim).SubItems(2) & "|"
+                If InStr(1, cad, "|" & Me.ListView2.ListItems(NumRegElim).SubItems(2) & "|") = 0 Then cad = cad & ListView2.ListItems(NumRegElim).SubItems(2) & "|"
             End If
         Next
         'Ya tengo los distintos conceptos
         'AAhora busco
-        Cad = Mid(Cad, 2) 'quito el primer pipe
+        cad = Mid(cad, 2) 'quito el primer pipe
         CadenaDesdeOtroForm = ""
         Do
-            davidNumalbar = InStr(1, Cad, "|")
+            davidNumalbar = InStr(1, cad, "|")
             If davidNumalbar = 0 Then
-                Cad = ""
+                cad = ""
             Else
-                pPdfRpt = Mid(Cad, 1, davidNumalbar - 1)
-                Cad = Mid(Cad, davidNumalbar + 1)
+                pPdfRpt = Mid(cad, 1, davidNumalbar - 1)
+                cad = Mid(cad, davidNumalbar + 1)
                 pImprimeDirecto = True
                 SumaCantidad = 0
                 SumaImporte = 0
@@ -513,7 +811,7 @@ Dim Seleccionados As Integer
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & vbCrLf & Format(davidNumalbar, "000") & "      Cantidad:    " & Format(SumaCantidad, FormatoCantidad)
                 CadenaDesdeOtroForm = CadenaDesdeOtroForm & "         Importe:     " & Format(SumaImporte, FormatoPrecio) & vbCrLf
             End If
-        Loop Until Cad = ""
+        Loop Until cad = ""
         pPdfRpt = "": pImprimeDirecto = False: davidNumalbar = 0
         CadenaDesdeOtroForm = "Resumen datos seleccionados (" & Seleccionados & ") " & vbCrLf & CadenaDesdeOtroForm
         MsgBox CadenaDesdeOtroForm, vbInformation
@@ -524,11 +822,14 @@ End Sub
 
 
 Private Sub Form_Activate()
-Dim Rs As ADODB.Recordset
-    
+Dim RS As ADODB.Recordset
+    Screen.MousePointer = vbHourglass
     If UnaVez Then
+        Check1.Value = CheckValueLeer(Me.Name)
         UnaVez = False
-        CargarDatos
+        Me.Tag = Where2
+        
+        CargarDatos False
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -538,17 +839,31 @@ Private Sub Form_Load()
     Me.Icon = frmPpal.Icon
     ListView2.Tag = 0
     
+    '++
+    With Me.Toolbar5
+        .HotImageList = frmPpal.imgListComun_OM2
+        .DisabledImageList = frmPpal.imgListComun_BN2
+        .ImageList = frmPpal.ImgListComun2
+        .Buttons(1).Image = 32 ' suma datos seleccionados
+        .Buttons(3).Image = 30 ' Exportar csv
+        .Buttons(5).Image = 15 ' Salir
+    End With
+    
+    
     Label1(12).visible = vParamAplic.TelefoniaVtaPlazos
     Text1(9).visible = vParamAplic.TelefoniaVtaPlazos
     Label1(10).visible = vParamAplic.TelefoniaVtaPlazos
     Text1(7).visible = vParamAplic.TelefoniaVtaPlazos
-
+    
+    
+    Me.lwTelef.visible = esAgrupacion
+    Option1(1).visible = esAgrupacion
     limpiar Me
     Text1(1).Text = "          L e y e n d o    B.D."
-    'Limpiar
+    
 End Sub
 
-Private Sub CargarDatos()
+Private Sub CargarDatos(SoloConsumos As Boolean)
 Dim Importe1 As Currency
 Dim IVA As Currency
 Dim Aux As Currency
@@ -558,70 +873,117 @@ Dim IT As ListItem
 
     Set miRsAux = New ADODB.Recordset
     
-    'Cabecera
-    Cad = "Select * from tel_cab_factura WHERE  " & RecuperaValor(Where2, 2)
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    'NO PUESER EOF
-    Text1(0).Text = miRsAux!Telefono
-         Cad = ""
-         If Not IsNull(miRsAux!apellido1) Then Cad = miRsAux!apellido1
-         If Not IsNull(miRsAux!apellido2) Then Cad = Trim(Cad & " " & miRsAux!apellido2)
-         If Not IsNull(miRsAux!Nombre) Then
-             If Cad <> "" Then Cad = Cad & ","
-             Cad = Trim(Cad & " " & Trim(miRsAux!Nombre))
-         End If
-    Text1(1).Tag = Cad
     
-    Text1(2).Text = miRsAux!Fecha
-    Text1(3).Text = Format(miRsAux!BaseImponible, "#,##0.00") ' Cuota Total
-    Text1(4).Text = Format(miRsAux!Cuota, "#,##0.00") ' Cuota Total
-    Text1(5).Text = Format(miRsAux!total, "#,##0.00") ' Cuota Total
-    Text1(6).Text = ""
-    If DBLet(miRsAux!base_exenta, "N") <> 0 Then Text1(6).Text = Format(miRsAux!base_exenta, "#,##0.00") ' Cuota Total
+    
+    'Cabecera
+    Where2 = Me.Tag
+    cad = "Select * from tel_cab_factura WHERE  " & RecuperaValor(Where2, 2)
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        
+    If Not SoloConsumos Then
+        'NO PUESER EOF
+        Text1(0).Text = miRsAux!Telefono
+             cad = ""
+             If Not IsNull(miRsAux!apellido1) Then cad = miRsAux!apellido1
+             If Not IsNull(miRsAux!apellido2) Then cad = Trim(cad & " " & miRsAux!apellido2)
+             If Not IsNull(miRsAux!Nombre) Then
+                 If cad <> "" Then cad = cad & ","
+                 cad = Trim(cad & " " & Trim(miRsAux!Nombre))
+             End If
+        Text1(1).Tag = cad
+        
+        Text1(2).Text = miRsAux!Fecha
+        Text1(3).Text = Format(miRsAux!BaseImponible, "#,##0.00") ' Cuota Total
+        Text1(4).Text = Format(miRsAux!Cuota, "#,##0.00") ' Cuota Total
+        Text1(5).Text = Format(miRsAux!total, "#,##0.00") ' Cuota Total
+        Text1(6).Text = ""
+        If DBLet(miRsAux!base_exenta, "N") <> 0 Then Text1(6).Text = Format(miRsAux!base_exenta, "#,##0.00") ' Cuota Total
+        
+    End If
     
     If vParamAplic.TieneTelefonia2 = 3 Then
-        Cad = FormatoPrecio
+        cad = FormatoPrecio
     Else
-        Cad = FormatoImporte
+        cad = FormatoImporte
     End If
-    CargaLwTelefonia Me.ListView1, miRsAux!Serie, miRsAux!Ano, miRsAux!NumFact, Cad
     
-    miRsAux.Close
+    ListView1.ListItems.Clear
+    CargaLwTelefonia Me.ListView1, miRsAux!Serie, miRsAux!Ano, miRsAux!NumFact, cad, Me.Check1.Value
+    
+    
+    lwTelef.ListItems.Clear
+    If esAgrupacion Then
+        CargaLwTelefoniaAgrupadoTfono lwTelef, miRsAux!Serie, miRsAux!Ano, miRsAux!NumFact, cad, Me.Check1.Value
+            
+    Else
+        lwTelef.Tag = "'" & Text1(0).Text & "'"
+    End If
     
     Importe1 = 0
     IVA = 0
     
+    miRsAux.Close
+    
+'    If Not SoloConsumos Then
+'        Text1(1).Text = Text1(1).Tag
+'        Set miRsAux = Nothing
+'        Exit Sub
+'    End If
+'
+'
+    
+    
+    
+    
+    
+    
+    
+    
+    
     Label1(8).Caption = ""
+    Label1(8).ToolTipText = ""
     If TieneAlbaranes Then
     
-        Cad = "Select nomclien,scaalb.numalbar,slialb.codartic,slialb.nomartic,importel,codigiva from scaalb left join slialb on scaalb.codtipom=slialb.codtipom"
-        Cad = Cad & " AND scaalb.numalbar = slialb.numalbar left join sartic on slialb.codartic = sartic.codartic  "
+        cad = "Select nomclien,scaalb.numalbar,slialb.codartic,slialb.nomartic,importel,codigiva,factursn from scaalb left join slialb on scaalb.codtipom=slialb.codtipom"
+        cad = cad & " AND scaalb.numalbar = slialb.numalbar left join sartic on slialb.codartic = sartic.codartic  "
         
-        Cad = Cad & " WHERE referenc = '" & Text1(0).Text & "' AND factursn=1"
+        cad = cad & " WHERE scaalb.codtipom='ALT' AND referenc in (" & lwTelef.Tag & ") "
         
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        
         If miRsAux.EOF Then
-            MsgBox "Albaranes NO encotrados", vbExclamation
+            MsgBox "Albaranes NO encontrados", vbExclamation
         Else
             If miRsAux!NomClien <> Text1(1).Tag Then
                 '
                 Text1(1).ForeColor = vbRed
                 Label1(8).Caption = miRsAux!NomClien
+                Label1(8).ToolTipText = "No coincide nombre ALBARAN con el del telefomo"
             Else
                 Text1(1).ForeColor = vbBlack
             End If
             While Not miRsAux.EOF
-                Cad = "** " & Format(miRsAux!NumAlbar, "0000") & " - " & miRsAux!NomArtic & "(" & miRsAux!codArtic & ")"
-                ListView1.ListItems.Add , , Cad
-                ListView1.ListItems(ListView1.ListItems.Count).SubItems(1) = Format(miRsAux!ImporteL, "#,##0.00")
-                ListView1.ListItems(ListView1.ListItems.Count).ForeColor = vbBlue
-                ListView1.ListItems(ListView1.ListItems.Count).ListSubItems(1).ForeColor = vbBlue
+                    
+                cad = "** " & Format(miRsAux!Numalbar, "0000") & " - " & miRsAux!NomArtic & "(" & miRsAux!codArtic & ")"
+                If miRsAux!factursn = 0 Then cad = cad & "  ""NO"""
                 
-                Cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", DBLet(miRsAux!Codigiva, "N"))
-                If Cad = "" Then Cad = "0"
-                Aux = (miRsAux!ImporteL * CCur(Cad)) / 100
-                IVA = IVA + Round2(Aux, 2)
-                Importe1 = Importe1 + miRsAux!ImporteL
+                ListView1.ListItems.Add , , cad
+                If miRsAux!factursn = 0 Then
+                    ListView1.ListItems(ListView1.ListItems.Count).SubItems(1) = "0"
+                    ListView1.ListItems(ListView1.ListItems.Count).ForeColor = vbRed
+                    ListView1.ListItems(ListView1.ListItems.Count).ListSubItems(1).ForeColor = vbRed
+                    ListView1.ListItems(ListView1.ListItems.Count).ToolTipText = "No tiene marca de facturar"
+                Else
+                    ListView1.ListItems(ListView1.ListItems.Count).SubItems(1) = Format(miRsAux!ImporteL, "#,##0.00")
+                    ListView1.ListItems(ListView1.ListItems.Count).ForeColor = vbBlue
+                    ListView1.ListItems(ListView1.ListItems.Count).ListSubItems(1).ForeColor = vbBlue
+                    
+                    cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", DBLet(miRsAux!Codigiva, "N"))
+                    If cad = "" Then cad = "0"
+                    Aux = (miRsAux!ImporteL * CCur(cad)) / 100
+                    IVA = IVA + Round2(Aux, 2)
+                    Importe1 = Importe1 + miRsAux!ImporteL
+                End If
                 miRsAux.MoveNext
             Wend
         End If
@@ -642,23 +1004,37 @@ Dim IT As ListItem
     
     'Si lleva venta plazos
     If vParamAplic.TelefoniaVtaPlazos Then
-        Cad = "select ArtPlazos,PlazosMeses,ImportePlazo,nomartic,codigiva from sclientfno left join sartic on artplazos=codartic "
-        Cad = Cad & " where PlazosMeses>0 AND idtelefono = " & DBSet(Text1(0).Text, "T")
-        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    
-        If Not miRsAux.EOF Then
-            Cad = miRsAux!artplazos & "   " & DBLet(miRsAux!NomArtic, "T")
-            Text1(7).Text = Cad
-            Cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", DBLet(miRsAux!Codigiva, "N"))
-            If Cad = "" Then Cad = "0"
-            Aux = (miRsAux!ImportePlazo * CCur(Cad)) / 100
-        
+        cad = "select ArtPlazos,PlazosMeses,ImportePlazo,nomartic,codigiva,idtelefono from sclientfno left join sartic on artplazos=codartic "
+        cad = cad & " where PlazosMeses>0 AND idtelefono IN (" & lwTelef.Tag & ")"
+        miRsAux.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Text1(7).Text = ""
+        Importe1 = 0
+        NumRegElim = 0
+        While Not miRsAux.EOF
+            
+            If esAgrupacion Then
+                If Text1(7).Text <> "" Then Text1(7).Text = Text1(7).Text & vbCrLf
+                cad = " (" & miRsAux!idtelefono & "     " & Format(miRsAux!ImportePlazo, FormatoImporte) & "€ )"
+                NumRegElim = NumRegElim + 1
+            Else
+                cad = ""
+            End If
+            cad = miRsAux!artplazos & "   " & DBLet(miRsAux!NomArtic, "T") & cad
+            Text1(7).Text = Text1(7).Text & cad
+            cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", DBLet(miRsAux!Codigiva, "N"))
+            If cad = "" Then cad = "0"
+            Aux = Round((miRsAux!ImportePlazo * CCur(cad)) / 100, 2)
+            Importe1 = Importe1 + miRsAux!ImportePlazo
             IVA = IVA + Aux
-            Text1(9).Text = Format(miRsAux!ImportePlazo, FormatoImporte)
+            
+            miRsAux.MoveNext
+    
+        Wend
+        miRsAux.Close
+        If NumRegElim > 0 Then
+            Text1(9).Text = Format(Importe1, FormatoImporte)
+            Label1(10).Caption = "Vta plazos " & IIf(NumRegElim > 2, CStr("(" & NumRegElim & ")"), "")
         End If
-    
-    
-    
     End If
     
     
@@ -690,26 +1066,47 @@ End Sub
 
 
 Private Sub DetalleLlamada(Orden As Byte)
-
+Dim I As Integer
     'Detalle llamada
     If ListView2.Tag = Orden Then Exit Sub
-    
+    If Orden = 127 Then Orden = 1
     Me.ListView2.ListItems.Clear
     ListView2.Tag = Orden
     'Cad = "select Numero_llamado,Fecha,Hora_inicio,Unidad_de_medida,Codigo_de_trafico,"
-    Cad = "SELECT Numero_llamado,Fecha,Codigo_de_trafico, Tipo_de_trafico,Cantidad_medida_originada,"
-    Cad = Cad & " Unidad_de_medida,Importe,Hora_inicio from telefono.detalle_de_llamadas"
-    Cad = Cad & " where fichero='" & Where2 & "' and   Numero_de_telefono='" & Text1(0).Text & "' and fecha<>'0000'"
-    'Cad = Cad & " ORDER BY fecha,Hora_inicio"
-    Cad = Cad & " ORDER BY " & Orden + 1
-    If Orden <> 1 Then
-        Cad = Cad & ",2,8"
+    cad = "SELECT Numero_llamado,Fecha,Codigo_de_trafico, Tipo_de_trafico,Cantidad_medida_originada,"
+    cad = cad & " Unidad_de_medida,Importe,Hora_inicio from telefono.detalle_de_llamadas WHERE "
+    cad = cad & "  fichero='" & Where2 & "' and   Numero_de_telefono "
+    If esAgrupacion Then
+        'Los he cargado en los datos agrupados
+        cad = cad & " IN ("
+        If Me.lwTelef.ListItems.Count = 0 Then
+            cad = cad & "'no'"
+        Else
+            NumRegElim = 0
+            For I = 1 To Me.lwTelef.ListItems.Count
+                If lwTelef.ListItems(I).Checked Then
+                    NumRegElim = NumRegElim + 1
+                    If NumRegElim > 1 Then cad = cad & ", "
+                    cad = cad & DBSet(lwTelef.ListItems(I).Text, "T")
+                End If
+            Next
+            If NumRegElim = 0 Then cad = cad & "'NO'"
+        End If
+        cad = cad & ")"
     Else
-        Cad = Cad & ",8"
+        cad = cad & " = " & DBSet(Text1(0).Text, "T")
+    End If
+    cad = cad & " and fecha<>'0000'"
+    'Cad = Cad & " ORDER BY fecha,Hora_inicio"
+    cad = cad & " ORDER BY " & Orden + 1
+    If Orden <> 1 Then
+        cad = cad & ",2,8"
+    Else
+        cad = cad & ",8"
     End If
     Set miRsAux = Nothing
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
         While Not miRsAux.EOF
             'Cad = "** " & Format(miRsAux!NumAlbar, "0000") & " - " & miRsAux!NomArtic & "(" & miRsAux!codArtic & ")"
@@ -733,6 +1130,10 @@ Private Sub DetalleLlamada(Orden As Byte)
 
 End Sub
 
+Private Sub Form_Unload(Cancel As Integer)
+    CheckValueGuardar Me.Name, Me.Check1.Value
+End Sub
+
 Private Sub ListView2_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
     DetalleLlamada ColumnHeader.Index - 1
 End Sub
@@ -747,20 +1148,20 @@ Dim NF As Integer
         Open App.Path & "\docum.csv" For Output As #NF
         
         'Cabecera
-        Cad = ""
+        cad = ""
         For NumRegElim = 1 To ListView2.ColumnHeaders.Count
-            Cad = Cad & ";""" & ListView2.ColumnHeaders(NumRegElim).Text & """"
+            cad = cad & ";""" & ListView2.ColumnHeaders(NumRegElim).Text & """"
         Next NumRegElim
-        Print #NF, Mid(Cad, 2)
+        Print #NF, Mid(cad, 2)
     
     
         'Lineas
         For NumRegElim = 1 To ListView2.ListItems.Count
-            Cad = """" & Trim(ListView2.ListItems(NumRegElim)) & """"
+            cad = """" & Trim(ListView2.ListItems(NumRegElim)) & """"
             For davidNumalbar = 1 To ListView2.ColumnHeaders.Count - 1
-                Cad = Cad & ";""" & Trim(ListView2.ListItems(NumRegElim).SubItems(davidNumalbar)) & """"
+                cad = cad & ";""" & Trim(ListView2.ListItems(NumRegElim).SubItems(davidNumalbar)) & """"
             Next davidNumalbar
-            Print #NF, Cad
+            Print #NF, cad
             
             
         Next NumRegElim
@@ -791,3 +1192,35 @@ eExp:
     
 End Sub
 
+Private Sub lwTelef_ItemCheck(ByVal Item As MSComctlLib.ListItem)
+    
+    DetalleLlamada 127
+End Sub
+
+Private Sub Option1_Click(Index As Integer)
+    If UnaVez Then Exit Sub
+    
+    Me.Check1.visible = Option1(0).Value
+    
+    If Index = 0 Then
+        ListView1.Left = Me.lwTelef.Left
+    Else
+        ListView1.Left = 12000
+    End If
+    
+End Sub
+
+Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1:
+            'suma datos seleccionados
+            cmdExport_Click (1)
+        Case 3:
+            'exportar csv
+            cmdExport_Click (0)
+        Case 5:
+            'salir
+            Command1_Click
+    End Select
+
+End Sub

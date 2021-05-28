@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacBonificacion 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Bonificaciones Factura"
@@ -455,7 +455,7 @@ Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que 
 
 Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 Attribute frmB.VB_VarHelpID = -1
-Private WithEvents frmA As frmAlmArticu2  'Form Mantenimiento Articulos
+Private WithEvents frmA As frmBasico2  'Form Mantenimiento Articulos
 Attribute frmA.VB_VarHelpID = -1
 
 Dim NombreTabla As String
@@ -594,9 +594,9 @@ Private Sub Form_Load()
     Ordenacion = " ORDER BY codartic "
     CadenaConsulta = "Select * from " & NombreTabla & " WHERE codartic = -1" 'No recupera datos
     'Cargar el data1 sin datos
-    Data1.ConnectionString = conn
-    Data1.RecordSource = CadenaConsulta
-    Data1.Refresh
+    data1.ConnectionString = conn
+    data1.RecordSource = CadenaConsulta
+    data1.Refresh
     
     If DatosADevolverBusqueda = "" Then
         PonerModo 0
@@ -652,10 +652,16 @@ Private Sub imgBuscar_Click(Index As Integer)
     
     Select Case Index
         Case 0, 1, 2 'Codigo Articulo
-            Set frmA = New frmAlmArticu2
+            Set frmA = New frmBasico2
            ' frmA.DatosADevolverBusqueda3 = "@1@" 'Llama en Modo Busqueda
-            frmA.DesdeTPV = False
-            frmA.Show vbModal
+'            frmA.DesdeTPV = False
+'            frmA.Show vbModal
+            If Index = 2 Then
+                AyudaArticulos frmA, Text1(4)
+            Else
+                AyudaArticulos frmA, Text1(Index)
+            End If
+                
             Set frmA = Nothing
     End Select
     If Index = 2 Then
@@ -780,8 +786,8 @@ Dim NumReg As Byte
     b = (Kmodo = 2)
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
     NumReg = 1
-    If Not Data1.Recordset.EOF Then
-        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
+    If Not data1.Recordset.EOF Then
+        If data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
     DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     
@@ -864,7 +870,7 @@ End Sub
 Private Sub Desplazamiento(Index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
-    DesplazamientoData Data1, Index
+    DesplazamientoData data1, Index
     PonerCampos
 End Sub
 
@@ -879,7 +885,7 @@ Private Sub BotonBuscar()
         Text1(0).BackColor = vbYellow
     Else
         HacerBusqueda
-        If Data1.Recordset.EOF Then
+        If data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
             Text1(kCampo).BackColor = vbYellow
             PonerFoco Text1(kCampo)
@@ -922,7 +928,7 @@ Private Sub BotonEliminar()
 Dim SQL As String
 
     'Ciertas comprobaciones
-    If Data1.Recordset.EOF Then Exit Sub
+    If data1.Recordset.EOF Then Exit Sub
     
     SQL = SQL & "¿Seguro que desea Eliminar las Bonificaciones para el Articulo:?"
     SQL = SQL & vbCrLf & vbCrLf & Text1(0).Text & " - " & Text2(0).Text
@@ -930,9 +936,9 @@ Dim SQL As String
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
-        NumRegElim = Data1.Recordset.AbsolutePosition
+        NumRegElim = data1.Recordset.AbsolutePosition
         If Not Eliminar Then Exit Sub
-        If SituarDataTrasEliminar(Data1, NumRegElim) Then
+        If SituarDataTrasEliminar(data1, NumRegElim) Then
             PonerCampos
         Else
             LimpiarCampos
@@ -945,7 +951,7 @@ Error2:
         If Err.Number <> 0 Then
             'MsgBox Err.Number & ": " & Err.Description, vbExclamation
             MuestraError Err.Number, "Eliminar Bonificación", Err.Description
-            Data1.Recordset.CancelUpdate
+            data1.Recordset.CancelUpdate
         End If
 End Sub
 
@@ -954,7 +960,7 @@ Private Function Eliminar() As Boolean
 Dim SQL As String
 On Error GoTo FinEliminar
         
-        SQL = " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+        SQL = " WHERE codartic=" & DBSet(data1.Recordset!codArtic, "T")
        
         conn.Execute "Delete  from " & NombreTabla & SQL
                       
@@ -1068,9 +1074,9 @@ Private Sub PonerCadenaBusqueda()
 Screen.MousePointer = vbHourglass
 On Error GoTo EEPonerBusq
 
-    Data1.RecordSource = CadenaConsulta
-    Data1.Refresh
-    If Data1.Recordset.RecordCount <= 0 Then
+    data1.RecordSource = CadenaConsulta
+    data1.Refresh
+    If data1.Recordset.RecordCount <= 0 Then
         If Modo = 1 Then 'Modo Busqueda
             MsgBox "No hay ningún registro en la tabla " & NombreTabla & " para ese criterio de Búsqueda.", vbInformation
         Else
@@ -1082,7 +1088,7 @@ On Error GoTo EEPonerBusq
         Exit Sub
     Else
         PonerModo 2
-        Data1.Recordset.MoveFirst
+        data1.Recordset.MoveFirst
         PonerCampos
     End If
     Screen.MousePointer = vbDefault
@@ -1098,9 +1104,9 @@ End Sub
 Private Sub PonerCampos()
 On Error GoTo EPonerCampos
 
-    If Data1.Recordset.EOF Then Exit Sub
+    If data1.Recordset.EOF Then Exit Sub
     
-    PonerCamposForma Me, Data1
+    PonerCamposForma Me, data1
     'Poner el nombre del cod. Articulo
     Text2(0).Text = PonerNombreDeCod(Text1(0), conAri, "sartic", "nomartic")
     'Poner el nombre del cod. Articulo 1 de Bonificacion
@@ -1112,7 +1118,7 @@ On Error GoTo EPonerCampos
     BloquearChecks Me, Modo
 
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+    lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
     
 EPonerCampos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo Campos", Err.Description
@@ -1129,7 +1135,7 @@ Dim Indicador As String
 Dim vWhere As String
 
     vWhere = "(codartic=" & DBSet(Text1(0).Text, "T") & ")"
-    If SituarData(Data1, vWhere, Indicador) Then
+    If SituarData(data1, vWhere, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else

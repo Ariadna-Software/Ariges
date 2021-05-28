@@ -713,11 +713,11 @@ Attribute frmF.VB_VarHelpID = -1
 Private WithEvents frmCP As frmCPostal 'Codigos Postales
 Attribute frmCP.VB_VarHelpID = -1
 
-Private WithEvents frmC As frmFacClientes3 'Form Mto Clientes
+Private WithEvents frmC As frmBasico2 'Form Mto Clientes
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmCV As frmFacClientesV  'Form Mto Clientes Varios
+Private WithEvents frmCV As frmBasico2 'frmFacClientesV  'Form Mto Clientes Varios
 Attribute frmCV.VB_VarHelpID = -1
-Private WithEvents frmT As frmAdmTrabajadores  'Form Mto Trabajadores
+Private WithEvents frmT As frmBasico2 'frmAdmTrabajadores  'Form Mto Trabajadores
 Attribute frmT.VB_VarHelpID = -1
 
 
@@ -885,8 +885,8 @@ End Sub
 Private Sub BotonAnyadir()
 'Añadir registro en tabla de cabecera de Pedidos: scaped (Cabecera)
 Dim NomTraba As String
-Dim Cad As String
-Dim Rs As ADODB.Recordset
+Dim cad As String
+Dim RS As ADODB.Recordset
 
     LimpiarCampos 'Vacía los TextBox
     'Poner los grid sin apuntar a nada
@@ -929,13 +929,13 @@ End Sub
 
 
 Private Sub BotonVerTodos()
-Dim Cad As String
+Dim cad As String
 '    LimpiarCampos
     If chkVistaPrevia.Value = 1 Then
         EsCabecera2 = True
 '        cad = " codtipom='" & CodTipoMov & "'"
-        Cad = ""
-        MandaBusquedaPrevia Cad
+        cad = ""
+        MandaBusquedaPrevia cad
     Else
         LimpiarCampos
 '        LimpiarDataGrids
@@ -1020,7 +1020,7 @@ End Function
 Private Sub BotonEliminar()
 'Eliminar Registro de la Cabecera: Tabla de Mantenimientos (scaman)
 ' y los registros correspondientes de las tablas de lineas (sliman y slima1)
-Dim Cad As String
+Dim cad As String
 Dim NumAlbElim As Long
 
     On Error GoTo EEliminar
@@ -1029,17 +1029,17 @@ Dim NumAlbElim As Long
     If Data1.Recordset.EOF Then Exit Sub
     If Not PuedeRealizarAccion(True) Then Exit Sub
     
-    Cad = "Cabecera de Avisos." & vbCrLf
-    Cad = Cad & "------------------------------------" & vbCrLf & vbCrLf
-    Cad = Cad & "Va a eliminar el Aviso:            "
-    Cad = Cad & vbCrLf & "Nº:  " & Format(Text1(0).Text, "0000000")
-    Cad = Cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
-    Cad = Cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
+    cad = "Cabecera de Avisos." & vbCrLf
+    cad = cad & "------------------------------------" & vbCrLf & vbCrLf
+    cad = cad & "Va a eliminar el Aviso:            "
+    cad = cad & vbCrLf & "Nº:  " & Format(Text1(0).Text, "0000000")
+    cad = cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
+    cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
       
     Screen.MousePointer = vbHourglass
        
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         NumRegElim = Data1.Recordset.AbsolutePosition
         NumAlbElim = Data1.Recordset.Fields(0).Value
         
@@ -1062,7 +1062,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
-Dim Cad As String
+Dim cad As String
 
     'Quitar lineas y volver a la cabecera
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
@@ -1074,9 +1074,9 @@ Dim Cad As String
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
-        Cad = Data1.Recordset.Fields(0) & "|"
-        Cad = Cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(Cad)
+        cad = Data1.Recordset.Fields(0) & "|"
+        cad = cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(cad)
         Unload Me
     End If
 End Sub
@@ -1134,11 +1134,11 @@ Private Sub Form_Load()
     CodTipoMov = "AVI" 'Avisos de averias de clientes
       
     'Comprobar si es Departamento o Direccion
-    Me.label1(1).Caption = DevuelveTextoDepto(True)
+    Me.Label1(1).Caption = DevuelveTextoDepto(True)
     If vParamAplic.TieneCRM Then
-        label1(4).Caption = "Observaciones CRM"
+        Label1(4).Caption = "Observaciones CRM"
     Else
-        label1(4).Caption = "Observaciones internas"
+        Label1(4).Caption = "Observaciones internas"
     End If
     
     
@@ -1218,41 +1218,41 @@ End Sub
 
 Private Sub frmCP_DatoSeleccionado(CadenaSeleccion As String)
 'Formulario Mantenimiento C. Postales
-Dim indice As Byte
+Dim Indice As Byte
 Dim devuelve As String
 
-    indice = 9
-    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
-    Text1(indice + 1).Text = ObtenerPoblacion(Text1(indice).Text, devuelve) 'Poblacion
+    Indice = 9
+    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'CPostal
+    Text1(Indice + 1).Text = ObtenerPoblacion(Text1(Indice).Text, devuelve) 'Poblacion
     'provincia
-    Text1(indice + 2).Text = devuelve
+    Text1(Indice + 2).Text = devuelve
 End Sub
 
 
 Private Sub frmCV_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Clientes Varios
-Dim indice As Byte
+Dim Indice As Byte
 
-    indice = 6
-    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'NIF
-    Text1(indice - 1).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Clien
-    PonerDatosClienteVario (Text1(indice).Text)
+    Indice = 6
+    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'NIF
+    Text1(Indice - 1).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Clien
+    PonerDatosClienteVario (Text1(Indice).Text)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date) 'Calendario Fechas
-Dim indice As Byte
-    indice = CByte(Me.imgFecha(0).Tag) + 1
-    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim Indice As Byte
+    Indice = CByte(Me.imgFecha(0).Tag) + 1
+    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
 Private Sub frmT_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Trabajadores
-Dim indice As Byte
+Dim Indice As Byte
 
-    indice = Val(Me.imgBuscar(2).Tag)
-    Text1(indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") 'Cod Trabajador
-    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Trabajador
+    Indice = Val(Me.imgBuscar(2).Tag)
+    Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000") 'Cod Trabajador
+    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Trabajador
 End Sub
 
 
@@ -1264,15 +1264,16 @@ Private Sub imgBuscar_Click(Index As Integer)
     Select Case Index
         Case 4 'Cod. Cliente
             PonerFoco Text1(4)
-            Set frmC = New frmFacClientes3
-            frmC.DatosADevolverBusqueda = "0"
-            frmC.Show vbModal
+            Set frmC = New frmBasico2
+            AyudaClientes frmC, Text1(4)
             Set frmC = Nothing
             
         Case 6 'NIF para cliente de Varios
-            Set frmCV = New frmFacClientesV
-            frmCV.DatosADevolverBusqueda = "0"
-            frmCV.Show vbModal
+'            Set frmCV = New frmFacClientesV
+'            frmCV.DatosADevolverBusqueda = "0"
+'            frmCV.Show vbModal
+            Set frmCV = New frmBasico2
+            AyudaClientesV frmCV, Text1(Index)
             Set frmCV = Nothing
             
         Case 12 'Cod. Direc.
@@ -1288,9 +1289,11 @@ Private Sub imgBuscar_Click(Index As Integer)
              
         Case 2, 13 'Realizada Por Trabajador (Pedido, Albaran, Preparador Material
             Me.imgBuscar(2).Tag = Index
-            Set frmT = New frmAdmTrabajadores
-            frmT.DatosADevolverBusqueda = "0"
-            frmT.Show vbModal
+'            Set frmT = New frmAdmTrabajadores
+'            frmT.DatosADevolverBusqueda = "0"
+'            frmT.Show vbModal
+            Set frmT = New frmBasico2
+            AyudaTrabajadores frmT, Text1(Index)
             Set frmT = Nothing
             
         Case 9 'Cod. Postal
@@ -1306,22 +1309,22 @@ End Sub
 
 
 Private Sub imgFecha_Click(Index As Integer) 'Abre calendario Fechas
-Dim indice As Byte
+Dim Indice As Byte
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
    Screen.MousePointer = vbHourglass
    Set frmF = New frmCal
    frmF.Fecha = Now
-   indice = Index + 1
+   Indice = Index + 1
    Me.imgFecha(0).Tag = Index
    
-    PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
+    PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco Text1(indice)
+   PonerFoco Text1(Indice)
 End Sub
 
 
@@ -1497,19 +1500,19 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
 
     'Llamamos a al form
     '##A mano
-    Cad = ""
+    cad = ""
     If EsCabecera2 Then
-        Cad = Cad & ParaGrid(Text1(0), 17, "Nº Aviso")
-        Cad = Cad & ParaGrid(Text1(1), 15, "Fecha")
-        Cad = Cad & ParaGrid(Text1(4), 15, "Cliente")
-        Cad = Cad & ParaGrid(Text1(5), 53, "Nombre Cliente")
+        cad = cad & ParaGrid(Text1(0), 17, "Nº Aviso")
+        cad = cad & ParaGrid(Text1(1), 15, "Fecha")
+        cad = cad & ParaGrid(Text1(4), 15, "Cliente")
+        cad = cad & ParaGrid(Text1(5), 53, "Nombre Cliente")
         tabla = NombreTabla
         Titulo = "Avisos"
         devuelve = "0|1|"
@@ -1525,16 +1528,16 @@ Dim Desc As String, devuelve As String
             Desc = "Obra"
         End If
         Titulo = Titulo & Text1(4).Text & " - " & Text1(5).Text
-        Cad = Cad & "Cod. " & Desc & "|sdirec|coddirec|N||15·"
-        Cad = Cad & "Desc. " & Desc & "|sdirec|nomdirec|T||35·"
+        cad = cad & "Cod. " & Desc & "|sdirec|coddirec|N||15·"
+        cad = cad & "Desc. " & Desc & "|sdirec|nomdirec|T||35·"
         tabla = "sdirec"
         devuelve = "0|1|"
     End If
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
@@ -1544,7 +1547,7 @@ Dim Desc As String, devuelve As String
         frmB.vTitulo = Titulo
         frmB.vselElem = 0
         frmB.vConexionGrid = conAri  'Conexión a BD: Ariges
-        If Not EsCabecera2 Then frmB.label1.FontSize = 11
+        If Not EsCabecera2 Then frmB.Label1.FontSize = 11
 '        frmB.vBuscaPrevia = chkVistaPrevia
         '#
         frmB.Show vbModal
@@ -2006,11 +2009,11 @@ End Function
 
 
 Private Sub LimpiarDatosCliente()
-Dim I As Byte
+Dim i As Byte
 
-    For I = 4 To 12
-        Text1(I).Text = ""
-    Next I
+    For i = 4 To 12
+        Text1(i).Text = ""
+    Next i
     Text2(12).Text = ""
 End Sub
     
@@ -2018,7 +2021,7 @@ End Sub
 
 Private Sub BotonImprimir(OpcionListado As Integer, EnvioMail As Boolean)
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
 Dim cadSelect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
@@ -2031,14 +2034,14 @@ Dim devuelve As String
     End If
     
     cadFormula = ""
-    CadParam = ""
+    cadParam = ""
     cadSelect = ""
     numParam = 0
     
     '===================================================
     '============ PARAMETROS ===========================
     indRPT = 16
-    If Not PonerParamRPT2(indRPT, CadParam, numParam, nomDocu, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
+    If Not PonerParamRPT2(indRPT, cadParam, numParam, nomDocu, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then Exit Sub
 
 
     '===================================================
@@ -2068,7 +2071,7 @@ Dim devuelve As String
     
      With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .SeleccionaRPTCodigo = pRptvMultiInforme
             .NumeroParametros = numParam
             .SoloImprimir = False
@@ -2148,7 +2151,7 @@ Dim Observaciones As String
     If vCliente.Existe(codClien) Then
         If vCliente.LeerDatos(codClien) Then
             'si el cliente esta bloqueado salimos
-            If vCliente.ClienteBloqueado Then
+            If vCliente.ClienteBloqueado(2, False) Then
                 LimpiarDatosCliente
                 Set vCliente = Nothing
                 Exit Sub
@@ -2167,7 +2170,7 @@ Dim Observaciones As String
             End If
             
 '            If (Not EsDeVarios) Or (EsDeVarios And modo = 3) Then
-            Text1(4).Text = vCliente.codigo
+            Text1(4).Text = vCliente.Codigo
             FormateaCampo Text1(4)
             If (Modo = 3) Or (Modo = 4) Then
                 Text1(5).Text = vCliente.Nombre  'Nom clien
@@ -2221,7 +2224,7 @@ End Sub
 
 
 Private Sub BloquearDatosCliente(bol As Boolean)
-Dim I As Byte
+Dim i As Byte
 
     'bloquear/desbloquear campos de datos segun sea de varios o no
     If Modo <> 5 Then
@@ -2230,9 +2233,9 @@ Dim I As Byte
         Me.imgBuscar(6).Enabled = bol
         Me.imgBuscar(6).visible = bol
         
-        For I = 5 To 11 'si no es de varios no se pueden modificar los datos
-            BloquearTxt Text1(I), Not bol
-        Next I
+        For i = 5 To 11 'si no es de varios no se pueden modificar los datos
+            BloquearTxt Text1(i), Not bol
+        Next i
     End If
 End Sub
 
@@ -2273,7 +2276,7 @@ Dim vClien As CCliente
 Dim NomDpto As String
 
     Set vClien = New CCliente
-    vClien.codigo = Text1(4).Text
+    vClien.Codigo = Text1(4).Text
     'si existe el departamento para el cliente
     If vClien.DptoCliente(Text1(12).Text, NomDpto) Then
         Text2(12).Text = NomDpto
@@ -2370,10 +2373,10 @@ Dim Des As String
         'Pequeño texto para el mensaje
         CadenaDesdeOtroForm = "Tomado por : " & Text2(2).Text & vbCrLf & vbCrLf & vbCrLf & "Cliente: " & Text1(5).Text & vbCrLf
         For NumRegElim = 6 To 7
-            CadenaDesdeOtroForm = CadenaDesdeOtroForm & label1(NumRegElim).Caption & ": " & Text1(NumRegElim) & vbCrLf
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & Label1(NumRegElim).Caption & ": " & Text1(NumRegElim) & vbCrLf
         Next NumRegElim
         
-        CadenaDesdeOtroForm = CadenaDesdeOtroForm & label1(45).Caption & ": " & Text1(3).Text & vbCrLf
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & Label1(45).Caption & ": " & Text1(3).Text & vbCrLf
         NumRegElim = 0
         frmEMail.DatosEnvio = frmEMail.DatosEnvio & CadenaDesdeOtroForm & "|"
         'Datos del enviante del mail
@@ -2504,7 +2507,7 @@ Dim Albaran As Long
     If Text1(12).Text <> "" Then
         CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", "codclien = " & Text1(4).Text & " AND coddirec ", Text1(12).Text, "N")
         If CadenaDesdeOtroForm = "" Then
-            MsgBox "No existe el " & label1(1).Caption & " para el cliente: " & Text1(4).Text, vbExclamation
+            MsgBox "No existe el " & Label1(1).Caption & " para el cliente: " & Text1(4).Text, vbExclamation
             
             Exit Sub
         End If
@@ -2564,7 +2567,7 @@ End Sub
 
 Private Function GenerarAlbaran2() As Long
 Dim NumAlb As Long
-Dim Cad As String
+Dim cad As String
 Dim vTipoMov As CTiposMov
 Dim Cli As CCliente
 
@@ -2581,8 +2584,8 @@ Dim Cli As CCliente
     Set vTipoMov = New CTiposMov
     NumAlb = vTipoMov.ConseguirContador("ALR")
     Do
-        Cad = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", vTipoMov.TipoMovimiento, "T", , "numalbar", CStr(NumAlb), "N")
-        If Cad <> "" Then
+        cad = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", vTipoMov.TipoMovimiento, "T", , "numalbar", CStr(NumAlb), "N")
+        If cad <> "" Then
             'Ya existe el contador incrementarlo
             HaDevueltoDatos = True
             vTipoMov.IncrementarContador (vTipoMov.TipoMovimiento)
@@ -2595,38 +2598,38 @@ Dim Cli As CCliente
     
     'Voy a insertar el albaran """""A MANO """"""
     'codtipom,numalbar,fechaalb,factursn,
-    Cad = "'ALR'," & NumAlb & ",'" & Format(RecuperaValor(CadenaDesdeOtroForm, 1), FormatoFecha) & "',0,"
+    cad = "'ALR'," & NumAlb & ",'" & Format(RecuperaValor(CadenaDesdeOtroForm, 1), FormatoFecha) & "',0,"
     'CodClien , nomclien, domclien, codpobla,
     
-    Cad = Cad & Cli.codigo & "," & DBSet(Text1(5).Text, "T") & "," & DBSet(Text1(8).Text, "T") & "," & DBSet(Text1(9).Text, "T") & ","
+    cad = cad & Cli.Codigo & "," & DBSet(Text1(5).Text, "T") & "," & DBSet(Text1(8).Text, "T") & "," & DBSet(Text1(9).Text, "T") & ","
     
     'pobclien, proclien, nifClien, telclien,
-    Cad = Cad & DBSet(Text1(10).Text, "T") & "," & DBSet(Text1(11).Text, "T") & "," & DBSet(Text1(6).Text, "T") & "," & DBSet(Text1(7).Text, "T") & ","
+    cad = cad & DBSet(Text1(10).Text, "T") & "," & DBSet(Text1(11).Text, "T") & "," & DBSet(Text1(6).Text, "T") & "," & DBSet(Text1(7).Text, "T") & ","
     'CodDirec , nomdirec, referenc,
-    Cad = Cad & DBSet(Text1(12).Text, "T") & "," & DBSet(Text2(12).Text, "T") & ",NULL,"
+    cad = cad & DBSet(Text1(12).Text, "T") & "," & DBSet(Text2(12).Text, "T") & ",NULL,"
     'facturkm , cantidkm,
-    Cad = Cad & "0,NULL,"
+    cad = cad & "0,NULL,"
     'CodTraba , codtrab1, codtrab2,
-    Cad = Cad & Text1(2).Text & "," & Text1(13).Text & "," & Text1(13).Text & ","
+    cad = cad & Text1(2).Text & "," & Text1(13).Text & "," & Text1(13).Text & ","
     'codagent , codforpa, CodEnvio, DtoPPago, DtoGnral, tipofact,
-    Cad = Cad & Cli.Agente & "," & Cli.ForPago & "," & Cli.FEnvio & "," & DBSet(Cli.DtoPPago, "N", "N") & "," & DBSet(Cli.DtoGnral, "N", "N") & "," & Cli.TipoFactu & ","
+    cad = cad & Cli.Agente & "," & Cli.ForPago & "," & Cli.FEnvio & "," & DBSet(Cli.DtoPPago, "N", "N") & "," & DBSet(Cli.DtoGnral, "N", "N") & "," & Cli.TipoFactu & ","
     'observa01 , observa02, observa03, observa04, observa05,
     For kCampo = 2 To 6
-        Cad = Cad & DBSet(Trim(RecuperaValor(CadenaDesdeOtroForm, kCampo)), "T", "S") & ","
+        cad = cad & DBSet(Trim(RecuperaValor(CadenaDesdeOtroForm, kCampo)), "T", "S") & ","
     Next kCampo
     
     'numpedcl, fecpedcl NumOfert , fecofert, , FecEntre, sementre,
-    Cad = Cad & Text1(0).Text & ",'" & Format(Text1(1).Text, FormatoFecha) & "',NULL,NULL,NULL,NULL,"
+    cad = cad & Text1(0).Text & ",'" & Format(Text1(1).Text, FormatoFecha) & "',NULL,NULL,NULL,NULL,"
     'codtipmf , NumFactu, FecFactu, EsTicket, NumTermi, NumVenta,
-    Cad = Cad & "NULL,NULL,NULL,0,NULL,NULL,"
+    cad = cad & "NULL,NULL,NULL,0,NULL,NULL,"
     
     'Aportacion , pesoalba, portes
-    Cad = Cad & "0,0,0"
+    cad = cad & "0,0,0"
     
     'INSER INTO
     CadenaDesdeOtroForm = "codtipom,numalbar,fechaalb,factursn,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,telclien,coddirec,nomdirec,referenc,facturkm,cantidkm,codtraba,codtrab1,codtrab2,codagent,codforpa,codenvio,dtoppago,dtognral,tipofact,observa01,observa02,observa03,observa04,observa05,numpedcl,fecpedcl,numofert,fecofert,fecentre,sementre,codtipmf,numfactu,fecfactu,esticket,numtermi,numventa,aportacion,pesoalba,portes"
-    Cad = "INSERT INTO scaalb(" & CadenaDesdeOtroForm & ") VALUES (" & Cad & ")"
-    conn.Execute Cad
+    cad = "INSERT INTO scaalb(" & CadenaDesdeOtroForm & ") VALUES (" & cad & ")"
+    conn.Execute cad
     
     GenerarAlbaran2 = NumAlb
     

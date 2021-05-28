@@ -1,5 +1,5 @@
 Attribute VB_Name = "ValoresxDefecto"
-
+'////////////////////
 
 
 'Dos metodos publicos

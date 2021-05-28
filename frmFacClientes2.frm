@@ -386,7 +386,7 @@ Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 
 
-Private WithEvents frmC As frmFacClientes
+Private WithEvents frmC As frmFacClientesGr
 Attribute frmC.VB_VarHelpID = -1
 
 Private CadenaConsulta As String
@@ -415,9 +415,9 @@ Dim b As Boolean
     b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtaux(0).visible = Not b
-    txtaux(1).visible = Not b
-    txtaux(2).visible = Not b
+    Me.txtAux(0).visible = Not b
+    txtAux(1).visible = Not b
+    txtAux(2).visible = Not b
     
     cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
@@ -427,7 +427,7 @@ Dim b As Boolean
     If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     'Si estamos en insertar o modificar
-    BloquearTxt txtaux(0), (Modo <> 3 And Modo <> 1)
+    BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -494,12 +494,12 @@ End Sub
 Private Sub BotonBuscar()
     CargaGrid2 "false"  'para vaciar los datos del Grid
     'Buscar
-    txtaux(0).Text = ""
-    txtaux(1).Text = ""
-    txtaux(2).Text = ""
+    txtAux(0).Text = ""
+    txtAux(1).Text = ""
+    txtAux(2).Text = ""
     
     LLamaLineas Me.DataGrid1.Top + 270, 1
-    PonerFoco txtaux(1)
+    PonerFoco txtAux(1)
 End Sub
 
 Private Sub BotonVerTodos()
@@ -549,9 +549,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
     'Fijamos el ancho
-    txtaux(0).Top = alto
-    txtaux(1).Top = alto
-    txtaux(2).Top = alto
+    txtAux(0).Top = alto
+    txtAux(1).Top = alto
+    txtAux(2).Top = alto
 '    txtAux(0).Left = DataGrid1.Left + 340
 '    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
 '    txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
@@ -597,13 +597,13 @@ Dim CadB As String
         Case 1 'HacerBusqueda
         
             'Modificacion para que no tenga que poner *
-            If txtaux(1).Text <> "" Then
+            If txtAux(1).Text <> "" Then
                 'No lo ha puesto el. Se lo pongo YO
-                If InStr(1, txtaux(1).Text, "*") = 0 Then txtaux(1).Text = "*" & txtaux(1).Text & "*"
+                If InStr(1, txtAux(1).Text, "*") = 0 Then txtAux(1).Text = "*" & txtAux(1).Text & "*"
             End If
-            If txtaux(2).Text <> "" Then
+            If txtAux(2).Text <> "" Then
                 'No lo ha puesto el. Se lo pongo YO
-                If InStr(1, txtaux(2).Text, "*") = 0 Then txtaux(2).Text = "*" & txtaux(2).Text & "*"
+                If InStr(1, txtAux(2).Text, "*") = 0 Then txtAux(2).Text = "*" & txtAux(2).Text & "*"
             End If
             
             CadB = ObtenerBusqueda(Me, False)
@@ -692,9 +692,9 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     End If
 End Sub
 
-Private Sub Form_activate()
+Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
-    If Modo = 1 Then PonerFoco Me.txtaux(1)
+    If Modo = 1 Then PonerFoco Me.txtAux(1)
 End Sub
 
 
@@ -723,7 +723,7 @@ Private Sub Form_Load()
         Toolbar1.Buttons(5).Enabled = False
     End If
     
-    FormatoCod = FormatoCampo(txtaux(0))
+    FormatoCod = FormatoCampo(txtAux(0))
     
     cmdRegresar.visible = (DatosADevolverBusqueda <> "")
 '    PonerModo 2
@@ -760,7 +760,7 @@ End Sub
 
 Private Sub mnBusqAvan_Click()
     FormatoCod = ""
-    Set frmC = New frmFacClientes
+    Set frmC = New frmFacClientesGr
     frmC.DatosADevolverBusqueda = "0|1|"
     frmC.Show vbModal
     Set frmC = Nothing
@@ -768,7 +768,7 @@ Private Sub mnBusqAvan_Click()
         RaiseEvent DatoSeleccionado(FormatoCod)
         Unload Me
     Else
-        FormatoCod = FormatoCampo(txtaux(0))
+        FormatoCod = FormatoCampo(txtAux(0))
     End If
 End Sub
 
@@ -849,7 +849,7 @@ Dim tots As String
 End Sub
 
 Private Sub txtAux_GotFocus(index As Integer)
-    ConseguirFoco txtaux(index), Modo
+    ConseguirFoco txtAux(index), Modo
 End Sub
 
 Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
@@ -861,8 +861,8 @@ Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAux_LostFocus(index As Integer)
-    If Not PerderFocoGnral(txtaux(index), Modo) Then Exit Sub
-    If index = 0 Then PonerFormatoEntero txtaux(index)
+    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
+    If index = 0 Then PonerFormatoEntero txtAux(index)
 End Sub
 
 

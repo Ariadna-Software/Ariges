@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFrecuencias 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Frecuencias"
@@ -1158,7 +1158,7 @@ Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal
 Attribute frmF.VB_VarHelpID = -1
-Private WithEvents frmMtoCliente As frmFacClientes
+Private WithEvents frmMtoCliente As frmBasico2 'frmFacClientesGr
 Attribute frmMtoCliente.VB_VarHelpID = -1
 
 Dim NombreTabla As String
@@ -1245,16 +1245,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    Cad = Data1.Recordset.Fields(0) & "|"
-    Cad = Cad & Data1.Recordset.Fields(2) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Data1.Recordset.Fields(0) & "|"
+    cad = cad & Data1.Recordset.Fields(2) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1390,7 +1390,7 @@ Private Sub frmMtoCliente_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
-Dim Cad As String
+Dim cad As String
 
     If Modo <> 3 And Modo <> 1 Then Exit Sub 'SOLO INSERTAR,  o buscar y o
  
@@ -1400,13 +1400,14 @@ Dim Cad As String
         
     If Index = 0 Then
         'NOMBRE CLIENTE
-        Set frmMtoCliente = New frmFacClientes
-        frmMtoCliente.DatosADevolverBusqueda = "0|1|"
+'        Set frmMtoCliente = New frmFacClientesGr
+'        frmMtoCliente.DatosADevolverBusqueda = "0|1|"
         If Not IsNumeric(Text1(0).Text) Then Text1(0).Text = ""
-        frmMtoCliente.Show vbModal
+'        frmMtoCliente.Show vbModal
+        
+        Set frmMtoCliente = New frmBasico2
+        AyudaClientes frmMtoCliente, Text1(0).Text
         Set frmMtoCliente = Nothing
-        
-        
         
     Else
         'DEPARTAMENTO
@@ -1419,16 +1420,16 @@ Dim Cad As String
         Set frmB = New frmBuscaGrid
         
 '        If vParamAplic.Departamento Then
-            Cad = "Dptos."
+            cad = "Dptos."
 '        Else
 '            Cad = "Direc."
 '        End If
         
-        Cad = Cad & " Cliente: " & Text1(0).Text & " - " & Text2(0).Text
-        frmB.vTitulo = Cad
-        Cad = "Codigo|sdirec|coddirec|N|000|15·"
-        Cad = Cad & "Descripcion|sdirec|nomdirec|T||55·"
-        frmB.vCampos = Cad
+        cad = cad & " Cliente: " & Text1(0).Text & " - " & Text2(0).Text
+        frmB.vTitulo = cad
+        cad = "Codigo|sdirec|coddirec|N|000|15·"
+        cad = cad & "Descripcion|sdirec|nomdirec|T||55·"
+        frmB.vCampos = cad
         frmB.vTabla = "sdirec"
         frmB.vSQL = " codclien =" & Text1(0).Text
         frmB.vCargaFrame = False
@@ -1699,7 +1700,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 10
             'Cambiar cliente dpto
             CadenaDesdeOtroForm = ""
-            frmListado2.opcion = 45
+            frmListado2.Opcion = 45
             frmListado2.Show vbModal
             If CadenaDesdeOtroForm <> "" Then
                 If Modo = 2 Then
@@ -1935,7 +1936,7 @@ Dim SQL As String
 On Error GoTo FinEliminar
         
         SQL = " WHERE coddirec=" & Data1.Recordset!CodDirec
-        SQL = SQL & " AND codclien =" & Data1.Recordset!codclien
+        SQL = SQL & " AND codclien =" & Data1.Recordset!codClien
         SQL = SQL & " AND numexped =" & DBSet(Data1.Recordset!numexped, "T")
         SQL = SQL & " AND numcanal =" & Data1.Recordset!numcanal
         SQL = SQL & " AND legalsno =" & Data1.Recordset!legalsno
@@ -1969,26 +1970,26 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
-Dim Tabla As String
+Dim cad As String
+Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: slista
-    Cad = Cad & ParaGrid(Text1(0), 25)
-    Cad = Cad & ParaGrid(Text1(1), 25)
-    Cad = Cad & ParaGrid(Text1(2), 25)
-    Cad = Cad & ParaGrid(Text1(3), 25)
-    Tabla = "scafre"
+    cad = cad & ParaGrid(Text1(0), 25)
+    cad = cad & ParaGrid(Text1(1), 25)
+    cad = cad & ParaGrid(Text1(2), 25)
+    cad = cad & ParaGrid(Text1(3), 25)
+    tabla = "scafre"
     Titulo = "Frecuencias"
                
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vCampos = cad
+        frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False
         '###A mano
@@ -2175,11 +2176,11 @@ Dim SQL As String
     If Me.Data1.Recordset.EOF Then Exit Sub
     
     If vUsu.Nivel > 1 Then
-        MsgBox "No tiene permisos", vbExclamation
+        MsgBox "No tiene suficientes privilegios. Consulte al administrador del sistema. ", vbExclamation
         Exit Sub
     End If
     CadenaDesdeOtroForm = Text1(2).Text & "|" & Abs(Me.Check1.Value) & "|"
-    frmListado2.opcion = 24
+    frmListado2.Opcion = 24
     frmListado2.Show vbModal
     
     If CadenaDesdeOtroForm <> "" Then
@@ -2189,7 +2190,7 @@ Dim SQL As String
         CadenaDesdeOtroForm = RecuperaValor(CadenaDesdeOtroForm, 2)
         CadenaConsulta = "numexped = " & DBSet(SQL, "T") & " AND legalsno = " & CadenaDesdeOtroForm
         SQL = "UPDATE scafre SET numexped = " & DBSet(SQL, "T") & ", legalsno = " & CadenaDesdeOtroForm
-        SQL = SQL & " WHERE codclien = " & Data1.Recordset!codclien & " AND coddirec = " & Data1.Recordset!CodDirec
+        SQL = SQL & " WHERE codclien = " & Data1.Recordset!codClien & " AND coddirec = " & Data1.Recordset!CodDirec
         SQL = SQL & " AND numexped = " & DBSet(Data1.Recordset!numexped, "T")
         SQL = SQL & " AND numcanal = " & Data1.Recordset!numcanal
         SQL = SQL & " AND legalsno = " & Data1.Recordset!legalsno
@@ -2198,7 +2199,7 @@ Dim SQL As String
         If ejecutar(SQL, False) Then
             Espera 0.5
             
-            SQL = " AND codclien = " & Data1.Recordset!codclien & " AND coddirec = " & Data1.Recordset!CodDirec
+            SQL = " AND codclien = " & Data1.Recordset!codClien & " AND coddirec = " & Data1.Recordset!CodDirec
             'SQL = SQL & " AND numexped = " & DBSet(Data1.Recordset!numexped, "T") esta en el update
             SQL = SQL & " AND numcanal = " & Data1.Recordset!numcanal
             'SQL = SQL & " AND legalsno = " & Data1.Recordset!legalsno esta tb en el update
