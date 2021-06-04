@@ -18,10 +18,10 @@ Begin VB.Form frmMensajes
    Visible         =   0   'False
    Begin VB.Frame FramePuntosCaducados 
       Height          =   6735
-      Left            =   3360
+      Left            =   2280
       TabIndex        =   142
       Top             =   960
-      Width           =   12375
+      Width           =   12975
       Begin VB.CommandButton cmdPuntosCaducados 
          Caption         =   "Caducar"
          BeginProperty Font 
@@ -35,7 +35,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   375
          Index           =   0
-         Left            =   9480
+         Left            =   9960
          TabIndex        =   146
          Top             =   6120
          Width           =   1185
@@ -53,7 +53,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   375
          Index           =   1
-         Left            =   10800
+         Left            =   11400
          TabIndex        =   145
          Top             =   6120
          Width           =   1185
@@ -63,8 +63,8 @@ Begin VB.Form frmMensajes
          Left            =   240
          TabIndex        =   143
          Top             =   720
-         Width           =   11805
-         _ExtentX        =   20823
+         Width           =   12405
+         _ExtentX        =   21881
          _ExtentY        =   9128
          View            =   3
          LabelEdit       =   1
@@ -85,7 +85,7 @@ Begin VB.Form frmMensajes
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   5
+         NumItems        =   6
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Codigo"
             Object.Width           =   2188
@@ -104,11 +104,17 @@ Begin VB.Form frmMensajes
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   1
             SubItemIndex    =   3
-            Text            =   "Max"
+            Text            =   "P.calculado"
             Object.Width           =   2540
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
             SubItemIndex    =   4
+            Text            =   "P.caducan"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
             Text            =   "Fec. Ult."
             Object.Width           =   2540
          EndProperty
@@ -2832,6 +2838,9 @@ Public OpcionMensaje As Byte
 '31 .- Puntos Caducados    'AUN NO ESTA REALIZADA !!!!!!!
 
 
+
+
+
 '99 .- Bloqueo por empresas
 
 
@@ -3889,7 +3898,8 @@ On Error Resume Next
             W = FramePrevisualizar.Width
             PonerFrameVisible FramePrevisualizar, True, H, W
             PulsadoSalir = False
-        
+            Caption = "Previsión facturación"
+            
         Case 30 ' peticion de pwd
             H = FramePWD.Height
             W = FramePWD.Width
@@ -6353,73 +6363,58 @@ Private Sub CargaPuntosCaducados()
 
     Label2(9).Caption = "Prepara datos "
     Label2(9).Refresh
-    SQL = "DELETE FROM tmpnlotes WHERE codusu = " & vUsu.Codigo
-    conn.Execute SQL
-    
-    Espera 0.1
-    
-    SQL = "insert into tmpnlotes(codusu,codprove,fechaalb)"
-    SQL = SQL & " SELECT " & vUsu.Codigo & ", codclien,max(if(concepto<>0,fechaalb,'2001-01-01')) fecha  from smovalpuntos where concepto<>2"
-    SQL = SQL & " and codclien in (select codclien from sclien where TienePuntos=1 and puntos>0 "
-    If cadWhere <> "" Then SQL = SQL & " AND codclien = " & cadWhere
-    SQL = SQL & ") group by codclien"
-    conn.Execute SQL
-
-
 
     'Empezamos a cargar datos
     Label2(9).Caption = "Leyendo movimientos puntos"
     Label2(9).Refresh
-    SQL = " select smovalpuntos.*,sclien.puntos puntoscliente,NomClien from smovalpuntos"
-    SQL = SQL & " inner join sclien on smovalpuntos.codclien=sclien.codclien"
-    SQL = SQL & " inner join tmpnlotes on tmpnlotes.codusu=2000 and tmpnlotes.codprove=smovalpuntos.codclien"
-    SQL = SQL & " Where tmpnlotes.FechaAlb < smovalpuntos.FechaAlb And smovalpuntos.FechaAlb < "
+    SQL = " select smovalpuntos.codclien,sum(smovalpuntos.puntos) caduca,sclien.puntos PuntosCliente,nomclien,max(if(concepto=3,fechaalb,'2001-01-01')) fec FROM "
+    SQL = SQL & " smovalpuntos inner join sclien on smovalpuntos.codclien=sclien.codclien"
+    SQL = SQL & " WHERE sclien.Puntos > 0 AND fechaalb <= "
     SQL = SQL & DBSet(DateAdd("d", -vParamAplic.DiasCaducidadPuntos, Now), "F")
     If cadWhere <> "" Then SQL = SQL & " AND smovalpuntos.codclien = " & cadWhere
-    SQL = SQL & " order by smovalpuntos.codclien,fechaalb,concepto"
+    SQL = SQL & " group by smovalpuntos.codclien"
+    SQL = SQL & " order by smovalpuntos.codclien"
 
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = -1
     NE = 0
     While Not miRsAux.EOF
-        If NumRegElim <> miRsAux!codClien Then
-            Label2(9).Caption = miRsAux!NomClien
-            Label2(9).Refresh
-            If NE > 0 Then
-                
-                ListView10.ListItems(NE).SubItems(3) = Format(Importe, FormatoCantidad)
-                ListView10.ListItems(NE).SubItems(4) = SQL
-            End If
-            
-            'Insert
-            NumRegElim = miRsAux!codClien
-            NE = NE + 1
-            ListView10.ListItems.Add , "K" & Format(NE, "00000"), Format(NumRegElim, "0000")
-            ListView10.ListItems(NE).SubItems(1) = miRsAux!NomClien
-            ListView10.ListItems(NE).SubItems(2) = Format(miRsAux!PuntosCliente, FormatoCantidad)
-            
-            SQL = ""
-            Importe = 0
-         End If
-         
-            'Este tambien lo caduca
-            SQL = Format(miRsAux!FechaAlb, "dd/mm/yyyy")
-            Importe = Importe + miRsAux!Puntos
     
-       
+            If miRsAux!PuntosCliente >= miRsAux!caduca Then
+                Importe = miRsAux!caduca
+                OK = 1
+            Else
+                Importe = miRsAux!PuntosCliente
+                OK = 2
+            End If
+
+    
+    
+            If Importe > 0 Then
+                'Insert
+                NumRegElim = miRsAux!codClien
+                NE = NE + 1
+                ListView10.ListItems.Add , "K" & Format(NE, "00000"), Format(NumRegElim, "0000")
+                ListView10.ListItems(NE).SubItems(1) = miRsAux!NomClien
+                ListView10.ListItems(NE).SubItems(2) = Format(miRsAux!PuntosCliente, FormatoCantidad)
+                ListView10.ListItems(NE).SubItems(3) = Format(miRsAux!caduca, FormatoCantidad)
+                
+                ListView10.ListItems(NE).SubItems(4) = Format(Importe, FormatoCantidad)
+                'Este tambien lo caduca
+                SQL = " "
+                If Year(miRsAux!fec) > 2020 Then SQL = Format(miRsAux!fec, "dd/mm/yyyy")
+                ListView10.ListItems(NE).SubItems(5) = SQL
+                
+    
+            End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     
     If NE > 0 Then
-        'El ultimo registro
-        ListView10.ListItems(NE).SubItems(3) = Format(Importe, FormatoCantidad)
-        ListView10.ListItems(NE).SubItems(4) = SQL
-        
         If cadWhere <> "" Then Me.Caption = Me.Caption & "  " & ListView10.ListItems(NE).SubItems(1)
             
-        
     End If
     
     Label2(9).Caption = ""
@@ -6448,9 +6443,9 @@ Private Sub CaducarPuntos()
             SQL = Val(SQL) + 1
         
             ''codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov,observaciones
-            Importe = -1 * ImporteFormateado(ListView10.ListItems(NumRegElim).SubItems(3))
-            Errores = ListView10.ListItems(NumRegElim).SubItems(4)
-            If Errores = "" Then Errores = Now                                                              '3: CADUCAER puntos
+            Importe = -1 * ImporteFormateado(ListView10.ListItems(NumRegElim).SubItems(4))
+            NE = vParamAplic.DiasCaducidadPuntos
+            Errores = DateAdd("d", -NE, Now)                '3: CADUCAER puntos
             SQL = "(" & ListView10.ListItems(NumRegElim).Text & "," & SQL & ",'',0," & DBSet(Errores, "F") & ",3," & DBSet(Importe, "N", "N")
             SQL = SQL & "," & DBSet(Now, "FH") & "," & DBSet("Realizado por " & vUsu.Login, "T") & ")"
             

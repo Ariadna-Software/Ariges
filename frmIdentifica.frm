@@ -428,6 +428,10 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
         KeyAscii = 0
         SendKeys "{tab}"
+        If Index = 1 Then
+            
+            PonerFocoOBj Me.Combo1
+        End If
     Else
         If KeyAscii = 27 Then
             CadenaDesdeOtroForm = ""
@@ -560,7 +564,7 @@ Private Sub CargaCombo()
     'Conceptos
     Set miRsAux = New ADODB.Recordset
     
-    miRsAux.Open "Select * from usuarios.usuarios where nivelusu <> -1 order by login", conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    miRsAux.Open "Select * from usuarios.usuarios where nivelariges <> -1 order by login", conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     
     While Not miRsAux.EOF

@@ -1094,7 +1094,7 @@ Private Sub chkVistaPrevia_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim b As Boolean
+Dim B As Boolean
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -1105,18 +1105,18 @@ Dim b As Boolean
         Case 3 'INSERTAR
             If DatosOk Then
                 If Me.DireccionesEnvio Then
-                    b = InsertarModificarLineaEnvio
+                    B = InsertarModificarLineaEnvio
                 Else
-                    b = InsertarModificarLineaDpto
+                    B = InsertarModificarLineaDpto
                 End If
                 
                     
-                If b Then
+                If B Then
                     If Data1.Recordset Is Nothing Then
-                        If Data1.Recordset.EOF Then b = False
+                        If Data1.Recordset.EOF Then B = False
                     End If
                     
-                    If Not b Then
+                    If Not B Then
                         PonerModo 2
                         BotonVerTodos
                         Exit Sub
@@ -1245,7 +1245,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
     
@@ -1259,9 +1259,9 @@ Dim cad As String
             Exit Sub
         End If
     
-        cad = Data1.Recordset.Fields(1) & "|"
-        cad = cad & Data1.Recordset.Fields(2) & "|"
-        RaiseEvent DatoSeleccionado(cad)
+        Cad = Data1.Recordset.Fields(1) & "|"
+        Cad = Cad & Data1.Recordset.Fields(2) & "|"
+        RaiseEvent DatoSeleccionado(Cad)
         Unload Me
     End If
 End Sub
@@ -1511,7 +1511,7 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim I As Byte
+Dim i As Byte
     
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
@@ -1530,7 +1530,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
  
@@ -1543,13 +1543,13 @@ Dim NumReg As Byte
     
     
    
-    b = Modo < 5
+    B = Modo < 5
     
     '-------------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
 
-    cmdRegresar.visible = b
+    cmdRegresar.visible = B
   
       
     
@@ -1561,10 +1561,10 @@ Dim NumReg As Byte
         End If
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
     
     'Poner Boton de Cabecera o Aceptar/Cancelar
-    PonerBotonCabecera b Or (Modo = 0)
+    PonerBotonCabecera B Or (Modo = 0)
         
     'Bloquear Registros si modo distinto de Insertar o Modificar
     BloquearText1 Me, Modo
@@ -1595,32 +1595,32 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 On Error Resume Next
 
-    b = (Modo = 0 Or Modo = 2)
+    B = (Modo = 0 Or Modo = 2)
 
     'Añadir
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = Modo = 2
+    B = Modo = 2
     
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    mnEliminar.Enabled = B
     
      '---------------------------------
-    b = (Modo >= 3 Or Modo = 1)
+    B = (Modo >= 3 Or Modo = 1)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'VerTodos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
     If Err.Number <> 0 Then Err.Clear
 
     Toolbar1.Buttons(8).Enabled = False
@@ -1637,23 +1637,23 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
-Dim I As Integer
+Dim B As Boolean
+Dim i As Integer
 
     If Modo = 3 Then Text1(15).Text = codClien
     
     
-    For I = 10 To 13
-        If Text1(I).Text <> "" Then
-            If IsNumeric(Text1(I).Text) Then
-                If Val(Text1(I).Text) = "0" Then Text1(I).Text = ""
+    For i = 10 To 13
+        If Text1(i).Text <> "" Then
+            If IsNumeric(Text1(i).Text) Then
+                If Val(Text1(i).Text) = "0" Then Text1(i).Text = ""
             End If
         End If
     Next
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
     
     If Text1(16).Text = "" Then
         MsgBox "Indique la zona", vbExclamation
@@ -1664,24 +1664,24 @@ Dim I As Integer
     'Si pone cta bancaria comprobaremos qu esta bien puesta
     'Si ha puesto entidad DEBE completar la cuenta bancaria
     If Text1(13).Text <> "" Then
-        For I = 11 To 13
-            If Text1(I).Text = "" Then Exit For
+        For i = 11 To 13
+            If Text1(i).Text = "" Then Exit For
         Next
-        If I <= 13 Then
+        If i <= 13 Then
             'Se ha salido
             MsgBox "Faltan datos para la cuenta bancaria", vbExclamation
-            b = False
+            B = False
         Else
-            b = Comprueba_CuentaBan2(Text1(10).Text & Text1(11).Text & Text1(12).Text & Text1(13).Text, False)
-            If Not b Then
-                If MsgBox("Cuenta bancaria incorrecta.    ¿Continuar?", vbQuestion + vbYesNo) = vbYes Then b = True
+            B = Comprueba_CuentaBan2(Text1(10).Text & Text1(11).Text & Text1(12).Text & Text1(13).Text, False)
+            If Not B Then
+                If MsgBox("Cuenta bancaria incorrecta.    ¿Continuar?", vbQuestion + vbYesNo) = vbYes Then B = True
             End If
         End If
     End If
     
     
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1841,17 +1841,17 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then PonerFocoBtn Me.cmdRegresar
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then PonerFocoBtn Me.cmdRegresar
     
     cmdCancelar.Cancel = True
     
     
    
-    Me.cmdRegresar.visible = b
+    Me.cmdRegresar.visible = B
     
     
     'Habilitar las opciones correctas del menu
@@ -1864,10 +1864,10 @@ End Sub
 
 
 Private Sub PosicionarData()
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 
-    cad = "(" & Ordenacion2 & "=" & Text1(0).Text & ")"
-    If SituarData(Data1, cad, Indicador) Then
+    Cad = "(" & Ordenacion2 & "=" & Text1(0).Text & ")"
+    If SituarData(Data1, Cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -1998,7 +1998,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim cad As String
+Dim Cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
@@ -2009,12 +2009,12 @@ Dim cad As String
     
     
     '### a mano
-    cad = "¿Seguro que desea eliminar?"
-    cad = cad & vbCrLf & "Codigo : " & Data1.Recordset.Fields(1)
-    cad = cad & vbCrLf & "Nombre: " & Data1.Recordset.Fields(2)
+    Cad = "¿Seguro que desea eliminar?"
+    Cad = Cad & vbCrLf & "Codigo : " & Data1.Recordset.Fields(1)
+    Cad = Cad & vbCrLf & "Nombre: " & Data1.Recordset.Fields(2)
 
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
@@ -2040,7 +2040,7 @@ End Sub
 
 
 Private Function InsertarModificarLineaDpto() As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim SQL As String
 
     On Error GoTo EInsertarModificarLinea
@@ -2052,16 +2052,16 @@ Dim SQL As String
             SQL = "INSERT INTO sdirec (codclien,coddirec,nomdirec,domdirec,codpobla,pobdirec,prodirec,perdirec,teldirec,faxdirec,maidirec,codbanco,codsucur,digcontr,cuentaba) VALUES ("
             SQL = SQL & codClien & ", "
             SQL = SQL & Text1(0).Text
-            For I = 1 To 5
+            For i = 1 To 5
                 SQL = SQL & ", "
-                SQL = SQL & DBSet(Text1(I).Text, "T")
-            Next I
+                SQL = SQL & DBSet(Text1(i).Text, "T")
+            Next i
                     
-            For I = 6 To 13 'campos opcionales
+            For i = 6 To 13 'campos opcionales
                 SQL = SQL & ", "
-                SQL = SQL & DBSet(Text1(I).Text, "T", "S")
+                SQL = SQL & DBSet(Text1(i).Text, "T", "S")
 '                If i <> 13 Then SQL = SQL & ", "
-            Next I
+            Next i
                         
             SQL = SQL & ")"
         
@@ -2108,7 +2108,7 @@ End Function
 
 
 Private Function InsertarModificarLineaEnvio() As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim SQL As String
 
     On Error GoTo EInsertarModificarLinea
@@ -2117,21 +2117,22 @@ Dim SQL As String
     SQL = ""
    If Modo = 3 Then
         
-            SQL = "INSERT INTO sdirenvio (codclien,coddiren,nomdiren,domdiren,codpobla,pobdiren,prodiren,perdiren,teldiren,faxdiren,observa) VALUES ("
+            SQL = "INSERT INTO sdirenvio (codclien,coddiren,nomdiren,domdiren,codpobla,pobdiren,prodiren,perdiren,teldiren,faxdiren,observa,codzona) VALUES ("
             SQL = SQL & codClien & ", "
             SQL = SQL & Text1(0).Text
-            For I = 1 To 5
+            For i = 1 To 5
                 SQL = SQL & ", "
-                SQL = SQL & DBSet(Text1(I).Text, "T")
-            Next I
+                SQL = SQL & DBSet(Text1(i).Text, "T")
+            Next i
                     
-            For I = 6 To 8 'campos opcionales
+            For i = 6 To 8 'campos opcionales
                 SQL = SQL & ", "
-                SQL = SQL & DBSet(Text1(I).Text, "T", "S")
+                SQL = SQL & DBSet(Text1(i).Text, "T", "S")
 '                If i <> 13 Then SQL = SQL & ", "
-            Next I
+            Next i
                         
-            SQL = SQL & "," & DBSet(Text1(I).Text, "T", "S") & ")"
+            SQL = SQL & "," & DBSet(Text1(i).Text, "T", "S")
+            SQL = SQL & "," & DBSet(Text1(16).Text, "N", "S") & ")"
  
         
     Else
@@ -2144,6 +2145,7 @@ Dim SQL As String
             SQL = SQL & ", teldiren = " & DBSet(Text1(7).Text, "T")
             SQL = SQL & ", faxdiren = " & DBSet(Text1(8).Text, "T")
             SQL = SQL & ", observa = " & DBSet(Text1(14).Text, "T")
+            SQL = SQL & ", codzona = " & DBSet(Text1(16).Text, "T", "S")
             SQL = SQL & " WHERE codclien =" & codClien & " AND "
             SQL = SQL & " coddiren =" & (Text1(0).Text)
     End If

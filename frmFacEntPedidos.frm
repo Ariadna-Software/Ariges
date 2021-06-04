@@ -2524,7 +2524,7 @@ Dim LineasArticulosEnPedidosProveedor As String
 
 
 Dim FenollarArtMed As String
-
+Dim TieneNumerosDeSerie As Boolean
 
 
 Private Sub cboEstado_KeyPress(KeyAscii As Integer)
@@ -3842,7 +3842,7 @@ End Sub
 Private Sub frmMen_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mensaje de Nº de Serie disponibles
 'En cadena seleccion estan concatenados los seleccionados
-Dim i As Integer, J As Integer, k As Integer
+Dim i As Integer, J As Integer, K As Integer
 Dim nSerie As String
 Dim SQL As String
 Dim devuelve As String
@@ -3863,21 +3863,21 @@ Dim numSerie As CNumSerie
         cadSel = Mid(CadenaSeleccion, J, i - J)
         
         'Para cada valor empipado actualizar la tabla sserie
-        k = InStr(1, cadSel, "|")
-        If k > 0 Then
-            codArtic = Mid(cadSel, 1, k - 1) 'El primero es el codartic
-            cadSel = Mid(cadSel, k + 1, Len(cadSel)) 'Los Nº de serie
+        K = InStr(1, cadSel, "|")
+        If K > 0 Then
+            codArtic = Mid(cadSel, 1, K - 1) 'El primero es el codartic
+            cadSel = Mid(cadSel, K + 1, Len(cadSel)) 'Los Nº de serie
             SQL = "select codartic, cantidad, numlinea from slialb "
             SQL = SQL & " WHERE codtipom='ALV' and numalbar= " & Me.cmdAux(1).Tag & " and codartic=" & DBSet(codArtic, "T")
             Set RS = New ADODB.Recordset
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
-            k = InStr(1, cadSel, "|")
+            K = InStr(1, cadSel, "|")
             Contador = RS!cantidad
-            While k > 0
-                nSerie = Mid(cadSel, 1, k - 1)
-                cadSel = Mid(cadSel, k + 1, Len(cadSel))
+            While K > 0
+                nSerie = Mid(cadSel, 1, K - 1)
+                cadSel = Mid(cadSel, K + 1, Len(cadSel))
                 
                 If Contador = 0 Then
                     RS.MoveNext
@@ -3904,7 +3904,7 @@ Dim numSerie As CNumSerie
                     Set numSerie = Nothing
                 End If
                 Contador = Contador - 1
-                k = InStr(1, cadSel, "|")
+                K = InStr(1, cadSel, "|")
             Wend
             RS.Close
             Set RS = Nothing
@@ -3933,7 +3933,16 @@ Dim i As Byte
     
     SQL = "SELECT slialb.codartic, numlinea, cantidad "
     SQL = SQL & " FROM slialb INNER JOIN sartic on slialb.codartic=sartic.codartic "
-    SQL = SQL & " WHERE (codtipom='ALV' and numalbar=" & Me.cmdAux(1).Tag
+    SQL = SQL & " WHERE (codtipom='"
+    If EsAMostrador2 = 1 Then
+        SQL = SQL & "ALM"
+    ElseIf EsAMostrador2 = 2 Then
+        SQL = SQL & "ALZ"
+    Else
+        SQL = SQL & "ALV"
+    End If
+    
+    SQL = SQL & "' and numalbar=" & Me.cmdAux(1).Tag
     SQL = SQL & " And nseriesn = 1) ORDER BY codartic, numlinea "
 
     Set RSalb = New ADODB.Recordset
@@ -4879,7 +4888,7 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim Aux2 As String
+Dim aux2 As String
 Dim cadB As String
 
     cadB = ObtenerBusqueda(Me, False)
@@ -4902,11 +4911,11 @@ Dim cadB As String
         
     
     If EsHistorico Then
-        Aux2 = DevuelveBusquedaLineas
-        If Aux2 <> "" Then
+        aux2 = DevuelveBusquedaLineas
+        If aux2 <> "" Then
             If cadB <> "" Then cadB = cadB & " AND "
             
-            cadB = cadB & " " & NombreTabla & ".numpedcl IN (SELECT distinct numpedcl FROM " & NomTablaLineas & " WHERE " & Aux2 & ")"
+            cadB = cadB & " " & NombreTabla & ".numpedcl IN (SELECT distinct numpedcl FROM " & NomTablaLineas & " WHERE " & aux2 & ")"
         End If
     End If
     
@@ -8029,6 +8038,36 @@ Dim vTipoM As String
         End If
     End If
     
+    
+        
+    If TieneNumerosDeSerie And vParamAplic.NumeroInstalacion = vbHerbelca Then
+            With frmImprimir
+                
+                .outTipoDocumento = 0
+                .NombreRPT = "HerFluorados.rpt"
+                .NombrePDF = .NombreRPT
+                .NumeroCopias = 1
+                .FormulaSeleccion = cadFormula
+                .OtrosParametros = cadParam
+                .NumeroParametros = numParam
+                .SoloImprimir = False
+                .EnvioEMail = False
+                .Opcion = Opcion
+                
+                .Titulo = "Gases fluorados "
+                
+                .ConSubInforme = True
+                .Show vbModal
+            End With
+        
+    End If
+
+    
+    
+    
+    
+    
+    
 End Sub
 
 
@@ -8495,7 +8534,10 @@ Dim CuantosPuntos As Currency
     
         'Esto estaba antes dentro de pasarpedido
         'ahora esta fuera del begintrans
-        ComprobarNSeriesLineas (NumAlb)
+        SQL = "ALV"
+        If EsAMostrador2 = 1 Then SQL = "ALM"
+        If EsAMostrador2 = 2 Then SQL = "ALZ"
+        ComprobarNSeriesLineas NumAlb, SQL
         
 '        'Comprobar si Hay Nº SERIE en compras, si hay Mostrar los Nº Serie y seleccionar
 '        'sino, pedir los Nº de serie de aquellos articulos que lo requieran
@@ -8785,7 +8827,7 @@ Dim SQL As String
 End Sub
 
 
-Private Sub ComprobarNSeriesLineas(NumAlb As String)
+Private Sub ComprobarNSeriesLineas(NumAlb As String, ByVal CodtipomAlbaran As String)
 'Al pasar de PEDIDO a ALBARAN
 'control de Nº Series si hay algun articulo en las lineas de pedido que requiere Nº de serie
 'Si NO se realiza control Nº series en compras pedirlos ahora
@@ -8794,10 +8836,10 @@ Private Sub ComprobarNSeriesLineas(NumAlb As String)
 Dim SQL As String
 Dim RSLineas As ADODB.Recordset
 Dim cadWhere As String
-        
+Dim Tiene As Boolean
     On Error GoTo ECompNSerie
     
-    cadWhere = " WHERE codtipom='ALV' and "
+    cadWhere = " WHERE codtipom='" & CodtipomAlbaran & "' and "
     cadWhere = cadWhere & " numalbar=" & NumAlb
     
     'Seleccionamos aquellas lineas de albaran que tienen Nº de Serie
@@ -8809,11 +8851,12 @@ Dim cadWhere As String
     SQL = SQL & " GROUP BY slialb.codartic,  slialb.numlinea ORDER BY slialb.codartic,  slialb.numlinea"
     
     
-
+    
     Set RSLineas = New ADODB.Recordset
     RSLineas.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    
+    TieneNumerosDeSerie = False
     If Not RSLineas.EOF Then
+        TieneNumerosDeSerie = True
         'Comprobar si NO Hay Nº SERIE en Compras y si no se realizo alli
         'Mostrar ahora ventana para pedir los Nº Serie de la cantidad introducida
         Me.cmdAux(1).Tag = NumAlb
@@ -8822,9 +8865,16 @@ Dim cadWhere As String
         Else 'Se realizo contro en COMPRAS, Mostramos los Nº y seleccionamos
             MostrarNSeries RSLineas
         End If
+        
     End If
     RSLineas.Close
     Set RSLineas = Nothing
+    
+
+    
+    
+    
+    
     
 ECompNSerie:
     If Err.Number <> 0 Then MuestraError Err.Number, "Comprobar Nº Serie.", Err.Description
@@ -8842,6 +8892,8 @@ Private Sub PedirNSeries(ByRef RS As ADODB.Recordset)
     frmNSerie.Show vbModal
     Set frmNSerie = Nothing
         
+        
+
 EPedirNSeries:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Sub
@@ -8920,9 +8972,20 @@ Dim B As Boolean
     nSerie.Cliente = CInt(Text1(4).Text)
     nSerie.DirDpto = Text1(12).Text
     nSerie.conMante = TieneMan
-    nSerie.tipoMov = "ALV"   'DE ALVARAN VENTA
     
-    devuelve = DevuelveDesdeBDNew(conAri, "scaalb", "fechaalb", "codtipom", "ALV", "T", , "numalbar", Me.cmdAux(1).Tag, "N")
+    
+    If EsAMostrador2 = 1 Then
+        nSerie.tipoMov = "ALM"
+    ElseIf EsAMostrador2 = 2 Then
+        nSerie.tipoMov = "ALZ"   'SQL = SQL & "ALZ"
+    Else
+        nSerie.tipoMov = "ALV"   'DE ALVARAN VENTA
+    End If
+
+    
+    
+    
+    devuelve = DevuelveDesdeBDNew(conAri, "scaalb", "fechaalb", "codtipom", nSerie.tipoMov, "T", , "numalbar", Me.cmdAux(1).Tag, "N")
     If devuelve <> "" Then nSerie.FechaVta = devuelve
     
     nSerie.NumAlbaran = Me.cmdAux(1).Tag
@@ -8941,23 +9004,6 @@ Dim B As Boolean
             nSerie.numSerie = numSerie
             B = nSerie.ActualizarNumSerie(True)
         End If
-        
-        
-        
-        'aqui aqui aqui
-        
-        
-        
-       ' Si numalbar ="" esta pensando para que si ya esta asignado NO lo cambie
-
-
-'Si numalbar="" faltara asignar
-'    nSerie.Articulo = codArtic
-'        nSerie.numSerie = numSerie
-'para que el update lo haga bien
-        
-        
-        
         
         
      Else

@@ -112,11 +112,31 @@ Dim TicketAgrupado As String
 
 
     If vParamAplic.NumeroInstalacion = vbHerbelca Then
-        If vUsu.Nivel <= 1 Then
-            
+        If vParamAplic.DiasCaducidadPuntos > 0 Then
+            Mensaje = PonerTrabajadorConectado("")
+            If Mensaje <> "" Then
+                Mensaje = " codtraba =" & Mensaje & " and fecaviso>20010101 and datediff(now(),fecaviso)>15 AND 1"
+                Mensaje = DevuelveDesdeBD(conAri, "codtraba", "straba", Mensaje, "1")
+                If Mensaje <> "" Then
+                
+                    Mensaje = "UPDATE straba set fecaviso=" & DBSet(Now, "F") & " WHERE codtraba = " & Mensaje
+                    ejecutar Mensaje, False
+                
+                    Mensaje = "¿Desea realizar el proceso de caducar puntos?"
+                    If MsgBox(Mensaje, vbQuestion + vbYesNo) = vbYes Then Mensaje = ""
+                    
+                    
+                    
+                    If Mensaje = "" Then
+                        frmMensajes.cadWhere = ""
+                        frmMensajes.OpcionMensaje = 31
+                        frmMensajes.Show vbModal
+                    End If
+                    
+                End If
+            End If
         End If
     End If
-    
     
 
 

@@ -27790,8 +27790,8 @@ Dim Ayuda As String
         Ayuda = vbCrLf & " Fecha:    Ademas de indicar la fecha para la factura, indicara el mes a facturar"
         
     Case 3
-        Ayuda = vbCrLf & "-Desde inventario: Diferencia entro sctok actual y calculado"
-        Ayuda = Ayuda & vbCrLf & "-Negativos: Stcoks negativos"
+        Ayuda = vbCrLf & "-Desde inventario: Diferencia entre stock actual y calculado"
+        Ayuda = Ayuda & vbCrLf & "-Negativos: Stocks negativos"
         Ayuda = Ayuda & vbCrLf & "-Vtas periodos con stock. Las ventas del articulo y el stock actual"
         
         
@@ -27826,7 +27826,7 @@ Dim Ayuda As String
         Ayuda = vbCrLf & "Presupuestos:  O normal o presupuesto  "
     End Select
     
-    Ayuda = imgayuda(Index).ToolTipText & vbCrLf & String(40, "=") & vbCrLf & Ayuda
+    Ayuda = imgayuda(Index).ToolTipText & vbCrLf & String(39, "=") & vbCrLf & Ayuda
     MsgBox Ayuda, vbInformation
 
 End Sub

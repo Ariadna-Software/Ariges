@@ -335,6 +335,7 @@ Form=frmPpalN_Vacio.frm
 Module=libNoCodejock; libNoCodejock.bas
 Form=frmPpalOld.frm
 Form=frmGesSocAsociadosGR.frm
+Form=frmComProveAnticipo.frm
 IconForm="frmPpal"
 Startup="Sub Main"
 HelpFile=""

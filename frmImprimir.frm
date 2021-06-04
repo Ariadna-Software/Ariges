@@ -237,11 +237,11 @@ Private ImpresoraPorDefectoAnterior As String
 
 'Private ReestableceSoloImprimir As Boolean
 Private Sub chkEMAIL_Click()
-    If chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 0
+    If chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 0
 End Sub
 
 Private Sub chkSoloImprimir_Click()
-    If Me.chkSoloImprimir.Value = 1 Then Me.chkEmail.Value = 0
+    If Me.chkSoloImprimir.Value = 1 Then Me.chkEMAIL.Value = 0
 End Sub
 
 
@@ -256,7 +256,7 @@ End Sub
 
 Private Sub cmdImprimir_Click()
  
-    If Me.chkSoloImprimir.Value = 1 And Me.chkEmail.Value = 1 Then
+    If Me.chkSoloImprimir.Value = 1 And Me.chkEMAIL.Value = 1 Then
         MsgBox "Si desea enviar por mail no debe marcar vista preliminar", vbExclamation
         Exit Sub
     End If
@@ -273,15 +273,15 @@ End Sub
 
 
 Private Sub Combo1_Click()
-Dim I As Integer
+Dim i As Integer
 Dim C  As String
     If PrimeraVez Then Exit Sub
     'En nomrpt pondra el valor entrecorchetado
     C = Combo1.Text
-    I = InStr(1, C, "[")
-    C = Mid(C, I + 1)
-    I = InStr(1, C, "]")
-    C = Mid(C, 1, I - 1)
+    i = InStr(1, C, "[")
+    C = Mid(C, i + 1)
+    i = InStr(1, C, "]")
+    C = Mid(C, 1, i - 1)
     Me.NombreRPT = C
 End Sub
 
@@ -663,7 +663,7 @@ Dim EsPorEmail As Boolean
     OtrosParam2 = OtrosParametros
     NumParam2 = NumeroParametros
     HaPulsadoImprimir = False
-    If Opcion = 53 And Me.chkEmail.Value = 0 Then
+    If Opcion = 53 And Me.chkEMAIL.Value = 0 Then
         'Estamos en
         '   -reimpresion de facturas
         '   -facturacion
@@ -701,7 +701,7 @@ Dim EsPorEmail As Boolean
         If EnvioEMail Then
             EsPorEmail = True
         Else
-            If Me.chkEmail.Value = 1 Then EsPorEmail = True
+            If Me.chkEMAIL.Value = 1 Then EsPorEmail = True
         End If
         If EsPorEmail Then
             'EMAIL
@@ -793,7 +793,7 @@ Dim EsPorEmail As Boolean
     
     
     
-    If Me.chkEmail.Value = 1 Then
+    If Me.chkEMAIL.Value = 1 Then
         If CadenaDesdeOtroForm <> "" Then 'se exporto el informe OK (.pdf)
             
             If Me.EnvioEMail Then  'se llamo desde envio masivo
@@ -872,7 +872,7 @@ Private Sub Form_Unload(Cancel As Integer)
     If EnvioEMail Then Exit Sub
     
 
-    If Me.chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 1
+    If Me.chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 1
     'If ReestableceSoloImprimir Then SoloImprimir = False
     'Dejo la marca como estaba
     If SoloImprimir Then
@@ -935,7 +935,7 @@ Private Sub LanzaProgramaAbrirOutlook()
 Dim NombrePDF As String
 Dim Aux As String
 Dim Lanza As String
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo ELanzaProgramaAbrirOutlook
 
@@ -972,8 +972,8 @@ Dim I As Integer
         'Con lo cual pondremos Documento
         Aux = Text1.Text
         If Aux <> "" Then
-            For I = 1 To Len(Aux)
-                Aux = Replace(Aux, Mid("\/:*""?<>|", I, 1), " ")
+            For i = 1 To Len(Aux)
+                Aux = Replace(Aux, Mid("\/:*""?<>|", i, 1), " ")
             Next
             Aux = Aux & ".pdf"
         End If
@@ -1118,34 +1118,34 @@ Private Sub ForzarImpresoraPorDefecto(sNombreImpresora As String)
     On Error GoTo eForzarImpresoraPorDefecto
     Dim nom As String
     Dim bEncontrada As Boolean
-    Dim I As Integer
+    Dim i As Integer
     'Selecciona la impresora para imprimir, si no puede seleccionarla devuelve false
     
     bEncontrada = False
-    For I = 0 To Printers.Count - 1
-        If Printers(I).DeviceName = sNombreImpresora Then
+    For i = 0 To Printers.Count - 1
+        If Printers(i).DeviceName = sNombreImpresora Then
             bEncontrada = True
             Exit For
         End If
-    Next I
+    Next i
     
     If bEncontrada Then
         
-        Set Printer = Printers(I)
+        Set Printer = Printers(i)
         
     Else
         
         nom = ""
-        I = InStrRev(sNombreImpresora, "\")
-        If I > 0 Then
-            nom = Mid(sNombreImpresora, I + 1)
-            For I = 0 To Printers.Count - 1
-                If Printers(I).DeviceName = sNombreImpresora Then
+        i = InStrRev(sNombreImpresora, "\")
+        If i > 0 Then
+            nom = Mid(sNombreImpresora, i + 1)
+            For i = 0 To Printers.Count - 1
+                If Printers(i).DeviceName = sNombreImpresora Then
                     bEncontrada = True
                     Exit For
                 End If
-            Next I
-            If bEncontrada Then Set Printer = Printers(I)
+            Next i
+            If bEncontrada Then Set Printer = Printers(i)
             
         
         End If

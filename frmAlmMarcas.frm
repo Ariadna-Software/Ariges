@@ -413,24 +413,24 @@ Dim Modo As Byte
 
 
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
     
     Modo = vModo
-    b = (Modo = 2)
+    B = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
+    txtAux(0).visible = Not B
+    txtAux(1).visible = Not B
     txtAux(0).BackColor = vbWhite
     txtAux(1).BackColor = vbWhite
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
 
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     End If
 
     'Si estamos insertando o busqueda
@@ -448,29 +448,29 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
    
-    b = b And Not DeConsulta
+    B = B And Not DeConsulta
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = b
+    Toolbar1.Buttons(8).Enabled = B
 End Sub
 
 'Private Sub PonerModoUsuarioGnral(Modo As Byte, aplicacion As String)
@@ -569,7 +569,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim cad As String
+Dim Cad As String
 Dim anc As Single
 Dim i As Integer
 On Error GoTo EModificar
@@ -590,9 +590,9 @@ On Error GoTo EModificar
     
     anc = ObtenerAlto(DataGrid1, 10)
     
-    cad = ""
+    Cad = ""
     For i = 0 To 1
-        cad = cad & DataGrid1.Columns(i).Text & "|"
+        Cad = Cad & DataGrid1.Columns(i).Text & "|"
     Next i
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
@@ -705,16 +705,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Adodc1.Recordset.Fields(0) & "|"
-    cad = cad & Adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -810,7 +810,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 8   'Imprimir Listado de Marcas
             frmInformesNew.OpcionListado = 1 'OpcionListado=1
             frmInformesNew.Show vbModal
-            Me.Show vbModal
+            
     End Select
 End Sub
 
@@ -818,9 +818,9 @@ End Sub
 
 Private Sub CargaGrid(Optional SQL As String)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
     
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
 
     If SQL <> "" Then
         SQL = CadenaConsulta & " WHERE " & SQL
@@ -864,7 +864,7 @@ Dim b As Boolean
         mnEliminar.Enabled = Not Adodc1.Recordset.EOF
    End If
    
-   DataGrid1.Enabled = b
+   DataGrid1.Enabled = B
    DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
@@ -897,17 +897,17 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
     'Comprobar si ya existe el cod de marca en la tabla
     If Modo = 3 Then 'Insertar
-        If ExisteCP(txtAux(0)) Then b = False
+        If ExisteCP(txtAux(0)) Then B = False
     End If
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 

@@ -393,203 +393,203 @@ Begin VB.Form frmFacEntAlbSAIL
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntAlbSAIL.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(77)"
-      Tab(1).Control(1)=   "Label1(78)"
-      Tab(1).Control(2)=   "Label1(79)"
-      Tab(1).Control(3)=   "Label1(73)"
-      Tab(1).Control(4)=   "Label1(45)"
-      Tab(1).Control(5)=   "Label1(3)"
-      Tab(1).Control(6)=   "Label1(5)"
-      Tab(1).Control(7)=   "Label1(10)"
-      Tab(1).Control(8)=   "Label1(11)"
-      Tab(1).Control(9)=   "Label1(12)"
-      Tab(1).Control(10)=   "imgBuscar(7)"
-      Tab(1).Control(11)=   "Label1(9)"
-      Tab(1).Control(12)=   "imgBuscar(8)"
-      Tab(1).Control(13)=   "Label1(23)"
-      Tab(1).Control(14)=   "Label1(24)"
-      Tab(1).Control(15)=   "imgBuscar(9)"
-      Tab(1).Control(16)=   "Label1(43)"
-      Tab(1).Control(17)=   "Label1(61)"
-      Tab(1).Control(18)=   "Label1(72)"
-      Tab(1).Control(19)=   "imgFecha(44)"
-      Tab(1).Control(20)=   "Label1(80)"
-      Tab(1).Control(21)=   "Label1(81)"
-      Tab(1).Control(22)=   "Label1(82)"
-      Tab(1).Control(23)=   "Label1(83)"
-      Tab(1).Control(24)=   "imgGeolocalizacion"
-      Tab(1).Control(25)=   "imgFirmaRecep"
-      Tab(1).Control(26)=   "Text1(39)"
-      Tab(1).Control(27)=   "chkDocArchi"
+      Tab(1).Control(0)=   "Text1(49)"
+      Tab(1).Control(1)=   "Text1(48)"
+      Tab(1).Control(2)=   "Text1(47)"
+      Tab(1).Control(3)=   "Text1(46)"
+      Tab(1).Control(4)=   "Text1(45)"
+      Tab(1).Control(5)=   "FrameHco"
+      Tab(1).Control(6)=   "cboTipopEnvio"
+      Tab(1).Control(7)=   "Text1(43)"
+      Tab(1).Control(8)=   "chkFacturarKm"
+      Tab(1).Control(9)=   "Text1(34)"
+      Tab(1).Control(10)=   "FrameFactura"
+      Tab(1).Control(11)=   "FrameFacRec"
+      Tab(1).Control(12)=   "Text1(29)"
+      Tab(1).Control(13)=   "Text2(29)"
+      Tab(1).Control(14)=   "Text1(28)"
+      Tab(1).Control(15)=   "Text2(28)"
+      Tab(1).Control(16)=   "Text1(27)"
+      Tab(1).Control(17)=   "Text2(27)"
+      Tab(1).Control(18)=   "Text1(2)"
+      Tab(1).Control(19)=   "Text1(25)"
+      Tab(1).Control(20)=   "Text1(26)"
+      Tab(1).Control(21)=   "Text1(24)"
+      Tab(1).Control(22)=   "Text1(23)"
+      Tab(1).Control(23)=   "Text1(22)"
+      Tab(1).Control(24)=   "Text1(21)"
+      Tab(1).Control(25)=   "Text1(20)"
+      Tab(1).Control(26)=   "Text1(19)"
+      Tab(1).Control(27)=   "Text1(18)"
       Tab(1).Control(28)=   "Text1(38)"
-      Tab(1).Control(29)=   "Text1(18)"
-      Tab(1).Control(30)=   "Text1(19)"
-      Tab(1).Control(31)=   "Text1(20)"
-      Tab(1).Control(32)=   "Text1(21)"
-      Tab(1).Control(33)=   "Text1(22)"
-      Tab(1).Control(34)=   "Text1(23)"
-      Tab(1).Control(35)=   "Text1(24)"
-      Tab(1).Control(36)=   "Text1(26)"
-      Tab(1).Control(37)=   "Text1(25)"
-      Tab(1).Control(38)=   "Text1(2)"
-      Tab(1).Control(39)=   "Text2(27)"
-      Tab(1).Control(40)=   "Text1(27)"
-      Tab(1).Control(41)=   "Text2(28)"
-      Tab(1).Control(42)=   "Text1(28)"
-      Tab(1).Control(43)=   "Text2(29)"
-      Tab(1).Control(44)=   "Text1(29)"
-      Tab(1).Control(45)=   "FrameFacRec"
-      Tab(1).Control(46)=   "FrameFactura"
-      Tab(1).Control(47)=   "Text1(34)"
-      Tab(1).Control(48)=   "chkFacturarKm"
-      Tab(1).Control(49)=   "Text1(43)"
-      Tab(1).Control(50)=   "cboTipopEnvio"
-      Tab(1).Control(51)=   "FrameHco"
-      Tab(1).Control(52)=   "Text1(45)"
-      Tab(1).Control(53)=   "Text1(46)"
-      Tab(1).Control(54)=   "Text1(47)"
-      Tab(1).Control(55)=   "Text1(48)"
-      Tab(1).Control(56)=   "Text1(49)"
+      Tab(1).Control(29)=   "chkDocArchi"
+      Tab(1).Control(30)=   "Text1(39)"
+      Tab(1).Control(31)=   "imgFirmaRecep"
+      Tab(1).Control(32)=   "imgGeolocalizacion"
+      Tab(1).Control(33)=   "Label1(83)"
+      Tab(1).Control(34)=   "Label1(82)"
+      Tab(1).Control(35)=   "Label1(81)"
+      Tab(1).Control(36)=   "Label1(80)"
+      Tab(1).Control(37)=   "imgFecha(44)"
+      Tab(1).Control(38)=   "Label1(72)"
+      Tab(1).Control(39)=   "Label1(61)"
+      Tab(1).Control(40)=   "Label1(43)"
+      Tab(1).Control(41)=   "imgBuscar(9)"
+      Tab(1).Control(42)=   "Label1(24)"
+      Tab(1).Control(43)=   "Label1(23)"
+      Tab(1).Control(44)=   "imgBuscar(8)"
+      Tab(1).Control(45)=   "Label1(9)"
+      Tab(1).Control(46)=   "imgBuscar(7)"
+      Tab(1).Control(47)=   "Label1(12)"
+      Tab(1).Control(48)=   "Label1(11)"
+      Tab(1).Control(49)=   "Label1(10)"
+      Tab(1).Control(50)=   "Label1(5)"
+      Tab(1).Control(51)=   "Label1(3)"
+      Tab(1).Control(52)=   "Label1(45)"
+      Tab(1).Control(53)=   "Label1(73)"
+      Tab(1).Control(54)=   "Label1(79)"
+      Tab(1).Control(55)=   "Label1(78)"
+      Tab(1).Control(56)=   "Label1(77)"
       Tab(1).ControlCount=   57
       TabCaption(2)   =   "O.trab /ext"
       TabPicture(2)   =   "frmFacEntAlbSAIL.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "lblTituloEst"
-      Tab(2).Control(1)=   "Label3(0)"
-      Tab(2).Control(2)=   "Label3(1)"
-      Tab(2).Control(3)=   "Label3(7)"
-      Tab(2).Control(4)=   "Label3(6)"
-      Tab(2).Control(5)=   "Label3(5)"
-      Tab(2).Control(6)=   "Label3(8)"
-      Tab(2).Control(7)=   "txtEuler(6)"
-      Tab(2).Control(8)=   "txtEuler(7)"
-      Tab(2).Control(9)=   "FrameOT_Euler"
-      Tab(2).Control(10)=   "txtEuler(9)"
-      Tab(2).Control(11)=   "txtEuler(8)"
-      Tab(2).Control(12)=   "txtEuler(10)"
-      Tab(2).Control(13)=   "FrameOT_Taxco"
+      Tab(2).Control(0)=   "FrameOT_Taxco"
+      Tab(2).Control(1)=   "txtEuler(10)"
+      Tab(2).Control(2)=   "txtEuler(8)"
+      Tab(2).Control(3)=   "txtEuler(9)"
+      Tab(2).Control(4)=   "FrameOT_Euler"
+      Tab(2).Control(5)=   "txtEuler(7)"
+      Tab(2).Control(6)=   "txtEuler(6)"
+      Tab(2).Control(7)=   "Label3(8)"
+      Tab(2).Control(8)=   "Label3(5)"
+      Tab(2).Control(9)=   "Label3(6)"
+      Tab(2).Control(10)=   "Label3(7)"
+      Tab(2).Control(11)=   "Label3(1)"
+      Tab(2).Control(12)=   "Label3(0)"
+      Tab(2).Control(13)=   "lblTituloEst"
       Tab(2).ControlCount=   14
       TabCaption(3)   =   "Reparaciones"
       TabPicture(3)   =   "frmFacEntAlbSAIL.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Line5"
-      Tab(3).Control(1)=   "Line3"
-      Tab(3).Control(2)=   "Line4"
-      Tab(3).Control(3)=   "Label3E(33)"
-      Tab(3).Control(4)=   "Label3E(34)"
-      Tab(3).Control(5)=   "Label3E(35)"
-      Tab(3).Control(6)=   "Label3E(31)"
-      Tab(3).Control(7)=   "Label3E(32)"
-      Tab(3).Control(8)=   "Label3E(12)"
-      Tab(3).Control(9)=   "Label3E(13)"
-      Tab(3).Control(10)=   "Label3E(14)"
-      Tab(3).Control(11)=   "Label3E(16)"
-      Tab(3).Control(12)=   "Label3E(17)"
-      Tab(3).Control(13)=   "Label3E(18)"
-      Tab(3).Control(14)=   "Label3E(19)"
-      Tab(3).Control(15)=   "Label3E(11)"
-      Tab(3).Control(16)=   "Label3E(25)"
-      Tab(3).Control(17)=   "Label3E(26)"
-      Tab(3).Control(18)=   "Label3E(27)"
-      Tab(3).Control(19)=   "Label3E(28)"
-      Tab(3).Control(20)=   "Label3E(29)"
-      Tab(3).Control(21)=   "Label3E(30)"
-      Tab(3).Control(22)=   "Label3E(1)"
-      Tab(3).Control(23)=   "Label3E(2)"
-      Tab(3).Control(24)=   "Label3E(3)"
-      Tab(3).Control(25)=   "Label3E(4)"
-      Tab(3).Control(26)=   "Label3E(5)"
-      Tab(3).Control(27)=   "Label3E(6)"
-      Tab(3).Control(28)=   "Label3E(7)"
-      Tab(3).Control(29)=   "Label3E(8)"
-      Tab(3).Control(30)=   "Label3E(9)"
-      Tab(3).Control(31)=   "Label3E(10)"
-      Tab(3).Control(32)=   "Label3E(15)"
-      Tab(3).Control(33)=   "Label3E(20)"
-      Tab(3).Control(34)=   "Label3E(23)"
-      Tab(3).Control(35)=   "Label3E(24)"
-      Tab(3).Control(36)=   "Label3E(36)"
-      Tab(3).Control(37)=   "Label3E(37)"
-      Tab(3).Control(38)=   "Label3E(38)"
-      Tab(3).Control(39)=   "txtEule_R(11)"
-      Tab(3).Control(40)=   "cboEulerUdR"
-      Tab(3).Control(41)=   "txtEule_R(17)"
-      Tab(3).Control(42)=   "txtEule_R(18)"
-      Tab(3).Control(43)=   "txtEule_R(19)"
-      Tab(3).Control(44)=   "optEule_R(4)"
-      Tab(3).Control(45)=   "optEule_R(5)"
-      Tab(3).Control(46)=   "optEule_R(6)"
-      Tab(3).Control(47)=   "optEule_R(7)"
-      Tab(3).Control(48)=   "txtEule_R(7)"
-      Tab(3).Control(49)=   "txtEule_R(5)"
-      Tab(3).Control(50)=   "txtEule_R(6)"
-      Tab(3).Control(51)=   "txtEule_R(8)"
-      Tab(3).Control(52)=   "txtEule_R(10)"
-      Tab(3).Control(53)=   "txtEule_R(9)"
-      Tab(3).Control(54)=   "txtEule_R(12)"
-      Tab(3).Control(55)=   "txtEule_R(13)"
-      Tab(3).Control(56)=   "txtEule_R(14)"
-      Tab(3).Control(57)=   "txtEule_R(16)"
-      Tab(3).Control(58)=   "txtEule_R(15)"
-      Tab(3).Control(59)=   "chkEuler(0)"
-      Tab(3).Control(60)=   "chkEuler(1)"
-      Tab(3).Control(61)=   "chkEuler(2)"
-      Tab(3).Control(62)=   "chkEuler(3)"
-      Tab(3).Control(63)=   "chkEuler(4)"
-      Tab(3).Control(64)=   "chkEuler(5)"
-      Tab(3).Control(65)=   "chkEuler(6)"
-      Tab(3).Control(66)=   "chkEuler(7)"
-      Tab(3).Control(67)=   "chkEuler(8)"
-      Tab(3).Control(68)=   "chkEuler(9)"
-      Tab(3).Control(69)=   "txtEule_R(3)"
-      Tab(3).Control(70)=   "txtEule_R(4)"
-      Tab(3).Control(71)=   "Frame4R"
-      Tab(3).Control(72)=   "txtEule_R(0)"
-      Tab(3).Control(73)=   "txtEule_R(1)"
-      Tab(3).Control(74)=   "txtEule_R(2)"
-      Tab(3).Control(75)=   "txtEule_R(20)"
-      Tab(3).Control(76)=   "txtEule_R(21)"
-      Tab(3).Control(77)=   "Frame3"
-      Tab(3).Control(78)=   "cboRecepAgenClien"
-      Tab(3).Control(79)=   "txtEule_R(22)"
+      Tab(3).Control(0)=   "txtEule_R(22)"
+      Tab(3).Control(1)=   "cboRecepAgenClien"
+      Tab(3).Control(2)=   "Frame3"
+      Tab(3).Control(3)=   "txtEule_R(21)"
+      Tab(3).Control(4)=   "txtEule_R(20)"
+      Tab(3).Control(5)=   "txtEule_R(2)"
+      Tab(3).Control(6)=   "txtEule_R(1)"
+      Tab(3).Control(7)=   "txtEule_R(0)"
+      Tab(3).Control(8)=   "Frame4R"
+      Tab(3).Control(9)=   "txtEule_R(4)"
+      Tab(3).Control(10)=   "txtEule_R(3)"
+      Tab(3).Control(11)=   "chkEuler(9)"
+      Tab(3).Control(12)=   "chkEuler(8)"
+      Tab(3).Control(13)=   "chkEuler(7)"
+      Tab(3).Control(14)=   "chkEuler(6)"
+      Tab(3).Control(15)=   "chkEuler(5)"
+      Tab(3).Control(16)=   "chkEuler(4)"
+      Tab(3).Control(17)=   "chkEuler(3)"
+      Tab(3).Control(18)=   "chkEuler(2)"
+      Tab(3).Control(19)=   "chkEuler(1)"
+      Tab(3).Control(20)=   "chkEuler(0)"
+      Tab(3).Control(21)=   "txtEule_R(15)"
+      Tab(3).Control(22)=   "txtEule_R(16)"
+      Tab(3).Control(23)=   "txtEule_R(14)"
+      Tab(3).Control(24)=   "txtEule_R(13)"
+      Tab(3).Control(25)=   "txtEule_R(12)"
+      Tab(3).Control(26)=   "txtEule_R(9)"
+      Tab(3).Control(27)=   "txtEule_R(10)"
+      Tab(3).Control(28)=   "txtEule_R(8)"
+      Tab(3).Control(29)=   "txtEule_R(6)"
+      Tab(3).Control(30)=   "txtEule_R(5)"
+      Tab(3).Control(31)=   "txtEule_R(7)"
+      Tab(3).Control(32)=   "optEule_R(7)"
+      Tab(3).Control(33)=   "optEule_R(6)"
+      Tab(3).Control(34)=   "optEule_R(5)"
+      Tab(3).Control(35)=   "optEule_R(4)"
+      Tab(3).Control(36)=   "txtEule_R(19)"
+      Tab(3).Control(37)=   "txtEule_R(18)"
+      Tab(3).Control(38)=   "txtEule_R(17)"
+      Tab(3).Control(39)=   "cboEulerUdR"
+      Tab(3).Control(40)=   "txtEule_R(11)"
+      Tab(3).Control(41)=   "Label3E(38)"
+      Tab(3).Control(42)=   "Label3E(37)"
+      Tab(3).Control(43)=   "Label3E(36)"
+      Tab(3).Control(44)=   "Label3E(24)"
+      Tab(3).Control(45)=   "Label3E(23)"
+      Tab(3).Control(46)=   "Label3E(20)"
+      Tab(3).Control(47)=   "Label3E(15)"
+      Tab(3).Control(48)=   "Label3E(10)"
+      Tab(3).Control(49)=   "Label3E(9)"
+      Tab(3).Control(50)=   "Label3E(8)"
+      Tab(3).Control(51)=   "Label3E(7)"
+      Tab(3).Control(52)=   "Label3E(6)"
+      Tab(3).Control(53)=   "Label3E(5)"
+      Tab(3).Control(54)=   "Label3E(4)"
+      Tab(3).Control(55)=   "Label3E(3)"
+      Tab(3).Control(56)=   "Label3E(2)"
+      Tab(3).Control(57)=   "Label3E(1)"
+      Tab(3).Control(58)=   "Label3E(30)"
+      Tab(3).Control(59)=   "Label3E(29)"
+      Tab(3).Control(60)=   "Label3E(28)"
+      Tab(3).Control(61)=   "Label3E(27)"
+      Tab(3).Control(62)=   "Label3E(26)"
+      Tab(3).Control(63)=   "Label3E(25)"
+      Tab(3).Control(64)=   "Label3E(11)"
+      Tab(3).Control(65)=   "Label3E(19)"
+      Tab(3).Control(66)=   "Label3E(18)"
+      Tab(3).Control(67)=   "Label3E(17)"
+      Tab(3).Control(68)=   "Label3E(16)"
+      Tab(3).Control(69)=   "Label3E(14)"
+      Tab(3).Control(70)=   "Label3E(13)"
+      Tab(3).Control(71)=   "Label3E(12)"
+      Tab(3).Control(72)=   "Label3E(32)"
+      Tab(3).Control(73)=   "Label3E(31)"
+      Tab(3).Control(74)=   "Label3E(35)"
+      Tab(3).Control(75)=   "Label3E(34)"
+      Tab(3).Control(76)=   "Label3E(33)"
+      Tab(3).Control(77)=   "Line4"
+      Tab(3).Control(78)=   "Line3"
+      Tab(3).Control(79)=   "Line5"
       Tab(3).ControlCount=   80
       TabCaption(4)   =   "Costes"
       TabPicture(4)   =   "frmFacEntAlbSAIL.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label3E(22)"
-      Tab(4).Control(1)=   "Label1(66)"
-      Tab(4).Control(2)=   "Label1(67)"
-      Tab(4).Control(3)=   "Label1(68)"
-      Tab(4).Control(4)=   "Label1(69)"
-      Tab(4).Control(5)=   "Label1(70)"
-      Tab(4).Control(6)=   "Label1(71)"
-      Tab(4).Control(7)=   "Line2"
-      Tab(4).Control(8)=   "Line6"
-      Tab(4).Control(9)=   "ListView2"
-      Tab(4).Control(10)=   "cmdLineasCostes(1)"
-      Tab(4).Control(11)=   "cmdLineasCostes(0)"
-      Tab(4).Control(12)=   "cmdLineasCostes(2)"
-      Tab(4).Control(13)=   "cmdLineasCostes(3)"
-      Tab(4).Control(14)=   "cmdLineasCostes(4)"
-      Tab(4).Control(15)=   "cmdLineasCostes(5)"
+      Tab(4).Control(0)=   "cmdLineasCostes(5)"
+      Tab(4).Control(1)=   "cmdLineasCostes(4)"
+      Tab(4).Control(2)=   "cmdLineasCostes(3)"
+      Tab(4).Control(3)=   "cmdLineasCostes(2)"
+      Tab(4).Control(4)=   "cmdLineasCostes(0)"
+      Tab(4).Control(5)=   "cmdLineasCostes(1)"
+      Tab(4).Control(6)=   "ListView2"
+      Tab(4).Control(7)=   "Line6"
+      Tab(4).Control(8)=   "Line2"
+      Tab(4).Control(9)=   "Label1(71)"
+      Tab(4).Control(10)=   "Label1(70)"
+      Tab(4).Control(11)=   "Label1(69)"
+      Tab(4).Control(12)=   "Label1(68)"
+      Tab(4).Control(13)=   "Label1(67)"
+      Tab(4).Control(14)=   "Label1(66)"
+      Tab(4).Control(15)=   "Label3E(22)"
       Tab(4).ControlCount=   16
       TabCaption(5)   =   "Fichadas"
       TabPicture(5)   =   "frmFacEntAlbSAIL.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "ListView1"
-      Tab(5).Control(1)=   "Label3E(0)"
+      Tab(5).Control(0)=   "Label1(62)"
+      Tab(5).Control(1)=   "Label1(63)"
       Tab(5).Control(2)=   "Label1(64)"
-      Tab(5).Control(3)=   "Label1(63)"
-      Tab(5).Control(4)=   "Label1(62)"
+      Tab(5).Control(3)=   "Label3E(0)"
+      Tab(5).Control(4)=   "ListView1"
       Tab(5).ControlCount=   5
       TabCaption(6)   =   "Lineas albaran"
       TabPicture(6)   =   "frmFacEntAlbSAIL.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "cmdLineasImpresion(0)"
-      Tab(6).Control(1)=   "cmdLineasImpresion(1)"
+      Tab(6).Control(0)=   "lwEulerLineas"
+      Tab(6).Control(1)=   "cmdLineasImpresion(3)"
       Tab(6).Control(2)=   "cmdLineasImpresion(2)"
-      Tab(6).Control(3)=   "cmdLineasImpresion(3)"
-      Tab(6).Control(4)=   "lwEulerLineas"
+      Tab(6).Control(3)=   "cmdLineasImpresion(1)"
+      Tab(6).Control(4)=   "cmdLineasImpresion(0)"
       Tab(6).ControlCount=   5
       Begin VB.CommandButton cmdLineasCostes 
          Height          =   375
@@ -6398,6 +6398,11 @@ Private Sub cmdLineasCostes_Click(Index As Integer)
 Dim C As String
 Dim R As Boolean
 Dim Cant As Currency
+Dim TotalImporte As Currency
+Dim ImporteADescontar As Currency
+Dim Aux2 As String
+Dim CPrecioFact As CPreciosFact
+Dim Precio  As String
 
     If Modo <> 2 Then Exit Sub
     If EsHistorico Then Exit Sub
@@ -6439,29 +6444,97 @@ Dim Cant As Currency
                 'Todo lo que sean lineas de proveedor , que no esten importadas  las meto en slialb
                 'ALC  FAC
                 'Veré que no estan puestas todavia
+                Aux2 = ""
                 For NumRegElim = 1 To ListView2.ListItems.Count
                     
                     If ListView2.ListItems(NumRegElim).Text = "ALC" Or ListView2.ListItems(NumRegElim).Text = "FAC" Then
-                        C = C & ", " & DBSet(ListView2.ListItems(NumRegElim).SubItems(9), "T")
                     
+                        Aux2 = Replace(ObtenerWhereCP(False), NombreTabla, NomTablaLineas) & " and codartic "
+                        Aux2 = DevuelveDesdeBD(conAri, "codartic", "slialb", Aux2, ListView2.ListItems(NumRegElim).SubItems(9), "T")
+                        If Aux2 = "" Then
+                            'Perfecto. La añadimos
+                            C = C & ", " & DBSet(ListView2.ListItems(NumRegElim).SubItems(9), "T")
+                        Else
+                            'Mal, ya esta añadida
+                            'No hacemos nada
+                            
+                        End If
                     End If
                     
                 Next
                 
                 If C = "" Then
                     MsgBox "Ningun coste Proveedor para inserar en venta", vbExclamation
-                    
-                Else
-                    C = Mid(C, 2) 'quitamos la priimra coma
-                    BuscaChekc = Replace(ObtenerWhereCP(False), NombreTabla, NomTablaLineas) & " AND codartic IN (" & C & ")"
-                    BuscaChekc = DevuelveDesdeBD(conAri, "codartic", "slialb", BuscaChekc & " AND 1", "1")
-                    If BuscaChekc <> "" Then
-                        MsgBox "Ya tiene articulos de coste de Proveedor en las lineas del albarán (" & BuscaChekc & ")", vbExclamation
-                        C = ""
-                    End If
+                    Exit Sub
                 End If
                 
-                If C = "" Then Exit Sub
+                
+                
+                'Veremos si hay una primera linea de costes articulo vario
+                Set miRsAux = New ADODB.Recordset
+                Aux2 = Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " and  sartic.codartic=slialb.codartic order by numlinea"
+                Aux2 = "Select slialb.codartic,slialb.nomartic,artvario,numlinea,ImporteL,cantidad,dtoline1,dtoline2 from slialb,sartic " & Aux2
+                miRsAux.Open Aux2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Aux2 = ""
+                Cant = 0  'linea 1
+                ImporteADescontar = 0
+                kCampo = 0
+                C = "|"
+                While Not miRsAux.EOF
+                    Cant = Cant + 1
+                    If miRsAux!artvario = 1 Then
+                        'Si es la primera linea
+                        If Cant = 1 Then
+                            'primera linea. Puede descontar de aqui.
+                            'la cantidad debe ser 1
+                            ' y los descuentos 0
+                            ' precioar * 1 = importel
+                            If miRsAux!cantidad = 1 And miRsAux!dtoline1 = 0 And miRsAux!dtoline2 = 0 Then
+                                Aux2 = miRsAux!codArtic & "   " & miRsAux!NomArtic
+                                ImporteADescontar = miRsAux!ImporteL
+                                kCampo = miRsAux!numlinea
+                                
+                                
+                                
+                            Else
+                                MsgBox "Primer linea varios no es compensable(cantidad /descuentos)", vbExclamation
+                                Cant = 0
+                            End If
+                        Else
+                            If Cant = 2 Then
+                                'Segunda linea tambien es de varios. Tenemos que ofertar que eliga la linea
+                                MsgBox "Mas de una linea para poder descontar. **", vbExclamation
+                            End If
+                        End If
+                    
+                    End If
+                    C = C & miRsAux!codArtic & "|"   'para saber si hay que insertar o no la linea de coste
+                    miRsAux.MoveNext
+                Wend
+                miRsAux.Close
+                
+                
+                If kCampo > 0 Then
+                    If kCampo = 1000 Then
+                        'Habrá que mostrar frmmensaje para seleccionar linea
+                        
+                    Else
+                        'Sobre la linea
+                        Aux2 = "Linea articulo descontar: " & vbCrLf & Aux2 & vbCrLf
+                        Aux2 = Aux2 & "Importe linea:     " & Format(ImporteADescontar, FormatoImporte) & "€" & vbCrLf
+                        Aux2 = Aux2 & vbCrLf & "¿Descontar importes de esta linea?"
+                        Aux2 = MsgBox(Aux2, vbQuestion + vbYesNoCancel)
+                        If CByte(Aux2) = vbCancel Then Exit Sub
+                        
+                        If CByte(Aux2) = vbNo Then kCampo = 0
+                        
+                    End If
+                    
+                End If
+                
+                
+                
+                
                 
                 'Perfecto , ahora vamos a añadir estos articulos pero en el txtaux(preciocoste)=0 para que no los vuelva a poner como coste
                 AlmacenLineas = -1
@@ -6471,31 +6544,87 @@ Dim Cant As Currency
                     MsgBox "Error almacen // Centro de coste: " & AlmacenLineas & " // " & BuscaChekc, vbExclamation
                     Exit Sub
                 End If
+                
+                Set CPrecioFact = New CPreciosFact
+                CPrecioFact.CodigoClien = Text1(4).Text
+                CPrecioFact.FijarTarifaActividad
+                Aux2 = C 'artiuclos que NO hay que insertar
                 For NumRegElim = 1 To ListView2.ListItems.Count
                     
                     If ListView2.ListItems(NumRegElim).Text = "ALC" Or ListView2.ListItems(NumRegElim).Text = "FAC" Then
-                    
-                        'codAlmac, codArtic NomArtic Ampliaci cantidad  precioar  origpre   dtoline1     dtoline2 Importe CodCCost
-                        C = AlmacenLineas & " codalmac , " & DBSet(ListView2.ListItems(NumRegElim).SubItems(9), "T") & " codartic,"
-                        C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(4), "T") & " nomartic, "
-                        C = C & DBSet("Alb: " & ListView2.ListItems(NumRegElim).SubItems(2), "T") & " Ampliaci, "
-                        Cant = ImporteFormateado(ListView2.ListItems(NumRegElim).SubItems(5))
-                        Cant = Cant * -1 'En la funcion Insertarlineafactu cambia el signo otra vez
-                        C = C & DBSet(Cant, "N") & " cantidad, "
-                        C = C & DBSet(Cant, "N") & " numbultos, "
-                        C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(6), "N") & " precioar, "
-                        C = C & "'M' origpre, 0 dtoline1 , 0 dtoline2, "
-                        Cant = ImporteFormateado(ListView2.ListItems(NumRegElim).SubItems(7))
-                        Cant = Cant * -1 'En la funcion Insertarlineafactu cambia el signo otra vez
-                        C = C & DBSet(Cant, "N") & " importel, " & DBSet(BuscaChekc, "T") & " CodCCost, '' numlote"
-                        C = "  SELECT " & C
-                        InsertarLineasFactu "SI", C
                         
                         
                         
+                        If InStr(1, Aux2, "|" & ListView2.ListItems(NumRegElim).SubItems(9) & "|") = 0 Then
+                            'OK, esta linea de coste aun no se ha añadido
+                            
+                            
+                            'codAlmac, codArtic NomArtic Ampliaci
+                            C = AlmacenLineas & " codalmac , " & DBSet(ListView2.ListItems(NumRegElim).SubItems(9), "T") & " codartic,"
+                            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(4), "T") & " nomartic, "
+                            C = C & DBSet("Alb: " & ListView2.ListItems(NumRegElim).SubItems(2), "T") & " Ampliaci, "
+                            
+                            
+                            'cantidad  butlos
+                            CPrecioFact.CodigoArtic = ListView2.ListItems(NumRegElim).SubItems(9)                                                                                    'ORIGPRE
+                            Precio = CPrecioFact.ObtenerPrecio(False, Text1(1).Text, txtAnterior, "")   'txtAnterior: ORIGPRE
+                            
+                            If Precio = "0" Then
+                                'Como minimo, el precio de compra
+                                txtAnterior = "M"
+                                CPrecioFact.DtoPermitido = False
+                                Precio = ListView2.ListItems(NumRegElim).SubItems(6)
+                            End If
+                            Cant = ImporteFormateado(ListView2.ListItems(NumRegElim).SubItems(5))
+                            Cant = Cant * -1 'En la funcion Insertarlineafactu cambia el signo otra vez
+                            C = C & DBSet(Cant, "N") & " cantidad, "
+                            C = C & DBSet(Cant, "N") & " numbultos, "
+
+                            'precioar  origpre   dtoline1     dtoline2 Importe CodCCost
+                            C = C & DBSet(Precio, "N") & " precioar, "
+                            C = C & "'" & txtAnterior & "' origpre, "
+                                    
+                            If Not CPrecioFact.DtoPermitido Then
+                                CPrecioFact.Descuento1 = 0
+                                CPrecioFact.Descuento2 = 0
+                            End If
+                            C = C & DBSet(CPrecioFact.Descuento1, "N") & " dtoline1 ," & DBSet(CPrecioFact.Descuento2, "N") & " dtoline2, "
+                            
+                            txtAnterior = CalcularImporte(ImporteSinFormato(CStr(Cant)), Precio, ImporteSinFormato(CStr(CPrecioFact.Descuento1)), ImporteSinFormato(CStr(CPrecioFact.Descuento2)), vParamAplic.TipoDtos)
                         
+                            TotalImporte = ImporteSinFormato(txtAnterior)
+                     
+                            
+                            C = C & DBSet(TotalImporte, "N") & " importel, " & DBSet(BuscaChekc, "T") & " CodCCost, '' numlote,"
+                            
+                            'Codprovex
+                            C = C & RecuperaValor(ListView2.ListItems(NumRegElim).Tag, 3) & " Codprovex"
+                            
+                            
+                            C = "  SELECT " & C
+                            If InsertarLineasFactu("SI", C) Then
                         
-                        
+                                'Descontamos
+                                If kCampo > 0 Then
+                                    'Voy a desconar del total de la linea que hemos dicho
+                                    If Abs(TotalImporte) < ImporteADescontar Then
+                                        C = "UPDATE slialb SET importel=importel " & DBSet(TotalImporte, "N")
+                                        C = C & " , precioar=precioar " & DBSet(TotalImporte, "N")
+                                        C = C & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
+                                        C = C & " AND numlinea =" & kCampo
+                                        If Not ejecutar(C, False) Then Exit For
+                                         ImporteADescontar = ImporteADescontar + TotalImporte
+                                    Else
+                                        'No puede descontar mas importe
+                                        
+                                        C = ListView2.ListItems(NumRegElim).SubItems(9) & " - " & ListView2.ListItems(NumRegElim).SubItems(4)
+                                        C = "No se puede descontar mas importe" & vbCrLf & C & vbCrLf & "Importe coste: " & TotalImporte & " -- " & ImporteADescontar
+                                        MsgBox C, vbExclamation
+                                        kCampo = 0 'para que no intente compensar mas
+                                    End If
+                                End If
+                            End If
+                        End If  'INSERTAMOS
                     End If
                 Next
                 
@@ -7081,7 +7210,7 @@ Private Sub Form_Load()
         CarpetaImagenesEULER = DevuelveDesdeBD(conAri, "pathDocs", "eulerparam", "1", "1")
         lblTituloEst.Caption = ""
         If vParamAplic.NumeroInstalacion = vbEuler Then Toolbar1.Buttons(14).visible = True
-        FrameTAXCO.visible = False
+        FrameTaxco.visible = False
         
         If CodTipoMov = "ALO" Then
             SSTab1.TabVisible(2) = True
@@ -7094,8 +7223,8 @@ Private Sub Form_Load()
             
             If vParamAplic.NumeroInstalacion = vbTaxco Then
                SSTab1.TabCaption(2) = "Orden de taller"
-                FrameTAXCO.BorderStyle = 0
-                FrameTAXCO.visible = True
+                FrameTaxco.BorderStyle = 0
+                FrameTaxco.visible = True
                 chkFacturar.Caption = "CERRADO"
                 Me.FrameOT_Taxco.visible = True
                 
@@ -8751,10 +8880,10 @@ Dim B As Boolean
     
     If CodTipoMov = "ALO" And vParamAplic.NumeroInstalacion = vbTaxco Then
         If Modo = 0 Then
-            Me.FrameTAXCO.visible = False
+            Me.FrameTaxco.visible = False
         Else
-            FrameTAXCO.visible = True
-            FrameTAXCO.Enabled = Modo = 1
+            FrameTaxco.visible = True
+            FrameTaxco.Enabled = Modo = 1
             cmdOrdenTallerTaxco.visible = Not EsHistorico And Modo = 2
             
             If Modo <> 1 Then
@@ -11824,7 +11953,7 @@ End Sub
 
 
 
- Private Sub InsertarLineasFactu(cadWhere, DesdeCostes As String)
+ Private Function InsertarLineasFactu(cadWhere, DesdeCostes As String) As Boolean
 'cadSerie = "INSERT INTO slialb(codtipom,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre) "
 'cadSerie = cadSerie & " SELECT '" & Text1(30).Text & "' as codtipom," & Text1(0).Text & " as numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre FROM slifac WHERE " & CadenaSeleccion
  Dim RS As ADODB.Recordset
@@ -11837,6 +11966,7 @@ End Sub
  
     On Error GoTo EInsFactu
     Screen.MousePointer = vbHourglass
+    InsertarLineasFactu = False
     
     If cadWhere <> "" Then
         'Obtenemos el numero de linea a insertar
@@ -11912,7 +12042,7 @@ End Sub
         
         CalcularDatosFactura
         
-    
+        InsertarLineasFactu = True
     End If
     Screen.MousePointer = vbDefault
     
@@ -11921,7 +12051,7 @@ EInsFactu:
         Screen.MousePointer = vbDefault
         MuestraError Err.Number, "Lineas Factura", Err.Description
     End If
-End Sub
+End Function
 
 
 

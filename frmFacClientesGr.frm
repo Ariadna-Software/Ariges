@@ -2579,6 +2579,16 @@ Begin VB.Form frmFacClientesGr
          TabIndex        =   340
          Top             =   7200
          Width           =   8115
+         Begin VB.TextBox Text1 
+            Height          =   360
+            Index           =   69
+            Left            =   6600
+            MaxLength       =   10
+            TabIndex        =   530
+            Top             =   1320
+            Visible         =   0   'False
+            Width           =   1335
+         End
          Begin VB.TextBox Text2 
             BackColor       =   &H80000018&
             Height          =   360
@@ -2589,7 +2599,7 @@ Begin VB.Form frmFacClientesGr
             TabIndex        =   341
             Text            =   "Text2"
             Top             =   840
-            Width           =   4485
+            Width           =   4845
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -2628,12 +2638,34 @@ Begin VB.Form frmFacClientesGr
          End
          Begin VB.ComboBox cboTipocliente 
             Height          =   360
+            ItemData        =   "frmFacClientesGr.frx":35DB
             Left            =   1920
+            List            =   "frmFacClientesGr.frx":35DD
             Style           =   2  'Dropdown List
             TabIndex        =   22
             Tag             =   "tipclien|N|N|||sclien|tipclien||N|"
             Top             =   1320
-            Width           =   3375
+            Width           =   3135
+         End
+         Begin VB.Image imgFecha 
+            Height          =   240
+            Index           =   12
+            Left            =   6360
+            Picture         =   "frmFacClientesGr.frx":35DF
+            ToolTipText     =   "Buscar fecha"
+            Top             =   1320
+            Visible         =   0   'False
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "F. Vigor"
+            Height          =   315
+            Index           =   168
+            Left            =   5160
+            TabIndex        =   531
+            Top             =   1380
+            Visible         =   0   'False
+            Width           =   1080
          End
          Begin VB.Label Label1 
             Caption         =   "dis"
@@ -2665,7 +2697,7 @@ Begin VB.Form frmFacClientesGr
             Height          =   240
             Index           =   1
             Left            =   1635
-            Picture         =   "frmFacClientesGr.frx":35DB
+            Picture         =   "frmFacClientesGr.frx":366A
             ToolTipText     =   "Buscar fecha"
             Top             =   360
             Width           =   240
@@ -2750,9 +2782,9 @@ Begin VB.Form frmFacClientesGr
          End
          Begin VB.ComboBox cboAlbaran 
             Height          =   360
-            ItemData        =   "frmFacClientesGr.frx":3666
+            ItemData        =   "frmFacClientesGr.frx":36F5
             Left            =   2160
-            List            =   "frmFacClientesGr.frx":3668
+            List            =   "frmFacClientesGr.frx":36F7
             Style           =   2  'Dropdown List
             TabIndex        =   46
             Tag             =   "Valorar albaran con|N|N|||sclien|albarcon||N|"
@@ -3298,9 +3330,9 @@ Begin VB.Form frmFacClientesGr
          End
          Begin VB.ComboBox cboTipoIVA 
             Height          =   360
-            ItemData        =   "frmFacClientesGr.frx":366A
+            ItemData        =   "frmFacClientesGr.frx":36F9
             Left            =   3960
-            List            =   "frmFacClientesGr.frx":366C
+            List            =   "frmFacClientesGr.frx":36FB
             Style           =   2  'Dropdown List
             TabIndex        =   29
             Tag             =   "Tipo de IVA|N|N|||sclien|tipoiva||N|"
@@ -3973,7 +4005,7 @@ Begin VB.Form frmFacClientesGr
             Height          =   495
             Index           =   3
             Left            =   1320
-            Picture         =   "frmFacClientesGr.frx":366E
+            Picture         =   "frmFacClientesGr.frx":36FD
             Style           =   1  'Graphical
             TabIndex        =   280
             ToolTipText     =   "Caducar puntos"
@@ -3993,7 +4025,7 @@ Begin VB.Form frmFacClientesGr
             Height          =   495
             Index           =   5
             Left            =   120
-            Picture         =   "frmFacClientesGr.frx":4070
+            Picture         =   "frmFacClientesGr.frx":40FF
             Style           =   1  'Graphical
             TabIndex        =   279
             ToolTipText     =   "Insertar puntos"
@@ -4013,7 +4045,7 @@ Begin VB.Form frmFacClientesGr
             Height          =   495
             Index           =   4
             Left            =   1920
-            Picture         =   "frmFacClientesGr.frx":4A72
+            Picture         =   "frmFacClientesGr.frx":4B01
             Style           =   1  'Graphical
             TabIndex        =   278
             ToolTipText     =   "Imprimir puntos"
@@ -4033,7 +4065,7 @@ Begin VB.Form frmFacClientesGr
             Height          =   495
             Index           =   6
             Left            =   720
-            Picture         =   "frmFacClientesGr.frx":4FFC
+            Picture         =   "frmFacClientesGr.frx":508B
             Style           =   1  'Graphical
             TabIndex        =   277
             ToolTipText     =   "Eliminar puntos"
@@ -4098,7 +4130,7 @@ Begin VB.Form frmFacClientesGr
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   267
-         Text            =   "frmFacClientesGr.frx":59FE
+         Text            =   "frmFacClientesGr.frx":5A8D
          Top             =   3240
          Width           =   5565
       End
@@ -4198,9 +4230,9 @@ Begin VB.Form frmFacClientesGr
       Begin VB.ComboBox cboFitos 
          Height          =   360
          Index           =   1
-         ItemData        =   "frmFacClientesGr.frx":5A05
+         ItemData        =   "frmFacClientesGr.frx":5A94
          Left            =   -67440
-         List            =   "frmFacClientesGr.frx":5A0F
+         List            =   "frmFacClientesGr.frx":5A9E
          Style           =   2  'Dropdown List
          TabIndex        =   256
          Top             =   3480
@@ -4284,9 +4316,9 @@ Begin VB.Form frmFacClientesGr
       Begin VB.ComboBox cboFitos 
          Height          =   360
          Index           =   0
-         ItemData        =   "frmFacClientesGr.frx":5A1B
+         ItemData        =   "frmFacClientesGr.frx":5AAA
          Left            =   -71520
-         List            =   "frmFacClientesGr.frx":5A25
+         List            =   "frmFacClientesGr.frx":5AB4
          Style           =   2  'Dropdown List
          TabIndex        =   245
          Top             =   3480
@@ -4341,9 +4373,9 @@ Begin VB.Form frmFacClientesGr
       End
       Begin VB.ComboBox cboManipulador 
          Height          =   360
-         ItemData        =   "frmFacClientesGr.frx":5A3E
+         ItemData        =   "frmFacClientesGr.frx":5ACD
          Left            =   -74760
-         List            =   "frmFacClientesGr.frx":5A40
+         List            =   "frmFacClientesGr.frx":5ACF
          Style           =   2  'Dropdown List
          TabIndex        =   235
          Tag             =   "Manipulador|N|N|||sclien|ManipuladortipoCarnet||N|"
@@ -4353,9 +4385,9 @@ Begin VB.Form frmFacClientesGr
       Begin VB.ComboBox cboOperadorTfnnia2 
          Height          =   360
          Index           =   0
-         ItemData        =   "frmFacClientesGr.frx":5A42
+         ItemData        =   "frmFacClientesGr.frx":5AD1
          Left            =   -73680
-         List            =   "frmFacClientesGr.frx":5A44
+         List            =   "frmFacClientesGr.frx":5AD3
          Style           =   2  'Dropdown List
          TabIndex        =   191
          Top             =   1080
@@ -4365,9 +4397,9 @@ Begin VB.Form frmFacClientesGr
       Begin VB.ComboBox cboOperadorTfnnia2 
          Height          =   360
          Index           =   1
-         ItemData        =   "frmFacClientesGr.frx":5A46
+         ItemData        =   "frmFacClientesGr.frx":5AD5
          Left            =   -64440
-         List            =   "frmFacClientesGr.frx":5A48
+         List            =   "frmFacClientesGr.frx":5AD7
          Style           =   2  'Dropdown List
          TabIndex        =   202
          Top             =   3720
@@ -4583,7 +4615,7 @@ Begin VB.Form frmFacClientesGr
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   208
-         Text            =   "frmFacClientesGr.frx":5A4A
+         Text            =   "frmFacClientesGr.frx":5AD9
          Top             =   5040
          Width           =   6885
       End
@@ -5004,7 +5036,7 @@ Begin VB.Form frmFacClientesGr
             MultiLine       =   -1  'True
             TabIndex        =   98
             Tag             =   "N|T|S|||scliendp|observa|||"
-            Text            =   "frmFacClientesGr.frx":5A51
+            Text            =   "frmFacClientesGr.frx":5AE0
             Top             =   3720
             Width           =   4485
          End
@@ -5291,7 +5323,7 @@ Begin VB.Form frmFacClientesGr
             MultiLine       =   -1  'True
             TabIndex        =   90
             Tag             =   "Obs|T|S|||sdirenvio|observa||N|"
-            Text            =   "frmFacClientesGr.frx":5A59
+            Text            =   "frmFacClientesGr.frx":5AE8
             Top             =   5160
             Width           =   5805
          End
@@ -5590,7 +5622,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   495
          Index           =   0
          Left            =   -59415
-         Picture         =   "frmFacClientesGr.frx":5A5F
+         Picture         =   "frmFacClientesGr.frx":5AEE
          Style           =   1  'Graphical
          TabIndex        =   143
          ToolTipText     =   "Acciones CRM"
@@ -5611,7 +5643,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   495
          Index           =   1
          Left            =   -58440
-         Picture         =   "frmFacClientesGr.frx":6461
+         Picture         =   "frmFacClientesGr.frx":64F0
          Style           =   1  'Graphical
          TabIndex        =   142
          ToolTipText     =   "Impresion CRM"
@@ -5632,7 +5664,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   495
          Index           =   2
          Left            =   -58935
-         Picture         =   "frmFacClientesGr.frx":69EB
+         Picture         =   "frmFacClientesGr.frx":6A7A
          Style           =   1  'Graphical
          TabIndex        =   141
          ToolTipText     =   "Eliminar"
@@ -6729,7 +6761,7 @@ Begin VB.Form frmFacClientesGr
       Begin VB.CommandButton cmdCatalogo 
          Height          =   495
          Left            =   -60000
-         Picture         =   "frmFacClientesGr.frx":73ED
+         Picture         =   "frmFacClientesGr.frx":747C
          Style           =   1  'Graphical
          TabIndex        =   390
          ToolTipText     =   "Catalogos"
@@ -6741,7 +6773,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   240
          Index           =   16
          Left            =   -58800
-         Picture         =   "frmFacClientesGr.frx":DC3F
+         Picture         =   "frmFacClientesGr.frx":DCCE
          ToolTipText     =   "Buscar fecha"
          Top             =   2760
          Width           =   240
@@ -6936,7 +6968,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   240
          Index           =   8
          Left            =   -59880
-         Picture         =   "frmFacClientesGr.frx":DCCA
+         Picture         =   "frmFacClientesGr.frx":DD59
          ToolTipText     =   "Buscar fecha"
          Top             =   2160
          Width           =   240
@@ -6963,7 +6995,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   240
          Index           =   7
          Left            =   -61920
-         Picture         =   "frmFacClientesGr.frx":DD55
+         Picture         =   "frmFacClientesGr.frx":DDE4
          ToolTipText     =   "Buscar fecha"
          Top             =   2160
          Width           =   240
@@ -7069,7 +7101,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   240
          Index           =   6
          Left            =   -67920
-         Picture         =   "frmFacClientesGr.frx":DDE0
+         Picture         =   "frmFacClientesGr.frx":DE6F
          ToolTipText     =   "Buscar fecha"
          Top             =   1440
          Width           =   240
@@ -7142,7 +7174,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   240
          Index           =   10
          Left            =   -60240
-         Picture         =   "frmFacClientesGr.frx":DE6B
+         Picture         =   "frmFacClientesGr.frx":DEFA
          ToolTipText     =   "Buscar fecha"
          Top             =   2760
          Width           =   240
@@ -7151,7 +7183,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   240
          Index           =   9
          Left            =   -63600
-         Picture         =   "frmFacClientesGr.frx":DEF6
+         Picture         =   "frmFacClientesGr.frx":DF85
          ToolTipText     =   "Buscar fecha"
          Top             =   2760
          Width           =   240
@@ -7314,7 +7346,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   240
          Index           =   3
          Left            =   -62640
-         Picture         =   "frmFacClientesGr.frx":DF81
+         Picture         =   "frmFacClientesGr.frx":E010
          ToolTipText     =   "Buscar fecha"
          Top             =   1155
          Width           =   240
@@ -7367,7 +7399,7 @@ Begin VB.Form frmFacClientesGr
          Height          =   240
          Index           =   0
          Left            =   1440
-         Picture         =   "frmFacClientesGr.frx":E00C
+         Picture         =   "frmFacClientesGr.frx":E09B
          ToolTipText     =   "Buscar fecha"
          Top             =   600
          Width           =   240
@@ -7384,7 +7416,7 @@ Begin VB.Form frmFacClientesGr
       Begin VB.Image imgWeb 
          Height          =   255
          Left            =   1440
-         Picture         =   "frmFacClientesGr.frx":E097
+         Picture         =   "frmFacClientesGr.frx":E126
          Stretch         =   -1  'True
          Tag             =   "-1"
          ToolTipText     =   "Abrir web"
@@ -10933,10 +10965,18 @@ Dim N As Integer
     'oolbarDoc.Buttons(15).visible = vParamAplic.PtosAsignar > 0
     Me.optDoc(7).visible = vParamAplic.PtosAsignar > 0
     
-    If vParamAplic.NumeroInstalacion = 2 Then
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then
         'HERBELCA
         If vUsu.CodigoAgente > 0 Then FrameNavegaDoc.visible = False 'rameNavegaDocToolbarDoc.visible = False
         Label1(17).Caption = "Asociación"
+    
+        Text1(58).Tag = ""  'Para que noi haga ni el insert ni el update. Es el mismo campo que el 69
+        Text1(69).Tag = "Fecha vigor|F|S|||sclien|ManipuladorFecCaducidad|dd/mm/yyyy||"
+        
+        'Fecha vigor
+        Text1(69).visible = True
+        Label1(168).visible = True
+        imgFecha(12).visible = True
     End If
     
     '[Monica]Ajuste de solapas
@@ -11276,6 +11316,9 @@ Dim Indice As Byte
                 txtTaximetro(Indice).Text = Format(vFecha, "dd/mm/yyyy")
     
             Exit Sub
+            
+        Case 12
+            Indice = 69
         Case 1004, 1006
             'Son las fechas del RENTING
             Me.txtauxRent(Val(imgFecha(0).Tag) - 1000).Text = Format(vFecha, "dd/mm/yyyy")
@@ -11767,6 +11810,10 @@ Dim Indice As Byte
         Indice = 53
     Case 6
         Indice = 58
+        
+        
+    Case 12
+        Indice = 69
     Case 7, 8, 9, 10, 11
        
             Indice = 100 + Index
@@ -11774,7 +11821,7 @@ Dim Indice As Byte
    End Select
    
     
-    If Indice > 58 Then
+    If Indice > 69 Then
 
 
         If Indice > 100 Then
@@ -11889,24 +11936,8 @@ Private Sub lw1_Click()
   If RecuperaValor(lw1.Tag, 1) = "6" Then
     If Not lw1.SelectedItem Is Nothing Then CargarIMG lw1.SelectedItem.SubItems(2)
 
-  Else
-        If RecuperaValor(lw1.Tag, 1) = "7" Then
-            'Puntos
-            If Not lw1.SelectedItem Is Nothing And Modo = 2 Then
-                If lw1.SelectedItem.Text = "ERROR" And vUsu.Login = "root" Then
-                    BuscaChekc = "Actualizo puntos"
-                    If MsgBox(BuscaChekc, vbQuestion + vbYesNo) = vbYes Then
-                        BuscaChekc = lw1.SelectedItem.Index
-                        BuscaChekc = Val(BuscaChekc) - 1
-                        If Val(BuscaChekc) >= 0 Then
-                            BuscaChekc = DBSet(lw1.ListItems(CInt(BuscaChekc)).SubItems(5), "N")
-                            BuscaChekc = "UPDATE sclien set puntos=" & BuscaChekc & " WHERE codclien =" & Me.Text1(0).Text
-                            ejecutar BuscaChekc, False
-                        End If
-                    End If
-                End If
-            End If
-        End If
+  
+       
   End If
 End Sub
 
@@ -12428,7 +12459,7 @@ Dim Titulo As String
             tabla = "starif"
             Titulo = "Tarifa"
                                     
-        Case 13, 40, 41, 48, 53, 58, 46 'Fecha alta, Fecha último mov.,fecha reclamación solicredito
+        Case 13, 40, 41, 48, 53, 58, 46, 69 'Fecha alta, Fecha último mov.,fecha reclamación solicredito
              If Text1(Index).Text <> "" Then PonerFormatoFecha Text1(Index)
              If Index = 46 Then
                 If Text1(Index).Text <> "" Then
@@ -18022,6 +18053,24 @@ Dim SQL As String
                         .Show vbModal
                     End With
                 End If
+
+
+
+        Case Else
+            
+                If lw1.SelectedItem.Text = "ERROR" And vUsu.Login = "root" Then
+                    BuscaChekc = "Actualizo puntos"
+                    If MsgBox(BuscaChekc, vbQuestion + vbYesNo) = vbYes Then
+                        BuscaChekc = lw1.SelectedItem.Index
+                        BuscaChekc = Val(BuscaChekc) - 1
+                        If Val(BuscaChekc) >= 0 Then
+                            BuscaChekc = DBSet(lw1.ListItems(CInt(BuscaChekc)).SubItems(5), "N")
+                            BuscaChekc = "UPDATE sclien set puntos=" & BuscaChekc & " WHERE codclien =" & Me.Text1(0).Text
+                            ejecutar BuscaChekc, False
+                        End If
+                    End If
+                End If
+            
 
         End Select
 End Sub

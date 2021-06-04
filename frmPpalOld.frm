@@ -169,7 +169,7 @@ Begin VB.Form frmPpalOld
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "10:25"
+            TextSave        =   "17:10"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -4765,7 +4765,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-
+   ' frmComProveAnticipo.Show vbModal
    
     
         

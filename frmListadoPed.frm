@@ -6632,8 +6632,8 @@ Dim Cad As String
             
             If vParamAplic.NumeroInstalacion <> 1 Then
             
-                'EN HERBERLCA SOLO MOSTRADOR
-                If vParamAplic.NumeroInstalacion = vbHerbelca Then
+                'EN HERBERLCA FACTURAS SOLO MOSTRADOR
+                If vParamAplic.NumeroInstalacion = vbHerbelca And OpcionListado = 1000 Then
                     'Mayo 2021
                     'SOLO mostrador
                     Cad = Cad & "   SOLO puede generar facturas de mostrador"
@@ -9906,11 +9906,9 @@ Private Sub LlamarImprimir()
         .FormulaSeleccion = cadFormula
         .OtrosParametros = cadParam
         .NumeroParametros = numParam
-        If Not vContinua Then
-            .SoloImprimir = False
-        Else
-            .SoloImprimir = True
-        End If
+        
+        .SoloImprimir = False
+        
         .EnvioEMail = False
         .Opcion = OpcionListado
         .Titulo = Titulo
