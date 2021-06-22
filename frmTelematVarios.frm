@@ -1932,7 +1932,7 @@ Dim Porcen As Currency
     While Not miRsAux.EOF
         Set IT = lw1.ListItems.Add()
         
-        'If miRsAux!codtelem = "326000519" Then Stop
+        'If miRsAux!codtelem = "326000519" Then St op
         
         
         IT.Text = miRsAux!codtelem

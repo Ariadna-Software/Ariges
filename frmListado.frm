@@ -15101,7 +15101,8 @@ Private Sub cmdStockMin_Click()
     
     
     InicializarVbles
-    
+    cadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    numParam = 1
     
     cadFormula = ""
     
@@ -18032,7 +18033,7 @@ Dim bytPrecio As Byte
     If Not HayRegParaInforme(cadFrom, cadSelect) Then
         Exit Function
     Else
-        If OpcionListado = 12 Then
+        If OpcionListado = 14 Then
         If MsgBox("¿Actualizar diferencias?", vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
         End If
     End If
@@ -21340,6 +21341,7 @@ Private Sub PonerDatosFacturaProveedorAcabadaRecepcionar()
                         If vParamAplic.ContabilidadNueva Then
                             Orden1 = "numfactu=" & DBSet(Trim(Mid(Orden1, 1, numParam - 1)), "T") & " AND fecfactu = " & DBSet(Trim(Mid(Orden1, numParam + 1)), "F")
                             Orden1 = "codmacta = '" & cadFormula & "' AND " & Orden1
+                            If vParamAplic.SerieAnticipoProveedor <> "" Then Orden1 = "numserie <> '" & vParamAplic.SerieAnticipoProveedor & "' AND " & Orden1
                         Else
                             Orden1 = "numfactu=" & DBSet(Trim(Mid(Orden1, 1, numParam - 1)), "T") & " AND fecfactu = " & DBSet(Trim(Mid(Orden1, numParam + 1)), "F")
                             Orden1 = "ctaprove = '" & cadFormula & "' AND " & Orden1

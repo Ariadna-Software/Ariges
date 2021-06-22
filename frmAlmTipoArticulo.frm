@@ -389,24 +389,24 @@ Dim Modo As Byte
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(vModo As Byte)
-Dim B As Boolean
+Dim b As Boolean
 
     Modo = vModo
-    B = (Modo = 2)
+    b = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    txtAux(0).visible = Not B
-    txtAux(1).visible = Not B
+    txtAux(0).visible = Not b
+    txtAux(1).visible = Not b
     txtAux(0).BackColor = vbWhite
     txtAux(1).BackColor = vbWhite
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
-    DataGrid1.Enabled = B
+    cmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
+    DataGrid1.Enabled = b
     
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = B
+        cmdRegresar.visible = b
     End If
     
     'Si estamos insertando o busqueda
@@ -422,28 +422,28 @@ Dim B As Boolean
 End Sub
 
 Private Sub PonerModoOpcionesMenu()
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnBuscar.Enabled = b
     'Ber Todos
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnVerTodos.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnVerTodos.Enabled = b
     
-    B = B And Not DeConsulta
+    b = b And Not DeConsulta
     'Añadir
-    Toolbar1.Buttons(1).Enabled = B
-    Me.mnNuevo.Enabled = B
+    Toolbar1.Buttons(1).Enabled = b
+    Me.mnNuevo.Enabled = b
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = b
+    Me.mnEliminar.Enabled = b
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = B
+    Toolbar1.Buttons(8).Enabled = b
 End Sub
 
 
@@ -457,7 +457,7 @@ Private Sub BotonAnyadir()
 Dim anc As Single
         
     'Situamos el grid al final
-    AnyadirLinea DataGrid1, adodc1
+    AnyadirLinea DataGrid1, Adodc1
    
     anc = ObtenerAlto(DataGrid1, 10)
     
@@ -481,7 +481,7 @@ End Sub
 Private Sub BotonVerTodos()
 On Error Resume Next
     CargaGrid ""
-    If adodc1.Recordset.RecordCount <= 0 Then
+    If Adodc1.Recordset.RecordCount <= 0 Then
          'MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
          MsgBox "No hay ningún registro en la tabla TIPOS DE ARTICULO", vbInformation
          Screen.MousePointer = vbDefault
@@ -497,12 +497,12 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim Cad As String
+Dim cad As String
 Dim anc As Single
 Dim I As Integer
 
-    If adodc1.Recordset.EOF Then Exit Sub
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
 
     Screen.MousePointer = vbHourglass
     
@@ -514,9 +514,9 @@ Dim I As Integer
     
     anc = ObtenerAlto(DataGrid1, 10)
     
-    Cad = ""
+    cad = ""
     For I = 0 To 1
-        Cad = Cad & DataGrid1.Columns(I).Text & "|"
+        cad = cad & DataGrid1.Columns(I).Text & "|"
     Next I
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
@@ -542,22 +542,22 @@ Dim SQL As String
 On Error GoTo Error2
     
     'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
+    If Adodc1.Recordset.EOF Then Exit Sub
     
     '### a mano
     SQL = "¿Seguro que desea eliminar el Tipo de Artículo? " & vbCrLf
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Denominación: " & Adodc1.Recordset.Fields(1)
     
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = Me.adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from stipar where codtipar='" & adodc1.Recordset!codTipar & "'"
+        NumRegElim = Me.Adodc1.Recordset.AbsolutePosition
+        SQL = "Delete from stipar where codtipar='" & Adodc1.Recordset!codTipar & "'"
         conn.Execute SQL
-        CancelaADODC Me.adodc1
+        CancelaADODC Me.Adodc1
         CargaGrid ""
-        CancelaADODC Me.adodc1
-        SituarDataPosicion Me.adodc1, NumRegElim, SQL
+        CancelaADODC Me.Adodc1
+        SituarDataPosicion Me.Adodc1, NumRegElim, SQL
     End If
 Error2:
     Screen.MousePointer = vbDefault
@@ -567,7 +567,7 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim I As String
-Dim CadB As String
+Dim cadB As String
 On Error GoTo EAceptar
 
     Select Case Modo
@@ -582,19 +582,19 @@ On Error GoTo EAceptar
              If DatosOk And BLOQUEADesdeFormulario(Me) Then
                  If ModificaDesdeFormulario(Me, 3) Then
                       TerminaBloquear
-                      I = adodc1.Recordset.Fields(0)
+                      I = Adodc1.Recordset.Fields(0)
                       PonerModo 2
-                      CancelaADODC Me.adodc1
+                      CancelaADODC Me.Adodc1
                       CargaGrid
-                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " = '" & I & "'")
+                      Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " = '" & I & "'")
                   End If
                   DataGrid1.SetFocus
             End If
         Case 1 'HacerBusqueda
-            CadB = ObtenerBusqueda(Me, False)
-            If CadB <> "" Then
+            cadB = ObtenerBusqueda(Me, False)
+            If cadB <> "" Then
                 PonerModo 2
-                CargaGrid CadB
+                CargaGrid cadB
                 DataGrid1.SetFocus
             End If
     End Select
@@ -607,9 +607,9 @@ Private Sub cmdCancelar_Click()
     Select Case Modo
         Case 3 'Insertar
             DataGrid1.AllowAddNew = False
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
+            If Not Adodc1.Recordset.EOF Then Adodc1.Recordset.MoveFirst
         Case 4 'Modificar
-            Me.lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+            Me.lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
         Case 1
             CargaGrid
     End Select
@@ -619,15 +619,15 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 
-    If adodc1.Recordset.EOF Then
+    If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    Cad = adodc1.Recordset.Fields(0) & "|"
-    Cad = Cad & adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(Cad)
+    cad = Adodc1.Recordset.Fields(0) & "|"
+    cad = cad & Adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -641,8 +641,8 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not adodc1.Recordset.EOF Then 'And Modo = 0 Then
-        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+    If Not Adodc1.Recordset.EOF Then 'And Modo = 0 Then
+        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
     End If
 End Sub
 
@@ -716,21 +716,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 6: mnVerTodos_Click
         Case 8: 'Imprimir
             frmListado.CadTag = txtAux(0).Tag
-            Me.Hide
-            'AbrirListado (4) 'OpcionListado=4
+          
             frmInformesNew.OpcionListado = 4
             frmInformesNew.Show vbModal
             
-            Me.Show vbModal
+           
     End Select
 End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
 Dim I As Byte
-Dim B As Boolean
+Dim b As Boolean
     
-    B = DataGrid1.Enabled
+    b = DataGrid1.Enabled
     
     If SQL <> "" Then
         SQL = CadenaConsulta & " WHERE " & SQL
@@ -739,7 +738,7 @@ Dim B As Boolean
     End If
     SQL = SQL & " ORDER BY codtipar"
     
-    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
     DataGrid1.RowHeight = 350
 
     I = 0  'Cod. Tipo Articulo
@@ -767,17 +766,17 @@ Dim B As Boolean
    
     'Habilitamos botones Modificar y Eliminar
    If Toolbar1.Buttons(6).Enabled Then
-        Toolbar1.Buttons(6).Enabled = Not adodc1.Recordset.EOF
-        Toolbar1.Buttons(7).Enabled = Not adodc1.Recordset.EOF
-        mnModificar.Enabled = Not adodc1.Recordset.EOF
-        mnEliminar.Enabled = Not adodc1.Recordset.EOF
+        Toolbar1.Buttons(6).Enabled = Not Adodc1.Recordset.EOF
+        Toolbar1.Buttons(7).Enabled = Not Adodc1.Recordset.EOF
+        mnModificar.Enabled = Not Adodc1.Recordset.EOF
+        mnEliminar.Enabled = Not Adodc1.Recordset.EOF
    End If
-   DataGrid1.Enabled = B
+   DataGrid1.Enabled = b
    PonerOpcionesMenu
    
    'Actualizar indicador
-   If Not adodc1.Recordset.EOF And (Modo = 2) Then
-        lblIndicador.Caption = adodc1.Recordset.AbsolutePosition & " de " & adodc1.Recordset.RecordCount
+   If Not Adodc1.Recordset.EOF And (Modo = 2) Then
+        lblIndicador.Caption = Adodc1.Recordset.AbsolutePosition & " de " & Adodc1.Recordset.RecordCount
    Else
         Me.lblIndicador.Caption = ""
    End If
@@ -803,25 +802,25 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim B As Boolean
+Dim b As Boolean
 
-    B = CompForm(Me, 3)
-    If Not B Then Exit Function
+    b = CompForm(Me, 3)
+    If Not b Then Exit Function
     
     'Comprobar si ya existe el cod de tipo articulo en la tabla
     If Modo = 3 Then 'Insertar
-        If ExisteCP(txtAux(0)) Then B = False
+        If ExisteCP(txtAux(0)) Then b = False
     End If
     
-    DatosOk = B
+    DatosOk = b
 End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 

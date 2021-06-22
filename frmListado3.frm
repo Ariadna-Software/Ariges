@@ -31209,13 +31209,21 @@ Dim IVA As Currency
     End If
     If i = 0 Then miSQL = "Ariges" & vEmpresa.codempre
     
-    miSQL = " ctaprove in (select codmacta from " & miSQL & ".sprove WHERE 1=1 "
-    miSQL = " select spagop.*,nomforpa from spagop,sforpa where spagop.codforpa=sforpa.codforpa and " & miSQL
+    '#@#-> replace por pago o spao
+    miSQL = IIf(vParamAplic.ContabilidadNueva, "pagos.codmacta", "spagop.ctaprove") & "  in (select codmacta from " & miSQL & ".sprove WHERE 1=1 "
+    
+    
+    If vParamAplic.ContabilidadNueva Then
+        miSQL = " select pagos.*,nomforpa, pagos.codmacta ctaprove from pagos,formapago where pagos.codforpa=formapago.codforpa and " & miSQL
+    Else
+        miSQL = " select spagop.*,nomforpa from spagop,sforpa where spagop.codforpa=sforpa.codforpa and " & miSQL
+    End If
     'Si ha puesto desde hasta proveedor
     If Me.txtCodProve(6).Text <> "" Then miSQL = miSQL & " AND sprove.codprove >= " & Me.txtCodProve(6).Text
     If Me.txtCodProve(7).Text <> "" Then miSQL = miSQL & " AND sprove.codprove <= " & Me.txtCodProve(7).Text
     
     miSQL = miSQL & ")"
+
     miRsAux.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     miSQL = ""
     While Not miRsAux.EOF
@@ -31254,12 +31262,18 @@ Dim IVA As Currency
     miSQL = "Select distinct(nombre1) from tmpinformes where codusu =" & vUsu.Codigo & " AND porcen1=4"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
+    
+    
+    
         Codigo = "nomprove"
         miSQL = DevuelveDesdeBD(conAri, "codprove", "sprove", "codmacta", miRsAux!nombre1, "T", Codigo)
         If miSQL = "" Then
             miSQL = "0"
             Codigo = "N/D"
         End If
+        
+        Label3(17).Caption = "Ajuste codigo proveedor: " & miSQL
+        Label3(17).Refresh
         
         miSQL = "UPDATE tmpinformes SET campo1=" & miSQL & ", nombre1=" & DBSet(Codigo, "T") & ", porcen1=0"
         miSQL = miSQL & " WHERE codusu = " & vUsu.Codigo & " AND nombre1=" & DBSet(miRsAux!nombre1, "T")

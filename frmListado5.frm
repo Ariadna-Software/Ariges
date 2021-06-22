@@ -15,6 +15,173 @@ Begin VB.Form frmListado5
    ScaleWidth      =   21225
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame frameAlvic 
+      Height          =   9015
+      Left            =   8040
+      TabIndex        =   309
+      Top             =   0
+      Width           =   8055
+      Begin VB.CommandButton cmdAlvic 
+         Caption         =   "Aceptar"
+         Height          =   375
+         Left            =   5400
+         TabIndex        =   313
+         Top             =   8520
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   30
+         Left            =   6600
+         TabIndex        =   310
+         Top             =   8520
+         Width           =   975
+      End
+      Begin MSComctlLib.ListView lw 
+         Height          =   2295
+         Index           =   9
+         Left            =   360
+         TabIndex        =   311
+         Top             =   720
+         Width           =   7335
+         _ExtentX        =   12938
+         _ExtentY        =   4048
+         View            =   3
+         LabelEdit       =   1
+         SortOrder       =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   3
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Codigo"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Forma de pago"
+            Object.Width           =   7126
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   2
+            Text            =   "Importe"
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin MSComctlLib.ListView lw 
+         Height          =   4695
+         Index           =   10
+         Left            =   360
+         TabIndex        =   316
+         Top             =   3600
+         Width           =   7335
+         _ExtentX        =   12938
+         _ExtentY        =   8281
+         View            =   3
+         LabelEdit       =   1
+         SortOrder       =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   2
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Campo"
+            Object.Width           =   3528
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Observacion"
+            Object.Width           =   7832
+         EndProperty
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Infrmación adicional"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00008000&
+         Height          =   345
+         Index           =   29
+         Left            =   360
+         TabIndex        =   315
+         Top             =   3240
+         Width           =   6495
+      End
+      Begin VB.Label lblDpto 
+         Caption         =   "M"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H000000FF&
+         Height          =   195
+         Index           =   42
+         Left            =   360
+         TabIndex        =   314
+         Top             =   3000
+         Width           =   4815
+      End
+      Begin VB.Label Label9 
+         Caption         =   "ALVIC"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   28
+         Left            =   360
+         TabIndex        =   312
+         Top             =   240
+         Width           =   6495
+      End
+   End
    Begin VB.Frame FrameActualizaSdtoFm 
       Height          =   3495
       Left            =   0
@@ -4799,173 +4966,6 @@ Begin VB.Form frmListado5
          Width           =   4275
       End
    End
-   Begin VB.Frame frameAlvic 
-      Height          =   9015
-      Left            =   8040
-      TabIndex        =   309
-      Top             =   0
-      Width           =   8055
-      Begin VB.CommandButton cmdAlvic 
-         Caption         =   "Aceptar"
-         Height          =   375
-         Left            =   5400
-         TabIndex        =   313
-         Top             =   8520
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   30
-         Left            =   6600
-         TabIndex        =   310
-         Top             =   8520
-         Width           =   975
-      End
-      Begin MSComctlLib.ListView lw 
-         Height          =   3135
-         Index           =   9
-         Left            =   360
-         TabIndex        =   311
-         Top             =   720
-         Width           =   7335
-         _ExtentX        =   12938
-         _ExtentY        =   5530
-         View            =   3
-         LabelEdit       =   1
-         SortOrder       =   -1  'True
-         LabelWrap       =   -1  'True
-         HideSelection   =   0   'False
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         NumItems        =   3
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Codigo"
-            Object.Width           =   2540
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Text            =   "Forma de pago"
-            Object.Width           =   7126
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
-            SubItemIndex    =   2
-            Text            =   "Importe"
-            Object.Width           =   2540
-         EndProperty
-      End
-      Begin MSComctlLib.ListView lw 
-         Height          =   3255
-         Index           =   10
-         Left            =   360
-         TabIndex        =   316
-         Top             =   5040
-         Width           =   7335
-         _ExtentX        =   12938
-         _ExtentY        =   5741
-         View            =   3
-         LabelEdit       =   1
-         SortOrder       =   -1  'True
-         LabelWrap       =   -1  'True
-         HideSelection   =   0   'False
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Verdana"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         NumItems        =   2
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Campo"
-            Object.Width           =   3528
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Text            =   "Observacion"
-            Object.Width           =   7832
-         EndProperty
-      End
-      Begin VB.Label Label9 
-         Caption         =   "Infrmación adicional"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00008000&
-         Height          =   345
-         Index           =   29
-         Left            =   360
-         TabIndex        =   315
-         Top             =   4560
-         Width           =   6495
-      End
-      Begin VB.Label lblDpto 
-         Caption         =   "M"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H000000FF&
-         Height          =   195
-         Index           =   42
-         Left            =   360
-         TabIndex        =   314
-         Top             =   3960
-         Width           =   4815
-      End
-      Begin VB.Label Label9 
-         Caption         =   "ALVIC"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Index           =   28
-         Left            =   360
-         TabIndex        =   312
-         Top             =   240
-         Width           =   6495
-      End
-   End
    Begin VB.Frame FramePtosCliente 
       Height          =   3495
       Left            =   4920
@@ -9224,7 +9224,7 @@ End Sub
 
 Private Sub cmdCRMClieAccion_Click()
 Dim AuxF As String
-Dim b As Boolean
+Dim B As Boolean
     'scrmacciones agente codtraba tipo fechora codclien
     If Me.optVarios(6).Value Then conn.Execute "DELETE from tmpcrmclien WHERE codusu = " & vUsu.Codigo
     
@@ -9325,11 +9325,11 @@ Dim b As Boolean
     Me.lblIndicador(3).Caption = "Registros BD"
     Me.lblIndicador(3).Refresh
     Screen.MousePointer = vbHourglass
-    b = True
+    B = True
     If Me.optVarios(5).Value Then
         If cadSelect <> "" Then cadSelect = " AND " & cadSelect
         cadSelect = "{scrmacciones.codclien} = {sclien.codclien} " & cadSelect
-        If Not HayRegParaInforme("scrmacciones,sclien", cadSelect, True) Then b = False
+        If Not HayRegParaInforme("scrmacciones,sclien", cadSelect, True) Then B = False
         
         If Me.optVarios(7).Value Then
             cadNomRPT = "rAccionesComercVisitadosFec.rpt"
@@ -9349,12 +9349,12 @@ Dim b As Boolean
     Else
         cadSelect = "codusu = " & vUsu.Codigo
         cadFormula = "{tmpcrmclien.codusu} = " & vUsu.Codigo
-        If Not HayRegParaInforme("tmpcrmclien", cadSelect, True) Then b = False
+        If Not HayRegParaInforme("tmpcrmclien", cadSelect, True) Then B = False
         cadTitulo = "No visitados"
         cadNomRPT = "rAccionesComercNOVisi.rpt"
    End If
     Me.lblIndicador(3).Caption = ""
-    If Not b Then
+    If Not B Then
         Screen.MousePointer = vbDefault
         MsgBox "No existe datos con los valores selccionados", vbExclamation
         Exit Sub
@@ -9368,7 +9368,7 @@ Dim b As Boolean
 End Sub
 
 Private Sub cmdDeclaraAlcohol_Click()
-Dim b As Boolean
+Dim B As Boolean
             
     miSQL = ""
     If Me.txtNumero(4).Text = "" Or Me.cboTrimiestre(0).ListIndex < 0 Then
@@ -9386,10 +9386,10 @@ Dim b As Boolean
     End If
         
     Screen.MousePointer = vbHourglass
-    b = GeneraDatosDeclaraAlcohol
+    B = GeneraDatosDeclaraAlcohol
     Screen.MousePointer = vbDefault
     
-    If b Then
+    If B Then
         InicializarVbles False
         
         If Me.chkVarios(4).Value = 1 Then
@@ -10845,7 +10845,7 @@ Dim Indice As Byte
         PonerFrameVisible FrameTaxcoNuevaTaller
     Case 30
         PonerFrameVisible frameAlvic
-        Label9(28).Caption = "Importes traspaso ALVIC (" & Format(CCur(OtrosDatos), FormatoImporte) & ")"
+        Label9(28).Caption = "Importes traspaso gaolinera (" & Format(CCur(OtrosDatos), FormatoImporte) & ")"
         lblDpto(42).Caption = ""
         lblDpto(42).Tag = 0
         
@@ -11315,7 +11315,7 @@ End Sub
 
 Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
 Dim devuelve As String
-Dim cad As String
+Dim Cad As String
 Dim Subtipo As String 'F: fecha   N: numero   T: texto  H: HORA
 Dim TDes As TextBox
 Dim THas As TextBox
@@ -11394,8 +11394,8 @@ Dim DesH As TextBox '    "       HASTA
         If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        cad = CadenaDesdeHastaBD(TDes.Text, THas.Text, campo, Subtipo)
-        If Not AnyadirAFormula(cadSelect, cad) Then Exit Function
+        Cad = CadenaDesdeHastaBD(TDes.Text, THas.Text, campo, Subtipo)
+        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
@@ -11409,19 +11409,19 @@ Dim DesH As TextBox '    "       HASTA
 End Function
 
 
-Private Function AnyadirParametroDH(cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
+Private Function AnyadirParametroDH(Cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
 On Error Resume Next
     
      If TextoDESDE.Text <> "" Then
-        cad = cad & "desde " & TextoDESDE.Text
-        If TD.Text <> "" Then cad = cad & " - " & TD.Text
+        Cad = Cad & "desde " & TextoDESDE.Text
+        If TD.Text <> "" Then Cad = Cad & " - " & TD.Text
     End If
     If TextoHasta.Text <> "" Then
-        cad = cad & "  hasta " & TextoHasta.Text
-        If TH <> "" Then cad = cad & " - " & TH.Text
+        Cad = Cad & "  hasta " & TextoHasta.Text
+        If TH <> "" Then Cad = Cad & " - " & TH.Text
     End If
     
-    AnyadirParametroDH = cad
+    AnyadirParametroDH = Cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
@@ -13281,13 +13281,13 @@ Dim SQLNumlinea As String
         
         
             'select numlotes from slialp where codartic='0ALC99AL' and numalbar ='Da0001' and codprove=46066
-            OtrosDatos = "codartic='0ALC99AL' and numalbar =" & DBSet(miRsAux!Document, "T") & " AND codprove "
+            OtrosDatos = "codartic='0ALC99AL' and numalbar =" & DBSet(miRsAux!document, "T") & " AND codprove "
             miSQL = DevuelveDesdeBD(conAri, "numlotes", "slialp", OtrosDatos, miRsAux!codigope)
             If miSQL = "" Then
                 OtrosDatos = "slifpc.codprove=scafpa.codprove and slifpc.numfactu=scafpa.numfactu and"
                 OtrosDatos = OtrosDatos & " slifpc.fecfactu=scafpa.fecfactu and slifpc.numalbar=scafpa.numalbar and"
                 OtrosDatos = OtrosDatos & " scafpa.fechaalb " & cadFormula
-                OtrosDatos = OtrosDatos & " AND slifpc.codartic='0ALC99AL' and scafpa.numalbar =" & DBSet(miRsAux!Document, "T") & " AND scafpa.codprove "
+                OtrosDatos = OtrosDatos & " AND slifpc.codartic='0ALC99AL' and scafpa.numalbar =" & DBSet(miRsAux!document, "T") & " AND scafpa.codprove "
                 miSQL = DevuelveDesdeBD(conAri, "numlotes", "slifpc,scafpa ", OtrosDatos, miRsAux!codigope)
                 
             End If
@@ -13312,11 +13312,11 @@ Dim SQLNumlinea As String
                 SQLNumlinea = "if (round(cantidad,2) -" & DBSet(RS!cantidad, "N") & "=0,0,1)"
                 OtrosDatos = ""
                 OtrosDatos = "slienvpr2.codartic=sartic.codartic and sartic.codfamia=sfamia.codfamia " & OtrosDatos & " and codarti2='0ALC99AL' and codigo"
-                miSQL = DevuelveDesdeBD(conAri, "concat(numlote,'|',nomfamia,'|')", "slienvpr2,sartic,sfamia", OtrosDatos, RS!Document & " ORDER BY 2 ASC", , SQLNumlinea)
+                miSQL = DevuelveDesdeBD(conAri, "concat(numlote,'|',nomfamia,'|')", "slienvpr2,sartic,sfamia", OtrosDatos, RS!document & " ORDER BY 2 ASC", , SQLNumlinea)
                 If miSQL = "" Then
-                    MsgBox "No se encuentra el movimiento: " & RS!FechaMov & " " & RS!codArtic & " ENV: " & RS!Document
+                    MsgBox "No se encuentra el movimiento: " & RS!FechaMov & " " & RS!codArtic & " ENV: " & RS!document
                 Else
-                    OtrosDatos = DevuelveDesdeBD(conAri, "cantidad", "slienvpr", "codigo", RS!Document)  'Canitdad producida
+                    OtrosDatos = DevuelveDesdeBD(conAri, "cantidad", "slienvpr", "codigo", RS!document)  'Canitdad producida
                     Salidas = Salidas + RS!cantidad
                     cadNomRPT = "'" & OtrosDatos & "L'," & DBSet(RecuperaValor(miSQL, 1), "T") & "," & DBSet(RecuperaValor(miSQL, 2), "T")
                     cadNomRPT = cadNomRPT & "," & DBSet(RS!cantidad, "N") & "," & DBSet(RS!FechaMov, "F")
@@ -13328,12 +13328,12 @@ Dim SQLNumlinea As String
                 OtrosDatos = ""
                
                 OtrosDatos = "sliordpr2.codartic=sartic.codartic and sartic.codfamia=sfamia.codfamia and codarti2='0ALC99AL' " & OtrosDatos & " and codigo"
-                miSQL = DevuelveDesdeBD(conAri, "concat(numlote,'|',nomfamia,'|')", "sliordpr2,sartic,sfamia", OtrosDatos, RS!Document & " ORDER BY 2 ASC", , SQLNumlinea)
+                miSQL = DevuelveDesdeBD(conAri, "concat(numlote,'|',nomfamia,'|')", "sliordpr2,sartic,sfamia", OtrosDatos, RS!document & " ORDER BY 2 ASC", , SQLNumlinea)
                 If miSQL = "" Then
-                    MsgBox "No se encuentra el movimiento: " & RS!FechaMov & " " & RS!codArtic & " Prod: " & RS!Document, vbExclamation
+                    MsgBox "No se encuentra el movimiento: " & RS!FechaMov & " " & RS!codArtic & " Prod: " & RS!document, vbExclamation
                     
                 Else
-                    OtrosDatos = DevuelveDesdeBD(conAri, "cantidad", "sliordpr", "codigo", RS!Document)  'Cantidad producida
+                    OtrosDatos = DevuelveDesdeBD(conAri, "cantidad", "sliordpr", "codigo", RS!document)  'Cantidad producida
                     Salidas = Salidas + RS!cantidad
                     cadNomRPT = "'" & OtrosDatos & "L'," & DBSet(RecuperaValor(miSQL, 1), "T") & "," & DBSet(RecuperaValor(miSQL, 2), "T")
                     cadNomRPT = cadNomRPT & "," & DBSet(RS!cantidad, "N") & "," & DBSet(RS!FechaMov, "F")
@@ -13683,35 +13683,49 @@ Private Function ListadoFacturasAlbaranes() As Boolean
     'Facturas
     If Me.chkAlb(1).Value Then
         
-        miSQL = "select scafac1.codtipoa,scafac1.numalbar,fechaalb,codclien,nomclien,sum(importel) import,scafac1.codtipom,scafac1.numfactu,scafac1.fecfactu from"
-        miSQL = miSQL & " scafac inner join scafac1 on scafac.codtipom=scafac1.codtipom and scafac.numfactu=scafac1.numfactu and scafac.fecfactu=scafac1.fecfactu"
-        miSQL = miSQL & " inner join slifac on scafac.codtipom=slifac.codtipom and scafac.numfactu=slifac.numfactu and scafac.fecfactu=slifac.fecfactu"
-        miSQL = miSQL & " and scafac1.numalbar=slifac.numalbar and scafac1.codtipoa=slifac.codtipoa"
         
-        auxiliar = Replace(cadSelect, "scaalb", "scafac1")
-        auxiliar = Replace(auxiliar, "codtipom", "codtipoa")
-        miSQL = miSQL & " WHERE  " & auxiliar
-        '(scafac1.codtipoa)<>'ALZ' AND (((scafac1.fechaalb >= '2018-01-01') and (scafac1.fechaalb <= '2019-03-24')))
-        miSQL = miSQL & " group by 1,2 "
-
-        
-        miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        auxiliar = ""
-        While Not miRsAux.EOF
-            NumRegElim = NumRegElim + 1
+        'Junio 2021
+        'Los mantenimientos
+        For numParam = 1 To 2
+            If numParam = 2 Then
+                miSQL = "select 'MAN' codtipoa,codclien numalbar, scafac1.fecfactu fechaalb,codclien,nomclien,sum(importel) import,scafac1.codtipom,scafac1.numfactu,scafac1.fecfactu from"
+            Else
+                'Lo que habia
+                miSQL = "select scafac1.codtipoa,scafac1.numalbar,fechaalb,codclien,nomclien,sum(importel) import,scafac1.codtipom,scafac1.numfactu,scafac1.fecfactu from"
+            End If
+            miSQL = miSQL & " scafac inner join scafac1 on scafac.codtipom=scafac1.codtipom and scafac.numfactu=scafac1.numfactu and scafac.fecfactu=scafac1.fecfactu"
+            miSQL = miSQL & " inner join slifac on scafac.codtipom=slifac.codtipom and scafac.numfactu=slifac.numfactu and scafac.fecfactu=slifac.fecfactu"
+            miSQL = miSQL & " and scafac1.numalbar=slifac.numalbar and scafac1.codtipoa=slifac.codtipoa"
             
-            'tmpinformes   codusu codigo1   campo1 nombre1 fecha1      nombre2    importe1   nombre3 fecha2
-        
-            miSQL = ", (" & vUsu.Codigo & "," & NumRegElim & ",'" & miRsAux!Codtipoa & "'," & miRsAux!Numalbar & "," & DBSet(miRsAux!FechaAlb, "F")
-            miSQL = miSQL & "," & DBSet(Format(miRsAux!codClien, "00000") & "   " & miRsAux!NomClien, "T") & "," & DBSet(miRsAux!Import, "N")
-            miSQL = miSQL & "," & DBSet(miRsAux!codtipom & Format(miRsAux!Numfactu, "000000"), "T") & "," & DBSet(miRsAux!FecFactu, "F") & ")"
+            auxiliar = Replace(cadSelect, "scaalb", "scafac1")
+            auxiliar = Replace(auxiliar, "codtipom", "codtipoa")
+            miSQL = miSQL & " WHERE  " & auxiliar
+            miSQL = miSQL & " AND scafac.codtipom " & IIf(numParam = 1, "<>", "=") & " 'FAM'"
+                
             
-            auxiliar = auxiliar & miSQL
-            If Len(auxiliar) > 6000 Then InsertaEnTmpLstFactu
-            miRsAux.MoveNext
-        Wend
-        miRsAux.Close
-        InsertaEnTmpLstFactu
+            miSQL = miSQL & " group by 1,2 "
+    
+            
+            miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            auxiliar = ""
+            While Not miRsAux.EOF
+                NumRegElim = NumRegElim + 1
+                
+                'tmpinformes   codusu codigo1   campo1 nombre1 fecha1      nombre2    importe1   nombre3 fecha2
+            
+                miSQL = ", (" & vUsu.Codigo & "," & NumRegElim & ",'" & miRsAux!Codtipoa & "'," & miRsAux!Numalbar & "," & DBSet(miRsAux!FechaAlb, "F")
+                miSQL = miSQL & "," & DBSet(Format(miRsAux!codClien, "00000") & "   " & miRsAux!NomClien, "T") & "," & DBSet(miRsAux!Import, "N")
+                miSQL = miSQL & "," & DBSet(miRsAux!codtipom & Format(miRsAux!Numfactu, "000000"), "T") & "," & DBSet(miRsAux!FecFactu, "F") & ")"
+                
+                auxiliar = auxiliar & miSQL
+                If Len(auxiliar) > 6000 Then InsertaEnTmpLstFactu
+                miRsAux.MoveNext
+            Wend
+            miRsAux.Close
+            InsertaEnTmpLstFactu
+    
+        Next numParam
+        
     End If
     
     
@@ -14023,7 +14037,7 @@ End Sub
 Private Function GeneraFraCli() As Boolean
 Dim CodTraba As Long
 Dim RF As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim RIvas As ADODB.Recordset
  Dim IVA As Byte
  
@@ -14033,7 +14047,7 @@ Dim RIvas As ADODB.Recordset
     Set RF = New ADODB.Recordset
     Set RIvas = New ADODB.Recordset
     
-    miSQL = PonerTrabajadorConectado(cad)
+    miSQL = PonerTrabajadorConectado(Cad)
     If miSQL = "" Then Err.Raise 513, , "No se puede establecer el trabajador conectado"
     CodTraba = Val(miSQL)
     
@@ -14046,15 +14060,15 @@ Dim RIvas As ADODB.Recordset
     miSQL = DevuelveDesdeBD(conAri, "CodigoIVA", "sparamcoarval", "1", "1", "T")
     If miSQL = "" Then Err.Raise 513, , "parametros coarval. Ivas"
     cadSelect = miSQL 'CodigoIVA
-    cad = Mid(miSQL, 2)
+    Cad = Mid(miSQL, 2)
     
     miSQL = DevuelveDesdeBD(conAri, "CodigoIVARecargo", "sparamcoarval", "1", "1", "T")
     If miSQL = "" Then Err.Raise 513, , "parametros coarval. Ivas recargo"
     cadNomRPT = miSQL 'CodigoIVARecargo
-    cad = cad & Mid(miSQL, 2)
-    cad = Mid(cad, 1, Len(cad) - 1) 'quito el ulitmo pipe
-    cad = Replace(cad, "|", ",")
-    miSQL = "Select * from tiposiva WHERE codigiva in (" & cad & ") ORDER BY porceiva"
+    Cad = Cad & Mid(miSQL, 2)
+    Cad = Mid(Cad, 1, Len(Cad) - 1) 'quito el ulitmo pipe
+    Cad = Replace(Cad, "|", ",")
+    miSQL = "Select * from tiposiva WHERE codigiva in (" & Cad & ") ORDER BY porceiva"
     
     RIvas.Open miSQL, ConnConta, adOpenKeyset, adLockPessimistic, adCmdText
     
@@ -14066,95 +14080,95 @@ Dim RIvas As ADODB.Recordset
     While Not miRsAux.EOF
 
           'SCAFAC
-                cad = "INSERT INTO scafac(codtipom,numfactu,fecfactu,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,coddirec,"
-                cad = cad & " codagent,codforpa,dtoppago,dtognral,brutofac,impdtopp,impdtogr,"
-                cad = cad & " baseimp1,codigiv1,porciva1,imporiv1,porciva1re,imporiv1re,"
-                cad = cad & " baseimp2,codigiv2,porciva2,imporiv2,porciva2re,imporiv2re,"
-                cad = cad & " baseimp3,codigiv3,porciva3,imporiv3,porciva3re,imporiv3re,"
-                cad = cad & "  TotalFac,intconta) VALUES ("
+                Cad = "INSERT INTO scafac(codtipom,numfactu,fecfactu,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,coddirec,"
+                Cad = Cad & " codagent,codforpa,dtoppago,dtognral,brutofac,impdtopp,impdtogr,"
+                Cad = Cad & " baseimp1,codigiv1,porciva1,imporiv1,porciva1re,imporiv1re,"
+                Cad = Cad & " baseimp2,codigiv2,porciva2,imporiv2,porciva2re,imporiv2re,"
+                Cad = Cad & " baseimp3,codigiv3,porciva3,imporiv3,porciva3re,imporiv3re,"
+                Cad = Cad & "  TotalFac,intconta) VALUES ("
                     
                 'numserie,numfactu,fechaalt,base,total,base_sr,iva_sr,re_sr,total_sr,base_red,iva_red,re_red,total_red,base_norm,iva_norm,re_nor,total_nor
                 
                 'codtipom,numfactu,fecfactu,codclien,nomclien,domclien,codpobla,pobclien,proclien,nifclien,
-                cad = cad & DBSet(miRsAux!numSerie, "T") & "," & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & "," & DBSet(miRsAux!codClien, "N") & ","
-                cad = cad & DBSet(miRsAux!NomClien, "T") & "," & DBSet(miRsAux!domclien, "T") & "," & DBSet(miRsAux!codpobla, "T") & ","
-                cad = cad & DBSet(miRsAux!pobclien, "T") & "," & DBSet(miRsAux!proclien, "T") & "," & DBSet(miRsAux!nifClien, "T") & ",NULL,"
+                Cad = Cad & DBSet(miRsAux!numSerie, "T") & "," & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & "," & DBSet(miRsAux!codClien, "N") & ","
+                Cad = Cad & DBSet(miRsAux!NomClien, "T") & "," & DBSet(miRsAux!domclien, "T") & "," & DBSet(miRsAux!codpobla, "T") & ","
+                Cad = Cad & DBSet(miRsAux!pobclien, "T") & "," & DBSet(miRsAux!proclien, "T") & "," & DBSet(miRsAux!nifClien, "T") & ",NULL,"
                 
                 
                 'codagent,codforpa,dtoppago,dtognral,brutofac,impdtopp,impdtogr
                 miSQL = DevuelveDesdeBD(conAri, "codforpa", "sforpa", "nomforpa", miRsAux!ForPa, "T")
                 If miSQL = "" Then Err.Raise 513, , "Error en forma de pago"
-                cad = cad & vParamAplic.PorDefecto_Agente & "," & miSQL & ",0,0," & DBSet(Round2(miRsAux!Base, 2), "N") & ",0,0,"
+                Cad = Cad & vParamAplic.PorDefecto_Agente & "," & miSQL & ",0,0," & DBSet(Round2(miRsAux!Base, 2), "N") & ",0,0,"
                 
                 'BASE 1
                 IVA = 0
                 If Not IsNull(miRsAux!base_norm) Then
                     IVA = IVA + 1
                     miSQL = CadenaImportesIVA_Coarval(RIvas, 3)
-                    cad = cad & miSQL
+                    Cad = Cad & miSQL
                 End If
                 
                 If Not IsNull(miRsAux!base_red) Then
                     IVA = IVA + 1
                     miSQL = CadenaImportesIVA_Coarval(RIvas, 2)
-                    cad = cad & miSQL
+                    Cad = Cad & miSQL
                 End If
                 
                 If Not IsNull(miRsAux!base_sr) Then
                     IVA = IVA + 1
                     miSQL = CadenaImportesIVA_Coarval(RIvas, 1)
-                    cad = cad & miSQL
+                    Cad = Cad & miSQL
                 End If
                 
                 For numParam = IVA + 1 To 3
                     miSQL = "null,null,null,null,null,null,"
-                    cad = cad & miSQL
+                    Cad = Cad & miSQL
                 Next
                 
-                cad = cad & DBSet(miRsAux!total, "N") & ",1)"
+                Cad = Cad & DBSet(miRsAux!total, "N") & ",1)"
                 
                 
-                conn.Execute cad
+                conn.Execute Cad
                'SCAFAC1
                 'vParamAplic.PorDefecto_Agente
-                cad = "INSERT INTO scafac1(codtipom,numfactu,fecfactu,codtipoa,numalbar,fechaalb,codenvio,codtraba,codtrab1,codtrab2) VALUES ("
-                cad = cad & DBSet(miRsAux!numSerie, "T") & "," & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & "," & DBSet(miRsAux!numSerie, "T") & ","
-                cad = cad & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & "," & vParamAplic.PorDefecto_Envio & ","
-                cad = cad & CodTraba & "," & CodTraba & "," & CodTraba & ")"
-                conn.Execute cad
+                Cad = "INSERT INTO scafac1(codtipom,numfactu,fecfactu,codtipoa,numalbar,fechaalb,codenvio,codtraba,codtrab1,codtrab2) VALUES ("
+                Cad = Cad & DBSet(miRsAux!numSerie, "T") & "," & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & "," & DBSet(miRsAux!numSerie, "T") & ","
+                Cad = Cad & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & "," & vParamAplic.PorDefecto_Envio & ","
+                Cad = Cad & CodTraba & "," & CodTraba & "," & CodTraba & ")"
+                conn.Execute Cad
                 
                 'SVENCI
-                cad = "INSERT INTO svenci(codtipom,numfactu,fecfactu,ordefect,fecefect,impefect) VALUES ("
-                cad = cad & DBSet(miRsAux!numSerie, "T") & "," & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & ",1,"
-                cad = cad & DBSet(miRsAux!fechaalt, "F") & "," & DBSet(miRsAux!total, "N") & ")"
-                conn.Execute cad
+                Cad = "INSERT INTO svenci(codtipom,numfactu,fecfactu,ordefect,fecefect,impefect) VALUES ("
+                Cad = Cad & DBSet(miRsAux!numSerie, "T") & "," & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & ",1,"
+                Cad = Cad & DBSet(miRsAux!fechaalt, "F") & "," & DBSet(miRsAux!total, "N") & ")"
+                conn.Execute Cad
                  
                 'SLIFAC
-                cad = "select * FROM tmpintegracoarval where codusu  = " & vUsu.Codigo & " and numserie=" & DBSet(miRsAux!numSerie, "T")
-                cad = cad & " AND numfactu =" & miRsAux!Numfactu
-                RF.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Cad = "select * FROM tmpintegracoarval where codusu  = " & vUsu.Codigo & " and numserie=" & DBSet(miRsAux!numSerie, "T")
+                Cad = Cad & " AND numfactu =" & miRsAux!Numfactu
+                RF.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 IVA = 0
                 miSQL = ""
                 While Not RF.EOF
                     IVA = IVA + 1
                     'codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,codalmac,codartic,nomartic"
                     ',cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre"
-                    cad = DBSet(miRsAux!numSerie, "T") & "," & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & "," & DBSet(miRsAux!numSerie, "T") & ","
-                    cad = cad & miRsAux!Numfactu & "," & IVA & ",1,"
+                    Cad = DBSet(miRsAux!numSerie, "T") & "," & miRsAux!Numfactu & "," & DBSet(miRsAux!fechaalt, "F") & "," & DBSet(miRsAux!numSerie, "T") & ","
+                    Cad = Cad & miRsAux!Numfactu & "," & IVA & ",1,"
                     'codartic nomartic ',cantidad,
-                    cad = cad & DBSet(miRsAux!codArtic, "T") & "," & DBSet(miRsAux!NomArtic, "F") & "," & DBSet(miRsAux!cantidad, "N") & ","
+                    Cad = Cad & DBSet(miRsAux!codArtic, "T") & "," & DBSet(miRsAux!NomArtic, "F") & "," & DBSet(miRsAux!cantidad, "N") & ","
                     'numbultos,precioar,dtoline1,dtoline2,importel,origpre"
-                    cad = cad & DBSet(Int(miRsAux!cantidad), "N") & "," & DBSet(miRsAux!precioar, "N") & "," & DBSet(miRsAux!dtoline1, "N", "N") & ",0,"
-                    cad = cad & DBSet(miRsAux!ImporteL, "N") & ",'T')"
-                    miSQL = miSQL & ", (" & cad
+                    Cad = Cad & DBSet(Int(miRsAux!cantidad), "N") & "," & DBSet(miRsAux!precioar, "N") & "," & DBSet(miRsAux!dtoline1, "N", "N") & ",0,"
+                    Cad = Cad & DBSet(miRsAux!ImporteL, "N") & ",'T')"
+                    miSQL = miSQL & ", (" & Cad
                     RF.MoveNext
                 Wend
                 RF.Close
                 If miSQL <> "" Then
                     miSQL = Mid(miSQL, 2)
-                    cad = "insert into slifac(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,codalmac,codartic,nomartic"
-                    cad = cad & ",cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre) VALUES " & miSQL
-                    conn.Execute cad
+                    Cad = "insert into slifac(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,codalmac,codartic,nomartic"
+                    Cad = Cad & ",cantidad,numbultos,precioar,dtoline1,dtoline2,importel,origpre) VALUES " & miSQL
+                    conn.Execute Cad
                 End If
                         
                 
@@ -14470,9 +14484,22 @@ Private Sub PonerImportesFormaPagoALVIC()
     
     'informacion adicional
     Me.lw(10).ListItems.Clear
-    miSQL = "select mid(numalbaran,1,1) tipo , if(numfactura is null,'Albaran','Factura') facturado, count(*) cuanto,min(numalbaran) minimo,max(numalbaran) maximo"
-    miSQL = miSQL & "  from tmpgasolimport where codusu =" & vUsu.Codigo & " group by 1,2 order by 1 asc , 2 asc"
+    
+    If CadenaDesdeOtroForm <> "" Then
+        'ALVIC
+        CadenaDesdeOtroForm = ""
+        miSQL = "select mid(numalbaran,1,1) tipo , if(numfactura is null,'Albaran','Factura') facturado, count(*) cuanto,min(numalbaran) minimo,max(numalbaran) maximo"
+        miSQL = miSQL & "  , '' minfra , '' maxfra"
+        miSQL = miSQL & "  from tmpgasolimport where codusu =" & vUsu.Codigo & " group by 1,2 order by 1 asc , 2 asc"
+    Else
+        miSQL = "select mid(numalbaran,1,3) tipo , if(numfactura is null,'Albaran','Factura') facturado, count(*) cuanto,min(numalbaran) minimo,max(numalbaran) maximo"
+        miSQL = miSQL & "  , min(coalesce(numfactura,'')) minfra , max(coalesce(numfactura,'')) maxfra"
+        miSQL = miSQL & "  from tmpgasolimport where codusu =" & vUsu.Codigo & " group by 1,2 order by 1 asc , 2 asc"
+    End If
+    
+    
     miRsAux.Open miSQL, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    
     miSQL = ""
     cadFormula = ""
     While Not miRsAux.EOF
@@ -14488,7 +14515,9 @@ Private Sub PonerImportesFormaPagoALVIC()
             miSQL = miRsAux!Tipo & "|"
            
         End If
+        
         miSQL = miSQL & miRsAux!Facturado & "*" & miRsAux!cuanto & "*" & miRsAux!Minimo & "*" & miRsAux!Maximo & "*|"
+        If miRsAux!Facturado = "Factura" Then miSQL = miSQL & "*" & miRsAux!minfra & "*" & miRsAux!Maxfra & "*|"
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -14553,15 +14582,22 @@ Dim IT As ListItem
 
     cadSelect = RecuperaValor(miSQL, 3)
     cadSelect = Replace(cadSelect, "*", "|")
+    If cadSelect = "|||" Then cadSelect = ""
     If cadSelect <> "" Then
         cadNomRPT = "Tipo " & RecuperaValor(miSQL, 1)
         cadNomRPT = cadNomRPT & " - " & RecuperaValor(cadSelect, 1)
         
         Set IT = lw(10).ListItems.Add(, , cadNomRPT)
-        
+        miSQL = RecuperaValor(miSQL, 4)
+        miSQL = Replace(miSQL, "*", "|")
+        If Len(miSQL) > 5 Then
+            miSQL = "   " & RecuperaValor(miSQL, 2) & "   " & RecuperaValor(miSQL, 3)
+        Else
+            miSQL = ""
+        End If
         cadNomRPT = "Nº " & Right("00000" & RecuperaValor(cadSelect, 2), 5) '& "   Min: " & RecuperaValor(cadSelect, 3) & "    Max: " & RecuperaValor(cadSelect, 4)
         
-        
+        cadNomRPT = cadNomRPT & miSQL
         IT.SubItems(1) = cadNomRPT
     End If
 

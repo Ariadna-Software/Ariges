@@ -38,7 +38,6 @@ Begin VB.Form frmListadoOfer
          Left            =   3600
          TabIndex        =   764
          Top             =   2160
-         Visible         =   0   'False
          Width           =   1935
       End
       Begin VB.TextBox txtCodigo 
@@ -126,6 +125,15 @@ Begin VB.Form frmListadoOfer
          Width           =   3015
          Begin VB.OptionButton OptPapelBlanco 
             Caption         =   "Cliente"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Left            =   240
             TabIndex        =   3
@@ -134,11 +142,20 @@ Begin VB.Form frmListadoOfer
          End
          Begin VB.OptionButton OptPapelMembrete 
             Caption         =   "Interna"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
-            Left            =   1800
+            Left            =   1680
             TabIndex        =   2
             Top             =   360
-            Width           =   975
+            Width           =   1215
          End
       End
       Begin MSComctlLib.ListView ListView2 
@@ -14477,6 +14494,7 @@ Dim jj As Integer
 
 
 
+
     CadenaParaEnvioMail = "1|" & codClien & "|"
     indCodigo = InStr(1, CadenaDesdeOtroForm, "IN")
     If indCodigo = 0 Then
@@ -16174,11 +16192,62 @@ Dim Aux As String
             cadSelect = cadSelect & " WHERE codusu = " & vUsu.Codigo & " and codclien=codprove"
             conn.Execute cadSelect
             
+            'Junio 2021
+            'Añado ; al final si "tienen algo" de email
+            lblInd.Caption = "Multidirecciones"
+            lblInd.Refresh
+    
+            cadSelect = "UPDATE tmpnlotes SET  nomartic=concat(nomartic,';')"
+            cadSelect = cadSelect & " WHERE codusu = " & vUsu.Codigo & " and coalesce(nomartic,'')<>''"
+            conn.Execute cadSelect
+            'Junio 2021
+            'Vamos a ver si algun cliente tiene puesto el envio a mas de una direccion
+            cadSelect = "SELECT codclien, GROUP_CONCAT( maidirec separator ';') from scliendp where incluirenviofacturacion =1 and maidirec<>'' and codclien "
+            cadSelect = cadSelect & " IN (select distinct codprove from tmpnlotes where codusu=" & vUsu.Codigo & ")"
+            RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            NumRegElim = 0
+            While Not RS.EOF
+                cadSelect = RS.Fields(1) & ";"
+                cadSelect = "UPDATE tmpnlotes SET nomartic =concat(nomartic," & DBSet(cadSelect, "T") & ") where codusu=" & vUsu.Codigo & " AND codprove= " & RS!codClien
+                conn.Execute cadSelect
+                NumRegElim = NumRegElim + 1
+                RS.MoveNext
+            Wend
+            RS.Close
+            
+            If NumRegElim > 0 Then
+                'Ha updateado emails
+                'Vere SI son correctos, ya que como mucho aceptamos 255 caracteres para la direccion email
+                cadSelect = "select * from tmpnlotes where codusu=" & vUsu.Codigo & " AND nomartic<>'' and right(nomartic,1)<>';'"
+                RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                cadSelect = ""
+                NumRegElim = 0
+                While Not RS.EOF
+                    cadSelect = "Cliente: " & RS!Codprove & vbCrLf & RS!NomArtic & vbCrLf & vbCrLf
+                    RS.MoveNext
+                Wend
+                RS.Close
+                If cadSelect <> "" Then
+                    cadSelect = "eMail incorrecto: " & vbCrLf & cadSelect
+                    MsgBox cadSelect, vbExclamation
+                    Exit Sub
+                End If
+            End If
+            lblInd.Caption = "Envio"
+            lblInd.Refresh
+
+            
+            
+            
+            'Sigo como estaba
+            
+            
             'Si hay algun departamento con direccion email
             cadSelect = "UPDATE tmpnlotes,sdirec set nomartic=maidirec"
             cadSelect = cadSelect & " WHERE codusu = " & vUsu.Codigo & " and codclien=codprove"
             cadSelect = cadSelect & " and codclien=codprove and coddirec=numlotes +0  and maidirec <>''"
             conn.Execute cadSelect
+            
             
             cadSelect = "Select * from tmpnlotes "
             cadSelect = cadSelect & " WHERE codusu = " & vUsu.Codigo & " and coalesce(nomartic,'')=''"
@@ -16251,7 +16320,12 @@ Dim Aux As String
     
     
     PonerTamnyosMail2 True
-    frmPpal.visible = False
+    
+    If vUsu.Skin >= 0 Then
+        frmPpalN.visible = False
+    Else
+        frmPpalOld.visible = False
+    End If
     'Voy arriesgar.
     'Confio en que no envien por mail mas de 32000 facturas (un integer)
     Label4(22).Caption = "Preparando datos"
@@ -16261,7 +16335,6 @@ Dim Aux As String
     Me.ProgressBar1.Max = 1000
     MaxNumerRegistroSEnProgressBar1 = CLng(NomTabla)
 
-    
     
     
     
@@ -16314,7 +16387,12 @@ Dim Aux As String
     PonerTamnyosMail2 False
     Espera 1
     Unload Me
-    frmPpal.Show
+    
+    If vUsu.Skin >= 0 Then
+        frmPpalN.Show
+    Else
+        frmPpalOld.Show
+    End If
 
     Screen.MousePointer = vbDefault
 End Sub
@@ -16896,7 +16974,7 @@ Dim devuelve As String
                 cargaDocumentos
                 chkVarios(12).visible = False  'IVA incluido
             Else
-                chkVarios(12).visible = OpcionListado = False ' 31
+                chkVarios(12).visible = OpcionListado = 31
             End If
             
         Case 32, 33 '32: Recordatorio de Ofertas
@@ -17113,7 +17191,7 @@ Dim devuelve As String
                 Me.Label9(31).Caption = "Detalle Facturación Clientes"
                 CargaTipoMov
                 
-                Label9(56).Caption = IIf(vParamAplic.NumeroInstalacion = 2, "Asociación", "Ruta")
+                Label9(56).Caption = IIf(vParamAplic.NumeroInstalacion = vbHerbelca, "Asociación", "Ruta")
             Else
                 
             End If
@@ -17123,6 +17201,7 @@ Dim devuelve As String
             
             
             chkDatosAlbaranes(8).visible = (OpcionListado = 231)
+            chkDatosAlbaranes(10).visible = (OpcionListado <> 231)
             FrameDetalleFacturacion.visible = OpcionListado = 231
             
             PonerFrameVisible Me.FrameEstVentasFam, True, H, W
@@ -18864,7 +18943,8 @@ Private Sub PonerFramePedVisible(H As Integer, W As Integer)
             NomTabla = "scaped"
             NomTablaLin = "sliped"
             Me.Label12(3).Caption = "Imprimir otros Pedidos del Cliente:"
-            chkVarios(10).visible = vUsu.Nivel < 1
+            'Estaba asi 09/junio/21 Lo pongo a true vUsu.Nivel < 1
+            chkVarios(10).visible = IIf(vParamAplic.NumeroInstalacion = vbHerbelca, True, vUsu.Nivel < 1) 'en herbelc siempre visible
         Case 239 'Historico de Pedidos Venta
             Me.Label12(0).Caption = "Informe Hist. Pedidos ventas"
             NomTabla = "schped" 'Cabecera  Hco de Pedidos de clientes

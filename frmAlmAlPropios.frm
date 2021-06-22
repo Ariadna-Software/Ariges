@@ -496,7 +496,7 @@ End Sub
 Private Sub BotonModificar()
 Dim cad As String
 Dim anc As Single
-Dim i As Integer
+Dim I As Integer
     
     If Adodc1.Recordset.EOF Then Exit Sub
     If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
@@ -504,17 +504,17 @@ Dim i As Integer
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
     anc = ObtenerAlto(DataGrid1, 10)
     
     cad = ""
-    For i = 0 To 1
-        cad = cad & DataGrid1.Columns(i).Text & "|"
-    Next i
+    For I = 0 To 1
+        cad = cad & DataGrid1.Columns(I).Text & "|"
+    Next I
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
@@ -566,7 +566,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim cadB As String
 
     On Error Resume Next
@@ -585,11 +585,11 @@ Dim cadB As String
                 If BLOQUEADesdeFormulario(Me) Then
                     If ModificaDesdeFormulario(Me, 3) Then
                         TerminaBloquear
-                        i = Adodc1.Recordset.Fields(0)
+                        I = Adodc1.Recordset.Fields(0)
                         PonerModo 2
                         CancelaADODC Me.Adodc1
                         CargaGrid
-                        Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
+                        Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & I)
                     End If
                     PonerFocoGrid Me.DataGrid1
                 End If
@@ -728,17 +728,17 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 5: mnBuscar_Click
         Case 6: mnVerTodos_Click
         Case 8: 'Botón Imprimir Listado
-                Me.Hide
+               
 '                AbrirListado (2) 'Opción 2 de los Listados
                 frmInformesNew.OpcionListado = 2 'OpcionListado=1
                 frmInformesNew.Show vbModal
-                Me.Show vbModal
+                
     End Select
 End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim i As Byte
+Dim I As Byte
 Dim b As Boolean
     
     b = DataGrid1.Enabled
@@ -753,15 +753,15 @@ Dim b As Boolean
     DataGrid1.RowHeight = 350
     
     'Nombre producto
-    i = 0
-        DataGrid1.Columns(i).Caption = "Almacen"
-        DataGrid1.Columns(i).Width = 1000
-        DataGrid1.Columns(i).NumberFormat = FormatoCod
+    I = 0
+        DataGrid1.Columns(I).Caption = "Almacen"
+        DataGrid1.Columns(I).Width = 1000
+        DataGrid1.Columns(I).NumberFormat = FormatoCod
     
     'Leemos del vector en 2
-    i = 1
-        DataGrid1.Columns(i).Caption = "Denominación"
-        DataGrid1.Columns(i).Width = 4630
+    I = 1
+        DataGrid1.Columns(I).Caption = "Denominación"
+        DataGrid1.Columns(I).Width = 4630
             
     'Fiajamos el cadancho
     If Not CadAncho Then
@@ -772,9 +772,9 @@ Dim b As Boolean
     End If
    
    'No permitir cambiar tamaño de columnas
-   For i = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(i).AllowSizing = False
-   Next i
+   For I = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(I).AllowSizing = False
+   Next I
    
    'Habilitamos botones Modificar y Eliminar
    If Toolbar1.Buttons(6).Enabled Then

@@ -950,7 +950,7 @@ Dim indCodigo As Integer
 
 
 Private Sub cmdAceptar_Click()
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -969,8 +969,8 @@ Dim cad As String, Indicador As String
                 If ModificaDesdeFormulario(Me, 1) Then
                     ModificarENTesoeria
                     TerminaBloquear
-                    cad = "(codforpa=" & Text1(0).Text & ")"
-                    If SituarData(data1, cad, Indicador) Then
+                    Cad = "(codforpa=" & Text1(0).Text & ")"
+                    If SituarData(Data1, Cad, Indicador) Then
                         PonerModo 2
                         lblIndicador.Caption = Indicador
                         PonerFoco Text1(0)
@@ -1022,7 +1022,7 @@ Private Sub BotonBuscar()
         Text1(0).BackColor = vbLightBlue
     Else
         HacerBusqueda
-        If data1.Recordset.EOF Then
+        If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
             Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
@@ -1045,9 +1045,9 @@ End Sub
 
 Private Sub Desplazamiento(Index As Integer)
 'Para desplazarse por los registros de control Data
-    DesplazamientoData data1, Index, True
+    DesplazamientoData Data1, Index, True
     PonerCampos
-    lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
+    lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
 End Sub
 
 
@@ -1066,35 +1066,35 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim cad As String
+Dim Cad As String
 
     'Ciertas comprobaciones
-    If data1.Recordset.EOF Then Exit Sub
+    If Data1.Recordset.EOF Then Exit Sub
     
     If Not PuedeModificarFPenContab Then Exit Sub
     
     '### a mano
-    cad = "¿Seguro que desea eliminar la Forma de Pago?" & vbCrLf
-    cad = cad & vbCrLf & "Cod. Forma Pago: " & Format(data1.Recordset.Fields(0), "000")
-    cad = cad & vbCrLf & "Desc. Forma Pago: " & data1.Recordset.Fields(1)
+    Cad = "¿Seguro que desea eliminar la Forma de Pago?" & vbCrLf
+    Cad = Cad & vbCrLf & "Cod. Forma Pago: " & Format(Data1.Recordset.Fields(0), "000")
+    Cad = Cad & vbCrLf & "Desc. Forma Pago: " & Data1.Recordset.Fields(1)
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
-        NumRegElim = data1.Recordset.AbsolutePosition
+        NumRegElim = Data1.Recordset.AbsolutePosition
         Screen.MousePointer = vbHourglass
 
-        cad = "En ariges"
-        data1.Recordset.Delete
+        Cad = "En ariges"
+        Data1.Recordset.Delete
         
         
         'Para eliminar en tesoreria
         If vParamAplic.ContabilidadNueva Then
-            cad = "DELETE FROM formapago WHERE codforpa = " & Text1(0).Text
+            Cad = "DELETE FROM formapago WHERE codforpa = " & Text1(0).Text
         Else
-            cad = "DELETE FROM sforpa WHERE codforpa = " & Text1(0).Text
+            Cad = "DELETE FROM sforpa WHERE codforpa = " & Text1(0).Text
         End If
-        If SituarDataTrasEliminar(data1, NumRegElim) Then
+        If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
         Else 'Solo habia un registro
             LimpiarCampos
@@ -1104,30 +1104,30 @@ Dim cad As String
         
         'Borro en tesoreria
          
-        ConnConta.Execute cad
+        ConnConta.Execute Cad
         
     End If
     Screen.MousePointer = vbDefault
 Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
-        data1.Recordset.CancelUpdate
-        MuestraError Err.Number, "Eliminar Forma de Pago" & vbCrLf & cad, Err.Description
+        Data1.Recordset.CancelUpdate
+        MuestraError Err.Number, "Eliminar Forma de Pago" & vbCrLf & Cad, Err.Description
     End If
 End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
-    If data1.Recordset.EOF Then
+    If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = data1.Recordset.Fields(0) & "|"
-    cad = cad & data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1184,10 +1184,10 @@ Private Sub Form_Load()
     chkVistaPrevia.Value = CheckValueLeer(Name)
     
     'ASignamos un SQL al DATA1
-    data1.ConnectionString = conn
+    Data1.ConnectionString = conn
     '## A mano
-    data1.RecordSource = "Select * from " & NombreTabla & " where codforpa=-1"
-    data1.Refresh
+    Data1.RecordSource = "Select * from " & NombreTabla & " where codforpa=-1"
+    Data1.Refresh
     If DatosADevolverBusqueda = "" Then
         PonerModo 0
     Else
@@ -1464,7 +1464,7 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim cad As String
+Dim Cad As String
 
     Set frmB = New frmBasico2
     AyudaFormasPago frmB, , cadB, True
@@ -1477,9 +1477,9 @@ Private Sub PonerCadenaBusqueda()
 On Error GoTo EEPonerBusq
     
     Screen.MousePointer = vbHourglass
-    data1.RecordSource = CadenaConsulta
-    data1.Refresh
-    If data1.Recordset.RecordCount <= 0 Then
+    Data1.RecordSource = CadenaConsulta
+    Data1.Refresh
+    If Data1.Recordset.RecordCount <= 0 Then
         If Modo = 1 Then 'Busqueda
              MsgBox "No hay ningún registro en la tabla " & NombreTabla & " para ese criterio de Búsqueda.", vbInformation
              PonerFoco Text1(0)
@@ -1491,7 +1491,7 @@ On Error GoTo EEPonerBusq
          Exit Sub
     Else
         PonerModo 2
-        data1.Recordset.MoveFirst
+        Data1.Recordset.MoveFirst
         PonerCampos
     End If
 
@@ -1509,13 +1509,13 @@ Private Sub PonerCampos()
 
     On Error GoTo EPonerCampos
 
-    If data1.Recordset.EOF Then Exit Sub
-    PonerCamposForma Me, Me.data1
+    If Data1.Recordset.EOF Then Exit Sub
+    PonerCamposForma Me, Me.Data1
     Text2(6).Text = PonerNombreDeCod(Text1(6), 1, "sforpa", "nomforpa", "codforpa")
     Text2(7).Text = PonerNombreDeCod(Text1(7), 1, "sforpa", "nomforpa", "codforpa")
     
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
+    lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
 
 EPonerCampos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo Campos", Err.Description
@@ -1527,7 +1527,7 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1535,10 +1535,10 @@ Dim NumReg As Byte
     
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
         If Modo = 1 Then Me.lblIndicador.Caption = "BUSQUEDA"
     Else
         cmdRegresar.visible = False
@@ -1546,19 +1546,19 @@ Dim NumReg As Byte
     
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
     NumReg = 1
-    If Not data1.Recordset.EOF Then
-        If data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
+    If Not Data1.Recordset.EOF Then
+        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
-    DesplazamientoVisible b And data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
 
     
     '----------------------------------------------
     'Modo insertar o modificar
-    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = b Or Modo = 1
-    cmdCancelar.visible = b Or Modo = 1
-    If b Or Modo = 1 Then
+    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = B Or Modo = 1
+    cmdCancelar.visible = B Or Modo = 1
+    If B Or Modo = 1 Then
         cmdCancelar.Cancel = True
     Else
         cmdCancelar.Cancel = False
@@ -1576,9 +1576,9 @@ Dim NumReg As Byte
     
     Combo1.Enabled = (Modo = 3) Or (Modo = 4) Or (Modo = 1)
     
-    b = (Modo = 3) 'Insertar
+    B = (Modo = 3) 'Insertar
     'Campos Importe Mínimo y % Adelantado
-    If b Then
+    If B Then
         For i = 8 To 9
             BloquearTxt Text1(i), True
         Next i
@@ -1599,78 +1599,81 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    mnEliminar.Enabled = B
+    Toolbar1.Buttons(8).Enabled = B
     
-    b = (Modo >= 3)
+    
+
     'Insertar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnNuevo.Enabled = Not b
+    B = B Or Modo = 0
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'VerTodos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
-    Toolbar1.Buttons(8).Enabled = False
+        B = (Modo >= 3)
     
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
-Dim cad As String
+Dim B As Boolean
+Dim Cad As String
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
      
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then B = False
     End If
      
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     'Comprobar que si nº vencimientos es 1, el campo resto vencimientos no tiene valor
     If Val(Text1(2).Text) = 1 Then
         If Not EsVacio(Text1(4)) Then
             MsgBox "El campo Resto Vencimientos no puede tener valor si NºVtos=1", vbInformation
-            b = False
+            B = False
         End If
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
      
     'Comprobar el campo resto vencimientos
     If Not EsVacio(Text1(2)) And Not EsVacio(Text1(3)) Then
         If Val(Text1(2).Text) > 1 And EsVacio(Text1(4)) Then
             MsgBox "El Campo Resto Vencimientos debe tener valor", vbInformation
             PonerFoco Text1(4)
-            b = False
+            B = False
         End If
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     'Comprobar el importe Mínimo
     'Requerido si se selecciona una forma de pago alternativa
     If Not EsVacio(Text1(6)) And EsVacio(Text1(8)) Then
        MsgBox "El campo Importe Mínimo debe tener valor", vbInformation
        PonerFoco Text1(8)
-       b = False
+       B = False
     End If
     'Verificar que el campo Importe Minimo no tiene valor si la forma de pago es vacio
     If EsVacio(Text1(6)) And Not EsVacio(Text1(8)) Then
         MsgBox "El campo Importe Mínimo no puede tener valor si no selecciona Forma de Pago.", vbInformation
-        b = False
+        B = False
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     
     'Porcentaje Adelantado
@@ -1678,26 +1681,26 @@ Dim cad As String
     If Not EsVacio(Text1(7)) And EsVacio(Text1(9)) Then
         MsgBox "El campo % Adelantado debe tener valor", vbInformation
         PonerFoco Text1(9)
-        b = False
+        B = False
     End If
     'Verificar que el campo %adelantado no tiene valor si la forma de pago es vacio
     If EsVacio(Text1(7)) And Not EsVacio(Text1(9)) Then
         MsgBox "El campo %Adelantado no puede tener valor si no selecciona Forma de Pago.", vbInformation
-        b = False
+        B = False
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
         
         
     'Marzo 2011
     '----------------------------------
     'Comprobaremos que son correctas las formas de pago adelantao y alternativa, y que no son la misma
     'que la principal
-    If b Then
+    If B Then
         'Alternativa
         If Text1(6).Text <> "" Then
             If Text1(6).Text = Text1(0).Text Then
                 MsgBox "Mismo código de forma de pago y la forma de pago alternativa", vbExclamation
-                b = False
+                B = False
             End If
         End If
         
@@ -1706,7 +1709,7 @@ Dim cad As String
         If Text1(7).Text <> "" Then
             If Text1(7).Text = Text1(0).Text Then
                 MsgBox "Mismo código de forma de pago y la forma de pago adelantado", vbExclamation
-                b = False
+                B = False
             End If
         End If
         
@@ -1715,20 +1718,20 @@ Dim cad As String
         
         
         'Salimos si no esta bien
-        If Not b Then Exit Function
+        If Not B Then Exit Function
     End If
         
     'Codigo integrracion
     'idForpaT
     If Text1(11).Text <> "" Then
-        cad = ""
-        If Modo = 4 Then cad = "codforpa <> " & Text1(0).Text & " AND "
-        cad = cad & "idForpaT "
-        cad = DevuelveDesdeBD(conAri, "concat(codforpa,' - ',nomforpa)", "sforpa", cad, Text1(11).Text)
-        If cad <> "" Then
-            cad = "Codigo integracion ya esta en la forma de pago: " & cad
-            MsgBox cad, vbExclamation
-            b = False
+        Cad = ""
+        If Modo = 4 Then Cad = "codforpa <> " & Text1(0).Text & " AND "
+        Cad = Cad & "idForpaT "
+        Cad = DevuelveDesdeBD(conAri, "concat(codforpa,' - ',nomforpa)", "sforpa", Cad, Text1(11).Text)
+        If Cad <> "" Then
+            Cad = "Codigo integracion ya esta en la forma de pago: " & Cad
+            MsgBox Cad, vbExclamation
+            B = False
         End If
     End If
     'Comprobaciones de TESORERIA
@@ -1737,7 +1740,7 @@ Dim cad As String
         If Not PuedeModificarFPenContab Then Exit Function
     End If
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1752,6 +1755,8 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             mnBuscar_Click
         Case 6  'Todos
             mnVerTodos_Click
+        Case 8
+            PrintNou
         Case 1  'Nuevo
             mnNuevo_Click
         Case 2  'Modificar
@@ -1761,6 +1766,38 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
+Private Sub PrintNou()
+
+    With frmImprimir2
+        .cadTabla2 = "sforpa"
+        .Informe2 = "rFacFPago.rpt"
+        indCodigo = InStr(1, Data1.RecordSource, " WHERE ")
+        If indCodigo > 0 Then
+            CadenaConsulta = Mid(Data1.RecordSource, indCodigo + 7)
+        Else
+            CadenaConsulta = ""
+        End If
+        
+        indCodigo = InStr(1, CadenaConsulta, " ORDER BY ")
+        If indCodigo > 0 Then CadenaConsulta = Mid(CadenaConsulta, 1, indCodigo)
+        If CadenaConsulta <> "" Then
+            .cadRegSelec = SQL2SF_David(CadenaConsulta, "sforpa|")
+        Else
+            .cadRegSelec = ""
+        End If
+        .cadRegActua = Replace(POS2SF(Data1, Me), "sforpa", "sforpa")
+        .cadTodosReg = ""
+        '.OtrosParametros2 = "pEmpresa='" & vEmpresa.NomEmpre & "'|pOrden={clientes.ape_raso}|"
+        .OtrosParametros2 = "|pEmpresa='" & vEmpresa.nomempre & "'|"
+        .NumeroParametros2 = 2
+        .MostrarTree2 = False
+        .InfConta2 = False
+        .ConSubInforme2 = False
+
+        .Show vbModal
+    End With
+
+End Sub
 
 Private Sub PonerOpcionesMenu()
     PonerOpcionesMenuGeneral Me
@@ -1776,7 +1813,7 @@ End Sub
 
 
 Private Function PuedeModificarFPenContab() As Boolean
-Dim cad As String
+Dim Cad As String
     PuedeModificarFPenContab = False
     Set miRsAux = New ADODB.Recordset
 
@@ -1785,12 +1822,12 @@ Dim cad As String
     'Vere si la forma de pago es forma de pago alternativa
     If Modo = 2 Then
         NumRegElim = 0
-        cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpaalt", CStr(Val(Text1(0).Text)))
-        If cad = "" Then cad = "0"
-        If Val(cad) > 0 Then NumRegElim = 1
-        cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpapor", Text1(0).Text)
-        If cad = "" Then cad = "0"
-        If Val(cad) > 0 Then NumRegElim = 1
+        Cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpaalt", CStr(Val(Text1(0).Text)))
+        If Cad = "" Then Cad = "0"
+        If Val(Cad) > 0 Then NumRegElim = 1
+        Cad = DevuelveDesdeBD(conAri, "count(*)", "sforpa", "forpapor", Text1(0).Text)
+        If Cad = "" Then Cad = "0"
+        If Val(Cad) > 0 Then NumRegElim = 1
         
         If NumRegElim > 0 Then
             MsgBox "La forma de pago es forma de pago alternativa o por adelantado de otra", vbExclamation
@@ -1799,9 +1836,9 @@ Dim cad As String
         
         
         If vParamAplic.AguasPotables Then
-            cad = DevuelveDesdeBD(conAri, "Count(*)", "aguacontadores", "codforpa", Text1(0).Text)
-            If cad = "" Then cad = "0"
-            If Val(cad) > 0 Then
+            Cad = DevuelveDesdeBD(conAri, "Count(*)", "aguacontadores", "codforpa", Text1(0).Text)
+            If Cad = "" Then Cad = "0"
+            If Val(Cad) > 0 Then
                 MsgBox "Tiene contadores de agua asociados a esta forma de pago", vbExclamation
                 Exit Function
             End If
@@ -1812,24 +1849,24 @@ Dim cad As String
 
     NumRegElim = 0
     If vParamAplic.ContabilidadNueva Then
-        cad = "Select count(*) from cobros where codforpa=" & Text1(0).Text
+        Cad = "Select count(*) from cobros where codforpa=" & Text1(0).Text
     Else
-        cad = "Select count(*) from scobro where codforpa=" & Text1(0).Text
+        Cad = "Select count(*) from scobro where codforpa=" & Text1(0).Text
     End If
     
-    miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
+    miRsAux.Open Cad, ConnConta, adOpenForwardOnly, adLockPessimistic
     If Not miRsAux.EOF Then NumRegElim = NumRegElim + DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
     
     
     If vParamAplic.ContabilidadNueva Then
-        cad = "Select count(*) from pagos where codforpa=" & Text1(0).Text
+        Cad = "Select count(*) from pagos where codforpa=" & Text1(0).Text
     Else
-        cad = "Select count(*) from spagop where codforpa=" & Text1(0).Text
+        Cad = "Select count(*) from spagop where codforpa=" & Text1(0).Text
     End If
     
     
-    miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
+    miRsAux.Open Cad, ConnConta, adOpenForwardOnly, adLockPessimistic
     If Not miRsAux.EOF Then NumRegElim = NumRegElim + DBLet(miRsAux.Fields(0), "N")
     miRsAux.Close
     

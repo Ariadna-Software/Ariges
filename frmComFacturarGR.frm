@@ -1467,7 +1467,12 @@ Dim N  As Long
             End If
         End If
         
-        If MsgBox("¿Generar la factura?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        
+        If Val(DevuelveDesdeBD(conAri, "count(*)", "sproveanticipo", "descontado=0 AND codprove", Text1(3).Text)) = 0 Then
+            If MsgBox("¿Generar la factura?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
+        End If
+        
+        
         If cadWhere = "" Then
             
             If Me.Codprove > 0 Then
@@ -2611,15 +2616,15 @@ Dim Cad As String
     
     
      If Me.Codprove > 0 Then
+        If cadWhere = "" Then
+            If Not DatosOk Then Exit Sub
             If cadWhere = "" Then
-                If Not DatosOk Then Exit Sub
-                If cadWhere = "" Then
-                    ListView1.ListItems(1).Checked = False
-                    MsgBox "Selecione un albaran", vbExclamation
-                    Exit Sub
-                End If
+                ListView1.ListItems(1).Checked = False
+                MsgBox "Selecione un albaran", vbExclamation
+                Exit Sub
             End If
         End If
+    End If
     
     
     
@@ -2631,9 +2636,42 @@ Private Function GenerarFactura_() As Boolean
 Dim vFactu As CFacturaCom
 Dim Cad  As String
 Dim CadenaContab As String
+Dim TieneAnticiposPendientesDescontar As String
 
         On Error GoTo Error1
         GenerarFactura_ = False
+        
+        
+        TieneAnticiposPendientesDescontar = ""
+        Cad = DevuelveDesdeBD(conAri, "count(*)", "sproveanticipo", "descontado=0 AND codprove", Text1(3).Text)
+        If Val(Cad) > 0 Then
+            'Lanzareamos pantalla para seleccionar anticipo o anticipos
+            ' si cancela, cancelamos
+            CadenaDesdeOtroForm = ""
+            frmMensajes.OpcionMensaje = 32
+            frmMensajes.cadWhere = Text1(3).Text
+            frmMensajes.cadWHERE2 = Text2(3).Text
+            frmMensajes.Parametros = Text1(22).Text
+            frmMensajes.Show vbModal
+            
+            
+            If CadenaDesdeOtroForm = "CANCEL" Then
+                Err.Raise 513, , "Proceso cancelado en anticipos proveedor"
+            Else
+                TieneAnticiposPendientesDescontar = Trim(CadenaDesdeOtroForm)
+                If TieneAnticiposPendientesDescontar <> "" Then TieneAnticiposPendientesDescontar = Mid(TieneAnticiposPendientesDescontar, 2)
+                    
+            End If
+            CadenaDesdeOtroForm = ""
+        End If
+        
+        
+        
+        
+        
+        
+        
+        
         
         'Pasar los Albaranes seleccionados con cadWHERE a una factura
         Set vFactu = New CFacturaCom
@@ -2687,7 +2725,7 @@ Dim CadenaContab As String
         
         '               Check1(0)=inserta tesoreria                             Check1(1) contab
         'If vFactu.TraspasoAlbaranesAFactura(cadWhere, (Check1(0).Value = 1), (Check1(1).Value = 1), False) Then
-        If vFactu.TraspasoAlbaranesAFactura(cadWhere, True, False, False) Then
+        If vFactu.TraspasoAlbaranesAFactura(cadWhere, True, False, False, TieneAnticiposPendientesDescontar) Then
         
             '------------------------------------------------------------------------------
             '------------------------------------------------------------------------------
@@ -2741,7 +2779,6 @@ Dim CadenaContab As String
             
             
             
-            
             'Marzo 2015. Mostrara en un FORM el numregis asignado y
             ' fecvecni e impvenci
             ' pudiendo cambiar este ultimo
@@ -2788,7 +2825,7 @@ Dim CadenaContab As String
             Next
             If Text1(23).Text <> "" Then Cad = Cad & "Ret:" & Text1(23).Text & "   " & Text1(24).Text & vbCrLf
             Cad = Cad & vbCrLf & "TOTAL: " & Text1(22).Text
-    
+            If TieneAnticiposPendientesDescontar <> "" Then Cad = Cad & vbCrLf & "Anticipos: " & TieneAnticiposPendientesDescontar
             LOG.Insertar 9, vUsu, Cad
             Set LOG = Nothing
             

@@ -16,6 +16,137 @@ Begin VB.Form frmMensajes
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.Frame FrameAnticiposprov 
+      Height          =   7455
+      Left            =   1800
+      TabIndex        =   148
+      Top             =   720
+      Visible         =   0   'False
+      Width           =   8895
+      Begin VB.CommandButton cmdAnticipoProv 
+         Caption         =   "Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   0
+         Left            =   7440
+         TabIndex        =   150
+         Top             =   6840
+         Width           =   1065
+      End
+      Begin VB.CommandButton cmdAnticipoProv 
+         Caption         =   "Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   1
+         Left            =   6120
+         TabIndex        =   149
+         Top             =   6840
+         Width           =   1065
+      End
+      Begin MSComctlLib.ListView ListView11 
+         Height          =   5175
+         Left            =   240
+         TabIndex        =   151
+         Top             =   960
+         Width           =   8445
+         _ExtentX        =   14896
+         _ExtentY        =   9128
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   4
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Codigo"
+            Object.Width           =   2188
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Documento"
+            Object.Width           =   4304
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Fecha"
+            Object.Width           =   3246
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   3
+            Text            =   "Anticipo"
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Nomprove"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   255
+         Index           =   12
+         Left            =   240
+         TabIndex        =   153
+         Top             =   480
+         Width           =   8175
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Marque,si lo desea, (el)los anticipos que quiera descontar en la factura "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   6.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   255
+         Index           =   10
+         Left            =   240
+         TabIndex        =   152
+         Top             =   6240
+         Width           =   8175
+      End
+   End
    Begin VB.Frame FramePuntosCaducados 
       Height          =   6735
       Left            =   2280
@@ -2836,6 +2967,7 @@ Public OpcionMensaje As Byte
 '30 .- Introduccion del PWD
 
 '31 .- Puntos Caducados    'AUN NO ESTA REALIZADA !!!!!!!
+'32 .- Anticipos proveedores
 
 
 
@@ -3108,6 +3240,45 @@ Dim C1 As String * 10, C2 As String * 10, c3 As String * 10
       Unload Me
 End Sub
 
+
+Private Sub cmdAnticipoProv_Click(Index As Integer)
+    CadenaDesdeOtroForm = ""
+    If Index = 0 Then
+        If MsgBox("Desea cancelar proceso generacion factura proveedor?", vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+        CadenaDesdeOtroForm = "CANCEL"
+    Else
+        OK = 0
+        Importe = 0
+        For NE = 1 To ListView11.ListItems.Count
+            If ListView11.ListItems(NE).Checked Then
+                OK = OK + 1
+                Importe = Importe + ImporteFormateado(ListView11.ListItems(NE).SubItems(3))
+                CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", " & ListView11.ListItems(NE).Text
+            End If
+        Next
+        If OK = 0 Then
+            SQL = "No compensar ningún anticipo"
+        Else
+            SQL = ""
+           
+                
+            SQL = "Compensar factura sobre: " & vbCrLf & "Anticipos: " & OK & vbCrLf & "Importe : " & Space(11) & Format(Importe, FormatoImporte)
+            SQL = SQL & vbCrLf & "Importe factura: " & Parametros
+            
+             If Importe <> CCur(Parametros) Then SQL = SQL & vbCrLf & vbCrLf & "*** Importe anticipos distinto factura ***"
+                
+            
+        End If
+        SQL = SQL & vbCrLf & vbCrLf & "¿Continuar?"
+        OK = MsgBox(SQL, vbQuestion + vbYesNoCancel)
+        If OK <> vbYes Then
+            CadenaDesdeOtroForm = ""
+            Exit Sub
+        End If
+    End If
+    PulsadoSalir = True
+    Unload Me
+End Sub
 
 Private Sub cmdArtAgrupado_Click(Index As Integer)
 Dim Impor As Currency
@@ -3647,6 +3818,10 @@ Dim OK As Boolean
             
         Case 31
             CargaPuntosCaducados
+            
+            
+        Case 32
+            CargaAnticipoProveedor
         Case 99
             cargaempresasbloquedas
                         
@@ -3681,7 +3856,7 @@ On Error Resume Next
     FramePrevisualizar.visible = False
     FramePWD.visible = False
     FramePuntosCaducados.visible = False
-    
+    FrameAnticiposprov.visible = False
     PulsadoSalir = True
     PrimeraVez = True
     
@@ -3914,6 +4089,16 @@ On Error Resume Next
             PulsadoSalir = True
             Label2(9).Caption = ""
             Me.Caption = "Puntos."
+         
+        Case 32
+            PulsadoSalir = False
+             H = FrameAnticiposprov.Height
+            W = FrameAnticiposprov.Width
+            PonerFrameVisible FrameAnticiposprov, True, H, W
+            Label2(9).Caption = ""
+            Me.Caption = "Anticipo proveedor"
+            CadenaDesdeOtroForm = ""
+        
         
         Case 99 ' bloqueo por empresa
             Me.FrameBloqueoEmpresas.visible = True
@@ -4846,6 +5031,13 @@ Private Sub Form_Unload(Cancel As Integer)
         Else
             PulsadoSalir = True
         End If
+    End If
+
+    
+
+    If OpcionMensaje = 32 Then
+        
+        'If PulsadoSalir = False Then Cancel = 1
     End If
 
     If PulsadoSalir = False Then Cancel = 1
@@ -6466,3 +6658,40 @@ Private Sub CaducarPuntos()
 
     
 End Sub
+
+
+Private Sub CargaAnticipoProveedor()
+
+    Label2(12).Caption = cadWHERE2
+
+    SQL = " select * FROM sproveanticipo WHERE   codprove=" & cadWhere & " AND  descontado =0"
+    SQL = SQL & " order by fechaant,idanticipo"
+
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    NE = 0
+    While Not miRsAux.EOF
+    
+        'Insert
+        NE = NE + 1
+        ListView11.ListItems.Add , "K" & Format(miRsAux!idAnticipo, "0000")
+        ListView11.ListItems(NE).Text = Format(miRsAux!idAnticipo, "0000")
+        ListView11.ListItems(NE).SubItems(1) = miRsAux!numdocum
+        ListView11.ListItems(NE).SubItems(2) = Format(miRsAux!fechaant, "dd/mm/yyyy")
+        
+        ListView11.ListItems(NE).SubItems(3) = Format(miRsAux!Importe, FormatoCantidad)
+        
+                
+        
+    
+        miRsAux.MoveNext
+    Wend
+    miRsAux.Close
+    
+
+    
+    
+End Sub
+
+
+

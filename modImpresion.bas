@@ -85,6 +85,79 @@ Public Function SQL2SF(cadSQL As String) As String
     SQL2SF = cadSQL2
 End Function
 
+
+'convertix un SQL a una Selection Formula SF
+Public Function SQL2SF_David(cadSQL As String, tablasIntervienen As String) As String
+    Dim cadSQL2 As String
+    Dim posP As Integer 'posició del Punt
+    Dim Pos3 As Integer
+    
+    Dim K As Integer
+    Dim TabActual As String
+    
+    cadSQL2 = cadSQL
+    
+    cadSQL2 = Replace(cadSQL2, "AND (1=1)", "") 'lleva el AND (1=1)  NOTA: açò ha d'estar abans de traure els parentesi
+    cadSQL2 = LCase(Replace(cadSQL2, "%", "*")) 'canvia el % per un *
+    
+    
+    
+    While tablasIntervienen <> ""
+        posP = InStr(tablasIntervienen, "|")
+        If posP = 0 Then
+            'Mal  NO hacemos nada
+            TabActual = "" 'para que pare la iteracion
+            tablasIntervienen = ""
+        Else
+            TabActual = Mid(tablasIntervienen, 1, posP - 1)
+            tablasIntervienen = Mid(tablasIntervienen, posP + 1)
+        End If
+        
+        If TabActual <> "" Then
+            
+            cadSQL2 = Replace(cadSQL2, TabActual, "@#@@")
+            posP = 0
+            K = 1
+            Do
+                
+                
+                posP = InStr(K, cadSQL2, "@#@@")
+            
+                If posP = 0 Then
+                    'Hemos acabado
+                Else
+                    posc = InStr(posP, cadSQL2, " ") 'Del final del campo ejemplo:  senvio.codenvio >= 0  ->> @#@@.codenvio >= 1  @#@@.codenvio} >= 1
+                    If posc = 0 Then
+                        Err.Raise 513, , "Error separando SQL en formato crystal report" & cadSQL2
+                    Else
+                        'En la posc insertamos el }
+                        cadSQL2 = Mid(cadSQL2, 1, posc - 1) & "}" & Mid(cadSQL2, posc)
+                    End If
+                    K = posc + 1
+                End If
+                    
+                    
+            Loop Until posP = 0
+            '+-+-+-+-+-+-+-+-+-+-+-+-+ reessablecemos la tabla
+            cadSQL2 = Replace(cadSQL2, "@#@@", "{" & TabActual)
+  
+        End If
+    Wend
+    
+    'per a canviar el format de les dates
+    cadSQL2 = Date2SF(CStr(cadSQL2))
+    
+    'per a canviar els _ per ?
+    cadSQL2 = Like2SF(CStr(cadSQL2))
+    
+    SQL2SF_David = cadSQL2
+End Function
+
+
+
+
+
+
 'convertix una data per a pasar-li-la a una Selection Formula SF
 ' funciona tant en format 2005-01-17 com en 17/01/2005
 Public Function Date2SF(cadData As String) As String

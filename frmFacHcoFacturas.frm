@@ -287,8 +287,8 @@ Begin VB.Form frmFacHcoFacturas2
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacHcoFacturas.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "FrameFactura"
-      Tab(0).Control(1)=   "FrameCliente"
+      Tab(0).Control(0)=   "FrameCliente"
+      Tab(0).Control(1)=   "FrameFactura"
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmFacHcoFacturas.frx":0A2A
@@ -419,27 +419,27 @@ Begin VB.Form frmFacHcoFacturas2
       TabCaption(2)   =   "Costes"
       TabPicture(2)   =   "frmFacHcoFacturas.frx":0A46
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "txtCostes(7)"
-      Tab(2).Control(1)=   "txtCostes(6)"
-      Tab(2).Control(2)=   "txtCostes(5)"
-      Tab(2).Control(3)=   "txtCostes(4)"
-      Tab(2).Control(4)=   "txtCostes(3)"
-      Tab(2).Control(5)=   "txtCostes(2)"
-      Tab(2).Control(6)=   "txtCostes(1)"
-      Tab(2).Control(7)=   "txtCostes(0)"
-      Tab(2).Control(8)=   "cmdLineasCostes(1)"
-      Tab(2).Control(9)=   "cmdLineasCostes(0)"
-      Tab(2).Control(10)=   "cmdLineasCostes(2)"
-      Tab(2).Control(11)=   "lwCostes"
+      Tab(2).Control(0)=   "lwCostes"
+      Tab(2).Control(1)=   "cmdLineasCostes(2)"
+      Tab(2).Control(2)=   "cmdLineasCostes(0)"
+      Tab(2).Control(3)=   "cmdLineasCostes(1)"
+      Tab(2).Control(4)=   "txtCostes(0)"
+      Tab(2).Control(5)=   "txtCostes(1)"
+      Tab(2).Control(6)=   "txtCostes(2)"
+      Tab(2).Control(7)=   "txtCostes(3)"
+      Tab(2).Control(8)=   "txtCostes(4)"
+      Tab(2).Control(9)=   "txtCostes(5)"
+      Tab(2).Control(10)=   "txtCostes(6)"
+      Tab(2).Control(11)=   "txtCostes(7)"
       Tab(2).ControlCount=   12
       TabCaption(3)   =   "Impresion lineas"
       TabPicture(3)   =   "frmFacHcoFacturas.frx":0A62
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "cmdLineasImpresion(3)"
-      Tab(3).Control(1)=   "cmdLineasImpresion(2)"
+      Tab(3).Control(0)=   "lwEulerLineas"
+      Tab(3).Control(1)=   "cmdLineasImpresion(0)"
       Tab(3).Control(2)=   "cmdLineasImpresion(1)"
-      Tab(3).Control(3)=   "cmdLineasImpresion(0)"
-      Tab(3).Control(4)=   "lwEulerLineas"
+      Tab(3).Control(3)=   "cmdLineasImpresion(2)"
+      Tab(3).Control(4)=   "cmdLineasImpresion(3)"
       Tab(3).ControlCount=   5
       Begin VB.CommandButton cmdLineasImpresion 
          Height          =   375
@@ -4481,13 +4481,13 @@ Dim b As Boolean
                     txtAux(jj).visible = b
                 End If
             Next jj
-            cmdaux.Top = alto
-            cmdaux.visible = b
+            cmdAux.Top = alto
+            cmdAux.visible = b
             txtAux(2).visible = False  'Por si acso
             
             If vParamAplic.NumeroInstalacion = 2 Then
                 txtAux(9).visible = False  'Por si acso
-                cmdaux.visible = False
+                cmdAux.visible = False
             End If
         Case "DataGrid2"
             DeseleccionaGrid Me.DataGrid2
@@ -4856,7 +4856,7 @@ Dim Codtipoa As String
     
     If Not InstalacionEsEulerTaxco Then
         FrameALE.visible = False
-        FrameTaxco.visible = False
+        FrameTAXCO.visible = False
     Else
         If Modo = 2 Or DesdeInicioBusqueda Then
             Codtipoa = "ALO"
@@ -4867,7 +4867,7 @@ Dim Codtipoa As String
                 FrameALE.visible = Codtipoa = "ALE" 'Or Data3.Recordset!codtipoa = "ALO"
             ElseIf vParamAplic.NumeroInstalacion = vbTaxco Then
                 FrameALE.visible = Codtipoa = "ALE" 'Or Data3.Recordset!codtipoa = "ALO"
-                FrameTaxco.visible = Codtipoa = "ALO"
+                FrameTAXCO.visible = Codtipoa = "ALO"
             End If
             FrameReparEuler.visible = Codtipoa = "ALR"
             
@@ -5040,7 +5040,7 @@ Private Sub Combo1_Click()
     If Modo = 1 Then
         If vParamAplic.NumeroInstalacion = vbTaxco Then
             cmdObserva3.Tag = 4
-            FrameTaxco.Enabled = True
+            FrameTAXCO.Enabled = True
             Me.SSTab1.Tab = 1
             VisualizarPorTipoAlbaran True
             Me.FrameEuler.Enabled = True
@@ -5346,8 +5346,8 @@ Dim B1 As Boolean
         If vParamAplic.NumeroInstalacion = vbEuler Then
             FrameALE.Left = 240
         Else
-            FrameTaxco.BorderStyle = 0
-            FrameTaxco.visible = True
+            FrameTAXCO.BorderStyle = 0
+            FrameTAXCO.visible = True
         
             lblSerie.visible = True
             lblSerie.Caption = ""
@@ -6793,7 +6793,7 @@ Dim b As Boolean
     If vParamAplic.NumeroInstalacion = vbTaxco Then
         TextmatriculaTaxco.visible = Modo = 1
         Label1(60).visible = Modo = 1
-        FrameTaxco.visible = Modo = 1
+        FrameTAXCO.visible = Modo = 1
         lblSerie.visible = Modo = 2
         lblSerie.Tag = ""
     End If
@@ -6830,7 +6830,7 @@ Dim b As Boolean
     End If
                     
                     
-   ' Stop
+   ' St op
                     
     'Sept 2020
     'Si el usuario no es nivel admin y esta modificando
@@ -8680,7 +8680,7 @@ End Function
 
 Private Function ObtenerSelFactura() As String
 Dim cad As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     On Error Resume Next
 
@@ -8717,15 +8717,15 @@ Dim Rs As ADODB.Recordset
                     cad = "SELECT codtipom,numfactu,fecfactu FROM scafac1 "
                     cad = cad & " WHERE codtipoa=" & DBSet(hcoCodTipoM, "T") & " AND numalbar=" & hcoCodMovim & " AND fechaalb=" & DBSet(hcoFechaMov, "F")
                     
-                    Set Rs = New ADODB.Recordset
-                    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                    If Not Rs.EOF Then 'where para la factura
-                        cad = " WHERE codtipom='" & Rs!codtipom & "' AND numfactu= " & Rs!Numfactu & " AND fecfactu=" & DBSet(Rs!FecFactu, "F")
+                    Set RS = New ADODB.Recordset
+                    RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    If Not RS.EOF Then 'where para la factura
+                        cad = " WHERE codtipom='" & RS!codtipom & "' AND numfactu= " & RS!Numfactu & " AND fecfactu=" & DBSet(RS!FecFactu, "F")
                     Else
                         cad = " WHERE numfactu=-1"
                     End If
-                    Rs.Close
-                    Set Rs = Nothing
+                    RS.Close
+                    Set RS = Nothing
                 End If
     
     End If
@@ -8752,7 +8752,7 @@ End Function
 
 
 Private Sub CargaCombo()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim I As Byte
     
@@ -8777,18 +8777,18 @@ Dim I As Byte
         End If
     End If
         
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
-        SQL = Rs!nomtipom
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RS.EOF
+        SQL = RS!nomtipom
         SQL = Replace(SQL, "Factura", "")
-        Combo1.AddItem Rs!codtipom & "-" & SQL
+        Combo1.AddItem RS!codtipom & "-" & SQL
         Combo1.ItemData(Combo1.NewIndex) = I
         I = I + 1
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 End Sub
 
 
@@ -9975,7 +9975,7 @@ Dim Impo As Currency
             Me.FrameALE.visible = Data3.Recordset!Codtipoa = "ALO"     'Text1(1).Text = "FAE"
         Else
             FrameALE.visible = False
-            Me.FrameTaxco.visible = Data3.Recordset!Codtipoa = "ALO"     'Text1(1).Text = "FAE"
+            Me.FrameTAXCO.visible = Data3.Recordset!Codtipoa = "ALO"     'Text1(1).Text = "FAE"
         End If
         Me.FrameReparEuler.visible = Data3.Recordset!Codtipoa = "ALR"      'Text1(1).Text = "FAE"
         
@@ -10015,8 +10015,8 @@ Dim Impo As Currency
             If vParamAplic.NumeroInstalacion = vbTaxco Then
             
                 N = 0
-                If Data1.Recordset!codtipom = "FAO" And FrameTaxco.visible Then N = 1
-                If Data1.Recordset!codtipom = "FA5" And FrameTaxco.visible Then N = 1
+                If Data1.Recordset!codtipom = "FAO" And FrameTAXCO.visible Then N = 1
+                If Data1.Recordset!codtipom = "FA5" And FrameTAXCO.visible Then N = 1
                 
                 If N = 1 Then
                     'bombamarca -Matricula
@@ -10989,7 +10989,7 @@ End Sub
 
 
 Private Sub FijarCadenaModificaUsuarioNormal(Cambios As String)
-Dim k As Integer
+Dim K As Integer
 Dim cTag As cTag
 
     On Error GoTo eFijarCadenaModificaUsuarioNormal
@@ -10998,9 +10998,9 @@ Dim cTag As cTag
     TituloLinea = ""
     BuscaChekc = ""
     Set cTag = New cTag
-    For k = 0 To Me.Text1.Count - 1
-        If Text1(k).Tag <> "" Then
-            If cTag.Cargar(Text1(k)) Then
+    For K = 0 To Me.Text1.Count - 1
+        If Text1(K).Tag <> "" Then
+            If cTag.Cargar(Text1(K)) Then
                 TituloLinea = cTag.columna
                 BuscaChekc = ""
                 If Not IsNull(Data1.Recordset.Fields(TituloLinea)) Then
@@ -11017,13 +11017,13 @@ Dim cTag As cTag
                 End If
                 
                 'Peculiaridades
-                If k = 23 Then If Data1.Recordset.Fields(TituloLinea) = 0 Then BuscaChekc = "0" 'dotpp
-                If k = 24 Then If Data1.Recordset.Fields(TituloLinea) = 0 Then BuscaChekc = "0"  'dopie
-                If k = 45 Then If Data1.Recordset.Fields(TituloLinea) = 0 Then BuscaChekc = ""   'aportacion
+                If K = 23 Then If Data1.Recordset.Fields(TituloLinea) = 0 Then BuscaChekc = "0" 'dotpp
+                If K = 24 Then If Data1.Recordset.Fields(TituloLinea) = 0 Then BuscaChekc = "0"  'dopie
+                If K = 45 Then If Data1.Recordset.Fields(TituloLinea) = 0 Then BuscaChekc = ""   'aportacion
         
                 
                 
-                If BuscaChekc <> Text1(k).Text Then Cambios = Cambios & cTag.Nombre & ": " & BuscaChekc & "   --- Ant: " & Text1(k).Text & vbCrLf
+                If BuscaChekc <> Text1(K).Text Then Cambios = Cambios & cTag.Nombre & ": " & BuscaChekc & "   --- Ant: " & Text1(K).Text & vbCrLf
                 
                 
             End If

@@ -474,6 +474,7 @@ Private mvarAgrupaTfnosFacturacionCliente As Boolean
 
 
 Private mvarDiasCaducidadPuntos As Integer
+Private mvarSerieAnticipoProveedor As String
 
 
 
@@ -1901,6 +1902,9 @@ Public Property Get DiasCaducidadPuntos() As Integer
      DiasCaducidadPuntos = mvarDiasCaducidadPuntos
 End Property
 
+Public Property Get SerieAnticipoProveedor() As String
+     SerieAnticipoProveedor = mvarSerieAnticipoProveedor
+End Property
 
 
 
@@ -2308,6 +2312,9 @@ On Error GoTo Err3
         mvarDiasCaducidadPuntos = 0
         If CampoNuevoBD(RS, "diascaducidadpuntos", "N", V) Then mvarDiasCaducidadPuntos = DBLet(V)
         
+        'Junio 2021
+        mvarSerieAnticipoProveedor = ""
+        If CampoNuevoBD(RS, "SerieAnticipoProveedor", "T", V) Then mvarSerieAnticipoProveedor = DBLet(V)
         
         
         Leer = 0

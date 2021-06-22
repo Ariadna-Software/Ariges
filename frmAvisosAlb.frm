@@ -319,7 +319,7 @@ Private Function GeneraDatosTmpAlba() As Boolean
         SQL = SQL & DBSet(ListView1.ListItems(NumRegElim).Text, "F") & "," & DBSet(ListView1.ListItems(NumRegElim).SubItems(4), "F") & ","
         SQL = SQL & DBSet(ListView1.ListItems(NumRegElim).SubItems(3), "N") & ")"
     Next
-    If NumRegElim > 0 Then
+    If SQL <> "" Then
         SQL = Mid(SQL, 2)
         SQL = "INSERT INTO tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,nombre3,fecha1,fecha2,importe1) values " & SQL
         conn.Execute SQL

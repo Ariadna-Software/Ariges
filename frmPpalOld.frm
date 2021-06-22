@@ -169,7 +169,7 @@ Begin VB.Form frmPpalOld
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "17:10"
+            TextSave        =   "14:22"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1169,6 +1169,14 @@ Begin VB.Form frmPpalOld
          End
          Begin VB.Menu mnComHcoFacturas 
             Caption         =   "&Histórico Albaran/Factura"
+         End
+         Begin VB.Menu mnProAnticipos 
+            Caption         =   "-"
+            Index           =   0
+         End
+         Begin VB.Menu mnProAnticipos 
+            Caption         =   "Anticipos proveedor"
+            Index           =   1
          End
          Begin VB.Menu mnBarra15 
             Caption         =   "-"
@@ -3583,9 +3591,19 @@ Private Sub mnFacPedidos_Click(Index As Integer)
         PonerCaption False, "Pedidos"
         
         If vParamAplic.TipoFormularioClientes = 0 Then
-            frmFacEntPedidos.DatosADevolverBusqueda2 = ""
-            frmFacEntPedidos.EsHistorico = Index = 1
-            frmFacEntPedidos.Show vbModal
+        
+            Debug.Assert False
+            If False Then
+                frmFacEntPedidosGR.DatosADevolverBusqueda2 = ""
+                frmFacEntPedidosGR.EsHistorico = Index = 1
+                frmFacEntPedidosGR.Show vbModal
+            
+            Else
+                frmFacEntPedidos.DatosADevolverBusqueda2 = ""
+                frmFacEntPedidos.EsHistorico = Index = 1
+                frmFacEntPedidos.Show vbModal
+            End If
+        
         Else
             frmFacEntPedSail.EsHistorico = Index = 1
                 frmFacEntPedSail.Show vbModal
@@ -3831,6 +3849,7 @@ Private Sub mnGasolinera_Click(Index As Integer)
             End If
         End If
 
+        ' ok
 End Sub
 
 Private Sub mnHcoMaten_Click()
@@ -4070,6 +4089,14 @@ End Sub
 
 
 
+
+Private Sub mnProAnticipos_Click(Index As Integer)
+        If vUsu.Nivel > 0 Then
+            MsgBox "No tiene permisos", vbExclamation
+        Else
+            frmComProveAnticipo.Show vbModal
+        End If
+End Sub
 
 Private Sub mnproduccion1_Click(Index As Integer)
     Select Case Index

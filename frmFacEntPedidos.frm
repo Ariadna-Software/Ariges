@@ -6449,6 +6449,8 @@ End Sub
 Private Sub TxtAux_Change(Index As Integer)
     If Index = 4 And ModificaLineas = 2 Then 'Precio y Modo Modificar Lineas
         txtAux(5).Text = "M"
+        BloquearTxt txtAux(6), False
+        BloquearTxt txtAux(7), False
     End If
 End Sub
 
@@ -6809,7 +6811,11 @@ Dim StatusArticMayorCero As Boolean
                 If Not PonerFormatoDecimal(txtAux(Index), 2) Then txtAux(Index).Text = "0" 'Tipo 2: Decimal(10,4)
                 If ModificaLineas = 1 Then
                     'Precio=valor devuelto por la funcion de precios
-                    If CSng(txtAux(Index).Text) <> CSng(ComprobarCero(Precio)) Then txtAux(5).Text = "M"
+                    If CSng(txtAux(Index).Text) <> CSng(ComprobarCero(Precio)) Then
+                        txtAux(5).Text = "M"
+                          BloquearTxt txtAux(6), False
+                         BloquearTxt txtAux(7), False
+                    End If
                 End If
             End If
 

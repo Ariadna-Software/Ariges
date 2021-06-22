@@ -194,7 +194,7 @@ Begin VB.Form frmComProveV
       Tag             =   "N.I.F.|T|N|||sprvar|nifprove||S|"
       Text            =   "Text1"
       Top             =   1170
-      Width           =   1845
+      Width           =   2685
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
@@ -619,7 +619,7 @@ Private VieneDeBuscar As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim cad As String
+Dim Cad As String
 Dim Indicador As String
 
     Screen.MousePointer = vbHourglass
@@ -635,8 +635,8 @@ Dim Indicador As String
             If DatosOk Then
                 If ModificaDesdeFormulario(Me, 1) Then
                     TerminaBloquear
-                    cad = "(nifprove=" & Text1(0).Text & ")"
-                    If SituarData(Data1, cad, Indicador) Then
+                    Cad = "(nifprove=" & Text1(0).Text & ")"
+                    If SituarData(Data1, Cad, Indicador) Then
                         PonerModo 2
                         lblIndicador.Caption = Indicador
                     Else
@@ -724,18 +724,18 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim cad As String
+Dim Cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
     
-    cad = "¿Seguro que desea eliminar el Cliente de Varios?" & vbCrLf
-    cad = cad & vbCrLf & "Código: " & Data1.Recordset.Fields(0)
-    cad = cad & vbCrLf & "Descripción: " & Data1.Recordset.Fields(1)
+    Cad = "¿Seguro que desea eliminar el Cliente de Varios?" & vbCrLf
+    Cad = Cad & vbCrLf & "Código: " & Data1.Recordset.Fields(0)
+    Cad = Cad & vbCrLf & "Descripción: " & Data1.Recordset.Fields(1)
 
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
@@ -758,16 +758,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
     
-    cad = Data1.Recordset.Fields(0) & "|"
-    cad = cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -991,7 +991,7 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
-Dim cad As String
+Dim Cad As String
 '        'Llamamos a al form
 '        '##A mano
 '        cad = ""
@@ -1023,7 +1023,11 @@ Dim cad As String
 '        End If
 
     Set frmB = New frmBasico2
-    AyudaProveedoresV frmB, Text1(0), , True
+    Cad = ""
+    If Text1(0).Text <> "" Then
+        If IsNumeric(Text1(0).Text) Then Cad = Text1(0).Text
+    End If
+    AyudaProveedoresV frmB, Cad, cadB, True
     Set frmB = Nothing
     
 End Sub
@@ -1072,7 +1076,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1080,10 +1084,10 @@ Dim NumReg As Byte
     
     '--------------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         cmdRegresar.visible = False
     End If
@@ -1094,7 +1098,7 @@ Dim NumReg As Byte
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
     
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
@@ -1102,9 +1106,9 @@ Dim NumReg As Byte
     
     '-----------------------------------------------------
     'Modo insertar o modificar
-    b = (Kmodo >= 3) Or Modo = 1 '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = b
-    cmdCancelar.visible = b
+    B = (Kmodo >= 3) Or Modo = 1 '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = B
+    cmdCancelar.visible = B
     
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
@@ -1126,48 +1130,48 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    mnEliminar.Enabled = B
     
     '---------------------------------------------
-    b = (Modo >= 3)
+    B = (Modo >= 3)
      'Insertar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnNuevo.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnNuevo.Enabled = Not B
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
     'Imprimir
     Toolbar1.Buttons(8).Enabled = False
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 1) 'Comprobar datos OK
-    If Not b Then Exit Function
+    B = CompForm(Me, 1) 'Comprobar datos OK
+    If Not B Then Exit Function
         
     'Comprobamos  si existe
     If Modo = 3 Then 'Si estamos insertando
         'BD 1: conexion a BD Ariges
         If DevuelveDesdeBD(conAri, "nifprove", NombreTabla, "nifprove", Text1(0).Text, "T") <> "" Then
-            b = False
+            B = False
             MsgBox "Ya existe el NIF del Proveedor de Varios: " & Text1(0).Text, vbExclamation
         End If
     End If
-    DatosOk = b
+    DatosOk = B
 End Function
 
 

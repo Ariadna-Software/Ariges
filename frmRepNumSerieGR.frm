@@ -2123,18 +2123,18 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Data1.Recordset.Fields(0) & "|" 'num serie
-    cad = cad & Data1.Recordset.Fields(1) & "|" 'cod artic
-    cad = cad & Text2(1).Text & "|"  'nom artic
-    cad = cad & Data1.Recordset.Fields(3) & "|" 'cod cliente
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|" 'num serie
+    Cad = Cad & Data1.Recordset.Fields(1) & "|" 'cod artic
+    Cad = Cad & Text2(1).Text & "|"  'nom artic
+    Cad = Cad & Data1.Recordset.Fields(3) & "|" 'cod cliente
+    RaiseEvent DatoSeleccionado(Cad)
     VariePublic = Text1(0).Text
     Unload Me
 End Sub
@@ -2144,17 +2144,17 @@ End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
 
-    If Me.adodc1.Recordset.EOF Then Exit Sub
+    If Me.Adodc1.Recordset.EOF Then Exit Sub
     
 '    If Modo = 2 Then
-        Me.chkAux.Value = DBLet(Me.adodc1.Recordset!TieneMan, "N")
-        TxtAux2(2).Text = DBLet(Me.adodc1.Recordset!nummante, "T")
-        TxtAux2(3).Text = DBLet(Me.adodc1.Recordset!codtipom, "T")
+        Me.chkAux.Value = DBLet(Me.Adodc1.Recordset!TieneMan, "N")
+        txtAux2(2).Text = DBLet(Me.Adodc1.Recordset!nummante, "T")
+        txtAux2(3).Text = DBLet(Me.Adodc1.Recordset!codtipom, "T")
         
-        TxtAux2(4).Text = DBLet(Me.adodc1.Recordset!Numalbar, "T")
-        TxtAux2(5).Text = DBLet(Me.adodc1.Recordset!Numfactu, "T")
-        TxtAux2(6).Text = DBLet(Me.adodc1.Recordset!FechaVta, "F")
-        TxtAux2(7).Text = DBLet(Me.adodc1.Recordset!numline1, "T")
+        txtAux2(4).Text = DBLet(Me.Adodc1.Recordset!Numalbar, "T")
+        txtAux2(5).Text = DBLet(Me.Adodc1.Recordset!Numfactu, "T")
+        txtAux2(6).Text = DBLet(Me.Adodc1.Recordset!FechaVta, "F")
+        txtAux2(7).Text = DBLet(Me.Adodc1.Recordset!numline1, "T")
 '    End If
 End Sub
 
@@ -2171,7 +2171,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
 
     PrimeraVez = True
     
@@ -2179,13 +2179,13 @@ Dim I As Integer
     Me.Icon = frmPpal.Icon
     
     'Icono de busqueda
-    For I = 1 To imgBuscar.Count - 1
-        imgBuscar(I).Picture = imgBuscar(0).Picture
-    Next I
+    For i = 1 To imgBuscar.Count - 1
+        imgBuscar(i).Picture = imgBuscar(0).Picture
+    Next i
 
-    For I = 0 To imgFra.Count - 1
-        imgFra(I).Picture = imgBuscar(0).Picture
-    Next I
+    For i = 0 To imgFra.Count - 1
+        imgFra(i).Picture = imgBuscar(0).Picture
+    Next i
 
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM2
@@ -2225,8 +2225,8 @@ Dim I As Integer
     'situarnos en el primer tab
     Me.SSTab1.Tab = 0
     'siempre bloqueardos campos fora grid
-    For kCampo = 0 To Me.TxtAux2.Count - 1
-        BloquearTxt TxtAux2(kCampo), True
+    For kCampo = 0 To Me.txtAux2.Count - 1
+        BloquearTxt txtAux2(kCampo), True
     Next kCampo
     Me.chkAux.Enabled = False
     
@@ -2753,8 +2753,8 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte
-Dim b As Boolean
+Dim i As Byte
+Dim B As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -2767,14 +2767,14 @@ Dim NumReg As Byte
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, (Modo = 2), NumReg
         
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         cmdRegresar.visible = False
     End If
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
         
     '-------------------------------------------
     'Bloquear Registros
@@ -2786,10 +2786,10 @@ Dim NumReg As Byte
     
             
     'Modo INSERTAR
-    b = (Modo = 3) Or (Modo = 4)
+    B = (Modo = 3) Or (Modo = 4)
     If Modo = 3 Then Me.chkTieneMan.Value = 1
-    Me.chkTieneMan.Enabled = b 'Insertar o Modificar
-    If b Then BloquearTxt Text1(3), Not CBool(Me.chkTieneMan.Value)
+    Me.chkTieneMan.Enabled = B 'Insertar o Modificar
+    If B Then BloquearTxt Text1(3), Not CBool(Me.chkTieneMan.Value)
     Me.cboTipomov.Enabled = False 'Insertar o Modificar
 
     '## LAURA 19/06/2008
@@ -2798,18 +2798,18 @@ Dim NumReg As Byte
     '##
     
     '------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     
-    For I = 0 To Me.imgBuscar.Count - 1
+    For i = 0 To Me.imgBuscar.Count - 1
 '        Me.imgBuscar(i).Enabled = b
-        BloquearImg Me.imgBuscar(I), Not b
-    Next I
+        BloquearImg Me.imgBuscar(i), Not B
+    Next i
     
-    For I = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(I).Enabled = b 'Si es insertar o modificar
-    Next I
+    For i = 0 To Me.imgFecha.Count - 1
+        Me.imgFecha(i).Enabled = B 'Si es insertar o modificar
+    Next i
     
     'Si Modificar y se ha insertado un nº Albaran no modificar datos
     'del proveedor
@@ -2818,10 +2818,10 @@ Dim NumReg As Byte
         Me.imgBuscar(4).Enabled = False
     End If
     
-    For I = 0 To imgFra.Count - 1
-        imgFra(I).Enabled = (Modo = 2)
-        imgFra(I).visible = (Modo = 2)
-    Next I
+    For i = 0 To imgFra.Count - 1
+        imgFra(i).Enabled = (Modo = 2)
+        imgFra(i).visible = (Modo = 2)
+    Next i
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -2847,41 +2847,53 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    B = (Modo = 2 Or Modo = 0)
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2)
+    Toolbar1.Buttons(4).Enabled = B
+    Me.mnBuscar.Enabled = B
+        
+    Toolbar1.Buttons(5).Enabled = B
+    mnVerTodos.Enabled = B
+    
+    
+    
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
+
+
+
+
 
     'Sustituir
-    Toolbar5.Buttons(1).Enabled = b
-    Me.mnSustituir.Enabled = b
+    Toolbar5.Buttons(1).Enabled = B
+    Me.mnSustituir.Enabled = B
     
     'recuperar nº serie
-    Toolbar5.Buttons(2).Enabled = b And Text1(6).Text <> ""
+    Toolbar5.Buttons(2).Enabled = B And Text1(6).Text <> ""
 
     'Componentes
-    Toolbar5.Buttons(3).Enabled = b
-    Me.mnComponentes.Enabled = b
+    Toolbar5.Buttons(3).Enabled = B
+    Me.mnComponentes.Enabled = B
 
     '-------------------------------------
-    b = (Modo >= 3)
+    B = (Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
 End Sub
 
 
@@ -3024,15 +3036,15 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
  
     'Comprobar que se introduce valor en fecha fin garantia
     If Text1(5).Text = "" Then
         MsgBox "El valor de fecha fin garantia no puede ser nulo.", vbInformation
-        b = False
+        B = False
     End If
     
     '## LAURA 19/06/2008
@@ -3042,24 +3054,24 @@ Dim b As Boolean
         Me.cboMotivoBaja.ListIndex = -1
     ElseIf Trim(cboMotivoBaja.List(cboMotivoBaja.ListIndex)) = "" Then
         MsgBox "Debe seleccionar un motivo de baja si hay valor en la fecha de baja.", vbInformation
-        b = False
+        B = False
     End If
     '##
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String, Desc As String
 Dim selElem As Byte
 
     'Llamamos a al form
-    cad = ""
+    Cad = ""
     If EsCabecera Then
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: sserie
@@ -3385,7 +3397,7 @@ Dim tots As String
 '    b = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral DataGrid1, Me.Adodc1, SQL, PrimeraVez
     
     tots = "N||||0|;N||||0|;N||||0|;"
     SQL = DevuelveTextoDepto(True)

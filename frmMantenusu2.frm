@@ -1217,7 +1217,7 @@ On Error GoTo EInsertarModificar
             Sql2 = Sql2 & " and aplicacion in ('ariges') "
         Else
             Sql2 = "DELETE FROM menus_usuarios WHERE codusu = " & CodigoUsuario
-            conn.Execute Sql2
+            ejecutar Sql2, False
             
             'Preparo el INSERT
             Sql2 = "INSERT INTO menus_usuarios (codusu,codigo,aplicacion,ver,creareliminar,modificar,imprimir,especial,expandido,textovisible,vericono) "
@@ -1225,7 +1225,7 @@ On Error GoTo EInsertarModificar
             
         End If
         
-        conn.Execute Sql2
+        ejecutar Sql2, False
         
         
         Excepcion = ""
@@ -1247,7 +1247,7 @@ On Error GoTo EInsertarModificar
             Sql2 = Sql2 & " and (codigo in " & Excepcion
             Sql2 = Sql2 & " or codigo in (select codigo from menus where padre in " & Excepcion & " and aplicacion in ('ariges')))"
             
-            conn.Execute Sql2
+            ejecutar Sql2, False
         End If
         
     End If
@@ -1267,7 +1267,7 @@ Dim K As Integer
 
     Select Case Index
     Case 0, 1
-        Limpiar Me
+        limpiar Me
         
         If Index = 0 Then
             'Nuevo usuario
@@ -1511,7 +1511,7 @@ Private Sub Form_Load()
     LeerDatosCombo True
     
     
-    imgQuitarSkin.visible = vUsu.Id = 0 'root
+    imgQuitarSkin.visible = vUsu.ID = 0 'root
     
 End Sub
 

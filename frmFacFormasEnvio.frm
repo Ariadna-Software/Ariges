@@ -46,20 +46,20 @@ Begin VB.Form frmFacFormasEnvio
       TabCaption(1)   =   "Conductores"
       TabPicture(1)   =   "frmFacFormasEnvio.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "DataGrid2"
-      Tab(1).Control(1)=   "FrameToolAux(0)"
+      Tab(1).Control(0)=   "cboDefecto(0)"
+      Tab(1).Control(1)=   "Text3(0)"
       Tab(1).Control(2)=   "Text3(1)"
-      Tab(1).Control(3)=   "Text3(0)"
-      Tab(1).Control(4)=   "cboDefecto(0)"
+      Tab(1).Control(3)=   "FrameToolAux(0)"
+      Tab(1).Control(4)=   "DataGrid2"
       Tab(1).ControlCount=   5
       TabCaption(2)   =   "Matrículas"
       TabPicture(2)   =   "frmFacFormasEnvio.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "cboDefecto(1)"
-      Tab(2).Control(1)=   "Text4(1)"
+      Tab(2).Control(0)=   "DataGrid3"
+      Tab(2).Control(1)=   "FrameToolAux(1)"
       Tab(2).Control(2)=   "Text4(0)"
-      Tab(2).Control(3)=   "FrameToolAux(1)"
-      Tab(2).Control(4)=   "DataGrid3"
+      Tab(2).Control(3)=   "Text4(1)"
+      Tab(2).Control(4)=   "cboDefecto(1)"
       Tab(2).ControlCount=   5
       Begin VB.ComboBox cboDefecto 
          Height          =   330
@@ -1123,8 +1123,7 @@ Public NuevoCodigo As String
 Public DeConsulta As Boolean
 Public CodigoActual As String
 
-' *** adrede: per a quan busque suplements/desconters des de frmViagrc ***
-Public ExpedBusca As Long
+
 Public TipoSuplem As Integer
 ' *********************************************************************
 
@@ -1157,30 +1156,30 @@ Dim ModoFrame2 As Byte
 Dim PrimVez As Boolean
 
 Private Sub PonerModo(vModo)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Integer
     
     Modo = vModo
 '    PonerIndicador lblIndicador, Modo
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     
-    If b Then
+    If B Then
         PonerContRegIndicador
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
     
-    b = Modo = 1 Or Modo = 3 Or Modo = 4
-    txtAux(0).visible = b
-    txtAux(1).visible = b
-    Me.Combo1.visible = b
+    B = Modo = 1 Or Modo = 3 Or Modo = 4
+    txtAux(0).visible = B
+    txtAux(1).visible = B
+    Me.Combo1.visible = B
     
     ' **** si n'hi han camps fora del grid, bloquejar-los ****
     If vParamAplic.CartaPortes Then
         For i = 2 To 8
-            BloquearTxt txtAux(i), Not b
+            BloquearTxt txtAux(i), Not B
         Next i
     End If
     
@@ -1189,11 +1188,11 @@ Dim i As Integer
     
     
     ' ********************************************************
-    b = Modo <> 2 And Modo <> 0
+    B = Modo <> 2 And Modo <> 0
     
-    cmdAceptar.visible = b
-    cmdCancelar.visible = b
-    DataGrid1.Enabled = Not b
+    cmdAceptar.visible = B
+    cmdCancelar.visible = B
+    DataGrid1.Enabled = Not B
     
     
     If Modo < 5 Then
@@ -1220,37 +1219,37 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botons de la toolbar i del menu, según el modo en que estiguem
-Dim b As Boolean
+Dim B As Boolean
 
-    ' *** adrede: per a que no es puga fer res si estic cridant des de frmViagrc ***
+    
 
-    b = (Modo = 2) And ExpedBusca = 0
+    B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Vore Tots
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b And Not DeConsulta
-    Me.mnNuevo.Enabled = b And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
+    Me.mnNuevo.Enabled = B And Not DeConsulta
         
         
     
-    b = (b And Adodc1.Recordset.RecordCount > 0) And Not DeConsulta And ExpedBusca = 0
+    B = (B And Adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
 
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
     'Toolbar1.Buttons(8).Enabled = b
-    Me.mnImprimir.Enabled = b
+    Me.mnImprimir.Enabled = B
 
-    Toolbar1.Buttons(8).Enabled = False
+    Toolbar1.Buttons(8).Enabled = B
 
     ' ******************************************************************************
 End Sub
@@ -1447,18 +1446,18 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim i As Long
-Dim b As Boolean
-Dim cad As String
+Dim B As Boolean
+Dim Cad As String
     Select Case Modo
         Case 3 'INSERTAR
             If DatosOk Then
                 
                 If vParamAplic.CartaPortes Then
-                    b = InsertarDesdeForm2(Me, 0)
+                    B = InsertarDesdeForm2(Me, 0)
                 Else
-                    b = InsertarDesdeForm2(Me, 2, Me.Name) 'Solo inserta cod,nom,etiq
+                    B = InsertarDesdeForm2(Me, 2, Me.Name) 'Solo inserta cod,nom,etiq
                 End If
-                If b Then
+                If B Then
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
@@ -1500,10 +1499,12 @@ Dim cad As String
             cadB = ObtenerBusqueda(Me, False)
             If cadB <> "" Then
                 
-                PonerModo 2
+                
                 CargaGrid cadB
+                PonerModo 2
 '                lblIndicador.Caption = "RESULTADO BUSQUEDA"
                 PonerFocoGrid Me.DataGrid1
+                
             End If
             
             
@@ -1511,9 +1512,9 @@ Dim cad As String
         Case 5, 6
                 If InsertarModificarLinea Then
                     If Modo = 6 Then
-                        cad = "matricula = " & DBSet(Text3(0).Text, "T")
+                        Cad = "matricula = " & DBSet(Text3(0).Text, "T")
                     Else
-                        cad = "chofer = " & NumRegElim
+                        Cad = "chofer = " & NumRegElim
                     End If
                     
                     
@@ -1527,9 +1528,9 @@ Dim cad As String
                         If ModificaLineas = 1 Then
                             Data2.Recordset.MoveLast
                         Else
-                            Data2.Recordset.Find cad
+                            Data2.Recordset.Find Cad
                         End If
-                        b = True
+                        B = True
     
                     
                     Else
@@ -1540,11 +1541,11 @@ Dim cad As String
                         CargaLineas True, 2
                     
                         If ModificaLineas = 1 Then
-                            data3.Recordset.MoveLast
+                            Data3.Recordset.MoveLast
                         Else
-                            data3.Recordset.Find cad
+                            Data3.Recordset.Find Cad
                         End If
-                        b = True
+                        B = True
                     End If
                     PonerModo 2
                 End If
@@ -1552,7 +1553,7 @@ Dim cad As String
 End Sub
 
 Private Sub cmdCancelar_Click()
-Dim cad As String
+Dim Cad As String
 
 
     If Modo < 5 Then
@@ -1585,9 +1586,9 @@ Dim cad As String
             If ModificaLineas = 1 Then '1 = Insertar
                 If Not Data2.Recordset.EOF Then Data2.Recordset.MoveFirst
             ElseIf ModificaLineas = 2 Then 'Modificar
-                 cad = "(chofer=" & Data2.Recordset!Chofer & ")"
+                 Cad = "(chofer=" & Data2.Recordset!Chofer & ")"
                  CargaLineas True, 1
-                 Data2.Recordset.Find cad
+                 Data2.Recordset.Find Cad
             End If
             
             LLamaLineasChofer 0, 0
@@ -1597,11 +1598,11 @@ Dim cad As String
             DataGrid3.AllowAddNew = False
                         
             If ModificaLineas = 1 Then '1 = Insertar
-                If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
+                If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
             ElseIf ModificaLineas = 3 Then 'Modificar
-                 cad = "(codenvio='" & "" & "')"
+                 Cad = "(codenvio='" & "" & "')"
                  CargaLineas True, 2
-                 data3.Recordset.Find cad
+                 Data3.Recordset.Find Cad
             End If
             
             
@@ -1623,21 +1624,21 @@ Dim cad As String
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     
     
     
-    cad = Adodc1.Recordset.Fields(0) & "|"
-    cad = cad & Adodc1.Recordset.Fields(1) & "|"
+    Cad = Adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
     
     
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1761,7 +1762,26 @@ Private Sub mnEliminar_Click()
 End Sub
 
 Private Sub mnImprimir_Click()
-    'printNou
+    
+    With frmImprimir2
+        .cadTabla2 = "senvio"
+        .Informe2 = "rFacEnvio.rpt"
+        If cadB <> "" Then
+            .cadRegSelec = SQL2SF_David(cadB, "senvio|")
+        Else
+            .cadRegSelec = ""
+        End If
+        .cadRegActua = Replace(POS2SF(Adodc1, Me), "senvio", "senvio")
+        .cadTodosReg = ""
+        '.OtrosParametros2 = "pEmpresa='" & vEmpresa.NomEmpre & "'|pOrden={clientes.ape_raso}|"
+        .OtrosParametros2 = "|pEmpresa='" & vEmpresa.nomempre & "'|"
+        .NumeroParametros2 = 2
+        .MostrarTree2 = False
+        .InfConta2 = False
+        .ConSubInforme2 = False
+
+        .Show vbModal
+    End With
 End Sub
 
 Private Sub mnModificar_Click()
@@ -1917,21 +1937,21 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim Datos As String
-Dim b As Boolean
+Dim B As Boolean
 ' *** només per ad este manteniment ***
 Dim RS As Recordset
-Dim cad As String
+Dim Cad As String
 Dim Cta As String
 Dim cadMen As String
 
 'Dim exped As String
 ' *************************************
 
-    b = CompForm(Me, 2)
-    If Not b Then Exit Function
+    B = CompForm(Me, 2)
+    If Not B Then Exit Function
 
 
-    If b And (Modo = 3) Then
+    If B And (Modo = 3) Then
         Datos = DevuelveDesdeBD(conAri, "codenvio", "senvio", "codenvio", txtAux(0).Text, "N")
 
          
@@ -1944,7 +1964,7 @@ Dim cadMen As String
         '*************************************************************************************
     End If
 
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1978,7 +1998,7 @@ Dim i As Byte
 End Sub
 
 Private Sub CargaForaGrid()
-Dim b As Boolean
+Dim B As Boolean
     If vParamAplic.CartaPortes Then
         If DataGrid1.Columns.Count <= 2 Then Exit Sub
         ' *** posar als camps de fora del grid el valor de la columna corresponent ***
@@ -2056,7 +2076,7 @@ End Function
 '******************************************************************************************
 
 Private Sub BotonesToolBarAux()
-Dim b As Boolean
+Dim B As Boolean
 
     
     If Not vParamAplic.CartaPortes Then Exit Sub
@@ -2064,18 +2084,18 @@ Dim b As Boolean
    
     
     
-        b = Modo = 2 Or Modo = 5
-        ToolbarAux(0).Buttons(1).Enabled = b
-        If b Then b = Me.Data2.Recordset.RecordCount > 0
-        ToolbarAux(0).Buttons(2).Enabled = b   '(Modo = 2 And Me.Data2.Recordset.RecordCount > 0)
-        ToolbarAux(0).Buttons(3).Enabled = b  '(Modo = 2 And Me.Data2.Recordset.RecordCount > 0)
+        B = Modo = 2 Or Modo = 5
+        ToolbarAux(0).Buttons(1).Enabled = B
+        If B Then B = Me.Data2.Recordset.RecordCount > 0
+        ToolbarAux(0).Buttons(2).Enabled = B   '(Modo = 2 And Me.Data2.Recordset.RecordCount > 0)
+        ToolbarAux(0).Buttons(3).Enabled = B  '(Modo = 2 And Me.Data2.Recordset.RecordCount > 0)
         
     
-        b = Modo = 2 Or Modo = 6
-        ToolbarAux(1).Buttons(1).Enabled = b
-        If b Then b = Me.data3.Recordset.RecordCount > 0
-        ToolbarAux(1).Buttons(2).Enabled = b
-        ToolbarAux(1).Buttons(3).Enabled = b
+        B = Modo = 2 Or Modo = 6
+        ToolbarAux(1).Buttons(1).Enabled = B
+        If B Then B = Me.Data3.Recordset.RecordCount > 0
+        ToolbarAux(1).Buttons(2).Enabled = B
+        ToolbarAux(1).Buttons(3).Enabled = B
     
 End Sub
 
@@ -2160,7 +2180,7 @@ Dim vWhere As String
         
         
         
-        AnyadirLinea DataGrid3, data3
+        AnyadirLinea DataGrid3, Data3
         LLamaLineasMatricula ObtenerAlto(DataGrid3, 30), 1
         
 
@@ -2211,7 +2231,7 @@ End Sub
 
 'Matricula o chofer
 Private Sub BotonEliminarLinea(Chofer As Boolean)
-Dim cad As String, cad2 As String
+Dim Cad As String, Cad2 As String
 Dim i As Integer
 
     If Modo <> 2 Then Exit Sub
@@ -2219,8 +2239,8 @@ Dim i As Integer
         If Data2.Recordset.EOF Then Exit Sub
         If Data2.Recordset.RecordCount < 1 Then Exit Sub
     Else
-        If data3.Recordset.EOF Then Exit Sub
-        If data3.Recordset.RecordCount < 1 Then Exit Sub
+        If Data3.Recordset.EOF Then Exit Sub
+        If Data3.Recordset.RecordCount < 1 Then Exit Sub
     End If
     
     
@@ -2233,9 +2253,9 @@ Dim i As Integer
         BuscaChekc = ""
         For i = 1 To 3
             
-            cad = DevuelveDesdeBD(conAri, "count(*)", RecuperaValor("scaalb|schalb|scafac1|", i), "chofer", CStr(Data2.Recordset!Chofer), "N")
-            If cad = "" Then cad = "0"
-            If Val(cad) > 0 Then
+            Cad = DevuelveDesdeBD(conAri, "count(*)", RecuperaValor("scaalb|schalb|scafac1|", i), "chofer", CStr(Data2.Recordset!Chofer), "N")
+            If Cad = "" Then Cad = "0"
+            If Val(Cad) > 0 Then
                 BuscaChekc = RecuperaValor("Albaranes|Alb. anulados|Facturas|", i)
                 Exit For
             End If
@@ -2249,9 +2269,9 @@ Dim i As Integer
     Else
         
             
-            cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb_portes", "matricula", CStr(data3.Recordset.Fields(0)), "T")
-            If cad = "" Then cad = "0"
-            If Val(cad) > 0 Then
+            Cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb_portes", "matricula", CStr(Data3.Recordset.Fields(0)), "T")
+            If Cad = "" Then Cad = "0"
+            If Val(Cad) > 0 Then
                 MsgBox "Existen albaranes asociados a esta matricula", vbExclamation
                 Exit Sub
             End If
@@ -2261,36 +2281,36 @@ Dim i As Integer
    
     
     'Dependiendo del parametro de la aplicacion trabajamos con Dpto o Direc.
-    cad = IIf(Chofer, "el conductor", "la matricula")
-    cad = "¿Seguro que desea eliminar " & cad & vbCrLf
+    Cad = IIf(Chofer, "el conductor", "la matricula")
+    Cad = "¿Seguro que desea eliminar " & Cad & vbCrLf
     If Chofer Then
           
-        cad = cad & vbCrLf & "Codigo : " & Data2.Recordset.Fields(0)
-        cad = cad & vbCrLf & "Nombre: " & Data2.Recordset.Fields(1)
+        Cad = Cad & vbCrLf & "Codigo : " & Data2.Recordset.Fields(0)
+        Cad = Cad & vbCrLf & "Nombre: " & Data2.Recordset.Fields(1)
     Else
-        cad = cad & vbCrLf & "Codigo : " & data3.Recordset.Fields(0)
-        cad = cad & vbCrLf & "Desc.: " & data3.Recordset.Fields(1)
+        Cad = Cad & vbCrLf & "Codigo : " & Data3.Recordset.Fields(0)
+        Cad = Cad & vbCrLf & "Desc.: " & Data3.Recordset.Fields(1)
         
     End If
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
         If Chofer Then
             NumRegElim = Data2.Recordset.AbsolutePosition
-            cad = "sconductor WHERE  chofer = " & Data2.Recordset!Chofer
+            Cad = "sconductor WHERE  chofer = " & Data2.Recordset!Chofer
             i = Data2.Recordset.AbsolutePosition
         Else
-            NumRegElim = data3.Recordset.AbsolutePosition
-            cad = "smatriculas WHERE matricula = " & DBSet(data3.Recordset!Matricula, "T")
-            i = data3.Recordset.AbsolutePosition
+            NumRegElim = Data3.Recordset.AbsolutePosition
+            Cad = "smatriculas WHERE matricula = " & DBSet(Data3.Recordset!Matricula, "T")
+            i = Data3.Recordset.AbsolutePosition
         End If
         
         
-        cad = "DELETE FROM " & cad
-        conn.Execute cad
+        Cad = "DELETE FROM " & Cad
+        conn.Execute Cad
         
       
         
@@ -2302,7 +2322,7 @@ Dim i As Integer
             If Chofer Then
                 Data2.Recordset.Move i
             Else
-                data3.Recordset.Move i
+                Data3.Recordset.Move i
             End If
         End If
             
@@ -2339,8 +2359,8 @@ Dim aModo As Byte
         
     Else
         'If aModo = 6 Then
-        If data3.Recordset.EOF Then Exit Sub
-        If data3.Recordset.RecordCount < 1 Then Exit Sub
+        If Data3.Recordset.EOF Then Exit Sub
+        If Data3.Recordset.RecordCount < 1 Then Exit Sub
         Me.SSTab1.Tab = 2
     
     End If
@@ -2381,48 +2401,48 @@ End Sub
 
 
 Private Sub LLamaLineasChofer(alto As Single, xModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
 
     ModificaLineas = xModo
     
-    b = Modo = 5 And (ModificaLineas = 1 Or ModificaLineas = 2) 'Insertar o Modificar Lineas
+    B = Modo = 5 And (ModificaLineas = 1 Or ModificaLineas = 2) 'Insertar o Modificar Lineas
 
-    DataGrid2.Enabled = Not b
+    DataGrid2.Enabled = Not B
     
     DeseleccionaGrid Me.DataGrid2
    
     For i = 0 To 1
            ' Text3(i).Height = DataGrid6.RowHeight
-            Text3(i).visible = b
+            Text3(i).visible = B
             Text3(i).Top = alto
     Next
-    Me.cboDefecto(0).visible = b
+    Me.cboDefecto(0).visible = B
     Me.cboDefecto(0).Top = alto
     
 End Sub
 
 
 Private Sub LLamaLineasMatricula(alto As Single, xModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
 
     ModificaLineas = xModo
     
-    b = Modo = 6 And (ModificaLineas = 1 Or ModificaLineas = 2) 'Insertar o Modificar Lineas
+    B = Modo = 6 And (ModificaLineas = 1 Or ModificaLineas = 2) 'Insertar o Modificar Lineas
 
-    DataGrid3.Enabled = Not b
+    DataGrid3.Enabled = Not B
     
     DeseleccionaGrid Me.DataGrid3
    
     For i = 0 To 1
         
            ' Text3(i).Height = DataGrid6.RowHeight
-            Text4(i).visible = b
+            Text4(i).visible = B
             Text4(i).Top = alto
         
     Next
-    Me.cboDefecto(1).visible = b
+    Me.cboDefecto(1).visible = B
     Me.cboDefecto(1).Top = alto
 End Sub
 
@@ -2434,17 +2454,16 @@ Dim SQL As String
 
 
         If Cual_ = 0 Or Cual_ = 1 Then
-            SQL = "SELECT    dni  ,nombre  , if(defecto =1,'Si','') defecto,chofer FROM sconductor where "
+            
+            SQL = " false "
             If enlaza Then
-                If Trim(txtAux(0).Text) = "" Then
-                    SQL = SQL & " false"
-                Else
-                    SQL = SQL & "codenvio = " & txtAux(0).Text
+                
+                If Not Adodc1.Recordset.EOF Then
+                    If Val(DBLet(Adodc1.Recordset!CodEnvio, "N")) >= 0 Then SQL = "codenvio = " & Adodc1.Recordset!CodEnvio
                 End If
-            Else
-                SQL = SQL & " false"
+            
             End If
-             
+            SQL = "SELECT    dni  ,nombre  , if(defecto =1,'Si','') defecto,chofer FROM sconductor where " & SQL
             SQL = SQL & " ORDER BY  chofer"
             CargaGridGnral DataGrid2, Me.Data2, SQL, PrimVez, 360
             SQL = "S|Text3(0)|T|DNI|1300|;S|Text3(1)|T|Nombre|3000|;"
@@ -2458,18 +2477,18 @@ Dim SQL As String
         
         
         If Cual_ = 0 Or Cual_ = 2 Then
-            SQL = "SELECT matricula ,titulo ,if(defecto =1,'Si','') defecto,codenvio FROM smatriculas WHERE "
+        
+            SQL = " false "
             If enlaza Then
-                If Trim(txtAux(0).Text) = "" Then
-                    SQL = SQL & " false"
-                Else
-                    SQL = SQL & " codenvio= " & txtAux(0).Text
+                If Not Adodc1.Recordset.EOF Then
+                    If Val(DBLet(Adodc1.Recordset!CodEnvio, "N")) >= 0 Then SQL = "codenvio = " & Adodc1.Recordset!CodEnvio
                 End If
-            Else
-                SQL = SQL & " false"
+            
             End If
+        
+            SQL = "SELECT matricula ,titulo ,if(defecto =1,'Si','') defecto,codenvio FROM smatriculas WHERE " & SQL
             SQL = SQL & " ORDER BY  matricula "
-            CargaGridGnral DataGrid3, Me.data3, SQL, PrimVez, 330
+            CargaGridGnral DataGrid3, Me.Data3, SQL, PrimVez, 330
             
             SQL = "S|Text4(0)|T|matricula|1400|;S|Text4(1)|T|Decr.|3500|;"
             SQL = SQL & "S|cboDefecto(1)|C|Def.|990|;"

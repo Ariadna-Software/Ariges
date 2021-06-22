@@ -1382,22 +1382,22 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim cad As String
+Dim Cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
     '### a mano
-    cad = "¿Seguro que desea eliminar el Banco Propio? " & vbCrLf
-    cad = cad & vbCrLf & "Cod. Banco : " & Format(Data1.Recordset.Fields(0), "0000")
-    cad = cad & vbCrLf & "Desc. Banco: " & Data1.Recordset.Fields(1)
+    Cad = "¿Seguro que desea eliminar el Banco Propio? " & vbCrLf
+    Cad = Cad & vbCrLf & "Cod. Banco : " & Format(Data1.Recordset.Fields(0), "0000")
+    Cad = Cad & vbCrLf & "Desc. Banco: " & Data1.Recordset.Fields(1)
     
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then     'Borramos
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then     'Borramos
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        cad = "Delete from sbanpr where codbanpr=" & Data1.Recordset!codbanpr
-        conn.Execute cad
+        Cad = "Delete from sbanpr where codbanpr=" & Data1.Recordset!codbanpr
+        conn.Execute Cad
 '        Data1.Recordset.Delete
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
@@ -1414,16 +1414,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
     
-    cad = Data1.Recordset.Fields(0) & "|"
-    cad = cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1800,19 +1800,19 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 '
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
    
     Modo = Kmodo
         
     '----------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     PonerIndicador lblIndicador, Modo
     
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         cmdRegresar.visible = False
     End If
@@ -1823,14 +1823,14 @@ Dim NumReg As Byte
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, CLng(NumReg)
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
 
     
     '------------------------------------------------------
     'Modo insertar o modificar
-    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    cmdAceptar.visible = b Or Modo = 1
-    cmdCancelar.visible = b Or Modo = 1
+    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    cmdAceptar.visible = B Or Modo = 1
+    cmdCancelar.visible = B Or Modo = 1
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
     Else
@@ -1868,41 +1868,41 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa botones de la Toolbar segun el Modo
-Dim b As Boolean
-    b = (Modo = 2)
+Dim B As Boolean
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    mnEliminar.Enabled = B
+    Toolbar1.Buttons(8).Enabled = B
     
-    '-----------------------------------------
-    b = (Modo >= 3) 'Insertar/Modificar
+    B = B Or Modo = 0
     'Insertar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnNuevo.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
-    Toolbar1.Buttons(8).Enabled = False
+    
 
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
     
     If Not Comprueba_CuentaBan2(Text1(10).Text & Text1(11).Text & Text1(12).Text & Text1(13).Text, True) Then
-        If MsgBox("La cuenta bancaria no es correcta. ¿Continuar?", vbQuestion + vbYesNo) = vbNo Then b = False
+        If MsgBox("La cuenta bancaria no es correcta. ¿Continuar?", vbQuestion + vbYesNo) = vbNo Then B = False
         
     Else
             CadenaConsulta = Text1(10).Text & Text1(11).Text & Text1(12).Text & Text1(13).Text
@@ -1929,10 +1929,10 @@ Dim b As Boolean
     End If
  
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then B = False
     End If
 
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1945,9 +1945,45 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 2: mnModificar_Click  'Modificar
         Case 3: mnEliminar_Click  'Borrar
             
-        Case 8:
+        Case 8: PrintNou
     End Select
 End Sub
+
+
+Private Sub PrintNou()
+
+    With frmImprimir2
+        .cadTabla2 = "sbanpr"
+        .Informe2 = "rFacBancos.rpt"
+        indCodigo = InStr(1, Data1.RecordSource, " WHERE ")
+        If indCodigo > 0 Then
+            CadenaConsulta = Mid(Data1.RecordSource, indCodigo + 7)
+        Else
+            CadenaConsulta = ""
+        End If
+        
+        indCodigo = InStr(1, CadenaConsulta, " ORDER BY ")
+        If indCodigo > 0 Then CadenaConsulta = Mid(CadenaConsulta, 1, indCodigo)
+        If CadenaConsulta <> "" Then
+            .cadRegSelec = SQL2SF_David(CadenaConsulta, "sbanpr|")
+        Else
+            .cadRegSelec = ""
+        End If
+        .cadRegActua = POS2SF(Data1, Me)
+        .cadTodosReg = ""
+        '.OtrosParametros2 = "pEmpresa='" & vEmpresa.NomEmpre & "'|pOrden={clientes.ape_raso}|"
+        .OtrosParametros2 = "|pEmpresa='" & vEmpresa.nomempre & "'|"
+        .NumeroParametros2 = 2
+        .MostrarTree2 = False
+        .InfConta2 = False
+        .ConSubInforme2 = False
+
+        .Show vbModal
+    End With
+
+End Sub
+
+
 
 Private Sub PonerOpcionesMenu()
     PonerOpcionesMenuGeneral Me
@@ -1963,11 +1999,11 @@ End Sub
 
 
 Private Sub PosicionarData()
-Dim cad As String
+Dim Cad As String
 Dim Indicador As String
 
-    cad = "(codbanpr=" & Text1(0).Text & ")"
-    If SituarData(Data1, cad, Indicador) Then
+    Cad = "(codbanpr=" & Text1(0).Text & ")"
+    If SituarData(Data1, Cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else

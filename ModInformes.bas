@@ -281,7 +281,7 @@ Dim cadAux As String
                         End If
                         
                     Case "T"
-                        If CSng(cadDesde) > CSng(cadHasta) Then
+                        If (cadDesde) > (cadHasta) Then
                             MsgBox "El campo Desde debe ser menor que el campo Hasta", _
                             vbExclamation, "Error de campo"
                             cadAux = "Error"
@@ -331,17 +331,17 @@ End Function
 Public Function QuitarCaracterACadena(cadForm As String, Caracter As String) As String
 'IN: [cadForm] es la cadena en la que se eliminara todos los caractes iguales a la vble [Caracter]
 'OUT: cadena sin los caracteres
-Dim I As Long
+Dim i As Long
 Dim J As Long
 Dim Aux As String
 
     Aux = cadForm
-    I = InStr(1, Aux, Caracter, vbTextCompare)
-    While I > 0
-        I = InStr(1, Aux, Caracter, vbTextCompare)
-        If I > 0 Then
+    i = InStr(1, Aux, Caracter, vbTextCompare)
+    While i > 0
+        i = InStr(1, Aux, Caracter, vbTextCompare)
+        If i > 0 Then
             J = Len(Caracter)
-            Aux = Mid(Aux, 1, I - 1) & Mid(Aux, I + J, Len(Aux) - 1)
+            Aux = Mid(Aux, 1, i - 1) & Mid(Aux, i + J, Len(Aux) - 1)
         End If
     Wend
     QuitarCaracterACadena = Aux
@@ -417,7 +417,7 @@ Dim Cad As String
 End Function
 
 
-Public Function PonerParamRPT2(indice As Byte, cadParam As String, numParam As Byte, nomDocu As String, ByRef ImpresionDirecta As Boolean, NomPDF As String, ByRef MultiInforme As Integer) As Boolean
+Public Function PonerParamRPT2(Indice As Byte, cadParam As String, numParam As Byte, nomDocu As String, ByRef ImpresionDirecta As Boolean, NomPDF As String, ByRef MultiInforme As Integer) As Boolean
 Dim vParamRpt As CParamRpt 'Tipos de Documentos
 Dim Cad As String
 
@@ -426,7 +426,7 @@ Dim Cad As String
     NomPDF = ""  'Reestablezco
     ImpresionDirecta = False 'psi acaso
     
-    If vParamRpt.Leer(indice) = 1 Then
+    If vParamRpt.Leer(Indice) = 1 Then
         Cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
         MsgBox Cad & "Debe configurar la aplicación.", vbExclamation
         Set vParamRpt = Nothing
@@ -483,7 +483,7 @@ Public Sub PonerParamCadOferta(cadParam As String, numParam As Byte, cadSelect A
 'RPT que lo utiliza: AriOfertas.rpt
 Dim cadOfertas As String
 Dim SQL As String
-Dim I As Byte
+Dim i As Byte
 Dim RS As ADODB.Recordset
 
     On Error GoTo EPonParam
@@ -491,8 +491,8 @@ Dim RS As ADODB.Recordset
     cadOfertas = ""
     SQL = "scapre"
 
-    I = InStr(1, cadSelect, "scapre")
-    If Not (I > 0) Then SQL = "schpre"
+    i = InStr(1, cadSelect, "scapre")
+    If Not (i > 0) Then SQL = "schpre"
 
     cadSelect = QuitarCaracterACadena(cadSelect, "{")
     cadSelect = QuitarCaracterACadena(cadSelect, "}")
@@ -612,20 +612,20 @@ End Function
 
 Public Function SaltosDeLinea(ByVal CADENA As String) As String
     Dim Devu As String
-    Dim I As Integer
+    Dim i As Integer
     
     Devu = ""
     Do
-        I = InStr(1, CADENA, vbCrLf)
-        If I > 0 Then
+        i = InStr(1, CADENA, vbCrLf)
+        If i > 0 Then
             If Devu <> "" Then Devu = Devu & """ + chr(13) + """
-            Devu = Devu & Mid(CADENA, 1, I - 1)
-            CADENA = Mid(CADENA, I + 2)
+            Devu = Devu & Mid(CADENA, 1, i - 1)
+            CADENA = Mid(CADENA, i + 2)
             
        Else
             Devu = Devu & CADENA
        End If
-    Loop While I > 0
+    Loop While i > 0
     SaltosDeLinea = Devu
 End Function
 
@@ -638,7 +638,7 @@ End Function
 
 '**********************************************************
 Public Sub GenerarEtiquetasEstanterias(ByRef lw, CADENA As String)
-Dim I As Integer
+Dim i As Integer
         
         
         If lw Is Nothing Then

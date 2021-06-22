@@ -638,7 +638,7 @@ End Sub
 'GRABAR EN TESORERIA
 '======================================================================
 
-Public Function InsertarEnTesoreria(MenError As String) As Boolean
+Public Function InsertarEnTesoreria(MenError As String, AnticiposADescontar As String) As Boolean
 'Guarda datos de Tesoreria en tablas: ariges.svenci y en conta.scobros
 Dim B As Boolean
 Dim RS As ADODB.Recordset
@@ -648,17 +648,41 @@ Dim cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
 Dim FecVenci As Date, FecVenci1 As Date
 Dim ImpVenci As Single
-Dim I As Byte
-
+Dim i As Byte
+Dim ImporteDescontadoAnticipo As Currency
     On Error GoTo EInsertarTesoreria
 
-'    b = False
+
+    
+
+
+
+
+    Set rsVenci = New ADODB.Recordset
     InsertarEnTesoreria = False
     CadValues2 = ""
-
+    ImporteDescontadoAnticipo = 0
+    
     'Obtener el Nº de Vencimientos de la forma de pago
-    SQL = "SELECT numerove, primerve, restoven FROM sforpa WHERE codforpa=" & ForPago
-    Set rsVenci = New ADODB.Recordset
+    If AnticiposADescontar <> "" Then
+        'Junio 2021
+        'Importe descontado
+        SQL = "Select * from sproveanticipo where idanticipo IN (" & AnticiposADescontar & ")"
+        
+        rsVenci.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        While Not rsVenci.EOF
+            ImporteDescontadoAnticipo = ImporteDescontadoAnticipo + rsVenci!Importe
+            rsVenci.MoveNext
+        Wend
+        rsVenci.Close
+        
+        'Junio 2021
+        SQL = "SELECT 1 numerove, primerve, restoven FROM sforpa WHERE codforpa=" & ForPago  'fuerzo un UNICO vencimiento
+    Else
+        'Lo que habia
+        SQL = "SELECT numerove, primerve, restoven FROM sforpa WHERE codforpa=" & ForPago
+    End If
+    
     rsVenci.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not rsVenci.EOF Then
@@ -677,7 +701,7 @@ Dim I As Byte
               
               'Primer Vencimiento
               '------------------------------------------------------------
-              I = 1
+              i = 1
               'FECHA VTO
               FecVenci = CDate(FecFactu)
               '=== Modificado: Laura 23/01/2007
@@ -693,12 +717,18 @@ Dim I As Byte
                   FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(RS!mesnogir, "N"), DBSet(0, "N"), RS!DiaPago1, RS!DiaPago2, RS!DiaPago3)
               End If
              
-              CadValues2 = CadValuesAux2 & I
+              CadValues2 = CadValuesAux2 & i
               CadValues2 = CadValues2 & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
                 
               'IMPORTE del Vencimiento
               If rsVenci!numerove = 1 Then
-                    ImpVenci = TotalFac
+                    If AnticiposADescontar <> "" Then
+                        'Junio 2021
+                        ImpVenci = TotalFac - ImporteDescontadoAnticipo
+                    Else
+                        'LO que habia
+                        ImpVenci = TotalFac
+                    End If
               Else
                     ImpVenci = Round(TotalFac / rsVenci!numerove, 2)
                     'Comprobar que la suma de los vencimientos cuadra con el total de la factura
@@ -735,8 +765,9 @@ Dim I As Byte
               SQL = "Factura num.: " & Numfactu & "-" & Format(FecFactu, "dd/mm/yyyy")
               CadValues2 = CadValues2 & "'" & DevNombreSQL(SQL) & "',"
               SQL = "Vto a fecha: " & Format(FecVenci1, "dd/mm/yyyy")
-              CadValues2 = CadValues2 & "'" & DevNombreSQL(SQL) & "'"
- 
+              If AnticiposADescontar <> "" Then SQL = SQL & "-Id anticipos: " & AnticiposADescontar
+              CadValues2 = CadValues2 & "'" & DevNombreSQL(Mid(SQL, 1, 60)) & "'"
+                 
 
               'Si hay contabilidad nueva añadira los siguiens valores
               '  nomprove , domprove, pobprove, cpprove, proprove, nifProve, codpais, numSerie)"
@@ -776,7 +807,7 @@ Dim I As Byte
               
               'Resto Vencimientos
               '--------------------------------------------------------------------
-              For I = 2 To rsVenci!numerove
+              For i = 2 To rsVenci!numerove
                  'FECHA Resto Vencimientos
                   '==== Modificado: Laura 23/01/2007
                   'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
@@ -791,7 +822,7 @@ Dim I As Byte
                         FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(RS!mesnogir, "N"), DBSet(0, "N"), RS!DiaPago1, RS!DiaPago2, RS!DiaPago3)
                   End If
 
-                  CadValues2 = CadValues2 & ", " & CadValuesAux2 & I & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
+                  CadValues2 = CadValues2 & ", " & CadValuesAux2 & i & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
 
                   'IMPORTE Resto de Vendimientos
                   ImpVenci = Round(TotalFac / rsVenci!numerove, 2)
@@ -815,6 +846,7 @@ Dim I As Byte
                   SQL = "Factura num.: " & Numfactu & "-" & Format(FecFactu, "dd/mm/yyyy")
                   CadValues2 = CadValues2 & "'" & DevNombreSQL(SQL) & "',"
                   SQL = "Vto a fecha: " & Format(FecVenci1, "dd/mm/yyyy")
+                  
                   CadValues2 = CadValues2 & "'" & DevNombreSQL(SQL) & "'"
                   
                   
@@ -829,7 +861,7 @@ Dim I As Byte
                   End If
                   CadValues2 = CadValues2 & ")"
                   
-              Next I
+              Next i
             End If
         End If
         RS.Close
@@ -889,13 +921,61 @@ Dim I As Byte
     End If
 
     B = True
+    If AnticiposADescontar <> "" Then
     
+        Set rsVenci = New ADODB.Recordset
+        SQL = "Select * from sproveanticipo where idanticipo IN (" & AnticiposADescontar & ") ORDER BY idanticipo DESC"
+        rsVenci.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        i = 1
+        Set RS = New ADODB.Recordset
+        While Not rsVenci.EOF
+        
+            'Actualizamos el vto al numero de factura
+            i = i + 1
+            
+            SQL = "Select * from pagos where numserie='" & vParamAplic.SerieAnticipoProveedor & "' AND codmacta ='" & CtaProve
+            SQL = SQL & "' AND numfactu =" & DBSet(rsVenci!numdocum, "T")
+            RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+            If RS.EOF Then
+                'ERROR . De mometo NO voy a dejar seguir
+                SQL = "No se enecuentra en tesoreria en anticipo: " & vParamAplic.SerieAnticipoProveedor & " " & rsVenci!numdocum & " de proveedor " & CtaProve
+                Err.Raise 513, , SQL
+            
+            Else
+                'Vamos a actualizarlo a numero de factura, y vencimiento correspondiente
+                SQL = DBLet(RS!observa, "T")
+                If SQL <> "" Then SQL = SQL & vbCrLf
+                SQL = "Descontado en factura: " & Numfactu & " de fecha " & FecFactu & vbCrLf
+                SQL = SQL & "Id: " & Format(rsVenci!idAnticipo, "0000") & "   Prov: " & rsVenci!Codprove & " " & DBLet(RS!nomprove, "T") & vbCrLf
+                SQL = SQL & Now & "     " & vUsu.Login
+                
+                SQL = "UPDATE pagos set observa=" & DBSet(SQL, "T")
+                SQL = SQL & " WHERE  numserie='" & vParamAplic.SerieAnticipoProveedor & "' AND codmacta ='" & CtaProve
+                SQL = SQL & "' AND numfactu =" & DBSet(rsVenci!numdocum, "T") & " AND fecfactu = " & DBSet(RS!FecFactu, "F")
+                SQL = SQL & " AND numorden = " & RS!numorden
+                ConnConta.Execute SQL
+            End If
+            RS.Close
+            
+            rsVenci.MoveNext
+        Wend
+        rsVenci.Close
+        Set rsVenci = Nothing
+        
+            SQL = "UPDATE sproveanticipo SET descontado=1 "
+            SQL = SQL & " where idanticipo IN (" & AnticiposADescontar & ")"
+            ejecutar SQL, False
+    
+        
+    End If
 EInsertarTesoreria:
     If Err.Number <> 0 Then
         B = False
         MenError = "Error al insertar en Tesoreria: " & Err.Description
     End If
     InsertarEnTesoreria = B
+    Set rsVenci = Nothing
+    Set RS = Nothing
 End Function
 
 'Si es LiquidacionProveedores entonces
@@ -903,7 +983,7 @@ End Function
 ' con tipo iva REA
 ' La diferencia PPAL es en el Arimoney y que en la lineas de la factura , en la conta
 ' es el lugar donde van las retenciones
-Public Function TraspasoAlbaranesAFactura(cadSQL As String, InsertarEnLaTesoreria As Boolean, MarcarAlbaranesComoContabilizados As Boolean, LiquidacionProveedores As Boolean) As Boolean
+Public Function TraspasoAlbaranesAFactura(cadSQL As String, InsertarEnLaTesoreria As Boolean, MarcarAlbaranesComoContabilizados As Boolean, LiquidacionProveedores As Boolean, AnticiposProveedorDescontados As String) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Albaranes que vamos a Facturar
 'Desde Albaranes Genera las Facturas correspondientes
 Dim B As Boolean
@@ -932,7 +1012,7 @@ Dim ImporteAuxiliarTesoreria As Currency
         
         If InsertarEnLaTesoreria Then
             
-            B = InsertarEnTesoreria(MenError)
+            B = InsertarEnTesoreria(MenError, AnticiposProveedorDescontados)
             
         End If
         
@@ -1153,7 +1233,7 @@ Public Function CalcularDatosFactura2(cadWhere As String, NomTabla As String, No
 'nomTabla: nombre de la tabla de albaranes(scaalp) o de AlbaranesXFactura(scafpa)
 '           segun llamemos desde recepcion de facturas o desde Hco de Facturas
 Dim RS As ADODB.Recordset
-Dim I As Integer
+Dim i As Integer
 
 Dim SQL As String
 Dim cadAux As String
@@ -1189,7 +1269,7 @@ Dim CodigoDeIva As Integer
     RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     TotBruto = 0
-    I = 1
+    i = 1
     While Not RS.EOF
         'Aqui vamos acumulando la suma del importe bruto de las lineas
         TotBruto = TotBruto + RS!bruto
@@ -1224,7 +1304,7 @@ Dim CodigoDeIva As Integer
         TotImpIVA = TotImpIVA + ImpIva
         
         
-        Select Case I
+        Select Case i
             Case 1  'IVA 1
                 TipoIVA1 = CodigoDeIva
                 
@@ -1255,7 +1335,7 @@ Dim CodigoDeIva As Integer
                 'Importe total con IVA
                 ImpIVA3 = ImpIva
         End Select
-        I = I + 1
+        i = i + 1
         RS.MoveNext
     Wend
     
@@ -1265,21 +1345,7 @@ Dim CodigoDeIva As Integer
     'TOTALES
     BrutoFac = TotBruto
     
-    'Aplicarle el dto ppago
-'    ImpPPago = CCur(CalcularDto(CStr(TotBruto), CStr(DtoPPago)))
-'    '---- Laura: 27/09/2006
-'    ImpPPago = Round(ImpPPago, 2)
-'    '----
-    '---- Laura: 24/10/2006
     ImpPPago = CalcularPorcentaje(TotBruto, DtoPPago, 2)
-    '----
-    
-    'Aplicarle el dto general
-'    ImpGnral = CCur(CalcularDto(CStr(TotBruto), CStr(DtoGnral)))
-'    '---- Laura: 27/09/2006
-'    ImpGnral = Round(ImpGnral, 2)
-'    '----
-    '---- Laura: 24/10/2006
     ImpGnral = CalcularPorcentaje(TotBruto, DtoGnral, 2)
     '----
     

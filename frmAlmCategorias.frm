@@ -525,15 +525,15 @@ End Sub
 
 Private Sub BotonModificar()
 Dim anc As Single
-Dim i As Integer
+Dim I As Integer
 
     If Adodc1.Recordset.EOF Then Exit Sub
     If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -593,7 +593,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim cadB As String
 On Error Resume Next
 
@@ -610,11 +610,11 @@ On Error Resume Next
             If DatosOk And BLOQUEADesdeFormulario(Me) Then
                 If ModificaDesdeFormulario(Me, 3) Then
                     TerminaBloquear
-                    i = Adodc1.Recordset.Fields(0)
+                    I = Adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CancelaADODC Me.Adodc1
                     CargaGrid
-                    Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & i)
+                    Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " =" & I)
                 End If
                 DataGrid1.SetFocus
             End If
@@ -758,17 +758,17 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 6: mnVerTodos_Click
         
         Case 8   'Imprimir Listado de Categorias
-            Me.Hide
+           
             frmInformesNew.OpcionListado = 23 '6 'OpcionListado=1
             frmInformesNew.Show vbModal
-            Me.Show vbModal
+           
     End Select
 End Sub
 
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim i As Byte
+Dim I As Byte
 Dim b As Boolean
 Dim tots As String
     

@@ -8,14 +8,14 @@ Begin VB.Form frmComProveAnticipo
    ClientHeight    =   10275
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   16500
+   ClientWidth     =   16965
    ClipControls    =   0   'False
    Icon            =   "frmComProveAnticipo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   10275
-   ScaleWidth      =   16500
+   ScaleWidth      =   16965
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
@@ -229,7 +229,7 @@ Begin VB.Form frmComProveAnticipo
       Height          =   315
       Index           =   2
       Left            =   6600
-      MaxLength       =   16
+      MaxLength       =   20
       TabIndex        =   2
       Tag             =   "Documento|T|N|||sproveanticipo|numdocum|||"
       Text            =   "documento"
@@ -388,7 +388,7 @@ Begin VB.Form frmComProveAnticipo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   14040
+      Left            =   14520
       TabIndex        =   7
       Top             =   9690
       Width           =   1065
@@ -406,7 +406,7 @@ Begin VB.Form frmComProveAnticipo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   15240
+      Left            =   15720
       TabIndex        =   8
       Top             =   9690
       Width           =   1065
@@ -464,8 +464,8 @@ Begin VB.Form frmComProveAnticipo
       Left            =   150
       TabIndex        =   9
       Top             =   930
-      Width           =   16140
-      _ExtentX        =   28469
+      Width           =   16620
+      _ExtentX        =   29316
       _ExtentY        =   15028
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -528,21 +528,22 @@ Begin VB.Form frmComProveAnticipo
       EndProperty
    End
    Begin VB.Label Label1 
-      Caption         =   "Anitcipos proveedor"
+      Alignment       =   1  'Right Justify
+      Caption         =   "Anticipo proveedor"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   24
+         Name            =   "Verdana"
+         Size            =   20.25
          Charset         =   0
-         Weight          =   400
+         Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   735
-      Left            =   5040
+      Height          =   480
+      Left            =   6720
       TabIndex        =   20
-      Top             =   240
-      Width           =   8775
+      Top             =   120
+      Width           =   10095
    End
    Begin VB.Label Label10 
       Caption         =   "Cargando datos ........."
@@ -654,6 +655,10 @@ Dim NumReg As Long
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
+                    Screen.MousePointer = vbHourglass
+                    'Primero  eseeperamos un momentito
+                    Espera 0.25
+                    InsertarAnticipoEnContabilidad CLng(txtAux(0).Text)
                     
                     CargaGrid True
                     
@@ -665,13 +670,26 @@ Dim NumReg As Long
         Case 4 'MODIFICAR
             If DatosOk And BLOQUEADesdeFormulario(Me) Then
                  If ModificaDesdeFormulario(Me, 3) Then
+                 
+                    
+                     '         DatosVto:   codmactaprov|numdcoum|fecdocum|
+                     Indicador = DevuelveDesdeBD(conAri, "codmacta", "sprove", "codprove", Data1.Recordset!Codprove)
+                     Indicador = Indicador & "|" & Data1.Recordset!numdocum & "|" & Data1.Recordset!fechaant & "|"
+                     BorrarAnticipoEnContabilidad Indicador
+                
+                     Indicador = ""
+                   
                      TerminaBloquear
                      NumReg = Data1.Recordset.AbsolutePosition
                      PonerModo 2
                      CancelaADODC Me.Data1
                      CargaGrid True
                      LLamaLineas 30
-                     SituarDataPosicion Data1, NumReg, Indicador
+                     If SituarDataPosicion(Data1, NumReg, Indicador) Then
+                        InsertarAnticipoEnContabilidad CLng(txtAux(0).Text)
+                     Else
+                        MsgBox "No se ha creado en contabilidad", vbExclamation
+                     End If
                  End If
                  lblIndicador.Caption = Indicador
                  PonerFocoGrid DataGrid1
@@ -788,12 +806,25 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
 End Sub
 
 Private Sub Form_Activate()
+
+    If Me.Caption = "" Then
+        Me.Caption = "Anticipo proveedor"
+        Data1.ConnectionString = conn
+        CargaGrid True
+        If Data1.Recordset.EOF Then
+            PonerModo 0
+            
+        Else
+            PonerModo 2
+        End If
+    End If
     Screen.MousePointer = vbDefault
 End Sub
 
 
 Private Sub Form_Load()
     'Icono del formulario
+    Me.Caption = ""
     Me.Icon = frmPpal.Icon
 
     With Me.Toolbar1
@@ -812,19 +843,8 @@ Private Sub Form_Load()
    
     DataGrid1.ClearFields
     
-    
-
     Ordenacion = " ORDER BY idanticipo "
-    CadenaConsulta = MontaSQLCarga(False)
-    Data1.ConnectionString = conn
-    Data1.RecordSource = CadenaConsulta
-    Data1.Refresh
     
-   
-        PonerModo 0
- 
-'    CargaGrid (Modo = 2 Or Modo = 0)
-    CargaGrid False
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -838,8 +858,11 @@ Dim tots As String
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data1, SQL, False
     
+
+        
+    
     tots = "S|txtAux(0)|T|ID|950|;S|txtAux(1)|T|Cod.|1000|;S|cmdAux(0)|B||0|;"
-    tots = tots & "S|txtAux2(0)|T|Proveedor|4080|;S|txtAux(2)|T|Documento|2500|;S|txtAux(3)|T|Fecha|1400|;"
+    tots = tots & "S|txtAux2(0)|T|Proveedor|4080|;S|txtAux(2)|T|Documento|2900|;S|txtAux(3)|T|Fecha|1400|;"
     tots = tots & "S|cmdAux(1)|B||0|;"
     tots = tots & "S|txtAux(4)|T|F.P.|1000|;S|cmdAux(2)|B||0|;"
     tots = tots & "S|txtAux2(1)|T|Forma de pago|2250|;S|txtAux(5)|T|Importe|1400|;S|Combo1|C|Desc.|650|;"
@@ -864,30 +887,30 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim b As Boolean
+Dim B As Boolean
 
     DeseleccionaGrid Me.DataGrid1
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To txtAux.Count - 1
         If jj < 2 Then
             txtAux2(jj).Height = Me.DataGrid1.RowHeight
             txtAux2(jj).Top = alto
-            txtAux2(jj).visible = b
+            txtAux2(jj).visible = B
         End If
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = b
+        txtAux(jj).visible = B
     Next jj
 
-    Me.Combo1.visible = b
+    Me.Combo1.visible = B
     Me.Combo1.Top = alto
     
     
     For jj = 0 To Me.cmdAux.Count - 1
         Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
         Me.cmdAux(jj).Top = alto
-        Me.cmdAux(jj).visible = b
+        Me.cmdAux(jj).visible = B
     Next jj
 End Sub
 
@@ -903,6 +926,11 @@ Private Sub frmFP_DatoSeleccionado(CadenaSeleccion As String)
     
     txtAux(4).Text = RecuperaValor(CadenaSeleccion, 1)
     txtAux2(1).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmProv_DatoSeleccionado(CadenaSeleccion As String)
+        txtAux(1).Text = RecuperaValor(CadenaSeleccion, 1)
+        txtAux2(0).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -949,7 +977,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
@@ -967,9 +995,9 @@ Dim b As Boolean
     'Me.cmdAux(0).Enabled = (Modo <> 4)
                    
     '-----------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -989,37 +1017,52 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
     
     'Insertar
+    If vParamAplic.SerieAnticipoProveedor = "" Then
+        B = False
+        Toolbar1.Buttons(1).Enabled = B
+        Me.mnNuevo.Enabled = B
+        Toolbar1.Buttons(2).Enabled = B
+        Me.mnModificar.Enabled = B
+        Toolbar1.Buttons(3).Enabled = B
+        Me.mnEliminar.Enabled = B
+        Toolbar1.Buttons(5).Enabled = B
+        Me.mnBuscar.Enabled = B
+        Toolbar1.Buttons(6).Enabled = B
+        Me.mnVerTodos.Enabled = B
         
-    Toolbar1.Buttons(1).Enabled = Modo = 2 Or Modo = 0
-    Me.mnNuevo.Enabled = False
-    
-    
-    
-    'modificar eliminar
-    b = (Modo = 2)
-    If b Then b = Not Data1.Recordset.EOF
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
-    
-    
-    
-    b = (Modo >= 3 Or Modo = 1)
-    'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
-    'VerTodos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
-    
-    
-    Toolbar1.Buttons(8).Enabled = False
-    
+                
+        
+    Else
+        Toolbar1.Buttons(1).Enabled = Modo = 2 Or Modo = 0
+        Me.mnNuevo.Enabled = False
+        
+        
+        
+        'modificar eliminar
+        B = (Modo = 2)
+        If B Then B = Not Data1.Recordset.EOF
+        Toolbar1.Buttons(2).Enabled = B
+        Me.mnModificar.Enabled = B
+        Toolbar1.Buttons(3).Enabled = B
+        Me.mnEliminar.Enabled = B
+        
+        
+        
+        B = (Modo >= 3 Or Modo = 1)
+        'Buscar
+        Toolbar1.Buttons(5).Enabled = Not B
+        Me.mnBuscar.Enabled = Not B
+        'VerTodos
+        Toolbar1.Buttons(6).Enabled = Not B
+        Me.mnVerTodos.Enabled = Not B
+        
+        
+        Toolbar1.Buttons(8).Enabled = False
+    End If
 End Sub
 
 
@@ -1106,17 +1149,21 @@ Private Function PuedeElimModif() As Boolean
 
     PuedeElimModif = False
     If Modo <> 2 Then Exit Function
+    If Data1.Recordset.EOF Then Exit Function
     'Lo principal para poder modificar.
     'NO puede estar descontado
     
-    If Not Data1.Recordset.EOF Then
-        If Data1.Recordset!descontado <> "" Then
-            MsgBox "Efecto ya descontado", vbExclamation
-        Else
-            PuedeElimModif = True
-        End If
+    
+    If Data1.Recordset!descontado <> "" Then
+        MsgBox "Efecto ya descontado", vbExclamation
+        Exit Function
     End If
     
+            
+    If Not EstadoAnticipoEnContabilidad(CLng(Data1.Recordset!idAnticipo)) Then Exit Function
+        
+    PuedeElimModif = True
+        
 
 End Function
 
@@ -1124,7 +1171,7 @@ End Function
 Private Sub BotonEliminar()
 On Error GoTo Error2
     
-    If Not PuedeElimModif Then Exit Sub
+    If Not PuedeElimModif() Then Exit Sub
     
     If MsgBox("¿Eliminar anticipo?", vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
@@ -1133,7 +1180,7 @@ On Error GoTo Error2
     'Hay que eliminar
     NumRegElim = Data1.Recordset.AbsolutePosition
     
-    conn.Execute "Delete from sproveanticipo where idanticipo=" & Data1.Recordset!idanticipo
+    conn.Execute "Delete from sproveanticipo where idanticipo=" & Data1.Recordset!idAnticipo
     CancelaADODC Me.Data1
     CargaGrid True
     CancelaADODC Me.Data1
@@ -1142,7 +1189,7 @@ On Error GoTo Error2
     
 Error2:
     Screen.MousePointer = vbDefault
-    If Err.Number <> 0 Then MuestraError Err.Number, "Eliminar Zona de Articulo", Err.Description
+    If Err.Number <> 0 Then MuestraError Err.Number, "Eliminar anticipo", Err.Description
     
     
     
@@ -1152,7 +1199,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
 
@@ -1213,22 +1260,36 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
 
     On Error GoTo ErrDatosOK
     
     
     DatosOk = False
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
+    'OBBLIGATORIO codmacta
+    If DevuelveDesdeBD(conAri, "codmacta", "sprove", "codprove", txtAux(1).Text) = "" Then
+        MsgBox "El proveedor no tiene cuenta contable asignada para contabilidad", vbExclamation
+        B = False
    
+    End If
     
-   
-
+    'NO tiene otro codigo igual
     
-    DatosOk = b
+    If B And Modo = 3 Then
+        
+        '   numdocum   codprove fechaant
+        If DevuelveDesdeBD(conAri, "idanticipo", "sproveanticipo", "year(fechaant)=" & Year(CDate(txtAux(3).Text)) & " AND numdocum=" & DBSet(txtAux(2).Text, "T") & " AND codprove", txtAux(1).Text) <> "" Then
+            MsgBox "Ya existe el documento para el proveedor y  año ", vbExclamation
+            B = False
+        End If
+    End If
+    
+    
+    DatosOk = B
     Exit Function
     
 ErrDatosOK:
@@ -1237,60 +1298,6 @@ ErrDatosOK:
 End Function
 
 
-
-Private Sub MandaBusquedaPrevia2(Envio As Boolean)
-''Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
-'Dim Tabla As String
-'Dim Titulo As String
-'
-'    'Llamamos a al form
-'    cad = ""
-'    'Estamos en Modo de Cabeceras
-'    'Registro de la tabla de cabeceras: slista
-        'Cod Diag.|tabla|columna|tipo|formato|10·
-        If Envio Then
-            cad = "Codigo|senvio|codenvio|N||20·"
-            cad = cad & "Decripcion|senvio|nomenvio|T||60·"
-        Else
-            cad = "Codigo|szonas|codzonas|N||20·"
-            cad = cad & "Decripcion|szonas|nomzonas|T||60·"
-        End If
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        
-        'frmB.vTabla = tabla
-        frmB.vSQL = ""
-        
-        
-        '###A mano
-        frmB.vDevuelve = "0|1|"
-        If Envio Then
-            frmB.vTitulo = "Forma de envio"
-            frmB.vTabla = "senvio"
-        Else
-            frmB.vTitulo = "ZONAS"
-            frmB.vTabla = "szonas"
-        End If
-        frmB.vselElem = 1
-        frmB.vConexionGrid = conAri       'Conexión a BD: Ariges
-        frmB.Show vbModal
-        Set frmB = Nothing
-        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
-        'tendremos que cerrar el form lanzando el evento
-        If HaDevueltoDatos <> "" Then
-            If Envio Then
-                txtAux(3).Text = RecuperaValor(HaDevueltoDatos, 1)
-                txtAux2(1).Text = RecuperaValor(HaDevueltoDatos, 2)
-            Else
-                txtAux(4).Text = RecuperaValor(HaDevueltoDatos, 1)
-                txtAux2(2).Text = RecuperaValor(HaDevueltoDatos, 2)
-            End If
-        End If
-    
-
-End Sub
 
 
 Private Sub HacerBusqueda()
@@ -1314,7 +1321,7 @@ Private Sub PonerCadenaBusqueda()
     Data1.Refresh
     If Data1.Recordset.RecordCount <= 0 Then
         CargaGrid False
-        MsgBox "No hay ningún registro en la tabla para ese criterio de Búsqueda.", vbInformation
+        MsgBox "No hay ningún registro en la tabla para ese criterio de Búsqueda." & vbCrLf & CadenaConsulta, vbInformation
         Screen.MousePointer = vbDefault
         PonerModo Modo
         Exit Sub
@@ -1394,7 +1401,7 @@ End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-Dim cad As String
+Dim Cad As String
 
     On Error Resume Next
     
@@ -1402,7 +1409,7 @@ Dim cad As String
     
     Select Case Index
         Case 1, 4
-            cad = ""
+            Cad = ""
             If txtAux(Index).Text <> "" Then
                 If Not IsNumeric(txtAux(Index).Text) Then
                     MsgBox "Campo numerico", vbExclamation
@@ -1410,22 +1417,30 @@ Dim cad As String
                     PonerFoco txtAux(Index)
                 Else
                     If Index = 4 Then
-                        cad = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", txtAux(Index).Text)
+                        Cad = DevuelveDesdeBD(conAri, "nomforpa", "sforpa", "codforpa", txtAux(Index).Text)
                     Else
-                        cad = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtAux(Index).Text)
+                        Cad = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtAux(Index).Text)
                     End If
-                    If cad = "" Then MsgBox "No existe el valor en la BD: " & txtAux(Index).Text, vbExclamation
+                    If Cad = "" Then MsgBox "No existe el valor en la BD: " & txtAux(Index).Text, vbExclamation
                 End If
-                If cad = "" And txtAux(Index).Text <> "" Then
+                If Cad = "" And txtAux(Index).Text <> "" Then
                     txtAux(Index).Text = ""
                     PonerFoco txtAux(Index)
                 End If
                       
             End If
-            txtAux2(IIf(Index = 1, 0, 1)).Text = cad
+            txtAux2(IIf(Index = 1, 0, 1)).Text = Cad
         Case 3 'fecha
-              PonerFormatoFecha txtAux(Index)
-              
+            PonerFormatoFecha txtAux(Index)
+            If txtAux(Index).Text <> "" Then
+                Cad = ""
+                If CDate(txtAux(Index)) < vEmpresa.FechaIni Then Cad = "Anterior inicio ejercicio"
+                If Cad <> "" Then
+                    MsgBox Cad, vbExclamation
+                    txtAux(Index).Text = ""
+                     PonerFoco txtAux(Index)
+                End If
+            End If
             
         Case 5
             If txtAux(Index).Text <> "" Then
