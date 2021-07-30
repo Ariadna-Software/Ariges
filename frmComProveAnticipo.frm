@@ -1169,6 +1169,7 @@ End Function
 
 
 Private Sub BotonEliminar()
+Dim C As String
 On Error GoTo Error2
     
     If Not PuedeElimModif() Then Exit Sub
@@ -1180,6 +1181,16 @@ On Error GoTo Error2
     'Hay que eliminar
     NumRegElim = Data1.Recordset.AbsolutePosition
     
+    
+    
+    '         DatosVto:   codmactaprov|numdcoum|fecdocum|
+    C = DevuelveDesdeBD(conAri, "codmacta", "sprove", "codprove", Data1.Recordset!Codprove)
+    C = C & "|" & Data1.Recordset!numdocum & "|" & Data1.Recordset!fechaant & "|"
+    BorrarAnticipoEnContabilidad C
+    
+    
+    
+    
     conn.Execute "Delete from sproveanticipo where idanticipo=" & Data1.Recordset!idAnticipo
     CancelaADODC Me.Data1
     CargaGrid True
@@ -1190,8 +1201,6 @@ On Error GoTo Error2
 Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then MuestraError Err.Number, "Eliminar anticipo", Err.Description
-    
-    
     
     
     

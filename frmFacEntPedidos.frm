@@ -5806,6 +5806,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
                 Screen.MousePointer = vbDefault
             End If
         Case 20
+            'ordenadr lineas
             If Modo <> 2 Then Exit Sub
             frmListado5.OpcionListado = 23
             frmListado5.OtrosDatos = Data1.Recordset!NumPedcl

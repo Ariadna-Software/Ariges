@@ -18,9 +18,9 @@ Begin VB.Form frmMensajes
    Visible         =   0   'False
    Begin VB.Frame FrameAnticiposprov 
       Height          =   7455
-      Left            =   1800
+      Left            =   -1800
       TabIndex        =   148
-      Top             =   720
+      Top             =   3360
       Visible         =   0   'False
       Width           =   8895
       Begin VB.CommandButton cmdAnticipoProv 
@@ -149,10 +149,28 @@ Begin VB.Form frmMensajes
    End
    Begin VB.Frame FramePuntosCaducados 
       Height          =   6735
-      Left            =   2280
+      Left            =   840
       TabIndex        =   142
-      Top             =   960
-      Width           =   12975
+      Top             =   240
+      Width           =   14415
+      Begin VB.CommandButton cmdPuntosCaducados 
+         Caption         =   "Imprimir"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   2
+         Left            =   9840
+         TabIndex        =   154
+         Top             =   6120
+         Width           =   1185
+      End
       Begin VB.CommandButton cmdPuntosCaducados 
          Caption         =   "Caducar"
          BeginProperty Font 
@@ -166,7 +184,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   375
          Index           =   0
-         Left            =   9960
+         Left            =   11520
          TabIndex        =   146
          Top             =   6120
          Width           =   1185
@@ -184,7 +202,7 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   375
          Index           =   1
-         Left            =   11400
+         Left            =   12840
          TabIndex        =   145
          Top             =   6120
          Width           =   1185
@@ -194,8 +212,8 @@ Begin VB.Form frmMensajes
          Left            =   240
          TabIndex        =   143
          Top             =   720
-         Width           =   12405
-         _ExtentX        =   21881
+         Width           =   13845
+         _ExtentX        =   24421
          _ExtentY        =   9128
          View            =   3
          LabelEdit       =   1
@@ -216,7 +234,7 @@ Begin VB.Form frmMensajes
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   6
+         NumItems        =   7
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Codigo"
             Object.Width           =   2188
@@ -246,14 +264,19 @@ Begin VB.Form frmMensajes
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   5
-            Text            =   "Fec. Ult."
+            Text            =   "Ult. canje"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
+            Text            =   "Ult. caduca"
             Object.Width           =   2540
          EndProperty
       End
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   9
-         Left            =   11760
+         Left            =   13680
          Picture         =   "frmMensajes.frx":000C
          Top             =   360
          Width           =   240
@@ -261,7 +284,7 @@ Begin VB.Form frmMensajes
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   8
-         Left            =   11400
+         Left            =   13320
          Picture         =   "frmMensajes.frx":0156
          Top             =   360
          Width           =   240
@@ -3664,14 +3687,26 @@ Private Sub cmdSalir_Click()
 End Sub
 
 Private Sub cmdPuntosCaducados_Click(Index As Integer)
-    If Index = 0 Then
+    
+    
+    
+    If Index = 2 Then
+            'IMPRIMIR
+            hazImprimirCaducidad
+            
+            Exit Sub
+    End If
+    
+    
+    
+    If Index <> 1 Then
     
         NE = 0
         For NumRegElim = 1 To Me.ListView10.ListItems.Count
             If ListView10.ListItems(NumRegElim).Checked Then NE = NE + 1
         Next
         If NE = 0 Then
-            MsgBox "Seleccione algún cliente para caducar puntos", vbExclamation
+            MsgBox "Seleccione algún cliente ", vbExclamation
             Exit Sub
         End If
         
@@ -3817,8 +3852,10 @@ Dim OK As Boolean
             PonerFoco Text3
             
         Case 31
-            CargaPuntosCaducados
-            
+            If PrimeraVez Then
+                PrimeraVez = False
+                CargaPuntosCaducados
+            End If
             
         Case 32
             CargaAnticipoProveedor
@@ -3846,7 +3883,7 @@ On Error Resume Next
     FrameEtiqEstant.visible = False
     FrameCorreccionPrecios.visible = False
     FrameTraspasoMante.visible = False
-    FrameEMail.visible = False
+    FrameEmail.visible = False
     FrameErrorCC.visible = False
     FrameArticulosAgrupados.visible = False
     Me.FrameTAXCO.visible = False
@@ -4020,9 +4057,9 @@ On Error Resume Next
         Case 21
             'Ver email
             limpiar Me
-            H = FrameEMail.Height
-            W = FrameEMail.Width
-            PonerFrameVisible FrameEMail, True, H, W
+            H = FrameEmail.Height
+            W = FrameEmail.Width
+            PonerFrameVisible FrameEmail, True, H, W
             If cadWHERE2 = "0" Then
                 Caption = "Enviados"
                 Label5(0).Caption = "Para"
@@ -6559,8 +6596,10 @@ Private Sub CargaPuntosCaducados()
     'Empezamos a cargar datos
     Label2(9).Caption = "Leyendo movimientos puntos"
     Label2(9).Refresh
-    SQL = " select smovalpuntos.codclien,sum(smovalpuntos.puntos) caduca,sclien.puntos PuntosCliente,nomclien,max(if(concepto=3,fechaalb,'2001-01-01')) fec FROM "
-    SQL = SQL & " smovalpuntos inner join sclien on smovalpuntos.codclien=sclien.codclien"
+    SQL = " select smovalpuntos.codclien,sum(smovalpuntos.puntos) caduca,sclien.puntos PuntosCliente,nomclien"
+    SQL = SQL & " ,max(if(concepto=3,fechaalb,'2001-01-01')) feccad  "
+    SQL = SQL & " ,max(if(concepto=1,fechaalb,'2001-01-01')) feccanj  "
+    SQL = SQL & " FROM smovalpuntos inner join sclien on smovalpuntos.codclien=sclien.codclien"
     SQL = SQL & " WHERE sclien.Puntos > 0 AND fechaalb <= "
     SQL = SQL & DBSet(DateAdd("d", -vParamAplic.DiasCaducidadPuntos, Now), "F")
     If cadWhere <> "" Then SQL = SQL & " AND smovalpuntos.codclien = " & cadWhere
@@ -6593,11 +6632,16 @@ Private Sub CargaPuntosCaducados()
                 ListView10.ListItems(NE).SubItems(3) = Format(miRsAux!caduca, FormatoCantidad)
                 
                 ListView10.ListItems(NE).SubItems(4) = Format(Importe, FormatoCantidad)
-                'Este tambien lo caduca
                 SQL = " "
-                If Year(miRsAux!fec) > 2020 Then SQL = Format(miRsAux!fec, "dd/mm/yyyy")
+                If Year(CDate(miRsAux!feccanj)) > 2010 Then SQL = Format(miRsAux!feccanj, "dd/mm/yyyy")
                 ListView10.ListItems(NE).SubItems(5) = SQL
+    
                 
+                SQL = " "
+                If Year(CDate(miRsAux!feccad)) > 2019 Then SQL = Format(miRsAux!feccad, "dd/mm/yyyy")
+                ListView10.ListItems(NE).SubItems(6) = SQL
+    
+    
     
             End If
         miRsAux.MoveNext
@@ -6658,6 +6702,51 @@ Private Sub CaducarPuntos()
 
     
 End Sub
+
+
+Private Sub hazImprimirCaducidad()
+    
+    conn.Execute "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
+    
+    cadWHERE2 = ""
+    cadWhere = ""
+    vCampos = "INSERT INTO tmpinformes  (codusu,codigo1,nombre1,importe1,importe2,importe3,fecha1,fecha2 ) VALUES "
+    For NumRegElim = 1 To ListView10.ListItems.Count
+        With ListView10.ListItems(NumRegElim)
+            cadWhere = ", (" & vUsu.Codigo & "," & .Text & "," & DBSet(.SubItems(1), "T") & "," & DBSet(.SubItems(2), "N")
+            cadWhere = cadWhere & "," & DBSet(.SubItems(3), "N") & "," & DBSet(.SubItems(4), "N")
+            cadWhere = cadWhere & "," & DBSet(Trim(.SubItems(5)), "F", "S") & "," & DBSet(Trim(.SubItems(6)), "F", "S") & ")"
+    
+            cadWHERE2 = cadWHERE2 & cadWhere
+            
+        End With
+    Next
+    
+    cadWHERE2 = Mid(cadWHERE2, 2)
+    cadWHERE2 = vCampos & cadWHERE2
+    conn.Execute cadWHERE2
+
+    
+    cadWHERE2 = ""
+    cadWhere = ""
+    vCampos = ""
+    With frmImprimir
+        .FormulaSeleccion = "{tmpinformes.codusu} = " & vUsu.Codigo
+        .OtrosParametros = "|pEmpresa=""" & vParam.NombreEmpresa & """|"
+        .NumeroParametros = 2 'numParam
+
+        .SoloImprimir = False
+        .EnvioEMail = False
+        .Opcion = 3000
+        .Titulo = Me.Caption
+        .NombreRPT = "rPuntosCaducados.rpt"
+        .ConSubInforme = False
+        .MostrarTreeDesdeFuera = False
+        .Show vbModal
+    End With
+        
+End Sub
+
 
 
 Private Sub CargaAnticipoProveedor()

@@ -13121,8 +13121,13 @@ Dim C2 As String
         'Nombre fichero .rpt a Imprimir
         nomRPT = "rAdmGastosTec.rpt"
         Titulo = "Gastos Técnicos"
+        
+        
+        
     End If
-    
+    'Pasar nombre de la Empresa como parametro
+    cadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    numParam = numParam + 1
         
     '===================================================
     '================= FORMULA =========================
@@ -16203,7 +16208,7 @@ Dim Aux As String
             'Junio 2021
             'Vamos a ver si algun cliente tiene puesto el envio a mas de una direccion
             cadSelect = "SELECT codclien, GROUP_CONCAT( maidirec separator ';') from scliendp where incluirenviofacturacion =1 and maidirec<>'' and codclien "
-            cadSelect = cadSelect & " IN (select distinct codprove from tmpnlotes where codusu=" & vUsu.Codigo & ")"
+            cadSelect = cadSelect & " IN (select distinct codprove from tmpnlotes where codusu=" & vUsu.Codigo & ")  GROUP BY codclien"
             RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             NumRegElim = 0
             While Not RS.EOF
@@ -18864,10 +18869,11 @@ Dim i As Byte
     'AHora tiene que mostrarlas todas
     'SQL = "select codtipom, nomtipom from stipom where (codtipom like 'F__') and (codtipom<>'FRT')"
     SQL = "select codtipom, nomtipom from stipom where (codtipom like 'F__')"  ' and (codtipom<>'FRT')"
+    If Indice = 1 Then SQL = SQL & " ORDER BY codtipom"
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     i = 0
-    
+    numParam = 120
     If Indice < 1000 Then
             'Son combos normales
          cboTipomov(Indice).Clear
@@ -18875,6 +18881,9 @@ Dim i As Byte
          While Not RS.EOF
              cboTipomov(Indice).AddItem RS.Fields(0).Value & "-" & RS.Fields(1).Value
              cboTipomov(Indice).ItemData(cboTipomov(Indice).NewIndex) = i
+             If Indice = 1 Then
+                If RS.Fields(0) = "FAV" Then numParam = i
+             End If
              i = i + 1
              RS.MoveNext
          Wend
@@ -18921,7 +18930,16 @@ Dim i As Byte
     
     'Pongo el dos para todos menos para la de etiquetas cliente
     If Indice < 1000 Then
-        If Indice <> 2 Then Me.cboTipomov(Indice).ListIndex = 2
+        If Indice <> 2 Then
+            If Indice = 1 Then
+                'Julio 2021
+                'Ponemos FAV como predeterminado
+                If numParam > 100 Then numParam = 2
+            Else
+                numParam = 2
+            End If
+            Me.cboTipomov(Indice).ListIndex = numParam
+        End If
     End If
 ECargaCombo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation

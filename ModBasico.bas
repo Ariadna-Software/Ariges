@@ -2344,6 +2344,60 @@ End Sub
 
 
 
+Public Sub AyudaFacturasAnyadeAlbaranCostes(frmAlb As frmBasico2, Codclien As String, SinAvanzada As Boolean)
+    frmAlb.CadenaTots = "S|txtAux(0)|T|Tipo|1105|;S|txtAux(1)|T|Albaran.|1495|;S|txtAux(2)|T|Fecha|1350|;S|txtAux(3)|T|Referenc|5500|;S|txtAux(4)|T|Observa1|4500|;"
+    frmAlb.CadenaConsulta = "SELECT scaalb.codtipom, scaalb.numalbar, scaalb.fechaalb, scaalb.referenc,scaalb.observa01"
+    frmAlb.CadenaConsulta = frmAlb.CadenaConsulta & " FROM scaalb"
+    frmAlb.CadenaConsulta = frmAlb.CadenaConsulta & " WHERE codclien=" & RecuperaValor(Codclien, 1) & " AND scaalb.codtipom <> 'ALV' "
+    frmAlb.CadenaConsulta = frmAlb.CadenaConsulta & " AND NOT (codtipom,numalbar) IN (select codtipom,numalbar FROM slialb)"
+    
+    
+    frmAlb.Tag1 = "Tipo|T|N|||scaalb|codtipom|||"
+    frmAlb.Tag2 = "Albaran|N|N|0|9999999|scaalb|numalbar|000000|S|"
+    frmAlb.Tag3 = "Fecha|F|N|||scaalb|fechaalb|dd/mm/yyyy||"
+    frmAlb.Tag4 = "Referencia|T|N|||scaalb|referenc|||"
+    frmAlb.Tag5 = "Observa.|T|N|||scaalb|observa01|||"
+    
+    frmAlb.Maxlen1 = 6
+    frmAlb.Maxlen2 = 10
+    frmAlb.Maxlen3 = 10
+    frmAlb.Maxlen4 = 35
+    frmAlb.Maxlen5 = 35
+    
+    frmAlb.pConn = conAri
+
+    frmAlb.tabla = "scaalb"
+    frmAlb.DatosADevolverBusqueda = "0|1|"
+    frmAlb.CampoCP = "codclien"
+    
+    frmAlb.TipoCP = "N"
+    'frmAlb.Formulario = "Albaranes cliente " & RecuperaValor(Codclien, 2)
+    frmAlb.DeConsulta = False
+    
+    frmAlb.Caption = "Albaranes cliente " & RecuperaValor(Codclien, 2)
+    
+    frmAlb.CodigoActual = 0
+'    If CodActual <> "" Then
+'    frmAlb.CodigoActual = CodActual
+    
+    '[Monica]17/04/2018: añadimos en este caso los botones de busqueda
+    frmAlb.DataGrid1.Height = 7420
+    frmAlb.DataGrid1.Top = 870
+    frmAlb.FrameBotonGnral.visible = True
+    frmAlb.FrameBotonGnral.Enabled = True
+    ' hasta aqui
+    
+    Redimensiona frmAlb, 7500
+    
+    
+    frmAlb.Show vbModal
+End Sub
+
+
+
+
+
+
 
 
 Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)

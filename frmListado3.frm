@@ -25799,7 +25799,7 @@ Private Sub cmdRectificaInven_Click()
 Dim ArticuloFitoSanitarios As Boolean
 
     miSQL = ""
-    If Me.txtAlma(0).Text = "" Or txtArticulo(0).Text = "" Or txtcantidad(0).Text = "" Then
+    If Me.txtAlma(0).Text = "" Or txtArticulo(0).Text = "" Or txtCantidad(0).Text = "" Then
         MsgBox "Datos obligatorios", vbExclamation
         Exit Sub
     End If
@@ -25811,7 +25811,7 @@ Dim ArticuloFitoSanitarios As Boolean
         End If
     End If
     
-    If ImporteFormateado(txtcantidad(0).Text) < 0 Then
+    If ImporteFormateado(txtCantidad(0).Text) < 0 Then
         MsgBox "Cantidad debe ser mayor o igual que cero", vbExclamation
         Exit Sub
     End If
@@ -28992,7 +28992,7 @@ Dim SQL As String
     For i = 1 To 6
         'Insertaremos en tmpinformes codusu,codigo1,campo1,campo2,  nombre1,importe1
         '                                   secuen   gasto  quinc   desc    imp
-        SQL = "SELECT sgastfij.codigo,Descripcion,importe  FROM sgastfij,sgastfijd WHERE sgastfij.codigo=sgastfijd.codigo "
+        SQL = "SELECT gastosfijos.codigo,Descripcion,importe  FROM gastosfijos,gastosfijos_recibos WHERE gastosfijos.codigo=gastosfijos_recibos.codigo "
         SQL = SQL & " AND fecha >= " & DBSet(FI, "F") & " AND fecha <= " & DBSet(FF, "F")
         miRsAux.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         Importe = 0
@@ -29078,11 +29078,11 @@ Dim Aux As String
     For i = 1 To 6
         'Insertaremos en tmpinformes codusu,codigo1,campo1,campo2,  nombre1,importe1
         '                                   secuen   gasto  quinc   desc    imp
-        miSQL = "SELECT tipforpa,descformapago,sum(impefect) suma FROM spagop,sforpa,stipoformapago WHERE "
-        miSQL = miSQL & "spagop.codforpa=sforpa.codforpa AND tipforpa = tipoformapago  "
+        miSQL = "SELECT if(tipforpa=7,6,tipforpa) tipforpa,descformapago,sum(impefect) suma FROM pagos,formapago,tipofpago WHERE "
+        miSQL = miSQL & "pagos.codforpa=formapago.codforpa AND tipforpa = tipoformapago  "
 
         miSQL = miSQL & " AND fecefect >= " & DBSet(FI, "F") & " AND fecefect <= " & DBSet(FF, "F")
-        miSQL = miSQL & " GROUP BY tipforpa"
+        miSQL = miSQL & " GROUP BY 1"
         miRsAux.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         miSQL = ""
         IncicializaVectorSQL True
@@ -29164,11 +29164,11 @@ Dim Impor As Currency
       
     'Disponible:
     '    Efectivo, tarjeta y recibo bancario  0,4,6
-        miSQL = "SELECT tipforpa,descformapago,sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM scobro,sforpa,stipoformapago WHERE "
-        miSQL = miSQL & "scobro.codforpa=sforpa.codforpa AND tipforpa = tipoformapago  "
+        miSQL = "SELECT if(tipforpa=7,6,tipforpa) tipforpa,descformapago,sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM cobros,formapago,tipofpago WHERE "
+        miSQL = miSQL & "cobros.codforpa=formapago.codforpa AND tipforpa = tipoformapago  "
         'miSQL = miSQL & " AND fecvenci >= " & DBSet(FI, "F")
         'If I < 6 Then miSQL = miSQL & " AND fecvenci <= " & DBSet(FF, "F")
-        miSQL = miSQL & " AND situacionjuri=0 AND Devuelto=0"
+        miSQL = miSQL & " AND situacionjuri=0 AND Devuelto=0 and situacion=0"
         miSQL = miSQL & " AND tipforpa IN (0,4,6)"
         miSQL = miSQL & " GROUP BY tipforpa"
         miRsAux.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -29188,9 +29188,9 @@ Dim Impor As Currency
         AuxSQL = miSQL
         
         'Disponible tb es:  talon,paga y confirming con la marca de reccedocu y QUE NO este remesado
-        miSQL = "SELECT tipforpa,descformapago,sum(impvenci+if(gastos is null,0,gastos)) suma FROM scobro,sforpa,stipoformapago WHERE "
-        miSQL = miSQL & "scobro.codforpa=sforpa.codforpa AND tipforpa = tipoformapago  "
-        miSQL = miSQL & " AND situacionjuri=0 AND Devuelto=0"
+        miSQL = "SELECT tipforpa,descformapago,sum(impvenci+if(gastos is null,0,gastos)) suma FROM cobros,formapago,tipofpago WHERE "
+        miSQL = miSQL & "cobros.codforpa=formapago.codforpa AND tipforpa = tipoformapago  "
+        miSQL = miSQL & " AND situacionjuri=0 AND Devuelto=0  and situacion=0"
         miSQL = miSQL & " AND recedocu=1"
         miSQL = miSQL & " AND codrem is null"
         miSQL = miSQL & " AND tipforpa IN (2,3,5)"
@@ -29215,9 +29215,9 @@ Dim Impor As Currency
         '------------------------------
         
         '  talon,paga y confirming sin la marca de reccedocu
-        miSQL = "SELECT tipforpa,descformapago,sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM scobro,sforpa,stipoformapago WHERE "
-        miSQL = miSQL & "scobro.codforpa=sforpa.codforpa AND tipforpa = tipoformapago  "
-        miSQL = miSQL & " AND situacionjuri=0 AND Devuelto=0"
+        miSQL = "SELECT tipforpa,descformapago,sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM cobros,formapago,tipofpago WHERE "
+        miSQL = miSQL & "cobros.codforpa=formapago.codforpa AND tipforpa = tipoformapago  "
+        miSQL = miSQL & " AND situacionjuri=0 AND Devuelto=0  and situacion=0"
         miSQL = miSQL & " AND recedocu=0"
         miSQL = miSQL & " AND tipforpa IN (2,3,5)"
         miSQL = miSQL & " GROUP BY tipforpa"
@@ -29242,9 +29242,9 @@ Dim Impor As Currency
         
         
         'no disponible:  TRANSFERENCIA
-        miSQL = "SELECT tipforpa,descformapago,sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM scobro,sforpa,stipoformapago WHERE "
-        miSQL = miSQL & "scobro.codforpa=sforpa.codforpa AND tipforpa = tipoformapago  "
-        miSQL = miSQL & " AND situacionjuri=0 AND Devuelto=0"
+        miSQL = "SELECT tipforpa,descformapago,sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM cobros,formapago,tipofpago WHERE "
+        miSQL = miSQL & "cobros.codforpa=formapago.codforpa AND tipforpa = tipoformapago  "
+        miSQL = miSQL & " AND situacionjuri=0 AND Devuelto=0 and situacion=0  "
         miSQL = miSQL & " AND tipforpa =1"
         miSQL = miSQL & " GROUP BY tipforpa"
         miRsAux.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -29264,8 +29264,8 @@ Dim Impor As Currency
       
         '----------------------------------------------------------------------------------------------------------------
         'Situacion juridica.
-        miSQL = "SELECT sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM scobro,sforpa WHERE "
-        miSQL = miSQL & "scobro.codforpa=sforpa.codforpa   "
+        miSQL = "SELECT sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM cobros,formapago WHERE "
+        miSQL = miSQL & "cobros.codforpa=formapago.codforpa   "
         miSQL = miSQL & " AND  situacionjuri=1 "
         miRsAux.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         miSQL = ""
@@ -29282,9 +29282,9 @@ Dim Impor As Currency
         miRsAux.Close
         AuxSQL = AuxSQL & miSQL
 
-    
-        miSQL = "SELECT sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM scobro,sforpa WHERE "
-        miSQL = miSQL & "scobro.codforpa=sforpa.codforpa   "
+        'Devueltos
+        miSQL = "SELECT sum(impvenci+if(gastos is null,0,gastos)-if(impcobro is null,0,impcobro)) suma FROM cobros,formapago WHERE "
+        miSQL = miSQL & "cobros.codforpa=formapago.codforpa   "
         miSQL = miSQL & " AND  situacionjuri=0 AND Devuelto=1"
         miRsAux.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         miSQL = ""
@@ -29645,7 +29645,10 @@ Dim Impor As Currency
 Dim ColCtasBa As Collection
 Dim IT As ListItem
     'Gastos fijos, ees el primero
-    Aux = "select ctabancaria.*,nommacta from ctabancaria,cuentas where ctabancaria.codmacta=cuentas.codmacta ORDER BY ctabancaria.codmacta"
+    
+    'Aux = "select ctabancaria.*,nommacta from ctabancaria,cuentas where ctabancaria.codmacta=cuentas.codmacta ORDER BY ctabancaria.codmacta"
+    Aux = "select bancos.*,nommacta from bancos,cuentas where bancos.codmacta=cuentas.codmacta ORDER BY bancos.codmacta"
+    
     miRsAux.Open Aux, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set ColCtasBa = New Collection
     While Not miRsAux.EOF
@@ -29659,14 +29662,25 @@ Dim IT As ListItem
     FijaFechaIni
     For i = 1 To ColCtasBa.Count
         'impmesde impmesha anopsald mespsald
-        Aux = "Select sum(impmesde),sum(impmesha) from hsaldos where codmacta = '" & RecuperaValor(ColCtasBa.Item(i), 1) & "' AND "
+        
+        
+'        Aux = "Select sum(impmesde),sum(impmesha) from hsaldos where codmacta = '" & RecuperaValor(ColCtasBa.Item(i), 1) & "' AND "
+'        'El perido
+'        If Month(vEmpresa.FechaIni) = 1 Then
+'            'Años normales
+'            Aux = Aux & " anopsald >= " & Year(vEmpresa.FechaIni)
+'        Else
+'            Aux = Aux & " anopsald > " & Year(vEmpresa.FechaIni) & " OR (anopsald = " & Year(vEmpresa.FechaIni) & " AND mespsald>= " & Month(vEmpresa.FechaIni) & ")"
+'        End If
+        
+        Label3(4).Caption = "Precarga saldos banco: " & RecuperaValor(ColCtasBa.Item(i), 1)
+        Label3(4).Refresh
+        
+        Aux = "Select sum(coalesce(timported,0)),sum(coalesce(timporteh,0)) from hlinapu where codmacta = '" & RecuperaValor(ColCtasBa.Item(i), 1) & "' AND "
         'El perido
-        If Month(vEmpresa.FechaIni) = 1 Then
-            'Años normales
-            Aux = Aux & " anopsald >= " & Year(vEmpresa.FechaIni)
-        Else
-            Aux = Aux & " anopsald > " & Year(vEmpresa.FechaIni) & " OR (anopsald = " & Year(vEmpresa.FechaIni) & " AND mespsald>= " & Month(vEmpresa.FechaIni) & ")"
-        End If
+        Aux = Aux & " fechaent >= " & DBSet(vEmpresa.FechaIni, "F")
+        
+        
         miRsAux.Open Aux, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         Impor = 0
         
@@ -29743,7 +29757,7 @@ End Sub
 Private Sub CargaTreePortes()
 Dim Cli As Long
 Dim N As Node
-    tv1.Nodes.Clear
+    TV1.Nodes.Clear
     miSQL = "Select * from tmpsliped WHERE codusu = " & vUsu.Codigo & " ORDER BY codclien,numpedcl"
     
     Set miRsAux = New ADODB.Recordset
@@ -29752,13 +29766,13 @@ Dim N As Node
     While Not miRsAux.EOF
         If Cli <> miRsAux!codClien Then
             Cli = miRsAux!codClien
-            Set N = tv1.Nodes.Add(, , CStr("N" & Cli))
+            Set N = TV1.Nodes.Add(, , CStr("N" & Cli))
             N.Text = Format(Cli, "00000") & "  " & miRsAux!NomArtic
         End If
         
         
         'metemos el albaran
-        Set N = tv1.Nodes.Add(CStr("N" & Cli), tvwChild)
+        Set N = TV1.Nodes.Add(CStr("N" & Cli), tvwChild)
         N.Text = miRsAux!codArtic & Format(miRsAux!NumPedcl, "00000") & " Lin: " & miRsAux!numlinea
         
         miRsAux.MoveNext
@@ -29925,7 +29939,7 @@ End Sub
 
 
 Private Sub txtcantidad_GotFocus(Index As Integer)
-    ConseguirFoco txtcantidad(Index), 3
+    ConseguirFoco txtCantidad(Index), 3
 End Sub
 
 Private Sub txtcantidad_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -29936,7 +29950,7 @@ End Sub
 
 
 Private Sub txtcantidad_LostFocus(Index As Integer)
-    If Not PonerFormatoDecimal(txtcantidad(Index), 3) Then txtcantidad(Index).Text = ""
+    If Not PonerFormatoDecimal(txtCantidad(Index), 3) Then txtCantidad(Index).Text = ""
 End Sub
 
 
@@ -30002,8 +30016,8 @@ Dim B As Boolean
         If cadFormula = "" Then cadFormula = "0"
         cadNomRPT = vUsu.Codigo & "," & miRsAux!codAlmac & "," & DBSet(miRsAux!codArtic, "T") & "," & DBSet(cadNomRPT, "T") & ","
         cadNomRPT = "INSERT INTO tmpinformes(codusu,codigo1,nombre1,nombre2,importe1,importe2,importeb1,importeb2,fecha1,nombre3,campo2,obser) VALUES (" & cadNomRPT
-        cadNomRPT = cadNomRPT & DBSet(DBLet(miRsAux!CanStock, "N"), "N") & "," & DBSet(txtcantidad(0).Text, "N") & "," & DBSet(cadFormula, "N") & ","
-        CuantoHabia = ImporteFormateado(txtcantidad(0).Text) * CCur(cadFormula)
+        cadNomRPT = cadNomRPT & DBSet(DBLet(miRsAux!CanStock, "N"), "N") & "," & DBSet(txtCantidad(0).Text, "N") & "," & DBSet(cadFormula, "N") & ","
+        CuantoHabia = ImporteFormateado(txtCantidad(0).Text) * CCur(cadFormula)
         cadNomRPT = cadNomRPT & DBSet(CuantoHabia, "N") & "," & DBSet(Fecha_, "F") & "," & DBSet(txtDescAlma(0).Text, "T") & ","
             
         ',campo2,obser
@@ -30014,11 +30028,11 @@ Dim B As Boolean
         'Cojo la de movimientos
         CuantoHabia = DBLet(miRsAux!CanStock, "N")
     End If
-    cantidad = ImporteFormateado(txtcantidad(0).Text)
+    cantidad = ImporteFormateado(txtCantidad(0).Text)
     cantidad = cantidad - CuantoHabia  'nueva menos lo que habia
     
     '2.- updatear salmac con la nueva cantidad Cantidad
-    miSQL = "UPDATE salmac set stockinv = " & DBSet(txtcantidad(0).Text, "N")
+    miSQL = "UPDATE salmac set stockinv = " & DBSet(txtCantidad(0).Text, "N")
     miSQL = miSQL & " , canstock = "
     
     If Opcion = 3 Then
@@ -30030,7 +30044,7 @@ Dim B As Boolean
     If B Then   'NO existia inventario , o es nuevo
         'Lo que quiero es poner ahora esa cantidad
         'luego NO se la sumo  a la que habia
-        miSQL = miSQL & DBSet(txtcantidad(0).Text, "N")
+        miSQL = miSQL & DBSet(txtCantidad(0).Text, "N")
         'Dire que he inventariado ahora
         miSQL = miSQL & " , fechainv = " & DBSet(Fecha_, "F")
         miSQL = miSQL & " , horainve = " & DBSet(Fecha_, "FH")
@@ -30107,7 +30121,7 @@ Dim B As Boolean
         
         
         CtoEnDFI = CuantoHabia - CtoEnDFI   'Como hemos puesto que sea ENtrada(cambiando signo si es salida)
-        cantidad = ImporteFormateado(txtcantidad(0).Text) 'cuanto hay segun lo que han puesto
+        cantidad = ImporteFormateado(txtCantidad(0).Text) 'cuanto hay segun lo que han puesto
         cantidad = cantidad - CtoEnDFI
         
         
@@ -31111,7 +31125,7 @@ Dim IVA As Currency
     While Not miRsAux.EOF
         NumRegElim = NumRegElim + 1
         'codusu,codigo1,campo1,     nombre1,nombre2,fecha1,fecha2,importe1,campo2,nombre3
-        i = Val(Me.txtcantidad(0).Text) + DBLet(miRsAux!primerve, "N")
+        i = Val(Me.txtCantidad(0).Text) + DBLet(miRsAux!primerve, "N")
         FI = DateAdd("d", i, miRsAux!fecpedpr)
         Importe = DBLet(miRsAux!Suma, "N")
         Importe = Round2(Importe * IVA, 2)
@@ -31304,7 +31318,7 @@ Dim IVA As Currency
         While Not miRsAux.EOF
             NumRegElim = NumRegElim + 1
             'codusu,codigo1,campo1,     nombre1,nombre2,fecha1,fecha2,importe1,campo2,nombre3
-            i = Val(Me.txtcantidad(0).Text) + DBLet(miRsAux!primerve, "N")
+            i = Val(Me.txtCantidad(0).Text) + DBLet(miRsAux!primerve, "N")
             FI = DateAdd("d", i, miRsAux!fecpedpr)
             Importe = DBLet(miRsAux!Suma, "N")
             Importe = Round2(Importe * IVA, 2)
@@ -40075,7 +40089,7 @@ Private Function IntroduccionLotesFitosanitariosInventario() As Boolean
         
 
         CadenaDesdeOtroForm = ""
-        frmFacTPVLotes.TotalLineas = ImporteFormateado(txtcantidad(0).Text)
+        frmFacTPVLotes.TotalLineas = ImporteFormateado(txtCantidad(0).Text)
         frmFacTPVLotes.NombreArticulo = txtDescArticulo(0).Text
         frmFacTPVLotes.DesdeInventario = True
         frmFacTPVLotes.Show vbModal

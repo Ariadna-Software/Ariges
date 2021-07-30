@@ -764,16 +764,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Data1.Recordset.Fields(0) & "|"
-    cad = cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -901,29 +901,29 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Byte
-Dim b As Boolean
+Dim B As Boolean
 
     On Error Resume Next
     
     DeseleccionaGrid Me.DataGrid1
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To txtAux.Count - 1
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = b
+        txtAux(jj).visible = B
         txtAux(jj).Text = ""
     Next jj
     
     txtAux2(2).Height = DataGrid1.RowHeight
     txtAux2(2).Top = alto
-    txtAux2(2).visible = b
+    txtAux2(2).visible = B
     BloquearTxt txtAux(6), True
     
     For jj = 0 To 1
         Me.CmbAux(jj).Height = DataGrid1.RowHeight
         Me.CmbAux(jj).Top = alto
-        Me.CmbAux(jj).visible = b
+        Me.CmbAux(jj).visible = B
         BloquearCmb Me.CmbAux(jj), (Modo <> 1)
     Next jj
     
@@ -931,8 +931,8 @@ Dim b As Boolean
     For jj = 1 To 1
         Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
         Me.cmdAux(jj).Top = alto
-        Me.cmdAux(jj).visible = b
-        Me.cmdAux(jj).Enabled = b And (Modo <> 4)
+        Me.cmdAux(jj).visible = B
+        Me.cmdAux(jj).Enabled = B And (Modo <> 4)
     Next jj
     
     If Err.Number Then Err.Clear
@@ -999,17 +999,17 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
      'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         cmdRegresar.visible = False
     End If
@@ -1023,9 +1023,9 @@ Dim i As Byte
     Next i
                       
     '-----------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -1046,35 +1046,35 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
     
     On Error Resume Next
 
-    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'VerTodos
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
-    b = (Modo = 2 Or Modo = 0)
+    B = (Modo = 2 Or Modo = 0)
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     
     'generar mes
-    Toolbar5.Buttons(1).Enabled = b
-    Toolbar5.Buttons(2).Enabled = b
-    Toolbar1.Buttons(8).Enabled = b
+    Toolbar5.Buttons(1).Enabled = B
+    Toolbar5.Buttons(2).Enabled = B
+    Toolbar1.Buttons(8).Enabled = Modo = 2 Or Modo = 0
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo opciones del menú.", Err.Description
 
@@ -1293,13 +1293,13 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1323,7 +1323,7 @@ End Sub
 
 
 Private Sub PonerCadenaBusqueda()
-Dim cad As String
+Dim Cad As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo EEPonerBusq
@@ -1333,10 +1333,10 @@ Dim cad As String
     Data1.Refresh
     If Data1.Recordset.RecordCount <= 0 Then
         CargaGrid False
-        cad = "No hay ningún registro en la tabla " & NombreTabla
-        If EsBusqueda Then cad = cad & " para ese criterio de Búsqueda."
+        Cad = "No hay ningún registro en la tabla " & NombreTabla
+        If EsBusqueda Then Cad = Cad & " para ese criterio de Búsqueda."
         Screen.MousePointer = vbDefault
-        MsgBox cad, vbInformation
+        MsgBox Cad, vbInformation
        
         PonerModo Modo
         Exit Sub

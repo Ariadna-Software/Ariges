@@ -413,6 +413,10 @@ Dim TrabajadoresZaldibia As String
 
 Dim NumeroTareasPendientesCerrar As Integer
 
+
+
+
+
 Private Sub cmdAlbaran_Click(Index As Integer)
     cad = ""
     If Combo1.ListIndex < 0 Then cad = "Seleccione el trabajador "
@@ -435,11 +439,29 @@ Private Sub cmdAlbaran_Click(Index As Integer)
     CrearAlbaran
 End Sub
 
+Private Sub cmdBuscarCli_Click(Index As Integer)
+    
+    
+    If Index = 0 Then
+        'Nusca grid
+        
+    
+    Else
+        'fechas
+        
+        
+    End If
+End Sub
+
+
+
 Private Sub cmdImprimir_Click()
     'VERSION RELOJ: comentar lineas #Soloreloj
-    frmListado2.Opcion = 46
-    frmListado2.Show vbModal
+   ' frmListado2.opcion = 46
+   ' frmListado2.Show vbModal
 End Sub
+
+
 
 Private Sub Combo1_Click()
 Dim J As Integer
@@ -495,7 +517,7 @@ Private Sub Combo1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub BuscarNodo(DesdeTrabajador As Boolean)
-Dim k As Integer
+Dim K As Integer
 Dim NodosFechasAnteriores As Boolean
 Dim fin As Boolean
 Dim NodoCierreAnterior As Integer
@@ -507,21 +529,21 @@ Dim F1 As Date
     fin = False
     
     Do
-            For k = ListView2.ListItems.Count To 1 Step -1
-                ListView2.ListItems(k).ForeColor = vbBlack
-                ListView2.ListItems(k).Bold = False
+            For K = ListView2.ListItems.Count To 1 Step -1
+                ListView2.ListItems(K).ForeColor = vbBlack
+                ListView2.ListItems(K).Bold = False
                 If Combo1.ListIndex >= 0 Then
-                    If Val(ListView2.ListItems(k).Text) = Val(Combo1.ItemData(Combo1.ListIndex)) Then
+                    If Val(ListView2.ListItems(K).Text) = Val(Combo1.ItemData(Combo1.ListIndex)) Then
                         
-                        ListView2.ListItems(k).Bold = True
-                        If Trim(ListView2.ListItems(k).SubItems(6)) = "" Then
-                            HayQueCerrarNodo = k
-                            ListView2.ListItems(k).ForeColor = vbBlue
+                        ListView2.ListItems(K).Bold = True
+                        If Trim(ListView2.ListItems(K).SubItems(6)) = "" Then
+                            HayQueCerrarNodo = K
+                            ListView2.ListItems(K).ForeColor = vbBlue
                             
                             'Fechas anteriores
-                            If ListView2.ListItems(k).ListSubItems(5).ForeColor = vbRed Then
+                            If ListView2.ListItems(K).ListSubItems(5).ForeColor = vbRed Then
                                 NodosFechasAnteriores = True
-                                NodoCierreAnterior = k
+                                NodoCierreAnterior = K
                             End If
                         End If
                     End If
@@ -627,26 +649,30 @@ Dim Cad2 As String
             CargarCombo_Tabla Me.cboAlb, "sordprod", "concat(right(concat(""000000"",codigo),6),' - ',coalesce(descripcion,feccreacion))", "codigo", "feccreacion>='" & cad & "'"
     
     Else
-            Aux = ""
-            If Combo1.ListIndex >= 0 Then
-                If Me.Check1.Value = 0 Then
-                    If TrabajadoresZaldibia <> "" Then
-                        Aux = "|" & Combo1.ItemData(Combo1.ListIndex) & "|"
-                        If InStr(1, "|" & TrabajadoresZaldibia, Aux) > 0 Then
-                            Aux = ""
-                        Else
-                            Aux = "NOT"
+    
+    
+    
+            
+                Aux = ""
+                If Combo1.ListIndex >= 0 Then
+                    If Me.Check1.Value = 0 Then
+                        If TrabajadoresZaldibia <> "" Then
+                            Aux = "|" & Combo1.ItemData(Combo1.ListIndex) & "|"
+                            If InStr(1, "|" & TrabajadoresZaldibia, Aux) > 0 Then
+                                Aux = ""
+                            Else
+                                Aux = "NOT"
+                            End If
+                        
+                            Cad2 = Mid(TrabajadoresZaldibia, 1, Len(TrabajadoresZaldibia) - 1) 'quito el ultimo pipe
+                            Aux = " AND " & Aux & " codtraba IN (" & Replace(Cad2, "|", ",") & ")"
                         End If
-                    
-                        Cad2 = Mid(TrabajadoresZaldibia, 1, Len(TrabajadoresZaldibia) - 1) 'quito el ultimo pipe
-                        Aux = " AND " & Aux & " codtraba IN (" & Replace(Cad2, "|", ",") & ")"
                     End If
                 End If
-            End If
-            
-            cad = "codtipom = '" & cad & "' AND  (origdat is null or origdat<>2)" & Aux
-            CargarCombo_Tabla Me.cboAlb, "scaalb", "concat(numalbar,' - ',nomclien,if(coalesce(referenc ,'')='','',concat('  [',referenc,']')))", "NumAlbar", cad, , "fechaalb desc,numalbar desc"
                 
+                cad = "codtipom = '" & cad & "' AND  (origdat is null or origdat<>2)" & Aux
+                CargarCombo_Tabla Me.cboAlb, "scaalb", "concat(numalbar,' - ',nomclien,if(coalesce(referenc ,'')='','',concat('  [',referenc,']')))", "NumAlbar", cad, , "fechaalb desc,numalbar desc"
+          
     End If
             
     cad = "R"
@@ -782,7 +808,7 @@ Dim C As String
         
         cad = DBSet(Label1(0).Caption, "F") & "," & Combo1.ItemData(Combo1.ListIndex) & "," & DBSet(Label1(0).Caption & " " & Label1(1).Caption, "FH") & ",null,0" & cad
         C = DevuelveDesdeBD(conAri, "max(id)", "sreloj", "1", "1")
-        C = str(Val(C) + 1)
+        C = Str(Val(C) + 1)
         cad = C & "," & cad
         cad = "INSERT INTO sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor) VALUES (" & cad
        
@@ -808,7 +834,13 @@ Private Sub Command2_Click()
     Me.cboTipoTrabajo.ListIndex = -1
     Me.Combo1.ListIndex = -1
     Combo1.Tag = -1
+  
+    
     CagarMarcajes
+End Sub
+
+Private Sub Command3_Click()
+    
 End Sub
 
 Private Sub Form_Activate()
@@ -902,6 +934,7 @@ Private Sub Form_Load()
     
     Me.Command1.Tag = 1
     Combo1.Tag = -1
+  
     Caption = "Reloj"
     If Soloreloj Then Caption = Caption & "    ver: " & App.Major & "." & App.Minor & "." & App.Revision
     
@@ -915,13 +948,13 @@ Private Sub CargaImangenBtn()
 
     If Soloreloj Then
         'Version SOLORELOJ. Comentar en NORMAL
-        Me.cmdImprimir.visible = False
+        Me.cmdImprimir.Visible = False
         cmdAlbaran(0).Picture = Nothing
         cmdAlbaran(0).Caption = "Generar"
     Else
         'Version normal
-        Me.cmdImprimir.Picture = frmPpal.imgListComun.ListImages(16).Picture
-        Me.cmdAlbaran(0).Picture = frmPpal.ImgListPpal.ListImages(10).Picture
+        Me.cmdImprimir.Picture = frmppal.imgListComun.ListImages(16).Picture
+        Me.cmdAlbaran(0).Picture = frmppal.ImgListPpal.ListImages(10).Picture
         Me.cmdAlbaran(0).Caption = ""
     End If
 End Sub
@@ -984,16 +1017,16 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
 End Sub
 
 Private Sub ListView2_DblClick()
-Dim I As Integer
+Dim i As Integer
 
     
     If ListView2.SelectedItem Is Nothing Then Exit Sub
     
     
-    For I = 0 To Combo1.ListCount - 1
-        If Combo1.ItemData(I) = Val(ListView2.SelectedItem.Text) Then
+    For i = 0 To Combo1.ListCount - 1
+        If Combo1.ItemData(i) = Val(ListView2.SelectedItem.Text) Then
             'Este es el trabajador
-            Combo1.ListIndex = I
+            Combo1.ListIndex = i
             Exit For
         End If
     Next
@@ -1002,23 +1035,23 @@ Dim I As Integer
        
     Select Case UCase(Trim(ListView2.SelectedItem.SubItems(2)))
     Case "ALE"
-        I = 2
+        i = 2
     Case "ALO"
-        I = 3
+        i = 3
     Case Else
-        I = 1
+        i = 1
     End Select
-    cboTipoTrabajo.ListIndex = I
+    cboTipoTrabajo.ListIndex = i
     DoEvents
     Espera 0.1
     
-    For I = 0 To cboAlb.ListCount - 1
-        cad = cboAlb.List(I)
+    For i = 0 To cboAlb.ListCount - 1
+        cad = cboAlb.List(i)
         cad = Mid(cad, 1, InStr(1, cad, "-") - 1)
         
         If Val(cad) = Val(ListView2.SelectedItem.SubItems(3)) Then
             'Este es el trabajador
-            cboAlb.ListIndex = I
+            cboAlb.ListIndex = i
             Exit For
         End If
     Next
@@ -1026,15 +1059,15 @@ Dim I As Integer
     
  
     ListView2.Tag = Trim(Mid(ListView2.SelectedItem.SubItems(4), 1, InStr(2, ListView2.SelectedItem.SubItems(4), " ")))
-    For I = 0 To Combo4.ListCount - 1
-        cad = Trim(Combo4.List(I))
+    For i = 0 To Combo4.ListCount - 1
+        cad = Trim(Combo4.List(i))
         
         cad = Mid(cad, InStr(1, cad, "[") + 1)  'quitamos primer corchete
         cad = Mid(cad, 1, Len(cad) - 1)  'quitamos segundo corchete
         
         If cad = ListView2.Tag Then
             'Este es el trabajador
-            Combo4.ListIndex = I
+            Combo4.ListIndex = i
             Exit For
         End If
     Next
@@ -1098,7 +1131,7 @@ End Sub
 
 Private Sub CagarMarcajes()
 Dim IT As ListItem
-Dim I As Integer
+Dim i As Integer
 
     limpiar Me
 
@@ -1154,8 +1187,8 @@ Dim I As Integer
             IT.SubItems(9) = DBLet(miRsAux!referenc, "T") & " "
         End If
         
-        For I = 1 To IT.ListSubItems.Count
-            IT.ListSubItems(I).ToolTipText = Format(miRsAux!horainicio, "dd/mm/yyyy")
+        For i = 1 To IT.ListSubItems.Count
+            IT.ListSubItems(i).ToolTipText = Format(miRsAux!horainicio, "dd/mm/yyyy")
         Next
         NumeroTareasPendientesCerrar = NumeroTareasPendientesCerrar + 1
         miRsAux.MoveNext
@@ -1241,7 +1274,7 @@ Dim b As Boolean
         b = HayQueCerrarNodo = 0
     End If
     
-    Frame4.visible = True
+    Frame4.Visible = True
     
     
     
@@ -1482,4 +1515,5 @@ Dim Ya As Boolean
     End If
     
 End Sub
+
 

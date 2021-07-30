@@ -174,7 +174,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Dim PrimeraVez As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim AgrupaTickets As Boolean
 
 Private Sub chkTiket_Click()
@@ -217,16 +217,16 @@ Private Sub Form_Load()
         
         
     AgrupaTickets = False
-    SQL = DevuelveDesdeBD(conAri, "contador", "stipom", "codtipom", "FTG", "T")
-    If SQL <> "" Then
-        If Val(SQL) > 0 Then AgrupaTickets = True
+    Sql = DevuelveDesdeBD(conAri, "contador", "stipom", "codtipom", "FTG", "T")
+    If Sql <> "" Then
+        If Val(Sql) > 0 Then AgrupaTickets = True
     End If
     If AgrupaTickets Then
         chkTiket.visible = False
     Else
-        SQL = DevuelveDesdeBD(conAri, "contador", "stipom", "codtipom", "'FTI'")
-        If SQL = "" Then SQL = "0"
-        chkTiket.visible = Val(SQL) > 0
+        Sql = DevuelveDesdeBD(conAri, "contador", "stipom", "codtipom", "'FTI'")
+        If Sql = "" Then Sql = "0"
+        chkTiket.visible = Val(Sql) > 0
     End If
     Combo1.ListIndex = 0
      
@@ -250,12 +250,12 @@ Dim Todas As Byte
     Todas = Combo1.ListIndex
     If Todas <> 2 Then
         'Clientes
-        SQL = DameSQL(True)
+        Sql = DameSQL(True)
         CargaListView (True)
     End If
     If Todas <> 1 Then
         'Proeedores
-        SQL = DameSQL(False)
+        Sql = DameSQL(False)
         CargaListView (False)
     End If
     
@@ -275,10 +275,10 @@ Dim Color As Long
     'FechaLimite = DateAdd("d", -1 * vParamAplic.Sii_Dias, Now)
     FechaLimite = UltimaFechaCorrectaSII(vParamAplic.Sii_Dias, Now)
     
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         NumRegElim = NumRegElim + 1
-        Set IT = ListView1.ListItems.Add(, "C" & Format(Now, "yymmdd" & Format(NumRegElim, "0000")))
+        Set IT = ListView1.ListItems.Add(, "C" & Format(Now, "yymmdd" & Format(NumRegElim, "000000")))
         
         
         IT.Text = Format(miRsAux!Fecha, "dd/mm/yyyy")
@@ -320,37 +320,37 @@ End Sub
 
 
 Private Function DameSQL(Clientes As Boolean) As String
-Dim cad As String
+Dim Cad As String
 
     
 
     If Clientes Then
     
-        cad = "Select fecfactu fecha, concat(codtipom,numfactu) factura, codclien,nomclien nombre,totalfac importe FROM scafac"
-        cad = cad & " WHERE fecfactu>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND  "
-        cad = cad & "fecfactu<=DATE_ADD(now(), INTERVAL -1 DAY) AND  intconta =0 "
+        Cad = "Select fecfactu fecha, concat(codtipom,right(concat('000000',numfactu),6)) factura, codclien,nomclien nombre,totalfac importe FROM scafac"
+        Cad = Cad & " WHERE fecfactu>=" & DBSet(vParamAplic.Sii_Finicio, "F") & " AND  "
+        Cad = Cad & "fecfactu<=DATE_ADD(now(), INTERVAL -1 DAY) AND  intconta =0 "
         
         If AgrupaTickets Then
-            cad = cad & " AND codtipom <>'FTI'    "
+            Cad = Cad & " AND codtipom <>'FTI'    "
         Else
-            If Me.chkTiket.Value Then cad = cad & " AND codtipom <>'FTI'    "
+            If Me.chkTiket.Value Then Cad = Cad & " AND codtipom <>'FTI'    "
         End If
         
-        cad = cad & " AND codtipom <>'FAZ'    "
+        Cad = Cad & " AND codtipom <>'FAZ'    "
         
     Else
         If vEmpresa.FechaIni > vParamAplic.Sii_Finicio Then
-            cad = vEmpresa.FechaIni
+            Cad = vEmpresa.FechaIni
         Else
-            cad = vParamAplic.Sii_Finicio
+            Cad = vParamAplic.Sii_Finicio
         End If
-        cad = "fecrecep>=" & DBSet(cad, "F")
-        cad = "Select fecrecep fecha, numfactu factura, codprove,nomprove nombre,totalfac importe  FROM scafpc WHERE " & cad
-        cad = cad & " AND fecrecep<=DATE_ADD(now(), INTERVAL -1 DAY) AND  intconta =0 "
+        Cad = "fecrecep>=" & DBSet(Cad, "F")
+        Cad = "Select fecrecep fecha, numfactu factura, codprove,nomprove nombre,totalfac importe  FROM scafpc WHERE " & Cad
+        Cad = Cad & " AND fecrecep<=DATE_ADD(now(), INTERVAL -1 DAY) AND  intconta =0 "
 
     
     End If
     
-    DameSQL = cad
+    DameSQL = Cad
 
 End Function

@@ -718,7 +718,7 @@ Begin VB.Form frmFacTarifasPrecios
       Left            =   1440
       MaxLength       =   16
       TabIndex        =   0
-      Tag             =   "Cod. Articulo|T|N|||slista|codartic||S|"
+      Tag             =   "Cod. Articulo|T1|N|||slista|codartic||S|"
       Text            =   "Text1"
       Top             =   1680
       Width           =   2175
@@ -1302,13 +1302,13 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data2, SQL, False
@@ -1344,7 +1344,7 @@ Dim SQL As String
     For i = 0 To DataGrid1.Columns.Count - 1
         DataGrid1.Columns(i).AllowSizing = False
     Next i
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     DataGrid1.ScrollBars = dbgAutomatic
     Exit Sub
     
@@ -1698,14 +1698,14 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte, NumReg As Byte
-Dim b As Boolean
+Dim B As Boolean
 On Error GoTo EPonerModo
 
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     
      'Visualizar flechas de desplazamiento en la toolbar si modo=2
     NumReg = 1
@@ -1713,7 +1713,7 @@ On Error GoTo EPonerModo
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
 
 
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -1723,16 +1723,16 @@ On Error GoTo EPonerModo
     BloquearChecks Me, Modo
            
     '--------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b And Modo <> 4 'Si modificar no activado pq son claves ajenas
+        Me.imgBuscar(i).Enabled = B And Modo <> 4 'Si modificar no activado pq son claves ajenas
     Next i
     
     For i = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(i).Enabled = b 'And Modo <> 3 'Si es insertar se modifica
+        Me.imgFecha(i).Enabled = B 'And Modo <> 3 'Si es insertar se modifica
     Next i
     
 '    Me.chkPermiteDto.Enabled = (Modo = 1) Or (Modo = 3) Or (Modo = 4)
@@ -1750,28 +1750,28 @@ Private Sub DesplazamientoVisible(bol As Boolean)
 End Sub
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     
     '-------------------------------------
     'b = (Modo >= 3)
-    b = Not (Modo = 0 Or Modo = 2)
+    B = Not (Modo = 0 Or Modo = 2)
     'Insertar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnNuevo.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnNuevo.Enabled = Not B
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
 End Sub
 
 Private Sub LimpiarCampos()
@@ -1957,26 +1957,26 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
     
     'Comprobar que si hay valores nuevos, la fecha de cambio no es nulo
     If Not EsVacio(Text1(5)) Or Not EsVacio(Text1(6)) Then
-        b = (Not EsVacio(Text1(4)))
+        B = (Not EsVacio(Text1(4)))
     End If
-    If Not b Then
+    If Not B Then
         MsgBox "La Fecha de Cambio debe tener valor.", vbInformation
         Exit Function
     End If
     
     'Comprobar que si no hay valores nuevos no haya fecha de Cambio
     If EsVacio(Text1(5)) And EsVacio(Text1(6)) Then
-        b = (EsVacio(Text1(4)))
+        B = (EsVacio(Text1(4)))
     End If
-    If Not b Then
+    If Not B Then
         MsgBox "No hay valores nuevos para la fecha de cambio", vbInformation
         Exit Function
     End If
@@ -1984,8 +1984,8 @@ Dim b As Boolean
     'si se modifica el precio actual no hay fecha de cambio ni precio nuevo
     If Modo = 4 Then
         If CCur(Me.Data1.Recordset!precioac) <> CCur(Me.Text1(2).Text) Then
-            b = EsVacio(Text1(5)) And EsVacio(Text1(6)) And EsVacio(Text1(4))
-            If Not b Then
+            B = EsVacio(Text1(5)) And EsVacio(Text1(6)) And EsVacio(Text1(4))
+            If Not B Then
                 MsgBox "Si se modifican precios actuales, los precios nuevos y fecha cambio no deben tener valor.", vbInformation
                 Exit Function
             End If
@@ -2000,7 +2000,7 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 

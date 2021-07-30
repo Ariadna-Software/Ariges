@@ -160,7 +160,7 @@ Public SoloImprimir As Boolean
 Public OtrosParametros As String   ' El grupo acaba en |                            ' param1=valor1|param2=valor2|
 Public NumeroParametros As Integer   'Cuantos parametros hay.  EMPRESA(EMP) no es parametro. Es fijo en todos los informes
 Public MostrarTree As Boolean
-Public opcion As Integer
+Public Opcion As Integer
 Public ExportarPDF As Boolean
 Public EstaImpreso As Boolean
 
@@ -176,7 +176,7 @@ Dim mrpt As CRAXDRT.Report
 Dim smrpt As CRAXDRT.Report
 
 'Dim Argumentos() As String
-Dim primeravez As Boolean
+Dim PrimeraVez As Boolean
 
 
 Private Sub Command1_Click()
@@ -304,10 +304,10 @@ End Function
 Private Sub Form_Activate()
 Dim Incio As Single
 Dim fin As Boolean
-    If primeravez Then
+    If PrimeraVez Then
     
     
-        primeravez = False
+        PrimeraVez = False
         
         
         
@@ -333,7 +333,7 @@ Dim fin As Boolean
 End Sub
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim NomImpre As String
 Dim BDConta As String
@@ -342,7 +342,7 @@ Dim BDConta As String
 
     
     'Icono del formulario
-    Me.Icon = frmppal.Icon
+    Me.Icon = frmPpal.Icon
     
     Screen.MousePointer = vbHourglass
     
@@ -361,23 +361,23 @@ Dim BDConta As String
     If vParamAplic.ContabilidadNueva Then BDConta = "ariconta"
        
     'Conectar a la BD de la Empresa
-    For I = 1 To mrpt.Database.Tables.Count
+    For i = 1 To mrpt.Database.Tables.Count
     
         'NUEVO 21 Mayo 2008
         'Puede que alguna tabla este vinculada a ARICONTA
-        If LCase(CStr(mrpt.Database.Tables(I).ConnectionProperties.Item("DSN"))) = "vconta" Then
+        If LCase(CStr(mrpt.Database.Tables(i).ConnectionProperties.Item("DSN"))) = "vconta" Then
             'A conta
             
-            mrpt.Database.Tables(I).SetLogOnInfo "vConta", BDConta & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+            mrpt.Database.Tables(i).SetLogOnInfo "vConta", BDConta & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
                 
             'If (InStr(1, mrpt.Database.Tables(i).Name, "_") = 0) Then
-            If RedireccionamosTabla(CStr(mrpt.Database.Tables(I).Name)) Then
+            If RedireccionamosTabla(CStr(mrpt.Database.Tables(i).Name)) Then
         
-               mrpt.Database.Tables(I).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(I).Name
+               mrpt.Database.Tables(i).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(i).Name
             Else
                 'Febrero2020
                 If vUsu.Login = "root" Then MsgBox "El programa continuará.         Redireccionando _ "
-                mrpt.Database.Tables(I).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(I).Location
+                mrpt.Database.Tables(i).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(i).Location
             End If
     
     
@@ -385,27 +385,27 @@ Dim BDConta As String
     
     
     
-        ElseIf LCase(CStr(mrpt.Database.Tables(I).ConnectionProperties.Item("DSN"))) = "mytelefono" Then
+        ElseIf LCase(CStr(mrpt.Database.Tables(i).ConnectionProperties.Item("DSN"))) = "mytelefono" Then
             'Detalle de llamada y poco mas
-            mrpt.Database.Tables(I).SetLogOnInfo "mytelefono", , vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+            mrpt.Database.Tables(i).SetLogOnInfo "mytelefono", , vParamAplic.UsuarioConta, vParamAplic.PasswordConta
         
         Else
             'A ariges
             If CambiaODBC Then
-                mrpt.Database.Tables(I).SetLogOnInfo "vAriges2", vEmpresa.BDAriges, vConfig.User, vConfig.password
+                mrpt.Database.Tables(i).SetLogOnInfo "vAriges2", vEmpresa.BDAriges, vConfig.User, vConfig.password
             Else
                 'lo que habia
-                mrpt.Database.Tables(I).SetLogOnInfo "vAriges", vEmpresa.BDAriges, vConfig.User, vConfig.password
+                mrpt.Database.Tables(i).SetLogOnInfo "vAriges", vEmpresa.BDAriges, vConfig.User, vConfig.password
             End If
            'If InStr(1, mrpt.Database.Tables(i).Name, "_") = 0 Then
-           If RedireccionamosTabla(CStr(mrpt.Database.Tables(I).Name)) Then
-                   mrpt.Database.Tables(I).Location = vEmpresa.BDAriges & "." & mrpt.Database.Tables(I).Name
-           ElseIf InStr(1, mrpt.Database.Tables(I).Name, "alias") <> 0 Then
-                J = InStr(1, mrpt.Database.Tables(I).Name, "_")
-                mrpt.Database.Tables(I).Location = vEmpresa.BDAriges & "." & Mid(mrpt.Database.Tables(I).Name, 1, J - 1)
+           If RedireccionamosTabla(CStr(mrpt.Database.Tables(i).Name)) Then
+                   mrpt.Database.Tables(i).Location = vEmpresa.BDAriges & "." & mrpt.Database.Tables(i).Name
+           ElseIf InStr(1, mrpt.Database.Tables(i).Name, "alias") <> 0 Then
+                J = InStr(1, mrpt.Database.Tables(i).Name, "_")
+                mrpt.Database.Tables(i).Location = vEmpresa.BDAriges & "." & Mid(mrpt.Database.Tables(i).Name, 1, J - 1)
            End If
         End If
-    Next I
+    Next i
 
 '
 '    If SubInformeConta <> "" Then
@@ -419,7 +419,7 @@ Dim BDConta As String
     'If ConSubInforme Then AbrirSubreport
     AbrirSubreportNuevo
     
-    primeravez = True
+    PrimeraVez = True
     
     CargaArgumentos
     
@@ -427,7 +427,7 @@ Dim BDConta As String
     mrpt.RecordSelectionFormula = FormulaSeleccion
 '    mrpt.RecordSortFields
 
-    If opcion = 227 Then
+    If Opcion = 227 Then
     'Para INforme de Ventas por cliente
         If mrpt.FormulaFields.GetItemByName("pOrden").Text = "{tmpinformes.importe5}" Then
             mrpt.RecordSortFields.Item(1).SortDirection = crDescendingOrder
@@ -437,7 +437,7 @@ Dim BDConta As String
     
     If ConSubInforme Then
         'If Opcion = 228 Or Opcion = 240 Then  ENERO 2020
-        If opcion = 240 Then
+        If Opcion = 240 Then
             If Not smrpt Is Nothing Then smrpt.RecordSelectionFormula = mrpt.RecordSelectionFormula
         End If
     End If
@@ -554,7 +554,7 @@ End Sub
 
 
 Private Sub ForzarHoja()
-Dim cad As String
+Dim Cad As String
      On Error Resume Next
      mrpt.PaperSize = crPaperLetter ' crPaperUser
    '  If vParamAplic.NumeroInstalacion = vbFenollar Then mrpt.SetUserPaperSize 215, 215
@@ -574,7 +574,7 @@ End Sub
 
 Private Sub CargaArgumentos()
 Dim Parametro As String
-Dim I As Integer
+Dim i As Integer
     'El primer parametro es el nombre de la empresa para todas las empresas
     ' Por lo tanto concaatenaremos con otros parametros
     ' Y sumaremos uno
@@ -588,37 +588,37 @@ Case 0
     '====Comenta: LAura
     'Solo se vacian los campos de formula que empiezan con "p" ya que estas
     'formulas se corresponden con paso de parametros al Report
-    For I = 1 To mrpt.FormulaFields.Count
-        If Left(Mid(mrpt.FormulaFields(I).Name, 3), 1) = "p" Then
-            mrpt.FormulaFields(I).Text = """"""
+    For i = 1 To mrpt.FormulaFields.Count
+        If Left(Mid(mrpt.FormulaFields(i).Name, 3), 1) = "p" Then
+            mrpt.FormulaFields(i).Text = """"""
         End If
-    Next I
+    Next i
     '====
 Case 1
     
-    For I = 1 To mrpt.FormulaFields.Count
-        Parametro = mrpt.FormulaFields(I).Name
+    For i = 1 To mrpt.FormulaFields.Count
+        Parametro = mrpt.FormulaFields(i).Name
         Parametro = Mid(Parametro, 3)  'Quitamos el {@
         Parametro = Mid(Parametro, 1, Len(Parametro) - 1) ' el } del final
         'Debug.Print Parametro
         If DevuelveValor(Parametro) Then
-            mrpt.FormulaFields(I).Text = Parametro
+            mrpt.FormulaFields(i).Text = Parametro
         Else
 '            mrpt.FormulaFields(I).Text = """"""
         End If
-    Next I
+    Next i
     
 Case Else
     NumeroParametros = NumeroParametros + 1
     
-    For I = 1 To mrpt.FormulaFields.Count
-        Parametro = mrpt.FormulaFields(I).Name
+    For i = 1 To mrpt.FormulaFields.Count
+        Parametro = mrpt.FormulaFields(i).Name
         Parametro = Mid(Parametro, 3)  'Quitamos el {@
         Parametro = Mid(Parametro, 1, Len(Parametro) - 1) ' el } del final
         If DevuelveValor(Parametro) Then
-            mrpt.FormulaFields(I).Text = Parametro
+            mrpt.FormulaFields(i).Text = Parametro
         End If
-    Next I
+    Next i
 '    mrpt.RecordSelectionFormula
 End Select
 End Sub
@@ -636,17 +636,17 @@ End Sub
 
 
 Private Function DevuelveValor(ByRef Valor As String) As Boolean
-Dim I As Long
+Dim i As Long
 Dim J As Long
 
     Valor = "|" & Valor & "="
     DevuelveValor = False
-    I = InStr(1, OtrosParametros, Valor, vbTextCompare)
-    If I > 0 Then
-        I = I + Len(Valor)
-        J = InStr(I, OtrosParametros, "|")
+    i = InStr(1, OtrosParametros, Valor, vbTextCompare)
+    If i > 0 Then
+        i = i + Len(Valor)
+        J = InStr(i, OtrosParametros, "|")
         If J > 0 Then
-            Valor = Mid(OtrosParametros, I, J - I)
+            Valor = Mid(OtrosParametros, i, J - i)
             If Valor = "" Then
                 Valor = " "
             Else
@@ -661,19 +661,19 @@ End Function
 Private Sub CompruebaComillas(ByRef Valor1 As String)
 Dim Aux As String
 Dim J As Integer
-Dim I As Integer
+Dim i As Integer
 
     If Mid(Valor1, 1, 1) = Chr(34) Then
         'Tiene comillas. Con lo cual tengo k poner las dobles
         Aux = Mid(Valor1, 2, Len(Valor1) - 2)
-        I = -1
+        i = -1
         Do
-            J = I + 2
-            I = InStr(J, Aux, """")
-            If I > 0 Then
-              Aux = Mid(Aux, 1, I - 1) & """" & Mid(Aux, I)
+            J = i + 2
+            i = InStr(J, Aux, """")
+            If i > 0 Then
+              Aux = Mid(Aux, 1, i - 1) & """" & Mid(Aux, i)
             End If
-        Loop Until I = 0
+        Loop Until i = 0
         Aux = """" & Aux & """"
         Valor1 = Aux
     End If
@@ -705,18 +705,18 @@ Private Sub Exportar()
 End Sub
 
 Private Sub PonerMargen()
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
     On Error GoTo EPon
-    cad = Dir(App.Path & "\*.mrg")
-    If cad <> "" Then
-        I = InStr(1, cad, ".")
-        If I > 0 Then
-            cad = Mid(cad, 1, I - 1)
-            If IsNumeric(cad) Then
-                If Val(cad) > 4000 Then cad = "4000"
-                If Val(cad) > 0 Then
-                    mrpt.BottomMargin = mrpt.BottomMargin + Val(cad)
+    Cad = Dir(App.Path & "\*.mrg")
+    If Cad <> "" Then
+        i = InStr(1, Cad, ".")
+        If i > 0 Then
+            Cad = Mid(Cad, 1, i - 1)
+            If IsNumeric(Cad) Then
+                If Val(Cad) > 4000 Then Cad = "4000"
+                If Val(Cad) > 0 Then
+                    mrpt.BottomMargin = mrpt.BottomMargin + Val(Cad)
                 End If
             End If
         End If
@@ -788,7 +788,7 @@ Private Sub AbrirSubreportNuevo()
 Dim crxSection As CRAXDRT.Section
 Dim crxObject As Object
 Dim crxSubreportObject As CRAXDRT.SubreportObject
-Dim I As Byte
+Dim i As Byte
 Dim BDConta
     BDConta = "conta"
     If vParamAplic.ContabilidadNueva Then BDConta = "ariconta"
@@ -798,38 +798,38 @@ Dim BDConta
              If TypeOf crxObject Is SubreportObject Then
                 Set crxSubreportObject = crxObject
                 Set smrpt = mrpt.OpenSubreport(crxSubreportObject.SubreportName)
-                For I = 1 To smrpt.Database.Tables.Count 'para cada tabla
+                For i = 1 To smrpt.Database.Tables.Count 'para cada tabla
                     '------ Añade Laura: 09/06/2005
                     
                     
                     
-                    If Mid(smrpt.Database.Tables(I).ConnectionProperties.Item("DSN"), 1, 7) = "vAriges" Then
+                    If Mid(smrpt.Database.Tables(i).ConnectionProperties.Item("DSN"), 1, 7) = "vAriges" Then
                         If CambiaODBC Then
-                            mrpt.Database.Tables(I).SetLogOnInfo "vAriges2", vEmpresa.BDAriges, vConfig.User, vConfig.password
+                            mrpt.Database.Tables(i).SetLogOnInfo "vAriges2", vEmpresa.BDAriges, vConfig.User, vConfig.password
                         Else
                             'LO QUE HABIA
-                            smrpt.Database.Tables(I).SetLogOnInfo "vAriges", vEmpresa.BDAriges, vConfig.User, vConfig.password
+                            smrpt.Database.Tables(i).SetLogOnInfo "vAriges", vEmpresa.BDAriges, vConfig.User, vConfig.password
                         End If
                         'If (InStr(1, smrpt.Database.Tables(i).Name, "_") = 0) Then
-                        If RedireccionamosTabla(CStr(smrpt.Database.Tables(I).Name)) Then
-                           smrpt.Database.Tables(I).Location = vEmpresa.BDAriges & "." & smrpt.Database.Tables(I).Name
+                        If RedireccionamosTabla(CStr(smrpt.Database.Tables(i).Name)) Then
+                           smrpt.Database.Tables(i).Location = vEmpresa.BDAriges & "." & smrpt.Database.Tables(i).Name
                         End If
-                    ElseIf smrpt.Database.Tables(I).ConnectionProperties.Item("DSN") = "vConta" Then
+                    ElseIf smrpt.Database.Tables(i).ConnectionProperties.Item("DSN") = "vConta" Then
                         
-                        smrpt.Database.Tables(I).SetLogOnInfo "vConta", BDConta & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+                        smrpt.Database.Tables(i).SetLogOnInfo "vConta", BDConta & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
                         'If (InStr(1, smrpt.Database.Tables(i).Name, "_") = 0) Then
-                        If RedireccionamosTabla(CStr(smrpt.Database.Tables(I).Name)) Then
-                           smrpt.Database.Tables(I).Location = BDConta & vParamAplic.NumeroConta & "." & smrpt.Database.Tables(I).Name
+                        If RedireccionamosTabla(CStr(smrpt.Database.Tables(i).Name)) Then
+                           smrpt.Database.Tables(i).Location = BDConta & vParamAplic.NumeroConta & "." & smrpt.Database.Tables(i).Name
                         End If
                         
-                    ElseIf LCase(CStr(smrpt.Database.Tables(I).ConnectionProperties.Item("DSN"))) = "mytelefono" Then
+                    ElseIf LCase(CStr(smrpt.Database.Tables(i).ConnectionProperties.Item("DSN"))) = "mytelefono" Then
                         'Detalle de llamada y poco mas
-                        smrpt.Database.Tables(I).SetLogOnInfo "myTelefono", "telefono", vParamAplic.UsuarioConta, vParamAplic.PasswordConta
-                        smrpt.Database.Tables(I).Location = "telefono." & smrpt.Database.Tables(I).Name
+                        smrpt.Database.Tables(i).SetLogOnInfo "myTelefono", "telefono", vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+                        smrpt.Database.Tables(i).Location = "telefono." & smrpt.Database.Tables(i).Name
                     
                     End If
                     '------
-                Next I
+                Next i
              End If
         Next crxObject
     Next crxSection
@@ -849,7 +849,7 @@ Private Function RedireccionamosTabla(tabla As String) As Boolean
             RedireccionamosTabla = True
         Else
             'resto
-            If LCase(Right(tabla, 3)) = "_eu" Then
+            If LCase(Right(tabla, 3)) = "_eu" Or LCase(Right(tabla, 3)) = "eu2" Then
                 RedireccionamosTabla = True
             Else
                 If Right(tabla, 4) = "taxi" Then
@@ -901,10 +901,10 @@ End Sub
 ' el resto de archivos seleccionados
 Private Sub HacerPDFSubDocumentos()
 Dim RN As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim J As Integer
 Dim T1 As Single
-Dim Aux2 As String
+Dim aux2 As String
 Dim Destino As String
 Dim FinEspera As Boolean
     DoEvents
@@ -916,9 +916,9 @@ Dim FinEspera As Boolean
     Me.MousePointer = vbHourglass
     Espera 0.1
     Set RN = New ADODB.Recordset
-    cad = "Select * from tmpImpresionAuxliar WHERE codusu = " & vUsu.Codigo
-    cad = cad & " AND lcase(right(fichero,3))='pdf'"
-    RN.Open cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
+    Cad = "Select * from tmpImpresionAuxliar WHERE codusu = " & vUsu.Codigo
+    Cad = Cad & " AND lcase(right(fichero,3))='pdf'"
+    RN.Open Cad, conn, adOpenKeyset, adLockPessimistic, adCmdText
     Screen.MousePointer = vbHourglass
     
     'If Dir(App.Path & "\temp\*.pdf", vbArchive) <> "" Then Kill App.Path & "\temp\*.pdf"
@@ -938,13 +938,13 @@ Dim FinEspera As Boolean
             
             If False Then
                 'Esto lo hacia antes
-                cad = """" & App.Path & "\temp\tmp" & J - 1 & ".pdf" & """" & " """ & RN!Fichero & """"
+                Cad = """" & App.Path & "\temp\tmp" & J - 1 & ".pdf" & """" & " """ & RN!Fichero & """"
                 
                 
                 Destino = App.Path & "\temp\tmp" & J & ".pdf"
-                cad = """" & App.Path & "\pdftk.exe"" " & cad & " cat output """ & Destino & """ verbose"
+                Cad = """" & App.Path & "\pdftk.exe"" " & Cad & " cat output """ & Destino & """ verbose"
                 
-                Shell cad, vbNormalFocus
+                Shell Cad, vbNormalFocus
                         
             Else
                 FileCopy RN!Fichero, App.Path & "\temp\" & Format(vUsu.Codigo, "0000") & "\" & J & ".pdf"
@@ -956,14 +956,14 @@ Dim FinEspera As Boolean
                         
             If False Then
                 'ANTES
-                Aux2 = "" 'No esta el archivo generado. No hace falta que sigamos. lanzar error
+                aux2 = "" 'No esta el archivo generado. No hace falta que sigamos. lanzar error
                 T1 = Timer
                 FinEspera = False
                 Do
                     Screen.MousePointer = vbHourglass
                     If Dir(Destino, vbArchive) <> "" Then
                         FinEspera = True
-                        Aux2 = "SI"
+                        aux2 = "SI"
                         
                     Else
                         If Timer - T1 > 25 Then FinEspera = True
@@ -974,7 +974,7 @@ Dim FinEspera As Boolean
                     End If
                 Loop Until FinEspera
                 
-                If Dir(Destino, vbArchive) = "" Then Err.Raise 513, , "Tiempo espera excedido creando fichero temporal: " & Aux2
+                If Dir(Destino, vbArchive) = "" Then Err.Raise 513, , "Tiempo espera excedido creando fichero temporal: " & aux2
             End If
             
             RN.MoveNext
@@ -987,10 +987,10 @@ Dim FinEspera As Boolean
             Destino = mrpt.ExportOptions.DiskFileName
             
             
-            cad = """" & App.Path & "\temp\" & Format(vUsu.Codigo, "0000") & "\*.pdf"""
-            cad = """" & App.Path & "\pdftk.exe"" " & cad & " cat output """ & Destino & """ verbose"
+            Cad = """" & App.Path & "\temp\" & Format(vUsu.Codigo, "0000") & "\*.pdf"""
+            Cad = """" & App.Path & "\pdftk.exe"" " & Cad & " cat output """ & Destino & """ verbose"
                     
-            Shell cad, vbNormalFocus
+            Shell Cad, vbNormalFocus
         End If
         Screen.MousePointer = vbHourglass
         'cad = App.Path & "\temp\" & Format(vUsu.codigo, "0000") & "\" & J & ".pdf"
@@ -1013,18 +1013,18 @@ Dim FinEspera As Boolean
        ' Loop Until J > 30
         
         J = 0
-        cad = ""
+        Cad = ""
         Do
             J = J + 1
             If Dir(Destino, vbArchive) = "" Then
                 Espera 1
             
-                If J > 120 Then cad = "NO"
+                If J > 120 Then Cad = "NO"
             Else
-                cad = "SI"
+                Cad = "SI"
             End If
-        Loop Until cad <> ""
-        If cad = "SI" Then
+        Loop Until Cad <> ""
+        If Cad = "SI" Then
             J = 36             'ok
         Else
             J = 34
@@ -1032,7 +1032,7 @@ Dim FinEspera As Boolean
          
     Else
         'NO hay ningun pdf para exportar. Solo exportará el docum.pdf
-        cad = mrpt.ExportOptions.DiskFileName
+        Cad = mrpt.ExportOptions.DiskFileName
         'FileCopy mrpt.ExportOptions.DiskFileName, cad
         J = 36
     End If
@@ -1100,40 +1100,40 @@ End Sub
 
 
 
-Private Sub Text1_GotFocus(index As Integer)
-     ConseguirFoco Text1(index), 3
+Private Sub Text1_GotFocus(Index As Integer)
+     ConseguirFoco Text1(Index), 3
 End Sub
 
-Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     'Si pulsa ESC
-    Dim Cerrar As Boolean
+    Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, 2, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, 2, cerrar
+    If cerrar Then Unload Me
 End Sub
 
-Private Sub Text1_LostFocus(index As Integer)
+Private Sub Text1_LostFocus(Index As Integer)
 Dim Resetear As Boolean
 
-    Text1(index).Text = Trim(Text1(index).Text)
+    Text1(Index).Text = Trim(Text1(Index).Text)
     Resetear = False
-    If Not PonerFormatoEntero(Text1(index)) Then
+    If Not PonerFormatoEntero(Text1(Index)) Then
         Resetear = True
         
     Else
-        Text1(index).Text = Abs(Text1(index).Text) 'por si acaso
-        If index = 2 Then
+        Text1(Index).Text = Abs(Text1(Index).Text) 'por si acaso
+        If Index = 2 Then
             
         Else
             'NUmero de copias / Pagina inicio
-            If Val(Text1(index).Text) = 0 Then Resetear = True
+            If Val(Text1(Index).Text) = 0 Then Resetear = True
         End If
     End If
     If Resetear Then
-        If index = 2 Then
-            Text1(index).Text = ""
-        ElseIf index = 1 Then
-            Text1(index).Text = "1"
+        If Index = 2 Then
+            Text1(Index).Text = ""
+        ElseIf Index = 1 Then
+            Text1(Index).Text = "1"
         Else
             
             VScroll1.Value = 15000
@@ -1149,20 +1149,20 @@ Dim Resetear As Boolean
 End Sub
 
 Private Sub SubirBajar(mas As Boolean)
-Dim I As Integer
+Dim i As Integer
     
     If Not IsNumeric(Text1(0).Text) Then
-        I = 1
+        i = 1
     Else
-        I = CInt(Val(Text1(0).Text))
+        i = CInt(Val(Text1(0).Text))
     End If
     If mas Then
-        I = I + 1
+        i = i + 1
     Else
-        I = I - 1
-        If I < 1 Then I = 1
+        i = i - 1
+        If i < 1 Then i = 1
     End If
-    Text1(0).Text = I
+    Text1(0).Text = i
 End Sub
 
 Private Sub UpDown1_DownClick()

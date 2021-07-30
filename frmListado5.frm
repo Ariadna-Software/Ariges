@@ -5694,7 +5694,7 @@ Begin VB.Form frmListado5
          BackColor       =   -2147483643
          BorderStyle     =   1
          Appearance      =   1
-         NumItems        =   5
+         NumItems        =   7
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Tipo"
             Object.Width           =   2540
@@ -5720,6 +5720,16 @@ Begin VB.Form frmListado5
             SubItemIndex    =   4
             Text            =   "Nº Factura"
             Object.Width           =   1764
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
+            Text            =   "TipoFact"
+            Object.Width           =   0
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
+            Text            =   "Fecfac"
+            Object.Width           =   0
          EndProperty
       End
       Begin VB.Label Label9 
@@ -9478,7 +9488,7 @@ Dim DesmarcarSolo As Boolean
             
         End If
     Else
-        
+        If treeAlb(1).SelectedItem Is Nothing Then Exit Sub
         If Not treeAlb(1).SelectedItem.Parent Is Nothing Then
             MsgBox "Seelccione la cabecera del albaran", vbExclamation
             Exit Sub
@@ -12941,17 +12951,17 @@ Private Sub CargaAlbaranesFacturaClienteEuler()
     
     lw(3).ListItems.Clear
     If Me.chkPedidos.Value = 1 Then
-        miSQL = " select 'PED',scaped.numpedcl,fecpedcl,sum(importel),-1 from scaped,sliped "
+        miSQL = " select 'PED',scaped.numpedcl,fecpedcl,sum(importel),-1,'' tipofa,null fecfac from scaped,sliped "
         miSQL = miSQL & " where  scaped.numpedcl = sliped.numpedcl"
         miSQL = miSQL & " and codclien=" & OtrosDatos & " group by 1,2"
     Else
-        miSQL = " select scaalb.codtipom,scaalb.numalbar,fechaalb,sum(importel),-1 from scaalb,slialb"
+        miSQL = " select scaalb.codtipom,scaalb.numalbar,fechaalb,sum(importel),-1,'' tipofa,null fecfac from scaalb,slialb"
         miSQL = miSQL & " where scaalb.codtipom = slialb.codtipom And scaalb.NumAlbar = slialb.NumAlbar"
         miSQL = miSQL & " and codclien=" & OtrosDatos & " group by 1,2"
         miSQL = miSQL & " Union"
-        miSQL = miSQL & " select scafac1.codtipoa,numalbar,fechaalb,brutofac,scafac.NumFactu  from scafac, scafac1 where"
+        miSQL = miSQL & " select scafac1.codtipoa,numalbar,fechaalb,brutofac,scafac.NumFactu ,scafac.codtipom tipofa,scafac.fecfactu fecfac from scafac, scafac1 where"
         miSQL = miSQL & " scafac.codtipom = scafac1.codtipom And scafac.NumFactu = scafac1.NumFactu And "
-        miSQL = miSQL & " scafac.FecFactu = scafac1.FecFactu and codclien=" & OtrosDatos
+        miSQL = miSQL & " scafac.FecFactu = scafac1.FecFactu and codclien=" & OtrosDatos & " AND scafac1.fechaalb>=" & DBSet(DateAdd("yyyy", -2, Now), "F")
     End If
     miSQL = miSQL & " order by 1,3 desc,2"
         
@@ -12969,8 +12979,12 @@ Private Sub CargaAlbaranesFacturaClienteEuler()
         'lw(3).ListItems(NumRegElim).SubItems(4) = IIf(miRsAux.Fields(4) = 1, "Si", " ")
         If miRsAux.Fields(4) = -1 Then
             lw(3).ListItems(NumRegElim).SubItems(4) = " "
+            lw(3).ListItems(NumRegElim).SubItems(5) = ""
+            lw(3).ListItems(NumRegElim).SubItems(6) = ""
         Else
             lw(3).ListItems(NumRegElim).SubItems(4) = Format(miRsAux.Fields(4), "000000")
+            lw(3).ListItems(NumRegElim).SubItems(5) = miRsAux!tipofa
+            lw(3).ListItems(NumRegElim).SubItems(6) = Format(miRsAux!fecFac, "dd/mm/yyyy")
         End If
         miRsAux.MoveNext
     Wend
@@ -14455,6 +14469,7 @@ Private Sub PonerImportesFormaPagoALVIC()
     miSQL = "select codforpa,nomforpa,cantidad from tmpscapla ,sforpa where codusu=" & vUsu.Codigo & " and codplant=codforpa ORDER BY codforpa"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = 0
+    cadFormula = ""
     While Not miRsAux.EOF
         
             NumRegElim = NumRegElim + 1
@@ -14469,8 +14484,9 @@ Private Sub PonerImportesFormaPagoALVIC()
                 IT.SubItems(2) = " "
                  IT.Tag = 0
                 'El importe lo resto
+                If cadFormula = "" Then cadFormula = OtrosDatos
                 OtrosDatos = CCur(OtrosDatos) - miRsAux!cantidad
-                Label9(28).Caption = "Importes traspaso ALVIC (" & Format(CCur(OtrosDatos), FormatoImporte) & ")"
+                Label9(28).Caption = "Importes traspaso  (" & Format(CCur(OtrosDatos), FormatoImporte) & ")"
             Else
                 IT.SubItems(1) = miRsAux!nomforpa
                 IT.SubItems(2) = Format(miRsAux!cantidad, FormatoImporte)
@@ -14479,8 +14495,8 @@ Private Sub PonerImportesFormaPagoALVIC()
         miRsAux.MoveNext
     Wend
     miRsAux.Close
-    
-    
+        
+    If cadFormula <> "" Then Caption = Caption & " TOTAL " & cadFormula
     
     'informacion adicional
     Me.lw(10).ListItems.Clear

@@ -44,6 +44,7 @@ Begin VB.Form frmTrasAlvic
          Left            =   120
          TabIndex        =   13
          Top             =   4320
+         Value           =   1  'Checked
          Width           =   3735
       End
       Begin VB.CheckBox chkSeparadoTabulador 
@@ -363,7 +364,7 @@ Dim B As Boolean
 Dim NomFic As String
 Dim CADENA As String
 Dim cadena1 As String
-
+Dim bkupTemporales As Boolean
 On Error GoTo eError
 
 '    GenerarFacturasScafac
@@ -379,6 +380,7 @@ On Error GoTo eError
     CommonDialog1.CancelError = True
     Me.CommonDialog1.ShowOpen
     B = False
+    bkupTemporales = False
     If Me.CommonDialog1.FileName <> "" Then
         InicializarVbles
         InicializarTabla
@@ -454,8 +456,12 @@ On Error GoTo eError
                         
                         lblProgres(0).Caption = "Creando facturas"
                         lblProgres(0).Refresh
-                        GenerarFacturasScafac
                         
+                        bkupTemporales = True
+                        GenerarFacturasScafac
+                        bkupTemporales = False
+                        
+                      
                         
                         If txtCodigo(1).Text <> "" Then
                             cadFormula = "UPDATE sparamalvic set ultimoturno =  " & txtCodigo(1).Text
@@ -491,6 +497,9 @@ eError:
     Pb1.visible = False
     lblProgres(0).Caption = ""
     lblProgres(1).Caption = ""
+    
+    If bkupTemporales Then BKTablas
+    
     
     If B Then
         BorrarArchivo Me.CommonDialog1.FileName
@@ -545,6 +554,7 @@ End Sub
 Private Sub cmdCancel_Click()
     Unload Me
 End Sub
+
 
 
 
@@ -1040,7 +1050,7 @@ Dim NumeroPasadasTicketsAgrupados As Integer   'En avalon los tickets agrupadso 
     Pb1.Max = IIf(Col.Count = 0, 1, Col.Count)
     DoEvents
     For i = 1 To Col.Count
-        
+        Debug.Print "Albar: " & Col.Item(i)
         GeneraAlbaranesFinMes Col.Item(i)
         Pb1.Value = i
     Next
@@ -1068,6 +1078,7 @@ Dim NumeroPasadasTicketsAgrupados As Integer   'En avalon los tickets agrupadso 
                 AuxPoste = "|"
             Else
                 NumeroPasadasTicketsAgrupados = 0
+                AuxPoste = ""
                 Cad = "Select distinct substring(numalbaran,2,2) poste from tmpgasolimport where codusu = " & vUsu.Codigo & " AND numalbaran like '" & LEtra & "%'"
                 Cad = Cad & " AND numfactura is null"
                 Cad = Cad & " AND " & CadenaClientesVarios
@@ -1117,11 +1128,13 @@ Dim NumeroPasadasTicketsAgrupados As Integer   'En avalon los tickets agrupadso 
                 If Col.Count > 0 Then
                     AlbaranesFacturaAgrupada = ""
                     SerieEnAriges = DevuelveCodtipom(LEtra, True, False, FAlta)
+                    Pb1.Value = 0
                     Pb1.Max = Col.Count
                     DoEvents
                     
                     For i = 1 To Col.Count
                         AlbaranesFacturaAgrupada = AlbaranesFacturaAgrupada & ", " & Mid(Col.Item(i), 2)   'quito la letra
+                        Debug.Print Col.Item(i)
                         GeneraAlbaranesTiendaAlvic2 SerieEnAriges, Col.Item(i)
                         Pb1.Value = i
                     Next
@@ -1165,6 +1178,9 @@ Dim NumeroPasadasTicketsAgrupados As Integer   'En avalon los tickets agrupadso 
         Pb1.Max = Col.Count
         DoEvents
         For i = 1 To Col.Count
+            'Debug.Print Col.Item(i)
+            
+            
             GeneraAlbaranesTiendaAlvic2 SerieEnAriges, Col.Item(i)
             Pb1.Value = i
         Next
@@ -1184,13 +1200,12 @@ Dim NumeroPasadasTicketsAgrupados As Integer   'En avalon los tickets agrupadso 
     Cad = "select count(*) from tmpgasolimport where codusu =" & vUsu.Codigo & " and  traspasado=0"
     miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Cad = ""
-    If Not miRsAux Then
+    If Not miRsAux.EOF Then
         If miRsAux.Fields(0) > 0 Then Cad = miRsAux.Fields(0)
     End If
     miRsAux.Close
     If Cad <> "" Then
-        Cad = Cad & vbCrLf & vbCrLf & "Avise a Ariadna"
-        MsgBox "Datos pendientes de traspasar: " & Cad, vbExclamation
+        Err.Raise 513, , "Datos pendientes de traspasar: " & Cad
     Else
         GenerarFacturasAlbaranes = False
     End If
@@ -1205,6 +1220,7 @@ Dim NumeroPasadasTicketsAgrupados As Integer   'En avalon los tickets agrupadso 
     Set Col = New Collection
     For i = 1 To ColFrasAgrupadas.Count
         Cad = CStr(ColFrasAgrupadas.Item(i)) & ""
+        'Debug.Print Cad
         Col.Add Cad
         
     Next
@@ -1436,8 +1452,9 @@ Dim LetraAlb As String
                 
             End If
             Codigo = miRsAux!NumAlbaran
+            NumeroFactura = NumeroFactura & ", " & Mid(miRsAux!NumAlbaran, 2)  'El numero de albaran "lleva incluida la serie
         End If
-        NumeroFactura = NumeroFactura & ", " & Mid(miRsAux!NumAlbaran, 2)  'El numero de albaran "lleva incluida la serie
+        
         
         If LetraAlb <> Mid(miRsAux!NumAlbaran, 1, 1) Then
             NumeroFactura = "Letras distintas para una misma factura. " & Factura & vbCrLf & NumeroFactura
@@ -1669,12 +1686,15 @@ Dim DesdeClivar As Boolean
         If miRsAux!codClien <> 100007 Then Clivario = True
     End If
         
+        
+    If miRsAux!NumAlbaran = "D12005212" Then Debug.Assert False
+        
     vSQL = "INSERT INTO scaalb (codtipom,numalbar,fechaalb,factursn,codclien,nomclien,domclien,codpobla,pobclien,proclien"
     vSQL = vSQL & ",nifclien,telclien,coddirec,nomdirec,referenc,codtraba,codtrab1,codtrab2,codagent,codforpa,codenvio,"
     vSQL = vSQL & "dtoppago,dtognral,tipofact,observa01,observa02,observa03,observa04,observa05,numofert,fecofert,"
     vSQL = vSQL & "numpedcl,fecpedcl,fecentre,sementre,coddiren,tipAlbaran,codzonas,fecenvio,codinter,codnatura,chofer) VALUES ("
     vSQL = vSQL & "'" & codtipom & "'," & Mid(miRsAux!NumAlbaran, 2) & ", " & DBSet(miRsAux!FechaHora, "F") & ",1,"
-    
+    'Debug.Print miRsAux!NumAlbaran
     If Clivario Then
         vSQL = vSQL & sparamalvic!Clivario
         If DBLet(miRsAux!ClivarioAlvic, "T") <> "" Then DesdeClivar = True
@@ -1761,7 +1781,15 @@ Dim DesdeClivar As Boolean
     vSQL = vSQL & ",null,null,null,null)"
     
     'Insertar Cabecera
-    conn.Execute vSQL, , adCmdText
+    
+    If Not ejecutar(vSQL, True) Then
+        vSQL = "Error insertando albaran " & vbCrLf
+        vSQL = vSQL & "Lin " & miRsAux!Codigo & " " & miRsAux!NumAlbaran & " " & miRsAux!NomClien
+        MsgBox vSQL, vbCritical
+        Err.Raise 513, vSQL, vSQL
+    End If
+    
+    'conn.Execute vSQL, , adCmdText
     
 End Sub
 
@@ -1785,9 +1813,8 @@ Dim traspasdado As String
     traspasdado = ""
     While Not miRsAux.EOF
         vContad = vContad + 1
-        
+       ' If vContad > 1 Then Debug.Assert False
         traspasdado = traspasdado & ", " & miRsAux!Codigo
-      
        ' If miRsAux!TipoIVA > 1 Then S top
       
         cadTitulo = DevuelveArticuloAlbaran(Mid(miRsAux!NumAlbaran, 1, 1), miRsAux!TipoIVA)
@@ -1946,16 +1973,33 @@ Public Function DevuelveCodtipom(ByVal LEtra As String, ParaAlbaran As Boolean, 
                     DevuelveCodtipom = "F" & Mid(PosteFra, 1, 2)
                     If Val(Mid(PosteFra, 1, 2)) > 16 Then Err.Raise 513, , "Id poste incorrecto: " & PosteFra & " Letra: " & LEtra
                 Else
-                    Stop
+                    
                     If Val(Mid(PosteFra, 1, 2)) > 9 Then 'los postes 11(101)  12(102) .. no aceptanfacturas NO gasolinear
                         Err.Raise 513, , "Tipo de factura no contemplada para estos postes: " & PosteFra & " Letra: " & LEtra
                     Else
                         If LEtra = sparamalvic!letraTienda Then
                             'DevuelveCodtipom = sparamalvic!FraDirectaT
+                            Stop
                         ElseIf LEtra = sparamalvic!letraVarios Then
                             'DevuelveCodtipom = sparamalvic!FraDirectaA
+                            Stop
                         Else
-                            Err.Raise 513, , "Letra facturas AVALON no contemplada"
+                        
+                        
+                            If LEtra = "B" Then
+                                If Val(Mid(PosteFra, 1, 2)) > 3 Or Val(Mid(PosteFra, 1, 2)) < 1 Then Err.Raise 513, , "Serie incorrecta B: " & LEtra & PosteFra
+                                    
+                                DevuelveCodtipom = "F2" & Mid(PosteFra, 2, 1)
+                             
+                            Else
+                                If LEtra = "G" Then
+                                    If Val(Mid(PosteFra, 1, 2)) > 3 Or Val(Mid(PosteFra, 1, 2)) < 1 Then Err.Raise 513, , "Serie incorrecta G: " & LEtra & PosteFra
+                                    DevuelveCodtipom = "F3" & Mid(PosteFra, 2, 1)
+                                Else
+                            
+                                    Err.Raise 513, , "Letra facturas AVALON no contemplada"
+                                End If
+                            End If
                         End If
                     End If
                 End If
@@ -2034,8 +2078,8 @@ Dim R2 As ADODB.Recordset
             Line Input #NF, Cad
             Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
             lblProgres(1).Caption = "Linea " & i
-        
-'            If i = 155 Then Stop
+            
+            'If i = 721 Then Debug.Assert False
         
             If Not TipoFicheroNormal And i = 1 Then
                 Cad = ""
@@ -2088,13 +2132,13 @@ Dim R2 As ADODB.Recordset
         'El fichero lo HA procesado OK            #1
         Pb1.Value = Pb1.Value + 1
         Set miRsAux = New ADODB.Recordset
-        SQL = "Select distinct idtipopago FROM tmpgasolimport  WHERE codusu = " & vUsu.Codigo 'IdVendedor
+        SQL = "Select idtipopago,min(codigo) FROM tmpgasolimport  WHERE codusu = " & vUsu.Codigo & " GROUP BY 1   " 'IdVendedor
         miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not miRsAux.EOF
             SQL = miRsAux.Fields(0)                                             'quito la f
             Sql1 = DevuelveDesdeBDNew(conAri, "sforpa", "codforpa", "idForpaT", Mid(SQL, 2), "N")
             If Sql1 = "" Then
-                Cad = "No existe la forma de pago Alvic"
+                Cad = "No existe la forma pago gasol. L:" & miRsAux.Fields(1)
                 SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, " & _
                       "importe3, importe4, importe5, nombre1) values (" & _
                       vUsu.Codigo & ",'0'," & DBSet(Me.txtCodigo(0).Text, "F")
@@ -2177,14 +2221,16 @@ Dim R2 As ADODB.Recordset
         'Por si queremos coger datos de aqui
         Pb1.Value = Pb1.Value + 1
         If vParamAplic.NumeroInstalacion = vbTaxco Then
-            SQL = "Select distinct substring(numalbaran,1,1) FROM tmpgasolimport  WHERE codusu = " & vUsu.Codigo   '#4
+            
+
+            SQL = "Select substring(numalbaran,1,1),min(codigo) lin FROM tmpgasolimport  WHERE codusu = " & vUsu.Codigo & " GROUP BY 1 " '#4
             miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             SQL = ""
             'letraGasoleo  letraTienda   letraVarios
             While Not miRsAux.EOF
                 If miRsAux.Fields(0) <> sparamalvic!letraGasoleo Then
                     If miRsAux.Fields(0) <> sparamalvic!letraTienda Then
-                        If miRsAux.Fields(0) <> sparamalvic!letraVarios Then SQL = miRsAux.Fields(0) & "  "
+                        If miRsAux.Fields(0) <> sparamalvic!letraVarios Then SQL = SQL & miRsAux.Fields(0) & "(L" & miRsAux!Lin & ")   "
                     End If
                 End If
                 miRsAux.MoveNext
@@ -2647,7 +2693,7 @@ Dim DocumentoRelacionado As String
 
 Dim Serie As String
 Dim CampoNumeroFacturaAvalon As String 'le quito la primera letra y formateamos a 6 digitos
-
+Dim F_au As Date
 
     On Error GoTo eComprobarRegistroAlz
 
@@ -2767,7 +2813,7 @@ Dim CampoNumeroFacturaAvalon As String 'le quito la primera letra y formateamos 
                         
             'Cliente
             tarjeta = Trim(Vec(13))
-            If tarjeta = "UNKNOWN" Then tarjeta = sparamalvic!Clivario
+            'If tarjeta = "UNKNOWN" Then tarjeta = sparamalvic!Clivario: Stop
 
             NifCliente = Trim(Vec(15))
                         
@@ -2779,7 +2825,7 @@ Dim CampoNumeroFacturaAvalon As String 'le quito la primera letra y formateamos 
             
             SQL = LCase(Trim(Vec(3)))
             
-            
+            If InStr(1, Vec(5), ",") > 0 Then Err.Raise 513, , "Linea " & vContad & " Datos incorrectos"
             
             SeparaSerieFacturaAvalon Vec(5), Serie, CampoNumeroFacturaAvalon, False
             DocumentoRelacionado = Trim(Vec(8))
@@ -2829,8 +2875,11 @@ Dim CampoNumeroFacturaAvalon As String 'le quito la primera letra y formateamos 
                         ' se hace el albaran D001
                         ' el cliente quiere factura. Se hace una factura E001 cogiendo como datos el D001
                         ' y postarior mente ANulacion D002 del albaran D001 quedando unicamente como valor positivo, la E001
+                        
+                        If Vec(4) = "" Then Err.Raise 513, , "Campo numerofactura (5) vacio"
+                        
                         NumAlbaran = DocumentoRelacionado
-                        SeparaSerieFacturaAvalon Vec(7), Fecha, hora, False
+                        SeparaSerieFacturaAvalon Vec(4), Fecha, hora, False
                         NumFactura = Fecha & hora
                         
                     Else
@@ -2897,13 +2946,23 @@ Dim CampoNumeroFacturaAvalon As String 'le quito la primera letra y formateamos 
     
     
     idClienteVarioAlvic = ""
-    If Mid(tarjeta, 1, 2) = "1Z" Then
-        'Cliente vario
-        
-        
-        idClienteVarioAlvic = tarjeta
-        tarjeta = sparamalvic!Clivario
+    
+    If EsAlvic2 Then
+        'Lo que habia
+        If Mid(tarjeta, 1, 2) = "1Z" Then
+            'Cliente vario
+            idClienteVarioAlvic = tarjeta
+            tarjeta = sparamalvic!Clivario
+        End If
+    Else
+        If Not IsNumeric(tarjeta) Then
+            idClienteVarioAlvic = tarjeta
+            tarjeta = sparamalvic!Clivario
+        End If
     End If
+    
+    
+    
     
     If FechaFichero < CDate("01/01/01") Then
         'Es la primera linea procesada
@@ -2911,6 +2970,15 @@ Dim CampoNumeroFacturaAvalon As String 'le quito la primera letra y formateamos 
     
         'Es la primera linea. La fecha debe coincidir con la del fichero
         If CDate(Fecha) <> FechaFichero Then
+        
+                
+            If Not EsAlvic2 Then
+                Debug.Assert False
+                Fecha = FechaFichero
+                'Y Subir cursor al if otra vez
+            End If
+            
+            
             Mens = "Fechas: " & Fecha & "  // " & FechaFichero
                 SQL = "insert into tmpinformes (codusu, importe1, fecha1, campo1, campo2, importe2, nombre2, importe3, importe4, importe5, nombre1) values (" & _
                   vUsu.Codigo & "," & DBSet(vContad, "T") & "," & DBSet(Fecha, "F") & "," & DBSet(Mid(hora, 1, 2), "N") & _
@@ -3047,15 +3115,15 @@ Dim CampoNumeroFacturaAvalon As String 'le quito la primera letra y formateamos 
     Else
         
         B = True  'ok por defecto
+        F_au = FechaFichero 'pueden venir postes mezclados. No hay secuencilidad en fechas
         If IdTurno > 0 Then
             'Esta traspasadno un turno. La fecha puede ser de la seleccionada, o un dia mas
-            If CDate(Fecha) <> FechaFichero Then FechaFichero = DateAdd("d", 1, CDate(txtCodigo(0).Text)): Turno3 = True
+            If CDate(Fecha) <> FechaFichero Then F_au = DateAdd("d", 1, CDate(txtCodigo(0).Text)): Turno3 = True
             
-        
         End If
             
         'If CDate(Fecha) <> CDate(txtcodigo(0).Text) Then b = False
-        If CDate(Fecha) <> FechaFichero Then
+        If CDate(Fecha) <> F_au Then
             'No es la misma fecha.
             B = False
         End If
@@ -3174,8 +3242,10 @@ Dim FormateadoATres As Boolean
             'VAMOS a  dejar los numeros de albaran hasta el 99999 por POSTE
             
             'If DocumentoRelacionado Then
+            
+            esDocumentoRelacionado = True    'quitar
             If esDocumentoRelacionado Then
-                Debug.Print DatoFichero
+                
             
                 FormateadoATres = False
                 Serie = Mid(DatoFichero, 2, 1)
@@ -3190,13 +3260,16 @@ Dim FormateadoATres As Boolean
                     Serie = Mid(DatoFichero, 1, 3)
                     Serie = Mid(DatoFichero, 1, 1) & Mid(DatoFichero, 2, 2)
                     Factura = Right("000000" & Mid(DatoFichero, 4), 6)
+                    
+                    
+                    
                 Else
                     'TPVs postes. Solo gasolina. Serán 101,102..106
                     Serie = Mid(DatoFichero, 1, 2) & Mid(DatoFichero, 4, 1)   'quitamos el cero del medio
                                     
                     Factura = Right("000000" & Mid(DatoFichero, 5), 6)
                 End If
-            
+                
             Else
 
                 '21 Junio.  Todos viene con 3 posiciones
@@ -3445,13 +3518,10 @@ Dim T1 As Single
     Pb1.Value = 0
     Pb1.Max = CInt(Codigo)
     
-    
-'    Dim TipCod As String
-'Dim cad As String
-'Dim cadTabla As String
+
 Dim Fecha As Date
-        
-    Codigo = "select * from tmpslipreu where codusu =" & vUsu.Codigo & " ORDER BY nomartic,codartic" & IIf(EsAlvic2, "", ",codalmac,numlinea")
+                                                                   
+    Codigo = "select * from tmpslipreu where codusu =" & vUsu.Codigo & "  ORDER BY nomartic,codartic" & IIf(EsAlvic2, "", ",codalmac,numlinea")
     RT.Open Codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Codigo = ""
     
@@ -3490,7 +3560,28 @@ Dim Fecha As Date
                 
                 '"F01", "F02", "F03","F11", "F12", "F13", "F14", "F15", "F16"  GASOLINA
                 ' "F21", "F22", "F23", "F31", "F32", "F33",
-                If RT!NumOfert = 0 Then Stop
+                cadTabla = RT!Ampliaci
+                If cadTabla = "ALB" Then
+                    cadTabla = "T0"
+                   
+                Else
+                    If cadTabla = "ALW" Then
+                        If RT!NumOfert > 3900000 Then
+                            cadTabla = "A"
+                        Else
+                            cadTabla = "A0"
+                        End If
+                    Else
+                        If RT!NumOfert > 3900000 Then
+                            cadTabla = "D"
+                        Else
+                            cadTabla = "D0"
+                        End If
+                    End If
+                End If
+                If RT!NumOfert = 0 Then
+                   
+                End If
                 
              End If
              
@@ -3504,7 +3595,7 @@ Dim Fecha As Date
                 cadTabla = "numalbaran = '" & cadTabla & "' AND codusu "
                 cadTabla = DevuelveDesdeBD(conAri, "fechahora", "tmpgasolimport", cadTabla, CStr(vUsu.Codigo))
             End If
-            If cadTabla = "" Then cadTabla = Me.txtCodigo(0).Text
+            If cadTabla = "" Then cadTabla = Me.txtCodigo(0).Text: Err.Raise 513, , "Error en fecha generafacturasscafac. Vacia"
              Fecha = Format(cadTabla, "dd/mm/yyyy")
                 
             Codigo = RT!NomArtic & RT!codArtic
@@ -3558,3 +3649,57 @@ Dim Resumen As Boolean
     Espera 0.1
     
 End Sub
+
+
+
+Private Sub BKTablas()
+
+    On Error GoTo eBKTablas
+
+
+
+    Set miRsAux = New ADODB.Recordset
+    For numParam = 1 To 2
+        Codigo = "Select * from " & IIf(numParam = 1, "tmpslipreu", "tmpgasolimport") & " WHERE codusu = " & vUsu.Codigo
+        miRsAux.Open Codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If miRsAux.EOF Then
+            'No hace falta hacer back up
+        
+        Else
+            vContad = FreeFile
+            Codigo = "BK" & IIf(numParam = 1, "tmpslipreu", "tmpgasol") & Format(Now, "ddmmhhnn")
+            Open App.Path & "\" & Codigo & ".sql" For Output As #vContad
+            BACKUP_TablaIzquierda miRsAux, cadSelect
+            cadNombreRPT = ""
+            indCodigo = 0
+            Do
+                BACKUP_Tabla miRsAux, cadTitulo
+                cadNombreRPT = cadNombreRPT & ", " & cadTitulo
+                miRsAux.MoveNext
+                If miRsAux.EOF Then
+                    indCodigo = 1
+                Else
+                    If Len(cadNombreRPT) > 4000 Then indCodigo = 1
+                End If
+                If indCodigo = 1 Then
+                    cadNombreRPT = Mid(cadNombreRPT, 2)
+                    Cad = "INSERT INTO " & IIf(numParam = 1, "tmpslipreu", "tmpgasolimport") & " " & cadSelect & " VALUES " & cadNombreRPT & ";"
+                    Print #vContad, Cad
+                    indCodigo = 0
+                    cadNombreRPT = ""
+                End If
+            Loop Until miRsAux.EOF
+            Close #vContad
+        End If
+        miRsAux.Close
+    Next
+    
+eBKTablas:
+    If Err.Number <> 0 Then
+        MsgBox "AVISE SOPORTE. Error grave.   Creando BK temporal " & Err.Description, vbCritical
+        Err.Clear
+    End If
+    Set miRsAux = Nothing
+End Sub
+
+

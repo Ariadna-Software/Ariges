@@ -2469,6 +2469,7 @@ Dim HaModifEnLineas As Boolean
 
 
 
+
 Private Sub chkDocArchi_Click()
    '  If Modo = 1 Then CheckCadenaBusqueda chkDocArchi, BuscaChekc
 End Sub
@@ -4557,6 +4558,10 @@ Dim ImporteRecicladoSigausT As String
         conn.Execute SQL
         
         
+        If InstalacionEsEulerTaxco Then AccionesAlbaranFacturado
+        
+        
+        
         '==== LAURA 20/09/2006
         'Realizar estas actualizaciones antes de modificar el stock del almacen
         MenError = "Actualizar ult. fecha compra"
@@ -4739,6 +4744,8 @@ Dim ImpReciclado As Single
         MenError = "Actualizando Lineas Albaran Compras"
         conn.Execute SQL
             
+            
+        If InstalacionEsEulerTaxco Then AccionesAlbaranFacturado
             
         '==== Laura 20/09/2006, antes de actualizar el stock
         ' deshacer el precio medio ponderado y luego calcularlo otra vez con los nuevos valores
@@ -5857,7 +5864,8 @@ Dim ImpReciclado As Single
         End If
     End If
     
-
+    If InstalacionEsEulerTaxco Then AccionesAlbaranFacturado
+    
 EEliminarLinea:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar Linea Albaran " & vbCrLf & Err.Description
@@ -6686,11 +6694,11 @@ Dim MenError As String
     B = ComprobarCambioFecha
       
     If B Then
-        If (CDate(Text1(30).Text) <> CDate(Data1.Recordset!fentrada)) Then
+        If (CDate(Text1(30).Text) <> CDate(Data1.Recordset!Fentrada)) Then
             'Actualizamos la fecha en la tabla smoval
             MenError = "UPDATE smoval SET fechamov=" & DBSet(Text1(30).Text, "F")
             MenError = MenError & " WHERE document = " & DBSet(Data1.Recordset!Numalbar, "T")
-            MenError = MenError & " AND fechamov=" & DBSet(Data1.Recordset!fentrada, "F")
+            MenError = MenError & " AND fechamov=" & DBSet(Data1.Recordset!Fentrada, "F")
             MenError = MenError & " AND codigope=" & Data1.Recordset!Codprove
             MenError = MenError & " AND detamovi='" & CodTipoMov & "'"
             If Not ejecutar(MenError, True) Then B = False
@@ -7335,33 +7343,44 @@ End Sub
 
 
 Private Sub PonerDatosAlbaranFacturaEuler()
-Dim Cad As String
-
     txtDesc(0).Text = ""
     If txtAux(15).Text <> "" And Me.txtAux(16).Text <> "" And Me.txtAux(17).Text <> "" Then
+        txtDesc(0).Text = ObtenerDatosAlbarFacturaEulerDesdeBD(txtAux(15).Text, txtAux(16).Text, txtAux(17).Text)
+    End If
+End Sub
+
+Private Function ObtenerDatosAlbarFacturaEulerDesdeBD(Codti As String, Numalba As String, FechaAlba As String, Optional ByRef Estado As String) As String
+Dim Cad As String
+
+    'estado "" -> no existe    "AL"   albvaran "???NNNNNNN numero factura
+    
         'Buscamos en albaranes
-        Cad = "codtipom=" & DBSet(txtAux(15).Text, "T") & " AND fechaalb =" & DBSet(txtAux(17).Text, "F")
+        Cad = "codtipom=" & DBSet(Codti, "T") & " AND fechaalb =" & DBSet(FechaAlba, "F")
         Cad = Cad & " AND numalbar"
-        Cad = DevuelveDesdeBD(conAri, "concat(codclien,' ',nomclien)", "scaalb", Cad, txtAux(16).Text)
+        Cad = DevuelveDesdeBD(conAri, "concat(codclien,' ',nomclien)", "scaalb", Cad, Numalba)
         
         If Cad = "" Then
             Cad = "scafac.codtipom=scafac1.codtipom and scafac.numfactu=scafac1.numfactu and "
-            Cad = Cad & " scafac.fecfactu=scafac1.fecfactu AND scafac1.codtipoa=" & DBSet(txtAux(15).Text, "T")
-            Cad = Cad & " AND fechaalb =" & DBSet(txtAux(17).Text, "F") & " AND numalbar"
-            Cad = DevuelveDesdeBD(conAri, "concat(scafac.codtipom,right(concat('00000',scafac.numfactu),10),' de ',DATE_FORMAT(scafac.fecfactu, '%d/%m/%Y'),'|',codclien,' ',nomclien,'|')", "scafac,scafac1", Cad, txtAux(16).Text)
+            Cad = Cad & " scafac.fecfactu=scafac1.fecfactu AND scafac1.codtipoa=" & DBSet(Codti, "T")
+            Cad = Cad & " AND fechaalb =" & DBSet(FechaAlba, "F") & " AND numalbar"
+            Cad = DevuelveDesdeBD(conAri, "concat(scafac.codtipom,right(concat('00000',scafac.numfactu),10),' de ',DATE_FORMAT(scafac.fecfactu, '%d/%m/%Y'),'|',codclien,' ',nomclien,'|')", "scafac,scafac1", Cad, Numalba)
             
             If Cad = "" Then
                 Cad = "NO EXISTE"
+                Estado = ""
             Else
+                Estado = RecuperaValor(Cad, 1)
                 Cad = "ALBARAN FACTURADO.     Fra:" & RecuperaValor(Cad, 1) & vbCrLf & RecuperaValor(Cad, 2)
+                
             End If
         Else
             Cad = "ALBARAN: " & vbCrLf & Cad
+            Estado = "AL"
         End If
-        txtDesc(0).Text = Cad
-    End If
+        ObtenerDatosAlbarFacturaEulerDesdeBD = Cad
+    
         
-End Sub
+End Function
 
 
 
@@ -7503,4 +7522,92 @@ Dim vCStock As CStock
     
 End Sub
 
+'Modificar o insertar
+Private Sub AccionesAlbaranFacturado()
+Dim C As String
+Dim Aux2 As String
+Dim B  As Boolean
+Dim Facturado As String
+Dim Impor As Currency
 
+    'Ha cambiado algo de lo que habia o insertado
+    B = False
+    If Modo = 5 And ModificaLineas = 2 Then
+        If DBLet(Me.Data2.Recordset!codtipomv, "T") <> txtAux(15).Text Then B = True
+        If DBLet(Me.Data2.Recordset!numalbarV, "N") <> Val(txtAux(16).Text) Then B = True
+        If DBLet(Me.Data2.Recordset!fechaalbV, "F") <> txtAux(17).Text Then B = True
+        
+        'Modificando y no ha cambiado NADA
+        If Not B Then Exit Sub
+    Else
+        If Modo = 5 And ModificaLineas = 3 Then B = True
+    End If
+    
+    If B Then
+        'Ha cambiado algo
+        If DBLet(Data2.Recordset!codtipomv, "T") = "" Then
+            B = False 'No hace falta borrar en slifac_eu
+            
+        Else
+            'Vamos a ver si estaba facturado o no
+            C = ObtenerDatosAlbarFacturaEulerDesdeBD(DBLet(Me.Data2.Recordset!codtipomv, "T"), DBLet(Me.Data2.Recordset!numalbarV, "N"), DBLet(Me.Data2.Recordset!fechaalbV, "F"), Facturado)
+            If Len(Facturado) > 2 Then
+                'Estaba facturado
+                'Con lo cual , hay que borrar de la tabla
+                C = Right(Facturado, 10)
+                Facturado = Trim(Mid(Facturado, 1, 14))
+                cadList = "codtipom ='" & Mid(Facturado, 1, 3) & "' AND numfactu = " & Mid(Facturado, 4) & " and fecfactu=" & DBSet(C, "F")
+                cadList = cadList & " AND codtipoa = '" & txtAux(15).Text & "' AND numalbar = " & txtAux(16).Text & " AND tipo >=3 " '3 o 4
+                cadList = "DELETE FROM slifac_eu WHERE " & cadList
+                ejecutar cadList, False
+            
+            End If
+        End If
+    End If
+    
+    
+    'Si era borrar linea, me salgo ya
+    If Modo = 5 And ModificaLineas = 3 Then Exit Sub
+    
+    'Y ahora insertamos, si hiciera falta, en la tabla de slifac_eu
+    If txtAux(15).Text <> "" Then
+        'OK quiere insertar
+        Facturado = ""
+        C = ObtenerDatosAlbarFacturaEulerDesdeBD(txtAux(15).Text, txtAux(16).Text, txtAux(17).Text, Facturado)
+        
+               
+        If Len(Facturado) > 2 Then
+            C = Right(Facturado, 10)
+            Facturado = Trim(Mid(Facturado, 1, 14))
+            cadList = "codtipom ='" & Mid(Facturado, 1, 3) & "' AND numfactu = " & Mid(Facturado, 4) & " and fecfactu=" & DBSet(C, "F")
+            cadList = cadList & " AND codtipoa = '" & txtAux(15).Text & "' AND numalbar = " & txtAux(16).Text & " AND tipo"
+            cadList = DevuelveDesdeBD(conAri, "max(numlinea)", "slifac_eu", cadList, "3") '3=albaran proveedor
+            
+            cadList = Val(cadList) + 1
+            
+            ' codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,Tipo,Aux,documento
+            
+            ',numlinea,fechamov
+            cadList = cadList & "," & DBSet(IIf(IsNull(Data1.Recordset!Fentrada), Data1.Recordset!FechaAlb, Data1.Recordset!Fentrada), "F")
+            ',codalmac,codartic,nomartic,cantidad
+            cadList = cadList & "," & txtAux(0).Text & "," & DBSet(txtAux(1).Text, "T") & "," & DBSet(txtAux(2).Text, "T") & "," & DBSet(txtAux(3).Text, "N")
+            ',precioar,Tipo,Aux,documento
+            Impor = ImporteFormateado(txtAux(3).Text)
+            If Impor <> 0 Then Impor = Round(ImporteFormateado(txtAux(7).Text) / Impor, 2)
+            cadList = cadList & "," & DBSet(Impor, "N") & ",3," & DBSet(Data1.Recordset!nomprove & " (" & Data1.Recordset!Codprove & ")", "T") & "," & DBSet("ALC_" & Text1(0).Text, "T") & ")"
+            ',codtipoa,numalbar + cadlist
+            cadList = "," & DBSet(txtAux(15).Text, "T") & "," & txtAux(16).Text & "," & cadList
+            ' codtipom,numfactu,fecfactu +cadlist
+            cadList = "(" & DBSet(Mid(Facturado, 1, 3), "T") & "," & Mid(Facturado, 4) & "," & DBSet(C, "F") & cadList
+            
+            
+            cadList = "INSERT INTO slifac_eu( codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,Tipo,Aux,documento) VALUES " & cadList
+            
+            If Not ejecutar(cadList, False) Then MsgBox "No se ha insertado el coste en factura cliente vinculada", vbExclamation
+                
+            
+        End If
+        
+    End If
+    cadList = ""
+End Sub

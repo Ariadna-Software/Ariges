@@ -86,19 +86,19 @@ Begin VB.Form frmFacProyecto
       TabCaption(1)   =   "Impresion"
       TabPicture(1)   =   "frmFacProyecto.frx":0060
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "lblFramePp(4)"
+      Tab(1).Control(0)=   "FrameToolAux(5)"
       Tab(1).Control(1)=   "lwEulerLineas"
-      Tab(1).Control(2)=   "FrameToolAux(5)"
+      Tab(1).Control(2)=   "lblFramePp(4)"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Tareas / costes"
       TabPicture(2)   =   "frmFacProyecto.frx":007C
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "lblFramePp(3)"
-      Tab(2).Control(1)=   "lblFramePp(5)"
-      Tab(2).Control(2)=   "Label1(64)"
-      Tab(2).Control(3)=   "Label1(63)"
-      Tab(2).Control(4)=   "ListView1"
-      Tab(2).Control(5)=   "ListView2"
+      Tab(2).Control(0)=   "ListView2"
+      Tab(2).Control(1)=   "ListView1"
+      Tab(2).Control(2)=   "Label1(63)"
+      Tab(2).Control(3)=   "Label1(64)"
+      Tab(2).Control(4)=   "lblFramePp(5)"
+      Tab(2).Control(5)=   "lblFramePp(3)"
       Tab(2).ControlCount=   6
       Begin VB.Frame FrameToolAux 
          BeginProperty Font 
@@ -4034,24 +4034,33 @@ Private Sub BotonImprimir_(OpcionListado As Byte, EsInformePortes As Boolean)
     
     Dim devuelve
     
+    If Modo <> 2 Then Exit Sub
+    
+
+    If Text1(16).Text <> "" Then
+        MsgBox "Proyecto cerrado", vbExclamation
+        Exit Sub
+    End If
+
     CompruebaTotales False    'Avisa (si hay lineas, que todas suman lo que toca
     
     
+    'Si el proyecto esta facturado NO puedo imprimirlo
     
     
-    frmImprimir.NombreRPT = "rProyectos.rpt"
-    frmImprimir.NombrePDF = frmImprimir.NombreRPT
+    
 
         
-        
-    
+    NumRegElim = 96
+    SQL = DevuelveDesdeBDNew(conAri, "scryst", "documrpt", "codcryst", CStr(NumRegElim), "N")
         
     
         With frmImprimir
             'Febrero 2010
-                .outTipoDocumento = 0
-            
-            
+            .outTipoDocumento = 0
+            .NombrePDF = SQL
+            .NombreRPT = SQL
+            .SeleccionaRPTCodigo = CInt(NumRegElim)
             .FormulaSeleccion = "{sproyecto.codtipom}='" & Text1(15).Text & "' AND ({sproyecto.numproyec}=" & Text1(0).Text & ")"
             .OtrosParametros = "|pCodigoISO=""""|pCodigoRev=""""|pCodUsu=2000|vPortes=""""|PuntoVerde=""""|Albarcon=0|pTipoIVA=0|"
 
@@ -5364,6 +5373,10 @@ Dim Cad As String
         
         CadenaDesdeOtroForm = ""
         'Vemos el total albaranes
+        
+        
+        
+        
         Cad = "(slialb.codtipom,slialb.numalbar) IN (Select codtipoa,numalbar from  sproyectolin WHERE codtipom='ALY' AND numproyec=" & Text1(0).Text & " ) AND 1 "
         Cad = DevuelveDesdeBD(conAri, "sum(importel)", "slialb", Cad, "1")
         If Cad = "" Then Cad = "0"

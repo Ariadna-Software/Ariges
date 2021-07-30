@@ -1,0 +1,10 @@
+Hay dos proyectos
+
+
+
+Serrvidor de impresion para apliacion movil que genere la factura.
+
+
+
+
+Ajuste facturas FACE

@@ -1060,7 +1060,7 @@ Begin VB.Form frmRepNumSerie2GR
             EndProperty
             Height          =   360
             Index           =   16
-            Left            =   7290
+            Left            =   4530
             TabIndex        =   9
             Tag             =   "Tipo Mov|T|S|||sserie|codtipom||N|"
             Text            =   "Text3"
@@ -1184,7 +1184,7 @@ Begin VB.Form frmRepNumSerie2GR
             EndProperty
             Height          =   360
             ItemData        =   "frmRepNumSerieGR.frx":00CC
-            Left            =   7290
+            Left            =   4530
             List            =   "frmRepNumSerieGR.frx":00CE
             Style           =   2  'Dropdown List
             TabIndex        =   10
@@ -1211,7 +1211,7 @@ Begin VB.Form frmRepNumSerie2GR
             Tag             =   "Nº Linea Venta|N|S|0|99999|sserie|numline1||N|"
             Text            =   "Text1"
             Top             =   1260
-            Width           =   780
+            Width           =   900
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -1268,10 +1268,10 @@ Begin VB.Form frmRepNumSerie2GR
                Strikethrough   =   0   'False
             EndProperty
             Height          =   240
-            Left            =   4590
+            Left            =   6000
             TabIndex        =   7
             Tag             =   "¿Tiene Mantenimiento?|N|S|||sserie|tieneman||N|"
-            Top             =   1305
+            Top             =   1320
             Width           =   1320
          End
          Begin VB.TextBox Text1 
@@ -1287,7 +1287,7 @@ Begin VB.Form frmRepNumSerie2GR
             EndProperty
             Height          =   360
             Index           =   3
-            Left            =   5940
+            Left            =   7320
             MaxLength       =   10
             TabIndex        =   8
             Tag             =   "Nº Mantenimiento|T|S|||sserie|nummante||N|"
@@ -1298,7 +1298,7 @@ Begin VB.Form frmRepNumSerie2GR
          Begin VB.Image imgFra 
             Height          =   240
             Index           =   0
-            Left            =   8415
+            Left            =   5655
             ToolTipText     =   "Buscar Factura Venta"
             Top             =   1305
             Width           =   240
@@ -1421,7 +1421,7 @@ Begin VB.Form frmRepNumSerie2GR
             EndProperty
             Height          =   255
             Index           =   8
-            Left            =   7290
+            Left            =   4530
             TabIndex        =   35
             Top             =   990
             Width           =   1335
@@ -1456,7 +1456,7 @@ Begin VB.Form frmRepNumSerie2GR
                Strikethrough   =   0   'False
             EndProperty
             Height          =   255
-            Left            =   5940
+            Left            =   7320
             TabIndex        =   33
             Top             =   990
             Width           =   840

@@ -5,29 +5,29 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmManTiposContrato 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Tipos de Contrato"
-   ClientHeight    =   7905
+   ClientHeight    =   8070
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   12930
+   ClientWidth     =   14295
    ClipControls    =   0   'False
    Icon            =   "frmManTiposContrato.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7905
-   ScaleWidth      =   12930
+   ScaleHeight     =   8070
+   ScaleWidth      =   14295
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   225
-      TabIndex        =   17
+      TabIndex        =   16
       Top             =   135
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   180
-         TabIndex        =   18
+         TabIndex        =   17
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -92,9 +92,9 @@ Begin VB.Form frmManTiposContrato
          Strikethrough   =   0   'False
       EndProperty
       Height          =   315
-      Left            =   11070
-      TabIndex        =   16
-      Top             =   90
+      Left            =   12240
+      TabIndex        =   15
+      Top             =   120
       Visible         =   0   'False
       Width           =   1620
    End
@@ -146,8 +146,8 @@ Begin VB.Form frmManTiposContrato
       Height          =   540
       Index           =   0
       Left            =   240
-      TabIndex        =   12
-      Top             =   7140
+      TabIndex        =   11
+      Top             =   7380
       Width           =   2535
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -163,7 +163,7 @@ Begin VB.Form frmManTiposContrato
          EndProperty
          Height          =   240
          Left            =   240
-         TabIndex        =   13
+         TabIndex        =   12
          Top             =   180
          Width           =   2115
       End
@@ -183,7 +183,7 @@ Begin VB.Form frmManTiposContrato
       Height          =   315
       Index           =   0
       Left            =   5280
-      TabIndex        =   11
+      TabIndex        =   10
       ToolTipText     =   "Buscar artículo"
       Top             =   3600
       Visible         =   0   'False
@@ -205,7 +205,7 @@ Begin VB.Form frmManTiposContrato
       Height          =   315
       Left            =   5520
       Locked          =   -1  'True
-      TabIndex        =   10
+      TabIndex        =   9
       Text            =   "Text2"
       Top             =   3600
       Visible         =   0   'False
@@ -269,9 +269,9 @@ Begin VB.Form frmManTiposContrato
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10395
+      Left            =   11715
       TabIndex        =   5
-      Top             =   7305
+      Top             =   7545
       Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
@@ -287,9 +287,9 @@ Begin VB.Form frmManTiposContrato
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11610
+      Left            =   12930
       TabIndex        =   6
-      Top             =   7305
+      Top             =   7545
       Width           =   1065
    End
    Begin VB.CommandButton cmdRegresar 
@@ -304,9 +304,9 @@ Begin VB.Form frmManTiposContrato
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11610
+      Left            =   12930
       TabIndex        =   7
-      Top             =   7305
+      Top             =   7545
       Visible         =   0   'False
       Width           =   1065
    End
@@ -382,13 +382,13 @@ Begin VB.Form frmManTiposContrato
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManTiposContrato.frx":000C
-      Height          =   5985
+      Height          =   6345
       Left            =   240
       TabIndex        =   8
       Top             =   1020
-      Width           =   12455
-      _ExtentX        =   21960
-      _ExtentY        =   10557
+      Width           =   13890
+      _ExtentX        =   24500
+      _ExtentY        =   11192
       _Version        =   393216
       AllowUpdate     =   0   'False
       AllowArrows     =   -1  'True
@@ -462,9 +462,9 @@ Begin VB.Form frmManTiposContrato
       EndProperty
       Height          =   255
       Index           =   1
-      Left            =   9180
-      TabIndex        =   15
-      Top             =   405
+      Left            =   10560
+      TabIndex        =   14
+      Top             =   600
       Width           =   390
    End
    Begin VB.Label Label1 
@@ -480,28 +480,10 @@ Begin VB.Form frmManTiposContrato
       EndProperty
       Height          =   255
       Index           =   0
-      Left            =   9585
-      TabIndex        =   14
-      Top             =   405
+      Left            =   11040
+      TabIndex        =   13
+      Top             =   600
       Width           =   3105
-   End
-   Begin VB.Label Label10 
-      Caption         =   "Cargando datos ........."
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   255
-      Left            =   240
-      TabIndex        =   9
-      Top             =   8220
-      Visible         =   0   'False
-      Width           =   3495
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -679,16 +661,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Data1.Recordset.Fields(0) & "|"
-    cad = cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -757,7 +739,7 @@ Private Sub Form_Load()
     Else
         BotonBuscar
     End If
-    CargaGrid (Modo = 2 Or Modo = 0)
+        CargaGrid (Modo = 2 Or Modo = 0)
     
     Screen.MousePointer = vbDefault
 End Sub
@@ -773,7 +755,7 @@ Dim tots As String
     CargaGridGnral DataGrid1, Me.Data1, SQL, False
     
 '    SQL = "SELECT codtipco, nomtipco, " & Tabla & ".codartic, " & " Articulos.nomartic, revision, detequip,if(detequip=0,""NO"",""SI"") as desequip "
-    tots = "S|txtAux(0)|T|Código|900|;S|txtAux(1)|T|Descripción|3000|;S|txtAux(2)|T|Artículo|1900|;S|cmdAux(0)|B||0|;S|txtAux2|T|Descripción|4400|;"
+    tots = "S|txtAux(0)|T|Código|850|;S|txtAux(1)|T|Descripción|3400|;S|txtAux(2)|T|Artículo|2100|;S|cmdAux(0)|B||0|;S|txtAux2|T|Descripción|5100|;"
     tots = tots & "S|txtAux(3)|T|Revisión|990|;N||||0|;S|cboAux(0)|C|DE|690|;"
     arregla tots, DataGrid1, Me, 350
     
@@ -801,28 +783,28 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim b As Boolean
+Dim B As Boolean
 
     DeseleccionaGrid Me.DataGrid1
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To txtAux.Count - 1
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = b
+        txtAux(jj).visible = B
     Next jj
     txtAux2.Height = Me.DataGrid1.RowHeight
     txtAux2.Top = alto
-    txtAux2.visible = b
+    txtAux2.visible = B
     
 '        Me.cboAux(0).Height = Me.DataGrid1.RowHeight
     Me.cboAux(0).Top = alto
-    Me.cboAux(0).visible = b
+    Me.cboAux(0).visible = B
     
     For jj = 0 To Me.cmdAux.Count - 1
         Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
         Me.cmdAux(jj).Top = alto
-        Me.cmdAux(jj).visible = b
+        Me.cmdAux(jj).visible = B
     Next jj
 End Sub
 
@@ -932,16 +914,16 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
      'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         cmdRegresar.visible = False
     End If
@@ -953,9 +935,9 @@ Dim b As Boolean
     BloquearTxt txtAux(0), (Modo = 4)
                       
     '-----------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -975,28 +957,28 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     
-    b = ((Modo >= 3))
+    B = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'VerTodos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
 End Sub
 
 
@@ -1169,11 +1151,11 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
     DatosOk = True
 End Function
@@ -1182,23 +1164,23 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    cad = ""
+    Cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: slista
-    cad = cad & ParaGrid(txtAux(0), 20, "Código")
-    cad = cad & ParaGrid(txtAux(1), 80, "Descripción")
+    Cad = Cad & ParaGrid(txtAux(0), 20, "Código")
+    Cad = Cad & ParaGrid(txtAux(1), 80, "Descripción")
     tabla = NombreTabla
     Titulo = "Tipos de Contrato"
     
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
+        frmB.vCampos = Cad
         frmB.vTabla = tabla
         frmB.vSQL = cadB
         HaDevueltoDatos = False

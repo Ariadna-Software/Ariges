@@ -6,21 +6,21 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacEntPedidosGR 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Pedidos Clientes"
-   ClientHeight    =   10170
+   ClientHeight    =   10500
    ClientLeft      =   -150
    ClientTop       =   -150
-   ClientWidth     =   17250
+   ClientWidth     =   17865
    Icon            =   "frmFacEntPedidosGR.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   10170
-   ScaleWidth      =   17250
+   ScaleHeight     =   10500
+   ScaleWidth      =   17865
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameFiltro 
       Height          =   705
-      Left            =   8640
+      Left            =   9120
       TabIndex        =   122
       Top             =   0
       Width           =   3135
@@ -44,7 +44,7 @@ Begin VB.Form frmFacEntPedidosGR
    End
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
-      Left            =   6120
+      Left            =   6660
       TabIndex        =   120
       Top             =   0
       Width           =   2415
@@ -87,14 +87,14 @@ Begin VB.Form frmFacEntPedidosGR
       Left            =   3480
       TabIndex        =   118
       Top             =   0
-      Width           =   2535
+      Width           =   3135
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   120
          TabIndex        =   119
          Top             =   150
-         Width           =   2325
-         _ExtentX        =   4101
+         Width           =   2805
+         _ExtentX        =   4948
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -102,21 +102,24 @@ Begin VB.Form frmFacEntPedidosGR
          Style           =   1
          _Version        =   393216
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   5
+            NumButtons      =   6
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Generar pedido"
+               Object.ToolTipText     =   "Generar albaran"
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Recordatorio"
+               Object.ToolTipText     =   "Orden de instalacion"
             EndProperty
             BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Valoracion"
+               Object.ToolTipText     =   "Confirmar entrega"
             EndProperty
             BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Imprimir proforma"
+               Object.ToolTipText     =   "Pasar a oferta"
             EndProperty
             BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Genera factura"
+               Object.ToolTipText     =   "Copiar pedido"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Crea pedido proveedor"
             EndProperty
          EndProperty
       End
@@ -197,7 +200,7 @@ Begin VB.Form frmFacEntPedidosGR
       EndProperty
       Height          =   360
       Index           =   56
-      Left            =   12960
+      Left            =   14160
       MaxLength       =   15
       TabIndex        =   115
       Text            =   "Text1 7"
@@ -221,7 +224,7 @@ Begin VB.Form frmFacEntPedidosGR
       ForeColor       =   &H00008000&
       Height          =   285
       Index           =   0
-      Left            =   12120
+      Left            =   13320
       MaxLength       =   15
       TabIndex        =   114
       Text            =   "TOTAL"
@@ -240,7 +243,7 @@ Begin VB.Form frmFacEntPedidosGR
          Strikethrough   =   0   'False
       EndProperty
       Height          =   195
-      Left            =   15360
+      Left            =   16080
       TabIndex        =   113
       Top             =   360
       Width           =   1695
@@ -261,12 +264,12 @@ Begin VB.Form frmFacEntPedidosGR
       EndProperty
       Height          =   195
       Index           =   12
-      Left            =   17760
+      Left            =   18480
       MaxLength       =   12
       TabIndex        =   111
       Tag             =   "Precio"
       Text            =   "precoste"
-      Top             =   7080
+      Top             =   7440
       Visible         =   0   'False
       Width           =   615
    End
@@ -288,7 +291,7 @@ Begin VB.Form frmFacEntPedidosGR
       MaxLength       =   60
       TabIndex        =   98
       Text            =   "nom ccoste"
-      Top             =   9840
+      Top             =   10080
       Visible         =   0   'False
       Width           =   5565
    End
@@ -297,7 +300,7 @@ Begin VB.Form frmFacEntPedidosGR
       Left            =   120
       TabIndex        =   80
       Top             =   720
-      Width           =   16935
+      Width           =   17655
       Begin VB.CheckBox chkServirCom 
          Caption         =   "Servir completo"
          Enabled         =   0   'False
@@ -329,13 +332,13 @@ Begin VB.Form frmFacEntPedidosGR
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   12120
+         Left            =   12360
          MaxLength       =   60
          TabIndex        =   9
          Tag             =   "Nombre Cliente|T|N|||scaped|nomclien||N|"
          Text            =   "Text1 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww aq"
          Top             =   480
-         Width           =   4455
+         Width           =   5175
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -356,7 +359,7 @@ Begin VB.Form frmFacEntPedidosGR
          Tag             =   "Cod. Cliente|N|N|||scaped|codclien|000000|N|"
          Text            =   "Text1"
          Top             =   480
-         Width           =   780
+         Width           =   1020
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -413,12 +416,12 @@ Begin VB.Form frmFacEntPedidosGR
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   1560
+         Left            =   1320
          MaxLength       =   10
          TabIndex        =   1
          Tag             =   "Fecha Pedido|F|N|||scaped|fecpedcl|dd/mm/yyyy|N|"
          Top             =   480
-         Width           =   1185
+         Width           =   1305
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -440,7 +443,7 @@ Begin VB.Form frmFacEntPedidosGR
          Tag             =   "Nº Pedido|N|S|0||scaped|numpedcl|0000000|S|"
          Text            =   "Text1 7"
          Top             =   480
-         Width           =   1245
+         Width           =   1125
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -455,12 +458,12 @@ Begin VB.Form frmFacEntPedidosGR
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   2880
+         Left            =   2640
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Fecha Entrega|F|N|||scaped|fecentre|dd/mm/yyyy|N|"
          Top             =   480
-         Width           =   1185
+         Width           =   1305
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -584,7 +587,7 @@ Begin VB.Form frmFacEntPedidosGR
          EndProperty
          Height          =   240
          Index           =   14
-         Left            =   1560
+         Left            =   1320
          TabIndex        =   84
          Top             =   165
          Width           =   915
@@ -592,7 +595,7 @@ Begin VB.Form frmFacEntPedidosGR
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   0
-         Left            =   2520
+         Left            =   2280
          Picture         =   "frmFacEntPedidosGR.frx":000C
          ToolTipText     =   "Buscar fecha"
          Top             =   180
@@ -619,7 +622,7 @@ Begin VB.Form frmFacEntPedidosGR
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   1
-         Left            =   3960
+         Left            =   3720
          Picture         =   "frmFacEntPedidosGR.frx":0097
          ToolTipText     =   "Buscar fecha"
          Top             =   180
@@ -638,7 +641,7 @@ Begin VB.Form frmFacEntPedidosGR
          EndProperty
          Height          =   240
          Index           =   51
-         Left            =   2880
+         Left            =   2640
          TabIndex        =   82
          Top             =   165
          Width           =   1035
@@ -682,7 +685,7 @@ Begin VB.Form frmFacEntPedidosGR
       ScrollBars      =   2  'Vertical
       TabIndex        =   54
       Text            =   "frmFacEntPedidosGR.frx":0122
-      Top             =   9480
+      Top             =   9720
       Visible         =   0   'False
       Width           =   6405
    End
@@ -691,7 +694,7 @@ Begin VB.Form frmFacEntPedidosGR
       Index           =   0
       Left            =   120
       TabIndex        =   39
-      Top             =   9600
+      Top             =   9840
       Width           =   2415
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -725,9 +728,9 @@ Begin VB.Form frmFacEntPedidosGR
          Strikethrough   =   0   'False
       EndProperty
       Height          =   420
-      Left            =   15840
+      Left            =   16560
       TabIndex        =   37
-      Top             =   9600
+      Top             =   9840
       Width           =   1200
    End
    Begin VB.CommandButton cmdAceptar 
@@ -742,14 +745,14 @@ Begin VB.Form frmFacEntPedidosGR
          Strikethrough   =   0   'False
       EndProperty
       Height          =   420
-      Left            =   14400
+      Left            =   15120
       TabIndex        =   36
-      Top             =   9600
+      Top             =   9840
       Width           =   1200
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
-      Left            =   13560
+      Left            =   14280
       Top             =   9720
       Visible         =   0   'False
       Width           =   1335
@@ -842,14 +845,14 @@ Begin VB.Form frmFacEntPedidosGR
       _Version        =   393216
    End
    Begin TabDlg.SSTab SSTab1 
-      Height          =   7740
+      Height          =   7980
       Left            =   120
       TabIndex        =   41
       Tag             =   "Fecha Oferta|F|N|||scapre|fecentre|dd/mm/yyyy|N|"
       Top             =   1680
-      Width           =   16935
-      _ExtentX        =   29871
-      _ExtentY        =   13653
+      Width           =   17655
+      _ExtentX        =   31141
+      _ExtentY        =   14076
       _Version        =   393216
       Style           =   1
       Tabs            =   2
@@ -933,15 +936,15 @@ Begin VB.Form frmFacEntPedidosGR
          Left            =   240
          TabIndex        =   162
          Top             =   3240
-         Width           =   2805
+         Width           =   2445
          Begin MSComctlLib.Toolbar ToolbarAux 
             Height          =   330
             Index           =   0
             Left            =   120
             TabIndex        =   163
             Top             =   120
-            Width           =   2535
-            _ExtentX        =   4471
+            Width           =   2175
+            _ExtentX        =   3836
             _ExtentY        =   582
             ButtonWidth     =   609
             ButtonHeight    =   582
@@ -965,9 +968,13 @@ Begin VB.Form frmFacEntPedidosGR
                   Object.ToolTipText     =   "Intercalar"
                EndProperty
                BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Enabled         =   0   'False
+                  Object.Visible         =   0   'False
                   Object.ToolTipText     =   "Plantilla"
                EndProperty
                BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Enabled         =   0   'False
+                  Object.Visible         =   0   'False
                   Object.ToolTipText     =   "traer lineas ofertas"
                EndProperty
             EndProperty
@@ -1307,15 +1314,15 @@ Begin VB.Form frmFacEntPedidosGR
             Alignment       =   1  'Right Justify
             BackColor       =   &H00C0FFC0&
             BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   285
+            Height          =   360
             Index           =   55
             Left            =   12720
             MaxLength       =   15
@@ -1618,8 +1625,8 @@ Begin VB.Form frmFacEntPedidosGR
          Begin VB.Label Label1 
             Caption         =   "TOTAL PEDIDO"
             BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
@@ -1631,7 +1638,7 @@ Begin VB.Form frmFacEntPedidosGR
             Index           =   39
             Left            =   11160
             TabIndex        =   152
-            Top             =   1920
+            Top             =   2010
             Width           =   1530
          End
          Begin VB.Label Label1 
@@ -1732,7 +1739,7 @@ Begin VB.Form frmFacEntPedidosGR
       Begin VB.CommandButton cmdAux 
          Appearance      =   0  'Flat
          Caption         =   "+"
-         Height          =   315
+         Height          =   360
          Index           =   2
          Left            =   12120
          TabIndex        =   100
@@ -1754,7 +1761,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   11
          Left            =   11640
          MaxLength       =   4
@@ -1778,7 +1785,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   10
          Left            =   12360
          MaxLength       =   15
@@ -1802,7 +1809,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   9
          Left            =   7440
          MaxLength       =   10
@@ -2086,7 +2093,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   5
          Left            =   8880
          Locked          =   -1  'True
@@ -2103,7 +2110,7 @@ Begin VB.Form frmFacEntPedidosGR
          Left            =   200
          TabIndex        =   60
          Top             =   310
-         Width           =   16455
+         Width           =   17175
          Begin VB.ComboBox cboEstado 
             BeginProperty Font 
                Name            =   "Verdana"
@@ -2154,13 +2161,13 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   32
-            Left            =   11500
+            Left            =   12105
             Locked          =   -1  'True
             MaxLength       =   40
             TabIndex        =   104
             Text            =   "Text2"
             Top             =   1506
-            Width           =   4800
+            Width           =   4920
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -2175,13 +2182,13 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   32
-            Left            =   10560
+            Left            =   11040
             MaxLength       =   30
             TabIndex        =   25
             Tag             =   "Dir envio|N|S|0|9999|scaped|coddiren|0000|N|"
             Text            =   "Text1"
             Top             =   1506
-            Width           =   900
+            Width           =   1020
          End
          Begin VB.CheckBox chkEnviadaConfir 
             Alignment       =   1  'Right Justify
@@ -2197,11 +2204,11 @@ Begin VB.Form frmFacEntPedidosGR
                Strikethrough   =   0   'False
             EndProperty
             Height          =   240
-            Left            =   13200
+            Left            =   13800
             TabIndex        =   102
             Tag             =   "Enviado e-mail confirmación|N|N|||scaped|envconfir||N|"
             Top             =   1956
-            Width           =   3135
+            Width           =   3255
          End
          Begin VB.TextBox Text1 
             BeginProperty Font 
@@ -2215,7 +2222,7 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   31
-            Left            =   10545
+            Left            =   11040
             MaxLength       =   40
             TabIndex        =   26
             Tag             =   "E-mail confirmación|T|S|||scaped|mailconfir||N|"
@@ -2255,14 +2262,14 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   12
-            Left            =   11500
+            Left            =   12105
             Locked          =   -1  'True
             MaxLength       =   40
             TabIndex        =   73
             Tag             =   "Direccion/Dpto.|T|S|||scaped|nomdirec||N|"
             Text            =   "Text2"
             Top             =   165
-            Width           =   4800
+            Width           =   4920
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -2277,13 +2284,13 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   12
-            Left            =   10560
+            Left            =   11040
             MaxLength       =   30
             TabIndex        =   22
             Tag             =   "Direccion/Dpto.|N|S|0|999|scaped|coddirec|000|N|"
             Text            =   "Text1"
             Top             =   165
-            Width           =   900
+            Width           =   1020
          End
          Begin VB.TextBox Text1 
             BeginProperty Font 
@@ -2418,13 +2425,13 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   17
-            Left            =   10560
+            Left            =   11040
             MaxLength       =   30
             TabIndex        =   23
             Tag             =   "Cod. Agente|N|N|0|9999|scaped|codagent|0000|N|"
             Text            =   "Text1"
             Top             =   612
-            Width           =   900
+            Width           =   1020
          End
          Begin VB.TextBox Text2 
             BackColor       =   &H80000018&
@@ -2439,13 +2446,13 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   17
-            Left            =   11500
+            Left            =   12105
             Locked          =   -1  'True
             MaxLength       =   40
             TabIndex        =   67
             Text            =   "Text2"
             Top             =   612
-            Width           =   4800
+            Width           =   4920
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -2460,13 +2467,13 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   14
-            Left            =   10560
+            Left            =   11040
             MaxLength       =   30
             TabIndex        =   24
             Tag             =   "Forma de Pago|N|N|0|999|scaped|codforpa|000|N|"
             Text            =   "Text1"
             Top             =   1059
-            Width           =   900
+            Width           =   1020
          End
          Begin VB.TextBox Text2 
             BackColor       =   &H80000018&
@@ -2481,13 +2488,13 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   14
-            Left            =   11500
+            Left            =   12105
             Locked          =   -1  'True
             MaxLength       =   40
             TabIndex        =   62
             Text            =   "Text2"
             Top             =   1059
-            Width           =   4800
+            Width           =   4920
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -2502,12 +2509,12 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   15
-            Left            =   10560
+            Left            =   11040
             MaxLength       =   7
             TabIndex        =   17
             Tag             =   "Descuento P.Pago|N|N|0|99.90|scaped|dtoppago|#0.00|N|"
             Text            =   "Text1 7"
-            Top             =   1953
+            Top             =   1920
             Width           =   660
          End
          Begin VB.TextBox Text1 
@@ -2523,7 +2530,7 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   360
             Index           =   16
-            Left            =   12360
+            Left            =   12840
             MaxLength       =   7
             TabIndex        =   18
             Tag             =   "Descuento General|N|N|0|99.90|scaped|dtognral|#0.00|N|"
@@ -2547,7 +2554,7 @@ Begin VB.Form frmFacEntPedidosGR
             TabIndex        =   21
             Tag             =   "Tipo Facturación|N|N|||scaped|tipofact||N|"
             Top             =   2310
-            Width           =   1695
+            Width           =   2175
          End
          Begin VB.TextBox Text1 
             BeginProperty Font 
@@ -2581,11 +2588,11 @@ Begin VB.Form frmFacEntPedidosGR
                Strikethrough   =   0   'False
             EndProperty
             Height          =   375
-            Left            =   3720
+            Left            =   4080
             TabIndex        =   110
             Top             =   2400
             Visible         =   0   'False
-            Width           =   1695
+            Width           =   1455
          End
          Begin VB.Image imgEstado 
             Height          =   240
@@ -2628,7 +2635,7 @@ Begin VB.Form frmFacEntPedidosGR
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   9
-            Left            =   10305
+            Left            =   10785
             ToolTipText     =   "Buscar forma de pago"
             Top             =   1560
             Width           =   240
@@ -2646,9 +2653,9 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   240
             Index           =   24
-            Left            =   8640
+            Left            =   9240
             TabIndex        =   105
-            Top             =   1503
+            Top             =   1512
             Width           =   1500
          End
          Begin VB.Label Label1 
@@ -2664,7 +2671,7 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   255
             Index           =   23
-            Left            =   9720
+            Left            =   10200
             TabIndex        =   101
             Top             =   2400
             Width           =   1455
@@ -2691,16 +2698,16 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   240
             Index           =   1
-            Left            =   8640
+            Left            =   9240
             TabIndex        =   75
             Top             =   165
-            Width           =   1530
+            Width           =   1410
          End
          Begin VB.Image imgBuscar 
             Enabled         =   0   'False
             Height          =   240
             Index           =   2
-            Left            =   10300
+            Left            =   10785
             ToolTipText     =   "Buscar direc./dpto"
             Top             =   240
             Width           =   240
@@ -2820,15 +2827,15 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   240
             Index           =   34
-            Left            =   8640
+            Left            =   9240
             TabIndex        =   68
-            Top             =   611
-            Width           =   705
+            Top             =   615
+            Width           =   1425
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   5
-            Left            =   10305
+            Left            =   10785
             ToolTipText     =   "Buscar agente"
             Top             =   660
             Width           =   240
@@ -2846,10 +2853,10 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   240
             Index           =   15
-            Left            =   8640
+            Left            =   9240
             TabIndex        =   66
-            Top             =   1057
-            Width           =   1155
+            Top             =   1050
+            Width           =   1515
          End
          Begin VB.Label Label1 
             Caption         =   "Dto. P.Pago"
@@ -2864,10 +2871,10 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   255
             Index           =   25
-            Left            =   8640
+            Left            =   9240
             TabIndex        =   65
-            Top             =   1950
-            Width           =   1935
+            Top             =   1920
+            Width           =   1455
          End
          Begin VB.Label Label1 
             Caption         =   "Dto. Gral"
@@ -2882,10 +2889,10 @@ Begin VB.Form frmFacEntPedidosGR
             EndProperty
             Height          =   255
             Index           =   26
-            Left            =   11400
+            Left            =   11880
             TabIndex        =   64
             Top             =   1950
-            Width           =   975
+            Width           =   1095
          End
          Begin VB.Label Label1 
             Caption         =   "Tipo facturacion"
@@ -2908,7 +2915,7 @@ Begin VB.Form frmFacEntPedidosGR
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   4
-            Left            =   10305
+            Left            =   10785
             ToolTipText     =   "Buscar forma de pago"
             Top             =   1110
             Width           =   240
@@ -2955,7 +2962,7 @@ Begin VB.Form frmFacEntPedidosGR
       Begin VB.CommandButton cmdAux 
          Appearance      =   0  'Flat
          Caption         =   "+"
-         Height          =   315
+         Height          =   360
          Index           =   1
          Left            =   2640
          TabIndex        =   59
@@ -2967,7 +2974,7 @@ Begin VB.Form frmFacEntPedidosGR
       Begin VB.CommandButton cmdAux 
          Appearance      =   0  'Flat
          Caption         =   "+"
-         Height          =   315
+         Height          =   360
          Index           =   0
          Left            =   960
          TabIndex        =   58
@@ -2989,7 +2996,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   2
          Left            =   2880
          Locked          =   -1  'True
@@ -3015,7 +3022,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   8
          Left            =   10680
          MaxLength       =   12
@@ -3040,7 +3047,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   7
          Left            =   10080
          MaxLength       =   30
@@ -3065,7 +3072,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   6
          Left            =   9360
          MaxLength       =   5
@@ -3090,7 +3097,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   4
          Left            =   7920
          MaxLength       =   12
@@ -3115,7 +3122,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   3
          Left            =   6120
          MaxLength       =   16
@@ -3139,7 +3146,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   1
          Left            =   1200
          MaxLength       =   18
@@ -3163,7 +3170,7 @@ Begin VB.Form frmFacEntPedidosGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   360
          Index           =   0
          Left            =   360
          MaxLength       =   15
@@ -3272,13 +3279,13 @@ Begin VB.Form frmFacEntPedidosGR
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
          Bindings        =   "frmFacEntPedidosGR.frx":F3F0
-         Height          =   3600
+         Height          =   3840
          Left            =   240
          TabIndex        =   57
          Top             =   3960
-         Width           =   16455
-         _ExtentX        =   29025
-         _ExtentY        =   6350
+         Width           =   17175
+         _ExtentX        =   30295
+         _ExtentY        =   6773
          _Version        =   393216
          AllowUpdate     =   -1  'True
          AllowArrows     =   -1  'True
@@ -3381,7 +3388,7 @@ Begin VB.Form frmFacEntPedidosGR
          Index           =   27
          Left            =   -64440
          TabIndex        =   106
-         Top             =   3600
+         Top             =   3660
          Width           =   2520
       End
       Begin VB.Label Label1 
@@ -3469,9 +3476,9 @@ Begin VB.Form frmFacEntPedidosGR
          Strikethrough   =   0   'False
       EndProperty
       Height          =   420
-      Left            =   15840
+      Left            =   16560
       TabIndex        =   38
-      Top             =   9600
+      Top             =   9840
       Visible         =   0   'False
       Width           =   1200
    End
@@ -3479,9 +3486,9 @@ Begin VB.Form frmFacEntPedidosGR
       Caption         =   "Campo precoste. No se ve pq no se puede modificar y trastoca todo, pero lo necesitamos para el insert"
       Height          =   1815
       Index           =   43
-      Left            =   16800
+      Left            =   17640
       TabIndex        =   112
-      Top             =   5880
+      Top             =   6000
       Width           =   1335
    End
    Begin VB.Image imgBuscar 
@@ -3490,7 +3497,7 @@ Begin VB.Form frmFacEntPedidosGR
       Left            =   3840
       Picture         =   "frmFacEntPedidosGR.frx":F405
       ToolTipText     =   "Buscar cliente varios"
-      Top             =   9480
+      Top             =   9720
       Width           =   240
    End
    Begin VB.Label lblF 
@@ -3507,7 +3514,7 @@ Begin VB.Form frmFacEntPedidosGR
       Height          =   255
       Left            =   10200
       TabIndex        =   103
-      Top             =   9840
+      Top             =   10080
       Width           =   3615
    End
    Begin VB.Label Label1 
@@ -3525,7 +3532,7 @@ Begin VB.Form frmFacEntPedidosGR
       Index           =   6
       Left            =   2760
       TabIndex        =   99
-      Top             =   9840
+      Top             =   10080
       Visible         =   0   'False
       Width           =   1335
    End
@@ -3545,7 +3552,7 @@ Begin VB.Form frmFacEntPedidosGR
       Index           =   35
       Left            =   2760
       TabIndex        =   42
-      Top             =   9480
+      Top             =   9720
       Visible         =   0   'False
       Width           =   1050
    End
@@ -3870,7 +3877,7 @@ Dim HayQueServir As Boolean
                         ModificaLineas = 0
                         PonerBotonCabecera True
                         BloquearTxt Text2(16), True
-                    
+                        cmdRegresar_Click
                     Else
                         BotonAnyadirLinea False
                     End If
@@ -3886,6 +3893,7 @@ Dim HayQueServir As Boolean
                     PonerBotonCabecera True
                     
                     BloquearTxt Text2(16), True
+                    cmdRegresar_Click
                 End If
                 Me.DataGrid1.Enabled = True
             End If
@@ -4668,14 +4676,13 @@ Dim Im
         .DisabledImageList = frmPpal.imgListComun_BN2
         .ImageList = frmPpal.ImgListComun2
         
-        .Buttons(1).Image = 21 '
-        .Buttons(2).Image = 30 '
-        .Buttons(3).Image = 22  '
-        .Buttons(4).Image = 11 '
-        
-        'Herbelca. Facturar a FAZ
-        .Buttons(5).Image = 20 '
-        
+        .Buttons(1).Image = 21 ' gen fac
+        .Buttons(2).Image = 30 ' orden de instalacion
+        .Buttons(3).Image = 23 ' confirmacion de entrga
+        .Buttons(4).Image = 11 ' pasaro a oferta
+        .Buttons(5).Image = 20 ' duplicar pedido
+        .Buttons(6).Image = 22 ' crea pedido proveedor
+        '.Buttons(7).Image = 20 ' 'ordenadr lineas
         
     End With
 
@@ -7224,7 +7231,7 @@ Dim SQL As String
     B = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza, conServidas2)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez, 360
     
 '    If PrimeraVez Or conServidas Then
     If conServidas2 Then
@@ -7260,24 +7267,24 @@ Dim L As Integer
         Case "DataGrid1" 'Cod. Almacen
             vDataGrid.Columns(2).Caption = "Alm."
             If conServidas Then
-                vDataGrid.Columns(2).Width = 450
-            Else
                 vDataGrid.Columns(2).Width = 500
+            Else
+                vDataGrid.Columns(2).Width = 550
             End If
             vDataGrid.Columns(2).NumberFormat = "000"
                 
             vDataGrid.Columns(3).Caption = "Articulo"
             If conServidas Then
-                vDataGrid.Columns(3).Width = 1600
+                vDataGrid.Columns(3).Width = 1800
             Else
-                vDataGrid.Columns(3).Width = 1700
+                vDataGrid.Columns(3).Width = 1900
             End If
                 
             vDataGrid.Columns(4).Caption = "Desc. Artículo"
             If conServidas Then
-                vDataGrid.Columns(4).Width = 3400
+                vDataGrid.Columns(4).Width = 4410
             Else
-                vDataGrid.Columns(4).Width = 3500
+                vDataGrid.Columns(4).Width = 5100
             End If
                 
             vDataGrid.Columns(5).visible = False   'ampliacion
@@ -7285,14 +7292,14 @@ Dim L As Integer
             
             
             vDataGrid.Columns(6).Caption = IIf(vParamAplic.NumeroInstalacion = vbFenollar, "Pendiente", "Cantidad")
-            vDataGrid.Columns(6).Width = 1040
+            vDataGrid.Columns(6).Width = 1020
             vDataGrid.Columns(6).Alignment = dbgRight
             vDataGrid.Columns(6).NumberFormat = FormatoImporte
             
             
             If vParamAplic.NumeroInstalacion = vbFenollar Then
                 vDataGrid.Columns(7).Caption = "Solicitadas"
-                vDataGrid.Columns(7).Width = 1000
+                vDataGrid.Columns(7).Width = 1020
                 vDataGrid.Columns(7).Alignment = dbgRight
                 vDataGrid.Columns(7).NumberFormat = FormatoImporte
                 i = 8
@@ -7300,7 +7307,7 @@ Dim L As Integer
                 If conServidas Then
                     'Cargar el grid con la columna de cantidad servida
                     vDataGrid.Columns(7).Caption = "Servidas"
-                    vDataGrid.Columns(7).Width = 1000
+                    vDataGrid.Columns(7).Width = 1020
                     vDataGrid.Columns(7).Alignment = dbgRight
                     vDataGrid.Columns(7).NumberFormat = FormatoImporte
                     i = 8
@@ -7309,58 +7316,52 @@ Dim L As Integer
                 End If
             End If
                             
-            'En fenollar NO llevan BUltos ni preparadas
-            If vParamAplic.NumeroInstalacion <> vbFenollar Then
-                If vParamAplic.NumeroInstalacion = vbHerbelca Then
-                    vDataGrid.Columns(i).Caption = "Prepar."
-                    If vParamAplic.NumeroInstalacion = vbHerbelca Then vDataGrid.Columns(i).NumberFormat = FormatoImporte
-                Else
-                    vDataGrid.Columns(i).Caption = "Bultos"
-                End If
-                vDataGrid.Columns(i).Width = 760
-                vDataGrid.Columns(i).Alignment = dbgRight
-                i = i + 1
+            
+            If vParamAplic.NumeroInstalacion = vbHerbelca Then
+                vDataGrid.Columns(i).Caption = "Prepar."
+                If vParamAplic.NumeroInstalacion = vbHerbelca Then vDataGrid.Columns(i).NumberFormat = FormatoImporte
+            Else
+                vDataGrid.Columns(i).Caption = "Bultos"
             End If
-                
+            vDataGrid.Columns(i).Width = 1020
+            vDataGrid.Columns(i).Alignment = dbgRight
+            i = i + 1
+            
             
             vDataGrid.Columns(i).Caption = "Precio"
-            vDataGrid.Columns(i).Width = IIf(vParamAplic.NumeroInstalacion = vbFenollar, 1200, 1000)
+            vDataGrid.Columns(i).Width = 1350
             vDataGrid.Columns(i).Alignment = dbgRight
             vDataGrid.Columns(i).NumberFormat = FormatoPrecio
             
             i = i + 1
             vDataGrid.Columns(i).Caption = "OP"
-            vDataGrid.Columns(i).Width = 340
+            vDataGrid.Columns(i).Width = 390
             vDataGrid.Columns(i).Alignment = dbgCenter
                 
             i = i + 1
             vDataGrid.Columns(i).Caption = "Dto.1"
-            vDataGrid.Columns(i).Width = 570
+            vDataGrid.Columns(i).Width = 630
             vDataGrid.Columns(i).Alignment = dbgRight
             vDataGrid.Columns(i).NumberFormat = FormatoDescuento
                 
             i = i + 1
             vDataGrid.Columns(i).Caption = "Dto.2"
-'            If conServidas Then
-                vDataGrid.Columns(i).Width = 570
-'            Else
-'                vDataGrid.Columns(i).Width = 560
-'            End If
+            vDataGrid.Columns(i).Width = 630
             vDataGrid.Columns(i).Alignment = dbgRight
             vDataGrid.Columns(i).NumberFormat = FormatoDescuento
             
             i = i + 1
             vDataGrid.Columns(i).Caption = "Importe"
             If conServidas Then
-                vDataGrid.Columns(i).Width = 1200
+                vDataGrid.Columns(i).Width = 1680
             Else
                 If vEmpresa.TieneAnalitica Then
                     L = 1250 'vDataGrid.Columns(i).Width = 1250
                 Else
                     L = 1300 'vDataGrid.Columns(i).Width = 1400
                 End If
-                L = L - IIf(vParamAplic.NumeroInstalacion = vbFenollar, 0, 300)
-                vDataGrid.Columns(i).Width = L
+                
+                vDataGrid.Columns(i).Width = L + 300
             End If
             vDataGrid.Columns(i).Alignment = dbgRight
             vDataGrid.Columns(i).NumberFormat = FormatoImporte
@@ -7657,6 +7658,79 @@ Dim i As Byte, i2 As Byte
 End Sub
 
 
+Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
+    If Modo <> 2 Then Exit Sub
+    
+    Select Case Button.Index
+    Case 1
+        mnGeneraFactura_Click
+    Case 2
+        mnImpOrde_Click
+    Case 3
+        mnConfirmacion_Click
+    Case 4
+        'pasar a  oferta
+        mnPasarA_Oferta_Click
+    Case 5
+        If Modo <> 2 Then Exit Sub
+            frmListado2.Opcion = 51
+            frmListado2.Show vbModal
+            If CadenaDesdeOtroForm <> "" Then
+                Screen.MousePointer = vbHourglass
+                CopiarPedido
+                Screen.MousePointer = vbDefault
+            End If
+    Case 6
+           'Crear pedido proveedor
+            CreaPedidoProveedor
+        
+    Case 7
+        'reordenar no hay nada
+    End Select
+    
+End Sub
+
+Private Sub ToolbarAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Button)
+    
+     
+        If Modo <> 2 Then Exit Sub
+        
+        
+    
+    Select Case Button.Index
+        Case 3
+            'Eliminar linea
+            ModificaLineas = 0
+            BotonEliminarLinea
+            
+        Case 1, 2, 5
+            
+            PonerModo 5
+            If Modo = 5 Then
+                If Button.Index = 2 Then
+                    'modificar linea
+                    ModificaLineas = 2
+                    BotonModificarLinea
+                Else
+                    '1 y 5
+                    'Insertar e Insertar intercalando
+                    ModificaLineas = 1
+                    BotonAnyadirLinea Button.Index = 5
+                End If
+            End If
+    End Select
+            
+    
+        
+    
+    
+End Sub
+
+Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
+    If Modo <> 2 Then Exit Sub
+    Desplazamiento Button.Index - 1
+End Sub
+
 Private Sub TxtAux_Change(Index As Integer)
     If Index = 4 And ModificaLineas = 2 Then 'Precio y Modo Modificar Lineas
         txtAux(5).Text = "M"
@@ -7786,6 +7860,12 @@ End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
+    Screen.MousePointer = vbHourglass
+    HazTxtLostfocus Index
+    Screen.MousePointer = vbDefault
+End Sub
+
+Private Sub HazTxtLostfocus(Index As Integer)
 Dim devuelve As String, cadMen As String
 'Dim codTarif As String
 Dim CPrecioFact As CPreciosFact
@@ -8297,7 +8377,7 @@ Dim i As Byte
         Toolbar1.Buttons(3).Enabled = B     'eliminar
         
         
-        For i = 1 To 5
+        For i = 1 To 6
             Toolbar2.Buttons(i).Enabled = B
         Next
     

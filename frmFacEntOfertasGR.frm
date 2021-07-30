@@ -4331,10 +4331,10 @@ Private Sub mnImpValoracion_Click()
     AbrirListadoOfer (33) '33: Valoracion de Ofertas
 End Sub
 
-Private Sub mnLineas_Click()
-    
-    BotonMtoLineas 0, "Ofertas"
-End Sub
+''Private Sub mnLineas_Click()
+''
+''    BotonMtoLineas 0, "Ofertas"
+''End Sub
 
 
 Private Sub mnModificar_Click()
@@ -5324,93 +5324,93 @@ Private Sub Text2_LostFocus(Index As Integer)
 End Sub
 
 
-Private Sub hacerToolbarAntiguo(Indice As Integer)
-
-    If vParamAplic.QueEmpresaEs = 1 Then
-        'WHOSE. NO permitimos ni
-        If Indice = 11 Then Exit Sub
-        If Indice = 19 Then Exit Sub
-    End If
-    
-
-
-
-    If Indice = 17 Or Indice = 19 Then
-        'Valoracion , fra proforma
-        'If TieneOpciones Then Exit Sub
-        TieneOpciones True   'Siempre dejo seguir
-    End If
-
-
-    Select Case Indice
-        
-            
-            
-        Case 10: mnLineas_Click  'Lineas
-        Case 11:
-                If Modo = 5 Then
-                    'Insertar intercalando
-                    BotonAnyadirLinea True
-                Else
-                    mnGenPedido_Click 'Generar Pedido
-                End If
-        Case 12: mnPlantillas_Click ' Plantillas. Solo visible en Mantenimiento Lineas.
-        Case 13: mnOferta_Click 'Traer Lineas de Otra Oferta
-            
-            
-        Case 16 'Recordatorio
-            mnImpRecordatorio_Click
-        Case 17 'Valoracion
-            mnImpValoracion_Click
-        Case 18 'Imprimir
-            mnImpOferta_Click
-        Case 19 'Imprimir factura por forma
-            mnImpFactProF_Click
-        
-        
-        Case 20
-        
-            If vUsu.Nivel > 1 Then Exit Sub
-            If Modo <> 2 Then Exit Sub
-            If Data1.Recordset.EOF Then Exit Sub
-            
-            
-            'Comprobacion
-            
-            If Not PuedePasarFacuraFAZ Then Exit Sub
-            
-            'Lanzaremos la pregunta del banco
-            'Vamos a generar un ALBARAN ALZ y desde ahi, una factura FAZ
-            CadenaDesdeOtroForm = Text1(1).Text
-            frmListado3.Opcion = 50
-            frmListado3.Show vbModal
-            If Mid(CadenaDesdeOtroForm, 1, 3) = "OK#" Then
-                'OK. Ha seleccionado el banco
-                CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, 4)
-                Screen.MousePointer = vbHourglass
-                lblIndicador.Caption = "Pasando ALZ"
-                lblIndicador.Refresh
-                
-                'Cambiamos a conta de B
-                AbrirConexionConta True
-                
-                PasarOfertaFacturaFAZ
-                
-                'Reestablecemos CONTA normal
-                lblIndicador.Caption = ""
-                Screen.MousePointer = vbDefault
-            End If
-            
-            
-            
-            
-            
-        Case 22: mnSalir_Click    'Salir
-            
-        Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento Indice  ' (Button.Index - btnPrimero)
-    End Select
-End Sub
+'Private Sub hacerToolbarAntiguo(Indice As Integer)
+'
+'    If vParamAplic.QueEmpresaEs = 1 Then
+'        'WHOSE. NO permitimos ni
+'        If Indice = 11 Then Exit Sub
+'        If Indice = 19 Then Exit Sub
+'    End If
+'
+'
+'
+'
+'    If Indice = 17 Or Indice = 19 Then
+'        'Valoracion , fra proforma
+'        'If TieneOpciones Then Exit Sub
+'        TieneOpciones True   'Siempre dejo seguir
+'    End If
+'
+'
+'    Select Case Indice
+'
+'
+'
+'        Case 10: mnLineas_Click  'Lineas
+'        Case 11:
+'                If Modo = 5 Then
+'                    'Insertar intercalando
+'                    BotonAnyadirLinea True
+'                Else
+'                    mnGenPedido_Click 'Generar Pedido
+'                End If
+'        Case 12: mnPlantillas_Click ' Plantillas. Solo visible en Mantenimiento Lineas.
+'        Case 13: mnOferta_Click 'Traer Lineas de Otra Oferta
+'
+'
+'        Case 16 'Recordatorio
+'            mnImpRecordatorio_Click
+'        Case 17 'Valoracion
+'            mnImpValoracion_Click
+'        Case 18 'Imprimir
+'            mnImpOferta_Click
+'        Case 19 'Imprimir factura por forma
+'            mnImpFactProF_Click
+'
+'
+'        Case 20
+'
+'            If vUsu.Nivel > 1 Then Exit Sub
+'            If Modo <> 2 Then Exit Sub
+'            If Data1.Recordset.EOF Then Exit Sub
+'
+'
+'            'Comprobacion
+'
+'            If Not PuedePasarFacuraFAZ Then Exit Sub
+'
+'            'Lanzaremos la pregunta del banco
+'            'Vamos a generar un ALBARAN ALZ y desde ahi, una factura FAZ
+'            CadenaDesdeOtroForm = Text1(1).Text
+'            frmListado3.Opcion = 50
+'            frmListado3.Show vbModal
+'            If Mid(CadenaDesdeOtroForm, 1, 3) = "OK#" Then
+'                'OK. Ha seleccionado el banco
+'                CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, 4)
+'                Screen.MousePointer = vbHourglass
+'                lblIndicador.Caption = "Pasando ALZ"
+'                lblIndicador.Refresh
+'
+'                'Cambiamos a conta de B
+'                AbrirConexionConta True
+'
+'                PasarOfertaFacturaFAZ
+'
+'                'Reestablecemos CONTA normal
+'                lblIndicador.Caption = ""
+'                Screen.MousePointer = vbDefault
+'            End If
+'
+'
+'
+'
+'
+'        Case 22: mnSalir_Click    'Salir
+'
+'        Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
+'            Desplazamiento Indice  ' (Button.Index - btnPrimero)
+'    End Select
+'End Sub
 
 
 
