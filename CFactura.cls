@@ -2763,20 +2763,27 @@ Dim cadPro As String
             devuelve = DevuelveDesdeBD(conAri, "sproyecto.numproyec", "sproyecto,sproyectolin", devuelve, "1 order by coalesce(fecfinal,'2037-04-12') desc", "N", cadPro)
             If devuelve = "" Then Err.Raise 513, , "No se encuentra proyecto vinculado"
             
-            'Tenemos el numero de proyecot, y el numero de uno de los albaranes vinculados
-            cadPro = ", '" & Mid(cadPro, 1, 3) & "' codtipoa, " & Mid(cadPro, 4) & " as numalbar"
-            cadPro = "SELECT 'FPY'," & Numfactu & "," & DBSet(FecFactu, "F") & cadPro
-            cadPro = cadPro & " ,numlinea ,articulo ,descrarticulo ,cantidad ,precioar ,dtoline1 ,importel "
-            cadPro = cadPro & " FROM sproyectolin2 WHERE codtipom='ALY' and numproyec =" & devuelve
-            cadPro = "INSERT INTO slifac_eu2(codtipom, numfactu ,fecfactu ,codtipoa ,numalbar ,numlinea ,articulo ,descrarticulo ,cantidad ,precioar ,dtoline1 ,importel ) " & cadPro
-            If Not ejecutar(cadPro, True) Then B = False
+            
+            
+            If False Then
+                'Comprobar ESTO
+                'Ya lo esta haciendo pero lo vemos FALTA###
+                
+                
+                'Tenemos el numero de proyecot, y el numero de uno de los albaranes vinculados
+                cadPro = ", '" & Mid(cadPro, 1, 3) & "' codtipoa, " & Mid(cadPro, 4) & " as numalbar"
+                cadPro = "SELECT 'FPY'," & Numfactu & "," & DBSet(FecFactu, "F") & cadPro
+                cadPro = cadPro & " ,numlinea ,articulo ,descrarticulo ,cantidad ,precioar ,dtoline1 ,importel "
+                cadPro = cadPro & " FROM sproyectolin2 WHERE codtipom='ALY' and numproyec =" & devuelve
+                cadPro = "INSERT INTO slifac_eu2(codtipom, numfactu ,fecfactu ,codtipoa ,numalbar ,numlinea ,articulo ,descrarticulo ,cantidad ,precioar ,dtoline1 ,importel ) " & cadPro
+                If Not ejecutar(cadPro, True) Then B = False
+            End If
             
             'ACtualizamos el cierre del priyecto
             cadPro = "UPDATE sproyecto set fecfinal =" & DBSet(FecFactu, "F") & ", numfactu = " & Numfactu & "  WHERE numproyec =" & devuelve
             If Not ejecutar(cadPro, True) Then B = False
             
-            
-
+          
             
             
         End If
@@ -4323,8 +4330,9 @@ Dim B As Boolean
         'Insertar lineas de Desplazamiento en tabla: slifac (lineas factura)
         '------------------------------------------------------------------
         SQL = "INSERT INTO slifac (codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,"
-        SQL = SQL & "cantidad,precioar,dtoline1,dtoline2,importel,origpre) "
-        SQL = SQL & " VALUES " & SQLBonif
+        SQL = SQL & "cantidad,precioar,dtoline1,dtoline2,importel,origpre"
+        If mCodTipoM = "FPY" Then SQL = SQL & ",codccost"
+        SQL = SQL & ") VALUES " & SQLBonif
         conn.Execute SQL
         
     End If
@@ -4354,26 +4362,26 @@ Dim Proyec As Long
 Dim ALbPpal As String
 Dim RestoAlb As String
 
-Dim CCoste As String
+Dim ccoste As String
 
 
 ' Esto cambiará segun quieran como contabilizamos los ajustes.
-' De momento. Eulerparam.  Un articulo de ajuste para ALOS, ALR, ALE  --> Si pusiera un tipo no reflejado, cogeria el , cogeria el ALO
+' De momento. Eulerparam.  Un articulo de ajuste para ALOS, ALR, ALE  --> Si pusiera un tipo no reflejado, cogeria el ALO
 Dim ArticulosAjustes As String  'artALO|artALE|artALR|
 
     On Error GoTo EBonif
     
-    If codtipom <> "FPY" Then 'Factura de Venta
+    If codtipom <> "FPY" Then  'SOLO proyectos
         CalculaImportesAjusteProyectos = True
         Exit Function
     End If
 
     
     
-    CCoste = DevuelveDesdeBDNew(conAri, "straba", "codccost", "codtraba", OpeFactu, "N")
-    If CCoste = "" Then
-        CCoste = DevuelveDesdeBDNew(conAri, "straba", "min(codccost)", "codtraba>0 AND codccost<>'' AND 1 ", "1 ORDER BY 1 asc", "N")
-        If CCoste = "" Then Err.Raise 513, , "Obteniedo centro coste trabajador : " & OpeFactu
+    ccoste = DevuelveDesdeBDNew(conAri, "straba", "codccost", "codtraba", OpeFactu, "N")
+    If ccoste = "" Then
+        ccoste = DevuelveDesdeBDNew(conAri, "straba", "min(codccost)", "codtraba>0 AND codccost<>'' AND 1 ", "1 ORDER BY 1 asc", "N")
+        If ccoste = "" Then Err.Raise 513, , "Obteniedo centro coste trabajador : " & OpeFactu
     End If
 
     CalculaImportesAjusteProyectos = False
@@ -4449,8 +4457,9 @@ Dim ArticulosAjustes As String  'artALO|artALE|artALR|
     SQL = "SELECT codtipom,numalbar,sum(importel) "
     SQL = SQL & "FROM " & NomTablaLin
     SQL = SQL & " WHERE (codtipom,numalbar) IN (" & RestoAlb & ")"
-    SQL = SQL & " GROUP BY codtipom,numalbar ORDER BY 1,2"
-         
+    'SQL = SQL & " GROUP BY codtipom,numalbar ORDER BY 1,2"
+    SQL = SQL & " GROUP BY codtipom,numalbar HAVING sum(importel)<>0  ORDER BY 1,2"
+    
     numlinea = 1
     RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RS.EOF 'para cada codartic
@@ -4476,7 +4485,7 @@ Dim ArticulosAjustes As String  'artALO|artALE|artALR|
             Canti1 = 1
             Bonif1 = RS.Fields(2)
             SQLBonif = SQLBonif & DBSet(SQL, "T") & ",'Albaran " & RS!codtipom & Format(RS!Numalbar, "000000") & "',"
-            SQLBonif = SQLBonif & DBSet(Canti1, "N") & "," & DBSet(-Bonif1, "N") & ",0,0," & DBSet(0 - Round(Canti1 * Bonif1, 2), "N") & ",'M','" & CCoste & "'),"
+            SQLBonif = SQLBonif & DBSet(Canti1, "N") & "," & DBSet(-Bonif1, "N") & ",0,0," & DBSet(0 - Round(Canti1 * Bonif1, 2), "N") & ",'M','" & ccoste & "'),"
             If IVABonif1 = 0 Or IVABonif1 = CByte(cadIVA) Then
                 IVABonif1 = CByte(cadIVA)
                 TotBonif1 = TotBonif1 + Round(Canti1 * Bonif1, 2)

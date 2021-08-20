@@ -2536,15 +2536,24 @@ Dim B1 As Boolean
     End If
     Cad = "Va a " & Cad & vbCrLf & vbCrLf & vbCrLf
     Cad = Cad & " NO se realizaran acciones sobre Arimoney ni Ariconta " & vbCrLf & vbCrLf
+    
+    
+    
+     
+    If Me.optElimFact(1).Value Then
+        'Si es proyecto, aviso de que será abierto
+        CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "codtipom", "stipom", "letraser", cmdCambiFecReestbFact.Tag, "T")
+        If CadenaDesdeOtroForm = "FPY" Then
+            'Es proyecto
+            Cad = Cad & "!!!!!!! PROYECTO. Será abierto de nuevo    !!!!!!" & vbCrLf & vbCrLf
+        End If
+        CadenaDesdeOtroForm = ""
+    End If
     Cad = Cad & " **** Se grabará el registro de acciones *** " & vbCrLf
     Cad = Cad & vbCrLf & vbCrLf & "Introduzca el password para continuar"
+   
+    Cad = InputBox(Cad, "Seguridad")
     
-    
-    If vParamAplic.NumeroInstalacion = vbFenollar Then
-        If MsgBox("¿Continuar con el proceso?", vbQuestion + vbYesNoCancel) = vbYes Then Cad = "ARIADNA"
-    Else
-        Cad = InputBox(Cad, "Seguridad")
-    End If
     If UCase(Cad) <> "ARIADNA" Then Exit Sub
         
         

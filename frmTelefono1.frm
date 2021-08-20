@@ -867,8 +867,8 @@ Public Opcion As Byte
 
     ' 6.- Datos importados
 
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 
 Dim ImporteAuxiliar As Currency
 
@@ -920,35 +920,35 @@ Private Sub cmdBus_Click()
     
    
     
-    cad = InputBox("Telefono a buscar", "Telefonia", "")
-    cad = Trim(cad)
-    If cad = "" Then Exit Sub
+    Cad = InputBox("Telefono a buscar", "Telefonia", "")
+    Cad = Trim(Cad)
+    If Cad = "" Then Exit Sub
     Screen.MousePointer = vbHourglass
     'select t.serie,t.ano,t.numfact from tel_cab_factura t, tel_cab_factura_agr a where t.Serie=a.serie and t.Ano=a.Ano and t.NumFact=a.NumFact and fichero='CI0915850635' and a.telefono='644056126'
     lwTF.Tag = " AND fichero = '" & cboFichero(0).Text & "' AND a.telefono"
     lwTF.Tag = "t.Serie=a.serie and t.Ano=a.Ano and t.NumFact=a.NumFact  " & lwTF.Tag
     
-    lwTF.Tag = DevuelveDesdeBD(conAri, "concat(t.Serie,'|',t.Ano,'|' ,t.NumFact,'|')", " tel_cab_factura t, tel_cab_factura_agr a", lwTF.Tag, cad, "T")
+    lwTF.Tag = DevuelveDesdeBD(conAri, "concat(t.Serie,'|',t.Ano,'|' ,t.NumFact,'|')", " tel_cab_factura t, tel_cab_factura_agr a", lwTF.Tag, Cad, "T")
     
     If lwTF.Tag = "" Then
-        cad = "No se ha encontrado al telefono " & cad & " en este fichero"
-        MsgBox cad, vbExclamation
-        I = lwTF.ListItems.Count + 1
+        Cad = "No se ha encontrado al telefono " & Cad & " en este fichero"
+        MsgBox Cad, vbExclamation
+        i = lwTF.ListItems.Count + 1
     Else
     
-        cad = "Serie = '" & RecuperaValor(lwTF.Tag, 1) & "' AND Ano =" & RecuperaValor(lwTF.Tag, 2) & " AND NumFact =" & RecuperaValor(lwTF.Tag, 3)
-        For I = 1 To lwTF.ListItems.Count
+        Cad = "Serie = '" & RecuperaValor(lwTF.Tag, 1) & "' AND Ano =" & RecuperaValor(lwTF.Tag, 2) & " AND NumFact =" & RecuperaValor(lwTF.Tag, 3)
+        For i = 1 To lwTF.ListItems.Count
             'IT.Tag = "Serie = '" & miRsAux!Serie & "' AND Ano =" & miRsAux!Ano & " AND NumFact =" & miRsAux!NumFact
-            If lwTF.ListItems(I).Tag = cad Then Exit For
+            If lwTF.ListItems(i).Tag = Cad Then Exit For
             
         Next
     
     End If
     Screen.MousePointer = vbDefault
-    If I <= lwTF.ListItems.Count Then
-        lwTF.ListItems(I).EnsureVisible
-        lwTF.ListItems(I).Selected = True
-        Set lwTF.SelectedItem = lwTF.ListItems(I)
+    If i <= lwTF.ListItems.Count Then
+        lwTF.ListItems(i).EnsureVisible
+        lwTF.ListItems(i).Selected = True
+        Set lwTF.SelectedItem = lwTF.ListItems(i)
         PonerFocoOBj lwTF
     End If
     
@@ -977,54 +977,54 @@ Private Sub HacerCoarval()
     
     'AHORA
     
-    I = -1
-    cad = DevuelveDesdeBD(conAri, "DigitoCoarval", "spara2", "1", "1")
-    If cad <> "" Then I = Val(cad)
+    i = -1
+    Cad = DevuelveDesdeBD(conAri, "DigitoCoarval", "spara2", "1", "1")
+    If Cad <> "" Then i = Val(Cad)
     
-    If I < 0 Then
-        cad = "-No esta establecido el digito de coarval"
+    If i < 0 Then
+        Cad = "-No esta establecido el digito de coarval"
     Else
-        cad = ""
+        Cad = ""
     End If
     
     If Text1.Text = "" Then
-        cad = "-Falta fichero"
+        Cad = "-Falta fichero"
     Else
-        If Dir(Text1.Text, vbArchive) = "" Then cad = "-No existe el archivo:" & Text1.Text
+        If Dir(Text1.Text, vbArchive) = "" Then Cad = "-No existe el archivo:" & Text1.Text
     End If
     
     If Text2(0).Text <> "" Then
-        cad = "-La fecha de las facturas la lleva el fichero. NO indique ninguna" & vbCrLf & cad
+        Cad = "-La fecha de las facturas la lleva el fichero. NO indique ninguna" & vbCrLf & Cad
     End If
-    If cad <> "" Then
-        MsgBox cad, vbExclamation
+    If Cad <> "" Then
+        MsgBox Cad, vbExclamation
         Exit Sub
     End If
     
             
-    cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb", "codtipom", "ALT", "T")
-    If cad = "" Then cad = "0"
+    Cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb", "codtipom", "ALT", "T")
+    If Cad = "" Then Cad = "0"
     
-    If Val(cad) > 0 Then
+    If Val(Cad) > 0 Then
         MsgBox "Albaranes telefonia pendientes de facturar. Avise soporte técnico", vbExclamation
         Exit Sub
     End If
     
-    cad = PonerTrabajadorConectado("")
-    If cad = "" Then
+    Cad = PonerTrabajadorConectado("")
+    If Cad = "" Then
         MsgBox "Error obteniendo datos trabajador conectado", vbExclamation
         Exit Sub
     End If
             
             
-    cad = "Continuar con la generacion de facturas de telefonía con el digito " & I & "?"
-    If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    Cad = "Continuar con la generacion de facturas de telefonía con el digito " & i & "?"
+    If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
     
     Screen.MousePointer = vbHourglass
     Set miRsAux = New ADODB.Recordset
     
-    If GenerarImportacionCatadau(I) Then InsertarFacturasTelefonoCoarval
+    If GenerarImportacionCatadau(i) Then InsertarFacturasTelefonoCoarval
     
     Me.lblInf.Caption = ""
     Set miRsAux = Nothing
@@ -1040,8 +1040,8 @@ Dim NumOld As Long
     If Me.lwTF.ListItems.Count = 0 Then Exit Sub
     If vUsu.Nivel > 1 Then Exit Sub
     
-    cad = "Desea eliminar el fichero de facturacion: " & cboFichero(0).Text & "?"
-    If MsgBox(cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
+    Cad = "Desea eliminar el fichero de facturacion: " & cboFichero(0).Text & "?"
+    If MsgBox(Cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
     
     If MsgBox("Seguro que desea eliminar el fichero?", vbQuestion + vbYesNo) <> vbYes Then Exit Sub
     
@@ -1063,29 +1063,29 @@ Dim NumOld As Long
     cT.Leer "FAT"
     
     'cad = "fecfactu <= " & Format(vEmpresa.FechaFin, FormatoFecha) & " AND
-    cad = ""
-    cad = cad & "  fecfactu >= " & Format(vEmpresa.FechaIni, FormatoFecha) & " AND codtipom "
-    cad = DevuelveDesdeBD(conAri, "concat(max(numfactu),'|',max(fecfactu),'|')", "scafac", cad, "FAT", "T")
-     If cad = "" Then cad = "||"
-    If cad = "||" Then
-        cad = ""
+    Cad = ""
+    Cad = Cad & "  fecfactu >= " & Format(vEmpresa.FechaIni, FormatoFecha) & " AND codtipom "
+    Cad = DevuelveDesdeBD(conAri, "concat(max(numfactu),'|',max(fecfactu),'|')", "scafac", Cad, "FAT", "T")
+     If Cad = "" Then Cad = "||"
+    If Cad = "||" Then
+        Cad = ""
         NumOld = -1
     Else
         
-        NumOld = CLng(RecuperaValor(cad, 1))
+        NumOld = CLng(RecuperaValor(Cad, 1))
         If vParamAplic.NumeroInstalacion <> vbTaxco Then
             If DevuelveDesdeBD(conAri, "DigitoCoarval", "spara2", "1", "1") <> "" Then
                 
                 NumOld = Val(Mid(CStr(NumOld), 3)) 'quitamos los dos primeros digitos
             End If
         End If
-        cad = RecuperaValor(cad, 1) & "    max fecha: " & Format(RecuperaValor(cad, 2), "dd/mm/yyyy")
+        Cad = RecuperaValor(Cad, 1) & "    max fecha: " & Format(RecuperaValor(Cad, 2), "dd/mm/yyyy")
     End If
-    cad = vbCrLf & vbCrLf & "Contadores:  " & cT.Contador & vbCrLf & "Facturas:  " & cad & vbCrLf
-    cad = "REVISE LOS CONTADORES DE FACTURA    " & cad & vbCrLf
-    If NumOld > 0 Then cad = cad & "  ---- ACTUALIZAR contador FAT: " & NumOld
+    Cad = vbCrLf & vbCrLf & "Contadores:  " & cT.Contador & vbCrLf & "Facturas:  " & Cad & vbCrLf
+    Cad = "REVISE LOS CONTADORES DE FACTURA    " & Cad & vbCrLf
+    If NumOld > 0 Then Cad = Cad & "  ---- ACTUALIZAR contador FAT: " & NumOld
     
-    cad = String(45, "*") & vbCrLf & vbCrLf & cad & vbCrLf & vbCrLf & String(45, "*")
+    Cad = String(45, "*") & vbCrLf & vbCrLf & Cad & vbCrLf & vbCrLf & String(45, "*")
     
     
     
@@ -1093,9 +1093,9 @@ Dim NumOld As Long
     
    
     If NumOld = -1 Then
-        MsgBox cad, vbCritical
+        MsgBox Cad, vbCritical
     Else
-        If MsgBox(cad, vbQuestion + vbYesNoCancel) = vbYes Then
+        If MsgBox(Cad, vbQuestion + vbYesNoCancel) = vbYes Then
             cT.Contador = NumOld - 1
             cT.IncrementarContador cT.TipoMovimiento
         End If
@@ -1126,7 +1126,7 @@ Private Sub cmdFacturar_Click()
 End Sub
 
 Private Sub HacerFacturacionTelefonia()
-Dim b As Boolean
+Dim B As Boolean
 Dim J As Byte
 Dim Col As Collection
 Dim F As Date
@@ -1144,49 +1144,49 @@ Dim CambiaArticuloLineasFactura As Boolean
     
 
     
-    cad = ""
+    Cad = ""
     For NumRegElim = 1 To Me.lwTF.ListItems.Count
         If lwTF.ListItems(NumRegElim).Bold Then
-            If lwTF.ListItems(NumRegElim).ForeColor = vbRed Then cad = cad & "-" & Me.lwTF.ListItems(NumRegElim).Text & " " & lwTF.ListItems(NumRegElim).SubItems(1) & vbCrLf
+            If lwTF.ListItems(NumRegElim).ForeColor = vbRed Then Cad = Cad & "-" & Me.lwTF.ListItems(NumRegElim).Text & " " & lwTF.ListItems(NumRegElim).SubItems(1) & vbCrLf
         End If
     Next NumRegElim
-    If cad <> "" Then
-        cad = "Estos telefonos tienen albaranes pero no estan marcados para facturar: " & vbCrLf & cad
-        cad = cad & vbCrLf & "*** ¿Seguro que desea continuar?"
+    If Cad <> "" Then
+        Cad = "Estos telefonos tienen albaranes pero no estan marcados para facturar: " & vbCrLf & Cad
+        Cad = Cad & vbCrLf & "*** ¿Seguro que desea continuar?"
     Else
         'NUEVO oCT 2013
-        cad = "factursn=0 AND codtipom"
-        cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb", cad, "ALT", "T")
-        If cad = "" Then cad = "0"
-        I = 0
-        If Val(cad) > 0 Then
-            cad = "Existen albaranes sin marca de facturar " & vbCrLf
-            cad = cad & vbCrLf & "***    ¿Continuar?      ****"
+        Cad = "factursn=0 AND codtipom"
+        Cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb", Cad, "ALT", "T")
+        If Cad = "" Then Cad = "0"
+        i = 0
+        If Val(Cad) > 0 Then
+            Cad = "Existen albaranes sin marca de facturar " & vbCrLf
+            Cad = Cad & vbCrLf & "***    ¿Continuar?      ****"
         Else
-            cad = ""
+            Cad = ""
         End If
     End If
        
-    If cad <> "" Then
-        If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    If Cad <> "" Then
+        If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     End If
     
     'Si todos los telefonos esta asociados a un telefono/cliente ARIGES
     'Veremos si todas las facturas tiene telefono
-    cad = "tel_cab_factura c left join tel_cab_factura_agr l on"
-    cad = cad & " C.Serie = L.Serie And C.Ano = L.Ano And C.NumFact = L.NumFact"
-    cad = DevuelveDesdeBD(conAri, "count(*)", cad, "fichero = '" & cboFichero(0).List(cboFichero(0).ListIndex) & "' AND l.numfact is null AND 1", "1")
-    If Val(cad) > 0 Then
+    Cad = "tel_cab_factura c left join tel_cab_factura_agr l on"
+    Cad = Cad & " C.Serie = L.Serie And C.Ano = L.Ano And C.NumFact = L.NumFact"
+    Cad = DevuelveDesdeBD(conAri, "count(*)", Cad, "fichero = '" & cboFichero(0).List(cboFichero(0).ListIndex) & "' AND l.numfact is null AND 1", "1")
+    If Val(Cad) > 0 Then
         MsgBox "Facturas sin telefono asignado", vbExclamation
         Exit Sub
     End If
     
-    cad = "tel_cab_factura c inner join tel_cab_factura_agr l on"
-    cad = cad & " C.Serie = L.Serie And C.Ano = L.Ano And C.NumFact = L.NumFact"
-    cad = cad & " left join sclientfno on IdTelefono=l.Telefono"  'l.telefobno son de tel_cab_factura_agr
-    cad = DevuelveDesdeBD(conAri, "count(*)", cad, "IdTelefono is null AND fichero", cboFichero(0).List(cboFichero(0).ListIndex), "T")
-    If cad = "" Then cad = "0"
-    If Val(cad) > 0 Then
+    Cad = "tel_cab_factura c inner join tel_cab_factura_agr l on"
+    Cad = Cad & " C.Serie = L.Serie And C.Ano = L.Ano And C.NumFact = L.NumFact"
+    Cad = Cad & " left join sclientfno on IdTelefono=l.Telefono"  'l.telefobno son de tel_cab_factura_agr
+    Cad = DevuelveDesdeBD(conAri, "count(*)", Cad, "IdTelefono is null AND fichero", cboFichero(0).List(cboFichero(0).ListIndex), "T")
+    If Cad = "" Then Cad = "0"
+    If Val(Cad) > 0 Then
         MsgBox "Telefonos sin asignar a clientes ARIGES", vbExclamation
         Exit Sub
     End If
@@ -1197,24 +1197,24 @@ Dim CambiaArticuloLineasFactura As Boolean
     Label1(5).Caption = "Comprobacion alb telefonia"
     Label1(5).Refresh
     
-    cad = "Select * from scaalb where codtipom='ALT' AND factursn=1"
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = "Select * from scaalb where codtipom='ALT' AND factursn=1"
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
             
             '1º  Que el numero de telefono lo tengo
            
                 'select  concat(codclien,'|',if(coddirec is null,'',coddirec),'|') from sclientfno where IdTelefono ='625780666'
-            cad = "concat(codclien,'|',if(coddirec is null,'',coddirec),'|')"
-            cad = DevuelveDesdeBD(conAri, cad, "sclientfno", "IdTelefono", miRsAux!referenc, "T")
-            If cad = "" Then
+            Cad = "concat(codclien,'|',if(coddirec is null,'',coddirec),'|')"
+            Cad = DevuelveDesdeBD(conAri, Cad, "sclientfno", "IdTelefono", miRsAux!referenc, "T")
+            If Cad = "" Then
                 Err.Raise 513, , "No se encuentra referencia: " & DBLet(miRsAux!referenc, "T")
             Else
                 'Mismo cliente
-                If Val(RecuperaValor(cad, 1)) = miRsAux!codClien Then
-                    cad = RecuperaValor(cad, 2)
+                If Val(RecuperaValor(Cad, 1)) = miRsAux!codClien Then
+                    Cad = RecuperaValor(Cad, 2)
                    
                     
-                    If DBLet(miRsAux!CodDirec, "T") <> cad Then Err.Raise 513, , "Coddirec incorrectas el nº de telefono: " & DBLet(miRsAux!referenc, "T")
+                    If DBLet(miRsAux!CodDirec, "T") <> Cad Then Err.Raise 513, , "Coddirec incorrectas el nº de telefono: " & DBLet(miRsAux!referenc, "T")
                         
                     
                 Else
@@ -1226,15 +1226,15 @@ Dim CambiaArticuloLineasFactura As Boolean
     miRsAux.Close
     
 
-    cad = DevuelveDesdeBD(conAri, "fecha", "tel_cab_factura", "fichero", cboFichero(0).List(cboFichero(0).ListIndex), "T")
-    If cad = "" Then
+    Cad = DevuelveDesdeBD(conAri, "fecha", "tel_cab_factura", "fichero", cboFichero(0).List(cboFichero(0).ListIndex), "T")
+    If Cad = "" Then
         MsgBox "Error obteniendo fecha factura", vbExclamation
         Exit Sub
     End If
-    F = CDate(cad)
+    F = CDate(Cad)
     
-    cad = PonerTrabajadorConectado("")
-    If cad = "" Then
+    Cad = PonerTrabajadorConectado("")
+    If Cad = "" Then
         MsgBox "Error obteniendo datos trabajador conectado", vbExclamation
         Exit Sub
     End If
@@ -1247,20 +1247,20 @@ Dim CambiaArticuloLineasFactura As Boolean
     'Veamos series y (min) n1factura
     
     
-    cad = "select serie,min(numfact) minim ,max(numfact) maxi from tel_cab_factura WHERE fichero=" & DBSet(cboFichero(0).List(cboFichero(0).ListIndex), "T") & " group by 1"
+    Cad = "select serie,min(numfact) minim ,max(numfact) maxi from tel_cab_factura WHERE fichero=" & DBSet(cboFichero(0).List(cboFichero(0).ListIndex), "T") & " group by 1"
     
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set Col = New Collection
     
     'SERIE|minimo|max]
     While Not miRsAux.EOF
-        cad = DevuelveDesdeBD(conAri, "codtipom", "stipom", "letraser", miRsAux!Serie, "T")
-        If cad = "" Then Err.Raise 513, "No se encuentra letraser=" & miRsAux!Serie
+        Cad = DevuelveDesdeBD(conAri, "codtipom", "stipom", "letraser", miRsAux!Serie, "T")
+        If Cad = "" Then Err.Raise 513, "No se encuentra letraser=" & miRsAux!Serie
         
-        cad = cad & "|" & miRsAux!Serie & "|"
-        cad = cad & DBLet(miRsAux!minim, "N") & "|"
-        cad = cad & DBLet(miRsAux!maxi, "N") & "|"
-        Col.Add cad
+        Cad = Cad & "|" & miRsAux!Serie & "|"
+        Cad = Cad & DBLet(miRsAux!minim, "N") & "|"
+        Cad = Cad & DBLet(miRsAux!maxi, "N") & "|"
+        Col.Add Cad
         
         miRsAux.MoveNext
     Wend
@@ -1277,28 +1277,28 @@ Dim CambiaArticuloLineasFactura As Boolean
         
             'VEremos la fecha de importacion
             NumRegElim = Year(F)
-            cad = "fecfactu between '" & NumRegElim & "-01-01' and '" & NumRegElim & "-12-31' "
-            cad = cad & " AND numfactu between " & RecuperaValor(Col.Item(J), 3) & " AND " & RecuperaValor(Col.Item(J), 4) & " AND codtipom"
-            cad = DevuelveDesdeBD(conAri, "max(fecfactu)", "scafac", cad, CadenaDesdeOtroForm, "T")
-            If cad <> "" Then
-                If CDate(cad) > F Then Err.Raise 513, , "Fecha facturada mayor que fecha factura telefonia"
+            Cad = "fecfactu between '" & NumRegElim & "-01-01' and '" & NumRegElim & "-12-31' "
+            Cad = Cad & " AND numfactu between " & RecuperaValor(Col.Item(J), 3) & " AND " & RecuperaValor(Col.Item(J), 4) & " AND codtipom"
+            Cad = DevuelveDesdeBD(conAri, "max(fecfactu)", "scafac", Cad, CadenaDesdeOtroForm, "T")
+            If Cad <> "" Then
+                If CDate(Cad) > F Then Err.Raise 513, , "Fecha facturada mayor que fecha factura telefonia"
             End If
             
             
             'Veamos si se solapan numeros de factura
-            cad = "fecfactu between '" & NumRegElim & "-01-01' and '" & NumRegElim & "-12-31' "
-            cad = cad & " AND numfactu between " & RecuperaValor(Col.Item(J), 3) & " AND " & RecuperaValor(Col.Item(J), 4) & " AND codtipom"
-            cad = DevuelveDesdeBD(conAri, "count(*)", "scafac", cad, CadenaDesdeOtroForm, "T")
-            If cad = "" Then cad = "0"
-            If Val(cad) > 0 Then Err.Raise 513, , "Se solapan " & cad & " factura(s)"
+            Cad = "fecfactu between '" & NumRegElim & "-01-01' and '" & NumRegElim & "-12-31' "
+            Cad = Cad & " AND numfactu between " & RecuperaValor(Col.Item(J), 3) & " AND " & RecuperaValor(Col.Item(J), 4) & " AND codtipom"
+            Cad = DevuelveDesdeBD(conAri, "count(*)", "scafac", Cad, CadenaDesdeOtroForm, "T")
+            If Cad = "" Then Cad = "0"
+            If Val(Cad) > 0 Then Err.Raise 513, , "Se solapan " & Cad & " factura(s)"
             
     
     
     
             'Salto de factura. Veremos cual es la ultima fra trasapsada
-            cad = "fecfactu between '" & NumRegElim & "-01-01' and '" & NumRegElim & "-12-31' "
-            cad = DevuelveDesdeBD(conAri, "max(numfactu)", "scafac", cad, CadenaDesdeOtroForm, "T")
-            If cad <> "" Then
+            Cad = "fecfactu between '" & NumRegElim & "-01-01' and '" & NumRegElim & "-12-31' "
+            Cad = DevuelveDesdeBD(conAri, "max(numfactu)", "scafac", Cad, CadenaDesdeOtroForm, "T")
+            If Cad <> "" Then
                 NumRegElim = Val(RecuperaValor(Col.Item(J), 4)) - Val(RecuperaValor(Col.Item(J), 4))
                 If NumRegElim > 1 Then Err.Raise 513, , "Salto factura"
             End If
@@ -1309,9 +1309,9 @@ Dim CambiaArticuloLineasFactura As Boolean
             'con un numero igaul al de la factura. NO deberia ya que en su momento cogio de scaalb
             
             
-            cad = " numalbar between " & RecuperaValor(Col.Item(J), 3) & " AND " & RecuperaValor(Col.Item(J), 4) & " AND codtipom"
-            cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb", cad, "ALI", "T")
-            If cad = "" Then cad = "0"
+            Cad = " numalbar between " & RecuperaValor(Col.Item(J), 3) & " AND " & RecuperaValor(Col.Item(J), 4) & " AND codtipom"
+            Cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb", Cad, "ALI", "T")
+            If Cad = "" Then Cad = "0"
             'If Val(Cad) > 0 Then Err.Raise 513, , "Se solapan albaranes internos"
     
     
@@ -1333,24 +1333,24 @@ Dim CambiaArticuloLineasFactura As Boolean
         'Obtenemos la compañia que vamos a facturar
         CambiaArticuloLineasFactura = False
         If vParamAplic.TieneTelefonia2 = 3 Then
-            cad = DevuelveDesdeBD(conAri, "distinct(companyia)", "tel_cab_factura", "Fichero", cboFichero(0).List(cboFichero(0).ListIndex), "T")
-            If cad = "ORA" Then
+            Cad = DevuelveDesdeBD(conAri, "distinct(companyia)", "tel_cab_factura", "Fichero", cboFichero(0).List(cboFichero(0).ListIndex), "T")
+            If Cad = "ORA" Then
                 'ORANGE
-                cad = DevuelveDesdeBD(conAri, "artiTelefNorORAN", "spara2", "1", "1")
-                If cad <> "" Then
-                    If cad <> vParamAplic.ArtiTelefonia Then
+                Cad = DevuelveDesdeBD(conAri, "artiTelefNorORAN", "spara2", "1", "1")
+                If Cad <> "" Then
+                    If Cad <> vParamAplic.ArtiTelefonia Then
                         CambiaArticuloLineasFactura = True
-                        vParamAplic.ArtiTelefonia = cad
+                        vParamAplic.ArtiTelefonia = Cad
                     End If
                 End If
             Else
-                If cad = "VOD" Then
+                If Cad = "VOD" Then
                     'VODAFONE
-                    cad = DevuelveDesdeBD(conAri, "artiTelefNorVOD", "spara2", "1", "1")
-                    If cad <> "" Then
-                        If cad <> vParamAplic.ArtiTelefonia Then
+                    Cad = DevuelveDesdeBD(conAri, "artiTelefNorVOD", "spara2", "1", "1")
+                    If Cad <> "" Then
+                        If Cad <> vParamAplic.ArtiTelefonia Then
                             CambiaArticuloLineasFactura = True
-                            vParamAplic.ArtiTelefonia = cad
+                            vParamAplic.ArtiTelefonia = Cad
                         End If
                     End If
                 End If
@@ -1361,16 +1361,16 @@ Dim CambiaArticuloLineasFactura As Boolean
     
 
         
-     b = traspasofacturasTelefonia(cboFichero(0).List(cboFichero(0).ListIndex), Label1(5), CInt(CadenaDesdeOtroForm))
+     B = traspasofacturasTelefonia(cboFichero(0).List(cboFichero(0).ListIndex), Label1(5), CInt(CadenaDesdeOtroForm))
         
         
         If CambiaArticuloLineasFactura Then
             'Sea como sea, dejo el articulo de telefonia como estaba
-            cad = DevuelveDesdeBD(conAri, "codartictel", "spara1", "1", "1")
-            vParamAplic.ArtiTelefonia = cad
+            Cad = DevuelveDesdeBD(conAri, "codartictel", "spara1", "1", "1")
+            vParamAplic.ArtiTelefonia = Cad
         End If
         
-        If b Then
+        If B Then
             ACtualizarPuntosTelefonia
             Unload Me
         End If
@@ -1395,8 +1395,8 @@ Private Sub ACtualizarPuntosTelefonia()
     Label1(5).Refresh
     Set miRsAux = Nothing
     Set miRsAux = New ADODB.Recordset
-    cad = "select Telefono,BaseImponible,base_exenta from tel_cab_factura WHERE fichero= '" & cboFichero(0).List(cboFichero(0).ListIndex) & "' ORDER BY Telefono"
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = "select Telefono,BaseImponible,base_exenta from tel_cab_factura WHERE fichero= '" & cboFichero(0).List(cboFichero(0).ListIndex) & "' ORDER BY Telefono"
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
 
             'FALTA### deberiamos parametrizar
@@ -1405,10 +1405,10 @@ Private Sub ACtualizarPuntosTelefonia()
             
             
                             
-            I = CInt((miRsAux!BaseImponible + DBLet(miRsAux!base_exenta, "N")) / 0.2)
-            cad = "UPDATE sclientfno SET puntos = puntos + " & CStr(I)
-            cad = cad & " WHERE IdTelefono = " & DBSet(miRsAux!Telefono, "T")
-            conn.Execute cad
+            i = CInt((miRsAux!BaseImponible + DBLet(miRsAux!base_exenta, "N")) / 0.2)
+            Cad = "UPDATE sclientfno SET puntos = puntos + " & CStr(i)
+            Cad = Cad & " WHERE IdTelefono = " & DBSet(miRsAux!Telefono, "T")
+            conn.Execute Cad
             miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1416,15 +1416,15 @@ Private Sub ACtualizarPuntosTelefonia()
 End Sub
 
 Private Sub cmdImprimir_Click()
-Dim b
+Dim B
     If lwTF.ListItems.Count = 0 Then Exit Sub
     If cboFichero(0).ListCount = 0 Then Exit Sub
     
     Screen.MousePointer = vbHourglass
-    b = GeneraDatosImpresion
+    B = GeneraDatosImpresion
     Label1(5).Caption = ""
     Screen.MousePointer = vbDefault
-    If b Then
+    If B Then
     
         With frmImprimir
             .FormulaSeleccion = "{tmpinformes.codusu}=" & vUsu.Codigo
@@ -1449,10 +1449,10 @@ Private Sub cmdListadoDto_Click()
 
     If Me.cboFichero(1).ListIndex < 0 Then Exit Sub
     '
-    I = 65
-    If Opcion = 3 Then I = 69
+    i = 65
+    If Opcion = 3 Then i = 69
     If Opcion = 4 Then
-        I = 70
+        i = 70
         HacerAccionesDelJOinDeRafa
     
     End If
@@ -1465,9 +1465,9 @@ Private Sub cmdListadoDto_Click()
         Exit Sub
     End If
     
-    cad = DevuelveDesdeBDNew(conAri, "scryst", "documrpt", "codcryst", CStr(I), "N")
-    If cad = "" Then
-        MsgBox "Error obtener informe: " & I, vbExclamation
+    Cad = DevuelveDesdeBDNew(conAri, "scryst", "documrpt", "codcryst", CStr(i), "N")
+    If Cad = "" Then
+        MsgBox "Error obtener informe: " & i, vbExclamation
     Else
         
         With frmImprimir
@@ -1478,7 +1478,7 @@ Private Sub cmdListadoDto_Click()
             .EnvioEMail = False
             .Opcion = 5
             .ConSubInforme = True
-            .NombreRPT = cad
+            .NombreRPT = Cad
             Select Case Opcion
             Case 3
                 .Titulo = "Resumen facturacion soporte"
@@ -1508,29 +1508,29 @@ Private Sub HacerAccionesDelJOinDeRafa()
     conn.Execute "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
     
     'Cojo el JOIN que habia en el rpt y lo meto aqui
-    cad = ""
-    cad = cad & "select " & vUsu.Codigo & ",0,0, a.CodCuota as Codigo, a.DescCuota  as Nombre, sum(a.importe), b.PorcentajeOperador as Porc, (sum(a.importe) * b.PorcentajeOperador)/100"
-    cad = cad & " , b.Porcentaje, (sum(a.importe) * b.Porcentaje)/100 from tel_lin_factura_cuotas as a,"
-    cad = cad & " tel_desc_cuotas as b, tel_cab_factura As C where A.serie = C.serie and a.NumFact = c.Numfact"
-    cad = cad & " and a.Ano = c.Ano and a.CodCuota = b.CodCuota and fichero='" & cboFichero(1).Text & "'"
+    Cad = ""
+    Cad = Cad & "select " & vUsu.Codigo & ",0,0, a.CodCuota as Codigo, a.DescCuota  as Nombre, sum(a.importe), b.PorcentajeOperador as Porc, (sum(a.importe) * b.PorcentajeOperador)/100"
+    Cad = Cad & " , b.Porcentaje, (sum(a.importe) * b.Porcentaje)/100 from tel_lin_factura_cuotas as a,"
+    Cad = Cad & " tel_desc_cuotas as b, tel_cab_factura As C where A.serie = C.serie and a.NumFact = c.Numfact"
+    Cad = Cad & " and a.Ano = c.Ano and a.CodCuota = b.CodCuota and fichero='" & cboFichero(1).Text & "'"
     ''CI0544330498'
-    cad = cad & " group by c.Fichero, a.CodCuota UNION "
-    cad = cad & " select " & vUsu.Codigo & ",0,0,a.CodTipoTrafico as Codigo, a.DescTipoTrafico as Nombre, sum(a.importe)"
-    cad = cad & " , b.PorcentajeOperador as Porc, (sum(a.importe) * b.PorcentajeOperador)/100 "
-    cad = cad & " , b.Porcentaje, (sum(a.importe) * b.Porcentaje)/100 from tel_lin_factura_consumos as a,"
-    cad = cad & " tel_desc_consumos as b,tel_cab_factura As C where A.serie = C.serie and a.NumFact = c.Numfact"
-    cad = cad & " and a.Ano = c.Ano and a.CodTipoTrafico = b.CodTipoTrafico and fichero='" & cboFichero(1).Text & "'"
-    cad = cad & " group by c.Fichero, a.CodTipoTrafico"
+    Cad = Cad & " group by c.Fichero, a.CodCuota UNION "
+    Cad = Cad & " select " & vUsu.Codigo & ",0,0,a.CodTipoTrafico as Codigo, a.DescTipoTrafico as Nombre, sum(a.importe)"
+    Cad = Cad & " , b.PorcentajeOperador as Porc, (sum(a.importe) * b.PorcentajeOperador)/100 "
+    Cad = Cad & " , b.Porcentaje, (sum(a.importe) * b.Porcentaje)/100 from tel_lin_factura_consumos as a,"
+    Cad = Cad & " tel_desc_consumos as b,tel_cab_factura As C where A.serie = C.serie and a.NumFact = c.Numfact"
+    Cad = Cad & " and a.Ano = c.Ano and a.CodTipoTrafico = b.CodTipoTrafico and fichero='" & cboFichero(1).Text & "'"
+    Cad = Cad & " group by c.Fichero, a.CodTipoTrafico"
     
     'Lo metemos en tmp
-    cad = "INSERT INTO tmpinformes(codusu,campo1,campo2,nombre1,nombre2,importe1,porcen1,importe2,porcen2,importe3) " & cad
-    conn.Execute cad
+    Cad = "INSERT INTO tmpinformes(codusu,campo1,campo2,nombre1,nombre2,importe1,porcen1,importe2,porcen2,importe3) " & Cad
+    conn.Execute Cad
     
     'Para que solo coja un registro
     conn.Execute "DELETE FROM tmpcrmcobros WHERE codusu = " & vUsu.Codigo
-    cad = "INSERT INTO tmpcrmcobros(codusu,secuencial,forpa) VALUES (" & vUsu.Codigo
-    cad = cad & ",1,'" & cboFichero(1).Text & "')"
-    conn.Execute cad
+    Cad = "INSERT INTO tmpcrmcobros(codusu,secuencial,forpa) VALUES (" & vUsu.Codigo
+    Cad = Cad & ",1,'" & cboFichero(1).Text & "')"
+    conn.Execute Cad
     
 'ORDER BY Porc, Nombre;
 End Sub
@@ -1556,6 +1556,7 @@ Private Sub Command1_Click()
         Screen.MousePointer = vbHourglass
         Me.Command1.Enabled = False
         HacerImportacion
+        lblInf.Caption = ""
         Me.Command1.Enabled = True
         Screen.MousePointer = vbDefault
 
@@ -1659,6 +1660,8 @@ Private Sub HacerImportacion()
     If Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex) = 2 Then
         'ES ORANGE
         Set mGen2 = New TelGenerador
+        lblInf.Caption = "obtener nombre unico fichero"
+        lblInf.Refresh
         FicheroOrange = mGen2.DevuelveNombreFicheroOrange(Text1.Text)
         Set mGen2 = Nothing
         If FicheroOrange = "" Then
@@ -1679,6 +1682,11 @@ Private Sub HacerImportacion()
         'Para la utilizacion posterior
         Mens = FicheroOrange
         
+        
+        lblInf.Caption = ""
+        lblInf.Refresh
+        
+        
     End If
     
     
@@ -1688,18 +1696,18 @@ Private Sub HacerImportacion()
     
     
     'Mens = "select distinct(Fichero) from tel_cab_factura where not Fichero in (select Fichero from tel_fichtraspasados)"
-    cad = " not Fichero in (select Fichero from tel_fichtraspasados) AND 1"
-    cad = DevuelveDesdeBD(conAri, "distinct(Fichero)", "tel_cab_factura", cad, "1")
-    If cad <> "" Then
+    Cad = " not Fichero in (select Fichero from tel_fichtraspasados) AND 1"
+    Cad = DevuelveDesdeBD(conAri, "distinct(Fichero)", "tel_cab_factura", Cad, "1")
+    If Cad <> "" Then
         'Si el fichero que falta NO es el que estamos intentando pasar
-        If cad <> Mens Then
-            MsgBox "Falta procesar el archivo: " & cad, vbExclamation
+        If Cad <> Mens Then
+            MsgBox "Falta procesar el archivo: " & Cad, vbExclamation
             
             Exit Sub
             
         Else
-            cad = "Volver a cargar los datos del fichero: " & Mens & "?"
-            If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+            Cad = "Volver a cargar los datos del fichero: " & Mens & "?"
+            If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
             resultado = True
         End If
     End If
@@ -1721,11 +1729,11 @@ Private Sub HacerImportacion()
     ' el fichero
     '-- Por si nos pasan ruta completa modificamos el nombre de fichero
     
-    cad = String(40, "*") & vbCrLf
-    cad = cad & cad & vbCrLf & vbCrLf
-    Mens = cad & "Va a importar el fichero de telefonía:"
+    Cad = String(40, "*") & vbCrLf
+    Cad = Cad & Cad & vbCrLf & vbCrLf
+    Mens = Cad & "Va a importar el fichero de telefonía:"
     Mens = Mens & vbCrLf & vbCrLf & "Compañia: " & Me.cboCompanyia2.Text
-    Mens = Mens & vbCrLf & vbCrLf & "FECHA: " & Text2(0).Text & vbCrLf & vbCrLf & cad
+    Mens = Mens & vbCrLf & vbCrLf & "FECHA: " & Text2(0).Text & vbCrLf & vbCrLf & Cad
     
     
     'En resultado tenemos si ya ha hecho la pregunta de procesar, para que no la vuelva a hacer
@@ -1851,32 +1859,32 @@ End Sub
 Private Sub NuevasCuotasConceptos()
     
     On Error GoTo eNuevasCuotasConceptos
-    cad = "Select * from tmpinformes where codusu=" & vUsu.Codigo & " ORDER BY campo2,nombre1"
+    Cad = "Select * from tmpinformes where codusu=" & vUsu.Codigo & " ORDER BY campo2,nombre1"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 0
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    i = 0
     If Not miRsAux.EOF Then
-        I = FreeFile
-        cad = App.Path & "\NC" & Format(Now, "yymmddhhnn") & ".txt"
-        CadenaDesdeOtroForm = cad
-        Open cad For Output As #I
+        i = FreeFile
+        Cad = App.Path & "\NC" & Format(Now, "yymmddhhnn") & ".txt"
+        CadenaDesdeOtroForm = Cad
+        Open Cad For Output As #i
         While Not miRsAux.EOF
             
             If miRsAux!Codigo1 = 2 Then
-                cad = "Varios "
+                Cad = "Varios "
             Else
-                cad = IIf(miRsAux!campo1 = 0, "Cuota ", "Conce ")
+                Cad = IIf(miRsAux!campo1 = 0, "Cuota ", "Conce ")
             End If
-            cad = "    " & cad & miRsAux!nombre1 & " :  " & miRsAux!nombre2 & vbCrLf
-            Print #I, cad
+            Cad = "    " & Cad & miRsAux!nombre1 & " :  " & miRsAux!nombre2 & vbCrLf
+            Print #i, Cad
             miRsAux.MoveNext
         Wend
-        Close #I
+        Close #i
     End If
     miRsAux.Close
     Set miRsAux = Nothing
     
-    If I > 0 Then
+    If i > 0 Then
         LanzaVisorMimeDocumento Me.hwnd, CadenaDesdeOtroForm
         CadenaDesdeOtroForm = ""
     End If
@@ -1911,7 +1919,7 @@ Private Sub Form_Load()
     Me.FrameImportacion.visible = False
     Me.FrameVerdatos.visible = False
     FrameCatadau.visible = False
-    I = Opcion
+    i = Opcion
     Select Case Opcion
     Case 0
         lblI.Caption = ""
@@ -1927,7 +1935,7 @@ Private Sub Form_Load()
         
         
     Case 2, 3, 4, 6
-        I = 2 'cancelar(2)
+        i = 2 'cancelar(2)
         If Opcion = 3 Then
             Label1(6).Caption = "Facturación por soporte"
         ElseIf Opcion = 4 Then
@@ -1949,7 +1957,7 @@ Private Sub Form_Load()
 '        lblInf.Caption = ""
     End Select
     
-    cmdSalir(I).Cancel = True
+    cmdSalir(i).Cancel = True
     lblInf.Caption = ""
     
     Label1(5).Caption = ""
@@ -1979,32 +1987,32 @@ Dim TelefonosFacturar As Integer
     IVA_standard = -1
     If vParamAplic.TelefoniaVtaPlazos Then
     
-        cad = "Select IdTelefono,PlazosMeses,ArtPlazos,ImportePlazo from sclientfno where PlazosMeses > 0 "
-        Rc.Open cad, conn, adOpenKeyset, adCmdText
+        Cad = "Select IdTelefono,PlazosMeses,ArtPlazos,ImportePlazo from sclientfno where PlazosMeses > 0 "
+        Rc.Open Cad, conn, adOpenKeyset, adCmdText
         If Not Rc.EOF Then
-            cad = DevuelveDesdeBD(conAri, "codigiva", "sartic", "codartic", DBLet(Rc!artplazos, "T"), "T")
-            If cad <> "" Then
-                cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", cad, "N")
-                If cad <> "" Then IVA_standard = CCur(cad)
+            Cad = DevuelveDesdeBD(conAri, "codigiva", "sartic", "codartic", DBLet(Rc!artplazos, "T"), "T")
+            If Cad <> "" Then
+                Cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", Cad, "N")
+                If Cad <> "" Then IVA_standard = CCur(Cad)
             End If
         End If
     Else
         If vParamAplic.ArtiTelefonia <> "" Then
             IVA_standard = 0
-           cad = DevuelveDesdeBD(conAri, "codigiva", "sartic", "codartic", DBLet(vParamAplic.ArtiTelefonia, "T"), "T")
-            If cad <> "" Then
-                cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", cad, "N")
-                If cad <> "" Then IVA_standard = CCur(cad)
+           Cad = DevuelveDesdeBD(conAri, "codigiva", "sartic", "codartic", DBLet(vParamAplic.ArtiTelefonia, "T"), "T")
+            If Cad <> "" Then
+                Cad = DevuelveDesdeBD(conConta, "(porceiva+coalesce(porcerec,0))", "tiposiva", "codigiva", Cad, "N")
+                If Cad <> "" Then IVA_standard = CCur(Cad)
             End If
         End If
     End If
     
-    cad = "select telefono,apellido1, apellido2,nombre,"
-    cad = cad & " BaseImponible,Cuota,total,Serie ,Ano ,NumFact,EsAgupacion"
-    cad = cad & "  from tel_cab_factura where fichero='" & Fich & "' order by telefono"
+    Cad = "select telefono,apellido1, apellido2,nombre,"
+    Cad = Cad & " BaseImponible,Cuota,total,Serie ,Ano ,NumFact,EsAgupacion"
+    Cad = Cad & "  from tel_cab_factura where fichero='" & Fich & "' order by telefono"
    
 
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
    
     lwTF.ListItems.Clear
     
@@ -2023,12 +2031,12 @@ Dim TelefonosFacturar As Integer
     While Not miRsAux.EOF
     
         
-        cad = ""
-        If Not IsNull(miRsAux!apellido1) Then cad = miRsAux!apellido1
-        If Not IsNull(miRsAux!apellido2) Then cad = Trim(cad & " " & miRsAux!apellido2)
+        Cad = ""
+        If Not IsNull(miRsAux!apellido1) Then Cad = miRsAux!apellido1
+        If Not IsNull(miRsAux!apellido2) Then Cad = Trim(Cad & " " & miRsAux!apellido2)
         If Not IsNull(miRsAux!Nombre) Then
-            If cad <> "" Then cad = cad & ","
-            cad = Trim(cad & " " & miRsAux!Nombre)
+            If Cad <> "" Then Cad = Cad & ","
+            Cad = Trim(Cad & " " & miRsAux!Nombre)
         End If
    
         Set IT = lwTF.ListItems.Add()
@@ -2037,7 +2045,7 @@ Dim TelefonosFacturar As Integer
         
         
         IT.Text = miRsAux!Telefono
-        IT.SubItems(1) = cad
+        IT.SubItems(1) = Cad
         
         If Me.chkMostrarBase.Value = 1 Then
             IT.SubItems(3) = Format(miRsAux!BaseImponible, "#,##0.00")
@@ -2053,52 +2061,52 @@ Dim TelefonosFacturar As Integer
         'Abril2020
         If miRsAux!EsAgupacion = 1 Then
             Aux = "count(*)"
-            cad = IT.Tag & " AND 1 "
-            cad = DevuelveDesdeBD(conAri, "GROUP_CONCAT( telefono separator '|')", "tel_cab_factura_agr", cad, "1", "N", Aux)
-            If cad = "" Then
+            Cad = IT.Tag & " AND 1 "
+            Cad = DevuelveDesdeBD(conAri, "GROUP_CONCAT( telefono separator '|')", "tel_cab_factura_agr", Cad, "1", "N", Aux)
+            If Cad = "" Then
                 Err.Raise 513, , "Error encontrando telefonos para factura: " & IT.Tag
                 Me.cmdFacturar.Enabled = False
                 Aux = 1
             End If
             TelefonosFacturar = TelefonosFacturar + CInt(Aux)
             Aux = ""
-            cad = cad & "|"
+            Cad = Cad & "|"
         Else
             TelefonosFacturar = TelefonosFacturar + 1
-            cad = miRsAux!Telefono
+            Cad = miRsAux!Telefono
         End If
-        IT.SubItems(6) = cad
+        IT.SubItems(6) = Cad
         IT.SubItems(7) = 0 'importe albaranes
         IT.SubItems(8) = 0 'importe ventas plazo
         IT.SubItems(9) = 0 'base imponible
         IT.SubItems(10) = miRsAux!BaseImponible
         
         If vParamAplic.TelefoniaVtaPlazos Then
-            I = 0
+            i = 0
             ImpoAux = 0
             
-            While cad <> ""
-                J = InStr(1, cad, "|")
+            While Cad <> ""
+                J = InStr(1, Cad, "|")
                 If J = 0 Then
-                    If cad = "" Then Err.Raise 513, , "Error leendo telefonos agrupados" & cad
+                    If Cad = "" Then Err.Raise 513, , "Error leendo telefonos agrupados" & Cad
                     
-                    Aux = cad
-                    cad = ""
+                    Aux = Cad
+                    Cad = ""
                     
                 Else
-                    Aux = Mid(cad, 1, J - 1)
-                    cad = Mid(cad, J + 1)
+                    Aux = Mid(Cad, 1, J - 1)
+                    Cad = Mid(Cad, J + 1)
                 End If
                 
                 Aux = "idtelefono =  '" & Aux & "'"
                 Rc.Find Aux, , adSearchForward, 1
                 If Not Rc.EOF Then
-                    I = 1
+                    i = 1
                     ImpoAux = ImpoAux + DBLet(Rc!ImportePlazo, "N")
                 End If
             Wend
             'La linea tiene albaranes pendientes
-            If I > 0 Then
+            If i > 0 Then
                                     
                     IT.SubItems(8) = ImpoAux
                                    
@@ -2158,12 +2166,12 @@ Dim Impaux As Currency
     On Error GoTo eComprobarAlbaranesPendientes
     
     
-    cad = "select scaalb.numalbar,referenc,codclien,nomclien,factursn,sum(importel) base from scaalb left join slialb "
-    cad = cad & " on scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar"
-    cad = cad & " Where scaalb.codtipom='ALT' group by scaalb.numalbar"
+    Cad = "select scaalb.numalbar,referenc,codclien,nomclien,factursn,sum(importel) base from scaalb left join slialb "
+    Cad = Cad & " on scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar"
+    Cad = Cad & " Where scaalb.codtipom='ALT' group by scaalb.numalbar"
     
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    cad = ""
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = ""
     ImporteAuxiliar = 0
     While Not miRsAux.EOF        'QUe hago....
     
@@ -2171,8 +2179,8 @@ Dim Impaux As Currency
     
     
         'Buscamos por el LW e telefono
-        For I = 1 To Me.lwTF.ListItems.Count
-            If InStr(lwTF.ListItems(I).SubItems(6), miRsAux!referenc) > 0 Then
+        For i = 1 To Me.lwTF.ListItems.Count
+            If InStr(lwTF.ListItems(i).SubItems(6), miRsAux!referenc) > 0 Then
                 'Este es el numero de telefono
                     
                 Exit For
@@ -2181,16 +2189,16 @@ Dim Impaux As Currency
         
         
         'Si NO lo ha encotrado, lo añado a CAD
-        If I > lwTF.ListItems.Count Then
-            cad = cad & vbCrLf & miRsAux!codClien & " " & miRsAux!NomClien & " -> " & miRsAux!referenc
+        If i > lwTF.ListItems.Count Then
+            Cad = Cad & vbCrLf & miRsAux!codClien & " " & miRsAux!NomClien & " -> " & miRsAux!referenc
         Else
-            Me.lwTF.ListItems(I).Bold = True
+            Me.lwTF.ListItems(i).Bold = True
             If miRsAux!factursn = 0 Then
-                Me.lwTF.ListItems(I).ForeColor = vbRed
-                lwTF.ListItems(I).ToolTipText = "Sin marca de facturar"
+                Me.lwTF.ListItems(i).ForeColor = vbRed
+                lwTF.ListItems(i).ToolTipText = "Sin marca de facturar"
             Else
-                Me.lwTF.ListItems(I).ForeColor = vbBlue
-                lwTF.ListItems(I).ToolTipText = "Albaranes"
+                Me.lwTF.ListItems(i).ForeColor = vbBlue
+                lwTF.ListItems(i).ToolTipText = "Albaranes"
                 'El total
                 
             
@@ -2199,14 +2207,14 @@ Dim Impaux As Currency
                  
                 Impaux = Round2(DBLet(miRsAux!Base, "N") * ((100 + Impaux) / 100), 2)
                 
-                Impaux = ImporteFormateado(lwTF.ListItems(I).SubItems(3)) + Impaux
-                ImporteAuxiliar = CCur(lwTF.ListItems(I).SubItems(7)) + DBLet(miRsAux!Base, "N")
-                lwTF.ListItems(I).SubItems(7) = ImporteAuxiliar
-                lwTF.ListItems(I).SubItems(3) = Format(Impaux, FormatoImporte)
-                lwTF.ListItems(I).SubItems(4) = Format(Impaux * 100, "0000000")
+                Impaux = ImporteFormateado(lwTF.ListItems(i).SubItems(3)) + Impaux
+                ImporteAuxiliar = CCur(lwTF.ListItems(i).SubItems(7)) + DBLet(miRsAux!Base, "N")
+                lwTF.ListItems(i).SubItems(7) = ImporteAuxiliar
+                lwTF.ListItems(i).SubItems(3) = Format(Impaux, FormatoImporte)
+                lwTF.ListItems(i).SubItems(4) = Format(Impaux * 100, "0000000")
             
-                lwTF.ListItems(I).ListSubItems(4).Bold = True
-                lwTF.ListItems(I).ListSubItems(4).ForeColor = vbBlue
+                lwTF.ListItems(i).ListSubItems(4).Bold = True
+                lwTF.ListItems(i).ListSubItems(4).ForeColor = vbBlue
             End If
         End If
         
@@ -2218,14 +2226,14 @@ Dim Impaux As Currency
 
     
 
-    If cad <> "" Then
-        cad = "Albaranes que no se facturarán: " & vbCrLf & cad
-        MsgBox cad, vbExclamation
+    If Cad <> "" Then
+        Cad = "Albaranes que no se facturarán: " & vbCrLf & Cad
+        MsgBox Cad, vbExclamation
     End If
         
     Exit Sub
 eComprobarAlbaranesPendientes:
-    MsgBox "Avise soporte tecnico. Albaran pdte   : " & miRsAux!Numalbar & "-" & I & vbCrLf & Err.Description, vbCritical
+    MsgBox "Avise soporte tecnico. Albaran pdte   : " & miRsAux!Numalbar & "-" & i & vbCrLf & Err.Description, vbCritical
 End Sub
 
 
@@ -2256,17 +2264,17 @@ Private Sub CargaCombo(ByRef CBO As ComboBox, FaltaProcesar As Boolean)
     Set miRsAux = New ADODB.Recordset
     
     CBO.Clear
-    cad = "Select distinct(fichero) from tel_cab_factura"
+    Cad = "Select distinct(fichero) from tel_cab_factura"
     If FaltaProcesar Then
-        cad = cad & " WHERE not fichero in (select fichero from tel_FichTraspasados) ORDER BY fecha desc"
+        Cad = Cad & " WHERE not fichero in (select fichero from tel_FichTraspasados) ORDER BY fecha desc"
     Else
         
-        cad = cad & " WHERE fecha > " & DBSet(DateAdd("yyyy", -2, Now), "F") & " ORDER BY fecha desc"
+        Cad = Cad & " WHERE fecha > " & DBSet(DateAdd("yyyy", -2, Now), "F") & " ORDER BY fecha desc"
     End If
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    cad = ""
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = ""
     While Not miRsAux.EOF
-        cad = cad & "1"
+        Cad = Cad & "1"
         CBO.AddItem miRsAux!Fichero
         miRsAux.MoveNext
     Wend
@@ -2302,10 +2310,10 @@ Private Sub Label1_Click(Index As Integer)
 End Sub
 
 Private Sub lwTf_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    I = ColumnHeader.Index - 1
-    If ColumnHeader.Index = 4 Then I = 4
+    i = ColumnHeader.Index - 1
+    If ColumnHeader.Index = 4 Then i = 4
     
-    If I = lwTF.SortKey Then
+    If i = lwTF.SortKey Then
         If lwTF.SortOrder = lvwAscending Then
             lwTF.SortOrder = lvwDescending
         Else
@@ -2386,31 +2394,31 @@ Dim cControlFra As CControlFacturaContab
     'Open Me.txtCatadau(0).Text For Input As #NF
     Open Text1.Text For Input As #NF
     'En toeria tiene que haber datos
-    cad = ""
+    Cad = ""
     NumRegElim = -1 'Indciador de situacion de proceso
     Do
         
-        Line Input #NF, cad
-        cad = Trim(cad)
+        Line Input #NF, Cad
+        Cad = Trim(Cad)
 
-        If Len(cad) >= 5 Then
-            If Mid(cad, 1, 5) = ";;;;;" Then cad = ""
+        If Len(Cad) >= 5 Then
+            If Mid(Cad, 1, 5) = ";;;;;" Then Cad = ""
         End If
 
-        If cad <> "" Then
+        If Cad <> "" Then
             If NumRegElim >= 0 Then 'la primera NO vale y en la primera es -1
-                If Mid(cad, 1, 1) = ";" Then MsgBox "Empieza con ;", vbCritical
-                Campos = Split(cad, ";")
+                If Mid(Cad, 1, 1) = ";" Then MsgBox "Empieza con ;", vbCritical
+                Campos = Split(Cad, ";")
                 NumRegElim = 0  'De momento BIEN
-                cad = cad & vbCrLf & vbCrLf
+                Cad = Cad & vbCrLf & vbCrLf
                 'Comprobaciones
                 If UBound(Campos) < 11 Then
-                    cad = cad & "Numero columnas incorrecto. Debian haber 11 columnas"
+                    Cad = Cad & "Numero columnas incorrecto. Debian haber 11 columnas"
                     NumRegElim = 1
                 Else
                     'OK. Columnas correctas
                     If Not IsNumeric(Campos(5)) Then
-                        cad = cad & "Codigo socio incorrecto " & vbCrLf
+                        Cad = Cad & "Codigo socio incorrecto " & vbCrLf
                         NumRegElim = 1
                     Else
                         'Es el codigo de socio.
@@ -2420,24 +2428,24 @@ Dim cControlFra As CControlFacturaContab
                     End If
                     Campos(0) = Campos(6)
                     If Len(Campos(0)) < 6 Then
-                        cad = cad & "Longitud fra incorrecta " & vbCrLf
+                        Cad = Cad & "Longitud fra incorrecta " & vbCrLf
                         NumRegElim = 1
                     Else
                         If Not IsNumeric(Right(Campos(0), 6)) Then
-                            cad = cad & "Numero fra incorrecta " & vbCrLf
+                            Cad = Cad & "Numero fra incorrecta " & vbCrLf
                             NumRegElim = 1
                         End If
                     End If
                     
-                    For I = 9 To 11
-                        If Not IsNumeric(Campos(I)) Then
-                            cad = cad & "Importes incorrectos " & Campos(I) & vbCrLf
+                    For i = 9 To 11
+                        If Not IsNumeric(Campos(i)) Then
+                            Cad = Cad & "Importes incorrectos " & Campos(i) & vbCrLf
                             NumRegElim = 1
                         End If
-                    Next I
+                    Next i
                     'Fecha factura
                     If Not IsDate(Campos(8)) Then
-                        cad = cad & "Fecha incorrecta " & vbCrLf
+                        Cad = Cad & "Fecha incorrecta " & vbCrLf
                         NumRegElim = 1
                     End If
                     
@@ -2447,39 +2455,39 @@ Dim cControlFra As CControlFacturaContab
                         '
                         
                         'Cad = Me.txtCatadau(1).Text & Right(Campos(6), 6)
-                        cad = DigitoCoarval & Right(Campos(6), 6)
+                        Cad = DigitoCoarval & Right(Campos(6), 6)
                         
                         'codusu codigo1, campo1, campo2,  nombre1,
-                        cad = vUsu.Codigo & "," & cad & "," & Campos(5) & "," & DBSet(Campos(4), "T")
+                        Cad = vUsu.Codigo & "," & Cad & "," & Campos(5) & "," & DBSet(Campos(4), "T")
                         ' fecha1, importe1, importe2, importe3
-                        cad = cad & "," & DBSet(Campos(8), "F") & "," & DBSet(Campos(9), "N")
-                        cad = cad & "," & DBSet(Campos(10), "N") & "," & DBSet(Campos(11), "N") & ")"
+                        Cad = Cad & "," & DBSet(Campos(8), "F") & "," & DBSet(Campos(9), "N")
+                        Cad = Cad & "," & DBSet(Campos(10), "N") & "," & DBSet(Campos(11), "N") & ")"
                         
-                        cad = "INSERT INTO tmpinformes(codusu,codigo1, campo1,   nombre1, fecha1, importe1, importe2, importe3) VALUES (" & cad
-                        conn.Execute cad
+                        Cad = "INSERT INTO tmpinformes(codusu,codigo1, campo1,   nombre1, fecha1, importe1, importe2, importe3) VALUES (" & Cad
+                        conn.Execute Cad
                     Else
-                        MsgBox cad, vbExclamation
+                        MsgBox Cad, vbExclamation
                         fin = True
                     End If
                 End If 'numcols
             Else
                 NumRegElim = 0  'para que empieze
-                cad = ""
+                Cad = ""
             End If
         
             
         Else
-            cad = "OK"
+            Cad = "OK"
         End If
         If NumRegElim = 1 Then
-            MsgBox cad, vbExclamation
+            MsgBox Cad, vbExclamation
             fin = True
         End If
         If EOF(NF) Then fin = True
     Loop Until fin
     Close #NF
     
-    If cad = "" Then
+    If Cad = "" Then
         MsgBox "NUmero registros incorrecto", vbExclamation
         NumRegElim = 1
     End If
@@ -2492,35 +2500,35 @@ Dim cControlFra As CControlFacturaContab
     
     'De momento va bien. Varias comporbaciones
     'Primer asunto. Codclien=0 NO lo procesamos. Serían internas
-    cad = "DELETE from tmpinformes where codusu=" & vUsu.Codigo & " AND campo1=0"
-    conn.Execute cad
+    Cad = "DELETE from tmpinformes where codusu=" & vUsu.Codigo & " AND campo1=0"
+    conn.Execute Cad
     
     
     '1ª comprobacion
-    cad = "Select distinct(fecha1) from tmpinformes where codusu =" & vUsu.Codigo
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    I = 0
+    Cad = "Select distinct(fecha1) from tmpinformes where codusu =" & vUsu.Codigo
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    i = 0
     While Not miRsAux.EOF
-        If I = 0 Then
-            cad = miRsAux!fecha1
-            Campos(0) = "01/01/" & Year(CDate(cad))
-            Campos(1) = "31/12/" & Year(CDate(cad))
+        If i = 0 Then
+            Cad = miRsAux!fecha1
+            Campos(0) = "01/01/" & Year(CDate(Cad))
+            Campos(1) = "31/12/" & Year(CDate(Cad))
         End If
-        I = I + 1
+        i = i + 1
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     
-    If I <> 1 Then
+    If i <> 1 Then
         MsgBox "No es fecha única", vbExclamation
         Exit Function
     End If
     
     Set cControlFra = New CControlFacturaContab
     
-    cad = cControlFra.FechaCorrectaContabilizazion(ConnConta, CDate(cad))
-    If cad <> "" Then
-        MsgBox cad, vbExclamation
+    Cad = cControlFra.FechaCorrectaContabilizazion(ConnConta, CDate(Cad))
+    If Cad <> "" Then
+        MsgBox Cad, vbExclamation
         NumRegElim = 1
     End If
     Set cControlFra = Nothing
@@ -2535,25 +2543,25 @@ Dim cControlFra As CControlFacturaContab
     
     
     'UN par de comprobaciones mas
-    cad = "select codusu,max(codigo1) elmaximo ,min(codigo1) elminimo from tmpinformes where codusu=" & vUsu.Codigo & " group by 1"
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = "select codusu,max(codigo1) elmaximo ,min(codigo1) elminimo from tmpinformes where codusu=" & vUsu.Codigo & " group by 1"
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     'NO PUEDE SER EOF
     'Comprobemos si NO existe el numero factura
-    cad = " numfactu >= " & miRsAux!elminimo & " AND numfactu<=" & miRsAux!elmaximo
-    cad = cad & " AND fecfactu>=" & DBSet(Campos(0), "F") & " AND fecfactu<=" & DBSet(Campos(1), "F")
+    Cad = " numfactu >= " & miRsAux!elminimo & " AND numfactu<=" & miRsAux!elmaximo
+    Cad = Cad & " AND fecfactu>=" & DBSet(Campos(0), "F") & " AND fecfactu<=" & DBSet(Campos(1), "F")
     miRsAux.Close
     
     
-    cad = "Select count(*) FROM scafac where codtipom='FAT' AND " & cad
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    cad = "0"
+    Cad = "Select count(*) FROM scafac where codtipom='FAT' AND " & Cad
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = "0"
     If Not miRsAux.EOF Then
-        If DBLet(miRsAux.Fields(0), "N") > 0 Then cad = miRsAux.Fields(0)
+        If DBLet(miRsAux.Fields(0), "N") > 0 Then Cad = miRsAux.Fields(0)
     End If
-    If Val(cad) > 0 Then
-        cad = "Se van a solapar " & cad & " registro(s) que se solaparán numeros de factura"
-        cad = cad & vbCrLf & vbCrLf & "¿Continuar?"
-        If MsgBox(cad, vbQuestion + vbYesNoCancel + vbDefaultButton3) <> vbYes Then Exit Function
+    If Val(Cad) > 0 Then
+        Cad = "Se van a solapar " & Cad & " registro(s) que se solaparán numeros de factura"
+        Cad = Cad & vbCrLf & vbCrLf & "¿Continuar?"
+        If MsgBox(Cad, vbQuestion + vbYesNoCancel + vbDefaultButton3) <> vbYes Then Exit Function
         
     End If
         
@@ -2636,51 +2644,51 @@ Private Function GeneraDatosImpresion() As Boolean
     
         'tmpinformes( codusu,codigo1,campo1,nombre1,campo2,obser,importe1,importe2,importe3)
     
-        cad = ", (" & vUsu.Codigo & "," & NumRegElim & "," & NumRegElim
-        cad = cad & "," & DBSet(lwTF.ListItems(NumRegElim).SubItems(1), "T")
+        Cad = ", (" & vUsu.Codigo & "," & NumRegElim & "," & NumRegElim
+        Cad = Cad & "," & DBSet(lwTF.ListItems(NumRegElim).SubItems(1), "T")
         davidCodtipom = lwTF.ListItems(NumRegElim).SubItems(6)
         If InStr(1, davidCodtipom, "|") > 0 Then
             ImporteAuxiliar = 0
-            I = 0
+            i = 0
             Do
-                I = InStr(I + 1, davidCodtipom, "|")
-                If I > 0 Then ImporteAuxiliar = ImporteAuxiliar + 1
-            Loop Until I = 0
-            cad = cad & ",1"
+                i = InStr(i + 1, davidCodtipom, "|")
+                If i > 0 Then ImporteAuxiliar = ImporteAuxiliar + 1
+            Loop Until i = 0
+            Cad = Cad & ",1"
             davidCodtipom = Replace(davidCodtipom, "|", vbCrLf)
             davidCodtipom = Left(davidCodtipom, Len(davidCodtipom) - 1)  'quitamos el ulimio pipe
         Else
-            cad = cad & ",0"
+            Cad = Cad & ",0"
             ImporteAuxiliar = 1
         End If
-        cad = cad & "," & DBSet(davidCodtipom, "T")
+        Cad = Cad & "," & DBSet(davidCodtipom, "T")
         'Bases de fichero      Bases albaranes     Bases vtaplazos
-        cad = cad & "," & DBSet(lwTF.ListItems(NumRegElim).SubItems(10), "N")
-        cad = cad & "," & DBSet(lwTF.ListItems(NumRegElim).SubItems(7), "N")
-        cad = cad & "," & DBSet(lwTF.ListItems(NumRegElim).SubItems(8), "N") & "," & CInt(ImporteAuxiliar) & ")"
+        Cad = Cad & "," & DBSet(lwTF.ListItems(NumRegElim).SubItems(10), "N")
+        Cad = Cad & "," & DBSet(lwTF.ListItems(NumRegElim).SubItems(7), "N")
+        Cad = Cad & "," & DBSet(lwTF.ListItems(NumRegElim).SubItems(8), "N") & "," & CInt(ImporteAuxiliar) & ")"
         
-        CadenaDesdeOtroForm = CadenaDesdeOtroForm & cad
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & Cad
         If Len(CadenaDesdeOtroForm) > 5000 Then
             
             CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, 2)
-            cad = "INSERT INTO tmpinformes( codusu,codigo1,campo1,nombre1,campo2,obser,importe1,importe2,importe3,importe5) VALUES " & CadenaDesdeOtroForm
-            conn.Execute cad
+            Cad = "INSERT INTO tmpinformes( codusu,codigo1,campo1,nombre1,campo2,obser,importe1,importe2,importe3,importe5) VALUES " & CadenaDesdeOtroForm
+            conn.Execute Cad
             CadenaDesdeOtroForm = ""
         End If
     Next
     
     If Len(CadenaDesdeOtroForm) > 0 Then
         CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, 2)
-        cad = "INSERT INTO tmpinformes( codusu,codigo1,campo1,nombre1,campo2,obser,importe1,importe2,importe3,importe5) VALUES " & CadenaDesdeOtroForm
-        conn.Execute cad
+        Cad = "INSERT INTO tmpinformes( codusu,codigo1,campo1,nombre1,campo2,obser,importe1,importe2,importe3,importe5) VALUES " & CadenaDesdeOtroForm
+        conn.Execute Cad
     End If
     
     Label1(5).Caption = "Calculando "
     Label1(5).Refresh
     Espera 0.5
     
-    cad = "UPDATE tmpinformes SET importe4=importe1+importe2+importe3 WHERE codusu =" & vUsu.Codigo
-    conn.Execute cad
+    Cad = "UPDATE tmpinformes SET importe4=importe1+importe2+importe3 WHERE codusu =" & vUsu.Codigo
+    conn.Execute Cad
     
     GeneraDatosImpresion = True
 eGeneraDatosImpresion:

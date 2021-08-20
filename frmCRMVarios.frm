@@ -1672,7 +1672,7 @@ Dim K As Integer
 Dim R As ADODB.Recordset
 Dim Aux2 As String
 Dim Importe As Currency
-Dim cad As String
+Dim Cad As String
 Dim Vec As Byte
 
     On Error GoTo eGenerarResumenCRM
@@ -1707,8 +1707,11 @@ Dim Vec As Byte
     If txtNumero(7).Text <> "" Then miSQL = miSQL & " AND sclien.codagent <= " & txtNumero(7).Text
   
 
-
-    Codigo = "Select codmacta from scobro group by 1"
+    If vParamAplic.ContabilidadNueva Then
+        Codigo = "Select codmacta from cobros group by 1"
+    Else
+        Codigo = "Select codmacta from scobro group by 1"
+    End If
     miRsAux.Open Codigo, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     Codigo = ""
     While Not miRsAux.EOF
@@ -1757,8 +1760,13 @@ Dim Vec As Byte
         'El vto sera Serie00Fra DBLet(R!numSerie, "T") & Format(R!Codfaccl, "000000")
         
         'Empezamos
-        'insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,`importe`,`observa`) values ( '1','0','0','','','',NULL,NULL)
-        miSQL = "SELECT scobro.* FROM scobro WHERE recedocu=0 AND codmacta = '" & Codigo & "'"
+        
+        If vParamAplic.ContabilidadNueva Then
+            miSQL = "SELECT cobros.*,numfactu codfaccl, fecfactu fecfaccl FROM cobros "
+        Else
+            miSQL = "SELECT scobro.* FROM scobro "
+        End If
+        miSQL = miSQL & " WHERE recedocu=0 AND codmacta = '" & Codigo & "'"
         miSQL = miSQL & " ORDER BY fecvenci desc"
         R.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         miSQL = ""
@@ -1809,9 +1817,14 @@ Dim Vec As Byte
             Codigo = CStr(Int(DBLet(miRsAux!ImporteL, "N")))
             
             'Hco reclamacioones
-            'miSQL = "SELECT codigo,numserie,codfaccl,fecfaccl,fecreclama,impvenci,codmacta,observaciones from shcocob "
-            miSQL = "SELECT numserie,codfaccl,count(*) from shcocob  WHERE "
-            miSQL = miSQL & " codmacta = '" & Codigo & "'  group by 1,2 order by 3"
+            If vParamAplic.ContabilidadNueva Then
+                miSQL = "select reclama.codigo,numserie,numfactu codfaccl,fecfactu fecfaccl,fecreclama,impvenci,codmacta,observaciones,importes "
+                miSQL = miSQL & " from reclama  INNER join reclama_facturas  on reclama.codigo=reclama_facturas.codigo"
+            Else
+        
+                miSQL = "SELECT numserie,codfaccl,count(*) from shcocob "
+            End If
+            miSQL = miSQL & " WHERE codmacta = '" & Codigo & "'  group by 1,2 order by 3"
             R.Open miSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
             Codigo = ""
             While Not R.EOF

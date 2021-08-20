@@ -86,19 +86,19 @@ Begin VB.Form frmFacProyecto
       TabCaption(1)   =   "Impresion"
       TabPicture(1)   =   "frmFacProyecto.frx":0060
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FrameToolAux(5)"
+      Tab(1).Control(0)=   "lblFramePp(4)"
       Tab(1).Control(1)=   "lwEulerLineas"
-      Tab(1).Control(2)=   "lblFramePp(4)"
+      Tab(1).Control(2)=   "FrameToolAux(5)"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Tareas / costes"
       TabPicture(2)   =   "frmFacProyecto.frx":007C
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "ListView2"
-      Tab(2).Control(1)=   "ListView1"
-      Tab(2).Control(2)=   "Label1(63)"
-      Tab(2).Control(3)=   "Label1(64)"
-      Tab(2).Control(4)=   "lblFramePp(5)"
-      Tab(2).Control(5)=   "lblFramePp(3)"
+      Tab(2).Control(0)=   "lblFramePp(3)"
+      Tab(2).Control(1)=   "lblFramePp(5)"
+      Tab(2).Control(2)=   "Label1(64)"
+      Tab(2).Control(3)=   "Label1(63)"
+      Tab(2).Control(4)=   "ListView1"
+      Tab(2).Control(5)=   "ListView2"
       Tab(2).ControlCount=   6
       Begin VB.Frame FrameToolAux 
          BeginProperty Font 
@@ -5084,7 +5084,7 @@ Dim Aux1 As Currency
     If PedidosVinculadosEnAlbaranes <> "" Then
         C1 = "select scaalp.numalbar,scaalp.fechaalb,nomprove,codartic,nomartic,cantidad,precioar,importel,scaalp.Codprove from scaalp,slialp  where"
         C1 = C1 & " scaalp.NumAlbar = slialp.NumAlbar And scaalp.FechaAlb = slialp.FechaAlb And scaalp.Codprove = slialp.Codprove"
-        C1 = C1 & " and codclien =" & Text1(4).Text
+        C1 = C1 & " and slialp.codclien =" & Text1(4).Text
         C1 = C1 & " and numpedV IN (" & PedidosVinculadosEnAlbaranes & ")"
         C1 = C1 & " ORDER BY Fechaalb"
 
@@ -5176,7 +5176,7 @@ Dim Aux1 As Currency
         C1 = C1 & " scafpc.codprove = scafpa.codprove And scafpc.numfactu = scafpa.numfactu And scafpc.fecfactu = scafpa.fecfactu "
         C1 = C1 & " AND scafpc.codprove = slifpc.codprove And scafpc.numfactu = slifpc.numfactu And scafpc.fecfactu = slifpc.fecfactu "
         C1 = C1 & " and scafpa.numalbar = slifpc.numalbar"
-        C1 = C1 & " and codclien=" & Text1(4).Text
+        C1 = C1 & " and slifpc.codclien=" & Text1(4).Text
         C1 = C1 & " and numpedV IN (" & PedidosVinculadosEnAlbaranes & ")"
         C1 = C1 & " ORDER BY fecfactu"
         RS.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText

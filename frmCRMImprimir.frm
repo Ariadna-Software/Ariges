@@ -927,7 +927,7 @@ End Function
 'COmercia
 '---------------------------
 Private Sub GenerarDatosComer()
-Dim cad As String
+Dim Cad As String
 Dim Contador As Long
 Dim F As Date
 Dim Procesar As Boolean
@@ -1001,9 +1001,9 @@ Dim Procesar As Boolean
                 SQL = SQL & DBSet(RS!feholla, "FH") & ","
                 'En sllama siempre son RECIBIDAS
                 SQL = SQL & "'Recibida',"
-                cad = DBLetMemo(RS!observac)
-                cad = Replace(cad, vbCrLf, " ")
-                SQL = SQL & DBSet(cad, "T", "S") & ","
+                Cad = DBLetMemo(RS!observac)
+                Cad = Replace(Cad, vbCrLf, " ")
+                SQL = SQL & DBSet(Cad, "T", "S") & ","
                 'Trabajador
                 SQL = SQL & DBSet(RS!NomTraba, "T") & ","
                 'En adjuntos guardare el tipop llamada
@@ -1039,9 +1039,9 @@ Dim Procesar As Boolean
                 SQL = SQL & DBSet(RS!fechora, "FH") & ","
                 'En sllama siempre son RECIBIDAS
                 SQL = SQL & "'Realizada',"
-                cad = DBLetMemo(RS!Observaciones)
-                cad = Replace(cad, vbCrLf, " ")
-                SQL = SQL & DBSet(cad, "T", "S") & ","
+                Cad = DBLetMemo(RS!Observaciones)
+                Cad = Replace(Cad, vbCrLf, " ")
+                SQL = SQL & DBSet(Cad, "T", "S") & ","
                 'Trabajador
                 SQL = SQL & DBSet(RS!NomTraba, "T") & ","
                 'En adjuntos guardare el tipop llamada
@@ -1082,10 +1082,10 @@ Dim Procesar As Boolean
                     SQL = SQL & " WHERE codclien=" & vCRM.codClien
                      SQL = SQL & " AND fechahora>=" & DBSet(F, "F")
                     If NumRegElim = 1 Or NumRegElim = 2 Then
-                        cad = "1"
-                        If NumRegElim = 2 Then cad = "0"
+                        Cad = "1"
+                        If NumRegElim = 2 Then Cad = "0"
                         'Ha selecionado solo una de las dos
-                        SQL = SQL & " AND enviado = " & cad
+                        SQL = SQL & " AND enviado = " & Cad
                     End If
                     NumRegElim = Contador
                     
@@ -1104,15 +1104,15 @@ Dim Procesar As Boolean
                         Else
                             SQL = SQL & "'Recibido',"
                         End If
-                        cad = DBLetMemo(RS!asunto)
-                        cad = Replace(cad, vbCrLf, " ")
-                        SQL = SQL & DBSet(cad, "T", "S") & ","
+                        Cad = DBLetMemo(RS!asunto)
+                        Cad = Replace(Cad, vbCrLf, " ")
+                        SQL = SQL & DBSet(Cad, "T", "S") & ","
                         'Trabajador
                         SQL = SQL & DBSet(RS!email, "T", "S") & ","
                         'En adjuntos guardare el tipop llamada
-                        cad = "'*'"
-                        If DBLet(RS!adjuntos, "T") = "" Then cad = "NULL"
-                        SQL = SQL & cad & ")"
+                        Cad = "'*'"
+                        If DBLet(RS!adjuntos, "T") = "" Then Cad = "NULL"
+                        SQL = SQL & Cad & ")"
                         
                         conn.Execute SQL
                         RS.MoveNext
@@ -1143,7 +1143,7 @@ End Sub
 Private Sub GenerarDatosAdmon()
 Dim Impor1 As Currency
 Dim Base As Currency
-Dim cad As String
+Dim Cad As String
 Dim Aux As String
 Dim F As Date
 Dim DiasRiesgo As Long
@@ -1168,7 +1168,7 @@ Dim N As Integer
         NumRegElim = 0
         
         While Not RS.EOF
-            cad = ""
+            Cad = ""
         
             NumRegElim = NumRegElim + 1
             Impor1 = DBLet(RS!TotalFac, "N")
@@ -1182,29 +1182,29 @@ Dim N As Integer
                 'Cambio la base para comprar con el mismo periodo del actual
                 
                 'Cad = "codtipom <>'FAZ' and codtipom<>'FRT' and "
-                cad = "codtipom <>'FAZ' and "
-                cad = cad & " fecfactu>='" & Year(Now) - 1 & "-01-01' and "
-                cad = cad & " fecfactu<='" & Year(Now) - 1 & "-" & Format(Now, "mm-dd") & "' AND codclien "
-                cad = DevuelveDesdeBD(conAri, "sum(totalfac)", "scafac", cad, Text1.Text)
-                If cad = "" Then cad = "0"
-                Base = CCur(cad)
+                Cad = "codtipom <>'FAZ' and "
+                Cad = Cad & " fecfactu>='" & Year(Now) - 1 & "-01-01' and "
+                Cad = Cad & " fecfactu<='" & Year(Now) - 1 & "-" & Format(Now, "mm-dd") & "' AND codclien "
+                Cad = DevuelveDesdeBD(conAri, "sum(totalfac)", "scafac", Cad, Text1.Text)
+                If Cad = "" Then Cad = "0"
+                Base = CCur(Cad)
                 If NumRegElim > 1 And Base <> 0 Then
                     Impor1 = CStr(((100 * Impor1) / Base) - 100)
-                    cad = Format(Impor1, FormatoPorcen) & "% sobre misma fecha año anterior"
+                    Cad = Format(Impor1, FormatoPorcen) & "% sobre misma fecha año anterior"
                 Else
-                    cad = ""
+                    Cad = ""
                 End If
             Else
                 'Otro año cualquiera
                  SQL = SQL & RS!Anyo & "',"
                 If NumRegElim > 1 And Base <> 0 Then
                     Impor1 = CStr(((100 * Impor1) / Base) - 100)
-                    cad = Format(Impor1, FormatoPorcen) & "%"
+                    Cad = Format(Impor1, FormatoPorcen) & "%"
                 End If
                  
             End If
             Base = DBLet(RS!TotalFac, "N")
-            SQL = SQL & "'" & cad & "')"
+            SQL = SQL & "'" & Cad & "')"
           
 
             conn.Execute SQL
@@ -1438,7 +1438,7 @@ Dim N As Integer
         
         If vParamAplic.ContabilidadNueva Then
             SQL = "select reclama.codigo,numserie,numfactu codfaccl,fecfactu fecfaccl,fecreclama,impvenci,codmacta,observaciones,importes "
-            SQL = SQL & " from reclama  left join reclama_facturas  on reclama.codigo=reclama_facturas.codigo"
+            SQL = SQL & " from reclama  INNER JOIN reclama_facturas  ON reclama.codigo=reclama_facturas.codigo"
         
         Else
             SQL = "SELECT codigo,numserie,codfaccl,fecfaccl,fecreclama,impvenci,codmacta,observaciones from shcocob "
@@ -1471,9 +1471,9 @@ Dim N As Integer
                 Aux = RS!ImpVenci
             End If
             SQL = SQL & TransformaComasPuntos(Aux) & ",'"
-            cad = DBLetMemo(RS!Observaciones)
-            cad = Replace(cad, vbCrLf, " ")
-            SQL = SQL & DevNombreSQL(cad) & "')"
+            Cad = DBLetMemo(RS!Observaciones)
+            Cad = Replace(Cad, vbCrLf, " ")
+            SQL = SQL & DevNombreSQL(Cad) & "')"
             conn.Execute SQL
             
             
@@ -1502,7 +1502,7 @@ End Sub
 
 
 Private Sub GenerarDatosSAT()
-Dim cad As String
+Dim Cad As String
 Dim Contador As Long
 Dim F As Date
 

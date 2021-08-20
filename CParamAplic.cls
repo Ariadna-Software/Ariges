@@ -2022,6 +2022,8 @@ On Error GoTo Err3
         mvarDefTarifa = DBLet(RS!deftarifa, "N") 'numero conta
         mvarDefAgente = DBLet(RS!defagente, "N") 'numero conta
 
+        FijarParaemtrosClientePordefecto 0  'de momento solo rutas
+
 
         mvaravipedcli = DBLet(RS!avipedcli, "N")
         mvaravipedpro = DBLet(RS!avipedpro, "N")
@@ -3052,6 +3054,16 @@ Public Sub QuitarFormulariosGrandes()
 End Sub
 
 
-
-
+'De momento SOLO ruta
+Private Sub FijarParaemtrosClientePordefecto(QueParametroPorDefecto As Integer)
+Dim Valor As Integer
+    
+    Valor = mvarDefRuta
+    If mvarDefRuta = 0 Then
+        'Compruebo que existe en BD
+        SQL = DevuelveDesdeBD(conAri, "codrutas", "srutas", "codrutas", CStr(mvarDefRuta))
+        If SQL = "" Then Valor = -1
+    End If
+    mvarDefRuta = Valor
+End Sub
 

@@ -708,7 +708,7 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
     
     
     
-    Dim b As Boolean
+    Dim B As Boolean
     
     Dim Nombre As String
     Dim Apell1 As String
@@ -1165,7 +1165,7 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
                     mSQL = mSQL & mdbFac2.numero(mLinea) & "," ' Número de línea
                     mSQL = mSQL & mdbFac2.Fecha(mrs1!Fecha_inicio_cuotas) & "," ' Fecha inicio del consumo
                     mSQL = mSQL & mdbFac2.Fecha(mrs1!Fecha_final_cuotas) & "," ' Fecha final del consumo
-                    mSQL = mSQL & mdbFac2.texto(mrs1!codigo_de_cuota) & "," ' código de la cuota correspondiente
+                    mSQL = mSQL & mdbFac2.texto(mrs1!Codigo_de_cuota) & "," ' código de la cuota correspondiente
                     mSQL = mSQL & mdbFac2.texto(mrs1!Descripcion_de_cuota) & "," ' Fecha
                     'MAYO 2013. Metemos el 0 al final para el tipo de IVA(0=normal  1=exento)
                     mSQL = mSQL & mdbFac2.numero(mrs1!SumaDeImporte) & ",0," ' importe de la cuota correspondiente
@@ -1175,7 +1175,7 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
                     
                     mdbFac2.ejecutar mSQL
                     '-- Calculamos si hay algún descuento aplicable
-                    mDescuento = buscaDescuentos(0, mrs1!SumaDeImporte, mrs1!codigo_de_cuota, mPorcentaje)
+                    mDescuento = buscaDescuentos(0, mrs1!SumaDeImporte, mrs1!Codigo_de_cuota, mPorcentaje)
                     If mDescuento <> 0 Then
                         '-- Hay descuento aplicable
                         mSQL = "insert into tel_lin_factura_descuentos values("
@@ -1464,11 +1464,11 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
                          mCuotaMinimia = mrs1!cuotaminima
                          
                          If mvarCuotaMinimaSobreConsumos Then
-                             b = mSumConsumos < mCuotaMinimia
+                             B = mSumConsumos < mCuotaMinimia
                          Else
-                             b = mTotal < mCuotaMinimia  'lo que habia
+                             B = mTotal < mCuotaMinimia  'lo que habia
                          End If
-                         If b Then
+                         If B Then
                              
                              
                              If mvarCuotaMinimaSobreConsumos Then
@@ -2350,7 +2350,7 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
     Dim Aux As String
     Dim Impor As Currency
     Dim imp2 As Currency
-    Dim aux2 As String
+    Dim Aux2 As String
     Dim i As Integer
     
     'Entran con espacios en blanco
@@ -2467,9 +2467,9 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
             'sum(Cantidad_medida_originada)"
             'Los segundos se suma distinto
             'Aux = Aux & "(floor(Cantidad_medida_originada) *60) + ((Cantidad_medida_originada - floor(Cantidad_medida_originada))*100) as calculados"
-            aux2 = "sum(floor(Cantidad_medida_originada) * 60 +(Cantidad_medida_originada-floor(Cantidad_medida_originada)) *100 ) as Calculados"
+            Aux2 = "sum(floor(Cantidad_medida_originada) * 60 +(Cantidad_medida_originada-floor(Cantidad_medida_originada)) *100 ) as Calculados"
 
-            Aux = Aux & aux2
+            Aux = Aux & Aux2
             
             Aux = Aux & ",0,0,sum(importe) totimpor,'' FROM telefono.detalle_de_llamadas WHERE  Fichero =" & DBSet(mFicheroCorto, "T")
             Aux = Aux & " and Codigo_de_trafico in (" & mvarConceptosQueSonLlamadas & ")  and fecha<>'0000'"
@@ -2483,9 +2483,9 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
             
             Cad = "" 'cuidado. Esta variable estaba para el numero de factura telefonia, fechainic y fin
             While Not RS.EOF
-                aux2 = ", ("
+                Aux2 = ", ("
                 For i = 0 To 12
-                    aux2 = aux2 & DBSet(RS.Fields(i), "T", "N") & ","
+                    Aux2 = Aux2 & DBSet(RS.Fields(i), "T", "N") & ","
                 Next
                             
                 Impor = DBLet(RS!Calculados, "N")
@@ -2494,12 +2494,12 @@ Public Function RecalcularImporteLlamadasCoperativa(ByRef L As Label, Operadora 
                 Impor = imp2 + (Round(Impor / 100, 2))
                     
                     
-                aux2 = aux2 & DBSet(Impor, "N")
+                Aux2 = Aux2 & DBSet(Impor, "N")
                 
                 ',0,0,sum(importe),''
-                aux2 = aux2 & ",0,0," & DBSet(RS!totimpor, "N") & ",''"
+                Aux2 = Aux2 & ",0,0," & DBSet(RS!totimpor, "N") & ",''"
                 
-                Cad = Cad & aux2 & ")"
+                Cad = Cad & Aux2 & ")"
                 
                 
                 If Len(Cad) > 25000 Then
@@ -2631,7 +2631,7 @@ Dim idC As Long
     While Not Rc.EOF
         Cad = TransformaComasPuntos(CStr(Rc!Valor))
         Cad = "UPDATE telefono.cuotas SET importe = " & Cad
-        Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!codigo_de_cuota, "T")
+        Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!Codigo_de_cuota, "T")
         conn.Execute Cad
         Rc.MoveNext
     Wend
@@ -2669,12 +2669,12 @@ Dim idC As Long
         Importe2 = 0 '% para guardar
         While Not Rc.EOF
             
-            If vSQL <> Rc!codigo_de_cuota Then
-                vSQL = DevuelveDesdeBD(conAri, "Valor", "tel_descuentoscuotas", "codigo_de_cuota", CStr(Rc!codigo_de_cuota), "T")
+            If vSQL <> Rc!Codigo_de_cuota Then
+                vSQL = DevuelveDesdeBD(conAri, "Valor", "tel_descuentoscuotas", "codigo_de_cuota", CStr(Rc!Codigo_de_cuota), "T")
                 If vSQL = "" Then vSQL = "100"
                 Importe2 = CCur(vSQL)
                     
-                vSQL = Rc!codigo_de_cuota
+                vSQL = Rc!Codigo_de_cuota
             End If
             i = Rc!Dias
             If i > 30 Then i = 30
@@ -2687,7 +2687,7 @@ Dim idC As Long
             
             Cad = "UPDATE telefono.cuotas SET libre=" & TransformaComasPuntos(CStr(Rc!Importe))
             Cad = Cad & ",importe = " & TransformaComasPuntos(CStr(Importe3))
-            Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!codigo_de_cuota, "T")
+            Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!Codigo_de_cuota, "T")
             Cad = Cad & " AND Numero_de_telefono =" & DBSet(Rc!Numero_de_telefono, "T")
             conn.Execute Cad
             Rc.MoveNext
@@ -3018,16 +3018,21 @@ Dim C As String
 
    
 
-    If mfichero3 = "" Then mfichero3 = Fichero
+    If mfichero3 = "" Then
+        mfichero3 = Fichero
+        If QueOperador = 2 Then mfichero3 = mFicheroCorto
+    End If
  
     C = "Fichero =" & DBSet(mfichero3, "T") & " and not Codigo_de_tipo_de_trafico in (select Codigo_de_tipo_de_trafico from tel_conceptosllamadas where operadora=" & QueOperador & ") and 1"
     C = DevuelveDesdeBD(conAri, "count(*)", "telefono.resumen_de_llamadas", C, "1", "N")
+    
+
     If Val(C) > 0 Then
         
     
     
         C = "INSERT INTO tmpinformes(codusu,codigo1,campo1,campo2,nombre1,nombre2) "
-        C = C & " select " & vUsu.Codigo & "," & QueOperador & " 1,0,Codigo_de_cuota,Descripcion_de_cuota"
+        C = C & " select " & vUsu.Codigo & "," & QueOperador & " ,1,0,Codigo_de_cuota,Descripcion_de_cuota FROM telefono.resumen_cuotas_general"
         C = C & " where Fichero =" & DBSet(mfichero3, "T") & " group by Codigo_de_cuota"
         mdbFac2.ejecutar C
     
@@ -3054,7 +3059,7 @@ Dim C As String
     RS.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     C = ""
     While Not RS.EOF
-        C = C & ", " & DBSet(RS!codigo_de_cuota, "T")
+        C = C & ", " & DBSet(RS!Codigo_de_cuota, "T")
         RS.MoveNext
     Wend
     RS.Close

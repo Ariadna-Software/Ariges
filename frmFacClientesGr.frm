@@ -326,8 +326,8 @@ Begin VB.Form frmFacClientesGr
       TabCaption(1)   =   "Asegur"
       TabPicture(1)   =   "frmFacClientesGr.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame3"
-      Tab(1).Control(1)=   "FrameAsegurados"
+      Tab(1).Control(0)=   "FrameAsegurados"
+      Tab(1).Control(1)=   "Frame3"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Direcciones"
       TabPicture(2)   =   "frmFacClientesGr.frx":0044
@@ -342,172 +342,172 @@ Begin VB.Form frmFacClientesGr
       TabCaption(4)   =   "Documentos"
       TabPicture(4)   =   "frmFacClientesGr.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "cmdImprimeFraCli"
-      Tab(4).Control(1)=   "FrameVisorDocumentos"
-      Tab(4).Control(2)=   "FrameNavegaDoc"
-      Tab(4).Control(3)=   "FramePuntos"
-      Tab(4).Control(4)=   "Text1(46)"
+      Tab(4).Control(0)=   "Label3"
+      Tab(4).Control(1)=   "imgFecha(3)"
+      Tab(4).Control(2)=   "LabelDoc"
+      Tab(4).Control(3)=   "imgDocumentos"
+      Tab(4).Control(4)=   "cmdCatalogo"
       Tab(4).Control(5)=   "lw1"
-      Tab(4).Control(6)=   "cmdCatalogo"
-      Tab(4).Control(7)=   "imgDocumentos"
-      Tab(4).Control(8)=   "LabelDoc"
-      Tab(4).Control(9)=   "imgFecha(3)"
-      Tab(4).Control(10)=   "Label3"
+      Tab(4).Control(6)=   "Text1(46)"
+      Tab(4).Control(7)=   "FramePuntos"
+      Tab(4).Control(8)=   "FrameNavegaDoc"
+      Tab(4).Control(9)=   "FrameVisorDocumentos"
+      Tab(4).Control(10)=   "cmdImprimeFraCli"
       Tab(4).ControlCount=   11
       TabCaption(5)   =   "CRM"
       TabPicture(5)   =   "frmFacClientesGr.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "LabelCRM"
-      Tab(5).Control(1)=   "imgCrm"
-      Tab(5).Control(2)=   "lwCRM"
-      Tab(5).Control(3)=   "cmdAccCRM(2)"
-      Tab(5).Control(4)=   "cmdAccCRM(1)"
-      Tab(5).Control(5)=   "cmdAccCRM(0)"
-      Tab(5).Control(6)=   "FrameNavegaCRM"
-      Tab(5).Control(7)=   "FrameBotonCMR"
+      Tab(5).Control(0)=   "FrameBotonCMR"
+      Tab(5).Control(1)=   "FrameNavegaCRM"
+      Tab(5).Control(2)=   "cmdAccCRM(0)"
+      Tab(5).Control(3)=   "cmdAccCRM(1)"
+      Tab(5).Control(4)=   "cmdAccCRM(2)"
+      Tab(5).Control(5)=   "lwCRM"
+      Tab(5).Control(6)=   "imgCrm"
+      Tab(5).Control(7)=   "LabelCRM"
       Tab(5).ControlCount=   8
       TabCaption(6)   =   "Contacto"
       TabPicture(6)   =   "frmFacClientesGr.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "frameComercial"
+      Tab(6).Control(0)=   "Frame4"
       Tab(6).Control(1)=   "frameAdmon"
-      Tab(6).Control(2)=   "Frame4"
+      Tab(6).Control(2)=   "frameComercial"
       Tab(6).ControlCount=   3
       TabCaption(7)   =   "Renting"
       TabPicture(7)   =   "frmFacClientesGr.frx":00D0
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "FrameToolAux(4)"
-      Tab(7).Control(1)=   "txtauxRent(10)"
-      Tab(7).Control(2)=   "txtauxRent(9)"
-      Tab(7).Control(3)=   "txtauxRent(8)"
-      Tab(7).Control(4)=   "cmdRenting(2)"
-      Tab(7).Control(5)=   "txtauxRent(7)"
-      Tab(7).Control(6)=   "txtauxRent(11)"
-      Tab(7).Control(7)=   "txtauxRent(6)"
-      Tab(7).Control(8)=   "txtauxRent(5)"
-      Tab(7).Control(9)=   "txtauxRent(4)"
-      Tab(7).Control(10)=   "txtauxRent(3)"
-      Tab(7).Control(11)=   "cmdRenting(1)"
-      Tab(7).Control(12)=   "cmdRenting(0)"
-      Tab(7).Control(13)=   "txtauxRent(2)"
-      Tab(7).Control(14)=   "txtauxRent(0)"
-      Tab(7).Control(15)=   "txtauxRent(1)"
-      Tab(7).Control(16)=   "DataGrid2"
-      Tab(7).Control(17)=   "imgBuscar(24)"
-      Tab(7).Control(18)=   "Label4(0)"
-      Tab(7).Control(19)=   "Label1(90)"
-      Tab(7).Control(20)=   "Label1(89)"
-      Tab(7).Control(21)=   "Label1(88)"
+      Tab(7).Control(0)=   "Label1(88)"
+      Tab(7).Control(1)=   "Label1(89)"
+      Tab(7).Control(2)=   "Label1(90)"
+      Tab(7).Control(3)=   "Label4(0)"
+      Tab(7).Control(4)=   "imgBuscar(24)"
+      Tab(7).Control(5)=   "DataGrid2"
+      Tab(7).Control(6)=   "txtauxRent(1)"
+      Tab(7).Control(7)=   "txtauxRent(0)"
+      Tab(7).Control(8)=   "txtauxRent(2)"
+      Tab(7).Control(9)=   "cmdRenting(0)"
+      Tab(7).Control(10)=   "cmdRenting(1)"
+      Tab(7).Control(11)=   "txtauxRent(3)"
+      Tab(7).Control(12)=   "txtauxRent(4)"
+      Tab(7).Control(13)=   "txtauxRent(5)"
+      Tab(7).Control(14)=   "txtauxRent(6)"
+      Tab(7).Control(15)=   "txtauxRent(11)"
+      Tab(7).Control(16)=   "txtauxRent(7)"
+      Tab(7).Control(17)=   "cmdRenting(2)"
+      Tab(7).Control(18)=   "txtauxRent(8)"
+      Tab(7).Control(19)=   "txtauxRent(9)"
+      Tab(7).Control(20)=   "txtauxRent(10)"
+      Tab(7).Control(21)=   "FrameToolAux(4)"
       Tab(7).ControlCount=   22
       TabCaption(8)   =   "tfno"
       TabPicture(8)   =   "frmFacClientesGr.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "txtauxTfno(16)"
-      Tab(8).Control(1)=   "cboFiltroTfno"
-      Tab(8).Control(2)=   "cboOperadorTfnnia2(2)"
-      Tab(8).Control(3)=   "FrameToolAux(5)"
-      Tab(8).Control(4)=   "FrameModuloVtaPlazos"
-      Tab(8).Control(5)=   "cboOperadorTfnnia2(0)"
-      Tab(8).Control(6)=   "cboOperadorTfnnia2(1)"
-      Tab(8).Control(7)=   "FrameTelefonia(1)"
-      Tab(8).Control(8)=   "txtauxTfno(10)"
-      Tab(8).Control(9)=   "txtauxTfno(9)"
-      Tab(8).Control(10)=   "txtauxTfno(8)"
-      Tab(8).Control(11)=   "txtauxTfno(7)"
-      Tab(8).Control(12)=   "Text5(6)"
-      Tab(8).Control(13)=   "txtauxTfno(6)"
-      Tab(8).Control(14)=   "Text5(5)"
-      Tab(8).Control(15)=   "Text5(4)"
-      Tab(8).Control(16)=   "txtauxTfno(5)"
-      Tab(8).Control(17)=   "txtauxTfno(4)"
-      Tab(8).Control(18)=   "FrameTelefonia(0)"
-      Tab(8).Control(19)=   "txtauxTfno(3)"
-      Tab(8).Control(20)=   "txtauxTfno(2)"
-      Tab(8).Control(21)=   "txtauxTfno(1)"
-      Tab(8).Control(22)=   "txtauxTfno(0)"
+      Tab(8).Control(0)=   "Label1(128)"
+      Tab(8).Control(1)=   "Label1(95)"
+      Tab(8).Control(2)=   "Label1(99)"
+      Tab(8).Control(3)=   "Label1(98)"
+      Tab(8).Control(4)=   "Label2(1)"
+      Tab(8).Control(5)=   "Label1(96)"
+      Tab(8).Control(6)=   "Label1(97)"
+      Tab(8).Control(7)=   "imgBuscar(18)"
+      Tab(8).Control(8)=   "imgBuscar(19)"
+      Tab(8).Control(9)=   "imgBuscar(20)"
+      Tab(8).Control(10)=   "Label1(100)"
+      Tab(8).Control(11)=   "Label1(101)"
+      Tab(8).Control(12)=   "Label1(102)"
+      Tab(8).Control(13)=   "imgBuscar(21)"
+      Tab(8).Control(14)=   "imgFechaTf(9)"
+      Tab(8).Control(15)=   "imgFechaTf(10)"
+      Tab(8).Control(16)=   "Label1(103)"
+      Tab(8).Control(17)=   "Label1(20)"
+      Tab(8).Control(18)=   "Line1"
+      Tab(8).Control(19)=   "Label5"
+      Tab(8).Control(20)=   "Label1(127)"
+      Tab(8).Control(21)=   "imgFechaTf(16)"
+      Tab(8).Control(22)=   "lwTfnoCuotas"
       Tab(8).Control(23)=   "DataGrid3"
-      Tab(8).Control(24)=   "lwTfnoCuotas"
-      Tab(8).Control(25)=   "imgFechaTf(16)"
-      Tab(8).Control(26)=   "Label1(127)"
-      Tab(8).Control(27)=   "Label5"
-      Tab(8).Control(28)=   "Line1"
-      Tab(8).Control(29)=   "Label1(20)"
-      Tab(8).Control(30)=   "Label1(103)"
-      Tab(8).Control(31)=   "imgFechaTf(10)"
-      Tab(8).Control(32)=   "imgFechaTf(9)"
-      Tab(8).Control(33)=   "imgBuscar(21)"
-      Tab(8).Control(34)=   "Label1(102)"
-      Tab(8).Control(35)=   "Label1(101)"
-      Tab(8).Control(36)=   "Label1(100)"
-      Tab(8).Control(37)=   "imgBuscar(20)"
-      Tab(8).Control(38)=   "imgBuscar(19)"
-      Tab(8).Control(39)=   "imgBuscar(18)"
-      Tab(8).Control(40)=   "Label1(97)"
-      Tab(8).Control(41)=   "Label1(96)"
-      Tab(8).Control(42)=   "Label2(1)"
-      Tab(8).Control(43)=   "Label1(98)"
-      Tab(8).Control(44)=   "Label1(99)"
-      Tab(8).Control(45)=   "Label1(95)"
-      Tab(8).Control(46)=   "Label1(128)"
+      Tab(8).Control(24)=   "txtauxTfno(0)"
+      Tab(8).Control(25)=   "txtauxTfno(1)"
+      Tab(8).Control(26)=   "txtauxTfno(2)"
+      Tab(8).Control(27)=   "txtauxTfno(3)"
+      Tab(8).Control(28)=   "FrameTelefonia(0)"
+      Tab(8).Control(29)=   "txtauxTfno(4)"
+      Tab(8).Control(30)=   "txtauxTfno(5)"
+      Tab(8).Control(31)=   "Text5(4)"
+      Tab(8).Control(32)=   "Text5(5)"
+      Tab(8).Control(33)=   "txtauxTfno(6)"
+      Tab(8).Control(34)=   "Text5(6)"
+      Tab(8).Control(35)=   "txtauxTfno(7)"
+      Tab(8).Control(36)=   "txtauxTfno(8)"
+      Tab(8).Control(37)=   "txtauxTfno(9)"
+      Tab(8).Control(38)=   "txtauxTfno(10)"
+      Tab(8).Control(39)=   "FrameTelefonia(1)"
+      Tab(8).Control(40)=   "cboOperadorTfnnia2(1)"
+      Tab(8).Control(41)=   "cboOperadorTfnnia2(0)"
+      Tab(8).Control(42)=   "FrameModuloVtaPlazos"
+      Tab(8).Control(43)=   "FrameToolAux(5)"
+      Tab(8).Control(44)=   "cboOperadorTfnnia2(2)"
+      Tab(8).Control(45)=   "cboFiltroTfno"
+      Tab(8).Control(46)=   "txtauxTfno(16)"
       Tab(8).ControlCount=   47
       TabCaption(9)   =   "Fito"
       TabPicture(9)   =   "frmFacClientesGr.frx":0108
       Tab(9).ControlEnabled=   0   'False
-      Tab(9).Control(0)=   "FrameToolAux(3)"
-      Tab(9).Control(1)=   "cboFitos(1)"
-      Tab(9).Control(2)=   "chkManiProv"
-      Tab(9).Control(3)=   "txtauxFito(5)"
-      Tab(9).Control(4)=   "cmdFitos(0)"
-      Tab(9).Control(5)=   "Text1(58)"
-      Tab(9).Control(6)=   "txtauxFito(4)"
-      Tab(9).Control(7)=   "txtauxFito(0)"
-      Tab(9).Control(8)=   "cboFitos(0)"
-      Tab(9).Control(9)=   "txtauxFito(1)"
-      Tab(9).Control(10)=   "txtauxFito(2)"
-      Tab(9).Control(11)=   "txtauxFito(3)"
-      Tab(9).Control(12)=   "Text1(57)"
-      Tab(9).Control(13)=   "cboManipulador"
-      Tab(9).Control(14)=   "DataGrid4"
-      Tab(9).Control(15)=   "Label1(124)"
-      Tab(9).Control(16)=   "ImageFito(4)"
-      Tab(9).Control(17)=   "Label1(115)"
-      Tab(9).Control(18)=   "ImageFito(3)"
-      Tab(9).Control(19)=   "ImageFito(2)"
-      Tab(9).Control(20)=   "ImageFito(1)"
-      Tab(9).Control(21)=   "ImageFito(0)"
-      Tab(9).Control(22)=   "Label1(109)"
-      Tab(9).Control(23)=   "Label1(108)"
-      Tab(9).Control(24)=   "Label1(107)"
-      Tab(9).Control(25)=   "Label1(105)"
-      Tab(9).Control(26)=   "imgFecha(6)"
-      Tab(9).Control(27)=   "Label1(104)"
-      Tab(9).Control(28)=   "Label1(35)"
-      Tab(9).Control(29)=   "Label1(33)"
+      Tab(9).Control(0)=   "Label1(33)"
+      Tab(9).Control(1)=   "Label1(35)"
+      Tab(9).Control(2)=   "Label1(104)"
+      Tab(9).Control(3)=   "imgFecha(6)"
+      Tab(9).Control(4)=   "Label1(105)"
+      Tab(9).Control(5)=   "Label1(107)"
+      Tab(9).Control(6)=   "Label1(108)"
+      Tab(9).Control(7)=   "Label1(109)"
+      Tab(9).Control(8)=   "ImageFito(0)"
+      Tab(9).Control(9)=   "ImageFito(1)"
+      Tab(9).Control(10)=   "ImageFito(2)"
+      Tab(9).Control(11)=   "ImageFito(3)"
+      Tab(9).Control(12)=   "Label1(115)"
+      Tab(9).Control(13)=   "ImageFito(4)"
+      Tab(9).Control(14)=   "Label1(124)"
+      Tab(9).Control(15)=   "DataGrid4"
+      Tab(9).Control(16)=   "cboManipulador"
+      Tab(9).Control(17)=   "Text1(57)"
+      Tab(9).Control(18)=   "txtauxFito(3)"
+      Tab(9).Control(19)=   "txtauxFito(2)"
+      Tab(9).Control(20)=   "txtauxFito(1)"
+      Tab(9).Control(21)=   "cboFitos(0)"
+      Tab(9).Control(22)=   "txtauxFito(0)"
+      Tab(9).Control(23)=   "txtauxFito(4)"
+      Tab(9).Control(24)=   "Text1(58)"
+      Tab(9).Control(25)=   "cmdFitos(0)"
+      Tab(9).Control(26)=   "txtauxFito(5)"
+      Tab(9).Control(27)=   "chkManiProv"
+      Tab(9).Control(28)=   "cboFitos(1)"
+      Tab(9).Control(29)=   "FrameToolAux(3)"
       Tab(9).ControlCount=   30
       TabCaption(10)  =   "Marja"
       TabPicture(10)  =   "frmFacClientesGr.frx":0124
       Tab(10).ControlEnabled=   0   'False
-      Tab(10).Control(0)=   "FrameToolAux(6)"
-      Tab(10).Control(1)=   "cbomarjal"
-      Tab(10).Control(2)=   "txtauxMarja(6)"
-      Tab(10).Control(3)=   "txtauxMarja(8)"
-      Tab(10).Control(4)=   "txtauxMarja(9)"
-      Tab(10).Control(5)=   "txtauxMarja(5)"
-      Tab(10).Control(6)=   "txtauxMarja(7)"
-      Tab(10).Control(7)=   "txtauxMarja(4)"
-      Tab(10).Control(8)=   "txtauxMarja(3)"
-      Tab(10).Control(9)=   "txtauxMarja(2)"
+      Tab(10).Control(0)=   "imgFechaCampos(7)"
+      Tab(10).Control(1)=   "Label1(110)"
+      Tab(10).Control(2)=   "Label1(111)"
+      Tab(10).Control(3)=   "imgFechaCampos(8)"
+      Tab(10).Control(4)=   "Label1(112)"
+      Tab(10).Control(5)=   "imgFechaCampos(9)"
+      Tab(10).Control(6)=   "Label1(113)"
+      Tab(10).Control(7)=   "Label4(1)"
+      Tab(10).Control(8)=   "DataGrid5"
+      Tab(10).Control(9)=   "txtauxMarja(0)"
       Tab(10).Control(10)=   "txtauxMarja(1)"
-      Tab(10).Control(11)=   "txtauxMarja(0)"
-      Tab(10).Control(12)=   "DataGrid5"
-      Tab(10).Control(13)=   "Label4(1)"
-      Tab(10).Control(14)=   "Label1(113)"
-      Tab(10).Control(15)=   "imgFechaCampos(9)"
-      Tab(10).Control(16)=   "Label1(112)"
-      Tab(10).Control(17)=   "imgFechaCampos(8)"
-      Tab(10).Control(18)=   "Label1(111)"
-      Tab(10).Control(19)=   "Label1(110)"
-      Tab(10).Control(20)=   "imgFechaCampos(7)"
+      Tab(10).Control(11)=   "txtauxMarja(2)"
+      Tab(10).Control(12)=   "txtauxMarja(3)"
+      Tab(10).Control(13)=   "txtauxMarja(4)"
+      Tab(10).Control(14)=   "txtauxMarja(7)"
+      Tab(10).Control(15)=   "txtauxMarja(5)"
+      Tab(10).Control(16)=   "txtauxMarja(9)"
+      Tab(10).Control(17)=   "txtauxMarja(8)"
+      Tab(10).Control(18)=   "txtauxMarja(6)"
+      Tab(10).Control(19)=   "cbomarjal"
+      Tab(10).Control(20)=   "FrameToolAux(6)"
       Tab(10).ControlCount=   21
       TabCaption(11)  =   "Taximetro"
       TabPicture(11)  =   "frmFacClientesGr.frx":0140
@@ -8632,13 +8632,13 @@ Private Sub cmdAccCRM_Click(Index As Integer)
         Select Case CByte(RecuperaValor(lwCRM.Tag, 1))
         Case 0
             'NUEVA, modificar o insertar acciones comerciales
-            frmCRMMto.DesdeElCliente = Data1.Recordset!Codclien
+            frmCRMMto.DesdeElCliente = Data1.Recordset!codClien
             frmCRMMto.TipoPredefinido = 0  'sin tipo predefinido
             frmCRMMto.DatosADevolverBusqueda = ""   'NUEVA
             frmCRMMto.Show vbModal
         Case 1
             'NUEVA llamda EFECTUADA
-            frmCRMMto.DesdeElCliente = Data1.Recordset!Codclien
+            frmCRMMto.DesdeElCliente = Data1.Recordset!codClien
             frmCRMMto.TipoPredefinido = 1  'Llamada efectuada
             frmCRMMto.DatosADevolverBusqueda = ""   'NUEVA
             frmCRMMto.Show vbModal
@@ -8654,7 +8654,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
             frmCrmObsDpto.Nuevo = True
             frmCrmObsDpto.Label2.Caption = Data1.Recordset!NomClien
             frmCrmObsDpto.Label2.Font.Size = IIf(Len(Data1.Recordset!NomClien) > 30, 11, 13)
-            frmCrmObsDpto.Tag = Data1.Recordset!Codclien
+            frmCrmObsDpto.Tag = Data1.Recordset!codClien
             frmCrmObsDpto.Show vbModal
             
         Case 4
@@ -8679,7 +8679,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
             BuscaChekc = ""
         Case 5
             'NUEVA entrada en Historial
-            frmCRMMto.DesdeElCliente = Data1.Recordset!Codclien
+            frmCRMMto.DesdeElCliente = Data1.Recordset!codClien
             frmCRMMto.TipoPredefinido = 2  'Historial
             frmCRMMto.DatosADevolverBusqueda = ""   'NUEVA
             frmCRMMto.Show vbModal
@@ -8694,7 +8694,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
             If lwCRM.SelectedItem Is Nothing Then Exit Sub
             If MsgBox("¿Desea eliminar las observaciones del departamento " & Me.lwCRM.SelectedItem.Text & "?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
             
-            BuscaChekc = "DELETE from scrmobsclien  WHERE codclien = " & Me.Data1.Recordset!Codclien & " AND dpto=" & lwCRM.SelectedItem.SubItems(3)
+            BuscaChekc = "DELETE from scrmobsclien  WHERE codclien = " & Me.Data1.Recordset!codClien & " AND dpto=" & lwCRM.SelectedItem.SubItems(3)
             If ejecutar(BuscaChekc, False) Then CargaDatosLWCRM
             BuscaChekc = ""
         ElseIf CByte(RecuperaValor(lwCRM.Tag, 1)) = 6 Then
@@ -9140,7 +9140,7 @@ Dim NombreModificado As Boolean
                         
                             'Deberiamos comprobar si la proxima fecha de facturacion para este cliente es
                             'anterior a la fecha de alta
-                            BuscaChekc = DevuelveDesdeBD(conAri, "max(ultfec)", "sclienrenting", "codclien", CStr(Data1.Recordset!Codclien))
+                            BuscaChekc = DevuelveDesdeBD(conAri, "max(ultfec)", "sclienrenting", "codclien", CStr(Data1.Recordset!codClien))
                             If BuscaChekc <> "" Then
                                 If data5.Recordset!fecalta > CDate(BuscaChekc) Then
                                     'No muesto el msg. Ya lo he hecho en datosoklinea
@@ -9490,7 +9490,7 @@ Private Sub BotonAnyadir()
         If Text1(11).Text = "" Then Text1(11).Text = vParamAplic.PorDefecto_Zona
         Text1_LostFocus 11
     End If
-    If vParamAplic.PorDefecto_Ruta > 0 Then
+    If vParamAplic.PorDefecto_Ruta >= 0 Then
         If Text1(12).Text = "" Then Text1(12).Text = vParamAplic.PorDefecto_Ruta
         Text1_LostFocus 12
     End If
@@ -9532,10 +9532,10 @@ Dim campo As String
     campo = "select codclien from sclien   WHERE codClien > 1900"
     miRsAux.Open campo, conn, adOpenKeyset, adLockReadOnly, adCmdText
     
-    ID = miRsAux!Codclien
+    ID = miRsAux!codClien
      While Not miRsAux.EOF
             
-            If miRsAux!Codclien = ID Then
+            If miRsAux!codClien = ID Then
               ID = ID + 1
             
          Else
@@ -9562,13 +9562,13 @@ On Error GoTo eBuscarHuecoCliente
     NumRegElim = -1
     While Not miRsAux.EOF
         
-        If (miRsAux!Codclien - miRsAux!rownum) > 0 Then
-            NumRegElim = miRsAux!Codclien - 1
+        If (miRsAux!codClien - miRsAux!rownum) > 0 Then
+            NumRegElim = miRsAux!codClien - 1
             'Este es el codigo
             miRsAux.MoveLast
         Else
             'No hacemos nada
-            NumRegElim = miRsAux!Codclien + 1
+            NumRegElim = miRsAux!codClien + 1
         End If
         miRsAux.MoveNext
     Wend
@@ -10076,7 +10076,7 @@ Dim i As Integer
        
        
     If vParamAplic.Renting Then
-        Cad = "codclien = " & Data1.Recordset!Codclien & " AND coddirec"
+        Cad = "codclien = " & Data1.Recordset!codClien & " AND coddirec"
         Cad = DevuelveDesdeBD(conAri, "count(*)", "sclienrenting", Cad, CStr(Data2.Recordset.Fields(0)), "N")
         If Cad = "" Then Cad = "0"
         If Val(Cad) > 0 Then
@@ -10086,7 +10086,7 @@ Dim i As Integer
     End If
        
     If vParamAplic.TieneTelefonia2 > 0 Then
-        Cad = "codclien = " & Data1.Recordset!Codclien & " AND coddirec"
+        Cad = "codclien = " & Data1.Recordset!codClien & " AND coddirec"
         Cad = DevuelveDesdeBD(conAri, "count(*)", "sclientfno", Cad, CStr(Data2.Recordset.Fields(0)), "N")
         If Cad = "" Then Cad = "0"
         If Val(Cad) > 0 Then
@@ -10120,7 +10120,7 @@ Dim i As Integer
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
         NumRegElim = Data2.Recordset.AbsolutePosition
-        Cad = "DELETE FROM sdirec WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE FROM sdirec WHERE codclien =" & Data1.Recordset!codClien
         Cad = Cad & " AND coddirec=" & Data2.Recordset!CodDirec
         conn.Execute Cad
         
@@ -10183,7 +10183,7 @@ Dim i As Integer
         NumRegElim = Data3.Recordset.AbsolutePosition
         
         
-        Cad = "DELETE FROM sdirenvio WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE FROM sdirenvio WHERE codclien =" & Data1.Recordset!codClien
         Cad = Cad & " AND coddiren=" & Data3.Recordset!coddiren
         conn.Execute Cad
         
@@ -12012,7 +12012,7 @@ Dim Seleccionado As Long
             
             
             If vParamAplic.PtosAsignar > 0 Then
-                BuscaChekc = DevuelveDesdeBD(conAri, "puntos", "sclien", "codclien", Data1.Recordset!Codclien)
+                BuscaChekc = DevuelveDesdeBD(conAri, "puntos", "sclien", "codclien", Data1.Recordset!codClien)
                 If BuscaChekc = "" Then BuscaChekc = "0"
                 If DBLet(Data1.Recordset!Puntos, "N") <> CCur(BuscaChekc) Then
                     'Ha cambiado puntos.
@@ -12084,7 +12084,7 @@ Dim Seleccionado As Long
         'Precios especiales
         'No creamos instancias
 
-        frmFacPreciosEspecial.CadenaSituarData = "'" & DevNombreSQL(lw1.SelectedItem.Text) & "'|" & Data1.Recordset!Codclien & "|"
+        frmFacPreciosEspecial.CadenaSituarData = "'" & DevNombreSQL(lw1.SelectedItem.Text) & "'|" & Data1.Recordset!codClien & "|"
         frmFacPreciosEspecial.Show vbModal
         
     Case 6
@@ -12134,14 +12134,14 @@ Dim i As Integer
     Case 0
         'Aciones comerciales
         ' modificar o insertar acciones comerciales
-        frmCRMMto.DesdeElCliente = Data1.Recordset!Codclien
+        frmCRMMto.DesdeElCliente = Data1.Recordset!codClien
         
         frmCRMMto.TipoPredefinido = 0  'sin tipo predefinido
         If Val(Me.lwCRM.SelectedItem.SubItems(4)) = 3 Then frmCRMMto.TipoPredefinido = 3  'Renovacion
         
         
         frmCRMMto.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & _
-            " AND scrmacciones.Tipo = " & lwCRM.SelectedItem.SubItems(4) & " And codClien = " & Data1.Recordset!Codclien
+            " AND scrmacciones.Tipo = " & lwCRM.SelectedItem.SubItems(4) & " And codClien = " & Data1.Recordset!codClien
         frmCRMMto.Show vbModal
     Case 1
         'Llamadas
@@ -12155,9 +12155,9 @@ Dim i As Integer
         Else
             'Lee de acciones realizadas con tipo=1 .....
             
-            frmCRMMto.DesdeElCliente = Data1.Recordset!Codclien
+            frmCRMMto.DesdeElCliente = Data1.Recordset!codClien
             frmCRMMto.TipoPredefinido = 1 'Llamadas realizadas
-            frmCRMMto.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & " AND scrmacciones.Tipo = 1 And codClien = " & Data1.Recordset!Codclien
+            frmCRMMto.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & " AND scrmacciones.Tipo = 1 And codClien = " & Data1.Recordset!codClien
             frmCRMMto.Show vbModal
             
         End If
@@ -12179,11 +12179,11 @@ Dim i As Integer
     Case 3
         frmCrmObsDpto.Nuevo = False
         BuscaChekc = "dpto = " & Me.lwCRM.SelectedItem.SubItems(3) & " AND codclien "
-        CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "observa", "scrmobsclien", BuscaChekc, CStr(Data1.Recordset!Codclien))
+        CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "observa", "scrmobsclien", BuscaChekc, CStr(Data1.Recordset!codClien))
         
         frmCrmObsDpto.Dpto = CByte(Me.lwCRM.SelectedItem.SubItems(3))
         frmCrmObsDpto.Label2.Caption = Data1.Recordset!NomClien
-        frmCrmObsDpto.Tag = Data1.Recordset!Codclien
+        frmCrmObsDpto.Tag = Data1.Recordset!codClien
         frmCrmObsDpto.Show vbModal
         
     Case 4
@@ -12194,9 +12194,9 @@ Dim i As Integer
             frmCRMReclamas.Show vbModal
     
     Case 5
-            frmCRMMto.DesdeElCliente = Data1.Recordset!Codclien
+            frmCRMMto.DesdeElCliente = Data1.Recordset!codClien
             frmCRMMto.TipoPredefinido = 2 'Historial
-            frmCRMMto.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & " AND scrmacciones.Tipo = 2 And codClien = " & Data1.Recordset!Codclien
+            frmCRMMto.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & " AND scrmacciones.Tipo = 2 And codClien = " & Data1.Recordset!codClien
             frmCRMMto.Show vbModal
     End Select
     Me.Refresh
@@ -13632,7 +13632,7 @@ Private Function DatosOkLinea() As Boolean
         End If
 
         'Comprobaremos que la linea que ha puesto no es mayor que uno ya facturado
-        BuscaChekc = DevuelveDesdeBD(conAri, "max(ultfec)", "sclienrenting", "codclien", CStr(Data1.Recordset!Codclien))
+        BuscaChekc = DevuelveDesdeBD(conAri, "max(ultfec)", "sclienrenting", "codclien", CStr(Data1.Recordset!codClien))
         If BuscaChekc <> "" Then
             If CDate(txtauxRent(4).Text) >= CDate(BuscaChekc) Then
                 If MsgBox("Peridodo no facturado.No se generara factura. ¿Continuar?", vbQuestion + vbYesNo) = vbNo Then Exit Function
@@ -14553,11 +14553,11 @@ Dim C As ColumnHeader
     Case 2, 3
         'ALBARANES
         If OpcionList = 3 Then
-            LabelDOC.Caption = "Facturas"
+            LabelDoc.Caption = "Facturas"
             Columnas = "Forma de pago" & IIf(vParamAplic.TieneTelefonia2 > 0, "/ Tfno", "")
             cmdImprimeFraCli.visible = True
         Else
-            LabelDOC.Caption = "Albaranes"
+            LabelDoc.Caption = "Albaranes"
             Columnas = "Referencia"
         End If
         Columnas = "Tipo|Numero|Fecha|" & Columnas & "|Importe|"
@@ -14571,10 +14571,10 @@ Dim C As ColumnHeader
     Case 0, 1
         'OFERTAS  y PEDIDOS. Tienen la msimas colimnas (aprox)
         If OpcionList = 0 Then
-            LabelDOC.Caption = "Ofertas"
+            LabelDoc.Caption = "Ofertas"
             Columnas = "Acep."
         Else
-            LabelDOC.Caption = "Pedidos"
+            LabelDoc.Caption = "Pedidos"
             Columnas = "Visado"
         End If
         Columnas = "Numero|Fecha |Fec. entrega|" & Columnas & "|Referencia|Importe|"
@@ -14589,7 +14589,7 @@ Dim C As ColumnHeader
         
     Case 4
         'PRECIOS ESPECIALES
-        LabelDOC.Caption = "Precios especiales"
+        LabelDoc.Caption = "Precios especiales"
         Columnas = "Artículo|Descripcion |Precio|F. cambio|Nuevo|"
         Ancho = "1800|4200|1550|1400|1550|"
         'vwColumnRight =1  left=0   center=2
@@ -14599,7 +14599,7 @@ Dim C As ColumnHeader
         Ncol = 5
     Case 5
         'DTO FAMILIA MARCA
-        LabelDOC.Caption = "Dto Familia/Marca"
+        LabelDoc.Caption = "Dto Familia/Marca"
         Columnas = "Fecha|Dto1|Dto2|Familia|Marca|"
         Ancho = "1800|1000|1000|3800|2200|"
         'vwColumnRight =1  left=0   center=2
@@ -14610,7 +14610,7 @@ Dim C As ColumnHeader
         
     Case 6
         'DOCUMENTOS ASOCIADOS AL CLIENTE
-        LabelDOC.Caption = "Documentos asociados"
+        LabelDoc.Caption = "Documentos asociados"
         Columnas = "orden|Descripción|docum|codigo|leido|TipoDoc|"
         Ancho = "1000|8000|0|0|0|0|"
         'vwColumnRight =1  left=0   center=2
@@ -14623,7 +14623,7 @@ Dim C As ColumnHeader
         
         
     Case 7
-        LabelDOC.Caption = "Puntos ventas"
+        LabelDoc.Caption = "Puntos ventas"
         'numero,codtipom,numalbar,fechaalb,concepto,puntos
         Columnas = "Fecha|Descripción|Tipo|Id|puntos|saldo|"
         Ancho = "1800|3000|600|1900|1100|2000|"
@@ -14662,7 +14662,7 @@ Dim bs As Byte
     bs = Screen.MousePointer
     Screen.MousePointer = vbHourglass
     C = Me.lblIndicador.Caption
-    lblIndicador.Caption = "Leyendo " & LabelDOC.Caption
+    lblIndicador.Caption = "Leyendo " & LabelDoc.Caption
     lblIndicador.Refresh
     CargaDatosLWDoc2
     Me.lblIndicador.Caption = C
@@ -14719,7 +14719,7 @@ Dim CargaCatalogos As Boolean
         'OFERTAS
         Cad = "select c.numofert,c.fecofert,fecentre,if(aceptado=1,""SI"","" ""),referenc ,sum(importel), 0 HCO from scapre c,slipre l where"
         Cad = Cad & " c.numofert=l.numofert "
-        Cad = Cad & " and codclien=" & Data1.Recordset!Codclien
+        Cad = Cad & " and codclien=" & Data1.Recordset!codClien
         Cad = Cad & " and fecofert >='" & Format(imgFecha(3).Tag, FormatoFecha) & "'"
         
         'Truco. Si es un agente, solo puede ver las suyas
@@ -14795,7 +14795,7 @@ Dim CargaCatalogos As Boolean
     
     If Not EsDTOFam Then
             'EL where del codclien
-            Cad = Cad & " and codclien=" & Data1.Recordset!Codclien
+            Cad = Cad & " and codclien=" & Data1.Recordset!codClien
             
             'La fecha
             If BuscaChekc <> "" Then
@@ -14829,7 +14829,7 @@ Dim CargaCatalogos As Boolean
             End If
     Else
         'Para familia marca
-        Cad = Cad & " (codclien=" & Data1.Recordset!Codclien & " AND codactiv is null)"
+        Cad = Cad & " (codclien=" & Data1.Recordset!codClien & " AND codactiv is null)"
         Cad = Cad & " OR (codactiv = " & Data1.Recordset!codactiv & " AND codclien is null)"
     End If
     BuscaChekc = ""
@@ -14886,7 +14886,7 @@ Dim CargaCatalogos As Boolean
             'Para familia /dto
             If EsDTOFam Then
                 'Si codclien es >0 then
-                If DBLet(RS!Codclien, "N") > 0 Then IT.Bold = True
+                If DBLet(RS!codClien, "N") > 0 Then IT.Bold = True
             End If
             
             If TemaPuntos Then
@@ -15233,7 +15233,7 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
     Case 0
         'Acciones comerciales
         Cad = "select fechora ,usuario,estado ,scrmacciones.medio ,tipo,denominacion from scrmacciones,scrmtipo WHERE scrmacciones.tipo= scrmtipo.codigo "
-        Cad = Cad & " and codclien=" & Data1.Recordset!Codclien
+        Cad = Cad & " and codclien=" & Data1.Recordset!codClien
         
         'Los tipo 1 y dos NO van aqui. El 3, que es RENOVACION TFNO SI
         Cad = Cad & " AND (tipo>=3 or tipo > 20)"  'las 20 primerasprobablemebne no sepongan aqui
@@ -15243,7 +15243,7 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
         'Llamadas
         Cad = "select feholla,usuario,nomllama1,observac,date_format(feholla,""%Y%m%d%H%i%s"") from sllama,sllama1  where"
         Cad = Cad & " sllama.codllama1 = sllama1.codllama1"
-        Cad = Cad & " and codclien=" & Data1.Recordset!Codclien
+        Cad = Cad & " and codclien=" & Data1.Recordset!codClien
         GroupBy = ""
         BuscaChekc = "feholla"
     
@@ -15281,7 +15281,7 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
     Case 3
         'Observaciones departamento
         Cad = "select if(dpto=1,""Administracion"",if(dpto=2,""Comercial"",if(dpto=3,""SAT"",""Dirección""))),fecha,observa,dpto from scrmobsclien"
-        Cad = Cad & " WHERE codclien=" & Data1.Recordset!Codclien
+        Cad = Cad & " WHERE codclien=" & Data1.Recordset!codClien
         BuscaChekc = "dpto"
         
     Case 4
@@ -15304,7 +15304,7 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
         'Historial
         Cad = "select fechora ,usuario,nomtraba ,observaciones,date_format(fechora,""%Y%m%d%H%i%s"") from"
         Cad = Cad & " scrmacciones left join straba on scrmacciones.codtraba=straba.codtraba "
-        Cad = Cad & " WHERE scrmacciones.tipo=2  and codclien= " & Data1.Recordset!Codclien   '2 DE historial
+        Cad = Cad & " WHERE scrmacciones.tipo=2  and codclien= " & Data1.Recordset!codClien   '2 DE historial
         GroupBy = ""
         BuscaChekc = "fechora"
     End Select
@@ -15416,7 +15416,7 @@ Dim ConexionConta As Boolean  'Si no es conta es ARIGES( conn)
         'Llamadas. Las efectuadas las hago desde este punto
         Cad = "select fechora ,usuario,nomtraba ,observaciones,date_format(fechora,""%Y%m%d%H%i%s"") from"
         Cad = Cad & " scrmacciones left join straba on scrmacciones.codtraba=straba.codtraba "
-        Cad = Cad & " WHERE scrmacciones.tipo=1  and codclien= " & Data1.Recordset!Codclien
+        Cad = Cad & " WHERE scrmacciones.tipo=1  and codclien= " & Data1.Recordset!codClien
         RS.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not RS.EOF
             '
@@ -15491,7 +15491,7 @@ Dim TieneDatosDpto As Boolean
     'Como lanzamos el programa
     '*************************  dbariges|codclien|nombre||||mails que se utlizan|
     If TieneDatosDpto Then
-        BuscaChekc = "Select distinct(maidirec) from sdirec where codclien=" & Data1.Recordset!Codclien & " AND maidirec <>"""""
+        BuscaChekc = "Select distinct(maidirec) from sdirec where codclien=" & Data1.Recordset!codClien & " AND maidirec <>"""""
         Set miRsAux = New ADODB.Recordset
         miRsAux.Open BuscaChekc, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     End If
@@ -15511,7 +15511,7 @@ Dim TieneDatosDpto As Boolean
         miRsAux.Close
     End If
     
-    BuscaChekc = vUsu.CadenaConexion & "|" & Data1.Recordset!Codclien & "|" & CStr(Data1.Recordset!NomClien) & "||||" & BuscaChekc
+    BuscaChekc = vUsu.CadenaConexion & "|" & Data1.Recordset!codClien & "|" & CStr(Data1.Recordset!NomClien) & "||||" & BuscaChekc
     
     Shell App.Path & "\AriOutlook.exe " & BuscaChekc, vbNormalFocus
     
@@ -17911,7 +17911,7 @@ Private Sub LanzaFrmDireccionEnvio()
     Set frmDptoEnvio2 = New frmFacCliEnvDpto
     frmDptoEnvio2.DireccionesEnvio = True
     frmDptoEnvio2.VerDatoDpto = -1
-    frmDptoEnvio2.Codclien = CLng(Text1(0).Text)
+    frmDptoEnvio2.codClien = CLng(Text1(0).Text)
     frmDptoEnvio2.NomClien = Text1(1).Text
     frmDptoEnvio2.Show vbModal
     Set frmDptoEnvio2 = Nothing
@@ -18004,7 +18004,7 @@ Private Sub ImprimirHcoPuntos()
     frmListado3.OtrosDatos = ""
     If Modo = 2 Then
         If Not Data1.Recordset.EOF Then
-            If Not IsNull(Data1.Recordset!Codclien) Then frmListado3.OtrosDatos = Data1.Recordset!Codclien & "|" & Data1.Recordset!NomClien & "|"
+            If Not IsNull(Data1.Recordset!codClien) Then frmListado3.OtrosDatos = Data1.Recordset!codClien & "|" & Data1.Recordset!NomClien & "|"
         End If
     End If
     frmListado3.Show vbModal
@@ -18049,7 +18049,7 @@ Dim SQL As String
                         'CargarPuntos otra vez
                         'Veremos si ha cambiado los puntos
                         
-                        SQL = DevuelveDesdeBDNew(conAri, "sclien", "puntos", "codclien", CStr(Data1.Recordset!Codclien))
+                        SQL = DevuelveDesdeBDNew(conAri, "sclien", "puntos", "codclien", CStr(Data1.Recordset!codClien))
                         If SQL = "" Then SQL = "0"
                         If CCur(SQL) <> DBLet(Data1.Recordset!Puntos, "N") Then
                             PosicionarData
@@ -18399,64 +18399,64 @@ Dim Cad As String
 
     EliminardeBD = False
 
-        Cad = "DELETE FROM scliendp WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE FROM scliendp WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
             
         
         
-        Cad = "DELETE FROM slimana WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE FROM slimana WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
         
-        Cad = "DELETE FROM scamana WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE FROM scamana WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
         
         '
         'schped  slhped    numpedcl  fecpedcl   numpedcl  fecpedcl
-        Cad = "DELETE from slhped WHERE (numpedcl,fecpedcl) IN (select numpedcl,fecpedcl from schped WHERE codclien =" & Data1.Recordset!Codclien & ")"
+        Cad = "DELETE from slhped WHERE (numpedcl,fecpedcl) IN (select numpedcl,fecpedcl from schped WHERE codclien =" & Data1.Recordset!codClien & ")"
         conn.Execute Cad
-        Cad = "DELETE from schped WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE from schped WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
         
         'schpre slhpre numofert  fecofert
-        Cad = "DELETE from slhpre WHERE (numofert,fecofert) IN (select numofert,fecofert from schpre WHERE codclien =" & Data1.Recordset!Codclien & ")"
+        Cad = "DELETE from slhpre WHERE (numofert,fecofert) IN (select numofert,fecofert from schpre WHERE codclien =" & Data1.Recordset!codClien & ")"
         conn.Execute Cad
-        Cad = "DELETE from schpre WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE from schpre WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
         
         'OFERTAS scapre slipre numofert  fecofert
-        Cad = "DELETE from slipre WHERE (numofert) IN (select numofert from scapre WHERE codclien =" & Data1.Recordset!Codclien & ")"
+        Cad = "DELETE from slipre WHERE (numofert) IN (select numofert from scapre WHERE codclien =" & Data1.Recordset!codClien & ")"
         conn.Execute Cad
-        Cad = "DELETE from scapre WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE from scapre WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
         
         
         
         'schalb  schalb_eu  slhalb   slhalb_eu   codtipom,numalbar,fechaalb   codtipom,numalbar,fechaalb1
-        Cad = "DELETE from slhalb WHERE (codtipom,numalbar,fechaalb) IN (select codtipom,numalbar,fechaalb from schalb WHERE codclien =" & Data1.Recordset!Codclien & ")"
+        Cad = "DELETE from slhalb WHERE (codtipom,numalbar,fechaalb) IN (select codtipom,numalbar,fechaalb from schalb WHERE codclien =" & Data1.Recordset!codClien & ")"
         conn.Execute Cad
-        Cad = "DELETE from slhalb_eu WHERE (codtipom,numalbar) IN (select codtipom,numalbar from schalb WHERE codclien =" & Data1.Recordset!Codclien & ")"
+        Cad = "DELETE from slhalb_eu WHERE (codtipom,numalbar) IN (select codtipom,numalbar from schalb WHERE codclien =" & Data1.Recordset!codClien & ")"
         conn.Execute Cad
-        Cad = "DELETE from schalb_eu WHERE (codtipom,numalbar,fechaalb1) IN (select codtipom,numalbar,fechaalb from schalb WHERE codclien =" & Data1.Recordset!Codclien & ")"
+        Cad = "DELETE from schalb_eu WHERE (codtipom,numalbar,fechaalb1) IN (select codtipom,numalbar,fechaalb from schalb WHERE codclien =" & Data1.Recordset!codClien & ")"
         conn.Execute Cad
-        Cad = "DELETE from schalb WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE from schalb WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
         
         
         
         
-        Cad = "DELETE FROM scliendp WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE FROM scliendp WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
         
         
         'TAXCO
         If vParamAplic.NumeroInstalacion = vbTaxco Then
-            Cad = "DELETE FROM sclien_taxi WHERE codclien =" & Data1.Recordset!Codclien
+            Cad = "DELETE FROM sclien_taxi WHERE codclien =" & Data1.Recordset!codClien
             conn.Execute Cad
         End If
         
         
         '###El cliente
-        Cad = "DELETE FROM sclien WHERE codclien =" & Data1.Recordset!Codclien
+        Cad = "DELETE FROM sclien WHERE codclien =" & Data1.Recordset!codClien
         conn.Execute Cad
                 
                 

@@ -20,7 +20,7 @@ Begin VB.Form frmFacEntPedidosGR
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameFiltro 
       Height          =   705
-      Left            =   9120
+      Left            =   9720
       TabIndex        =   122
       Top             =   0
       Width           =   3135
@@ -44,7 +44,7 @@ Begin VB.Form frmFacEntPedidosGR
    End
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
-      Left            =   6660
+      Left            =   7260
       TabIndex        =   120
       Top             =   0
       Width           =   2415
@@ -87,14 +87,14 @@ Begin VB.Form frmFacEntPedidosGR
       Left            =   3480
       TabIndex        =   118
       Top             =   0
-      Width           =   3135
+      Width           =   3735
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   120
          TabIndex        =   119
          Top             =   150
-         Width           =   2805
-         _ExtentX        =   4948
+         Width           =   3525
+         _ExtentX        =   6218
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -102,23 +102,29 @@ Begin VB.Form frmFacEntPedidosGR
          Style           =   1
          _Version        =   393216
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   6
+            NumButtons      =   8
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Generar albaran"
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Orden de instalacion"
+               Object.ToolTipText     =   "Generar factura"
             EndProperty
             BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Confirmar entrega"
+               Style           =   3
             EndProperty
             BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Pasar a oferta"
+               Object.ToolTipText     =   "Orden de instalacion"
             EndProperty
             BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Copiar pedido"
+               Object.ToolTipText     =   "Confirmar entrega"
             EndProperty
             BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Pasar a oferta"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Copiar pedido"
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Crea pedido proveedor"
             EndProperty
          EndProperty
@@ -200,7 +206,7 @@ Begin VB.Form frmFacEntPedidosGR
       EndProperty
       Height          =   360
       Index           =   56
-      Left            =   14160
+      Left            =   14280
       MaxLength       =   15
       TabIndex        =   115
       Text            =   "Text1 7"
@@ -224,12 +230,12 @@ Begin VB.Form frmFacEntPedidosGR
       ForeColor       =   &H00008000&
       Height          =   285
       Index           =   0
-      Left            =   13320
+      Left            =   12960
       MaxLength       =   15
       TabIndex        =   114
       Text            =   "TOTAL"
       Top             =   255
-      Width           =   765
+      Width           =   1245
    End
    Begin VB.CheckBox chkVistaPrevia 
       Caption         =   "Vista previa"
@@ -2126,7 +2132,7 @@ Begin VB.Form frmFacEntPedidosGR
             Style           =   2  'Dropdown List
             TabIndex        =   108
             Tag             =   "Estado|N|N|||scaped|estado||N|"
-            Top             =   2400
+            Top             =   2340
             Width           =   1815
          End
          Begin VB.CheckBox chkPedPorCliente 
@@ -2228,7 +2234,7 @@ Begin VB.Form frmFacEntPedidosGR
             Tag             =   "E-mail confirmación|T|S|||scaped|mailconfir||N|"
             Text            =   "Text1 wwwwwwwwwwwwwwwwwwwwwwwwww aqteter"
             Top             =   2400
-            Width           =   5760
+            Width           =   6000
          End
          Begin VB.CheckBox chkRecogeClien 
             Caption         =   "Recoge cliente"
@@ -2410,7 +2416,7 @@ Begin VB.Form frmFacEntPedidosGR
             Tag             =   "Referencia Cliente|T|S|||scaped|referenc||N|"
             Text            =   "Text1 Text1 Text1 Te"
             Top             =   1881
-            Width           =   4125
+            Width           =   3765
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -2553,7 +2559,7 @@ Begin VB.Form frmFacEntPedidosGR
             Style           =   2  'Dropdown List
             TabIndex        =   21
             Tag             =   "Tipo Facturación|N|N|||scaped|tipofact||N|"
-            Top             =   2310
+            Top             =   2340
             Width           =   2175
          End
          Begin VB.TextBox Text1 
@@ -3279,13 +3285,13 @@ Begin VB.Form frmFacEntPedidosGR
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
          Bindings        =   "frmFacEntPedidosGR.frx":F3F0
-         Height          =   3840
+         Height          =   4080
          Left            =   240
          TabIndex        =   57
-         Top             =   3960
+         Top             =   3840
          Width           =   17175
          _ExtentX        =   30295
-         _ExtentY        =   6773
+         _ExtentY        =   7197
          _Version        =   393216
          AllowUpdate     =   -1  'True
          AllowArrows     =   -1  'True
@@ -3294,8 +3300,8 @@ Begin VB.Form frmFacEntPedidosGR
          RowHeight       =   19
          FormatLocked    =   -1  'True
          BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -3997,12 +4003,16 @@ Private Sub cmdCancelar_Click()
             If ModificaLineas = 1 Then 'INSERTAR
                 ModificaLineas = 0
                 DataGrid1.AllowAddNew = False
-                If Not Data2.Recordset.EOF Then Data2.Recordset.MoveFirst
+                If Not Data2.Recordset.EOF Then Data2.Recordset.MoveLast
             End If
             ModificaLineas = 0
             LineaIntercalar = 0
-            PonerBotonCabecera True
+            'PonerBotonCabecera True
             Me.DataGrid1.Enabled = True
+            
+            PonerModo 2
+            PonerFoco Text1(0)
+            
             
         Case 6 'Insertar servidas en Generar Albaran (Pedido --> Albaran)
             InicializarServidas
@@ -4677,12 +4687,17 @@ Dim Im
         .ImageList = frmPpal.ImgListComun2
         
         .Buttons(1).Image = 21 ' gen fac
-        .Buttons(2).Image = 30 ' orden de instalacion
-        .Buttons(3).Image = 23 ' confirmacion de entrga
-        .Buttons(4).Image = 11 ' pasaro a oferta
-        .Buttons(5).Image = 20 ' duplicar pedido
-        .Buttons(6).Image = 22 ' crea pedido proveedor
-        '.Buttons(7).Image = 20 ' 'ordenadr lineas
+        .Buttons(2).Image = 42 'Generar factura desde el pedido
+        
+        .Buttons(4).Image = 30 ' orden de instalacion
+        .Buttons(5).Image = 23 ' confirmacion de entrga
+        .Buttons(6).Image = 11 ' pasaro a oferta
+        .Buttons(7).Image = 20 ' duplicar pedido
+        .Buttons(8).Image = 22 ' crea pedido proveedor
+        
+        
+        
+        
         
     End With
 
@@ -4754,15 +4769,10 @@ Dim Im
     'Vemos como esta guardado el valor del check
     chkVistaPrevia.Value = CheckValueLeer(Name)
     
-    If vParamAplic.NumeroInstalacion = vbFenollar Then
-        chkRecogeClien.Left = 30000
-        chkPedPorCliente.Left = 30000
-        Me.Text1(13).Width = 4125
-    Else
-        chkRecogeClien.Left = 3900
-        chkPedPorCliente.Left = 5580
-        Me.Text1(13).Width = 2565
-    End If
+    'chkRecogeClien.Left = 3900
+    'chkPedPorCliente.Left = 5580
+   ' Me.Text1(13).Width = 2565
+
     
     
     If DatosADevolverBusqueda2 = "" Then
@@ -5886,35 +5896,35 @@ End Sub
 
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-Dim Ind As Integer
+Dim ind As Integer
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     If Index <> 33 And Index <> 34 Then KEYdown KeyCode
     
         
     If KeyCode = 43 Or KeyCode = 107 Or KeyCode = 187 Then
         If Text1(Index).Text = "" Then
-            Ind = -1
+            ind = -1
             Select Case Index
             Case 3
-                Ind = 3
+                ind = 3
             Case 4
-                Ind = 0
+                ind = 0
             Case 6
-                Ind = 1
+                ind = 1
             Case 9
-                Ind = 6
+                ind = 6
             Case 12
-                Ind = 2
+                ind = 2
             Case 17
-                Ind = 5
+                ind = 5
             Case 14
-                Ind = 4
+                ind = 4
             Case 32
-                Ind = 9
+                ind = 9
             End Select
-            If Ind >= 0 Then
+            If ind >= 0 Then
                 PulsadoMas2 = True
-                PulsarTeclaMas True, Ind
+                PulsarTeclaMas True, ind
             End If
         End If
     End If
@@ -6099,7 +6109,7 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim aux2 As String
+Dim Aux2 As String
 Dim cadB As String
 
     cadB = ObtenerBusqueda(Me, False)
@@ -6115,11 +6125,11 @@ Dim cadB As String
         
     
     If EsHistorico Then
-        aux2 = DevuelveBusquedaLineas
-        If aux2 <> "" Then
+        Aux2 = DevuelveBusquedaLineas
+        If Aux2 <> "" Then
             If cadB <> "" Then cadB = cadB & " AND "
             
-            cadB = cadB & " " & NombreTabla & ".numpedcl IN (SELECT distinct numpedcl FROM " & NomTablaLineas & " WHERE " & aux2 & ")"
+            cadB = cadB & " " & NombreTabla & ".numpedcl IN (SELECT distinct numpedcl FROM " & NomTablaLineas & " WHERE " & Aux2 & ")"
         End If
     End If
     
@@ -6344,10 +6354,9 @@ Dim B As Boolean
     
     lblF.Caption = ""
     
-    'Actualiza Iconos Insertar,Modificar,Eliminar
-    ActualizarToolbarGnral Me.Toolbar1, Modo, Kmodo, btnAnyadir
-    
+  
     Modo = Kmodo
+    
     PonerIndicador lblIndicador, Modo
     
     If Modo = 6 Then Me.lblIndicador.Caption = "Insertar Cant. Servidas"
@@ -6369,7 +6378,7 @@ Dim B As Boolean
     End If
     Me.ToolbarDes.visible = NumReg > 1
     ToolbarDes.Enabled = NumReg > 1
-        
+    If B Then DataLabelIndicador Me.Data1, lblIndicador
         
         
         
@@ -7490,7 +7499,7 @@ Dim i As Byte
 
         'Fijamos altura(Height) y posición Top
         '-------------------------------
-        alto = ObtenerAlto(DataGrid1, 10)
+        alto = ObtenerAlto(DataGrid1, 30)
         
         For i = 0 To txtAux.Count - 1
             txtAux(i).Top = alto
@@ -7663,15 +7672,19 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
     
     Select Case Button.Index
     Case 1
-        mnGeneraFactura_Click
+        mnGenAlbaran_Click
     Case 2
-        mnImpOrde_Click
-    Case 3
-        mnConfirmacion_Click
+        mnGeneraFactura_Click
+        
+        
     Case 4
+        mnImpOrde_Click
+    Case 5
+        mnConfirmacion_Click
+    Case 6
         'pasar a  oferta
         mnPasarA_Oferta_Click
-    Case 5
+    Case 7
         If Modo <> 2 Then Exit Sub
             frmListado2.Opcion = 51
             frmListado2.Show vbModal
@@ -7680,12 +7693,11 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
                 CopiarPedido
                 Screen.MousePointer = vbDefault
             End If
-    Case 6
+    Case 8
            'Crear pedido proveedor
             CreaPedidoProveedor
         
-    Case 7
-        'reordenar no hay nada
+    
     End Select
     
 End Sub
@@ -8376,8 +8388,9 @@ Dim i As Byte
         Toolbar1.Buttons(2).Enabled = B  'modificar
         Toolbar1.Buttons(3).Enabled = B     'eliminar
         
+        If EsHistorico Then B = False
         
-        For i = 1 To 6
+        For i = 1 To 8
             Toolbar2.Buttons(i).Enabled = B
         Next
     
@@ -11729,8 +11742,11 @@ Dim vNu As CTiposMov
     txtAnterior = txtAnterior & "proclien,nifclien,telclien,coddirec,nomdirec,referenc,codtraba,codagent,codforpa,dtoppago,dtognral,tipofact,"
     txtAnterior = txtAnterior & "plazos01,plazos02,plazos03,asunto01,asunto02,asunto03,asunto04,asunto05,"
     txtAnterior = txtAnterior & "observa01,observa02,observa03,observa04,observa05,observacrm)"
-
-    txtAnterior = txtAnterior & " select numofert,fecofert,fecentre,0,codclien,nomclien,domclien,codpobla,pobclien,"
+    
+    'Herbelca oferta con fecha del dia
+    txtAnterior = txtAnterior & " SELECT  numofert,"
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then txtAnterior = txtAnterior & DBSet(Now, "F") & " as "
+    txtAnterior = txtAnterior & " fecofert ,fecentre,0,codclien,nomclien,domclien,codpobla,pobclien,"
     txtAnterior = txtAnterior & "proclien,nifclien,telclien,coddirec,nomdirec,referenc,codtraba,codagent,codforpa,dtoppago,dtognral,"
     txtAnterior = txtAnterior & "tipofact , Null, Null, Null, Null, Null, Null, Null, Null, observa01, observa02, observa03, observa04, observa05, observacrm"
     txtAnterior = txtAnterior & " from " & NombreTabla & " where numpedcl=" & Data1.Recordset!NumPedcl
@@ -11755,8 +11771,11 @@ eTrasapasarAOfertas:
     
     If Bien Then
         conn.CommitTrans
-        TituloLinea = "Numero: " & Text1(24).Text & "       Fecha: " & Text1(25).Text
+        TituloLinea = "Numero: " & Text1(24).Text & "       Fecha: " & IIf(vParamAplic.NumeroInstalacion = vbHerbelca, Format(Now, "dd/mm/yyyy"), Text1(25).Text)
         MsgBox "Oferta generada" & vbCrLf & TituloLinea, vbInformation
+       
+        
+        
         
         NumRegElim = Data1.Recordset.AbsolutePosition
         
@@ -12073,14 +12092,17 @@ Dim B As Boolean
     '   5.-  Mantenimiento Lineas
     B = False
     
-    If Modo = 2 Then
-        B = True
+    If EsHistorico Then
+        B = False
     Else
-        If Modo = 5 Then
-            'If ModificaLineas > 0 Then b = T
+        If Modo = 2 Then
+            B = True
+        Else
+            If Modo = 5 Then
+                'If ModificaLineas > 0 Then b = T
+            End If
         End If
     End If
-
         
         
     

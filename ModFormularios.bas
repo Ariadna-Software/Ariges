@@ -63,55 +63,55 @@ Public Sub BloquearText1(ByRef Formulario As Form, Modo As Byte)
 'si estamos en modo modificar bloquea solo los campos que son clave primaria
 'IN ->  formulario: formulario en el que se van a poner los controles textbox en modo visualización
 '       Modo: modo del mantenimiento (Insertar, Modificar,Buscar...)
-Dim I As Byte
-Dim b As Boolean
+Dim i As Byte
+Dim B As Boolean
 Dim vtag As cTag
 On Error Resume Next
 
     With Formulario
-        b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'And ModoLineas = 1))
+        B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'And ModoLineas = 1))
         
-        For I = 0 To .Text1.Count - 1 'En principio todos los TExt1 tiene TAG
+        For i = 0 To .Text1.Count - 1 'En principio todos los TExt1 tiene TAG
             Set vtag = New cTag
-            vtag.Cargar .Text1(I)
+            vtag.Cargar .Text1(i)
             If vtag.Cargado Then
                 If vtag.EsClave And (Modo = 2 Or Modo = 4 Or Modo = 5) Then
-                    .Text1(I).Locked = True
-                    .Text1(I).BackColor = &H80000018 'amarillo claro
+                    .Text1(i).Locked = True
+                    .Text1(i).BackColor = &H80000018 'amarillo claro
                 Else
-                    .Text1(I).Locked = Not b  '((Not b) And (Modo <> 1))
-                    If b Then
-                        .Text1(I).BackColor = vbWhite
+                    .Text1(i).Locked = Not B  '((Not b) And (Modo <> 1))
+                    If B Then
+                        .Text1(i).BackColor = vbWhite
                     Else
-                        .Text1(I).BackColor = &H80000018 'amarillo claro
+                        .Text1(i).BackColor = &H80000018 'amarillo claro
                     End If
-                    If Modo = 3 Then .Text1(I).Text = "" 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
+                    If Modo = 3 Then .Text1(i).Text = "" 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
                 End If
             Else
-                .Text1(I).Locked = Not b  '((Not b) And (Modo <> 1))
-                If b Then
-                    .Text1(I).BackColor = vbWhite
+                .Text1(i).Locked = Not B  '((Not b) And (Modo <> 1))
+                If B Then
+                    .Text1(i).BackColor = vbWhite
                 Else
-                    .Text1(I).BackColor = &H80000018 'amarillo claro
+                    .Text1(i).BackColor = &H80000018 'amarillo claro
                 End If
             End If
         Set vtag = Nothing
-        Next I
+        Next i
         
     End With
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
-Public Sub BloquearTxt(ByRef Text As TextBox, b As Boolean, Optional EsContador As Boolean)
+Public Sub BloquearTxt(ByRef Text As TextBox, B As Boolean, Optional EsContador As Boolean)
 'Bloquea un control de tipo TextBox
 'Si lo bloquea lo pone de color amarillo claro sino lo pone en color blanco (sino es contador)
 'pero si es contador lo pone color azul claro
 On Error Resume Next
 
-    Text.Locked = b
-    If Not b And Text.Enabled = False Then Text.Enabled = True
-    If b Then
+    Text.Locked = B
+    If Not B And Text.Enabled = False Then Text.Enabled = True
+    If B Then
         If EsContador Then
             'Si Es un campo que se obtiene de un contador poner color azul
 '            Text.BackColor = &H80000013 'Azul Claro
@@ -126,29 +126,29 @@ On Error Resume Next
 End Sub
 
 
-Public Sub BloquearImg(ByRef imgF As Image, b As Boolean)
+Public Sub BloquearImg(ByRef imgF As Image, B As Boolean)
 On Error Resume Next
 
-    imgF.Enabled = Not b
-    imgF.visible = Not b
+    imgF.Enabled = Not B
+    imgF.visible = Not B
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
-Public Sub BloquearCmb(ByRef cmb As ComboBox, b As Boolean, Optional EsContador As Boolean)
+Public Sub BloquearCmb(ByRef cmb As ComboBox, B As Boolean, Optional EsContador As Boolean)
 'Bloqueja un control de tipo ComboBox
 'Si el bloqueja el posa de color gris claro, sino el posa de color blanc (sino es contador)
 'pero si es contador el posa color blau clar
     On Error Resume Next
 
-    cmb.Locked = b
+    cmb.Locked = B
     cmb.Enabled = True
     
     'cmb.Enabled = Not b
     
     'If Not b And Cmb.Enabled = False Then Cmb.Enabled = True
-    If b Then
+    If B Then
         If EsContador Then
             'Si Es un campo que se obtiene de un contador poner color azul
             cmb.BackColor = &H80000013 'Azul Claro
@@ -168,11 +168,11 @@ Public Sub BloquearChecks(ByRef Formulario As Form, Modo As Byte)
 'Bloquea controles  CheckBox si no estamos en Modo: 3.-Insertar, 4.-Modificar
 'IN ->  formulario: formulario en el que se van a poner los controles textbox en modo visualización
 '       Modo: modo del mantenimiento (Insertar, Modificar,Buscar...)
-Dim b As Boolean
+Dim B As Boolean
 Dim Control As Control
 On Error Resume Next
 
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1)
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1)
     With Formulario
         For Each Control In Formulario.Controls
             If TypeOf Control Is CheckBox Then
@@ -197,7 +197,7 @@ End Sub
 
 
 Public Sub PonerLongCamposGnral(ByRef Formulario As Form, Modo As Byte, Opcion As Byte)
-    Dim I As Integer
+    Dim i As Integer
     
     On Error Resume Next
 
@@ -205,46 +205,46 @@ Public Sub PonerLongCamposGnral(ByRef Formulario As Form, Modo As Byte, Opcion A
         If Modo = 1 Then 'BUSQUEDA
             Select Case Opcion
                 Case 1 'Para los TEXT1
-                    For I = 0 To .Text1.Count - 1
-                        With .Text1(I)
+                    For i = 0 To .Text1.Count - 1
+                        With .Text1(i)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = (.HelpContextID * 2) + 1 'el doble + 1
                             End If
                         End With
-                    Next I
+                    Next i
                 
                 Case 3 'para los TXTAUX
-                    For I = 0 To .txtAux.Count - 1
-                        With .txtAux(I)
+                    For i = 0 To .txtAux.Count - 1
+                        With .txtAux(i)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = (.HelpContextID * 2) + 1 'el doble + 1
                             End If
                         End With
-                    Next I
+                    Next i
             End Select
             
         Else 'resto de modos
             Select Case Opcion
                 Case 1
-                    For I = 0 To .Text1.Count - 1
-                        With .Text1(I)
+                    For i = 0 To .Text1.Count - 1
+                        With .Text1(i)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
                             End If
                         End With
-                    Next I
+                    Next i
                 Case 3
-                    For I = 0 To .txtAux.Count - 1
-                        With .txtAux(I)
+                    For i = 0 To .txtAux.Count - 1
+                        With .txtAux(i)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
                             End If
                         End With
-                    Next I
+                    Next i
             End Select
         End If
     End With
@@ -329,6 +329,16 @@ ESituarDataPosicion:
 End Function
 
 
+Public Sub DataLabelIndicador(ByRef vData As Adodc, ByRef lblIndicador As Label)
+
+On Error Resume Next
+
+        lblIndicador.Caption = ""
+        lblIndicador.Caption = vData.Recordset.AbsolutePosition & " de " & vData.Recordset.RecordCount
+                
+        If Err.Number <> 0 Then Err.Clear
+
+End Sub
 '===========================
 Public Function SituarDataMULTI(ByRef vData As Adodc, vWhere As String, ByRef Indicador As String) As Boolean
 'Situa un DataControl en el registo que cumple vwhere
@@ -736,7 +746,7 @@ Public Sub CargarCombo_Tabla(ByRef CBO As ComboBox, NomTabla As String, NomCodig
 '(IN) ItemNulo: si es true se añade el primer item con linea en blanco
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo ErrCombo
     
@@ -774,11 +784,11 @@ Dim I As Integer
             '- si el codigo NomCodigo en alfanumerico no se puede cargar
             '- el codigo en ItemData y cargamos un indice ficticio
             '- y en el List el campo codigo NomCodigo
-            I = 1
+            i = 1
             While Not RS.EOF
               CBO.AddItem RS.Fields(0).Value 'campo del codigo
-              CBO.ItemData(CBO.NewIndex) = I
-              I = I + 1
+              CBO.ItemData(CBO.NewIndex) = i
+              i = i + 1
               RS.MoveNext
             Wend
         End If
@@ -807,7 +817,7 @@ Public Sub CargarCombo_TipMov(ByRef CBO As ComboBox, NomTabla As String, NomCodi
 '(IN) ItemNulo: si es true se añade el primer item con linea en blanco
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim I As Integer
+Dim i As Integer
 
     On Error GoTo ErrCombo
     
@@ -826,13 +836,13 @@ Dim I As Integer
         CBO.ItemData(CBO.NewIndex) = 0
     End If
        
-    I = 1
+    i = 1
     While Not RS.EOF
         SQL = Replace(RS.Fields(1).Value, "Factura", "Fac.")
         SQL = RS.Fields(0).Value & " - " & SQL
         CBO.AddItem SQL 'campo del codigo
-        CBO.ItemData(CBO.NewIndex) = I
-        I = I + 1
+        CBO.ItemData(CBO.NewIndex) = i
+        i = i + 1
         RS.MoveNext
     Wend
 
@@ -864,17 +874,17 @@ End Function
 
 Public Sub DesplazamientoVisible(ByRef toolb As Toolbar, iniBoton As Byte, bol As Boolean, nreg As Byte)
 'Oculta o Muestra las botones de  flechas de desplazamiento de la toolbar
-Dim I As Byte
+Dim i As Byte
 
     Select Case nreg
         Case 0, 1 '0 o 1 registro no mostrar los botones despl.
-            For I = iniBoton To iniBoton + 3
-                toolb.Buttons(I).visible = False
-            Next I
+            For i = iniBoton To iniBoton + 3
+                toolb.Buttons(i).visible = False
+            Next i
         Case Else '>1 reg, mostrar si bol
-            For I = iniBoton To iniBoton + 3
-                toolb.Buttons(I).visible = bol
-            Next I
+            For i = iniBoton To iniBoton + 3
+                toolb.Buttons(i).visible = bol
+            Next i
     End Select
 End Sub
 
@@ -906,15 +916,15 @@ End Sub
 Public Sub ActualizarToolbarGnral(ByRef Toolbar1 As Toolbar, Modo As Byte, Kmodo As Byte, posic As Byte)
 'Modo: Modo antiguo
 'Kmodo: Modo que se va a poner
-Dim b As Boolean
+Dim B As Boolean
     
     '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN (se añade modo 8)
     '---- [2012] DAVID : Materias activas y equivalencias
-    b = (Modo = 5 Or Modo = 6 Or Modo = 7 Or Modo = 8 Or Modo = 9 Or Modo = 10)
+    B = (Modo = 5 Or Modo = 6 Or Modo = 7 Or Modo = 8 Or Modo = 9 Or Modo = 10)
     
     '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN (se añade modo 8)
     ' 19/12/2011  Modo 9=  Materias activas
-    If (b) And (Kmodo <> 5 And Kmodo <> 6 And Kmodo <> 7 And Kmodo <> 8 And Kmodo <> 9 And Kmodo <> 10) Then  'Cabecera
+    If (B) And (Kmodo <> 5 And Kmodo <> 6 And Kmodo <> 7 And Kmodo <> 8 And Kmodo <> 9 And Kmodo <> 10) Then  'Cabecera
         'El modo antigu era modificando las lineas
         'Luego hay que reestablecer los dibujitos y los TIPS
         '-- insertar
@@ -1004,17 +1014,17 @@ End Sub
 
 
 Public Sub SituarCombo(ByRef CBO As ComboBox, Valor As Long)
-Dim I As Byte
+Dim i As Byte
 
     On Error Resume Next
 
-        For I = 0 To CBO.ListCount - 1
-            If CBO.ItemData(I) = Val(Valor) Then
-                CBO.ListIndex = I
+        For i = 0 To CBO.ListCount - 1
+            If CBO.ItemData(i) = Val(Valor) Then
+                CBO.ListIndex = i
                 Exit For
             End If
-        Next I
-        If I = CBO.ListCount Then CBO.ListIndex = -1
+        Next i
+        If i = CBO.ListCount Then CBO.ListIndex = -1
     
     If Err.Number <> 0 Then
         CBO.ListIndex = -1
@@ -1037,7 +1047,7 @@ End Function
 
 '*********** LAURA : 13/09/2005
 Public Function EsEnteroNew(texto As String) As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim C As Integer
 Dim L As Integer
 Dim res As Boolean
@@ -1052,24 +1062,24 @@ Dim res As Boolean
         C = 0
         L = 1
         Do
-            I = InStr(L, texto, ".")
-            If I > 0 Then
-                L = I + 1
+            i = InStr(L, texto, ".")
+            If i > 0 Then
+                L = i + 1
                 C = C + 1
             End If
-        Loop Until I = 0
+        Loop Until i = 0
         If C > 0 Then res = False
         
         'Si ha puesto mas de una coma y no tiene puntos
         If C = 0 Then
             L = 1
             Do
-                I = InStr(L, texto, ",")
-                If I > 0 Then
-                    L = I + 1
+                i = InStr(L, texto, ",")
+                If i > 0 Then
+                    L = i + 1
                     C = C + 1
                 End If
-            Loop Until I = 0
+            Loop Until i = 0
             If C > 0 Then res = False
         End If
     End If
@@ -1082,7 +1092,7 @@ End Function
 '=================================
 '******** DAVID (NO LA USO)
 Public Function EsEntero(texto As String) As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim C As Integer
 Dim L As Integer
 Dim res As Boolean
@@ -1097,24 +1107,24 @@ Dim res As Boolean
         C = 0
         L = 1
         Do
-            I = InStr(L, texto, ".")
-            If I > 0 Then
-                L = I + 1
+            i = InStr(L, texto, ".")
+            If i > 0 Then
+                L = i + 1
                 C = C + 1
             End If
-        Loop Until I = 0
+        Loop Until i = 0
         If C > 1 Then res = False
         
         'Si ha puesto mas de una coma y no tiene puntos
         If C = 0 Then
             L = 1
             Do
-                I = InStr(L, texto, ",")
-                If I > 0 Then
-                    L = I + 1
+                i = InStr(L, texto, ",")
+                If i > 0 Then
+                    L = i + 1
                     C = C + 1
                 End If
-            Loop Until I = 0
+            Loop Until i = 0
             If C > 1 Then res = False
         End If
         
@@ -1127,7 +1137,7 @@ End Function
 Public Function PonerFormatoEntero(ByRef T As TextBox) As Boolean
 'Comprueba que el valor del textbox es un entero y le pone el formato
 Dim mTag As cTag
-Dim cad As String
+Dim Cad As String
 Dim Formato As String
 On Error GoTo EPonerFormato
 
@@ -1137,14 +1147,14 @@ On Error GoTo EPonerFormato
     Set mTag = New cTag
     mTag.Cargar T
     If mTag.Cargado Then
-       cad = mTag.Nombre 'descripcion del campo
+       Cad = mTag.Nombre 'descripcion del campo
        Formato = mTag.Formato
     End If
     Set mTag = Nothing
 
     If Not EsEnteroNew(T.Text) Then
         PonerFormatoEntero = False
-        MsgBox "El campo " & cad & " tiene que ser un número entero.", vbExclamation
+        MsgBox "El campo " & Cad & " tiene que ser un número entero.", vbExclamation
         PonerFoco T
     Else
          T.Text = Format(T.Text, Formato)
@@ -1483,18 +1493,18 @@ End Function
 
 Public Sub SubirItemList(ByRef LView As ListView)
 'Subir el item seleccionado del listview una posicion
-Dim I As Byte, Item As Byte
+Dim i As Byte, Item As Byte
 Dim Aux As String
 On Error Resume Next
    
-    For I = 2 To LView.ListItems.Count
-        If LView.ListItems(I).Selected Then
-            Item = I
-            Aux = LView.ListItems(I).Text
-            LView.ListItems(I).Text = LView.ListItems(I - 1).Text
-            LView.ListItems(I - 1).Text = Aux
+    For i = 2 To LView.ListItems.Count
+        If LView.ListItems(i).Selected Then
+            Item = i
+            Aux = LView.ListItems(i).Text
+            LView.ListItems(i).Text = LView.ListItems(i - 1).Text
+            LView.ListItems(i - 1).Text = Aux
         End If
-    Next I
+    Next i
     If Item <> 0 Then
         LView.ListItems(Item).Selected = False
         LView.ListItems(Item - 1).Selected = True
@@ -1506,18 +1516,18 @@ End Sub
 
 Public Sub BajarItemList(ByRef LView As ListView)
 'Bajar el item seleccionado del listview una posicion
-Dim I As Byte, Item As Byte
+Dim i As Byte, Item As Byte
 Dim Aux As String
 On Error Resume Next
 
-    For I = 1 To LView.ListItems.Count - 1
-        If LView.ListItems(I).Selected Then
-            Item = I
-            Aux = LView.ListItems(I).Text
-            LView.ListItems(I).Text = LView.ListItems(I + 1).Text
-            LView.ListItems(I + 1).Text = Aux
+    For i = 1 To LView.ListItems.Count - 1
+        If LView.ListItems(i).Selected Then
+            Item = i
+            Aux = LView.ListItems(i).Text
+            LView.ListItems(i).Text = LView.ListItems(i + 1).Text
+            LView.ListItems(i + 1).Text = Aux
         End If
-    Next I
+    Next i
     If Item <> 0 Then
         LView.ListItems(Item).Selected = False
         LView.ListItems(Item + 1).Selected = True
@@ -1568,15 +1578,15 @@ End Sub
 
 
 Public Sub PosicionarComboDes(ByRef CBO As ComboBox, Valor As String)
-Dim I As Byte
+Dim i As Byte
 
-    For I = 0 To CBO.ListCount - 1
-        If Trim(CBO.List(I)) = Trim(Valor) Then
-            CBO.ListIndex = I
+    For i = 0 To CBO.ListCount - 1
+        If Trim(CBO.List(i)) = Trim(Valor) Then
+            CBO.ListIndex = i
             Exit For
         End If
-    Next I
-    If I = CBO.ListCount Then CBO.ListIndex = -1
+    Next i
+    If i = CBO.ListCount Then CBO.ListIndex = -1
     
 End Sub
 
@@ -1673,7 +1683,7 @@ Dim SQL As String
 Dim vClien As CCliente
 Dim vProve As CProveedor
 Dim Aux As String
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo EInsCta
     
@@ -1739,9 +1749,9 @@ Dim b As Boolean
             
             ConnConta.Execute SQL
             cadClien = vClien.Nombre
-            b = True
+            B = True
         Else
-            b = False
+            B = False
         End If
         Set vClien = Nothing
     End If
@@ -1814,9 +1824,9 @@ Dim b As Boolean
             
             ConnConta.Execute SQL
             cadProve = vProve.Nombre
-            b = True
+            B = True
         Else
-            b = False
+            B = False
         End If
         Set vProve = Nothing
     
@@ -1830,16 +1840,16 @@ Dim b As Boolean
         SQL = SQL & ValorNulo & "," & ValorNulo & ")"
         
         ConnConta.Execute SQL
-        b = True
+        B = True
     ' ----
     End If
     
 EInsCta:
     If Err.Number <> 0 Then
-        b = False
+        B = False
         MuestraError Err.Number, "Insertando cuenta contable", Err.Description
     End If
-    InsertarCuentaCble = b
+    InsertarCuentaCble = B
 End Function
 
 
@@ -1849,7 +1859,7 @@ Public Function ModificarCtaContabilidad(esCliente As Boolean, Cuenta As String,
 Dim SQL As String
 Dim vClien As CCliente
 Dim vProve As CProveedor
-Dim b As Boolean
+Dim B As Boolean
 Dim vL As String
 Dim Aux As String
 
@@ -1957,7 +1967,7 @@ Dim Aux As String
             
             
             ConnConta.Execute SQL
-            b = True
+            B = True
             
             
             
@@ -1965,7 +1975,7 @@ Dim Aux As String
             
             
         Else
-            b = False
+            B = False
         End If
         Set vClien = Nothing
     
@@ -2025,19 +2035,19 @@ Dim Aux As String
             
             ConnConta.Execute SQL
             vL = vL & vProve.Nombre
-            b = True
+            B = True
             
             
             
             
             
         Else
-            b = False
+            B = False
         End If
         Set vProve = Nothing
     End If
     
-    If b Then
+    If B Then
         'METEMOS UN LOG
         
         Codigo = InStr(1, SQL, "dirdatos")
@@ -2077,10 +2087,10 @@ Dim Aux As String
     
 EModCta:
     If Err.Number <> 0 Then
-        b = False
+        B = False
         MuestraError Err.Description, "Modificando cuenta contable", Err.Description
     End If
-    ModificarCtaContabilidad = b
+    ModificarCtaContabilidad = B
     
 End Function
 
@@ -2120,13 +2130,13 @@ End Function
 Public Function ComprobarHayStock(stockOrig As Single, stockTras As Single, codArtic As String, NomArtic As String, tipoMov As String)
 'IN: stockOrig: stock existente en almacen Origen
 '    stockTras: stock a traspasar del origen a otro almacen
-Dim b As Boolean
+Dim B As Boolean
 Dim devuelve As String
 
     ComprobarHayStock = False
     If stockOrig >= CSng(stockTras) Then
     'Si cantidad en stock > cantidad a traspasar entonces
-        b = True
+        B = True
     Else    'No hay suficiente stock en almacen origen
         devuelve = "Control de Stock : " & vbCrLf
         devuelve = devuelve & "---------------------- " & vbCrLf & vbCrLf
@@ -2140,7 +2150,7 @@ Dim devuelve As String
         Else
             If vParamAplic.ControlStock Then
             'Si hay control Stock no permitir traspaso
-                b = False
+                B = False
                 Select Case tipoMov
                     Case "REG"
                         devuelve = devuelve & vbCrLf & vbCrLf & " No se puede realizar el Movimiento de Almacen. "
@@ -2156,14 +2166,14 @@ Dim devuelve As String
                     devuelve = devuelve & vbCrLf & vbCrLf & " ¿Desea realizar el Traspaso de Almacen? "
                 End Select
                 If MsgBox(devuelve, vbQuestion + vbYesNo) = vbYes Then
-                    b = True
+                    B = True
                 Else
-                    b = False
+                    B = False
                 End If
             End If
         End If
     End If
-    ComprobarHayStock = b
+    ComprobarHayStock = B
 End Function
 
 

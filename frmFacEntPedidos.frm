@@ -4675,35 +4675,35 @@ End Sub
 
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-Dim Ind As Integer
+Dim ind As Integer
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     If Index <> 33 And Index <> 34 Then KEYdown KeyCode
     
         
     If KeyCode = 43 Or KeyCode = 107 Or KeyCode = 187 Then
         If Text1(Index).Text = "" Then
-            Ind = -1
+            ind = -1
             Select Case Index
             Case 3
-                Ind = 3
+                ind = 3
             Case 4
-                Ind = 0
+                ind = 0
             Case 6
-                Ind = 1
+                ind = 1
             Case 9
-                Ind = 6
+                ind = 6
             Case 12
-                Ind = 2
+                ind = 2
             Case 17
-                Ind = 5
+                ind = 5
             Case 14
-                Ind = 4
+                ind = 4
             Case 32
-                Ind = 9
+                ind = 9
             End Select
-            If Ind >= 0 Then
+            If ind >= 0 Then
                 PulsadoMas2 = True
-                PulsarTeclaMas True, Ind
+                PulsarTeclaMas True, ind
             End If
         End If
     End If
@@ -4888,7 +4888,7 @@ End Sub
 
 
 Private Sub HacerBusqueda()
-Dim aux2 As String
+Dim Aux2 As String
 Dim cadB As String
 
     cadB = ObtenerBusqueda(Me, False)
@@ -4911,11 +4911,11 @@ Dim cadB As String
         
     
     If EsHistorico Then
-        aux2 = DevuelveBusquedaLineas
-        If aux2 <> "" Then
+        Aux2 = DevuelveBusquedaLineas
+        If Aux2 <> "" Then
             If cadB <> "" Then cadB = cadB & " AND "
             
-            cadB = cadB & " " & NombreTabla & ".numpedcl IN (SELECT distinct numpedcl FROM " & NomTablaLineas & " WHERE " & aux2 & ")"
+            cadB = cadB & " " & NombreTabla & ".numpedcl IN (SELECT distinct numpedcl FROM " & NomTablaLineas & " WHERE " & Aux2 & ")"
         End If
     End If
     
@@ -10425,10 +10425,13 @@ Dim vNu As CTiposMov
     txtAnterior = txtAnterior & "plazos01,plazos02,plazos03,asunto01,asunto02,asunto03,asunto04,asunto05,"
     txtAnterior = txtAnterior & "observa01,observa02,observa03,observa04,observa05,observacrm)"
 
-    txtAnterior = txtAnterior & " select numofert,fecofert,fecentre,0,codclien,nomclien,domclien,codpobla,pobclien,"
+    txtAnterior = txtAnterior & " SELECT numofert,"
+    'Herbelca oferta con fecha del dia
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then txtAnterior = txtAnterior & DBSet(Now, "F") & " as "
+    txtAnterior = txtAnterior & " fecofert ,fecentre,0,codclien,nomclien,domclien,codpobla,pobclien,"
     txtAnterior = txtAnterior & "proclien,nifclien,telclien,coddirec,nomdirec,referenc,codtraba,codagent,codforpa,dtoppago,dtognral,"
     txtAnterior = txtAnterior & "tipofact , Null, Null, Null, Null, Null, Null, Null, Null, observa01, observa02, observa03, observa04, observa05, observacrm"
-    txtAnterior = txtAnterior & " from " & NombreTabla & " where numpedcl=" & Data1.Recordset!NumPedcl
+    txtAnterior = txtAnterior & " FROM " & NombreTabla & " WHERE numpedcl=" & Data1.Recordset!NumPedcl
     conn.Execute txtAnterior
 
     txtAnterior = "insert into slipre(numofert,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,"
@@ -10450,7 +10453,7 @@ eTrasapasarAOfertas:
     
     If Bien Then
         conn.CommitTrans
-        TituloLinea = "Numero: " & Text1(24).Text & "       Fecha: " & Text1(25).Text
+        TituloLinea = "Numero: " & Text1(24).Text & "       Fecha: " & IIf(vParamAplic.NumeroInstalacion = vbHerbelca, Format(Now, "dd/mm/yyyy"), Text1(25).Text)
         MsgBox "Oferta generada" & vbCrLf & TituloLinea, vbInformation
         
         NumRegElim = Data1.Recordset.AbsolutePosition
