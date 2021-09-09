@@ -272,6 +272,7 @@ Begin VB.Form frmFacHcoFacturas2
       _Version        =   393216
       Style           =   1
       Tabs            =   4
+      Tab             =   3
       TabsPerRow      =   4
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -285,11 +286,9 @@ Begin VB.Form frmFacHcoFacturas2
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmFacHcoFacturas.frx":0A0E
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "FrameCliente"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "FrameFactura"
-      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "FrameFactura"
+      Tab(0).Control(1)=   "FrameCliente"
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmFacHcoFacturas.frx":0A2A
@@ -360,27 +359,32 @@ Begin VB.Form frmFacHcoFacturas2
       TabCaption(2)   =   "Costes"
       TabPicture(2)   =   "frmFacHcoFacturas.frx":0A46
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "lwCostes"
-      Tab(2).Control(1)=   "cmdLineasCostes(2)"
-      Tab(2).Control(2)=   "cmdLineasCostes(0)"
-      Tab(2).Control(3)=   "cmdLineasCostes(1)"
-      Tab(2).Control(4)=   "txtCostes(0)"
-      Tab(2).Control(5)=   "txtCostes(1)"
-      Tab(2).Control(6)=   "txtCostes(2)"
-      Tab(2).Control(7)=   "txtCostes(3)"
-      Tab(2).Control(8)=   "txtCostes(4)"
-      Tab(2).Control(9)=   "txtCostes(5)"
-      Tab(2).Control(10)=   "txtCostes(6)"
-      Tab(2).Control(11)=   "txtCostes(7)"
+      Tab(2).Control(0)=   "txtCostes(7)"
+      Tab(2).Control(1)=   "txtCostes(6)"
+      Tab(2).Control(2)=   "txtCostes(5)"
+      Tab(2).Control(3)=   "txtCostes(4)"
+      Tab(2).Control(4)=   "txtCostes(3)"
+      Tab(2).Control(5)=   "txtCostes(2)"
+      Tab(2).Control(6)=   "txtCostes(1)"
+      Tab(2).Control(7)=   "txtCostes(0)"
+      Tab(2).Control(8)=   "cmdLineasCostes(1)"
+      Tab(2).Control(9)=   "cmdLineasCostes(0)"
+      Tab(2).Control(10)=   "cmdLineasCostes(2)"
+      Tab(2).Control(11)=   "lwCostes"
       Tab(2).ControlCount=   12
       TabCaption(3)   =   "Impresion lineas"
       TabPicture(3)   =   "frmFacHcoFacturas.frx":0A62
-      Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "cmdLineasImpresion(3)"
-      Tab(3).Control(1)=   "cmdLineasImpresion(2)"
+      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).Control(0)=   "lwEulerLineas"
+      Tab(3).Control(0).Enabled=   0   'False
+      Tab(3).Control(1)=   "cmdLineasImpresion(0)"
+      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).Control(2)=   "cmdLineasImpresion(1)"
-      Tab(3).Control(3)=   "cmdLineasImpresion(0)"
-      Tab(3).Control(4)=   "lwEulerLineas"
+      Tab(3).Control(2).Enabled=   0   'False
+      Tab(3).Control(3)=   "cmdLineasImpresion(2)"
+      Tab(3).Control(3).Enabled=   0   'False
+      Tab(3).Control(4)=   "cmdLineasImpresion(3)"
+      Tab(3).Control(4).Enabled=   0   'False
       Tab(3).ControlCount=   5
       Begin VB.CommandButton cmdInsertaAlbaranCostes 
          Height          =   375
@@ -396,7 +400,7 @@ Begin VB.Form frmFacHcoFacturas2
       Begin VB.CommandButton cmdLineasImpresion 
          Height          =   375
          Index           =   3
-         Left            =   -73080
+         Left            =   1920
          Style           =   1  'Graphical
          TabIndex        =   235
          ToolTipText     =   "Imprimir factura lineas"
@@ -406,7 +410,7 @@ Begin VB.Form frmFacHcoFacturas2
       Begin VB.CommandButton cmdLineasImpresion 
          Height          =   375
          Index           =   2
-         Left            =   -73920
+         Left            =   1080
          Style           =   1  'Graphical
          TabIndex        =   234
          ToolTipText     =   "Eliminar"
@@ -416,7 +420,7 @@ Begin VB.Form frmFacHcoFacturas2
       Begin VB.CommandButton cmdLineasImpresion 
          Height          =   375
          Index           =   1
-         Left            =   -74400
+         Left            =   600
          Style           =   1  'Graphical
          TabIndex        =   233
          ToolTipText     =   "Modificar"
@@ -426,7 +430,7 @@ Begin VB.Form frmFacHcoFacturas2
       Begin VB.CommandButton cmdLineasImpresion 
          Height          =   375
          Index           =   0
-         Left            =   -74880
+         Left            =   120
          Style           =   1  'Graphical
          TabIndex        =   232
          ToolTipText     =   "Insertar "
@@ -1474,7 +1478,7 @@ Begin VB.Form frmFacHcoFacturas2
       End
       Begin VB.Frame FrameFactura 
          Height          =   1980
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   65
          Top             =   3120
          Width           =   12255
@@ -2086,7 +2090,7 @@ Begin VB.Form frmFacHcoFacturas2
          Caption         =   "Datos Cliente"
          ForeColor       =   &H00972E0B&
          Height          =   2295
-         Left            =   960
+         Left            =   -74040
          TabIndex        =   44
          Top             =   600
          Width           =   12255
@@ -3094,7 +3098,7 @@ Begin VB.Form frmFacHcoFacturas2
       End
       Begin MSComctlLib.ListView lwEulerLineas 
          Height          =   3495
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   231
          Top             =   1320
          Width           =   13695

@@ -16173,6 +16173,11 @@ Dim Aux As String
     NomTabla = "UPDATE tmpnlotes SET codalmac = 66 WHERE codusu = " & vUsu.Codigo & " AND numalbar= 'FTI'"
     conn.Execute NomTabla
     
+    'Proyectos
+    NomTabla = "UPDATE tmpnlotes SET codalmac = 89 WHERE codusu = " & vUsu.Codigo & " AND numalbar= 'FPY'"
+    conn.Execute NomTabla
+    
+    
     
     If vParamAplic.NumeroInstalacion = vbTaxco Then
         'Facturas alvic
@@ -16562,7 +16567,7 @@ Dim C_Aux As String
             
             
             'Ha copiado, luego yo la pongo como en facturaE
-            cadFormula = "UPDATE scafac set EnFacturaE=1 WHERE codtipom='" & RS!Numalbar & "' AND numfactu=" & RS!codArtic
+            cadFormula = "UPDATE scafac set EnFacturaE=1, nomrpt=coalesce(nomrpt," & DBSet(NumCod, "T") & ") WHERE codtipom='" & RS!Numalbar & "' AND numfactu=" & RS!codArtic
             cadFormula = cadFormula & " AND fecfactu='" & Format(RS!FechaAlb, FormatoFecha) & "'"
             ejecutar cadFormula, False
         End If
