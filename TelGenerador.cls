@@ -1165,7 +1165,7 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
                     mSQL = mSQL & mdbFac2.numero(mLinea) & "," ' Número de línea
                     mSQL = mSQL & mdbFac2.Fecha(mrs1!Fecha_inicio_cuotas) & "," ' Fecha inicio del consumo
                     mSQL = mSQL & mdbFac2.Fecha(mrs1!Fecha_final_cuotas) & "," ' Fecha final del consumo
-                    mSQL = mSQL & mdbFac2.texto(mrs1!Codigo_de_cuota) & "," ' código de la cuota correspondiente
+                    mSQL = mSQL & mdbFac2.texto(mrs1!codigo_de_cuota) & "," ' código de la cuota correspondiente
                     mSQL = mSQL & mdbFac2.texto(mrs1!Descripcion_de_cuota) & "," ' Fecha
                     'MAYO 2013. Metemos el 0 al final para el tipo de IVA(0=normal  1=exento)
                     mSQL = mSQL & mdbFac2.numero(mrs1!SumaDeImporte) & ",0," ' importe de la cuota correspondiente
@@ -1175,7 +1175,7 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
                     
                     mdbFac2.ejecutar mSQL
                     '-- Calculamos si hay algún descuento aplicable
-                    mDescuento = buscaDescuentos(0, mrs1!SumaDeImporte, mrs1!Codigo_de_cuota, mPorcentaje)
+                    mDescuento = buscaDescuentos(0, mrs1!SumaDeImporte, mrs1!codigo_de_cuota, mPorcentaje)
                     If mDescuento <> 0 Then
                         '-- Hay descuento aplicable
                         mSQL = "insert into tel_lin_factura_descuentos values("
@@ -2631,7 +2631,7 @@ Dim idC As Long
     While Not Rc.EOF
         Cad = TransformaComasPuntos(CStr(Rc!Valor))
         Cad = "UPDATE telefono.cuotas SET importe = " & Cad
-        Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!Codigo_de_cuota, "T")
+        Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!codigo_de_cuota, "T")
         conn.Execute Cad
         Rc.MoveNext
     Wend
@@ -2669,12 +2669,12 @@ Dim idC As Long
         Importe2 = 0 '% para guardar
         While Not Rc.EOF
             
-            If vSQL <> Rc!Codigo_de_cuota Then
-                vSQL = DevuelveDesdeBD(conAri, "Valor", "tel_descuentoscuotas", "codigo_de_cuota", CStr(Rc!Codigo_de_cuota), "T")
+            If vSQL <> Rc!codigo_de_cuota Then
+                vSQL = DevuelveDesdeBD(conAri, "Valor", "tel_descuentoscuotas", "codigo_de_cuota", CStr(Rc!codigo_de_cuota), "T")
                 If vSQL = "" Then vSQL = "100"
                 Importe2 = CCur(vSQL)
                     
-                vSQL = Rc!Codigo_de_cuota
+                vSQL = Rc!codigo_de_cuota
             End If
             i = Rc!Dias
             If i > 30 Then i = 30
@@ -2687,7 +2687,7 @@ Dim idC As Long
             
             Cad = "UPDATE telefono.cuotas SET libre=" & TransformaComasPuntos(CStr(Rc!Importe))
             Cad = Cad & ",importe = " & TransformaComasPuntos(CStr(Importe3))
-            Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!Codigo_de_cuota, "T")
+            Cad = Cad & " WHERE Fichero =" & DBSet(mfichero, "T") & " AND Codigo_de_cuota = " & DBSet(Rc!codigo_de_cuota, "T")
             Cad = Cad & " AND Numero_de_telefono =" & DBSet(Rc!Numero_de_telefono, "T")
             conn.Execute Cad
             Rc.MoveNext
@@ -2912,7 +2912,7 @@ Dim idC As Long
             CadenaDesdeOtroForm = vSQL & "|" & TipoFicheroOperador & "|" & mfichero & "|"
                 
             'Lanzamos el visor donde sal
-            frmVarios3.Opcion = 3
+            frmVarios3.opcion = 3
             frmVarios3.Show vbModal
     
             
@@ -3059,7 +3059,7 @@ Dim C As String
     RS.Open C, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     C = ""
     While Not RS.EOF
-        C = C & ", " & DBSet(RS!Codigo_de_cuota, "T")
+        C = C & ", " & DBSet(RS!codigo_de_cuota, "T")
         RS.MoveNext
     Wend
     RS.Close
@@ -3322,7 +3322,7 @@ Dim IdLinDetalle As Long
                         If Tipo > 1 And Tipo < 10 Then  '2 al 9 detalles de llamada
                             InsertarTramoDetalleLlamdas IdLinDetalle, Tipo, Tramo, LB
                         Else
-                            OrangeInsertBdTelefono Tipo, Tramo
+                            OrangeInsertBdTelefono Tipo, Tramo, LB
                         End If
                     End If
                 End If
@@ -3485,7 +3485,7 @@ End Function
 
 
 
-Private Sub OrangeInsertBdTelefono(Tipo As Byte, Tramo As String)
+Private Sub OrangeInsertBdTelefono(Tipo As Byte, Tramo As String, ByRef Lbl As Label)
 Dim Aux As String
 Dim i As Integer
 Dim F As Date
@@ -3589,6 +3589,9 @@ Dim linea As String
                 Aux = Replace(Aux, ";", "|")
                 linea = Aux
                 
+                Lbl.Caption = Mid(Aux, 1, 30)
+                Lbl.Refresh
+                
                 i = i + 1                                                '300 pq el de movistar viene un 300
                 CadenaInsert = CadenaInsert & ", ('" & mFicheroCorto & "','300'," & i & ",'" & mFicheroCorto & "','"
                 'Numero de telefono
@@ -3608,7 +3611,7 @@ Dim linea As String
                 'Desde la poscion 3 a la 10 van los distintos cargos.
                 'Si la suma no coincide es que se la ha sumado un cargo de consumo minimo
                 
-                
+                Debug.Print linea
                 Importe = 0
                 For H = 3 To 12
                     Aux = RecuperaValor(linea, H)

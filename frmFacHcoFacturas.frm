@@ -4617,13 +4617,18 @@ Dim Aux As String
                 BuscaChekc = "0"
                 Aux = "HORAS TRABAJADAS"
             Else
-                If lwCostes.SelectedItem.Text = "ALB" Or lwCostes.SelectedItem.Text = "MAT" Then
-                    BuscaChekc = "1"
+                If lwCostes.SelectedItem.Text = "VEH" Then
+                    BuscaChekc = "3"
+                    Aux = "Gastos vehiculo"
                 Else
-                    'Proveedor
-                    BuscaChekc = "2"
+                    If lwCostes.SelectedItem.Text = "ALB" Or lwCostes.SelectedItem.Text = "MAT" Then
+                        BuscaChekc = "1"
+                    Else
+                        'Proveedor
+                        BuscaChekc = "2"
+                    End If
+                    Aux = lwCostes.SelectedItem.SubItems(4)
                 End If
-                Aux = lwCostes.SelectedItem.SubItems(4)
             End If
             BuscaChekc = BuscaChekc & lwCostes.SelectedItem.SubItems(3) & "|"
             BuscaChekc = BuscaChekc & lwCostes.SelectedItem.ListSubItems(7).Tag & "|"
@@ -4636,7 +4641,7 @@ Dim Aux As String
         
         End If
         CadenaDesdeOtroForm = ""
-        frmListado3.Opcion = 70
+        frmListado3.opcion = 70
         frmListado3.OtrosDatos = BuscaChekc
         frmListado3.Show vbModal
         If CadenaDesdeOtroForm <> "" Then
@@ -4662,7 +4667,7 @@ Dim Aux As String
                 Aux = Aux & ",1," & DBSet(RecuperaValor(CadenaDesdeOtroForm, 2), "T", "N") & ","
                 Aux = Aux & DBSet(RecuperaValor(CadenaDesdeOtroForm, 3), "T") & ","
                 Aux = Aux & DBSet(RecuperaValor(CadenaDesdeOtroForm, 4), "T") & ","
-                Aux = Aux & DBSet(RecuperaValor(CadenaDesdeOtroForm, 5), "T") & "," & IIf(Tipo = 2, 4, Tipo) & ")"
+                Aux = Aux & DBSet(RecuperaValor(CadenaDesdeOtroForm, 5), "T") & "," & IIf(Tipo = 2, 4, IIf(Tipo = 3, 5, Tipo)) & ")"
                 
                 BuscaChekc = "INSERT INTO slifac_eu(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,Tipo) VALUES " & Aux
                 
@@ -4771,7 +4776,7 @@ Private Sub cmdMtoCampos_Click(Index As Integer)
     If Index = 0 Then
         'Añadir mas campos
             CadenaDesdeOtroForm = ""
-            frmADVvarios.Opcion = 0
+            frmADVvarios.opcion = 0
             frmADVvarios.vCampos = Text1(4).Text
             frmADVvarios.Show vbModal
             If CadenaDesdeOtroForm <> "" Then
@@ -6216,7 +6221,7 @@ Private Sub mnTipoPreciosLinea_Click()
      BuscaChekc = BuscaChekc & Data1.Recordset!Numfactu & " AND fecfactu=" & DBSet(Data1.Recordset!FecFactu, "F") & "|"
      
      frmListado4.vCadena = BuscaChekc
-     frmListado4.Opcion = 6
+     frmListado4.opcion = 6
      frmListado4.Show vbModal
      CargaGrid DataGrid1, Data2, True
      BuscaChekc = ""
@@ -7289,18 +7294,18 @@ End Sub
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
-Dim Opcion As Byte
+Dim opcion As Byte
 Dim SQL As String
 
     On Error GoTo ECargaGrid
 
     B = DataGrid1.Enabled
     If vDataGrid.Name = "DataGrid1" Then
-        Opcion = 1
+        opcion = 1
     Else
-        Opcion = 2
+        opcion = 2
     End If
-    SQL = MontaSQLCarga(enlaza, Opcion)
+    SQL = MontaSQLCarga(enlaza, opcion)
     CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
     
     vDataGrid.RowHeight = 270
@@ -7660,7 +7665,7 @@ Dim SQL As String
 End Function
 
 
-Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
+Private Function MontaSQLCarga(enlaza As Boolean, opcion As Byte) As String
 '--------------------------------------------------------------------
 ' MontaSQlCarga:
 '   Basándose en la información proporcionada por el vector de campos
@@ -7672,7 +7677,7 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 Dim SQL As String
 Dim B1 As Boolean
     
-    If Opcion = 1 Then
+    If opcion = 1 Then
         SQL = "SELECT codtipom, numfactu, fecfactu, numalbar, numlinea, codalmac, codartic, nomartic,"
         SQL = SQL & " ampliaci, cantidad,numbultos, precioar, origpre, dtoline1, dtoline2, importel ,"
         B1 = False
@@ -7685,7 +7690,7 @@ Dim B1 As Boolean
         End If
         SQL = SQL & " codprovex, nomprove,codccost,numlote"
         SQL = SQL & " FROM slifac left join sprove on codprovex=codprove " 'lineas de factura
-    ElseIf Opcion = 2 Then
+    ElseIf opcion = 2 Then
         SQL = "SELECT codtipom,numfactu,fecfactu,codtipoa,numalbar, fechaalb, numpedcl,fecpedcl,sementre,numofert,fecofert, referenc, codenvio,codtraba, codtrab1, codtrab2,observa1,observa2,observa3,observa4,observa5,numtermi,numventa,fecenvio  "
         If vParamAplic.DireccionesEnvio Then SQL = SQL & ",coddiren"
         SQL = SQL & ",docarchiv "
@@ -7701,7 +7706,7 @@ Dim B1 As Boolean
     
     If enlaza Then
         SQL = SQL & " " & ObtenerWhereCP(True)
-        If Opcion = 1 Then SQL = SQL & " AND numalbar=" & Data3.Recordset.Fields!Numalbar
+        If opcion = 1 Then SQL = SQL & " AND numalbar=" & Data3.Recordset.Fields!Numalbar
     Else
         'aNTES
         'SQL = SQL & " WHERE numfactu = -1 "
@@ -7711,11 +7716,11 @@ Dim B1 As Boolean
             SQL = SQL & " WHERE false"
         Else
             SQL = SQL & " WHERE codtipom is null and numfactu is null and fecfactu is null and codtipoa is null and numalbar is null "
-            If Opcion = 1 Then SQL = SQL & " AND numlinea is null"
+            If opcion = 1 Then SQL = SQL & " AND numlinea is null"
         End If
     End If
     SQL = SQL & " ORDER BY codtipom, numfactu, fecfactu,numalbar "
-    If Opcion = 1 Then SQL = SQL & ", numlinea "
+    If opcion = 1 Then SQL = SQL & ", numlinea "
     MontaSQLCarga = SQL
 End Function
 
@@ -7938,6 +7943,13 @@ Dim NumCopias As Integer
         'TELEFONIA
         ElseIf Text1(1).Text = "FAT" Then
             indRPT = 63 'Facturas telefonia
+            
+        ElseIf Text1(1).Text = "FPY" Then
+              indRPT = 12 'Facturas Clientes
+            If lwCostes.ListItems.Count > 0 Then
+                If MsgBox("Impresion formato proyectos?", vbQuestion + vbYesNo) = vbYes Then indRPT = 89
+            
+            End If
         Else
             indRPT = 12 'Facturas Clientes
             
@@ -8039,8 +8051,8 @@ Dim NumCopias As Integer
                 .SoloImprimir = False
                 .EnvioEMail = False
                 .NumeroCopias = NumCopias
-                .Opcion = OpcionListado
-                .Titulo = IIf(OpcionListado = 89, "Impresion lineas especiales", "")
+                .opcion = OpcionListado
+                .Titulo = IIf(indRPT = 89, "Impresion lineas especiales", "")
                 .Show vbModal
         End With
     End If
@@ -8087,7 +8099,7 @@ Dim cadImpresion As String, SQL As String
         
         .Informe = App.Path & "\Informes\" & SQL
         .ConSubInforme = False
-        .Opcion = 93
+        .opcion = 93
         .ExportarPDF = False
         .Show vbModal
    End With
@@ -8909,7 +8921,7 @@ Dim devuelve As String
                 .NombrePDF = pPdfRpt
                 .SoloImprimir = False
                 .EnvioEMail = False
-                .Opcion = 45
+                .opcion = 45
                 .Titulo = "Albarán facturado"
                 .Show vbModal
         End With
@@ -9368,7 +9380,7 @@ Dim nPar As Byte
         .Titulo = "Factura telefonía"
         .SoloImprimir = False
         .EnvioEMail = False
-        .Opcion = 2000 '2000 generico
+        .opcion = 2000 '2000 generico
        
         .ConSubInforme = True
         .Show vbModal
@@ -9531,7 +9543,7 @@ Dim PuedeModificarCobrosContabilidad As Boolean
     CadenaDesdeOtroForm = "0"
     If CStr(Data1.Recordset!codtipom) = "FAT" Then CadenaDesdeOtroForm = "1"
     CadenaDesdeOtroForm = Text1(2).Text & "|" & LEtra & "|" & CadenaDesdeOtroForm & "|"
-    frmVarios.Opcion = 13
+    frmVarios.opcion = 13
     frmVarios.Show vbModal
     
     
@@ -9990,6 +10002,7 @@ Dim SQL As String
 Dim Cad2 As String
 Dim N2 As Integer
 Dim ImpMano As Currency
+Dim impVeh As Currency
 Dim total As Currency
 Dim Impo As Currency
 
@@ -10165,12 +10178,13 @@ Dim Impo As Currency
     'Total
     If Todo Then
         Me.lwCostes.ListItems.Clear
-        SQL = " *,if(tipo=0,0,1) orden1 "
+        SQL = " *, if(tipo=0,0,if(tipo=5,2,tipo*10)) orden1  "   ' if(tipo=0,0,1) orden1 "
         SQL = "Select " & SQL & " FROM  slifac_eu " & ObtenerWhereCP(True)
         SQL = SQL & " order by orden1,fechamov"
         miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         N2 = 0
         ImpMano = 0
+        impVeh = 0
         Cad2 = ""
         total = 0
         While Not miRsAux.EOF
@@ -10193,8 +10207,14 @@ Dim Impo As Currency
                 lwCostes.ListItems(N2).SubItems(3) = " "
                 
                
-               
-            
+            Case 5
+                'Vehiculo
+                lwCostes.ListItems.Add , , "VEH"
+                lwCostes.ListItems(N2).SubItems(1) = "Gastos vehiculo"
+                lwCostes.ListItems(N2).SubItems(2) = " "
+                lwCostes.ListItems(N2).SubItems(3) = miRsAux!NomArtic & " "
+                lwCostes.ListItems(N2).SubItems(4) = " "
+                
             Case Else
                 'proveedor
                 lwCostes.ListItems.Add , , "PRO"
@@ -10219,7 +10239,11 @@ Dim Impo As Currency
             If miRsAux!Tipo = 0 Then
                 ImpMano = ImpMano + Impo
             Else
-                lwCostes.ListItems(N2).ListSubItems(7).Tag = DBLet(miRsAux!codArtic, "T")
+                If miRsAux!Tipo = 5 Then
+                    impVeh = impVeh + Impo
+                Else
+                    lwCostes.ListItems(N2).ListSubItems(7).Tag = DBLet(miRsAux!codArtic, "T")
+                End If
             End If
             total = total + Impo
             
@@ -10236,7 +10260,7 @@ Dim Impo As Currency
         Wend
         miRsAux.Close
         If N2 > 0 Then
-            If ImpMano > 0 Then
+            If ImpMano <> 0 Then
                 N2 = N2 + 1
                 lwCostes.ListItems.Add , , " "
                 For N = 1 To 5
@@ -10245,10 +10269,20 @@ Dim Impo As Currency
                 lwCostes.ListItems(N2).SubItems(6) = "Mano obra"
                 lwCostes.ListItems(N2).SubItems(7) = Format(ImpMano, FormatoImporte)
             End If
-            If total > 0 Then
-                Impo = total - ImpMano
             
-                
+            If impVeh <> 0 Then
+                N2 = N2 + 1
+                lwCostes.ListItems.Add , , " "
+                For N = 1 To 5
+                    lwCostes.ListItems(N2).SubItems(N) = " "
+                Next
+                lwCostes.ListItems(N2).SubItems(6) = "Vehiculos"
+                lwCostes.ListItems(N2).SubItems(7) = Format(impVeh, FormatoImporte)
+            End If
+            
+            If total <> 0 Then Impo = total - ImpMano - impVeh
+            
+            If Impo <> 0 Then
                 lwCostes.ListItems.Add , , " "
                 N2 = N2 + 1
                 For N = 1 To 5
@@ -10257,7 +10291,9 @@ Dim Impo As Currency
                 lwCostes.ListItems(N2).SubItems(6) = "Materiales"
                 lwCostes.ListItems(N2).SubItems(7) = Format(Impo, FormatoImporte)
                 
-                    
+            End If
+                
+            If total <> 0 Then
                 lwCostes.ListItems.Add , , " "
                 N2 = N2 + 1
                 For N = 1 To 5
@@ -10386,7 +10422,7 @@ If Modo <> 2 Then Exit Sub
            .EnvioEMail = False
            .Titulo = "Valoracion factura"
            .NumeroCopias = 1
-           .Opcion = 2000
+           .opcion = 2000
            
            .Show vbModal
     End With
@@ -10611,7 +10647,7 @@ Private Sub ImprimirCostesEuler()
         .Titulo = "Costes EULER"
         .SoloImprimir = False
         .EnvioEMail = False
-        .Opcion = 2000 '2000 generico
+        .opcion = 2000 '2000 generico
         .ConSubInforme = True
         .Show vbModal
     End With
@@ -10634,23 +10670,23 @@ End Sub
 
 
 '--------------------------------------------------------------------------------
-Private Function CargaCostesEuler2() As Boolean
-Dim C As String
-
-    On Error GoTo eCargaCostesEuler
-    
-    
-    C = "Select     "
-    
-
-        
-    
-eCargaCostesEuler:
-    If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
-    
-    lblIndicador.Caption = lblIndicador.Tag
-    Screen.MousePointer = vbDefault
-End Function
+'Private Function CargaCostesEuler2() As Boolean
+'Dim C As String
+'
+'    On Error GoTo eCargaCostesEuler
+'
+'
+'    C = "Select     "
+'
+'
+'
+'
+'eCargaCostesEuler:
+'    If Err.Number <> 0 Then MuestraError Err.Number, Err.Description
+'
+'    lblIndicador.Caption = lblIndicador.Tag
+'    Screen.MousePointer = vbDefault
+'End Function
 
 
 

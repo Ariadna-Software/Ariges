@@ -16174,10 +16174,50 @@ Dim Aux As String
     conn.Execute NomTabla
     
     'Proyectos
-    NomTabla = "UPDATE tmpnlotes SET codalmac = 89 WHERE codusu = " & vUsu.Codigo & " AND numalbar= 'FPY'"
-    conn.Execute NomTabla
+    If vParamAplic.NumeroInstalacion = vbEuler Then
     
+        'Los que tengan lineas de impresion haran esse report. El resto el normal
     
+        NomTabla = "Select * from tmpnlotes where codusu =" & vUsu.Codigo & "  and numalbar='FPY'"
+        RS.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        NomTabla = ""
+        While Not RS.EOF
+            lblInd.Caption = "Proyec " & DBLet(RS!FechaAlb, "T") & ": " & RS!codArtic
+            lblInd.Refresh
+            NomTabla = NomTabla & ", (" & RS!codArtic & "," & DBSet(RS!FechaAlb, "F") & ")"
+            RS.MoveNext
+        Wend
+        RS.Close
+        
+        
+        'Veo si tienen lineas
+        If NomTabla <> "" Then
+            lblInd.Caption = "Proyectos con lineas "
+            lblInd.Refresh
+            NomTabla = Mid(NomTabla, 2)
+            NomTabla = " AND (numfactu,fecfactu) IN (" & NomTabla & ")"
+            If txtCodigo(108).Text <> "" Then NomTabla = " AND fecfactu >=" & DBSet(txtCodigo(108).Text, "F") & NomTabla
+            NomTabla = "Select distinct numfactu,fecfactu from slifac_eu2 where codtipom='FPY' " & NomTabla
+            RS.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            NomTabla = ""
+            While Not RS.EOF
+               
+                NomTabla = NomTabla & ", (" & RS!Numfactu & "," & DBSet(RS!FecFactu, "F") & ")"
+                RS.MoveNext
+            Wend
+            RS.Close
+        
+        
+        End If
+        
+        
+        If NomTabla <> "" Then
+            NomTabla = Mid(NomTabla, 2) 'quitamos la primera coma
+            NomTabla = " AND (codartic,fechaalb) IN (" & NomTabla & ")"
+            NomTabla = "UPDATE tmpnlotes SET codalmac = 89 WHERE codusu = " & vUsu.Codigo & " AND numalbar= 'FPY' " & NomTabla
+            conn.Execute NomTabla
+        End If
+    End If
     
     If vParamAplic.NumeroInstalacion = vbTaxco Then
         'Facturas alvic

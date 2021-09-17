@@ -3674,14 +3674,10 @@ Dim Aux2 As String
 
 
     If InstalacionEsEulerTaxco And codtipom <> "FTI" Then
-        
+        Set RL = New ADODB.Recordset
         'EULER slialb_eu  -> slifac_eu
         'Llevara costes hora, albaran prov, fra pro y las mismas lineas de este albaran introducidas a precio coste
-        InsertarCostesEuler cadSQL
-        
-        
-        
-        
+        InsertarCostesEuler cadSQL, RL
         
     End If
 
@@ -3691,18 +3687,20 @@ Dim Aux2 As String
 EInsertarLin:
     If Err.Number <> 0 Then
         InsertarLineasFactu = False
-        MuestraError Err.Number, "Insertar lineas factura.", Err.Description
+        MuestraError Err.Number, "Insertar lineas factura." & Err.Description
     Else
         InsertarLineasFactu = True
     End If
 End Function
 
-Private Sub InsertarCostesEuler(CadenaAlbaran As String)
+'Pasamos el Rs para no declarr otro mas
+Private Sub InsertarCostesEuler(CadenaAlbaran As String, ByRef RS1 As ADODB.Recordset)
 Dim Nlinea As Integer
 Dim SQL As String
 Dim NumA As String
 Dim TipoA As String
-
+Dim Horas As Currency
+Dim Lin As Integer
     'No lleva on error. Si da error que salte arriba
     '..................................................................................
     'Obtengo numero de albaran
@@ -3745,39 +3743,82 @@ Dim TipoA As String
     
     
     
-    'Costes linea fac.  TIPO 0
+    'Costes linea fac.  TIPO 0      Coste vechiculos  TIPO 5
     'HORAS
-    
-    SQL = " sreloj left join stipor on sreloj.codtipor=stipor.codtipor"
-    SQL = SQL & " left join straba on straba.codtraba=sreloj.codtraba"
-    
-    SQL = DevuelveDesdeBD(conAri, "sum(calculadas)", SQL, Replace(CadenaAlbaran, "scaalb", "sreloj") & " AND 1", 1)
-    If SQL <> "" Then
-        If CCur(SQL) <> 0 Then
-           
-            'Tiene horas trabajadas. Las pongo como linea coste
-            SQL = TransformaComasPuntos(SQL) & " cantidad," & TransformaComasPuntos(vParamAplic.PrecioHoraCosteEUL) & " precioar,0"
-            SQL = "numalbar,0,fechaalb,1 codalmac,'','Horas trabajadas', " & SQL
-            SQL = " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "codtipom as codtipoa, " & SQL
-            SQL = SQL & " FROM scaalb WHERE " & CadenaAlbaran
-            SQL = "INSERT INTO slifac_eu(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,tipo) " & SQL
+
+    SQL = Replace(CadenaAlbaran, "scaalb", "sreloj")
+
+    SQL = " on straba.codtraba=sreloj.codtraba WHERE " & SQL
+    SQL = "Select  codflota,sum(calculadas) horas,min(concat(sreloj.codtipom,sreloj.numalbar)) datosalb FROM  sreloj left join stipor on sreloj.codtipor=stipor.codtipor left join straba " & SQL
+    SQL = SQL & " GROUP BY codflota"
+    RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    TipoA = ""
+    Horas = 0
+    Lin = 1  'reservo el 1 para las horas trabajadas
+    NumA = ""
+    While Not RS1.EOF
+        If NumA = "" Then NumA = DBLet(RS1!datosalb, "T")
             
+        Horas = Horas + DBLet(RS1!Horas)
+        If DBLet(RS1!codflota, "T") <> "" Then
+            ' Si tiene vehiculo, coste del vehiculo
+            SQL = DevuelveDesdeBD(conAri, "precostehora", "sflotas", "codflota", RS1!codflota, "T")
+            If SQL = "" Then SQL = "0,00"
             
-            conn.Execute SQL
+            Lin = Lin + 1
+        
+            'codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,tipo
+            TipoA = TipoA & ", ('" & codtipom & "'," & DBSet(Numfactu, "N") & "," & DBSet(FecFactu, "F") & ", '##codtipom##' , ##numalb## ," & Lin & ", " & DBSet(FecFactu, "F")
+            TipoA = TipoA & ", 1 , '', " & DBSet("Coste vehiculo " & RS1!codflota, "T") & "," & DBSet(DBLet(RS1!Horas, "N"), "N") & "," & DBSet(SQL, "N") & ",5)"
+            
             
         End If
+        
+            
+        RS1.MoveNext
+    Wend
+    RS1.Close
+    Set RS1 = Nothing
+    
+
+    If Horas <> 0 Then
+        Lin = 1
+
+        'codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,tipo
+        TipoA = TipoA & ", ('" & codtipom & "'," & DBSet(Numfactu, "N") & "," & DBSet(FecFactu, "F") & ", '##codtipom##' , ##numalb## ," & Lin & ", " & DBSet(FecFactu, "F")
+        TipoA = TipoA & ", 1 , '','Horas trabajadas'," & DBSet(Horas, "N") & "," & DBSet(vParamAplic.PrecioHoraCosteEUL, "N") & ",0)"
+    
+    
+    End If
+    
+    If TipoA <> "" Then
+        TipoA = Mid(TipoA, 2)
+        
+        If NumA = "" Then
+            'De momento pong un aviso
+            MsgBox "Falta situar albaran horas/vehiculo", vbInformation
+            NumA = codtipom & Numfactu
+        End If
+        
+        SQL = Mid(NumA, 4) 'quito codtipom
+        TipoA = Replace(TipoA, "##codtipom##", Mid(NumA, 1, 3))   'codtipoa
+        TipoA = Replace(TipoA, "##numalb##", SQL)  ' numalbar
+        
+        SQL = "INSERT INTO slifac_eu(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,fechamov,codalmac,codartic,nomartic,cantidad,precioar,tipo) VALUES " & TipoA
+        conn.Execute SQL
         
     End If
     
     
     
     
+            
+    
     
     
     
     'Costes albaran provee
      
-    
     TipoA = Replace(CadenaAlbaran, "scaalb.", "")
     TipoA = Replace(TipoA, "codtipom", "codtipomv")
     TipoA = Replace(TipoA, "numalbar", "numalbarV")
@@ -3824,11 +3865,44 @@ Dim TipoA As String
     '----------------------------
     SQL = "INSERT INTO slifac_eu2(codtipom,numfactu,fecfactu,codtipoa,numalbar,numlinea,articulo,descrarticulo,cantidad,precioar,dtoline1,importel)"
     
-    SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "codtipom as codtipoa, "
-    SQL = SQL & "numalbar,numlinea,articulo,descrarticulo,cantidad,precioar,dtoline1,importel"
-    SQL = SQL & " FROM slialb_eu2 "
-    '--
-    SQL = SQL & " WHERE " & Replace(CadenaAlbaran, "scaalb", "slialb_eu2")
+    If codtipom = "FPY" Then
+        'Obtenemos el numero de proyecto
+        SQL = " WHERE " & Replace(CadenaAlbaran, "scaalb", "sproyectolin")
+        SQL = Replace(SQL, "codtipom", "codtipoa")
+        SQL = "Select   distinct numproyec  FROM sproyectolin " & SQL
+        Set RS1 = New ADODB.Recordset
+        RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        NumA = ""
+        TipoA = ""
+        While Not RS1.EOF
+            NumA = RS1!numproyec
+            TipoA = TipoA & "Z"
+            RS1.MoveNext
+        Wend
+        RS1.Close
+        Set RS1 = Nothing
+        If Len(TipoA) <> 1 Then
+            SQL = "Lineas impresion. Se han encontrado " & TipoA & " proyectos " & CadenaAlbaran
+            Err.Raise 513, , SQL
+        End If
+        aqui aqui aqui
+        
+        'Es de proyectos. Las tablas son
+         SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "codtipom as codtipoa, "
+        SQL = SQL & "numalbar,numlinea,articulo,descrarticulo,cantidad,precioar,dtoline1,importel"
+        SQL = SQL & " FROM sproyectolin WHERE codproyec =  " & NumA
+        
+    
+    Else
+        'LO que habia
+    
+        SQL = SQL & " SELECT '" & codtipom & "' as codtipom," & DBSet(Numfactu, "N") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & "codtipom as codtipoa, "
+        SQL = SQL & "numalbar,numlinea,articulo,descrarticulo,cantidad,precioar,dtoline1,importel"
+        SQL = SQL & " FROM slialb_eu2 "
+        '--
+        SQL = SQL & " WHERE " & Replace(CadenaAlbaran, "scaalb", "slialb_eu2")
+    End If
+    
     conn.Execute SQL
 
     

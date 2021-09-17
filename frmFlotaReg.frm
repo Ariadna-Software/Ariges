@@ -4,34 +4,52 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFlotaReg 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Registro entrada flotas"
-   ClientHeight    =   8280
+   ClientHeight    =   8895
    ClientLeft      =   45
    ClientTop       =   630
-   ClientWidth     =   5985
+   ClientWidth     =   6450
    ClipControls    =   0   'False
    Icon            =   "frmFlotaReg.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8280
-   ScaleWidth      =   5985
+   ScaleHeight     =   8895
+   ScaleWidth      =   6450
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   10
-      Left            =   3480
+      Left            =   4800
       TabIndex        =   9
       Tag             =   "ProxKM|F|S|||sflotasregistro|proximo|||"
       Text            =   "Text1"
-      Top             =   4440
+      Top             =   4680
       Width           =   1215
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   8
-      Left            =   3120
+      Left            =   3360
       TabIndex        =   2
       Tag             =   "Base imp.|N|N|||sflotasregistro|baseimp|##,##0.00||"
       Text            =   "Text1"
@@ -42,69 +60,123 @@ Begin VB.Form frmFlotaReg
       Height          =   1095
       Left            =   240
       TabIndex        =   33
-      Top             =   4830
-      Width           =   5655
+      Top             =   5160
+      Width           =   6015
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   2520
+         Left            =   2640
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   41
          Text            =   "Text2"
-         Top             =   480
-         Width           =   525
+         Top             =   600
+         Width           =   645
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   13
-         Left            =   4560
+         Left            =   4800
          TabIndex        =   13
          Tag             =   "Base imp.|N|S|0|9999|sflotasregistro|consumo|##,##0.00||"
          Text            =   "Text1"
-         Top             =   450
+         Top             =   570
          Width           =   975
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   12
-         Left            =   3360
+         Left            =   3600
          TabIndex        =   12
          Tag             =   "Litros ult. tiquet|N|S|0||sflotasregistro|litrosulttik|##,##0.00||"
          Text            =   "Text1"
-         Top             =   480
+         Top             =   600
          Width           =   975
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   11
          Left            =   1200
          TabIndex        =   11
          Tag             =   "Litros ante.|N|S|0||sflotasregistro|litros|##,##0.00||"
          Text            =   "Text1"
-         Top             =   480
+         Top             =   600
          Width           =   1095
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   9
          Left            =   120
          TabIndex        =   10
          Tag             =   "Km Iniciales|N|S|0||sflotasregistro|kminciales|||"
          Text            =   "Text1"
-         Top             =   480
+         Top             =   600
          Width           =   975
       End
       Begin VB.Label Label1 
          Caption         =   "Anterior"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   11
-         Left            =   2520
+         Left            =   2640
          TabIndex        =   42
          Top             =   240
          Width           =   825
@@ -112,47 +184,92 @@ Begin VB.Form frmFlotaReg
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          Caption         =   "Consumo %"
-         Height          =   195
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   210
          Index           =   10
-         Left            =   4560
+         Left            =   4800
          TabIndex        =   40
          Top             =   240
-         Width           =   825
+         Width           =   1140
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
-         Caption         =   "Litros ult.tiket"
-         Height          =   195
+         Caption         =   "Lts ult.tiket"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   210
          Index           =   9
-         Left            =   3360
+         Left            =   3600
          TabIndex        =   39
-         Top             =   270
-         Width           =   930
+         Top             =   240
+         Width           =   1065
       End
       Begin VB.Label Label1 
          Caption         =   "Litros (Sin ultim)"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   8
-         Left            =   1200
+         Left            =   1080
          TabIndex        =   38
-         Top             =   270
-         Width           =   1215
+         Top             =   240
+         Width           =   1575
       End
       Begin VB.Label Label1 
          Caption         =   "Km iniciales"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   5
          Left            =   120
          TabIndex        =   35
          Top             =   270
-         Width           =   825
+         Width           =   1065
       End
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   4
-      Left            =   4560
+      Left            =   4920
       TabIndex        =   3
       Tag             =   "Horas KM|N|S|||sflotasregistro|horaskm|||"
       Text            =   "Text1"
@@ -160,28 +277,55 @@ Begin VB.Form frmFlotaReg
       Width           =   1215
    End
    Begin VB.TextBox Text1 
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   7
-      Left            =   1440
+      Left            =   2400
       TabIndex        =   8
       Tag             =   "Caduca|F|S|||sflotasregistro|caduca|dd/mm/yyyy||"
       Text            =   "Text1"
-      Top             =   4440
+      Top             =   4680
       Width           =   1215
    End
    Begin VB.ComboBox Combo1 
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Left            =   240
       Style           =   2  'Dropdown List
       TabIndex        =   5
       Tag             =   "Concepto|N|N|||sflotasregistro|codconcef|||"
-      Top             =   2160
-      Width           =   5535
+      Top             =   2400
+      Width           =   5895
    End
    Begin VB.TextBox Text1 
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   3
-      Left            =   1680
+      Left            =   1800
       TabIndex        =   1
       Tag             =   "Fecha|F|N|||sflotasregistro|fecha|dd/mm/yyyy||"
       Text            =   "Text1"
@@ -189,7 +333,16 @@ Begin VB.Form frmFlotaReg
       Width           =   1335
    End
    Begin VB.TextBox Text1 
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   6
       Left            =   240
       MaxLength       =   35
@@ -201,28 +354,55 @@ Begin VB.Form frmFlotaReg
    End
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   1
       Left            =   1680
       Locked          =   -1  'True
       TabIndex        =   26
       Text            =   "Text2"
-      Top             =   1560
-      Width           =   4125
+      Top             =   1680
+      Width           =   4485
    End
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   0
       Left            =   1680
       Locked          =   -1  'True
       MaxLength       =   30
       TabIndex        =   25
       Text            =   "Text2"
-      Top             =   3600
-      Width           =   4125
+      Top             =   4080
+      Width           =   4365
    End
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   1155
       Index           =   5
       Left            =   240
@@ -232,54 +412,99 @@ Begin VB.Form frmFlotaReg
       TabIndex        =   14
       Tag             =   "Ob|T|S|||sflotasregistro|Observaciones|||"
       Text            =   "frmFlotaReg.frx":000C
-      Top             =   6360
-      Width           =   5655
+      Top             =   6840
+      Width           =   6015
    End
    Begin VB.TextBox Text1 
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   2
       Left            =   240
       MaxLength       =   35
       TabIndex        =   6
       Tag             =   "A|T|S|||sflotasregistro|ampliacion|||"
       Text            =   "Text1"
-      Top             =   2880
-      Width           =   5535
+      Top             =   3240
+      Width           =   5895
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   1
       Left            =   240
       TabIndex        =   4
       Tag             =   "Vehiculo|T|N|||sflotasregistro|codflota|||"
       Text            =   "Text1"
-      Top             =   1560
+      Top             =   1680
       Width           =   1335
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   3600
       TabIndex        =   15
-      Top             =   7800
+      Top             =   8280
       Width           =   1035
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   4875
       TabIndex        =   16
-      Top             =   7800
+      Top             =   8280
       Width           =   1035
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   4875
       TabIndex        =   17
-      Top             =   7800
+      Top             =   8280
       Visible         =   0   'False
       Width           =   1035
    End
@@ -288,11 +513,20 @@ Begin VB.Form frmFlotaReg
       Index           =   0
       Left            =   240
       TabIndex        =   20
-      Top             =   7680
+      Top             =   8160
       Width           =   2535
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   240
          Left            =   240
          TabIndex        =   21
@@ -302,13 +536,22 @@ Begin VB.Form frmFlotaReg
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   0
       Left            =   240
       TabIndex        =   7
       Tag             =   "Proveedor|N|S|||sflotasregistro|codprove|||"
       Text            =   "Text1"
-      Top             =   3600
+      Top             =   4080
       Width           =   1335
    End
    Begin MSComctlLib.Toolbar Toolbar1 
@@ -317,8 +560,8 @@ Begin VB.Form frmFlotaReg
       Left            =   0
       TabIndex        =   18
       Top             =   0
-      Width           =   5985
-      _ExtentX        =   10557
+      Width           =   6450
+      _ExtentX        =   11377
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -394,7 +637,7 @@ Begin VB.Form frmFlotaReg
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
       Left            =   4440
-      Top             =   6720
+      Top             =   7920
       Visible         =   0   'False
       Width           =   1335
       _ExtentX        =   2355
@@ -441,146 +684,245 @@ Begin VB.Form frmFlotaReg
    Begin VB.Label Label1 
       Caption         =   "PROXIMA"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   195
+      Height          =   315
       Index           =   7
       Left            =   240
       TabIndex        =   37
-      Top             =   4200
-      Width           =   855
+      Top             =   4680
+      Width           =   1215
    End
    Begin VB.Label Label1 
       Caption         =   "Kms"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   6
-      Left            =   3480
+      Left            =   4080
       TabIndex        =   36
-      Top             =   4230
+      Top             =   4740
       Width           =   975
    End
    Begin VB.Label Label1 
       Caption         =   "Base Imp"
-      Height          =   255
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
       Index           =   4
-      Left            =   3120
+      Left            =   3360
       TabIndex        =   34
       Top             =   600
-      Width           =   735
+      Width           =   900
    End
    Begin VB.Label Label2 
       Caption         =   "Fecha"
-      Height          =   255
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
       Index           =   3
-      Left            =   1680
+      Left            =   1800
       TabIndex        =   32
       Top             =   600
-      Width           =   615
+      Width           =   600
    End
    Begin VB.Label Label1 
       Caption         =   "Horas-Km"
-      Height          =   255
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
       Index           =   3
-      Left            =   4560
+      Left            =   4920
       TabIndex        =   31
       Top             =   600
-      Width           =   735
+      Width           =   945
    End
    Begin VB.Label Label1 
       Caption         =   "Fecha"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   2
-      Left            =   1440
+      Left            =   1680
       TabIndex        =   29
-      Top             =   4200
+      Top             =   4740
       Width           =   855
    End
    Begin VB.Label Label1 
       Caption         =   "Concepto"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   1
       Left            =   240
       TabIndex        =   28
-      Top             =   1920
-      Width           =   735
+      Top             =   2160
+      Width           =   1095
    End
    Begin VB.Image imgFecha 
       Height          =   240
       Index           =   3
-      Left            =   2280
+      Left            =   2400
       Picture         =   "frmFlotaReg.frx":0012
       Top             =   600
       Width           =   240
    End
    Begin VB.Label Label2 
       Caption         =   "Nº Regsitro"
-      Height          =   255
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
       Index           =   1
       Left            =   240
       TabIndex        =   27
       Top             =   600
-      Width           =   1095
+      Width           =   1110
    End
    Begin VB.Image imgBuscar 
       Height          =   240
       Index           =   1
-      Left            =   960
+      Left            =   1080
       Picture         =   "frmFlotaReg.frx":009D
       Tag             =   "-1"
       ToolTipText     =   "Buscar población"
-      Top             =   1320
+      Top             =   1440
       Width           =   240
    End
    Begin VB.Image imgBuscar 
       Height          =   240
       Index           =   0
-      Left            =   1080
+      Left            =   1320
       Picture         =   "frmFlotaReg.frx":019F
       Tag             =   "-1"
       ToolTipText     =   "Buscar población"
-      Top             =   3360
+      Top             =   3840
       Width           =   240
    End
    Begin VB.Label Label7 
       Caption         =   "Observaciones"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   240
       TabIndex        =   24
-      Top             =   6120
-      Width           =   1095
+      Top             =   6480
+      Width           =   1695
    End
    Begin VB.Label Label2 
       Caption         =   "Ampliacion"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   240
       TabIndex        =   23
-      Top             =   2640
-      Width           =   975
+      Top             =   3000
+      Width           =   1455
    End
    Begin VB.Label Label1 
       Caption         =   "Vehiculo"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   240
       TabIndex        =   22
-      Top             =   1320
-      Width           =   735
+      Top             =   1440
+      Width           =   1095
    End
    Begin VB.Label Label2 
       Caption         =   "Proveedor"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   2
       Left            =   240
       TabIndex        =   30
-      Top             =   3360
-      Width           =   1095
+      Top             =   3840
+      Width           =   1335
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -671,7 +1013,7 @@ Private PimeraVez As Boolean
 Private DatosVehiculo As String
 Private ConceptosRequierenKm As String  'Llevara empipados los conceptos que requieran KM
 
-Dim cad As String
+Dim Cad As String
 
 'Para cuando devuelve dos poblaciones con el mismo codigo Postal. Si viene de pulsar prismatico
 'de busqueda poner el valor de poblacion seleccionado y no volver a recuperar de la Base de Datos
@@ -744,30 +1086,30 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = Val(RecuperaValor(DatosADevolverBusqueda, 1))
-    If Val(cad) <> Val(Data1.Recordset.Fields(0)) Then
-        MsgBox "No coincide el cliente (" & cad & ")", vbExclamation
+    Cad = Val(RecuperaValor(DatosADevolverBusqueda, 1))
+    If Val(Cad) <> Val(Data1.Recordset.Fields(0)) Then
+        MsgBox "No coincide el cliente (" & Cad & ")", vbExclamation
         Exit Sub
     End If
-    cad = Val(RecuperaValor(DatosADevolverBusqueda, 2))
-    If Val(cad) <> Val(Data1.Recordset.Fields(1)) Then
-        MsgBox "No coincide la obra (" & cad & ")", vbExclamation
+    Cad = Val(RecuperaValor(DatosADevolverBusqueda, 2))
+    If Val(Cad) <> Val(Data1.Recordset.Fields(1)) Then
+        MsgBox "No coincide la obra (" & Cad & ")", vbExclamation
         Exit Sub
     End If
         
-    cad = Data1.Recordset.Fields(0) & "|"
-    cad = cad & Data1.Recordset.Fields(1) & "|"
-     cad = cad & DBLet(Data1.Recordset.Fields(2), "F") & "|"
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+     Cad = Cad & DBLet(Data1.Recordset.Fields(2), "F") & "|"
     'Pongo la fecha ini y el txt
-    cad = cad & DBLet(Data1.Recordset!FechaIni, "T") & "|"
-    cad = cad & DBLet(Data1.Recordset!observa, "T") & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Cad & DBLet(Data1.Recordset!FechaIni, "T") & "|"
+    Cad = Cad & DBLet(Data1.Recordset!observa, "T") & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -887,7 +1229,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
-Dim cad As String
+Dim Cad As String
 Dim cad1 As String
 Dim nada As String
 
@@ -899,16 +1241,16 @@ Dim devuelve As String
     Set frmB = New frmBuscaGrid
     Select Case Index
     Case 0
-        cad = "Codigo|sprove|codprove|N|000|15·"
-        cad = cad & "Nombre|sprove|nomprove|T||55·"
+        Cad = "Codigo|sprove|codprove|N|000|15·"
+        Cad = Cad & "Nombre|sprove|nomprove|T||55·"
         frmB.vTabla = "sprove"
         frmB.vSQL = ""
         frmB.vTitulo = "Proveedores"
     Case 1
         
-        cad = "Codigo|sflotas|codflota|T||15·"
-        cad = cad & "Desc.|sflotas|nomflota|T||45·"
-        cad = cad & "Desc.|sflotatipo|desctipflota|T||30·"
+        Cad = "Codigo|sflotas|codflota|T||15·"
+        Cad = Cad & "Desc.|sflotas|nomflota|T||45·"
+        Cad = Cad & "Desc.|sflotatipo|desctipflota|T||30·"
         
         frmB.vTabla = "sflotas,sflotatipo"
         frmB.vSQL = "sflotas.tipo=tipflota "
@@ -940,7 +1282,7 @@ Dim devuelve As String
     End Select
     
     HaDevueltoDatos2 = ""
-    frmB.vCampos = cad
+    frmB.vCampos = Cad
     frmB.vDevuelve = "0|1|"
     frmB.vselElem = 0
     frmB.vCargaFrame = False
@@ -1118,7 +1460,7 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte 'Solo para saber que hay + de 1 Registro
 
     Modo = Kmodo
@@ -1126,19 +1468,19 @@ Dim NumReg As Byte 'Solo para saber que hay + de 1 Registro
     
     '--------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
     
     
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
         If Modo = 1 Then Me.lblIndicador.Caption = "BUSQUEDA"
     Else
         cmdRegresar.visible = False
@@ -1153,20 +1495,20 @@ Dim NumReg As Byte 'Solo para saber que hay + de 1 Registro
     BloquearTxt Text1(10), Modo <> 1
     
     'Bloquear Registro sino es Insert o Update
-    b = (Modo = 0) Or (Modo = 2)
+    B = (Modo = 0) Or (Modo = 2)
 
     
            
     '------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
-    Me.Combo1.Enabled = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
+    Me.Combo1.Enabled = B
     
     
     
-    Me.imgBuscar(0).Enabled = b
-    Me.imgBuscar(1).Enabled = b
+    Me.imgBuscar(0).Enabled = B
+    Me.imgBuscar(1).Enabled = B
     
     chkVistaPrevia.Enabled = (Modo <= 2)
     
@@ -1189,29 +1531,29 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnEliminar.Enabled = B
 
     '-------------------------------------
-    b = (Modo >= 3)
+    B = (Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'Ver Todos
-    Toolbar1.Buttons(2).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
 End Sub
 
 
@@ -1361,11 +1703,11 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
     
     
     'Los Kms actuales NO pueden ser menor que los que ya habian
@@ -1388,17 +1730,17 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 
     'Llamamos a al form
-    cad = ""
+    Cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: slista
-    cad = cad & ParaGrid(Text1(6), 10, "Registro")
+    Cad = Cad & ParaGrid(Text1(6), 10, "Registro")
     
-        cad = cad & "Codigo|sflotas|codflota|T||15·"
-        cad = cad & "Desc.|sflotas|nomflota|T||35·"
-        cad = cad & "Desc.|sflotatipo|desctipflota|T||30·"
+        Cad = Cad & "Codigo|sflotas|codflota|T||15·"
+        Cad = Cad & "Desc.|sflotas|nomflota|T||35·"
+        Cad = Cad & "Desc.|sflotatipo|desctipflota|T||30·"
         
         
                
@@ -1410,7 +1752,7 @@ Dim cad As String
         cadB = "sflotasregistro.codflota=sflotas.codflota AND sflotas.tipo=tipflota " & cadB
         frmB.vSQL = cadB
         frmB.vTitulo = "Registro"
-        frmB.vCampos = cad
+        frmB.vCampos = Cad
         HaDevueltoDatos2 = ""
         '###A mano
         frmB.vDevuelve = "0|"
@@ -1426,9 +1768,9 @@ Dim cad As String
             'Creamos una cadena consulta y ponemos los datos
             Screen.MousePointer = vbHourglass
             cadB = ""
-            cad = RecuperaValor(HaDevueltoDatos2, 1)
+            Cad = RecuperaValor(HaDevueltoDatos2, 1)
             
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE registro = " & cad & Ordenacion
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE registro = " & Cad & Ordenacion
             PonerCadenaBusqueda
             
             
@@ -1592,9 +1934,9 @@ Private Sub PonerDatosVehiculo()
         Text2(1).Text = ""
     Else
         
-        cad = "Select  desctipflota, nomflota,tipflota from sflotas,sflotatipo WHERE tipo=tipflota AND codflota = " & DBSet(Text1(1).Text, "T")
+        Cad = "Select  desctipflota, nomflota,tipflota from sflotas,sflotatipo WHERE tipo=tipflota AND codflota = " & DBSet(Text1(1).Text, "T")
         Set miRsAux = New ADODB.Recordset
-        miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If miRsAux.EOF Then
             Text2(1).Text = ""
             
@@ -1607,10 +1949,10 @@ Private Sub PonerDatosVehiculo()
             If Modo = 3 Then
                 'Fijaremos los KM anteriores
                 miRsAux.Close
-                cad = "Select horaskm,litrosulttik FROM sflotasregistro WHERE codflota = " & DBSet(Text1(1).Text, "T")
-                cad = cad & " AND codconcef = " & IncidenciaLlenarDeposito   'Llenar deposito
-                cad = cad & " ORDER BY fecha desc" 'Cogemos el ultimo tiket
-                miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Cad = "Select horaskm,litrosulttik FROM sflotasregistro WHERE codflota = " & DBSet(Text1(1).Text, "T")
+                Cad = Cad & " AND codconcef = " & IncidenciaLlenarDeposito   'Llenar deposito
+                Cad = Cad & " ORDER BY fecha desc" 'Cogemos el ultimo tiket
+                miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Not miRsAux.EOF Then
                     DatosVehiculo = DatosVehiculo & DBLet(miRsAux.Fields(0), "N") & "|"
                     DatosVehiculo = DatosVehiculo & DBLet(miRsAux.Fields(1), "N") & "|"
@@ -1638,10 +1980,10 @@ Private Sub PonerProximo()
     If Combo1.ListIndex < 0 Then Exit Sub
     If DatosVehiculo = "" Then Exit Sub
     'sflotascon_x_tipo tipflota freqKm freqMes
-    cad = "Select freqKm ,freqMes FROM sflotascon_x_tipo WHERE tipflota = " & RecuperaValor(DatosVehiculo, 1)
-    cad = cad & " AND codconcef = " & Combo1.ItemData(Combo1.ListIndex)
+    Cad = "Select freqKm ,freqMes FROM sflotascon_x_tipo WHERE tipflota = " & RecuperaValor(DatosVehiculo, 1)
+    Cad = Cad & " AND codconcef = " & Combo1.ItemData(Combo1.ListIndex)
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If DBLet(miRsAux!freqMes, "N") > 0 Then Text1(7).Text = DateAdd("m", miRsAux!freqMes, CDate(Text1(3).Text))
         Text1(10).Text = miRsAux!freqKm

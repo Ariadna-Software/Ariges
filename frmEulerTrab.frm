@@ -18,6 +18,26 @@ Begin VB.Form frmEulerTrab
    ScaleWidth      =   15420
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Index           =   7
+      Left            =   12240
+      MaxLength       =   13
+      TabIndex        =   6
+      Tag             =   "Tipo|T|S|||sreloj|codflota|||"
+      Text            =   "tipo"
+      Top             =   2640
+      Width           =   1815
+   End
    Begin VB.TextBox txtAux3 
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
@@ -25,7 +45,7 @@ Begin VB.Form frmEulerTrab
       Index           =   2
       Left            =   9840
       Locked          =   -1  'True
-      TabIndex        =   25
+      TabIndex        =   26
       Text            =   "Text2"
       Top             =   3600
       Visible         =   0   'False
@@ -38,7 +58,7 @@ Begin VB.Form frmEulerTrab
       Left            =   11760
       Locked          =   -1  'True
       MultiLine       =   -1  'True
-      TabIndex        =   21
+      TabIndex        =   22
       Text            =   "frmEulerTrab.frx":000C
       Top             =   3960
       Width           =   3285
@@ -49,7 +69,7 @@ Begin VB.Form frmEulerTrab
       Left            =   11760
       List            =   "frmEulerTrab.frx":0025
       Style           =   2  'Dropdown List
-      TabIndex        =   6
+      TabIndex        =   7
       Top             =   3600
       Width           =   1935
    End
@@ -70,6 +90,15 @@ Begin VB.Form frmEulerTrab
    End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   5
       Left            =   12240
@@ -80,6 +109,15 @@ Begin VB.Form frmEulerTrab
    End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   4
       Left            =   12240
@@ -94,7 +132,7 @@ Begin VB.Form frmEulerTrab
       Height          =   315
       Index           =   1
       Left            =   3840
-      TabIndex        =   20
+      TabIndex        =   21
       ToolTipText     =   "Buscar artículo"
       Top             =   3600
       Visible         =   0   'False
@@ -107,7 +145,7 @@ Begin VB.Form frmEulerTrab
       Index           =   1
       Left            =   3960
       Locked          =   -1  'True
-      TabIndex        =   19
+      TabIndex        =   20
       Text            =   "Text2"
       Top             =   3600
       Visible         =   0   'False
@@ -130,7 +168,7 @@ Begin VB.Form frmEulerTrab
       Height          =   540
       Index           =   0
       Left            =   120
-      TabIndex        =   17
+      TabIndex        =   18
       Top             =   5520
       Width           =   2535
       Begin VB.Label lblIndicador 
@@ -147,7 +185,7 @@ Begin VB.Form frmEulerTrab
          EndProperty
          Height          =   240
          Left            =   240
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   180
          Width           =   2115
       End
@@ -158,7 +196,7 @@ Begin VB.Form frmEulerTrab
       Height          =   315
       Index           =   0
       Left            =   960
-      TabIndex        =   16
+      TabIndex        =   17
       ToolTipText     =   "Buscar artículo"
       Top             =   3600
       Visible         =   0   'False
@@ -171,7 +209,7 @@ Begin VB.Form frmEulerTrab
       Index           =   0
       Left            =   960
       Locked          =   -1  'True
-      TabIndex        =   15
+      TabIndex        =   16
       Text            =   "Text2"
       Top             =   3600
       Visible         =   0   'False
@@ -196,7 +234,7 @@ Begin VB.Form frmEulerTrab
       Index           =   6
       Left            =   13800
       MaxLength       =   13
-      TabIndex        =   10
+      TabIndex        =   11
       Tag             =   "Tipo|N|N|||sreloj|numalbar|0000||"
       Text            =   "tipo"
       Top             =   3600
@@ -206,7 +244,7 @@ Begin VB.Form frmEulerTrab
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   12720
-      TabIndex        =   7
+      TabIndex        =   8
       Top             =   5565
       Width           =   1035
    End
@@ -215,7 +253,7 @@ Begin VB.Form frmEulerTrab
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   13875
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   5565
       Width           =   1035
    End
@@ -223,7 +261,7 @@ Begin VB.Form frmEulerTrab
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   13875
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   5565
       Visible         =   0   'False
       Width           =   1035
@@ -246,7 +284,7 @@ Begin VB.Form frmEulerTrab
       Align           =   1  'Align Top
       Height          =   420
       Left            =   0
-      TabIndex        =   12
+      TabIndex        =   13
       Top             =   0
       Width           =   15420
       _ExtentX        =   27199
@@ -299,7 +337,7 @@ Begin VB.Form frmEulerTrab
          Caption         =   "Vista previa"
          Height          =   315
          Left            =   9240
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   0
          Visible         =   0   'False
          Width           =   1215
@@ -356,7 +394,7 @@ Begin VB.Form frmEulerTrab
       Bindings        =   "frmEulerTrab.frx":007C
       Height          =   5025
       Left            =   120
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   495
       Width           =   11535
       _ExtentX        =   20346
@@ -421,6 +459,25 @@ Begin VB.Form frmEulerTrab
          EndProperty
       EndProperty
    End
+   Begin VB.Label Label2 
+      AutoSize        =   -1  'True
+      Caption         =   "Vehiculo"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   2
+      Left            =   11760
+      TabIndex        =   27
+      Top             =   2280
+      Width           =   780
+   End
    Begin VB.Image imgRef 
       Height          =   240
       Left            =   13080
@@ -442,7 +499,7 @@ Begin VB.Form frmEulerTrab
       Height          =   240
       Index           =   3
       Left            =   11760
-      TabIndex        =   24
+      TabIndex        =   25
       Top             =   1560
       Width           =   660
    End
@@ -460,7 +517,7 @@ Begin VB.Form frmEulerTrab
       Height          =   240
       Index           =   1
       Left            =   11760
-      TabIndex        =   23
+      TabIndex        =   24
       Top             =   3240
       Width           =   1260
    End
@@ -478,7 +535,7 @@ Begin VB.Form frmEulerTrab
       Height          =   240
       Index           =   0
       Left            =   11760
-      TabIndex        =   22
+      TabIndex        =   23
       Top             =   840
       Width           =   660
    End
@@ -495,7 +552,7 @@ Begin VB.Form frmEulerTrab
       EndProperty
       Height          =   255
       Left            =   240
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   8220
       Visible         =   0   'False
       Width           =   3495
@@ -574,7 +631,7 @@ Private HaDevueltoDatos As Boolean
 Private TareaADuplicar As Long
 Private MaximoHoras As Currency
 Private LaDuplicada As Long
-Dim b As Boolean
+Dim B As Boolean
 Private Sub chkVistaPrevia_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -775,16 +832,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Data1.Recordset.Fields(0) & "|"
-    cad = cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -855,6 +912,7 @@ Private Sub Form_Load()
         .Buttons(10).Image = 16 'Imprimir
         .Buttons(11).Image = 15 'Salir
     End With
+
     
     LimpiarCampos   'Limpia los campos TextBox
     DataGrid1.ClearFields
@@ -867,6 +925,7 @@ Private Sub Form_Load()
     
     If DatosADevolverBusqueda = "" Then
         PonerModo 0
+        LLamaLineas 10
     Else
         'se le llama desde otro form
         BotonBuscar
@@ -895,7 +954,7 @@ Dim tots As String
     
     'tots = tots & "S|txtAux(4)|T|Entrada|1100|;S|txtAux(5)|T|Salida|1100|;"
     tots = tots & "N|||||;N|||||;"
-    tots = tots & "N|||||;N|||||;N|||||;"
+    tots = tots & "N|||||;N|||||;N|||||;N|||||;"
     
     arregla tots, DataGrid1, Me
     
@@ -924,26 +983,26 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Byte
-Dim b As Boolean
+Dim B As Boolean
 
     On Error Resume Next
     
     DeseleccionaGrid Me.DataGrid1
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To 3
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = b
+        txtAux(jj).visible = B
         If jj < 2 Then
             txtAux3(jj).Height = DataGrid1.RowHeight
             txtAux3(jj).Top = alto
-            txtAux3(jj).visible = b
+            txtAux3(jj).visible = B
             
             Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
             Me.cmdAux(jj).Top = alto
-            Me.cmdAux(jj).visible = b
-            Me.cmdAux(jj).Enabled = b
+            Me.cmdAux(jj).visible = B
+            Me.cmdAux(jj).Enabled = B
             
             
             
@@ -951,9 +1010,12 @@ Dim b As Boolean
     Next jj
     
     For jj = 4 To 6
-        BloquearTxt txtAux(jj), Not b
+        BloquearTxt txtAux(jj), Not B
     Next jj
-    BloquearCmb Me.cboTipo2, Not b
+    BloquearTxt txtAux(7), Not B
+    
+    BloquearCmb Me.cboTipo2, Not B
+    
     If Err.Number Then Err.Clear
 End Sub
 
@@ -974,13 +1036,13 @@ End Sub
 Private Sub imgRef_Click()
 
     If Modo = 0 Or Modo = 2 Then Exit Sub
-    b = False
+    B = False
     If cboTipo2.ListIndex < 0 Then
-        b = True
+        B = True
     Else
-        If cboTipo2.ListIndex = 3 Then b = True
+        If cboTipo2.ListIndex = 3 Then B = True
     End If
-    If b Then Exit Sub
+    If B Then Exit Sub
     
     cmdAux_Click 100
 End Sub
@@ -1122,17 +1184,17 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
      'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         cmdRegresar.visible = False
     End If
@@ -1140,15 +1202,15 @@ Dim i As Byte
     'Modo Buscar
     If Kmodo = 1 Then PonerFoco txtAux(0)
                       
-    'Bloquear los campos de clave primaria al modificar
-    'For I = 0 To 2
-        BloquearTxt txtAux(7), True
-    'Next I
                       
     '-----------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
+
+    
+
+
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -1169,33 +1231,33 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
     
     On Error Resume Next
 
-    b = (Modo = 2 Or Modo = 0 Or Modo = 1)
+    B = (Modo = 2 Or Modo = 0 Or Modo = 1)
     'Insertar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnModificar.Enabled = B
     
-    Toolbar1.Buttons(9).Enabled = b
+    Toolbar1.Buttons(9).Enabled = B
     
     'eliminar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnEliminar.Enabled = B
     
-    b = ((Modo >= 3))
+    B = ((Modo >= 3))
     'Buscar
-    Toolbar1.Buttons(1).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(1).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'VerTodos
-    Toolbar1.Buttons(2).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(2).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo opciones del menú.", Err.Description
 
@@ -1233,7 +1295,7 @@ Dim SQL As String
     
     SQL = SQL & ",HoraInicio,HoraFin,"
     'SQL = SQL & " if(sreloj.codtipom='ALE','Exter',if(codtipom='ALR','Repar',if(codtipom='ALO','Orden','Prod'))) Txt,"
-    SQL = SQL & " codtipom,numalbar,ID FROM "
+    SQL = SQL & " codtipom,numalbar,ID,codflota FROM "
     SQL = SQL & NombreTabla
     SQL = SQL & " left join stipor on stipor.codtipor=sreloj.codtipor"
         
@@ -1390,7 +1452,7 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim SQL As String
 
 
@@ -1408,38 +1470,38 @@ Dim SQL As String
     End If
     If Me.txtAux(3).Text = "" Then txtAux(3).Text = "0"
     DatosOk = False
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
     
     SQL = txtAux(4).Text
     If Not EsFechaHoraOK(SQL) Then
         MsgBox "Error hora inicio", vbExclamation
-        b = False
+        B = False
     Else
         If Format(CDate(SQL), "dd/mm/yyyy") <> CDate(txtAux(2).Text) Then
             MsgBox "Fecha inicio debe ser: " & txtAux(2).Text, vbExclamation
-            b = False
+            B = False
         End If
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     SQL = Trim(txtAux(5).Text)
     If SQL <> "" Then
         If Not EsFechaHoraOK(SQL) Then
             MsgBox "Error hora inicio", vbExclamation
-            b = False
+            B = False
             
         Else
             If CDate(txtAux(5).Text) < CDate(txtAux(4).Text) Then
                 MsgBox "Fecha fin menor que fecha inicio", vbExclamation
-                b = False
+                B = False
             End If
         End If
         
         
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
     
     If TareaADuplicar > 0 Then
@@ -1450,25 +1512,32 @@ Dim SQL As String
     End If
     
     
+    If B Then
+        If txtAux(7).Text <> "" Then
+            SQL = PonerNombreDeCod(txtAux(7), conAri, "sflotas", "codflota", "codflota", "vehiculo", "T")
+            If SQL = "" Then Exit Function
+
+        End If
+    End If
     
     
     'Comprobar que existe un Albaran de venta para ese técnico(realizado por del alb)
     'para ese cliente y en esa fecha. Si no avisar
-    b = False
+    B = False
     If Me.cboTipo2.ListIndex >= 0 Then
-        If Me.cboTipo2.ListIndex <> 3 Then b = True
+        If Me.cboTipo2.ListIndex <> 3 Then B = True
     End If
-    If b Then
+    If B Then
         SQL = RecuperaValor("ALR|ALE|ALO||ALV|", cboTipo2.ListIndex + 1)
         SQL = " numalbar=" & DBSet(txtAux(6).Text, "N") & " AND codtipom=" & DBSet(SQL, "T")
         SQL = "SELECT count(*) FROM scaalb WHERE " & SQL
         
         If Not (RegistrosAListar(SQL) > 0) Then
             SQL = "No existe(o esta facturado) el albaran de fecha indicado. ¿Desea continuar?"
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then b = False
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then B = False
         End If
     End If
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1513,7 +1582,7 @@ End Sub
 
 
 Private Sub PonerCadenaBusqueda()
-Dim cad As String
+Dim Cad As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo EEPonerBusq
@@ -1523,9 +1592,9 @@ Dim cad As String
     Data1.Refresh
     If Data1.Recordset.RecordCount <= 0 Then
         CargaGrid False
-        cad = "No hay ningún registro en la tabla "
-         If EsBusqueda Then cad = cad & " para ese criterio de Búsqueda."
-        MsgBox cad, vbInformation
+        Cad = "No hay ningún registro en la tabla "
+         If EsBusqueda Then Cad = Cad & " para ese criterio de Búsqueda."
+        MsgBox Cad, vbInformation
         Screen.MousePointer = vbDefault
         PonerModo Modo
         Exit Sub
@@ -1607,6 +1676,27 @@ Dim Minutos As Currency
                     PonerFoco txtAux(Index)
                 End If
             End If
+            
+        Case 7
+            'CargarCombo_Tabla Me.cboVehiculo, "sflotas", "codflota", "codflota", "", True
+            
+            txtAux(Index).Text = Trim(txtAux(Index).Text)
+            
+            If Modo > 2 And txtAux(Index).Text <> "" Then
+                Aux = PonerNombreDeCod(txtAux(Index), conAri, "sflotas", "codflota", "codflota", "vehiculo", "T")
+                If Aux = "" Then
+                    
+                    If Modo = 4 Then
+                        txtAux(Index).Text = DBLet(Data1.Recordset!codflota, "T")
+                    Else
+                        txtAux(Index).Text = ""
+                    End If
+                    PonerFoco txtAux(Index)
+                Else
+                    txtAux(Index).Text = Aux
+                End If
+            End If
+            
         Case 6 'Cod. tipor
             If Modo = 1 Then Exit Sub
             If cboTipo2.ListIndex < 0 Then
@@ -1722,12 +1812,13 @@ Dim Limp As Boolean
         txtAux(5).Text = ""
         txtAux(6).Text = ""
         txtAux3(4).Text = ""
-
+        txtAux(7).Text = ""
     Else
         'EL
         txtAux(4).Text = PonerCampoAux2(1)
         txtAux(5).Text = PonerCampoAux2(2)
         txtAux(6).Text = PonerCampoAux2(3)
+        txtAux(7).Text = PonerCampoAux2(5)
         txtAux3(4).Text = ""
         PonerCampoAux2 4
         
@@ -1737,40 +1828,40 @@ End Sub
 
 
 Private Function PonerCampoAux2(Cual As Integer) As String
-Dim cad As String
+Dim Cad As String
 Dim C As String
     
-    cad = ""
-    C = RecuperaValor("HoraInicio|HoraFin|numalbar|codtipom|", Cual)
+    Cad = ""
+    C = RecuperaValor("HoraInicio|HoraFin|numalbar|codtipom|codflota|", Cual)
     
     
     If IsNull(Data1.Recordset.Fields(C)) Then
-        cad = ""
+        Cad = ""
     Else
         If Cual < 3 Then
-            cad = Format(Data1.Recordset.Fields(C), "dd/mm/yyyy hh:mm:ss")
+            Cad = Format(Data1.Recordset.Fields(C), "dd/mm/yyyy hh:mm:ss")
         Else
-            cad = Data1.Recordset.Fields(C)
+            Cad = Data1.Recordset.Fields(C)
         End If
     End If
-    PonerCampoAux2 = cad
+    PonerCampoAux2 = Cad
     
     
     If Cual = 4 Then
-        If cad = "" Then
+        If Cad = "" Then
             Me.cboTipo2.ListIndex = -1
         Else
             'Ubicamos el combo
             'Vamos a intentar localizar el ALBARAN, FACTURA
                             
-            If Mid(cad, 1, 1) = "A" Then
+            If Mid(Cad, 1, 1) = "A" Then
                 'ALbaran
-                If cad = "ALE" Then
+                If Cad = "ALE" Then
                     cboTipo2.ListIndex = 1
                 Else
-                    If cad = "ALO" Then
+                    If Cad = "ALO" Then
                         cboTipo2.ListIndex = 2
-                    ElseIf cad = "ALV" Then
+                    ElseIf Cad = "ALV" Then
                         cboTipo2.ListIndex = 4
                     Else
                         cboTipo2.ListIndex = 0
@@ -1782,7 +1873,7 @@ Dim C As String
                 
                 
                 
-                C = "codtipom='" & cad & "' AND numalbar"
+                C = "codtipom='" & Cad & "' AND numalbar"
                 C = DevuelveDesdeBD(conAri, "concat(codclien,'|',nomclien,'|')", "scaalb", C, txtAux(6).Text)
                 If C <> "" Then
                     C = RecuperaValor(C, 1) & " - " & RecuperaValor(C, 2)
@@ -1790,7 +1881,7 @@ Dim C As String
                 Else
                     'SELECT concat(codclien,'|',nomclien,'|') from scafac,scafac1 where
                     C = "scafac.codtipom=scafac1.codtipom AND scafac.numfactu=Scafac1.numfactu and scafac.fecfactu=scafac1.fecfactu AND "
-                    C = C & "codtipoa='" & cad & "' AND numalbar"
+                    C = C & "codtipoa='" & Cad & "' AND numalbar"
                     C = DevuelveDesdeBD(conAri, "concat(codclien,'|',nomclien,'|',scafac.numfactu,'|',scafac.fecfactu,'|',scafac.codtipom,'|')", "scafac,scafac1", C, txtAux(6).Text)
                 
                     If C <> "" Then
@@ -1813,45 +1904,47 @@ End Function
 
 
 Private Function InsertarModificar() As Boolean
-Dim cad As String
+Dim Cad As String
     
     
     If Modo <> 4 Then
         'sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor)
         
-        cad = SugerirCodigoSiguienteStr("sreloj", "id")
-        LaDuplicada = Val(cad)
-        If Data1.Recordset.EOF Then CadenaConsulta = cad
+        Cad = SugerirCodigoSiguienteStr("sreloj", "id")
+        LaDuplicada = Val(Cad)
+        If Data1.Recordset.EOF Then CadenaConsulta = Cad
         
-        cad = cad & "," & DBSet(txtAux(2).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
-        cad = cad & DBSet(txtAux(4).Text, "FH") & ","
+        Cad = Cad & "," & DBSet(txtAux(2).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
+        Cad = Cad & DBSet(txtAux(4).Text, "FH") & ","
         If txtAux(5).Text = "" Then
-            cad = cad & "NULL"
+            Cad = Cad & "NULL"
         Else
-            cad = cad & DBSet(txtAux(5).Text, "FH")
+            Cad = Cad & DBSet(txtAux(5).Text, "FH")
         End If
-        cad = cad & "," & DBSet(txtAux(3).Text, "N") & ","
+        Cad = Cad & "," & DBSet(txtAux(3).Text, "N") & ","
         
-        cad = cad & "'" & RecuperaValor("ALR|ALE|ALO|PROD|ALV|", cboTipo2.ListIndex + 1) & "',"
-        cad = cad & DBSet(txtAux(6).Text, "N") & "," & DBSet(txtAux(1).Text, "T") & ")"
+        Cad = Cad & "'" & RecuperaValor("ALR|ALE|ALO|PROD|ALV|", cboTipo2.ListIndex + 1) & "',"
+        Cad = Cad & DBSet(txtAux(6).Text, "N") & "," & DBSet(txtAux(1).Text, "T") & ","
+        Cad = Cad & DBSet(txtAux(7).Text, "T") & ")"
         
-        cad = "insert into sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor) VALUES (" & cad
+        Cad = "insert into sreloj(ID,Fecha,codtraba,HoraInicio,HoraFin,Calculadas,codtipom,numalbar,codtipor,codflota) VALUES (" & Cad
     Else
-        cad = "UPDATE sreloj SET fecha=" & DBSet(txtAux(2).Text, "F")
-        cad = cad & ",codtraba=" & DBSet(txtAux(0).Text, "N") & ",codtipor=" & DBSet(txtAux(1).Text, "T")
-        cad = cad & ",HoraInicio=" & DBSet(txtAux(4).Text, "FH") & ",HoraFin="
+        Cad = "UPDATE sreloj SET fecha=" & DBSet(txtAux(2).Text, "F")
+        Cad = Cad & ",codtraba=" & DBSet(txtAux(0).Text, "N") & ",codtipor=" & DBSet(txtAux(1).Text, "T")
+        Cad = Cad & ",HoraInicio=" & DBSet(txtAux(4).Text, "FH") & ",HoraFin="
         If txtAux(5).Text = "" Then
-            cad = cad & "NULL"
+            Cad = Cad & "NULL"
         Else
-            cad = cad & DBSet(txtAux(5).Text, "FH")
+            Cad = Cad & DBSet(txtAux(5).Text, "FH")
         End If
         
-        cad = cad & ",Calculadas=" & DBSet(txtAux(3).Text, "N") & ",numalbar=" & DBSet(txtAux(6).Text, "N")
-        cad = cad & ",codtipom='" & RecuperaValor("ALR|ALE|ALO|PROD|ALV|", cboTipo2.ListIndex + 1)
-        cad = cad & "' WHERE ID =" & Data1.Recordset!ID
+        Cad = Cad & ",Calculadas=" & DBSet(txtAux(3).Text, "N") & ",numalbar=" & DBSet(txtAux(6).Text, "N")
+        Cad = Cad & ",codtipom='" & RecuperaValor("ALR|ALE|ALO|PROD|ALV|", cboTipo2.ListIndex + 1)
+        Cad = Cad & "' ,codflota=" & DBSet(txtAux(7).Text, "T", "S")
+        Cad = Cad & " WHERE ID =" & Data1.Recordset!ID
     End If
     
-    InsertarModificar = ejecutar(cad, False)
+    InsertarModificar = ejecutar(Cad, False)
     If Modo = 3 And Data1.Recordset.EOF Then
         
     End If
