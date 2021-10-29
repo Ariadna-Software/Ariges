@@ -6,15 +6,15 @@ Option Explicit
 Public Function ComprobarCarpetaPDFSMante2(campo1 As Long, campo2 As String) As String
 Dim C As String
 Dim Referencia As String
-Dim I As Integer
+Dim i As Integer
     On Error GoTo eComprobarCarpetaOferta
     ComprobarCarpetaPDFSMante2 = ""
     C = EulerParam & "\"
     
     
     Referencia = CStr(campo2)
-    For I = 1 To Len(Referencia)
-        Referencia = Replace(Referencia, Mid("\/:*""?<>|", I, 1), " ")
+    For i = 1 To Len(Referencia)
+        Referencia = Replace(Referencia, Mid("\/:*""?<>|", i, 1), " ")
     Next
     
         
@@ -168,7 +168,7 @@ End Function
 Public Function CopiaArhivoPDFOfertaEuler(CarpetaDestino As String, OrigenCompleto As String) As Boolean
 Dim C As String
 Dim J As Integer
-Dim k As Integer
+Dim K As Integer
 
     On Error GoTo eCopiaArhivoOferta
     CopiaArhivoPDFOfertaEuler = False
@@ -251,4 +251,88 @@ Dim J As Integer
     Next
         
     NombreArchivoEULER = Descripcion
+End Function
+
+
+
+
+
+
+Public Function ImprimirLosCostesAlbaranEuler(ByRef ListView2 As ListView, hcoCodTipoM As String, numalbar As String) As Boolean
+
+    
+Dim C As String
+Dim N As String
+    
+    ImprimirLosCostesAlbaranEuler = False
+    
+    C = "DELETE FROM tmpcommand WHERE codusu =" & vUsu.Codigo
+    conn.Execute C
+
+
+        
+    'tmpcommand(codusu,cantidad,importel,fecrecep,nomprove,codfamia,nomfamia,nomartic,codartic)
+    CadenaDesdeOtroForm = ""
+    For NumRegElim = 1 To ListView2.ListItems.Count
+        'Primera linea
+        C = vUsu.Codigo & ","
+        'Cantidad y precio
+        C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(5), "N") & "," & DBSet(ListView2.ListItems(NumRegElim).SubItems(6), "N") & ","
+        'Fecha
+        N = Trim(Trim(ListView2.ListItems(NumRegElim).SubItems(3)))
+        If N = "" Then N = Format(Now, "dd/mm/yyyy")
+        C = C & DBSet(N, "F", "S") & ","
+        
+        'Resto campos  nomprove codfamia nomfamia,nomartic,codartic
+        Select Case ListView2.ListItems(NumRegElim).Text
+        Case "HOR"
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(1), "T") & ",1,'','',"
+        
+        Case "VEH"
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(1), "T") & ",0,"
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(2), "T") & ",'',"
+        
+        Case "ALV"
+            C = C & DBSet("Venta. ", "T") & ",3,"
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(2), "T") & ","
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(4), "T") & ","
+        Case "ALC"
+            C = C & DBSet("Albaran. " & ListView2.ListItems(NumRegElim).SubItems(1), "T") & ",4,"
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(2), "T") & ","
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(4), "T") & ","
+        Case "MAT"
+            C = C & "'Material',2,'',"
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(4), "T") & ","
+                
+        Case "FAC"
+            C = C & DBSet("Factura. " & ListView2.ListItems(NumRegElim).SubItems(1), "T") & ",5,"
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(2), "T") & ","
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(4), "T") & ","
+     
+     
+        Case "PED"
+            C = C & DBSet("Pedido. " & ListView2.ListItems(NumRegElim).SubItems(1), "T") & ",6,"
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(2), "T") & ","
+            C = C & DBSet(ListView2.ListItems(NumRegElim).SubItems(4), "T") & ","
+        Case Else
+            MsgBox "No tratado. " & ListView2.ListItems(NumRegElim).Text, vbExclamation
+            C = ""
+        End Select
+    
+        If C <> "" Then
+            C = C & DBSet(hcoCodTipoM, "T") & "," & DBSet(numalbar, "T") & ")"
+            CadenaDesdeOtroForm = CadenaDesdeOtroForm & ", (" & C
+        End If
+    
+    Next
+    If CadenaDesdeOtroForm <> "" Then
+        CadenaDesdeOtroForm = Mid(CadenaDesdeOtroForm, 2)
+        C = "INSERT INTO tmpcommand(codusu,cantidad,importel,fecrecep,nomprove,codfamia,nomfamia,nomartic,codartic,codprove) VALUES "
+        C = C & CadenaDesdeOtroForm
+        conn.Execute C
+        
+        ImprimirLosCostesAlbaranEuler = True
+    End If
+
+
 End Function

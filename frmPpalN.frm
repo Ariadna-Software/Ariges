@@ -5,15 +5,15 @@ Object = "{555E8FCC-830E-45CC-AF00-A012D5AE7451}#17.2#0"; "Codejock.CommandBars.
 Object = "{945E8FCC-830E-45CC-AF00-A012D5AE7451}#17.2#0"; "Codejock.DockingPane.v17.2.0.ocx"
 Begin VB.Form frmppalN 
    Caption         =   "Ariges6"
-   ClientHeight    =   8160
+   ClientHeight    =   8760
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   11580
+   ClientWidth     =   16755
    FillStyle       =   0  'Solid
    Icon            =   "frmPpalN.frx":0000
    LinkTopic       =   "Form1"
-   ScaleHeight     =   8160
-   ScaleWidth      =   11580
+   ScaleHeight     =   8760
+   ScaleWidth      =   16755
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
    Begin MSComctlLib.ImageList imlToolbarIcons 
@@ -435,10 +435,12 @@ Dim AbiertoFormulario  As Boolean
     AbiertoFormulario = False
     
     
-    'Debug.Print Now & ": " & Control.Id
+   ' Debug.Print Now & ": " & Control.Id
     Select Case Control_Id
         Case XTPCommandBarsSpecialCommands.XTP_ID_RIBBONCONTROLTAB:
             'If PrimeraVez Then S top
+            
+            
             If frmInbox.CalendarControl.visible = True Then
                 If UCase(frmppalN.RibbonBar.SelectedTab.Caption) <> "AGENDA" Then
                    
@@ -624,7 +626,7 @@ Dim AbiertoFormulario  As Boolean
         AbiertoFormulario = False
         'mOTIVO... no lo se
         'Pero si lo vamos cambiando funciona
-        If False Then
+        If True Then
             If Me.DockingPaneManager.Panes(1).Enabled <> 3 Then
                 Me.DockingPaneManager.Panes(1).Enabled = PaneEnabled
                 Me.DockingPaneManager.Panes(2).Enabled = PaneEnabled
@@ -763,7 +765,7 @@ Private Sub Form_Activate()
         
         
         'Para este usuario y esta empresa unos avlores al usuario
-        vUsu.FijarOtrosValoresUsuario
+        If vEmpresa.codempre > 0 Then vUsu.FijarOtrosValoresUsuario
         
         Espera 0.25
         
@@ -835,7 +837,8 @@ Dim RB As RibbonBar
     Set vUsu = New Usuario
     vUsu.Leer RecuperaValor(CadenaDesdeOtroForm, 1)
     
-    vUsu.CadenaConexion = "ariges" & QueEmpresa
+    
+    vUsu.CadenaConexion = "ariges" & IIf(QueEmpresa = 0, "", QueEmpresa)
     
     vUsu.LeerFiltros "ariges", 301 ' asientos
     vUsu.LeerFiltros "ariges", 401 ' facturas de cliente
@@ -2061,7 +2064,7 @@ Private Sub Abrir_Formularios(Accion As Long)
         'Abre formularios de contailizacion , entrada albaranes...
         AccionesIncioAbrirProgramaEmpresa
   
-    Case id_Marcas To id_HistóricoInventario
+    Case id_Marcas To id_Telematel
         '
         ' --------------------------------
         '   Almacenes
@@ -2239,29 +2242,25 @@ Dim Tiene_A_cancelar As Byte    '0: NO    1:  Cobros      2 : Pagos     3 Los do
     ComprobarFechaContabilizadas
     End If
     
-    'If vParamAplic.NumeroInstalacion = vbEuler Then
-    If True Then
+    If vParamAplic.NumeroInstalacion = vbEuler Then
+
         CadenaDesdeOtroForm = "not fechaent is null AND 1"
         CadenaDesdeOtroForm = DevuelveDesdeBD(conAri, "count(*)", "scaalb", CadenaDesdeOtroForm, "1")
-        CadenaDesdeOtroForm = "1"
+        'CadenaDesdeOtroForm = "1"
         If Val(CadenaDesdeOtroForm) > 0 Then
                         
      
             frmAvisosAlb.Show vbModal
-            frmPaneContacts.Refresh
+
         End If
         CadenaDesdeOtroForm = ""
     End If
-    If Not frmPaneContacts.Enabled Then
 
-        
-    End If
-    
     
  
     
     DoEvent2
-
+    
     Screen.MousePointer = vbDefault
     
         

@@ -69,6 +69,7 @@ Option Explicit
 '       39 . Gasloniera TAXCO
 '       40 -  Cambio cliente
 '       41 -  usuarios
+'       42 - Deshacer cierre prod/env
 
 Public Function Insertar(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String) As Boolean
 Dim SQL As String
@@ -140,6 +141,7 @@ Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
     ListaAcciones.Add "39|Gasolinera|"
     ListaAcciones.Add "40|Cambio cliente|"
     ListaAcciones.Add "41|Usuarios|"
+    ListaAcciones.Add "42|Deshacer cierre PROD/ENV|"
     DevuelveAcciones = True
     Exit Function
 EDevuelveAcciones:

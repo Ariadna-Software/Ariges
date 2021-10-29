@@ -496,8 +496,8 @@ End Sub
 
 Private Sub cmdImprimir_Click()
     'VERSION RELOJ: comentar lineas #Soloreloj
-   ' frmListado2.opcion = 46
-   ' frmListado2.Show vbModal
+    frmListado2.Opcion = 46
+    frmListado2.Show vbModal
 End Sub
 
 

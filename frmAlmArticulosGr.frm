@@ -362,27 +362,27 @@ Begin VB.Form frmAlmArticulosGr
       TabCaption(1)   =   "Stocks"
       TabPicture(1)   =   "frmAlmArticulosGr.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2(3)"
-      Tab(1).Control(1)=   "Label2(2)"
-      Tab(1).Control(2)=   "Label2(11)"
-      Tab(1).Control(3)=   "Label2(1)"
-      Tab(1).Control(4)=   "Label2(7)"
-      Tab(1).Control(5)=   "Label1(46)"
-      Tab(1).Control(6)=   "imgCuentas(10)"
-      Tab(1).Control(7)=   "DataGrid3"
-      Tab(1).Control(8)=   "Text1(21)"
-      Tab(1).Control(9)=   "Text1(20)"
+      Tab(1).Control(0)=   "framePortes"
+      Tab(1).Control(1)=   "Text1(28)"
+      Tab(1).Control(2)=   "Text2(9)"
+      Tab(1).Control(3)=   "Text1(36)"
+      Tab(1).Control(4)=   "FrameToolAux(0)"
+      Tab(1).Control(5)=   "FrameArtxAlmac"
+      Tab(1).Control(6)=   "Text3(2)"
+      Tab(1).Control(7)=   "Text2(8)"
+      Tab(1).Control(8)=   "Text3(0)"
+      Tab(1).Control(9)=   "cmdAlma"
       Tab(1).Control(10)=   "Text1(19)"
-      Tab(1).Control(11)=   "cmdAlma"
-      Tab(1).Control(12)=   "Text3(0)"
-      Tab(1).Control(13)=   "Text2(8)"
-      Tab(1).Control(14)=   "Text3(2)"
-      Tab(1).Control(15)=   "FrameArtxAlmac"
-      Tab(1).Control(16)=   "FrameToolAux(0)"
-      Tab(1).Control(17)=   "Text1(36)"
-      Tab(1).Control(18)=   "Text2(9)"
-      Tab(1).Control(19)=   "Text1(28)"
-      Tab(1).Control(20)=   "framePortes"
+      Tab(1).Control(11)=   "Text1(20)"
+      Tab(1).Control(12)=   "Text1(21)"
+      Tab(1).Control(13)=   "DataGrid3"
+      Tab(1).Control(14)=   "imgCuentas(10)"
+      Tab(1).Control(15)=   "Label1(46)"
+      Tab(1).Control(16)=   "Label2(7)"
+      Tab(1).Control(17)=   "Label2(1)"
+      Tab(1).Control(18)=   "Label2(11)"
+      Tab(1).Control(19)=   "Label2(2)"
+      Tab(1).Control(20)=   "Label2(3)"
       Tab(1).ControlCount=   21
       TabCaption(2)   =   "Componentes"
       TabPicture(2)   =   "frmAlmArticulosGr.frx":0044
@@ -567,11 +567,12 @@ Begin VB.Form frmAlmArticulosGr
          Index           =   28
          Left            =   -67440
          MaxLength       =   255
+         MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   46
          Tag             =   "Taux|T|S|||sartic|txtauxdocumento|||"
          Top             =   5760
-         Width           =   6735
+         Width           =   6855
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
@@ -4557,21 +4558,6 @@ Private Sub BotonAnyadir()
     If vParamAplic.NumeroInstalacion = 2 Then cboTipoComiArtVario.ListIndex = 0
     cboUnidadCompra.ListIndex = 0
     
-    If vParamAplic.NumeroInstalacion = vbFenollar Then
-        Text1(2).Text = "000968"
-        Text2(0).Text = "ALFREDO FENOLLAR S.A."
-        'Text1(3).Text = 968
-        'Text2(1).Text = "ALFREDO FENOLLAR S.A."
-        Text1(4).Text = "0001"
-        Text2(2).Text = "GENERICA"
-        Text1(5).Text = "01"
-        Text2(3).Text = "UNIDADES"
-        Text1(6).Text = "1"
-        Text2(4).Text = "GENERAL"
-        Text1(7).Text = 21
-        Text2(5).Text = "IVA 21%"
-        Text1(17).Text = "0,00" 'PVP
-    End If
     
     
     
@@ -5769,7 +5755,12 @@ Dim i As Integer
     Else
         'Resto
         Label1(20).Caption = "Unidades caja"
-        Label1(42).Caption = "Ud embalaje"
+        
+         If vParamAplic.ManipuladorFitosanitarios2 Then
+            Label1(42).Caption = "Capacidad"
+        Else
+            Label1(42).Caption = "Ud embalaje"
+        End If
         cboTipoComiArtVario.visible = False
         Label1(44).visible = False
     End If
@@ -7381,7 +7372,7 @@ Dim i As Byte
     End If
     
     'Solo hay ECO para los articulos de VARIOS
-    If vParamAplic.NumeroInstalacion = 2 Then
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then
         If cboArticuloVarios.ListIndex = 0 Then cboTipoComiArtVario.ListIndex = 0
     End If
      
@@ -7460,7 +7451,25 @@ Dim i As Byte
     
     
     
-    
+    'Estamos
+    'numserie<>''
+    If vParamAplic.ManipuladorFitosanitarios2 Then
+        If Text1(23).Text <> "" Then
+            'Puede ser de lotes. Debemos pedir cantidad y tipounid
+            
+            
+            AQUI
+            
+            BuscaChekc = ""
+            If Text1(34).Text = "" Then BuscaChekc = BuscaChekc & "- Capacidad" & vbCrLf
+            If cboUnidadCompra.ItemData(cboUnidadCompra.ListIndex) = 0 Then BuscaChekc = BuscaChekc & "- Codigo unidad(L,Kg...)"
+            If BuscaChekc <> "" Then
+                MsgBox "Fitosanitarios: " & vbCrLf & BuscaChekc, vbExclamation
+                B = False
+            End If
+        End If
+    End If
+        
     DatosOk = B
 End Function
 

@@ -375,22 +375,22 @@ Dim L As Long
     L = Label1(2).Height + 220
     L = Me.Height - L
     L = IIf(L <= 500, 500, L)
-    Me.Label1(2).Top = L
-    Text1(1).Top = L
-    imgBl.Top = L
+    Me.Label1(2).top = L
+    Text1(1).top = L
+    imgBl.top = L
     L = L - 320   '375 + algo
-    Label1(1).Top = L
+    Label1(1).top = L
     L = L - 350 '330+20
-    Text1(0).Top = L
-    Combo1.Top = L - 90
+    Text1(0).top = L
+    Combo1.top = L - 90
     L = L - 380
-    Label1(0).Top = L
+    Label1(0).top = L
     
     
     
     
-    lblInd.Top = Me.Height - lblInd.Height - 15
-    lblMay.Top = lblInd.Top
+    lblInd.top = Me.Height - lblInd.Height - 15
+    lblMay.top = lblInd.top
     
     
     
@@ -606,7 +606,7 @@ End Sub
 
 
 Private Sub UsuarioCorrecto()
-Dim SQL As String
+Dim Sql As String
 Dim PrimeraBD As String
 Dim EmpreProhibid As String
 
@@ -639,10 +639,10 @@ Dim EmpreProhibid As String
         End If
         ' antes de cerrar la conexion cojo de usuarios.empresasariconta la primera que encuentre
         ' que no este bloqueada
-        SQL = "select min(codempre) from usuarios.empresasariges  "
-        SQL = SQL & " WHERE codempre>0 and not codempre in (select codempre from usuarios.usuarioempresasariges where codusu =" & vUsu.ID & ")"
+        Sql = "select min(codempre) from usuarios.empresasariges  "
+        Sql = Sql & " WHERE codempre>0 and not codempre in (select codempre from usuarios.usuarioempresasariges where codusu =" & vUsu.Id & ")"
         
-        PrimeraBD = DevuelveValor(SQL)
+        PrimeraBD = DevuelveValor(Sql)
     
         If UltEmpre_ = "" And PrimeraBD <> "" Then
             UltEmpre_ = PrimeraBD
@@ -652,9 +652,9 @@ Dim EmpreProhibid As String
         
         'Veo si la empresa prohibida es esta
         If EmpreProhibid <> "" Then
-            SQL = Trim(Replace(CadenaDesdeOtroForm, "ariges", ""))
-            SQL = "|" & SQL & "|"
-            If InStr(1, EmpreProhibid, SQL) > 0 Then
+            Sql = Trim(Replace(CadenaDesdeOtroForm, "ariges", ""))
+            Sql = "|" & Sql & "|"
+            If InStr(1, EmpreProhibid, Sql) > 0 Then
                 'Empresa entre las prohibidas. BUscamois otra
                 If PrimeraBD = 0 Then
                     MsgBox "NO teiene acceso a empresas del sistema", vbCritical
@@ -686,6 +686,7 @@ Dim EmpreProhibid As String
             End
         End If
         
+        vUsu.LeerTabPorDefecto
         
         'Otras acciones
         OtrasAcciones
@@ -694,13 +695,13 @@ Dim EmpreProhibid As String
         pLabel "Cargando principal"
 
         Load frmPpal
-        Load frmPpalN
+        Load frmppalN
 End Sub
 
 
 Private Function DevuelveProhibidasSys() As String
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open "Select * from usuarios.usuarioempresasariges WHERE codusu =" & vUsu.ID, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    miRsAux.Open "Select * from usuarios.usuarioempresasariges WHERE codusu =" & vUsu.Id, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     DevuelveProhibidasSys = ""
     While Not miRsAux.EOF
         DevuelveProhibidasSys = DevuelveProhibidasSys & miRsAux.Fields(1) & "|"
@@ -720,7 +721,7 @@ Dim B As Boolean
     While Not miRsAux.EOF
         If Not B Then
             If miRsAux!nomempre = UltEmpre_ Then
-                UltEmpre_ = miRsAux!AriGes
+                UltEmpre_ = miRsAux!ariges
                 B = True
             End If
         End If

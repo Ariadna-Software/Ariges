@@ -126,8 +126,8 @@ Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 
 
-Dim cad As String  'multi proposito
-Dim I As Integer
+Dim Cad As String  'multi proposito
+Dim i As Integer
 
 Private Sub chkCierreParcial_Click()
     Me.txtcantidad.visible = chkCierreParcial.Value = 1
@@ -135,7 +135,7 @@ Private Sub chkCierreParcial_Click()
     
 End Sub
 
-Private Sub cmdCancelar_Click(index As Integer)
+Private Sub cmdCancelar_Click(Index As Integer)
     Unload Me
 End Sub
 
@@ -149,14 +149,38 @@ Private Sub cmdCierreOrdProd_Click()
         End If
     End If
     
-    cad = "¿Seguro que desea cerrar la orden de "
-    If Opcion = 0 Then
-        cad = cad & "producción"
+    
+    NumRegElim = DateDiff("m", CDate(txtFecha(0).Text), Now)
+    NumRegElim = Abs(NumRegElim)
+    If NumRegElim < 6 Then
+        Cad = RecuperaValor(Intercambio, 2)
+        
+        NumRegElim = DateDiff("m", CDate(Cad), Now)
+        NumRegElim = Abs(NumRegElim)
+        
+        'Si es menor que 6 meses compruebo la diferencia
+        If NumRegElim > 6 Then
+            Cad = "creaacion"
+        Else
+            NumRegElim = 0
+        End If
     Else
-        cad = cad & "envasado"
+        Cad = "hoy"
+    
     End If
-    cad = cad & RecuperaValor(Intercambio, 1) & " - " & RecuperaValor(Intercambio, 2)
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
+    If NumRegElim > 0 Then
+        Cad = "Hay " & NumRegElim & " meses de diferencia entre la fecha de cierre y la fecha de " & Cad
+        If MsgBox(Cad, vbQuestion + vbYesNo) <> vbYes Then Exit Sub
+    End If
+    
+    Cad = "¿Seguro que desea cerrar la orden de "
+    If Opcion = 0 Then
+        Cad = Cad & "producción"
+    Else
+        Cad = Cad & "envasado"
+    End If
+    Cad = Cad & " " & RecuperaValor(Intercambio, 1) & " - " & RecuperaValor(Intercambio, 2)
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then Exit Sub
     
     Screen.MousePointer = vbHourglass
     
@@ -167,11 +191,11 @@ Private Sub cmdCierreOrdProd_Click()
 End Sub
 
 Private Sub Form_Load()
- Dim I As Integer
+ Dim i As Integer
     Me.Icon = frmPpal.Icon
     FrCierreOrdenProduccion.visible = False
     limpiar Me
-    I = Opcion
+    i = Opcion
     Select Case Opcion
     Case 0, 1
         PonerFrameVisible FrCierreOrdenProduccion
@@ -183,7 +207,7 @@ Private Sub Form_Load()
             'If vParamAplic.NumeroInstalacion = vbFenollar Then chkCierreParcial.visible = True
         Else
             lbFec(0).Caption = lbFec(0).Caption & "Envasado"
-            I = 0
+            i = 0
         End If
         
         
@@ -192,7 +216,7 @@ Private Sub Form_Load()
         
     End Select
     
-    cmdCancelar(I).Cancel = True
+    cmdCancelar(i).Cancel = True
 End Sub
 
 
@@ -209,15 +233,15 @@ End Sub
 
 
 Private Sub frmC_Selec(vFecha As Date)
-    txtFecha(I).Text = Format(vFecha, "dd/mm/yyyy")
+    txtFecha(i).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub imgFecha_Click(index As Integer)
+Private Sub imgFecha_Click(Index As Integer)
     'El index tiene que ser el mismo que el del txtfecha al que acompaña
     Set frmC = New frmCal
     frmC.Fecha = Now
-    I = index
-    If txtFecha(index).Text <> "" Then frmC.Fecha = CDate(txtFecha(index).Text)
+    i = Index
+    If txtFecha(Index).Text <> "" Then frmC.Fecha = CDate(txtFecha(Index).Text)
     frmC.Show vbModal
     Set frmC = Nothing
     
@@ -244,25 +268,25 @@ Private Sub txtcantidad_LostFocus()
  
 End Sub
 
-Private Sub txtFecha_GotFocus(index As Integer)
-    ConseguirFoco txtFecha(index), 3
+Private Sub txtFecha_GotFocus(Index As Integer)
+    ConseguirFoco txtFecha(Index), 3
 End Sub
 
-Private Sub txtFecha_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtFecha_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtFecha_LostFocus(index As Integer)
+Private Sub txtFecha_LostFocus(Index As Integer)
 Dim T As String
-    txtFecha(index).Text = Trim(txtFecha(index).Text)
-    If txtFecha(index).Text <> "" Then
-        T = txtFecha(index).Text
+    txtFecha(Index).Text = Trim(txtFecha(Index).Text)
+    If txtFecha(Index).Text <> "" Then
+        T = txtFecha(Index).Text
         If EsFechaOK(T) Then
-            txtFecha(index).Text = T
+            txtFecha(Index).Text = T
         Else
-            MsgBox "Fecha con formato incorrecto: " & txtFecha(index).Text, vbExclamation
-            txtFecha(index).Text = ""
-            PonerFoco txtFecha(index)
+            MsgBox "Fecha con formato incorrecto: " & txtFecha(Index).Text, vbExclamation
+            txtFecha(Index).Text = ""
+            PonerFoco txtFecha(Index)
         End If
     End If
     
@@ -270,7 +294,7 @@ End Sub
 
 Private Function CerrarOrdenProduccion(SoloComprobar As Boolean) As Boolean
 Dim vCStock As CStock
-Dim b As Boolean
+Dim B As Boolean
 Dim tabla As String
     
     If Opcion = 0 Then
@@ -287,9 +311,9 @@ Dim tabla As String
     Set miRsAux = New ADODB.Recordset
     Set vCStock = New CStock
     
-    cad = "select * from " & tabla & "2 where codigo=" & RecuperaValor(Me.Intercambio, 1)
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    b = False
+    Cad = "select * from " & tabla & "2 where codigo=" & RecuperaValor(Me.Intercambio, 1)
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    B = False
     
     If Not SoloComprobar Then conn.BeginTrans
     
@@ -297,26 +321,26 @@ Dim tabla As String
     
     
     While Not miRsAux.EOF
-        b = False
+        B = False
         If InicializarCStock(vCStock, "S") Then
             
             If vCStock.MueveStock Then
                 If SoloComprobar Then
-                    b = vCStock.MoverStock(False, False)
+                    B = vCStock.MoverStock(False, False)
                 Else
                     'Estamos ejecutando la actualizacion
                     '---------------------------------------------
                     'si hay control de stock para el articulo actualizar en salmac e insertar en smoval
                     'en actualizar stock comprobamos si el articulo tiene control de stock
-                    b = vCStock.ActualizarStock(False, True)
+                    B = vCStock.ActualizarStock(False, True)
                 End If
             Else
-                b = True
+                B = True
             End If
             
         End If
         
-        If Not b Then
+        If Not B Then
             While Not miRsAux.EOF
                 miRsAux.MoveNext  'para que no siga
             Wend
@@ -328,7 +352,7 @@ Dim tabla As String
     miRsAux.Close
     
     
-    If Not b Then
+    If Not B Then
         Set miRsAux = Nothing
         Set vCStock = Nothing
         If Not SoloComprobar Then conn.RollbackTrans
@@ -337,26 +361,26 @@ Dim tabla As String
     
     
     'AHora comprobamos los stcosk de las entraddas , de las lineas
-    cad = "select codartic codarti2,codalmac,sum(" & tabla & ".cantidad) cantidad from " & tabla & " where "
-    cad = cad & " codigo=" & RecuperaValor(Me.Intercambio, 1) & " group by 1,2"
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    b = False
+    Cad = "select codartic codarti2,codalmac,sum(" & tabla & ".cantidad) cantidad from " & tabla & " where "
+    Cad = Cad & " codigo=" & RecuperaValor(Me.Intercambio, 1) & " group by 1,2"
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    B = False
     While Not miRsAux.EOF
-        b = False
+        B = False
         If InicializarCStock(vCStock, "E") Then   'Las lineas son de netrada
         
             If vCStock.MueveStock Then
                 If SoloComprobar Then
-                    b = vCStock.MoverStock(False, False, True)
+                    B = vCStock.MoverStock(False, False, True)
                 Else
-                    b = vCStock.ActualizarStock(False)
+                    B = vCStock.ActualizarStock(False)
                 End If
             Else
-                b = True
+                B = True
             End If
         End If
         
-        If Not b Then
+        If Not B Then
             While Not miRsAux.EOF
                 miRsAux.MoveNext  'para que no siga
             Wend
@@ -368,7 +392,7 @@ Dim tabla As String
     miRsAux.Close
     
     
-    If Not b Then
+    If Not B Then
         Set miRsAux = Nothing
         Set vCStock = Nothing
         If Not SoloComprobar Then conn.RollbackTrans
@@ -382,13 +406,13 @@ Dim tabla As String
     If Not SoloComprobar Then
         conn.CommitTrans
         If Opcion = 0 Then
-            cad = "sordprod"
+            Cad = "sordprod"
         Else
-            cad = "senvprod"
+            Cad = "senvprod"
         End If
-        cad = "UPDATE " & cad & "  set fecproduccion = " & DBSet(txtFecha(0).Text, "F")
-        cad = cad & " WHERE  codigo=" & RecuperaValor(Me.Intercambio, 1)
-        conn.Execute cad
+        Cad = "UPDATE " & Cad & "  set fecproduccion = " & DBSet(txtFecha(0).Text, "F")
+        Cad = Cad & " WHERE  codigo=" & RecuperaValor(Me.Intercambio, 1)
+        conn.Execute Cad
     End If
     
     CerrarOrdenProduccion = True
@@ -415,8 +439,8 @@ Dim CantidadNecesaria As Currency
     Else
         vCStock.DetaMov = "PRE"
     End If
-    vCStock.Trabajador = PonerTrabajadorConectado(cad)
-    If cad = "" Then Err.Raise 513, , "Imposible asignar trabajador conectado"
+    vCStock.Trabajador = PonerTrabajadorConectado(Cad)
+    If Cad = "" Then Err.Raise 513, , "Imposible asignar trabajador conectado"
     vCStock.Documento = RecuperaValor(Intercambio, 1)
     vCStock.FechaMov = txtFecha(0).Text '
     

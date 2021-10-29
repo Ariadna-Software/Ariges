@@ -756,15 +756,15 @@ End Function
 
 Public Function Bonifica() As Boolean
 'Indica si al cliente se le aplican bonificaciones o no
-Dim cad As String
+Dim Cad As String
 
     On Error GoTo EBonifica
     Bonifica = False
     
-    cad = DevuelveDesdeBDNew(conAri, "sclien", "codtarif", "codclien", Codigo, "N")
-    If cad <> "" Then
-        cad = DevuelveDesdeBDNew(conAri, "starif", "bonifica", "codlista", cad, "N")
-        If cad <> "" Then Bonifica = CBool(cad)
+    Cad = DevuelveDesdeBDNew(conAri, "sclien", "codtarif", "codclien", Codigo, "N")
+    If Cad <> "" Then
+        Cad = DevuelveDesdeBDNew(conAri, "starif", "bonifica", "codlista", Cad, "N")
+        If Cad <> "" Then Bonifica = CBool(Cad)
     End If
     
 EBonifica:
@@ -778,7 +778,7 @@ Public Function ActualizaUltFecMovim(vFecha As String) As Boolean
 'Actualiza la fecha del ultimo movimiento del cliente si la fecha del movimiento
 'que se pasa por parametro es posterior a la que tiene el cliente
 Dim SQL As String
-Dim b As Boolean
+Dim B As Boolean
 Dim actualiza As Boolean
 
     On Error GoTo EActFecha
@@ -800,11 +800,11 @@ Dim actualiza As Boolean
         SQL = SQL & " WHERE codclien=" & Codigo
         conn.Execute SQL, , adCmdText
     End If
-    b = True
+    B = True
         
 EActFecha:
-    If Err.Number <> 0 Then b = False
-    ActualizaUltFecMovim = b
+    If Err.Number <> 0 Then B = False
+    ActualizaUltFecMovim = B
 End Function
 
 
@@ -889,3 +889,12 @@ Public Sub PonDatosDireccionEnvio(ByRef txtCod As TextBox, txtName As TextBox)
         
     End If
 End Sub
+
+
+
+Public Function MarcaFacturar() As Byte
+
+    MarcaFacturar = 0
+    If DevuelveDesdeBDNew(conAri, "sclien", "marcafacturar", "codclien", Me.Codigo, "N") = 1 Then MarcaFacturar = 1
+        
+End Function

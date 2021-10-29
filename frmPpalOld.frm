@@ -169,7 +169,7 @@ Begin VB.Form frmPpalOld
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "11:14"
+            TextSave        =   "17:56"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -3606,7 +3606,7 @@ Private Sub mnFacPedidos_Click(Index As Integer)
         
         Else
             frmFacEntPedSail.EsHistorico = Index = 1
-                frmFacEntPedSail.Show vbModal
+            frmFacEntPedSail.Show vbModal
         End If
         
         If vParamAplic.NumeroInstalacion = vbFenollar Then

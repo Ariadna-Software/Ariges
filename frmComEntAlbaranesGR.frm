@@ -827,18 +827,18 @@ Begin VB.Form frmComEntAlbaranesGR
       TabCaption(1)   =   "Observaciones / Totales"
       TabPicture(1)   =   "frmComEntAlbaranesGR.frx":0B40
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(47)"
-      Tab(1).Control(2)=   "Label1(48)"
-      Tab(1).Control(3)=   "Text1(15)"
-      Tab(1).Control(4)=   "Text1(16)"
-      Tab(1).Control(5)=   "Text1(17)"
-      Tab(1).Control(6)=   "Text1(18)"
-      Tab(1).Control(7)=   "Text1(19)"
-      Tab(1).Control(8)=   "FrameHco"
-      Tab(1).Control(9)=   "FrameFactura"
-      Tab(1).Control(10)=   "Text1(28)"
-      Tab(1).Control(11)=   "Text1(29)"
+      Tab(1).Control(0)=   "Text1(29)"
+      Tab(1).Control(1)=   "Text1(28)"
+      Tab(1).Control(2)=   "FrameFactura"
+      Tab(1).Control(3)=   "FrameHco"
+      Tab(1).Control(4)=   "Text1(19)"
+      Tab(1).Control(5)=   "Text1(18)"
+      Tab(1).Control(6)=   "Text1(17)"
+      Tab(1).Control(7)=   "Text1(16)"
+      Tab(1).Control(8)=   "Text1(15)"
+      Tab(1).Control(9)=   "Label1(48)"
+      Tab(1).Control(10)=   "Label1(47)"
+      Tab(1).Control(11)=   "Label1(45)"
       Tab(1).ControlCount=   12
       Begin VB.TextBox Text1 
          BeginProperty Font 
@@ -7802,7 +7802,7 @@ Dim C As String
             AlmacenLineas = -1
        End If
             
-       If AlmacenLineas < 0 Then
+       If AlmacenLineas <= 0 Then
             'No hay datos todavia
             '                                                                trabajador
             C = DevuelveDesdeBDNew(conAri, "straba", "codalmac", "codtraba", Text1(2).Text, "N")

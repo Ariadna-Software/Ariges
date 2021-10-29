@@ -398,7 +398,6 @@ Begin VB.Form frmGesSocAsociadosGR
       _ExtentX        =   21616
       _ExtentY        =   13996
       _Version        =   393216
-      Tab             =   1
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Verdana"
@@ -411,60 +410,109 @@ Begin VB.Form frmGesSocAsociadosGR
       EndProperty
       TabCaption(0)   =   "Asociados gestion"
       TabPicture(0)   =   "frmGesSocAsociadosGR.frx":000C
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label1(13)"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(14)"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "Label1(34)"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "Label1(15)"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "Label1(36)"
+      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "Label1(37)"
+      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "Label1(12)"
+      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "Label1(25)"
+      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).Control(8)=   "ImgMail(0)"
+      Tab(0).Control(8).Enabled=   0   'False
       Tab(0).Control(9)=   "Label1(3)"
+      Tab(0).Control(9).Enabled=   0   'False
       Tab(0).Control(10)=   "imgFecha(1)"
+      Tab(0).Control(10).Enabled=   0   'False
       Tab(0).Control(11)=   "Label1(16)"
+      Tab(0).Control(11).Enabled=   0   'False
       Tab(0).Control(12)=   "imgFecha(0)"
+      Tab(0).Control(12).Enabled=   0   'False
       Tab(0).Control(13)=   "Label1(5)"
+      Tab(0).Control(13).Enabled=   0   'False
       Tab(0).Control(14)=   "imgFecha(2)"
+      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "Label1(40)"
+      Tab(0).Control(15).Enabled=   0   'False
       Tab(0).Control(16)=   "Label1(2)"
+      Tab(0).Control(16).Enabled=   0   'False
       Tab(0).Control(17)=   "Label1(4)"
+      Tab(0).Control(17).Enabled=   0   'False
       Tab(0).Control(18)=   "imgBuscar(1)"
+      Tab(0).Control(18).Enabled=   0   'False
       Tab(0).Control(19)=   "imgBuscar(0)"
+      Tab(0).Control(19).Enabled=   0   'False
       Tab(0).Control(20)=   "DataGrid1"
+      Tab(0).Control(20).Enabled=   0   'False
       Tab(0).Control(21)=   "Text1(3)"
+      Tab(0).Control(21).Enabled=   0   'False
       Tab(0).Control(22)=   "Text1(4)"
+      Tab(0).Control(22).Enabled=   0   'False
       Tab(0).Control(23)=   "Text1(5)"
+      Tab(0).Control(23).Enabled=   0   'False
       Tab(0).Control(24)=   "Text1(6)"
+      Tab(0).Control(24).Enabled=   0   'False
       Tab(0).Control(25)=   "Text1(9)"
+      Tab(0).Control(25).Enabled=   0   'False
       Tab(0).Control(26)=   "Text1(8)"
+      Tab(0).Control(26).Enabled=   0   'False
       Tab(0).Control(27)=   "Text1(7)"
+      Tab(0).Control(27).Enabled=   0   'False
       Tab(0).Control(28)=   "Text1(2)"
+      Tab(0).Control(28).Enabled=   0   'False
       Tab(0).Control(29)=   "Text1(19)"
+      Tab(0).Control(29).Enabled=   0   'False
       Tab(0).Control(30)=   "Text1(15)"
+      Tab(0).Control(30).Enabled=   0   'False
       Tab(0).Control(31)=   "Text1(16)"
+      Tab(0).Control(31).Enabled=   0   'False
       Tab(0).Control(32)=   "Text1(17)"
+      Tab(0).Control(32).Enabled=   0   'False
       Tab(0).Control(33)=   "Text1(18)"
+      Tab(0).Control(33).Enabled=   0   'False
       Tab(0).Control(34)=   "Text1(12)"
+      Tab(0).Control(34).Enabled=   0   'False
       Tab(0).Control(35)=   "Text1(11)"
+      Tab(0).Control(35).Enabled=   0   'False
       Tab(0).Control(36)=   "Text1(13)"
+      Tab(0).Control(36).Enabled=   0   'False
       Tab(0).Control(37)=   "Text1(14)"
+      Tab(0).Control(37).Enabled=   0   'False
       Tab(0).Control(38)=   "Text1(10)"
+      Tab(0).Control(38).Enabled=   0   'False
       Tab(0).Control(39)=   "Text1(20)"
+      Tab(0).Control(39).Enabled=   0   'False
       Tab(0).Control(40)=   "Combo1(0)"
+      Tab(0).Control(40).Enabled=   0   'False
       Tab(0).Control(41)=   "Check1(4)"
+      Tab(0).Control(41).Enabled=   0   'False
       Tab(0).Control(42)=   "Frame3"
+      Tab(0).Control(42).Enabled=   0   'False
       Tab(0).Control(43)=   "FrameSocio"
+      Tab(0).Control(43).Enabled=   0   'False
       Tab(0).Control(44)=   "txtAux1(0)"
+      Tab(0).Control(44).Enabled=   0   'False
       Tab(0).Control(45)=   "txtAux1(1)"
+      Tab(0).Control(45).Enabled=   0   'False
       Tab(0).Control(46)=   "cboEntidades"
+      Tab(0).Control(46).Enabled=   0   'False
       Tab(0).Control(47)=   "cboSeccionGesoc"
+      Tab(0).Control(47).Enabled=   0   'False
       Tab(0).Control(48)=   "FrameToolAux0"
+      Tab(0).Control(48).Enabled=   0   'False
       Tab(0).ControlCount=   49
       TabCaption(1)   =   "Email  /  Histórico"
       TabPicture(1)   =   "frmGesSocAsociadosGR.frx":0028
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "lblDpto(6)"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "lblDpto(5)"
@@ -495,7 +543,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Tab(2).ControlCount=   1
       Begin VB.Frame FrameToolAux0 
          Height          =   645
-         Left            =   -74865
+         Left            =   135
          TabIndex        =   88
          Top             =   5040
          Width           =   1500
@@ -541,7 +589,7 @@ Begin VB.Form frmGesSocAsociadosGR
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Left            =   -73920
+         Left            =   1080
          Style           =   2  'Dropdown List
          TabIndex        =   74
          Top             =   5760
@@ -559,7 +607,7 @@ Begin VB.Form frmGesSocAsociadosGR
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Left            =   -69000
+         Left            =   6000
          Style           =   2  'Dropdown List
          TabIndex        =   77
          Top             =   5760
@@ -579,7 +627,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   390
          Index           =   0
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   81
          Tag             =   "Envio de correo normal|N|N|||asociados|Correo|||"
          Top             =   465
@@ -598,7 +646,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   80
          Tag             =   "Aurorizo comunicaciones|N|N|||asociados|Auto3|||"""
          Top             =   1125
@@ -617,7 +665,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   390
          Index           =   2
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   79
          Tag             =   "Autorizo correo electrónico|N|N|||asociados|Auto2|||"
          Top             =   780
@@ -636,7 +684,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   3
-         Left            =   360
+         Left            =   -74640
          TabIndex        =   78
          Tag             =   "Autorizo tratamiento informático|N|N|||asociados|Auto1|||"
          Top             =   1440
@@ -656,7 +704,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   315
          Index           =   1
-         Left            =   -72720
+         Left            =   2280
          MaxLength       =   70
          TabIndex        =   76
          Tag             =   "Formación|T|N|||strab1|formacio||N|"
@@ -679,7 +727,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   315
          Index           =   0
-         Left            =   -74760
+         Left            =   240
          MaxLength       =   15
          TabIndex        =   75
          Tag             =   "Periodo|T|N|||strab1|periodos||N|"
@@ -700,7 +748,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   2415
          Index           =   1
-         Left            =   7920
+         Left            =   -67080
          Locked          =   -1  'True
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -721,7 +769,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   1815
          Index           =   0
-         Left            =   7800
+         Left            =   -67200
          Locked          =   -1  'True
          MultiLine       =   -1  'True
          TabIndex        =   70
@@ -741,7 +789,7 @@ Begin VB.Form frmGesSocAsociadosGR
             Strikethrough   =   0   'False
          EndProperty
          Height          =   810
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   63
          Top             =   4215
          Width           =   11850
@@ -949,7 +997,7 @@ Begin VB.Form frmGesSocAsociadosGR
             Strikethrough   =   0   'False
          EndProperty
          Height          =   735
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   57
          Top             =   3465
          Width           =   11895
@@ -1130,7 +1178,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   4
-         Left            =   -72150
+         Left            =   2850
          TabIndex        =   3
          Tag             =   "Socio|N|N|||asociados|essocio|||"
          Top             =   600
@@ -1148,7 +1196,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   -68040
+         Left            =   6960
          Style           =   2  'Dropdown List
          TabIndex        =   14
          Tag             =   "Situacion|N|N|||asociados|Estado|||"
@@ -1167,7 +1215,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   20
-         Left            =   -73830
+         Left            =   1170
          MaxLength       =   9
          TabIndex        =   12
          Tag             =   "T|T|S|||asociados|movil|||"
@@ -1187,7 +1235,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   10
-         Left            =   -70950
+         Left            =   4050
          MaxLength       =   9
          TabIndex        =   11
          Tag             =   "T|T|S|||asociados|telefono3|||"
@@ -1207,7 +1255,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   1470
          Index           =   14
-         Left            =   -68040
+         Left            =   6960
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   22
@@ -1229,7 +1277,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   13
-         Left            =   -65145
+         Left            =   9855
          MaxLength       =   10
          TabIndex        =   16
          Tag             =   "Fecha de Baja|F|S|||asociados|fechabaja|dd/mm/yyyy|N|"
@@ -1249,7 +1297,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   11
-         Left            =   -70770
+         Left            =   4230
          MaxLength       =   10
          TabIndex        =   13
          Tag             =   "Fecha de Nacimiento|F|S|||asociados|fechanac|dd/mm/yyyy|N|"
@@ -1269,7 +1317,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   12
-         Left            =   -68040
+         Left            =   6960
          MaxLength       =   10
          TabIndex        =   15
          Tag             =   "Fecha de Alta|F|S|||asociados|FechaAlta|dd/mm/yyyy|N|"
@@ -1288,7 +1336,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   18
-         Left            =   -65565
+         Left            =   9435
          MaxLength       =   10
          TabIndex        =   21
          Tag             =   "Cuenta|T|S|||asociados|NUmcc|0000000000||"
@@ -1308,7 +1356,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   17
-         Left            =   -65955
+         Left            =   9045
          MaxLength       =   2
          TabIndex        =   20
          Tag             =   "DC|T|S|||asociados|DC|00||"
@@ -1328,7 +1376,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   16
-         Left            =   -66660
+         Left            =   8340
          MaxLength       =   4
          TabIndex        =   19
          Tag             =   "Sucur.|N|S|0|9999|asociados|sucursal|0000|N|"
@@ -1348,7 +1396,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   15
-         Left            =   -67350
+         Left            =   7650
          MaxLength       =   4
          TabIndex        =   18
          Tag             =   "Ban|N|S|0|9999|asociados|entidad|0000|N|"
@@ -1368,7 +1416,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   19
-         Left            =   -68040
+         Left            =   6960
          MaxLength       =   4
          TabIndex        =   17
          Tag             =   "IBAN|T|S|||asociados|iban|||"
@@ -1388,7 +1436,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   -73830
+         Left            =   1170
          MaxLength       =   35
          TabIndex        =   4
          Tag             =   "D|T|S|||asociados|Direccion|||"
@@ -1408,7 +1456,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   -73830
+         Left            =   1170
          MaxLength       =   15
          TabIndex        =   9
          Tag             =   "Teléfono|T|S|||asociados|telefono1|||"
@@ -1450,7 +1498,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   8
-         Left            =   -72375
+         Left            =   2625
          MaxLength       =   30
          TabIndex        =   10
          Tag             =   "T|T|S|||asociados|Telefono2||N|"
@@ -1470,7 +1518,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   9
-         Left            =   -73830
+         Left            =   1170
          MaxLength       =   40
          TabIndex        =   8
          Tag             =   "e-mail|T|S|||asociados|Mail||N|"
@@ -1490,7 +1538,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   6
-         Left            =   -73830
+         Left            =   1170
          MaxLength       =   9
          TabIndex        =   2
          Tag             =   "N.I.F.|T|N|||asociados|nif|||"
@@ -1510,7 +1558,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   -73830
+         Left            =   1170
          MaxLength       =   30
          TabIndex        =   7
          Tag             =   "Pro.|T|S|||asociados|provincia||N|"
@@ -1530,7 +1578,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   -71910
+         Left            =   3090
          MaxLength       =   30
          TabIndex        =   6
          Tag             =   "Pob|T|S|||asociados|Poblacion||N|"
@@ -1550,7 +1598,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   -73830
+         Left            =   1170
          MaxLength       =   6
          TabIndex        =   5
          Tag             =   "C.Postal|T|N|||asociados|CodPostal||N|"
@@ -1561,7 +1609,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin MSDataGridLib.DataGrid DataGrid1 
          Bindings        =   "frmGesSocAsociadosGR.frx":0072
          Height          =   1815
-         Left            =   -74835
+         Left            =   165
          TabIndex        =   56
          Top             =   5880
          Width           =   11580
@@ -1631,7 +1679,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin MSDataGridLib.DataGrid DataGrid2 
          Bindings        =   "frmGesSocAsociadosGR.frx":0087
          Height          =   5535
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   69
          Top             =   2160
          Width           =   7455
@@ -1700,7 +1748,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   0
-         Left            =   -74100
+         Left            =   900
          Picture         =   "frmGesSocAsociadosGR.frx":009C
          Tag             =   "-1"
          ToolTipText     =   "Buscar población"
@@ -1722,7 +1770,7 @@ Begin VB.Form frmGesSocAsociadosGR
          ForeColor       =   &H00800000&
          Height          =   240
          Index           =   0
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   82
          Top             =   1920
          Width           =   870
@@ -1730,8 +1778,8 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin VB.Line Line1 
          BorderColor     =   &H00C00000&
          BorderWidth     =   3
-         X1              =   240
-         X2              =   11790
+         X1              =   -74760
+         X2              =   -63210
          Y1              =   1800
          Y2              =   1800
       End
@@ -1750,7 +1798,7 @@ Begin VB.Form frmGesSocAsociadosGR
          ForeColor       =   &H00800000&
          Height          =   240
          Index           =   5
-         Left            =   7800
+         Left            =   -67200
          TabIndex        =   72
          Top             =   1995
          Width           =   900
@@ -1770,7 +1818,7 @@ Begin VB.Form frmGesSocAsociadosGR
          ForeColor       =   &H00800000&
          Height          =   240
          Index           =   6
-         Left            =   7920
+         Left            =   -67080
          TabIndex        =   71
          Top             =   4800
          Width           =   1455
@@ -1778,7 +1826,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   1
-         Left            =   -68325
+         Left            =   6675
          Tag             =   "-1"
          ToolTipText     =   "Buscar población"
          Top             =   2040
@@ -1798,7 +1846,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   240
          Index           =   4
-         Left            =   -69240
+         Left            =   5760
          TabIndex        =   55
          Top             =   660
          Width           =   915
@@ -1816,7 +1864,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   -69240
+         Left            =   5760
          TabIndex        =   54
          Top             =   1560
          Width           =   495
@@ -1834,7 +1882,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   40
-         Left            =   -69240
+         Left            =   5760
          TabIndex        =   53
          Top             =   2040
          Width           =   855
@@ -1842,7 +1890,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   2
-         Left            =   -65505
+         Left            =   9495
          Picture         =   "frmGesSocAsociadosGR.frx":0A9E
          ToolTipText     =   "Buscar fecha"
          Top             =   1110
@@ -1861,7 +1909,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   240
          Index           =   5
-         Left            =   -66465
+         Left            =   8535
          TabIndex        =   52
          Top             =   1110
          Width           =   855
@@ -1869,7 +1917,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   0
-         Left            =   -71010
+         Left            =   3990
          Picture         =   "frmGesSocAsociadosGR.frx":0B29
          ToolTipText     =   "Buscar fecha"
          Top             =   3150
@@ -1889,7 +1937,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   16
-         Left            =   -72045
+         Left            =   2955
          TabIndex        =   51
          Top             =   3150
          Width           =   975
@@ -1897,7 +1945,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   1
-         Left            =   -68325
+         Left            =   6675
          Picture         =   "frmGesSocAsociadosGR.frx":0BB4
          ToolTipText     =   "Buscar fecha"
          Top             =   1080
@@ -1916,7 +1964,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   3
-         Left            =   -69240
+         Left            =   5760
          TabIndex        =   50
          Top             =   1080
          Width           =   855
@@ -1924,7 +1972,7 @@ Begin VB.Form frmGesSocAsociadosGR
       Begin VB.Image ImgMail 
          Height          =   240
          Index           =   0
-         Left            =   -74115
+         Left            =   885
          Tag             =   "-1"
          ToolTipText     =   "Enviar e-mail"
          Top             =   2355
@@ -1943,7 +1991,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   25
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   46
          Top             =   3150
          Width           =   615
@@ -1961,7 +2009,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   12
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   44
          Top             =   2775
          Width           =   1005
@@ -1979,7 +2027,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   37
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   43
          Top             =   2355
          Width           =   630
@@ -1997,7 +2045,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   36
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   42
          Top             =   630
          Width           =   600
@@ -2015,7 +2063,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   15
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   41
          Top             =   1950
          Width           =   960
@@ -2033,7 +2081,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   34
-         Left            =   -72870
+         Left            =   2130
          TabIndex        =   40
          Top             =   1560
          Width           =   1005
@@ -2051,7 +2099,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   14
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   39
          Top             =   1560
          Width           =   780
@@ -2069,7 +2117,7 @@ Begin VB.Form frmGesSocAsociadosGR
          EndProperty
          Height          =   255
          Index           =   13
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   38
          Top             =   1095
          Width           =   915
@@ -2489,7 +2537,7 @@ Private Sub BotonAnyadir()
     
     Me.Check1(4).Value = 0
     
-    Text1(0).Text = SugerirCodigoSiguienteStr("asociados", "idasoc", "idasoc<8500")
+    Text1(0).Text = SugerirCodigoSiguienteStr("asociados", "idasoc", "")    '"idasoc<8500")  --> Sep 2021  Chelo dice que lo quitemos. ademas ya no hay hueco
     Text1(12).Text = Format(Now, "dd/mm/yyyy")
     Text1(21).Text = "0": Text1(22).Text = "0": Text1(23).Text = "1"
     FormateaCampo Text1(0)
@@ -2616,7 +2664,7 @@ Private Sub BotonModificarLinea()
                 
                 CargaTxtAux1 True, False
                 DataGrid1.Enabled = False
-                PonerFoco txtAux1(1)
+                PonerFoco TxtAux1(1)
         Case 2 'Habilidades
         
         
@@ -3904,9 +3952,9 @@ On Error GoTo EDatosOkLinea
         Case 0 '
             miSQL = ""
             
-            If Trim(txtAux1(0).Text) = "" Then
+            If Trim(TxtAux1(0).Text) = "" Then
                 miSQL = "Fecha alta no puede ser nula" & vbCrLf
-                PonerFoco txtAux1(0)
+                PonerFoco TxtAux1(0)
             End If
             
             If ModificaLineas = 1 Then
@@ -4057,7 +4105,7 @@ On Error GoTo EModificarLinea
                 'Para dar de baja, lo otro no hacemos nada
                 
             
-                If Me.txtAux1(1).Text = "" Then
+                If Me.TxtAux1(1).Text = "" Then
                     'NO ha puesto fecha de baja. NO hago NADA de nada
             
                 Else
@@ -4196,18 +4244,18 @@ Dim i As Byte
 
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
-        For i = 0 To txtAux1.Count - 1 'TextBox
-            txtAux1(i).Top = 290
-            txtAux1(i).visible = visible
+        For i = 0 To TxtAux1.Count - 1 'TextBox
+            TxtAux1(i).Top = 290
+            TxtAux1(i).visible = visible
         Next i
         cboEntidades.visible = visible
         cboSeccionGesoc.visible = visible
     Else
         If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             DeseleccionaGrid DataGrid1
-            For i = 0 To txtAux1.Count - 1
-                txtAux1(i).Text = ""
-                BloquearTxt txtAux1(i), False
+            For i = 0 To TxtAux1.Count - 1
+                TxtAux1(i).Text = ""
+                BloquearTxt TxtAux1(i), False
             Next i
             cboEntidades.ListIndex = -1
             cboSeccionGesoc.ListIndex = -1
@@ -4216,8 +4264,8 @@ Dim i As Byte
             'MODificar
             'Solo dejamos modificar la fecha de baja
             For i = 0 To 1
-                txtAux1(i).Text = Trim(DataGrid1.Columns(i + 2).Text)
-                BloquearTxt txtAux1(i), i = 0
+                TxtAux1(i).Text = Trim(DataGrid1.Columns(i + 2).Text)
+                BloquearTxt TxtAux1(i), i = 0
             Next i
         End If
 
@@ -4227,9 +4275,9 @@ Dim i As Byte
         alto = ObtenerAlto(DataGrid1, 8)
         cboEntidades.Top = alto
         cboSeccionGesoc.Top = alto
-        For i = 0 To txtAux1.Count - 1
-            txtAux1(i).Top = alto
-            txtAux1(i).Height = DataGrid1.RowHeight
+        For i = 0 To TxtAux1.Count - 1
+            TxtAux1(i).Top = alto
+            TxtAux1(i).Height = DataGrid1.RowHeight
         Next i
         
         'Fijamos anchura y posicion Left
@@ -4237,18 +4285,18 @@ Dim i As Byte
         'Periodo
         cboSeccionGesoc.Left = DataGrid1.Left + 320
         cboSeccionGesoc.Width = DataGrid1.Columns(1).Width
-        txtAux1(0).Left = DataGrid1.Columns(2).Left + DataGrid1.Left
-        txtAux1(0).Width = DataGrid1.Columns(2).Width - 20
+        TxtAux1(0).Left = DataGrid1.Columns(2).Left + DataGrid1.Left
+        TxtAux1(0).Width = DataGrid1.Columns(2).Width - 20
         'Formacion
-        txtAux1(1).Left = DataGrid1.Columns(3).Left + DataGrid1.Left
-        txtAux1(1).Width = DataGrid1.Columns(3).Width - 20
+        TxtAux1(1).Left = DataGrid1.Columns(3).Left + DataGrid1.Left
+        TxtAux1(1).Width = DataGrid1.Columns(3).Width - 20
         
         cboEntidades.Left = DataGrid1.Columns(4).Left + DataGrid1.Left
         cboEntidades.Width = DataGrid1.Columns(4).Width
         'Los ponemos Visibles o No
         '--------------------------
-        For i = 0 To txtAux1.Count - 1
-            txtAux1(i).visible = visible
+        For i = 0 To TxtAux1.Count - 1
+            TxtAux1(i).visible = visible
         Next i
         cboEntidades.visible = False
         cboSeccionGesoc.visible = False
@@ -4307,7 +4355,7 @@ Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtAux1_GotFocus(Index As Integer)
-    ConseguirFoco txtAux1(Index), Modo
+    ConseguirFoco TxtAux1(Index), Modo
 End Sub
 
 Private Sub txtAux1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -4332,8 +4380,8 @@ End Sub
 
 Private Sub TxtAux1_LostFocus(Index As Integer)
     
-    If txtAux1(Index).Text <> "" Then
-        PonerFormatoFecha txtAux1(Index)
+    If TxtAux1(Index).Text <> "" Then
+        PonerFormatoFecha TxtAux1(Index)
            
             'PonerFoco txtAux1(Index)
         
@@ -4642,10 +4690,10 @@ Dim SituBajaAgro As String
     End If
     
     
-    If Me.txtAux1(1).Text = "" Then
+    If Me.TxtAux1(1).Text = "" Then
         BuscaChekc = "null"  'en minuscula. Abajo se compara con el valor null
     Else
-        BuscaChekc = DBSet(txtAux1(1).Text, "F")
+        BuscaChekc = DBSet(TxtAux1(1).Text, "F")
     End If
     
     
@@ -4978,10 +5026,10 @@ Dim RN As ADODB.Recordset
         
         
         
-        ActGasolineraAsociadoSocio CLng(Text1(0)), CInt(cboEntidades.ItemData(cboEntidades.ListIndex)), CDate(Me.txtAux1(0).Text), BD_Arigaso_l
+        ActGasolineraAsociadoSocio CLng(Text1(0)), CInt(cboEntidades.ItemData(cboEntidades.ListIndex)), CDate(Me.TxtAux1(0).Text), BD_Arigaso_l
         miSQL = "REPLACE asociados_entidades(IdAsoc,IdEntidad,FechaAlta) VALUES (" & CLng(Text1(0))
         miSQL = miSQL & "," & Me.cboEntidades.ItemData(Me.cboEntidades.ListIndex) & ","
-        miSQL = miSQL & DBSet(CDate(Me.txtAux1(0).Text), "F", "N") & ")"
+        miSQL = miSQL & DBSet(CDate(Me.TxtAux1(0).Text), "F", "N") & ")"
         conn.Execute miSQL
             
     
@@ -4991,7 +5039,7 @@ Dim RN As ADODB.Recordset
         
         RN.Open "Select * from unidadesnegocio where idunidad = " & cboSeccionGesoc.ItemData(cboSeccionGesoc.ListIndex), conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         '-- actualiza el cliente en Ariges
-        TraspasaAsociadoAriges Text1(0), RN, CDate(Me.txtAux1(0).Text)
+        TraspasaAsociadoAriges Text1(0), RN, CDate(Me.TxtAux1(0).Text)
         RN.Close
         Set RN = Nothing
     
@@ -5003,7 +5051,7 @@ Dim RN As ADODB.Recordset
     End Select
     
     miSQL = "insert into asociados_unidadesnegocio(IdAsoc,IdUnidad,FechaAlta) VALUES (" & Text1(0).Text & ","
-    miSQL = miSQL & cboSeccionGesoc.ItemData(cboSeccionGesoc.ListIndex) & "," & DBSet(txtAux1(0).Text, "F") & ")"
+    miSQL = miSQL & cboSeccionGesoc.ItemData(cboSeccionGesoc.ListIndex) & "," & DBSet(TxtAux1(0).Text, "F") & ")"
     ejecutar miSQL, False
      DarAltaUnidadNegocio_ = True
 End Function

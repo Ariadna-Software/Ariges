@@ -109,9 +109,10 @@ Dim Cad As String
 
     BuscaEmpresas
     
-    
+
     
     UpdateLayout
+       
 End Sub
 
 Public Sub BuscaEmpresas()
@@ -119,7 +120,7 @@ Dim Prohibidas As String
 Dim RS As ADODB.Recordset
 Dim rs2 As ADODB.Recordset
 Dim Cad As String
-Dim SQL As String
+Dim Sql As String
 
 Dim N
 
@@ -130,7 +131,7 @@ Prohibidas = DevuelveProhibidas
     Set RS = New ADODB.Recordset
     
     '[Monica]11/04/2014: solo debe de salir las ariconta
-    RS.Open "Select * from usuarios.empresasariconta where conta like 'ariconta%' ORDER BY Codempre", conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open "Select * from usuarios.empresasariges where ariges like 'ariges%' ORDER BY Codempre", conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     tree.Nodes.Clear
     
     While Not RS.EOF
@@ -153,7 +154,7 @@ Prohibidas = DevuelveProhibidas
             'Set Rs2 = Nothing
             
                 
-            Cad = RS!CONTA & "|" & RS!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+            Cad = RS!ariges & "|" & RS!nomresum '& "|" & Rs!Usuario & "|" & Rs!Pass & "|"
             
             If RS!codempre = vEmpresa.codempre Then
                 N.Bold = True

@@ -15,6 +15,285 @@ Begin VB.Form frmListado5
    ScaleWidth      =   21225
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameCopiarPrecios 
+      Height          =   4305
+      Left            =   0
+      TabIndex        =   452
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   6975
+      Begin VB.CheckBox chkVarios 
+         Caption         =   "Sólo marca permite compra"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   10
+         Left            =   240
+         TabIndex        =   458
+         Top             =   3480
+         Visible         =   0   'False
+         Width           =   3135
+      End
+      Begin VB.TextBox txtDescFamia 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   3
+         Left            =   1170
+         Locked          =   -1  'True
+         TabIndex        =   485
+         Top             =   2925
+         Width           =   5520
+      End
+      Begin VB.TextBox txtFamia 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   3
+         Left            =   270
+         TabIndex        =   457
+         Tag             =   "Cod. Proveedor|N|N|0|999999|slispr|codprove|000000|S|"
+         Top             =   2925
+         Width           =   840
+      End
+      Begin VB.TextBox txtDescProve 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   3
+         Left            =   1170
+         Locked          =   -1  'True
+         TabIndex        =   462
+         Top             =   2070
+         Width           =   5520
+      End
+      Begin VB.TextBox txtProve 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   3
+         Left            =   270
+         TabIndex        =   456
+         Tag             =   "Cod. Proveedor|N|N|0|999999|slispr|codprove|000000|S|"
+         Top             =   2070
+         Width           =   840
+      End
+      Begin VB.TextBox txtProve 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   2
+         Left            =   285
+         TabIndex        =   455
+         Tag             =   "Cod. Proveedor|N|N|0|999999|slispr|codprove|000000|S|"
+         Top             =   1260
+         Width           =   840
+      End
+      Begin VB.TextBox txtDescProve 
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   2
+         Left            =   1185
+         Locked          =   -1  'True
+         TabIndex        =   454
+         Top             =   1260
+         Width           =   5520
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   41
+         Left            =   5610
+         TabIndex        =   460
+         Top             =   3600
+         Width           =   1065
+      End
+      Begin VB.CommandButton CmdAcepCopia 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   4440
+         TabIndex        =   459
+         Top             =   3600
+         Width           =   1065
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Familia Origen"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   285
+         Index           =   1
+         Left            =   300
+         TabIndex        =   486
+         Top             =   2610
+         Width           =   1590
+      End
+      Begin VB.Image imgFamilia 
+         Height          =   240
+         Index           =   3
+         Left            =   1965
+         Picture         =   "frmListado5.frx":0000
+         Tag             =   "-1"
+         ToolTipText     =   "Buscar Proveedor"
+         Top             =   2610
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Proveedor Destino"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   285
+         Index           =   0
+         Left            =   300
+         TabIndex        =   463
+         Top             =   1755
+         Width           =   2085
+      End
+      Begin VB.Image imgProveedor 
+         Height          =   240
+         Index           =   3
+         Left            =   2370
+         Picture         =   "frmListado5.frx":0A02
+         Tag             =   "-1"
+         ToolTipText     =   "Buscar Proveedor"
+         Top             =   1755
+         Width           =   240
+      End
+      Begin VB.Image imgProveedor 
+         Height          =   240
+         Index           =   2
+         Left            =   2340
+         Picture         =   "frmListado5.frx":1404
+         Tag             =   "-1"
+         ToolTipText     =   "Buscar Proveedor"
+         Top             =   945
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Proveedor Origen"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   285
+         Index           =   3
+         Left            =   315
+         TabIndex        =   461
+         Top             =   945
+         Width           =   1950
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Copiar Precios Proveedor"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   40
+         Left            =   315
+         TabIndex        =   453
+         Top             =   360
+         Width           =   4365
+      End
+   End
    Begin VB.Frame FrameLineasAlbaFalsoEuler 
       Height          =   2655
       Left            =   105
@@ -960,7 +1239,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   2
          Left            =   1170
-         Picture         =   "frmListado5.frx":0000
+         Picture         =   "frmListado5.frx":1E06
          Top             =   840
          Width           =   240
       End
@@ -1359,7 +1638,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   24
          Left            =   3870
-         Picture         =   "frmListado5.frx":008B
+         Picture         =   "frmListado5.frx":1E91
          Top             =   1320
          Width           =   240
       End
@@ -1367,7 +1646,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   23
          Left            =   1200
-         Picture         =   "frmListado5.frx":0116
+         Picture         =   "frmListado5.frx":1F1C
          Top             =   1320
          Width           =   240
       End
@@ -1416,7 +1695,7 @@ Begin VB.Form frmListado5
    Begin VB.Frame FrameAsignarAlbaranesEuler 
       Height          =   9375
       Left            =   0
-      TabIndex        =   476
+      TabIndex        =   477
       Top             =   -120
       Visible         =   0   'False
       Width           =   16935
@@ -1424,9 +1703,9 @@ Begin VB.Form frmListado5
          Height          =   375
          Index           =   1
          Left            =   3960
-         Picture         =   "frmListado5.frx":01A1
+         Picture         =   "frmListado5.frx":1FA7
          Style           =   1  'Graphical
-         TabIndex        =   502
+         TabIndex        =   503
          ToolTipText     =   "Establecer albarán principal del proyecto"
          Top             =   3840
          Visible         =   0   'False
@@ -1436,9 +1715,9 @@ Begin VB.Form frmListado5
          Height          =   375
          Index           =   0
          Left            =   3960
-         Picture         =   "frmListado5.frx":0BA3
+         Picture         =   "frmListado5.frx":29A9
          Style           =   1  'Graphical
-         TabIndex        =   501
+         TabIndex        =   502
          ToolTipText     =   "Establecer albarán principal del proyecto"
          Top             =   240
          Visible         =   0   'False
@@ -1448,7 +1727,7 @@ Begin VB.Form frmListado5
          Height          =   2655
          Index           =   0
          Left            =   240
-         TabIndex        =   481
+         TabIndex        =   482
          Top             =   720
          Width           =   16095
          _ExtentX        =   28390
@@ -1483,7 +1762,7 @@ Begin VB.Form frmListado5
          Height          =   375
          Index           =   43
          Left            =   15240
-         TabIndex        =   478
+         TabIndex        =   479
          Top             =   8880
          Width           =   1095
       End
@@ -1500,7 +1779,7 @@ Begin VB.Form frmListado5
          EndProperty
          Height          =   375
          Left            =   13920
-         TabIndex        =   477
+         TabIndex        =   478
          Top             =   8880
          Width           =   1095
       End
@@ -1508,7 +1787,7 @@ Begin VB.Form frmListado5
          Height          =   4335
          Index           =   1
          Left            =   240
-         TabIndex        =   482
+         TabIndex        =   483
          Top             =   4320
          Width           =   16095
          _ExtentX        =   28390
@@ -1543,7 +1822,7 @@ Begin VB.Form frmListado5
          Height          =   255
          Index           =   8
          Left            =   240
-         TabIndex        =   483
+         TabIndex        =   484
          Top             =   8880
          Width           =   4455
       End
@@ -1562,7 +1841,7 @@ Begin VB.Form frmListado5
          Height          =   375
          Index           =   42
          Left            =   240
-         TabIndex        =   480
+         TabIndex        =   481
          Top             =   3840
          Width           =   3435
       End
@@ -1581,7 +1860,7 @@ Begin VB.Form frmListado5
          Height          =   345
          Index           =   41
          Left            =   240
-         TabIndex        =   479
+         TabIndex        =   480
          Top             =   240
          Width           =   4365
       End
@@ -1589,7 +1868,7 @@ Begin VB.Form frmListado5
    Begin VB.Frame FrameTaxcoSvenciAlvic 
       Height          =   3375
       Left            =   3600
-      TabIndex        =   491
+      TabIndex        =   492
       Top             =   3240
       Visible         =   0   'False
       Width           =   6855
@@ -1606,7 +1885,7 @@ Begin VB.Form frmListado5
          Height          =   315
          Index           =   26
          Left            =   4680
-         TabIndex        =   496
+         TabIndex        =   497
          Top             =   1560
          Width           =   1335
       End
@@ -1623,7 +1902,7 @@ Begin VB.Form frmListado5
          Height          =   315
          Index           =   25
          Left            =   1680
-         TabIndex        =   494
+         TabIndex        =   495
          Top             =   1560
          Width           =   1335
       End
@@ -1641,7 +1920,7 @@ Begin VB.Form frmListado5
          Height          =   375
          Index           =   45
          Left            =   5160
-         TabIndex        =   493
+         TabIndex        =   494
          Top             =   2640
          Width           =   1165
       End
@@ -1658,7 +1937,7 @@ Begin VB.Form frmListado5
          EndProperty
          Height          =   375
          Left            =   3720
-         TabIndex        =   492
+         TabIndex        =   493
          Top             =   2640
          Width           =   1165
       End
@@ -1676,7 +1955,7 @@ Begin VB.Form frmListado5
          Height          =   255
          Index           =   9
          Left            =   240
-         TabIndex        =   500
+         TabIndex        =   501
          Top             =   2160
          Width           =   4455
       End
@@ -1696,7 +1975,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   55
          Left            =   240
-         TabIndex        =   499
+         TabIndex        =   500
          Top             =   1080
          Width           =   1500
       End
@@ -1717,7 +1996,7 @@ Begin VB.Form frmListado5
          Height          =   345
          Index           =   44
          Left            =   240
-         TabIndex        =   498
+         TabIndex        =   499
          Top             =   360
          Width           =   5895
       End
@@ -1725,7 +2004,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   26
          Left            =   4320
-         Picture         =   "frmListado5.frx":15A5
+         Picture         =   "frmListado5.frx":33AB
          Top             =   1560
          Width           =   240
       End
@@ -1745,7 +2024,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   54
          Left            =   3720
-         TabIndex        =   497
+         TabIndex        =   498
          Top             =   1560
          Width           =   330
       End
@@ -1753,7 +2032,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   25
          Left            =   1320
-         Picture         =   "frmListado5.frx":1630
+         Picture         =   "frmListado5.frx":3436
          Top             =   1560
          Width           =   240
       End
@@ -1773,7 +2052,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   53
          Left            =   240
-         TabIndex        =   495
+         TabIndex        =   496
          Top             =   1560
          Width           =   600
       End
@@ -1781,7 +2060,7 @@ Begin VB.Form frmListado5
    Begin VB.Frame FrameCestaApp 
       Height          =   8895
       Left            =   2880
-      TabIndex        =   486
+      TabIndex        =   487
       Top             =   0
       Visible         =   0   'False
       Width           =   12615
@@ -1798,7 +2077,7 @@ Begin VB.Form frmListado5
          EndProperty
          Height          =   375
          Left            =   9840
-         TabIndex        =   489
+         TabIndex        =   490
          Top             =   8280
          Width           =   1095
       End
@@ -1816,7 +2095,7 @@ Begin VB.Form frmListado5
          Height          =   375
          Index           =   44
          Left            =   11040
-         TabIndex        =   488
+         TabIndex        =   489
          Top             =   8280
          Width           =   1095
       End
@@ -1824,7 +2103,7 @@ Begin VB.Form frmListado5
          Height          =   6975
          Index           =   15
          Left            =   240
-         TabIndex        =   487
+         TabIndex        =   488
          Top             =   1080
          Width           =   12015
          _ExtentX        =   21193
@@ -1884,7 +2163,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   11
          Left            =   600
-         Picture         =   "frmListado5.frx":16BB
+         Picture         =   "frmListado5.frx":34C1
          Top             =   8160
          Width           =   240
       End
@@ -1892,7 +2171,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   10
          Left            =   240
-         Picture         =   "frmListado5.frx":1805
+         Picture         =   "frmListado5.frx":360B
          Top             =   8160
          Width           =   240
       End
@@ -1911,7 +2190,7 @@ Begin VB.Form frmListado5
          Height          =   345
          Index           =   43
          Left            =   240
-         TabIndex        =   490
+         TabIndex        =   491
          Top             =   480
          Width           =   11685
       End
@@ -2054,7 +2333,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   9
          Left            =   11520
-         Picture         =   "frmListado5.frx":194F
+         Picture         =   "frmListado5.frx":3755
          Top             =   1200
          Width           =   240
       End
@@ -2062,7 +2341,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   8
          Left            =   11880
-         Picture         =   "frmListado5.frx":1A99
+         Picture         =   "frmListado5.frx":389F
          Top             =   1200
          Width           =   240
       End
@@ -2070,7 +2349,7 @@ Begin VB.Form frmListado5
          Height          =   240
          Index           =   14
          Left            =   1080
-         Picture         =   "frmListado5.frx":1BE3
+         Picture         =   "frmListado5.frx":39E9
          Top             =   960
          Width           =   240
       End
@@ -2113,266 +2392,6 @@ Begin VB.Form frmListado5
          TabIndex        =   352
          Top             =   240
          Width           =   5070
-      End
-   End
-   Begin VB.Frame FrameCopiarPrecios 
-      Height          =   4305
-      Left            =   0
-      TabIndex        =   452
-      Top             =   0
-      Visible         =   0   'False
-      Width           =   6975
-      Begin VB.TextBox txtDescFamia 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   3
-         Left            =   1170
-         Locked          =   -1  'True
-         TabIndex        =   484
-         Top             =   2925
-         Width           =   5520
-      End
-      Begin VB.TextBox txtFamia 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   3
-         Left            =   270
-         TabIndex        =   457
-         Tag             =   "Cod. Proveedor|N|N|0|999999|slispr|codprove|000000|S|"
-         Top             =   2925
-         Width           =   840
-      End
-      Begin VB.TextBox txtDescProve 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   3
-         Left            =   1170
-         Locked          =   -1  'True
-         TabIndex        =   461
-         Top             =   2070
-         Width           =   5520
-      End
-      Begin VB.TextBox txtProve 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   3
-         Left            =   270
-         TabIndex        =   456
-         Tag             =   "Cod. Proveedor|N|N|0|999999|slispr|codprove|000000|S|"
-         Top             =   2070
-         Width           =   840
-      End
-      Begin VB.TextBox txtProve 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   2
-         Left            =   285
-         TabIndex        =   455
-         Tag             =   "Cod. Proveedor|N|N|0|999999|slispr|codprove|000000|S|"
-         Top             =   1260
-         Width           =   840
-      End
-      Begin VB.TextBox txtDescProve 
-         BackColor       =   &H80000018&
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   2
-         Left            =   1185
-         Locked          =   -1  'True
-         TabIndex        =   454
-         Top             =   1260
-         Width           =   5520
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Cancelar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Index           =   41
-         Left            =   5610
-         TabIndex        =   459
-         Top             =   3420
-         Width           =   1065
-      End
-      Begin VB.CommandButton CmdAcepCopia 
-         Caption         =   "&Aceptar"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   4455
-         TabIndex        =   458
-         Top             =   3420
-         Width           =   1065
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Familia Origen"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   285
-         Index           =   1
-         Left            =   300
-         TabIndex        =   485
-         Top             =   2610
-         Width           =   1590
-      End
-      Begin VB.Image imgFamilia 
-         Height          =   240
-         Index           =   3
-         Left            =   1965
-         Picture         =   "frmListado5.frx":1CE5
-         Tag             =   "-1"
-         ToolTipText     =   "Buscar Proveedor"
-         Top             =   2610
-         Width           =   240
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Proveedor Destino"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   285
-         Index           =   0
-         Left            =   300
-         TabIndex        =   462
-         Top             =   1755
-         Width           =   2085
-      End
-      Begin VB.Image imgProveedor 
-         Height          =   240
-         Index           =   3
-         Left            =   2370
-         Picture         =   "frmListado5.frx":26E7
-         Tag             =   "-1"
-         ToolTipText     =   "Buscar Proveedor"
-         Top             =   1755
-         Width           =   240
-      End
-      Begin VB.Image imgProveedor 
-         Height          =   240
-         Index           =   2
-         Left            =   2340
-         Picture         =   "frmListado5.frx":30E9
-         Tag             =   "-1"
-         ToolTipText     =   "Buscar Proveedor"
-         Top             =   945
-         Width           =   240
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Proveedor Origen"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   285
-         Index           =   3
-         Left            =   315
-         TabIndex        =   460
-         Top             =   945
-         Width           =   1950
-      End
-      Begin VB.Label Label9 
-         Caption         =   "Copiar Precios Proveedor"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Index           =   40
-         Left            =   315
-         TabIndex        =   453
-         Top             =   360
-         Width           =   4365
       End
    End
    Begin VB.Frame FrameCambioCliente 
@@ -7652,7 +7671,7 @@ Begin VB.Form frmListado5
    Begin VB.Frame FrameContadoresAgua 
       Height          =   3615
       Left            =   0
-      TabIndex        =   463
+      TabIndex        =   464
       Top             =   0
       Visible         =   0   'False
       Width           =   6015
@@ -7661,7 +7680,7 @@ Begin VB.Form frmListado5
          Height          =   375
          Index           =   0
          Left            =   4800
-         TabIndex        =   471
+         TabIndex        =   472
          Top             =   3120
          Width           =   975
       End
@@ -7669,7 +7688,7 @@ Begin VB.Form frmListado5
          Height          =   285
          Index           =   0
          Left            =   1200
-         TabIndex        =   470
+         TabIndex        =   471
          Top             =   1200
          Width           =   855
       End
@@ -7679,7 +7698,7 @@ Begin VB.Form frmListado5
          Index           =   0
          Left            =   2160
          Locked          =   -1  'True
-         TabIndex        =   469
+         TabIndex        =   470
          Top             =   1200
          Width           =   3495
       End
@@ -7689,7 +7708,7 @@ Begin VB.Form frmListado5
          Index           =   1
          Left            =   2160
          Locked          =   -1  'True
-         TabIndex        =   468
+         TabIndex        =   469
          Top             =   1560
          Width           =   3495
       End
@@ -7697,7 +7716,7 @@ Begin VB.Form frmListado5
          Height          =   285
          Index           =   1
          Left            =   1200
-         TabIndex        =   467
+         TabIndex        =   468
          Top             =   1560
          Width           =   855
       End
@@ -7706,7 +7725,7 @@ Begin VB.Form frmListado5
          Height          =   255
          Index           =   0
          Left            =   1440
-         TabIndex        =   466
+         TabIndex        =   467
          Top             =   2520
          Width           =   1455
       End
@@ -7715,7 +7734,7 @@ Begin VB.Form frmListado5
          Height          =   255
          Index           =   1
          Left            =   3120
-         TabIndex        =   465
+         TabIndex        =   466
          Top             =   2520
          Width           =   1455
       End
@@ -7723,7 +7742,7 @@ Begin VB.Form frmListado5
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3720
-         TabIndex        =   464
+         TabIndex        =   465
          Top             =   3120
          Width           =   975
       End
@@ -7742,7 +7761,7 @@ Begin VB.Form frmListado5
          Height          =   345
          Index           =   0
          Left            =   1080
-         TabIndex        =   475
+         TabIndex        =   476
          Top             =   360
          Width           =   3510
       End
@@ -7770,7 +7789,7 @@ Begin VB.Form frmListado5
          Height          =   195
          Index           =   34
          Left            =   120
-         TabIndex        =   474
+         TabIndex        =   475
          Top             =   840
          Width           =   585
       End
@@ -7790,7 +7809,7 @@ Begin VB.Form frmListado5
          Height          =   195
          Index           =   126
          Left            =   480
-         TabIndex        =   473
+         TabIndex        =   474
          Top             =   1200
          Width           =   450
       End
@@ -7810,7 +7829,7 @@ Begin VB.Form frmListado5
          Height          =   195
          Index           =   0
          Left            =   480
-         TabIndex        =   472
+         TabIndex        =   473
          Top             =   1560
          Width           =   420
       End
@@ -8477,23 +8496,23 @@ Private Sub cboDestinoB_KeyPress(KeyAscii As Integer)
  KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub cboTipoDescuento_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub cboTipoDescuento_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub cboTrimiestre_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub cboTrimiestre_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub chkAlb_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub chkAlb_KeyPress(Index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub chkCamposSocios_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub chkCamposSocios_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub chkCodtipom_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub chkCodtipom_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
@@ -8503,8 +8522,8 @@ Private Sub chkPedidos_Click()
     CargaAlbaranesFacturaClienteEuler
 End Sub
 
-Private Sub chkVarios_Click(index As Integer)
-    If index = 9 Then
+Private Sub chkVarios_Click(Index As Integer)
+    If Index = 9 Then
         'Fecha menor iguial en promociones
         txtFecha(24).visible = chkVarios(9).Value = 0
         Label4(38).visible = chkVarios(9).Value = 0
@@ -8518,7 +8537,7 @@ Private Sub chkVarios_Click(index As Integer)
     
 End Sub
 
-Private Sub chkVarios_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub chkVarios_KeyPress(Index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
@@ -8573,6 +8592,7 @@ Dim SQL As String
     ' si hay articulos del destino que los tenga el origen los mostramos
     SQL = "select count(*) from slispr where codprove = " & DBSet(txtProve(3), "N")
     SQL = SQL & " and codartic in (select slispr.codartic from slispr inner join sartic on slispr.codartic = sartic.codartic where slispr.codprove = " & DBSet(txtProve(2), "N")
+    SQL = SQL & IIf(Me.chkVarios(10).Value = 1, " AND sartic.auna_puedecomprar =1 ", "")
     If txtFamia(3).Text <> "" Then
         SQL = SQL & " and sartic.codfamia = " & DBSet(txtFamia(3).Text, "N") & ")"
     Else
@@ -8586,6 +8606,7 @@ Dim SQL As String
         Dim Sql2 As String
         
         Sql2 = "slispr.codprove = " & DBSet(txtProve(3), "N") & " and slispr.codartic in (select slispr.codartic from slispr inner join sartic on slispr.codartic = sartic.codartic where slispr.codprove = " & DBSet(txtProve(2), "N")
+        Sql2 = Sql2 & IIf(Me.chkVarios(10).Value = 1, " AND sartic.auna_puedecomprar =1 ", "")
         If txtFamia(3).Text <> "" Then
             Sql2 = Sql2 & " and sartic.codfamia = " & DBSet(txtFamia(3).Text, "N") & ")"
         Else
@@ -8603,7 +8624,13 @@ Dim SQL As String
     If CadArticulos <> "NO" Then
         If CopiaPrecios Then
             MsgBox "Proceso finalizado.", vbInformation
-            Unload Me
+            
+            'Reeestablezco , dejando el proveedor
+            txtProve(3).Text = ""
+            txtDescProve(3).Text = ""
+            txtFamia(3).Text = ""
+            txtDescFamia(3).Text = ""
+            PonerFoco txtProve(3)
         End If
     End If
     
@@ -8623,9 +8650,10 @@ Dim SQL As String
     SQL = SQL & " select slispr.codartic, " & DBSet(txtProve(3), "N") & ",slispr.precioac,slispr.fechanue,slispr.precionu,slispr.dtopermi,slispr.cantfija,slispr.cantmini,slispr.fechaini,slispr.fechafin,slispr.preciopr,slispr.dtoperm1,slispr.dtoline1,slispr.dtoline2,slispr.precioexp,slispr.referprov,slispr.descripprov "
     SQL = SQL & " from slispr inner join sartic on slispr.codartic = sartic.codartic "
     SQL = SQL & " where slispr.codprove = " & DBSet(txtProve(2), "N")
+    SQL = SQL & IIf(Me.chkVarios(10).Value = 1, " AND sartic.auna_puedecomprar =1 ", "")
     If txtFamia(3).Text <> "" Then SQL = SQL & " and sartic.codfamia = " & DBSet(txtFamia(3).Text, "N")
-    
     If CadArticulos <> "" Then SQL = SQL & " and not slispr.codartic in " & CadArticulos
+    
     
     conn.Execute SQL
     
@@ -9000,26 +9028,26 @@ Private Sub cmdCamposSocio_Click()
         
 End Sub
 
-Private Sub cmdCancelar_Click(index As Integer)
-    If index = 5 Then
+Private Sub cmdCancelar_Click(Index As Integer)
+    If Index = 5 Then
         'GESSOCIAL
         'Cambio de situacion
         'Pone SALIR.
         CadenaDesdeOtroForm = Trim(txtModificable(0).Text)
     
-    ElseIf index = 7 Then
+    ElseIf Index = 7 Then
         CadenaDesdeOtroForm = ""
-    ElseIf index = 11 Or index = 44 Then
+    ElseIf Index = 11 Or Index = 44 Then
         CadenaDesdeOtroForm = ""
-    ElseIf index >= 17 And index <= 19 Then
+    ElseIf Index >= 17 And Index <= 19 Then
         CadenaDesdeOtroForm = ""
-    ElseIf index = 23 Then
+    ElseIf Index = 23 Then
         If numParam = 1 Then
             If MsgBox("Descartar cambios?", vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
         End If
-    ElseIf index = 118 Then
+    ElseIf Index = 118 Then
         CadenaDesdeOtroForm = ""
-    ElseIf index = 26 Then
+    ElseIf Index = 26 Then
         If lw(7).Tag = 1 Then
             If MsgBox("Borrar datos importacion?", vbQuestion + vbYesNoCancel) = vbYes Then CargaColumnasCoarval True
             Exit Sub
@@ -9027,7 +9055,7 @@ Private Sub cmdCancelar_Click(index As Integer)
         
         
         
-    ElseIf index = 38 Then
+    ElseIf Index = 38 Then
         If Me.txtNumero(9).Text <> "" Then
             CadenaDesdeOtroForm = txtNumero(9).Text
             PuedeCerrar = True
@@ -9438,7 +9466,7 @@ Private Sub cmdElimPresu_Click()
         MsgBox "Ningun dato a eliminar", vbExclamation
     Else
         CadenaDesdeOtroForm = miSQL
-        frmVarios3.opcion = 5
+        frmVarios3.Opcion = 5
         frmVarios3.Show vbModal
         Unload Me
         
@@ -9447,11 +9475,11 @@ End Sub
 
 
 
-Private Sub cmdEstablecerAlbaranPrincipal_Click(index As Integer)
+Private Sub cmdEstablecerAlbaranPrincipal_Click(Index As Integer)
 Dim DesmarcarSolo As Boolean
     miSQL = ""
     cadFormula = ""
-    If index = 0 Then
+    If Index = 0 Then
     
         If treeAlb(0).SelectedItem Is Nothing Then Exit Sub
             
@@ -9611,7 +9639,7 @@ End Sub
 
 
 
-Private Sub cmdLinPed_Click(index As Integer)
+Private Sub cmdLinPed_Click(Index As Integer)
 Dim Destino As Integer
 Dim Origen As Integer
 Dim C As Integer
@@ -9620,21 +9648,21 @@ Dim C As Integer
 
     If Me.lw(6).SelectedItem Is Nothing Then Exit Sub
     
-    If index <= 1 Then
-        If lw(6).SelectedItem.index = 1 Then Exit Sub
+    If Index <= 1 Then
+        If lw(6).SelectedItem.Index = 1 Then Exit Sub
         
-        If index = 0 Then
+        If Index = 0 Then
             NumRegElim = 1
         Else
-            NumRegElim = lw(6).SelectedItem.index - 1
+            NumRegElim = lw(6).SelectedItem.Index - 1
         End If
     Else
-        If lw(6).SelectedItem.index = lw(6).ListItems(lw(6).ListItems.Count).index Then Exit Sub
+        If lw(6).SelectedItem.Index = lw(6).ListItems(lw(6).ListItems.Count).Index Then Exit Sub
         
-        If index = 3 Then
-            NumRegElim = lw(6).ListItems(lw(6).ListItems.Count).index
+        If Index = 3 Then
+            NumRegElim = lw(6).ListItems(lw(6).ListItems.Count).Index
         Else
-            NumRegElim = lw(6).SelectedItem.index + 1
+            NumRegElim = lw(6).SelectedItem.Index + 1
         End If
         
         
@@ -9643,7 +9671,7 @@ Dim C As Integer
     End If
     
     Destino = CInt(NumRegElim)
-    Origen = lw(6).SelectedItem.index
+    Origen = lw(6).SelectedItem.Index
     
 
     
@@ -10905,6 +10933,8 @@ Dim Indice As Byte
     
     Case 41
         PonerFrameVisible FrameCopiarPrecios
+        chkVarios(10).Value = 0
+        chkVarios(10).visible = vParamAplic.NumeroInstalacion = vbHerbelca
         Me.Caption = "Proceso"
     Case 43
         PonerFrameVisible FrameAsignarAlbaranesEuler
@@ -10971,7 +11001,7 @@ Private Sub LlamarImprimir()
         .SoloImprimir = False
         .EnvioEMail = False
         .Titulo = cadTitulo
-        .opcion = 3000   'VAN TODOS EN ESTE SACO
+        .Opcion = 3000   'VAN TODOS EN ESTE SACO
         .NombrePDF = ""
         .NombrePDF = cadPDFrpt
         .NombreRPT = cadNomRPT
@@ -11034,7 +11064,7 @@ Private Sub frmP_DatoSeleccionado(CadenaSeleccion As String)
     miSQL = CadenaSeleccion
 End Sub
 
-Private Sub imgActividad_Click(index As Integer)
+Private Sub imgActividad_Click(Index As Integer)
 
 '    AbreBuscaGrid 1
     Set frmB3 = New frmFacActividades
@@ -11045,8 +11075,8 @@ Private Sub imgActividad_Click(index As Integer)
 
     If miSQL <> "" Then
         
-        txtActiv(index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescActiv(index).Text = RecuperaValor(miSQL, 2)
+        txtActiv(Index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescActiv(Index).Text = RecuperaValor(miSQL, 2)
        
     End If
 
@@ -11089,56 +11119,56 @@ Private Sub AbreBuscaGrid(Cual As Byte)
 End Sub
 
 
-Private Sub imgAgente_Click(index As Integer)
+Private Sub imgAgente_Click(Index As Integer)
 
     miSQL = ""
 '    Set frmAc = New frmFacAgentesCom
 '    frmAc.DatosADevolverBusqueda = "0"
-    If Not IsNumeric(txtAgente(index)) Then txtAgente(index).Text = ""
+    If Not IsNumeric(txtAgente(Index)) Then txtAgente(Index).Text = ""
 '    frmAc.Show vbModal
     Set frmAc = New frmBasico2
-    AyudaAgentesComerciales frmAc, txtAgente(index), , True
+    AyudaAgentesComerciales frmAc, txtAgente(Index), , True
     Set frmAc = Nothing
-    PonerFoco txtAgente(index)
+    PonerFoco txtAgente(Index)
     If miSQL <> "" Then
-        txtAgente(index).Text = RecuperaValor(miSQL, 1)
-        txtDescAge(index).Text = RecuperaValor(miSQL, 2)
+        txtAgente(Index).Text = RecuperaValor(miSQL, 1)
+        txtDescAge(Index).Text = RecuperaValor(miSQL, 2)
     End If
 End Sub
 
-Private Sub imgCheck_Click(index As Integer)
+Private Sub imgCheck_Click(Index As Integer)
 Dim Cual As Byte
 Dim Chec As Boolean
 
 
-    If index < 2 Then
+    If Index < 2 Then
         'Proveedores
         Cual = 0
         Chec = True
-        If (index Mod 2) = 0 Then Chec = False
-    ElseIf index < 4 Then
+        If (Index Mod 2) = 0 Then Chec = False
+    ElseIf Index < 4 Then
         Cual = 1
         Chec = True
-        If (index Mod 2) = 0 Then Chec = False
+        If (Index Mod 2) = 0 Then Chec = False
         
-    ElseIf index < 6 Then
+    ElseIf Index < 6 Then
         Cual = 2
         Chec = True
-        If (index Mod 2) = 0 Then Chec = False
+        If (Index Mod 2) = 0 Then Chec = False
 
-    ElseIf index < 8 Then
+    ElseIf Index < 8 Then
         '6 7
         Cual = 5
-        Chec = index = 6
-    ElseIf index < 10 Then
+        Chec = Index = 6
+    ElseIf Index < 10 Then
             '8 9
         Cual = 13
-        Chec = (index Mod 2) = 0
+        Chec = (Index Mod 2) = 0
     
-    ElseIf index < 12 Then
+    ElseIf Index < 12 Then
         '10 11
         Cual = 15
-        Chec = index = 11
+        Chec = Index = 11
     
     
     'Else
@@ -11161,26 +11191,26 @@ Dim Chec As Boolean
     End If
 End Sub
 
-Private Sub imgCliente_Click(index As Integer)
+Private Sub imgCliente_Click(Index As Integer)
     Screen.MousePointer = vbHourglass
     miSQL = ""
 
             Set frmCli = New frmBasico2
-            AyudaClientes frmCli, txtCliente(index).Text
+            AyudaClientes frmCli, txtCliente(Index).Text
             Set frmCli = Nothing
 
     If miSQL <> "" Then
-        Me.txtCliente(index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescClie(index).Text = RecuperaValor(miSQL, 2)
-        PonerFoco txtCliente(index)
-        If index = 14 Then txtCliente_LostFocus index
-        If index = 15 Then txtCliente_LostFocus index
+        Me.txtCliente(Index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescClie(Index).Text = RecuperaValor(miSQL, 2)
+        PonerFoco txtCliente(Index)
+        If Index = 14 Then txtCliente_LostFocus Index
+        If Index = 15 Then txtCliente_LostFocus Index
     End If
 End Sub
 
 
 
-Private Sub imgCodigoVario_Click(index As Integer)
+Private Sub imgCodigoVario_Click(Index As Integer)
     
         
     AbreBuscaGrid 1
@@ -11188,59 +11218,59 @@ Private Sub imgCodigoVario_Click(index As Integer)
         
     If miSQL <> "" Then
         
-        txtCodigoVario(index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDesVario(index).Text = RecuperaValor(miSQL, 2)
+        txtCodigoVario(Index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDesVario(Index).Text = RecuperaValor(miSQL, 2)
        
     End If
 
     
 End Sub
 
-Private Sub imgFamilia_Click(index As Integer)
+Private Sub imgFamilia_Click(Index As Integer)
     miSQL = ""
 '    Set frmMtoFamilia = New frmAlmFamiliaArticulo
 '    frmMtoFamilia.DatosADevolverBusqueda = "0|1"
 '    frmMtoFamilia.Show vbModal
     Set frmMtoFamilia = New frmBasico2
-    AyudaFamilias frmMtoFamilia, txtFamia(index)
+    AyudaFamilias frmMtoFamilia, txtFamia(Index)
     Set frmMtoFamilia = Nothing
     If miSQL <> "" Then
-        txtFamia(index).Text = RecuperaValor(miSQL, 1)
-        txtDescFamia(index).Text = RecuperaValor(miSQL, 2)
+        txtFamia(Index).Text = RecuperaValor(miSQL, 1)
+        txtDescFamia(Index).Text = RecuperaValor(miSQL, 2)
         miSQL = ""
     End If
-    PonerFoco txtFamia(index)
+    PonerFoco txtFamia(Index)
 End Sub
 
-Private Sub imgFecha_Click(index As Integer)
+Private Sub imgFecha_Click(Index As Integer)
    miSQL = ""
    Set frmC = New frmCal
    frmC.Fecha = Now
-   If txtFecha(index).Text <> "" Then
-        If IsDate(txtFecha(index).Text) Then frmC.Fecha = CDate(txtFecha(index).Text)
+   If txtFecha(Index).Text <> "" Then
+        If IsDate(txtFecha(Index).Text) Then frmC.Fecha = CDate(txtFecha(Index).Text)
    End If
    frmC.Show vbModal
    Set frmC = Nothing
-   If miSQL <> "" Then txtFecha(index).Text = Format(miSQL, "dd/mm/yyyy")
+   If miSQL <> "" Then txtFecha(Index).Text = Format(miSQL, "dd/mm/yyyy")
 End Sub
 
 
 
 
-Private Sub imgProveedor_Click(index As Integer)
+Private Sub imgProveedor_Click(Index As Integer)
     miSQL = ""
     Set frmP = New frmBasico2
 '    frmP.DatosADevolverBusqueda = "0|1"
 '    frmP.Show vbModal
-    AyudaProveedores frmP, txtProve(index)
+    AyudaProveedores frmP, txtProve(Index)
     Set frmP = Nothing
     If miSQL <> "" Then
-        txtProve(index).Text = RecuperaValor(miSQL, 1)
-        Me.txtDescProve(index).Text = RecuperaValor(miSQL, 2)
+        txtProve(Index).Text = RecuperaValor(miSQL, 1)
+        Me.txtDescProve(Index).Text = RecuperaValor(miSQL, 2)
         miSQL = ""
     End If
 
-    PonerFoco txtProve(index)
+    PonerFoco txtProve(Index)
 
 End Sub
 
@@ -11256,14 +11286,14 @@ Private Sub lblDestinoB_Click()
     End If
 End Sub
 
-Private Sub lw_ColumnClick(index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If index = 12 Then OrdenacionPedidosFontenas ColumnHeader.index
-    If index = 13 Then OrdenacionTaxcoCliente ColumnHeader.index
+Private Sub lw_ColumnClick(Index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+    If Index = 12 Then OrdenacionPedidosFontenas ColumnHeader.Index
+    If Index = 13 Then OrdenacionTaxcoCliente ColumnHeader.Index
     
 End Sub
 
-Private Sub lw_DblClick(index As Integer)
-    Select Case index
+Private Sub lw_DblClick(Index As Integer)
+    Select Case Index
     Case 3
         cmdSelecAlbaran_Click
     Case 4
@@ -11278,17 +11308,17 @@ Private Sub lw_DblClick(index As Integer)
     End Select
 End Sub
 
-Private Sub lw_ItemCheck(index As Integer, ByVal Item As MSComctlLib.ListItem)
-    If index = 13 Then
+Private Sub lw_ItemCheck(Index As Integer, ByVal Item As MSComctlLib.ListItem)
+    If Index = 13 Then
         'Cambiar facturas ALVIC de cliente (dentro de un mismo NIF)
         If Item.Checked Then If Item.Tag = 1 Then Item.Checked = False
         
     End If
 End Sub
 
-Private Sub lw_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub lw_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
-        If index = 8 Then
+        If Index = 8 Then
             cmdTaxcoNuevoEntradaVehiculo_Click
         Else
             cmdTraerLineaCompraCliente_Click
@@ -11304,18 +11334,18 @@ Private Sub lwSigno_DblClick()
     
 End Sub
 
-Private Sub optFitoCampos_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub optFitoCampos_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub optVarios_Click(index As Integer)
-      If index = 5 Or index = 6 Then FrameAccionComerOrden.visible = optVarios(5).Value
+Private Sub optVarios_Click(Index As Integer)
+      If Index = 5 Or Index = 6 Then FrameAccionComerOrden.visible = optVarios(5).Value
       
-      If index = 7 Or index = 8 Then chkVarios(6).visible = optVarios(7).Value
+      If Index = 7 Or Index = 8 Then chkVarios(6).visible = optVarios(7).Value
       
 End Sub
 
-Private Sub optVarios_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub optVarios_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
   
 End Sub
@@ -11441,7 +11471,7 @@ End Function
 
 
 
-Private Sub treeAlb_NodeCheck(index As Integer, ByVal Node As MSComctlLib.Node)
+Private Sub treeAlb_NodeCheck(Index As Integer, ByVal Node As MSComctlLib.Node)
 Dim N As Node
     If Node.Parent Is Nothing Then
         'Si lo marca/desmarc, hace eso para todo los nodos
@@ -11462,23 +11492,23 @@ Dim N As Node
     
 End Sub
 
-Private Sub txtActiv_Gotfocus(index As Integer)
-    ConseguirFoco txtActiv(index), 3
+Private Sub txtActiv_Gotfocus(Index As Integer)
+    ConseguirFoco txtActiv(Index), 3
 End Sub
 
-Private Sub txtActiv_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtActiv_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgActividad_Click index
+        If KeyCode = 65 Then imgActividad_Click Index
     End If
     
 End Sub
 
-Private Sub txtActiv_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtActiv_KeyPress(Index As Integer, KeyAscii As Integer)
 '    KEYpressGnral KeyAscii, 2, True
     If KeyAscii = teclaBuscar Then
-        KEYBusquedaAct KeyAscii, index 'actividad
+        KEYBusquedaAct KeyAscii, Index 'actividad
     Else
         KEYpress KeyAscii
     End If
@@ -11489,72 +11519,72 @@ Private Sub KEYBusquedaAct(KeyAscii As Integer, Indice As Integer)
     imgActividad_Click (Indice)
 End Sub
 
-Private Sub txtActiv_LostFocus(index As Integer)
-    txtActiv(index).Text = Trim(txtActiv(index).Text)
+Private Sub txtActiv_LostFocus(Index As Integer)
+    txtActiv(Index).Text = Trim(txtActiv(Index).Text)
     cadTitulo = ""
     miSQL = ""
-    If txtActiv(index).Text <> "" Then
-        If IsNumeric(txtActiv(index).Text) Then
-            cadTitulo = DevuelveDesdeBD(conAri, "nomactiv", "sactiv", "codactiv", txtActiv(index).Text, "N")
+    If txtActiv(Index).Text <> "" Then
+        If IsNumeric(txtActiv(Index).Text) Then
+            cadTitulo = DevuelveDesdeBD(conAri, "nomactiv", "sactiv", "codactiv", txtActiv(Index).Text, "N")
             
-            If index <= 1 And cadTitulo = "" Then miSQL = "No existe la actividad"
+            If Index <= 1 And cadTitulo = "" Then miSQL = "No existe la actividad"
             
         Else
             miSQL = "Campo numerico"
         End If
     End If
-    Me.txtDescActiv(index).Text = cadTitulo
+    Me.txtDescActiv(Index).Text = cadTitulo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
-        txtActiv(index).Text = ""
-        PonerFoco txtActiv(index)
+        txtActiv(Index).Text = ""
+        PonerFoco txtActiv(Index)
     End If
 End Sub
 
 
 
 
-Private Sub txtCliente_GotFocus(index As Integer)
-    ConseguirFoco txtCliente(index), 3
+Private Sub txtCliente_GotFocus(Index As Integer)
+    ConseguirFoco txtCliente(Index), 3
 End Sub
 
-Private Sub txtCliente_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtCliente_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgCliente_Click index
+        If KeyCode = 65 Then imgCliente_Click Index
     End If
 End Sub
 
-Private Sub txtCliente_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtCliente_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtCliente_LostFocus(index As Integer)
+Private Sub txtCliente_LostFocus(Index As Integer)
 Dim Descri As String
 Dim OK As Boolean
     Descri = ""
     OK = False
-    txtCliente(index).Text = Trim(txtCliente(index).Text)
-    If txtCliente(index).Text <> "" Then
-        If Not IsNumeric(txtCliente(index).Text) Then
+    txtCliente(Index).Text = Trim(txtCliente(Index).Text)
+    If txtCliente(Index).Text <> "" Then
+        If Not IsNumeric(txtCliente(Index).Text) Then
             MsgBox "Campo codigo cliente debe ser numérico", vbExclamation
-            PonerFoco txtCliente(index)
+            PonerFoco txtCliente(Index)
         Else
-            Descri = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtCliente(index).Text, "N")
+            Descri = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", txtCliente(Index).Text, "N")
             If Descri = "" Then
-                MsgBox "No existe el cliente : " & txtCliente(index).Text, vbExclamation
+                MsgBox "No existe el cliente : " & txtCliente(Index).Text, vbExclamation
             Else
                 OK = True
             End If
         End If
     End If
-    Me.txtDescClie(index).Text = Descri
-    If index = 14 Then
-        If Not OK Then txtCliente(index).Text = ""
+    Me.txtDescClie(Index).Text = Descri
+    If Index = 14 Then
+        If Not OK Then txtCliente(Index).Text = ""
         CargaAlbaranesNif_Alvic Not OK
     End If
-    If index = 15 Then
-        If Not OK Then txtCliente(index).Text = ""
+    If Index = 15 Then
+        If Not OK Then txtCliente(Index).Text = ""
         CambiReferenciaCliente
     End If
         
@@ -11563,39 +11593,39 @@ End Sub
 
 
 
-Private Sub txtAgente_GotFocus(index As Integer)
-    ConseguirFoco txtAgente(index), 3
+Private Sub txtAgente_GotFocus(Index As Integer)
+    ConseguirFoco txtAgente(Index), 3
 End Sub
 
-Private Sub txtAgente_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAgente_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgAgente_Click index
+        If KeyCode = 65 Then imgAgente_Click Index
     End If
 End Sub
 
-Private Sub txtAgente_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtAgente_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtAgente_LostFocus(index As Integer)
+Private Sub txtAgente_LostFocus(Index As Integer)
 Dim Descri As String
     
     Descri = ""
-    txtAgente(index).Text = Trim(txtAgente(index).Text)
-    If txtAgente(index).Text <> "" Then
-        If Not IsNumeric(txtAgente(index).Text) Then
+    txtAgente(Index).Text = Trim(txtAgente(Index).Text)
+    If txtAgente(Index).Text <> "" Then
+        If Not IsNumeric(txtAgente(Index).Text) Then
             MsgBox "Campo codigo agente debe ser numérico", vbExclamation
-            txtAgente(index).Text = ""
-            PonerFoco txtAgente(index)
+            txtAgente(Index).Text = ""
+            PonerFoco txtAgente(Index)
         Else
-            Descri = DevuelveDesdeBD(conAri, "nomagent", "sagent", "codagent", txtAgente(index).Text, "N")
+            Descri = DevuelveDesdeBD(conAri, "nomagent", "sagent", "codagent", txtAgente(Index).Text, "N")
             If Descri = "" Then
-                MsgBox "No existe el agente : " & txtAgente(index).Text, vbExclamation
+                MsgBox "No existe el agente : " & txtAgente(Index).Text, vbExclamation
             End If
         End If
     End If
-    Me.txtDescAge(index).Text = Descri
+    Me.txtDescAge(Index).Text = Descri
     
 End Sub
 
@@ -11604,50 +11634,50 @@ End Sub
 
 
 
-Private Sub txtCodigoVario_GotFocus(index As Integer)
-    ConseguirFoco txtCodigoVario(index), 3
+Private Sub txtCodigoVario_GotFocus(Index As Integer)
+    ConseguirFoco txtCodigoVario(Index), 3
 End Sub
 
-Private Sub txtCodigoVario_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtCodigoVario_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then KeyCode = 0: imgCodigoVario_Click index
+        If KeyCode = 65 Then KeyCode = 0: imgCodigoVario_Click Index
     End If
 End Sub
 
-Private Sub txtCodigoVario_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtCodigoVario_KeyPress(Index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtCodigoVario_LostFocus(index As Integer)
+Private Sub txtCodigoVario_LostFocus(Index As Integer)
 Dim Codigo  As String
 Dim Error As Boolean
 
     Error = False
-    txtCodigoVario(index).Text = Trim(txtCodigoVario(index).Text)
+    txtCodigoVario(Index).Text = Trim(txtCodigoVario(Index).Text)
     Codigo = ""
     miSQL = ""
     
     
-    If txtCodigoVario(index).Text <> "" Then
+    If txtCodigoVario(Index).Text <> "" Then
     
-        If index < 2 Then
+        If Index < 2 Then
             'TIPO ARTICULO
     
-            Codigo = DevuelveDesdeBD(conAri, "nomtipar", "stipar", "codtipar", txtCodigoVario(index).Text, "T")
+            Codigo = DevuelveDesdeBD(conAri, "nomtipar", "stipar", "codtipar", txtCodigoVario(Index).Text, "T")
             If Codigo = "" Then miSQL = "El codigo no pertence a ningún tipo articulo"
             
-        ElseIf index < 4 Then
-            Codigo = DevuelveDesdeBD(conAri, "nomtrata", "advtrata", "codtrata", txtCodigoVario(index).Text, "T")
+        ElseIf Index < 4 Then
+            Codigo = DevuelveDesdeBD(conAri, "nomtrata", "advtrata", "codtrata", txtCodigoVario(Index).Text, "T")
             If Codigo = "" Then Codigo = "NO existe  tratamiento"
         End If
     End If
-    Me.txtDesVario(index).Text = Codigo
+    Me.txtDesVario(Index).Text = Codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
         If Error Then
-            txtCodigoVario(index).Text = ""
-            PonerFoco txtCodigoVario(index)
+            txtCodigoVario(Index).Text = ""
+            PonerFoco txtCodigoVario(Index)
         End If
     End If
 End Sub
@@ -11663,21 +11693,21 @@ End Sub
 
 
 
-Private Sub txtFamia_GotFocus(index As Integer)
-    ConseguirFoco txtFamia(index), 3
+Private Sub txtFamia_GotFocus(Index As Integer)
+    ConseguirFoco txtFamia(Index), 3
 End Sub
 
-Private Sub txtFamia_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtFamia_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgFamilia_Click index
+        If KeyCode = 65 Then imgFamilia_Click Index
     End If
 End Sub
 
-Private Sub txtFamia_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtFamia_KeyPress(Index As Integer, KeyAscii As Integer)
 '     KEYpressGnral KeyAscii, 2, True
     If KeyAscii = teclaBuscar Then
-        KEYBusquedaFam KeyAscii, index 'familia
+        KEYBusquedaFam KeyAscii, Index 'familia
     Else
         KEYpress KeyAscii
     End If
@@ -11689,19 +11719,19 @@ Private Sub KEYBusquedaFam(KeyAscii As Integer, Indice As Integer)
 End Sub
 
 
-Private Sub txtFamia_LostFocus(index As Integer)
+Private Sub txtFamia_LostFocus(Index As Integer)
 Dim Codigo  As String
-    txtFamia(index).Text = Trim(txtFamia(index).Text)
+    txtFamia(Index).Text = Trim(txtFamia(Index).Text)
     Codigo = ""
     miSQL = ""
-    If txtFamia(index).Text <> "" Then
-        If IsNumeric(txtFamia(index).Text) Then
-            Codigo = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(index).Text, "N")
+    If txtFamia(Index).Text <> "" Then
+        If IsNumeric(txtFamia(Index).Text) Then
+            Codigo = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFamia(Index).Text, "N")
             If Codigo = "" Then
                 MsgBox "El codigo no pertence a ninguna familia", vbExclamation
-                If index = 0 Then
-                    txtFamia(index).Text = ""
-                    txtDescFamia(index).Text = ""
+                If Index = 0 Then
+                    txtFamia(Index).Text = ""
+                    txtDescFamia(Index).Text = ""
                 End If
             End If
         Else
@@ -11709,23 +11739,23 @@ Dim Codigo  As String
         End If
     End If
      
-    Me.txtDescFamia(index).Text = Codigo
+    Me.txtDescFamia(Index).Text = Codigo
     If miSQL <> "" Then
         MsgBox miSQL, vbExclamation
-        txtFamia(index).Text = ""
-        PonerFoco txtFamia(index)
+        txtFamia(Index).Text = ""
+        PonerFoco txtFamia(Index)
     End If
 End Sub
 
 
-Private Sub txtFecha_GotFocus(index As Integer)
-    ConseguirFoco txtFecha(index), 3
+Private Sub txtFecha_GotFocus(Index As Integer)
+    ConseguirFoco txtFecha(Index), 3
 End Sub
 
-Private Sub txtFecha_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtFecha_KeyPress(Index As Integer, KeyAscii As Integer)
 '    KEYpressGnral KeyAscii, 2, True
     If KeyAscii = teclaBuscar Then
-        KEYFecha KeyAscii, index
+        KEYFecha KeyAscii, Index
     Else
         KEYpress KeyAscii
     End If
@@ -11736,17 +11766,17 @@ Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     imgFecha_Click (Indice)
 End Sub
 
-Private Sub txtFecha_LostFocus(index As Integer)
+Private Sub txtFecha_LostFocus(Index As Integer)
 Dim T As String
-    txtFecha(index).Text = Trim(txtFecha(index).Text)
-    If txtFecha(index).Text <> "" Then
-        T = txtFecha(index).Text
+    txtFecha(Index).Text = Trim(txtFecha(Index).Text)
+    If txtFecha(Index).Text <> "" Then
+        T = txtFecha(Index).Text
         If EsFechaOK(T) Then
-            txtFecha(index).Text = T
+            txtFecha(Index).Text = T
         Else
-            MsgBox "Fecha con formato incorrecto: " & txtFecha(index).Text, vbExclamation
-            txtFecha(index).Text = ""
-            PonerFoco txtFecha(index)
+            MsgBox "Fecha con formato incorrecto: " & txtFecha(Index).Text, vbExclamation
+            txtFecha(Index).Text = ""
+            PonerFoco txtFecha(Index)
         End If
     End If
     
@@ -11754,10 +11784,10 @@ End Sub
 
 
 
-Private Sub txtModificable_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtModificable_KeyPress(Index As Integer, KeyAscii As Integer)
 
     
-        If index <> 5 Then KEYpressGnral KeyAscii, 2, True
+        If Index <> 5 Then KEYpressGnral KeyAscii, 2, True
     
     
     
@@ -11825,70 +11855,70 @@ Private Sub CargaProveedores()
     
 End Sub
 
-Private Sub txtModificable_LostFocus(index As Integer)
+Private Sub txtModificable_LostFocus(Index As Integer)
      'Matricula TAXCo
-      If index = 6 Then LeerMatriculaTaxco
+      If Index = 6 Then LeerMatriculaTaxco
 End Sub
 
-Private Sub txtNumero_GotFocus(index As Integer)
+Private Sub txtNumero_GotFocus(Index As Integer)
     
-     ConseguirFoco txtNumero(index), 3
+     ConseguirFoco txtNumero(Index), 3
     
 End Sub
 
-Private Sub txtNumero_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtNumero_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpressGnral KeyAscii, 2, True
 End Sub
 
-Private Sub txtNumero_LostFocus(index As Integer)
+Private Sub txtNumero_LostFocus(Index As Integer)
 Dim J As Long
 Dim Impor As Currency
 
- txtNumero(index).Text = Trim(txtNumero(index).Text)
+ txtNumero(Index).Text = Trim(txtNumero(Index).Text)
     miSQL = ""
-    If txtNumero(index).Text <> "" Then
+    If txtNumero(Index).Text <> "" Then
         
-        Select Case index
+        Select Case Index
         Case 0
-            If Not PonerFormatoEntero(txtNumero(index)) Then
-                txtNumero(index).Text = ""
+            If Not PonerFormatoEntero(txtNumero(Index)) Then
+                txtNumero(Index).Text = ""
                 
             Else
                 'Calulamos la diferencia
                 
                 J = Val(Trim(Mid(Me.txtNoModificable(3).Text, 11))) 'quitamos la fecha y queda la lectura
-                J = Val(txtNumero(index).Text) - J
+                J = Val(txtNumero(Index).Text) - J
                 If J < 0 Then
                     MsgBox "Consumo negativo", vbExclamation
                     J = 0
                 Else
-                    miSQL = txtNumero(index).Text
+                    miSQL = txtNumero(Index).Text
                     
                 End If
             End If
         Case 1, 3, 5, 8, 9
         
-            If Not PonerFormatoDecimal(txtNumero(index), 3) Then txtNumero(index).Text = ""
+            If Not PonerFormatoDecimal(txtNumero(Index), 3) Then txtNumero(Index).Text = ""
         Case 2
-            If Not PonerFormatoEntero(txtNumero(index)) Then txtNumero(index).Text = ""
+            If Not PonerFormatoEntero(txtNumero(Index)) Then txtNumero(Index).Text = ""
         
         Case 4
             
             
-            If Not PonerFormatoEntero(txtNumero(index)) Then txtNumero(index).Text = ""
+            If Not PonerFormatoEntero(txtNumero(Index)) Then txtNumero(Index).Text = ""
         
         
         Case 6
-            If Not PonerFormatoDecimal(txtNumero(index), 2) Then txtNumero(index).Text = ""
+            If Not PonerFormatoDecimal(txtNumero(Index), 2) Then txtNumero(Index).Text = ""
         Case 7
-            If Not PonerFormatoDecimal(txtNumero(index), 4) Then txtNumero(index).Text = ""
+            If Not PonerFormatoDecimal(txtNumero(Index), 4) Then txtNumero(Index).Text = ""
         
             
         End Select
     Else
         
     End If
-    If index = 0 Then
+    If Index = 0 Then
         txtNumero(0).Text = miSQL
         If J = 0 Then J = RecuperaValor(OtrosDatos, 3)
         Label1(7).Tag = J
@@ -11896,8 +11926,8 @@ Dim Impor As Currency
         If txtNumero(0).Text = "" Then PonerFoco txtNumero(0)
         
     Else
-        If index >= 5 And index <= 7 Then
-            If index <> 8 Then 'que no sea el importe
+        If Index >= 5 And Index <= 7 Then
+            If Index <> 8 Then 'que no sea el importe
                 If txtNumero(6).Text <> "" And txtNumero(5).Text <> "" Then
                     Impor = ImporteFormateado(txtNumero(6).Text) * ImporteFormateado(txtNumero(5).Text)
                     If txtNumero(7).Text <> "" Then Impor = Impor * ((100 - ImporteFormateado(txtNumero(7).Text)) / 100)
@@ -15388,38 +15418,38 @@ eListadoPedidoPorDia:
 End Function
 
 
-Private Sub txtProve_GotFocus(index As Integer)
-    ConseguirFoco txtProve(index), 3
+Private Sub txtProve_GotFocus(Index As Integer)
+    ConseguirFoco txtProve(Index), 3
 End Sub
 
-Private Sub txtProve_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtProve_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If (Shift And vbCtrlMask) > 0 Then
         'Caption = KeyCode
-        If KeyCode = 65 Then imgProveedor_Click index
+        If KeyCode = 65 Then imgProveedor_Click Index
     End If
 End Sub
 
-Private Sub txtProve_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtProve_KeyPress(Index As Integer, KeyAscii As Integer)
      KEYpressGnral KeyAscii, 2, True
 End Sub
 
 
 
-Private Sub txtProve_LostFocus(index As Integer)
+Private Sub txtProve_LostFocus(Index As Integer)
 Dim Descri As String
 
     Descri = ""
-    txtProve(index).Text = Trim(txtProve(index).Text)
-    If txtProve(index).Text <> "" Then
-        If PonerFormatoEntero(txtProve(index)) Then
-            Descri = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtProve(index).Text, "N")
-            If Descri = "" Then MsgBox "No existe el proveedor : " & txtProve(index).Text, vbExclamation
+    txtProve(Index).Text = Trim(txtProve(Index).Text)
+    If txtProve(Index).Text <> "" Then
+        If PonerFormatoEntero(txtProve(Index)) Then
+            Descri = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", txtProve(Index).Text, "N")
+            If Descri = "" Then MsgBox "No existe el proveedor : " & txtProve(Index).Text, vbExclamation
         End If
     End If
-    txtDescProve(index).Text = Descri
-    If Descri = "" And txtProve(index).Text <> "" Then
-        txtProve(index).Text = ""
-        PonerFoco txtProve(index)
+    txtDescProve(Index).Text = Descri
+    If Descri = "" And txtProve(Index).Text <> "" Then
+        txtProve(Index).Text = ""
+        PonerFoco txtProve(Index)
     End If
 End Sub
 

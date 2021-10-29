@@ -478,12 +478,24 @@ Private mvarSerieAnticipoProveedor As String
 
 
 
-
-
 'TAXCO
 'Cuando factura OTs final de mes, el trabajador será otro, para que no le aparezca en
 ' ventas por trabajador
 Private mvarTrabajadorFinMesFacturacion As Integer
+
+
+
+
+
+
+
+
+'Septiembre 2021
+Private mvarTotalAlbaranSobreTablaTmp As Boolean
+
+
+
+
 
 Private SQL As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
@@ -1906,6 +1918,9 @@ Public Property Get SerieAnticipoProveedor() As String
      SerieAnticipoProveedor = mvarSerieAnticipoProveedor
 End Property
 
+Public Property Get TotalAlbaranSobreTablaTmp() As String
+     TotalAlbaranSobreTablaTmp = mvarTotalAlbaranSobreTablaTmp
+End Property
 
 
 
@@ -2317,6 +2332,10 @@ On Error GoTo Err3
         'Junio 2021
         mvarSerieAnticipoProveedor = ""
         If CampoNuevoBD(RS, "SerieAnticipoProveedor", "T", V) Then mvarSerieAnticipoProveedor = DBLet(V)
+        
+                    
+        mvarTotalAlbaranSobreTablaTmp = False
+        If CampoNuevoBD(RS, "albarandesdetmp", "B", V) Then mvarTotalAlbaranSobreTablaTmp = CBool(V)
         
         
         Leer = 0
@@ -3030,6 +3049,7 @@ Private Function CampoNuevoBD(ByRef R As ADODB.Recordset, campo As String, Tipo 
     Else
         'OK
         If Tipo = "B" Then
+            
             ValorDevuelto = CBool(ValorDevuelto = 1)
         Else
             If IsNull(R(campo)) Then

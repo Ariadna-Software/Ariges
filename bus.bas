@@ -1038,7 +1038,7 @@ End Function
 
 Public Function CuentaCorrectaUltimoNivel(ByRef Cuenta As String, ByRef devuelve As String) As Boolean
 'Comprueba si es numerica
-Dim SQL As String
+Dim Sql As String
 Dim otroCampo As String
 
 CuentaCorrectaUltimoNivel = False
@@ -1064,8 +1064,8 @@ End If
 
 otroCampo = "apudirec"
 'BD 2: conexion a BD Conta
-SQL = DevuelveDesdeBD(conConta, "nommacta", "cuentas", "codmacta", Cuenta, "T", otroCampo)
-If SQL = "" Then
+Sql = DevuelveDesdeBD(conConta, "nommacta", "cuentas", "codmacta", Cuenta, "T", otroCampo)
+If Sql = "" Then
     devuelve = "No existe la cuenta : " & Cuenta
     CuentaCorrectaUltimoNivel = True
     Exit Function
@@ -1074,7 +1074,7 @@ End If
 'Llegados aqui, si que existe la cuenta
 If otroCampo = "S" Then 'Si es apunte directo
     CuentaCorrectaUltimoNivel = True
-    devuelve = SQL
+    devuelve = Sql
 Else
     devuelve = "No es apunte directo: " & Cuenta
 End If
@@ -1914,7 +1914,7 @@ End Function
 '--------------------  ELIMINAR ARTICULO
 Public Function SePuedeEliminarArticulo(ByVal Articulo As String, ByRef L1 As Label) As String
 On Error GoTo Salida
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim i As Integer
 Dim C As String
@@ -1926,9 +1926,9 @@ Dim nt As Integer
     
     
     'Clientes
-    DevuelveTablasBorre 0, C, SQL, nt
+    DevuelveTablasBorre 0, C, Sql, nt
     For i = 1 To nt
-        L1.Caption = RecuperaValor(SQL, i) & " (Clientes)"
+        L1.Caption = RecuperaValor(Sql, i) & " (Clientes)"
         L1.Refresh
         If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
@@ -1939,9 +1939,9 @@ Dim nt As Integer
     
     'Si llega aqui comprobamos en  proveedores
     'PROVEEDORES
-    DevuelveTablasBorre 1, C, SQL, nt
+    DevuelveTablasBorre 1, C, Sql, nt
     For i = 1 To nt
-        L1.Caption = RecuperaValor(SQL, i) & " (Proveedores)"
+        L1.Caption = RecuperaValor(Sql, i) & " (Proveedores)"
         L1.Refresh
         If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
@@ -1951,9 +1951,9 @@ Dim nt As Integer
     If SePuedeEliminarArticulo <> "" Then SePuedeEliminarArticulo = SePuedeEliminarArticulo & vbCrLf
     
     'Varios
-    DevuelveTablasBorre 2, C, SQL, nt
+    DevuelveTablasBorre 2, C, Sql, nt
     For i = 1 To nt
-        L1.Caption = RecuperaValor(SQL, i) & " (Varios)"
+        L1.Caption = RecuperaValor(Sql, i) & " (Varios)"
         L1.Refresh
         If TieneDatosSQLCount(RS, "SELECT count(*) from " & RecuperaValor(C, i) & " where codartic = " & Articulo, 0) Then
             SePuedeEliminarArticulo = SePuedeEliminarArticulo & "    -" & L1.Caption & vbCrLf
@@ -1965,13 +1965,13 @@ Dim nt As Integer
         
     'Si es articulo de parametros
     C = ""
-    SQL = vbCrLf & Space(10)
+    Sql = vbCrLf & Space(10)
     With vParamAplic
-        If DBSet(.ArticDesplaz, "T") = Articulo Then C = C & SQL & "Desplazamiento"
-        If DBSet(.ArtPortesN, "T") = Articulo Then C = C & SQL & "Portes"
-        If DBSet(.ArtReciclado, "T") = Articulo Then C = C & SQL & "Tasa reciclado"
+        If DBSet(.ArticDesplaz, "T") = Articulo Then C = C & Sql & "Desplazamiento"
+        If DBSet(.ArtPortesN, "T") = Articulo Then C = C & Sql & "Portes"
+        If DBSet(.ArtReciclado, "T") = Articulo Then C = C & Sql & "Tasa reciclado"
         'If DBSet(.CodarticTfnia, "T") = Articulo Then C = C & SQL & "Telefonia"
-        If DBSet(.ArticuloRecargoFinanciero, "T") = Articulo Then C = C & SQL & "Recargo financiero"
+        If DBSet(.ArticuloRecargoFinanciero, "T") = Articulo Then C = C & Sql & "Recargo financiero"
     End With
     If C <> "" Then
         C = " -Parametros " & C
@@ -2267,12 +2267,12 @@ End Sub
 
 
 
-Public Function ejecutar(ByRef SQL As String, OcultarMsg As Boolean) As Boolean
+Public Function ejecutar(ByRef Sql As String, OcultarMsg As Boolean) As Boolean
     On Error Resume Next
-    conn.Execute SQL
+    conn.Execute Sql
     If Err.Number <> 0 Then
         If Not OcultarMsg Then
-            MuestraError Err.Number, Err.Description, SQL
+            MuestraError Err.Number, Err.Description, Sql
         Else
             Err.Clear   'Ya que no queremos que traslade el error
         End If
@@ -2321,7 +2321,7 @@ End Function
 
 Public Sub DavidLogImpresionAlbaranes()
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 
     'antes d lanzar este sub se fijaran las variables
     'Public davidCodtipom As String
@@ -2335,16 +2335,16 @@ Dim SQL As String
 
 
     'Inserto en slog
-    SQL = "insert into `slogimpr` (fecha,usuario,pc,codtipom,numalbar) values ( "
-    SQL = SQL & " now(),'" & DevNombreSQL(vUsu.Login) & "','"
-    SQL = SQL & DevNombreSQL(vUsu.PC) & "','" & davidCodtipom & "'," & davidNumalbar & ")"
-    conn.Execute SQL
+    Sql = "insert into `slogimpr` (fecha,usuario,pc,codtipom,numalbar) values ( "
+    Sql = Sql & " now(),'" & DevNombreSQL(vUsu.Login) & "','"
+    Sql = Sql & DevNombreSQL(vUsu.PC) & "','" & davidCodtipom & "'," & davidNumalbar & ")"
+    conn.Execute Sql
     
 
     'UPDATEO SCAALB
-    SQL = "scaalb.codtipom = '" & davidCodtipom & "' AND scaalb.numalbar = " & davidNumalbar
-    SQL = "UPDATE scaalb SET albImpreso = 1 WHERE " & SQL
-    conn.Execute SQL
+    Sql = "scaalb.codtipom = '" & davidCodtipom & "' AND scaalb.numalbar = " & davidNumalbar
+    Sql = "UPDATE scaalb SET albImpreso = 1 WHERE " & Sql
+    conn.Execute Sql
 
     If Err.Number <> 0 Then Err.Clear
 
@@ -2358,7 +2358,7 @@ End Sub
 'N tiene sentido. Nunca entrara cuando YA haya un precionu, pero por si acaso....
 Public Function ActualizarPrecioEspecialGenerico(codArt As String, Precio As Currency, BloqueaTabla As Boolean, FechaNUeTele As String) As Boolean
 'actualizar precio especial
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim NumF As String
 Dim fec As Date
@@ -2373,9 +2373,9 @@ Dim InsertaHco As Boolean
         If Not BloqueoManual("ACTPRE", "1") Then Exit Function
     End If
     
-    SQL = "SELECT * FROM sprees WHERE codartic=" & DBSet(codArt, "T")
+    Sql = "SELECT * FROM sprees WHERE codartic=" & DBSet(codArt, "T")
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RS.EOF
     
         
@@ -2384,10 +2384,10 @@ Dim InsertaHco As Boolean
     
         InsertaHco = True
         If IsNull(RS!fechanue) Then
-            SQL = DBSet(Now, "F")
+            Sql = DBSet(Now, "F")
             If FechaNUeTele <> "" Then InsertaHco = False
         Else
-            SQL = DBSet(RS!fechanue, "F")
+            Sql = DBSet(RS!fechanue, "F")
         End If
         
         '-- Insertar en el historico spree1
@@ -2395,41 +2395,41 @@ Dim InsertaHco As Boolean
         If InsertaHco Then NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", "codartic=" & DBSet(codArt, "T") & " AND codclien=" & RS!codClien)
         
         'codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec
-        SQL = RS!codClien & "," & DBSet(codArt, "T") & "," & NumF & "," & SQL
+        Sql = RS!codClien & "," & DBSet(codArt, "T") & "," & NumF & "," & Sql
         'No tiene valor siguiente. Directamente actualizamos
-        SQL = SQL & "," & DBSet(RS!precioac, "N") & "," & DBSet(DBLet(RS!precioa1, "N"), "N") & "," & DBSet(RS!dtoespec, "N") & ")"
-        SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec) VALUES (" & SQL
+        Sql = Sql & "," & DBSet(RS!precioac, "N") & "," & DBSet(DBLet(RS!precioa1, "N"), "N") & "," & DBSet(RS!dtoespec, "N") & ")"
+        Sql = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec) VALUES (" & Sql
         
-        If InsertaHco Then conn.Execute SQL
+        If InsertaHco Then conn.Execute Sql
         
         
         '-- Actualizar precios actuales con nuevo y resetear valores nuevos
         If IsNull(RS!precionu) Then
             If FechaNUeTele <> "" Then
                 'Viene de TELEMATEL. Lleva fecha de cambio
-                SQL = "UPDATE sprees SET precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(FechaNUeTele, "F") & ", precion1=null"
+                Sql = "UPDATE sprees SET precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(FechaNUeTele, "F") & ", precion1=null"
                 
             Else
                 'Lo que hacia antes de Febrero 2019
                 'Como el valor de precion1 es nulo, actualizamos directamente
-                SQL = "UPDATE sprees SET precioac=" & DBSet(Precio, "N")
+                Sql = "UPDATE sprees SET precioac=" & DBSet(Precio, "N")
             
             End If
         Else
             
-            SQL = "UPDATE sprees SET precioac=" & DBSet(RS!precionu, "N")
-            SQL = SQL & "," & " precioa1=" & DBSet(RS!precion1, "N")
-            SQL = SQL & ", dtoespec=" & DBSet(RS!dtoespe1, "N", "S")
+            Sql = "UPDATE sprees SET precioac=" & DBSet(RS!precionu, "N")
+            Sql = Sql & "," & " precioa1=" & DBSet(RS!precion1, "N")
+            Sql = Sql & ", dtoespec=" & DBSet(RS!dtoespe1, "N", "S")
             
             If FechaNUeTele = "" Then
                 'Antes Febrero 2019. Estaba asi!!!!
-                SQL = SQL & ", " & "precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(Now, "F")
+                Sql = Sql & ", " & "precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(Now, "F")
             Else
-                SQL = SQL & ", " & "precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(FechaNUeTele, "F")
+                Sql = Sql & ", " & "precionu=" & DBSet(Precio, "N") & ", fechanue=" & DBSet(FechaNUeTele, "F")
             End If
         End If
-        SQL = SQL & " WHERE codclien=" & RS!codClien & " and codartic=" & DBSet(codArt, "T")
-        conn.Execute SQL
+        Sql = Sql & " WHERE codclien=" & RS!codClien & " and codartic=" & DBSet(codArt, "T")
+        conn.Execute Sql
         
         RS.MoveNext
     Wend

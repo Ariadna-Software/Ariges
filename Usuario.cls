@@ -34,10 +34,12 @@ Private mvarCodigoAgente As Integer
 Private mvarNivel2 As Byte   'Aplicara un segundo nivel para tema de permisos
 Private mvarId As Long    'Aplicara un segundo nivel para tema de permisos
 
+Private mvarTabPorDefecto As Integer
+
 
 
 Private RS As ADODB.Recordset
-Private SQL As String
+Private Sql As String
 Private Mens As String
 
 Public Property Let Nivel(ByVal vData As Long)
@@ -172,13 +174,13 @@ Public Property Get Nivel2() As Byte
 End Property
 
 
-Public Property Let ID(ByVal vData As Long)
+Public Property Let Id(ByVal vData As Long)
     mvarId = vData
 End Property
 
 
-Public Property Get ID() As Long
-    ID = mvarId
+Public Property Get Id() As Long
+    Id = mvarId
 End Property
 
 
@@ -191,12 +193,12 @@ Public Property Let Skin(ByVal vData As Integer)
 End Property
 
 Public Property Let TabPorDefecto(ByVal vData As Integer)
-    'mvarTabPorDefecto = vData
+    mvarTabPorDefecto = vData
 End Property
 
 
 Public Property Get TabPorDefecto() As Integer
-    TabPorDefecto = 1 ' mvarTabPorDefecto
+    TabPorDefecto = mvarTabPorDefecto
 End Property
 
 
@@ -210,10 +212,10 @@ Attribute Leer.VB_Description = "Lee un grupo de formas de cobro en función del 
 Dim i As Long
     On Error GoTo Err1
     
-    SQL = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
-    SQL = SQL & " AND NivelAriges >=0"
+    Sql = "SELECT * FROM usuarios.usuarios WHERE login = '" & vlogin & "'"
+    Sql = Sql & " AND NivelAriges >=0"
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If RS.EOF Then
         Leer = 1
@@ -230,6 +232,10 @@ Dim i As Long
         
         
         mvarSkin = -1
+        
+        
+        mvarTabPorDefecto = 2 'De momento pongo esto
+        
         'If Not IsNull(RS!skinariges) Then mvarSkin = RS!skinariges
         FijarSkinAriges
         
@@ -248,7 +254,7 @@ End Function
 Private Function FijarSkinAriges()
 
     On Error Resume Next
-    SQL = RS!skinariges
+    Sql = RS!skinariges
     If Err.Number <> 0 Then
         Err.Clear
         conn.Errors.Clear
@@ -264,8 +270,8 @@ Private Function DevuelveAumentoPC() As Long
 DevuelveAumentoPC = 32000
 'mvarPC = ComputerName
 mvarPC = ComputerName
-SQL = DevuelveDesdeBD(conAri, "codpc", "usuarios.pcs", "nompc", mvarPC, "T")
-If SQL <> "" Then DevuelveAumentoPC = Val(SQL) * 1000
+Sql = DevuelveDesdeBD(conAri, "codpc", "usuarios.pcs", "nompc", mvarPC, "T")
+If Sql <> "" Then DevuelveAumentoPC = Val(Sql) * 1000
 
 End Function
 
@@ -281,8 +287,8 @@ Dim R As ADODB.Recordset
     mvarCodigoAgente = 0
     mvarNivel2 = 0
     Set R = New ADODB.Recordset
-    SQL = "Select codalmac,codagent,nrosegur FROM straba WHERE login = " & DBSet(Login, "T")
-    R.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "Select codalmac,codagent,nrosegur FROM straba WHERE login = " & DBSet(Login, "T")
+    R.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not R.EOF Then
         If Not IsNull(R!codAlmac) Then mvarAlmacenPorDefecto = R!codAlmac
         If Not IsNull(R!CodAgent) Then mvarCodigoAgente = R!CodAgent
@@ -304,14 +310,11 @@ End Sub
 
 
 Public Sub ActualizarSkin()
-    SQL = "UPDATE usuarios.usuarios SET skin=" & mvarSkin & " WHERE codusu = " & vUsu.ID
+    Sql = "UPDATE usuarios.usuarios SET skin=" & mvarSkin & " WHERE codusu = " & vUsu.Id
    
-    ejecutar SQL, False
+    ejecutar Sql, False
 End Sub
 Public Sub LeerFiltros(aplicacion As String, idPrg As Integer)
-
-End Sub
-Public Sub GuardarTabPorDefecto()
 
 End Sub
 
@@ -322,3 +325,49 @@ Public Sub InicializaFiltrosEmpresa()
        ' mvarFiltroCompensacionHco2 = 0
     
 End Sub
+
+
+
+Public Sub LeerTabPorDefecto()
+    'Las tabs estan en mysql,menus, desde el 1 hasta el 14
+    If mvarTabPorDefecto = 0 Then mvarTabPorDefecto = 2
+    
+    Sql = "aplicacion = 'ariges' and filtro =1  and codigo in (select codigo from menus where padre=0 and ocultarPorInstalacion=0)  and codusu  "
+
+    Sql = DevuelveDesdeBD(conAri, "codigo", "menus_usuarios", Sql, CStr(mvarId))
+    If Sql <> "" Then
+        If Val(Sql) > 0 Then mvarTabPorDefecto = CInt(Sql)
+    End If
+    
+End Sub
+
+Public Sub GuardarTabPorDefecto()
+    On Error GoTo eGuardarTabPorDefecto
+    'En todas las contabilidades
+    Sql = "SELECT codempre FROM usuarios.empresasariges "
+    Sql = Sql & " where mid(ariges,1,6) = 'ariges' "
+    Set RS = New ADODB.Recordset
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If RS.EOF Then
+        'SOLO en esta. Deberia dar error
+        Sql = "UPDATE menus_usuarios SET filtro=if(codigo=" & vUsu.TabPorDefecto & ",1,0) WHERE codusu = " & vUsu.Id
+        Sql = Sql & " AND aplicacion = 'ariges' and codigo in (select codigo from menus where padre=0 and ocultarPorInstalacion=0) "
+        conn.Execute Sql
+    Else
+        While Not RS.EOF
+            Sql = "UPDATE ariges" & IIf(RS!codempre = 0, "", RS!codempre) & ".menus_usuarios "
+            Sql = Sql & " SET filtro=if(codigo=" & vUsu.TabPorDefecto & ",1,0) WHERE codusu = " & vUsu.Id
+            Sql = Sql & " AND aplicacion = 'ariges' and codigo in (select codigo from menus where padre=0 and ocultarPorInstalacion=0) "
+            conn.Execute Sql
+            RS.MoveNext
+        Wend
+    End If
+    RS.Close
+    
+eGuardarTabPorDefecto:
+    If Err.Number <> 0 Then Err.Clear
+
+    Set RS = Nothing
+    
+End Sub
+

@@ -3314,7 +3314,7 @@ Private Sub mnLineas_Click()
     'Si son facturas de liquidacion de soccios NO dejamos modificarlas
     If Me.FrmRetencionSocios.visible Then
         If DBLet(Data1.Recordset!PorRet, "N") > 0 Then
-            MsgBox "Factura liquidación socios. No puede modificarse", vbExclamation
+            MsgBox "Factura con retencion. No puede modificarse", vbExclamation
             Exit Sub
         End If
     End If
@@ -3356,14 +3356,14 @@ End Sub
 
 Private Function BloqueaAlbxFac() As Boolean
 'bloquea todos los albaranes de la factura
-Dim Sql As String
+Dim SQL As String
 On Error GoTo EBloqueaAlb
 
     BloqueaAlbxFac = False
     'bloquear cabecera albaranes x factura
-    Sql = "select * FROM scafpa "
-    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute Sql, , adCmdText
+    SQL = "select * FROM scafpa "
+    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute SQL, , adCmdText
     BloqueaAlbxFac = True
 
 EBloqueaAlb:
@@ -3373,16 +3373,16 @@ End Function
 
 Private Function BloqueaLineasFac() As Boolean
 'bloquea TODAS las lineas de la factura
-Dim Sql As String
+Dim SQL As String
     
     On Error GoTo EBloqueaLin
 
     BloqueaLineasFac = False
     
     'bloquear cabecera albaranes x factura
-    Sql = "select * FROM slifpc "
-    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute Sql, , adCmdText
+    SQL = "select * FROM slifpc "
+    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute SQL, , adCmdText
     BloqueaLineasFac = True
 
 EBloqueaLin:
@@ -4078,7 +4078,7 @@ End Sub
     
 Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Albaran: slialb
-Dim Sql As String
+Dim SQL As String
 Dim vWhere As String
 Dim B As Boolean
 
@@ -4092,32 +4092,32 @@ Dim B As Boolean
     vWhere = vWhere & " AND numlinea=" & Data2.Recordset.Fields!numlinea
     
     If DatosOkLinea() Then
-        Sql = "UPDATE " & NomTablaLineas & " SET "
-        Sql = Sql & " ampliaci=" & DBSet(Text2(16).Text, "T")
+        SQL = "UPDATE " & NomTablaLineas & " SET "
+        SQL = SQL & " ampliaci=" & DBSet(Text2(16).Text, "T")
         'SQL = SQL & "precioar= " & DBSet(txtAux(4).Text, "N") & ", "
         'SQL = SQL & "dtoline1= " & DBSet(txtAux(5).Text, "N") & ", dtoline2= " & DBSet(txtAux(6).Text, "N") & ", "
         'SQL = SQL & "importel= " & DBSet(txtAux(7).Text, "N")
-        Sql = Sql & ", numlotes=" & DBSet(Text2(17).Text, "T")
-        Sql = Sql & ", codclien=" & DBSet(txtAux(9).Text, "N", "S")
-        Sql = Sql & ", coddirec=" & DBSet(txtAux(10).Text, "N", "S")
-        Sql = Sql & ", actuacion=" & DBSet(txtAux(11).Text, "T", "S")
+        SQL = SQL & ", numlotes=" & DBSet(Text2(17).Text, "T")
+        SQL = SQL & ", codclien=" & DBSet(txtAux(9).Text, "N", "S")
+        SQL = SQL & ", coddirec=" & DBSet(txtAux(10).Text, "N", "S")
+        SQL = SQL & ", actuacion=" & DBSet(txtAux(11).Text, "T", "S")
         
-        If vEmpresa.TieneAnalitica Then Sql = Sql & ", codccost=" & DBSet(txtAux(8).Text, "T", "S")
+        If vEmpresa.TieneAnalitica Then SQL = SQL & ", codccost=" & DBSet(txtAux(8).Text, "T", "S")
         
         'Julio 2015. Euler
         If InstalacionEsEulerTaxco Then
             'codtipomV numalbarV fechaalbV
-            Sql = Sql & "," & "codtipomv=" & DBSet(txtAux(12).Text, "T", "S")
-            Sql = Sql & "," & "numalbarV=" & DBSet(txtAux(13).Text, "N", "S")
-            Sql = Sql & "," & "fechaalbV=" & DBSet(txtAux(14).Text, "F", "S")
+            SQL = SQL & "," & "codtipomv=" & DBSet(txtAux(12).Text, "T", "S")
+            SQL = SQL & "," & "numalbarV=" & DBSet(txtAux(13).Text, "N", "S")
+            SQL = SQL & "," & "fechaalbV=" & DBSet(txtAux(14).Text, "F", "S")
         End If
         
-        Sql = Sql & vWhere
+        SQL = SQL & vWhere
     End If
     
-    If Sql <> "" Then
+    If SQL <> "" Then
         'actualizar la factura y vencimientos
-        B = ModificarFactura(Sql)
+        B = ModificarFactura(SQL)
         ModificarLinea = B
     End If
     
@@ -4157,7 +4157,7 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
 Dim Opcion As Byte
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo ECargaGrid
 
@@ -4169,8 +4169,8 @@ Dim Sql As String
         Opcion = 2
     End If
     
-    Sql = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
+    SQL = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
     
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
@@ -4334,7 +4334,7 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Cta As String
 Dim B As Boolean
 
@@ -4350,25 +4350,31 @@ Dim B As Boolean
         'Eliminar en la tabla pagos de la Contabilidad: spagop
         '------------------------------------------------
         Cta = DevuelveDesdeBDNew(conAri, "sprove", "codmacta", "codprove", Text1(2).Text, "N")
-        Sql = " ctaprove='" & Cta & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
-        Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
-        ConnConta.Execute "Delete from spagop WHERE " & Sql
+        SQL = " ctaprove ='" & Cta & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
+        SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
+        SQL = "Delete from  spagop WHERE " & SQL
+        If vParamAplic.ContabilidadNueva Then
+            SQL = Replace(SQL, " ctaprove ", " codmacta ")
+            SQL = Replace(SQL, " spagop ", " pagos ")
+        End If
+        ConnConta.Execute SQL
+        
         B = True
         
         
         'Eliminar en tablas de factura de Ariges: scafpc, scafpa, slifpc
         '---------------------------------------------------------------
         If B Then
-            Sql = " " & ObtenerWhereCP(True)
+            SQL = " " & ObtenerWhereCP(True)
         
             'Lineas de facturas (slifpc)
-            conn.Execute "Delete from " & NomTablaLineas & Sql
+            conn.Execute "Delete from " & NomTablaLineas & SQL
         
             'Lineas de cabeceras de albaranes de la factura
-            conn.Execute "Delete from scafpa " & Sql
+            conn.Execute "Delete from scafpa " & SQL
             
             'Cabecera de facturas (scafpc)
-            conn.Execute "Delete from " & NombreTabla & Sql
+            conn.Execute "Delete from " & NombreTabla & SQL
         End If
         
         'Eliminar los movimientos generados por el albaran que genero la factura
@@ -4433,11 +4439,11 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim Sql As String
+Dim SQL As String
 On Error Resume Next
-    Sql = "codprove= " & Text1(2).Text & " and numfactu= '" & Text1(0).Text & "' and fecfactu='" & Format(Text1(1).Text, FormatoFecha) & "' "
-    If conWhere Then Sql = " WHERE " & Sql
-    ObtenerWhereCP = Sql
+    SQL = "codprove= " & Text1(2).Text & " and numfactu= '" & Text1(0).Text & "' and fecfactu='" & Format(Text1(1).Text, FormatoFecha) & "' "
+    If conWhere Then SQL = " WHERE " & SQL
+    ObtenerWhereCP = SQL
 End Function
 
 
@@ -4450,32 +4456,32 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim SQL As String
     
     If Opcion = 1 Then
-        Sql = "SELECT codprove, numfactu, fecfactu, numalbar, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,numlotes,codccost "
+        SQL = "SELECT codprove, numfactu, fecfactu, numalbar, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,numlotes,codccost "
         'Sept 2012
-        Sql = Sql & ",codclien,coddirec,actuacion"
+        SQL = SQL & ",codclien,coddirec,actuacion"
         
         'Julio 2015
-        Sql = Sql & ",codtipomV,numalbarV,fechaalbV"
+        SQL = SQL & ",codtipomV,numalbarV,fechaalbV"
         
-        Sql = Sql & " FROM slifpc " 'lineas de factura
+        SQL = SQL & " FROM slifpc " 'lineas de factura
     ElseIf Opcion = 2 Then
-        Sql = "SELECT codprove,numfactu,fecfactu,numalbar, fechaalb, numpedpr,fecpedpr,codtrab1, codtrab2,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia ,SReferencia ,fecentrega,fentrada  "
-        Sql = Sql & " FROM scafpa " 'cabeceras albaranes de la factura
+        SQL = "SELECT codprove,numfactu,fecfactu,numalbar, fechaalb, numpedpr,fecpedpr,codtrab1, codtrab2,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia ,SReferencia ,fecentrega,fentrada  "
+        SQL = SQL & " FROM scafpa " 'cabeceras albaranes de la factura
     End If
     
     If enlaza Then
-        Sql = Sql & " " & ObtenerWhereCP(True)
+        SQL = SQL & " " & ObtenerWhereCP(True)
         'lineas factura proveedor
-        If Opcion = 1 Then Sql = Sql & " AND numalbar=" & DBSet(Data3.Recordset.Fields!Numalbar, "T")
+        If Opcion = 1 Then SQL = SQL & " AND numalbar=" & DBSet(Data3.Recordset.Fields!Numalbar, "T")
     Else
-        Sql = Sql & " WHERE false " 'numfactu = -1"
+        SQL = SQL & " WHERE false " 'numfactu = -1"
     End If
-    Sql = Sql & " ORDER BY codprove, numfactu, fecfactu,numalbar "
-    If Opcion = 1 Then Sql = Sql & ", numlinea "
-    MontaSQLCarga = Sql
+    SQL = SQL & " ORDER BY codprove, numfactu, fecfactu,numalbar "
+    If Opcion = 1 Then SQL = SQL & ", numlinea "
+    MontaSQLCarga = SQL
 End Function
 
 
@@ -4595,7 +4601,7 @@ End Sub
    
 
 Private Function ModificaAlbxFac() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim B As Boolean
 On Error GoTo EModificaAlb
     
@@ -4626,23 +4632,23 @@ On Error GoTo EModificaAlb
     
     
     
-    Sql = "UPDATE scafpa SET codtrab2=" & DBSet(Text3(0).Text, "N", "S") & ", "
-    Sql = Sql & "codtrab1=" & DBSet(Text3(1).Text, "N", "S")
+    SQL = "UPDATE scafpa SET codtrab2=" & DBSet(Text3(0).Text, "N", "S") & ", "
+    SQL = SQL & "codtrab1=" & DBSet(Text3(1).Text, "N", "S")
     If Me.FrameObserva.visible Then
-        Sql = Sql & ", observa1=" & DBSet(Text3(4).Text, "T")
-        Sql = Sql & ", observa2=" & DBSet(Text3(5).Text, "T")
-        Sql = Sql & ", observa3=" & DBSet(Text3(6).Text, "T")
-        Sql = Sql & ", observa4=" & DBSet(Text3(7).Text, "T")
-        Sql = Sql & ", observa5=" & DBSet(Text3(8).Text, "T")
+        SQL = SQL & ", observa1=" & DBSet(Text3(4).Text, "T")
+        SQL = SQL & ", observa2=" & DBSet(Text3(5).Text, "T")
+        SQL = SQL & ", observa3=" & DBSet(Text3(6).Text, "T")
+        SQL = SQL & ", observa4=" & DBSet(Text3(7).Text, "T")
+        SQL = SQL & ", observa5=" & DBSet(Text3(8).Text, "T")
     End If
-    Sql = Sql & ", fecenvio=" & DBSet(Text3(9).Text, "F", "S")
-    Sql = Sql & ", docarchiv=" & DBSet(Me.chkDocArchi.Value, "N")
-    Sql = Sql & ", codenvio=" & DBSet(Text3(10).Text, "N", "S")
-    Sql = Sql & ObtenerWhereCP(True)
+    SQL = SQL & ", fecenvio=" & DBSet(Text3(9).Text, "F", "S")
+    SQL = SQL & ", docarchiv=" & DBSet(Me.chkDocArchi.Value, "N")
+    SQL = SQL & ", codenvio=" & DBSet(Text3(10).Text, "N", "S")
+    SQL = SQL & ObtenerWhereCP(True)
     'Antes oct 2011
     'SQL = SQL & " AND numalbar=" & Data3.Recordset.Fields!NumAlbar
-    Sql = Sql & " AND numalbar=" & DBSet(Data3.Recordset.Fields!Numalbar, "T")
-    conn.Execute Sql
+    SQL = SQL & " AND numalbar=" & DBSet(Data3.Recordset.Fields!Numalbar, "T")
+    conn.Execute SQL
     ModificaAlbxFac = True
     
 EModificaAlb:
@@ -4655,7 +4661,7 @@ Private Function ModificarFactura(Optional sqlLineas As String) As Boolean
 'si se ha modificado la linea de slifac, añadir a la transaccion la modificación de la linea y recalcular
 Dim bol As Boolean
 Dim MenError As String
-Dim Sql As String
+Dim SQL As String
 Dim vFactu As CFacturaCom
 Dim TocarEnTesoreria As Boolean
 Dim Impag As String
@@ -4706,19 +4712,19 @@ On Error GoTo EModFact
                         'Si no esta el pago, o ya esta pagado, NO tocamos nada de la tesoreria
                         If Modo = 5 Then
                             'NO TOCAREMOS EL VTO, estamos asignadndo albaranes en las linea
-                            Sql = ""
+                            SQL = ""
                         Else
-                            Sql = " codmacta='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
-                            Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
-                            Sql = DevuelveDesdeBD(conConta, "concat(impefect-coalesce(imppagad,0),'|',coalesce(imppagad,0),'|')", "pagos", Sql & " AND 1", "1")
-                            Impag = RecuperaValor(Sql, 2)
-                            Sql = RecuperaValor(Sql, 1)
+                            SQL = " codmacta='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
+                            SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
+                            SQL = DevuelveDesdeBD(conConta, "concat(impefect-coalesce(imppagad,0),'|',coalesce(imppagad,0),'|')", "pagos", SQL & " AND 1", "1")
+                            Impag = RecuperaValor(SQL, 2)
+                            SQL = RecuperaValor(SQL, 1)
                         End If
-                        If Sql <> "" Then
+                        If SQL <> "" Then
                             If Impag = "" Then Impag = "0.00"
                            
                             
-                            If vFactu.TotalFac <> CCur(Sql) Then
+                            If vFactu.TotalFac <> CCur(SQL) Then
                                 If Impag <> "0.00" Then
                                    ' MsgBox "Revise pago en tesoreria. Tiene pago realizado", vbExclamation
                                 Else
@@ -4734,20 +4740,20 @@ On Error GoTo EModFact
                                 End If
                             End If
                         End If
-                        Sql = " codmacta='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
-                        Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
-                        Sql = "Delete from pagos WHERE " & Sql
+                        SQL = " codmacta='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
+                        SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
+                        SQL = "Delete from pagos WHERE " & SQL
                     Else
                         TocarEnTesoreria = True
-                        Sql = " ctaprove='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
-                        Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
-                        Sql = "Delete from spagop WHERE " & Sql
+                        SQL = " ctaprove='" & vFactu.CtaProve & "' AND numfactu='" & Data1.Recordset.Fields!Numfactu & "'"
+                        SQL = SQL & " AND fecfactu='" & Format(Data1.Recordset.Fields!FecFactu, FormatoFecha) & "'"
+                        SQL = "Delete from spagop WHERE " & SQL
                     End If
                     
                     
                     'Volvemos a grabar en TESORERIA. Tabla de Contabilidad: sconta.spagop
                     If TocarEnTesoreria Then
-                        ConnConta.Execute Sql
+                        ConnConta.Execute SQL
                         If bol Then
                             bol = vFactu.InsertarEnTesoreria(MenError, "")
                         End If

@@ -2912,7 +2912,7 @@ Dim idC As Long
             CadenaDesdeOtroForm = vSQL & "|" & TipoFicheroOperador & "|" & mfichero & "|"
                 
             'Lanzamos el visor donde sal
-            frmVarios3.opcion = 3
+            frmVarios3.Opcion = 3
             frmVarios3.Show vbModal
     
             
@@ -5406,6 +5406,9 @@ Dim J As Integer
             
             i = i + 1
             'If I = 70 Then S top
+            If RTef.Fields(6) = "961108291" Then Debug.Assert False
+            
+            
             Lbl.Caption = "Lineas factura " & CStr(i) & " " & RTef.Fields(6)
             Lbl.Refresh
             DoEvents
@@ -5456,6 +5459,8 @@ Dim J As Integer
             If Not EsAgrupacionTelefono Then
                 mSQL = Replace(whereTelefono, "#campotele#", "idtelefono")
                 mSQL = "Select cuotaminima,fechaalta from sclientfno where " & mSQL
+                
+        
                 miRsAux.Open mSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 ImporteAjusteMinimo = 0
                 mValorIva = 0
@@ -5466,7 +5471,10 @@ Dim J As Integer
                         If DateDiff("d", miRsAux!fechaalta, Now) > 30 Then
                             'Tiene mas de un mes de permenencia
                             
-                            ImporteAjusteMinimo = CalcularImporteMinimoConsumoNuevo(RTef, CCur(DBLet(miRsAux!cuotaminima, "N")), ImporteparaElCalculoDelMinimo, Apell1)
+                            'OCTUBRE 2021
+                            If Not IsNull(miRsAux!cuotaminima) Then
+                                ImporteAjusteMinimo = CalcularImporteMinimoConsumoNuevo(RTef, CCur(DBLet(miRsAux!cuotaminima, "N")), ImporteparaElCalculoDelMinimo, Apell1)
+                            End If
                         End If
                     End If
                     
@@ -6411,7 +6419,7 @@ Private Function cargarBaseDatosVODAFONE_Refacturado(mfichero As String, ByRef L
             
             Else
                 J = 0 'MAL
-                Err.Raise 513, , "Campos soportados: Consumo Datos- Consumo Voz - Cuotas - Consumo Mensajes "
+                Err.Raise 513, , "Campos soportados: Consumo Datos- Consumo Voz - Cuotas - Consumo Mensajes.   Valor: " & Valores(0)
             End If
             
             If J = 3 Then

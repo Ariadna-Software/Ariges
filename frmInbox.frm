@@ -607,7 +607,7 @@ Public Sub OpenProvider()
     
     Set m_pCustomDataHandler = New providerMySQL
     '
-    strConnectionString = "Provider=Custom;DSN=Ariconta6"
+    strConnectionString = "Provider=Custom;DSN=vAriges"
     m_pCustomDataHandler.OpenDB strConnectionString
     m_pCustomDataHandler.SetCalendar CalendarControl
 

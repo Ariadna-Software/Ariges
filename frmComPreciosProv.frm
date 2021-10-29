@@ -1281,7 +1281,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim b As Boolean
+Dim B As Boolean
     On Error GoTo Error1
     Screen.MousePointer = vbHourglass
     
@@ -1296,9 +1296,9 @@ Dim b As Boolean
             If DatosOk Then
                     
                 conn.BeginTrans
-                b = ModificarRegistro
+                B = ModificarRegistro
                 
-                If b Then
+                If B Then
                      conn.CommitTrans
                      TerminaBloquear
                      PosicionarData
@@ -1421,7 +1421,7 @@ Dim i As Integer
     NombreTabla = "slispr" 'Tabla Cabecera Precios Proveedor
     NombreTablaLin = "slisp1" 'Tabla Lineas Precios Proveedor
     Ordenacion = " ORDER BY codartic, codprove "
-    CadenaConsulta = "Select * from " & NombreTabla & " WHERE codartic = -1" 'No recupera datos
+    CadenaConsulta = "Select * from " & NombreTabla & " WHERE false" 'No recupera datos
     
     Data1.ConnectionString = conn
     Data1.RecordSource = CadenaConsulta
@@ -1433,13 +1433,13 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data2, SQL, False
@@ -1463,7 +1463,7 @@ Dim SQL As String
     For i = 0 To DataGrid1.Columns.Count - 1
         DataGrid1.Columns(i).AllowSizing = False
     Next i
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     DataGrid1.RowHeight = 350
     DataGrid1.ScrollBars = dbgAutomatic
     
@@ -1697,7 +1697,7 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
@@ -1705,14 +1705,14 @@ Dim NumReg As Byte
     
     '===========================================
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     'Visualizar flechas de desplazamiento en la toolbar si modo=2
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
 
           
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -1735,9 +1735,9 @@ Dim NumReg As Byte
     Me.chkPermiteDto(1).Enabled = (Modo = 3) Or (Modo = 4) 'Insert o Modificar
     
     '==============================
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     
     
     Me.imgBuscar(1).Enabled = Modo = 1 Or Modo = 3 'Si modificar no activado pq son claves ajenas
@@ -1745,7 +1745,7 @@ Dim NumReg As Byte
     
     
     For i = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(i).Enabled = b
+        Me.imgFecha(i).Enabled = B
     Next i
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
@@ -1772,30 +1772,30 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2 Or Modo = 0)
+    B = (Modo = 2 Or Modo = 0)
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     
     
     '===============================
-    b = Not (Modo = 0 Or Modo = 2) '(Modo >= 3)
+    B = Not (Modo = 0 Or Modo = 2) '(Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
 End Sub
 
 
@@ -1982,27 +1982,27 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim Aux As String
 
     On Error Resume Next
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
     
     'Comprobar que si hay valores nuevos, la fecha de cambio no es nulo
-    If (Not EsVacio(Text1(4))) Then b = (Not EsVacio(Text1(3)))
+    If (Not EsVacio(Text1(4))) Then B = (Not EsVacio(Text1(3)))
     
-    If Not b Then
+    If Not B Then
         MsgBox "La Fecha de Cambio debe tener valor.", vbInformation
         Exit Function
     End If
     
     'Comprobar que si no hay valores nuevos no haya fecha de Cambio
-    If EsVacio(Text1(4)) Then b = (EsVacio(Text1(3)))
+    If EsVacio(Text1(4)) Then B = (EsVacio(Text1(3)))
     
-    If Not b Then
+    If Not B Then
         MsgBox "No hay precio nuevo para la fecha de cambio", vbInformation
         Exit Function
     End If
@@ -2026,7 +2026,7 @@ Dim Aux As String
                         Case vbYes
                             Text1(13).Text = CadenaConsulta
                         Case vbCancel
-                            b = False
+                            B = False
                         Case Else
                             'NADA
                         End Select
@@ -2038,7 +2038,7 @@ Dim Aux As String
     End If
     
     
-    If b And Modo = 4 And InstalacionEsEulerTaxco Then
+    If B And Modo = 4 And InstalacionEsEulerTaxco Then
         'EULER. Puede cambiar el codprove
         If Val(Data1.Recordset!Codprove) <> Val(Text1(0).Text) Then
             'Veamos que no existe un articulo-proveedor , ya que lo han cambiado
@@ -2046,18 +2046,18 @@ Dim Aux As String
             Aux = DevuelveDesdeBD(conAri, "codprove", "slispr", Aux, Text1(1).Text, "T")
             If Aux <> "" Then
                 MsgBox "Ya existe un precio para el ese articulo con el proveedor " & Text1(0).Text, vbExclamation
-                b = False
+                B = False
             End If
         End If
     End If
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 
@@ -2344,16 +2344,16 @@ End Sub
 
 
 Private Function ModificarRegistro() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo eModificarRegistro
 
     ModificarRegistro = False
 
-    b = ModificaDesdeFormulario(Me, 1)  'Esto actualizara los campos (sin codprove)
+    B = ModificaDesdeFormulario(Me, 1)  'Esto actualizara los campos (sin codprove)
     
     
-    If b And InstalacionEsEulerTaxco Then
+    If B And InstalacionEsEulerTaxco Then
         'EULER. Puede cambiar el codprove
         If Val(Data1.Recordset!Codprove) <> Val(Text1(0).Text) Then
             Me.Tag = "UPDATE @@@ SET codprove=" & Text1(0).Text & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codprove=" & Data1.Recordset!Codprove & ";"
@@ -2364,13 +2364,13 @@ Dim b As Boolean
             conn.Execute Replace(Me.Tag, "@@@", NombreTablaLin)
             conn.Execute "SET FOREIGN_KEY_CHECKS=1;"
     
-            b = True
+            B = True
     
     
             Me.Tag = ""
         End If
     End If
-    ModificarRegistro = b
+    ModificarRegistro = B
     Exit Function
 eModificarRegistro:
     MuestraError Err.Number

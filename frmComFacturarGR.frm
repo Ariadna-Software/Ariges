@@ -156,7 +156,7 @@ Begin VB.Form frmComFacturarGR
          Height          =   360
          Index           =   24
          Left            =   3885
-         MaxLength       =   5
+         MaxLength       =   12
          TabIndex        =   48
          Tag             =   "Impret|N|S|||scafac|impret|#,##0.00|N|"
          Text            =   "Text1 7"
@@ -1944,9 +1944,12 @@ Dim C As String
             End If
         Case 23, 24
             'SON EL IMPORTE DE RETENCION y el porcentaje
-            Text1(Index).Text = Text1(Index).Text
+            Text1(Index).Text = Trim(Text1(Index).Text)
             
-            PonerFormatoDecimal Text1(Index), 3
+            If Not PonerFormatoDecimal(Text1(Index), 3) Then
+                    Text1(Index).Text = ""
+                   
+            End If
                             
             If Index = 23 Then
                 If Text1(23).Text <> "" Then

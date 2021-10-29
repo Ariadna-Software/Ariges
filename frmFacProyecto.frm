@@ -37,7 +37,7 @@ Begin VB.Form frmFacProyecto
          Strikethrough   =   0   'False
       EndProperty
       Height          =   705
-      Left            =   5400
+      Left            =   6600
       TabIndex        =   72
       Top             =   0
       Width           =   2895
@@ -65,41 +65,53 @@ Begin VB.Form frmFacProyecto
       Height          =   6780
       Left            =   120
       TabIndex        =   52
-      Top             =   3840
+      Top             =   3960
       Width           =   17775
       _ExtentX        =   31353
       _ExtentY        =   11959
       _Version        =   393216
-      Tab             =   1
       TabHeight       =   520
       TabCaption(0)   =   "Albaranes"
       TabPicture(0)   =   "frmFacProyecto.frx":0044
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "FrameCampos2"
-      Tab(0).Control(1)=   "Frame3"
-      Tab(0).Control(2)=   "lwLineaAlbaran"
-      Tab(0).Control(3)=   "lblFramePp(2)"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "lblFramePp(2)"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "lwLineaAlbaran"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "Frame3"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "FrameCampos2"
+      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).ControlCount=   4
       TabCaption(1)   =   "Impresion"
       TabPicture(1)   =   "frmFacProyecto.frx":0060
-      Tab(1).ControlEnabled=   -1  'True
-      Tab(1).Control(0)=   "lblFramePp(4)"
-      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "FrameToolAux(5)"
       Tab(1).Control(1)=   "lwEulerLineas"
-      Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "FrameToolAux(5)"
-      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(2)=   "lblFramePp(4)"
       Tab(1).ControlCount=   3
       TabCaption(2)   =   "Tareas / costes"
       TabPicture(2)   =   "frmFacProyecto.frx":007C
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "ListView2"
-      Tab(2).Control(1)=   "ListView1"
-      Tab(2).Control(2)=   "Label1(63)"
-      Tab(2).Control(3)=   "Label1(64)"
-      Tab(2).Control(4)=   "lblFramePp(5)"
-      Tab(2).Control(5)=   "lblFramePp(3)"
-      Tab(2).ControlCount=   6
+      Tab(2).Control(0)=   "lblFramePp(3)"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "lblFramePp(5)"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(2)=   "Label1(64)"
+      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(3)=   "Label1(63)"
+      Tab(2).Control(3).Enabled=   0   'False
+      Tab(2).Control(4)=   "lblFramePp(6)"
+      Tab(2).Control(4).Enabled=   0   'False
+      Tab(2).Control(5)=   "Label1(65)"
+      Tab(2).Control(5).Enabled=   0   'False
+      Tab(2).Control(6)=   "Label1(66)"
+      Tab(2).Control(6).Enabled=   0   'False
+      Tab(2).Control(7)=   "ListView1"
+      Tab(2).Control(7).Enabled=   0   'False
+      Tab(2).Control(8)=   "ListView2"
+      Tab(2).Control(8).Enabled=   0   'False
+      Tab(2).ControlCount=   9
       Begin VB.Frame FrameToolAux 
          BeginProperty Font 
             Name            =   "MS Sans Serif"
@@ -112,7 +124,7 @@ Begin VB.Form frmFacProyecto
          EndProperty
          Height          =   555
          Index           =   5
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   57
          Top             =   960
          Width           =   2205
@@ -170,7 +182,7 @@ Begin VB.Form frmFacProyecto
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3495
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   55
          Top             =   360
          Width           =   8895
@@ -271,7 +283,7 @@ Begin VB.Form frmFacProyecto
             Strikethrough   =   0   'False
          EndProperty
          Height          =   3495
-         Left            =   -65760
+         Left            =   9240
          TabIndex        =   53
          Top             =   360
          Width           =   8415
@@ -348,7 +360,7 @@ Begin VB.Form frmFacProyecto
       End
       Begin MSComctlLib.ListView lwEulerLineas 
          Height          =   5535
-         Left            =   2520
+         Left            =   -72480
          TabIndex        =   59
          Top             =   720
          Width           =   14415
@@ -425,13 +437,13 @@ Begin VB.Form frmFacProyecto
          EndProperty
       End
       Begin MSComctlLib.ListView ListView2 
-         Height          =   3135
+         Height          =   2895
          Left            =   -72840
          TabIndex        =   61
-         Top             =   3480
-         Width           =   14775
-         _ExtentX        =   26061
-         _ExtentY        =   5530
+         Top             =   3240
+         Width           =   15135
+         _ExtentX        =   26696
+         _ExtentY        =   5106
          SortKey         =   8
          View            =   3
          LabelEdit       =   1
@@ -509,7 +521,7 @@ Begin VB.Form frmFacProyecto
       End
       Begin MSComctlLib.ListView lwLineaAlbaran 
          Height          =   2535
-         Left            =   -72480
+         Left            =   2520
          TabIndex        =   63
          Top             =   3960
          Width           =   15015
@@ -591,13 +603,13 @@ Begin VB.Form frmFacProyecto
          EndProperty
       End
       Begin MSComctlLib.ListView ListView1 
-         Height          =   2895
+         Height          =   2655
          Left            =   -72840
          TabIndex        =   65
          Top             =   480
-         Width           =   14775
-         _ExtentX        =   26061
-         _ExtentY        =   5106
+         Width           =   15135
+         _ExtentX        =   26696
+         _ExtentY        =   4683
          View            =   3
          LabelEdit       =   1
          LabelWrap       =   -1  'True
@@ -617,10 +629,10 @@ Begin VB.Form frmFacProyecto
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         NumItems        =   8
+         NumItems        =   9
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Text            =   "Albaran"
-            Object.Width           =   2998
+            Object.Width           =   2469
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
@@ -630,7 +642,7 @@ Begin VB.Form frmFacProyecto
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
             Text            =   "Nombre"
-            Object.Width           =   5503
+            Object.Width           =   5292
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
@@ -640,7 +652,7 @@ Begin VB.Form frmFacProyecto
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
             Text            =   "Descripción"
-            Object.Width           =   6350
+            Object.Width           =   5821
          EndProperty
          BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             Alignment       =   2
@@ -649,20 +661,80 @@ Begin VB.Form frmFacProyecto
             Object.Width           =   2195
          EndProperty
          BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   2
             SubItemIndex    =   6
-            Text            =   "Tiempo"
+            Text            =   "Matri"
             Object.Width           =   2540
          EndProperty
          BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Alignment       =   1
+            Alignment       =   2
             SubItemIndex    =   7
+            Text            =   "Tiempo"
+            Object.Width           =   1834
+         EndProperty
+         BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Alignment       =   1
+            SubItemIndex    =   8
             Text            =   "Horas"
-            Object.Width           =   2364
+            Object.Width           =   1835
          EndProperty
       End
       Begin VB.Label Label1 
          Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   66
+         Left            =   -60960
+         TabIndex        =   77
+         Top             =   6240
+         Width           =   3135
+      End
+      Begin VB.Label Label1 
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   65
+         Left            =   -64800
+         TabIndex        =   76
+         Top             =   6240
+         Width           =   3135
+      End
+      Begin VB.Label lblFramePp 
+         AutoSize        =   -1  'True
+         Caption         =   "Total"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00008000&
+         Height          =   375
+         Index           =   6
+         Left            =   -74760
+         TabIndex        =   75
+         Top             =   6240
+         Visible         =   0   'False
+         Width           =   885
+      End
+      Begin VB.Label Label1 
          BeginProperty Font 
             Name            =   "Tahoma"
             Size            =   12
@@ -674,13 +746,12 @@ Begin VB.Form frmFacProyecto
          EndProperty
          Height          =   255
          Index           =   63
-         Left            =   -74640
+         Left            =   -72840
          TabIndex        =   68
-         Top             =   1920
-         Width           =   1455
+         Top             =   6240
+         Width           =   2775
       End
       Begin VB.Label Label1 
-         Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Tahoma"
             Size            =   12
@@ -690,12 +761,12 @@ Begin VB.Form frmFacProyecto
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   255
+         Height          =   285
          Index           =   64
-         Left            =   -74880
+         Left            =   -68385
          TabIndex        =   67
-         Top             =   1320
-         Width           =   1455
+         Top             =   6240
+         Width           =   3480
       End
       Begin VB.Label lblFramePp 
          Caption         =   "Fichadas"
@@ -730,7 +801,7 @@ Begin VB.Form frmFacProyecto
          ForeColor       =   &H00800000&
          Height          =   420
          Index           =   2
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   64
          Top             =   4080
          Width           =   5265
@@ -749,7 +820,7 @@ Begin VB.Form frmFacProyecto
          ForeColor       =   &H00800000&
          Height          =   420
          Index           =   4
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   62
          Top             =   480
          Width           =   5265
@@ -770,7 +841,7 @@ Begin VB.Form frmFacProyecto
          Index           =   3
          Left            =   -74760
          TabIndex        =   60
-         Top             =   3480
+         Top             =   3240
          Width           =   5265
       End
    End
@@ -1336,14 +1407,14 @@ Begin VB.Form frmFacProyecto
       Left            =   3840
       TabIndex        =   22
       Top             =   0
-      Width           =   1455
+      Width           =   2055
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   120
          TabIndex        =   23
          Top             =   150
-         Width           =   1125
-         _ExtentX        =   1984
+         Width           =   1605
+         _ExtentX        =   2831
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -1359,12 +1430,11 @@ Begin VB.Form frmFacProyecto
                Object.ToolTipText     =   "Generar factura"
             EndProperty
             BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.Visible         =   0   'False
-               Object.ToolTipText     =   "Marcar para facturar"
+               Object.ToolTipText     =   "Costes"
             EndProperty
             BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.Visible         =   0   'False
-               Object.ToolTipText     =   "Imprimir portes"
+               Object.ToolTipText     =   "Imprimir costes"
             EndProperty
             BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.Visible         =   0   'False
@@ -1387,7 +1457,7 @@ Begin VB.Form frmFacProyecto
          Strikethrough   =   0   'False
       EndProperty
       Height          =   705
-      Left            =   8420
+      Left            =   9620
       TabIndex        =   20
       Top             =   0
       Width           =   2415
@@ -1572,7 +1642,7 @@ Begin VB.Form frmFacProyecto
       Height          =   375
       Left            =   16440
       TabIndex        =   6
-      Top             =   10800
+      Top             =   10920
       Width           =   1335
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1589,7 +1659,7 @@ Begin VB.Form frmFacProyecto
       Height          =   375
       Left            =   14880
       TabIndex        =   5
-      Top             =   10800
+      Top             =   10920
       Width           =   1335
    End
    Begin MSAdodcLib.Adodc Data1 
@@ -2332,11 +2402,11 @@ Dim cadB As String
 End Sub
 
 
-Private Sub Desplazamiento(index As Integer)
+Private Sub Desplazamiento(Index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
     If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, index - 1
+    DesplazamientoData Data1, Index - 1
     Screen.MousePointer = vbHourglass
     PonerCampos
     Screen.MousePointer = vbDefault
@@ -2457,20 +2527,7 @@ Private Sub Form_Load()
         
     End With
 
-    
-    If vParamAplic.Ariagro <> "" Then
-        With Me.ToolbarAux(2)
-            .HotImageList = frmPpal.imgListComun_OM16
-            .DisabledImageList = frmPpal.imgListComun_BN16
-            .ImageList = frmPpal.imgListComun16
-            
-            .Buttons(1).Image = 3
-            .Buttons(3).Image = 5
-        End With
-    
-    End If
-    
-   
+  
     
    
   
@@ -2483,40 +2540,14 @@ Private Sub Form_Load()
         
         
         '                                                                                   Indice  antiguo
-        .Buttons(1).Image = 30 'Nº Serie si lineas con articulos de control Nº serie  Ant 11
-        If vParamAplic.NumeroInstalacion = vbFenollar Then .Buttons(1).ToolTipText = "Reestablecer al pedido"
-        .Buttons(2).Image = 21 'GEnerar factura ant 12
-        .Buttons(3).Image = 20  'Marcar a facturar 13
-        
-        
-        
-        
-        .Buttons(5).Image = 11 'duplicar albaran
-        
+        .Buttons(1).Image = 30
+        .Buttons(2).Image = 21
 
-        'MAYO 2015  Herbelca. ALbran ruta Castellon
-        .Buttons(6).Image = 16 'Imprimir Pedido ant 16
+        .Buttons(3).Image = 16 '54
         
         
-        If vParamAplic.TipoPortes <> 1 Then
-            If vParamAplic.PathFirmasAlbaran <> "" Then
-                .Buttons(4).ToolTipText = "Imprimir albaran firmado"
-                .Buttons(4).Style = tbrDefault
-                .Buttons(4).Image = 54  '54
-            Else
-                .Buttons(4).Style = tbrSeparator
-                .Buttons(4).visible = False
-                .Buttons(4).ToolTipText = ""
-            End If
-        Else
-            .Buttons(4).Style = tbrDefault
-            .Buttons(4).ToolTipText = "Imprimir portes"
-        End If
-
-        
-        
-        
-        
+        .Buttons(4).ToolTipText = "Imprimir COSTES"
+                
     End With
 
 
@@ -2575,6 +2606,8 @@ On Error Resume Next
     ListView1.ListItems.Clear
     lwLineaAlbaran.ListItems.Clear
     
+    
+
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
@@ -2707,17 +2740,17 @@ End Sub
 
 
 
-Private Sub imgBuscar_Click(index As Integer)
+Private Sub imgBuscar_Click(Index As Integer)
 Dim Indice As Byte
 
 
     If Modo = 0 Then Exit Sub
-    If Modo = 2 And index <> 14 Then Exit Sub
+    If Modo = 2 And Index <> 14 Then Exit Sub
     
     TerminaBloquear
     Screen.MousePointer = vbHourglass
 
-    Select Case index
+    Select Case Index
         Case 0 'Cod. Cliente
             HaDevueltoDatos = False
             PonerFoco Text1(4)
@@ -2756,12 +2789,12 @@ Dim Indice As Byte
              End If
              
         Case 3 'Realizada Por Trabajador (Pedido, Albaran, Preparador Material
-            If index = 7 Then
+            If Index = 7 Then
                 Indice = 27
-            ElseIf index = 8 Then
+            ElseIf Index = 8 Then
                 Indice = 28
             Else
-                Indice = index
+                Indice = Index
             End If
             Me.imgBuscar(3).Tag = Indice
             Set frmT = New frmBasico2
@@ -2813,15 +2846,15 @@ Dim Indice As Byte
 End Sub
 
 
-Private Sub imgFecha_Click(index As Integer) 'Abre calendario Fechas
+Private Sub imgFecha_Click(Index As Integer) 'Abre calendario Fechas
 Dim Indice As Byte
 
    If Modo = 2 Or Modo = 0 Then Exit Sub
    Screen.MousePointer = vbHourglass
    Set frmF = New frmCal
    frmF.Fecha = Now
-   Indice = index + 1
-   Me.imgFecha(0).Tag = index
+   Indice = Index + 1
+   Me.imgFecha(0).Tag = Index
    
     PonerFormatoFecha Text1(Indice)
    If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
@@ -2878,38 +2911,38 @@ Private Sub ListView2_DblClick()
     
 End Sub
 
-Private Sub lwAlb_ColumnClick(index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+Private Sub lwAlb_ColumnClick(Index As Integer, ByVal ColumnHeader As MSComctlLib.ColumnHeader)
 Dim columna As Integer
     
     
-    columna = ColumnHeader.index - 1
+    columna = ColumnHeader.Index - 1
     If columna = 1 Then columna = 4
-    If columna <> lwAlb(index).SortKey Then
-        lwAlb(index).SortKey = columna
-        lwAlb(index).SortOrder = lvwAscending
+    If columna <> lwAlb(Index).SortKey Then
+        lwAlb(Index).SortKey = columna
+        lwAlb(Index).SortOrder = lvwAscending
     Else
-        If lwAlb(index).SortOrder = lvwAscending Then
-            lwAlb(index).SortOrder = lvwDescending
+        If lwAlb(Index).SortOrder = lvwAscending Then
+            lwAlb(Index).SortOrder = lvwDescending
         Else
-            lwAlb(index).SortOrder = lvwAscending
+            lwAlb(Index).SortOrder = lvwAscending
         End If
     End If
 End Sub
 
-Private Sub lwAlb_DblClick(index As Integer)
+Private Sub lwAlb_DblClick(Index As Integer)
 Dim Knodo As Integer
     If Modo <> 2 Then Exit Sub
     If Me.Datos_A_Ver <> "" Then Exit Sub
-    If lwAlb(index).ListItems.Count = 0 Then Exit Sub
-    If lwAlb(index).SelectedItem Is Nothing Then Exit Sub
+    If lwAlb(Index).ListItems.Count = 0 Then Exit Sub
+    If lwAlb(Index).SelectedItem Is Nothing Then Exit Sub
     
-    DblClickTreeview lwAlb(index).SelectedItem.Text
-    If index = 0 Then
-        Knodo = lwAlb(index).SelectedItem.index
+    DblClickTreeview lwAlb(Index).SelectedItem.Text
+    If Index = 0 Then
+        Knodo = lwAlb(Index).SelectedItem.Index
         PonerCamposAlbaranes
         
         'Pongo menor porque si es igual cuando carga el listvie ya lo deja seleccioando el ultimo
-        If Knodo < lwAlb(index).ListItems.Count Then lwAlb(index).SelectedItem = lwAlb(index).ListItems(Knodo)
+        If Knodo < lwAlb(Index).ListItems.Count Then lwAlb(Index).SelectedItem = lwAlb(Index).ListItems(Knodo)
     End If
 End Sub
 
@@ -3002,25 +3035,25 @@ End Sub
 '### A mano
 'Los metodos del text tendran que estar
 'Los descomentamos cuando esten puestos ya los controles
-Private Sub Text1_GotFocus(index As Integer)
-    txtAnterior = Text1(index).Text
-    kCampo = index
+Private Sub Text1_GotFocus(Index As Integer)
+    txtAnterior = Text1(Index).Text
+    kCampo = Index
     'If Index = 9 Then HaCambiadoCP = False 'CPostal
    
-    If Not (index = 15 And Modo = 1) Then ConseguirFoco Text1(index), Modo
+    If Not (Index = 15 And Modo = 1) Then ConseguirFoco Text1(Index), Modo
 End Sub
 
 
-Private Sub Text1_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 Dim ind As Integer
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
-    If index <> 38 Then KEYdown KeyCode
+    If Index <> 38 Then KEYdown KeyCode
     
      If KeyCode = 43 Or KeyCode = 107 Or KeyCode = 187 Then
     
-        If Text1(index).Text = "" Then
+        If Text1(Index).Text = "" Then
             ind = -1
-            Select Case index
+            Select Case Index
             Case 3
                 ind = 3
             Case 4
@@ -3036,7 +3069,7 @@ Dim ind As Integer
             Case 14
                 ind = 4
             Case 27, 28, 29
-                ind = index - 20
+                ind = Index - 20
             
             Case 43
                 ind = 13
@@ -3050,7 +3083,7 @@ Dim ind As Integer
 End Sub
 
 
-Private Sub Text1_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -3064,7 +3097,7 @@ End Sub
 ' hasta pedir que nos devuelva los datos de la empresa
 '----------------------------------------------------------------
 '----------------------------------------------------------------
-Private Sub Text1_LostFocus(index As Integer)
+Private Sub Text1_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim campo As String
 Dim ImpDto As Currency
@@ -3073,11 +3106,11 @@ Dim ImpDto As Currency
     If PulsadoMas2 Then
         'Para que cuando pulse el mas abra el form
         PulsadoMas2 = False
-        Text1(index).Text = ""
+        Text1(Index).Text = ""
         Exit Sub
     End If
         
-    If Not PerderFocoGnral(Text1(index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
         
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -3085,7 +3118,7 @@ Dim ImpDto As Currency
           
           
     'Por si no ha cambiado nada
-    If txtAnterior = Text1(index).Text Then
+    If txtAnterior = Text1(Index).Text Then
         
         
 
@@ -3097,28 +3130,28 @@ Dim ImpDto As Currency
           
           
     'Si queremos hacer algo ..
-    Select Case index
+    Select Case Index
         Case 1, 41 'Fecha Albaran,fecenvio
-                If Text1(index).Text <> "" Then PonerFormatoFecha Text1(index)
+                If Text1(Index).Text <> "" Then PonerFormatoFecha Text1(Index)
                 
         Case 3, 27, 28 'Cod Vendedor
-            If PonerFormatoEntero(Text1(index)) Then
-                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "straba", "nomtraba", "codtraba")
-                If Text2(index).Text = "" And Modo >= 3 Then
-                    Text1(index).Text = ""
-                    PonerFoco Text1(index)
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "straba", "nomtraba", "codtraba")
+                If Text2(Index).Text = "" And Modo >= 3 Then
+                    Text1(Index).Text = ""
+                    PonerFoco Text1(Index)
                 End If
               
             Else
-                Text2(index).Text = ""
+                Text2(Index).Text = ""
             End If
             
         Case 4 'Cod. Cliente
             
-            If PonerFormatoEntero(Text1(index)) Then
+            If PonerFormatoEntero(Text1(Index)) Then
                 If Modo = 1 Then 'Modo=1 Busqueda
                    
-                    Text1(5).Text = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(index).Text, "N")
+                    Text1(5).Text = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1(Index).Text, "N")
                 Else 'If Modo = 3 Then 'Modo Insertar
                     'si es ART-Albaran de factura Rectificativa ya he cargado los
                     'datos de la factura
@@ -3126,10 +3159,10 @@ Dim ImpDto As Currency
                     
                         campo = "nomclien"
                         devuelve = DevuelveDesdeBD(conAri, "clivario", "sclien", "codclien", Text1(4).Text, "N", campo)
-                        If campo <> Text1(5).Text Then PonerDatosCliente Text1(index).Text
+                        If campo <> Text1(5).Text Then PonerDatosCliente Text1(Index).Text
                     
-                    If Text1(index).Text = "" Then
-                        PonerFoco Text1(index)
+                    If Text1(Index).Text = "" Then
+                        PonerFoco Text1(Index)
                     Else
                         If Text1(5).Locked Then
        
@@ -3150,13 +3183,13 @@ Dim ImpDto As Currency
             If (Modo = 4) Then
                 If (Text1(6).Text = Data1.Recordset!nifClien) Then Exit Sub
             End If
-            PonerDatosClienteVario (Text1(index).Text)
+            PonerDatosClienteVario (Text1(Index).Text)
                     
         Case 9 'Cod. Postal
-             If Text1(index).Locked Then Exit Sub
-             If Text1(index).Text = "" Then
-                Text1(index + 1).Text = ""
-                Text1(index + 2).Text = ""
+             If Text1(Index).Locked Then Exit Sub
+             If Text1(Index).Text = "" Then
+                Text1(Index + 1).Text = ""
+                Text1(Index + 2).Text = ""
                 Exit Sub
              End If
              'If (Not VieneDeBuscar) Or (VieneDeBuscar And HaCambiadoCP) Then
@@ -3166,11 +3199,11 @@ Dim ImpDto As Currency
             'VieneDeBuscar = False
             
         Case 12 'Cod. Direc
-            If Text1(index).Text = "" Then
-                Text2(index).Text = ""
+            If Text1(Index).Text = "" Then
+                Text2(Index).Text = ""
                 Exit Sub
             End If
-            Text1(index).Text = Format(Text1(index).Text, "000")
+            Text1(Index).Text = Format(Text1(Index).Text, "000")
             
             'Comprobar que el cliente seleccionada tiene esa direccion
             If PonerDptoEnCliente Then
@@ -3178,21 +3211,21 @@ Dim ImpDto As Currency
                 devuelve = DevuelveDesdeBDNew(conAri, "scaman", "nummante", "codclien", Text1(4).Text, "N", , "coddirec", Text1(12).Text, "N")
                 If devuelve <> "" Then MsgBox "El cliente tiene Mantenimientos.", vbInformation
             Else
-                PonerFoco Text1(index)
+                PonerFoco Text1(Index)
             End If
             
         Case 13 'Referencia Obligatoria
             If Trim(Text1(4).Text) <> "" Then ComprobarRefObligatoria
             
         Case 14 'Forma de Pago
-            If PonerFormatoEntero(Text1(index)) Then
-                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sforpa", "nomforpa")
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sforpa", "nomforpa")
             Else
-                Text2(index).Text = ""
+                Text2(Index).Text = ""
             End If
             
         Case 15, 16 'Descuentos
-            If PonerFormatoDecimal(Text1(index), 4) Then   'Tipo 4: Decimal(4,2)
+            If PonerFormatoDecimal(Text1(Index), 4) Then   'Tipo 4: Decimal(4,2)
                 If Modo = 4 Then
                     
                     CalcularDatosFactura
@@ -3200,10 +3233,10 @@ Dim ImpDto As Currency
             End If
             
         Case 17 'Cod. Agente
-            If PonerFormatoEntero(Text1(index)) Then
-                Text2(index).Text = PonerNombreDeCod(Text1(index), conAri, "sagent", "nomagent")
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sagent", "nomagent")
             Else
-                Text2(index).Text = ""
+                Text2(Index).Text = ""
             End If
             
        
@@ -3518,8 +3551,8 @@ End Sub
 
 
 
-Private Sub Text2_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
-    If index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
+Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
         PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
@@ -3527,19 +3560,19 @@ Private Sub Text2_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer
 End Sub
 
 
-Private Sub Text2_KeyPress(index As Integer, KeyAscii As Integer)
-    If index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
+Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
+    If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
         PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
-Private Sub Text2_LostFocus(index As Integer)
+Private Sub Text2_LostFocus(Index As Integer)
     'If Index = 16 And (Text2(Index).Locked = False) Then Text2(Index).Text = UCase(Text2(Index).Text)
 End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    HacerToolbar Button.index
+    HacerToolbar Button.Index
 End Sub
 
 Private Sub HacerToolbar(Indice As Integer)
@@ -3619,7 +3652,7 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
 
 
 
-    If Button.index = 1 Then
+    If Button.Index = 1 Then
         'Habria que bloquear
         
         CadenaDesdeOtroForm = ""
@@ -3633,7 +3666,14 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
         End If
         
         
-    ElseIf Button.index = 2 Then
+    ElseIf Button.Index = 3 Then
+        'Impresion costes
+        BotonImprimir_ 85, True
+        
+        
+        
+        
+    ElseIf Button.Index = 2 Then
 
             CadenaDesdeOtroForm = ""
             CadenaDesdeOtroForm = PonerTrabajadorConectado("")
@@ -3777,16 +3817,16 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
     End If
 End Sub
 
-Private Sub ToolbarAux_ButtonClick(index As Integer, ByVal Button As MSComctlLib.Button)
-    HacerToolButtonClick index, Button.index
+Private Sub ToolbarAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Button)
+    HacerToolButtonClick Index, Button.Index
 End Sub
 
-Private Sub HacerToolButtonClick(index As Integer, IndiceBoton As Integer)
+Private Sub HacerToolButtonClick(Index As Integer, IndiceBoton As Integer)
     If Modo <> 2 Then Exit Sub
 
     If Data1.Recordset.EOF Then Exit Sub
 
-    If index = 0 Then HacerToolBarLineas IndiceBoton - 1
+    If Index = 0 Then HacerToolBarLineas IndiceBoton - 1
     
     
     
@@ -3795,7 +3835,7 @@ Private Sub HacerToolButtonClick(index As Integer, IndiceBoton As Integer)
 End Sub
 
 
-Private Sub HacerToolBarLineas(index As Integer)  'index: boton
+Private Sub HacerToolBarLineas(Index As Integer)  'index: boton
 
 Dim Cad As String
    
@@ -3807,12 +3847,12 @@ Dim Cad As String
     End If
     
     
-    If index > 0 Then
+    If Index > 0 Then
         If lwEulerLineas.ListItems.Count = 0 Then
             MsgBox "Ningun dato", vbExclamation
             Exit Sub
         End If
-        If index < 3 Then
+        If Index < 3 Then
             'Modificar eliminar.
             'el seleccionado
             If Me.lwEulerLineas.SelectedItem Is Nothing Then
@@ -3825,9 +3865,9 @@ Dim Cad As String
     End If
     CadenaDesdeOtroForm = ""
     
-    If index < 2 Then
+    If Index < 2 Then
         'nuevo modificar
-        If index = 1 Then
+        If Index = 1 Then
             
             CadenaDesdeOtroForm = Mid(lwEulerLineas.SelectedItem.Key, 2, 4)
         Else
@@ -3839,7 +3879,7 @@ Dim Cad As String
         
     
     Else
-        If index = 2 Then
+        If Index = 2 Then
             'Eliminar
             Cad = "Va a eliminar linea impresion" & vbCrLf & "Articulo : " & Me.lwEulerLineas.SelectedItem.Text & vbCrLf
             Cad = Cad & "Descripcion : " & Me.lwEulerLineas.SelectedItem.SubItems(1) & vbCrLf
@@ -3873,7 +3913,7 @@ Dim Cad As String
 End Sub
 
 Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Desplazamiento Button.index
+    Desplazamiento Button.Index
 End Sub
 
 
@@ -4045,24 +4085,32 @@ Private Sub BotonImprimir_(OpcionListado As Byte, EsInformePortes As Boolean)
     
     If Modo <> 2 Then Exit Sub
     
-
+    
     If Text1(16).Text <> "" Then
+        
         MsgBox "Proyecto cerrado", vbExclamation
-        Exit Sub
+        If OpcionListado <> 85 Then
+            Exit Sub
+        Else
+            NumRegElim = 85
+        End If
     End If
 
-    CompruebaTotales False    'Avisa (si hay lineas, que todas suman lo que toca
+
+    If OpcionListado <> 85 Then
+        CompruebaTotales False    'Avisa (si hay lineas, que todas suman lo que toca
+    Else
+        If Not ImprimirLosCostesAlbaranEuler(Me.ListView2, "", "") Then Exit Sub
+    End If
     
     
     'Si el proyecto esta facturado NO puedo imprimirlo
+    'If OpcionListado = 85 Then NumRegElim = 85
+    'NumRegElim = 96
+    NumRegElim = IIf(OpcionListado = 85, OpcionListado, 96)
     
-    
-    
-
-        
-    NumRegElim = 96
     SQL = DevuelveDesdeBDNew(conAri, "scryst", "documrpt", "codcryst", CStr(NumRegElim), "N")
-        
+    If NumRegElim = 85 Then SQL = "EULCosteproyecto.rpt"
     
         With frmImprimir
             'Febrero 2010
@@ -4070,15 +4118,25 @@ Private Sub BotonImprimir_(OpcionListado As Byte, EsInformePortes As Boolean)
             .NombrePDF = SQL
             .NombreRPT = SQL
             .SeleccionaRPTCodigo = CInt(NumRegElim)
+            
+            
+            If OpcionListado = 85 Then
+                '
+                
+            Else
+            
+            
+            End If
+            
             .FormulaSeleccion = "{sproyecto.codtipom}='" & Text1(15).Text & "' AND ({sproyecto.numproyec}=" & Text1(0).Text & ")"
-            .OtrosParametros = "|pCodigoISO=""""|pCodigoRev=""""|pCodUsu=2000|vPortes=""""|PuntoVerde=""""|Albarcon=0|pTipoIVA=0|"
+            .OtrosParametros = "|pCodigoISO=""""|pCodigoRev=""""|pCodUsu=" & vUsu.Codigo & "|vPortes=""""|PuntoVerde=""""|Albarcon=0|pTipoIVA=0|"
 
             .NumeroParametros = 7
             .SoloImprimir = False
             .EnvioEMail = False
-            .opcion = 12 'OpcionListado
+            .Opcion = 12 'OpcionListado
             
-            .Titulo = "PROYECTO"
+            .Titulo = IIf(OpcionListado = 85, "Costes", "PROYECTO")
                 
             .ConSubInforme = True
             .Show vbModal
@@ -4409,11 +4467,11 @@ End Sub
 
 
 'Nuevo. Cuando pulse MAS (y es el primer carcater abre el prismatico asociado)
-Private Sub PulsarTeclaMas(InsertandoCabecera As Boolean, index As Integer)
+Private Sub PulsarTeclaMas(InsertandoCabecera As Boolean, Index As Integer)
 
     If InsertandoCabecera Then
         EsCabecera = 0
-        imgBuscar_Click index
+        imgBuscar_Click Index
         
     Else
         'Lineas
@@ -4931,9 +4989,10 @@ Dim N As Integer
 Dim H As Currency
 Dim TotalCostes As Currency
 Dim CostesHoras As Currency
+Dim CosteVehiculo As Currency
 Dim IT As ListItem
 Dim Aux1 As Currency
-
+Dim Matriculas As String
 
     On Error GoTo eCargaCostesEuler
     
@@ -4941,8 +5000,10 @@ Dim Aux1 As Currency
     ListView1.ListItems.Clear
     Me.ListView2.ListItems.Clear
     
-    For N = 66 To 71
-      '  Label1(N).Caption = ""
+    
+ 
+    For N = 63 To 66
+        Label1(N).Caption = ""
     Next
         
     If limpiar Then Exit Sub
@@ -4962,16 +5023,17 @@ Dim Aux1 As Currency
     
     
     
-    C1 = "select sreloj.codtraba,nomtraba,fecha,sreloj.codtipor,nomtipor,horainicio,horafin,calculadas,codtipom,numalbar from sreloj left join stipor on sreloj.codtipor=stipor.codtipor"
+    C1 = "select sreloj.codtraba,nomtraba,fecha,sreloj.codtipor,nomtipor,horainicio,horafin,calculadas,codtipom,numalbar,codflota from sreloj left join stipor on sreloj.codtipor=stipor.codtipor"
     C1 = C1 & " left join straba on straba.codtraba=sreloj.codtraba"
     C1 = C1 & " WHERE  (codtipom,numalbar) IN (" & AlbaranesDelProyecto & ")"
     C1 = C1 & " ORDER BY fecha,horainicio"
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
+    Matriculas = ""
     TotalCostes = 0 'reutilizo pq bajo se pone a cero
-    
-    
+    CosteVehiculo = 0
+    CostesHoras = 0
     N = 0
     While Not miRsAux.EOF
         N = N + 1
@@ -4982,75 +5044,150 @@ Dim Aux1 As Currency
         ListView1.ListItems(N).SubItems(4) = DBLet(miRsAux!NomTipor, "T")
         ListView1.ListItems(N).SubItems(5) = Format(miRsAux!Fecha, "dd/mm/yyyy")
         
+        C1 = DBLet(miRsAux!codflota, "T")
+        If C1 <> "" Then
+            If InStr(1, Matriculas, C1) = 0 Then Matriculas = Matriculas & C1 & "|"
+        Else
+            C1 = " "
+        End If
+        
+        ListView1.ListItems(N).SubItems(6) = C1
+        
+        
+        
+        
+        
+        
         If Not IsNull(miRsAux!calculadas) Then
-            TotalCostes = TotalCostes + miRsAux!calculadas
-            ListView1.ListItems(N).SubItems(7) = Format(miRsAux!calculadas, FormatoCantidad)
+        
+            CostesHoras = CostesHoras + miRsAux!calculadas
+            
+            ListView1.ListItems(N).SubItems(8) = Format(miRsAux!calculadas, FormatoCantidad)
             C1 = Format(Int(miRsAux!calculadas), "00") & ":"
+            H = miRsAux!calculadas - Int(miRsAux!calculadas)
+            H = (H * 0.6) * 100
+            C1 = C1 & Format(H, "00")
             
             
-            CostesHoras = Int((miRsAux!calculadas - Int(miRsAux!calculadas)) * 100)
-            CostesHoras = Round(CostesHoras * 0.6, 2)
-            C1 = C1 & Format(CostesHoras, "00")
-            ListView1.ListItems(N).SubItems(6) = C1
+           
+            ListView1.ListItems(N).SubItems(7) = C1
             
-            
+
             
         Else
-            ListView1.ListItems(N).SubItems(6) = " "
             ListView1.ListItems(N).SubItems(7) = " "
+            ListView1.ListItems(N).SubItems(8) = " "
         End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
     
-    Label1(63).visible = False
-    Label1(63).Caption = Format(TotalCostes, FormatoCantidad)
-    If TotalCostes = 0 Then
-        C1 = ""
-    Else
-        C1 = Format(Int(TotalCostes), "00") & ":"
-        CostesHoras = Int((TotalCostes - Int(TotalCostes)) * 100)
-        CostesHoras = Round(CostesHoras * 0.6, 2)
-        C1 = C1 & Format(CostesHoras, "00")
-    End If
-    Label1(64).visible = False
-    Label1(64).Caption = C1
-
     
     
-    
-    
-    
-    
+        
     
     lblIndicador.Caption = "Costes alb."
     lblIndicador.Refresh
-    N = 0
-    TotalCostes = 0
-    CostesHoras = 0
+    
    
     
     'Si tiene horas, las aplicamos aqui
-    H = 0
-    If Label1(63).Caption <> "" And Label1(63).Caption <> "" Then
-
-        C1 = ImporteFormateado(Label1(63).Caption)
-        H = CCur(C1)
-        ListView2.ListItems.Add , , "HOR"
-        ListView2.ListItems(1).SubItems(1) = "Horas trabajadas"
+    NumRegElim = 0
+    
+    If CostesHoras <> 0 Then
+        
+        Set IT = ListView2.ListItems.Add(, , "HOR")
+        IT.SubItems(1) = "Horas trabajadas"
 
         For N = 2 To 4
-            ListView2.ListItems(1).SubItems(N) = " "
+            IT.SubItems(N) = " "
         Next
-        ListView2.ListItems(1).SubItems(5) = Format(H, FormatoImporte)
-        ListView2.ListItems(1).SubItems(6) = Format(vParamAplic.PrecioHoraCosteEUL, FormatoPrecio)
-        H = H * vParamAplic.PrecioHoraCosteEUL
+        IT.SubItems(5) = Format(CostesHoras, FormatoImporte)
+        IT.SubItems(6) = Format(vParamAplic.PrecioHoraCosteEUL, FormatoPrecio)
+        H = CostesHoras * vParamAplic.PrecioHoraCosteEUL
         TotalCostes = TotalCostes + H
         CostesHoras = H
-        ListView2.ListItems(1).SubItems(7) = Format(H, FormatoImporte)
-        ListView2.ListItems(1).SubItems(8) = " "  'ordenacion
-        N = 1
+        IT.SubItems(7) = Format(H, FormatoImporte)
+        IT.SubItems(8) = "000000"  'ordenacion
+        NumRegElim = 1
+    
+        Label1(63).Caption = "Horas: " & Right(Space(20) & Format(H, FormatoImporte), 20)
+        
     End If
+    
+    
+    
+    
+    While Matriculas <> ""
+        N = InStr(1, Matriculas, "|")
+        If N > 0 Then
+            C1 = Mid(Matriculas, 1, N - 1)
+            Matriculas = Mid(Matriculas, N + 1)
+            H = 0
+            For N = 1 To ListView1.ListItems.Count
+                If ListView1.ListItems(N).SubItems(6) = C1 Then H = H + ImporteFormateado(ListView1.ListItems(N).SubItems(8))
+            Next
+            
+            If H <> 0 Then
+                
+                
+                
+                'Añado en lw2
+                Set IT = ListView2.ListItems.Add(, , "VEH")
+                NumRegElim = NumRegElim + 1
+                IT.SubItems(8) = "000000" & NumRegElim  'ordenacion
+                IT.SubItems(1) = "Vehiculo"
+                IT.SubItems(2) = C1
+                
+                
+                C1 = DevuelveDesdeBD(conAri, "precostehora", "sflotas", "codflota", C1, "T")
+                If C1 = "" Then C1 = "0.00"
+                Aux1 = ImporteFormateado(C1)
+                
+                
+                For N = 3 To 4
+                    IT.SubItems(N) = " "
+                Next
+                IT.SubItems(5) = Format(H, FormatoImporte)
+                IT.SubItems(6) = Format(Aux1, FormatoPrecio)
+                H = Round(H * Aux1, 2)
+                TotalCostes = TotalCostes + H
+                CosteVehiculo = CosteVehiculo + H
+                IT.SubItems(7) = Format(H, FormatoImporte)
+
+                
+            End If
+            
+            
+        Else
+            Matriculas = ""
+        End If
+    
+    Wend
+    If CosteVehiculo <> 0 Then Label1(64).Caption = "Vehiculos: " & Right(Space(20) & Format(CosteVehiculo, FormatoImporte), 20)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     'En albaranes
     C1 = "select scaalp.numalbar,scaalp.fechaalb,nomprove,codartic,nomartic,cantidad,precioar,importel,scaalp.Codprove from scaalp,slialp  where"
@@ -5060,6 +5197,7 @@ Dim Aux1 As Currency
     
     Set RS = New ADODB.Recordset
     RS.Open C1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    N = NumRegElim
     While Not RS.EOF
         N = N + 1
         
@@ -5343,20 +5481,14 @@ Dim Aux1 As Currency
     RS.Close
 
 
-
-
-        
-    If ListView2.ListItems.Count > 0 Then
+    'Costes materiales
+    H = TotalCostes - CosteVehiculo - CostesHoras
+    If H <> 0 Then Label1(65).Caption = "Materiales: " & Right(Space(20) & Format(H, FormatoImporte), 20)
     
-'        Label1(67).Caption = "Total costes"
-'        Label1(66).Caption = Format(TotalCostes, FormatoImporte)
-'        Label1(68).Caption = "Costes horas"
-'        Label1(69).Caption = Format(CostesHoras, FormatoImporte)
-'        CostesHoras = TotalCostes - CostesHoras
-'        Label1(70).Caption = "Costes materiales"
-'        Label1(71).Caption = Format(CostesHoras, FormatoImporte)
+    If ListView2.ListItems.Count > 0 Then Label1(66).Caption = "TOTAL: " & Right(Space(20) & Format(TotalCostes, FormatoImporte), 20)
+    
         
-    End If
+    
     
 eCargaCostesEuler:
     If Err.Number <> 0 Then MuestraError Err.Number, Err.Description

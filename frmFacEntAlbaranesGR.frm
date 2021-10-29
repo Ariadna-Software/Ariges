@@ -547,55 +547,55 @@ Begin VB.Form frmFacEntAlbaranesGR
       TabCaption(1)   =   "Otros Datos / Totales"
       TabPicture(1)   =   "frmFacEntAlbaranesGR.frx":0065
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(45)"
-      Tab(1).Control(1)=   "Label1(3)"
-      Tab(1).Control(2)=   "Label1(5)"
-      Tab(1).Control(3)=   "Label1(10)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Label1(12)"
-      Tab(1).Control(6)=   "imgBuscar(7)"
-      Tab(1).Control(7)=   "Label1(9)"
-      Tab(1).Control(8)=   "imgBuscar(8)"
-      Tab(1).Control(9)=   "Label1(23)"
-      Tab(1).Control(10)=   "Label1(24)"
-      Tab(1).Control(11)=   "Label1(52)"
-      Tab(1).Control(12)=   "imgFecha(40)"
-      Tab(1).Control(13)=   "imgBuscar(9)"
-      Tab(1).Control(14)=   "imgBuscar(13)"
-      Tab(1).Control(15)=   "Label1(54)"
-      Tab(1).Control(16)=   "Label1(55)"
-      Tab(1).Control(17)=   "Label1(63)"
-      Tab(1).Control(18)=   "Label1(65)"
-      Tab(1).Control(19)=   "Label1(64)"
-      Tab(1).Control(20)=   "chkImpreso"
-      Tab(1).Control(21)=   "Text1(38)"
-      Tab(1).Control(22)=   "Text1(18)"
-      Tab(1).Control(23)=   "Text1(19)"
+      Tab(1).Control(0)=   "FrameFactura"
+      Tab(1).Control(1)=   "FrameHco"
+      Tab(1).Control(2)=   "FrameFacRec"
+      Tab(1).Control(3)=   "Text1(50)"
+      Tab(1).Control(4)=   "Text2(1)"
+      Tab(1).Control(5)=   "Text1(44)"
+      Tab(1).Control(6)=   "Text2(43)"
+      Tab(1).Control(7)=   "Text1(43)"
+      Tab(1).Control(8)=   "chkDocArchi"
+      Tab(1).Control(9)=   "Text1(41)"
+      Tab(1).Control(10)=   "Text1(39)"
+      Tab(1).Control(11)=   "Text1(29)"
+      Tab(1).Control(12)=   "Text2(29)"
+      Tab(1).Control(13)=   "Text1(28)"
+      Tab(1).Control(14)=   "Text2(28)"
+      Tab(1).Control(15)=   "Text1(27)"
+      Tab(1).Control(16)=   "Text2(27)"
+      Tab(1).Control(17)=   "Text1(2)"
+      Tab(1).Control(18)=   "Text1(25)"
+      Tab(1).Control(19)=   "Text1(26)"
+      Tab(1).Control(20)=   "Text1(24)"
+      Tab(1).Control(21)=   "Text1(23)"
+      Tab(1).Control(22)=   "Text1(22)"
+      Tab(1).Control(23)=   "Text1(21)"
       Tab(1).Control(24)=   "Text1(20)"
-      Tab(1).Control(25)=   "Text1(21)"
-      Tab(1).Control(26)=   "Text1(22)"
-      Tab(1).Control(27)=   "Text1(23)"
-      Tab(1).Control(28)=   "Text1(24)"
-      Tab(1).Control(29)=   "Text1(26)"
-      Tab(1).Control(30)=   "Text1(25)"
-      Tab(1).Control(31)=   "Text1(2)"
-      Tab(1).Control(32)=   "Text2(27)"
-      Tab(1).Control(33)=   "Text1(27)"
-      Tab(1).Control(34)=   "Text2(28)"
-      Tab(1).Control(35)=   "Text1(28)"
-      Tab(1).Control(36)=   "Text2(29)"
-      Tab(1).Control(37)=   "Text1(29)"
-      Tab(1).Control(38)=   "Text1(39)"
-      Tab(1).Control(39)=   "Text1(41)"
-      Tab(1).Control(40)=   "chkDocArchi"
-      Tab(1).Control(41)=   "Text1(43)"
-      Tab(1).Control(42)=   "Text2(43)"
-      Tab(1).Control(43)=   "Text1(44)"
-      Tab(1).Control(44)=   "Text2(1)"
-      Tab(1).Control(45)=   "Text1(50)"
-      Tab(1).Control(46)=   "FrameFacRec"
-      Tab(1).Control(47)=   "FrameHco"
-      Tab(1).Control(48)=   "FrameFactura"
+      Tab(1).Control(25)=   "Text1(19)"
+      Tab(1).Control(26)=   "Text1(18)"
+      Tab(1).Control(27)=   "Text1(38)"
+      Tab(1).Control(28)=   "chkImpreso"
+      Tab(1).Control(29)=   "Label1(64)"
+      Tab(1).Control(30)=   "Label1(65)"
+      Tab(1).Control(31)=   "Label1(63)"
+      Tab(1).Control(32)=   "Label1(55)"
+      Tab(1).Control(33)=   "Label1(54)"
+      Tab(1).Control(34)=   "imgBuscar(13)"
+      Tab(1).Control(35)=   "imgBuscar(9)"
+      Tab(1).Control(36)=   "imgFecha(40)"
+      Tab(1).Control(37)=   "Label1(52)"
+      Tab(1).Control(38)=   "Label1(24)"
+      Tab(1).Control(39)=   "Label1(23)"
+      Tab(1).Control(40)=   "imgBuscar(8)"
+      Tab(1).Control(41)=   "Label1(9)"
+      Tab(1).Control(42)=   "imgBuscar(7)"
+      Tab(1).Control(43)=   "Label1(12)"
+      Tab(1).Control(44)=   "Label1(11)"
+      Tab(1).Control(45)=   "Label1(10)"
+      Tab(1).Control(46)=   "Label1(5)"
+      Tab(1).Control(47)=   "Label1(3)"
+      Tab(1).Control(48)=   "Label1(45)"
       Tab(1).ControlCount=   49
       TabCaption(2)   =   "Fitosanitarios / Campos"
       TabPicture(2)   =   "frmFacEntAlbaranesGR.frx":0081
@@ -605,26 +605,26 @@ Begin VB.Form frmFacEntAlbaranesGR
       TabCaption(3)   =   "Carta de portes"
       TabPicture(3)   =   "frmFacEntAlbaranesGR.frx":009D
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Label1(61)"
-      Tab(3).Control(1)=   "Label1(67)"
-      Tab(3).Control(2)=   "imgBuscar(18)"
-      Tab(3).Control(3)=   "Label1(60)"
-      Tab(3).Control(4)=   "Label1(66)"
-      Tab(3).Control(5)=   "imgBuscar(17)"
-      Tab(3).Control(6)=   "Label1(36)"
-      Tab(3).Control(7)=   "imgBuscar(16)"
-      Tab(3).Control(8)=   "DataGrid2"
-      Tab(3).Control(9)=   "cmdAux2(0)"
-      Tab(3).Control(10)=   "txtAux2(1)"
-      Tab(3).Control(11)=   "txtAux2(0)"
-      Tab(3).Control(12)=   "FrameToolAux(1)"
-      Tab(3).Control(13)=   "Text1(53)"
-      Tab(3).Control(14)=   "Text1(54)"
-      Tab(3).Control(15)=   "Text2(54)"
-      Tab(3).Control(16)=   "Text2(52)"
-      Tab(3).Control(17)=   "Text1(52)"
-      Tab(3).Control(18)=   "Text2(51)"
-      Tab(3).Control(19)=   "Text1(51)"
+      Tab(3).Control(0)=   "Text1(51)"
+      Tab(3).Control(1)=   "Text2(51)"
+      Tab(3).Control(2)=   "Text1(52)"
+      Tab(3).Control(3)=   "Text2(52)"
+      Tab(3).Control(4)=   "Text2(54)"
+      Tab(3).Control(5)=   "Text1(54)"
+      Tab(3).Control(6)=   "Text1(53)"
+      Tab(3).Control(7)=   "FrameToolAux(1)"
+      Tab(3).Control(8)=   "txtAux2(0)"
+      Tab(3).Control(9)=   "txtAux2(1)"
+      Tab(3).Control(10)=   "cmdAux2(0)"
+      Tab(3).Control(11)=   "DataGrid2"
+      Tab(3).Control(12)=   "imgBuscar(16)"
+      Tab(3).Control(13)=   "Label1(36)"
+      Tab(3).Control(14)=   "imgBuscar(17)"
+      Tab(3).Control(15)=   "Label1(66)"
+      Tab(3).Control(16)=   "Label1(60)"
+      Tab(3).Control(17)=   "imgBuscar(18)"
+      Tab(3).Control(18)=   "Label1(67)"
+      Tab(3).Control(19)=   "Label1(61)"
       Tab(3).ControlCount=   20
       Begin VB.Frame FrameFactura 
          BeginProperty Font 
@@ -6086,7 +6086,7 @@ Dim TxtMotivoFra As String 'AMESA
         End If
             
         
-        Me.chkFacturar.Value = 1
+        chkFacturar.Value = IIf(vParamAplic.MarcarAlbaranFacturar, 1, 0)
         
         Set RS = Nothing
     Else
@@ -6118,7 +6118,8 @@ Dim TxtMotivoFra As String 'AMESA
     
 
     'Marca de para facturar
-    If vParamAplic.MarcarAlbaranFacturar Then Me.chkFacturar.Value = 1
+    'If vParamAplic.MarcarAlbaranFacturar Then Me.chkFacturar.Value = 1
+    chkFacturar.Value = IIf(vParamAplic.MarcarAlbaranFacturar, 1, 0)
 
     Text1(1).Text = Format(Now, "dd/mm/yyyy") 'Fecha Albaran
     Text1(30).Text = CodTipoMov
@@ -7943,39 +7944,39 @@ End Sub
 
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-Dim Ind As Integer
+Dim ind As Integer
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     If Index <> 38 Then KEYdown KeyCode
     
      If KeyCode = 43 Or KeyCode = 107 Or KeyCode = 187 Then
     
         If Text1(Index).Text = "" Then
-            Ind = -1
+            ind = -1
             Select Case Index
             Case 3
-                Ind = 3
+                ind = 3
             Case 4
-                Ind = 0
+                ind = 0
             Case 6
-                Ind = 1
+                ind = 1
             Case 9
-                Ind = 6
+                ind = 6
             Case 12
-                Ind = 2
+                ind = 2
             Case 17
-                Ind = 5
+                ind = 5
             Case 14
-                Ind = 4
+                ind = 4
             Case 27, 28, 29
-                Ind = Index - 20
+                ind = Index - 20
             Case 42
-                Ind = 12
+                ind = 12
             Case 43
-                Ind = 13
+                ind = 13
             End Select
-            If Ind >= 0 Then
+            If ind >= 0 Then
                 PulsadoMas2 = True
-                PulsarTeclaMas True, Ind
+                PulsarTeclaMas True, ind
             End If
         End If
     End If
@@ -9007,7 +9008,7 @@ Dim devuelve As String
     
     'HERBELCA.
     ' Modificar.  Los trabajadores de GANDIA-CASTELLON no pueden desmarcar FACTURAR
-    If vParamAplic.NumeroInstalacion = 2 And Modo = 4 And Me.chkFacturar.Value = 0 Then
+    If vParamAplic.NumeroInstalacion = vbHerbelca And Modo = 4 And Me.chkFacturar.Value = 0 Then
         If DBLet(Me.Data1.Recordset!factursn, "N") = 1 Then
             'ERA facturar y ahora NO tienen la marca.
             If vUsu.AlmacenPorDefecto2 > 1 Then Me.chkFacturar.Value = 1   'NO PREGUNTAMOS ni damos error ni nada de nada
@@ -11741,6 +11742,9 @@ Dim i As Byte
     Me.Text1(48).Text = ""
     Text2(0).Text = ""
     
+    
+    chkFacturar.Value = IIf(vParamAplic.MarcarAlbaranFacturar, 1, 0)
+    
 End Sub
     
 
@@ -12973,12 +12977,15 @@ Dim B As Boolean
             Me.Text1(45).Text = "": Me.Text1(46).Text = "": Me.Text1(47).Text = "": Me.Text1(48).Text = "": Text2(0).Text = ""
             
            
+           Me.chkFacturar.Value = vCliente.MarcaFacturar()
+           
 
             Observaciones = DBLet(vCliente.Observaciones)
             If Observaciones <> "" Then
                 MsgBox Observaciones, vbInformation, "Observaciones del cliente"
             End If
                            
+                                  
             
             'Comprobar si el cliente tiene cobros pendientes
             'MARZO 2014

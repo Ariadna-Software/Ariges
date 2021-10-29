@@ -1564,7 +1564,7 @@ Dim vFactu As CFactura
 
 Dim Conta2 As Long
 Dim i As Integer
-Dim aux2 As String
+Dim Aux2 As String
 Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
 
     On Error GoTo ETraspasoMtoFac
@@ -1621,9 +1621,9 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
         If (RSmto.RecordCount Mod 10) = 9 Then DoEvents
         'para cada mantenimiento de la tabla scaman seleccionado para facturar
         
-        aux2 = DevuelveDesdeBD(conAri, "TipoFraRenting", "sclien", "codclien", CStr(RSmto!codClien))
-        If aux2 = "" Then aux2 = "1"
-        TipoFacturacion = CByte(aux2)
+        Aux2 = DevuelveDesdeBD(conAri, "TipoFraRenting", "sclien", "codclien", CStr(RSmto!codClien))
+        If Aux2 = "" Then Aux2 = "1"
+        TipoFacturacion = CByte(Aux2)
         
         If SoloID <> "" Then
             'Es un cobro parcial del mantenimiento que se contrata AHORA.
@@ -1631,14 +1631,14 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
             i = DiasMes(Month(PeridoFacturar), Year(PeridoFacturar))
             vFactu.BrutoFac = CCur(RSmto!Importe) / i 'Vamos a calcular el importe DIA
             
-            aux2 = Mid(cadSQL, InStr(1, cadSQL, "AND id =") + 8)
-            aux2 = Mid(aux2, 1, InStr(1, aux2, " AND ") - 1)
+            Aux2 = Mid(cadSQL, InStr(1, cadSQL, "AND id =") + 8)
+            Aux2 = Mid(Aux2, 1, InStr(1, Aux2, " AND ") - 1)
             
-            aux2 = DevuelveDesdeBD(conAri, "fecalta", "sclienrenting", "codclien = " & RSmto!codClien & " AND id", aux2, "N")
+            Aux2 = DevuelveDesdeBD(conAri, "fecalta", "sclienrenting", "codclien = " & RSmto!codClien & " AND id", Aux2, "N")
             
             
             
-            i = DateDiff("d", CDate(aux2), CDate(i & Format(PeridoFacturar, "/mm/yyyy")))
+            i = DateDiff("d", CDate(Aux2), CDate(i & Format(PeridoFacturar, "/mm/yyyy")))
             If i > 0 Then
                  vFactu.BrutoFac = Round2(i * vFactu.BrutoFac, 2)
             
@@ -1689,27 +1689,27 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
             
             'Cliente /departamento
             If PorDepartamento <> "" Then
-                aux2 = "codclien = " & vFactu.Cliente & " AND coddirec"
-                aux2 = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", aux2, PorDepartamento)
+                Aux2 = "codclien = " & vFactu.Cliente & " AND coddirec"
+                Aux2 = DevuelveDesdeBD(conAri, "nomdirec", "sdirec", Aux2, PorDepartamento)
                 vFactu.DirDpto = PorDepartamento
-                vFactu.NombreDirDpto = aux2
+                vFactu.NombreDirDpto = Aux2
                 
                 
                 
                 
                 If vParamAplic.HayDeparNuevo = 1 Then
                     'Son departamentos. La cuenta del cliente del banco debe coger la del departamento, SI TIENE
-                    aux2 = "concat(coalesce(iban,''),'|',coalesce(codbanco,''),'|',coalesce(codsucur,''),'|',coalesce(digcontr,''),'|',coalesce(cuentaba,''),'|') "
-                    aux2 = DevuelveDesdeBD(conAri, aux2, "sdirec", "codclien =" & vFactu.Cliente & " AND coddirec  ", vFactu.DirDpto)
-                    If aux2 <> "|||||" Then
+                    Aux2 = "concat(coalesce(iban,''),'|',coalesce(codbanco,''),'|',coalesce(codsucur,''),'|',coalesce(digcontr,''),'|',coalesce(cuentaba,''),'|') "
+                    Aux2 = DevuelveDesdeBD(conAri, Aux2, "sdirec", "codclien =" & vFactu.Cliente & " AND coddirec  ", vFactu.DirDpto)
+                    If Aux2 <> "|||||" Then
                         'Tiene algun valor
-                        If Trim(RecuperaValor(aux2, 1)) <> "" And Trim(RecuperaValor(aux2, 5)) <> "" Then
+                        If Trim(RecuperaValor(Aux2, 1)) <> "" And Trim(RecuperaValor(Aux2, 5)) <> "" Then
                             'Por lo menos tiene la cuenta banc e IBAN
-                            vFactu.Iban = DBLet(RecuperaValor(aux2, 1), "T")
-                            vFactu.Banco = DBLet(RecuperaValor(aux2, 2), "N")
-                            vFactu.Sucursal = DBLet(RecuperaValor(aux2, 3), "N")
-                            vFactu.DigControl = DBLet(RecuperaValor(aux2, 4), "T")
-                            vFactu.CuentaBan = DBLet(RecuperaValor(aux2, 5), "T")
+                            vFactu.Iban = DBLet(RecuperaValor(Aux2, 1), "T")
+                            vFactu.Banco = DBLet(RecuperaValor(Aux2, 2), "N")
+                            vFactu.Sucursal = DBLet(RecuperaValor(Aux2, 3), "N")
+                            vFactu.DigControl = DBLet(RecuperaValor(Aux2, 4), "T")
+                            vFactu.CuentaBan = DBLet(RecuperaValor(Aux2, 5), "T")
                         End If
                     End If
                 End If
@@ -1718,8 +1718,8 @@ Dim TipoFacturacion As Byte  '1: mensual   3:trimestral   6:semestral   12:anual
                 
             
             
-            aux2 = Mid(cadSQL, InStr(1, cadSQL, "FROM") + 25) 'EL SQL para seleccionar los datos de las lineas
-            If Not vFactu.PasarRentingAFactura(TipCoMan, OpeFactu, CentroCoste, aux2, PeridoFacturar) Then
+            Aux2 = Mid(cadSQL, InStr(1, cadSQL, "FROM") + 25) 'EL SQL para seleccionar los datos de las lineas
+            If Not vFactu.PasarRentingAFactura(TipCoMan, OpeFactu, CentroCoste, Aux2, PeridoFacturar) Then
                 If B Then B = False
             Else
                 vClien.ActualizaUltFecMovim (Fecfact)
@@ -2003,7 +2003,7 @@ Dim DarInternasContabilizadas As Boolean
                         'PUEDE ser que tengamos albaranes de telefonia introducidos "a mano"
                         'Habra que verlos
                         
-                        'If RSalb!codClien = 700174 Then Stop
+                        'If RSalb!codClien = 700174 Then St op
                         
                         
                         If Not RTT.EOF Then

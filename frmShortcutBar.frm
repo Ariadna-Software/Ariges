@@ -107,9 +107,9 @@ Sub CreateShortcutBar()
     
   
     Set Item = wndShortcutBar.AddItem(SHORTCUT_CONTACTS, "Empresas", frmPaneContacts.hwnd)
-    
     Set Item = wndShortcutBar.AddItem(SHORTCUT_CALENDAR, "Calendario", frmPaneCalendar.hwnd)
-   
+    
+    
    
     
 End Sub
