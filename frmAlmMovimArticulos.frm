@@ -1433,7 +1433,7 @@ Dim cadB As String
 End Sub
 
 Private Sub ImageObservaDFI_Click()
-Dim cad As String
+Dim Cad As String
 Dim Invehco As Boolean
 
     If Modo = 0 Then Exit Sub
@@ -1445,29 +1445,29 @@ Dim Invehco As Boolean
             
             Invehco = False
             'Veremos si el DFI es del utlimo inventario
-            cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(lw1.SelectedItem.SubItems(1), "F") & " AND codalmac"
-            cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", cad, CStr(lw1.SelectedItem.Text))
+            Cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(lw1.SelectedItem.SubItems(1), "F") & " AND codalmac"
+            Cad = DevuelveDesdeBD(conAri, "stockinv", "salmac", Cad, CStr(lw1.SelectedItem.Text))
             
-            If cad = "" Then
+            If Cad = "" Then
                 'No es el de salmac. Buscamos en shinve
-                cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(lw1.SelectedItem.SubItems(1), "F") & " AND codalmac"
-                cad = DevuelveDesdeBD(conAri, "existenc", "shinve", cad, CStr(lw1.SelectedItem.Text))
-                If cad <> "" Then Invehco = True
+                Cad = "codartic =" & DBSet(Data1.Recordset!codArtic, "T") & " AND fechainv=" & DBSet(lw1.SelectedItem.SubItems(1), "F") & " AND codalmac"
+                Cad = DevuelveDesdeBD(conAri, "existenc", "shinve", Cad, CStr(lw1.SelectedItem.Text))
+                If Cad <> "" Then Invehco = True
             
             End If
             
             
-            If cad <> "" Then
+            If Cad <> "" Then
                 
-                cad = "          Existencias: " & cad
-                If Invehco Then cad = cad & "    *Hco"
-                cad = "Fecha inventario: " & lw1.SelectedItem.SubItems(1) & cad
+                Cad = "          Existencias: " & Cad
+                If Invehco Then Cad = Cad & "    *Hco"
+                Cad = "Fecha inventario: " & lw1.SelectedItem.SubItems(1) & Cad
                 
             End If
                         
-            If Not IsNull(lw1.SelectedItem.SubItems(11)) And lw1.SelectedItem.SubItems(11) <> "" Then cad = cad & vbCrLf & "Observaciones: " & vbCrLf & lw1.SelectedItem.SubItems(11)
+            If Not IsNull(lw1.SelectedItem.SubItems(11)) And lw1.SelectedItem.SubItems(11) <> "" Then Cad = Cad & vbCrLf & "Observaciones: " & vbCrLf & lw1.SelectedItem.SubItems(11)
             
-            If cad <> "" Then MsgBox cad, vbInformation
+            If Cad <> "" Then MsgBox Cad, vbInformation
          End If
     End If
         
@@ -1510,6 +1510,10 @@ Dim SQL As String
 Dim Numalbar As String
 Dim Codtipm As String
 Dim FecAlbCompra As String
+
+
+    If Modo <> 2 Then Exit Sub
+
 
     Select Case lw1.SelectedItem.SubItems(3)
         Case "TRA" 'traspaso de almacenes
@@ -1773,9 +1777,9 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 
@@ -1873,18 +1877,18 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
     Modo = Kmodo
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
 
    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
@@ -1904,17 +1908,17 @@ Dim NumReg As Byte
         PonerBotonCabecera True
     End Select
            
-    b = Modo <> 0 And Modo <> 2
+    B = Modo <> 0 And Modo <> 2
   
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
+        Me.imgBuscar(i).Enabled = B
     Next i
 
     
     PonerLongCampos
 
-    b = (Kmodo >= 3) Or Modo = 1
-    Toolbar1.Buttons(1).Enabled = Not b
+    B = (Kmodo >= 3) Or Modo = 1
+    Toolbar1.Buttons(1).Enabled = Not B
     Toolbar1.Buttons(2).Enabled = False 'Not b
 End Sub
 
@@ -2054,12 +2058,12 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 Dim bol As Boolean
 
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then Me.lblIndicador.Caption = ""
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then Me.lblIndicador.Caption = ""
     
     bol = (Modo = 1 Or Modo = 2)
     Me.Label3.visible = bol
@@ -2240,7 +2244,7 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 
@@ -2378,7 +2382,7 @@ Dim ItmX As ListItem
 Dim CampoOrden As String
 Dim Descen As String
 Dim SQL As String
-Dim SQL2 As String
+Dim Sql2 As String
 Dim RS As ADODB.Recordset
 Dim rs2 As ADODB.Recordset
 
@@ -2461,6 +2465,9 @@ Dim selSQL As String
         IT.SubItems(8) = DBLet(RS!Nombre, "T")
         IT.SubItems(9) = Format(DBLet(RS!cantidad, "N"), "###,###,##0.00")
         IT.SubItems(10) = Format(DBLet(RS!impormov, "N"), "###,###,##0.00")
+        
+        IT.SubItems(11) = DBLet(RS!observa, "T")
+        
         
         If DBLet(RS!tipomovi) = "E" Then
             TotCantidadE = TotCantidadE + DBLet(RS!cantidad, "N")

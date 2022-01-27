@@ -1310,7 +1310,7 @@ Dim PrimeraLin As Boolean 'Si se inserta la primera linea no esta creado el data
             
             If ModificaLineas = 1 Then 'INSERTAR
                 PrimeraLin = False
-                If data3.Recordset.EOF = True Then PrimeraLin = True
+                If Data3.Recordset.EOF = True Then PrimeraLin = True
                 If InsertarSubLineaCalidad Then
                     CargaGridCalidad True
                     BotonAnyadirSubLineaCalidad
@@ -1421,7 +1421,7 @@ Private Sub cmdCancelar_Click()
            
             If ModificaLineas = 1 Then 'INSERTAR
                 DataGrid2.AllowAddNew = False
-                If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
+                If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
             End If
             ModificaLineas = 0
             PonerBotonCabecera True
@@ -1516,7 +1516,7 @@ Private Sub BotonAnyadirSubLinea()
     PonerBotonCabecera False
     lblIndicador.Caption = "INSERTAR"
     
-    AnyadirLinea DataGrid2, data3
+    AnyadirLinea DataGrid2, Data3
     
     ModificarCantidadComponentes True
 
@@ -1628,7 +1628,7 @@ Dim vWhere As String
     'Si no estaba modificando lineas salimos
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 1 Then Exit Sub '1= Insertar
-    If data3.Recordset.EOF Then Exit Sub
+    If Data3.Recordset.EOF Then Exit Sub
     
   
     ModificaLineas = 2 'Modificar
@@ -1688,7 +1688,7 @@ End Sub
 
 Private Sub BotonEliminarLinea()
 'Eliminar una linea Del Pedido. (Tabla: sliped)
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EEliminarLinea
 
@@ -1699,30 +1699,30 @@ Dim SQL As String
     If Data2.Recordset.EOF Then Exit Sub
             
     ModificaLineas = 3 'Eliminar
-    SQL = "¿Seguro que desea eliminar la línea de produccion?     "
-    SQL = SQL & vbCrLf
-    SQL = SQL & "Almacen:  " & Format(Data2.Recordset!codAlmac, "000")
-    SQL = SQL & vbCrLf & "Artículo:  " & Data2.Recordset!codArtic & " - " & Data2.Recordset!NomArtic
+    Sql = "¿Seguro que desea eliminar la línea de produccion?     "
+    Sql = Sql & vbCrLf
+    Sql = Sql & "Almacen:  " & Format(Data2.Recordset!codAlmac, "000")
+    Sql = Sql & vbCrLf & "Artículo:  " & Data2.Recordset!codArtic & " - " & Data2.Recordset!NomArtic
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Data2.Recordset.AbsolutePosition
-        SQL = " WHERE codartic = " & DBSet(Data2.Recordset!codArtic, "T")
-        SQL = SQL & " and codigo=" & Data1.Recordset!Codigo
-        SQL = SQL & " and codalmac=" & Data2.Recordset!codAlmac
+        Sql = " WHERE codartic = " & DBSet(Data2.Recordset!codArtic, "T")
+        Sql = Sql & " and codigo=" & Data1.Recordset!Codigo
+        Sql = Sql & " and codalmac=" & Data2.Recordset!codAlmac
         
         'Sublineas calidad
-        conn.Execute "DELETE FROM sliordprcalidad " & SQL
+        conn.Execute "DELETE FROM sliordprcalidad " & Sql
         
         'Las sublineas
-        conn.Execute "DELETE FROM sliordpr2 " & SQL
+        conn.Execute "DELETE FROM sliordpr2 " & Sql
         'Las lineas
-        conn.Execute "DELETE FROM sliordpr " & SQL
+        conn.Execute "DELETE FROM sliordpr " & Sql
         ModificaLineas = 0
         CargaGrid2 DataGrid1, Data2
         CargaGrid3 False
 '        SituarDataTrasEliminar Data2, NumRegElim
-        SituarDataPosicion Me.Data2, NumRegElim, SQL
+        SituarDataPosicion Me.Data2, NumRegElim, Sql
         
 '        CancelaADODC
     End If
@@ -1737,7 +1737,7 @@ End Sub
 
 Private Sub BotonEliminarSubLinea()
 'Eliminar una linea Del Pedido. (Tabla: sliped)
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EEliminarLinea
 
@@ -1745,30 +1745,30 @@ Dim SQL As String
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 1 Or ModificaLineas = 2 Then Exit Sub '1= Insertar, 2=Modificar
 
-    If data3.Recordset.EOF Then Exit Sub
+    If Data3.Recordset.EOF Then Exit Sub
             
     ModificaLineas = 3 'Eliminar
-    SQL = "¿Seguro que desea eliminar la sublínea de produccion?     "
-    SQL = SQL & vbCrLf
-    SQL = SQL & vbCrLf & "Artículo:  " & data3.Recordset!codarti2 & " - " & data3.Recordset!NomArtic
-    SQL = SQL & vbCrLf & "Lote:  " & DBLet(data3.Recordset!numLote)
-    SQL = SQL & vbCrLf & "Cantidad:  " & Format(DBLet(data3.Recordset!cantidad, "N"), FormatoCantidad2)
+    Sql = "¿Seguro que desea eliminar la sublínea de produccion?     "
+    Sql = Sql & vbCrLf
+    Sql = Sql & vbCrLf & "Artículo:  " & Data3.Recordset!codarti2 & " - " & Data3.Recordset!NomArtic
+    Sql = Sql & vbCrLf & "Lote:  " & DBLet(Data3.Recordset!numLote)
+    Sql = Sql & vbCrLf & "Cantidad:  " & Format(DBLet(Data3.Recordset!cantidad, "N"), FormatoCantidad2)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = data3.Recordset.AbsolutePosition
-        SQL = " WHERE codartic = " & DBSet(Data2.Recordset!codArtic, "T")
-        SQL = SQL & " and codigo=" & Data1.Recordset!Codigo
-        SQL = SQL & " and codalmac=" & Data2.Recordset!codAlmac
-        SQL = SQL & " AND codarti2 = " & DBSet(data3.Recordset!codarti2, "T")
-        SQL = SQL & " AND numlinea = " & data3.Recordset!numlinea
+        NumRegElim = Data3.Recordset.AbsolutePosition
+        Sql = " WHERE codartic = " & DBSet(Data2.Recordset!codArtic, "T")
+        Sql = Sql & " and codigo=" & Data1.Recordset!Codigo
+        Sql = Sql & " and codalmac=" & Data2.Recordset!codAlmac
+        Sql = Sql & " AND codarti2 = " & DBSet(Data3.Recordset!codarti2, "T")
+        Sql = Sql & " AND numlinea = " & Data3.Recordset!numlinea
         'Las sublineas
-        conn.Execute "DELETE FROM sliordpr2 " & SQL
+        conn.Execute "DELETE FROM sliordpr2 " & Sql
  
         ModificaLineas = 0
         CargaGrid3 True
 
-        SituarDataPosicion Me.data3, NumRegElim, SQL
+        SituarDataPosicion Me.Data3, NumRegElim, Sql
         
 
     End If
@@ -2423,7 +2423,7 @@ Dim Desc As String, devuelve As String
         frmB.vTitulo = Titulo
         frmB.vselElem = 0
         frmB.vConexionGrid = conAri 'Conexión a BD: Ariges
-        If Not EsCabecera Then frmB.Label1.FontSize = 11
+        If Not EsCabecera Then frmB.label1.FontSize = 11
 '        frmB.vBuscaPrevia = chkVistaPrevia
         '#
         frmB.Show vbModal
@@ -2874,26 +2874,26 @@ End Sub
     
 Private Function InsertarLinea() As Boolean
 'Inserta un registro en la tabla de lineas de Pedido: slipre
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 
     On Error GoTo EInsertarLinea
 
     InsertarLinea = False
-    SQL = ""
+    Sql = ""
 
     If DatosOkLinea() Then 'Lineas de Pedidos
         'Conseguir el siguiente numero de linea
-        SQL = "INSERT INTO sliordpr"
-        SQL = SQL & "( codigo, codalmac, codartic ,cantidad,numlote ) "
-        SQL = SQL & "VALUES (" & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
-        SQL = SQL & DBSet(txtAux(1).Text, "T") & "," & DBSet(txtAux(4).Text, "N") & ","
-        SQL = SQL & DBSet(txtAux(3).Text, "T") & ")"
+        Sql = "INSERT INTO sliordpr"
+        Sql = Sql & "( codigo, codalmac, codartic ,cantidad,numlote ) "
+        Sql = Sql & "VALUES (" & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
+        Sql = Sql & DBSet(txtAux(1).Text, "T") & "," & DBSet(txtAux(4).Text, "N") & ","
+        Sql = Sql & DBSet(txtAux(3).Text, "T") & ")"
         
     End If
     
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         
         
         'Insertamos en lineas2
@@ -2912,35 +2912,35 @@ End Function
 
 Private Function InsertarSubLinea() As Boolean
 'Inserta un registro en la tabla de lineas de Pedido: slipre
-Dim SQL As String
+Dim Sql As String
 
 
     On Error GoTo EInsertarLinea
 
     InsertarSubLinea = False
-    SQL = ""
+    Sql = ""
     If txtComponentes(4).Text = "" Then
         MsgBox "Campo articulo obligado", vbExclamation
         Exit Function
     End If
     If DatosOkLineaCompo() Then 'Lineas de Pedidos
-        SQL = "codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND codigo "
-        SQL = DevuelveDesdeBD(conAri, "max(numlinea)", "sliordpr2", SQL, Data1.Recordset!Codigo, "N")
-        If SQL = "" Then SQL = "0"
-        NumRegElim = Val(SQL) + 1
+        Sql = "codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND codigo "
+        Sql = DevuelveDesdeBD(conAri, "max(numlinea)", "sliordpr2", Sql, Data1.Recordset!Codigo, "N")
+        If Sql = "" Then Sql = "0"
+        NumRegElim = Val(Sql) + 1
     
         'Conseguir el siguiente numero de linea
-        SQL = "INSERT INTO sliordpr2"
-        SQL = SQL & "(`codigo`,`codalmac`,`codartic`,`codarti2`,`cantidad`,`numlote`,`codprove`,numlinea)"
-        SQL = SQL & "VALUES (" & Val(Text1(0).Text) & ", " & Val(Data2.Recordset!codAlmac) & ","
-        SQL = SQL & DBSet(Data2.Recordset!codArtic, "T") & ","
-        SQL = SQL & DBSet(txtComponentes(4).Text, "T") & "," & DBSet(txtComponentes(3).Text, "N") & ","
-        SQL = SQL & DBSet(txtComponentes(0).Text, "T") & "," & txtComponentes(1).Text & "," & NumRegElim & ")"
+        Sql = "INSERT INTO sliordpr2"
+        Sql = Sql & "(`codigo`,`codalmac`,`codartic`,`codarti2`,`cantidad`,`numlote`,`codprove`,numlinea)"
+        Sql = Sql & "VALUES (" & Val(Text1(0).Text) & ", " & Val(Data2.Recordset!codAlmac) & ","
+        Sql = Sql & DBSet(Data2.Recordset!codArtic, "T") & ","
+        Sql = Sql & DBSet(txtComponentes(4).Text, "T") & "," & DBSet(txtComponentes(3).Text, "N") & ","
+        Sql = Sql & DBSet(txtComponentes(0).Text, "T") & "," & txtComponentes(1).Text & "," & NumRegElim & ")"
         
     End If
     
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         
         
         InsertarSubLinea = True
@@ -2954,26 +2954,26 @@ End Function
 
 Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Pedido: sliped
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EModificarLinea
 
     ModificarLinea = False
-    SQL = ""
+    Sql = ""
     
     If DatosOkLinea() Then
         'Creamos la sentencia SQL
-        SQL = "UPDATE sliordpr set codalmac=" & txtAux(0).Text & " , codartic =" & DBSet(txtAux(1).Text, "T")
-        SQL = SQL & ", numlote = " & DBSet(txtAux(3).Text, "T", "S")
-        SQL = SQL & ", cantidad = " & DBSet(txtAux(4).Text, "N")
-        SQL = SQL & " WHERE codigo =" & Data1.Recordset!Codigo & " AND codalmac = " & Data2.Recordset!codAlmac
-        SQL = SQL & " AND codartic =" & DBSet(Data2.Recordset!codArtic, "T")
+        Sql = "UPDATE sliordpr set codalmac=" & txtAux(0).Text & " , codartic =" & DBSet(txtAux(1).Text, "T")
+        Sql = Sql & ", numlote = " & DBSet(txtAux(3).Text, "T", "S")
+        Sql = Sql & ", cantidad = " & DBSet(txtAux(4).Text, "N")
+        Sql = Sql & " WHERE codigo =" & Data1.Recordset!Codigo & " AND codalmac = " & Data2.Recordset!codAlmac
+        Sql = Sql & " AND codartic =" & DBSet(Data2.Recordset!codArtic, "T")
         
         
     End If
     
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         
         
         ActualizarComponentes
@@ -3013,14 +3013,14 @@ Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza 
 'IN: enlaza= si carga el grid con valores de la tabla o lo muestra vacio si no enlaza
 '    conServidas=si enlaza, se muestra la columna de servidas solo cuando se va a generar el Albaran no completo
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECargaGrid
 
     B = DataGrid1.Enabled
     
-    SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
 
     
@@ -3046,32 +3046,32 @@ End Sub
 
 
 Private Sub CargaGrid3(enlaza As Boolean)
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "codigo = -1"
+    Sql = "codigo = -1"
 
 
     If enlaza Then
        If Not Data2.Recordset.EOF Then
-            SQL = " codigo = " & Data1.Recordset!Codigo
-            SQL = SQL & " AND codalmac = " & Data2.Recordset!codAlmac
-            SQL = SQL & " AND sliordpr2.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
+            Sql = " codigo = " & Data1.Recordset!Codigo
+            Sql = Sql & " AND codalmac = " & Data2.Recordset!codAlmac
+            Sql = Sql & " AND sliordpr2.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
             
        End If
     End If
 
     
     
-    SQL = " Where sliordpr2.codarti2 = sartic.codArtic And " & SQL
-    SQL = " sartic,sliordpr2 left join sprove on sliordpr2.codprove = sprove.codprove" & SQL
-    SQL = " Select codarti2,nomartic,numlote,sliordpr2.codprove,nomprove,cantidad,numlinea  from " & SQL
+    Sql = " Where sliordpr2.codarti2 = sartic.codArtic And " & Sql
+    Sql = " sartic,sliordpr2 left join sprove on sliordpr2.codprove = sprove.codprove" & Sql
+    Sql = " Select codarti2,nomartic,numlote,sliordpr2.codprove,nomprove,cantidad,numlinea  from " & Sql
 
-    data3.ConnectionString = conn
-    data3.RecordSource = SQL
-    data3.Refresh
+    Data3.ConnectionString = conn
+    Data3.RecordSource = Sql
+    Data3.Refresh
     If DataGrid2.DataSource Is Nothing Then DataGrid2.ClearFields
         
-    Set DataGrid2.DataSource = data3
+    Set DataGrid2.DataSource = Data3
     DataGrid2.RowHeight = 290
     DataGrid2.Columns(0).Caption = "Codigo"
     DataGrid2.Columns(0).Width = 1700
@@ -3409,12 +3409,12 @@ End Sub
 
 Private Function ObtenerWhereCP() As String
 'Obtiene la where de la Clave Primaria de la tabla de Cabecera: scaped
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = NombreTabla & ".codigo= " & Val(Text1(0).Text)
-    ObtenerWhereCP = SQL
+    Sql = NombreTabla & ".codigo= " & Val(Text1(0).Text)
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then Err.Clear
 End Function
@@ -3429,17 +3429,17 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data2
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
-    SQL = "SELECT codalmac,sliordpr.codartic,nomartic,numlote,cantidad "
-    SQL = SQL & " FROM sliordpr,sartic WHERE sliordpr.codartic=sartic.codartic AND "
+    Sql = "SELECT codalmac,sliordpr.codartic,nomartic,numlote,cantidad "
+    Sql = Sql & " FROM sliordpr,sartic WHERE sliordpr.codartic=sartic.codartic AND "
     If enlaza Then
-        SQL = SQL & Replace(ObtenerWhereCP, NombreTabla, "sliordpr")
+        Sql = Sql & Replace(ObtenerWhereCP, NombreTabla, "sliordpr")
     Else
-        SQL = SQL & " false "
+        Sql = Sql & " false "
     End If
-    SQL = SQL & " Order by codigo"
-    MontaSQLCarga = SQL
+    Sql = Sql & " Order by codigo"
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -3499,20 +3499,20 @@ End Sub
 Private Function PedidoConInstalaciones() As Boolean
 'Comprobar si en las lineas del Pedido hay algun articulo que sea Instalacion
 'Si no hay niguna linea que sea instalacion no se imprimira la Orden de Instalacion
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 
     On Error GoTo EInstalac
 
     PedidoConInstalaciones = False
-    SQL = "SELECT sliped.codartic, sliped.numlinea,scaped.numpedcl, sfamia.instalac "
-    SQL = SQL & " FROM ((sliped INNER JOIN scaped ON sliped.numpedcl=scaped.numpedcl) "
-    SQL = SQL & " INNER JOIN sartic ON sliped.codartic=sartic.codartic) INNER JOIN "
-    SQL = SQL & " sfamia ON sartic.codfamia=sfamia.codfamia "
-    SQL = SQL & " WHERE scaped.numpedcl = " & Val(Text1(0).Text) & " And sfamia.instalac = 1"
+    Sql = "SELECT sliped.codartic, sliped.numlinea,scaped.numpedcl, sfamia.instalac "
+    Sql = Sql & " FROM ((sliped INNER JOIN scaped ON sliped.numpedcl=scaped.numpedcl) "
+    Sql = Sql & " INNER JOIN sartic ON sliped.codartic=sartic.codartic) INNER JOIN "
+    Sql = Sql & " sfamia ON sartic.codfamia=sfamia.codfamia "
+    Sql = Sql & " WHERE scaped.numpedcl = " & Val(Text1(0).Text) & " And sfamia.instalac = 1"
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If RS.EOF Then
         PedidoConInstalaciones = False
     Else
@@ -3532,17 +3532,17 @@ End Function
 
 Private Function EliminarPedido(numPed As Long) As Boolean
 'Eliminar las lineas y la Cabecera de un Pedido. Tablas: scaped, sliped
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EEliminarPed
 
-     SQL = " WHERE  numpedcl=" & numPed
+     Sql = " WHERE  numpedcl=" & numPed
 
     'Lineas de Pedido
    ' conn.Execute "Delete from " & NomTablaLineas & sql
 
     'Cabecera
-    conn.Execute "Delete from " & NombreTabla & SQL
+    conn.Execute "Delete from " & NombreTabla & Sql
 
 EEliminarPed:
     If Err.Number <> 0 Then
@@ -3589,7 +3589,7 @@ Dim cT As CTiposMov
 End Sub
 
 Private Sub ActualizarLineasPedido()
-Dim SQL As String
+Dim Sql As String
     If OpcionConElPedido = 0 Then Exit Sub
     
     'Si tiene que coger pero no tiene pedido (NO DEBERIA PASAR)
@@ -3597,34 +3597,34 @@ Dim SQL As String
     
     If OpcionConElPedido = 2 Then
         'Eliminamos los que hubieren
-        SQL = "DELETE FROM sliordpr where codigo = " & Text1(0).Text
-        conn.Execute SQL
+        Sql = "DELETE FROM sliordpr where codigo = " & Text1(0).Text
+        conn.Execute Sql
     End If
-    SQL = "INSERT IGNORE INTO sliordpr(codigo,codalmac,codartic,cantidad)"
-    SQL = SQL & "select " & Text1(0).Text & ",codalmac,codartic,sum(cantidad) from sliped"
-    SQL = SQL & " Where numpedcl = " & Text1(4).Text
-    SQL = SQL & " group by 1,2,3"
-    conn.Execute SQL
+    Sql = "INSERT IGNORE INTO sliordpr(codigo,codalmac,codartic,cantidad)"
+    Sql = Sql & "select " & Text1(0).Text & ",codalmac,codartic,sum(cantidad) from sliped"
+    Sql = Sql & " Where numpedcl = " & Text1(4).Text
+    Sql = Sql & " group by 1,2,3"
+    conn.Execute Sql
     
 End Sub
 
 Private Function UpdateaCantidadComponentes() As Boolean
-Dim SQL As String
+Dim Sql As String
     On Error Resume Next
     Screen.MousePointer = vbHourglass
     UpdateaCantidadComponentes = False
     
-    SQL = "UPDATE sliordpr2 SET cantidad = " & DBSet(txtComponentes(3).Text, "N")
+    Sql = "UPDATE sliordpr2 SET cantidad = " & DBSet(txtComponentes(3).Text, "N")
     'LOTE
-    SQL = SQL & ", numlote = " & DBSet(txtComponentes(0).Text, "T", "S")
-    SQL = SQL & ", codprove = " & txtComponentes(1).Text
+    Sql = Sql & ", numlote = " & DBSet(txtComponentes(0).Text, "T", "S")
+    Sql = Sql & ", codprove = " & txtComponentes(1).Text
     
-    SQL = SQL & " WHERE codartic = " & DBSet(Data2.Recordset!codArtic, "T")
-    SQL = SQL & " and codigo=" & Data1.Recordset!Codigo
-    SQL = SQL & " and codalmac=" & Data2.Recordset!codAlmac
-    SQL = SQL & " and codarti2=" & DBSet(data3.Recordset!codarti2, "T")
-    SQL = SQL & " AND numlinea = " & DBSet(data3.Recordset!numlinea, "T")
-    conn.Execute SQL
+    Sql = Sql & " WHERE codartic = " & DBSet(Data2.Recordset!codArtic, "T")
+    Sql = Sql & " and codigo=" & Data1.Recordset!Codigo
+    Sql = Sql & " and codalmac=" & Data2.Recordset!codAlmac
+    Sql = Sql & " and codarti2=" & DBSet(Data3.Recordset!codarti2, "T")
+    Sql = Sql & " AND numlinea = " & DBSet(Data3.Recordset!numlinea, "T")
+    conn.Execute Sql
     Espera 0.5
     If Err.Number <> 0 Then
         MuestraError Err.Number, Err.Description
@@ -3638,7 +3638,7 @@ End Function
 'Es decir. Si insertamos o modificamos un elemento que tiene componentes
 'insertaremos en sliorpd
 Private Sub ActualizarComponentes()
-Dim SQL As String
+Dim Sql As String
 Dim cantidad As Single
 
     'Sept 2015.
@@ -3651,57 +3651,57 @@ Dim cantidad As Single
         
         
         
-        SQL = Replace(ObtenerWhereCP, NombreTabla, "sliordpr2")
-        SQL = SQL & " AND codalmac = " & Data2.Recordset!codAlmac
-        SQL = SQL & " AND sliordpr2.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
+        Sql = Replace(ObtenerWhereCP, NombreTabla, "sliordpr2")
+        Sql = Sql & " AND codalmac = " & Data2.Recordset!codAlmac
+        Sql = Sql & " AND sliordpr2.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
         
         
-        SQL = "UPDATE sliordpr2 SET cantidad=round(cantidad * " & DBSet(cantidad, "N") & ",4) WHERE " & SQL
+        Sql = "UPDATE sliordpr2 SET cantidad=round(cantidad * " & DBSet(cantidad, "N") & ",4) WHERE " & Sql
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         'Tema decimales cunado dividimos por 3 , 7. 9 eeeeeetc
-        SQL = Replace(ObtenerWhereCP, NombreTabla, "sliordpr2")
-        SQL = SQL & " AND codalmac = " & Data2.Recordset!codAlmac
-        SQL = SQL & " AND sliordpr2.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
-        SQL = SQL & " AND ((cantidad-floor(cantidad))*1000>990   or (cantidad-floor(cantidad))*1000<10 )   "
-        SQL = "UPDATE sliordpr2 SET cantidad=round(cantidad,0) WHERE " & SQL
-        conn.Execute SQL
+        Sql = Replace(ObtenerWhereCP, NombreTabla, "sliordpr2")
+        Sql = Sql & " AND codalmac = " & Data2.Recordset!codAlmac
+        Sql = Sql & " AND sliordpr2.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
+        Sql = Sql & " AND ((cantidad-floor(cantidad))*1000>990   or (cantidad-floor(cantidad))*1000<10 )   "
+        Sql = "UPDATE sliordpr2 SET cantidad=round(cantidad,0) WHERE " & Sql
+        conn.Execute Sql
 
         
         
     Else
         'INSERTAR
         
-        SQL = "INSERT INTO sliordpr2"
-        SQL = SQL & "( codigo, codalmac, codartic ,codarti2,cantidad,numlote,codprove ) "
+        Sql = "INSERT INTO sliordpr2"
+        Sql = Sql & "( codigo, codalmac, codartic ,codarti2,cantidad,numlote,codprove ) "
         If vParamAplic.ComponentePorcentaje Then
             'Los componentes en materias primas entran como porcentajes. Tipo fontentas
-            SQL = SQL & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
-            SQL = SQL & DBSet(txtAux(1).Text, "T") & "," & TablaComponentes & ".codarti1,"
-            SQL = SQL & " if (mateprima=0,cantidad * " & DBSet(txtAux(4).Text, "N")
-            SQL = SQL & ", (Cantidad / 100) * " & DBSet(txtAux(4).Text, "N") & "),NULL,codprove"
-            SQL = SQL & " FROM   " & TablaComponentes & " INNER JOIN sartic ON " & TablaComponentes & ".codarti1 = sartic.codArtic"
-            SQL = SQL & " WHERE " & TablaComponentes & ".codartic = " & DBSet(txtAux(1).Text, "T")
+            Sql = Sql & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
+            Sql = Sql & DBSet(txtAux(1).Text, "T") & "," & TablaComponentes & ".codarti1,"
+            Sql = Sql & " if (mateprima=0,cantidad * " & DBSet(txtAux(4).Text, "N")
+            Sql = Sql & ", (Cantidad / 100) * " & DBSet(txtAux(4).Text, "N") & "),NULL,codprove"
+            Sql = Sql & " FROM   " & TablaComponentes & " INNER JOIN sartic ON " & TablaComponentes & ".codarti1 = sartic.codArtic"
+            Sql = Sql & " WHERE " & TablaComponentes & ".codartic = " & DBSet(txtAux(1).Text, "T")
         Else
             'Por cantidad. Lo de siempre vamos
-            SQL = SQL & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
-            SQL = SQL & DBSet(txtAux(1).Text, "T") & "," & TablaComponentes & ".codarti1,cantidad * " & DBSet(txtAux(4).Text, "N") & ",NULL,codprove "
-            SQL = SQL & " FROM   " & TablaComponentes & " INNER JOIN sartic ON " & TablaComponentes & ".codarti1 = sartic.codArtic"
-            SQL = SQL & " WHERE " & TablaComponentes & ".codartic = " & DBSet(txtAux(1).Text, "T")
+            Sql = Sql & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
+            Sql = Sql & DBSet(txtAux(1).Text, "T") & "," & TablaComponentes & ".codarti1,cantidad * " & DBSet(txtAux(4).Text, "N") & ",NULL,codprove "
+            Sql = Sql & " FROM   " & TablaComponentes & " INNER JOIN sartic ON " & TablaComponentes & ".codarti1 = sartic.codArtic"
+            Sql = Sql & " WHERE " & TablaComponentes & ".codartic = " & DBSet(txtAux(1).Text, "T")
             
         End If
-        conn.Execute SQL
+        conn.Execute Sql
         
         
         'INSERTAMOS EN LA TABLA DE CALIDAD de produccion
         'CALIDAD
-        SQL = "INSERT INTO sliordprcalidad"
-        SQL = SQL & "(codigo,codalmac,codartic,codigoensayo,especificaciones,resultado,conforme) "
-        SQL = SQL & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
-        SQL = SQL & " sarti7.codartic,codigoensayo,especificaciones,'',0"
-        SQL = SQL & " FROM   sarti7 WHERE sarti7.codartic = " & DBSet(txtAux(1).Text, "T")
-        conn.Execute SQL
+        Sql = "INSERT INTO sliordprcalidad"
+        Sql = Sql & "(codigo,codalmac,codartic,codigoensayo,especificaciones,resultado,conforme) "
+        Sql = Sql & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
+        Sql = Sql & " sarti7.codartic,codigoensayo,especificaciones,'',0"
+        Sql = Sql & " FROM   sarti7 WHERE sarti7.codartic = " & DBSet(txtAux(1).Text, "T")
+        conn.Execute Sql
         
         
     End If
@@ -3723,7 +3723,7 @@ Dim i As Integer
     
     If visible Then
         For i = 0 To 3
-            If data3.Recordset.EOF Then
+            If Data3.Recordset.EOF Then
                 Me.txtComponentes(i).Top = DataGrid2.Top + DataGrid2.RowTop(0) + 10
             Else
                 Me.txtComponentes(i).Top = DataGrid2.Top + DataGrid2.RowTop(DataGrid2.Row) + 10
@@ -3867,7 +3867,7 @@ Private Sub txtCalidad_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCalidad_LostFocus(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 
     txtCalidad(Index).Text = Trim(txtCalidad(Index).Text)
     If Index = 0 Then
@@ -3875,14 +3875,14 @@ Dim SQL As String
         If Me.txtCalidad(Index).Text = "" Then
             txtCalidad(1).Text = ""
         Else
-            SQL = "codartic"
-            txtCalidad(1).Text = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", txtCalidad(Index).Text, "T", SQL)
+            Sql = "codartic"
+            txtCalidad(1).Text = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", txtCalidad(Index).Text, "T", Sql)
             If txtCalidad(1).Text = "" Then
                 MsgBox "No existe el articulo: " & txtCalidad(Index).Text, vbExclamation
                 txtCalidad(Index).Text = ""
                 PonerFoco txtCalidad(Index)
             Else
-                txtCalidad(Index).Text = SQL
+                txtCalidad(Index).Text = Sql
             End If
         End If
     End If
@@ -3946,35 +3946,35 @@ End Sub
 
 
 Private Function InsertarSubLineaCalidad() As Boolean
-Dim SQL As String
+Dim Sql As String
 
 
     On Error GoTo EInsertarLinea
     
 
     InsertarSubLineaCalidad = False
-    SQL = ""
-    If txtCalidad(0).Text = "" Then SQL = "- Campo articulo obligado" & vbCrLf
-    If txtCalidad(1).Text = "" Then SQL = "- Articulo incorrecto" & vbCrLf
-    If cboCalidad.ListIndex < 0 Then SQL = SQL & "- Ensayo obligado" & vbCrLf
-    If SQL <> "" Then
-        MsgBox "Campos erroneos: " & vbCrLf & SQL, vbExclamation
+    Sql = ""
+    If txtCalidad(0).Text = "" Then Sql = "- Campo articulo obligado" & vbCrLf
+    If txtCalidad(1).Text = "" Then Sql = "- Articulo incorrecto" & vbCrLf
+    If cboCalidad.ListIndex < 0 Then Sql = Sql & "- Ensayo obligado" & vbCrLf
+    If Sql <> "" Then
+        MsgBox "Campos erroneos: " & vbCrLf & Sql, vbExclamation
         Exit Function
     End If
 
    
         'Conseguir el siguiente numero de linea
-        SQL = "INSERT INTO sliordprcalidad("
-        SQL = SQL & "codigo,codalmac,codartic,codigoensayo,especificaciones,resultado,conforme) "
-        SQL = SQL & "VALUES (" & Val(Text1(0).Text) & ", " & Val(Data2.Recordset!codAlmac) & ","
-        SQL = SQL & DBSet(Data2.Recordset!codArtic, "T") & ","
-        SQL = SQL & cboCalidad.ItemData(cboCalidad.ListIndex) & ","
-        SQL = SQL & DBSet(txtCalidad(2).Text, "T") & "," & DBSet(txtCalidad(3).Text, "T") & "," & Abs(Me.chkCalidad.Value) & ")"
+        Sql = "INSERT INTO sliordprcalidad("
+        Sql = Sql & "codigo,codalmac,codartic,codigoensayo,especificaciones,resultado,conforme) "
+        Sql = Sql & "VALUES (" & Val(Text1(0).Text) & ", " & Val(Data2.Recordset!codAlmac) & ","
+        Sql = Sql & DBSet(Data2.Recordset!codArtic, "T") & ","
+        Sql = Sql & cboCalidad.ItemData(cboCalidad.ListIndex) & ","
+        Sql = Sql & DBSet(txtCalidad(2).Text, "T") & "," & DBSet(txtCalidad(3).Text, "T") & "," & Abs(Me.chkCalidad.Value) & ")"
         
     
     
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         
         
         InsertarSubLineaCalidad = True
@@ -3991,7 +3991,7 @@ End Function
 
 
 Private Sub CargaGridCalidad(enlaza As Boolean)
-Dim SQL As String
+Dim Sql As String
 
     
     'SQL = "select codarti2,nomartic,ensayo,sliordprcalidad.especificaciones,resultado,if(conforme=1,'Si','') ok"
@@ -4002,16 +4002,16 @@ Dim SQL As String
     
     
     
-    SQL = "select sliordprcalidad.codartic,nomartic,ensayo,sliordprcalidad.especificaciones,resultado,if(conforme=1,'Si','') ok"
-    SQL = SQL & " ,sliordprcalidad.codArtic ,codAlmac ,codigoensayo" 'No se ven
-    SQL = SQL & "  from sliordprcalidad,sartic,scalidad where  sartic.codArtic = sliordprcalidad.codartic"
-    SQL = SQL & " and codigoensayo=scalidad.codigo  and  sliordprcalidad.codigo= "
-    SQL = SQL & IIf(enlaza, Data1.Recordset!Codigo, -1)
-    SQL = SQL & " order by codartic,ensayo"
+    Sql = "select sliordprcalidad.codartic,nomartic,ensayo,sliordprcalidad.especificaciones,resultado,if(conforme=1,'Si','') ok"
+    Sql = Sql & " ,sliordprcalidad.codArtic ,codAlmac ,codigoensayo" 'No se ven
+    Sql = Sql & "  from sliordprcalidad,sartic,scalidad where  sartic.codArtic = sliordprcalidad.codartic"
+    Sql = Sql & " and codigoensayo=scalidad.codigo  and  sliordprcalidad.codigo= "
+    Sql = Sql & IIf(enlaza, Data1.Recordset!Codigo, -1)
+    Sql = Sql & " order by codartic,ensayo"
     
     
     data4.ConnectionString = conn
-    data4.RecordSource = SQL
+    data4.RecordSource = Sql
     data4.Refresh
     If DataGrid3.DataSource Is Nothing Then DataGrid3.ClearFields
         
@@ -4067,22 +4067,22 @@ End Function
 
 
 Private Function UpdateaDatosCalidad() As Boolean
-Dim SQL As String
+Dim Sql As String
     On Error Resume Next
     Screen.MousePointer = vbHourglass
     UpdateaDatosCalidad = False
     
   
     
-    SQL = "UPDATE sliordprcalidad  "
-    SQL = SQL & " SET  resultado  = " & DBSet(txtCalidad(3).Text, "T", "S")
-    SQL = SQL & ", conforme = " & Abs(Me.chkCalidad.Value)
+    Sql = "UPDATE sliordprcalidad  "
+    Sql = Sql & " SET  resultado  = " & DBSet(txtCalidad(3).Text, "T", "S")
+    Sql = Sql & ", conforme = " & Abs(Me.chkCalidad.Value)
     
-    SQL = SQL & " WHERE codartic = " & DBSet(data4.Recordset!codArtic, "T")
-    SQL = SQL & " and codigo=" & Data1.Recordset!Codigo
-    SQL = SQL & " and codalmac=" & data4.Recordset!codAlmac
-    SQL = SQL & " and codigoensayo=" & data4.Recordset!codigoensayo
-    conn.Execute SQL
+    Sql = Sql & " WHERE codartic = " & DBSet(data4.Recordset!codArtic, "T")
+    Sql = Sql & " and codigo=" & Data1.Recordset!Codigo
+    Sql = Sql & " and codalmac=" & data4.Recordset!codAlmac
+    Sql = Sql & " and codigoensayo=" & data4.Recordset!codigoensayo
+    conn.Execute Sql
     Espera 0.1
     If Err.Number <> 0 Then
         MuestraError Err.Number, Err.Description
@@ -4199,7 +4199,7 @@ Private Sub OcultarMostrarFramaCalid(Ocultar As Boolean)
 End Sub
 
 Private Sub BotonEliminarLineaCalidad()
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EEliminarLinea
 
@@ -4210,28 +4210,28 @@ Dim SQL As String
     If data4.Recordset.EOF Then Exit Sub
             
     ModificaLineas = 3 'Eliminar
-    SQL = "¿Seguro que desea eliminar el dato de  calidad?     "
-    SQL = SQL & vbCrLf
-    SQL = SQL & vbCrLf & "Artículo:  " & data4.Recordset!codArtic & " - " & data4.Recordset!NomArtic
-    SQL = SQL & vbCrLf & "Ensayo:  " & DBLet(data4.Recordset!ensayo, "T")
-    SQL = SQL & vbCrLf & "Resultado:  " & DBLet(data4.Recordset!resultado, "T")
+    Sql = "¿Seguro que desea eliminar el dato de  calidad?     "
+    Sql = Sql & vbCrLf
+    Sql = Sql & vbCrLf & "Artículo:  " & data4.Recordset!codArtic & " - " & data4.Recordset!NomArtic
+    Sql = Sql & vbCrLf & "Ensayo:  " & DBLet(data4.Recordset!ensayo, "T")
+    Sql = Sql & vbCrLf & "Resultado:  " & DBLet(data4.Recordset!resultado, "T")
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = data4.Recordset.AbsolutePosition
-        SQL = " WHERE codartic = " & DBSet(data4.Recordset!codArtic, "T")
-        SQL = SQL & " and codigo=" & Data1.Recordset!Codigo
-        SQL = SQL & " and codalmac=" & data4.Recordset!codAlmac
-        SQL = SQL & " AND codigoensayo = " & DBSet(data4.Recordset!codigoensayo, "T")
+        Sql = " WHERE codartic = " & DBSet(data4.Recordset!codArtic, "T")
+        Sql = Sql & " and codigo=" & Data1.Recordset!Codigo
+        Sql = Sql & " and codalmac=" & data4.Recordset!codAlmac
+        Sql = Sql & " AND codigoensayo = " & DBSet(data4.Recordset!codigoensayo, "T")
         
         
         'Las sublineas
-        conn.Execute "DELETE FROM sliordprcalidad " & SQL
+        conn.Execute "DELETE FROM sliordprcalidad " & Sql
  
         ModificaLineas = 0
         CargaGridCalidad True
 
-        SituarDataPosicion Me.data4, NumRegElim, SQL
+        SituarDataPosicion Me.data4, NumRegElim, Sql
         
 
     End If
@@ -4295,7 +4295,7 @@ End Function
 
 
 Private Function AccionDeshaceCierreProd() As Boolean
-Dim SQL As String
+Dim Sql As String
 On Error GoTo eAccionDeshaceCierreProd
 
     AccionDeshaceCierreProd = False
@@ -4303,26 +4303,26 @@ On Error GoTo eAccionDeshaceCierreProd
     'YA HEMOS VALIDADO data1.recrodset.codigo
 
     'Data1.Recordset
-    SQL = "UPDATE salmac, sliordpr Set CanStock = CanStock - cantidad"
-    SQL = SQL & " WHERE sliordpr.codigo = " & CStr(Data1.Recordset!Codigo)
-    SQL = SQL & " AND     salmac.codalmac = 1 AND salmac.codartic = sliordpr.codartic;"
-    conn.Execute SQL
+    Sql = "UPDATE salmac, sliordpr Set CanStock = CanStock - cantidad"
+    Sql = Sql & " WHERE sliordpr.codigo = " & CStr(Data1.Recordset!Codigo)
+    Sql = Sql & " AND     salmac.codalmac = sliordpr.codalmac AND salmac.codartic = sliordpr.codartic;"
+    conn.Execute Sql
       
-    SQL = " UPDATE salmac, sliordpr2 Set CanStock = CanStock + cantidad"
-    SQL = SQL & " WHERE sliordpr2.codigo =" & CStr(Data1.Recordset!Codigo)
-    SQL = SQL & " AND salmac.codalmac = 1 AND  salmac.codartic = sliordpr2.codarti2;"
-    conn.Execute SQL
+    Sql = " UPDATE salmac, sliordpr2 Set CanStock = CanStock + cantidad"
+    Sql = Sql & " WHERE sliordpr2.codigo =" & CStr(Data1.Recordset!Codigo)
+    Sql = Sql & " AND salmac.codalmac = sliordpr2.codalmac AND  salmac.codartic = sliordpr2.codarti2;"
+    conn.Execute Sql
 
-    SQL = "DELETE FROM smoval WHERE document = '" & CStr(Data1.Recordset!Codigo) & "' AND detamovi = 'PRO'"
-    conn.Execute SQL
+    Sql = "DELETE FROM smoval WHERE document = '" & CStr(Data1.Recordset!Codigo) & "' AND detamovi = 'PRO'"
+    conn.Execute Sql
     
-    SQL = "UPDATE sordprod SET fecproduccion = NULL WHERE codigo = " & CStr(Data1.Recordset!Codigo)
-    conn.Execute SQL
+    Sql = "UPDATE sordprod SET fecproduccion = NULL WHERE codigo = " & CStr(Data1.Recordset!Codigo)
+    conn.Execute Sql
     
     AccionDeshaceCierreProd = True
     Exit Function
 eAccionDeshaceCierreProd:
-    MuestraError Err.Number, , Err.Description & vbCrLf & SQL
+    MuestraError Err.Number, , Err.Description & vbCrLf & Sql
 End Function
 
 

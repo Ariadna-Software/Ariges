@@ -610,7 +610,7 @@ Dim Modo As Byte
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim J As Integer
 
 '    J = 0
@@ -625,28 +625,28 @@ Dim J As Integer
 '        Next J
 '    End If
     Modo = vModo
-    b = (Modo = 2)
+    B = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    Me.txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
-    txtAux(2).visible = Not b
-    txtAux(3).visible = Not b
-    txtAux(4).visible = Not b
+    Me.txtAux(0).visible = Not B
+    txtAux(1).visible = Not B
+    txtAux(2).visible = Not B
+    txtAux(3).visible = Not B
+    txtAux(4).visible = Not B
     If Me.DesdeTPV Then
-        txtAux(5).visible = Not b
+        txtAux(5).visible = Not B
     Else
-        txtAux(6).visible = Not b
+        txtAux(6).visible = Not B
     End If
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
         
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
      
     'Si estamos en insertar o modificar
     BloquearTxt txtAux(0), (Modo <> 3 And Modo <> 1)
@@ -665,15 +665,15 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ber Todos
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
 
 End Sub
@@ -807,7 +807,7 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim I As Integer
-Dim CadB As String
+Dim cadB As String
 
     On Error Resume Next
 
@@ -821,15 +821,15 @@ Dim CadB As String
 '                    If InStr(1, txtAux(i).Text, "*") = 0 Then txtAux(i).Text = "*" & txtAux(i).Text & "*"
 '                End If
 '            Next i
-            CadB = ObtenerBusqueda(Me, False)
-            If CadB <> "" Then
+            cadB = ObtenerBusqueda(Me, False)
+            If cadB <> "" Then
             
                 'Febrero 2018
                 '  Los articulos que esten BLOQUEADOS no salen en esta lista
-                CadB = CadB & " AND sartic.codstatu<>2"
+                cadB = cadB & " AND sartic.codstatu<>2"
             
                 PonerModo 2
-                CargaGrid CadB
+                CargaGrid cadB
                 DataGrid1.SetFocus
             End If
         
@@ -884,16 +884,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Adodc1.Recordset.Fields(0) & "|"
-    cad = cad & Adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1085,17 +1085,17 @@ Dim C As String
 End Sub
 
 
-Private Sub mnExc_Click(index As Integer)
-      If index = 1 Then mnExc(1).Checked = Not mnExc(1).Checked
+Private Sub mnExc_Click(Index As Integer)
+      If Index = 1 Then mnExc(1).Checked = Not mnExc(1).Checked
 End Sub
 
 Private Sub mnLotes_Click()
         HacerToolbar 10
 End Sub
 
-Private Sub mnOrdenadoPor_Click(index As Integer)
-        mnOrdenadoPor(0).Checked = index = 0
-        mnOrdenadoPor(1).Checked = index = 1
+Private Sub mnOrdenadoPor_Click(Index As Integer)
+        mnOrdenadoPor(0).Checked = Index = 0
+        mnOrdenadoPor(1).Checked = Index = 1
 End Sub
 
 Private Sub mnSalir_Click()
@@ -1108,7 +1108,7 @@ Private Sub mnVerTodos_Click()
 End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-    HacerToolbar Button.index
+    HacerToolbar Button.Index
 End Sub
 Private Sub HacerToolbar(Indice As Integer)
     Select Case Indice
@@ -1137,33 +1137,37 @@ Private Sub HacerToolbar(Indice As Integer)
 End Sub
 
 
-Private Sub CargaGrid(Optional SQL As String)
-Dim b As Boolean
+Private Sub CargaGrid(Optional Sql As String)
+Dim B As Boolean
 Dim tots As String
 Dim cadSel As String
-    
-    b = DataGrid1.Enabled
+Dim rc As Byte
+
+    rc = Screen.MousePointer
+    Screen.MousePointer = vbHourglass
+
+    B = DataGrid1.Enabled
     
     ' ---- [06/11/2009] [LAURA] : añadir la cantidad de stock
-    cadSel = SQL
+    cadSel = Sql
     
     
     
-    SQL = CadenaConsulta
+    Sql = CadenaConsulta
     
     If mnExc(1).Checked Then
-        SQL = SQL & " AND sartic.codstatu<2 " 'EXLUCIMOS
+        Sql = Sql & " AND sartic.codstatu<2 " 'EXLUCIMOS
     End If
     
 '    If Trim(cadSel) <> "" Then Sql = Sql & " WHERE " & cadSel
-    If Trim(cadSel) <> "" Then SQL = SQL & " AND " & cadSel
+    If Trim(cadSel) <> "" Then Sql = Sql & " AND " & cadSel
     If mnOrdenadoPor(1).Checked Then
-        SQL = SQL & " ORDER BY sartic.nomartic"
+        Sql = Sql & " ORDER BY sartic.nomartic"
     Else
-        SQL = SQL & " ORDER BY sartic.codartic"
+        Sql = Sql & " ORDER BY sartic.codartic"
     End If
 
-    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.Adodc1, Sql, False
     
     '### a mano
     tots = "S|txtAux(0)|T|Codigo|2100|;S|txtAux(1)|T|Descripcion|4640|;S|txtAux(2)|T|Cod. Asoc.|1500|;"
@@ -1182,7 +1186,7 @@ Dim cadSel As String
     ' ----
     arregla tots, DataGrid1, Me, 330
     
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     DataGrid1.ScrollBars = dbgAutomatic
    
    'Actualizar indicador
@@ -1191,17 +1195,18 @@ Dim cadSel As String
    Else
         Me.lblIndicador.Caption = ""
    End If
+   Screen.MousePointer = rc
 End Sub
 
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
 Dim Indice As Integer
     
-    If Button.index = 10 Then
+    If Button.Index = 10 Then
         Indice = 10 'TPV
     Else
-        If Button.index = 8 Then
+        If Button.Index = 8 Then
             Indice = 5
-        ElseIf Button.index = 6 Then
+        ElseIf Button.Index = 6 Then
             Indice = 2
         Else
             Indice = 1
@@ -1210,17 +1215,17 @@ Dim Indice As Integer
     HacerToolbar Indice
 End Sub
 
-Private Sub txtAux_GotFocus(index As Integer)
-    ConseguirFoco txtAux(index), Modo
+Private Sub txtAux_GotFocus(Index As Integer)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
-Private Sub TxtAux_KeyDown(index As Integer, KeyCode As Integer, Shift As Integer)
-    If Not (index = 0 And KeyCode = 38) Then KEYdown KeyCode
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+    If Not (Index = 0 And KeyCode = 38) Then KEYdown KeyCode
 End Sub
 
-Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
-    If index = 1 And KeyAscii = 13 Then
-        If Me.txtAux(index).Text <> "" Then
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+    If Index = 1 And KeyAscii = 13 Then
+        If Me.txtAux(Index).Text <> "" Then
             PonerFocoBtn Me.cmdAceptar
             KeyAscii = 0
         End If
@@ -1228,8 +1233,8 @@ Private Sub txtAux_KeyPress(index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-Private Sub txtAux_LostFocus(index As Integer)
-    If Not PerderFocoGnral(txtAux(index), Modo) Then Exit Sub
+Private Sub txtAux_LostFocus(Index As Integer)
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     'If Index = 0 Then PonerFormatoEntero txtAux(Index)
 End Sub
 
@@ -1248,10 +1253,10 @@ End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 

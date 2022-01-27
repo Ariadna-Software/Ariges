@@ -8,26 +8,93 @@ Begin VB.Form frmFacAlbAsignar
    ClientHeight    =   10275
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   16500
+   ClientWidth     =   17910
    ClipControls    =   0   'False
    Icon            =   "frmFacAlbAsignar.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   10275
-   ScaleWidth      =   16500
+   ScaleWidth      =   17910
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Index           =   6
+      Left            =   9360
+      MaxLength       =   10
+      TabIndex        =   2
+      Tag             =   "Tipalb|T|S|||scaalb|notasportes|||"
+      Text            =   "matr"
+      Top             =   5520
+      Visible         =   0   'False
+      Width           =   1215
+   End
+   Begin VB.TextBox txtAux2 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000018&
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Index           =   3
+      Left            =   11280
+      Locked          =   -1  'True
+      TabIndex        =   26
+      Text            =   "Text2"
+      Top             =   5400
+      Visible         =   0   'False
+      Width           =   2565
+   End
+   Begin VB.CommandButton cmdAux 
+      Appearance      =   0  'Flat
+      Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Index           =   4
+      Left            =   10680
+      TabIndex        =   25
+      ToolTipText     =   "Buscar envío"
+      Top             =   5400
+      Visible         =   0   'False
+      Width           =   195
+   End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   150
-      TabIndex        =   22
+      TabIndex        =   23
       Top             =   90
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   180
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -93,7 +160,7 @@ Begin VB.Form frmFacAlbAsignar
       EndProperty
       Height          =   315
       Left            =   14625
-      TabIndex        =   21
+      TabIndex        =   22
       Top             =   270
       Visible         =   0   'False
       Width           =   1530
@@ -113,7 +180,7 @@ Begin VB.Form frmFacAlbAsignar
       Left            =   13620
       List            =   "frmFacAlbAsignar.frx":0016
       Style           =   2  'Dropdown List
-      TabIndex        =   4
+      TabIndex        =   5
       Tag             =   "Facturar|N|N||||factursn|||"
       Top             =   4320
       Visible         =   0   'False
@@ -134,7 +201,7 @@ Begin VB.Form frmFacAlbAsignar
       Left            =   12930
       List            =   "frmFacAlbAsignar.frx":002C
       Style           =   2  'Dropdown List
-      TabIndex        =   3
+      TabIndex        =   4
       Tag             =   "Archi|N|N||||docarchiv|||"
       Top             =   4320
       Visible         =   0   'False
@@ -157,7 +224,7 @@ Begin VB.Form frmFacAlbAsignar
       Index           =   2
       Left            =   12555
       Locked          =   -1  'True
-      TabIndex        =   20
+      TabIndex        =   21
       Text            =   "Text2"
       Top             =   4320
       Visible         =   0   'False
@@ -178,7 +245,7 @@ Begin VB.Form frmFacAlbAsignar
       Height          =   315
       Index           =   3
       Left            =   12120
-      TabIndex        =   19
+      TabIndex        =   20
       ToolTipText     =   "Buscar fecha"
       Top             =   4320
       Visible         =   0   'False
@@ -200,7 +267,7 @@ Begin VB.Form frmFacAlbAsignar
       Index           =   5
       Left            =   10920
       MaxLength       =   10
-      TabIndex        =   2
+      TabIndex        =   3
       Tag             =   "Fecha|F|S||||fecenvio|dd/mm/yyyy||"
       Text            =   "fecha"
       Top             =   4320
@@ -224,7 +291,7 @@ Begin VB.Form frmFacAlbAsignar
       Index           =   1
       Left            =   9000
       Locked          =   -1  'True
-      TabIndex        =   18
+      TabIndex        =   19
       Text            =   "Text2"
       Top             =   4320
       Visible         =   0   'False
@@ -244,10 +311,10 @@ Begin VB.Form frmFacAlbAsignar
       EndProperty
       Height          =   315
       Index           =   2
-      Left            =   8760
-      TabIndex        =   17
+      Left            =   8880
+      TabIndex        =   18
       ToolTipText     =   "Buscar zona"
-      Top             =   4320
+      Top             =   4800
       Visible         =   0   'False
       Width           =   195
    End
@@ -290,7 +357,7 @@ Begin VB.Form frmFacAlbAsignar
       Height          =   315
       Index           =   1
       Left            =   8640
-      TabIndex        =   16
+      TabIndex        =   17
       ToolTipText     =   "Buscar envio"
       Top             =   4320
       Visible         =   0   'False
@@ -336,7 +403,7 @@ Begin VB.Form frmFacAlbAsignar
       Index           =   2
       Left            =   2280
       MaxLength       =   10
-      TabIndex        =   9
+      TabIndex        =   10
       Tag             =   "Fecha|F|N|||scaalb|fechaalb|dd/mm/yyyy|S|"
       Text            =   "fecha"
       Top             =   4320
@@ -359,7 +426,7 @@ Begin VB.Form frmFacAlbAsignar
       Index           =   1
       Left            =   1080
       MaxLength       =   15
-      TabIndex        =   8
+      TabIndex        =   9
       Tag             =   "numalbar|N|N|||scaalb|numalbar|0|S|"
       Text            =   "numlote"
       Top             =   4320
@@ -370,7 +437,7 @@ Begin VB.Form frmFacAlbAsignar
       Height          =   540
       Index           =   0
       Left            =   150
-      TabIndex        =   14
+      TabIndex        =   15
       Top             =   9615
       Width           =   2535
       Begin VB.Label lblIndicador 
@@ -387,7 +454,7 @@ Begin VB.Form frmFacAlbAsignar
          EndProperty
          Height          =   240
          Left            =   240
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   180
          Width           =   2115
       End
@@ -407,7 +474,7 @@ Begin VB.Form frmFacAlbAsignar
       Height          =   315
       Index           =   0
       Left            =   3480
-      TabIndex        =   13
+      TabIndex        =   14
       ToolTipText     =   "Buscar fecha"
       Top             =   4320
       Visible         =   0   'False
@@ -430,7 +497,7 @@ Begin VB.Form frmFacAlbAsignar
       Index           =   0
       Left            =   5160
       Locked          =   -1  'True
-      TabIndex        =   12
+      TabIndex        =   13
       Text            =   "Text2"
       Top             =   4320
       Visible         =   0   'False
@@ -452,7 +519,7 @@ Begin VB.Form frmFacAlbAsignar
       Index           =   0
       Left            =   480
       MaxLength       =   16
-      TabIndex        =   7
+      TabIndex        =   8
       Tag             =   "codtipom|T|N|||scaalb|codtipom||S|"
       Text            =   "codartic codarti"
       Top             =   4320
@@ -472,7 +539,7 @@ Begin VB.Form frmFacAlbAsignar
       EndProperty
       Height          =   375
       Left            =   14040
-      TabIndex        =   5
+      TabIndex        =   6
       Top             =   9690
       Width           =   1065
    End
@@ -490,7 +557,7 @@ Begin VB.Form frmFacAlbAsignar
       EndProperty
       Height          =   375
       Left            =   15240
-      TabIndex        =   6
+      TabIndex        =   7
       Top             =   9690
       Width           =   1065
    End
@@ -545,10 +612,10 @@ Begin VB.Form frmFacAlbAsignar
       Bindings        =   "frmFacAlbAsignar.frx":0038
       Height          =   8520
       Left            =   150
-      TabIndex        =   10
+      TabIndex        =   11
       Top             =   930
-      Width           =   16140
-      _ExtentX        =   28469
+      Width           =   17580
+      _ExtentX        =   31009
       _ExtentY        =   15028
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -623,7 +690,7 @@ Begin VB.Form frmFacAlbAsignar
       EndProperty
       Height          =   255
       Left            =   240
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   7905
       Visible         =   0   'False
       Width           =   3495
@@ -681,6 +748,8 @@ Private WithEvents frmB As frmBuscaGrid 'Form para busquedas (frmBuscaGrid)
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal 'Calendario de Fechas
 Attribute frmF.VB_VarHelpID = -1
+Private WithEvents frmFl As frmFlotas
+Attribute frmFl.VB_VarHelpID = -1
 
 Private WithEvents frmB1 As frmFacFormasEnvio 'formas de envio
 Attribute frmB1.VB_VarHelpID = -1
@@ -774,6 +843,19 @@ Private Sub cmdAux_Click(Index As Integer)
                 txtAux(Index + 2).Text = HaDevueltoDatos
                 PonerFoco txtAux(Index + 2)
             End If
+            
+        Case 4
+            'Fltoas
+            Set frmFl = New frmFlotas
+            frmFl.DatosADevolverBusqueda = "0|"
+            frmFl.Show vbModal
+            Set frmFl = Nothing
+            If HaDevueltoDatos <> "" Then
+                txtAux(6).Text = HaDevueltoDatos
+                PonerFoco txtAux(Index + 2)
+            End If
+            
+            
     End Select
 End Sub
 
@@ -912,10 +994,12 @@ Dim tots As String
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data1, SQL, False
     
-    tots = "S|txtAux(0)|T|Tipo|650|;S|txtAux(1)|T|Numero|1000|;S|txtAux(2)|T|Fecha|1400|;S|cmdAux(0)|B||0|;"
-    tots = tots & "S|txtAux2(0)|T|Cliente|4080|;S|txtAux(3)|T|Codigo|800|;S|cmdAux(1)|B||0|;"
-    tots = tots & "S|txtAux2(1)|T|Envio|2100|;S|txtAux(4)|T|Zona|800|;S|cmdAux(2)|B||0|;"
-    tots = tots & "S|txtAux2(2)|T|Descripción|2050|;S|cmdAux(3)|B||0|;S|txtAux(5)|T|Fec.Envio|1400|;S|Combo1|C|Doc.|650|;"
+    tots = "S|txtAux(0)|T|Tipo|650|;S|txtAux(1)|T|Numero|1000|;S|txtAux(2)|T|Fecha|1300|;S|cmdAux(0)|B||0|;"
+    tots = tots & "S|txtAux2(0)|T|Cliente|3380|;S|txtAux(3)|T|Cpd.|650|;S|cmdAux(1)|B||0|;"
+    tots = tots & "S|txtAux2(1)|T|Envio|1900|;S|txtAux(4)|T|zona|700|;S|cmdAux(2)|B||0|;"
+    
+    tots = tots & "S|txtAux2(2)|T|Descripción|1850|;S|txtAux(6)|T|Cod.|800|;S|cmdAux(4)|B||0|;S|txtAux2(3)|T|Vehiculo|2050|;"
+    tots = tots & "S|cmdAux(3)|B||0|;S|txtAux(5)|T|Fec.Envio|1400|;S|Combo1|C|Doc.|650|;"
     'Mayo 2012. Facturar
     tots = tots & "S|Combo2|C|Fact.|650|;"
     arregla tots, DataGrid1, Me, 350
@@ -941,32 +1025,32 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim b As Boolean
+Dim B As Boolean
 
     DeseleccionaGrid Me.DataGrid1
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
     For jj = 0 To txtAux.Count - 1
-        If jj < 3 Then
+        If jj <= 3 Then
             txtAux2(jj).Height = Me.DataGrid1.RowHeight
             txtAux2(jj).Top = alto
-            txtAux2(jj).visible = b
+            txtAux2(jj).visible = B
         End If
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = b
+        txtAux(jj).visible = B
     Next jj
 
-    Me.Combo1.visible = b
+    Me.Combo1.visible = B
     Me.Combo1.Top = alto
-    Me.Combo2.visible = b
+    Me.Combo2.visible = B
     Me.Combo2.Top = alto
     
     
     For jj = 0 To Me.cmdAux.Count - 1
         Me.cmdAux(jj).Height = Me.DataGrid1.RowHeight
         Me.cmdAux(jj).Top = alto
-        Me.cmdAux(jj).visible = b
+        Me.cmdAux(jj).visible = B
     Next jj
 End Sub
 
@@ -999,6 +1083,10 @@ End Sub
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
     HaDevueltoDatos = Format(vFecha, "dd/mm/yyyy")
+End Sub
+
+Private Sub frmFl_DatoSeleccionado(CadenaSeleccion As String)
+    HaDevueltoDatos = RecuperaValor(CadenaSeleccion, 1)
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -1046,13 +1134,13 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
 
                       
     If Kmodo = 1 Then 'Modo Buscar
@@ -1065,9 +1153,9 @@ Dim b As Boolean
     Me.cmdAux(0).Enabled = (Modo <> 4)
                    
     '-----------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
 
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -1087,7 +1175,7 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activas unas Opciones de Menu y Toolbar según el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
     
     'Insertar
@@ -1097,19 +1185,19 @@ Dim b As Boolean
     Toolbar1.Buttons(3).Enabled = False
     Me.mnEliminar.Enabled = False
     
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     
     
-    b = (Modo >= 3 Or Modo = 1)
+    B = (Modo >= 3 Or Modo = 1)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'VerTodos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
 End Sub
 
 
@@ -1140,16 +1228,17 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 '--------------------------------------------------------------------
 Dim SQL As String
     
-    SQL = "select codtipom,numalbar,fechaalb,nomclien,scaalb.codenvio,nomenvio,scaalb.codzonas,"
-    SQL = SQL & "nomzonas,fecenvio,if(docarchiv=1,""SI"","""") docarchiv,if(factursn=0,""NO"","""") factursn"
-    SQL = SQL & " from (scaalb left join senvio on scaalb.codenvio=senvio.codenvio)"
+    SQL = "select codtipom,numalbar,fechaalb,nomclien,scaalb.codenvio,nomenvio,scaalb.codzonas,nomzonas,notasportes,nomflota,"
+    SQL = SQL & "fecenvio,if(docarchiv=1,""SI"","""") docarchiv,if(factursn=0,""NO"","""") factursn"
+    SQL = SQL & " from scaalb left join senvio on scaalb.codenvio=senvio.codenvio"
     SQL = SQL & " left join szonas on  scaalb.codzonas=szonas.codzonas "
-    SQL = SQL & " where  1=1 "
+    SQL = SQL & " left join sflotas on  scaalb.notasportes=sflotas.codflota "
+    SQL = SQL & " where  true "
     SQL = SQL & ""
     If enlaza Then
         If EsBusqueda And CadenaBusqueda <> "" Then SQL = SQL & CadenaBusqueda
     Else
-        SQL = SQL & " AND  codtipom = '-A'"
+        SQL = SQL & " AND  false"
     End If
     SQL = SQL & Ordenacion
     MontaSQLCarga = SQL
@@ -1197,7 +1286,7 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim I As Integer
+Dim i As Integer
 Dim anc As Single
 
     'Escondemos el navegador y ponemos Modo Modificar
@@ -1205,17 +1294,17 @@ Dim anc As Single
     
     'Como el campo1, campo2 y campo3 es clave primaria, NO se puede modificar
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     anc = ObtenerAlto(Me.DataGrid1, 10)
     LLamaLineas anc
     
  
-    For I = 0 To 2
-        txtAux(I).Text = DBLet(DataGrid1.Columns(I).Value, "T")
-    Next I
+    For i = 0 To 2
+        txtAux(i).Text = DBLet(DataGrid1.Columns(i).Value, "T")
+    Next i
 
     txtAux2(0).Text = DBLet(DataGrid1.Columns(3).Value, "T")
     txtAux(3).Text = DBLet(Me.DataGrid1.Columns(4).Value, "T")
@@ -1224,17 +1313,18 @@ Dim anc As Single
     txtAux2(2).Text = DBLet(DataGrid1.Columns(7).Text, "T")
     
     
-    txtAux(5).Text = DBLet(DataGrid1.Columns(8).Text, "F")
+    txtAux(5).Text = DBLet(DataGrid1.Columns(10).Text, "F")
     
+    txtAux(6).Text = DBLet(DataGrid1.Columns(8).Text, "T")
+    txtAux2(3).Text = DBLet(DataGrid1.Columns(9).Text, "T")
     
-    
-    If UCase(DBLet(DataGrid1.Columns(9).Value, "T")) = "SI" Then
+    If UCase(DBLet(DataGrid1.Columns(11).Value, "T")) = "SI" Then
         Combo1.ListIndex = 0
     Else
         Combo1.ListIndex = 1
     End If
     
-    If UCase(DBLet(DataGrid1.Columns(10).Value, "T")) = "NO" Then
+    If UCase(DBLet(DataGrid1.Columns(12).Value, "T")) = "NO" Then
         Combo2.ListIndex = 1
     Else
         Combo2.ListIndex = 0
@@ -1249,25 +1339,34 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
 
     On Error GoTo ErrDatosOK
 
     DatosOk = False
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
     If txtAux(5).Text <> "" Then
         'Fecha envio no puede ser anterior a fecha albaran
         If CDate(txtAux(5).Text) < CDate(txtAux(2).Text) Then
             MsgBox "Fecha envio no puede ser anterior a fecha albaran", vbExclamation
-            b = False
+            B = False
         End If
     End If
 
+    If txtAux(6).Text <> "" Then
+        HaDevueltoDatos = DevuelveDesdeBD(conAri, "nomflota", "sflotas", "codflota", txtAux(6).Text, "T")
+        If HaDevueltoDatos = "" Then
+            MsgBox "Error vehiculo. " & txtAux(6).Text, vbExclamation
+            PonerFoco txtAux(6)
+            B = False
+        End If
+        HaDevueltoDatos = ""
+    End If
     
-    DatosOk = b
+    DatosOk = B
     Exit Function
     
 ErrDatosOK:
@@ -1279,7 +1378,7 @@ End Function
 
 Private Sub MandaBusquedaPrevia2(Envio As Boolean)
 ''Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 'Dim Tabla As String
 'Dim Titulo As String
 '
@@ -1289,15 +1388,15 @@ Dim cad As String
 '    'Registro de la tabla de cabeceras: slista
         'Cod Diag.|tabla|columna|tipo|formato|10·
         If Envio Then
-            cad = "Codigo|senvio|codenvio|N||20·"
-            cad = cad & "Decripcion|senvio|nomenvio|T||60·"
+            Cad = "Codigo|senvio|codenvio|N||20·"
+            Cad = Cad & "Decripcion|senvio|nomenvio|T||60·"
         Else
-            cad = "Codigo|szonas|codzonas|N||20·"
-            cad = cad & "Decripcion|szonas|nomzonas|T||60·"
+            Cad = "Codigo|szonas|codzonas|N||20·"
+            Cad = Cad & "Decripcion|szonas|nomzonas|T||60·"
         End If
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
+        frmB.vCampos = Cad
         
         'frmB.vTabla = tabla
         frmB.vSQL = ""
@@ -1434,7 +1533,7 @@ End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-Dim cad As String
+Dim Cad As String
 
     On Error Resume Next
     
@@ -1442,30 +1541,45 @@ Dim cad As String
     
     Select Case Index
         Case 3, 4
-            cad = ""
+            Cad = ""
             If txtAux(Index).Text <> "" Then
                 If Not IsNumeric(txtAux(Index).Text) Then
                     MsgBox "Campo numerico", vbExclamation
                     txtAux(Index).Text = ""
                 Else
                     If Index = 3 Then
-                        cad = DevuelveDesdeBD(conAri, "nomenvio", "senvio", "codenvio", txtAux(Index).Text)
+                        Cad = DevuelveDesdeBD(conAri, "nomenvio", "senvio", "codenvio", txtAux(Index).Text)
                     Else
-                        cad = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", txtAux(Index).Text)
+                        Cad = DevuelveDesdeBD(conAri, "nomzonas", "szonas", "codzonas", txtAux(Index).Text)
                     End If
-                    If cad = "" Then MsgBox "No existe el valor en la BD: " & txtAux(Index).Text, vbExclamation
+                    If Cad = "" Then MsgBox "No existe el valor en la BD: " & txtAux(Index).Text, vbExclamation
                 End If
-                If cad = "" And txtAux(Index).Text <> "" Then
+                If Cad = "" And txtAux(Index).Text <> "" Then
                     txtAux(Index).Text = ""
                     PonerFoco txtAux(Index)
                 End If
                       
             End If
-            txtAux2(Index - 2).Text = cad
+            txtAux2(Index - 2).Text = Cad
         Case 2, 5 'fecha
               PonerFormatoFecha txtAux(Index)
               
             
+            
+            
+        Case 6
+            Cad = ""
+            If txtAux(Index).Text <> "" Then
+                Cad = DevuelveDesdeBD(conAri, "nomflota", "sflotas", "codflota", txtAux(Index).Text, "T")
+                If Cad = "" Then MsgBox "No existe el valor en la BD: " & txtAux(Index).Text, vbExclamation
+                
+                If Cad = "" And txtAux(Index).Text <> "" Then
+                    txtAux(Index).Text = ""
+                    PonerFoco txtAux(Index)
+                End If
+                
+            End If
+            txtAux2(3).Text = Cad
         
     End Select
     

@@ -909,6 +909,7 @@ Private Function EmitirFacturasMOVI_ORANGE(mfichero As String, mfecha As Date, B
                             numAgrupados = numAgrupados + 1
                         Else
                             'Añadmios el telefono
+                            MsgBox "falta"
                             Stop
                             'hemos pasado de agrupacion 1 a cero. Eso no pued ser por el SQL
                             

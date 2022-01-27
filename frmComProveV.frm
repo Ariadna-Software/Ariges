@@ -964,7 +964,7 @@ Dim devuelve As String
         Case 0 'NIF
             If Modo = 3 Then
                 Text1(Index).Text = UCase(Text1(Index).Text)
-                ValidarNIF Text1(Index).Text
+                ValidarNIF_ Text1(Index).Text, False
             End If
         Case 3 'CPostal
             If Not VieneDeBuscar Then

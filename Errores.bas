@@ -25,7 +25,7 @@ Case 1052
 Case 1054
     CADENA = "Columna desconocida en cadena SQL."
 Case 1062
-    CADENA = "Entrada duplicada en BD." & vbCrLf & CadenaDesde(60, conn.Errors(0).Description, "'")
+    CADENA = "Entrada duplicada en BD." & vbCrLf & CadenaDesde(80, conn.Errors(0).Description, "'")
 Case 1064
     CADENA = "Error en el SQL."
 Case 1109
@@ -55,13 +55,13 @@ End Sub
 
 
 Private Function CadenaDesde(Inicio As Integer, CADENA As String, Caracter As String) As String
-Dim I, J
+Dim i, J
 CadenaDesde = ""
-I = InStr(Inicio, CADENA, Caracter)
-If I >= Inicio Then
-    J = InStr(I + 1, CADENA, Caracter)
-    I = I + 1
-    If J > 0 Then CadenaDesde = Mid(CADENA, I, J - I)
+i = InStr(Inicio, CADENA, Caracter)
+If i >= Inicio Then
+    J = InStr(i + 1, CADENA, Caracter)
+    i = i + 1
+    If J > 0 Then CadenaDesde = Mid(CADENA, i, J - i)
 End If
 End Function
 

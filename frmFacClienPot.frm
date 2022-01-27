@@ -578,41 +578,41 @@ Begin VB.Form frmFacClienPot
       TabCaption(1)   =   "Contactos"
       TabPicture(1)   =   "frmFacClienPot.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FrameToolAux0"
-      Tab(1).Control(1)=   "txtauxDC(7)"
-      Tab(1).Control(2)=   "txtauxDC(6)"
-      Tab(1).Control(3)=   "txtauxDC(8)"
-      Tab(1).Control(4)=   "txtauxDC(5)"
-      Tab(1).Control(5)=   "txtauxDC(3)"
-      Tab(1).Control(6)=   "txtauxDC(4)"
-      Tab(1).Control(7)=   "txtauxDC(1)"
-      Tab(1).Control(8)=   "txtauxDC(0)"
-      Tab(1).Control(9)=   "DataGrid1"
+      Tab(1).Control(0)=   "Label1(60)"
+      Tab(1).Control(1)=   "Label2"
+      Tab(1).Control(2)=   "imgBuscar(14)"
+      Tab(1).Control(3)=   "Label1(61)"
+      Tab(1).Control(4)=   "Label1(78)"
+      Tab(1).Control(5)=   "Label1(63)"
+      Tab(1).Control(6)=   "Label1(67)"
+      Tab(1).Control(7)=   "ImgMail(3)"
+      Tab(1).Control(8)=   "Label1(77)"
+      Tab(1).Control(9)=   "txtauxDC(2)"
       Tab(1).Control(10)=   "cboCargo"
-      Tab(1).Control(11)=   "txtauxDC(2)"
-      Tab(1).Control(12)=   "Label1(77)"
-      Tab(1).Control(13)=   "ImgMail(3)"
-      Tab(1).Control(14)=   "Label1(67)"
-      Tab(1).Control(15)=   "Label1(63)"
-      Tab(1).Control(16)=   "Label1(78)"
-      Tab(1).Control(17)=   "Label1(61)"
-      Tab(1).Control(18)=   "imgBuscar(14)"
-      Tab(1).Control(19)=   "Label2"
-      Tab(1).Control(20)=   "Label1(60)"
+      Tab(1).Control(11)=   "DataGrid1"
+      Tab(1).Control(12)=   "txtauxDC(0)"
+      Tab(1).Control(13)=   "txtauxDC(1)"
+      Tab(1).Control(14)=   "txtauxDC(4)"
+      Tab(1).Control(15)=   "txtauxDC(3)"
+      Tab(1).Control(16)=   "txtauxDC(5)"
+      Tab(1).Control(17)=   "txtauxDC(8)"
+      Tab(1).Control(18)=   "txtauxDC(6)"
+      Tab(1).Control(19)=   "txtauxDC(7)"
+      Tab(1).Control(20)=   "FrameToolAux0"
       Tab(1).ControlCount=   21
       TabCaption(2)   =   "CRM"
       TabPicture(2)   =   "frmFacClienPot.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "LabelCRM"
-      Tab(2).Control(1)=   "Label1(2)"
-      Tab(2).Control(2)=   "imgCrm"
-      Tab(2).Control(3)=   "Frame3(1)"
-      Tab(2).Control(4)=   "cmdAccCRM(0)"
-      Tab(2).Control(5)=   "cmdAccCRM(1)"
-      Tab(2).Control(6)=   "cmdAccCRM(2)"
-      Tab(2).Control(7)=   "lwCRM"
-      Tab(2).Control(8)=   "FrameNavegaCRM"
-      Tab(2).Control(9)=   "FrameBotonCMR"
+      Tab(2).Control(0)=   "FrameBotonCMR"
+      Tab(2).Control(1)=   "FrameNavegaCRM"
+      Tab(2).Control(2)=   "lwCRM"
+      Tab(2).Control(3)=   "cmdAccCRM(2)"
+      Tab(2).Control(4)=   "cmdAccCRM(1)"
+      Tab(2).Control(5)=   "cmdAccCRM(0)"
+      Tab(2).Control(6)=   "Frame3(1)"
+      Tab(2).Control(7)=   "imgCrm"
+      Tab(2).Control(8)=   "Label1(2)"
+      Tab(2).Control(9)=   "LabelCRM"
       Tab(2).ControlCount=   10
       Begin VB.Frame FrameBotonCMR 
          Enabled         =   0   'False
@@ -2457,7 +2457,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
     Select Case Index
     Case 1
         If Modo <> 2 Then Exit Sub
-        If data1.Recordset.EOF Then Exit Sub
+        If Data1.Recordset.EOF Then Exit Sub
         If Text1(0).Text = "" Then Exit Sub
         
         frmListadoOfer.NumCod = Format(Val(Text1(0).Text), "0000") & "|" & Text1(1).Text & "|"
@@ -2476,7 +2476,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
 '            frmCRMMto.Show vbModal
         Case 1
             'NUEVA llamda EFECTUADA
-            frmcrmMantePot.DesdeElCliente = data1.Recordset!codClien
+            frmcrmMantePot.DesdeElCliente = Data1.Recordset!codClien
             frmcrmMantePot.TipoPredefinido = 1  'llamada
             frmcrmMantePot.DatosADevolverBusqueda = ""   'NUEVA
             frmcrmMantePot.Show vbModal
@@ -2511,7 +2511,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
 '            BuscaChekc = ""
         Case 6
             'NUEVA entrada en Historial
-            frmcrmMantePot.DesdeElCliente = data1.Recordset!codClien
+            frmcrmMantePot.DesdeElCliente = Data1.Recordset!codClien
             frmcrmMantePot.TipoPredefinido = 2  'Historial
             frmcrmMantePot.DatosADevolverBusqueda = ""   'NUEVA
             frmcrmMantePot.Show vbModal
@@ -2536,8 +2536,8 @@ Private Sub cmdAccCRM_Click(Index As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim cad As String, Indicador As String
-Dim b As Boolean
+Dim Cad As String, Indicador As String
+Dim B As Boolean
 Dim EraNuevaLinea As Boolean
 
     Screen.MousePointer = vbHourglass
@@ -2578,7 +2578,7 @@ Dim EraNuevaLinea As Boolean
           '          Cad = "coddiren = " & Text4(0).Text
                 Else
                     If Modo = 7 Then
-                        cad = "id = " & txtauxDC(8).Text
+                        Cad = "id = " & txtauxDC(8).Text
                     Else
           '              Cad = "id = " & Me.txtauxRent(0).Text
                     End If
@@ -2591,11 +2591,11 @@ Dim EraNuevaLinea As Boolean
                 If ModificaLineas = 1 Then
                     data4.Recordset.MoveLast
                 Else
-                    data4.Recordset.Find cad
+                    data4.Recordset.Find Cad
                 End If
-                b = True
+                B = True
                 
-                If b Then
+                If B Then
                     PonerDatosForaGrid False
                     
                     ModificaLineas = 0
@@ -2620,7 +2620,7 @@ End Sub
 
 
 Private Sub cmdCancelar_Click()
-Dim cad As String
+Dim Cad As String
 Dim Indicador As String
 
     Select Case Modo
@@ -2650,9 +2650,9 @@ Dim Indicador As String
                 If Not data4.Recordset.EOF Then data4.Recordset.MoveFirst
                 
             ElseIf ModificaLineas = 2 Then 'Modificar
-                 cad = "(id=" & Me.txtauxDC(8).Text & ")"
+                 Cad = "(id=" & Me.txtauxDC(8).Text & ")"
                  CargaLineas True, 0
-                 data4.Recordset.Find cad
+                 data4.Recordset.Find Cad
                  
             End If
             
@@ -2778,7 +2778,7 @@ Private Sub BotonBuscar()
         Text1(1).BackColor = vbYellow
     Else
         HacerBusqueda
-        If data1.Recordset.EOF Then
+        If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
             Text1(kCampo).BackColor = vbYellow
             PonerFoco Text1(kCampo)
@@ -2788,18 +2788,18 @@ End Sub
 
 
 Private Sub BotonVerTodos()
-Dim cad As String
+Dim Cad As String
     
-    cad = "1=1"
+    Cad = "1=1"
     If vParamAplic.NumeroInstalacion = 2 Then
-        If vUsu.CodigoAgente > 0 Then cad = "codagent = " & vUsu.CodigoAgente
+        If vUsu.CodigoAgente > 0 Then Cad = "codagent = " & vUsu.CodigoAgente
     End If
 'Ver todos
     LimpiarCampos
     If chkVistaPrevia.Value = 1 Then
-        MandaBusquedaPrevia2 cad
+        MandaBusquedaPrevia2 Cad
     Else
-        CadenaConsulta = "Select * from " & NombreTabla & " WHERE " & cad & Ordenacion
+        CadenaConsulta = "Select * from " & NombreTabla & " WHERE " & Cad & Ordenacion
         PonerCadenaBusqueda
     End If
     
@@ -2807,8 +2807,8 @@ End Sub
 
 
 Private Sub Desplazamiento(Index As Integer)
-    If data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData data1, Index, True
+    If Data1.Recordset.EOF Then Exit Sub
+    DesplazamientoData Data1, Index, True
     PonerCampos
 End Sub
 
@@ -2852,36 +2852,36 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim cad As String
+Dim Cad As String
 
     'Ciertas comprobaciones
-    If data1.Recordset.EOF Then Exit Sub
+    If Data1.Recordset.EOF Then Exit Sub
     If Modo <> 2 Then Exit Sub
     
     If Not EliminarCliente() Then Exit Sub
 
 
     '### a mano
-    cad = "¿Seguro que desea ELIMINAR el cliente  potencial?"
-    cad = cad & vbCrLf & "Cod. : " & data1.Recordset.Fields(0)
-    cad = cad & vbCrLf & "Nombre: " & data1.Recordset.Fields(1)
+    Cad = "¿Seguro que desea ELIMINAR el cliente  potencial?"
+    Cad = Cad & vbCrLf & "Cod. : " & Data1.Recordset.Fields(0)
+    Cad = Cad & vbCrLf & "Nombre: " & Data1.Recordset.Fields(1)
 
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
-        NumRegElim = data1.Recordset.AbsolutePosition
+        NumRegElim = Data1.Recordset.AbsolutePosition
         
         'Contactos
-        cad = "DELETE FROM sclipotdp WHERE codclien = " & data1.Recordset!codClien
-        conn.Execute cad
+        Cad = "DELETE FROM sclipotdp WHERE codclien = " & Data1.Recordset!codClien
+        conn.Execute Cad
         'CRM de potenciales
-        cad = "DELETE FROM scrmaccionclipot WHERE codclipot = " & data1.Recordset!codClien
-        conn.Execute cad
+        Cad = "DELETE FROM scrmaccionclipot WHERE codclipot = " & Data1.Recordset!codClien
+        conn.Execute Cad
         
-        data1.Recordset.Delete
-        If SituarDataTrasEliminar(data1, NumRegElim) Then
+        Data1.Recordset.Delete
+        If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
         Else 'solo habia un registro
             LimpiarCampos
@@ -2892,7 +2892,7 @@ Dim cad As String
 Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
-        data1.Recordset.CancelUpdate
+        Data1.Recordset.CancelUpdate
         MuestraError Err.Number, "Eliminar Cliente", Err.Description
     End If
 End Sub
@@ -3081,28 +3081,28 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim Indicador As String
 
     'Quitar lineas y volver a la cabecera
     If Modo >= 5 Then  'modo 5: Lineas Direcciones/Departamentos
-        cad = "(codclien=" & Text1(0).Text & ")"
-        If SituarData(data1, cad, Indicador) Then
+        Cad = "(codclien=" & Text1(0).Text & ")"
+        If SituarData(Data1, Cad, Indicador) Then
 '            PonerLineaVisible False
             PonerModo 2
             lblIndicador.Caption = Indicador
         End If
     Else 'Regresar
-        If data1.Recordset.EOF Then
+        If Data1.Recordset.EOF Then
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
         
-        cad = data1.Recordset.Fields(0) & "|"
-        cad = cad & data1.Recordset.Fields(1) & "|"
-        cad = cad & data1.Recordset!perclie1 & "|"
-        cad = cad & data1.Recordset!maiclie1 & "|"
-        RaiseEvent DatoSeleccionado(cad)
+        Cad = Data1.Recordset.Fields(0) & "|"
+        Cad = Cad & Data1.Recordset.Fields(1) & "|"
+        Cad = Cad & Data1.Recordset!perclie1 & "|"
+        Cad = Cad & Data1.Recordset!maiclie1 & "|"
+        RaiseEvent DatoSeleccionado(Cad)
         Unload Me
     End If
 End Sub
@@ -3191,7 +3191,7 @@ Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
     If PriVezForm Then
         PriVezForm = False
-        If Not data1.Recordset.EOF Then
+        If Not Data1.Recordset.EOF Then
             PonerModo 2
             PonerCampos
         Else
@@ -3358,16 +3358,16 @@ Dim i As Integer
     chkVistaPrevia.Value = CheckValueLeer(Name)
     
     'ASignamos un SQL al DATA1
-    data1.ConnectionString = conn
-    data1.RecordSource = "Select * from " & NombreTabla & " where codclien=-1"
+    Data1.ConnectionString = conn
+    Data1.RecordSource = "Select * from " & NombreTabla & " where codclien=-1"
     
     If DatosADevolverBusqueda <> "" Then
         If InStr(1, DatosADevolverBusqueda, "|") = 0 Then
             'QUIERO VER EL CLIENTE
-            data1.RecordSource = "Select * from " & NombreTabla & " where codclien=" & DatosADevolverBusqueda
+            Data1.RecordSource = "Select * from " & NombreTabla & " where codclien=" & DatosADevolverBusqueda
         End If
     End If
-    data1.Refresh
+    Data1.Refresh
     
     'Asignamos un SQL al DATA2
     'CargaFrameDirec2 0   'los dos
@@ -3378,7 +3378,7 @@ Dim i As Integer
     If DatosADevolverBusqueda = "" Then
         PonerModo 0
     Else
-        If data1.Recordset.EOF Then
+        If Data1.Recordset.EOF Then
             PonerModo 1
         Else
            'LO pondra en el activatre
@@ -3656,11 +3656,11 @@ Dim Indice As Byte
                         
                 Else
                     CadenaDesdeOtroForm = ""
-                    If Not data1.Recordset.EOF Then
+                    If Not Data1.Recordset.EOF Then
                         If Index = 11 Then
-                            CadenaDesdeOtroForm = DBLet(data1.Recordset!observac, "T")
+                            CadenaDesdeOtroForm = DBLet(Data1.Recordset!observac, "T")
                         Else
-                            CadenaDesdeOtroForm = DBLet(data1.Recordset!obsfacturacion, "T")
+                            CadenaDesdeOtroForm = DBLet(Data1.Recordset!obsfacturacion, "T")
                         End If
                     End If
                 End If
@@ -3769,15 +3769,15 @@ Dim i As Integer
         'Llamadas
             'Lee de acciones realizadas con tipo=1 .....
 
-            frmcrmMantePot.DesdeElCliente = data1.Recordset!codClien
+            frmcrmMantePot.DesdeElCliente = Data1.Recordset!codClien
             frmcrmMantePot.TipoPredefinido = 1 'Llamadas realizadas
-            frmcrmMantePot.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & " AND scrmaccionclipot.Tipo = 1 And codclipot = " & data1.Recordset!codClien
+            frmcrmMantePot.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & " AND scrmaccionclipot.Tipo = 1 And codclipot = " & Data1.Recordset!codClien
             frmcrmMantePot.Show vbModal
     
     Case 6
-            frmcrmMantePot.DesdeElCliente = data1.Recordset!codClien
+            frmcrmMantePot.DesdeElCliente = Data1.Recordset!codClien
             frmcrmMantePot.TipoPredefinido = 2 'Historial
-            frmcrmMantePot.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & " AND scrmaccionclipot.Tipo = 2 And codclipot = " & data1.Recordset!codClien
+            frmcrmMantePot.DatosADevolverBusqueda = "`fechora`=" & DBSet(lwCRM.SelectedItem.Text, "FH") & " AND scrmaccionclipot.Tipo = 2 And codclipot = " & Data1.Recordset!codClien
             frmcrmMantePot.Show vbModal
     End Select
     Me.Refresh
@@ -3976,7 +3976,7 @@ Dim Titulo As String
         Case 7 'NIF
             If Text1(Index).Text <> "" Then
                 Text1(Index).Text = UCase(Text1(Index).Text)
-                ValidarNIF Text1(Index).Text
+                ValidarNIF_ Text1(Index).Text, False
                 
             End If
         
@@ -4118,7 +4118,7 @@ End Sub
 
 Private Sub MandaBusquedaPrevia2(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 Dim Conexion As Byte
@@ -4198,14 +4198,14 @@ Screen.MousePointer = vbHourglass
 
     On Error GoTo EEPonerBusq
 
-    data1.RecordSource = CadenaConsulta
-    data1.Refresh
-    If data1.Recordset.RecordCount <= 0 Then
+    Data1.RecordSource = CadenaConsulta
+    Data1.Refresh
+    If Data1.Recordset.RecordCount <= 0 Then
         MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
         Screen.MousePointer = vbDefault
         Exit Sub
     Else
-        data1.Recordset.MoveFirst
+        Data1.Recordset.MoveFirst
         PonerModo 2
         
         PonerCampos
@@ -4223,9 +4223,9 @@ End Sub
 
 
 Private Sub PonerCampos()
-    If data1.Recordset.EOF Then Exit Sub
+    If Data1.Recordset.EOF Then Exit Sub
     
-    PonerCamposForma Me, data1
+    PonerCamposForma Me, Data1
     Text2(9).Text = PonerNombreDeCod(Text1(9), conAri, "sactiv", "nomactiv")
     Text2(10).Text = PonerNombreDeCod(Text1(10), conAri, "senvio", "nomenvio")
     Text2(11).Text = PonerNombreDeCod(Text1(11), conAri, "szonas", "nomzonas")
@@ -4244,7 +4244,7 @@ Private Sub PonerCampos()
     CargaDatosLWCRM
     
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
+    lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
 
 End Sub
 
@@ -4256,7 +4256,7 @@ End Sub
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte, NumReg As Long
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo EPonerModo
 
@@ -4270,10 +4270,10 @@ Dim b As Boolean
     
     'Modo 2. Hay datos y estamos visualizandolos
     '=========================================
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
         Me.cmdRegresar.Caption = "&Regresar"
     Else
         cmdRegresar.visible = False
@@ -4281,11 +4281,11 @@ Dim b As Boolean
     
      'Poner Flechas de desplazamiento visibles
     NumReg = 1
-    If Not data1.Recordset.EOF Then
-        If data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
+    If Not Data1.Recordset.EOF Then
+        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, CLng(NumReg)
-    DesplazamientoVisible b And data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
          
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
@@ -4302,26 +4302,26 @@ Dim b As Boolean
 
         
     '---------------------------------------------
-    b = Modo <> 0 And Modo <> 2 And Modo <> 5
+    B = Modo <> 0 And Modo <> 2 And Modo <> 5
     'cboAlbaran.Enabled = b
     'cboFacturacion.Enabled = b
     'cboTipoIVA.Enabled = b
     'cboTipocliente.Enabled = b
     'If vParamAplic.Renting Then cboFraRenting.Enabled = b
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     
     
     'Bloquear los checkbox
     BloquearChecks Me, Modo
     
-    b = Modo <> 0 And Modo <> 2 And Modo < 5
-    Me.imgFecha(0).Enabled = b
+    B = Modo <> 0 And Modo <> 2 And Modo < 5
+    Me.imgFecha(0).Enabled = B
    
     
     
     For i = 0 To 3
-        Me.imgBuscar(i).Enabled = b
+        Me.imgBuscar(i).Enabled = B
     Next i
     Me.imgBuscar(9).Enabled = Me.imgBuscar(3).Enabled
     imgBuscar(11).Enabled = Modo >= 2 And Modo < 5
@@ -4368,62 +4368,62 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 Dim bAux As Boolean
 Dim i As Integer
 
-    b = (Modo = 2 Or Modo = 0) '-- Or (Modo >= 5 And ModificaLineas = 0))
+    B = (Modo = 2 Or Modo = 0) '-- Or (Modo >= 5 And ModificaLineas = 0))
     If vParamAplic.NumeroInstalacion = 2 Then
-        If vUsu.CodigoAgente > 0 Then b = False
+        If vUsu.CodigoAgente > 0 Then B = False
     End If
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2)  '-- Or (Modo >= 5 And ModificaLineas = 0))
+    B = (Modo = 2)  '-- Or (Modo >= 5 And ModificaLineas = 0))
     'Los que sean AGENTES no pueden entrar
     If vParamAplic.NumeroInstalacion = 2 Then
-        If vUsu.CodigoAgente > 0 Then b = False
+        If vUsu.CodigoAgente > 0 Then B = False
     End If
     
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     
     'Impresion a false
     Toolbar1.Buttons(8).Enabled = False
     
     'Lineas Direcciones/Departamentos
-    b = Modo = 2
-    Toolbar2.Buttons(1).Enabled = b
+    B = Modo = 2
+    Toolbar2.Buttons(1).Enabled = B
     
 '    If vParamAplic.DireccionesEnvio Then Toolbar1.Buttons(11).Enabled = b
-    Toolbar2.Buttons(2).Enabled = b 'Datos contacto
-    If vParamAplic.Renting Then Toolbar2.Buttons(3).Enabled = b  'Datos contacto
+    Toolbar2.Buttons(2).Enabled = B 'Datos contacto
+    If vParamAplic.Renting Then Toolbar2.Buttons(3).Enabled = B  'Datos contacto
     
     
     '-----------------------------
-    b = (Modo >= 3)
+    B = (Modo >= 3)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = Not b
-    Me.mnBuscar.Enabled = Not b
+    Toolbar1.Buttons(5).Enabled = Not B
+    Me.mnBuscar.Enabled = Not B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = Not b
-    Me.mnVerTodos.Enabled = Not b
+    Toolbar1.Buttons(6).Enabled = Not B
+    Me.mnVerTodos.Enabled = Not B
     
-    b = Modo = 2 Or Modo = 0
-    Toolbar2.Buttons(2).Enabled = b
-    Toolbar2.Buttons(3).Enabled = b
-    Toolbar2.Buttons(4).Enabled = b
+    B = Modo = 2 Or Modo = 0
+    Toolbar2.Buttons(2).Enabled = B
+    Toolbar2.Buttons(3).Enabled = B
+    Toolbar2.Buttons(4).Enabled = B
     
-    b = (Modo = 2) And DatosADevolverBusqueda = ""
+    B = (Modo = 2) And DatosADevolverBusqueda = ""
     For i = 0 To ToolAux.Count - 1
-        ToolAux(i).Buttons(1).Enabled = b
-        bAux = (b And Me.data4.Recordset.RecordCount > 0)
+        ToolAux(i).Buttons(1).Enabled = B
+        bAux = (B And Me.data4.Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     Next i
@@ -4497,26 +4497,26 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim fec As Date
 
     On Error GoTo EDatosOK
 
     DatosOk = False
     
-    b = CompForm(Me, 1) 'Comprobar formato datos ok
-    If Not b Then Exit Function
+    B = CompForm(Me, 1) 'Comprobar formato datos ok
+    If Not B Then Exit Function
        
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then B = False
     End If
-    If Not b Then Exit Function
+    If Not B Then Exit Function
     
 
 
 
     
-    DatosOk = b
+    DatosOk = B
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
@@ -4793,18 +4793,18 @@ End Function
 '    MuestraError Err.Number, "Insertar/Modificar Direcciones de envio" & vbCrLf & Err.Description
 'End Function
 
-Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdRegresar.visible = b
+Private Sub PonerBotonCabecera(B As Boolean)
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "&Cabecera"
-    If b Then
+    If B Then
         cmdRegresar.Cancel = True
     Else
         cmdCancelar.Cancel = True
     End If
         
-    If b Then
+    If B Then
         
 '        If Modo = 5 Then
 '            Me.lblIndicador.Caption = "Lineas Detalle"
@@ -4859,10 +4859,10 @@ End Sub
 
 
 Private Sub PosicionarData()
-Dim Indicador As String, cad As String
+Dim Indicador As String, Cad As String
 
-    cad = "(codclien=" & Val(Text1(0).Text) & ")"
-    If SituarData(data1, cad, Indicador) Then
+    Cad = "(codclien=" & Val(Text1(0).Text) & ")"
+    If SituarData(Data1, Cad, Indicador) Then
 '       PonerModo 2
        lblIndicador.Caption = Indicador
     Else
@@ -5010,7 +5010,7 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
             If Modo <> 2 Then Exit Sub
-            If data1.Recordset.EOF Then Exit Sub
+            If Data1.Recordset.EOF Then Exit Sub
             
             PasarACliente
 '        Case 11, 12
@@ -5208,7 +5208,7 @@ Dim bs As Byte
 End Sub
 
 Private Sub CargaDatosLWcrm2()
-Dim cad As String
+Dim Cad As String
 Dim RS As ADODB.Recordset
 Dim IT As ListItem
 Dim ElIcono As Integer
@@ -5243,9 +5243,9 @@ Dim Reemplazar As Boolean
 '        BuscaChekc = "fechora"
     Case 1
         'Llamadas
-        cad = "select fechora ,usuario,'' nomtraba ,observaciones,date_format(fechora,""%Y%m%d%H%i%s"") from"
-        cad = cad & " scrmaccionclipot "   'left join straba on scrmacciones.codtraba=straba.codtraba "
-        cad = cad & " WHERE scrmaccionclipot.tipo=1  and codclipot= " & data1.Recordset!codClien   '2 DE historial
+        Cad = "select fechora ,usuario,'' nomtraba ,observaciones,date_format(fechora,""%Y%m%d%H%i%s"") from"
+        Cad = Cad & " scrmaccionclipot "   'left join straba on scrmacciones.codtraba=straba.codtraba "
+        Cad = Cad & " WHERE scrmaccionclipot.tipo=1  and codclipot= " & Data1.Recordset!codClien   '2 DE historial
         GroupBy = ""
         BuscaChekc = "fechora"
 
@@ -5287,9 +5287,9 @@ Dim Reemplazar As Boolean
 '
     Case 6
         'Historial
-        cad = "select fechora ,usuario,'' nomtraba ,observaciones,date_format(fechora,""%Y%m%d%H%i%s"") from"
-        cad = cad & " scrmaccionclipot "   'left join straba on scrmacciones.codtraba=straba.codtraba "
-        cad = cad & " WHERE scrmaccionclipot.tipo=2  and codclipot= " & data1.Recordset!codClien   '2 DE historial
+        Cad = "select fechora ,usuario,'' nomtraba ,observaciones,date_format(fechora,""%Y%m%d%H%i%s"") from"
+        Cad = Cad & " scrmaccionclipot "   'left join straba on scrmacciones.codtraba=straba.codtraba "
+        Cad = Cad & " WHERE scrmaccionclipot.tipo=2  and codclipot= " & Data1.Recordset!codClien   '2 DE historial
         GroupBy = ""
         BuscaChekc = "fechora"
     End Select
@@ -5298,11 +5298,11 @@ Dim Reemplazar As Boolean
     
     
     'El group by
-    If GroupBy <> "" Then cad = cad & " GROUP BY " & GroupBy
+    If GroupBy <> "" Then Cad = Cad & " GROUP BY " & GroupBy
     
     'El ORDER BY
-    cad = cad & " ORDER BY " & BuscaChekc
-    If Kopc <> 4 Then cad = cad & " DESC"
+    Cad = Cad & " ORDER BY " & BuscaChekc
+    If Kopc <> 4 Then Cad = Cad & " DESC"
 
     
     BuscaChekc = ""
@@ -5312,10 +5312,10 @@ Dim Reemplazar As Boolean
     Set RS = New ADODB.Recordset
     If Not ConexionConta Then
         'Conn  ariges
-        RS.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Else
         'Va contra la contabilidad  connconta
-        RS.Open cad, ConnConta, adOpenKeyset, adLockPessimistic, adCmdText
+        RS.Open Cad, ConnConta, adOpenKeyset, adLockPessimistic, adCmdText
     End If
     While Not RS.EOF
         If Kopc <> 3 Then
@@ -5348,22 +5348,22 @@ Dim Reemplazar As Boolean
                                                 
                             Reemplazar = False
                             'Cad = RS.Fields(NumRegElim - 1)
-                            cad = DBLetMemo(RS.Fields(NumRegElim - 1))
+                            Cad = DBLetMemo(RS.Fields(NumRegElim - 1))
                             'no TIENE FORMATO. sEGUN LO QUE SEA puedo hacer unas cosas u otras
                             If NumRegElim = 4 And (Kopc = 1 Or Kopc = 6) Then Reemplazar = True
                             'para las observaciones de la reclamacion tb quito los vbcrlf
                             If NumRegElim = 3 And Kopc = 5 Then Reemplazar = True
                             
                             'Medio
-                            If NumRegElim = 3 And Kopc = 0 Then DevuelveMedio cad
+                            If NumRegElim = 3 And Kopc = 0 Then DevuelveMedio Cad
                             If NumRegElim = 3 And Kopc = 4 Then Reemplazar = True
                             If NumRegElim = 3 And Kopc = 4 Then Reemplazar = True
                             
                             If Reemplazar Then
-                                cad = Replace(cad, vbCrLf, " ")
-                                cad = Replace(cad, vbTab, "   ")
+                                Cad = Replace(Cad, vbCrLf, " ")
+                                Cad = Replace(Cad, vbTab, "   ")
                             End If
-                            IT.SubItems(NumRegElim - 1) = cad
+                            IT.SubItems(NumRegElim - 1) = Cad
                         
                             
                             
@@ -5442,14 +5442,14 @@ ECargaDatosLW:
     
 End Sub
 
-Private Sub DevuelveMedio(ByRef cad As String)
+Private Sub DevuelveMedio(ByRef Cad As String)
     'pendiente,en curso finalizada
-    If cad = "0" Then
-        cad = "Pendiente"
-    ElseIf cad = "1" Then
-        cad = "En curso"
+    If Cad = "0" Then
+        Cad = "Pendiente"
+    ElseIf Cad = "1" Then
+        Cad = "En curso"
     Else
-        cad = "Finalizada"
+        Cad = "Finalizada"
     End If
 End Sub
 
@@ -5493,7 +5493,7 @@ Private Sub LanzarProgramaEmails()
     '    miRsAux.Close
     'End If
     
-    BuscaChekc = vUsu.CadenaConexion & "|" & data1.Recordset!codClien & "|" & CStr(data1.Recordset!NomClien) & "||||" & BuscaChekc
+    BuscaChekc = vUsu.CadenaConexion & "|" & Data1.Recordset!codClien & "|" & CStr(Data1.Recordset!NomClien) & "||||" & BuscaChekc
     
     Shell App.Path & "\AriOutlook.exe " & BuscaChekc, vbNormalFocus
     
@@ -5605,20 +5605,20 @@ End Sub
 
 
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 
     ModificaLineas = xModo
     '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN (se añade modo 8)
-    b = Modo = 7 And (ModificaLineas = 1 Or ModificaLineas = 2) 'Insertar o Modificar Lineas
+    B = Modo = 7 And (ModificaLineas = 1 Or ModificaLineas = 2) 'Insertar o Modificar Lineas
 
 
     DeseleccionaGrid Me.DataGrid1
     
     txtauxDC(0).Height = DataGrid1.RowHeight
-    txtauxDC(0).visible = b
+    txtauxDC(0).visible = B
     txtauxDC(0).Top = alto
     txtauxDC(1).Height = DataGrid1.RowHeight
-    txtauxDC(1).visible = b
+    txtauxDC(1).visible = B
     txtauxDC(1).Top = alto
     SituarCboCargo
 End Sub
@@ -5720,7 +5720,7 @@ End Sub
 
 Private Sub BotonEliminarLineaContacto()
 'Eliminar una linea De ArticulosxAlmacen
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 
     If data4.Recordset.EOF Then Exit Sub
@@ -5733,12 +5733,12 @@ Dim i As Integer
     ModificaLineas = 3 'Eliminar
     
     
-    cad = "¿Seguro que desea eliminar el contacto?"
-    cad = cad & vbCrLf & "Nombre:  " & data4.Recordset!Nombre
-    cad = cad & vbCrLf & "Departamento:  " & DBLet(data4.Recordset!Dpto, "T")
+    Cad = "¿Seguro que desea eliminar el contacto?"
+    Cad = Cad & vbCrLf & "Nombre:  " & data4.Recordset!Nombre
+    Cad = Cad & vbCrLf & "Departamento:  " & DBLet(data4.Recordset!Dpto, "T")
     
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass

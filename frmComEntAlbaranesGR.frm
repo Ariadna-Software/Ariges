@@ -3218,6 +3218,8 @@ Dim precioUC As Currency
 Dim FechaUltCompra As Date
 Dim EnPromocionOPrecioEspecial As String
 Dim ParaElMargen As Currency
+Dim numPedV As String
+Dim EsDeVarios As Boolean
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -3341,7 +3343,7 @@ Dim ParaElMargen As Currency
                 End If
                 
             ElseIf ModificaLineas = 2 Then 'MODIFICAR lineas
-                If DatosOkLinea() Then
+                If DatosOkLinea(EsDeVarios) Then
                     If ModificarLinea Then
                         
                         
@@ -3394,6 +3396,29 @@ Dim ParaElMargen As Currency
                             EnPromocionOPrecioEspecial = ""
                             
                             
+                            
+                            If vParamAplic.NumeroInstalacion = vbHerbelca And EsDeVarios Then
+                                'Ha cambiado el precio.
+                                ' si tiene numpedv --> buscamos
+                                numPedV = ObtenerWhereCP(False) & " and numlinea=" & Data2.Recordset!numlinea & " AND 1 "
+                                numPedV = Replace(numPedV, NombreTabla, NomTablaLineas)
+                                numPedV = DevuelveDesdeBD(conAri, "numpedv", NomTablaLineas, numPedV, "1")
+                                If numPedV <> "" Then
+                                    'Ajustamos costes en lineas
+                                    ' Viene de un pedido de proveedor que se creo desde pedido cliente
+                                    ' Vamos a buscar albanran / factura de ese ped prov, codartic
+                                    ' Si solo hay UNO-> update
+                                    'Si hay mas de uno - mostrar para que seleccione cual es
+                                    
+                                    Me.lblIndicador.Caption = "Buscar costes vta"
+                                    Me.lblIndicador.Refresh
+                                    Screen.MousePointer = vbHourglass
+                                    AjustarCosteVenta numPedV, Round2(CCur(txtAux(7).Text) / CCur(txtAux(3).Text), 4)
+                                    
+                                    
+                                End If
+                                
+                            End If
                         End If
                         
                         NumRegElim = Data2.Recordset!numlinea
@@ -3471,7 +3496,7 @@ Dim B As Boolean
         'seleccionar todas las lineas de ese albaran para actualizar la fecha (slialp)
         SQL = "SELECT * FROM " & NomTablaLineas & " WHERE numalbar=" & DBSet(Data1.Recordset!Numalbar, "T")
         SQL = SQL & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
+        SQL = SQL & " AND codprove=" & Data1.Recordset!CodProve
         
         Set RS = New ADODB.Recordset
         RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -3497,7 +3522,7 @@ Dim B As Boolean
         If vParamAplic.ManipuladorFitosanitarios2 Then
             SQL = " Select * from " & NomTablaLineas & " WHERE numalbar = " & DBSet(Data1.Recordset!Numalbar, "T")
             SQL = SQL & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-            SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
+            SQL = SQL & " AND codprove=" & Data1.Recordset!CodProve
             
             
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -3525,14 +3550,14 @@ Dim B As Boolean
         'Eliminamos las lineas que tenia ese albaran (slialp) para volverlas a insertar con la fecha nueva
         SQL = "DELETE from slialp WHERE numalbar = " & DBSet(Data1.Recordset!Numalbar, "T")
         SQL = SQL & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
+        SQL = SQL & " AND codprove=" & Data1.Recordset!CodProve
         conn.Execute SQL
         
         'Actualizamos la fecha en la cabecera (scaalp)
         SQL = "UPDATE scaalp SET fechaalb = " & DBSet(Text1(1).Text, "F")
         SQL = SQL & " WHERE numalbar = " & DBSet(Data1.Recordset!Numalbar, "T")
         SQL = SQL & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
+        SQL = SQL & " AND codprove=" & Data1.Recordset!CodProve
         conn.Execute SQL
         
         
@@ -3551,7 +3576,7 @@ Dim B As Boolean
         SQL = "UPDATE sserie SET fechacom=" & DBSet(Text1(1).Text, "F")
         SQL = SQL & " WHERE fechacom=" & DBSet(Data1.Recordset!FechaAlb, "F") & " AND "
         SQL = SQL & " numalbpr=" & DBSet(Data1.Recordset!Numalbar, "T")
-        SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
+        SQL = SQL & " AND codprove=" & Data1.Recordset!CodProve
         conn.Execute SQL
             
         
@@ -4171,7 +4196,7 @@ Dim i As Integer
     ElseIf cadSelAlbaranes <> "" Then
         CadenaConsulta = CadenaConsulta & " WHERE " & cadSelAlbaranes
     Else
-        CadenaConsulta = CadenaConsulta & " WHERE numalbar = -1"
+        CadenaConsulta = CadenaConsulta & " WHERE false"
     End If
     Data1.ConnectionString = conn
     Data1.RecordSource = CadenaConsulta
@@ -5124,7 +5149,7 @@ EDatosOK:
 End Function
 
 
-Private Function DatosOkLinea() As Boolean
+Private Function DatosOkLinea(ByRef EsArticuloVarios As Boolean) As Boolean
 Dim B As Boolean
 Dim i As Byte
 Dim cart As CArticulo
@@ -5170,6 +5195,7 @@ Dim DiferenciaCantidad As Currency
     'si el articulo tiene control de numero de lotes, el campo del lote será requerido
     Set cart = New CArticulo
     If cart.LeerDatos(txtAux(1).Text) Then
+        EsArticuloVarios = cart.EsDeVarios = 1
         If cart.TieneNumLote Then
             If Trim(Text2(17).Text) = "" Then
                 B = False
@@ -5394,7 +5420,7 @@ Dim ImpReciclado As Single
     vCStock.ComprobarFechaInventario True, ""
     
     
-    If DatosOkLinea() Then 'Lineas de Albaranes Proveedor
+    If DatosOkLinea(False) Then 'Lineas de Albaranes Proveedor
          
         
         'Inserta en tabla "slialp"
@@ -6229,7 +6255,7 @@ End Sub
 Private Sub ObtenerPrecioCompra()
 Dim vPrecio As CPreciosCom
 Dim Cad As String
-Dim aux2 As String
+Dim Aux2 As String
     On Error GoTo EPrecios
     
     Set vPrecio = New CPreciosCom
@@ -6250,11 +6276,11 @@ Dim aux2 As String
         
             vPrecio.CodigoArtic = txtAux(1).Text
             vPrecio.CodigoProve = Text1(4).Text
-            Cad = vPrecio.ObtenerDescuentos2(Text1(1).Text, aux2)
+            Cad = vPrecio.ObtenerDescuentos2(Text1(1).Text, Aux2)
             If Cad = "" Then Cad = "0"
             txtAux(5).Text = Cad
-            If aux2 = "" Then aux2 = "0"
-            txtAux(6).Text = aux2
+            If Aux2 = "" Then Aux2 = "0"
+            txtAux(6).Text = Aux2
             
             'txtAux(5).Text = "0"
             'txtAux(6).Text = "0"
@@ -6316,7 +6342,7 @@ Dim SQL As String
             If B Then
                 SQL = "DELETE FROM sserie WHERE numalbpr=" & DBSet(Data1.Recordset!Numalbar, "T")
                 SQL = SQL & " AND fechacom=" & DBSet(Data1.Recordset!FechaAlb, "F")
-                SQL = SQL & " AND codprove=" & Data1.Recordset!Codprove
+                SQL = SQL & " AND codprove=" & Data1.Recordset!CodProve
                 SQL = SQL & " AND (isnull(numfactu) and isnull(numalbar))"
                 conn.Execute SQL
             End If
@@ -6416,7 +6442,7 @@ Dim SQL As String
     If enlaza Then
         SQL = SQL & " " & ObtenerWhereCP(True)
     Else
-        SQL = SQL & " WHERE numalbar = -1"
+        SQL = SQL & " WHERE false "
     End If
     SQL = SQL & " Order by numalbar, fechaalb, codprove, numlinea"
     SQL = Replace(SQL, NombreTabla, NomTablaLineas)
@@ -7116,21 +7142,21 @@ End Function
 
 
 
-Private Sub PonerDatosProveedor(Codprove As String, Optional nifProve As String)
+Private Sub PonerDatosProveedor(CodProve As String, Optional nifProve As String)
 Dim vProve As CProveedor
 Dim Observaciones As String
     
     On Error GoTo EPonerDatos
     
-    If Codprove = "" Then
+    If CodProve = "" Then
         LimpiarDatosProve
         Exit Sub
     End If
 
     Set vProve = New CProveedor
     'si se ha modificado el proveedor volver a cargar los datos
-    If vProve.Existe(Codprove) Then
-        If vProve.LeerDatos(Codprove) Then
+    If vProve.Existe(CodProve) Then
+        If vProve.LeerDatos(CodProve) Then
             'NUEVO. Situacion proveedor
             If vProve.ProveedorBloqueado Then
                 LimpiarDatosProve
@@ -7144,7 +7170,7 @@ Dim Observaciones As String
         
             If Modo = 4 And EsDeVarios Then 'Modificar
                 'si no se ha modificado el proveedor no hacer nada
-                If CLng(Text1(4).Text) = CLng(Data1.Recordset!Codprove) Then
+                If CLng(Text1(4).Text) = CLng(Data1.Recordset!CodProve) Then
                     Set vProve = Nothing
                     Exit Sub
                 End If
@@ -7476,12 +7502,12 @@ Dim MenError As String
     B = ComprobarCambioFecha
                 
     If B Then
-        If (CDate(Text1(30).Text) <> CDate(Data1.Recordset!fentrada)) Then
+        If (CDate(Text1(30).Text) <> CDate(Data1.Recordset!Fentrada)) Then
             'Actualizamos la fecha en la tabla smoval
             MenError = "UPDATE smoval SET fechamov=" & DBSet(Text1(30).Text, "F")
             MenError = MenError & " WHERE document = " & DBSet(Data1.Recordset!Numalbar, "T")
-            MenError = MenError & " AND fechamov=" & DBSet(Data1.Recordset!fentrada, "F")
-            MenError = MenError & " AND codigope=" & Data1.Recordset!Codprove
+            MenError = MenError & " AND fechamov=" & DBSet(Data1.Recordset!Fentrada, "F")
+            MenError = MenError & " AND codigope=" & Data1.Recordset!CodProve
             MenError = MenError & " AND detamovi='" & CodTipoMov & "'"
             If Not ejecutar(MenError, True) Then B = False
                 
@@ -7840,7 +7866,7 @@ Private Function SituarData() As Boolean
     'SQL = SQL & "' and " & NombreTabla & ".codprove=" & Val(Text1(4).Text)
     
     While Not Data1.Recordset.EOF
-        If Val(Data1.Recordset!Codprove) = Val(Text1(4).Text) Then
+        If Val(Data1.Recordset!CodProve) = Val(Text1(4).Text) Then
             If Data1.Recordset!Numalbar = Text1(0).Text Then
                 If Format(Data1.Recordset!FechaAlb, "dd/mm/yyyy") = Text1(1).Text Then
                     Me.lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -8099,7 +8125,7 @@ Dim SQL As String
     SQL = ObtenerWhereCP(False)
         
     frmComFacturarGR.CadenaAlbaran = SQL
-    frmComFacturarGR.Codprove = Val(Text1(4).Text)
+    frmComFacturarGR.CodProve = Val(Text1(4).Text)
     frmComFacturarGR.Show vbModal
     
     SQL = ObtenerWhereCP(False)
@@ -8118,4 +8144,81 @@ Dim SQL As String
     End If
     
     
+End Sub
+
+
+Private Sub AjustarCosteVenta(NumeroPedido As String, PrecioA_Asjustar As Currency)
+Dim TieneLineas As Byte '0.- NO   1.- pedidos    +10 albaranes   +100 facturas
+Dim SoloUno As Byte   '1 solo un pedido   10 solo un albaran  100 solo una factura
+Dim Cad As String
+
+    
+    TieneLineas = 0
+    SoloUno = 0
+    
+    'Pedidos   SLIPRE no lleva preciouc ni nada de eso.
+    'ejempl: select count(*) from scaped,sliped where scaped.numpedcl=sliped.numpedcl and  scaped.numpedcl=275718 and codartic='02000471'
+    Cad = " scaped.numpedcl=sliped.numpedcl and  scaped.numpedcl=" & NumeroPedido & " and codartic"
+    Cad = DevuelveDesdeBD(conAri, "count(*)", "scaped,sliped", Cad, txtAux(1).Text, "T")
+    If Val(Cad) > 0 Then
+        TieneLineas = 1
+        If Val(Cad) = 1 Then
+            SoloUno = 1
+            CadenaDesdeOtroForm = "UPDATE scaped,sliped set ##### scaped.numpedcl=sliped.numpedcl"
+        End If
+    End If
+
+    'Albaranes
+    'ejemplo   select count(*) from scaalb, slialb where scaalb.numalbar=slialb.numalbar and scaalb.numpedcl=275718  and codartic='02000471'
+     Cad = " scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar and  scaalb.numpedcl=" & NumeroPedido & " and codartic"
+     Cad = DevuelveDesdeBD(conAri, "count(*)", "scaalb, slialb", Cad, txtAux(1).Text, "T")
+    If Val(Cad) > 0 Then
+        TieneLineas = TieneLineas + 10
+        If Val(Cad) = 1 Then
+            SoloUno = SoloUno + 10
+            CadenaDesdeOtroForm = "UPDATE scaalb,slialb set ##### scaalb.codtipom=slialb.codtipom and scaalb.numalbar=slialb.numalbar"
+        End If
+    End If
+    
+    'facturas
+    'ejemplo       select count(*) from scafac1, slifac where scafac1.codtipom=slifac.codtipom and scafac1.numfactu=slifac.numfactu and scafac1.fecfactu=slifac.fecfactu
+    '               and scafac1.codtipoa=slifac.codtipoa  and scafac1.numalbar=slifac.numalbar  and scafac1.numpedcl=275718  and codartic='02000471'
+    Cad = " scafac1.codtipom=slifac.codtipom and scafac1.numfactu=slifac.numfactu and scafac1.fecfactu=slifac.fecfactu"
+    Cad = Cad & " and scafac1.codtipoa=slifac.codtipoa  and scafac1.numalbar=slifac.numalbar"
+    Cad = Cad & " AND scafac1.numpedcl=" & NumeroPedido & " and codartic"
+    Cad = DevuelveDesdeBD(conAri, "count(*)", "scafac1, slifac", Cad, txtAux(1).Text, "T")
+    If Val(Cad) > 0 Then
+        TieneLineas = TieneLineas + 100
+        If Val(Cad) = 1 Then
+            SoloUno = SoloUno + 100
+            Cad = " scafac1.codtipom=slifac.codtipom and scafac1.numfactu=slifac.numfactu and scafac1.fecfactu=slifac.fecfactu"
+            Cad = Cad & " and scafac1.codtipoa=slifac.codtipoa  and scafac1.numalbar=slifac.numalbar"
+            CadenaDesdeOtroForm = "UPDATE scafac1,slifac set ##### " & Cad
+            
+        End If
+    End If
+    
+
+    If TieneLineas = 0 Then Exit Sub  'Vale, NADA a actualizar
+    
+    
+    If SoloUno = 1 Or SoloUno = 10 Or SoloUno = 100 Then
+        'SOLO hay una linea en el pedido / albaran / factura
+        '   actualizamos directamente
+        CadenaDesdeOtroForm = CadenaDesdeOtroForm & " and  numpedcl=" & NumeroPedido & " and codartic =" & DBSet(txtAux(1).Text, "T")
+        CadenaDesdeOtroForm = Replace(CadenaDesdeOtroForm, "#####", "precoste = " & DBSet(PrecioA_Asjustar, "N") & " WHERE ")
+        ejecutar CadenaDesdeOtroForm, False
+    Else
+        'Mas de una linea. FORM y que seleccione
+        NumRegElim = TieneLineas
+        
+        frmListado5.OpcionListado = 46
+        frmListado5.OtrosDatos = NumeroPedido & "|" & txtAux(1).Text & "|" & DBSet(PrecioA_Asjustar, "N") & "|"
+        frmListado5.Show vbModal
+        
+        
+        
+    End If
+    CadenaDesdeOtroForm = ""
+
 End Sub

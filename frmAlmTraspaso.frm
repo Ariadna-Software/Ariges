@@ -1217,6 +1217,31 @@ Private Sub cmdRegresar_Click()
 End Sub
 
 
+Private Sub DataGrid1_DblClick()
+
+    
+    If Modo <> 2 Then Exit Sub
+    
+    
+    
+    ' premp preve preuc
+    If DBLet(Data2.Recordset!premp, "N") <> 0 Then davidCodtipom = davidCodtipom & " Precio medio ponderado = " & Format(Data2.Recordset!premp, FormatoPrecio) & vbCrLf
+    If DBLet(Data2.Recordset!preUC, "N") <> 0 Then davidCodtipom = davidCodtipom & " Precio última compra   = " & Format(Data2.Recordset!preUC, FormatoPrecio) & vbCrLf
+    If DBLet(Data2.Recordset!preve, "N") <> 0 Then davidCodtipom = davidCodtipom & " Precio venta(artículo) = " & Format(Data2.Recordset!preve, FormatoPrecio) & vbCrLf
+    
+    If davidCodtipom = "" Then davidCodtipom = "***   Ningun precio guardado **"
+    
+    If EsHistorico Then
+        davidCodtipom = "Precio hco: " & vbCrLf & vbCrLf & davidCodtipom
+    Else
+        davidCodtipom = "Precio actual: " & vbCrLf & vbCrLf & davidCodtipom
+    End If
+    
+    MsgBox davidCodtipom, vbExclamation
+    
+    davidCodtipom = ""
+End Sub
+
 Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
     If Modo = 5 And KeyAscii = 27 Then 'ESC 'Modo Lineas
         cmdRegresar_Click
@@ -1368,13 +1393,13 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
 Dim SQL As String
 
     On Error GoTo ECarga
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
     SQL = MontaSQLCarga(enlaza)
     CargaGridGnral DataGrid1, Me.Data2, SQL, False
@@ -1385,6 +1410,11 @@ Dim SQL As String
       
     DataGrid1.Columns(0).visible = False 'Cod. trasp
     DataGrid1.Columns(1).visible = False 'Numlinea
+    
+    'Para ocultarlas rapido
+    DataGrid1.Columns(6).visible = False 'Numlinea
+    DataGrid1.Columns(7).visible = False 'Numlinea
+    DataGrid1.Columns(8).visible = False 'Numlinea
     
     i = 2
     'Cod. Artículo
@@ -1408,11 +1438,15 @@ Dim SQL As String
     DataGrid1.Columns(i).Caption = "Observaciones"
     DataGrid1.Columns(i).Width = 5300
        
+       
+       
+       
+       
     For i = 0 To DataGrid1.Columns.Count - 1
         DataGrid1.Columns(i).AllowSizing = False
     Next i
        
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     DataGrid1.ScrollBars = dbgAutomatic
     
     
@@ -1498,10 +1532,10 @@ End Sub
 
 Private Sub frmA_DatoSeleccionado(CadenaSeleccion As String)
 'Almacenes Propios
-Dim indice As Byte
-    indice = CByte(Me.imgBuscar(0).Tag)
-    Text1(indice + 2).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
-    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2)
+Dim Indice As Byte
+    Indice = CByte(Me.imgBuscar(0).Tag)
+    Text1(Indice + 2).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmArt_DatoSeleccionado(CadenaSeleccion As String)
@@ -1546,10 +1580,10 @@ End Sub
 
 Private Sub frmT_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento de Trabajadores
-Dim indice As Byte
-    indice = 4
-    Text1(indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
-    Text2(indice - 2).Text = RecuperaValor(CadenaSeleccion, 2)
+Dim Indice As Byte
+    Indice = 4
+    Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "0000")
+    Text2(Indice - 2).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVarN_DatoSeleccionado(CadenaSeleccion As String)
@@ -1612,17 +1646,17 @@ Private Sub imgBuscar_Click(Index As Integer)
 End Sub
 
 Private Sub imgFecha_Click(Index As Integer)
-Dim indice As Byte
+Dim Indice As Byte
 
    Screen.MousePointer = vbHourglass
    imgFecha(0).Tag = Index
    Set frmF = New frmCal
    frmF.Fecha = Now
    
-   indice = 1
+   Indice = 1
    
-   PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmF.Fecha = CDate(Text1(indice).Text)
+   PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmF.Fecha = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
@@ -1702,17 +1736,17 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYFecha2(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha2(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFecha_Click (indice)
+    imgFecha_Click (Indice)
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYBusqueda2(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda2(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
     cmdAux_Click
 End Sub
@@ -1862,7 +1896,7 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
     'Actualiza Iconos Insertar,Modificar,Eliminar
@@ -1874,14 +1908,14 @@ Dim NumReg As Byte
 
     'Modo 2. Hay datos y estamos visualizandolos
     '-------------------------------------------
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     'Poner Flechas de desplazamiento visibles
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
     'DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
     
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
@@ -1895,16 +1929,16 @@ Dim NumReg As Byte
     'Modo 1:Busqueda / Modo 3: Insertar / Modo 4: Modificar
     '-------------------------------------------------------
     'b = (Modo = 3 Or Modo = 4 Or Modo = 1)
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     
     For i = 0 To Me.imgFecha.Count - 1
-        Me.imgFecha(i).Enabled = b
+        Me.imgFecha(i).Enabled = B
     Next i
     
     For i = 0 To Me.imgBuscar.Count - 1
-        If i <> 3 Then Me.imgBuscar(i).Enabled = b
+        If i <> 3 Then Me.imgBuscar(i).Enabled = B
     Next i
     
     If vParamAplic.NumeroInstalacion = vbHerbelca Then
@@ -1934,7 +1968,7 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
 Dim bAux As Boolean
 
@@ -1949,32 +1983,32 @@ Dim bAux As Boolean
     Me.mnBarra2.visible = Not EsHistorico
     
     If Not EsHistorico Then
-         b = (Modo = 2) Or (Modo = 5)
+         B = (Modo = 2) Or (Modo = 5)
         'Insertar
-        Toolbar1.Buttons(1).Enabled = (b Or Modo = 0)
-        Me.mnNuevo.Enabled = (b Or Modo = 0)
+        Toolbar1.Buttons(1).Enabled = (B Or Modo = 0)
+        Me.mnNuevo.Enabled = (B Or Modo = 0)
         'Modificar
-        Toolbar1.Buttons(2).Enabled = b
-        Me.mnModificar.Enabled = b
+        Toolbar1.Buttons(2).Enabled = B
+        Me.mnModificar.Enabled = B
         'eliminar
-        Toolbar1.Buttons(3).Enabled = b
-        Me.mnEliminar.Enabled = b
+        Toolbar1.Buttons(3).Enabled = B
+        Me.mnEliminar.Enabled = B
         
         '--------------------------------
-        b = (Modo = 2)
+        B = (Modo = 2)
         'Actualizar
-        Toolbar5.Buttons(1).Enabled = b
+        Toolbar5.Buttons(1).Enabled = B
         'Imprimir
-        Toolbar1.Buttons(8).Enabled = b
+        Toolbar1.Buttons(8).Enabled = B
             
         '-------------------------------
-        b = (Modo >= 3) Or Modo = 1
+        B = (Modo >= 3) Or Modo = 1
         'Buscar
-        Toolbar1.Buttons(5).Enabled = Not b
-        Me.mnBuscar.Enabled = Not b
+        Toolbar1.Buttons(5).Enabled = Not B
+        Me.mnBuscar.Enabled = Not B
         'VerTodos
-        Toolbar1.Buttons(6).Enabled = Not b
-        Me.mnVerTodos.Enabled = Not b
+        Toolbar1.Buttons(6).Enabled = Not B
+        Me.mnVerTodos.Enabled = Not B
     Else
         'Actualizar
         FrameBotonGnral2.Enabled = False
@@ -1982,14 +2016,14 @@ Dim bAux As Boolean
         FrameDesplazamiento.Left = FrameBotonGnral2.Left
     End If
     
-    b = (Modo = 2) And Not EsHistorico
+    B = (Modo = 2) And Not EsHistorico
     For i = 0 To ToolAux.Count - 1
-        ToolAux(i).Buttons(1).Enabled = b
-        bAux = (b And Me.Data2.Recordset.RecordCount > 0)
+        ToolAux(i).Buttons(1).Enabled = B
+        bAux = (B And Me.Data2.Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     
-        ToolAux(i).Buttons(5).Enabled = b
+        ToolAux(i).Buttons(5).Enabled = B
     Next i
 End Sub
 
@@ -2038,13 +2072,21 @@ On Error GoTo EMontaSQL
 
     SQL = "SELECT " & tabla & ".codtrasp, "
     SQL = SQL & tabla & ".numlinea, " & tabla & ".codartic, Articulos.nomartic, "
-    SQL = SQL & tabla & ".cantidad, " & tabla & ".observa2 "
+    SQL = SQL & tabla & ".cantidad, " & tabla & ".observa2 , "
+    
+    
+    If EsHistorico Then
+        SQL = SQL & " preciomphco premp, preciopvphco preve ,preciouchco preuc"
+    Else
+        SQL = SQL & " preciomp premp, preciove preve ,preciouc preuc"
+    End If
+    
     SQL = SQL & " FROM ((" & tabla & " LEFT JOIN sartic AS Articulos ON " & tabla & ".codartic ="
     SQL = SQL & " Articulos.codartic))"
     If enlaza Then
         SQL = SQL & ObtenerWhereCP(True)  '" WHERE codtrasp = " & Data1.Recordset!codtrasp
     Else
-        SQL = SQL & " WHERE codtrasp = -1"
+        SQL = SQL & " WHERE false "
     End If
     SQL = SQL & " ORDER BY " & tabla & ".numlinea"
     MontaSQLCarga = SQL
@@ -2330,7 +2372,7 @@ End Sub
 
 Private Sub BotonCopiarLineas()
 Dim SQL As String
-Dim SQL2 As String
+Dim Sql2 As String
 Dim vCadena As String
 
 
@@ -2339,9 +2381,9 @@ Dim vCadena As String
     SQL = SQL & " inner join salmpr on schtra.almaorig = salmpr.codalmac) "
     SQL = SQL & " inner join salmpr dest on schtra.almadest = dest.codalmac "
     
-    SQL2 = " where fechatra >= " & DBSet(DateAdd("m", -1, Now), "F")
+    Sql2 = " where fechatra >= " & DBSet(DateAdd("m", -1, Now), "F")
 
-    If TotalRegistros(SQL & SQL2) = 0 Then
+    If TotalRegistros(SQL & Sql2) = 0 Then
         If TotalRegistros(SQL) = 0 Then
             MsgBox "No hay traspasos de almacén en el histórico"
             Exit Sub
@@ -2349,7 +2391,7 @@ Dim vCadena As String
             vCadena = SQL & "||0|"
         End If
     Else
-        vCadena = SQL & "|" & SQL2 & "|1|"
+        vCadena = SQL & "|" & Sql2 & "|1|"
     End If
 
     Movimiento = ""
@@ -2429,22 +2471,22 @@ End Function
 
 
 Private Function DatosOk(Optional cabecera As Boolean) As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
 
     'Comprobar que almacen origen y destino son distintos
     If Trim(Text1(2).Text) = Trim(Text1(3).Text) Then
         MsgBox "Almacen Origen y Destino no pueden ser el mismo.", vbExclamation
-        b = False
+        B = False
         Exit Function
     End If
     
-    If Not cabecera Then b = ComprobarStocksLineas
+    If Not cabecera Then B = ComprobarStocksLineas
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -2453,7 +2495,7 @@ Private Function ComprobarStocksLineas() As Boolean
 'Comprobar para todas las lineas del traspaso que:
 ' - todos los Artículos entan en el almacen origen
 ' - Comprobar que hay suficiente stock en el Almacen Origen de ese Articulo
-Dim b As Boolean
+Dim B As Boolean
 Dim RS As ADODB.Recordset
 Dim SQL As String
 
@@ -2470,15 +2512,15 @@ Dim SQL As String
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     'para cada linea comprabar stock del articulo en almacen
-    b = True
-    While Not RS.EOF And b
-        b = ComprobarStock(RS!codArtic, Data1.Recordset!almaorig, RS!cantidad, CodTipoMov)
+    B = True
+    While Not RS.EOF And B
+        B = ComprobarStock(RS!codArtic, Data1.Recordset!almaorig, RS!cantidad, CodTipoMov)
         RS.MoveNext
     Wend
     RS.Close
     Set RS = Nothing
     
-    ComprobarStocksLineas = b
+    ComprobarStocksLineas = B
     Exit Function
     '----
 
@@ -2502,32 +2544,32 @@ End Function
 
 
 Private Function DatosOkLinea() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOkLinea = False
-    b = True
+    B = True
         
     If txtAux(0).Text = "" Then
         MsgBox "El campo Cod. Artículo no puede ser nulo", vbExclamation
-        b = False
+        B = False
         Exit Function
     End If
         
     'Comprobamos el campo Cantidad
     If txtAux(2).Text = "" Then
          MsgBox "El campo Cantidad no puede ser nulo", vbExclamation, "Artículos"
-         b = False
+         B = False
     ElseIf Not IsNumeric(txtAux(2).Text) Then
         MsgBox "El campo Cantidad debe ser numérico", vbExclamation
-        b = False
+        B = False
     End If
-    If Not b Then
+    If Not B Then
         PonerFoco txtAux(2)
         Exit Function
     End If
     
     'b = ComprobarStock(txtAux(0).Text, txtAux(1).Text, txtAux(2).Text, CodTipoMov)
-    b = ComprobarStock(txtAux(0).Text, Text1(2).Text, txtAux(2).Text, CodTipoMov)
+    B = ComprobarStock(txtAux(0).Text, Text1(2).Text, txtAux(2).Text, CodTipoMov)
          
          
          
@@ -2535,17 +2577,17 @@ Dim b As Boolean
          
          
          
-    DatosOkLinea = b
+    DatosOkLinea = B
 End Function
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 On Error Resume Next
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdRegresar.visible = b
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
-    If b Then
+    If B Then
         Me.lblIndicador.Caption = "LINEAS DETALLE"
     Else
         Me.lblIndicador.Caption = ""
@@ -2622,7 +2664,7 @@ End Function
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 
@@ -3013,17 +3055,23 @@ Dim SQL As String
 Dim RS As ADODB.Recordset
 On Error GoTo EInsertarLineas
 
-    SQL = "SELECT codtrasp, numlinea, codartic, cantidad, observa2 from slitra "
+    'SQL = "SELECT codtrasp, numlinea, codartic, cantidad, observa2 from slitra "
+    'Diciembre 2021
+    SQL = "SELECT codtrasp, numlinea, slitra.codartic, cantidad, observa2,preciomp,preciouc,preciove "
+    SQL = SQL & " FROM slitra LEFT JOIN  sartic ON slitra.codartic=sartic.codartic"
+    
     SQL = SQL & ObtenerWhereCP(True)
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     RS.MoveFirst
     While Not RS.EOF
-        SQL = "INSERT INTO slhtra (codtrasp, fechamov, numlinea, codartic, cantidad, observa2)"
+        SQL = "INSERT INTO slhtra (codtrasp, fechamov, numlinea, codartic, cantidad, observa2, preciomphco ,preciopvphco ,preciouchco)"
         SQL = SQL & " VALUES (" & RS.Fields(0).Value & ", '" & Format(Data1.Recordset!fechatra, FormatoFecha) & "', "
         SQL = SQL & RS.Fields(1).Value & ", " & DBSet(RS.Fields(2).Value, "T") & ", "
-        SQL = SQL & DBSet(RS.Fields(3).Value, "N") & ", " & DBSet(RS.Fields(4).Value, "T") & ")"
+        SQL = SQL & DBSet(RS.Fields(3).Value, "N") & ", " & DBSet(RS.Fields(4).Value, "T") & ","
+        'Dicimebre 2021
+        SQL = SQL & DBSet(RS!PrecioMP, "N") & ", " & DBSet(RS!preciove, "N") & ", " & DBSet(RS!precioUC, "N") & ")"
         conn.Execute SQL
         RS.MoveNext
     Wend
@@ -3079,12 +3127,12 @@ Dim SQL As String
 End Function
 
 Public Sub ActualizarSituacionImpresion()
-Dim cad As String
+Dim Cad As String
 Dim Indicador As String
 On Error GoTo EImpresion
    
-        cad = "(codtrasp=" & Val(Text1(0).Text) & ")"
-        If SituarData(Data1, cad, Indicador) Then
+        Cad = "(codtrasp=" & Val(Text1(0).Text) & ")"
+        If SituarData(Data1, Cad, Indicador) Then
             If Modo <> 5 Then
                 PonerModo 2
             Else
@@ -3101,7 +3149,7 @@ End Sub
 
 
 Private Function InsertarMovimArticulos(MenError As String) As Boolean
-Dim SQL As String, cad As String
+Dim SQL As String, Cad As String
 Dim RS As ADODB.Recordset
 Dim vImporte As Single, vPrecioVenta As String
 Dim vTipoMov As CTiposMov
@@ -3121,14 +3169,14 @@ Dim bol As Boolean
         RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         While Not RS.EOF
              'Obtener el precio de venta del articulo, si tiene control de stock
-            cad = "ctrstock"
-            vPrecioVenta = DevuelveDesdeBDNew(conAri, "sartic", "preciomp", "codartic", RS.Fields!codArtic, "T", cad)
+            Cad = "ctrstock"
+            vPrecioVenta = DevuelveDesdeBDNew(conAri, "sartic", "preciomp", "codartic", RS.Fields!codArtic, "T", Cad)
             If vPrecioVenta <> "" Then
                 vImporte = Round2(RS.Fields!cantidad * CSng(vPrecioVenta), 2)
             Else
                 vImporte = 0
             End If
-            If Val(cad) = 1 Then
+            If Val(Cad) = 1 Then
                 'Insertar Movimiento de Salida en Almacen Origen
                 SQL = "INSERT INTO smoval (codartic, codalmac, fechamov, horamovi, tipomovi, detamovi, cantidad, impormov, codigope, letraser, document, numlinea) "
                 SQL = SQL & " VALUES (" & DBSet(RS.Fields!codArtic, "T") & ", " & RS.Fields!almaorig & ", '" & Format(RS.Fields!fechatra, "yyyy-mm-dd") & "', '"
@@ -3191,7 +3239,7 @@ End Sub
 Private Sub BotonImprimirHco()
 Dim indRPT As Byte
 Dim cadParam As String
-Dim cad As String
+Dim Cad As String
 Dim numParam As Byte
 Dim nomDocu As String
 
@@ -3214,9 +3262,9 @@ Dim nomDocu As String
             Else
                 'Se Llama desde dobleclick en frmAlmMovimArticulos
                 'o estamos en Historico
-                cad = "{schtra.codtrasp}= " & Data1.Recordset!codtrasp
-                cad = cad & " and {schtra.fechatra}= Date(" & Year(Data1.Recordset!fechatra) & "," & Month(Data1.Recordset!fechatra) & "," & Day(Data1.Recordset!fechatra) & ")" & ""
-                .FormulaSeleccion = cad
+                Cad = "{schtra.codtrasp}= " & Data1.Recordset!codtrasp
+                Cad = Cad & " and {schtra.fechatra}= Date(" & Year(Data1.Recordset!fechatra) & "," & Month(Data1.Recordset!fechatra) & "," & Day(Data1.Recordset!fechatra) & ")" & ""
+                .FormulaSeleccion = Cad
             End If
             .Show vbModal
         End With

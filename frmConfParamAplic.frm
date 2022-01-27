@@ -67,7 +67,7 @@ Begin VB.Form frmConfParamAplic
       Height          =   540
       Left            =   120
       TabIndex        =   110
-      Top             =   8430
+      Top             =   8520
       Width           =   3000
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -122,53 +122,6 @@ Begin VB.Form frmConfParamAplic
       TabIndex        =   109
       Top             =   8505
       Width           =   1065
-   End
-   Begin MSAdodcLib.Adodc Data1 
-      Height          =   330
-      Left            =   3240
-      Top             =   7920
-      Visible         =   0   'False
-      Width           =   2055
-      _ExtentX        =   3625
-      _ExtentY        =   582
-      ConnectMode     =   0
-      CursorLocation  =   3
-      IsolationLevel  =   -1
-      ConnectionTimeout=   15
-      CommandTimeout  =   30
-      CursorType      =   3
-      LockType        =   3
-      CommandType     =   8
-      CursorOptions   =   0
-      CacheSize       =   50
-      MaxRecords      =   0
-      BOFAction       =   0
-      EOFAction       =   0
-      ConnectStringType=   1
-      Appearance      =   1
-      BackColor       =   -2147483643
-      ForeColor       =   -2147483640
-      Orientation     =   0
-      Enabled         =   -1
-      Connect         =   ""
-      OLEDBString     =   ""
-      OLEDBFile       =   ""
-      DataSourceName  =   ""
-      OtherAttributes =   ""
-      UserName        =   ""
-      Password        =   ""
-      RecordSource    =   ""
-      Caption         =   "Adodc1"
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      _Version        =   393216
    End
    Begin TabDlg.SSTab SSTab1 
       Height          =   7275
@@ -245,190 +198,158 @@ Begin VB.Form frmConfParamAplic
       TabPicture(1)   =   "frmConfParamAplic.frx":0028
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Label1(86)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Frame2"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "FrameTelefoniaArtic"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "Frame9"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "Frame10"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "Frame12"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "Frame15"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).Control(7)=   "Text1(76)"
-      Tab(1).Control(7).Enabled=   0   'False
       Tab(1).ControlCount=   8
       TabCaption(2)   =   "Compras / Copias"
       TabPicture(2)   =   "frmConfParamAplic.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Label1(67)"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "imgBuscar(65)"
-      Tab(2).Control(1).Enabled=   0   'False
       Tab(2).Control(2)=   "imgayuda(6)"
-      Tab(2).Control(2).Enabled=   0   'False
       Tab(2).Control(3)=   "Label1(75)"
-      Tab(2).Control(3).Enabled=   0   'False
       Tab(2).Control(4)=   "Label1(87)"
-      Tab(2).Control(4).Enabled=   0   'False
       Tab(2).Control(5)=   "Label1(88)"
-      Tab(2).Control(5).Enabled=   0   'False
       Tab(2).Control(6)=   "Label1(89)"
-      Tab(2).Control(6).Enabled=   0   'False
       Tab(2).Control(7)=   "imgBuscar(79)"
-      Tab(2).Control(7).Enabled=   0   'False
       Tab(2).Control(8)=   "Frame3"
-      Tab(2).Control(8).Enabled=   0   'False
       Tab(2).Control(9)=   "Frame11"
-      Tab(2).Control(9).Enabled=   0   'False
       Tab(2).Control(10)=   "FrameNumCopias"
-      Tab(2).Control(10).Enabled=   0   'False
       Tab(2).Control(11)=   "Frame14"
-      Tab(2).Control(11).Enabled=   0   'False
       Tab(2).Control(12)=   "Frame4"
-      Tab(2).Control(12).Enabled=   0   'False
       Tab(2).Control(13)=   "Frame16"
-      Tab(2).Control(13).Enabled=   0   'False
       Tab(2).Control(14)=   "Text2(65)"
-      Tab(2).Control(14).Enabled=   0   'False
       Tab(2).Control(15)=   "Text1(65)"
-      Tab(2).Control(15).Enabled=   0   'False
       Tab(2).Control(16)=   "Text1(72)"
-      Tab(2).Control(16).Enabled=   0   'False
       Tab(2).Control(17)=   "FrameSepOfertas"
-      Tab(2).Control(17).Enabled=   0   'False
       Tab(2).Control(18)=   "Text1(77)"
-      Tab(2).Control(18).Enabled=   0   'False
       Tab(2).Control(19)=   "Text1(78)"
-      Tab(2).Control(19).Enabled=   0   'False
       Tab(2).Control(20)=   "Text1(79)"
-      Tab(2).Control(20).Enabled=   0   'False
       Tab(2).Control(21)=   "Text2(79)"
-      Tab(2).Control(21).Enabled=   0   'False
       Tab(2).ControlCount=   22
       TabCaption(3)   =   "Contabilidad "
       TabPicture(3)   =   "frmConfParamAplic.frx":0060
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Label1(15)"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "Label1(17)"
-      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).Control(2)=   "Label1(18)"
-      Tab(3).Control(2).Enabled=   0   'False
       Tab(3).Control(3)=   "Label1(19)"
-      Tab(3).Control(3).Enabled=   0   'False
       Tab(3).Control(4)=   "imgBuscar(39)"
-      Tab(3).Control(4).Enabled=   0   'False
       Tab(3).Control(5)=   "Label1(48)"
-      Tab(3).Control(5).Enabled=   0   'False
       Tab(3).Control(6)=   "imgBuscar(40)"
-      Tab(3).Control(6).Enabled=   0   'False
       Tab(3).Control(7)=   "Label2(7)"
-      Tab(3).Control(7).Enabled=   0   'False
       Tab(3).Control(8)=   "Label2(6)"
-      Tab(3).Control(8).Enabled=   0   'False
       Tab(3).Control(9)=   "Label1(49)"
-      Tab(3).Control(9).Enabled=   0   'False
       Tab(3).Control(10)=   "Label1(50)"
-      Tab(3).Control(10).Enabled=   0   'False
       Tab(3).Control(11)=   "imgBuscar(41)"
-      Tab(3).Control(11).Enabled=   0   'False
       Tab(3).Control(12)=   "Label1(52)"
-      Tab(3).Control(12).Enabled=   0   'False
       Tab(3).Control(13)=   "Label1(53)"
-      Tab(3).Control(13).Enabled=   0   'False
       Tab(3).Control(14)=   "imgBuscar(45)"
-      Tab(3).Control(14).Enabled=   0   'False
       Tab(3).Control(15)=   "Label1(47)"
-      Tab(3).Control(15).Enabled=   0   'False
       Tab(3).Control(16)=   "Label1(51)"
-      Tab(3).Control(16).Enabled=   0   'False
       Tab(3).Control(17)=   "Label1(58)"
-      Tab(3).Control(17).Enabled=   0   'False
       Tab(3).Control(18)=   "Label2(4)"
-      Tab(3).Control(18).Enabled=   0   'False
       Tab(3).Control(19)=   "imgBuscar(67)"
-      Tab(3).Control(19).Enabled=   0   'False
       Tab(3).Control(20)=   "Label1(72)"
-      Tab(3).Control(20).Enabled=   0   'False
       Tab(3).Control(21)=   "Label1(73)"
-      Tab(3).Control(21).Enabled=   0   'False
       Tab(3).Control(22)=   "imgBuscar(66)"
-      Tab(3).Control(22).Enabled=   0   'False
       Tab(3).Control(23)=   "Label1(74)"
-      Tab(3).Control(23).Enabled=   0   'False
       Tab(3).Control(24)=   "imgayuda(8)"
-      Tab(3).Control(24).Enabled=   0   'False
       Tab(3).Control(25)=   "imgayuda(9)"
-      Tab(3).Control(25).Enabled=   0   'False
       Tab(3).Control(26)=   "Text1(20)"
-      Tab(3).Control(26).Enabled=   0   'False
       Tab(3).Control(27)=   "Text1(21)"
-      Tab(3).Control(27).Enabled=   0   'False
       Tab(3).Control(28)=   "Text1(22)"
-      Tab(3).Control(28).Enabled=   0   'False
       Tab(3).Control(29)=   "Text1(23)"
-      Tab(3).Control(29).Enabled=   0   'False
       Tab(3).Control(30)=   "Text2(46)"
-      Tab(3).Control(30).Enabled=   0   'False
       Tab(3).Control(31)=   "Text1(46)"
-      Tab(3).Control(31).Enabled=   0   'False
       Tab(3).Control(32)=   "Text1(47)"
-      Tab(3).Control(32).Enabled=   0   'False
       Tab(3).Control(33)=   "Text2(47)"
-      Tab(3).Control(33).Enabled=   0   'False
       Tab(3).Control(34)=   "Text1(49)"
-      Tab(3).Control(34).Enabled=   0   'False
       Tab(3).Control(35)=   "Text1(48)"
-      Tab(3).Control(35).Enabled=   0   'False
       Tab(3).Control(36)=   "Text2(48)"
-      Tab(3).Control(36).Enabled=   0   'False
       Tab(3).Control(37)=   "cboObsFactura"
-      Tab(3).Control(37).Enabled=   0   'False
       Tab(3).Control(38)=   "Text2(52)"
-      Tab(3).Control(38).Enabled=   0   'False
       Tab(3).Control(39)=   "Text1(52)"
-      Tab(3).Control(39).Enabled=   0   'False
       Tab(3).Control(40)=   "Text1(50)"
-      Tab(3).Control(40).Enabled=   0   'False
       Tab(3).Control(41)=   "Frame8"
-      Tab(3).Control(41).Enabled=   0   'False
       Tab(3).Control(42)=   "Text2(70)"
-      Tab(3).Control(42).Enabled=   0   'False
       Tab(3).Control(43)=   "Text1(70)"
-      Tab(3).Control(43).Enabled=   0   'False
       Tab(3).Control(44)=   "chkContabIntraCom"
-      Tab(3).Control(44).Enabled=   0   'False
       Tab(3).Control(45)=   "Text2(71)"
-      Tab(3).Control(45).Enabled=   0   'False
       Tab(3).Control(46)=   "Text1(71)"
-      Tab(3).Control(46).Enabled=   0   'False
       Tab(3).Control(47)=   "CboModAnalitica"
-      Tab(3).Control(47).Enabled=   0   'False
       Tab(3).ControlCount=   48
       TabCaption(4)   =   "Internet"
       TabPicture(4)   =   "frmConfParamAplic.frx":007C
       Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "FrameEMail"
-      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).Control(1)=   "FrameSoporte"
-      Tab(4).Control(1).Enabled=   0   'False
       Tab(4).ControlCount=   2
       TabCaption(5)   =   "Datos Varios 2"
       TabPicture(5)   =   "frmConfParamAplic.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "Frame5"
+      Tab(5).Control(0)=   "Label1(91)"
       Tab(5).Control(0).Enabled=   0   'False
-      Tab(5).Control(1)=   "Frame7"
+      Tab(5).Control(1)=   "Label1(92)"
       Tab(5).Control(1).Enabled=   0   'False
-      Tab(5).ControlCount=   2
+      Tab(5).Control(2)=   "Label1(93)"
+      Tab(5).Control(2).Enabled=   0   'False
+      Tab(5).Control(3)=   "Frame5"
+      Tab(5).Control(3).Enabled=   0   'False
+      Tab(5).Control(4)=   "Frame7"
+      Tab(5).Control(4).Enabled=   0   'False
+      Tab(5).Control(5)=   "Text1(80)"
+      Tab(5).Control(5).Enabled=   0   'False
+      Tab(5).Control(6)=   "Text1(81)"
+      Tab(5).Control(6).Enabled=   0   'False
+      Tab(5).ControlCount=   7
       TabCaption(6)   =   "Disponible"
       TabPicture(6)   =   "frmConfParamAplic.frx":00B4
       Tab(6).ControlEnabled=   0   'False
       Tab(6).ControlCount=   0
+      Begin VB.TextBox Text1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   81
+         Left            =   -68880
+         TabIndex        =   291
+         Tag             =   "A|T|S|||spara1|RetoSumi|||"
+         Text            =   "Tex"
+         Top             =   6660
+         Width           =   1620
+      End
+      Begin VB.TextBox Text1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   80
+         Left            =   -72000
+         TabIndex        =   287
+         Tag             =   "A|T|S|||spara1|RetoVta|||"
+         Text            =   "Tex"
+         Top             =   6660
+         Width           =   1620
+      End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          BeginProperty Font 
@@ -3682,7 +3603,7 @@ Begin VB.Form frmConfParamAplic
             EndProperty
             Height          =   320
             Index           =   58
-            Left            =   2280
+            Left            =   3120
             MaxLength       =   4
             TabIndex        =   11
             Tag             =   "Dias de garantia de Reparacion|N|S|0|9999|spara1|diasgaranrepa|||"
@@ -5524,6 +5445,63 @@ Begin VB.Form frmConfParamAplic
          Top             =   480
          Width           =   645
       End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         Caption         =   "Aplicador"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Index           =   93
+         Left            =   -69840
+         TabIndex        =   290
+         Top             =   6720
+         Width           =   900
+      End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         Caption         =   "Venta "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
+         Index           =   92
+         Left            =   -72840
+         TabIndex        =   289
+         Top             =   6720
+         Width           =   660
+      End
+      Begin VB.Label Label1 
+         Caption         =   "R.E.T.O."
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   255
+         Index           =   91
+         Left            =   -74040
+         TabIndex        =   288
+         Top             =   6720
+         Width           =   975
+      End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   1
@@ -6216,6 +6194,52 @@ Begin VB.Form frmConfParamAplic
          Width           =   2940
       End
    End
+   Begin MSAdodcLib.Adodc data1 
+      Height          =   375
+      Left            =   1320
+      Top             =   8640
+      Width           =   1695
+      _ExtentX        =   2990
+      _ExtentY        =   661
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "Adodc1"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
       Enabled         =   0   'False
@@ -6545,7 +6569,7 @@ End Sub
 Private Sub cmdAceptar_Click()
 Dim actualiza As Boolean
 Dim kms As Currency
-
+Dim Aux As String
 
 
     If Modo = 4 Then 'MODIFICAR
@@ -6766,6 +6790,12 @@ Dim kms As Currency
 
 
             If actualiza Then  'Inserta o Modifica
+            
+                'Actualizo dos campos que no quiero PARAMETRO
+                Aux = "UPDATE spara1 SET RetoVta = " & DBSet(Text1(80).Text, "T")
+                Aux = Aux & " , RetoSumi =" & DBSet(Text1(81).Text, "T")
+                ejecutar Aux, True
+            
                 'Abrir la conexion a la conta q hemos modificado
                 CerrarConexionConta
                 If vParamAplic.NumeroConta <> 0 Then
@@ -7305,7 +7335,7 @@ Private Sub Text1_LostFocus(Index As Integer)
         Case 14
             'PonerFocoBtn Me.cmdAceptar
             
-        Case 15, 32, 53, 54, 64, 73, 75, 80, 81, 82  'cod. artic
+        Case 15, 32, 53, 54, 64, 73, 75
             Text2(Index).Text = PonerNombreDeCod(Text1(Index), conAri, "sartic", "nomartic", "codartic", "Articulo")
             If Text2(Index).Text = "" Then Text1(Index).Text = ""
         Case 22 'nº conta

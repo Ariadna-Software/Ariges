@@ -1199,13 +1199,13 @@ On Error GoTo Error1
                If DatosOk Then
                     If ModificaDesdeFormulario(Me, 1) Then
                         'Si me cambia el proveedor, entonces guardo el LOG
-                        If Val(DBLet(Data1.Recordset!Codprove, "N")) <> Val(Text1(14).Text) Then
+                        If Val(DBLet(Data1.Recordset!CodProve, "N")) <> Val(Text1(14).Text) Then
                                 'Ha cambiado el proveedor
                                 Set LOG = New cLOG
                                 
-                                CadenaConsulta2 = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", CStr(DBLet(Data1.Recordset!Codprove, "N")))
+                                CadenaConsulta2 = DevuelveDesdeBD(conAri, "nomprove", "sprove", "codprove", CStr(DBLet(Data1.Recordset!CodProve, "N")))
                                 
-                                CadenaConsulta2 = "Anterior: " & DBLet(Data1.Recordset!Codprove, "T") & " - " & CadenaConsulta2
+                                CadenaConsulta2 = "Anterior: " & DBLet(Data1.Recordset!CodProve, "T") & " - " & CadenaConsulta2
                                 CadenaConsulta2 = "Actual: " & Text1(14).Text & " - " & Text2(14).Text & vbCrLf & CadenaConsulta2
                                 CadenaConsulta2 = "[FLOTAS]" & vbCrLf & CadenaConsulta2
                                 LOG.Insertar 29, vUsu, CadenaConsulta2
@@ -1382,9 +1382,13 @@ Private Sub Form_Load()
     Data1.RecordSource = CadenaConsulta2
     Data1.Refresh
     CargaCboMarcas
-    
-    PonerModo 0
     CargaGrid False
+    If DatosADevolverBusqueda <> "" Then
+        PonerModo 1
+    Else
+        PonerModo 0
+    End If
+    
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -1962,13 +1966,29 @@ Dim SQL As String
     End If
     
     'En euler asiganmos a la tarea la matricula
-    SQL = DevuelveDesdeBD(conAri, "count(*)", "sreloj", "codflota", CStr(Data1.Recordset!codflota), "T")
-    If SQL = "" Then SQL = "0"
-    If Val(SQL) > 0 Then
-        MsgBox "Existen registros relacionados(" & SQL & ") en trabajos realizados", vbExclamation
-        Exit Sub
-    End If
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then
+        SQL = DevuelveDesdeBD(conAri, "count(*)", "scafac1", "notasportes", CStr(Data1.Recordset!codflota), "T")
+        If SQL = "" Then SQL = "0"
+        If Val(SQL) > 0 Then
+            MsgBox "Existen registros relacionados(" & SQL & ") en trabajos realizados", vbExclamation
+            Exit Sub
+        End If
+        SQL = DevuelveDesdeBD(conAri, "count(*)", "scaalb", "notasportes", CStr(Data1.Recordset!codflota), "T")
+        If SQL = "" Then SQL = "0"
+        If Val(SQL) > 0 Then
+            MsgBox "Existen registros relacionados(" & SQL & ") en trabajos realizados", vbExclamation
+            Exit Sub
+        End If
     
+    
+    Else
+        SQL = DevuelveDesdeBD(conAri, "count(*)", "sreloj", "codflota", CStr(Data1.Recordset!codflota), "T")
+        If SQL = "" Then SQL = "0"
+        If Val(SQL) > 0 Then
+            MsgBox "Existen registros relacionados(" & SQL & ") en trabajos realizados", vbExclamation
+            Exit Sub
+        End If
+    End If
    
     
     

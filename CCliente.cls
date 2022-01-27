@@ -435,18 +435,18 @@ Public Function LeerDatos(vCodClien As String) As Boolean
 'Lee de la BD: Ariges, Tabla: sclien
 'OUT: True si lee los datos correctamente
 Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ELeer
     
     LeerDatos = False
     
-    SQL = "SELECT codclien,nomclien,nomcomer,codpobla,domclien,pobclien,proclien,nifclien,wwwclien,codenvio,codagent,codforpa,codbanco,codsucur,digcontr,cuentaba,telclie1,maiclie1,clivario,dtoppago,dtognral,codtarif,codsitua,tipofact,kilometr,fechamov,observac,perclie1,codzonas,coddirenhab,iban,codpais,tienepuntos "
-    SQL = SQL & " FROM sclien "
-    SQL = SQL & " WHERE codclien=" & vCodClien
+    Sql = "SELECT codclien,nomclien,nomcomer,codpobla,domclien,pobclien,proclien,nifclien,wwwclien,codenvio,codagent,codforpa,codbanco,codsucur,digcontr,cuentaba,telclie1,maiclie1,clivario,dtoppago,dtognral,codtarif,codsitua,tipofact,kilometr,fechamov,observac,perclie1,codzonas,coddirenhab,iban,codpais,tienepuntos "
+    Sql = Sql & " FROM sclien "
+    Sql = Sql & " WHERE codclien=" & vCodClien
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     If RS.EOF Then
         LeerDatos = False
@@ -509,31 +509,31 @@ Dim SQL As String
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Datos Cliente" & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
+    Sql = "Se ha producido un error. " & "Datos Cliente" & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
     Set RS = Nothing
     LeerDatos = False
 End Function
 
 
 
-Public Function LeerDatosCliVario(vNif As String) As Boolean
+Public Function LeerDatosCliVario(vNif As String, Optional OcultarMensaje As Boolean) As Boolean
 'si es cliente de varios recuperamos los datos nombre,direc,etc.
 'de la tabla de varios: sclvar
 Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo ELeer
     LeerDatosCliVario = False
     
-    SQL = "SELECT nifclien,nomclien,domclien,codpobla,pobclien,proclien,telclien "
-    SQL = SQL & " FROM sclvar "
-    SQL = SQL & " WHERE nifclien=" & DBSet(vNif, "T")
+    Sql = "SELECT nifclien,nomclien,domclien,codpobla,pobclien,proclien,telclien "
+    Sql = Sql & " FROM sclvar "
+    Sql = Sql & " WHERE nifclien=" & DBSet(vNif, "T")
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     mPersonaContacto = ""
     If RS.EOF Then
         LeerDatosCliVario = False
@@ -545,7 +545,7 @@ Dim SQL As String
         mPobClien = ""
         mProClien = ""
         mTfnClien = ""
-        MsgBox "No existe el cliente vario: " & vNif, vbInformation
+        If Not OcultarMensaje Then MsgBox "No existe el cliente vario: " & vNif, vbInformation
     Else
         mNIFClien = RS!nifClien
         mNomClien = RS!NomClien
@@ -564,10 +564,10 @@ Dim SQL As String
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Datos Cliente de Varios." & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
+    Sql = "Se ha producido un error. " & "Datos Cliente de Varios." & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
     Set RS = Nothing
     LeerDatosCliVario = False
 End Function
@@ -576,7 +576,7 @@ End Function
 
 Public Function ActualizarClienteV(vNif As String) As Boolean
 'Actualiza los datos del cliente de varios en la tabla: sclvar
-Dim SQL As String
+Dim Sql As String
 Dim devuelve As String
 
     On Error GoTo EActualizarCliente
@@ -585,16 +585,16 @@ Dim devuelve As String
     devuelve = DevuelveDesdeBDNew(conAri, "sclvar", "nifclien", "nifclien", vNif, "T")
     
     If devuelve <> "" Then 'Existe el cliente de varios y lo actualizamos
-        SQL = "UPDATE sclvar SET nomclien=" & DBSet(Nombre, "T") & ", domclien=" & DBSet(Domicilio, "T") & ", "
-        SQL = SQL & " codpobla=" & DBSet(CPostal, "T") & ", pobclien=" & DBSet(Poblacion, "T") & ", "
-        SQL = SQL & " proclien=" & DBSet(Provincia, "T") & ", telclien=" & DBSet(TfnoClien, "T")
-        SQL = SQL & " WHERE nifclien=" & DBSet(vNif, "T")
+        Sql = "UPDATE sclvar SET nomclien=" & DBSet(Nombre, "T") & ", domclien=" & DBSet(Domicilio, "T") & ", "
+        Sql = Sql & " codpobla=" & DBSet(CPostal, "T") & ", pobclien=" & DBSet(Poblacion, "T") & ", "
+        Sql = Sql & " proclien=" & DBSet(Provincia, "T") & ", telclien=" & DBSet(TfnoClien, "T")
+        Sql = Sql & " WHERE nifclien=" & DBSet(vNif, "T")
     Else 'No existe el cliente y lo añadimos
-        SQL = "INSERT INTO sclvar (nifclien, nomclien, domclien, codpobla, pobclien, proclien, telclien) "
-        SQL = SQL & " VALUES (" & DBSet(vNif, "T") & ", " & DBSet(Nombre, "T") & ", " & DBSet(Domicilio, "T") & ", "
-        SQL = SQL & DBSet(CPostal, "T") & ", " & DBSet(Poblacion, "T") & ", " & DBSet(Provincia, "T") & ", " & DBSet(TfnoClien, "T") & ")"
+        Sql = "INSERT INTO sclvar (nifclien, nomclien, domclien, codpobla, pobclien, proclien, telclien) "
+        Sql = Sql & " VALUES (" & DBSet(vNif, "T") & ", " & DBSet(Nombre, "T") & ", " & DBSet(Domicilio, "T") & ", "
+        Sql = Sql & DBSet(CPostal, "T") & ", " & DBSet(Poblacion, "T") & ", " & DBSet(Provincia, "T") & ", " & DBSet(TfnoClien, "T") & ")"
     End If
-    conn.Execute SQL, , adCmdText
+    conn.Execute Sql, , adCmdText
     
     ActualizarClienteV = True
     
@@ -777,7 +777,7 @@ End Function
 Public Function ActualizaUltFecMovim(vFecha As String) As Boolean
 'Actualiza la fecha del ultimo movimiento del cliente si la fecha del movimiento
 'que se pasa por parametro es posterior a la que tiene el cliente
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim actualiza As Boolean
 
@@ -796,9 +796,9 @@ Dim actualiza As Boolean
     End If
     
     If actualiza Then
-        SQL = "UPDATE sclien SET fechamov=" & DBSet(vFecha, "F")
-        SQL = SQL & " WHERE codclien=" & Codigo
-        conn.Execute SQL, , adCmdText
+        Sql = "UPDATE sclien SET fechamov=" & DBSet(vFecha, "F")
+        Sql = Sql & " WHERE codclien=" & Codigo
+        conn.Execute Sql, , adCmdText
     End If
     B = True
         
@@ -813,8 +813,16 @@ End Function
 Public Sub MostrarObservaciones()
 'Recuperamos el texto de las observaciones del cliente, y si tiene
 'valor lo mostramos en un mensaje
+
+On Error GoTo eMostrarObservaciones
+
+    If Screen.ActiveControl.Name <> "Text1" Then Exit Sub
     If Me.Observaciones <> "" Then _
          MsgBox Me.Observaciones, vbInformation, "Observaciones del cliente"
+         
+    Exit Sub
+eMostrarObservaciones:
+    Err.Clear
 End Sub
 
 

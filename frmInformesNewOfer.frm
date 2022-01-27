@@ -1912,12 +1912,13 @@ Dim B As Boolean
             If Me.cboClienteCredito.ListIndex > 0 Then
                 devuelve = devuelve & " Credito:"
                 If Me.cboClienteCredito.ListIndex = 1 Then
-                    devuelve = devuelve & " Privado"
-                    campo = "({sclien.credipriv} = 1)"
-                    
-                ElseIf Me.cboClienteCredito.ListIndex = 2 Then
                     devuelve = devuelve & " Aseguradora"
                     campo = "({sclien.credipriv} = 0)"
+                    
+                ElseIf Me.cboClienteCredito.ListIndex = 2 Then
+                    
+                    devuelve = devuelve & " Privado"
+                    campo = "({sclien.credipriv} = 1)"
                 ElseIf Me.cboClienteCredito.ListIndex = 3 Then
                     devuelve = devuelve & " Estudiado"
                     campo = "({sclien.credipriv} = 2)"
@@ -2226,20 +2227,20 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdDeselTodos_Click(Index As Integer)
-Dim I As Byte
+Dim i As Byte
 
-    For I = 1 To ListView1.ListItems.Count
-        ListView1.ListItems(I).Checked = False
-    Next I
+    For i = 1 To ListView1.ListItems.Count
+        ListView1.ListItems(i).Checked = False
+    Next i
 
 End Sub
 
 Private Sub cmdSelTodos_Click()
-Dim I As Byte
+Dim i As Byte
 
-    For I = 1 To ListView1.ListItems.Count
-        ListView1.ListItems(I).Checked = True
-    Next I
+    For i = 1 To ListView1.ListItems.Count
+        ListView1.ListItems(i).Checked = True
+    Next i
 End Sub
 
 Private Sub Form_Activate()
@@ -3409,7 +3410,7 @@ End Function
 
 Private Function GeneraFicheroCSV(cadSQL As String, Salida As String, Optional OcultarMensajeCreacionCorrecta As Boolean) As Boolean
 Dim NF As Integer
-Dim I  As Integer
+Dim i  As Integer
 
     On Error GoTo eGeneraFicheroCSV
     GeneraFicheroCSV = False
@@ -3429,18 +3430,18 @@ Dim I  As Integer
         Open App.Path & "\docum.csv" For Output As #NF
         'Cabecera
         cadSQL = ""
-        For I = 0 To miRsAux.Fields.Count - 1
-            cadSQL = cadSQL & ";""" & miRsAux.Fields(I).Name & """"
-        Next I
+        For i = 0 To miRsAux.Fields.Count - 1
+            cadSQL = cadSQL & ";""" & miRsAux.Fields(i).Name & """"
+        Next i
         Print #NF, Mid(cadSQL, 2)
     
     
         'Lineas
         While Not miRsAux.EOF
             cadSQL = ""
-            For I = 0 To miRsAux.Fields.Count - 1
-                cadSQL = cadSQL & ";""" & DBLet(miRsAux.Fields(I).Value, "T") & """"
-            Next I
+            For i = 0 To miRsAux.Fields.Count - 1
+                cadSQL = cadSQL & ";""" & DBLet(miRsAux.Fields(i).Value, "T") & """"
+            Next i
             Print #NF, Mid(cadSQL, 2)
             
             
@@ -3627,7 +3628,7 @@ Private Function PonerFormulaYParametrosInfMovArt() As Boolean
 Dim Cad As String
 Dim todosMarcados As Boolean
 Dim devuelve As String
-Dim I As Byte
+Dim i As Byte
 
     PonerFormulaYParametrosInfMovArt = False
 '    InicializarVbles True
@@ -3688,30 +3689,30 @@ Dim I As Byte
     devuelve = ""
     'Si todos seleccionados no añadir la select
     todosMarcados = True
-    I = 1
-    While Not I > Me.ListView1.ListItems.Count And todosMarcados
-        If Not Me.ListView1.ListItems(I).Checked Then todosMarcados = False
-        I = I + 1
+    i = 1
+    While Not i > Me.ListView1.ListItems.Count And todosMarcados
+        If Not Me.ListView1.ListItems(i).Checked Then todosMarcados = False
+        i = i + 1
     Wend
     
     'si no estan todos seleccionados montar select de los seleccionados
     If Not todosMarcados Then
         Cad = ""
         devuelve = ""
-        For I = 1 To Me.ListView1.ListItems.Count
-            If Me.ListView1.ListItems(I).Checked Then
+        For i = 1 To Me.ListView1.ListItems.Count
+            If Me.ListView1.ListItems(i).Checked Then
                 If Cad = "" Then
-                    Cad = Me.ListView1.ListItems(I).Text
+                    Cad = Me.ListView1.ListItems(i).Text
                 Else
-                    Cad = Cad & ", " & Me.ListView1.ListItems(I).Text
+                    Cad = Cad & ", " & Me.ListView1.ListItems(i).Text
                 End If
                 If devuelve = "" Then
-                    devuelve = Codigo & " = """ & Me.ListView1.ListItems(I).Text & """"
+                    devuelve = Codigo & " = """ & Me.ListView1.ListItems(i).Text & """"
                 Else
-                    devuelve = devuelve & " or " & Codigo & " = """ & Me.ListView1.ListItems(I).Text & """"
+                    devuelve = devuelve & " or " & Codigo & " = """ & Me.ListView1.ListItems(i).Text & """"
                 End If
             End If
-        Next I
+        Next i
 
         If devuelve <> "" Then 'Hay algun movimiento marcado
             If cadFormula <> "" Then
@@ -3731,13 +3732,13 @@ Dim I As Byte
             numParam = numParam + 1
         Else 'Todos desmarcados
             Cad = ""
-            For I = 1 To ListView1.ListItems.Count
+            For i = 1 To ListView1.ListItems.Count
                 If Cad = "" Then
-                    Cad = """" & ListView1.ListItems(I).Text & """"
+                    Cad = """" & ListView1.ListItems(i).Text & """"
                 Else
-                    Cad = Cad & ", """ & ListView1.ListItems(I).Text & """"
+                    Cad = Cad & ", """ & ListView1.ListItems(i).Text & """"
                 End If
-            Next I
+            Next i
             devuelve = Codigo & " NOT IN [" & Cad & "]"
             Cad = Codigo & " NOT IN (" & Cad & ")"
             Cad = QuitarCaracterACadena(Cad, "{")

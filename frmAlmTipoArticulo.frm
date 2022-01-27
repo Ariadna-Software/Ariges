@@ -8,15 +8,33 @@ Begin VB.Form frmAlmTipoArticulo
    ClientHeight    =   7605
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   6600
+   ClientWidth     =   7395
    Icon            =   "frmAlmTipoArticulo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7605
-   ScaleWidth      =   6600
+   ScaleWidth      =   7395
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.ComboBox Combo1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   2760
+      Style           =   2  'Dropdown List
+      TabIndex        =   10
+      Tag             =   "Impre|N|N|||stipar|impresionauxiliar|0||"
+      Top             =   4800
+      Width           =   735
+   End
    Begin VB.Frame Frame1 
       Height          =   555
       Left            =   135
@@ -54,7 +72,7 @@ Begin VB.Form frmAlmTipoArticulo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   4065
+      Left            =   4785
       TabIndex        =   2
       Top             =   7005
       Width           =   1065
@@ -72,7 +90,7 @@ Begin VB.Form frmAlmTipoArticulo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   5310
+      Left            =   6030
       TabIndex        =   3
       Top             =   7020
       Width           =   1065
@@ -236,8 +254,8 @@ Begin VB.Form frmAlmTipoArticulo
       Left            =   135
       TabIndex        =   8
       Top             =   810
-      Width           =   6225
-      _ExtentX        =   10980
+      Width           =   7185
+      _ExtentX        =   12674
       _ExtentY        =   10557
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -312,7 +330,7 @@ Begin VB.Form frmAlmTipoArticulo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   5310
+      Left            =   6030
       TabIndex        =   9
       Top             =   7020
       Visible         =   0   'False
@@ -389,24 +407,24 @@ Dim Modo As Byte
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
-    b = (Modo = 2)
+    B = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
     
-    txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
+    txtAux(0).visible = Not B
+    txtAux(1).visible = Not B
     txtAux(0).BackColor = vbWhite
     txtAux(1).BackColor = vbWhite
-    
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    Combo1.visible = Not B
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     End If
     
     'Si estamos insertando o busqueda
@@ -422,28 +440,28 @@ Dim b As Boolean
 End Sub
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Buscar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ber Todos
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
-    b = b And Not DeConsulta
+    B = B And Not DeConsulta
     'Añadir
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = b
+    Toolbar1.Buttons(8).Enabled = B
 End Sub
 
 
@@ -464,6 +482,9 @@ Dim anc As Single
     'Obtenemos la siguiente numero de factura
     LimpiarCampos
     LLamaLineas anc, 3
+    
+    Combo1.ListIndex = 0
+    
     
     'Ponemos el foco
     PonerFoco txtAux(0)
@@ -497,9 +518,9 @@ End Sub
 
 
 Private Sub BotonModificar()
-Dim cad As String
+Dim Cad As String
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
 
     If Adodc1.Recordset.EOF Then Exit Sub
     If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
@@ -507,20 +528,26 @@ Dim I As Integer
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
     anc = ObtenerAlto(DataGrid1, 10)
     
-    cad = ""
-    For I = 0 To 1
-        cad = cad & DataGrid1.Columns(I).Text & "|"
-    Next I
+    Cad = ""
+    For i = 0 To 1
+        Cad = Cad & DataGrid1.Columns(i).Text & "|"
+    Next i
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
+    
+    
+    Combo1.ListIndex = IIf(DataGrid1.Columns(2).Text <> "", 1, 0)
+    
+    
+    
     LLamaLineas anc, 4
    
     Screen.MousePointer = vbDefault
@@ -535,6 +562,10 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     txtAux(1).Top = alto
     txtAux(0).Left = DataGrid1.Left + 340
     txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
+    
+    Combo1.Top = alto
+    Combo1.Left = txtAux(1).Left + txtAux(1).Width + 30
+    
 End Sub
 
 Private Sub BotonEliminar()
@@ -566,7 +597,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim I As String
+Dim i As String
 Dim cadB As String
 On Error GoTo EAceptar
 
@@ -582,11 +613,11 @@ On Error GoTo EAceptar
              If DatosOk And BLOQUEADesdeFormulario(Me) Then
                  If ModificaDesdeFormulario(Me, 3) Then
                       TerminaBloquear
-                      I = Adodc1.Recordset.Fields(0)
+                      i = Adodc1.Recordset.Fields(0)
                       PonerModo 2
                       CancelaADODC Me.Adodc1
                       CargaGrid
-                      Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " = '" & I & "'")
+                      Adodc1.Recordset.Find (Adodc1.Recordset.Fields(0).Name & " = '" & i & "'")
                   End If
                   DataGrid1.SetFocus
             End If
@@ -619,18 +650,24 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = Adodc1.Recordset.Fields(0) & "|"
-    cad = cad & Adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
+
+
+
+Private Sub Combo1_KeyPress(KeyAscii As Integer)
+     KEYpress KeyAscii
+End Sub
 
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible = True Then cmdRegresar_Click
@@ -672,8 +709,12 @@ Private Sub Form_Load()
     cmdRegresar.visible = (DatosADevolverBusqueda <> "")
     PonerModo 2
     
+    CargarCombo_SiNo Combo1
+    
+    
     'Cadena consulta
-    CadenaConsulta = "Select * from stipar "
+    'CadenaConsulta = ""Select * from stipar "
+    CadenaConsulta = "Select codtipar,nomtipar,if(coalesce(impresionauxiliar,0)=0,'','Si') impresionauxiliar from stipar "
     CargaGrid
 End Sub
 
@@ -726,10 +767,10 @@ End Sub
 
 
 Private Sub CargaGrid(Optional SQL As String)
-Dim I As Byte
-Dim b As Boolean
+Dim i As Byte
+Dim B As Boolean
     
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
     If SQL <> "" Then
         SQL = CadenaConsulta & " WHERE " & SQL
@@ -741,26 +782,34 @@ Dim b As Boolean
     CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
     DataGrid1.RowHeight = 350
 
-    I = 0  'Cod. Tipo Articulo
-        DataGrid1.Columns(I).Caption = "Tipo"
-        DataGrid1.Columns(I).Width = 1500
+    i = 0  'Cod. Tipo Articulo
+        DataGrid1.Columns(i).Caption = "Tipo"
+        DataGrid1.Columns(i).Width = 1500
     
-    I = 1 'Desc. Tipo Articulo
-        DataGrid1.Columns(I).Caption = "Denominación"
-        DataGrid1.Columns(I).Width = 4130
+    i = 1 'Desc. Tipo Articulo
+        DataGrid1.Columns(i).Caption = "Denominación"
+        DataGrid1.Columns(i).Width = 3800
+            
+            
+    i = 2 'Es trabajo
+        DataGrid1.Columns(i).Caption = IIf(vParamAplic.NumeroInstalacion = vbHerbelca, "Gas fluo.", "Impresion")
+        DataGrid1.Columns(i).Width = 1100
+        DataGrid1.Columns(i).Alignment = dbgCenter
+            
             
     'Fiajamos el cadancho
     If Not CadAncho Then
         'La primera vez fijamos el ancho y alto de  los txtaux
         txtAux(0).Width = DataGrid1.Columns(0).Width - 60
         txtAux(1).Width = DataGrid1.Columns(1).Width - 60
+        Combo1.Width = DataGrid1.Columns(2).Width
         CadAncho = True
     End If
    
    'No permitir cambiar tamaño de columnas
-   For I = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(I).AllowSizing = False
-   Next I
+   For i = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(i).AllowSizing = False
+   Next i
    
    Me.DataGrid1.ScrollBars = dbgAutomatic
    
@@ -771,7 +820,7 @@ Dim b As Boolean
         mnModificar.Enabled = Not Adodc1.Recordset.EOF
         mnEliminar.Enabled = Not Adodc1.Recordset.EOF
    End If
-   DataGrid1.Enabled = b
+   DataGrid1.Enabled = B
    PonerOpcionesMenu
    
    'Actualizar indicador
@@ -802,17 +851,17 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
     'Comprobar si ya existe el cod de tipo articulo en la tabla
     If Modo = 3 Then 'Insertar
-        If ExisteCP(txtAux(0)) Then b = False
+        If ExisteCP(txtAux(0)) Then B = False
     End If
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -831,6 +880,8 @@ End Sub
 
 Private Sub LimpiarCampos()
 On Error Resume Next
+    Combo1.ListIndex = -1
+
     limpiar Me   'Metodo general: Limpia los controles TextBox
     'Aqui va el especifico de cada form es
     '### a mano

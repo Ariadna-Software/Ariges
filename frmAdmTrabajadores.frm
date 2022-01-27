@@ -3000,7 +3000,7 @@ Dim devuelve As String
             
         Case 6 'NIF
             Text1(Index).Text = UCase(Text1(Index).Text)
-            ValidarNIF Text1(Index).Text
+            ValidarNIF_ Text1(Index).Text, False
             
             
         Case 10

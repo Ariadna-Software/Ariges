@@ -8,15 +8,37 @@ Begin VB.Form frmCPostal
    ClientHeight    =   7590
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   6495
+   ClientWidth     =   7725
    Icon            =   "frmCPostal.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7590
-   ScaleWidth      =   6495
+   ScaleWidth      =   7725
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      Index           =   2
+      Left            =   3000
+      MaxLength       =   30
+      TabIndex        =   2
+      Tag             =   "ine|T|S|||scpostal|ine|||"
+      Text            =   "Dato2"
+      Top             =   4800
+      Width           =   1395
+   End
    Begin VB.CheckBox chkVistaPrevia 
       Caption         =   "Vista previa"
       Enabled         =   0   'False
@@ -30,22 +52,22 @@ Begin VB.Form frmCPostal
          Strikethrough   =   0   'False
       EndProperty
       Height          =   195
-      Left            =   4680
-      TabIndex        =   10
-      Top             =   315
+      Left            =   6000
+      TabIndex        =   11
+      Top             =   240
       Visible         =   0   'False
       Width           =   1575
    End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   135
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   90
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   180
-         TabIndex        =   9
+         TabIndex        =   10
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -111,8 +133,8 @@ Begin VB.Form frmCPostal
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   5130
-      TabIndex        =   3
+      Left            =   6210
+      TabIndex        =   4
       Top             =   7065
       Width           =   1065
    End
@@ -128,8 +150,8 @@ Begin VB.Form frmCPostal
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   3915
-      TabIndex        =   2
+      Left            =   4995
+      TabIndex        =   3
       Top             =   7065
       Width           =   1065
    End
@@ -190,8 +212,8 @@ Begin VB.Form frmCPostal
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   5130
-      TabIndex        =   6
+      Left            =   6210
+      TabIndex        =   7
       Top             =   7065
       Visible         =   0   'False
       Width           =   1065
@@ -199,7 +221,7 @@ Begin VB.Form frmCPostal
    Begin VB.Frame Frame1 
       Height          =   555
       Left            =   135
-      TabIndex        =   4
+      TabIndex        =   5
       Top             =   6975
       Width           =   2535
       Begin VB.Label lblIndicador 
@@ -216,7 +238,7 @@ Begin VB.Form frmCPostal
          EndProperty
          Height          =   255
          Left            =   120
-         TabIndex        =   5
+         TabIndex        =   6
          Top             =   195
          Width           =   2280
       End
@@ -272,11 +294,11 @@ Begin VB.Form frmCPostal
       Bindings        =   "frmCPostal.frx":000C
       Height          =   5985
       Left            =   150
-      TabIndex        =   7
+      TabIndex        =   8
       TabStop         =   0   'False
       Top             =   900
-      Width           =   6060
-      _ExtentX        =   10689
+      Width           =   7260
+      _ExtentX        =   12806
       _ExtentY        =   10557
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -404,24 +426,26 @@ Dim Modo As Byte
 '----------------------------------------------
 
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
-    b = (Modo = 0)
-    If b Then Me.lblIndicador.Caption = ""
+    B = (Modo = 0)
+    If B Then Me.lblIndicador.Caption = ""
     
-    txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
+    txtAux(0).visible = Not B
+    txtAux(1).visible = Not B
+    txtAux(2).visible = Not B
     txtAux(0).BackColor = vbWhite
     txtAux(1).BackColor = vbWhite
+    txtAux(2).BackColor = vbWhite
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     End If
 
     'Si estamos mod or insert
@@ -450,6 +474,7 @@ Dim anc As Single
     anc = ObtenerAlto(DataGrid1, 20)
     txtAux(0).Text = ""
     txtAux(1).Text = ""
+    txtAux(2).Text = ""
     LLamaLineas anc, 0
     
     'Ponemos el foco
@@ -462,6 +487,7 @@ Private Sub BotonBuscar()
     'Buscar
     txtAux(0).Text = ""
     txtAux(1).Text = ""
+    txtAux(2).Text = ""
     lblIndicador.Caption = "BUSQUEDA"
     LLamaLineas DataGrid1.Top + 240, 2
     PonerFoco txtAux(0)
@@ -508,6 +534,7 @@ Dim i As Byte
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = DataGrid1.Columns(2).Text
     anc = ObtenerAlto(DataGrid1, 20)
     LLamaLineas anc, 1
    
@@ -525,13 +552,15 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     'Fijamos el ancho
     txtAux(0).Top = alto
     txtAux(1).Top = alto
+    txtAux(2).Top = alto
     txtAux(0).Left = DataGrid1.Left + 340
     txtAux(1).Left = txtAux(0).Left + txtAux(0).Width + 45
+    txtAux(2).Left = txtAux(1).Left + txtAux(1).Width + 45
 End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
     On Error GoTo Error2
     'Ciertas comprobaciones
     If Adodc1.Recordset.EOF Then Exit Sub
@@ -539,14 +568,14 @@ Dim SQL As String
 
     Screen.MousePointer = vbHourglass
     '### a mano
-    SQL = "Seguro que desea eliminar el Cod. Postal:"
-    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Provincia: " & Adodc1.Recordset.Fields(1)
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    Sql = "Seguro que desea eliminar el Cod. Postal:"
+    Sql = Sql & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Provincia: " & Adodc1.Recordset.Fields(1)
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from scpostal where cpostal='" & Adodc1.Recordset!CPostal & "'"
-        SQL = SQL & " AND provincia= '" & Adodc1.Recordset!Provincia & "'"
-        conn.Execute SQL
+        Sql = "Delete from scpostal where cpostal='" & Adodc1.Recordset!CPostal & "'"
+        Sql = Sql & " AND provincia= '" & Adodc1.Recordset!Provincia & "'"
+        conn.Execute Sql
         CancelaADODC Me.Adodc1
         Espera 0.5
         If cadB <> "" Then
@@ -631,16 +660,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Adodc1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Adodc1.Recordset.Fields(0) & "|"
-    cad = cad & Adodc1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Adodc1.Recordset.Fields(0) & "|"
+    Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -733,23 +762,23 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 
-Private Sub CargaGrid(Optional SQL As String)
+Private Sub CargaGrid(Optional Sql As String)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo ErrGrid
     
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
 
-    If SQL <> "" Then
-        SQL = CadenaConsulta & " WHERE " & SQL
+    If Sql <> "" Then
+        Sql = CadenaConsulta & " WHERE " & Sql
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY cpostal"
+    Sql = Sql & " ORDER BY cpostal"
     
 
-    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.Adodc1, Sql, False
     DataGrid1.RowHeight = 350
     
     'Nombre producto
@@ -762,12 +791,17 @@ Dim b As Boolean
     i = 1
         DataGrid1.Columns(i).Caption = "Poblacion"
         DataGrid1.Columns(i).Width = 4250
+    i = 2
+        DataGrid1.Columns(i).Caption = "INE"
+        DataGrid1.Columns(i).Width = 1250
+            
             
     'Fiajamos el cadancho
     If Not CadAncho Then
         'La primera vez fijamos el ancho y alto de  los txtaux
         txtAux(0).Width = DataGrid1.Columns(0).Width - 60
         txtAux(1).Width = DataGrid1.Columns(1).Width - 60
+        txtAux(2).Width = DataGrid1.Columns(2).Width - 60
         CadAncho = True
     End If
    
@@ -781,7 +815,7 @@ Dim b As Boolean
    Toolbar1.Buttons(3).Enabled = Not Adodc1.Recordset.EOF
    mnModificar.Enabled = Not Adodc1.Recordset.EOF
    mnEliminar.Enabled = Not Adodc1.Recordset.EOF
-   DataGrid1.Enabled = b
+   DataGrid1.Enabled = B
    DataGrid1.ScrollBars = dbgAutomatic
    PonerOpcionesMenu
    Exit Sub
@@ -805,14 +839,22 @@ End Sub
 Private Sub txtAux_LostFocus(Index As Integer)
     txtAux(Index).Text = Trim(txtAux(Index).Text)
     If txtAux(Index).Text = "" Then Exit Sub
+    
+    If Modo > 2 And Index = 2 Then
+        If Not IsNumeric(txtAux(Index).Text) Then
+            txtAux(Index).Text = ""
+        Else
+            txtAux(Index).Text = Format(txtAux(Index).Text, "00000")
+        End If
+    End If
     'If Modo = 3 Then Exit Sub 'Busquedas
 End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+Dim B As Boolean
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
 
 'If Modo = 1 Then
 '    'Estamos insertando
@@ -823,7 +865,7 @@ Dim b As Boolean
 '        b = False
 '    End If
 'End If
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -862,27 +904,27 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'segun Modo en el que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 0 Or Modo = 2)
+    B = (Modo = 0 Or Modo = 2)
     
     'Buscar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ber Todos
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
 '     b = b And Not DeConsulta
     'Añadir
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
 
     'imprimir
     Toolbar1.Buttons(8).Enabled = False
@@ -900,7 +942,7 @@ Dim mTag As cTag
 Dim Aux As String, Aux2 As String
 Dim cadWhere As String
 Dim cadUPDATE As String
-Dim b As Boolean
+Dim B As Boolean
 
 On Error GoTo EModificaDesdeFormulario
     ModificarCPostal = False
@@ -922,7 +964,7 @@ On Error GoTo EModificaDesdeFormulario
                             'Lo pondremos para el WHERE
                              If cadWhere <> "" Then cadWhere = cadWhere & " AND "
                              If mTag.columna = "provincia" Then
-                                Aux2 = "'" & Adodc1.Recordset!Provincia & "'"
+                                Aux2 = DBSet(Adodc1.Recordset!Provincia, "T")
                                 cadWhere = cadWhere & "(" & mTag.columna & " = " & Aux2 & ")"
                              Else
                                 cadWhere = cadWhere & "(" & mTag.columna & " = " & Aux & ")"
@@ -932,6 +974,8 @@ On Error GoTo EModificaDesdeFormulario
                             If mTag.columna = "provincia" Then
                                 cadUPDATE = cadUPDATE & "" & mTag.columna & " = " & Aux
                             End If
+                        Else
+                            cadUPDATE = cadUPDATE & "" & mTag.columna & " = " & Aux & " , "
                         End If
                     End If
                 End If

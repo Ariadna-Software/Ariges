@@ -2846,8 +2846,8 @@ Private Sub KEYpress(KeyAscii As Integer)
 End Sub
 
 Private Function MontaSQL() As Boolean
-Dim SQL As String
-Dim SQL2 As String
+Dim Sql As String
+Dim Sql2 As String
 Dim Rc As String
 Dim RC2 As String
 
@@ -2933,7 +2933,10 @@ Dim PrevioArticulos As Boolean
 Dim cadParam2 As String
 
         
-    cadNombreRPT = "rAlmListArticulos.rpt"  'Nombre fichero .rpt a Imprimir
+        
+    'Enero 2022
+    If Not PonerParamRPT2(99, cadParam, numParam, cadNombreRPT, pImprimeDirecto, pPdfRpt, pRptvMultiInforme) Then cadNombreRPT = "rAlmArticulosPVP.rpt"
+
     cadFrom = " sartic"
             
     cadParam2 = ""
@@ -3153,12 +3156,18 @@ Dim cadParam2 As String
                 Codigo = ""
                 
                 'numero de etiquetas
-                
-                If Val(cadFormula) > 0 Then
-                    indCodigo = Val(cadFormula) - 1
+                If Me.chkImpEtiq(0).Value = 0 And Me.chkImpEtiq(1).Value = 1 Then
+                    'INFORME PVP
+                    indCodigo = 0
                 Else
-                    indCodigo = miRsAux!cantidad - 1
+                    If Val(cadFormula) > 0 Then
+                        indCodigo = Val(cadFormula) - 1
+                    Else
+                        indCodigo = miRsAux!cantidad - 1
+                    End If
                 End If
+                
+                
                 While indCodigo <> 0
                     'tmpnseries(codusu,codartic,numserie,numlinealb,numlinea)
                     Codigo = Codigo & ", (" & vUsu.Codigo & "," & DBSet(miRsAux!codArtic, "T") & "," & DBSet(miRsAux!numSerie, "T")
@@ -3316,7 +3325,7 @@ Dim miRsAux As ADODB.Recordset
      
         'tmpinformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importe1,importe2,importe3,cantidad)
         NumRegElim = NumRegElim + 1
-        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBLet(miRsAux!Codprove, "N") & "," & miRsAux!Codfamia & ","
+        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBLet(miRsAux!CodProve, "N") & "," & miRsAux!Codfamia & ","
         miSQL = miSQL & DBSet(miRsAux!nomprove, "T", "N") & "," & DBSet(miRsAux!nomfamia, "T", "N") & ","
         
         'CERO O DOS
@@ -3364,12 +3373,12 @@ End Function
 
 
 Private Function DatosOk() As Boolean
-Dim SQL As String
-Dim b As Boolean
+Dim Sql As String
+Dim B As Boolean
     
-    b = True
+    B = True
     
-    DatosOk = b
+    DatosOk = B
 
 End Function
 
@@ -3625,59 +3634,59 @@ End Sub
 
 
 Private Sub AccionesCSV()
-Dim SQL As String
+Dim Sql As String
 
     'Monto el SQL
     Select Case OpcionListado
         Case 1 'marcas
-            SQL = "Select codmarca AS Código,nommarca as Descripcion "
-            SQL = SQL & " From smarca "
+            Sql = "Select codmarca AS Código,nommarca as Descripcion "
+            Sql = Sql & " From smarca "
         Case 2 'almacenes propios
-            SQL = "Select codalmac AS Código,nomalmac as Descripcion "
-            SQL = SQL & " From salmpr "
+            Sql = "Select codalmac AS Código,nomalmac as Descripcion "
+            Sql = Sql & " From salmpr "
         Case 3 'tipos de unidad
-            SQL = "Select codunida AS Código,nomunida as Descripcion, nomunbre as Abrev, tasareciclado as TasaReciclado, estrabajo as Trabajo "
-            SQL = SQL & " From sunida "
+            Sql = "Select codunida AS Código,nomunida as Descripcion, nomunbre as Abrev, tasareciclado as TasaReciclado, estrabajo as Trabajo "
+            Sql = Sql & " From sunida "
         Case 4 'tipos de articulos
-            SQL = "Select codtipar AS Código,nomtipar as Descripcion "
-            SQL = SQL & " From stipar "
+            Sql = "Select codtipar AS Código,nomtipar as Descripcion "
+            Sql = Sql & " From stipar "
         Case 20 'actividades
-            SQL = "Select codactiv AS Código,nomactiv as Descripcion "
-            SQL = SQL & " From sactiv "
+            Sql = "Select codactiv AS Código,nomactiv as Descripcion "
+            Sql = Sql & " From sactiv "
         Case 21 'tipos de articulos
-            SQL = "Select codtipar AS Código,nomtipar as Descripcion "
-            SQL = SQL & " From szonas "
+            Sql = "Select codtipar AS Código,nomtipar as Descripcion "
+            Sql = Sql & " From szonas "
         Case 22 'rutas
-            SQL = "Select codrutas AS Código,nomrutas as Descripcion "
-            SQL = SQL & " From srutas "
+            Sql = "Select codrutas AS Código,nomrutas as Descripcion "
+            Sql = Sql & " From srutas "
         Case 23 'categorias
-            SQL = "Select codcateg AS Código,descateg as Descripcion, if (ctrlotes=0,'No','Sí') as CtrolLotes "
-            SQL = SQL & " From scateg "
+            Sql = "Select codcateg AS Código,descateg as Descripcion, if (ctrlotes=0,'No','Sí') as CtrolLotes "
+            Sql = Sql & " From scateg "
         Case 24 'tarifas
-            SQL = "Select codlista AS Código,nomlista as Descripcion "
-            SQL = SQL & " From starif "
+            Sql = "Select codlista AS Código,nomlista as Descripcion "
+            Sql = Sql & " From starif "
         Case 27 'situaciones
             'tipositu,clioferped,ocultarbus,PermiteEfectAalb
             ' "S|cboclioferped|C|Blq ofe/ped|1450|;S|cboBusqweb|C|Busq. web|1450|;S|cbopermitefecti|C|Alb.efec|1450|;"
-            SQL = "Select codsitua AS Código,nomsitua as Descripcion, if (tipositu=0,'No','Sí') as Bloquea,"
-            SQL = SQL & "if (clioferped=0,'No','Sí') as BlqOfePed, if (ocultarbus=0,'No','Sí') as BusqWeb, "
-            SQL = SQL & "if (permiteefectaalb=0,'No','Sí') as AlbEfec "
-            SQL = SQL & " From ssitua "
+            Sql = "Select codsitua AS Código,nomsitua as Descripcion, if (tipositu=0,'No','Sí') as Bloquea,"
+            Sql = Sql & "if (clioferped=0,'No','Sí') as BlqOfePed, if (ocultarbus=0,'No','Sí') as BusqWeb, "
+            Sql = Sql & "if (permiteefectaalb=0,'No','Sí') as AlbEfec "
+            Sql = Sql & " From ssitua "
             
         Case 61 'reparaciones motivos pendientes
-            SQL = "Select codmotre AS Código,nommotre as Descripcion "
-            SQL = SQL & " From smotre "
+            Sql = "Select codmotre AS Código,nommotre as Descripcion "
+            Sql = Sql & " From smotre "
         Case 65 'reparaciones motivos baja
-            SQL = "Select codmotiv AS Código,desmotiv as Descripcion "
-            SQL = SQL & " From smotba "
+            Sql = "Select codmotiv AS Código,desmotiv as Descripcion "
+            Sql = Sql & " From smotba "
             
         Case 999 ' incidencias
-            SQL = "Select codincid AS Código,nomincid as Descripcion "
-            SQL = SQL & " From sincid "
+            Sql = "Select codincid AS Código,nomincid as Descripcion "
+            Sql = Sql & " From sincid "
             
         Case 110 'ubicaciones
-            SQL = "Select codubica AS Código,nomubica as Descripcion "
-            SQL = SQL & " From subica "
+            Sql = "Select codubica AS Código,nomubica as Descripcion "
+            Sql = Sql & " From subica "
         Case 7 ' familias/descuentos
            ' If chkVarios(1).Value = 1 Then
            '
@@ -3685,22 +3694,22 @@ Dim SQL As String
            '
            ' End If
         Case 58 ' proveedores
-            SQL = "Select codprove AS Código,nomprove as Nombre, domprove as Domicilio, codpobla as CPostal, pobprove as Poblacion, proprove as Provincia, nifprove as NIF, telprov1 as Telefono, codmacta as Cuenta, maiprov1 as Email1  "
-            SQL = SQL & " From sprove "
+            Sql = "Select codprove AS Código,nomprove as Nombre, domprove as Domicilio, codpobla as CPostal, pobprove as Poblacion, proprove as Provincia, nifprove as NIF, telprov1 as Telefono, codmacta as Cuenta, maiprov1 as Email1  "
+            Sql = Sql & " From sprove "
         
         
     End Select
     
-    If cadSelect <> "" Then SQL = SQL & " WHERE " & cadSelect
+    If cadSelect <> "" Then Sql = Sql & " WHERE " & cadSelect
     
     If Me.Optcodigo.Value Then
-        SQL = SQL & " ORDER BY 1 "
+        Sql = Sql & " ORDER BY 1 "
     Else
-        SQL = SQL & " ORDER BY 2 "
+        Sql = Sql & " ORDER BY 2 "
     End If
         
     'LLamos a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
     
 End Sub
 
@@ -4455,7 +4464,7 @@ Private Sub KEYFecha2(KeyAscii As Integer, Indice As Integer)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
@@ -5085,7 +5094,7 @@ End Sub
 
 Private Function PonerDesdeHasta2(campo As String, Tipo As String, ByRef Desde As TextBox, ByRef DesD As TextBox, ByRef Hasta As TextBox, ByRef DesH As TextBox, param As String) As Boolean
 Dim devuelve As String
-Dim cad As String
+Dim Cad As String
 Dim Subtipo As String 'F: fecha   N: numero   T: texto  H: HORA
 
 
@@ -5128,10 +5137,10 @@ Dim Subtipo As String 'F: fecha   N: numero   T: texto  H: HORA
         If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        cad = CadenaDesdeHastaBD(Desde.Text, Hasta.Text, campo, Subtipo)
-        cad = Replace(cad, "{", "")
-        cad = Replace(cad, "}", "")
-        If Not AnyadirAFormula(cadSelect, cad) Then Exit Function
+        Cad = CadenaDesdeHastaBD(Desde.Text, Hasta.Text, campo, Subtipo)
+        Cad = Replace(Cad, "{", "")
+        Cad = Replace(Cad, "}", "")
+        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
@@ -5145,24 +5154,24 @@ Dim Subtipo As String 'F: fecha   N: numero   T: texto  H: HORA
 End Function
 
 
-Private Function AnyadirParametroDH2(cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
+Private Function AnyadirParametroDH2(Cad As String, ByRef TextoDESDE As TextBox, TextoHasta As TextBox, ByRef TD As TextBox, ByRef TH As TextBox) As String
 On Error Resume Next
     
     
     If Not TextoDESDE Is Nothing Then
          If TextoDESDE.Text <> "" Then
-            cad = cad & "desde " & TextoDESDE.Text
+            Cad = Cad & "desde " & TextoDESDE.Text
 '            If TD.Caption <> "" Then Cad = Cad & " - " & TD.Caption
         End If
     End If
     If Not TextoHasta Is Nothing Then
         If TextoHasta.Text <> "" Then
-            cad = cad & "  hasta " & TextoHasta.Text
+            Cad = Cad & "  hasta " & TextoHasta.Text
 '            If TH.Caption <> "" Then Cad = Cad & " - " & TH.Caption
         End If
     End If
     
-    AnyadirParametroDH2 = cad
+    AnyadirParametroDH2 = Cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
@@ -5170,7 +5179,7 @@ End Function
 
 
 Private Function ExisteARIMAILGES()
-Dim SQL As String
+Dim Sql As String
 
     If Dir(App.Path & "\ArimailGes.exe") = "" Then
         MsgBox "No existe el programa ArimailGes.exe. Llame a Ariadna.", vbExclamation
@@ -5186,7 +5195,7 @@ End Function
 Private Sub CargarListView()
 'Carga el List View del frame: frameMovimArtic
 'con los parametros de la tabla: stipom (Tipos de Movimientos)
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 
@@ -5195,9 +5204,9 @@ Dim ItmX As ListItem
     ListView1.ColumnHeaders.Add , , "Código", 1000
     ListView1.ColumnHeaders.Add , , "Descripción", 2650
     
-    SQL = "select codtipom,nomtipom from stipom where muevesto=1"
+    Sql = "select codtipom,nomtipom from stipom where muevesto=1"
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF
         Set ItmX = ListView1.ListItems.Add
@@ -5225,7 +5234,7 @@ Private Sub AbrirFrmClientes()
 End Sub
 
 Private Function PonerFormulaYParametrosInfMovArt() As Boolean
-Dim cad As String
+Dim Cad As String
 Dim todosMarcados As Boolean
 Dim devuelve As String
 Dim i As Byte
@@ -5297,14 +5306,14 @@ Dim i As Byte
     
     'si no estan todos seleccionados montar select de los seleccionados
     If Not todosMarcados Then
-        cad = ""
+        Cad = ""
         devuelve = ""
         For i = 1 To Me.ListView1.ListItems.Count
             If Me.ListView1.ListItems(i).Checked Then
-                If cad = "" Then
-                    cad = Me.ListView1.ListItems(i).Text
+                If Cad = "" Then
+                    Cad = Me.ListView1.ListItems(i).Text
                 Else
-                    cad = cad & ", " & Me.ListView1.ListItems(i).Text
+                    Cad = Cad & ", " & Me.ListView1.ListItems(i).Text
                 End If
                 If devuelve = "" Then
                     devuelve = Codigo & " = """ & Me.ListView1.ListItems(i).Text & """"
@@ -5327,28 +5336,28 @@ Dim i As Byte
 '                devuelve = QuitarCaracterACadena(devuelve, "}")
                 cadSelect = "(" & devuelve & ")"
             End If
-            cad = "pTiposMov=""Tipos Movimiento: " & cad
-            cadParam = cadParam & cad & """|"
+            Cad = "pTiposMov=""Tipos Movimiento: " & Cad
+            cadParam = cadParam & Cad & """|"
             numParam = numParam + 1
         Else 'Todos desmarcados
-            cad = ""
+            Cad = ""
             For i = 1 To ListView1.ListItems.Count
-                If cad = "" Then
-                    cad = """" & ListView1.ListItems(i).Text & """"
+                If Cad = "" Then
+                    Cad = """" & ListView1.ListItems(i).Text & """"
                 Else
-                    cad = cad & ", """ & ListView1.ListItems(i).Text & """"
+                    Cad = Cad & ", """ & ListView1.ListItems(i).Text & """"
                 End If
             Next i
-            devuelve = Codigo & " NOT IN [" & cad & "]"
-            cad = Codigo & " NOT IN (" & cad & ")"
-            cad = QuitarCaracterACadena(cad, "{")
-            cad = QuitarCaracterACadena(cad, "}")
+            devuelve = Codigo & " NOT IN [" & Cad & "]"
+            Cad = Codigo & " NOT IN (" & Cad & ")"
+            Cad = QuitarCaracterACadena(Cad, "{")
+            Cad = QuitarCaracterACadena(Cad, "}")
             If cadFormula = "" Then
                 cadFormula = "(" & devuelve & ")"
-                cadSelect = "(" & cad & ")"
+                cadSelect = "(" & Cad & ")"
             Else
                 cadFormula = cadFormula & " AND " & "(" & devuelve & ")"
-                cadSelect = cadSelect & " AND " & "(" & cad & ")"
+                cadSelect = cadSelect & " AND " & "(" & Cad & ")"
             End If
         End If
     End If
@@ -5363,7 +5372,7 @@ End Function
 
 Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
 Dim devuelve As String
-Dim cad As String
+Dim Cad As String
 
     PonerDesdeHasta = False
     devuelve = CadenaDesdeHasta(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
@@ -5375,8 +5384,8 @@ Dim cad As String
         If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        cad = CadenaDesdeHastaBD(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
-        If Not AnyadirAFormula(cadSelect, cad) Then Exit Function
+        Cad = CadenaDesdeHastaBD(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
+        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
@@ -5389,19 +5398,19 @@ Dim cad As String
     End If
 End Function
 
-Private Function AnyadirParametroDH(cad As String, indD As Byte, indH As Byte) As String
+Private Function AnyadirParametroDH(Cad As String, indD As Byte, indH As Byte) As String
 On Error Resume Next
     
      If txtCodigo(indD).Text <> "" Then
-        cad = cad & "desde " & txtCodigo(indD).Text
-        If txtNombre(indD).Text <> "" Then cad = cad & " - " & txtNombre(indD).Text
+        Cad = Cad & "desde " & txtCodigo(indD).Text
+        If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
     End If
     If txtCodigo(indH).Text <> "" Then
-        cad = cad & "  hasta " & txtCodigo(indH).Text
-        If txtNombre(indH).Text <> "" Then cad = cad & " - " & txtNombre(indH).Text
+        Cad = Cad & "  hasta " & txtCodigo(indH).Text
+        If txtNombre(indH).Text <> "" Then Cad = Cad & " - " & txtNombre(indH).Text
     End If
     
-    AnyadirParametroDH = cad
+    AnyadirParametroDH = Cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
@@ -5484,19 +5493,19 @@ End Function
 
 Private Sub ponerFrameArticulosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el informe de Articulos, de tabla: sartic
-Dim b As Boolean
+Dim B As Boolean
 
 
 
     'Hay una opcion mas que mostrara este frame. la 247. Correccion de de tarifas e importes en articulos
     FrameTapaINCORRECTO.visible = False
     chkMinimoCorreg.visible = False
-    b = (OpcionListado = 6)
-    chkImpEtiq(0).visible = b
-    chkImpEtiq(1).visible = b
-    chkImpEtiq(3).visible = b
-    Me.imgayuda(0).visible = b
-    If b Then
+    B = (OpcionListado = 6)
+    chkImpEtiq(0).visible = B
+    chkImpEtiq(1).visible = B
+    chkImpEtiq(3).visible = B
+    Me.imgayuda(0).visible = B
+    If B Then
         'Me.Label9.Caption = "Informe de Articulos"
        
         W = 8715
@@ -5525,12 +5534,12 @@ Dim b As Boolean
     
     If visible = True Then
         'visible orden campos si opcionlistado=6
-        Me.FrameInfArticulosOrd.visible = b
-        Label4(36).visible = Not b ' label almacen
+        Me.FrameInfArticulosOrd.visible = B
+        Label4(36).visible = Not B ' label almacen
 
-        Me.imgBuscarG(18).visible = Not b
-        Me.txtCodigo(72).visible = Not b
-        Me.txtNombre(72).visible = Not b
+        Me.imgBuscarG(18).visible = Not B
+        Me.txtCodigo(72).visible = Not B
+        Me.txtNombre(72).visible = Not B
         
         'Visible Frame stocks Max Minimos si opcionlistado=18
         Me.optStockMax.Value = True
@@ -5541,12 +5550,12 @@ Dim b As Boolean
     
         'REajustes.
         'El articulo NO se muestra si la opcion es 247
-        b = OpcionListado <> 247
-        PonerLabelsArticulosFrameVisible b
-        Label4(75).visible = Not b
-        cmbDecimales.visible = Not b
-        Label4(90).visible = Not b
-        cmbProduccion.visible = Not b
+        B = OpcionListado <> 247
+        PonerLabelsArticulosFrameVisible B
+        Label4(75).visible = Not B
+        cmbDecimales.visible = Not B
+        Label4(90).visible = Not B
+        cmbProduccion.visible = Not B
     
     End If
     

@@ -1433,13 +1433,20 @@ Dim SQL As String
     SQL = SQL & vbCrLf & "Referencia: " & DBLet(Data1.Recordset!codtipom, "T") & " - " & DBLet(Data1.Recordset.Fields(4).Value, "T")
             
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    
+        
+    
         'Hay que eliminar
         NumRegElim = Me.Data1.Recordset.AbsolutePosition
         SQL = "Delete from sreloj where ID=" & Data1.Recordset!ID
         
         conn.Execute SQL
+        ActualizarCostesAlbaranSeleccionado
+        
+        
         CancelaADODC Me.Data1
         CargaGrid True
+        
         CancelaADODC Me.Data1
         SituarDataPosicion Me.Data1, NumRegElim, SQL
     End If
@@ -1886,7 +1893,7 @@ Dim C As String
                 
                     If C <> "" Then
                         C = RecuperaValor(C, 5) & Format(RecuperaValor(C, 3), "00000") & " de " & RecuperaValor(C, 4) & vbCrLf & RecuperaValor(C, 1) & " - " & RecuperaValor(C, 2)
-                        C = "Factura: " & C
+                        C = "Factura: " & C 'No tocar este texto. Esta en prodedimiento abajo
                     Else
                         C = "NO encontrado"
                     End If
@@ -2024,3 +2031,54 @@ Dim J As Integer
     Me.txtAux(5).Text = RecuperaValor(Cd, 9)
     PonerFoco txtAux(3)
 End Sub
+
+
+
+Private Sub ActualizarCostesAlbaranSeleccionado()
+Dim Cada As String
+
+    On Error GoTo eActualizarCostesAlbaranSeleccionado
+
+    Debug.Assert False
+    If DBLet(Data1.Recordset!codtipom, "T") = "" Then Exit Sub
+    If DBLet(Data1.Recordset!Numalbar, "N") = 0 Then Exit Sub
+    
+    'Si las horas son CERO tampoco hacemos nada
+    If Data1.Recordset.Fields(5).Value = 0 Then Exit Sub
+    
+    If InStr(1, txtAux3(4).Text, "Factura: ") = 0 Then Exit Sub 'NO  esta facturado
+    'En albaranes
+    
+    Set miRsAux = New ADODB.Recordset
+    Cada = "fecfactu>= " & DBSet(DateAdd("m", -6, Data1.Recordset!Fecha), "F")
+    Cada = Cada & " AND codtipoa =" & DBSet(Data1.Recordset!codtipom, "T") & " AND numalbar = " & DBLet(Data1.Recordset!Numalbar, "N")
+    Cada = "select codtipom,numfactu,fecfactu from slifac_eu  where " & Cada
+    Cada = "select * from slifac_eu where (codtipom,numfactu,fecfactu) in (" & Cada & ") and  nomartic='Horas trabajadas'  "
+    miRsAux.Open Cada, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If miRsAux.EOF Then Err.Raise 513, , "No existe la linea de costes horas para la factura: " & txtAux3(4).Text & vbCrLf & "El programa continua"
+    
+    'Ok esta la linea
+    If miRsAux!cantidad >= Data1.Recordset.Fields(5).Value Then
+        Cada = DBSet(miRsAux!cantidad - Data1.Recordset.Fields(5).Value, "N")
+    Else
+        'No puede quitar todas las horas. Hay menos en coset
+        Cada = "Cantidad en factura: " & miRsAux!cantidad & vbCrLf
+        Cada = Cada & "Cantidad a eliminar: " & Data1.Recordset.Fields(5).Value & vbCrLf
+        Cada = Cada & "Resultado final: 0"
+        MsgBox Cada, vbExclamation
+        Cada = 0
+    End If
+    Cada = "UPDATE  slifac_eu set cantidad= " & Cada
+    Cada = Cada & " WHERE fecfactu= " & DBSet(miRsAux!FecFactu, "F") & " AND codtipom =" & DBSet(miRsAux!codtipom, "T")
+    Cada = Cada & " AND numfactu= " & DBSet(miRsAux!Numfactu, "F")
+    Cada = Cada & " AND codtipoa =" & DBSet(miRsAux!Codtipoa, "T") & " AND numalbar = " & DBLet(miRsAux!Numalbar, "N")
+    Cada = Cada & " AND numlinea =" & DBSet(miRsAux!numlinea, "N")
+    
+    ejecutar Cada, False
+    Set miRsAux = Nothing
+    Exit Sub
+eActualizarCostesAlbaranSeleccionado:
+    MuestraError Err.Number, , Err.Description
+    Set miRsAux = Nothing
+End Sub
+

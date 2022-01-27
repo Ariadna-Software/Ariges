@@ -376,7 +376,7 @@ Dim BDConta As String
                mrpt.Database.Tables(i).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(i).Name
             Else
                 'Febrero2020
-                If vUsu.Login = "root" Then MsgBox "El programa continuará.         Redireccionando _ "
+                If vUsu.Login = "root" Then MsgBox "El programa continuará.         Redireccionando _   " & CStr(mrpt.Database.Tables(i).Name), vbExclamation
                 mrpt.Database.Tables(i).Location = BDConta & vParamAplic.NumeroConta & "." & mrpt.Database.Tables(i).Location
             End If
     
@@ -904,7 +904,7 @@ Dim RN As ADODB.Recordset
 Dim Cad As String
 Dim J As Integer
 Dim T1 As Single
-Dim aux2 As String
+Dim Aux2 As String
 Dim Destino As String
 Dim FinEspera As Boolean
     DoEvents
@@ -956,14 +956,14 @@ Dim FinEspera As Boolean
                         
             If False Then
                 'ANTES
-                aux2 = "" 'No esta el archivo generado. No hace falta que sigamos. lanzar error
+                Aux2 = "" 'No esta el archivo generado. No hace falta que sigamos. lanzar error
                 T1 = Timer
                 FinEspera = False
                 Do
                     Screen.MousePointer = vbHourglass
                     If Dir(Destino, vbArchive) <> "" Then
                         FinEspera = True
-                        aux2 = "SI"
+                        Aux2 = "SI"
                         
                     Else
                         If Timer - T1 > 25 Then FinEspera = True
@@ -974,7 +974,7 @@ Dim FinEspera As Boolean
                     End If
                 Loop Until FinEspera
                 
-                If Dir(Destino, vbArchive) = "" Then Err.Raise 513, , "Tiempo espera excedido creando fichero temporal: " & aux2
+                If Dir(Destino, vbArchive) = "" Then Err.Raise 513, , "Tiempo espera excedido creando fichero temporal: " & Aux2
             End If
             
             RN.MoveNext

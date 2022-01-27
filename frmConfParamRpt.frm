@@ -542,7 +542,7 @@ Begin VB.Form frmConfParamRpt
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8445
+      Left            =   8280
       TabIndex        =   12
       Top             =   8805
       Visible         =   0   'False
@@ -818,7 +818,7 @@ Dim btnPrimero As Byte
 Private WithEvents frmB As frmBasico2 'BuscaGrid
 Attribute frmB.VB_VarHelpID = -1
 Dim HaDevueltoDatos  As Boolean
-Dim CadB As String
+Dim cadB As String
 
 Dim Modo As Byte
 '0: Inicial
@@ -838,8 +838,16 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim vParamRpt As CParamRpt 'Clase Parametros para Reports
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 Dim actualiza As Boolean
+
+
+    If Modo = 1 Then
+        HacerBusqueda
+    
+        Exit Sub
+    End If
+
 
     If DatosOk Then
         'Modifica datos en la Tabla: scryst
@@ -870,8 +878,8 @@ Dim actualiza As Boolean
         End If
         Set vParamRpt = Nothing
         If actualiza = 0 Then 'Inserta o Modifica
-            cad = "codcryst=" & Text1(0).Text
-            If SituarData(Data1, cad, Indicador) Then
+            Cad = "codcryst=" & Text1(0).Text
+            If SituarData(Data1, Cad, Indicador) Then
                 PonerModo 2
                 Me.lblIndicador.Caption = Indicador
             End If
@@ -882,7 +890,11 @@ End Sub
 
 
 Private Sub cmdCancelar_Click()
+Dim V As Boolean
+    V = False
     Select Case Modo
+        Case 1
+            V = True
         Case 3 'Insertar
             LimpiarCampos
             PonerModo 0
@@ -893,11 +905,17 @@ Private Sub cmdCancelar_Click()
                 PonerModo 0
                 LimpiarCampos
             Else
-                PonerCampos
-                PonerModo 2
-                Me.lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+                V = True
+                
             End If
     End Select
+    
+    'Ver todos
+    If V Then
+        PonerCampos
+        PonerModo 2
+        Me.lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
+    End If
 End Sub
 
 
@@ -982,7 +1000,7 @@ Dim i As Integer
     PonerModo 0
     PonerFoco Text1(0)
     limpiar Me
-    Me.chkVistaPrevia.Value = 1
+    Me.chkVistaPrevia.Value = CheckValueLeer(Name)
 End Sub
 
 
@@ -1012,14 +1030,18 @@ EEPonerBusq:
     Screen.MousePointer = vbDefault
 End Sub
 
+Private Sub Form_Unload(Cancel As Integer)
+     CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
+End Sub
+
 Private Sub frmB_DatoSeleccionado(CadenaSeleccion As String)
     If CadenaSeleccion <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
         'Sabemos que campos son los que nos devuelve
         'Creamos una cadena consulta y ponemos los datos
-        CadB = ValorDevueltoFormGrid(Text1(0), CadenaSeleccion, 1)
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        cadB = ValorDevueltoFormGrid(Text1(0), CadenaSeleccion, 1)
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -1179,16 +1201,16 @@ Private Sub BotonBuscar()
 End Sub
 
 Private Sub HacerBusqueda()
-Dim cad As String
-Dim CadB As String
-CadB = ObtenerBusqueda(Me, False)
+Dim Cad As String
+Dim cadB As String
+cadB = ObtenerBusqueda(Me, False)
 
 If chkVistaPrevia = 1 Then
-    MandaBusquedaPrevia CadB
+    MandaBusquedaPrevia cadB
     Else
         'Se muestran en el mismo form
-        If CadB <> "" Then
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        If cadB <> "" Then
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
 End If
@@ -1231,10 +1253,10 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
     DatosOk = False
-    b = CompForm(Me, 1)
-    DatosOk = b
+    B = CompForm(Me, 1)
+    DatosOk = B
 End Function
 
 
@@ -1246,11 +1268,11 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdSalir.visible = b
-    If b Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera_(B As Boolean)
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdSalir.visible = B
+    
 End Sub
 
 
@@ -1309,7 +1331,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
    
     Modo = Kmodo
@@ -1324,15 +1346,15 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    b = (Kmodo = 2) Or (Kmodo = 0)
+    B = (Kmodo = 2) Or (Kmodo = 0)
 '    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
     
     
     '------------------------------------------------------
     'Modo insertar o modificar
-    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    PonerBotonCabecera Not b
+    B = Modo = 1 Or (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    PonerBotonCabecera_ Not B
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
     Else
@@ -1356,15 +1378,15 @@ Private Sub DesplazamientoVisible(bol As Boolean)
 End Sub
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Integer
 
-    b = (Modo = 0) Or (Modo = 2)
-    Me.Toolbar1.Buttons(1).Enabled = b 'Insertar
-    Me.mnNuevo.Enabled = b
-    b = (Modo = 2)
-    Me.Toolbar1.Buttons(2).Enabled = b 'Modificar
-    Me.mnModificar.Enabled = b
+    B = (Modo = 0) Or (Modo = 2)
+    Me.Toolbar1.Buttons(1).Enabled = B 'Insertar
+    Me.mnNuevo.Enabled = B
+    B = (Modo = 2)
+    Me.Toolbar1.Buttons(2).Enabled = B 'Modificar
+    Me.mnModificar.Enabled = B
     
     Me.Toolbar1.Buttons(3).Enabled = False 'eliminar
     
@@ -1378,19 +1400,19 @@ Dim i As Integer
 '    Image3(1).visible = Image3(0).visible
 '    Image3(2).visible = Image3(0).visible
     
-    b = (Modo = 2) And Val(Data1.Recordset!LlevaMulitInformes) = 1
+    B = (Modo = 2) And Val(Data1.Recordset!LlevaMulitInformes) = 1
     For i = 0 To ToolAux.Count - 1
-        ToolAux(i).Buttons(1).Enabled = b
-        ToolAux(i).Buttons(2).Enabled = b
-        ToolAux(i).Buttons(3).Enabled = b
+        ToolAux(i).Buttons(1).Enabled = B
+        ToolAux(i).Buttons(2).Enabled = B
+        ToolAux(i).Buttons(3).Enabled = B
     Next i
     
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 
     'Llamamos a al form
     Screen.MousePointer = vbHourglass
@@ -1421,7 +1443,7 @@ Dim cad As String
 '        End If
     
     Set frmB = New frmBasico2
-    AyudaMantenimientoReports frmB, Text1(0)
+    AyudaMantenimientoReports frmB, Text1(0), cadB
     Set frmB = Nothing
     
     
@@ -1454,3 +1476,5 @@ End Sub
 Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
     Desplazamiento (Button.Index)
 End Sub
+
+

@@ -890,7 +890,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -898,15 +898,15 @@ Dim temp As Boolean
     If Adodc1.Recordset.EOF Then Exit Sub
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el registro de " & Me.Caption & "?"
-    SQL = SQL & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & Adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el registro de " & Me.Caption & "?"
+    Sql = Sql & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & Adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from " & tabla & " where " & CampoCP & "=" & Adodc1.Recordset.Fields(0).Value
-        conn.Execute SQL
+        Sql = "Delete from " & tabla & " where " & CampoCP & "=" & Adodc1.Recordset.Fields(0).Value
+        conn.Execute Sql
         CargaGrid cadB
         PonerModoOpcionesMenu
         Adodc1.Recordset.Cancel
@@ -937,7 +937,7 @@ Private Sub ChkCaduca_Click()
     If ChkCaduca.Value = 1 Then
         cadFiltro2 = "sartic.codstatu < 2"
     End If
-    BotonVerTodos
+    'BotonVerTodos
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -986,7 +986,7 @@ End Sub
 
 Private Sub cmdCancelar_Click()
     On Error Resume Next
-    
+    Screen.MousePointer = vbHourglass
     Select Case Modo
         Case 1 'búsqueda
             CargaGrid cadB
@@ -1003,6 +1003,7 @@ Private Sub cmdCancelar_Click()
     
     PonerFocoGrid Me.DataGrid1
     If Err.Number <> 0 Then Err.Clear
+    Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub cmdRegresar_Click()
@@ -1202,6 +1203,10 @@ Private Sub Form_Load()
     If Formulario = "Articulos" Then
         ChkCaduca.visible = Not DeConsulta
         ChkCaduca.Enabled = Not DeConsulta
+        
+        If Not DeConsulta Then ChkCaduca.Value = CheckValueLeer("caducado")
+        
+        
     End If
     
     cadB = ""
@@ -1275,6 +1280,9 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
 If Modo = 4 Then TerminaBloquear
+
+    If ChkCaduca.visible Then CheckValueGuardar "caducado", ChkCaduca.Value
+
     Screen.MousePointer = vbDefault
     Set vTag1 = Nothing
     Set vTag3 = Nothing
@@ -1322,7 +1330,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
     
@@ -1335,28 +1343,28 @@ Private Sub CargaGrid(Optional vSQL As String)
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
     '[Monica]27/06/2019: solo para la ayuda de socios para no tener en cuenta los que tienen fecha de baja
     If cboFiltro.ListIndex <> -1 Then
         CargarSqlFiltro
         
-        SQL = SQL & " and " & cadFiltro
+        Sql = Sql & " and " & cadFiltro
     End If
     
     If cadFiltro2 <> "" Then
-        SQL = SQL & " and " & cadFiltro2
+        Sql = Sql & " and " & cadFiltro2
     End If
     
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY " & CampoOrden & " " & TipoOrden
+    Sql = Sql & " ORDER BY " & CampoOrden & " " & TipoOrden
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.Adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, Sql, PrimeraVez
     
     
     
@@ -1371,13 +1379,13 @@ Private Sub CargaGrid(Optional vSQL As String)
 
 End Sub
 
-Private Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, SQL As String, PrimeraVez As Boolean)
+Private Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, Sql As String, PrimeraVez As Boolean)
 On Error GoTo ECargaGrid
 
     vDataGrid.Enabled = True
     '    vdata.Recordset.Cancel
 '    vData.ConnectionString = conn
-    vData.RecordSource = SQL
+    vData.RecordSource = Sql
     vData.CursorType = adOpenDynamic
     vData.LockType = adLockPessimistic
     vDataGrid.ScrollBars = dbgNone
@@ -1612,7 +1620,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 

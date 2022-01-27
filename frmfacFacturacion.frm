@@ -243,8 +243,8 @@ Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 
 Private frmAlbG As frmFacEntAlbaranesGR
-Dim cad As String
-Dim primeravez As Boolean
+Dim Cad As String
+Dim PrimeraVez As Boolean
 
 
 Dim Orden As Integer
@@ -259,41 +259,41 @@ Dim TipoAlbaSeleccionado As String
 
 Private Sub CargaDatos(Numalbar As Long)
 Dim IT As ListItem
-    On Error GoTo ECargaDatos
+    On Error GoTo eCargaDatos
     
     Screen.MousePointer = vbHourglass
      
     lw1.ListItems.Clear
     Marcado = 0
     ImporteTot = 0
-    cad = "select c.numalbar,c.fechaalb,codclien,nomclien,substring(stippa.destippa,1,5),nomforpa ,coddirec,nomdirec,referenc,factursn,sum(importel) base"
-    cad = cad & " from scaalb c inner join sforpa on c.codforpa=sforpa.codforpa"
-    cad = cad & " left join stippa   on stippa.tipforpa =sforpa.tipforpa"
-    cad = cad & " left join slialb l on c.codtipom=l.codtipom and c.numalbar=l.numalbar where c.codtipom='" & TipoAlbaSeleccionado & "' group by 1"
+    Cad = "select c.numalbar,c.fechaalb,codclien,nomclien,substring(stippa.destippa,1,5),nomforpa ,coddirec,nomdirec,referenc,factursn,sum(importel) base"
+    Cad = Cad & " from scaalb c inner join sforpa on c.codforpa=sforpa.codforpa"
+    Cad = Cad & " left join stippa   on stippa.tipforpa =sforpa.tipforpa"
+    Cad = Cad & " left join slialb l on c.codtipom=l.codtipom and c.numalbar=l.numalbar where c.codtipom='" & TipoAlbaSeleccionado & "' group by 1"
     
-    cad = cad & " ORDER BY "
+    Cad = Cad & " ORDER BY "
     Select Case Orden
 
     Case 2
-         cad = cad & " fechaalb " & IIf(Not Asc, "DESC", "") & ", numalbar "
+         Cad = Cad & " fechaalb " & IIf(Not Asc, "DESC", "") & ", numalbar "
     Case 3
-         cad = cad & " codclien " & IIf(Not Asc, "DESC", "") & ", numalbar  "
+         Cad = Cad & " codclien " & IIf(Not Asc, "DESC", "") & ", numalbar  "
     
     Case 4
-        cad = cad & " nomclien " & IIf(Not Asc, "DESC", "") & ", codclien, numalbar  "
+        Cad = Cad & " nomclien " & IIf(Not Asc, "DESC", "") & ", codclien, numalbar  "
     Case 5
-        cad = cad & " nomdirec " & IIf(Not Asc, "DESC", "") & ", referenc " & IIf(Not Asc, "DESC", "") & ", codclien, numalbar  "
+        Cad = Cad & " nomdirec " & IIf(Not Asc, "DESC", "") & ", referenc " & IIf(Not Asc, "DESC", "") & ", codclien, numalbar  "
     Case 6
-        cad = cad & " nomforpa " & IIf(Not Asc, "DESC", "") & ", fechaalb, numalbar  "
+        Cad = Cad & " nomforpa " & IIf(Not Asc, "DESC", "") & ", fechaalb, numalbar  "
     
     Case 7
-        cad = cad & " base " & IIf(Not Asc, "DESC", "") & ", fechaalb  "
+        Cad = Cad & " base " & IIf(Not Asc, "DESC", "") & ", fechaalb  "
     Case Else
-        cad = cad & " numalbar " & IIf(Not Asc, "DESC", "") & ", fechaalb "
+        Cad = Cad & " numalbar " & IIf(Not Asc, "DESC", "") & ", fechaalb "
     End Select
     
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not miRsAux.EOF
         Set IT = lw1.ListItems.Add()
         IT.Text = Format(miRsAux!Numalbar, "000000")
@@ -334,7 +334,7 @@ Dim IT As ListItem
     miRsAux.Close
     
     
-ECargaDatos:
+eCargaDatos:
     If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
     Set miRsAux = Nothing
     Lbl
@@ -376,18 +376,18 @@ Dim vCli As CCliente
     
     
     Set miRsAux = New ADODB.Recordset
-    cad = "Select codclien , nomclien from scaalb WHERE scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ") GROUP BY codclien"
+    Cad = "Select codclien , nomclien from scaalb WHERE scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ") GROUP BY codclien"
     Set vCli = New CCliente
-    miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    cad = "OK"
+    miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Cad = "OK"
     While Not miRsAux.EOF
         If Not vCli.LeerDatos(CStr(miRsAux!codClien)) Then
-            cad = ""
+            Cad = ""
         Else
             'Falta##3
             If vCli.ClienteBloqueado(2, False) Then
                 MsgBox "No se le puede realizar facturas : " & vbCrLf & "   -" & miRsAux!NomClien, vbExclamation
-                cad = "N"
+                Cad = "N"
             End If
         End If
         miRsAux.MoveNext
@@ -395,16 +395,16 @@ Dim vCli As CCliente
     miRsAux.Close
     Set miRsAux = Nothing
     Set vCli = Nothing
-    If cad <> "OK" Then Exit Sub
+    If Cad <> "OK" Then Exit Sub
     
-    cad = vbCrLf & Replace(Me.Label2.Caption, "Selec", "Selecionados")
-    cad = "Fecha factura: " & Text1.Text & vbCrLf & "Banco: " & Combo1.Text & cad & vbCrLf & vbCrLf & "¿Desea continuar con la facturación?"
-    If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    Cad = vbCrLf & Replace(Me.Label2.Caption, "Selec", "Selecionados")
+    Cad = "Fecha factura: " & Text1.Text & vbCrLf & "Banco: " & Combo1.Text & Cad & vbCrLf & vbCrLf & "¿Desea continuar con la facturación?"
+    If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
     
     
     'Clientes BLOQUEADOS
-    cad = "scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ")"
+    Cad = "scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ")"
     
 
     
@@ -415,8 +415,8 @@ Dim vCli As CCliente
     '------------------------------------------------------------------------------
     '  LOG de acciones.
     Set LOG = New cLOG
-    cad = "Albaranes: " & Numalbar
-    LOG.Insertar 2, vUsu, cad
+    Cad = "Albaranes: " & Numalbar
+    LOG.Insertar 2, vUsu, Cad
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
 
@@ -424,8 +424,8 @@ Dim vCli As CCliente
     
     
     Screen.MousePointer = vbHourglass
-    cad = "scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ")"
-    TraspasoAlbaranesFacturas "Select *  FROM  scaalb WHERE " & cad, cad, Text1.Text, Combo1.ItemData(Combo1.ListIndex), Nothing, Label2, True, CStr(TipoAlbaSeleccionado), "|||", CByte(vParamAplic.NumCopiasFacturacion), True, False, False
+    Cad = "scaalb.factursn=1  and scaalb.codtipom='" & TipoAlbaSeleccionado & "' AND scaalb.numalbar in (" & Numalbar & ")"
+    TraspasoAlbaranesFacturas "Select *  FROM  scaalb WHERE " & Cad, Cad, Text1.Text, Combo1.ItemData(Combo1.ListIndex), Nothing, Label2, True, CStr(TipoAlbaSeleccionado), "|||", CByte(vParamAplic.NumCopiasFacturacion), True, False, False, False
     
     DoEvents
     Label2.Caption = "Leyendo BD"
@@ -447,7 +447,7 @@ Private Sub Combo1_Click()
 End Sub
 
 Private Sub Combo2_Click()
-    If primeravez Then Exit Sub
+    If PrimeraVez Then Exit Sub
     If Combo2.ListIndex > 0 Then
         TipoAlbaSeleccionado = "ALZ"
         Me.Label1(0).ForeColor = vbRed
@@ -459,8 +459,8 @@ Private Sub Combo2_Click()
 End Sub
 
 Private Sub Form_Activate()
-    If primeravez Then
-        primeravez = False
+    If PrimeraVez Then
+        PrimeraVez = False
         
         CargaDatos -1
                 
@@ -469,7 +469,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-    primeravez = True
+    PrimeraVez = True
     Me.Icon = frmPpal.Icon
    ' Me.cmdFra.Picture = frmPpal.imgListComun.ListImages(5)
     Orden = 1
@@ -487,36 +487,36 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
-    cad = Format(vFecha, "dd/mm/yyyy")
+    Cad = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub imgCheck_Click(index As Integer)
+Private Sub imgCheck_Click(Index As Integer)
 
     
-    cad = IIf(index = 0, "Marcar", "Desmarcar")
-    cad = cad & " los albaranes para facturar?"
-    If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    Cad = IIf(Index = 0, "Marcar", "Desmarcar")
+    Cad = Cad & " los albaranes para facturar?"
+    If MsgBox(Cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
     Screen.MousePointer = vbHourglass
-    cad = "UPDATE scaalb set factursn = " & IIf(index = 0, "1", "0") & " WHERE codtipom = '" & TipoAlbaSeleccionado & "'"
-    ejecutar cad, False
+    Cad = "UPDATE scaalb set factursn = " & IIf(Index = 0, "1", "0") & " WHERE codtipom = '" & TipoAlbaSeleccionado & "'"
+    ejecutar Cad, False
     CargaDatos -1
 End Sub
 
-Private Sub imgFecha_Click(index As Integer)
+Private Sub imgFecha_Click(Index As Integer)
     Set frmC = New frmCal
     frmC.Fecha = Now
-    cad = ""
+    Cad = ""
     frmC.Show vbModal
     Set frmC = Nothing
-    If cad <> "" Then
-        Text1.Text = cad
+    If Cad <> "" Then
+        Text1.Text = Cad
         Text1_LostFocus
     End If
 End Sub
 
-Private Sub Label1_Click(index As Integer)
-    If index = 2 Then
+Private Sub Label1_Click(Index As Integer)
+    If Index = 2 Then
         If vUsu.Nivel <= 1 Then
             If Combo2.ListCount = 1 Then
                 Combo2.AddItem "Presupuesto"
@@ -527,11 +527,11 @@ Private Sub Label1_Click(index As Integer)
 End Sub
 
 Private Sub lw1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
-    If ColumnHeader.index = Orden Then
+    If ColumnHeader.Index = Orden Then
         Asc = Not Asc
     Else
         Asc = True
-        Orden = ColumnHeader.index
+        Orden = ColumnHeader.Index
     End If
     CargaDatos -1
 End Sub
@@ -559,7 +559,7 @@ Private Sub lw1_DblClick()
 End Sub
 
 Private Sub lw1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
-    cad = "UPDATE scaalb set factursn = " & IIf(Item.Checked, "1", "0") & " WHERE codtipom = '" & TipoAlbaSeleccionado & "' AND numalbar = " & Item.Text
+    Cad = "UPDATE scaalb set factursn = " & IIf(Item.Checked, "1", "0") & " WHERE codtipom = '" & TipoAlbaSeleccionado & "' AND numalbar = " & Item.Text
     
     If Item.Checked Then
         Marcado = Marcado + 1
@@ -568,7 +568,7 @@ Private Sub lw1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
         Marcado = Marcado - 1
         ImporteTot = ImporteTot - ImporteFormateado(Item.SubItems(6))
     End If
-    ejecutar cad, False
+    ejecutar Cad, False
     Lbl
 End Sub
 

@@ -2080,8 +2080,9 @@ Public Sub DevuelveTablasBorre(Opcion As Byte, ByRef Tablas As String, ByRef Des
             NumeroTablas = NumeroTablas + 1
         End If
         
-        
-        
+        Tablas = Tablas & "sarti9|"
+        Descripcion = Descripcion & "Doc. tecnicos|"
+        NumeroTablas = NumeroTablas + 1
     Else
         'Tablas que al eliminar el articulo voy a tener que borrar
         'Esta salmac. Antes de lanzar el proceso hay que comprobar que la suma de stock es CERO
@@ -2461,14 +2462,19 @@ End Function
 
 
 
-Public Function DevuelveTipoFacturaDesdeAlbaran(TipoAlb As String) As String
+Public Function DevuelveTipoFacturaDesdeAlbaran(TipoAlb As String, FacturaTicketSuperaImporte As Boolean) As String
 Dim codtipom As String
 
      Select Case TipoAlb
         Case "ALV", "ALM": 'ALV: Albaranes venta a clientes
             codtipom = "FAV"
             If TipoAlb = "ALM" Then
-                If vParamAplic.FrasMostradorSerieDistinta Then codtipom = "FMO"
+                If vParamAplic.FrasMostradorSerieDistinta Then
+                    codtipom = "FMO"
+                    'facturas de mostrador que van a otra serie, y supera los importes de tickets para partuclares o empresa
+                    If FacturaTicketSuperaImporte Then codtipom = vParamAplic.SerieFacturaDirecta
+                    
+                End If
             End If
             
             
@@ -2716,3 +2722,35 @@ eUltimoUsuarioLogado:
     MuestraError Err.Number, "Leyendo ult. usuario logado", Err.Description
 End Sub
 
+
+
+
+
+
+Public Function ComprobarFechaCaducidadCarnetFito(FechaCaducidadCarnet As Date, FechaTranasccion As Date) As Boolean
+Dim C As String
+Dim N As Long
+
+    
+    'FALTA.  En un futuro si esta caducado, estará caducado y no podra comprar
+    C = vbCrLf & String(45, "*") & vbCrLf
+    
+    ComprobarFechaCaducidadCarnetFito = False
+    If FechaCaducidadCarnet < FechaTranasccion Then
+        C = C & "Carnet fitosanitario     CADUCADO" & C
+        If Now >= CDate("01/03/2022") Then
+            MsgBox C, vbExclamation
+        Else
+            C = C & vbCrLf & "Si continua debe avisar al responsable de fitosanitarios." & vbCrLf & vbCrLf & "¿Continuar?"
+            If MsgBox(C, vbQuestion + vbYesNoCancel) = vbYes Then C = ""
+        End If
+        If C <> "" Then Exit Function
+    Else
+        N = DateDiff("m", Now, FechaCaducidadCarnet)
+        If N <= 1 Then
+            C = C & "Carnet de fitosanitarios " & IIf(N > 0, "a punto de caducar.", "caducado") & vbCrLf & "NO podrá comprar con el carnet caducado" & C
+            MsgBox C, vbInformation
+        End If
+    End If
+    ComprobarFechaCaducidadCarnetFito = True
+End Function

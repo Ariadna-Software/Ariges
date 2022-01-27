@@ -446,7 +446,7 @@ Dim i As Integer
                     'Columna en la BD
                     
                     If mTag.columna <> "" Then
-                        'Debug.Print mTag.columna
+                        Debug.Print mTag.columna
                         
                         campo = mTag.columna
                         If mTag.Vacio = "S" Then

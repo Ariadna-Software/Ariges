@@ -39,18 +39,17 @@ Begin VB.Form frmFacClientesGr
          Strikethrough   =   0   'False
       EndProperty
       Height          =   705
-      Left            =   7200
+      Left            =   3840
       TabIndex        =   359
       Top             =   0
-      Visible         =   0   'False
-      Width           =   2745
+      Width           =   1305
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   210
          TabIndex        =   360
          Top             =   180
-         Width           =   1965
-         _ExtentX        =   3466
+         Width           =   1005
+         _ExtentX        =   1773
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -58,18 +57,9 @@ Begin VB.Form frmFacClientesGr
          Style           =   1
          _Version        =   393216
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   4
+            NumButtons      =   1
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Datos Fiscales"
-            EndProperty
-            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Cobros"
-            EndProperty
-            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Errores NºFactura"
-            EndProperty
-            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Facturas sin Asiento"
+               Object.ToolTipText     =   "Datos facturacio electrónica"
             EndProperty
          EndProperty
       End
@@ -93,7 +83,7 @@ Begin VB.Form frmFacClientesGr
          Strikethrough   =   0   'False
       EndProperty
       Height          =   705
-      Left            =   3840
+      Left            =   5340
       TabIndex        =   291
       Top             =   0
       Width           =   2415
@@ -326,8 +316,8 @@ Begin VB.Form frmFacClientesGr
       TabCaption(1)   =   "Asegur"
       TabPicture(1)   =   "frmFacClientesGr.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame3"
-      Tab(1).Control(1)=   "FrameAsegurados"
+      Tab(1).Control(0)=   "FrameAsegurados"
+      Tab(1).Control(1)=   "Frame3"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Direcciones"
       TabPicture(2)   =   "frmFacClientesGr.frx":0044
@@ -1897,7 +1887,7 @@ Begin VB.Form frmFacClientesGr
             Tag             =   "Fecha concesion|F|S|||sclien|fecbajcre|dd/mm/yyyy|N|"
             Text            =   "Text1"
             Top             =   3360
-            Width           =   1110
+            Width           =   1455
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -1968,7 +1958,7 @@ Begin VB.Form frmFacClientesGr
             Tag             =   "Fecha Reclamación|F|S|||sclien|FechaSol|dd/mm/yyyy|N|"
             Text            =   "Text1"
             Top             =   1680
-            Width           =   1335
+            Width           =   1455
          End
          Begin VB.TextBox Text1 
             Height          =   360
@@ -8728,7 +8718,7 @@ Private Sub cmdAccCRM_Click(Index As Integer)
 End Sub
 
 Private Sub cmdAccDocs_Click(Index As Integer)
-Dim SQL As String
+Dim Sql As String
     If Index <> 2 And Index <> 4 Then
         If Modo <> 2 Then Exit Sub
     End If
@@ -9062,9 +9052,9 @@ Dim NombreModificado As Boolean
                     CargaLineas True, 6
                 
                     If ModificaLineas = 1 Then
-                        Data3.Recordset.MoveLast
+                        data3.Recordset.MoveLast
                     Else
-                        Data3.Recordset.Find Cad
+                        data3.Recordset.Find Cad
                     End If
                     B = True
                     
@@ -9112,6 +9102,16 @@ Dim NombreModificado As Boolean
                     B = True
                 ElseIf Modo = 10 Then
                     '10.- Fitos
+                    
+                    BuscaChekc = ""
+                    If ModificaLineas = 2 Then
+                        'Podria ser que el autorizado este en otro clientes
+                        'Comprobaremos si es asi, avisamos y si dice que si, actualizamos
+                        BuscaChekc = "codclien <> " & Text1(0).Text & " AND cif =" & DBSet(data7.Recordset!CIF, "T") & " AND 1"
+                        BuscaChekc = DevuelveDesdeBD(conAri, "count(*)", "sclienmani", BuscaChekc, "1")
+                        If Val(BuscaChekc) < 1 Then BuscaChekc = ""
+                    
+                    End If
                     LLamaLineasFito 0, 0
                     DataGrid4.AllowAddNew = False
                     CargaLineas True, 3
@@ -9122,6 +9122,28 @@ Dim NombreModificado As Boolean
                         data7.Recordset.Find Cad
                     End If
                     B = True
+                    
+                    If BuscaChekc <> "" Then
+                        BuscaChekc = "El autorizado lo está en otros clientes. (" & BuscaChekc & ") " & vbCrLf & " ¿Actualizar?"
+                        If MsgBox(BuscaChekc, vbQuestion + vbYesNoCancel) = vbYes Then
+                            BuscaChekc = "update sclienmani as destino inner join ("
+                            BuscaChekc = BuscaChekc & " select codclien,cif,nombre,tipocarnet,numcarnet,fcaducidad,telefono"
+                            BuscaChekc = BuscaChekc & " FROM sclienmani where codclien=" & Text1(0).Text & " and cif =" & DBSet(data7.Recordset!CIF, "T")
+                            BuscaChekc = BuscaChekc & " ) as origen"
+
+                            BuscaChekc = BuscaChekc & " set destino.nombre = origen.nombre,"
+                            BuscaChekc = BuscaChekc & " destino.tipocarnet = origen.tipocarnet,"
+                            BuscaChekc = BuscaChekc & " destino.numcarnet = origen.numcarnet,"
+                            BuscaChekc = BuscaChekc & " destino.fcaducidad = origen.fcaducidad,"
+                            BuscaChekc = BuscaChekc & " Destino.Telefono = Origen.Telefono"
+
+                            BuscaChekc = BuscaChekc & " where Destino.codclien <> " & Text1(0).Text & " and Destino.cif =" & DBSet(data7.Recordset!CIF, "T")
+                    
+                            ejecutar BuscaChekc, False
+                        End If
+                        BuscaChekc = ""
+                    End If
+                    
                 ElseIf Modo = 11 Then
                     '11.- Campos huertos
                     LLamaLineasCamposHuertos 0, 0
@@ -9340,12 +9362,12 @@ Dim Indicador As String
             DataGrid7.AllowAddNew = False
             If ModificaLineas = 1 Or ModificaLineas = 5 Then '1 = Insertar
                 
-                If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
+                If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
                     
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(coddiren=" & Text4(0).Text & ")"
                  CargaLineas True, 6
-                 Data3.Recordset.Find Cad
+                 data3.Recordset.Find Cad
                  
             End If
             
@@ -9534,7 +9556,8 @@ Private Sub BotonAnyadir()
     End If
     
 
-    
+    '
+    chkMarcarFacturar.Value = IIf(vParamAplic.MarcarAlbaranFacturar, 1, 0)
     
     Me.SSTab1.Tab = 0
     If vParamAplic.NumeroInstalacion = vbFenollar Then
@@ -9705,7 +9728,7 @@ Dim vWhere As String
         Text4(0).Text = SugerirCodigoSiguienteStr("sdirenvio", "coddiren", vWhere)
         
         
-        AnyadirLinea DataGrid7, Data3
+        AnyadirLinea DataGrid7, data3
         LLamaLineasDirenEvio ObtenerAlto(DataGrid7, 20), 1
         
 
@@ -9884,8 +9907,8 @@ Dim aModo As Byte
         Me.SSTab1.Tab = 2
         
     ElseIf aModo = 6 Then
-        If Data3.Recordset.EOF Then Exit Sub
-        If Data3.Recordset.RecordCount < 1 Then Exit Sub
+        If data3.Recordset.EOF Then Exit Sub
+        If data3.Recordset.RecordCount < 1 Then Exit Sub
         Me.SSTab1.Tab = 3
     ElseIf aModo = 7 Then
         If data4.Recordset.EOF Then Exit Sub
@@ -10183,39 +10206,39 @@ Private Sub BotonEliminarLineaDirEnvio()
 Dim Cad As String
 Dim i As Integer
 
-    If Data3.Recordset.EOF Then Exit Sub
-    If Data3.Recordset.RecordCount < 1 Then Exit Sub
+    If data3.Recordset.EOF Then Exit Sub
+    If data3.Recordset.RecordCount < 1 Then Exit Sub
     
     'Si no estaba modificando lineas salimos
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 1 Or ModificaLineas = 2 Then Exit Sub '1= Insertar, 2=Modificar
        
-    If Not PuedeEliminarDirecEnvio(True, Text1(0).Text, CInt(Data3.Recordset!coddiren)) Then Exit Sub
+    If Not PuedeEliminarDirecEnvio(True, Text1(0).Text, CInt(data3.Recordset!coddiren)) Then Exit Sub
     
     ModificaLineas = 3 'Eliminar
     
     
     Cad = "¿Seguro que desea eliminar la direccion de envio" & Cad & vbCrLf
-    Cad = Cad & vbCrLf & "Codigo:  " & Format(Data3.Recordset.Fields(0), FormatoCampo(Text4(0)))
-    Cad = Cad & vbCrLf & "Nombre:  " & Data3.Recordset.Fields(1)
+    Cad = Cad & vbCrLf & "Codigo:  " & Format(data3.Recordset.Fields(0), FormatoCampo(Text4(0)))
+    Cad = Cad & vbCrLf & "Nombre:  " & data3.Recordset.Fields(1)
     
     'Borramos
     If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
-        NumRegElim = Data3.Recordset.AbsolutePosition
+        NumRegElim = data3.Recordset.AbsolutePosition
         
         
         Cad = "DELETE FROM sdirenvio WHERE codclien =" & Data1.Recordset!codClien
-        Cad = Cad & " AND coddiren=" & Data3.Recordset!coddiren
+        Cad = Cad & " AND coddiren=" & data3.Recordset!coddiren
         conn.Execute Cad
         
         
         
         CargaLineas True, 6
         
-        If NumRegElim > 0 Then Data3.Recordset.Move NumRegElim
+        If NumRegElim > 0 Then data3.Recordset.Move NumRegElim
 
         
         
@@ -10226,7 +10249,7 @@ Dim i As Integer
 Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
-        Data3.Recordset.CancelUpdate
+        data3.Recordset.CancelUpdate
         MsgBox Err.Number & ": " & Err.Description, vbExclamation
     End If
 End Sub
@@ -10500,7 +10523,7 @@ End Sub
 Private Sub data3_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
 
     If Modo = 6 And ModificaLineas > 0 Then Exit Sub
-    If Not Data3.Recordset.EOF Then
+    If Not data3.Recordset.EOF Then
         'Caption = data4.Recordset!Id
         PonerDatosForaGridDirEnvio False
     Else
@@ -10578,7 +10601,7 @@ Private Sub DataGrid6_Click()
 End Sub
 
 Private Sub DataGrid7_Click()
-    If Not Data3.Recordset.EOF And ModificaLineas <> 1 Then PonerDatosForaGridDirEnvio False
+    If Not data3.Recordset.EOF And ModificaLineas <> 1 Then PonerDatosForaGridDirEnvio False
 
 End Sub
 
@@ -10642,6 +10665,16 @@ Dim N As Integer
         .Buttons(8).Image = 16
         
     End With
+    
+    With Me.Toolbar2
+        .HotImageList = frmPpal.imgListComun_OM2
+        .DisabledImageList = frmPpal.imgListComun_BN2
+        .ImageList = frmPpal.ImgListComun2
+        .Buttons(1).Image = 42
+        
+    End With
+
+    
     
     ' desplazamiento
     With Me.ToolbarDes
@@ -12419,7 +12452,7 @@ Dim Titulo As String
         Case 7 'NIF
             If Text1(Index).Text <> "" And Me.chkClienteV.Value = False Then
                 Text1(Index).Text = UCase(Text1(Index).Text)
-                ValidarNIF Text1(Index).Text
+                ValidarNIF_ Text1(Index).Text, False
                 If Modo = 3 Then
                     If Text1(45).Text = "" Then Text1(45).Text = Text1(Index).Text
                     'Veremos si ya existe un cliente con este NIF
@@ -13515,26 +13548,26 @@ Dim fec As Date
         End If
     
         'Operaciones aseguradas FENOLLAR
-        If vParamAplic.NumeroInstalacion = vbFenollar Then
-            If Text1(55).Text <> "" Then
-                BuscaChekc = "|" & Text1(55).Text & "|"
-                If InStr(1, "|NORM|30|90|60|NADA|OP|180|120|150|PART|", BuscaChekc) = 0 Then
-                    MsgBox "Tipo de perfil incorrecto" & vbCrLf & " 30 - 60  - 90 - 120 - 150 - 180 - NADA - NORM - OP - PART", vbExclamation
-                    B = False
-                    PonerFoco Text1(55)
-                End If
-            
-                If B Then
-                    If Text1(64).Text = "" Then
-                        'MsgBox "Debe indicar tipo de credito asegurado"
-                        'B = False
-                        'PonerFoco Text1(64)
-                    End If
-                End If
-            End If
-            BuscaChekc = ""
-            
-        End If
+'        If vParamAplic.NumeroInstalacion = vbFenollar Then
+'            If Text1(55).Text <> "" Then
+'                BuscaChekc = "|" & Text1(55).Text & "|"
+'                If InStr(1, "|NORM|30|90|60|NADA|OP|180|120|150|PART|", BuscaChekc) = 0 Then
+'                    MsgBox "Tipo de perfil incorrecto" & vbCrLf & " 30 - 60  - 90 - 120 - 150 - 180 - NADA - NORM - OP - PART", vbExclamation
+'                    B = False
+'                    PonerFoco Text1(55)
+'                End If
+'
+'                If B Then
+'                    If Text1(64).Text = "" Then
+'                        'MsgBox "Debe indicar tipo de credito asegurado"
+'                        'B = False
+'                        'PonerFoco Text1(64)
+'                    End If
+'                End If
+'            End If
+'            BuscaChekc = ""
+'
+'        End If
     
     
     End If
@@ -13555,6 +13588,19 @@ Dim fec As Date
             
         End If
     End If
+    
+    
+    
+    If B Then
+        If vParamAplic.NumeroInstalacion = vbHerbelca And vUsu.Nivel > 0 Then
+            If HamCambiadoDatosEsenciales(False) Then
+                MsgBox "No puede cambiar datos basicos", vbExclamation
+                B = False
+            End If
+        End If
+    End If
+    
+    
     
     'Si lleva aseguradas
     If B And vParamAplic.OperacionesAseguradas And vUsu.Nivel = 0 Then
@@ -14236,69 +14282,69 @@ End Function
     
 Private Function InsertarModificarLineaDpto() As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarModificarLinea
     
     InsertarModificarLineaDpto = False
-    SQL = ""
+    Sql = ""
     Select Case ModificaLineas
     Case 1  'INSERTAR
         If DatosOkLinea Then
-            SQL = "INSERT INTO sdirec (codclien,coddirec,nomdirec,domdirec,codpobla,pobdirec,prodirec,perdirec,teldirec,faxdirec,maidirec,codbanco,codsucur,digcontr,cuentaba,codzona,iban"
-            SQL = SQL & " , organogestor,unidadtramitadora,orgproponente,oficinacontable) VALUES ("
-            SQL = SQL & Text1(0).Text & ", "
-            SQL = SQL & Text3(0).Text
+            Sql = "INSERT INTO sdirec (codclien,coddirec,nomdirec,domdirec,codpobla,pobdirec,prodirec,perdirec,teldirec,faxdirec,maidirec,codbanco,codsucur,digcontr,cuentaba,codzona,iban"
+            Sql = Sql & " , organogestor,unidadtramitadora,orgproponente,oficinacontable) VALUES ("
+            Sql = Sql & Text1(0).Text & ", "
+            Sql = Sql & Text3(0).Text
             For i = 1 To 5
-                SQL = SQL & ", "
-                SQL = SQL & DBSet(Text3(i).Text, "T")
+                Sql = Sql & ", "
+                Sql = Sql & DBSet(Text3(i).Text, "T")
             Next i
                     
             For i = 6 To 19 'campos opcionales
-                SQL = SQL & ", "
-                SQL = SQL & DBSet(Text3(i).Text, "T", "S")
+                Sql = Sql & ", "
+                Sql = Sql & DBSet(Text3(i).Text, "T", "S")
 '                If i <> 13 Then SQL = SQL & ", "
             Next i
                         
-            SQL = SQL & ")"
+            Sql = Sql & ")"
         End If
         
     Case 2  'MODIFICAR
         If DatosOkLinea Then
-            SQL = "UPDATE sdirec Set nomdirec = " & DBSet(Text3(1).Text, "T")
-            SQL = SQL & ", domdirec = " & DBSet(Text3(2).Text, "T")
-            SQL = SQL & ", codpobla = " & DBSet(Text3(3).Text, "T")
-            SQL = SQL & ", pobdirec = " & DBSet(Text3(4).Text, "T")
-            SQL = SQL & ", prodirec = " & DBSet(Text3(5).Text, "T")
-            SQL = SQL & ", perdirec = " & DBSet(Text3(6).Text, "T")
+            Sql = "UPDATE sdirec Set nomdirec = " & DBSet(Text3(1).Text, "T")
+            Sql = Sql & ", domdirec = " & DBSet(Text3(2).Text, "T")
+            Sql = Sql & ", codpobla = " & DBSet(Text3(3).Text, "T")
+            Sql = Sql & ", pobdirec = " & DBSet(Text3(4).Text, "T")
+            Sql = Sql & ", prodirec = " & DBSet(Text3(5).Text, "T")
+            Sql = Sql & ", perdirec = " & DBSet(Text3(6).Text, "T")
             'If Text3(7).Text <> "" Then SQL = SQL & ", fechainv = '" & Format(Text3(7).Text, "yyyy-mm-dd") & "'"
             'If Text3(8).Text <> "" Then SQL = SQL & ", horainve = '" & Format(Text3(8).Text, "hh:mm:ss") & "'"
-            SQL = SQL & ", teldirec = " & DBSet(Text3(7).Text, "T")
-            SQL = SQL & ", faxdirec = " & DBSet(Text3(8).Text, "T")
-            SQL = SQL & ", maidirec = " & DBSet(Text3(9).Text, "T")
+            Sql = Sql & ", teldirec = " & DBSet(Text3(7).Text, "T")
+            Sql = Sql & ", faxdirec = " & DBSet(Text3(8).Text, "T")
+            Sql = Sql & ", maidirec = " & DBSet(Text3(9).Text, "T")
             'datos cuenta bancaria
             If Me.FrameCtaBanDpto.visible Then
-                SQL = SQL & ", codbanco = " & DBSet(Text3(10).Text, "N", "S")
-                SQL = SQL & ", codsucur = " & DBSet(Text3(11).Text, "N", "S")
-                SQL = SQL & ", digcontr = " & DBSet(Text3(12).Text, "T")
-                SQL = SQL & ", cuentaba = " & DBSet(Text3(13).Text, "T")
-                SQL = SQL & ", iban = " & DBSet(Text3(15).Text, "T")
+                Sql = Sql & ", codbanco = " & DBSet(Text3(10).Text, "N", "S")
+                Sql = Sql & ", codsucur = " & DBSet(Text3(11).Text, "N", "S")
+                Sql = Sql & ", digcontr = " & DBSet(Text3(12).Text, "T")
+                Sql = Sql & ", cuentaba = " & DBSet(Text3(13).Text, "T")
+                Sql = Sql & ", iban = " & DBSet(Text3(15).Text, "T")
                 
-                SQL = SQL & ", organogestor = " & DBSet(Text3(16).Text, "T", "S")
-                SQL = SQL & ", unidadtramitadora = " & DBSet(Text3(17).Text, "T", "S")
-                SQL = SQL & ", orgproponente = " & DBSet(Text3(18).Text, "T", "S")
-                SQL = SQL & ", oficinacontable = " & DBSet(Text3(19).Text, "T", "S")
+                Sql = Sql & ", organogestor = " & DBSet(Text3(16).Text, "T", "S")
+                Sql = Sql & ", unidadtramitadora = " & DBSet(Text3(17).Text, "T", "S")
+                Sql = Sql & ", orgproponente = " & DBSet(Text3(18).Text, "T", "S")
+                Sql = Sql & ", oficinacontable = " & DBSet(Text3(19).Text, "T", "S")
                 
                 
             End If
-            SQL = SQL & ", codzona = " & DBSet(Text3(14).Text, "N", "S")
-            SQL = SQL & " WHERE codclien =" & (Text1(0).Text) & " AND "
-            SQL = SQL & " coddirec =" & (Text3(0).Text)
+            Sql = Sql & ", codzona = " & DBSet(Text3(14).Text, "N", "S")
+            Sql = Sql & " WHERE codclien =" & (Text1(0).Text) & " AND "
+            Sql = Sql & " coddirec =" & (Text3(0).Text)
         End If
     End Select
         
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarLineaDpto = True
         TratarDptoEnTesoreria   'TESOERIA
     Else
@@ -14313,51 +14359,51 @@ End Function
 
 Private Function InsertarModificarLineaEnvio() As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarModificarLinea
     
     InsertarModificarLineaEnvio = False
-    SQL = ""
+    Sql = ""
     Select Case ModificaLineas
     Case 1  'INSERTAR
         If DatosOkLinea Then
-            SQL = "INSERT INTO sdirenvio (codclien,coddiren,nomdiren,perdiren,pobdiren,codpobla,prodiren,teldiren,faxdiren,observa,codzona,domdiren) VALUES ("
-            SQL = SQL & Text1(0).Text & ", "
-            SQL = SQL & Text4(0).Text
+            Sql = "INSERT INTO sdirenvio (codclien,coddiren,nomdiren,perdiren,pobdiren,codpobla,prodiren,teldiren,faxdiren,observa,codzona,domdiren) VALUES ("
+            Sql = Sql & Text1(0).Text & ", "
+            Sql = Sql & Text4(0).Text
             For i = 1 To 5
-                SQL = SQL & ", "
-                SQL = SQL & DBSet(Text4(i).Text, "T")
+                Sql = Sql & ", "
+                Sql = Sql & DBSet(Text4(i).Text, "T")
             Next i
                     
             For i = 6 To 8 'campos opcionales
-                SQL = SQL & ", "
-                SQL = SQL & DBSet(Text4(i).Text, "T", "S")
+                Sql = Sql & ", "
+                Sql = Sql & DBSet(Text4(i).Text, "T", "S")
 '                If i <> 13 Then SQL = SQL & ", "
             Next i
-            SQL = SQL & "," & DBSet(Text4(9).Text, "N", "S") & "," & DBSet(Text4(10).Text, "T", "S")
-            SQL = SQL & ")"
+            Sql = Sql & "," & DBSet(Text4(9).Text, "N", "S") & "," & DBSet(Text4(10).Text, "T", "S")
+            Sql = Sql & ")"
         End If
         
     Case 2  'MODIFICAR
         If DatosOkLinea Then
-            SQL = "UPDATE sdirenvio Set nomdiren = " & DBSet(Text4(1).Text, "T")
-            SQL = SQL & ", domdiren = " & DBSet(Text4(10).Text, "T")
-            SQL = SQL & ", codpobla = " & DBSet(Text4(4).Text, "T")
-            SQL = SQL & ", pobdiren = " & DBSet(Text4(3).Text, "T")
-            SQL = SQL & ", prodiren = " & DBSet(Text4(5).Text, "T")
-            SQL = SQL & ", perdiren = " & DBSet(Text4(2).Text, "T")
-            SQL = SQL & ", teldiren = " & DBSet(Text4(6).Text, "T")
-            SQL = SQL & ", faxdiren = " & DBSet(Text4(7).Text, "T")
-            SQL = SQL & ", observa = " & DBSet(Text4(8).Text, "T")
-            SQL = SQL & ", codzona = " & DBSet(Text4(9).Text, "N", "S")
-            SQL = SQL & " WHERE codclien =" & (Text1(0).Text) & " AND "
-            SQL = SQL & " coddiren =" & (Text4(0).Text)
+            Sql = "UPDATE sdirenvio Set nomdiren = " & DBSet(Text4(1).Text, "T")
+            Sql = Sql & ", domdiren = " & DBSet(Text4(10).Text, "T")
+            Sql = Sql & ", codpobla = " & DBSet(Text4(4).Text, "T")
+            Sql = Sql & ", pobdiren = " & DBSet(Text4(3).Text, "T")
+            Sql = Sql & ", prodiren = " & DBSet(Text4(5).Text, "T")
+            Sql = Sql & ", perdiren = " & DBSet(Text4(2).Text, "T")
+            Sql = Sql & ", teldiren = " & DBSet(Text4(6).Text, "T")
+            Sql = Sql & ", faxdiren = " & DBSet(Text4(7).Text, "T")
+            Sql = Sql & ", observa = " & DBSet(Text4(8).Text, "T")
+            Sql = Sql & ", codzona = " & DBSet(Text4(9).Text, "N", "S")
+            Sql = Sql & " WHERE codclien =" & (Text1(0).Text) & " AND "
+            Sql = Sql & " coddiren =" & (Text4(0).Text)
         End If
     End Select
         
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarLineaEnvio = True
     Else
         PonerFoco Text4(1)
@@ -14460,7 +14506,7 @@ Dim enlaza As Boolean
 
     'Crear las lineas de Direcciones/Departamentos para el cliente
     'ASignamos un SQL al DATA2
-    Me.Data3.ConnectionString = conn
+    Me.data3.ConnectionString = conn
     enlaza = False
     If Text1(0).Text <> "" Then enlaza = True
     CargaLineas enlaza, 6
@@ -15558,24 +15604,24 @@ Private Sub CargaLineas(enlaza As Boolean, Cual_ As Byte)
 'cual:     0  percontac, 1  renting   , 2 telefonos    3 fitos  4 Campos(huertos)
 '          5 departamentos     6  Direcciones de envio  7 Taxi
 '          8 Todos
-Dim SQL As String
+Dim Sql As String
         
 
         If Cual_ = 0 Or Cual_ = 8 Then
-            SQL = "SELECT nombre,cargo,dpto,telefono,ext,maidirec,movil,observa,id,codclien FROM scliendp where "
+            Sql = "SELECT nombre,cargo,dpto,telefono,ext,maidirec,movil,observa,id,codclien FROM scliendp where "
             If enlaza Then
-                SQL = SQL & "codclien = " & Text1(0).Text
+                Sql = Sql & "codclien = " & Text1(0).Text
                 
             Else
-                SQL = SQL & " false"
+                Sql = Sql & " false"
             End If
              
-            SQL = SQL & " ORDER BY  id"
-            CargaGridGnral DataGrid1, Me.data4, SQL, PriVezForm, 330
-            SQL = "S|txtauxDC(0)|T|Nombre|5000|;S|txtauxDC(2)|T|Cargo|4300|;S|cmdCargos|B||0|;"
+            Sql = Sql & " ORDER BY  id"
+            CargaGridGnral DataGrid1, Me.data4, Sql, PriVezForm, 330
+            Sql = "S|txtauxDC(0)|T|Nombre|5000|;S|txtauxDC(2)|T|Cargo|4300|;S|cmdCargos|B||0|;"
             'Los campos que no se ven que van FUERA DEL GRID
-            SQL = SQL & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
-            arregla SQL, DataGrid1, Me, 330
+            Sql = Sql & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
+            arregla Sql, DataGrid1, Me, 330
             DataGrid1.ScrollBars = dbgAutomatic
             If cboCargo.Width < 2000 Then
                     
@@ -15587,17 +15633,17 @@ Dim SQL As String
         
         If vParamAplic.Renting Then
             If Cual_ = 1 Or Cual_ = 8 Then
-                SQL = "SELECT id,sclienrenting.coddirec,nomdirec,referencia,fecalta,numcuotas,fecbaja,importe"
-                SQL = SQL & ",sclienrenting.codtipco,nomtipco,obser,ultfec"
-                SQL = SQL & " from (sclienrenting left join sdirec on sclienrenting.codclien=sdirec.codclien"
-                SQL = SQL & " and sdirec.coddirec=sclienrenting.coddirec ) "
-                SQL = SQL & " inner join stipco on stipco.codtipco=sclienrenting.codtipco"
-                SQL = SQL & " WHERE "
+                Sql = "SELECT id,sclienrenting.coddirec,nomdirec,referencia,fecalta,numcuotas,fecbaja,importe"
+                Sql = Sql & ",sclienrenting.codtipco,nomtipco,obser,ultfec"
+                Sql = Sql & " from (sclienrenting left join sdirec on sclienrenting.codclien=sdirec.codclien"
+                Sql = Sql & " and sdirec.coddirec=sclienrenting.coddirec ) "
+                Sql = Sql & " inner join stipco on stipco.codtipco=sclienrenting.codtipco"
+                Sql = Sql & " WHERE "
                 If enlaza Then
-                    SQL = SQL & " sclienrenting.codclien = " & Text1(0).Text
+                    Sql = Sql & " sclienrenting.codclien = " & Text1(0).Text
                     
                 Else
-                    SQL = SQL & " false"
+                    Sql = Sql & " false"
                 End If
                 
                 
@@ -15605,22 +15651,22 @@ Dim SQL As String
                 
                 
                 
-                SQL = SQL & " ORDER BY  id"
-                CargaGridGnral DataGrid2, Me.data5, SQL, PriVezForm, 330
+                Sql = Sql & " ORDER BY  id"
+                CargaGridGnral DataGrid2, Me.data5, Sql, PriVezForm, 330
                 
-                SQL = "S|txtauxRent(0)|T|ID|700|;"
+                Sql = "S|txtauxRent(0)|T|ID|700|;"
                 If vParamAplic.HayDeparNuevo = 1 Then
-                    SQL = SQL & "S|txtauxRent(1)|T|Dpto|750|"
+                    Sql = Sql & "S|txtauxRent(1)|T|Dpto|750|"
                 Else
-                    SQL = SQL & "S|txtauxRent(1)|T|Dir.|750|"
+                    Sql = Sql & "S|txtauxRent(1)|T|Dir.|750|"
                 End If
-                SQL = SQL & ";S|cmdRenting(0)|B||0|;S|txtauxRent(2)|T|Departamento|3150|;"
-                SQL = SQL & "S|txtauxRent(3)|T|Referencia|2800|;S|txtauxRent(4)|T|Fecha alta|1300|;S|cmdRenting(1)|B||0|;"
-                SQL = SQL & "S|txtauxRent(5)|T|Cuotas|750|;S|txtauxRent(6)|T|Fecha baja|1300|;S|cmdRenting(2)|B||0|;"
-                SQL = SQL & "S|txtauxRent(7)|T|Importe|1350|;"
+                Sql = Sql & ";S|cmdRenting(0)|B||0|;S|txtauxRent(2)|T|Departamento|3150|;"
+                Sql = Sql & "S|txtauxRent(3)|T|Referencia|2800|;S|txtauxRent(4)|T|Fecha alta|1300|;S|cmdRenting(1)|B||0|;"
+                Sql = Sql & "S|txtauxRent(5)|T|Cuotas|750|;S|txtauxRent(6)|T|Fecha baja|1300|;S|cmdRenting(2)|B||0|;"
+                Sql = Sql & "S|txtauxRent(7)|T|Importe|1350|;"
                 'no se ven
-                SQL = SQL & "N||||0|;N||||0|;N||||0|;N||||0|;"
-                arregla SQL, DataGrid2, Me, 330
+                Sql = Sql & "N||||0|;N||||0|;N||||0|;N||||0|;"
+                arregla Sql, DataGrid2, Me, 330
                 DataGrid1.ScrollBars = dbgAutomatic
                 'Como el lo pone a la derecha
                 txtauxRent(1).Alignment = 0 'a la izda
@@ -15632,68 +15678,68 @@ Dim SQL As String
         
         If vParamAplic.TieneTelefonia2 > 0 Then
             If Cual_ = 2 Or Cual_ = 8 Then
-                SQL = "select  IdTelefono,stfnooperador.nombre ,operador,IMEI,SIM,Factura,Detalle,Inactivo,Observaciones,coddirec,clienppal,"
-                SQL = SQL & " modelo,coninternet,puntos,fechaalta,cuotaminima,fecharenove,procedencia "
-                If vParamAplic.TelefoniaVtaPlazos Then SQL = SQL & " ,ArtPlazos,PlazosMeses,ImportePlazo,PlazosOrigen,costevtaplz"
-                SQL = SQL & " , agrupacion ,fecbaja "
+                Sql = "select  IdTelefono,stfnooperador.nombre ,operador,IMEI,SIM,Factura,Detalle,Inactivo,Observaciones,coddirec,clienppal,"
+                Sql = Sql & " modelo,coninternet,puntos,fechaalta,cuotaminima,fecharenove,procedencia "
+                If vParamAplic.TelefoniaVtaPlazos Then Sql = Sql & " ,ArtPlazos,PlazosMeses,ImportePlazo,PlazosOrigen,costevtaplz"
+                Sql = Sql & " , agrupacion ,fecbaja "
                 
-                SQL = SQL & " ,if(Inactivo=1,'*','') as B "
-                SQL = SQL & " ,if(agrupacion=1,'-','') as Ag "
-                
-                
+                Sql = Sql & " ,if(Inactivo=1,'*','') as B "
+                Sql = Sql & " ,if(agrupacion=1,'-','') as Ag "
                 
                 
                 
-                SQL = SQL & "  FROM sclientfno,stfnooperador WHERE sclientfno.operador=stfnooperador.codoperador  AND "
+                
+                
+                Sql = Sql & "  FROM sclientfno,stfnooperador WHERE sclientfno.operador=stfnooperador.codoperador  AND "
                 
                 If enlaza Then
-                    SQL = SQL & "codclien = " & Text1(0).Text
+                    Sql = Sql & "codclien = " & Text1(0).Text
                 Else
-                    SQL = SQL & " false"
+                    Sql = Sql & " false"
                 End If
                 
-                If Me.cboFiltroTfno.ListIndex > 0 Then SQL = SQL & " AND inactivo = " & IIf(Me.cboFiltroTfno.ListIndex = 2, 1, 0)
+                If Me.cboFiltroTfno.ListIndex > 0 Then Sql = Sql & " AND inactivo = " & IIf(Me.cboFiltroTfno.ListIndex = 2, 1, 0)
                 
-                SQL = SQL & " ORDER BY  IdTelefono"
-                CargaGridGnral DataGrid3, Me.data6, SQL, PriVezForm, 330
-                SQL = "S|txtauxTfno(0)|T|Teléfono|1380|;S|cboOperadorTfnnia2(0)|C|Operador|1790|;N|||||;"
-                SQL = SQL & "S|txtauxTfno(1)|T|IMEI|2350|;S|txtauxTfno(2)|T|SIM|2400|;"
+                Sql = Sql & " ORDER BY  IdTelefono"
+                CargaGridGnral DataGrid3, Me.data6, Sql, PriVezForm, 330
+                Sql = "S|txtauxTfno(0)|T|Teléfono|1380|;S|cboOperadorTfnnia2(0)|C|Operador|1790|;N|||||;"
+                Sql = Sql & "S|txtauxTfno(1)|T|IMEI|2350|;S|txtauxTfno(2)|T|SIM|2400|;"
                 
                 'Los campos que no se ven que van FUERA DEL GRID
-                SQL = SQL & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
-                If vParamAplic.TelefoniaVtaPlazos Then SQL = SQL & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;" 'vta a plazos mese importe mesestot  costevtaplz
-                SQL = SQL & "N||||0|;N||||0|;"
-                arregla SQL, DataGrid3, Me, 330
+                Sql = Sql & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
+                If vParamAplic.TelefoniaVtaPlazos Then Sql = Sql & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;" 'vta a plazos mese importe mesestot  costevtaplz
+                Sql = Sql & "N||||0|;N||||0|;"
+                arregla Sql, DataGrid3, Me, 330
                 DataGrid3.ScrollBars = dbgAutomatic
                 
                 
-                SQL = IIf(vParamAplic.TelefoniaVtaPlazos, 24, 20)
-                DataGrid3.Columns(CInt(SQL)).Width = 300
-                DataGrid3.Columns(CInt(SQL) + 1).Width = IIf(vParamAplic.AgrupaTfnosFacturacionCliente, 360, 0)
+                Sql = IIf(vParamAplic.TelefoniaVtaPlazos, 24, 20)
+                DataGrid3.Columns(CInt(Sql)).Width = 300
+                DataGrid3.Columns(CInt(Sql) + 1).Width = IIf(vParamAplic.AgrupaTfnosFacturacionCliente, 360, 0)
             End If
         End If
         
         If vParamAplic.ManipuladorFitosanitarios2 Then
             If Cual_ = 3 Or Cual_ = 8 Then
-                SQL = "select  cif,nombre,if(tipocarnet=2,'Cualificado','Básico') tipo,numcarnet,fcaducidad,telefono"
-                SQL = SQL & ", if (Manipuladorprovisional=0,'','Si') PROV,if(ImgDNI is null, '','*') DNI,if(ImgManipula is null, '','*') as 'Car.'"
-                SQL = SQL & ",id  FROM sclienmani WHERE  "
+                Sql = "select  cif,nombre,if(tipocarnet=2,'Cualificado','Básico') tipo,numcarnet,fcaducidad,telefono"
+                Sql = Sql & ", if (Manipuladorprovisional=0,'','Si') PROV,if(ImgDNI is null, '','*') DNI,if(ImgManipula is null, '','*') as 'Car.'"
+                Sql = Sql & ",id  FROM sclienmani WHERE  "
                 If enlaza Then
-                    SQL = SQL & "codclien = " & Text1(0).Text
+                    Sql = Sql & "codclien = " & Text1(0).Text
                 Else
-                    SQL = SQL & " false"
+                    Sql = Sql & " false"
                 End If
-                SQL = SQL & " ORDER BY  id"
-                CargaGridGnral DataGrid4, Me.data7, SQL, PriVezForm, 330
-                SQL = "S|txtauxFito(0)|T|CIF|1500|;"
-                SQL = SQL & "S|txtauxFito(1)|T|Nombre|4800|;"
-                SQL = SQL & "S|cboFitos(0)|C|Tipo|1200|;S|txtauxFito(2)|T|Referencia|2810|;"
-                SQL = SQL & "S|cmdFitos(0)|B||0|;S|txtauxFito(5)|T|Caducidad|1750|;"
+                Sql = Sql & " ORDER BY  id"
+                CargaGridGnral DataGrid4, Me.data7, Sql, PriVezForm, 330
+                Sql = "S|txtauxFito(0)|T|CIF|1500|;"
+                Sql = Sql & "S|txtauxFito(1)|T|Nombre|4800|;"
+                Sql = Sql & "S|cboFitos(0)|C|Tipo|1200|;S|txtauxFito(2)|T|Referencia|2810|;"
+                Sql = Sql & "S|cmdFitos(0)|B||0|;S|txtauxFito(5)|T|Caducidad|1750|;"
                 
-                SQL = SQL & "S|txtauxFito(3)|T|Telefono|2100|;"
-                SQL = SQL & "S|cboFitos(1)|C|Provi.|600|;||||100|;||||150|;"
-                SQL = SQL & "N|txtauxFito(4)|T|id|0|;"
-                arregla SQL, DataGrid4, Me, 330
+                Sql = Sql & "S|txtauxFito(3)|T|Telefono|2100|;"
+                Sql = Sql & "S|cboFitos(1)|C|Provi.|600|;||||100|;||||150|;"
+                Sql = Sql & "N|txtauxFito(4)|T|id|0|;"
+                arregla Sql, DataGrid4, Me, 330
                 DataGrid4.ScrollBars = dbgAutomatic
                 
                 cmdFitos(0).Height = DataGrid4.RowHeight
@@ -15705,32 +15751,32 @@ Dim SQL As String
         'Sept 2015
         If vParamAplic.Huertos Then
             If Cual_ = 4 Or Cual_ = 8 Then
-                SQL = "select id, poligono,parcela, recintos,supsigpa,supderec,partida,fecaltas,fecbajas,observac"
+                Sql = "select id, poligono,parcela, recintos,supsigpa,supderec,partida,fecaltas,fecbajas,observac"
                 'id,codparti,fecaltas,fecbajas,supsigpa,supderec,poligono,parcela,recintos,observac
-                SQL = SQL & "  from sclienhuertos WHERE  "
+                Sql = Sql & "  from sclienhuertos WHERE  "
                 If enlaza Then
-                    SQL = SQL & "codclien = " & Text1(0).Text
+                    Sql = Sql & "codclien = " & Text1(0).Text
                 Else
-                    SQL = SQL & " false "
+                    Sql = Sql & " false "
                 End If
-                SQL = SQL & " ORDER BY  1"
-                CargaGridGnral DataGrid5, Me.data8, SQL, PriVezForm, 330
+                Sql = Sql & " ORDER BY  1"
+                CargaGridGnral DataGrid5, Me.data8, Sql, PriVezForm, 330
                 'poligono,codparti, recintos,supsigpa,supderec,fecaltas,fecbajas,observac,id"
-                SQL = "S|txtauxMarja(0)|T|id|690|;"
-                SQL = SQL & "S|txtauxMarja(1)|T|Polígono|1690|;"
-                SQL = SQL & "S|txtauxMarja(2)|T|Parcela|1650|;"
-                SQL = SQL & "S|txtauxMarja(3)|T|Recintos|1650|;"
-                SQL = SQL & "S|txtauxMarja(4)|T|SIGPAC(ha)|2100|;"
+                Sql = "S|txtauxMarja(0)|T|id|690|;"
+                Sql = Sql & "S|txtauxMarja(1)|T|Polígono|1690|;"
+                Sql = Sql & "S|txtauxMarja(2)|T|Parcela|1650|;"
+                Sql = Sql & "S|txtauxMarja(3)|T|Recintos|1650|;"
+                Sql = Sql & "S|txtauxMarja(4)|T|SIGPAC(ha)|2100|;"
             
-                SQL = SQL & "S|txtauxMarja(5)|T|Sup.derechos(ha)|2200|;"
+                Sql = Sql & "S|txtauxMarja(5)|T|Sup.derechos(ha)|2200|;"
                 'SQL = SQL & "S|txtauxMarja(6)|T|Partida|900|;"
-                SQL = SQL & "N|||||;"
-                SQL = SQL & "N|||||;"
-                SQL = SQL & "N|||||;"
-                SQL = SQL & "N|||||;"
+                Sql = Sql & "N|||||;"
+                Sql = Sql & "N|||||;"
+                Sql = Sql & "N|||||;"
+                Sql = Sql & "N|||||;"
                 'Aunque no se vean, pongo el caption de la columna, para despues en el datosok poner que campo me falta
                 DataGrid5.Columns(6).Caption = "Fecha alta"
-                arregla SQL, DataGrid5, Me, 330
+                arregla Sql, DataGrid5, Me, 330
                 DataGrid5.ScrollBars = dbgAutomatic
                 
                
@@ -15741,22 +15787,22 @@ Dim SQL As String
         
         'Junio18
         If Cual_ = 5 Or Cual_ = 8 Then
-            SQL = "SELECT coddirec,nomdirec,domdirec,codpobla,pobdirec,prodirec,perdirec,teldirec,faxdirec,maidirec,codbanco,codsucur,digcontr,cuentaba,codzona,iban"
-            SQL = SQL & " , organogestor,unidadtramitadora,orgproponente,oficinacontable FROM sdirec WHERE "
+            Sql = "SELECT coddirec,nomdirec,domdirec,codpobla,pobdirec,prodirec,perdirec,teldirec,faxdirec,maidirec,codbanco,codsucur,digcontr,cuentaba,codzona,iban"
+            Sql = Sql & " , organogestor,unidadtramitadora,orgproponente,oficinacontable FROM sdirec WHERE "
             If enlaza Then
-                SQL = SQL & " codclien = " & Text1(0).Text
+                Sql = Sql & " codclien = " & Text1(0).Text
             Else
-                SQL = SQL & " false"
+                Sql = Sql & " false"
             End If
-            SQL = SQL & " ORDER BY  coddirec"
+            Sql = Sql & " ORDER BY  coddirec"
             
-            CargaGridGnral DataGrid6, Me.Data2, SQL, PriVezForm
+            CargaGridGnral DataGrid6, Me.Data2, Sql, PriVezForm
             
-            SQL = "S|Text3(0)|T|ID|1300|;S|Text3(1)|T|Nombre|5950|;"
+            Sql = "S|Text3(0)|T|ID|1300|;S|Text3(1)|T|Nombre|5950|;"
             
-            SQL = SQL & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
-            SQL = SQL & "N||||0|;N||||0|;N||||0|;N||||0|;"
-             arregla SQL, DataGrid6, Me, 330
+            Sql = Sql & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
+            Sql = Sql & "N||||0|;N||||0|;N||||0|;N||||0|;"
+             arregla Sql, DataGrid6, Me, 330
             DataGrid6.ScrollBars = dbgAutomatic
             'Como el lo pone a la derecha
             Text3(0).Alignment = 0 'a la izda
@@ -15764,20 +15810,20 @@ Dim SQL As String
     
         If vParamAplic.DireccionesEnvio Then
             If Cual_ = 6 Or Cual_ = 8 Then
-                SQL = "SELECT coddiren,nomdiren,perdiren,pobdiren,codpobla,prodiren,teldiren,faxdiren,observa,codzona,domdiren FROM sdirenvio WHERE "
+                Sql = "SELECT coddiren,nomdiren,perdiren,pobdiren,codpobla,prodiren,teldiren,faxdiren,observa,codzona,domdiren FROM sdirenvio WHERE "
                 If enlaza Then
-                    SQL = SQL & " codclien = " & Text1(0).Text
+                    Sql = Sql & " codclien = " & Text1(0).Text
                 Else
-                    SQL = SQL & " false"
+                    Sql = Sql & " false"
                 End If
-                SQL = SQL & " ORDER BY  coddiren"
+                Sql = Sql & " ORDER BY  coddiren"
                 
-                CargaGridGnral DataGrid7, Me.Data3, SQL, PriVezForm
+                CargaGridGnral DataGrid7, Me.data3, Sql, PriVezForm
                 
-                SQL = "S|Text4(0)|T|ID|600|;S|Text4(1)|T|Nombre|3950|;S|Text4(2)|T|Contacto|3950|;"
+                Sql = "S|Text4(0)|T|ID|600|;S|Text4(1)|T|Nombre|3950|;S|Text4(2)|T|Contacto|3950|;"
                 
-                SQL = SQL & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
-                arregla SQL, DataGrid7, Me, 330
+                Sql = Sql & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
+                arregla Sql, DataGrid7, Me, 330
                 DataGrid7.ScrollBars = dbgAutomatic
                 'Como el lo pone a la derecha
                 Text4(0).Alignment = 0 'a la izda
@@ -16159,46 +16205,46 @@ End Sub
 
 Private Function InsertarModificarLineaDatosConctacto() As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarModificarLinea
     'codclien,nombre,dpto,cargo,telefono,ext,maidirec,movil,observa,id FROM scliendp
     InsertarModificarLineaDatosConctacto = False
-    SQL = ""
+    Sql = ""
     Select Case ModificaLineas
     Case 1  'INSERTAR
         If DatosOkLinea Then
-            SQL = "INSERT INTO scliendp (codclien,nombre,dpto,cargo,telefono,ext,movil,maidirec,observa,id,incluirenviofacturacion ) VALUES ("
-            SQL = SQL & Text1(0).Text
+            Sql = "INSERT INTO scliendp (codclien,nombre,dpto,cargo,telefono,ext,movil,maidirec,observa,id,incluirenviofacturacion ) VALUES ("
+            Sql = Sql & Text1(0).Text
 
                     
             For i = 0 To 7 'campos opcionales
-                SQL = SQL & ", "
-                SQL = SQL & DBSet(txtauxDC(i).Text, "T", "S")
+                Sql = Sql & ", "
+                Sql = Sql & DBSet(txtauxDC(i).Text, "T", "S")
             Next i
-            SQL = SQL & ", " & txtauxDC(8).Text & ","
-            SQL = SQL & Val(Me.chkDatosContacto(0).Value) & ")"
+            Sql = Sql & ", " & txtauxDC(8).Text & ","
+            Sql = Sql & Val(Me.chkDatosContacto(0).Value) & ")"
         End If
         
     Case 2  'MODIFICAR
         If DatosOkLinea Then
             'codclien,nombre,dpto,cargo,telefono,ext,maidirec,movil,observa,id
-            SQL = "UPDATE scliendp Set nombre = " & DBSet(txtauxDC(0).Text, "T")
-            SQL = SQL & ", dpto = " & DBSet(txtauxDC(1).Text, "T", "S")
-            SQL = SQL & ", cargo = " & DBSet(txtauxDC(2).Text, "T", "S")
-            SQL = SQL & ", telefono = " & DBSet(txtauxDC(3).Text, "T", "S")
-            SQL = SQL & ", ext = " & DBSet(txtauxDC(4).Text, "T", "S")
-            SQL = SQL & ", movil  = " & DBSet(txtauxDC(5).Text, "T", "S")
-            SQL = SQL & ", maidirec= " & DBSet(txtauxDC(6).Text, "T", "S")
-            SQL = SQL & ", observa = " & DBSet(txtauxDC(7).Text, "T", "S")
-            SQL = SQL & ", incluirenviofacturacion = " & Val(Me.chkDatosContacto(0).Value)
-            SQL = SQL & " WHERE codclien =" & (Text1(0).Text) & " AND "
-            SQL = SQL & " id =" & (txtauxDC(8).Text)
+            Sql = "UPDATE scliendp Set nombre = " & DBSet(txtauxDC(0).Text, "T")
+            Sql = Sql & ", dpto = " & DBSet(txtauxDC(1).Text, "T", "S")
+            Sql = Sql & ", cargo = " & DBSet(txtauxDC(2).Text, "T", "S")
+            Sql = Sql & ", telefono = " & DBSet(txtauxDC(3).Text, "T", "S")
+            Sql = Sql & ", ext = " & DBSet(txtauxDC(4).Text, "T", "S")
+            Sql = Sql & ", movil  = " & DBSet(txtauxDC(5).Text, "T", "S")
+            Sql = Sql & ", maidirec= " & DBSet(txtauxDC(6).Text, "T", "S")
+            Sql = Sql & ", observa = " & DBSet(txtauxDC(7).Text, "T", "S")
+            Sql = Sql & ", incluirenviofacturacion = " & Val(Me.chkDatosContacto(0).Value)
+            Sql = Sql & " WHERE codclien =" & (Text1(0).Text) & " AND "
+            Sql = Sql & " id =" & (txtauxDC(8).Text)
         End If
     End Select
         
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarLineaDatosConctacto = True
     Else
         PonerFoco txtauxDC(0)
@@ -16212,100 +16258,100 @@ End Function
 
 Private Function InsertarModificarLineaTelefonia() As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 Dim HaCambiadoFacturaImpresa As Boolean 'Feb 2014
 
     On Error GoTo EInsertarModificarLinea
     'sclientfno(codclien,IdTelefono,IMEI,SIM,Factura,Detalle,Inactivo,Observaciones)
     InsertarModificarLineaTelefonia = False
-    SQL = ""
+    Sql = ""
     HaCambiadoFacturaImpresa = False
     Select Case ModificaLineas
     Case 1  'INSERTAR
         If DatosOkLinea Then
-            SQL = "INSERT INTO sclientfno(codclien,IdTelefono,IMEI,SIM,Observaciones,Factura,Detalle,Inactivo,"
-            SQL = SQL & "coninternet,coddirec,clienppal,modelo,cuotaminima,puntos,fechaalta,fecharenove,Operador,procedencia"
-            SQL = SQL & ",ArtPlazos,PlazosMeses,ImportePlazo,PlazosOrigen,costevtaplz,agrupacion,fecbaja) VALUES (" & Text1(0).Text
+            Sql = "INSERT INTO sclientfno(codclien,IdTelefono,IMEI,SIM,Observaciones,Factura,Detalle,Inactivo,"
+            Sql = Sql & "coninternet,coddirec,clienppal,modelo,cuotaminima,puntos,fechaalta,fecharenove,Operador,procedencia"
+            Sql = Sql & ",ArtPlazos,PlazosMeses,ImportePlazo,PlazosOrigen,costevtaplz,agrupacion,fecbaja) VALUES (" & Text1(0).Text
             
                      
             For i = 0 To 3 '
-                SQL = SQL & ", "
-                SQL = SQL & DBSet(txtauxTfno(i).Text, "T", "S")
+                Sql = Sql & ", "
+                Sql = Sql & DBSet(txtauxTfno(i).Text, "T", "S")
             Next i
             For i = 0 To 3
-                SQL = SQL & ", "
-                SQL = SQL & Me.chkTelefonia(i).Value
+                Sql = Sql & ", "
+                Sql = Sql & Me.chkTelefonia(i).Value
             Next
             For i = 4 To 8 '
-                SQL = SQL & ", "
-                SQL = SQL & DBSet(txtauxTfno(i).Text, "N", IIf(i >= 7, "N", "S"))
+                Sql = Sql & ", "
+                Sql = Sql & DBSet(txtauxTfno(i).Text, "N", IIf(i >= 7, "N", "S"))
 
             Next i
-            SQL = SQL & "," & DBSet(txtauxTfno(9).Text, "F", "S")
+            Sql = Sql & "," & DBSet(txtauxTfno(9).Text, "F", "S")
             'Si la fecha renovacion es "" pongo la fecha de alta
             'If Me.txtauxTfno(10).Text = "" Then txtauxTfno(10).Text = txtauxTfno(9).Text feb2020
-            SQL = SQL & "," & DBSet(txtauxTfno(10).Text, "F", "S")
-            SQL = SQL & "," & cboOperadorTfnnia2(0).ItemData(cboOperadorTfnnia2(0).ListIndex)
-            SQL = SQL & "," & cboOperadorTfnnia2(1).ItemData(cboOperadorTfnnia2(1).ListIndex)
+            Sql = Sql & "," & DBSet(txtauxTfno(10).Text, "F", "S")
+            Sql = Sql & "," & cboOperadorTfnnia2(0).ItemData(cboOperadorTfnnia2(0).ListIndex)
+            Sql = Sql & "," & cboOperadorTfnnia2(1).ItemData(cboOperadorTfnnia2(1).ListIndex)
             For i = 11 To 15
                 If vParamAplic.TelefoniaVtaPlazos Then
-                    SQL = SQL & "," & DBSet(txtauxTfno(i).Text, IIf(i = 11, "T", "N"), "S")
+                    Sql = Sql & "," & DBSet(txtauxTfno(i).Text, IIf(i = 11, "T", "N"), "S")
                 Else
-                    SQL = SQL & ",NULL"
+                    Sql = Sql & ",NULL"
                 End If
             Next i
-            SQL = SQL & "," & cboOperadorTfnnia2(2).ItemData(cboOperadorTfnnia2(2).ListIndex)
-            SQL = SQL & "," & DBSet(txtauxTfno(16).Text, "F", "S")
-            SQL = SQL & ")"
+            Sql = Sql & "," & cboOperadorTfnnia2(2).ItemData(cboOperadorTfnnia2(2).ListIndex)
+            Sql = Sql & "," & DBSet(txtauxTfno(16).Text, "F", "S")
+            Sql = Sql & ")"
         End If
         
     Case 2  'MODIFICAR
         If DatosOkLinea Then
             
-            SQL = DBLet(data6.Recordset!Factura, "N")
-            If Val(SQL) <> Abs(Me.chkTelefonia(0).Value) Then HaCambiadoFacturaImpresa = True
+            Sql = DBLet(data6.Recordset!Factura, "N")
+            If Val(Sql) <> Abs(Me.chkTelefonia(0).Value) Then HaCambiadoFacturaImpresa = True
                         
             'codclien,IdTelefono,IMEI,SIM,Factura,Detalle,Inactivo,Observaciones
-            SQL = ""
+            Sql = ""
             For i = 1 To 3  'EL CERO NO
                 BuscaChekc = RecuperaValor("IMEI|SIM|Observaciones|", CInt(i))
-                SQL = SQL & ", " & BuscaChekc & " = " & DBSet(txtauxTfno(i).Text, "T", "S")
+                Sql = Sql & ", " & BuscaChekc & " = " & DBSet(txtauxTfno(i).Text, "T", "S")
             Next i
             For i = 0 To 3
                 BuscaChekc = RecuperaValor("Factura|Detalle|Inactivo|coninternet|", i + 1)
-                SQL = SQL & ", " & BuscaChekc & " = " & Me.chkTelefonia(i).Value
+                Sql = Sql & ", " & BuscaChekc & " = " & Me.chkTelefonia(i).Value
             Next
             For i = 4 To 8  'EL CERO NO
                 BuscaChekc = RecuperaValor("|||coddirec|clienppal|modelo|cuotaminima|puntos|", CInt(i))
-                SQL = SQL & ", " & BuscaChekc & " = " & DBSet(txtauxTfno(i).Text, "N", "S")
+                Sql = Sql & ", " & BuscaChekc & " = " & DBSet(txtauxTfno(i).Text, "N", "S")
             Next i
             
-            SQL = SQL & ", fechaalta = " & DBSet(txtauxTfno(9).Text, "F", "S")
-            SQL = SQL & ", fecharenove = " & DBSet(txtauxTfno(10).Text, "F", "S")
-            SQL = SQL & ", Operador= " & Me.cboOperadorTfnnia2(0).ItemData(cboOperadorTfnnia2(0).ListIndex)
-            SQL = SQL & ", procedencia= " & Me.cboOperadorTfnnia2(1).ItemData(cboOperadorTfnnia2(1).ListIndex)
-            SQL = SQL & ", agrupacion= " & Me.cboOperadorTfnnia2(2).ItemData(cboOperadorTfnnia2(2).ListIndex)
-            SQL = SQL & ", fecbaja = " & DBSet(txtauxTfno(16).Text, "F", "S")
+            Sql = Sql & ", fechaalta = " & DBSet(txtauxTfno(9).Text, "F", "S")
+            Sql = Sql & ", fecharenove = " & DBSet(txtauxTfno(10).Text, "F", "S")
+            Sql = Sql & ", Operador= " & Me.cboOperadorTfnnia2(0).ItemData(cboOperadorTfnnia2(0).ListIndex)
+            Sql = Sql & ", procedencia= " & Me.cboOperadorTfnnia2(1).ItemData(cboOperadorTfnnia2(1).ListIndex)
+            Sql = Sql & ", agrupacion= " & Me.cboOperadorTfnnia2(2).ItemData(cboOperadorTfnnia2(2).ListIndex)
+            Sql = Sql & ", fecbaja = " & DBSet(txtauxTfno(16).Text, "F", "S")
             
             If vParamAplic.TelefoniaVtaPlazos Then
                 For i = 11 To 15  ',ArtPlazos,PlazosMeses,ImportePlazoPlazosOrigen
                     BuscaChekc = RecuperaValor("ArtPlazos|PlazosMeses|ImportePlazo|PlazosOrigen|costevtaplz|", CInt(i - 10))
                     If i = 12 Then
                         'Cuantos quedam
-                        SQL = SQL & ", " & BuscaChekc & " = "
+                        Sql = Sql & ", " & BuscaChekc & " = "
                         If txtauxTfno(i).Text = "" Then
-                            SQL = SQL & "NULL"
+                            Sql = Sql & "NULL"
                         Else
-                            SQL = SQL & txtauxTfno(i).Text
+                            Sql = Sql & txtauxTfno(i).Text
                         End If
                     Else
-                        SQL = SQL & ", " & BuscaChekc & " = " & DBSet(txtauxTfno(i).Text, IIf(i = 11, "T", "N"), "S")
+                        Sql = Sql & ", " & BuscaChekc & " = " & DBSet(txtauxTfno(i).Text, IIf(i = 11, "T", "N"), "S")
                     End If
                 Next i
             End If
-            SQL = Mid(SQL, 2) 'quito la primera coma
-            SQL = "UPDATE sclientfno Set " & SQL
-            SQL = SQL & " WHERE  IdTelefono = " & DBSet(txtauxTfno(0).Text, "T")
+            Sql = Mid(Sql, 2) 'quito la primera coma
+            Sql = "UPDATE sclientfno Set " & Sql
+            Sql = Sql & " WHERE  IdTelefono = " & DBSet(txtauxTfno(0).Text, "T")
             
             
             
@@ -16314,8 +16360,8 @@ Dim HaCambiadoFacturaImpresa As Boolean 'Feb 2014
         End If
     End Select
         
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarLineaTelefonia = True
         
         If HaCambiadoFacturaImpresa Then
@@ -16323,13 +16369,13 @@ Dim HaCambiadoFacturaImpresa As Boolean 'Feb 2014
             '#  NUMPEDCL sera para la reimpresion de facturas numpedcl
             '#   0.- SE imprime
             '#   1.- NO. ya que va por email
-            SQL = "0"
-            If Me.chkTelefonia(0).Value = 0 Then SQL = "1"
-            SQL = "UPDATE scafac1 set numpedcl=" & SQL
-            SQL = SQL & " WHERE codtipom='FAT' AND observa4=" & DBSet(txtauxTfno(0).Text, "T")
-            SQL = SQL & " AND (numfactu,fecfactu) IN (select numfactu,fecfactu from scafac WHERE "
-            SQL = SQL & " codclien = " & Me.Text1(0).Text & " and codtipom='FAT')"
-            ejecutar SQL, True
+            Sql = "0"
+            If Me.chkTelefonia(0).Value = 0 Then Sql = "1"
+            Sql = "UPDATE scafac1 set numpedcl=" & Sql
+            Sql = Sql & " WHERE codtipom='FAT' AND observa4=" & DBSet(txtauxTfno(0).Text, "T")
+            Sql = Sql & " AND (numfactu,fecfactu) IN (select numfactu,fecfactu from scafac WHERE "
+            Sql = Sql & " codclien = " & Me.Text1(0).Text & " and codtipom='FAT')"
+            ejecutar Sql, True
             
             
         End If
@@ -16341,34 +16387,34 @@ Dim HaCambiadoFacturaImpresa As Boolean 'Feb 2014
             BuscaChekc = ""
             If ModificaLineas = 2 Then
                 If DBLet(data6.Recordset!artplazos, "T") <> txtauxTfno(11).Text Then BuscaChekc = BuscaChekc & vbCrLf & "Articulo : " & DBLet(data6.Recordset!artplazos, "T") & " // " & txtauxTfno(11).Text
-                SQL = ""
-                If Not IsNull(data6.Recordset!PlazosMeses) Then SQL = data6.Recordset!PlazosMeses
-                If SQL <> txtauxTfno(12).Text Then BuscaChekc = BuscaChekc & vbCrLf & "Plazos restan : " & DBLet(data6.Recordset!PlazosMeses, "T") & " // " & txtauxTfno(12).Text
+                Sql = ""
+                If Not IsNull(data6.Recordset!PlazosMeses) Then Sql = data6.Recordset!PlazosMeses
+                If Sql <> txtauxTfno(12).Text Then BuscaChekc = BuscaChekc & vbCrLf & "Plazos restan : " & DBLet(data6.Recordset!PlazosMeses, "T") & " // " & txtauxTfno(12).Text
                 
-                SQL = ""
-                If Not IsNull(data6.Recordset!ImportePlazo) Then SQL = Format(data6.Recordset!ImportePlazo, FormatoImporte)
-                If SQL <> txtauxTfno(13).Text Then BuscaChekc = BuscaChekc & vbCrLf & "Imp/mes : " & DBLet(data6.Recordset!ImportePlazo, "T") & " // " & txtauxTfno(13).Text
+                Sql = ""
+                If Not IsNull(data6.Recordset!ImportePlazo) Then Sql = Format(data6.Recordset!ImportePlazo, FormatoImporte)
+                If Sql <> txtauxTfno(13).Text Then BuscaChekc = BuscaChekc & vbCrLf & "Imp/mes : " & DBLet(data6.Recordset!ImportePlazo, "T") & " // " & txtauxTfno(13).Text
                 
-                SQL = ""
-                If Not IsNull(data6.Recordset!PlazosMeses) Then SQL = data6.Recordset!PlazosOrigen
-                If SQL <> txtauxTfno(14).Text Then BuscaChekc = BuscaChekc & vbCrLf & "Plazos origen: " & DBLet(data6.Recordset!PlazosOrigen, "T") & " // " & txtauxTfno(14).Text
+                Sql = ""
+                If Not IsNull(data6.Recordset!PlazosMeses) Then Sql = data6.Recordset!PlazosOrigen
+                If Sql <> txtauxTfno(14).Text Then BuscaChekc = BuscaChekc & vbCrLf & "Plazos origen: " & DBLet(data6.Recordset!PlazosOrigen, "T") & " // " & txtauxTfno(14).Text
             End If
             If BuscaChekc <> "" Then
                 'GRABAMOS UN LOG
                 BuscaChekc = "Telefono: " & txtauxTfno(0).Text & vbCrLf & BuscaChekc
-                SQL = "[TELEFONIA] Venta plazos. Cambio en el cliente: " & Text1(0).Text & " " & Text1(1).Text & vbCrLf & "Anterior//Actual" & vbCrLf & BuscaChekc
+                Sql = "[TELEFONIA] Venta plazos. Cambio en el cliente: " & Text1(0).Text & " " & Text1(1).Text & vbCrLf & "Anterior//Actual" & vbCrLf & BuscaChekc
                 Set LOG = New cLOG
-                LOG.Insertar 29, vUsu, SQL
+                LOG.Insertar 29, vUsu, Sql
                 Set LOG = Nothing
                 
                 
                 
                 'Acciones comerciales. La 5
-                SQL = "NO"
+                Sql = "NO"
                 If ModoFrame2 = 4 Then
                     'Disitnot BD que ahora
                     If DBLet(data6.Recordset!artplazos, "T") <> txtauxTfno(11).Text Then
-                        SQL = ""
+                        Sql = ""
                         If DBLet(data6.Recordset!artplazos, "T") <> "" Then
                             'Tenia y ahora NO tiene
                             BuscaChekc = "Fin venta plazos " & vbCrLf & BuscaChekc
@@ -16377,20 +16423,20 @@ Dim HaCambiadoFacturaImpresa As Boolean 'Feb 2014
                         End If
                     End If
                 Else
-                    SQL = ""
+                    Sql = ""
                 End If
-                If SQL = "" Then
+                If Sql = "" Then
                     
-                    SQL = PonerTrabajadorConectado("")
-                    SQL = DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & "," & Text1(0).Text & "," & vUsu.CodigoAgente & "," & Val(SQL) & ",2,5,'Otros',"
-                    SQL = "INSERT INTO scrmacciones(usuario,fechora,codclien,agente,codtraba,estado,tipo,medio,observaciones) VALUES (" & SQL
-                    SQL = SQL & DBSet(BuscaChekc, "T") & ")"
-                    If Not ejecutar(SQL, True) Then MsgBox "Error insertando en hco de acciones comerciales", vbExclamation
+                    Sql = PonerTrabajadorConectado("")
+                    Sql = DBSet(vUsu.Login, "T") & "," & DBSet(Now, "FH") & "," & Text1(0).Text & "," & vUsu.CodigoAgente & "," & Val(Sql) & ",2,5,'Otros',"
+                    Sql = "INSERT INTO scrmacciones(usuario,fechora,codclien,agente,codtraba,estado,tipo,medio,observaciones) VALUES (" & Sql
+                    Sql = Sql & DBSet(BuscaChekc, "T") & ")"
+                    If Not ejecutar(Sql, True) Then MsgBox "Error insertando en hco de acciones comerciales", vbExclamation
                         
                 End If
                 
                 
-                SQL = ""
+                Sql = ""
                 
             End If
             
@@ -16415,13 +16461,13 @@ End Function
 
 Private Function InsertarModificarLineamanipuladorFito() As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
 
     On Error GoTo EInsertarModificarLinea
     'sclientfno(codclien,IdTelefono,IMEI,SIM,Factura,Detalle,Inactivo,Observaciones)
     InsertarModificarLineamanipuladorFito = False
-    SQL = ""
+    Sql = ""
     
     Select Case ModificaLineas
     Case 1  'INSERTAR
@@ -16431,20 +16477,20 @@ Dim SQL As String
             Else
                 i = 1
             End If
-            SQL = "INSERT INTO sclienmani(codclien,tipocarnet,cif,nombre,numcarnet,telefono,id,fcaducidad,Manipuladorprovisional)  VALUES ("
-            SQL = SQL & Text1(0).Text & "," & i
+            Sql = "INSERT INTO sclienmani(codclien,tipocarnet,cif,nombre,numcarnet,telefono,id,fcaducidad,Manipuladorprovisional)  VALUES ("
+            Sql = Sql & Text1(0).Text & "," & i
             
                      
             For i = 0 To Me.txtauxFito.Count - 1
                 If i = 5 Then
-                    SQL = SQL & ", " & DBSet(txtauxFito(i).Text, "F", "N")
+                    Sql = Sql & ", " & DBSet(txtauxFito(i).Text, "F", "N")
                 Else
-                    SQL = SQL & ", " & DBSet(txtauxFito(i).Text, "T", "S")
+                    Sql = Sql & ", " & DBSet(txtauxFito(i).Text, "T", "S")
                 End If
             Next i
             i = 0
             If cboFitos(1).ListIndex = 1 Then i = 1
-            SQL = SQL & "," & i & ")"
+            Sql = Sql & "," & i & ")"
         End If
         
     Case 2  'MODIFICAR
@@ -16453,22 +16499,22 @@ Dim SQL As String
             
                         
             'codclien,IdTelefono,IMEI,SIM,Factura,Detalle,Inactivo,Observaciones
-            SQL = ""
+            Sql = ""
             
             For i = 1 To 6  'EL CERO NO
                 If i <> 5 Then
                     BuscaChekc = RecuperaValor("cif|nombre|numcarnet|telefono||fcaducidad|", CInt(i))
-                    SQL = SQL & ", " & BuscaChekc & " = " & DBSet(txtauxFito(i - 1).Text, IIf(i = 6, "F", "T"), "S")
+                    Sql = Sql & ", " & BuscaChekc & " = " & DBSet(txtauxFito(i - 1).Text, IIf(i = 6, "F", "T"), "S")
                 End If
             Next i
             i = 1
             If Me.cboFitos(0).ListIndex = 1 Then i = 2
-            SQL = " tipocarnet = " & i & SQL
+            Sql = " tipocarnet = " & i & Sql
             i = Me.cboFitos(1).ListIndex
-            SQL = SQL & ", Manipuladorprovisional = " & i
-            SQL = "UPDATE sclienmani Set " & SQL
-            SQL = SQL & " WHERE  id = " & data7.Recordset!ID
-            SQL = SQL & " AND  codclien = " & DBSet(Text1(0).Text, "T")
+            Sql = Sql & ", Manipuladorprovisional = " & i
+            Sql = "UPDATE sclienmani Set " & Sql
+            Sql = Sql & " WHERE  id = " & data7.Recordset!ID
+            Sql = Sql & " AND  codclien = " & DBSet(Text1(0).Text, "T")
             
             
             
@@ -16477,8 +16523,8 @@ Dim SQL As String
         End If
     End Select
         
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarLineamanipuladorFito = True
     Else
         PonerFoco txtauxTfno(1)
@@ -16491,13 +16537,13 @@ End Function
 
 Private Function InsertarModificarLineaCamposhuertos() As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
 
     On Error GoTo EInsertarModificarLinea
     'sclientfno(codclien,IdTelefono,IMEI,SIM,Factura,Detalle,Inactivo,Observaciones)
     InsertarModificarLineaCamposhuertos = False
-    SQL = ""
+    Sql = ""
     
     
     If Not DatosOkLinea Then
@@ -16514,47 +16560,47 @@ Dim SQL As String
     If ModificaLineas = 2 Then kCampo = 1
             
     For i = kCampo To Me.txtauxMarja.Count - 1
-        SQL = SQL & ", "
-        If ModificaLineas = 2 Then SQL = SQL & RecuperaValor(BuscaChekc, CInt(i + 1)) & " = "
+        Sql = Sql & ", "
+        If ModificaLineas = 2 Then Sql = Sql & RecuperaValor(BuscaChekc, CInt(i + 1)) & " = "
             
         If i < 6 Then
-            SQL = SQL & DBSet(txtauxMarja(i), "N")
+            Sql = Sql & DBSet(txtauxMarja(i), "N")
         ElseIf i = 7 Or i = 8 Then
-            SQL = SQL & DBSet(txtauxMarja(i), "F", "S")
+            Sql = Sql & DBSet(txtauxMarja(i), "F", "S")
         Else
-            SQL = SQL & DBSet(txtauxMarja(i), "T", "S")
+            Sql = Sql & DBSet(txtauxMarja(i), "T", "S")
         End If
     Next i
             
             
     If ModificaLineas = 1 Then
-        SQL = Text1(0).Text & SQL
+        Sql = Text1(0).Text & Sql
         BuscaChekc = Replace(BuscaChekc, "|", ",")
         BuscaChekc = Mid(BuscaChekc, 1, Len(BuscaChekc) - 1) 'quitamos la ultmia coma
-        SQL = "INSERT INTO sclienhuertos(codclien," & BuscaChekc & ") VALUES (" & SQL & ")"
+        Sql = "INSERT INTO sclienhuertos(codclien," & BuscaChekc & ") VALUES (" & Sql & ")"
     
     Else
-        SQL = Mid(SQL, 2)
-        SQL = "UPDATE sclienhuertos SET " & SQL
-        SQL = SQL & " WHERE  id = " & data8.Recordset!ID
-        SQL = SQL & " AND  codclien = " & DBSet(Text1(0).Text, "T")
+        Sql = Mid(Sql, 2)
+        Sql = "UPDATE sclienhuertos SET " & Sql
+        Sql = Sql & " WHERE  id = " & data8.Recordset!ID
+        Sql = Sql & " AND  codclien = " & DBSet(Text1(0).Text, "T")
     End If
-    If SQL <> "" Then
+    If Sql <> "" Then
         
-        conn.Execute SQL
+        conn.Execute Sql
         InsertarModificarLineaCamposhuertos = True
         
         
         'Voy a tratar el combo, por si lo que ha puesto NO estaba entodavia
         
-        SQL = ""
+        Sql = ""
         For NumRegElim = 1 To cbomarjal.ListCount
             If cbomarjal.List(NumRegElim) = Me.txtauxMarja(6).Text Then
-                SQL = "X"
+                Sql = "X"
                 Exit For
             End If
         Next
-        If SQL = "" Then Cargacbomarjal
+        If Sql = "" Then Cargacbomarjal
             
        
                 
@@ -16570,6 +16616,18 @@ End Function
 
 
 
+
+Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1  'Facelec
+            If Modo <> 2 Then Exit Sub
+            If Me.chkClienteV.Value = 1 Then Exit Sub
+            
+            frmListado5.OpcionListado = 48
+            frmListado5.OtrosDatos = Text1(0).Text & "|" & Text1(7).Text & "|"
+            frmListado5.Show vbModal
+    End Select
+End Sub
 
 Private Sub Toolbar3_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
@@ -17106,38 +17164,60 @@ End Sub
 
 'Comprobaremos que ha cambiado los campos que enlazan con conta. nombre nif.....
 Private Function HayQueActualizarenContabilidad() As Boolean
+    
+    HayQueActualizarenContabilidad = HamCambiadoDatosEsenciales(True)
+
+End Function
+
+
+Private Function HamCambiadoDatosEsenciales(ParaContabilidad As Boolean) As Boolean
 Dim QueCampos As String
 Dim mTag As cTag
 Dim i As Integer
 Dim fin As Boolean
 Dim txt As String
 Dim Valor
-    HayQueActualizarenContabilidad = False
-    CambiaCCC_Ariadna = False
-    If Text1(35).Text = "" Or Text2(35).Text = "" Then Exit Function
 
-
-    'Para CCC en aopliaciones ARIADNA
-    If vParamAplic.ComprobarBancoRestoAplicaciones Then
-        txt = Format(DBLet(Data1.Recordset.Fields!codbanco, "N"), "0000") & Format(DBLet(Data1.Recordset.Fields!codsucur, "N"), "0000")
-        txt = txt & Right("00" & DBLet(Data1.Recordset.Fields!digcontr), 2)
-        txt = txt & Right(String(10, "0") & DBLet(Data1.Recordset.Fields!cuentaba), 10)
-        'Nov 2013.
-        txt = DBLet(Data1.Recordset!Iban, "T") & txt
-        QueCampos = Me.Text1(56).Text & Me.Text1(31).Text & Text1(32).Text & Text1(33).Text & Text1(34).Text
-        If txt <> QueCampos Then CambiaCCC_Ariadna = True
+    HamCambiadoDatosEsenciales = False
+    
+    
+    If ParaContabilidad Then
+        'Si no existe la cuenta. No hacemos nada
+       If Text1(35).Text = "" Or Text2(35).Text = "" Then Exit Function
     End If
     
+    CambiaCCC_Ariadna = False
+'
+'    ''Para CCC en aopliaciones ARIADNA
+'    'If vParamAplic.ComprobarBancoRestoAplicaciones Then
+'    If ParaContabilidad Then
+'        txt = Format(DBLet(Data1.Recordset.Fields!codbanco, "N"), "0000") & Format(DBLet(Data1.Recordset.Fields!codsucur, "N"), "0000")
+'        txt = txt & Right("00" & DBLet(Data1.Recordset.Fields!digcontr), 2)
+'        txt = txt & Right(String(10, "0") & DBLet(Data1.Recordset.Fields!cuentaba), 10)
+'        'Nov 2013.
+'        txt = DBLet(Data1.Recordset!Iban, "T") & txt
+'        QueCampos = Me.Text1(56).Text & Me.Text1(31).Text & Text1(32).Text & Text1(33).Text & Text1(34).Text
+'        If txt <> QueCampos Then CambiaCCC_Ariadna = True
+'    End If
+    
 
+    
+    If ParaContabilidad Then
 
-
-    'Vere si el campo que habia al que hay ha cambiado
-    QueCampos = "0|1|3|4|5|6|7|31|32|33|34|"
-    'Marzo 2012, operaciones aseguradas
-    QueCampos = QueCampos & "50|48|47|41|43|23|"
-    'Mayo 2012, la fecha baja credito    y IBAN
-    QueCampos = QueCampos & "53|56|"
-    If vParamAplic.ContabilidadNueva Then QueCampos = QueCampos & "60|"   'PAIS
+                'Vere si el campo que habia al que hay ha cambiado
+                QueCampos = "0|1|3|4|5|6|7|31|32|33|34|"
+                'Marzo 2012, operaciones aseguradas
+                QueCampos = QueCampos & "50|48|47|41|43|23|"
+                'Mayo 2012, la fecha baja credito    y IBAN
+                QueCampos = QueCampos & "53|56|"
+                If vParamAplic.ContabilidadNueva Then QueCampos = QueCampos & "60|"   'PAIS
+    
+    
+    
+    Else
+          'Datos esenciales
+            QueCampos = "0|1|3|4|5|6|7|31|32|33|34|36|23|"
+    End If
     
     fin = False
     Set mTag = New cTag
@@ -17192,20 +17272,24 @@ Dim Valor
                 End If
     Wend
     
-    'Febrero 2021
-    'Llevaremos el @email
-    If vParamAplic.ContabilidadNueva Then
-        txt = DBLet(Data1.Recordset!maiclie1, "T")
-        If Text1(17).Text <> txt Then QueCampos = "S"
-    
+    If ParaContabilidad Then
+        'Febrero 2021
+        'Llevaremos el @email
+        If vParamAplic.ContabilidadNueva Then
+            txt = DBLet(Data1.Recordset!maiclie1, "T")
+            If Text1(17).Text <> txt Then QueCampos = "S"
+        
+        End If
     End If
-    
 
     'PREGUNTA
     If QueCampos <> "" Then
-        'Significa que ha cambiado algo
-        If MsgBox("Actualizar datos cuenta en contabilidad", vbQuestion + vbYesNo) = vbYes Then HayQueActualizarenContabilidad = True
-        
+        If ParaContabilidad Then
+            'Significa que ha cambiado algo
+            If MsgBox("Actualizar datos cuenta en contabilidad", vbQuestion + vbYesNo) = vbYes Then HamCambiadoDatosEsenciales = True
+        Else
+            HamCambiadoDatosEsenciales = True
+        End If
     End If
 End Function
 
@@ -17450,35 +17534,35 @@ End Sub
 
 Private Function InsertarModificarLineaRenting() As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarModificarLinea
     'codclien,nombre,dpto,cargo,telefono,ext,maidirec,movil,observa,id FROM scliendp
     InsertarModificarLineaRenting = False
-    SQL = ""
+    Sql = ""
     Select Case ModificaLineas
     Case 1  'INSERTAR
         If DatosOkLinea Then
-            SQL = "INSERT INTO sclienrenting(codclien,id,coddirec,referencia,fecalta,numcuotas,fecbaja,importe,codtipco, obser,ultfec) VALUES ("
-            SQL = SQL & Text1(0).Text
+            Sql = "INSERT INTO sclienrenting(codclien,id,coddirec,referencia,fecalta,numcuotas,fecbaja,importe,codtipco, obser,ultfec) VALUES ("
+            Sql = Sql & Text1(0).Text
 
                     
             For i = 0 To 11
-                If i <> 2 And i <> 9 Then SQL = SQL & ", " 'el 2 no mete en el sql
+                If i <> 2 And i <> 9 Then Sql = Sql & ", " 'el 2 no mete en el sql
                 If i = 0 Or i = 1 Or i = 5 Then
                     'ENTERO
-                    SQL = SQL & DBSet(txtauxRent(i).Text, "N", "S")
+                    Sql = Sql & DBSet(txtauxRent(i).Text, "N", "S")
                 Else
                     If i = 4 Or i = 6 Or i = 11 Then
                         'FECHA
-                        SQL = SQL & DBSet(txtauxRent(i).Text, "F", "S")
+                        Sql = Sql & DBSet(txtauxRent(i).Text, "F", "S")
                     Else
                         If i = 7 Then
                             'DECIMAL
-                            SQL = SQL & DBSet(txtauxRent(i).Text, "N", "N")
+                            Sql = Sql & DBSet(txtauxRent(i).Text, "N", "N")
                         Else
                             'TEXTO
-                            If i <> 2 And i <> 9 Then SQL = SQL & DBSet(txtauxRent(i).Text, "T", "S") 'el nomdepartamento NO VA AQUI
+                            If i <> 2 And i <> 9 Then Sql = Sql & DBSet(txtauxRent(i).Text, "T", "S") 'el nomdepartamento NO VA AQUI
                         End If
                     End If
                 End If
@@ -17486,7 +17570,7 @@ Dim SQL As String
                 
                 
             
-            SQL = SQL & ")"
+            Sql = Sql & ")"
   
         End If
         
@@ -17494,22 +17578,22 @@ Dim SQL As String
         If DatosOkLinea Then
             '(codclien,id,coddirec,referencia,fecalta,numcuotas,fecbaja,ultfec,importe) VALUES ("
             '
-            SQL = "UPDATE sclienrenting Set coddirec = " & DBSet(txtauxRent(1).Text, "N", "S")
-            SQL = SQL & ", referencia = " & DBSet(txtauxRent(3).Text, "T", "N")
-            SQL = SQL & ", fecalta = " & DBSet(txtauxRent(4).Text, "F", "N")
-            SQL = SQL & ", numcuotas = " & DBSet(txtauxRent(5).Text, "N", "N")
-            SQL = SQL & ", fecbaja = " & DBSet(txtauxRent(6).Text, "F", "N")
+            Sql = "UPDATE sclienrenting Set coddirec = " & DBSet(txtauxRent(1).Text, "N", "S")
+            Sql = Sql & ", referencia = " & DBSet(txtauxRent(3).Text, "T", "N")
+            Sql = Sql & ", fecalta = " & DBSet(txtauxRent(4).Text, "F", "N")
+            Sql = Sql & ", numcuotas = " & DBSet(txtauxRent(5).Text, "N", "N")
+            Sql = Sql & ", fecbaja = " & DBSet(txtauxRent(6).Text, "F", "N")
             'SQL = SQL & ", ultfec  = " & DBSet(txtauxRent(11).Text, "F", "S")
-            SQL = SQL & ", importe= " & DBSet(txtauxRent(7).Text, "N", "N")
-            SQL = SQL & ", codtipco= " & DBSet(txtauxRent(8).Text, "T", "N")
-            SQL = SQL & ", obser = " & DBSet(txtauxRent(10).Text, "T", "S")
-            SQL = SQL & " WHERE codclien =" & (Text1(0).Text) & " AND "
-            SQL = SQL & " id =" & (txtauxRent(0).Text)
+            Sql = Sql & ", importe= " & DBSet(txtauxRent(7).Text, "N", "N")
+            Sql = Sql & ", codtipco= " & DBSet(txtauxRent(8).Text, "T", "N")
+            Sql = Sql & ", obser = " & DBSet(txtauxRent(10).Text, "T", "S")
+            Sql = Sql & " WHERE codclien =" & (Text1(0).Text) & " AND "
+            Sql = Sql & " id =" & (txtauxRent(0).Text)
         End If
     End Select
         
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarLineaRenting = True
     Else
         PonerFoco txtauxRent(1)
@@ -18039,7 +18123,7 @@ End Sub
 
 Private Sub AbrirAlbaranesPuntos()
 Dim Documento As String
-Dim SQL As String
+Dim Sql As String
 
     Documento = lw1.SelectedItem.SubItems(3)
     Select Case Me.lw1.SelectedItem.SubItems(2)
@@ -18058,8 +18142,8 @@ Dim SQL As String
 
 
             'consultamos si existe el albaran en la tabla de albaranes: scaalb
-            SQL = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", lw1.SelectedItem.SubItems(2), "T", , "numalbar", Documento, "N")
-            If SQL <> "" Then 'existe el Albaran
+            Sql = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", lw1.SelectedItem.SubItems(2), "T", , "numalbar", Documento, "N")
+            If Sql <> "" Then 'existe el Albaran
                 If vParamAplic.TipoFormularioClientes = 0 Then
                          With frmFacEntAlbaranes2
                             If EsNumerico(Documento) Then
@@ -18074,9 +18158,9 @@ Dim SQL As String
                         'CargarPuntos otra vez
                         'Veremos si ha cambiado los puntos
                         
-                        SQL = DevuelveDesdeBDNew(conAri, "sclien", "puntos", "codclien", CStr(Data1.Recordset!codClien))
-                        If SQL = "" Then SQL = "0"
-                        If CCur(SQL) <> DBLet(Data1.Recordset!Puntos, "N") Then
+                        Sql = DevuelveDesdeBDNew(conAri, "sclien", "puntos", "codclien", CStr(Data1.Recordset!codClien))
+                        If Sql = "" Then Sql = "0"
+                        If CCur(Sql) <> DBLet(Data1.Recordset!Puntos, "N") Then
                             PosicionarData
                             PonerCampos
                         End If
@@ -18234,8 +18318,8 @@ Dim T As Boolean
 
     Limp = True
     If Not ForzarLimpiar Then
-        If Not (Data3.Recordset Is Nothing) Then
-            If Not Data3.Recordset.EOF Then Limp = False
+        If Not (data3.Recordset Is Nothing) Then
+            If Not data3.Recordset.EOF Then Limp = False
         End If
     End If
     
@@ -18266,15 +18350,15 @@ Dim T As Boolean
                 End If
             End If
             If T Then
-                Text4(i).Text = DBLet(Data3.Recordset.Fields(i), "T")
+                Text4(i).Text = DBLet(data3.Recordset.Fields(i), "T")
             Else
-                If IsNull(Data3.Recordset.Fields(i)) Then
+                If IsNull(data3.Recordset.Fields(i)) Then
                     Text4(i).Text = ""
                 Else
                     If i = 13 Then
-                        Text4(i).Text = DBLet(Data3.Recordset.Fields(i), "0000000000")
+                        Text4(i).Text = DBLet(data3.Recordset.Fields(i), "0000000000")
                     Else
-                        Text4(i).Text = DBLet(Data3.Recordset.Fields(i), "0000")
+                        Text4(i).Text = DBLet(data3.Recordset.Fields(i), "0000")
                     End If
                 End If
             End If
@@ -18309,11 +18393,10 @@ Dim B As Boolean
     ToolbarAux(0).Buttons(3).Enabled = B  '(Modo = 2 And Me.Data2.Recordset.RecordCount > 0)
     
     
-    
     If vParamAplic.DireccionesEnvio Then
         B = Modo = 2 Or Modo = 6
         ToolbarAux(1).Buttons(1).Enabled = B
-        If B Then B = Me.Data3.Recordset.RecordCount > 0
+        If B Then B = Me.data3.Recordset.RecordCount > 0
         ToolbarAux(1).Buttons(2).Enabled = B
         ToolbarAux(1).Buttons(3).Enabled = B
         
@@ -18388,7 +18471,8 @@ Dim B As Boolean
     End If
     
     
-    
+    B = Modo = 2 And vParamAplic.TieneFacElec And vUsu.Nivel = 0 'Solo super usuarios
+    Toolbar2.Buttons(1).Enabled = B
 End Sub
 
 
@@ -18966,3 +19050,4 @@ Private Sub ImprimirListadoVtaPlazos()
     End With
     BuscaChekc = ""
 End Sub
+

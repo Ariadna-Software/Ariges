@@ -6,23 +6,41 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacTPVEnt 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Punto de Venta"
-   ClientHeight    =   8205
+   ClientHeight    =   9090
    ClientLeft      =   45
    ClientTop       =   4335
-   ClientWidth     =   11910
+   ClientWidth     =   15675
+   BeginProperty Font 
+      Name            =   "Verdana"
+      Size            =   8.25
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
    Icon            =   "frmFacTPVEnt.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8205
-   ScaleWidth      =   11910
+   ScaleHeight     =   9090
+   ScaleWidth      =   15675
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameFito 
       BorderStyle     =   0  'None
-      Height          =   375
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   615
       Left            =   120
       TabIndex        =   43
-      Top             =   7800
+      Top             =   8280
       Width           =   10455
       Begin VB.TextBox txtFito2 
          BeginProperty Font 
@@ -42,7 +60,7 @@ Begin VB.Form frmFacTPVEnt
          ScrollBars      =   2  'Vertical
          TabIndex        =   44
          Text            =   "frmFacTPVEnt.frx":000C
-         Top             =   0
+         Top             =   120
          Width           =   10095
       End
    End
@@ -51,6 +69,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   14
       Left            =   11280
@@ -66,6 +93,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   13
       Left            =   11280
@@ -82,6 +118,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   12
       Left            =   11280
@@ -99,6 +144,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   11
       Left            =   11280
@@ -115,6 +169,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   10
       Left            =   11040
@@ -132,6 +195,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   9
       Left            =   11040
@@ -148,6 +220,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   8
       Left            =   10680
@@ -160,62 +241,116 @@ Begin VB.Form frmFacTPVEnt
       Width           =   495
    End
    Begin VB.Frame Frame1 
-      Height          =   1035
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1155
       Left            =   120
       TabIndex        =   27
-      Top             =   2520
-      Width           =   11640
+      Top             =   2880
+      Width           =   15360
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   2
-         Left            =   7425
+         Left            =   1560
          TabIndex        =   29
          Text            =   "Text1"
-         Top             =   240
-         Width           =   495
+         Top             =   720
+         Width           =   735
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   2
-         Left            =   7980
+         Left            =   2280
          Locked          =   -1  'True
          TabIndex        =   34
          Text            =   "Text2"
-         Top             =   240
-         Width           =   3300
+         Top             =   720
+         Width           =   2820
       End
       Begin VB.TextBox Text1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   2280
+         Left            =   9360
          MaxLength       =   80
          TabIndex        =   30
          Text            =   "Text1"
-         Top             =   620
-         Width           =   9015
+         Top             =   240
+         Width           =   5895
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   2280
+         Left            =   2640
          Locked          =   -1  'True
          TabIndex        =   31
          Text            =   "Text2"
          Top             =   240
-         Width           =   4005
+         Width           =   4605
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   1500
          TabIndex        =   28
          Text            =   "Text1"
          Top             =   240
-         Width           =   735
+         Width           =   1095
       End
       Begin VB.Label label1 
          Caption         =   "Dpto"
@@ -231,18 +366,18 @@ Begin VB.Form frmFacTPVEnt
          ForeColor       =   &H00800000&
          Height          =   255
          Index           =   11
-         Left            =   6440
+         Left            =   240
          TabIndex        =   35
-         Top             =   240
-         Width           =   560
+         Top             =   720
+         Width           =   555
       End
       Begin VB.Image imgBuscar 
          Appearance      =   0  'Flat
          Height          =   360
          Index           =   1
-         Left            =   7040
+         Left            =   1080
          ToolTipText     =   "Buscar artículo"
-         Top             =   220
+         Top             =   720
          Width           =   360
       End
       Begin VB.Label label1 
@@ -259,9 +394,9 @@ Begin VB.Form frmFacTPVEnt
          ForeColor       =   &H00800000&
          Height          =   255
          Index           =   10
-         Left            =   240
+         Left            =   7560
          TabIndex        =   33
-         Top             =   600
+         Top             =   240
          Width           =   1815
       End
       Begin VB.Image imgBuscar 
@@ -294,8 +429,8 @@ Begin VB.Form frmFacTPVEnt
       End
    End
    Begin MSCommLib.MSComm MSComm1 
-      Left            =   11520
-      Top             =   1080
+      Left            =   14040
+      Top             =   360
       _ExtentX        =   1005
       _ExtentY        =   1005
       _Version        =   393216
@@ -304,18 +439,36 @@ Begin VB.Form frmFacTPVEnt
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   11640
+      Left            =   12600
       TabIndex        =   26
-      Top             =   6960
+      Top             =   8400
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1275
    End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   7
       Left            =   11040
@@ -331,9 +484,18 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H00F5F5F5&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H80000008&
-      Height          =   1455
-      Left            =   4080
+      Height          =   1815
+      Left            =   7920
       TabIndex        =   19
       Top             =   960
       Width           =   7650
@@ -343,8 +505,8 @@ Begin VB.Form frmFacTPVEnt
          BorderStyle     =   1  'Fixed Single
          Caption         =   "0.0"
          BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   21.75
+            Name            =   "Tahoma"
+            Size            =   24
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -352,21 +514,21 @@ Begin VB.Form frmFacTPVEnt
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
-         Height          =   510
+         Height          =   630
          Index           =   8
-         Left            =   4880
+         Left            =   4755
          TabIndex        =   24
-         Top             =   100
-         Width           =   2660
+         Top             =   105
+         Width           =   2775
       End
       Begin VB.Label label1 
          BackColor       =   &H00F5F5F5&
          Caption         =   "TOTAL LINEA"
          BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   18
+            Name            =   "Tahoma"
+            Size            =   20.25
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
@@ -385,8 +547,8 @@ Begin VB.Form frmFacTPVEnt
          BorderStyle     =   1  'Fixed Single
          Caption         =   "0.0"
          BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   24
+            Name            =   "Tahoma"
+            Size            =   36
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -394,19 +556,19 @@ Begin VB.Form frmFacTPVEnt
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
-         Height          =   600
+         Height          =   840
          Index           =   6
-         Left            =   3720
+         Left            =   3000
          TabIndex        =   21
-         Top             =   720
-         Width           =   3825
+         Top             =   840
+         Width           =   4545
       End
       Begin VB.Label label1 
          BackColor       =   &H00F5F5F5&
          Caption         =   "TOTAL"
          BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   24
+            Name            =   "Tahoma"
+            Size            =   36
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -414,34 +576,52 @@ Begin VB.Form frmFacTPVEnt
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
-         Height          =   615
+         Height          =   735
          Index           =   5
          Left            =   120
          TabIndex        =   20
-         Top             =   600
+         Top             =   840
          Width           =   2775
       End
    End
    Begin VB.Frame FrameCab 
-      Height          =   1485
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1725
       Left            =   120
       TabIndex        =   14
       Top             =   960
-      Width           =   3510
+      Width           =   4335
       Begin VB.ComboBox cboNumVenta 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   390
          ItemData        =   "frmFacTPVEnt.frx":0012
-         Left            =   1800
+         Left            =   1920
          List            =   "frmFacTPVEnt.frx":0014
          Style           =   2  'Dropdown List
          TabIndex        =   0
-         Top             =   1080
-         Width           =   1455
+         Top             =   1200
+         Width           =   1935
       End
       Begin VB.Label label1 
          Caption         =   "Nº Venta"
          BeginProperty Font 
-            Name            =   "Arial"
+            Name            =   "Tahoma"
             Size            =   12
             Charset         =   0
             Weight          =   700
@@ -454,7 +634,7 @@ Begin VB.Form frmFacTPVEnt
          Index           =   0
          Left            =   240
          TabIndex        =   22
-         Top             =   1080
+         Top             =   1290
          Width           =   1215
       End
       Begin VB.Label label1 
@@ -462,8 +642,8 @@ Begin VB.Form frmFacTPVEnt
          BorderStyle     =   1  'Fixed Single
          Caption         =   "TotVentas"
          BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   12
+            Name            =   "Verdana"
+            Size            =   11.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -473,15 +653,15 @@ Begin VB.Form frmFacTPVEnt
          ForeColor       =   &H00400040&
          Height          =   345
          Index           =   4
-         Left            =   2280
+         Left            =   2880
          TabIndex        =   18
-         Top             =   600
+         Top             =   720
          Width           =   975
       End
       Begin VB.Label label1 
          Caption         =   "Ventas Abiertas:"
          BeginProperty Font 
-            Name            =   "Arial"
+            Name            =   "Tahoma"
             Size            =   12
             Charset         =   0
             Weight          =   700
@@ -494,7 +674,7 @@ Begin VB.Form frmFacTPVEnt
          Index           =   3
          Left            =   240
          TabIndex        =   17
-         Top             =   600
+         Top             =   720
          Width           =   2055
       End
       Begin VB.Label label1 
@@ -502,8 +682,8 @@ Begin VB.Form frmFacTPVEnt
          Appearance      =   0  'Flat
          Caption         =   "Fecha"
          BeginProperty Font 
-            Name            =   "Arial"
-            Size            =   12
+            Name            =   "Verdana"
+            Size            =   11.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -513,15 +693,15 @@ Begin VB.Form frmFacTPVEnt
          ForeColor       =   &H00400040&
          Height          =   255
          Index           =   2
-         Left            =   1200
+         Left            =   1080
          TabIndex        =   16
          Top             =   240
-         Width           =   2055
+         Width           =   2775
       End
       Begin VB.Label label1 
          Caption         =   "Fecha:"
          BeginProperty Font 
-            Name            =   "Arial"
+            Name            =   "Tahoma"
             Size            =   12
             Charset         =   0
             Weight          =   700
@@ -542,6 +722,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   840
@@ -558,6 +747,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   6
       Left            =   10080
@@ -573,6 +771,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   240
@@ -588,6 +795,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       Left            =   1920
@@ -604,6 +820,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   3
       Left            =   6840
@@ -621,6 +846,15 @@ Begin VB.Form frmFacTPVEnt
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
       Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   4
       Left            =   8160
@@ -637,6 +871,15 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   0  'Flat
       BackColor       =   &H80000013&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   5
       Left            =   9120
@@ -653,6 +896,15 @@ Begin VB.Form frmFacTPVEnt
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
       Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       Left            =   3480
@@ -668,6 +920,15 @@ Begin VB.Form frmFacTPVEnt
    Begin VB.CommandButton cmdAux 
       Appearance      =   0  'Flat
       Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   3240
@@ -679,17 +940,26 @@ Begin VB.Form frmFacTPVEnt
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   10800
+      Left            =   11040
       TabIndex        =   9
-      Top             =   7800
+      Top             =   8400
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1275
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
-      Left            =   11280
-      Top             =   7800
+      Left            =   9720
+      Top             =   9000
       Visible         =   0   'False
       Width           =   1335
       _ExtentX        =   2355
@@ -739,8 +1009,8 @@ Begin VB.Form frmFacTPVEnt
       Left            =   0
       TabIndex        =   11
       Top             =   0
-      Width           =   11910
-      _ExtentX        =   21008
+      Width           =   15675
+      _ExtentX        =   27649
       _ExtentY        =   1164
       ButtonWidth     =   1746
       ButtonHeight    =   1005
@@ -748,7 +1018,7 @@ Begin VB.Form frmFacTPVEnt
       Appearance      =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   23
+         NumButtons      =   26
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.Visible         =   0   'False
             Style           =   3
@@ -831,6 +1101,16 @@ Begin VB.Form frmFacTPVEnt
             Style           =   3
          EndProperty
          BeginProperty Button23 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Caption         =   "Cestas"
+            Object.ToolTipText     =   "Leer cestas"
+         EndProperty
+         BeginProperty Button24 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button25 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button26 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Caption         =   "&Salir"
             Object.ToolTipText     =   "Salir"
          EndProperty
@@ -838,8 +1118,8 @@ Begin VB.Form frmFacTPVEnt
    End
    Begin MSAdodcLib.Adodc Data2 
       Height          =   330
-      Left            =   11400
-      Top             =   7800
+      Left            =   9240
+      Top             =   8640
       Visible         =   0   'False
       Width           =   1335
       _ExtentX        =   2355
@@ -885,29 +1165,38 @@ Begin VB.Form frmFacTPVEnt
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   11520
+      Left            =   12600
       TabIndex        =   10
-      Top             =   6960
+      Top             =   8400
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1275
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmFacTPVEnt.frx":0016
-      Height          =   3975
+      Height          =   3855
       Left            =   120
       TabIndex        =   1
-      Top             =   3600
-      Width           =   11655
-      _ExtentX        =   20558
-      _ExtentY        =   7011
+      Top             =   4200
+      Width           =   15255
+      _ExtentX        =   26908
+      _ExtentY        =   6800
       _Version        =   393216
       AllowUpdate     =   0   'False
       AllowArrows     =   -1  'True
       BorderStyle     =   0
       ColumnHeaders   =   -1  'True
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       TabAcrossSplits =   -1  'True
       TabAction       =   2
       FormatLocked    =   -1  'True
@@ -921,8 +1210,8 @@ Begin VB.Form frmFacTPVEnt
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -968,9 +1257,9 @@ Begin VB.Form frmFacTPVEnt
       BorderColor     =   &H00E0E0E0&
       BorderWidth     =   2
       Height          =   1650
-      Left            =   3720
-      Top             =   1050
-      Width           =   7755
+      Left            =   4680
+      Top             =   1080
+      Width           =   2955
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -1019,6 +1308,9 @@ Begin VB.Form frmFacTPVEnt
          Caption         =   "Nº lote fitosanitario"
          Shortcut        =   {F11}
       End
+      Begin VB.Menu mnCestas 
+         Caption         =   "Cestas"
+      End
       Begin VB.Menu mnbarra4 
          Caption         =   "-"
       End
@@ -1045,8 +1337,8 @@ Public NomrePC_conectado As String
 '========== VBLES PRIVADAS ====================
 Private WithEvents frmB As frmBuscaGrid 'Form para busquedas
 Attribute frmB.VB_VarHelpID = -1
-Private WithEvents frmArt As frmAlmArticu2   'Form Articulos LLEVA BUSQUEDA LOTES
-Attribute frmArt.VB_VarHelpID = -1
+Private WithEvents FrmArt As frmAlmArticu2   'Form Articulos LLEVA BUSQUEDA LOTES
+Attribute FrmArt.VB_VarHelpID = -1
 Private WithEvents frmCli As frmBasico2   'Form clientes (busquedas)
 Attribute frmCli.VB_VarHelpID = -1
 Private WithEvents frmA As frmBasico2
@@ -1096,8 +1388,10 @@ Private kCampo As Integer
 '-------------------------------------------------------------------------
 Private HaDevueltoDatos As Boolean
 
+Private TieneAPP_Cestas As Boolean
 
-Dim SQL As String
+
+Dim Sql As String
 Dim i As Integer
 
 
@@ -1255,11 +1549,11 @@ Private Sub BotonEliminarLinea()
     If Data2.Recordset.EOF Then Exit Sub
     If Data2.Recordset.BOF Then Exit Sub
     If DBLet(Data2.Recordset!codArtic, "T") = "" Then Exit Sub
-    SQL = "¿Seguro que desea eliminar la línea de venta?     " & vbCrLf
-    SQL = SQL & vbCrLf & "Artículo:  " & Data2.Recordset!codArtic & " - " & Data2.Recordset!NomArtic
-    SQL = SQL & vbCrLf & "Importe:  " & Data2.Recordset!ImporteL
+    Sql = "¿Seguro que desea eliminar la línea de venta?     " & vbCrLf
+    Sql = Sql & vbCrLf & "Artículo:  " & Data2.Recordset!codArtic & " - " & Data2.Recordset!NomArtic
+    Sql = Sql & vbCrLf & "Importe:  " & Data2.Recordset!ImporteL
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Data2.Recordset.AbsolutePosition
         If EliminarLinea Then
@@ -1435,8 +1729,9 @@ Private Sub Form_Load()
         .Buttons(21).visible = vParamAplic.ManipuladorFitosanitarios2
         Me.mnLotefitosanitarios.visible = vParamAplic.ManipuladorFitosanitarios2
         
-        
-        .Buttons(23).Image = 6  'Salir
+        .Buttons(23).Image = 11
+        .Buttons(23).Enabled = False
+        .Buttons(26).Image = 6  'Salir
     End With
 
 
@@ -1448,26 +1743,26 @@ Private Sub Form_Load()
    
     'Terminal con el que trabajaremos, leemos el nombre del ordenador
 '    SQL = ComputerName
-    SQL = Me.NomrePC_conectado
-    SQL = DevuelveDesdeBDNew(conAri, "spatpvt", "numtermi", "nombrepc", SQL, "T")
+    Sql = Me.NomrePC_conectado
+    Sql = DevuelveDesdeBDNew(conAri, "spatpvt", "numtermi", "nombrepc", Sql, "T")
 '    MsgBox "Nº de terminal para " & Me.NomrePC_conectado & ": " & SQL, vbInformation
-    If Not IsNumeric(SQL) Then
+    If Not IsNumeric(Sql) Then
         MsgBox "No se ha configurado el terminal de venta." & vbCrLf & "Debe configurar primero los parámetros del TPV.", vbExclamation
         Exit Sub
     End If
-    NumTermi = CInt(SQL)
+    NumTermi = CInt(Sql)
    
     
     'Leemos los parametros del TPV
     Set vParamTPV = New CParamTPV
     If vParamTPV.Leer() = 1 Then
-        SQL = "No se han podido cargar los Parámetros generales del TPV." & vbCrLf
-        MsgBox SQL & "Debe configurar la aplicación.", vbExclamation
+        Sql = "No se han podido cargar los Parámetros generales del TPV." & vbCrLf
+        MsgBox Sql & "Debe configurar la aplicación.", vbExclamation
         Set vParamTPV = Nothing
         Unload Me
     ElseIf vParamTPV.Leer2(CStr(NumTermi)) = 1 Then
-        SQL = "No se han podido cargar los Parámetros del terminal TPV." & vbCrLf
-        MsgBox SQL & "Debe configurar la aplicación.", vbExclamation
+        Sql = "No se han podido cargar los Parámetros del terminal TPV." & vbCrLf
+        MsgBox Sql & "Debe configurar la aplicación.", vbExclamation
         Set vParamTPV = Nothing
         Unload Me
     End If
@@ -1476,9 +1771,9 @@ Private Sub Form_Load()
     'Poner el trabajador que esta conectado
     CodTraba = PonerTrabajadorConectado(NomTraba)
     If CodTraba = "" Then
-        SQL = "No se ha encontrado ningún trabajador con ese login." & vbCrLf
-        SQL = SQL & "Compruebe que el trabajador tiene asignado su login."
-        MsgBox SQL, vbExclamation
+        Sql = "No se ha encontrado ningún trabajador con ese login." & vbCrLf
+        Sql = Sql & "Compruebe que el trabajador tiene asignado su login."
+        MsgBox Sql, vbExclamation
         Exit Sub
     End If
     
@@ -1495,14 +1790,14 @@ Private Sub Form_Load()
     'Compruebo si tiene mas de una forma de pago
     '
     Set miRsAux = New ADODB.Recordset
-    SQL = "SELECT count(*) from sforpa"
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "SELECT count(*) from sforpa"
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
-        If DBLet(miRsAux.Fields(0), "N") = 1 Then SQL = ""
+        If DBLet(miRsAux.Fields(0), "N") = 1 Then Sql = ""
     End If
     miRsAux.Close
     Set miRsAux = Nothing
-    If SQL = "" Then vParamTPV.FormaPagoUnica = True
+    If Sql = "" Then vParamTPV.FormaPagoUnica = True
 
 
     NombreTabla = "scaven" 'tabla cabecera de la venta
@@ -1529,7 +1824,17 @@ Private Sub Form_Load()
     'Comprobar si hay ventas abiertas
     PonerVentasAbiertas
 
-
+    'Ver si tiene nuestra APP de cestas
+    EstableceCestas
+    
+    If TieneAPP_Cestas Then
+        Toolbar1.Buttons(23).Enabled = True
+        Me.mnCestas.Enabled = True
+    Else
+            Me.mnCestas.Enabled = False
+    End If
+    
+    
     If CInt(Me.Label1(4).Caption) > 0 Then
         cargaCabeceras True
     Else
@@ -1537,15 +1842,15 @@ Private Sub Form_Load()
     End If
 
     cargaComboVentas
-    
+        
 End Sub
 
 
 
 Private Sub PonerVentasAbiertas()
-    SQL = "SELECT count(*) FROM " & NombreTabla & " WHERE numtermi=" & NumTermi
-    If CadSelVenta <> "" Then SQL = SQL & " OR " & CadSelVenta
-    Me.Label1(4).Caption = CStr(NumRegistros(SQL)) 'nº ventas abiertas
+    Sql = "SELECT count(*) FROM " & NombreTabla & " WHERE numtermi=" & NumTermi
+    If CadSelVenta <> "" Then Sql = Sql & " OR " & CadSelVenta
+    Me.Label1(4).Caption = CStr(NumRegistros(Sql)) 'nº ventas abiertas
 End Sub
 
 
@@ -1557,18 +1862,18 @@ Dim N As Integer
     Me.cboNumVenta.visible = False
     Me.cboNumVenta.Clear
 
-    SQL = "SELECT * FROM " & NombreTabla & " WHERE numtermi=" & NumTermi
-    If CadSelVenta <> "" Then SQL = SQL & " OR " & CadSelVenta
-    SQL = SQL & " ORDER BY numventa"
+    Sql = "SELECT * FROM " & NombreTabla & " WHERE numtermi=" & NumTermi
+    If CadSelVenta <> "" Then Sql = Sql & " OR " & CadSelVenta
+    Sql = Sql & " ORDER BY numventa"
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     i = 0
-    SQL = "                      "
+    Sql = "                      "
     While Not RS.EOF
-        N = 21 - Len(CStr(RS!NumVenta))
+        N = 15 - Len(CStr(RS!NumVenta))
             
-        Me.cboNumVenta.AddItem Right(SQL & RS!NumVenta, N)
+        Me.cboNumVenta.AddItem Right(Sql & RS!NumVenta, N)
         cboNumVenta.ItemData(cboNumVenta.NewIndex) = i
         Me.cboNumVenta.RightToLeft = True
         i = i + 1
@@ -1618,15 +1923,15 @@ Private Sub Form_Unload(Cancel As Integer)
     If vParamAplic.NumeroInstalacion = vbTaxco Then
         'NO SE PUEDEN QUEDAR VENTAS ABIERTAS
         
-        SQL = DevuelveDesdeBD(conAri, "count(*)", "sliven", "numtermi", CStr(NumTermi))
-        If Val(SQL) > 0 Then
+        Sql = DevuelveDesdeBD(conAri, "count(*)", "sliven", "numtermi", CStr(NumTermi))
+        If Val(Sql) > 0 Then
             MsgBox "Tiene ventas abiertas sin realizar tickets", vbCritical
             Cancel = 1
             
         Else
-            SQL = "DELETE FROM scaven WHERE numtermi=" & NumTermi & " AND NOT (numtermi,numventa,fecventa) "
-            SQL = SQL & " IN (select numtermi,numventa,fecventa from sliven )"
-            ejecutar SQL, True
+            Sql = "DELETE FROM scaven WHERE numtermi=" & NumTermi & " AND NOT (numtermi,numventa,fecventa) "
+            Sql = Sql & " IN (select numtermi,numventa,fecventa from sliven )"
+            ejecutar Sql, True
         End If
             
     End If
@@ -1747,6 +2052,34 @@ ErrImg:
     MuestraError Err.Number, "Busqueda de clientes", Err.Description
 End Sub
 
+Private Sub mnCestas_Click()
+    'Leer cestas
+    If Modo < 2 Then Exit Sub
+    
+    
+    'Veremos si  el cliente tiene una cesta abierta
+    Sql = "cestas inner join cestas_lineas on cestas.cestaId= cestas_lineas.cestaId "
+    Sql = DevuelveDesdeBD(conAri, "count(*)", Sql, "codclien", Text1(0).Text)
+    If Val(Sql) = 0 Then
+        MsgBox "El cliente no tiene ninguna cesta abierta", vbExclamation
+        Exit Sub
+    End If
+    CadenaDesdeOtroForm = ""
+    frmFacTPV_Cesta.Text1(0).Text = Text1(0).Text
+    frmFacTPV_Cesta.Text2(0).Text = Text2(0).Text
+    frmFacTPV_Cesta.Show vbModal
+    If CadenaDesdeOtroForm <> "" Then
+        Screen.MousePointer = vbHourglass
+        
+        If InsertaLineasArticulosCesta Then
+            CargaGrid2 DataGrid1, Data2
+            BotonAnyadirLinea
+            
+        End If
+        Screen.MousePointer = vbDefault
+    End If
+End Sub
+
 Private Sub mnEliminar_Click()
 'Elimina una venta
     BotonEliminar
@@ -1776,12 +2109,12 @@ Dim B As Boolean
         HaDevueltoDatos = False
         
         If vParamAplic.NumeroInstalacion = vbAlzira Then
-            Set frmArt = New frmAlmArticu2
-            frmArt.DesdeTPV = True
-            frmArt.DatosADevolverBusqueda = "0"
-            frmArt.parAlmacen = codAlmac
-            frmArt.Show vbModal
-            Set frmArt = Nothing
+            Set FrmArt = New frmAlmArticu2
+            FrmArt.DesdeTPV = True
+            FrmArt.DatosADevolverBusqueda = "0"
+            FrmArt.parAlmacen = codAlmac
+            FrmArt.Show vbModal
+            Set FrmArt = Nothing
         Else
         
             Set frmA = New frmBasico2
@@ -2132,8 +2465,8 @@ Dim CantidadEnTotal As Currency
     'Numero de LOTE fitosanitarios
     ArticuloConLotes = False
     
-    SQL = DevuelveDesdeBD(conAri, "numserie", "sartic", "codartic", txtAux(2).Text, "T")
-    If SQL <> "" Then
+    Sql = DevuelveDesdeBD(conAri, "numserie", "sartic", "codartic", txtAux(2).Text, "T")
+    If Sql <> "" Then
         ArticuloConLotes = True
         'Los que no lleven el nuevo controlo sigue como antes
         If Not vParamAplic.ManipuladorFitosanitarios2 Then
@@ -2150,12 +2483,12 @@ Dim CantidadEnTotal As Currency
         
         
         
-        SQL = "select numlotes,fecentra,Codartic,canentra - vendida"
-        SQL = SQL & "  disponible from slotes where "
-        SQL = SQL & " codartic=" & DBSet(txtAux(2).Text, "T") & " and canentra - vendida  >0 order by fecentra "
+        Sql = "select numlotes,fecentra,Codartic,canentra - vendida"
+        Sql = Sql & "  disponible from slotes where "
+        Sql = Sql & " codartic=" & DBSet(txtAux(2).Text, "T") & " and canentra - vendida  >0 order by fecentra "
       
         Set miRsAux = New ADODB.Recordset
-        miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         NumRegElim = 0
         
         NumerloLote = ""
@@ -2179,7 +2512,7 @@ Dim CantidadEnTotal As Currency
                 'CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(txtAux(2).Text, "T") & "," & DBSet(txtAux2(2).Text, "T")
                 CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(miRsAux!disponible * 100, "N")
                 CadenaInsertTmpLotes = CadenaInsertTmpLotes & ",0," & DBSet(miRsAux!numlotes, "T") & ")"
-                SQL = miRsAux!disponible 'por si solo hay uno
+                Sql = miRsAux!disponible 'por si solo hay uno
                
                 miRsAux.MoveNext
                
@@ -2206,14 +2539,14 @@ Dim CantidadEnTotal As Currency
         'Con lo cual, que haremos, pondremos
         
         If NumRegElim = 1 Then
-            If CCur(SQL) < ImporteFormateado(txtAux(3).Text) Then
-                MsgBox "Cantidad en el lote insuficiente:" & SQL, vbExclamation
+            If CCur(Sql) < ImporteFormateado(txtAux(3).Text) Then
+                MsgBox "Cantidad en el lote insuficiente:" & Sql, vbExclamation
                 B = False
             Else
                 'Donde va la cantidad asignada en el SQL es en : ,0,'
                 'Luego reeplazo esto por la cantidad del albaran
-                SQL = TransformaComasPuntos(CStr(ImporteFormateado(txtAux(3).Text)))
-                CadenaInsertTmpLotes = Replace(CadenaInsertTmpLotes, ",0,'", "," & SQL & ",'")
+                Sql = TransformaComasPuntos(CStr(ImporteFormateado(txtAux(3).Text)))
+                CadenaInsertTmpLotes = Replace(CadenaInsertTmpLotes, ",0,'", "," & Sql & ",'")
                 
             End If
         Else
@@ -2228,12 +2561,12 @@ Dim CantidadEnTotal As Currency
                     B = False
                 Else
                     'Hay suficiente en este LOTE. Volvemos a abri , PARA este lote y volvemos a cargar el SQL
-                    SQL = "select numlotes,fecentra,Codartic,canentra - vendida"
-                    SQL = SQL & "  disponible from slotes where "
-                    SQL = SQL & " codartic=" & DBSet(txtAux(2).Text, "T") & " and canentra - vendida  >0"
-                    SQL = SQL & " AND numlotes= " & DBSet(NumerloLote, "T") & " order by fecentra "
+                    Sql = "select numlotes,fecentra,Codartic,canentra - vendida"
+                    Sql = Sql & "  disponible from slotes where "
+                    Sql = Sql & " codartic=" & DBSet(txtAux(2).Text, "T") & " and canentra - vendida  >0"
+                    Sql = Sql & " AND numlotes= " & DBSet(NumerloLote, "T") & " order by fecentra "
                     Set miRsAux = New ADODB.Recordset
-                    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     CadenaInsertTmpLotes = "" 'Vamos a volver a cargar el SQL de insert in lotes
                     CantidadEnTotal = ImporteFormateado(txtAux(3).Text)
                     NumRegElim = 0
@@ -2335,7 +2668,7 @@ End Function
 
 Private Sub mnTotal_Click()
 'Dim cCli As CCliente
-Dim SQL As String
+Dim Sql As String
 Dim bModif As Boolean
 Dim ArticulosFito As Boolean
 
@@ -2349,12 +2682,12 @@ Dim ArticulosFito As Boolean
     If txtAux(4).Enabled Then
         'Cuando es articulo de varios obtenia totales pero SIN insertar en sliven
         'Al pulsar F5 se salia sin haber insrtado en sliven
-        SQL = " numventa=" & Data1.Recordset!NumVenta & " and fecventa=" & DBSet(Data1.Recordset!fecventa, "F") & " AND numtermi"
+        Sql = " numventa=" & Data1.Recordset!NumVenta & " and fecventa=" & DBSet(Data1.Recordset!fecventa, "F") & " AND numtermi"
         
-        SQL = DevuelveDesdeBD(conAri, "sum(importel)", "sliven", SQL, CStr(Data1.Recordset!NumTermi), "N")
-        If SQL = "" Then SQL = "0"
-        SQL = Format(SQL, FormatoImporte)
-        If SQL <> Label1(6).Caption Then
+        Sql = DevuelveDesdeBD(conAri, "sum(importel)", "sliven", Sql, CStr(Data1.Recordset!NumTermi), "N")
+        If Sql = "" Then Sql = "0"
+        Sql = Format(Sql, FormatoImporte)
+        If Sql <> Label1(6).Caption Then
             MsgBox "No ha confirmado la ultima linea que estaba insertando", vbExclamation
             PonerFoco txtAux(4)
             Exit Sub
@@ -2365,10 +2698,10 @@ Dim ArticulosFito As Boolean
     '-- si el cliente se ha modificado y no tiene la misma tarifa q para el q se crearon las lineas tampoco
     
     'obtenemos el cliente actual guardado en la cabecera de la venta
-    SQL = ""
-    If Not Data1.Recordset.EOF Then SQL = Data1.Recordset!codClien
-    If Not ClienteOK(Text1(0).Text, SQL, bModif) Then
-        Text1(0).Text = SQL
+    Sql = ""
+    If Not Data1.Recordset.EOF Then Sql = Data1.Recordset!codClien
+    If Not ClienteOK(Text1(0).Text, Sql, bModif) Then
+        Text1(0).Text = Sql
         Text2(0).Text = PonerNombreDeCod(Text1(0), conAri, "sclien", "nomclien", "codclien", "cliente", "N")
         PonerFoco Text1(0)
         Exit Sub
@@ -2378,10 +2711,10 @@ Dim ArticulosFito As Boolean
     
     '-- si no hay lineas en la venta no permitimos generar ticket/Albaran/Factura
     '-- y no abrimos la pantalla de totales
-    SQL = ObtenerWhereCP(False)
-    SQL = Replace(SQL, NombreTabla, NomTablaLineas)
-    SQL = "SELECT COUNT(*) FROM " & NomTablaLineas & " WHERE " & SQL
-    If Not RegistrosAListar(SQL) > 0 Then
+    Sql = ObtenerWhereCP(False)
+    Sql = Replace(Sql, NombreTabla, NomTablaLineas)
+    Sql = "SELECT COUNT(*) FROM " & NomTablaLineas & " WHERE " & Sql
+    If Not RegistrosAListar(Sql) > 0 Then
         MsgBox "La venta debe tener líneas para totalizar.", vbExclamation
         Exit Sub
     End If
@@ -2595,7 +2928,10 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 21
             mnLotefitosanitarios_Click
         
-        Case 23    'Salir
+        Case 23
+            mnCestas_Click
+        
+        Case 26    'Salir
             mnSalir_Click
     End Select
 End Sub
@@ -2622,13 +2958,13 @@ Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza 
 
 '    b = DataGrid1.Enabled
     
-    SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
     vData.LockType = adLockOptimistic
     
     CargaGrid2 vDataGrid, vData
-    DataGrid1.RowHeight = 320
+    DataGrid1.RowHeight = 360
     
     If Data2.Recordset.RecordCount = 0 Then DataGrid1_RowColChange 1, 1
     
@@ -2647,16 +2983,17 @@ Dim tots As String
     vDataGrid.ScrollBars = dbgNone
     vData.Refresh
 
-    tots = "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;S|txtAux(1)|T|Cod. EAN|1550|;S|txtAux(2)|T|Código|1650|;S|cmdAux(1)|B||0|;S|txtAux2(2)|T|Desc. Artículo|4050|;"
-    tots = tots & "S|txtAux(3)|T|Cantidad|900|;"
+
+    tots = "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;S|txtAux(1)|T|Cod. EAN|2050|;S|txtAux(2)|T|Código|1850|;S|cmdAux(1)|B||0|;S|txtAux2(2)|T|Desc. Artículo|5650|;"
+    tots = tots & "S|txtAux(3)|T|Cantidad|1150|;"
 '    If vParamTPV.ModoCalculo = 1 Then
-        tots = tots & "S|txtAux(4)|T|Precio|1100|;"
+        tots = tots & "S|txtAux(4)|T|Precio|1600|;"
 '    Else
 '        tots = tots & "S|txtAux(6)|T|Precio|1200|;"
 '    End If
-    tots = tots & "S|txtAux(5)|T|Importe|1400|;N||||0|;N||||0|;S|txtAux(12)|T|Dto|450|;N||||0|;"
+    tots = tots & "S|txtAux(5)|T|Importe|1700|;N||||0|;N||||0|;S|txtAux(12)|T|Dto|650|;N||||0|;"
        
-    arregla tots, DataGrid1, Me
+    arregla tots, DataGrid1, Me, 360
     
     'cantidad
     Me.DataGrid1.Columns(8).Alignment = dbgRight
@@ -2730,7 +3067,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
             PonerArticuloEan (txtAux(Index).Text)
                 
         Case 2 'Cod. Articulo
-           PonerArticuloCod (txtAux(Index).Text)
+           PonerArticuloCod (txtAux(Index).Text), False
         
         Case 3 'CANTIDAD
           If PonerFormatoDecimal(txtAux(Index), 1) Then
@@ -2789,18 +3126,18 @@ Dim vWhere As String
     
     MenError = "Eliminando tablas de venta."
     'La de los campos
-    SQL = "DELETE FROM " & NomTablaLineas & "2 WHERE " & Replace(vWhere, NombreTabla, NomTablaLineas & "2")
-    conn.Execute SQL
+    Sql = "DELETE FROM " & NomTablaLineas & "2 WHERE " & Replace(vWhere, NombreTabla, NomTablaLineas & "2")
+    conn.Execute Sql
     
-    SQL = "DELETE FROM " & NomTablaLineas & " WHERE " & Replace(vWhere, NombreTabla, NomTablaLineas)
-    conn.Execute SQL
+    Sql = "DELETE FROM " & NomTablaLineas & " WHERE " & Replace(vWhere, NombreTabla, NomTablaLineas)
+    conn.Execute Sql
             
-    SQL = "DELETE FROM slivenlotes WHERE " & Replace(vWhere, NombreTabla, "slivenlotes")
-    conn.Execute SQL
+    Sql = "DELETE FROM slivenlotes WHERE " & Replace(vWhere, NombreTabla, "slivenlotes")
+    conn.Execute Sql
             
             
-    SQL = "DELETE FROM " & NombreTabla & " WHERE " & vWhere
-    conn.Execute SQL
+    Sql = "DELETE FROM " & NombreTabla & " WHERE " & vWhere
+    conn.Execute Sql
     
             
     'Devolvemos contador, si no estamos actualizando
@@ -2854,18 +3191,18 @@ End Function
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
     If Me.Data1.Recordset.EOF Then Exit Function
     
-    SQL = NombreTabla & ".numtermi= " & Data1.Recordset!NumTermi & " and "
-    SQL = SQL & NombreTabla & ".numventa= " & Data1.Recordset!NumVenta & " and " 'Trim(Me.cboNumVenta.List(Me.cboNumVenta.ListIndex))
-    SQL = SQL & NombreTabla & ".fecventa= " & DBSet(Data1.Recordset!fecventa, "F")
+    Sql = NombreTabla & ".numtermi= " & Data1.Recordset!NumTermi & " and "
+    Sql = Sql & NombreTabla & ".numventa= " & Data1.Recordset!NumVenta & " and " 'Trim(Me.cboNumVenta.List(Me.cboNumVenta.ListIndex))
+    Sql = Sql & NombreTabla & ".fecventa= " & DBSet(Data1.Recordset!fecventa, "F")
     
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then Err.Clear
 End Function
@@ -2880,24 +3217,24 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
-    SQL = "SELECT numtermi, numventa,fecventa,horventa, numlinea, codigoea,codartic, nomartic, cantidad, precioiv, importel,precioar,codigiva "
+    Sql = "SELECT numtermi, numventa,fecventa,horventa, numlinea, codigoea,codartic, nomartic, cantidad, precioiv, importel,precioar,codigiva "
     '
-    SQL = SQL & " ,if((dto1+dto2)>0,""*"","""") as dto,numlote"
+    Sql = Sql & " ,if((dto1+dto2)>0,""*"","""") as dto,numlote"
     
     
     
-    SQL = SQL & " FROM " & NomTablaLineas
+    Sql = Sql & " FROM " & NomTablaLineas
     
     If enlaza Then
-        SQL = SQL & " WHERE numtermi=" & Data1.Recordset!NumTermi & " and numventa=" & Data1.Recordset!NumVenta 'Trim(Me.cboNumVenta.List(Me.cboNumVenta.ListIndex))
-        SQL = SQL & " AND fecventa=" & DBSet(Data1.Recordset!fecventa, "F")
+        Sql = Sql & " WHERE numtermi=" & Data1.Recordset!NumTermi & " and numventa=" & Data1.Recordset!NumVenta 'Trim(Me.cboNumVenta.List(Me.cboNumVenta.ListIndex))
+        Sql = Sql & " AND fecventa=" & DBSet(Data1.Recordset!fecventa, "F")
     Else
-        SQL = SQL & " WHERE numventa = -1 "
+        Sql = Sql & " WHERE numventa = -1 "
     End If
-    SQL = SQL & Ordenacion & ",numlinea"  '" Order by codtipom, numalbar, numlinea"
-    MontaSQLCarga = SQL
+    Sql = Sql & Ordenacion & ",numlinea"  '" Order by codtipom, numalbar, numlinea"
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -2909,20 +3246,20 @@ Dim B As Boolean
     EliminarLinea = False
     
     'Construir la SQL para eliminar la linea de la tabla "slialb"
-    SQL = "Delete from " & NomTablaLineas & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
-    SQL = SQL & " and numlinea=" & Data2.Recordset!numlinea
+    Sql = "Delete from " & NomTablaLineas & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
+    Sql = Sql & " and numlinea=" & Data2.Recordset!numlinea
     
 
     
     On Error GoTo EEliminarLinea
     conn.BeginTrans
     
-    conn.Execute SQL 'Eliminar linea
+    conn.Execute Sql 'Eliminar linea
 
 
     If vParamAplic.ManipuladorFitosanitarios2 Then
-        SQL = Replace(SQL, "sliven", "slivenlotes")
-        conn.Execute SQL 'Eliminar linea fitos
+        Sql = Replace(Sql, "sliven", "slivenlotes")
+        conn.Execute Sql 'Eliminar linea fitos
     End If
 
 
@@ -2960,11 +3297,11 @@ Private Sub PonerArticuloEan(codArt As String)
     If codArt <> "" Then
         '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN y quitar de la cabecera
 '        SQL = DevuelveDesdeBDNew(conAri, "sartic", "codartic", "codigoea", codArt, "T")
-        SQL = DevuelveDesdeBDNew(conAri, "sarti3", "codartic", "codigoea", codArt, "T")
+        Sql = DevuelveDesdeBDNew(conAri, "sarti3", "codartic", "codigoea", codArt, "T")
         '----
         
-        If SQL <> "" Then
-            PonerArticuloCod (SQL)
+        If Sql <> "" Then
+            PonerArticuloCod (Sql), False
         Else
             MsgBox "No existe un artículo asociado al cód. EAN: " & codArt, vbInformation
             'Si el campo de codigo no esta vacio
@@ -2977,7 +3314,7 @@ End Sub
 
 
 
-Private Sub PonerArticuloCod(codArt As String)
+Private Sub PonerArticuloCod(codArt As String, InsertoDesdeCestas As Boolean)
 Dim vArtic As CArticulo
 Dim Dto1 As String
 Dim Dto2 As String
@@ -3070,11 +3407,15 @@ Dim Bloq As Boolean
                    If vArtic.EsDeVarios <> 0 Then
                         PonerFoco txtAux(4)
                    Else
-                        GuardarLinea
+                        If Not InsertoDesdeCestas Then
+                            GuardarLinea
+                        Else
+                            nUnids = ""
+                        End If
                         If nUnids <> "" Then
                             txtAux(3).Text = nUnids
                             PonerFormatoDecimal txtAux(3), 1
-                            PonerArticuloCod codArt
+                            PonerArticuloCod codArt, False
                         End If
                    End If
                 End If
@@ -3249,7 +3590,7 @@ Dim IvaA2dec As Currency
 
 
             'Calculo el PVP unitario
-            SQL = CalcularDto(txtAux(6).Text, CStr(txtAux(11).Text))
+            Sql = CalcularDto(txtAux(6).Text, CStr(txtAux(11).Text))
             
             txtAux(6).Text = ObtenerImporteLin
             
@@ -3262,12 +3603,12 @@ Dim IvaA2dec As Currency
             
             
             
-            SQL = CalcularDto(txtAux(6).Text, CStr(txtAux(11).Text))
+            Sql = CalcularDto(txtAux(6).Text, CStr(txtAux(11).Text))
             
             
             If vParamTPV.Redondea2 Then
                 'A dos decimales. El IVA lo sacara a partir del PVP
-                IvaA2dec = CCur(ComprobarCero(SQL))
+                IvaA2dec = CCur(ComprobarCero(Sql))
                 IvaA2dec = Round2(IvaA2dec, 2)
                 txtAux(5).Text = Round2(CCur(ComprobarCero(txtAux(6).Text)) + IvaA2dec, 2)
                 PonerFormatoDecimal txtAux(5), 1
@@ -3275,7 +3616,7 @@ Dim IvaA2dec As Currency
             Else
                 'Como estaba
                 'El IVA
-                txtAux(5).Text = Round(CCur(ComprobarCero(txtAux(6).Text)) + CCur(ComprobarCero(SQL)), 4)
+                txtAux(5).Text = Round(CCur(ComprobarCero(txtAux(6).Text)) + CCur(ComprobarCero(Sql)), 4)
                 PonerFormatoDecimal txtAux(5), 5
             End If
             
@@ -3332,9 +3673,9 @@ Dim total As Currency
 '    End If
 
     total = 0
-    SQL = "select sum(importel) FROM " & NomTablaLineas & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
+    Sql = "select sum(importel) FROM " & NomTablaLineas & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not RS.EOF Then
         total = DBLet(RS.Fields(0).Value, "D")
@@ -3346,9 +3687,9 @@ Dim total As Currency
     ObtenerImporteTotal = total
         
     If actualiza Then
-        SQL = "UPDATE " & NombreTabla & " SET imptotal=" & DBSet(total, "N")
-        SQL = SQL & ObtenerWhereCP(True)
-        conn.Execute SQL
+        Sql = "UPDATE " & NombreTabla & " SET imptotal=" & DBSet(total, "N")
+        Sql = Sql & ObtenerWhereCP(True)
+        conn.Execute Sql
     End If
     
 ETotal:
@@ -3390,32 +3731,32 @@ Dim LlevaArticuloLotes As Boolean
     'El campo de numventa no tiene valor es que aun se ha insertado la linea
     If Me.txtAux(0).Text = "" Then
         'numero de linea de la venta
-        SQL = "numtermi=" & Data1.Recordset!NumTermi & " and numventa=" & Data1.Recordset!NumVenta & " and fecventa=" & DBSet(Data1.Recordset!fecventa, "F")
-        SQL = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", SQL)
-        txtAux(0).Text = SQL
+        Sql = "numtermi=" & Data1.Recordset!NumTermi & " and numventa=" & Data1.Recordset!NumVenta & " and fecventa=" & DBSet(Data1.Recordset!fecventa, "F")
+        Sql = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", Sql)
+        txtAux(0).Text = Sql
         
         'El campo numlote lo guardaremos para saber si el articulo lleva lotes  o no, NO para indicar el nº d lote
-        SQL = "INSERT INTO sliven(numtermi,numventa,fecventa,horventa,numlinea,codigoea,codartic,nomartic,cantidad,precioiv,importel,precioar,codigiva,dto1,dto2,implineareal,impartalb,codccost,numlote) "
-        SQL = SQL & " VALUES (" & Data1.Recordset!NumTermi & "," & Data1.Recordset!NumVenta & "," & DBSet(Data1.Recordset!fecventa, "F") & ","
+        Sql = "INSERT INTO sliven(numtermi,numventa,fecventa,horventa,numlinea,codigoea,codartic,nomartic,cantidad,precioiv,importel,precioar,codigiva,dto1,dto2,implineareal,impartalb,codccost,numlote) "
+        Sql = Sql & " VALUES (" & Data1.Recordset!NumTermi & "," & Data1.Recordset!NumVenta & "," & DBSet(Data1.Recordset!fecventa, "F") & ","
         '& DBSet(Data1.Recordset!fecventa & " " & Format(Now, "hh:mm:ss"), "FH") & ","
-        SQL = SQL & DBSet(Now, "FH") & ","
-        SQL = SQL & txtAux(0).Text & "," & DBSet(txtAux(1).Text, "T") & "," & DBSet(txtAux(2).Text, "T") & "," & DBSet(txtAux2(2).Text, "T") & ","
+        Sql = Sql & DBSet(Now, "FH") & ","
+        Sql = Sql & txtAux(0).Text & "," & DBSet(txtAux(1).Text, "T") & "," & DBSet(txtAux(2).Text, "T") & "," & DBSet(txtAux2(2).Text, "T") & ","
         
         'DAVID.
         '   Antes pasaba el 6. Ahora paso el 10.  EL precio articulo esta en el 10
         '                  cantidad                        precioiv                             importe                             precioar
-        SQL = SQL & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(10).Text, "N") & "," & txtAux(7).Text
+        Sql = Sql & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(10).Text, "N") & "," & txtAux(7).Text
         
         
         'Nuevo###       David
         'Para llevar so tiene descuentos en linea los guarda implineareal
         '                             dto1                              dto2                                 imp linea real
-        SQL = SQL & "," & DBSet(txtAux(8).Text, "N", "N") & "," & DBSet(txtAux(9).Text, "N", "N") & "," & DBSet(txtAux(6).Text, "N", "N") & ","
+        Sql = Sql & "," & DBSet(txtAux(8).Text, "N", "N") & "," & DBSet(txtAux(9).Text, "N", "N") & "," & DBSet(txtAux(6).Text, "N", "N") & ","
         
         
         'Enero 2010
         'Importe para ajustar la linea dl importe del articulo. Por el tema de los decimales
-        SQL = SQL & DBSet(txtAux(14).Text, "N", "N") & ","
+        Sql = Sql & DBSet(txtAux(14).Text, "N", "N") & ","
         
         
         
@@ -3423,41 +3764,39 @@ Dim LlevaArticuloLotes As Boolean
         If vEmpresa.TieneAnalitica And vParamAplic.ModoAnalitica = 1 Then 'por familia
             '- obtener centro de coste de la familia del articulo
             ccoste = DevuelveDesdeBDNew(conAri, "sfamia", "codccost", "codfamia", txtAux(13).Text, "N")
-            SQL = SQL & DBSet(ccoste, "T", "S")
+            Sql = Sql & DBSet(ccoste, "T", "S")
         Else
-            SQL = SQL & ValorNulo
+            Sql = Sql & ValorNulo
         End If
     
     
         If LlevaArticuloLotes Then
         
             If vParamAplic.ManipuladorFitosanitarios2 Then
-                SQL = SQL & ",'*'"
+                Sql = Sql & ",'*'"
             Else
                 'ANtiguo. Para los que no se acojan a fitsonatiarios
-                
-                
                 ccoste = DBSet(txtAux(2).Text, "T") & " ORDER BY fecentra desc"
                 ccoste = DevuelveDesdeBD(conAri, "numlotes", "slotes", "codartic", ccoste, "N")
-                SQL = SQL & "," & DBSet(ccoste, "T")
+                Sql = Sql & "," & DBSet(ccoste, "T")
             End If
         Else
-            SQL = SQL & ",NULL"
+            Sql = Sql & ",NULL"
         End If
-        SQL = SQL & ")"
-        conn.Execute SQL
+        Sql = Sql & ")"
+        conn.Execute Sql
         
         
         'Desde tmpnlotes llevaremos los lotes de los registros fitosanitarios
         If LlevaArticuloLotes Then
             If vParamAplic.ManipuladorFitosanitarios2 Then
-                SQL = "INSERT INTO slivenlotes(numtermi,numventa,fecventa,horventa,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-                SQL = SQL & " SELECT " & Data1.Recordset!NumTermi & "," & Data1.Recordset!NumVenta & "," & DBSet(Data1.Recordset!fecventa, "F")
-                SQL = SQL & ",now()," & txtAux(0).Text
-                SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
-                SQL = SQL & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
+                Sql = "INSERT INTO slivenlotes(numtermi,numventa,fecventa,horventa,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
+                Sql = Sql & " SELECT " & Data1.Recordset!NumTermi & "," & Data1.Recordset!NumVenta & "," & DBSet(Data1.Recordset!fecventa, "F")
+                Sql = Sql & ",now()," & txtAux(0).Text
+                Sql = Sql & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
+                Sql = Sql & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
     
-                conn.Execute SQL
+                conn.Execute Sql
             End If
         End If
         
@@ -3524,16 +3863,16 @@ Dim MenError As String
     Else
         'Insertamos la cabecera de venta
         MenError = "Insertando en tabla de ventas."
-        SQL = "INSERT INTO " & NombreTabla & " (numtermi,numventa,fecventa,horventa,codtraba,imcambio,imptotal,codclien) VALUES "
-        SQL = SQL & "(" & NumTermi & "," & cont & "," & DBSet(Now, "F") & ", " & DBSet(Now, "FH") & "," & CodTraba & "," & ValorNulo & ",0,"
+        Sql = "INSERT INTO " & NombreTabla & " (numtermi,numventa,fecventa,horventa,codtraba,imcambio,imptotal,codclien) VALUES "
+        Sql = Sql & "(" & NumTermi & "," & cont & "," & DBSet(Now, "F") & ", " & DBSet(Now, "FH") & "," & CodTraba & "," & ValorNulo & ",0,"
         'Poner el cliente que hay por defecto en los parametros
         If vParamTPV.Cliente = "" Then
-            SQL = SQL & "0)"
+            Sql = Sql & "0)"
         Else
-            SQL = SQL & vParamTPV.Cliente & ")"
+            Sql = Sql & vParamTPV.Cliente & ")"
         End If
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         
         MenError = "Incrementando contador de venta."
@@ -3556,25 +3895,25 @@ End Function
 
 Private Function ModificarVenta() As Boolean
 'Modificar el cliente de una venta
-Dim SQL As String
+Dim Sql As String
     On Error GoTo ErrModVen
     
-    SQL = "UPDATE scaven SET "
-    If Trim(Text1(0).Text) <> "" Then SQL = SQL & " codclien=" & DBSet(Text1(0).Text, "N") & ","
-    SQL = SQL & "coddirec=" & DBSet(Text1(2).Text, "N", "S")
+    Sql = "UPDATE scaven SET "
+    If Trim(Text1(0).Text) <> "" Then Sql = Sql & " codclien=" & DBSet(Text1(0).Text, "N") & ","
+    Sql = Sql & "coddirec=" & DBSet(Text1(2).Text, "N", "S")
 
     'Si el cliente NO es de varios, fuerzo
-    If Val(Text1(0).Text) <> vParamTPV.Cliente Then SQL = SQL & ",nifvarios=NULL"
+    If Val(Text1(0).Text) <> vParamTPV.Cliente Then Sql = Sql & ",nifvarios=NULL"
         
     'Fuerzo un null
-    SQL = SQL & ",ManipuladorNumCarnet=NULL,ManipuladorFecCaducidad =NULL ,ManipuladorNombre =  NULL , TipoCarnet = NULL"
+    Sql = Sql & ",ManipuladorNumCarnet=NULL,ManipuladorFecCaducidad =NULL ,ManipuladorNombre =  NULL , TipoCarnet = NULL"
     
     
-    SQL = SQL & ", observa1=" & DBSet(Text1(1).Text, "T")
+    Sql = Sql & ", observa1=" & DBSet(Text1(1).Text, "T")
             
-    SQL = SQL & " WHERE numtermi=" & Me.Data1.Recordset!NumTermi & " AND numventa=" & Me.Data1.Recordset!NumVenta
-    SQL = SQL & " AND fecventa=" & DBSet(Me.Data1.Recordset!fecventa, "F")
-    conn.Execute SQL
+    Sql = Sql & " WHERE numtermi=" & Me.Data1.Recordset!NumTermi & " AND numventa=" & Me.Data1.Recordset!NumVenta
+    Sql = Sql & " AND fecventa=" & DBSet(Me.Data1.Recordset!fecventa, "F")
+    conn.Execute Sql
     
     Data1.Refresh
     PosicionarData
@@ -3752,11 +4091,11 @@ Private Sub RevisarEntradasDia()
 
         If i = 1 Then
         
-            SQL = RecuperaValor(CadSelVenta, 2)
+            Sql = RecuperaValor(CadSelVenta, 2)
             CadSelVenta = RecuperaValor(CadSelVenta, 3)
         
             'IMPRESION
-            If SQL = "FTI" Then
+            If Sql = "FTI" Then
                  ImprimirTicketDirecto CadSelVenta, Now
             Else
                 'Es una factura de venta
@@ -3764,7 +4103,7 @@ Private Sub RevisarEntradasDia()
             End If
             
         Else
-            SQL = RecuperaValor(CadSelVenta, 5)   'Tipo movimiento albaran
+            Sql = RecuperaValor(CadSelVenta, 5)   'Tipo movimiento albaran
             'Ponemos el numero de albaran, NO el numero de factura
             CadSelVenta = RecuperaValor(CadSelVenta, 4)
             'Ver lineas detalles
@@ -3772,7 +4111,7 @@ Private Sub RevisarEntradasDia()
             With frmFacHcoFacturas2
                 .DesdeFichaCliente = False
                  .hcoCodMovim = CadSelVenta
-                 .hcoCodTipoM = SQL
+                 .hcoCodTipoM = Sql
                  .hcoFechaMov = Now
                  .Show vbModal
             End With
@@ -3810,19 +4149,19 @@ Dim nomDocu As String
     frmImprimir.SeleccionaRPTCodigo = pRptvMultiInforme
 
     'EN sql tengo el numero de factura
-    SQL = "({scafac.numfactu} = " & CadSelVenta & ")"
+    Sql = "({scafac.numfactu} = " & CadSelVenta & ")"
     
     'Tipo documento
-    SQL = SQL & " AND ({scafac.codtipom}='FAV') "
+    Sql = Sql & " AND ({scafac.codtipom}='FAV') "
     
     'fecha factu
-    SQL = SQL & " AND ({scafac.fecfactu} =  Date(" & Year(Now) & "," & Month(Now) & "," & Day(Now) & ")" & ")"
+    Sql = Sql & " AND ({scafac.fecfactu} =  Date(" & Year(Now) & "," & Month(Now) & "," & Day(Now) & ")" & ")"
 
-    CadSelVenta = SQL
+    CadSelVenta = Sql
     'If Not HayRegParaInforme("scafac", CadSelVenta) Then Exit Sub
 
     With frmImprimir
-            .FormulaSeleccion = SQL
+            .FormulaSeleccion = Sql
             .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
@@ -3843,8 +4182,8 @@ Dim V2 As Currency
             If txtAux(10).Text = "" Then txtAux(10).Text = "0"
             If txtAux(14).Text = "" Then txtAux(14).Text = "0"
             'Lo primero que hago es obtener el PVP de una unidad
-            SQL = CalcularDto(txtAux(10).Text, CStr(txtAux(11).Text))
-            IvaA2dec = CCur(ComprobarCero(SQL))
+            Sql = CalcularDto(txtAux(10).Text, CStr(txtAux(11).Text))
+            IvaA2dec = CCur(ComprobarCero(Sql))
             
             IvaA2dec = CCur(txtAux(10).Text) + IvaA2dec
             
@@ -3973,7 +4312,7 @@ Dim Cad As String
     
     Me.cmdAceptar.visible = True
     Me.cmdCancelar.visible = True
-    PonerArticuloCod txtAux(2)
+    PonerArticuloCod txtAux(2), False
     PonerFoco txtAux(3)
 End Sub
 
@@ -3993,45 +4332,45 @@ Private Function HacerUpdate() As Boolean
        '  añadir centro de coste
         If vEmpresa.TieneAnalitica And vParamAplic.ModoAnalitica = 1 Then 'por familia
             '- obtener centro de coste de la familia del articulo
-            SQL = DevuelveDesdeBDNew(conAri, "sfamia", "codccost", "codfamia", txtAux(13).Text, "N")
-            SQL = DBSet(SQL, "T", "S")
+            Sql = DevuelveDesdeBDNew(conAri, "sfamia", "codccost", "codfamia", txtAux(13).Text, "N")
+            Sql = DBSet(Sql, "T", "S")
         Else
-            SQL = ValorNulo
+            Sql = ValorNulo
         End If
         
-       SQL = "UPDATE sliven set codccost = " & SQL
-       SQL = SQL & ", codigoea = " & DBSet(txtAux(1).Text, "T")
-       SQL = SQL & ", codartic = " & DBSet(txtAux(2).Text, "T")
-       SQL = SQL & ", nomartic = " & DBSet(txtAux2(2).Text, "T")
+       Sql = "UPDATE sliven set codccost = " & Sql
+       Sql = Sql & ", codigoea = " & DBSet(txtAux(1).Text, "T")
+       Sql = Sql & ", codartic = " & DBSet(txtAux(2).Text, "T")
+       Sql = Sql & ", nomartic = " & DBSet(txtAux2(2).Text, "T")
        
         
         'DAVID.
         '   Antes pasaba el 6. Ahora paso el 10.  EL precio articulo esta en el 10
-       SQL = SQL & ", cantidad = " & DBSet(txtAux(3).Text, "N")
-       SQL = SQL & ", precioiv = " & DBSet(txtAux(4).Text, "N")
-       SQL = SQL & ", importel = " & DBSet(txtAux(5).Text, "N")
-       SQL = SQL & ", precioar = " & DBSet(txtAux(10).Text, "N")
-       SQL = SQL & ", codigiva = " & txtAux(7).Text
+       Sql = Sql & ", cantidad = " & DBSet(txtAux(3).Text, "N")
+       Sql = Sql & ", precioiv = " & DBSet(txtAux(4).Text, "N")
+       Sql = Sql & ", importel = " & DBSet(txtAux(5).Text, "N")
+       Sql = Sql & ", precioar = " & DBSet(txtAux(10).Text, "N")
+       Sql = Sql & ", codigiva = " & txtAux(7).Text
         '
         '                             dto1                              dto2
-        SQL = SQL & ", dto1 = " & DBSet(txtAux(8).Text, "N", "N")
-        SQL = SQL & ", dto2 = " & DBSet(txtAux(9).Text, "N", "N")
+        Sql = Sql & ", dto1 = " & DBSet(txtAux(8).Text, "N", "N")
+        Sql = Sql & ", dto2 = " & DBSet(txtAux(9).Text, "N", "N")
         'imp linea real
-        SQL = SQL & ", implineareal = " & DBSet(txtAux(6).Text, "N", "N")
+        Sql = Sql & ", implineareal = " & DBSet(txtAux(6).Text, "N", "N")
         
         
         'Enero 2010
         'Importe para ajustar la linea dl importe del articulo. Por el tema de los decimales
         
-        SQL = SQL & ", impartalb = " & DBSet(txtAux(14).Text, "N", "N")
+        Sql = Sql & ", impartalb = " & DBSet(txtAux(14).Text, "N", "N")
         
         
         
         
         
-        SQL = SQL & " WHERE numtermi=" & Data1.Recordset!NumTermi & " and numventa=" & Data1.Recordset!NumVenta & " and fecventa=" & DBSet(Data1.Recordset!fecventa, "F")
-        SQL = SQL & " AND numlinea = " & Data2.Recordset!numlinea
-        conn.Execute SQL
+        Sql = Sql & " WHERE numtermi=" & Data1.Recordset!NumTermi & " and numventa=" & Data1.Recordset!NumVenta & " and fecventa=" & DBSet(Data1.Recordset!fecventa, "F")
+        Sql = Sql & " AND numlinea = " & Data2.Recordset!numlinea
+        conn.Execute Sql
         HacerUpdate = True
         Exit Function
 EHacerUpdate:
@@ -4136,10 +4475,10 @@ Dim fin As Boolean
         miRsAux.Close
         
             CadenaInsertTmpLotes = ""
-            SQL = "select codartic,numlotes,fecentra,canentra-vendida disponible from slotes where "
-            SQL = SQL & " codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and canentra-vendida >0 order by fecentra "
+            Sql = "select codartic,numlotes,fecentra,canentra-vendida disponible from slotes where "
+            Sql = Sql & " codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and canentra-vendida >0 order by fecentra "
             
-            miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             NumRegElim = 0
             While Not miRsAux.EOF
                 NumRegElim = NumRegElim + 1
@@ -4149,32 +4488,32 @@ Dim fin As Boolean
                 'CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(txtAux(2).Text, "T") & "," & DBSet(txtAux2(2).Text, "T")
                 CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(miRsAux!disponible * 100, "N") & ","
                                 
-                SQL = "|" & miRsAux!numlotes & "#@#"
+                Sql = "|" & miRsAux!numlotes & "#@#"
                 fin = False
                 IncioBusqueda = 1
                 
                 While Not fin
                     
                      
-                    J = InStr(IncioBusqueda, LotesArticulos, SQL)
+                    J = InStr(IncioBusqueda, LotesArticulos, Sql)
                     If J > 0 Then
-                        J = J + Len(SQL)
-                        SQL = Mid(LotesArticulos, J, 10)
+                        J = J + Len(Sql)
+                        Sql = Mid(LotesArticulos, J, 10)
                         
-                        If SQL = Format(miRsAux!fecentra, "dd/mm/yyyy") Then
+                        If Sql = Format(miRsAux!fecentra, "dd/mm/yyyy") Then
                             'OK, esta es la linea
-                            SQL = Trim(Mid(LotesArticulos, J + 10, 10))
+                            Sql = Trim(Mid(LotesArticulos, J + 10, 10))
                             fin = True
                         Else
-                            SQL = "|" & miRsAux!numlotes & "#@#"   'Vuelve a la busqueda
+                            Sql = "|" & miRsAux!numlotes & "#@#"   'Vuelve a la busqueda
                             IncioBusqueda = InStr(J, LotesArticulos, "|")
                         End If
                     Else
-                        SQL = "0"
+                        Sql = "0"
                         fin = True
                     End If
                 Wend
-                CadenaInsertTmpLotes = CadenaInsertTmpLotes & SQL
+                CadenaInsertTmpLotes = CadenaInsertTmpLotes & Sql
                 
                 CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(miRsAux!numlotes, "T") & ")"
                 
@@ -4208,18 +4547,18 @@ Dim fin As Boolean
                     frmFacTPVLotes.Show vbModal
               
                     If CadenaDesdeOtroForm = "OK" Then
-                        SQL = ObtenerWhereCP(True)
-                        SQL = Replace(SQL, "scaven", "slivenlotes")
-                        SQL = "DELETE FROM slivenlotes " & SQL
-                        SQL = SQL & " AND numlinea = " & Data2.Recordset!numlinea
-                        conn.Execute SQL
+                        Sql = ObtenerWhereCP(True)
+                        Sql = Replace(Sql, "scaven", "slivenlotes")
+                        Sql = "DELETE FROM slivenlotes " & Sql
+                        Sql = Sql & " AND numlinea = " & Data2.Recordset!numlinea
+                        conn.Execute Sql
                         Espera 0.2
-                        SQL = "INSERT INTO slivenlotes(numtermi,numventa,fecventa,horventa,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-                        SQL = SQL & " SELECT " & Data1.Recordset!NumTermi & "," & Data1.Recordset!NumVenta & "," & DBSet(Data1.Recordset!fecventa, "F")
-                        SQL = SQL & ",now()," & Data2.Recordset!numlinea
-                        SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad >0 "
+                        Sql = "INSERT INTO slivenlotes(numtermi,numventa,fecventa,horventa,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
+                        Sql = Sql & " SELECT " & Data1.Recordset!NumTermi & "," & Data1.Recordset!NumVenta & "," & DBSet(Data1.Recordset!fecventa, "F")
+                        Sql = Sql & ",now()," & Data2.Recordset!numlinea
+                        Sql = Sql & " , numlinea , Cantidad, numlotes,fechaalb,codartic FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad >0 "
             
-                        conn.Execute SQL
+                        conn.Execute Sql
                         Espera 0.3
                         CargaLotesArticulos
                         
@@ -4246,21 +4585,21 @@ Dim linea As Integer
         
         MenError = ""
         
-        SQL = ObtenerWhereCP(True)
-        SQL = Replace(SQL, "scaven", "sliven")
-        SQL = SQL & " and not isnull(numserie) and trim(numserie)<>''"
-        SQL = " inner join sartic on sliven.codartic=sartic.codartic" & SQL
-        SQL = "SELECT numlinea,sliven.codartic,sum(cantidad) lasuma FROM sliven" & SQL & " GROUP BY 1"
+        Sql = ObtenerWhereCP(True)
+        Sql = Replace(Sql, "scaven", "sliven")
+        Sql = Sql & " and not isnull(numserie) and trim(numserie)<>''"
+        Sql = " inner join sartic on sliven.codartic=sartic.codartic" & Sql
+        Sql = "SELECT numlinea,sliven.codartic,sum(cantidad) lasuma FROM sliven" & Sql & " GROUP BY 1"
             
-        miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         Aux = ""
         linea = 0
         
         
         While Not miRsAux.EOF
             If Not IsNull(miRsAux!numlinea) Then
-                SQL = Format(miRsAux!numlinea, "0000000") & Mid(miRsAux!codArtic & Space(16), 1, 16) & DBLet(miRsAux!lasuma, "N") & "|"
-                Aux = Aux & SQL
+                Sql = Format(miRsAux!numlinea, "0000000") & Mid(miRsAux!codArtic & Space(16), 1, 16) & DBLet(miRsAux!lasuma, "N") & "|"
+                Aux = Aux & Sql
                 TieneArticulosFito = True
             End If
             miRsAux.MoveNext
@@ -4276,27 +4615,27 @@ Dim linea As Integer
                 
         
             'codartic,cantidad
-            SQL = ObtenerWhereCP(True)
-            SQL = Replace(SQL, "scaven", "slivenlotes")
-            SQL = "select numlinea,sum(cantidad) lasuma FROM slivenlotes " & SQL
-            SQL = SQL & " AND numlinea = " & Mid(CADENA, 1, 7) & " GROUP BY 1"
+            Sql = ObtenerWhereCP(True)
+            Sql = Replace(Sql, "scaven", "slivenlotes")
+            Sql = "select numlinea,sum(cantidad) lasuma FROM slivenlotes " & Sql
+            Sql = Sql & " AND numlinea = " & Mid(CADENA, 1, 7) & " GROUP BY 1"
             
-            miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If Not miRsAux.EOF Then
 
                 If CCur(Trim(Mid(CADENA, 24))) <> miRsAux!lasuma Then
-                    SQL = "Linea: " & Val(Mid(CADENA, 1, 7)) & "   " & Mid(CADENA, 8, 16) & "@#@" & "  - Canti. <> asiganda"
+                    Sql = "Linea: " & Val(Mid(CADENA, 1, 7)) & "   " & Mid(CADENA, 8, 16) & "@#@" & "  - Canti. <> asiganda"
                     CADENA = Trim(Mid(CADENA, 8, 16))
                     CADENA = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", CADENA, "T")
-                    SQL = Replace(SQL, "@#@", CADENA)
-                    MenError = SQL & vbCrLf & MenError
+                    Sql = Replace(Sql, "@#@", CADENA)
+                    MenError = Sql & vbCrLf & MenError
                 End If
             Else
-                SQL = "Linea: " & Val(Mid(CADENA, 1, 7)) & "   " & Mid(CADENA, 8, 16) & "@#@" & "  -Sin asignar"
+                Sql = "Linea: " & Val(Mid(CADENA, 1, 7)) & "   " & Mid(CADENA, 8, 16) & "@#@" & "  -Sin asignar"
                 CADENA = Trim(Mid(CADENA, 8, 16))
                 CADENA = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", CADENA, "T")
-                SQL = Replace(SQL, "@#@", CADENA)
-                MenError = MenError & vbCrLf & SQL
+                Sql = Replace(Sql, "@#@", CADENA)
+                MenError = MenError & vbCrLf & Sql
             End If
             
             miRsAux.Close
@@ -4335,34 +4674,34 @@ Dim Aux As String
 
     Set miRsAux = New ADODB.Recordset
         
-    SQL = "numtermi=" & Data1.Recordset!NumTermi & " and numventa=" & Data1.Recordset!NumVenta & " and fecventa=" & DBSet(Data1.Recordset!fecventa, "F")
-    SQL = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", SQL)
-    SQL = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", SQL)
-    NumRegElim = Val(SQL)
+    Sql = "numtermi=" & Data1.Recordset!NumTermi & " and numventa=" & Data1.Recordset!NumVenta & " and fecventa=" & DBSet(Data1.Recordset!fecventa, "F")
+    Sql = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", Sql)
+    Sql = SugerirCodigoSiguienteStr(NomTablaLineas, "numlinea", Sql)
+    NumRegElim = Val(Sql)
     
-    SQL = "select * from sarticAgrupado  where idcaja=" & RecuperaValor(CadenaDesdeOtroForm, 1)
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select * from sarticAgrupado  where idcaja=" & RecuperaValor(CadenaDesdeOtroForm, 1)
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If miRsAux.EOF Then Err.Raise 513, , "Error leyendo caja: " & RecuperaValor(CadenaDesdeOtroForm, 1)
     Uds = CInt(RecuperaValor(CadenaDesdeOtroForm, 2))
     
     
     '(numtermi,numventa,fecventa,horventa,numlinea,codigoea,codartic,nomartic,cantidad,precioiv,importel,precioar,codigiva,dto1,dto2,implineareal,impartalb,codccost,numlote) "
-    SQL = ""
+    Sql = ""
     CargaLineArticuloLotes 0, Uds
-    If SQL <> "" Then Aux = Aux & SQL
+    If Sql <> "" Then Aux = Aux & Sql
         
-    SQL = ""
+    Sql = ""
     CargaLineArticuloLotes 1, Uds
-    If SQL <> "" Then Aux = Aux & SQL
+    If Sql <> "" Then Aux = Aux & Sql
     
-    SQL = ""
+    Sql = ""
     CargaLineArticuloLotes 2, Uds
-    If SQL <> "" Then Aux = Aux & SQL
+    If Sql <> "" Then Aux = Aux & Sql
         
     Aux = Mid(Aux, 2)
-    SQL = "INSERT INTO sliven(numtermi,numventa,fecventa,horventa,numlinea,codigoea,codartic,nomartic,cantidad,precioiv,importel,precioar,codigiva,dto1,dto2,implineareal,impartalb,codccost,numlote) VALUES  " & Aux
-    conn.Execute SQL
+    Sql = "INSERT INTO sliven(numtermi,numventa,fecventa,horventa,numlinea,codigoea,codartic,nomartic,cantidad,precioiv,importel,precioar,codigiva,dto1,dto2,implineareal,impartalb,codccost,numlote) VALUES  " & Aux
+    conn.Execute Sql
     
      Set miRsAux = Nothing
    'Cargamos grid
@@ -4386,7 +4725,7 @@ Dim Porciva As Currency
 Dim Precio As Currency
 
         ' 0: 21%     1: 10%      2:4%
-        SQL = ""
+        Sql = ""
         Articulo = ""
         If QueArticulo = 0 Then
             Articulo = DBLet(miRsAux!artIVA_Normal, "T")
@@ -4408,10 +4747,10 @@ Dim Precio As Currency
         
         Porciva = CCur(DevuelveDesdeBD(conConta, "porceiva", "tiposiva", "codigiva", Codigiva))
         
-        SQL = ", (" & Data1.Recordset!NumTermi & "," & Data1.Recordset!NumVenta & "," & DBSet(Data1.Recordset!fecventa, "F") & ","
-        SQL = SQL & DBSet(Now, "FH") & "," & NumRegElim
+        Sql = ", (" & Data1.Recordset!NumTermi & "," & Data1.Recordset!NumVenta & "," & DBSet(Data1.Recordset!fecventa, "F") & ","
+        Sql = Sql & DBSet(Now, "FH") & "," & NumRegElim
         'codigoea,codartic,nomartic,cantidad,
-        SQL = SQL & ",null," & DBSet(Articulo, "T") & "," & DBSet(miRsAux!texto & " Ref(" & miRsAux!Referencia & ")", "T") & "," & DBSet(Cajas, "T") & ","
+        Sql = Sql & ",null," & DBSet(Articulo, "T") & "," & DBSet(miRsAux!texto & " Ref(" & miRsAux!Referencia & ")", "T") & "," & DBSet(Cajas, "T") & ","
         
         'precioiv,importel,precioar,codigiva,"
         
@@ -4419,12 +4758,12 @@ Dim Precio As Currency
         'If Cajas = 1 Then Precio = Round(Precio, 2)
         
         
-        SQL = SQL & DBSet((Precio + Importe), "N") & ","
-        SQL = SQL & DBSet((Precio + Importe) * Cajas, "N") & "," & DBSet(Importe, "N") & "," & DBSet(Codigiva, "N")
+        Sql = Sql & DBSet((Precio + Importe), "N") & ","
+        Sql = Sql & DBSet((Precio + Importe) * Cajas, "N") & "," & DBSet(Importe, "N") & "," & DBSet(Codigiva, "N")
         
         'dto1 dto2        implineareal,impartalb
         
-        SQL = SQL & ",0,0," & DBSet(Importe * Cajas, "N") & "," & DBSet(Precio, "N") & ","
+        Sql = Sql & ",0,0," & DBSet(Importe * Cajas, "N") & "," & DBSet(Precio, "N") & ","
         
 
 
@@ -4437,9 +4776,101 @@ Dim Precio As Currency
 '            ccoste = DevuelveDesdeBDNew(conAri, "sfamia", "codccost", "codfamia", txtAux(13).Text, "N")
 '            SQL = SQL & DBSet(ccoste, "T", "S")
 '        Else
-            SQL = SQL & ValorNulo
+            Sql = Sql & ValorNulo
         'End If
     
-        SQL = SQL & ",NULL)"
+        Sql = Sql & ",NULL)"
         NumRegElim = NumRegElim + 1
 End Sub
+
+
+
+Private Sub EstableceCestas()
+On Error GoTo eEstableceCestas
+    TieneAPP_Cestas = False
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open "Select * from cestas where false", conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    TieneAPP_Cestas = True
+    miRsAux.Close
+    
+eEstableceCestas:
+    If Err.Number <> 0 Then
+        Err.Clear
+        conn.Errors.Clear
+    End If
+
+    Set miRsAux = Nothing
+    
+
+End Sub
+
+
+
+
+
+
+Private Function InsertaLineasArticulosCesta() As Boolean
+Dim i As Integer
+Dim Aux As String
+Dim RS As ADODB.Recordset
+
+    On Error GoTo eInsertaCajasNavidad
+    InsertaLineasArticulosCesta = False
+    Set RS = New ADODB.Recordset
+        
+    
+    Sql = " select cestas.*,cestas_lineas.*, nomartic,codigiva from cestas inner join cestas_lineas on cestas.cestaId= cestas_lineas.cestaId "
+    Sql = Sql & " inner join sartic on cestas_lineas.codartic=sartic.codartic where cestas.codclien=" & Text1(0).Text & " order by numlinea"
+       
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    If RS.EOF Then Err.Raise 513, , "Error leyendo cesta cliente " & Text1(0).Text
+    
+    While Not RS.EOF
+    
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Text = ""
+        Next
+        txtAux2(2).Text = ""
+
+        
+        txtAux(3).Text = RS!cantidad
+        If Not PonerFormatoDecimal(txtAux(3), 1) Then Err.Raise 513, , "Poner cantidad"
+        
+        txtAux(2).Text = RS!codArtic
+        PonerArticuloCod (txtAux(2).Text), True
+        
+        If txtAux(2).Text = "" Then Err.Raise 513, , "Articulo  bloqueado" & miRsAux!codArtic
+            
+        If Not InsertarLinea Then Err.Raise 513, , "Error insertando liena"
+           
+        
+        
+        
+        
+       
+    
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+   
+   'Borramos la cestas
+   
+   Sql = " delete from cestas_lineas where cestaId IN (Select cestaid from cestas where codclien=" & Text1(0).Text & ")"
+    conn.Execute Sql
+   Sql = " delete from cestas where codclien=" & Text1(0).Text
+   conn.Execute Sql
+   
+   
+   InsertaLineasArticulosCesta = True
+   
+   
+Exit Function
+eInsertaCajasNavidad:
+    
+    MuestraError Err.Number, , Err.Description
+    Set miRsAux = Nothing
+    
+End Function
+

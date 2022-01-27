@@ -517,9 +517,9 @@ Begin VB.Form frmListado3
    End
    Begin VB.Frame FrameIncremPrecioPorcen 
       Height          =   5295
-      Left            =   3480
+      Left            =   1320
       TabIndex        =   0
-      Top             =   0
+      Top             =   3240
       Visible         =   0   'False
       Width           =   6615
       Begin VB.TextBox txtDecimal 
@@ -22199,7 +22199,7 @@ Option Explicit
 
 Private Const InicioComisionesHerbelca = "01/08/2012"
 
-Public opcion As Byte
+Public Opcion As Byte
     '0  .-  Pregunta del pq se cambia el precio o dto
     '1  .-  Informe de prevision
     '2  .-  Estan facturando. Albaranes que ya tienen la linea de portes
@@ -22320,7 +22320,6 @@ Public opcion As Byte
     
     '75 .- Bloqueo clientes inactivos
     
-
     
     
 Public OtrosDatos As String
@@ -22413,10 +22412,10 @@ Private Sub cboCostesEuler_Click()
     
 End Sub
 
-Private Sub CostesEulerDatosVisibles_(opcion As Byte)
+Private Sub CostesEulerDatosVisibles_(Opcion As Byte)
 Dim visible As Boolean
-    visible = Not (opcion = 0 Or opcion = 3)
-    cboCostesEulerVeh.visible = opcion = 3
+    visible = Not (Opcion = 0 Or Opcion = 3)
+    cboCostesEulerVeh.visible = Opcion = 3
     
     Me.txtArticulo(19).visible = visible
     Me.imgArticulo(19).visible = visible
@@ -22723,7 +22722,7 @@ Dim K As Integer
     If Me.txtmarca(3).Text <> "" Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Marca: " & Me.txtmarca(3).Text & " " & Me.txtDescmarca(3).Text & vbCrLf
     If Me.txtCodProve(27).Text <> "" Then CadenaDesdeOtroForm = CadenaDesdeOtroForm & "Proveedor " & Me.txtDescProve(27).Text
     
-    frmListado4.opcion = numParam
+    frmListado4.Opcion = numParam
     frmListado4.vCadena = miSQL
     frmListado4.Show vbModal
     
@@ -22813,7 +22812,7 @@ Private Sub cmdAguaCanonGeneralitat_Click()
         numParam = numParam + 2
         
         cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
-        If opcion = 55 Then
+        If Opcion = 55 Then
             cadTitulo = "Facturación agua por periodo"
             cadNomRPT = "aguFacPeriodo.rpt"
         Else
@@ -22928,11 +22927,11 @@ Dim LeeLaFechaDelFichero As Boolean
     Codigo = ""
     LeeLaFechaDelFichero = False
     If Me.txtFecha(56).Text = "" Then
-        If opcion = 53 Then Codigo = vbCrLf & "-Fecha obligatoria"
+        If Opcion = 53 Then Codigo = vbCrLf & "-Fecha obligatoria"
         LeeLaFechaDelFichero = True
     
     Else
-        If opcion = 52 Then
+        If Opcion = 52 Then
             miSQL = DevuelveDesdeBD(conAri, "max(fecha_anterior)", "aguacontadores", "1", "1")
             If miSQL <> "" Then
                 If CDate(miSQL) >= CDate(txtFecha(56).Text) Then Codigo = Codigo & vbCrLf & "-menor que lectura efectuada " & miSQL
@@ -22940,7 +22939,7 @@ Dim LeeLaFechaDelFichero As Boolean
         End If
     End If
     
-    If opcion = 52 Then
+    If Opcion = 52 Then
         If TxtFichero(0).Text = "" Then
             Codigo = Codigo & vbCrLf & "-Falta fichero"
         Else
@@ -22956,7 +22955,7 @@ Dim LeeLaFechaDelFichero As Boolean
     
     Set miRsAux = New ADODB.Recordset
     Screen.MousePointer = vbHourglass
-    If opcion = 53 Then
+    If Opcion = 53 Then
         ResultadoFuncion = ListadoAguaEmpresa
     Else
         ResultadoFuncion = False
@@ -23089,7 +23088,7 @@ Private Sub cmdArtEnPromo_Click()
     miSQL = ""
     If Me.txtAlma(2).Text = "" Then miSQL = "-Almacen principal" & vbCrLf
     If txtAlma(5).Text = "" And txtAlma(6).Text <> "" Then miSQL = "-Almacen 2 vacio" & vbCrLf
-    If opcion = 5 Then
+    If Opcion = 5 Then
         If Me.txtFecha(2).Text = "" Then miSQL = miSQL & "-Fecha promocion" & vbCrLf
     Else
         If Me.txtFecha(30).Text = "" Or Me.txtFecha(31).Text = "" Then miSQL = miSQL & "-Fecha obligatorias" & vbCrLf
@@ -23111,7 +23110,7 @@ Private Sub cmdArtEnPromo_Click()
     Screen.MousePointer = vbHourglass
     Set miRsAux = New ADODB.Recordset
     
-    If opcion = 5 Then
+    If Opcion = 5 Then
         ResultadoFuncion = GeneraDatosPromociones
     Else
         ResultadoFuncion = GeneraDatosDotEspecial
@@ -23175,13 +23174,13 @@ Private Sub cmdArtEnPromo_Click()
         cadParam = cadParam & "detalla=" & Abs(Me.chkVarios(0).Value) & "|"
         numParam = numParam + 1
                 
-        If opcion = 5 Then
+        If Opcion = 5 Then
             cadParam = cadParam & "DetallaFamilia=" & Abs(Me.chkVarios(28).Value) & "|"
             numParam = numParam + 1
         End If
                  
         'Solo lo tienen dtoesp
-        If opcion = 34 Then
+        If Opcion = 34 Then
             If txtAgente(4).Text <> "" Or txtAgente(5).Text <> "" Then
                 miSQL = "pdH3=""Agente: "
                 Codigo = "{}"
@@ -23193,7 +23192,7 @@ Private Sub cmdArtEnPromo_Click()
         
         cadPDFrpt = cadNomRPT
         cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
-        If opcion = 5 Then
+        If Opcion = 5 Then
             cadNomRPT = "rPromoArtiVta.rpt"
             cadTitulo = "Articulos en promocion"
         Else
@@ -23273,7 +23272,7 @@ Dim RT As ADODB.Recordset
             'NO HA VENDIDO NADA DEL ARTICULO
             
             NumRegElim = NumRegElim + 1
-            miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & RT!Codprove & "," & RT!Codfamia
+            miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & RT!CodProve & "," & RT!Codfamia
             miSQL = miSQL & ",''"
             miSQL = miSQL & "," & DBSet(RT!codArtic, "T") & "," & DBSet(RT!NomArtic, "T") & ",0"
             miSQL = miSQL & "," & DBSet(RT!FechaIni, "F") & "," & DBSet(RT!FechaFin, "F") & ",0,0,0)"
@@ -23285,7 +23284,7 @@ Dim RT As ADODB.Recordset
             While Not miRsAux.EOF
                 If DBSet(miRsAux.Fields(3), "N") <> 0 Then
                     NumRegElim = NumRegElim + 1
-                    miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & RT!Codprove & "," & RT!Codfamia
+                    miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & RT!CodProve & "," & RT!Codfamia
                     miSQL = miSQL & "," & DBSet(miRsAux!NomClien, "T")
                     miSQL = miSQL & "," & DBSet(miRsAux!codArtic, "T") & "," & DBSet(RT!NomArtic, "T") & "," & DBSet(miRsAux.Fields(3), "N")
                     miSQL = miSQL & "," & DBSet(RT!FechaIni, "F") & "," & DBSet(RT!FechaFin, "F") & "," & miRsAux!codClien & "," & DBSet(miRsAux.Fields(4), "N")
@@ -23732,7 +23731,7 @@ Private Sub cmdControDirEnv_Click()
         
     Screen.MousePointer = vbHourglass
     frmListado4.vCadena = CStr(CadenaDesdeOtroForm)
-    frmListado4.opcion = 11
+    frmListado4.Opcion = 11
     frmListado4.Show vbModal
 
     
@@ -24113,7 +24112,7 @@ Private Sub cmdFacturarRenting_Click()
     
     miSQL = ""
     If Me.txtFecha(17).Text = "" Then miSQL = miSQL & vbCrLf & " -Fecha"
-    If opcion <> 23 Then
+    If Opcion <> 23 Then
         If Me.txtBanco(0).Text = "" Then
             miSQL = miSQL & vbCrLf & " -Banco"
         Else
@@ -24153,7 +24152,7 @@ Private Sub cmdFacturarRenting_Click()
     
     'Ahora se factura MEs, trimestre, semestre o AÑO
     'Por lo cual, la fecha de factura NOS indicara el mes a facturar
-    If opcion = 22 Then
+    If Opcion = 22 Then
         HacerFacturaRenting
     Else
         HacerPreFactRenting
@@ -24249,7 +24248,7 @@ Dim UltFecMes As Date
         
         If NumRegElim >= 0 Then
 
-            frmVarios.opcion = 12
+            frmVarios.Opcion = 12
             frmVarios.Show vbModal
             Exit Sub
         End If
@@ -25364,14 +25363,14 @@ Dim PorRap2 As Currency
 
                 
                 
-                    Aux = Format(miRsAux!Codprove, "0000000") & Format(miRsAux!Codfamia, "000000")
+                    Aux = Format(miRsAux!CodProve, "0000000") & Format(miRsAux!Codfamia, "000000")
                     If Aux = Codigo Then
                         'Mismo que en RT
                         '
                     Else
                         Codigo = Aux
                         cadParam = "if(rap2 is null,0,rap2)"
-                        Aux = "codprove = " & miRsAux!Codprove & " AND codfamia"
+                        Aux = "codprove = " & miRsAux!CodProve & " AND codfamia"
                         Aux = DevuelveDesdeBD(conAri, "if(rap1 is null,0,rap1)", "sdtomp", Aux, CStr(miRsAux!Codfamia), "N", cadParam)
                         If Aux = "" Then
                             Aux = 0
@@ -25549,7 +25548,7 @@ Dim cControlFra As CControlFacturaContab
     
     CadenaDesdeOtroForm = CadenaDesdeOtroForm & cadSelect & "|"
     frmListado4.vCadena = CadenaDesdeOtroForm
-    frmListado4.opcion = 9
+    frmListado4.Opcion = 9
     frmListado4.Show vbModal
 
 
@@ -25783,7 +25782,7 @@ Private Sub cmdRecalPMP_Click()
         End If
         Screen.MousePointer = vbHourglass
         If RecalculoPrecioMedioPonderado Then
-            frmListado4.opcion = 0
+            frmListado4.Opcion = 0
             frmListado4.Show vbModal
             Unload Me
         End If
@@ -25842,7 +25841,7 @@ Private Sub cmdRecalUPC_Click()
         
         Screen.MousePointer = vbHourglass
         If RecalculoUltimoPrecioCompra Then
-            frmListado4.opcion = 2
+            frmListado4.Opcion = 2
             frmListado4.Show vbModal
             If CadenaDesdeOtroForm <> "" Then Unload Me
         End If
@@ -25862,7 +25861,7 @@ Dim ArticuloFitoSanitarios As Boolean
         Exit Sub
     End If
     
-    If opcion = 3 Then
+    If Opcion = 3 Then
         If Mid(Text2(0).Text, 1, 2) = "NO" Then
             MsgBox "Existen errores ", vbExclamation
             Exit Sub
@@ -25892,7 +25891,7 @@ Dim ArticuloFitoSanitarios As Boolean
     End If
     
     'Solo si rectificamos
-    If opcion = 3 Then
+    If Opcion = 3 Then
         If InStr(1, Text2(0).Text, "** No tiene") > 0 Then
             miSQL = "No existe inventario para el articulo / almacen. " & vbCrLf
             MsgBox miSQL, vbExclamation
@@ -25925,7 +25924,7 @@ Dim ArticuloFitoSanitarios As Boolean
     Set miRsAux = New ADODB.Recordset
     If HacerActualizacion Then
     
-        If opcion = 61 Then
+        If Opcion = 61 Then
             InicializarVbles True
             cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             cadTitulo = "Inventario articulo"
@@ -25958,7 +25957,7 @@ Private Sub cmdRegresaPrecio_Click()
 End Sub
 
 Private Sub cmdRenovar_Click()
-    If opcion = 42 Then
+    If Opcion = 42 Then
         Renovar
     Else
         CambiarTitular
@@ -26963,7 +26962,7 @@ Private Sub Form_Activate()
     
     If PrimeraVez Then
         PrimeraVez = False
-        Select Case opcion
+        Select Case Opcion
         Case 0
             
             PonerFoco Text1
@@ -27116,7 +27115,7 @@ Dim W As Integer
     PuedeCerrar = True
     
     
-    Select Case opcion
+    Select Case Opcion
     Case 0
         Caption = "LOG"
         PonerFrameVisible FramePregunta, H, W
@@ -27149,7 +27148,7 @@ Dim W As Integer
     Case 5, 34  '5-Articulos en promocio
                 '34- listado precio especial
         ArreglaFormularioPromoEsp
-        chkVarios(28).visible = opcion = 5
+        chkVarios(28).visible = Opcion = 5
         PonerFrameVisible FrameArtEnPromo, H, W
         Label3(10).Caption = "" 'el indicador
     Case 6
@@ -27241,9 +27240,9 @@ Dim W As Integer
         Me.cboMes(1).ListIndex = Month(CDate(txtFecha(17).Text)) - 1
         Me.txtAnyo(2).Text = Year(CDate(txtFecha(17).Text))
         
-        If opcion = 23 Then lblTitulo(20).Caption = "Previsión factura "
+        If Opcion = 23 Then lblTitulo(20).Caption = "Previsión factura "
         
-        vMostrarTree = opcion <> 23
+        vMostrarTree = Opcion <> 23
         Label4(87).visible = vMostrarTree
         imgBanco(0).visible = vMostrarTree
         txtBanco(0).visible = vMostrarTree
@@ -27361,10 +27360,10 @@ Dim W As Integer
         NumRegElim = Val(miSQL)  'CODCLIEN
         
         PonerFrameVisible FrameRenovacion, H, W
-        FrameRenov1(0).visible = opcion = 42
+        FrameRenov1(0).visible = Opcion = 42
         FrameRenov1(1).visible = Not FrameRenov1(0).visible
         
-        If opcion = 42 Then
+        If Opcion = 42 Then
             txtFecha(44).Text = Format(Now, "dd/mm/yyyy")
             lblTitulo(39).Caption = "Renovación de teléfonos"
             FrameRenov1(0).BorderStyle = 0
@@ -27418,7 +27417,7 @@ Dim W As Integer
         imgBanco(4).Picture = imgCuentas(0).Picture
         
     Case 52, 53
-        conSubRPT = opcion = 52
+        conSubRPT = Opcion = 52
         PonerFrameVisible FrameImportarAgua, H, W
         imgayuda(8).visible = conSubRPT
         If conSubRPT Then
@@ -27443,12 +27442,12 @@ Dim W As Integer
         
     Case 55, 74
         PonerFrameVisible FrameAguaGeneralitat, H, W
-        If opcion = 55 Then
+        If Opcion = 55 Then
             Me.lblTitulo(50).Caption = "Aguas. Canon Generalitat"
         Else
             Me.lblTitulo(50).Caption = "Tasas pendienes de cobro"
         End If
-        chkVarios(44).visible = opcion = 74
+        chkVarios(44).visible = Opcion = 74
         Label3(106).Caption = ""
     Case 56
         PonerFrameVisible FrameProveedor, H, W
@@ -27612,13 +27611,13 @@ Dim W As Integer
     Me.Height = H + 150
     Me.Width = W
     
-    W = opcion
-    If opcion = 23 Then W = 22
-    If opcion = 34 Then W = 5
-    If opcion = 44 Then W = 42
-    If opcion = 53 Then W = 52
-    If opcion = 61 Then W = 3
-    If opcion = 74 Then W = 55
+    W = Opcion
+    If Opcion = 23 Then W = 22
+    If Opcion = 34 Then W = 5
+    If Opcion = 44 Then W = 42
+    If Opcion = 53 Then W = 52
+    If Opcion = 61 Then W = 3
+    If Opcion = 74 Then W = 55
 
     cmdCancelar(CInt(W)).Cancel = True
     
@@ -27636,7 +27635,7 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     If Not PuedeCerrar Then Cancel = 1
-    If opcion = 11 Then CadenaDesdeOtroForm = ""
+    If Opcion = 11 Then CadenaDesdeOtroForm = ""
 End Sub
 
 
@@ -27817,7 +27816,7 @@ Private Sub imgArticulo_Click(Index As Integer)
             Else
                 FrmArtEul.FechaDoc = DateAdd("d", -30, Now)
             End If
-            FrmArtEul.Codprove = -1
+            FrmArtEul.CodProve = -1
             FrmArtEul.DesdeVentas = True
             FrmArtEul.Show vbModal
             Set FrmArtEul = Nothing
@@ -29934,7 +29933,7 @@ Private Sub cargarUltimoIventario()
     
     If Me.txtAlma(0).Text <> "" And txtArticulo(0).Text <> "" Then
         'OK
-        If opcion = 3 Then
+        If Opcion = 3 Then
             'RECTIFICAR INVENTARIO
             miSQL = "Select * from salmac where codartic=" & DBSet(txtArticulo(0).Text, "T")
             miSQL = miSQL & " AND codalmac= " & txtAlma(0).Text
@@ -30070,7 +30069,7 @@ Dim B As Boolean
     End If
     
     
-    If opcion = 3 Then
+    If Opcion = 3 Then
         'RECTIFICAR INVENTARIO
         If Not IsNull(miRsAux!FechaINV) Then
             Fecha_ = miRsAux!FechaINV
@@ -30112,7 +30111,7 @@ Dim B As Boolean
     miSQL = "UPDATE salmac set stockinv = " & DBSet(txtcantidad(0).Text, "N")
     miSQL = miSQL & " , canstock = "
     
-    If opcion = 3 Then
+    If Opcion = 3 Then
         B = FechaInventario = "01/01/1900"
     Else
         B = True
@@ -30158,7 +30157,7 @@ Dim B As Boolean
             miSQL = "INSERT INTO smoval(codartic,codalmac,fechamov,horamovi,tipomovi,detamovi,cantidad,impormov,codigope,letraser,document,numlinea,observa) VALUES ("
             miSQL = miSQL & DBSet(txtArticulo(0).Text, "T") & "," & txtAlma(0).Text & "," & DBSet(Fecha_, "F") & "," & DBSet(Now, "FH") & ","
             
-            If opcion = 3 Then
+            If Opcion = 3 Then
                 B = cantidad < 0
             Else
                 B = cantidad < 0
@@ -30173,7 +30172,7 @@ Dim B As Boolean
             
             miSQL = miSQL & ",'DFI'," & DBSet(Abs(cantidad), "N") & "," & DBSet(ImporteUd, "N") & ","
             
-            miSQL = miSQL & CadenaDesdeOtroForm & ",'','" & IIf(opcion = 3, "RECT", "INV") & "',1,"
+            miSQL = miSQL & CadenaDesdeOtroForm & ",'','" & IIf(Opcion = 3, "RECT", "INV") & "',1,"
             
             'Febrero 2018
             miSQL = miSQL & DBSet(Text2(1).Text, "T", "S") & ")"
@@ -30340,7 +30339,7 @@ Dim EncuentraARPMP As Boolean
         
         
         
-        Label3(6).Caption = miRsAux!Codprove & " / " & miRsAux!codArtic
+        Label3(6).Caption = miRsAux!CodProve & " / " & miRsAux!codArtic
         Label3(6).Refresh
         
         For J = 0 To 11
@@ -30422,7 +30421,7 @@ Dim EncuentraARPMP As Boolean
                 
                 'Los rappels
                 Rap1 = 0: Rap2 = 0
-                miSQL = "Select rap1,rap2 from sdtomp where codprove=" & miRsAux!Codprove & " AND codfamia =" & miRsAux!Codfamia
+                miSQL = "Select rap1,rap2 from sdtomp where codprove=" & miRsAux!CodProve & " AND codfamia =" & miRsAux!Codfamia
                 RT.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Not RT.EOF Then
                     Rap1 = DBLet(RT!Rap1, "N")
@@ -30459,8 +30458,8 @@ Dim EncuentraARPMP As Boolean
                         End If
                         If B Then
                             NumRegElim = NumRegElim + 1
-                            Codigo = Codigo & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!Codprove \ 10000 & ","
-                            Codigo = Codigo & miRsAux!Codprove Mod 10000 & "," & DBSet(miRsAux!nomprove, "T") & ","
+                            Codigo = Codigo & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!CodProve \ 10000 & ","
+                            Codigo = Codigo & miRsAux!CodProve Mod 10000 & "," & DBSet(miRsAux!nomprove, "T") & ","
                             Codigo = Codigo & DBSet(miRsAux!codArtic, "T") & "," & DBSet(miRsAux!NomArtic, "T") & "," & DBSet(V(J), "N")
                             
                             EncuentraARPMP = False
@@ -30604,7 +30603,7 @@ Dim EncuentraARPMP As Boolean
                 'Mostraremos los articulos regularizados
                 'Se pone aqui pq en frmvarios utilo numregelim
                 Screen.MousePointer = vbHourglass
-                frmVarios.opcion = 10
+                frmVarios.Opcion = 10
                 frmVarios.Show vbModal
                 Me.Refresh
                 Espera 0.2
@@ -30656,7 +30655,7 @@ Private Sub LlamarImprimir()
         .SoloImprimir = False
         .EnvioEMail = False
         .Titulo = cadTitulo
-        .opcion = 3000   'VAN TODOS EN ESTE SACO
+        .Opcion = 3000   'VAN TODOS EN ESTE SACO
         .NombrePDF = ""
         .NombrePDF = cadPDFrpt
         .NombreRPT = cadNomRPT
@@ -31033,7 +31032,7 @@ Dim precioUC As Currency  'Para guardar el importe de ultco
             Importe = DBLet(RL!precioUC, "N")
             
         Else
-            Codigo = "select * from slispr where codartic= " & DBSet(RL!codArtic, "T") & " AND codprove = " & RL!Codprove
+            Codigo = "select * from slispr where codartic= " & DBSet(RL!codArtic, "T") & " AND codprove = " & RL!CodProve
             miRsAux.Open Codigo, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             DePromocion = False
             If miRsAux.EOF Then
@@ -31082,7 +31081,7 @@ Dim precioUC As Currency  'Para guardar el importe de ultco
             If Me.chkRecalPrStd(3).Value = 1 Or Me.chkRecalPrStd(1).Value = 1 Then
                 
                 'Va a aplicar alguno de los dos dtos
-                miSQL = "Select * from sdtomp where codfamia= " & RL!Codfamia & " AND codprove = " & RL!Codprove
+                miSQL = "Select * from sdtomp where codfamia= " & RL!Codfamia & " AND codprove = " & RL!CodProve
                 ' ? y codmarca....?
                 miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If miRsAux.EOF Then
@@ -31207,7 +31206,7 @@ Dim IVA As Currency
         Importe = DBLet(miRsAux!Suma, "N")
         Importe = Round2(Importe * IVA, 2)
         
-        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!Codprove & "," & DBSet(miRsAux!nomprove, "T")
+        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!CodProve & "," & DBSet(miRsAux!nomprove, "T")
         miSQL = miSQL & ",'PED   " & Format(miRsAux!numpedpr, "000000") & "'," & DBSet(miRsAux!fecpedpr, "F") & ","
         miSQL = miSQL & DBSet(FI, "F") & "," & DBSet(Importe, "N") & "," & DBSet(Importe, "N") & "," & miRsAux!codforpa
         miSQL = miSQL & "," & DBSet(miRsAux!nomforpa, "T") & ",0)"
@@ -31262,7 +31261,7 @@ Dim IVA As Currency
         Importe = DBLet(miRsAux!Suma, "N")
         Importe = Round2(Importe * IVA, 2)
         
-        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!Codprove & "," & DBSet(miRsAux!nomprove, "T")
+        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!CodProve & "," & DBSet(miRsAux!nomprove, "T")
         miSQL = miSQL & ",'ALB   " & miRsAux!Numalbar & "'," & DBSet(miRsAux!FechaAlb, "F") & ","
         miSQL = miSQL & DBSet(FI, "F") & "," & DBSet(Importe, "N") & "," & DBSet(Importe, "N") & "," & miRsAux!codforpa
         miSQL = miSQL & "," & DBSet(miRsAux!nomforpa, "T") & ",0)"
@@ -31400,7 +31399,7 @@ Dim IVA As Currency
             Importe = DBLet(miRsAux!Suma, "N")
             Importe = Round2(Importe * IVA, 2)
             
-            miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!Codprove & "," & DBSet(miRsAux!nomprove, "T")
+            miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!CodProve & "," & DBSet(miRsAux!nomprove, "T")
             miSQL = miSQL & ",'PED   " & Format(miRsAux!numpedpr, "000000") & "'," & DBSet(txtFecha(0).Text, "F") & ","
             miSQL = miSQL & DBSet(FI, "F") & "," & DBSet(Importe, "N") & "," & DBSet(Importe, "N") & "," & miRsAux!codforpa
             miSQL = miSQL & "," & DBSet(miRsAux!nomforpa, "T") & ",1)"
@@ -31453,7 +31452,7 @@ Dim IVA As Currency
             Importe = DBLet(miRsAux!Suma, "N")
             Importe = Round2(Importe * IVA, 2)
             
-            miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!Codprove & "," & DBSet(miRsAux!nomprove, "T")
+            miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!CodProve & "," & DBSet(miRsAux!nomprove, "T")
             miSQL = miSQL & ",'ALB   " & miRsAux!Numalbar & "'," & DBSet(miRsAux!FechaAlb, "F") & ","
             miSQL = miSQL & DBSet(FI, "F") & "," & DBSet(Importe, "N") & "," & DBSet(Importe, "N") & "," & miRsAux!codforpa
             miSQL = miSQL & "," & DBSet(miRsAux!nomforpa, "T") & ",1)"
@@ -31986,7 +31985,7 @@ Private Function CargarDatosFamiliasDtoEnTmp() As Boolean
      
         'tmpinformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importe1,importe2,importe3)
         NumRegElim = NumRegElim + 1
-        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBLet(miRsAux!Codprove, "N") & "," & miRsAux!Codfamia & ","
+        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBLet(miRsAux!CodProve, "N") & "," & miRsAux!Codfamia & ","
         miSQL = miSQL & DBSet(miRsAux!nomprove, "T", "N") & "," & DBSet(miRsAux!nomfamia, "T", "N") & ","
         
         'CERO O DOS
@@ -32552,7 +32551,7 @@ Dim YaEstaFijadoPrecio As Boolean
             '(codusu,codigo1,campo1,nombre1,nombre2,importeb1,importeb2
             '                 codpro artic   nomart   preciopmp  calculado
             NumRegElim = NumRegElim + 1
-            cadNomRPT = "(" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!Codprove & "," & miRsAux!Codfamia & "," & DBSet(miRsAux!codArtic, "T")
+            cadNomRPT = "(" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!CodProve & "," & miRsAux!Codfamia & "," & DBSet(miRsAux!codArtic, "T")
             cadNomRPT = cadNomRPT & "," & DBSet(miRsAux!NomArtic, "T") & "," & DBSet(miRsAux!PrecioMP, "N") & ","
             
             
@@ -32688,7 +32687,7 @@ Dim Aux As Currency
             Label3(41).Refresh
             
             NumRegElim = NumRegElim + 1
-            cadNomRPT = "(" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!Codprove & "," & miRsAux!Codfamia & "," & DBSet(miRsAux!codArtic, "T")
+            cadNomRPT = "(" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!CodProve & "," & miRsAux!Codfamia & "," & DBSet(miRsAux!codArtic, "T")
             cadNomRPT = cadNomRPT & "," & DBSet(miRsAux!NomArtic, "T") & "," & DBSet(miRsAux!precioUC, "N") & ","
             
             precioUC = DBLet(miRsAux.Fields(0), "N")
@@ -33618,7 +33617,7 @@ Private Function CargaDatosListadoIncidenciasFlotas() As Boolean
         NumRegElim = NumRegElim + 1
         Label3(56).Caption = NumRegElim & " - " & miRsAux!nomflota
         Label3(56).Refresh
-        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBSet(miRsAux!Codprove, "N", "S") & ","
+        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBSet(miRsAux!CodProve, "N", "S") & ","
         miSQL = miSQL & DBSet(miRsAux!codflota, "T") & "," & DBSet(miRsAux!nomflota, "T") & ","
         miSQL = miSQL & DBSet(miRsAux!nomconcef, "T") & "," & DBSet(miRsAux!BaseImp, "N") & "," & DBSet(miRsAux!Fecha, "F") & ")"
         
@@ -34602,7 +34601,7 @@ Dim C As Collection
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Set C = New Collection
     While Not miRsAux.EOF
-        C.Add CStr(miRsAux!Codprove) & "|" & miRsAux!nomprove & "|"
+        C.Add CStr(miRsAux!CodProve) & "|" & miRsAux!nomprove & "|"
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -34804,7 +34803,7 @@ Dim ColCli As Collection
                 miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!codClien & "," & miRsAux!Codfamia
                 miSQL = miSQL & "," & DBSet(miRsAux!NomClien, "T")
                 miSQL = miSQL & "," & DBSet(miRsAux!codArtic, "T") & "," & DBSet(miRsAux!NomArtic, "T") & "," & DBSet(miRsAux!cantid, "N")
-                miSQL = miSQL & "," & DBSet(Now, "F") & "," & DBSet(Now, "F") & "," & miRsAux!Codprove & "," & DBSet(miRsAux!implin, "N") & "," & miRsAux!CodAgent & ")"
+                miSQL = miSQL & "," & DBSet(Now, "F") & "," & DBSet(Now, "F") & "," & miRsAux!CodProve & "," & DBSet(miRsAux!implin, "N") & "," & miRsAux!CodAgent & ")"
             End If
             miRsAux.MoveNext
                 
@@ -34903,7 +34902,7 @@ End Function
 
 Private Sub ArreglaFormularioPromoEsp()
 
-        vMostrarTree = opcion = 5
+        vMostrarTree = Opcion = 5
     
         'Solo para opcion =5
 '        chkVarios(0).Visible = vMostrarTree
@@ -38573,7 +38572,7 @@ Private Function ObtenerDatosAguasGeneralitat() As Boolean
     Screen.MousePointer = vbHourglass
     Label3(106).Caption = "Inicio proceso"
     Label3(106).Refresh
-    If opcion = 55 Then
+    If Opcion = 55 Then
         ObtenerDatosAguasGeneralitat = ObtenerDatosFacturacionAguaGeneralitat
     Else
         ObtenerDatosAguasGeneralitat = ObtenerDatosTasasPdteCobroAguaGeneralitat
@@ -39804,7 +39803,7 @@ Dim vTipoMov As CTiposMov
     'NO PUEDE SER EOF
     'codprove   nomprove   domprove    codpobla   pobprove    proprove    nifprove    telprove
 
-    miSQL = "UPDATE scappr SET codprove=" & miRsAux!Codprove
+    miSQL = "UPDATE scappr SET codprove=" & miRsAux!CodProve
     miSQL = miSQL & ", nomprove = " & DBSet(miRsAux!nomprove, "T")
     miSQL = miSQL & ", domprove = " & DBSet(miRsAux!domprove, "T")
     miSQL = miSQL & ", codpobla = " & DBSet(miRsAux!codpobla, "N")
@@ -40121,7 +40120,7 @@ End Function
 
 Private Sub InventariarRectificar()
    
-    If opcion = 3 Then
+    If Opcion = 3 Then
         
         lblTitulo(26).ForeColor = Label4(198).ForeColor
         lblTitulo(26).Caption = "Rectificar último inventario"

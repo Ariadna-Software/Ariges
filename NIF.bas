@@ -250,13 +250,18 @@ End Function
 'End Function
 
 
-Public Function ValidarNIF(valorNIF As String) As Boolean
+Public Function ValidarNIF_(valorNIF As String, HacerPregunta As Boolean) As Boolean
 
-    ValidarNIF = True
+    ValidarNIF_ = True
+    
     If valorNIF <> "" Then
         If Not Comprobar_NIF(valorNIF) Then
-            MsgBox "El NIF no es correcto.", vbExclamation
-            ValidarNIF = False
+            If HacerPregunta Then
+                If MsgBox("NIF parece incorrecto. ¿Continuar?", vbQuestion + vbYesNoCancel) <> vbYes Then ValidarNIF_ = False
+            Else
+                MsgBox "El NIF no parece correcto.", vbExclamation
+                ValidarNIF_ = False
+            End If
         End If
     End If
 End Function

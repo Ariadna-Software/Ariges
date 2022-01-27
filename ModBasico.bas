@@ -823,7 +823,7 @@ Public Sub AyudaClientesV(frmCom As frmBasico2, Optional CodActual As String, Op
     frmCom.tabla = "sclvar"
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CampoCP = "nifclien"
-    frmCom.TipoCP = "N"
+    frmCom.TipoCP = "T"
     frmCom.Formulario = "ClientesV"
     If SinAvanzada Then frmCom.DeConsulta = True
     frmCom.Caption = "Clientes Varios"
@@ -1446,7 +1446,7 @@ Public Sub AyudaAlbaranesCompra(frmCom As frmBasico2, tabla As String, Optional 
     
     frmCom.tabla = "(" & tabla & " LEFT JOIN sprove ON " & tabla & ".codprove=sprove.codprove)"
     frmCom.CampoCP = tabla & ".numalbar"
-    frmCom.TipoCP = "N"
+    frmCom.TipoCP = "T"
     If SinAvanzada Then frmCom.DeConsulta = True
     If tabla = "scaalp" Then
         frmCom.Caption = "Albaranes de Compra"
@@ -2344,11 +2344,11 @@ End Sub
 
 
 
-Public Sub AyudaFacturasAnyadeAlbaranCostes(frmAlb As frmBasico2, Codclien As String, SinAvanzada As Boolean)
+Public Sub AyudaFacturasAnyadeAlbaranCostes(frmAlb As frmBasico2, codClien As String, SinAvanzada As Boolean)
     frmAlb.CadenaTots = "S|txtAux(0)|T|Tipo|1105|;S|txtAux(1)|T|Albaran.|1495|;S|txtAux(2)|T|Fecha|1350|;S|txtAux(3)|T|Referenc|5500|;S|txtAux(4)|T|Observa1|4500|;"
     frmAlb.CadenaConsulta = "SELECT scaalb.codtipom, scaalb.numalbar, scaalb.fechaalb, scaalb.referenc,scaalb.observa01"
     frmAlb.CadenaConsulta = frmAlb.CadenaConsulta & " FROM scaalb"
-    frmAlb.CadenaConsulta = frmAlb.CadenaConsulta & " WHERE codclien=" & RecuperaValor(Codclien, 1) & " AND scaalb.codtipom <> 'ALV' "
+    frmAlb.CadenaConsulta = frmAlb.CadenaConsulta & " WHERE codclien=" & RecuperaValor(codClien, 1) & " AND scaalb.codtipom <> 'ALV' "
     frmAlb.CadenaConsulta = frmAlb.CadenaConsulta & " AND NOT (codtipom,numalbar) IN (select codtipom,numalbar FROM slialb)"
     
     
@@ -2374,7 +2374,7 @@ Public Sub AyudaFacturasAnyadeAlbaranCostes(frmAlb As frmBasico2, Codclien As St
     'frmAlb.Formulario = "Albaranes cliente " & RecuperaValor(Codclien, 2)
     frmAlb.DeConsulta = False
     
-    frmAlb.Caption = "Albaranes cliente " & RecuperaValor(Codclien, 2)
+    frmAlb.Caption = "Albaranes cliente " & RecuperaValor(codClien, 2)
     
     frmAlb.CodigoActual = 0
 '    If CodActual <> "" Then

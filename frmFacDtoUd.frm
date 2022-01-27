@@ -17,73 +17,6 @@ Begin VB.Form frmFacDtoUd
    ScaleWidth      =   10965
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin MSDataGridLib.DataGrid DataGrid1 
-      Bindings        =   "frmFacDtoUd.frx":000C
-      Height          =   7440
-      Left            =   135
-      TabIndex        =   9
-      TabStop         =   0   'False
-      Top             =   945
-      Width           =   10650
-      _ExtentX        =   18785
-      _ExtentY        =   13123
-      _Version        =   393216
-      AllowUpdate     =   0   'False
-      HeadLines       =   1
-      RowHeight       =   19
-      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   9
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   -1  'True
-         Strikethrough   =   0   'False
-      EndProperty
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ColumnCount     =   2
-      BeginProperty Column00 
-         DataField       =   ""
-         Caption         =   ""
-         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-            Type            =   0
-            Format          =   ""
-            HaveTrueFalseNull=   0
-            FirstDayOfWeek  =   0
-            FirstWeekOfYear =   0
-            LCID            =   3082
-            SubFormatType   =   0
-         EndProperty
-      EndProperty
-      BeginProperty Column01 
-         DataField       =   ""
-         Caption         =   ""
-         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-            Type            =   0
-            Format          =   ""
-            HaveTrueFalseNull=   0
-            FirstDayOfWeek  =   0
-            FirstWeekOfYear =   0
-            LCID            =   3082
-            SubFormatType   =   0
-         EndProperty
-      EndProperty
-      SplitCount      =   1
-      BeginProperty Split0 
-         BeginProperty Column00 
-         EndProperty
-         BeginProperty Column01 
-         EndProperty
-      EndProperty
-   End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   135
@@ -193,6 +126,7 @@ Begin VB.Form frmFacDtoUd
       TabIndex        =   10
       Text            =   "Descripcion"
       Top             =   5400
+      Visible         =   0   'False
       Width           =   1755
    End
    Begin VB.TextBox txtAux 
@@ -216,6 +150,7 @@ Begin VB.Form frmFacDtoUd
       Tag             =   "Descuento|N|N|0|99|sdesca|dtolinea|0,00||"
       Text            =   "Descripcion"
       Top             =   5040
+      Visible         =   0   'False
       Width           =   1035
    End
    Begin VB.TextBox txtAux 
@@ -296,6 +231,7 @@ Begin VB.Form frmFacDtoUd
       Tag             =   "Envase-granel|T|N|||sdesca|envagran|||"
       Text            =   "Codi"
       Top             =   5040
+      Visible         =   0   'False
       Width           =   800
    End
    Begin VB.TextBox txtAux 
@@ -319,6 +255,7 @@ Begin VB.Form frmFacDtoUd
       Tag             =   "Desde|N|S|||sdesca|desdecan|0||"
       Text            =   "Descripcion"
       Top             =   5040
+      Visible         =   0   'False
       Width           =   1395
    End
    Begin VB.CommandButton cmdRegresar 
@@ -431,7 +368,75 @@ Begin VB.Form frmFacDtoUd
       Tag             =   "id|N|N|||sdesca|id|||"
       Text            =   "Codi"
       Top             =   7080
+      Visible         =   0   'False
       Width           =   800
+   End
+   Begin MSDataGridLib.DataGrid DataGrid1 
+      Bindings        =   "frmFacDtoUd.frx":000C
+      Height          =   7440
+      Left            =   135
+      TabIndex        =   9
+      TabStop         =   0   'False
+      Top             =   945
+      Width           =   10650
+      _ExtentX        =   18785
+      _ExtentY        =   13123
+      _Version        =   393216
+      AllowUpdate     =   0   'False
+      HeadLines       =   1
+      RowHeight       =   19
+      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ColumnCount     =   2
+      BeginProperty Column00 
+         DataField       =   ""
+         Caption         =   ""
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column01 
+         DataField       =   ""
+         Caption         =   ""
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      SplitCount      =   1
+      BeginProperty Split0 
+         BeginProperty Column00 
+         EndProperty
+         BeginProperty Column01 
+         EndProperty
+      EndProperty
    End
    Begin VB.Label Label1 
       Caption         =   "El txt ID esta bajo"
@@ -516,25 +521,25 @@ Dim Modo As Byte
 '-------------------------------------------------------
 
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
     
     Modo = vModo
-    b = (Modo = 2)
+    B = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
         
-    txtAux(0).visible = Not b
-    txtAux2(0).visible = Not b
-    txtAux(1).visible = Not b
-    txtAux(2).visible = Not b
-    txtAux(3).visible = Not b
-    Me.Command1.visible = Not b
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    txtAux(0).visible = Not B
+    txtAux2(0).visible = Not B
+    txtAux(1).visible = Not B
+    txtAux(2).visible = Not B
+    txtAux(3).visible = Not B
+    Me.Command1.visible = Not B
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     End If
     
     'Si estamos insertando o busqueda
@@ -550,24 +555,24 @@ Dim b As Boolean
 End Sub
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
     
-    b = (Modo = 2)
-    Toolbar1.Buttons(5).Enabled = b 'Buscar
-    Me.mnBuscar.Enabled = b
-    Toolbar1.Buttons(6).Enabled = b 'Todos
-    Me.mnVerTodos.Enabled = b
+    B = (Modo = 2)
+    Toolbar1.Buttons(5).Enabled = B 'Buscar
+    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(6).Enabled = B 'Todos
+    Me.mnVerTodos.Enabled = B
     
-    b = (Modo = 2) And Not DeConsulta
+    B = (Modo = 2) And Not DeConsulta
     'Añadir
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
     Toolbar1.Buttons(8).Enabled = False 'b
 End Sub
@@ -679,7 +684,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo Error2
 
@@ -689,31 +694,31 @@ Dim SQL As String
 
     
     '### a mano
-    SQL = "¿Seguro que desea eliminar el descuento seleccionado? " & vbCrLf
+    Sql = "¿Seguro que desea eliminar el descuento seleccionado? " & vbCrLf
     
     
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         NumRegElim = Me.Adodc1.Recordset.AbsolutePosition
         'Hay que eliminar
         
        
-        SQL = "Delete from sdesca where id = " & Adodc1.Recordset!ID
-        conn.Execute SQL
+        Sql = "Delete from sdesca where id = " & Adodc1.Recordset!ID
+        conn.Execute Sql
         
-        SQL = CStr(InStr(1, Adodc1.RecordSource, " WHERE "))
-        If Val(SQL) > 0 Then
-            SQL = Mid(Adodc1.RecordSource, Val(SQL) + 7)
+        Sql = CStr(InStr(1, Adodc1.RecordSource, " WHERE "))
+        If Val(Sql) > 0 Then
+            Sql = Mid(Adodc1.RecordSource, Val(Sql) + 7)
             
-            SQL = Mid(SQL, 1, InStr(1, SQL, " ORDER BY "))
+            Sql = Mid(Sql, 1, InStr(1, Sql, " ORDER BY "))
             
         Else
-            SQL = ""
+            Sql = ""
         End If
         CancelaADODC Me.Adodc1
-        CargaGrid SQL
+        CargaGrid Sql
         CancelaADODC Me.Adodc1
-        SituarDataPosicion Me.Adodc1, NumRegElim, SQL
+        SituarDataPosicion Me.Adodc1, NumRegElim, Sql
     End If
 Error2:
     Screen.MousePointer = vbDefault
@@ -783,7 +788,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
 
 
@@ -792,9 +797,9 @@ Dim cad As String
             Exit Sub
         End If
     
-        cad = Adodc1.Recordset.Fields(0) & "|"
-        cad = cad & Adodc1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(cad)
+        Cad = Adodc1.Recordset.Fields(0) & "|"
+        Cad = Cad & Adodc1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(Cad)
         Unload Me
 
 End Sub
@@ -910,19 +915,19 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 
-Private Sub CargaGrid(Optional SQL As String)
+Private Sub CargaGrid(Optional Sql As String)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
     
-    b = DataGrid1.Enabled
-    If SQL <> "" Then
-        SQL = CadenaConsulta & " WHERE " & SQL
+    B = DataGrid1.Enabled
+    If Sql <> "" Then
+        Sql = CadenaConsulta & " WHERE " & Sql
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY envagran,desdecan,hastacan"
+    Sql = Sql & " ORDER BY envagran,desdecan,hastacan"
     
-    CargaGridGnral DataGrid1, Me.Adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.Adodc1, Sql, False
     
     DataGrid1.RowHeight = 350
     
@@ -970,7 +975,7 @@ Dim b As Boolean
         mnModificar.Enabled = Not Adodc1.Recordset.EOF
         mnEliminar.Enabled = Not Adodc1.Recordset.EOF
    End If
-   DataGrid1.Enabled = b
+   DataGrid1.Enabled = B
    DataGrid1.ScrollBars = dbgAutomatic
    
    PonerOpcionesMenu
@@ -1039,12 +1044,12 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
 
-    b = CompForm(Me, 3)
-    If Not b Then Exit Function
+    B = CompForm(Me, 3)
+    If Not B Then Exit Function
     
     'Comprobar si ya existe el cod de tipo unidad en la tabla
     
@@ -1056,7 +1061,7 @@ Dim b As Boolean
     '    If ExisteCP(txtAux(0)) Then b = False
     
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 

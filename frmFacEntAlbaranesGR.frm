@@ -5608,7 +5608,7 @@ End Sub
 
 Private Function ModificarCabAlbaran() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EModificaAlb
     conn.BeginTrans
@@ -5619,8 +5619,8 @@ Dim SQL As String
     If B Then
         B = ModificaDesdeFormulario(Me, 1)
         If B Then
-            SQL = "UPDATE scaalb SET nomdirec=" & DBSet(Text2(12).Text, "T") & " WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!Numalbar
-            conn.Execute SQL
+            Sql = "UPDATE scaalb SET nomdirec=" & DBSet(Text2(12).Text, "T") & " WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!Numalbar
+            conn.Execute Sql
         End If
 
         If B Then
@@ -5631,20 +5631,20 @@ Dim SQL As String
             If (Val(Me.Data1.Recordset!codClien) <> Val(Text1(4).Text)) Or (CDate(Data1.Recordset!FechaAlb) <> CDate(Text1(1).Text)) Then
                 'si hay numeros de serie en ese albaran, actualizamos el cliente
                 'al nuevo cliente
-                SQL = "UPDATE sserie SET codclien=" & DBSet(Text1(4).Text, "N") & ","
-                SQL = SQL & " fechavta=" & DBSet(Text1(1).Text, "F")
-                SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
-                SQL = SQL & " WHERE codtipom='" & CodTipoMov & "'" & " AND numalbar=" & Data1.Recordset!Numalbar & " and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
-                conn.Execute SQL
+                Sql = "UPDATE sserie SET codclien=" & DBSet(Text1(4).Text, "N") & ","
+                Sql = Sql & " fechavta=" & DBSet(Text1(1).Text, "F")
+                Sql = Sql & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
+                Sql = Sql & " WHERE codtipom='" & CodTipoMov & "'" & " AND numalbar=" & Data1.Recordset!Numalbar & " and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
+                conn.Execute Sql
                 
                 'Modificar el cliente en la smoval
-                SQL = "UPDATE smoval SET codigope=" & DBSet(Text1(4).Text, "N") & ","
-                SQL = SQL & " fechamov=" & DBSet(Text1(1).Text, "F")
-                SQL = SQL & ", horamovi= concat(" & DBSet(Text1(1).Text, "F") & ",' ',hour(horamovi),':',minute(horamovi),':',second(horamovi))"
-                SQL = SQL & " WHERE detamovi='" & CodTipoMov & "'"
-                SQL = SQL & " AND document='" & Text1(0).Text & "'"
-                SQL = SQL & " and fechamov=" & DBSet(Data1.Recordset!FechaAlb, "F")
-                conn.Execute SQL
+                Sql = "UPDATE smoval SET codigope=" & DBSet(Text1(4).Text, "N") & ","
+                Sql = Sql & " fechamov=" & DBSet(Text1(1).Text, "F")
+                Sql = Sql & ", horamovi= concat(" & DBSet(Text1(1).Text, "F") & ",' ',hour(horamovi),':',minute(horamovi),':',second(horamovi))"
+                Sql = Sql & " WHERE detamovi='" & CodTipoMov & "'"
+                Sql = Sql & " AND document='" & Text1(0).Text & "'"
+                Sql = Sql & " and fechamov=" & DBSet(Data1.Recordset!FechaAlb, "F")
+                conn.Execute Sql
             End If
             
             
@@ -5655,11 +5655,11 @@ Dim SQL As String
                 '------------------------------------------------------------------------------
                 '  LOG de acciones.
                 Set LOG = New cLOG
-                SQL = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", CStr(GrabaCambioTrabajador))
-                SQL = "Antes: " & Format(GrabaCambioTrabajador, "0000") & " " & SQL
-                SQL = "Ahora: " & Text1(3).Text & " " & Text2(3).Text & vbCrLf & SQL
-                SQL = "Albaran: " & Text1(0).Text & " Fecha " & Text1(1).Text & vbCrLf & SQL
-                LOG.Insertar 20, vUsu, SQL
+                Sql = DevuelveDesdeBD(conAri, "nomtraba", "straba", "codtraba", CStr(GrabaCambioTrabajador))
+                Sql = "Antes: " & Format(GrabaCambioTrabajador, "0000") & " " & Sql
+                Sql = "Ahora: " & Text1(3).Text & " " & Text2(3).Text & vbCrLf & Sql
+                Sql = "Albaran: " & Text1(0).Text & " Fecha " & Text1(1).Text & vbCrLf & Sql
+                LOG.Insertar 20, vUsu, Sql
                 Set LOG = Nothing
             End If
         End If
@@ -5673,20 +5673,20 @@ Dim SQL As String
                 
                 If Val(Data1.Recordset!codClien) <> Val(Text1(4).Text) Then
                     'Si cambia el cliente, hay que ver
-                    SQL = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
-                    If Val(SQL) = "1" Then
+                    Sql = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
+                    If Val(Sql) = "1" Then
                         'El nuevo cliente tiene puntos
-                        SQL = "+"
-                        If Data1.Recordset!Puntos < 0 Then SQL = "-"
-                        SQL = "UPDATE sclien set puntos=coalesce(puntos,0) " & SQL & DBSet(Abs(Data1.Recordset!Puntos), "N")
-                        SQL = SQL & " WHERE codclien =" & Text1(4).Text
-                        conn.Execute SQL
+                        Sql = "+"
+                        If Data1.Recordset!Puntos < 0 Then Sql = "-"
+                        Sql = "UPDATE sclien set puntos=coalesce(puntos,0) " & Sql & DBSet(Abs(Data1.Recordset!Puntos), "N")
+                        Sql = Sql & " WHERE codclien =" & Text1(4).Text
+                        conn.Execute Sql
                     
                         BuscaChekc = "U"
                        
                     Else
-                        SQL = "UPDATE scaalb SET puntos=0 WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!Numalbar
-                        conn.Execute SQL
+                        Sql = "UPDATE scaalb SET puntos=0 WHERE codtipom=" & DBSet(CodTipoMov, "T") & " and numalbar=" & Data1.Recordset!Numalbar
+                        conn.Execute Sql
                         BuscaChekc = "D"
                         Text2(1).Text = ""
                         
@@ -5694,35 +5694,35 @@ Dim SQL As String
                     
                     
                     'Le quito los puntos al cliente origen. Osea al reves de arriba
-                    SQL = "-"
-                    If Data1.Recordset!Puntos < 0 Then SQL = "+"
-                    SQL = "UPDATE sclien set puntos=puntos " & SQL & DBSet(Abs(Data1.Recordset!Puntos), "N")
-                    SQL = SQL & " WHERE codclien =" & Data1.Recordset!codClien
-                    conn.Execute SQL
+                    Sql = "-"
+                    If Data1.Recordset!Puntos < 0 Then Sql = "+"
+                    Sql = "UPDATE sclien set puntos=puntos " & Sql & DBSet(Abs(Data1.Recordset!Puntos), "N")
+                    Sql = Sql & " WHERE codclien =" & Data1.Recordset!codClien
+                    conn.Execute Sql
                     
                     
                     
                     'O borro o updateo movimientos puntos
-                    SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
-                    SQL = SQL & " AND codclien = " & Data1.Recordset!codClien
+                    Sql = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+                    Sql = Sql & " AND codclien = " & Data1.Recordset!codClien
                     If BuscaChekc = "U" Then
                         BuscaChekc = "UPDATE smovalpuntos SET codclien = " & Text1(4).Text
                     Else
                         BuscaChekc = "DELETE FROM smovalpuntos "
                     End If
-                    SQL = BuscaChekc & SQL
+                    Sql = BuscaChekc & Sql
                     
-                    ejecutar SQL, False
+                    ejecutar Sql, False
                     
                     BuscaChekc = ""
                     
                     
                 End If
                 If CDate(Me.Text1(1).Text) <> Data1.Recordset!FechaAlb Then
-                    SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
-                    SQL = SQL & " AND codclien = " & Data1.Recordset!codClien
-                    SQL = "UPDATE smovalpuntos set fechaalb= " & DBSet(Text1(1).Text, "F") & SQL
-                    ejecutar SQL, False
+                    Sql = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+                    Sql = Sql & " AND codclien = " & Data1.Recordset!codClien
+                    Sql = "UPDATE smovalpuntos set fechaalb= " & DBSet(Text1(1).Text, "F") & Sql
+                    ejecutar Sql, False
                     
                 End If
 
@@ -6520,7 +6520,7 @@ End Sub
 
 Private Sub BotonEliminarLinea()
 'Eliminar una linea De Mantenimiento. Tabla: slima1
-Dim SQL As String
+Dim Sql As String
 Dim CodproveHerbelca As String
 
     'Si no estaba modificando lineas salimos
@@ -6533,10 +6533,10 @@ Dim CodproveHerbelca As String
         'HERBELCA
         CodproveHerbelca = "codprove"
         
-        SQL = DevuelveDesdeBD(conAri, "artvario", "sartic", "codartic", CStr(Data2.Recordset!codArtic), "T", CodproveHerbelca)
+        Sql = DevuelveDesdeBD(conAri, "artvario", "sartic", "codartic", CStr(Data2.Recordset!codArtic), "T", CodproveHerbelca)
         If vUsu.Nivel > 0 Then
             
-            If Val(SQL) > 0 Then
+            If Val(Sql) > 0 Then
                 MsgBox MensajeHerbelcaEliminarVarios, vbExclamation
                 Exit Sub
             End If
@@ -6563,12 +6563,12 @@ Dim CodproveHerbelca As String
     
     
     ModificaLineas = 3 'Eliminar
-    SQL = "¿Seguro que desea eliminar la línea de Albaran?     "
-    SQL = SQL & vbCrLf & "NumLinea:  " & Data2.Recordset!numlinea & vbCrLf
-    SQL = SQL & "Almacen:  " & Format(Data2.Recordset!codAlmac, "000")
-    SQL = SQL & vbCrLf & "Artículo:  " & Data2.Recordset!codArtic & " - " & Data2.Recordset!NomArtic
+    Sql = "¿Seguro que desea eliminar la línea de Albaran?     "
+    Sql = Sql & vbCrLf & "NumLinea:  " & Data2.Recordset!numlinea & vbCrLf
+    Sql = Sql & "Almacen:  " & Format(Data2.Recordset!codAlmac, "000")
+    Sql = Sql & vbCrLf & "Artículo:  " & Data2.Recordset!codArtic & " - " & Data2.Recordset!NomArtic
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Data2.Recordset.AbsolutePosition
         If EliminarLinea Then
@@ -6593,7 +6593,7 @@ End Sub
 Private Sub ActualizaArticulosExplosivos()
 Dim Cad As String
     
-    Debug.Assert False
+    
     
     Cad = ""
     If vParamAplic.ManipuladorFitosanitarios2 Then
@@ -6838,15 +6838,15 @@ End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
 Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo Error1
 
     If Not Data2.Recordset.EOF And ModificaLineas <> 1 Then '1: Insertar
         '- ampliacion lineas
-        SQL = "select ampliaci from " & NomTablaLineas & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " and numlinea=" & Data2.Recordset!numlinea
+        Sql = "select ampliaci from " & NomTablaLineas & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " and numlinea=" & Data2.Recordset!numlinea
         Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
             Text2(16).Text = DBLet(RS.Fields(0).Value, "T")
         End If
@@ -6988,12 +6988,12 @@ Private Sub Form_Load()
             .Buttons(2).visible = False
             .Buttons(3).Image = 5
         End With
-        Label1(24).Caption = "Transportista"
-        Label1(52).Caption = "Fecha carga"
+        label1(24).Caption = "Transportista"
+        label1(52).Caption = "Fecha carga"
         
     Else
-        Label1(24).Caption = "Cod. envio"
-        Label1(52).Caption = "Fecha envio"
+        label1(24).Caption = "Cod. envio"
+        label1(52).Caption = "Fecha envio"
     
     End If
     
@@ -7002,18 +7002,18 @@ Private Sub Form_Load()
     DataGrid2.visible = vParamAplic.CartaPortes
     Text1(51).visible = vParamAplic.CartaPortes
     Text2(51).visible = vParamAplic.CartaPortes
-    Label1(36).visible = vParamAplic.CartaPortes
+    label1(36).visible = vParamAplic.CartaPortes
     imgBuscar(16).visible = vParamAplic.CartaPortes
-    Label1(66).visible = vParamAplic.CartaPortes
+    label1(66).visible = vParamAplic.CartaPortes
     Text1(52).visible = vParamAplic.CartaPortes
     Text2(52).visible = vParamAplic.CartaPortes
     imgBuscar(17).visible = vParamAplic.CartaPortes
-    Label1(66).visible = vParamAplic.CartaPortes
-    Label1(67).visible = vParamAplic.CartaPortes
+    label1(66).visible = vParamAplic.CartaPortes
+    label1(67).visible = vParamAplic.CartaPortes
     Text1(53).visible = vParamAplic.CartaPortes
     
     imgBuscar(18).visible = vParamAplic.CartaPortes
-    Label1(60).visible = vParamAplic.CartaPortes
+    label1(60).visible = vParamAplic.CartaPortes
     Text1(54).visible = vParamAplic.CartaPortes
     Text2(54).visible = vParamAplic.CartaPortes
     
@@ -7072,7 +7072,7 @@ Private Sub Form_Load()
     SSTab1.TabVisible(3) = False
       
     'Direcion envio SOLO si esta en parametros
-    Label1(53).visible = vParamAplic.DireccionesEnvio
+    label1(53).visible = vParamAplic.DireccionesEnvio
     imgBuscar(12).visible = vParamAplic.DireccionesEnvio
     Text1(42).visible = vParamAplic.DireccionesEnvio
     Text2(42).visible = vParamAplic.DireccionesEnvio
@@ -7087,52 +7087,52 @@ Private Sub Form_Load()
     
     If CodTipoMov = "ALR" Then
         Me.Caption = "Albaranes Reparación"
-        Label1(3).visible = False
-        Label1(5).visible = False
+        label1(3).visible = False
+        label1(5).visible = False
         Text1(23).visible = False
         Text1(24).visible = False
-        Label1(12).visible = False
+        label1(12).visible = False
         Text1(2).visible = False
         'Captions
-        Label1(11).Caption = "Nº Repa."
-        Label1(10).Caption = "Fecha repara."
+        label1(11).Caption = "Nº Repa."
+        label1(10).Caption = "Fecha repara."
         Text1(24).visible = False
         'Terminal
         Text1(38).visible = False
         Text1(39).visible = False
-        Label1(65).visible = False
+        label1(65).visible = False
         
     Else
-        Label1(11).Caption = "Nº Pedido"
-        Label1(10).Caption = "Fecha Pedido"
+        label1(11).Caption = "Nº Pedido"
+        label1(10).Caption = "Fecha Pedido"
         
          If CodTipoMov = "ALZ" Then Me.Caption = "Albaranes presupuestos"
         
     End If
    
     'Comprobar si es Departamento o Direccion
-    Me.Label1(1).Caption = DevuelveTextoDepto(True)
+    Me.label1(1).Caption = DevuelveTextoDepto(True)
     
     If vParamAplic.TieneCRM Then
-        Label1(55).Caption = "Observaciones CRM"
+        label1(55).Caption = "Observaciones CRM"
     Else
-        Label1(55).Caption = "Observaciones internas"
+        label1(55).Caption = "Observaciones internas"
     End If
-    Label1(55).visible = Not (CodTipoMov = "ART")
+    label1(55).visible = Not (CodTipoMov = "ART")
     Text1(44).visible = Not (CodTipoMov = "ART")
     
     ' ---- [19/10/2009] [LAURA] : añadir centro de coste a la linea
     If vEmpresa.TieneAnalitica Then
         cmdAux(9).ToolTipText = "Buscar centro coste"
         txtAux(9).Tag = "centro coste"
-        Label1(51).Caption = "Centro coste"
+        label1(51).Caption = "Centro coste"
     Else
-        Label1(51).Caption = "Proveedor"
+        label1(51).Caption = "Proveedor"
     End If
     
     
     If vParamAplic.PtosAsignar > 0 Then
-        Label1(63).visible = True
+        label1(63).visible = True
         Text2(1).visible = True
     End If
     
@@ -7174,7 +7174,7 @@ Private Sub Form_Load()
         
     
     'Aportacion a terminal
-    Label1(49).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
+    label1(49).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
     Text1(40).visible = hcoCodTipoM = "ALM" And vParamAplic.ctaAportacion <> ""
     
     
@@ -7249,7 +7249,7 @@ Dim Color As Long
     
     
     
-    Label1(50).Caption = IIf(esDEV, "Devolucion", "Nº Albaran")
+    label1(50).Caption = IIf(esDEV, "Devolucion", "Nº Albaran")
     'If esDEV Then
     '    Color = Me.BackColor 'El que tengo en desarrollo
     'Else
@@ -7751,9 +7751,10 @@ Dim Indice As Byte
         frmFitoCarnet.Show vbModal
         If CadenaDesdeOtroForm <> "" Then
         
-            If CDate(RecuperaValor(CadenaDesdeOtroForm, 2)) < CDate(Text1(1).Text) Then
-                If MsgBox("Carnet caducado.  ¿Desea continuar?", vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
-            End If
+                
+            If Not ComprobarFechaCaducidadCarnetFito(CDate(RecuperaValor(CadenaDesdeOtroForm, 2)), CDate(Text1(1).Text)) Then Exit Sub
+                
+            
             Me.Text1(45).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
             Me.Text1(46).Text = RecuperaValor(CadenaDesdeOtroForm, 3)
             Me.Text1(47).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
@@ -7917,9 +7918,9 @@ Private Sub SSTab1_Click(PreviousTab As Integer)
     End If
 
 
-    Me.Label1(35).visible = Me.SSTab1.Tab = 0
+    Me.label1(35).visible = Me.SSTab1.Tab = 0
     Me.Text2(16).visible = Me.SSTab1.Tab = 0
-    Me.Label1(51).visible = (Modo = 5) And (vEmpresa.TieneAnalitica) And SSTab1.Tab = 0
+    Me.label1(51).visible = (Modo = 5) And (vEmpresa.TieneAnalitica) And SSTab1.Tab = 0
     Me.Text2(9).visible = (Modo = 5) And (vEmpresa.TieneAnalitica) And Me.SSTab1.Tab = 0
     Me.imgBuscar(14).visible = Me.SSTab1.Tab = 0
 End Sub
@@ -7944,39 +7945,39 @@ End Sub
 
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-Dim ind As Integer
+Dim Ind As Integer
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     If Index <> 38 Then KEYdown KeyCode
     
      If KeyCode = 43 Or KeyCode = 107 Or KeyCode = 187 Then
     
         If Text1(Index).Text = "" Then
-            ind = -1
+            Ind = -1
             Select Case Index
             Case 3
-                ind = 3
+                Ind = 3
             Case 4
-                ind = 0
+                Ind = 0
             Case 6
-                ind = 1
+                Ind = 1
             Case 9
-                ind = 6
+                Ind = 6
             Case 12
-                ind = 2
+                Ind = 2
             Case 17
-                ind = 5
+                Ind = 5
             Case 14
-                ind = 4
+                Ind = 4
             Case 27, 28, 29
-                ind = Index - 20
+                Ind = Index - 20
             Case 42
-                ind = 12
+                Ind = 12
             Case 43
-                ind = 13
+                Ind = 13
             End Select
-            If ind >= 0 Then
+            If Ind >= 0 Then
                 PulsadoMas2 = True
-                PulsarTeclaMas True, ind
+                PulsarTeclaMas True, Ind
             End If
         End If
     End If
@@ -8097,6 +8098,12 @@ Dim ImpDto As Currency
             If (Modo = 4) Then
                 If (Text1(6).Text = Data1.Recordset!nifClien) Then Exit Sub
             End If
+            Text1(Index).Text = UCase(Trim(Text1(Index).Text))
+             If Not ValidarNIF_(Text1(Index).Text, True) Then
+                    Text1(Index).Text = ""
+                    PonerFoco Text1(Index)
+                End If
+            
             PonerDatosClienteVario (Text1(Index).Text)
                     
         Case 9 'Cod. Postal
@@ -8335,7 +8342,7 @@ Dim Desc As String, devuelve As String
         End If
         
         frmB.vConexionGrid = conAri  'Conexión a BD: Ariges
-        If EsCabecera > 0 Then frmB.Label1.FontSize = 11
+        If EsCabecera > 0 Then frmB.label1.FontSize = 11
 '        frmB.vBuscaPrevia = chkVistaPrevia
         '#
         frmB.Show vbModal
@@ -8414,7 +8421,7 @@ Dim B As Boolean
 
     If hcoCodTipoM <> "ALR" Then
         'sem. entrega pedido
-        Label1(12).visible = Not B
+        label1(12).visible = Not B
         Text1(2).visible = Not B
         'num oferta
         Text1(23).visible = Not B And hcoCodTipoM <> "ALR"
@@ -8424,25 +8431,25 @@ Dim B As Boolean
         Text1(38).visible = B
         'nº venta
         Text1(39).visible = B
-        Label1(65).visible = B
+        label1(65).visible = B
     
         If B Then
         'El albaran se genero a partir de un ticket
-            Me.Label1(11).Caption = "Nº Ticket"
-            Me.Label1(10).Caption = "Fecha Ticket"
-            Me.Label1(9).Caption = "Trabajador Ticket"
+            Me.label1(11).Caption = "Nº Ticket"
+            Me.label1(10).Caption = "Fecha Ticket"
+            Me.label1(9).Caption = "Trabajador Ticket"
         
             'ocultamos los datos de la oferta
-            Me.Label1(3).Caption = "Nº Venta"
-            Label1(5).Caption = "Nº Terminal"
+            Me.label1(3).Caption = "Nº Venta"
+            label1(5).Caption = "Nº Terminal"
         Else
-            Me.Label1(11).Caption = "Nº Pedido"
-            Me.Label1(10).Caption = "Fecha Pedido"
-            Me.Label1(9).Caption = "Trabajador Pedido"
+            Me.label1(11).Caption = "Nº Pedido"
+            Me.label1(10).Caption = "Fecha Pedido"
+            Me.label1(9).Caption = "Trabajador Pedido"
     
             'Mostramos los datos de la oferta
-            Me.Label1(3).Caption = "Nº Oferta"
-            Label1(5).Caption = "Fecha Oferta"
+            Me.label1(3).Caption = "Nº Oferta"
+            label1(5).Caption = "Fecha Oferta"
         End If
         
     End If
@@ -9528,7 +9535,7 @@ End Sub
 'DesdeRecuperaParaRectificativa:  Para que no inserte el punto verde
 Private Function InsertarLinea(numlinea As String, DesdeRecuperaParaRectificativa2 As Boolean) As Boolean
 'Inserta un registro en la tabla de lineas de Albaranes: slialb
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim B As Boolean
 Dim vCStock As CStock
@@ -9542,7 +9549,7 @@ Dim C As String
 
 
     InsertarLinea = False
-    SQL = ""
+    Sql = ""
     DentroTRANS = False
     
     'Conseguir el siguiente numero de linea
@@ -9558,17 +9565,17 @@ Dim C As String
     Else
         
                                                 'por si acaso lleva tasa reciclaje
-        SQL = "UPDATE " & NomTablaLineas & " SET numlinea=numlinea + 2 WHERE " & vWhere & " and numlinea >= " & LineaIntercalar
-        SQL = SQL & " order by numlinea desc " 'Para que empieza por las ultimas
-        SqlIntercalar = SQL
+        Sql = "UPDATE " & NomTablaLineas & " SET numlinea=numlinea + 2 WHERE " & vWhere & " and numlinea >= " & LineaIntercalar
+        Sql = Sql & " order by numlinea desc " 'Para que empieza por las ultimas
+        SqlIntercalar = Sql
         
         'ENERO 2018. ERROR GRAVE
         ' No actualizaba la smoval
-        SQL = "UPDATE smoval SET numlinea=numlinea + 2"
-        SQL = SQL & "  WHERE detamovi ='" & Text1(30).Text & "' AND document ='" & Text1(0).Text & "' AND "
-        SQL = SQL & " fechamov= " & DBSet(Text1(1).Text, "F") & " and numlinea >= " & LineaIntercalar
-        SQL = SQL & " order by numlinea desc"
-        SqlIntercalar2 = SQL
+        Sql = "UPDATE smoval SET numlinea=numlinea + 2"
+        Sql = Sql & "  WHERE detamovi ='" & Text1(30).Text & "' AND document ='" & Text1(0).Text & "' AND "
+        Sql = Sql & " fechamov= " & DBSet(Text1(1).Text, "F") & " and numlinea >= " & LineaIntercalar
+        Sql = Sql & " order by numlinea desc"
+        SqlIntercalar2 = Sql
         
         numlinea = LineaIntercalar
     End If
@@ -9591,16 +9598,16 @@ Dim C As String
     If B Then 'Lineas de Albaranes
     
         'Inserta en tabla "slialb"
-        SQL = "INSERT INTO " & NomTablaLineas
-        SQL = SQL & "(codtipom, numalbar,numlinea, codalmac, codartic, nomartic, ampliaci, cantidad,numbultos,precioar, dtoline1, dtoline2, importel, origpre,codprovex,numlote,codccost,pvpInferior,comisionagente,idL,ordenlin) "
-        SQL = SQL & "VALUES ('" & Text1(30).Text & "', " & Val(Text1(0).Text) & ", " & numlinea & ", " & Val(txtAux(0).Text) & ","
-        SQL = SQL & DBSet(txtAux(1).Text, "T") & ", " & DBSet(txtAux(2).Text, "T") & ", " & DBSet(Text2(16).Text, "T") & ", "
+        Sql = "INSERT INTO " & NomTablaLineas
+        Sql = Sql & "(codtipom, numalbar,numlinea, codalmac, codartic, nomartic, ampliaci, cantidad,numbultos,precioar, dtoline1, dtoline2, importel, origpre,codprovex,numlote,codccost,pvpInferior,comisionagente,idL,ordenlin) "
+        Sql = Sql & "VALUES ('" & Text1(30).Text & "', " & Val(Text1(0).Text) & ", " & numlinea & ", " & Val(txtAux(0).Text) & ","
+        Sql = Sql & DBSet(txtAux(1).Text, "T") & ", " & DBSet(txtAux(2).Text, "T") & ", " & DBSet(Text2(16).Text, "T") & ", "
         '- cantidad,numbultos
-        SQL = SQL & DBSet(txtAux(3).Text, "N") & ", " & DBSet(txtAux(10).Text, "N") & ", "
-        SQL = SQL & DBSet(txtAux(4).Text, "N") & ", " & DBSet(txtAux(6).Text, "N") & ", "
-        SQL = SQL & DBSet(txtAux(7).Text, "N") & ","
-        SQL = SQL & DBSet(txtAux(8).Text, "N") & ", "
-        SQL = SQL & DBSet(txtAux(5).Text, "T", "N") & ","
+        Sql = Sql & DBSet(txtAux(3).Text, "N") & ", " & DBSet(txtAux(10).Text, "N") & ", "
+        Sql = Sql & DBSet(txtAux(4).Text, "N") & ", " & DBSet(txtAux(6).Text, "N") & ", "
+        Sql = Sql & DBSet(txtAux(7).Text, "N") & ","
+        Sql = Sql & DBSet(txtAux(8).Text, "N") & ", "
+        Sql = Sql & DBSet(txtAux(5).Text, "T", "N") & ","
         
         
         If vParamAplic.ManipuladorFitosanitarios2 Then
@@ -9613,32 +9620,32 @@ Dim C As String
         
         If vEmpresa.TieneAnalitica Then
             '- codprove,numlote,codccost
-            SQL = SQL & "0," & DBSet(txtAux(11).Text, "T", "S") & "," & DBSet(txtAux(9).Text, "T", "S")
+            Sql = Sql & "0," & DBSet(txtAux(11).Text, "T", "S") & "," & DBSet(txtAux(9).Text, "T", "S")
         Else
             '- codprove,numlote,codccost
-            SQL = SQL & DBSet(txtAux(9).Text, "N", "N") & "," & DBSet(txtAux(11).Text, "T", "S") & "," & ValorNulo
+            Sql = Sql & DBSet(txtAux(9).Text, "N", "N") & "," & DBSet(txtAux(11).Text, "T", "S") & "," & ValorNulo
         End If
-        SQL = SQL & "," & VendeAMenorPrecio & ","
+        Sql = Sql & "," & VendeAMenorPrecio & ","
         If vParamAplic.NumeroInstalacion = 2 Then
-            SQL = SQL & DBSet(txtAux(12).Text, "N", "S")
+            Sql = Sql & DBSet(txtAux(12).Text, "N", "S")
         Else
-            SQL = SQL & "null"
+            Sql = Sql & "null"
         End If
-        SQL = SQL & "," & IIf(vParamAplic.NumeroInstalacion = vbFenollar, -1, 0)
+        Sql = Sql & "," & IIf(vParamAplic.NumeroInstalacion = vbFenollar, -1, 0)
         
         'ORDEN
         C = DevuelveDesdeBD(conAri, "max(ordenlin)", "slialb", vWhere & " AND 1", "1")
         If C = "" Then C = "0"
         If Val(C) > 0 Then C = Val(C) + 1
-        SQL = SQL & ", " & C
+        Sql = Sql & ", " & C
             
-        SQL = SQL & ")"
+        Sql = Sql & ")"
         
      Else
         Exit Function
      End If
     
-    If SQL <> "" Then
+    If Sql <> "" Then
         On Error GoTo EInsertarLinea
         conn.BeginTrans
         DentroTRANS = True
@@ -9653,7 +9660,7 @@ Dim C As String
         End If
         
         'insertar la linea
-        conn.Execute SQL
+        conn.Execute Sql
         
         'si hay control de stock para el articulo actualizar en salmac e insertar en smoval
         'en actualizar stock comprobamos si el articulo tiene control de stock
@@ -9668,12 +9675,12 @@ Dim C As String
         If ArtFitosnatiarios Then
             
             '#Este codigo esta copiado en ModificarLote
-            SQL = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-            SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!Numalbar & "," & numlinea
-            SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
-            SQL = SQL & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
+            Sql = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
+            Sql = Sql & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!Numalbar & "," & numlinea
+            Sql = Sql & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
+            Sql = Sql & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
 
-            conn.Execute SQL
+            conn.Execute Sql
             
             'Tengo que updatear la cantidad vendida
             Set miRsAux = New ADODB.Recordset
@@ -9681,15 +9688,15 @@ Dim C As String
             While Not miRsAux.EOF
                 If miRsAux!cantidad <> 0 Then
                     If miRsAux!cantidad > 0 Then
-                        SQL = "+"
+                        Sql = "+"
                     Else
-                        SQL = "-"
+                        Sql = "-"
                     End If
-                    SQL = "UPDATE slotes SET vendida=vendida " & SQL & DBSet(Abs(miRsAux!cantidad), "N")
-                    SQL = SQL & " WHERE numlotes =" & DBSet(miRsAux!numlotes, "T") & " AND codartic= " & DBSet(miRsAux!codArtic, "T")
-                    SQL = SQL & " AND fecentra= " & DBSet(miRsAux!FechaAlb, "F")
+                    Sql = "UPDATE slotes SET vendida=vendida " & Sql & DBSet(Abs(miRsAux!cantidad), "N")
+                    Sql = Sql & " WHERE numlotes =" & DBSet(miRsAux!numlotes, "T") & " AND codartic= " & DBSet(miRsAux!codArtic, "T")
+                    Sql = Sql & " AND fecentra= " & DBSet(miRsAux!FechaAlb, "F")
                 
-                    conn.Execute SQL
+                    conn.Execute Sql
                 End If
                 miRsAux.MoveNext
             Wend
@@ -9705,20 +9712,20 @@ Dim C As String
                     'Insertamos la linea del reciclado
                     
                     vWhere = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", vParamAplic.ArtReciclado, "T")
-                    SQL = "INSERT INTO " & NomTablaLineas
-                    SQL = SQL & "(codtipom, numalbar,numlinea, codalmac, codartic, nomartic, ampliaci, cantidad,  precioar,"
-                    SQL = SQL & "dtoline1, dtoline2, importel, origpre,comisionagente) "
-                    SQL = SQL & "VALUES ('" & Text1(30).Text & "', " & Val(Text1(0).Text) & ", " & numlinea + 1 & ", " & Val(txtAux(0).Text) & ","
-                    SQL = SQL & DBSet(vParamAplic.ArtReciclado, "T") & "," & DBSet(vWhere, "T") & ", Null, "
-                    SQL = SQL & DBSet(txtAux(3).Text, "N") & "," 'Cantidad. La misma
-                    SQL = SQL & DBSet(ImpReciclado, "N") & ",0,0,"
+                    Sql = "INSERT INTO " & NomTablaLineas
+                    Sql = Sql & "(codtipom, numalbar,numlinea, codalmac, codartic, nomartic, ampliaci, cantidad,  precioar,"
+                    Sql = Sql & "dtoline1, dtoline2, importel, origpre,comisionagente) "
+                    Sql = Sql & "VALUES ('" & Text1(30).Text & "', " & Val(Text1(0).Text) & ", " & numlinea + 1 & ", " & Val(txtAux(0).Text) & ","
+                    Sql = Sql & DBSet(vParamAplic.ArtReciclado, "T") & "," & DBSet(vWhere, "T") & ", Null, "
+                    Sql = Sql & DBSet(txtAux(3).Text, "N") & "," 'Cantidad. La misma
+                    Sql = Sql & DBSet(ImpReciclado, "N") & ",0,0,"
                     'Importe linea
                     ImpReciclado = ImporteFormateado(txtAux(3).Text) * ImpReciclado
-                    SQL = SQL & DBSet(ImpReciclado, "N") & ", 'A',"
+                    Sql = Sql & DBSet(ImpReciclado, "N") & ", 'A',"
                     'Comision
                     ImpReciclado = 0
-                    SQL = SQL & DBSet(ImpReciclado, "N") & ")"
-                    conn.Execute SQL
+                    Sql = Sql & DBSet(ImpReciclado, "N") & ")"
+                    conn.Execute Sql
                         
                     
                 End If 'articulo con sunida reciclado
@@ -9731,17 +9738,17 @@ Dim C As String
                     
                     ImpReciclado = ImporteFormateado(txtAux(3).Text)
     
-                    SQL = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", CStr(Data1.Recordset!codClien))
-                    SQL = " VALUES (" & Data1.Recordset!codClien & "," & Val(SQL) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!Numalbar
+                    Sql = DevuelveDesdeBD(conAri, "max(numero)", "smovalpuntos", "codclien", CStr(Data1.Recordset!codClien))
+                    Sql = " VALUES (" & Data1.Recordset!codClien & "," & Val(Sql) + 1 & "," & DBSet(Data1.Recordset!codtipom, "T") & "," & Data1.Recordset!Numalbar
                     
-                    SQL = "INSERT INTO smovalpuntos(codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov)" & SQL
-                    SQL = SQL & " ," & DBSet(Data1.Recordset!FechaAlb, "F") & ",1," & DBSet(ImpReciclado, "N") & ",now())"
-                    conn.Execute SQL
+                    Sql = "INSERT INTO smovalpuntos(codclien,numero,codtipom,numalbar,fechaalb,concepto,puntos,fecMov)" & Sql
+                    Sql = Sql & " ," & DBSet(Data1.Recordset!FechaAlb, "F") & ",1," & DBSet(ImpReciclado, "N") & ",now())"
+                    conn.Execute Sql
                 
                     
-                    SQL = "UPDATE sclien set puntos=" & DBSet(ImpReciclado, "N") & " + coalesce(puntos,0) "
-                    SQL = SQL & " WHERE codclien =" & Text1(4).Text
-                    conn.Execute SQL
+                    Sql = "UPDATE sclien set puntos=" & DBSet(ImpReciclado, "N") & " + coalesce(puntos,0) "
+                    Sql = Sql & " WHERE codclien =" & Text1(4).Text
+                    conn.Execute Sql
                 End If
             End If
             
@@ -9785,7 +9792,7 @@ End Function
 
 Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Albaran: slialb
-Dim SQL As String
+Dim Sql As String
 Dim vCStock As CStock
 Dim B As Boolean
 Dim ImpReciclado As Single
@@ -9796,7 +9803,7 @@ Dim Cantaux As Currency
     On Error GoTo EModificarLinea
 
     ModificarLinea = False
-    SQL = ""
+    Sql = ""
     
     
     Set vCStock = New CStock
@@ -9818,11 +9825,11 @@ Dim Cantaux As Currency
                     'si se ha modificado el articulo
                     If CStr(Data2.Recordset!codArtic) <> txtAux(1).Text Then
                         'si la linea tenia numero de serie vaciar los campos correspondien al albaran venta
-                        SQL = "UPDATE sserie SET codclien=" & ValorNulo & ",codtipom=" & ValorNulo & ", fechavta=" & ValorNulo & ",numalbar=" & ValorNulo & ",numline1=" & ValorNulo
-                        SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
-                        SQL = SQL & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and codtipom='" & CodTipoMov & "' and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
-                        SQL = SQL & " AND numalbar=" & Data1.Recordset!Numalbar & " AND numline1=" & Data2.Recordset!numlinea
-                        conn.Execute SQL
+                        Sql = "UPDATE sserie SET codclien=" & ValorNulo & ",codtipom=" & ValorNulo & ", fechavta=" & ValorNulo & ",numalbar=" & ValorNulo & ",numline1=" & ValorNulo
+                        Sql = Sql & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
+                        Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and codtipom='" & CodTipoMov & "' and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
+                        Sql = Sql & " AND numalbar=" & Data1.Recordset!Numalbar & " AND numline1=" & Data2.Recordset!numlinea
+                        conn.Execute Sql
                     End If
                 End If
                 'ahora leemos los valores nuevos
@@ -9837,28 +9844,28 @@ Dim Cantaux As Currency
     
             'actualizar la linea de Albaran
             If B Then
-                SQL = "UPDATE " & NomTablaLineas & " Set codalmac = " & txtAux(0).Text & ", codartic=" & DBSet(txtAux(1).Text, "T") & ", "
-                SQL = SQL & "nomartic=" & DBSet(txtAux(2).Text, "T") & ", ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
-                SQL = SQL & "cantidad= " & DBSet(txtAux(3).Text, "N") & ", numbultos=" & DBSet(txtAux(10).Text, "N") & ","
-                SQL = SQL & "precioar= " & DBSet(txtAux(4).Text, "N") & ", " 'precio
-                SQL = SQL & "dtoline1= " & DBSet(txtAux(6).Text, "N") & ", dtoline2= " & DBSet(txtAux(7).Text, "N") & ", "
-                SQL = SQL & "importel= " & DBSet(txtAux(8).Text, "N") & ", " 'Importe
-                SQL = SQL & "origpre=" & DBSet(txtAux(5).Text, "T", "S") & ","
+                Sql = "UPDATE " & NomTablaLineas & " Set codalmac = " & txtAux(0).Text & ", codartic=" & DBSet(txtAux(1).Text, "T") & ", "
+                Sql = Sql & "nomartic=" & DBSet(txtAux(2).Text, "T") & ", ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
+                Sql = Sql & "cantidad= " & DBSet(txtAux(3).Text, "N") & ", numbultos=" & DBSet(txtAux(10).Text, "N") & ","
+                Sql = Sql & "precioar= " & DBSet(txtAux(4).Text, "N") & ", " 'precio
+                Sql = Sql & "dtoline1= " & DBSet(txtAux(6).Text, "N") & ", dtoline2= " & DBSet(txtAux(7).Text, "N") & ", "
+                Sql = Sql & "importel= " & DBSet(txtAux(8).Text, "N") & ", " 'Importe
+                Sql = Sql & "origpre=" & DBSet(txtAux(5).Text, "T", "S") & ","
                 ' ---- [19/10/2009] [LAURA] : añadir centro de coste a la linea
                 If vEmpresa.TieneAnalitica Then
-                    SQL = SQL & "codccost=" & DBSet(txtAux(9).Text, "T", "S") & ","
+                    Sql = Sql & "codccost=" & DBSet(txtAux(9).Text, "T", "S") & ","
                 Else
-                    SQL = SQL & "codprovex=" & DBSet(txtAux(9).Text, "N", "N") & ","
+                    Sql = Sql & "codprovex=" & DBSet(txtAux(9).Text, "N", "N") & ","
                 End If
-                SQL = SQL & "numlote=" & DBSet(txtAux(11).Text, "T", "S") & ", "
+                Sql = Sql & "numlote=" & DBSet(txtAux(11).Text, "T", "S") & ", "
                 
                 'Junio2013
-                SQL = SQL & "pvpInferior=" & DBSet(VendeAMenorPrecio, "N") & ""
-                If vParamAplic.NumeroInstalacion = vbHerbelca Then SQL = SQL & " , comisionagente =" & DBSet(txtAux(12).Text, "N", "S")
+                Sql = Sql & "pvpInferior=" & DBSet(VendeAMenorPrecio, "N") & ""
+                If vParamAplic.NumeroInstalacion = vbHerbelca Then Sql = Sql & " , comisionagente =" & DBSet(txtAux(12).Text, "N", "S")
                 
                 
-                SQL = SQL & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & Data2.Recordset!numlinea
-                conn.Execute SQL
+                Sql = Sql & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & Data2.Recordset!numlinea
+                conn.Execute Sql
                 
                                 
                 'Si ha cambiado, si tiene el parametro... todo esta ahi
@@ -9870,23 +9877,23 @@ Dim Cantaux As Currency
                     If ArticuloConTasaReciclado(txtAux(1).Text, ImpReciclado) Then
                         
                        'Si el articulo siguiente es PV entoces lo updatearemos
-                       SQL = Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea"
+                       Sql = Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea"
                        'QUITO EL WHERE
-                       SQL = Mid(SQL, 8)
+                       Sql = Mid(Sql, 8)
                        NumRegElim = Val(DBLet(Data2.Recordset!numlinea, "N")) + 1
-                       SQL = DevuelveDesdeBD(conAri, "codartic", "slialb", SQL, CStr(NumRegElim))
+                       Sql = DevuelveDesdeBD(conAri, "codartic", "slialb", Sql, CStr(NumRegElim))
                        'En SQL tengo el codarti de la linea SIGUIENTE
                        'SI es punto verde de parametros, supondremos que esta vinculado con la linea que estamos modificando
-                       If SQL = vParamAplic.ArtReciclado Then
+                       If Sql = vParamAplic.ArtReciclado Then
                        
-                            SQL = "UPDATE " & NomTablaLineas & " SET "
-                            SQL = SQL & "cantidad= " & DBSet(txtAux(3).Text, "N") & ", "
-                            SQL = SQL & "precioar= " & DBSet(ImpReciclado, "N") & ", " 'precio
+                            Sql = "UPDATE " & NomTablaLineas & " SET "
+                            Sql = Sql & "cantidad= " & DBSet(txtAux(3).Text, "N") & ", "
+                            Sql = Sql & "precioar= " & DBSet(ImpReciclado, "N") & ", " 'precio
                             ImpReciclado = ImporteFormateado(txtAux(3).Text) * ImpReciclado
-                            SQL = SQL & "importel= " & DBSet(ImpReciclado, "N")  'Importe
+                            Sql = Sql & "importel= " & DBSet(ImpReciclado, "N")  'Importe
                             'WHERE
-                            SQL = SQL & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & NumRegElim
-                            conn.Execute SQL
+                            Sql = Sql & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & NumRegElim
+                            conn.Execute Sql
                       End If  'linea siguiente con codarti=puntoverde
                     End If  'articulo con reciclado
                 End If ' de cliente con tasa reciclado
@@ -9898,14 +9905,14 @@ Dim Cantaux As Currency
                         'Actualizamos los puntos en el cliente, el el movimputs
                         ImpReciclado = Data2.Recordset!cantidad
                         ImpReciclado = ImporteFormateado(txtAux(3).Text) - ImpReciclado
-                        SQL = "UPDATE sclien set puntos=" & DBSet(ImpReciclado, "N") & " + coalesce(puntos,0) "
-                        SQL = SQL & " WHERE codclien =" & Text1(4).Text
-                        conn.Execute SQL
+                        Sql = "UPDATE sclien set puntos=" & DBSet(ImpReciclado, "N") & " + coalesce(puntos,0) "
+                        Sql = Sql & " WHERE codclien =" & Text1(4).Text
+                        conn.Execute Sql
                                                 
-                        SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
-                        SQL = SQL & " AND codclien = " & Data1.Recordset!codClien & " AND concepto=1"
-                        SQL = "UPDATE smovalpuntos  set puntos = " & DBSet(ImporteFormateado(txtAux(3).Text), "N") & SQL
-                        conn.Execute SQL
+                        Sql = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+                        Sql = Sql & " AND codclien = " & Data1.Recordset!codClien & " AND concepto=1"
+                        Sql = "UPDATE smovalpuntos  set puntos = " & DBSet(ImporteFormateado(txtAux(3).Text), "N") & Sql
+                        conn.Execute Sql
                                                 
                                                 
                                                 
@@ -9920,21 +9927,21 @@ Dim Cantaux As Currency
                         
                         If Val(DBLet(Data2.Recordset!idL, "T")) > 0 Then
                             'Perfecto. Esta identificada la linea en el pedido
-                            SQL = "UPDATE sliped set cantidad=cantidad " & IIf(Cantaux >= 0, "+", "") & DBSet(Cantaux, "N", "N")
-                            SQL = SQL & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T")
-                            ejecutar SQL, False
+                            Sql = "UPDATE sliped set cantidad=cantidad " & IIf(Cantaux >= 0, "+", "") & DBSet(Cantaux, "N", "N")
+                            Sql = Sql & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T")
+                            ejecutar Sql, False
                          
-                            SQL = "UPDATE scaped set cerrado=0 where numpedcl in (SELECT numpedcl from sliped"
-                            SQL = SQL & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T") & " )"
-                            ejecutar SQL, False
+                            Sql = "UPDATE scaped set cerrado=0 where numpedcl in (SELECT numpedcl from sliped"
+                            Sql = Sql & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T") & " )"
+                            ejecutar Sql, False
                             
                             
                             
                             
-                            SQL = "round((cantidad * precioar) * ((100- coalesce(dtoline1,0)) * (100-coalesce(dtoline2,0))/10000),2)"
-                            SQL = "UPDATE sliped set importel=" & SQL
-                            SQL = SQL & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T")
-                            ejecutar SQL, False
+                            Sql = "round((cantidad * precioar) * ((100- coalesce(dtoline1,0)) * (100-coalesce(dtoline2,0))/10000),2)"
+                            Sql = "UPDATE sliped set importel=" & Sql
+                            Sql = Sql & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T")
+                            ejecutar Sql, False
                             
                             
                     
@@ -9945,44 +9952,44 @@ Dim Cantaux As Currency
                             'Vere si el cliente tiene articulos sin asignar
                             ' where  codclien=9000 and codartic='05619'  and idl=0
                             If Val(DBLet(Data2.Recordset!idL, "T")) = 0 Then
-                                SQL = "codclien=" & Text1(4).Text & " AND codartic=" & DBSet(txtAux(1).Text, "T") & " AND idl=0 AND cerrado>=0 and 0"
-                                SQL = DevuelveDesdeBD(conAri, "count(*)", "scaped left join  sliped  on scaped.numpedcl =sliped.numpedcl", SQL, "0")
-                                If Val(SQL) > 0 Then
+                                Sql = "codclien=" & Text1(4).Text & " AND codartic=" & DBSet(txtAux(1).Text, "T") & " AND idl=0 AND cerrado>=0 and 0"
+                                Sql = DevuelveDesdeBD(conAri, "count(*)", "scaped left join  sliped  on scaped.numpedcl =sliped.numpedcl", Sql, "0")
+                                If Val(Sql) > 0 Then
                                     Screen.MousePointer = vbHourglass
                                     'AQUI,  abrir
-                                    SQL = "select scaped.numpedcl,referenc,fecpedcl,numlinea,solicitadas,cantidad,cerrado, "
+                                    Sql = "select scaped.numpedcl,referenc,fecpedcl,numlinea,solicitadas,cantidad,cerrado, "
                                     If Text1(13).Text <> "" Then
-                                        SQL = SQL & " if(ucase(referenc)= " & DBSet(UCase(Text1(13).Text), "T") & ",0,1) "
+                                        Sql = Sql & " if(ucase(referenc)= " & DBSet(UCase(Text1(13).Text), "T") & ",0,1) "
                                     Else
-                                        SQL = SQL & " 0 "
+                                        Sql = Sql & " 0 "
                                     End If
-                                    SQL = SQL & " OrdRef FROM scaped left join  sliped  on scaped.numpedcl =sliped.numpedcl where "
-                                    SQL = SQL & " codclien=" & Text1(4).Text & " AND codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND idl=0 AND cerrado >=0 ORDER By OrdRef ,fecpedcl desc"
+                                    Sql = Sql & " OrdRef FROM scaped left join  sliped  on scaped.numpedcl =sliped.numpedcl where "
+                                    Sql = Sql & " codclien=" & Text1(4).Text & " AND codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND idl=0 AND cerrado >=0 ORDER By OrdRef ,fecpedcl desc"
                             
                             
                                     CadenaDesdeOtroForm = ""
                                     frmFacPedVinculaLine.C = "Cliente: " & Text1(4).Text & " " & Text1(5).Text
                                     frmFacPedVinculaLine.A = txtAux(1).Text & " -" & txtAux(2).Text
-                                    frmFacPedVinculaLine.lblCliente.Tag = SQL
+                                    frmFacPedVinculaLine.lblCliente.Tag = Sql
                                     frmFacPedVinculaLine.Show vbModal
                                     
                                     If CadenaDesdeOtroForm <> "" Then
-                                        SQL = DevuelveDesdeBD(conAri, "max(idl)", "sliped", "1", "1")
-                                        ContAux = Val(SQL) + 1
-                                        SQL = " ,cantidad=cantidad " & IIf(Cantaux >= 0, "+", "") & DBSet(Cantaux, "N", "N") & " WHERE " & CadenaDesdeOtroForm
+                                        Sql = DevuelveDesdeBD(conAri, "max(idl)", "sliped", "1", "1")
+                                        ContAux = Val(Sql) + 1
+                                        Sql = " ,cantidad=cantidad " & IIf(Cantaux >= 0, "+", "") & DBSet(Cantaux, "N", "N") & " WHERE " & CadenaDesdeOtroForm
                                         
-                                        SQL = "UPDATE sliped set idl=" & ContAux & SQL
-                                        ejecutar SQL, False
+                                        Sql = "UPDATE sliped set idl=" & ContAux & Sql
+                                        ejecutar Sql, False
                                         
                                         
-                                        SQL = Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & Data2.Recordset!numlinea
-                                        SQL = "UPDATE slialb set idl=" & ContAux & "  " & SQL
-                                        ejecutar SQL, False
+                                        Sql = Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & Data2.Recordset!numlinea
+                                        Sql = "UPDATE slialb set idl=" & ContAux & "  " & Sql
+                                        ejecutar Sql, False
                                                                     
                                                 
-                                        SQL = "UPDATE sliped set importel=round((cantidad * precioar) * (((100- coalesce(dtoline1,0)+coalesce(dtoline2,0))/100)),2)"
-                                        SQL = SQL & " WHERE " & CadenaDesdeOtroForm
-                                        ejecutar SQL, False
+                                        Sql = "UPDATE sliped set importel=round((cantidad * precioar) * (((100- coalesce(dtoline1,0)+coalesce(dtoline2,0))/100)),2)"
+                                        Sql = Sql & " WHERE " & CadenaDesdeOtroForm
+                                        ejecutar Sql, False
                                         
                                         
                                         CadenaDesdeOtroForm = ""
@@ -10021,28 +10028,28 @@ EModificarLinea:
 End Function
 
 Private Sub CalculoPesosBultos1()
-Dim SQL As String
-                SQL = Replace(ObtenerWhereCP(False), "scaalb", "slialb") & " AND 1"
-                SQL = " slialb.codartic=sartic.codartic AND " & SQL
-                SQL = DevuelveDesdeBD(conAri, "concat(sum(if(slialb.codartic in ('11000','11001','11003','11007','11010','11012'),cantidad,0)),'|',sum(cantidad*(coalesce(pesoarti,0))),'|')", "slialb ,sartic", SQL, "1")
+Dim Sql As String
+                Sql = Replace(ObtenerWhereCP(False), "scaalb", "slialb") & " AND 1"
+                Sql = " slialb.codartic=sartic.codartic AND " & Sql
+                Sql = DevuelveDesdeBD(conAri, "concat(sum(if(slialb.codartic in ('11000','11001','11003','11007','11010','11012'),cantidad,0)),'|',sum(cantidad*(coalesce(pesoarti,0))),'|')", "slialb ,sartic", Sql, "1")
                 
-                If SQL = "" Then SQL = "0|0|"
+                If Sql = "" Then Sql = "0|0|"
                     
-                If RecuperaValor(SQL, 1) = "" Then
+                If RecuperaValor(Sql, 1) = "" Then
                     Text1(49).Text = "0"
                 Else
-                    Text1(49).Text = CInt(TransformaPuntosComas(RecuperaValor(SQL, 1)))
+                    Text1(49).Text = CInt(TransformaPuntosComas(RecuperaValor(Sql, 1)))
                 End If
                 
-                If RecuperaValor(SQL, 2) = "" Then
+                If RecuperaValor(Sql, 2) = "" Then
                     Text1(50).Text = "0"
                 Else
-                    Text1(50).Text = Format(TransformaPuntosComas(RecuperaValor(SQL, 2)), FormatoImporte)
+                    Text1(50).Text = Format(TransformaPuntosComas(RecuperaValor(Sql, 2)), FormatoImporte)
                 End If
                 
-                SQL = "UPDATE scaalb set pesoalba =" & DBSet(ImporteFormateado(Text1(50).Text), "N")
-                SQL = SQL & ", numbultos = " & DBSet(Text1(49).Text, "N") & " " & ObtenerWhereCP(True)
-                conn.Execute SQL
+                Sql = "UPDATE scaalb set pesoalba =" & DBSet(ImporteFormateado(Text1(50).Text), "N")
+                Sql = Sql & ", numbultos = " & DBSet(Text1(49).Text, "N") & " " & ObtenerWhereCP(True)
+                conn.Execute Sql
                 
 
 
@@ -10075,14 +10082,14 @@ End Sub
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo ECargaGrid
 
     B = vDataGrid.Enabled
     
-    SQL = MontaSQLCarga(enlaza, IIf(vDataGrid.Name = "DataGrid2", 2, 1))
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez, 330
+    Sql = MontaSQLCarga(enlaza, IIf(vDataGrid.Name = "DataGrid2", 2, 1))
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez, 330
     
     CargaGrid2 vDataGrid, vData
     
@@ -10529,6 +10536,75 @@ Dim B As Boolean
                 If vParamAplic.NumeroInstalacion = 2 Then
                     If Not PrecioMinimoAlbaran Then Exit Sub
                 End If
+                
+                
+                
+                'Facturacion de Albaran de Mostrador
+                '-----------------------------------
+                frmListadoPed.FacturaSuperaImporteTicket_ = False
+                BuscaChekc = "NO"
+                If CodTipoMov = "ALM" Then
+                    BuscaChekc = ""
+                Else
+                    'Cuando herbelca factura un unico albaran de venta, tambien lo pasa a ALM (factura simplicada)
+                    'Por lo tanto
+                    If vParamAplic.NumeroInstalacion = vbHerbelca And CodTipoMov = "ALV" Then BuscaChekc = ""
+                End If
+                If BuscaChekc = "" Then
+                    If vParamAplic.SerieFacturaDirecta <> "" Then
+                        'No puede hacer facturas simplicadas a partuculares / empresas que superen cierta cantidad(maximporticketparticular / maximporticketempresa)
+                        txtAnterior = "clivario"
+                        BuscaChekc = DevuelveDesdeBD(conAri, "particular", "sclien", "codclien", Text1(4).Text, "N", txtAnterior)
+                        
+                         '17 ENERO   ARIGES-502
+                        If txtAnterior = "0" Then
+                            'Cualquier cliente IDENDTIICADO hace factura FAD
+                            frmListadoPed.FacturaSuperaImporteTicket_ = True
+                        Else
+                            If Comprobar_NIF(Text1(6).Text) Then
+                                'De varios per NIF correcto
+                                frmListadoPed.FacturaSuperaImporteTicket_ = True  'hace FAD
+                            Else
+                                Aux = Text3(55).Text
+                                If Aux = "" Then Aux = "0"
+                                If BuscaChekc = "1" Then
+                                    'particular
+                                    If ImporteFormateado(Aux) > vParamAplic.MaxImporteTicketParticular Then Aux = "S" 'Supera
+                                Else
+                                    'Empresa
+                                    If ImporteFormateado(Aux) > vParamAplic.MaxImporteTicketEmpresa Then Aux = "S"  'Supera
+                                End If
+                                If Aux = "S" Then
+                                    'Supera el importe maximo para NO hacer factura simplificada
+                                    MsgBox "Supera el maximo para realizar factura simplificada y no esta identificado el cliente", vbExclamation
+                                    Exit Sub
+                                End If
+                            End If
+                        End If ' txtAnterior = "0"
+                    End If 'factura direta
+                        
+                    txtAnterior = ""
+                End If  'buscachek
+                
+                BuscaChekc = ""
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 
                 'Facturacion de Albaran de Mostrador
                 frmListadoPed.codClien = CodTipoMov  'utilizamos esta vble para pasarle el tipo de movimiento
@@ -11300,7 +11376,7 @@ End Sub
 
 
 Private Function Eliminar(NumAlbElim As Long, SinInsertarHco As Boolean) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim MenError As String
@@ -11309,9 +11385,9 @@ Dim ParaElLog As String
     On Error GoTo FinEliminar
     conn.BeginTrans
     
-    SQL = ObtenerWhereCP(False)
+    Sql = ObtenerWhereCP(False)
     
-    MenError = DevuelveDesdeBD(conAri, "concat(count(*),'|',sum(importel),'|')", "slialb", Replace(SQL, "scaalb", "slialb") & " AND 1", "1")
+    MenError = DevuelveDesdeBD(conAri, "concat(count(*),'|',sum(importel),'|')", "slialb", Replace(Sql, "scaalb", "slialb") & " AND 1", "1")
     If MenError = "" Then MenError = "0|0|"
     ParaElLog = "Albaran: " & Text1(30).Text & Text1(0).Text & " de " & Text1(1).Text & vbCrLf
     ParaElLog = ParaElLog & Text1(4).Text & " " & Text1(5).Text & vbCrLf
@@ -11338,25 +11414,25 @@ Dim ParaElLog As String
         
         If Not SinInsertarHco Then
             Screen.MousePointer = vbHourglass
-            B = ActualizarElTraspaso(MenError, SQL, CodTipoMov, cadList)
+            B = ActualizarElTraspaso(MenError, Sql, CodTipoMov, cadList)
             Screen.MousePointer = vbDefault
         Else
             'Borramos de scaalb
-            SQL = ObtenerWhereCP(True)
-            conn.Execute "DELETE from slialb " & Replace(SQL, "scaalb", "slialb")
-            conn.Execute "DELETE from scaalb_portes " & Replace(SQL, "scaalb", "scaalb_portes")
-            conn.Execute "DELETE from scaalb " & SQL
+            Sql = ObtenerWhereCP(True)
+            conn.Execute "DELETE from slialb " & Replace(Sql, "scaalb", "slialb")
+            conn.Execute "DELETE from scaalb_portes " & Replace(Sql, "scaalb", "scaalb_portes")
+            conn.Execute "DELETE from scaalb " & Sql
             
         End If
         
         If B Then
             MenError = "Actualizando numeros de serie."
             'Actualizar los posibles num. serie de ese albaran. vaciar los campos
-            SQL = "UPDATE  sserie SET codclien=" & ValorNulo & ", codtipom=" & ValorNulo & ","
-            SQL = SQL & " fechavta=" & ValorNulo & ", numalbar=" & ValorNulo & ", numline1=" & ValorNulo
-            SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
-            SQL = SQL & " WHERE codtipom='" & CodTipoMov & "' AND numalbar=" & Data1.Recordset!Numalbar & " AND fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
-            conn.Execute SQL
+            Sql = "UPDATE  sserie SET codclien=" & ValorNulo & ", codtipom=" & ValorNulo & ","
+            Sql = Sql & " fechavta=" & ValorNulo & ", numalbar=" & ValorNulo & ", numline1=" & ValorNulo
+            Sql = Sql & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
+            Sql = Sql & " WHERE codtipom='" & CodTipoMov & "' AND numalbar=" & Data1.Recordset!Numalbar & " AND fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
+            conn.Execute Sql
             
             
            
@@ -11369,9 +11445,9 @@ Dim ParaElLog As String
                     If vParamAplic.OperacionesAseguradas Then
                         lblIndicador.Caption = "Riesgo"
                          lblIndicador.Refresh
-                        SQL = DevuelveDesdeBD(conAri, "credipriv", "sclien", "codclien", Text1(4).Text, "N")
-                        If SQL = "" Then SQL = "9"
-                        If Val(SQL) < 9 Then
+                        Sql = DevuelveDesdeBD(conAri, "credipriv", "sclien", "codclien", Text1(4).Text, "N")
+                        If Sql = "" Then Sql = "9"
+                        If Val(Sql) < 9 Then
                             'Febrero 2018 . YA NO
                             'OK tiene credito. Que actualice
                             'ActualizaRiesgoCliente CLng(Text1(4).Text)
@@ -11391,26 +11467,26 @@ Dim ParaElLog As String
                 
                 
                 'Si cambia el cliente, hay que ver
-                SQL = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
-                If Val(SQL) = "1" Then
+                Sql = DevuelveDesdeBD(conAri, "tienePuntos", "sclien", "codclien", Text1(4).Text)
+                If Val(Sql) = "1" Then
                     'El nuevo cliente tiene puntos
-                    SQL = "-"
-                    If Data1.Recordset!Puntos < 0 Then SQL = "+"
-                    SQL = "UPDATE sclien set puntos=coalesce(puntos,0) " & SQL & DBSet(Abs(Data1.Recordset!Puntos), "N")
-                    SQL = SQL & " WHERE codclien =" & Text1(4).Text
-                    conn.Execute SQL
+                    Sql = "-"
+                    If Data1.Recordset!Puntos < 0 Then Sql = "+"
+                    Sql = "UPDATE sclien set puntos=coalesce(puntos,0) " & Sql & DBSet(Abs(Data1.Recordset!Puntos), "N")
+                    Sql = Sql & " WHERE codclien =" & Text1(4).Text
+                    conn.Execute Sql
                 End If
             
             End If
             
             'Borro de smovalpuntos
-            SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
-            SQL = SQL & " AND codclien = " & Data1.Recordset!codClien
-            SQL = SQL & " AND concepto = 0"
+            Sql = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+            Sql = Sql & " AND codclien = " & Data1.Recordset!codClien
+            Sql = Sql & " AND concepto = 0"
             
                 
-            SQL = "DELETE FROM smovalpuntos " & SQL
-            conn.Execute SQL
+            Sql = "DELETE FROM smovalpuntos " & Sql
+            conn.Execute Sql
             
             
         End If
@@ -11485,14 +11561,14 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = " " & NombreTabla & ".codtipom= '" & Text1(30).Text & "' and " & NombreTabla & ".numalbar= " & Val(Text1(0).Text)
-    If EsHistorico Then SQL = SQL & " AND " & NombreTabla & ".fechaalb=" & DBSet(Text1(1).Text, "F")
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    Sql = " " & NombreTabla & ".codtipom= '" & Text1(30).Text & "' and " & NombreTabla & ".numalbar= " & Val(Text1(0).Text)
+    If EsHistorico Then Sql = Sql & " AND " & NombreTabla & ".fechaalb=" & DBSet(Text1(1).Text, "F")
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then Err.Clear
 End Function
@@ -11507,66 +11583,66 @@ Private Function MontaSQLCarga(enlaza As Boolean, QueGRid As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
     
     If QueGRid = 1 Then
-       SQL = "SELECT codtipom, numalbar, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad,numbultos, precioar, origpre, dtoline1, dtoline2, importel "
+       Sql = "SELECT codtipom, numalbar, numlinea, codalmac, codartic, nomartic, ampliaci, cantidad,numbultos, precioar, origpre, dtoline1, dtoline2, importel "
        If vEmpresa.TieneAnalitica Then
-           SQL = SQL & ",codccost"
+           Sql = Sql & ",codccost"
        Else
            'COTUBRE
            If vParamAplic.NumeroInstalacion = 2 Then
                
                If MostrarComision Then
-                   SQL = SQL & ",comisionagente,'' nomprove"   'LO que habia antes de Sep 2018
+                   Sql = Sql & ",comisionagente,'' nomprove"   'LO que habia antes de Sep 2018
                Else
-                   SQL = SQL & ",codprovex,'' nomprove"   'NUEVO
+                   Sql = Sql & ",codprovex,'' nomprove"   'NUEVO
                End If
            Else
-               SQL = SQL & ",codprovex,nomprove"
+               Sql = Sql & ",codprovex,nomprove"
            End If
        End If
-       SQL = SQL & ",numlote "
+       Sql = Sql & ",numlote "
        
        
        'Para herbelca, ponemos el codprove al final
        If vParamAplic.NumeroInstalacion = 2 Then
-           SQL = SQL & ",codprovex,if(pvpinferior=0,'',if(pvpinferior=1,'*','m')) tipoprecio"
-           If Not MostrarComision Then SQL = SQL & ",comisionagente"   'para updaear los campos
+           Sql = Sql & ",codprovex,if(pvpinferior=0,'',if(pvpinferior=1,'*','m')) tipoprecio"
+           If Not MostrarComision Then Sql = Sql & ",comisionagente"   'para updaear los campos
        End If
         
-       SQL = SQL & ", idL "
+       Sql = Sql & ", idL "
        
-       SQL = SQL & " FROM " & NomTablaLineas
+       Sql = Sql & " FROM " & NomTablaLineas
        'traza
        If vEmpresa.TieneAnalitica = False Then
-           SQL = SQL & " LEFT JOIN sprove on codprovex=codprove "
+           Sql = Sql & " LEFT JOIN sprove on codprovex=codprove "
        End If
        
        If enlaza Then
-           SQL = SQL & " " & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
-           If EsHistorico Then SQL = SQL & " and fechaalb='" & Format(Text1(1).Text, FormatoFecha) & "'"
+           Sql = Sql & " " & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
+           If EsHistorico Then Sql = Sql & " and fechaalb='" & Format(Text1(1).Text, FormatoFecha) & "'"
        Else
-           SQL = SQL & " WHERE numalbar = -1"
+           Sql = Sql & " WHERE numalbar = -1"
        End If
-       SQL = SQL & " Order by codtipom, numalbar, ordenlin, numlinea"
+       Sql = Sql & " Order by codtipom, numalbar, ordenlin, numlinea"
     
     Else
         'Matriculas en portes
-        SQL = "SELECT codtipom,numalbar,matricula,descr FROM "
-        SQL = SQL & Trim(NombreTabla) & "_portes as " & NombreTabla & " WHERE "
+        Sql = "SELECT codtipom,numalbar,matricula,descr FROM "
+        Sql = Sql & Trim(NombreTabla) & "_portes as " & NombreTabla & " WHERE "
          
         If enlaza Then
-           SQL = SQL & ObtenerWhereCP(False)
-           If EsHistorico Then SQL = SQL & " and fechaalb='" & Format(Text1(1).Text, FormatoFecha) & "'"
+           Sql = Sql & ObtenerWhereCP(False)
+           If EsHistorico Then Sql = Sql & " and fechaalb='" & Format(Text1(1).Text, FormatoFecha) & "'"
        Else
-           SQL = SQL & " false "
+           Sql = Sql & " false "
        End If
        
         
     End If
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -11750,7 +11826,7 @@ End Sub
 
 Private Function EliminarLinea() As Boolean
 Dim vCStock As CStock
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim ImpReciclado As Single
 Dim Cantaux2 As Currency
@@ -11760,8 +11836,8 @@ Dim Cantaux2 As Currency
     EliminarLinea = False
     
     'Construir la SQL para eliminar la linea de la tabla "slialb"
-    SQL = "Delete from " & NomTablaLineas & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
-    SQL = SQL & " and numlinea=" & Data2.Recordset!numlinea
+    Sql = "Delete from " & NomTablaLineas & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
+    Sql = Sql & " and numlinea=" & Data2.Recordset!numlinea
     
     
     
@@ -11776,7 +11852,7 @@ Dim Cantaux2 As Currency
     On Error GoTo EEliminarLinea
     
     conn.BeginTrans
-    conn.Execute SQL 'Eliminar linea
+    conn.Execute Sql 'Eliminar linea
     If hcoCodTipoM <> "DEV" Then
         B = vCStock.DevolverStock2
     Else
@@ -11789,23 +11865,23 @@ Dim Cantaux2 As Currency
                    'Llegado aqui, si tiene Punto verde(tasa ecologica)
                 'Y el cliente tiene tasa recliclado
                 If ClienteConTasaReciclado Then
-                    SQL = CStr(Data2.Recordset!codArtic)
-                    If ArticuloConTasaReciclado(SQL, ImpReciclado) Then
+                    Sql = CStr(Data2.Recordset!codArtic)
+                    If ArticuloConTasaReciclado(Sql, ImpReciclado) Then
                         
                        'Si el articulo siguiente es PV entoces lo updatearemos
-                       SQL = Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea"
+                       Sql = Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea"
                        'QUITO EL WHERE
-                       SQL = Mid(SQL, 8)
+                       Sql = Mid(Sql, 8)
                        NumRegElim = Val(DBLet(Data2.Recordset!numlinea, "N")) + 1
-                       SQL = DevuelveDesdeBD(conAri, "codartic", "slialb", SQL, CStr(NumRegElim))
+                       Sql = DevuelveDesdeBD(conAri, "codartic", "slialb", Sql, CStr(NumRegElim))
                        'En SQL tengo el codarti de la linea SIGUIENTE
                        'SI es punto verde de parametros, supondremos que esta vinculado con la linea que estamos modificando
-                       If SQL = vParamAplic.ArtReciclado Then
+                       If Sql = vParamAplic.ArtReciclado Then
                        
-                            SQL = "DELETE FROM " & NomTablaLineas
+                            Sql = "DELETE FROM " & NomTablaLineas
                             'WHERE
-                            SQL = SQL & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & NumRegElim
-                            conn.Execute SQL
+                            Sql = Sql & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & NumRegElim
+                            conn.Execute Sql
                       End If  'linea siguiente con codarti=puntoverde
                     End If  'articulo con reciclado
                 End If ' de cliente con tasa reciclado
@@ -11815,11 +11891,11 @@ Dim Cantaux2 As Currency
 
     'si la linea tenia numero de serie vaciar los campos correspondien al albaran venta
     If hcoCodTipoM <> "DEV" Then
-        SQL = "UPDATE sserie SET codclien=" & ValorNulo & ",codtipom=" & ValorNulo & ", fechavta=" & ValorNulo & ",numalbar=" & ValorNulo & ",numline1=" & ValorNulo
-        SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
-        SQL = SQL & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and codtipom='" & CodTipoMov & "' and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        SQL = SQL & " AND numalbar=" & Data1.Recordset!Numalbar & " AND numline1=" & Data2.Recordset!numlinea
-        conn.Execute SQL
+        Sql = "UPDATE sserie SET codclien=" & ValorNulo & ",codtipom=" & ValorNulo & ", fechavta=" & ValorNulo & ",numalbar=" & ValorNulo & ",numline1=" & ValorNulo
+        Sql = Sql & ", TieneMan=0 , NumMante= " & ValorNulo & ",coddirec=" & ValorNulo
+        Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and codtipom='" & CodTipoMov & "' and fechavta=" & DBSet(Data1.Recordset!FechaAlb, "F")
+        Sql = Sql & " AND numalbar=" & Data1.Recordset!Numalbar & " AND numline1=" & Data2.Recordset!numlinea
+        conn.Execute Sql
     End If
     
     
@@ -11827,9 +11903,9 @@ Dim Cantaux2 As Currency
         ReestablecerLotesArticulo Data2.Recordset!numlinea
         
         'Borramos de slialblotes
-        SQL = "Delete from slialblotes " & Replace(ObtenerWhereCP(True), NombreTabla, "slialblotes")
-        SQL = SQL & " and numlinea=" & Data2.Recordset!numlinea
-        conn.Execute SQL 'Eliminar linea
+        Sql = "Delete from slialblotes " & Replace(ObtenerWhereCP(True), NombreTabla, "slialblotes")
+        Sql = Sql & " and numlinea=" & Data2.Recordset!numlinea
+        conn.Execute Sql 'Eliminar linea
     End If
         
 
@@ -11839,20 +11915,20 @@ Dim Cantaux2 As Currency
         
         'Si es la linea de canje, hay que quitarla de movimientos
         If Data2.Recordset!codArtic = vParamAplic.PtosArticuloCanje Then
-            SQL = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
-            SQL = SQL & " AND codclien = " & Data1.Recordset!codClien & " AND concepto=1"
-            SQL = "DELETE FROM smovalpuntos  " & SQL
-            conn.Execute SQL
+            Sql = Replace(ObtenerWhereCP(True), "scaalb", "smovalpuntos")
+            Sql = Sql & " AND codclien = " & Data1.Recordset!codClien & " AND concepto=1"
+            Sql = "DELETE FROM smovalpuntos  " & Sql
+            conn.Execute Sql
       
-            SQL = "UPDATE sclien set puntos=" & DBSet(-1 * Data2.Recordset!cantidad, "N") & " + coalesce(puntos,0) "
-            SQL = SQL & " WHERE codclien =" & Text1(4).Text
-            conn.Execute SQL
+            Sql = "UPDATE sclien set puntos=" & DBSet(-1 * Data2.Recordset!cantidad, "N") & " + coalesce(puntos,0) "
+            Sql = Sql & " WHERE codclien =" & Text1(4).Text
+            conn.Execute Sql
         End If
     End If
     
-    SQL = "Albarán: " & Text1(30).Text & "-" & Text1(0).Text & " de " & Text1(1).Text & vbCrLf
-    SQL = SQL & "Linea: " & Data2.Recordset!codArtic & " " & DBSet(Data2.Recordset!NomArtic, "T")
-    SQL = SQL & "Uds: " & Data2.Recordset!cantidad & "    Importe:" & DBSet(Data2.Recordset!ImporteL, "N")
+    Sql = "Albarán: " & Text1(30).Text & "-" & Text1(0).Text & " de " & Text1(1).Text & vbCrLf
+    Sql = Sql & "Linea: " & Data2.Recordset!codArtic & " " & DBSet(Data2.Recordset!NomArtic, "T")
+    Sql = Sql & "Uds: " & Data2.Recordset!cantidad & "    Importe:" & DBSet(Data2.Recordset!ImporteL, "N")
 
 
     If vParamAplic.NumeroInstalacion = vbFenollar Then
@@ -11866,21 +11942,21 @@ Dim Cantaux2 As Currency
                         Cantaux2 = Data2.Recordset!cantidad
                         If Val(DBLet(Data2.Recordset!idL, "T")) > 0 Then
                             'Perfecto. Esta identificada la linea en el pedido
-                            SQL = "UPDATE sliped set cantidad=cantidad " & IIf(Cantaux2 >= 0, "+", "") & DBSet(Cantaux2, "N", "N")
-                            SQL = SQL & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T")
-                            ejecutar SQL, False
+                            Sql = "UPDATE sliped set cantidad=cantidad " & IIf(Cantaux2 >= 0, "+", "") & DBSet(Cantaux2, "N", "N")
+                            Sql = Sql & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T")
+                            ejecutar Sql, False
                             
                             
                             
-                            SQL = "UPDATE scaped set cerrado=0 where numpedcl in (SELECT numpedcl from sliped"
-                            SQL = SQL & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T") & " )"
-                            ejecutar SQL, False
+                            Sql = "UPDATE scaped set cerrado=0 where numpedcl in (SELECT numpedcl from sliped"
+                            Sql = Sql & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T") & " )"
+                            ejecutar Sql, False
                            
                             
-                            SQL = "round((cantidad * precioar) * ((100- coalesce(dtoline1,0)) * (100-coalesce(dtoline2,0))/10000),2)"
-                            SQL = "UPDATE sliped set importel=" & SQL
-                            SQL = SQL & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T")
-                            ejecutar SQL, False
+                            Sql = "round((cantidad * precioar) * ((100- coalesce(dtoline1,0)) * (100-coalesce(dtoline2,0))/10000),2)"
+                            Sql = "UPDATE sliped set importel=" & Sql
+                            Sql = Sql & " WHERE idL = " & DBLet(Data2.Recordset!idL, "T")
+                            ejecutar Sql, False
                             
                             
                             
@@ -11892,34 +11968,34 @@ Dim Cantaux2 As Currency
                             ' where  codclien=9000 and codartic='05619'  and idl=0
                             If Val(DBLet(Data2.Recordset!idL, "T")) = 0 Then
                             
-                                SQL = "codclien=" & Text1(4).Text & " AND codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND idl=0 AND 0"  'Por si queriamos cerrdos
-                                SQL = DevuelveDesdeBD(conAri, "count(*)", "scaped left join  sliped  on scaped.numpedcl =sliped.numpedcl", SQL, "0")
-                                If Val(SQL) > 0 Then
+                                Sql = "codclien=" & Text1(4).Text & " AND codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND idl=0 AND 0"  'Por si queriamos cerrdos
+                                Sql = DevuelveDesdeBD(conAri, "count(*)", "scaped left join  sliped  on scaped.numpedcl =sliped.numpedcl", Sql, "0")
+                                If Val(Sql) > 0 Then
                                     Screen.MousePointer = vbHourglass
                                     'AQUI,  abrir
-                                    SQL = "select scaped.numpedcl,referenc,fecpedcl,numlinea,solicitadas,cantidad,cerrado, "
+                                    Sql = "select scaped.numpedcl,referenc,fecpedcl,numlinea,solicitadas,cantidad,cerrado, "
                                     If Text1(13).Text <> "" Then
-                                        SQL = SQL & " if(ucase(referenc)= " & DBSet(UCase(Text1(13).Text), "T") & ",0,1) "
+                                        Sql = Sql & " if(ucase(referenc)= " & DBSet(UCase(Text1(13).Text), "T") & ",0,1) "
                                     Else
-                                        SQL = SQL & " 0 "
+                                        Sql = Sql & " 0 "
                                     End If
-                                    SQL = SQL & " OrdRef FROM scaped left join  sliped  on scaped.numpedcl =sliped.numpedcl where "
-                                    SQL = SQL & " codclien=" & Text1(4).Text & " AND codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND idl=0 AND cerrado >=0 ORDER By cerrado asc,OrdRef ,fecpedcl desc"
+                                    Sql = Sql & " OrdRef FROM scaped left join  sliped  on scaped.numpedcl =sliped.numpedcl where "
+                                    Sql = Sql & " codclien=" & Text1(4).Text & " AND codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND idl=0 AND cerrado >=0 ORDER By cerrado asc,OrdRef ,fecpedcl desc"
                             
                                     CadenaDesdeOtroForm = ""
                                     frmFacPedVinculaLine.C = "Cliente: " & Text1(4).Text & " " & Text1(5).Text
                                     frmFacPedVinculaLine.A = "Lin" & Data2.Recordset!numlinea & "-" & Data2.Recordset!codArtic & " - " & Data2.Recordset!NomArtic
-                                    frmFacPedVinculaLine.lblCliente.Tag = SQL
+                                    frmFacPedVinculaLine.lblCliente.Tag = Sql
                                     frmFacPedVinculaLine.Show vbModal
                                     
                                     If CadenaDesdeOtroForm <> "" Then
                                         
-                                        SQL = DevuelveDesdeBD(conAri, "max(idl)", "sliped", "1", "1")
-                                        ContAux = Val(SQL) + 1  'idL
-                                        SQL = " ,cantidad=cantidad " & IIf(Cantaux2 >= 0, "+", "") & DBSet(Cantaux2, "N", "N") & " WHERE " & CadenaDesdeOtroForm
+                                        Sql = DevuelveDesdeBD(conAri, "max(idl)", "sliped", "1", "1")
+                                        ContAux = Val(Sql) + 1  'idL
+                                        Sql = " ,cantidad=cantidad " & IIf(Cantaux2 >= 0, "+", "") & DBSet(Cantaux2, "N", "N") & " WHERE " & CadenaDesdeOtroForm
                                         
-                                        SQL = "UPDATE sliped set idl=" & ContAux & SQL
-                                        ejecutar SQL, False
+                                        Sql = "UPDATE sliped set idl=" & ContAux & Sql
+                                        ejecutar Sql, False
                                         
                                         
                                         'SQL = Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas) & " AND numlinea=" & data2.Recordset!numlinea
@@ -11927,9 +12003,9 @@ Dim Cantaux2 As Currency
                                         'ejecutar SQL, False
                                         Espera 0.5
                                                 
-                                        SQL = "UPDATE sliped set importel=round((cantidad * precioar) * (((100- coalesce(dtoline1,0)+coalesce(dtoline2,0))/100)),2)"
-                                        SQL = SQL & " WHERE " & CadenaDesdeOtroForm
-                                        ejecutar SQL, False
+                                        Sql = "UPDATE sliped set importel=round((cantidad * precioar) * (((100- coalesce(dtoline1,0)+coalesce(dtoline2,0))/100)),2)"
+                                        Sql = Sql & " WHERE " & CadenaDesdeOtroForm
+                                        ejecutar Sql, False
     
                                         CadenaDesdeOtroForm = ""
                                     End If
@@ -11950,7 +12026,7 @@ Dim Cantaux2 As Currency
 
     Set LOG = New cLOG
     ' 17 Venta a sabiendas riesgo
-    LOG.Insertar 37, vUsu, SQL
+    LOG.Insertar 37, vUsu, Sql
     Set LOG = Nothing
             
         
@@ -12343,6 +12419,23 @@ Dim ImprimeFluorados As Boolean
                             devuelve = "codtipom = '" & CodTipoMov & "' AND numalbar = " & Val(Text1(0).Text) & " AND numfactu is null AND 1"
                             devuelve = DevuelveDesdeBD(conAri, "count(*)", "sserie", devuelve, "1")
                             
+                            
+                            
+                            If Val(devuelve) > 0 Then
+                                'Lleva numeros de serie
+                                'Veremos si alguno es de gases fluorados. tipar:
+                                devuelve = "slialb inner join sartic on slialb.codartic=sartic.codartic inner join stipar on sartic.codtipar=stipar.codtipar"
+                                
+                                devuelve = DevuelveDesdeBD(conAri, "count(*)", devuelve, "codtipom = '" & CodTipoMov & "' AND numalbar = " & Val(Text1(0).Text) & " and impresionauxiliar", "1")
+                                If devuelve = "" Then devuelve = 0
+                            
+                            End If
+                            
+                            
+                            
+                            
+                            
+                            
                             If Val(devuelve) > 0 Then
                                 If Val(DBLet(Data1.Recordset!albImpreso, "N")) = 1 Then
                                     'pregunta
@@ -12420,25 +12513,25 @@ Private Sub MostrarNSeries(ByRef RSLineas As ADODB.Recordset, Optional Dif As St
 'Si los Nº de serie se introdujeron en ALBARAN COMPRAS se muestran
 'los Nº de serie de los articulos comprados y se seleccionan tantos como cantidad de la linea
 'Dif: si se ha modificado la cantidad pasamos la difencia con lo que habia
-Dim SQL As String
+Dim Sql As String
 Dim Campos As String
 
     On Error GoTo EMostrarNSeries
 
     If Text1(30).Text = "ART" Then
-        SQL = MostrarNSeriesGnral(RSLineas, Campos, True)
+        Sql = MostrarNSeriesGnral(RSLineas, Campos, True)
     Else
-        SQL = MostrarNSeriesGnral(RSLineas, Campos)
+        Sql = MostrarNSeriesGnral(RSLineas, Campos)
     End If
     
-   If SQL <> "" Then
+   If Sql <> "" Then
         Set frmMen = New frmMensajes
-        frmMen.cadWhere = SQL
+        frmMen.cadWhere = Sql
         
         If Dif <> "" Then
-            SQL = " WHERE (codtipom=" & DBSet(CodTipoMov, "T") & " and "
-            SQL = SQL & " numalbar=" & Text1(0).Text & " and numline1=" & Data2.Recordset!numlinea & ")"
-            frmMen.cadWHERE2 = Dif & "|" & SQL & "|"
+            Sql = " WHERE (codtipom=" & DBSet(CodTipoMov, "T") & " and "
+            Sql = Sql & " numalbar=" & Text1(0).Text & " and numline1=" & Data2.Recordset!numlinea & ")"
+            frmMen.cadWHERE2 = Dif & "|" & Sql & "|"
         Else
             If cadSel <> "" Then
                 'seleccionar lineas de nº serie de la factura a rectificar
@@ -12459,13 +12552,13 @@ End Sub
 
 
 Private Sub PedirNSeries(ByRef RS As ADODB.Recordset)
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EPedirNSeries
 
-        SQL = "El artículo tienen control de Nº de Serie." & vbCrLf & vbCrLf
-        SQL = SQL & "Introduzca los Nº De Serie." & vbCrLf
-        MsgBox SQL, vbInformation
+        Sql = "El artículo tienen control de Nº de Serie." & vbCrLf & vbCrLf
+        Sql = Sql & "Introduzca los Nº De Serie." & vbCrLf
+        MsgBox Sql, vbInformation
         PedirNSeriesGnral RS, False
         
         Set frmNSerie = New frmRepCargarNSerie
@@ -12481,7 +12574,7 @@ End Sub
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim SQL As String
+Dim Sql As String
 Dim HaEncontradoHueco As Boolean
 
     On Error GoTo EInsertarCab
@@ -12504,23 +12597,23 @@ Dim HaEncontradoHueco As Boolean
         
         If Val(Text1(0).Text) <= 0 Then Err.Raise 513, , "Error obteniendo contador. "
         
-        SQL = CadenaInsertarDesdeForm(Me)
+        Sql = CadenaInsertarDesdeForm(Me)
         
-        If SQL <> "" Then
-            If InsertarOferta(SQL, vTipoMov, HaEncontradoHueco) Then
+        If Sql <> "" Then
+            If InsertarOferta(Sql, vTipoMov, HaEncontradoHueco) Then
             
                 If vParamAplic.CartaPortes Then
                     'Vemos si el transportista tiene matricula por defecto
                     'Si es asi, la traemos
-                    SQL = "codenvio =" & Text1(29).Text & " AND defecto "
-                    SQL = DevuelveDesdeBD(conAri, "matricula", "smatriculas", SQL, "1", "T")
-                    If SQL <> "" Then
+                    Sql = "codenvio =" & Text1(29).Text & " AND defecto "
+                    Sql = DevuelveDesdeBD(conAri, "matricula", "smatriculas", Sql, "1", "T")
+                    If Sql <> "" Then
                         'Tienen un vehiculo marcado com por defecto
                         
-                        SQL = "," & DBSet(SQL, "T") & ", NULL)"
-                        SQL = "VALUES ('" & Text1(30).Text & "', " & Val(Text1(0).Text) & SQL
-                        SQL = "INSERT INTO scaalb_portes(codtipom,numalbar,matricula,descr)" & SQL
-                        If Not ejecutar(SQL, False) Then MsgBox "No se ha podido insertar el vehiculo por defecto. " & vbCrLf & SQL, vbExclamation
+                        Sql = "," & DBSet(Sql, "T") & ", NULL)"
+                        Sql = "VALUES ('" & Text1(30).Text & "', " & Val(Text1(0).Text) & Sql
+                        Sql = "INSERT INTO scaalb_portes(codtipom,numalbar,matricula,descr)" & Sql
+                        If Not ejecutar(Sql, False) Then MsgBox "No se ha podido insertar el vehiculo por defecto. " & vbCrLf & Sql, vbExclamation
                             
                     End If
                     
@@ -12556,15 +12649,15 @@ Private Sub ComprobarNSeriesLineas(numlinea As String)
 'Si NO se realiza control Nº series en compras pedirlos ahora
 'Si se realiza control Nº Series en compras verificar que efectivamente estan introducidos
 'y mostrarlos para seleccionarlos
-Dim SQL As String
+Dim Sql As String
 Dim RSLineas As ADODB.Recordset
 Dim cadWhere As String
 Dim Dif As Single
 
     'Comprobar si el Articulo tiene control de Nº de Serie
-    SQL = DevuelveDesdeBDNew(conAri, "sartic", "nseriesn", "codartic", txtAux(1).Text, "T")
+    Sql = DevuelveDesdeBDNew(conAri, "sartic", "nseriesn", "codartic", txtAux(1).Text, "T")
     
-    If SQL = "1" Then 'Hay NºSerie para el Articulo
+    If Sql = "1" Then 'Hay NºSerie para el Articulo
         'si estamos insertando
         If Modo = 5 Then
             If ModificaLineas = 1 Then 'Insertar
@@ -12584,13 +12677,13 @@ Dim Dif As Single
         cadWhere = cadWhere & " numalbar=" & Text1(0).Text & " and numlinea=" & numlinea
     
         'Seleccionamos aquellas lineas de albaran que tienen Nº de Serie
-        SQL = "SELECT slialb.codartic, sum(cantidad) as cantidad, numlinea "
-        SQL = SQL & " FROM slialb INNER JOIN sartic on slialb.codartic=sartic.codartic "
-        SQL = SQL & cadWhere & " And nseriesn = 1 "
-        SQL = SQL & " GROUP BY codartic ORDER BY Codartic "
+        Sql = "SELECT slialb.codartic, sum(cantidad) as cantidad, numlinea "
+        Sql = Sql & " FROM slialb INNER JOIN sartic on slialb.codartic=sartic.codartic "
+        Sql = Sql & cadWhere & " And nseriesn = 1 "
+        Sql = Sql & " GROUP BY codartic ORDER BY Codartic "
 
         Set RSLineas = New ADODB.Recordset
-        RSLineas.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RSLineas.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         Me.cmdAux(1).Tag = Text1(0).Text 'Num Albaran
         Me.cmdAux(0).Tag = numlinea 'Num Linea
@@ -12603,19 +12696,19 @@ Dim Dif As Single
             If ModificaLineas = 1 Then 'Insertando la linea
                 'Comprobar que efectivamente estan en tabla sserie los NºSerie del Articulo
                 ' y que no esten asignados ya a otro albaran de venta
-                SQL = " select distinct count(numserie) from sserie where codartic=" & DBSet(txtAux(1).Text, "T") & " and (numalbar='' or isnull(numalbar))"
+                Sql = " select distinct count(numserie) from sserie where codartic=" & DBSet(txtAux(1).Text, "T") & " and (numalbar='' or isnull(numalbar))"
                 '=== Laura 17/01/2007
                 'y que no este asignados a una factura
-                SQL = SQL & " and (numfactu='' or isnull(numfactu))"
+                Sql = Sql & " and (numfactu='' or isnull(numfactu))"
                 '===
-                If RegistrosAListar(SQL) = 0 Then 'No hay Nº de Serie para elegir
+                If RegistrosAListar(Sql) = 0 Then 'No hay Nº de Serie para elegir
                     PedirNSeries RSLineas
                 Else
                     MostrarNSeries RSLineas
                 End If
             ElseIf ModificaLineas = 2 Then
-                SQL = " select distinct count(numserie) from sserie " & Replace(cadWhere, "numlinea", "numline1")
-                If RegistrosAListar(SQL) > 0 Then
+                Sql = " select distinct count(numserie) from sserie " & Replace(cadWhere, "numlinea", "numline1")
+                If RegistrosAListar(Sql) > 0 Then
                     MostrarNSeries RSLineas, CStr(Dif)
                 End If
             End If
@@ -12628,7 +12721,7 @@ End Sub
 
 
 Private Sub BotonNSeries()
-Dim cadWhere As String, SQL As String
+Dim cadWhere As String, Sql As String
 Dim RSLineas As ADODB.Recordset
 
     If Me.Data1.Recordset!EsTicket Then
@@ -12657,18 +12750,18 @@ Dim RSLineas As ADODB.Recordset
     cadWhere = cadWhere & " and numalbar=" & Text1(0).Text
     
     'Seleccionamos aquellas lineas de albaran que tienen Nº de Serie
-    SQL = "SELECT numlinea, slialb.codartic, sum(cantidad) as cantidad "
-    SQL = SQL & " FROM slialb INNER JOIN sartic on slialb.codartic=sartic.codartic "
-    SQL = SQL & cadWhere & " And nseriesn = 1 "
+    Sql = "SELECT numlinea, slialb.codartic, sum(cantidad) as cantidad "
+    Sql = Sql & " FROM slialb INNER JOIN sartic on slialb.codartic=sartic.codartic "
+    Sql = Sql & cadWhere & " And nseriesn = 1 "
     
     'Pudioera ser que tuvieran un mismo articulo wen dos lineas, y por lo tanto
     'el articulo tendria numeros de sr asociados a distintas lineas
     'por lo tanto hay que agrupar por numlinea TB
-    SQL = SQL & " GROUP BY codartic,numlinea ORDER BY Codartic "
+    Sql = Sql & " GROUP BY codartic,numlinea ORDER BY Codartic "
     
 
     Set RSLineas = New ADODB.Recordset
-    RSLineas.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RSLineas.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not RSLineas.EOF Then
         'Comprobar si NO Hay Nº SERIE en Compras y si no se realizo alli
@@ -12685,7 +12778,7 @@ End Sub
 
 Private Sub PedirNSeriesT(ByRef RS As ADODB.Recordset)
 Dim RSseries As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim linea As Integer
 
     On Error GoTo EPedirNSeries
@@ -12696,21 +12789,21 @@ Dim linea As Integer
         While Not RS.EOF
             linea = 0
             'Cargar los Nº de serie asignados
-            SQL = "SELECT numserie, codartic,nummante FROM sserie "
-            SQL = SQL & " WHERE codtipom='" & Text1(30).Text & "' and "
-            SQL = SQL & "numalbar=" & Text1(0).Text
-            SQL = SQL & " and numline1=" & RS!numlinea
-            SQL = SQL & " ORDER BY codartic "
+            Sql = "SELECT numserie, codartic,nummante FROM sserie "
+            Sql = Sql & " WHERE codtipom='" & Text1(30).Text & "' and "
+            Sql = Sql & "numalbar=" & Text1(0).Text
+            Sql = Sql & " and numline1=" & RS!numlinea
+            Sql = Sql & " ORDER BY codartic "
             Set RSseries = New ADODB.Recordset
-            RSseries.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RSseries.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RSseries.EOF
                 linea = linea + 1
-                SQL = "UPDATE tmpnseries SET numserie=" & DBSet(RSseries!numSerie, "T")
-                SQL = SQL & ", nummante = " & DBSet(RSseries!nummante, "T")
-                SQL = SQL & " WHERE codartic=" & DBSet(RS!codArtic, "T")
-                SQL = SQL & " and numlinealb=" & RS!numlinea
-                SQL = SQL & " and numlinea=" & linea
-                conn.Execute SQL
+                Sql = "UPDATE tmpnseries SET numserie=" & DBSet(RSseries!numSerie, "T")
+                Sql = Sql & ", nummante = " & DBSet(RSseries!nummante, "T")
+                Sql = Sql & " WHERE codartic=" & DBSet(RS!codArtic, "T")
+                Sql = Sql & " and numlinealb=" & RS!numlinea
+                Sql = Sql & " and numlinea=" & linea
+                conn.Execute Sql
                 RSseries.MoveNext
             Wend
             RS.MoveNext
@@ -12736,7 +12829,7 @@ Private Sub CargarNumSeries()
 'Insertar un registro en la tabla "sserie" por cada uno de los
 'Nº de Serie introducidos en la Tabla Temporal o actualizarlo
 Dim RStmp As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 
     On Error GoTo ECargar
@@ -12744,21 +12837,21 @@ Dim B As Boolean
     conn.BeginTrans
     
     'Limpiar primero los Nº de serie asignados al ALV y luego volver a cargarlos
-    SQL = "UPDATE sserie SET codtipom=" & ValorNulo & ", numalbar=" & ValorNulo & ", fechavta="
-    SQL = SQL & ValorNulo & ", numline1=" & ValorNulo
+    Sql = "UPDATE sserie SET codtipom=" & ValorNulo & ", numalbar=" & ValorNulo & ", fechavta="
+    Sql = Sql & ValorNulo & ", numline1=" & ValorNulo
     'Enero 2010
     'Tambien reestablezco los valores de tieneman y numeromantenimiento
-     SQL = SQL & ", TieneMan=0 , NumMante= " & ValorNulo & ", coddirec= " & ValorNulo
+     Sql = Sql & ", TieneMan=0 , NumMante= " & ValorNulo & ", coddirec= " & ValorNulo
     
-    SQL = SQL & " WHERE codtipom=" & DBSet(Text1(30).Text, "T") & " and numalbar=" & Text1(0).Text & " AND year(fechavta)=" & Year(Text1(1).Text)
-    conn.Execute SQL
+    Sql = Sql & " WHERE codtipom=" & DBSet(Text1(30).Text, "T") & " and numalbar=" & Text1(0).Text & " AND year(fechavta)=" & Year(Text1(1).Text)
+    conn.Execute Sql
     
     'Recuperar los Nº Serie de ese articulo cargados en la Temporal
     'Seleccionar los nº de serie cargados en la temporal: tmpnseries
-    SQL = "SELECT * FROM tmpnseries WHERE codusu=" & vUsu.Codigo
-    SQL = SQL & " ORDER BY codartic, numlinealb, numlinea "
+    Sql = "SELECT * FROM tmpnseries WHERE codusu=" & vUsu.Codigo
+    Sql = Sql & " ORDER BY codartic, numlinealb, numlinea "
     Set RStmp = New ADODB.Recordset
-    RStmp.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RStmp.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                 
     B = True
     While Not RStmp.EOF And B
@@ -13140,7 +13233,7 @@ End Function
 
 Private Sub CalcularDatosFactura()
 Dim i As Integer
-Dim cadWhere As String, SQL As String
+Dim cadWhere As String, Sql As String
 Dim vFactu As CFactura
 Dim CambiarValoresIVA As Boolean
 
@@ -13152,8 +13245,8 @@ Dim CambiarValoresIVA As Boolean
 
     'Comprobar que hay lineas de albaran para calcular totales
     cadWhere = ObtenerWhereCP(False)
-    SQL = "Select count(*) from " & NomTablaLineas & " Where " & Replace(cadWhere, NombreTabla, NomTablaLineas)
-    If RegistrosAListar(SQL) = 0 Then Exit Sub
+    Sql = "Select count(*) from " & NomTablaLineas & " Where " & Replace(cadWhere, NombreTabla, NomTablaLineas)
+    If RegistrosAListar(Sql) = 0 Then Exit Sub
     
     Set vFactu = New CFactura
     vFactu.DtoPPago = CCur(ComprobarCero(Text1(15).Text))
@@ -13277,7 +13370,7 @@ End Sub
 'cadSerie = "INSERT INTO slialb(codtipom,numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre) "
 'cadSerie = cadSerie & " SELECT '" & Text1(30).Text & "' as codtipom," & Text1(0).Text & " as numalbar,numlinea,codalmac,codartic,nomartic,ampliaci,cantidad,precioar,dtoline1,dtoline2,importel,origpre FROM slifac WHERE " & CadenaSeleccion
  Dim RS As ADODB.Recordset
- Dim SQL As String
+ Dim Sql As String
  Dim i As Integer
  Dim cadI As String
  Dim numlin As String
@@ -13297,10 +13390,10 @@ End Sub
         
         cadI = ""
     
-        SQL = "SELECT * FROM slifac WHERE " & cadWhere
+        Sql = "SELECT * FROM slifac WHERE " & cadWhere
         Set RL = New ADODB.Recordset
         Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not RS.EOF
             txtAux(0).Text = RS!codAlmac
             txtAux(1).Text = RS!codArtic
@@ -13352,26 +13445,26 @@ End Sub
             If InsertarLinea(numlin, True) Then
                 If vParamAplic.ManipuladorFitosanitarios2 Then
                     'Vere si esa linea tenia fitosanitarios y los meto
-                    SQL = "SELECT * FROM slifaclotes WHERE " & cadWhere
-                    SQL = SQL & " AND numlinea= " & RS!numlinea
+                    Sql = "SELECT * FROM slifaclotes WHERE " & cadWhere
+                    Sql = Sql & " AND numlinea= " & RS!numlinea
                     
-                    RL.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    RL.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     While Not RL.EOF
-                        SQL = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic) VALUES "
-                        SQL = SQL & "('" & Text1(30).Text & "', " & Val(Text1(0).Text) & "," & RS!numlinea & ","
-                        SQL = SQL & RL!sublinea & "," & DBSet(-RL!cantidad, "N") & ","
-                        SQL = SQL & DBSet(RL!numLote, "T") & "," & DBSet(RL!fecentra, "F") & "," & DBSet(RS!codArtic, "T") & ")"
-                        If ejecutar(SQL, False) Then
-                            SQL = "UPDATE slotes SET vendida=vendida "
+                        Sql = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic) VALUES "
+                        Sql = Sql & "('" & Text1(30).Text & "', " & Val(Text1(0).Text) & "," & RS!numlinea & ","
+                        Sql = Sql & RL!sublinea & "," & DBSet(-RL!cantidad, "N") & ","
+                        Sql = Sql & DBSet(RL!numLote, "T") & "," & DBSet(RL!fecentra, "F") & "," & DBSet(RS!codArtic, "T") & ")"
+                        If ejecutar(Sql, False) Then
+                            Sql = "UPDATE slotes SET vendida=vendida "
                             If RL!cantidad > 0 Then
-                                SQL = SQL & " - "
+                                Sql = Sql & " - "
                             Else
-                                SQL = SQL & " + "
+                                Sql = Sql & " + "
                             End If
-                            SQL = SQL & DBSet(Abs(RL!cantidad), "N") & " WHERE codartic = " & DBSet(RS!codArtic, "T")
-                            SQL = SQL & " AND numlotes = " & DBSet(RL!numLote, "T")
-                            SQL = SQL & " AND fecentra = " & DBSet(RL!fecentra, "F")
-                            ejecutar SQL, False
+                            Sql = Sql & DBSet(Abs(RL!cantidad), "N") & " WHERE codartic = " & DBSet(RS!codArtic, "T")
+                            Sql = Sql & " AND numlotes = " & DBSet(RL!numLote, "T")
+                            Sql = Sql & " AND fecentra = " & DBSet(RL!fecentra, "F")
+                            ejecutar Sql, False
                         End If
                         RL.MoveNext
                     Wend
@@ -13483,7 +13576,7 @@ End Function
 
 
 Private Sub DevolverNumSeries()
-Dim SQL As String
+Dim Sql As String
 Dim cadWhere As String
 Dim RS As ADODB.Recordset
 
@@ -13493,13 +13586,13 @@ Dim RS As ADODB.Recordset
     If IsNull(Me.Data1.Recordset!Numfactu) Then Exit Sub
         
     cadWhere = ObtenerWhereCP(True)
-    SQL = "select slialb.codartic,abs(cantidad) as cantidad,numlinea"
-    SQL = SQL & " from slialb inner join scaalb on slialb.codtipom=scaalb.codtipom and scaalb.numalbar=slialb.numalbar "
-    SQL = SQL & " inner join sserie on slialb.codartic=sserie.codartic and sserie.numfactu=scaalb.numfactu and sserie.codclien=scaalb.codclien "
+    Sql = "select slialb.codartic,abs(cantidad) as cantidad,numlinea"
+    Sql = Sql & " from slialb inner join scaalb on slialb.codtipom=scaalb.codtipom and scaalb.numalbar=slialb.numalbar "
+    Sql = Sql & " inner join sserie on slialb.codartic=sserie.codartic and sserie.numfactu=scaalb.numfactu and sserie.codclien=scaalb.codclien "
     '-- LAURA: 02/07/2007
 '    SQL = SQL & " inner join scafac1 on scafac1.codtipom=scaalb.codtipmf and scafac1.numfactu=scaalb.numfactu and scafac1.fecfactu=scaalb.fecfactu "
 '    SQL = SQL & " inner join sserie on scafac1.codtipoa=sserie.codtipom and scafac1.numalbar=sserie.numalbar and scafac1.fechaalb=sserie.fechavta "
-    SQL = SQL & cadWhere & " and scaalb.numfactu=" & CStr(Me.Data1.Recordset!Numfactu)
+    Sql = Sql & cadWhere & " and scaalb.numfactu=" & CStr(Me.Data1.Recordset!Numfactu)
 '    If Me.Data1.Recordset!codtipmf = "FAV" Then SQL = SQL & " AND codtipom='ALV'"
     '--
 
@@ -13508,24 +13601,24 @@ Dim RS As ADODB.Recordset
     
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'Hay articulos con nº de serie en las lineas del albaran rectificativo
     'que hay que quitar de los nº de serie que tenia asignados
     'estamos devolviendo nº serie y pedimos los que vamos a devolver y a estos
     'le limpiamos los campos de venta de la tabla sserie
     If Not RS.EOF Then
-        SQL = "select sserie.numserie, sserie.codartic, sartic.nomartic"
-        SQL = SQL & " from slialb inner join scaalb on slialb.codtipom=scaalb.codtipom and scaalb.numalbar=slialb.numalbar "
+        Sql = "select sserie.numserie, sserie.codartic, sartic.nomartic"
+        Sql = Sql & " from slialb inner join scaalb on slialb.codtipom=scaalb.codtipom and scaalb.numalbar=slialb.numalbar "
         '-- LAURA: 02/07/2007
 '        SQL = SQL & " inner join scafac1 on scafac1.codtipom=scaalb.codtipmf and scafac1.numfactu=scaalb.numfactu and scafac1.fecfactu=scaalb.fecfactu "
 '        SQL = SQL & " inner join sserie on scafac1.codtipoa=sserie.codtipom and scafac1.numalbar=sserie.numalbar and scafac1.fechaalb=sserie.fechavta "
-        SQL = SQL & " inner join sserie on slialb.codartic=sserie.codartic and sserie.numfactu=scaalb.numfactu  and sserie.codclien=scaalb.codclien "
+        Sql = Sql & " inner join sserie on slialb.codartic=sserie.codartic and sserie.numfactu=scaalb.numfactu  and sserie.codclien=scaalb.codclien "
         '--
-        SQL = SQL & " inner join sartic on sserie.codartic=sartic.codartic "
-        SQL = SQL & cadWhere & " and scaalb.numfactu=" & CStr(Me.Data1.Recordset!Numfactu)
+        Sql = Sql & " inner join sartic on sserie.codartic=sartic.codartic "
+        Sql = Sql & cadWhere & " and scaalb.numfactu=" & CStr(Me.Data1.Recordset!Numfactu)
     
-        MostrarNSeries RS, , SQL
+        MostrarNSeries RS, , Sql
     End If
     RS.Close
     Set RS = Nothing
@@ -14790,7 +14883,7 @@ End Function
 'Lotes fitosantiarios
 ' Los pide, O no segun hay muchos o pocos
 Private Function DatosLotesFitosOk(ByRef ArticuloConFitosantiarios As Boolean) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim CadenaInsertTmpLotes  As String
 Dim NumerloLote As String
 Dim CuantosLotesDistintos As Integer
@@ -14799,8 +14892,8 @@ Dim B As Boolean
 
     
     ArticuloConFitosantiarios = False
-    SQL = DevuelveDesdeBD(conAri, "numserie", "sartic", "codartic", txtAux(1).Text, "T")
-    If SQL = "" Then
+    Sql = DevuelveDesdeBD(conAri, "numserie", "sartic", "codartic", txtAux(1).Text, "T")
+    If Sql = "" Then
         'OK. Salimos YA
         DatosLotesFitosOk = True
         Exit Function
@@ -14814,34 +14907,37 @@ Dim B As Boolean
     If Trim(Text1(45).Text) = "" Then
         
         'Esto sera para el CHOLI , en Navarrres
-        SQL = DevuelveDesdeBD(conAri, "ManipuladorNumCarnet", "sclien", "codclien", Text1(4).Text)
-        If SQL = "" Then
+        Sql = DevuelveDesdeBD(conAri, "ManipuladorNumCarnet", "sclien", "codclien", Text1(4).Text)
+        If Sql = "" Then
             'Veo si tiene autirzados
-            SQL = DevuelveDesdeBD(conAri, "numcarnet", "sclienmani", "codclien", Text1(4).Text)
+            Sql = DevuelveDesdeBD(conAri, "numcarnet", "sclienmani", "codclien", Text1(4).Text)
         End If
         
-        If SQL <> "" Then
+        If Sql <> "" Then
             'Llamamos al manipulador de carnet fitosnaitarios
             CadenaDesdeOtroForm = ""
             frmFitoCarnet.Cliente = Val(Text1(4).Text)
             frmFitoCarnet.Show vbModal
             If CadenaDesdeOtroForm <> "" Then
                 
-                SQL = "UPDATE scaalb SET ManipuladorNumCarnet = " & DBSet(RecuperaValor(CadenaDesdeOtroForm, 1), "T")
-                SQL = SQL & ",ManipuladorFecCaducidad =" & DBSet(RecuperaValor(CadenaDesdeOtroForm, 2), "T")
-                SQL = SQL & ",ManipuladorNombre = " & DBSet(RecuperaValor(CadenaDesdeOtroForm, 3), "T")
-                SQL = SQL & ", TipoCarnet =" & IIf(UCase(RecuperaValor(CadenaDesdeOtroForm, 4)) = "CUALIFICADO", 2, 1)
-                SQL = SQL & ObtenerWhereCP(True)
-                If ejecutar(SQL, False) Then
-                    ' ManipuladorFecCaducidad  ManipuladorNombre  TipoCarnet
-                    Me.Text1(45).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
-                    Me.Text1(46).Text = RecuperaValor(CadenaDesdeOtroForm, 3)
-                    Me.Text1(47).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
-                    Text2(0).Text = RecuperaValor(CadenaDesdeOtroForm, 4)
-                    'IIf(miRsAux!Tipo = 2, "Cualificado", "Básico")
-                    Me.Text1(48).Text = IIf(UCase(Text2(0).Text) = "CUALIFICADO", 2, 1)
+                If ComprobarFechaCaducidadCarnetFito(CDate(RecuperaValor(CadenaDesdeOtroForm, 2)), CDate(Text1(1).Text)) Then
+                    
+                    
+                    Sql = "UPDATE scaalb SET ManipuladorNumCarnet = " & DBSet(RecuperaValor(CadenaDesdeOtroForm, 1), "T")
+                    Sql = Sql & ",ManipuladorFecCaducidad =" & DBSet(RecuperaValor(CadenaDesdeOtroForm, 2), "T")
+                    Sql = Sql & ",ManipuladorNombre = " & DBSet(RecuperaValor(CadenaDesdeOtroForm, 3), "T")
+                    Sql = Sql & ", TipoCarnet =" & IIf(UCase(RecuperaValor(CadenaDesdeOtroForm, 4)) = "CUALIFICADO", 2, 1)
+                    Sql = Sql & ObtenerWhereCP(True)
+                    If ejecutar(Sql, False) Then
+                        ' ManipuladorFecCaducidad  ManipuladorNombre  TipoCarnet
+                        Me.Text1(45).Text = RecuperaValor(CadenaDesdeOtroForm, 1)
+                        Me.Text1(46).Text = RecuperaValor(CadenaDesdeOtroForm, 3)
+                        Me.Text1(47).Text = RecuperaValor(CadenaDesdeOtroForm, 2)
+                        Text2(0).Text = RecuperaValor(CadenaDesdeOtroForm, 4)
+                        'IIf(miRsAux!Tipo = 2, "Cualificado", "Básico")
+                        Me.Text1(48).Text = IIf(UCase(Text2(0).Text) = "CUALIFICADO", 2, 1)
+                    End If
                 End If
-                
             End If
         End If
 
@@ -14864,12 +14960,12 @@ Dim B As Boolean
         
         
         
-        SQL = "select numlotes,fecentra,Codartic,canentra - vendida"
-        SQL = SQL & "  disponible from slotes where "
-        SQL = SQL & " codartic=" & DBSet(txtAux(1).Text, "T") & " and canentra - vendida  >0 order by fecentra "
+        Sql = "select numlotes,fecentra,Codartic,canentra - vendida"
+        Sql = Sql & "  disponible from slotes where "
+        Sql = Sql & " codartic=" & DBSet(txtAux(1).Text, "T") & " and canentra - vendida  >0 order by fecentra "
       
         Set miRsAux = New ADODB.Recordset
-        miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         NumRegElim = 0
         
 
@@ -14894,7 +14990,7 @@ Dim B As Boolean
                 'CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(txtAux(2).Text, "T") & "," & DBSet(txtAux2(2).Text, "T")
                 CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(miRsAux!disponible * 100, "N")
                 CadenaInsertTmpLotes = CadenaInsertTmpLotes & ",0," & DBSet(miRsAux!numlotes, "T") & ")"
-                SQL = miRsAux!disponible 'por si solo hay uno
+                Sql = miRsAux!disponible 'por si solo hay uno
                
                 miRsAux.MoveNext
                
@@ -14914,14 +15010,14 @@ Dim B As Boolean
         'Con lo cual, que haremos, pondremos
         
         If NumRegElim = 1 Then
-            If CCur(SQL) < ImporteFormateado(txtAux(3).Text) Then
-                MsgBox "Cantidad en el lote insuficiente:" & SQL, vbExclamation
+            If CCur(Sql) < ImporteFormateado(txtAux(3).Text) Then
+                MsgBox "Cantidad en el lote insuficiente:" & Sql, vbExclamation
                 
             Else
                 'Donde va la cantidad asignada en el SQL es en : ,0,'
                 'Luego reeplazo esto por la cantidad del albaran
-                SQL = TransformaComasPuntos(CStr(ImporteFormateado(txtAux(3).Text)))
-                CadenaInsertTmpLotes = Replace(CadenaInsertTmpLotes, ",0,'", "," & SQL & ",'")
+                Sql = TransformaComasPuntos(CStr(ImporteFormateado(txtAux(3).Text)))
+                CadenaInsertTmpLotes = Replace(CadenaInsertTmpLotes, ",0,'", "," & Sql & ",'")
                 B = True
             End If
         Else
@@ -14936,12 +15032,12 @@ Dim B As Boolean
                     
                 Else
                     'Hay suficiente en este LOTE. Volvemos a abri , PARA este lote y volvemos a cargar el SQL
-                    SQL = "select numlotes,fecentra,Codartic,canentra - vendida"
-                    SQL = SQL & "  disponible from slotes where "
-                    SQL = SQL & " codartic=" & DBSet(txtAux(1).Text, "T") & " and canentra - vendida  >0"
-                    SQL = SQL & " AND numlotes= " & DBSet(NumerloLote, "T") & " order by fecentra "
+                    Sql = "select numlotes,fecentra,Codartic,canentra - vendida"
+                    Sql = Sql & "  disponible from slotes where "
+                    Sql = Sql & " codartic=" & DBSet(txtAux(1).Text, "T") & " and canentra - vendida  >0"
+                    Sql = Sql & " AND numlotes= " & DBSet(NumerloLote, "T") & " order by fecentra "
                     Set miRsAux = New ADODB.Recordset
-                    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     CadenaInsertTmpLotes = "" 'Vamos a volver a cargar el SQL de insert in lotes
                     CantidadEnTotal = ImporteFormateado(txtAux(3).Text)
                     NumRegElim = 0
@@ -15027,7 +15123,7 @@ Dim J As Integer
 Dim LotesArticulos
 Dim IncioBusqueda As Integer
 Dim fin As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim CadenaOR As String
 
         Set miRsAux = New ADODB.Recordset
@@ -15049,14 +15145,14 @@ Dim CadenaOR As String
         miRsAux.Close
         
             CadenaInsertTmpLotes = ""
-            SQL = "select codartic,numlotes,fecentra,canentra-vendida disponible from slotes where "
-            SQL = SQL & " codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and canentra-vendida >0  "
+            Sql = "select codartic,numlotes,fecentra,canentra-vendida disponible from slotes where "
+            Sql = Sql & " codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " and canentra-vendida >0  "
             If CadenaOR <> "" Then
                 CadenaOR = Mid(CadenaOR, 2)
-                SQL = SQL & "  OR numlotes in(" & CadenaOR & ")"
+                Sql = Sql & "  OR numlotes in(" & CadenaOR & ")"
             End If
-            SQL = SQL & "  order by fecentra "
-            miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Sql = Sql & "  order by fecentra "
+            miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             NumRegElim = 0
             While Not miRsAux.EOF
                 NumRegElim = NumRegElim + 1
@@ -15066,32 +15162,33 @@ Dim CadenaOR As String
                 'CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(txtAux(2).Text, "T") & "," & DBSet(txtAux2(2).Text, "T")
                 CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(miRsAux!disponible * 100, "N") & ","
                                 
-                SQL = "|" & miRsAux!numlotes & "#@#"
+                Sql = "|" & miRsAux!numlotes & "#@#"
                 fin = False
                 IncioBusqueda = 1
                 
                 While Not fin
                     
                      
-                    J = InStr(IncioBusqueda, LotesArticulos, SQL)
+                    J = InStr(IncioBusqueda, LotesArticulos, Sql)
                     If J > 0 Then
-                        J = J + Len(SQL)
-                        SQL = Mid(LotesArticulos, J, 10)
+                        J = J + Len(Sql)
+                        Sql = Mid(LotesArticulos, J, 10)
                         
-                        If SQL = Format(miRsAux!fecentra, "dd/mm/yyyy") Then
+                        If Sql = Format(miRsAux!fecentra, "dd/mm/yyyy") Then
                             'OK, esta es la linea
-                            SQL = Trim(Mid(LotesArticulos, J + 10, 10))
+                            Sql = Trim(Mid(LotesArticulos, J + 10, 10))
+                            Sql = TransformaComasPuntos(Sql)
                             fin = True
                         Else
-                            SQL = "|" & miRsAux!numlotes & "#@#"   'Vuelve a la busqueda
+                            Sql = "|" & miRsAux!numlotes & "#@#"   'Vuelve a la busqueda
                             IncioBusqueda = InStr(J, LotesArticulos, "|")
                         End If
                     Else
-                        SQL = "0"
+                        Sql = "0"
                         fin = True
                     End If
                 Wend
-                CadenaInsertTmpLotes = CadenaInsertTmpLotes & SQL
+                CadenaInsertTmpLotes = CadenaInsertTmpLotes & Sql
                 
                 CadenaInsertTmpLotes = CadenaInsertTmpLotes & "," & DBSet(miRsAux!numlotes, "T") & ")"
                 
@@ -15130,18 +15227,18 @@ Dim CadenaOR As String
                         ReestablecerLotesArticulo Data2.Recordset!numlinea
                         
                         'Borramos la linea de lotes
-                        SQL = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!Numalbar
-                        SQL = SQL & " AND numlinea =" & Data2.Recordset!numlinea
-                        SQL = "DELETE FROM slialblotes WHERE " & SQL
-                        conn.Execute SQL
+                        Sql = "codtipom ='" & Data1.Recordset!codtipom & "' AND numalbar =" & Data1.Recordset!Numalbar
+                        Sql = Sql & " AND numlinea =" & Data2.Recordset!numlinea
+                        Sql = "DELETE FROM slialblotes WHERE " & Sql
+                        conn.Execute Sql
                         Espera 0.4
                         
-                        SQL = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
-                        SQL = SQL & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!Numalbar & "," & Data2.Recordset!numlinea
-                        SQL = SQL & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
-                        SQL = SQL & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
+                        Sql = "INSERT INTO slialblotes(codtipom,numalbar,numlinea,sublinea,cantidad,numlote,fecentra,codartic)"
+                        Sql = Sql & " SELECT '" & Data1.Recordset!codtipom & "'," & Data1.Recordset!Numalbar & "," & Data2.Recordset!numlinea
+                        Sql = Sql & " , numlinea , Cantidad, numlotes,fechaalb,codartic "
+                        Sql = Sql & " FROM tmpnlotes  WHERE codusu = " & vUsu.Codigo & " and cantidad <>0 "
             
-                        conn.Execute SQL
+                        conn.Execute Sql
                         
                         'Tengo que updatear la cantidad vendida
                         Set miRsAux = New ADODB.Recordset
@@ -15149,15 +15246,15 @@ Dim CadenaOR As String
                         While Not miRsAux.EOF
                             If miRsAux!cantidad <> 0 Then
                                 If miRsAux!cantidad > 0 Then
-                                    SQL = "+"
+                                    Sql = "+"
                                 Else
-                                    SQL = "-"
+                                    Sql = "-"
                                 End If
-                                SQL = "UPDATE slotes SET vendida=vendida " & SQL & DBSet(Abs(miRsAux!cantidad), "N")
-                                SQL = SQL & " WHERE numlotes =" & DBSet(miRsAux!numlotes, "T") & " AND codartic= " & DBSet(miRsAux!codArtic, "T")
-                                SQL = SQL & " AND fecentra= " & DBSet(miRsAux!FechaAlb, "F")
+                                Sql = "UPDATE slotes SET vendida=vendida " & Sql & DBSet(Abs(miRsAux!cantidad), "N")
+                                Sql = Sql & " WHERE numlotes =" & DBSet(miRsAux!numlotes, "T") & " AND codartic= " & DBSet(miRsAux!codArtic, "T")
+                                Sql = Sql & " AND fecentra= " & DBSet(miRsAux!FechaAlb, "F")
                             
-                                conn.Execute SQL
+                                conn.Execute Sql
                             End If
                             miRsAux.MoveNext
                         Wend
@@ -15594,7 +15691,7 @@ End Sub
 
 
 Private Function InsertarModificarMatricula() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rc As Byte
     'Pequeña comprobacion
     InsertarModificarMatricula = False
@@ -15605,25 +15702,25 @@ Dim Rc As Byte
         Exit Function
     End If
         'matriculas
-        SQL = "codenvio=" & Text1(29).Text & " AND matricula"
-        SQL = DevuelveDesdeBD(conAri, "codenvio", "smatriculas", SQL, txtAux2(0).Text, "T")
-        If SQL = "" Then
-            SQL = "Transportista " & Text1(29).Text & " - " & Text2(29).Text & vbCrLf & vbCrLf
-            SQL = SQL & "Matricula: " & txtAux2(0).Text & "    ¿Crear en base de datos?"
-            Rc = MsgBox(SQL, vbQuestion + vbYesNoCancel)
+        Sql = "codenvio=" & Text1(29).Text & " AND matricula"
+        Sql = DevuelveDesdeBD(conAri, "codenvio", "smatriculas", Sql, txtAux2(0).Text, "T")
+        If Sql = "" Then
+            Sql = "Transportista " & Text1(29).Text & " - " & Text2(29).Text & vbCrLf & vbCrLf
+            Sql = Sql & "Matricula: " & txtAux2(0).Text & "    ¿Crear en base de datos?"
+            Rc = MsgBox(Sql, vbQuestion + vbYesNoCancel)
             If Rc = vbCancel Then Exit Function
             If Rc = vbYes Then
-                SQL = "INSERT INTO smatriculas (matricula  ,codenvio  ,titulo ,defecto) VALUES ("
-                SQL = SQL & DBSet(txtAux2(0).Text, "T") & "," & Text1(29).Text & "," & DBSet(txtAux2(1).Text, "T", "N") & ",0)"
-                If Not ejecutar(SQL, False) Then Exit Function
+                Sql = "INSERT INTO smatriculas (matricula  ,codenvio  ,titulo ,defecto) VALUES ("
+                Sql = Sql & DBSet(txtAux2(0).Text, "T") & "," & Text1(29).Text & "," & DBSet(txtAux2(1).Text, "T", "N") & ",0)"
+                If Not ejecutar(Sql, False) Then Exit Function
             End If
         End If
-        SQL = "REPLACE INTO scaalb_portes(codtipom,numalbar,matricula,descr)"
-        SQL = SQL & "VALUES ('" & Text1(30).Text & "', " & Val(Text1(0).Text)
-        SQL = SQL & "," & DBSet(txtAux2(0).Text, "T") & ", " & DBSet(txtAux2(1).Text, "T") & ")"
+        Sql = "REPLACE INTO scaalb_portes(codtipom,numalbar,matricula,descr)"
+        Sql = Sql & "VALUES ('" & Text1(30).Text & "', " & Val(Text1(0).Text)
+        Sql = Sql & "," & DBSet(txtAux2(0).Text, "T") & ", " & DBSet(txtAux2(1).Text, "T") & ")"
         
-    If Not ejecutar(SQL, True) Then
-        MsgBox SQL, vbExclamation
+    If Not ejecutar(Sql, True) Then
+        MsgBox Sql, vbExclamation
     Else
         InsertarModificarMatricula = True
     End If

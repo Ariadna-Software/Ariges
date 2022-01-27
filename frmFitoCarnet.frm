@@ -186,7 +186,7 @@ Public Cliente As Long
 Private WithEvents frmCli As frmBasico2
 Attribute frmCli.VB_VarHelpID = -1
 
-Dim cad As String
+Dim Cad As String
 
 Private Sub cmdAceptar_Click()
     If ListView1.ListItems.Count = 0 Then Exit Sub
@@ -235,7 +235,7 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub frmCli_DatoSeleccionado(CadenaSeleccion As String)
-    cad = CadenaSeleccion
+    Cad = CadenaSeleccion
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
@@ -285,17 +285,17 @@ Dim Continuar As Boolean
     
     If Text1.Text <> "" Then
     
-        cad = "Select nomclien elnom ,nifclien elnif ,clivario,ManipuladortipoCarnet as tipo,ManipuladorNumCarnet as nume,ManipuladorFecCaducidad as feccad"
-        cad = cad & " from sclien where codclien =" & Text1.Text
+        Cad = "Select nomclien elnom ,nifclien elnif ,clivario,ManipuladortipoCarnet as tipo,ManipuladorNumCarnet as nume,ManipuladorFecCaducidad as feccad"
+        Cad = Cad & " from sclien where codclien =" & Text1.Text
         Set miRsAux = New ADODB.Recordset
-        miRsAux.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        miRsAux.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         NumRegElim = 0
         Continuar = False
         If miRsAux.EOF Then
-            cad = "No existe el cliente"
+            Cad = "No existe el cliente"
         Else
             If miRsAux!Clivario = 1 Then
-                cad = "Cliente de varios"
+                Cad = "Cliente de varios"
             Else
                 'OK, vamos p'alla
                 Text2.Text = miRsAux!elnom
@@ -307,14 +307,14 @@ Dim Continuar As Boolean
         miRsAux.Close
         
         If Not Continuar Then
-            MsgBox cad, vbExclamation
+            MsgBox Cad, vbExclamation
            
             
         Else
             'Vemos si tiene AUTORIZADOS
-            cad = "SELECT cif elnif,nombre elnom,tipocarnet as tipo,numcarnet as nume,fcaducidad  as feccad FROM sclienmani "
-            cad = cad & " WHERE codclien = " & Text1.Text
-            miRsAux.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Cad = "SELECT cif elnif,nombre elnom,tipocarnet as tipo,numcarnet as nume,fcaducidad  as feccad FROM sclienmani "
+            Cad = Cad & " WHERE codclien = " & Text1.Text
+            miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not miRsAux.EOF
                 AnyadeItem False
                 miRsAux.MoveNext
@@ -346,6 +346,10 @@ Private Sub AnyadeItem(DelPPal As Boolean)
     ListView1.ListItems(NumRegElim).SubItems(1) = miRsAux!elnom
     ListView1.ListItems(NumRegElim).SubItems(2) = DBLet(miRsAux!nume, "T")
     ListView1.ListItems(NumRegElim).SubItems(3) = Format(miRsAux!feccad, "dd/mm/yyyy")
+    If Trim(ListView1.ListItems(NumRegElim).SubItems(3)) = "" Then
+        ListView1.ListItems(NumRegElim).SubItems(3) = "01/01/1900"
+        ListView1.ListItems(NumRegElim).ForeColor = vbRed
+    End If
     ListView1.ListItems(NumRegElim).SubItems(4) = IIf(miRsAux!Tipo = 2, "Cualificado", "Básico")
     If Not DelPPal Then ListView1.ListItems(NumRegElim).SubItems(5) = "Autorizado"
     If NumRegElim = 1 Then Set ListView1.SelectedItem = ListView1.ListItems(NumRegElim)

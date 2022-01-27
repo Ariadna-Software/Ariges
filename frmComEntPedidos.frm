@@ -697,20 +697,20 @@ Begin VB.Form frmComEntPedidos2
       TabCaption(1)   =   "Direcciones/Observaciones/Totales"
       TabPicture(1)   =   "frmComEntPedidos.frx":0AF2
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(30)"
-      Tab(1).Control(1)=   "Text1(29)"
-      Tab(1).Control(2)=   "FrameFactura"
-      Tab(1).Control(3)=   "FrameHco"
-      Tab(1).Control(4)=   "FrameDirFactura"
-      Tab(1).Control(5)=   "FrameDirMercancia"
-      Tab(1).Control(6)=   "Text1(21)"
-      Tab(1).Control(7)=   "Text1(20)"
-      Tab(1).Control(8)=   "Text1(19)"
-      Tab(1).Control(9)=   "Text1(18)"
-      Tab(1).Control(10)=   "Text1(17)"
-      Tab(1).Control(11)=   "Label1(48)"
-      Tab(1).Control(12)=   "Label1(47)"
-      Tab(1).Control(13)=   "Label1(45)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(47)"
+      Tab(1).Control(2)=   "Label1(48)"
+      Tab(1).Control(3)=   "Text1(17)"
+      Tab(1).Control(4)=   "Text1(18)"
+      Tab(1).Control(5)=   "Text1(19)"
+      Tab(1).Control(6)=   "Text1(20)"
+      Tab(1).Control(7)=   "Text1(21)"
+      Tab(1).Control(8)=   "FrameDirMercancia"
+      Tab(1).Control(9)=   "FrameDirFactura"
+      Tab(1).Control(10)=   "FrameHco"
+      Tab(1).Control(11)=   "FrameFactura"
+      Tab(1).Control(12)=   "Text1(29)"
+      Tab(1).Control(13)=   "Text1(30)"
       Tab(1).ControlCount=   14
       Begin VB.TextBox Text1 
          BeginProperty Font 
@@ -4900,7 +4900,7 @@ End Sub
 
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-Dim Ind As Integer
+Dim ind As Integer
 Dim B As Boolean
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
@@ -4913,30 +4913,30 @@ Dim B As Boolean
             If Text1(Index).SelLength = Len(Text1(Index).Text) Then B = True
         End If
         If B Then
-                Ind = -1
+                ind = -1
                 Select Case Index
                 Case 2
-                    Ind = 5
+                    ind = 5
                 Case 3
-                    Ind = 2
+                    ind = 2
                 Case 4
-                    Ind = 0
+                    ind = 0
                 Case 6
-                    Ind = 6
+                    ind = 6
                 Case 9
-                    Ind = 1
+                    ind = 1
                 Case 12
-                    Ind = 3
+                    ind = 3
                 Case 15
-                    Ind = 4
+                    ind = 4
                 Case 22, 23
-                    Ind = Index - 15
+                    ind = Index - 15
                 Case 27
-                    Ind = 11
+                    ind = 11
                 End Select
-                If Ind >= 0 Then
+                If ind >= 0 Then
                     PulsadoMas2 = True
-                    PulsarTeclaMas True, Ind
+                    PulsarTeclaMas True, ind
                 End If
             End If
         End If
@@ -6342,7 +6342,7 @@ End Sub
 Private Sub ObtenerPrecioCompra()
 Dim vPrecio As CPreciosCom
 Dim Cad As String
-Dim aux2 As String
+Dim Aux2 As String
 
     On Error GoTo EPrecios
     
@@ -6367,11 +6367,11 @@ Dim aux2 As String
         'Septiembre 2010   'Descuentos
         vPrecio.CodigoArtic = txtAux(1).Text
         vPrecio.CodigoProve = Text1(4).Text
-        Cad = vPrecio.ObtenerDescuentos2(Text1(1).Text, aux2)
+        Cad = vPrecio.ObtenerDescuentos2(Text1(1).Text, Aux2)
         If Cad = "" Then Cad = "0"
-        If aux2 = "" Then aux2 = "0"
+        If Aux2 = "" Then Aux2 = "0"
         txtAux(5).Text = Cad
-        txtAux(6).Text = aux2
+        txtAux(6).Text = Aux2
     
     End If
     PonerFormatoDecimal_Single txtAux(4), 9   '10,5
@@ -6878,7 +6878,7 @@ End Function
 Private Function InsertarLineasAlbaran(NumAlb As String, FechaAlb As String, FechaEntradaMercancia As String) As Boolean
 'Inserta en la tabla de lineas de albaran (slialb)
 'IN -> TipoM, numAlb
-Dim SQL2 As String
+Dim Sql2 As String
 Dim RS As ADODB.Recordset
 Dim ImpLinea As String
 Dim TipoDto As Byte
@@ -6904,43 +6904,43 @@ On Error GoTo EInsertarLinAlb
     
         'NO insert directo.
         'Es o bien pq no es completio o pq tiene tasa reciclado
-        SQL2 = "select * from " & NomTablaLineas
-        SQL2 = SQL2 & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
-        SQL2 = SQL2 & " ORDER BY numlinea"
+        Sql2 = "select * from " & NomTablaLineas
+        Sql2 = Sql2 & Replace(ObtenerWhereCP(True), NombreTabla, NomTablaLineas)
+        Sql2 = Sql2 & " ORDER BY numlinea"
         Set RS = New ADODB.Recordset
-        RS.Open SQL2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         numlinea = 1
         While Not RS.EOF 'Para cada linea de pedido insertar una de albaran si recibidas >0
-            SQL2 = ""
+            Sql2 = ""
             If AlbCompleto Then
                 'Va la linea entera
-                SQL2 = "INSERT INTO slialp (numalbar, fechaalb, codprove, numlinea,codartic, codalmac, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,codccost) "
-                SQL2 = SQL2 & " VALUES(" & DBSet(NumAlb, "T") & ", " & DBSet(FechaAlb, "F") & ", " & Val(Text1(4).Text) & ", " & numlinea & ", "
-                SQL2 = SQL2 & DBSet(RS!codArtic, "T") & "," & RS!codAlmac & ", " & DBSet(RS!NomArtic, "T") & ", " & DBSet(RS!Ampliaci, "T") & ", "
-                SQL2 = SQL2 & DBSet(RS!cantidad, "N") & ", " & DBSet(RS!precioar, "S") & ", " & DBSet(RS!dtoline1, "N") & ", " & DBSet(RS!dtoline2, "N") & ", "
-                SQL2 = SQL2 & DBSet(RS!ImporteL, "N") & ","
-                SQL2 = SQL2 & DBSet(RS!CodCCost, "T", "S") & ")"
+                Sql2 = "INSERT INTO slialp (numalbar, fechaalb, codprove, numlinea,codartic, codalmac, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,codccost,numpedV) "
+                Sql2 = Sql2 & " VALUES(" & DBSet(NumAlb, "T") & ", " & DBSet(FechaAlb, "F") & ", " & Val(Text1(4).Text) & ", " & numlinea & ", "
+                Sql2 = Sql2 & DBSet(RS!codArtic, "T") & "," & RS!codAlmac & ", " & DBSet(RS!NomArtic, "T") & ", " & DBSet(RS!Ampliaci, "T") & ", "
+                Sql2 = Sql2 & DBSet(RS!cantidad, "N") & ", " & DBSet(RS!precioar, "S") & ", " & DBSet(RS!dtoline1, "N") & ", " & DBSet(RS!dtoline2, "N") & ", "
+                Sql2 = Sql2 & DBSet(RS!ImporteL, "N") & "," & DBSet(RS!CodCCost, "T", "S") & ","
+                Sql2 = Sql2 & DBSet(RS!numPedV, "N", "S") & ")"
                 cantidad = RS!cantidad
                 ImpLinea = RS!ImporteL
             Else
                 If RS!recibida > 0 Then
                     TipoDto = DevuelveDesdeBDNew(conAri, "sprove", "tipodtos", "codprove", Text1(4).Text, "N")
                     ImpLinea = CalcularImporte(RS!recibida, RS!precioar, RS!dtoline1, RS!dtoline2, TipoDto)
-                    SQL2 = "INSERT INTO slialp (numalbar, fechaalb, codprove, numlinea,codartic, codalmac, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,codccost) "
-                    SQL2 = SQL2 & " VALUES(" & DBSet(NumAlb, "T") & ", " & DBSet(FechaAlb, "F") & ", " & Val(Text1(4).Text) & ", " & numlinea & ", "
-                    SQL2 = SQL2 & DBSet(RS!codArtic, "T") & "," & RS!codAlmac & ", " & DBSet(RS!NomArtic, "T") & ", " & DBSet(RS!Ampliaci, "T") & ", "
-                    SQL2 = SQL2 & DBSet(RS!recibida, "N") & ", " & DBSet(RS!precioar, "S") & ", " & DBSet(RS!dtoline1, "N") & ", " & DBSet(RS!dtoline2, "N") & ", "
-                    SQL2 = SQL2 & DBSet(ImpLinea, "N") & ","
-                    SQL2 = SQL2 & DBSet(RS!CodCCost, "T", "S") & ")"
+                    Sql2 = "INSERT INTO slialp (numalbar, fechaalb, codprove, numlinea,codartic, codalmac, nomartic, ampliaci, cantidad, precioar, dtoline1, dtoline2, importel,codccost,numpedV) "
+                    Sql2 = Sql2 & " VALUES(" & DBSet(NumAlb, "T") & ", " & DBSet(FechaAlb, "F") & ", " & Val(Text1(4).Text) & ", " & numlinea & ", "
+                    Sql2 = Sql2 & DBSet(RS!codArtic, "T") & "," & RS!codAlmac & ", " & DBSet(RS!NomArtic, "T") & ", " & DBSet(RS!Ampliaci, "T") & ", "
+                    Sql2 = Sql2 & DBSet(RS!recibida, "N") & ", " & DBSet(RS!precioar, "S") & ", " & DBSet(RS!dtoline1, "N") & ", " & DBSet(RS!dtoline2, "N") & ", "
+                    Sql2 = Sql2 & DBSet(ImpLinea, "N") & "," & DBSet(RS!CodCCost, "T", "S") & ","
+                    Sql2 = Sql2 & DBSet(RS!numPedV, "N", "S") & ")"
                     cantidad = RS!recibida
                 End If
             End If
             
             
             
-            If SQL2 <> "" Then
+            If Sql2 <> "" Then
                 
-                conn.Execute SQL2, , adCmdText
+                conn.Execute Sql2, , adCmdText
                 
                 
                 'AQui habria que hacer lo del stock
@@ -6955,19 +6955,19 @@ On Error GoTo EInsertarLinAlb
                 If vParamAplic.ArtReciclado <> "" Then
                     If ArticuloConTasaReciclado(CStr(RS!codArtic), ImpReciclado) Then
                         ImpLinea = Round2(cantidad * ImpReciclado, 2)
-                        SQL2 = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", vParamAplic.ArtReciclado, "T")
+                        Sql2 = DevuelveDesdeBD(conAri, "nomartic", "sartic", "codartic", vParamAplic.ArtReciclado, "T")
                         'OCTUBRE 2011
                         'Error. Ponia rs!codartic en lugar de artrecicla: SQL2 = numlinea & ", " & DBSet(RS!codArtic, "T") .....
-                        SQL2 = numlinea & ", " & DBSet(vParamAplic.ArtReciclado, "T") & "," & RS!codAlmac & ", " & DBSet(SQL2, "T") & ", " & DBSet("", "T") & ", "
-                        SQL2 = " VALUES(" & DBSet(NumAlb, "T") & ", " & DBSet(FechaAlb, "F") & ", " & Val(Text1(4).Text) & ", " & SQL2
+                        Sql2 = numlinea & ", " & DBSet(vParamAplic.ArtReciclado, "T") & "," & RS!codAlmac & ", " & DBSet(Sql2, "T") & ", " & DBSet("", "T") & ", "
+                        Sql2 = " VALUES(" & DBSet(NumAlb, "T") & ", " & DBSet(FechaAlb, "F") & ", " & Val(Text1(4).Text) & ", " & Sql2
                         'SQL2 = SQL2 & DBSet(Cantidad, "N") & ", " & DBSet(ImpReciclado, "S") & ", " & DBSet(RS!dtoline1, "N") & ", " & DBSet(RS!dtoline2, "N") & ", "
-                        SQL2 = SQL2 & DBSet(cantidad, "N") & ", " & DBSet(ImpReciclado, "S") & ",0,0,"
-                        SQL2 = SQL2 & DBSet(ImpLinea, "N") & ","
-                        SQL2 = SQL2 & DBSet(RS!CodCCost, "T", "S") & ")"
-                        SQL2 = "INSERT INTO slialp (numalbar, fechaalb, codprove, numlinea,codartic, codalmac, nomartic, ampliaci, " & _
-                            "cantidad, precioar, dtoline1, dtoline2, importel,codccost) " & SQL2
+                        Sql2 = Sql2 & DBSet(cantidad, "N") & ", " & DBSet(ImpReciclado, "S") & ",0,0,"
+                        Sql2 = Sql2 & DBSet(ImpLinea, "N") & ","
+                        Sql2 = Sql2 & DBSet(RS!CodCCost, "T", "S") & ")"
+                        Sql2 = "INSERT INTO slialp (numalbar, fechaalb, codprove, numlinea,codartic, codalmac, nomartic, ampliaci, " & _
+                            "cantidad, precioar, dtoline1, dtoline2, importel,codccost) " & Sql2
                         
-                        conn.Execute SQL2
+                        conn.Execute Sql2
                         numlinea = numlinea + 1
             
                     End If

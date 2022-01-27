@@ -1362,7 +1362,7 @@ ECarga:
 End Sub
 
 'Esta funcion sustituye a LlamaLineas
-Private Sub CargaTxtAux(visible As Boolean, Limpiar As Boolean)
+Private Sub CargaTxtAux(visible As Boolean, limpiar As Boolean)
 'IN: visible: si es true ponerlos visibles en la posición adecuada
 '    limpiar: si es true vaciar los txtAux
 Dim i As Byte
@@ -1371,14 +1371,14 @@ Dim alto As Single
     If Not visible Then
         'Fijamos el alto (ponerlo en la parte inferior del form)
         For i = 0 To txtAux.Count - 1
-            txtAux(i).top = 290
+            txtAux(i).Top = 290
         Next i
-        Me.cmdAux.top = 290
-        Me.cboAux.top = 290
+        Me.cmdAux.Top = 290
+        Me.cboAux.Top = 290
     Else
         DeseleccionaGrid Me.DataGrid1
         CargarComboAux
-        If Limpiar Then 'Vaciar los textBox (Vamos a Insertar)
+        If limpiar Then 'Vaciar los textBox (Vamos a Insertar)
             For i = 0 To txtAux.Count - 1
                 txtAux(i).Text = ""
                 If i <> 1 Then txtAux(i).Locked = False
@@ -1405,19 +1405,19 @@ Dim alto As Single
         End If
         
         If DataGrid1.Row < 0 Then
-            alto = DataGrid1.top + 240
+            alto = DataGrid1.Top + 240
         Else
-            alto = DataGrid1.top + DataGrid1.RowTop(DataGrid1.Row) + 10
+            alto = DataGrid1.Top + DataGrid1.RowTop(DataGrid1.Row) + 10
         End If
         
         'Fijamos altura y posición Top
         For i = 0 To txtAux.Count - 1
-            txtAux(i).top = alto
+            txtAux(i).Top = alto
             txtAux(i).Height = DataGrid1.RowHeight
         Next i
-        Me.cmdAux.top = alto
+        Me.cmdAux.Top = alto
         Me.cmdAux.Height = DataGrid1.RowHeight
-        cboAux.top = alto - 5
+        cboAux.Top = alto - 5
         
         'Fijamos anchura y posicion Left
         txtAux(0).Left = DataGrid1.Left + 340 'codartic
@@ -1957,7 +1957,7 @@ End Sub
 
 
 Private Sub LimpiarCampos()
-    Limpiar Me   'Metodo general: Limpia los controles TextBox
+    limpiar Me   'Metodo general: Limpia los controles TextBox
     'Aqui va el especifico de cada form es
     '### a mano
     Me.chkImpresion.Value = 0
@@ -2927,18 +2927,21 @@ Dim SQL As String
 Dim RS As ADODB.Recordset
 On Error GoTo EInsertarLineas
 
-    SQL = "SELECT codmovim, numlinea, codartic, cantidad, tipomovi, motimovi from slimov where "
-    SQL = SQL & " codmovim =" & Data1.Recordset!codMovim
+    'Diciembre
+    SQL = "SELECT codmovim, numlinea, slimov.codartic, cantidad, tipomovi, motimovi,preciomp,preciouc,preciove from slimov left join sartic on slimov.codartic=sartic.codartic "
+    SQL = SQL & " WHERE codmovim =" & Data1.Recordset!codMovim
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     RS.MoveFirst
     While Not RS.EOF
-        SQL = "INSERT INTO slhmov (codmovim, fecmovim, numlinea, codartic, cantidad, tipomovi, motimovi)"
+        SQL = "INSERT INTO slhmov (codmovim, fecmovim, numlinea, codartic, cantidad, tipomovi, motimovi, preciomphco ,preciopvphco ,preciouchco)"
         SQL = SQL & " VALUES (" & RS.Fields(0).Value & ", '" & Format(Data1.Recordset!fecmovim, "yyyy-mm-dd") & "', "
         SQL = SQL & RS.Fields(1).Value & ", " & DBSet(RS.Fields(2).Value, "T") & ", "
         SQL = SQL & DBSet(RS.Fields(3).Value, "N") & ", " & RS.Fields(4).Value
-        SQL = SQL & ", '" & RS.Fields(5).Value & "')"
+        SQL = SQL & ", '" & RS.Fields(5).Value & "',"
+        'Dicimebre 2021
+        SQL = SQL & DBSet(RS!PrecioMP, "N") & ", " & DBSet(RS!preciove, "N") & ", " & DBSet(RS!precioUC, "N") & ")"
         conn.Execute SQL
         RS.MoveNext
     Wend

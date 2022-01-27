@@ -169,7 +169,7 @@ Begin VB.Form frmPpalOld
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "17:56"
+            TextSave        =   "14:25"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -872,6 +872,21 @@ Begin VB.Form frmPpalOld
             Index           =   14
          End
       End
+      Begin VB.Menu mntemporalFlotas 
+         Caption         =   "Flotas"
+         Begin VB.Menu mnTempoFlotas 
+            Caption         =   "Registro"
+            Index           =   0
+         End
+         Begin VB.Menu mnTempoFlotas 
+            Caption         =   "Mantenimiento de flotas"
+            Index           =   1
+         End
+         Begin VB.Menu mnTempoFlotas 
+            Caption         =   "Mantenimiento de conceptos"
+            Index           =   2
+         End
+      End
       Begin VB.Menu mnAgua 
          Caption         =   "Agua"
          Begin VB.Menu mnAguaLin 
@@ -1296,6 +1311,10 @@ Begin VB.Form frmPpalOld
             Caption         =   "Comparativo descuentos compra/venta"
             Index           =   10
          End
+         Begin VB.Menu mnInfoAdm 
+            Caption         =   "Incremento precios proveedor"
+            Index           =   11
+         End
       End
       Begin VB.Menu mnAdmAgentes 
          Caption         =   "Agentes"
@@ -1678,7 +1697,7 @@ Begin VB.Form frmPpalOld
          Index           =   0
       End
       Begin VB.Menu mnUtiDeclaraLOM 
-         Caption         =   "Declaración ROPO"
+         Caption         =   "Comunicación RETO"
          Index           =   1
       End
       Begin VB.Menu mnArticulos 
@@ -1896,7 +1915,7 @@ Dim B As Boolean
     
     PuntoDeMenuVisible mnFacPedidos(14), vParamAplic.NumeroInstalacion = vbFenollar
     
-    
+            
     
     
     
@@ -1968,12 +1987,6 @@ Dim B As Boolean
     mnUtiMensInt.visible = False
     mnBarra21.visible = False
     
- '   If AvisosPendientes Then
- '       If MsgBox("Tiene avisos pendientes. ¿Quiere verlos ahora?", vbQuestion + vbYesNo) = vbYes Then
- '           'Mostrare la pantalla de avisos pendientes
- '           frmAlertas.Show vbModal
- '       End If
- '   End If
     '-- Descriptores especiales (Vrs 4.0.9)
     If vParamAplic.Descriptores Then
         mnAlmTipoUnidad.Caption = "Formatos"
@@ -2007,7 +2020,8 @@ Dim B As Boolean
     
     PuntoDeMenuVisible mnFacPedidos(14), vParamAplic.NumeroInstalacion = vbFenollar
     
-    
+    PuntoDeMenuVisible mntemporalFlotas, vParamAplic.NumeroInstalacion = vbHerbelca
+
     
         'Si es empresa de b
     'Utilidades de traspaso presu a factura
@@ -2923,7 +2937,7 @@ End Sub
 
 Private Sub mnComFacturar_Click()
    
-    frmComFacturarGR.Codprove = -1
+    frmComFacturarGR.CodProve = -1
     frmComFacturarGR.Show vbModal
     
 End Sub
@@ -3067,7 +3081,14 @@ End Sub
 Private Sub mnConfManteUsuarios_Click()
 'Mantenimiento de Usuarios
     If vUsu.Nivel > 0 Then Exit Sub
-    frmMantenusu2.Show vbModal
+    
+    If vParamAplic.HaciendoFrmulariosGrandes Then
+        frmMantenusu2.Show vbModal
+    Else
+        frmMantenusu.Show vbModal
+    End If
+    
+    
       
 End Sub
 
@@ -3597,7 +3618,6 @@ Private Sub mnFacPedidos_Click(Index As Integer)
                 frmFacEntPedidosGR.DatosADevolverBusqueda2 = ""
                 frmFacEntPedidosGR.EsHistorico = Index = 1
                 frmFacEntPedidosGR.Show vbModal
-            
             Else
                 frmFacEntPedidos.DatosADevolverBusqueda2 = ""
                 frmFacEntPedidos.EsHistorico = Index = 1
@@ -3930,7 +3950,14 @@ Private Sub mnInfoAdm_Click(Index As Integer)
     Case 10
         frmListado5.OpcionListado = 37
         frmListado5.Show vbModal
+    
+    Case 11
+        frmListado5.OpcionListado = 47
+        frmListado5.Show vbModal
+
+    
     End Select
+    
 End Sub
 
 
@@ -4513,6 +4540,22 @@ Private Sub mnTelematel_Click(Index As Integer)
     End Select
 End Sub
 
+Private Sub mnTempoFlotas_Click(Index As Integer)
+  Select Case Index
+    Case 0
+        frmFlotaReg.DatosADevolverBusqueda = ""
+        frmFlotaReg.Show vbModal
+    Case 1
+        frmFlotas.DatosADevolverBusqueda = ""
+        frmFlotas.Show vbModal
+        
+    Case 2
+    
+        frmFlotasConceptos.DatosADevolverBusqueda = ""
+        frmFlotasConceptos.Show vbModal
+    End Select
+End Sub
+
 Private Sub mnTicket_Click(Index As Integer)
     
     If Index > 0 Then AbrirListado2 12 + Index
@@ -4674,11 +4717,25 @@ End Sub
 
 
 Private Sub mnUtiDeclaraLOM_Click(Index As Integer)
-    If Index = 0 Then
-        frmFacLotesGeneralitat.Show vbModal
-    Else
-        frmUtDeclara.Show vbModal
+
+
+
+    'Vamos a bloquear
+    If BloqueoManual("RETO", "1") Then
+
+    
+        If Index = 0 Then
+            frmFacLotesGeneralitat.Show vbModal
+        Else
+            'Noviembre 2021
+            'Pasa a ser RETO
+        
+            frmUtDeclara.Show vbModal
+        End If
+
+        DesBloqueoManual "RETO"
     End If
+
 End Sub
 
 Private Sub mnUtilidadesVarias_Click(Index As Integer)
@@ -4754,7 +4811,7 @@ End Sub
 
 Private Sub mnUtiUsuActivos_Click()
 'Muestra si hay otros usuarios conectados a la Gestion
-Dim SQL As String
+Dim Sql As String
 Dim i As Integer
 
     CadenaDesdeOtroForm = OtrosPCsContraContabiliad
@@ -4762,10 +4819,10 @@ Dim i As Integer
         i = 1
         Me.Tag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
         Do
-            SQL = RecuperaValor(CadenaDesdeOtroForm, i)
-            If SQL <> "" Then Me.Tag = Me.Tag & "    - " & SQL & vbCrLf
+            Sql = RecuperaValor(CadenaDesdeOtroForm, i)
+            If Sql <> "" Then Me.Tag = Me.Tag & "    - " & Sql & vbCrLf
             i = i + 1
-        Loop Until SQL = ""
+        Loop Until Sql = ""
         MsgBox Me.Tag, vbExclamation
     Else
         MsgBox "Ningun usuario, además de usted, conectado a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf, vbInformation
@@ -5043,14 +5100,14 @@ End Sub
 
 
 Private Sub LeerEditorMenus()
-Dim SQL As String
+Dim Sql As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     TieneEditorDeMenus = False
-    SQL = "Select count(*) from usuarios.appmenus where aplicacion='Ariges'"
+    Sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariges'"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
             If miRsAux.Fields(0) > 0 Then TieneEditorDeMenus = True
@@ -5069,36 +5126,36 @@ End Sub
 
 Private Sub PoneMenusDelEditor()
 Dim T As Control
-Dim SQL As String
+Dim Sql As String
 Dim C As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     
-    SQL = "Select * from usuarios.appmenususuario where aplicacion='Ariges' and codusu = " & Val(Right(CStr(vUsu.Codigo), 3))
+    Sql = "Select * from usuarios.appmenususuario where aplicacion='Ariges' and codusu = " & Val(Right(CStr(vUsu.Codigo), 3))
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    SQL = ""
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = ""
 
     While Not miRsAux.EOF
         If Not IsNull(miRsAux.Fields(3)) Then
-            SQL = SQL & miRsAux.Fields(3)
-            If Right(miRsAux.Fields(3), 1) <> "|" Then SQL = SQL & "|"
-            SQL = SQL & "·"
+            Sql = Sql & miRsAux.Fields(3)
+            If Right(miRsAux.Fields(3), 1) <> "|" Then Sql = Sql & "|"
+            Sql = Sql & "·"
         End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
         
    
-    If SQL <> "" Then
-        SQL = "·" & SQL
+    If Sql <> "" Then
+        Sql = "·" & Sql
         For Each T In Me.Controls
             If TypeOf T Is Menu Then
                 C = DevuelveCadenaMenu(T)
                 C = "·" & C & "·"
                 'Debug.Print C
-                If InStr(1, SQL, C) > 0 Then
+                If InStr(1, Sql, C) > 0 Then
                     
                     '
                     T.visible = False
@@ -5289,7 +5346,7 @@ Private Function ComprobarBotonMenuVisible(objMenu As Menu, Activado As Boolean)
 'esta activada/desactiva o visible/invisible
 '(se comprueba hasta q se encuentra el false o se llega al padre)
 Dim nomMenu As String
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim Cad As String
 Dim B As Boolean
@@ -5309,8 +5366,8 @@ Dim B As Boolean
         Set RS = New ADODB.Recordset
         
         'Obtener el padre del menu
-        SQL = "select padre from usuarios.appmenus where aplicacion='Ariges' and name=" & DBSet(nomMenu, "T")
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = "select padre from usuarios.appmenus where aplicacion='Ariges' and name=" & DBSet(nomMenu, "T")
+        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
             Cad = RS.Fields(0).Value
         End If
@@ -5318,8 +5375,8 @@ Dim B As Boolean
         
         B = True
         While B And Cad <> ""
-                SQL = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & Cad
-                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Sql = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & Cad
+                RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Not RS.EOF Then
                     Cad = RS!Padre
                     nomMenu = RS!Name
@@ -5327,9 +5384,9 @@ Dim B As Boolean
                 RS.Close
                 
                 'comprobar si el padre esta bloqueado
-                SQL = "Select count(*) from usuarios.appmenususuario where aplicacion='Ariges' and codusu=" & Val(Right(CStr(vUsu.Codigo), 3))
-                SQL = SQL & " and tag='" & nomMenu & "|'"
-                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Sql = "Select count(*) from usuarios.appmenususuario where aplicacion='Ariges' and codusu=" & Val(Right(CStr(vUsu.Codigo), 3))
+                Sql = Sql & " and tag='" & nomMenu & "|'"
+                RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If RS.Fields(0).Value > 0 Then
                     'Esta bloqueado el menu para el usuario
                     B = False

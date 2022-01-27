@@ -272,7 +272,7 @@ Private GuardarConfig As Boolean
 
 Dim J As Integer
 Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Donde As String
 
 
@@ -320,7 +320,7 @@ Private Sub CargaAdmon()
     '{pVisReclamas} {pVisReparas} {}
     
     'Departamento administradcio
-    Set N = tv1.Nodes.Add(, , "ADM")
+    Set N = TV1.Nodes.Add(, , "ADM")
     N.Text = "Datos dpto de administración"
     N.Bold = True
     N.Checked = NodoPadreCheckeado(N.Index)    '
@@ -358,7 +358,7 @@ Private Sub CargaComercial()
     '{pVisReclamas} {pVisReparas} {pVisVolVenta}
     
     'Departamento administradcio
-    Set N = tv1.Nodes.Add(, , "COM")
+    Set N = TV1.Nodes.Add(, , "COM")
     N.Text = "Datos dpto de comercial"
     N.Tag = "||"
     N.Bold = True
@@ -424,7 +424,7 @@ Private Sub CargaSAT()
     
 
     'Departamento administradcio
-    Set N = tv1.Nodes.Add(, , "SAT")
+    Set N = TV1.Nodes.Add(, , "SAT")
     N.Text = "Datos dpto de S.A.T."
     N.Bold = True
     N.Checked = NodoPadreCheckeado(N.Index)
@@ -456,18 +456,18 @@ Private Sub cmdCobros_Click()
 End Sub
 
 Private Sub cmdFecha_Click()
-    If tv1.Nodes.Count = 0 Then Exit Sub
-    If tv1.SelectedItem Is Nothing Then Exit Sub
+    If TV1.Nodes.Count = 0 Then Exit Sub
+    If TV1.SelectedItem Is Nothing Then Exit Sub
     
-    If Right(tv1.SelectedItem.Text, 1) <> "]" Then
+    If Right(TV1.SelectedItem.Text, 1) <> "]" Then
         MsgBox "NO se le asigna fecha a esta opcion", vbExclamation
     Else
-        SQL = ""
-        J = InStr(1, tv1.SelectedItem, "[")
+        Sql = ""
+        J = InStr(1, TV1.SelectedItem, "[")
         If J = 0 Then
             MsgBox "No se ha encotrado la marca de fecha", vbExclamation
         Else
-            Donde = Mid(tv1.SelectedItem.Text, J + 1)
+            Donde = Mid(TV1.SelectedItem.Text, J + 1)
             Donde = Mid(Donde, 1, Len(Donde) - 1)
             If Len(Donde) = 4 Then
                 'Es AÑO
@@ -477,36 +477,36 @@ Private Sub cmdFecha_Click()
                 'Es fecha
                 J = 1
             End If
-            SQL = ""
+            Sql = ""
             Set frmC = New frmCal
             frmC.Fecha = CDate(Donde)
             frmC.Show vbModal
             Set frmC = Nothing
-            If SQL <> "" Then
+            If Sql <> "" Then
                 
                             'Solo quiero el año
-                If J = 0 Then SQL = Year(SQL)
+                If J = 0 Then Sql = Year(Sql)
                 
-                J = InStr(tv1.SelectedItem.Text, "[")
+                J = InStr(TV1.SelectedItem.Text, "[")
                 If J = 0 Then
                     MsgBox ""
             
                 Else
                     'Ha retornado dato
                     GuardarConfig = True
-                    Donde = Mid(tv1.SelectedItem.Text, 1, J)
-                    Donde = Donde & SQL & "]"
-                    tv1.SelectedItem.Text = Donde
+                    Donde = Mid(TV1.SelectedItem.Text, 1, J)
+                    Donde = Donde & Sql & "]"
+                    TV1.SelectedItem.Text = Donde
                     
                     
                     'Si es de ofertas o de albaranes CARGAMOS los datos de nuevo
-                    SQL = tv1.SelectedItem.Key
-                    If SQL = "com1" Or SQL = "com3" Then CargaDatosAux
+                    Sql = TV1.SelectedItem.Key
+                    If Sql = "com1" Or Sql = "com3" Then CargaDatosAux
                     
                     
                 End If
                 Donde = ""
-                SQL = ""
+                Sql = ""
             
                 End If
             End If
@@ -600,9 +600,9 @@ Private Sub Form_Load()
     PrimeraVez = True
     Me.Icon = frmPpal.Icon
     CargaTreeView
-    For J = 1 To tv1.Nodes.Count
+    For J = 1 To TV1.Nodes.Count
         'TV1.Nodes(J).Checked = True
-        tv1.Nodes(J).EnsureVisible
+        TV1.Nodes(J).EnsureVisible
     Next J
 
     GuardarConfig = False
@@ -616,21 +616,21 @@ End Sub
 
 
 Private Sub frmC_Selec(vFecha As Date)
-    SQL = CStr(vFecha)
+    Sql = CStr(vFecha)
 End Sub
 
 Private Sub frmC2_DatoSeleccionado(CadenaSeleccion As String)
-    SQL = CadenaSeleccion
+    Sql = CadenaSeleccion
 End Sub
 
 Private Sub Image1_Click()
-    SQL = ""
+    Sql = ""
     Set frmC2 = New frmBasico2
     AyudaClientes frmC2, Text1.Text
     Set frmC2 = Nothing
-    If SQL <> "" Then
-        Me.Text1.Text = RecuperaValor(SQL, 1)
-        Me.Text2.Text = RecuperaValor(SQL, 2)
+    If Sql <> "" Then
+        Me.Text1.Text = RecuperaValor(Sql, 1)
+        Me.Text2.Text = RecuperaValor(Sql, 2)
         CargaDatosAux
     End If
 End Sub
@@ -662,7 +662,7 @@ Private Sub Text1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Text1_LostFocus()
-    SQL = ""
+    Sql = ""
     Text1.Text = Trim(Text1.Text)
     If Text1.Text <> "" Then
         If Not IsNumeric(Text1.Text) Then
@@ -670,24 +670,24 @@ Private Sub Text1_LostFocus()
             Text1.Text = ""
             PonerFoco Text1
         Else
-            SQL = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1.Text)
-            If SQL = "" Then
+            Sql = DevuelveDesdeBD(conAri, "nomclien", "sclien", "codclien", Text1.Text)
+            If Sql = "" Then
                 MsgBox "no existe cliente: " & Text1.Text, vbExclamation
                 PonerFoco Text1
     
             End If
         End If
     End If
-    Text2.Text = SQL
+    Text2.Text = Sql
     CargaDatosAux
     
 End Sub
 
 Private Sub TV1_DblClick()
-    If tv1.Nodes.Count = 0 Then Exit Sub
-    If tv1.SelectedItem Is Nothing Then Exit Sub
+    If TV1.Nodes.Count = 0 Then Exit Sub
+    If TV1.SelectedItem Is Nothing Then Exit Sub
     
-    If InStr(tv1.SelectedItem.Text, "[") = 0 Then Exit Sub
+    If InStr(TV1.SelectedItem.Text, "[") = 0 Then Exit Sub
     
     cmdFecha_Click
 End Sub
@@ -773,27 +773,27 @@ Private Sub InsertaDatosBasicos()
 Dim Aux As String
 
     'Si habian metido algun dato...
-    SQL = "insert into `tmpcrmclien` (`codusu`,`codclien`,`saldopdte`,saldototal,`nomactiv`,`nomforpa`) values ("
-    SQL = SQL & vUsu.Codigo & "," & Text1.Text & ","
+    Sql = "insert into `tmpcrmclien` (`codusu`,`codclien`,`saldopdte`,saldototal,`nomactiv`,`nomforpa`) values ("
+    Sql = Sql & vUsu.Codigo & "," & Text1.Text & ","
     
     'Saldo pdte (a fecha NOW
     Aux = "Imp"
     ComprobarCobrosCliente Text1.Text, Now, Aux
     If Aux = "" Or Aux = "Imp" Then Aux = "0"
-    SQL = SQL & DBSet(Aux, "N") & ","
+    Sql = Sql & DBSet(Aux, "N") & ","
     'saldo totoal A fecha 31/12/2222"
     Aux = "Imp"
     ComprobarCobrosCliente Text1.Text, CDate("31/12/2222"), Aux
     If Aux = "" Or Aux = "Imp" Then Aux = "0"
-    SQL = SQL & DBSet(Aux, "N") & ","
+    Sql = Sql & DBSet(Aux, "N") & ","
     
     
     
     Aux = DevuelveDesdeBD(conAri, "nomactiv", "sclien,sactiv", "sclien.codactiv=sactiv.codactiv and codclien", Text1.Text)
-    SQL = SQL & DBSet(Aux, "T") & ","
+    Sql = Sql & DBSet(Aux, "T") & ","
     Aux = DevuelveDesdeBD(conAri, "nomforpa", "sclien,sforpa", "sclien.codforpa=sforpa.codforpa and codclien", Text1.Text)
-    SQL = SQL & DBSet(Aux, "T") & ")"
-    conn.Execute SQL
+    Sql = Sql & DBSet(Aux, "T") & ")"
+    conn.Execute Sql
 End Sub
 
 
@@ -807,7 +807,7 @@ Private Sub GenerarDatosInformes()
     
     
     J = DevuelveIndiceNodo("ADM")
-    If Me.tv1.Nodes(J).Checked Then
+    If Me.TV1.Nodes(J).Checked Then
         GenerarDatosAdmon
     Else
         'PONGO TODOS LOS SUBPARAMETROS A FALSE
@@ -817,7 +817,7 @@ Private Sub GenerarDatosInformes()
     
     'Para saber si tiene datos cada secccion
     J = DevuelveIndiceNodo("COM")
-    If Me.tv1.Nodes(J).Checked Then
+    If Me.TV1.Nodes(J).Checked Then
         GenerarDatosComer
     Else
         'PONGO TODOS LOS SUBPARAMETROS A FALSE
@@ -828,7 +828,7 @@ Private Sub GenerarDatosInformes()
     'Para saber si tiene datos cada secccion
     If vParamAplic.Reparaciones Then
         J = DevuelveIndiceNodo("SAT")
-        If Me.tv1.Nodes(J).Checked Then
+        If Me.TV1.Nodes(J).Checked Then
             GenerarDatosSAT
         Else
             'PONGO TODOS LOS SUBPARAMETROS A FALSE
@@ -866,11 +866,11 @@ Dim N As Node
 
 
     
-    Set N = tv1.Nodes(1).Child 'ADMON
+    Set N = TV1.Nodes(1).Child 'ADMON
     If Leer Then
         
-        CadenaDesdeOtroForm = CInt(tv1.Nodes(1).Checked) & "|"
-        tv1.Nodes(1).Checked = True
+        CadenaDesdeOtroForm = CInt(TV1.Nodes(1).Checked) & "|"
+        TV1.Nodes(1).Checked = True
         
         While Not (N Is Nothing)
             CadenaDesdeOtroForm = CadenaDesdeOtroForm & CInt(N.Checked) & "|"
@@ -881,12 +881,12 @@ Dim N As Node
     Else
         'Tengo en cadenasql lo que habia leido antes de marcarlo
         NumRegElim = 1
-        SQL = RecuperaValor(CadenaDesdeOtroForm, CInt(NumRegElim))
-        tv1.Nodes(1).Checked = SQL = "-1"
+        Sql = RecuperaValor(CadenaDesdeOtroForm, CInt(NumRegElim))
+        TV1.Nodes(1).Checked = Sql = "-1"
         While Not (N Is Nothing)
             NumRegElim = NumRegElim + 1
-            SQL = RecuperaValor(CadenaDesdeOtroForm, CInt(NumRegElim))
-            N.Checked = SQL = "-1"
+            Sql = RecuperaValor(CadenaDesdeOtroForm, CInt(NumRegElim))
+            N.Checked = Sql = "-1"
             
             Set N = N.Next
         Wend
@@ -899,10 +899,10 @@ Private Sub PonerparametrosVisiblesFalse()
 Dim N As Node
     'en TV1(j) tengo el NODO padre
     'Con lo cual, recorrro todos sus hijos, obteneido la cadena param de visible y poneindola a cero
-    Set N = tv1.Nodes(J).Child '
+    Set N = TV1.Nodes(J).Child '
     While Not (N Is Nothing)
-        SQL = RecuperaValor(N.Tag, 1)
-        If SQL <> "" Then cadParam2 = cadParam2 & SQL & "=0|"
+        Sql = RecuperaValor(N.Tag, 1)
+        If Sql <> "" Then cadParam2 = cadParam2 & Sql & "=0|"
         Set N = N.Next
     Wend
 End Sub
@@ -912,8 +912,8 @@ End Sub
 Private Function DevuelveIndiceNodo(Clave As String) As Integer
 Dim i As Integer
     
-    For i = 1 To tv1.Nodes.Count
-        If tv1.Nodes(i).Key = Clave Then
+    For i = 1 To TV1.Nodes.Count
+        If TV1.Nodes(i).Key = Clave Then
             DevuelveIndiceNodo = i
             Exit Function
         End If
@@ -985,31 +985,31 @@ Dim Procesar As Boolean
         J = DevuelveIndiceNodo("com41")
         If HayKprocesarNodo(J, F) Then
             'insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,`trabajador`,`adjuntos`) values ( '1','0','','',NULL,NULL,NULL,NULL)
-            SQL = "select feholla,usuario,nomllama1,observac,codtraba,nomtraba from sllama,sllama1 "
-            SQL = SQL & "  where sllama.codllama1 = sllama1.codllama1"
-            SQL = SQL & " and codclien=" & vCRM.codClien
-            SQL = SQL & " AND feholla>=" & DBSet(F, "F")
+            Sql = "select feholla,usuario,nomllama1,observac,codtraba,nomtraba from sllama,sllama1 "
+            Sql = Sql & "  where sllama.codllama1 = sllama1.codllama1"
+            Sql = Sql & " and codclien=" & vCRM.codClien
+            Sql = Sql & " AND feholla>=" & DBSet(F, "F")
             
             
             
             
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RS.EOF
                 NumRegElim = NumRegElim + 1
-                SQL = "insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,"
-                SQL = SQL & "`trabajador`,`adjuntos`) values ( " & vUsu.Codigo & "," & NumRegElim & ",0,"
-                SQL = SQL & DBSet(RS!feholla, "FH") & ","
+                Sql = "insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,"
+                Sql = Sql & "`trabajador`,`adjuntos`) values ( " & vUsu.Codigo & "," & NumRegElim & ",0,"
+                Sql = Sql & DBSet(RS!feholla, "FH") & ","
                 'En sllama siempre son RECIBIDAS
-                SQL = SQL & "'Recibida',"
+                Sql = Sql & "'Recibida',"
                 Cad = DBLetMemo(RS!observac)
                 Cad = Replace(Cad, vbCrLf, " ")
-                SQL = SQL & DBSet(Cad, "T", "S") & ","
+                Sql = Sql & DBSet(Cad, "T", "S") & ","
                 'Trabajador
-                SQL = SQL & DBSet(RS!NomTraba, "T") & ","
+                Sql = Sql & DBSet(RS!NomTraba, "T") & ","
                 'En adjuntos guardare el tipop llamada
-                SQL = SQL & DBSet(RS!nomllama1, "T") & ")"
+                Sql = Sql & DBSet(RS!nomllama1, "T") & ")"
                 
-                conn.Execute SQL
+                conn.Execute Sql
                 RS.MoveNext
             Wend
             RS.Close
@@ -1022,32 +1022,32 @@ Dim Procesar As Boolean
         J = DevuelveIndiceNodo("com42")
         If HayKprocesarNodo(J, F) Then
             'insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,`trabajador`,`adjuntos`) values ( '1','0','','',NULL,NULL,NULL,NULL)
-            SQL = "select fechora ,usuario,nomtraba ,observaciones from"
-            SQL = SQL & " scrmacciones left join straba on scrmacciones.codtraba=straba.codtraba "
-            SQL = SQL & " WHERE scrmacciones.tipo=1  and codclien= " & vCRM.codClien
-            SQL = SQL & " AND fechora>=" & DBSet(F, "F")
+            Sql = "select fechora ,usuario,nomtraba ,observaciones from"
+            Sql = Sql & " scrmacciones left join straba on scrmacciones.codtraba=straba.codtraba "
+            Sql = Sql & " WHERE scrmacciones.tipo=1  and codclien= " & vCRM.codClien
+            Sql = Sql & " AND fechora>=" & DBSet(F, "F")
             
             
             
             
             
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             While Not RS.EOF
                 NumRegElim = NumRegElim + 1
-                SQL = "insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,"
-                SQL = SQL & "`trabajador`,`adjuntos`) values ( " & vUsu.Codigo & "," & NumRegElim & ",0,"
-                SQL = SQL & DBSet(RS!fechora, "FH") & ","
+                Sql = "insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,"
+                Sql = Sql & "`trabajador`,`adjuntos`) values ( " & vUsu.Codigo & "," & NumRegElim & ",0,"
+                Sql = Sql & DBSet(RS!fechora, "FH") & ","
                 'En sllama siempre son RECIBIDAS
-                SQL = SQL & "'Realizada',"
+                Sql = Sql & "'Realizada',"
                 Cad = DBLetMemo(RS!Observaciones)
                 Cad = Replace(Cad, vbCrLf, " ")
-                SQL = SQL & DBSet(Cad, "T", "S") & ","
+                Sql = Sql & DBSet(Cad, "T", "S") & ","
                 'Trabajador
-                SQL = SQL & DBSet(RS!NomTraba, "T") & ","
+                Sql = Sql & DBSet(RS!NomTraba, "T") & ","
                 'En adjuntos guardare el tipop llamada
-                SQL = SQL & "NULL)"
+                Sql = Sql & "NULL)"
                 
-                conn.Execute SQL
+                conn.Execute Sql
                 RS.MoveNext
             Wend
             RS.Close
@@ -1069,52 +1069,52 @@ Dim Procesar As Boolean
             'Si no quiere las recibidas
             NumRegElim = 0
             J = DevuelveIndiceNodo("com51")
-            If tv1.Nodes(J).Checked Then NumRegElim = 1
+            If TV1.Nodes(J).Checked Then NumRegElim = 1
             
             J = DevuelveIndiceNodo("com51")
-            If tv1.Nodes(J).Checked Then NumRegElim = NumRegElim + 2
+            If TV1.Nodes(J).Checked Then NumRegElim = NumRegElim + 2
             
             If NumRegElim > 0 Then
                     'Ha selecionado alguno de los dos, o los dos
                     
                     'insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,`trabajador`,`adjuntos`) values ( '1','0','','',NULL,NULL,NULL,NULL)
-                    SQL = "select fechahora,enviado,email,asunto,adjuntos from scrmmail"
-                    SQL = SQL & " WHERE codclien=" & vCRM.codClien
-                     SQL = SQL & " AND fechahora>=" & DBSet(F, "F")
+                    Sql = "select fechahora,enviado,email,asunto,adjuntos from scrmmail"
+                    Sql = Sql & " WHERE codclien=" & vCRM.codClien
+                     Sql = Sql & " AND fechahora>=" & DBSet(F, "F")
                     If NumRegElim = 1 Or NumRegElim = 2 Then
                         Cad = "1"
                         If NumRegElim = 2 Then Cad = "0"
                         'Ha selecionado solo una de las dos
-                        SQL = SQL & " AND enviado = " & Cad
+                        Sql = Sql & " AND enviado = " & Cad
                     End If
                     NumRegElim = Contador
                     
                 
                 
                 
-                    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     While Not RS.EOF
                         NumRegElim = NumRegElim + 1
-                        SQL = "insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,"
-                        SQL = SQL & "`trabajador`,`adjuntos`) values ( " & vUsu.Codigo & "," & NumRegElim & ",1,"  '1.email
-                        SQL = SQL & DBSet(RS!FechaHora, "FH") & ","
+                        Sql = "insert into `tmpcrmmsg` (`codusu`,`codigo`,`tipo`,`fechahora`,`rec_env`,`asun_obs`,"
+                        Sql = Sql & "`trabajador`,`adjuntos`) values ( " & vUsu.Codigo & "," & NumRegElim & ",1,"  '1.email
+                        Sql = Sql & DBSet(RS!FechaHora, "FH") & ","
                         'En sllama siempre son RECIBIDAS
                         If Val(RS!Enviado) = 1 Then
-                            SQL = SQL & "'Enviado',"
+                            Sql = Sql & "'Enviado',"
                         Else
-                            SQL = SQL & "'Recibido',"
+                            Sql = Sql & "'Recibido',"
                         End If
                         Cad = DBLetMemo(RS!asunto)
                         Cad = Replace(Cad, vbCrLf, " ")
-                        SQL = SQL & DBSet(Cad, "T", "S") & ","
+                        Sql = Sql & DBSet(Cad, "T", "S") & ","
                         'Trabajador
-                        SQL = SQL & DBSet(RS!email, "T", "S") & ","
+                        Sql = Sql & DBSet(RS!email, "T", "S") & ","
                         'En adjuntos guardare el tipop llamada
                         Cad = "'*'"
                         If DBLet(RS!adjuntos, "T") = "" Then Cad = "NULL"
-                        SQL = SQL & Cad & ")"
+                        Sql = Sql & Cad & ")"
                         
-                        conn.Execute SQL
+                        conn.Execute Sql
                         RS.MoveNext
                     Wend
                     RS.Close
@@ -1156,15 +1156,15 @@ Dim N As Integer
         Donde = "Volumen fact."
         
         'Volumen facturacion
-        SQL = "select year(fecfactu) anyo,sum(totalfac) totalfac from scafac "
+        Sql = "select year(fecfactu) anyo,sum(totalfac) totalfac from scafac "
         'SEPTIEMBE 2011. Quito FRT del select
         'SQL = SQL & " where codclien=" & Text1.Text & " and codtipom <>'FAZ' and codtipom<>'FRT' "
-        SQL = SQL & " where codclien=" & Text1.Text & " and codtipom <>'FAZ'"
-        SQL = SQL & " AND fecfactu>='" & Format(F, FormatoFecha) & "'"
+        Sql = Sql & " where codclien=" & Text1.Text & " and codtipom <>'FAZ'"
+        Sql = Sql & " AND fecfactu>='" & Format(F, FormatoFecha) & "'"
         'Aqui va lo de ultimos años
-        SQL = SQL & " group by 1 order by 1,2"
+        Sql = Sql & " group by 1 order by 1,2"
         
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         NumRegElim = 0
         
         While Not RS.EOF
@@ -1173,14 +1173,16 @@ Dim N As Integer
             NumRegElim = NumRegElim + 1
             Impor1 = DBLet(RS!TotalFac, "N")
             
-            SQL = "insert into `tmpcrmtesor` (`codusu`,`codigo`,`importe`,`anyotxt`,`variacion`)"
-            SQL = SQL & " values (" & vUsu.Codigo & "," & NumRegElim & "," & TransformaComasPuntos(CStr(Impor1)) & ",'"
+            Sql = "insert into `tmpcrmtesor` (`codusu`,`codigo`,`importe`,`anyotxt`,`variacion`)"
+            Sql = Sql & " values (" & vUsu.Codigo & "," & NumRegElim & "," & TransformaComasPuntos(CStr(Impor1)) & ",'"
+            
+            
             
             If Val(RS!Anyo) = Year(Now) Then
                 'Valor actual.
-                SQL = SQL & "actual',"
+                Sql = Sql & "actual',"
                 'Cambio la base para comprar con el mismo periodo del actual
-                
+
                 'Cad = "codtipom <>'FAZ' and codtipom<>'FRT' and "
                 Cad = "codtipom <>'FAZ' and "
                 Cad = Cad & " fecfactu>='" & Year(Now) - 1 & "-01-01' and "
@@ -1196,7 +1198,7 @@ Dim N As Integer
                 End If
             Else
                 'Otro año cualquiera
-                 SQL = SQL & RS!Anyo & "',"
+                 Sql = Sql & RS!Anyo & "',"
                 If NumRegElim > 1 And Base <> 0 Then
                     Impor1 = CStr(((100 * Impor1) / Base) - 100)
                     Cad = Format(Impor1, FormatoPorcen) & "%"
@@ -1204,10 +1206,10 @@ Dim N As Integer
                  
             End If
             Base = DBLet(RS!TotalFac, "N")
-            SQL = SQL & "'" & Cad & "')"
+            Sql = Sql & "'" & Cad & "')"
           
 
-            conn.Execute SQL
+            conn.Execute Sql
             RS.MoveNext
         Wend
         RS.Close
@@ -1222,18 +1224,18 @@ Dim N As Integer
         Donde = "Cobros pendientes"
         'insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,`importe`,`observa`) values ( '1','0','0','','','',NULL,NULL)
         If vParamAplic.ContabilidadNueva Then
-            SQL = " cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa "
+            Sql = " cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa "
         Else
-            SQL = " scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+            Sql = " scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
         End If
          
-        SQL = "SELECT scobro.*,nomforpa FROM " & SQL
-        SQL = SQL & " WHERE scobro.codmacta = '" & vCRM.Codmacta & "'"
+        Sql = "SELECT scobro.*,nomforpa FROM " & Sql
+        Sql = Sql & " WHERE scobro.codmacta = '" & vCRM.Codmacta & "'"
         
-        SQL = SQL & "  AND recedocu=0 ORDER BY fecvenci desc"
+        Sql = Sql & "  AND recedocu=0 ORDER BY fecvenci desc"
         
         NumRegElim = 0
-        RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         Base = 0
         Impor1 = 0
         
@@ -1256,25 +1258,25 @@ Dim N As Integer
           End If
           If Impor1 <> 0 Then
                 NumRegElim = NumRegElim + 1
-                SQL = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,"
-                SQL = SQL & "`importe`,`observa`,forpa) values ( "
-                SQL = SQL & vUsu.Codigo & "," & NumRegElim & ",0,'"
+                Sql = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,"
+                Sql = Sql & "`importe`,`observa`,forpa) values ( "
+                Sql = Sql & vUsu.Codigo & "," & NumRegElim & ",0,'"
                 
-                SQL = SQL & RS!numSerie
+                Sql = Sql & RS!numSerie
                 If vParamAplic.ContabilidadNueva Then
-                    SQL = SQL & Format(RS!Numfactu, "000000")
+                    Sql = Sql & Format(RS!Numfactu, "000000")
                 Else
-                    SQL = SQL & Format(RS!Codfaccl, "000000")
+                    Sql = Sql & Format(RS!Codfaccl, "000000")
                 End If
-                If RS!FecVenci < Now Then SQL = SQL & " *"
+                If RS!FecVenci < Now Then Sql = Sql & " *"
                 
                 If vParamAplic.ContabilidadNueva Then
-                    SQL = SQL & "','" & Format(RS!FecFactu, FormatoFecha)
+                    Sql = Sql & "','" & Format(RS!FecFactu, FormatoFecha)
                 Else
-                    SQL = SQL & "','" & Format(RS!fecfaccl, FormatoFecha)
+                    Sql = Sql & "','" & Format(RS!fecfaccl, FormatoFecha)
                 End If
                 
-                SQL = SQL & "','" & Format(RS!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
+                Sql = Sql & "','" & Format(RS!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
                 'Antes la observa era NULL, ahora llevare el Depto
                 If IsNull(RS!Departamento) Then
                     Aux = "NULL"
@@ -1285,11 +1287,11 @@ Dim N As Integer
                     Aux = "'" & DevNombreSQL(Aux) & "'"
                     
                 End If
-                SQL = SQL & Aux
+                Sql = Sql & Aux
                 'Mayo 2010
                 'Con forma de pago
-                SQL = SQL & ",'" & Format(RS!codforpa, "000") & " - " & DevNombreSQL(RS!nomforpa) & "')"
-                conn.Execute SQL
+                Sql = Sql & ",'" & Format(RS!codforpa, "000") & " - " & DevNombreSQL(RS!nomforpa) & "')"
+                conn.Execute Sql
           End If
           RS.MoveNext
 
@@ -1309,32 +1311,32 @@ Dim N As Integer
         
         
         If vParamAplic.ContabilidadNueva Then
-            SQL = "SELECT impvenci,impcobro,numfactu codfaccl,numserie,fecvenci,fecfactu fecfaccl,Departamento,scobro.codforpa,nomforpa,  talondias ,pagaredias ,remesadiasmenor,gastos "
-            SQL = SQL & " ,fecultco,sforpa.tipforpa,codrem,tiporem,recedocu FROM cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa "
-            SQL = SQL & " LEFT JOIN bancos ON scobro.ctabanc1=bancos.codmacta "
+            Sql = "SELECT impvenci,impcobro,numfactu codfaccl,numserie,fecvenci,fecfactu fecfaccl,Departamento,scobro.codforpa,nomforpa,  talondias ,pagaredias ,remesadiasmenor,gastos "
+            Sql = Sql & " ,fecultco,sforpa.tipforpa,codrem,tiporem,recedocu FROM cobros as scobro INNER JOIN formapago as sforpa ON scobro.codforpa=sforpa.codforpa "
+            Sql = Sql & " LEFT JOIN bancos ON scobro.ctabanc1=bancos.codmacta "
         Else
-            SQL = "SELECT impcobro,Codfaccl,numserie,fecvenci,fecfaccl,Departamento,scobro.codforpa,nomforpa,  talondias , pagaredias ,remesadiasmayor"
-            SQL = SQL & ",fecultco, sforpa.tipforpa,recedocu FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
-            SQL = SQL & " LEFT JOIN ctabancaria bancos ON scobro.ctabanc1=bancos.codmacta "
+            Sql = "SELECT impcobro,Codfaccl,numserie,fecvenci,fecfaccl,Departamento,scobro.codforpa,nomforpa,  talondias , pagaredias ,remesadiasmayor"
+            Sql = Sql & ",fecultco, sforpa.tipforpa,recedocu FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+            Sql = Sql & " LEFT JOIN ctabancaria bancos ON scobro.ctabanc1=bancos.codmacta "
         End If
         
         
-        SQL = SQL & " WHERE scobro.codmacta = '" & vCRM.Codmacta & "'"
+        Sql = Sql & " WHERE scobro.codmacta = '" & vCRM.Codmacta & "'"
         
         
         
         If Not vParamAplic.ContabilidadNueva Then
-            SQL = SQL & " AND (sforpa.tipforpa between 2 and 5) "
-            SQL = SQL & " AND fecultco> " & DBSet(DateAdd("yyyy", -1, Now), "F") 'Aqueloos que la remesa(normal-talpag) sea de una año hasta ahora
-            SQL = SQL & " AND impcobro<>0 "
+            Sql = Sql & " AND (sforpa.tipforpa between 2 and 5) "
+            Sql = Sql & " AND fecultco> " & DBSet(DateAdd("yyyy", -1, Now), "F") 'Aqueloos que la remesa(normal-talpag) sea de una año hasta ahora
+            Sql = Sql & " AND impcobro<>0 "
         Else
             
             
         End If
         
-        SQL = SQL & " ORDER BY fecvenci desc"
+        Sql = Sql & " ORDER BY fecvenci desc"
         J = CInt(NumRegElim) 'pk puede que haya metidos de cobros. NO reseteo Numregelim
-        RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         Base = 0
         Impor1 = 0
         
@@ -1391,13 +1393,13 @@ Dim N As Integer
                 If DiasRiesgo > 0 Then
                     Impor1 = DBLet(Impor1, "N")
                     NumRegElim = NumRegElim + 1
-                    SQL = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,"
-                    SQL = SQL & "`importe`,`observa`,forpa) values ( "
-                    SQL = SQL & vUsu.Codigo & "," & NumRegElim & ",2,'"    '2.  El 2 es RIESGO para el rpt
-                    SQL = SQL & RS!numSerie & Format(RS!Codfaccl, "000000")
-                    If RS!FecVenci < Now Then SQL = SQL & " *"
-                    SQL = SQL & "','" & Format(RS!fecfaccl, FormatoFecha)
-                    SQL = SQL & "','" & Format(RS!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
+                    Sql = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,"
+                    Sql = Sql & "`importe`,`observa`,forpa) values ( "
+                    Sql = Sql & vUsu.Codigo & "," & NumRegElim & ",2,'"    '2.  El 2 es RIESGO para el rpt
+                    Sql = Sql & RS!numSerie & Format(RS!Codfaccl, "000000")
+                    If RS!FecVenci < Now Then Sql = Sql & " *"
+                    Sql = Sql & "','" & Format(RS!fecfaccl, FormatoFecha)
+                    Sql = Sql & "','" & Format(RS!FecVenci, FormatoFecha) & "'," & TransformaComasPuntos(CStr(Impor1)) & ","
                     'Antes la observa era NULL, ahora llevare el Depto
                     If IsNull(RS!Departamento) Then
                         Aux = "NULL"
@@ -1408,11 +1410,11 @@ Dim N As Integer
                         Aux = "'" & DevNombreSQL(Aux) & "'"
                         
                     End If
-                    SQL = SQL & Aux
+                    Sql = Sql & Aux
                     'Mayo 2010
                     'Con forma de pago
-                    SQL = SQL & ",'" & Format(RS!codforpa, "000") & " - " & DevNombreSQL(RS!nomforpa) & "')"
-                    conn.Execute SQL
+                    Sql = Sql & ",'" & Format(RS!codforpa, "000") & " - " & DevNombreSQL(RS!nomforpa) & "')"
+                    conn.Execute Sql
                 End If
                 RS.MoveNext
 
@@ -1437,30 +1439,30 @@ Dim N As Integer
         Donde = "Hco reclamas"
         
         If vParamAplic.ContabilidadNueva Then
-            SQL = "select reclama.codigo,numserie,numfactu codfaccl,fecfactu fecfaccl,fecreclama,impvenci,codmacta,observaciones,importes "
-            SQL = SQL & " from reclama  INNER JOIN reclama_facturas  ON reclama.codigo=reclama_facturas.codigo"
+            Sql = "select reclama.codigo,numserie,numfactu codfaccl,fecfactu fecfaccl,fecreclama,impvenci,codmacta,observaciones,importes "
+            Sql = Sql & " from reclama  INNER JOIN reclama_facturas  ON reclama.codigo=reclama_facturas.codigo"
         
         Else
-            SQL = "SELECT codigo,numserie,codfaccl,fecfaccl,fecreclama,impvenci,codmacta,observaciones from shcocob "
+            Sql = "SELECT codigo,numserie,codfaccl,fecfaccl,fecreclama,impvenci,codmacta,observaciones from shcocob "
         
         End If
         
-        SQL = SQL & " WHERE codmacta = '" & vCRM.Codmacta & "'"
-        SQL = SQL & " AND fecreclama >= '" & Format(F, FormatoFecha) & "' ORDER BY fecreclama"
-        If vParamAplic.ContabilidadNueva Then SQL = SQL & ",reclama_facturas.codigo"
+        Sql = Sql & " WHERE codmacta = '" & vCRM.Codmacta & "'"
+        Sql = Sql & " AND fecreclama >= '" & Format(F, FormatoFecha) & "' ORDER BY fecreclama"
+        If vParamAplic.ContabilidadNueva Then Sql = Sql & ",reclama_facturas.codigo"
         
         
         
         J = CInt(NumRegElim) 'pk puede que haya metidos de cobros. NO reseteo Numregelim
         
-        RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-        SQL = ""
+        RS.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = ""
         While Not RS.EOF
             NumRegElim = NumRegElim + 1
-            SQL = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,`importe`,`observa`) values ("
-            SQL = SQL & vUsu.Codigo & "," & NumRegElim & ",1,'"
-            SQL = SQL & DBLet(RS!numSerie, "T") & Format(DBLet(RS!Codfaccl, "N"), "000000") & "','"
-            SQL = SQL & Format(RS!fecfaccl, FormatoFecha) & "','" & Format(RS!fecreclama, FormatoFecha) & "',"
+            Sql = "insert into `tmpcrmcobros` (`codusu`,`secuencial`,`tipo`,`numfac`,`fecfaccl`,`fecha2`,`importe`,`observa`) values ("
+            Sql = Sql & vUsu.Codigo & "," & NumRegElim & ",1,'"
+            Sql = Sql & DBLet(RS!numSerie, "T") & Format(DBLet(RS!Codfaccl, "N"), "000000") & "','"
+            Sql = Sql & Format(RS!fecfaccl, FormatoFecha) & "','" & Format(RS!fecreclama, FormatoFecha) & "',"
             If vParamAplic.ContabilidadNueva Then
                 If IsNull(RS!ImpVenci) Then
                     Aux = DBLet(RS!Importes)
@@ -1470,11 +1472,11 @@ Dim N As Integer
             Else
                 Aux = RS!ImpVenci
             End If
-            SQL = SQL & TransformaComasPuntos(Aux) & ",'"
+            Sql = Sql & TransformaComasPuntos(Aux) & ",'"
             Cad = DBLetMemo(RS!Observaciones)
             Cad = Replace(Cad, vbCrLf, " ")
-            SQL = SQL & DevNombreSQL(Cad) & "')"
-            conn.Execute SQL
+            Sql = Sql & DevNombreSQL(Cad) & "')"
+            conn.Execute Sql
             
             
             
@@ -1491,8 +1493,8 @@ Dim N As Integer
     'Vere si teiene manteinimeots para mostrar/o no en el rpt
     J = DevuelveIndiceNodo("adm4")
     If HayKprocesarNodo(J, F) Then
-        SQL = "Select count(*) from scaman where codclien = " & Text1.Text
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = "Select count(*) from scaman where codclien = " & Text1.Text
+        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         NumRegElim = 0
         If Not RS.EOF Then NumRegElim = DBLet(RS.Fields(0), "N")
         RS.Close
@@ -1546,7 +1548,7 @@ Dim Fecha As Date
 Dim leido As Boolean
 
     'Primero AÑADO EL NODO
-    Set Nod = tv1.Nodes.Add(Padre, tvwChild, Clave)
+    Set Nod = TV1.Nodes.Add(Padre, tvwChild, Clave)
     Nod.Text = texto
     
     'Veo si estan leido los datos de preselccion
@@ -1637,28 +1639,28 @@ Dim NodoOfertaPedidoAlbaran As Boolean
 
 
     Fecha = CDate("01/01/2007")
-    i = InStr(1, tv1.Nodes(Indice).Text, "[")
+    i = InStr(1, TV1.Nodes(Indice).Text, "[")
     TieneFecha = i > 0
     
     
     If TieneFecha Then
-        Valor = Mid(tv1.Nodes(Indice).Text, i + 1)
+        Valor = Mid(TV1.Nodes(Indice).Text, i + 1)
         Valor = Mid(Valor, 1, Len(Valor) - 1)
     End If
     
     'Sabremos si esta marcado o no
-    HayKprocesarNodo = tv1.Nodes(Indice).Checked
+    HayKprocesarNodo = TV1.Nodes(Indice).Checked
     
     
     'Si es un NODO padre no leo mas, ya que no hay campos visibles para ellos
-    If tv1.Nodes(Indice).Parent Is Nothing Then Exit Function
+    If TV1.Nodes(Indice).Parent Is Nothing Then Exit Function
     
 
     NodoOfertaPedidoAlbaran = False
     If Indice = 7 Or Indice = 8 Or Indice = 9 Then NodoOfertaPedidoAlbaran = True
         
     If NodoOfertaPedidoAlbaran Then
-        CadenaVisible = RecuperaValor(tv1.Nodes(Indice).Tag, 1)
+        CadenaVisible = RecuperaValor(TV1.Nodes(Indice).Tag, 1)
         If CadenaVisible <> "" Then
             'El nodo esta marcado para imprimir
             If Not CadenaOfePedAlb(Indice, Aux) Then
@@ -1668,16 +1670,16 @@ Dim NodoOfertaPedidoAlbaran As Boolean
         End If
         
     Else
-        CadenaVisible = RecuperaValor(tv1.Nodes(Indice).Tag, 1)
+        CadenaVisible = RecuperaValor(TV1.Nodes(Indice).Tag, 1)
     End If  'para los nodos de ofer,ped alb y el resto
     
     
     If CadenaVisible <> "" Then
-        cadParam2 = cadParam2 & CadenaVisible & "=" & Val(Abs(tv1.Nodes(Indice).Checked)) & "|"
+        cadParam2 = cadParam2 & CadenaVisible & "=" & Val(Abs(TV1.Nodes(Indice).Checked)) & "|"
     Else
        ' MsgBox "No hay campo visible en el rpt", vbInformation
     End If
-    CadenaFecha = RecuperaValor(tv1.Nodes(Indice).Tag, 2)
+    CadenaFecha = RecuperaValor(TV1.Nodes(Indice).Tag, 2)
     'FECHA
     'Si hay fecha
     If CadenaFecha <> "" Then
@@ -1700,9 +1702,9 @@ Dim NodoOfertaPedidoAlbaran As Boolean
 End Function
 
 Private Sub Configuracion(Leer As Boolean)
-    SQL = App.Path & "\crmdef.dat"
+    Sql = App.Path & "\crmdef.dat"
     If Leer Then
-        If Dir(SQL, vbArchive) <> "" Then
+        If Dir(Sql, vbArchive) <> "" Then
             'Lo cargo todo
             If Not ProcFicheroConfig(True) Then Set DatosGuardados = Nothing
         End If
@@ -1724,34 +1726,34 @@ Dim NF As Integer
     ProcFicheroConfig = False
     NF = FreeFile
     If Leer Then
-        Open SQL For Input As #NF
+        Open Sql For Input As #NF
         
         Set DatosGuardados = New Collection
-        SQL = ""
+        Sql = ""
         While Not EOF(NF)
-            Line Input #NF, SQL
-            DatosGuardados.Add SQL
+            Line Input #NF, Sql
+            DatosGuardados.Add Sql
         Wend
         Close #NF
         
     Else
     
-        Open SQL For Output As #NF
-        For J = 1 To tv1.Nodes.Count
-            i = InStr(1, tv1.Nodes(J), "[")
+        Open Sql For Output As #NF
+        For J = 1 To TV1.Nodes.Count
+            i = InStr(1, TV1.Nodes(J), "[")
             TieneF = i > 0
             
-            SQL = Abs(tv1.Nodes(J).Checked) & "|"
+            Sql = Abs(TV1.Nodes(J).Checked) & "|"
             If TieneF Then
-                Aux = Mid(tv1.Nodes(J).Text, i + 1)
+                Aux = Mid(TV1.Nodes(J).Text, i + 1)
                 Aux = Mid(Aux, 1, Len(Aux) - 1)
                 If Len(Aux) = 4 Then Aux = "01/01/" & Aux
                 
             Else
                 Aux = ""
             End If
-            SQL = SQL & Aux & "|"
-            Print #NF, SQL
+            Sql = Sql & Aux & "|"
+            Print #NF, Sql
         Next J
         Close #NF
     End If
@@ -1797,10 +1799,10 @@ Dim N
     'OFERTAS
     lblInd.Caption = "OFERTAS"
     lblInd.Refresh
-    SQL = "Select numofert,fecofert from scapre where codclien =" & Text1.Text & " AND "
-    SQL = SQL & DevFecha(7, "fecofert")
-    SQL = SQL & " ORDER BY fecofert"
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "Select numofert,fecofert from scapre where codclien =" & Text1.Text & " AND "
+    Sql = Sql & DevFecha(7, "fecofert")
+    Sql = Sql & " ORDER BY fecofert"
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     PpalInsertado = False
     While Not RS.EOF
         If Not PpalInsertado Then
@@ -1816,12 +1818,12 @@ Dim N
             PpalInsertado = True
         End If
         
-        SQL = Format(RS!NumOfert, "000000") & "  -  " & Format(RS!fecofert, "dd/mm/yyyy")
+        Sql = Format(RS!NumOfert, "000000") & "  -  " & Format(RS!fecofert, "dd/mm/yyyy")
         Set N = tv2.Nodes.Add("OFE", tvwChild)
-        N.Text = SQL
+        N.Text = Sql
         N.Checked = False 'True
         Set N = tv3.Nodes.Add("OFE", tvwChild)
-        N.Text = SQL
+        N.Text = Sql
         N.Checked = False
         RS.MoveNext
     Wend
@@ -1837,10 +1839,10 @@ Dim N
     'PEDIDO
     lblInd.Caption = "PEDIDOS"
     lblInd.Refresh
-    SQL = "Select numpedcl,fecpedcl from scaped where codclien =" & Text1.Text & " AND "
-    SQL = SQL & DevFecha(8, "fecpedcl")
-    SQL = SQL & " ORDER BY fecpedcl"
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "Select numpedcl,fecpedcl from scaped where codclien =" & Text1.Text & " AND "
+    Sql = Sql & DevFecha(8, "fecpedcl")
+    Sql = Sql & " ORDER BY fecpedcl"
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     PpalInsertado = False
     While Not RS.EOF
         If Not PpalInsertado Then
@@ -1857,12 +1859,12 @@ Dim N
             N.ForeColor = &H4000&
         End If
         
-        SQL = Format(RS!NumPedcl, "000000") & "  -  " & Format(RS!fecpedcl, "dd/mm/yyyy")
+        Sql = Format(RS!NumPedcl, "000000") & "  -  " & Format(RS!fecpedcl, "dd/mm/yyyy")
         Set N = tv2.Nodes.Add("PED", tvwChild)
-        N.Text = SQL
+        N.Text = Sql
         N.Checked = True
         Set N = tv3.Nodes.Add("PED", tvwChild)
-        N.Text = SQL
+        N.Text = Sql
         N.Checked = False
         RS.MoveNext
     Wend
@@ -1877,11 +1879,11 @@ Dim N
     'ALBARANES
     lblInd.Caption = "ALBARANES"
     lblInd.Refresh
-    SQL = "Select codtipom,numalbar,fechaalb from scaalb where "
-    SQL = SQL & DevFecha(9, "fechaalb")
-    SQL = SQL & " AND codtipom <>'ALZ' and codtipom<>'ALR' and "
-    SQL = SQL & " codClien = " & Text1.Text
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "Select codtipom,numalbar,fechaalb from scaalb where "
+    Sql = Sql & DevFecha(9, "fechaalb")
+    Sql = Sql & " AND codtipom <>'ALZ' and codtipom<>'ALR' and "
+    Sql = Sql & " codClien = " & Text1.Text
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     PpalInsertado = False
     While Not RS.EOF
         If Not PpalInsertado Then
@@ -1898,12 +1900,12 @@ Dim N
             PpalInsertado = True
         End If
         
-        SQL = RS!codtipom & Format(RS!Numalbar, "000000") & "  -  " & Format(RS!FechaAlb, "dd/mm/yy")
+        Sql = RS!codtipom & Format(RS!Numalbar, "000000") & "  -  " & Format(RS!FechaAlb, "dd/mm/yy")
         Set N = tv2.Nodes.Add("ALB", tvwChild)
         N.Checked = True
-        N.Text = SQL
+        N.Text = Sql
         Set N = tv3.Nodes.Add("ALB", tvwChild)
-        N.Text = SQL
+        N.Text = Sql
         N.Checked = False
         
         RS.MoveNext
@@ -1921,8 +1923,8 @@ Private Function DevFecha(Indice As Integer, CampoBD As String) As String
 Dim i As Integer
 Dim F As String
     F = CDate("01/01/1900")
-    i = InStr(1, tv1.Nodes(Indice).Text, "[")
-    If i > 0 Then F = Mid(tv1.Nodes(Indice), i + 1, 10)
+    i = InStr(1, TV1.Nodes(Indice).Text, "[")
+    If i > 0 Then F = Mid(TV1.Nodes(Indice), i + 1, 10)
     DevFecha = CampoBD & " >= '" & Format(F, FormatoFecha) & "'"
 End Function
 
@@ -2167,24 +2169,24 @@ Dim N As Node
     
     
     Set N = tv3.Nodes(1)
-    SQL = ""
+    Sql = ""
     For J = 1 To tv3.Nodes.Count
         If tv3.Nodes(J).Checked Then
             If Not tv3.Nodes(J).Parent Is Nothing Then
-                SQL = "OK"   'Si es nodo hijo
+                Sql = "OK"   'Si es nodo hijo
                 Exit For
             End If
         End If
     Next
     
-    If SQL = "" Then
+    If Sql = "" Then
       '  MsgBox "Ningun datos seleccionado", vbExclamation
         J = 0
     Else
         J = 1
-        SQL = "Va a imprimir las ofertas/pedidos/albaranes seleccionados" & vbCrLf & vbCrLf
-        SQL = SQL & "¿Continuar?"
-        If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then J = 0
+        Sql = "Va a imprimir las ofertas/pedidos/albaranes seleccionados" & vbCrLf & vbCrLf
+        Sql = Sql & "¿Continuar?"
+        If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then J = 0
     End If
     If J = 0 Then Exit Sub
     
@@ -2253,7 +2255,7 @@ Dim AntiguoTipmov As String
     
 
     cadFormula = ""
-    SQL = ""
+    Sql = ""
     AntiguoTipmov = ""
     Set N = NodoPadre.Child
     While Not (N Is Nothing)
@@ -2261,7 +2263,7 @@ Dim AntiguoTipmov As String
             
             Select Case NodoPadre.Key
             Case "PED"
-                If SQL = "" Then SQL = "{scaped.codclien} = " & Text1.Text & " AND {scaped.numpedcl} IN "
+                If Sql = "" Then Sql = "{scaped.codclien} = " & Text1.Text & " AND {scaped.numpedcl} IN "
                 J = InStr(1, N.Text, "-")
                 cadFormula = cadFormula & ", " & Trim(Mid(N.Text, 1, J - 1))
                 
@@ -2271,7 +2273,7 @@ Dim AntiguoTipmov As String
                     'Es la 1era vez k entra aqui
                     cadParam2 = cadParam2 & "pCodCarta=0|"
                     numParam = numParam + 1
-                    SQL = "{scapre.codclien} = " & Text1.Text & " AND {scapre.numofert} IN "
+                    Sql = "{scapre.codclien} = " & Text1.Text & " AND {scapre.numofert} IN "
                 End If
                  J = InStr(1, N.Text, "-")
                  cadFormula = cadFormula & ", " & Trim(Mid(N.Text, 1, J - 1))
@@ -2300,7 +2302,7 @@ Dim AntiguoTipmov As String
                     cadParam2 = cadParam2 & "Albarcon=" & devuelve & "|"
                     numParam = numParam + 1
                     
-                    SQL = "{scaalb.codclien} = " & Text1.Text & " AND {scaalb.codtipom}= '" & AntiguoTipmov & "' AND {scaalb.numalbar} IN "
+                    Sql = "{scaalb.codclien} = " & Text1.Text & " AND {scaalb.codtipom}= '" & AntiguoTipmov & "' AND {scaalb.numalbar} IN "
                     
                 End If
                  J = InStr(1, N.Text, "-")
@@ -2330,7 +2332,7 @@ End Sub
 Private Sub Imprime(cadFormula As String, OpcRPT As Integer, cadParam As String, numParam As Byte)
         cadFormula = Mid(cadFormula, 2) 'quito la primera coma
         cadFormula = "[" & cadFormula & "]"
-        cadFormula = SQL & cadFormula
+        cadFormula = Sql & cadFormula
     
          With frmImprimir
                     

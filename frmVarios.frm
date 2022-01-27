@@ -3026,33 +3026,37 @@ End Sub
 
 Private Sub cmdZonaxAlb_Click()
 Dim N
-    If tv1.Nodes.Count = 0 Then Exit Sub
-    'Nos recorreemos el tv1 por si a desmarcado alguno
-    'Lo borraremos de la tabla tmpsliped
-    lblInd(0).Caption = "Devuelve datos"
-    lblInd(0).Refresh
-    
-
-    Set N = tv1.Nodes(1)
-    NumRegElim = 0  'Los nodos NO chequeados
-    Cad = ""
-    While Not N Is Nothing
+    If tv1.Nodes.Count = 0 Then
+        NumRegElim = 0
         
-        If Not N.Checked Then
-            NumRegElim = NumRegElim + 1
-        Else
-            Cad = Cad & ", " & Mid(N.Key, 2)
+    Else
+    
+        'Nos recorreemos el tv1 por si a desmarcado alguno
+        'Lo borraremos de la tabla tmpsliped
+        lblInd(0).Caption = "Devuelve datos"
+        lblInd(0).Refresh
+        
+    
+        Set N = tv1.Nodes(1)
+        NumRegElim = 0  'Los nodos NO chequeados
+        Cad = ""
+        While Not N Is Nothing
+            
+            If Not N.Checked Then
+                NumRegElim = NumRegElim + 1
+            Else
+                Cad = Cad & ", " & Mid(N.Key, 2)
+            End If
+            
+            Set N = N.Next
+        Wend
+        
+        If Cad = "" Then
+            MsgBox "Nada seleccionado", vbExclamation
+            lblInd(0).Caption = ""
+            Exit Sub
         End If
-        
-        Set N = N.Next
-    Wend
-    
-    If Cad = "" Then
-        MsgBox "Nada seleccionado", vbExclamation
-        lblInd(0).Caption = ""
-        Exit Sub
     End If
-    
     'Ahora si estan todos los nodos seleccionados  no hace falta que haga
     'en el select un codzona in (1,2... etc)
     'Si son todos, son todos. No ponemos una condicion mas
@@ -3813,6 +3817,9 @@ Dim N
     Wend
     miRsAux.Close
     Set miRsAux = Nothing
+    
+    
+    
     CadenaDesdeOtroForm = "NO" 'Para que si le da a cancelar NO haga nada en frmlistado2
 End Sub
 
@@ -4181,16 +4188,16 @@ Dim Aux As String
     txtStock.Text = ""
     Aux = ""
     While Not miRsAux.EOF
-        If NumRegElim <> miRsAux!Codprove Then
+        If NumRegElim <> miRsAux!CodProve Then
             'Pinto el proveedor y un linea
             If Aux <> "" Then
                 txtStock.Text = txtStock.Text & Aux & vbCrLf
                 Aux = ""
             End If
             If txtStock.Text <> "" Then txtStock.Text = txtStock.Text & vbCrLf & vbCrLf
-            txtStock.Text = txtStock & miRsAux!nomprove & " (" & miRsAux!Codprove & ")" & vbCrLf
+            txtStock.Text = txtStock & miRsAux!nomprove & " (" & miRsAux!CodProve & ")" & vbCrLf
             txtStock.Text = txtStock.Text & String(40, "-")
-            NumRegElim = miRsAux!Codprove
+            NumRegElim = miRsAux!CodProve
             Cad = ""
         End If
         If Cad <> miRsAux!codArtic Then

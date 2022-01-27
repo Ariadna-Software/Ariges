@@ -2289,8 +2289,9 @@ Dim L As Integer
                     If Bloquea Then 'El articulo esta bloqueado
                         If Modo = 1 Then
                             txtCod.Text = ""
-                            txtNom.Text = ""
+                            'txtNom.Text = ""
                         End If
+                        txtNom.Text = ""   'Nov 2021 lo he pasado aqui para que no pueda insertar despues
                         PonerFoco txtCod
                     Else 'Articulo OK
                         PonerArticulo = True

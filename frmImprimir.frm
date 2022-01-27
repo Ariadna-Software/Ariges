@@ -16,6 +16,68 @@ Begin VB.Form frmImprimir
    ScaleWidth      =   6780
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameAlbaran1A1 
+      Height          =   1095
+      Left            =   240
+      TabIndex        =   12
+      Top             =   1800
+      Visible         =   0   'False
+      Width           =   6375
+      Begin VB.OptionButton optAlbValorado 
+         Caption         =   "Cantidad"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   2
+         Left            =   4680
+         TabIndex        =   15
+         Top             =   480
+         Width           =   1455
+      End
+      Begin VB.OptionButton optAlbValorado 
+         Caption         =   "Cantidad y precio"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   1
+         Left            =   2160
+         TabIndex        =   14
+         Top             =   480
+         Width           =   1935
+      End
+      Begin VB.OptionButton optAlbValorado 
+         Caption         =   "Valorado"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   240
+         TabIndex        =   13
+         Top             =   480
+         Width           =   1455
+      End
+   End
    Begin VB.Frame FrameSelecRPT 
       BorderStyle     =   0  'None
       Height          =   975
@@ -265,6 +327,9 @@ Private Sub cmdImprimir_Click()
     
     
     Imprime
+    
+    
+    
 End Sub
 
 Private Sub cmdSalir_Click()
@@ -322,6 +387,7 @@ End Sub
 'cogera el mismo que tiene en NombreRPT
 Private Sub Form_Load()
 Dim Cad As String
+Dim jj As Integer
 
     PrimeraVez = True
     Lanzado = False
@@ -329,8 +395,8 @@ Dim Cad As String
     Cad = Dir(App.Path & "\impre.dat", vbArchive)
     HaPulsadoElBotonDeImprimir = False
     
-    
-    
+    FrameAlbaran1A1.visible = False
+        
     
     
     'ReestableceSoloImprimir = False
@@ -548,6 +614,48 @@ Dim Cad As String
                         NombreRPT = "rFacPedxClien.rpt"
                         MostrarTree = True
                     '45: Informe de Albaranes
+                    Case 45
+                    
+                        'Viene un parametro ... |Albarcon=0|   '0 o 1
+                        FrameAlbaran1A1.Tag = ""
+                        If vParamAplic.NumeroInstalacion = vbHerbelca Then
+                            jj = InStr(1, OtrosParametros, "|Albarcon=")
+                        Else
+                            jj = 0  'Solo para herbelca
+                        End If
+                        If jj > 0 Then
+                            
+                            
+                            
+                            
+                            
+                            Cad = Mid(OtrosParametros, jj + 10, 2)   'Buscamos ->  0| o 1|
+                            ' 0 todo    1  cantidad y precio    2- cantidad
+                            If Cad = "0|" Then
+                                Me.optAlbValorado(0).Value = True
+                            Else
+                                If Cad = "1|" Then
+                                    Me.optAlbValorado(1).Value = True
+                                Else
+                                    If Cad = "2|" Then
+                                        Me.optAlbValorado(2).Value = True
+                                    Else
+                                        Cad = ""
+                                    End If
+                                End If
+                            End If
+                            
+                            If Cad <> "" Then
+                                FrameAlbaran1A1.Tag = "|Albarcon=" & Cad
+                                FrameAlbaran1A1.Left = 240
+                                FrameAlbaran1A1.visible = True
+                            End If
+                            
+                        End If
+                        
+                    
+                    
+                    
                     Case 46
                         'TRAMPA.
                         'No estaba utlizado.
@@ -679,8 +787,23 @@ Dim EsPorEmail As Boolean
     
     End If
     
-    CadenaDesdeOtroForm = ""
     
+    
+    If Opcion = 45 And CStr(Me.FrameAlbaran1A1.Tag) <> "" Then
+        Aux = ""
+        
+        If Me.optAlbValorado(0).Value Then Aux = "0"
+        If Me.optAlbValorado(1).Value Then Aux = "1"
+        If Me.optAlbValorado(2).Value Then Aux = "2"
+         
+        If Aux <> "" Then
+            Aux = "|Albarcon=" & Aux & "|"
+            If FrameAlbaran1A1.Tag <> Aux Then OtrosParam2 = Replace(OtrosParam2, FrameAlbaran1A1.Tag, Aux)
+            
+        End If
+    End If
+    
+    CadenaDesdeOtroForm = ""
     With frmVisReport
             
         .CambiaODBC = False
@@ -727,13 +850,17 @@ Dim EsPorEmail As Boolean
             .NumCopias = NumeroCopias
         End If
         .Opcion = Opcion
-        
         .ExportarPDF = EsPorEmail
         .MostrarTree = MostrarTree
         
         If EsPorEmail Then
             Load frmVisReport
             Unload frmVisReport
+            
+            'De momento ciertos casos
+            '
+            'if outTipoDocumento<>"" the
+            If Opcion = 238 Then .EstaImpreso = True   'confirmacion de entrega
         Else
             .Show vbModal
         End If
@@ -828,7 +955,7 @@ Dim EsPorEmail As Boolean
                             If Dir(davidCodtipom, vbDirectory) <> "" Then LanzaVisorMimeDocumento Me.hwnd, davidCodtipom
                             
                         End If
-                    End If
+                     End If
                 
                     '
                     LanzaProgramaAbrirOutlook
@@ -963,6 +1090,12 @@ Dim i As Integer
     Case 7
         'ALbaran facturado
         Aux = "" & Me.outClaveNombreArchiv & ".pdf"
+        
+        
+    Case 8
+        'Confirmacion entraga pedido
+        Aux = "Entrega_Ped" & Me.outClaveNombreArchiv & ".pdf"
+        
     Case 51
         Aux = "PEDP" & Me.outClaveNombreArchiv & ".pdf"
         
@@ -1008,6 +1141,8 @@ Dim i As Integer
     Case 7
         Aux = "Albaran facturado."
     '--------------------------------------------------
+    Case 8
+        Aux = "Confirmacion entrega pedido nº: " & outClaveNombreArchiv
     Case 51
         Aux = "Pedido proveedor nº: " & outClaveNombreArchiv
     
@@ -1069,6 +1204,12 @@ Dim otromail As String
             End If
             campoemail = DevuelveDesdeBD(conAri, campoemail, "sclien", "codclien", Me.outCodigoCliProv, "N", otromail)
             If campoemail = "" Then campoemail = otromail
+            
+            If outTipoDocumento = 8 Then
+                otromail = "0" & outClaveNombreArchiv
+                otromail = DevuelveDesdeBD(conAri, "mailconfir", "scaped", "numpedcl", otromail)
+                If otromail <> "" Then campoemail = campoemail & ";" & otromail & ";"
+            End If
         Else
             'Para provedores
             If outTipoDocumento = 52 Or outTipoDocumento = 53 Then

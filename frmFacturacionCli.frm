@@ -492,7 +492,7 @@ Dim SQL As String
 Dim Im As Currency
 
 Private Sub cmdFacturar_Click()
-Dim I As Integer
+Dim i As Integer
 
     
     
@@ -526,12 +526,12 @@ Dim I As Integer
     
     'Vere si hay alguno marcado para facturar
     SQL = ""
-    For I = 1 To TreeView1.Nodes.Count
-        If Not TreeView1.Nodes(I).Parent Is Nothing Then
-            If TreeView1.Nodes(I).Checked Then
-                If Not TreeView1.Nodes(I).Parent.Checked Then
-                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(I).Parent.Text, vbExclamation
-                    TreeView1.Nodes(I).Parent.Checked = True
+    For i = 1 To TreeView1.Nodes.Count
+        If Not TreeView1.Nodes(i).Parent Is Nothing Then
+            If TreeView1.Nodes(i).Checked Then
+                If Not TreeView1.Nodes(i).Parent.Checked Then
+                    MsgBox "Deberia estar marcado: " & TreeView1.Nodes(i).Parent.Text, vbExclamation
+                    TreeView1.Nodes(i).Parent.Checked = True
                     Exit Sub
                 End If
                 
@@ -673,16 +673,16 @@ Dim Im As Currency
 End Sub
 
 Private Sub PonerCadenaImporte(ByRef N As Node, Padre As Boolean)
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
     If Padre Then
         J = 24
     Else
         J = 45
     End If
-    I = InStr(1, N.Text, ":")
-    If I > 0 Then
-        N.Text = Mid(N.Text, 1, I)
+    i = InStr(1, N.Text, ":")
+    If i > 0 Then
+        N.Text = Mid(N.Text, 1, i)
         N.Text = N.Text & Right(Space(J) & Format(N.Tag, FormatoImporte), J)
     End If
 End Sub
@@ -963,7 +963,7 @@ End Function
 
 
 Private Sub InsertarLineaFactura(ByRef Cole As Collection)
-Dim I As Integer
+Dim i As Integer
 Dim N As Node
 Dim TotalFra As Currency
 
@@ -982,9 +982,9 @@ Dim TotalFra As Currency
     N.Checked = True
     TotalFra = 0
     'Los albaranes que iran
-    For I = 1 To Cole.Count
+    For i = 1 To Cole.Count
         'El importe
-        SQL = RecuperaValor(Cole.Item(I), 2)
+        SQL = RecuperaValor(Cole.Item(i), 2)
         Im = CCur(SQL)
         TotalFra = TotalFra + Im
         
@@ -992,7 +992,7 @@ Dim TotalFra As Currency
 '--
 '        SQL = Right(Space(10) & Format(Im, FormatoImporte), 10)
         SQL = Right(Space(18) & Format(Im, FormatoImporte), 18)
-        SQL = RecuperaValor(Cole.Item(I), 1) & SQL
+        SQL = RecuperaValor(Cole.Item(i), 1) & SQL
         Set N = TreeView1.Nodes.Add("FRA" & Format(NumRegElim, "000"), tvwChild)
         N.Text = SQL
         N.Image = 44
@@ -1056,25 +1056,25 @@ End Sub
 
 Private Sub HacerFacturacionCliente()
 Dim CadenaSQL As String
-Dim I As Integer
+Dim i As Integer
     
     SQL = ""
-    For I = 1 To TreeView1.Nodes.Count
-        If TreeView1.Nodes(I).Parent Is Nothing Then
+    For i = 1 To TreeView1.Nodes.Count
+        If TreeView1.Nodes(i).Parent Is Nothing Then
             'NADA
             
         Else
-            If TreeView1.Nodes(I).Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(TreeView1.Nodes(I).Text)
+            If TreeView1.Nodes(i).Checked Then SQL = SQL & ", " & DevuelveNumeroAlbaran(TreeView1.Nodes(i).Text)
    
         End If
-    Next I
+    Next i
     
     SQL = Mid(SQL, 3)
     
     CadenaSQL = "scaalb.codtipom = 'ALV' AND scaalb.codclien=" & Me.txtclien.Text & " AND  scaalb.numalbar IN (" & SQL & ")"
     SQL = "SELECT scaalb.*,sclien.nomclien FROM scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien  WHERE " & CadenaSQL
     
-    I = Val(RecuperaValor(CadenaDesdeOtroForm, 3))
+    i = Val(RecuperaValor(CadenaDesdeOtroForm, 3))
     
      Dim AuxCadena As String
         
@@ -1110,7 +1110,7 @@ Dim I As Integer
         End If
     End If
         
-    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, I = 1, "ALV", "", CByte(txtCopia.Text), True, False, False
+    TraspasoAlbaranesFacturas SQL, CadenaSQL, RecuperaValor(CadenaDesdeOtroForm, 1), RecuperaValor(CadenaDesdeOtroForm, 2), Nothing, Me.lblInd, i = 1, "ALV", "", CByte(txtCopia.Text), True, False, False, False
 End Sub
 
 
