@@ -635,10 +635,10 @@ On Error GoTo Error1
         If DatosOk(True) Then
             If InsertarDesdeForm(Me) Then
                 Espera 0.5
-                data1.Refresh
+                Data1.Refresh
                 
                  PosicionarData True
-                 If Not Me.data1.Recordset.EOF Then
+                 If Not Me.Data1.Recordset.EOF Then
                     BotonLineas
                     mnNuevo_Click
                  End If
@@ -741,7 +741,7 @@ Private Sub cmdRegresar_Click()
     'Quitar lineas y volver a la cabecera
     If Modo >= 5 Then 'modo 5: Mantenimiento Lineas
         PonerModo 2
-        Me.lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
+        Me.lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
         If DataGrid1.Row >= 0 Then
             DeseleccionaGrid Me.DataGrid1
             DataGrid1.Bookmark = 1
@@ -750,12 +750,12 @@ Private Sub cmdRegresar_Click()
         Me.cmdCancelar.Cancel = True
         Me.cmdRegresar.Caption = "Regresar"
     Else
-        If data1.Recordset.EOF Then
+        If Data1.Recordset.EOF Then
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
         
-        RaiseEvent DatoSeleccionado(data1.Recordset.Fields(0) & "|" & data1.Recordset.Fields(1) & "|")
+        RaiseEvent DatoSeleccionado(Data1.Recordset.Fields(0) & "|" & Data1.Recordset.Fields(1) & "|")
         Unload Me
     End If
 End Sub
@@ -812,9 +812,9 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " WHERE false"
 
     
-    data1.ConnectionString = conn
-    data1.RecordSource = CadenaConsulta
-    data1.Refresh
+    Data1.ConnectionString = conn
+    Data1.RecordSource = CadenaConsulta
+    Data1.Refresh
     
     CargaGridArticulos False
     PonerModo 0
@@ -823,16 +823,16 @@ End Sub
 
 
 Private Sub CargaGridArticulos(enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECarga
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
-    SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.Data2, SQL, False
+    Sql = MontaSQLCarga(enlaza)
+    CargaGridGnral DataGrid1, Me.Data2, Sql, False
       
     DataGrid1.Columns(0).visible = False 'Cod. trasp
    
@@ -859,7 +859,7 @@ Dim SQL As String
         DataGrid1.Columns(i).AllowSizing = False
     Next i
        
-    DataGrid1.Enabled = b
+    DataGrid1.Enabled = B
     DataGrid1.ScrollBars = dbgAutomatic
     
 ECarga:
@@ -1205,12 +1205,12 @@ Dim C As String
         Case 7 'Eliminar
             mnEliminar_Click
         Case 9, 10
-                If data1.Recordset.EOF Then Exit Sub
+                If Data1.Recordset.EOF Then Exit Sub
                 C = ""
                 If Button.Index = 9 Then
-                    If Val(data1.Recordset!Situacion) > 0 Then C = "Imposible modificar lineas en esta situacion"
+                    If Val(Data1.Recordset!Situacion) > 0 Then C = "Imposible modificar lineas en esta situacion"
                 Else
-                    If Val(data1.Recordset!Situacion) = 2 Then C = "Situacion: cerrada"
+                    If Val(Data1.Recordset!Situacion) = 2 Then C = "Situacion: cerrada"
                 End If
                 If C <> "" Then
                     MsgBox C, vbExclamation
@@ -1243,7 +1243,7 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 
     'Actualiza Iconos Insertar,Modificar,Eliminar
@@ -1254,13 +1254,13 @@ Dim NumReg As Byte
 
     'Modo 2. Hay datos y estamos visualizandolos
     '-------------------------------------------
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     'Poner Flechas de desplazamiento visibles
     NumReg = 1
-    If Not data1.Recordset.EOF Then
-        If data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
+    If Not Data1.Recordset.EOF Then
+        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
     
     
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -1272,12 +1272,12 @@ Dim NumReg As Byte
     
     'Modo 1:Busqueda / Modo 3: Insertar / Modo 4: Modificar
     '-------------------------------------------------------
-    b = (Modo = 3 Or Modo = 4 Or Modo = 1)
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = (Modo = 3 Or Modo = 4 Or Modo = 1)
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     
     For i = 1 To 3
-        If i <> 2 Then Me.imgFecha(i).Enabled = b
+        If i <> 2 Then Me.imgFecha(i).Enabled = B
     Next i
     
     BloquearCmb cboSitua, Modo <> 1
@@ -1289,7 +1289,7 @@ Dim NumReg As Byte
     If Modo = 2 Then
         '
         If Me.DatosADevolverBusqueda Then
-            If Not Me.data1.Recordset.EOF Then cmdRegresar.visible = True
+            If Not Me.Data1.Recordset.EOF Then cmdRegresar.visible = True
 
         End If
     End If
@@ -1309,7 +1309,7 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 
     
     
@@ -1317,34 +1317,34 @@ Dim b As Boolean
   
     
     
-         b = (Modo = 2) Or (Modo >= 5)
+         B = (Modo = 2) Or (Modo >= 5)
         'Insertar
-        Toolbar1.Buttons(5).Enabled = (b Or Modo = 0)
-        Me.mnNuevo.Enabled = (b Or Modo = 0)
+        Toolbar1.Buttons(5).Enabled = (B Or Modo = 0)
+        Me.mnNuevo.Enabled = (B Or Modo = 0)
         'Modificar
-        Toolbar1.Buttons(6).Enabled = b
-        Me.mnModificar.Enabled = b
+        Toolbar1.Buttons(6).Enabled = B
+        Me.mnModificar.Enabled = B
         'eliminar
-        Toolbar1.Buttons(7).Enabled = b
-        Me.mnEliminar.Enabled = b
+        Toolbar1.Buttons(7).Enabled = B
+        Me.mnEliminar.Enabled = B
         
         '--------------------------------
-        b = (Modo = 2)
+        B = (Modo = 2)
         'Lineas Traspaso Almacenes
-        Toolbar1.Buttons(9).Enabled = b
+        Toolbar1.Buttons(9).Enabled = B
         'Actualizar
-        Toolbar1.Buttons(10).Enabled = b
+        Toolbar1.Buttons(10).Enabled = B
         'Imprimir
-        Toolbar1.Buttons(12).Enabled = b
+        Toolbar1.Buttons(12).Enabled = B
             
         '-------------------------------
-        b = (Modo >= 3) Or Modo = 1
+        B = (Modo >= 3) Or Modo = 1
         'Buscar
-        Toolbar1.Buttons(1).Enabled = Not b
-        Me.mnBuscar.Enabled = Not b
+        Toolbar1.Buttons(1).Enabled = Not B
+        Me.mnBuscar.Enabled = Not B
         'VerTodos
-        Toolbar1.Buttons(2).Enabled = Not b
-        Me.mnVerTodos.Enabled = Not b
+        Toolbar1.Buttons(2).Enabled = Not B
+        Me.mnVerTodos.Enabled = Not B
 
 End Sub
 
@@ -1366,8 +1366,8 @@ Private Sub Desplazamiento(Index As Integer)
             If Data2.Recordset.EOF Then Exit Sub
             DesplazamientoData Data2, Index
         Case Else 'Datos de Cabecera
-            If data1.Recordset.EOF Then Exit Sub
-            DesplazamientoData data1, Index
+            If Data1.Recordset.EOF Then Exit Sub
+            DesplazamientoData Data1, Index
             PonerCampos
     End Select
 End Sub
@@ -1382,7 +1382,7 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
 On Error GoTo EMontaSQL
  
@@ -1390,19 +1390,19 @@ On Error GoTo EMontaSQL
         tabla = NomTablaLineas
     
     
-        SQL = "SELECT " & tabla & ".codigo, "
-        SQL = SQL & tabla & ".codartic, Articulos.nomartic, " & tabla & ".precioMail "
-        SQL = SQL & " FROM ((" & tabla & " LEFT JOIN sartic AS Articulos ON " & tabla & ".codartic ="
-        SQL = SQL & " Articulos.codartic))"
+        Sql = "SELECT " & tabla & ".codigo, "
+        Sql = Sql & tabla & ".codartic, Articulos.nomartic, " & tabla & ".precioMail "
+        Sql = Sql & " FROM ((" & tabla & " LEFT JOIN sartic AS Articulos ON " & tabla & ".codartic ="
+        Sql = Sql & " Articulos.codartic))"
     
     
     If enlaza Then
-        SQL = SQL & ObtenerWhereCP(True)  '" WHERE codtrasp = " & Data1.Recordset!codtrasp
+        Sql = Sql & ObtenerWhereCP(True)  '" WHERE codtrasp = " & Data1.Recordset!codtrasp
     Else
-        SQL = SQL & " WHERE false"
+        Sql = Sql & " WHERE false"
     End If
-    SQL = SQL & " ORDER BY " & tabla & ".codartic"
-    MontaSQLCarga = SQL
+    Sql = Sql & " ORDER BY " & tabla & ".codartic"
+    MontaSQLCarga = Sql
     
 EMontaSQL:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -1421,7 +1421,7 @@ Private Sub BotonBuscar()
         Text1(0).BackColor = vbYellow
     Else
         HacerBusqueda
-        If data1.Recordset.EOF Then
+        If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
             Text1(kCampo).BackColor = vbYellow
             PonerFoco Text1(kCampo)
@@ -1516,7 +1516,7 @@ Private Sub BotonModificar()
     
     
     
-    If Val(data1.Recordset!Situacion) > 0 Then
+    If Val(Data1.Recordset!Situacion) > 0 Then
         BloquearTxt Text1(1), True
         BloquearTxt Text1(3), True
     End If
@@ -1565,24 +1565,24 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 
     'Ciertas comprobaciones
-    If data1.Recordset.EOF Then Exit Sub
-    If Val(data1.Recordset!Situacion) > 0 Then
+    If Data1.Recordset.EOF Then Exit Sub
+    If Val(Data1.Recordset!Situacion) > 0 Then
         MsgBox "Imposible eliminar los registros en esta situacion", vbExclamation
         Exit Sub
     End If
     
     
     
-    SQL = "Va a eliminar " & vbCrLf
-    SQL = SQL & "------------------------------------------" & vbCrLf & vbCrLf
-    SQL = SQL & vbCrLf & "Codigo   : " & Text1(0).Text
-    SQL = SQL & vbCrLf & "Descripcion  : " & CStr(data1.Recordset.Fields(1))
-    SQL = SQL & vbCrLf & vbCrLf & " ¿Desea continuar ? "
+    Sql = "Va a eliminar " & vbCrLf
+    Sql = Sql & "------------------------------------------" & vbCrLf & vbCrLf
+    Sql = Sql & vbCrLf & "Codigo   : " & Text1(0).Text
+    Sql = Sql & vbCrLf & "Descripcion  : " & CStr(Data1.Recordset.Fields(1))
+    Sql = Sql & vbCrLf & vbCrLf & " ¿Desea continuar ? "
     
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         If Not Eliminar Then Exit Sub
@@ -1593,9 +1593,9 @@ Dim SQL As String
 '        vTipoMov.DevolverContador CodTipoMov, NumRegElim
 '        Set vTipoMov = Nothing
     
-        NumRegElim = data1.Recordset.AbsolutePosition
+        NumRegElim = Data1.Recordset.AbsolutePosition
         DataGrid1.Enabled = False
-        If SituarDataTrasEliminar(data1, NumRegElim) Then
+        If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
         Else 'Solo habia un registro
             LimpiarCampos
@@ -1608,24 +1608,24 @@ Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
         MsgBox Err.Number & ": " & Err.Description, vbExclamation
-        data1.Recordset.CancelUpdate
+        Data1.Recordset.CancelUpdate
     End If
 End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim SQL As String
+Dim Sql As String
 On Error GoTo FinEliminar
     
     conn.BeginTrans
-    SQL = ObtenerWhereCP(True)  '" WHERE  codtrasp=" & Data1.Recordset!codtrasp
+    Sql = ObtenerWhereCP(True)  '" WHERE  codtrasp=" & Data1.Recordset!codtrasp
     
     'Lineas
-    conn.Execute "Delete  from " & NomTablaLineas & SQL
+    conn.Execute "Delete  from " & NomTablaLineas & Sql
   
     
     'Cabeceras
-    conn.Execute "Delete  from " & NombreTabla & SQL
+    conn.Execute "Delete  from " & NombreTabla & Sql
                       
 
 FinEliminar:
@@ -1641,7 +1641,7 @@ End Function
 
 
 Private Sub BotonEliminarLinea()
-Dim SQL As String
+Dim Sql As String
 On Error GoTo Error2
     'Ciertas comprobaciones
     
@@ -1655,25 +1655,25 @@ On Error GoTo Error2
     ModificaLineas = 3 'Eliminar
     
     '### a mano
-    SQL = "Seguro que desea eliminar la línea :"
-    SQL = SQL & "del Artículo" & vbCrLf & "Código: @2"
-    SQL = SQL & vbCrLf & "Descripción: @3"
+    Sql = "Seguro que desea eliminar la línea :"
+    Sql = Sql & "del Artículo" & vbCrLf & "Código: @2"
+    Sql = Sql & vbCrLf & "Descripción: @3"
     
-        SQL = Replace(SQL, "@1", "del Artículo")
-        SQL = Replace(SQL, "@2", Data2.Recordset!codArtic)
-        SQL = Replace(SQL, "@3", Data2.Recordset.Fields(3))
+        Sql = Replace(Sql, "@1", "del Artículo")
+        Sql = Replace(Sql, "@2", Data2.Recordset!codArtic)
+        Sql = Replace(Sql, "@3", Data2.Recordset.Fields(3))
   
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
     
        
-            SQL = NomTablaLineas
+            Sql = NomTablaLineas
             
       
         
-        SQL = "Delete from " & SQL & ObtenerWhereCP(True)
-        SQL = SQL & " and codartic=" & DBSet(Data2.Recordset!codArtic, "T")
+        Sql = "Delete from " & Sql & ObtenerWhereCP(True)
+        Sql = Sql & " and codartic=" & DBSet(Data2.Recordset!codArtic, "T")
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         
             CancelaADODC Me.Data2
@@ -1690,54 +1690,54 @@ End Sub
 
 
 Private Function DatosOk(Optional cabecera As Boolean) As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
 
    
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
    
 
 Private Function DatosOkLinea() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
-Dim cad As String
+Dim Cad As String
 
     DatosOkLinea = False
-    b = True
+    B = True
     
-    cad = ""
+    Cad = ""
     kCampo = 0
     If txtAux(0).Text = "" Then
-        cad = "El campo Cod. Artículo no puede ser nulo"
+        Cad = "El campo Cod. Artículo no puede ser nulo"
     Else
-        If txtAux(1).Text = "" Then cad = "El campo Cod. Artículo incorrecto"
+        If txtAux(1).Text = "" Then Cad = "El campo Cod. Artículo incorrecto"
     End If
-    If txtAux(2).Text = "" Then cad = vbCrLf & "Precio no puede estar vacio": kCampo = 2
-    If cad <> "" Then
-        b = False
+    If txtAux(2).Text = "" Then Cad = vbCrLf & "Precio no puede estar vacio": kCampo = 2
+    If Cad <> "" Then
+        B = False
         PonerFoco txtAux(kCampo)
     End If
     
     
     
-    DatosOkLinea = b
+    DatosOkLinea = B
 End Function
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 On Error Resume Next
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdRegresar.visible = b
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
-    If b Then
+    If B Then
         Me.cmdRegresar.Cancel = True
         If Modo = 5 Then
             Me.lblIndicador.Caption = "Lin. artículos"
@@ -1769,11 +1769,11 @@ EInsertarModificarLinea:
 End Function
 
 Private Function InsertarModificarLineaArt() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     
     
-    SQL = ""
+    Sql = ""
     
 
     
@@ -1781,22 +1781,22 @@ Dim SQL As String
     Select Case ModificaLineas
     Case 1 'Insertar
         If DatosOkLinea() Then 'INSERTAR
-            SQL = "INSERT INTO smailpromoli(codigo,codartic,precioMail)"
-            SQL = SQL & " VALUES (" & DBSet(Text1(0).Text, "T") & ", "
-            SQL = SQL & DBSet(txtAux(0).Text, "T") & ", "
-            SQL = SQL & DBSet(txtAux(2).Text, "N", "N") & ") "
+            Sql = "INSERT INTO smailpromoli(codigo,codartic,precioMail)"
+            Sql = Sql & " VALUES (" & DBSet(Text1(0).Text, "T") & ", "
+            Sql = Sql & DBSet(txtAux(0).Text, "T") & ", "
+            Sql = Sql & DBSet(txtAux(2).Text, "N", "N") & ") "
         Else
 '            PonerFoco txtAux(3)
         End If
     Case 2 'Modificar
         If DatosOkLinea() Then
-            SQL = "UPDATE smailpromoli Set precioMail = " & DBSet(txtAux(2).Text, "N")
-            SQL = SQL & ObtenerWhereCP(True) & " AND " '" WHERE codtrasp =" & Val(Text1(0).Text) & " AND "
-            SQL = SQL & " codartic =" & DBSet(Data2.Recordset!codArtic, "T")
+            Sql = "UPDATE smailpromoli Set precioMail = " & DBSet(txtAux(2).Text, "N")
+            Sql = Sql & ObtenerWhereCP(True) & " AND " '" WHERE codtrasp =" & Val(Text1(0).Text) & " AND "
+            Sql = Sql & " codartic =" & DBSet(Data2.Recordset!codArtic, "T")
         End If
     End Select
     
-    If ejecutar(SQL, False) Then InsertarModificarLineaArt = True
+    If ejecutar(Sql, False) Then InsertarModificarLineaArt = True
     
 
 End Function
@@ -1856,9 +1856,9 @@ Private Sub PonerCadenaBusqueda()
 Screen.MousePointer = vbHourglass
 On Error GoTo EEPonerBusq
 
-    data1.RecordSource = CadenaConsulta
-    data1.Refresh
-    If data1.Recordset.RecordCount <= 0 Then
+    Data1.RecordSource = CadenaConsulta
+    Data1.Refresh
+    If Data1.Recordset.RecordCount <= 0 Then
         If Modo = 1 Then 'Busqueda
              MsgBox "No hay ningún registro en la tabla " & NombreTabla & " para ese criterio de Búsqueda.", vbInformation
              PonerFoco Text1(0)
@@ -1869,7 +1869,7 @@ On Error GoTo EEPonerBusq
         Exit Sub
     Else
         PonerModo 2
-        data1.Recordset.MoveFirst
+        Data1.Recordset.MoveFirst
         PonerCampos
         Me.DataGrid1.Enabled = True
     End If
@@ -1884,14 +1884,14 @@ End Sub
 Private Sub PonerCampos()
 On Error GoTo EPonerCampos
 
-    If data1.Recordset.EOF Then Exit Sub
+    If Data1.Recordset.EOF Then Exit Sub
     
-    PonerCamposForma Me, data1
+    PonerCamposForma Me, Data1
    ' Text2(0).Text = PonerNombreDeCod(Text1(2), conAri, "splagas", "nombrepl")
     CargaGridArticulos True
     
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = data1.Recordset.AbsolutePosition & " de " & data1.Recordset.RecordCount
+    lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
     
 EPonerCampos:
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo Campos", Err.Description
@@ -1903,26 +1903,26 @@ End Sub
 
 
 Private Function InsertarCabeceraHistorico() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 On Error GoTo EInsertarCab
 
-    SQL = "SELECT codtrasp,fechatra,almaorig,almadest,codtraba,observa1 from advtrata "
-    SQL = SQL & ObtenerWhereCP(True)
-    SQL = SQL & " AND fechatra='" & Format(data1.Recordset!fechatra, "yyyy-mm-dd") & "'"
+    Sql = "SELECT codtrasp,fechatra,almaorig,almadest,codtraba,observa1 from advtrata "
+    Sql = Sql & ObtenerWhereCP(True)
+    Sql = Sql & " AND fechatra='" & Format(Data1.Recordset!fechatra, "yyyy-mm-dd") & "'"
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not RS.EOF Then
-        SQL = "INSERT INTO schtra (codtrasp, fechatra,hormovim,almaorig,almadest,codtraba,observa1) "
-        SQL = SQL & " VALUES (" & RS.Fields(0).Value & ", '" & Format(RS.Fields(1).Value, "yyyy-mm-dd") & "', '"
-        SQL = SQL & Format(Now, "yyyy-mm-dd hh:mm:ss") & "', " & RS.Fields(2).Value & ", " & RS.Fields(3).Value & ", "
-        SQL = SQL & RS.Fields(4).Value & ", " & DBSet(RS.Fields(5).Value, "T") & ")"
+        Sql = "INSERT INTO schtra (codtrasp, fechatra,hormovim,almaorig,almadest,codtraba,observa1) "
+        Sql = Sql & " VALUES (" & RS.Fields(0).Value & ", '" & Format(RS.Fields(1).Value, "yyyy-mm-dd") & "', '"
+        Sql = Sql & Format(Now, "yyyy-mm-dd hh:mm:ss") & "', " & RS.Fields(2).Value & ", " & RS.Fields(3).Value & ", "
+        Sql = Sql & RS.Fields(4).Value & ", " & DBSet(RS.Fields(5).Value, "T") & ")"
     End If
     RS.Close
     Set RS = Nothing
     
-    conn.Execute SQL
+    conn.Execute Sql
     
 EInsertarCab:
     If Err.Number <> 0 Then
@@ -1935,22 +1935,22 @@ End Function
 
 
 Private Function InsertarLineasHistorico(MenError As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 On Error GoTo EInsertarLineas
 
-    SQL = "SELECT codtrasp, numlinea, codartic, cantidad, observa2 from slitra "
-    SQL = SQL & ObtenerWhereCP(True)
+    Sql = "SELECT codtrasp, numlinea, codartic, cantidad, observa2 from slitra "
+    Sql = Sql & ObtenerWhereCP(True)
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     RS.MoveFirst
     While Not RS.EOF
-        SQL = "INSERT INTO slhtra (codtrasp, fechamov, numlinea, codartic, cantidad, observa2)"
-        SQL = SQL & " VALUES (" & RS.Fields(0).Value & ", '" & Format(data1.Recordset!fechatra, FormatoFecha) & "', "
-        SQL = SQL & RS.Fields(1).Value & ", " & DBSet(RS.Fields(2).Value, "T") & ", "
-        SQL = SQL & DBSet(RS.Fields(3).Value, "N") & ", " & DBSet(RS.Fields(4).Value, "T") & ")"
-        conn.Execute SQL
+        Sql = "INSERT INTO slhtra (codtrasp, fechamov, numlinea, codartic, cantidad, observa2)"
+        Sql = Sql & " VALUES (" & RS.Fields(0).Value & ", '" & Format(Data1.Recordset!fechatra, FormatoFecha) & "', "
+        Sql = Sql & RS.Fields(1).Value & ", " & DBSet(RS.Fields(2).Value, "T") & ", "
+        Sql = Sql & DBSet(RS.Fields(3).Value, "N") & ", " & DBSet(RS.Fields(4).Value, "T") & ")"
+        conn.Execute Sql
         RS.MoveNext
     Wend
     RS.Close
@@ -1973,21 +1973,21 @@ End Function
 
 
 Private Function BorrarTraspaso(MenError As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 
     BorrarTraspaso = False
     
     'Borramos las lineas
-    SQL = "Delete from "
-    SQL = SQL & "slitra"
-    SQL = SQL & " WHERE codtrasp = " & data1.Recordset!codtrasp
-    conn.Execute SQL
+    Sql = "Delete from "
+    Sql = Sql & "slitra"
+    Sql = Sql & " WHERE codtrasp = " & Data1.Recordset!codtrasp
+    conn.Execute Sql
     
     'La cabecera
-    SQL = "Delete from "
-    SQL = SQL & "advtrata"
-    SQL = SQL & " WHERE codtrasp =" & data1.Recordset!codtrasp
-    conn.Execute SQL
+    Sql = "Delete from "
+    Sql = Sql & "advtrata"
+    Sql = Sql & " WHERE codtrasp =" & Data1.Recordset!codtrasp
+    conn.Execute Sql
     
     If Err.Number <> 0 Then
         BorrarTraspaso = False
@@ -2015,7 +2015,7 @@ End Sub
 Private Sub BotonImprimirHco()
 Dim indRPT As Byte
 Dim cadParam As String
-Dim cad As String
+Dim Cad As String
 Dim numParam As Byte
 Dim nomDocu As String
 
@@ -2039,9 +2039,9 @@ Dim nomDocu As String
             Else
                 'Se Llama desde dobleclick en frmAlmMovimArticulos
                 'o estamos en Historico
-                cad = "{schtra.codtrasp}= " & data1.Recordset!codtrasp
-                cad = cad & " and {schtra.fechatra}= Date(" & Year(data1.Recordset!fechatra) & "," & Month(data1.Recordset!fechatra) & "," & Day(data1.Recordset!fechatra) & ")" & ""
-                .FormulaSeleccion = cad
+                Cad = "{schtra.codtrasp}= " & Data1.Recordset!codtrasp
+                Cad = Cad & " and {schtra.fechatra}= Date(" & Year(Data1.Recordset!fechatra) & "," & Month(Data1.Recordset!fechatra) & "," & Day(Data1.Recordset!fechatra) & ")" & ""
+                .FormulaSeleccion = Cad
             End If
             .Show vbModal
         End With
@@ -2067,15 +2067,15 @@ Private Sub PosicionarData(VieneDeInsertar As Boolean)
 'Despues de hacer refresh del Data, volver a situar el Data en el registro que estaba
 Dim Indicador As String
 Dim vWhere As String
-Dim b As Boolean
+Dim B As Boolean
     
-    b = data1.Recordset.EOF
-    If Not b And VieneDeInsertar Then b = True
+    B = Data1.Recordset.EOF
+    If Not B And VieneDeInsertar Then B = True
 
-    If Not data1.Recordset.EOF Then
+    If Not Data1.Recordset.EOF Then
         'Hay datos en el Data1 bien porque se ha hecho VerTodos o una Busqueda
          vWhere = "(" & ObtenerWhereCP(False) & ")"
-         If SituarData(data1, vWhere, Indicador) Then
+         If SituarData(Data1, vWhere, Indicador) Then
              PonerModo 2
              PonerCampos
              lblIndicador.Caption = Indicador
@@ -2103,18 +2103,19 @@ End Sub
 Private Sub ProcesoMailingPromo()
 Dim Reestablecer As Boolean
 Dim Aux As String
-Dim b As Boolean
+Dim B As Boolean
     'Comprobaciones
-    Reestablecer = Val(data1.Recordset!Situacion) = 1
+    Reestablecer = Val(Data1.Recordset!Situacion) = 1
     
     
     If Not Reestablecer Then
         'Va a coger el precioac,fechaini,fechafin de spromo, y ponerlas en las lineas de mailpromo  y pmv en
         'Veamos que no hay ninguna abierta con estos articulos
         
-        Aux = "codartic in (select codartic from smailpromoli,smailpromoca where smailpromoli.codigo=smailpromoca.codigo "
-        Aux = Aux & " AND smailpromoli.codigo<>" & data1.Recordset!Codigo & " and situacion = 1 ) AND 1"
-
+        Aux = " AND codartic in (select codartic from smailpromoli,smailpromoca where smailpromoli.codigo=smailpromoca.codigo "
+        Aux = Aux & " AND smailpromoli.codigo<>" & Data1.Recordset!Codigo & " and situacion = 1 ) AND 1"
+        'Enero
+        Aux = " smailpromoli.codigo=" & Data1.Recordset!Codigo & Aux
         Aux = DevuelveDesdeBD(conAri, "min(codigo)", "smailpromoli", Aux, "1")
         If Val(Aux) > 0 Then
             MsgBox "El articulo esta en otro proceso de mailing/promociones", vbExclamation
@@ -2139,14 +2140,14 @@ Dim b As Boolean
     Set miRsAux = New ADODB.Recordset
     If Reestablecer Then
         'metemos en spormo los valores antiugos
-        b = ReestablecerEnSPromo
+        B = ReestablecerEnSPromo
     Else
         
         'grabamos en spromo con los valores actuales
-        b = GuardarEnSPromo
+        B = GuardarEnSPromo
     End If
     Set miRsAux = Nothing
-    If b Then
+    If B Then
         conn.CommitTrans
         PosicionarData False
     Else
@@ -2167,7 +2168,7 @@ Dim Aux As String
     'Cogeremos de spromo u grabaremos los valores en las columnas
     Aux = "select s.codartic,spromo.fechaini ,spromo.fechafin ,spromo.precioac ,preciomail,s.pmv,preciominvta "
     Aux = Aux & " from smailpromoli s ,spromo, sartic where s.codartic=spromo.codartic and s.codartic=Sartic.codartic and spromo.codlista=1"
-    Aux = Aux & " AND codigo=" & data1.Recordset!Codigo
+    Aux = Aux & " AND codigo=" & Data1.Recordset!Codigo
     miRsAux.Open Aux, conn, adOpenForwardOnly, adLockPessimistic
     While Not miRsAux.EOF
         'GRabo los valores de spromo y pmv en lineas
@@ -2175,12 +2176,12 @@ Dim Aux As String
         Aux = Aux & " , PMV=" & DBSet(miRsAux!preciominvta, "N")
         Aux = Aux & " , fechainiart= " & DBSet(miRsAux!FechaIni, "F")
         Aux = Aux & " , fechafinart=" & DBSet(miRsAux!FechaFin, "F")
-        Aux = Aux & " WHERE codigo = " & data1.Recordset!Codigo & " AND codartic=" & DBSet(miRsAux!codArtic, "T")
+        Aux = Aux & " WHERE codigo = " & Data1.Recordset!Codigo & " AND codartic=" & DBSet(miRsAux!codArtic, "T")
         conn.Execute Aux
         
         Aux = "UPDATE spromo set precioac=" & DBSet(miRsAux!preciomail, "N")
-        Aux = Aux & " , FechaIni =" & DBSet(data1.Recordset!FechaIni, "F")
-        Aux = Aux & " , FechaFin=" & DBSet(data1.Recordset!FechaFin, "F")
+        Aux = Aux & " , FechaIni =" & DBSet(Data1.Recordset!FechaIni, "F")
+        Aux = Aux & " , FechaFin=" & DBSet(Data1.Recordset!FechaFin, "F")
         Aux = Aux & " WHERE codlista = 1 AND codartic=" & DBSet(miRsAux!codArtic, "T")
         conn.Execute Aux
         
@@ -2194,7 +2195,7 @@ Dim Aux As String
      
     
     Aux = "UPDATE smailpromoca set situacion=1 ,usuacepta =" & DBSet(vUsu.Login, "F") & ", fechaAcepta = " & DBSet(Now, "FH")
-    Aux = Aux & " WHERE codigo = " & data1.Recordset!Codigo
+    Aux = Aux & " WHERE codigo = " & Data1.Recordset!Codigo
     conn.Execute Aux
     Espera 0.5
     GuardarEnSPromo = True
@@ -2230,7 +2231,7 @@ Dim Aux As String
      
     
     Aux = "UPDATE smailpromoca set situacion=2 ,usurestaura  =" & DBSet(vUsu.Login, "F") & ", fecharestaura = " & DBSet(Now, "FH")
-    Aux = Aux & " WHERE codigo = " & data1.Recordset!Codigo
+    Aux = Aux & " WHERE codigo = " & Data1.Recordset!Codigo
     conn.Execute Aux
     ReestablecerEnSPromo = True
     Exit Function

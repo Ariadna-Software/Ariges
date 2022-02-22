@@ -2204,25 +2204,16 @@ Dim KKK As Integer
             'Enero 2020
             If UnaUnicaFactura Then
                 If vParamAplic.FacturaRectificativaTicket <> "" Then
+                
+                    'Veremos si el cliente esta IDENTIFICADO
+                    Aux = "scaalb.codclien=sclien.codclien AND " & cadSQL & " AND 1"
+                    
+                
                     'Rectificativa. Veamos si  normal o de ticket
-                    C_aux = "observa01"
-                    Aux = DevuelveDesdeBD(conAri, "codtipmf", "scaalb", cadSQL & " AND 1", "1", "N", C_aux)
-                    If Aux <> "" Then
-                        'Vemos si rectifica  FMO
-                        If Aux = "FMO" Then codtipom = vParamAplic.FacturaRectificativaTicket
-                    Else
-                        KKK = InStr(1, C_aux, ":")
-                        If KKK > 0 And KKK < 25 Then
-                            'RECTIFICA A FACTURA: C, 79000545 31/12/2021
-                            C_aux = Mid(C_aux, KKK + 1)
-                            KKK = InStr(1, C_aux, ",")
-                            If KKK < 10 Then
-                                '
-                                C_aux = Trim(Mid(C_aux, 1, KKK - 1))
-                                Aux = DevuelveDesdeBD(conAri, "letraser", "stipom", "codtipom", "FMO", "T")
-                                If Aux = C_aux Then codtipom = vParamAplic.FacturaRectificativaTicket
-                            End If
-                        End If
+                    C_aux = "scaalb.nifclien"
+                    Aux = DevuelveDesdeBD(conAri, "clivario", "scaalb,sclien", Aux, "1", "N", C_aux)
+                    If Aux = "1" Then
+                        If Not Comprobar_NIF(C_aux) Then codtipom = vParamAplic.FacturaRectificativaTicket
                     End If
                 End If
             End If

@@ -5674,7 +5674,7 @@ Public codClien As String 'Para seleccionar inicialmente las ofertas del Proveed
                         'para paso ped a labaran llevare datos x defecto: llevo: tienecoddiren & "|" & zonacliente & "|"
                 
 
-Public FacturaSuperaImporteTicket_ As Boolean 'Dira si el importe es mayor que el maximo permitido pora la ley para facturas simpificadas (todo esta en parametros)
+Public FacturaSuperaImporteTicket As Boolean 'Dira si el importe es mayor que el maximo permitido pora la ley para facturas simpificadas (todo esta en parametros)
 
 
 'Private HaDevueltoDatos As Boolean
@@ -6010,7 +6010,7 @@ Dim Pregunta As Boolean
     End If
     
     
-    If FacturaSuperaImporteTicket_ Then
+    If FacturaSuperaImporteTicket Then
         Cad = "NO"
         If codClien = "ALM" Then
             Cad = ""
@@ -6020,7 +6020,7 @@ Dim Pregunta As Boolean
         If Cad <> "" Then
             MsgBox "Supera importe tickets.     Sólo puden hacer facturas directas las facturas de mostrador", vbExclamation
             MsgBox "El programa continuara generando la factura.   AVISE soporte tecnico", vbExclamation
-            FacturaSuperaImporteTicket_ = False
+            FacturaSuperaImporteTicket = False
         End If
     End If
     
@@ -6521,7 +6521,7 @@ Dim Pregunta As Boolean
             TaxcoFacurarUnAlbaranALVIC_Facturado = "" 'reestablezco
         Else
             campo = "|||"
-            TraspasoAlbaranesFacturas Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, Me.PB_Fact, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False, UnoSolo, FacturaSuperaImporteTicket_
+            TraspasoAlbaranesFacturas Cad, cadSelect, txtCodigo(34).Text, txtCodigo(0).Text, Me.PB_Fact, Me.lblProgess(1), True, codClien, campo, CByte(vParamAplic.NumCopiasFacturacion), False, False, UnoSolo, FacturaSuperaImporteTicket
         End If
     End If
 
@@ -6561,7 +6561,7 @@ Private Function ComprobarSecuencialFactura() As Boolean
     End If
     
         
-    cadParam = DevuelveTipoFacturaDesdeAlbaran(codClien, FacturaSuperaImporteTicket_)
+    cadParam = DevuelveTipoFacturaDesdeAlbaran(codClien, FacturaSuperaImporteTicket)
     If cadParam <> "" Then
         cadFormula = Year(CDate(txtCodigo(34).Text))
         cadFormula = "fecfactu > " & DBSet(txtCodigo(34).Text, "F") & " AND fecfactu <= '" & cadFormula & "-12-31' AND codtipom"
@@ -8377,6 +8377,7 @@ Private Sub cmdSelFraRect_Click()
         
         Set frmLd = New frmListadoOfer
         frmLd.OpcionListado = 225
+        frmLd.codClien = "N"
         frmLd.Show vbModal
         Set frmLd = Nothing
         
@@ -8907,7 +8908,7 @@ Private Sub Form_Unload(Cancel As Integer)
         'SI es taxco, ha cerrado un OT de CONTADO. O factura o no sale de ahi
         If davidNumalbar > 0 Then Cancel = 1
     End If
-    FacturaSuperaImporteTicket_ = False 'Lo dejo aqui por si acaso para que nunca se qede precargado
+    FacturaSuperaImporteTicket = False 'Lo dejo aqui por si acaso para que nunca se qede precargado
 End Sub
 
 
@@ -9664,7 +9665,7 @@ Private Sub PonerFramePedxArticVisible(visible As Boolean, ByRef H As Integer, B
         If OpcionListado = 44 Then 'Informe Pedido por cliente
             Me.Frame5.Top = 4320
             Me.Frame5.Left = 400
-            Me.Label1.Caption = "Pedidos por Cliente"
+            Me.label1.Caption = "Pedidos por Cliente"
             '
             FramepedxClien.Top = 5440
             FramepedxClien.Left = 500
@@ -9680,7 +9681,7 @@ Private Sub PonerFramePedxArticVisible(visible As Boolean, ByRef H As Integer, B
             Me.Frame10.Top = 4800        '3800
             
             FrameZonaCli.Left = 500
-            Me.Label1.Caption = "Ventas por Cliente"
+            Me.label1.Caption = "Ventas por Cliente"
             Label4(4).Caption = "Fecha Factura"
             
             
@@ -9695,7 +9696,7 @@ Private Sub PonerFramePedxArticVisible(visible As Boolean, ByRef H As Integer, B
         ElseIf OpcionListado = 228 Then 'Inf. Estadistica ventas x trabajador
             Me.Frame12.Top = 1900
             Me.Frame12.Left = 500
-            Me.Label1.Caption = "Ventas por Trabajador"
+            Me.label1.Caption = "Ventas por Trabajador"
             Label4(4).Caption = "Fecha Factura"
             Me.cmdAceptarPedxArtic.Top = 4150
             Me.cmdCancel(2).Top = Me.cmdAceptarPedxArtic.Top
@@ -9703,15 +9704,15 @@ Private Sub PonerFramePedxArticVisible(visible As Boolean, ByRef H As Integer, B
             Me.Frame8.Top = 3120
             Me.Frame8.Left = 500
             If OpcionListado = 41 Then
-                Me.Label1.Caption = "Pedidos por Artículo"
+                Me.label1.Caption = "Pedidos por Artículo"
                 Frame5.Top = 4300
                 Frame5.Left = 300
                 Me.Frame8.Top = 3020
                 Me.Frame8.Left = 300
             ElseIf OpcionListado = 42 Then
-                Me.Label1.Caption = "Disponibilidad de Stocks"
+                Me.label1.Caption = "Disponibilidad de Stocks"
             ElseIf OpcionListado = 49 Then
-                Me.Label1.Caption = "Albaranes por Artículo"
+                Me.label1.Caption = "Albaranes por Artículo"
                 Label4(4).Caption = "Fecha Albaran"
             End If
         End If

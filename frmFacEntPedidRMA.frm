@@ -3933,14 +3933,14 @@ Dim devuelve As String
             End If
             
         Case 6 'NIF
-'            If Not EsDeVarios Then Exit Sub
-'            If Modo = 4 Then 'Modificar
-'                'si no se ha modificado el nif del cliente no hacer nada
-'                If Text1(6).Text = Data1.Recordset!nifClien Then
-'                    Exit Sub
-'                End If
-'            End If
-'            PonerDatosClienteVario (Text1(Index).Text)
+            If Modo = 3 Or Modo = 4 Then
+                If Not Me.Text1(Index).Locked Then
+                    If Text1(Index).Text <> "" Then
+                        If Not Comprobar_NIF(Text1(Index).Text) Then MsgBox "NIF parece incorrecto", vbExclamation
+                            
+                    End If
+                End If
+            End If
              
         Case 9 'Cod. Postal
             If Text1(Index).Locked Then Exit Sub
@@ -6499,7 +6499,68 @@ Dim FraRectificativa As String   'Que factura rectifica
 Dim Aux As String
 Dim FAlb As Date
 Dim Puntos As Currency
+
+Dim IMporteTicketExcede  As Boolean
+
+
+
 'Dim CodZona As Integer   'Ocutbre 2010  VARIABLE GLOBAL DEL FORM
+
+
+    'PRevio.
+    IMporteTicketExcede = False
+    If PasarTambienAFacturar And vParamAplic.SerieFacturaDirecta <> "" Then
+        'Facturacion
+        '-----------------------------------
+        'No puede hacer facturas simplicadas a partuculares / empresas que superen cierta cantidad(maximporticketparticular / maximporticketempresa)
+        Sql = "clivario"
+        NumAlb = DevuelveDesdeBD(conAri, "particular", "sclien", "codclien", Text1(4).Text, "N", Sql)
+                
+                
+         '17 ENERO   ARIGES-502
+        If Sql = "0" Then
+           'Cualquier cliente IDENDTIICADO hace factura FRT
+           IMporteTicketExcede = True
+        Else
+            If Comprobar_NIF(Text1(6).Text) Then
+                'De varios per NIF correcto
+                IMporteTicketExcede = True   'hace FRT
+            Else
+         
+                Aux = Text3(55).Text
+                If Aux = "" Then Aux = "0"
+                If NumAlb = "1" Then
+                    'particular
+                    If ImporteFormateado(Aux) > vParamAplic.MaxImporteTicketParticular Then Aux = "S" 'Supera
+                Else
+                    'Empresa
+                    If ImporteFormateado(Aux) > vParamAplic.MaxImporteTicketEmpresa Then Aux = "S"  'Supera
+                End If
+                If Aux = "S" Then
+                    'Supera el importe maximo para NO hacer factura simplificada
+                    MsgBox "Supera el maximo para realizar factura simplificada y no esta identificado el cliente", vbExclamation
+                    Exit Sub
+                End If
+            End If
+            
+        End If
+    
+    End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     'Pedir: Operador de Albaran, Material Preparado por y forma de envio
     CadenaSQL = ""
@@ -6573,7 +6634,7 @@ Dim Puntos As Currency
         Espera 0.5
     
         Aux = DevuelveDesdeBD(conAri, "asun_obs", "tmpcrmmsg", "codusu", vUsu.Codigo)
-        'Solo hay uno, he borarado antes de empezar este proceso
+        'Solo hay uno, he borrado antes de empezar este proceso
         If Aux = "" Then
             MsgBox "Error devolviendo datos", vbExclamation
             Exit Sub
@@ -6708,7 +6769,7 @@ Dim Puntos As Currency
             CadenaSQL = "scaalb.codtipom = 'ART' AND scaalb.numalbar = " & NumAlb
             Precio = "SELECT scaalb.*,sclien.nomclien FROM scaalb INNER JOIN sclien ON scaalb.codclien=sclien.codclien "
             Precio = Precio & " WHERE " & CadenaSQL
-            TraspasoAlbaranesFacturas Precio, CadenaSQL, FechaAlb, CtaBancoPropi, Nothing, lblIndicador, ImprimeFactura, "ART", "", 1, True, False, True, False
+            TraspasoAlbaranesFacturas Precio, CadenaSQL, FechaAlb, CtaBancoPropi, Nothing, lblIndicador, ImprimeFactura, "ART", "", 1, True, False, True, IMporteTicketExcede
         End If
             
         

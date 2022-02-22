@@ -507,7 +507,7 @@ Private ColAlbaran As Collection
 
 
 Private Sub cmdAceptar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim TodoOk As Boolean
 
@@ -644,7 +644,7 @@ End Sub
 
 Private Sub CargaGrid()
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 On Error GoTo ECarga
 
     gridCargado = False
@@ -654,8 +654,8 @@ On Error GoTo ECarga
     
     
     
-    SQL = MontaSQLCarga()
-    CargaGridGnral DataGrid1, Me.Data1, SQL, PrimeraVez, 360
+    Sql = MontaSQLCarga()
+    CargaGridGnral DataGrid1, Me.Data1, Sql, PrimeraVez, 360
     
     PrimeraVez = False
         
@@ -976,19 +976,19 @@ End Sub
 
 Private Sub PonerModo(Kmodo As Byte)
 Dim i As Byte
-Dim b As Boolean
+Dim B As Boolean
        
     
     'PonerIndicador lblIndicador, 3
     
-    b = False
-    BloquearTxt Text1(0), b
-    BloquearTxt Text1(1), b
+    B = False
+    BloquearTxt Text1(0), B
+    BloquearTxt Text1(1), B
     
-    b = True
+    B = True
     
     For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
+        Me.imgBuscar(i).Enabled = B
     Next i
 
 
@@ -1014,22 +1014,22 @@ Private Function MontaSQLCarga() As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim miOrden As String
     '                                                                                           round((importel/cantidad),4) precio ,
-    SQL = "select sliped.numpedcl,fecpedcl,numlinea,referenc,codartic,nomartic,solicitadas,cantidad,servidas,"
-    SQL = SQL & " cantidad - servidas Pendiente, if(servidas>0 ,'S','') ped"
-    SQL = SQL & " from sliped,scaped where sliped.numpedcl=scaped.numpedcl and cerrado=0 and cantidad >0 AND "
+    Sql = "select sliped.numpedcl,fecpedcl,numlinea,referenc,codartic,nomartic,solicitadas,cantidad,servidas,"
+    Sql = Sql & " cantidad - servidas Pendiente, if(servidas>0 ,'S','') ped"
+    Sql = Sql & " from sliped,scaped where sliped.numpedcl=scaped.numpedcl and cerrado=0 and cantidad >0 AND "
     
     
     
     If Text1(0).Text <> "" Then
-        SQL = SQL & " codclien= " & Val(Text1(0).Text)
+        Sql = Sql & " codclien= " & Val(Text1(0).Text)
     Else
-        SQL = SQL & " false"
+        Sql = Sql & " false"
     End If
 
-    SQL = SQL & " order by "
+    Sql = Sql & " order by "
     
     If Orden = 0 Then
         miOrden = " numpedcl  " & IIf(Desce, "DESC", "") & " ,fecpedcl"
@@ -1038,7 +1038,7 @@ Dim miOrden As String
     End If
     
     miOrden = miOrden & " ,numlinea"
-    MontaSQLCarga = SQL & miOrden
+    MontaSQLCarga = Sql & miOrden
 End Function
 
 
@@ -1092,16 +1092,16 @@ End Sub
 
 Private Function ActualizarExistencia(canti As String) As Boolean
 'Actualiza la cantidad de stock Inventariada (Existencia Real en Almacen)
-Dim SQL As String
+Dim Sql As String
 Dim ADonde As String
 
     On Error GoTo EActualizar
 
     ADonde = "Modificando datos de Inventario (Tabla: sinven)."
-    SQL = "UPDATE sliped Set servidas = " & DBSet(canti, "N")
-    SQL = SQL & " WHERE numpedcl =" & Data1.Recordset!NumPedcl
-    SQL = SQL & " AND numlinea =" & Data1.Recordset!numlinea
-    conn.Execute SQL
+    Sql = "UPDATE sliped Set servidas = " & DBSet(canti, "N")
+    Sql = Sql & " WHERE numpedcl =" & Data1.Recordset!NumPedcl
+    Sql = Sql & " AND numlinea =" & Data1.Recordset!numlinea
+    conn.Execute Sql
     
     
     ActualizarExistencia = True
@@ -1109,7 +1109,7 @@ Dim ADonde As String
 EActualizar:
     If Err.Number <> 0 Then
         'Hay error , almacenamos y salimos
-         MuestraError Err.Number, SQL, Err.Description
+         MuestraError Err.Number, Sql, Err.Description
          
          ActualizarExistencia = False
     Else
@@ -1593,3 +1593,5 @@ Dim Co As Long
     RN.Close
     Set RN = Nothing
 End Function
+
+

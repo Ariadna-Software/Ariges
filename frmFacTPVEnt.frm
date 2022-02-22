@@ -1413,7 +1413,7 @@ Private Sub cboNumVenta_Click()
         If Me.Data1.Recordset.AbsolutePosition > 0 Then
             If Not Data1.Recordset.EOF Then
                 'poner el total
-                Me.Label1(6).Caption = Format(DevuelveDesdeBDNew(conAri, "scaven", "imptotal", "numtermi", CStr(Data1.Recordset!NumTermi), "N", , "numventa", CStr(Data1.Recordset!NumVenta), "N", "fecventa", CStr(Data1.Recordset!fecventa), "F"), FormatoImporte)
+                Me.label1(6).Caption = Format(DevuelveDesdeBDNew(conAri, "scaven", "imptotal", "numtermi", CStr(Data1.Recordset!NumTermi), "N", , "numventa", CStr(Data1.Recordset!NumVenta), "N", "fecventa", CStr(Data1.Recordset!fecventa), "F"), FormatoImporte)
                 'poner el cliente
                 Me.Text1(0).Text = Data1.Recordset!codClien
                 Me.Text1(0).Text = Format(Text1(0).Text, "000000")
@@ -1432,7 +1432,7 @@ Private Sub cboNumVenta_Click()
 '                Text2(2).Text = PonerNombreDeCod(Text1(2), conAri, "sdirec", "nomdirec", "coddirec", "cliente", "N")
             End If
                 
-            If vParamTPV.HayVisor Then EnviarVisorPuerto Label1(7).Caption, Label1(8).Caption, Label1(5).Caption, Label1(6).Caption
+            If vParamTPV.HayVisor Then EnviarVisorPuerto label1(7).Caption, label1(8).Caption, label1(5).Caption, label1(6).Caption
                 
 '                If Data2.Recordset.EditMode = adEditNone Then
 '                    If Me.Data2.Recordset.AbsolutePosition <> Me.Data2.Recordset.RecordCount Then
@@ -1590,7 +1590,7 @@ Private Sub cmdCancelar_Click()
                 ModificaLineas = 0
                 Me.DataGrid1.Enabled = True
             End If
-            Me.Label1(6).Caption = Format(ObtenerImporteTotal(False), FormatoImporte)
+            Me.label1(6).Caption = Format(ObtenerImporteTotal(False), FormatoImporte)
             PonerFocoGrid DataGrid1
 '            If DataGrid1.Enabled Then DataGrid1.SetFocus
 '            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
@@ -1638,21 +1638,21 @@ End Sub
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     
     If Data2.Recordset.EOF Or Me.Data2.Recordset.BOF Then
-        Me.Label1(7).Caption = ""
-        Me.Label1(8).Caption = ""
+        Me.label1(7).Caption = ""
+        Me.label1(8).Caption = ""
         txtFito2(0).Text = ""
     Else
         'Actualizar el total de linea
         If (ModificaLineas = 0) Or (ModificaLineas = 1 And Data2.Recordset.AbsolutePosition = Data2.Recordset.RecordCount And Me.Data2.Recordset!NomArtic <> "") Then
-            Me.Label1(7).Caption = Mid(Me.Data2.Recordset!NomArtic, 1, 19)
-            Me.Label1(8).Caption = Format(Me.Data2.Recordset!ImporteL, FormatoImporte)
+            Me.label1(7).Caption = Mid(Me.Data2.Recordset!NomArtic, 1, 19)
+            Me.label1(8).Caption = Format(Me.Data2.Recordset!ImporteL, FormatoImporte)
             
             CargaLotesArticulos
             
         End If
     End If
     If vParamTPV.HayVisor Then
-        EnviarVisorPuerto Label1(7).Caption, Label1(8).Caption, "TOTAL", Label1(6).Caption
+        EnviarVisorPuerto label1(7).Caption, label1(8).Caption, "TOTAL", label1(6).Caption
     End If
 End Sub
 
@@ -1812,7 +1812,7 @@ Private Sub Form_Load()
     Data1.ConnectionString = conn
 
     'Inicializar Cabecera de Caja
-    Me.Label1(2).Caption = Format(Now, "dd-mm-yy  hh:mm")
+    Me.label1(2).Caption = Format(Now, "dd-mm-yy  hh:mm")
 
 
     'Abrir Visor en puerto serie
@@ -1835,7 +1835,7 @@ Private Sub Form_Load()
     End If
     
     
-    If CInt(Me.Label1(4).Caption) > 0 Then
+    If CInt(Me.label1(4).Caption) > 0 Then
         cargaCabeceras True
     Else
         cargaCabeceras False
@@ -1850,7 +1850,7 @@ End Sub
 Private Sub PonerVentasAbiertas()
     Sql = "SELECT count(*) FROM " & NombreTabla & " WHERE numtermi=" & NumTermi
     If CadSelVenta <> "" Then Sql = Sql & " OR " & CadSelVenta
-    Me.Label1(4).Caption = CStr(NumRegistros(Sql)) 'nº ventas abiertas
+    Me.label1(4).Caption = CStr(NumRegistros(Sql)) 'nº ventas abiertas
 End Sub
 
 
@@ -2299,7 +2299,7 @@ Dim Desc As String
         frmB.vselElem = 1
         frmB.vConexionGrid = conAri  'Conexión a BD: Ariges
         '#
-        frmB.Label1.FontSize = 11
+        frmB.label1.FontSize = 11
         frmB.Show vbModal
         Set frmB = Nothing
         'Si ha puesto valores y tenemos que es formulario de busqueda entonces
@@ -2687,7 +2687,7 @@ Dim ArticulosFito As Boolean
         Sql = DevuelveDesdeBD(conAri, "sum(importel)", "sliven", Sql, CStr(Data1.Recordset!NumTermi), "N")
         If Sql = "" Then Sql = "0"
         Sql = Format(Sql, FormatoImporte)
-        If Sql <> Label1(6).Caption Then
+        If Sql <> label1(6).Caption Then
             MsgBox "No ha confirmado la ultima linea que estaba insertando", vbExclamation
             PonerFoco txtAux(4)
             Exit Sub
@@ -2720,7 +2720,7 @@ Dim ArticulosFito As Boolean
     End If
     
     If vParamTPV.ProhibirTiketsNegativos Then
-        If ImporteFormateado(Me.Label1(6).Caption) < 0 Then
+        If ImporteFormateado(Me.label1(6).Caption) < 0 Then
             MsgBox "Importe total ticket negativo", vbExclamation
             Exit Sub
         End If
@@ -2735,16 +2735,19 @@ Dim ArticulosFito As Boolean
     End If
     
     
+
+    
+    
     
     cmdCancelar_Click
     
-    Me.Label1(2).Caption = Format(Now, "dd-mm-yy  hh:mm")
+    Me.label1(2).Caption = Format(Now, "dd-mm-yy  hh:mm")
 '    If CDate(Data1.Recordset!fecventa) <> CDate(Format(Now, "dd/mm/yyyy")) Then
         'Actualizar la fecha de la venta
         ModificarVenta
 '    End If
     Volver_A_Cargar_Datos = False  'Nos diara si hemos cerrado la venta o no
-    frmFacTPVTotal.ImporteInicial = Me.Label1(6).Caption
+    frmFacTPVTotal.ImporteInicial = Me.label1(6).Caption
     frmFacTPVTotal.cadSel = ObtenerWhereCP(False)
     frmFacTPVTotal.LLevaArticulosFitosanitarios = ArticulosFito
     Load frmFacTPVTotal
@@ -3263,7 +3266,7 @@ Dim B As Boolean
     End If
 
 
-    Me.Label1(6).Caption = Format(ObtenerImporteTotal(True, B), FormatoImporte)
+    Me.label1(6).Caption = Format(ObtenerImporteTotal(True, B), FormatoImporte)
 
     B = Not B
     
@@ -3333,7 +3336,9 @@ Dim Bloq As Boolean
             
             
                 vArtic.MostrarStatusArtic Bloq
-            
+                'Febrero 22
+                If Not Bloq Then If vArtic.EnInventario(codAlmac) Then Bloq = True
+                
                 If Bloq Then
                 
                     'DE LEER EL ARTICULO. Ha dado error
@@ -3347,7 +3352,7 @@ Dim Bloq As Boolean
                     txtAux(2).Text = vArtic.Codigo
                     txtAux2(2).Text = UCase(vArtic.Nombre)
                     If vArtic.TextoVentas <> "" Then vArtic.MostrarTextoVen
-                    Me.Label1(7).Caption = vArtic.Nombre
+                    Me.label1(7).Caption = vArtic.Nombre
                     If txtAux(3).Text = "" Then 'cantidad
                         txtAux(3).Text = "1"
                         PonerFormatoDecimal txtAux(3), 1
@@ -3392,13 +3397,13 @@ Dim Bloq As Boolean
     
                     
     
-                    Me.Label1(8).Caption = txtAux(6).Text
+                    Me.label1(8).Caption = txtAux(6).Text
                     
                     'recalculamos el importe total de la venta
-                    Me.Label1(6).Caption = Format(ObtenerImporteTotal(False) + txtAux(5).Text, FormatoImporte)
+                    Me.label1(6).Caption = Format(ObtenerImporteTotal(False) + txtAux(5).Text, FormatoImporte)
                     
                    'Mostramos por el visor
-                   EnviarVisorPuerto Me.Label1(7).Caption, Label1(8).Caption, "TOTAL", Label1(6).Caption
+                   EnviarVisorPuerto Me.label1(7).Caption, label1(8).Caption, "TOTAL", label1(6).Caption
                     
                     
                    'si es de varios el precio se puede modificar y lo desbloqueamos
@@ -3802,7 +3807,7 @@ Dim LlevaArticuloLotes As Boolean
         
     End If
     
-    Me.Label1(6).Caption = Format(ObtenerImporteTotal(True), FormatoImporte)
+    Me.label1(6).Caption = Format(ObtenerImporteTotal(True), FormatoImporte)
     B = True
 
 EInsLinea:
@@ -3820,11 +3825,11 @@ End Function
 
 
 Private Sub ReiniciarVisor()
-    Me.Label1(6).Caption = "0,00"
-    Me.Label1(7).Caption = "Precio"
-    Me.Label1(8).Caption = "0,00"
+    Me.label1(6).Caption = "0,00"
+    Me.label1(7).Caption = "Precio"
+    Me.label1(8).Caption = "0,00"
     If vParamTPV.HayVisor Then
-        EnviarVisorPuerto Label1(7).Caption, Label1(8).Caption, Label1(5).Caption, Label1(6).Caption
+        EnviarVisorPuerto label1(7).Caption, label1(8).Caption, label1(5).Caption, label1(6).Caption
     End If
 End Sub
 

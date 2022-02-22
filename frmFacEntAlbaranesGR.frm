@@ -10539,9 +10539,44 @@ Dim B As Boolean
                 
                 
                 
+                'Febrero 2022
+                If hcoCodTipoM = "ALM" And Not EsHistorico And vParamAplic.NumeroInstalacion = vbHerbelca Then
+                
+                    BuscaChekc = ObtenerWhereCP(False) & " AND 1"
+                    BuscaChekc = DevuelveDesdeBD(conAri, "codnatura", "scaalb", BuscaChekc, "1")
+            
+                    If Val(BuscaChekc) > 0 Then
+                        BuscaChekc = "{" & NombreTabla & ".codtipom}='" & hcoCodTipoM & "'"  'lo que habia
+                        BuscaChekc = "{" & NombreTabla & ".numalbar}=" & Val(Text1(0).Text)
+                        With frmImprimir
+                            .outTipoDocumento = 0
+                            .NombreRPT = "HerAlbaranPrecursor.rpt"
+                            .FormulaSeleccion = BuscaChekc
+                            .OtrosParametros = ""
+                            .NumeroParametros = 0
+                            .SoloImprimir = False
+                            .EnvioEMail = False
+                            .Opcion = 250
+                            .Titulo = "Precursor explosivos"
+                            .ConSubInforme = True
+                            .Show vbModal
+                       End With
+                   End If
+                End If
+                   
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 'Facturacion de Albaran de Mostrador
                 '-----------------------------------
-                frmListadoPed.FacturaSuperaImporteTicket_ = False
+                frmListadoPed.FacturaSuperaImporteTicket = False
                 BuscaChekc = "NO"
                 If CodTipoMov = "ALM" Then
                     BuscaChekc = ""
@@ -10559,11 +10594,11 @@ Dim B As Boolean
                          '17 ENERO   ARIGES-502
                         If txtAnterior = "0" Then
                             'Cualquier cliente IDENDTIICADO hace factura FAD
-                            frmListadoPed.FacturaSuperaImporteTicket_ = True
+                            frmListadoPed.FacturaSuperaImporteTicket = True
                         Else
                             If Comprobar_NIF(Text1(6).Text) Then
                                 'De varios per NIF correcto
-                                frmListadoPed.FacturaSuperaImporteTicket_ = True  'hace FAD
+                                frmListadoPed.FacturaSuperaImporteTicket = True  'hace FAD
                             Else
                                 Aux = Text3(55).Text
                                 If Aux = "" Then Aux = "0"

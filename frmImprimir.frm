@@ -862,7 +862,7 @@ Dim EsPorEmail As Boolean
             'if outTipoDocumento<>"" the
             If Opcion = 238 Then .EstaImpreso = True   'confirmacion de entrega
         Else
-            .Show vbModal
+             .Show vbModal
         End If
         
         
@@ -1041,9 +1041,9 @@ End Sub
 
 Private Sub PonerNombreImpresora()
 On Error Resume Next
-    Label1.Caption = Printer.DeviceName
+    label1.Caption = Printer.DeviceName
     If Err.Number <> 0 Then
-        Label1.Caption = "No hay impresora instalada"
+        label1.Caption = "No hay impresora instalada"
         Err.Clear
     End If
 End Sub

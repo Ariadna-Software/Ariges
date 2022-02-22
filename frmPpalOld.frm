@@ -6,22 +6,22 @@ Begin VB.Form frmPpalOld
    ClientHeight    =   9525
    ClientLeft      =   165
    ClientTop       =   -990
-   ClientWidth     =   17250
+   ClientWidth     =   13260
    Icon            =   "frmPpalOld.frx":0000
    LinkTopic       =   "MDIForm1"
    ScaleHeight     =   9525
-   ScaleWidth      =   17250
+   ScaleWidth      =   13260
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   420
+      Height          =   660
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   17250
-      _ExtentX        =   30427
-      _ExtentY        =   741
+      Width           =   13260
+      _ExtentX        =   23389
+      _ExtentY        =   1164
       ButtonWidth     =   609
       ButtonHeight    =   582
       AllowCustomize  =   0   'False
@@ -128,8 +128,8 @@ Begin VB.Form frmPpalOld
       Left            =   0
       TabIndex        =   1
       Top             =   8940
-      Width           =   17250
-      _ExtentX        =   30427
+      Width           =   13260
+      _ExtentX        =   23389
       _ExtentY        =   1032
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -142,7 +142,7 @@ Begin VB.Form frmPpalOld
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   22357
+            Object.Width           =   15319
             Text            =   "asdasd"
             TextSave        =   "asdasd"
          EndProperty
@@ -169,7 +169,7 @@ Begin VB.Form frmPpalOld
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "14:25"
+            TextSave        =   "9:44"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -4849,9 +4849,7 @@ End Sub
 
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
-   ' frmComProveAnticipo.Show vbModal
-   
-    
+
         
     Select Case Button.Index
     Case 1 'Mantenimiento de Artículos

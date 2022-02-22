@@ -10606,13 +10606,9 @@ Private Sub cmdListaComparaDto_Click()
     
     
         cadTitulo = "Compara descuentos venta-compra"
-      '  cadParam = cadParam & "pdh1=""Fechas: " & txtFecha(4).Text & " - " & txtFecha(5).Text & """|"
-      '  numParam = numParam + 1
         cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
-       ' cadParam = cadParam & "Detalle=" & Abs(Me.chkVarios(2).Value) & "|"
-       ' numParam = numParam + 1
         vMostrarTree = True
-        cadNomRPT = "rDtosVtaComrpa.rpt"   'cadPDFrpt & ".rpt"
+        cadNomRPT = "rDtosVtaComrpa.rpt"
         cadPDFrpt = ""
         conSubRPT = False
         
@@ -16518,7 +16514,7 @@ Private Function GeneraDatosDtoComparativo() As Boolean
    
     miSQL = " FROM sdtofm,sfamia,(SELECT @rownum:=0) r where sdtofm.codfamia=sfamia.codfamia AND " & miSQL
     miSQL = miSQL & " AND codactiv >=0" & auxiliar  'axuliar lleva la actividad
-    miSQL = "Select " & vUsu.Codigo & ",@rownum:=@rownum+1 AS rownum,codprove,sfamia.codfamia,concat('A',codactiv),null,dtoline1,dtoline2,0,0,0,0,0 " & miSQL
+    miSQL = "Select " & vUsu.Codigo & ",@rownum:=@rownum+1 AS rownum,codprove,sfamia.codfamia,concat('A',codactiv),null,dtoline1,coalesce(dtopmv,0),0,0,0,0,0 " & miSQL
     miSQL = "INSERT INTO tmpinformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importe1,importe2,importeb1,importeb2,importeb3,importeb4,importeb5) " & miSQL
     conn.Execute miSQL
     
@@ -16605,7 +16601,7 @@ Private Function GeneraDatosDtoComparativo() As Boolean
         
          miSQL = " FROM sdtofm,sfamia,(SELECT @rownum:=0) r where sdtofm.codfamia=sfamia.codfamia AND " & miSQL
          miSQL = miSQL & " AND codclien >=0"
-         miSQL = "Select " & vUsu.Codigo & ",@rownum:=@rownum+1 AS rownum,codprove,sfamia.codfamia,concat('C',codclien),'',dtoline1,dtoline2,0,0,0,0,0 " & miSQL
+         miSQL = "Select " & vUsu.Codigo & ",@rownum:=@rownum+1 AS rownum,codprove,sfamia.codfamia,concat('C',codclien),'',dtoline1,coalesce(dtopmv,0),0,0,0,0,0 " & miSQL
          miSQL = "INSERT INTO tmpinformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importe1,importe2,importeb1,importeb2,importeb3,importeb4,importeb5) " & miSQL
          conn.Execute miSQL
          

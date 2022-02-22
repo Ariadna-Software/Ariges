@@ -316,8 +316,8 @@ Begin VB.Form frmFacClientesGr
       TabCaption(1)   =   "Asegur"
       TabPicture(1)   =   "frmFacClientesGr.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FrameAsegurados"
-      Tab(1).Control(1)=   "Frame3"
+      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(1)=   "FrameAsegurados"
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Direcciones"
       TabPicture(2)   =   "frmFacClientesGr.frx":0044
@@ -332,172 +332,172 @@ Begin VB.Form frmFacClientesGr
       TabCaption(4)   =   "Documentos"
       TabPicture(4)   =   "frmFacClientesGr.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "cmdImprimeFraCli"
-      Tab(4).Control(1)=   "FrameVisorDocumentos"
-      Tab(4).Control(2)=   "FrameNavegaDoc"
-      Tab(4).Control(3)=   "FramePuntos"
-      Tab(4).Control(4)=   "Text1(46)"
+      Tab(4).Control(0)=   "Label3"
+      Tab(4).Control(1)=   "imgFecha(3)"
+      Tab(4).Control(2)=   "LabelDoc"
+      Tab(4).Control(3)=   "imgDocumentos"
+      Tab(4).Control(4)=   "cmdCatalogo"
       Tab(4).Control(5)=   "lw1"
-      Tab(4).Control(6)=   "cmdCatalogo"
-      Tab(4).Control(7)=   "imgDocumentos"
-      Tab(4).Control(8)=   "LabelDoc"
-      Tab(4).Control(9)=   "imgFecha(3)"
-      Tab(4).Control(10)=   "Label3"
+      Tab(4).Control(6)=   "Text1(46)"
+      Tab(4).Control(7)=   "FramePuntos"
+      Tab(4).Control(8)=   "FrameNavegaDoc"
+      Tab(4).Control(9)=   "FrameVisorDocumentos"
+      Tab(4).Control(10)=   "cmdImprimeFraCli"
       Tab(4).ControlCount=   11
       TabCaption(5)   =   "CRM"
       TabPicture(5)   =   "frmFacClientesGr.frx":0098
       Tab(5).ControlEnabled=   0   'False
-      Tab(5).Control(0)=   "LabelCRM"
-      Tab(5).Control(1)=   "imgCrm"
-      Tab(5).Control(2)=   "lwCRM"
-      Tab(5).Control(3)=   "cmdAccCRM(2)"
-      Tab(5).Control(4)=   "cmdAccCRM(1)"
-      Tab(5).Control(5)=   "cmdAccCRM(0)"
-      Tab(5).Control(6)=   "FrameNavegaCRM"
-      Tab(5).Control(7)=   "FrameBotonCMR"
+      Tab(5).Control(0)=   "FrameBotonCMR"
+      Tab(5).Control(1)=   "FrameNavegaCRM"
+      Tab(5).Control(2)=   "cmdAccCRM(0)"
+      Tab(5).Control(3)=   "cmdAccCRM(1)"
+      Tab(5).Control(4)=   "cmdAccCRM(2)"
+      Tab(5).Control(5)=   "lwCRM"
+      Tab(5).Control(6)=   "imgCrm"
+      Tab(5).Control(7)=   "LabelCRM"
       Tab(5).ControlCount=   8
       TabCaption(6)   =   "Contacto"
       TabPicture(6)   =   "frmFacClientesGr.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "frameComercial"
+      Tab(6).Control(0)=   "Frame4"
       Tab(6).Control(1)=   "frameAdmon"
-      Tab(6).Control(2)=   "Frame4"
+      Tab(6).Control(2)=   "frameComercial"
       Tab(6).ControlCount=   3
       TabCaption(7)   =   "Renting"
       TabPicture(7)   =   "frmFacClientesGr.frx":00D0
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "FrameToolAux(4)"
-      Tab(7).Control(1)=   "txtauxRent(10)"
-      Tab(7).Control(2)=   "txtauxRent(9)"
-      Tab(7).Control(3)=   "txtauxRent(8)"
-      Tab(7).Control(4)=   "cmdRenting(2)"
-      Tab(7).Control(5)=   "txtauxRent(7)"
-      Tab(7).Control(6)=   "txtauxRent(11)"
-      Tab(7).Control(7)=   "txtauxRent(6)"
-      Tab(7).Control(8)=   "txtauxRent(5)"
-      Tab(7).Control(9)=   "txtauxRent(4)"
-      Tab(7).Control(10)=   "txtauxRent(3)"
-      Tab(7).Control(11)=   "cmdRenting(1)"
-      Tab(7).Control(12)=   "cmdRenting(0)"
-      Tab(7).Control(13)=   "txtauxRent(2)"
-      Tab(7).Control(14)=   "txtauxRent(0)"
-      Tab(7).Control(15)=   "txtauxRent(1)"
-      Tab(7).Control(16)=   "DataGrid2"
-      Tab(7).Control(17)=   "imgBuscar(24)"
-      Tab(7).Control(18)=   "Label4(0)"
-      Tab(7).Control(19)=   "Label1(90)"
-      Tab(7).Control(20)=   "Label1(89)"
-      Tab(7).Control(21)=   "Label1(88)"
+      Tab(7).Control(0)=   "Label1(88)"
+      Tab(7).Control(1)=   "Label1(89)"
+      Tab(7).Control(2)=   "Label1(90)"
+      Tab(7).Control(3)=   "Label4(0)"
+      Tab(7).Control(4)=   "imgBuscar(24)"
+      Tab(7).Control(5)=   "DataGrid2"
+      Tab(7).Control(6)=   "txtauxRent(1)"
+      Tab(7).Control(7)=   "txtauxRent(0)"
+      Tab(7).Control(8)=   "txtauxRent(2)"
+      Tab(7).Control(9)=   "cmdRenting(0)"
+      Tab(7).Control(10)=   "cmdRenting(1)"
+      Tab(7).Control(11)=   "txtauxRent(3)"
+      Tab(7).Control(12)=   "txtauxRent(4)"
+      Tab(7).Control(13)=   "txtauxRent(5)"
+      Tab(7).Control(14)=   "txtauxRent(6)"
+      Tab(7).Control(15)=   "txtauxRent(11)"
+      Tab(7).Control(16)=   "txtauxRent(7)"
+      Tab(7).Control(17)=   "cmdRenting(2)"
+      Tab(7).Control(18)=   "txtauxRent(8)"
+      Tab(7).Control(19)=   "txtauxRent(9)"
+      Tab(7).Control(20)=   "txtauxRent(10)"
+      Tab(7).Control(21)=   "FrameToolAux(4)"
       Tab(7).ControlCount=   22
       TabCaption(8)   =   "tfno"
       TabPicture(8)   =   "frmFacClientesGr.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "txtauxTfno(16)"
-      Tab(8).Control(1)=   "cboFiltroTfno"
-      Tab(8).Control(2)=   "cboOperadorTfnnia2(2)"
-      Tab(8).Control(3)=   "FrameToolAux(5)"
-      Tab(8).Control(4)=   "FrameModuloVtaPlazos"
-      Tab(8).Control(5)=   "cboOperadorTfnnia2(0)"
-      Tab(8).Control(6)=   "cboOperadorTfnnia2(1)"
-      Tab(8).Control(7)=   "FrameTelefonia(1)"
-      Tab(8).Control(8)=   "txtauxTfno(10)"
-      Tab(8).Control(9)=   "txtauxTfno(9)"
-      Tab(8).Control(10)=   "txtauxTfno(8)"
-      Tab(8).Control(11)=   "txtauxTfno(7)"
-      Tab(8).Control(12)=   "Text5(6)"
-      Tab(8).Control(13)=   "txtauxTfno(6)"
-      Tab(8).Control(14)=   "Text5(5)"
-      Tab(8).Control(15)=   "Text5(4)"
-      Tab(8).Control(16)=   "txtauxTfno(5)"
-      Tab(8).Control(17)=   "txtauxTfno(4)"
-      Tab(8).Control(18)=   "FrameTelefonia(0)"
-      Tab(8).Control(19)=   "txtauxTfno(3)"
-      Tab(8).Control(20)=   "txtauxTfno(2)"
-      Tab(8).Control(21)=   "txtauxTfno(1)"
-      Tab(8).Control(22)=   "txtauxTfno(0)"
+      Tab(8).Control(0)=   "Label1(128)"
+      Tab(8).Control(1)=   "Label1(95)"
+      Tab(8).Control(2)=   "Label1(99)"
+      Tab(8).Control(3)=   "Label1(98)"
+      Tab(8).Control(4)=   "Label2(1)"
+      Tab(8).Control(5)=   "Label1(96)"
+      Tab(8).Control(6)=   "Label1(97)"
+      Tab(8).Control(7)=   "imgBuscar(18)"
+      Tab(8).Control(8)=   "imgBuscar(19)"
+      Tab(8).Control(9)=   "imgBuscar(20)"
+      Tab(8).Control(10)=   "Label1(100)"
+      Tab(8).Control(11)=   "Label1(101)"
+      Tab(8).Control(12)=   "Label1(102)"
+      Tab(8).Control(13)=   "imgBuscar(21)"
+      Tab(8).Control(14)=   "imgFechaTf(9)"
+      Tab(8).Control(15)=   "imgFechaTf(10)"
+      Tab(8).Control(16)=   "Label1(103)"
+      Tab(8).Control(17)=   "Label1(20)"
+      Tab(8).Control(18)=   "Line1"
+      Tab(8).Control(19)=   "Label5"
+      Tab(8).Control(20)=   "Label1(127)"
+      Tab(8).Control(21)=   "imgFechaTf(16)"
+      Tab(8).Control(22)=   "lwTfnoCuotas"
       Tab(8).Control(23)=   "DataGrid3"
-      Tab(8).Control(24)=   "lwTfnoCuotas"
-      Tab(8).Control(25)=   "imgFechaTf(16)"
-      Tab(8).Control(26)=   "Label1(127)"
-      Tab(8).Control(27)=   "Label5"
-      Tab(8).Control(28)=   "Line1"
-      Tab(8).Control(29)=   "Label1(20)"
-      Tab(8).Control(30)=   "Label1(103)"
-      Tab(8).Control(31)=   "imgFechaTf(10)"
-      Tab(8).Control(32)=   "imgFechaTf(9)"
-      Tab(8).Control(33)=   "imgBuscar(21)"
-      Tab(8).Control(34)=   "Label1(102)"
-      Tab(8).Control(35)=   "Label1(101)"
-      Tab(8).Control(36)=   "Label1(100)"
-      Tab(8).Control(37)=   "imgBuscar(20)"
-      Tab(8).Control(38)=   "imgBuscar(19)"
-      Tab(8).Control(39)=   "imgBuscar(18)"
-      Tab(8).Control(40)=   "Label1(97)"
-      Tab(8).Control(41)=   "Label1(96)"
-      Tab(8).Control(42)=   "Label2(1)"
-      Tab(8).Control(43)=   "Label1(98)"
-      Tab(8).Control(44)=   "Label1(99)"
-      Tab(8).Control(45)=   "Label1(95)"
-      Tab(8).Control(46)=   "Label1(128)"
+      Tab(8).Control(24)=   "txtauxTfno(0)"
+      Tab(8).Control(25)=   "txtauxTfno(1)"
+      Tab(8).Control(26)=   "txtauxTfno(2)"
+      Tab(8).Control(27)=   "txtauxTfno(3)"
+      Tab(8).Control(28)=   "FrameTelefonia(0)"
+      Tab(8).Control(29)=   "txtauxTfno(4)"
+      Tab(8).Control(30)=   "txtauxTfno(5)"
+      Tab(8).Control(31)=   "Text5(4)"
+      Tab(8).Control(32)=   "Text5(5)"
+      Tab(8).Control(33)=   "txtauxTfno(6)"
+      Tab(8).Control(34)=   "Text5(6)"
+      Tab(8).Control(35)=   "txtauxTfno(7)"
+      Tab(8).Control(36)=   "txtauxTfno(8)"
+      Tab(8).Control(37)=   "txtauxTfno(9)"
+      Tab(8).Control(38)=   "txtauxTfno(10)"
+      Tab(8).Control(39)=   "FrameTelefonia(1)"
+      Tab(8).Control(40)=   "cboOperadorTfnnia2(1)"
+      Tab(8).Control(41)=   "cboOperadorTfnnia2(0)"
+      Tab(8).Control(42)=   "FrameModuloVtaPlazos"
+      Tab(8).Control(43)=   "FrameToolAux(5)"
+      Tab(8).Control(44)=   "cboOperadorTfnnia2(2)"
+      Tab(8).Control(45)=   "cboFiltroTfno"
+      Tab(8).Control(46)=   "txtauxTfno(16)"
       Tab(8).ControlCount=   47
       TabCaption(9)   =   "Fito"
       TabPicture(9)   =   "frmFacClientesGr.frx":0108
       Tab(9).ControlEnabled=   0   'False
-      Tab(9).Control(0)=   "FrameToolAux(3)"
-      Tab(9).Control(1)=   "cboFitos(1)"
-      Tab(9).Control(2)=   "chkManiProv"
-      Tab(9).Control(3)=   "txtauxFito(5)"
-      Tab(9).Control(4)=   "cmdFitos(0)"
-      Tab(9).Control(5)=   "Text1(58)"
-      Tab(9).Control(6)=   "txtauxFito(4)"
-      Tab(9).Control(7)=   "txtauxFito(0)"
-      Tab(9).Control(8)=   "cboFitos(0)"
-      Tab(9).Control(9)=   "txtauxFito(1)"
-      Tab(9).Control(10)=   "txtauxFito(2)"
-      Tab(9).Control(11)=   "txtauxFito(3)"
-      Tab(9).Control(12)=   "Text1(57)"
-      Tab(9).Control(13)=   "cboManipulador"
-      Tab(9).Control(14)=   "DataGrid4"
-      Tab(9).Control(15)=   "Label1(124)"
-      Tab(9).Control(16)=   "ImageFito(4)"
-      Tab(9).Control(17)=   "Label1(115)"
-      Tab(9).Control(18)=   "ImageFito(3)"
-      Tab(9).Control(19)=   "ImageFito(2)"
-      Tab(9).Control(20)=   "ImageFito(1)"
-      Tab(9).Control(21)=   "ImageFito(0)"
-      Tab(9).Control(22)=   "Label1(109)"
-      Tab(9).Control(23)=   "Label1(108)"
-      Tab(9).Control(24)=   "Label1(107)"
-      Tab(9).Control(25)=   "Label1(105)"
-      Tab(9).Control(26)=   "imgFecha(6)"
-      Tab(9).Control(27)=   "Label1(104)"
-      Tab(9).Control(28)=   "Label1(35)"
-      Tab(9).Control(29)=   "Label1(33)"
+      Tab(9).Control(0)=   "Label1(33)"
+      Tab(9).Control(1)=   "Label1(35)"
+      Tab(9).Control(2)=   "Label1(104)"
+      Tab(9).Control(3)=   "imgFecha(6)"
+      Tab(9).Control(4)=   "Label1(105)"
+      Tab(9).Control(5)=   "Label1(107)"
+      Tab(9).Control(6)=   "Label1(108)"
+      Tab(9).Control(7)=   "Label1(109)"
+      Tab(9).Control(8)=   "ImageFito(0)"
+      Tab(9).Control(9)=   "ImageFito(1)"
+      Tab(9).Control(10)=   "ImageFito(2)"
+      Tab(9).Control(11)=   "ImageFito(3)"
+      Tab(9).Control(12)=   "Label1(115)"
+      Tab(9).Control(13)=   "ImageFito(4)"
+      Tab(9).Control(14)=   "Label1(124)"
+      Tab(9).Control(15)=   "DataGrid4"
+      Tab(9).Control(16)=   "cboManipulador"
+      Tab(9).Control(17)=   "Text1(57)"
+      Tab(9).Control(18)=   "txtauxFito(3)"
+      Tab(9).Control(19)=   "txtauxFito(2)"
+      Tab(9).Control(20)=   "txtauxFito(1)"
+      Tab(9).Control(21)=   "cboFitos(0)"
+      Tab(9).Control(22)=   "txtauxFito(0)"
+      Tab(9).Control(23)=   "txtauxFito(4)"
+      Tab(9).Control(24)=   "Text1(58)"
+      Tab(9).Control(25)=   "cmdFitos(0)"
+      Tab(9).Control(26)=   "txtauxFito(5)"
+      Tab(9).Control(27)=   "chkManiProv"
+      Tab(9).Control(28)=   "cboFitos(1)"
+      Tab(9).Control(29)=   "FrameToolAux(3)"
       Tab(9).ControlCount=   30
       TabCaption(10)  =   "Marja"
       TabPicture(10)  =   "frmFacClientesGr.frx":0124
       Tab(10).ControlEnabled=   0   'False
-      Tab(10).Control(0)=   "FrameToolAux(6)"
-      Tab(10).Control(1)=   "cbomarjal"
-      Tab(10).Control(2)=   "txtauxMarja(6)"
-      Tab(10).Control(3)=   "txtauxMarja(8)"
-      Tab(10).Control(4)=   "txtauxMarja(9)"
-      Tab(10).Control(5)=   "txtauxMarja(5)"
-      Tab(10).Control(6)=   "txtauxMarja(7)"
-      Tab(10).Control(7)=   "txtauxMarja(4)"
-      Tab(10).Control(8)=   "txtauxMarja(3)"
-      Tab(10).Control(9)=   "txtauxMarja(2)"
+      Tab(10).Control(0)=   "imgFechaCampos(7)"
+      Tab(10).Control(1)=   "Label1(110)"
+      Tab(10).Control(2)=   "Label1(111)"
+      Tab(10).Control(3)=   "imgFechaCampos(8)"
+      Tab(10).Control(4)=   "Label1(112)"
+      Tab(10).Control(5)=   "imgFechaCampos(9)"
+      Tab(10).Control(6)=   "Label1(113)"
+      Tab(10).Control(7)=   "Label4(1)"
+      Tab(10).Control(8)=   "DataGrid5"
+      Tab(10).Control(9)=   "txtauxMarja(0)"
       Tab(10).Control(10)=   "txtauxMarja(1)"
-      Tab(10).Control(11)=   "txtauxMarja(0)"
-      Tab(10).Control(12)=   "DataGrid5"
-      Tab(10).Control(13)=   "Label4(1)"
-      Tab(10).Control(14)=   "Label1(113)"
-      Tab(10).Control(15)=   "imgFechaCampos(9)"
-      Tab(10).Control(16)=   "Label1(112)"
-      Tab(10).Control(17)=   "imgFechaCampos(8)"
-      Tab(10).Control(18)=   "Label1(111)"
-      Tab(10).Control(19)=   "Label1(110)"
-      Tab(10).Control(20)=   "imgFechaCampos(7)"
+      Tab(10).Control(11)=   "txtauxMarja(2)"
+      Tab(10).Control(12)=   "txtauxMarja(3)"
+      Tab(10).Control(13)=   "txtauxMarja(4)"
+      Tab(10).Control(14)=   "txtauxMarja(7)"
+      Tab(10).Control(15)=   "txtauxMarja(5)"
+      Tab(10).Control(16)=   "txtauxMarja(9)"
+      Tab(10).Control(17)=   "txtauxMarja(8)"
+      Tab(10).Control(18)=   "txtauxMarja(6)"
+      Tab(10).Control(19)=   "cbomarjal"
+      Tab(10).Control(20)=   "FrameToolAux(6)"
       Tab(10).ControlCount=   21
       TabCaption(11)  =   "Taximetro"
       TabPicture(11)  =   "frmFacClientesGr.frx":0140
@@ -7526,7 +7526,7 @@ Begin VB.Form frmFacClientesGr
          Left            =   120
          TabIndex        =   115
          Top             =   4530
-         Width           =   1020
+         Width           =   1140
       End
       Begin VB.Label Label1 
          Caption         =   "Observaciones"
@@ -8976,7 +8976,9 @@ Dim NombreModificado As Boolean
                         Set LOG = New cLOG
                         Cad = DevuelveDesdeBD(conAri, "nomsitua", "ssitua", "codsitua", CStr(Val(Data1.Recordset!codsitua)))
                         Cad = "Anterior: " & Val(Data1.Recordset!codsitua) & " - " & Cad
-                        Cad = "Actual: " & Text1(42).Text & " - " & Text2(12).Text & vbCrLf & Cad
+                        Cad = "Actual: " & Text1(42).Text & " - " & Text2(42).Text & vbCrLf & Cad
+                        Cad = "NIF: " & Text1(7).Text & vbCrLf & Cad
+                        Cad = "Codigo: " & Val(Text1(0).Text) & "     " & Text1(1).Text & vbCrLf & Cad
                         LOG.Insertar 31, vUsu, Cad
                         Set LOG = Nothing
                     End If
@@ -9052,9 +9054,9 @@ Dim NombreModificado As Boolean
                     CargaLineas True, 6
                 
                     If ModificaLineas = 1 Then
-                        data3.Recordset.MoveLast
+                        Data3.Recordset.MoveLast
                     Else
-                        data3.Recordset.Find Cad
+                        Data3.Recordset.Find Cad
                     End If
                     B = True
                     
@@ -9362,12 +9364,12 @@ Dim Indicador As String
             DataGrid7.AllowAddNew = False
             If ModificaLineas = 1 Or ModificaLineas = 5 Then '1 = Insertar
                 
-                If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
+                If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
                     
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(coddiren=" & Text4(0).Text & ")"
                  CargaLineas True, 6
-                 data3.Recordset.Find Cad
+                 Data3.Recordset.Find Cad
                  
             End If
             
@@ -9728,7 +9730,7 @@ Dim vWhere As String
         Text4(0).Text = SugerirCodigoSiguienteStr("sdirenvio", "coddiren", vWhere)
         
         
-        AnyadirLinea DataGrid7, data3
+        AnyadirLinea DataGrid7, Data3
         LLamaLineasDirenEvio ObtenerAlto(DataGrid7, 20), 1
         
 
@@ -9812,7 +9814,7 @@ Private Sub BotonVerTodos()
 Dim Cad As String
     
     Cad = "1=1"
-    If vParamAplic.NumeroInstalacion = 2 Then
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then
         If vUsu.CodigoAgente > 0 Then Cad = "codagent = " & vUsu.CodigoAgente
     End If
 'Ver todos
@@ -9907,8 +9909,8 @@ Dim aModo As Byte
         Me.SSTab1.Tab = 2
         
     ElseIf aModo = 6 Then
-        If data3.Recordset.EOF Then Exit Sub
-        If data3.Recordset.RecordCount < 1 Then Exit Sub
+        If Data3.Recordset.EOF Then Exit Sub
+        If Data3.Recordset.RecordCount < 1 Then Exit Sub
         Me.SSTab1.Tab = 3
     ElseIf aModo = 7 Then
         If data4.Recordset.EOF Then Exit Sub
@@ -10206,39 +10208,39 @@ Private Sub BotonEliminarLineaDirEnvio()
 Dim Cad As String
 Dim i As Integer
 
-    If data3.Recordset.EOF Then Exit Sub
-    If data3.Recordset.RecordCount < 1 Then Exit Sub
+    If Data3.Recordset.EOF Then Exit Sub
+    If Data3.Recordset.RecordCount < 1 Then Exit Sub
     
     'Si no estaba modificando lineas salimos
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas = 1 Or ModificaLineas = 2 Then Exit Sub '1= Insertar, 2=Modificar
        
-    If Not PuedeEliminarDirecEnvio(True, Text1(0).Text, CInt(data3.Recordset!coddiren)) Then Exit Sub
+    If Not PuedeEliminarDirecEnvio(True, Text1(0).Text, CInt(Data3.Recordset!coddiren)) Then Exit Sub
     
     ModificaLineas = 3 'Eliminar
     
     
     Cad = "¿Seguro que desea eliminar la direccion de envio" & Cad & vbCrLf
-    Cad = Cad & vbCrLf & "Codigo:  " & Format(data3.Recordset.Fields(0), FormatoCampo(Text4(0)))
-    Cad = Cad & vbCrLf & "Nombre:  " & data3.Recordset.Fields(1)
+    Cad = Cad & vbCrLf & "Codigo:  " & Format(Data3.Recordset.Fields(0), FormatoCampo(Text4(0)))
+    Cad = Cad & vbCrLf & "Nombre:  " & Data3.Recordset.Fields(1)
     
     'Borramos
     If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
-        NumRegElim = data3.Recordset.AbsolutePosition
+        NumRegElim = Data3.Recordset.AbsolutePosition
         
         
         Cad = "DELETE FROM sdirenvio WHERE codclien =" & Data1.Recordset!codClien
-        Cad = Cad & " AND coddiren=" & data3.Recordset!coddiren
+        Cad = Cad & " AND coddiren=" & Data3.Recordset!coddiren
         conn.Execute Cad
         
         
         
         CargaLineas True, 6
         
-        If NumRegElim > 0 Then data3.Recordset.Move NumRegElim
+        If NumRegElim > 0 Then Data3.Recordset.Move NumRegElim
 
         
         
@@ -10249,7 +10251,7 @@ Dim i As Integer
 Error2:
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then
-        data3.Recordset.CancelUpdate
+        Data3.Recordset.CancelUpdate
         MsgBox Err.Number & ": " & Err.Description, vbExclamation
     End If
 End Sub
@@ -10523,7 +10525,7 @@ End Sub
 Private Sub data3_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
 
     If Modo = 6 And ModificaLineas > 0 Then Exit Sub
-    If Not data3.Recordset.EOF Then
+    If Not Data3.Recordset.EOF Then
         'Caption = data4.Recordset!Id
         PonerDatosForaGridDirEnvio False
     Else
@@ -10601,7 +10603,7 @@ Private Sub DataGrid6_Click()
 End Sub
 
 Private Sub DataGrid7_Click()
-    If Not data3.Recordset.EOF And ModificaLineas <> 1 Then PonerDatosForaGridDirEnvio False
+    If Not Data3.Recordset.EOF And ModificaLineas <> 1 Then PonerDatosForaGridDirEnvio False
 
 End Sub
 
@@ -10824,7 +10826,7 @@ Dim N As Integer
             
     'Coultamos password web
     Text1(45).visible = False
-    Label1(19).visible = False
+    label1(19).visible = False
             
     'Marjal Chipos
     SSTab1.TabVisible(10) = vParamAplic.Huertos
@@ -10857,15 +10859,15 @@ Dim N As Integer
         
         
         cboOperadorTfnnia2(2).visible = vParamAplic.AgrupaTfnosFacturacionCliente
-        Label1(127).visible = vParamAplic.AgrupaTfnosFacturacionCliente
+        label1(127).visible = vParamAplic.AgrupaTfnosFacturacionCliente
         
         cboFiltroTfno.ListIndex = 0
         
     End If
     'Si tienen renting
     cboFraRenting.visible = vParamAplic.Renting
-    Label1(91).visible = vParamAplic.Renting
-    Label1(91).Caption = Label1(91).Caption & RentingLB
+    label1(91).visible = vParamAplic.Renting
+    label1(91).Caption = label1(91).Caption & RentingLB
     'Si NO tiene renting ocultamos el chk
     If vParamAplic.Renting Then
         Me.chkRentingDpto.Top = 4560
@@ -10913,7 +10915,7 @@ Dim N As Integer
         If vParamAplic.NumeroInstalacion = 6 Then
             lblFramePp(0).Caption = lblFramePp(0).Caption & " / OBRAS"
             Me.SSTab1.TabCaption(2) = "Dpto. / Obras"
-            Label1(6).Caption = "Transportista"
+            label1(6).Caption = "Transportista"
         End If
         FrameCtaBanDpto.BorderStyle = 0
         Me.FrameCtaBanDpto.visible = True
@@ -10931,7 +10933,7 @@ Dim N As Integer
             
             Me.Toolbar1.Buttons(10).ToolTipText = "Obras"
             lblFramePp(0).Caption = "Obras"
-            Me.Label1(22).Caption = "Cod. obra"
+            Me.label1(22).Caption = "Cod. obra"
             Me.SSTab1.TabCaption(2) = "Obras"
             
             kCampo = 1
@@ -10946,31 +10948,34 @@ Dim N As Integer
     
     
     SSTab1.TabVisible(11) = False
-    Label1(56).Caption = "Distancia Km."  'TAXCO utlizará el campo en BD para otras cosa
+    label1(56).Caption = "Distancia Km."  'TAXCO utlizará el campo en BD para otras cosa
     If vParamAplic.NumeroInstalacion = vbTaxco Then
         CargaComboTipoActuacion
         SSTab1.TabVisible(11) = True
         
         'Los quito de la pantallas.  El tabindex ya esta cmabiado
-        Label1(144).Left = 30000
-        imgBuscar(26).Left = Label1(144).Left
-        txtTaximetro(15).Left = Label1(144).Left
-        txtTaximetro(17).Left = Label1(144).Left
+        label1(144).Left = 30000
+        imgBuscar(26).Left = label1(144).Left
+        txtTaximetro(15).Left = label1(144).Left
+        txtTaximetro(17).Left = label1(144).Left
 
         'EnvFraEmail     en taxco es para ver si se le comunica facturas por facturaE
         chkEnvioFraEmail.Caption = "Fact. electrónica"
         
         
         
-        Label1(56).Caption = "Nº Título"
+        label1(56).Caption = "Nº Título"
         '
         'El texto "Agente", cambiarlo por "Mutua Acc"
         'El texto "Ruta", cambiarlo por "Area"
-        Label1(9).Caption = "Mutua Acc."
-        Label1(17).Caption = "Area"
+        label1(9).Caption = "Mutua Acc."
+        label1(17).Caption = "Area"
+        label1(7).Caption = "Módulos"
+        
+        
     End If
     'Para que el text1(44) sclien.distancia , pero que el msgbxo diga lo que correspona
-    Text1(44).Tag = Replace(Text1(44).Tag, "@@@", Label1(56).Caption)
+    Text1(44).Tag = Replace(Text1(44).Tag, "@@@", label1(56).Caption)
     
     'Si lleva puntos
     Text1(62).visible = vParamAplic.PtosAsignar > 0
@@ -11005,14 +11010,14 @@ Dim N As Integer
     
     
     'Si no tiene el parametro de direcciones envio, NO se muestra el txt
-    Me.Label1(84).visible = vParamAplic.DireccionesEnvio
+    Me.label1(84).visible = vParamAplic.DireccionesEnvio
     Me.imgBuscar(13).visible = vParamAplic.DireccionesEnvio
     Me.Text1(52).visible = vParamAplic.DireccionesEnvio
     Me.Text2(52).visible = vParamAplic.DireccionesEnvio
     
     If vParamAplic.NumeroInstalacion = vbFenollar Then
-        Label1(94).Caption = "Perfil credito"
-        Label1(22).visible = True
+        label1(94).Caption = "Perfil credito"
+        label1(22).visible = True
         Text1(64).visible = True
         Text1(64).MaxLength = 3
         Text1(64).Width = 765
@@ -11056,15 +11061,15 @@ Dim N As Integer
     
     If vParamAplic.NumeroInstalacion = vbHerbelca Then
         'HERBELCA
-        If vUsu.CodigoAgente > 0 Then FrameNavegaDoc.visible = False 'rameNavegaDocToolbarDoc.visible = False
-        Label1(17).Caption = "Asociación"
+        'Feb2022 If vUsu.CodigoAgente > 0 Then FrameNavegaDoc.visible = False 'rameNavegaDocToolbarDoc.visible = False
+        label1(17).Caption = "Asociación"
     
         Text1(58).Tag = ""  'Para que noi haga ni el insert ni el update. Es el mismo campo que el 69
         Text1(69).Tag = "Fecha vigor|F|S|||sclien|ManipuladorFecCaducidad|dd/mm/yyyy||"
         
         'Fecha vigor
         Text1(69).visible = True
-        Label1(168).visible = True
+        label1(168).visible = True
         imgFecha(12).visible = True
     End If
     
@@ -12648,7 +12653,7 @@ Dim cadB3 As String
     cadB = ObtenerBusqueda(Me, False, BuscaChekc)
     
         
-    If vParamAplic.NumeroInstalacion = 2 Then
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then
         If vUsu.CodigoAgente > 0 Then
             If cadB <> "" Then cadB = cadB & " AND "
             cadB = cadB & " codagent = " & vUsu.CodigoAgente
@@ -13150,7 +13155,7 @@ Dim B As Boolean
     Toolbar1.Buttons(5).Enabled = B
     Toolbar1.Buttons(6).Enabled = B
     
-    If vParamAplic.NumeroInstalacion = 2 Then
+    If vParamAplic.NumeroInstalacion = vbHerbelca Then
         If vUsu.CodigoAgente > 0 Then B = False
     Else
         If vUsu.Nivel2 > 1 Then B = False
@@ -14506,7 +14511,7 @@ Dim enlaza As Boolean
 
     'Crear las lineas de Direcciones/Departamentos para el cliente
     'ASignamos un SQL al DATA2
-    Me.data3.ConnectionString = conn
+    Me.Data3.ConnectionString = conn
     enlaza = False
     If Text1(0).Text <> "" Then enlaza = True
     CargaLineas enlaza, 6
@@ -15818,7 +15823,7 @@ Dim Sql As String
                 End If
                 Sql = Sql & " ORDER BY  coddiren"
                 
-                CargaGridGnral DataGrid7, Me.data3, Sql, PriVezForm
+                CargaGridGnral DataGrid7, Me.Data3, Sql, PriVezForm
                 
                 Sql = "S|Text4(0)|T|ID|600|;S|Text4(1)|T|Nombre|3950|;S|Text4(2)|T|Contacto|3950|;"
                 
@@ -18318,8 +18323,8 @@ Dim T As Boolean
 
     Limp = True
     If Not ForzarLimpiar Then
-        If Not (data3.Recordset Is Nothing) Then
-            If Not data3.Recordset.EOF Then Limp = False
+        If Not (Data3.Recordset Is Nothing) Then
+            If Not Data3.Recordset.EOF Then Limp = False
         End If
     End If
     
@@ -18350,15 +18355,15 @@ Dim T As Boolean
                 End If
             End If
             If T Then
-                Text4(i).Text = DBLet(data3.Recordset.Fields(i), "T")
+                Text4(i).Text = DBLet(Data3.Recordset.Fields(i), "T")
             Else
-                If IsNull(data3.Recordset.Fields(i)) Then
+                If IsNull(Data3.Recordset.Fields(i)) Then
                     Text4(i).Text = ""
                 Else
                     If i = 13 Then
-                        Text4(i).Text = DBLet(data3.Recordset.Fields(i), "0000000000")
+                        Text4(i).Text = DBLet(Data3.Recordset.Fields(i), "0000000000")
                     Else
-                        Text4(i).Text = DBLet(data3.Recordset.Fields(i), "0000")
+                        Text4(i).Text = DBLet(Data3.Recordset.Fields(i), "0000")
                     End If
                 End If
             End If
@@ -18396,7 +18401,7 @@ Dim B As Boolean
     If vParamAplic.DireccionesEnvio Then
         B = Modo = 2 Or Modo = 6
         ToolbarAux(1).Buttons(1).Enabled = B
-        If B Then B = Me.data3.Recordset.RecordCount > 0
+        If B Then B = Me.Data3.Recordset.RecordCount > 0
         ToolbarAux(1).Buttons(2).Enabled = B
         ToolbarAux(1).Buttons(3).Enabled = B
         

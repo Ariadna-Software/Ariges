@@ -635,25 +635,25 @@ Begin VB.Form frmFacEntPedidos
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmFacEntPedidos.frx":037F
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(34)"
-      Tab(1).Control(1)=   "Text1(33)"
-      Tab(1).Control(2)=   "Text1(29)"
-      Tab(1).Control(3)=   "Text1(30)"
-      Tab(1).Control(4)=   "FrameHco"
-      Tab(1).Control(5)=   "Text1(25)"
-      Tab(1).Control(6)=   "Text1(24)"
-      Tab(1).Control(7)=   "Text1(23)"
-      Tab(1).Control(8)=   "Text1(22)"
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(3)"
+      Tab(1).Control(2)=   "Label1(5)"
+      Tab(1).Control(3)=   "Label1(18)"
+      Tab(1).Control(4)=   "Label1(27)"
+      Tab(1).Control(5)=   "Label1(28)"
+      Tab(1).Control(6)=   "imgBuscar(11)"
+      Tab(1).Control(7)=   "Text1(19)"
+      Tab(1).Control(8)=   "Text1(20)"
       Tab(1).Control(9)=   "Text1(21)"
-      Tab(1).Control(10)=   "Text1(20)"
-      Tab(1).Control(11)=   "Text1(19)"
-      Tab(1).Control(12)=   "imgBuscar(11)"
-      Tab(1).Control(13)=   "Label1(28)"
-      Tab(1).Control(14)=   "Label1(27)"
-      Tab(1).Control(15)=   "Label1(18)"
-      Tab(1).Control(16)=   "Label1(5)"
-      Tab(1).Control(17)=   "Label1(3)"
-      Tab(1).Control(18)=   "Label1(45)"
+      Tab(1).Control(10)=   "Text1(22)"
+      Tab(1).Control(11)=   "Text1(23)"
+      Tab(1).Control(12)=   "Text1(24)"
+      Tab(1).Control(13)=   "Text1(25)"
+      Tab(1).Control(14)=   "FrameHco"
+      Tab(1).Control(15)=   "Text1(30)"
+      Tab(1).Control(16)=   "Text1(29)"
+      Tab(1).Control(17)=   "Text1(33)"
+      Tab(1).Control(18)=   "Text1(34)"
       Tab(1).ControlCount=   19
       TabCaption(2)   =   "Totales"
       TabPicture(2)   =   "frmFacEntPedidos.frx":039B
@@ -3462,12 +3462,16 @@ Private Sub Form_Load()
         
         .Buttons(14).Image = 16 'Imprimir Pedido
         .Buttons(15).Image = 27 'Imprimir Orden Instalacion
-        If vParamAplic.NumeroInstalacion = vbFenollar Then
+'        If vParamAplic.NumeroInstalacion = vbFenollar Then
+'            .Buttons(15).Image = 55  'tiene que ser 55
+'            .Buttons(15).ToolTipText = "Cerrar / abrir pedido"
+'            mnImpOrde.Caption = .Buttons(15).ToolTipText
+'            .Buttons(12).ToolTipText = "Agrupacion pedidos"
+'
+'        End If
+        If vParamAplic.NumeroInstalacion = vbFontenas Then
             .Buttons(15).Image = 55  'tiene que ser 55
-            .Buttons(15).ToolTipText = "Cerrar / abrir pedido"
-            mnImpOrde.Caption = .Buttons(15).ToolTipText
-            .Buttons(12).ToolTipText = "Agrupacion pedidos"
-
+            .Buttons(15).ToolTipText = "Importar pedido EXCEL"
         End If
         .Buttons(16).Image = 40 'confirmación de entrega
         .Buttons(17).Image = 43 'confirmación de entrega
@@ -3507,22 +3511,22 @@ Private Sub Form_Load()
    
     'Comprobar si es Departamento o Direccion
 
-    Me.Label1(1).Caption = DevuelveTextoDepto(True)
+    Me.label1(1).Caption = DevuelveTextoDepto(True)
     mnFiltroSelec.visible = vParamAplic.NumeroInstalacion = vbFenollar
     mnFiltro1(0).Checked = True
     
     'Lbl obs crm
     If vParamAplic.TieneCRM Then
-        Label1(27).Caption = "Observaciones CRM"
+        label1(27).Caption = "Observaciones CRM"
     Else
-        Label1(27).Caption = "Observaciones internas"
+        label1(27).Caption = "Observaciones internas"
     End If
     
     'campo exxplicativo txtAux(12) PRECOSTE (Octubre 2020)
-    Label1(43).visible = False
+    label1(43).visible = False
     
     'Direcion envio SOLO si esta en parametros
-    Label1(24).visible = vParamAplic.DireccionesEnvio
+    label1(24).visible = vParamAplic.DireccionesEnvio
     imgBuscar(9).visible = vParamAplic.DireccionesEnvio
     Text1(32).visible = vParamAplic.DireccionesEnvio
     Text2(32).visible = vParamAplic.DireccionesEnvio
@@ -3530,7 +3534,7 @@ Private Sub Form_Load()
     '## A mano
     Me.FrameHco.visible = EsHistorico
     chkEnviadaConfir.visible = Not EsHistorico
-    Label1(23).visible = Not EsHistorico
+    label1(23).visible = Not EsHistorico
     Text1(31).visible = Not EsHistorico
     
     
@@ -4489,12 +4493,15 @@ Dim devuelve As String, nomDocu As String
 Dim numParam As Byte
 
     'Comprobar que hay un pedido seleccionado
-    If Text1(0).Text = "" Then
+    If Text1(0).Text = "" And vParamAplic.NumeroInstalacion <> vbFontenas Then
         MsgBox "No hay ningún Pedido seleccionado.", vbInformation
         Exit Sub
     End If
-
-
+    
+    If Me.EsHistorico Then
+        MsgBox "Está en histórico de pedidos", vbExclamation
+        Exit Sub
+    End If
 
     If vParamAplic.NumeroInstalacion = vbFenollar Then
         If Modo <> 2 Then Exit Sub
@@ -4514,11 +4521,48 @@ Dim numParam As Byte
         End If
         Exit Sub
     End If
-'    'Comprobar que algun Articulo pertenece a la familia de Instalaciones
-'    If Not PedidoConInstalaciones Then
-'        MsgBox "El Pedido no tiene ningún Artículo que sea Instalación.", vbInformation
-'        Exit Sub
-'    End If
+
+
+    'En fontenas es ABRIR el CSV
+    If vParamAplic.NumeroInstalacion = vbFontenas Then
+        CadenaDesdeOtroForm = ""
+        If Modo = 2 Or Modo = 0 Then
+            frmMensajes.Parametros = Text1(0).Text & "  " & Text1(4).Text
+            frmMensajes.OpcionMensaje = 33
+            frmMensajes.Show vbModal
+            
+            If Trim(CadenaDesdeOtroForm) <> "" Then
+                
+                
+                Screen.MousePointer = vbHourglass
+                
+                'Primero poner HacerBusqueda
+                CadenaConsulta = "select * from " & NombreTabla & " WHERE numpedcl=" & CadenaDesdeOtroForm & " " & Ordenacion
+                PonerCadenaBusqueda
+                
+                
+                If Data1.Recordset.EOF Then
+                    MsgBox "Pedido " & CadenaDesdeOtroForm & " NO existe", vbExclamation
+                Else
+                    
+                    Screen.MousePointer = vbHourglass
+                    LeerDatosLineasEXCEL CLng(CadenaDesdeOtroForm)
+                   
+                    Modo = 5
+                    cmdRegresar_Click
+                    Screen.MousePointer = vbDefault
+                End If
+            End If
+        End If
+        
+        Exit Sub
+    End If
+
+
+
+
+
+
 
     '=======================================================================
     '=============== FORMULA    ============================================
@@ -4695,9 +4739,9 @@ End Sub
 
 
 Private Sub SSTab1_Click(PreviousTab As Integer)
-    Me.Label1(35).visible = Me.SSTab1.Tab = 0
+    Me.label1(35).visible = Me.SSTab1.Tab = 0
     Me.Text2(16).visible = Me.SSTab1.Tab = 0
-    Me.Label1(6).visible = (Modo = 5) And (vEmpresa.TieneAnalitica) And SSTab1.Tab = 0
+    Me.label1(6).visible = (Modo = 5) And (vEmpresa.TieneAnalitica) And SSTab1.Tab = 0
     Me.txtAux2(11).visible = (Modo = 5) And (vEmpresa.TieneAnalitica) And Me.SSTab1.Tab = 0
     Me.imgBuscar(10).visible = Me.SSTab1.Tab = 0
 End Sub
@@ -5049,7 +5093,7 @@ Dim J As Integer
         frmB.vselElem = IIf(vParamAplic.NumeroInstalacion = vbFenollar, 1, 0)
         frmB.vDescendente = IIf(vParamAplic.NumeroInstalacion = vbFenollar, True, False)
         frmB.vConexionGrid = conAri 'Conexión a BD: Ariges
-        If EsCabecera2 > 0 Then frmB.Label1.FontSize = 11
+        If EsCabecera2 > 0 Then frmB.label1.FontSize = 11
 '        frmB.vBuscaPrevia = chkVistaPrevia
         '#
         frmB.Show vbModal
@@ -5828,7 +5872,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             
         Case 14: mnImpPedido_Click 'Imprimir Pedido
         Case 15: mnImpOrde_Click 'Imprimir Orden Instalacion
-            ' ---- [04/11/2009] [LAURA] : Añadir botón para enviar informe confirmacion entrega del Pedido
+            
         Case 16: mnConfirmacion_Click 'confirmacion de entrega
             ' ----
         
@@ -8509,7 +8553,7 @@ Dim IMporteTicketExcede As Boolean
     
     
     Set frmList = New frmListadoPed
-    frmList.FacturaSuperaImporteTicket_ = False
+    frmList.FacturaSuperaImporteTicket = False
     If PasarTambienAFacturar Then
         frmList.OpcionListado = 1000
     Else
@@ -10883,6 +10927,101 @@ eLeerDatosCestaApp:
     CadenaDesdeOtroForm = ""
     ModificaLineas = 0
 End Sub
+
+
+
+
+
+
+
+
+Private Sub LeerDatosLineasEXCEL(CodigoEXCEL As Long)
+Dim Almacen As Integer
+    
+    
+    On Error GoTo eLeerDatosCestaApp
+    
+    lblIndicador.Caption = "Eli. lineas"
+    lblIndicador.Refresh
+    
+    
+    CtaBancoPropi = "DELETE FROM sliped where numpedcl = " & CodigoEXCEL
+    conn.Execute CtaBancoPropi
+    
+    lblIndicador.Caption = "Leyendo XLS"
+    lblIndicador.Refresh
+    
+    CtaBancoPropi = "select slipedxls.*,sartic.nomartic nomreal FROM slipedxls inner join sartic on slipedxls.codartic=sartic.codartic"
+    CtaBancoPropi = CtaBancoPropi & " WHERE codigo= " & CodigoEXCEL
+    
+    
+    CadenaDesdeOtroForm = ""
+    Set miRsAux = New ADODB.Recordset
+    miRsAux.Open CtaBancoPropi, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If miRsAux.EOF Then
+        MsgBox "Ningun pedido desde EXCEL ", vbExclamation
+    Else
+    
+        txtAux(3).Locked = False
+        Modo = 5
+        While Not miRsAux.EOF
+                        
+            lblIndicador.Caption = "Art: " & miRsAux!codArtic
+            lblIndicador.Refresh
+        
+            For kCampo = 0 To txtAux.Count - 1
+                txtAux(kCampo).Text = ""
+            Next
+        
+            txtAux(0).Text = miRsAux!codAlmac
+            txtAux(1).Text = miRsAux!codArtic
+            txtAux(2).Text = miRsAux!nomreal
+            txtAux(3).Text = Format(miRsAux!servidas, FormatoCantidad)
+            txtAux(9).Text = DBSet(miRsAux!NumBultos, "N")
+            txtAux(10).Text = miRsAux!numLote
+        
+            'Hacemos el lostfocus de cantidad
+            ModificaLineas = 1
+            
+            txtAux_LostFocus 3
+        
+                
+            'Insertamos pedido
+            InsertarLinea
+                
+        
+            'Sigueinte
+            miRsAux.MoveNext
+        Wend
+        
+        CargaGrid2 DataGrid1, Data2
+    
+    End If
+    miRsAux.Close
+    
+    
+        
+    CtaBancoPropi = "DELETE FROM slipedxls WHERE codigo= " & CodigoEXCEL
+    Debug.Assert False
+    conn.Execute CtaBancoPropi
+
+    
+    
+    
+    
+    
+eLeerDatosCestaApp:
+    If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
+    lblIndicador.Caption = ""
+    CtaBancoPropi = ""
+    CadenaDesdeOtroForm = ""
+    ModificaLineas = 0
+    Modo = 2
+End Sub
+
+
+
+
 
 
 

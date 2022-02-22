@@ -15,10 +15,241 @@ Begin VB.Form frmListado3
    ScaleWidth      =   14580
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.Frame FrameAguaGeneralitat 
+      Height          =   2895
+      Left            =   1080
+      TabIndex        =   977
+      Top             =   1080
+      Visible         =   0   'False
+      Width           =   5655
+      Begin VB.CheckBox chkVarios 
+         Caption         =   "Formato EPSAR"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   9
+         Left            =   3000
+         TabIndex        =   981
+         Top             =   1680
+         Value           =   1  'Checked
+         Width           =   2295
+      End
+      Begin VB.CheckBox chkVarios 
+         Caption         =   "Detalla cobros"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   44
+         Left            =   480
+         TabIndex        =   980
+         Top             =   1680
+         Value           =   1  'Checked
+         Width           =   2535
+      End
+      Begin VB.CommandButton cmdAguaCanonGeneralitat 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Left            =   2880
+         TabIndex        =   982
+         Top             =   2160
+         Width           =   1215
+      End
+      Begin VB.TextBox txtFecha 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   58
+         Left            =   4200
+         TabIndex        =   979
+         Text            =   "Text1"
+         Top             =   1065
+         Width           =   1215
+      End
+      Begin VB.TextBox txtFecha 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   57
+         Left            =   1200
+         TabIndex        =   978
+         Text            =   "Text1"
+         Top             =   1065
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdCancelar 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Index           =   55
+         Left            =   4200
+         TabIndex        =   983
+         Top             =   2160
+         Width           =   1215
+      End
+      Begin VB.Label Label3 
+         Caption         =   "D"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   106
+         Left            =   120
+         TabIndex        =   1377
+         Top             =   2400
+         Width           =   2625
+      End
+      Begin VB.Label lblTitulo 
+         Alignment       =   2  'Center
+         Caption         =   "aguas"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   360
+         Index           =   50
+         Left            =   120
+         TabIndex        =   987
+         Top             =   240
+         Width           =   5325
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   58
+         Left            =   3840
+         Picture         =   "frmListado3.frx":0000
+         Top             =   1125
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   178
+         Left            =   240
+         TabIndex        =   986
+         Top             =   1125
+         Width           =   600
+      End
+      Begin VB.Label lblDpto 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha  facturación"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   240
+         Index           =   68
+         Left            =   240
+         TabIndex        =   985
+         Top             =   720
+         Width           =   2010
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   57
+         Left            =   960
+         Picture         =   "frmListado3.frx":008B
+         Top             =   1125
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   240
+         Index           =   177
+         Left            =   3120
+         TabIndex        =   984
+         Top             =   1125
+         Width           =   570
+      End
+   End
    Begin VB.Frame FrameCostesEulerFra 
       Height          =   1575
       Left            =   0
-      TabIndex        =   1322
+      TabIndex        =   1323
       Top             =   0
       Visible         =   0   'False
       Width           =   14040
@@ -33,11 +264,11 @@ Begin VB.Form frmListado3
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         ItemData        =   "frmListado3.frx":0000
+         ItemData        =   "frmListado3.frx":0116
          Left            =   1680
-         List            =   "frmListado3.frx":0010
+         List            =   "frmListado3.frx":0126
          Style           =   2  'Dropdown List
-         TabIndex        =   1324
+         TabIndex        =   1325
          Top             =   480
          Visible         =   0   'False
          Width           =   3495
@@ -53,11 +284,11 @@ Begin VB.Form frmListado3
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         ItemData        =   "frmListado3.frx":003A
+         ItemData        =   "frmListado3.frx":0150
          Left            =   120
-         List            =   "frmListado3.frx":004A
+         List            =   "frmListado3.frx":0160
          Style           =   2  'Dropdown List
-         TabIndex        =   1323
+         TabIndex        =   1324
          Top             =   480
          Width           =   1470
       End
@@ -75,7 +306,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   70
          Left            =   12645
-         TabIndex        =   1331
+         TabIndex        =   1332
          Top             =   960
          Width           =   1065
       End
@@ -93,7 +324,7 @@ Begin VB.Form frmListado3
          Index           =   19
          Left            =   3000
          MaxLength       =   16
-         TabIndex        =   1326
+         TabIndex        =   1327
          Top             =   480
          Width           =   2200
       End
@@ -112,7 +343,7 @@ Begin VB.Form frmListado3
          Index           =   19
          Left            =   5205
          Locked          =   -1  'True
-         TabIndex        =   1327
+         TabIndex        =   1328
          Text            =   "Text5"
          Top             =   480
          Width           =   4110
@@ -130,7 +361,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   81
          Left            =   1680
-         TabIndex        =   1325
+         TabIndex        =   1326
          Text            =   "Text1"
          Top             =   480
          Width           =   1260
@@ -149,7 +380,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   22
          Left            =   9375
-         TabIndex        =   1328
+         TabIndex        =   1329
          Text            =   "Text3"
          Top             =   480
          Width           =   1245
@@ -168,7 +399,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   23
          Left            =   10635
-         TabIndex        =   1329
+         TabIndex        =   1330
          Text            =   "Text3"
          Top             =   480
          Width           =   1500
@@ -189,7 +420,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   24
          Left            =   12195
-         TabIndex        =   1332
+         TabIndex        =   1333
          Text            =   "Text3"
          Top             =   480
          Width           =   1500
@@ -207,7 +438,7 @@ Begin VB.Form frmListado3
          EndProperty
          Height          =   375
          Left            =   11445
-         TabIndex        =   1330
+         TabIndex        =   1331
          Top             =   960
          Width           =   1065
       End
@@ -227,7 +458,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   261
          Left            =   195
-         TabIndex        =   1340
+         TabIndex        =   1341
          Top             =   240
          Width           =   465
       End
@@ -253,7 +484,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   102
          Left            =   3000
-         TabIndex        =   1339
+         TabIndex        =   1340
          Top             =   240
          Width           =   750
       End
@@ -261,7 +492,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   81
          Left            =   2655
-         Picture         =   "frmListado3.frx":0074
+         Picture         =   "frmListado3.frx":018A
          Top             =   240
          Width           =   240
       End
@@ -281,7 +512,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   260
          Left            =   1680
-         TabIndex        =   1338
+         TabIndex        =   1339
          Top             =   240
          Width           =   645
       End
@@ -301,7 +532,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   259
          Left            =   9735
-         TabIndex        =   1337
+         TabIndex        =   1338
          Top             =   240
          Width           =   915
       End
@@ -321,7 +552,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   258
          Left            =   11490
-         TabIndex        =   1336
+         TabIndex        =   1337
          Top             =   240
          Width           =   645
       End
@@ -341,7 +572,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   257
          Left            =   12885
-         TabIndex        =   1335
+         TabIndex        =   1336
          Top             =   240
          Width           =   810
       End
@@ -361,7 +592,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   102
          Left            =   120
-         TabIndex        =   1334
+         TabIndex        =   1335
          Top             =   1080
          Visible         =   0   'False
          Width           =   1095
@@ -382,7 +613,7 @@ Begin VB.Form frmListado3
          Height          =   480
          Index           =   62
          Left            =   3645
-         TabIndex        =   1333
+         TabIndex        =   1334
          Top             =   990
          Visible         =   0   'False
          Width           =   4530
@@ -391,7 +622,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameSituBloqCliInactivo 
       Height          =   2295
       Left            =   0
-      TabIndex        =   1378
+      TabIndex        =   1379
       Top             =   0
       Visible         =   0   'False
       Width           =   7935
@@ -410,7 +641,7 @@ Begin VB.Form frmListado3
          Index           =   6
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   1383
+         TabIndex        =   1384
          Text            =   "Text1"
          Top             =   1080
          Width           =   4980
@@ -428,7 +659,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   6
          Left            =   1680
-         TabIndex        =   1382
+         TabIndex        =   1383
          Text            =   "186"
          Top             =   1080
          Width           =   780
@@ -446,7 +677,7 @@ Begin VB.Form frmListado3
          EndProperty
          Height          =   375
          Left            =   4920
-         TabIndex        =   1381
+         TabIndex        =   1382
          Top             =   1680
          Width           =   1095
       End
@@ -464,7 +695,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   75
          Left            =   6120
-         TabIndex        =   1380
+         TabIndex        =   1381
          Top             =   1680
          Width           =   1095
       End
@@ -491,7 +722,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   105
          Left            =   240
-         TabIndex        =   1384
+         TabIndex        =   1385
          Top             =   1080
          Width           =   975
       End
@@ -510,7 +741,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   8
          Left            =   120
-         TabIndex        =   1379
+         TabIndex        =   1380
          Top             =   480
          Width           =   75
       End
@@ -535,7 +766,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   18
          Left            =   5175
-         TabIndex        =   1096
+         TabIndex        =   1097
          Text            =   "Text1"
          Top             =   840
          Width           =   1140
@@ -553,7 +784,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   31
          Left            =   1440
-         TabIndex        =   1098
+         TabIndex        =   1099
          Top             =   2280
          Width           =   1140
       End
@@ -572,7 +803,7 @@ Begin VB.Form frmListado3
          Index           =   31
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   1113
+         TabIndex        =   1114
          Text            =   "Text5"
          Top             =   2280
          Width           =   3660
@@ -590,7 +821,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   30
          Left            =   1440
-         TabIndex        =   1097
+         TabIndex        =   1098
          Top             =   1800
          Width           =   1140
       End
@@ -609,7 +840,7 @@ Begin VB.Form frmListado3
          Index           =   30
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   1110
+         TabIndex        =   1111
          Text            =   "Text5"
          Top             =   1800
          Width           =   3660
@@ -627,7 +858,7 @@ Begin VB.Form frmListado3
          EndProperty
          Height          =   375
          Left            =   4020
-         TabIndex        =   1101
+         TabIndex        =   1102
          Top             =   4680
          Width           =   1095
       End
@@ -645,7 +876,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   62
          Left            =   5220
-         TabIndex        =   1102
+         TabIndex        =   1103
          Top             =   4680
          Width           =   1095
       End
@@ -662,7 +893,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   26
          Left            =   1440
-         TabIndex        =   1100
+         TabIndex        =   1101
          Text            =   "Text1"
          Top             =   3720
          Width           =   1140
@@ -682,7 +913,7 @@ Begin VB.Form frmListado3
          Index           =   26
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   1108
+         TabIndex        =   1109
          Text            =   "Text5"
          Top             =   3720
          Width           =   3660
@@ -700,7 +931,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   25
          Left            =   1440
-         TabIndex        =   1099
+         TabIndex        =   1100
          Text            =   "Text1"
          Top             =   3240
          Width           =   1140
@@ -720,7 +951,7 @@ Begin VB.Form frmListado3
          Index           =   25
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   1105
+         TabIndex        =   1106
          Text            =   "Text5"
          Top             =   3240
          Width           =   3660
@@ -738,7 +969,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   63
          Left            =   2100
-         TabIndex        =   1095
+         TabIndex        =   1096
          Text            =   "Text1"
          Top             =   840
          Width           =   1350
@@ -759,7 +990,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   75
          Left            =   3915
-         TabIndex        =   1115
+         TabIndex        =   1116
          Top             =   840
          Width           =   1230
       End
@@ -786,7 +1017,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   203
          Left            =   480
-         TabIndex        =   1114
+         TabIndex        =   1115
          Top             =   2280
          Width           =   615
       End
@@ -813,7 +1044,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   202
          Left            =   240
-         TabIndex        =   1112
+         TabIndex        =   1113
          Top             =   1440
          Width           =   1125
       End
@@ -833,7 +1064,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   201
          Left            =   480
-         TabIndex        =   1111
+         TabIndex        =   1112
          Top             =   1800
          Width           =   645
       End
@@ -851,7 +1082,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   95
          Left            =   480
-         TabIndex        =   1109
+         TabIndex        =   1110
          Top             =   3720
          Width           =   690
       End
@@ -876,7 +1107,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   94
          Left            =   480
-         TabIndex        =   1107
+         TabIndex        =   1108
          Top             =   3240
          Width           =   690
       End
@@ -896,7 +1127,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   200
          Left            =   240
-         TabIndex        =   1106
+         TabIndex        =   1107
          Top             =   2880
          Width           =   780
       End
@@ -923,7 +1154,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   74
          Left            =   240
-         TabIndex        =   1104
+         TabIndex        =   1105
          Top             =   840
          Width           =   1470
       End
@@ -931,7 +1162,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   63
          Left            =   1785
-         Picture         =   "frmListado3.frx":00FF
+         Picture         =   "frmListado3.frx":0215
          Top             =   840
          Width           =   240
       End
@@ -951,7 +1182,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   55
          Left            =   555
-         TabIndex        =   1103
+         TabIndex        =   1104
          Top             =   240
          Width           =   5415
       End
@@ -1429,7 +1660,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   29
          Left            =   1320
-         Picture         =   "frmListado3.frx":018A
+         Picture         =   "frmListado3.frx":02A0
          Top             =   3600
          Width           =   240
       End
@@ -1565,7 +1796,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameExporEmailCliPro 
       Height          =   10095
       Left            =   0
-      TabIndex        =   1169
+      TabIndex        =   1170
       Top             =   0
       Visible         =   0   'False
       Width           =   7095
@@ -1581,11 +1812,11 @@ Begin VB.Form frmListado3
          EndProperty
          Height          =   360
          Index           =   1
-         ItemData        =   "frmListado3.frx":0215
+         ItemData        =   "frmListado3.frx":032B
          Left            =   1305
-         List            =   "frmListado3.frx":021F
+         List            =   "frmListado3.frx":0335
          Style           =   2  'Dropdown List
-         TabIndex        =   1369
+         TabIndex        =   1370
          Top             =   1725
          Width           =   1770
       End
@@ -1603,7 +1834,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   43
          Left            =   5640
-         TabIndex        =   1367
+         TabIndex        =   1368
          Top             =   1155
          Value           =   1  'Checked
          Visible         =   0   'False
@@ -1621,11 +1852,11 @@ Begin VB.Form frmListado3
          EndProperty
          Height          =   360
          Index           =   0
-         ItemData        =   "frmListado3.frx":023E
+         ItemData        =   "frmListado3.frx":0354
          Left            =   5550
-         List            =   "frmListado3.frx":024B
+         List            =   "frmListado3.frx":0361
          Style           =   2  'Dropdown List
-         TabIndex        =   1276
+         TabIndex        =   1277
          Top             =   1725
          Width           =   1260
       End
@@ -1642,7 +1873,7 @@ Begin VB.Form frmListado3
          EndProperty
          Height          =   375
          Left            =   4455
-         TabIndex        =   1203
+         TabIndex        =   1204
          Top             =   9600
          Width           =   1065
       End
@@ -1660,7 +1891,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   39
          Left            =   4200
-         TabIndex        =   1173
+         TabIndex        =   1174
          Top             =   1155
          Value           =   1  'Checked
          Width           =   1305
@@ -1679,7 +1910,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   38
          Left            =   4200
-         TabIndex        =   1172
+         TabIndex        =   1173
          Top             =   795
          Width           =   1815
       End
@@ -1697,7 +1928,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   1
          Left            =   1320
-         TabIndex        =   1171
+         TabIndex        =   1172
          Top             =   1155
          Width           =   2175
       End
@@ -1715,7 +1946,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   0
          Left            =   1320
-         TabIndex        =   1170
+         TabIndex        =   1171
          Top             =   795
          Value           =   -1  'True
          Width           =   1335
@@ -1734,7 +1965,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   66
          Left            =   5640
-         TabIndex        =   1204
+         TabIndex        =   1205
          Top             =   9600
          Width           =   1065
       End
@@ -1742,7 +1973,7 @@ Begin VB.Form frmListado3
          Caption         =   "Frame5"
          Height          =   5055
          Left            =   120
-         TabIndex        =   1231
+         TabIndex        =   1232
          Top             =   2000
          Width           =   6735
          Begin VB.TextBox txtSitua 
@@ -1758,7 +1989,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   3
             Left            =   1560
-            TabIndex        =   1202
+            TabIndex        =   1203
             Text            =   "186"
             Top             =   4200
             Width           =   780
@@ -1778,7 +2009,7 @@ Begin VB.Form frmListado3
             Index           =   3
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1254
+            TabIndex        =   1255
             Text            =   "Text1"
             Top             =   4200
             Width           =   3900
@@ -1796,7 +2027,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   2
             Left            =   1560
-            TabIndex        =   1201
+            TabIndex        =   1202
             Text            =   "186"
             Top             =   3720
             Width           =   780
@@ -1816,7 +2047,7 @@ Begin VB.Form frmListado3
             Index           =   2
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1251
+            TabIndex        =   1252
             Text            =   "Text1"
             Top             =   3720
             Width           =   3900
@@ -1834,7 +2065,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   3
             Left            =   3945
-            TabIndex        =   1200
+            TabIndex        =   1201
             Text            =   "186"
             Top             =   3045
             Width           =   1110
@@ -1852,7 +2083,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   2
             Left            =   1530
-            TabIndex        =   1199
+            TabIndex        =   1200
             Text            =   "186"
             Top             =   3045
             Width           =   990
@@ -1870,7 +2101,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   75
             Left            =   1530
-            TabIndex        =   1196
+            TabIndex        =   1197
             Text            =   "Text1"
             Top             =   2250
             Width           =   1350
@@ -1888,7 +2119,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   74
             Left            =   3900
-            TabIndex        =   1197
+            TabIndex        =   1198
             Text            =   "Text1"
             Top             =   2250
             Width           =   1350
@@ -1906,7 +2137,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   73
             Left            =   1530
-            TabIndex        =   1194
+            TabIndex        =   1195
             Text            =   "Text1"
             Top             =   1560
             Width           =   1350
@@ -1924,7 +2155,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   72
             Left            =   3900
-            TabIndex        =   1195
+            TabIndex        =   1196
             Text            =   "Text1"
             Top             =   1560
             Width           =   1350
@@ -1942,7 +2173,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   3
             Left            =   1560
-            TabIndex        =   1193
+            TabIndex        =   1194
             Text            =   "186"
             Top             =   840
             Width           =   780
@@ -1962,7 +2193,7 @@ Begin VB.Form frmListado3
             Index           =   3
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1235
+            TabIndex        =   1236
             Text            =   "Text1"
             Top             =   840
             Width           =   3900
@@ -1980,7 +2211,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   2
             Left            =   1560
-            TabIndex        =   1192
+            TabIndex        =   1193
             Text            =   "186"
             Top             =   480
             Width           =   780
@@ -2000,7 +2231,7 @@ Begin VB.Form frmListado3
             Index           =   2
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1232
+            TabIndex        =   1233
             Text            =   "Text1"
             Top             =   480
             Width           =   3900
@@ -2028,7 +2259,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   239
             Left            =   600
-            TabIndex        =   1255
+            TabIndex        =   1256
             Top             =   4200
             Width           =   615
          End
@@ -2048,7 +2279,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   93
             Left            =   120
-            TabIndex        =   1253
+            TabIndex        =   1254
             Top             =   3480
             Width           =   975
          End
@@ -2075,7 +2306,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   238
             Left            =   600
-            TabIndex        =   1252
+            TabIndex        =   1253
             Top             =   3720
             Width           =   645
          End
@@ -2095,7 +2326,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   235
             Left            =   2985
-            TabIndex        =   1245
+            TabIndex        =   1246
             Top             =   3045
             Width           =   615
          End
@@ -2115,7 +2346,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   91
             Left            =   120
-            TabIndex        =   1244
+            TabIndex        =   1245
             Top             =   2760
             Width           =   1575
          End
@@ -2135,7 +2366,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   234
             Left            =   585
-            TabIndex        =   1243
+            TabIndex        =   1244
             Top             =   3045
             Width           =   645
          End
@@ -2155,7 +2386,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   90
             Left            =   120
-            TabIndex        =   1242
+            TabIndex        =   1243
             Top             =   1965
             Width           =   1845
          End
@@ -2175,7 +2406,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   233
             Left            =   3000
-            TabIndex        =   1241
+            TabIndex        =   1242
             Top             =   2250
             Width           =   615
          End
@@ -2183,7 +2414,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   75
             Left            =   1245
-            Picture         =   "frmListado3.frx":025E
+            Picture         =   "frmListado3.frx":0374
             Top             =   2250
             Width           =   240
          End
@@ -2203,7 +2434,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   232
             Left            =   585
-            TabIndex        =   1240
+            TabIndex        =   1241
             Top             =   2250
             Width           =   645
          End
@@ -2211,7 +2442,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   74
             Left            =   3615
-            Picture         =   "frmListado3.frx":02E9
+            Picture         =   "frmListado3.frx":03FF
             Top             =   2250
             Width           =   240
          End
@@ -2231,7 +2462,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   89
             Left            =   120
-            TabIndex        =   1239
+            TabIndex        =   1240
             Top             =   1200
             Width           =   1440
          End
@@ -2251,7 +2482,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   231
             Left            =   3000
-            TabIndex        =   1238
+            TabIndex        =   1239
             Top             =   1560
             Width           =   615
          End
@@ -2259,7 +2490,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   73
             Left            =   1245
-            Picture         =   "frmListado3.frx":0374
+            Picture         =   "frmListado3.frx":048A
             Top             =   1560
             Width           =   240
          End
@@ -2279,7 +2510,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   230
             Left            =   585
-            TabIndex        =   1237
+            TabIndex        =   1238
             Top             =   1560
             Width           =   645
          End
@@ -2287,7 +2518,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   72
             Left            =   3615
-            Picture         =   "frmListado3.frx":03FF
+            Picture         =   "frmListado3.frx":0515
             Top             =   1560
             Width           =   240
          End
@@ -2314,7 +2545,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   229
             Left            =   600
-            TabIndex        =   1236
+            TabIndex        =   1237
             Top             =   840
             Width           =   615
          End
@@ -2334,7 +2565,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   88
             Left            =   120
-            TabIndex        =   1234
+            TabIndex        =   1235
             Top             =   195
             Width           =   1620
          End
@@ -2361,7 +2592,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   228
             Left            =   600
-            TabIndex        =   1233
+            TabIndex        =   1234
             Top             =   480
             Width           =   645
          End
@@ -2370,7 +2601,7 @@ Begin VB.Form frmListado3
          Caption         =   "Frame5"
          Height          =   7695
          Left            =   120
-         TabIndex        =   1205
+         TabIndex        =   1206
          Top             =   2040
          Width           =   6735
          Begin VB.TextBox txtDesSitua 
@@ -2388,7 +2619,7 @@ Begin VB.Form frmListado3
             Index           =   5
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1374
+            TabIndex        =   1375
             Text            =   "RUTA"
             Top             =   6000
             Width           =   3900
@@ -2406,7 +2637,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   5
             Left            =   1560
-            TabIndex        =   1185
+            TabIndex        =   1186
             Text            =   "186"
             Top             =   6000
             Width           =   780
@@ -2426,7 +2657,7 @@ Begin VB.Form frmListado3
             Index           =   4
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1371
+            TabIndex        =   1372
             Text            =   "RUTA"
             Top             =   5640
             Width           =   3900
@@ -2444,7 +2675,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   4
             Left            =   1560
-            TabIndex        =   1184
+            TabIndex        =   1185
             Text            =   "186"
             Top             =   5640
             Width           =   780
@@ -2462,7 +2693,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   1
             Left            =   1560
-            TabIndex        =   1183
+            TabIndex        =   1184
             Text            =   "186"
             Top             =   4920
             Width           =   780
@@ -2482,7 +2713,7 @@ Begin VB.Form frmListado3
             Index           =   1
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1249
+            TabIndex        =   1250
             Text            =   "Text1"
             Top             =   4920
             Width           =   3900
@@ -2500,7 +2731,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   0
             Left            =   1560
-            TabIndex        =   1182
+            TabIndex        =   1183
             Text            =   "186"
             Top             =   4560
             Width           =   780
@@ -2520,7 +2751,7 @@ Begin VB.Form frmListado3
             Index           =   0
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1246
+            TabIndex        =   1247
             Text            =   "Text1"
             Top             =   4560
             Width           =   3900
@@ -2538,7 +2769,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   1
             Left            =   5160
-            TabIndex        =   1191
+            TabIndex        =   1192
             Text            =   "186"
             Top             =   7110
             Width           =   1065
@@ -2556,7 +2787,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   0
             Left            =   5160
-            TabIndex        =   1190
+            TabIndex        =   1191
             Text            =   "186"
             Top             =   6750
             Width           =   1065
@@ -2574,7 +2805,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   71
             Left            =   3360
-            TabIndex        =   1188
+            TabIndex        =   1189
             Text            =   "Text1"
             Top             =   6750
             Width           =   1350
@@ -2592,7 +2823,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   70
             Left            =   3360
-            TabIndex        =   1189
+            TabIndex        =   1190
             Text            =   "Text1"
             Top             =   7110
             Width           =   1350
@@ -2610,7 +2841,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   69
             Left            =   1560
-            TabIndex        =   1186
+            TabIndex        =   1187
             Text            =   "99/99/9999"
             Top             =   6750
             Width           =   1350
@@ -2628,7 +2859,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   68
             Left            =   1560
-            TabIndex        =   1187
+            TabIndex        =   1188
             Text            =   "Text1"
             Top             =   7110
             Width           =   1350
@@ -2646,7 +2877,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   1
             Left            =   1560
-            TabIndex        =   1181
+            TabIndex        =   1182
             Text            =   "186"
             Top             =   3960
             Width           =   780
@@ -2666,7 +2897,7 @@ Begin VB.Form frmListado3
             Index           =   1
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1224
+            TabIndex        =   1225
             Text            =   "Text1"
             Top             =   3960
             Width           =   3900
@@ -2684,7 +2915,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   0
             Left            =   1560
-            TabIndex        =   1180
+            TabIndex        =   1181
             Text            =   "186"
             Top             =   3600
             Width           =   780
@@ -2704,7 +2935,7 @@ Begin VB.Form frmListado3
             Index           =   0
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1221
+            TabIndex        =   1222
             Text            =   "Text1"
             Top             =   3600
             Width           =   3900
@@ -2724,7 +2955,7 @@ Begin VB.Form frmListado3
             Index           =   1
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1219
+            TabIndex        =   1220
             Text            =   "Text1"
             Top             =   2880
             Width           =   3900
@@ -2742,7 +2973,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   1
             Left            =   1560
-            TabIndex        =   1179
+            TabIndex        =   1180
             Text            =   "186"
             Top             =   2880
             Width           =   780
@@ -2762,7 +2993,7 @@ Begin VB.Form frmListado3
             Index           =   0
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1216
+            TabIndex        =   1217
             Text            =   "Text1"
             Top             =   2520
             Width           =   3900
@@ -2780,7 +3011,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   0
             Left            =   1575
-            TabIndex        =   1178
+            TabIndex        =   1179
             Text            =   "186"
             Top             =   2520
             Width           =   780
@@ -2800,7 +3031,7 @@ Begin VB.Form frmListado3
             Index           =   3
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1214
+            TabIndex        =   1215
             Text            =   "Text1"
             Top             =   1920
             Width           =   3900
@@ -2818,7 +3049,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   3
             Left            =   1560
-            TabIndex        =   1177
+            TabIndex        =   1178
             Text            =   "186"
             Top             =   1920
             Width           =   780
@@ -2838,7 +3069,7 @@ Begin VB.Form frmListado3
             Index           =   2
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1211
+            TabIndex        =   1212
             Text            =   "Text1"
             Top             =   1560
             Width           =   3900
@@ -2856,7 +3087,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   2
             Left            =   1560
-            TabIndex        =   1176
+            TabIndex        =   1177
             Text            =   "186"
             Top             =   1560
             Width           =   780
@@ -2876,7 +3107,7 @@ Begin VB.Form frmListado3
             Index           =   17
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1209
+            TabIndex        =   1210
             Text            =   "Text1"
             Top             =   840
             Width           =   3900
@@ -2894,7 +3125,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   17
             Left            =   1560
-            TabIndex        =   1175
+            TabIndex        =   1176
             Text            =   "186"
             Top             =   840
             Width           =   780
@@ -2914,7 +3145,7 @@ Begin VB.Form frmListado3
             Index           =   16
             Left            =   2400
             Locked          =   -1  'True
-            TabIndex        =   1206
+            TabIndex        =   1207
             Text            =   "Text1"
             Top             =   480
             Width           =   3900
@@ -2932,7 +3163,7 @@ Begin VB.Form frmListado3
             Height          =   360
             Index           =   16
             Left            =   1560
-            TabIndex        =   1174
+            TabIndex        =   1175
             Text            =   "186"
             Top             =   480
             Width           =   780
@@ -2953,7 +3184,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   225
             Left            =   600
-            TabIndex        =   1375
+            TabIndex        =   1376
             Top             =   6000
             Width           =   570
          End
@@ -2980,7 +3211,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   224
             Left            =   600
-            TabIndex        =   1373
+            TabIndex        =   1374
             Top             =   5640
             Width           =   600
          End
@@ -3007,7 +3238,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   104
             Left            =   120
-            TabIndex        =   1372
+            TabIndex        =   1373
             Top             =   5355
             Width           =   510
          End
@@ -3034,7 +3265,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   237
             Left            =   600
-            TabIndex        =   1250
+            TabIndex        =   1251
             Top             =   4920
             Width           =   570
          End
@@ -3054,7 +3285,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   92
             Left            =   120
-            TabIndex        =   1248
+            TabIndex        =   1249
             Top             =   4275
             Width           =   975
          End
@@ -3081,7 +3312,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   236
             Left            =   600
-            TabIndex        =   1247
+            TabIndex        =   1248
             Top             =   4560
             Width           =   600
          End
@@ -3101,7 +3332,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   87
             Left            =   5040
-            TabIndex        =   1230
+            TabIndex        =   1231
             Top             =   6510
             Width           =   1485
          End
@@ -3121,7 +3352,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   86
             Left            =   3000
-            TabIndex        =   1229
+            TabIndex        =   1230
             Top             =   6510
             Width           =   1845
          End
@@ -3141,7 +3372,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   85
             Left            =   1560
-            TabIndex        =   1228
+            TabIndex        =   1229
             Top             =   6510
             Width           =   1110
          End
@@ -3149,7 +3380,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   71
             Left            =   3075
-            Picture         =   "frmListado3.frx":048A
+            Picture         =   "frmListado3.frx":05A0
             Top             =   6750
             Width           =   240
          End
@@ -3157,7 +3388,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   70
             Left            =   3075
-            Picture         =   "frmListado3.frx":0515
+            Picture         =   "frmListado3.frx":062B
             Top             =   7110
             Width           =   240
          End
@@ -3177,7 +3408,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   223
             Left            =   600
-            TabIndex        =   1227
+            TabIndex        =   1228
             Top             =   7110
             Width           =   570
          End
@@ -3185,7 +3416,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   69
             Left            =   1275
-            Picture         =   "frmListado3.frx":05A0
+            Picture         =   "frmListado3.frx":06B6
             Top             =   6750
             Width           =   240
          End
@@ -3205,7 +3436,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   222
             Left            =   600
-            TabIndex        =   1226
+            TabIndex        =   1227
             Top             =   6750
             Width           =   600
          End
@@ -3213,7 +3444,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   68
             Left            =   1275
-            Picture         =   "frmListado3.frx":062B
+            Picture         =   "frmListado3.frx":0741
             Top             =   7110
             Width           =   240
          End
@@ -3240,7 +3471,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   221
             Left            =   600
-            TabIndex        =   1225
+            TabIndex        =   1226
             Top             =   3960
             Width           =   570
          End
@@ -3260,7 +3491,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   84
             Left            =   120
-            TabIndex        =   1223
+            TabIndex        =   1224
             Top             =   3315
             Width           =   1620
          End
@@ -3287,7 +3518,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   220
             Left            =   600
-            TabIndex        =   1222
+            TabIndex        =   1223
             Top             =   3600
             Width           =   600
          End
@@ -3307,7 +3538,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   219
             Left            =   600
-            TabIndex        =   1220
+            TabIndex        =   1221
             Top             =   2880
             Width           =   570
          End
@@ -3334,7 +3565,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   218
             Left            =   600
-            TabIndex        =   1218
+            TabIndex        =   1219
             Top             =   2520
             Width           =   600
          End
@@ -3361,7 +3592,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   83
             Left            =   120
-            TabIndex        =   1217
+            TabIndex        =   1218
             Top             =   2235
             Width           =   540
          End
@@ -3381,7 +3612,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   217
             Left            =   600
-            TabIndex        =   1215
+            TabIndex        =   1216
             Top             =   1920
             Width           =   570
          End
@@ -3408,7 +3639,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   216
             Left            =   600
-            TabIndex        =   1213
+            TabIndex        =   1214
             Top             =   1560
             Width           =   600
          End
@@ -3435,7 +3666,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   82
             Left            =   120
-            TabIndex        =   1212
+            TabIndex        =   1213
             Top             =   1275
             Width           =   990
          End
@@ -3455,7 +3686,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   215
             Left            =   600
-            TabIndex        =   1210
+            TabIndex        =   1211
             Top             =   840
             Width           =   570
          End
@@ -3482,7 +3713,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   214
             Left            =   600
-            TabIndex        =   1208
+            TabIndex        =   1209
             Top             =   480
             Width           =   600
          End
@@ -3509,7 +3740,7 @@ Begin VB.Form frmListado3
             Height          =   240
             Index           =   81
             Left            =   135
-            TabIndex        =   1207
+            TabIndex        =   1208
             Top             =   165
             Width           =   765
          End
@@ -3530,7 +3761,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   103
          Left            =   240
-         TabIndex        =   1370
+         TabIndex        =   1371
          Top             =   1455
          Width           =   2805
       End
@@ -3550,7 +3781,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   97
          Left            =   4695
-         TabIndex        =   1277
+         TabIndex        =   1278
          Top             =   1455
          Width           =   2055
       End
@@ -3570,7 +3801,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   95
          Left            =   3480
-         TabIndex        =   1257
+         TabIndex        =   1258
          Top             =   795
          Width           =   570
       End
@@ -3590,7 +3821,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   94
          Left            =   240
-         TabIndex        =   1256
+         TabIndex        =   1257
          Top             =   795
          Width           =   930
       End
@@ -3610,7 +3841,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   58
          Left            =   105
-         TabIndex        =   1198
+         TabIndex        =   1199
          Top             =   240
          Width           =   6825
       End
@@ -3618,7 +3849,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameExportarFAS 
       Height          =   2415
       Left            =   2280
-      TabIndex        =   1054
+      TabIndex        =   1055
       Top             =   1440
       Visible         =   0   'False
       Width           =   5430
@@ -3635,7 +3866,7 @@ Begin VB.Form frmListado3
          EndProperty
          Height          =   375
          Left            =   2955
-         TabIndex        =   1057
+         TabIndex        =   1058
          Top             =   1680
          Width           =   1065
       End
@@ -3653,7 +3884,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   59
          Left            =   4140
-         TabIndex        =   1058
+         TabIndex        =   1059
          Top             =   1680
          Width           =   1065
       End
@@ -3670,7 +3901,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   60
          Left            =   1320
-         TabIndex        =   1055
+         TabIndex        =   1056
          Top             =   1080
          Width           =   1350
       End
@@ -3687,7 +3918,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   61
          Left            =   3840
-         TabIndex        =   1056
+         TabIndex        =   1057
          Top             =   1080
          Width           =   1350
       End
@@ -3695,7 +3926,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   60
          Left            =   960
-         Picture         =   "frmListado3.frx":06B6
+         Picture         =   "frmListado3.frx":07CC
          Top             =   1080
          Width           =   240
       End
@@ -3715,7 +3946,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   72
          Left            =   240
-         TabIndex        =   1062
+         TabIndex        =   1063
          Top             =   720
          Width           =   630
       End
@@ -3733,7 +3964,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   12
          Left            =   270
-         TabIndex        =   1061
+         TabIndex        =   1062
          Top             =   1080
          Width           =   645
       End
@@ -3741,7 +3972,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   61
          Left            =   3480
-         Picture         =   "frmListado3.frx":0741
+         Picture         =   "frmListado3.frx":0857
          Top             =   1080
          Width           =   240
       End
@@ -3759,7 +3990,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   13
          Left            =   2790
-         TabIndex        =   1060
+         TabIndex        =   1061
          Top             =   1080
          Width           =   645
       End
@@ -3779,7 +4010,7 @@ Begin VB.Form frmListado3
          Height          =   345
          Index           =   13
          Left            =   195
-         TabIndex        =   1059
+         TabIndex        =   1060
          Top             =   240
          Width           =   4770
       End
@@ -4119,7 +4350,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   24
          Left            =   1725
-         Picture         =   "frmListado3.frx":07CC
+         Picture         =   "frmListado3.frx":08E2
          Top             =   1440
          Width           =   240
       End
@@ -4200,7 +4431,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   17
          Left            =   4080
-         Picture         =   "frmListado3.frx":0857
+         Picture         =   "frmListado3.frx":096D
          Top             =   600
          Width           =   240
       End
@@ -4246,7 +4477,7 @@ Begin VB.Form frmListado3
          Index           =   27
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1005
+         TabIndex        =   1006
          Text            =   "Text5"
          Top             =   3960
          Width           =   4125
@@ -4477,7 +4708,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   184
          Left            =   270
-         TabIndex        =   1006
+         TabIndex        =   1007
          Top             =   3960
          Width           =   990
       End
@@ -4736,7 +4967,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   53
          Left            =   3600
-         Picture         =   "frmListado3.frx":08E2
+         Picture         =   "frmListado3.frx":09F8
          Top             =   2160
          Width           =   240
       End
@@ -4753,7 +4984,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   52
          Left            =   1200
-         Picture         =   "frmListado3.frx":096D
+         Picture         =   "frmListado3.frx":0A83
          Top             =   2160
          Width           =   240
       End
@@ -4810,7 +5041,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   23
          Left            =   1200
-         Picture         =   "frmListado3.frx":09F8
+         Picture         =   "frmListado3.frx":0B0E
          Top             =   1440
          Width           =   240
       End
@@ -4858,7 +5089,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   22
          Left            =   1200
-         Picture         =   "frmListado3.frx":0AFA
+         Picture         =   "frmListado3.frx":0C10
          Top             =   1080
          Width           =   240
       End
@@ -4906,7 +5137,7 @@ Begin VB.Form frmListado3
          MaxLength       =   255
          MultiLine       =   -1  'True
          TabIndex        =   33
-         Text            =   "frmListado3.frx":0BFC
+         Text            =   "frmListado3.frx":0D12
          Top             =   3240
          Width           =   7065
       End
@@ -4961,7 +5192,7 @@ Begin VB.Form frmListado3
          Left            =   1845
          MultiLine       =   -1  'True
          TabIndex        =   42
-         Text            =   "frmListado3.frx":0C02
+         Text            =   "frmListado3.frx":0D18
          Top             =   2160
          Width           =   7065
       End
@@ -5075,7 +5306,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   269
          Left            =   120
-         TabIndex        =   1368
+         TabIndex        =   1369
          Top             =   3240
          Width           =   1440
       End
@@ -6226,7 +6457,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   16
          Left            =   1515
-         Picture         =   "frmListado3.frx":0C08
+         Picture         =   "frmListado3.frx":0D1E
          Top             =   4185
          Width           =   240
       End
@@ -6524,7 +6755,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   8
          Left            =   3765
-         TabIndex        =   1377
+         TabIndex        =   1378
          Top             =   840
          Value           =   1  'Checked
          Visible         =   0   'False
@@ -6544,7 +6775,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   27
          Left            =   135
-         TabIndex        =   1014
+         TabIndex        =   1015
          Top             =   1920
          Width           =   3405
       End
@@ -6686,7 +6917,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   56
          Left            =   1665
-         Picture         =   "frmListado3.frx":0C93
+         Picture         =   "frmListado3.frx":0DA9
          Top             =   840
          Width           =   240
       End
@@ -6733,7 +6964,7 @@ Begin VB.Form frmListado3
          Index           =   1
          Left            =   3120
          Locked          =   -1  'True
-         TabIndex        =   1259
+         TabIndex        =   1260
          Text            =   "Text3"
          Top             =   1560
          Width           =   3705
@@ -6901,7 +7132,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   240
          Left            =   360
-         TabIndex        =   1258
+         TabIndex        =   1259
          Top             =   1560
          Width           =   900
       End
@@ -6937,7 +7168,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   54
          Left            =   1155
-         Picture         =   "frmListado3.frx":0D1E
+         Picture         =   "frmListado3.frx":0E34
          Top             =   1080
          Width           =   240
       End
@@ -7007,164 +7238,6 @@ Begin VB.Form frmListado3
          TabIndex        =   953
          Top             =   240
          Width           =   4980
-      End
-   End
-   Begin VB.Frame FrameAguaGeneralitat 
-      Height          =   2535
-      Left            =   1080
-      TabIndex        =   977
-      Top             =   1080
-      Visible         =   0   'False
-      Width           =   5655
-      Begin VB.CheckBox chkVarios 
-         Caption         =   "Detalla cobros"
-         Height          =   255
-         Index           =   44
-         Left            =   480
-         TabIndex        =   980
-         Top             =   1560
-         Value           =   1  'Checked
-         Width           =   1695
-      End
-      Begin VB.CommandButton cmdAguaCanonGeneralitat 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3240
-         TabIndex        =   981
-         Top             =   2040
-         Width           =   1095
-      End
-      Begin VB.TextBox txtFecha 
-         Height          =   285
-         Index           =   58
-         Left            =   4200
-         TabIndex        =   979
-         Text            =   "Text1"
-         Top             =   1080
-         Width           =   1215
-      End
-      Begin VB.TextBox txtFecha 
-         Height          =   285
-         Index           =   57
-         Left            =   1200
-         TabIndex        =   978
-         Text            =   "Text1"
-         Top             =   1080
-         Width           =   1215
-      End
-      Begin VB.CommandButton cmdCancelar 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   55
-         Left            =   4440
-         TabIndex        =   982
-         Top             =   2040
-         Width           =   1095
-      End
-      Begin VB.Label Label3 
-         Caption         =   "D"
-         Height          =   195
-         Index           =   106
-         Left            =   120
-         TabIndex        =   1376
-         Top             =   2160
-         Width           =   2625
-      End
-      Begin VB.Label lblTitulo 
-         Alignment       =   2  'Center
-         Caption         =   "aguas"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   13.5
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   360
-         Index           =   50
-         Left            =   120
-         TabIndex        =   986
-         Top             =   240
-         Width           =   5325
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   58
-         Left            =   3840
-         Picture         =   "frmListado3.frx":0DA9
-         Top             =   1095
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Desde"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   178
-         Left            =   480
-         TabIndex        =   985
-         Top             =   1125
-         Width           =   450
-      End
-      Begin VB.Label lblDpto 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha  facturación"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   195
-         Index           =   68
-         Left            =   240
-         TabIndex        =   984
-         Top             =   720
-         Width           =   1545
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   57
-         Left            =   960
-         Picture         =   "frmListado3.frx":0E34
-         Top             =   1095
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Hasta"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   177
-         Left            =   3360
-         TabIndex        =   983
-         Top             =   1125
-         Width           =   420
       End
    End
    Begin VB.Frame FrameCliVar 
@@ -7662,7 +7735,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FramemarjaChipos 
       Height          =   3735
       Left            =   1320
-      TabIndex        =   1081
+      TabIndex        =   1082
       Top             =   0
       Visible         =   0   'False
       Width           =   6135
@@ -7670,7 +7743,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3480
-         TabIndex        =   1086
+         TabIndex        =   1087
          Top             =   3120
          Width           =   1095
       End
@@ -7680,7 +7753,7 @@ Begin VB.Form frmListado3
          Left            =   240
          MaxLength       =   80
          ScrollBars      =   2  'Vertical
-         TabIndex        =   1085
+         TabIndex        =   1086
          Text            =   "Text3"
          Top             =   2520
          Width           =   5655
@@ -7689,7 +7762,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   17
          Left            =   2160
-         TabIndex        =   1083
+         TabIndex        =   1084
          Text            =   "Text1"
          Top             =   1080
          Width           =   1095
@@ -7699,7 +7772,7 @@ Begin VB.Form frmListado3
          Index           =   15
          Left            =   240
          MaxLength       =   16
-         TabIndex        =   1084
+         TabIndex        =   1085
          Top             =   1800
          Width           =   1455
       End
@@ -7709,7 +7782,7 @@ Begin VB.Form frmListado3
          Index           =   15
          Left            =   1800
          Locked          =   -1  'True
-         TabIndex        =   1090
+         TabIndex        =   1091
          Text            =   "Text5"
          Top             =   1800
          Width           =   4095
@@ -7718,7 +7791,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   62
          Left            =   240
-         TabIndex        =   1082
+         TabIndex        =   1083
          Text            =   "Text1"
          Top             =   1080
          Width           =   1215
@@ -7728,7 +7801,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   72
          Left            =   4800
-         TabIndex        =   1087
+         TabIndex        =   1088
          Top             =   3120
          Width           =   1095
       End
@@ -7737,7 +7810,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   93
          Left            =   240
-         TabIndex        =   1094
+         TabIndex        =   1095
          Top             =   3000
          Width           =   2865
       End
@@ -7757,7 +7830,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   199
          Left            =   240
-         TabIndex        =   1093
+         TabIndex        =   1094
          Top             =   2280
          Width           =   1245
       End
@@ -7777,7 +7850,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   198
          Left            =   1920
-         TabIndex        =   1092
+         TabIndex        =   1093
          Top             =   840
          Width           =   1590
       End
@@ -7805,7 +7878,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   197
          Left            =   240
-         TabIndex        =   1091
+         TabIndex        =   1092
          Top             =   1560
          Width           =   660
       End
@@ -7833,7 +7906,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   73
          Left            =   240
-         TabIndex        =   1089
+         TabIndex        =   1090
          Top             =   840
          Width           =   930
       End
@@ -7853,7 +7926,7 @@ Begin VB.Form frmListado3
          Height          =   480
          Index           =   54
          Left            =   720
-         TabIndex        =   1088
+         TabIndex        =   1089
          Top             =   240
          Width           =   4125
       End
@@ -8020,7 +8093,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameTiepoSerPedido 
       Height          =   5055
       Left            =   4320
-      TabIndex        =   1341
+      TabIndex        =   1342
       Top             =   1200
       Visible         =   0   'False
       Width           =   6495
@@ -8029,7 +8102,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   18
          Left            =   3600
-         TabIndex        =   1349
+         TabIndex        =   1350
          Top             =   4080
          Width           =   1575
       End
@@ -8038,7 +8111,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   17
          Left            =   1440
-         TabIndex        =   1348
+         TabIndex        =   1349
          Top             =   4080
          Value           =   -1  'True
          Width           =   1575
@@ -8047,7 +8120,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3840
-         TabIndex        =   1350
+         TabIndex        =   1351
          Top             =   4560
          Width           =   975
       End
@@ -8055,7 +8128,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   83
          Left            =   4200
-         TabIndex        =   1347
+         TabIndex        =   1348
          Text            =   "Text1"
          Top             =   3360
          Width           =   1215
@@ -8064,7 +8137,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   82
          Left            =   1560
-         TabIndex        =   1346
+         TabIndex        =   1347
          Text            =   "Text1"
          Top             =   3360
          Width           =   1215
@@ -8075,7 +8148,7 @@ Begin VB.Form frmListado3
          Index           =   21
          Left            =   3000
          Locked          =   -1  'True
-         TabIndex        =   1360
+         TabIndex        =   1361
          Text            =   "Text5"
          Top             =   2640
          Width           =   3255
@@ -8085,7 +8158,7 @@ Begin VB.Form frmListado3
          Index           =   21
          Left            =   1560
          MaxLength       =   16
-         TabIndex        =   1345
+         TabIndex        =   1346
          Top             =   2640
          Width           =   1455
       End
@@ -8095,7 +8168,7 @@ Begin VB.Form frmListado3
          Index           =   20
          Left            =   3000
          Locked          =   -1  'True
-         TabIndex        =   1357
+         TabIndex        =   1358
          Text            =   "Text5"
          Top             =   2280
          Width           =   3255
@@ -8105,7 +8178,7 @@ Begin VB.Form frmListado3
          Index           =   20
          Left            =   1560
          MaxLength       =   16
-         TabIndex        =   1344
+         TabIndex        =   1345
          Top             =   2280
          Width           =   1455
       End
@@ -8113,7 +8186,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   34
          Left            =   1560
-         TabIndex        =   1343
+         TabIndex        =   1344
          Top             =   1440
          Width           =   1095
       End
@@ -8123,7 +8196,7 @@ Begin VB.Form frmListado3
          Index           =   34
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1355
+         TabIndex        =   1356
          Text            =   "Text5"
          Top             =   1440
          Width           =   3495
@@ -8132,7 +8205,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   33
          Left            =   1560
-         TabIndex        =   1342
+         TabIndex        =   1343
          Top             =   1080
          Width           =   1095
       End
@@ -8142,7 +8215,7 @@ Begin VB.Form frmListado3
          Index           =   33
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1352
+         TabIndex        =   1353
          Text            =   "Text5"
          Top             =   1080
          Width           =   3495
@@ -8152,7 +8225,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   71
          Left            =   5040
-         TabIndex        =   1351
+         TabIndex        =   1352
          Top             =   4560
          Width           =   1095
       End
@@ -8161,7 +8234,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   105
          Left            =   120
-         TabIndex        =   1366
+         TabIndex        =   1367
          Top             =   4560
          Width           =   3465
       End
@@ -8181,7 +8254,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   63
          Left            =   960
-         TabIndex        =   1365
+         TabIndex        =   1366
          Top             =   360
          Width           =   4845
       End
@@ -8209,7 +8282,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   268
          Left            =   3480
-         TabIndex        =   1364
+         TabIndex        =   1365
          Top             =   3360
          Width           =   420
       End
@@ -8237,7 +8310,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   267
          Left            =   240
-         TabIndex        =   1363
+         TabIndex        =   1364
          Top             =   3120
          Width           =   1110
       End
@@ -8257,7 +8330,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   266
          Left            =   600
-         TabIndex        =   1362
+         TabIndex        =   1363
          Top             =   3360
          Width           =   450
       End
@@ -8266,7 +8339,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   104
          Left            =   600
-         TabIndex        =   1361
+         TabIndex        =   1362
          Top             =   2640
          Width           =   465
       End
@@ -8283,7 +8356,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   103
          Left            =   600
-         TabIndex        =   1359
+         TabIndex        =   1360
          Top             =   2280
          Width           =   465
       End
@@ -8303,7 +8376,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   265
          Left            =   240
-         TabIndex        =   1358
+         TabIndex        =   1359
          Top             =   2040
          Width           =   660
       End
@@ -8331,7 +8404,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   264
          Left            =   600
-         TabIndex        =   1356
+         TabIndex        =   1357
          Top             =   1440
          Width           =   420
       End
@@ -8359,7 +8432,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   263
          Left            =   600
-         TabIndex        =   1354
+         TabIndex        =   1355
          Top             =   1080
          Width           =   450
       End
@@ -8387,7 +8460,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   262
          Left            =   240
-         TabIndex        =   1353
+         TabIndex        =   1354
          Top             =   840
          Width           =   885
       End
@@ -8971,7 +9044,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameCostesEuler 
       Height          =   1575
       Left            =   0
-      TabIndex        =   1260
+      TabIndex        =   1261
       Top             =   360
       Visible         =   0   'False
       Width           =   11415
@@ -8979,7 +9052,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   8520
-         TabIndex        =   1265
+         TabIndex        =   1266
          Top             =   960
          Width           =   975
       End
@@ -8990,7 +9063,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   21
          Left            =   9600
-         TabIndex        =   1272
+         TabIndex        =   1273
          Text            =   "Text3"
          Top             =   480
          Width           =   1455
@@ -8999,7 +9072,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   20
          Left            =   8040
-         TabIndex        =   1264
+         TabIndex        =   1265
          Text            =   "Text3"
          Top             =   480
          Width           =   1455
@@ -9008,7 +9081,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   19
          Left            =   6720
-         TabIndex        =   1263
+         TabIndex        =   1264
          Text            =   "Text3"
          Top             =   480
          Width           =   1215
@@ -9017,7 +9090,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   76
          Left            =   240
-         TabIndex        =   1261
+         TabIndex        =   1262
          Text            =   "Text1"
          Top             =   480
          Width           =   1215
@@ -9028,7 +9101,7 @@ Begin VB.Form frmListado3
          Index           =   18
          Left            =   3000
          Locked          =   -1  'True
-         TabIndex        =   1267
+         TabIndex        =   1268
          Text            =   "Text5"
          Top             =   480
          Width           =   3615
@@ -9038,7 +9111,7 @@ Begin VB.Form frmListado3
          Index           =   18
          Left            =   1560
          MaxLength       =   16
-         TabIndex        =   1262
+         TabIndex        =   1263
          Top             =   480
          Width           =   1455
       End
@@ -9047,7 +9120,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   67
          Left            =   9960
-         TabIndex        =   1266
+         TabIndex        =   1267
          Top             =   960
          Width           =   1095
       End
@@ -9067,7 +9140,7 @@ Begin VB.Form frmListado3
          Height          =   480
          Index           =   59
          Left            =   2040
-         TabIndex        =   1275
+         TabIndex        =   1276
          Top             =   840
          Visible         =   0   'False
          Width           =   4125
@@ -9088,7 +9161,7 @@ Begin VB.Form frmListado3
          Height          =   240
          Index           =   96
          Left            =   240
-         TabIndex        =   1274
+         TabIndex        =   1275
          Top             =   840
          Visible         =   0   'False
          Width           =   1080
@@ -9109,7 +9182,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   244
          Left            =   10200
-         TabIndex        =   1273
+         TabIndex        =   1274
          Top             =   240
          Width           =   570
       End
@@ -9129,7 +9202,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   243
          Left            =   8400
-         TabIndex        =   1271
+         TabIndex        =   1272
          Top             =   240
          Width           =   435
       End
@@ -9149,7 +9222,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   242
          Left            =   6840
-         TabIndex        =   1270
+         TabIndex        =   1271
          Top             =   240
          Width           =   645
       End
@@ -9169,7 +9242,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   241
          Left            =   240
-         TabIndex        =   1269
+         TabIndex        =   1270
          Top             =   240
          Width           =   435
       End
@@ -9187,7 +9260,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   100
          Left            =   1560
-         TabIndex        =   1268
+         TabIndex        =   1269
          Top             =   240
          Width           =   525
       End
@@ -9203,7 +9276,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameListadoPuntos 
       Height          =   3255
       Left            =   6000
-      TabIndex        =   1278
+      TabIndex        =   1279
       Top             =   960
       Visible         =   0   'False
       Width           =   6495
@@ -9211,7 +9284,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3960
-         TabIndex        =   1283
+         TabIndex        =   1284
          Top             =   2760
          Width           =   975
       End
@@ -9219,7 +9292,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   78
          Left            =   3960
-         TabIndex        =   1282
+         TabIndex        =   1283
          Text            =   "Text1"
          Top             =   2160
          Width           =   1215
@@ -9228,7 +9301,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   77
          Left            =   1560
-         TabIndex        =   1281
+         TabIndex        =   1282
          Text            =   "Text1"
          Top             =   2160
          Width           =   1215
@@ -9237,7 +9310,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   29
          Left            =   1560
-         TabIndex        =   1280
+         TabIndex        =   1281
          Text            =   "Text1"
          Top             =   1440
          Width           =   1095
@@ -9248,7 +9321,7 @@ Begin VB.Form frmListado3
          Index           =   29
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1288
+         TabIndex        =   1289
          Text            =   "Text1"
          Top             =   1440
          Width           =   3495
@@ -9257,7 +9330,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   28
          Left            =   1560
-         TabIndex        =   1279
+         TabIndex        =   1280
          Text            =   "Text1"
          Top             =   1080
          Width           =   1095
@@ -9268,7 +9341,7 @@ Begin VB.Form frmListado3
          Index           =   28
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1285
+         TabIndex        =   1286
          Text            =   "Text1"
          Top             =   1080
          Width           =   3495
@@ -9278,7 +9351,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   68
          Left            =   5040
-         TabIndex        =   1284
+         TabIndex        =   1285
          Top             =   2760
          Width           =   1095
       End
@@ -9298,7 +9371,7 @@ Begin VB.Form frmListado3
          Height          =   480
          Index           =   60
          Left            =   840
-         TabIndex        =   1293
+         TabIndex        =   1294
          Top             =   240
          Width           =   4125
       End
@@ -9326,7 +9399,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   249
          Left            =   3240
-         TabIndex        =   1292
+         TabIndex        =   1293
          Top             =   2160
          Width           =   420
       End
@@ -9354,7 +9427,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   248
          Left            =   240
-         TabIndex        =   1291
+         TabIndex        =   1292
          Top             =   1920
          Width           =   585
       End
@@ -9374,7 +9447,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   247
          Left            =   600
-         TabIndex        =   1290
+         TabIndex        =   1291
          Top             =   2160
          Width           =   450
       End
@@ -9402,7 +9475,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   246
          Left            =   600
-         TabIndex        =   1289
+         TabIndex        =   1290
          Top             =   1440
          Width           =   420
       End
@@ -9430,7 +9503,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   98
          Left            =   240
-         TabIndex        =   1287
+         TabIndex        =   1288
          Top             =   840
          Width           =   585
       End
@@ -9450,7 +9523,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   245
          Left            =   600
-         TabIndex        =   1286
+         TabIndex        =   1287
          Top             =   1080
          Width           =   450
       End
@@ -9747,7 +9820,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameFitosSubven 
       Height          =   3855
       Left            =   4080
-      TabIndex        =   1153
+      TabIndex        =   1154
       Top             =   1680
       Visible         =   0   'False
       Width           =   6495
@@ -9756,7 +9829,7 @@ Begin VB.Form frmListado3
          Index           =   17
          Left            =   1440
          MaxLength       =   16
-         TabIndex        =   1157
+         TabIndex        =   1158
          Top             =   2280
          Width           =   1455
       End
@@ -9766,7 +9839,7 @@ Begin VB.Form frmListado3
          Index           =   17
          Left            =   3120
          Locked          =   -1  'True
-         TabIndex        =   1167
+         TabIndex        =   1168
          Text            =   "Text5"
          Top             =   2280
          Width           =   3015
@@ -9776,7 +9849,7 @@ Begin VB.Form frmListado3
          Index           =   16
          Left            =   1440
          MaxLength       =   16
-         TabIndex        =   1156
+         TabIndex        =   1157
          Top             =   1920
          Width           =   1455
       End
@@ -9786,7 +9859,7 @@ Begin VB.Form frmListado3
          Index           =   16
          Left            =   3120
          Locked          =   -1  'True
-         TabIndex        =   1164
+         TabIndex        =   1165
          Text            =   "Text5"
          Top             =   1920
          Width           =   3015
@@ -9795,7 +9868,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   67
          Left            =   3840
-         TabIndex        =   1155
+         TabIndex        =   1156
          Text            =   "Text1"
          Top             =   1200
          Width           =   1215
@@ -9804,7 +9877,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   66
          Left            =   1440
-         TabIndex        =   1154
+         TabIndex        =   1155
          Text            =   "Text1"
          Top             =   1200
          Width           =   1215
@@ -9814,7 +9887,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   65
          Left            =   4800
-         TabIndex        =   1159
+         TabIndex        =   1160
          Top             =   3120
          Width           =   975
       End
@@ -9822,7 +9895,7 @@ Begin VB.Form frmListado3
          Caption         =   "Aceptar"
          Height          =   375
          Left            =   3720
-         TabIndex        =   1158
+         TabIndex        =   1159
          Top             =   3120
          Width           =   975
       End
@@ -9839,7 +9912,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   99
          Left            =   480
-         TabIndex        =   1168
+         TabIndex        =   1169
          Top             =   2280
          Width           =   465
       End
@@ -9867,7 +9940,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   213
          Left            =   120
-         TabIndex        =   1166
+         TabIndex        =   1167
          Top             =   1680
          Width           =   660
       End
@@ -9876,7 +9949,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   98
          Left            =   480
-         TabIndex        =   1165
+         TabIndex        =   1166
          Top             =   1920
          Width           =   465
       End
@@ -9904,7 +9977,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   212
          Left            =   3120
-         TabIndex        =   1163
+         TabIndex        =   1164
          Top             =   1200
          Width           =   420
       End
@@ -9932,7 +10005,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   211
          Left            =   720
-         TabIndex        =   1162
+         TabIndex        =   1163
          Top             =   1200
          Width           =   450
       End
@@ -9952,7 +10025,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   80
          Left            =   120
-         TabIndex        =   1161
+         TabIndex        =   1162
          Top             =   960
          Width           =   585
       End
@@ -9972,7 +10045,7 @@ Begin VB.Form frmListado3
          Height          =   345
          Index           =   19
          Left            =   360
-         TabIndex        =   1160
+         TabIndex        =   1161
          Top             =   360
          Width           =   5505
       End
@@ -9989,7 +10062,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   33
          Left            =   3600
-         TabIndex        =   1134
+         TabIndex        =   1135
          Top             =   5280
          Width           =   1815
       End
@@ -10457,7 +10530,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameListadoManipulador 
       Height          =   3495
       Left            =   960
-      TabIndex        =   1137
+      TabIndex        =   1138
       Top             =   0
       Visible         =   0   'False
       Width           =   6375
@@ -10467,7 +10540,7 @@ Begin VB.Form frmListado3
          Index           =   27
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1149
+         TabIndex        =   1150
          Text            =   "Text1"
          Top             =   1560
          Width           =   3495
@@ -10476,7 +10549,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   27
          Left            =   1440
-         TabIndex        =   1139
+         TabIndex        =   1140
          Text            =   "Text1"
          Top             =   1560
          Width           =   1095
@@ -10487,7 +10560,7 @@ Begin VB.Form frmListado3
          Index           =   26
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1146
+         TabIndex        =   1147
          Text            =   "Text1"
          Top             =   1200
          Width           =   3495
@@ -10496,7 +10569,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   26
          Left            =   1440
-         TabIndex        =   1138
+         TabIndex        =   1139
          Text            =   "Text1"
          Top             =   1200
          Width           =   1095
@@ -10506,7 +10579,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   37
          Left            =   240
-         TabIndex        =   1142
+         TabIndex        =   1143
          Top             =   2520
          Value           =   1  'Checked
          Width           =   2295
@@ -10515,7 +10588,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3720
-         TabIndex        =   1143
+         TabIndex        =   1144
          Top             =   2880
          Width           =   1095
       End
@@ -10524,7 +10597,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   36
          Left            =   3480
-         TabIndex        =   1141
+         TabIndex        =   1142
          Top             =   2160
          Value           =   1  'Checked
          Width           =   2295
@@ -10534,7 +10607,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   35
          Left            =   1320
-         TabIndex        =   1140
+         TabIndex        =   1141
          Top             =   2160
          Value           =   1  'Checked
          Width           =   2295
@@ -10544,7 +10617,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   64
          Left            =   5040
-         TabIndex        =   1144
+         TabIndex        =   1145
          Top             =   2880
          Width           =   1095
       End
@@ -10564,7 +10637,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   79
          Left            =   240
-         TabIndex        =   1152
+         TabIndex        =   1153
          Top             =   2160
          Width           =   570
       End
@@ -10573,7 +10646,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   97
          Left            =   240
-         TabIndex        =   1151
+         TabIndex        =   1152
          Top             =   3000
          Width           =   3465
       End
@@ -10593,7 +10666,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   210
          Left            =   480
-         TabIndex        =   1150
+         TabIndex        =   1151
          Top             =   1560
          Width           =   420
       End
@@ -10621,7 +10694,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   209
          Left            =   480
-         TabIndex        =   1148
+         TabIndex        =   1149
          Top             =   1200
          Width           =   450
       End
@@ -10641,7 +10714,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   78
          Left            =   240
-         TabIndex        =   1147
+         TabIndex        =   1148
          Top             =   960
          Width           =   585
       End
@@ -10669,7 +10742,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   57
          Left            =   240
-         TabIndex        =   1145
+         TabIndex        =   1146
          Top             =   360
          Width           =   5775
       End
@@ -10677,7 +10750,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FramepedidoSolicitante 
       Height          =   3975
       Left            =   5040
-      TabIndex        =   1116
+      TabIndex        =   1117
       Top             =   720
       Visible         =   0   'False
       Width           =   6495
@@ -10685,7 +10758,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3600
-         TabIndex        =   1122
+         TabIndex        =   1123
          Top             =   3240
          Width           =   1095
       End
@@ -10694,7 +10767,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   31
          Left            =   240
-         TabIndex        =   1121
+         TabIndex        =   1122
          Top             =   2880
          Width           =   2295
       End
@@ -10702,7 +10775,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   15
          Left            =   1560
-         TabIndex        =   1120
+         TabIndex        =   1121
          Text            =   "186"
          Top             =   2280
          Width           =   735
@@ -10713,7 +10786,7 @@ Begin VB.Form frmListado3
          Index           =   15
          Left            =   2400
          Locked          =   -1  'True
-         TabIndex        =   1131
+         TabIndex        =   1132
          Text            =   "Text1"
          Top             =   2280
          Width           =   3855
@@ -10722,7 +10795,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   14
          Left            =   1560
-         TabIndex        =   1119
+         TabIndex        =   1120
          Text            =   "186"
          Top             =   1920
          Width           =   735
@@ -10733,7 +10806,7 @@ Begin VB.Form frmListado3
          Index           =   14
          Left            =   2400
          Locked          =   -1  'True
-         TabIndex        =   1128
+         TabIndex        =   1129
          Text            =   "Text1"
          Top             =   1920
          Width           =   3855
@@ -10742,7 +10815,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   65
          Left            =   3720
-         TabIndex        =   1118
+         TabIndex        =   1119
          Text            =   "Text1"
          Top             =   1200
          Width           =   1215
@@ -10751,7 +10824,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   64
          Left            =   1560
-         TabIndex        =   1117
+         TabIndex        =   1118
          Text            =   "Text1"
          Top             =   1200
          Width           =   1215
@@ -10761,7 +10834,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   63
          Left            =   4920
-         TabIndex        =   1123
+         TabIndex        =   1124
          Top             =   3240
          Width           =   1095
       End
@@ -10770,7 +10843,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   96
          Left            =   240
-         TabIndex        =   1133
+         TabIndex        =   1134
          Top             =   3360
          Width           =   3465
       End
@@ -10798,7 +10871,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   207
          Left            =   600
-         TabIndex        =   1132
+         TabIndex        =   1133
          Top             =   2280
          Width           =   420
       End
@@ -10818,7 +10891,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   77
          Left            =   120
-         TabIndex        =   1130
+         TabIndex        =   1131
          Top             =   1680
          Width           =   615
       End
@@ -10846,7 +10919,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   206
          Left            =   600
-         TabIndex        =   1129
+         TabIndex        =   1130
          Top             =   1920
          Width           =   450
       End
@@ -10866,7 +10939,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   205
          Left            =   3000
-         TabIndex        =   1127
+         TabIndex        =   1128
          Top             =   1200
          Width           =   420
       End
@@ -10894,7 +10967,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   204
          Left            =   600
-         TabIndex        =   1126
+         TabIndex        =   1127
          Top             =   1200
          Width           =   450
       End
@@ -10922,7 +10995,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   76
          Left            =   120
-         TabIndex        =   1125
+         TabIndex        =   1126
          Top             =   840
          Width           =   540
       End
@@ -10942,7 +11015,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   56
          Left            =   750
-         TabIndex        =   1124
+         TabIndex        =   1125
          Top             =   240
          Width           =   5295
       End
@@ -10976,7 +11049,7 @@ Begin VB.Form frmListado3
          Index           =   32
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   1136
+         TabIndex        =   1137
          Text            =   "Text5"
          Top             =   1560
          Width           =   3615
@@ -11079,7 +11152,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   208
          Left            =   120
-         TabIndex        =   1135
+         TabIndex        =   1136
          Top             =   1560
          Width           =   885
       End
@@ -11198,7 +11271,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameProveedor 
       Height          =   1695
       Left            =   3840
-      TabIndex        =   1007
+      TabIndex        =   1008
       Top             =   4680
       Visible         =   0   'False
       Width           =   6495
@@ -11207,7 +11280,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   32
          Left            =   1440
-         TabIndex        =   1009
+         TabIndex        =   1010
          Top             =   1080
          Width           =   2295
       End
@@ -11215,7 +11288,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3840
-         TabIndex        =   1010
+         TabIndex        =   1011
          Top             =   1080
          Width           =   1095
       End
@@ -11223,7 +11296,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   28
          Left            =   1440
-         TabIndex        =   1008
+         TabIndex        =   1009
          Top             =   600
          Width           =   1095
       End
@@ -11233,7 +11306,7 @@ Begin VB.Form frmListado3
          Index           =   28
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   1013
+         TabIndex        =   1014
          Text            =   "Text5"
          Top             =   600
          Width           =   3495
@@ -11243,7 +11316,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   56
          Left            =   5040
-         TabIndex        =   1011
+         TabIndex        =   1012
          Top             =   1080
          Width           =   1095
       End
@@ -11271,7 +11344,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   185
          Left            =   120
-         TabIndex        =   1012
+         TabIndex        =   1013
          Top             =   600
          Width           =   885
       End
@@ -11279,7 +11352,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameAgua2 
       Height          =   3495
       Left            =   1680
-      TabIndex        =   1063
+      TabIndex        =   1064
       Top             =   480
       Visible         =   0   'False
       Width           =   6615
@@ -11288,7 +11361,7 @@ Begin VB.Form frmListado3
          Height          =   615
          Index           =   3
          Left            =   4800
-         TabIndex        =   1079
+         TabIndex        =   1080
          Top             =   120
          Visible         =   0   'False
          Width           =   2535
@@ -11297,7 +11370,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   7
             Left            =   720
-            TabIndex        =   1070
+            TabIndex        =   1071
             Tag             =   "1"
             Top             =   270
             Width           =   735
@@ -11307,7 +11380,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   8
             Left            =   1680
-            TabIndex        =   1071
+            TabIndex        =   1072
             Tag             =   "0"
             Top             =   270
             Value           =   1  'Checked
@@ -11319,7 +11392,7 @@ Begin VB.Form frmListado3
          Height          =   615
          Index           =   2
          Left            =   3720
-         TabIndex        =   1077
+         TabIndex        =   1078
          Top             =   1680
          Width           =   2415
          Begin VB.CheckBox chkAgua2 
@@ -11327,7 +11400,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   6
             Left            =   1440
-            TabIndex        =   1078
+            TabIndex        =   1079
             Tag             =   "0"
             Top             =   240
             Width           =   735
@@ -11337,7 +11410,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   5
             Left            =   720
-            TabIndex        =   1069
+            TabIndex        =   1070
             Tag             =   "1"
             Top             =   240
             Value           =   1  'Checked
@@ -11349,7 +11422,7 @@ Begin VB.Form frmListado3
          Height          =   615
          Index           =   1
          Left            =   240
-         TabIndex        =   1076
+         TabIndex        =   1077
          Top             =   1680
          Width           =   3375
          Begin VB.CheckBox chkAgua2 
@@ -11357,7 +11430,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   4
             Left            =   2160
-            TabIndex        =   1068
+            TabIndex        =   1069
             Tag             =   "1"
             Top             =   270
             Value           =   1  'Checked
@@ -11368,7 +11441,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   3
             Left            =   720
-            TabIndex        =   1067
+            TabIndex        =   1068
             Tag             =   "0"
             Top             =   270
             Value           =   1  'Checked
@@ -11380,7 +11453,7 @@ Begin VB.Form frmListado3
          Height          =   735
          Index           =   0
          Left            =   240
-         TabIndex        =   1075
+         TabIndex        =   1076
          Top             =   840
          Width           =   5895
          Begin VB.CheckBox chkAgua2 
@@ -11388,7 +11461,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   2
             Left            =   3480
-            TabIndex        =   1066
+            TabIndex        =   1067
             Tag             =   "2"
             Top             =   360
             Width           =   855
@@ -11398,7 +11471,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   0
             Left            =   720
-            TabIndex        =   1064
+            TabIndex        =   1065
             Tag             =   "0"
             Top             =   360
             Value           =   1  'Checked
@@ -11409,7 +11482,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   1
             Left            =   2160
-            TabIndex        =   1065
+            TabIndex        =   1066
             Tag             =   "1"
             Top             =   360
             Width           =   1335
@@ -11419,7 +11492,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3720
-         TabIndex        =   1072
+         TabIndex        =   1073
          Top             =   2640
          Width           =   1095
       End
@@ -11428,7 +11501,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   60
          Left            =   5040
-         TabIndex        =   1073
+         TabIndex        =   1074
          Top             =   2640
          Width           =   1095
       End
@@ -11448,7 +11521,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   53
          Left            =   105
-         TabIndex        =   1074
+         TabIndex        =   1075
          Top             =   240
          Width           =   5355
       End
@@ -11456,7 +11529,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameAguaDeclaracion 
       Height          =   2775
       Left            =   960
-      TabIndex        =   1047
+      TabIndex        =   1048
       Top             =   0
       Visible         =   0   'False
       Width           =   4695
@@ -11464,7 +11537,7 @@ Begin VB.Form frmListado3
          Height          =   315
          Left            =   2160
          Style           =   2  'Dropdown List
-         TabIndex        =   1052
+         TabIndex        =   1053
          Top             =   960
          Width           =   1695
       End
@@ -11472,7 +11545,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   2040
-         TabIndex        =   1050
+         TabIndex        =   1051
          Top             =   1920
          Width           =   1095
       End
@@ -11481,7 +11554,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   58
          Left            =   3240
-         TabIndex        =   1048
+         TabIndex        =   1049
          Top             =   1920
          Width           =   1095
       End
@@ -11501,7 +11574,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   71
          Left            =   840
-         TabIndex        =   1053
+         TabIndex        =   1054
          Top             =   960
          Width           =   1140
       End
@@ -11509,7 +11582,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   92
          Left            =   240
-         TabIndex        =   1051
+         TabIndex        =   1052
          Top             =   1560
          Width           =   4065
       End
@@ -11529,7 +11602,7 @@ Begin VB.Form frmListado3
          Height          =   480
          Index           =   52
          Left            =   240
-         TabIndex        =   1049
+         TabIndex        =   1050
          Top             =   360
          Width           =   4125
       End
@@ -11620,7 +11693,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameSimularPedidoProveedor 
       Height          =   4095
       Left            =   2280
-      TabIndex        =   1015
+      TabIndex        =   1016
       Top             =   360
       Visible         =   0   'False
       Width           =   6135
@@ -11629,7 +11702,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   1
          Left            =   240
-         TabIndex        =   1041
+         TabIndex        =   1042
          ToolTipText     =   "Cambiar proveedor en el pedido"
          Top             =   3600
          Width           =   1095
@@ -11639,7 +11712,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   0
          Left            =   3600
-         TabIndex        =   1018
+         TabIndex        =   1019
          Top             =   3600
          Width           =   1095
       End
@@ -11647,7 +11720,7 @@ Begin VB.Form frmListado3
          Enabled         =   0   'False
          Height          =   855
          Left            =   240
-         TabIndex        =   1030
+         TabIndex        =   1031
          Top             =   2520
          Width           =   5535
          Begin VB.TextBox txtDecimal 
@@ -11655,7 +11728,7 @@ Begin VB.Form frmListado3
             Height          =   285
             Index           =   14
             Left            =   2040
-            TabIndex        =   1039
+            TabIndex        =   1040
             Text            =   "Text3"
             Top             =   480
             Width           =   735
@@ -11665,7 +11738,7 @@ Begin VB.Form frmListado3
             Height          =   285
             Index           =   16
             Left            =   4200
-            TabIndex        =   1037
+            TabIndex        =   1038
             Text            =   "Text3"
             Top             =   480
             Width           =   1095
@@ -11675,7 +11748,7 @@ Begin VB.Form frmListado3
             Height          =   285
             Index           =   15
             Left            =   3240
-            TabIndex        =   1035
+            TabIndex        =   1036
             Text            =   "Text3"
             Top             =   480
             Width           =   855
@@ -11685,7 +11758,7 @@ Begin VB.Form frmListado3
             Height          =   285
             Index           =   13
             Left            =   1080
-            TabIndex        =   1033
+            TabIndex        =   1034
             Text            =   "Text3"
             Top             =   480
             Width           =   735
@@ -11695,7 +11768,7 @@ Begin VB.Form frmListado3
             Height          =   285
             Index           =   12
             Left            =   120
-            TabIndex        =   1031
+            TabIndex        =   1032
             Text            =   "Text3"
             Top             =   480
             Width           =   735
@@ -11716,7 +11789,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   194
             Left            =   2040
-            TabIndex        =   1040
+            TabIndex        =   1041
             Top             =   240
             Width           =   705
          End
@@ -11736,7 +11809,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   193
             Left            =   4800
-            TabIndex        =   1038
+            TabIndex        =   1039
             Top             =   240
             Width           =   360
          End
@@ -11756,7 +11829,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   192
             Left            =   3240
-            TabIndex        =   1036
+            TabIndex        =   1037
             Top             =   240
             Width           =   840
          End
@@ -11776,7 +11849,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   191
             Left            =   1080
-            TabIndex        =   1034
+            TabIndex        =   1035
             Top             =   240
             Width           =   330
          End
@@ -11796,7 +11869,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   190
             Left            =   120
-            TabIndex        =   1032
+            TabIndex        =   1033
             Top             =   240
             Width           =   750
          End
@@ -11805,7 +11878,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   29
          Left            =   360
-         TabIndex        =   1017
+         TabIndex        =   1018
          Top             =   960
          Width           =   1095
       End
@@ -11815,7 +11888,7 @@ Begin VB.Form frmListado3
          Index           =   29
          Left            =   1560
          Locked          =   -1  'True
-         TabIndex        =   1021
+         TabIndex        =   1022
          Text            =   "Text5"
          Top             =   960
          Width           =   3495
@@ -11824,14 +11897,14 @@ Begin VB.Form frmListado3
          Enabled         =   0   'False
          Height          =   975
          Left            =   240
-         TabIndex        =   1020
+         TabIndex        =   1021
          Top             =   1440
          Width           =   5535
          Begin VB.TextBox txtFecha 
             Height          =   285
             Index           =   59
             Left            =   240
-            TabIndex        =   1027
+            TabIndex        =   1028
             Text            =   "Text1"
             Top             =   600
             Width           =   1215
@@ -11841,7 +11914,7 @@ Begin VB.Form frmListado3
             Height          =   285
             Index           =   11
             Left            =   3840
-            TabIndex        =   1025
+            TabIndex        =   1026
             Text            =   "Text3"
             Top             =   600
             Width           =   1095
@@ -11851,7 +11924,7 @@ Begin VB.Form frmListado3
             Height          =   285
             Index           =   10
             Left            =   2160
-            TabIndex        =   1023
+            TabIndex        =   1024
             Text            =   "Text3"
             Top             =   600
             Width           =   1095
@@ -11872,7 +11945,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   189
             Left            =   240
-            TabIndex        =   1029
+            TabIndex        =   1030
             Top             =   360
             Width           =   435
          End
@@ -11901,7 +11974,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   69
             Left            =   120
-            TabIndex        =   1028
+            TabIndex        =   1029
             Top             =   0
             Width           =   1110
          End
@@ -11921,7 +11994,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   187
             Left            =   3840
-            TabIndex        =   1026
+            TabIndex        =   1027
             Top             =   360
             Width           =   840
          End
@@ -11941,7 +12014,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   186
             Left            =   2160
-            TabIndex        =   1024
+            TabIndex        =   1025
             Top             =   360
             Width           =   600
          End
@@ -11951,7 +12024,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   57
          Left            =   4800
-         TabIndex        =   1019
+         TabIndex        =   1020
          Top             =   3600
          Width           =   975
       End
@@ -11979,7 +12052,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   188
          Left            =   360
-         TabIndex        =   1022
+         TabIndex        =   1023
          Top             =   720
          Width           =   885
       End
@@ -11999,7 +12072,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   51
          Left            =   840
-         TabIndex        =   1016
+         TabIndex        =   1017
          Top             =   240
          Width           =   4515
       End
@@ -18140,7 +18213,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   29
          Left            =   120
-         TabIndex        =   1080
+         TabIndex        =   1081
          Top             =   7680
          Width           =   2775
       End
@@ -18159,7 +18232,7 @@ Begin VB.Form frmListado3
          Index           =   13
          Left            =   2400
          Locked          =   -1  'True
-         TabIndex        =   1045
+         TabIndex        =   1046
          Text            =   "Text1"
          Top             =   6360
          Width           =   3855
@@ -18179,7 +18252,7 @@ Begin VB.Form frmListado3
          Index           =   12
          Left            =   2400
          Locked          =   -1  'True
-         TabIndex        =   1042
+         TabIndex        =   1043
          Text            =   "Text1"
          Top             =   6000
          Width           =   3855
@@ -18190,7 +18263,7 @@ Begin VB.Form frmListado3
          Index           =   3
          Left            =   2280
          Locked          =   -1  'True
-         TabIndex        =   1002
+         TabIndex        =   1003
          Text            =   "Text5"
          Top             =   5400
          Width           =   3495
@@ -18209,7 +18282,7 @@ Begin VB.Form frmListado3
          Index           =   2
          Left            =   2280
          Locked          =   -1  'True
-         TabIndex        =   1001
+         TabIndex        =   1002
          Text            =   "Text5"
          Top             =   5040
          Width           =   3495
@@ -18237,7 +18310,7 @@ Begin VB.Form frmListado3
          Index           =   9
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   997
+         TabIndex        =   998
          Text            =   "Text5"
          Top             =   4320
          Width           =   3495
@@ -18257,7 +18330,7 @@ Begin VB.Form frmListado3
          Index           =   8
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   995
+         TabIndex        =   996
          Text            =   "Text5"
          Top             =   3960
          Width           =   3495
@@ -18277,7 +18350,7 @@ Begin VB.Form frmListado3
          Index           =   7
          Left            =   2640
          Locked          =   -1  'True
-         TabIndex        =   993
+         TabIndex        =   994
          Text            =   "Text5"
          Top             =   3600
          Width           =   3495
@@ -18485,7 +18558,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   196
          Left            =   480
-         TabIndex        =   1046
+         TabIndex        =   1047
          Top             =   6360
          Width           =   420
       End
@@ -18505,7 +18578,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   70
          Left            =   120
-         TabIndex        =   1044
+         TabIndex        =   1045
          Top             =   5760
          Width           =   615
       End
@@ -18533,7 +18606,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   195
          Left            =   480
-         TabIndex        =   1043
+         TabIndex        =   1044
          Top             =   6000
          Width           =   450
       End
@@ -18561,7 +18634,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   183
          Left            =   480
-         TabIndex        =   1004
+         TabIndex        =   1005
          Top             =   5040
          Width           =   450
       End
@@ -18589,7 +18662,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   182
          Left            =   480
-         TabIndex        =   1003
+         TabIndex        =   1004
          Top             =   5400
          Width           =   420
       End
@@ -18609,7 +18682,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   181
          Left            =   240
-         TabIndex        =   1000
+         TabIndex        =   1001
          Top             =   4680
          Width           =   1140
       End
@@ -18629,7 +18702,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   180
          Left            =   240
-         TabIndex        =   999
+         TabIndex        =   1000
          Top             =   3240
          Width           =   1050
       End
@@ -18654,7 +18727,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   91
          Left            =   480
-         TabIndex        =   998
+         TabIndex        =   999
          Top             =   4320
          Width           =   465
       End
@@ -18671,7 +18744,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   90
          Left            =   480
-         TabIndex        =   996
+         TabIndex        =   997
          Top             =   3960
          Width           =   465
       End
@@ -18688,7 +18761,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   89
          Left            =   480
-         TabIndex        =   994
+         TabIndex        =   995
          Top             =   3600
          Width           =   465
       End
@@ -19485,7 +19558,7 @@ Begin VB.Form frmListado3
          Caption         =   "FrameConsolidado"
          Height          =   1335
          Left            =   120
-         TabIndex        =   987
+         TabIndex        =   988
          Top             =   4990
          Visible         =   0   'False
          Width           =   6255
@@ -19495,7 +19568,7 @@ Begin VB.Form frmListado3
             Index           =   6
             Left            =   2640
             Locked          =   -1  'True
-            TabIndex        =   991
+            TabIndex        =   992
             Text            =   "Text5"
             Top             =   720
             Width           =   3495
@@ -19515,7 +19588,7 @@ Begin VB.Form frmListado3
             Index           =   5
             Left            =   2640
             Locked          =   -1  'True
-            TabIndex        =   988
+            TabIndex        =   989
             Text            =   "Text5"
             Top             =   360
             Width           =   3495
@@ -19534,7 +19607,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   88
             Left            =   480
-            TabIndex        =   992
+            TabIndex        =   993
             Top             =   720
             Width           =   465
          End
@@ -19551,7 +19624,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   87
             Left            =   480
-            TabIndex        =   990
+            TabIndex        =   991
             Top             =   360
             Width           =   465
          End
@@ -19571,7 +19644,7 @@ Begin VB.Form frmListado3
             Height          =   195
             Index           =   179
             Left            =   60
-            TabIndex        =   989
+            TabIndex        =   990
             Top             =   0
             Width           =   1980
          End
@@ -21219,7 +21292,7 @@ Begin VB.Form frmListado3
    Begin VB.Frame FrameListadoCostesEuler2 
       Height          =   5175
       Left            =   6240
-      TabIndex        =   1294
+      TabIndex        =   1295
       Top             =   1320
       Visible         =   0   'False
       Width           =   6855
@@ -21228,7 +21301,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   42
          Left            =   4560
-         TabIndex        =   1303
+         TabIndex        =   1304
          Top             =   4080
          Value           =   1  'Checked
          Width           =   1695
@@ -21238,7 +21311,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   41
          Left            =   2640
-         TabIndex        =   1302
+         TabIndex        =   1303
          Top             =   4080
          Value           =   1  'Checked
          Width           =   1695
@@ -21248,7 +21321,7 @@ Begin VB.Form frmListado3
          Height          =   255
          Index           =   40
          Left            =   600
-         TabIndex        =   1301
+         TabIndex        =   1302
          Top             =   4080
          Value           =   1  'Checked
          Width           =   1695
@@ -21257,7 +21330,7 @@ Begin VB.Form frmListado3
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4080
-         TabIndex        =   1304
+         TabIndex        =   1305
          Top             =   4680
          Width           =   1095
       End
@@ -21266,7 +21339,7 @@ Begin VB.Form frmListado3
          Index           =   1
          Left            =   1560
          MaxLength       =   4
-         TabIndex        =   1300
+         TabIndex        =   1301
          Text            =   "Text1"
          Top             =   3240
          Width           =   735
@@ -21277,7 +21350,7 @@ Begin VB.Form frmListado3
          Index           =   1
          Left            =   2400
          Locked          =   -1  'True
-         TabIndex        =   1318
+         TabIndex        =   1319
          Text            =   "Text1"
          Top             =   3240
          Width           =   3495
@@ -21287,7 +21360,7 @@ Begin VB.Form frmListado3
          Index           =   0
          Left            =   1560
          MaxLength       =   4
-         TabIndex        =   1299
+         TabIndex        =   1300
          Text            =   "Text1"
          Top             =   2880
          Width           =   735
@@ -21298,7 +21371,7 @@ Begin VB.Form frmListado3
          Index           =   0
          Left            =   2400
          Locked          =   -1  'True
-         TabIndex        =   1315
+         TabIndex        =   1316
          Text            =   "Text1"
          Top             =   2880
          Width           =   3495
@@ -21309,7 +21382,7 @@ Begin VB.Form frmListado3
          Index           =   31
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1313
+         TabIndex        =   1314
          Text            =   "Text1"
          Top             =   1320
          Width           =   3495
@@ -21318,7 +21391,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   31
          Left            =   1560
-         TabIndex        =   1296
+         TabIndex        =   1297
          Text            =   "Text1"
          Top             =   1320
          Width           =   1095
@@ -21329,7 +21402,7 @@ Begin VB.Form frmListado3
          Index           =   30
          Left            =   2760
          Locked          =   -1  'True
-         TabIndex        =   1310
+         TabIndex        =   1311
          Text            =   "Text1"
          Top             =   960
          Width           =   3495
@@ -21338,7 +21411,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   30
          Left            =   1560
-         TabIndex        =   1295
+         TabIndex        =   1296
          Text            =   "Text1"
          Top             =   960
          Width           =   1095
@@ -21347,7 +21420,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   80
          Left            =   4080
-         TabIndex        =   1298
+         TabIndex        =   1299
          Text            =   "Text1"
          Top             =   2040
          Width           =   1215
@@ -21356,7 +21429,7 @@ Begin VB.Form frmListado3
          Height          =   285
          Index           =   79
          Left            =   1560
-         TabIndex        =   1297
+         TabIndex        =   1298
          Text            =   "Text1"
          Top             =   2040
          Width           =   1215
@@ -21366,7 +21439,7 @@ Begin VB.Form frmListado3
          Height          =   375
          Index           =   69
          Left            =   5400
-         TabIndex        =   1305
+         TabIndex        =   1306
          Top             =   4680
          Width           =   1095
       End
@@ -21375,7 +21448,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   101
          Left            =   240
-         TabIndex        =   1321
+         TabIndex        =   1322
          Top             =   4680
          Width           =   3465
       End
@@ -21395,7 +21468,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   101
          Left            =   240
-         TabIndex        =   1320
+         TabIndex        =   1321
          Top             =   3720
          Width           =   1020
       End
@@ -21423,7 +21496,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   256
          Left            =   600
-         TabIndex        =   1319
+         TabIndex        =   1320
          Top             =   3240
          Width           =   420
       End
@@ -21451,7 +21524,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   100
          Left            =   240
-         TabIndex        =   1317
+         TabIndex        =   1318
          Top             =   2640
          Width           =   1335
       End
@@ -21471,7 +21544,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   255
          Left            =   600
-         TabIndex        =   1316
+         TabIndex        =   1317
          Top             =   2880
          Width           =   450
       End
@@ -21491,7 +21564,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   254
          Left            =   600
-         TabIndex        =   1314
+         TabIndex        =   1315
          Top             =   1320
          Width           =   420
       End
@@ -21519,7 +21592,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   253
          Left            =   600
-         TabIndex        =   1312
+         TabIndex        =   1313
          Top             =   960
          Width           =   450
       End
@@ -21539,7 +21612,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   99
          Left            =   240
-         TabIndex        =   1311
+         TabIndex        =   1312
          Top             =   720
          Width           =   585
       End
@@ -21567,7 +21640,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   252
          Left            =   3360
-         TabIndex        =   1309
+         TabIndex        =   1310
          Top             =   2040
          Width           =   420
       End
@@ -21595,7 +21668,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   251
          Left            =   600
-         TabIndex        =   1308
+         TabIndex        =   1309
          Top             =   2040
          Width           =   450
       End
@@ -21615,7 +21688,7 @@ Begin VB.Form frmListado3
          Height          =   195
          Index           =   250
          Left            =   240
-         TabIndex        =   1307
+         TabIndex        =   1308
          Top             =   1800
          Width           =   585
       End
@@ -21643,7 +21716,7 @@ Begin VB.Form frmListado3
          Height          =   360
          Index           =   61
          Left            =   960
-         TabIndex        =   1306
+         TabIndex        =   1307
          Top             =   240
          Width           =   4485
       End
@@ -22316,7 +22389,7 @@ Public Opcion As Byte
     
     '73 .- Lineas albaran EULER     Son unas lineas que llevan codigo/descrip(precio  para pintar luego en factura
     
-    '74 .- Aguas. Listado cobros pendientes pero por tasas. Como el 55
+    '74 .- Aguas. Listado cobros pendientes pero por tasas. Como el 55. #Enero 22. Añadimos una opcion para apaisarlo qy que muestrdatos exportables EPSAR
     
     '75 .- Bloqueo clientes inactivos
     
@@ -22479,6 +22552,10 @@ Private Sub chkVarios_Click(Index As Integer)
         End If
     ElseIf Index = 26 Then
         Me.chkVarios(33).visible = Me.chkVarios(Index).Value = 1
+    ElseIf Index = 44 Then
+        'Agua municipal Tasas generalita
+        Me.chkVarios(9).visible = Me.chkVarios(Index).Value = 1
+        
     End If
 End Sub
 
@@ -22817,7 +22894,13 @@ Private Sub cmdAguaCanonGeneralitat_Click()
             cadNomRPT = "aguFacPeriodo.rpt"
         Else
             cadTitulo = "Tasas pendientes cobro"
-            cadNomRPT = "aguFacCuotasPdtesCobro.rpt"
+            cadNomRPT = "aguFacCuotasPdtesCobro"
+            If Me.chkVarios(9).Value = 1 Then cadNomRPT = cadNomRPT & "CSV"
+            cadNomRPT = cadNomRPT & ".rpt"
+            
+            'cadNomRPT = "aguFacCuotasPdtesCobro.rpt"
+            'cadNomRPT = "aguFacCuotasPdtesCobroCSV.rpt"'
+            
         End If
         cadPDFrpt = cadNomRPT
         conSubRPT = False
@@ -27448,6 +27531,7 @@ Dim W As Integer
             Me.lblTitulo(50).Caption = "Tasas pendienes de cobro"
         End If
         chkVarios(44).visible = Opcion = 74
+        
         Label3(106).Caption = ""
     Case 56
         PonerFrameVisible FrameProveedor, H, W
@@ -29059,7 +29143,7 @@ Private Sub LeyendoGastosFijos()
 Dim i As Integer
 Dim Aux As String
 Dim Importe As Currency
-Dim SQL As String
+Dim Sql As String
 
     'Detalle de la quincena
     FijaFechaIni
@@ -29068,9 +29152,9 @@ Dim SQL As String
     For i = 1 To 6
         'Insertaremos en tmpinformes codusu,codigo1,campo1,campo2,  nombre1,importe1
         '                                   secuen   gasto  quinc   desc    imp
-        SQL = "SELECT gastosfijos.codigo,Descripcion,importe  FROM gastosfijos,gastosfijos_recibos WHERE gastosfijos.codigo=gastosfijos_recibos.codigo "
-        SQL = SQL & " AND fecha >= " & DBSet(FI, "F") & " AND fecha <= " & DBSet(FF, "F")
-        miRsAux.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = "SELECT gastosfijos.codigo,Descripcion,importe  FROM gastosfijos,gastosfijos_recibos WHERE gastosfijos.codigo=gastosfijos_recibos.codigo "
+        Sql = Sql & " AND fecha >= " & DBSet(FI, "F") & " AND fecha <= " & DBSet(FF, "F")
+        miRsAux.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         Importe = 0
         While Not miRsAux.EOF
         
@@ -38743,30 +38827,32 @@ Private Function ObtenerDatosTasasPdteCobroAguaGeneralitat() As Boolean
     Codigo = Codigo & " and numlinea >=21 and numlinea <=25 "
     Codigo = Codigo & " and (numfactu,fecfactu) IN (select codprove,fecrecep from tmpcommand where codusu =" & vUsu.Codigo & ")"
     Codigo = Codigo & " group by numfactu,fecfactu"
-    Codigo = "select " & vUsu.Codigo & ", numfactu,fecfactu, sum(if(numlinea=21,importel,0)),sum(if(numlinea=25,importel,0)) from slifac " & Codigo
-    Codigo = "INSERT INTO tmpcommandest (codusu ,codclien ,fechaalb ,cantidad ,importel) " & Codigo
+    Codigo = "select " & vUsu.Codigo & ", numfactu,fecfactu, sum(if(numlinea=21,importel,0)),sum(if(numlinea=25,importel,0)), sum(if(numlinea=21,cantidad,0)) from slifac " & Codigo
+    Codigo = "INSERT INTO tmpcommandest (codusu ,codclien ,fechaalb ,cantidad ,importel,importlant) " & Codigo
     Label3(106).Caption = "Calculando tasas"
     Label3(106).Refresh
     conn.Execute Codigo
 
-    
- 
+
+  
     'Insertamos en la tabla de informes
     Label3(106).Caption = "Leyendo facturas"
     Label3(106).Refresh
     miSQL = "select scafac.numfactu,scafac.fecfactu,scafac.codclien,scafac.nomclien,cantidad,importel,totalfac,tmpcommandest.codclien Fratmp"
+    miSQL = miSQL & " , importlant , scafac.codpobla, scafac.pobclien"
     miSQL = miSQL & " from tmpcommandest inner join scafac on tmpcommandest.codusu=" & vUsu.Codigo & " and scafac.codtipom='FAG' and  scafac.numfactu=tmpcommandest.codclien and fechaalb=fecfactu"
     miRsAux.Open miSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cadFormula = ""
-    cadTitulo = "INSERT INTO tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,fecha1,importe1,importe2,importe3) VALUES "
+    cadTitulo = "INSERT INTO tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,fecha1,importe1,importe2,importe3,importe5,nombre3,obser) VALUES "
     NumRegElim = 0
     While Not miRsAux.EOF
-        'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,fecha1,importe1,importe2,importe3,
+        'tmpinformes(codusu,codigo1,campo1,nombre1,nombre2,fecha1,importe1,importe2,importe3,importe5
         NumRegElim = NumRegElim + 1
         If IsNull(miRsAux!codClien) Then Err.Raise 513, , "Factura en tmp: " & miRsAux!Fratmp
         cadFormula = cadFormula & ", (" & vUsu.Codigo & "," & NumRegElim & "," & miRsAux!Numfactu & ",'" & miRsAux!codClien & "',"
         cadFormula = cadFormula & DBSet(miRsAux!NomClien, "T") & "," & DBSet(miRsAux!FecFactu, "F") & "," & DBSet(miRsAux!cantidad, "N")
-        cadFormula = cadFormula & "," & DBSet(miRsAux!ImporteL, "N") & "," & DBSet(miRsAux!TotalFac, "N") & ")"
+        cadFormula = cadFormula & "," & DBSet(miRsAux!ImporteL, "N") & "," & DBSet(miRsAux!TotalFac, "N") & ", " & DBSet(miRsAux!importlant, "N")
+        cadFormula = cadFormula & "," & DBSet(miRsAux!codpobla, "T") & "," & DBSet(miRsAux!pobclien, "T") & ")"
         If Len(cadFormula) > 10000 Then
             cadFormula = Mid(cadFormula, 2)
             cadFormula = cadTitulo & cadFormula

@@ -1340,7 +1340,7 @@ Option Explicit
 '========== VBLES PUBLICAS ====================
 'Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 'Public Event DatoSeleccionado(CadenaSeleccion As String)
-Public Codprove As Long
+Public CodProve As Long
 Public CadenaAlbaran As String
 
 
@@ -1475,7 +1475,7 @@ Dim N  As Long
         
         If cadWhere = "" Then
             
-            If Me.Codprove > 0 Then
+            If Me.CodProve > 0 Then
                 If Not DatosOk Then Exit Sub
             
             End If
@@ -1489,9 +1489,9 @@ Dim N  As Long
         If GenerarFactura_ Then
             If vParamAplic.InvSujetoPasivo Then Me.chkInvSujePasivo.Value = 0
             BotonPedirDatos
-            If Me.Codprove >= 0 Then Unload Me
+            If Me.CodProve >= 0 Then Unload Me
         Else
-            If Me.Codprove >= 0 Then PonerCamposFacturarAlbaran
+            If Me.CodProve >= 0 Then PonerCamposFacturarAlbaran
         End If
     End If
 End Sub
@@ -1533,7 +1533,7 @@ Private Sub Form_Activate()
         
     If PrimeraVez Then
         PrimeraVez = False
-        If Me.Codprove >= 0 Then
+        If Me.CodProve >= 0 Then
             'Esta facturando UN albaran
             PonerCamposFacturarAlbaran
             
@@ -1579,7 +1579,7 @@ Dim i As Integer
     End With
     
     
-    Toolbar1.Buttons(2).Enabled = Me.Codprove < 0
+    Toolbar1.Buttons(2).Enabled = Me.CodProve < 0
     
     cadWhere = ""
     
@@ -2187,11 +2187,11 @@ Dim i As Byte
     
     If cadWhere = "" Then
         Cad = "MAL"
-        If Me.Codprove >= 0 Then
+        If Me.CodProve >= 0 Then
             'Esta facturando UN albaran
             If ListView1.ListItems(1).Checked Then
                 'Solo hay UN albaran
-                If Me.Codprove = Val(Text1(3).Text) Then
+                If Me.CodProve = Val(Text1(3).Text) Then
                     'Es el mismo proveedor. Solo ha cambiado fechas
                     CalcularDatosFactura
                     If cadWhere <> "" Then Cad = ""
@@ -2367,7 +2367,7 @@ End Sub
 Private Sub CargarAlbaranes()
 'Recupera de la BD y muestra en el Listview todos los albaranes de compra
 'que tiene el proveedor introducido.
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 Const vbPassionRed = &HC0&      '&H1C47F4
@@ -2382,22 +2382,22 @@ On Error GoTo ECargar
     'si no hay proveedor salir
     If Text1(3).Text = "" Then Exit Sub
     
-    SQL = "SELECT scaalp.numalbar,scaalp.fechaalb,scaalp.codforpa,sforpa.nomforpa,scaalp.dtoppago,scaalp.dtognral, "
-    SQL = SQL & " sum(slialp.importel) as bruto "
-    SQL = SQL & " FROM (scaalp LEFT OUTER JOIN sforpa ON scaalp.codforpa=sforpa.codforpa) "
-    SQL = SQL & " INNER JOIN slialp ON scaalp.numalbar = slialp.numalbar  AND scaalp.fechaalb=slialp.fechaalb AND scaalp.codprove=slialp.codprove "
-    SQL = SQL & " WHERE scaalp.codprove =" & Text1(3).Text
-    If Me.Codprove >= 0 Then
+    Sql = "SELECT scaalp.numalbar,scaalp.fechaalb,scaalp.codforpa,sforpa.nomforpa,scaalp.dtoppago,scaalp.dtognral, "
+    Sql = Sql & " sum(slialp.importel) as bruto "
+    Sql = Sql & " FROM (scaalp LEFT OUTER JOIN sforpa ON scaalp.codforpa=sforpa.codforpa) "
+    Sql = Sql & " INNER JOIN slialp ON scaalp.numalbar = slialp.numalbar  AND scaalp.fechaalb=slialp.fechaalb AND scaalp.codprove=slialp.codprove "
+    Sql = Sql & " WHERE scaalp.codprove =" & Text1(3).Text
+    If Me.CodProve >= 0 Then
         'Esta facturando direcamente UN albaran
-        SQL = SQL & " AND " & Me.CadenaAlbaran
+        Sql = Sql & " AND " & Me.CadenaAlbaran
     End If
     
     
-    SQL = SQL & " GROUP BY scaalp.numalbar, scaalp.fechaalb, scaalp.codforpa, scaalp.dtoppago,scaalp.dtognral "
-    SQL = SQL & " ORDER BY scaalp.numalbar"
+    Sql = Sql & " GROUP BY scaalp.numalbar, scaalp.fechaalb, scaalp.codforpa, scaalp.dtoppago,scaalp.dtognral "
+    Sql = Sql & " ORDER BY scaalp.numalbar"
 
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     InicializarListView
     
@@ -2421,7 +2421,7 @@ On Error GoTo ECargar
             ItmX.ToolTipText = "Abono"
         End If
                              
-        If Me.Codprove >= 0 Then ItmX.Checked = True
+        If Me.CodProve >= 0 Then ItmX.Checked = True
             
                              
         'Sig
@@ -2457,7 +2457,7 @@ End Sub
 
 Private Sub CalcularDatosFactura()
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 Dim cadAux As String
 Dim vFactu As CFacturaCom
 
@@ -2476,12 +2476,12 @@ Dim vFactu As CFacturaCom
             ForPa = ListView1.ListItems(i).SubItems(2)
             dtoPP = ListView1.ListItems(i).SubItems(4)
             dtoGn = ListView1.ListItems(i).SubItems(5)
-            SQL = "(numalbar=" & DBSet(ListView1.ListItems(i).Text, "T") & " and "
-            SQL = SQL & "fechaalb=" & DBSet(ListView1.ListItems(i).SubItems(1), "F") & ")"
+            Sql = "(numalbar=" & DBSet(ListView1.ListItems(i).Text, "T") & " and "
+            Sql = Sql & "fechaalb=" & DBSet(ListView1.ListItems(i).SubItems(1), "F") & ")"
             If cadAux = "" Then
-                cadAux = SQL
+                cadAux = Sql
             Else
-                cadAux = cadAux & " OR " & SQL
+                cadAux = cadAux & " OR " & Sql
             End If
         End If
     Next i
@@ -2561,7 +2561,7 @@ Private Function SeleccionaRegistros() As Boolean
 'Comprueba que se seleccionan albaranes en la base de datos
 'es decir que hay albaranes marcados
 'cuando se van marcando albaranes se van añadiendo el la cadena cadWhere
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ESel
     SeleccionaRegistros = False
@@ -2569,9 +2569,9 @@ Dim SQL As String
     If cadWhere = "" Then Exit Function
     cadWhere = Replace(cadWhere, "slialp", "scaalp")
     
-    SQL = "Select count(*) FROM scaalp"
-    SQL = SQL & " WHERE " & cadWhere
-    If RegistrosAListar(SQL) <> 0 Then SeleccionaRegistros = True
+    Sql = "Select count(*) FROM scaalp"
+    Sql = Sql & " WHERE " & cadWhere
+    If RegistrosAListar(Sql) <> 0 Then SeleccionaRegistros = True
     Exit Function
     
 ESel:
@@ -2618,7 +2618,7 @@ Dim Cad As String
     If Not DatosOk Then Exit Sub
     
     
-     If Me.Codprove > 0 Then
+     If Me.CodProve > 0 Then
         If cadWhere = "" Then
             If Not DatosOk Then Exit Sub
             If cadWhere = "" Then
@@ -2703,6 +2703,21 @@ Dim TieneAnticiposPendientesDescontar As String
         vFactu.ImpIVA2 = ImporteFormateado(Text1(20).Text)
         vFactu.ImpIVA3 = ImporteFormateado(Text1(21).Text)
         vFactu.TotalFac = ImporteFormateado(Text1(22).Text)
+        
+        'Febrero 2022
+        'David. Proveedor varios
+        Cad = DevuelveDesdeBD(conAri, "provario", "sprove", "codprove", vFactu.Proveedor)
+        If Cad = "1" Then
+             Cad = Replace(cadWhere, "slialp", "scaalp")
+             Cad = Cad & " AND 1"
+             Cad = DevuelveDesdeBD(conAri, "nifprove", "scaalp", Cad, "1")
+             If Cad = "" Then
+                Err.Raise 513, , "Proveedor varios NIF no encontrado"
+            Else
+                vFactu.NIFProv = Cad
+            End If
+        End If
+        
         
         'Sobre que calcual la retencion, si sobre el tota o sobre las bases(sun iva)
         If chkTipoRet.Value = 1 Then
@@ -2850,7 +2865,7 @@ Dim TieneAnticiposPendientesDescontar As String
                 Cad = DevuelveDesdeBD(conAri, "count(*)", "sflotas", "codprove", CStr(vProve.Codigo))
     
                 If Val(Cad) > 0 Then
-                    frmComCasarAlbaranes.Codprove = vProve.Codigo
+                    frmComCasarAlbaranes.CodProve = vProve.Codigo
                     frmComCasarAlbaranes.Show vbModal
                 End If
             End If
@@ -2899,22 +2914,22 @@ End Function
 
 Private Sub RefrescarAlbaranes()
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 Dim Itm As ListItem
 Dim RS As ADODB.Recordset
     
 
     For i = 1 To ListView1.ListItems.Count
-        SQL = "SELECT scaalp.numalbar,scaalp.fechaalb,scaalp.codforpa,sforpa.nomforpa,scaalp.dtoppago,scaalp.dtognral, "
-        SQL = SQL & " sum(slialp.importel) as bruto "
-        SQL = SQL & " FROM (scaalp LEFT OUTER JOIN sforpa ON scaalp.codforpa=sforpa.codforpa) "
-        SQL = SQL & " INNER JOIN slialp ON scaalp.numalbar = slialp.numalbar  AND scaalp.fechaalb=slialp.fechaalb AND scaalp.codprove=slialp.codprove "
-        SQL = SQL & " WHERE scaalp.codprove =" & Text1(3).Text & " AND scaalp.numalbar=" & DBSet(ListView1.ListItems(i).Text, "T") & " AND scaalp.fechaalb=" & DBSet(ListView1.ListItems(i).SubItems(1), "F")
-        SQL = SQL & " GROUP BY scaalp.numalbar, scaalp.fechaalb, scaalp.codforpa, scaalp.dtoppago,scaalp.dtognral "
-        SQL = SQL & " ORDER BY scaalp.numalbar"
+        Sql = "SELECT scaalp.numalbar,scaalp.fechaalb,scaalp.codforpa,sforpa.nomforpa,scaalp.dtoppago,scaalp.dtognral, "
+        Sql = Sql & " sum(slialp.importel) as bruto "
+        Sql = Sql & " FROM (scaalp LEFT OUTER JOIN sforpa ON scaalp.codforpa=sforpa.codforpa) "
+        Sql = Sql & " INNER JOIN slialp ON scaalp.numalbar = slialp.numalbar  AND scaalp.fechaalb=slialp.fechaalb AND scaalp.codprove=slialp.codprove "
+        Sql = Sql & " WHERE scaalp.codprove =" & Text1(3).Text & " AND scaalp.numalbar=" & DBSet(ListView1.ListItems(i).Text, "T") & " AND scaalp.fechaalb=" & DBSet(ListView1.ListItems(i).SubItems(1), "F")
+        Sql = Sql & " GROUP BY scaalp.numalbar, scaalp.fechaalb, scaalp.codforpa, scaalp.dtoppago,scaalp.dtognral "
+        Sql = Sql & " ORDER BY scaalp.numalbar"
 
         Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
         If Not RS.EOF Then 'Actualizamos los datos de este item en el list
             ListView1.ListItems(i).SubItems(2) = RS!codforpa
@@ -2999,7 +3014,7 @@ Private Sub PonerCamposFacturarAlbaran()
     BotonPedirDatos
     
     Text1(1).Text = Format(Now, "dd/mm/yyyy")
-    Text1(3).Text = Codprove
+    Text1(3).Text = CodProve
     Text2(3).Text = PonerDatosProveedor
        
     'Datos Albaranes

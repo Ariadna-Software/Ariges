@@ -498,7 +498,7 @@ End Sub
 
 Private Sub BotonModificar()
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
 
     If adodc1.Recordset.EOF Then Exit Sub
     If adodc1.Recordset.RecordCount < 1 Then Exit Sub
@@ -506,8 +506,8 @@ Dim I As Integer
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -535,7 +535,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim Aux As String
 On Error GoTo Error2
     
@@ -545,11 +545,11 @@ On Error GoTo Error2
     
     'Comprobare que en sdirec, y sdireenvio NO existe el cozona
     Aux = ""
-    SQL = DevuelveDesdeBD(conAri, "count(*)", "sdirec", "codzona", CStr(adodc1.Recordset!codzonas))
-    If SQL = "" Then SQL = "0"
-    If Val(SQL) > 0 Then Aux = vbCrLf & "- Departamentos/Obras: " & SQL
-    SQL = DevuelveDesdeBD(conAri, "count(*)", "sdirenvio", "codzona", CStr(adodc1.Recordset!codzonas))
-    If Val(SQL) > 0 Then Aux = Aux & vbCrLf & "- Direcciones de envio: " & SQL
+    Sql = DevuelveDesdeBD(conAri, "count(*)", "sdirec", "codzona", CStr(adodc1.Recordset!codzonas))
+    If Sql = "" Then Sql = "0"
+    If Val(Sql) > 0 Then Aux = vbCrLf & "- Departamentos/Obras: " & Sql
+    Sql = DevuelveDesdeBD(conAri, "count(*)", "sdirenvio", "codzona", CStr(adodc1.Recordset!codzonas))
+    If Val(Sql) > 0 Then Aux = Aux & vbCrLf & "- Direcciones de envio: " & Sql
     If Aux <> "" Then
         Aux = "Existen registros relacionados:" & Aux
         MsgBox Aux, vbExclamation
@@ -557,18 +557,18 @@ On Error GoTo Error2
     End If
     
     '### a mano
-    SQL = "¿Seguro que desea eliminar la Zona de Cliente? " & vbCrLf
-    SQL = SQL & vbCrLf & "Código: " & Format(adodc1.Recordset.Fields(0), FormatoCod)
-    SQL = SQL & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    Sql = "¿Seguro que desea eliminar la Zona de Cliente? " & vbCrLf
+    Sql = Sql & vbCrLf & "Código: " & Format(adodc1.Recordset.Fields(0), FormatoCod)
+    Sql = Sql & vbCrLf & "Denominación: " & adodc1.Recordset.Fields(1)
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Me.adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from szonas where codzonas=" & adodc1.Recordset!codzonas
-        conn.Execute SQL
+        Sql = "Delete from szonas where codzonas=" & adodc1.Recordset!codzonas
+        conn.Execute Sql
         CancelaADODC Me.adodc1
         CargaGrid ""
         CancelaADODC Me.adodc1
-        SituarDataPosicion Me.adodc1, NumRegElim, SQL
+        SituarDataPosicion Me.adodc1, NumRegElim, Sql
     End If
 Error2:
     Screen.MousePointer = vbDefault
@@ -577,7 +577,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim I As Integer
+Dim i As Integer
 Dim cadB As String
 On Error GoTo EAceptar
 
@@ -593,11 +593,11 @@ On Error GoTo EAceptar
             If DatosOk And BLOQUEADesdeFormulario(Me) Then
                  If ModificaDesdeFormulario(Me, 3) Then
                       TerminaBloquear
-                      I = adodc1.Recordset.Fields(0)
+                      i = adodc1.Recordset.Fields(0)
                       PonerModo 2
                       CancelaADODC Me.adodc1
                       CargaGrid
-                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                      adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                   End If
 '                  adodc1.Recordset.MoveFirst
                   DataGrid1.SetFocus
@@ -694,6 +694,10 @@ Private Sub Form_Load()
     'Cadena consulta
     CadenaConsulta = "Select * from szonas"
     CargaGrid
+    
+    
+    If vParamAplic.NumeroInstalacion = vbTaxco Then Caption = "M O D U L O S"
+    
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -739,23 +743,25 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 
-Private Sub CargaGrid(Optional SQL As String)
+Private Sub CargaGrid(Optional Sql As String)
 Dim B As Boolean
 Dim tots As String
 
     B = DataGrid1.Enabled
 
-    If SQL <> "" Then
-        SQL = CadenaConsulta & " WHERE " & SQL
+    If Sql <> "" Then
+        Sql = CadenaConsulta & " WHERE " & Sql
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY codzonas"
+    Sql = Sql & " ORDER BY codzonas"
 
-    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.adodc1, Sql, False
     
     '### a mano
-    tots = "S|txtAux(0)|T|Zonas|1000|;S|txtAux(1)|T|Denominación|4630|;"
+    tots = IIf(vParamAplic.NumeroInstalacion = vbTaxco, "Modulos", "Zonas")
+    'tots = "S|txtAux(0)|T|Zonas|1000|;S|txtAux(1)|T|Denominación|4630|;"
+    tots = "S|txtAux(0)|T|" & tots & "|1000|;S|txtAux(1)|T|Denominación|4630|;"
     arregla tots, DataGrid1, Me, 350
     
     DataGrid1.Enabled = B

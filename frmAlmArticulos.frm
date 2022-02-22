@@ -4505,7 +4505,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 
 
 
@@ -4530,22 +4530,22 @@ Dim SQL As String
 
     
     BuscaChekc = lblIndicador.Caption
-    SQL = SePuedeEliminarArticulo(CStr(Data1.Recordset!codArtic), lblIndicador)
+    Sql = SePuedeEliminarArticulo(CStr(Data1.Recordset!codArtic), lblIndicador)
     lblIndicador.Caption = BuscaChekc
     BuscaChekc = ""
-    If SQL <> "" Then
-        SQL = "No se puede eliminar el articulo: " & Data1.Recordset!codArtic & vbCrLf & vbCrLf & SQL
-        MsgBox SQL, vbExclamation
+    If Sql <> "" Then
+        Sql = "No se puede eliminar el articulo: " & Data1.Recordset!codArtic & vbCrLf & vbCrLf & Sql
+        MsgBox Sql, vbExclamation
         Exit Sub
     End If
-    SQL = "Cabecera de Artículos." & vbCrLf
-    SQL = SQL & "---------------------------        " & vbCrLf & vbCrLf
-    SQL = SQL & "Va a eliminar el Artículo:"
-    SQL = SQL & vbCrLf & "Cod. Artic. :   " & Data1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción :   " & Data1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
+    Sql = "Cabecera de Artículos." & vbCrLf
+    Sql = Sql & "---------------------------        " & vbCrLf & vbCrLf
+    Sql = Sql & "Va a eliminar el Artículo:"
+    Sql = Sql & vbCrLf & "Cod. Artic. :   " & Data1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción :   " & Data1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         TerminaBloquear
@@ -4622,22 +4622,22 @@ End Sub
 
 
 Private Sub BotonEliminarConjunto()
-Dim SQL As String
+Dim Sql As String
     On Error GoTo Error2
     
     'Ciertas comprobaciones
     If Data2.Recordset.EOF Then Exit Sub
     
-    SQL = "Seguro que desea eliminar el Componente de Conjunto:"
-    SQL = SQL & vbCrLf & "Código: " & Data2.Recordset!codarti1
-    SQL = SQL & vbCrLf & "Descripción: " & Data2.Recordset.Fields(3)
+    Sql = "Seguro que desea eliminar el Componente de Conjunto:"
+    Sql = Sql & vbCrLf & "Código: " & Data2.Recordset!codarti1
+    Sql = Sql & vbCrLf & "Descripción: " & Data2.Recordset.Fields(3)
     
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from sarti1 where codartic=" & DBSet(Data2.Recordset!codArtic, "T")
-        SQL = SQL & " and numlinea=" & Data2.Recordset!numlinea
-        SQL = SQL & " and codarti1=" & DBSet(Data2.Recordset!codarti1, "T")
-        conn.Execute SQL
+        Sql = "Delete from sarti1 where codartic=" & DBSet(Data2.Recordset!codArtic, "T")
+        Sql = Sql & " and numlinea=" & Data2.Recordset!numlinea
+        Sql = Sql & " and codarti1=" & DBSet(Data2.Recordset!codarti1, "T")
+        conn.Execute Sql
         CancelaADODC Me.Data2
         CargaGrid Me.DataGrid1, Me.Data2, True
         CancelaADODC Me.Data2
@@ -4650,31 +4650,31 @@ End Sub
 
 
 Private Sub BotonEliminarInstalacion()
-Dim SQL As String
+Dim Sql As String
     On Error GoTo Error2
 
     'Ciertas comprobaciones
     If Data3.Recordset.EOF Then Exit Sub
     
     If vParamAplic.NumeroInstalacion = vbFontenas Then
-        SQL = "Seguro que desea eliminar el registro:"
-        SQL = SQL & vbCrLf & "Ensayo: " & Data3.Recordset!ensayo
-        SQL = SQL & vbCrLf & "Especificación: " & Data3.Recordset!especificaciones
+        Sql = "Seguro que desea eliminar el registro:"
+        Sql = Sql & vbCrLf & "Ensayo: " & Data3.Recordset!ensayo
+        Sql = Sql & vbCrLf & "Especificación: " & Data3.Recordset!especificaciones
     Else
-        SQL = "Seguro que desea eliminar el control de instalación:"
-        SQL = SQL & vbCrLf & "Linea: " & Data3.Recordset!numlinea
-        SQL = SQL & vbCrLf & "Descripción: " & Data3.Recordset!licontro
+        Sql = "Seguro que desea eliminar el control de instalación:"
+        Sql = Sql & vbCrLf & "Linea: " & Data3.Recordset!numlinea
+        Sql = Sql & vbCrLf & "Descripción: " & Data3.Recordset!licontro
     End If
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         If vParamAplic.NumeroInstalacion = vbFontenas Then
-            SQL = "Delete from sarti7 where codartic=" & DBSet(Data1.Recordset!codArtic, "T")
-            SQL = SQL & " and codigoensayo=" & Data3.Recordset!numlinea
+            Sql = "Delete from sarti7 where codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+            Sql = Sql & " and codigoensayo=" & Data3.Recordset!numlinea
         Else
-            SQL = "Delete from sarti2 where codartic=" & DBSet(Data3.Recordset!codArtic, "T")
-            SQL = SQL & " and numlinea=" & Data3.Recordset!numlinea
+            Sql = "Delete from sarti2 where codartic=" & DBSet(Data3.Recordset!codArtic, "T")
+            Sql = Sql & " and numlinea=" & Data3.Recordset!numlinea
         End If
-        conn.Execute SQL
+        conn.Execute Sql
         CancelaADODC Me.Data3
         CargaGrid Me.DataGrid2, Me.Data3, True
         CancelaADODC Me.Data3
@@ -4688,21 +4688,21 @@ End Sub
 
 
 Private Sub BotonEliminarMateriaActiva()
-Dim SQL As String
+Dim Sql As String
     On Error GoTo Error2
 
     'Ciertas comprobaciones
     If data6.Recordset.EOF Then Exit Sub
     
-    SQL = "Seguro que desea eliminar la materia activa:"
-    SQL = SQL & vbCrLf & "Linea: " & data6.Recordset!codigoma
-    SQL = SQL & vbCrLf & "Descripción: " & data6.Recordset!nombrema
+    Sql = "Seguro que desea eliminar la materia activa:"
+    Sql = Sql & vbCrLf & "Linea: " & data6.Recordset!codigoma
+    Sql = Sql & vbCrLf & "Descripción: " & data6.Recordset!nombrema
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from sarti5 where codartic=" & DBSet(Data1.Recordset!codArtic, "T")
-        SQL = SQL & " and Codigoma=" & data6.Recordset!codigoma
-        conn.Execute SQL
+        Sql = "Delete from sarti5 where codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+        Sql = Sql & " and Codigoma=" & data6.Recordset!codigoma
+        conn.Execute Sql
         CancelaADODC Me.data5
         CargaGrid Me.DataGrid5, Me.data6, True
         'DataGrid5, data6, enlaza
@@ -4718,21 +4718,21 @@ End Sub
 
 '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN
 Private Sub BotonEliminarCodigosEAN()
-Dim SQL As String
+Dim Sql As String
     On Error GoTo ErrElimEAN
 
     'Ciertas comprobaciones
     If data5.Recordset.EOF Then Exit Sub
     
-    SQL = "Seguro que desea eliminar el codigo EAN:"
-    SQL = SQL & vbCrLf & "Linea: " & data5.Recordset!numlinea
-    SQL = SQL & vbCrLf & "Cod. EAN: " & data5.Recordset!codigoea
+    Sql = "Seguro que desea eliminar el codigo EAN:"
+    Sql = Sql & vbCrLf & "Linea: " & data5.Recordset!numlinea
+    Sql = Sql & vbCrLf & "Cod. EAN: " & data5.Recordset!codigoea
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from sarti3 where codartic=" & DBSet(data5.Recordset!codArtic, "T")
-        SQL = SQL & " and numlinea=" & data5.Recordset!numlinea
-        conn.Execute SQL
+        Sql = "Delete from sarti3 where codartic=" & DBSet(data5.Recordset!codArtic, "T")
+        Sql = Sql & " and numlinea=" & data5.Recordset!numlinea
+        conn.Execute Sql
         CancelaADODC Me.data5
         CargaGrid Me.DataGrid4, Me.data5, True
         CancelaADODC Me.data5
@@ -4746,26 +4746,26 @@ End Sub
 '----
 
 Private Sub BotonEliminarEquivalencia()
-Dim SQL As String
+Dim Sql As String
     On Error GoTo Error2
 
     'Ciertas comprobaciones
     If data7.Recordset.EOF Then Exit Sub
     
-    SQL = "Seguro que desea eliminar la equivalencia con el"
-    SQL = SQL & vbCrLf & "Articulo: " & data7.Recordset!codarti1
-    SQL = SQL & vbCrLf & "Descripción: " & Trim(data7.Recordset!NomArtic)
+    Sql = "Seguro que desea eliminar la equivalencia con el"
+    Sql = Sql & vbCrLf & "Articulo: " & data7.Recordset!codarti1
+    Sql = Sql & vbCrLf & "Descripción: " & Trim(data7.Recordset!NomArtic)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        SQL = "Delete from sarti6 where codartic=" & DBSet(Data1.Recordset!codArtic, "T")
-        SQL = SQL & " and codArti1=" & DBSet(data7.Recordset!codarti1, "T")
-        conn.Execute SQL
+        Sql = "Delete from sarti6 where codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+        Sql = Sql & " and codArti1=" & DBSet(data7.Recordset!codarti1, "T")
+        conn.Execute Sql
         
         'Borramos la "viceversa"
-        SQL = "Delete from sarti6 where codartic=" & DBSet(data7.Recordset!codarti1, "T")
-        SQL = SQL & " and codArti1=" & DBSet(Data1.Recordset!codArtic, "T")
-        conn.Execute SQL
+        Sql = "Delete from sarti6 where codartic=" & DBSet(data7.Recordset!codarti1, "T")
+        Sql = Sql & " and codArti1=" & DBSet(Data1.Recordset!codArtic, "T")
+        conn.Execute Sql
         
         CancelaADODC Me.data7
         CargaGrid Me.DataGrid6, Me.data7, True
@@ -5239,30 +5239,30 @@ Private Sub Form_Load()
     Me.Toolbar1.Buttons(14).visible = vParamAplic.Ariagro <> ""
 
     cboADV.visible = vParamAplic.NumeroInstalacion = 1
-    Label1(41).visible = vParamAplic.NumeroInstalacion = 1
+    label1(41).visible = vParamAplic.NumeroInstalacion = 1
     'Documentos articulo. Cantidad reservada. En los que tienen produccion
     If vParamAplic.Produccion Then Label4(0).Caption = "En produccion"
     
     If vParamAplic.NumeroInstalacion = 2 Then
         'HERBELCA
         cboTipoComiArtVario.visible = True
-        Label1(44).visible = True
+        label1(44).visible = True
         CargarComboComisionArticulosVarios
         
-        Label1(20).Caption = "Ud. embalaje grande"
-        Label1(42).Caption = "Ud. embalaje pequeña"
+        label1(20).Caption = "Ud. embalaje grande"
+        label1(42).Caption = "Ud. embalaje pequeña"
         
     Else
         'Resto
-        Label1(20).Caption = "Unidades caja"
+        label1(20).Caption = "Unidades caja"
         
         If vParamAplic.ManipuladorFitosanitarios2 Then
-            Label1(42).Caption = "Capacidad"
+            label1(42).Caption = "Capacidad"
         Else
-            Label1(42).Caption = "Ud embalaje"
+            label1(42).Caption = "Ud embalaje"
         End If
         cboTipoComiArtVario.visible = False
-        Label1(44).visible = False
+        label1(44).visible = False
     End If
     CargarComboTipoUnidadesCompra
     cboUnidadCompra.visible = True
@@ -5280,8 +5280,8 @@ Private Sub Form_Load()
     If InstalacionEsEulerTaxco Then
         'En EULER, ni codprove, ni refereprov SE VEN
         'Pero se insertan etc etc, por lo tanto los pongo "lejos" y en el zorder los paso al final
-        Label1(5).visible = False
-        Label1(38).visible = False
+        label1(5).visible = False
+        label1(38).visible = False
         imgCuentas(0).visible = False
         Text2(0).visible = False
         'Los txt no puedo ocultarlos
@@ -5372,9 +5372,9 @@ Private Sub Form_Load()
     '-- Descriptores especiales y botón de composición (Rafa VRS 4.0.9)
     If vParamAplic.Descriptores Then
         'cmdGenerar.visible = True  estara en poner modo
-        Label1(6) = "Cod. Categoria"
-        Label1(9) = "Cod. Modelo"
-        Label1(17) = "Cod. Formato"
+        label1(6) = "Cod. Categoria"
+        label1(9) = "Cod. Modelo"
+        label1(17) = "Cod. Formato"
         '-- Aqui cambiamos los tag para evitar lios.
         CambiaTagDescriptores Text1(3), "Cod. Categoria"
         CambiaTagDescriptores Text1(5), "Cod. Formato"
@@ -5706,7 +5706,7 @@ End Sub
 
 Private Sub lw1_DblClick()
 Dim Seleccionado As Long
-Dim SQL As String
+Dim Sql As String
     If Modo <> 2 Then Exit Sub
     If lw1.ListItems.Count = 0 Then Exit Sub
     If lw1.SelectedItem Is Nothing Then Exit Sub
@@ -6326,13 +6326,13 @@ End Sub
 
 Private Sub PonerSumaStocks()
 Dim rst As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
     
-    SQL = DevuelveDesdeBDNew(conAri, "salmac", "codartic", "codartic", Text1(0).Text, "T")
-    If SQL <> "" Then
-        SQL = "select sum(canstock) from salmac where codartic=" & DBSet(Text1(0).Text, "T")
+    Sql = DevuelveDesdeBDNew(conAri, "salmac", "codartic", "codartic", Text1(0).Text, "T")
+    If Sql <> "" Then
+        Sql = "select sum(canstock) from salmac where codartic=" & DBSet(Text1(0).Text, "T")
         Set rst = New ADODB.Recordset
-        rst.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        rst.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not rst.EOF Then
             Me.txtSumaStock.Text = rst.Fields(0).Value
         End If
@@ -6486,7 +6486,8 @@ Dim NumReg As Byte
     If vParamAplic.NumeroInstalacion = 2 Then
         If vUsu.CodigoAgente > 0 Then B = False
     End If
-    Me.FrameDatosAlmacen2.visible = B
+    'Febrero 2022
+    'Me.FrameDatosAlmacen2.visible = B
         
     B = (Modo = 1 Or Modo = 3 Or Modo = 4) '1:Busqueda, 3:Insertar, 4:Modificar
     cboArticuloVarios.Enabled = B
@@ -7332,7 +7333,7 @@ End Function
    
 Private Function InsertarPreciosPorTarifa2(Optional cadErr As String) As Boolean
 'Insertar en la lista de precios las tarifas para el articulo
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim cTar As CTarifaArt
 Dim NoOK As Boolean
@@ -7364,20 +7365,20 @@ Dim Cad As String
     If vParamAplic.CreaTarifasArticulo = 2 Then 'crear todas las tarifas
     '----
     
-        SQL = "SELECT * FROM starif WHERE NOT ISNULL(margecom) "
+        Sql = "SELECT * FROM starif WHERE NOT ISNULL(margecom) "
         
     '---- [14/09/2009] LAURA
     Else 'crear solo la tarifa general
         Cad = DevuelveDesdeBD(conAri, "min(codlista)", "starif", "1", "1")
         If Cad = "" Then Cad = "0"
-        SQL = "SELECT * FROM starif WHERE NOT ISNULL(margecom) and codlista = " & Val(Cad)
+        Sql = "SELECT * FROM starif WHERE NOT ISNULL(margecom) and codlista = " & Val(Cad)
 
     
     End If
     '----
         
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa insertar un linea en la tabla de lista de precios
     'por cada codartic,codtarif
@@ -7613,7 +7614,7 @@ End Function
                     '                   2. LOS DOS
 Private Function ActualizarPreciosPorTarifaDOS(PVP As Byte, Optional cadErr As String) As Boolean
 'Actualiza en la lista de precios las tarifas para el articulo
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim cTar As CTarifaArt
 Dim NoOK As Boolean
@@ -7630,9 +7631,9 @@ Dim newPrecio As Currency
     
     '-- comprobar que para ese articulo en la tabla de tarifas no haya ningun registros
     '   con valor en el campo precio_nuevo
-    SQL = "SELECT COUNT(*) FROM slista WHERE codartic=" & DBSet(Text1(0).Text, "T")
-    SQL = SQL & " AND not isnull(precionu) and precionu>0"
-    If RegistrosAListar(SQL) > 0 Then
+    Sql = "SELECT COUNT(*) FROM slista WHERE codartic=" & DBSet(Text1(0).Text, "T")
+    Sql = Sql & " AND not isnull(precionu) and precionu>0"
+    If RegistrosAListar(Sql) > 0 Then
         MsgBox "No se pueden actualizar las tarifas del artículo." & vbCrLf & "Tiene precios nuevos.", vbExclamation
         Exit Function
     End If
@@ -7647,14 +7648,14 @@ Dim newPrecio As Currency
     
     
     '-- seleccionar todas las posibles tarifas
-    SQL = "SELECT * FROM starif WHERE NOT ISNULL(margecom) "
+    Sql = "SELECT * FROM starif WHERE NOT ISNULL(margecom) "
     If PVP < 2 Then
         'Sera de uno de los tipos
-        SQL = SQL & " AND opcionINC = " & CStr(PVP)
+        Sql = Sql & " AND opcionINC = " & CStr(PVP)
     End If
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa actualizar la linea en la tabla de lista de precios
     'por cada codartic,codtarif
@@ -7723,29 +7724,29 @@ End Function
     
 Private Function InsertarModificarLinea() As Boolean
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarModificarLinea
 
     InsertarModificarLinea = False
-    SQL = ""
+    Sql = ""
     Select Case ModificaLineas
     Case 1  'INSERTAR
         If DatosOkLinea Then 'INSERTAR
-            SQL = "INSERT INTO salmac (codartic,codalmac,ubialmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin) VALUES ("
+            Sql = "INSERT INTO salmac (codartic,codalmac,ubialmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin) VALUES ("
             
-            SQL = SQL & DBSet(Text1(0).Text, "T") & ", "
-            SQL = SQL & Text3(0).Text & ", "
-            SQL = SQL & DBSet(Text3(1).Text, "T") & ", "
+            Sql = Sql & DBSet(Text1(0).Text, "T") & ", "
+            Sql = Sql & Text3(0).Text & ", "
+            Sql = Sql & DBSet(Text3(1).Text, "T") & ", "
             
             'Campos Stocks (Son Decimales)
-            SQL = SQL & DBSet(Text3(2).Text, "N", "N") & ", "
+            Sql = Sql & DBSet(Text3(2).Text, "N", "N") & ", "
             For i = 3 To 6
-                SQL = SQL & DBSet(Text3(i).Text, "N", "S") & ", "
+                Sql = Sql & DBSet(Text3(i).Text, "N", "S") & ", "
             Next i
         
             'Campo Fecha
-            SQL = SQL & DBSet(Text3(7).Text, "F", "S") & ", "
+            Sql = Sql & DBSet(Text3(7).Text, "F", "S") & ", "
 '            If Trim(Text3(7).Text) <> "" Then
 '              SQL = SQL & DBSet(Text3(7).Text, "F") & ", "
 '            Else
@@ -7753,22 +7754,22 @@ Dim SQL As String
 '            End If
         
             If Trim(Text3(8).Text) <> "" Then     'Campo Hora
-              SQL = SQL & Format(Text3(8).Text, "hh:mm:ss") & ", "
+              Sql = Sql & Format(Text3(8).Text, "hh:mm:ss") & ", "
             Else
-              SQL = SQL & "NULL, "
+              Sql = Sql & "NULL, "
             End If
         
-            SQL = SQL & chkInventario.Value & ")"
+            Sql = Sql & chkInventario.Value & ")"
         End If
         
     Case 2  'MODIFICAR
         If DatosOkLinea Then
-            SQL = "UPDATE salmac Set ubialmac = " & DBSet(Text3(1).Text, "T") & ", "
-            SQL = SQL & " canstock = " & DBSet(Text3(2).Text, "N") & ", "
-            SQL = SQL & " stockmin = " & DBSet(Text3(3).Text, "N", "S") & ", "
-            SQL = SQL & " puntoped = " & DBSet(Text3(4).Text, "N", "S") & ", "
-            SQL = SQL & " stockmax = " & DBSet(Text3(5).Text, "N", "S") & ", "
-            SQL = SQL & " stockinv = " & DBSet(Text3(6).Text, "N", "S")
+            Sql = "UPDATE salmac Set ubialmac = " & DBSet(Text3(1).Text, "T") & ", "
+            Sql = Sql & " canstock = " & DBSet(Text3(2).Text, "N") & ", "
+            Sql = Sql & " stockmin = " & DBSet(Text3(3).Text, "N", "S") & ", "
+            Sql = Sql & " puntoped = " & DBSet(Text3(4).Text, "N", "S") & ", "
+            Sql = Sql & " stockmax = " & DBSet(Text3(5).Text, "N", "S") & ", "
+            Sql = Sql & " stockinv = " & DBSet(Text3(6).Text, "N", "S")
     '        If Trim(Text3(7).Text) <> "" Then
     '            SQL = SQL & ", fechainv = " & DBSet(Text3(7).Text, "F", "S")
     '            If Trim(Text3(8).Text) <> "" Then
@@ -7778,14 +7779,14 @@ Dim SQL As String
     '            End If
     '        End If
     '        SQL = SQL & ", statusin = " & (chkInventario.Value)
-            SQL = SQL & " WHERE codartic = " & DBSet(Text1(0).Text, "T") & " AND "
-            SQL = SQL & " codalmac =" & Val(Text3(0).Text)
+            Sql = Sql & " WHERE codartic = " & DBSet(Text1(0).Text, "T") & " AND "
+            Sql = Sql & " codalmac =" & Val(Text3(0).Text)
             
         End If
     End Select
         
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarLinea = True
     Else
         PonerFoco Text3(1)
@@ -7832,41 +7833,41 @@ End Function
     
 
 Public Function InsertarModificarConjunto() As Boolean
-Dim SQL As String
+Dim Sql As String
 On Error GoTo EInsertarModificarLinea
 
-    SQL = ""
+    Sql = ""
     InsertarModificarConjunto = False
     
     If DatosOkConjunto Then
         Select Case ModificaLineas
         Case 1 'Insertar
                 If IntercalaComponente Then
-                    SQL = "UPDATE sarti1 SET numlinea=numlinea +1 "
-                    SQL = SQL & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
-                    SQL = SQL & " numlinea >=" & cmdAceptar.Tag & " ORDER BY numlinea desc"
-                    conn.Execute SQL
+                    Sql = "UPDATE sarti1 SET numlinea=numlinea +1 "
+                    Sql = Sql & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
+                    Sql = Sql & " numlinea >=" & cmdAceptar.Tag & " ORDER BY numlinea desc"
+                    conn.Execute Sql
                     Espera 0.5
                 End If
         
         
         
-                SQL = "INSERT INTO sarti1 VALUES ("
-                SQL = SQL & DBSet(Text1(0).Text, "T") & ", "
-                SQL = SQL & cmdAceptar.Tag & ", "
-                SQL = SQL & DBSet(txtAux(0).Text, "T") & ", "
-                SQL = SQL & DBSet(txtAux(1).Text, "N") & ") "
+                Sql = "INSERT INTO sarti1 VALUES ("
+                Sql = Sql & DBSet(Text1(0).Text, "T") & ", "
+                Sql = Sql & cmdAceptar.Tag & ", "
+                Sql = Sql & DBSet(txtAux(0).Text, "T") & ", "
+                Sql = Sql & DBSet(txtAux(1).Text, "N") & ") "
         Case 2 'Modificar
       
-                SQL = "UPDATE sarti1 Set codarti1 = " & DBSet(txtAux(0).Text, "T")
-                SQL = SQL & ", cantidad = " & DBSet(txtAux(1).Text, "N")
-                SQL = SQL & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
-                SQL = SQL & " numlinea =" & cmdAceptar.Tag
+                Sql = "UPDATE sarti1 Set codarti1 = " & DBSet(txtAux(0).Text, "T")
+                Sql = Sql & ", cantidad = " & DBSet(txtAux(1).Text, "N")
+                Sql = Sql & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
+                Sql = Sql & " numlinea =" & cmdAceptar.Tag
         End Select
     End If
     
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarConjunto = True
         txtAux2.BackColor = &H80000005
         IntercalaComponente = False
@@ -7879,7 +7880,7 @@ End Function
 
 
 Public Function InsertarModificarInstalacion() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Valor As String
 
 On Error GoTo EInsertarModificarInstalacion
@@ -7888,35 +7889,35 @@ On Error GoTo EInsertarModificarInstalacion
     
     If vParamAplic.NumeroInstalacion = vbFontenas Then
         'CALIDAD
-        SQL = ""
+        Sql = ""
         'INSERTAR
-        If ModificaLineas = 1 And cboCalidad.ListIndex < 0 Then SQL = "- Seleccione ensayo"
-        If Trim(txtAux(9).Text) = "" Then SQL = SQL & vbCrLf & "-indique especificación"
-        If Trim(txtAux(10).Text) = "" Xor Trim(txtAux(11).Text) = "" Then SQL = SQL & vbCrLf & "-maximo/minimo. Los dos o ninguno"
-        If SQL <> "" Then
-            MsgBox "Error: " & vbCrLf & SQL, vbExclamation
+        If ModificaLineas = 1 And cboCalidad.ListIndex < 0 Then Sql = "- Seleccione ensayo"
+        If Trim(txtAux(9).Text) = "" Then Sql = Sql & vbCrLf & "-indique especificación"
+        If Trim(txtAux(10).Text) = "" Xor Trim(txtAux(11).Text) = "" Then Sql = Sql & vbCrLf & "-maximo/minimo. Los dos o ninguno"
+        If Sql <> "" Then
+            MsgBox "Error: " & vbCrLf & Sql, vbExclamation
             Exit Function
         End If
     
         If ModificaLineas = 1 Then 'INSERTAR
             'Que no exista
-            SQL = "codigoensayo =" & cboCalidad.ItemData(cboCalidad.ListIndex) & " AND codartic"
-            SQL = DevuelveDesdeBD(conAri, "codigoensayo", "sarti7", SQL, Data1.Recordset!codArtic, "T")
-            If SQL <> "" Then
+            Sql = "codigoensayo =" & cboCalidad.ItemData(cboCalidad.ListIndex) & " AND codartic"
+            Sql = DevuelveDesdeBD(conAri, "codigoensayo", "sarti7", Sql, Data1.Recordset!codArtic, "T")
+            If Sql <> "" Then
                 MsgBox "Ya existe el ensayo " & cboCalidad.List(cboCalidad.ListIndex), vbExclamation
                 Exit Function
             End If
         End If
-        SQL = "REPLACE INTO sarti7(codartic,codigoensayo,especificaciones ,mini,maxi) VALUES ("
-        SQL = SQL & DBSet(Text1(0).Text, "T") & ","
+        Sql = "REPLACE INTO sarti7(codartic,codigoensayo,especificaciones ,mini,maxi) VALUES ("
+        Sql = Sql & DBSet(Text1(0).Text, "T") & ","
         If ModificaLineas = 1 Then
             'INSERTAR
-            SQL = SQL & cboCalidad.ItemData(cboCalidad.ListIndex)
+            Sql = Sql & cboCalidad.ItemData(cboCalidad.ListIndex)
         Else
             'Modificar
-            SQL = SQL & Data3.Recordset!numlinea
+            Sql = Sql & Data3.Recordset!numlinea
         End If
-        SQL = SQL & "," & DBSet(txtAux(9).Text, "T") & "," & DBSet(txtAux(10).Text, "N", "S") & "," & DBSet(txtAux(11).Text, "N", "S") & ")"
+        Sql = Sql & "," & DBSet(txtAux(9).Text, "T") & "," & DBSet(txtAux(10).Text, "N", "S") & "," & DBSet(txtAux(11).Text, "N", "S") & ")"
     
     Else
         'INSTALACION
@@ -7924,14 +7925,14 @@ On Error GoTo EInsertarModificarInstalacion
         If Valor = "" Then Valor = " "
         
         If ModificaLineas = 1 Then 'INSERTAR
-            SQL = "INSERT INTO sarti2 VALUES ("
-            SQL = SQL & DBSet(Text1(0).Text, "T") & ", "
-            SQL = SQL & cmdAceptar.Tag & ", "
-            SQL = SQL & DBSet(Valor, "T") & ") "
+            Sql = "INSERT INTO sarti2 VALUES ("
+            Sql = Sql & DBSet(Text1(0).Text, "T") & ", "
+            Sql = Sql & cmdAceptar.Tag & ", "
+            Sql = Sql & DBSet(Valor, "T") & ") "
         ElseIf ModificaLineas = 2 Then 'MODIFICAR
-            SQL = "UPDATE sarti2 Set licontro = " & DBSet(Valor, "T")
-            SQL = SQL & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
-            SQL = SQL & " numlinea =" & cmdAceptar.Tag
+            Sql = "UPDATE sarti2 Set licontro = " & DBSet(Valor, "T")
+            Sql = Sql & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
+            Sql = Sql & " numlinea =" & cmdAceptar.Tag
         End If
     
     
@@ -7939,7 +7940,7 @@ On Error GoTo EInsertarModificarInstalacion
     
     
     
-    conn.Execute SQL
+    conn.Execute Sql
     InsertarModificarInstalacion = True
     Exit Function
 
@@ -7950,7 +7951,7 @@ End Function
 
 '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN
 Public Function InsertarModificarCodigosEAN() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Valor As String
 
     On Error GoTo ErrInsModEAN
@@ -7960,17 +7961,17 @@ Dim Valor As String
     If Valor = "" Then Valor = " "
     
     If ModificaLineas = 1 Then 'INSERTAR
-        SQL = "INSERT INTO sarti3 VALUES ("
-        SQL = SQL & DBSet(Text1(0).Text, "T") & ", "
-        SQL = SQL & cmdAceptar.Tag & ", "
-        SQL = SQL & DBSet(Valor, "T") & ") "
+        Sql = "INSERT INTO sarti3 VALUES ("
+        Sql = Sql & DBSet(Text1(0).Text, "T") & ", "
+        Sql = Sql & cmdAceptar.Tag & ", "
+        Sql = Sql & DBSet(Valor, "T") & ") "
     ElseIf ModificaLineas = 2 Then 'MODIFICAR
-        SQL = "UPDATE sarti3 Set codigoea = " & DBSet(Valor, "T")
-        SQL = SQL & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
-        SQL = SQL & " numlinea =" & cmdAceptar.Tag
+        Sql = "UPDATE sarti3 Set codigoea = " & DBSet(Valor, "T")
+        Sql = Sql & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
+        Sql = Sql & " numlinea =" & cmdAceptar.Tag
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     InsertarModificarCodigosEAN = True
     Exit Function
 
@@ -7981,7 +7982,7 @@ End Function
 
 '---- [19/12/2011] David Materias activas fitosnaitariios
 Public Function InsertarModificarMATACT() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Valor As String
 
     On Error GoTo ErrInsModEAN
@@ -7995,15 +7996,15 @@ Dim Valor As String
     
     If ModificaLineas = 1 Then 'INSERTAR
         cmdAceptar.Tag = Text5(0).Text
-        SQL = "INSERT INTO sarti5(codartic,codigoma) VALUES ("
-        SQL = SQL & DBSet(Text1(0).Text, "T") & "," & DBSet(Text5(0).Text, "N") & ") "
+        Sql = "INSERT INTO sarti5(codartic,codigoma) VALUES ("
+        Sql = Sql & DBSet(Text1(0).Text, "T") & "," & DBSet(Text5(0).Text, "N") & ") "
     ElseIf ModificaLineas = 2 Then 'MODIFICAR
         'SQL = "UPDATE sarti3 Set codigoea = " & DBSet(Valor, "T")
         'SQL = SQL & " WHERE codartic =" & DBSet(Text1(0).Text, "T") & " AND "
         'SQL = SQL & " numlinea =" & cmdAceptar.Tag
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     InsertarModificarMATACT = True
     Exit Function
 
@@ -8016,14 +8017,14 @@ End Function
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim tots As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECargaGrid
     
       
     If vDataGrid.Name = "DataGrid1" Then
-        SQL = MontaSQLCarga(enlaza, 2)
-        CargaGridGnral DataGrid1, Me.Data2, SQL, PrimeraVez
+        Sql = MontaSQLCarga(enlaza, 2)
+        CargaGridGnral DataGrid1, Me.Data2, Sql, PrimeraVez
         If vParamAplic.ComponentePorcentaje Then
             tots = "%"
         Else
@@ -8042,8 +8043,8 @@ Dim SQL As String
     ElseIf vDataGrid.Name = "DataGrid2" Then
         
         
-        SQL = MontaSQLCarga(enlaza, 3)
-        CargaGridGnral DataGrid2, Me.Data3, SQL, PrimeraVez
+        Sql = MontaSQLCarga(enlaza, 3)
+        CargaGridGnral DataGrid2, Me.Data3, Sql, PrimeraVez
         
         If vParamAplic.NumeroInstalacion = vbFontenas Then
             'FONTENAS   codigoensayo,ensayo,sarti7.especificaciones,mini,maxi
@@ -8057,8 +8058,8 @@ Dim SQL As String
         DataGrid2.ScrollBars = dbgAutomatic
         
     ElseIf vDataGrid.Name = "DataGrid3" Then
-        SQL = MontaSQLCarga(enlaza, 4)
-        CargaGridGnral DataGrid3, Me.data4, SQL, PrimeraVez
+        Sql = MontaSQLCarga(enlaza, 4)
+        CargaGridGnral DataGrid3, Me.data4, Sql, PrimeraVez
         tots = "S|Text3(0)|T|Cod.Alm|1200|;S|cmdAlma|B||0|;S|Text2(8)|T|Nombre Almacen|2400|;S|Text3(2)|T|Stock|1200|;"
         'Los campos que no se ven que van FUERA DEL GRID
         tots = tots & "N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;N||||0|;"
@@ -8067,24 +8068,24 @@ Dim SQL As String
  
     '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN
     ElseIf vDataGrid.Name = "DataGrid4" Then 'Lineas cod. EAN
-        SQL = MontaSQLCarga(enlaza, 5)
-        CargaGridGnral DataGrid4, Me.data5, SQL, PrimeraVez
+        Sql = MontaSQLCarga(enlaza, 5)
+        CargaGridGnral DataGrid4, Me.data5, Sql, PrimeraVez
         tots = "N||||0|;N||||0|;S|txtAux(8)|T|Cod. EAN|2100|;"
         arregla tots, DataGrid4, Me
         DataGrid4.ScrollBars = dbgAutomatic
         
         '19 Diciembre 2011.
     ElseIf vDataGrid.Name = "DataGrid5" Then 'Lineas cod. EAN
-        SQL = MontaSQLCarga(enlaza, 6)
-        CargaGridGnral DataGrid5, Me.data6, SQL, PrimeraVez
+        Sql = MontaSQLCarga(enlaza, 6)
+        CargaGridGnral DataGrid5, Me.data6, Sql, PrimeraVez
         tots = "S|Text5(0)|T|Codigo|1300|;S|cmdMatAux|B||0|;S|Text5(1)|T|Descripcion|3200|;"
         arregla tots, DataGrid5, Me
         DataGrid5.ScrollBars = dbgAutomatic
         
     '----
     ElseIf vDataGrid.Name = "DataGrid6" Then 'Lineas equivalencias
-        SQL = MontaSQLCarga(enlaza, 7)
-        CargaGridGnral DataGrid6, Me.data7, SQL, PrimeraVez
+        Sql = MontaSQLCarga(enlaza, 7)
+        CargaGridGnral DataGrid6, Me.data7, Sql, PrimeraVez
         tots = "S|Text6(0)|T|Articulo|1500|;S|cmdEquiv|B||0|;S|Text6(1)|T|Descripcion|4000|;"
         arregla tots, DataGrid6, Me
         DataGrid6.ScrollBars = dbgAutomatic
@@ -8110,7 +8111,7 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el Data
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 
     If Opcion = 2 Then
         'cadena SQL para cargar los CONJUNTOS de la tabla sarti1
@@ -8118,98 +8119,98 @@ Dim SQL As String
         'SQL = SQL & " FROM sarti1 INNER JOIN sartic ON sarti1.codarti1=sartic.codartic "
         
         
-        SQL = "SELECT sarti1.codartic, numlinea, sarti1.codarti1,sartic.nomartic,"
-        SQL = SQL & " sarti1.Cantidad , sartic.preciove, sartic.precioUC, slista.precioac,if (mateprima=1,""*"","" "") materiaprima, canstock"
-        SQL = SQL & " FROM   sarti1 INNER JOIN sartic ON"
-        SQL = SQL & " sarti1.codarti1 = sartic.codArtic"
+        Sql = "SELECT sarti1.codartic, numlinea, sarti1.codarti1,sartic.nomartic,"
+        Sql = Sql & " sarti1.Cantidad , sartic.preciove, sartic.precioUC, slista.precioac,if (mateprima=1,""*"","" "") materiaprima, canstock"
+        Sql = Sql & " FROM   sarti1 INNER JOIN sartic ON"
+        Sql = Sql & " sarti1.codarti1 = sartic.codArtic"
         
         'Dic 2013
         'Stock en el almacen ppal
-        SQL = SQL & " LEFT OUTER join salmac on sarti1.codarti1=salmac.codartic and codalmac=1"
+        Sql = Sql & " LEFT OUTER join salmac on sarti1.codarti1=salmac.codartic and codalmac=1"
         
-        SQL = SQL & " LEFT OUTER JOIN slista ON sarti1.codarti1=slista.codartic AND slista.codlista = " & vParamAplic.CodTarifa
-        SQL = SQL & " where sarti1.codartic="
+        Sql = Sql & " LEFT OUTER JOIN slista ON sarti1.codarti1=slista.codartic AND slista.codlista = " & vParamAplic.CodTarifa
+        Sql = Sql & " where sarti1.codartic="
         If enlaza Then
-            SQL = SQL & DBSet(Text1(0).Text, "T")
+            Sql = Sql & DBSet(Text1(0).Text, "T")
         Else
-            SQL = SQL & "'-1@#'"
+            Sql = Sql & "'-1@#'"
         End If
-        SQL = SQL & " ORDER BY sarti1.numlinea "
+        Sql = Sql & " ORDER BY sarti1.numlinea "
         
         
     ElseIf Opcion = 3 Then 'INSTALACIONES
     
         If vParamAplic.NumeroInstalacion = vbFontenas Then
-            SQL = "Select codigoensayo numlinea,ensayo,sarti7.especificaciones,mini,maxi from "
-            SQL = SQL & " sarti7,scalidad where scalidad.codigo=sarti7.codigoensayo"
-            SQL = SQL & " AND sarti7.codartic= "
+            Sql = "Select codigoensayo numlinea,ensayo,sarti7.especificaciones,mini,maxi from "
+            Sql = Sql & " sarti7,scalidad where scalidad.codigo=sarti7.codigoensayo"
+            Sql = Sql & " AND sarti7.codartic= "
             If enlaza Then
-                SQL = SQL & DBSet(Text1(0), "T")
+                Sql = Sql & DBSet(Text1(0), "T")
             Else
-                SQL = SQL & "'-1'"
+                Sql = Sql & "'-1'"
             End If
-            SQL = SQL & " ORDER BY ensayo"
+            Sql = Sql & " ORDER BY ensayo"
     
     
     
         Else
             'Lo que habia. Teinsa y demas
-            SQL = "SELECT sarti2.codartic, sarti2.numlinea, sarti2.licontro "
-            SQL = SQL & " FROM sarti2"
+            Sql = "SELECT sarti2.codartic, sarti2.numlinea, sarti2.licontro "
+            Sql = Sql & " FROM sarti2"
             If enlaza Then
-                SQL = SQL & " WHERE sarti2.codartic=" & DBSet(Text1(0), "T")
+                Sql = Sql & " WHERE sarti2.codartic=" & DBSet(Text1(0), "T")
             Else
-                SQL = SQL & " WHERE sarti2.codartic= '-1'"
+                Sql = Sql & " WHERE sarti2.codartic= '-1'"
             End If
-            SQL = SQL & " ORDER BY sarti2.numlinea"
+            Sql = Sql & " ORDER BY sarti2.numlinea"
     
         End If
     ElseIf Opcion = 4 Then 'STOCK
         
-        SQL = "select salmac.codalmac,nomalmac,canstock,ubialmac,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin  "
-        SQL = SQL & " from salmac,salmpr where salmac.codalmac=salmpr.codalmac AND "
+        Sql = "select salmac.codalmac,nomalmac,canstock,ubialmac,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin  "
+        Sql = Sql & " from salmac,salmpr where salmac.codalmac=salmpr.codalmac AND "
         If enlaza Then
-            SQL = SQL & " codartic=" & DBSet(Text1(0), "T")
+            Sql = Sql & " codartic=" & DBSet(Text1(0), "T")
         Else
-            SQL = SQL & " codartic= '-1'"
+            Sql = Sql & " codartic= '-1'"
         End If
     
     '---- [23/09/2009] LAURA : Añadir lineas de Cod. EAN
     ElseIf Opcion = 5 Then
-        SQL = "SELECT *"
-        SQL = SQL & " FROM sarti3"
+        Sql = "SELECT *"
+        Sql = Sql & " FROM sarti3"
         If enlaza Then
-            SQL = SQL & " WHERE sarti3.codartic=" & DBSet(Text1(0), "T")
+            Sql = Sql & " WHERE sarti3.codartic=" & DBSet(Text1(0), "T")
         Else
-            SQL = SQL & " WHERE sarti3.codartic= '-1'"
+            Sql = Sql & " WHERE sarti3.codartic= '-1'"
         End If
-        SQL = SQL & " ORDER BY sarti3.numlinea"
+        Sql = Sql & " ORDER BY sarti3.numlinea"
     '---- [19/12/2011] Materias activas
     ElseIf Opcion = 6 Then
-        SQL = "SELECT sarti5.codigoma,nombrema"
-        SQL = SQL & " FROM sarti5,smatact WHERE sarti5.codigoma=smatact.codigoma and sarti5.codartic="
+        Sql = "SELECT sarti5.codigoma,nombrema"
+        Sql = Sql & " FROM sarti5,smatact WHERE sarti5.codigoma=smatact.codigoma and sarti5.codartic="
         
         If enlaza Then
-            SQL = SQL & DBSet(Text1(0), "T")
+            Sql = Sql & DBSet(Text1(0), "T")
         Else
-            SQL = SQL & " '-1'"
+            Sql = Sql & " '-1'"
         End If
-        SQL = SQL & " ORDER BY sarti5.codigoma"
+        Sql = Sql & " ORDER BY sarti5.codigoma"
     '----
     
     '---- [24/02/2012] Equivalencias
     ElseIf Opcion = 7 Then
     
-        SQL = "select codarti1 ,nomartic "
-        SQL = SQL & " from sarti6,sartic where sartic.codartic=sarti6.codarti1 AND sarti6.codartic= "
+        Sql = "select codarti1 ,nomartic "
+        Sql = Sql & " from sarti6,sartic where sartic.codartic=sarti6.codarti1 AND sarti6.codartic= "
         If enlaza Then
-            SQL = SQL & DBSet(Text1(0), "T")
+            Sql = Sql & DBSet(Text1(0), "T")
         Else
-            SQL = SQL & "'-1'"
+            Sql = Sql & "'-1'"
         End If
     End If
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -9021,7 +9022,7 @@ End Function
 Private Sub DataGrid1EnSMOVAL()
 'Abrir el formulario del Mantenimiento del que viene el Movimiento
 'Se busca en histórico o en Form
-Dim SQL As String
+Dim Sql As String
     
     Select Case lw1.SelectedItem.SubItems(2)
         Case "TRA" 'traspaso de almacenes
@@ -9052,8 +9053,8 @@ Dim SQL As String
             'si esta ya facturado abrir el histórico de facturas: frmFacHcoFacturas
             
             'consultamos si existe el albaran en la tabla de albaranes: scaalb
-            SQL = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", lw1.SelectedItem.SubItems(2), "T", , "numalbar", lw1.SelectedItem.SubItems(4), "N")
-            If SQL <> "" Then 'existe el Albaran
+            Sql = DevuelveDesdeBDNew(conAri, "scaalb", "numalbar", "codtipom", lw1.SelectedItem.SubItems(2), "T", , "numalbar", lw1.SelectedItem.SubItems(4), "N")
+            If Sql <> "" Then 'existe el Albaran
                     'Abrira un frm u otro
                     If vParamAplic.TipoFormularioClientes = 0 Then
                          With frmFacEntAlbaranes2
@@ -9110,9 +9111,9 @@ Dim SQL As String
             'si esta ya facturado abrir el histórico de facturas: frmComHcoFacturas
             
             'consultamos si existe el albaran en la tabla de albaranes: scaalp
-            SQL = DevuelveDesdeBDNew(conAri, "scaalp", "numalbar", "codprove", lw1.SelectedItem.SubItems(6), "N", , "numalbar", lw1.SelectedItem.SubItems(4), "T", "fechaalb", lw1.SelectedItem.SubItems(1), "F")
+            Sql = DevuelveDesdeBDNew(conAri, "scaalp", "numalbar", "codprove", lw1.SelectedItem.SubItems(6), "N", , "numalbar", lw1.SelectedItem.SubItems(4), "T", "fechaalb", lw1.SelectedItem.SubItems(1), "F")
             
-            If SQL <> "" Then 'existe el Albaran
+            If Sql <> "" Then 'existe el Albaran
                 If vParamAplic.TipoFormularioClientes = 0 Then
                     With frmComEntAlbaranesGR
                         .hcoCodMovim = Trim(lw1.SelectedItem.SubItems(4))
@@ -9202,7 +9203,7 @@ End Sub
 
 
 Private Function InsertarModificarEQUIV() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Valor As String
 
     On Error GoTo ErrInsModEAN
@@ -9222,18 +9223,18 @@ Dim Valor As String
     
     If ModificaLineas = 1 Then 'INSERTAR
         cmdAceptar.Tag = Text6(0).Text
-        SQL = "INSERT INTO sarti6(codartic,codarti1) VALUES ("
-        SQL = SQL & DBSet(Text1(0).Text, "T") & "," & DBSet(Text6(0).Text, "T") & ") "
-        conn.Execute SQL
+        Sql = "INSERT INTO sarti6(codartic,codarti1) VALUES ("
+        Sql = Sql & DBSet(Text1(0).Text, "T") & "," & DBSet(Text6(0).Text, "T") & ") "
+        conn.Execute Sql
         
         'Y la "equivalente"
-        SQL = "INSERT IGNORE INTO sarti6(codartic,codarti1) VALUES ("
-        SQL = SQL & DBSet(Text6(0).Text, "T") & "," & DBSet(Text1(0).Text, "T") & ") "
+        Sql = "INSERT IGNORE INTO sarti6(codartic,codarti1) VALUES ("
+        Sql = Sql & DBSet(Text6(0).Text, "T") & "," & DBSet(Text1(0).Text, "T") & ") "
     ElseIf ModificaLineas = 2 Then 'MODIFICAR
   
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     InsertarModificarEQUIV = True
     Exit Function
 
