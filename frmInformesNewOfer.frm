@@ -279,7 +279,7 @@ Begin VB.Form frmInformesNewOfer
             Height          =   360
             ItemData        =   "frmInformesNewOfer.frx":2226
             Left            =   255
-            List            =   "frmInformesNewOfer.frx":2230
+            List            =   "frmInformesNewOfer.frx":2233
             Style           =   2  'Dropdown List
             TabIndex        =   77
             Top             =   3135
@@ -324,9 +324,9 @@ Begin VB.Form frmInformesNewOfer
                   Strikethrough   =   0   'False
                EndProperty
                Height          =   360
-               ItemData        =   "frmInformesNewOfer.frx":2251
+               ItemData        =   "frmInformesNewOfer.frx":225C
                Left            =   960
-               List            =   "frmInformesNewOfer.frx":2264
+               List            =   "frmInformesNewOfer.frx":226F
                Style           =   2  'Dropdown List
                TabIndex        =   74
                Top             =   120
@@ -1736,45 +1736,24 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Public OpcionListado As Integer
-'1.  Marcas
-'2.  Almacenes propios
-'3.  Tipos de Unidad
-'4.  Tipos de Artículo
-
-'6.  Listado de Articulos
-
-'7.  Traspaso Almacen
-'8.  Movimientos Almacen
-'9.  Informe de movimiento de articulos
-
-'23.  Categorias
-
-'58. Listado de proveedores
-
-'110.  Ubicaciones
-
-    '400:  Clientes potenciales.  Cartas
-    '401:                "       Etiquetas
-    '402        "               CRM
-
-Public NumCod As String 'Para indicar cod. Traspaso,Movimiento, etc. que llama
-                        'Para indicar nº oferta a imprimir
-
-Public CadTag As String 'Cadena con el Tag del campo que se va a poner en D/H en los listados
-                        'Se necesita si el tipo de codigo es texto
-Public EsHco As Boolean
+    '47.. Y UNICO   CLIENTES
     
-Private Conexion As Byte
-'1.- Conexión a BD Ariges  2.- Conexión a BD Conta
+
+'Public NumCod As String 'Para indicar cod. Traspaso,Movimiento, etc. que llama
+'                        'Para indicar nº oferta a imprimir
+'
+'Public CadTag As String 'Cadena con el Tag del campo que se va a poner en D/H en los listados
+'                        'Se necesita si el tipo de codigo es texto
+'Public EsHco As Boolean
+'
+'Private Conexion As Byte
+''1.- Conexión a BD Ariges  2.- Conexión a BD Conta
 
 Private HaDevueltoDatos As Boolean
 
-Private WithEvents frmMtoCartasOfe As frmFacCartasOferta
-Attribute frmMtoCartasOfe.VB_VarHelpID = -1
-Private WithEvents frmMtoCliente As frmBasico2
-Attribute frmMtoCliente.VB_VarHelpID = -1
-Private WithEvents frmMtoProve As frmBasico2
-Attribute frmMtoProve.VB_VarHelpID = -1
+'Private WithEvents frmMtoCartasOfe As frmFacCartasOferta
+'Private WithEvents frmMtoCliente As frmBasico2
+'Private WithEvents frmMtoProve As frmBasico2
 Private WithEvents frmMtoAgente As frmBasico2 '%=%=frmFacAgentesCom
 Attribute frmMtoAgente.VB_VarHelpID = -1
 Private WithEvents frmMtoTraba As frmBasico2 'frmAdmTrabajadores
@@ -1851,7 +1830,7 @@ Private Sub KEYpress(KeyAscii As Integer)
 End Sub
 
 Private Function MontaSQL() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Rc As String
 Dim RC2 As String
@@ -1979,7 +1958,7 @@ Dim B As Boolean
     
     
     If Titulo <> "" Then
-        devuelve = "pDHAgente="" " & Titulo & """|"
+        devuelve = "pDHAgente=""" & Titulo & """|"
         cadParam = cadParam & devuelve
         numParam = numParam + 1
         Titulo = ""
@@ -2008,7 +1987,7 @@ Dim B As Boolean
     End If
  
     If Titulo <> "" Then
-        devuelve = "pDHSituacion="" " & Titulo & """|"
+        devuelve = "pDHSituacion=""" & Titulo & """|"
         cadParam = cadParam & devuelve
         numParam = numParam + 1
         Titulo = ""
@@ -2027,6 +2006,20 @@ Dim B As Boolean
     End If
 
 
+
+    If Me.chkVolumen.Value = 1 Then
+        If Me.cboOrdVolVta.ListIndex = 2 Then
+            'RAPPEL
+            campo = " codclien IN ( SELECT distinct codclien FROM sclienrappel)"
+            'cadFormula = cadFormula & campo
+            If cadFormula <> "" Then cadFormula = cadFormula & " AND "
+            cadFormula = cadFormula & campo
+        End If
+    End If
+
+
+
+
     cadSelect = cadFormula
     tabla = "sclien"
 
@@ -2036,7 +2029,7 @@ Dim B As Boolean
 End Function
 
 Private Function DatosOk() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
     
     B = True
@@ -2044,6 +2037,8 @@ Dim B As Boolean
     DatosOk = B
 
 End Function
+
+
 
 
 Private Sub chkVarios_Click(Index As Integer)
@@ -2168,8 +2163,15 @@ Dim B As Boolean
             NombreRPT = "rFacClientes.rpt"
         Else
             'Añadimos codusu
-            If cadFormula <> "" Then cadFormula = cadFormula & " AND "
-            cadFormula = cadFormula & " ({tmpstockfec.codusu} = " & vUsu.Codigo & " )"
+            
+            If cboOrdVolVta.ListIndex = 2 Then
+                'rappel
+                 cadFormula = " {tmpsliped.codusu} = " & vUsu.Codigo
+            Else
+                'lo que habia
+                If cadFormula <> "" Then cadFormula = cadFormula & " AND "
+                cadFormula = cadFormula & " ({tmpstockfec.codusu} = " & vUsu.Codigo & " )"
+            End If
             
             'Añadimos el de emial
             devuelve = 0
@@ -2184,12 +2186,15 @@ Dim B As Boolean
                 NombreRPT = "rFacClienAgeVol.rpt"
                   
             Else
-                If Me.chkExportacion.Value = 1 Then
-                    NombreRPT = "rFacClienAgeExp.rpt"
+                If cboOrdVolVta.ListIndex = 2 Then
+                    NombreRPT = "rFacClienRappell.rpt"
                 Else
-                    NombreRPT = "rFacClienAgeVol2.rpt"
+                    If Me.chkExportacion.Value = 1 Then
+                        NombreRPT = "rFacClienAgeExp.rpt"
+                    Else
+                        NombreRPT = "rFacClienAgeVol2.rpt"
+                    End If
                 End If
-                
             End If
         End If
     End If
@@ -2198,22 +2203,22 @@ Dim B As Boolean
 End Sub
 
 Private Sub AccionesCSV()
-Dim SQL As String
+Dim Sql As String
 
     'Monto el SQL
     Select Case OpcionListado
         Case 47 ' listado de clientes
-            SQL = "Select codprove AS Código,nomprove as Nombre, domprove as Domicilio, codpobla as CPostal, pobprove as Poblacion, proprove as Provincia, nifprove as NIF, telprov1 as Telefono, codmacta as Cuenta, maiprov1 as Email1  "
-            SQL = SQL & " From sprove "
+            Sql = "Select codprove AS Código,nomprove as Nombre, domprove as Domicilio, codpobla as CPostal, pobprove as Poblacion, proprove as Provincia, nifprove as NIF, telprov1 as Telefono, codmacta as Cuenta, maiprov1 as Email1  "
+            Sql = Sql & " From sprove "
         
         
     End Select
     
-    If cadSelect <> "" Then SQL = SQL & " WHERE " & cadSelect
+    If cadSelect <> "" Then Sql = Sql & " WHERE " & cadSelect
     
         
     'LLamos a la funcion
-    GeneraFicheroCSV SQL, txtTipoSalida(1).Text
+    GeneraFicheroCSV Sql, txtTipoSalida(1).Text
     
 End Sub
 
@@ -2495,64 +2500,60 @@ End Sub
 
 Private Sub imgBuscarOfer_Click(Index As Integer)
     Select Case Index
-        Case 0, 1, 39, 40, 45, 60, 77 'Cod. Carta
+'        Case 0, 1, 39, 40, 45, 60, 77 'Cod. Carta
+'            Select Case Index
+'                Case 0: indCodigo = 2
+'                Case 1: indCodigo = 13
+'                Case 39: indCodigo = 63
+'                Case 40: indCodigo = 64
+'                Case 45: indCodigo = 81
+'                Case 60: indCodigo = 116
+'                Case 77: indCodigo = 138
+'            End Select
+'
+'            Set frmMtoCartasOfe = New frmFacCartasOferta
+'            frmMtoCartasOfe.DatosADevolverBusqueda = "0|1|"
+'            frmMtoCartasOfe.Show vbModal
+'            Set frmMtoCartasOfe = Nothing
+            
+'        Case 2, 3, 9, 10, 23, 24, 46, 47, 52, 53, 56, 57, 63, 64, 78, 79, 85, 86, 93, 94, 99, 100, 147, 148 'Cod. CLIENTE
+'            Select Case Index
+'                Case 2, 3: indCodigo = 7 + Index
+'                Case 9, 10: indCodigo = 18 + Index
+'                Case 23, 24: indCodigo = Index + 20
+'                Case 46, 47: indCodigo = Index + 33
+'                Case 52, 53: indCodigo = Index + 44
+'                Case 56, 57: indCodigo = Index + 54
+'                Case 63, 64: indCodigo = Index + 57
+'                Case 78, 79: indCodigo = Index + 61
+'                Case 85, 86, 93, 94: indCodigo = Index + 62
+'                Case 99, 100: indCodigo = Index + 63
+'            End Select
+'
+'
+'            Set frmMtoCliente = New frmBasico2
+'            AyudaClientes frmMtoCliente, txtCodigo(indCodigo).Text
+'            Set frmMtoCliente = Nothing
+'
+            
+            
+        Case 19, 20, 89, 90     '4, 5, 6, 7, 11, 12,  25, 26, 80, 81, 87, 88, 'Cod. AGENTE
             Select Case Index
-                Case 0: indCodigo = 2
-                Case 1: indCodigo = 13
-                Case 39: indCodigo = 63
-                Case 40: indCodigo = 64
-                Case 45: indCodigo = 81
-                Case 60: indCodigo = 116
-                Case 77: indCodigo = 138
-            End Select
-            
-            Set frmMtoCartasOfe = New frmFacCartasOferta
-            frmMtoCartasOfe.DatosADevolverBusqueda = "0|1|"
-            frmMtoCartasOfe.Show vbModal
-            Set frmMtoCartasOfe = Nothing
-            
-        Case 2, 3, 9, 10, 23, 24, 46, 47, 52, 53, 56, 57, 63, 64, 78, 79, 85, 86, 93, 94, 99, 100, 147, 148 'Cod. CLIENTE
-            Select Case Index
-                Case 2, 3: indCodigo = 7 + Index
-                Case 9, 10: indCodigo = 18 + Index
-                Case 23, 24: indCodigo = Index + 20
-                Case 46, 47: indCodigo = Index + 33
-                Case 52, 53: indCodigo = Index + 44
-                Case 56, 57: indCodigo = Index + 54
-                Case 63, 64: indCodigo = Index + 57
-                Case 78, 79: indCodigo = Index + 61
-                Case 85, 86, 93, 94: indCodigo = Index + 62
-                Case 99, 100: indCodigo = Index + 63
-            End Select
-            
-            
-            Set frmMtoCliente = New frmBasico2
-            AyudaClientes frmMtoCliente, txtCodigo(indCodigo).Text
-            Set frmMtoCliente = Nothing
-    
-            
-            
-        Case 4, 5, 6, 7, 11, 12, 19, 20, 25, 26, 80, 81, 87, 88, 89, 90 'Cod. AGENTE
-            Select Case Index
-                Case 4, 5: indCodigo = 7 + Index
-                Case 5: indCodigo = 12
-                Case 6, 7: indCodigo = 12 + Index
-                Case 11, 12: indCodigo = 18 + Index
+'                Case 4, 5: indCodigo = 7 + Index
+'                Case 5: indCodigo = 12
+'                Case 6, 7: indCodigo = 12 + Index
+'                Case 11, 12: indCodigo = 18 + Index
                 Case 19, 20, 25, 26: indCodigo = 20 + Index
-                Case 80, 81: indCodigo = Index + 61
+'                Case 80, 81: indCodigo = Index + 61
                 Case 87, 88, 89, 90: indCodigo = Index + 62
             End Select
             If OpcionListado <> 92 Then
-'                Set frmMtoAgente = New frmFacAgentesCom
-'                frmMtoAgente.DatosADevolverBusqueda = "0|1|"
-'                frmMtoAgente.Show vbModal
+
                 Set frmMtoAgente = New frmBasico2
                 AyudaAgentesComerciales frmMtoAgente, txtCodigo(indCodigo), , True
                 Set frmMtoAgente = Nothing
             ElseIf Index = 6 Or Index = 7 Then 'Gastos financieros (trabajador)
-'                Set frmMtoTraba = New frmAdmTrabajadores
-'                frmMtoTraba.DatosADevolverBusqueda = "0|1|"
-'                frmMtoTraba.Show vbModal
+
                 Set frmMtoTraba = New frmBasico2
                 AyudaTrabajadores frmMtoTraba, txtCodigo(indCodigo)
                 Set frmMtoTraba = Nothing
@@ -2637,54 +2638,51 @@ Private Sub imgBuscarOfer_Click(Index As Integer)
             frmCP.Show vbModal
             Set frmCP = Nothing
             
-        Case 35, 36, 41, 42, 48, 49, 65, 66 'cod. PROVEEDOR
-            Select Case Index
-                Case 35, 36: indCodigo = Index + 23
-                Case 41, 42: indCodigo = Index + 24
-                Case 48, 49: indCodigo = Index + 42
-                Case 65, 66: indCodigo = Index + 59
-            End Select
-'            If Index = 35 Or Index = 36 Then indCodigo = Index + 23
-'            If Index = 41 Or Index = 42 Then indCodigo = Index + 24
-'            If Index = 48 Or Index = 49 Then indCodigo = Index + 42
-            Set frmMtoProve = New frmBasico2
-'            frmMtoProve.DatosADevolverBusqueda = "0|1|"
-'            frmMtoProve.Show vbModal
-            AyudaProveedores frmMtoProve, txtCodigo(indCodigo)
-            Set frmMtoProve = Nothing
+'        Case 35, 36, 41, 42, 48, 49, 65, 66 'cod. PROVEEDOR
+'            Select Case Index
+'                Case 35, 36: indCodigo = Index + 23
+'                Case 41, 42: indCodigo = Index + 24
+'                Case 48, 49: indCodigo = Index + 42
+'                Case 65, 66: indCodigo = Index + 59
+'            End Select
+'    '            If Index = 35 Or Index = 36 Then indCodigo = Index + 23
+'    '            If Index = 41 Or Index = 42 Then indCodigo = Index + 24
+'    '            If Index = 48 Or Index = 49 Then indCodigo = Index + 42
+'            Set frmMtoProve = New frmBasico2
+'    '            frmMtoProve.DatosADevolverBusqueda = "0|1|"
+'    '            frmMtoProve.Show vbModal
+'            AyudaProveedores frmMtoProve, txtCodigo(indCodigo)
+'            Set frmMtoProve = Nothing
             
-        Case 43, 44, 58, 59 'cod. ARTICULO
-            If Index <= 44 Then
-                indCodigo = Index + 24
-            Else
-                indCodigo = Index + 54  'En listado de vetnas x familia articulo
-            End If
-            Set frmMtoArtic = New frmBasico2
-            'frmMtoArtic.DatosADevolverBusqueda3 = "@1@" 'Abrimos en Modo Busqueda
-'            frmMtoArtic.DatosADevolverBusqueda = "0|1|"
-'            frmMtoArtic.Show vbModal
-            AyudaArticulos frmMtoArtic, txtCodigo(indCodigo)
-            Set frmMtoArtic = Nothing
+'        Case 43, 44, 58, 59 'cod. ARTICULO
+'            If Index <= 44 Then
+'                indCodigo = Index + 24
+'            Else
+'                indCodigo = Index + 54  'En listado de vetnas x familia articulo
+'            End If
+'            Set frmMtoArtic = New frmBasico2
+'            AyudaArticulos frmMtoArtic, txtCodigo(indCodigo)
+'            Set frmMtoArtic = Nothing
             
-        Case 50, 51, 54, 55 'Cod. FAMILIA articulo
-            Select Case Index
-                Case 50, 51: indCodigo = Index + 44
-                Case 54, 55: indCodigo = Index + 46
-            End Select
-'            Set frmMtoFamilia = New frmAlmFamiliaArticulo
-'            frmMtoFamilia.DatosADevolverBusqueda = "0|1|"
-'            frmMtoFamilia.Show vbModal
-            Set frmMtoFamilia = New frmBasico2
-            AyudaFamilias frmMtoFamilia, txtCodigo(indCodigo)
-            Set frmMtoFamilia = Nothing
-        Case 71, 72
-            'Clientes potenciales
-            AbrirBuscaGrid Index
-            
-        Case 97, 98
-            'Bancos propios   - Formas pago
-            AbrirBuscaGrid Index
-            
+'        Case 50, 51, 54, 55 'Cod. FAMILIA articulo
+'            Select Case Index
+'                Case 50, 51: indCodigo = Index + 44
+'                Case 54, 55: indCodigo = Index + 46
+'            End Select
+''            Set frmMtoFamilia = New frmAlmFamiliaArticulo
+''            frmMtoFamilia.DatosADevolverBusqueda = "0|1|"
+''            frmMtoFamilia.Show vbModal
+'            Set frmMtoFamilia = New frmBasico2
+'            AyudaFamilias frmMtoFamilia, txtCodigo(indCodigo)
+'            Set frmMtoFamilia = Nothing
+'        Case 71, 72
+'            'Clientes potenciales
+'            AbrirBuscaGrid Index
+'
+'        Case 97, 98
+'            'Bancos propios   - Formas pago
+'            AbrirBuscaGrid Index
+'
         End Select
     PonerFoco txtCodigo(indCodigo)
 End Sub
@@ -3570,7 +3568,7 @@ End Function
 
 
 Private Function ExisteARIMAILGES()
-Dim SQL As String
+Dim Sql As String
 
     If Dir(App.Path & "\ArimailGes.exe") = "" Then
         MsgBox "No existe el programa ArimailGes.exe. Llame a Ariadna.", vbExclamation
@@ -3586,7 +3584,7 @@ End Function
 Private Sub CargarListView()
 'Carga el List View del frame: frameMovimArtic
 'con los parametros de la tabla: stipom (Tipos de Movimientos)
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 
@@ -3595,9 +3593,9 @@ Dim ItmX As ListItem
     ListView1.ColumnHeaders.Add , , "Código", 1000
     ListView1.ColumnHeaders.Add , , "Descripción", 2650
     
-    SQL = "select codtipom,nomtipom from stipom where muevesto=1"
+    Sql = "select codtipom,nomtipom from stipom where muevesto=1"
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF
         Set ItmX = ListView1.ListItems.Add
@@ -3610,19 +3608,19 @@ Dim ItmX As ListItem
     Set RS = Nothing
 End Sub
 
-Private Sub AbrirFrmClientes()
-'Clientes
-
-    
-
-            Set frmMtoCliente = New frmBasico2
-            AyudaClientes frmMtoCliente, txtCodigo(indCodigo).Text
-            Set frmMtoCliente = Nothing
-    
-    
-    
-    
-End Sub
+'Private Sub AbrirFrmClientes()
+''Clientes
+'
+'
+'
+'            Set frmMtoCliente = New frmBasico2
+'            AyudaClientes frmMtoCliente, txtCodigo(indCodigo).Text
+'            Set frmMtoCliente = Nothing
+'
+'
+'
+'
+'End Sub
 
 Private Function PonerFormulaYParametrosInfMovArt() As Boolean
 Dim Cad As String
@@ -3980,9 +3978,72 @@ On Error GoTo ECalculaVolumenVtas_
     conn.Execute Codigo
     
     
+    Codigo = ""
+    
+    'RAPPEL
+    If Me.chkVolumen.Value = 1 Then
+        If Me.cboOrdVolVta.ListIndex = 2 Then
+            'RAPPEL
+            Codigo = "DELETE FROM tmpstockfec WHERE codusu =" & vUsu.Codigo & " AND stock=0"
+            conn.Execute Codigo
+            Codigo = "DELETE FROM tmpsliped where codusu = " & vUsu.Codigo
+            conn.Execute Codigo
+            
+            
+            
+            'tmpsliped(codusu,numpedcl,numlinea,nomartic,importel,cantidad)
+            Codigo = "Select  tmpstockfec.*,nomclien from tmpstockfec left join sclien on codalmac=codclien WHERE codusu =" & vUsu.Codigo
+            
+            Set miRsAux = New ADODB.Recordset
+            miRsAux.Open Codigo, conn, adOpenForwardOnly, adLockPessimistic
+            tabla = ""
+            NumRegElim = -1
+            While Not miRsAux.EOF
+                NumRegElim = NumRegElim + 1
+                'tmpsliped(codusu,numpedcl,numlinea,nomartic,ampliaci,importel,cantidad)
+                If IsNull(miRsAux!NomClien) Then
+                    'ERROR
+                    Codigo = vUsu.Codigo & "," & miRsAux!codAlmac & ",1,'ERROR',''," & DBSet(miRsAux!stock, "N") & ",0"
+                Else
+                    
+                    Codigo = "codclien =" & miRsAux!codAlmac & " and desdeimporte<= " & DBSet(miRsAux!stock, "N")
+                    Codigo = Codigo & " AND coalesce(hastaimporte,999999999) >= " & DBSet(miRsAux!stock, "N") & " AND 1"
+                    NombreRPT = "concat(desdeimporte,'  -   ',coalesce(hastaimporte,''))"
+                    Codigo = DevuelveDesdeBD(conAri, "rappel", "sclienrappel", Codigo, "1", , NombreRPT)
+                    If Codigo = "" Then
+                        'No hay rappel para le intervalo
+                        Codigo = 0
+                        NombreRPT = "Sin rappel para el importe"
+                    End If
+                    tabla = tabla & ", (" & vUsu.Codigo & "," & miRsAux!codAlmac & ",1," & DBSet(miRsAux!NomClien, "T")
+                    tabla = tabla & "," & DBSet(NombreRPT, "T") & "," & DBSet(miRsAux!stock, "N") & "," & DBSet(Codigo, "N") & ")"
+                End If
+                
+                miRsAux.MoveNext
+                If miRsAux.EOF Then NumRegElim = 11
+                If NumRegElim > 10 Then
+                    
+                    tabla = Mid(tabla, 2)
+                    Codigo = "INSERT INTO tmpsliped(codusu,numpedcl,numlinea,nomartic,ampliaci,importel,cantidad) VALUES " & tabla
+                    conn.Execute Codigo
+                    tabla = ""
+                    NumRegElim = 0
+                End If
+            Wend
+            miRsAux.Close
+            
+            If NumRegElim = -1 Then Err.Raise 513, , "Ningun dato"
+            
+        End If
+    End If
+    
+    
+    
+    
     CalculaVolumenVtas_ = True
 ECalculaVolumenVtas_:
-    If Err.Number <> 0 Then MuestraError Err.Number, "Calculando volumen ventas"
+    If Err.Number <> 0 Then MuestraError Err.Number, "Calculando volumen ventas" & vbCrLf & Err.Description
+    Set miRsAux = Nothing
 End Function
 
 

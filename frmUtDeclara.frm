@@ -21,12 +21,29 @@ Begin VB.Form frmUtDeclara
    ScaleHeight     =   4620
    ScaleWidth      =   4920
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkFechasPlazo 
+      Caption         =   "Fechas en plazo"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Left            =   240
+      TabIndex        =   5
+      Top             =   2760
+      Width           =   3495
+   End
    Begin VB.CommandButton cmdCarnetsCaducados 
       Height          =   495
       Left            =   720
       Picture         =   "frmUtDeclara.frx":0000
       Style           =   1  'Graphical
-      TabIndex        =   14
+      TabIndex        =   15
       ToolTipText     =   "Comprobar carnets caducados"
       Top             =   3960
       Width           =   495
@@ -53,7 +70,7 @@ Begin VB.Form frmUtDeclara
       Left            =   120
       Picture         =   "frmUtDeclara.frx":058A
       Style           =   1  'Graphical
-      TabIndex        =   12
+      TabIndex        =   13
       ToolTipText     =   "Poblaciones"
       Top             =   3960
       Width           =   495
@@ -76,8 +93,8 @@ Begin VB.Form frmUtDeclara
       Width           =   3495
    End
    Begin MSComDlg.CommonDialog cd1 
-      Left            =   960
-      Top             =   3600
+      Left            =   3600
+      Top             =   240
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
@@ -95,8 +112,8 @@ Begin VB.Form frmUtDeclara
       EndProperty
       Height          =   255
       Left            =   240
-      TabIndex        =   5
-      Top             =   2760
+      TabIndex        =   6
+      Top             =   3240
       Visible         =   0   'False
       Width           =   3495
    End
@@ -169,7 +186,7 @@ Begin VB.Form frmUtDeclara
       EndProperty
       Height          =   495
       Left            =   3480
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   3960
       Width           =   1215
    End
@@ -186,7 +203,7 @@ Begin VB.Form frmUtDeclara
       EndProperty
       Height          =   495
       Left            =   1680
-      TabIndex        =   6
+      TabIndex        =   7
       Top             =   3960
       Width           =   1695
    End
@@ -205,7 +222,7 @@ Begin VB.Form frmUtDeclara
       ForeColor       =   &H00008000&
       Height          =   240
       Left            =   3840
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   1800
       Visible         =   0   'False
       Width           =   975
@@ -226,7 +243,7 @@ Begin VB.Form frmUtDeclara
       Height          =   240
       Index           =   95
       Left            =   240
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   120
       Width           =   2340
    End
@@ -261,7 +278,7 @@ Begin VB.Form frmUtDeclara
       Height          =   240
       Index           =   1
       Left            =   2400
-      TabIndex        =   10
+      TabIndex        =   11
       Top             =   480
       Width           =   645
    End
@@ -280,7 +297,7 @@ Begin VB.Form frmUtDeclara
       Height          =   240
       Index           =   0
       Left            =   240
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   480
       Width           =   675
    End
@@ -296,8 +313,8 @@ Begin VB.Form frmUtDeclara
       EndProperty
       Height          =   375
       Left            =   240
-      TabIndex        =   7
-      Top             =   3240
+      TabIndex        =   8
+      Top             =   3480
       Width           =   3735
    End
 End
@@ -323,6 +340,10 @@ Dim RETO As Boolean
 Dim NF As Integer
 Dim DesdeAriago As Boolean
 
+
+Private Sub chkFechasPlazo_KeyPress(KeyAscii As Integer)
+ KEYpressGnral KeyAscii, 3, False
+End Sub
 
 Private Sub chkROPO_KeyPress(KeyAscii As Integer)
     KEYpressGnral KeyAscii, 3, False
@@ -661,7 +682,7 @@ Dim fin As Boolean
                 Sql = Sql & db.texto(RS!nifClien) & "," ' NIF
                 Sql = Sql & db.texto(RS!codtipom & Format(RS!Numfactu, "0000000")) & "," ' NumFactura
                 'octubre 2011 EsVenta,Direccion,Poblacion
-                            Sql = Sql & "1,"   ' es vebta
+                            Sql = Sql & "1,"   ' es venta
                             Sql = Sql & db.texto(RS!Direccion) & "," ' direccion cliente
                             Sql = Sql & db.texto(RS!Poblacion) & ")" ' poblacion
                 
@@ -713,7 +734,7 @@ Dim fin As Boolean
                             Sql = Sql & db.texto(RS!codtipom & Format(RS!Numfactu, "0000000")) & "," ' NumFactura
                             
                             'octubre 2011 EsVenta,Direccion,Poblacion
-                            Sql = Sql & "1,"   ' es vebta
+                            Sql = Sql & "1,"   ' es venta
                             Sql = Sql & db.texto(RS!Direccion) & "," ' direccion cliente
                             Sql = Sql & db.texto(RS!Poblacion) & ")" ' poblacion
                             db.ejecutar Sql
@@ -735,7 +756,7 @@ Dim fin As Boolean
                                 Sql = Sql & db.texto(RS!nifClien) & "," ' NIF
                                 Sql = Sql & db.texto(RS!codtipom & Format(RS!Numfactu, "0000000")) & ","
                                 'octubre 2011 EsVenta,Direccion,Poblacion
-                                Sql = Sql & "1,"   ' es vebta
+                                Sql = Sql & "1,"   ' es venta
                                 Sql = Sql & db.texto(RS!Direccion) & "," ' direccion cliente
                                 Sql = Sql & db.texto(RS!Poblacion) & ")" ' poblacion
                                 
@@ -833,7 +854,7 @@ Dim fin As Boolean
                 lblInf.Caption = "Col   " & Col.Count + 1 & "   Reg  " & L & " de " & lblInf.Tag
                 lblInf.Refresh
                 
-                Sql = Sql & ", (" & DBSet(RS!FechaVenta, "F") & "," & DBSet(RS.Fields(1), "T") & "," & RS.Fields(2) & ")"
+                Sql = Sql & ", (" & DBSet(RS!fechaventa, "F") & "," & DBSet(RS.Fields(1), "T") & "," & RS.Fields(2) & ")"
                 RS.MoveNext
                 
                 
@@ -917,7 +938,7 @@ Dim fin As Boolean
                 lblInf.Caption = "Fra: " & RS!NumFactura
                 lblInf.Refresh
                 Sql = "select * from scafac1 where codtipom='FAS' "
-                Sql = Sql & " and fecfactu=" & DBSet(RS!FechaVenta, "F") & " and numfactu=" & Mid(RS!NumFactura, 4)
+                Sql = Sql & " and fecfactu=" & DBSet(RS!fechaventa, "F") & " and numfactu=" & Mid(RS!NumFactura, 4)
                 rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If rs2.EOF Then
                     Sql = ""
@@ -957,9 +978,9 @@ Dim fin As Boolean
                     End If
                     Sql = "UPDATE declaralom set cultivo=" & DBSet(Sql, "T")
                     Sql = Sql & ",tratamiento= " & DBSet(cadFecha, "T", "S")
-                    Sql = Sql & " where fechaventa=" & DBSet(RS!FechaVenta, "F") & " and numfactura='" & RS!NumFactura
+                    Sql = Sql & " where fechaventa=" & DBSet(RS!fechaventa, "F") & " and numfactura='" & RS!NumFactura
                     Sql = Sql & "' and lote=" & DBSet(RS!Lote, "T") & " and nif=" & DBSet(RS!NIF, "T")
-                    Sql = Sql & " and registro=" & DBSet(RS!registro, "T") & " and cultivo is null and tratamiento is null"
+                    Sql = Sql & " and registro=" & DBSet(RS!Registro, "T") & " and cultivo is null and tratamiento is null"
                     
                     conn.Execute Sql
                 
@@ -1111,7 +1132,8 @@ Dim ParaVerDatosINE As String
 
 Dim Llevatratamientos As Byte  ' 0. NO      1.- Desde ariges(Alzira Cata)     2 Desde ariagro.
 Dim CADENA As String
-
+Dim F As Date
+Dim F2 As Date
 
     On Error GoTo eProcesoDesdeSlifac
 
@@ -1600,6 +1622,7 @@ Dim CADENA As String
     Sql = ""
     Capacidad = 1   'Para el ROPO da igual
     Volumen = 1   'Para el ROPO da igual
+    CADENA = ""
     While Not RS.EOF
     
                 'En declara.email pondremos codclien
@@ -1629,8 +1652,6 @@ Dim CADENA As String
                     
                         'RETO
                         
-                        
-                        
                         rsTipUd.Find "tipcompra =" & DBLet(RS!unidadesCompra, "N"), , adSearchForward, 1
                         
                         'Capacidad
@@ -1650,12 +1671,22 @@ Dim CADENA As String
                         
                         If VtaPorUnidades Then
                             cantidad = RS!cantidad
+                            If chkTratamientos.Value = 0 Then
+                                If cantidad > 0 And Int(cantidad) <> cantidad Then
+                                    'NO permite VENTAS decimales
+                                    If Me.chkSoloMostrarErrores.Value Then CADENA = CADENA & Mid(RS!codtipom & RS!Numfactu & Space(20), 1, 20) & "  " & RS!cantidad & vbCrLf
+                                    cantidad = Int(cantidad)
+                                    If cantidad = 0 Then cantidad = 1
+                        
+                                    
+                                End If
+                            End If
                             Volumen = cantidad * Capacidad
                             If chkTratamientos.Value = 1 Then cantidad = 1
                             
                         Else
                             'Si pone 5, esta vendiendo 5 Litros. Si el envase es de 5Lts, esta vendiedndo 1 Unidad
-                            
+                            If cantidad > 0 And Int(cantidad) <> cantidad Then Debug.Assert False
                             Volumen = RS!cantidad
                             If Me.chkTratamientos.Value = 1 Then
                                 cantidad = Round2(Volumen \ Capacidad, 2)
@@ -1670,13 +1701,7 @@ Dim CADENA As String
         
                     'ENERO 2016
                     LotesCorrectos = DBLet(RS!ManipuladorNombre, "T") <> ""
-    '
-    '                If LotesCorrectos Then
-    '                    'ManipuladorNumCarnet,ManipuladorFecCaducidad,ManipuladorNombre,TipoCarnet
-    '                    SQL = SQL & db.texto(RS!ManipuladorNombre) & "," ' NombreSocio
-    '                Else
-    '                    SQL = SQL & db.texto(RS!Nomclien) & "," ' NombreSocio
-    '                End If
+    
                     Sql = Sql & db.texto(RS!NomClien) & "," ' NombreSocio
                     
                     Sql = Sql & db.texto(RS!nifClien) & "," ' NIF
@@ -1693,10 +1718,10 @@ Dim CADENA As String
                         'Datos carnet manipulador
                         Sql = Sql & db.texto(RS!ManipuladorNombre) & "," ' NombreSocio
                         Sql = Sql & db.texto(RS!ManipuladorNumCarnet) & ","
-                        Sql = Sql & "NULL"  ' poblacion
+                        Sql = Sql & "NULL"
                     
                     Else
-                        Sql = Sql & "NULL,NULL,NULL"  ' poblacion
+                        Sql = Sql & "NULL,NULL,NULL"
                     End If
                     
                     
@@ -1738,13 +1763,134 @@ Dim CADENA As String
         RS.Close
         
         
+        If chkSoloMostrarErrores.Value = 1 And CADENA <> "" Then
+            Errores = Errores & vbCrLf & vbCrLf & vbCrLf & "Ventas decimales " & vbCrLf & String(40, "=") & vbCrLf
+            Errores = Errores & "      Factura       Cantidad" & vbCrLf
+            Errores = Errores & CADENA
+        End If
+        CADENA = ""
+        
+        
+        'Movimientros traspasos almacen
+        'Se llevan de suminiostros a compras con un slhtra
+        If chkROPO.Value = 0 And chkTratamientos.Value = 1 Then
+            'Veremos si tienen almacen por defecto de advparametros <> ppal
+             Sql = DevuelveDesdeBD(conAri, "codalmac", "advparametros ", "1", "1")
+             If Sql = "" Then Sql = "1"
+             If Val(Sql) <> 1 Then  'almacen separado
+                    
+                    CADENA = "select slhtra.*,nomartic,numserie, ctrlotes,unidadesCompra, descateg,unicajas2"
+                    CADENA = CADENA & " FROM slhtra INNER JOIN sartic on slhtra.codartic=sartic.codartic "
+                    CADENA = CADENA & " INNER JOIN  scateg ON sartic.codcateg = scateg.codcateg "
+                    CADENA = CADENA & " AND codtrasp in (Select codtrasp from schtra where almadest=" & Sql
+                    CADENA = CADENA & " AND fechatra between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
+                    Sql = CADENA & ")"
+                    CADENA = ""
+                    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    Sql = ""
+                    While Not RS.EOF
+                       Sql = Sql & ",  ("
+                       Sql = Sql & db.Fecha(RS!FechaMov) & "," ' FechaVenta
+                       Sql = Sql & db.texto(RS!NomArtic) & "," ' NombreComercial
+                       Sql = Sql & db.texto(RS!numSerie) & "," ' Registro
+                       Sql = Sql & db.texto(RS!descateg) & "," ' Categoria
+                       Sql = Sql & db.texto(RS!observa2) & "," ' Lote
+                       
+                       
+                           
+                       rsTipUd.Find "tipcompra =" & DBLet(RS!unidadesCompra, "N"), , adSearchForward, 1
+                           
+                       'Capacidad
+                       Capacidad = DBLet(RS!unicajas2, "N")
+                       If Capacidad = 0 Then Capacidad = 1
+                       
+                           
+                       VtaPorUnidades = True
+                       If Not rsTipUd.EOF Then VtaPorUnidades = rsTipUd!vtaindicacantidad = 0
+                       If rsTipUd.EOF Then Debug.Assert False
+                       
+                       
+                       If VtaPorUnidades Then
+                           cantidad = RS!cantidad
+                           Volumen = cantidad * Capacidad
+                           
+                           
+                       Else
+                           'Si pone 5, esta vendiendo 5 Litros. Si el envase es de 5Lts, esta vendiedndo 1 Unidad
+                           
+                           Volumen = RS!cantidad
+                           
+                           cantidad = Round2(Volumen \ Capacidad, 0)
+                           If cantidad = 0 Then cantidad = 1
+                       End If
+                       Sql = Sql & db.numero(cantidad) & "," ' Cantidad
+
+                       LotesCorrectos = False 'DBLet(RS!ManipuladorNombre, "T") <> ""
+                       Sql = Sql & db.texto(vEmpresa.nomempre) & "," ' NombreSocio
+                       Sql = Sql & db.texto(vParam.CifEmpresa) & "," ' NIF
+                       Sql = Sql & db.texto("TRA" & Format(RS!codtrasp, "0000000")) & "," ' NumFactura
+                       Sql = Sql & "3,"   ' es venta  --> Traspaso almacenes
+                       Sql = Sql & db.texto(vParam.DomicilioEmpresa) & "," ' direccion cliente
+                       Sql = Sql & db.texto(vParam.Poblacion) & "," ' poblacion
+                       
+                       
+        
+                       'Llevamos tanto el nombre del cliente como el de manipulador
+                       'NomCarnetMani, NumCarnet, NifMani
+                       Sql = Sql & "NULL,NULL,NULL"
+                       
+                       'Noviembre
+                       'email . Tendremos codclien para actualizar datos email tfno  pais
+                       Sql = Sql & ",0" '& RS!codClien
+                       
+                       'Noviembre 2021
+                       'capacidad,tipoud,volumen
+                       Sql = Sql & "," & Int(Capacidad) & "," & DBLet(RS!unidadesCompra, "N")
+                       'volumen
+                       Sql = Sql & "," & DBSet(Volumen, "N") & ","
+                       
+                       'Codpobla
+                       If DBLet(vParam.CPostal, "T") = "" Then
+                           Sql = Sql & "- 0 )"
+                       Else
+                           Sql = Sql & "-" & DBLet(vParam.CPostal, "N") & ")"
+                       End If
+                
+                       RS.MoveNext
+                    Wend
+                    RS.Close
+                    
+                    If Sql <> "" Then
+                        Sql = Mid(Sql, 2) 'quitamos la primera coma
+                        Sql = "insert into declaralom(FechaVenta, NombreComercial, Registro, Categoria, Lote, Cantidad, NombreSocio, NIF, NumFactura,EsVenta,Direccion,Poblacion,NomCarnetMani, NumCarnet, NifMani,email,capacidad,tipoud,volumen,ine) VALUES " & Sql
+                        db.ejecutar Sql
+                        Sql = ""
+        
+                    End If
+                    
+            End If   'Tiene almacen tratamientos
+        End If
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         'AHora vamos a actualizar datos de cliente desde declaralom
         lblInf.Caption = "Datos cliente"
         lblInf.Refresh
         
         If Me.chkROPO.Value = 0 Then
-        
-             Sql = "select distinct email from declaralom  where esventa>=1 and email <>''"
+            
+             Sql = "select distinct email , esventa from declaralom  where esventa>=1 and email <>''"
              RS.Open Sql, conn, adOpenKeyset, adLockOptimistic, adCmdText
              
              Set miRsAux = New ADODB.Recordset
@@ -1752,7 +1898,16 @@ Dim CADENA As String
                  lblInf.Caption = "Datos cliente"
                  lblInf.Refresh
                  
-                 Sql = "Select telclie1,telclie2,maiclie1,maiclie2 FROM sclien where codclien = " & RS!email
+                 
+                 If RS!EsVenta = 3 Then
+                    'Traspaso de almacenes
+                    'Los datos son de parametros
+                    Sql = "select telempre telclie1,faxempre telclie2, maiempre maiclie1,null maiclie2 FROM sparam WHERE true"
+                 Else
+                    'Ventas
+                    Sql = "Select telclie1,telclie2,maiclie1,maiclie2 FROM sclien where codclien = " & RS!email
+                 
+                 End If
                  miRsAux.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                  
                  If Not miRsAux.EOF Then
@@ -1776,11 +1931,121 @@ Dim CADENA As String
                  
              Wend
              RS.Close
-             Set miRsAux = Nothing
+             
+                         
+            'Autorizados
+            lblInf.Caption = "Autorizados " & IIf(chkSoloMostrarErrores.Value = 1, "CHECK", "")
+            lblInf.Refresh
+            CADENA = ""
+            Sql = "select numcarnet,nif,nombresocio from declaralom where esventa=1 and numcarnet <>'' group by 1,2"
+            RS.Open Sql, conn, adOpenKeyset, adLockOptimistic, adCmdText
+                
+            Set miRsAux = New ADODB.Recordset
+            While Not RS.EOF
+                lblInf.Caption = "Leyendo " & DBLet(RS!numcarnet, "T")
+                lblInf.Refresh
+                
+                Sql = "select cif,nombre from sclienmani where numcarnet=" & DBSet(RS!numcarnet, "T")
+                miRsAux.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+                
+                If Not miRsAux.EOF Then
+                    ' Aux = DBLet(miRsAux!Nombre, "T")
+                    'Sql = DBLet(RS!nombresocio)
+                     
+                    Aux = DBLet(miRsAux!CIF, "T")
+                    Sql = DBLet(RS!NIF)
+                    If Aux <> Sql Then
+                         
+                         
+                         
+                       CADENA = CADENA & Mid(RS!nombresocio & Space(40), 1, 40) & " " & Mid(RS!numcarnet & Space(15), 1, 15) & " " & Sql & " > " & Aux & vbCrLf
+                         
+                           
+                       Sql = DBSet(Aux, "T")
+                       
+                       
+                       
+                       'Sql = Sql & " WHERE email =" & RS!email
+                       'conn.Execute Sql
+                   Else
+                       Sql = DBSet(RS!NIF, "T")
+                       
+                   End If
+                   
+                Else
+                   Sql = DBSet(RS!NIF, "T")
+                End If
+                miRsAux.Close
+                Sql = "UPDATE declaralom SET nifmani=" & Sql & " WHERE numcarnet=" & DBSet(RS!numcarnet, "T") & " AND nif=" & DBSet(RS!NIF, "T")
+                conn.Execute Sql
+                
+                
+                RS.MoveNext
+                
+                
+            Wend
+            RS.Close
+            
+            
+            
+            
+            'Autorizados VARIOS
+            lblInf.Caption = "Autorizados varios " & IIf(chkSoloMostrarErrores.Value = 1, "CHECK", "")
+            lblInf.Refresh
+            CADENA = ""
+            Sql = "select numcarnet,nif,nombresocio from declaralom where esventa=1 and numcarnet <>'' group by 1,2"
+            RS.Open Sql, conn, adOpenKeyset, adLockOptimistic, adCmdText
+                
+            Set miRsAux = New ADODB.Recordset
+            While Not RS.EOF
+                lblInf.Caption = "Leyendo " & DBLet(RS!numcarnet, "T")
+                lblInf.Refresh
+                
+                Sql = "select nifclien cif, nomclien nombre from sclvar where ManipuladorNumCarnet=" & DBSet(RS!numcarnet, "T")
+                miRsAux.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+                
+                If Not miRsAux.EOF Then
+                     
+                    Aux = DBLet(miRsAux!CIF, "T")
+                    Sql = DBLet(RS!NIF)
+                    If Aux <> Sql Then
+                         
+                       CADENA = CADENA & Mid(RS!nombresocio & Space(40), 1, 40) & " " & Mid(RS!numcarnet & Space(15), 1, 15) & " " & Sql & " > " & Aux & "    Var." & vbCrLf
+                       Sql = DBSet(Aux, "T")
+                       
+                   Else
+                       Sql = DBSet(RS!NIF, "T")
+                   End If
+                   
+                Else
+                   Sql = DBSet(RS!NIF, "T")
+                End If
+                miRsAux.Close
+                Sql = "UPDATE declaralom SET nifmani=" & Sql & " WHERE numcarnet=" & DBSet(RS!numcarnet, "T") & " AND nif=" & DBSet(RS!NIF, "T")
+                conn.Execute Sql
+                
+                
+                RS.MoveNext
+                
+                
+            Wend
+            RS.Close
+            Set miRsAux = Nothing
+            
+            
+            If chkSoloMostrarErrores.Value = 1 And CADENA <> "" Then
+               Errores = Errores & vbCrLf & vbCrLf & vbCrLf & "AUTORIZADOS " & vbCrLf & String(40, "=") & vbCrLf
+               Errores = Errores & "      Socio                                Carnet          NIF vta      NIF mani" & vbCrLf
+               Errores = Errores & CADENA
+               CADENA = ""
+            End If
+            
+             
+      
         End If
         
         
-        lblInf.Caption = "Proveedores" & IIf(chkSoloMostrarErrores.Value = 1, "CHECK", "")
+        lblInf.Caption = "Proveedores " & IIf(chkSoloMostrarErrores.Value = 1, "CHECK", "")
         lblInf.Refresh
         DoEvents
         Sql = ""
@@ -1828,6 +2093,7 @@ Dim CADENA As String
          Sql = ""
          Capacidad = 1
          Volumen = 1
+         CADENA = ""
          While Not RS.EOF
             lblInf.Caption = "Proveedores. " & RS!nomprove
             lblInf.Refresh
@@ -1849,14 +2115,23 @@ Dim CADENA As String
                 cantidad = RS!canentra
             Else
             
+                'If RS!numSerie = "25449" Then Debug.Assert False
+                
                 'RETO
                 rsTipUd.Find "tipcompra =" & DBLet(RS!unidadesCompra, "N"), , adSearchForward, 1
                 VtaPorUnidades = True
-                If Not rsTipUd.EOF Then VtaPorUnidades = rsTipUd!vtaindicacantidad = 0
+                If Not rsTipUd.EOF Then
+                    VtaPorUnidades = rsTipUd!vtaindicacantidad = 0
+                Else
+                    If chkSoloMostrarErrores.Value = 1 Then CADENA = CADENA & RS!NomArtic & "     " & DBLet(RS!Capacidad) & "  Tipo UD" & vbCrLf
+                End If
+                
                 'Capacidad
                 Capacidad = DBLet(RS!Capacidad, "N")
                 If Capacidad = 0 Then Capacidad = 1
-               '  If Capacidad > 1 And Not VtaPorUnidades Then Debug.Assert False
+                If Capacidad > 1 And VtaPorUnidades Then
+                    If chkSoloMostrarErrores.Value = 1 Then CADENA = CADENA & RS!NomArtic & "     " & Capacidad & "  Vtas x UD" & vbCrLf
+                End If
                 If VtaPorUnidades Then
                     cantidad = RS!canentra
                     Volumen = cantidad * Capacidad
@@ -1889,6 +2164,19 @@ Dim CADENA As String
         Wend
         RS.Close
         
+        If chkSoloMostrarErrores.Value = 1 And CADENA <> "" Then
+           Errores = Errores & vbCrLf & vbCrLf & vbCrLf & "COMPRAS " & vbCrLf & String(40, "=") & vbCrLf
+           Errores = Errores & "      " & vbCrLf
+           Errores = Errores & CADENA
+           CADENA = ""
+        End If
+        
+        
+        
+        
+        
+        
+        
         lblInf.Caption = "Nº ROPO proveedores"
         lblInf.Refresh
         Espera 0.25
@@ -1897,7 +2185,7 @@ Dim CADENA As String
             RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             Sql = ""
             While Not RS.EOF
-                Sql = Sql & RS!NIF & "  " & RS!NombreSocio & vbCrLf
+                Sql = Sql & RS!NIF & "  " & RS!nombresocio & vbCrLf
                 RS.MoveNext
             Wend
             RS.Close
@@ -2137,9 +2425,9 @@ Dim CADENA As String
                     End If
                     Sql = "UPDATE declaralom set cultivo=" & DBSet(Sql, "T")
                     Sql = Sql & ",tratamiento= " & DBSet(cadFecha, "T", "S")
-                    Sql = Sql & " where fechaventa=" & DBSet(RS!FechaVenta, "F") & " and numfactura='" & RS!NumFactura
+                    Sql = Sql & " where fechaventa=" & DBSet(RS!fechaventa, "F") & " and numfactura='" & RS!NumFactura
                     Sql = Sql & "' and lote=" & DBSet(RS!Lote, "T") & " and nif=" & DBSet(RS!NIF, "T")
-                    Sql = Sql & " and registro=" & DBSet(RS!registro, "T") & " and cultivo is null and tratamiento is null"
+                    Sql = Sql & " and registro=" & DBSet(RS!Registro, "T") & " and cultivo is null and tratamiento is null"
                     
                     conn.Execute Sql
                 
@@ -2258,7 +2546,7 @@ Dim CADENA As String
 
         Sql = "select NumFactura ,FechaVenta ,NombreSocio from declaralom where esventa>0 and (numcarnet is null  or  NomCarnetMani is null)"
         If Me.chkTratamientos.Value = 1 Then
-            'No hace falta obtener carnet de manipulador enlos tratamiebntos, ya que es la COOPERATIVA quein lo realiza
+            'No hace falta obtener carnet de manipulador en los tratamientos, ya que es la COOPERATIVA quien lo realiza
             Sql = Sql & " AND FALSE"
         End If
         RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -2267,7 +2555,7 @@ Dim CADENA As String
         NumRegElim = 0
         Sql = ""
         While Not RS.EOF
-            Sql = Sql & "- " & DBLet(RS!NumFactura, "T") & " " & DBLet(RS!FechaVenta, "T") & "   " & DBLet(RS!NombreSocio, "T") & vbCrLf
+            Sql = Sql & "- " & DBLet(RS!NumFactura, "T") & " " & DBLet(RS!fechaventa, "T") & "   " & DBLet(RS!nombresocio, "T") & vbCrLf
             RS.MoveNext
         Wend
         RS.Close
@@ -2278,12 +2566,85 @@ Dim CADENA As String
         End If
         
         
+        
+        
+        
+        'Ajustes finales
+        '   SIN rectificativas
+        '   Ajustes fecha funcion presentacion
+        
+        'marzo 2022. Facturas venta rectificativas NO se declaran
+        lblInf.Caption = "Rectificativas"
+        lblInf.Refresh
+        Set miRsAux = New ADODB.Recordset
+        CADENA = ""
+        
+        If chkSoloMostrarErrores.Value = 1 Then
+            Sql = "select * from declaralom  where esventa=1 and cantidad<=0  ORDER BY numfactura"
+            miRsAux.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+            While Not miRsAux.EOF
+                CADENA = CADENA & Mid(miRsAux!nombresocio & Space(40), 1, 40) & " " & Mid(miRsAux!NumFactura & Space(15), 1, 15) & " " & miRsAux!cantidad
+                miRsAux.MoveNext
+            Wend
+            miRsAux.Close
+        End If
+        conn.Execute "DELETE from declaralom  where esventa=1 and cantidad<=0"
+        
+        If CADENA <> "" Then
+           Errores = Errores & vbCrLf & vbCrLf & vbCrLf & "VTAS RECTIFICTIVAS " & vbCrLf & String(40, "=") & vbCrLf
+           Errores = Errores & "      " & vbCrLf
+           Errores = Errores & CADENA
+           CADENA = ""
+        End If
+        
+        
+        
+        If Me.chkTratamientos.Value = 0 And chkFechasPlazo.Value = 1 Then
+            lblInf.Caption = "Plazos fechas VENTA"
+            lblInf.Refresh
+            F = DateAdd("m", -1, Now()) ' -un mes
+            
+            Sql = "select distinct FechaVenta from declaralom  where esventa= 1 and FechaVenta <" & DBSet(F, "F")
+            miRsAux.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+            NumRegElim = 1
+            F2 = F
+            While Not miRsAux.EOF
+                Sql = ""
+                Do
+                    NumRegElim = NumRegElim + 1
+                    F2 = DateAdd("d", NumRegElim, F)
+                    If F2 >= Now Then
+                        F2 = F
+                        NumRegElim = 1
+                    End If
+                    If Weekday(F2, vbMonday) <> 7 Then Sql = "S"
+                Loop Until Sql <> ""
+                If chkSoloMostrarErrores.Value = 1 Then CADENA = CADENA & miRsAux!fechaventa & "      " & Format(F2, "dd/mm/yyyy") & vbCrLf
+                
+                Sql = "UPDATE declaralom set fechaventa= " & DBSet(F2, "F") & " WHERE esventa=1 "
+                Sql = Sql & "  AND fechaventa=" & DBSet(miRsAux!fechaventa, "F")
+                conn.Execute Sql
+                
+                miRsAux.MoveNext
+            Wend
+            miRsAux.Close
+            
+            If chkSoloMostrarErrores.Value = 1 Then
+               Errores = Errores & vbCrLf & vbCrLf & vbCrLf & "Ajuste fechas " & vbCrLf & String(40, "=") & vbCrLf
+               Errores = Errores & "  Fecha       Ajuste" & vbCrLf
+               Errores = Errores & CADENA
+            End If
+            NumRegElim = 0
+        End If
+        
+        
+        
         lblInf.Caption = "Comprobar carnets ROPO"
         lblInf.Refresh
         
         Sql = "select numcarnet ,NomCarnetMani,GROUP_CONCAT( numfactuRA separator ' ')  from declaralom where numcarnet <>'' "
         If Me.chkTratamientos.Value = 1 Then
-            'No hace falta obtener carnet de manipulador enlos tratamiebntos, ya que es la COOPERATIVA quein lo realiza
+            'No hace falta obtener carnet de manipulador enlos tratamientos, ya que es la COOPERATIVA quein lo realiza
             Sql = Sql & " AND FALSE"
         End If
         'ROPOR TAMPCOCO
@@ -2440,6 +2801,9 @@ Private Function CrearFicheroReto() As Boolean
 Dim Clipro As String
 Dim CPos As String
 Dim PintaCarnet As Boolean
+Dim EsVenta As Boolean
+Dim Cuantos As Currency
+
 On Error GoTo eCrearFicheroReto
 
     CrearFicheroReto = False
@@ -2489,32 +2853,49 @@ On Error GoTo eCrearFicheroReto
         
         Clipro = ""
         Print #NF, "RT0001"
-        Sql = "select * from declaralom order by esventa asc,nif,numcarnet,fechaventa,numfactura"
+        Sql = "select declaralom.*,if(cantidad<0,1,0) esnegativo from declaralom order by esventa asc,nif,numcarnet,fechaventa,numfactura,esnegativo"
         miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not miRsAux.EOF
-                    
+                
+            If miRsAux!esnegativo = 1 And miRsAux!EsVenta = 0 Then Debug.Assert False
+        
         
             'RETO
             'Para cada "cliente /proveedor " y persona autirzada imprimira resgistro transaccion (Tipo1)
-            Sql = miRsAux!esventa & miRsAux!NIF & "@" & miRsAux!numcarnet & "@" & Format(miRsAux!FechaVenta, "ddmmyy")
+            Sql = miRsAux!EsVenta & miRsAux!NIF & "@" & miRsAux!numcarnet & "@" & Format(miRsAux!fechaventa, "ddmmyy") & "@" & miRsAux!esnegativo
             
             
             If Sql <> Clipro Then
+            
+            
+            
                 Clipro = CStr(Sql)
                 
                 'Imprimimos el registro
-                Sql = "1;" & Format(miRsAux!FechaVenta, "dd/mm/yyyy") & ";" & vParam.CifEmpresa & ";"
+                Sql = "1;" & Format(miRsAux!fechaventa, "dd/mm/yyyy") & ";" & vParam.CifEmpresa & ";"
                 
                 
                     
                 If Me.chkTratamientos.Value = 1 Then
                     'Aplicacon tratamientos
                     Sql = Sql & RecuperaValor(CadenaDesdeOtroForm, 2) & ";"
-                    Sql = Sql & "8;"
+                    
+                    If miRsAux!EsVenta = 3 Then
+                        'Traspaso entre almacenes de fisoantiarios
+                        Sql = Sql & "7;"
+                    Else
+                        'Aplicador tratamiento
+                        Sql = Sql & "8;"
+                    End If
                 Else
                     Sql = Sql & RecuperaValor(CadenaDesdeOtroForm, 1) & ";"
-                    Sql = Sql & IIf(miRsAux!esventa = 1, 2, 1) & ";" 'vta:2   compra 1
+                    
+                    EsVenta = miRsAux!EsVenta = 1
+                    'Si es venta negativo se trata como una compra
+                    'Si es compra neativo se trata como una venta
+                    If miRsAux!esnegativo = 1 Then EsVenta = Not EsVenta
+                    Sql = Sql & IIf(EsVenta, 2, 1) & ";"  'vta:2   compra 1
                 End If
             
                 
@@ -2525,9 +2906,20 @@ On Error GoTo eCrearFicheroReto
                     'SQL = SQL & vParam.CifEmpresa & ";" & RecuperaValor(CadenaDesdeOtroForm, 2) & ";"
                 Else
                     'El destino cuando es una COMPRA se supone que es el proveedor
-                    Sql = Sql & miRsAux!NIF & ";" & miRsAux!numcarnet & ";"
+                    If miRsAux!EsVenta = 1 Then
+                        
+                        If DBLet(miRsAux!nifmani, "T") <> "" Then
+                            Sql = Sql & miRsAux!nifmani
+                        Else
+                            Sql = Sql & miRsAux!NIF
+                        End If
+                        Sql = Sql & ";" & miRsAux!numcarnet & ";"
+                    Else
+                        'lo que habia
+                        Sql = Sql & miRsAux!NIF & ";" & miRsAux!numcarnet & ";"
+                    End If
                 End If
-                Sql = Sql & miRsAux!NombreSocio & ";" & DBLet(miRsAux!email, "T") & ";"
+                Sql = Sql & miRsAux!nombresocio & ";" & DBLet(miRsAux!email, "T") & ";"
                 Sql = Sql & DBLet(miRsAux!Telefono, "T") & ";;" 'fax
                 
                 CPos = Trim(Mid(miRsAux!Poblacion, 1, 5))
@@ -2545,12 +2937,12 @@ On Error GoTo eCrearFicheroReto
                  
                 'nif nombre apee1 apell2
                 PintaCarnet = False
-                If Me.chkTratamientos.Value = 0 Then If miRsAux!esventa = 1 Then PintaCarnet = True
+                If Me.chkTratamientos.Value = 0 Then If miRsAux!EsVenta = 1 Then PintaCarnet = True
                 
                 If PintaCarnet Then
                     'Venta
                     SeparaNombreManipulador DBLet(miRsAux!NomCarnetMani, "T")
-                    CPos = miRsAux!NombreSocio
+                    CPos = miRsAux!nombresocio
                 Else
                     Sql = Sql & ";;;;"
                     CPos = ""
@@ -2565,11 +2957,27 @@ On Error GoTo eCrearFicheroReto
             
             'Lineas articulos
             '  Registro NombreComercial Lote capacidad tipoud Cantidad volumen N" "N"
-            Sql = "2;" & miRsAux!registro & ";" & miRsAux!NombreComercial & ";" & miRsAux!Lote & ";"
-            Sql = Sql & miRsAux!Capacidad & ";" & miRsAux!tipoud & ";"
-            Sql = Sql & IIf(miRsAux!esventa = 0, miRsAux!CanCompra, miRsAux!cantidad)
-            Sql = Sql & ";" & miRsAux!Volumen & ";N;N;"
-            If Me.chkTratamientos.Value = 1 Then Sql = Sql & "plagas;"
+            Sql = "2;" & miRsAux!Registro & ";" & miRsAux!NombreComercial & ";" & miRsAux!Lote & ";"
+            
+            'En los tratamientos NO pintaremos la capacidad
+            If Me.chkTratamientos.Value = 0 Then Sql = Sql & miRsAux!Capacidad
+            
+            
+            Sql = Sql & ";" & miRsAux!tipoud & ";"
+            
+            
+             If Me.chkTratamientos.Value = 0 Then
+                'SIEMPRE pondra CANTIDAD
+                'Sql = Sql & IIf(miRsAux!esventa = 0, miRsAux!CanCompra, miRsAux!cantidad)
+                Cuantos = Abs(IIf(miRsAux!EsVenta = 0, miRsAux!cantidad, miRsAux!cantidad))
+                Sql = Sql & Cuantos
+            End If
+            'Sql = Sql & ";" & miRsAux!Volumen & ";N;N;"
+            Cuantos = Abs(miRsAux!Volumen)
+            Sql = Sql & ";" & Cuantos & ";N;N;"
+            If Me.chkTratamientos.Value = 1 Then
+                If miRsAux!EsVenta <> 3 Then Sql = Sql & "plagas;"
+            End If
             Print #NF, Sql
         
         

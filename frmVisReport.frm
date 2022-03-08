@@ -475,30 +475,7 @@ Dim BDConta As String
     
     
     EstaImpreso = False
-'    mrpt.SelectPrinter Printer.DriverName, Printer.DeviceName, Printer.Port
-'    If Opcion = 93 Then 'TICKET
-'        I = ObtenerTerminal
-'        'Establecemos la impresora de ticket
-'        NomImpre = NombreImpresoraTicket(I)
-'
-'        '## PRUEBAS
-''        Dim X As Printer
-''
-'''        oImp = ObtenerImpresora(NomImpre)
-''        For Each X In Printers
-''           If X.DeviceName = NomImpre Then
-''              ' La define como predeterminada del sistema.
-''    '          Set Printer = X
-''              ' Sale del bucle.
-'''              ObtenerImpresora = X
-''              Exit For
-''           End If
-''        Next
-''        mrpt.SelectPrinter X.DriverName, X.DeviceName, X.Port
-'        '##
-'
-'        mrpt.SelectPrinter "", NomImpre, ""
-'    End If
+
     
     CRViewer1.ReportSource = mrpt
    

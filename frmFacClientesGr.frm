@@ -316,9 +316,10 @@ Begin VB.Form frmFacClientesGr
       TabCaption(1)   =   "Asegur"
       TabPicture(1)   =   "frmFacClientesGr.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame3"
-      Tab(1).Control(1)=   "FrameAsegurados"
-      Tab(1).ControlCount=   2
+      Tab(1).Control(0)=   "FrameRappel"
+      Tab(1).Control(1)=   "Frame3"
+      Tab(1).Control(2)=   "FrameAsegurados"
+      Tab(1).ControlCount=   3
       TabCaption(2)   =   "Direcciones"
       TabPicture(2)   =   "frmFacClientesGr.frx":0044
       Tab(2).ControlEnabled=   0   'False
@@ -392,53 +393,53 @@ Begin VB.Form frmFacClientesGr
       TabCaption(8)   =   "tfno"
       TabPicture(8)   =   "frmFacClientesGr.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "Label1(128)"
-      Tab(8).Control(1)=   "Label1(95)"
-      Tab(8).Control(2)=   "Label1(99)"
-      Tab(8).Control(3)=   "Label1(98)"
-      Tab(8).Control(4)=   "Label2(1)"
-      Tab(8).Control(5)=   "Label1(96)"
-      Tab(8).Control(6)=   "Label1(97)"
-      Tab(8).Control(7)=   "imgBuscar(18)"
-      Tab(8).Control(8)=   "imgBuscar(19)"
-      Tab(8).Control(9)=   "imgBuscar(20)"
-      Tab(8).Control(10)=   "Label1(100)"
-      Tab(8).Control(11)=   "Label1(101)"
-      Tab(8).Control(12)=   "Label1(102)"
-      Tab(8).Control(13)=   "imgBuscar(21)"
-      Tab(8).Control(14)=   "imgFechaTf(9)"
-      Tab(8).Control(15)=   "imgFechaTf(10)"
-      Tab(8).Control(16)=   "Label1(103)"
-      Tab(8).Control(17)=   "Label1(20)"
-      Tab(8).Control(18)=   "Line1"
-      Tab(8).Control(19)=   "Label5"
-      Tab(8).Control(20)=   "Label1(127)"
-      Tab(8).Control(21)=   "imgFechaTf(16)"
-      Tab(8).Control(22)=   "lwTfnoCuotas"
+      Tab(8).Control(0)=   "txtauxTfno(16)"
+      Tab(8).Control(1)=   "cboFiltroTfno"
+      Tab(8).Control(2)=   "cboOperadorTfnnia2(2)"
+      Tab(8).Control(3)=   "FrameToolAux(5)"
+      Tab(8).Control(4)=   "FrameModuloVtaPlazos"
+      Tab(8).Control(5)=   "cboOperadorTfnnia2(0)"
+      Tab(8).Control(6)=   "cboOperadorTfnnia2(1)"
+      Tab(8).Control(7)=   "FrameTelefonia(1)"
+      Tab(8).Control(8)=   "txtauxTfno(10)"
+      Tab(8).Control(9)=   "txtauxTfno(9)"
+      Tab(8).Control(10)=   "txtauxTfno(8)"
+      Tab(8).Control(11)=   "txtauxTfno(7)"
+      Tab(8).Control(12)=   "Text5(6)"
+      Tab(8).Control(13)=   "txtauxTfno(6)"
+      Tab(8).Control(14)=   "Text5(5)"
+      Tab(8).Control(15)=   "Text5(4)"
+      Tab(8).Control(16)=   "txtauxTfno(5)"
+      Tab(8).Control(17)=   "txtauxTfno(4)"
+      Tab(8).Control(18)=   "FrameTelefonia(0)"
+      Tab(8).Control(19)=   "txtauxTfno(3)"
+      Tab(8).Control(20)=   "txtauxTfno(2)"
+      Tab(8).Control(21)=   "txtauxTfno(1)"
+      Tab(8).Control(22)=   "txtauxTfno(0)"
       Tab(8).Control(23)=   "DataGrid3"
-      Tab(8).Control(24)=   "txtauxTfno(0)"
-      Tab(8).Control(25)=   "txtauxTfno(1)"
-      Tab(8).Control(26)=   "txtauxTfno(2)"
-      Tab(8).Control(27)=   "txtauxTfno(3)"
-      Tab(8).Control(28)=   "FrameTelefonia(0)"
-      Tab(8).Control(29)=   "txtauxTfno(4)"
-      Tab(8).Control(30)=   "txtauxTfno(5)"
-      Tab(8).Control(31)=   "Text5(4)"
-      Tab(8).Control(32)=   "Text5(5)"
-      Tab(8).Control(33)=   "txtauxTfno(6)"
-      Tab(8).Control(34)=   "Text5(6)"
-      Tab(8).Control(35)=   "txtauxTfno(7)"
-      Tab(8).Control(36)=   "txtauxTfno(8)"
-      Tab(8).Control(37)=   "txtauxTfno(9)"
-      Tab(8).Control(38)=   "txtauxTfno(10)"
-      Tab(8).Control(39)=   "FrameTelefonia(1)"
-      Tab(8).Control(40)=   "cboOperadorTfnnia2(1)"
-      Tab(8).Control(41)=   "cboOperadorTfnnia2(0)"
-      Tab(8).Control(42)=   "FrameModuloVtaPlazos"
-      Tab(8).Control(43)=   "FrameToolAux(5)"
-      Tab(8).Control(44)=   "cboOperadorTfnnia2(2)"
-      Tab(8).Control(45)=   "cboFiltroTfno"
-      Tab(8).Control(46)=   "txtauxTfno(16)"
+      Tab(8).Control(24)=   "lwTfnoCuotas"
+      Tab(8).Control(25)=   "imgFechaTf(16)"
+      Tab(8).Control(26)=   "Label1(127)"
+      Tab(8).Control(27)=   "Label5"
+      Tab(8).Control(28)=   "Line1"
+      Tab(8).Control(29)=   "Label1(20)"
+      Tab(8).Control(30)=   "Label1(103)"
+      Tab(8).Control(31)=   "imgFechaTf(10)"
+      Tab(8).Control(32)=   "imgFechaTf(9)"
+      Tab(8).Control(33)=   "imgBuscar(21)"
+      Tab(8).Control(34)=   "Label1(102)"
+      Tab(8).Control(35)=   "Label1(101)"
+      Tab(8).Control(36)=   "Label1(100)"
+      Tab(8).Control(37)=   "imgBuscar(20)"
+      Tab(8).Control(38)=   "imgBuscar(19)"
+      Tab(8).Control(39)=   "imgBuscar(18)"
+      Tab(8).Control(40)=   "Label1(97)"
+      Tab(8).Control(41)=   "Label1(96)"
+      Tab(8).Control(42)=   "Label2(1)"
+      Tab(8).Control(43)=   "Label1(98)"
+      Tab(8).Control(44)=   "Label1(99)"
+      Tab(8).Control(45)=   "Label1(95)"
+      Tab(8).Control(46)=   "Label1(128)"
       Tab(8).ControlCount=   47
       TabCaption(9)   =   "Fito"
       TabPicture(9)   =   "frmFacClientesGr.frx":0108
@@ -504,6 +505,181 @@ Begin VB.Form frmFacClientesGr
       Tab(11).ControlEnabled=   0   'False
       Tab(11).Control(0)=   "Frame5"
       Tab(11).ControlCount=   1
+      Begin VB.Frame FrameRappel 
+         Caption         =   "Rappel cliente "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00004000&
+         Height          =   6495
+         Left            =   -64680
+         TabIndex        =   535
+         Top             =   2280
+         Width           =   7215
+         Begin VB.TextBox txtRappel 
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   0
+            Left            =   1440
+            Locked          =   -1  'True
+            MaxLength       =   40
+            TabIndex        =   542
+            Tag             =   "ID|N|N|0||sclienrappel|id|000|S|"
+            Text            =   "id"
+            Top             =   600
+            Visible         =   0   'False
+            Width           =   765
+         End
+         Begin VB.TextBox txtRappel 
+            Alignment       =   1  'Right Justify
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   2
+            Left            =   3480
+            Locked          =   -1  'True
+            MaxLength       =   40
+            TabIndex        =   540
+            Tag             =   "Desde|N|S|0||sclienrappel|hastaimporte|#,##0.00||"
+            Text            =   "Importe"
+            Top             =   480
+            Visible         =   0   'False
+            Width           =   1005
+         End
+         Begin VB.TextBox txtRappel 
+            Alignment       =   1  'Right Justify
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   1
+            Left            =   2400
+            Locked          =   -1  'True
+            MaxLength       =   40
+            TabIndex        =   539
+            Tag             =   "Desde|N|N|0||sclienrappel|desdeImporte|#,##0.00|N|"
+            Text            =   "Importe"
+            Top             =   480
+            Visible         =   0   'False
+            Width           =   1005
+         End
+         Begin VB.TextBox txtRappel 
+            Alignment       =   1  'Right Justify
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   3
+            Left            =   4560
+            Locked          =   -1  'True
+            MaxLength       =   40
+            TabIndex        =   541
+            Tag             =   "Desde|N|N|0|99|sclienrappel|rappel|#0.00||"
+            Text            =   "rapp"
+            Top             =   360
+            Visible         =   0   'False
+            Width           =   765
+         End
+         Begin VB.Frame FrameToolAux 
+            Height          =   555
+            Index           =   7
+            Left            =   240
+            TabIndex        =   536
+            Top             =   360
+            Width           =   1965
+            Begin MSComctlLib.Toolbar ToolbarAux 
+               Height          =   330
+               Index           =   8
+               Left            =   120
+               TabIndex        =   537
+               Top             =   180
+               Width           =   1335
+               _ExtentX        =   2355
+               _ExtentY        =   582
+               ButtonWidth     =   609
+               ButtonHeight    =   582
+               Style           =   1
+               _Version        =   393216
+               BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+                  NumButtons      =   3
+                  BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                     Object.ToolTipText     =   "Insertar"
+                  EndProperty
+                  BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                     Object.ToolTipText     =   "Modificar"
+                  EndProperty
+                  BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                     Object.ToolTipText     =   "Eliminar"
+                  EndProperty
+               EndProperty
+            End
+         End
+         Begin MSDataGridLib.DataGrid DataGrid8 
+            Height          =   4935
+            Left            =   720
+            TabIndex        =   538
+            Top             =   1080
+            Width           =   5775
+            _ExtentX        =   10186
+            _ExtentY        =   8705
+            _Version        =   393216
+            HeadLines       =   1
+            RowHeight       =   19
+            BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   -1  'True
+               Strikethrough   =   0   'False
+            EndProperty
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ColumnCount     =   2
+            BeginProperty Column00 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   1034
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            BeginProperty Column01 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   1034
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            SplitCount      =   1
+            BeginProperty Split0 
+               BeginProperty Column00 
+               EndProperty
+               BeginProperty Column01 
+               EndProperty
+            EndProperty
+         End
+      End
       Begin VB.CommandButton cmdImprimeFraCli 
          Height          =   495
          Left            =   -60000
@@ -1723,7 +1899,7 @@ Begin VB.Form frmFacClientesGr
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00004000&
-         Height          =   1695
+         Height          =   1575
          Left            =   -74640
          TabIndex        =   424
          Top             =   600
@@ -1821,17 +1997,17 @@ Begin VB.Form frmFacClientesGr
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00004000&
-         Height          =   5415
+         Height          =   6495
          Left            =   -74640
          TabIndex        =   393
-         Top             =   2880
-         Width           =   17175
+         Top             =   2280
+         Width           =   9615
          Begin VB.CommandButton cmdActRiesgo 
             Caption         =   "Actualizar riesgo"
             Height          =   495
-            Left            =   12000
+            Left            =   7200
             TabIndex        =   423
-            Top             =   4560
+            Top             =   5400
             Visible         =   0   'False
             Width           =   2055
          End
@@ -1847,93 +2023,94 @@ Begin VB.Form frmFacClientesGr
                Strikethrough   =   0   'False
             EndProperty
             Height          =   465
-            Left            =   4920
+            Left            =   480
             Locked          =   -1  'True
             MaxLength       =   30
             TabIndex        =   422
             Text            =   "Text2"
-            Top             =   4680
+            Top             =   5400
             Width           =   6045
          End
          Begin VB.TextBox Text1 
+            Alignment       =   2  'Center
             Height          =   360
             Index           =   51
-            Left            =   14160
+            Left            =   7440
             MaxLength       =   10
-            TabIndex        =   420
+            TabIndex        =   409
             Tag             =   "Fecha Reclamación|F|S|||sclien|UtFecrecal|dd/mm/yyyy|N|"
             Text            =   "Text1"
-            Top             =   3360
-            Width           =   1335
+            Top             =   4080
+            Width           =   1575
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   360
             Index           =   49
-            Left            =   8760
+            Left            =   7440
             MaxLength       =   16
-            TabIndex        =   418
+            TabIndex        =   405
             Tag             =   "Riesgo|N|S|||sclien|riesgoact|#,###,###,##0.00|N|"
             Text            =   "Text1"
-            Top             =   3360
+            Top             =   2640
             Width           =   1570
          End
          Begin VB.TextBox Text1 
             Height          =   360
             Index           =   53
-            Left            =   2760
+            Left            =   2400
             MaxLength       =   10
-            TabIndex        =   416
+            TabIndex        =   404
             Tag             =   "Fecha concesion|F|S|||sclien|fecbajcre|dd/mm/yyyy|N|"
             Text            =   "Text1"
-            Top             =   3360
+            Top             =   2640
             Width           =   1455
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   360
             Index           =   43
-            Left            =   14160
+            Left            =   7440
             MaxLength       =   16
-            TabIndex        =   414
+            TabIndex        =   407
             Tag             =   "Límite crédito|N|S|0||sclien|limcredi|#,###,###,##0.00|N|"
             Text            =   "Text1"
-            Top             =   2520
-            Width           =   1350
+            Top             =   3360
+            Width           =   1590
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   360
             Index           =   63
-            Left            =   8760
+            Left            =   7440
             MaxLength       =   16
-            TabIndex        =   412
+            TabIndex        =   403
             Tag             =   "Crédito concedidp|N|S|0||sclien|CreditoConcedido|#,###,###,##0.00|N|"
             Text            =   "Text1"
-            Top             =   2520
+            Top             =   1920
             Width           =   1570
          End
          Begin VB.TextBox Text1 
             Height          =   360
             Index           =   41
-            Left            =   2760
+            Left            =   2400
             MaxLength       =   10
-            TabIndex        =   410
+            TabIndex        =   402
             Tag             =   "Fecha concesion|F|S|||sclien|fechaulr|dd/mm/yyyy|N|"
             Text            =   "Text1"
-            Top             =   2520
+            Top             =   1920
             Width           =   1455
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   360
             Index           =   64
-            Left            =   14160
+            Left            =   2400
             MaxLength       =   3
-            TabIndex        =   408
+            TabIndex        =   406
             Tag             =   "NºGrupo|T|S|||sclien|TipoCredito|||"
             Text            =   "Text1"
-            Top             =   1680
+            Top             =   3360
             Visible         =   0   'False
             Width           =   615
          End
@@ -1941,55 +2118,55 @@ Begin VB.Form frmFacClientesGr
             Alignment       =   1  'Right Justify
             Height          =   360
             Index           =   47
-            Left            =   8760
+            Left            =   7440
             MaxLength       =   16
-            TabIndex        =   406
+            TabIndex        =   401
             Tag             =   "Límite crédito|N|S|0||sclien|credisol|#,###,###,##0.00|N|"
             Text            =   "Text1"
-            Top             =   1680
+            Top             =   1200
             Width           =   1570
          End
          Begin VB.TextBox Text1 
             Height          =   360
             Index           =   48
-            Left            =   2760
+            Left            =   2400
             MaxLength       =   10
-            TabIndex        =   404
+            TabIndex        =   400
             Tag             =   "Fecha Reclamación|F|S|||sclien|FechaSol|dd/mm/yyyy|N|"
             Text            =   "Text1"
-            Top             =   1680
+            Top             =   1200
             Width           =   1455
          End
          Begin VB.TextBox Text1 
             Height          =   360
             Index           =   55
-            Left            =   14160
+            Left            =   2400
             MaxLength       =   16
-            TabIndex        =   402
+            TabIndex        =   408
             Tag             =   "NºGrupo|T|S|||sclien|NumGrupo|||"
             Text            =   "Text1"
-            Top             =   840
+            Top             =   4080
             Width           =   1470
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             Height          =   360
             Index           =   50
-            Left            =   8760
+            Left            =   7440
             MaxLength       =   16
-            TabIndex        =   400
+            TabIndex        =   399
             Tag             =   "Codigo aseg.|T|S|||sclien|codaseg||N|"
             Text            =   "Text1"
-            Top             =   847
+            Top             =   480
             Width           =   1570
          End
          Begin VB.ComboBox cboTipoASeg 
             Height          =   360
-            Left            =   2760
+            Left            =   2400
             Style           =   2  'Dropdown List
             TabIndex        =   398
             Tag             =   "Tipo credito|N|S|||sclien|credipriv||N|"
-            Top             =   847
+            Top             =   480
             Width           =   2415
          End
          Begin VB.Label lblPerfil 
@@ -2012,81 +2189,81 @@ Begin VB.Form frmFacClientesGr
             Caption         =   "Ult. fec. recalculo"
             Height          =   240
             Index           =   83
-            Left            =   12120
+            Left            =   5280
             TabIndex        =   421
-            Top             =   3390
+            Top             =   4140
             Width           =   1770
          End
          Begin VB.Label Label1 
             Caption         =   "Riesgo actual"
             Height          =   240
             Index           =   81
-            Left            =   6360
-            TabIndex        =   419
-            Top             =   3360
+            Left            =   5280
+            TabIndex        =   420
+            Top             =   2640
             Width           =   1320
          End
          Begin VB.Image imgFecha 
             Height          =   240
             Index           =   5
-            Left            =   2400
+            Left            =   2040
             Picture         =   "frmFacClientesGr.frx":1AAC
             ToolTipText     =   "Buscar fecha"
-            Top             =   3390
+            Top             =   2670
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "Fecha baja"
             Height          =   240
             Index           =   92
-            Left            =   600
-            TabIndex        =   417
-            Top             =   3390
+            Left            =   240
+            TabIndex        =   419
+            Top             =   2670
             Width           =   1095
          End
          Begin VB.Label Label1 
             Caption         =   "Límite Crédito"
             Height          =   240
             Index           =   45
-            Left            =   12120
-            TabIndex        =   415
-            Top             =   2550
+            Left            =   5280
+            TabIndex        =   418
+            Top             =   3420
             Width           =   1350
          End
          Begin VB.Label Label1 
             Caption         =   "Credito concedido"
             Height          =   240
             Index           =   118
-            Left            =   6360
-            TabIndex        =   413
-            Top             =   2580
+            Left            =   5280
+            TabIndex        =   417
+            Top             =   1980
             Width           =   1785
          End
          Begin VB.Image imgFecha 
             Height          =   240
             Index           =   2
-            Left            =   2400
+            Left            =   2040
             Picture         =   "frmFacClientesGr.frx":1B37
             ToolTipText     =   "Buscar fecha"
-            Top             =   2550
+            Top             =   1950
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "Fecha concesión"
             Height          =   240
             Index           =   66
-            Left            =   600
-            TabIndex        =   411
-            Top             =   2550
+            Left            =   240
+            TabIndex        =   416
+            Top             =   1950
             Width           =   1665
          End
          Begin VB.Label Label1 
             Caption         =   "Tipo crédito"
             Height          =   240
             Index           =   22
-            Left            =   12120
-            TabIndex        =   409
-            Top             =   1710
+            Left            =   240
+            TabIndex        =   415
+            Top             =   3420
             Visible         =   0   'False
             Width           =   1215
          End
@@ -2094,54 +2271,54 @@ Begin VB.Form frmFacClientesGr
             Caption         =   "Crédito solicitado"
             Height          =   240
             Index           =   79
-            Left            =   6360
-            TabIndex        =   407
-            Top             =   1710
+            Left            =   5280
+            TabIndex        =   414
+            Top             =   1230
             Width           =   1710
          End
          Begin VB.Image imgFecha 
             Height          =   240
             Index           =   4
-            Left            =   2400
+            Left            =   2040
             Picture         =   "frmFacClientesGr.frx":1BC2
             ToolTipText     =   "Buscar fecha"
-            Top             =   1710
+            Top             =   1230
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "Fecha solicitud"
             Height          =   240
             Index           =   80
-            Left            =   600
-            TabIndex        =   405
-            Top             =   1710
+            Left            =   240
+            TabIndex        =   413
+            Top             =   1230
             Width           =   1485
          End
          Begin VB.Label Label1 
             Caption         =   "Nº Grupo:"
             Height          =   240
             Index           =   94
-            Left            =   12120
-            TabIndex        =   403
-            Top             =   900
+            Left            =   240
+            TabIndex        =   412
+            Top             =   4140
             Width           =   2055
          End
          Begin VB.Label Label1 
             Caption         =   "Código aseguradora"
             Height          =   240
             Index           =   82
-            Left            =   6360
-            TabIndex        =   401
-            Top             =   900
+            Left            =   5280
+            TabIndex        =   411
+            Top             =   540
             Width           =   1950
          End
          Begin VB.Label Label1 
             Caption         =   "Tipo crédito"
             Height          =   255
             Index           =   117
-            Left            =   600
-            TabIndex        =   399
-            Top             =   900
+            Left            =   240
+            TabIndex        =   410
+            Top             =   540
             Width           =   1335
          End
       End
@@ -8252,6 +8429,52 @@ Begin VB.Form frmFacClientesGr
          EndProperty
       EndProperty
    End
+   Begin MSAdodcLib.Adodc data9 
+      Height          =   495
+      Left            =   13680
+      Top             =   10200
+      Width           =   1200
+      _ExtentX        =   2117
+      _ExtentY        =   873
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   ""
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
 End
 Attribute VB_Name = "frmFacClientesGr"
 Attribute VB_GlobalNameSpace = False
@@ -8336,6 +8559,7 @@ Private Modo As Byte
 '   9.-  Telefonia
 '   10.- Fitosan
 '   11.- Campos
+'   12.- Rappel
 '-------------------------------------------------------------------------
 '-------------------------------------------------------------------------
 
@@ -9003,7 +9227,7 @@ Dim NombreModificado As Boolean
                 End If
             End If
                 
-         Case 5, 6, 7, 8, 9, 10, 11 'InsertarModificar linea
+         Case 5, 6, 7, 8, 9, 10, 11, 12 'InsertarModificar linea
             'Enero 2014
             'Puede buscar dentro de un cliente por direccion de envio
             If Modo = 6 And ModificaLineas = 5 Then
@@ -9030,6 +9254,10 @@ Dim NombreModificado As Boolean
                 Case 11
                     Cad = "id = " & Me.txtauxMarja(0).Text
                
+                Case 12
+                    
+                    Cad = "id = " & Me.txtRappel(0).Text
+               
                 End Select
                 
                 
@@ -9037,7 +9265,7 @@ Dim NombreModificado As Boolean
                 
                     LLamaLineasDirec 0, 0
                     DataGrid6.AllowAddNew = False
-                    CargaLineas True, 5
+                    CargaLineas2 True, 9
                 
                     If ModificaLineas = 1 Then
                         Data2.Recordset.MoveLast
@@ -9051,7 +9279,7 @@ Dim NombreModificado As Boolean
                     
                     LLamaLineasDirenEvio 0, 0
                     DataGrid7.AllowAddNew = False
-                    CargaLineas True, 6
+                    CargaLineas2 True, 6
                 
                     If ModificaLineas = 1 Then
                         Data3.Recordset.MoveLast
@@ -9067,7 +9295,7 @@ Dim NombreModificado As Boolean
                         
                     LLamaLineasDatosContacto 0, 0
                     DataGrid1.AllowAddNew = False
-                    CargaLineas True, 0
+                    CargaLineas2 True, 0
                 
                     If ModificaLineas = 1 Then
                         data4.Recordset.MoveLast
@@ -9081,7 +9309,7 @@ Dim NombreModificado As Boolean
                     EraNuevaLinea = ModificaLineas = 1
                     LLamaLineasRenting 0, 0
                     DataGrid2.AllowAddNew = False
-                    CargaLineas True, 1
+                    CargaLineas2 True, 1
                 
                     If ModificaLineas = 1 Then
                         data5.Recordset.MoveLast
@@ -9094,7 +9322,7 @@ Dim NombreModificado As Boolean
                     
                     LLamaLineasTfnia 0, 0
                     DataGrid3.AllowAddNew = False
-                    CargaLineas True, 2
+                    CargaLineas2 True, 2
                 
                     If ModificaLineas = 1 Then
                         data6.Recordset.MoveLast
@@ -9116,7 +9344,7 @@ Dim NombreModificado As Boolean
                     End If
                     LLamaLineasFito 0, 0
                     DataGrid4.AllowAddNew = False
-                    CargaLineas True, 3
+                    CargaLineas2 True, 3
                 
                     If ModificaLineas = 1 Then
                         data7.Recordset.MoveLast
@@ -9150,7 +9378,7 @@ Dim NombreModificado As Boolean
                     '11.- Campos huertos
                     LLamaLineasCamposHuertos 0, 0
                     DataGrid5.AllowAddNew = False
-                    CargaLineas True, 4
+                    CargaLineas2 True, 4
                 
                     If ModificaLineas = 1 Then
                         data8.Recordset.MoveLast
@@ -9160,6 +9388,20 @@ Dim NombreModificado As Boolean
                     B = True
                     
                     
+                ElseIf Modo = 12 Then
+                    '11.- Rappel
+                    LLamaLineasCamposRappel 0, 0
+                    DataGrid8.AllowAddNew = False
+                    CargaLineas2 True, 8
+                
+                    If ModificaLineas = 1 Then
+                        data9.Recordset.MoveLast
+                    Else
+                        data9.Recordset.Find Cad
+                    End If
+                    B = True
+                    
+                
                     
                 End If
                 If B Then
@@ -9349,7 +9591,7 @@ Dim Indicador As String
                 End If
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(coddirec=" & Text3(0).Text & ")"
-                 CargaLineas True, 5
+                 CargaLineas2 True, 5
                  Data2.Recordset.Find Cad
                  
                  
@@ -9368,7 +9610,7 @@ Dim Indicador As String
                     
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(coddiren=" & Text4(0).Text & ")"
-                 CargaLineas True, 6
+                 CargaLineas2 True, 6
                  Data3.Recordset.Find Cad
                  
             End If
@@ -9388,7 +9630,7 @@ Dim Indicador As String
                     
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(id=" & Me.txtauxDC(8).Text & ")"
-                 CargaLineas True, 0
+                 CargaLineas2 True, 0
                  data4.Recordset.Find Cad
                  
                  
@@ -9407,7 +9649,7 @@ Dim Indicador As String
                 
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(id=" & CStr(data5.Recordset!ID) & ")"
-                 CargaLineas True, 1
+                 CargaLineas2 True, 1
                  data5.Recordset.Find Cad
                  
             End If
@@ -9425,7 +9667,7 @@ Dim Indicador As String
                     
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(IdTelefono='" & Me.txtauxTfno(0).Text & "')"
-                 CargaLineas True, 2
+                 CargaLineas2 True, 2
                  data6.Recordset.Find Cad
                  
                  
@@ -9441,7 +9683,7 @@ Dim Indicador As String
                 If Not data7.Recordset.EOF Then data7.Recordset.MoveFirst
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(id='" & Me.txtauxFito(4).Text & "')"
-                 CargaLineas True, 3
+                 CargaLineas2 True, 3
                  data7.Recordset.Find Cad
             End If
             LLamaLineasFito 0, 0
@@ -9456,7 +9698,7 @@ Dim Indicador As String
                 If Not data8.Recordset.EOF Then data8.Recordset.MoveFirst
             ElseIf ModificaLineas = 2 Then 'Modificar
                  Cad = "(id='" & Me.txtauxMarja(0).Text & "')"
-                 CargaLineas True, 4
+                 CargaLineas2 True, 4
                  data8.Recordset.Find Cad
             End If
             PonerDatosForaGridCamposHuertos False
@@ -9464,6 +9706,24 @@ Dim Indicador As String
             ModificaLineas = 0
 
             PonerModo 2
+    
+    Case 12
+            PonerModoFrame 0, Modo
+            DataGrid8.AllowAddNew = False
+            If ModificaLineas = 1 Then '1 = Insertar
+                If Not data9.Recordset.EOF Then data9.Recordset.MoveFirst
+            ElseIf ModificaLineas = 2 Then 'Modificar
+                 Cad = "(id=" & data9.Recordset!ID & ")"
+                 CargaLineas2 True, 8
+                 data9.Recordset.Find Cad
+            End If
+            
+            LLamaLineasCamposRappel 0, 0
+            ModificaLineas = 0
+            PonerModo 2
+    
+    
+    
     
     End Select
 End Sub
@@ -9701,6 +9961,9 @@ Dim vWhere As String
         Me.SSTab1.Tab = 9
     ElseIf aModo = 11 Then
         Me.SSTab1.Tab = 10
+    ElseIf aModo = 12 Then
+        Me.SSTab1.Tab = 1
+    
     Else
         Me.SSTab1.Tab = 7
     End If
@@ -9780,6 +10043,22 @@ Dim vWhere As String
         LLamaLineasCamposHuertos ObtenerAlto(DataGrid5, 30), 1
         Me.txtauxMarja(0).Text = SugerirCodigoSiguienteStr("sclienhuertos", "id", vWhere)
         PonerFoco txtauxMarja(1)
+        
+    ElseIf Modo = 12 Then
+        'Situamos el grid al final
+        AnyadirLinea DataGrid8, data9
+        LLamaLineasCamposRappel ObtenerAlto(DataGrid8, 30), 1
+        BuscaChekc = "hastaimporte"
+        vWhere = DevuelveDesdeBD(conAri, "id", "sclienrappel", vWhere & " AND 1", "1 ORDER BY id desc", "N", BuscaChekc)
+        If vWhere = "" Then
+            vWhere = "0"
+            BuscaChekc = ""
+        End If
+        txtRappel(0).Text = Val(vWhere + 1)
+        txtRappel(1).Text = BuscaChekc
+        PonerFoco txtRappel(1)
+    
+        
     Else
         AnyadirLinea DataGrid2, data5
         LLamaLineasRenting ObtenerAlto(DataGrid2, 30), 1
@@ -9882,7 +10161,12 @@ Private Function DevuelveTextoModAnyadir(QueModoEs As Byte)
         DevuelveTextoModAnyadir = "campos"
     Case 8
         DevuelveTextoModAnyadir = "renting"
+   
+    Case 12
+        DevuelveTextoModAnyadir = "rappel"
+    
     Case Else
+
         DevuelveTextoModAnyadir = ""
     End Select
 End Function
@@ -9931,7 +10215,12 @@ Dim aModo As Byte
         If data8.Recordset.EOF Then Exit Sub
         If data8.Recordset.RecordCount < 1 Then Exit Sub
         Me.SSTab1.Tab = 10
-        
+    
+    ElseIf aModo = 12 Then
+        If data9.Recordset.EOF Then Exit Sub
+        If data9.Recordset.RecordCount < 1 Then Exit Sub
+        Me.SSTab1.Tab = 1
+    
     Else
         'Renting
         If data5.Recordset.EOF Then Exit Sub
@@ -10043,6 +10332,23 @@ Dim aModo As Byte
         cboFitos(1).ListIndex = Abs(UCase(DBLet(data7.Recordset!Prov, "T")) = "SI")
         
         PonerFoco Me.txtauxFito(1)
+        
+    ElseIf aModo = 12 Then
+        'sclienrappel(codclien,id,descuento,desdeImporte,hastaimporte)
+        LLamaLineasCamposRappel ObtenerAlto(DataGrid8, 30), 2
+        txtRappel(0).Text = DBLet(data9.Recordset!ID, "N")
+        txtRappel(1).Text = DBLet(data9.Recordset!desdeImporte, "N")
+        If IsNull(data9.Recordset!hastaimporte) Then
+            txtRappel(2).Text = ""
+        Else
+            txtRappel(2).Text = data9.Recordset!hastaimporte
+        End If
+        txtRappel(3).Text = DBLet(data9.Recordset!rappel, "N")
+        
+        
+        PonerFoco Me.txtRappel(1)
+        
+        
         
     ElseIf aModo = 11 Then
         'Campos huertos
@@ -10182,7 +10488,7 @@ Dim i As Integer
         i = Data2.Recordset.AbsolutePosition
         i = i - 1
         
-        CargaLineas True, 5
+        CargaLineas2 True, 5
         
         If i > 0 Then Data2.Recordset.Move i
         'PonerDatosForaGridContacto False
@@ -10238,7 +10544,7 @@ Dim i As Integer
         
         
         
-        CargaLineas True, 6
+        CargaLineas2 True, 6
         
         If NumRegElim > 0 Then Data3.Recordset.Move NumRegElim
 
@@ -10443,7 +10749,7 @@ Private Sub Renovar_Cambiar_Telefono(Renovar As Boolean)
     End If
     
     Screen.MousePointer = vbHourglass
-    CargaLineas True, 2
+    CargaLineas2 True, 2
     If CadenaConsulta <> "" Then data6.Recordset.Find CadenaConsulta
 
 
@@ -10608,7 +10914,7 @@ Private Sub DataGrid7_Click()
 End Sub
 
 Private Sub Form_Activate()
-    If PriVezForm Then
+   If PriVezForm Then
         PriVezForm = False
         ProcesarCarpetaImagenes
         
@@ -10822,6 +11128,18 @@ Dim N As Integer
     SSTab1.TabCaption(7) = RentingLB
     SSTab1.TabVisible(5) = vParamAplic.TieneCRM
         
+        
+    'RAPPEL
+    With Me.ToolbarAux(8)
+            .HotImageList = frmPpal.imgListComun_OM16
+            .DisabledImageList = frmPpal.imgListComun_BN16
+            .ImageList = frmPpal.imgListComun16
+            .Buttons(1).Image = 3
+            .Buttons(2).Image = 4
+            .Buttons(3).Image = 5
+    End With
+    
+    
     
             
     'Coultamos password web
@@ -11118,7 +11436,7 @@ On Error Resume Next
     cboTipoASeg.ListIndex = -1
     cboPais.ListIndex = -1
     cboPrioridad.ListIndex = -1
-    CargaLineas False, 8
+    CargaLineas2 False, 9
     If vParamAplic.TieneTelefonia2 > 0 Then
         Me.chkTelefonia(0).Value = 0: Me.chkTelefonia(1).Value = 0: Me.chkTelefonia(2).Value = 0:: Me.chkTelefonia(3).Value = 0
         lwTfnoCuotas.ListItems.Clear
@@ -12894,7 +13212,7 @@ Private Sub PonerCampos()
     
     lblIndicador.Caption = "Clientes aux"
     lblIndicador.Refresh
-    CargaLineas True, 8
+    CargaLineas2 True, 9
     BotonesToolBarAux
     
     lblIndicador.Caption = "Datos navegacion"
@@ -13320,7 +13638,14 @@ On Error GoTo EPonerModoFr
             Me.imgFechaCampos(i).Enabled = ModoFrame2 > 2
         Next
         
-    
+    Case 12
+        For i = 0 To 3
+            txtRappel(i).Text = "" ' ModoFrame2 > 2
+            'If ModoFrame2 = 3 Then Text4(i).Text = ""
+            BloquearTxt txtRappel(i), (ModoFrame2 = 0)
+        Next
+
+       DataGrid8.Enabled = ModoFrame2 = 0
     End Select
     
     
@@ -13830,7 +14155,85 @@ Private Function DatosOkLinea() As Boolean
             Me.txtauxMarja(6).Text = cbomarjal.Text
             
         End If
+        
+        
+    Case 12
+        BuscaChekc = ""
+        kCampo = -1
+        For NumRegElim = 0 To 3
+          
+            txtRappel(NumRegElim).Text = Trim(txtRappel(NumRegElim).Text)
+            If NumRegElim <> 2 Then
+                If txtRappel(NumRegElim).Text = "" Then BuscaChekc = BuscaChekc & vbCrLf & "- Campo requerido (" & DataGrid8.Columns(NumRegElim).Caption & ")": kCampo = NumRegElim
+            End If
+            
+            If txtRappel(NumRegElim).Text <> "" Then
+                If Not EsNumerico(txtRappel(NumRegElim).Text) Then BuscaChekc = BuscaChekc & vbCrLf & "Campo numérico": kCampo = NumRegElim
+            End If
+            
+        Next
+        
+        If BuscaChekc = "" Then
+            If txtRappel(2).Text <> "" Then
+                If ImporteFormateado(txtRappel(1).Text) > ImporteFormateado(txtRappel(2).Text) Then BuscaChekc = "Importe hasta no puede ser menor que desde"
+            End If
+        End If
+        
+        If BuscaChekc = "" Then
+        
+            'Todo bien en la linea, vemos si es insertar o modificar
+            'Vemos si el importe es mayor que el maximo de desde
+            BuscaChekc = " codclien=" & Text1(0).Text & " AND  id < " & txtRappel(0).Text & " AND 1"
+            BuscaChekc = DevuelveDesdeBD(conAri, "hastaimporte", "sclienrappel", BuscaChekc, "1 ORDER BY id desc")
+            If BuscaChekc <> "" Then
+                If CCur(BuscaChekc) > ImporteFormateado(txtRappel(1).Text) Then
+                    BuscaChekc = "El  importe desde esta en un intervalo anterior"
+                Else
+                    If CCur(BuscaChekc) <> ImporteFormateado(txtRappel(1).Text) Then
+                        BuscaChekc = "El importe desde debe ser: " & BuscaChekc
+                    Else
+                        BuscaChekc = ""
+                    End If
+                End If
+            End If
+            
+            If BuscaChekc = "" Then
+                'El importe hasta esta en un intervalo posterior
+                BuscaChekc = " codclien=" & Text1(0).Text & " AND id > " & txtRappel(0).Text & " AND 1"
+                BuscaChekc = DevuelveDesdeBD(conAri, "desdeImporte", "sclienrappel", BuscaChekc, "1 ORDER BY id asc")
+                If BuscaChekc <> "" Then
+                
+                    If ImporteFormateado(txtRappel(2).Text) > CCur(BuscaChekc) Then
+                        BuscaChekc = "El  importe desde esta en un intervalo anterior"
+                    Else
+                    
+                        If ImporteFormateado(txtRappel(2).Text) <> CCur(BuscaChekc) Then
+                            BuscaChekc = "Importe hasta debe ser " & BuscaChekc
+                        Else
+                            BuscaChekc = ""
+                        End If
+                    End If
+                End If
+            End If
+        End If
+        
+        
+        
+        If BuscaChekc <> "" Then
+            MsgBox BuscaChekc, vbExclamation
+            
+            If kCampo >= 0 Then PonerFoco txtRappel(kCampo)
+            
+            Exit Function
+            
+        End If
+        DatosOkLinea = True
+        
+        
+        
     End Select
+    
+    
 End Function
 
 Private Function DatosOkLineaDpto() As Boolean
@@ -14276,7 +14679,8 @@ Private Function InsertarModificarLinea() As Boolean
         InsertarModificarLinea = InsertarModificarLineamanipuladorFito
     Case 11
         InsertarModificarLinea = InsertarModificarLineaCamposhuertos
-
+    Case 12
+        InsertarModificarLinea = InsertarModificarLineaRappel
     End Select
     
     If InsertarModificarLinea Then
@@ -14495,7 +14899,7 @@ Dim enlaza As Boolean
     
     
     
-    CargaLineas enlaza, 5
+    CargaLineas2 enlaza, 5
     
     
     PonerModoOpcionesMenu
@@ -14514,7 +14918,7 @@ Dim enlaza As Boolean
     Me.Data3.ConnectionString = conn
     enlaza = False
     If Text1(0).Text <> "" Then enlaza = True
-    CargaLineas enlaza, 6
+    CargaLineas2 enlaza, 6
     PonerModoOpcionesMenu
    
 End Sub
@@ -15605,14 +16009,17 @@ End Sub
 
 
 
-Private Sub CargaLineas(enlaza As Boolean, Cual_ As Byte)
+Private Sub CargaLineas2(enlaza As Boolean, Cual As Byte)
 'cual:     0  percontac, 1  renting   , 2 telefonos    3 fitos  4 Campos(huertos)
 '          5 departamentos     6  Direcciones de envio  7 Taxi
-'          8 Todos
+'          8 Rappel
+'          9 Todos
 Dim Sql As String
+Dim Todos As Boolean
         
+        Todos = Cual
 
-        If Cual_ = 0 Or Cual_ = 8 Then
+        If Cual = 0 Or Todos Then
             Sql = "SELECT nombre,cargo,dpto,telefono,ext,maidirec,movil,observa,id,codclien FROM scliendp where "
             If enlaza Then
                 Sql = Sql & "codclien = " & Text1(0).Text
@@ -15637,7 +16044,7 @@ Dim Sql As String
         End If
         
         If vParamAplic.Renting Then
-            If Cual_ = 1 Or Cual_ = 8 Then
+            If Cual = 1 Or Todos Then
                 Sql = "SELECT id,sclienrenting.coddirec,nomdirec,referencia,fecalta,numcuotas,fecbaja,importe"
                 Sql = Sql & ",sclienrenting.codtipco,nomtipco,obser,ultfec"
                 Sql = Sql & " from (sclienrenting left join sdirec on sclienrenting.codclien=sdirec.codclien"
@@ -15682,7 +16089,7 @@ Dim Sql As String
         
         
         If vParamAplic.TieneTelefonia2 > 0 Then
-            If Cual_ = 2 Or Cual_ = 8 Then
+            If Cual = 2 Or Todos Then
                 Sql = "select  IdTelefono,stfnooperador.nombre ,operador,IMEI,SIM,Factura,Detalle,Inactivo,Observaciones,coddirec,clienppal,"
                 Sql = Sql & " modelo,coninternet,puntos,fechaalta,cuotaminima,fecharenove,procedencia "
                 If vParamAplic.TelefoniaVtaPlazos Then Sql = Sql & " ,ArtPlazos,PlazosMeses,ImportePlazo,PlazosOrigen,costevtaplz"
@@ -15725,7 +16132,7 @@ Dim Sql As String
         End If
         
         If vParamAplic.ManipuladorFitosanitarios2 Then
-            If Cual_ = 3 Or Cual_ = 8 Then
+            If Cual = 3 Or Todos Then
                 Sql = "select  cif,nombre,if(tipocarnet=2,'Cualificado','Básico') tipo,numcarnet,fcaducidad,telefono"
                 Sql = Sql & ", if (Manipuladorprovisional=0,'','Si') PROV,if(ImgDNI is null, '','*') DNI,if(ImgManipula is null, '','*') as 'Car.'"
                 Sql = Sql & ",id  FROM sclienmani WHERE  "
@@ -15755,7 +16162,7 @@ Dim Sql As String
         
         'Sept 2015
         If vParamAplic.Huertos Then
-            If Cual_ = 4 Or Cual_ = 8 Then
+            If Cual = 4 Or Todos Then
                 Sql = "select id, poligono,parcela, recintos,supsigpa,supderec,partida,fecaltas,fecbajas,observac"
                 'id,codparti,fecaltas,fecbajas,supsigpa,supderec,poligono,parcela,recintos,observac
                 Sql = Sql & "  from sclienhuertos WHERE  "
@@ -15791,7 +16198,7 @@ Dim Sql As String
                 
         
         'Junio18
-        If Cual_ = 5 Or Cual_ = 8 Then
+        If Cual = 5 Or Todos Then
             Sql = "SELECT coddirec,nomdirec,domdirec,codpobla,pobdirec,prodirec,perdirec,teldirec,faxdirec,maidirec,codbanco,codsucur,digcontr,cuentaba,codzona,iban"
             Sql = Sql & " , organogestor,unidadtramitadora,orgproponente,oficinacontable FROM sdirec WHERE "
             If enlaza Then
@@ -15814,7 +16221,7 @@ Dim Sql As String
         End If
     
         If vParamAplic.DireccionesEnvio Then
-            If Cual_ = 6 Or Cual_ = 8 Then
+            If Cual = 6 Or Todos Then
                 Sql = "SELECT coddiren,nomdiren,perdiren,pobdiren,codpobla,prodiren,teldiren,faxdiren,observa,codzona,domdiren FROM sdirenvio WHERE "
                 If enlaza Then
                     Sql = Sql & " codclien = " & Text1(0).Text
@@ -15834,6 +16241,36 @@ Dim Sql As String
                 Text4(0).Alignment = 0 'a la izda
             End If
         End If
+        
+        
+        'RAPPEL
+        If Cual = 8 Or Todos Then
+        
+            '
+        
+            Sql = "SELECT id,desdeImporte,hastaimporte,rappel FROM sclienrappel WHERE "
+            
+            If enlaza Then
+                Sql = Sql & " codclien = " & Text1(0).Text
+            Else
+                Sql = Sql & " false"
+            End If
+            Sql = Sql & " ORDER BY  id"
+            
+            CargaGridGnral DataGrid8, Me.data9, Sql, PriVezForm
+            
+            Sql = "N|||||;S|txtRappel(1)|T|Desde €|1950|;S|txtRappel(2)|T|Hasta €|1950|;S|txtRappel(3)|T|Rappel|1150|;"
+            
+            arregla Sql, DataGrid8, Me, 330
+            DataGrid8.ScrollBars = dbgAutomatic
+           
+        End If
+        
+        
+        
+        
+        
+        
         
         
         
@@ -16794,6 +17231,23 @@ Private Sub ToolbarAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib
     Case 7
         AcconesTelefonos Button.Index + 1
         
+    Case 8
+        
+        'Direcciones de envio
+        If Button.Index = 3 Then
+            BotonEliminarLineaRappel
+        Else
+            PonerModo 12
+            If Button.Index = 1 Then
+                'AÑADIR linea factura
+                BotonAnyadirLinea
+            Else
+                'MODIFICAR linea factura
+                BotonModificarLinea
+            End If
+        End If
+
+        
         
     Case 11
         'Listado venta plazos
@@ -16854,7 +17308,7 @@ Dim i As Integer
         Screen.MousePointer = vbHourglass
         NumRegElim = data4.Recordset.AbsolutePosition
         data4.Recordset.Delete
-        CargaLineas True, 0
+        CargaLineas2 True, 0
         
         'PonerDatosForaGridContacto False
             
@@ -16907,7 +17361,7 @@ Dim Cad As String
         NumRegElim = data5.Recordset.AbsolutePosition
         Cad = "DELETE FROM sclienrenting where codclien = " & Text1(0).Text & " AND ID= " & data5.Recordset!ID
         conn.Execute Cad
-        CargaLineas True, 1
+        CargaLineas2 True, 1
         PonerDatosForaGridRent False
             
         ModificaLineas = 0
@@ -16977,7 +17431,7 @@ Dim Cad As String
         
         Cad = "DELETE FROM sclientfno where  IdTelefono= " & data6.Recordset!idtelefono
         conn.Execute Cad
-        CargaLineas True, 2
+        CargaLineas2 True, 2
         PonerDatosForaGridTfno False
             
         ModificaLineas = 0
@@ -17022,7 +17476,7 @@ Dim Cad As String
         NumRegElim = data7.Recordset.AbsolutePosition
         Cad = "DELETE FROM sclienmani where codclien = " & Text1(0).Text & " AND ID= " & data7.Recordset!ID
         conn.Execute Cad
-        CargaLineas True, 3
+        CargaLineas2 True, 3
         'PonerDatosForaGridRent False
             
         ModificaLineas = 0
@@ -17068,7 +17522,7 @@ Dim Cad As String
         NumRegElim = data8.Recordset.AbsolutePosition
         Cad = "DELETE FROM sclienhuertos where codclien = " & Text1(0).Text & " AND ID= " & data8.Recordset!ID
         conn.Execute Cad
-        CargaLineas True, 4
+        CargaLineas2 True, 4
         
             
         ModificaLineas = 0
@@ -18057,7 +18511,7 @@ Private Sub LanzaAnyadirImagenDocumento(TipoDoc As Integer)
         Else
             
             CadenaDesdeOtroForm = "id = " & data7.Recordset!ID
-            CargaLineas True, 3
+            CargaLineas2 True, 3
             data7.Recordset.Find CadenaDesdeOtroForm
         End If
     End If
@@ -18476,6 +18930,15 @@ Dim B As Boolean
     End If
     
     
+    'Rappel
+    B = Modo = 2 Or Modo = 12
+    ToolbarAux(8).Buttons(1).Enabled = B
+    If B Then B = Me.data9.Recordset.RecordCount > 0
+    ToolbarAux(8).Buttons(2).Enabled = B   '(Modo = 2 And Me.Data2.Recordset.RecordCount > 0)
+    ToolbarAux(8).Buttons(3).Enabled = B  '(Modo = 2 And Me.Data2.Recordset.RecordCount > 0)
+    
+    
+    
     B = Modo = 2 And vParamAplic.TieneFacElec And vUsu.Nivel = 0 'Solo super usuarios
     Toolbar2.Buttons(1).Enabled = B
 End Sub
@@ -18651,6 +19114,34 @@ Dim i As Integer
 End Sub
 
 
+
+Private Sub txtRappel_GotFocus(Index As Integer)
+      ConseguirFoco txtRappel(Index), 3
+End Sub
+
+Private Sub txtRappel_KeyPress(Index As Integer, KeyAscii As Integer)
+    
+     If Index = 3 And KeyAscii = 13 Then
+        KeyAscii = 0
+        PonerFocoBtn cmdAceptar
+    Else
+        KEYpressGnral KeyAscii, 3, False
+   End If
+End Sub
+
+Private Sub txtRappel_LostFocus(Index As Integer)
+    If Modo <> 12 Then Exit Sub
+    
+    If Index > 0 Then
+        txtRappel(Index).Text = Trim(txtRappel(Index).Text)
+        
+        If txtRappel(Index).Text <> "" Then
+            If Not PonerFormatoDecimal(txtRappel(Index), IIf(Index = 3, 4, 1)) Then txtRappel(Index).Text = ""
+            
+        End If
+    End If
+            
+End Sub
 
 Private Sub txtTaximetro_GotFocus(Index As Integer)
     ConseguirFoco txtTaximetro(Index), 3
@@ -19056,3 +19547,147 @@ Private Sub ImprimirListadoVtaPlazos()
     BuscaChekc = ""
 End Sub
 
+
+
+'------------------------------------------------------------------------------------------------------------
+'------------------------------------------------------------------------------------------------------------
+'
+'                                   Mantenimiento RAPPEL
+'
+'------------------------------------------------------------------------------------------------------------
+'------------------------------------------------------------------------------------------------------------
+'       Al insertar un nuevo, si no es el primero, el importe desde se pone como importe hasta del anterior
+'       Solo se puede borrar el ultimo. Al borrar, pondra el hastaimporte del ultimo que quede a 9999999999
+'       Al modificar, ver si puede por intervalos, y si puede, updatea 2 valores
+
+
+Private Sub LLamaLineasCamposRappel(alto As Single, xModo As Byte)
+Dim B As Boolean
+Dim i As Byte
+
+    ModificaLineas = xModo
+    
+    B = Modo = 12 And (ModificaLineas = 1 Or ModificaLineas = 2) 'Insertar o Modificar Lineas
+
+    DeseleccionaGrid Me.DataGrid8
+    txtRappel(0).visible = False
+    For i = 1 To 3
+        
+        txtRappel(i).Height = DataGrid5.RowHeight
+        txtRappel(i).visible = B
+        txtRappel(i).Top = alto
+    
+    Next
+     
+    
+End Sub
+
+
+
+
+
+
+Private Function InsertarModificarLineaRappel() As Boolean
+Dim Sql As String
+ Dim i As Byte
+    On Error GoTo eInsertarModificarLineaRappel
+    
+    InsertarModificarLineaRappel = False
+    
+    
+    If Not DatosOkLinea Then Exit Function
+    
+    Select Case ModificaLineas
+    Case 1  'INSERTAR
+        
+            Sql = "INSERT INTO sclienrappel(codclien,id,desdeImporte,hastaimporte,rappel) VALUES ("
+            Sql = Sql & Text1(0).Text
+            For i = 0 To 3
+                Sql = Sql & ", " & DBSet(txtRappel(i).Text, "N", IIf(i = 2, "S", "N"))
+            Next i
+            Sql = Sql & ")"
+            
+        
+        
+    Case 2  'MODIFICAR
+        
+            Sql = "UPDATE sclienrappel Set desdeImporte = " & DBSet(txtRappel(1).Text, "N")
+            Sql = Sql & ", hastaimporte = " & DBSet(txtRappel(2).Text, "N", "S")
+            Sql = Sql & ", rappel = " & DBSet(txtRappel(3).Text, "N")
+            Sql = Sql & " WHERE codclien =" & (Text1(0).Text) & " AND "
+            Sql = Sql & " id =" & (txtRappel(0).Text)
+        
+    End Select
+        
+    If Sql <> "" Then
+        Debug.Assert False
+        conn.Execute Sql
+        InsertarModificarLineaRappel = True
+        
+        
+        
+        'Si el anterior habia puesto NULL, ahora updteamos
+        If ModificaLineas = 1 Then
+            Sql = "id"
+            BuscaChekc = " id < " & txtRappel(0).Text & " AND 1"
+            BuscaChekc = DevuelveDesdeBD(conAri, "hastaimporte", "sclienrappel", BuscaChekc, "1 ORDER BY id desc", "N", Sql)
+            If BuscaChekc = "" And IsNumeric(Sql) Then
+                BuscaChekc = "UPDATE sclienrappel set hastaimporte=" & DBSet(txtRappel(1).Text, "N") & " WHERE codclien = " & Text1(0).Text
+                BuscaChekc = BuscaChekc & " AND id =" & Sql
+                conn.Execute BuscaChekc
+            End If
+        End If
+        
+    Else
+        PonerFoco txtRappel(1)
+    End If
+    BuscaChekc = ""
+    Exit Function
+eInsertarModificarLineaRappel:
+    MuestraError Err.Number, "Insertar/Modificar Direcciones/Departamentos" & vbCrLf & Err.Description
+    
+    
+
+End Function
+
+Private Sub BotonEliminarLineaRappel()
+
+    
+    If data9.Recordset.EOF Then Exit Sub
+    If data9.Recordset.RecordCount < 1 Then Exit Sub
+    
+    'Si no estaba modificando lineas salimos
+    'Es decir, si estaba insertando linea no podemos hacer otra cosa
+    If ModificaLineas = 1 Or ModificaLineas = 2 Then Exit Sub '1= Insertar, 2=Modificar
+    
+    BuscaChekc = " codclien =" & Text1(0).Text
+    BuscaChekc = DevuelveDesdeBD(conAri, "max(id)", "sclienrappel", BuscaChekc, "1")
+    If Val(BuscaChekc) <> Val(data9.Recordset!ID) Then
+        MsgBox "No es el ultimo registro", vbExclamation
+        Exit Sub
+    End If
+        
+    BuscaChekc = "¿Seguro que desea eliminar la última linea de rappel?" & vbCrLf
+    
+    'Borramos
+    If MsgBox(BuscaChekc, vbQuestion + vbYesNo) = vbYes Then
+        
+        Screen.MousePointer = vbHourglass
+        
+        BuscaChekc = "DELETE FROM sclienrappel WHERE codclien =" & Data1.Recordset!codClien
+        BuscaChekc = BuscaChekc & " AND id=" & data9.Recordset!ID
+        ejecutar BuscaChekc, False
+        
+        CargaLineas2 True, 9
+        
+        If Not data9.Recordset.EOF Then data9.Recordset.MoveLast
+        ModificaLineas = 0
+
+        Screen.MousePointer = vbDefault
+
+    End If
+    
+        
+    
+    
+End Sub

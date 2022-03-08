@@ -5871,7 +5871,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         
             
         Case 14: mnImpPedido_Click 'Imprimir Pedido
-        Case 15: mnImpOrde_Click 'Imprimir Orden Instalacion
+        Case 15: mnImpOrde_Click 'Imprimir Orden Instalacion y fontenas excel
             
         Case 16: mnConfirmacion_Click 'confirmacion de entrega
             ' ----
@@ -10978,13 +10978,19 @@ Dim Almacen As Integer
             txtAux(2).Text = miRsAux!nomreal
             txtAux(3).Text = Format(miRsAux!servidas, FormatoCantidad)
             txtAux(9).Text = DBSet(miRsAux!NumBultos, "N")
-            txtAux(10).Text = miRsAux!numLote
+            txtAux(10).Text = DBLet(miRsAux!numLote, "T")
         
             'Hacemos el lostfocus de cantidad
             ModificaLineas = 1
             
             txtAux_LostFocus 3
-        
+            
+            If txtAux(4).Text = "" Then txtAux(4).Text = "0"
+            If txtAux(5).Text = "" Then txtAux(4).Text = "M"
+            If txtAux(6).Text = "" Then txtAux(6).Text = "0"
+            If txtAux(7).Text = "" Then txtAux(7).Text = "0"
+            
+            txtAux(9).Text = DBSet(miRsAux!NumBultos, "N")
                 
             'Insertamos pedido
             InsertarLinea

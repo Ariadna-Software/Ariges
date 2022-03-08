@@ -15,13 +15,13 @@ Begin VB.Form frmPpalOld
    WindowState     =   2  'Maximized
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   660
+      Height          =   420
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   13260
       _ExtentX        =   23389
-      _ExtentY        =   1164
+      _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
       AllowCustomize  =   0   'False
@@ -169,7 +169,7 @@ Begin VB.Form frmPpalOld
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "9:44"
+            TextSave        =   "18:18"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -618,6 +618,14 @@ Begin VB.Form frmPpalOld
          Begin VB.Menu mnFacPedidos 
             Caption         =   "Listado pedidos por dia"
             Index           =   15
+         End
+         Begin VB.Menu mnFacPedidos 
+            Caption         =   "-"
+            Index           =   16
+         End
+         Begin VB.Menu mnFacPedidos 
+            Caption         =   "Informe pedidos anulados"
+            Index           =   17
          End
       End
       Begin VB.Menu mnFacAlbaran 
@@ -3678,7 +3686,12 @@ Private Sub mnFacPedidos_Click(Index As Integer)
     Case 15
         frmListado5.OpcionListado = 36
         frmListado5.Show vbModal
-        
+            
+            
+    Case 17
+        'Marzo 2022
+        'Pedidos anulados
+        AbrirListadoPed 80
     End Select
     PonerCaption True
 End Sub

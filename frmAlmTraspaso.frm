@@ -1395,14 +1395,14 @@ End Sub
 Private Sub CargaGrid(enlaza As Boolean)
 Dim B As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECarga
 
     B = DataGrid1.Enabled
     
-    SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.Data2, SQL, False
+    Sql = MontaSQLCarga(enlaza)
+    CargaGridGnral DataGrid1, Me.Data2, Sql, False
       
     DataGrid1.RowHeight = 350
       
@@ -2064,32 +2064,32 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
 On Error GoTo EMontaSQL
  
     tabla = NomTablaLineas
 
-    SQL = "SELECT " & tabla & ".codtrasp, "
-    SQL = SQL & tabla & ".numlinea, " & tabla & ".codartic, Articulos.nomartic, "
-    SQL = SQL & tabla & ".cantidad, " & tabla & ".observa2 , "
+    Sql = "SELECT " & tabla & ".codtrasp, "
+    Sql = Sql & tabla & ".numlinea, " & tabla & ".codartic, Articulos.nomartic, "
+    Sql = Sql & tabla & ".cantidad, " & tabla & ".observa2 , "
     
     
     If EsHistorico Then
-        SQL = SQL & " preciomphco premp, preciopvphco preve ,preciouchco preuc"
+        Sql = Sql & " preciomphco premp, preciopvphco preve ,preciouchco preuc"
     Else
-        SQL = SQL & " preciomp premp, preciove preve ,preciouc preuc"
+        Sql = Sql & " preciomp premp, preciove preve ,preciouc preuc"
     End If
     
-    SQL = SQL & " FROM ((" & tabla & " LEFT JOIN sartic AS Articulos ON " & tabla & ".codartic ="
-    SQL = SQL & " Articulos.codartic))"
+    Sql = Sql & " FROM ((" & tabla & " LEFT JOIN sartic AS Articulos ON " & tabla & ".codartic ="
+    Sql = Sql & " Articulos.codartic))"
     If enlaza Then
-        SQL = SQL & ObtenerWhereCP(True)  '" WHERE codtrasp = " & Data1.Recordset!codtrasp
+        Sql = Sql & ObtenerWhereCP(True)  '" WHERE codtrasp = " & Data1.Recordset!codtrasp
     Else
-        SQL = SQL & " WHERE false "
+        Sql = Sql & " WHERE false "
     End If
-    SQL = SQL & " ORDER BY " & tabla & ".numlinea"
-    MontaSQLCarga = SQL
+    Sql = Sql & " ORDER BY " & tabla & ".numlinea"
+    MontaSQLCarga = Sql
     
 EMontaSQL:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -2234,22 +2234,22 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
-    SQL = "Cabecera de Traspaso Almacenes." & vbCrLf
-    SQL = SQL & "------------------------------------------" & vbCrLf & vbCrLf
+    Sql = "Cabecera de Traspaso Almacenes." & vbCrLf
+    Sql = Sql & "------------------------------------------" & vbCrLf & vbCrLf
     
-    SQL = SQL & "Va a eliminar el Traspaso:" & vbCrLf
-    SQL = SQL & vbCrLf & "Nº Traspaso   : " & Text1(0).Text
-    SQL = SQL & vbCrLf & "Fecha Trasp.  : " & CStr(Data1.Recordset.Fields(1))
-    SQL = SQL & vbCrLf & "Almac. Origen : " & Text1(2).Text
-    SQL = SQL & vbCrLf & "Almac. Destino: " & Text1(3).Text
-    SQL = SQL & vbCrLf & vbCrLf & " ¿Desea continuar ? "
+    Sql = Sql & "Va a eliminar el Traspaso:" & vbCrLf
+    Sql = Sql & vbCrLf & "Nº Traspaso   : " & Text1(0).Text
+    Sql = Sql & vbCrLf & "Fecha Trasp.  : " & CStr(Data1.Recordset.Fields(1))
+    Sql = Sql & vbCrLf & "Almac. Origen : " & Text1(2).Text
+    Sql = Sql & vbCrLf & "Almac. Destino: " & Text1(3).Text
+    Sql = Sql & vbCrLf & vbCrLf & " ¿Desea continuar ? "
     
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         If Not Eliminar Then Exit Sub
@@ -2282,18 +2282,18 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
 On Error GoTo FinEliminar
     
     conn.BeginTrans
-    SQL = ObtenerWhereCP(True)  '" WHERE  codtrasp=" & Data1.Recordset!codtrasp
+    Sql = ObtenerWhereCP(True)  '" WHERE  codtrasp=" & Data1.Recordset!codtrasp
     
     'Lineas
-    conn.Execute "Delete  from " & NomTablaLineas & SQL
+    conn.Execute "Delete  from " & NomTablaLineas & Sql
     
     'Cabeceras
-    conn.Execute "Delete  from " & NombreTabla & SQL
+    conn.Execute "Delete  from " & NombreTabla & Sql
                       
                       
                       
@@ -2323,7 +2323,7 @@ End Function
 
 
 Private Sub BotonEliminarLinea()
-Dim SQL As String
+Dim Sql As String
 On Error GoTo Error2
     'Ciertas comprobaciones
     If Data2.Recordset.EOF Then Exit Sub
@@ -2335,23 +2335,23 @@ On Error GoTo Error2
     ModificaLineas = 3 'Eliminar
     
     '### a mano
-    SQL = "Seguro que desea eliminar la línea del Artículo:"
-    SQL = SQL & vbCrLf & "Código: " & Data2.Recordset!codArtic
-    SQL = SQL & vbCrLf & "Descripción: " & Data2.Recordset.Fields(3)
+    Sql = "Seguro que desea eliminar la línea del Artículo:"
+    Sql = Sql & vbCrLf & "Código: " & Data2.Recordset!codArtic
+    Sql = Sql & vbCrLf & "Descripción: " & Data2.Recordset.Fields(3)
     
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
         
         
         
         NumRegElim = Me.Data2.Recordset.AbsolutePosition
-        SQL = "Delete from slitra where codtrasp=" & Data2.Recordset!codtrasp
-        SQL = SQL & " and numlinea=" & Data2.Recordset!numlinea
-        SQL = SQL & " and codartic=" & DBSet(Data2.Recordset!codArtic, "T")
+        Sql = "Delete from slitra where codtrasp=" & Data2.Recordset!codtrasp
+        Sql = Sql & " and numlinea=" & Data2.Recordset!numlinea
+        Sql = Sql & " and codartic=" & DBSet(Data2.Recordset!codArtic, "T")
         
         If vParamAplic.NumeroInstalacion = vbHerbelca Then LineaPedidoVinculado ModificaLineas, Data2.Recordset!numlinea
         
-        conn.Execute SQL
+        conn.Execute Sql
         CancelaADODC Me.Data2
         CargaGrid True
         CancelaADODC Me.Data2
@@ -2360,8 +2360,8 @@ On Error GoTo Error2
         
         
         
-        SituarDataPosicion Me.Data2, NumRegElim, SQL
-        lblIndicador.Caption = SQL
+        SituarDataPosicion Me.Data2, NumRegElim, Sql
+        lblIndicador.Caption = Sql
     End If
     ModificaLineas = 0
 Error2:
@@ -2371,27 +2371,27 @@ Error2:
 End Sub
 
 Private Sub BotonCopiarLineas()
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim vCadena As String
 
 
-    SQL = "select codtrasp, fechatra, hormovim, schtra.almaorig, salmpr.nomalmac nomalmori, schtra.almadest, salmpr.nomalmac nomalmdes, schtra.codtraba, straba.nomtraba "
-    SQL = SQL & " from ((schtra inner join straba on schtra.codtraba = straba.codtraba) "
-    SQL = SQL & " inner join salmpr on schtra.almaorig = salmpr.codalmac) "
-    SQL = SQL & " inner join salmpr dest on schtra.almadest = dest.codalmac "
+    Sql = "select codtrasp, fechatra, hormovim, schtra.almaorig, salmpr.nomalmac nomalmori, schtra.almadest, salmpr.nomalmac nomalmdes, schtra.codtraba, straba.nomtraba "
+    Sql = Sql & " from ((schtra inner join straba on schtra.codtraba = straba.codtraba) "
+    Sql = Sql & " inner join salmpr on schtra.almaorig = salmpr.codalmac) "
+    Sql = Sql & " inner join salmpr dest on schtra.almadest = dest.codalmac "
     
     Sql2 = " where fechatra >= " & DBSet(DateAdd("m", -1, Now), "F")
 
-    If TotalRegistros(SQL & Sql2) = 0 Then
-        If TotalRegistros(SQL) = 0 Then
+    If TotalRegistros(Sql & Sql2) = 0 Then
+        If TotalRegistros(Sql) = 0 Then
             MsgBox "No hay traspasos de almacén en el histórico"
             Exit Sub
         Else
-            vCadena = SQL & "||0|"
+            vCadena = Sql & "||0|"
         End If
     Else
-        vCadena = SQL & "|" & Sql2 & "|1|"
+        vCadena = Sql & "|" & Sql2 & "|1|"
     End If
 
     Movimiento = ""
@@ -2414,7 +2414,7 @@ Dim vCadena As String
 End Sub
 
 Private Function CopiarMovimientos(movim As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim vResult As String
 Dim vResult2 As String
 Dim RS As ADODB.Recordset
@@ -2424,11 +2424,11 @@ Dim numlin As String
 
     CopiarMovimientos = False
 
-    SQL = "select slitra.codartic from slhtra inner join slitra on slhtra.codartic = slitra.codartic where slhtra.codtrasp = " & DBSet(movim, "N")
-    SQL = SQL & " and slitra.codtrasp = " & DBSet(Text1(0).Text, "N")
+    Sql = "select slitra.codartic from slhtra inner join slitra on slhtra.codartic = slitra.codartic where slhtra.codtrasp = " & DBSet(movim, "N")
+    Sql = Sql & " and slitra.codtrasp = " & DBSet(Text1(0).Text, "N")
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     vResult = ""
     vResult2 = ""
     While Not RS.EOF
@@ -2447,13 +2447,13 @@ Dim numlin As String
     
     numlin = DevuelveDesdeBDNew(conAri, "slitra", "max(numlinea)", "codtrasp", Text1(0).Text, "N")
     If ComprobarCero(numlin) = "0" Then numlin = "0"
-    SQL = "insert ignore into slitra (codtrasp,numlinea,codartic,cantidad,observa2)"
-    SQL = SQL & " select " & DBSet(Text1(0), "N") & "," & "@Lin:=@Lin + 1 ,codartic,cantidad,observa2"
-    SQL = SQL & " from slhtra, (select @Lin:= " & numlin & ") aa where codtrasp = " & DBSet(movim, "N")
+    Sql = "insert ignore into slitra (codtrasp,numlinea,codartic,cantidad,observa2)"
+    Sql = Sql & " select " & DBSet(Text1(0), "N") & "," & "@Lin:=@Lin + 1 ,codartic,cantidad,observa2"
+    Sql = Sql & " from slhtra, (select @Lin:= " & numlin & ") aa where codtrasp = " & DBSet(movim, "N")
     
-    If vResult <> "" Then SQL = SQL & " and not slhtra.codartic in (" & Mid(vResult2, 2) & ")"
+    If vResult <> "" Then Sql = Sql & " and not slhtra.codartic in (" & Mid(vResult2, 2) & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     
     'En herbelca, volvemos a generar las lineas del pedido vinculado
@@ -2497,7 +2497,7 @@ Private Function ComprobarStocksLineas() As Boolean
 ' - Comprobar que hay suficiente stock en el Almacen Origen de ese Articulo
 Dim B As Boolean
 Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ErrStock
     
@@ -2505,11 +2505,11 @@ Dim SQL As String
     '---- Laura: 27/09/2006
     If Data2 Is Nothing Then Exit Function
     
-    SQL = Data2.RecordSource
-    If SQL = "" Then Exit Function
+    Sql = Data2.RecordSource
+    If Sql = "" Then Exit Function
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     'para cada linea comprabar stock del articulo en almacen
     B = True
@@ -2545,6 +2545,7 @@ End Function
 
 Private Function DatosOkLinea() As Boolean
 Dim B As Boolean
+Dim Aux As String
 
     DatosOkLinea = False
     B = True
@@ -2572,9 +2573,42 @@ Dim B As Boolean
     B = ComprobarStock(txtAux(0).Text, Text1(2).Text, txtAux(2).Text, CodTipoMov)
          
          
-         
-    
-         
+     If vParamAplic.ManipuladorFitosanitarios2 Then
+        Aux = DevuelveDesdeBD(conAri, "codalmac", "advparametros", "1", "1")
+        If Aux = "" Then Aux = "1"
+        If Val(Data1.Recordset!almadest) = Val(Aux) Then
+            
+            'Lleva almacen para fitosinatiarios y es el DESTINO
+            
+            Aux = " sartic.codcateg=scateg.codcateg and ctrlotes =1 and codartic"
+            Aux = DevuelveDesdeBD(conAri, "numserie", "sartic,scateg", Aux, txtAux(0).Text, "T")
+            If Aux <> "" Then
+                'LLEVA CONTROL DE LOTES
+                'La observacion debe ser un LOTE valido
+                txtAux(3).Text = Trim(txtAux(3).Text)
+                If txtAux(3).Text = "" Then
+                    Aux = "Debe indicar el lote para el traspaso de fitosantiarios"
+                Else
+                    Aux = "numlotes=" & DBSet(txtAux(3).Text, "T") & " AND codartic"
+                    Aux = DevuelveDesdeBD(conAri, "canentra - vendida ", "slotes", Aux, txtAux(0).Text)
+                    If Aux = "" Then
+                        Aux = "NO existe el lote " & txtAux(3).Text & " para el articulo: " & txtAux(2).Text
+                    Else
+                        If CCur(Aux) <= 0 Then
+                            Aux = "NO existe cantidad disponible para el lote: " & txtAux(3).Text
+                        Else
+                            Aux = ""
+                        End If
+                    End If
+                End If
+                If Aux <> "" Then
+                    MsgBox Aux, vbExclamation
+                    B = False
+                End If
+                      
+            End If
+        End If
+    End If
          
          
     DatosOkLinea = B
@@ -2601,46 +2635,46 @@ End Sub
 
 
 Private Function InsertarModificarLinea() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim TodasLasLineaas As Boolean
 On Error GoTo EInsertarModificarLinea
     
-    SQL = ""
+    Sql = ""
     InsertarModificarLinea = False
     Select Case ModificaLineas
     Case 1 'Insertar
         If DatosOkLinea() Then 'INSERTAR
-            SQL = "INSERT INTO slitra (codtrasp,numlinea,codartic,cantidad,observa2) "
-            SQL = SQL & " VALUES (" & Val(Text1(0).Text) & ", "
-            SQL = SQL & cmdAceptar.Tag & ", "
-            SQL = SQL & DBSet(txtAux(0).Text, "T") & ", "
-            SQL = SQL & DBSet(txtAux(2).Text, "N") & ","
-            SQL = SQL & DBSet(txtAux(3).Text, "T") & ") "
+            Sql = "INSERT INTO slitra (codtrasp,numlinea,codartic,cantidad,observa2) "
+            Sql = Sql & " VALUES (" & Val(Text1(0).Text) & ", "
+            Sql = Sql & cmdAceptar.Tag & ", "
+            Sql = Sql & DBSet(txtAux(0).Text, "T") & ", "
+            Sql = Sql & DBSet(txtAux(2).Text, "N") & ","
+            Sql = Sql & DBSet(txtAux(3).Text, "T") & ") "
         Else
 '            PonerFoco txtAux(3)
         End If
     Case 2 'Modificar
         If DatosOkLinea() Then
-            SQL = "UPDATE slitra Set cantidad = " & DBSet(txtAux(2).Text, "N")
-            SQL = SQL & ", observa2 = " & DBSet(txtAux(3).Text, "T")
-            SQL = SQL & ObtenerWhereCP(True) & " AND " '" WHERE codtrasp =" & Val(Text1(0).Text) & " AND "
-            SQL = SQL & " numlinea =" & cmdAceptar.Tag
+            Sql = "UPDATE slitra Set cantidad = " & DBSet(txtAux(2).Text, "N")
+            Sql = Sql & ", observa2 = " & DBSet(txtAux(3).Text, "T")
+            Sql = Sql & ObtenerWhereCP(True) & " AND " '" WHERE codtrasp =" & Val(Text1(0).Text) & " AND "
+            Sql = Sql & " numlinea =" & cmdAceptar.Tag
         End If
     End Select
             
-    If SQL <> "" Then
-        conn.Execute SQL
+    If Sql <> "" Then
+        conn.Execute Sql
         InsertarModificarLinea = True
         
         'Si tiene componentes preguntamos si queire insertar las lineas
         TodasLasLineaas = False
-        SQL = DevuelveDesdeBD(conAri, "count(*)", "sarti1", "codartic", txtAux(0).Text, "T")
-        If Val(SQL) >= 1 Then
+        Sql = DevuelveDesdeBD(conAri, "count(*)", "sarti1", "codartic", txtAux(0).Text, "T")
+        If Val(Sql) >= 1 Then
             If MsgBox("El articulo tiene componentes" & vbCrLf & "¿Desea insertarlos?", vbQuestion + vbYesNoCancel) = vbYes Then
-                SQL = "select " & Val(Text1(0).Text) & "," & cmdAceptar.Tag & "+numlinea,codarti1,"
-                SQL = SQL & " (cantidad*" & DBSet(txtAux(2).Text, "N") & "),concat('COMPONENTES ',codartic) from sarti1 where codartic=" & DBSet(txtAux(0).Text, "T")
-                SQL = "INSERT INTO slitra (codtrasp,numlinea,codartic,cantidad,observa2) " & SQL
-                ejecutar SQL, False
+                Sql = "select " & Val(Text1(0).Text) & "," & cmdAceptar.Tag & "+numlinea,codarti1,"
+                Sql = Sql & " (cantidad*" & DBSet(txtAux(2).Text, "N") & "),concat('COMPONENTES ',codartic) from sarti1 where codartic=" & DBSet(txtAux(0).Text, "T")
+                Sql = "INSERT INTO slitra (codtrasp,numlinea,codartic,cantidad,observa2) " & Sql
+                ejecutar Sql, False
                 Espera 0.2
                 TodasLasLineaas = True
             End If
@@ -2799,7 +2833,7 @@ End Sub
 
 
 Private Function ActualizarStocks() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cantidad As Single
 Dim devuelve As String
 Dim RS As ADODB.Recordset
@@ -2822,24 +2856,24 @@ Dim RS As ADODB.Recordset
             cantidad = CSng(RS!cantidad) 'Cant a traspasar
             
             '==== Almacen Origen
-            SQL = "UPDATE salmac Set canstock = canstock - " & DBSet(cantidad, "N")
-            SQL = SQL & " WHERE codartic =" & DBSet(RS!codArtic, "T") & " AND "
-            SQL = SQL & " codalmac =" & Data1.Recordset!almaorig
-            conn.Execute SQL
+            Sql = "UPDATE salmac Set canstock = canstock - " & DBSet(cantidad, "N")
+            Sql = Sql & " WHERE codartic =" & DBSet(RS!codArtic, "T") & " AND "
+            Sql = Sql & " codalmac =" & Data1.Recordset!almaorig
+            conn.Execute Sql
         
             '==== Almacen Destino
             'Comprobar que existe el articulo en Almacen Destino
             devuelve = DevuelveDesdeBDNew(conAri, "salmac", "codalmac", "codartic", RS!codArtic, "T", , "codalmac", Text1(3).Text, "N")
             If devuelve = "" Then 'No hay de ese artículo en Destino
-                SQL = "INSERT INTO salmac (codartic,codalmac,ubialmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin)"
-                SQL = SQL & " VALUES (" & DBSet(RS!codArtic, "T") & "," & Val(Text1(3).Text) & ",''," & DBSet(cantidad, "N") & ",0,0,0,0,NULL,NULL,0)"
+                Sql = "INSERT INTO salmac (codartic,codalmac,ubialmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin)"
+                Sql = Sql & " VALUES (" & DBSet(RS!codArtic, "T") & "," & Val(Text1(3).Text) & ",''," & DBSet(cantidad, "N") & ",0,0,0,0,NULL,NULL,0)"
             Else 'Existe el artic en almac. Dest -> Aumentar stock
-                SQL = "UPDATE salmac Set canstock = canstock + " & DBSet(cantidad, "N")
-                SQL = SQL & " WHERE codartic =" & DBSet(RS!codArtic, "T") & " AND "
-                SQL = SQL & " codalmac =" & Data1.Recordset!almadest
+                Sql = "UPDATE salmac Set canstock = canstock + " & DBSet(cantidad, "N")
+                Sql = Sql & " WHERE codartic =" & DBSet(RS!codArtic, "T") & " AND "
+                Sql = Sql & " codalmac =" & Data1.Recordset!almadest
             End If
             
-            conn.Execute SQL
+            conn.Execute Sql
         End If
         'Data2.Recordset.MoveNext
         RS.MoveNext
@@ -2858,7 +2892,7 @@ End Function
 
 Private Sub BotonActualizar()
 'Actualizar Traspaso Almacen
-Dim SQL As String
+Dim Sql As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún Traspaso para actualizar.", vbExclamation
@@ -2873,27 +2907,27 @@ Dim SQL As String
     End If
     
     If Data1.Recordset!situacio = 0 Then 'Informe No Impreso
-        SQL = "Actualización Traspaso Almacenes." & vbCrLf
-        SQL = SQL & "------------------------------------------" & vbCrLf & vbCrLf
-        SQL = SQL & "NO ESTA IMPRESO EL TRASPASO:" & vbCrLf
-        SQL = SQL & vbCrLf & "Nº Trasp.     :  " & Format(Data1.Recordset.Fields(0), "0000000")
-        SQL = SQL & vbCrLf & "Fecha Trasp.  :  " & CStr(Data1.Recordset.Fields(1))
-        SQL = SQL & vbCrLf & "Almac. Origen :  " & Format(Data1.Recordset.Fields(2), "000") & " - " & Text2(0).Text & "     "
-        SQL = SQL & vbCrLf & "Almac. Destino:  " & Format(Data1.Recordset.Fields(3), "000") & " - " & Text2(1).Text & "     "
-        SQL = SQL & vbCrLf & vbCrLf & " ¿Desea continuar ? "
-        If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then
+        Sql = "Actualización Traspaso Almacenes." & vbCrLf
+        Sql = Sql & "------------------------------------------" & vbCrLf & vbCrLf
+        Sql = Sql & "NO ESTA IMPRESO EL TRASPASO:" & vbCrLf
+        Sql = Sql & vbCrLf & "Nº Trasp.     :  " & Format(Data1.Recordset.Fields(0), "0000000")
+        Sql = Sql & vbCrLf & "Fecha Trasp.  :  " & CStr(Data1.Recordset.Fields(1))
+        Sql = Sql & vbCrLf & "Almac. Origen :  " & Format(Data1.Recordset.Fields(2), "000") & " - " & Text2(0).Text & "     "
+        Sql = Sql & vbCrLf & "Almac. Destino:  " & Format(Data1.Recordset.Fields(3), "000") & " - " & Text2(1).Text & "     "
+        Sql = Sql & vbCrLf & vbCrLf & " ¿Desea continuar ? "
+        If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then
             Exit Sub
         End If
     Else 'Informe Impreso
-        SQL = "Actualización Traspaso Almacenes." & vbCrLf
-        SQL = SQL & "-----------------------------------------" & vbCrLf & vbCrLf
-        SQL = SQL & "Va a Actualizar el Traspaso:" & vbCrLf
-        SQL = SQL & vbCrLf & "   Nº Trasp.   : " & Format(Data1.Recordset.Fields(0), "0000000")
-        SQL = SQL & vbCrLf & "   Fecha Trasp.: " & CStr(Data1.Recordset.Fields(1))
-        SQL = SQL & vbCrLf & "   Almac. Orig.: " & Format(Data1.Recordset.Fields(2), "000") & " - " & Text2(0).Text & "     "
-        SQL = SQL & vbCrLf & "   Almac. Dest.: " & Format(Data1.Recordset.Fields(3), "000") & " - " & Text2(1).Text & "     "
-        SQL = SQL & vbCrLf & vbCrLf & " ¿Desea continuar ? "
-        If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then
+        Sql = "Actualización Traspaso Almacenes." & vbCrLf
+        Sql = Sql & "-----------------------------------------" & vbCrLf & vbCrLf
+        Sql = Sql & "Va a Actualizar el Traspaso:" & vbCrLf
+        Sql = Sql & vbCrLf & "   Nº Trasp.   : " & Format(Data1.Recordset.Fields(0), "0000000")
+        Sql = Sql & vbCrLf & "   Fecha Trasp.: " & CStr(Data1.Recordset.Fields(1))
+        Sql = Sql & vbCrLf & "   Almac. Orig.: " & Format(Data1.Recordset.Fields(2), "000") & " - " & Text2(0).Text & "     "
+        Sql = Sql & vbCrLf & "   Almac. Dest.: " & Format(Data1.Recordset.Fields(3), "000") & " - " & Text2(1).Text & "     "
+        Sql = Sql & vbCrLf & vbCrLf & " ¿Desea continuar ? "
+        If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then
             Exit Sub
         End If
     End If
@@ -3018,27 +3052,27 @@ End Function
 
 
 Private Function InsertarCabeceraHistorico() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 On Error GoTo EInsertarCab
 
-    SQL = "SELECT codtrasp,fechatra,almaorig,almadest,codtraba,observa1,codclienvinculado,codpedidovinuclado from scatra "
-    SQL = SQL & ObtenerWhereCP(True)
-    SQL = SQL & " AND fechatra='" & Format(Data1.Recordset!fechatra, "yyyy-mm-dd") & "'"
+    Sql = "SELECT codtrasp,fechatra,almaorig,almadest,codtraba,observa1,codclienvinculado,codpedidovinuclado from scatra "
+    Sql = Sql & ObtenerWhereCP(True)
+    Sql = Sql & " AND fechatra='" & Format(Data1.Recordset!fechatra, "yyyy-mm-dd") & "'"
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not RS.EOF Then
-        SQL = "INSERT INTO schtra (codtrasp, fechatra,hormovim,almaorig,almadest,codtraba,observa1,codclienvinculado,codpedidovinuclado) "
-        SQL = SQL & " VALUES (" & RS.Fields(0).Value & ", '" & Format(RS.Fields(1).Value, "yyyy-mm-dd") & "', '"
-        SQL = SQL & Format(Now, "yyyy-mm-dd hh:mm:ss") & "', " & RS.Fields(2).Value & ", " & RS.Fields(3).Value & ", "
-        SQL = SQL & RS.Fields(4).Value & ", " & DBSet(RS.Fields(5).Value, "T") & ","
-        SQL = SQL & DBSet(RS.Fields(6).Value, "N", "S") & ", " & DBSet(RS.Fields(7).Value, "N", "S") & ")"
+        Sql = "INSERT INTO schtra (codtrasp, fechatra,hormovim,almaorig,almadest,codtraba,observa1,codclienvinculado,codpedidovinuclado) "
+        Sql = Sql & " VALUES (" & RS.Fields(0).Value & ", '" & Format(RS.Fields(1).Value, "yyyy-mm-dd") & "', '"
+        Sql = Sql & Format(Now, "yyyy-mm-dd hh:mm:ss") & "', " & RS.Fields(2).Value & ", " & RS.Fields(3).Value & ", "
+        Sql = Sql & RS.Fields(4).Value & ", " & DBSet(RS.Fields(5).Value, "T") & ","
+        Sql = Sql & DBSet(RS.Fields(6).Value, "N", "S") & ", " & DBSet(RS.Fields(7).Value, "N", "S") & ")"
     End If
     RS.Close
     Set RS = Nothing
     
-    conn.Execute SQL
+    conn.Execute Sql
     
 EInsertarCab:
     If Err.Number <> 0 Then
@@ -3051,28 +3085,28 @@ End Function
 
 
 Private Function InsertarLineasHistorico(MenError As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 On Error GoTo EInsertarLineas
 
     'SQL = "SELECT codtrasp, numlinea, codartic, cantidad, observa2 from slitra "
     'Diciembre 2021
-    SQL = "SELECT codtrasp, numlinea, slitra.codartic, cantidad, observa2,preciomp,preciouc,preciove "
-    SQL = SQL & " FROM slitra LEFT JOIN  sartic ON slitra.codartic=sartic.codartic"
+    Sql = "SELECT codtrasp, numlinea, slitra.codartic, cantidad, observa2,preciomp,preciouc,preciove "
+    Sql = Sql & " FROM slitra LEFT JOIN  sartic ON slitra.codartic=sartic.codartic"
     
-    SQL = SQL & ObtenerWhereCP(True)
+    Sql = Sql & ObtenerWhereCP(True)
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     RS.MoveFirst
     While Not RS.EOF
-        SQL = "INSERT INTO slhtra (codtrasp, fechamov, numlinea, codartic, cantidad, observa2, preciomphco ,preciopvphco ,preciouchco)"
-        SQL = SQL & " VALUES (" & RS.Fields(0).Value & ", '" & Format(Data1.Recordset!fechatra, FormatoFecha) & "', "
-        SQL = SQL & RS.Fields(1).Value & ", " & DBSet(RS.Fields(2).Value, "T") & ", "
-        SQL = SQL & DBSet(RS.Fields(3).Value, "N") & ", " & DBSet(RS.Fields(4).Value, "T") & ","
+        Sql = "INSERT INTO slhtra (codtrasp, fechamov, numlinea, codartic, cantidad, observa2, preciomphco ,preciopvphco ,preciouchco)"
+        Sql = Sql & " VALUES (" & RS.Fields(0).Value & ", '" & Format(Data1.Recordset!fechatra, FormatoFecha) & "', "
+        Sql = Sql & RS.Fields(1).Value & ", " & DBSet(RS.Fields(2).Value, "T") & ", "
+        Sql = Sql & DBSet(RS.Fields(3).Value, "N") & ", " & DBSet(RS.Fields(4).Value, "T") & ","
         'Dicimebre 2021
-        SQL = SQL & DBSet(RS!PrecioMP, "N") & ", " & DBSet(RS!preciove, "N") & ", " & DBSet(RS!precioUC, "N") & ")"
-        conn.Execute SQL
+        Sql = Sql & DBSet(RS!PrecioMP, "N") & ", " & DBSet(RS!PrecioVe, "N") & ", " & DBSet(RS!precioUC, "N") & ")"
+        conn.Execute Sql
         RS.MoveNext
     Wend
     RS.Close
@@ -3101,21 +3135,21 @@ End Sub
 
 
 Private Function BorrarTraspaso(MenError As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 
     BorrarTraspaso = False
     
     'Borramos las lineas
-    SQL = "Delete from "
-    SQL = SQL & "slitra"
-    SQL = SQL & " WHERE codtrasp = " & Data1.Recordset!codtrasp
-    conn.Execute SQL
+    Sql = "Delete from "
+    Sql = Sql & "slitra"
+    Sql = Sql & " WHERE codtrasp = " & Data1.Recordset!codtrasp
+    conn.Execute Sql
     
     'La cabecera
-    SQL = "Delete from "
-    SQL = SQL & "scatra"
-    SQL = SQL & " WHERE codtrasp =" & Data1.Recordset!codtrasp
-    conn.Execute SQL
+    Sql = "Delete from "
+    Sql = Sql & "scatra"
+    Sql = Sql & " WHERE codtrasp =" & Data1.Recordset!codtrasp
+    conn.Execute Sql
     
     If Err.Number <> 0 Then
         BorrarTraspaso = False
@@ -3149,7 +3183,7 @@ End Sub
 
 
 Private Function InsertarMovimArticulos(MenError As String) As Boolean
-Dim SQL As String, Cad As String
+Dim Sql As String, Cad As String
 Dim RS As ADODB.Recordset
 Dim vImporte As Single, vPrecioVenta As String
 Dim vTipoMov As CTiposMov
@@ -3161,12 +3195,12 @@ Dim bol As Boolean
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         'Se han cargado correctamente los valores de la clase
-        SQL = "SELECT scatra.codtrasp, fechatra, almaorig, almadest, codtraba, numlinea, codartic, cantidad "
-        SQL = SQL & " FROM scatra LEFT JOIN slitra ON scatra.codtrasp=slitra.codtrasp "
-        SQL = SQL & " WHERE scatra.codtrasp =" & Data1.Recordset!codtrasp
+        Sql = "SELECT scatra.codtrasp, fechatra, almaorig, almadest, codtraba, numlinea, codartic, cantidad "
+        Sql = Sql & " FROM scatra LEFT JOIN slitra ON scatra.codtrasp=slitra.codtrasp "
+        Sql = Sql & " WHERE scatra.codtrasp =" & Data1.Recordset!codtrasp
     
         Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         While Not RS.EOF
              'Obtener el precio de venta del articulo, si tiene control de stock
             Cad = "ctrstock"
@@ -3178,18 +3212,18 @@ Dim bol As Boolean
             End If
             If Val(Cad) = 1 Then
                 'Insertar Movimiento de Salida en Almacen Origen
-                SQL = "INSERT INTO smoval (codartic, codalmac, fechamov, horamovi, tipomovi, detamovi, cantidad, impormov, codigope, letraser, document, numlinea) "
-                SQL = SQL & " VALUES (" & DBSet(RS.Fields!codArtic, "T") & ", " & RS.Fields!almaorig & ", '" & Format(RS.Fields!fechatra, "yyyy-mm-dd") & "', '"
-                SQL = SQL & Format(RS.Fields!fechatra & " " & Time, "yyyy-mm-dd hh:mm:ss") & "', 0" & ", '" & vTipoMov.TipoMovimiento & "', " & DBSet(RS.Fields!cantidad, "N") & ", " & DBSet(vImporte, "N") & ", " & RS.Fields!CodTraba & ", "
-                SQL = SQL & DBSet(vTipoMov.LetraSerie, "T") & ", " & RS.Fields!codtrasp & ", " & RS.Fields!numlinea & ")"
-                conn.Execute SQL
+                Sql = "INSERT INTO smoval (codartic, codalmac, fechamov, horamovi, tipomovi, detamovi, cantidad, impormov, codigope, letraser, document, numlinea) "
+                Sql = Sql & " VALUES (" & DBSet(RS.Fields!codArtic, "T") & ", " & RS.Fields!almaorig & ", '" & Format(RS.Fields!fechatra, "yyyy-mm-dd") & "', '"
+                Sql = Sql & Format(RS.Fields!fechatra & " " & Time, "yyyy-mm-dd hh:mm:ss") & "', 0" & ", '" & vTipoMov.TipoMovimiento & "', " & DBSet(RS.Fields!cantidad, "N") & ", " & DBSet(vImporte, "N") & ", " & RS.Fields!CodTraba & ", "
+                Sql = Sql & DBSet(vTipoMov.LetraSerie, "T") & ", " & RS.Fields!codtrasp & ", " & RS.Fields!numlinea & ")"
+                conn.Execute Sql
                 
                 'Insertar Movimiento de Entrada en Almacen Destino
-                SQL = "INSERT INTO smoval (codartic, codalmac, fechamov, horamovi, tipomovi, detamovi, cantidad, impormov, codigope, letraser, document, numlinea) "
-                SQL = SQL & " VALUES (" & DBSet(RS.Fields!codArtic, "T") & ", " & RS.Fields!almadest & ", '" & Format(RS.Fields!fechatra, "yyyy-mm-dd") & "', '"
-                SQL = SQL & Format(RS.Fields!fechatra & " " & Time, "yyyy-mm-dd hh:mm:ss") & "', 1" & ", '" & vTipoMov.TipoMovimiento & "', " & DBSet(RS.Fields!cantidad, "N") & ", " & DBSet(vImporte, "N") & ", " & RS.Fields!CodTraba & ", "
-                SQL = SQL & DBSet(vTipoMov.LetraSerie, "T") & ", " & RS.Fields!codtrasp & ", " & RS.Fields!numlinea & ")"
-                conn.Execute SQL
+                Sql = "INSERT INTO smoval (codartic, codalmac, fechamov, horamovi, tipomovi, detamovi, cantidad, impormov, codigope, letraser, document, numlinea) "
+                Sql = Sql & " VALUES (" & DBSet(RS.Fields!codArtic, "T") & ", " & RS.Fields!almadest & ", '" & Format(RS.Fields!fechatra, "yyyy-mm-dd") & "', '"
+                Sql = Sql & Format(RS.Fields!fechatra & " " & Time, "yyyy-mm-dd hh:mm:ss") & "', 1" & ", '" & vTipoMov.TipoMovimiento & "', " & DBSet(RS.Fields!cantidad, "N") & ", " & DBSet(vImporte, "N") & ", " & RS.Fields!CodTraba & ", "
+                Sql = Sql & DBSet(vTipoMov.LetraSerie, "T") & ", " & RS.Fields!codtrasp & ", " & RS.Fields!numlinea & ")"
+                conn.Execute Sql
             End If
             RS.MoveNext
         Wend
@@ -3344,7 +3378,7 @@ End Sub
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim SQL As String
+Dim Sql As String
 
     Set vTipoMov = New CTiposMov
     
@@ -3352,9 +3386,9 @@ Dim SQL As String
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
         Text1(0).Text = Format(Text1(0).Text, "0000000")
         cmdCancelar.Caption = "Cancelar"
-        SQL = CadenaInsertarDesdeForm(Me)
-        If SQL <> "" Then
-            If InsertarTraspaso(SQL, vTipoMov) Then
+        Sql = CadenaInsertarDesdeForm(Me)
+        If Sql <> "" Then
+            If InsertarTraspaso(Sql, vTipoMov) Then
                 
                 
                 'Si es herbelca, creará el pedido vinculado

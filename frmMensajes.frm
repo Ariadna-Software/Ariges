@@ -7329,7 +7329,7 @@ Private Sub PonerDatosPedidosFontenas()
         ItmX.SubItems(1) = miRsAux!codArtic
         ItmX.SubItems(2) = miRsAux!NomArtic
         ItmX.SubItems(3) = miRsAux!servidas
-        ItmX.SubItems(4) = miRsAux!numLote
+        ItmX.SubItems(4) = DBLet(miRsAux!numLote, "T")
         ItmX.ToolTipText = miRsAux!NomArtic
         ItmX.ListSubItems(2).ToolTipText = miRsAux!NomArtic
         ItmX.Tag = 0
@@ -7354,6 +7354,7 @@ End Sub
 Private Sub LanzaProcesoImportacionXLS()
 Dim N As Byte
 
+
     On Error GoTo eLanzaProcesoImportacionXLS
         
         
@@ -7371,7 +7372,7 @@ Dim N As Byte
     If Dir(Sql, vbArchive) = "" Then Err.Raise 513, , "No tiene el programa de conversion. "
         
            
-        
+            
         
     Screen.MousePointer = vbHourglass
     Shell Sql, vbNormalFocus
@@ -7381,10 +7382,22 @@ Dim N As Byte
     Do
         
         Screen.MousePointer = vbHourglass
-        Label2(16).Caption = NE & " se"
+        Label2(16).Caption = NE & " seg"
         Label2(16).Refresh
-        DoEvents
+        Sql = Dir(Me.Tag & "\*.convertir.xlsx")
+        If Sql <> "" Then
+            N = N + 1
+        Else
+            N = 16
+        End If
+    Loop Until N > 15
         
+    'OK procesamos el fihero
+    N = 0
+    NumRegElim = 0
+    Sql = ""
+
+    Do
         Sql = Dir(Me.Tag & "\*.csv")
         If Sql <> "" Then
             'Hay un csv. Lo proceso
@@ -7398,9 +7411,13 @@ Dim N As Byte
         End If
         NumRegElim = NumRegElim + 1
         
-        
-        
     Loop Until NumRegElim > 25
+    
+    
+    
+    
+    
+    
     
     If N = 0 Then MsgBox "No se ha generado ningún csv", vbExclamation
     
@@ -7459,6 +7476,10 @@ Private Sub ImportarFontenasCSV(ConPregunta As Boolean, Fichero As String)
             Else
                 'Comprobaciones
                 'Formato numero
+                
+                
+                If Trim(codArtic(5)) = "" Then codArtic(5) = "0"
+                
                 vCampos = ""
                 If Not IsNumeric(codArtic(2)) Then vCampos = " pedido"
                 If Not IsNumeric(codArtic(9)) Then vCampos = " almacen"
@@ -7468,7 +7489,7 @@ Private Sub ImportarFontenasCSV(ConPregunta As Boolean, Fichero As String)
                 'If Not EsFechaOK(codArtic(1)) Then vCampos = " fecha"
                 
                 If Trim(codArtic(3)) = "" Then vCampos = " articulo"
-                If Trim(codArtic(9)) = "" Then vCampos = " lote"
+                'If Trim(codArtic(9)) = "" Then vCampos = " lote"
                 
                 'Si ha ido bien
                 If vCampos <> "" Then
@@ -7485,7 +7506,9 @@ Private Sub ImportarFontenasCSV(ConPregunta As Boolean, Fichero As String)
                     
                     'Por tema de velocidad debieraos ir "a tramos", pero de moemento va asi
                     vCampos = DevuelveDesdeBD(conAri, "codartic", "sartic", "codartic", codArtic(3), "T")
-                    If vCampos = "" Then Errores = Errores & "Lin " & Format(OK, "000") & "   No existe articulo" & codArtic(2) & vbCrLf
+                    If vCampos = "" Then Errores = Errores & "Lin " & Format(OK, "000") & "   No existe articulo: " & codArtic(3) & vbCrLf
+                    
+                    
                     
                     
                     
@@ -7514,14 +7537,16 @@ Private Sub ImportarFontenasCSV(ConPregunta As Boolean, Fichero As String)
             'slipedxls  codigo ,fechaped,numlinea,codalmac,codartic,nomartic,cantidad,servidas,numbultos,numlote,fechahora,usuario,fichero)
             Sql = "INSERT INTO slipedxls  (codigo ,fechaped,numlinea,codalmac,codartic,nomartic,cantidad,servidas,numbultos,numlote,fechahora,usuario,fichero) VALUES " & cadWHERE2
             conn.Execute Sql
-            
-            Sql = Me.Tag & "\" & Fichero
-            cadWHERE2 = Me.Tag & "\Procesados\" & Format(Now, "yymmdd_hhnn") & Fichero
-            FileCopy Sql, cadWHERE2
-            Kill Sql
-            
         End If
     End If
+    
+    
+    Sql = Me.Tag & "\" & Fichero
+    cadWHERE2 = Me.Tag & "\Procesados\" & Format(Now, "yymmdd_hhnn") & Fichero
+    FileCopy Sql, cadWHERE2
+    Kill Sql
+    Espera 1
+
 eImportarFontenasCSV:
     If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
     Screen.MousePointer = vbDefault
