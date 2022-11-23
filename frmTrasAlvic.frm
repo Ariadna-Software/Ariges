@@ -337,6 +337,7 @@ Dim EsAlvic2 As Boolean 'Llegado el caso, habra que parametrizar
 Dim DigitosSerie As Byte
 Dim DigitoAnyoFacturas As Byte  '2022
 
+Dim varAportacion As Currency
 
 Private Sub KEYpress(KeyAscii As Integer)
 Dim cerrar As Boolean
@@ -392,7 +393,7 @@ On Error GoTo eError
         InicializarTabla
         cadSelect = "INSERT INTO tmpgasolimport(codusu,codigo,NumAlbaran,NumFactura,fechahora,IdVendedor,"
         cadSelect = cadSelect & "Cliente,NombreCliente,NifCliente,Matricula,CodigoProducto"
-        cadSelect = cadSelect & ",surtidor,manguera,Precio,cantidad,descuento,importel,idtipopago,tipoIVa,importeConIva,ccoste,turno,ClivarioAlvic,doc_original,doc_relacionado ) VALUES "
+        cadSelect = cadSelect & ",surtidor,manguera,Precio,cantidad,descuento,importel,idtipopago,tipoIVa,importeConIva,ccoste,turno,ClivarioAlvic,doc_original,doc_relacionado,aportacion ) VALUES "
         cadFormula = ""
         
         
@@ -1068,7 +1069,7 @@ Dim NumeroPasadasTicketsAgrupados As Integer   'En avalon los tickets agrupadso 
     Pb1.Max = IIf(Col.Count = 0, 1, Col.Count)
     DoEvents
     For i = 1 To Col.Count
-        Debug.Print "Albar: " & Col.Item(i)
+        'Debug.Print "Albar: " & Col.Item(i)
         GeneraAlbaranesFinMes Col.Item(i)
         Pb1.Value = i
     Next
@@ -1152,7 +1153,7 @@ Dim NumeroPasadasTicketsAgrupados As Integer   'En avalon los tickets agrupadso 
                     
                     For i = 1 To Col.Count
                         AlbaranesFacturaAgrupada = AlbaranesFacturaAgrupada & ", " & Mid(Col.Item(i), 2)   'quito la letra
-                        Debug.Print Col.Item(i)
+                        'Debug.Print Col.Item(i)
                         GeneraAlbaranesTiendaAlvic2 SerieEnAriges, Col.Item(i)
                         Pb1.Value = i
                     Next
@@ -1454,9 +1455,9 @@ Dim LetraAlb As String
     
     
     
-    
+    If Factura = "E012003052" Then Debug.Assert False
         
-    
+    varAportacion = 0
     LetraAlb = Mid(miRsAux!NumAlbaran, 1, 1)
     Do
         
@@ -1464,7 +1465,8 @@ Dim LetraAlb As String
             If Codigo <> "" Then
                 miRsAux.MovePrevious
                 Codtipoa = DevuelveCodtipom(miRsAux!NumAlbaran, True, False, "")  'para los albaranes no necesito el valor del poste
-                CrearAlbaran Codtipoa, False    '
+                CrearAlbaran Codtipoa, False, varAportacion
+                varAportacion = 0
                 miRsAux.MoveNext
             Else
                 
@@ -1472,7 +1474,7 @@ Dim LetraAlb As String
             Codigo = miRsAux!NumAlbaran
             NumeroFactura = NumeroFactura & ", " & Mid(miRsAux!NumAlbaran, 2)  'El numero de albaran "lleva incluida la serie
         End If
-        
+        varAportacion = varAportacion + DBLet(miRsAux!Aportacion, "N")
         
         If LetraAlb <> Mid(miRsAux!NumAlbaran, 1, 1) Then
             NumeroFactura = "Letras distintas para una misma factura. " & Factura & vbCrLf & NumeroFactura
@@ -1480,11 +1482,12 @@ Dim LetraAlb As String
         End If
         
         miRsAux.MoveNext
+        If Not miRsAux.EOF Then Debug.Assert False
     Loop Until miRsAux.EOF
         
     miRsAux.MovePrevious
     Codtipoa = DevuelveCodtipom(miRsAux!NumAlbaran, True, False, "")
-    CrearAlbaran Codtipoa, False    'las facturas al momento SON FMO  - >letra de serie la de stipom
+    CrearAlbaran Codtipoa, False, varAportacion   'las facturas al momento SON FMO  - >letra de serie la de stipom
     miRsAux.Close
     
     
@@ -1521,23 +1524,26 @@ Dim Codtipoa As String
     Codigo = Codigo & " WHERE  codusu=" & vUsu.Codigo & " and numfactura is null and numalbaran=  " & DBSet(Numalbar, "T")
     miRsAux.Open Codigo, conn, adOpenKeyset, adLockPessimistic, adCmdText
     Codigo = ""
+    varAportacion = 0
     If miRsAux.EOF Then Err.Raise 513, , "No existe albaran: " & Numalbar
     Do
         If miRsAux!NumAlbaran <> Codigo Then
             If Codigo <> "" Then
                 miRsAux.MovePrevious
                 Codtipoa = DevuelveCodtipom(miRsAux!NumAlbaran, True, False, "")
-                CrearAlbaran Codtipoa, False
+                CrearAlbaran Codtipoa, False, varAportacion
+                varAportacion = 0
                 miRsAux.MoveNext
             End If
             Codigo = miRsAux!NumAlbaran
         End If
+        varAportacion = varAportacion + DBLet(miRsAux!Aportacion, "N")
         miRsAux.MoveNext
     Loop Until miRsAux.EOF
         
     miRsAux.MovePrevious
     Codtipoa = DevuelveCodtipom(miRsAux!NumAlbaran, True, False, "")
-    CrearAlbaran Codtipoa, False
+    CrearAlbaran Codtipoa, False, varAportacion
     miRsAux.Close
     
     
@@ -1561,21 +1567,24 @@ Private Sub GeneraAlbaranesTiendaAlvic2(SerieAriges As String, Factura As String
     Codigo = Codigo & " WHERE  codusu=" & vUsu.Codigo & " and numalbaran= " & DBSet(Factura, "T")
     miRsAux.Open Codigo, conn, adOpenKeyset, adLockPessimistic, adCmdText
     Codigo = ""
+    varAportacion = 0
     If miRsAux.EOF Then Err.Raise 513, , "Sin albaranes para la factura: " & Factura
     Do
         If miRsAux!NumAlbaran <> Codigo Then
             If Codigo <> "" Then
                 miRsAux.MovePrevious
-                CrearAlbaran SerieAriges, True     'Aunque luego hagamos una UNICA factura con todas los albaranes(facturas) que insertemos
+                CrearAlbaran SerieAriges, True, varAportacion    'Aunque luego hagamos una UNICA factura con todas los albaranes(facturas) que insertemos
                 miRsAux.MoveNext
             End If
             Codigo = miRsAux!NumAlbaran
+            varAportacion = 0
         End If
+        varAportacion = varAportacion + DBLet(miRsAux!Aportacion, "N")
         miRsAux.MoveNext
     Loop Until miRsAux.EOF
         
     miRsAux.MovePrevious
-    CrearAlbaran SerieAriges, True
+    CrearAlbaran SerieAriges, True, varAportacion
     miRsAux.Close
     
     
@@ -1599,21 +1608,24 @@ Dim codtipom As String
     Codigo = Codigo & " WHERE  codusu=" & vUsu.Codigo & " and numalbaran= " & DBSet(Factura, "T")
     miRsAux.Open Codigo, conn, adOpenKeyset, adLockPessimistic, adCmdText
     Codigo = ""
+    varAportacion = 0
     If miRsAux.EOF Then Err.Raise 513, , "Sin albaranes para la factura: " & Factura
     Do
         If miRsAux!NumAlbaran <> Codigo Then
             If Codigo <> "" Then
                 miRsAux.MovePrevious
-                CrearAlbaran codtipom, True     'Aunque luego hagamos una UNICA factura con todas los albaranes(facturas) que insertemos
+                CrearAlbaran codtipom, True, varAportacion     'Aunque luego hagamos una UNICA factura con todas los albaranes(facturas) que insertemos
                 miRsAux.MoveNext
+                varAportacion = 0
             End If
             Codigo = miRsAux!NumAlbaran
+            varAportacion = varAportacion + DBLet(miRsAux!Aportacion, "N")
         End If
         miRsAux.MoveNext
     Loop Until miRsAux.EOF
         
     miRsAux.MovePrevious
-    CrearAlbaran codtipom, True
+    CrearAlbaran codtipom, True, varAportacion
     miRsAux.Close
     
     
@@ -1645,21 +1657,24 @@ Private Sub GeneraFacturaTickets(Factura As String)
     Codigo = Codigo & " WHERE  codusu=" & vUsu.Codigo & " and numfactura= " & DBSet(Factura, "T")
     miRsAux.Open Codigo, conn, adOpenKeyset, adLockPessimistic, adCmdText
     Codigo = ""
+    varAportacion = 0
     If miRsAux.EOF Then Err.Raise 513, , "Sin albaranes para la factura: " & Factura
     Do
         If miRsAux!NumAlbaran <> Codigo Then
             If Codigo <> "" Then
                 miRsAux.MovePrevious
-                CrearAlbaran "ATI", True     'las facturas al momento SON FMO  - >letra de serie la de stipom
+                CrearAlbaran "ATI", True, varAportacion     'las facturas al momento SON FMO  - >letra de serie la de stipom
+                varAportacion = 0
                 miRsAux.MoveNext
             End If
             Codigo = miRsAux!NumAlbaran
         End If
+        varAportacion = varAportacion + DBLet(miRsAux!Aportacion, "N")
         miRsAux.MoveNext
     Loop Until miRsAux.EOF
         
     miRsAux.MovePrevious
-    CrearAlbaran "ATI", True     'las facturas al momento SON FMO  - >letra de serie la de stipom
+    CrearAlbaran "ATI", True, varAportacion     'las facturas al momento SON FMO  - >letra de serie la de stipom
     miRsAux.Close
     
     
@@ -1692,7 +1707,7 @@ End Sub
                 
                 
 'Estara abierto mirsaux con los datos desde ALVIC, cruzados con la sclien
-Private Sub CrearAlbaran(codtipom As String, PonerReferencia As Boolean)
+Private Sub CrearAlbaran(codtipom As String, PonerReferencia As Boolean, importeAportacion As Currency)
 Dim vSQL As String
 Dim Clivario As Boolean
 Dim RVario As ADODB.Recordset
@@ -1705,14 +1720,18 @@ Dim DesdeClivar As Boolean
     End If
         
         
-    If miRsAux!NumAlbaran = "D11000000" Then Debug.Assert False
+    If miRsAux!NumAlbaran = "D01082965" Then Debug.Assert False
+    
+       ' If InStr(1, "D01163830.D01163879.D01163985.D01163996.D01164048.D02117889.D02118085.D02118112.D02118211", miRsAux!NumAlbaran) > 0 Then Debug.Assert False
+    
         
     vSQL = "INSERT INTO scaalb (codtipom,numalbar,fechaalb,factursn,codclien,nomclien,domclien,codpobla,pobclien,proclien"
     vSQL = vSQL & ",nifclien,telclien,coddirec,nomdirec,referenc,codtraba,codtrab1,codtrab2,codagent,codforpa,codenvio,"
     vSQL = vSQL & "dtoppago,dtognral,tipofact,observa01,observa02,observa03,observa04,observa05,numofert,fecofert,"
-    vSQL = vSQL & "numpedcl,fecpedcl,fecentre,sementre,coddiren,tipAlbaran,codzonas,fecenvio,codinter,codnatura,chofer) VALUES ("
+    'Abril 2022 Añadimos APORTACION por subvencion AEAT
+    vSQL = vSQL & "numpedcl,fecpedcl,fecentre,sementre,coddiren,tipAlbaran,codzonas,fecenvio,codinter,codnatura,chofer,aportacion) VALUES ("
     vSQL = vSQL & "'" & codtipom & "'," & Mid(miRsAux!NumAlbaran, 2) & ", " & DBSet(miRsAux!FechaHora, "F") & ",1,"
-    'Debug.Print miRsAux!NumAlbaran
+    
     If Clivario Then
         vSQL = vSQL & sparamalvic!Clivario
         If DBLet(miRsAux!ClivarioAlvic, "T") <> "" Then DesdeClivar = True
@@ -1797,7 +1816,17 @@ Dim DesdeClivar As Boolean
     vSQL = vSQL & ",null,null,null,0," & DBSet(miRsAux!codzonas, "T")
     
     'fecenvio 'codinter,codnatura,chofer
-    vSQL = vSQL & ",null,null,null,null)"
+    vSQL = vSQL & ",null,null,null,null"
+    
+    'Aporatacion / Subvencion AEAT
+    'vSQL = vSQL & "," & DBSet(miRsAux!Aportacion, "N") & ")"
+    vSQL = vSQL & "," & DBSet(importeAportacion, "N") & ")"
+        
+    If miRsAux!Aportacion <> importeAportacion Then
+        Debug.Print miRsAux!NumAlbaran
+        Debug.Assert False
+    End If
+        
     
     'Insertar Cabecera
     
@@ -1998,10 +2027,13 @@ Public Function DevuelveCodtipom(ByVal LEtra As String, ParaAlbaran As Boolean, 
                     Else
                         If LEtra = sparamalvic!letraTienda Then
                             'DevuelveCodtipom = sparamalvic!FraDirectaT
-                            Stop
+                            'S top
+                            Err.Raise 513, , "Tipo de factura :  LEtra = sparamalvic!letraTienda"
+                            
                         ElseIf LEtra = sparamalvic!letraVarios Then
                             'DevuelveCodtipom = sparamalvic!FraDirectaA
-                            Stop
+                            'S top
+                            Err.Raise 513, , "Tipo de factura :  LEtra = sparamalvic!letraVario"
                         Else
                         
                         
@@ -2045,6 +2077,7 @@ Dim Sql1 As String
 Dim B As Boolean
 Dim CodCCost As String
 Dim Impor1 As Currency
+Dim Impor2 As Currency
 Dim Tot As Currency
 Dim jj As Byte
 Dim R2 As ADODB.Recordset
@@ -2498,7 +2531,7 @@ Dim R2 As ADODB.Recordset
                     miRsAux.Close
             
             Else
-                    Sql = "select idtipopago,sum(importeconiva) importeconiva from tmpgasolimport   WHERE codusu = " & vUsu.Codigo
+                    Sql = "select idtipopago,sum(importeconiva) importeconiva,sum(aportacion) la_subvencion from tmpgasolimport   WHERE codusu = " & vUsu.Codigo
                     Sql = Sql & " group by 1 ORDER BY  1"
                     
                     
@@ -2510,26 +2543,28 @@ Dim R2 As ADODB.Recordset
                     While Not miRsAux.EOF
                         If miRsAux!idtipopago <> Sql Then
                             If Sql <> "" Then
-                                Sql1 = Sql1 & ", (" & vUsu.Codigo & "," & Sql & "," & DBSet(Impor1, "N") & ")"
-                                Tot = Tot + Impor1
+                                Sql1 = Sql1 & ", (" & vUsu.Codigo & "," & Sql & "," & DBSet(Impor1, "N") & "," & DBSet(Impor2, "N") & ")"
+                                Tot = Tot + Impor1 - Impor2
                             End If
                             Sql = miRsAux!idtipopago
                             Impor1 = 0
+                            Impor2 = 0
                         End If
                         Impor1 = Impor1 + miRsAux!importeConIva
+                        Impor2 = Impor2 + miRsAux!la_subvencion
                         miRsAux.MoveNext
                     Wend
                     miRsAux.Close
             End If
             If Sql <> "" Then
-                Sql1 = Sql1 & ", (" & vUsu.Codigo & "," & Sql & "," & DBSet(Impor1, "N") & ")"
-                Tot = Tot + Impor1   'EN IVA redudido va el total
+                Sql1 = Sql1 & ", (" & vUsu.Codigo & "," & Sql & "," & DBSet(Impor1, "N") & "," & DBSet(Impor2, "N") & ")"
+                Tot = Tot + Impor1 - Impor2 '
             End If
             
             cadParam = Tot
             If Sql1 <> "" Then
                 Sql1 = Mid(Sql1, 2)
-                Sql1 = "INSERT INTO tmpscapla(codusu,codplant,cantidad) VALUES " & Sql1
+                Sql1 = "INSERT INTO tmpscapla(codusu,codplant,cantidad,importe) VALUES " & Sql1
                 conn.Execute Sql1
             End If
         End If
@@ -2686,6 +2721,8 @@ Dim c_Importe2 As Currency
 Dim c_Precio As Currency
 Dim c_PrecioSinIVA As Currency
 Dim c_Descuento As Currency
+Dim c_SubvenicionAportacion As Currency
+
 
 Dim Fecha As String
 Dim hora As String
@@ -2816,7 +2853,7 @@ Dim F_au As Date
             'Debug.Print UBound(Vec)
             If False Then
                     For NumRegElim = 0 To UBound(Vec) - 1
-                        Debug.Print Vec(NumRegElim)
+                        Debug.Print NumRegElim & ":  " & Vec(NumRegElim)
                         
                     Next
             End If
@@ -2946,6 +2983,17 @@ Dim F_au As Date
             IvaArticulo = CCur(Trim(Vec(23))) * "100"  'Son 4 decimales
             NombreArticulo = Trim(Vec(18))
             Kilometros = 0 '
+                
+                
+                
+            c_SubvenicionAportacion = 0
+            Sql = Trim(Vec(31))
+            If Sql <> "" Then
+                c_SubvenicionAportacion = CCur(Sql)
+                
+            End If
+            
+            
                 
         
     End If
@@ -3228,7 +3276,16 @@ Dim F_au As Date
     Sql = Sql & "," & DBSet(ccoste, "T", "N") & ",'" & turno & "','" & idClienteVarioAlvic & "',"
     
     'DocumentoOriginal DocumentoRelacionado
-    Sql = Sql & DBSet(DocumentoOriginal, "T", "N") & "," & DBSet(DocumentoRelacionado, "T") & ")"
+    Sql = Sql & DBSet(DocumentoOriginal, "T", "N") & "," & DBSet(DocumentoRelacionado, "T") & ","
+    
+    'Abril 2022
+    ' Subvenicon AEAT 0.2€Litro
+    ' Lo tratamos como una aportacion ya que la factura sigue siendo por el total. Lo unico es que paga menos
+    Sql = Sql & DBSet(c_SubvenicionAportacion, "N", "N") & ")"
+    
+    
+    
+    
     
     'insertamos
     cadFormula = cadFormula & Sql
@@ -3301,7 +3358,9 @@ Dim FormateadoATres As Boolean
                                 
                             Else
                             
-                                Stop
+                                'S top
+                                MsgBox "ERROR CRITICO " & DatoFichero, vbCritical
+                                End
                             
                                 'TPVs postes. Solo gasolina. Serán 101,102..106
                                 Serie = Mid(DatoFichero, 1, 2) & Mid(DatoFichero, 4, 1)   'quitamos el cero del medio
@@ -3311,7 +3370,7 @@ Dim FormateadoATres As Boolean
                             End If
                             
                     End If
-                    Debug.Print DatoFichero & "   " & Serie & " " & Factura
+                    'Debug.Print DatoFichero & "   " & Serie & " " & Factura
                 Else
     
                     '21 Junio.  Todos viene con 3 posiciones
@@ -3371,6 +3430,9 @@ Dim Mc As Contadores
 Dim FechaAsi As Date
 Dim Sql As String
 Dim Importe As Currency
+Dim TotAporta As Currency
+Dim ImpApuCobro As Currency
+
 
     On Error Resume Next
 
@@ -3407,19 +3469,27 @@ Set Mc = New Contadores
     
     miRsAux.Open Codigo, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Importe = 0
+    TotAporta = 0
     Codigo = ""
     NumRegElim = 0
     While Not miRsAux.EOF
         NumRegElim = NumRegElim + 1
-        Importe = Importe + miRsAux!importeConIva
         
+        
+        'Mete directamente en apunte el importe TICKET
+        ImpApuCobro = miRsAux!importeConIva
+        'Metemos el cobro MENOS subvencion
+        ImpApuCobro = ImpApuCobro - DBLet(miRsAux!Aportacion, "N")
+        
+        Importe = Importe + miRsAux!importeConIva - DBLet(miRsAux!Aportacion, "N")
+        TotAporta = TotAporta + DBLet(miRsAux!Aportacion, "N")
         
         ' linliapu, codmacta, numdocum, "
         Sql = Cad & NumRegElim & "," & DBSet(miRsAux!Codmacta, "T") & "," & DBSet(miRsAux!NumAlbaran, "T")
         'codconce,ampconce,
         Sql = Sql & ",1," & DBSet(miRsAux!NombreCliente, "T") & ","
         ' timporteD, timporteH,
-        Sql = Sql & "NULL," & DBSet(miRsAux!importeConIva, "N")
+        Sql = Sql & "NULL," & DBSet(ImpApuCobro, "N")
         'codccost, ctacontr, idcontab, punteada
         Sql = Sql & ",NULL," & DBSet(cadTitulo, "T") & ",'contab',0)"
         Codigo = Codigo & Sql
@@ -3427,6 +3497,26 @@ Set Mc = New Contadores
         miRsAux.MoveNext
         If miRsAux.EOF Then
             indCodigo = 10001
+            
+            'Si hay aportacion
+            'De momento NO reflejo NADA en el cierre diario pq los vencimientos estan llegando con el dto "quitado"
+            If False Then
+                If TotAporta <> 0 Then
+                    NumRegElim = NumRegElim + 1
+                    Sql = Cad & NumRegElim & "," & DBSet(vParamAplic.ctaAportacion, "T") & "," & DBSet("SUBVENCION", "T")
+                    'codconce,ampconce,
+                    Sql = Sql & ",1," & DBSet("Subvencion turno: " & Format(IdTurno, "00000"), "T") & ","
+                    ' timporteD, timporteH,
+                    Sql = Sql & DBSet(TotAporta, "N") & ",NULL"    'la aportacion cambia de lado
+                    'codccost, ctacontr, idcontab, punteada
+                    Sql = Sql & ",NULL," & DBSet(cadTitulo, "T") & ",'contab',0)"
+                    Codigo = Codigo & Sql
+                
+                End If
+            End If
+            
+            
+            
         Else
             indCodigo = Len(Codigo)
         End If
@@ -3438,25 +3528,26 @@ Set Mc = New Contadores
             Codigo = ""
             ConnConta.Execute Sql
             If Err.Number <> 0 Then
-                MsgBox "Creando asiento: " & Err.Description, vbExclamation
+                MsgBox "Creando asiento CIERRE: " & Err.Description, vbExclamation
                 Err.Clear
             End If
         End If
     Wend
     miRsAux.Close
        
-         
+       
+        
           
     'GEneramos pod forma de pago del traspaso000001
-    Codigo = "select * from tmpscapla   ,sforpa where codforpa=codplant and codusu=" & vUsu.Codigo
+    Codigo = "select * from tmpscapla   ,sforpa where codforpa=codplant and codplant<>2 and codusu=" & vUsu.Codigo
     miRsAux.Open Codigo, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     Codigo = ""
-
+    TotAporta = 0
     While Not miRsAux.EOF
         NumRegElim = NumRegElim + 1
-        Importe = Importe - miRsAux!cantidad
-        
+        Importe = Importe - (miRsAux!cantidad - DBLet(miRsAux!Importe, "N"))
+        TotAporta = TotAporta + miRsAux!Importe 'APORTACION
         
         ' linliapu, codmacta, numdocum, "
         Sql = ""
@@ -3472,10 +3563,20 @@ Set Mc = New Contadores
         'codconce,ampconce,
         Sql = Sql & ",1," & DBSet("Cierre turno " & txtCodigo(1).Text, "T") & ","
         ' timporteD, timporteH,
-        Sql = Sql & DBSet(miRsAux!cantidad, "N") & ",NULL"
+        Sql = Sql & DBSet(miRsAux!cantidad - DBLet(miRsAux!Importe, "N"), "N") & ",NULL"
         'codccost, ctacontr, idcontab, punteada
         Sql = Sql & ",NULL," & DBSet(cadTitulo, "T") & ",'contab',0)"
         Codigo = Codigo & Sql
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         miRsAux.MoveNext
         If miRsAux.EOF Then

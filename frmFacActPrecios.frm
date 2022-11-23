@@ -1,9 +1,9 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Begin VB.Form frmFacActPrecios2 
+Begin VB.Form frmFacActPrecios 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Actualizar Precios"
-   ClientHeight    =   4365
+   ClientHeight    =   4275
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   7170
@@ -11,10 +11,73 @@ Begin VB.Form frmFacActPrecios2
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   4365
+   ScaleHeight     =   4275
    ScaleWidth      =   7170
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameFam 
+      Caption         =   "Familia"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00800000&
+      Height          =   825
+      Left            =   360
+      TabIndex        =   16
+      Top             =   2040
+      Width           =   6735
+      Begin VB.TextBox txtFam 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         Left            =   270
+         TabIndex        =   2
+         Top             =   315
+         Width           =   990
+      End
+      Begin VB.TextBox txtFam 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   1
+         Left            =   1620
+         TabIndex        =   17
+         Top             =   315
+         Width           =   4830
+      End
+      Begin VB.Image ImgFam 
+         Height          =   240
+         Left            =   1305
+         Picture         =   "frmFacActPrecios.frx":000C
+         Tag             =   "-1"
+         ToolTipText     =   "Buscar proveedor"
+         Top             =   360
+         Width           =   240
+      End
+   End
    Begin VB.CheckBox chkCabel 
       Caption         =   "CABEL"
       BeginProperty Font 
@@ -27,9 +90,9 @@ Begin VB.Form frmFacActPrecios2
          Strikethrough   =   0   'False
       EndProperty
       Height          =   255
-      Left            =   450
-      TabIndex        =   2
-      Top             =   2070
+      Left            =   360
+      TabIndex        =   3
+      Top             =   3000
       Width           =   2655
    End
    Begin VB.Frame Frameprov 
@@ -46,7 +109,7 @@ Begin VB.Form frmFacActPrecios2
       ForeColor       =   &H00800000&
       Height          =   825
       Left            =   360
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   1170
       Width           =   6735
       Begin VB.TextBox txtDescProv 
@@ -63,7 +126,7 @@ Begin VB.Form frmFacActPrecios2
          EndProperty
          Height          =   360
          Left            =   1620
-         TabIndex        =   14
+         TabIndex        =   15
          Text            =   "Text1"
          Top             =   315
          Width           =   4830
@@ -88,7 +151,7 @@ Begin VB.Form frmFacActPrecios2
       Begin VB.Image imgProve 
          Height          =   240
          Left            =   1305
-         Picture         =   "frmFacActPrecios.frx":000C
+         Picture         =   "frmFacActPrecios.frx":0A0E
          Tag             =   "-1"
          ToolTipText     =   "Buscar proveedor"
          Top             =   360
@@ -98,8 +161,8 @@ Begin VB.Form frmFacActPrecios2
    Begin MSComctlLib.ProgressBar ProgressBar1 
       Height          =   375
       Left            =   360
-      TabIndex        =   10
-      Top             =   3720
+      TabIndex        =   11
+      Top             =   4680
       Visible         =   0   'False
       Width           =   6600
       _ExtentX        =   11642
@@ -118,10 +181,10 @@ Begin VB.Form frmFacActPrecios2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   375
-      Left            =   4875
-      TabIndex        =   5
-      Top             =   2880
+      Height          =   495
+      Left            =   4800
+      TabIndex        =   6
+      Top             =   3600
       Width           =   1065
    End
    Begin VB.CommandButton cmdCancel 
@@ -136,10 +199,10 @@ Begin VB.Form frmFacActPrecios2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   375
+      Height          =   495
       Left            =   6000
-      TabIndex        =   6
-      Top             =   2880
+      TabIndex        =   7
+      Top             =   3600
       Width           =   1065
    End
    Begin VB.Frame Frame1 
@@ -156,8 +219,8 @@ Begin VB.Form frmFacActPrecios2
       ForeColor       =   &H00800000&
       Height          =   1215
       Left            =   360
-      TabIndex        =   8
-      Top             =   2040
+      TabIndex        =   9
+      Top             =   3000
       Width           =   3720
       Begin VB.CheckBox chkPreuEsp 
          Caption         =   "Precios especiales"
@@ -172,7 +235,7 @@ Begin VB.Form frmFacActPrecios2
          EndProperty
          Height          =   255
          Left            =   240
-         TabIndex        =   4
+         TabIndex        =   5
          Top             =   720
          Value           =   1  'Checked
          Width           =   2490
@@ -190,7 +253,7 @@ Begin VB.Form frmFacActPrecios2
          EndProperty
          Height          =   255
          Left            =   240
-         TabIndex        =   3
+         TabIndex        =   4
          Top             =   360
          Value           =   1  'Checked
          Width           =   3330
@@ -230,8 +293,8 @@ Begin VB.Form frmFacActPrecios2
       Height          =   255
       Index           =   1
       Left            =   6105
-      TabIndex        =   12
-      Top             =   3360
+      TabIndex        =   13
+      Top             =   4320
       Visible         =   0   'False
       Width           =   855
    End
@@ -250,8 +313,8 @@ Begin VB.Form frmFacActPrecios2
       Height          =   255
       Index           =   0
       Left            =   360
-      TabIndex        =   11
-      Top             =   3360
+      TabIndex        =   12
+      Top             =   4320
       Visible         =   0   'False
       Width           =   5655
    End
@@ -269,7 +332,7 @@ Begin VB.Form frmFacActPrecios2
       Height          =   345
       Index           =   3
       Left            =   360
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   120
       Width           =   6330
    End
@@ -289,7 +352,7 @@ Begin VB.Form frmFacActPrecios2
       Height          =   240
       Index           =   21
       Left            =   360
-      TabIndex        =   7
+      TabIndex        =   8
       Top             =   765
       Width           =   1800
    End
@@ -297,12 +360,12 @@ Begin VB.Form frmFacActPrecios2
       Height          =   240
       Index           =   0
       Left            =   2205
-      Picture         =   "frmFacActPrecios.frx":0A0E
+      Picture         =   "frmFacActPrecios.frx":1410
       Top             =   765
       Width           =   240
    End
 End
-Attribute VB_Name = "frmFacActPrecios2"
+Attribute VB_Name = "frmFacActPrecios"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -330,7 +393,7 @@ End Sub
 Private Sub AceptarClientes()
 'actualizar los nuevos precios actuales  y/o especiales
 Dim cadSel As String
-Dim SQL As String
+Dim Sql As String
 Dim totRegPA As Long 'total registros a cambiar de precios actuales
 Dim totRegPE As Long 'total registros a cambia de precios especiales
 
@@ -373,14 +436,14 @@ Dim totRegPE As Long 'total registros a cambia de precios especiales
     totRegPE = 0
     If Me.chkPreuAct.Value = 1 Then
         'si marcado actualizar PRECIOS ACTUALES
-        SQL = "SELECT COUNT(*) FROM slista,sartic WHERE " & cadSel
-        totRegPA = TotalRegistros(SQL)
+        Sql = "SELECT COUNT(*) FROM slista,sartic WHERE " & cadSel
+        totRegPA = TotalRegistros(Sql)
         
         If Not (totRegPA > 0) Then
             If Me.chkPreuEsp.Value = 1 Then
                 'comprobar si se actualizar precios especiales
-                SQL = "SELECT COUNT(*) FROM sprees,sartic WHERE " & Replace(cadSel, "slista", "sprees")
-                totRegPE = TotalRegistros(SQL)
+                Sql = "SELECT COUNT(*) FROM sprees,sartic WHERE " & Replace(cadSel, "slista", "sprees")
+                totRegPE = TotalRegistros(Sql)
                 If Not (totRegPE > 0) Then
                     MsgBox "No hay tarifas de precios ni precios especiales a actualizar para esa fecha.", vbExclamation
                     Exit Sub
@@ -395,14 +458,16 @@ Dim totRegPE As Long 'total registros a cambia de precios especiales
     
     If Me.chkPreuEsp.Value = 1 Then
         'comprobar si se actualizar PRECIOS ESPECIALES
-        SQL = "SELECT COUNT(*) FROM sprees,sartic WHERE " & Replace(cadSel, "slista", "sprees")
-        totRegPE = TotalRegistros(SQL)
+        Sql = "SELECT COUNT(*) FROM sprees,sartic WHERE " & Replace(cadSel, "slista", "sprees")
+        totRegPE = TotalRegistros(Sql)
         
         If Not ((totRegPE) > 0) And totRegPA = 0 Then
             MsgBox "No hay precios especiales a actualizar para esa fecha.", vbExclamation
             Exit Sub
         End If
     End If
+    
+    If MsgBox("Continuar con el proceso?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
     
     
     
@@ -463,7 +528,7 @@ Private Sub chkPreuEsp_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    If MsgBox("Continuar con el proceso?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
+    
     If Me.Proveedor Then
         AceptarProveedores
     Else
@@ -481,8 +546,9 @@ Private Sub Form_Load()
     Me.ProgressBar1.visible = False
     Me.lblProgreso(0).visible = False
     Me.lblProgreso(1).visible = False
-    Me.Height = 4100
+    Me.Height = 5100
     Frame1.visible = Not Me.Proveedor
+    Me.FrameFam.visible = Me.Proveedor
     chkCabel.visible = Me.Proveedor And vParamAplic.NumeroInstalacion = 2
    ' Frameprov.visible = Me.Proveedor
     txtProv.Text = ""
@@ -490,10 +556,10 @@ Private Sub Form_Load()
     If Me.Proveedor Then
         Me.lblTitulo(3).Caption = "Actualizar precios proveedor"
         Caption = "PROVEEDOR"
-
     Else
         Caption = "TARIFAS "
         Me.lblTitulo(3).Caption = "Actualizar Tarifas de Precios"
+        Me.Frame1.Top = FrameFam.Top
     End If
     
 End Sub
@@ -504,8 +570,18 @@ Private Sub frmF_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmProv_DatoSeleccionado(CadenaSeleccion As String)
-    txtProv.Text = RecuperaValor(CadenaSeleccion, 1)
-    Me.txtDescProv.Text = RecuperaValor(CadenaSeleccion, 2)
+
+    menErrProceso = CadenaSeleccion
+
+End Sub
+
+Private Sub ImgFam_Click()
+    LanzaAyuda False
+    If menErrProceso <> "" Then
+        txtFam(0).Text = RecuperaValor(menErrProceso, 1)
+        txtFam(1).Text = RecuperaValor(menErrProceso, 2)
+    End If
+    menErrProceso = ""
 End Sub
 
 Private Sub imgFecha_Click(Index As Integer)
@@ -516,7 +592,6 @@ Private Sub imgFecha_Click(Index As Integer)
     
     PonerFormatoFecha txtCodigo(Index)
     If txtCodigo(Index).Text <> "" Then frmF.Fecha = CDate(txtCodigo(Index).Text)
-   
     Screen.MousePointer = vbDefault
     frmF.Show vbModal
     Set frmF = Nothing
@@ -528,13 +603,26 @@ End Sub
 
 
 Private Sub imgProve_Click()
-'    Set frmProv = New frmComProveedores
-'    frmProv.DatosADevolverBusqueda = "0"
-'    frmProv.Show vbModal
+
+    LanzaAyuda True
+    If menErrProceso <> "" Then
+        txtProv.Text = RecuperaValor(menErrProceso, 1)
+        Me.txtDescProv.Text = RecuperaValor(menErrProceso, 2)
+    End If
+    menErrProceso = ""
+End Sub
+
+Private Sub LanzaAyuda(prov As Boolean)
+    menErrProceso = ""
     Set frmProv = New frmBasico2
-    AyudaProveedores frmProv, txtProv
+    If prov Then
+        AyudaProveedores frmProv, txtProv
+    Else
+        AyudaFamilias frmProv, txtFam(0)
+    End If
     Set frmProv = Nothing
 End Sub
+
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
     ConseguirFoco txtCodigo(Index), 3
@@ -591,7 +679,7 @@ Private Sub ProcesoActualizarPrecios_Actuales(cadWhere As String, totReg As Long
 '   - insertar. en historico (slist1) linea con slista.fechanue y con el slista.precioac
 '   - actualizar slista con slista.precioac=slista.precionu
 '   - si slista.codlista es la tarifa de los parametros de la aplicacion: actualizar PVP del articulo
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
@@ -610,9 +698,9 @@ Dim hayErr As Boolean
     
     
     '-- seleccionar todos los registros actuales a procesar
-    SQL = "SELECT * FROM slista,sartic WHERE " & cadWhere
+    Sql = "SELECT * FROM slista,sartic WHERE " & cadWhere
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa a cambiar
     hayErr = False
@@ -660,7 +748,7 @@ End Sub
 Private Function ActualizarTarifa(codArt As String, codLis As Integer) As Boolean
 Dim cadErr As String
 Dim cTar As CTarifaArt
-Dim b As Boolean
+Dim B As Boolean
 Dim margen As Currency
 Dim newPrecio As Currency
 
@@ -669,33 +757,33 @@ Dim newPrecio As Currency
     
     
     Set cTar = New CTarifaArt
-    b = cTar.LeerDatos(codArt, codLis)
+    B = cTar.LeerDatos(codArt, codLis)
     
-    If b Then
+    If B Then
         'actualizar la tarifa precios
-        b = cTar.ActualizarPrecios(cTar.FechaCambio, cTar.PrecioNuevo, cTar.PrecioCajaNuevo, cadErr, True)
+        B = cTar.ActualizarPrecios(cTar.FechaCambio, cTar.PrecioNuevo, cTar.PrecioCajaNuevo, cadErr, True)
         
         'si tarifa es la de parametros actualizar PVP del articulo
-        If b And codLis = vParamAplic.CodTarifa Then
-            b = BloquearArticulo(codArt)
-            If b Then
+        If B And codLis = vParamAplic.CodTarifa Then
+            B = BloquearArticulo(codArt)
+            If B Then
                 margen = Round2(cTar.MargenComercial / 100, 4)
                 newPrecio = Round2((cTar.PrecioNuevo / (margen + 1)), 4)
-                b = ActualizarPVPArticulo(codArt, newPrecio)
+                B = ActualizarPVPArticulo(codArt, newPrecio)
             End If
         End If
     End If
     Set cTar = Nothing
     
     
-    If b Then
+    If B Then
         conn.CommitTrans
     Else
         conn.RollbackTrans
     End If
     
-    ActualizarTarifa = b
-    If Not b And cadErr <> "" Then MsgBox cadErr, vbExclamation
+    ActualizarTarifa = B
+    If Not B And cadErr <> "" Then MsgBox cadErr, vbExclamation
     Exit Function
     
 ErrAct:
@@ -716,14 +804,14 @@ End Function
 
 
 Private Function ActualizarPVPArticulo(codArt As String, newPreu As Currency) As Boolean
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo ErrActPVP
     ActualizarPVPArticulo = False
     
-    SQL = "UPDATE sartic SET preciove=" & DBSet(newPreu, "N")
-    SQL = SQL & " WHERE codartic=" & DBSet(codArt, "T")
-    conn.Execute SQL
+    Sql = "UPDATE sartic SET preciove=" & DBSet(newPreu, "N")
+    Sql = Sql & " WHERE codartic=" & DBSet(codArt, "T")
+    conn.Execute Sql
     
     ActualizarPVPArticulo = True
     Exit Function
@@ -746,7 +834,7 @@ Private Sub ProcesoActualizarPrecios_Especiales(cadWhere As String, totReg As Lo
 '   - insertar. en historico (spree1) linea con sprees.fechanue y con el sprees.precioac
 '   - actualizar sprees con sprees.precioac=sprees.precionu
 '   - poner a nulos los valores nuevos
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
@@ -765,9 +853,9 @@ Dim hayErr As Boolean
     
     
     '-- seleccionar todos los registros actuales a procesar
-    SQL = "SELECT * FROM sprees,sartic WHERE " & cadWhere
+    Sql = "SELECT * FROM sprees,sartic WHERE " & cadWhere
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada precio especial a cambiar
     hayErr = False
@@ -813,7 +901,7 @@ End Sub
 
 Private Function ActualizarPrecioEspec(codCli As Long, codArt As String) As Boolean
 'actualizar precio especial
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim NumF As String
 
@@ -822,29 +910,29 @@ Dim NumF As String
     conn.BeginTrans
     ActualizarPrecioEspec = False
     
-    SQL = "SELECT * FROM sprees WHERE codclien=" & codCli & " AND codartic=" & DBSet(codArt, "T")
+    Sql = "SELECT * FROM sprees WHERE codclien=" & codCli & " AND codartic=" & DBSet(codArt, "T")
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RS.EOF Then
         '-- Insertar en el historico spree1
         'numero de linea
         NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", "codartic=" & DBSet(codArt, "T") & " AND codclien=" & codCli)
     
-        SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec) "
-        SQL = SQL & " VALUES (" & codCli & "," & DBSet(codArt, "T") & "," & NumF & ","
-        SQL = SQL & DBSet(RS!fechanue, "F") & "," & DBSet(RS!precioac, "N") & "," & DBSet(DBLet(RS!precioa1, "N"), "N") & "," & DBSet(RS!dtoespec, "N") & ")"
-        conn.Execute SQL
+        Sql = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec) "
+        Sql = Sql & " VALUES (" & codCli & "," & DBSet(codArt, "T") & "," & NumF & ","
+        Sql = Sql & DBSet(RS!fechanue, "F") & "," & DBSet(RS!precioac, "N") & "," & DBSet(DBLet(RS!precioa1, "N"), "N") & "," & DBSet(RS!dtoespec, "N") & ")"
+        conn.Execute Sql
         
         
         '-- Actualizar precios actuales con nuevo y resetear valores nuevos
-        SQL = "UPDATE sprees SET precioac=" & DBSet(RS!precionu, "N")
-        SQL = SQL & "," & " precioa1=" & DBSet(RS!precion1, "N")
+        Sql = "UPDATE sprees SET precioac=" & DBSet(RS!precionu, "N")
+        Sql = Sql & "," & " precioa1=" & DBSet(RS!precion1, "N")
         'Si dtosespec nuevo esta vacio(null), como esto es herbequiano, no UPDATEO el dtoespecial
-        If Not IsNull(RS!dtoespe1) Then SQL = SQL & ", dtoespec=" & DBSet(RS!dtoespe1, "N")
-        SQL = SQL & ", " & "precionu=" & ValorNulo & ", fechanue=" & ValorNulo & ", precion1=" & ValorNulo
-        SQL = SQL & ", dtoespe1=" & ValorNulo
-        SQL = SQL & " WHERE codclien=" & codCli & " and codartic=" & DBSet(codArt, "T")
-        conn.Execute SQL
+        If Not IsNull(RS!dtoespe1) Then Sql = Sql & ", dtoespec=" & DBSet(RS!dtoespe1, "N")
+        Sql = Sql & ", " & "precionu=" & ValorNulo & ", fechanue=" & ValorNulo & ", precion1=" & ValorNulo
+        Sql = Sql & ", dtoespe1=" & ValorNulo
+        Sql = Sql & " WHERE codclien=" & codCli & " and codartic=" & DBSet(codArt, "T")
+        conn.Execute Sql
     End If
     RS.Close
     Set RS = Nothing
@@ -862,13 +950,51 @@ End Function
 
 
 
+Private Sub txtFam_GotFocus(Index As Integer)
+    ConseguirFoco txtFam(0), 2
+End Sub
+
+Private Sub txtFam_KeyPress(Index As Integer, KeyAscii As Integer)
+    If KeyAscii = teclaBuscar Then
+        KEYBusqueda KeyAscii, 1 'fam
+    Else
+        KEYpress KeyAscii
+    End If
+End Sub
+
+Private Sub txtFam_LostFocus(Index As Integer)
+    If Index = 1 Then Exit Sub
+    
+    menErrProceso = ""
+    txtFam(Index).Text = Trim(txtFam(Index).Text)
+    If txtFam(Index).Text <> "" Then
+        If Not IsNumeric(txtFam(Index).Text) Then
+            MsgBox "Campo numerico", vbExclamation
+        Else
+            menErrProceso = DevuelveDesdeBD(conAri, "nomfamia", "sfamia", "codfamia", txtFam(Index).Text)
+            If menErrProceso = "" Then MsgBox "no existe existe familia", vbExclamation
+        End If
+        If menErrProceso = "" Then
+            txtFam(Index).Text = ""
+            PonerFoco txtFam(Index)
+        End If
+    End If
+    Me.txtFam(1).Text = menErrProceso
+    menErrProceso = ""
+   
+End Sub
+
 Private Sub txtProv_GotFocus()
     ConseguirFoco txtProv, 3
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgProve_Click
+    If Indice = 0 Then
+        imgProve_Click
+    Else
+        ImgFam_Click
+    End If
 End Sub
 
 Private Sub txtProv_KeyPress(KeyAscii As Integer)
@@ -904,7 +1030,7 @@ End Sub
 Private Sub AceptarProveedores()
 'actualizar los nuevos precios actuales  y/o especiales
 Dim cadSel As String
-Dim SQL As String
+Dim Sql As String
 Dim totRegPA As Long 'total registros a cambiar de precios actuales
 Dim totRegPE As Long 'total registros a cambia de precios especiales
 
@@ -922,17 +1048,33 @@ Dim totRegPE As Long 'total registros a cambia de precios especiales
         Exit Sub
     End If
     
-    SQL = ""
+    Sql = ""
     cadSel = ""
-    If Me.txtProv.Text = "" Or Me.txtDescProv.Text = "" Then SQL = "1"
+    If Me.txtProv.Text <> "" Or Me.txtDescProv.Text <> "" Then Sql = "1"
     
     If Me.chkCabel.Value Then
-        If SQL <> "" Then cadSel = "No debe indicar proveedor"
+        If Sql <> "" Then cadSel = "No debe indicar proveedor"
+        
+        'Si indica familia, debe ser cabel
+        If Me.txtFam(0).Text <> "" Then
+            Sql = DevuelveDesdeBD(conAri, "marcapropia", "sfamia", "codfamia", txtFam(0).Text)
+            If Sql = "" Then
+                cadSel = "Error leyendo familia"
+            Else
+                If Sql = "0" Then cadSel = "No es familia CABEL"
+            End If
+        End If
     Else
-        If SQL = "" Then cadSel = "Indique proveedor"
+        If Sql = "" Then cadSel = "Indique proveedor"
+        
+        
+    End If
+    If cadSel <> "" Then
+        MsgBox cadSel, vbExclamation
+        Exit Sub
     End If
     
-    
+        
     
     '--- COMPROBAR Q HAY REGISTROS A PROCESAR
     '------------------------------------------
@@ -941,29 +1083,43 @@ Dim totRegPE As Long 'total registros a cambia de precios especiales
     '    a actualizar: los q cumplan q slista.fechanue <= valor_introducido
     cadSel = "fechanue"
     cadSel = CadenaDesdeHastaBD("", txtCodigo(0).Text, cadSel, "F")
-    If Me.chkCabel.Value Then
-        'CABEL
-        cadSel = cadSel & " AND codartic in (select codartic from sartic,sfamia"
-        cadSel = cadSel & " WHERE sartic.codfamia=sfamia.codfamia and marcapropia=1 )"
-    Else
-        cadSel = cadSel & " AND codprove = " & txtProv.Text
-    End If
+    
+    If Not chkCabel.Value = 1 Then cadSel = cadSel & " AND codprove = " & txtProv.Text
+    
+    cadSel = cadSel & " AND codartic in (select codartic from sartic,sfamia"
+    cadSel = cadSel & " WHERE sartic.codfamia=sfamia.codfamia "
+    If Me.txtFam(0).Text <> "" Then cadSel = cadSel & " AND sfamia.codfamia =" & txtFam(0).Text
+    'CABEL
+    If Me.chkCabel.Value Then cadSel = cadSel & " AND marcapropia=1 "
+    cadSel = cadSel & " )"
+        
+        
+    
+    
+    
+    
+    
+    
+    
     
     '- comprabar q existen registros para ese criterio de seleccion
     totRegPA = 0
     totRegPE = 0
     If Me.chkPreuAct.Value = 1 Then
         'si marcado actualizar PRECIOS ACTUALES
-        SQL = "SELECT COUNT(*) FROM slispr WHERE " & cadSel
-        totRegPA = TotalRegistros(SQL)
+        Sql = "SELECT COUNT(*) FROM slispr WHERE " & cadSel
+        totRegPA = TotalRegistros(Sql)
         
         If totRegPA = 0 Then
                 'no hay registros a procesar y fin
-                MsgBox "No hay precios a actualizar para ese proveedor.", vbExclamation
+                MsgBox "No hay precios a actualizar para con estos valores.", vbExclamation
                 Exit Sub
            
         End If
     End If
+    
+    
+    If MsgBox("Continuar con el proceso?  (" & totRegPA & ")", vbQuestion + vbYesNo) = vbNo Then Exit Sub
     
     
     
@@ -990,7 +1146,7 @@ Dim totRegPE As Long 'total registros a cambia de precios especiales
     DesBloqueoManual ("ACTPRE")
     
     If menErrProceso <> "" Then MsgBox menErrProceso, vbInformation
-    cmdCancel_Click
+    
 End Sub
 
 
@@ -1002,7 +1158,7 @@ Private Sub ProcesoActualizarPreciosProvee(cadWhere As String, totReg As Long)
 '   - insertar. en historico (slist1) linea con slista.fechanue y con el slista.precioac
 '   - actualizar slista con slista.precioac=slista.precionu
 '   - si slista.codlista es la tarifa de los parametros de la aplicacion: actualizar PVP del articulo
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim i As Long
 Dim hayErr As Boolean
@@ -1021,9 +1177,9 @@ Dim hayErr As Boolean
     
     
     '-- seleccionar todos los registros actuales a procesar
-    SQL = "SELECT * FROM slispr WHERE " & cadWhere
+    Sql = "SELECT * FROM slispr WHERE " & cadWhere
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'para cada tarifa a cambiar
     hayErr = False
@@ -1069,7 +1225,7 @@ End Sub
 
 
 Public Function ActualizarPreciosProvee(ByRef rsa As ADODB.Recordset) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim NumF As String
 Dim vCodProve As Long
 
@@ -1086,27 +1242,27 @@ Dim vCodProve As Long
     
     'Mover los precios actuales al histórcio slist1
     '------------------------------------------------
-    SQL = "INSERT INTO slisp1(codartic,codprove,numlinea,fechacam,precioac) "
-    SQL = SQL & " VALUES (" & DBSet(rsa!codArtic, "T") & "," & vCodProve
+    Sql = "INSERT INTO slisp1(codartic,codprove,numlinea,fechacam,precioac) "
+    Sql = Sql & " VALUES (" & DBSet(rsa!codArtic, "T") & "," & vCodProve
 
     'numero de linea
     NumF = SugerirCodigoSiguienteStr("slisp1", "numlinea", "codartic=" & DBSet(rsa!codArtic, "T") & " AND codprove=" & vCodProve)
-    SQL = SQL & "," & NumF & "," & DBSet(Me.txtCodigo(0).Text, "F") & "," & DBSet(rsa!precioac, "N") & ")"
+    Sql = Sql & "," & NumF & "," & DBSet(Me.txtCodigo(0).Text, "F") & "," & DBSet(rsa!precioac, "N") & ")"
 
 
 
 
-    conn.Execute SQL
+    conn.Execute Sql
     
 
     'Actualizar los precios actuales con valores nuevos
     'y quitar el valor de los precios nuevos y poner a nulos
     '--------------------------------------------------
-    SQL = "UPDATE slispr SET precioac=" & DBSet(rsa!precionu, "N")
+    Sql = "UPDATE slispr SET precioac=" & DBSet(rsa!precionu, "N")
 '    SQL = SQL & "," & " precioa1=" & DBSet(newPrecioA1, "N")
-    SQL = SQL & ", " & "precionu=" & ValorNulo & ", fechanue=" & ValorNulo
-    SQL = SQL & " WHERE codartic=" & DBSet(rsa!codArtic, "T") & " AND codprove=" & vCodProve
-    conn.Execute SQL
+    Sql = Sql & ", " & "precionu=" & ValorNulo & ", fechanue=" & ValorNulo
+    Sql = Sql & " WHERE codartic=" & DBSet(rsa!codArtic, "T") & " AND codprove=" & vCodProve
+    conn.Execute Sql
     
     
     

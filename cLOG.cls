@@ -18,6 +18,24 @@ Option Explicit
 'En el frmlog, grabamos la tabla tmpnlotes con las acciones para linkar con slog
 
 
+'Se guardara una cadena de texto para no declarse mas variables en donde llamemos al clog
+' Me explico
+'         clog.VariableTemporal=TodosLosDatosQueNecsitoParaElLog
+'         if haceraAcciones then
+'              cad=clog.variableTemporal
+'              clog.insertar Numero, cad
+'         end if
+Private mvarVariableTemporal As String
+
+
+Public Property Get VariableTemporal() As String
+     VariableTemporal = mvarVariableTemporal
+End Property
+Public Property Let VariableTemporal(ByVal vData As String)
+     mvarVariableTemporal = vData
+End Property
+
+
 'ACCIONES DISPONIBLES
 '
 '       1.- Eliminar facturas
@@ -70,22 +88,23 @@ Option Explicit
 '       40 -  Cambio cliente
 '       41 -  usuarios
 '       42 - Deshacer cierre prod/env
+'       43 - Precio inferior PVM
 
 Public Function Insertar(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EI
     Insertar = False
     
-    SQL = "insert into `slog` (`fecha`,`accion`,`usuario`,`pc`,`descripcion`) values ( "
-    SQL = SQL & " now()," & Accion & " ,'" & DevNombreSQL(ElUsuario.Login) & "','"
-    SQL = SQL & DevNombreSQL(ElUsuario.PC) & "',"
+    Sql = "insert into `slog` (`fecha`,`accion`,`usuario`,`pc`,`descripcion`) values ( "
+    Sql = Sql & " now()," & Accion & " ,'" & DevNombreSQL(ElUsuario.Login) & "','"
+    Sql = Sql & DevNombreSQL(ElUsuario.PC) & "',"
     If Descripcion = "" Then
-        SQL = SQL & "NULL)"
+        Sql = Sql & "NULL)"
     Else
-        SQL = SQL & "'" & DevNombreSQL(Descripcion) & "')"
+        Sql = Sql & "'" & DevNombreSQL(Descripcion) & "')"
     End If
-    conn.Execute SQL
+    conn.Execute Sql
     
     
     Insertar = True
@@ -142,9 +161,14 @@ Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
     ListaAcciones.Add "40|Cambio cliente|"
     ListaAcciones.Add "41|Usuarios|"
     ListaAcciones.Add "42|Deshacer cierre PROD/ENV|"
+    ListaAcciones.Add "43|Precio < PMV|"
     DevuelveAcciones = True
     Exit Function
 EDevuelveAcciones:
     MuestraError Err.Number
 End Function
+
+
+
+
 

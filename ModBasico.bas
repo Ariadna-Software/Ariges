@@ -470,7 +470,7 @@ Dim incre As Long
         
     
     frmCom.pConn = conAri
-
+    frmCom.CampoDeOrdenacion = "sartic.nomartic"
     frmCom.tabla = "sartic ,salmac "
     If DesdeTPV Then frmCom.tabla = frmCom.tabla & ", tmpinformes "
     frmCom.DatosADevolverBusqueda = "0|1|"
@@ -649,7 +649,7 @@ Public Sub AyudaClientes(frmCom As frmBasico2, Optional CodActual As String, Opt
     frmCom.Maxlen6 = 10
 
     frmCom.pConn = conAri
-
+    frmCom.CampoDeOrdenacion = "sclien.nomclien"
     frmCom.tabla = "sclien"
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CampoCP = "codclien"
@@ -1060,7 +1060,7 @@ End Sub
 
 
 Public Sub AyudaOfertas(frmOfe As frmBasico2, Optional CodActual As String, Optional cWhere As String, Optional SinAvanzada As Boolean)
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
 
     Screen.MousePointer = vbHourglass
@@ -1080,7 +1080,7 @@ Dim tabla As String
     
     tabla = tabla & " GROUP BY scapre.numofert ) as tt"
     
-    SQL = "SELECT numofert,fecofert,codclien,nomclien,codtraba,nomtraba,base FROM " & tabla & " WHERE true"
+    Sql = "SELECT numofert,fecofert,codclien,nomclien,codtraba,nomtraba,base FROM " & tabla & " WHERE true"
     
     
     
@@ -1088,7 +1088,7 @@ Dim tabla As String
     
     
     
-    frmOfe.CadenaConsulta = SQL
+    frmOfe.CadenaConsulta = Sql
     
     frmOfe.Tag1 = "Oferta|N|N|0|999999|tt|numofert|000000|S|"
     frmOfe.Tag2 = "Fecha|F|N|||tt|fecofert|dd/mm/yyyy||"

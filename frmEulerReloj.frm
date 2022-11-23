@@ -12,6 +12,108 @@ Begin VB.Form frmEulerReloj
    ScaleWidth      =   18990
    StartUpPosition =   2  'CenterScreen
    WindowState     =   2  'Maximized
+   Begin VB.Frame FrameAlbaranes 
+      Height          =   7455
+      Left            =   240
+      TabIndex        =   22
+      Tag             =   "0"
+      Top             =   4200
+      Visible         =   0   'False
+      Width           =   13695
+      Begin VB.CommandButton cmdVistaPrevAlbaranes 
+         Caption         =   "Cerrar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Index           =   1
+         Left            =   12120
+         TabIndex        =   26
+         Top             =   240
+         Width           =   1335
+      End
+      Begin VB.CommandButton cmdVistaPrevAlbaranes 
+         Caption         =   "Seleccionar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   495
+         Index           =   0
+         Left            =   9360
+         TabIndex        =   25
+         Top             =   240
+         Width           =   1335
+      End
+      Begin MSComctlLib.ListView lwAyudaAlbaranes 
+         Height          =   6015
+         Left            =   360
+         TabIndex        =   24
+         Top             =   840
+         Width           =   12375
+         _ExtentX        =   21828
+         _ExtentY        =   10610
+         View            =   3
+         LabelEdit       =   1
+         Sorted          =   -1  'True
+         LabelWrap       =   -1  'True
+         HideSelection   =   0   'False
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Verdana"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         NumItems        =   2
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Albaran"
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Descripción"
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin VB.Label Label6 
+         Caption         =   "Albarán / Orden producción"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00C00000&
+         Height          =   375
+         Left            =   360
+         TabIndex        =   23
+         Top             =   360
+         Width           =   4575
+      End
+   End
    Begin VB.CommandButton cmdAlbaran 
       Caption         =   "Nuevo"
       Height          =   495
@@ -70,7 +172,7 @@ Begin VB.Form frmEulerReloj
             Strikethrough   =   0   'False
          EndProperty
          Height          =   435
-         Left            =   3960
+         Left            =   4560
          TabIndex        =   19
          Top             =   960
          Width           =   2895
@@ -128,6 +230,13 @@ Begin VB.Form frmEulerReloj
          Top             =   120
          Width           =   5775
       End
+      Begin VB.Image imgBuscarEnCombo 
+         Height          =   240
+         Left            =   3840
+         Picture         =   "frmEulerReloj.frx":0898
+         Top             =   960
+         Width           =   240
+      End
       Begin VB.Label Label5 
          Caption         =   "Vehículo/Maquinaria"
          BeginProperty Font 
@@ -177,7 +286,7 @@ Begin VB.Form frmEulerReloj
          Left            =   0
          TabIndex        =   11
          Top             =   960
-         Width           =   5175
+         Width           =   3735
       End
       Begin VB.Label Label3 
          Caption         =   "Tipo trabajo"
@@ -209,7 +318,7 @@ Begin VB.Form frmEulerReloj
       Begin VB.CommandButton Command2 
          Height          =   495
          Left            =   8640
-         Picture         =   "frmEulerReloj.frx":0898
+         Picture         =   "frmEulerReloj.frx":70EA
          Style           =   1  'Graphical
          TabIndex        =   17
          ToolTipText     =   "Limpiar"
@@ -456,6 +565,19 @@ Dim NumeroTareasPendientesCerrar As Integer
 
 
 
+Private Sub Check1_Click()
+    
+    
+    Cad = ""
+    If Combo1.ListIndex < 0 Then Cad = "X"
+    If Me.cboTipoTrabajo.ListIndex <= 0 Then Cad = "X"
+    If Cad <> "" Then Exit Sub
+    
+    
+    
+    cboTipoTrabajo_Click
+End Sub
+
 Private Sub cmdAlbaran_Click(Index As Integer)
     Cad = ""
     If Combo1.ListIndex < 0 Then Cad = "Seleccione el trabajador "
@@ -501,6 +623,20 @@ Private Sub cmdImprimir_Click()
 End Sub
 
 
+
+Private Sub cmdVistaPrevAlbaranes_Click(Index As Integer)
+
+    If Index = 0 Then
+    
+        If lwAyudaAlbaranes.SelectedItem Is Nothing Then Exit Sub
+        NumRegElim = Val(Mid(lwAyudaAlbaranes.SelectedItem.Key, 2))
+        If cboAlb.ListCount < NumRegElim Then Exit Sub
+        
+        cboAlb.ListIndex = NumRegElim
+
+    End If
+    Me.FrameAlbaranes.visible = False
+End Sub
 
 Private Sub Combo1_Click()
 Dim J As Integer
@@ -1043,6 +1179,11 @@ Dim H As Long
     Command1.Left = Me.Width - 1800
     cmdAceptar.Left = Command1.Left - 320 - cmdAceptar.Width
     
+    If FrameAlbaranes.visible Then
+        AjustarTamanyoFrame
+    Else
+        Me.FrameAlbaranes.Tag = 0 'Ya ajustará
+    End If
     
     
     If Soloreloj Then
@@ -1060,8 +1201,74 @@ Private Sub frmAc_DatoSeleccionado(CadenaSeleccion As String)
     Cad = CadenaSeleccion
 End Sub
 
+Private Sub Form_Unload(Cancel As Integer)
+    If Me.FrameAlbaranes.visible Then Cancel = 1
+End Sub
+
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
     Cad = CadenaDevuelta
+End Sub
+
+Private Sub imgBuscarEnCombo_Click()
+Dim IT As ListItem
+    If Me.cboAlb.ListCount <= 0 Then Exit Sub
+    
+    If FrameAlbaranes.Tag = 0 Then
+        AjustarTamanyoFrame
+        FrameAlbaranes.Top = 1
+    End If
+    
+    Label6.Caption = cboTipoTrabajo.Text
+    
+    lwAyudaAlbaranes.ListItems.Clear
+    InsertadoAlbaran = 0
+    lwAyudaAlbaranes.SortOrder = lvwAscending
+    lwAyudaAlbaranes.SortKey = 0
+    For NumRegElim = 0 To cboAlb.ListCount - 1
+        
+        
+        davidCodtipom = Trim(cboAlb.List(NumRegElim))
+        If davidCodtipom <> "" Then
+            davidNumalbar = InStr(1, davidCodtipom, " - ")
+            If davidNumalbar = 0 Then
+                'RARO
+                MsgBox "Error obteniendo", vbExclamation
+            Else
+                Set IT = lwAyudaAlbaranes.ListItems.Add(, "K" & Format(NumRegElim, "00000"), Trim(Mid(davidCodtipom, 1, davidNumalbar - 1)))
+                InsertadoAlbaran = InsertadoAlbaran + 1
+                davidCodtipom = Trim(Mid(davidCodtipom, davidNumalbar + 3))
+                
+                IT.SubItems(1) = CStr(davidCodtipom)
+            End If
+        End If
+    Next
+    davidCodtipom = ""
+    davidNumalbar = 0
+    InsertadoAlbaran = 0
+    FrameAlbaranes.visible = True
+    
+    
+End Sub
+
+
+Private Sub AjustarTamanyoFrame()
+        
+        FrameAlbaranes.Left = 0
+        FrameAlbaranes.Width = Me.Width - 90
+        FrameAlbaranes.Height = Me.Height - 90
+        FrameAlbaranes.Tag = 1
+        
+        lwAyudaAlbaranes.Width = FrameAlbaranes.Width - lwAyudaAlbaranes.Left - 600
+        lwAyudaAlbaranes.Height = FrameAlbaranes.Height - lwAyudaAlbaranes.Top - 900
+        cmdVistaPrevAlbaranes(1).Left = FrameAlbaranes.Width - cmdVistaPrevAlbaranes(1).Width - 240
+        cmdVistaPrevAlbaranes(0).Left = cmdVistaPrevAlbaranes(1).Left - cmdVistaPrevAlbaranes(0).Width - 240
+        
+        NumRegElim = lwAyudaAlbaranes.Width - 900
+        If NumRegElim <= 900 Then NumRegElim = 900
+        lwAyudaAlbaranes.ColumnHeaders(1).Width = CInt(NumRegElim / 6)
+        NumRegElim = NumRegElim - CInt(lwAyudaAlbaranes.ColumnHeaders(1).Width) - 120
+        lwAyudaAlbaranes.ColumnHeaders(2).Width = NumRegElim
+
 End Sub
 
 Private Sub ListView2_DblClick()
@@ -1139,6 +1346,21 @@ Dim i As Integer
     
 End Sub
 
+
+Private Sub lwAyudaAlbaranes_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+    
+    
+    If lwAyudaAlbaranes.SortKey = ColumnHeader.Index - 1 Then
+        lwAyudaAlbaranes.SortOrder = IIf(lwAyudaAlbaranes.SortOrder = lvwAscending, lvwDescending, lvwAscending)
+    Else
+        lwAyudaAlbaranes.SortOrder = lvwAscending
+        lwAyudaAlbaranes.SortKey = ColumnHeader.Index - 1
+    End If
+End Sub
+
+Private Sub lwAyudaAlbaranes_DblClick()
+    cmdVistaPrevAlbaranes_Click 0
+End Sub
 
 Private Sub Timer1_Timer()
 Dim Hacer As Boolean

@@ -1356,25 +1356,7 @@ Dim i As Integer
     PrimeraVez = True
     'Icono del formulario
     Me.Icon = frmPpal.Icon
-    
-    'ICONOS de La toolbar
-'    btnPrimero = 19 'Posicion del Boton Primero en la toolbar (+ 3 siguientes)
-'    With Toolbar1
-'        .ImageList = frmPpal.imgListComun
-'        'ASignamos botones
-'        .Buttons(1).Image = 1   'Buscar
-'        .Buttons(2).Image = 2 'Ver Todos
-'        .Buttons(5).Image = 3 'Añadir
-'        .Buttons(6).Image = 4 'Modificar
-'        .Buttons(7).Image = 5 'Eliminar
-'        .Buttons(10).Image = 21 'Para cambiar precios
-'        .Buttons(15).Image = 16 'Imprimir
-'        .Buttons(16).Image = 15 'Salir
-'        .Buttons(btnPrimero).Image = 6 'Primero
-'        .Buttons(btnPrimero + 1).Image = 7 'Anterior
-'        .Buttons(btnPrimero + 2).Image = 8 'Siguiente
-'        .Buttons(btnPrimero + 3).Image = 9 'Ultimo
-'    End With
+
     For i = 1 To imgBuscar.Count - 1
         imgBuscar(i).Picture = imgBuscar(0).Picture
     Next
@@ -1435,14 +1417,14 @@ End Sub
 Private Sub CargaGrid(enlaza As Boolean)
 Dim B As Boolean
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECarga
 
     B = DataGrid1.Enabled
     
-    SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.Data2, SQL, False
+    Sql = MontaSQLCarga(enlaza)
+    CargaGridGnral DataGrid1, Me.Data2, Sql, False
     
     DataGrid1.Columns(0).visible = False 'Cod. Articulo
     DataGrid1.Columns(1).visible = False 'Cod. Proveedor
@@ -1825,20 +1807,20 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     tabla = "slisp1" 'Tabla de lineas
-    SQL = "SELECT * FROM " & tabla
+    Sql = "SELECT * FROM " & tabla
     
     If enlaza Then
-        SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codprove=" & Data1.Recordset!Codprove
+        Sql = Sql & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codprove=" & Data1.Recordset!Codprove
     Else
-        SQL = SQL & " WHERE codprove = -1"
+        Sql = Sql & " WHERE codprove = -1"
     End If
     
-    SQL = SQL & " ORDER BY " & tabla & ".numlinea desc"
-    MontaSQLCarga = SQL
+    Sql = Sql & " ORDER BY " & tabla & ".numlinea desc"
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -1915,21 +1897,21 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
-    SQL = "Precios Proveedor." & vbCrLf
-    SQL = SQL & "--------------------------" & vbCrLf & vbCrLf
+    Sql = "Precios Proveedor." & vbCrLf
+    Sql = Sql & "--------------------------" & vbCrLf & vbCrLf
     
-    SQL = SQL & "Va a Eliminar El Precio de Proveedor:"
-    SQL = SQL & vbCrLf & "Proveedor : " & Text1(0).Text & " - " & Text2(0).Text
-    SQL = SQL & vbCrLf & "Articulo : " & Text1(1).Text & " - " & Text2(1).Text
+    Sql = Sql & "Va a Eliminar El Precio de Proveedor:"
+    Sql = Sql & vbCrLf & "Proveedor : " & Text1(0).Text & " - " & Text2(0).Text
+    Sql = Sql & vbCrLf & "Articulo : " & Text1(1).Text & " - " & Text2(1).Text
     
-    SQL = SQL & vbCrLf & vbCrLf & "¿Desea continuar ? "
+    Sql = Sql & vbCrLf & vbCrLf & "¿Desea continuar ? "
     
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         
@@ -1955,19 +1937,19 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo FinEliminar
         
     conn.BeginTrans
-    SQL = " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T")
-    SQL = SQL & " AND codprove=" & Val(Data1.Recordset!Codprove)
+    Sql = " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+    Sql = Sql & " AND codprove=" & Val(Data1.Recordset!Codprove)
     
     'Lineas
-    conn.Execute "Delete  from " & NombreTablaLin & SQL
+    conn.Execute "Delete  from " & NombreTablaLin & Sql
     
     'Cabeceras
-    conn.Execute "Delete  from " & NombreTabla & SQL
+    conn.Execute "Delete  from " & NombreTabla & Sql
                       
 FinEliminar:
     If Err.Number <> 0 Then
@@ -2193,7 +2175,7 @@ End Sub
 
 Private Sub BotonActualizar()
 'Actualizar Precios Especiales
-Dim SQL As String
+Dim Sql As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún Precio Especial para actualizar.", vbExclamation
@@ -2202,14 +2184,14 @@ Dim SQL As String
     
     If Data2 Is Nothing Then Exit Sub
    
-    SQL = "Actualización Precios Especiales de Artículos." & vbCrLf
-    SQL = SQL & "---------------------------------------------" & vbCrLf & vbCrLf
+    Sql = "Actualización Precios Especiales de Artículos." & vbCrLf
+    Sql = Sql & "---------------------------------------------" & vbCrLf & vbCrLf
     
-    SQL = SQL & "Va a Actualizar el Precio Especial para:"
-    SQL = SQL & vbCrLf & " Cod. Clien. :  " & CStr(Format(Data1.Recordset.Fields(0), "000000"))
-    SQL = SQL & vbCrLf & " Cod. Artic. :  " & Data1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & vbCrLf & " ¿Desea continuar ? "
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
+    Sql = Sql & "Va a Actualizar el Precio Especial para:"
+    Sql = Sql & vbCrLf & " Cod. Clien. :  " & CStr(Format(Data1.Recordset.Fields(0), "000000"))
+    Sql = Sql & vbCrLf & " Cod. Artic. :  " & Data1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & vbCrLf & " ¿Desea continuar ? "
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
     
     NumRegElim = Data1.Recordset.AbsolutePosition
     If ActualizarPreEspecial Then
@@ -2267,14 +2249,14 @@ End Function
 
 Private Function ModificarCabecera() As Boolean
 'Modifica la tabla de cabeceras de Tarifas
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ErrModCab
 
-    SQL = "UPDATE " & NombreTabla & " SET precioac=precionu, precioa1=precion1, dtoespec=dtoespe1, fechanue=null, precionu=0, precion1=0"
-    SQL = SQL & " WHERE codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+    Sql = "UPDATE " & NombreTabla & " SET precioac=precionu, precioa1=precion1, dtoespec=dtoespe1, fechanue=null, precionu=0, precion1=0"
+    Sql = Sql & " WHERE codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
    
-    conn.Execute SQL
+    conn.Execute Sql
     ModificarCabecera = True
     Exit Function
     
@@ -2289,21 +2271,21 @@ End Function
 
 
 Private Function InsertarLineasHistorico() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim NumF As String
 
     On Error GoTo ErrInsLin
 
     'Obtenemos la siguiente numero de linea de tarifa
-    SQL = "codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
-    NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", SQL)
+    Sql = "codclien=" & Data1.Recordset!codClien & " AND codartic=" & DBSet(Data1.Recordset!codArtic, "T")
+    NumF = SugerirCodigoSiguienteStr("spree1", "numlinea", Sql)
 
-    SQL = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec)"
-    SQL = SQL & " VALUES (" & Data1.Recordset.Fields(0).Value & ", " & DBSet(Data1.Recordset.Fields(1).Value, "T") & ", "
-    SQL = SQL & NumF & ", " & DBSet(Text1(4).Text, "F") & ", "
-    SQL = SQL & DBSet(Data1.Recordset!precioac, "N") & ", " & DBSet(Data1.Recordset!precioa1, "N") & ", "
-    SQL = SQL & DBSet(Data1.Recordset!dtoespec, "N") & ") "
-    conn.Execute SQL
+    Sql = "INSERT INTO spree1 (codclien, codartic, numlinea, fechanue, precioac, precioa1, dtoespec)"
+    Sql = Sql & " VALUES (" & Data1.Recordset.Fields(0).Value & ", " & DBSet(Data1.Recordset.Fields(1).Value, "T") & ", "
+    Sql = Sql & NumF & ", " & DBSet(Text1(4).Text, "F") & ", "
+    Sql = Sql & DBSet(Data1.Recordset!precioac, "N") & ", " & DBSet(Data1.Recordset!precioa1, "N") & ", "
+    Sql = Sql & DBSet(Data1.Recordset!dtoespec, "N") & ") "
+    conn.Execute Sql
     
     InsertarLineasHistorico = True
     Exit Function

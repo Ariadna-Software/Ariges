@@ -1918,7 +1918,7 @@ End Function
 
 
 Public Function calculaInformeDescuentos(mfichero As String) As Boolean
-    Dim SQL As String
+    Dim Sql As String
     Dim RS As ADODB.Recordset
     Dim rs2 As ADODB.Recordset
     Dim rs3 As ADODB.Recordset
@@ -1945,16 +1945,16 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
     '-- 1.- Nos basamos en los descuentos que nos hace telefónica, recorremos los
     '   registros y vamos dando de alta los correspondientes en tmp_inf_*
     '-- Borramos los valores hasta el momento
-    SQL = "delete from tmp_inf_descuentos where fichero = " & mdbFac2.texto(mfichero)
-    mdbFac2.ejecutar SQL
-    SQL = "delete from tmp_inf_descuentos2 where fichero = " & mdbFac2.texto(mfichero)
-    mdbFac2.ejecutar SQL
+    Sql = "delete from tmp_inf_descuentos where fichero = " & mdbFac2.texto(mfichero)
+    mdbFac2.ejecutar Sql
+    Sql = "delete from tmp_inf_descuentos2 where fichero = " & mdbFac2.texto(mfichero)
+    mdbFac2.ejecutar Sql
     '--
-    SQL = "select * from telefono.descuentos_por_factura" & _
+    Sql = "select * from telefono.descuentos_por_factura" & _
             " where fichero = " & mdbFac2.texto(mfichero) & _
             " and Codigo_de_descuento <> ''"
     Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
+    Set RS = mdbFac2.cursor(Sql)
     If Not RS.EOF Then
         Reg = 0
         RS.MoveFirst
@@ -1962,20 +1962,20 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
             Reg = Reg + 1
             '-- Ya podemos dar de alta nuestro registro
             ID = tmpSiguienteID()
-            SQL = "insert into tmp_inf_descuentos(ID,fichero,tel_descripcion,tel_porcentaje,tel_base,tel_importe)"
-            SQL = SQL & " values("
-            SQL = SQL & mdbFac2.numero(ID) & ","
-            SQL = SQL & mdbFac2.texto(mfichero) & ","
-            SQL = SQL & mdbFac2.texto(RS!Descripcion_de_descuento) & ","
-            SQL = SQL & mdbFac2.numero(RS!Porcentaje_descuento) & ","
-            SQL = SQL & mdbFac2.numero(RS!Importe) & ","
-            SQL = SQL & mdbFac2.numero(Abs(RS!Importe_Descuento)) & ")"
-            mdbFac2.ejecutar SQL
+            Sql = "insert into tmp_inf_descuentos(ID,fichero,tel_descripcion,tel_porcentaje,tel_base,tel_importe)"
+            Sql = Sql & " values("
+            Sql = Sql & mdbFac2.numero(ID) & ","
+            Sql = Sql & mdbFac2.texto(mfichero) & ","
+            Sql = Sql & mdbFac2.texto(RS!Descripcion_de_descuento) & ","
+            Sql = Sql & mdbFac2.numero(RS!Porcentaje_descuento) & ","
+            Sql = Sql & mdbFac2.numero(RS!Importe) & ","
+            Sql = Sql & mdbFac2.numero(Abs(RS!Importe_Descuento)) & ")"
+            mdbFac2.ejecutar Sql
             '-- Ahora buscamos las correspondencias para ver los descuentos que hacemos nosotros
-            SQL = "select * from tel_relacion_descuentos" & _
+            Sql = "select * from tel_relacion_descuentos" & _
                     " where coddesctel = " & mdbFac2.texto(RS!Codigo_de_descuento)
             Set rs2 = New ADODB.Recordset
-            Set rs2 = mdbFac2.cursor(SQL)
+            Set rs2 = mdbFac2.cursor(Sql)
             If Not rs2.EOF Then
                 Grupo = 0
                 i2 = 0
@@ -1986,10 +1986,10 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
                         Select Case Tipo
                             Case "T"
                                 '-- buscammos si pertenece a un grupo y a cual
-                                SQL = "select * from tel_desc_consumos" & _
+                                Sql = "select * from tel_desc_consumos" & _
                                         " where CodTipoTrafico = " & mdbFac2.texto(Mc)
                                 Set rs3 = New ADODB.Recordset
-                                Set rs3 = mdbFac2.cursor(SQL)
+                                Set rs3 = mdbFac2.cursor(Sql)
                                 If Not rs3.EOF Then Grupo = rs3!Grupo Else Grupo = 0
                             Case "C"
                                 Grupo = 0
@@ -1997,53 +1997,53 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
                         If Grupo = 0 Then
                             If Tipo = "T" Then
                                 '-- No forma parte de un grupo lo calculamos individual
-                                SQL = "select * from telefono.detalle_de_llamadas " & _
+                                Sql = "select * from telefono.detalle_de_llamadas " & _
                                         " where fichero = " & mdbFac2.texto(mfichero) & _
                                         " and Codigo_de_trafico = " & mdbFac2.texto(Mc)
                                 Set rs3 = New ADODB.Recordset
-                                Set rs3 = mdbFac2.cursor(SQL)
+                                Set rs3 = mdbFac2.cursor(Sql)
                                 If Not rs3.EOF Then cop_descripcion = rs3!Tipo_de_trafico _
                                     Else cop_descripcion = ""
                             Else
                                 '-- es una cuota
-                                SQL = "select * from telefono.cuotas " & _
+                                Sql = "select * from telefono.cuotas " & _
                                         " where fichero = " & mdbFac2.texto(mfichero) & _
                                         " and Codigo_de_cuota = " & mdbFac2.texto(Mc)
                                 Set rs3 = New ADODB.Recordset
-                                Set rs3 = mdbFac2.cursor(SQL)
+                                Set rs3 = mdbFac2.cursor(Sql)
                                 If Not rs3.EOF Then cop_descripcion = rs3!Descripcion_de_cuota _
                                     Else cop_descripcion = ""
                             End If
                         Else
                             '-- Forma parte de un grupo, buscamos el nombre del grupo
-                            SQL = "select * from tel_desc_nombres_grupo where grupo = " & mdbFac2.numero(Grupo)
-                            Set rs3 = mdbFac2.cursor(SQL)
+                            Sql = "select * from tel_desc_nombres_grupo where grupo = " & mdbFac2.numero(Grupo)
+                            Set rs3 = mdbFac2.cursor(Sql)
                             If Not rs3.EOF Then cop_descripcion = rs3!Nombre _
                                 Else cop_descripcion = ""
                             '-- Ahora confirmamos que ese grupo no se ha procesado ya
                             If cop_descripcion <> "" Then
-                                SQL = "select * from tmp_inf_descuentos" & _
+                                Sql = "select * from tmp_inf_descuentos" & _
                                         " where ID = " & mdbFac2.numero(ID) & _
                                         " and cop_descripcion = " & mdbFac2.texto(cop_descripcion)
-                                Set rs3 = mdbFac2.cursor(SQL)
+                                Set rs3 = mdbFac2.cursor(Sql)
                                 If Not rs3.EOF Then cop_descripcion = ""
-                                SQL = "select * from tmp_inf_descuentos2" & _
+                                Sql = "select * from tmp_inf_descuentos2" & _
                                         " where ID = " & mdbFac2.numero(ID) & _
                                         " and cop_descripcion = " & mdbFac2.texto(cop_descripcion)
-                                Set rs3 = mdbFac2.cursor(SQL)
+                                Set rs3 = mdbFac2.cursor(Sql)
                                 If Not rs3.EOF Then cop_descripcion = ""
                             End If
                         End If
                         '-- Tanto si forma parte de un grupo como si no nos movemos por descripciones
                         If cop_descripcion <> "" Then
                             '-- Ahora a buscar importes de descuentos
-                            SQL = "select a.descuento, sum(a.Base), sum(a.Importe)" & _
+                            Sql = "select a.descuento, sum(a.Base), sum(a.Importe)" & _
                                     " from tel_lin_factura_descuentos as a, tel_cab_factura as b" & _
                                     " where b.fichero = " & mdbFac2.texto(mfichero) & _
                                     " and a.concepto = " & mdbFac2.texto(cop_descripcion) & _
                                     " and a.serie = b.serie and a.ano = b.ano and a.numfact = b.numfact" & _
                                     " group by a.descuento"
-                             Set rs3 = mdbFac2.cursor(SQL)
+                             Set rs3 = mdbFac2.cursor(Sql)
                              If Not rs3.EOF Then
                                 rs3.MoveFirst
                                 While Not rs3.EOF
@@ -2057,17 +2057,17 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
 '                                        sql = sql & " where ID = " & mdbFac.numero(ID)
 '                                    Else
                                         ID2 = tmpsiguienteID2(ID)
-                                        SQL = "insert into tmp_inf_descuentos2(ID,ID2,fichero,cop_descripcion,cop_porcentaje,cop_base,cop_importe)"
-                                        SQL = SQL & " values("
-                                        SQL = SQL & mdbFac2.numero(ID) & ","
-                                        SQL = SQL & mdbFac2.numero(ID2) & ","
-                                        SQL = SQL & mdbFac2.texto(mfichero) & ","
-                                        SQL = SQL & mdbFac2.texto(cop_descripcion) & ","
-                                        SQL = SQL & mdbFac2.numero(cop_porcentaje) & ","
-                                        SQL = SQL & mdbFac2.numero(rs3.Fields(1)) & ","
-                                        SQL = SQL & mdbFac2.numero(rs3.Fields(2)) & ")"
+                                        Sql = "insert into tmp_inf_descuentos2(ID,ID2,fichero,cop_descripcion,cop_porcentaje,cop_base,cop_importe)"
+                                        Sql = Sql & " values("
+                                        Sql = Sql & mdbFac2.numero(ID) & ","
+                                        Sql = Sql & mdbFac2.numero(ID2) & ","
+                                        Sql = Sql & mdbFac2.texto(mfichero) & ","
+                                        Sql = Sql & mdbFac2.texto(cop_descripcion) & ","
+                                        Sql = Sql & mdbFac2.numero(cop_porcentaje) & ","
+                                        Sql = Sql & mdbFac2.numero(rs3.Fields(1)) & ","
+                                        Sql = Sql & mdbFac2.numero(rs3.Fields(2)) & ")"
 '                                    End If
-                                    mdbFac2.ejecutar SQL
+                                    mdbFac2.ejecutar Sql
                                     i2 = i2 + 1
                                     rs3.MoveNext
                                 Wend
@@ -2085,20 +2085,20 @@ Public Function calculaInformeDescuentos(mfichero As String) As Boolean
     '-- Ya están actualizados todos los registros, ahora vamos a por los totales
     Dim tot_cop_base As Currency
     Dim tot_cop_importe As Currency
-    SQL = "select sum(cop_base), sum(cop_importe), ID from tmp_inf_descuentos2"
-    SQL = SQL & " where fichero = " & mdbFac2.texto(mfichero)
-    SQL = SQL & " group by ID"
-    Set RS = mdbFac2.cursor(SQL)
+    Sql = "select sum(cop_base), sum(cop_importe), ID from tmp_inf_descuentos2"
+    Sql = Sql & " where fichero = " & mdbFac2.texto(mfichero)
+    Sql = Sql & " group by ID"
+    Set RS = mdbFac2.cursor(Sql)
     If Not RS.EOF Then
         RS.MoveFirst
         While Not RS.EOF
-            SQL = "update tmp_inf_descuentos set "
-            SQL = SQL & " cop_descripcion = 'TOTAL'" & ","
-            SQL = SQL & " cop_base = " & mdbFac2.numero(RS.Fields(0)) & ","
-            SQL = SQL & " cop_importe = " & mdbFac2.numero(RS.Fields(1))
-            SQL = SQL & " where ID = " & mdbFac2.numero(RS.Fields(2))
-            SQL = SQL & " and fichero = " & mdbFac2.texto(mfichero)
-            mdbFac2.ejecutar SQL
+            Sql = "update tmp_inf_descuentos set "
+            Sql = Sql & " cop_descripcion = 'TOTAL'" & ","
+            Sql = Sql & " cop_base = " & mdbFac2.numero(RS.Fields(0)) & ","
+            Sql = Sql & " cop_importe = " & mdbFac2.numero(RS.Fields(1))
+            Sql = Sql & " where ID = " & mdbFac2.numero(RS.Fields(2))
+            Sql = Sql & " and fichero = " & mdbFac2.texto(mfichero)
+            mdbFac2.ejecutar Sql
             RS.MoveNext
         Wend
     End If
@@ -2110,7 +2110,7 @@ Private Function compruebaCoherenciaDescuentos() As Boolean
     '-- Esta function comprueba si las relaciones parametrizadas en relacion_descuentos
     '   son correctas, fundamentalmente si el descuento pertenece a un grupo que todos
     '   los tráficos asignados a ese grupo estan en el mismo registro de relación
-    Dim SQL As String
+    Dim Sql As String
     Dim RS As ADODB.Recordset
     Dim rs2 As ADODB.Recordset
     Dim i As Integer
@@ -2121,9 +2121,9 @@ Private Function compruebaCoherenciaDescuentos() As Boolean
     compruebaCoherenciaDescuentos = True
     Grupo = 0
     '--
-    SQL = "select * from tel_relacion_descuentos"
+    Sql = "select * from tel_relacion_descuentos"
     Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
+    Set RS = mdbFac2.cursor(Sql)
     If Not RS.EOF Then
         RS.MoveFirst
         While Not RS.EOF
@@ -2133,10 +2133,10 @@ Private Function compruebaCoherenciaDescuentos() As Boolean
                     C = Mid(RS!reldescpro, i, 1)
                     If C = "/" Then
                         '-- buscammos si pertenece a un grupo y a cual
-                        SQL = "select * from tel_desc_consumos" & _
+                        Sql = "select * from tel_desc_consumos" & _
                                 " where CodTipoTrafico = " & mdbFac2.texto(RS!coddesctel)
                         Set rs2 = New ADODB.Recordset
-                        Set rs2 = mdbFac2.cursor(SQL)
+                        Set rs2 = mdbFac2.cursor(Sql)
                         If Not rs2.EOF Then
                             If (Grupo <> 0) And (rs2!Grupo <> Grupo) Then
                                 compruebaCoherenciaDescuentos = False
@@ -2158,10 +2158,10 @@ End Function
 
 Private Function tmpSiguienteID() As Long
     Dim RS As ADODB.Recordset
-    Dim SQL As String
-    SQL = "select max(ID) from tmp_inf_descuentos"
+    Dim Sql As String
+    Sql = "select max(ID) from tmp_inf_descuentos"
     Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
+    Set RS = mdbFac2.cursor(Sql)
     If Not IsNull(RS.Fields(0)) Then
         tmpSiguienteID = RS.Fields(0) + 1
     Else
@@ -2173,11 +2173,11 @@ End Function
 
 Private Function tmpsiguienteID2(ID As Long) As Long
     Dim RS As ADODB.Recordset
-    Dim SQL As String
-    SQL = "select max(ID2) from tmp_inf_descuentos2" & _
+    Dim Sql As String
+    Sql = "select max(ID2) from tmp_inf_descuentos2" & _
             " where ID = " & mdbFac2.numero(ID)
     Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
+    Set RS = mdbFac2.cursor(Sql)
     If Not IsNull(RS.Fields(0)) Then
         tmpsiguienteID2 = RS.Fields(0) + 1
     Else
@@ -2191,7 +2191,7 @@ Private Sub Carga_Inf_Nombres(mfichero As String)
     Dim RS As ADODB.Recordset
     Dim rs2 As ADODB.Recordset
     Dim rs3 As ADODB.Recordset
-    Dim SQL As String
+    Dim Sql As String
     Dim C As String
     Dim Mc As String
     Dim i As Integer
@@ -2199,70 +2199,70 @@ Private Sub Carga_Inf_Nombres(mfichero As String)
     Dim N2 As String
     Dim Importe As Currency
     '--
-    SQL = "delete from tmp_inf_nombres where fichero = " & mdbFac2.texto(mfichero)
-    mdbFac2.ejecutar SQL
+    Sql = "delete from tmp_inf_nombres where fichero = " & mdbFac2.texto(mfichero)
+    mdbFac2.ejecutar Sql
     '-- leemos secuencialmente los valores
-    SQL = "select * from tel_relacion_nombres"
+    Sql = "select * from tel_relacion_nombres"
     Set RS = New ADODB.Recordset
-    Set RS = mdbFac2.cursor(SQL)
+    Set RS = mdbFac2.cursor(Sql)
     If Not RS.EOF Then
         RS.MoveFirst
         While Not RS.EOF
-            SQL = "select * from telefono.descuentos_por_factura" & _
+            Sql = "select * from telefono.descuentos_por_factura" & _
                     " where fichero = " & mdbFac2.texto(mfichero) & _
                     " and Codigo_de_descuento = " & mdbFac2.texto(RS!coddesctel)
             Set rs2 = New ADODB.Recordset
-            Set rs2 = mdbFac2.cursor(SQL)
+            Set rs2 = mdbFac2.cursor(Sql)
             If Not rs2.EOF Then n1 = rs2!Descripcion_de_descuento Else n1 = ""
             For i = 1 To Len(RS!reldescpro)
                 C = Mid(RS!reldescpro, i, 1)
                 If C = "/" Then
                     Select Case RS!Tipo
                         Case "T"
-                            SQL = "select * from telefono.detalle_de_llamadas " & _
+                            Sql = "select * from telefono.detalle_de_llamadas " & _
                                     " where fichero = " & mdbFac2.texto(mfichero) & _
                                     " and Codigo_de_trafico = " & mdbFac2.texto(Mc)
                             Set rs3 = New ADODB.Recordset
-                            Set rs3 = mdbFac2.cursor(SQL)
+                            Set rs3 = mdbFac2.cursor(Sql)
                             If Not rs3.EOF Then N2 = rs3!Tipo_de_trafico _
                                 Else N2 = ""
                         Case "C"
-                            SQL = "select * from telefono.cuotas " & _
+                            Sql = "select * from telefono.cuotas " & _
                                     " where fichero = " & mdbFac2.texto(mfichero) & _
                                     " and Codigo_de_cuota = " & mdbFac2.texto(Mc)
                             Set rs3 = New ADODB.Recordset
-                            Set rs3 = mdbFac2.cursor(SQL)
+                            Set rs3 = mdbFac2.cursor(Sql)
                             If Not rs3.EOF Then N2 = rs3!Descripcion_de_cuota _
                                 Else N2 = ""
                     End Select
                     '-- Y ahora damos de alta el registro correspondiente
                     If N2 <> "" And Not IsNull(N2) Then
                         If RS!Tipo = "T" Then
-                            SQL = "select sum(a.Importe)" & _
+                            Sql = "select sum(a.Importe)" & _
                                    " from tel_lin_factura_consumos as a, tel_cab_factura as b" & _
                                    " where b.fichero = " & mdbFac2.texto(mfichero) & _
                                    " and a.DescTipoTrafico = " & mdbFac2.texto(N2) & _
                                    " and a.serie = b.serie and a.ano = b.ano and a.numfact = b.numfact"
                         Else
-                            SQL = "select sum(a.Importe)" & _
+                            Sql = "select sum(a.Importe)" & _
                                    " from tel_lin_factura_cuotas as a, tel_cab_factura as b" & _
                                    " where b.fichero = " & mdbFac2.texto(mfichero) & _
                                    " and a.DescCuota = " & mdbFac2.texto(N2) & _
                                    " and a.serie = b.serie and a.ano = b.ano and a.numfact = b.numfact"
                         End If
-                        Set rs3 = mdbFac2.cursor(SQL)
+                        Set rs3 = mdbFac2.cursor(Sql)
                         If Not IsNull(rs3.Fields(0)) Then
                             Importe = rs3.Fields(0)
                         Else
                             Importe = 0
                         End If
-                        SQL = "insert into tmp_inf_nombres(fichero,n1,n2,importe)"
-                        SQL = SQL & " values("
-                        SQL = SQL & mdbFac2.texto(mfichero) & ","
-                        SQL = SQL & mdbFac2.texto(n1) & ","
-                        SQL = SQL & mdbFac2.texto(N2) & ","
-                        SQL = SQL & mdbFac2.numero(Importe) & ")"
-                        mdbFac2.ejecutar SQL
+                        Sql = "insert into tmp_inf_nombres(fichero,n1,n2,importe)"
+                        Sql = Sql & " values("
+                        Sql = Sql & mdbFac2.texto(mfichero) & ","
+                        Sql = Sql & mdbFac2.texto(n1) & ","
+                        Sql = Sql & mdbFac2.texto(N2) & ","
+                        Sql = Sql & mdbFac2.numero(Importe) & ")"
+                        mdbFac2.ejecutar Sql
                     End If
                     N2 = ""
                     Mc = ""
@@ -3962,8 +3962,8 @@ Dim Cambialo As Byte
             If Tipo = 7 Then Ud = "minutos"
             
             If Aux <> "" Then
-                MsgBox "error separando horas"
-                Stop
+                MsgBox "error separando horas", vbCritical
+                End 'ponia un st p
             End If
     
       

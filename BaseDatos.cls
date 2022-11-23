@@ -21,7 +21,7 @@ Private mrs As ADODB.Recordset
 Public Property Let Tipo(ByVal vData As String)
     mtipo = vData
 End Property
-
+ 
 Public Property Get Tipo() As String
     Tipo = mtipo
 End Property
@@ -38,9 +38,9 @@ Public Function abrir(vODBC As String, vUsu As String, vPass As String) As Boole
     abrir = True
 End Function
 
-Public Function asignar(ByRef cn As ADODB.Connection) As Boolean
+Public Function asignar(ByRef CN As ADODB.Connection) As Boolean
     Set conn = New ADODB.Connection
-    Set conn = cn
+    Set conn = CN
 End Function
 
 
@@ -59,24 +59,24 @@ Public Function cursor(vSQL As String) As ADODB.Recordset
     Set cursor = mrs
 End Function
 
-Public Function fecha(vData) As String
+Public Function Fecha(vData) As String
     '-- Devuelve un string con la fecha correspondiente
     If vData = "0:00:00" Then
-        fecha = "NULL"
+        Fecha = "NULL"
     Else
         If Not IsNull(vData) And IsDate(vData) Then
             Select Case mtipo
                 Case "ACCESS"
-                    fecha = "#" & Format(vData, "yyyy/mm/dd") & "#"
+                    Fecha = "#" & Format(vData, "yyyy/mm/dd") & "#"
                 Case "MYSQL"
-                    fecha = "'" & Format(vData, "yyyy-mm-dd") & "'"
+                    Fecha = "'" & Format(vData, "yyyy-mm-dd") & "'"
                 Case "MULTIBASE"
-                    fecha = "'" & Format(vData, "dd/mm/yyyy") & "'"
+                    Fecha = "'" & Format(vData, "dd/mm/yyyy") & "'"
                 Case Default
-                    fecha = "'" & Format(vData, "yyyy-mm-dd") & "'"
+                    Fecha = "'" & Format(vData, "yyyy-mm-dd") & "'"
             End Select
         Else
-            fecha = "NULL"
+            Fecha = "NULL"
         End If
     End If
 End Function
@@ -117,15 +117,15 @@ Public Function numero(vData, Optional decimales As Integer) As String
     If numero = "" Then numero = 0
 End Function
 
-Public Function Texto(vData) As String
-Dim cad As String
+Public Function texto(vData) As String
+Dim Cad As String
 
     If Not IsNull(vData) Then
 '        vData = CApos(CStr(vData))
-        cad = (CStr(vData))
-        NombreSQL cad
-        Texto = "'" & cad & "'"
+        Cad = (CStr(vData))
+        NombreSQL Cad
+        texto = "'" & Cad & "'"
     Else
-        Texto = "''"
+        texto = "''"
     End If
 End Function

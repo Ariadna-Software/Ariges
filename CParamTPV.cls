@@ -42,7 +42,7 @@ Private mvarVelocPue As String
 'Introduccion de ticket rapida
 Private mvarRapida As Boolean
 Private mvarFormaPagoUnica As Boolean   'Este no lo lee de parametros, si no cuando abre el terminal lo comrpueba
-Private mvarImprimiDirecto As Boolean
+Private mvarImprimiDirecto As Byte
 
 'Desglosa IVAS al pie del TICKET
 Private mvarDesglosaIVATicket As Boolean
@@ -92,6 +92,13 @@ Private mvarImpresoraAlbaranes As String
 Private mvarProhibirFacturasTPV As String
 
 
+
+'Octu 22
+Private mvarModificaprecio As Boolean
+Private mvarImprimiDirectoTerminal As Byte
+
+
+
 'En Impresion tiket directa abre un cursor cada tiket
 'Para leer el pie
 'EMPIEZA en 0
@@ -114,6 +121,8 @@ Private mvarForpasConRecargoFinanciero As String
 'Simplemente es para no terner que ir leyendo el numero de terminal continuamente
 'Solo get
 Private mvarNumeroDeTerminal As Integer
+
+Private mvarCierreApertura As Boolean
 
 
 Private SQL As String  'Para la sentencia
@@ -148,12 +157,12 @@ End Property
 
 
 'Empieza en cero
-Public Property Get CabeceraTiket(index As Integer) As String
-    CabeceraTiket = mvarCabecera(index)
+Public Property Get CabeceraTiket(Index As Integer) As String
+    CabeceraTiket = mvarCabecera(Index)
 End Property
 
-Public Property Get PieTiket(index As Integer) As String
-    PieTiket = mvarPie(index)
+Public Property Get PieTiket(Index As Integer) As String
+    PieTiket = mvarPie(Index)
 End Property
 
 
@@ -429,6 +438,25 @@ Public Property Get ProhibirFacturasTPV() As Boolean
      ProhibirFacturasTPV = mvarProhibirFacturasTPV
 End Property
 
+Public Property Get ModificaPrecio() As Boolean
+     ModificaPrecio = mvarModificaprecio
+End Property
+
+Public Property Get ImprimiDirectoTerminal() As Byte
+    '0   lo que diga SCRYST
+    
+    'Cada terminal lleva su opcion
+    '1    No imprime directo
+    '2    Si que imprime directo
+    ImprimiDirectoTerminal = mvarImprimiDirectoTerminal
+End Property
+
+
+Public Property Get CierreApertura() As Boolean
+     CierreApertura = mvarCierreApertura
+End Property
+
+
 
 
 
@@ -439,7 +467,7 @@ End Property
 '****   LEER  ***
 Public Function Leer() As Byte
 'Lee los parametros generales
-Dim cad As String
+Dim Cad As String
 Dim RS As ADODB.Recordset
 Dim J As Integer
 On Error GoTo Err3
@@ -463,10 +491,10 @@ On Error GoTo Err3
         mvarNomClien = RecuperaValor(mvarNomClien, 1)
         
         
-        cad = "tipforpa"
-        SQL = DevuelveDesdeBDNew(conAri, "sforpa", "nomforpa", "codforpa", mvarCodForPa, "N", cad)
+        Cad = "tipforpa"
+        SQL = DevuelveDesdeBDNew(conAri, "sforpa", "nomforpa", "codforpa", mvarCodForPa, "N", Cad)
         mvarNomForPa = SQL
-        mvarTipForPa = CByte(cad)
+        mvarTipForPa = CByte(Cad)
         
         mvarTipCierre = CByte(RS!tipcierre)
         
@@ -502,17 +530,24 @@ On Error GoTo Err3
         
         'Cabcera y pie
         For J = 1 To 5
-            cad = DBLet(RS.Fields("cabtick" & CStr(J)), "T")
-            mvarCabecera(J - 1) = cad
+            Cad = DBLet(RS.Fields("cabtick" & CStr(J)), "T")
+            mvarCabecera(J - 1) = Cad
         Next
         For J = 1 To 3
-            cad = DBLet(RS.Fields("pietick" & CStr(J)), "T")
-            mvarPie(J - 1) = cad
+            Cad = DBLet(RS.Fields("pietick" & CStr(J)), "T")
+            mvarPie(J - 1) = Cad
         Next
         mvarForpasConRecargoFinanciero = ""
         
         mvarProhibirTicketSocios = (DBLet(RS!ProhibirTicketSocios, "N") = 1)
         mvarProhibirFacturasTPV = (DBLet(RS!ProhibirFacturasTPV, "N") = 1)
+        
+        mvarModificaprecio = (DBLet(RS!ModificaPrecio, "N") = 1)
+        
+        mvarImprimiDirectoTerminal = DBLet(RS!ImprsionDirectaPorTerminal, "N")
+        
+        mvarCierreApertura = DBLet(RS!CierreApertura, "N") = 1
+
         Leer = 0
     End If
 
@@ -542,7 +577,7 @@ End Function
 
 Public Function Leer2(nt As String) As Byte
 'Lee los parametros del terminal
-Dim cad As String
+Dim Cad As String
 Dim RS As ADODB.Recordset
     
     On Error GoTo Err3
@@ -565,6 +600,24 @@ Dim RS As ADODB.Recordset
         mvarSecuenciaCajon = DBLet(RS!SecuenciaCajon)
         mvarComImpresora = DBLet(RS!cualcom, "N")
         mvarImpresoraAlbaranes = DBLet(RS!ImpresoraALV, "T")
+        
+        
+        If mvarImprimiDirectoTerminal = 0 Then
+            'No hacemos NADA. Depende de scryst
+            
+        Else
+            '0   lo que diga SCRYST
+    
+            'Cada terminal lleva su opcion
+            '1    No imprime directo
+            '2    Si que imprime directo
+            SQL = DBLet(RS!ImpresionDirecta, "N")
+            If SQL = "1" Then
+                mvarImprimiDirectoTerminal = 2
+            Else
+                mvarImprimiDirectoTerminal = 1
+            End If
+        End If
         Leer2 = 0
     End If
 
@@ -611,7 +664,7 @@ End Function
 
 
 Public Function ConseguirContador(vCodigo As Byte) As Long
-Dim OK As Boolean
+Dim Ok As Boolean
 Dim C1 As Long 'contador
 Dim RS As ADODB.Recordset
 
@@ -626,12 +679,12 @@ Dim RS As ADODB.Recordset
     If Not RS.EOF Then
         mvarContador = RS!Contador
         C1 = RS!Contador
-        OK = True
+        Ok = True
     End If
     RS.Close
     Set RS = Nothing
     
-    If OK Then ConseguirContador = C1 + 1
+    If Ok Then ConseguirContador = C1 + 1
     Exit Function
     
 Err1:
@@ -669,7 +722,7 @@ End Function
 
 
 Public Function DevolverContador(vCodigo As Byte, Contador As Long) As Byte
-Dim OK As Boolean
+Dim Ok As Boolean
 Dim C1 As Long
 Dim RS As ADODB.Recordset
 
@@ -680,24 +733,24 @@ Dim RS As ADODB.Recordset
     'Esto esba asi antes, sin comentar
 '    Conn.Execute "Set autocommit = 0"
     DevolverContador = 1
-    OK = False
+    Ok = False
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not RS.EOF Then
         C1 = RS!Contador
-        OK = True
+        Ok = True
     End If
     RS.Close
     Set RS = Nothing
-    If Not OK Then
+    If Not Ok Then
         conn.Execute "commit"
         Exit Function
     End If
 
-    OK = False
+    Ok = False
 
-    OK = (C1 = Contador)
-    If OK Then
+    Ok = (C1 = Contador)
+    If Ok Then
         'Actualizamos el contador
         SQL = "UPDATE spatpvt set "
 

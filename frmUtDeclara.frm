@@ -980,7 +980,7 @@ Dim fin As Boolean
                     Sql = Sql & ",tratamiento= " & DBSet(cadFecha, "T", "S")
                     Sql = Sql & " where fechaventa=" & DBSet(RS!fechaventa, "F") & " and numfactura='" & RS!NumFactura
                     Sql = Sql & "' and lote=" & DBSet(RS!Lote, "T") & " and nif=" & DBSet(RS!NIF, "T")
-                    Sql = Sql & " and registro=" & DBSet(RS!Registro, "T") & " and cultivo is null and tratamiento is null"
+                    Sql = Sql & " and registro=" & DBSet(RS!registro, "T") & " and cultivo is null and tratamiento is null"
                     
                     conn.Execute Sql
                 
@@ -1134,6 +1134,8 @@ Dim Llevatratamientos As Byte  ' 0. NO      1.- Desde ariges(Alzira Cata)     2 
 Dim CADENA As String
 Dim F As Date
 Dim F2 As Date
+Dim LotePartidoEnVenta As String
+Dim CantidadUtilizadaLotePartido As Currency
 
     On Error GoTo eProcesoDesdeSlifac
 
@@ -1202,7 +1204,9 @@ Dim F2 As Date
         
     Aux = "(" & Mid(Aux, 2) & ")"  'NO TOCAR AUX hasta el final de las comprobaciones
     
-    Sql = "select distinct slifac.codartic,slifac.nomartic from  slifac,sartic where slifac.codartic=sartic.codartic "
+    'Sql = "select distinct slifac.codartic, slifac.nomartic "
+    Sql = "select distinct slifac.codartic, slifac.nomartic"
+    Sql = Sql & " from  slifac,sartic where slifac.codartic=sartic.codartic "
     Sql = Sql & " AND fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
     Sql = Sql & " AND codcateg in " & Aux & "  and coalesce(numserie,'')=''"
     
@@ -1274,7 +1278,8 @@ Dim F2 As Date
      
             'Comprobacion numeros de serie
       
-            Sql = "select lin.codartic, ges.nomartic"
+            'Sql = "select lin.codartic, ges.nomartic"
+            Sql = "select lin.codartic, ges.nomartic nomartic"
             Sql = Sql & " from ariagro.advfacturas_lineas lin inner join ariagro.advartic art on art.codartic=lin.codartic"
             Sql = Sql & " inner join sartic ges on ges.codartic=art.codartic  WHERE tipoprod=0 and art.numserie<>''"
             Sql = Sql & " AND fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
@@ -1306,7 +1311,9 @@ Dim F2 As Date
     'Noviembre 2021
     Sql = ""
     If chkROPO.Value = 0 Then    'solo RETO
-         Sql = "select distinct slifac.codartic,slifac.nomartic from  slifac,sartic where slifac.codartic=sartic.codartic "
+         'Sql = "select distinct slifac.codartic,slifac.nomartic "
+         Sql = "select distinct slifac.codartic, slifac.nomartic nomartic"
+         Sql = Sql & " from  slifac,sartic where slifac.codartic=sartic.codartic "
          Sql = Sql & " AND fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
          Sql = Sql & " AND codcateg in " & Aux & "  and numserie<>'' and (unidadescompra =0 or  coalesce(unicajas2,0)=0)"
          If Sql_Servicios <> "" Then Sql = Sql & Sql_Servicios
@@ -1315,7 +1322,8 @@ Dim F2 As Date
          If DesdeAriago And chkTratamientos.Value = 1 Then
                 
                  'los articulos vienen
-                Sql = "select lin.codartic, ges.nomartic"
+                'Sql = "select lin.codartic, ges.nomartic"
+                Sql = "select lin.codartic,   ges.nomartic nomartic"
                 Sql = Sql & " from ariagro.advfacturas_lineas lin inner join ariagro.advartic art on art.codartic=lin.codartic"
                 Sql = Sql & " inner join sartic ges on ges.codartic=art.codartic  WHERE tipoprod=0 and art.numserie<>''"
                 Sql = Sql & " AND fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
@@ -1408,7 +1416,8 @@ Dim F2 As Date
             lblInf.Refresh
     
             'los articulos vienen
-            Sql = "select lin.codartic,lin.ampliaci, ges.nomartic "
+            'Sql = "select lin.codartic,lin.ampliaci, ges.nomartic "
+            Sql = "select lin.codartic,lin.ampliaci,  ges.nomartic nomartic"
             Sql = Sql & " from ariagro.advfacturas_lineas lin inner join ariagro.advartic art on art.codartic=lin.codartic"
             Sql = Sql & " inner join sartic ges on ges.codartic=art.codartic  WHERE tipoprod=0 and art.numserie<>''"
             Sql = Sql & " AND fecfactu between " & DBSet(txtFecha(0).Text, "F") & " AND " & DBSet(txtFecha(1).Text, "F")
@@ -1458,6 +1467,9 @@ Dim F2 As Date
     
     
     'Vemos que todos los articulos vendidos en el periodo que deberian tener lote, tienen lote
+    lblInf.Caption = "Comprobando lotes // articulos"
+    lblInf.Refresh
+
     Sql = "DELETE FROM tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
     
@@ -1574,7 +1586,10 @@ Dim F2 As Date
     Set rsTipUd = New ADODB.Recordset
     rsTipUd.Open "select * from stipudcompra ", conn, adOpenKeyset, adLockOptimistic, adCmdText
     
-    Sql = " select a.codtipom, a.numfactu, h.fechaalb, a.codartic, c.nomartic, a.cantidad ,b.nomclien, b.nifclien,"
+    Sql = " select a.codtipom, a.numfactu, h.fechaalb, a.codartic,"
+    'c.nomartic"
+    Sql = Sql & "  c.nomartic nomartic"
+    Sql = Sql & ", a.cantidad ,b.nomclien, b.nifclien,"
     Sql = Sql & " b.domclien direccion,concat(codpobla,' ',pobclien) poblacion ,d.descateg , numlote,numserie"
     Sql = Sql & " ,ManipuladorNumCarnet,ManipuladorFecCaducidad,ManipuladorNombre,TipoCarnet, b.codclien"
     'Noviembre
@@ -1592,11 +1607,14 @@ Dim F2 As Date
     Sql = Sql & " AND a.codtipoa = h.codtipoa AND a.numalbar = h.numalbar"
     
     If Sql_Servicios <> "" Then Sql = Sql & Replace(Sql_Servicios, "slifac", "a")
-    Sql = Sql & " order by codartic,h.fechaalb desc"
+    Sql = Sql & " order by codartic,h.fechaalb desc , a.numfactu,a.cantidad  desc  "
     
     If chkROPO.Value = 0 Then    'solo RETO
         If DesdeAriago And chkTratamientos.Value = 1 Then
-            Sql = "select lin.codtipom,lin.numfactu,lin.fecfactu fechaalb,lin.codartic,art.nomartic,lin.cantidad," & DBSet(vEmpresa.nomempre, "T") & " as NomClien,"
+            Sql = "select lin.codtipom,lin.numfactu,lin.fecfactu fechaalb,lin.codartic,"
+            'art.nomartic"
+            Sql = Sql & "  ges.nomartic nomartic "
+            Sql = Sql & " ,lin.cantidad," & DBSet(vEmpresa.nomempre, "T") & " as NomClien,"
             Sql = Sql & DBSet(vParam.CifEmpresa, "T") & " nifclien," & DBSet(vParam.DomicilioEmpresa, "T") & " direccion,"
             Sql = Sql & DBSet(vParam.CPostal & " " & vParam.Poblacion, "T") & " poblacion," & DBSet(vParam.DomicilioEmpresa, "T") & " as direccion"
             Sql = Sql & " , descateg , ampliaci numLote, ges.numserie"
@@ -1623,6 +1641,7 @@ Dim F2 As Date
     Capacidad = 1   'Para el ROPO da igual
     Volumen = 1   'Para el ROPO da igual
     CADENA = ""
+    LotePartidoEnVenta = ""
     While Not RS.EOF
     
                 'En declara.email pondremos codclien
@@ -1674,7 +1693,7 @@ Dim F2 As Date
                             If chkTratamientos.Value = 0 Then
                                 If cantidad > 0 And Int(cantidad) <> cantidad Then
                                     'NO permite VENTAS decimales
-                                    If Me.chkSoloMostrarErrores.Value Then CADENA = CADENA & Mid(RS!codtipom & RS!Numfactu & Space(20), 1, 20) & "  " & RS!cantidad & vbCrLf
+                                    If Me.chkSoloMostrarErrores.Value = 1 Then CADENA = CADENA & Mid(RS!codtipom & RS!Numfactu & Space(20), 1, 20) & "  " & RS!cantidad & vbCrLf
                                     cantidad = Int(cantidad)
                                     If cantidad = 0 Then cantidad = 1
                         
@@ -1686,14 +1705,45 @@ Dim F2 As Date
                             
                         Else
                             'Si pone 5, esta vendiendo 5 Litros. Si el envase es de 5Lts, esta vendiedndo 1 Unidad
-                            If cantidad > 0 And Int(cantidad) <> cantidad Then Debug.Assert False
+                            cantidad = RS!cantidad
                             Volumen = RS!cantidad
-                            If Me.chkTratamientos.Value = 1 Then
-                                cantidad = Round2(Volumen \ Capacidad, 2)
-                            Else
-                                cantidad = Round2(Volumen \ Capacidad, 0)
+                            If chkTratamientos.Value = 0 Then
+                                
+                                If cantidad > 0 And Int(cantidad) <> cantidad Then
+                                    
+                                    'CantidadUtilizadaLotePartido
+                                    
+                                    LotePartidoEnVenta = RS!codtipom & RS!Numfactu & "#" & RS!codArtic
+                                    
+                                    CantidadUtilizadaLotePartido = Capacidad
+                                    CadenaAux = "N"
+                                    Do
+                                        If CantidadUtilizadaLotePartido < cantidad Then
+                                            CantidadUtilizadaLotePartido = CantidadUtilizadaLotePartido + Capacidad
+                                        Else
+                                            CadenaAux = ""
+                                        End If
+                                    Loop Until CadenaAux = ""
+                                    
+                                    Volumen = CantidadUtilizadaLotePartido
+                                    CantidadUtilizadaLotePartido = CantidadUtilizadaLotePartido - cantidad
+                                    If CantidadUtilizadaLotePartido < 0 Then MsgBox "Compruebe lineas LOTES decimales", vbExclamation
+                                    
+                                    If Me.chkSoloMostrarErrores.Value Then CADENA = CADENA & Mid(RS!codtipom & RS!Numfactu & Space(20), 1, 20) & "   " & RS!cantidad & "   " & Volumen & vbCrLf
+                                    
+                                    
+                                End If
                             End If
-                            If cantidad = 0 Then cantidad = 1
+                            If Volumen <> 0 Then
+                                If Me.chkTratamientos.Value = 1 Then
+                                    cantidad = Round2(Volumen \ Capacidad, 2)
+                                Else
+                                    cantidad = Round2(Volumen \ Capacidad, 0)
+                                End If
+                                If cantidad = 0 Then cantidad = 1
+                            Else
+                                cantidad = 0
+                            End If
                         End If
                     End If
                     
@@ -1745,8 +1795,34 @@ Dim F2 As Date
                 End If
                 
                 RS.MoveNext
+                
+                'Lotes partidos, problema ALIZRA
+                If LotePartidoEnVenta <> "" And Not RS.EOF Then
+                    Do
+                        CadenaAux = RS!codtipom & RS!Numfactu & "#" & RS!codArtic
+                        If CadenaAux = LotePartidoEnVenta Then
+                            If RS!cantidad <> CantidadUtilizadaLotePartido Then
+                                If Me.chkSoloMostrarErrores.Value Then CADENA = CADENA & Mid(RS!codtipom & RS!Numfactu & Space(20), 1, 20) & "       REVISAR Lote lin2: " & RS!numLote & "  " & RS!cantidad & vbCrLf
+                            Else
+                                'Perfecto. Es el resto del lote
+                                If Me.chkSoloMostrarErrores.Value Then CADENA = CADENA & Mid(RS!codtipom & RS!Numfactu & Space(20), 1, 20) & "       " & RS!numLote & "  " & RS!cantidad & "  " & " 0 " & vbCrLf
+                            End If
+                            RS.MoveNext
+                            If RS.EOF Then CadenaAux = ""
+                        
+                            
+                        Else
+                            'FIN
+                            CadenaAux = ""
+                        End If
+                    Loop Until CadenaAux = ""
+                    LotePartidoEnVenta = ""
+                End If
+                
+                
                 If RS.EOF Then
                     NumRegElim = davidNumalbar + 1
+                    If Len(Sql) = 0 Then NumRegElim = 0 'para qu no haga insert ya que no hay nada para insertar sql=""
                 Else
                     NumRegElim = Len(Sql)
                 End If
@@ -1779,7 +1855,10 @@ Dim F2 As Date
              If Sql = "" Then Sql = "1"
              If Val(Sql) <> 1 Then  'almacen separado
                     
-                    CADENA = "select slhtra.*,nomartic,numserie, ctrlotes,unidadesCompra, descateg,unicajas2"
+                    'CADENA = "select slhtra.*,nomartic"
+                    CADENA = "select slhtra.*,slifac.nomartic nomartic"
+
+                    CADENA = CADENA & " ,numserie, ctrlotes,unidadesCompra, descateg,unicajas2"
                     CADENA = CADENA & " FROM slhtra INNER JOIN sartic on slhtra.codartic=sartic.codartic "
                     CADENA = CADENA & " INNER JOIN  scateg ON sartic.codcateg = scateg.codcateg "
                     CADENA = CADENA & " AND codtrasp in (Select codtrasp from schtra where almadest=" & Sql
@@ -1864,7 +1943,14 @@ Dim F2 As Date
                         Sql = Mid(Sql, 2) 'quitamos la primera coma
                         Sql = "insert into declaralom(FechaVenta, NombreComercial, Registro, Categoria, Lote, Cantidad, NombreSocio, NIF, NumFactura,EsVenta,Direccion,Poblacion,NomCarnetMani, NumCarnet, NifMani,email,capacidad,tipoud,volumen,ine) VALUES " & Sql
                         db.ejecutar Sql
-                        Sql = ""
+                        
+                        
+                        Sql = DevuelveDesdeBD(conAri, "RetoVta", "spara1", "1", "1")
+                        If Sql <> "" Then
+                            Sql = "UPDATE declaralom  SET numcarnet = " & DBSet(Sql, "T") & " WHERE esventa=3 and coalesce(NumCarnet,'')=''"
+                            conn.Execute Sql
+                        End If
+        
         
                     End If
                     
@@ -1973,12 +2059,14 @@ Dim F2 As Date
                    End If
                    
                 Else
-                   Sql = DBSet(RS!NIF, "T")
+                   'Sql = DBSet(RS!NIF, "T")
+                   Sql = ""
                 End If
                 miRsAux.Close
-                Sql = "UPDATE declaralom SET nifmani=" & Sql & " WHERE numcarnet=" & DBSet(RS!numcarnet, "T") & " AND nif=" & DBSet(RS!NIF, "T")
-                conn.Execute Sql
-                
+                If Sql <> "" Then
+                    Sql = "UPDATE declaralom SET nifmani=" & Sql & " WHERE numcarnet=" & DBSet(RS!numcarnet, "T") & " AND nif=" & DBSet(RS!NIF, "T")
+                    conn.Execute Sql
+                End If
                 
                 RS.MoveNext
                 
@@ -2018,12 +2106,14 @@ Dim F2 As Date
                    End If
                    
                 Else
-                   Sql = DBSet(RS!NIF, "T")
+                   'Sql = DBSet(RS!NIF, "T")
+                   Sql = ""
                 End If
                 miRsAux.Close
-                Sql = "UPDATE declaralom SET nifmani=" & Sql & " WHERE numcarnet=" & DBSet(RS!numcarnet, "T") & " AND nif=" & DBSet(RS!NIF, "T")
-                conn.Execute Sql
-                
+                If Sql <> "" Then
+                    Sql = "UPDATE declaralom SET nifmani=" & Sql & " WHERE numcarnet=" & DBSet(RS!numcarnet, "T") & " AND nif=" & DBSet(RS!NIF, "T")
+                    conn.Execute Sql
+                End If
                 
                 RS.MoveNext
                 
@@ -2034,7 +2124,7 @@ Dim F2 As Date
             
             
             If chkSoloMostrarErrores.Value = 1 And CADENA <> "" Then
-               Errores = Errores & vbCrLf & vbCrLf & vbCrLf & "AUTORIZADOS " & vbCrLf & String(40, "=") & vbCrLf
+               Errores = Errores & vbCrLf & vbCrLf & vbCrLf & "AUTORIZADOS Varios" & vbCrLf & String(40, "=") & vbCrLf
                Errores = Errores & "      Socio                                Carnet          NIF vta      NIF mani" & vbCrLf
                Errores = Errores & CADENA
                CADENA = ""
@@ -2427,7 +2517,7 @@ Dim F2 As Date
                     Sql = Sql & ",tratamiento= " & DBSet(cadFecha, "T", "S")
                     Sql = Sql & " where fechaventa=" & DBSet(RS!fechaventa, "F") & " and numfactura='" & RS!NumFactura
                     Sql = Sql & "' and lote=" & DBSet(RS!Lote, "T") & " and nif=" & DBSet(RS!NIF, "T")
-                    Sql = Sql & " and registro=" & DBSet(RS!Registro, "T") & " and cultivo is null and tratamiento is null"
+                    Sql = Sql & " and registro=" & DBSet(RS!registro, "T") & " and cultivo is null and tratamiento is null"
                     
                     conn.Execute Sql
                 
@@ -2583,7 +2673,7 @@ Dim F2 As Date
             Sql = "select * from declaralom  where esventa=1 and cantidad<=0  ORDER BY numfactura"
             miRsAux.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             While Not miRsAux.EOF
-                CADENA = CADENA & Mid(miRsAux!nombresocio & Space(40), 1, 40) & " " & Mid(miRsAux!NumFactura & Space(15), 1, 15) & " " & miRsAux!cantidad
+                CADENA = CADENA & Mid(miRsAux!nombresocio & Space(40), 1, 40) & " " & Mid(miRsAux!NumFactura & Space(15), 1, 15) & " " & miRsAux!cantidad & vbCrLf
                 miRsAux.MoveNext
             Wend
             miRsAux.Close
@@ -2598,13 +2688,13 @@ Dim F2 As Date
         End If
         
         
-        
-        If Me.chkTratamientos.Value = 0 And chkFechasPlazo.Value = 1 Then
+        'TRATAMIENTOS TAMBIEN ajustamos
+        If chkFechasPlazo.Value = 1 Then
             lblInf.Caption = "Plazos fechas VENTA"
             lblInf.Refresh
             F = DateAdd("m", -1, Now()) ' -un mes
             
-            Sql = "select distinct FechaVenta from declaralom  where esventa= 1 and FechaVenta <" & DBSet(F, "F")
+            Sql = "select distinct FechaVenta from declaralom  where esventa= 1 and FechaVenta <" & DBSet(F, "F") & " ORDER BY 1"
             miRsAux.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             NumRegElim = 1
             F2 = F
@@ -2865,7 +2955,6 @@ On Error GoTo eCrearFicheroReto
             'Para cada "cliente /proveedor " y persona autirzada imprimira resgistro transaccion (Tipo1)
             Sql = miRsAux!EsVenta & miRsAux!NIF & "@" & miRsAux!numcarnet & "@" & Format(miRsAux!fechaventa, "ddmmyy") & "@" & miRsAux!esnegativo
             
-            
             If Sql <> Clipro Then
             
             
@@ -2892,18 +2981,38 @@ On Error GoTo eCrearFicheroReto
                     Sql = Sql & RecuperaValor(CadenaDesdeOtroForm, 1) & ";"
                     
                     EsVenta = miRsAux!EsVenta = 1
-                    'Si es venta negativo se trata como una compra
-                    'Si es compra neativo se trata como una venta
-                    If miRsAux!esnegativo = 1 Then EsVenta = Not EsVenta
-                    Sql = Sql & IIf(EsVenta, 2, 1) & ";"  'vta:2   compra 1
+                    
+                    
+                    'Agosto2022
+                    'ANTES
+                    
+'                            'Si es venta negativo se trata como una compra
+'                            'Si es compra neativo se trata como una venta
+'                            If miRsAux!esnegativo = 1 Then EsVenta = Not EsVenta
+'                            Sql = Sql & IIf(EsVenta, 2, 1) & ";"  'vta:2   compra 1
+
+                ' 11 = Compra en España Entrada (suministrador).
+                ' 12 = Compra en España Salida (suministrador).
+                    If EsVenta Then
+                        If miRsAux!esnegativo = 1 Then Err.Raise 513, "Devoluciones ventas manualmenete por web Portal RETO"
+                        Sql = Sql & "2;"  'vta:2
+                    Else
+                        Sql = Sql & IIf(miRsAux!esnegativo = 1, 12, 11) & ";"
+                    End If
+                    
+                    
+                    
                 End If
             
                 
                 
                 If Me.chkTratamientos.Value = 1 Then
                     'Es trtamiento
-                    Sql = Sql & miRsAux!NIF & ";;"   '
-                    'SQL = SQL & vParam.CifEmpresa & ";" & RecuperaValor(CadenaDesdeOtroForm, 2) & ";"
+                    
+                    Sql = Sql & miRsAux!NIF & ";"
+                    If miRsAux!EsVenta = 3 Then Sql = Sql & miRsAux!numcarnet
+                    Sql = Sql & ";"
+                    
                 Else
                     'El destino cuando es una COMPRA se supone que es el proveedor
                     If miRsAux!EsVenta = 1 Then
@@ -2916,7 +3025,7 @@ On Error GoTo eCrearFicheroReto
                         Sql = Sql & ";" & miRsAux!numcarnet & ";"
                     Else
                         'lo que habia
-                        Sql = Sql & miRsAux!NIF & ";" & miRsAux!numcarnet & ";"
+                        Sql = Sql & miRsAux!NIF & ";" & miRsAux!numcarnet & " ;"
                     End If
                 End If
                 Sql = Sql & miRsAux!nombresocio & ";" & DBLet(miRsAux!email, "T") & ";"
@@ -2931,7 +3040,7 @@ On Error GoTo eCrearFicheroReto
                 Sql = Sql & Trim(DBLet(miRsAux!Direccion, "T")) & ";" & CPos & ";ES;"
                 
                 'Si ine tiene valor se queda ine, si no, cpostal
-                If DBLet(miRsAux!ine, "T") <> "" Then CPos = Mid(miRsAux!ine & "00000", 1, 5)
+                If DBLet(miRsAux!ine, "T") <> "" Then CPos = Right("00000" & miRsAux!ine, 5)
                     
                 Sql = Sql & Mid(CPos, 1, 2) & ";" & Mid(CPos, 3, 3) & ";"
                  
@@ -2957,7 +3066,7 @@ On Error GoTo eCrearFicheroReto
             
             'Lineas articulos
             '  Registro NombreComercial Lote capacidad tipoud Cantidad volumen N" "N"
-            Sql = "2;" & miRsAux!Registro & ";" & miRsAux!NombreComercial & ";" & miRsAux!Lote & ";"
+            Sql = "2;" & miRsAux!registro & ";" & miRsAux!NombreComercial & ";" & miRsAux!Lote & ";"
             
             'En los tratamientos NO pintaremos la capacidad
             If Me.chkTratamientos.Value = 0 Then Sql = Sql & miRsAux!Capacidad
@@ -2966,7 +3075,7 @@ On Error GoTo eCrearFicheroReto
             Sql = Sql & ";" & miRsAux!tipoud & ";"
             
             
-             If Me.chkTratamientos.Value = 0 Then
+            If Me.chkTratamientos.Value = 0 Then
                 'SIEMPRE pondra CANTIDAD
                 'Sql = Sql & IIf(miRsAux!esventa = 0, miRsAux!CanCompra, miRsAux!cantidad)
                 Cuantos = Abs(IIf(miRsAux!EsVenta = 0, miRsAux!cantidad, miRsAux!cantidad))
@@ -2974,7 +3083,8 @@ On Error GoTo eCrearFicheroReto
             End If
             'Sql = Sql & ";" & miRsAux!Volumen & ";N;N;"
             Cuantos = Abs(miRsAux!Volumen)
-            Sql = Sql & ";" & Cuantos & ";N;N;"
+            'Sql = Sql & ";" & Cuantos & ";N;N;"
+            Sql = Sql & ";" & Cuantos & ";N;S;"
             If Me.chkTratamientos.Value = 1 Then
                 If miRsAux!EsVenta <> 3 Then Sql = Sql & "plagas;"
             End If

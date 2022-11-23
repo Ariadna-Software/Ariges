@@ -20,13 +20,13 @@ Begin VB.Form frmComEntAlbaranesGR
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
       Left            =   6600
-      TabIndex        =   123
+      TabIndex        =   124
       Top             =   90
       Width           =   2415
       Begin MSComctlLib.Toolbar ToolbarDes 
          Height          =   330
          Left            =   240
-         TabIndex        =   124
+         TabIndex        =   125
          Top             =   180
          Width           =   1965
          _ExtentX        =   3466
@@ -60,13 +60,13 @@ Begin VB.Form frmComEntAlbaranesGR
    Begin VB.Frame FrameBotonGnral2 
       Height          =   705
       Left            =   3780
-      TabIndex        =   121
+      TabIndex        =   122
       Top             =   90
       Width           =   2715
       Begin MSComctlLib.Toolbar Toolbar5 
          Height          =   330
          Left            =   210
-         TabIndex        =   122
+         TabIndex        =   123
          Top             =   180
          Width           =   2445
          _ExtentX        =   4313
@@ -99,13 +99,13 @@ Begin VB.Form frmComEntAlbaranesGR
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   90
-      TabIndex        =   119
+      TabIndex        =   120
       Top             =   90
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   180
-         TabIndex        =   120
+         TabIndex        =   121
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -171,7 +171,7 @@ Begin VB.Form frmComEntAlbaranesGR
       EndProperty
       Height          =   240
       Left            =   13770
-      TabIndex        =   105
+      TabIndex        =   106
       Top             =   315
       Width           =   1530
    End
@@ -194,7 +194,7 @@ Begin VB.Form frmComEntAlbaranesGR
       Index           =   0
       Left            =   9810
       MaxLength       =   15
-      TabIndex        =   104
+      TabIndex        =   105
       Text            =   "BASE IMPONIBLE"
       Top             =   285
       Width           =   1920
@@ -215,7 +215,7 @@ Begin VB.Form frmComEntAlbaranesGR
       Index           =   50
       Left            =   11805
       MaxLength       =   15
-      TabIndex        =   103
+      TabIndex        =   104
       Text            =   "Text1 7"
       Top             =   270
       Width           =   1845
@@ -236,7 +236,7 @@ Begin VB.Form frmComEntAlbaranesGR
       Left            =   3690
       Locked          =   -1  'True
       MaxLength       =   60
-      TabIndex        =   98
+      TabIndex        =   99
       Text            =   "nom ccoste"
       Top             =   10440
       Visible         =   0   'False
@@ -245,7 +245,7 @@ Begin VB.Form frmComEntAlbaranesGR
    Begin VB.Frame Frame2 
       Height          =   1020
       Left            =   75
-      TabIndex        =   81
+      TabIndex        =   82
       Top             =   870
       Width           =   15200
       Begin VB.TextBox Text1 
@@ -390,7 +390,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Left            =   10185
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   82
+         TabIndex        =   83
          Text            =   "Text2"
          Top             =   180
          Width           =   4710
@@ -469,7 +469,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   5
          Left            =   3210
-         TabIndex        =   102
+         TabIndex        =   103
          ToolTipText     =   "Fecha entrada mercancia"
          Top             =   165
          Width           =   1035
@@ -496,7 +496,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   0
          Left            =   7695
-         TabIndex        =   88
+         TabIndex        =   89
          Top             =   540
          Width           =   1185
       End
@@ -523,7 +523,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   50
          Left            =   210
-         TabIndex        =   86
+         TabIndex        =   87
          Top             =   165
          Width           =   1125
       End
@@ -541,7 +541,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   21
          Left            =   7695
-         TabIndex        =   85
+         TabIndex        =   86
          Top             =   180
          Width           =   1320
       End
@@ -559,7 +559,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   11
          Left            =   4845
-         TabIndex        =   84
+         TabIndex        =   85
          Top             =   165
          Width           =   1005
       End
@@ -577,7 +577,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   10
          Left            =   6180
-         TabIndex        =   83
+         TabIndex        =   84
          Top             =   165
          Width           =   1365
       End
@@ -595,7 +595,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   14
          Left            =   1635
-         TabIndex        =   87
+         TabIndex        =   88
          ToolTipText     =   "Fecha albaran"
          Top             =   165
          Width           =   990
@@ -605,7 +605,7 @@ Begin VB.Form frmComEntAlbaranesGR
       Height          =   475
       Index           =   0
       Left            =   75
-      TabIndex        =   53
+      TabIndex        =   54
       Top             =   10350
       Width           =   2175
       Begin VB.Label lblIndicador 
@@ -622,7 +622,7 @@ Begin VB.Form frmComEntAlbaranesGR
          EndProperty
          Height          =   240
          Left            =   225
-         TabIndex        =   54
+         TabIndex        =   55
          Top             =   135
          Width           =   1755
       End
@@ -641,7 +641,7 @@ Begin VB.Form frmComEntAlbaranesGR
       EndProperty
       Height          =   375
       Left            =   14220
-      TabIndex        =   51
+      TabIndex        =   52
       Top             =   10425
       Width           =   1065
    End
@@ -658,7 +658,7 @@ Begin VB.Form frmComEntAlbaranesGR
       EndProperty
       Height          =   375
       Left            =   13050
-      TabIndex        =   50
+      TabIndex        =   51
       Top             =   10425
       Width           =   1065
    End
@@ -759,7 +759,7 @@ Begin VB.Form frmComEntAlbaranesGR
    Begin TabDlg.SSTab SSTab1 
       Height          =   8280
       Left            =   90
-      TabIndex        =   55
+      TabIndex        =   56
       Tag             =   "Fecha Oferta|F|N|||scapre|fecentre|dd/mm/yyyy|N|"
       Top             =   1980
       Width           =   15195
@@ -827,19 +827,38 @@ Begin VB.Form frmComEntAlbaranesGR
       TabCaption(1)   =   "Observaciones / Totales"
       TabPicture(1)   =   "frmComEntAlbaranesGR.frx":0B40
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Text1(29)"
-      Tab(1).Control(1)=   "Text1(28)"
-      Tab(1).Control(2)=   "FrameFactura"
-      Tab(1).Control(3)=   "FrameHco"
-      Tab(1).Control(4)=   "Text1(19)"
-      Tab(1).Control(5)=   "Text1(18)"
-      Tab(1).Control(6)=   "Text1(17)"
-      Tab(1).Control(7)=   "Text1(16)"
-      Tab(1).Control(8)=   "Text1(15)"
-      Tab(1).Control(9)=   "Label1(48)"
-      Tab(1).Control(10)=   "Label1(47)"
-      Tab(1).Control(11)=   "Label1(45)"
-      Tab(1).ControlCount=   12
+      Tab(1).Control(0)=   "Label1(45)"
+      Tab(1).Control(1)=   "Label1(47)"
+      Tab(1).Control(2)=   "Label1(48)"
+      Tab(1).Control(3)=   "Text1(15)"
+      Tab(1).Control(4)=   "Text1(16)"
+      Tab(1).Control(5)=   "Text1(17)"
+      Tab(1).Control(6)=   "Text1(18)"
+      Tab(1).Control(7)=   "Text1(19)"
+      Tab(1).Control(8)=   "FrameHco"
+      Tab(1).Control(9)=   "FrameFactura"
+      Tab(1).Control(10)=   "Text1(28)"
+      Tab(1).Control(11)=   "Text1(29)"
+      Tab(1).Control(12)=   "chkEmailEnviado"
+      Tab(1).ControlCount=   13
+      Begin VB.CheckBox chkEmailEnviado 
+         Caption         =   "Email enviado "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   330
+         Left            =   -72960
+         TabIndex        =   25
+         Tag             =   "Ar|N|S|||scaalp|emailenviado|||"
+         Top             =   1320
+         Width           =   4665
+      End
       Begin VB.TextBox Text1 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -856,7 +875,7 @@ Begin VB.Form frmComEntAlbaranesGR
          MaxLength       =   80
          TabIndex        =   24
          Tag             =   "T|T|S|||scaalp|SReferencia||N|"
-         Top             =   945
+         Top             =   825
          Width           =   5505
       End
       Begin VB.TextBox Text1 
@@ -875,20 +894,20 @@ Begin VB.Form frmComEntAlbaranesGR
          MaxLength       =   80
          TabIndex        =   23
          Tag             =   "O|T|S|||scaalp|NReferencia||N|"
-         Top             =   930
+         Top             =   810
          Width           =   5505
       End
       Begin VB.Frame FrameToolAux0 
          Height          =   645
          Left            =   225
-         TabIndex        =   131
+         TabIndex        =   132
          Top             =   2880
          Width           =   1500
          Begin MSComctlLib.Toolbar ToolAux 
             Height          =   330
             Index           =   0
             Left            =   150
-            TabIndex        =   132
+            TabIndex        =   133
             Top             =   180
             Width           =   1230
             _ExtentX        =   2170
@@ -918,8 +937,8 @@ Begin VB.Form frmComEntAlbaranesGR
       Begin VB.Frame FrameFactura 
          Height          =   2400
          Left            =   -74640
-         TabIndex        =   106
-         Top             =   3795
+         TabIndex        =   107
+         Top             =   4080
          Width           =   14625
          Begin VB.TextBox Text3 
             Alignment       =   1  'Right Justify
@@ -936,7 +955,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   33
             Left            =   150
             MaxLength       =   15
-            TabIndex        =   30
+            TabIndex        =   31
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1665
@@ -956,7 +975,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   34
             Left            =   2205
             MaxLength       =   15
-            TabIndex        =   31
+            TabIndex        =   32
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1590
@@ -976,7 +995,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   35
             Left            =   4185
             MaxLength       =   15
-            TabIndex        =   32
+            TabIndex        =   33
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1635
@@ -997,7 +1016,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   36
             Left            =   6165
             MaxLength       =   15
-            TabIndex        =   33
+            TabIndex        =   34
             Text            =   "Text1 7"
             Top             =   555
             Width           =   1665
@@ -1017,7 +1036,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   43
             Left            =   10305
             MaxLength       =   15
-            TabIndex        =   36
+            TabIndex        =   37
             Text            =   "Text1 7"
             Top             =   540
             Width           =   1800
@@ -1037,7 +1056,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   37
             Left            =   8325
             MaxLength       =   4
-            TabIndex        =   34
+            TabIndex        =   35
             Text            =   "Text1 7"
             Top             =   540
             Width           =   750
@@ -1057,7 +1076,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   40
             Left            =   9360
             MaxLength       =   5
-            TabIndex        =   35
+            TabIndex        =   36
             Text            =   "Text1 7"
             Top             =   540
             Width           =   750
@@ -1078,7 +1097,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   46
             Left            =   12510
             MaxLength       =   15
-            TabIndex        =   37
+            TabIndex        =   38
             Text            =   "Text1 7"
             Top             =   540
             Width           =   1935
@@ -1098,7 +1117,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   44
             Left            =   10305
             MaxLength       =   15
-            TabIndex        =   40
+            TabIndex        =   41
             Text            =   "Text1 7"
             Top             =   900
             Width           =   1800
@@ -1118,7 +1137,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   38
             Left            =   8325
             MaxLength       =   4
-            TabIndex        =   38
+            TabIndex        =   39
             Text            =   "Text1 7"
             Top             =   900
             Width           =   750
@@ -1138,7 +1157,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   41
             Left            =   9360
             MaxLength       =   5
-            TabIndex        =   39
+            TabIndex        =   40
             Text            =   "Text1 7"
             Top             =   900
             Width           =   750
@@ -1159,7 +1178,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   47
             Left            =   12510
             MaxLength       =   15
-            TabIndex        =   41
+            TabIndex        =   42
             Text            =   "Text1 7"
             Top             =   900
             Width           =   1935
@@ -1179,7 +1198,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   45
             Left            =   10305
             MaxLength       =   15
-            TabIndex        =   44
+            TabIndex        =   45
             Text            =   "Text1 7"
             Top             =   1275
             Width           =   1800
@@ -1199,7 +1218,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   39
             Left            =   8325
             MaxLength       =   4
-            TabIndex        =   42
+            TabIndex        =   43
             Text            =   "Text1 7"
             Top             =   1275
             Width           =   750
@@ -1219,7 +1238,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   42
             Left            =   9360
             MaxLength       =   5
-            TabIndex        =   43
+            TabIndex        =   44
             Text            =   "Text1 7"
             Top             =   1275
             Width           =   750
@@ -1240,7 +1259,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   48
             Left            =   12510
             MaxLength       =   15
-            TabIndex        =   45
+            TabIndex        =   46
             Text            =   "Text1 7"
             Top             =   1275
             Width           =   1935
@@ -1261,7 +1280,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   49
             Left            =   12285
             MaxLength       =   15
-            TabIndex        =   46
+            TabIndex        =   47
             Text            =   "Text1 7"
             Top             =   1830
             Width           =   2160
@@ -1280,7 +1299,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   27
             Left            =   10305
-            TabIndex        =   118
+            TabIndex        =   119
             Top             =   255
             Width           =   1575
          End
@@ -1298,7 +1317,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   24
             Left            =   150
-            TabIndex        =   117
+            TabIndex        =   118
             Top             =   270
             Width           =   1260
          End
@@ -1316,7 +1335,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   23
             Left            =   2205
-            TabIndex        =   116
+            TabIndex        =   117
             Top             =   270
             Width           =   1260
          End
@@ -1334,7 +1353,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   22
             Left            =   4185
-            TabIndex        =   115
+            TabIndex        =   116
             Top             =   270
             Width           =   1500
          End
@@ -1352,7 +1371,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   18
             Left            =   6165
-            TabIndex        =   114
+            TabIndex        =   115
             Top             =   270
             Width           =   1620
          End
@@ -1370,7 +1389,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   30
             Left            =   1965
-            TabIndex        =   113
+            TabIndex        =   114
             Top             =   480
             Width           =   135
          End
@@ -1388,7 +1407,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   31
             Left            =   3945
-            TabIndex        =   112
+            TabIndex        =   113
             Top             =   480
             Width           =   135
          End
@@ -1406,7 +1425,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   32
             Left            =   5925
-            TabIndex        =   111
+            TabIndex        =   112
             Top             =   480
             Width           =   135
          End
@@ -1424,7 +1443,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   33
             Left            =   12510
-            TabIndex        =   110
+            TabIndex        =   111
             Top             =   285
             Width           =   1515
          End
@@ -1443,7 +1462,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   285
             Index           =   39
             Left            =   10320
-            TabIndex        =   109
+            TabIndex        =   110
             Top             =   1845
             Width           =   1785
          End
@@ -1461,7 +1480,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   41
             Left            =   9360
-            TabIndex        =   108
+            TabIndex        =   109
             Top             =   240
             Width           =   765
          End
@@ -1479,7 +1498,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   42
             Left            =   8325
-            TabIndex        =   107
+            TabIndex        =   108
             Top             =   255
             Width           =   960
          End
@@ -1490,7 +1509,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   315
          Index           =   2
          Left            =   10920
-         TabIndex        =   100
+         TabIndex        =   101
          ToolTipText     =   "Buscar centro coste"
          Top             =   5835
          Visible         =   0   'False
@@ -1513,7 +1532,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   9
          Left            =   10440
          MaxLength       =   4
-         TabIndex        =   65
+         TabIndex        =   66
          Tag             =   "centro coste"
          Text            =   "cc"
          Top             =   5835
@@ -1538,7 +1557,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   8
          Left            =   10320
          MaxLength       =   3
-         TabIndex        =   97
+         TabIndex        =   98
          Tag             =   "IVA"
          Text            =   "IVA"
          Top             =   5355
@@ -1561,7 +1580,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Left            =   1755
          Locked          =   -1  'True
          MultiLine       =   -1  'True
-         TabIndex        =   66
+         TabIndex        =   67
          Text            =   "frmComEntAlbaranesGR.frx":0B5C
          Top             =   7755
          Width           =   8700
@@ -1582,7 +1601,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Left            =   11490
          Locked          =   -1  'True
          MaxLength       =   15
-         TabIndex        =   67
+         TabIndex        =   68
          Text            =   "ABCDKFJADKSFJAK"
          Top             =   7755
          Visible         =   0   'False
@@ -1602,8 +1621,8 @@ Begin VB.Form frmComEntAlbaranesGR
          ForeColor       =   &H00972E0B&
          Height          =   1170
          Left            =   -74640
-         TabIndex        =   89
-         Top             =   6390
+         TabIndex        =   90
+         Top             =   6720
          Width           =   14640
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -1620,7 +1639,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   22
             Left            =   135
             MaxLength       =   10
-            TabIndex        =   47
+            TabIndex        =   48
             Top             =   585
             Width           =   1290
          End
@@ -1639,7 +1658,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   23
             Left            =   1680
             MaxLength       =   30
-            TabIndex        =   48
+            TabIndex        =   49
             Text            =   "Text1"
             Top             =   585
             Width           =   840
@@ -1660,7 +1679,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Left            =   2565
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   91
+            TabIndex        =   92
             Text            =   "Text2"
             Top             =   585
             Width           =   4740
@@ -1680,7 +1699,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Index           =   24
             Left            =   7485
             MaxLength       =   30
-            TabIndex        =   49
+            TabIndex        =   50
             Text            =   "Text1"
             Top             =   600
             Width           =   885
@@ -1701,7 +1720,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Left            =   8415
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   90
+            TabIndex        =   91
             Text            =   "Text2"
             Top             =   600
             Width           =   6000
@@ -1720,7 +1739,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   37
             Left            =   135
-            TabIndex        =   94
+            TabIndex        =   95
             Top             =   300
             Width           =   1440
          End
@@ -1738,7 +1757,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   38
             Left            =   1695
-            TabIndex        =   93
+            TabIndex        =   94
             Top             =   315
             Width           =   1140
          End
@@ -1764,7 +1783,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   40
             Left            =   7500
-            TabIndex        =   92
+            TabIndex        =   93
             Top             =   330
             Width           =   1185
          End
@@ -1780,7 +1799,7 @@ Begin VB.Form frmComEntAlbaranesGR
       Begin VB.Frame FrameCliente 
          Height          =   2400
          Left            =   220
-         TabIndex        =   71
+         TabIndex        =   72
          Top             =   465
          Width           =   14775
          Begin VB.TextBox Text1 
@@ -1820,7 +1839,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Left            =   9945
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   135
+            TabIndex        =   136
             Text            =   "Text2"
             Top             =   1920
             Width           =   4710
@@ -1862,7 +1881,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Left            =   9930
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   126
+            TabIndex        =   127
             Text            =   "Text2"
             Top             =   1035
             Width           =   4710
@@ -1921,7 +1940,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Left            =   9930
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   125
+            TabIndex        =   126
             Text            =   "Text2"
             Top             =   1440
             Width           =   4710
@@ -2104,7 +2123,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Left            =   9945
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   73
+            TabIndex        =   74
             Text            =   "Text2"
             Top             =   190
             Width           =   4695
@@ -2194,7 +2213,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   240
             Index           =   6
             Left            =   7440
-            TabIndex        =   136
+            TabIndex        =   137
             Top             =   1920
             Width           =   1170
          End
@@ -2220,7 +2239,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   44
             Left            =   135
-            TabIndex        =   130
+            TabIndex        =   131
             Top             =   1920
             Width           =   1095
          End
@@ -2238,7 +2257,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   1
             Left            =   7440
-            TabIndex        =   129
+            TabIndex        =   130
             Top             =   1035
             Width           =   1365
          End
@@ -2264,7 +2283,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   3
             Left            =   3135
-            TabIndex        =   128
+            TabIndex        =   129
             Top             =   1935
             Width           =   990
          End
@@ -2292,7 +2311,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   240
             Index           =   4
             Left            =   7440
-            TabIndex        =   127
+            TabIndex        =   128
             Top             =   1440
             Width           =   1200
          End
@@ -2337,7 +2356,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   17
             Left            =   120
-            TabIndex        =   80
+            TabIndex        =   81
             Top             =   1440
             Width           =   960
          End
@@ -2355,7 +2374,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   16
             Left            =   120
-            TabIndex        =   79
+            TabIndex        =   80
             Top             =   1005
             Width           =   1005
          End
@@ -2373,7 +2392,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   19
             Left            =   3720
-            TabIndex        =   78
+            TabIndex        =   79
             Top             =   195
             Width           =   960
          End
@@ -2391,7 +2410,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   20
             Left            =   120
-            TabIndex        =   77
+            TabIndex        =   78
             Top             =   190
             Width           =   615
          End
@@ -2409,7 +2428,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   15
             Left            =   7440
-            TabIndex        =   76
+            TabIndex        =   77
             Top             =   195
             Width           =   1215
          End
@@ -2427,7 +2446,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   25
             Left            =   7455
-            TabIndex        =   75
+            TabIndex        =   76
             Top             =   600
             Width           =   1290
          End
@@ -2445,7 +2464,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   26
             Left            =   10200
-            TabIndex        =   74
+            TabIndex        =   75
             Top             =   600
             Width           =   930
          End
@@ -2471,7 +2490,7 @@ Begin VB.Form frmComEntAlbaranesGR
             Height          =   255
             Index           =   7
             Left            =   120
-            TabIndex        =   72
+            TabIndex        =   73
             Top             =   600
             Width           =   1005
          End
@@ -2482,7 +2501,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   315
          Index           =   1
          Left            =   2655
-         TabIndex        =   70
+         TabIndex        =   71
          ToolTipText     =   "Buscar artículo"
          Top             =   5895
          Visible         =   0   'False
@@ -2494,7 +2513,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   315
          Index           =   0
          Left            =   960
-         TabIndex        =   69
+         TabIndex        =   70
          ToolTipText     =   "Buscar almacen"
          Top             =   5895
          Visible         =   0   'False
@@ -2518,7 +2537,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Left            =   2880
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   59
+         TabIndex        =   60
          Tag             =   "Nombre Artículo"
          Text            =   "nomArtic"
          Top             =   5835
@@ -2543,7 +2562,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   7
          Left            =   9360
          MaxLength       =   16
-         TabIndex        =   64
+         TabIndex        =   65
          Tag             =   "Importe"
          Text            =   "Importe"
          Top             =   5835
@@ -2568,7 +2587,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   6
          Left            =   8880
          MaxLength       =   30
-         TabIndex        =   63
+         TabIndex        =   64
          Tag             =   "Descuento 2"
          Text            =   "Dto2"
          Top             =   5835
@@ -2593,7 +2612,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   5
          Left            =   8280
          MaxLength       =   5
-         TabIndex        =   62
+         TabIndex        =   63
          Tag             =   "Descuento 1"
          Text            =   "Dto1"
          Top             =   5835
@@ -2618,7 +2637,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   4
          Left            =   7320
          MaxLength       =   12
-         TabIndex        =   61
+         TabIndex        =   62
          Tag             =   "Precio"
          Text            =   "123,456.7879"
          Top             =   5835
@@ -2643,7 +2662,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   3
          Left            =   6120
          MaxLength       =   16
-         TabIndex        =   60
+         TabIndex        =   61
          Tag             =   "Cantidad"
          Text            =   "1,234,567,891.25"
          Top             =   5835
@@ -2667,7 +2686,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   1
          Left            =   1200
          MaxLength       =   18
-         TabIndex        =   58
+         TabIndex        =   59
          Tag             =   "Código Artículo"
          Text            =   "Artic Artic Artic5"
          Top             =   5895
@@ -2691,7 +2710,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   0
          Left            =   360
          MaxLength       =   15
-         TabIndex        =   57
+         TabIndex        =   58
          Tag             =   "Código Almacen"
          Text            =   "codalmac"
          Top             =   5895
@@ -2712,9 +2731,9 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   19
          Left            =   -73005
          MaxLength       =   80
-         TabIndex        =   29
+         TabIndex        =   30
          Tag             =   "Observación 5|T|S|||scaalp|observa5||N|"
-         Top             =   3210
+         Top             =   3570
          Width           =   12810
       End
       Begin VB.TextBox Text1 
@@ -2731,9 +2750,9 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   18
          Left            =   -73005
          MaxLength       =   80
-         TabIndex        =   28
+         TabIndex        =   29
          Tag             =   "Observación 4|T|S|||scaalp|observa4||N|"
-         Top             =   2820
+         Top             =   3180
          Width           =   12810
       End
       Begin VB.TextBox Text1 
@@ -2750,9 +2769,9 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   17
          Left            =   -73005
          MaxLength       =   80
-         TabIndex        =   27
+         TabIndex        =   28
          Tag             =   "Observación 3|T|S|||scaalp|observa3||N|"
-         Top             =   2430
+         Top             =   2790
          Width           =   12810
       End
       Begin VB.TextBox Text1 
@@ -2769,9 +2788,9 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   16
          Left            =   -73005
          MaxLength       =   80
-         TabIndex        =   26
+         TabIndex        =   27
          Tag             =   "Observación 2|T|S|||scaalp|observa2||N|"
-         Top             =   2040
+         Top             =   2400
          Width           =   12810
       End
       Begin VB.TextBox Text1 
@@ -2788,19 +2807,19 @@ Begin VB.Form frmComEntAlbaranesGR
          Index           =   15
          Left            =   -73005
          MaxLength       =   80
-         TabIndex        =   25
+         TabIndex        =   26
          Tag             =   "Observación 1|T|S|||scaalp|observa1||N|"
-         Top             =   1650
+         Top             =   2010
          Width           =   12810
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
          Bindings        =   "frmComEntAlbaranesGR.frx":0CAF
          Height          =   3960
          Left            =   225
-         TabIndex        =   68
+         TabIndex        =   69
          Top             =   3600
-         Width           =   14595
-         _ExtentX        =   25744
+         Width           =   14715
+         _ExtentX        =   25956
          _ExtentY        =   6985
          _Version        =   393216
          AllowUpdate     =   -1  'True
@@ -2876,8 +2895,8 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   48
          Left            =   -67350
-         TabIndex        =   134
-         Top             =   945
+         TabIndex        =   135
+         Top             =   825
          Width           =   2175
       End
       Begin VB.Label Label1 
@@ -2894,8 +2913,8 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   47
          Left            =   -74670
-         TabIndex        =   133
-         Top             =   945
+         TabIndex        =   134
+         Top             =   825
          Width           =   2175
       End
       Begin VB.Image imgBuscar 
@@ -2920,7 +2939,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   35
          Left            =   240
-         TabIndex        =   96
+         TabIndex        =   97
          Top             =   7755
          Width           =   1065
       End
@@ -2938,7 +2957,7 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   2
          Left            =   10635
-         TabIndex        =   95
+         TabIndex        =   96
          Top             =   7755
          Visible         =   0   'False
          Width           =   885
@@ -2957,8 +2976,8 @@ Begin VB.Form frmComEntAlbaranesGR
          Height          =   255
          Index           =   45
          Left            =   -74685
-         TabIndex        =   56
-         Top             =   1665
+         TabIndex        =   57
+         Top             =   2025
          Width           =   1590
       End
    End
@@ -2975,7 +2994,7 @@ Begin VB.Form frmComEntAlbaranesGR
       EndProperty
       Height          =   375
       Left            =   14220
-      TabIndex        =   52
+      TabIndex        =   53
       Top             =   10440
       Visible         =   0   'False
       Width           =   1065
@@ -2993,7 +3012,7 @@ Begin VB.Form frmComEntAlbaranesGR
       EndProperty
       Height          =   255
       Left            =   10305
-      TabIndex        =   101
+      TabIndex        =   102
       Top             =   10470
       Width           =   2535
    End
@@ -3011,7 +3030,7 @@ Begin VB.Form frmComEntAlbaranesGR
       Height          =   255
       Index           =   46
       Left            =   2355
-      TabIndex        =   99
+      TabIndex        =   100
       Top             =   10470
       Visible         =   0   'False
       Width           =   1335
@@ -3184,7 +3203,7 @@ Dim PulsadoMas2 As Boolean
 'Diciembre 2010.
 'Para ver si al volver a cabecera muestra el listado o no
 Dim HaModifEnLineas As Boolean
-
+Dim BuscaChekc As String
 
 Dim Indice As Byte
 
@@ -3192,7 +3211,7 @@ Dim Indice As Byte
 
 
 Private Sub chkDocArchi_Click()
-   '  If Modo = 1 Then CheckCadenaBusqueda chkDocArchi, BuscaChekc
+     If Modo = 1 Then CheckCadenaBusqueda chkDocArchi, BuscaChekc
 End Sub
 Private Sub chkDocArchi_KeyDown(KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
@@ -3209,6 +3228,14 @@ End Sub
 
 
 
+
+Private Sub chkEmailEnviado_Click()
+    If Modo = 1 Then CheckCadenaBusqueda chkEmailEnviado, BuscaChekc
+End Sub
+
+Private Sub chkEmailEnviado_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
 
 Private Sub cmdAceptar_Click()
 Dim PrimeraLin As Boolean 'Si se inserta la primera linea no esta creado el datagrid1 entonces llamar
@@ -3478,7 +3505,7 @@ Private Function ComprobarCambioFecha() As Boolean
 'Comprueba si se ha modificado el campo fecha de la cabecera.
 'Ya que es clave primaria y se deberan cambiar tambien la fecha
 'en tablas sliap y smoval
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Izquierda As String, Derecha As String
 Dim llis As Collection
@@ -3496,24 +3523,24 @@ Dim B As Boolean
         'seleccionar todas las lineas de ese albaran para actualizar la fecha (slialp)
         Sql = "SELECT * FROM " & NomTablaLineas & " WHERE numalbar=" & DBSet(Data1.Recordset!Numalbar, "T")
         Sql = Sql & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        Sql = Sql & " AND codprove=" & Data1.Recordset!CodProve
+        Sql = Sql & " AND codprove=" & Data1.Recordset!Codprove
         
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         
         Set llis = New Collection
             
         'Nos guardamos todas las lineas con la modificacion de la fecha para
         'volverlas a insertar
-        BACKUP_TablaIzquierda RS, Izquierda
+        BACKUP_TablaIzquierda Rs, Izquierda
         
-        While Not RS.EOF
-            BACKUP_Tabla RS, Derecha, "fechaalb", CStr(Text1(1).Text)
+        While Not Rs.EOF
+            BACKUP_Tabla Rs, Derecha, "fechaalb", CStr(Text1(1).Text)
             llis.Add Derecha
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         
-        RS.Close
+        Rs.Close
        
         
         
@@ -3522,25 +3549,25 @@ Dim B As Boolean
         If vParamAplic.ManipuladorFitosanitarios2 Then
             Sql = " Select * from " & NomTablaLineas & " WHERE numalbar = " & DBSet(Data1.Recordset!Numalbar, "T")
             Sql = Sql & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-            Sql = Sql & " AND codprove=" & Data1.Recordset!CodProve
+            Sql = Sql & " AND codprove=" & Data1.Recordset!Codprove
             
             
-            RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            While Not RS.EOF
+            While Not Rs.EOF
                 
                 Sql = "UPDATE slotes SET fecentra = " & DBSet(Text1(30).Text, "F") & " WHERE "
-                Sql = Sql & " codartic=" & DBSet(RS!codArtic, "T") & " AND numlotes=" & DBSet(RS!numlotes, "T") & " AND fecentra=" & DBSet(RS!FechaAlb, "F")
+                Sql = Sql & " codartic=" & DBSet(Rs!codArtic, "T") & " AND numlotes=" & DBSet(Rs!numlotes, "T") & " AND fecentra=" & DBSet(Rs!FechaAlb, "F")
                 conn.Execute Sql
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
         End If
 
 
         
-        Set RS = Nothing
+        Set Rs = Nothing
         
         
         
@@ -3550,14 +3577,14 @@ Dim B As Boolean
         'Eliminamos las lineas que tenia ese albaran (slialp) para volverlas a insertar con la fecha nueva
         Sql = "DELETE from slialp WHERE numalbar = " & DBSet(Data1.Recordset!Numalbar, "T")
         Sql = Sql & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        Sql = Sql & " AND codprove=" & Data1.Recordset!CodProve
+        Sql = Sql & " AND codprove=" & Data1.Recordset!Codprove
         conn.Execute Sql
         
         'Actualizamos la fecha en la cabecera (scaalp)
         Sql = "UPDATE scaalp SET fechaalb = " & DBSet(Text1(1).Text, "F")
         Sql = Sql & " WHERE numalbar = " & DBSet(Data1.Recordset!Numalbar, "T")
         Sql = Sql & " AND fechaalb=" & DBSet(Data1.Recordset!FechaAlb, "F")
-        Sql = Sql & " AND codprove=" & Data1.Recordset!CodProve
+        Sql = Sql & " AND codprove=" & Data1.Recordset!Codprove
         conn.Execute Sql
         
         
@@ -3576,7 +3603,7 @@ Dim B As Boolean
         Sql = "UPDATE sserie SET fechacom=" & DBSet(Text1(1).Text, "F")
         Sql = Sql & " WHERE fechacom=" & DBSet(Data1.Recordset!FechaAlb, "F") & " AND "
         Sql = Sql & " numalbpr=" & DBSet(Data1.Recordset!Numalbar, "T")
-        Sql = Sql & " AND codprove=" & Data1.Recordset!CodProve
+        Sql = Sql & " AND codprove=" & Data1.Recordset!Codprove
         conn.Execute Sql
             
         
@@ -3768,6 +3795,7 @@ Private Sub BotonBuscar()
         LimpiarDataGrids
         PonerModo 1
         'Si pasamos el control aqui lo ponemos en amarillo
+        BuscaChekc = ""
         PonerFoco Text1(0)
         Text1(0).BackColor = vbLightBlue
     Else
@@ -3922,6 +3950,7 @@ Dim Cad As String
         Set frmList = Nothing
         If cadList = "" Then Exit Sub
         
+        Screen.MousePointer = vbHourglass
         If Not Eliminar() Then
             CargaGrid Me.DataGrid1, Me.Data2, True
             Exit Sub
@@ -3958,6 +3987,7 @@ Dim Sql As String
     
     HaModifEnLineas = True
     ModificaLineas = 3 'Eliminar
+    Screen.MousePointer = vbHourglass
     Sql = "¿Seguro que desea eliminar la línea de Albaran?     "
     Sql = Sql & vbCrLf & "NumLinea:  " & Data2.Recordset!numlinea & vbCrLf
     Sql = Sql & "Almacen:  " & Format(Data2.Recordset!codAlmac, "000")
@@ -3966,12 +3996,16 @@ Dim Sql As String
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Data2.Recordset.AbsolutePosition
+        
         If EliminarLinea Then
+            Screen.MousePointer = vbHourglass
             ModificaLineas = 0
             SituarDataTrasEliminar Data2, NumRegElim
             'CargaGrid2 DataGrid1, Data2
+            Screen.MousePointer = vbHourglass
             CalcularDatosFactura
         End If
+        Screen.MousePointer = vbDefault
 '        CancelaADODC
     End If
     PonerFocoBtn Me.cmdRegresar
@@ -4228,6 +4262,7 @@ On Error Resume Next
     'Aqui va el especifico de cada form es
     '### a mano
     chkDocArchi.Value = 0
+    chkEmailEnviado.Value = 0
     Text3(0).Text = "BASE IMPONIBLE"
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -4771,7 +4806,7 @@ End Sub
 Private Sub HacerBusqueda()
 Dim cadB As String
 
-    cadB = ObtenerBusqueda(Me, False)
+    cadB = ObtenerBusqueda(Me, False, BuscaChekc)
     If cadSelAlbaranes <> "" Then cadB = cadB & " AND " & cadSelAlbaranes
     If chkVistaPrevia = 1 Then
         MandaBusquedaPrevia cadB
@@ -5012,7 +5047,7 @@ Dim B As Boolean
     cmdAceptar.visible = B
     If cmdCancelar.visible Then cmdCancelar.Cancel = True
     chkDocArchi.Enabled = B
-        
+    chkEmailEnviado.Enabled = B
     
     
     
@@ -5035,12 +5070,12 @@ Dim B As Boolean
   '  imgBuscar(9).visible = (Modo = 5)
     BloquearTxt Text2(16), True
     'Modo Linea de Albaranes. Campo num_lote
-    Me.label1(2).visible = (Modo = 5)
+    Me.Label1(2).visible = (Modo = 5)
     Me.Text2(17).visible = (Modo = 5)
     BloquearTxt Text2(17), True
     
     ' ---- [20/10/2009] [LAURA] : añadir del centro de coste
-    Me.label1(46).visible = (vEmpresa.TieneAnalitica) And (Modo = 5)
+    Me.Label1(46).visible = (vEmpresa.TieneAnalitica) And (Modo = 5)
     Me.txtAux2(9).visible = (vEmpresa.TieneAnalitica) And (Modo = 5)
     BloquearTxt txtAux2(9), True
     
@@ -5224,14 +5259,14 @@ Dim DiferenciaCantidad As Currency
                         
                         If cadList = "LO" Then
                             
-                            cadList = "numlote =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!fentrada, "F")
+                            cadList = "numlote =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!FEntrada, "F")
                             cadList = cadList & " AND codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND 1"
                             cadList = DevuelveDesdeBD(conAri, "count(*)", "slialblotes", cadList, "1")
                             If Val(cadList) > 0 Then
                                 MsgBox "El lote ya ha sido vendido", vbExclamation
                                 B = False
                             Else
-                                cadList = "numlote =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!fentrada, "F")
+                                cadList = "numlote =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!FEntrada, "F")
                                 cadList = cadList & " AND codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND 1"
                                 cadList = DevuelveDesdeBD(conAri, "count(*)", "slivenlotes", cadList, "1")
                                 If Val(cadList) > 0 Then
@@ -5244,7 +5279,7 @@ Dim DiferenciaCantidad As Currency
                             DiferenciaCantidad = Data2.Recordset!cantidad - ImporteFormateado(Me.txtAux(3).Text)
                             If DiferenciaCantidad > 0 Then
                                 'Hemos puesto menos cantidad de la que habiamos puesto
-                                cadList = "numlotes =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!fentrada, "F")
+                                cadList = "numlotes =" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra = " & DBSet(Data1.Recordset!FEntrada, "F")
                                 cadList = cadList & " AND codartic = " & DBSet(Data2.Recordset!codArtic, "T") & " AND 1"
                                 cadList = DevuelveDesdeBD(conAri, "(canentra-vendida)", "slotes", cadList, "1")
                                 If cadList = "" Then cadList = "0"
@@ -5676,16 +5711,16 @@ Dim ImpReciclado As Single
                     'si no existe en la tabla slotes lo añadimos sino lo modificamos
                     Sql = "SELECT COUNT(*) FROM slotes "
                     Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Text2(17).Text, "T")
-                    Sql = Sql & " AND fecentra=" & DBSet(Data2.Recordset!fentrada, "F")
+                    Sql = Sql & " AND fecentra=" & DBSet(Data1.Recordset!FEntrada, "F")
                     If RegistrosAListar(Sql) > 0 Then
                         'actualizar la cantidad de entrada de la tabla slotes
                         Sql = "UPDATE slotes SET canentra=" & DBSet(txtAux(3).Text, "N")  '- CSng(Me.Data2.Recordset!cantidad), "N")
-                        Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data2.Recordset!fentrada, "F")
+                        Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data1.Recordset!FEntrada, "F")
                         conn.Execute Sql
                     ElseIf Text2(17).Text <> "" Then
                         'SI NO EXISTE LO INSERTAMOS
                         Sql = "INSERT INTO slotes (codartic,numlotes,fecentra,canentra,canasign) VALUES ("
-                        Sql = Sql & DBSet(Data2.Recordset!codArtic, "T") & "," & DBSet(Text2(17).Text, "T") & "," & DBSet(Data2.Recordset!fentrada, "F") & ","
+                        Sql = Sql & DBSet(Data2.Recordset!codArtic, "T") & "," & DBSet(Text2(17).Text, "T") & "," & DBSet(Data1.Recordset!FEntrada, "F") & ","
                         Sql = Sql & DBSet(txtAux(3).Text, "N") & ",0)"
                         conn.Execute Sql
                     End If
@@ -5698,11 +5733,11 @@ Dim ImpReciclado As Single
                             If DBLet(Data2.Recordset!numlotes, "T") <> "" Then
                                 'actualizar la cantidad de entrada de la tabla slotes
                                 Sql = "UPDATE slotes SET canentra=canentra - " & DBSet(txtAux(3).Text, "N")
-                                Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data2.Recordset!FechaAlb, "F")
+                                Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data1.Recordset!FEntrada, "F")
                                 conn.Execute Sql
                                 'borrar si
                                 Sql = "DELETE FROM slotes "
-                                Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data2.Recordset!FechaAlb, "F")
+                                Sql = Sql & " WHERE codartic=" & DBSet(Data2.Recordset!codArtic, "T") & " AND numlotes=" & DBSet(Data2.Recordset!numlotes, "T") & " AND fecentra=" & DBSet(Data1.Recordset!FEntrada, "F")
                                 Sql = Sql & " AND canentra=0"
                                 conn.Execute Sql
                             End If
@@ -5856,7 +5891,7 @@ On Error GoTo ECargaGrid
             vDataGrid.Columns(i).Caption = "Precio"
             vDataGrid.Columns(i).Width = 1140 + 300
             vDataGrid.Columns(i).Alignment = dbgRight
-            vDataGrid.Columns(i).NumberFormat = FormatoPrecio2
+            vDataGrid.Columns(i).NumberFormat = FormatoPrecio  'FormatoPrecio2  Quitamos el 2
                 
             i = i + 1
             vDataGrid.Columns(i).Caption = "Dto.1"
@@ -6213,7 +6248,7 @@ Dim okArticulo As Boolean
             End If
 
         Case 4 'Precio
-            PonerFormatoDecimal_Single txtAux(Index), 9 'Tipo 9: COnstante
+            PonerFormatoDecimal_Single txtAux(Index), 2     '9 'Tipo 9: COnstante
         Case 5, 6 'Descuentos
             PonerFormatoDecimal txtAux(Index), 4 'Tipo 4: Decimal(4,2)
         Case 7 'Importe Linea
@@ -6342,7 +6377,7 @@ Dim Sql As String
             If B Then
                 Sql = "DELETE FROM sserie WHERE numalbpr=" & DBSet(Data1.Recordset!Numalbar, "T")
                 Sql = Sql & " AND fechacom=" & DBSet(Data1.Recordset!FechaAlb, "F")
-                Sql = Sql & " AND codprove=" & Data1.Recordset!CodProve
+                Sql = Sql & " AND codprove=" & Data1.Recordset!Codprove
                 Sql = Sql & " AND (isnull(numfactu) and isnull(numalbar))"
                 conn.Execute Sql
             End If
@@ -6729,7 +6764,7 @@ Dim vCStock As CStock
 Dim cart As CArticulo
 Dim cLote As CNumLote
 Dim B As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 
     On Error GoTo ERestablecer
@@ -6737,20 +6772,20 @@ Dim Sql As String
     Sql = "SELECT * FROM " & NomTablaLineas & " WHERE " & Replace(cadSel, NombreTabla, NomTablaLineas)
     Sql = Sql & " ORDER BY numlinea desc "
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     B = True
-    While (Not RS.EOF) And B
+    While (Not Rs.EOF) And B
         'para cada linea de albaran deshacemos movimientos y precios medios ponderados
         Set vCStock = New CStock
-           If InicializarCStock(vCStock, "S", RS!numlinea) Then
+           If InicializarCStock(vCStock, "S", Rs!numlinea) Then
                 'estos valores hay q leerlos del RS y no del data2
-                 vCStock.codArtic = RS!codArtic
-                 vCStock.codAlmac = CInt(RS!codAlmac)
-                 vCStock.cantidad = CSng(RS!cantidad)
-                 vCStock.Importe = CCur(RS!ImporteL)
-                 vCStock.LineaDocu = RS!numlinea
+                 vCStock.codArtic = Rs!codArtic
+                 vCStock.codAlmac = CInt(Rs!codAlmac)
+                 vCStock.cantidad = CSng(Rs!cantidad)
+                 vCStock.Importe = CCur(Rs!ImporteL)
+                 vCStock.LineaDocu = Rs!numlinea
            
                 '==== Laura 20/09/2006
                 'antes de actualizar el stock reestablecer el precio medio ponderado del articulo
@@ -6765,7 +6800,7 @@ Dim Sql As String
                     If B Then
                         If cart.TieneNumLote Then
                             Set cLote = New CNumLote
-                            If cLote.LeerDatos(cart.Codigo, CStr(DBLet(RS!numlotes, "T")), CStr(RS!FechaAlb)) Then
+                            If cLote.LeerDatos(cart.Codigo, CStr(DBLet(Rs!numlotes, "T")), CStr(Rs!FechaAlb)) Then
                                 B = cLote.Eliminar(vCStock.cantidad)
                             
                             End If
@@ -6789,10 +6824,10 @@ Dim Sql As String
 '           Data2.Recordset.MoveNext
            Set vCStock = Nothing
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     
     '#### ANTES DEL 20/09/2006
@@ -6983,7 +7018,7 @@ Dim RSLineas As ADODB.Recordset
 End Sub
 
 
-Private Sub PedirNSeries(ByRef RS As ADODB.Recordset)
+Private Sub PedirNSeries(ByRef Rs As ADODB.Recordset)
 Dim RSseries As ADODB.Recordset
 Dim Sql As String
 Dim linea As Integer
@@ -6991,16 +7026,16 @@ Dim linea As Integer
     On Error GoTo EPedirNSeries
 
         'Inicializo la tabla temporal de los num.serie
-        PedirNSeriesGnral RS, False
+        PedirNSeriesGnral Rs, False
         
-        RS.MoveFirst
-        While Not RS.EOF
+        Rs.MoveFirst
+        While Not Rs.EOF
             linea = 0
             'Cargar los Nº de serie asignados al albaran
             Sql = "SELECT numserie, codartic FROM sserie "
             Sql = Sql & " WHERE numalbpr=" & DBSet(Text1(0).Text, "T")
             Sql = Sql & " and fechacom='" & Format(Text1(1).Text, FormatoFecha) & "'"
-            Sql = Sql & " and codprove=" & Text1(4).Text & " and numline2=" & RS!numlinea
+            Sql = Sql & " and codprove=" & Text1(4).Text & " and numline2=" & Rs!numlinea
             Sql = Sql & " ORDER BY codartic "
             
             Set RSseries = New ADODB.Recordset
@@ -7008,13 +7043,13 @@ Dim linea As Integer
             While Not RSseries.EOF
                 linea = linea + 1
                 Sql = "UPDATE tmpnseries SET numserie=" & DBSet(RSseries!numSerie, "T")
-                Sql = Sql & " WHERE codusu=" & vUsu.Codigo & " and codartic=" & DBSet(RS!codArtic, "T")
-                Sql = Sql & " and numlinealb=" & RS!numlinea
+                Sql = Sql & " WHERE codusu=" & vUsu.Codigo & " and codartic=" & DBSet(Rs!codArtic, "T")
+                Sql = Sql & " and numlinealb=" & Rs!numlinea
                 Sql = Sql & " and numlinea=" & linea
                 conn.Execute Sql
                 RSseries.MoveNext
             Wend
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         RSseries.Close
         Set RSseries = Nothing
@@ -7142,21 +7177,21 @@ End Function
 
 
 
-Private Sub PonerDatosProveedor(CodProve As String, Optional nifProve As String)
+Private Sub PonerDatosProveedor(Codprove As String, Optional nifProve As String)
 Dim vProve As CProveedor
 Dim Observaciones As String
     
     On Error GoTo EPonerDatos
     
-    If CodProve = "" Then
+    If Codprove = "" Then
         LimpiarDatosProve
         Exit Sub
     End If
 
     Set vProve = New CProveedor
     'si se ha modificado el proveedor volver a cargar los datos
-    If vProve.Existe(CodProve) Then
-        If vProve.LeerDatos(CodProve) Then
+    If vProve.Existe(Codprove) Then
+        If vProve.LeerDatos(Codprove) Then
             'NUEVO. Situacion proveedor
             If vProve.ProveedorBloqueado Then
                 LimpiarDatosProve
@@ -7170,7 +7205,7 @@ Dim Observaciones As String
         
             If Modo = 4 And EsDeVarios Then 'Modificar
                 'si no se ha modificado el proveedor no hacer nada
-                If CLng(Text1(4).Text) = CLng(Data1.Recordset!CodProve) Then
+                If CLng(Text1(4).Text) = CLng(Data1.Recordset!Codprove) Then
                     Set vProve = Nothing
                     Exit Sub
                 End If
@@ -7502,12 +7537,12 @@ Dim MenError As String
     B = ComprobarCambioFecha
                 
     If B Then
-        If (CDate(Text1(30).Text) <> CDate(Data1.Recordset!fentrada)) Then
+        If (CDate(Text1(30).Text) <> CDate(Data1.Recordset!FEntrada)) Then
             'Actualizamos la fecha en la tabla smoval
             MenError = "UPDATE smoval SET fechamov=" & DBSet(Text1(30).Text, "F")
             MenError = MenError & " WHERE document = " & DBSet(Data1.Recordset!Numalbar, "T")
-            MenError = MenError & " AND fechamov=" & DBSet(Data1.Recordset!fentrada, "F")
-            MenError = MenError & " AND codigope=" & Data1.Recordset!CodProve
+            MenError = MenError & " AND fechamov=" & DBSet(Data1.Recordset!FEntrada, "F")
+            MenError = MenError & " AND codigope=" & Data1.Recordset!Codprove
             MenError = MenError & " AND detamovi='" & CodTipoMov & "'"
             If Not ejecutar(MenError, True) Then B = False
                 
@@ -7866,7 +7901,7 @@ Private Function SituarData() As Boolean
     'SQL = SQL & "' and " & NombreTabla & ".codprove=" & Val(Text1(4).Text)
     
     While Not Data1.Recordset.EOF
-        If Val(Data1.Recordset!CodProve) = Val(Text1(4).Text) Then
+        If Val(Data1.Recordset!Codprove) = Val(Text1(4).Text) Then
             If Data1.Recordset!Numalbar = Text1(0).Text Then
                 If Format(Data1.Recordset!FechaAlb, "dd/mm/yyyy") = Text1(1).Text Then
                     Me.lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
@@ -8034,7 +8069,13 @@ Dim Aux As String
     
     cadList = ObtenerWhereCP(True)
     cadList = Replace(cadList, NombreTabla, NomTablaLineas)
-    cadList = "Select codartic,numlotes,fechaalb from " & NomTablaLineas & cadList & " AND numlotes "
+    If IsNull(Data1.Recordset!FEntrada) Then
+        Aux = DBSet(Data1.Recordset!FechaAlb, "F")
+    Else
+        Aux = DBSet(Data1.Recordset!FEntrada, "F")
+    End If
+    cadList = Aux & " FEntrada FROM " & NomTablaLineas & cadList & " AND numlotes "
+    cadList = "Select codartic,numlotes,fechaalb, " & cadList
     If EsLinea Then
         cadList = cadList & " = " & DBSet(Data2.Recordset!numlotes, "T")
     Else
@@ -8045,25 +8086,26 @@ Dim Aux As String
     Set RN = New ADODB.Recordset
     miRsAux.Open cadList, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     cadList = ""
+    Aux = ""
     While Not miRsAux.EOF
         
         Aux = "SELECT * FROM slotes WHERE "
-        Aux = Aux & " codartic=" & DBSet(miRsAux!codArtic, "T") & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!fentrada, "F")
+        Aux = Aux & " codartic=" & DBSet(miRsAux!codArtic, "T") & " AND numlotes=" & DBSet(miRsAux!numlotes, "T") & " AND fecentra=" & DBSet(miRsAux!FEntrada, "F")
         RN.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If RN.EOF Then
-            MsgBox "Lote no encontrado: " & miRsAux!codArtic & "    " & miRsAux!numlotes & "     " & miRsAux!fentrada, vbExclamation
+            MsgBox "Lote no encontrado: " & miRsAux!codArtic & "    " & miRsAux!numlotes & "     " & miRsAux!FEntrada, vbExclamation
         Else
             If RN!vendida > 0 Then
                 cadList = cadList & "Ya vendida  -> " & miRsAux!codArtic & "    " & miRsAux!numlotes & vbCrLf
             Else
                 'Vemos si existe LOTES realacionados en ventas, aunque NO deberia pasar
-                Aux = "numlote =" & DBSet(miRsAux!numlotes, "T") & " AND fecentra = " & DBSet(miRsAux!fentrada, "F")
+                Aux = "numlote =" & DBSet(miRsAux!numlotes, "T") & " AND fecentra = " & DBSet(miRsAux!FEntrada, "F")
                 Aux = Aux & " AND codartic = " & DBSet(miRsAux!codArtic, "T") & " AND 1"
                 Aux = DevuelveDesdeBD(conAri, "count(*)", "slialblotes", Aux, "1")
                 If Val(Aux) > 0 Then
                     cadList = cadList & "Lotes asignados  -> " & miRsAux!codArtic & "    " & miRsAux!numlotes & vbCrLf
                 Else
-                    Aux = "numlote =" & DBSet(miRsAux!numlotes, "T") & " AND fecentra = " & DBSet(miRsAux!fentrada, "F")
+                    Aux = "numlote =" & DBSet(miRsAux!numlotes, "T") & " AND fecentra = " & DBSet(miRsAux!FEntrada, "F")
                     Aux = Aux & " AND codartic = " & DBSet(miRsAux!codArtic, "T") & " AND 1"
                     Aux = DevuelveDesdeBD(conAri, "count(*)", "slivenlotes", Aux, "1")
                     If Val(Aux) > 0 Then cadList = cadList & "En venta(I)  -> " & miRsAux!codArtic & "    " & miRsAux!numlotes & vbCrLf
@@ -8125,7 +8167,7 @@ Dim Sql As String
     Sql = ObtenerWhereCP(False)
         
     frmComFacturarGR.CadenaAlbaran = Sql
-    frmComFacturarGR.CodProve = Val(Text1(4).Text)
+    frmComFacturarGR.Codprove = Val(Text1(4).Text)
     frmComFacturarGR.Show vbModal
     
     Sql = ObtenerWhereCP(False)

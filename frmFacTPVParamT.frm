@@ -629,8 +629,8 @@ End Sub
 Private Sub cmdConfigImpre_Click()
     Screen.MousePointer = vbHourglass
     'Me.CommonDialog1.Flags = cdlPDPageNums
-    CommonDialog1.ShowPrinter
-    txtAux(4).Text = PonerNombreImpresora
+    'CommonDialog1.ShowPrinter
+    'txtAux(4).Text = PonerNombreImpresora
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -727,25 +727,25 @@ End Sub
 
 
 
-Private Sub CargaGrid(SQL As String)
+Private Sub CargaGrid(Sql As String)
 'Dim SQL As String
 Dim tots As String
     
     On Error GoTo ECarga
     
 '    SQL = MontaSQLCarga(enlaza)
-    If SQL <> "" Then
-        SQL = CadenaConsulta & " WHERE " & SQL
+    If Sql <> "" Then
+        Sql = CadenaConsulta & " WHERE " & Sql
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & Ordenacion
+    Sql = Sql & Ordenacion
 
 '    DataGrid1.Columns(0).Width = 700
 '    DataGrid1.Columns(1).Width = 700
     DataGrid1.ScrollBars = dbgNone
     
-    CargaGridGnral DataGrid1, Me.Data1, SQL, PrimeraVez
+    CargaGridGnral DataGrid1, Me.Data1, Sql, PrimeraVez
     
     tots = "S|txtAux(0)|T|NºTerm.|800|;S|txtAux(1)|T|Desc. terminal|1700|;S|txtAux(2)|T|Nombre PC|1600|;"
     tots = tots & "S|txtAux(3)|T|contador|1200|;N||||0|;N||||0|;N||||0|;N||||0|;"
@@ -878,16 +878,16 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Byte
-Dim b As Boolean
+Dim B As Boolean
 
         DeseleccionaGrid Me.DataGrid1
-        b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
+        B = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
 
         For jj = 0 To 7
             If jj < 4 Or jj > 5 Then
                 txtAux(jj).Height = DataGrid1.RowHeight
                 txtAux(jj).Top = alto
-                txtAux(jj).visible = b
+                txtAux(jj).visible = B
             End If
         Next jj
         
@@ -917,24 +917,24 @@ End Sub
 
 
 Private Function BotonEliminar() As Boolean
-Dim SQL As String
+Dim Sql As String
         
         On Error GoTo FinEliminar
         
         'Ciertas comprobaciones
         If Data1.Recordset.EOF Then Exit Function
         
-        SQL = "¿Seguro que desea eliminar el terminal?" & vbCrLf
-        SQL = SQL & vbCrLf & "Term.: " & Format(Data1.Recordset.Fields(0).Value, "000") & " - " & Data1.Recordset.Fields(1).Value
-        SQL = SQL & vbCrLf & "Equipo: " & Data1.Recordset.Fields(2).Value
+        Sql = "¿Seguro que desea eliminar el terminal?" & vbCrLf
+        Sql = Sql & vbCrLf & "Term.: " & Format(Data1.Recordset.Fields(0).Value, "000") & " - " & Data1.Recordset.Fields(1).Value
+        Sql = Sql & vbCrLf & "Equipo: " & Data1.Recordset.Fields(2).Value
                 
-        If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+        If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
             'Hay que eliminar
             NumRegElim = Me.Data1.Recordset.AbsolutePosition
-            SQL = "Delete from " & NombreTabla & " where numtermi=" & DBSet(Data1.Recordset!NumTermi, "N")
+            Sql = "Delete from " & NombreTabla & " where numtermi=" & DBSet(Data1.Recordset!NumTermi, "N")
             'SQL = SQL & " AND codtecni=" & Data1.Recordset!codtecni & " AND codclien=" & Data1.Recordset!CodClien
             
-            conn.Execute SQL
+            conn.Execute Sql
             CancelaADODC Me.Data1
             CargaGrid ""
             CancelaADODC Me.Data1
@@ -1040,20 +1040,20 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
     DatosOk = False
-    b = CompForm(Me, 3)
+    B = CompForm(Me, 3)
     
     
-    If b Then
+    If B Then
         If Me.chkHayVisor.Value = 1 Then
             If Me.cboPuertos.ListIndex = -1 Or Me.cboVelocidad.ListIndex = -1 Then
                 MsgBox "Debe indicar el valor del puerto/velocidad", vbExclamation
-                b = False
+                B = False
             End If
         End If
     End If
-    DatosOk = b
+    DatosOk = B
 End Function
 
 
@@ -1065,11 +1065,11 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdSalir.visible = b
-    If b Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera(B As Boolean)
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdSalir.visible = B
+    If B Then Me.lblIndicador.Caption = ""
 End Sub
 
 
@@ -1111,20 +1111,20 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
    
     Modo = Kmodo
     PonerIndicador lblIndicador, Modo
       
     '------------------------------------------------------
     'Modo insertar o modificar
-    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    B = (Kmodo >= 3) '-->Luego not b sera kmodo<3
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
     Else
         cmdCancelar.Cancel = False
     End If
-    PonerBotonCabecera Not b
+    PonerBotonCabecera Not B
        
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1 y bloquea la clave primaria
@@ -1133,15 +1133,18 @@ Dim b As Boolean
     'Bloquear los checkbox
     BloquearChecks Me, Modo
 
-    b = (Modo = 0) Or (Modo = 2)
-    Me.FrameImpresoras.Enabled = (Not b)
-    Me.FrameVisor.Enabled = (Not b)
-    Me.cboPuertos.Enabled = (Not b)
-    Me.cboVelocidad.Enabled = (Not b)
+    B = (Modo = 0) Or (Modo = 2)
+    Me.FrameImpresoras.Enabled = (Not B)
+    Me.FrameVisor.Enabled = (Not B)
+    Me.cboPuertos.Enabled = (Not B)
+    Me.cboVelocidad.Enabled = (Not B)
+    
     
     
      'Bloquear los campos de clave primaria al modificar
     BloquearTxt txtAux(0), (Modo = 4)
+    BloquearTxt txtAux(4), False
+    
     
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
@@ -1162,13 +1165,13 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
-    b = (Modo = 3) Or (Modo = 4)
-    Me.Toolbar1.Buttons(1).Enabled = Not b 'Nuevo
-    Me.mnNuevo.Enabled = Not b
+Dim B As Boolean
+    B = (Modo = 3) Or (Modo = 4)
+    Me.Toolbar1.Buttons(1).Enabled = Not B 'Nuevo
+    Me.mnNuevo.Enabled = Not B
     
-    Me.Toolbar1.Buttons(2).Enabled = Not b 'Modificar
-    Me.mnModificar.Enabled = Not b
+    Me.Toolbar1.Buttons(2).Enabled = Not B 'Modificar
+    Me.mnModificar.Enabled = Not B
 End Sub
 
 

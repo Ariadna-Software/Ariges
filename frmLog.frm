@@ -171,6 +171,7 @@ Begin VB.Form frmLog
       ItemData        =   "frmLog.frx":000C
       Left            =   2880
       List            =   "frmLog.frx":000E
+      Sorted          =   -1  'True
       Style           =   2  'Dropdown List
       TabIndex        =   1
       Tag             =   "Accion|N|N|||slog|accion||N|"

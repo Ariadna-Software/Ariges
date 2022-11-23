@@ -59,8 +59,8 @@ Dim Cta As String
     Cta = DBLet(miRsAux!ctabanc1, "T")
     miRsAux.Close
     If Cta = "" Then
-        Stop
-        
+        'S top
+        Err.Raise 513, , "ctabanc1 vacia"
     End If
     
     Sql = "select idanticipo,sproveanticipo.codprove,fechaant,sproveanticipo.codforpa fp,numdocum,importe,sprove.*"
@@ -76,7 +76,7 @@ Dim Cta As String
     Sql = Sql & miRsAux!fp & "," & DBSet(miRsAux!fechaant, "F") & "," & DBSet(miRsAux!Importe, "N") & ",'" & Cta & "',"
     
     'text1csb,text2csb,referencia,nomprove,domprove,pobprove,cpprove,proprove,nifprove,codpais
-    Sql = Sql & "'Anticipo prov: " & miRsAux!Codprove & "   Id: " & Format(idAnticipo, "0000") & "'," & DBSet("Creado por " & vUsu.Login, "T")
+    Sql = Sql & "'Anticipo prov: " & miRsAux!CodProve & "   Id: " & Format(idAnticipo, "0000") & "'," & DBSet("Creado por " & vUsu.Login, "T")
     Sql = Sql & ",'" & Format(idAnticipo, "000000") & "'," & DBSet(miRsAux!nomprove, "T") & "," & DBSet(miRsAux!domprove, "T")
     Sql = Sql & "," & DBSet(miRsAux!pobprove, "T") & "," & DBSet(miRsAux!codpobla, "T") & "," & DBSet(miRsAux!proprove, "T")
     Sql = Sql & "," & DBSet(miRsAux!nifProve, "T") & "," & DBSet(miRsAux!codpais, "T") & ")"

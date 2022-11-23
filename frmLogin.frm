@@ -6,38 +6,56 @@ Begin VB.Form frmLogin
    ClientHeight    =   6630
    ClientLeft      =   2835
    ClientTop       =   3480
-   ClientWidth     =   6600
+   ClientWidth     =   6990
    Icon            =   "frmLogin.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   3917.224
    ScaleMode       =   0  'User
-   ScaleWidth      =   6197.042
+   ScaleWidth      =   6563.231
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtlargo 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
-      Height          =   300
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       IMEMode         =   3  'DISABLE
-      Left            =   2520
-      TabIndex        =   6
+      Left            =   2160
+      TabIndex        =   5
       Top             =   480
-      Width           =   3945
+      Width           =   4545
    End
    Begin VB.TextBox txtUser 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
-      Height          =   300
-      Left            =   960
-      TabIndex        =   5
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   120
+      TabIndex        =   4
       Top             =   480
-      Width           =   1440
+      Width           =   1680
    End
    Begin MSComctlLib.ImageList ImageList1 
-      Left            =   5880
-      Top             =   600
+      Left            =   8760
+      Top             =   720
       _ExtentX        =   1005
       _ExtentY        =   1005
       BackColor       =   -2147483643
@@ -48,7 +66,7 @@ Begin VB.Form frmLogin
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   1
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmLogin.frx":0442
+            Picture         =   "frmLogin.frx":FC8A
             Key             =   ""
          EndProperty
       EndProperty
@@ -58,8 +76,8 @@ Begin VB.Form frmLogin
       Left            =   120
       TabIndex        =   0
       Top             =   1215
-      Width           =   6300
-      _ExtentX        =   11113
+      Width           =   6660
+      _ExtentX        =   11748
       _ExtentY        =   8308
       View            =   3
       LabelEdit       =   1
@@ -71,6 +89,15 @@ Begin VB.Form frmLogin
       BackColor       =   -2147483643
       BorderStyle     =   1
       Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       NumItems        =   2
       BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
          Object.Width           =   3006
@@ -83,85 +110,88 @@ Begin VB.Form frmLogin
    Begin VB.CommandButton cmdOK 
       Caption         =   "Aceptar"
       Default         =   -1  'True
-      Height          =   390
-      Left            =   3900
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   406
+      Left            =   4080
       TabIndex        =   1
       Top             =   6120
-      Width           =   1140
+      Width           =   1245
    End
    Begin VB.CommandButton cmdCancel 
       Cancel          =   -1  'True
       Caption         =   "Cancelar"
-      Height          =   390
-      Left            =   5220
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   406
+      Left            =   5520
       TabIndex        =   2
       Top             =   6120
-      Width           =   1140
+      Width           =   1260
    End
    Begin VB.Label lblAriges 
       Caption         =   "AriGes"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   12
+         Name            =   "Verdana"
+         Size            =   11.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00800000&
+      ForeColor       =   &H000040C0&
       Height          =   375
       Left            =   2640
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   6120
       Width           =   975
    End
    Begin VB.Label lblLabels 
       Caption         =   "Usuario:"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Tahoma"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H000040C0&
       Height          =   195
       Index           =   0
       Left            =   120
-      TabIndex        =   7
-      Top             =   480
-      Width           =   720
-   End
-   Begin VB.Label Label1 
-      Caption         =   "Seleccione una de las empresas disponibles para el usuario:"
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   255
-      Left            =   840
-      TabIndex        =   4
+      TabIndex        =   6
       Top             =   120
-      Width           =   5595
+      Width           =   720
    End
    Begin VB.Label lblLabels 
       Caption         =   "Empresas:"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Tahoma"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H000040C0&
       Height          =   195
       Index           =   2
       Left            =   120
@@ -175,13 +205,6 @@ Begin VB.Form frmLogin
       Top             =   6000
       Width           =   2280
    End
-   Begin VB.Image Image1 
-      Height          =   480
-      Left            =   120
-      Picture         =   "frmLogin.frx":0894
-      Top             =   0
-      Width           =   480
-   End
 End
 Attribute VB_Name = "frmLogin"
 Attribute VB_GlobalNameSpace = False
@@ -193,6 +216,9 @@ Option Explicit
 Dim Cad As String
 Dim ItmX As ListItem
 Dim RS As Recordset
+
+Dim PrimeraVez As Boolean
+
 
     
 Private Sub cmdCancel_Click()
@@ -239,10 +265,19 @@ End Sub
 
 
 Private Sub Form_Activate()
+
+    If PrimeraVez Then
+        If Me.lw1.ListItems.Count = 1 Then
+            Espera 0.3
+            cmdOk_Click
+        End If
+    End If
+
     Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Form_Load()
+    PrimeraVez = True
     CargaImagen
     lw1.SmallIcons = Me.ImageList1
     Me.txtUser.Text = vUsu.Login
@@ -283,7 +318,7 @@ End Sub
 Private Function DevuelveProhibidas() As String
 'Private Function DevuelvePermitidas() As String
 Dim i As Integer
-Dim SQL As String
+Dim Sql As String
 On Error GoTo EDevuelveProhibidas
     
     DevuelveProhibidas = ""
@@ -294,9 +329,9 @@ On Error GoTo EDevuelveProhibidas
 '    If vUsu.Nivel = 0 Then
 '        SQL = "Select * from usuarios.empresasariges "
 '    Else
-        SQL = "Select * from usuarios.usuarioempresasariges WHERE codusu =" & i
+        Sql = "Select * from usuarios.usuarioempresasariges WHERE codusu =" & i
 '    End If
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Cad = ""
     While Not RS.EOF
         Cad = Cad & RS!codempre & "|"
@@ -314,7 +349,7 @@ End Function
 
 Private Sub BuscaEmpresas()
 Dim Prohibidas As String
-Dim SQL As String
+Dim Sql As String
 
 
 'Cargamos las Empresas Permitidas para el usuario
@@ -325,8 +360,8 @@ Set RS = New ADODB.Recordset
 'SQL = "Select * from  usuarios.usuarioempresasariges INNER JOIN usuarios.empresasariges "
 'SQL = SQL & " ON usuarios.usuarioempresasariges.codempre=usuarios.empresasariges.codempre "
 'SQL = SQL & "WHERE codusu=" & vUsu.Codigo & " ORDER BY usuarios.usuarioempresasariges.codempre"
-SQL = "Select * from usuarios.empresasariges ORDER BY Codempre"
-RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+Sql = "Select * from usuarios.empresasariges ORDER BY Codempre"
+RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
 While Not RS.EOF
     Cad = "|" & RS!codempre & "|"

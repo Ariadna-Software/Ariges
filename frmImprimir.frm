@@ -299,11 +299,11 @@ Private ImpresoraPorDefectoAnterior As String
 
 'Private ReestableceSoloImprimir As Boolean
 Private Sub chkEMAIL_Click()
-    If chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 0
+    If chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 0
 End Sub
 
 Private Sub chkSoloImprimir_Click()
-    If Me.chkSoloImprimir.Value = 1 Then Me.chkEMAIL.Value = 0
+    If Me.chkSoloImprimir.Value = 1 Then Me.chkEmail.Value = 0
 End Sub
 
 
@@ -318,7 +318,7 @@ End Sub
 
 Private Sub cmdImprimir_Click()
  
-    If Me.chkSoloImprimir.Value = 1 And Me.chkEMAIL.Value = 1 Then
+    If Me.chkSoloImprimir.Value = 1 And Me.chkEmail.Value = 1 Then
         MsgBox "Si desea enviar por mail no debe marcar vista preliminar", vbExclamation
         Exit Sub
     End If
@@ -771,7 +771,7 @@ Dim EsPorEmail As Boolean
     OtrosParam2 = OtrosParametros
     NumParam2 = NumeroParametros
     HaPulsadoImprimir = False
-    If Opcion = 53 And Me.chkEMAIL.Value = 0 Then
+    If Opcion = 53 And Me.chkEmail.Value = 0 Then
         'Estamos en
         '   -reimpresion de facturas
         '   -facturacion
@@ -802,6 +802,9 @@ Dim EsPorEmail As Boolean
             
         End If
     End If
+    If False Then
+        
+    End If
     
     CadenaDesdeOtroForm = ""
     With frmVisReport
@@ -819,12 +822,14 @@ Dim EsPorEmail As Boolean
             .ForzarNombreImpresora = "Godex G500-1"
             .SoloImprimir = True
         End If
-        
+        If Opcion = 93 Then
+            If vParamTPV.NomImpresora <> "" Then .ForzarNombreImpresora = vParamTPV.NomImpresora
+        End If
         EsPorEmail = False
         If EnvioEMail Then
             EsPorEmail = True
         Else
-            If Me.chkEMAIL.Value = 1 Then EsPorEmail = True
+            If Me.chkEmail.Value = 1 Then EsPorEmail = True
         End If
         If EsPorEmail Then
             'EMAIL
@@ -920,7 +925,7 @@ Dim EsPorEmail As Boolean
     
     
     
-    If Me.chkEMAIL.Value = 1 Then
+    If Me.chkEmail.Value = 1 Then
         If CadenaDesdeOtroForm <> "" Then 'se exporto el informe OK (.pdf)
             
             If Me.EnvioEMail Then  'se llamo desde envio masivo
@@ -999,7 +1004,7 @@ Private Sub Form_Unload(Cancel As Integer)
     If EnvioEMail Then Exit Sub
     
 
-    If Me.chkEMAIL.Value = 1 Then Me.chkSoloImprimir.Value = 1
+    If Me.chkEmail.Value = 1 Then Me.chkSoloImprimir.Value = 1
     'If ReestableceSoloImprimir Then SoloImprimir = False
     'Dejo la marca como estaba
     If SoloImprimir Then
@@ -1063,11 +1068,12 @@ Dim NombrePDF As String
 Dim Aux As String
 Dim Lanza As String
 Dim i As Integer
+Dim UpdateSQL As String
 
     On Error GoTo ELanzaProgramaAbrirOutlook
 
     If Not PrepararCarpetasEnvioMail(True) Then Exit Sub
-
+    UpdateSQL = ""
     'Primer tema. Copiar el docum.pdf con otro nombre mas significatiov
     Select Case outTipoDocumento
     Case 1
@@ -1099,7 +1105,7 @@ Dim i As Integer
     Case 51
         Aux = "PEDP" & Me.outClaveNombreArchiv & ".pdf"
         
-        
+        UpdateSQL = "UPDATE scappr set emailenviado =1 WHERE numpedpr = " & outClaveNombreArchiv
     Case Else
         'GENERICO.  Sin especificar.
         'Con lo cual pondremos Documento
@@ -1171,6 +1177,9 @@ Dim i As Integer
     Aux = App.Path & "\" & vParamAplic.ExeEnvioMail & " " & Lanza
     Shell Aux, vbNormalFocus
     
+    If UpdateSQL <> "" Then ejecutar UpdateSQL, True
+    
+    
     Exit Sub
 ELanzaProgramaAbrirOutlook:
     MuestraError Err.Number, Err.Description
@@ -1180,7 +1189,7 @@ End Sub
 Private Function FijaDireccionEmail() As String
 Dim campoemail As String
 Dim otromail As String
-
+Dim Maiclie1_Primero As Byte   '0 NO , primero maicli2 ,   1: si       2 NO busques
 
     FijaDireccionEmail = ""
     
@@ -1195,21 +1204,30 @@ Dim otromail As String
         'LO que habia
         If outTipoDocumento < 50 Then
             
-            If outTipoDocumento = 1 Or outTipoDocumento = 2 Or outTipoDocumento = 3 Or outTipoDocumento = 7 Then
-                campoemail = "maiclie1"
-                otromail = "maiclie2"
-            Else
-                campoemail = "maiclie2"
-                otromail = "maiclie1"
-            End If
-            campoemail = DevuelveDesdeBD(conAri, campoemail, "sclien", "codclien", Me.outCodigoCliProv, "N", otromail)
-            If campoemail = "" Then campoemail = otromail
+            
+            Maiclie1_Primero = 1
             
             If outTipoDocumento = 8 Then
-                otromail = "0" & outClaveNombreArchiv
-                otromail = DevuelveDesdeBD(conAri, "mailconfir", "scaped", "numpedcl", otromail)
-                If otromail <> "" Then campoemail = campoemail & ";" & otromail & ";"
+                'Confirmacion PEDIDO
+                campoemail = DevuelveDesdeBD(conAri, "mailconfir", "scaped", "numpedcl", outClaveNombreArchiv)
+                otromail = ""
+                If campoemail <> "" Then Maiclie1_Primero = 2
             End If
+        
+            
+            If Maiclie1_Primero < 2 Then  'si es dos es que ya "han fijado " el mail
+            
+                If outTipoDocumento = 1 Or outTipoDocumento = 2 Or outTipoDocumento = 3 Or outTipoDocumento = 7 Or outTipoDocumento = 8 Then
+                    campoemail = "maiclie1"
+                    otromail = "maiclie2"
+                Else
+                    campoemail = "maiclie2"
+                    otromail = "maiclie1"
+                End If
+                campoemail = DevuelveDesdeBD(conAri, campoemail, "sclien", "codclien", Me.outCodigoCliProv, "N", otromail)
+                If campoemail = "" Then campoemail = otromail
+            End If
+            
         Else
             'Para provedores
             If outTipoDocumento = 52 Or outTipoDocumento = 53 Then

@@ -5,128 +5,327 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmComActPrecios 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Actualizar precios venta"
-   ClientHeight    =   5970
+   ClientHeight    =   6585
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   9000
+   ClientWidth     =   10605
    ClipControls    =   0   'False
    Icon            =   "frmComActPrecios.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5970
-   ScaleWidth      =   9000
+   ScaleHeight     =   6585
+   ScaleWidth      =   10605
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdActualizar 
       Caption         =   "&Actualizar"
-      Height          =   375
-      Left            =   6240
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   420
+      Left            =   7320
       TabIndex        =   3
-      Top             =   5445
-      Width           =   1035
+      Top             =   5925
+      Width           =   1320
    End
    Begin VB.Frame Frame4 
       Caption         =   "Precio Venta"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00972E0B&
-      Height          =   950
+      Height          =   1425
       Left            =   240
       TabIndex        =   16
       Top             =   960
-      Width           =   8415
+      Width           =   10095
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BackColor       =   &H00FFFFC0&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   8
+         Left            =   8280
+         Locked          =   -1  'True
+         MaxLength       =   15
+         TabIndex        =   34
+         Text            =   "PVP actual"
+         Top             =   960
+         Width           =   1485
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   7
+         Left            =   5160
+         Locked          =   -1  'True
+         MaxLength       =   15
+         TabIndex        =   33
+         Text            =   "PVP actual"
+         Top             =   960
+         Width           =   1365
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   6
+         Left            =   3480
+         Locked          =   -1  'True
+         MaxLength       =   15
+         TabIndex        =   32
+         Text            =   "PVP actual"
+         Top             =   960
+         Width           =   1365
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   5
-         Left            =   4140
+         Left            =   6900
          Locked          =   -1  'True
          TabIndex        =   0
          Text            =   "margen"
          Top             =   435
-         Width           =   765
+         Width           =   1005
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   4
-         Left            =   5160
+         Left            =   8280
          MaxLength       =   15
          TabIndex        =   1
          Text            =   "PVP nuevo"
          Top             =   435
-         Width           =   1250
+         Width           =   1485
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   2520
+         Left            =   5160
          MaxLength       =   15
          TabIndex        =   18
          Text            =   "PVP actual"
          Top             =   435
-         Width           =   1250
+         Width           =   1365
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   960
+         Left            =   3480
          MaxLength       =   15
          TabIndex        =   17
          Text            =   "PVP actual"
          Top             =   435
-         Width           =   1250
+         Width           =   1365
+      End
+      Begin VB.Line Line1 
+         X1              =   3480
+         X2              =   9840
+         Y1              =   840
+         Y2              =   840
+      End
+      Begin VB.Label Label1 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Con IVA"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   6
+         Left            =   2040
+         TabIndex        =   35
+         Top             =   960
+         Width           =   1215
       End
       Begin VB.Label Label1 
          Caption         =   "PVP nuevo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   2
-         Left            =   5160
+         Left            =   8400
          TabIndex        =   22
-         Top             =   240
-         Width           =   855
+         Top             =   180
+         Width           =   1335
       End
       Begin VB.Label Label1 
          Caption         =   "Margen %"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   1
-         Left            =   4140
+         Left            =   6900
          TabIndex        =   21
-         Top             =   240
-         Width           =   855
+         Top             =   180
+         Width           =   1095
       End
       Begin VB.Label Label1 
          Caption         =   "PVP actual"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   0
-         Left            =   2520
+         Left            =   5280
          TabIndex        =   20
-         Top             =   240
-         Width           =   855
+         Top             =   180
+         Width           =   1215
       End
       Begin VB.Label Label1 
          Caption         =   "Precio compra"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   5
-         Left            =   960
+         Left            =   3480
          TabIndex        =   19
-         Top             =   240
+         Top             =   180
          Width           =   1335
       End
    End
    Begin VB.Frame Frame3 
       Caption         =   "Tarifas de Precios"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00972E0B&
-      Height          =   3255
+      Height          =   3135
       Left            =   240
       TabIndex        =   13
-      Top             =   2000
-      Width           =   8415
+      Top             =   2520
+      Width           =   10095
       Begin VB.TextBox txtAux2 
          Appearance      =   0  'Flat
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   1
          Left            =   2040
@@ -141,6 +340,15 @@ Begin VB.Form frmComActPrecios
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   3
          Left            =   4680
@@ -156,6 +364,15 @@ Begin VB.Form frmComActPrecios
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   2
          Left            =   3840
@@ -170,6 +387,15 @@ Begin VB.Form frmComActPrecios
       Begin VB.TextBox txtAux 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   1
          Left            =   1440
@@ -184,6 +410,15 @@ Begin VB.Form frmComActPrecios
       Begin VB.TextBox txtAux 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   0
          Left            =   240
@@ -200,6 +435,15 @@ Begin VB.Form frmComActPrecios
          Appearance      =   0  'Flat
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   2
          Left            =   5640
@@ -214,6 +458,15 @@ Begin VB.Form frmComActPrecios
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   4
          Left            =   6360
@@ -229,6 +482,15 @@ Begin VB.Form frmComActPrecios
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   5
          Left            =   7200
@@ -245,8 +507,8 @@ Begin VB.Form frmComActPrecios
          Left            =   240
          TabIndex        =   14
          Top             =   705
-         Width           =   7815
-         _ExtentX        =   13785
+         Width           =   9615
+         _ExtentX        =   16960
          _ExtentY        =   3916
          _Version        =   393216
          AllowUpdate     =   0   'False
@@ -254,7 +516,7 @@ Begin VB.Form frmComActPrecios
          BorderStyle     =   0
          ColumnHeaders   =   -1  'True
          HeadLines       =   2
-         RowHeight       =   15
+         RowHeight       =   16
          FormatLocked    =   -1  'True
          BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "MS Sans Serif"
@@ -266,8 +528,8 @@ Begin VB.Form frmComActPrecios
             Strikethrough   =   0   'False
          EndProperty
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -330,6 +592,15 @@ Begin VB.Form frmComActPrecios
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   1
          Left            =   5760
@@ -337,7 +608,7 @@ Begin VB.Form frmComActPrecios
          TabIndex        =   2
          Text            =   "Fecha cambio"
          Top             =   240
-         Width           =   1215
+         Width           =   1335
       End
       Begin VB.Image imgFecha 
          Height          =   240
@@ -350,12 +621,21 @@ Begin VB.Form frmComActPrecios
       End
       Begin VB.Label Label1 
          Caption         =   "Fecha cambio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   3
-         Left            =   4320
+         Left            =   3960
          TabIndex        =   15
          Top             =   240
-         Width           =   1095
+         Width           =   1455
       End
    End
    Begin VB.Frame Frame2 
@@ -363,36 +643,63 @@ Begin VB.Form frmComActPrecios
       Left            =   240
       TabIndex        =   9
       Top             =   120
-      Width           =   8415
+      Width           =   10095
       Begin VB.TextBox Text1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   960
          MaxLength       =   16
          TabIndex        =   11
          Text            =   "codartic codarti"
          Top             =   240
-         Width           =   1695
+         Width           =   2295
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   2760
+         Left            =   3360
          Locked          =   -1  'True
          TabIndex        =   10
          Text            =   "Text2"
          Top             =   240
-         Width           =   5085
+         Width           =   6525
       End
       Begin VB.Label Label1 
          Caption         =   "Artículo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   4
-         Left            =   240
+         Left            =   120
          TabIndex        =   12
          Top             =   285
-         Width           =   855
+         Width           =   1095
       End
    End
    Begin VB.Frame Frame1 
@@ -400,7 +707,7 @@ Begin VB.Form frmComActPrecios
       Index           =   0
       Left            =   240
       TabIndex        =   7
-      Top             =   5280
+      Top             =   5880
       Width           =   2535
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -415,7 +722,7 @@ Begin VB.Form frmComActPrecios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   240
-         Left            =   360
+         Left            =   240
          TabIndex        =   8
          Top             =   240
          Width           =   2115
@@ -423,25 +730,43 @@ Begin VB.Form frmComActPrecios
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
-      Height          =   375
-      Left            =   6240
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   420
+      Left            =   7320
       TabIndex        =   4
-      Top             =   5445
-      Width           =   1035
+      Top             =   5925
+      Width           =   1320
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
-      Height          =   375
-      Left            =   7560
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   420
+      Left            =   8880
       TabIndex        =   5
-      Top             =   5445
-      Width           =   1035
+      Top             =   5925
+      Width           =   1320
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
-      Left            =   2880
-      Top             =   5520
+      Left            =   3000
+      Top             =   6120
       Visible         =   0   'False
       Width           =   1575
       _ExtentX        =   2778
@@ -529,7 +854,7 @@ Private Modo As Byte
 
 
 Dim cart As CArticulo
-
+Dim PorcenIVA As Currency
 
 
 
@@ -568,8 +893,8 @@ End Sub
 Private Sub cmdActualizar_Click()
 'Actualizar los nuevos precios del artículo
 ' en la tabla de articulo y en la de tarifas (slista)
-Dim b As Boolean
-Dim SQL As String
+Dim B As Boolean
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim cTar As CTarifaArt
 Dim MenError As String
@@ -584,22 +909,22 @@ Dim RN As ADODB.Recordset
     
     'Actualizar el PVP del artículo
     '----------------------------------
-    b = cart.CambiaPrecioVenta(Text1(4).Text, Text1(5).Text, Text1(1).Text, MenError)
+    B = cart.CambiaPrecioVenta(Text1(4).Text, Text1(5).Text, Text1(1).Text, MenError)
     
     
     'Actualizar los precios de las TARIFAS del artículo si se ha modificado
     '-----------------------------------------------------------------------
-    If b Then
-        SQL = MontaSQLCarga(True)
+    If B Then
+        Sql = MontaSQLCarga(True)
         
         Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RS.EOF And b
+        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not RS.EOF And B
             'si los precios son distintos
             If (RS!precioac <> RS!tmpprecioac) Then
                 Set cTar = New CTarifaArt
                 If cTar.LeerDatos(Me.parCodArtic, RS!codlista) Then
-                    b = cTar.ActualizarPrecios(Text1(1).Text, RS!tmpprecioac, 0, MenError, True)
+                    B = cTar.ActualizarPrecios(Text1(1).Text, RS!tmpprecioac, 0, MenError, True)
                 End If
                                 
                 
@@ -611,13 +936,13 @@ Dim RN As ADODB.Recordset
         Set RS = Nothing
     End If
     
-    If b And vParamAplic.ActualizaPrecioEspecial Then
+    If B And vParamAplic.ActualizaPrecioEspecial Then
         ActualizarPrecioEspecialGenerico parCodArtic, ImporteFormateado(Text1(4).Text), False, ""
         
     End If
     
     
-    If b Then
+    If B Then
         conn.CommitTrans
         MsgBox "Precios actualizados correctamente.", vbInformation
     Else
@@ -734,6 +1059,7 @@ Private Sub Form_Load()
 
     'Antes de cargar el Grid actualizamos los nuevos precios de las tarifas
     'el los campos temporales de la tabla slista
+    PorcenIVA = -1
     CalcularPreciosNuevosTarifas
 
     CargaGrid True
@@ -750,9 +1076,9 @@ Dim tots As String
     CargaGridGnral DataGrid1, Me.Data1, tots, False
     
     
-    tots = "N||||0|;S|txtAux(1)|T|Tarif|540|;S|txtAux2(1)|T|Desc. Tarifa|2550|;S|txtAux(2)|T|Precio|1200|;"
+    tots = "N||||0|;S|txtAux(1)|T|Tarifa|690|;S|txtAux2(1)|T|Desc. Tarifa|3150|;S|txtAux(2)|T|Precio|1620|;"
     tots = tots & "N||||0|;" '"S|txtAux(3)|T|Precio Caja|1100|;"
-    tots = tots & "S|txtAux2(2)|T|% PVP|900|;S|txtAux(4)|T|Precio Nuevo     |1200|;"
+    tots = tots & "S|txtAux2(2)|T|% PVP|1200|;S|txtAux(4)|T|Precio Nuevo |1620|;"
     '                           Nuevo. Tipo: PVP o UPC
     tots = tots & "N||||0|;"
     arregla tots, DataGrid1, Me
@@ -778,16 +1104,16 @@ End Sub
 
 Private Sub LLamaLineas(alto As Single)
 Dim jj As Integer
-Dim b As Boolean
+Dim B As Boolean
 
     DeseleccionaGrid Me.DataGrid1
 '    b = (Modo = 3 Or Modo = 4 Or Modo = 1) 'Insertar o Modificar
-    b = (Modo = 5)
+    B = (Modo = 5)
 
     For jj = 4 To 4
         txtAux(jj).Height = DataGrid1.RowHeight
         txtAux(jj).Top = alto
-        txtAux(jj).visible = b
+        txtAux(jj).visible = B
     Next jj
 '    txtaux2(1).Height = Me.DataGrid1.RowHeight
 '    txtaux2(1).Top = alto
@@ -811,21 +1137,21 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-Dim Cerrar As Boolean
+Dim cerrar As Boolean
 
-    KEYpressGnral KeyAscii, Modo, Cerrar
-    If Cerrar Then Unload Me
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
     
     Modo = Kmodo
     PonerIndicador lblIndicador, Kmodo
     
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
 
                       
     'codartic siempre bloqueado
@@ -889,23 +1215,23 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
-    SQL = "SELECT " & NombreTabla & ".codartic, " & NombreTabla & ".codlista,starif.nomlista, precioac, if(isnull(precioa1),0,precioa1) as precioa1,"
-    SQL = SQL & "if(isnull(starif.margecom),0,starif.margecom) as margen,tmpprecioac,tmpprecioa1,  "
+    Sql = "SELECT " & NombreTabla & ".codartic, " & NombreTabla & ".codlista,starif.nomlista, precioac, if(isnull(precioa1),0,precioa1) as precioa1,"
+    Sql = Sql & "if(isnull(starif.margecom),0,starif.margecom) as margen,tmpprecioac,tmpprecioa1,  "
     'NUEVO. Trifas sobre UPC (ultimo precio compra)
     'Indicare en el grid que tipo tarifa es
-    SQL = SQL & " if(opcionINC=0,""PVP"",""UPC"") as tipo"
-    SQL = SQL & " FROM " & NombreTabla & " INNER JOIN starif ON " & NombreTabla & ".codlista = starif.codlista "
+    Sql = Sql & " if(opcionINC=0,""PVP"",""UPC"") as tipo"
+    Sql = Sql & " FROM " & NombreTabla & " INNER JOIN starif ON " & NombreTabla & ".codlista = starif.codlista "
     
     If enlaza Then
-        SQL = SQL & " WHERE " & NombreTabla & ".codartic=" & DBSet(Me.parCodArtic, "T")
-        SQL = SQL & " AND not isnull(margecom) "
+        Sql = Sql & " WHERE " & NombreTabla & ".codartic=" & DBSet(Me.parCodArtic, "T")
+        Sql = Sql & " AND not isnull(margecom) "
     Else
-        SQL = SQL & " WHERE codlista = -1"
+        Sql = Sql & " WHERE codlista = -1"
     End If
-    SQL = SQL & Ordenacion
-    MontaSQLCarga = SQL
+    Sql = Sql & Ordenacion
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -1111,16 +1437,18 @@ End Sub
 
 
 Private Function CalcularPreciosNuevosTarifas() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim cTar As CTarifaArt
+Dim Aux As Currency
+
 
     On Error GoTo ErrTarifa
     
-    SQL = MontaSQLCarga(True)
+    Sql = MontaSQLCarga(True)
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF
         Set cTar = New CTarifaArt
@@ -1133,7 +1461,42 @@ Dim cTar As CTarifaArt
     Wend
 
     RS.Close
+
+    
+    If PorcenIVA < 0 Then
+        'La primera vez calcularemos codigo iva
+        Set miRsAux = New ADODB.Recordset
+        PorcenIVA = 0
+        
+        
+        RS.Open "Select porceiva from tiposiva where codigiva =" & cart.TipoIVA, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not RS.EOF Then PorcenIVA = DBLet(RS!PorceIVA, "N")
+        RS.Close
+        
+        Label1(6).Caption = "IVA " & TransformaComasPuntos(CStr(PorcenIVA)) & " %"
+        
+        PorcenIVA = (PorcenIVA + 100) / 100
+        
+        
+    End If
     Set RS = Nothing
+    
+    Aux = ImporteFormateado(Text1(2).Text)
+    Aux = PorcenIVA * Aux
+    Text1(6).Text = Format(Aux, FormatoPrecio)
+        
+    Aux = ImporteFormateado(Text1(3).Text)
+    Aux = PorcenIVA * Aux
+    Text1(7).Text = Format(Aux, FormatoPrecio)
+    
+    Aux = ImporteFormateado(Text1(4).Text)
+    Aux = PorcenIVA * Aux
+    Text1(8).Text = Format(Aux, FormatoPrecio)
+
+    
+    
+    
+    
     
     CalcularPreciosNuevosTarifas = True
     Exit Function
@@ -1145,13 +1508,14 @@ End Function
 
 
 
+
 Private Function ModificarLinea() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ErrMod
-    SQL = "UPDATE " & NombreTabla & " SET tmpprecioac=" & DBSet(txtAux(4).Text, "N")
-    SQL = SQL & " WHERE codartic=" & DBSet(Me.parCodArtic, "T") & " AND codlista=" & Me.Data1.Recordset!codlista
-    conn.Execute SQL
+    Sql = "UPDATE " & NombreTabla & " SET tmpprecioac=" & DBSet(txtAux(4).Text, "N")
+    Sql = Sql & " WHERE codartic=" & DBSet(Me.parCodArtic, "T") & " AND codlista=" & Me.Data1.Recordset!codlista
+    conn.Execute Sql
     
     ModificarLinea = True
     Exit Function

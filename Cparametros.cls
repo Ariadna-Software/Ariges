@@ -28,6 +28,7 @@ Private mvarTelempre As String      'Teléfono empresa
 Private mvarFaxempre As String      'Fax empresa
 Private mvarWwwempre As String      'web empresa
 Private mvarMaiempre As String      'e-mail empresa
+Private mvarImagenFondo As Byte      'e-mail empresa
 
 'Si el usuario ha modificado los datos de la empresa
 'para saber si hay que actualizar los datos empresa visibles
@@ -35,10 +36,10 @@ Private mvarMaiempre As String      'e-mail empresa
 Private mvarModificado As Boolean
 
 
-Private SQL As String  'Para la sentencia
+Private Sql As String  'Para la sentencia
 Private Mens As String    'Para los mensajes
 Private RS As Recordset
-Private RC As Byte
+Private Rc As Byte
 
 
 
@@ -142,6 +143,37 @@ Public Property Get MailEmpresa() As String
      MailEmpresa = mvarMaiempre
 End Property
 
+
+Public Property Let ImagenFondo(ByVal vData As Byte)
+     mvarImagenFondo = vData
+End Property
+
+Public Property Get ImagenFondo() As Byte
+     ImagenFondo = mvarImagenFondo
+End Property
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Public Property Let Modificado(ByVal vData As Boolean)
      mvarModificado = vData
 End Property
@@ -158,9 +190,9 @@ End Property
 '****   LEER  ***
 Public Function Leer() As Byte
     On Error GoTo Err3
-    SQL = "SELECT * FROM sparam "
+    Sql = "SELECT * FROM sparam "
     Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockOptimistic
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic
 
     If RS.EOF Then
         Leer = 1
@@ -179,6 +211,7 @@ Public Function Leer() As Byte
         mvarFaxempre = DBLet(RS!faxempre, "T")
         mvarWwwempre = DBLet(RS!wwwempre, "T")
         mvarMaiempre = DBLet(RS!maiempre, "T")
+        mvarImagenFondo = DBLet(RS!ImagenFondo, "N")
         mvarModificado = False
         Leer = 0
     End If
@@ -204,20 +237,21 @@ Public Function Modificar() As Byte
 
     mvarModificado = True
 
-    SQL = "UPDATE sparam SET "
-    SQL = SQL & " nomempre = " & DBSet(mvarNomempre, "T")
-    SQL = SQL & ", domempre = " & DBSet(mvarDomempre, "T")
-    SQL = SQL & ", codpobla = '" & mvarCodpobla
-    SQL = SQL & "', pobempre = " & DBSet(mvarPobempre, "T")
-    SQL = SQL & ", proempre = " & DBSet(mvarProempre, "T")
-    SQL = SQL & ", cifempre = '" & mvarCifempre
-    SQL = SQL & "', telempre = '" & mvarTelempre
-    SQL = SQL & "', faxempre = '" & mvarFaxempre
-    SQL = SQL & "', wwwempre = " & DBSet(mvarWwwempre, "T")
-    SQL = SQL & ", maiempre = " & DBSet(mvarMaiempre, "T")
-    SQL = SQL & " WHERE codigo =1" & ";"
+    Sql = "UPDATE sparam SET "
+    Sql = Sql & " nomempre = " & DBSet(mvarNomempre, "T")
+    Sql = Sql & ", domempre = " & DBSet(mvarDomempre, "T")
+    Sql = Sql & ", codpobla = '" & mvarCodpobla
+    Sql = Sql & "', pobempre = " & DBSet(mvarPobempre, "T")
+    Sql = Sql & ", proempre = " & DBSet(mvarProempre, "T")
+    Sql = Sql & ", cifempre = '" & mvarCifempre
+    Sql = Sql & "', telempre = '" & mvarTelempre
+    Sql = Sql & "', faxempre = '" & mvarFaxempre
+    Sql = Sql & "', wwwempre = " & DBSet(mvarWwwempre, "T")
+    Sql = Sql & ", maiempre = " & DBSet(mvarMaiempre, "T")
+    Sql = Sql & ", imagenfondo = " & DBSet(mvarImagenFondo, "N")
+    Sql = Sql & " WHERE codigo =1" & ";"
 
-    Conn.Execute SQL
+    conn.Execute Sql
 
     Exit Function
 

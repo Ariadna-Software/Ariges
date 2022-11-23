@@ -300,21 +300,21 @@ Public Function LeerDatos(vCodartic As String) As Boolean
 'Lee de la BD: Ariges, Tabla: sartic
 'OUT: True si lee los datos correctamente
 Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ELeer
     LeerDatos = False
     
-    SQL = "SELECT codartic,nomartic,codfamia,codstatu,ctrstock,preciove,unicajas,codigiva,artvario,conjunto,textoven,textocom,codcateg,preciomp,preciost,preciouc,margecom,codprove,preciominvta "
+    Sql = "SELECT codartic,nomartic,codfamia,codstatu,ctrstock,preciove,unicajas,codigiva,artvario,conjunto,textoven,textocom,codcateg,preciomp,preciost,preciouc,margecom,codprove,preciominvta "
     
-    If vParamAplic.TieneComponentes_y_Produccion Then SQL = SQL & ", EsProduccion"
+    If vParamAplic.TieneComponentes_y_Produccion Then Sql = Sql & ", EsProduccion"
     
     
-    SQL = SQL & " FROM sartic "
-    SQL = SQL & " WHERE codartic=" & DBSet(vCodartic, "T")
+    Sql = Sql & " FROM sartic "
+    Sql = Sql & " WHERE codartic=" & DBSet(vCodartic, "T")
     
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     If RS.EOF Then
         LeerDatos = False
@@ -364,10 +364,10 @@ Dim SQL As String
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Datos Artículo" & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
+    Sql = "Se ha producido un error. " & "Datos Artículo" & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
     Set RS = Nothing
     LeerDatos = False
 End Function
@@ -435,14 +435,14 @@ End Function
 Public Function ExistenciaTotalAlmacenes() As Currency
 '-- devuelve la cantidad de stock total en todos los almacenes del articulo
 Dim rst As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo EExisTotal
     
     If Codigo <> "" Then
-        SQL = "SELECT SUM(canstock) FROM salmac where codartic=" & DBSet(Codigo, "T")
+        Sql = "SELECT SUM(canstock) FROM salmac where codartic=" & DBSet(Codigo, "T")
         Set rst = New ADODB.Recordset
-        rst.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        rst.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not rst.EOF Then
             ExistenciaTotalAlmacenes = rst.Fields(0).Value
         End If
@@ -507,31 +507,31 @@ End Sub
 
 Public Function ActualizarUltFechaCompra(vFecha As String, vPrecio As String) As Boolean
 'Modificar fecha ult.compra y precio ult.compra en la tabla sartic
-Dim SQL As String
+Dim Sql As String
 Dim actualiza As Boolean
 
     On Error GoTo EActFecha
 
     'Obtenemos la ult. fecha de compra que tiene el articulo
-    SQL = DevuelveDesdeBDNew(conAri, "sartic", "ultfecco", "codartic", Codigo, "T")
+    Sql = DevuelveDesdeBDNew(conAri, "sartic", "ultfecco", "codartic", Codigo, "T")
     
     actualiza = False
     
-    If SQL = "" Then
+    If Sql = "" Then
         'No tiene fecha ult. compra
         actualiza = True
-    ElseIf CDate(vFecha) >= CDate(SQL) Then
+    ElseIf CDate(vFecha) >= CDate(Sql) Then
         'fecha de compra posterior
         actualiza = True
     End If
     
     If actualiza Then
-        SQL = "UPDATE sartic SET ultfecco=" & DBSet(vFecha, "F")
+        Sql = "UPDATE sartic SET ultfecco=" & DBSet(vFecha, "F")
         'actualizar el ult. precio de compra si el nuevo valor no es 0
-        If CCur(vPrecio) > 0 Then SQL = SQL & ",preciouc=" & DBSet(vPrecio, "N")
-        SQL = SQL & " WHERE codartic=" & DBSet(Codigo, "T", "N")
+        If CCur(vPrecio) > 0 Then Sql = Sql & ",preciouc=" & DBSet(vPrecio, "N")
+        Sql = Sql & " WHERE codartic=" & DBSet(Codigo, "T", "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
 EActFecha:
@@ -550,7 +550,7 @@ Public Function ActualizarPrecioMedPond(vCantidad As Currency, vPrecio As Curren
 '(IN) vCantidad=cantidad comprada o modificada
 '(IN) vPrecio= precio de compra
 '(IN) vCantAnt= cantidad anterior a la modificacion
-Dim SQL As String
+Dim Sql As String
 Dim actualiza As Boolean
 Dim existencia As Currency
 Dim Importe As Currency
@@ -561,8 +561,8 @@ Dim Importe As Currency
     If PrecioMedPon = 0 Then
         'Obtenemos el precio medio ponderado que tiene el articulo
         'leemos de la tabla por si no se leyeron todos los campos de la sartic
-        SQL = DevuelveDesdeBDNew(conAri, "sartic", "preciomp", "codartic", Codigo, "T")
-        If SQL <> "" Then PrecioMedPon = CCur(SQL)
+        Sql = DevuelveDesdeBDNew(conAri, "sartic", "preciomp", "codartic", Codigo, "T")
+        If Sql <> "" Then PrecioMedPon = CCur(Sql)
     End If
     
     actualiza = False
@@ -604,10 +604,10 @@ Dim Importe As Currency
 
     
     If actualiza Then
-        SQL = "UPDATE sartic SET preciomp=" & DBSet(PrecioMedPon, "N")
-        SQL = SQL & " WHERE codartic=" & DBSet(Codigo, "T", "N")
+        Sql = "UPDATE sartic SET preciomp=" & DBSet(PrecioMedPon, "N")
+        Sql = Sql & " WHERE codartic=" & DBSet(Codigo, "T", "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     ActualizarPrecioMedPond = True
@@ -629,7 +629,7 @@ End Function
 Public Function ReestablecerUltFechaCompra(vAlmac As String) As Boolean
 'Modificar fecha ult.compra y precio ult.compra en la tabla sartic
 'con los valores del ultimo movimiento que encontremos en la smoval
-Dim SQL As String
+Dim Sql As String
 Dim cadSel As String
 Dim RS As ADODB.Recordset
 
@@ -638,17 +638,17 @@ Dim RS As ADODB.Recordset
     'Obtenemos el ultimo movimiento de albaran de compra que tiene el articulo
     cadSel = " detamovi='ALC' and codartic=" & DBSet(Codigo, "T") & " AND codalmac=" & vAlmac & " AND and tipomovi=1 "
     
-    SQL = "select * from smoval WHERE " & cadSel
-    SQL = SQL & " and horamovi =(select max(horamovi) from smoval where " & cadSel & ")"
+    Sql = "select * from smoval WHERE " & cadSel
+    Sql = Sql & " and horamovi =(select max(horamovi) from smoval where " & cadSel & ")"
 
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RS.EOF Then
         'actualizamos la sartic con esos valores
-        SQL = "UPDATE sartic SET ultfecco=" & DBSet(RS!FechaMov, "F")
-        SQL = SQL & ", preciouc=" & DBSet(RS!impormov, "N")
-        SQL = SQL & " WHERE codartic=" & DBSet(Codigo, "T")
-        conn.Execute SQL
+        Sql = "UPDATE sartic SET ultfecco=" & DBSet(RS!FechaMov, "F")
+        Sql = Sql & ", preciouc=" & DBSet(RS!impormov, "N")
+        Sql = Sql & " WHERE codartic=" & DBSet(Codigo, "T")
+        conn.Execute Sql
     End If
     RS.Close
     Set RS = Nothing
@@ -672,7 +672,7 @@ Public Function ReestablecerPrecioMedPon(vCantidad As Currency, vPrecio As Curre
 '       (stock_actual - cantidad)
 
 Dim existencia As Currency 'existencia de stock en almacenes
-Dim SQL As String
+Dim Sql As String
 Dim Importe As Currency
 
     On Error GoTo EResPMP
@@ -682,8 +682,8 @@ Dim Importe As Currency
     If PrecioMedPon = 0 Then
         'Obtenemos el precio medio ponderado que tiene el articulo
         'leemos de la tabla por si no se leyeron todos los campos de la sartic
-        SQL = DevuelveDesdeBDNew(conAri, "sartic", "preciomp", "codartic", Codigo, "T")
-        If SQL <> "" Then PrecioMedPon = CCur(SQL)
+        Sql = DevuelveDesdeBDNew(conAri, "sartic", "preciomp", "codartic", Codigo, "T")
+        If Sql <> "" Then PrecioMedPon = CCur(Sql)
     End If
     
     
@@ -701,10 +701,10 @@ Dim Importe As Currency
         PrecioMedPon = 0
     End If
     
-    SQL = "UPDATE sartic SET preciomp=" & DBSet(PrecioMedPon, "N")
-    SQL = SQL & " WHERE codartic=" & DBSet(Codigo, "T", "N")
+    Sql = "UPDATE sartic SET preciomp=" & DBSet(PrecioMedPon, "N")
+    Sql = Sql & " WHERE codartic=" & DBSet(Codigo, "T", "N")
         
-    conn.Execute SQL
+    conn.Execute Sql
     
     ReestablecerPrecioMedPon = True
     Exit Function
@@ -720,30 +720,30 @@ End Function
 Public Function ObtenerPorceIVA() As Currency
 'Devuelve el % de IVA del articulo correspondiente al codigiva
 Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EPorce
     
     If Codigo <> "" Then 'codartic
         'Obtenemos el % de IVA a aplicar
-        SQL = "SELECT porceiva FROM tiposiva WHERE codigiva=" & TipoIVA
+        Sql = "SELECT porceiva FROM tiposiva WHERE codigiva=" & TipoIVA
         Set RS = New ADODB.Recordset
-        RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        SQL = ""
-        If Not RS.EOF Then SQL = RS.Fields(0).Value
+        Sql = ""
+        If Not RS.EOF Then Sql = RS.Fields(0).Value
         
         RS.Close
         Set RS = Nothing
-        ObtenerPorceIVA = CCur(SQL)
+        ObtenerPorceIVA = CCur(Sql)
     End If
     
 EPorce:
     If Err.Number <> 0 Then
-        SQL = "Se ha producido un error. " & "Obteniendo porcentaje de IVA." & vbCrLf
-        SQL = SQL & "Número: " & Err.Number & vbCrLf
-        SQL = SQL & "Descripción: " & Err.Description
-        MsgBox SQL, vbExclamation
+        Sql = "Se ha producido un error. " & "Obteniendo porcentaje de IVA." & vbCrLf
+        Sql = Sql & "Número: " & Err.Number & vbCrLf
+        Sql = Sql & "Descripción: " & Err.Description
+        MsgBox Sql, vbExclamation
         Set RS = Nothing
     End If
 End Function
@@ -807,7 +807,7 @@ Public Function ObtenerPrecioSinIVA(Optional newPrecio As String) As Currency
 'si newPrecio tiene valor le quitamos el IVA a ese precio ya que habremos
 'introducido el precio del articulo manualmente
 'si no le pasamos newPrecio será al precio_venta del articulo
-Dim SQL As String
+Dim Sql As String
 Dim Porce As Currency ' % de IVA
 Dim PreuSinIVA As Currency
 
@@ -835,22 +835,14 @@ Dim PreuSinIVA As Currency
         ObtenerPrecioSinIVA = PreuSinIVA
     End If
 
-'    curImporte = curImporte / (1 + curPorce) 'importe sin iva
-'    curCuota = Round((curPorce * curImporte), 2)
-'    curImporte = Round(curImporte, 2)
-'
-'    'valores que devuelve: Importe sin iva, cuota de iva
-'    ImporteSinIVA = Format(curImporte, FormatoImporte)
-'    sCuota = Format(curCuota, FormatoImporte)
-'
     Exit Function
     
 EPrecio:
     If Err.Number <> 0 Then
-        SQL = "Se ha producido un error. " & "Calculando precio sin IVA." & vbCrLf
-        SQL = SQL & "Número: " & Err.Number & vbCrLf
-        SQL = SQL & "Descripción: " & Err.Description
-        MsgBox SQL, vbExclamation
+        Sql = "Se ha producido un error. " & "Calculando precio sin IVA." & vbCrLf
+        Sql = Sql & "Número: " & Err.Number & vbCrLf
+        Sql = Sql & "Descripción: " & Err.Description
+        MsgBox Sql, vbExclamation
     End If
 End Function
 
@@ -858,7 +850,7 @@ End Function
 'Nuevo###
 'Cambiado por David 14 Mayo 2008
 ' Si tiene descuentos linea, debe calcular el importe con respecto a esos descuentos
-Public Function ObtPrecioParaCliente2(codCli As String, canti As String, FecVen As String, des1 As String, des2 As String) As String
+Public Function ObtPrecioParaCliente2(codCli As String, canti As String, FecVen As String, des1 As String, des2 As String, OrigP As String) As String
 'Obtiene el precio que se le va a aplicar a un cliente
 'en la venta de un determinado articulo
 'Habrá clientes con promociones, precios especiales, etc.
@@ -873,7 +865,7 @@ Dim cPrecioF As CPreciosFact
 Dim NumCajas As Integer
 Dim RestoUnid As Integer
 Dim PorCaja As Boolean
-Dim OrigP As String
+
 Dim Precio As String
 Dim cadMen As String
 Dim Impo As Currency
@@ -947,12 +939,12 @@ End Function
 
 Public Function TieneNumLote() As Boolean
 'si el articulo pertenece a una categoria que tiene control de numero de lote
-Dim cad As String
+Dim Cad As String
 
     If categoria <> "" Then
         'ver si la categoria a la q pertenece lleva control de lotes
-        cad = DevuelveDesdeBDNew(conAri, "scateg", "ctrlotes", "codcateg", categoria, "T")
-        TieneNumLote = (cad = "1")
+        Cad = DevuelveDesdeBDNew(conAri, "scateg", "ctrlotes", "codcateg", categoria, "T")
+        TieneNumLote = (Cad = "1")
     Else
         'el articulo no pertenece a una categoria
         TieneNumLote = False
@@ -986,22 +978,22 @@ Public Function CambiaPrecioVenta(newPrecio As Currency, newMargen As Currency, 
 'actualiza el precio de venta del articulo (PVP) y la fecha en que se realiza la modificacion
 'actualiza el campo sartic.preciove
 'actualiza el campo sartic.ultfecpvp
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ErrPrecio
 
     CambiaPrecioVenta = False
     If Codigo <> "" Then
-        SQL = "UPDATE sartic SET preciove=" & DBSet(newPrecio, "N")
-        SQL = SQL & ", margecom=" & DBSet(newMargen, "N")
+        Sql = "UPDATE sartic SET preciove=" & DBSet(newPrecio, "N")
+        Sql = Sql & ", margecom=" & DBSet(newMargen, "N")
         
         '## LAURA 23/06/2008
         '   actualizar la fecha de ultima modificacion PVP
-        SQL = SQL & ", ultfecpvp=" & DBSet(fecCambio, "F")
+        Sql = Sql & ", ultfecpvp=" & DBSet(fecCambio, "F")
         '##
         
-        SQL = SQL & " WHERE codartic=" & DBSet(Codigo, "T")
-        conn.Execute SQL
+        Sql = Sql & " WHERE codartic=" & DBSet(Codigo, "T")
+        conn.Execute Sql
         CambiaPrecioVenta = True
     Else
         cadError = cadError & "Falta código del artículo para actualizar precio."
@@ -1074,7 +1066,7 @@ Public Sub FijarprecioMinimo_(FechaCalculo As Date, codClien As Long)
 Dim RS As ADODB.Recordset
 Dim Precio As Currency
 Dim Porcen As Currency
-Dim SQL As String
+Dim Sql As String
 Dim LlevaDescuentoEspecial As Boolean
 Dim EstaprMinimoEnlaFicha As Boolean
 Dim DtoAdicional As Currency
@@ -1091,8 +1083,8 @@ Dim Porcen2 As Currency
     'Siempre recalcula
     'EstaprMinimoEnlaFicha = False
         
-    SQL = "select precioac,coalesce(fechanue,'2100-01-01') FE,precionu from slista WHERE codlista=1 AND codartic=" & DBSet(mCodArtic, "T")
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select precioac,coalesce(fechanue,'2100-01-01') FE,precionu from slista WHERE codlista=1 AND codartic=" & DBSet(mCodArtic, "T")
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Precio = -1
     If Not RS.EOF Then
         If FechaCalculo > CDate(RS!FE) Then
@@ -1107,8 +1099,8 @@ Dim Porcen2 As Currency
     
     
     DtoAdicional = 0
-    SQL = "select  dtopmv from sfamia where codfamia=" & mCodFamia
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select  dtopmv from sfamia where codfamia=" & mCodFamia
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not RS.EOF Then DtoAdicional = DBLet(RS!Dtopmv, "N")
     RS.Close
     
@@ -1119,8 +1111,8 @@ Dim Porcen2 As Currency
     'DTO ESPECIAL
     LlevaDescuentoEspecial = False
     If Val(codClien) > 0 Then
-        SQL = "select dtoline1+dtoline2  from sdtofm where codclien=" & codClien & " and codfamia=" & mCodFamia & " and dtoesp=1"
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = "select dtoline1+dtoline2  from sdtofm where codclien=" & codClien & " and codfamia=" & mCodFamia & " and dtoesp=1"
+        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
             If Not IsNull(RS.Fields(0)) Then
                 Porcen = 100 - (RS.Fields(0) + DtoAdicional)
@@ -1147,8 +1139,8 @@ Dim Porcen2 As Currency
         Porcen1 = 0
         Porcen2 = 0
             
-        SQL = "select dtoline1,dtoline2 from sfamiadtos,sfamiatipodto where sfamiadtos.clasifica=sfamiatipodto.clasifica and codfamia=" & mCodFamia & " ORDER BY 1 desc"
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = "select dtoline1,dtoline2 from sfamiadtos,sfamiatipodto where sfamiadtos.clasifica=sfamiatipodto.clasifica and codfamia=" & mCodFamia & " ORDER BY 1 desc"
+        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
             If Not IsNull(RS.Fields(0)) Then Porcen1 = RS.Fields(0)
             If Not IsNull(RS.Fields(1)) Then Porcen2 = RS.Fields(1)
@@ -1174,10 +1166,10 @@ Dim Porcen2 As Currency
         RS.Close
         
 
-        If Porcen1 = 0 And Porcen2 = 0 And DtoAdicional = 0 Then SQL = ""
+        If Porcen1 = 0 And Porcen2 = 0 And DtoAdicional = 0 Then Sql = ""
 
         
-        If SQL <> "" Then
+        If Sql <> "" Then
                 ''''                'Aditivos
                 If vParamAplic.TipoDtos = 0 Then
                     'Aditivos

@@ -2589,8 +2589,9 @@ Dim Aux As String
                 If txtAux(3).Text = "" Then
                     Aux = "Debe indicar el lote para el traspaso de fitosantiarios"
                 Else
-                    Aux = "numlotes=" & DBSet(txtAux(3).Text, "T") & " AND codartic"
-                    Aux = DevuelveDesdeBD(conAri, "canentra - vendida ", "slotes", Aux, txtAux(0).Text)
+                    Aux = "numlotes=" & DBSet(txtAux(3).Text, "T") & " AND codartic =" & DBSet(txtAux(0).Text, "T") & " AND 1"
+                    
+                    Aux = DevuelveDesdeBD(conAri, "canentra - vendida ", "slotes", Aux, "1 ORDER BY (canentra - vendida)>0 desc ,fecentra")
                     If Aux = "" Then
                         Aux = "NO existe el lote " & txtAux(3).Text & " para el articulo: " & txtAux(2).Text
                     Else

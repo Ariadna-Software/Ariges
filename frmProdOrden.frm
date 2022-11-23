@@ -2955,13 +2955,16 @@ End Function
 Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Pedido: sliped
 Dim Sql As String
-
+Dim ACtualizaLineas As Boolean
     On Error GoTo EModificarLinea
 
     ModificarLinea = False
     Sql = ""
     
     If DatosOkLinea() Then
+    
+        ACtualizaLineas = False
+        If Val(Data2.Recordset!codAlmac) <> Val(Text1(0).Text) Then ACtualizaLineas = True
         'Creamos la sentencia SQL
         Sql = "UPDATE sliordpr set codalmac=" & txtAux(0).Text & " , codartic =" & DBSet(txtAux(1).Text, "T")
         Sql = Sql & ", numlote = " & DBSet(txtAux(3).Text, "T", "S")
@@ -3168,7 +3171,7 @@ Dim i As Byte
         Else 'Vamos a modificar
             For i = 0 To txtAux.Count - 1
                 txtAux(i).Text = DataGrid1.Columns(i).Text
-                txtAux(i).Locked = False
+                txtAux(i).Locked = i < 2
             Next i
         End If
                
@@ -3213,6 +3216,11 @@ Dim i As Byte
         Next i
         cmdAux(0).visible = visible
         cmdAux(1).visible = visible
+        
+        cmdAux(0).Enabled = ModificaLineas = 1
+        cmdAux(1).Enabled = ModificaLineas = 1
+        
+        
     End If
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -3646,56 +3654,41 @@ Dim cantidad As Single
     ' Si no que para la modificacion updatearemos con la nueva cantidad
 
     If ModificaLineas = 2 Then
-        cantidad = ImporteFormateado(txtAux(4).Text)
-        cantidad = cantidad / Data2.Recordset!cantidad
-        
-        
-        
-        Sql = Replace(ObtenerWhereCP, NombreTabla, "sliordpr2")
-        Sql = Sql & " AND codalmac = " & Data2.Recordset!codAlmac
-        Sql = Sql & " AND sliordpr2.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
-        
-        
-        Sql = "UPDATE sliordpr2 SET cantidad=round(cantidad * " & DBSet(cantidad, "N") & ",4) WHERE " & Sql
-        
+        'Borramos para que luego vuelva a insertar
+        Sql = "DELETE FROM sliordpr2 WHERE codigo =" & Data1.Recordset!Codigo & " AND codalmac = " & Data2.Recordset!codAlmac
+        Sql = Sql & " AND codartic =" & DBSet(Data2.Recordset!codArtic, "T")
         conn.Execute Sql
-        
-        'Tema decimales cunado dividimos por 3 , 7. 9 eeeeeetc
-        Sql = Replace(ObtenerWhereCP, NombreTabla, "sliordpr2")
-        Sql = Sql & " AND codalmac = " & Data2.Recordset!codAlmac
-        Sql = Sql & " AND sliordpr2.codartic = " & DBSet(Data2.Recordset!codArtic, "T")
-        Sql = Sql & " AND ((cantidad-floor(cantidad))*1000>990   or (cantidad-floor(cantidad))*1000<10 )   "
-        Sql = "UPDATE sliordpr2 SET cantidad=round(cantidad,0) WHERE " & Sql
-        conn.Execute Sql
-
+        Espera 0.5
         
         
+    End If
+    
+    'INSERTAR
+    
+    Sql = "INSERT INTO sliordpr2"
+    Sql = Sql & "( codigo, codalmac, codartic ,codarti2,cantidad,numlote,codprove ) "
+    If vParamAplic.ComponentePorcentaje Then
+        'Los componentes en materias primas entran como porcentajes. Tipo fontentas
+        Sql = Sql & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
+        Sql = Sql & DBSet(txtAux(1).Text, "T") & "," & TablaComponentes & ".codarti1,"
+        Sql = Sql & " if (mateprima=0,cantidad * " & DBSet(txtAux(4).Text, "N")
+        Sql = Sql & ", (Cantidad / 100) * " & DBSet(txtAux(4).Text, "N") & "),NULL,codprove"
+        Sql = Sql & " FROM   " & TablaComponentes & " INNER JOIN sartic ON " & TablaComponentes & ".codarti1 = sartic.codArtic"
+        Sql = Sql & " WHERE " & TablaComponentes & ".codartic = " & DBSet(txtAux(1).Text, "T")
     Else
-        'INSERTAR
+        'Por cantidad. Lo de siempre vamos
+        Sql = Sql & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
+        Sql = Sql & DBSet(txtAux(1).Text, "T") & "," & TablaComponentes & ".codarti1,cantidad * " & DBSet(txtAux(4).Text, "N") & ",NULL,codprove "
+        Sql = Sql & " FROM   " & TablaComponentes & " INNER JOIN sartic ON " & TablaComponentes & ".codarti1 = sartic.codArtic"
+        Sql = Sql & " WHERE " & TablaComponentes & ".codartic = " & DBSet(txtAux(1).Text, "T")
         
-        Sql = "INSERT INTO sliordpr2"
-        Sql = Sql & "( codigo, codalmac, codartic ,codarti2,cantidad,numlote,codprove ) "
-        If vParamAplic.ComponentePorcentaje Then
-            'Los componentes en materias primas entran como porcentajes. Tipo fontentas
-            Sql = Sql & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
-            Sql = Sql & DBSet(txtAux(1).Text, "T") & "," & TablaComponentes & ".codarti1,"
-            Sql = Sql & " if (mateprima=0,cantidad * " & DBSet(txtAux(4).Text, "N")
-            Sql = Sql & ", (Cantidad / 100) * " & DBSet(txtAux(4).Text, "N") & "),NULL,codprove"
-            Sql = Sql & " FROM   " & TablaComponentes & " INNER JOIN sartic ON " & TablaComponentes & ".codarti1 = sartic.codArtic"
-            Sql = Sql & " WHERE " & TablaComponentes & ".codartic = " & DBSet(txtAux(1).Text, "T")
-        Else
-            'Por cantidad. Lo de siempre vamos
-            Sql = Sql & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
-            Sql = Sql & DBSet(txtAux(1).Text, "T") & "," & TablaComponentes & ".codarti1,cantidad * " & DBSet(txtAux(4).Text, "N") & ",NULL,codprove "
-            Sql = Sql & " FROM   " & TablaComponentes & " INNER JOIN sartic ON " & TablaComponentes & ".codarti1 = sartic.codArtic"
-            Sql = Sql & " WHERE " & TablaComponentes & ".codartic = " & DBSet(txtAux(1).Text, "T")
-            
-        End If
-        conn.Execute Sql
-        
-        
-        'INSERTAMOS EN LA TABLA DE CALIDAD de produccion
-        'CALIDAD
+    End If
+    conn.Execute Sql
+    
+    
+    'INSERTAMOS EN LA TABLA DE CALIDAD de produccion SOLO en modo=insertar
+    'CALIDAD
+    If ModificaLineas = 1 Then
         Sql = "INSERT INTO sliordprcalidad"
         Sql = Sql & "(codigo,codalmac,codartic,codigoensayo,especificaciones,resultado,conforme) "
         Sql = Sql & "select " & Val(Text1(0).Text) & ", " & Val(txtAux(0).Text) & ","
@@ -3703,8 +3696,8 @@ Dim cantidad As Single
         Sql = Sql & " FROM   sarti7 WHERE sarti7.codartic = " & DBSet(txtAux(1).Text, "T")
         conn.Execute Sql
         
-        
-    End If
+     End If
+
     
     
     

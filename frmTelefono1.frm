@@ -895,23 +895,23 @@ End Sub
 Private Sub cmdAriadna_Click()
 Dim Normales As Boolean
 Dim idBanco As Integer
-Dim SQL As String
+Dim Sql As String
 
         Normales = True
         If MsgBox("Normales", vbQuestion + vbYesNo) <> vbNo Then Normales = False
 
-        SQL = InputBox("banco", "", "1")
-        If SQL = "" Then Exit Sub
-        idBanco = Val(SQL)
+        Sql = InputBox("banco", "", "1")
+        If Sql = "" Then Exit Sub
+        idBanco = Val(Sql)
         
-        SQL = InputBox("Fichero", "", "")
-        If SQL = "" Then Exit Sub
+        Sql = InputBox("Fichero", "", "")
+        If Sql = "" Then Exit Sub
         
-        EstableceValoresFacturaTelefoniaROOT SQL
+        EstableceValoresFacturaTelefoniaROOT Sql
         
         'cboFichero(0).List(cboFichero(0).ListIndex), Label1(5), CInt(CadenaDesdeOtroForm))
         '(cboFichero(0).ListIndex), Label1(5), CInt(CadenaDesdeOtroForm))
-         GenerarFacturasTelefonia idBanco, Label1(5), Normales, False
+         GenerarFacturasTelefonia idBanco, label1(5), Normales, False
 
 End Sub
 
@@ -1054,7 +1054,7 @@ Dim NumOld As Long
 'mGen2.EliminarTodoElFichero "CI0915168016", Label1(5)
 
 
-    mGen2.EliminarTodoElFichero cboFichero(0).Text, Label1(5)
+    mGen2.EliminarTodoElFichero cboFichero(0).Text, label1(5)
     
     Set mGen2 = Nothing
     lwTF.ListItems.Clear
@@ -1114,12 +1114,12 @@ Private Sub cmdFacturar_Click()
     
     
     Screen.MousePointer = vbHourglass
-    Label1(5).Caption = "Comprobar"
-    Label1(5).Refresh
+    label1(5).Caption = "Comprobar"
+    label1(5).Refresh
 
     HacerFacturacionTelefonia
     
-    Label1(5).Caption = ""
+    label1(5).Caption = ""
     Screen.MousePointer = vbDefault
 
 
@@ -1194,8 +1194,8 @@ Dim CambiaArticuloLineasFactura As Boolean
     Set miRsAux = New ADODB.Recordset
     
     'Comprobaremos que todos los albaranes que YA estan en telefonia, tienen correctos los clientes/departame
-    Label1(5).Caption = "Comprobacion alb telefonia"
-    Label1(5).Refresh
+    label1(5).Caption = "Comprobacion alb telefonia"
+    label1(5).Refresh
     
     Cad = "Select * from scaalb where codtipom='ALT' AND factursn=1"
     miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1240,8 +1240,8 @@ Dim CambiaArticuloLineasFactura As Boolean
     End If
     
     'Veremos si se solapan las facturas. Obtenemos la fecha
-    Label1(5).Caption = "Solapar nº factura"
-    Label1(5).Refresh
+    label1(5).Caption = "Solapar nº factura"
+    label1(5).Refresh
     
     
     'Veamos series y (min) n1factura
@@ -1323,7 +1323,7 @@ Dim CambiaArticuloLineasFactura As Boolean
     
     
     Screen.MousePointer = vbDefault
-    Label1(5).Caption = ""
+    label1(5).Caption = ""
     CadenaDesdeOtroForm = ""
     frmListado3.Opcion = 36
     frmListado3.Show vbModal
@@ -1361,7 +1361,7 @@ Dim CambiaArticuloLineasFactura As Boolean
     
 
         
-     B = traspasofacturasTelefonia(cboFichero(0).List(cboFichero(0).ListIndex), Label1(5), CInt(CadenaDesdeOtroForm))
+     B = traspasofacturasTelefonia(cboFichero(0).List(cboFichero(0).ListIndex), label1(5), CInt(CadenaDesdeOtroForm))
         
         
         If CambiaArticuloLineasFactura Then
@@ -1391,8 +1391,8 @@ End Sub
 
 Private Sub ACtualizarPuntosTelefonia()
     DoEvents
-    Label1(5).Caption = "Ajuste puntos"
-    Label1(5).Refresh
+    label1(5).Caption = "Ajuste puntos"
+    label1(5).Refresh
     Set miRsAux = Nothing
     Set miRsAux = New ADODB.Recordset
     Cad = "select Telefono,BaseImponible,base_exenta from tel_cab_factura WHERE fichero= '" & cboFichero(0).List(cboFichero(0).ListIndex) & "' ORDER BY Telefono"
@@ -1422,7 +1422,7 @@ Dim B
     
     Screen.MousePointer = vbHourglass
     B = GeneraDatosImpresion
-    Label1(5).Caption = ""
+    label1(5).Caption = ""
     Screen.MousePointer = vbDefault
     If B Then
     
@@ -1752,7 +1752,6 @@ Private Sub HacerImportacion()
             resultado = mGen2.cargarBaseDatosMOVISTAR(Text1, lblInf)
             'resultado = True
         ElseIf Me.cboCompanyia2.ItemData(cboCompanyia2.ListIndex) = 2 Then
-           
             
             'Le paso el fichero fisico, el nombre estara en: FicheroOrange
             resultado = mGen2.cargarBaseDatosOrange(Text1.Text, lblInf)
@@ -1937,16 +1936,16 @@ Private Sub Form_Load()
     Case 2, 3, 4, 6
         i = 2 'cancelar(2)
         If Opcion = 3 Then
-            Label1(6).Caption = "Facturación por soporte"
+            label1(6).Caption = "Facturación por soporte"
         ElseIf Opcion = 4 Then
-            Label1(6).Caption = "Resumen por soporte"
+            label1(6).Caption = "Resumen por soporte"
             
         ElseIf Opcion = 6 Then
-            Label1(6).Caption = "Datos importados fichero"
+            label1(6).Caption = "Datos importados fichero"
             
         Else
             '2
-            Label1(6).Caption = "Estudio descuentos telefonía"
+            label1(6).Caption = "Estudio descuentos telefonía"
         End If
         
         PonerFrameVisible Me.FrameDtosTelefonia
@@ -1960,7 +1959,7 @@ Private Sub Form_Load()
     cmdSalir(i).Cancel = True
     lblInf.Caption = ""
     
-    Label1(5).Caption = ""
+    label1(5).Caption = ""
     Screen.MousePointer = vbDefault
 
 End Sub
@@ -2635,8 +2634,8 @@ Private Function GeneraDatosImpresion() As Boolean
         
     On Error GoTo eGeneraDatosImpresion
     GeneraDatosImpresion = False
-    Label1(5).Caption = "Preparando datos"
-    Label1(5).Refresh
+    label1(5).Caption = "Preparando datos"
+    label1(5).Refresh
     conn.Execute "DELETE FROM tmpinformes where  codusu =" & vUsu.Codigo
     
     CadenaDesdeOtroForm = ""
@@ -2683,8 +2682,8 @@ Private Function GeneraDatosImpresion() As Boolean
         conn.Execute Cad
     End If
     
-    Label1(5).Caption = "Calculando "
-    Label1(5).Refresh
+    label1(5).Caption = "Calculando "
+    label1(5).Refresh
     Espera 0.5
     
     Cad = "UPDATE tmpinformes SET importe4=importe1+importe2+importe3 WHERE codusu =" & vUsu.Codigo

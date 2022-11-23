@@ -42,7 +42,6 @@ Begin VB.Form frmIdentifica
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BackColor       =   &H00FFFFFF&
-      BorderStyle     =   0  'None
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   12
@@ -84,6 +83,25 @@ Begin VB.Form frmIdentifica
       Top             =   1920
       Width           =   1575
    End
+   Begin VB.Label lblVersion 
+      BackStyle       =   0  'Transparent
+      Caption         =   "vers"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   285
+      Left            =   4200
+      TabIndex        =   8
+      Top             =   2400
+      Width           =   2775
+   End
    Begin VB.Image imgBl 
       Height          =   240
       Left            =   4080
@@ -104,10 +122,10 @@ Begin VB.Form frmIdentifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00808080&
+      ForeColor       =   &H000040C0&
       Height          =   375
       Left            =   4440
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   5280
       Visible         =   0   'False
       Width           =   3375
@@ -117,18 +135,18 @@ Begin VB.Form frmIdentifica
       Caption         =   "Cargando ..."
       BeginProperty Font 
          Name            =   "Tahoma"
-         Size            =   8.25
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00765341&
+      ForeColor       =   &H000040C0&
       Height          =   285
-      Left            =   960
-      TabIndex        =   7
-      Top             =   5160
+      Left            =   360
+      TabIndex        =   6
+      Top             =   2880
       Width           =   3495
    End
    Begin VB.Label lblTiempo 
@@ -146,29 +164,9 @@ Begin VB.Form frmIdentifica
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Left            =   120
-      TabIndex        =   6
+      TabIndex        =   5
       Top             =   0
       Width           =   7335
-   End
-   Begin VB.Label Label1 
-      BackStyle       =   0  'Transparent
-      Caption         =   "Cargando ....."
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   13.5
-         Charset         =   0
-         Weight          =   700
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   375
-      Index           =   2
-      Left            =   5280
-      TabIndex        =   5
-      Top             =   5160
-      Width           =   2175
    End
    Begin VB.Label Label1 
       BackStyle       =   0  'Transparent
@@ -182,7 +180,7 @@ Begin VB.Form frmIdentifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00FFFFFF&
+      ForeColor       =   &H000040C0&
       Height          =   375
       Index           =   1
       Left            =   4320
@@ -202,7 +200,7 @@ Begin VB.Form frmIdentifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00FFFFFF&
+      ForeColor       =   &H000040C0&
       Height          =   375
       Index           =   0
       Left            =   4320
@@ -339,7 +337,9 @@ Private Sub Form_Load()
     Text1(0).Text = ""
     Text1(1).Text = ""
     lblTiempo.Caption = ""
-    lblInd.Caption = "Ver. " & App.Major & "." & App.Minor & "." & App.Revision
+    lblVersion.Caption = "Ver. " & App.Major & "." & App.Minor & "." & App.Revision
+    lblInd.Caption = "Cargando .."
+    
     PrimeraVez = True
     CargaImagen
 End Sub
@@ -363,34 +363,35 @@ End Sub
 Private Sub FijarText()
 Dim L As Long
     On Error GoTo EF
-    L = Me.Width - Text1(1).Width - 120
+    L = Me.Width - Text1(1).Width - 360
     Text1(0).Left = L
     Text1(1).Left = L
     Me.Label1(0).Left = L
     Me.Label1(1).Left = L
-    Me.Label1(2).Left = L
+
     lblMay.Left = L
     Combo1.Left = L
     Me.imgBl.Left = L - Me.imgBl.Width - 30
-    L = Label1(2).Height + 220
-    L = Me.Height - L
+    
+    'L = Label1(2).Height + 220
+    L = Me.Height - 720
     L = IIf(L <= 500, 500, L)
-    Me.Label1(2).top = L
-    Text1(1).top = L
-    imgBl.top = L
-    L = L - 320   '375 + algo
-    Label1(1).top = L
-    L = L - 350 '330+20
-    Text1(0).top = L
-    Combo1.top = L - 90
-    L = L - 380
-    Label1(0).top = L
+    
+    Text1(1).Top = L
+    imgBl.Top = L
+    L = L - 360   '375 + algo
+    Label1(1).Top = L + 60
+    L = L - 300
+    Text1(0).Top = L
+    Combo1.Top = L - 90
+    L = L - 360
+    Label1(0).Top = L
     
     
     
     
-    lblInd.top = Me.Height - lblInd.Height - 15
-    lblMay.top = lblInd.top
+    
+    lblMay.Top = Me.Height - 300
     
     
     
@@ -426,12 +427,12 @@ End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
+        
+        If Index = 1 Then
+            If Me.Text1(Index).Text = "" Then PonerFocoOBj Me.Combo1: Exit Sub
+        End If
         KeyAscii = 0
         SendKeys "{tab}"
-        If Index = 1 Then
-            
-            PonerFocoOBj Me.Combo1
-        End If
     Else
         If KeyAscii = 27 Then
             CadenaDesdeOtroForm = ""
@@ -484,10 +485,7 @@ Dim OK As Byte
         MsgBox "Usuario-Clave Incorrecto", vbExclamation
             LeeMayusculas_
             Text1(1).Text = ""
-            PonerFoco Text1(0)
-            
-            
-            
+            PonerFoco Text1(1)
             
     Else
         'OK
@@ -496,6 +494,7 @@ Dim OK As Byte
         
                                 'Con codejcok
         If vUsu.Skin >= 0 Then UsuarioCorrecto
+        
         CadenaDesdeOtroForm = "OK"
         Unload Me
     End If
@@ -504,12 +503,15 @@ End Sub
 
 
 Private Sub PonerVisible(visible As Boolean)
-    Label1(2).visible = Not visible  'Cargando
+    'Label1(2).visible = Not visible  'Cargando
+    lblInd.visible = Not visible
     Text1(0).visible = visible
     Combo1.visible = visible
     Text1(1).visible = visible
     Label1(0).visible = visible
     Label1(1).visible = visible
+    
+    
 End Sub
 
 
@@ -640,7 +642,7 @@ Dim EmpreProhibid As String
         ' antes de cerrar la conexion cojo de usuarios.empresasariconta la primera que encuentre
         ' que no este bloqueada
         Sql = "select min(codempre) from usuarios.empresasariges  "
-        Sql = Sql & " WHERE codempre>0 and not codempre in (select codempre from usuarios.usuarioempresasariges where codusu =" & vUsu.Id & ")"
+        Sql = Sql & " WHERE codempre>0 and not codempre in (select codempre from usuarios.usuarioempresasariges where codusu =" & vUsu.ID & ")"
         
         PrimeraBD = DevuelveValor(Sql)
     
@@ -695,13 +697,13 @@ Dim EmpreProhibid As String
         pLabel "Cargando principal"
 
         Load frmPpal
-        Load frmppalN
+        Load frmPpalN
 End Sub
 
 
 Private Function DevuelveProhibidasSys() As String
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open "Select * from usuarios.usuarioempresasariges WHERE codusu =" & vUsu.Id, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    miRsAux.Open "Select * from usuarios.usuarioempresasariges WHERE codusu =" & vUsu.ID, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     DevuelveProhibidasSys = ""
     While Not miRsAux.EOF
         DevuelveProhibidasSys = DevuelveProhibidasSys & miRsAux.Fields(1) & "|"
@@ -721,7 +723,7 @@ Dim B As Boolean
     While Not miRsAux.EOF
         If Not B Then
             If miRsAux!nomempre = UltEmpre_ Then
-                UltEmpre_ = miRsAux!ariges
+                UltEmpre_ = miRsAux!AriGes
                 B = True
             End If
         End If

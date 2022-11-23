@@ -25,39 +25,39 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   9
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1982
+            Picture         =   "frmPpal.frx":FC8A
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":2394
+            Picture         =   "frmPpal.frx":1069C
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":2DA6
+            Picture         =   "frmPpal.frx":110AE
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":37B8
+            Picture         =   "frmPpal.frx":11AC0
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":41CA
+            Picture         =   "frmPpal.frx":124D2
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":4BDC
+            Picture         =   "frmPpal.frx":12EE4
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":55EE
+            Picture         =   "frmPpal.frx":138F6
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6000
+            Picture         =   "frmPpal.frx":14308
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6A12
+            Picture         =   "frmPpal.frx":14D1A
             Key             =   ""
          EndProperty
       EndProperty
@@ -75,159 +75,159 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   39
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7424
+            Picture         =   "frmPpal.frx":1572C
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":84B6
+            Picture         =   "frmPpal.frx":167BE
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":9548
+            Picture         =   "frmPpal.frx":17850
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A5DA
+            Picture         =   "frmPpal.frx":188E2
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":B66C
+            Picture         =   "frmPpal.frx":19974
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":D0EE
+            Picture         =   "frmPpal.frx":1B3F6
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E180
+            Picture         =   "frmPpal.frx":1C488
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F212
+            Picture         =   "frmPpal.frx":1D51A
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":102A4
+            Picture         =   "frmPpal.frx":1E5AC
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":11336
+            Picture         =   "frmPpal.frx":1F63E
             Key             =   ""
          EndProperty
          BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":123C8
+            Picture         =   "frmPpal.frx":206D0
             Key             =   ""
          EndProperty
          BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1345A
+            Picture         =   "frmPpal.frx":21762
             Key             =   ""
          EndProperty
          BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":144EC
+            Picture         =   "frmPpal.frx":227F4
             Key             =   ""
          EndProperty
          BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1557E
+            Picture         =   "frmPpal.frx":23886
             Key             =   ""
          EndProperty
          BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":16610
+            Picture         =   "frmPpal.frx":24918
             Key             =   ""
          EndProperty
          BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":176A2
+            Picture         =   "frmPpal.frx":259AA
             Key             =   ""
          EndProperty
          BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":18734
+            Picture         =   "frmPpal.frx":26A3C
             Key             =   ""
          EndProperty
          BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":197C6
+            Picture         =   "frmPpal.frx":27ACE
             Key             =   ""
          EndProperty
          BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1A858
+            Picture         =   "frmPpal.frx":28B60
             Key             =   ""
          EndProperty
          BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":1C1EA
+            Picture         =   "frmPpal.frx":2A4F2
             Key             =   ""
          EndProperty
          BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":22A4C
+            Picture         =   "frmPpal.frx":30D54
             Key             =   ""
          EndProperty
          BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":26F4E
+            Picture         =   "frmPpal.frx":35256
             Key             =   ""
          EndProperty
          BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":27960
+            Picture         =   "frmPpal.frx":35C68
             Key             =   ""
          EndProperty
          BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":2AD52
+            Picture         =   "frmPpal.frx":3905A
             Key             =   ""
          EndProperty
          BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":315B4
+            Picture         =   "frmPpal.frx":3F8BC
             Key             =   ""
          EndProperty
          BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":37E16
+            Picture         =   "frmPpal.frx":4611E
             Key             =   ""
          EndProperty
          BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":38EA8
+            Picture         =   "frmPpal.frx":471B0
             Key             =   ""
          EndProperty
          BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":39F3A
+            Picture         =   "frmPpal.frx":48242
             Key             =   ""
          EndProperty
          BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":3AFCC
+            Picture         =   "frmPpal.frx":492D4
             Key             =   ""
          EndProperty
          BeginProperty ListImage30 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":3C05E
+            Picture         =   "frmPpal.frx":4A366
             Key             =   ""
          EndProperty
          BeginProperty ListImage31 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":3D0F0
+            Picture         =   "frmPpal.frx":4B3F8
             Key             =   ""
          EndProperty
          BeginProperty ListImage32 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":43952
+            Picture         =   "frmPpal.frx":51C5A
             Key             =   ""
          EndProperty
          BeginProperty ListImage33 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":4A1B4
+            Picture         =   "frmPpal.frx":584BC
             Key             =   ""
          EndProperty
          BeginProperty ListImage34 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":50A16
+            Picture         =   "frmPpal.frx":5ED1E
             Key             =   ""
          EndProperty
          BeginProperty ListImage35 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":51AA8
+            Picture         =   "frmPpal.frx":5FDB0
             Key             =   ""
          EndProperty
          BeginProperty ListImage36 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":5352A
+            Picture         =   "frmPpal.frx":61832
             Key             =   ""
          EndProperty
          BeginProperty ListImage37 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":54FAC
+            Picture         =   "frmPpal.frx":632B4
             Key             =   ""
          EndProperty
          BeginProperty ListImage38 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":552C6
+            Picture         =   "frmPpal.frx":635CE
             Key             =   ""
          EndProperty
          BeginProperty ListImage39 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":5BB28
+            Picture         =   "frmPpal.frx":69E30
             Key             =   ""
          EndProperty
       EndProperty
@@ -252,223 +252,223 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   55
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6238A
+            Picture         =   "frmPpal.frx":70692
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":62D9C
+            Picture         =   "frmPpal.frx":710A4
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":69042
+            Picture         =   "frmPpal.frx":7734A
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":69A54
+            Picture         =   "frmPpal.frx":77D5C
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6A466
+            Picture         =   "frmPpal.frx":7876E
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6CC18
+            Picture         =   "frmPpal.frx":7AF20
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6D4F2
+            Picture         =   "frmPpal.frx":7B7FA
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6DDCC
+            Picture         =   "frmPpal.frx":7C0D4
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6E6A6
+            Picture         =   "frmPpal.frx":7C9AE
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6EF80
+            Picture         =   "frmPpal.frx":7D288
             Key             =   ""
          EndProperty
          BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6F992
+            Picture         =   "frmPpal.frx":7DC9A
             Key             =   ""
          EndProperty
          BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6FDEC
+            Picture         =   "frmPpal.frx":7E0F4
             Key             =   ""
          EndProperty
          BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":6FEFE
+            Picture         =   "frmPpal.frx":7E206
             Key             =   ""
          EndProperty
          BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":70010
+            Picture         =   "frmPpal.frx":7E318
             Key             =   ""
          EndProperty
          BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":70122
+            Picture         =   "frmPpal.frx":7E42A
             Key             =   ""
          EndProperty
          BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7043C
+            Picture         =   "frmPpal.frx":7E744
             Key             =   ""
          EndProperty
          BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7605E
+            Picture         =   "frmPpal.frx":84366
             Key             =   ""
          EndProperty
          BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":76A70
+            Picture         =   "frmPpal.frx":84D78
             Key             =   ""
          EndProperty
          BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":77482
+            Picture         =   "frmPpal.frx":8578A
             Key             =   ""
          EndProperty
          BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":77594
+            Picture         =   "frmPpal.frx":8589C
             Key             =   ""
          EndProperty
          BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":77FA6
+            Picture         =   "frmPpal.frx":862AE
             Key             =   ""
          EndProperty
          BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":789B8
+            Picture         =   "frmPpal.frx":86CC0
             Key             =   ""
          EndProperty
          BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":793CA
+            Picture         =   "frmPpal.frx":876D2
             Key             =   ""
          EndProperty
          BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":79964
+            Picture         =   "frmPpal.frx":87C6C
             Key             =   ""
          EndProperty
          BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":79C7E
+            Picture         =   "frmPpal.frx":87F86
             Key             =   ""
          EndProperty
          BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7A0D0
+            Picture         =   "frmPpal.frx":883D8
             Key             =   ""
          EndProperty
          BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7A522
+            Picture         =   "frmPpal.frx":8882A
             Key             =   ""
          EndProperty
          BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7A974
+            Picture         =   "frmPpal.frx":88C7C
             Key             =   ""
          EndProperty
          BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7ADC6
+            Picture         =   "frmPpal.frx":890CE
             Key             =   ""
          EndProperty
          BeginProperty ListImage30 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7B218
+            Picture         =   "frmPpal.frx":89520
             Key             =   ""
          EndProperty
          BeginProperty ListImage31 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7B66A
+            Picture         =   "frmPpal.frx":89972
             Key             =   ""
          EndProperty
          BeginProperty ListImage32 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7B984
+            Picture         =   "frmPpal.frx":89C8C
             Key             =   ""
          EndProperty
          BeginProperty ListImage33 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7BADE
+            Picture         =   "frmPpal.frx":89DE6
             Key             =   ""
          EndProperty
          BeginProperty ListImage34 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7BDF8
+            Picture         =   "frmPpal.frx":8A100
             Key             =   ""
          EndProperty
          BeginProperty ListImage35 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7C112
+            Picture         =   "frmPpal.frx":8A41A
             Key             =   ""
          EndProperty
          BeginProperty ListImage36 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7C9EC
+            Picture         =   "frmPpal.frx":8ACF4
             Key             =   ""
          EndProperty
          BeginProperty ListImage37 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7D2C6
+            Picture         =   "frmPpal.frx":8B5CE
             Key             =   ""
          EndProperty
          BeginProperty ListImage38 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7D5E0
+            Picture         =   "frmPpal.frx":8B8E8
             Key             =   ""
          EndProperty
          BeginProperty ListImage39 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7D73A
+            Picture         =   "frmPpal.frx":8BA42
             Key             =   ""
          EndProperty
          BeginProperty ListImage40 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7DA54
+            Picture         =   "frmPpal.frx":8BD5C
             Key             =   ""
          EndProperty
          BeginProperty ListImage41 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7E466
+            Picture         =   "frmPpal.frx":8C76E
             Key             =   ""
          EndProperty
          BeginProperty ListImage42 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7EE78
+            Picture         =   "frmPpal.frx":8D180
             Key             =   ""
          EndProperty
          BeginProperty ListImage43 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":7F88A
+            Picture         =   "frmPpal.frx":8DB92
             Key             =   ""
          EndProperty
          BeginProperty ListImage44 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":8029C
+            Picture         =   "frmPpal.frx":8E5A4
             Key             =   ""
          EndProperty
          BeginProperty ListImage45 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":80CAE
+            Picture         =   "frmPpal.frx":8EFB6
             Key             =   ""
          EndProperty
          BeginProperty ListImage46 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":816C0
+            Picture         =   "frmPpal.frx":8F9C8
             Key             =   ""
          EndProperty
          BeginProperty ListImage47 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":820D2
+            Picture         =   "frmPpal.frx":903DA
             Key             =   ""
          EndProperty
          BeginProperty ListImage48 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":88934
+            Picture         =   "frmPpal.frx":96C3C
             Key             =   ""
          EndProperty
          BeginProperty ListImage49 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":8A3B6
+            Picture         =   "frmPpal.frx":986BE
             Key             =   ""
          EndProperty
          BeginProperty ListImage50 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":8B448
+            Picture         =   "frmPpal.frx":99750
             Key             =   ""
          EndProperty
          BeginProperty ListImage51 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":8BE5A
+            Picture         =   "frmPpal.frx":9A162
             Key             =   ""
          EndProperty
          BeginProperty ListImage52 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":9335C
+            Picture         =   "frmPpal.frx":A1664
             Key             =   ""
          EndProperty
          BeginProperty ListImage53 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":99BBE
+            Picture         =   "frmPpal.frx":A7EC6
             Key             =   ""
          EndProperty
          BeginProperty ListImage54 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":9A5D0
+            Picture         =   "frmPpal.frx":A88D8
             Key             =   ""
          EndProperty
          BeginProperty ListImage55 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":9B852
+            Picture         =   "frmPpal.frx":A9B5A
             Key             =   ""
          EndProperty
       EndProperty
@@ -484,49 +484,53 @@ Begin VB.Form frmPpal
       MaskColor       =   12632256
       _Version        =   393216
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
-         NumListImages   =   11
+         NumListImages   =   12
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":9BDEC
+            Picture         =   "frmPpal.frx":AA0F4
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":9D77E
+            Picture         =   "frmPpal.frx":ABA86
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":9F110
+            Picture         =   "frmPpal.frx":AD418
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A0AA2
+            Picture         =   "frmPpal.frx":AEDAA
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A2434
+            Picture         =   "frmPpal.frx":B073C
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A3DC6
+            Picture         =   "frmPpal.frx":B20CE
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A5758
+            Picture         =   "frmPpal.frx":B3A60
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":A70EA
+            Picture         =   "frmPpal.frx":B53F2
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":AD94C
+            Picture         =   "frmPpal.frx":BBC54
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":B313E
+            Picture         =   "frmPpal.frx":C1446
             Key             =   ""
          EndProperty
          BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":B4BC0
+            Picture         =   "frmPpal.frx":C2EC8
+            Key             =   ""
+         EndProperty
+         BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
+            Picture         =   "frmPpal.frx":C972A
             Key             =   ""
          EndProperty
       EndProperty
@@ -544,119 +548,119 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   29
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BB422
+            Picture         =   "frmPpal.frx":CFF8C
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BB874
+            Picture         =   "frmPpal.frx":D03DE
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BBCC6
+            Picture         =   "frmPpal.frx":D0830
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BC118
+            Picture         =   "frmPpal.frx":D0C82
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BC56A
+            Picture         =   "frmPpal.frx":D10D4
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BC9BC
+            Picture         =   "frmPpal.frx":D1526
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BCE0E
+            Picture         =   "frmPpal.frx":D1978
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BD260
+            Picture         =   "frmPpal.frx":D1DCA
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":BD6B2
+            Picture         =   "frmPpal.frx":D221C
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C394C
+            Picture         =   "frmPpal.frx":D84B6
             Key             =   ""
          EndProperty
          BeginProperty ListImage11 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":C435E
+            Picture         =   "frmPpal.frx":D8EC8
             Key             =   ""
          EndProperty
          BeginProperty ListImage12 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":CA5F8
+            Picture         =   "frmPpal.frx":DF162
             Key             =   ""
          EndProperty
          BeginProperty ListImage13 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":D0E5A
+            Picture         =   "frmPpal.frx":E59C4
             Key             =   ""
          EndProperty
          BeginProperty ListImage14 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":D76BC
+            Picture         =   "frmPpal.frx":EC226
             Key             =   ""
          EndProperty
          BeginProperty ListImage15 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":DDF1E
+            Picture         =   "frmPpal.frx":F2A88
             Key             =   ""
          EndProperty
          BeginProperty ListImage16 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":E4780
+            Picture         =   "frmPpal.frx":F92EA
             Key             =   ""
          EndProperty
          BeginProperty ListImage17 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":EAFE2
+            Picture         =   "frmPpal.frx":FFB4C
             Key             =   ""
          EndProperty
          BeginProperty ListImage18 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F1844
+            Picture         =   "frmPpal.frx":1063AE
             Key             =   ""
          EndProperty
          BeginProperty ListImage19 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F1C96
+            Picture         =   "frmPpal.frx":106800
             Key             =   ""
          EndProperty
          BeginProperty ListImage20 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F20E8
+            Picture         =   "frmPpal.frx":106C52
             Key             =   ""
          EndProperty
          BeginProperty ListImage21 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F253A
+            Picture         =   "frmPpal.frx":1070A4
             Key             =   ""
          EndProperty
          BeginProperty ListImage22 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F298C
+            Picture         =   "frmPpal.frx":1074F6
             Key             =   ""
          EndProperty
          BeginProperty ListImage23 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F2DDE
+            Picture         =   "frmPpal.frx":107948
             Key             =   ""
          EndProperty
          BeginProperty ListImage24 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F3230
+            Picture         =   "frmPpal.frx":107D9A
             Key             =   ""
          EndProperty
          BeginProperty ListImage25 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F8E52
+            Picture         =   "frmPpal.frx":10D9BC
             Key             =   ""
          EndProperty
          BeginProperty ListImage26 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F9CA4
+            Picture         =   "frmPpal.frx":10E80E
             Key             =   ""
          EndProperty
          BeginProperty ListImage27 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":F9FBE
+            Picture         =   "frmPpal.frx":10EB28
             Key             =   ""
          EndProperty
          BeginProperty ListImage28 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FA2D8
+            Picture         =   "frmPpal.frx":10EE42
             Key             =   ""
          EndProperty
          BeginProperty ListImage29 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FA5F2
+            Picture         =   "frmPpal.frx":10F15C
             Key             =   ""
          EndProperty
       EndProperty
@@ -728,15 +732,15 @@ Begin VB.Form frmPpal
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   3
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FA90C
+            Picture         =   "frmPpal.frx":10F476
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FB31E
+            Picture         =   "frmPpal.frx":10FE88
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "frmPpal.frx":FB3B9
+            Picture         =   "frmPpal.frx":10FF23
             Key             =   ""
          EndProperty
       EndProperty

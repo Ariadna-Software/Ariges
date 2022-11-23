@@ -653,11 +653,11 @@ Begin VB.Form frmADVTraPartes
       TabCaption(1)   =   "Trabajadores"
       TabPicture(1)   =   "frmTraPartes.frx":E0F8
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "DataGrid3"
-      Tab(1).Control(1)=   "txtAuxT(2)"
+      Tab(1).Control(0)=   "cmdTra"
+      Tab(1).Control(1)=   "txtAuxT(1)"
       Tab(1).Control(2)=   "txtAuxT(0)"
-      Tab(1).Control(3)=   "txtAuxT(1)"
-      Tab(1).Control(4)=   "cmdTra"
+      Tab(1).Control(3)=   "txtAuxT(2)"
+      Tab(1).Control(4)=   "DataGrid3"
       Tab(1).ControlCount=   5
       Begin VB.ComboBox Combo1 
          Height          =   315
@@ -2004,7 +2004,7 @@ Private Sub Check1_GotFocus(Index As Integer)
 End Sub
 
 Private Sub Check1_KeyPress(Index As Integer, KeyAscii As Integer)
-        KEYpress KeyAscii
+    KEYpress KeyAscii
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -2053,7 +2053,7 @@ Dim CambiaLitros As Boolean
                     If Data2.Recordset.EOF Then numlinea = 0
                 ElseIf Modo = 6 Then
                     
-                    If data3.Recordset.EOF Then numlinea = 0
+                    If Data3.Recordset.EOF Then numlinea = 0
                     
                 Else
                     'modo=7
@@ -2072,8 +2072,8 @@ Dim CambiaLitros As Boolean
                         If numlinea = 0 Then
                             CargaGrid True, 2
                         Else
-                            data3.Refresh
-                            CargaGridArt DataGrid1, data3     'solo caraga el suyo
+                            Data3.Refresh
+                            CargaGridArt DataGrid1, Data3     'solo caraga el suyo
                             DataGrid1.Enabled = True
                         End If
                         
@@ -2094,10 +2094,10 @@ Dim CambiaLitros As Boolean
                 If InsertarModificar() Then
                     TerminaBloquear
                     If Modo = 6 Then
-                        NumRegElim = Val(data3.Recordset!numlinea)
+                        NumRegElim = Val(Data3.Recordset!numlinea)
                         CargaTxtAuxArt False, False
-                        data3.Refresh
-                        CargaGridArt DataGrid1, data3
+                        Data3.Refresh
+                        CargaGridArt DataGrid1, Data3
                         
                     Else
                         If Modo = 7 Then
@@ -2226,7 +2226,7 @@ Dim Hay As Boolean
                 If ModificaLineas = 1 Then 'INSERTAR
                     DataGrid1.AllowAddNew = False
                     ModificaLineas = 0  'Fuerzo el cero para que carge la ampliacion
-                    If Not data3.Recordset.EOF Then data3.Recordset.MoveFirst
+                    If Not Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
                     
                 End If
                 ModificaLineas = 0
@@ -2500,10 +2500,10 @@ End Sub
 Private Sub data3_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
     txtAux(10).Text = "": txtAux(11).Text = ""
     If Modo = 2 Or Modo = 6 Then
-        If Not data3.Recordset.EOF Then
+        If Not Data3.Recordset.EOF Then
             On Error Resume Next
-            txtAux(10).Text = DBLet(data3.Recordset!nomalmac, "T")
-            txtAux(11).Text = DBLet(data3.Recordset!Ampliaci, "T")
+            txtAux(10).Text = DBLet(Data3.Recordset!nomalmac, "T")
+            txtAux(11).Text = DBLet(Data3.Recordset!Ampliaci, "T")
             Err.Clear
         End If
     End If
@@ -3815,9 +3815,9 @@ Private Sub PosicionarData3()
         'NO HAY
     
     ElseIf Modo = 6 Then
-        data3.Recordset.Find "numlinea = " & NumRegElim
+        Data3.Recordset.Find "numlinea = " & NumRegElim
     
-        If data3.Recordset.EOF Then data3.Recordset.MoveFirst
+        If Data3.Recordset.EOF Then Data3.Recordset.MoveFirst
     Else
          data4.Recordset.Find "numlinea = " & NumRegElim
     
@@ -4349,7 +4349,7 @@ Dim vWhere As String
     
     If Modo = 6 Then
         Me.SSTab1.Tab = 0
-        If data3.Recordset.EOF Then Exit Sub
+        If Data3.Recordset.EOF Then Exit Sub
         CargaTxtAuxArt True, False
         PonerFoco txtAux(4)
         DataGrid1.Enabled = False
@@ -4408,7 +4408,7 @@ Private Sub BotonAnyadirLinea()
 
     ElseIf Modo = 6 Then
         lblIndicador.Caption = "INSERTAR ART"
-        AnyadirLinea DataGrid1, data3
+        AnyadirLinea DataGrid1, Data3
         CargaTxtAuxArt True, True
         Combo1.ListIndex = 1
         txtAux(0).Text = AlmacenLin
@@ -4487,27 +4487,27 @@ Dim Sql As String
     'Es decir, si estaba insertando linea no podemos hacer otra cosa
     If ModificaLineas > 0 Then Exit Sub '1= Insertar, 2=Modificar
 
-    If data3.Recordset.EOF Then Exit Sub
+    If Data3.Recordset.EOF Then Exit Sub
 
     Me.SSTab1.Tab = 0
     
 
     Sql = "¿Seguro que desea eliminar el articulo?     "
-    Sql = Sql & vbCrLf & "Articulo:  " & data3.Recordset!NomArtic & vbCrLf
-    Sql = Sql & "Cantidad:  " & data3.Recordset!cantidad
+    Sql = Sql & vbCrLf & "Articulo:  " & Data3.Recordset!NomArtic & vbCrLf
+    Sql = Sql & "Cantidad:  " & Data3.Recordset!cantidad
     
 
 
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
-        NumRegElim = data3.Recordset.AbsolutePosition
-        Sql = " numparte = " & Text1(0).Text & " AND numlinea=" & data3.Recordset!numlinea
+        NumRegElim = Data3.Recordset.AbsolutePosition
+        Sql = " numparte = " & Text1(0).Text & " AND numlinea=" & Data3.Recordset!numlinea
         Sql = "Delete from advparteslineas WHERE " & Sql
         conn.Execute Sql
 
         ModificaLineas = 0
-        CargaGridArt DataGrid1, data3
-        SituarDataTrasEliminar data3, NumRegElim
+        CargaGridArt DataGrid1, Data3
+        SituarDataTrasEliminar Data3, NumRegElim
 
     End If
     PonerFocoBtn Me.cmdRegresar
@@ -4710,9 +4710,9 @@ Dim Sql As String
     If Cual = 0 Or Cual = 2 Then
         'Articulos
          Sql = MontaSQLCarga(enlaza, 2)
-         CargaGridGnral DataGrid1, Me.data3, Sql, True
+         CargaGridGnral DataGrid1, Me.Data3, Sql, True
 
-         CargaGridArt DataGrid1, data3
+         CargaGridArt DataGrid1, Data3
 '
         B = (Modo = 6) And (ModificaLineas = 1 Or ModificaLineas = 2)
         
@@ -4887,7 +4887,7 @@ Dim i As Byte
                 txtAux(i).Text = DataGrid1.Columns(i + 1).Text
                 BloquearTxt txtAux(i), Not (i <> 0 And i <> 2 And i <> 10 And i <> 6)
             Next i
-            If DBLet(data3.Recordset!fijo2, "T") = "" Then
+            If DBLet(Data3.Recordset!fijo2, "T") = "" Then
                 Combo1.ListIndex = 1
             Else
                 Combo1.ListIndex = 0
@@ -5427,15 +5427,15 @@ Dim DeDosis As Boolean
         Cad = Cad & " codartic= " & DBSet(txtAux(1).Text, "T")
         For i = 4 To 10
             If i = 7 Then
-                Cad = Cad & ", " & Me.data3.Recordset.Fields(i).Name & " = " & DBSet(txtAux(i - 1).Text, "T")
+                Cad = Cad & ", " & Me.Data3.Recordset.Fields(i).Name & " = " & DBSet(txtAux(i - 1).Text, "T")
             Else
-                Cad = Cad & ", " & Me.data3.Recordset.Fields(i).Name & " = " & DBSet(txtAux(i - 1).Text, "N", "S")
+                Cad = Cad & ", " & Me.Data3.Recordset.Fields(i).Name & " = " & DBSet(txtAux(i - 1).Text, "N", "S")
             End If
         Next i
         Cad = Cad & ", Ampliaci = " & DBSet(txtAux(11).Text, "T")
         Cad = Cad & ", fijo = " & Combo1.ItemData(Combo1.ListIndex)
         
-        Cad = Cad & " WHERE numparte = " & Data1.Recordset!numparte & " AND numlinea = " & data3.Recordset!numlinea
+        Cad = Cad & " WHERE numparte = " & Data1.Recordset!numparte & " AND numlinea = " & Data3.Recordset!numlinea
     End If
     
     If ejecutar(Cad, False) Then InsertarModificarArticulo = True
@@ -5669,7 +5669,7 @@ Private Sub pasarAAlbaranes()
     If Me.Check1(1).Value = 1 Then D = D & "-Ya facturado"
 
     'Si no tiene lineas de arti o de trabajadores..
-    If data3.Recordset.EOF And data4.Recordset.EOF Then D = D & "-Sin lineas a facturar" & vbCrLf
+    If Data3.Recordset.EOF And data4.Recordset.EOF Then D = D & "-Sin lineas a facturar" & vbCrLf
     
     'Debe tener trabajador de parte
     If Text1(8).Text = "" Then D = D & "- Falta trabajador  introduccion parte"
@@ -5784,6 +5784,9 @@ Dim Cad As String
 Dim CPrFact As CPreciosFact
 Dim Au As String
 Dim cantidad As Currency
+
+Dim ParaSalmac As String
+
     Cad = "select * from advtrata_lineas where codtrata=" & DBSet(Text1(3).Text, "T") & " order by numlinea"
     Set miRsAux = New ADODB.Recordset
     miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -5794,7 +5797,20 @@ Dim cantidad As Currency
         'd = "insert into `advparteslineas` (`numparte`,`numlinea`,`codalmac`,`codartic`,"
         'd = d & "`dosishab`,`cantidad`,`ampliaci`,`dtoline1`,`dtoline2`,`origpre`,`preciove`,`importel`) values ("
         
-        Cad = Cad & ", (" & Text1(0).Text & "," & NumRegElim & ",1,"
+        
+        'Combrobams que existe en codalmac
+        If AlmacenLin <> 1 Then
+            ParaSalmac = "codartic = " & DBSet(miRsAux!codArtic, "T") & " AND codalmac"
+            ParaSalmac = DevuelveDesdeBD(conAri, "codalmac", "salmac", ParaSalmac, CStr(AlmacenLin))
+            If ParaSalmac = "" Then
+                ParaSalmac = "INSERT INTO salmac(codartic ,codalmac ,ubialmac,canstock ,statusin) VALUES ("
+                ParaSalmac = ParaSalmac & DBSet(miRsAux!codArtic, "T") & "," & AlmacenLin & ",0,0,0)"
+                conn.Execute ParaSalmac
+            End If
+        End If
+        
+        
+        Cad = Cad & ", (" & Text1(0).Text & "," & NumRegElim & "," & AlmacenLin & ","
         Cad = Cad & DBSet(miRsAux!codArtic, "T") & ","
         'codartic,dosishab,cantidad,
         cantidad = ImporteFormateado(Text1(5).Text)

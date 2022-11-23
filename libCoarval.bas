@@ -354,7 +354,7 @@ On Error GoTo eProcesaFicheroClientes
             
                 End If
             Wend
-            If NF = 1 Then Stop
+            'If NF = 1 Then St op
             
             miRsAux.MoveNext
         Wend
@@ -398,7 +398,7 @@ End Function
 Private Function ProcesarLineaAsiento(linea As String) As Boolean
 Dim strArray() As String
 Dim Aux As String
-Dim cad As String
+Dim Cad As String
 Dim N As Integer
 
     On Error GoTo EProcesarLineaAsientO
@@ -422,9 +422,9 @@ Dim N As Integer
     'Numero factura  00010100023733  ---->> SERIE: 101   nº: 00023733
     
     Aux = Val(Mid(strArray(0), 4, 3))
-    cad = Val(Mid(strArray(0), 7))
-    If Val(Aux) = 0 Or Val(cad) = 0 Then Err.Raise 513, , "Error en serie-factura: " & strArray(0)
-    CadenaInsert = CadenaInsert & DBSet(Aux, "T") & "," & DBSet(cad, "N") & ","
+    Cad = Val(Mid(strArray(0), 7))
+    If Val(Aux) = 0 Or Val(Cad) = 0 Then Err.Raise 513, , "Error en serie-factura: " & strArray(0)
+    CadenaInsert = CadenaInsert & DBSet(Aux, "T") & "," & DBSet(Cad, "N") & ","
     
     N = 1
     Aux = strArray(N)
@@ -434,27 +434,27 @@ Dim N As Integer
     ' `base`,`total`
     N = 2
     Aux = strArray(N)
-    cad = strArray(N + 1)
+    Cad = strArray(N + 1)
     If Not IsNumeric(Aux) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N)
-    If Not IsNumeric(cad) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N + 1)
-    CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N") & "," & DBSet(CCur(cad), "N") & ","
+    If Not IsNumeric(Cad) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N + 1)
+    CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N") & "," & DBSet(CCur(Cad), "N") & ","
     
     'SUPER-REDUCIDO
     ',`base_sr`,`iva_sr`,`re_sr`,`total_sr`
     N = 4
     Aux = strArray(N)
-    cad = strArray(N + 1)
-    If Aux = "" Xor cad = "" Then Err.Raise 513, , "Error en iva S-R: " & strArray(N) & strArray(N + 1)
-    If cad <> "" Then
+    Cad = strArray(N + 1)
+    If Aux = "" Xor Cad = "" Then Err.Raise 513, , "Error en iva S-R: " & strArray(N) & strArray(N + 1)
+    If Cad <> "" Then
         If Not IsNumeric(Aux) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N)
-        If Not IsNumeric(cad) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N + 1)
+        If Not IsNumeric(Cad) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N + 1)
         
-        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N") & "," & DBSet(CCur(cad), "N") & ","
+        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N") & "," & DBSet(CCur(Cad), "N") & ","
         N = 6
         Aux = strArray(N)
-        cad = strArray(N + 1)
+        Cad = strArray(N + 1)
         
-        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N", "S") & "," & DBSet(CCur(cad), "N") & ","
+        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N", "S") & "," & DBSet(CCur(Cad), "N") & ","
     
     Else
         CadenaInsert = CadenaInsert & "null,null,null,null,"
@@ -465,18 +465,18 @@ Dim N As Integer
     ',`base_red`,`iva_red`,`re_red`,`total_red`,
     N = 8
     Aux = strArray(N)
-    cad = strArray(N + 1)
-    If Aux = "" Xor cad = "" Then Err.Raise 513, , "Error en iva reducido: " & strArray(N) & strArray(N + 1)
-    If cad <> "" Then
+    Cad = strArray(N + 1)
+    If Aux = "" Xor Cad = "" Then Err.Raise 513, , "Error en iva reducido: " & strArray(N) & strArray(N + 1)
+    If Cad <> "" Then
         If Not IsNumeric(Aux) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N)
-        If Not IsNumeric(cad) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N + 1)
+        If Not IsNumeric(Cad) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N + 1)
         
-        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N") & "," & DBSet(CCur(cad), "N") & ","
+        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N") & "," & DBSet(CCur(Cad), "N") & ","
         N = 10
         Aux = strArray(N)
-        cad = strArray(N + 1)
+        Cad = strArray(N + 1)
         
-        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N", "S") & "," & DBSet(CCur(cad), "N") & ","
+        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N", "S") & "," & DBSet(CCur(Cad), "N") & ","
     
     Else
         CadenaInsert = CadenaInsert & "null,null,null,null,"
@@ -487,18 +487,18 @@ Dim N As Integer
     '`base_norm`,`iva_norm`,`re_nor`,`total_nor`
     N = 12
     Aux = strArray(N)
-    cad = strArray(N + 1)
-    If Aux = "" Xor cad = "" Then Err.Raise 513, , "Error en iva normal: " & strArray(N) & strArray(N + 1)
-    If cad <> "" Then
+    Cad = strArray(N + 1)
+    If Aux = "" Xor Cad = "" Then Err.Raise 513, , "Error en iva normal: " & strArray(N) & strArray(N + 1)
+    If Cad <> "" Then
         If Not IsNumeric(Aux) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N)
-        If Not IsNumeric(cad) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N + 1)
+        If Not IsNumeric(Cad) Then Err.Raise 513, , "Error en campo numerico: " & strArray(N + 1)
         
-        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N") & "," & DBSet(CCur(cad), "N") & ","
+        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N") & "," & DBSet(CCur(Cad), "N") & ","
         N = 14
         Aux = strArray(N)
-        cad = strArray(N + 1)
+        Cad = strArray(N + 1)
         
-        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N", "S") & "," & DBSet(CCur(cad), "N") & ","
+        CadenaInsert = CadenaInsert & DBSet(CCur(Aux), "N", "S") & "," & DBSet(CCur(Cad), "N") & ","
     
     Else
         CadenaInsert = CadenaInsert & "null,null,null,null,"
@@ -507,37 +507,37 @@ Dim N As Integer
     
     ',`codclien`,`nomclien`,`domclien`,`codpobla`,`pobclien`,`proclien`,`nifclien`
     For N = 16 To 22
-        cad = Trim(strArray(N))
+        Cad = Trim(strArray(N))
         If N <= 17 Or N = 22 Then
             'CAMPO OBLIGADO
-            If cad = "" Then
+            If Cad = "" Then
                 Err.Raise 513, , "Campo en cliente obligado(Codigo-Nombre-NIF)"
             Else
-                If N = 16 Then If Not IsNumeric(cad) Then Err.Raise 513, , "Campo en codigo cliente numerico: " & strArray(N)
+                If N = 16 Then If Not IsNumeric(Cad) Then Err.Raise 513, , "Campo en codigo cliente numerico: " & strArray(N)
             End If
         End If
-        CadenaInsert = CadenaInsert & DBSet(cad, "T", "S") & ","
+        CadenaInsert = CadenaInsert & DBSet(Cad, "T", "S") & ","
     Next
     
     
     
     ',`forpa`,`codartic`,`nomartic,ampliaci`
     For N = 23 To 25
-        cad = Trim(strArray(N))
-        If cad = "" Then Err.Raise 513, , "Campo  obligado: " & RecuperaValor("Forma pago|Art|Desc.articulo|", N - 22)
-        CadenaInsert = CadenaInsert & DBSet(cad, "T", "S") & ","
+        Cad = Trim(strArray(N))
+        If Cad = "" Then Err.Raise 513, , "Campo  obligado: " & RecuperaValor("Forma pago|Art|Desc.articulo|", N - 22)
+        CadenaInsert = CadenaInsert & DBSet(Cad, "T", "S") & ","
     Next N
     
     
     ',`PorcenIVA`,`cantidad`,`precioar`,`dtoline1`,`importel`)
     For N = 26 To 30
-        cad = Trim(strArray(N))
-        If cad = "" Then
+        Cad = Trim(strArray(N))
+        If Cad = "" Then
             Err.Raise 513, , "Campo  obligado: " & RecuperaValor("porcenIVa|cantidad|Precio|dto|importe lin|", N - 26)
         Else
-            If Not IsNumeric(cad) Then Err.Raise 513, , "Campo  numerico: " & RecuperaValor("porcenIVa|cantidad|Precio|dto|importe lin|", N - 26) & cad
+            If Not IsNumeric(Cad) Then Err.Raise 513, , "Campo  numerico: " & RecuperaValor("porcenIVa|cantidad|Precio|dto|importe lin|", N - 26) & Cad
         End If
-        CadenaInsert = CadenaInsert & DBSet(CCur(cad), "N", "S")
+        CadenaInsert = CadenaInsert & DBSet(CCur(Cad), "N", "S")
         If N <> 30 Then CadenaInsert = CadenaInsert & ","
     Next N
     
@@ -545,9 +545,9 @@ Dim N As Integer
             
     If Len(CadenaInsert) > 8000 Then
         CadenaInsert = Mid(CadenaInsert, 2)
-        cad = DevuelevInsert
-        cad = cad & CadenaInsert
-        conn.Execute cad
+        Cad = DevuelevInsert
+        Cad = Cad & CadenaInsert
+        conn.Execute Cad
         CadenaInsert = ""
     End If
 

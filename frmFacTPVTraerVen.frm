@@ -1,75 +1,154 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmFacTPVTraerVen 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Ventas de otros terminales"
-   ClientHeight    =   4785
+   ClientHeight    =   6015
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   9150
+   ClientWidth     =   10740
    ClipControls    =   0   'False
    Icon            =   "frmFacTPVTraerVen.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   4785
-   ScaleWidth      =   9150
+   ScaleHeight     =   6015
+   ScaleWidth      =   10740
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Visible         =   0   'False
+   Begin VB.ComboBox cboFiltro 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   11.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   390
+      ItemData        =   "frmFacTPVTraerVen.frx":000C
+      Left            =   1560
+      List            =   "frmFacTPVTraerVen.frx":0016
+      Style           =   2  'Dropdown List
+      TabIndex        =   7
+      Top             =   5400
+      Width           =   2055
+   End
    Begin VB.CommandButton cmdVerLin 
       Caption         =   "Ver lineas"
-      Height          =   375
-      Left            =   5160
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   390
+      Left            =   6600
       TabIndex        =   5
-      Top             =   4320
+      Top             =   5400
       Width           =   1215
    End
    Begin VB.CommandButton cmdImprimir 
       Caption         =   "Imprimir"
-      Height          =   375
-      Left            =   6600
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   390
+      Left            =   7920
       TabIndex        =   4
-      Top             =   4320
+      Top             =   5400
       Width           =   1215
    End
    Begin MSComctlLib.ListView ListView1 
-      Height          =   4020
+      Height          =   5100
       Left            =   240
       TabIndex        =   3
       Top             =   120
-      Width           =   8775
-      _ExtentX        =   15478
-      _ExtentY        =   7091
+      Width           =   10335
+      _ExtentX        =   18230
+      _ExtentY        =   8996
       View            =   3
       LabelEdit       =   1
       LabelWrap       =   -1  'True
       HideSelection   =   -1  'True
-      Checkboxes      =   -1  'True
       FullRowSelect   =   -1  'True
-      GridLines       =   -1  'True
       _Version        =   393217
       ForeColor       =   -2147483640
       BackColor       =   -2147483643
       Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       NumItems        =   0
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   6720
+      Left            =   8160
       TabIndex        =   0
-      Top             =   4320
-      Width           =   1035
+      Top             =   5400
+      Width           =   915
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
-      Height          =   375
-      Left            =   7920
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   390
+      Left            =   9360
       TabIndex        =   1
-      Top             =   4320
+      Top             =   5400
       Width           =   1035
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Terminal"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   11.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   360
+      TabIndex        =   6
+      Top             =   5400
+      Width           =   1215
    End
    Begin VB.Label Label10 
       Caption         =   "Cargando datos ........."
@@ -111,21 +190,26 @@ Dim OrdenList As Integer
 Public Event CargarVenta(cadSel As String, numVen As Long)
 
 Private HaDevueltoDatos As Boolean
+Dim PrimVez As Boolean
 
+Private Sub cboFiltro_Click()
+    If PrimVez Then Exit Sub
+    CargarListView_VentasDia False
+End Sub
 
 Private Sub cmdAceptar_Click()
 Dim i As Integer
-Dim cad As String
+Dim Cad As String
 
     On Error GoTo Error1
 
     'Comprobar que solo se ha seleccionado una venta
     For i = 1 To Me.ListView1.ListItems.Count
         If Me.ListView1.ListItems(i).Checked Then
-            cad = "(numtermi=" & Me.ListView1.ListItems(i).Text & " AND numventa=" & Me.ListView1.ListItems(i).ListSubItems(1).Text
-            cad = cad & " AND fecventa=" & DBSet(Me.ListView1.ListItems(i).ListSubItems(2).Text, "F") & ")"
+            Cad = "(numtermi=" & Me.ListView1.ListItems(i).Text & " AND numventa=" & Me.ListView1.ListItems(i).ListSubItems(1).Text
+            Cad = Cad & " AND fecventa=" & DBSet(Me.ListView1.ListItems(i).ListSubItems(2).Text, "F") & ")"
             
-            RaiseEvent CargarVenta(cad, CLng(Me.ListView1.ListItems(i).ListSubItems(1).Text))
+            RaiseEvent CargarVenta(Cad, CLng(Me.ListView1.ListItems(i).ListSubItems(1).Text))
             Exit For
         End If
     Next i
@@ -159,21 +243,35 @@ End Sub
 
 Private Sub DevolverDatosAlFormulario(LaOpcionSeleccionada As Integer)
 Dim i As Integer
-Dim cad As String
+Dim Cad As String
 
     On Error GoTo Error2
-    cad = ""
+    Cad = ""
+    
+    
+    'ANTES OCT2023
     'Comprobar que solo se ha seleccionado una venta
-    For i = 1 To Me.ListView1.ListItems.Count
-        If Me.ListView1.ListItems(i).Checked Then
-                'Tipo documento
-            cad = Me.ListView1.ListItems(i).SubItems(2) & "|" & Me.ListView1.ListItems(i).Tag
-            
-            RaiseEvent CargarVenta(cad, -1 * LaOpcionSeleccionada)
-            Exit For
-        End If
-    Next i
-    If cad = "" Then
+    
+'            For i = 1 To Me.ListView1.ListItems.Count
+'                If Me.ListView1.ListItems(i).Checked Then
+'                        'Tipo documento
+'                    Cad = Me.ListView1.ListItems(i).SubItems(2) & "|" & Me.ListView1.ListItems(i).Tag
+'
+'                    RaiseEvent CargarVenta(Cad, -1 * LaOpcionSeleccionada)
+'                    Exit For
+'                End If
+'            Next i
+
+    If Me.ListView1.ListItems.Count = 0 Then Exit Sub
+    If Not Me.ListView1.SelectedItem Is Nothing Then
+                    Cad = Me.ListView1.SelectedItem.SubItems(2) & "|" & Me.ListView1.SelectedItem.Tag
+                    RaiseEvent CargarVenta(Cad, -1 * LaOpcionSeleccionada)
+    End If
+
+    
+
+
+    If Cad = "" Then
         MsgBox "Seleccione algún dato", vbExclamation
         Exit Sub
     End If
@@ -187,29 +285,29 @@ End Sub
 
 
 Private Sub Form_Activate()
+    If PrimVez Then
+        PrimVez = False
+        
+    End If
     Screen.MousePointer = vbDefault
 End Sub
 
 
 Private Sub Form_Load()
         
-    
+    PrimVez = True
     Me.cmdAceptar.visible = parNumTermi >= 0
     
     Me.cmdImprimir.visible = parNumTermi = -1
     cmdVerLin.visible = parNumTermi = -1
     
-'    PonerModo 0
-    If parNumTermi >= 0 Then
-        
-        CargarListView_VentasTPV
-        Caption = "Ventas de otros terminales"
-    Else
-        'Caption
-        Caption = "Ventas dia: " & Format(Now, "dd/mm/yyyy")
-        
-        CargarListView_VentasDia
-    End If
+
+
+    Caption = "Ventas dia: " & Format(Now, "dd/mm/yyyy")
+    Me.cboFiltro.ListIndex = 0
+    CargarListView_VentasDia True
+
+
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -263,7 +361,7 @@ Private Sub CargarListView_VentasTPV()
 'para seleccionar la que queremos recuperar en mi terminal activo
 Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ErrCargar
      
@@ -279,16 +377,16 @@ Dim SQL As String
     ListView1.ColumnHeaders.Add , , "Nombre Cliente", 3510, 0
     ListView1.ColumnHeaders.Add , , "Total (€)", 1150, 1
     
-    SQL = "SELECT numtermi,numventa,fecventa,scaven.codclien, nomclien,imptotal "
+    Sql = "SELECT numtermi,numventa,fecventa,scaven.codclien, nomclien,imptotal "
 '    SQL = SQL & " FROM (scaven INNER JOIN sliven ON scaven.numtermi=sliven.numtermi AND scaven.numventa=sliven.numventa AND scaven.fecventa=sliven.fecventa) "
-    SQL = SQL & " FROM scaven "
-    SQL = SQL & " INNER JOIN sclien ON scaven.codclien=sclien.codclien "
+    Sql = Sql & " FROM scaven "
+    Sql = Sql & " INNER JOIN sclien ON scaven.codclien=sclien.codclien "
     'seleccionamos de otros terminales distintos al q estoy conectado
-    SQL = SQL & " WHERE numtermi <>" & Me.parNumTermi
-    SQL = SQL & " ORDER BY numtermi,numventa "
+    Sql = Sql & " WHERE numtermi <>" & Me.parNumTermi
+    Sql = Sql & " ORDER BY numtermi,numventa "
 
     Set RS = New ADODB.Recordset
-    RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF
         Set ItmX = ListView1.ListItems.Add
@@ -334,17 +432,24 @@ Private Sub ListView1_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader
     End If
 End Sub
 
+Private Sub ListView1_DblClick()
+    If ListView1.ListItems.Count = 0 Then Exit Sub
+    If ListView1.SelectedItem Is Nothing Then Exit Sub
+    cmdImprimir_Click
+    
+End Sub
+
 Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
-Dim i As Integer
+'Dim i As Integer
     'cuando se selecciona una venta se quitar las anteriores que pudiera haber
     'solo se podrá seleccionar una venta
 
-    For i = 1 To Me.ListView1.ListItems.Count
-        If i <> Item.Index Then Me.ListView1.ListItems(i).Checked = False
-                
-    Next i
+'    For i = 1 To Me.ListView1.ListItems.Count
+'        If i <> Item.Index Then Me.ListView1.ListItems(i).Checked = False
+'
+'    Next i
 
-    Me.ListView1.ListItems(Item.Index).Selected = True
+ '   Me.ListView1.ListItems(Item.Index).Selected = True
 End Sub
 
 
@@ -353,31 +458,37 @@ End Sub
 
 
 
-Private Sub CargarListView_VentasDia()
+Private Sub CargarListView_VentasDia(CargaEncabezados As Boolean)
 'Muestra en una lista las ventas de otros terminales
 'para seleccionar la que queremos recuperar en mi terminal activo
 Dim ItmX As ListItem
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ErrCargar
      
-    
+    Me.ListView1.ListItems.Clear
     
     'limpiamos Los encabezados
-    ListView1.ColumnHeaders.Clear
-    
-    'cargamos los encabezados
-    ListView1.ColumnHeaders.Add , , "Termi.", 900
-    ListView1.ColumnHeaders.Add , , "Nº Venta", 1000, 1
-    ListView1.ColumnHeaders.Add , , "Tipo", 850, 2
-    ListView1.ColumnHeaders.Add , , "Cliente", 900, 2
-    ListView1.ColumnHeaders.Add , , "Nombre Cliente", 3210, 0
-    ListView1.ColumnHeaders.Add , , "Total (€)", 1150, 1
-    
+    If CargaEncabezados Then
+        ListView1.ColumnHeaders.Clear
+        
+        'cargamos los encabezados
+        ListView1.ColumnHeaders.Add , , "Terminal", 1200
+        ListView1.ColumnHeaders.Add , , "Nº Factura", 1310, 1
+        ListView1.ColumnHeaders.Add , , "Tipo", 840, 2
+        ListView1.ColumnHeaders.Add , , "Cliente", 1110, 2
+        ListView1.ColumnHeaders.Add , , "Nombre Cliente", 3910, 0
+        ListView1.ColumnHeaders.Add , , "Total (€)", 1320, 1
+        
+        ListView1.ColumnHeaders.Add , , "orden", 0, 1
+        
+    End If
     
 
-    SQL = "select numtermi,numventa,s.codtipom,s.codclien,nomclien,totalfac,s.numfactu,numalbar,codtipoa from scafac s,scafac1 s1 where s.codtipom=s1.codtipom and s.numfactu=s1.numfactu and s.fecfactu=s1.fecfactu"
-    SQL = SQL & " and (s.codtipom='FTI'  or (s.codtipom='FAV' and numtermi>0)) and s.fecfactu='" & Format(Now, FormatoFecha) & "' order by numventa"
+    Sql = "select numtermi,numventa,s.codtipom,s.codclien,nomclien,totalfac,s.numfactu,numalbar,codtipoa from scafac s,scafac1 s1 where s.codtipom=s1.codtipom and s.numfactu=s1.numfactu and s.fecfactu=s1.fecfactu"
+    Sql = Sql & " and (s.codtipom='FTI'  or (s.codtipom='FAV' and numtermi>0)) and s.fecfactu='" & Format(Now, FormatoFecha) & "'"
+    If Me.cboFiltro.ListIndex = 0 Then Sql = Sql & " AND numtermi =" & vParamTPV.NumeroDeTerminal
+    Sql = Sql & " order by numtermi,numfactu desc"
     
 
 
@@ -387,17 +498,18 @@ Dim SQL As String
 
 
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not miRsAux.EOF
         Set ItmX = ListView1.ListItems.Add
         ItmX.Text = Format(miRsAux.Fields(0).Value, "0000") 'Nº terminal
-        ItmX.SubItems(1) = miRsAux.Fields(1).Value 'Nº venta
+        'ItmX.SubItems(1) = Format(miRsAux.Fields(1).Value, "00000") 'Nº venta
+        ItmX.SubItems(1) = Format(miRsAux!Numfactu, "00000") 'Nº venta
         ItmX.SubItems(2) = miRsAux.Fields(2).Value  'tipo documento
         ItmX.SubItems(3) = Format(miRsAux.Fields(3).Value, "000000") 'cliente
         ItmX.SubItems(4) = miRsAux.Fields(4).Value 'nombre cliente
         ItmX.SubItems(5) = Format(miRsAux.Fields(5).Value, "#,###,###,##0.00") 'importe total
-        ItmX.Tag = DBLet(miRsAux!NumFactu, "N") & "|" & miRsAux!NumAlbar & "|" & miRsAux!codtipoa
+        ItmX.Tag = DBLet(miRsAux!Numfactu, "N") & "|" & miRsAux!Numalbar & "|" & miRsAux!Codtipoa
         miRsAux.MoveNext
     Wend
     miRsAux.Close

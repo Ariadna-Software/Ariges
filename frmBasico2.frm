@@ -682,6 +682,9 @@ Public Report As String
 
 Public Titulo As String
 
+Public CampoDeOrdenacion As String
+
+
 Private cadB As String
 
 Private WithEvents frmProv As frmComProveedoresGr
@@ -692,6 +695,10 @@ Private WithEvents frmBan As frmFacBancosPropios
 Attribute frmBan.VB_VarHelpID = -1
 Private WithEvents frmSer As frmRepNumSerie2GR
 Attribute frmSer.VB_VarHelpID = -1
+
+
+    
+
 
 Dim CampoOrden As String
 Dim TipoOrden As String
@@ -1188,6 +1195,9 @@ Private Sub Form_Load()
     txtAux(8).MaxLength = Maxlen9
     
     CampoOrden = CampoCP
+    If CampoDeOrdenacion <> "" Then CampoOrden = CampoDeOrdenacion
+    
+    
     TipoOrden = "ASC"
     
     '[Monica]27/06/2019: cargamos el filtro
@@ -1282,11 +1292,12 @@ Private Sub Form_Unload(Cancel As Integer)
 If Modo = 4 Then TerminaBloquear
 
     If ChkCaduca.visible Then CheckValueGuardar "caducado", ChkCaduca.Value
-
+    CampoDeOrdenacion = ""
     Screen.MousePointer = vbDefault
     Set vTag1 = Nothing
     Set vTag3 = Nothing
 End Sub
+
 
 
 
@@ -1302,7 +1313,7 @@ Private Sub mnModificar_Click()
     'Comprobaciones
     '--------------
     If Adodc1.Recordset.EOF Then Exit Sub
-    
+        
     If Adodc1.Recordset.RecordCount < 1 Then Exit Sub
     
     If BLOQUEADesdeFormulario(Me) Then BotonModificar
@@ -1483,6 +1494,10 @@ Private Sub AbrirFormulario(vFormulario As String)
                 cmdRegresar_Click
             End If
         
+
+
+        
+                    
         
         
 '        Case "Bancos"

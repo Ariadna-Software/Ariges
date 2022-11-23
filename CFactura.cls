@@ -3061,7 +3061,7 @@ Dim RTiket As ADODB.Recordset
     
     
     Sql = Sql & ")"
-     
+         
     
     'Octubre 2013
     'FAT
@@ -3455,7 +3455,7 @@ Dim Aux2 As String
                     'guardar los precios del articulo
                     NumAlbTicket = NumAlbTicket & DBSet(cart.PrecioMedPon, "N") & "," & DBSet(cart.PrecioStan, "N") & "," & DBSet(cart.PrecioUltCom, "N") & ","
                     'traza ENERO 2008                    'NUmero lote Junio2009
-                    NumAlbTicket = NumAlbTicket & DBSet(cart.CodProve, "N") & ",NULL,"
+                    NumAlbTicket = NumAlbTicket & DBSet(cart.Codprove, "N") & ",NULL,"
                     'CEntro de coste
                     NumAlbTicket = NumAlbTicket & DBSet(manCCost, "T", "S")
                     'SAIL codtipor codcapit precoste codtraba ,pvpInferior,comisionagente
@@ -3511,7 +3511,7 @@ Dim Aux2 As String
             'guardar los precios del articulo
             Sql = Sql & DBSet(cart.PrecioMedPon, "N") & "," & DBSet(cart.PrecioStan, "N") & "," & DBSet(cart.PrecioUltCom, "N") & ","
             'traza ENERO 2008                    'NUmero lote Junio2009
-            Sql = Sql & DBSet(cart.CodProve, "N") & ",NULL,"
+            Sql = Sql & DBSet(cart.Codprove, "N") & ",NULL,"
             'CEntro de coste
             Sql = Sql & DBSet(manCCost, "T", "S")
             'SAIL codtipor codcapit precoste codtraba   pvpinf comisionagente
@@ -3527,7 +3527,7 @@ Dim Aux2 As String
         Sql = Sql & AlmFactu & " as codalmac," & "sliven.codartic,sliven.nomartic," & ValorNulo & " as ampliaci,cantidad,1 as numbultos,precioar,"
         'David 16 Mayo 08
         '0 as dtoline1,0 as dtoline2, cantidad*precioar as importel,'' as origpre,precioiv "
-        Sql = Sql & " dto1,dto2, implineareal,'' as origpre,precioiv "
+        Sql = Sql & " dto1,dto2, implineareal,origpre,precioiv "
         
          '-- Laura 15/09/2006: añadir precios del articulo a las lineas de factura
         Sql = Sql & ", sartic.preciomp,sartic.preciost,sartic.preciouc,sartic.codprove,NULL as numlote"
@@ -4661,14 +4661,13 @@ Dim ImpDif As Currency
     On Error GoTo ETicket
     
 
-
+   
+   
     
     
-    '23 Nov 2010
-    'Antes
-    Sql = "SELECT codigiva,sum(importel) as totalimp, from sliven "
-    'Ahora
-    Sql = "SELECT codigiva,sum(implineareal) as totalimp from sliven "   'Ahi tenemos el importe de la linea SIN IVA
+    
+    Sql = "SELECT codigiva,sum(implineareal) as totalimp "   'Ahi tenemos el importe de la linea SIN IVA
+    Sql = Sql & "  from sliven "
     Sql = Sql & " WHERE " & Replace(cadSQL, "scaven", "sliven")
     Sql = Sql & " group by codigiva"
     Set RS = New ADODB.Recordset

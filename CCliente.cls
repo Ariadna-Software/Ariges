@@ -67,7 +67,7 @@ Private mDirEnvioHabitual As Integer   ' Si no trabajamos con direcciones de env
 Private mPais As String 'Conta nueva. Tesoreria
 
 Private mPuntos As Boolean
-
+Private mMarcaParaFacturar As Boolean
 
 '------------------------------------------------
 'Propiedades del modulo CCliente
@@ -402,6 +402,9 @@ Public Property Get tienePuntos() As Boolean
      tienePuntos = mPuntos
 End Property
 
+Public Property Get MarcaParaFacturar() As Boolean
+     MarcaParaFacturar = mMarcaParaFacturar
+End Property
 
 
 
@@ -441,7 +444,7 @@ Dim Sql As String
     
     LeerDatos = False
     
-    Sql = "SELECT codclien,nomclien,nomcomer,codpobla,domclien,pobclien,proclien,nifclien,wwwclien,codenvio,codagent,codforpa,codbanco,codsucur,digcontr,cuentaba,telclie1,maiclie1,clivario,dtoppago,dtognral,codtarif,codsitua,tipofact,kilometr,fechamov,observac,perclie1,codzonas,coddirenhab,iban,codpais,tienepuntos "
+    Sql = "SELECT codclien,nomclien,nomcomer,codpobla,domclien,pobclien,proclien,nifclien,wwwclien,codenvio,codagent,codforpa,codbanco,codsucur,digcontr,cuentaba,telclie1,maiclie1,clivario,dtoppago,dtognral,codtarif,codsitua,tipofact,kilometr,fechamov,observac,perclie1,codzonas,coddirenhab,iban,codpais,tienepuntos,MarcaFacturar "
     Sql = Sql & " FROM sclien "
     Sql = Sql & " WHERE codclien=" & vCodClien
     
@@ -500,6 +503,8 @@ Dim Sql As String
         End If
         
         mPuntos = DBLet(RS!tienePuntos, "N") = 1
+        
+        mMarcaParaFacturar = DBLet(RS!MarcaFacturar, "N") = 1
         
         LeerDatos = True
     End If
@@ -903,6 +908,6 @@ End Sub
 Public Function MarcaFacturar() As Byte
 
     MarcaFacturar = 0
-    If DevuelveDesdeBDNew(conAri, "sclien", "marcafacturar", "codclien", Me.Codigo, "N") = 1 Then MarcaFacturar = 1
+    If DevuelveDesdeBDNew(conAri, "sclien", "marcafacturar", "codclien", Me.Codigo, "N") = "1" Then MarcaFacturar = 1
         
 End Function

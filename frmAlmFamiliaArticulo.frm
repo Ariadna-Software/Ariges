@@ -413,6 +413,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       _ExtentY        =   10610
       _Version        =   393216
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -426,28 +427,35 @@ Begin VB.Form frmAlmFamiliaArticulo
       EndProperty
       TabCaption(0)   =   "Contabilidad"
       TabPicture(0)   =   "frmAlmFamiliaArticulo.frx":0012
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Frame2"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Frame3"
-      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "Frame3"
+      Tab(0).Control(1)=   "Frame2"
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Descuentos"
       TabPicture(1)   =   "frmAlmFamiliaArticulo.frx":002E
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FrameToolAux0"
-      Tab(1).Control(1)=   "Text1(15)"
-      Tab(1).Control(2)=   "Text1(10)"
-      Tab(1).Control(3)=   "Combo1"
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "Label1(10)"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "Label1(15)"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "DataGrid1"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(3)=   "txtAux(1)"
+      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "txtAux(0)"
-      Tab(1).Control(5)=   "txtAux(1)"
-      Tab(1).Control(6)=   "DataGrid1"
-      Tab(1).Control(7)=   "Label1(15)"
-      Tab(1).Control(8)=   "Label1(10)"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "Combo1"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "Text1(10)"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(7)=   "Text1(15)"
+      Tab(1).Control(7).Enabled=   0   'False
+      Tab(1).Control(8)=   "FrameToolAux0"
+      Tab(1).Control(8).Enabled=   0   'False
       Tab(1).ControlCount=   9
       Begin VB.Frame FrameToolAux0 
          Height          =   645
-         Left            =   -74865
+         Left            =   135
          TabIndex        =   68
          Top             =   510
          Width           =   1500
@@ -495,7 +503,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          EndProperty
          Height          =   360
          Index           =   15
-         Left            =   -70530
+         Left            =   4470
          MaxLength       =   5
          TabIndex        =   23
          Tag             =   "Dto adi. PVM|N|S|0|100|sfamia|dtopmv|#0.00|N|"
@@ -515,7 +523,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          EndProperty
          Height          =   360
          Index           =   10
-         Left            =   -70530
+         Left            =   4470
          MaxLength       =   5
          TabIndex        =   22
          Tag             =   "Centro de coste|N|S|0|100|sfamia|maxdtopar|#0.00|N|"
@@ -533,7 +541,7 @@ Begin VB.Form frmAlmFamiliaArticulo
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Left            =   -74760
+         Left            =   240
          Style           =   2  'Dropdown List
          TabIndex        =   19
          Top             =   2700
@@ -555,7 +563,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          EndProperty
          Height          =   315
          Index           =   0
-         Left            =   -71880
+         Left            =   3120
          MaxLength       =   18
          TabIndex        =   20
          Tag             =   "Código Artículo"
@@ -579,7 +587,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          EndProperty
          Height          =   315
          Index           =   1
-         Left            =   -70200
+         Left            =   4800
          MaxLength       =   15
          TabIndex        =   21
          Tag             =   "Código Almacen"
@@ -590,7 +598,7 @@ Begin VB.Form frmAlmFamiliaArticulo
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
          Height          =   2535
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   47
          Top             =   1245
          Width           =   8985
@@ -665,7 +673,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1710
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   42
          Top             =   4035
          Width           =   9000
@@ -884,7 +892,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   3210
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   33
          Top             =   585
          Width           =   9000
@@ -1309,7 +1317,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          EndProperty
          Height          =   240
          Index           =   15
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   56
          Top             =   4905
          Width           =   4260
@@ -1327,7 +1335,7 @@ Begin VB.Form frmAlmFamiliaArticulo
          EndProperty
          Height          =   285
          Index           =   10
-         Left            =   -74745
+         Left            =   255
          TabIndex        =   48
          Top             =   4335
          Width           =   4005
@@ -2017,32 +2025,32 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim cad As String
+Dim Cad As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
     'El registro de codigo 0 no se puede Modificar ni Eliminar
     'If EsCodigoCero(CStr(Data1.Recordset.Fields(0).Value), FormatoCampo(Text1(0))) Then Exit Sub
-    cad = DevuelveDesdeBD(conAri, "count(*)", "sartic", "codfamia", Text1(0).Text)
-    If cad = "" Then cad = "0"
-    If Val(cad) > 0 Then
-        cad = "Hay " & cad & " artículos pertenecientes a esta familia"
-        MsgBox cad, vbExclamation
+    Cad = DevuelveDesdeBD(conAri, "count(*)", "sartic", "codfamia", Text1(0).Text)
+    If Cad = "" Then Cad = "0"
+    If Val(Cad) > 0 Then
+        Cad = "Hay " & Cad & " artículos pertenecientes a esta familia"
+        MsgBox Cad, vbExclamation
         Exit Sub
     End If
     
     '### a mano
-    cad = "¿Seguro que desea eliminar la Familia de Artículo?:" & vbCrLf
-    cad = cad & vbCrLf & "Cod. : " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
-    cad = cad & vbCrLf & "Desc.: " & Data1.Recordset.Fields(1)
+    Cad = "¿Seguro que desea eliminar la Familia de Artículo?:" & vbCrLf
+    Cad = Cad & vbCrLf & "Cod. : " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
+    Cad = Cad & vbCrLf & "Desc.: " & Data1.Recordset.Fields(1)
     
     
 
 
 
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         Screen.MousePointer = vbHourglass
@@ -2050,22 +2058,22 @@ Dim cad As String
         'Borramos en dtofamia
         lblIndicador.Caption = "Eliminando descuentos"
         lblIndicador.Refresh
-        cad = "Delete from sdtofm where codfamia = " & Data1.Recordset!Codfamia
-        conn.Execute cad
+        Cad = "Delete from sdtofm where codfamia = " & Data1.Recordset!Codfamia
+        conn.Execute Cad
         
         
-        cad = "Delete from sdtomp where codfamia = " & Data1.Recordset!Codfamia
-        conn.Execute cad
+        Cad = "Delete from sdtomp where codfamia = " & Data1.Recordset!Codfamia
+        conn.Execute Cad
         
         
-        cad = "Delete from sfamiadtos where codfamia = " & Data1.Recordset!Codfamia 'despues del DELETE
-        conn.Execute cad
+        Cad = "Delete from sfamiadtos where codfamia = " & Data1.Recordset!Codfamia 'despues del DELETE
+        conn.Execute Cad
         
         lblIndicador.Caption = "Eliminando familia"
         lblIndicador.Refresh
         Data1.Recordset.Delete
         
-        ejecutar cad, False
+        ejecutar Cad, False
         
         If SituarDataTrasEliminar(Data1, NumRegElim) Then
             PonerCampos
@@ -2087,7 +2095,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
     
@@ -2101,9 +2109,9 @@ Dim cad As String
             Exit Sub
         End If
     
-        cad = Data1.Recordset.Fields(0) & "|"
-        cad = cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(cad)
+        Cad = Data1.Recordset.Fields(0) & "|"
+        Cad = Cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(Cad)
         Unload Me
     End If
 End Sub
@@ -2542,7 +2550,7 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(cadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim tabla As String
 Dim Titulo As String
 Dim CargaF As Boolean 'Para saber si se carga el frame o no en el BuscaGrid
@@ -2676,7 +2684,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
 Dim i As Integer
 
@@ -2690,16 +2698,16 @@ Dim i As Integer
     
     
 '    Frame4.Enabled = Modo < 5  'En lineas no dejo trabajar
-    b = Modo < 5
-    If Not b Then ModificaLineas = 0
+    B = Modo < 5
+    If Not B Then ModificaLineas = 0
     'datagrid1.enabled
     
     '-------------------------------------------------
     'Modo 2. Hay datos y estamos visualizandolos
-    b = (Kmodo = 2)
+    B = (Kmodo = 2)
     'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
     If DatosADevolverBusqueda <> "" Then
-        cmdRegresar.visible = b
+        cmdRegresar.visible = B
     Else
         'Ponemos visible, si es formulario de busqueda, el boton regresar cuando hay datos
         cmdRegresar.visible = False
@@ -2710,7 +2718,7 @@ Dim i As Integer
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible b And Data1.Recordset.RecordCount > 1
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
     
     'Poner Boton de Cabecera o Aceptar/Cancelar
 '    PonerBotonCabecera B Or (Modo = 0)
@@ -2737,25 +2745,25 @@ Dim i As Integer
 '    chkVistaPrevia.Enabled = (Modo <= 2)
     
     If vParamAplic.PtosAsignar > 0 Then
-        b = False
+        B = False
         If Modo = 1 Then
-            b = True
+            B = True
         Else
-            If Modo > 2 Then b = vUsu.Nivel = 0
+            If Modo > 2 Then B = vUsu.Nivel = 0
         End If
  '       chkPuntos.Enabled = B
         
  '       chkPuntos.Enabled = chkPuntos.Enabled And Modo <> 5
     End If
     
-    b = (Modo = 1 Or Modo = 3 Or Modo = 4)
-    imgBuscar(0).Enabled = b And vEmpresa.TieneAnalitica
+    B = (Modo = 1 Or Modo = 3 Or Modo = 4)
+    imgBuscar(0).Enabled = B And vEmpresa.TieneAnalitica
     imgBuscar(0).visible = True And vEmpresa.TieneAnalitica
-    imgBuscar(1).Enabled = b
+    imgBuscar(1).Enabled = B
     imgBuscar(1).visible = True
     
     For i = 0 To Me.imgCuentas.Count - 1
-        imgCuentas(i).Enabled = b
+        imgCuentas(i).Enabled = B
     Next i
     
     
@@ -2776,42 +2784,42 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Integer
 Dim bAux As Boolean
 
 On Error Resume Next
 
-    b = (Modo = 0 Or Modo = 2)
+    B = (Modo = 0 Or Modo = 2)
     
     'Añadir
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
     'Buscar
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'VerTodos
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
-    b = (Modo = 2)
-    Toolbar5.Buttons(1).Enabled = b
+    B = (Modo = 2)
+    Toolbar5.Buttons(1).Enabled = B
     
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    mnEliminar.Enabled = B
     
     'imprimir
     Toolbar1.Buttons(8).Enabled = True
     
-    b = (Modo = 2) And DatosADevolverBusqueda = ""
+    B = (Modo = 2) And DatosADevolverBusqueda = ""
     For i = 0 To ToolAux.Count - 1
-        ToolAux(i).Buttons(1).Enabled = b
-        bAux = (b And Me.Data2.Recordset.RecordCount > 0)
+        ToolAux(i).Buttons(1).Enabled = B
+        bAux = (B And Me.Data2.Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     Next i
@@ -2828,18 +2836,18 @@ End Sub
 
 
 Private Function DatosOk() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 
     DatosOk = False
-    b = CompForm(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm(Me, 1)
+    If Not B Then Exit Function
     
     'Comprobar si ya existe el cod de familia en la tabla
     If Modo = 3 Then 'Insertar
-        If ExisteCP(Text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then B = False
     End If
     
-    DatosOk = b
+    DatosOk = B
 End Function
 
 Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Button)
@@ -2887,11 +2895,11 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
+Private Sub PonerBotonCabecera(B As Boolean)
 
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then
         PonerFocoBtn Me.cmdRegresar
         cmdRegresar.Cancel = True
     Else
@@ -2900,17 +2908,17 @@ Private Sub PonerBotonCabecera(b As Boolean)
     
     
     Me.cmdRegresar.Caption = "Cabecera"
-    If b Then
-        b = False
+    If B Then
+        B = False
         If Modo = 2 Then
-            b = Me.DatosADevolverBusqueda <> ""
-            If b Then Me.cmdRegresar.Caption = "Regresar"
+            B = Me.DatosADevolverBusqueda <> ""
+            If B Then Me.cmdRegresar.Caption = "Regresar"
         ElseIf Modo = 5 Then
-            b = ModificaLineas = 0
+            B = ModificaLineas = 0
         End If
         
     End If
-    Me.cmdRegresar.visible = b
+    Me.cmdRegresar.visible = B
    
     
     'Habilitar las opciones correctas del menu
@@ -2923,10 +2931,10 @@ End Sub
 
 
 Private Sub PosicionarData()
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 
-    cad = "(codfamia=" & Text1(0).Text & ")"
-    If SituarData(Data1, cad, Indicador) Then
+    Cad = "(codfamia=" & Text1(0).Text & ")"
+    If SituarData(Data1, Cad, Indicador) Then
         PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -3046,7 +3054,7 @@ End Sub
 
 Private Sub BotonEliminarLinea()
 'Eliminar una linea De Mantenimiento. Tabla: slima1
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo EEliminarLinea
 
@@ -3059,18 +3067,18 @@ Dim SQL As String
     Me.SSTab1.Tab = 1
     
 
-    SQL = "¿Seguro que desea eliminar la línea de descuento?     "
-    SQL = SQL & vbCrLf & "Clasificacion:  " & Data2.Recordset!Nombre & vbCrLf
-    SQL = SQL & "Descuento1:  " & Format(Data2.Recordset!dtoline1, FormatoDescuento)
+    Sql = "¿Seguro que desea eliminar la línea de descuento?     "
+    Sql = Sql & vbCrLf & "Clasificacion:  " & Data2.Recordset!Nombre & vbCrLf
+    Sql = Sql & "Descuento1:  " & Format(Data2.Recordset!dtoline1, FormatoDescuento)
     
 
 
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Data2.Recordset.AbsolutePosition
-        SQL = " codfamia = " & Text1(0).Text & " AND clasifica=" & Data2.Recordset!clasifica
-        SQL = "Delete from sfamiadtos WHERE " & SQL
-        conn.Execute SQL
+        Sql = " codfamia = " & Text1(0).Text & " AND clasifica=" & Data2.Recordset!clasifica
+        Sql = "Delete from sfamiadtos WHERE " & Sql
+        conn.Execute Sql
 
         ModificaLineas = 0
         CargaGrid2 DataGrid1, Data2
@@ -3095,18 +3103,18 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
-    SQL = "select sfamiadtos.clasifica,nombre,dtoline1,dtoline2 from sfamiadtos,sfamiatipodto where"
-    SQL = SQL & " sfamiadtos.clasifica=sfamiatipodto.clasifica and codfamia="
+    Sql = "select sfamiadtos.clasifica,nombre,dtoline1,dtoline2 from sfamiadtos,sfamiatipodto where"
+    Sql = Sql & " sfamiadtos.clasifica=sfamiatipodto.clasifica and codfamia="
     If enlaza Then
-        SQL = SQL & Data1.Recordset!Codfamia
+        Sql = Sql & Data1.Recordset!Codfamia
        
     Else
-        SQL = SQL & "  -1"
+        Sql = Sql & "  -1"
     End If
-    SQL = SQL & " Order by sfamiadtos.clasifica"
-    MontaSQLCarga = SQL
+    Sql = Sql & " Order by sfamiadtos.clasifica"
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -3131,22 +3139,22 @@ End Sub
 
 
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
-Dim b As Boolean
-Dim SQL As String
+Dim B As Boolean
+Dim Sql As String
 
     On Error GoTo ECargaGrid
 
-    b = DataGrid1.Enabled
+    B = DataGrid1.Enabled
     
-    SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral vDataGrid, vData, SQL, True
+    Sql = MontaSQLCarga(enlaza)
+    CargaGridGnral vDataGrid, vData, Sql, True
 
     
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
         
-    b = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
-    vDataGrid.Enabled = Not b
+    B = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
+    vDataGrid.Enabled = Not B
 
     'PrimeraVez = False
     Exit Sub
@@ -3318,28 +3326,28 @@ End Sub
 
 Private Function TratarLinea(Insertar As Boolean) As Boolean
 'Modifica o Inserta un registro de linea
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EModificarLinea
 
     TratarLinea = False
-    SQL = ""
+    Sql = ""
     
     'Meto el DATOS OK aqui
     '-------------------------
     If Insertar Then
         If Combo1.ListIndex < 0 Then
-            SQL = "- Seleccione una clasificacion" & vbCrLf
+            Sql = "- Seleccione una clasificacion" & vbCrLf
         Else
             CadenaConsulta = "codfamia = " & Text1(0).Text & " AND clasifica "
             CadenaConsulta = DevuelveDesdeBD(conAri, "clasifica", "sfamiadtos ", CadenaConsulta, Combo1.ItemData(Combo1.ListIndex), "N")
-            If CadenaConsulta <> "" Then SQL = SQL & "- Ya existe para la clasificacion: " & Combo1.Text & vbCrLf
+            If CadenaConsulta <> "" Then Sql = Sql & "- Ya existe para la clasificacion: " & Combo1.Text & vbCrLf
         End If
     End If
     
     'Sea insertar o modificar. Hay cosas que son para los dos
     If txtAux(0).Text = "" Then
-        SQL = SQL & "- Descuento 1 obligado" & vbCrLf
+        Sql = Sql & "- Descuento 1 obligado" & vbCrLf
     Else
         'NO PUEDE EXISTIR EL DESCUENTO YA
         
@@ -3348,60 +3356,60 @@ Dim SQL As String
         CadenaConsulta = CadenaConsulta & "dtoline1 = " & DBSet(txtAux(0).Text, "N") & " AND codfamia"
         
         CadenaConsulta = DevuelveDesdeBD(conAri, "clasifica", "sfamiadtos ", CadenaConsulta, Text1(0).Text, "N")
-        If CadenaConsulta <> "" Then SQL = SQL & "- Ya existe el descuento en la clasificacion: " & CadenaConsulta & vbCrLf
+        If CadenaConsulta <> "" Then Sql = Sql & "- Ya existe el descuento en la clasificacion: " & CadenaConsulta & vbCrLf
         
         
         
     End If
     CadenaConsulta = Data1.RecordSource
     
-    If SQL <> "" Then
-        SQL = "Errores: " & vbCrLf & vbCrLf & SQL
-        MsgBox SQL, vbExclamation
+    If Sql <> "" Then
+        Sql = "Errores: " & vbCrLf & vbCrLf & Sql
+        MsgBox Sql, vbExclamation
         Exit Function
     End If
     
     'Si tieen proveedor asignado
     'Si ha llegado aqui comprobaremos que el dto no supera al maximo que tiene el proveedor
     If Text1(9).Text <> "" Then
-            SQL = txtAux(0).Text
+            Sql = txtAux(0).Text
             If txtAux(1).Text <> "" Then
-                If ImporteFormateado(txtAux(1).Text) > ImporteFormateado(SQL) Then SQL = txtAux(1).Text
+                If ImporteFormateado(txtAux(1).Text) > ImporteFormateado(Sql) Then Sql = txtAux(1).Text
             End If
             
             CadenaConsulta = "codfamia = " & Text1(0).Text & " AND codmarca is NULL AND codprove "
             
             CadenaConsulta = DevuelveDesdeBD(conAri, "dtoline1+dtoline2", "sdtomp", CadenaConsulta, Text1(9).Text, "N")
             If CadenaConsulta <> "" Then
-                If ImporteFormateado(SQL) > CCur(CadenaConsulta) Then
-                    SQL = "Descuento mayor al asignado por el proveedor a esta familia." & vbCrLf & "¿Continuar?"
+                If ImporteFormateado(Sql) > CCur(CadenaConsulta) Then
+                    Sql = "Descuento mayor al asignado por el proveedor a esta familia." & vbCrLf & "¿Continuar?"
                 Else
-                    SQL = ""
+                    Sql = ""
                 End If
             Else
                 'No tiene asignado dto
-                SQL = ""
+                Sql = ""
             End If
             'Reestablezco
             CadenaConsulta = Data1.RecordSource
-            If SQL <> "" Then
-                If MsgBox(SQL, vbQuestion + vbYesNo) = vbNo Then Exit Function
+            If Sql <> "" Then
+                If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then Exit Function
             End If
     End If
             
     'Creamos la sentencia SQL
     If Insertar Then
-        SQL = "INSERT INTO sfamiadtos(codfamia,clasifica,dtoline1,dtoline2) VALUES ("
-        SQL = SQL & Text1(0).Text & "," & Combo1.ItemData(Combo1.ListIndex) & ","
-        SQL = SQL & DBSet(txtAux(0).Text, "N") & "," & DBSet(txtAux(1).Text, "N", "N") & ")"
+        Sql = "INSERT INTO sfamiadtos(codfamia,clasifica,dtoline1,dtoline2) VALUES ("
+        Sql = Sql & Text1(0).Text & "," & Combo1.ItemData(Combo1.ListIndex) & ","
+        Sql = Sql & DBSet(txtAux(0).Text, "N") & "," & DBSet(txtAux(1).Text, "N", "N") & ")"
     Else
-        SQL = "UPDATE sfamiadtos Set dtoline1 = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & ", dtoline2=" & DBSet(txtAux(1).Text, "N", "N")
-        SQL = SQL & " WHERE codfamia = " & Text1(0).Text & " AND clasifica=" & Data2.Recordset!clasifica
+        Sql = "UPDATE sfamiadtos Set dtoline1 = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & ", dtoline2=" & DBSet(txtAux(1).Text, "N", "N")
+        Sql = Sql & " WHERE codfamia = " & Text1(0).Text & " AND clasifica=" & Data2.Recordset!clasifica
     End If
     
     
-    conn.Execute SQL
+    conn.Execute Sql
     TratarLinea = True
     
         

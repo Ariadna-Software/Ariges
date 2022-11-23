@@ -571,7 +571,7 @@ Dim Sql As String
         
     Else
         Mens = "Datos Factura"
-        mCodProve = RS!CodProve
+        mCodProve = RS!Codprove
         mNumFactu = CStr(RS!Numfactu)
         mFecFactu = CStr(RS!FecFactu)
         mCodForpa = CStr(RS!codforpa)
@@ -946,7 +946,7 @@ Dim ImporteDescontadoAnticipo As Currency
                 Sql = DBLet(RS!observa, "T")
                 If Sql <> "" Then Sql = Sql & vbCrLf
                 Sql = "Descontado en factura: " & Numfactu & " de fecha " & FecFactu & vbCrLf
-                Sql = Sql & "Id: " & Format(rsVenci!idAnticipo, "0000") & "   Prov: " & rsVenci!CodProve & " " & DBLet(RS!nomprove, "T") & vbCrLf
+                Sql = Sql & "Id: " & Format(rsVenci!idAnticipo, "0000") & "   Prov: " & rsVenci!Codprove & " " & DBLet(RS!nomprove, "T") & vbCrLf
                 Sql = Sql & Now & "     " & vUsu.Login
                 
                 Sql = "UPDATE pagos set observa=" & DBSet(Sql, "T")
@@ -1166,8 +1166,8 @@ Dim Sql As String
 
     On Error GoTo EInsertarAlb
 
-    Sql = "INSERT INTO scafpa (codprove,numfactu,fecfactu,numalbar,fechaalb,numpedpr,fecpedpr,codtrab1,codtrab2,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega,fentrada) "
-    Sql = Sql & " SELECT " & Proveedor & " as codprove," & DBSet(Numfactu, "T") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & " numalbar,fechaalb,numpedpr,fecpedpr,codtrab1,codtraba,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega,fentrada "
+    Sql = "INSERT INTO scafpa (codprove,numfactu,fecfactu,numalbar,fechaalb,numpedpr,fecpedpr,codtrab1,codtrab2,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega,fentrada,codclien) "
+    Sql = Sql & " SELECT " & Proveedor & " as codprove," & DBSet(Numfactu, "T") & " as numfactu," & DBSet(FecFactu, "F") & " as fecfactu," & " numalbar,fechaalb,numpedpr,fecpedpr,codtrab1,codtraba,observa1,observa2,observa3,observa4,observa5,fecenvio,docarchiv,codenvio,NReferencia,SReferencia,fecentrega,fentrada,codclien "
     Sql = Sql & " FROM scaalp WHERE " & cadSQL
     conn.Execute Sql
 

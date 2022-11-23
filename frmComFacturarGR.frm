@@ -117,7 +117,7 @@ Begin VB.Form frmComFacturarGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   375
+         Height          =   495
          Index           =   1
          Left            =   1380
          TabIndex        =   52
@@ -135,7 +135,7 @@ Begin VB.Form frmComFacturarGR
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   375
+         Height          =   495
          Index           =   0
          Left            =   255
          TabIndex        =   51
@@ -1340,7 +1340,7 @@ Option Explicit
 '========== VBLES PUBLICAS ====================
 'Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 'Public Event DatoSeleccionado(CadenaSeleccion As String)
-Public CodProve As Long
+Public Codprove As Long
 Public CadenaAlbaran As String
 
 
@@ -1475,7 +1475,7 @@ Dim N  As Long
         
         If cadWhere = "" Then
             
-            If Me.CodProve > 0 Then
+            If Me.Codprove > 0 Then
                 If Not DatosOk Then Exit Sub
             
             End If
@@ -1489,9 +1489,9 @@ Dim N  As Long
         If GenerarFactura_ Then
             If vParamAplic.InvSujetoPasivo Then Me.chkInvSujePasivo.Value = 0
             BotonPedirDatos
-            If Me.CodProve >= 0 Then Unload Me
+            If Me.Codprove >= 0 Then Unload Me
         Else
-            If Me.CodProve >= 0 Then PonerCamposFacturarAlbaran
+            If Me.Codprove >= 0 Then PonerCamposFacturarAlbaran
         End If
     End If
 End Sub
@@ -1533,7 +1533,7 @@ Private Sub Form_Activate()
         
     If PrimeraVez Then
         PrimeraVez = False
-        If Me.CodProve >= 0 Then
+        If Me.Codprove >= 0 Then
             'Esta facturando UN albaran
             PonerCamposFacturarAlbaran
             
@@ -1579,7 +1579,7 @@ Dim i As Integer
     End With
     
     
-    Toolbar1.Buttons(2).Enabled = Me.CodProve < 0
+    Toolbar1.Buttons(2).Enabled = Me.Codprove < 0
     
     cadWhere = ""
     
@@ -2187,11 +2187,11 @@ Dim i As Byte
     
     If cadWhere = "" Then
         Cad = "MAL"
-        If Me.CodProve >= 0 Then
+        If Me.Codprove >= 0 Then
             'Esta facturando UN albaran
             If ListView1.ListItems(1).Checked Then
                 'Solo hay UN albaran
-                If Me.CodProve = Val(Text1(3).Text) Then
+                If Me.Codprove = Val(Text1(3).Text) Then
                     'Es el mismo proveedor. Solo ha cambiado fechas
                     CalcularDatosFactura
                     If cadWhere <> "" Then Cad = ""
@@ -2387,7 +2387,7 @@ On Error GoTo ECargar
     Sql = Sql & " FROM (scaalp LEFT OUTER JOIN sforpa ON scaalp.codforpa=sforpa.codforpa) "
     Sql = Sql & " INNER JOIN slialp ON scaalp.numalbar = slialp.numalbar  AND scaalp.fechaalb=slialp.fechaalb AND scaalp.codprove=slialp.codprove "
     Sql = Sql & " WHERE scaalp.codprove =" & Text1(3).Text
-    If Me.CodProve >= 0 Then
+    If Me.Codprove >= 0 Then
         'Esta facturando direcamente UN albaran
         Sql = Sql & " AND " & Me.CadenaAlbaran
     End If
@@ -2421,7 +2421,7 @@ On Error GoTo ECargar
             ItmX.ToolTipText = "Abono"
         End If
                              
-        If Me.CodProve >= 0 Then ItmX.Checked = True
+        If Me.Codprove >= 0 Then ItmX.Checked = True
             
                              
         'Sig
@@ -2618,7 +2618,7 @@ Dim Cad As String
     If Not DatosOk Then Exit Sub
     
     
-     If Me.CodProve > 0 Then
+     If Me.Codprove > 0 Then
         If cadWhere = "" Then
             If Not DatosOk Then Exit Sub
             If cadWhere = "" Then
@@ -2865,7 +2865,7 @@ Dim TieneAnticiposPendientesDescontar As String
                 Cad = DevuelveDesdeBD(conAri, "count(*)", "sflotas", "codprove", CStr(vProve.Codigo))
     
                 If Val(Cad) > 0 Then
-                    frmComCasarAlbaranes.CodProve = vProve.Codigo
+                    frmComCasarAlbaranes.Codprove = vProve.Codigo
                     frmComCasarAlbaranes.Show vbModal
                 End If
             End If
@@ -3014,7 +3014,7 @@ Private Sub PonerCamposFacturarAlbaran()
     BotonPedirDatos
     
     Text1(1).Text = Format(Now, "dd/mm/yyyy")
-    Text1(3).Text = CodProve
+    Text1(3).Text = Codprove
     Text2(3).Text = PonerDatosProveedor
        
     'Datos Albaranes

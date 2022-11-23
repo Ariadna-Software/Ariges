@@ -364,6 +364,15 @@ Begin VB.Form frmFacTPVTotal
    End
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   3720
@@ -375,6 +384,15 @@ Begin VB.Form frmFacTPVTotal
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   2880
@@ -699,6 +717,8 @@ Private WithEvents frmB As frmBuscaGrid 'Form para busquedas
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmClv As frmFacClientesV
 Attribute frmClv.VB_VarHelpID = -1
+Private WithEvents frmCli As frmBasico2
+Attribute frmCli.VB_VarHelpID = -1
 
 Private PrimeraVez As Boolean
 Private HaDevueltoDatos As Boolean
@@ -1004,8 +1024,8 @@ Dim Cad As String
         Me.cmdCampos.Top = Me.cmdCampos.Top + 1000
     End If
     'Cheque
-    label1(3).Top = Me.FrameEfectivo.Top + 120
-    Text1(4).Top = label1(3).Top + 392
+    Label1(3).Top = Me.FrameEfectivo.Top + 120
+    Text1(4).Top = Label1(3).Top + 392
     
     Me.mnManipulador.visible = LLevaArticulosFitosanitarios
     Toolbar1.Buttons(10).visible = LLevaArticulosFitosanitarios
@@ -1062,6 +1082,10 @@ Dim i As Byte
 End Sub
 
 
+Private Sub frmCli_DatoSeleccionado(CadenaSeleccion As String)
+    Sql = RecuperaValor(CadenaSeleccion, 1)
+End Sub
+
 Private Sub frmClv_DatoSeleccionado(CadenaSeleccion As String)
     Text3.Text = RecuperaValor(CadenaSeleccion, 2) & "    (" & RecuperaValor(CadenaSeleccion, 1) & ")"
     Text3.Tag = RecuperaValor(CadenaSeleccion, 1)
@@ -1088,8 +1112,20 @@ End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
     If RSVenta.EOF Then Exit Sub
-    imgBuscar(0).Tag = Index
-    MandaBusquedaPrevia CStr(Index)
+    'imgBuscar(0).Tag = Index
+    'MandaBusquedaPrevia CStr(Index)
+    
+    Sql = ""
+    
+    Set frmCli = New frmBasico2
+    AyudaClientes frmCli, Text1(0)
+    Set frmCli = Nothing
+    
+    Text1(0).Text = Sql
+        Text1_LostFocus (0)
+        PonerFoco Text1(0)
+    
+    
 '    If Index = 5 Then Text1_LostFocus (5)
 End Sub
 
@@ -1303,12 +1339,12 @@ Dim curCambio As Currency
         If Not vParamTPV.ImprimiDirecto Then
             If MsgBox("¿Desea imprimir el ticket?", vbQuestion + vbYesNo) = vbNo Then Impr = False
         End If
-        'If Impr Then ImprimirTicketDirecto vNumTicket, vNumAlbTicket, RSVenta!fecventa
+        
         
         '# Modificado: LAURA (25/07/2008)
         If Text1(3).Text <> "" Then curEntregado = CCur(Text1(3).Text)
         If Label2(4).Caption <> "" Then curCambio = CCur(Label2(4).Caption)
-        If Impr Then ImprimirTicketDirecto vNumTicket, miFechaTicket, curEntregado, curCambio
+        If Impr Then ImprimirTicketDirecto2 vNumTicket, miFechaTicket, curEntregado, curCambio
         '#
         
         'cerrar ventana total y regresar a entrada de ventas
@@ -1489,22 +1525,22 @@ End Sub
 
 
 
-Private Function InicializarCStock(ByRef vCStock As CStock, TipoM As String, ByRef RS As ADODB.Recordset) As Boolean
+Private Function InicializarCStock(ByRef vCStock As CStock, TipoM As String, ByRef Rs As ADODB.Recordset) As Boolean
 'On Error Resume Next
 On Error Resume Next
 
     vCStock.tipoMov = TipoM
-    vCStock.HoraMov = CStr(RS!horventa)
-    vCStock.codArtic = RS!codArtic
+    vCStock.HoraMov = CStr(Rs!horventa)
+    vCStock.codArtic = Rs!codArtic
     vCStock.codAlmac = codAlmac
-    vCStock.cantidad = CSng(RS!cantidad)
+    vCStock.cantidad = CSng(Rs!cantidad)
     
     '16 Mayo 08
     '----------
     ' El importe de la linea esta en una columna de la BD
     'vCStock.Importe = CCur(RS!Cantidad) * CCur(RS!precioar)
-    vCStock.Importe = RS!implineareal
-    vCStock.LineaDocu = CInt(RS!numlinea)
+    vCStock.Importe = Rs!implineareal
+    vCStock.LineaDocu = CInt(Rs!numlinea)
         
     If Err.Number <> 0 Then
         MsgBox "No se han podido inicializar la clase para actualizar Stock", vbExclamation
@@ -1621,7 +1657,7 @@ End Function
 
 Private Function InsertarMovAlmacen(NumTicket As String) As Boolean
 'PAra tickets, albaranes y facturas
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim vCStock As CStock
 Dim B As Boolean
 Dim ErroresEnStock As String
@@ -1630,14 +1666,14 @@ Dim ErroresEnLotes_DatosInternos As String
     On Error GoTo EInsMov
     
     'Para cada linea de venta insertar el movimiento e actualizar stocks
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     Set vCStock = New CStock
     
     
     
     Sql = Replace(cadSel, "scaven", "sliven")
     Sql = "SELECT * FROM sliven WHERE " & Sql
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '26 Abril 2011
     'El documento ira formateado con ceros. Como si fuera en la entrada de albaran
@@ -1652,8 +1688,8 @@ Dim ErroresEnLotes_DatosInternos As String
     
     'En la funcion muevestock tiene los avisioss sobre las cantidades y sobre
     'maximos minimos y puntos de pedido
-    While Not RS.EOF And B
-        If Not InicializarCStock(vCStock, "S", RS) Then Exit Function
+    While Not Rs.EOF And B
+        If Not InicializarCStock(vCStock, "S", Rs) Then Exit Function
         
         'Para que compruebe las cantidades y eso
         If vParamTPV.CtrstockVenta Then
@@ -1664,44 +1700,44 @@ Dim ErroresEnLotes_DatosInternos As String
             End If
         End If
         If Not vCStock.ActualizarStock(True, False) Then B = False
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     'Ahora REstaremos en los lotes
     If vParamAplic.ManipuladorFitosanitarios2 Then
         Sql = Replace(cadSel, "scaven", "slivenlotes")
         Sql = "SELECT * FROM slivenlotes WHERE " & Sql
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RS.EOF
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
         
-            If RS!cantidad > 0 Then
-                Sql = " numlotes= " & DBSet(RS!numLote, "T")
-                Sql = Sql & " AND codartic= " & DBSet(RS!codArtic, "T")
-                Sql = Sql & " AND fecentra= " & DBSet(RS!fecentra, "F") & " AND 1"
+            If Rs!cantidad > 0 Then
+                Sql = " numlotes= " & DBSet(Rs!numLote, "T")
+                Sql = Sql & " AND codartic= " & DBSet(Rs!codArtic, "T")
+                Sql = Sql & " AND fecentra= " & DBSet(Rs!fecentra, "F") & " AND 1"
                 Sql = DevuelveDesdeBD(conAri, "canentra-vendida", "slotes", Sql, "1")
                 
-                If RS!cantidad > CCur(Sql) Then
+                If Rs!cantidad > CCur(Sql) Then
                     
-                    MsgBox "Mas cantidad que disponible en el LOTE: " & RS!codArtic & " " & RS!numLote & vbCrLf & "Proceso continua", vbExclamation
+                    MsgBox "Mas cantidad que disponible en el LOTE: " & Rs!codArtic & " " & Rs!numLote & vbCrLf & "Proceso continua", vbExclamation
                     Espera 0 - 75
                 End If
             End If
         
-            If RS!cantidad < 0 Then
+            If Rs!cantidad < 0 Then
                 Sql = "-"
             Else
                 Sql = "+"
             End If
-            Sql = "UPDATE slotes SET vendida=vendida " & Sql & DBSet(Abs(RS!cantidad), "N")
-            Sql = Sql & " WHERE numlotes= " & DBSet(RS!numLote, "T")
-            Sql = Sql & " AND codartic= " & DBSet(RS!codArtic, "T")
-            Sql = Sql & " AND fecentra= " & DBSet(RS!fecentra, "F")
+            Sql = "UPDATE slotes SET vendida=vendida " & Sql & DBSet(Abs(Rs!cantidad), "N")
+            Sql = Sql & " WHERE numlotes= " & DBSet(Rs!numLote, "T")
+            Sql = Sql & " AND codartic= " & DBSet(Rs!codArtic, "T")
+            Sql = Sql & " AND fecentra= " & DBSet(Rs!fecentra, "F")
             conn.Execute Sql
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        RS.Close
+        Rs.Close
     End If
     
     
@@ -1716,10 +1752,10 @@ EInsMov:
         B = False
         Set vCStock = Nothing
         
-        Set RS = Nothing
+        Set Rs = Nothing
     End If
     Set vCStock = Nothing
-    Set RS = Nothing
+    Set Rs = Nothing
     InsertarMovAlmacen = B
 End Function
 
@@ -1891,15 +1927,17 @@ Dim DatosDelClienteVarios As String
     Sql = Sql & "observa01,observa02,observa03,observa04,observa05,numofert,fecofert,numpedcl,fecpedcl,fecentre,sementre,esticket,numtermi,numventa "
     'Octubre 2015
     Sql = Sql & ",ManipuladorNumCarnet,ManipuladorFecCaducidad,ManipuladorNombre,TipoCarnet,codnatura) "
-    'Abril 2008
-    'Pongo la marca de facturar a TRUE: 1
-    Sql = Sql & " VALUES ('" & CodTipoMov & "'," & NumAlb & "," & DBSet(miFechaTicket, "F") & ",1," & Text1(0).Text & ","
+
     
     'Obtenemos los datos del cliente
     Set vClien = New CCliente
     If vClien.Existe(Text1(0).Text) Then
         If vClien.LeerDatos(Text1(0).Text) Then
         
+            'Pongo la marca de facturar a TRUE: 1
+            Sql = Sql & " VALUES ('" & CodTipoMov & "'," & NumAlb & "," & DBSet(miFechaTicket, "F") & "," & Abs(vClien.MarcaParaFacturar) & "," & Text1(0).Text & ","
+
+                    
             'Si es cliente varios
             DatosDelClienteVarios = ""
             If Val(Text1(0).Text) = vParamTPV.Cliente Then
@@ -1983,7 +2021,7 @@ Dim DatosDelClienteVarios As String
         'David.    La linea puede llevar dtos, con lo cual hay un
         '           campo en sliven que lleva el importe real de la linea
         ' ANTES:  round(cantidad*precioar,2) as importel
-        Sql = Sql & " implineareal as importel,'' as origpre ,codprove,codccost,"
+        Sql = Sql & " implineareal as importel, origpre ,codprove,codccost,"
         
         'Si es manipulador fitosantir grabaremos lo que hay
         'es decir. * si lleva lotes   NUll si no
@@ -2089,7 +2127,7 @@ Private Function DatosOk(Destino As Byte) As Boolean
 Dim B As Boolean
 Dim i As Byte
 Dim Cad As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim LlevaraRecargoFinanciero As Boolean
 
 
@@ -2263,14 +2301,14 @@ Dim LlevaraRecargoFinanciero As Boolean
         Cad = "SELECT codartic FROM sliven WHERE " & Replace(cadSel, "scaven", "sliven")
         Cad = Cad & " and isnull(codccost)"
         
-        Set RS = New ADODB.Recordset
-        RS.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-        If Not RS.EOF Then
+        Set Rs = New ADODB.Recordset
+        Rs.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        If Not Rs.EOF Then
             B = False
-            MsgBox "La familia del artículo " & DBLet(RS!codArtic, "T") & " no tiene asignado centro de coste.", vbExclamation
+            MsgBox "La familia del artículo " & DBLet(Rs!codArtic, "T") & " no tiene asignado centro de coste.", vbExclamation
         End If
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
     End If
     
     'Si lleva explosivos
@@ -2280,19 +2318,19 @@ Dim LlevaraRecargoFinanciero As Boolean
         Cad = "SELECT codartic FROM sliven WHERE " & Replace(cadSel, "scaven", "sliven")
         Cad = Cad & " and codartic IN (select codartic from sarticexplosivos)"
         
-        Set RS = New ADODB.Recordset
-        RS.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-        If Not RS.EOF Then
+        Set Rs = New ADODB.Recordset
+        Rs.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        If Not Rs.EOF Then
             LlevaArticulosExplosivos = True
             If Destino = 0 Then
                 'En tickets NO dejo coninuar
                 B = False
-                Cad = "Tiena articulos precursores de explosivos (" & RS!codArtic & " )"
+                Cad = "Tiena articulos precursores de explosivos (" & Rs!codArtic & " )"
                 MsgBox Cad, vbExclamation
             End If
         End If
-        RS.Close
-        Set RS = Nothing
+        Rs.Close
+        Set Rs = Nothing
     End If
     
     
@@ -2300,16 +2338,16 @@ Dim LlevaraRecargoFinanciero As Boolean
     'Juli19
     'umero de tipos de IVA. Maximo 3
     Cad = "SELECT codigiva,sum(importel) FROM sliven WHERE " & Replace(cadSel, "scaven", "sliven") & " GROUP BY 1"
-    Set RS = New ADODB.Recordset
-    RS.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Cad = ""
     i = 0
-    While Not RS.EOF
+    While Not Rs.EOF
        i = i + 1
-       RS.MoveNext
+       Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     If LlevaraRecargoFinanciero Then i = i + 1
     If i > 3 Then
         Cad = "ticket"
@@ -2776,7 +2814,7 @@ Dim i As Byte
         frmB.vselElem = 1
         frmB.vConexionGrid = conAri  'Conexión a BD: Ariges
         '#
-        If tabla = "sdirec" Then frmB.label1.FontSize = 11
+        If tabla = "sdirec" Then frmB.Label1.FontSize = 11
         frmB.Show vbModal
         Set frmB = Nothing
         'Si ha puesto valores y tenemos que es formulario de busqueda entonces
@@ -2847,7 +2885,7 @@ Private Function HayArticuloFitosanitario_O_BloqFamilia(ParaTiket As Boolean) As
 'q tiene registro fitosanitario (en ese caso no se puede crear Ticket)
 '(OUT) -> true si encuentra algun articulo fitosanitario
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim i As Integer
 Dim Clivario As Boolean
     On Error GoTo ErrFito
@@ -2857,10 +2895,10 @@ Dim Clivario As Boolean
     Sql = Sql & " WHERE " & Replace(cadSel, "scaven", "sliven")
     Sql = Sql & " and not isnull(numserie) and trim(numserie)<>''"
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If RS.EOF Then
+    If Rs.EOF Then
         'no hay articulos con registro fitosanitario
         HayArticuloFitosanitario_O_BloqFamilia = False
     Else
@@ -2870,14 +2908,14 @@ Dim Clivario As Boolean
         '- seleccionamos algunos articulos para mostrar en el mensaje
         i = 1
         Sql = ""
-        While Not RS.EOF And i < 3
+        While Not Rs.EOF And i < 3
             If Sql <> "" Then Sql = Sql & vbCrLf
-            Sql = Sql & DBLet(RS!NomArtic, "T") & " (" & DBLet(RS!numSerie, "T") & ")"
+            Sql = Sql & DBLet(Rs!NomArtic, "T") & " (" & DBLet(Rs!numSerie, "T") & ")"
             
             i = i + 1
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        If i >= 3 And Not RS.EOF Then Sql = Sql & vbCrLf & "..."
+        If i >= 3 And Not Rs.EOF Then Sql = Sql & vbCrLf & "..."
         
         '- mostramos mensaje de error
         If ParaTiket Then
@@ -2986,7 +3024,7 @@ Dim Clivario As Boolean
         End If
     End If
     
-    RS.Close
+    Rs.Close
     
     
     If Not HayArticuloFitosanitario_O_BloqFamilia Then
@@ -2997,13 +3035,13 @@ Dim Clivario As Boolean
             Sql = "select sliven.nomartic,cantidad,codfamia from sliven,sartic where sliven.codartic=sartic.codartic "
             Sql = Sql & " AND " & Replace(cadSel, "scaven", "sliven")
             Sql = Sql & " AND codfamia in (select codfamia from sfamia where bloqEnTPV=1)"
-            RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             Sql = ""
-            While Not RS.EOF
-                Sql = Sql & vbCrLf & "- " & RS!NomArtic & "   (" & RS!cantidad & ")   Fam: " & RS!Codfamia
-                RS.MoveNext
+            While Not Rs.EOF
+                Sql = Sql & vbCrLf & "- " & Rs!NomArtic & "   (" & Rs!cantidad & ")   Fam: " & Rs!Codfamia
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             
             If Sql <> "" Then
                 Sql = "No se puede vender por TICKET los articulos siguientes:" & Sql & vbCrLf & vbCrLf & "    DEBE HACER ALBARAN / FACTURA"
@@ -3013,21 +3051,21 @@ Dim Clivario As Boolean
         End If
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     Exit Function
     
 ErrFito:
     MuestraError Err.Number, "Comprobar articulos fitosanitarios", Err.Description
     'Pongo un true para que no siga
     HayArticuloFitosanitario_O_BloqFamilia = True
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
 Private Function ActualizarCentroCoste() As Boolean
 Dim Sql As String
 Dim ccoste As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo ErrActCC
     
@@ -3038,34 +3076,34 @@ Dim RS As ADODB.Recordset
     If vEmpresa.TieneAnalitica Then
         If vParamAplic.ModoAnalitica = 1 Then
             'Por FAMILIA
-            Set RS = New ADODB.Recordset
+            Set Rs = New ADODB.Recordset
             Sql = "Select sliven.codartic,sfamia.codfamia,sfamia.codccost from sliven,sartic,sfamia"
             Sql = Sql & " WHERE sliven.codartic=sartic.codartic AND sartic.codfamia=sfamia.codfamia"
             Sql = Sql & " AND " & Replace(cadSel, "scaven", "sliven") & " ORDER BY codccost"
-            RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not RS.EOF
-                If IsNull(RS!CodCCost) Then
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not Rs.EOF
+                If IsNull(Rs!CodCCost) Then
                     Sql = ""
-                    While Not RS.EOF
-                        Sql = Sql & RS!Codfamia & "      -         " & DBLet(RS!CodCCost, "T") & vbCrLf
-                        RS.MoveNext
+                    While Not Rs.EOF
+                        Sql = Sql & Rs!Codfamia & "      -         " & DBLet(Rs!CodCCost, "T") & vbCrLf
+                        Rs.MoveNext
                         
                         
                     Wend
-                    RS.Close
-                    Set RS = Nothing
+                    Rs.Close
+                    Set Rs = Nothing
                     Sql = "Familia      Centro de coste" & vbCrLf & String(20, "=") & vbCrLf & Sql
                     MsgBox Sql, vbExclamation
                     Exit Function
                 Else
                     'OK. Actualizamos el CC
-                    Sql = "UPDATE sliven set codccost=" & DBSet(RS!CodCCost, "T") & " WHERE codartic="
-                    Sql = Sql & DBSet(RS!codArtic, "T") & " AND " & Replace(cadSel, "scaven", "sliven")
+                    Sql = "UPDATE sliven set codccost=" & DBSet(Rs!CodCCost, "T") & " WHERE codartic="
+                    Sql = Sql & DBSet(Rs!codArtic, "T") & " AND " & Replace(cadSel, "scaven", "sliven")
                     conn.Execute Sql
                 End If
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            RS.Close
+            Rs.Close
             ActualizarCentroCoste = True
         Else
             

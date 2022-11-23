@@ -1280,7 +1280,7 @@ End Sub
 Private Sub cmdAceptar_Click()
 'Dim SQL As String
 Dim PrimeraLin As Boolean 'Si se inserta la primera linea no esta creado el datagrid1 entonces llamar
-                          ' a DataGrid, sino llamar solo a DataGrid2
+                          ' a DataGrid, sino llama  solo a DataGrid2
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -2549,7 +2549,7 @@ Dim Desc As String, devuelve As String
         frmB.vTitulo = Titulo
         frmB.vselElem = 0
         frmB.vConexionGrid = conAri 'Conexión a BD: Ariges
-        If Not EsCabecera Then frmB.Label1.FontSize = 11
+        If Not EsCabecera Then frmB.label1.FontSize = 11
 '        frmB.vBuscaPrevia = chkVistaPrevia
         '#
         frmB.Show vbModal

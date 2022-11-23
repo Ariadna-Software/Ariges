@@ -6,6 +6,7 @@ Begin VB.Form frmPpalN
    ClientLeft      =   120
    ClientTop       =   450
    ClientWidth     =   4560
+   Icon            =   "frmPpalN_Vacio.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   3030
    ScaleWidth      =   4560

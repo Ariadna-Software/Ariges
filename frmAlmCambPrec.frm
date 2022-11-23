@@ -3,67 +3,94 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmAlmCambPrec 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   5850
+   ClientHeight    =   8880
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   11070
+   ClientWidth     =   11415
    ClipControls    =   0   'False
    Icon            =   "frmAlmCambPrec.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5850
-   ScaleWidth      =   11070
+   ScaleHeight     =   8880
+   ScaleWidth      =   11415
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "Actualizar"
-      Height          =   375
-      Left            =   8160
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   390
+      Left            =   8040
       TabIndex        =   4
-      Top             =   5400
+      Top             =   8400
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1290
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
-      Height          =   375
-      Left            =   9480
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   390
+      Left            =   9720
       TabIndex        =   1
-      Top             =   5400
+      Top             =   8400
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1290
    End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BackColor       =   &H00C0C0C0&
       BorderStyle     =   0  'None
-      Height          =   320
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Left            =   6840
       Locked          =   -1  'True
       MaxLength       =   15
       TabIndex        =   0
-      Top             =   5280
+      Top             =   8160
       Visible         =   0   'False
       Width           =   1455
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmAlmCambPrec.frx":000C
-      Height          =   4965
+      Height          =   7965
       Left            =   240
       TabIndex        =   2
       Top             =   240
-      Width           =   10455
-      _ExtentX        =   18441
-      _ExtentY        =   8758
+      Width           =   10935
+      _ExtentX        =   19288
+      _ExtentY        =   14049
       _Version        =   393216
       AllowUpdate     =   0   'False
       AllowArrows     =   -1  'True
       ColumnHeaders   =   -1  'True
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       FormatLocked    =   -1  'True
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
@@ -75,8 +102,8 @@ Begin VB.Form frmAlmCambPrec
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -168,8 +195,8 @@ Begin VB.Form frmAlmCambPrec
    Begin VB.Label Label1 
       Caption         =   "Label1"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   13.5
+         Name            =   "Verdana"
+         Size            =   14.25
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -177,9 +204,9 @@ Begin VB.Form frmAlmCambPrec
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   480
+      Left            =   360
       TabIndex        =   3
-      Top             =   5400
+      Top             =   8280
       Width           =   5415
    End
 End
@@ -210,8 +237,8 @@ Dim gridCargado As Boolean 'Si el DataGrid ya tiene todos los Datos cargados.
 
 
 Private Sub cmdAceptar_Click()
-Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim Sql As String
+Dim RS As ADODB.Recordset
 
     If MsgBox("Fecha: " & vFecha & "      ¿Continuar?", vbQuestion + vbYesNo) = vbNo Then Exit Sub
     
@@ -219,58 +246,58 @@ Dim Rs As ADODB.Recordset
 
 
     
-    SQL = MontaSQLCarga(True)
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = MontaSQLCarga(True)
+    Set RS = New ADODB.Recordset
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
 
-    While Not Rs.EOF
+    While Not RS.EOF
 
        If Ventas Then
 
-            If Not IsNull(Rs!tmpprecioac) Then
-                If Rs!tmpprecioac > 0 Then
-                    SQL = "UPDATE slista SET precionu=" & DBSet(Rs!tmpprecioac, "N")
-                    SQL = SQL & ", fechanue = " & DBSet(vFecha, "F")
-                    SQL = SQL & " WHERE " & " codartic =" & DBSet(Rs!codArtic, "T")
-                    SQL = SQL & " AND codlista=" & Rs!codlista
-                    conn.Execute SQL
+            If Not IsNull(RS!tmpprecioac) Then
+                If RS!tmpprecioac > 0 Then
+                    Sql = "UPDATE slista SET precionu=" & DBSet(RS!tmpprecioac, "N")
+                    Sql = Sql & ", fechanue = " & DBSet(vFecha, "F")
+                    Sql = Sql & " WHERE " & " codartic =" & DBSet(RS!codArtic, "T")
+                    Sql = Sql & " AND codlista=" & RS!codlista
+                    conn.Execute Sql
                     
                     
                     'Nov 2017
                     If vParamAplic.ActualizaPrecioEspecial Then
                         'Como descuento vamos a poner el dto que tiene ahora
-                        SQL = "UPDATE sprees SET precionu=" & DBSet(Rs!tmpprecioac, "N")
-                        SQL = SQL & ", fechanue = " & DBSet(vFecha, "F")
-                        SQL = SQL & ", dtoespe1 = dtoespec" 'Como descuento vamos a poner el dto que tiene ahora
-                        SQL = SQL & " WHERE " & " codartic =" & DBSet(Rs!codArtic, "T")
-                        conn.Execute SQL
+                        Sql = "UPDATE sprees SET precionu=" & DBSet(RS!tmpprecioac, "N")
+                        Sql = Sql & ", fechanue = " & DBSet(vFecha, "F")
+                        Sql = Sql & ", dtoespe1 = dtoespec" 'Como descuento vamos a poner el dto que tiene ahora
+                        Sql = Sql & " WHERE " & " codartic =" & DBSet(RS!codArtic, "T")
+                        conn.Execute Sql
                     End If
                 End If
             End If
         
         Else
             
-            If DBLet(Rs!precioar, "N") > 0 Then
-                SQL = "UPDATE slispr SET precionu=" & DBSet(Rs!precioar, "N")
-                SQL = SQL & ", fechanue = " & DBSet(vFecha, "F")
-                SQL = SQL & " WHERE " & " codartic =" & DBSet(Rs!codArtic, "T")
-                SQL = SQL & " AND codprove=" & Rs!NumOfert  'Numofert en la temporal es el proveedor
-                conn.Execute SQL
+            If DBLet(RS!precioar, "N") > 0 Then
+                Sql = "UPDATE slispr SET precionu=" & DBSet(RS!precioar, "N")
+                Sql = Sql & ", fechanue = " & DBSet(vFecha, "F")
+                Sql = Sql & " WHERE " & " codartic =" & DBSet(RS!codArtic, "T")
+                Sql = Sql & " AND codprove=" & RS!NumOfert  'Numofert en la temporal es el proveedor
+                conn.Execute Sql
             End If
     
         End If
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     Me.cmdAceptar.visible = False
     Unload Me
     Exit Sub
     
 ErrAceptar:
-    If Not Rs Is Nothing Then Set Rs = Nothing
+    If Not RS Is Nothing Then Set RS = Nothing
     MuestraError Err.Number, "No se ha actualizado correctamente los precios", Err.Description
 End Sub
 
@@ -349,45 +376,48 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 
 
 
      If Ventas Then
-        SQL = "SELECT slista.codlista,slista.codartic,nomartic,fechanue,precionu,tmpprecioac FROM"
-        SQL = SQL & " slista,sartic WHERE slista.codartic=sartic.codartic "
-        SQL = SQL & " AND " & Me.parSelSQL
-        SQL = SQL & Ordenacion
+        'Sql = "SELECT slista.codlista,slista.codartic,nomartic,fechanue,precionu,tmpprecioac FROM"
+        Sql = "SELECT slista.codlista,slista.codartic,nomartic,fechanue,precioac,tmpprecioac,"
+        Sql = Sql & " round(if(precioac>0, if(tmpprecioac>0, (tmpprecioac-precioac)/precioac*100,0),0),2) Incremento  "
+        Sql = Sql & " FROM slista,sartic WHERE slista.codartic=sartic.codartic "
+        Sql = Sql & " AND " & Me.parSelSQL
+        Sql = Sql & Ordenacion
      Else
-        SQL = "Select codusu,codartic,nomartic,numofert,ampliaci, precioar FROM tmpslipreu"
-        SQL = SQL & " WHERE " & Me.parSelSQL
-        SQL = SQL & Ordenacion
+        Sql = "Select codusu,codartic,nomartic,numofert,ampliaci, precioar"
+        'Sql = Sql & ", round(if(numofert>0, if(precioar>0, (precioar-numofert)/numofert*100,0),0),2) Incremento  "
+        Sql = Sql & "  FROM tmpslipreu WHERE " & Me.parSelSQL
+        Sql = Sql & Ordenacion
      End If
-     MontaSQLCarga = SQL
+     MontaSQLCarga = Sql
 End Function
 
 
 Private Sub CargaGrid(enlaza As Boolean)
 Dim i As Byte
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo ECarga
 
     gridCargado = False
     
     
-    SQL = MontaSQLCarga(enlaza)
-    CargaGridGnral DataGrid1, Me.Data1, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza)
+    CargaGridGnral DataGrid1, Me.Data1, Sql, PrimeraVez
     PrimeraVez = False
         
 
     DataGrid1.Columns(0).visible = False
     
     DataGrid1.Columns(1).Caption = "Cod.Art."
-    DataGrid1.Columns(1).Width = 1700
+    DataGrid1.Columns(1).Width = 1920
     
     DataGrid1.Columns(2).Caption = "Desc. Articulo"
-    DataGrid1.Columns(2).Width = 3200
+    DataGrid1.Columns(2).Width = 4500
        
        
     DataGrid1.Columns(3).Caption = "Fecha"
@@ -395,18 +425,27 @@ Dim SQL As String
     DataGrid1.Columns(3).NumberFormat = "dd/mm/yyyy"
           
     DataGrid1.Columns(4).Caption = "Precio"
-    DataGrid1.Columns(4).Width = 1200
+    DataGrid1.Columns(4).Width = 1500
     DataGrid1.Columns(4).Alignment = dbgRight
     If Ventas Then DataGrid1.Columns(4).NumberFormat = FormatoPrecio & " "
         
         
+        
     
     DataGrid1.Columns(5).Caption = "Nuevo"
-    DataGrid1.Columns(5).Width = 1200
+    DataGrid1.Columns(5).Width = 1500
     DataGrid1.Columns(5).Alignment = dbgRight
     DataGrid1.Columns(5).NumberFormat = FormatoPrecio & " "
             
-        
+    If Ventas Then
+        'Porcentaje incremento
+        DataGrid1.Columns(6).Caption = "%Inc."
+        DataGrid1.Columns(6).Width = 840
+        DataGrid1.Columns(6).Alignment = dbgRight
+        DataGrid1.Columns(6).NumberFormat = FormatoPorcen
+    Else
+        'DataGrid1.Columns(6).visible = False
+    End If
     gridCargado = True
     
 ECarga:
@@ -415,14 +454,14 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
        
     Modo = Kmodo
     
     'MODIFICAR
-    b = (Modo = 4)
+    B = (Modo = 4)
    ' Me.cmdAceptar2.visible = B
-    Me.cmdCancelar.visible = b
+    Me.cmdCancelar.visible = B
     
 '    PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario
@@ -601,7 +640,7 @@ End Sub
 
 
 Private Function ActualizarLinea2() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim i As Currency
 '    If Not DatosOkLinea Then Exit Function
     
@@ -615,16 +654,16 @@ Dim i As Currency
         
         If Ventas Then
         
-            SQL = "UPDATE " & NombreTabla & " SET tmpprecioac=" & TransformaComasPuntos(CStr(i))
-            SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codlista=" & DBSet(Data1.Recordset!codlista, "N")
+            Sql = "UPDATE " & NombreTabla & " SET tmpprecioac=" & TransformaComasPuntos(CStr(i))
+            Sql = Sql & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codlista=" & DBSet(Data1.Recordset!codlista, "N")
         Else
             'Compras
-            SQL = "UPDATE " & NombreTabla & " SET precioar=" & TransformaComasPuntos(CStr(i))
-            SQL = SQL & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codusu=" & vUsu.codigo
+            Sql = "UPDATE " & NombreTabla & " SET precioar=" & TransformaComasPuntos(CStr(i))
+            Sql = Sql & " WHERE codartic=" & DBSet(Data1.Recordset!codArtic, "T") & " AND codusu=" & vUsu.Codigo
             
         End If
         
-        conn.Execute SQL
+        conn.Execute Sql
             
         If Not cmdAceptar.visible Then cmdAceptar.visible = True
    

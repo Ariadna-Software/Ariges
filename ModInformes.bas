@@ -117,11 +117,11 @@ End Function
 '   optional: por defecto FALSE
 Public Function HayRegParaInforme(cTabla As String, cWhere As String, Optional OcultarMsg As Boolean) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select count(*) FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select count(*) FROM " & QuitarCaracterACadena(cTabla, "_1")
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
@@ -129,9 +129,9 @@ Dim SQL As String
         cWhere = QuitarCaracterACadena(cWhere, "_1")
         cWhere = Replace(cWhere, "[", "(")
         cWhere = Replace(cWhere, "]", ")")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
-    If RegistrosAListar(SQL) = 0 Then
+    If RegistrosAListar(Sql) = 0 Then
         'Por defecto SI que lo muestra
         If Not OcultarMsg Then MsgBox "No hay datos para mostrar.", vbInformation
         HayRegParaInforme = False
@@ -482,25 +482,25 @@ Public Sub PonerParamCadOferta(cadParam As String, numParam As Byte, cadSelect A
 'Añade el parametro: pCadOfertas= 0000001, 0000002, ...
 'RPT que lo utiliza: AriOfertas.rpt
 Dim cadOfertas As String
-Dim SQL As String
+Dim Sql As String
 Dim i As Byte
 Dim RS As ADODB.Recordset
 
     On Error GoTo EPonParam
     
     cadOfertas = ""
-    SQL = "scapre"
+    Sql = "scapre"
 
     i = InStr(1, cadSelect, "scapre")
-    If Not (i > 0) Then SQL = "schpre"
+    If Not (i > 0) Then Sql = "schpre"
 
     cadSelect = QuitarCaracterACadena(cadSelect, "{")
     cadSelect = QuitarCaracterACadena(cadSelect, "}")
 
-    SQL = "SELECT distinct numofert from  " & SQL
-    SQL = SQL & " WHERE " & cadSelect
+    Sql = "SELECT distinct numofert from  " & Sql
+    Sql = Sql & " WHERE " & cadSelect
     Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
     While Not RS.EOF
         If Len(cadOfertas) > 75 Then
             If InStr(cadOfertas, "...") > 0 Then
@@ -587,20 +587,20 @@ End Function
 
 
 Public Function ObtenerTerminal() As Integer
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo ErrTermi
 
     'Obtener que terminal es
     'Terminal con el que trabajaremos, leemos el nombre del ordenador
-    SQL = ComputerName 'Nombre PC conectado por Terminal Server / local
-    SQL = DevuelveDesdeBDNew(conAri, "spatpvt", "numtermi", "nombrepc", SQL, "T")
-    If Not IsNumeric(SQL) Then
+    Sql = ComputerName 'Nombre PC conectado por Terminal Server / local
+    Sql = DevuelveDesdeBDNew(conAri, "spatpvt", "numtermi", "nombrepc", Sql, "T")
+    If Not IsNumeric(Sql) Then
         MsgBox "No se ha podido establecer la impresora de ticket." & vbCrLf & "Debe configurar primero los parámetros del TPV.", vbExclamation
 '    Else
 '        bImpre = True
     End If
-    ObtenerTerminal = CInt(SQL)
+    ObtenerTerminal = CInt(Sql)
     Exit Function
     
 ErrTermi:

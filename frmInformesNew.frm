@@ -7,13 +7,13 @@ Begin VB.Form frmInformesNew
    ClientHeight    =   7290
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   12300
+   ClientWidth     =   12210
    Icon            =   "frmInformesNew.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7290
-   ScaleWidth      =   12300
+   ScaleWidth      =   12210
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin MSComDlg.CommonDialog cd1 
@@ -28,7 +28,7 @@ Begin VB.Form frmInformesNew
       Left            =   120
       TabIndex        =   4
       Top             =   120
-      Width           =   12090
+      Width           =   11970
       Begin VB.Frame FrameInfArticulosOrd 
          Caption         =   "Ordenación"
          Enabled         =   0   'False
@@ -1426,7 +1426,7 @@ Begin VB.Form frmInformesNew
             Height          =   360
             Index           =   87
             Left            =   1275
-            TabIndex        =   44
+            TabIndex        =   42
             Top             =   5130
             Width           =   855
          End
@@ -1444,7 +1444,7 @@ Begin VB.Form frmInformesNew
             Height          =   360
             Index           =   86
             Left            =   1275
-            TabIndex        =   43
+            TabIndex        =   41
             Top             =   4770
             Width           =   855
          End
@@ -1462,7 +1462,7 @@ Begin VB.Form frmInformesNew
             Height          =   360
             Index           =   10
             Left            =   3825
-            TabIndex        =   39
+            TabIndex        =   38
             Top             =   2880
             Width           =   1350
          End
@@ -1480,7 +1480,7 @@ Begin VB.Form frmInformesNew
             Height          =   360
             Index           =   9
             Left            =   1260
-            TabIndex        =   40
+            TabIndex        =   37
             Top             =   2880
             Width           =   1350
          End
@@ -1498,7 +1498,7 @@ Begin VB.Form frmInformesNew
             Height          =   360
             Index           =   11
             Left            =   1275
-            TabIndex        =   41
+            TabIndex        =   39
             Top             =   3585
             Width           =   615
          End
@@ -1516,7 +1516,7 @@ Begin VB.Form frmInformesNew
             Height          =   360
             Index           =   12
             Left            =   1275
-            TabIndex        =   42
+            TabIndex        =   40
             Top             =   3945
             Width           =   615
          End
@@ -1593,7 +1593,7 @@ Begin VB.Form frmInformesNew
             Index           =   6
             Left            =   3120
             Locked          =   -1  'True
-            TabIndex        =   37
+            TabIndex        =   44
             Text            =   "Text5"
             Top             =   1095
             Width           =   3615
@@ -1613,7 +1613,7 @@ Begin VB.Form frmInformesNew
             Index           =   5
             Left            =   3105
             Locked          =   -1  'True
-            TabIndex        =   35
+            TabIndex        =   43
             Text            =   "Text5"
             Top             =   720
             Width           =   3615
@@ -1651,7 +1651,7 @@ Begin VB.Form frmInformesNew
             Index           =   7
             Left            =   1275
             MaxLength       =   4
-            TabIndex        =   36
+            TabIndex        =   35
             Top             =   1845
             Width           =   615
          End
@@ -1670,7 +1670,7 @@ Begin VB.Form frmInformesNew
             Index           =   8
             Left            =   1275
             MaxLength       =   4
-            TabIndex        =   38
+            TabIndex        =   36
             Top             =   2205
             Width           =   615
          End
@@ -3325,7 +3325,7 @@ Dim miRsAux As ADODB.Recordset
      
         'tmpinformes(codusu,codigo1,campo1,campo2,nombre1,nombre2,importe1,importe2,importe3,cantidad)
         NumRegElim = NumRegElim + 1
-        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBLet(miRsAux!CodProve, "N") & "," & miRsAux!Codfamia & ","
+        miSQL = miSQL & ", (" & vUsu.Codigo & "," & NumRegElim & "," & DBLet(miRsAux!Codprove, "N") & "," & miRsAux!Codfamia & ","
         miSQL = miSQL & DBSet(miRsAux!nomprove, "T", "N") & "," & DBSet(miRsAux!nomfamia, "T", "N") & ","
         
         'CERO O DOS
@@ -5248,7 +5248,7 @@ Dim i As Byte
         
     '-- Cadena para seleccion Desde y Hasta ARTICULO
     If txtCodigo(5).Text <> "" Or txtCodigo(6).Text <> "" Then
-        Codigo = "{smoval.codartic}"
+        Codigo = "{sartic.codartic}"
         devuelve = "pDHArticulo=""Artículo: "
         If Not PonerDesdeHasta(Codigo, "T", 5, 6, devuelve) Then Exit Function
     End If
@@ -5276,21 +5276,33 @@ Dim i As Byte
     End If
     
         
-'    cadSelect = QuitarCaracterACadena(cadFormula, "{")
-'    cadSelect = QuitarCaracterACadena(cadSelect, "}")
+       
+        
+    '-- seleccionar los articulos que tienen control de stock
+    Cad = "SOLO control stock"
+    Codigo = "{sartic.ctrstock}=1"
+    If InStr(1, cadFormula, "sartic.codartic") > 0 Then
+        Codigo = "{sartic.ctrstock}>=0"
+        Cad = "Con / Sin control stock "
+    End If
+    AnyadirAFormula cadFormula, Codigo
+    AnyadirAFormula cadSelect, Codigo
         
     '=================================================
     '-- Cadena para seleccion Desde y Hasta FECHA
+    devuelve = ""
     If txtCodigo(9).Text <> "" Or txtCodigo(10).Text <> "" Then
         Codigo = "{smoval.fechamov}"
-        devuelve = "pDHFecha=""Fecha: "
+        devuelve = "      Fecha: "
         If Not PonerDesdeHasta(Codigo, "F", 9, 10, devuelve) Then Exit Function
+        Cad = Cad & devuelve
     End If
+    
+    devuelve = "pDHFecha=""" & Cad & """|"
+    cadParam = cadParam & devuelve
+    numParam = numParam + 1
         
-    '-- seleccionar los articulos que tienen control de stock
-    Codigo = "{sartic.ctrstock}=1"
-    AnyadirAFormula cadFormula, Codigo
-    AnyadirAFormula cadSelect, Codigo
+        
         
         
     '-- Cadena de Seleccion TIPOS de MOVIMIENTOS

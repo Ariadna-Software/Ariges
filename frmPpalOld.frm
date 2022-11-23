@@ -138,7 +138,7 @@ Begin VB.Form frmPpalOld
             Alignment       =   1
             Object.Width           =   3175
             MinWidth        =   3175
-            Picture         =   "frmPpalOld.frx":6852
+            Picture         =   "frmPpalOld.frx":FC8A
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
@@ -169,7 +169,7 @@ Begin VB.Form frmPpalOld
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "18:18"
+            TextSave        =   "15:59"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -675,6 +675,10 @@ Begin VB.Form frmPpalOld
          Begin VB.Menu mnSituaAlba 
             Caption         =   "Listado albaranes entregados"
             Index           =   6
+         End
+         Begin VB.Menu mnSituaAlba 
+            Caption         =   "Previsión caja"
+            Index           =   7
          End
          Begin VB.Menu mnBarra5 
             Caption         =   "-"
@@ -1415,6 +1419,11 @@ Begin VB.Form frmPpalOld
          Caption         =   "Informe ventas a credito"
          Index           =   8
       End
+      Begin VB.Menu mnAdministra 
+         Caption         =   "Traspaso Herbelca-Renovables"
+         Index           =   9
+         Visible         =   0   'False
+      End
    End
    Begin VB.Menu mnMantenimientos 
       Caption         =   "&Mantenimientos"
@@ -1864,9 +1873,7 @@ Option Explicit
 Dim PrimeraVez As Boolean
 
 Dim TieneEditorDeMenus As Boolean
-
 Dim QueCaption As String
-
 
 
 Private Sub SituarArriba()
@@ -2042,14 +2049,16 @@ Dim B As Boolean
         Else
             B = Val(vUsu.AlmacenPorDefecto2) > 90
         End If
+        mnAdministra(9).visible = True
+    Else
+        PuntoDeMenuVisible mnAdministra(9), False
     End If
+    
     PuntoDeMenuVisible mnUtilidadesVarias(2), B
     PuntoDeMenuVisible mnUtilidadesVarias(3), B
+    
     PuntoDeMenuVisible mnproduccion1(5), vParamAplic.NumeroInstalacion = 5
-    
     PuntoDeMenuVisible mnUtilidadesVarias(9), vParamAplic.NumeroInstalacion = vbTaxco
-    
-    
     
     'De momento no hay
     mnComCtrlAlb(2).visible = False
@@ -2282,11 +2291,15 @@ End Sub
 
 Private Sub CargaImagen()
     On Error Resume Next
-    Me.Picture = LoadPicture(App.Path & "\arifon2.dll")
-    If Err.Number <> 0 Then
-        Me.Picture = LoadPicture()
-        Err.Clear
-    End If
+    
+    CargaImagenFondoFrmPpal Me, Nothing, vParam.ImagenFondo
+    
+'
+'    Me.Picture = LoadPicture(App.Path & "\arifon2.dll")
+'    If Err.Number <> 0 Then
+'        Me.Picture = LoadPicture()
+'        Err.Clear
+'    End If
 End Sub
 
 
@@ -2442,6 +2455,12 @@ Private Sub mnAdministra_Click(Index As Integer)
     Case 8
         'Ventas a credito
         AbrirListado3 25
+        
+    Case 9
+        'Traspaso
+        AbrirListado3 76
+
+    
     End Select
         
 End Sub
@@ -2824,8 +2843,11 @@ Private Sub mnCambioEmpresa_Click()
     
     'Carga los Niveles de cuentas de Contabilidad de la empresa
     LeerNivelesEmpresa
-    'HaMostradoCanal2_elB = False
     
+    CargaImagen
+    
+    'HaMostradoCanal2_elB = False
+        
     
     
     If vParamAplic.QueEmpresaEs = 2 Then
@@ -2945,7 +2967,7 @@ End Sub
 
 Private Sub mnComFacturar_Click()
    
-    frmComFacturarGR.CodProve = -1
+    frmComFacturarGR.Codprove = -1
     frmComFacturarGR.Show vbModal
     
 End Sub
@@ -3054,8 +3076,8 @@ Private Sub mnComPreProv_Click(Index As Integer)
         CadenaDesdeOtroForm = "V"
         AbrirListado2 28
     Case 3
-        frmFacActPrecios2.Proveedor = True
-        frmFacActPrecios2.Show vbModal
+        frmFacActPrecios.Proveedor = True
+        frmFacActPrecios.Show vbModal
     End Select
 End Sub
 
@@ -3090,7 +3112,10 @@ Private Sub mnConfManteUsuarios_Click()
 'Mantenimiento de Usuarios
     If vUsu.Nivel > 0 Then Exit Sub
     
-    If vParamAplic.HaciendoFrmulariosGrandes Then
+    
+    
+    
+    If vParamAplic.HaciendoFrmulariosGrandes And vUsu.Skin >= 0 Then
         frmMantenusu2.Show vbModal
     Else
         frmMantenusu.Show vbModal
@@ -3303,12 +3328,9 @@ Dim VerGrande As Boolean
     
 
     PonerCaption False, "Clientes"
-    VerGrande = False
-    'If vParamAplic.HaciendoFrmulariosGrandes Then
-        VerGrande = True
-    'Else
-    '    If vParamAplic.NumeroInstalacion = vbTaxco Then VerGrande = True
-    'End If
+   
+    VerGrande = True
+   
     Screen.MousePointer = vbHourglass
     If VerGrande Then
         frmFacClientesGr.Show vbModal
@@ -3434,6 +3456,7 @@ End Sub
 
 Private Sub mnFacEstVentaTraba_Click()
 'Estadistica Ventas por Trabajador
+    frmListadoPed.NumCod = ""
     AbrirListadoPed (228)
 End Sub
 
@@ -3766,8 +3789,8 @@ Private Sub mnFacTarVen_Click(Index As Integer)
     
     Case 8
         'Actualizar precios actuales y especiales
-        frmFacActPrecios2.Proveedor = False
-        frmFacActPrecios2.Show vbModal
+        frmFacActPrecios.Proveedor = False
+        frmFacActPrecios.Show vbModal
     
     Case 9
         'Copiar desde compra
@@ -4398,8 +4421,13 @@ Private Sub mnSituaAlba_Click(Index As Integer)
         If HaMostradoCanal2_El_B Then Me.mnAlbaranesB.visible = True
             
     Case 6
-        
         frmAvisosAlb.Show vbModal
+        
+    Case 7
+        frmListadoPed.NumCod = "S"
+        AbrirListadoPed (228)
+
+        
     End Select
 End Sub
 
@@ -4603,6 +4631,7 @@ Dim nom As String
     nom = ComputerName 'Nombre PC conectado por Terminal Server / local
     
     If Trim(nom) <> "" Then
+    
         frmFacTPVEnt.NomrePC_conectado = nom
         frmFacTPVEnt.Show
     Else
@@ -5358,7 +5387,7 @@ Private Function ComprobarBotonMenuVisible(objMenu As Menu, Activado As Boolean)
 '(se comprueba hasta q se encuentra el false o se llega al padre)
 Dim nomMenu As String
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Cad As String
 Dim B As Boolean
 
@@ -5374,40 +5403,40 @@ Dim B As Boolean
     
         nomMenu = objMenu.Name
         
-        Set RS = New ADODB.Recordset
+        Set Rs = New ADODB.Recordset
         
         'Obtener el padre del menu
         Sql = "select padre from usuarios.appmenus where aplicacion='Ariges' and name=" & DBSet(nomMenu, "T")
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not RS.EOF Then
-            Cad = RS.Fields(0).Value
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
+            Cad = Rs.Fields(0).Value
         End If
-        RS.Close
+        Rs.Close
         
         B = True
         While B And Cad <> ""
                 Sql = "Select name,padre from usuarios.appmenus where aplicacion='Ariges' and contador= " & Cad
-                RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                If Not RS.EOF Then
-                    Cad = RS!Padre
-                    nomMenu = RS!Name
+                Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If Not Rs.EOF Then
+                    Cad = Rs!Padre
+                    nomMenu = Rs!Name
                 End If
-                RS.Close
+                Rs.Close
                 
                 'comprobar si el padre esta bloqueado
                 Sql = "Select count(*) from usuarios.appmenususuario where aplicacion='Ariges' and codusu=" & Val(Right(CStr(vUsu.Codigo), 3))
                 Sql = Sql & " and tag='" & nomMenu & "|'"
-                RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                If RS.Fields(0).Value > 0 Then
+                Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If Rs.Fields(0).Value > 0 Then
                     'Esta bloqueado el menu para el usuario
                     B = False
                     Activado = False
                 End If
-                RS.Close
+                Rs.Close
                 If Cad = "0" Then Cad = "" 'terminar si llegamos a la raiz
         Wend
         ComprobarBotonMenuVisible = B
-        Set RS = Nothing
+        Set Rs = Nothing
     End If
     
 EComprobar:

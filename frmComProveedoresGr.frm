@@ -517,32 +517,32 @@ Begin VB.Form frmComProveedoresGr
       TabCaption(1)   =   "Direcciones/Observaciones"
       TabPicture(1)   =   "frmComProveedoresGr.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2(1)"
-      Tab(1).Control(1)=   "imgCuentas(5)"
-      Tab(1).Control(2)=   "Label2(11)"
-      Tab(1).Control(3)=   "Label2(14)"
-      Tab(1).Control(4)=   "imgCuentas(6)"
-      Tab(1).Control(5)=   "Label2(12)"
-      Tab(1).Control(6)=   "DataGrid1"
+      Tab(1).Control(0)=   "Text1(31)"
+      Tab(1).Control(1)=   "Text1(32)"
+      Tab(1).Control(2)=   "Text1(33)"
+      Tab(1).Control(3)=   "Text1(34)"
+      Tab(1).Control(4)=   "Text1(35)"
+      Tab(1).Control(5)=   "Text1(38)"
+      Tab(1).Control(6)=   "Text1(28)"
       Tab(1).Control(7)=   "FrameToolAux(1)"
-      Tab(1).Control(8)=   "Text1(28)"
-      Tab(1).Control(9)=   "Text1(38)"
-      Tab(1).Control(10)=   "Text1(35)"
-      Tab(1).Control(11)=   "Text1(34)"
-      Tab(1).Control(12)=   "Text1(33)"
-      Tab(1).Control(13)=   "Text1(32)"
-      Tab(1).Control(14)=   "Text1(31)"
+      Tab(1).Control(8)=   "DataGrid1"
+      Tab(1).Control(9)=   "Label2(12)"
+      Tab(1).Control(10)=   "imgCuentas(6)"
+      Tab(1).Control(11)=   "Label2(14)"
+      Tab(1).Control(12)=   "Label2(11)"
+      Tab(1).Control(13)=   "imgCuentas(5)"
+      Tab(1).Control(14)=   "Label2(1)"
       Tab(1).ControlCount=   15
       TabCaption(2)   =   "Documentos"
       TabPicture(2)   =   "frmComProveedoresGr.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label3"
-      Tab(2).Control(1)=   "imgFecha(2)"
-      Tab(2).Control(2)=   "imgDocumentos"
+      Tab(2).Control(0)=   "FrameNavegaDoc"
+      Tab(2).Control(1)=   "Text1(30)"
+      Tab(2).Control(2)=   "lw1"
       Tab(2).Control(3)=   "LabelDOC"
-      Tab(2).Control(4)=   "lw1"
-      Tab(2).Control(5)=   "Text1(30)"
-      Tab(2).Control(6)=   "FrameNavegaDoc"
+      Tab(2).Control(4)=   "imgDocumentos"
+      Tab(2).Control(5)=   "imgFecha(2)"
+      Tab(2).Control(6)=   "Label3"
       Tab(2).ControlCount=   7
       Begin VB.TextBox Text1 
          BeginProperty Font 
@@ -739,7 +739,7 @@ Begin VB.Form frmComProveedoresGr
          Height          =   360
          Index           =   40
          Left            =   1440
-         MaxLength       =   40
+         MaxLength       =   100
          TabIndex        =   37
          Tag             =   "eMail Administración|T|S|||sprove|emailPed|||"
          Text            =   "Text1"
@@ -837,7 +837,7 @@ Begin VB.Form frmComProveedoresGr
             Height          =   360
             Index           =   24
             Left            =   1200
-            MaxLength       =   40
+            MaxLength       =   100
             TabIndex        =   33
             Tag             =   "eMail Compras|T|S|||sprove|maiprov2|||"
             Text            =   "Text1"
@@ -996,7 +996,7 @@ Begin VB.Form frmComProveedoresGr
             Height          =   360
             Index           =   20
             Left            =   1200
-            MaxLength       =   40
+            MaxLength       =   100
             TabIndex        =   29
             Tag             =   "eMail Administración|T|S|||sprove|maiprov1|||"
             Text            =   "Text1"
@@ -3236,14 +3236,14 @@ Dim Seleccionado As Long
             
             frmComEntAlbaranesGR.cadSelAlbaranes = " numalbar='" & DevNombreSQL(lw1.SelectedItem.Text) & _
             "' AND fechaalb= '" & Format(lw1.SelectedItem.SubItems(1), "yyyy-mm-dd") & _
-            "' AND codprove = " & Data1.Recordset!CodProve
+            "' AND codprove = " & Data1.Recordset!Codprove
         
             frmComEntAlbaranesGR.Show vbModal
             frmComEntAlbaranesGR.cadSelAlbaranes = ""
         Else
             frmComEntAlbaranSA.cadSelAlbaranes = " numalbar='" & DevNombreSQL(lw1.SelectedItem.Text) & _
             "' AND fechaalb= '" & Format(lw1.SelectedItem.SubItems(1), "yyyy-mm-dd") & _
-            "' AND codprove = " & Data1.Recordset!CodProve
+            "' AND codprove = " & Data1.Recordset!Codprove
         
             frmComEntAlbaranSA.Show vbModal
             frmComEntAlbaranSA.cadSelAlbaranes = ""
@@ -3747,9 +3747,9 @@ Dim Cad As String
             On Error GoTo Error2
             NumRegElim = Data1.Recordset.AbsolutePosition
             conn.BeginTrans
-            Cad = "DELETE FROM sdirrecog where codprove=" & Data1.Recordset!CodProve
+            Cad = "DELETE FROM sdirrecog where codprove=" & Data1.Recordset!Codprove
             If ejecutar(Cad, False) Then
-                Cad = "DELETE FROM sprove where codprove=" & Data1.Recordset!CodProve
+                Cad = "DELETE FROM sprove where codprove=" & Data1.Recordset!Codprove
                 If ejecutar(Cad, False) Then Cad = ""
             End If
             If Cad = "" Then
@@ -4158,7 +4158,7 @@ End Sub
 
 Private Sub CargaDatosLW2()
 Dim Cad As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim IT As ListItem
 Dim ElIcono As Integer
 Dim GroupBy As String
@@ -4215,7 +4215,7 @@ Dim BuscaChekc
     'La fecha
     
     'EL where del codclien
-    Cad = Cad & " and c.codprove=" & Data1.Recordset!CodProve
+    Cad = Cad & " and c.codprove=" & Data1.Recordset!Codprove
     
     'La fecha
     Cad = Cad & " and " & BuscaChekc & " >='" & Format(imgFecha(2).Tag, FormatoFecha) & "'"
@@ -4229,38 +4229,38 @@ Dim BuscaChekc
     BuscaChekc = ""
     
     lw1.ListItems.Clear
-    Set RS = New ADODB.Recordset
-    RS.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not RS.EOF
+    Set Rs = New ADODB.Recordset
+    Rs.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
         Set IT = lw1.ListItems.Add()
         If lw1.ColumnHeaders(1).Tag <> "" Then
-            IT.Text = Format(RS.Fields(0), lw1.ColumnHeaders(1).Tag)
+            IT.Text = Format(Rs.Fields(0), lw1.ColumnHeaders(1).Tag)
         Else
-            IT.Text = RS.Fields(0)
+            IT.Text = Rs.Fields(0)
         End If
         'El resto de cmpos
         For NumRegElim = 2 To CInt(RecuperaValor(lw1.Tag, 2))
-            If IsNull(RS.Fields(NumRegElim - 1)) Then
+            If IsNull(Rs.Fields(NumRegElim - 1)) Then
                 IT.SubItems(NumRegElim - 1) = " "
             Else
                 If lw1.ColumnHeaders(NumRegElim).Tag <> "" Then
-                    IT.SubItems(NumRegElim - 1) = Format(RS.Fields(NumRegElim - 1), lw1.ColumnHeaders(NumRegElim).Tag)
+                    IT.SubItems(NumRegElim - 1) = Format(Rs.Fields(NumRegElim - 1), lw1.ColumnHeaders(NumRegElim).Tag)
                 Else
-                    IT.SubItems(NumRegElim - 1) = RS.Fields(NumRegElim - 1)
+                    IT.SubItems(NumRegElim - 1) = Rs.Fields(NumRegElim - 1)
                 End If
             End If
         Next
         IT.SmallIcon = ElIcono
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     
     Exit Sub
 ECargaDatosLW:
     MuestraError Err.Number
-    Set RS = Nothing
+    Set Rs = Nothing
     
 End Sub
 
@@ -4287,7 +4287,7 @@ Dim s As String
             With frmComHcoFacturas2GR
                 .hcoCodMovim = RecuperaValor(s, 1)
                 .hcoFechaMovim = RecuperaValor(s, 2)
-                .hcoCodProve = Data1.Recordset!CodProve
+                .hcoCodProve = Data1.Recordset!Codprove
                 .Show vbModal
             End With
         Else
@@ -4312,21 +4312,21 @@ End Sub
 '----------------------------------------------------------------------------------
 Private Sub CargaGrid(enlaza As Boolean)
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo ECargaGrid
 
     B = DataGrid1.Enabled
     
-    SQL = "select  `coddirre`,`nomdirre`,`codpobla`,`pobdirre`,`teldirre` from sdirrecog  WHERE codprove = "
+    Sql = "select  `coddirre`,`nomdirre`,`codpobla`,`pobdirre`,`teldirre` from sdirrecog  WHERE codprove = "
     If enlaza Then
-        SQL = SQL & Data1.Recordset!CodProve
+        Sql = Sql & Data1.Recordset!Codprove
     Else
-        SQL = SQL & " -1"
+        Sql = Sql & " -1"
     End If
     
     
-    CargaGridGnral DataGrid1, Data2, SQL, True
+    CargaGridGnral DataGrid1, Data2, Sql, True
     
     CargaGrid2 DataGrid1, Data2
     
@@ -4394,9 +4394,9 @@ Private Sub VerLineasDirecciones(DesdeDobleClick As Boolean)
             If Data2.Recordset.EOF Then Exit Sub
     End If
     
-    If BloqueoManual("lindirprov", Data1.Recordset!CodProve, False) Then
+    If BloqueoManual("lindirprov", Data1.Recordset!Codprove, False) Then
 
-        frmComDirRecogida.CodProve = Data1.Recordset!CodProve
+        frmComDirRecogida.Codprove = Data1.Recordset!Codprove
         frmComDirRecogida.nomprove = CStr(Data1.Recordset!nomprove)
         
         If DesdeDobleClick Then frmComDirRecogida.VerDatoDpto = Data2.Recordset!coddirre
@@ -4414,20 +4414,20 @@ Dim C As String
 
     PuedeEliminarProveedor = False
     CadenaConsulta = "Fra. proveedor"
-    C = DevuelveDesdeBD(conAri, "numfactu", "scafpc", "codprove", CStr(Data1.Recordset!CodProve))
+    C = DevuelveDesdeBD(conAri, "numfactu", "scafpc", "codprove", CStr(Data1.Recordset!Codprove))
     If C = "" Then
         CadenaConsulta = "Alb. proveedor"
-        C = DevuelveDesdeBD(conAri, "numalbar", "scaalp", "codprove", CStr(Data1.Recordset!CodProve))
+        C = DevuelveDesdeBD(conAri, "numalbar", "scaalp", "codprove", CStr(Data1.Recordset!Codprove))
         If C = "" Then
             CadenaConsulta = "Pedido proveedor"
-            C = DevuelveDesdeBD(conAri, "numpedpr", "scappr", "codprove", CStr(Data1.Recordset!CodProve))
+            C = DevuelveDesdeBD(conAri, "numpedpr", "scappr", "codprove", CStr(Data1.Recordset!Codprove))
             If C = "" Then
                 CadenaConsulta = "Articulos asignados"
-                C = DevuelveDesdeBD(conAri, "numpedpr", "scappr", "codprove", CStr(Data1.Recordset!CodProve))
+                C = DevuelveDesdeBD(conAri, "numpedpr", "scappr", "codprove", CStr(Data1.Recordset!Codprove))
                 If C = "" Then
                     'FLOTAS
                     CadenaConsulta = "Flotas."
-                    C = DevuelveDesdeBD(conAri, "concat(codflota ,' ',nomflota)", "sflotas", "codprove", CStr(Data1.Recordset!CodProve))
+                    C = DevuelveDesdeBD(conAri, "concat(codflota ,' ',nomflota)", "sflotas", "codprove", CStr(Data1.Recordset!Codprove))
                     If C = "" Then PuedeEliminarProveedor = True
                 End If
             End If

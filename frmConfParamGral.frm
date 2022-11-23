@@ -7,25 +7,45 @@ Begin VB.Form frmConfParamGral
    ClientHeight    =   6060
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   6975
+   ClientWidth     =   6855
    Icon            =   "frmConfParamGral.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6060
-   ScaleWidth      =   6975
+   ScaleWidth      =   6855
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Index           =   11
+      Left            =   5760
+      MaxLength       =   2
+      TabIndex        =   28
+      Tag             =   "Imagen|N|N|0|99|sparam|imagenfondo|||"
+      Text            =   "Text1"
+      Top             =   4680
+      Width           =   855
+   End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   180
-      TabIndex        =   29
+      TabIndex        =   30
       Top             =   90
       Width           =   1050
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   240
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   180
          Width           =   615
          _ExtentX        =   1085
@@ -399,6 +419,23 @@ Begin VB.Form frmConfParamGral
       EndProperty
       _Version        =   393216
    End
+   Begin VB.Label Label3 
+      Caption         =   "NºImagen"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   285
+      Left            =   4320
+      TabIndex        =   32
+      Top             =   4680
+      Width           =   1425
+   End
    Begin VB.Image imgBuscar 
       Height          =   240
       Left            =   1395
@@ -421,7 +458,7 @@ Begin VB.Form frmConfParamGral
       EndProperty
       Height          =   285
       Left            =   315
-      TabIndex        =   28
+      TabIndex        =   29
       Top             =   4665
       Width           =   1425
    End
@@ -692,6 +729,7 @@ Private Sub cmdAceptar_Click()
         vParam.Fax = Text1(8).Text
         vParam.WebEmpresa = Text1(9).Text
         vParam.MailEmpresa = Text1(10).Text
+        vParam.ImagenFondo = Val(Text1(11).Text)
         vParam.Modificar
         TerminaBloquear
         
@@ -893,6 +931,9 @@ Dim devuelve As String
                 Text1(5).Text = devuelve
             End If
             VieneDeBuscar = False
+            
+        Case 11
+            If Not IsNumeric(Text1(11).Text) Then Text1(11).Text = 0
     End Select
 End Sub
 

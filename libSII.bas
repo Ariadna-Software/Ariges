@@ -105,7 +105,7 @@ Dim TicketAgrupado As String
             
         Else
 
-            frmSiiAvisos.Show vbModal
+             frmSiiAvisos.Show vbModal
             
         End If
     End If
